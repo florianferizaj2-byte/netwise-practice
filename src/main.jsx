@@ -46,6 +46,8 @@ import {
   Scale,
   Compass,
   Landmark,
+  Megaphone,
+  Heart,
 } from "lucide-react";
 import "./style.css";
 
@@ -261,6 +263,118 @@ function AuthScreen({ onAuth, initialError = "" }) {
     </main>
   );
 }
+function AnnouncementModal({ onClose }) {
+  return (
+    <div
+      className="announcement-backdrop"
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) onClose();
+      }}
+    >
+      <section
+        className="announcement-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="announcement-title"
+      >
+        <header className="announcement-header">
+          <div className="announcement-heading">
+            <span className="announcement-icon">
+              <Megaphone size={22} />
+            </span>
+            <div>
+              <span className="announcement-kicker">网知 NETWISE · 网站公告</span>
+              <h2 id="announcement-title">欢迎来到你的网络认证学习空间</h2>
+              <p>把零散的刷题时间，变成看得见的学习进度。</p>
+            </div>
+          </div>
+          <IconButton icon={X} label="关闭网站公告" onClick={onClose} />
+        </header>
+        <div className="announcement-body">
+          <div className="announcement-highlight">
+            <strong>现在可以开始了</strong>
+            <span>
+              当前支持软考中级网络工程师与 HCIA-Datacom，进入章节练习即可按证书和知识点开始学习。
+            </span>
+          </div>
+          <ul className="announcement-list">
+            <li>
+              <span>01</span>
+              <div>
+                <strong>题库来源会清楚标注</strong>
+                <p>
+                  内置练习、用户提供资料和 AI 生成题会分开显示；第三方资料仅作为学习参考，请结合官方范围复核。
+                </p>
+              </div>
+            </li>
+            <li>
+              <span>02</span>
+              <div>
+                <strong>AI 功能按需使用</strong>
+                <p>
+                  答错后可以先看内置解析，只有点击 AI 解析或生成训练题时才会调用你配置的 API。
+                </p>
+              </div>
+            </li>
+            <li>
+              <span>03</span>
+              <div>
+                <strong>学习记录跟随账号保存</strong>
+                <p>
+                  错题、掌握度、复习计划和 AI 题组保存在服务器，换设备登录后也能继续学习。
+                </p>
+              </div>
+            </li>
+          </ul>
+          <p className="announcement-footnote">
+            使用中遇到问题，可以先刷新页面；题目或解析存在疑问时，优先以考试主办方和认证机构的最新信息为准。
+          </p>
+        </div>
+        <footer className="announcement-footer">
+          <small>公告关闭后，本次浏览器将不再重复提示。</small>
+          <button className="primary" onClick={onClose}>
+            知道了，开始学习
+            <ArrowRight size={16} />
+          </button>
+        </footer>
+      </section>
+    </div>
+  );
+}
+function SponsorModal({ onClose }) {
+  return (
+    <div
+      className="sponsor-backdrop"
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) onClose();
+      }}
+    >
+      <section
+        className="sponsor-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="sponsor-title"
+      >
+        <header>
+          <div>
+            <span className="sponsor-kicker">支持网知 NETWISE</span>
+            <h2 id="sponsor-title">赞助作者</h2>
+            <p>如果这个学习工具对你有帮助，欢迎请作者喝杯咖啡。</p>
+          </div>
+          <IconButton icon={X} label="关闭赞助作者" onClick={onClose} />
+        </header>
+        <div className="sponsor-content">
+          <img src="/sponsor-wechat.jpg" alt="微信赞助二维码" />
+          <strong>使用微信扫一扫</strong>
+          <p>感谢你的支持，我会继续维护题库和学习功能。</p>
+        </div>
+        <footer>
+          <button onClick={onClose}>暂时关闭</button>
+        </footer>
+      </section>
+    </div>
+  );
+}
 function CertificatePicker({ certificates, onSelect }) {
   const [busy, setBusy] = useState("");
   return (
@@ -323,7 +437,9 @@ function App() {
     [queue, setQueue] = useState([]),
     [useSharedAi, setUseSharedAi] = useState(false),
     [sharedAiQuestions, setSharedAiQuestions] = useState([]),
-    [sharedAiLoading, setSharedAiLoading] = useState(false);
+    [sharedAiLoading, setSharedAiLoading] = useState(false),
+    [announcementOpen, setAnnouncementOpen] = useState(false),
+    [sponsorOpen, setSponsorOpen] = useState(false);
   const refresh = async () => {
     const [d, w, q] = await Promise.all([
       api("/dashboard"),
@@ -349,6 +465,23 @@ function App() {
     window.addEventListener("hashchange", h);
     return () => window.removeEventListener("hashchange", h);
   }, [auth?.authenticated, auth?.user?.certificateId]);
+  useEffect(() => {
+    if (!auth?.authenticated || !auth.user?.certificateId || !dashboard) return;
+    try {
+      if (localStorage.getItem("netwise-announcement-2026-09-v1") !== "seen")
+        setAnnouncementOpen(true);
+    } catch {
+      setAnnouncementOpen(true);
+    }
+  }, [auth?.authenticated, auth?.user?.certificateId, dashboard]);
+  const dismissAnnouncement = () => {
+    setAnnouncementOpen(false);
+    try {
+      localStorage.setItem("netwise-announcement-2026-09-v1", "seen");
+    } catch {
+      // Private browsing may disable localStorage; closing still works for this render.
+    }
+  };
   const go = (p) => {
     setPage(p);
     location.hash = p;
@@ -528,6 +661,13 @@ function App() {
             <Settings size={19} />
             设置
             <ChevronRight size={15} />
+          </button>
+          <button
+            className="sponsor-sidebar-button"
+            onClick={() => setSponsorOpen(true)}
+          >
+            <Heart size={17} />
+            赞助作者
           </button>
           <button
             onClick={async () => {
@@ -1156,6 +1296,8 @@ function App() {
           </span>
         </footer>
       </div>
+      {announcementOpen && <AnnouncementModal onClose={dismissAnnouncement} />}
+      {sponsorOpen && <SponsorModal onClose={() => setSponsorOpen(false)} />}
     </div>
   );
 }
