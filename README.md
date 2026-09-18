@@ -119,3 +119,5 @@ Windows 浏览器测试使用已安装的 Microsoft Edge；其他平台需先运
 - `test/`：领域、安全、HTTP 接口、故障降级和浏览器流程测试。
 
 页面机房图片来自 Unsplash：`photo-1558494949-ef010cbdcc31`，已下载到 `public/network-rack.jpg`，运行时无需远程加载。
+#   n e t w i s e - p r a c t i c e  
+ 
