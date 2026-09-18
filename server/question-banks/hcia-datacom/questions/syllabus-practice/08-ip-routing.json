@@ -1,0 +1,94 @@
+[
+  {
+    "id": "hcia-v2-08-longest-prefix",
+    "type": "single_choice",
+    "question": "路由表中有多条路由都能匹配目的地址时，路由器首先选择哪一条？",
+    "options": {
+      "A": "掩码最长的路由",
+      "B": "最早配置的路由",
+      "C": "下一跳地址最大的路由",
+      "D": "接口编号最小的路由"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IP 转发首先遵循最长前缀匹配，前缀越长表示目的网络越具体。",
+    "chapter": "IP 路由基础",
+    "knowledgePoint": "最长匹配",
+    "difficulty": "easy",
+    "tags": [
+      "IP 路由基础",
+      "最长匹配"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-08-default-route",
+    "type": "single_choice",
+    "question": "IPv4 默认路由的目标前缀通常表示为什么？",
+    "options": {
+      "A": "127.0.0.0/8",
+      "B": "0.0.0.0/0",
+      "C": "224.0.0.0/4",
+      "D": "255.255.255.255/32"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "0.0.0.0/0 能匹配任意 IPv4 目的地址，通常作为没有更具体路由时的出口。",
+    "chapter": "IP 路由基础",
+    "knowledgePoint": "默认路由",
+    "difficulty": "easy",
+    "tags": [
+      "IP 路由基础",
+      "默认路由"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-08-direct-route",
+    "type": "single_choice",
+    "question": "路由器接口配置 IP 地址并处于正常工作状态后，通常会自动产生什么路由？",
+    "options": {
+      "A": "直连路由",
+      "B": "OSPF 外部路由",
+      "C": "BGP 路由",
+      "D": "默认路由"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "接口协议状态正常后，设备可根据接口地址和掩码生成相应的直连网络路由。",
+    "chapter": "IP 路由基础",
+    "knowledgePoint": "路由表",
+    "difficulty": "medium",
+    "tags": [
+      "IP 路由基础",
+      "路由表"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-08-static-next-hop",
+    "type": "single_choice",
+    "question": "配置静态路由时指定下一跳地址的主要目的是什么？",
+    "options": {
+      "A": "指出到达目标网络应交给的相邻路由器",
+      "B": "修改源主机地址",
+      "C": "创建新的 VLAN 标签",
+      "D": "自动选举根桥"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "下一跳指出报文离开本设备后应交付给哪个相邻三层设备，递归查询后确定出接口。",
+    "chapter": "IP 路由基础",
+    "knowledgePoint": "静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IP 路由基础",
+      "静态路由"
+    ],
+    "stage": "变式计算"
+  }
+]

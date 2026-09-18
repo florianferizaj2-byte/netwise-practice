@@ -1,0 +1,96 @@
+[
+  {
+    "id": "hcia-v2-02-system-view",
+    "type": "single_choice",
+    "question": "在华为网络设备命令行中，通常使用哪个命令进入系统视图？",
+    "options": {
+      "A": "enable",
+      "B": "system-view",
+      "C": "configure terminal",
+      "D": "interface-view"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "system-view 用于从用户视图进入系统视图，随后可进行设备级配置。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgePoint": "命令行视图",
+    "difficulty": "easy",
+    "tags": [
+      "华为网络设备操作系统",
+      "命令行视图"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-02-view-prompt",
+    "type": "single_choice",
+    "question": "华为设备命令提示符显示为方括号时，通常表示当前处于什么视图？",
+    "options": {
+      "A": "用户视图",
+      "B": "系统或配置视图",
+      "C": "引导加载视图",
+      "D": "诊断只读视图"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "尖括号通常表示用户视图，方括号通常表示系统视图或其下级配置视图。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgePoint": "命令行视图",
+    "difficulty": "easy",
+    "tags": [
+      "华为网络设备操作系统",
+      "命令行视图"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-02-save-config",
+    "type": "single_choice",
+    "question": "完成设备配置并希望重启后仍然生效，通常还需要执行什么操作？",
+    "options": {
+      "A": "清空日志",
+      "B": "保存当前配置",
+      "C": "重启接口",
+      "D": "删除启动文件"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "运行配置位于内存中，执行保存操作后才会写入启动配置，避免重启后丢失。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgePoint": "配置保存",
+    "difficulty": "easy",
+    "tags": [
+      "华为网络设备操作系统",
+      "配置保存"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-02-ssh-management",
+    "type": "multiple_choice",
+    "question": "与 Telnet 相比，使用 SSH 或 STelnet 远程管理设备的优势有哪些？",
+    "options": {
+      "A": "认证信息可加密传输",
+      "B": "管理会话内容可加密",
+      "C": "不再需要 IP 连通性",
+      "D": "可降低明文口令泄露风险"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "SSH/STelnet 对认证与会话数据加密，但仍然依赖正常的 IP 连通性。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgePoint": "SSH 与 STelnet",
+    "difficulty": "medium",
+    "tags": [
+      "华为网络设备操作系统",
+      "SSH 与 STelnet"
+    ],
+    "stage": "变式计算"
+  }
+]

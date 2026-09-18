@@ -1,0 +1,1322 @@
+[
+  {
+    "id": "collection-c06-q001",
+    "question": "下列关于VLAN的描述，错误的是？",
+    "options": {
+      "A": "VLAN可以隔离广播域",
+      "B": "VLAN可以提高网络安全性",
+      "C": "VLAN可以跨越不同交换机",
+      "D": "VLAN必须使用路由器才能通信"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "同一VLAN内主机可以直接通信（跨交换机通过Trunk），不同VLAN间通信需要三层设备（路由器或三层交换机）。VLAN隔离广播域、提高安全性、可跨交换机部署。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "VLAN",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 1,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q002",
+    "question": "IEEE 802.1Q标准定义的VLAN标签长度为多少字节？",
+    "options": {
+      "A": "2",
+      "B": "4",
+      "C": "6",
+      "D": "8"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "802.1Q标签占4字节，包含2字节TPID（0x8100，标识这是802.1Q帧）和2字节TCI（标签控制信息，含优先级3位、CFI 1位、VLAN ID 12位）。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "VLAN",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 2,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q003",
+    "question": "下列关于Trunk端口的描述，正确的是？",
+    "options": {
+      "A": "Trunk端口只能属于一个VLAN",
+      "B": "Trunk端口可以传输多个VLAN的数据",
+      "C": "Trunk端口只能连接终端设备",
+      "D": "Trunk端口不需要配置VLAN标签"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Trunk端口可以传输多个VLAN的数据帧，通常用于交换机之间连接。Access端口只能属于一个VLAN，用于连接终端设备（PC、服务器等）。Trunk端口通过802.1Q标签区分不同VLAN。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "VLAN",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 3,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q004",
+    "question": "STP协议中，根桥选举依据是什么？",
+    "options": {
+      "A": "背板带宽最高",
+      "B": "Bridge ID最小",
+      "C": "最先发出BPDU",
+      "D": "接口速率最高"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "STP根桥依据桥ID（Bridge ID=优先级2字节+MAC地址6字节）选举，数值最小的当选根桥。默认优先级32768，可手动修改优先级影响选举结果。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "STP",
+    "difficulty": "medium",
+    "tags": [
+      "STP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 4,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q005",
+    "question": "STP协议中，根端口（Root Port）的定义是？",
+    "options": {
+      "A": "根桥上的端口",
+      "B": "非根桥上到根桥路径开销最小的端口",
+      "C": "被阻塞的端口",
+      "D": "连接终端的端口"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "根端口存在于非根桥上，是该交换机上到根桥根路径开销（RPC）最小的端口，用于接收根桥方向的BPDU和数据。根桥上所有端口都是指定端口（DP），没有根端口。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "STP",
+    "difficulty": "medium",
+    "tags": [
+      "STP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 5,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q006",
+    "question": "STP协议中，指定端口（Designated Port）的定义是？",
+    "options": {
+      "A": "每条链路上到根桥路径开销最小的交换机上的端口",
+      "B": "被阻塞的端口",
+      "C": "根桥上的所有端口",
+      "D": "A和C"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "指定端口（DP）：在每个网段（链路）上，到根桥根路径开销最小的交换机上的端口为该网段的指定端口，负责向该网段转发数据。根桥上的所有端口都是指定端口（因为根桥RPC=0最小）。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "NAT",
+    "difficulty": "medium",
+    "tags": [
+      "NAT",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 6,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q007",
+    "question": "STP端口从阻塞状态到转发状态，默认需要经过多长时间？",
+    "options": {
+      "A": "15秒",
+      "B": "30秒",
+      "C": "50秒",
+      "D": "20秒"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "STP端口状态转换：阻塞（Blocking）→监听（Listening，15秒）→学习（Learning，15秒）→转发（Forwarding），总时间30秒。注意从阻塞到转发经过监听和学习两个状态各15秒。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "STP",
+    "difficulty": "medium",
+    "tags": [
+      "STP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 7,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q008",
+    "question": "RSTP相比STP的主要改进是？",
+    "options": {
+      "A": "支持更多VLAN",
+      "B": "收敛时间大幅缩短",
+      "C": "不需要选举根桥",
+      "D": "使用UDP传输BPDU"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RSTP（802.1w，快速生成树）收敛时间通常为2-10秒，远快于STP的30-50秒。RSTP通过引入替代端口、备份端口角色，以及点对点链路的快速握手（Proposal/Agreement）机制实现快速收敛。MSTP（802.1s）支持多VLAN负载均衡。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "STP",
+    "difficulty": "medium",
+    "tags": [
+      "STP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 8,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q009",
+    "question": "MSTP相比RSTP的主要优势是？",
+    "options": {
+      "A": "收敛更快",
+      "B": "支持多实例，实现VLAN负载均衡",
+      "C": "不需要根桥",
+      "D": "支持更多端口"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "MSTP（多生成树协议，802.1s）将多个VLAN映射到一个MST实例（MSTI），每个实例独立计算生成树，从而实现不同VLAN在不同链路上的负载均衡，提高链路利用率。RSTP只有一个生成树实例，所有VLAN共享同一棵树，冗余链路被阻塞无法利用。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "STP",
+    "difficulty": "medium",
+    "tags": [
+      "STP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 9,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q010",
+    "question": "下列关于STP的描述，错误的是？",
+    "options": {
+      "A": "STP可以防止网络环路",
+      "B": "STP会阻塞某些端口",
+      "C": "STP可以提高网络带宽利用率",
+      "D": "STP需要选举根桥"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "STP通过阻塞冗余端口防止二层环路，但被阻塞的端口不转发数据，因此降低了带宽利用率，而非提高。RSTP收敛更快，MSTP通过多实例实现负载均衡提高利用率。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "STP",
+    "difficulty": "medium",
+    "tags": [
+      "STP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 10,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q011",
+    "question": "链路聚合（Eth-Trunk/Port Channel）的作用是？",
+    "options": {
+      "A": "将多个物理链路捆绑为逻辑链路，提高带宽和冗余",
+      "B": "将一个物理链路拆分为多个逻辑链路",
+      "C": "提高网络安全性",
+      "D": "减少网络延迟"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "链路聚合将多个物理链路捆绑为一个逻辑链路，实现：1）增加带宽（总带宽=各成员链路带宽之和）；2）链路冗余（某条成员链路故障时流量自动切换到其他成员链路）；3）负载均衡（根据哈希策略分担流量）。IEEE标准为802.3ad（LACP）。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "VLAN",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 11,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q012",
+    "question": "下列关于交换机MAC地址表的描述，错误的是？",
+    "options": {
+      "A": "交换机通过学习源MAC地址建立MAC地址表",
+      "B": "MAC地址表是静态的，不会变化",
+      "C": "MAC地址表项有老化时间",
+      "D": "MAC地址表用于指导数据帧转发"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "MAC地址表是动态学习的：交换机收到数据帧时，将源MAC地址和接收端口关联记录到MAC地址表。表项有老化时间（默认300秒），超时未使用则删除。交换机根据目的MAC地址查找MAC地址表进行转发。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "以太网与交换",
+    "difficulty": "medium",
+    "tags": [
+      "以太网与交换",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 12,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q013",
+    "question": "下列关于VLAN间路由的描述，正确的是？",
+    "options": {
+      "A": "VLAN间路由必须使用路由器",
+      "B": "VLAN间路由可以使用三层交换机",
+      "C": "VLAN间路由不需要网关",
+      "D": "VLAN间路由会扩大广播域"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "VLAN间路由可以通过路由器（单臂路由或多接口）或三层交换机实现。三层交换机通过VLANIF接口（SVI）实现VLAN间路由，效率更高（硬件转发）。每个VLAN需要一个网关IP。VLAN间路由不扩大广播域。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "VLAN",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 13,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q014",
+    "question": "在三层交换机上，VLAN 10的网关接口称为？",
+    "options": {
+      "A": "VLANIF 10（或SVI）",
+      "B": "Loopback 10",
+      "C": "GigabitEthernet 0/0/10",
+      "D": "Tunnel 10"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "三层交换机上为VLAN创建的三层逻辑接口称为VLANIF（华为）或SVI（交换虚拟接口，Cisco），为该VLAN配置IP地址作为网关。VLANIF接口在VLAN存在且至少有一个活动端口时处于Up状态。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "VLAN",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 14,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q015",
+    "question": "下列关于端口安全（Port Security）的描述，正确的是？",
+    "options": {
+      "A": "端口安全只能限制MAC地址数量",
+      "B": "端口安全可以防止MAC地址泛洪攻击",
+      "C": "端口安全不需要绑定MAC地址",
+      "D": "端口安全只适用于无线端口"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "端口安全通过限制端口学习MAC地址的最大数量和绑定特定MAC地址，防止MAC地址泛洪攻击（攻击者发送大量源MAC不同的帧，耗尽交换机MAC地址表，导致交换机泛洪所有数据）。违规动作包括protect（丢弃未知MAC帧）、restrict（丢弃并告警）、shutdown（关闭端口）。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "局域网与交换技术",
+    "difficulty": "medium",
+    "tags": [
+      "局域网与交换技术",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 15,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q016",
+    "question": "下列关于GVRP的描述，错误的是？",
+    "options": {
+      "A": "GVRP是VLAN注册协议",
+      "B": "GVRP可以自动传播VLAN信息",
+      "C": "GVRP是IEEE 802.1Q标准本身",
+      "D": "GVRP可以减少VLAN配置工作量"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "GVRP（GARP VLAN Registration Protocol）是基于GARP的VLAN注册协议，用于在交换机之间自动传播VLAN信息，减少手动配置工作量。GVRP是IEEE 802.1Q的扩展应用，不是802.1Q标准本身（802.1Q定义VLAN标签和帧格式）。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "局域网与交换技术",
+    "difficulty": "medium",
+    "tags": [
+      "局域网与交换技术",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 16,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q017",
+    "question": "无线局域网（WLAN）使用的介质访问控制方法是？",
+    "options": {
+      "A": "CSMA/CD",
+      "B": "CSMA/CA",
+      "C": "Token Ring",
+      "D": "TDMA"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "无线局域网（IEEE 802.11）使用CSMA/CA（载波监听多路访问/冲突避免），因为无线环境中发送方无法检测冲突（隐藏终端问题），所以采用冲突避免机制：发送前先监听信道，空闲时等待随机退避时间，还可使用RTS/CTS握手预留信道。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "无线网络",
+    "difficulty": "medium",
+    "tags": [
+      "无线网络",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 17,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q018",
+    "question": "AP（Access Point）的作用是？",
+    "options": {
+      "A": "无线接入点，连接无线客户端和有线网络",
+      "B": "路由器",
+      "C": "防火墙",
+      "D": "交换机"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "AP（无线接入点）为无线客户端提供接入服务，将无线网络连接到有线以太网。胖AP（FAT AP）独立工作，自带DHCP、认证等功能，适合家庭/小型网络；瘦AP（FIT AP）需要AC（无线控制器）统一管理，支持三层漫游，适合企业大型网络。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "VLAN",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 18,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q019",
+    "question": "下列关于FAT AP和FIT AP的说法，错误的是？",
+    "options": {
+      "A": "FAT AP自带DHCP服务",
+      "B": "FAT AP支持跨AP的三层漫游",
+      "C": "FIT AP需要AC控制器管理",
+      "D": "FIT AP适合大型企业网络"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "FAT（胖AP）只支持二层漫游，不支持跨AP的三层漫游；三层漫游需要AC+瘦AP（FIT AP）架构。胖AP自带DHCP、独立配置，适合家庭/小网络；瘦AP由AC统一管理配置，支持三层漫游、负载均衡，适合大型企业。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "局域网与交换技术",
+    "difficulty": "medium",
+    "tags": [
+      "局域网与交换技术",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 19,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q020",
+    "question": "802.11标准中，AP周期性发送的包含SSID的帧是？",
+    "options": {
+      "A": "控制帧",
+      "B": "数据帧",
+      "C": "响应帧",
+      "D": "信标帧（Beacon）"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Beacon（信标帧）由AP周期性发送（默认每100ms一次），携带SSID、支持速率、安全参数等信息，告知终端该无线网络的存在，终端通过扫描信标帧发现可用无线网络。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "无线网络",
+    "difficulty": "medium",
+    "tags": [
+      "无线网络",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 20,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q021",
+    "question": "下列关于无线加密的说法，错误的是？",
+    "options": {
+      "A": "WEP使用RC4加密算法",
+      "B": "WPA2比WEP更安全",
+      "C": "WEP密钥有效长度最长104位",
+      "D": "WEP不会出现IV重复"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "WEP的IV（初始向量）只有24位，在繁忙网络中会快速重复，导致密钥流重用，攻击者可通过统计分析破解密钥。WEP使用RC4加密，64位WEP=40位用户密钥+24位IV，128位WEP=104位用户密钥+24位IV。WPA/WPA2使用TKIP/AES，比WEP安全得多。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "无线网络",
+    "difficulty": "medium",
+    "tags": [
+      "无线网络",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 21,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q022",
+    "question": "交换机堆叠（Stack）的作用是？",
+    "options": {
+      "A": "将多台交换机虚拟为一台设备，统一管理",
+      "B": "增加端口数量",
+      "C": "提高转发性能",
+      "D": "以上都是"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "交换机堆叠将多台同型号交换机通过专用堆叠线缆连接，虚拟为一台逻辑设备：1）统一管理（对主设备配置自动同步到成员）；2）增加端口密度；3）提高转发性能（跨设备链路聚合）；4）冗余（主设备故障备设备接管，表项同步无需重新学习）。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "以太网与交换",
+    "difficulty": "medium",
+    "tags": [
+      "以太网与交换",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 22,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q023",
+    "question": "下列关于QinQ技术的说法，正确的是？",
+    "options": {
+      "A": "QinQ是双层VLAN标签封装",
+      "B": "内层是公网标签，外层是私网标签",
+      "C": "QinQ只能用于IPv6",
+      "D": "QinQ减少VLAN标签层数"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "QinQ（802.1Q-in-Q）是双层VLAN标签技术：内层标签（C-Tag）是用户私网VLAN标签，外层标签（S-Tag）是运营商公网VLAN标签。QinQ扩展了VLAN空间（4094×4094），实现用户网络隔离，常用于运营商以太网。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "局域网与交换技术",
+    "difficulty": "medium",
+    "tags": [
+      "局域网与交换技术",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 23,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q024",
+    "question": "下列关于交换机转发方式的说法，正确的是？",
+    "options": {
+      "A": "存储转发式交换机接收到完整帧后才转发",
+      "B": "直通式交换机接收到目的MAC地址后立即转发",
+      "C": "存储转发式可以检查帧错误，直通式不能",
+      "D": "以上都正确"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "存储转发（Store-and-Forward）：接收完整帧后检查FCS，无错误才转发，延迟大但可检错。直通（Cut-through）：接收目的MAC地址（前14字节）后立即查表转发，延迟小但无法检错（错误帧也会转发）。碎片隔离（Fragment-free）：接收前64字节后转发，可检测冲突碎片。现代交换机多为存储转发。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "以太网与交换",
+    "difficulty": "medium",
+    "tags": [
+      "以太网与交换",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 24,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q025",
+    "question": "下列关于广播风暴的说法，错误的是？",
+    "options": {
+      "A": "二层环路会导致广播风暴",
+      "B": "STP可以防止广播风暴",
+      "C": "广播风暴不影响网络性能",
+      "D": "VLAN可以缩小广播域范围"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "二层环路中广播帧被无限循环转发，导致广播风暴，耗尽带宽和交换机CPU资源，严重影响网络性能甚至导致网络瘫痪。STP通过阻塞端口防止环路从而防止广播风暴。VLAN将大广播域分割为小广播域，限制广播范围。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "局域网与交换技术",
+    "difficulty": "medium",
+    "tags": [
+      "局域网与交换技术",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 25,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q026",
+    "question": "在交换机上，Access端口收到不带VLAN标签的数据帧时如何处理？",
+    "options": {
+      "A": "直接丢弃",
+      "B": "打上该端口PVID的VLAN标签后在交换机内部转发",
+      "C": "剥离标签后转发",
+      "D": "广播到所有端口"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Access端口收到untag帧时，打上该端口的PVID（默认VLAN ID）标签，在交换机内部转发。发送帧时剥离VLAN标签（untag）发给终端。Access端口通常只属于一个VLAN，用于连接PC、服务器等终端设备。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "VLAN",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 26,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q027",
+    "question": "下列关于交换机和集线器的区别，错误的是？",
+    "options": {
+      "A": "交换机工作在数据链路层，集线器工作在物理层",
+      "B": "交换机根据MAC地址转发，集线器广播所有数据",
+      "C": "交换机所有端口共享带宽，集线器每个端口独享带宽",
+      "D": "交换机可以隔离冲突域，集线器不能"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "交换机每个端口独享带宽（全双工时），根据MAC地址有针对性地转发数据，可以隔离冲突域。集线器所有端口共享带宽，收到数据广播到所有其他端口，所有端口属于同一冲突域。选项C说反了。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "以太网与交换",
+    "difficulty": "medium",
+    "tags": [
+      "以太网与交换",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 27,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q028",
+    "question": "综合布线中，信息插座离地面的标准高度是？",
+    "options": {
+      "A": "10cm",
+      "B": "30cm",
+      "C": "50cm",
+      "D": "100cm"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "综合布线国家标准（GB 50311）规定，信息插座离地面高度为30cm。这是为了方便接入设备同时保持美观。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "局域网与交换技术",
+    "difficulty": "medium",
+    "tags": [
+      "局域网与交换技术",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 28,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q029",
+    "question": "下列关于PoE（Power over Ethernet）的说法，正确的是？",
+    "options": {
+      "A": "PoE通过双绞线同时传输数据和电力",
+      "B": "PoE只能为IP电话供电",
+      "C": "PoE使用额外的电源线",
+      "D": "PoE不遵循IEEE标准"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "PoE（以太网供电，IEEE 802.3af/at/bt标准）通过双绞线（空闲线对或数据线对）同时传输数据和直流电力，可为IP电话、无线AP、网络摄像头等设备供电，无需额外电源线和电源插座。802.3af提供15.4W，802.3at提供30W，802.3bt提供60-90W。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "局域网与交换技术",
+    "difficulty": "medium",
+    "tags": [
+      "局域网与交换技术",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 29,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q030",
+    "question": "下列关于多层交换机（三层交换机）的说法，正确的是？",
+    "options": {
+      "A": "三层交换机只能工作在数据链路层",
+      "B": "三层交换机可以工作在网络层，实现VLAN间路由",
+      "C": "三层交换机不能配置IP地址",
+      "D": "三层交换机就是路由器"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "三层交换机同时具备二层交换和三层路由功能，可以工作在数据链路层和网络层，通过VLANIF/SVI接口实现VLAN间路由。三层交换机的路由功能通常由硬件ASIC实现，转发性能远高于传统路由器（软件转发），适合局域网内部高速路由。但三层交换机的广域网接口和NAT等功能不如路由器丰富。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "以太网与交换",
+    "difficulty": "medium",
+    "tags": [
+      "以太网与交换",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 30,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q031",
+    "question": "下列关于交换机MAC地址学习的说法，正确的是？",
+    "options": {
+      "A": "交换机根据目的MAC地址学习",
+      "B": "交换机根据源MAC地址学习，记录源MAC和接收端口的映射",
+      "C": "交换机不需要学习MAC地址",
+      "D": "MAC地址表永久保存"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "交换机收到数据帧时，检查源MAC地址，如果MAC地址表中没有该条目，则将源MAC地址和接收端口的映射添加到MAC地址表（学习过程）。转发时根据目的MAC地址查找表项。MAC地址表项有老化时间（默认300秒），超时删除。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "以太网与交换",
+    "difficulty": "medium",
+    "tags": [
+      "以太网与交换",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 31,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q032",
+    "question": "在STP中，BPDU的默认发送间隔是？",
+    "options": {
+      "A": "1秒",
+      "B": "2秒",
+      "C": "10秒",
+      "D": "15秒"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "STP中，根桥默认每2秒发送一次配置BPDU（Hello Time）。非根桥从根端口收到BPDU后，从指定端口转发。Max Age默认20秒（20秒未收到BPDU则认为根桥故障，重新选举）。Forward Delay默认15秒（监听和学习状态各15秒）。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "STP",
+    "difficulty": "medium",
+    "tags": [
+      "STP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 32,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q033",
+    "question": "下列关于交换机端口类型的说法，错误的是？",
+    "options": {
+      "A": "Access端口用于连接终端，属于一个VLAN",
+      "B": "Trunk端口用于交换机间连接，可传输多个VLAN",
+      "C": "Hybrid端口可以灵活配置哪些VLAN tag/untag",
+      "D": "所有端口类型功能完全相同"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Access：属于一个VLAN，收发untag帧，用于连接终端。Trunk：默认属于VLAN 1，可允许多个VLAN通过，收发tag帧（除PVID外），用于交换机间连接。Hybrid（华为）：可灵活配置哪些VLAN的帧以tag方式发送、哪些以untag方式发送，适用于复杂场景。三者功能不同。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "以太网与交换",
+    "difficulty": "medium",
+    "tags": [
+      "以太网与交换",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 33,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q034",
+    "question": "下列关于生成树协议版本的说法，正确的是？",
+    "options": {
+      "A": "STP（802.1D）收敛慢，单实例",
+      "B": "RSTP（802.1w）收敛快，单实例",
+      "C": "MSTP（802.1s）多实例，支持VLAN负载均衡",
+      "D": "以上都正确"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "STP（802.1D，1998）：原始生成树，收敛慢（30-50秒），单实例。RSTP（802.1w，2001）：快速生成树，收敛快（秒级），单实例。MSTP（802.1s，2002）：多生成树，将VLAN映射到不同实例，支持VLAN负载均衡。MSTP兼容RSTP和STP。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "STP",
+    "difficulty": "medium",
+    "tags": [
+      "STP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 34,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q036",
+    "question": "生成树协议STP使用哪两个参数来选举根网桥？",
+    "options": {
+      "A": "网桥优先级和IP地址",
+      "B": "链路速率和IP地址",
+      "C": "链路速率和MAC地址",
+      "D": "网桥优先级和MAC地址"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "STP选举根网桥时，先比较网桥优先级（Bridge Priority，默认32768，越小越优先），若相同则比较MAC地址（越小越优先）。桥ID（Bridge ID）=优先级（2字节）+MAC地址（6字节），共8字节。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "STP",
+    "difficulty": "medium",
+    "tags": [
+      "STP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 36,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q037",
+    "question": "在交换机上执行undo mac-address blackhole命令，其作用是？",
+    "options": {
+      "A": "删除配置的黑洞MAC地址表项",
+      "B": "为用户接口配置端口安全",
+      "C": "禁止用户接口透传VLAN",
+      "D": "关闭接口的MAC学习功能"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "undo命令用于删除配置，blackhole表示黑洞MAC地址（收到目的/源为该MAC的帧直接丢弃），所以undo mac-address blackhole是删除配置的黑洞MAC地址表项。黑洞MAC常用于阻止特定MAC地址的通信。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "OSPF DR/BDR",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF DR/BDR",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 37,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q038",
+    "question": "下列关于曼彻斯特编码的描述中，错误的是？",
+    "options": {
+      "A": "可以用高电平到低电平的转换边表示0",
+      "B": "可以用低电平到高电平的转换边表示1",
+      "C": "编码效率为100%",
+      "D": "比特中间的电平转换边既表示数据代码，也作为定时信号"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "曼彻斯特编码每个比特中间都有电平跳变，既传数据又传时钟（自同步），但编码效率只有50%（每个比特需要两次信号变化，波特率是数据速率的2倍），不是100%。差分曼彻斯特编码：比特开始有跳变表示0，无跳变表示1。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "编码与调制",
+    "difficulty": "medium",
+    "tags": [
+      "编码与调制",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 38,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q044",
+    "question": "在交换机上配置VLAN时，命令vlan batch 10 20 30的作用是？",
+    "options": {
+      "A": "创建VLAN 10、20、30",
+      "B": "删除VLAN 10、20、30",
+      "C": "将端口加入VLAN 10、20、30",
+      "D": "查看VLAN 10、20、30的信息"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "vlan batch命令（华为设备）用于批量创建多个VLAN，如vlan batch 10 20 30创建VLAN 10、20、30。也可使用vlan batch 10 to 30创建连续VLAN。Cisco设备使用vlan 10,20,30或vlan range 10-30。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "VLAN",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 44,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q045",
+    "question": "在华为交换机上，将接口GigabitEthernet0/0/1加入Eth-Trunk 1的命令是？",
+    "options": {
+      "A": "interface GigabitEthernet 0/0/1; eth-trunk 1",
+      "B": "interface Eth-Trunk 1; port GigabitEthernet 0/0/1",
+      "C": "eth-trunk 1; interface GigabitEthernet 0/0/1",
+      "D": "port GigabitEthernet 0/0/1 eth-trunk 1"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "在华为交换机上，先进入接口视图（interface GigabitEthernet 0/0/1），然后使用eth-trunk 1命令将该接口加入Eth-Trunk 1聚合组。也可在Eth-Trunk接口视图下使用trunkport GigabitEthernet 0/0/1添加成员接口。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "VLAN",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 45,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q046",
+    "question": "在交换机上配置端口安全，限制端口最多学习2个MAC地址的命令是？",
+    "options": {
+      "A": "port-security enable; port-security max-mac-num 2",
+      "B": "port-security max-mac-num 2",
+      "C": "mac-limit 2",
+      "D": "port-security protect-action restrict"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "配置端口安全需要先启用端口安全（port-security enable），再设置最大MAC地址数量（port-security max-mac-num 2）。还可配置违规动作（port-security protect-action protect/restrict/shutdown）和 sticky MAC（将动态学习的MAC转换为静态绑定）。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "以太网与交换",
+    "difficulty": "medium",
+    "tags": [
+      "以太网与交换",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 46,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q047",
+    "question": "下列关于交换机和集线器的区别，正确的是？",
+    "options": {
+      "A": "交换机工作在数据链路层，集线器工作在物理层",
+      "B": "交换机根据MAC地址转发，集线器广播所有数据",
+      "C": "交换机每个端口独享带宽，集线器所有端口共享带宽",
+      "D": "以上都正确"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "交换机（Switch）工作在数据链路层，根据MAC地址表有针对性地转发数据帧，每个端口独享带宽（全双工时），可以隔离冲突域。集线器（Hub）工作在物理层，收到数据信号后放大并广播到所有其他端口，所有端口共享带宽，属于同一冲突域。交换机比集线器更智能、更高效。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "以太网与交换",
+    "difficulty": "medium",
+    "tags": [
+      "以太网与交换",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 47,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q048",
+    "question": "下列关于综合布线的说法，错误的是？",
+    "options": {
+      "A": "综合布线分为工作区子系统、水平子系统、干线子系统、设备间子系统、管理子系统、建筑群子系统",
+      "B": "水平子系统通常使用双绞线",
+      "C": "干线子系统通常使用光纤或大对数双绞线",
+      "D": "信息插座离地面高度为100cm"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "综合布线六大子系统：工作区子系统（终端到信息插座）、水平子系统（信息插座到楼层配线间）、干线子系统（楼层配线间到设备间）、设备间子系统（主机房）、管理子系统（配线架管理）、建筑群子系统（建筑物之间）。水平子系统通常使用超五类/六类双绞线（距离≤90米），干线子系统使用光纤或大对数双绞线。信息插座离地面标准高度为30cm，不是100cm。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "局域网与交换技术",
+    "difficulty": "medium",
+    "tags": [
+      "局域网与交换技术",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 48,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q049",
+    "question": "下列关于PoE供电的说法，正确的是？",
+    "options": {
+      "A": "PoE通过双绞线同时传输数据和电力",
+      "B": "PoE标准为IEEE 802.3af/at/bt",
+      "C": "PoE可为IP电话、无线AP、网络摄像头供电",
+      "D": "以上都正确"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "PoE（Power over Ethernet，以太网供电）通过双绞线（数据线对或空闲线对）同时传输数据和直流电力，无需额外电源线。IEEE标准：802.3af（15.4W）、802.3at（30W，PoE+）、802.3bt（60-90W，PoE++）。PoE可为IP电话、无线AP、网络摄像头、传感器等设备供电。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "局域网与交换技术",
+    "difficulty": "medium",
+    "tags": [
+      "局域网与交换技术",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 49,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c06-q050",
+    "question": "下列关于多层交换机（三层交换机）的说法，错误的是？",
+    "options": {
+      "A": "三层交换机同时具备二层交换和三层路由功能",
+      "B": "三层交换机通过VLANIF/SVI接口实现VLAN间路由",
+      "C": "三层交换机的路由功能由硬件ASIC实现，转发性能高",
+      "D": "三层交换机可以完全替代路由器"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "三层交换机同时具备二层交换和三层路由功能，通过VLANIF（华为）/SVI（Cisco）接口实现VLAN间路由，路由功能由硬件ASIC实现（线速转发），性能远高于传统路由器（软件转发）。但三层交换机不能完全替代路由器：路由器有更丰富的广域网接口（如串行口、POS口）、更强的NAT/策略路由/广域网协议支持，适合广域网互联；三层交换机适合局域网内部高速路由。",
+    "type": "single_choice",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "以太网与交换",
+    "difficulty": "medium",
+    "tags": [
+      "以太网与交换",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 50,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  }
+]

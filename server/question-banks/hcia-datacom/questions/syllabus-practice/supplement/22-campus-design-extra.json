@@ -1,0 +1,140 @@
+[
+  {
+    "id": "hcia-v2-extra-22-distribution-role",
+    "type": "single_choice",
+    "question": "园区分层架构中，汇聚层常承担什么角色？",
+    "options": {
+      "A": "直接连接每台服务器硬盘",
+      "B": "仅提供无线射频",
+      "C": "替代所有终端网卡",
+      "D": "汇聚接入层流量并提供策略与三层边界"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "汇聚层连接多个接入交换机，常承载 VLAN 网关、ACL 和上联核心的功能。 本题考查“接入/汇聚/核心”，因此应选择“汇聚接入层流量并提供策略与三层边界”。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgePoint": "接入/汇聚/核心",
+    "difficulty": "easy",
+    "tags": [
+      "园区网络典型组网方案",
+      "接入/汇聚/核心"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-extra-22-gateway-redundancy",
+    "type": "single_choice",
+    "question": "用户 VLAN 默认网关采用双设备冗余的主要价值是什么？",
+    "options": {
+      "A": "自动取消 VLAN",
+      "B": "禁止所有路由",
+      "C": "单台网关故障时可维持业务转发",
+      "D": "让终端无需 IP 地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "网关冗余通过主备或负载分担等方式减少三层出口单点故障。 本题考查“网关部署”，因此应选择“单台网关故障时可维持业务转发”。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgePoint": "网关部署",
+    "difficulty": "easy",
+    "tags": [
+      "园区网络典型组网方案",
+      "网关部署"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v2-extra-22-access-security",
+    "type": "single_choice",
+    "question": "在园区接入端口部署 802.1X 或 MAC 认证主要是为了什么？",
+    "options": {
+      "A": "替代 DHCP",
+      "B": "控制哪些用户和终端可以接入网络",
+      "C": "增加广播范围",
+      "D": "加快 OSPF SPF"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "接入认证在边缘验证身份并结合策略限制未授权设备接入。 本题考查“园区安全”，因此应选择“控制哪些用户和终端可以接入网络”。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgePoint": "园区安全",
+    "difficulty": "medium",
+    "tags": [
+      "园区网络典型组网方案",
+      "园区安全"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v2-extra-22-guest-isolation",
+    "type": "single_choice",
+    "question": "园区访客网络的合理设计是什么？",
+    "options": {
+      "A": "与内部办公网隔离并仅按需放行外网访问",
+      "B": "与服务器网完全混用",
+      "C": "使用管理员 VLAN",
+      "D": "关闭所有安全策略"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "访客网络应通过独立 VLAN、ACL 或防火墙策略与内网隔离。 本题考查“园区安全”，因此应选择“与内部办公网隔离并仅按需放行外网访问”。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgePoint": "园区安全",
+    "difficulty": "easy",
+    "tags": [
+      "园区网络典型组网方案",
+      "园区安全"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v2-extra-22-uplink-redundancy",
+    "type": "single_choice",
+    "question": "接入交换机双上联到两台汇聚设备时，通常需要配合什么设计避免二层环路并提升可靠性？",
+    "options": {
+      "A": "只增加 DHCP 地址池",
+      "B": "删除所有 VLAN",
+      "C": "关闭一台汇聚设备",
+      "D": "链路聚合或生成树等冗余控制机制"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "冗余上联需有拓扑控制和故障切换机制，才能既利用冗余又避免环路。 本题考查“可靠性”，因此应选择“链路聚合或生成树等冗余控制机制”。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgePoint": "可靠性",
+    "difficulty": "medium",
+    "tags": [
+      "园区网络典型组网方案",
+      "可靠性"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-extra-22-segmentation-benefit",
+    "type": "single_choice",
+    "question": "按部门或业务划分 VLAN 与访问策略的直接好处是什么？",
+    "options": {
+      "A": "取消所有三层设备",
+      "B": "使地址不再需要掩码",
+      "C": "减少广播影响并限制横向访问",
+      "D": "让所有人共享同一权限"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "业务分区可缩小广播域和安全边界，使访问控制更清晰且故障影响范围更小。 本题考查“园区安全”，因此应选择“减少广播影响并限制横向访问”。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgePoint": "园区安全",
+    "difficulty": "easy",
+    "tags": [
+      "园区网络典型组网方案",
+      "园区安全"
+    ],
+    "stage": "基础理解"
+  }
+]

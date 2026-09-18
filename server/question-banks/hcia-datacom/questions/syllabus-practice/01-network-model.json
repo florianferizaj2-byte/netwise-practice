@@ -1,0 +1,96 @@
+[
+  {
+    "id": "hcia-v2-01-osi-transport",
+    "type": "single_choice",
+    "question": "在 OSI 参考模型中，负责端到端传输控制的是哪一层？",
+    "options": {
+      "A": "网络层",
+      "B": "传输层",
+      "C": "数据链路层",
+      "D": "表示层"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "传输层负责端到端通信，TCP 可在这一层提供确认、重传和流量控制。",
+    "chapter": "网络参考模型",
+    "knowledgePoint": "OSI 与 TCP/IP 模型",
+    "difficulty": "easy",
+    "tags": [
+      "网络参考模型",
+      "OSI 与 TCP/IP 模型"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-01-pdu-frame",
+    "type": "single_choice",
+    "question": "数据在以太网数据链路层封装后通常称为什么？",
+    "options": {
+      "A": "比特",
+      "B": "帧",
+      "C": "报文段",
+      "D": "分组"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "数据链路层的协议数据单元通常称为帧，以太网帧携带源和目的 MAC 地址。",
+    "chapter": "网络参考模型",
+    "knowledgePoint": "数据封装",
+    "difficulty": "easy",
+    "tags": [
+      "网络参考模型",
+      "数据封装"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-01-tcp-reliable",
+    "type": "multiple_choice",
+    "question": "下列哪些机制有助于 TCP 实现可靠传输？",
+    "options": {
+      "A": "序列号",
+      "B": "确认与重传",
+      "C": "滑动窗口",
+      "D": "广播泛洪"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "TCP 依靠序列号、确认重传和滑动窗口等机制实现可靠有序传输，广播泛洪属于二层转发行为。",
+    "chapter": "网络参考模型",
+    "knowledgePoint": "TCP 与 UDP",
+    "difficulty": "medium",
+    "tags": [
+      "网络参考模型",
+      "TCP 与 UDP"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-01-encapsulation-order",
+    "type": "single_choice",
+    "question": "应用数据从主机发送到以太网时，正确的封装顺序是哪一项？",
+    "options": {
+      "A": "帧→IP 包→TCP 段",
+      "B": "TCP 段→IP 包→以太网帧",
+      "C": "IP 包→帧→TCP 段",
+      "D": "比特→应用数据→IP 包"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "发送端先添加传输层首部，再添加网络层首部，最后添加数据链路层首尾部形成以太网帧。",
+    "chapter": "网络参考模型",
+    "knowledgePoint": "数据封装",
+    "difficulty": "medium",
+    "tags": [
+      "网络参考模型",
+      "数据封装"
+    ],
+    "stage": "变式计算"
+  }
+]

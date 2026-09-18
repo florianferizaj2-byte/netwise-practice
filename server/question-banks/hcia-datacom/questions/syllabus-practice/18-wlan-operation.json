@@ -1,0 +1,96 @@
+[
+  {
+    "id": "hcia-v2-18-ap-online",
+    "type": "single_choice",
+    "question": "集中式 WLAN 中，AP 要从 AC 获得业务配置前通常需要先完成什么？",
+    "options": {
+      "A": "发现 AC 并建立 CAPWAP 控制连接",
+      "B": "成为 OSPF DR",
+      "C": "创建静态 NAT",
+      "D": "关闭所有射频"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "AP 先发现 AC、建立控制隧道并完成注册，随后 AC 才能下发射频和业务配置。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgePoint": "AP 上线",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "AP 上线"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-18-sta-access",
+    "type": "single_choice",
+    "question": "无线终端连接到一个基础结构 WLAN 时，通常需要完成扫描、认证以及什么过程？",
+    "options": {
+      "A": "关联",
+      "B": "路由聚合",
+      "C": "根桥选举",
+      "D": "NAT Server 映射"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "终端发现目标网络后需与 AP 完成认证和关联，随后才能建立正常的数据通信。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgePoint": "STA 接入",
+    "difficulty": "easy",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "STA 接入"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-18-roaming",
+    "type": "single_choice",
+    "question": "WLAN 漫游的目标是什么？",
+    "options": {
+      "A": "终端移动时尽量保持业务并切换到更合适的 AP",
+      "B": "让终端同时占用所有信道",
+      "C": "把无线帧改成 OSPF 报文",
+      "D": "取消用户认证"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "漫游允许终端在同一业务网络的覆盖区域移动并切换 AP，以尽量减少业务中断。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgePoint": "漫游",
+    "difficulty": "easy",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "漫游"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-18-wpa-security",
+    "type": "multiple_choice",
+    "question": "提升企业 WLAN 接入安全性时，哪些做法是合理的？",
+    "options": {
+      "A": "采用 WPA2/WPA3 等安全机制",
+      "B": "使用强认证凭据",
+      "C": "对所有用户开放无加密接入",
+      "D": "按业务划分访问权限"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "安全无线接入需要可靠加密、身份认证和最小权限控制，开放无加密接入会增加窃听与冒用风险。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgePoint": "WLAN 安全",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "WLAN 安全"
+    ],
+    "stage": "变式计算"
+  }
+]

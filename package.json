@@ -1,0 +1,31 @@
+{
+  "name": "netwise-practice",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server/index.js",
+    "build": "vite build",
+    "start": "node server/index.js --production",
+    "test": "node --test test/*.test.js",
+    "test:e2e": "node test/e2e.js",
+    "bank:validate": "node scripts/validate-question-banks.js",
+    "bank:hcia": "node scripts/build-hcia-v2-bank.js",
+    "bank:hcia:supplement": "node scripts/build-hcia-v2-supplement.js",
+    "bank:hcia:import-h12-811": "node scripts/import-hcia-h12-811-bank.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.0",
+    "express": "^5.1.0",
+    "lucide-react": "^0.468.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "zod": "^4.1.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "prettier": "^3.9.8",
+    "vite": "^7.1.0"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "certificate": {
+    "id": "network-engineer",
+    "name": "软考中级网络工程师",
+    "shortName": "软考网络工程师",
+    "description": "网络体系、IPv4、交换、路由、安全、服务与运维",
+    "order": 1
+  },
+  "guidePath": "guide.json",
+  "banks": [
+    {
+      "id": "original-practice",
+      "name": "原创练习题",
+      "description": "本站内置基础练习",
+      "source": "practice",
+      "path": "questions/original.json"
+    },
+    {
+      "id": "user-collection",
+      "name": "真题汇编（用户提供）",
+      "description": "保留原文档答案、解析、文件名与题号，未核实官方出处",
+      "source": "user_collection",
+      "path": "questions/user-collection"
+    }
+  ]
+}

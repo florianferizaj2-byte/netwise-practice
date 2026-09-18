@@ -1,0 +1,140 @@
+[
+  {
+    "id": "hcia-v2-extra-02-display-current",
+    "type": "single_choice",
+    "question": "在华为设备上查看当前运行配置，常用哪个命令？",
+    "options": {
+      "A": "show running-config only",
+      "B": "erase startup-config",
+      "C": "format flash",
+      "D": "display current-configuration"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "display current-configuration 用于查看设备当前生效的运行配置。 本题考查“基础设备操作”，因此应选择“display current-configuration”。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgePoint": "基础设备操作",
+    "difficulty": "easy",
+    "tags": [
+      "华为网络设备操作系统",
+      "基础设备操作"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-extra-02-undo-command",
+    "type": "single_choice",
+    "question": "华为网络设备命令前加 undo 通常表示什么？",
+    "options": {
+      "A": "进入用户视图",
+      "B": "重启设备",
+      "C": "取消或恢复该项配置",
+      "D": "保存所有配置"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "undo 通常用于删除已配置命令或恢复相应默认设置。 本题考查“命令行视图”，因此应选择“取消或恢复该项配置”。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgePoint": "命令行视图",
+    "difficulty": "easy",
+    "tags": [
+      "华为网络设备操作系统",
+      "命令行视图"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v2-extra-02-quit-view",
+    "type": "single_choice",
+    "question": "在华为设备的下级配置视图中执行 quit，通常会怎样？",
+    "options": {
+      "A": "进入 BootROM",
+      "B": "返回上一级视图",
+      "C": "立即断电",
+      "D": "清空全部配置"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "quit 逐级返回上一级命令视图，return 可直接返回用户视图。 本题考查“命令行视图”，因此应选择“返回上一级视图”。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgePoint": "命令行视图",
+    "difficulty": "easy",
+    "tags": [
+      "华为网络设备操作系统",
+      "命令行视图"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v2-extra-02-interface-view",
+    "type": "single_choice",
+    "question": "要为接口配置 IP 地址，通常应先进入哪个视图？",
+    "options": {
+      "A": "对应接口视图",
+      "B": "AAA 域视图",
+      "C": "用户登录视图",
+      "D": "文件系统视图"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "接口地址、状态和链路参数通常在相应接口视图中配置。 本题考查“命令行视图”，因此应选择“对应接口视图”。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgePoint": "命令行视图",
+    "difficulty": "medium",
+    "tags": [
+      "华为网络设备操作系统",
+      "命令行视图"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v2-extra-02-save-startup",
+    "type": "single_choice",
+    "question": "执行 save 后，配置通常被写入哪类文件供下次启动使用？",
+    "options": {
+      "A": "临时 ARP 缓存",
+      "B": "MAC 地址表",
+      "C": "OSPF 邻居表",
+      "D": "启动配置文件"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "保存操作把当前配置写入启动配置，设备重启时可再次加载。 本题考查“配置保存”，因此应选择“启动配置文件”。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgePoint": "配置保存",
+    "difficulty": "easy",
+    "tags": [
+      "华为网络设备操作系统",
+      "配置保存"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-extra-02-stelnet-prereq",
+    "type": "single_choice",
+    "question": "配置 STelnet 远程管理前，除了 IP 可达性外还需要重点准备什么？",
+    "options": {
+      "A": "NAT 地址池",
+      "B": "无线射频模板",
+      "C": "SSH 用户认证及密钥等安全参数",
+      "D": "STP 根桥优先级"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "STelnet 基于 SSH，需要配置密钥、用户认证和 VTY 访问方式。 本题考查“SSH 与 STelnet”，因此应选择“SSH 用户认证及密钥等安全参数”。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgePoint": "SSH 与 STelnet",
+    "difficulty": "hard",
+    "tags": [
+      "华为网络设备操作系统",
+      "SSH 与 STelnet"
+    ],
+    "stage": "基础理解"
+  }
+]

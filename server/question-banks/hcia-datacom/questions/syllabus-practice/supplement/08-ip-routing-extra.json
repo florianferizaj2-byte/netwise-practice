@@ -1,0 +1,140 @@
+[
+  {
+    "id": "hcia-v2-extra-08-route-type",
+    "type": "single_choice",
+    "question": "路由表中显示 Direct 路由通常表示什么？",
+    "options": {
+      "A": "该路由没有出接口",
+      "B": "该目标网络与本设备某接口直连",
+      "C": "该路由由 DNS 下发",
+      "D": "该路由只能用于无线终端"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "直连路由由接口地址和掩码自动产生，表示目标网络可从本地接口到达。 本题考查“路由表”，因此应选择“该目标网络与本设备某接口直连”。",
+    "chapter": "IP 路由基础",
+    "knowledgePoint": "路由表",
+    "difficulty": "easy",
+    "tags": [
+      "IP 路由基础",
+      "路由表"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-extra-08-static-preference",
+    "type": "single_choice",
+    "question": "当静态路由和动态路由到同一前缀同时存在时，设备通常还会比较什么以决定优选？",
+    "options": {
+      "A": "路由优先级和度量值",
+      "B": "终端 MAC 地址",
+      "C": "VLAN 名称",
+      "D": "NTP 时钟"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "最长前缀相同后，设备依次依据路由优先级和协议度量选择更优路由。 本题考查“静态路由”，因此应选择“路由优先级和度量值”。",
+    "chapter": "IP 路由基础",
+    "knowledgePoint": "静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IP 路由基础",
+      "静态路由"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v2-extra-08-recursive-lookup",
+    "type": "single_choice",
+    "question": "静态路由指定下一跳 IP 后，设备还需要完成什么才能转发报文？",
+    "options": {
+      "A": "创建新的 SSID",
+      "B": "选举根桥",
+      "C": "关闭 ARP",
+      "D": "查找下一跳的出接口和二层可达性"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "下一跳递归查询用于确认到达下一跳的实际出接口，并解析相邻 MAC。 本题考查“路由表”，因此应选择“查找下一跳的出接口和二层可达性”。",
+    "chapter": "IP 路由基础",
+    "knowledgePoint": "路由表",
+    "difficulty": "hard",
+    "tags": [
+      "IP 路由基础",
+      "路由表"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v2-extra-08-route-blackhole",
+    "type": "single_choice",
+    "question": "路由表存在 192.168.0.0/16 与 192.168.1.0/24 两条可达路由，访问 192.168.1.10 时会优先命中哪条？",
+    "options": {
+      "A": "两条随机选择",
+      "B": "默认路由",
+      "C": "192.168.1.0/24",
+      "D": "192.168.0.0/16"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "/24 比 /16 前缀更长，匹配更具体，因此优先用于转发。 本题考查“最长匹配”，因此应选择“192.168.1.0/24”。",
+    "chapter": "IP 路由基础",
+    "knowledgePoint": "最长匹配",
+    "difficulty": "medium",
+    "tags": [
+      "IP 路由基础",
+      "最长匹配"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v2-extra-08-default-use",
+    "type": "single_choice",
+    "question": "默认路由最适合在何种情况下使用？",
+    "options": {
+      "A": "只给 DHCP 使用",
+      "B": "没有更具体目的路由时作为兜底出口",
+      "C": "替代所有直连路由",
+      "D": "只处理组播流量"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "默认路由前缀为 0.0.0.0/0，匹配范围最宽，只有没有更具体路由时才会被选中。 本题考查“默认路由”，因此应选择“没有更具体目的路由时作为兜底出口”。",
+    "chapter": "IP 路由基础",
+    "knowledgePoint": "默认路由",
+    "difficulty": "easy",
+    "tags": [
+      "IP 路由基础",
+      "默认路由"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-extra-08-static-discard",
+    "type": "single_choice",
+    "question": "配置指向 NULL0 等丢弃接口的静态路由，常见用途是什么？",
+    "options": {
+      "A": "防止汇总路由指向不存在的明细网络形成环路",
+      "B": "加密用户口令",
+      "C": "增加接口速率",
+      "D": "自动分配地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "丢弃路由可作为汇总场景的保护，防止错误流量被反复转发。 本题考查“静态路由”，因此应选择“防止汇总路由指向不存在的明细网络形成环路”。",
+    "chapter": "IP 路由基础",
+    "knowledgePoint": "静态路由",
+    "difficulty": "hard",
+    "tags": [
+      "IP 路由基础",
+      "静态路由"
+    ],
+    "stage": "基础理解"
+  }
+]

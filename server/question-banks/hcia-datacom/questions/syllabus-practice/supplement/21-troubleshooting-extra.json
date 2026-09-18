@@ -1,0 +1,140 @@
+[
+  {
+    "id": "hcia-v2-extra-21-scope-first",
+    "type": "single_choice",
+    "question": "收到“无法上网”报障后，最先应确认什么？",
+    "options": {
+      "A": "影响范围、时间和可复现现象",
+      "B": "立刻重启所有核心设备",
+      "C": "删除所有 ACL",
+      "D": "修改全部 VLAN"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "先界定受影响用户和时间有助于判断问题是单点、网段还是全网，并缩小排查范围。 本题考查“分层排障”，因此应选择“影响范围、时间和可复现现象”。",
+    "chapter": "网络故障排除",
+    "knowledgePoint": "分层排障",
+    "difficulty": "easy",
+    "tags": [
+      "网络故障排除",
+      "分层排障"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-extra-21-physical-check",
+    "type": "single_choice",
+    "question": "接口显示 down/down 时，优先排查哪一层？",
+    "options": {
+      "A": "应用层 DNS 记录",
+      "B": "AAA 授权规则",
+      "C": "OSPF 路由汇总",
+      "D": "物理层链路与对端状态"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "down/down 常表示物理链路未建立，应检查线缆、模块、端口启用与对端设备。 本题考查“分层排障”，因此应选择“物理层链路与对端状态”。",
+    "chapter": "网络故障排除",
+    "knowledgePoint": "分层排障",
+    "difficulty": "easy",
+    "tags": [
+      "网络故障排除",
+      "分层排障"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v2-extra-21-vlan-check",
+    "type": "single_choice",
+    "question": "同 VLAN 两台主机无法二层互通时，合理的检查项是什么？",
+    "options": {
+      "A": "NTP Stratum",
+      "B": "Python 版本",
+      "C": "端口 VLAN 归属与 Trunk 放行情况",
+      "D": "公网 NAT 地址池"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "二层业务首先核对接入口 VLAN、上联 Trunk 与 VLAN 是否已创建及允许通过。 本题考查“配置核对”，因此应选择“端口 VLAN 归属与 Trunk 放行情况”。",
+    "chapter": "网络故障排除",
+    "knowledgePoint": "配置核对",
+    "difficulty": "medium",
+    "tags": [
+      "网络故障排除",
+      "配置核对"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v2-extra-21-route-check",
+    "type": "single_choice",
+    "question": "本地网关可 ping 通但远端网段不可达，下一步优先检查什么？",
+    "options": {
+      "A": "交换机桥优先级",
+      "B": "路由表和回程路由",
+      "C": "无线 SSID 名称",
+      "D": "终端屏幕亮度"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "跨网段不通常需要检查去程路由、下一跳以及目的端回程路径是否完整。 本题考查“连通性检查”，因此应选择“路由表和回程路由”。",
+    "chapter": "网络故障排除",
+    "knowledgePoint": "连通性检查",
+    "difficulty": "medium",
+    "tags": [
+      "网络故障排除",
+      "连通性检查"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v2-extra-21-change-correlation",
+    "type": "single_choice",
+    "question": "故障恰好发生在配置变更后，最有价值的初步动作是什么？",
+    "options": {
+      "A": "比对并验证近期变更，必要时按方案回退",
+      "B": "继续叠加更多随机配置",
+      "C": "清空所有日志",
+      "D": "忽略时间关联"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "变更时间线是重要证据，应优先审查变更内容和影响面并按流程回退验证。 本题考查“故障定位”，因此应选择“比对并验证近期变更，必要时按方案回退”。",
+    "chapter": "网络故障排除",
+    "knowledgePoint": "故障定位",
+    "difficulty": "easy",
+    "tags": [
+      "网络故障排除",
+      "故障定位"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-extra-21-evidence-record",
+    "type": "single_choice",
+    "question": "完成故障恢复后，为什么还应记录根因、操作和验证结果？",
+    "options": {
+      "A": "只为增加日志数量",
+      "B": "让设备自动升级",
+      "C": "取消监控告警",
+      "D": "便于复盘、防复发和后续快速定位"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "规范复盘沉淀知识库，可减少同类问题再次处理的时间和风险。 本题考查“故障定位”，因此应选择“便于复盘、防复发和后续快速定位”。",
+    "chapter": "网络故障排除",
+    "knowledgePoint": "故障定位",
+    "difficulty": "easy",
+    "tags": [
+      "网络故障排除",
+      "故障定位"
+    ],
+    "stage": "基础理解"
+  }
+]

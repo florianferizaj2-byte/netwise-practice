@@ -1,0 +1,140 @@
+[
+  {
+    "id": "hcia-v2-extra-05-bpdu",
+    "type": "single_choice",
+    "question": "STP 交换机之间主要通过哪种报文交换生成树信息？",
+    "options": {
+      "A": "BPDU",
+      "B": "ARP Reply",
+      "C": "OSPF LSA",
+      "D": "DHCP Offer"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "BPDU 携带根桥、路径开销和桥 ID 等生成树选举信息。 本题考查“STP/RSTP”，因此应选择“BPDU”。",
+    "chapter": "生成树原理与配置",
+    "knowledgePoint": "STP/RSTP",
+    "difficulty": "easy",
+    "tags": [
+      "生成树原理与配置",
+      "STP/RSTP"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-extra-05-path-cost",
+    "type": "single_choice",
+    "question": "非根交换机选择根端口时，优先考虑什么？",
+    "options": {
+      "A": "本机管理 IP 最大",
+      "B": "端口名称最长",
+      "C": "VLAN 数量最多",
+      "D": "到根桥的最小根路径开销"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "根端口是非根桥到根桥总代价最优的端口。 本题考查“端口角色”，因此应选择“到根桥的最小根路径开销”。",
+    "chapter": "生成树原理与配置",
+    "knowledgePoint": "端口角色",
+    "difficulty": "medium",
+    "tags": [
+      "生成树原理与配置",
+      "端口角色"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v2-extra-05-designated-port",
+    "type": "single_choice",
+    "question": "在一个网段上，指定端口的主要职责是什么？",
+    "options": {
+      "A": "分配主机地址",
+      "B": "建立 SSH 用户",
+      "C": "向该网段转发到根桥方向最优的 BPDU 和数据",
+      "D": "永久阻塞全部帧"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "每个网段选择一个指定端口，代表到根桥路径最优的交换机转发。 本题考查“端口角色”，因此应选择“向该网段转发到根桥方向最优的 BPDU 和数据”。",
+    "chapter": "生成树原理与配置",
+    "knowledgePoint": "端口角色",
+    "difficulty": "hard",
+    "tags": [
+      "生成树原理与配置",
+      "端口角色"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v2-extra-05-bridge-priority",
+    "type": "single_choice",
+    "question": "其他条件相同，降低交换机 STP 桥优先级数值会产生什么效果？",
+    "options": {
+      "A": "禁止发送 BPDU",
+      "B": "提高其成为根桥的可能性",
+      "C": "降低链路带宽",
+      "D": "删除所有 VLAN"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "桥 ID 越小越优，较小的优先级数值更容易赢得根桥选举。 本题考查“根桥选举”，因此应选择“提高其成为根桥的可能性”。",
+    "chapter": "生成树原理与配置",
+    "knowledgePoint": "根桥选举",
+    "difficulty": "medium",
+    "tags": [
+      "生成树原理与配置",
+      "根桥选举"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v2-extra-05-edge-port",
+    "type": "single_choice",
+    "question": "RSTP 中把连接终端的端口配置为边缘端口有什么作用？",
+    "options": {
+      "A": "可快速进入转发状态",
+      "B": "让端口参加 DR 选举",
+      "C": "自动创建默认路由",
+      "D": "使其成为根端口"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "边缘端口面向终端，可跳过常规收敛等待快速转发，但不应连接交换机。 本题考查“STP/RSTP”，因此应选择“可快速进入转发状态”。",
+    "chapter": "生成树原理与配置",
+    "knowledgePoint": "STP/RSTP",
+    "difficulty": "medium",
+    "tags": [
+      "生成树原理与配置",
+      "STP/RSTP"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-extra-05-loop-symptom",
+    "type": "single_choice",
+    "question": "二层环路发生时最典型的网络现象是什么？",
+    "options": {
+      "A": "IPv6 地址长度变化",
+      "B": "DNS 域名自动删除",
+      "C": "SSH 密钥过期",
+      "D": "广播风暴和 MAC 地址表震荡"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "环路会让广播和未知单播反复循环，并导致源 MAC 在端口间来回学习。 本题考查“二层环路”，因此应选择“广播风暴和 MAC 地址表震荡”。",
+    "chapter": "生成树原理与配置",
+    "knowledgePoint": "二层环路",
+    "difficulty": "easy",
+    "tags": [
+      "生成树原理与配置",
+      "二层环路"
+    ],
+    "stage": "基础理解"
+  }
+]

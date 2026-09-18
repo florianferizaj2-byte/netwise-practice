@@ -1,0 +1,1502 @@
+[
+  {
+    "id": "collection-c04-q001",
+    "question": "TCP协议中，用于建立连接的握手次数是？",
+    "options": {
+      "A": "2次",
+      "B": "3次",
+      "C": "4次",
+      "D": "5次"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "TCP使用三次握手建立连接：客户端SYN→服务器SYN+ACK→客户端ACK。四次挥手用于断开连接。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP 连接",
+    "difficulty": "medium",
+    "tags": [
+      "TCP 连接",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 1,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q002",
+    "question": "TCP三次握手中，客户端发送的第一个SYN报文的序列号是？",
+    "options": {
+      "A": "固定为0",
+      "B": "由服务器指定",
+      "C": "根据客户端IP计算",
+      "D": "由客户端随机生成"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "TCP初始序列号（ISN）由客户端随机生成，防止序列号预测攻击。服务器的ISN也随机生成。这是TCP安全的重要机制。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP 连接",
+    "difficulty": "medium",
+    "tags": [
+      "TCP 连接",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 2,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q003",
+    "question": "TCP三次握手中，第二次握手（服务器→客户端）的标志位是？",
+    "options": {
+      "A": "SYN=1, ACK=0",
+      "B": "SYN=1, ACK=1",
+      "C": "SYN=0, ACK=1",
+      "D": "SYN=0, ACK=0"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "第二次握手服务器发送SYN+ACK：SYN=1表示同意建立连接，ACK=1表示确认客户端的SYN（确认号=客户端ISN+1）。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP 连接",
+    "difficulty": "medium",
+    "tags": [
+      "TCP 连接",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 3,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q004",
+    "question": "TCP断开连接需要几次挥手？",
+    "options": {
+      "A": "2次",
+      "B": "3次",
+      "C": "4次",
+      "D": "5次"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "TCP断开连接使用四次挥手：主动方FIN→被动方ACK→被动方FIN→主动方ACK。因为TCP是全双工的，每个方向需要单独关闭。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP 连接",
+    "difficulty": "medium",
+    "tags": [
+      "TCP 连接",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 4,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q005",
+    "question": "下列关于TCP和UDP的描述，正确的是？",
+    "options": {
+      "A": "TCP是无连接的，UDP是面向连接的",
+      "B": "TCP提供可靠传输，UDP提供不可靠传输",
+      "C": "TCP比UDP传输效率高",
+      "D": "UDP比TCP开销大"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "TCP面向连接、可靠传输，开销大、效率相对较低；UDP无连接、不可靠传输，头部仅8字节，开销小、效率高。TCP适合文件传输等可靠性要求高的场景，UDP适合实时音视频。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 5,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q006",
+    "question": "TCP协议中，用于流量控制的机制是？",
+    "options": {
+      "A": "拥塞窗口cwnd",
+      "B": "滑动窗口",
+      "C": "超时重传",
+      "D": "慢启动"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "流量控制使用滑动窗口机制，接收端通过通告窗口（rwnd）告知发送方可接收的数据量，防止发送方淹没接收方。拥塞窗口用于拥塞控制，不是流量控制。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 6,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q007",
+    "question": "TCP拥塞控制中，慢启动阶段拥塞窗口的变化规律是？",
+    "options": {
+      "A": "线性增长",
+      "B": "指数增长",
+      "C": "保持不变",
+      "D": "先指数后线性"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "慢启动阶段，拥塞窗口从1个MSS开始，每收到一个ACK增加1个MSS，每经过一个RTT窗口翻倍，呈指数增长。达到慢启动阈值后进入拥塞避免阶段（线性增长）。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 7,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q008",
+    "question": "TCP拥塞控制中，拥塞避免阶段拥塞窗口的变化规律是？",
+    "options": {
+      "A": "每个RTT增加1个MSS",
+      "B": "每个RTT翻倍",
+      "C": "保持不变",
+      "D": "每个ACK增加1个MSS"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "拥塞避免阶段，拥塞窗口每经过一个RTT增加1个MSS（线性增长），而非慢启动的每个ACK增加1个MSS（指数增长）。这样可以缓慢增加窗口，避免网络拥塞。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 8,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q009",
+    "question": "TCP协议中，URG标志位的作用是？",
+    "options": {
+      "A": "表示确认号有效",
+      "B": "表示紧急指针有效，数据需优先处理",
+      "C": "表示复位连接",
+      "D": "表示同步序列号"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "URG=1表示紧急指针字段有效，指出本报文段中有紧急数据，接收方应优先处理。紧急指针指出紧急数据在数据字段中的末尾位置。ACK表示确认号有效，RST复位连接，SYN同步序列号。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 9,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q010",
+    "question": "TCP首部中，窗口字段的作用是？",
+    "options": {
+      "A": "表示发送方的发送窗口大小",
+      "B": "表示接收方的接收窗口大小（流量控制）",
+      "C": "表示拥塞窗口大小",
+      "D": "表示数据包的总长度"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "TCP首部窗口字段（16位）表示接收方当前可接收的字节数（接收窗口rwnd），用于流量控制。发送方的发送窗口=min(接收窗口rwnd, 拥塞窗口cwnd)。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 10,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q011",
+    "question": "UDP首部的长度是多少字节？",
+    "options": {
+      "A": "8字节",
+      "B": "20字节",
+      "C": "40字节",
+      "D": "60字节"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "UDP首部仅8字节，包含源端口（2字节）、目的端口（2字节）、长度（2字节）、校验和（2字节）。TCP首部至少20字节（不含选项）。UDP开销小是其重要优势。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "UDP",
+    "difficulty": "medium",
+    "tags": [
+      "UDP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 11,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q012",
+    "question": "TCP首部中，序号字段的作用是？",
+    "options": {
+      "A": "标识本报文段的数据的第一个字节的编号",
+      "B": "标识期望收到的下一个字节的编号",
+      "C": "标识窗口大小",
+      "D": "标识紧急指针"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "TCP序号字段（32位）标识本报文段所发送的数据的第一个字节的编号。确认号字段标识期望收到对方下一个报文段的第一个数据字节的编号（确认号之前的字节均已正确收到）。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 12,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q013",
+    "question": "下列协议中，使用UDP作为传输层协议的是？",
+    "options": {
+      "A": "HTTP",
+      "B": "FTP",
+      "C": "SNMP",
+      "D": "SMTP"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "SNMP使用UDP（端口161/162）。HTTP（80）、FTP（21/20）、SMTP（25）均使用TCP。DNS同时使用UDP（53，常规查询）和TCP（53，区域传输）。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "UDP",
+    "difficulty": "medium",
+    "tags": [
+      "UDP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 13,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q014",
+    "question": "TCP协议中，超时重传计时器（RTO）的计算基于？",
+    "options": {
+      "A": "固定值3秒",
+      "B": "往返时间RTT的加权平均",
+      "C": "带宽大小",
+      "D": "数据包长度"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "TCP的RTO（重传超时）基于RTT（往返时间）的加权平均计算，使用平滑RTT（SRTT）和RTT偏差（RTTVAR），RTO=SRTT+4×RTTVAR。RTO动态调整，适应网络变化。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 14,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q015",
+    "question": "TCP快速重传（Fast Retransmit）的触发条件是？",
+    "options": {
+      "A": "收到1个重复ACK",
+      "B": "收到3个重复ACK",
+      "C": "超时",
+      "D": "收到5个重复ACK"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "快速重传：发送方收到3个重复的ACK（duplicate ACK）时，不等超时计时器到期，直接重传丢失的报文段。这可以大大减少重传延迟。快速恢复（Fast Recovery）与快速重传配合使用。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 15,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q016",
+    "question": "下列关于UDP校验和的说法，正确的是？",
+    "options": {
+      "A": "UDP校验和是可选的",
+      "B": "UDP校验和只校验首部",
+      "C": "UDP校验和校验首部和数据",
+      "D": "UDP没有校验和字段"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "UDP校验和校验UDP首部和数据部分（使用伪首部+UDP首部+数据）。在IPv4中UDP校验和是可选的（为0表示不计算），在IPv6中是必须的。校验和用于检测传输过程中的比特错误。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "UDP",
+    "difficulty": "medium",
+    "tags": [
+      "UDP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 16,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q017",
+    "question": "TCP连接中，TIME_WAIT状态的作用是？",
+    "options": {
+      "A": "等待服务器关闭连接",
+      "B": "确保最后一个ACK到达服务器，防止旧连接的延迟报文影响新连接",
+      "C": "重新传输数据",
+      "D": "建立连接"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "TIME_WAIT状态持续2MSL（最长报文寿命），作用：1）确保最后一个ACK到达服务器（若丢失服务器会重传FIN，客户端可重发ACK）；2）防止旧连接的延迟报文在新连接中出现。主动关闭连接的一方进入TIME_WAIT。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP 连接",
+    "difficulty": "medium",
+    "tags": [
+      "TCP 连接",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 17,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q018",
+    "question": "TCP协议中，MSS（最大报文段长度）的默认值是？",
+    "options": {
+      "A": "536字节",
+      "B": "1460字节",
+      "C": "1500字节",
+      "D": "1518字节"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "MSS默认值为536字节（对应MTU 576字节，是X.25网络的MTU）。在以太网中，MTU=1500字节，MSS=1500-20（IP首部）-20（TCP首部）=1460字节。MSS在连接建立时通过选项协商。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 18,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q019",
+    "question": "下列关于TCP粘包问题的说法，正确的是？",
+    "options": {
+      "A": "TCP会丢失数据",
+      "B": "TCP是面向字节流的，没有消息边界，需要应用层处理",
+      "C": "TCP粘包是因为UDP传输",
+      "D": "TCP粘包无法解决"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "TCP是面向字节流的协议，不保留应用层消息边界，多个应用层消息可能被合并为一个TCP段发送（粘包），或一个消息被拆分为多个段（拆包）。需要应用层通过固定长度、分隔符或长度字段来处理。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 19,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q020",
+    "question": "TCP拥塞控制中，发生超时（Timeout）后，慢启动阈值ssthresh如何变化？",
+    "options": {
+      "A": "不变",
+      "B": "设置为当前拥塞窗口的一半",
+      "C": "设置为1",
+      "D": "设置为当前拥塞窗口"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "发生超时后，ssthresh设置为当前拥塞窗口的一半（最小为2个MSS），然后拥塞窗口重置为1个MSS，重新进入慢启动。收到3个重复ACK时（快速重传），ssthresh也减半但cwnd不重置为1而是设为ssthresh（快速恢复）。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 20,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q021",
+    "question": "下列哪个应用层协议不使用TCP？",
+    "options": {
+      "A": "HTTP",
+      "B": "FTP",
+      "C": "DNS（常规查询）",
+      "D": "Telnet"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "DNS常规查询使用UDP（53端口），因为查询报文短、要求低延迟。DNS区域传输使用TCP。HTTP（80）、FTP（21）、Telnet（23）均使用TCP。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 21,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q022",
+    "question": "TCP首部中，PSH标志位的作用是？",
+    "options": {
+      "A": "表示紧急数据",
+      "B": "表示接收方应立即将数据交给应用层，不要缓存",
+      "C": "表示复位连接",
+      "D": "表示结束连接"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "PSH（Push）标志表示接收方应立即将数据推送给应用进程，不要在缓冲区中等待。常用于交互式应用（如Telnet），确保数据及时交付。URG是紧急数据，RST复位，FIN结束连接。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 22,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q023",
+    "question": "UDP协议中，源端口字段的作用是？",
+    "options": {
+      "A": "标识接收方应用进程",
+      "B": "标识发送方应用进程，用于回复",
+      "C": "标识数据包长度",
+      "D": "标识校验和"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "UDP源端口标识发送方的应用进程，接收方回复时使用该端口作为目的端口。目的端口标识接收方应用进程。源端口可以为0（不需要回复时）。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "UDP",
+    "difficulty": "medium",
+    "tags": [
+      "UDP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 23,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q024",
+    "question": "TCP连接建立后，双方可以同时发送数据，这种通信方式称为？",
+    "options": {
+      "A": "单工",
+      "B": "半双工",
+      "C": "全双工",
+      "D": "单播"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "TCP连接是全双工的，连接建立后双方可以同时发送和接收数据，两个方向的数据传输独立。这也是TCP断开连接需要四次挥手（每个方向单独关闭）的原因。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP 连接",
+    "difficulty": "medium",
+    "tags": [
+      "TCP 连接",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 24,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q025",
+    "question": "下列关于TCP可靠传输机制的说法，错误的是？",
+    "options": {
+      "A": "使用序号和确认号确保数据按序交付",
+      "B": "使用超时重传处理丢失的报文段",
+      "C": "使用校验和检测比特错误",
+      "D": "TCP保证数据一定能送达"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "TCP通过序号、确认号、超时重传、校验和、滑动窗口等机制提供可靠传输，但不能保证数据\"一定\"能送达（如网络完全中断、对方崩溃等极端情况）。TCP会尽力重传，超过最大重试次数后会通知应用层连接失败。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 25,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q026",
+    "question": "TCP拥塞控制的四个阶段依次是？",
+    "options": {
+      "A": "慢启动→拥塞避免→快速重传→快速恢复",
+      "B": "慢启动→拥塞避免→超时重传→快速恢复",
+      "C": "慢启动→快速重传→拥塞避免→快速恢复",
+      "D": "拥塞避免→慢启动→快速重传→快速恢复"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "TCP拥塞控制：慢启动（指数增长）→拥塞避免（线性增长）→快速重传（收到3个重复ACK时重传）→快速恢复（重传后不回到慢启动而是进入拥塞避免）。超时则回到慢启动。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 26,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q027",
+    "question": "UDP协议适合下列哪种应用场景？",
+    "options": {
+      "A": "文件传输（FTP）",
+      "B": "网页浏览（HTTP）",
+      "C": "实时视频会议",
+      "D": "电子邮件（SMTP）"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "UDP无连接、低延迟、不保证可靠，适合实时音视频、在线游戏、DNS查询等对实时性要求高、可容忍少量丢包的场景。文件传输、网页浏览、电子邮件需要可靠传输，使用TCP。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "UDP",
+    "difficulty": "medium",
+    "tags": [
+      "UDP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 27,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q028",
+    "question": "TCP首部中，确认号字段的值为N表示？",
+    "options": {
+      "A": "已收到第N个字节",
+      "B": "已收到前N-1个字节，期望收到第N个字节",
+      "C": "将要发送第N个字节",
+      "D": "窗口大小为N"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "TCP确认号是累积确认，确认号=N表示确认号之前的所有字节（到N-1）都已正确收到，期望收到的下一个字节的序号是N。这是TCP可靠传输的核心机制。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 28,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q029",
+    "question": "下列关于TCP和UDP端口号的说法，正确的是？",
+    "options": {
+      "A": "TCP和UDP使用独立的端口号空间",
+      "B": "TCP和UDP共享同一个端口号空间",
+      "C": "端口号长度为8位",
+      "D": "知名端口号范围是1024-65535"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "TCP和UDP使用独立的端口号空间，TCP的80端口和UDP的80端口互不影响。端口号长度为16位（0-65535）。知名端口（Well-known）0-1023，注册端口1024-49151，动态/私有端口49152-65535。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 29,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q030",
+    "question": "TCP协议中，Nagle算法的作用是？",
+    "options": {
+      "A": "提高网络吞吐量，减少小报文段数量",
+      "B": "提高传输安全性",
+      "C": "减少延迟",
+      "D": "增加窗口大小"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Nagle算法：当发送方有小数据要发送时，如果已有已发送但未确认的数据，则缓存小数据，等到收到确认或数据积累到一个MSS时再发送。这可以减少网络中小报文段的数量，提高吞吐量，但会增加延迟（交互式应用如Telnet可禁用）。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 30,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q031",
+    "question": "TCP滑动窗口中，发送窗口的大小等于？",
+    "options": {
+      "A": "接收窗口rwnd",
+      "B": "拥塞窗口cwnd",
+      "C": "min(rwnd, cwnd)",
+      "D": "max(rwnd, cwnd)"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "TCP发送窗口大小=min(接收窗口rwnd, 拥塞窗口cwnd)。接收窗口由接收方通告（流量控制），拥塞窗口由发送方根据网络拥塞情况动态调整（拥塞控制）。发送方不能发送超过两者中较小值的数据。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 31,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q032",
+    "question": "下列关于TCP三次握手的说法，错误的是？",
+    "options": {
+      "A": "三次握手可以防止已失效的连接请求报文段突然又传到服务器",
+      "B": "三次握手可以协商初始序列号",
+      "C": "三次握手可以协商MSS等选项",
+      "D": "两次握手就可以可靠地建立连接"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "三次握手的必要性：1）防止已失效的连接请求到达服务器导致错误建立连接；2）双方协商初始序列号；3）协商MSS、窗口缩放等选项。两次握手无法确认客户端的接收能力，也无法防止旧连接请求干扰，因此不可靠。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP 连接",
+    "difficulty": "medium",
+    "tags": [
+      "TCP 连接",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 32,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q033",
+    "question": "UDP数据报的最大长度（含首部）是？",
+    "options": {
+      "A": "512字节",
+      "B": "1480字节",
+      "C": "65535字节",
+      "D": "1500字节"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "UDP长度字段为16位，最大65535字节（含UDP首部8字节），即数据部分最大65527字节。但实际传输中受链路MTU限制（以太网1500字节），超过会被IP分片。UDP应用通常将数据控制在MTU以下以避免分片。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "UDP",
+    "difficulty": "medium",
+    "tags": [
+      "UDP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 33,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q034",
+    "question": "TCP协议中，延迟确认（Delayed ACK）的作用是？",
+    "options": {
+      "A": "减少ACK报文数量，提高效率",
+      "B": "提高传输安全性",
+      "C": "减少延迟",
+      "D": "增加窗口大小"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "延迟确认：接收方收到数据后不立即发送ACK，而是等待一段时间（通常最大200ms或最多2个全尺寸段），如果有反向数据要发送则将ACK捎带在数据中，或者等待第二个段到达后一起确认。这可以减少ACK报文数量，但可能增加延迟，与Nagle算法配合时可能导致延迟增大。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 34,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q035",
+    "question": "下列关于TCP和UDP的描述，错误的是？",
+    "options": {
+      "A": "TCP是面向字节流的，UDP是面向报文的",
+      "B": "TCP有拥塞控制，UDP没有",
+      "C": "TCP首部比UDP首部短",
+      "D": "TCP提供全双工通信，UDP也支持全双工"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "TCP首部至少20字节（含选项最多60字节），UDP首部仅8字节。TCP首部比UDP首部长得多，不是更短。TCP面向字节流、有拥塞控制、全双工；UDP面向报文（保留应用层消息边界）、无拥塞控制、也支持全双工。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 35,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q036",
+    "question": "TCP协议中，用于建立连接的三次握手顺序是？",
+    "options": {
+      "A": "SYN→SYN+ACK→ACK",
+      "B": "SYN→ACK→SYN+ACK",
+      "C": "SYN+ACK→SYN→ACK",
+      "D": "ACK→SYN→SYN+ACK"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "TCP三次握手建立连接：1）客户端发送SYN（同步序列号，seq=x）；2）服务器回复SYN+ACK（同步+确认，seq=y，ack=x+1）；3）客户端发送ACK（确认，seq=x+1，ack=y+1）。三次握手确保双方都能发送和接收数据，同步初始序列号。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP 连接",
+    "difficulty": "medium",
+    "tags": [
+      "TCP 连接",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 36,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q037",
+    "question": "TCP协议中，用于终止连接的四次挥手顺序是？",
+    "options": {
+      "A": "FIN→ACK→FIN→ACK",
+      "B": "FIN→FIN→ACK→ACK",
+      "C": "ACK→FIN→ACK→FIN",
+      "D": "FIN→ACK→ACK→FIN"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "TCP四次挥手终止连接：1）主动关闭方发送FIN（结束，seq=u）；2）被动关闭方回复ACK（确认，ack=u+1），此时被动关闭方仍可发送数据（半关闭状态）；3）被动关闭方发送完数据后发送FIN（结束，seq=w）；4）主动关闭方回复ACK（确认，ack=w+1），主动关闭方进入TIME_WAIT状态（等待2MSL后关闭）。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP 连接",
+    "difficulty": "medium",
+    "tags": [
+      "TCP 连接",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 37,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q038",
+    "question": "TCP的TIME_WAIT状态持续多长时间？作用是什么？",
+    "options": {
+      "A": "1MSL，确保最后一个ACK到达对方",
+      "B": "2MSL，确保最后一个ACK到达对方，且防止旧连接的延迟报文影响新连接",
+      "C": "30秒，防止端口被立即重用",
+      "D": "60秒，等待对方确认"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "TIME_WAIT状态持续2MSL（最大报文生存时间，通常2分钟），两个作用：1）确保主动关闭方发送的最后一个ACK能到达对方（如果丢失，对方会重发FIN，主动关闭方仍在TIME_WAIT可重发ACK）；2）防止旧连接的延迟报文在网络中存活后影响新连接（2MSL后旧报文全部消亡）。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 38,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q039",
+    "question": "TCP拥塞控制中，慢启动阶段拥塞窗口的变化规律是？",
+    "options": {
+      "A": "线性增长",
+      "B": "指数增长（每收到一个ACK翻倍）",
+      "C": "保持不变",
+      "D": "随机增长"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "TCP拥塞控制四个阶段：1）慢启动（Slow Start）：拥塞窗口cwnd从1开始，每收到一个ACK增加1个MSS，每个RTT翻倍（指数增长），直到达到慢启动阈值ssthresh；2）拥塞避免（Congestion Avoidance）：cwnd超过ssthresh后，每个RTT增加1个MSS（线性增长/加性增）；3）快重传（Fast Retransmit）：收到3个重复ACK立即重传；4）快恢复（Fast Recovery）：ssthresh减半，cwnd=ssthresh，进入拥塞避免。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 39,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q040",
+    "question": "下列关于UDP协议的描述，错误的是？",
+    "options": {
+      "A": "UDP是无连接的",
+      "B": "UDP提供可靠传输",
+      "C": "UDP首部开销小（8字节）",
+      "D": "UDP适用于实时应用（如视频、语音）"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "UDP（用户数据报协议）是无连接的、不可靠的传输层协议，不保证数据可靠到达、不保证顺序、不进行流量控制和拥塞控制。UDP首部仅8字节（源端口、目的端口、长度、校验和），开销小，适用于对实时性要求高、可容忍少量丢包的应用（如视频会议、VoIP、DNS查询、在线游戏）。可靠传输由应用层自行实现（如QUIC基于UDP实现可靠传输）。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "UDP",
+    "difficulty": "medium",
+    "tags": [
+      "UDP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 40,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q041",
+    "question": "TCP首部中，窗口字段（Window）的作用是？",
+    "options": {
+      "A": "表示发送方的拥塞窗口大小",
+      "B": "表示接收方的接收窗口大小，用于流量控制",
+      "C": "表示数据段的长度",
+      "D": "表示序列号"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "TCP首部的窗口字段（16位）表示接收方当前可接收的数据量（接收窗口rwnd），用于流量控制（Flow Control）：接收方通过窗口字段告知发送方自己还能接收多少数据，防止发送方发送过快导致接收方缓冲区溢出。发送方的发送窗口=min(拥塞窗口cwnd, 接收窗口rwnd)。窗口字段最大65535字节，可通过窗口缩放选项（Window Scale）扩大。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 41,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q042",
+    "question": "TCP协议中，URG标志位的作用是？",
+    "options": {
+      "A": "表示确认号有效",
+      "B": "表示紧急指针有效，数据需要优先处理",
+      "C": "表示重置连接",
+      "D": "表示同步序列号"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "TCP标志位：URG（紧急）表示紧急指针字段有效，数据需要优先处理（如中断信号）；ACK（确认）表示确认号有效；PSH（推送）表示接收方应立即将数据交给应用层；RST（重置）表示重置连接；SYN（同步）表示同步序列号，用于建立连接；FIN（结束）表示发送方没有更多数据要发送，用于关闭连接。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 42,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q043",
+    "question": "下列关于TCP和UDP端口号的说法，正确的是？",
+    "options": {
+      "A": "端口号长度为16位，范围0-65535",
+      "B": "0-1023是知名端口（Well-known Ports）",
+      "C": "1024-49151是注册端口（Registered Ports）",
+      "D": "以上都正确"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "TCP/UDP端口号长度为16位，范围0-65535。分为三类：1）知名端口（Well-known Ports，0-1023）：由IANA分配给标准服务，如HTTP=80、HTTPS=443、FTP=21、SSH=22、DNS=53；2）注册端口（Registered Ports，1024-49151）：供用户注册使用，如MySQL=3306、RDP=3389；3）动态/私有端口（Dynamic/Private Ports，49152-65535）：客户端临时使用。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 43,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q044",
+    "question": "TCP的滑动窗口机制中，发送窗口的大小由什么决定？",
+    "options": {
+      "A": "仅由拥塞窗口决定",
+      "B": "仅由接收窗口决定",
+      "C": "由拥塞窗口和接收窗口的较小值决定",
+      "D": "由发送方自行决定"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "TCP发送窗口（实际可发送的数据量）=min(拥塞窗口cwnd, 接收窗口rwnd)。拥塞窗口由发送方根据网络拥塞情况动态调整（拥塞控制），接收窗口由接收方根据自身缓冲区情况通告（流量控制）。发送方取两者较小值，既不会导致网络拥塞，也不会导致接收方缓冲区溢出。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 44,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q045",
+    "question": "下列关于TCP校验和的说法，正确的是？",
+    "options": {
+      "A": "TCP校验和只校验TCP首部",
+      "B": "TCP校验和校验TCP首部、数据和伪首部",
+      "C": "TCP校验和是可选的",
+      "D": "TCP校验和使用CRC算法"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "TCP校验和校验范围包括：TCP首部、TCP数据段、以及一个12字节的伪首部（包含源IP、目的IP、协议号、TCP长度）。伪首部的作用是确保数据报到达正确的主机和协议。TCP校验和是必选的（UDP校验和在IPv4中可选，IPv6中必选）。校验和使用16位二进制反码求和算法，不是CRC。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 45,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q046",
+    "question": "TCP协议中，快重传（Fast Retransmit）的触发条件是？",
+    "options": {
+      "A": "收到1个重复ACK",
+      "B": "收到3个重复ACK",
+      "C": "超时未收到ACK",
+      "D": "收到5个重复ACK"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "快重传（Fast Retransmit）：当发送方收到3个重复的ACK（duplicate ACK）时，立即重传丢失的报文段，而不必等待重传计时器超时。这大大提高了丢包恢复速度。快重传后通常进入快恢复（Fast Recovery）阶段：将慢启动阈值ssthresh减半，拥塞窗口cwnd=ssthresh（而非从1开始慢启动），然后进入拥塞避免阶段。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 46,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q047",
+    "question": "下列关于TCP连接建立的说法，错误的是？",
+    "options": {
+      "A": "TCP使用三次握手建立连接",
+      "B": "三次握手可以防止已失效的连接请求报文段突然又传送到服务器",
+      "C": "三次握手可以同步双方的初始序列号",
+      "D": "TCP可以使用两次握手建立连接"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "TCP必须使用三次握手建立连接，不能使用两次握手。两次握手的问题：1）无法防止已失效的连接请求报文段突然又传送到服务器（客户端的旧SYN延迟到达，服务器以为是新连接请求，回复SYN+ACK后就建立连接，但客户端并不想建立连接，浪费服务器资源）；2）无法确保双方都能接收对方的数据。三次握手确保双方都确认了对方的发送和接收能力，并同步了初始序列号。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP 连接",
+    "difficulty": "medium",
+    "tags": [
+      "TCP 连接",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 47,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q048",
+    "question": "UDP首部中不包含以下哪个字段？",
+    "options": {
+      "A": "源端口号",
+      "B": "目的端口号",
+      "C": "序列号",
+      "D": "校验和"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "UDP首部仅8字节，包含4个字段：源端口号（16位）、目的端口号（16位）、长度（16位，UDP数据报总长度）、校验和（16位）。UDP没有序列号、确认号、窗口、标志位等字段，因为UDP是无连接的、不可靠的，不需要这些机制。序列号是TCP首部的字段，用于保证数据顺序和可靠性。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "UDP",
+    "difficulty": "medium",
+    "tags": [
+      "UDP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 48,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q049",
+    "question": "TCP协议中，MSS（最大报文段长度）的含义是？",
+    "options": {
+      "A": "TCP数据部分的最大长度（不含TCP首部和IP首部）",
+      "B": "TCP报文段的总最大长度（含首部）",
+      "C": "IP数据报的最大长度",
+      "D": "以太网帧的最大长度"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "MSS（Maximum Segment Size，最大报文段长度）是TCP数据部分的最大长度，不包含TCP首部和IP首部。MSS通常在连接建立时通过SYN报文段的MSS选项协商，默认值为536字节（对应IP数据报576字节=20字节IP首部+20字节TCP首部+536字节数据）。以太网环境中MSS通常为1460字节（1500字节MTU-20字节IP首部-20字节TCP首部）。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 49,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c04-q050",
+    "question": "下列关于TCP流量控制和拥塞控制的说法，正确的是？",
+    "options": {
+      "A": "流量控制是端到端的，拥塞控制是全局的",
+      "B": "流量控制防止接收方溢出，拥塞控制防止网络过载",
+      "C": "流量控制通过接收窗口实现，拥塞控制通过拥塞窗口实现",
+      "D": "以上都正确"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "流量控制（Flow Control）是端到端的机制，通过接收窗口（rwnd）防止发送方发送过快导致接收方缓冲区溢出。拥塞控制（Congestion Control）是全局的机制，通过拥塞窗口（cwnd）防止发送方发送过多数据导致网络过载（路由器队列溢出丢包）。两者共同决定发送方的实际发送窗口=min(cwnd, rwnd)。",
+    "type": "single_choice",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第四章 传输层协议（含答案解析）.docx",
+        "questionNumber": 50,
+        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  }
+]

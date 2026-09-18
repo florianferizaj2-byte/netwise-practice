@@ -1,0 +1,94 @@
+[
+  {
+    "id": "hcia-v2-16-ssid",
+    "type": "single_choice",
+    "question": "WLAN 中用于向用户标识无线网络名称的字段是什么？",
+    "options": {
+      "A": "SSID",
+      "B": "BSSID",
+      "C": "VLAN ID",
+      "D": "Router ID"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "SSID 是无线局域网的服务集标识，通常作为用户看到并选择的无线网络名称。",
+    "chapter": "WLAN 技术基础",
+    "knowledgePoint": "SSID/BSSID",
+    "difficulty": "easy",
+    "tags": [
+      "WLAN 技术基础",
+      "SSID/BSSID"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-16-bssid",
+    "type": "single_choice",
+    "question": "基础结构 WLAN 中，BSSID 通常对应什么？",
+    "options": {
+      "A": "AP 某个无线服务的 MAC 标识",
+      "B": "用户输入的口令",
+      "C": "无线信道宽度",
+      "D": "DHCP 地址池"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "BSSID 用于唯一标识基本服务集，通常与 AP 无线接口或虚拟无线服务的 MAC 地址相关。",
+    "chapter": "WLAN 技术基础",
+    "knowledgePoint": "SSID/BSSID",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 技术基础",
+      "SSID/BSSID"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-16-24g-channels",
+    "type": "single_choice",
+    "question": "在常见 2.4 GHz WLAN 的 20 MHz 信道规划中，通常优先使用哪组互不重叠信道？",
+    "options": {
+      "A": "1、6、11",
+      "B": "1、2、3",
+      "C": "3、4、5",
+      "D": "8、9、10"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "1、6、11 在常见监管域下通常作为三个互不重叠的 20 MHz 信道，可减少同频干扰。",
+    "chapter": "WLAN 技术基础",
+    "knowledgePoint": "信道",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 技术基础",
+      "信道"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-16-csma-ca",
+    "type": "single_choice",
+    "question": "IEEE 802.11 无线局域网主要使用哪种介质访问机制来降低冲突？",
+    "options": {
+      "A": "CSMA/CA",
+      "B": "CSMA/CD",
+      "C": "令牌环",
+      "D": "固定时分且无需竞争"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "无线终端难以边发送边检测冲突，因此 802.11 主要采用带冲突避免的 CSMA/CA。",
+    "chapter": "WLAN 技术基础",
+    "knowledgePoint": "802.11",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 技术基础",
+      "802.11"
+    ],
+    "stage": "变式计算"
+  }
+]

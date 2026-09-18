@@ -1,0 +1,712 @@
+[
+  {
+    "id": "collection-c11-q001",
+    "question": "在Linux中，使用哪个命令可以切换到上次访问的目录？",
+    "options": {
+      "A": "cd /",
+      "B": "cd ~",
+      "C": "cd .",
+      "D": "cd -"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "cd - 切换到上次访问的目录（OLDPWD环境变量）。cd /切换到根目录，cd ~或cd切换到当前用户家目录，cd .表示当前目录（无变化），cd ..切换到上级目录。",
+    "type": "single_choice",
+    "chapter": "网络操作系统与服务器配置",
+    "knowledgePoint": "Linux 命令与管理",
+    "difficulty": "medium",
+    "tags": [
+      "Linux 命令与管理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 1,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      },
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 25,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c11-q002",
+    "question": "在Linux中，pwd命令的作用是？",
+    "options": {
+      "A": "设置用户口令",
+      "B": "删除文件目录",
+      "C": "显示当前目录路径",
+      "D": "修改权限"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "pwd（print working directory）打印当前工作目录的绝对路径。passwd修改用户密码，rm删除文件/目录，chmod修改文件权限。",
+    "type": "single_choice",
+    "chapter": "网络操作系统与服务器配置",
+    "knowledgePoint": "Linux 命令与管理",
+    "difficulty": "medium",
+    "tags": [
+      "Linux 命令与管理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 2,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      },
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 26,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c11-q003",
+    "question": "在Linux中，用于更改文件权限的命令是？",
+    "options": {
+      "A": "attrib",
+      "B": "change",
+      "C": "chmod",
+      "D": "file"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "chmod修改文件/目录权限（如chmod 755 file，chmod u+x file）。chown修改属主和属组，chgrp修改属组。attrib是Windows命令（修改文件属性）。",
+    "type": "single_choice",
+    "chapter": "网络操作系统与服务器配置",
+    "knowledgePoint": "Linux 权限",
+    "difficulty": "medium",
+    "tags": [
+      "Linux 权限",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 3,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      },
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 27,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c11-q004",
+    "question": "在Linux中，查看较大文件内容适合使用的命令是？",
+    "options": {
+      "A": "tail",
+      "B": "cat",
+      "C": "head",
+      "D": "less"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "less分页浏览大文件，支持上下翻页、搜索等，适合查看大文件。cat一次性全部输出（大文件会刷屏），tail查看文件末尾（默认10行），head查看文件开头（默认10行）。more也可分页但功能不如less强大。",
+    "type": "single_choice",
+    "chapter": "网络操作系统与服务器配置",
+    "knowledgePoint": "Linux 命令与管理",
+    "difficulty": "medium",
+    "tags": [
+      "Linux 命令与管理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 4,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      },
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 28,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c11-q005",
+    "question": "在Linux中，显示进程信息的命令是？",
+    "options": {
+      "A": "ps",
+      "B": "ls",
+      "C": "cd",
+      "D": "pwd"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "ps（process status）显示当前进程快照（如ps aux、ps -ef）。top动态实时显示进程状态（类似任务管理器）。ls列目录内容，cd切换目录，pwd显示当前路径。",
+    "type": "single_choice",
+    "chapter": "网络操作系统与服务器配置",
+    "knowledgePoint": "Linux 命令与管理",
+    "difficulty": "medium",
+    "tags": [
+      "Linux 命令与管理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 5,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      },
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 29,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c11-q006",
+    "question": "在Linux中，硬盘、U盘等设备属于？",
+    "options": {
+      "A": "字符设备",
+      "B": "网络设备",
+      "C": "虚拟设备",
+      "D": "块设备"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "块设备（Block Device）：按块（通常512字节或4KB）随机读写，如硬盘、U盘、光盘，设备文件在/dev/sd*。字符设备（Character Device）：按字节流顺序读写，如串口、键盘、终端，设备文件在/dev/tty*。网络设备通过套接字访问，虚拟设备如/dev/null、/dev/zero。",
+    "type": "single_choice",
+    "chapter": "网络操作系统与服务器配置",
+    "knowledgePoint": "Linux 命令与管理",
+    "difficulty": "medium",
+    "tags": [
+      "Linux 命令与管理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 6,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      },
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 30,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c11-q007",
+    "question": "安装Linux时必须创建的分区是？",
+    "options": {
+      "A": "/root",
+      "B": "/home",
+      "C": "/bin",
+      "D": "/（根分区）"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "安装Linux时必须创建根分区（/），根分区是整个文件系统的根，所有其他目录都在根分区下（除非单独挂载）。/root是root用户的家目录，/home是普通用户家目录，/bin是基本命令目录，这些都可以在根分区下，不需要单独分区。建议单独创建的分区：/boot、/home、swap（交换分区）。",
+    "type": "single_choice",
+    "chapter": "网络操作系统与服务器配置",
+    "knowledgePoint": "Linux 命令与管理",
+    "difficulty": "medium",
+    "tags": [
+      "Linux 命令与管理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 7,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      },
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 31,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c11-q008",
+    "question": "在Linux中，下列哪个目录包含系统配置文件？",
+    "options": {
+      "A": "/bin",
+      "B": "/etc",
+      "C": "/dev",
+      "D": "/root"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "/etc目录包含大量系统配置文件和管理工具，如passwd（用户信息）、shadow（密码哈希）、hosts（主机名解析）、resolv.conf（DNS配置）、network（网络配置）等。/bin保存基本命令，/dev包含设备文件，/root是超级用户家目录。",
+    "type": "single_choice",
+    "chapter": "网络操作系统与服务器配置",
+    "knowledgePoint": "Linux 命令与管理",
+    "difficulty": "medium",
+    "tags": [
+      "Linux 命令与管理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 8,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      },
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 32,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c11-q009",
+    "question": "在Windows中，使用什么命令启动远程桌面连接？",
+    "options": {
+      "A": "config",
+      "B": "telnet",
+      "C": "mstsc",
+      "D": "wscript"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "mstsc（Microsoft Terminal Services Client）打开远程桌面连接（RDP，端口3389）。telnet是远程命令行（端口23，明文），wscript是Windows脚本宿主，config不是远程桌面命令。",
+    "type": "single_choice",
+    "chapter": "网络操作系统与服务器配置",
+    "knowledgePoint": "Windows 服务器",
+    "difficulty": "medium",
+    "tags": [
+      "Windows 服务器",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 9,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      },
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 33,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c11-q015",
+    "question": "在Linux中，用于查看系统日志的命令是？",
+    "options": {
+      "A": "tail /var/log/messages",
+      "B": "cd /var/log",
+      "C": "mkdir /var/log",
+      "D": "rm /var/log"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "tail -f /var/log/messages（或/var/log/syslog，取决于发行版）实时查看系统日志。systemd系统使用journalctl命令查看日志。cd切换目录，mkdir创建目录，rm删除文件（这些不是查看日志的命令）。",
+    "type": "single_choice",
+    "chapter": "网络操作系统与服务器配置",
+    "knowledgePoint": "日志管理",
+    "difficulty": "medium",
+    "tags": [
+      "日志管理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 15,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c11-q017",
+    "question": "在Linux中，用于配置网络接口IP地址的命令是？",
+    "options": {
+      "A": "ifconfig 或 ip addr",
+      "B": "netstat",
+      "C": "route",
+      "D": "ping"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Linux中使用ifconfig（传统，net-tools，如ifconfig eth0 192.168.1.10 netmask 255.255.255.0）或ip addr（现代，iproute2，如ip addr add 192.168.1.10/24 dev eth0）配置网络接口IP。netstat查看连接，route/ip route配置路由，ping测试连通性。",
+    "type": "single_choice",
+    "chapter": "网络操作系统与服务器配置",
+    "knowledgePoint": "IPv4",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 17,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      },
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 41,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c11-q018",
+    "question": "在Linux中，切换用户身份的命令是？",
+    "options": {
+      "A": "su 或 sudo",
+      "B": "cd",
+      "C": "ls",
+      "D": "pwd"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "su（switch user）切换用户身份（如su - root切换到root并加载环境变量）。sudo以超级用户权限执行单条命令（如sudo systemctl restart nginx），需要配置sudoers。cd切换目录，ls列目录，pwd显示当前路径。",
+    "type": "single_choice",
+    "chapter": "网络操作系统与服务器配置",
+    "knowledgePoint": "Linux 命令与管理",
+    "difficulty": "medium",
+    "tags": [
+      "Linux 命令与管理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 18,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      },
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 42,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c11-q019",
+    "question": "在Linux中，用于启动/停止/重启服务的命令是？",
+    "options": {
+      "A": "systemctl 或 service",
+      "B": "cd",
+      "C": "ls",
+      "D": "pwd"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "systemd系统使用systemctl管理服务（systemctl start/stop/restart/status/enable/disable 服务名）。传统SysVinit系统使用service命令（service 服务名 start/stop/restart）。常用服务：nginx、httpd、mysqld、sshd、network等。",
+    "type": "single_choice",
+    "chapter": "网络操作系统与服务器配置",
+    "knowledgePoint": "Linux 命令与管理",
+    "difficulty": "medium",
+    "tags": [
+      "Linux 命令与管理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 19,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      },
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 43,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c11-q020",
+    "question": "在Windows中，Workstation服务的核心功能是？",
+    "options": {
+      "A": "提供Web服务",
+      "B": "通过SMB协议创建并维护客户端与远程服务器的网络连接",
+      "C": "提供DNS解析服务",
+      "D": "管理用户账户和权限"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Workstation服务是Windows核心网络服务，通过SMB（服务器消息块）协议创建并维护客户端与远程服务器之间的网络连接，支持文件共享、打印机共享和网络资源访问。该服务对应Windows的\"客户端\"功能，停止后无法访问网络共享。",
+    "type": "single_choice",
+    "chapter": "网络操作系统与服务器配置",
+    "knowledgePoint": "Windows 服务器",
+    "difficulty": "medium",
+    "tags": [
+      "Windows 服务器",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 20,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      },
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 44,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c11-q021",
+    "question": "在Linux中，下列哪个命令可以查看内核版本？",
+    "options": {
+      "A": "uname -a",
+      "B": "ls",
+      "C": "cd",
+      "D": "pwd"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "uname -a显示系统信息（内核名称、主机名、内核版本、内核编译时间、硬件架构等）。uname -r仅显示内核版本。cat /etc/os-release查看发行版信息。ls列目录，cd切换目录，pwd显示路径。",
+    "type": "single_choice",
+    "chapter": "网络操作系统与服务器配置",
+    "knowledgePoint": "Linux 命令与管理",
+    "difficulty": "medium",
+    "tags": [
+      "Linux 命令与管理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 21,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      },
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 45,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c11-q022",
+    "question": "在Linux中，用于查找文件的命令是？",
+    "options": {
+      "A": "find",
+      "B": "cd",
+      "C": "pwd",
+      "D": "ls"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "find命令在目录树中查找文件（如find / -name \"*.conf\"，find /home -user john）。locate命令基于数据库快速查找文件（需先updatedb）。cd切换目录，pwd显示当前路径，ls列目录内容（不是查找）。",
+    "type": "single_choice",
+    "chapter": "网络操作系统与服务器配置",
+    "knowledgePoint": "Linux 命令与管理",
+    "difficulty": "medium",
+    "tags": [
+      "Linux 命令与管理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 22,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      },
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 46,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c11-q023",
+    "question": "在Windows中，用于管理用户账户的命令是？",
+    "options": {
+      "A": "net user",
+      "B": "ipconfig",
+      "C": "ping",
+      "D": "tracert"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "net user命令管理Windows用户账户（查看用户列表、创建/删除用户、修改密码等）。如net user查看所有用户，net user username password /add添加用户。也可通过\"计算机管理→本地用户和组\"图形界面管理。ipconfig/ping/tracert是网络诊断命令。",
+    "type": "single_choice",
+    "chapter": "网络操作系统与服务器配置",
+    "knowledgePoint": "Windows 服务器",
+    "difficulty": "medium",
+    "tags": [
+      "Windows 服务器",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 23,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c11-q024",
+    "question": "在Linux中，用于打包压缩文件的命令是？",
+    "options": {
+      "A": "tar",
+      "B": "cd",
+      "C": "ls",
+      "D": "pwd"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "tar（tape archive）用于打包归档，常与gzip/bzip2/xz结合压缩。常用：tar -czvf archive.tar.gz directory（创建gzip压缩包），tar -xzvf archive.tar.gz（解压）。zip/unzip也可用于zip格式。cd/ls/pwd不是打包命令。",
+    "type": "single_choice",
+    "chapter": "网络操作系统与服务器配置",
+    "knowledgePoint": "Linux 命令与管理",
+    "difficulty": "medium",
+    "tags": [
+      "Linux 命令与管理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 24,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      },
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 47,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c11-q048",
+    "question": "在Linux中，下列哪个命令可以查看系统启动时间和运行时长？",
+    "options": {
+      "A": "uptime",
+      "B": "cd",
+      "C": "ls",
+      "D": "pwd"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "uptime命令显示系统已经运行了多长时间，输出包括：当前时间、系统运行时长（up X days, HH:MM）、当前登录用户数、系统平均负载（Load Average，过去1分钟、5分钟、15分钟的平均运行队列长度，即等待CPU的进程数+正在运行的进程数）。如输出：18:30:00 up 10 days, 2:30, 3 users, load average: 0.50, 0.80, 1.20。Load Average解读：对于多核CPU，load average/CPU核心数<0.7为正常，>1表示CPU繁忙（进程排队等待），需要关注。uptime的信息也存储在/proc/uptime（第一列系统运行秒数，第二列空闲秒数）和/proc/loadavg（负载平均值和运行/总进程数、最近创建的PID）。其他查看系统运行时间/启动时间的命令：1）w（显示登录用户和他们的活动，第一行同uptime）；2）who -b（显示系统启动时间）；3）last reboot（显示重启历史记录）；4）cat /proc/stat | grep btime（btime行是系统启动时间的Unix时间戳）；5）systemctl show --property=UserspaceTimestamp（systemd系统，用户空间启动时间）；6）date -d \"$(awk -F. '{print $1}' /proc/uptime) seconds ago\" +\"%Y-%m-%d %H:%M:%S\"（计算启动时间）。cd切换目录，ls列目录，pwd显示当前路径。",
+    "type": "single_choice",
+    "chapter": "网络操作系统与服务器配置",
+    "knowledgePoint": "Linux 命令与管理",
+    "difficulty": "medium",
+    "tags": [
+      "Linux 命令与管理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 48,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c11-q049",
+    "question": "在Linux中，用于查看内存使用情况的命令是？",
+    "options": {
+      "A": "free",
+      "B": "cd",
+      "C": "ls",
+      "D": "pwd"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "free命令显示系统内存使用情况，包括物理内存（RAM）、交换分区（Swap）、缓冲区（buffers）、缓存（cached）。常用参数：-h（human-readable，人类可读单位，自动选择K/M/G，如free -h，最常用）、-m（以MB为单位）、-g（以GB为单位）、-k（以KB为单位，默认）、-b（以字节为单位）、-s N（每N秒刷新一次，持续显示，如free -s 2 -h，类似top的内存监控）、-c N（刷新N次后退出，配合-s使用，如free -s 2 -c 5）、-t（最后显示总计行，Total=Mem+Swap）、-w（wide模式，分离显示buff和cache，不合并为buff/cache）。输出列（free -h）：total（总内存）、used（已使用内存，=total-free-buffers-cache）、free（完全未使用的空闲内存）、shared（共享内存，tmpfs等）、buff/cache（缓冲区+缓存，buffers是块设备IO缓存，cache是页缓存包括文件内容缓存和slab，这部分内存可在需要时被回收给应用程序使用，所以available列更能反映可用内存）、available（可用内存，估计可用于启动新应用程序的内存，=free+可回收的buff/cache，最值得关注的列，available低才是真正内存不足）。Swap行：total（交换分区总大小）、used（已使用交换空间，used>0表示物理内存不足开始使用交换分区，会导致性能下降，因为磁盘比内存慢几个数量级）、free（空闲交换空间）。其他查看内存的命令：1）top/htop（实时显示内存使用率，按m切换内存显示模式）；2）cat /proc/meminfo（详细内存信息，含MemTotal/MemFree/MemAvailable/Buffers/Cached/SwapTotal/SwapFree/Active/Inactive/Dirty/Writeback/Slab/SReclaimable/SUnreclaim等）；3）vmstat（虚拟内存统计，vmstat 1每秒刷新，显示r/b/swpd/free/buff/cache/si/so/bi/bo/in/cs/us/sy/id/wa/st，si/so是交换分区换入换出，>0表示内存压力）；4）ps aux --sort=-%mem | head（按内存使用率排序查看进程，找占用内存最多的进程）；5）smem（按进程统计内存使用，含PSS比例集大小，更准确）；6）sar -r（系统活动报告，历史内存统计）。内存排查：free -h看available和swap used；available低且swap used高说明内存不足；用ps aux --sort=-%mem | head -10找内存占用高的进程；检查是否有内存泄漏（进程内存持续增长不释放）；考虑增加物理内存、优化应用内存使用、调整OOM参数（/proc/sys/vm/overcommit_memory、swappiness）。cd切换目录，ls列目录，pwd显示当前路径。",
+    "type": "single_choice",
+    "chapter": "网络操作系统与服务器配置",
+    "knowledgePoint": "Linux 命令与管理",
+    "difficulty": "medium",
+    "tags": [
+      "Linux 命令与管理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 49,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c11-q050",
+    "question": "在Linux中，用于查看CPU使用情况的命令是？",
+    "options": {
+      "A": "top 或 mpstat",
+      "B": "cd",
+      "C": "ls",
+      "D": "pwd"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "查看CPU使用情况的常用命令：1）top（实时动态显示系统整体和各进程的CPU/内存使用，最常用）：输出顶部显示系统概览（uptime、任务数、CPU使用率us用户/sy系统/ni调整优先级/id空闲/wa IO等待/hi硬中断/si软中断/st虚拟化、内存、交换分区），下方进程列表按CPU使用率排序（默认，可按M按内存排序、P按CPU排序、N按PID排序）。常用交互：q退出、k杀进程（输入PID）、r调整nice值、z彩色显示、c显示完整命令行、1显示每个CPU核心使用率、H显示线程、u筛选用户、W保存配置。top -bn1（非交互模式，输出一次后退出，适合脚本中获取CPU使用率）、top -d 2（每2秒刷新）、top -p PID（监控指定进程）。2）htop（top的增强版，更友好的界面，支持鼠标操作、颜色、树形进程视图、垂直/水平滚动，需安装，更直观）。3）mpstat（multi-processor statistics，多处理器统计，sysstat包）：mpstat（显示所有CPU平均使用率）、mpstat -P ALL（显示每个CPU核心的使用率）、mpstat 1 5（每1秒刷新共5次）、mpstat -P 0（仅显示CPU0）。输出列：%usr用户态、%nice调整优先级用户态、%sys内核态、%iowait IO等待、%irq硬中断、%soft软中断、%steal虚拟化、%guest虚拟机、%gnice、%idle空闲。%idle低（如<10%）说明CPU繁忙，%iowait高说明IO瓶颈（磁盘/网络等待），%sys高说明系统调用频繁。4）vmstat（虚拟内存统计，也含CPU列）：vmstat 1每秒刷新，r（运行队列长度，>CPU核心数说明CPU排队）、b（不可中断睡眠进程数，通常IO等待）、us（用户态CPU%）、sy（内核态CPU%）、id（空闲%）、wa（IO等待%）、st（虚拟化%）。5）sar（System Activity Reporter，系统活动报告，sysstat包，历史统计）：sar -u（CPU使用率历史，默认每10分钟一次，来自cron收集）、sar -u 1 5（实时统计）、sar -P ALL（每核心）、sar -q（运行队列和负载）、sar -r（内存）、sar -n DEV（网络）、sar -d（磁盘）。sar可以查看历史性能数据（/var/log/sa/），用于排查过去某个时间点的性能问题。6）其他：cat /proc/cpuinfo（CPU硬件信息，型号、核心数、频率、缓存、特性标志）、nproc（CPU核心数）、lscpu（CPU架构详细信息，更友好）、ps aux --sort=-%cpu | head（按CPU使用率排序查看进程，找占用CPU最多的进程）、pidstat 1（每秒显示各进程CPU使用率，sysstat包，pidstat -u -p PID监控指定进程）、perf top（性能分析，显示占用CPU最多的函数/符号，需root，适合排查CPU热点）、strace -p PID（跟踪进程系统调用，看进程在做什么）。CPU排查：top/htop看整体CPU使用率和占用高的进程；%us高说明应用程序计算密集，%sy高说明系统调用/内核操作多，%iowait高说明IO瓶颈（磁盘慢或网络等待，不是CPU本身问题），%si高说明软中断多（网络流量大）；r（运行队列）>CPU核心数说明CPU饱和，进程排队等待；用ps/pidstat/perf定位具体进程和函数；考虑优化代码、增加CPU核心/升级CPU、负载均衡、限流。cd切换目录，ls列目录，pwd显示当前路径。",
+    "type": "single_choice",
+    "chapter": "网络操作系统与服务器配置",
+    "knowledgePoint": "Linux 命令与管理",
+    "difficulty": "medium",
+    "tags": [
+      "Linux 命令与管理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 50,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  }
+]

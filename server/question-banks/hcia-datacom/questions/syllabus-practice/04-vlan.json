@@ -1,0 +1,96 @@
+[
+  {
+    "id": "hcia-v2-04-dot1q-vid",
+    "type": "single_choice",
+    "question": "IEEE 802.1Q 标签中的 VLAN ID 字段长度是多少位？",
+    "options": {
+      "A": "8 位",
+      "B": "10 位",
+      "C": "12 位",
+      "D": "16 位"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "802.1Q 标签中的 VLAN ID 占 12 位，可表示 4096 个数值，其中部分值保留。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgePoint": "802.1Q",
+    "difficulty": "easy",
+    "tags": [
+      "VLAN 原理与配置",
+      "802.1Q"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-04-access-port",
+    "type": "single_choice",
+    "question": "连接普通终端的 Access 接口通常如何处理所属 VLAN 的以太网帧？",
+    "options": {
+      "A": "只允许一个缺省 VLAN，向终端发送时通常去除标签",
+      "B": "允许所有 VLAN 且始终携带标签",
+      "C": "仅转发三层报文",
+      "D": "自动改写源 MAC 地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Access 接口通常承载一个 VLAN，接收无标签帧并归入 PVID，发给终端时通常去除标签。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgePoint": "Access 接口",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 原理与配置",
+      "Access 接口"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-04-trunk-port",
+    "type": "multiple_choice",
+    "question": "关于 Trunk 接口的描述，哪些是正确的？",
+    "options": {
+      "A": "可承载多个 VLAN",
+      "B": "通常使用 802.1Q 标签区分 VLAN",
+      "C": "必须只连接一台 PC",
+      "D": "需要配置允许通过的 VLAN 范围"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "Trunk 常用于网络设备互联，可承载多个 VLAN，并通过允许列表控制哪些 VLAN 可以通过。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgePoint": "Trunk 接口",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 原理与配置",
+      "Trunk 接口"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-04-hybrid-port",
+    "type": "single_choice",
+    "question": "Hybrid 接口相较典型 Access 和 Trunk 接口的突出能力是什么？",
+    "options": {
+      "A": "可灵活指定不同 VLAN 帧以带标签或不带标签方式发送",
+      "B": "只能承载一个 VLAN",
+      "C": "不学习 MAC 地址",
+      "D": "只能工作在三层模式"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Hybrid 接口可针对不同 VLAN 灵活配置 tagged 或 untagged 发送方式，适配复杂接入场景。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgePoint": "Hybrid 接口",
+    "difficulty": "hard",
+    "tags": [
+      "VLAN 原理与配置",
+      "Hybrid 接口"
+    ],
+    "stage": "变式计算"
+  }
+]

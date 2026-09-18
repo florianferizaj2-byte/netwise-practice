@@ -1,0 +1,140 @@
+[
+  {
+    "id": "hcia-v2-extra-18-auth-assoc",
+    "type": "single_choice",
+    "question": "无线终端成功接入基础结构 WLAN 前，认证与关联的正确逻辑是什么？",
+    "options": {
+      "A": "先获取公网地址再认证",
+      "B": "先成为根桥再关联",
+      "C": "只需知道 AP MAC",
+      "D": "先完成认证流程，再与 AP 关联"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "终端需要完成认证和关联等控制过程，之后才能进行正常业务通信。 本题考查“STA 接入”，因此应选择“先完成认证流程，再与 AP 关联”。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgePoint": "STA 接入",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "STA 接入"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-extra-18-ssid-vlan",
+    "type": "single_choice",
+    "question": "企业 WLAN 将不同 SSID 映射到不同 VLAN 的主要用途是什么？",
+    "options": {
+      "A": "取消网关",
+      "B": "增加无线干扰",
+      "C": "按员工、访客等业务隔离流量",
+      "D": "让所有用户共享管理员权限"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "SSID 与 VLAN 映射可把不同无线业务划入不同网段并实施不同访问策略。 本题考查“WLAN 工作原理”，因此应选择“按员工、访客等业务隔离流量”。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgePoint": "WLAN 工作原理",
+    "difficulty": "easy",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "WLAN 工作原理"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v2-extra-18-roam-rssi",
+    "type": "single_choice",
+    "question": "终端是否漫游通常由谁发起决定？",
+    "options": {
+      "A": "NTP 服务器决定",
+      "B": "主要由无线终端根据自身策略和信号条件决定",
+      "C": "任何交换机强制决定",
+      "D": "DNS 服务器决定"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "AP 和 AC 可提供辅助信息，但是否切换通常由 STA 的漫游算法和阈值决定。 本题考查“漫游”，因此应选择“主要由无线终端根据自身策略和信号条件决定”。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgePoint": "漫游",
+    "difficulty": "hard",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "漫游"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v2-extra-18-wlan-security-psk",
+    "type": "single_choice",
+    "question": "WPA2-PSK 模式中的 PSK 指什么？",
+    "options": {
+      "A": "预共享密钥",
+      "B": "公网路由器",
+      "C": "端口安全密钥",
+      "D": "协议状态机"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "PSK 是 Pre-Shared Key，所有授权用户使用配置好的共享口令进行接入认证。 本题考查“WLAN 安全”，因此应选择“预共享密钥”。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgePoint": "WLAN 安全",
+    "difficulty": "easy",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "WLAN 安全"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v2-extra-18-enterprise-auth",
+    "type": "single_choice",
+    "question": "企业 WLAN 使用 802.1X 的主要好处是什么？",
+    "options": {
+      "A": "自动关闭所有加密",
+      "B": "不需要 RADIUS",
+      "C": "无法记录审计",
+      "D": "可基于每个用户进行集中身份认证"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "802.1X 通常配合 RADIUS 实现按用户身份认证和授权，适合企业场景。 本题考查“WLAN 安全”，因此应选择“可基于每个用户进行集中身份认证”。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgePoint": "WLAN 安全",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "WLAN 安全"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-extra-18-ap-radio",
+    "type": "single_choice",
+    "question": "AP 已上线但某个 SSID 不可见，排查时应优先核对什么？",
+    "options": {
+      "A": "NAT 地址池数量",
+      "B": "服务器硬盘空间",
+      "C": "该 AP 的射频和 WLAN 业务配置是否已下发启用",
+      "D": "OSPF 是否选出 DR"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "SSID 广播依赖 AP 射频、WLAN 配置和业务模板等多项配置正确生效。 本题考查“AP 上线”，因此应选择“该 AP 的射频和 WLAN 业务配置是否已下发启用”。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgePoint": "AP 上线",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "AP 上线"
+    ],
+    "stage": "基础理解"
+  }
+]

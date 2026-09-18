@@ -1,0 +1,1472 @@
+[
+  {
+    "id": "collection-c01-q001",
+    "question": "OSI参考模型中，负责端到端可靠数据传输的层次是？",
+    "options": {
+      "A": "网络层",
+      "B": "传输层",
+      "C": "数据链路层",
+      "D": "会话层"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "传输层（如TCP）通过确认、重传、流量控制等机制实现端到端可靠性。网络层提供尽力而为的不可靠传输；数据链路层负责相邻节点间帧传输。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "OSI 与 TCP/IP 模型",
+    "difficulty": "medium",
+    "tags": [
+      "OSI 与 TCP/IP 模型",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 1,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q002",
+    "question": "TCP/IP体系结构中，网际层的主要功能是？",
+    "options": {
+      "A": "可靠传输",
+      "B": "路由选择和分组转发",
+      "C": "物理信号传输",
+      "D": "数据格式转换"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "TCP/IP网际层对应OSI网络层，核心功能是路由选择和分组转发，主要协议为IP、ICMP、ARP等。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 2,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q003",
+    "question": "以下协议中，不属于TCP/IP应用层协议的是？",
+    "options": {
+      "A": "HTTP",
+      "B": "SMTP",
+      "C": "TCP",
+      "D": "FTP"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "TCP是传输层协议。HTTP、SMTP、FTP均为应用层协议。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 3,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q004",
+    "question": "OSI参考模型七层中，数据链路层的PDU称为？",
+    "options": {
+      "A": "比特流",
+      "B": "帧",
+      "C": "分组",
+      "D": "报文"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "各层PDU：物理层-比特；数据链路层-帧；网络层-分组/包；传输层-段；应用层-报文。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "OSI 与 TCP/IP 模型",
+    "difficulty": "medium",
+    "tags": [
+      "OSI 与 TCP/IP 模型",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 4,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q005",
+    "question": "在TCP/IP网络中，ARP协议的作用是？",
+    "options": {
+      "A": "将IP地址解析为MAC地址",
+      "B": "将MAC地址解析为IP地址",
+      "C": "分配IP地址",
+      "D": "域名解析"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "ARP根据目标IP地址获取对应的MAC地址。反向功能由RARP实现，DNS负责域名到IP的解析。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "ARP",
+    "difficulty": "medium",
+    "tags": [
+      "ARP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 5,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q006",
+    "question": "以下关于ICMP协议的说法中，正确的是？",
+    "options": {
+      "A": "ICMP用于传输用户数据",
+      "B": "ICMP工作在传输层",
+      "C": "ICMP可报告网络错误，如目的不可达",
+      "D": "ICMP不使用IP封装"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "ICMP是网络层协议，封装在IP数据报中传输，用于报告错误和网络诊断（ping）。不传输用户数据。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "ICMP",
+    "difficulty": "medium",
+    "tags": [
+      "ICMP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 6,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q007",
+    "question": "TCP三次握手过程中，服务器发送的SYN+ACK报文包含的标志位是？",
+    "options": {
+      "A": "SYN=1, ACK=0",
+      "B": "SYN=1, ACK=1",
+      "C": "SYN=0, ACK=1",
+      "D": "SYN=0, ACK=0"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "三次握手：客户端SYN=1；服务器SYN=1,ACK=1；客户端ACK=1。第二次握手同时设置SYN和ACK。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "TCP 连接",
+    "difficulty": "medium",
+    "tags": [
+      "TCP 连接",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 7,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q008",
+    "question": "TCP协议中，用于流量控制的机制是？",
+    "options": {
+      "A": "拥塞窗口",
+      "B": "滑动窗口",
+      "C": "超时重传",
+      "D": "慢启动"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "流量控制使用滑动窗口机制，接收端通过通告窗口大小告知发送方可接收的数据量。拥塞窗口用于拥塞控制。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 8,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q009",
+    "question": "以下关于UDP的叙述中，正确的是？",
+    "options": {
+      "A": "UDP提供可靠、有序的数据传输",
+      "B": "UDP报文头部包含序列号",
+      "C": "UDP适用于实时性要求高的应用如VoIP",
+      "D": "UDP在传输前需要建立连接"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "UDP无连接、不可靠、无序列号，头部开销小（8字节）。因其低延迟，适合实时音视频、DNS查询等场景。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "UDP",
+    "difficulty": "medium",
+    "tags": [
+      "UDP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 9,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q010",
+    "question": "在OSI参考模型中，网桥工作在？",
+    "options": {
+      "A": "物理层",
+      "B": "数据链路层",
+      "C": "网络层",
+      "D": "传输层"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "网桥基于MAC地址进行帧转发和过滤，属于数据链路层设备。集线器工作在物理层；路由器工作在网络层。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "OSI 与 TCP/IP 模型",
+    "difficulty": "medium",
+    "tags": [
+      "OSI 与 TCP/IP 模型",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 10,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q011",
+    "question": "OSI参考模型中，负责数据格式转换和加密的是？",
+    "options": {
+      "A": "表示层",
+      "B": "会话层",
+      "C": "传输层",
+      "D": "应用层"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "表示层负责数据格式转换、加密解密、压缩解压缩等。会话层负责会话管理；传输层负责端到端传输。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "OSI 与 TCP/IP 模型",
+    "difficulty": "medium",
+    "tags": [
+      "OSI 与 TCP/IP 模型",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 11,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q012",
+    "question": "在ISO/OSI参考模型中，哪层可以完成流量控制和错误检测？",
+    "options": {
+      "A": "物理层、数据链路层",
+      "B": "数据链路层、传输层",
+      "C": "数据链路层、应用层",
+      "D": "物理层、网络层"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "数据链路层通过CRC检错和滑动窗口进行流量控制；传输层通过确认重传和滑动窗口实现端到端流量控制和差错恢复。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "OSI 与 TCP/IP 模型",
+    "difficulty": "medium",
+    "tags": [
+      "OSI 与 TCP/IP 模型",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 12,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q013",
+    "question": "下列关于OSI七层模型与TCP/IP四层模型对应关系的说法，正确的是？",
+    "options": {
+      "A": "OSI会话层对应TCP/IP的网际层",
+      "B": "OSI表示层、会话层合并对应TCP/IP的应用层",
+      "C": "OSI传输层对应TCP/IP的网络接口层",
+      "D": "OSI物理层对应TCP/IP的网际层"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "TCP/IP四层模型中，应用层对应OSI的应用层、表示层、会话层；传输层对应OSI传输层；网际层对应OSI网络层；网络接口层对应OSI数据链路层和物理层。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 13,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q014",
+    "question": "关于FTP协议层级的说法，正确的是？",
+    "options": {
+      "A": "FTP工作在OSI模型的会话层",
+      "B": "FTP工作在TCP/IP模型的传输层",
+      "C": "FTP工作在应用层",
+      "D": "FTP工作在网络层"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "FTP是文件传输协议，属于应用层协议，使用TCP端口21（控制）和20（数据）。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "FTP",
+    "difficulty": "medium",
+    "tags": [
+      "FTP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 14,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q015",
+    "question": "OSI参考模型中，负责选择最优传输路径的是？",
+    "options": {
+      "A": "数据链路层",
+      "B": "网络层",
+      "C": "传输层",
+      "D": "会话层"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "网络层的核心功能是路由选择，即根据目的地址选择最优传输路径。路由器工作在网络层。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "OSI 与 TCP/IP 模型",
+    "difficulty": "medium",
+    "tags": [
+      "OSI 与 TCP/IP 模型",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 15,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q016",
+    "question": "普通交换机根据什么地址转发数据帧？该地址属于OSI哪一层？",
+    "options": {
+      "A": "IP地址，网络层",
+      "B": "MAC地址，数据链路层",
+      "C": "端口号，传输层",
+      "D": "MAC地址，网络层"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "普通交换机根据MAC地址转发数据帧，MAC地址属于数据链路层地址。路由器根据IP地址转发，IP属于网络层。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "以太网与交换",
+    "difficulty": "medium",
+    "tags": [
+      "以太网与交换",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 16,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q017",
+    "question": "下列网络设备中，工作在物理层的是？",
+    "options": {
+      "A": "路由器",
+      "B": "交换机",
+      "C": "集线器",
+      "D": "网桥"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "集线器是多口中继器，工作在物理层，仅对信号放大再生，所有端口同一冲突域和广播域。网桥和交换机工作在数据链路层，路由器工作在网络层。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "网络体系结构",
+    "difficulty": "medium",
+    "tags": [
+      "网络体系结构",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 17,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q018",
+    "question": "路由器工作在OSI模型的哪一层？",
+    "options": {
+      "A": "物理层",
+      "B": "数据链路层",
+      "C": "网络层",
+      "D": "传输层"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "路由器根据IP地址（网络层地址）进行路由选择和数据包转发，工作在网络层。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "OSI 与 TCP/IP 模型",
+    "difficulty": "medium",
+    "tags": [
+      "OSI 与 TCP/IP 模型",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 18,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q019",
+    "question": "在OSI参考模型中，会话层的主要功能是？",
+    "options": {
+      "A": "差错控制",
+      "B": "路由选择",
+      "C": "会话管理",
+      "D": "数据表示转换"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "会话层负责建立、管理和终止会话，完成会话管理与会话数据交换。差错控制是数据链路层功能；路由选择是网络层功能；数据表示转换是表示层功能。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "OSI 与 TCP/IP 模型",
+    "difficulty": "medium",
+    "tags": [
+      "OSI 与 TCP/IP 模型",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 19,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q020",
+    "question": "TCP/IP模型中，传输层的主要协议是？",
+    "options": {
+      "A": "IP和ICMP",
+      "B": "TCP和UDP",
+      "C": "HTTP和FTP",
+      "D": "ARP和RARP"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "TCP/IP传输层包含TCP（面向连接、可靠）和UDP（无连接、不可靠）。IP和ICMP属于网际层；HTTP和FTP属于应用层；ARP属于网络接口层/网际层。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 20,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q021",
+    "question": "在OSI七层模型中，物理层的数据单位是？",
+    "options": {
+      "A": "比特",
+      "B": "帧",
+      "C": "分组",
+      "D": "报文"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "物理层传输原始比特流，数据单位是比特（bit）。数据链路层是帧，网络层是分组，传输层是段，应用层是报文。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "OSI 与 TCP/IP 模型",
+    "difficulty": "medium",
+    "tags": [
+      "OSI 与 TCP/IP 模型",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 21,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q022",
+    "question": "下列关于TCP/IP模型与OSI模型的说法，错误的是？",
+    "options": {
+      "A": "TCP/IP模型分为四层",
+      "B": "OSI模型分为七层",
+      "C": "TCP/IP的网络接口层对应OSI的数据链路层和物理层",
+      "D": "TCP/IP的应用层仅对应OSI的应用层"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "TCP/IP应用层对应OSI的应用层、表示层和会话层三层，而非仅应用层。TCP/IP将OSI上三层合并为一层。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 22,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q023",
+    "question": "在OSI参考模型中，提供端到端的可靠数据传输的是？",
+    "options": {
+      "A": "数据链路层",
+      "B": "网络层",
+      "C": "传输层",
+      "D": "会话层"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "传输层负责端到端的可靠数据传输。数据链路层只提供相邻节点间的可靠传输；网络层提供不可靠的尽力而为传输。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "OSI 与 TCP/IP 模型",
+    "difficulty": "medium",
+    "tags": [
+      "OSI 与 TCP/IP 模型",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 23,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q024",
+    "question": "下列协议中，工作在网络层的是？",
+    "options": {
+      "A": "TCP",
+      "B": "UDP",
+      "C": "IP",
+      "D": "HTTP"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "IP协议工作在网络层，负责寻址和路由。TCP和UDP工作在传输层；HTTP工作在应用层。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "网络体系结构",
+    "difficulty": "medium",
+    "tags": [
+      "网络体系结构",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 24,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q025",
+    "question": "在OSI模型中，负责将上层数据分割成帧并添加物理地址的是？",
+    "options": {
+      "A": "网络层",
+      "B": "数据链路层",
+      "C": "传输层",
+      "D": "物理层"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "数据链路层将网络层数据包封装为帧，添加源MAC和目的MAC地址（物理地址），负责帧的差错检测和流量控制。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "OSI 与 TCP/IP 模型",
+    "difficulty": "medium",
+    "tags": [
+      "OSI 与 TCP/IP 模型",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 25,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q026",
+    "question": "中继器工作在OSI模型的哪一层？",
+    "options": {
+      "A": "物理层",
+      "B": "数据链路层",
+      "C": "网络层",
+      "D": "传输层"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "中继器工作在物理层，仅对信号进行放大和再生，延长传输距离，不能隔离冲突域或广播域。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "OSI 与 TCP/IP 模型",
+    "difficulty": "medium",
+    "tags": [
+      "OSI 与 TCP/IP 模型",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 26,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q027",
+    "question": "在TCP/IP协议栈中，HTTP协议默认使用的端口号是？",
+    "options": {
+      "A": "21",
+      "B": "23",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "HTTP默认端口80，HTTPS默认端口443，FTP默认端口21，Telnet默认端口23。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 27,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q028",
+    "question": "下列关于OSI模型各层功能的描述，错误的是？",
+    "options": {
+      "A": "物理层负责比特流传输",
+      "B": "数据链路层负责帧的可靠传输",
+      "C": "网络层负责端到端的可靠传输",
+      "D": "传输层负责端到端的可靠传输"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "网络层负责路由选择和分组转发，提供不可靠的尽力而为传输。端到端的可靠传输是传输层的功能。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "OSI 与 TCP/IP 模型",
+    "difficulty": "medium",
+    "tags": [
+      "OSI 与 TCP/IP 模型",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 28,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q029",
+    "question": "在OSI七层模型中，从下往上第四层是？",
+    "options": {
+      "A": "数据链路层",
+      "B": "网络层",
+      "C": "传输层",
+      "D": "会话层"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "OSI七层从下往上：1物理层、2数据链路层、3网络层、4传输层、5会话层、6表示层、7应用层。第四层是传输层。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "OSI 与 TCP/IP 模型",
+    "difficulty": "medium",
+    "tags": [
+      "OSI 与 TCP/IP 模型",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 29,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q030",
+    "question": "网关工作在OSI模型的哪一层以上？",
+    "options": {
+      "A": "物理层",
+      "B": "数据链路层",
+      "C": "网络层",
+      "D": "传输层"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "网关（Gateway）工作在传输层以上，能够实现不同协议体系之间的转换，如应用层网关。路由器工作在网络层，交换机工作在数据链路层。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "OSI 与 TCP/IP 模型",
+    "difficulty": "medium",
+    "tags": [
+      "OSI 与 TCP/IP 模型",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 30,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q031",
+    "question": "在OSI参考模型中，表示层的功能不包括？",
+    "options": {
+      "A": "数据加密",
+      "B": "数据压缩",
+      "C": "数据格式转换",
+      "D": "路由选择"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "表示层负责数据格式转换、加密解密、压缩解压缩。路由选择是网络层的功能，不属于表示层。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "OSI 与 TCP/IP 模型",
+    "difficulty": "medium",
+    "tags": [
+      "OSI 与 TCP/IP 模型",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 31,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q032",
+    "question": "下列关于TCP/IP模型网络接口层的说法，正确的是？",
+    "options": {
+      "A": "对应OSI的网络层",
+      "B": "对应OSI的数据链路层和物理层",
+      "C": "主要协议是IP",
+      "D": "负责端到端传输"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "TCP/IP网络接口层对应OSI的数据链路层和物理层，负责将IP数据报封装成帧并通过物理介质传输。IP是网际层协议；端到端传输是传输层功能。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 32,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q033",
+    "question": "在OSI模型中，负责建立、管理和终止应用程序之间会话的是？",
+    "options": {
+      "A": "传输层",
+      "B": "会话层",
+      "C": "表示层",
+      "D": "应用层"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "会话层负责建立、管理和终止表示层实体之间的通信会话，包括会话同步点设置和会话恢复。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "OSI 与 TCP/IP 模型",
+    "difficulty": "medium",
+    "tags": [
+      "OSI 与 TCP/IP 模型",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 33,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q034",
+    "question": "下列设备中，可以隔离广播域的是？",
+    "options": {
+      "A": "集线器",
+      "B": "中继器",
+      "C": "路由器",
+      "D": "普通交换机"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "路由器可以隔离广播域，因为路由器默认不转发广播包。集线器和中继器工作在物理层，不能隔离广播域；普通交换机可以隔离冲突域但不能隔离广播域（VLAN除外）。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "以太网与交换",
+    "difficulty": "medium",
+    "tags": [
+      "以太网与交换",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 34,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q035",
+    "question": "在OSI七层模型中，应用层的PDU称为？",
+    "options": {
+      "A": "比特",
+      "B": "帧",
+      "C": "分组",
+      "D": "报文"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "应用层的数据单位是报文（Message）。物理层是比特，数据链路层是帧，网络层是分组/包，传输层是段/数据报。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "OSI 与 TCP/IP 模型",
+    "difficulty": "medium",
+    "tags": [
+      "OSI 与 TCP/IP 模型",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 35,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q036",
+    "question": "下列关于OSI模型和TCP/IP模型的说法，正确的是？",
+    "options": {
+      "A": "OSI模型是实际使用的模型",
+      "B": "TCP/IP模型是理论模型",
+      "C": "OSI模型分为七层，TCP/IP模型分为四层",
+      "D": "两个模型完全相同"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "OSI是七层理论参考模型，TCP/IP是四层实际使用的模型。两者层次划分不同，但功能对应。OSI上三层对应TCP/IP应用层。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 36,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q037",
+    "question": "在OSI参考模型中，网络层的主要功能不包括？",
+    "options": {
+      "A": "路由选择",
+      "B": "拥塞控制",
+      "C": "分组转发",
+      "D": "端到端的可靠传输"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "网络层功能包括路由选择、拥塞控制、分组转发、逻辑寻址等。端到端的可靠传输是传输层的功能，不属于网络层。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "OSI 与 TCP/IP 模型",
+    "difficulty": "medium",
+    "tags": [
+      "OSI 与 TCP/IP 模型",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 37,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q038",
+    "question": "下列协议中，不属于网络层协议的是？",
+    "options": {
+      "A": "IP",
+      "B": "ICMP",
+      "C": "ARP",
+      "D": "FTP"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "IP、ICMP、ARP均为网络层协议。FTP是文件传输协议，属于应用层。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "网络体系结构",
+    "difficulty": "medium",
+    "tags": [
+      "网络体系结构",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 38,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q039",
+    "question": "在TCP/IP模型中，网际层对应OSI模型的？",
+    "options": {
+      "A": "物理层",
+      "B": "数据链路层",
+      "C": "网络层",
+      "D": "传输层"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "TCP/IP网际层（Internet Layer）对应OSI网络层，主要协议是IP，负责路由选择和分组转发。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 39,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q040",
+    "question": "下列关于传输层的说法，错误的是？",
+    "options": {
+      "A": "传输层提供端到端的通信",
+      "B": "TCP是面向连接的",
+      "C": "UDP是无连接的",
+      "D": "传输层负责路由选择"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "传输层负责端到端的通信，TCP面向连接可靠，UDP无连接不可靠。路由选择是网络层的功能，不是传输层。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "网络体系结构",
+    "difficulty": "medium",
+    "tags": [
+      "网络体系结构",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 40,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q041",
+    "question": "在OSI模型中，数据从应用层传到物理层时，每层都会加上自己的首部，这个过程称为？",
+    "options": {
+      "A": "解封装",
+      "B": "封装",
+      "C": "分段",
+      "D": "重组"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "数据从上层向下层传输时，每层加上自己的首部（和尾部），这个过程称为封装（Encapsulation）。接收方从下层向上层传输时去掉首部，称为解封装。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "OSI 与 TCP/IP 模型",
+    "difficulty": "medium",
+    "tags": [
+      "OSI 与 TCP/IP 模型",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 41,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q042",
+    "question": "下列关于集线器的说法，正确的是？",
+    "options": {
+      "A": "集线器可以隔离冲突域",
+      "B": "集线器所有端口共享带宽",
+      "C": "集线器工作在数据链路层",
+      "D": "集线器可以隔离广播域"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "集线器工作在物理层，所有端口共享带宽，属于同一冲突域和同一广播域，不能隔离冲突域或广播域。交换机可以隔离冲突域。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "网络体系结构",
+    "difficulty": "medium",
+    "tags": [
+      "网络体系结构",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 42,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q043",
+    "question": "在OSI七层模型中，负责差错检测和帧同步的是？",
+    "options": {
+      "A": "物理层",
+      "B": "数据链路层",
+      "C": "网络层",
+      "D": "传输层"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "数据链路层负责帧同步、差错检测（CRC）、流量控制、物理寻址等。物理层只负责比特流传输；网络层负责路由；传输层负责端到端差错恢复。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "OSI 与 TCP/IP 模型",
+    "difficulty": "medium",
+    "tags": [
+      "OSI 与 TCP/IP 模型",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 43,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q044",
+    "question": "TCP/IP模型中，应用层的协议不包括？",
+    "options": {
+      "A": "HTTP",
+      "B": "FTP",
+      "C": "TCP",
+      "D": "DNS"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "HTTP、FTP、DNS均为应用层协议。TCP是传输层协议，不属于应用层。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 44,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q045",
+    "question": "在OSI参考模型中，哪一层负责为上层提供网络服务？",
+    "options": {
+      "A": "物理层",
+      "B": "数据链路层",
+      "C": "网络层",
+      "D": "传输层"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "传输层负责为上层（应用层）提供端到端的网络服务，确保数据在不同网络设备之间可靠传输。传输层是OSI模型中负责端到端通信的关键层。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "OSI 与 TCP/IP 模型",
+    "difficulty": "medium",
+    "tags": [
+      "OSI 与 TCP/IP 模型",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 45,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q046",
+    "question": "下列关于OSI模型层次顺序的排列，正确的是？",
+    "options": {
+      "A": "物理层-数据链路层-网络层-传输层-会话层-表示层-应用层",
+      "B": "物理层-网络层-数据链路层-传输层-会话层-表示层-应用层",
+      "C": "应用层-表示层-会话层-传输层-网络层-数据链路层-物理层",
+      "D": "物理层-数据链路层-传输层-网络层-会话层-表示层-应用层"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "OSI七层从下到上顺序：物理层、数据链路层、网络层、传输层、会话层、表示层、应用层。可记忆为\"物数网传会表应\"。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "OSI 与 TCP/IP 模型",
+    "difficulty": "medium",
+    "tags": [
+      "OSI 与 TCP/IP 模型",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 46,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q047",
+    "question": "在OSI模型中，路由器和交换机的主要区别是？",
+    "options": {
+      "A": "路由器工作在网络层，交换机工作在数据链路层",
+      "B": "路由器工作在数据链路层，交换机工作在网络层",
+      "C": "两者工作在同一层",
+      "D": "路由器工作在物理层，交换机工作在传输层"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "路由器工作在网络层，根据IP地址转发；交换机工作在数据链路层，根据MAC地址转发。这是两者最根本的区别。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "以太网与交换",
+    "difficulty": "medium",
+    "tags": [
+      "以太网与交换",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 47,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q048",
+    "question": "在OSI参考模型中，提供端到端的可靠数据传输服务的是哪一层？",
+    "options": {
+      "A": "网络层",
+      "B": "传输层",
+      "C": "会话层",
+      "D": "表示层"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "传输层（第4层）负责端到端的可靠数据传输，典型协议TCP提供面向连接的可靠传输，UDP提供无连接的不可靠传输。网络层负责路由选择，会话层负责建立/管理/终止会话，表示层负责数据格式转换和加密。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "OSI 与 TCP/IP 模型",
+    "difficulty": "medium",
+    "tags": [
+      "OSI 与 TCP/IP 模型",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 48,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c01-q049",
+    "question": "TCP/IP参考模型分为几层？",
+    "options": {
+      "A": "4层",
+      "B": "5层",
+      "C": "6层",
+      "D": "7层"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "TCP/IP参考模型分为4层：应用层、传输层、网络层（网际层）、网络接口层（主机-网络层）。OSI参考模型分为7层。TCP/IP的应用层对应OSI的应用层+表示层+会话层，网络接口层对应OSI的数据链路层+物理层。",
+    "type": "single_choice",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "TCP",
+    "difficulty": "medium",
+    "tags": [
+      "TCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第一章 网络体系结构（含答案解析）.docx",
+        "questionNumber": 49,
+        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  }
+]

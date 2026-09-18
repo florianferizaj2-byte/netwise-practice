@@ -1,0 +1,140 @@
+[
+  {
+    "id": "hcia-v2-extra-19-snmpv3",
+    "type": "single_choice",
+    "question": "SNMPv3 相比早期 SNMP 版本的主要安全改进是什么？",
+    "options": {
+      "A": "只支持 IPv4",
+      "B": "不再传递管理信息",
+      "C": "支持认证和加密",
+      "D": "取消管理站"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "SNMPv3 可提供用户认证与报文加密，适合更安全的网管场景。 本题考查“SNMP”，因此应选择“支持认证和加密”。",
+    "chapter": "网络设备管理",
+    "knowledgePoint": "SNMP",
+    "difficulty": "medium",
+    "tags": [
+      "网络设备管理",
+      "SNMP"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-extra-19-trap",
+    "type": "single_choice",
+    "question": "SNMP Trap 的典型特点是什么？",
+    "options": {
+      "A": "交换机发送 BPDU",
+      "B": "设备主动向管理站发送异常通知",
+      "C": "管理站轮询设备配置",
+      "D": "终端请求 DHCP 地址"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Trap 由 Agent 主动上报，可用于告警等需要及时通知的事件。 本题考查“SNMP”，因此应选择“设备主动向管理站发送异常通知”。",
+    "chapter": "网络设备管理",
+    "knowledgePoint": "SNMP",
+    "difficulty": "easy",
+    "tags": [
+      "网络设备管理",
+      "SNMP"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v2-extra-19-log-level",
+    "type": "single_choice",
+    "question": "网络设备日志级别的作用是什么？",
+    "options": {
+      "A": "区分事件严重程度和筛选范围",
+      "B": "决定接口带宽",
+      "C": "生成 IP 地址",
+      "D": "建立无线隧道"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "日志级别有助于运维人员优先处理严重告警并控制输出量。 本题考查“日志”，因此应选择“区分事件严重程度和筛选范围”。",
+    "chapter": "网络设备管理",
+    "knowledgePoint": "日志",
+    "difficulty": "easy",
+    "tags": [
+      "网络设备管理",
+      "日志"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v2-extra-19-config-backup",
+    "type": "single_choice",
+    "question": "定期备份网络设备配置的主要价值是什么？",
+    "options": {
+      "A": "增加无线信道数",
+      "B": "代替账号认证",
+      "C": "自动优化路由",
+      "D": "故障或误变更后可快速恢复与比对"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "版本化配置备份便于恢复、审计与排查变更引入的问题。 本题考查“网络设备管理”，因此应选择“故障或误变更后可快速恢复与比对”。",
+    "chapter": "网络设备管理",
+    "knowledgePoint": "网络设备管理",
+    "difficulty": "easy",
+    "tags": [
+      "网络设备管理",
+      "网络设备管理"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v2-extra-19-mgmt-plane",
+    "type": "single_choice",
+    "question": "为什么建议把设备管理流量与用户业务流量隔离？",
+    "options": {
+      "A": "取消日志记录",
+      "B": "使设备不需要 IP",
+      "C": "降低管理面暴露并便于实施访问控制",
+      "D": "让用户访问更慢"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "独立管理网或管理 VLAN 可限制管理入口并降低业务网络故障对运维的影响。 本题考查“远程管理”，因此应选择“降低管理面暴露并便于实施访问控制”。",
+    "chapter": "网络设备管理",
+    "knowledgePoint": "远程管理",
+    "difficulty": "medium",
+    "tags": [
+      "网络设备管理",
+      "远程管理"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-extra-19-syslog-time",
+    "type": "single_choice",
+    "question": "集中日志系统与 NTP 配合使用的关键价值是什么？",
+    "options": {
+      "A": "自动创建用户",
+      "B": "不同设备事件可按统一时间线关联",
+      "C": "自动生成 VLAN",
+      "D": "自动做 NAT"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "统一时间戳让跨设备日志的先后关系可信，是排障和审计的基础。 本题考查“日志”，因此应选择“不同设备事件可按统一时间线关联”。",
+    "chapter": "网络设备管理",
+    "knowledgePoint": "日志",
+    "difficulty": "easy",
+    "tags": [
+      "网络设备管理",
+      "日志"
+    ],
+    "stage": "基础理解"
+  }
+]

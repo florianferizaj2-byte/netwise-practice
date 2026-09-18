@@ -1,0 +1,140 @@
+[
+  {
+    "id": "hcia-v2-extra-09-hello-purpose",
+    "type": "single_choice",
+    "question": "OSPF Hello 报文的主要用途是什么？",
+    "options": {
+      "A": "发现并维持邻居关系",
+      "B": "传输用户文件",
+      "C": "分配 DHCP 地址",
+      "D": "创建 VLAN 标签"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "OSPF 周期性发送 Hello 用于发现邻居并检测邻居是否存活。 本题考查“单区域 OSPF”，因此应选择“发现并维持邻居关系”。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgePoint": "单区域 OSPF",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF 原理与配置",
+      "单区域 OSPF"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-extra-09-area-match",
+    "type": "single_choice",
+    "question": "两台路由器直连接口配置的 OSPF Area ID 不同，通常会怎样？",
+    "options": {
+      "A": "必定选举为 DR",
+      "B": "自动变成同一区域",
+      "C": "只影响 IPv6",
+      "D": "不能建立正常邻接"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "区域 ID 是 OSPF 邻接关键参数之一，不一致会阻止邻接建立。 本题考查“单区域 OSPF”，因此应选择“不能建立正常邻接”。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgePoint": "单区域 OSPF",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF 原理与配置",
+      "单区域 OSPF"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v2-extra-09-dead-timer",
+    "type": "single_choice",
+    "question": "OSPF 在 Dead Timer 到期前未收到邻居 Hello 时，通常如何处理该邻居？",
+    "options": {
+      "A": "把它加入 NAT 地址池",
+      "B": "继续永久保留 Full 状态",
+      "C": "将邻居状态置为 Down",
+      "D": "把它立即设为 DR"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Dead Timer 用于检测邻居失效，超时后邻居关系会被删除。 本题考查“邻居状态”，因此应选择“将邻居状态置为 Down”。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgePoint": "邻居状态",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF 原理与配置",
+      "邻居状态"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v2-extra-09-dr-role",
+    "type": "single_choice",
+    "question": "OSPF 广播网络中选举 DR/BDR 的主要目的是什么？",
+    "options": {
+      "A": "为终端分配地址",
+      "B": "减少多路由器之间 LSA 交换的邻接数量",
+      "C": "提供 NAT 转换",
+      "D": "替代默认路由"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "DR/BDR 让 DROther 主要与 DR、BDR 建立 Full 邻接，降低全互连同步开销。 本题考查“DR/BDR”，因此应选择“减少多路由器之间 LSA 交换的邻接数量”。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgePoint": "DR/BDR",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF 原理与配置",
+      "DR/BDR"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v2-extra-09-lsa-db",
+    "type": "single_choice",
+    "question": "OSPF 路由器计算最短路径前，需要先建立什么数据库？",
+    "options": {
+      "A": "链路状态数据库 LSDB",
+      "B": "ARP 缓存",
+      "C": "DNS 缓存",
+      "D": "MAC 地址表"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "OSPF 汇集 LSA 形成 LSDB，再运行 SPF 算法计算路由。 本题考查“单区域 OSPF”，因此应选择“链路状态数据库 LSDB”。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgePoint": "单区域 OSPF",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF 原理与配置",
+      "单区域 OSPF"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-extra-09-passive-interface",
+    "type": "single_choice",
+    "question": "把 OSPF 接口配置为 passive-interface 的典型效果是什么？",
+    "options": {
+      "A": "关闭接口物理链路",
+      "B": "清除接口 IP 地址",
+      "C": "禁止所有三层转发",
+      "D": "不在该接口发送 Hello，但仍可通告其网段"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "被动接口适合连接终端网段，可避免在无需邻居的接口上发送 OSPF Hello。 本题考查“单区域 OSPF”，因此应选择“不在该接口发送 Hello，但仍可通告其网段”。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgePoint": "单区域 OSPF",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF 原理与配置",
+      "单区域 OSPF"
+    ],
+    "stage": "基础理解"
+  }
+]

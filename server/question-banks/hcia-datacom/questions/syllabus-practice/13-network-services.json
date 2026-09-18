@@ -1,0 +1,94 @@
+[
+  {
+    "id": "hcia-v2-13-dhcp-dora",
+    "type": "single_choice",
+    "question": "DHCP 客户端首次获取 IPv4 地址时，常见的 DORA 交互顺序是哪一项？",
+    "options": {
+      "A": "Discover→Offer→Request→Ack",
+      "B": "Request→Discover→Ack→Offer",
+      "C": "Offer→Ack→Discover→Request",
+      "D": "Discover→Request→Offer→Nak"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "客户端先 Discover，服务器 Offer，客户端 Request，服务器最终 Ack 确认租约。",
+    "chapter": "网络服务与应用",
+    "knowledgePoint": "DHCP",
+    "difficulty": "medium",
+    "tags": [
+      "网络服务与应用",
+      "DHCP"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-13-dns",
+    "type": "single_choice",
+    "question": "DNS 服务的核心作用是什么？",
+    "options": {
+      "A": "把域名解析为 IP 地址等资源记录",
+      "B": "分配以太网 VLAN",
+      "C": "选举路由器 DR",
+      "D": "加密无线信号"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "DNS 提供域名与 IP 地址等资源记录之间的查询解析，使用户无需记忆数字地址。",
+    "chapter": "网络服务与应用",
+    "knowledgePoint": "DNS",
+    "difficulty": "easy",
+    "tags": [
+      "网络服务与应用",
+      "DNS"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-13-ntp",
+    "type": "single_choice",
+    "question": "在多台网络设备之间部署 NTP 的主要目的是什么？",
+    "options": {
+      "A": "同步系统时间",
+      "B": "同步 MAC 地址表",
+      "C": "分配无线信道",
+      "D": "转换私网地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "统一时间可让日志、告警和审计记录具备一致时间线，便于定位事件。",
+    "chapter": "网络服务与应用",
+    "knowledgePoint": "NTP",
+    "difficulty": "easy",
+    "tags": [
+      "网络服务与应用",
+      "NTP"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-13-tftp",
+    "type": "single_choice",
+    "question": "TFTP 的典型特点是什么？",
+    "options": {
+      "A": "基于 UDP，功能简单且无内置可靠会话",
+      "B": "基于 TCP 并强制加密",
+      "C": "用于域名解析",
+      "D": "用于动态路由"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "TFTP 通常使用 UDP 69 端口开始传输，协议简单，缺少 FTP 那样的完整会话和认证能力。",
+    "chapter": "网络服务与应用",
+    "knowledgePoint": "FTP/TFTP",
+    "difficulty": "medium",
+    "tags": [
+      "网络服务与应用",
+      "FTP/TFTP"
+    ],
+    "stage": "变式计算"
+  }
+]

@@ -1,0 +1,2674 @@
+[
+  {
+    "id": "hcia-h12-811-recall-001",
+    "type": "single_choice",
+    "question": "路由器工作在OSI参考模型的哪一层？",
+    "options": {
+      "A": "网络层",
+      "B": "应用层",
+      "C": "数据链路层",
+      "D": "传输层"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "路由器根据IP地址转发数据包，工作在网络层（第三层）。",
+    "chapter": "IP 地址与配置",
+    "knowledgePoint": "子网划分",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "IP 地址与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 1,
+        "originalChapter": "数据通信网络基础",
+        "sourceUrl": "https://blog.csdn.net/qq_45859163/article/details/161254384"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-002",
+    "type": "single_choice",
+    "question": "交换机工作在OSI参考模型的哪一层？",
+    "options": {
+      "A": "物理层",
+      "B": "数据链路层",
+      "C": "网络层",
+      "D": "传输层"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "传统二层交换机根据MAC地址转发数据帧，工作在数据链路层。",
+    "chapter": "以太网交换基础",
+    "knowledgePoint": "MAC 地址表",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "以太网交换基础"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 2,
+        "originalChapter": "数据通信网络基础",
+        "sourceUrl": "https://blog.csdn.net/qq_45859163/article/details/161254384"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-003",
+    "type": "multiple_choice",
+    "question": "TCP/IP模型包含哪些层次？",
+    "options": {
+      "A": "网络接口层",
+      "B": "网络层",
+      "C": "传输层",
+      "D": "应用层"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "TCP/IP四层模型：网络接口层→网络层→传输层→应用层。",
+    "chapter": "网络参考模型",
+    "knowledgePoint": "TCP 与 UDP",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "网络参考模型"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 3,
+        "originalChapter": "数据通信网络基础",
+        "sourceUrl": "https://blog.csdn.net/qq_45859163/article/details/161254384"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-004",
+    "type": "single_choice",
+    "question": "HTTP协议使用的传输层协议和端口号是？",
+    "options": {
+      "A": "TCP 80",
+      "B": "TCP 443",
+      "C": "UDP 80",
+      "D": "UDP 443"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "HTTP默认使用TCP 80端口；HTTPS使用TCP 443端口。",
+    "chapter": "网络参考模型",
+    "knowledgePoint": "TCP 与 UDP",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "网络参考模型"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 4,
+        "originalChapter": "数据通信网络基础",
+        "sourceUrl": "https://blog.csdn.net/qq_45859163/article/details/161254384"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-005",
+    "type": "single_choice",
+    "question": "以下哪种线缆在制作时使用T568B标准且两端线序一致？",
+    "options": {
+      "A": "直通线",
+      "B": "交叉线",
+      "C": "全反线",
+      "D": "同轴电缆"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "直通线两端线序相同，用于连接不同类型的设备（如PC-交换机）；交叉线用于同类型设备互联。",
+    "chapter": "以太网交换基础",
+    "knowledgePoint": "交换机转发",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "以太网交换基础"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 5,
+        "originalChapter": "数据通信网络基础",
+        "sourceUrl": "https://blog.csdn.net/qq_45859163/article/details/161254384"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-006",
+    "type": "true_false",
+    "question": "单模光纤比多模光纤传输距离更长。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确。单模光纤纤芯细、损耗小，传输距离和带宽都优于多模光纤。",
+    "chapter": "以太网交换基础",
+    "knowledgePoint": "交换机转发",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "以太网交换基础"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 6,
+        "originalChapter": "数据通信网络基础",
+        "sourceUrl": "https://blog.csdn.net/qq_45859163/article/details/161254384"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-007",
+    "type": "true_false",
+    "question": "主机在访问服务器的Web服务器时，网络层protocol字段取值为6。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确。IP头部Protocol字段：6代表TCP（Web服务基于TCP），17代表UDP，1代表ICMP。",
+    "chapter": "IP 地址与配置",
+    "knowledgePoint": "ICMP",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "IP 地址与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 7,
+        "originalChapter": "数据通信网络基础",
+        "sourceUrl": "https://blog.csdn.net/weixin_50281314/article/details/123973881"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-008",
+    "type": "multiple_choice",
+    "question": "关于传输层协议，说法正确的有？",
+    "options": {
+      "A": "TCP连接的建立是三次握手的过程，而TCP连接的终止要经过四次握手",
+      "B": "UDP使用SYN和ACK标志位来请求建立连接和确认建立连接",
+      "C": "知名端口号范围为1-1023",
+      "D": "UDP适合传输对时延敏感的流量并且可以依据报文首部中的序列号字段进行重组"
+    },
+    "answer": [
+      "A",
+      "C"
+    ],
+    "analysis": "TCP建立连接三次握手、断开四次握手，A正确；UDP无SYN/ACK机制，B错误；知名端口1-1023，C正确；UDP没有序列号字段重组机制，D错误。",
+    "chapter": "网络参考模型",
+    "knowledgePoint": "TCP 与 UDP",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "网络参考模型"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 8,
+        "originalChapter": "数据通信网络基础",
+        "sourceUrl": "https://blog.csdn.net/weixin_50281314/article/details/123973881"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-009",
+    "type": "single_choice",
+    "question": "管理员在网络中捕获到三个数据包（TCP三次握手报文），下列说法不正确的是？",
+    "options": {
+      "A": "这三个数据包中都不包含应用层数据",
+      "B": "这三个数据包代表了TCP的三次握手过程",
+      "C": "Telnet客户端使用50190端口与服务器建立连接",
+      "D": "Telnet服务器的IP地址是10.0.12.1，Telnet客户端的IP地址是10.0.12.2"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "SYN报文是客户端（源IP=10.0.12.1，端口50190）发往服务器（10.0.12.2），因此服务器IP是10.0.12.2、客户端IP是10.0.12.1，D说法错误。",
+    "chapter": "网络参考模型",
+    "knowledgePoint": "TCP 与 UDP",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "网络参考模型"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 9,
+        "originalChapter": "数据通信网络基础",
+        "sourceUrl": "https://blog.csdn.net/weixin_50281314/article/details/123973881"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-010",
+    "type": "multiple_choice",
+    "question": "以下哪些属于网络通信的常见形式？",
+    "options": {
+      "A": "从邮箱下载邮件到电脑",
+      "B": "在电脑上访问公司官网",
+      "C": "通过即时通信软件与朋友聊天",
+      "D": "在电脑上观看在线视频"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "以上都属于网络通信行为（下载、访问网站、即时通信、流媒体）。",
+    "chapter": "网络参考模型",
+    "knowledgePoint": "OSI 与 TCP/IP 模型",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "网络参考模型"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 10,
+        "originalChapter": "数据通信网络基础",
+        "sourceUrl": "https://www.edudump.com/exams/Huawei/H12-811_V1.0/view/"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-011",
+    "type": "single_choice",
+    "question": "TTL字段在IP报文头中的描述正确的是？",
+    "options": {
+      "A": "TTL定义了源主机发送数据包的时间间隔",
+      "B": "IP报文每经过一台路由器，TTL值减1",
+      "C": "IP报文每经过一台路由器，TTL值加1",
+      "D": "TTL定义了源主机可以发送的数据包数量"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "TTL（生存时间）表示报文最多可经过的路由器跳数，每经过一台路由器减1，减到0时报文被丢弃。",
+    "chapter": "IP 地址与配置",
+    "knowledgePoint": "ICMP",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "IP 地址与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 11,
+        "originalChapter": "数据通信网络基础",
+        "sourceUrl": "https://www.actual4test.com/exam/H12-811-questions"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-012",
+    "type": "true_false",
+    "question": "路由器所有的接口属于同一个广播域。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "错误。路由器的每个接口都是一个独立的广播域，路由器隔离广播域。",
+    "chapter": "以太网交换基础",
+    "knowledgePoint": "交换机转发",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "以太网交换基础"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 12,
+        "originalChapter": "数据通信网络基础",
+        "sourceUrl": "https://blog.csdn.net/weixin_50281314/article/details/123973881"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-013",
+    "type": "single_choice",
+    "question": "IEEE 802.1Q定义的VLAN帧格式中，VLAN ID总共有多少bit？",
+    "options": {
+      "A": "6",
+      "B": "10",
+      "C": "12",
+      "D": "8"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "802.1Q Tag中VLAN ID占12bit，取值范围0-4095，有效取值1-4094（0和4095保留）。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgePoint": "802.1Q",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "VLAN 原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 13,
+        "originalChapter": "以太网交换技术",
+        "sourceUrl": "http://www.runtimewh.com/xwzx/25420.html"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-014",
+    "type": "single_choice",
+    "question": "使用命令\"vlan batch 10 20\"和\"vlan batch 10 to 20\"，分别能创建的VLAN数量是？",
+    "options": {
+      "A": "2和11",
+      "B": "11和2",
+      "C": "11和11",
+      "D": "2和2"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "\"vlan batch 10 20\"创建VLAN 10、20共2个；\"vlan batch 10 to 20\"创建VLAN 10-20共11个。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgePoint": "802.1Q",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "VLAN 原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 14,
+        "originalChapter": "以太网交换技术",
+        "sourceUrl": "https://www.59xuexi.com/?p=6188"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-015",
+    "type": "multiple_choice",
+    "question": "根据命令输出（接口为Trunk，allow-pass vlan 2 to 4094），下列说法正确的是？",
+    "options": {
+      "A": "GigabitEthernet0/0/1允许VLAN 1通过",
+      "B": "要把该端口变为Access端口，首先要使用\"undo port trunk allow-pass vlan all\"清除默认配置",
+      "C": "要把该端口变为Access端口，首先要使用\"undo port trunk allow-pass vlan 2 to 4094\"清除默认配置",
+      "D": "GigabitEthernet0/0/1不允许VLAN 1通过"
+    },
+    "answer": [
+      "A",
+      "C"
+    ],
+    "analysis": "Trunk口默认允许VLAN 1通过（PVID所在VLAN默认放行），A正确；将Trunk改为Access前，需先undo掉trunk的allow-pass配置（此处为vlan 2 to 4094），C正确。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgePoint": "Trunk 接口",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "VLAN 原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 15,
+        "originalChapter": "以太网交换技术",
+        "sourceUrl": "https://www.59xuexi.com/?p=6188"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-016",
+    "type": "single_choice",
+    "question": "接口配置port hybrid tagged vlan 2 to 3 100、port hybrid untagged vlan 4 6，则该接口发送哪些VLAN的数据帧时携带VLAN Tag？",
+    "options": {
+      "A": "2, 3, 100",
+      "B": "1, 2, 3, 100",
+      "C": "2, 3, 4, 6, 100",
+      "D": "1, 2, 3, 4, 6, 100"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Hybrid接口中，tagged vlan列表（2、3、100）的报文发送时带Tag，untagged vlan列表（4、6）的报文发送时不带Tag。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgePoint": "802.1Q",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "VLAN 原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 16,
+        "originalChapter": "以太网交换技术",
+        "sourceUrl": "https://www.pass4test.com/H12-811_V1.0-exam-questions.html"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-017",
+    "type": "single_choice",
+    "question": "假设SWA刚刚启动，MAC地址表为空，主机A发送一个目的MAC为MAC-B的数据帧，交换机将如何处理？",
+    "options": {
+      "A": "将数据帧丢弃",
+      "B": "将数据帧泛洪出去",
+      "C": "只从G0/0/3端口转发",
+      "D": "只从G0/0/2端口转发"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "交换机MAC表为空，查不到目的MAC对应端口，会将数据帧从除接收端口外的所有端口泛洪。",
+    "chapter": "以太网交换基础",
+    "knowledgePoint": "MAC 地址表",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "以太网交换基础"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 17,
+        "originalChapter": "以太网交换技术",
+        "sourceUrl": "http://www.runtimewh.com/xwzx/25420.html"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-018",
+    "type": "single_choice",
+    "question": "现有交换机MAC地址表（5489-9811-0b49为static，其余为dynamic），下列说法正确的是？",
+    "options": {
+      "A": "MAC地址5489-9885-18a8是由管理员手工配置",
+      "B": "MAC地址5489-989d-1d30是由管理员手工配置",
+      "C": "交换机重启后，所有MAC地址都需要重新学习",
+      "D": "MAC地址5489-9811-0b49是由管理员手工配置"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "静态MAC（static）由管理员手工配置，重启后保留；动态MAC重启后消失需重新学习。表中5489-9811-0b49为static，故选D。",
+    "chapter": "以太网交换基础",
+    "knowledgePoint": "MAC 地址表",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "以太网交换基础"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 18,
+        "originalChapter": "以太网交换技术",
+        "sourceUrl": "http://www.runtimewh.com/xwzx/25420.html"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-019",
+    "type": "true_false",
+    "question": "二层ACL可以匹配源MAC、目的MAC、源IP、目的IP等信息。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "错误。二层ACL只能匹配源/目的MAC地址、VLAN、二层协议类型等，不能匹配IP地址；匹配IP需要使用三层ACL（如基本ACL/高级ACL）。",
+    "chapter": "ACL 原理与配置",
+    "knowledgePoint": "高级 ACL",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "ACL 原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 19,
+        "originalChapter": "以太网交换技术",
+        "sourceUrl": "https://www.pass4test.com/H12-811_V1.0-exam-questions.html",
+        "structuralCorrection": {
+          "originalType": "单选",
+          "normalizedType": "true_false",
+          "reason": "原记录的答案为 True/False 或缺少选项，按判断题导入"
+        }
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-020",
+    "type": "true_false",
+    "question": "交换机收到一个单播数据帧，如果在MAC地址表中能找到目的MAC对应的表项，则该数据帧一定会从对应端口转发出去。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "错误。虽然通常按MAC表转发，但存在端口安全、VLAN限制等场景可能导致帧被丢弃，因此\"一定\"转发是错的。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgePoint": "802.1Q",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "VLAN 原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 20,
+        "originalChapter": "以太网交换技术",
+        "sourceUrl": "https://www.examstrack.com/huawei-exams/how-to-pass-h12-811_v1-0-test-3"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-021",
+    "type": "true_false",
+    "question": "二层网络中的环路可能引起广播风暴。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确。二层环路会导致广播帧循环转发、无限增长，引发广播风暴，STP就是为解决该问题而设计的。",
+    "chapter": "生成树原理与配置",
+    "knowledgePoint": "根桥选举",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "生成树原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 21,
+        "originalChapter": "以太网交换技术",
+        "sourceUrl": "https://certempire.com/practice-tests/free-h12-811_v1-0-practice-questions/"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-022",
+    "type": "true_false",
+    "question": "华为交换机默认桥优先级是32768。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确。华为交换机STP默认桥优先级为32768。",
+    "chapter": "生成树原理与配置",
+    "knowledgePoint": "根桥选举",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "生成树原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 22,
+        "originalChapter": "以太网交换技术",
+        "sourceUrl": "https://www.pass4test.com/H12-811_V1.0-exam-questions.html"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-023",
+    "type": "true_false",
+    "question": "对于启用STP的交换机，处于任何状态的端口都可以转换为Disabled状态。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确。Disabled是端口被管理员关闭（shutdown）或失效的状态，任何状态下端口都可因管理动作进入Disabled。",
+    "chapter": "生成树原理与配置",
+    "knowledgePoint": "根桥选举",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "生成树原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 23,
+        "originalChapter": "以太网交换技术",
+        "sourceUrl": "https://www.pass4test.com/H12-811_V1.0-exam-questions.html"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-024",
+    "type": "true_false",
+    "question": "在STP中，处于Forwarding状态的端口可以接收BPDU报文。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "错误。STP中所有端口（除Disabled外）都收发BPDU，但Forwarding状态端口不能\"接收BPDU\"的说法不准确——实际Forwarding端口可以接收BPDU。此题按华为教材标准答案为False（原题意为Forwarding状态端口只负责转发用户数据帧），部分题库答案有争议。",
+    "chapter": "生成树原理与配置",
+    "knowledgePoint": "根桥选举",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "生成树原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 24,
+        "originalChapter": "以太网交换技术",
+        "sourceUrl": "https://www.edudump.com/exams/Huawei/H12-811_V1.0/view/",
+        "note": "此题网传答案存在分歧：按IEEE 802.1D，Forwarding端口确实收发BPDU；按部分华为题库原意选False。建议结合教材理解。"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-025",
+    "type": "single_choice",
+    "question": "RSTP协议不包含以下哪个端口状态？",
+    "options": {
+      "A": "Blocking",
+      "B": "Learning",
+      "C": "Discarding",
+      "D": "Forwarding"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "RSTP只有3种端口状态：Forwarding、Learning、Discarding。Blocking是STP（802.1D）中的状态，RSTP将其合并为Discarding。",
+    "chapter": "生成树原理与配置",
+    "knowledgePoint": "STP/RSTP",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "生成树原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 25,
+        "originalChapter": "以太网交换技术",
+        "sourceUrl": "http://www.runtimewh.com/xwzx/25420.html"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-026",
+    "type": "true_false",
+    "question": "在RSTP中，Alternate端口和Backup端口都不能转发用户流量，也不能接收、处理和发送BPDU。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "错误。Alternate/Backup端口不转发用户流量，但仍然接收和处理BPDU，以保证拓扑快速收敛（备份路径就绪）。",
+    "chapter": "生成树原理与配置",
+    "knowledgePoint": "STP/RSTP",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "生成树原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 26,
+        "originalChapter": "以太网交换技术",
+        "sourceUrl": "https://www.examstrack.com/huawei-exams/how-to-pass-h12-811_v1-0-test-3"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-027",
+    "type": "true_false",
+    "question": "在RSTP中，Backup端口可以替代故障的根端口。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "错误。RSTP中Backup端口是特定交换机上根端口的备份，只能替代本设备的根端口；替代根端口的是Alternate端口（其他交换机视角）。",
+    "chapter": "生成树原理与配置",
+    "knowledgePoint": "STP/RSTP",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "生成树原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 27,
+        "originalChapter": "以太网交换技术",
+        "sourceUrl": "https://www.pass4test.com/H12-811_V1.0-exam-questions.html"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-028",
+    "type": "single_choice",
+    "question": "STP协议中，备份端口（Backup）是哪个交换机的端口角色？",
+    "options": {
+      "A": "边缘交换机",
+      "B": "根桥交换机",
+      "C": "指定交换机",
+      "D": "非根桥交换机"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Backup端口出现在非根桥交换机上，是根端口的备份（同一交换机上）。",
+    "chapter": "生成树原理与配置",
+    "knowledgePoint": "根桥选举",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "生成树原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 28,
+        "originalChapter": "以太网交换技术",
+        "sourceUrl": "https://m.etest8.com/pxrz/hwzyrz/15953448.html"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-029",
+    "type": "single_choice",
+    "question": "RSTP协议使用P/A机制加速上游端口进入Forwarding状态，但不会产生临时环路，原因是？",
+    "options": {
+      "A": "边缘端口",
+      "B": "通过同步机制保证不产生临时环路",
+      "C": "缩短Forward Delay时间",
+      "D": "加速端口角色选举"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RSTP的P/A机制通过\"同步\"（sync）机制，在向下游提案时先阻塞本设备其他端口，确保切换过程中无临时环路。",
+    "chapter": "生成树原理与配置",
+    "knowledgePoint": "STP/RSTP",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "生成树原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 29,
+        "originalChapter": "以太网交换技术",
+        "sourceUrl": "https://www.actual4test.com/exam/H12-811-questions"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-030",
+    "type": "single_choice",
+    "question": "如下STP网络（SWA桥ID 4096:0001-0203-04AA为根桥），哪个端口会处于Blocking状态？",
+    "options": {
+      "A": "SWC的G0/0/1",
+      "B": "SWA的G0/0/3",
+      "C": "SWB的G0/0/3",
+      "D": "SWC的G0/0/2"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "根桥SWA优先级最高（4096），SWB、SWC桥优先级相同（32768）比较MAC：SWB的MAC(...04BB)<SWC(...04CC)，SWB为根端口候选。按网传标准答案，处于Blocking的是SWB的G0/0/3（根路径开销更大的一端被阻塞）。",
+    "chapter": "生成树原理与配置",
+    "knowledgePoint": "根桥选举",
+    "difficulty": "hard",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "生成树原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 30,
+        "originalChapter": "以太网交换技术",
+        "sourceUrl": "https://www.edudump.com/exams/Huawei/H12-811_V1.0/view/"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-031",
+    "type": "single_choice",
+    "question": "假设所有启用STP的交换机桥优先级相同，交换机A的MAC为00-e0-fc-00-00-40、B为00-e0-fc-00-00-10、C为00-e0-fc-00-00-20、D为00-e0-fc-00-00-80，哪台交换机被选举为根桥？",
+    "options": {
+      "A": "Switch B",
+      "B": "Switch D",
+      "C": "Switch C",
+      "D": "Switch A"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "优先级相同则比较MAC地址，MAC越小越优。00-...-10最小，Switch B成为根桥。",
+    "chapter": "生成树原理与配置",
+    "knowledgePoint": "根桥选举",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "生成树原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 31,
+        "originalChapter": "以太网交换技术",
+        "sourceUrl": "https://www.edudump.com/exams/Huawei/H12-811_V1.0/view/"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-032",
+    "type": "single_choice",
+    "question": "STP配置BPDU中不包含以下哪个参数？",
+    "options": {
+      "A": "Bridge ID",
+      "B": "VLAN ID",
+      "C": "Root ID",
+      "D": "Port ID"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "STP（802.1D）配置BPDU包含根桥ID、根路径开销、桥ID、端口ID、计时器等，不包含VLAN ID（MSTP的MSTI BPDU才涉及实例信息）。",
+    "chapter": "生成树原理与配置",
+    "knowledgePoint": "STP/RSTP",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "生成树原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 32,
+        "originalChapter": "以太网交换技术",
+        "sourceUrl": "https://www.examstrack.com/huawei-exams/how-to-pass-h12-811_v1-0-test-3",
+        "structuralCorrection": {
+          "originalType": "判断",
+          "normalizedType": "single_choice",
+          "reason": "原记录题型与选项及答案数量不一致，按实际结构导入"
+        }
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-033",
+    "type": "single_choice",
+    "question": "VLANIF接口根据以下哪个信息判断执行二层转发还是三层转发？",
+    "options": {
+      "A": "源IP地址",
+      "B": "目的端口",
+      "C": "目的MAC地址",
+      "D": "源MAC地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "VLANIF（三层接口）收到报文后，若目的MAC为本接口MAC则进行三层转发，否则按二层转发处理。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgePoint": "802.1Q",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "VLAN 原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 33,
+        "originalChapter": "以太网交换技术",
+        "sourceUrl": "https://www.examstrack.com/huawei-exams/how-to-pass-h12-811_v1-0-test-3"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-034",
+    "type": "multiple_choice",
+    "question": "堆叠（Stacking）和CSS集群技术的优点包括？",
+    "options": {
+      "A": "可以部署跨设备Eth-Trunk",
+      "B": "多台设备虚拟成一台逻辑设备，简化管理",
+      "C": "增加端口数量",
+      "D": "有效防止单点故障"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "堆叠/CSS将多台设备虚拟为逻辑单机，支持跨设备链路聚合、扩展端口密度、简化管理并提供冗余，全部正确。",
+    "chapter": "以太网链路聚合",
+    "knowledgePoint": "Eth-Trunk",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "以太网链路聚合"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 34,
+        "originalChapter": "以太网交换技术",
+        "sourceUrl": "https://www.examstrack.com/huawei-exams/how-to-pass-h12-811_v1-0-test-3"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-035",
+    "type": "true_false",
+    "question": "多台交换机可以堆叠为一台逻辑设备。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确。华为iStack等堆叠技术可将多台交换机虚拟成一台逻辑设备，统一管理。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgePoint": "接入/汇聚/核心",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "园区网络典型组网方案"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 35,
+        "originalChapter": "以太网交换技术",
+        "sourceUrl": "https://certempire.com/practice-tests/free-h12-811_v1-0-practice-questions/"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-036",
+    "type": "true_false",
+    "question": "华为AR G3系列路由器默认支持SNMPv1、SNMPv2c和SNMPv3全部版本。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确。华为AR G3系列VRP系统默认内置对SNMP三个版本的支持，启用后即可配置使用。",
+    "chapter": "网络设备管理",
+    "knowledgePoint": "SNMP",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "网络设备管理"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 36,
+        "originalChapter": "以太网交换技术",
+        "sourceUrl": "https://certempire.com/practice-tests/free-h12-811_v1-0-practice-questions/"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-037",
+    "type": "single_choice",
+    "question": "IPv6地址体系不包含以下哪种地址类型？",
+    "options": {
+      "A": "广播地址",
+      "B": "任播地址",
+      "C": "组播地址",
+      "D": "单播地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IPv6没有广播地址，使用单播、组播、任播（Anycast）三类地址，广播功能由组播替代。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgePoint": "IPv6 地址类型",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "IPv6 地址与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 37,
+        "originalChapter": "IP技术基础",
+        "sourceUrl": "https://www.edudump.com/exams/Huawei/H12-811_V1.0/view/"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-038",
+    "type": "single_choice",
+    "question": "若接口MAC地址为00E0-FCEF-0FEC，则对应的EUI-64地址是？",
+    "options": {
+      "A": "02E0-FCEF-FFFE-0FEC",
+      "B": "00E0-FCFF-FEEF-0FEC",
+      "C": "00E0-FCEF-FFFE-0FEC",
+      "D": "02E0-FCFF-FEEF-0FEC"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "EUI-64转换：在MAC中间插入FFFE得00E0:FCFF:FEEF:0FEC，再将第一个字节的U/L位取反（00→02），结果为02E0-FCFF-FEEF-0FEC。部分题库误标C，标准答案应为D。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgePoint": "IPv6 地址类型",
+    "difficulty": "hard",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "IPv6 地址与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 38,
+        "originalChapter": "IP技术基础",
+        "sourceUrl": "https://www.edudump.com/exams/Huawei/H12-811_V1.0/view/",
+        "note": "网上多个版本题库答案不一致（有标C），按IEEE EUI-64规则正确答案为D（需翻转U/L位）。"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-039",
+    "type": "true_false",
+    "question": "网段192.168.1.0/25的广播地址是192.168.1.128。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "错误。/25掩码255.255.255.128，192.168.1.0/25的广播地址是192.168.1.127；192.168.1.128是下一个子网的网络地址。部分题库误标True。",
+    "chapter": "IP 地址与配置",
+    "knowledgePoint": "子网划分",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "IP 地址与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 39,
+        "originalChapter": "IP技术基础",
+        "sourceUrl": "https://www.edudump.com/exams/Huawei/H12-811_V1.0/view/",
+        "note": "此题网传答案有误（原站标True），按子网计算正确广播地址应为192.168.1.127。"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-040",
+    "type": "multiple_choice",
+    "question": "关于IPv6任播（Anycast）地址，说法正确的有？",
+    "options": {
+      "A": "IPv6任播地址实现对服务的负载均衡",
+      "B": "任播地址和单播地址使用相同的地址空间",
+      "C": "发往任播地址的报文根据路由距离被发送到最近的接口",
+      "D": "IPv6任播地址为服务提供冗余功能"
+    },
+    "answer": [
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "任播地址与单播地址共用地址空间，报文被路由到最近的节点，可提供冗余；任播本身并不做负载均衡（负载均衡通常由多播/单播+调度实现），A错误。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgePoint": "IPv6 地址类型",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "IPv6 地址与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 40,
+        "originalChapter": "IP技术基础",
+        "sourceUrl": "https://www.edudump.com/exams/Huawei/H12-811_V1.0/view/"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-041",
+    "type": "multiple_choice",
+    "question": "关于IPv6的RA和RS报文，说法正确的有？",
+    "options": {
+      "A": "RA用于请求地址前缀信息",
+      "B": "RS用于请求地址前缀信息",
+      "C": "RS用于回复地址前缀信息",
+      "D": "RA用于回复地址前缀信息"
+    },
+    "answer": [
+      "B",
+      "D"
+    ],
+    "analysis": "RS（Router Solicitation）由主机发出请求路由信息，RA（Router Advertisement）由路由器周期性/应答式回复前缀等信息。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgePoint": "邻居发现",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "IPv6 地址与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 41,
+        "originalChapter": "IP技术基础",
+        "sourceUrl": "https://www.actual4test.com/exam/H12-811-questions"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-042",
+    "type": "single_choice",
+    "question": "网段150.25.0.0的掩码为255.255.224.0，以下哪个是该网段内有效的主机地址？",
+    "options": {
+      "A": "150.15.3.30",
+      "B": "150.25.0.0",
+      "C": "150.25.1.255",
+      "D": "150.25.2.24"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "255.255.224.0（/19）表示第三字节块大小256-224=32，子网范围150.25.0.0-31、32-63...，150.25.2.24在0-31网段内且非网络地址非广播地址，是有效主机地址。150.25.0.0是网络地址，150.25.1.255是广播地址（0-31段的广播是150.25.0.31，1.255属于32-63段广播），A不在150.25网段。",
+    "chapter": "IP 地址与配置",
+    "knowledgePoint": "子网划分",
+    "difficulty": "hard",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "IP 地址与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 42,
+        "originalChapter": "IP技术基础",
+        "sourceUrl": "https://www.actual4test.com/exam/H12-811-questions"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-043",
+    "type": "single_choice",
+    "question": "管理员抓到一个数据帧，目的MAC地址为01-00-5E-A0-B1-C3，关于该MAC地址说法正确的是？",
+    "options": {
+      "A": "是单播MAC地址",
+      "B": "是广播MAC地址",
+      "C": "是非法MAC地址",
+      "D": "是组播MAC地址"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "01-00-5E开头的MAC是IPv4组播MAC地址（01-00-5E-xx-xx-xx）。广播MAC是全F（FF-FF-FF-FF-FF-FF）。",
+    "chapter": "IP 地址与配置",
+    "knowledgePoint": "子网划分",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "IP 地址与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 43,
+        "originalChapter": "IP技术基础",
+        "sourceUrl": "https://www.actual4test.com/exam/H12-811-questions"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-044",
+    "type": "single_choice",
+    "question": "tracert诊断工具在收到的超时ICMP TTL报文中记录以下哪个信息？",
+    "options": {
+      "A": "目的端口",
+      "B": "目的IP地址",
+      "C": "源IP地址",
+      "D": "源端口"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "tracert通过递增TTL让沿途路由器返回ICMP超时报文，并记录报文的源IP地址（即经过的路由器接口地址），从而还原转发路径。",
+    "chapter": "网络故障排除",
+    "knowledgePoint": "连通性检查",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "网络故障排除"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 44,
+        "originalChapter": "IP技术基础",
+        "sourceUrl": "https://www.pass4test.com/H12-811_V1.0-exam-questions.html"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-045",
+    "type": "single_choice",
+    "question": "直连路由的路由优先级数值是？",
+    "options": {
+      "A": "0",
+      "B": "1",
+      "C": "10",
+      "D": "60"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "华为设备直连路由优先级为0，静态路由60，OSPF内部10。数值越小优先级越高。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgePoint": "单区域 OSPF",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "OSPF 原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 45,
+        "originalChapter": "路由技术",
+        "sourceUrl": "https://m.etest8.com/pxrz/hwzyrz/15953448.html"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-046",
+    "type": "single_choice",
+    "question": "以下关于OSPF的描述，正确的是哪一项？",
+    "options": {
+      "A": "OSPF同时采用了触发更新机制和周期更新机制",
+      "B": "OSPF采用Bellman-Ford算法，每个路由器都独立运行该算法",
+      "C": "OSPF默认每隔60分钟进行LSA的定期更新",
+      "D": "OSPF本身没有确认机制，所以依靠上层TCP进行确认"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "OSPF有触发更新+周期更新（LSA刷新周期默认1800秒），A正确；OSPF用SPF（Dijkstra）算法，B错；LSA定期更新默认1800秒非60分钟，C错；OSPF直接运行在IP之上（协议号89），自带LSACK确认，D错。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgePoint": "单区域 OSPF",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "OSPF 原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 46,
+        "originalChapter": "路由技术",
+        "sourceUrl": "https://www.59xuexi.com/?p=6188"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-047",
+    "type": "multiple_choice",
+    "question": "以下关于OSPF协议的描述，正确的有哪些选项？",
+    "options": {
+      "A": "第一类外部路由的开销值包含了AS外部开销值和AS内部开销值",
+      "B": "AS-External-LSA和ASBR-Summary-LSA不属于任何区域",
+      "C": "第二类外部路由的开销值只是AS外部开销值，忽略AS内部开销值，OSPF默认采用第一类外部路由",
+      "D": "AS-External-LSA描述到AS外部路由的路径信息，可以在OSPF的所有区域中泛洪",
+      "E": "ASBR-Summary-LSA描述的是ABR到ASBR的OSPF内部开销值"
+    },
+    "answer": [
+      "A",
+      "D",
+      "E"
+    ],
+    "analysis": "Type1外部路由开销=AS外部+AS内部开销，A正确；AS-External-LSA（Type5）在整个自治系统泛洪，D正确；ASBR-Summary-LSA（Type4）描述ABR到ASBR的开销，E正确。Type2外部路由不计算内部开销，但OSPF默认采用第二类外部路由，C错误；Type5 LSA不属于任何区域但Type4属于区域，B表述笼统错误。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgePoint": "单区域 OSPF",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "OSPF 原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 47,
+        "originalChapter": "路由技术",
+        "sourceUrl": "https://www.59xuexi.com/?p=6188"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-048",
+    "type": "multiple_choice",
+    "question": "R1部分配置：ospf 1 router-id 172.16.1.1（area 0，network 10.1.12.1/10.1.13.1/172.16.1.1）；ospf 2 vpn-instance tt（area 0，network 10.1.1.1）。以下描述正确的有哪些？",
+    "options": {
+      "A": "进程1和进程2的OSPF LSDB其区域0内LSA完全一致",
+      "B": "进程1和进程2的OSPF LSDB其区域0内LSA不一致",
+      "C": "VRF tt的路由信息会出现在OSPF进程1的路由表中",
+      "D": "VRF tt的路由信息不会出现在OSPF进程1的路由表中"
+    },
+    "answer": [
+      "B",
+      "D"
+    ],
+    "analysis": "不同OSPF进程的LSDB相互独立，区域0的LSA不一致，B正确；进程2绑定VPN实例tt，其路由信息不会进入进程1（公网）的路由表，D正确。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgePoint": "邻居状态",
+    "difficulty": "hard",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "OSPF 原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 48,
+        "originalChapter": "路由技术",
+        "sourceUrl": "https://www.59xuexi.com/?p=6188"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-049",
+    "type": "true_false",
+    "question": "OSPFv2通过增加新类型的LSA来支持IPv6。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "错误。支持IPv6的是OSPFv3（使用新的LSA类型如Link-LSA、Intra-Area-Prefix-LSA），OSPFv2只支持IPv4。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgePoint": "单区域 OSPF",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "OSPF 原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 49,
+        "originalChapter": "路由技术",
+        "sourceUrl": "https://www.59xuexi.com/?p=6188",
+        "structuralCorrection": {
+          "originalType": "单选",
+          "normalizedType": "true_false",
+          "reason": "原记录的答案为 True/False 或缺少选项，按判断题导入"
+        }
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-050",
+    "type": "multiple_choice",
+    "question": "OSPF协议在以下哪些网络类型中需要选举DR和BDR？",
+    "options": {
+      "A": "广播类型",
+      "B": "点到点类型",
+      "C": "点到多点",
+      "D": "NBMA"
+    },
+    "answer": [
+      "A",
+      "D"
+    ],
+    "analysis": "只有广播型（Broadcast）和NBMA网络类型需要选举DR/BDR；点到点、点到多点不选举。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgePoint": "DR/BDR",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "OSPF 原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 50,
+        "originalChapter": "路由技术",
+        "sourceUrl": "https://blog.csdn.net/weixin_50281314/article/details/123973881"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-051",
+    "type": "single_choice",
+    "question": "以下关于静态路由的说法，错误的是？",
+    "options": {
+      "A": "通过网络管理员手动配置",
+      "B": "路由器之间需要交互路由信息",
+      "C": "不能自动适应网络拓扑的变化",
+      "D": "对系统性能要求低"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "静态路由由管理员手工配置，路由器之间不交互路由信息（这是动态路由的特性），B说法错误。",
+    "chapter": "IP 路由基础",
+    "knowledgePoint": "静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "IP 路由基础"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 51,
+        "originalChapter": "路由技术",
+        "sourceUrl": "https://blog.csdn.net/weixin_50281314/article/details/123973881"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-052",
+    "type": "true_false",
+    "question": "运行OSPF协议的路由器在完成LSDB同步后才能达到FULL状态。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确。OSPF邻居状态机中，LSDB同步完成（Loading结束）后进入Full状态。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgePoint": "邻居状态",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "OSPF 原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 52,
+        "originalChapter": "路由技术",
+        "sourceUrl": "https://blog.csdn.net/weixin_50281314/article/details/123973881"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-053",
+    "type": "true_false",
+    "question": "运行OSPF协议的路由器先到达FULL状态，然后再同步LSDB。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "错误。顺序相反：先进行LSDB同步，同步完成后才进入Full状态。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgePoint": "邻居状态",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "OSPF 原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 53,
+        "originalChapter": "路由技术",
+        "sourceUrl": "https://www.actual4test.com/exam/H12-811-questions"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-054",
+    "type": "multiple_choice",
+    "question": "OSPF协议支持以下哪些网络类型？",
+    "options": {
+      "A": "点到多点",
+      "B": "点到点",
+      "C": "广播",
+      "D": "NBMA"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "OSPF支持4种网络类型：点到点、广播、NBMA、点到多点，全部正确。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgePoint": "单区域 OSPF",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "OSPF 原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 54,
+        "originalChapter": "路由技术",
+        "sourceUrl": "https://blog.csdn.net/weixin_50281314/article/details/123973881"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-055",
+    "type": "multiple_choice",
+    "question": "OSPF协议邻居关系有哪几种稳定状态？",
+    "options": {
+      "A": "2-Way",
+      "B": "Full",
+      "C": "Down",
+      "D": "Attempt"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "OSPF稳定状态为Down、2-Way、Full；Attempt是NBMA网络特有、非稳定状态，ExStart/Exchange/Loading为过渡状态。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgePoint": "邻居状态",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "OSPF 原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 55,
+        "originalChapter": "路由技术",
+        "sourceUrl": "https://blog.csdn.net/weixin_50281314/article/details/123973881"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-056",
+    "type": "single_choice",
+    "question": "下列哪个OSPF报文可以确保LSA更新的可靠性？",
+    "options": {
+      "A": "DD",
+      "B": "LSR",
+      "C": "LSU",
+      "D": "LSACK"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "LSACK（链路状态确认报文）用于对收到的LSA进行确认，保证LSA更新的可靠性。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgePoint": "单区域 OSPF",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "OSPF 原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 56,
+        "originalChapter": "路由技术",
+        "sourceUrl": "https://blog.csdn.net/weixin_50281314/article/details/123973881"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-057",
+    "type": "true_false",
+    "question": "运行OSPF协议的路由器所有接口必须属于同一区域。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "错误。OSPF路由器可以同时属于多个区域（如ABR至少连接Area 0和其他区域）。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgePoint": "单区域 OSPF",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "OSPF 原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 57,
+        "originalChapter": "路由技术",
+        "sourceUrl": "https://blog.csdn.net/weixin_50281314/article/details/123973881"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-058",
+    "type": "true_false",
+    "question": "动态路由协议能够自动适应网络拓扑的变化。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确。动态路由协议通过协议报文感知拓扑变化并自动更新路由表。",
+    "chapter": "IP 路由基础",
+    "knowledgePoint": "路由表",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "IP 路由基础"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 58,
+        "originalChapter": "路由技术",
+        "sourceUrl": "https://blog.csdn.net/weixin_50281314/article/details/123973881"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-059",
+    "type": "true_false",
+    "question": "主机A和主机B处于不同网段且中间路由器无路由配置，则它们不能通信。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "错误。需结合拓扑判断，若中间路由器配置了相应路由仍可通信；原题图例中两主机可通过路由器正确配置实现通信。",
+    "chapter": "IP 路由基础",
+    "knowledgePoint": "路由表",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "IP 路由基础"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 59,
+        "originalChapter": "路由技术",
+        "sourceUrl": "https://blog.csdn.net/weixin_50281314/article/details/123973881"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-060",
+    "type": "true_false",
+    "question": "在广播网络中运行OSPF的四台路由器，OSPF会自动选举1个DR和多个BDR以实现更好的备份效果。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "错误。OSPF在广播网络中选举1个DR和1个BDR（其他为DRother），不是多个BDR。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgePoint": "DR/BDR",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "OSPF 原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 60,
+        "originalChapter": "路由技术",
+        "sourceUrl": "https://www.actual4test.com/exam/H12-811-questions",
+        "structuralCorrection": {
+          "originalType": "单选",
+          "normalizedType": "true_false",
+          "reason": "原记录的答案为 True/False 或缺少选项，按判断题导入"
+        }
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-061",
+    "type": "true_false",
+    "question": "如图网络（RTA在Area0中），除RTA外的RTB、RTC、RTD都是ABR路由器。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "错误。ABR必须同时连接骨干区域（Area 0）和非骨干区域。图中RTD若只在一个非骨干区域内，则不是ABR。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgePoint": "单区域 OSPF",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "OSPF 原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 61,
+        "originalChapter": "路由技术",
+        "sourceUrl": "https://www.actual4test.com/exam/H12-811-questions"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-062",
+    "type": "single_choice",
+    "question": "系统视图下执行 command-privilege level 3 view user save，其作用是？",
+    "options": {
+      "A": "修改用户的权限等级为3，并保存配置",
+      "B": "修改用户使用save命令的权限等级为3",
+      "C": "修改save命令在用户视图下的权限等级为3",
+      "D": "修改用户视图下命令的权限等级为3并保存配置"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "command-privilege命令用于修改指定视图下某条命令的权限等级。该命令将save命令在用户视图下的等级改为3级。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgePoint": "配置保存",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "华为网络设备操作系统"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 62,
+        "originalChapter": "路由技术",
+        "sourceUrl": "https://www.actual4test.com/exam/H12-811-questions"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-063",
+    "type": "single_choice",
+    "question": "以下哪个接口不是华为控制器的南向开放接口？",
+    "options": {
+      "A": "RESTful",
+      "B": "OpenFlow",
+      "C": "AAA",
+      "D": "NETCONF"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "华为控制器（如iMaster NCE）南向开放接口主要为NETCONF、RESTful、SNMP、Telemetry等，不开放OpenFlow（OpenFlow是SDN控制器与转发设备间的协议，华为控制器不采用）。",
+    "chapter": "网络编程自动化",
+    "knowledgePoint": "REST API",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "网络编程自动化"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 63,
+        "originalChapter": "路由技术",
+        "sourceUrl": "https://www.actual4test.com/exam/H12-811-questions"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-064",
+    "type": "multiple_choice",
+    "question": "OSPF协议的特点包括？",
+    "options": {
+      "A": "支持触发更新",
+      "B": "容易产生路由环路",
+      "C": "基于跳数计算最短路径",
+      "D": "支持区域划分"
+    },
+    "answer": [
+      "A",
+      "D"
+    ],
+    "analysis": "OSPF支持触发更新、划分区域实现分层路由；基于带宽计算Cost（非跳数），本身不会产生环路（SPF算法），B、C错误。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgePoint": "单区域 OSPF",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "OSPF 原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 64,
+        "originalChapter": "路由技术",
+        "sourceUrl": "https://www.edudump.com/exams/Huawei/H12-811_V1.0/view/"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-065",
+    "type": "multiple_choice",
+    "question": "关于OSPF邻居状态机，说法正确的有？",
+    "options": {
+      "A": "Exchange状态下，路由器之间发送DD报文简要描述本地LSDB内容",
+      "B": "OSPF的主从关系在ExStart状态确定",
+      "C": "LSDB同步完成后，路由器状态变为Full",
+      "D": "DD报文的序列号在Exchange状态确定"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "OSPF邻居状态：ExStart确定主从关系（B正确）及DD初始序列号，Exchange交换DD报文（A、D正确），Loading交换LSR/LSU，同步完成进入Full（C正确）。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgePoint": "邻居状态",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "OSPF 原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 65,
+        "originalChapter": "路由技术",
+        "sourceUrl": "https://www.examstrack.com/huawei-exams/how-to-pass-h12-811_v1-0-test-3"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-066",
+    "type": "single_choice",
+    "question": "RTA到RTD网络（OSPF链路开销：A-B=20, B-D=50, A-C=50, C-D=10, A-D=100），RTA路由表中到达10.0.0.0/8的Cost值是多少？",
+    "options": {
+      "A": "70",
+      "B": "60",
+      "C": "20",
+      "D": "100"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "三条路径：A-B-D开销20+50=70；A-D=100；A-C-D=50+10=60。OSPF选Cost最小路径，为60。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgePoint": "单区域 OSPF",
+    "difficulty": "hard",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "OSPF 原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 66,
+        "originalChapter": "路由技术",
+        "sourceUrl": "http://www.runtimewh.com/xwzx/25420.html",
+        "structuralCorrection": {
+          "originalType": "多选",
+          "normalizedType": "single_choice",
+          "reason": "原记录题型与选项及答案数量不一致，按实际结构导入"
+        }
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-067",
+    "type": "single_choice",
+    "question": "VRP平台下，以下哪条命令可以只查看静态路由？",
+    "options": {
+      "A": "display ip routing-table",
+      "B": "display ip routing-table statistics",
+      "C": "display ip routing-table verbose",
+      "D": "display ip routing-table protocol static"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "display ip routing-table protocol static 按协议过滤显示静态路由；display ip routing-table 显示全部路由。",
+    "chapter": "IP 路由基础",
+    "knowledgePoint": "静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "IP 路由基础"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 67,
+        "originalChapter": "路由技术",
+        "sourceUrl": "https://blog.csdn.net/weixin_50281314/article/details/123973881"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-068",
+    "type": "true_false",
+    "question": "华为路由器中tracert诊断工具被用来跟踪数据的转发路径。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确。tracert通过递增TTL逐跳探测报文转发路径。",
+    "chapter": "网络故障排除",
+    "knowledgePoint": "连通性检查",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "网络故障排除"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 68,
+        "originalChapter": "路由技术",
+        "sourceUrl": "https://blog.csdn.net/weixin_50281314/article/details/123973881"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-069",
+    "type": "true_false",
+    "question": "骨干区域（Area 0）内的路由器拥有其他区域完整的LSDB。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "错误。OSPF区域间通过Type3（汇总）LSA传递路由信息，骨干路由器只有本区域的完整LSDB，对其他区域只有汇总信息。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgePoint": "邻居状态",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "OSPF 原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 69,
+        "originalChapter": "路由技术",
+        "sourceUrl": "https://certempire.com/practice-tests/free-h12-811_v1-0-practice-questions/"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-070",
+    "type": "single_choice",
+    "question": "缺省情况下，运行SNMPv2c协议的网络设备使用以下哪个端口号向网络管理系统发送Trap消息？",
+    "options": {
+      "A": "17",
+      "B": "162",
+      "C": "6",
+      "D": "161"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "SNMP Trap消息目的端口为UDP 162；UDP 161是SNMP管理站查询代理的端口。",
+    "chapter": "网络设备管理",
+    "knowledgePoint": "SNMP",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "网络设备管理"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 70,
+        "originalChapter": "网络安全与服务",
+        "sourceUrl": "https://www.59xuexi.com/?p=6188"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-071",
+    "type": "single_choice",
+    "question": "基本ACL的编号范围是？",
+    "options": {
+      "A": "6000~60315",
+      "B": "2000~2999",
+      "C": "4000~4999",
+      "D": "3000~3999"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "华为ACL编号：基本ACL 2000-2999，高级ACL 3000-3999，二层ACL 4000-4999，用户自定义ACL 5000-5999。",
+    "chapter": "ACL 原理与配置",
+    "knowledgePoint": "高级 ACL",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "ACL 原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 71,
+        "originalChapter": "网络安全与服务",
+        "sourceUrl": "https://www.59xuexi.com/?p=6188"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-072",
+    "type": "true_false",
+    "question": "在Telnet服务器上配置ACL（rule 5 permit source 172.16.105.2 0）后，只有IP地址为172.16.105.2的设备可以远程登录。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确。该ACL仅允许源172.16.105.2的主机，应用于Telnet后实现只允许该地址登录。",
+    "chapter": "ACL 原理与配置",
+    "knowledgePoint": "基本 ACL",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "ACL 原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 72,
+        "originalChapter": "网络安全与服务",
+        "sourceUrl": "https://www.59xuexi.com/?p=6188"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-073",
+    "type": "multiple_choice",
+    "question": "以下哪些ACL配置可以阻止主机A（100.0.13.1）与主机B（100.0.12.1）之间的通信？",
+    "options": {
+      "A": "在RTA G0/0/1上outbound应用deny源100.0.12.0/24的ACL",
+      "B": "在RTA G0/0/3上inbound应用deny源100.0.12.0/24的ACL",
+      "C": "在RTA G0/0/2上inbound应用deny源100.0.12.0/24的ACL",
+      "D": "在RTA G0/0/1上inbound应用deny源100.0.12.0/24的ACL"
+    },
+    "answer": [
+      "C",
+      "D"
+    ],
+    "analysis": "主机B在RTA的G0/0/2侧（网段100.0.12.0/24）。在G0/0/2入方向过滤源100.0.12.0/24（C），或在G0/0/1入方向过滤来自B的报文（D，B的流量从G0/0/1进入RTA），均可阻止A-B通信。",
+    "chapter": "ACL 原理与配置",
+    "knowledgePoint": "基本 ACL",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "ACL 原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 73,
+        "originalChapter": "网络安全与服务",
+        "sourceUrl": "https://www.edudump.com/exams/Huawei/H12-811_V1.0/view/"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-074",
+    "type": "true_false",
+    "question": "ACL规则可以重叠。若数据包匹配了条件宽松的规则，后面的规则不再处理，因此严格条件的规则应放在前面，宽松规则放在后面。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确。ACL按规则ID从小到大匹配，一旦匹配立即执行动作并停止后续匹配（首次匹配原则），故严格规则应靠前。",
+    "chapter": "ACL 原理与配置",
+    "knowledgePoint": "基本 ACL",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "ACL 原理与配置"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 74,
+        "originalChapter": "网络安全与服务",
+        "sourceUrl": "https://certempire.com/practice-tests/free-h12-811_v1-0-practice-questions/"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-075",
+    "type": "multiple_choice",
+    "question": "NFV架构中关于MANO的描述正确的有？",
+    "options": {
+      "A": "VNFM负责VNF的生命周期管理",
+      "B": "NFVO负责业务的编排",
+      "C": "MANO由NFVO、VNFM和VIM组成",
+      "D": "VIM虚拟资源管理，负责实现基础设施的虚拟化"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "MANO由NFVO、VNFM、VIM组成，A、B、C正确；VIM负责管理虚拟化基础设施资源（计算/存储/网络），\"实现基础设施虚拟化\"是虚拟化层的职责，D表述不准确。",
+    "chapter": "数据中心网络基础",
+    "knowledgePoint": "Leaf-Spine",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "数据中心网络基础"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 75,
+        "originalChapter": "网络安全与服务",
+        "sourceUrl": "https://www.59xuexi.com/?p=6188"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-076",
+    "type": "single_choice",
+    "question": "为实现FIT AP上线，FIT AP首先需要获取AC的IP地址，以下哪项不是FIT AP获取AC IP地址的方式？",
+    "options": {
+      "A": "广播方式",
+      "B": "DHCP Option方式",
+      "C": "组播方式",
+      "D": "AP上静态指定方式"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "FIT AP获取AC地址的方式：静态指定、DHCP Option 43、DNS、广播发现等，不含组播方式。",
+    "chapter": "WLAN 组网架构",
+    "knowledgePoint": "AC 与 AP",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "WLAN 组网架构"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 76,
+        "originalChapter": "WLAN技术基础",
+        "sourceUrl": "https://www.59xuexi.com/?p=6188"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-077",
+    "type": "multiple_choice",
+    "question": "IEEE 802.11n标准支持在哪些频率下工作？",
+    "options": {
+      "A": "6GHz",
+      "B": "2.5GHz",
+      "C": "2.4GHz",
+      "D": "5GHz"
+    },
+    "answer": [
+      "C",
+      "D"
+    ],
+    "analysis": "802.11n（Wi-Fi 4）支持2.4GHz和5GHz双频段；6GHz是802.11ax（Wi-Fi 6E）新增频段。",
+    "chapter": "WLAN 技术基础",
+    "knowledgePoint": "802.11",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "WLAN 技术基础"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 77,
+        "originalChapter": "WLAN技术基础",
+        "sourceUrl": "https://blog.csdn.net/weixin_50281314/article/details/123973881"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-078",
+    "type": "true_false",
+    "question": "Wi-Fi 6也就是IEEE 802.11ax标准。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确。Wi-Fi联盟命名：802.11ax对应Wi-Fi 6。",
+    "chapter": "WLAN 技术基础",
+    "knowledgePoint": "802.11",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "WLAN 技术基础"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 78,
+        "originalChapter": "WLAN技术基础",
+        "sourceUrl": "https://certempire.com/practice-tests/free-h12-811_v1-0-practice-questions/"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-079",
+    "type": "true_false",
+    "question": "国家码（Country Code）配置会影响设备实际使用的发射频率和最大发射功率。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确。国家码决定允许的工作信道范围和最大发射功率限制，须按当地法规配置。",
+    "chapter": "WLAN 技术基础",
+    "knowledgePoint": "射频基础",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "WLAN 技术基础"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 79,
+        "originalChapter": "WLAN技术基础",
+        "sourceUrl": "https://www.edudump.com/exams/Huawei/H12-811_V1.0/view/"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-080",
+    "type": "single_choice",
+    "question": "某网络工程师输入命令行时提示：Error: unrecognized command found at '^' position. 对于该提示信息说法正确的是？",
+    "options": {
+      "A": "输入命令不明确",
+      "B": "参数类型错误",
+      "C": "没有查找到关键字",
+      "D": "输入命令不完整"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "华为VRP中该报错表示系统无法识别'^'位置处的命令/关键字（命令不明确或拼写错误）。网传回忆题库标准答案为A。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgePoint": "命令行视图",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "华为网络设备操作系统"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 80,
+        "originalChapter": "网络运维与排障",
+        "sourceUrl": "https://blog.csdn.net/weixin_50281314/article/details/123973881",
+        "note": "注意：严格区分时，\"Ambiguous command\"才对应\"输入不明确\"，\"Unrecognized command\"通常指命令无法识别；本题按主流回忆题库取A。"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-081",
+    "type": "true_false",
+    "question": "华为AR路由器命令行下，save命令的作用是保存当前的系统时间。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "错误。save命令用于保存当前配置到存储设备；设置/保存系统时间使用clock命令。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgePoint": "配置保存",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "华为网络设备操作系统"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 81,
+        "originalChapter": "网络运维与排障",
+        "sourceUrl": "https://blog.csdn.net/weixin_50281314/article/details/123973881"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-082",
+    "type": "multiple_choice",
+    "question": "关于VRP操作平台快捷键，说法正确的有？",
+    "options": {
+      "A": "按左方向键将光标向左移动一位",
+      "B": "按TAB键查看最近使用过的命令",
+      "C": "按CTRL+Z从任何视图返回到用户视图",
+      "D": "按CTRL+C停止当前命令的执行"
+    },
+    "answer": [
+      "A",
+      "C",
+      "D"
+    ],
+    "analysis": "TAB键用于命令自动补全，不是查看历史命令；上/下方向键查看历史命令。A、C、D正确。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgePoint": "命令行视图",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "华为网络设备操作系统"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 82,
+        "originalChapter": "网络运维与排障",
+        "sourceUrl": "https://www.pass4test.com/H12-811_V1.0-exam-questions.html"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-083",
+    "type": "single_choice",
+    "question": "在华为VRP平台上，可以使用以下哪个键调用命令行接口保存的历史命令？",
+    "options": {
+      "A": "Ctrl+P",
+      "B": "上方向键",
+      "C": "Ctrl+U",
+      "D": "左方向键"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "VRP中使用上/下方向键浏览历史命令；Ctrl+U删除整行；Ctrl+P在某些终端中也有历史功能但华为VRP标准为方向键。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgePoint": "命令行视图",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "华为网络设备操作系统"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 83,
+        "originalChapter": "网络运维与排障",
+        "sourceUrl": "https://www.examstrack.com/huawei-exams/how-to-pass-h12-811_v1-0-test-3"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-084",
+    "type": "single_choice",
+    "question": "管理员希望彻底删除旧的设备配置文件config.zip，以下哪条命令正确？",
+    "options": {
+      "A": "delete /force config.zip",
+      "B": "clear config.zip",
+      "C": "delete /unreserved config.zip",
+      "D": "reset config.zip"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "VRP中delete默认将文件放入回收站；delete /unreserved彻底删除（不经过回收站），delete /force不提示确认。\"彻底删除\"应使用/unreserved参数。注意：网上多个dumps站点此题标答不一致（有标delete /force或reset），按华为VRP命令语义正确答案为C。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgePoint": "配置保存",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "华为网络设备操作系统"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 84,
+        "originalChapter": "网络运维与排障",
+        "sourceUrl": "https://www.pass4test.com/H12-811_V1.0-exam-questions.html",
+        "note": "此题网传答案严重不一致（Pass4Test标A、Actual4test标B），本JSON按华为VRP官方命令语义给出答案C（delete /unreserved 彻底删除）。"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-085",
+    "type": "true_false",
+    "question": "在VRP上执行mkdir test命令，系统会创建一个名为test的目录。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确。mkdir用于创建目录。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgePoint": "配置保存",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "华为网络设备操作系统"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 85,
+        "originalChapter": "网络运维与排障",
+        "sourceUrl": "https://www.edudump.com/exams/Huawei/H12-811_V1.0/view/"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-086",
+    "type": "single_choice",
+    "question": "管理员希望远程管理位于分支机构的路由器，可以使用以下哪种方式？",
+    "options": {
+      "A": "Console口连接",
+      "B": "Telnet",
+      "C": "FTP",
+      "D": "DHCP"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "远程管理网络设备最常用Telnet/SSH；Console为本地管理，FTP/DHCP不是管理通道。",
+    "chapter": "网络设备管理",
+    "knowledgePoint": "远程管理",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "网络设备管理"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 86,
+        "originalChapter": "网络运维与排障",
+        "sourceUrl": "https://www.pass4test.com/H12-811_V1.0-exam-questions.html"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-087",
+    "type": "single_choice",
+    "question": "主机A通过Telnet登录路由器A，然后在远程界面通过FTP获取路由器B的配置文件，此时路由器A上存在多少个TCP连接？",
+    "options": {
+      "A": "1",
+      "B": "2",
+      "C": "3",
+      "D": "4"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Telnet占用1个TCP连接（23端口），FTP需要2个TCP连接（21控制连接+20数据连接），共3个。",
+    "chapter": "网络设备管理",
+    "knowledgePoint": "远程管理",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "网络设备管理"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 87,
+        "originalChapter": "网络运维与排障",
+        "sourceUrl": "http://www.runtimewh.com/xwzx/25420.html"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-088",
+    "type": "true_false",
+    "question": "vty用户接口配置了user privilege level 3后，用户权限等级被设为3级。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确。user privilege level命令设置VTY登录用户的权限等级。",
+    "chapter": "网络设备管理",
+    "knowledgePoint": "远程管理",
+    "difficulty": "easy",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "网络设备管理"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 88,
+        "originalChapter": "网络运维与排障",
+        "sourceUrl": "https://www.59xuexi.com/?p=6188"
+      }
+    ]
+  },
+  {
+    "id": "hcia-h12-811-recall-089",
+    "type": "single_choice",
+    "question": "VRP平台使用ping命令时，如果需要指定一个IP地址作为回显请求报文的源地址，应该使用哪个参数？",
+    "options": {
+      "A": "-d",
+      "B": "-a",
+      "C": "-s",
+      "D": "-n"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "ping -a source-ip-address指定源地址；-c指定次数；-s指定数据大小；-d是debug开关。",
+    "chapter": "网络故障排除",
+    "knowledgePoint": "连通性检查",
+    "difficulty": "medium",
+    "tags": [
+      "HCIA-Datacom",
+      "H12-811",
+      "网络故障排除"
+    ],
+    "provenance": [
+      {
+        "originalQuestionId": 89,
+        "originalChapter": "网络运维与排障",
+        "sourceUrl": "https://blog.csdn.net/weixin_50281314/article/details/123973881"
+      }
+    ]
+  }
+]

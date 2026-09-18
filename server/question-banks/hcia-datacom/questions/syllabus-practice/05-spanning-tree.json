@@ -1,0 +1,94 @@
+[
+  {
+    "id": "hcia-v2-05-root-bridge",
+    "type": "single_choice",
+    "question": "STP 选举根桥时，优先选择哪台交换机？",
+    "options": {
+      "A": "桥 ID 最小的交换机",
+      "B": "端口数量最多的交换机",
+      "C": "启动最早的交换机",
+      "D": "管理 IP 最大的交换机"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "STP 比较桥 ID，先比较桥优先级，再比较 MAC 地址，数值更小者更优。",
+    "chapter": "生成树原理与配置",
+    "knowledgePoint": "根桥选举",
+    "difficulty": "easy",
+    "tags": [
+      "生成树原理与配置",
+      "根桥选举"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-05-root-port",
+    "type": "single_choice",
+    "question": "在 STP 拓扑中，每台非根交换机通常选择几个根端口？",
+    "options": {
+      "A": "0 个",
+      "B": "1 个",
+      "C": "2 个",
+      "D": "所有上行口"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "非根交换机选择一条到根桥路径开销最小的端口作为根端口。",
+    "chapter": "生成树原理与配置",
+    "knowledgePoint": "端口角色",
+    "difficulty": "easy",
+    "tags": [
+      "生成树原理与配置",
+      "端口角色"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-05-loop-prevention",
+    "type": "single_choice",
+    "question": "生成树协议通过什么方式避免冗余二层链路形成环路？",
+    "options": {
+      "A": "关闭所有上行链路",
+      "B": "将部分冗余端口置于非转发状态",
+      "C": "禁用 MAC 地址学习",
+      "D": "给所有帧增加 IP TTL"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "STP 保留冗余物理链路，同时阻塞部分逻辑路径，使活动拓扑保持无环。",
+    "chapter": "生成树原理与配置",
+    "knowledgePoint": "二层环路",
+    "difficulty": "medium",
+    "tags": [
+      "生成树原理与配置",
+      "二层环路"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-05-rstp",
+    "type": "single_choice",
+    "question": "RSTP 相比传统 STP 的主要改进是什么？",
+    "options": {
+      "A": "支持更快的拓扑收敛",
+      "B": "取消根桥选举",
+      "C": "只支持单链路",
+      "D": "不再使用 BPDU"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "RSTP 通过新的端口角色和快速迁移机制缩短拓扑变化后的收敛时间。",
+    "chapter": "生成树原理与配置",
+    "knowledgePoint": "STP/RSTP",
+    "difficulty": "medium",
+    "tags": [
+      "生成树原理与配置",
+      "STP/RSTP"
+    ],
+    "stage": "变式计算"
+  }
+]

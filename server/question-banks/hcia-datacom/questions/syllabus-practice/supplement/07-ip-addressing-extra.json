@@ -1,0 +1,140 @@
+[
+  {
+    "id": "hcia-v2-extra-07-private-10",
+    "type": "single_choice",
+    "question": "下列哪个网段属于 RFC 1918 定义的 IPv4 私有地址范围？",
+    "options": {
+      "A": "100.0.0.0/8",
+      "B": "224.0.0.0/4",
+      "C": "10.0.0.0/8",
+      "D": "8.0.0.0/8"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "10.0.0.0/8 是三段常用 IPv4 私有地址范围之一。 本题考查“IPv4 地址”，因此应选择“10.0.0.0/8”。",
+    "chapter": "IP 地址与配置",
+    "knowledgePoint": "IPv4 地址",
+    "difficulty": "easy",
+    "tags": [
+      "IP 地址与配置",
+      "IPv4 地址"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-extra-07-slash-26",
+    "type": "single_choice",
+    "question": "普通 /26 IPv4 子网通常可提供多少个可用主机地址？",
+    "options": {
+      "A": "254",
+      "B": "62",
+      "C": "30",
+      "D": "126"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "/26 共 64 个地址，扣除网络地址和广播地址后通常有 62 个可用地址。 本题考查“子网划分”，因此应选择“62”。",
+    "chapter": "IP 地址与配置",
+    "knowledgePoint": "子网划分",
+    "difficulty": "easy",
+    "tags": [
+      "IP 地址与配置",
+      "子网划分"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v2-extra-07-network-27",
+    "type": "single_choice",
+    "question": "主机 192.168.10.77/27 所在子网的网络地址是什么？",
+    "options": {
+      "A": "192.168.10.64",
+      "B": "192.168.10.32",
+      "C": "192.168.10.77",
+      "D": "192.168.10.96"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "/27 的块大小为 32，77 位于 64 到 95 的地址块。 本题考查“子网划分”，因此应选择“192.168.10.64”。",
+    "chapter": "IP 地址与配置",
+    "knowledgePoint": "子网划分",
+    "difficulty": "medium",
+    "tags": [
+      "IP 地址与配置",
+      "子网划分"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v2-extra-07-broadcast-28",
+    "type": "single_choice",
+    "question": "主机 10.0.0.34/28 所在子网的广播地址是什么？",
+    "options": {
+      "A": "10.0.0.31",
+      "B": "10.0.0.46",
+      "C": "10.0.0.63",
+      "D": "10.0.0.47"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "/28 的块大小为 16，34 位于 32 到 47 的子网，47 是广播地址。 本题考查“子网划分”，因此应选择“10.0.0.47”。",
+    "chapter": "IP 地址与配置",
+    "knowledgePoint": "子网划分",
+    "difficulty": "medium",
+    "tags": [
+      "IP 地址与配置",
+      "子网划分"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v2-extra-07-gateway-purpose",
+    "type": "single_choice",
+    "question": "终端配置默认网关的主要目的是什么？",
+    "options": {
+      "A": "创建无线 SSID",
+      "B": "同步设备时钟",
+      "C": "把非本地子网流量交给三层设备转发",
+      "D": "解析本地 MAC 地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "目的地址不在本地子网时，主机把报文交给默认网关继续路由。 本题考查“IPv4 地址”，因此应选择“把非本地子网流量交给三层设备转发”。",
+    "chapter": "IP 地址与配置",
+    "knowledgePoint": "IPv4 地址",
+    "difficulty": "easy",
+    "tags": [
+      "IP 地址与配置",
+      "IPv4 地址"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-extra-07-arp-cache",
+    "type": "single_choice",
+    "question": "查看终端 ARP 缓存最适合确认什么信息？",
+    "options": {
+      "A": "无线信道利用率",
+      "B": "已解析的 IPv4 地址与 MAC 地址对应关系",
+      "C": "应用层用户名",
+      "D": "OSPF 区域拓扑"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "ARP 缓存保存本链路邻居或网关的 IP 与 MAC 映射。 本题考查“ARP”，因此应选择“已解析的 IPv4 地址与 MAC 地址对应关系”。",
+    "chapter": "IP 地址与配置",
+    "knowledgePoint": "ARP",
+    "difficulty": "medium",
+    "tags": [
+      "IP 地址与配置",
+      "ARP"
+    ],
+    "stage": "基础理解"
+  }
+]

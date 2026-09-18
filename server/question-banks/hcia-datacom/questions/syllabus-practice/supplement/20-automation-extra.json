@@ -1,0 +1,140 @@
+[
+  {
+    "id": "hcia-v2-extra-20-json-array",
+    "type": "single_choice",
+    "question": "JSON 中表示有序列表时通常使用什么符号？",
+    "options": {
+      "A": "井号 #",
+      "B": "方括号 []",
+      "C": "花括号 {}",
+      "D": "尖括号 <>"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "JSON 数组使用方括号，元素之间用逗号分隔。 本题考查“JSON/YAML”，因此应选择“方括号 []”。",
+    "chapter": "网络编程自动化",
+    "knowledgePoint": "JSON/YAML",
+    "difficulty": "easy",
+    "tags": [
+      "网络编程自动化",
+      "JSON/YAML"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-extra-20-yaml-indent",
+    "type": "single_choice",
+    "question": "YAML 描述层级结构时通常主要依赖什么？",
+    "options": {
+      "A": "缩进",
+      "B": "固定的二进制长度",
+      "C": "MAC 地址",
+      "D": "OSPF Area ID"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "YAML 用缩进表达层级，编辑时应保持一致的空格规范。 本题考查“JSON/YAML”，因此应选择“缩进”。",
+    "chapter": "网络编程自动化",
+    "knowledgePoint": "JSON/YAML",
+    "difficulty": "easy",
+    "tags": [
+      "网络编程自动化",
+      "JSON/YAML"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v2-extra-20-python-dict",
+    "type": "single_choice",
+    "question": "Python 中用键值对保存结构化数据的常用类型是什么？",
+    "options": {
+      "A": "tuple only",
+      "B": "float",
+      "C": "bytes only",
+      "D": "dict"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "dict 以键映射到值，适合表达设备属性、接口参数等结构化信息。 本题考查“Python 基础”，因此应选择“dict”。",
+    "chapter": "网络编程自动化",
+    "knowledgePoint": "Python 基础",
+    "difficulty": "easy",
+    "tags": [
+      "网络编程自动化",
+      "Python 基础"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v2-extra-20-api-idempotent",
+    "type": "single_choice",
+    "question": "REST API 中 GET 方法通常应具有什么语义？",
+    "options": {
+      "A": "创建新用户",
+      "B": "重启所有设备",
+      "C": "读取资源而不修改资源状态",
+      "D": "删除资源"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "GET 用于读取资源；配置变更通常使用 POST、PUT、PATCH 或 DELETE 等方法。 本题考查“REST API”，因此应选择“读取资源而不修改资源状态”。",
+    "chapter": "网络编程自动化",
+    "knowledgePoint": "REST API",
+    "difficulty": "easy",
+    "tags": [
+      "网络编程自动化",
+      "REST API"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v2-extra-20-automation-validate",
+    "type": "single_choice",
+    "question": "自动化批量下发网络配置前，最关键的安全实践之一是什么？",
+    "options": {
+      "A": "跳过输入校验",
+      "B": "先在测试范围验证并做好回滚方案",
+      "C": "直接并行改全部设备",
+      "D": "关闭日志以提升速度"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "网络自动化会放大操作范围，应先校验数据、灰度验证并预留回滚。 本题考查“网络编程自动化”，因此应选择“先在测试范围验证并做好回滚方案”。",
+    "chapter": "网络编程自动化",
+    "knowledgePoint": "网络编程自动化",
+    "difficulty": "hard",
+    "tags": [
+      "网络编程自动化",
+      "网络编程自动化"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-extra-20-yang-model",
+    "type": "single_choice",
+    "question": "YANG 数据模型的主要价值是什么？",
+    "options": {
+      "A": "以标准结构描述设备配置和状态数据",
+      "B": "替代所有 IP 协议",
+      "C": "产生无线信号",
+      "D": "计算以太网 CRC"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "YANG 定义数据节点、类型与约束，使程序可一致地读写网络设备配置。 本题考查“NETCONF/YANG”，因此应选择“以标准结构描述设备配置和状态数据”。",
+    "chapter": "网络编程自动化",
+    "knowledgePoint": "NETCONF/YANG",
+    "difficulty": "medium",
+    "tags": [
+      "网络编程自动化",
+      "NETCONF/YANG"
+    ],
+    "stage": "基础理解"
+  }
+]

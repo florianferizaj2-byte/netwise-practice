@@ -1,0 +1,96 @@
+[
+  {
+    "id": "hcia-v2-11-first-match",
+    "type": "single_choice",
+    "question": "设备按顺序检查 ACL 规则时，报文匹配到第一条规则后通常如何处理？",
+    "options": {
+      "A": "执行该规则并停止继续匹配",
+      "B": "继续匹配所有规则再投票",
+      "C": "忽略该规则",
+      "D": "自动改为允许"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "ACL 通常采用从前到后首条命中原则，因此规则顺序会直接影响过滤结果。",
+    "chapter": "ACL 原理与配置",
+    "knowledgePoint": "规则顺序",
+    "difficulty": "easy",
+    "tags": [
+      "ACL 原理与配置",
+      "规则顺序"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-11-basic-acl",
+    "type": "single_choice",
+    "question": "基本 ACL 通常主要依据报文中的哪项信息进行匹配？",
+    "options": {
+      "A": "源 IPv4 地址",
+      "B": "目的 TCP 端口",
+      "C": "源和目的 MAC",
+      "D": "应用层用户名"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "基本 ACL 的主要匹配条件是源 IPv4 地址，高级 ACL 才可进一步匹配协议和端口等字段。",
+    "chapter": "ACL 原理与配置",
+    "knowledgePoint": "基本 ACL",
+    "difficulty": "easy",
+    "tags": [
+      "ACL 原理与配置",
+      "基本 ACL"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-11-advanced-acl",
+    "type": "multiple_choice",
+    "question": "高级 ACL 通常可以匹配哪些报文字段？",
+    "options": {
+      "A": "源和目的 IP 地址",
+      "B": "IP 协议类型",
+      "C": "TCP/UDP 端口",
+      "D": "交换机电源功率"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "高级 ACL 能结合源目的地址、协议类型以及四层端口精细识别流量，与设备电源参数无关。",
+    "chapter": "ACL 原理与配置",
+    "knowledgePoint": "高级 ACL",
+    "difficulty": "medium",
+    "tags": [
+      "ACL 原理与配置",
+      "高级 ACL"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-11-wildcard",
+    "type": "single_choice",
+    "question": "ACL 通配符掩码中的某一位为 0 表示什么？",
+    "options": {
+      "A": "对应地址位必须精确匹配",
+      "B": "对应地址位可以忽略",
+      "C": "整条规则拒绝",
+      "D": "只匹配广播地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "通配符掩码中 0 表示对应位需要比较，1 表示该位不关心。",
+    "chapter": "ACL 原理与配置",
+    "knowledgePoint": "通配符掩码",
+    "difficulty": "medium",
+    "tags": [
+      "ACL 原理与配置",
+      "通配符掩码"
+    ],
+    "stage": "变式计算"
+  }
+]

@@ -1,0 +1,140 @@
+[
+  {
+    "id": "hcia-v2-extra-13-dhcp-relay",
+    "type": "single_choice",
+    "question": "DHCP 服务器与客户端不在同一广播域时，通常使用什么功能转发客户端请求？",
+    "options": {
+      "A": "DHCP Relay",
+      "B": "STP Root",
+      "C": "NAT Server",
+      "D": "LACP"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "DHCP Relay 将客户端广播转换并转发到远端 DHCP 服务器。 本题考查“DHCP”，因此应选择“DHCP Relay”。",
+    "chapter": "网络服务与应用",
+    "knowledgePoint": "DHCP",
+    "difficulty": "medium",
+    "tags": [
+      "网络服务与应用",
+      "DHCP"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-extra-13-dhcp-gateway",
+    "type": "single_choice",
+    "question": "DHCP 为客户端下发默认网关时，常通过哪个选项携带？",
+    "options": {
+      "A": "Option 53 DNS",
+      "B": "Option 1 MAC",
+      "C": "Option 255 VLAN",
+      "D": "Option 3 Router"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "DHCP Option 3 用于向客户端提供默认网关地址。 本题考查“DHCP”，因此应选择“Option 3 Router”。",
+    "chapter": "网络服务与应用",
+    "knowledgePoint": "DHCP",
+    "difficulty": "hard",
+    "tags": [
+      "网络服务与应用",
+      "DHCP"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v2-extra-13-dns-cache",
+    "type": "single_choice",
+    "question": "DNS 递归服务器缓存记录的主要好处是什么？",
+    "options": {
+      "A": "创建静态路由",
+      "B": "加密所有网页",
+      "C": "降低重复查询延迟和上游负载",
+      "D": "改变用户 IP 地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "缓存仍在 TTL 内的 DNS 记录，可减少重复递归查询。 本题考查“DNS”，因此应选择“降低重复查询延迟和上游负载”。",
+    "chapter": "网络服务与应用",
+    "knowledgePoint": "DNS",
+    "difficulty": "easy",
+    "tags": [
+      "网络服务与应用",
+      "DNS"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v2-extra-13-ntp-stratum",
+    "type": "single_choice",
+    "question": "NTP 中较小的 Stratum 数值通常意味着什么？",
+    "options": {
+      "A": "VLAN 数量更少",
+      "B": "时间源更接近权威参考时钟",
+      "C": "网络带宽更小",
+      "D": "路由优先级更低"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Stratum 表示与参考时钟的层级距离，数值越小通常越接近权威时间源。 本题考查“NTP”，因此应选择“时间源更接近权威参考时钟”。",
+    "chapter": "网络服务与应用",
+    "knowledgePoint": "NTP",
+    "difficulty": "hard",
+    "tags": [
+      "网络服务与应用",
+      "NTP"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v2-extra-13-ftp-control",
+    "type": "single_choice",
+    "question": "传统 FTP 的控制连接默认端口通常是多少？",
+    "options": {
+      "A": "TCP 21",
+      "B": "UDP 69",
+      "C": "TCP 22",
+      "D": "UDP 161"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "FTP 控制连接使用 TCP 21，数据连接根据主动或被动模式另行建立。 本题考查“FTP/TFTP”，因此应选择“TCP 21”。",
+    "chapter": "网络服务与应用",
+    "knowledgePoint": "FTP/TFTP",
+    "difficulty": "medium",
+    "tags": [
+      "网络服务与应用",
+      "FTP/TFTP"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-extra-13-tftp-risk",
+    "type": "single_choice",
+    "question": "为什么不应在不可信网络上直接使用 TFTP 传输敏感配置？",
+    "options": {
+      "A": "TFTP 会自动运行 OSPF",
+      "B": "TFTP 只能传输 IPv6",
+      "C": "TFTP 会关闭接口",
+      "D": "TFTP 缺少完善认证和加密保护"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "TFTP 协议简单，通常不提供强认证和加密，适合受控网络内的文件传输。 本题考查“FTP/TFTP”，因此应选择“TFTP 缺少完善认证和加密保护”。",
+    "chapter": "网络服务与应用",
+    "knowledgePoint": "FTP/TFTP",
+    "difficulty": "easy",
+    "tags": [
+      "网络服务与应用",
+      "FTP/TFTP"
+    ],
+    "stage": "基础理解"
+  }
+]

@@ -1,0 +1,1002 @@
+[
+  {
+    "id": "collection-c10-q001",
+    "question": "电子邮件所使用的SMTP协议的默认端口为？",
+    "options": {
+      "A": "21",
+      "B": "25",
+      "C": "53",
+      "D": "23"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "SMTP（简单邮件传输协议）用于发送邮件，默认TCP端口25。FTP使用TCP 21（控制）和20（数据），DNS使用UDP/TCP 53，Telnet使用TCP 23。接收邮件使用POP3（110）或IMAP（143）。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "电子邮件",
+    "difficulty": "medium",
+    "tags": [
+      "电子邮件",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 1,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      },
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 21,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c10-q002",
+    "question": "DNS协议中，用于将域名指向另一个域名（别名记录）的记录类型是？",
+    "options": {
+      "A": "A",
+      "B": "CNAME",
+      "C": "AAAA",
+      "D": "PTR"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "CNAME（Canonical Name）是别名记录，将一个域名指向另一个域名（如www.example.com→example.com）。A记录将域名指向IPv4地址，AAAA记录指向IPv6地址，PTR记录用于反向解析（IP→域名），MX记录用于邮件交换，NS记录用于域名服务器，SOA记录用于起始授权。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "DNS",
+    "difficulty": "medium",
+    "tags": [
+      "DNS",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 2,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      },
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 22,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c10-q003",
+    "question": "FTP协议使用两个端口，控制连接和数据连接分别使用？",
+    "options": {
+      "A": "21和20",
+      "B": "20和21",
+      "C": "23和25",
+      "D": "80和443"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "FTP使用双通道：控制连接使用TCP 21端口（传输命令和响应，持续连接），数据连接使用TCP 20端口（主动模式PORT下，传输文件数据，临时连接）。被动模式PASV下数据端口由服务器随机分配（>1023）。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "FTP",
+    "difficulty": "medium",
+    "tags": [
+      "FTP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 3,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      },
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 23,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c10-q004",
+    "question": "WWW使用的应用层协议是？",
+    "options": {
+      "A": "FTP",
+      "B": "HTTP",
+      "C": "SSL",
+      "D": "DNS"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "WWW（万维网）使用HTTP（超文本传输协议），默认端口80。HTTPS是HTTP的安全版本，基于SSL/TLS加密，默认端口443。FTP用于文件传输，DNS用于域名解析，SSL/TLS是安全协议（工作在传输层和应用层之间）。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "Web 与 HTTP",
+    "difficulty": "medium",
+    "tags": [
+      "Web 与 HTTP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 4,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      },
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 24,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c10-q005",
+    "question": "DHCP协议中，客户端首次接入网络时发送的第一个报文是？",
+    "options": {
+      "A": "DHCPOFFER",
+      "B": "DHCPREQUEST",
+      "C": "DHCPDISCOVER",
+      "D": "DHCPACK"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "DHCP工作流程：①客户端广播DHCPDISCOVER（寻找DHCP服务器，源0.0.0.0目的255.255.255.255）；②服务器单播/广播DHCPOFFER（提供IP地址）；③客户端广播DHCPREQUEST（请求确认使用该IP）；④服务器DHCPACK（确认分配）。DHCP使用UDP 67（服务器）和68（客户端）。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "DHCP",
+    "difficulty": "medium",
+    "tags": [
+      "DHCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 5,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      },
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 25,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c10-q006",
+    "question": "下列协议和端口号的对应关系，错误的是？",
+    "options": {
+      "A": "HTTP - 80",
+      "B": "HTTPS - 443",
+      "C": "DNS - 53",
+      "D": "SNMP - 8080"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "SNMP使用UDP 161（代理接收请求）和162（Trap告警），不是8080。8080通常是HTTP代理/备用端口。HTTP=80，HTTPS=443，DNS=53，FTP=21/20，SSH=22，Telnet=23，SMTP=25，POP3=110，RDP=3389，DHCP=67/68。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "应用层协议",
+    "difficulty": "medium",
+    "tags": [
+      "应用层协议",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 6,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      },
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 26,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c10-q007",
+    "question": "用于收取电子邮件的协议是？",
+    "options": {
+      "A": "SMTP",
+      "B": "SNMP",
+      "C": "ICMP",
+      "D": "POP3"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "POP3（邮局协议版本3，端口110）用于接收邮件，将邮件从服务器下载到本地（默认下载后删除服务器副本）。SMTP（端口25）用于发送邮件。IMAP（端口143）也用于接收邮件，与POP3不同的是IMAP在服务器上保留邮件副本，支持多设备同步。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "电子邮件",
+    "difficulty": "medium",
+    "tags": [
+      "电子邮件",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 7,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      },
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 27,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c10-q008",
+    "question": "要查询DNS域内的权威域名服务器信息，可查看什么资源记录？",
+    "options": {
+      "A": "SOA",
+      "B": "NS",
+      "C": "PTR",
+      "D": "A"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "NS（Name Server）记录指定该域名的权威DNS服务器。SOA（Start of Authority）记录指定主域名服务器、管理员邮箱、序列号、刷新/重试/过期/最小TTL等参数。PTR用于反向解析，A用于正向解析（域名→IPv4）。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "DNS",
+    "difficulty": "medium",
+    "tags": [
+      "DNS",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 8,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      },
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 28,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c10-q009",
+    "question": "邮件客户端需监听哪个端口及时接收邮件（POP3）？",
+    "options": {
+      "A": "25",
+      "B": "50",
+      "C": "100",
+      "D": "110"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "POP3使用TCP端口110，邮件客户端连接服务器的110端口接收邮件。25端口是SMTP（发送邮件）。IMAP使用143端口。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "电子邮件",
+    "difficulty": "medium",
+    "tags": [
+      "电子邮件",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 9,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      },
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 29,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c10-q010",
+    "question": "POP3协议采用什么模式进行通信？",
+    "options": {
+      "A": "Browser/Server",
+      "B": "Client/Server",
+      "C": "Peer to Peer",
+      "D": "Peer to Server"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "POP3采用客户端/服务器（Client/Server）模式，客户端软件与POP3服务器建立TCP连接，通过USER/PASS命令认证后，使用STAT/LIST/RETR/DELE等命令管理和下载邮件。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "电子邮件",
+    "difficulty": "medium",
+    "tags": [
+      "电子邮件",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 10,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      },
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 30,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c10-q011",
+    "question": "SMTP协议用于什么电子邮件？",
+    "options": {
+      "A": "接收",
+      "B": "发送",
+      "C": "丢弃",
+      "D": "阻挡"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "SMTP（简单邮件传输协议）用于发送电子邮件，包括客户端到邮件服务器的提交，以及邮件服务器之间的中继传输。SMTP只负责\"送信\"不负责\"收信\"，收信用POP3/IMAP。SMTP基于TCP端口25。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "电子邮件",
+    "difficulty": "medium",
+    "tags": [
+      "电子邮件",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 11,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      },
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 31,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c10-q012",
+    "question": "FTP服务匿名登录的用户名是？上传文件应使用什么命令？",
+    "options": {
+      "A": "root，copy",
+      "B": "user，paste",
+      "C": "guest，get",
+      "D": "anonymous，put"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "FTP匿名登录用户名为anonymous（密码通常为邮箱格式或任意）。FTP命令：put上传文件到服务器，get从服务器下载文件，mput/mget批量上传/下载，ls列目录，cd切换目录，bye退出。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "FTP",
+    "difficulty": "medium",
+    "tags": [
+      "FTP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 12,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      },
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 32,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c10-q013",
+    "question": "下列关于HTTP和HTTPS的说法，错误的是？",
+    "options": {
+      "A": "HTTPS响应速度比HTTP更快",
+      "B": "HTTPS需要SSL证书",
+      "C": "HTTP是明文传输",
+      "D": "两者都属于TCP连接"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "HTTPS在HTTP基础上增加了SSL/TLS加密握手和加解密开销，响应速度比HTTP慢，不是更快。HTTPS需要CA颁发的SSL/TLS证书（端口443），HTTP明文传输（端口80），两者都基于TCP。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "Web 与 HTTP",
+    "difficulty": "medium",
+    "tags": [
+      "Web 与 HTTP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 13,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      },
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 33,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c10-q014",
+    "question": "HTTP状态码404表示？",
+    "options": {
+      "A": "服务器内部错误",
+      "B": "请求成功",
+      "C": "未找到资源",
+      "D": "禁止访问"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "常见HTTP状态码：200成功（OK），301永久重定向，302临时重定向，400错误请求，401未授权，403禁止访问（Forbidden），404未找到资源（Not Found），500服务器内部错误，502网关错误，503服务不可用。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "Web 与 HTTP",
+    "difficulty": "medium",
+    "tags": [
+      "Web 与 HTTP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 14,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      },
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 34,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c10-q015",
+    "question": "DNS域名解析过程中，客户端向本地DNS服务器发送的查询方式通常是？本地DNS服务器向其他DNS服务器的查询方式是？",
+    "options": {
+      "A": "递归查询，迭代查询",
+      "B": "迭代查询，递归查询",
+      "C": "都是递归查询",
+      "D": "都是迭代查询"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "DNS查询两种方式：递归查询中DNS服务器必须返回最终结果（成功或失败），客户端→本地DNS通常用递归；迭代查询中DNS服务器返回自己知道的最佳答案（通常是下一级DNS服务器地址），本地DNS→根域/顶级域/权威域用迭代。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "DNS",
+    "difficulty": "medium",
+    "tags": [
+      "DNS",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 15,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      },
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 35,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c10-q016",
+    "question": "如果发送给DHCP客户端的地址已被其他客户端使用，客户端会向服务器发送什么报文拒绝？",
+    "options": {
+      "A": "DhcpAck",
+      "B": "DhcpOffer",
+      "C": "DhcpDecline",
+      "D": "DhcpNak"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "DHCP客户端收到DHCPACK后，会通过ARP检测分配的IP地址是否已被使用。如果已被使用，客户端发送DHCPDECLINE报文拒绝该地址，并重新开始DHCPDISCOVER过程。DHCPNAK是服务器拒绝客户端请求（如地址已过期或不在作用域）。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "DHCP",
+    "difficulty": "medium",
+    "tags": [
+      "DHCP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 16,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      },
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 36,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c10-q017",
+    "question": "下列关于DNS的说法，正确的是？",
+    "options": {
+      "A": "DNS使用TCP协议进行所有查询",
+      "B": "DNS查询只能使用递归查询",
+      "C": "DNS的默认端口是53",
+      "D": "DNS仅支持A记录类型"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "DNS默认端口53，通常使用UDP（短查询响应，<512字节），当响应超过512字节或区域传输（AXFR/IXFR）时使用TCP。DNS支持递归和迭代两种查询方式。DNS支持多种记录类型：A、AAAA、CNAME、MX、NS、PTR、SOA、TXT、SRV等。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "DNS",
+    "difficulty": "medium",
+    "tags": [
+      "DNS",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 17,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      },
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 37,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c10-q018",
+    "question": "下列关于FTP主动模式和被动模式的说法，正确的是？",
+    "options": {
+      "A": "主动模式下服务器使用20端口主动连接客户端的数据端口",
+      "B": "被动模式下服务器使用20端口主动连接客户端",
+      "C": "主动模式和被动模式完全相同",
+      "D": "被动模式不使用数据连接"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "FTP主动模式（PORT）：客户端告诉服务器自己的数据端口，服务器使用20端口主动连接客户端的数据端口建立数据连接。被动模式（PASV）：服务器告诉客户端自己的数据端口（随机>1023），客户端主动连接服务器的数据端口。被动模式适合客户端在防火墙/NAT后面的场景。两者都使用数据连接。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "FTP",
+    "difficulty": "medium",
+    "tags": [
+      "FTP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 18,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      },
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 38,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c10-q019",
+    "question": "下列关于Telnet和SSH的说法，错误的是？",
+    "options": {
+      "A": "Telnet使用明文传输，SSH使用加密传输",
+      "B": "Telnet默认端口23，SSH默认端口22",
+      "C": "SSH比Telnet更安全",
+      "D": "Telnet比SSH更安全"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Telnet（端口23）使用明文传输用户名、密码和数据，不安全，容易被窃听和劫持。SSH（Secure Shell，端口22）使用加密传输（对称加密+非对称加密+哈希），提供认证、加密和完整性保护，比Telnet安全得多。现代网络管理推荐使用SSH替代Telnet。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "远程管理",
+    "difficulty": "medium",
+    "tags": [
+      "远程管理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 19,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      },
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 39,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c10-q020",
+    "question": "下列关于应用层协议的说法，错误的是？",
+    "options": {
+      "A": "HTTP是无状态协议",
+      "B": "FTP使用两个TCP连接",
+      "C": "DNS只能使用UDP",
+      "D": "SMTP用于发送邮件"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "DNS主要使用UDP（53端口）进行常规查询，但也可以使用TCP（53端口）进行区域传输和大于512字节的响应。所以DNS不是\"只能\"使用UDP。HTTP是无状态协议（每次请求独立，服务器不保存客户端状态，通过Cookie/Session维持状态）。FTP使用控制连接（21）和数据连接（20）两个TCP连接。SMTP用于发送邮件。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "应用层协议",
+    "difficulty": "medium",
+    "tags": [
+      "应用层协议",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 20,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      },
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 40,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c10-q041",
+    "question": "下列关于NTP协议的说法，正确的是？",
+    "options": {
+      "A": "NTP用于网络时间同步，使用UDP端口123",
+      "B": "NTP使用分层架构（Stratum 0-15）",
+      "C": "NTP可以实现毫秒级时间同步精度",
+      "D": "以上都正确"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "NTP（网络时间协议，Network Time Protocol）用于网络中计算机的时间同步，使用UDP端口123。NTP使用分层（层级）架构：Stratum 0是参考时钟（如原子钟、GPS，最精确），Stratum 1是直接连接Stratum 0的服务器（一级时间服务器），Stratum 2是从Stratum 1同步的服务器，依此类推，Stratum 15是最低层级（Stratum 16表示未同步/不可用）。NTP可以实现毫秒级（局域网内甚至微秒级）的时间同步精度，使用Marzullo算法和滤波算法提高精度。NTPv4是当前版本，支持IPv6和自动发现。简单时间协议SNTP是NTP的简化版（不实现复杂的滤波和统计，适合简单场景）。Windows时间服务（W32Time）使用NTP/SNTP。时间同步对日志分析、Kerberos认证（时间偏差>5分钟认证失败）、分布式系统非常重要。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "NTP",
+    "difficulty": "medium",
+    "tags": [
+      "NTP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 41,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c10-q042",
+    "question": "下列关于TFTP协议的说法，错误的是？",
+    "options": {
+      "A": "TFTP使用UDP端口69",
+      "B": "TFTP支持用户名密码认证",
+      "C": "TFTP是简单文件传输协议，功能比FTP简单",
+      "D": "TFTP常用于网络设备的固件升级和配置备份"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "TFTP（简单文件传输协议，Trivial File Transfer Protocol）使用UDP端口69，是FTP的简化版，功能非常简单：只支持文件上传（WRQ）和下载（RRQ），不支持列目录（LIST）、不支持删除/重命名、不支持用户名密码认证（无认证机制，安全性低）、不支持加密。TFTP使用停止等待协议（每发送一个数据块等待ACK，块大小默认512字节），传输效率低，但实现简单、占用资源少。TFTP常用于网络设备（路由器、交换机、防火墙）的操作系统/固件升级（IOS升级）和配置文件备份/恢复（如思科设备的copy tftp flash、copy running-config tftp），以及无盘工作站（PXE）的启动文件传输。由于TFTP无认证且明文，应仅在受信任的内部网络使用，或通过ACL限制访问。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "FTP",
+    "difficulty": "medium",
+    "tags": [
+      "FTP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 42,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c10-q043",
+    "question": "下列关于LDAP协议的说法，正确的是？",
+    "options": {
+      "A": "LDAP是轻量目录访问协议，用于访问和维护分布式目录服务",
+      "B": "LDAP默认端口389（明文）和636（LDAPS，SSL加密）",
+      "C": "LDAP使用树形目录结构（DN、OU、CN）",
+      "D": "以上都正确"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "LDAP（轻量目录访问协议，Lightweight Directory Access Protocol）用于访问和维护分布式目录服务（如用户账户、组织架构、设备信息），是X.500目录服务的轻量版本（基于TCP/IP，比DAP简单）。LDAP默认端口：389（明文，可使用STARTTLS升级为加密）、636（LDAPS，SSL/TLS加密）。LDAP使用树形目录结构：DN（Distinguished Name，唯一标识条目，如cn=张三,ou=研发部,dc=example,dc=com）、OU（Organizational Unit，组织单元，如ou=研发部）、CN（Common Name，通用名称，如cn=张三）、DC（Domain Component，域组件，如dc=example,dc=com）。LDAP广泛用于企业统一身份认证（如Microsoft Active Directory AD、OpenLDAP）、单点登录（SSO）、地址簿等。LDAP操作：Bind（认证绑定）、Search（搜索查询）、Add（添加条目）、Modify（修改条目）、Delete（删除条目）、Compare（比较属性）。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "应用层协议",
+    "difficulty": "medium",
+    "tags": [
+      "应用层协议",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 43,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c10-q044",
+    "question": "下列关于RDP协议的说法，错误的是？",
+    "options": {
+      "A": "RDP是远程桌面协议，用于Windows远程桌面连接",
+      "B": "RDP默认端口3389",
+      "C": "RDP不支持加密",
+      "D": "RDP支持音频、打印机、剪贴板重定向"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "RDP（远程桌面协议，Remote Desktop Protocol）是Microsoft开发的远程桌面协议，用于Windows远程桌面连接（mstsc.exe），允许用户通过网络远程控制另一台计算机的桌面。RDP默认TCP端口3389（也使用UDP 3389用于UDP传输，RDP 8.0+支持UDP加速）。RDP支持加密（默认使用TLS 1.0/1.1/1.2加密，早期版本使用RC4加密，可配置网络级别认证NLA提高安全性）。RDP支持多种重定向：音频重定向（远程声音在本地播放）、打印机重定向（本地打印机在远程会话中可用）、剪贴板重定向（本地和远程之间复制粘贴文本/文件）、驱动器重定向（本地磁盘在远程会话中可用）、USB设备重定向、串口重定向等。RDP是Windows服务器管理的常用工具，但暴露在公网的RDP服务常被暴力破解攻击，应使用强密码、NLA、VPN、限制源IP、更改默认端口等措施加固。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "应用层协议",
+    "difficulty": "medium",
+    "tags": [
+      "应用层协议",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 44,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c10-q045",
+    "question": "下列关于HTTP请求方法的说法，正确的是？",
+    "options": {
+      "A": "GET用于获取资源，POST用于提交数据",
+      "B": "PUT用于更新资源，DELETE用于删除资源",
+      "C": "HEAD类似于GET但只返回响应头不返回响应体",
+      "D": "以上都正确"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "HTTP请求方法（动词）：1）GET：获取资源（查询，幂等，可缓存，参数在URL中，有长度限制）；2）POST：提交数据（创建/提交，非幂等，不可缓存，参数在请求体中，无长度限制）；3）PUT：更新/替换资源（幂等，完整替换）；4）PATCH：部分更新资源（非幂等，修改部分字段）；5）DELETE：删除资源（幂等）；6）HEAD：类似于GET但只返回响应头不返回响应体（用于检查资源是否存在、获取元信息如Content-Length/Last-Modified）；7）OPTIONS：获取服务器支持的HTTP方法和CORS策略（预检请求）；8）TRACE：回显请求（用于诊断，通常禁用）；9）CONNECT：建立隧道（用于HTTPS代理）。幂等（Idempotent）：多次执行相同请求结果相同（GET/PUT/DELETE/HEAD/OPTIONS是幂等的，POST/PATCH不是）。安全（Safe）：不修改服务器资源（GET/HEAD/OPTIONS是安全的）。RESTful API设计中常用GET/POST/PUT/DELETE对应CRUD（查询/创建/更新/删除）。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "Web 与 HTTP",
+    "difficulty": "medium",
+    "tags": [
+      "Web 与 HTTP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 45,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c10-q046",
+    "question": "下列关于Cookie和Session的说法，错误的是？",
+    "options": {
+      "A": "Cookie存储在客户端（浏览器），Session存储在服务器端",
+      "B": "Cookie有大小限制（约4KB），Session没有大小限制",
+      "C": "Cookie比Session更安全",
+      "D": "Session通过Session ID（通常存储在Cookie中）与客户端关联"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Cookie和Session都是用于维持HTTP无状态协议的会话状态机制：1）Cookie：存储在客户端（浏览器），服务器通过Set-Cookie响应头设置Cookie，浏览器后续请求自动携带Cookie。Cookie有大小限制（单个约4KB，每个域名约20-50个），安全性较低（存储在客户端，可被用户查看/修改/删除，易受XSS窃取和CSRF攻击，可设置HttpOnly/Secure/SameSite属性提高安全性）。2）Session：存储在服务器端（内存/文件/数据库/Redis），安全性较高（数据不暴露给客户端），没有严格的大小限制（但受服务器资源限制）。Session通过Session ID（唯一标识符，通常存储在Cookie中如PHPSESSID/JSESSIONID，或通过URL重写传递）与客户端关联，客户端只持有Session ID，实际数据在服务器。Session有过期时间（默认20-30分钟无活动则过期）。由于Session存储在服务器端，分布式系统需要Session共享（如Redis集中存储）或使用JWT（无状态Token）替代。Cookie可设置过期时间（持久Cookie）或不设置（会话Cookie，浏览器关闭即失效）。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "应用层协议",
+    "difficulty": "medium",
+    "tags": [
+      "应用层协议",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 46,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c10-q047",
+    "question": "下列关于DNS解析过程的说法，正确的是？",
+    "options": {
+      "A": "客户端先检查本地DNS缓存，再查询本地DNS服务器",
+      "B": "本地DNS服务器先查缓存，再迭代查询根/顶级域/权威服务器",
+      "C": "DNS解析结果会被缓存（有TTL）",
+      "D": "以上都正确"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "DNS域名解析完整过程：1）客户端先检查本地DNS缓存（浏览器缓存→操作系统缓存hosts文件→DNS解析器缓存），如果有记录且未过期（TTL内），直接使用；2）如果本地缓存没有，客户端向本地DNS服务器（递归DNS/Resolver，如运营商DNS、8.8.8.8、114.114.114.114）发送递归查询；3）本地DNS服务器先查自己的缓存，如果有记录且未过期，直接返回；4）如果缓存没有，本地DNS服务器进行迭代查询：先查根域名服务器（.，返回顶级域服务器如.com）→查顶级域服务器（.com，返回权威域服务器如example.com）→查权威域服务器（example.com，返回最终IP地址）；5）本地DNS服务器将结果缓存（设置TTL，如300秒），并返回给客户端；6）客户端缓存结果并使用。DNS解析结果会被各级缓存（客户端、本地DNS、中间DNS），TTL（Time To Live，生存时间）决定缓存有效期，TTL过期后需要重新查询。DNS缓存可以提高解析速度、减少DNS查询流量，但也会导致DNS记录更新后有延迟（需要等待TTL过期或刷新缓存）。DNS污染/劫持、DNS缓存投毒是常见的DNS安全问题，DNSSEC（DNS安全扩展）通过数字签名验证DNS响应的真实性和完整性。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "DNS",
+    "difficulty": "medium",
+    "tags": [
+      "DNS",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 47,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c10-q048",
+    "question": "下列关于HTTP/2和HTTP/3的说法，正确的是？",
+    "options": {
+      "A": "HTTP/2支持多路复用，在一个TCP连接上并行传输多个请求",
+      "B": "HTTP/2支持头部压缩（HPACK），减少传输开销",
+      "C": "HTTP/3基于QUIC协议（UDP），解决HTTP/2的队头阻塞问题",
+      "D": "以上都正确"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "HTTP/2（RFC 7540，2015年）相比HTTP/1.1的主要改进：1）多路复用（Multiplexing）：在一个TCP连接上并行传输多个请求/响应，不需要建立多个TCP连接，解决HTTP/1.1的队头阻塞（Head-of-Line Blocking）问题；2）头部压缩（HPACK）：压缩HTTP请求/响应头部，减少传输开销（HTTP/1.1头部不压缩且重复发送）；3）二进制分帧（Binary Framing）：将消息分为二进制帧，解析更高效；4）服务器推送（Server Push）：服务器主动向客户端推送资源；5）流量控制和优先级。HTTP/3（RFC 9114，2022年）基于QUIC协议（Quick UDP Internet Connections，基于UDP），解决HTTP/2的TCP层队头阻塞问题（HTTP/2虽然应用层多路复用，但TCP层一个丢包会阻塞所有流，因为TCP保证有序交付）；QUIC内置TLS 1.3加密、0-RTT快速恢复、连接迁移（网络切换时连接不断开，如WiFi切换到4G）、改进的拥塞控制。HTTP/3使用UDP端口443（QUIC）。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "Web 与 HTTP",
+    "difficulty": "medium",
+    "tags": [
+      "Web 与 HTTP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 48,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c10-q049",
+    "question": "下列关于RESTful API的说法，错误的是？",
+    "options": {
+      "A": "REST使用HTTP方法（GET/POST/PUT/DELETE）对应CRUD操作",
+      "B": "REST是无状态的，每个请求包含所有必要信息",
+      "C": "REST必须使用XML格式传输数据",
+      "D": "REST使用URI标识资源"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "REST（Representational State Transfer，表述性状态转移）是一种软件架构风格，不是标准协议，用于设计网络API。核心原则：1）资源（Resource）：使用URI标识资源（如/users/123、/products/456），每个资源有唯一URI；2）统一接口：使用HTTP方法对应CRUD操作（GET=查询/Read、POST=创建/Create、PUT=更新/Update（完整替换）、PATCH=部分更新、DELETE=删除/Delete）；3）无状态（Stateless）：服务器不保存客户端状态，每个请求包含所有必要信息（认证信息在请求头如Token/JWT），便于水平扩展；4）客户端-服务器分离；5）可缓存（Cacheable）：响应可被缓存（HTTP缓存头Cache-Control/ETag/Last-Modified）；6）分层系统（客户端不知道直接连接的是最终服务器还是中间代理/网关）。REST API数据格式通常使用JSON（JavaScript Object Notation，轻量、易解析，最常用），也可以使用XML、YAML、纯文本等，不是必须使用XML（SOAP API才强制使用XML）。RESTful API设计最佳实践：使用名词复数（/users而非/getUsers）、使用HTTP状态码（200成功、201创建、400参数错误、401未认证、403禁止、404未找到、500服务器错误）、版本控制（/api/v1/users）、分页（?page=1&size=20）、过滤排序（?status=active&sort=-created_at）、使用HTTPS、认证用Bearer Token/JWT。与REST对比：SOAP（Simple Object Access Protocol，简单对象访问协议）是严格的XML协议，使用WSDL描述，支持WS-Security等企业级特性，较重；GraphQL是Facebook开发的查询语言，客户端可以精确请求需要的数据（避免过度获取/不足获取），单端点查询；gRPC是Google的高性能RPC框架，使用Protocol Buffers序列化，基于HTTP/2，支持流式传输，适合微服务间通信。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "应用层协议",
+    "difficulty": "medium",
+    "tags": [
+      "应用层协议",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 49,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c10-q050",
+    "question": "下列关于CDN的说法，正确的是？",
+    "options": {
+      "A": "CDN通过在全球部署边缘节点，将内容缓存到离用户最近的节点",
+      "B": "CDN可以加速静态资源访问，降低源站负载",
+      "C": "CDN可以提供DDoS防护、HTTPS加速、视频直播等功能",
+      "D": "以上都正确"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "CDN（Content Delivery Network，内容分发网络）通过在全球/全国多个地理位置部署边缘节点（Edge Node/POP点），将源站内容（静态资源如图片、CSS、JS、视频、软件安装包，甚至动态内容）缓存到离用户最近的边缘节点，用户访问时直接从最近的边缘节点获取内容（缓存命中），而不是回源到源站，从而：1）加速访问（减少网络延迟和传输距离，提高加载速度）；2）降低源站负载（大部分请求由边缘节点处理，源站只处理缓存未命中和动态请求）；3）提高可用性（边缘节点冗余，单点故障不影响全局）；4）节省带宽成本（边缘节点缓存减少回源流量）。CDN工作原理：DNS解析（CNAME到CDN域名，智能DNS根据用户地理位置/运营商返回最近的边缘节点IP）→用户请求边缘节点→边缘节点有缓存则直接返回（命中），无缓存则回源获取并缓存（未命中）→后续请求直接从缓存返回。CDN功能：静态资源加速、动态加速（DCDN，路由优化+连接复用）、视频点播/直播加速（转码、切片、RTMP/HLS/DASH）、文件下载加速、全站加速（HTTPS）、DDoS防护（流量清洗，大带宽抗攻击）、WAF（Web应用防火墙）、图片处理（实时裁剪/压缩/水印/格式转换WebP）、SSL证书管理、访问控制（Referer防盗链、IP黑白名单、URL鉴权/时间戳防盗链）、数据分析（访问日志、流量统计、热门资源）。主流CDN服务商：Cloudflare、Akamai、AWS CloudFront、阿里云CDN、腾讯云CDN、百度云CDN、华为云CDN、网宿科技、七牛云等。CDN缓存策略：通过Cache-Control响应头控制缓存时间（如max-age=3600缓存1小时），静态资源可长时间缓存（如图片/JS/CSS缓存7天-1年，配合文件名hash指纹更新），动态内容不缓存或短缓存。缓存刷新/预热：内容更新后可主动刷新CDN缓存（URL刷新/目录刷新），大文件可预热（主动推送到边缘节点）。",
+    "type": "single_choice",
+    "chapter": "应用层协议",
+    "knowledgePoint": "Web 与 HTTP",
+    "difficulty": "medium",
+    "tags": [
+      "Web 与 HTTP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第十章 应用层协议（含答案解析）.docx",
+        "questionNumber": 50,
+        "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  }
+]

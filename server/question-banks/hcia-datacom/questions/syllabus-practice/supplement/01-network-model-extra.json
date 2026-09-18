@@ -1,0 +1,140 @@
+[
+  {
+    "id": "hcia-v2-extra-01-tcp-handshake",
+    "type": "single_choice",
+    "question": "TCP 三次握手中，服务器收到客户端 SYN 后通常回复什么？",
+    "options": {
+      "A": "SYN 和 ACK 同时置位的报文",
+      "B": "只置位 FIN 的报文",
+      "C": "只置位 RST 的报文",
+      "D": "不带任何控制位的 UDP 报文"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "服务器既确认客户端序列号，又发送自己的初始序列号。 本题考查“TCP 与 UDP”，因此应选择“SYN 和 ACK 同时置位的报文”。",
+    "chapter": "网络参考模型",
+    "knowledgePoint": "TCP 与 UDP",
+    "difficulty": "easy",
+    "tags": [
+      "网络参考模型",
+      "TCP 与 UDP"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-extra-01-udp-dns",
+    "type": "single_choice",
+    "question": "传统 DNS 短查询在没有特殊需求时通常使用哪种传输层协议？",
+    "options": {
+      "A": "ICMP",
+      "B": "ARP",
+      "C": "GRE",
+      "D": "UDP"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "普通 DNS 查询通常使用 UDP 53，区域传送等场景可以使用 TCP。 本题考查“常用协议”，因此应选择“UDP”。",
+    "chapter": "网络参考模型",
+    "knowledgePoint": "常用协议",
+    "difficulty": "easy",
+    "tags": [
+      "网络参考模型",
+      "常用协议"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v2-extra-01-tcp-sequence",
+    "type": "single_choice",
+    "question": "TCP 接收方使用序列号的主要目的是什么？",
+    "options": {
+      "A": "计算无线信道",
+      "B": "生成设备 MAC 地址",
+      "C": "识别数据顺序并发现缺失或重复",
+      "D": "选择二层 VLAN"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "序列号帮助 TCP 对字节流排序，并配合确认与重传保证可靠性。 本题考查“TCP 与 UDP”，因此应选择“识别数据顺序并发现缺失或重复”。",
+    "chapter": "网络参考模型",
+    "knowledgePoint": "TCP 与 UDP",
+    "difficulty": "medium",
+    "tags": [
+      "网络参考模型",
+      "TCP 与 UDP"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v2-extra-01-decapsulation",
+    "type": "single_choice",
+    "question": "接收主机处理以太网帧时，解封装的正确方向是什么？",
+    "options": {
+      "A": "只读取 MAC 地址而不处理上层",
+      "B": "从数据链路层逐层向应用层处理",
+      "C": "从应用层逐层向物理层添加首部",
+      "D": "先生成路由表再读取帧"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "接收端依次移除二层、网络层和传输层信息，把数据交给应用。 本题考查“数据封装”，因此应选择“从数据链路层逐层向应用层处理”。",
+    "chapter": "网络参考模型",
+    "knowledgePoint": "数据封装",
+    "difficulty": "medium",
+    "tags": [
+      "网络参考模型",
+      "数据封装"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v2-extra-01-ip-layer",
+    "type": "single_choice",
+    "question": "IP 协议在 TCP/IP 模型中主要负责什么？",
+    "options": {
+      "A": "跨网络寻址与分组转发",
+      "B": "网页内容排版",
+      "C": "用户身份认证",
+      "D": "以太网冲突检测"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IP 提供逻辑地址和尽力而为的跨网络分组传递能力。 本题考查“OSI 与 TCP/IP 模型”，因此应选择“跨网络寻址与分组转发”。",
+    "chapter": "网络参考模型",
+    "knowledgePoint": "OSI 与 TCP/IP 模型",
+    "difficulty": "easy",
+    "tags": [
+      "网络参考模型",
+      "OSI 与 TCP/IP 模型"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-extra-01-port-demux",
+    "type": "single_choice",
+    "question": "传输层目的端口号的主要作用是什么？",
+    "options": {
+      "A": "寻找目的交换机端口",
+      "B": "标识无线接入点",
+      "C": "选择生成树根桥",
+      "D": "把数据交给目标主机上的对应应用进程"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "TCP/UDP 端口用于在一台主机上区分不同应用或服务。 本题考查“常用协议”，因此应选择“把数据交给目标主机上的对应应用进程”。",
+    "chapter": "网络参考模型",
+    "knowledgePoint": "常用协议",
+    "difficulty": "medium",
+    "tags": [
+      "网络参考模型",
+      "常用协议"
+    ],
+    "stage": "基础理解"
+  }
+]

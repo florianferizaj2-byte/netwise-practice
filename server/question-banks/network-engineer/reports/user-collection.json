@@ -1,0 +1,1202 @@
+{
+  "sourceCount": 550,
+  "publishedCount": 459,
+  "duplicateCount": 90,
+  "reviewCount": 1,
+  "documents": [
+    {
+      "file": "第一章 网络体系结构（含答案解析）.docx",
+      "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af",
+      "questionCount": 50,
+      "images": 0,
+      "tables": 0
+    },
+    {
+      "file": "第二章 数据通信基础（含答案解析）.docx",
+      "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f",
+      "questionCount": 50,
+      "images": 0,
+      "tables": 0
+    },
+    {
+      "file": "第三章 网络层协议（含答案解析）.docx",
+      "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8",
+      "questionCount": 50,
+      "images": 0,
+      "tables": 0
+    },
+    {
+      "file": "第四章 传输层协议（含答案解析）.docx",
+      "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8",
+      "questionCount": 50,
+      "images": 0,
+      "tables": 0
+    },
+    {
+      "file": "第五章 路由协议（含答案解析）.docx",
+      "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a",
+      "questionCount": 50,
+      "images": 0,
+      "tables": 0
+    },
+    {
+      "file": "第六章 局域网与交换技术（含答案解析）.docx",
+      "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48",
+      "questionCount": 50,
+      "images": 0,
+      "tables": 0
+    },
+    {
+      "file": "第七章 IP地址与子网划分（含答案解析）.docx",
+      "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e",
+      "questionCount": 50,
+      "images": 0,
+      "tables": 0
+    },
+    {
+      "file": "第八章 网络安全（含答案解析）.docx",
+      "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1",
+      "questionCount": 50,
+      "images": 0,
+      "tables": 0
+    },
+    {
+      "file": "第九章 网络管理（含答案解析）.docx",
+      "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a",
+      "questionCount": 50,
+      "images": 0,
+      "tables": 0
+    },
+    {
+      "file": "第十章 应用层协议（含答案解析）.docx",
+      "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25",
+      "questionCount": 50,
+      "images": 0,
+      "tables": 0
+    },
+    {
+      "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+      "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4",
+      "questionCount": 50,
+      "images": 0,
+      "tables": 0
+    }
+  ],
+  "duplicates": [
+    {
+      "id": "collection-c02-q048",
+      "retainedId": "collection-c02-q032",
+      "analysis": "同步技术解决收发双方时间基准一致性问题，包括位同步（比特同步）、字符同步、帧同步等。位同步确保接收方能正确识别每个比特的起止，帧同步确保接收方能正确识别每一帧的起止。",
+      "provenance": [
+        {
+          "file": "第二章 数据通信基础（含答案解析）.docx",
+          "questionNumber": 48,
+          "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+        }
+      ]
+    },
+    {
+      "id": "collection-c03-q042",
+      "retainedId": "collection-c03-q011",
+      "analysis": "ICMP（Internet控制报文协议）是网络层协议，封装在IP数据报中传输，是IP协议的补充，用于传递差错报告（如目的不可达、超时）和控制信息（如回显请求/应答、重定向）。ICMP不能作为独立的传输层协议使用，它依赖IP协议传输。",
+      "provenance": [
+        {
+          "file": "第三章 网络层协议（含答案解析）.docx",
+          "questionNumber": 42,
+          "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
+        }
+      ]
+    },
+    {
+      "id": "collection-c03-q044",
+      "retainedId": "collection-c03-q013",
+      "analysis": "FF02::1是IPv6链路本地范围的所有节点组播地址（类似IPv4的广播地址），FF02::2是所有路由器组播地址，FF02::5是所有OSPF路由器组播地址，FF02::6是所有OSPF DR/BDR组播地址。链路本地地址以FE80::/10开头。",
+      "provenance": [
+        {
+          "file": "第三章 网络层协议（含答案解析）.docx",
+          "questionNumber": 44,
+          "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
+        }
+      ]
+    },
+    {
+      "id": "collection-c03-q045",
+      "retainedId": "collection-c03-q018",
+      "analysis": "IPv6地址长度128位，采用冒分十六进制表示（如2001:db8::1），取消了广播地址（用组播代替），内置支持IPSec（IPv4中IPSec是可选扩展）。IPv6还支持更大的地址空间、更好的QoS、即插即用（SLAAC）等特性。",
+      "provenance": [
+        {
+          "file": "第三章 网络层协议（含答案解析）.docx",
+          "questionNumber": 45,
+          "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
+        }
+      ]
+    },
+    {
+      "id": "collection-c03-q047",
+      "retainedId": "collection-c03-q021",
+      "analysis": "190.255.255.255/24的主机位全为1，是定向广播地址，不能作为源地址。0.0.0.0可作为初始化时的源地址（如DHCP客户端尚未获取IP时），127.0.0.1是环回地址可作为源地址，192.168.0.1是普通单播地址可作为源地址。",
+      "provenance": [
+        {
+          "file": "第三章 网络层协议（含答案解析）.docx",
+          "questionNumber": 47,
+          "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
+        }
+      ]
+    },
+    {
+      "id": "collection-c03-q048",
+      "retainedId": "collection-c03-q023",
+      "analysis": "IPv6地址简化规则：1）每段中的前导零可以省略（0DB8→DB8，0042→42）；2）连续的全零段可以用::代替，但::在一个地址中只能使用一次。2001:0DB8:0000:0000:0000:FF00:0042:8329简化为2001:DB8::FF00:42:8329。",
+      "provenance": [
+        {
+          "file": "第三章 网络层协议（含答案解析）.docx",
+          "questionNumber": 48,
+          "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
+        }
+      ]
+    },
+    {
+      "id": "collection-c06-q035",
+      "retainedId": "collection-c02-q035",
+      "analysis": "IEEE 802.3ad定义的链路聚合控制协议（LACP）将多个物理链路聚合成一个逻辑链路（Eth-Trunk/Port Channel），实现链路备份和负载均衡，提高总带宽。聚合后的逻辑链路带宽约等于各成员链路带宽之和。",
+      "provenance": [
+        {
+          "file": "第六章 局域网与交换技术（含答案解析）.docx",
+          "questionNumber": 35,
+          "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+        }
+      ]
+    },
+    {
+      "id": "collection-c06-q039",
+      "retainedId": "collection-c02-q023",
+      "analysis": "以太网帧最小长度为64字节（包含14字节首部+46字节数据（不足时填充）+4字节FCS），最大长度为1518字节（不含VLAN标签）。最小帧长64字节是为了确保CSMA/CD能检测到冲突（在最大传播延迟内发送方仍在发送）。数据部分最小46字节，最大1500字节（MTU）。",
+      "provenance": [
+        {
+          "file": "第六章 局域网与交换技术（含答案解析）.docx",
+          "questionNumber": 39,
+          "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+        }
+      ]
+    },
+    {
+      "id": "collection-c06-q040",
+      "retainedId": "collection-c02-q040",
+      "analysis": "以太网使用CSMA/CD（载波监听多路访问/冲突检测），不是CSMA/CA（无线用）。以太网拓扑可以是总线型（早期10BASE5/10BASE2）或星型（现代10BASE-T/100BASE-TX，通过交换机连接）。以太网帧的地址字段（源地址和目的地址）是MAC地址（48位）。以太网速率有10/100/1000/10000Mbps等多种，不是固定10Mbps。",
+      "provenance": [
+        {
+          "file": "第六章 局域网与交换技术（含答案解析）.docx",
+          "questionNumber": 40,
+          "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+        }
+      ]
+    },
+    {
+      "id": "collection-c06-q041",
+      "retainedId": "collection-c02-q030",
+      "analysis": "通过电话交换网传输数据需要调制解调器（Modem）将数字信号调制成模拟信号（频带信号）在电话线上传输，接收端再解调回数字信号，属于频带传输。基带传输是直接传输数字信号（如以太网），宽带传输是将信道划分为多个子信道同时传输多种信号（如CATV）。",
+      "provenance": [
+        {
+          "file": "第六章 局域网与交换技术（含答案解析）.docx",
+          "questionNumber": 41,
+          "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+        }
+      ]
+    },
+    {
+      "id": "collection-c06-q042",
+      "retainedId": "collection-c02-q031",
+      "analysis": "光纤（光导纤维）通过光信号传输数据，带宽最宽（单模光纤可达Tbps级），抗电磁干扰能力最强（不受电磁干扰和射频干扰），传输距离远（单模可达数十公里），安全性高（不易窃听）。双绞线和同轴电缆是电信号传输，易受电磁干扰；微波是无线传输，易受干扰和天气影响。",
+      "provenance": [
+        {
+          "file": "第六章 局域网与交换技术（含答案解析）.docx",
+          "questionNumber": 42,
+          "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+        }
+      ]
+    },
+    {
+      "id": "collection-c06-q043",
+      "retainedId": "collection-c02-q038",
+      "analysis": "星型拓扑所有节点都连接到中心设备（如交换机或集线器），中心设备负责数据转发。环型拓扑节点首尾相连形成环形，数据沿环单向或双向传输。总线型拓扑所有节点共享一条传输介质（总线）。网状拓扑节点之间有多条路径连接，可靠性高但成本高。",
+      "provenance": [
+        {
+          "file": "第六章 局域网与交换技术（含答案解析）.docx",
+          "questionNumber": 43,
+          "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+        }
+      ]
+    },
+    {
+      "id": "collection-c07-q011",
+      "retainedId": "collection-c03-q019",
+      "analysis": "/27掩码255.255.255.224，块大小32。子网：0,32,64,96,128,160,192,224。215落在192-223网段，网络号为192.168.10.192，广播地址192.168.10.223。",
+      "provenance": [
+        {
+          "file": "第七章 IP地址与子网划分（含答案解析）.docx",
+          "questionNumber": 11,
+          "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
+        }
+      ]
+    },
+    {
+      "id": "collection-c07-q031",
+      "retainedId": "collection-c03-q020",
+      "analysis": "192.168.1.0、192.168.2.0、192.168.3.0，前22位相同（192.168.000000 01/02/03.0），可以聚合为192.168.0.0/22（包含192.168.0.0-192.168.3.255）。虽然包含了192.168.0.0，但这是能同时覆盖1-3的最短掩码。",
+      "provenance": [
+        {
+          "file": "第七章 IP地址与子网划分（含答案解析）.docx",
+          "questionNumber": 31,
+          "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
+        }
+      ]
+    },
+    {
+      "id": "collection-c07-q034",
+      "retainedId": "collection-c07-q026",
+      "analysis": "248=11111000，主机位3位。可用主机数=2^3-2=8-2=6台（减去网络地址和广播地址）。/29常用于点对点链路（只需2个可用地址，但/30更常见，/29可容纳6台主机）。",
+      "provenance": [
+        {
+          "file": "第七章 IP地址与子网划分（含答案解析）.docx",
+          "questionNumber": 34,
+          "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
+        }
+      ]
+    },
+    {
+      "id": "collection-c07-q035",
+      "retainedId": "collection-c07-q022",
+      "analysis": "/8到/24借用了16位（24-8=16），可划分2^16=65536个/24子网。每个/24子网有256个地址（254个可用主机）。A类地址/8有16777216个地址，划分为/24后每个子网256个地址，16777216/256=65536个子网。",
+      "provenance": [
+        {
+          "file": "第七章 IP地址与子网划分（含答案解析）.docx",
+          "questionNumber": 35,
+          "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
+        }
+      ]
+    },
+    {
+      "id": "collection-c07-q037",
+      "retainedId": "collection-c07-q024",
+      "analysis": "/27掩码255.255.255.224，块大小32。33在32-63子网内，网络地址10.10.1.32，广播地址10.10.1.63。可用主机地址范围是网络地址+1到广播地址-1，即10.10.1.33-10.10.1.62，共30个可用地址。",
+      "provenance": [
+        {
+          "file": "第七章 IP地址与子网划分（含答案解析）.docx",
+          "questionNumber": 37,
+          "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
+        }
+      ]
+    },
+    {
+      "id": "collection-c07-q039",
+      "retainedId": "collection-c07-q015",
+      "analysis": "C类/24借3位，网络位变为27位（/27），主机位剩余5位。可用主机数=2^5-2=32-2=30台（减去网络地址和广播地址）。可划分2^3=8个子网。",
+      "provenance": [
+        {
+          "file": "第七章 IP地址与子网划分（含答案解析）.docx",
+          "questionNumber": 39,
+          "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
+        }
+      ]
+    },
+    {
+      "id": "collection-c07-q040",
+      "retainedId": "collection-c07-q019",
+      "analysis": "需要6个子网，借用3位（2^3=8≥6），剩余5位主机位（2^5-2=30≥30），掩码为255.255.255.224（/27）。每个子网可用主机30台，共8个子网。/26（255.255.255.192）只能划分4个子网（借2位），不够6个；/28（255.255.255.240）每个子网只有14台主机，不够30台。",
+      "provenance": [
+        {
+          "file": "第七章 IP地址与子网划分（含答案解析）.docx",
+          "questionNumber": 40,
+          "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
+        }
+      ]
+    },
+    {
+      "id": "collection-c07-q042",
+      "retainedId": "collection-c07-q017",
+      "analysis": "A类地址第一段1-126（0保留，127环回），B类128-191，C类192-223，D类224-239（组播），E类240-255（保留）。202在192-223范围内，属于C类地址。C类地址默认掩码255.255.255.0（/24），每个C类网络有254个可用主机地址。",
+      "provenance": [
+        {
+          "file": "第七章 IP地址与子网划分（含答案解析）.docx",
+          "questionNumber": 42,
+          "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
+        }
+      ]
+    },
+    {
+      "id": "collection-c07-q044",
+      "retainedId": "collection-c07-q002",
+      "analysis": "容纳8台主机需2^h-2≥8，h=4时2^4-2=14≥8，h=3时2^3-2=6<8。需要4位主机位，网络位=32-4=28位，即/28（255.255.255.240），每个子网有14个可用主机地址。",
+      "provenance": [
+        {
+          "file": "第七章 IP地址与子网划分（含答案解析）.docx",
+          "questionNumber": 44,
+          "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
+        }
+      ]
+    },
+    {
+      "id": "collection-c07-q045",
+      "retainedId": "collection-c07-q005",
+      "analysis": "主机位n，2^n-2≥10000，n≥14位（2^14-2=16382≥10000，2^13-2=8190<10000）。网络位=32-14=18位，掩码255.255.128.0（/18）。/18可划分2^2=4个子网（从/16借用2位），每个子网容纳16382台主机。",
+      "provenance": [
+        {
+          "file": "第七章 IP地址与子网划分（含答案解析）.docx",
+          "questionNumber": 45,
+          "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
+        }
+      ]
+    },
+    {
+      "id": "collection-c07-q046",
+      "retainedId": "collection-c07-q006",
+      "analysis": "172.24.0.0-172.24.7.255共8个C类网络（0-7），掩码21位（/21=255.255.248.0，块大小8）。总地址数2^11=2048，减去网络号和广播，可用主机=2048-2=2046。",
+      "provenance": [
+        {
+          "file": "第七章 IP地址与子网划分（含答案解析）.docx",
+          "questionNumber": 46,
+          "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
+        }
+      ]
+    },
+    {
+      "id": "collection-c07-q047",
+      "retainedId": "collection-c07-q021",
+      "analysis": "网络地址（子网地址）的主机位全为0，用于标识一个子网，不能分配给主机使用。广播地址的主机位全为1，也不能分配给主机。可用主机地址是网络地址和广播地址之间的地址（主机位不全为0也不全为1）。",
+      "provenance": [
+        {
+          "file": "第七章 IP地址与子网划分（含答案解析）.docx",
+          "questionNumber": 47,
+          "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
+        }
+      ]
+    },
+    {
+      "id": "collection-c07-q048",
+      "retainedId": "collection-c07-q007",
+      "analysis": "2^h-2≥50，h=6时2^6-2=62≥50，h=5时2^5-2=30<50。故主机位最少6位，网络位=32-6=26位（/26），可划分2^2=4个子网（借用2位），每个子网62个可用IP。",
+      "provenance": [
+        {
+          "file": "第七章 IP地址与子网划分（含答案解析）.docx",
+          "questionNumber": 48,
+          "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
+        }
+      ]
+    },
+    {
+      "id": "collection-c07-q049",
+      "retainedId": "collection-c07-q003",
+      "analysis": "掩码255.255.255.192=/26，块大小=256-192=64。子网：0,64,128,192。70在64-127范围内，网络地址为192.168.10.64，广播地址192.168.10.127，可用主机范围192.168.10.65-192.168.10.126。",
+      "provenance": [
+        {
+          "file": "第七章 IP地址与子网划分（含答案解析）.docx",
+          "questionNumber": 49,
+          "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
+        }
+      ]
+    },
+    {
+      "id": "collection-c07-q050",
+      "retainedId": "collection-c07-q004",
+      "analysis": "掩码/27（255.255.255.224），块大小32。子网：0,32,64,96,128,160,192,224。33在32-63范围内，网络地址10.10.1.32，广播地址=下一个子网地址-1=64-1=63，即10.10.1.63。",
+      "provenance": [
+        {
+          "file": "第七章 IP地址与子网划分（含答案解析）.docx",
+          "questionNumber": 50,
+          "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
+        }
+      ]
+    },
+    {
+      "id": "collection-c08-q035",
+      "retainedId": "collection-c08-q024",
+      "analysis": "防火墙不能有效防范病毒入侵，因为防火墙主要检查网络层/传输层包头（IP、端口、协议），无法检测文件内容中的病毒。防范病毒需要防病毒软件、UTM（统一威胁管理）或NGFW（下一代防火墙）的内容检测/防病毒功能。防火墙的功能包括：访问控制（控制对特殊站点/端口的访问）、日志审计、NAT（隐藏内部网络结构）、VPN支持、IDS/IPS集成（NGFW）等。",
+      "provenance": [
+        {
+          "file": "第八章 网络安全（含答案解析）.docx",
+          "questionNumber": 35,
+          "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+        }
+      ]
+    },
+    {
+      "id": "collection-c08-q038",
+      "retainedId": "collection-c08-q027",
+      "analysis": "CA（Certificate Authority，证书颁发机构）负责颁发、管理、吊销数字证书。CA用自己的私钥签名证书，客户端/浏览器用CA的公钥（根证书中）验证证书签名。客户端/浏览器预装了可信CA的根证书，才能验证证书链。CA证书不能随意伪造，因为CA的私钥严格保密，伪造的证书无法通过签名验证。如果CA的私钥泄露，则该CA颁发的所有证书都不再可信。",
+      "provenance": [
+        {
+          "file": "第八章 网络安全（含答案解析）.docx",
+          "questionNumber": 38,
+          "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+        }
+      ]
+    },
+    {
+      "id": "collection-c08-q045",
+      "retainedId": "collection-c08-q016",
+      "analysis": "震网病毒（Stuxnet）最初依靠U盘等移动介质传播（利用Windows自动播放功能和LNK文件漏洞），攻击伊朗核设施的工业控制系统（西门子SIMATIC WinCC/S7 PLC）。它是第一个被发现的以物理基础设施为目标的网络武器，利用了多个Windows零日漏洞（如MS10-046、MS10-061等），并通过感染Step7工程文件在工程师站和PLC之间传播。",
+      "provenance": [
+        {
+          "file": "第八章 网络安全（含答案解析）.docx",
+          "questionNumber": 45,
+          "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+        }
+      ]
+    },
+    {
+      "id": "collection-c09-q016",
+      "retainedId": "collection-c03-q028",
+      "analysis": "Linux中使用ip route show（现代，iproute2）或route -n（传统，net-tools，-n数字形式不解析主机名）查看路由表。ifconfig/ip addr查看网络接口，ping测试连通性，arp/ip neigh查看ARP缓存（邻居表）。",
+      "provenance": [
+        {
+          "file": "第九章 网络管理（含答案解析）.docx",
+          "questionNumber": 16,
+          "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+        }
+      ]
+    },
+    {
+      "id": "collection-c09-q028",
+      "retainedId": "collection-c09-q008",
+      "analysis": "SNMPv1使用共同体字符串（Community String）作为简单的认证方式，明文传输（不加密），安全性差。只读共同体（默认public）用于读取操作，读写共同体（默认private）用于修改操作。SNMPv2c也使用共同体字符串。SNMPv3使用基于用户的安全模型（USM），支持用户名+认证（HMAC）+加密（DES/AES），安全性高。",
+      "provenance": [
+        {
+          "file": "第九章 网络管理（含答案解析）.docx",
+          "questionNumber": 28,
+          "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+        }
+      ]
+    },
+    {
+      "id": "collection-c09-q029",
+      "retainedId": "collection-c09-q009",
+      "analysis": "SNMP使用UDP协议：代理进程（Agent）使用UDP 161端口接收管理站的请求（Get/Set/GetNext/GetBulk）并发送应答；管理站（NMS）使用UDP 162端口接收代理发送的Trap和Inform告警报文。SNMP不使用TCP（SNMP本身设计为无连接、低开销，适合管理报文短、要求快速响应的场景）。",
+      "provenance": [
+        {
+          "file": "第九章 网络管理（含答案解析）.docx",
+          "questionNumber": 29,
+          "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+        }
+      ]
+    },
+    {
+      "id": "collection-c09-q030",
+      "retainedId": "collection-c09-q018",
+      "analysis": "OID（Object Identifier，对象标识符）是一串用点分隔的数字（如1.3.6.1.2.1.1.1.0表示系统描述sysDescr），唯一标识MIB树中的每个被管理对象。OID采用树形层次结构，从根（iso=1）开始逐级分支，每个节点有编号和名称（如1.3.6.1=iso.org.dod.internet，1.3.6.1.2.1=mib-2）。管理站通过OID来读取或修改对应的被管理对象。MIB文件将OID映射为可读的名称和描述。",
+      "provenance": [
+        {
+          "file": "第九章 网络管理（含答案解析）.docx",
+          "questionNumber": 30,
+          "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+        }
+      ]
+    },
+    {
+      "id": "collection-c09-q031",
+      "retainedId": "collection-c09-q019",
+      "analysis": "SNMPv3定义三种安全级别（Security Level）：1）noAuthNoPriv（无认证无加密）：仅用户名，不认证不加密，安全性最低（类似v1/v2c）；2）authNoPriv（有认证无加密）：使用HMAC-MD5或HMAC-SHA进行认证（完整性+数据源认证），不加密数据；3）authPriv（有认证有加密）：认证+加密（DES/AES），安全性最高。SNMPv3支持无认证模式（noAuthNoPriv），但通常建议使用authPriv以获得最高安全性。",
+      "provenance": [
+        {
+          "file": "第九章 网络管理（含答案解析）.docx",
+          "questionNumber": 31,
+          "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+        }
+      ]
+    },
+    {
+      "id": "collection-c09-q034",
+      "retainedId": "collection-c09-q011",
+      "analysis": "netstat（网络统计）查看TCP/UDP连接、端口监听状态、路由表、网络接口统计等。常用参数：-a（所有连接和监听端口）、-n（数字形式显示地址和端口，不解析主机名）、-o（显示进程ID/PID）、-b（显示关联的可执行文件，需管理员权限）、-r（路由表）、-e（以太网统计）、-s（各协议统计）。ipconfig查看网卡IP配置，ping测试连通性，tracert路由跟踪。",
+      "provenance": [
+        {
+          "file": "第九章 网络管理（含答案解析）.docx",
+          "questionNumber": 34,
+          "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+        }
+      ]
+    },
+    {
+      "id": "collection-c09-q035",
+      "retainedId": "collection-c09-q012",
+      "analysis": "Linux中使用ifconfig（传统命令，net-tools包，如ifconfig eth0）或ip addr（现代命令，iproute2包，如ip addr show eth0）查看和配置网络接口IP地址、MAC地址、状态等。ping测试连通性，netstat/ss查看网络连接和端口，route/ip route查看路由表。现代Linux发行版（如CentOS 7+、Ubuntu 18.04+）默认使用iproute2（ip命令），net-tools（ifconfig/route/netstat）可能未安装或已弃用。",
+      "provenance": [
+        {
+          "file": "第九章 网络管理（含答案解析）.docx",
+          "questionNumber": 35,
+          "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+        }
+      ]
+    },
+    {
+      "id": "collection-c09-q036",
+      "retainedId": "collection-c09-q013",
+      "analysis": "ipconfig /flushdns清除DNS解析器缓存（DNS Resolver Cache），当DNS解析异常或DNS记录更新后需要刷新缓存时使用。/displaydns显示DNS缓存内容（包括记录名称、类型、TTL、数据）。/registerdns刷新所有DHCP租约并向DNS服务器注册主机名和IP地址（动态DNS更新）。/renew更新DHCP租约（重新获取IP地址，指定适配器时如ipconfig /renew \"以太网\"）。/release释放DHCP租约。",
+      "provenance": [
+        {
+          "file": "第九章 网络管理（含答案解析）.docx",
+          "questionNumber": 36,
+          "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+        }
+      ]
+    },
+    {
+      "id": "collection-c09-q037",
+      "retainedId": "collection-c09-q014",
+      "analysis": "Linux ping -c count指定发送ICMP回显请求（Echo Request）的次数，发送完后自动停止并显示统计信息（丢包率、往返时间min/avg/max/mdev）。不指定-c时Linux ping默认持续发送（需Ctrl+C停止），Windows ping默认发送4次。-s size设置数据包大小（默认56字节，+8字节ICMP头=64字节）。-t ttl设置TTL值（Linux）。-i interval设置发送间隔（默认1秒）。-W timeout设置等待响应超时时间。",
+      "provenance": [
+        {
+          "file": "第九章 网络管理（含答案解析）.docx",
+          "questionNumber": 37,
+          "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+        }
+      ]
+    },
+    {
+      "id": "collection-c09-q038",
+      "retainedId": "collection-c09-q015",
+      "analysis": "tracert（Windows）/traceroute（Linux）路由跟踪，通过发送TTL递增的数据包，利用ICMP超时消息（Windows用ICMP Echo Request，Linux默认用UDP数据包，也可用-I选项使用ICMP）获取从源到目标经过的每一跳路由器的IP地址和往返延迟，用于诊断路由路径和定位网络故障点（哪一跳延迟高或丢包）。常用参数：tracert -d（不解析主机名，加快速度）、tracert -h max_hops（最大跳数）、traceroute -n（不解析主机名）。",
+      "provenance": [
+        {
+          "file": "第九章 网络管理（含答案解析）.docx",
+          "questionNumber": 38,
+          "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+        }
+      ]
+    },
+    {
+      "id": "collection-c09-q039",
+      "retainedId": "collection-c03-q028",
+      "analysis": "Linux中使用ip route show（现代，iproute2包，可简写ip route）或route -n（传统，net-tools包，-n数字形式不解析主机名）查看路由表。路由表包含：目的网络/前缀、网关（下一跳）、子网掩码、出接口、度量值（Metric）、路由来源等。ifconfig/ip addr查看网络接口配置，ping测试连通性，arp/ip neigh查看ARP缓存（邻居表，IP-MAC映射）。添加路由：ip route add 网络/前缀 via 网关 dev 接口；删除路由：ip route del 网络/前缀。",
+      "provenance": [
+        {
+          "file": "第九章 网络管理（含答案解析）.docx",
+          "questionNumber": 39,
+          "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+        }
+      ]
+    },
+    {
+      "id": "collection-c10-q021",
+      "retainedId": "collection-c10-q001",
+      "analysis": "SMTP（简单邮件传输协议，Simple Mail Transfer Protocol）用于发送邮件，默认TCP端口25。FTP使用TCP 21（控制连接）和20（数据连接），DNS使用UDP/TCP 53，Telnet使用TCP 23。接收邮件使用POP3（TCP 110）或IMAP（TCP 143）。SMTP子mission端口587（提交，需认证），SMTPS端口465（SSL加密）。",
+      "provenance": [
+        {
+          "file": "第十章 应用层协议（含答案解析）.docx",
+          "questionNumber": 21,
+          "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+        }
+      ]
+    },
+    {
+      "id": "collection-c10-q022",
+      "retainedId": "collection-c10-q002",
+      "analysis": "CNAME（Canonical Name，规范名称/别名记录）将一个域名指向另一个域名（如www.example.com→example.com，或cdn.example.com→cdn-provider.com），当查询CNAME记录时，DNS服务器会继续解析指向的域名直到得到A/AAAA记录。A记录将域名指向IPv4地址，AAAA记录指向IPv6地址，PTR记录用于反向解析（IP→域名），MX记录用于邮件交换服务器，NS记录用于权威域名服务器，SOA记录用于起始授权（主DNS服务器、管理员邮箱、序列号、刷新/重试/过期/最小TTL），TXT记录用于文本信息（如SPF、DKIM、域名验证），SRV记录用于服务定位（如_sip._tcp.example.com）。",
+      "provenance": [
+        {
+          "file": "第十章 应用层协议（含答案解析）.docx",
+          "questionNumber": 22,
+          "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+        }
+      ]
+    },
+    {
+      "id": "collection-c10-q023",
+      "retainedId": "collection-c10-q003",
+      "analysis": "FTP（文件传输协议，File Transfer Protocol）使用双通道：控制连接使用TCP 21端口（传输FTP命令和响应，持续连接，整个会话期间保持），数据连接使用TCP 20端口（主动模式PORT下，传输文件数据和目录列表，临时连接，传输完成后关闭）。被动模式PASV下数据端口由服务器随机分配（高端口>1023），客户端主动连接服务器的数据端口。FTP不加密（明文传输用户名密码和数据），安全版本为FTPS（FTP over SSL/TLS，端口990控制/989数据）或SFTP（SSH File Transfer Protocol，基于SSH，端口22）。",
+      "provenance": [
+        {
+          "file": "第十章 应用层协议（含答案解析）.docx",
+          "questionNumber": 23,
+          "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+        }
+      ]
+    },
+    {
+      "id": "collection-c10-q024",
+      "retainedId": "collection-c10-q004",
+      "analysis": "WWW（World Wide Web，万维网）使用HTTP（超文本传输协议，HyperText Transfer Protocol），默认TCP端口80。HTTPS是HTTP的安全版本，基于SSL/TLS加密，默认TCP端口443。FTP用于文件传输（端口21），DNS用于域名解析（端口53），SSL/TLS是安全协议（工作在传输层和应用层之间，不是独立的应用层协议）。HTTP是无状态协议（每次请求独立，服务器不保存客户端状态，通过Cookie/Session维持状态），HTTP/1.1支持持久连接（Keep-Alive）和管道化，HTTP/2支持多路复用和头部压缩，HTTP/3基于QUIC（UDP）。",
+      "provenance": [
+        {
+          "file": "第十章 应用层协议（含答案解析）.docx",
+          "questionNumber": 24,
+          "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+        }
+      ]
+    },
+    {
+      "id": "collection-c10-q025",
+      "retainedId": "collection-c10-q005",
+      "analysis": "DHCP（动态主机配置协议，Dynamic Host Configuration Protocol）工作流程（DORA）：①客户端广播DHCPDISCOVER（发现DHCP服务器，源IP 0.0.0.0，目的IP 255.255.255.255，因为客户端还没有IP地址）；②服务器单播/广播DHCPOFFER（提供IP地址、子网掩码、网关、DNS、租约期等配置）；③客户端广播DHCPREQUEST（请求确认使用该IP，通常选择第一个收到的OFFER）；④服务器DHCPACK（确认分配，客户端正式使用该IP）。如果服务器拒绝（如地址已被使用或不在作用域），发送DHCPNAK。DHCP使用UDP 67（服务器端）和68（客户端端）。客户端续约：租约50%时单播DHCPREQUEST续约，87.5%时广播DHCPREQUEST续约。",
+      "provenance": [
+        {
+          "file": "第十章 应用层协议（含答案解析）.docx",
+          "questionNumber": 25,
+          "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+        }
+      ]
+    },
+    {
+      "id": "collection-c10-q026",
+      "retainedId": "collection-c10-q006",
+      "analysis": "SNMP使用UDP 161（代理接收请求）和162（Trap告警），不是8080。8080通常是HTTP代理服务器或HTTP备用端口（如Tomcat默认端口、开发测试用端口）。常见协议端口：HTTP=80，HTTPS=443，FTP=21（控制）/20（数据），SSH=22，Telnet=23，SMTP=25，DNS=53，DHCP=67（服务器）/68（客户端），TFTP=69，POP3=110，NNTP=119，NTP=123，IMAP=143，SNMP=161/162，LDAP=389，HTTPS=443，SMTP提交=587，LDAPS=636，FTPS=990，RDP=3389，MySQL=3306，Redis=6379，MongoDB=27017。",
+      "provenance": [
+        {
+          "file": "第十章 应用层协议（含答案解析）.docx",
+          "questionNumber": 26,
+          "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+        }
+      ]
+    },
+    {
+      "id": "collection-c10-q027",
+      "retainedId": "collection-c10-q007",
+      "analysis": "POP3（邮局协议版本3，Post Office Protocol version 3）用于接收邮件，默认TCP端口110，将邮件从服务器下载到本地客户端（默认下载后删除服务器副本，可配置保留）。SMTP（简单邮件传输协议，端口25）用于发送邮件（客户端→服务器、服务器→服务器中继）。IMAP（互联网消息访问协议，端口143）也用于接收邮件，与POP3不同：IMAP在服务器上保留邮件副本，支持多设备同步、文件夹管理、服务器端搜索，适合多设备访问。SNMP是网络管理协议，ICMP是网络层控制协议（ping/traceroute）。",
+      "provenance": [
+        {
+          "file": "第十章 应用层协议（含答案解析）.docx",
+          "questionNumber": 27,
+          "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+        }
+      ]
+    },
+    {
+      "id": "collection-c10-q028",
+      "retainedId": "collection-c10-q008",
+      "analysis": "NS（Name Server，域名服务器记录）指定该域名的权威DNS服务器（如ns1.example.com、ns2.example.com），用于DNS查询时委派到权威服务器。SOA（Start of Authority，起始授权记录）指定主域名服务器（Primary Master）、管理员邮箱（如admin.example.com，@用.代替）、序列号（Serial，版本号，用于主从同步）、刷新时间（Refresh）、重试时间（Retry）、过期时间（Expire）、最小TTL（Minimum TTL）。PTR用于反向解析（IP→域名），A用于正向解析（域名→IPv4）。查询NS记录：nslookup -type=NS example.com 或 dig NS example.com。",
+      "provenance": [
+        {
+          "file": "第十章 应用层协议（含答案解析）.docx",
+          "questionNumber": 28,
+          "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+        }
+      ]
+    },
+    {
+      "id": "collection-c10-q029",
+      "retainedId": "collection-c10-q009",
+      "analysis": "POP3使用TCP端口110，邮件客户端连接服务器的110端口接收邮件。25端口是SMTP（发送邮件）。IMAP使用143端口。POP3S（POP3 over SSL）使用995端口（加密接收邮件）。注意：邮件客户端不需要\"监听\"端口，而是主动连接服务器的110端口（客户端使用临时高端口）。题目表述可能不够准确，但POP3服务器端监听110端口。",
+      "provenance": [
+        {
+          "file": "第十章 应用层协议（含答案解析）.docx",
+          "questionNumber": 29,
+          "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+        }
+      ]
+    },
+    {
+      "id": "collection-c10-q030",
+      "retainedId": "collection-c10-q010",
+      "analysis": "POP3采用客户端/服务器（Client/Server）模式，客户端软件（如Outlook、Foxmail）与POP3服务器建立TCP连接（端口110），通过USER/PASS命令认证后，使用STAT（邮箱统计）、LIST（邮件列表）、RETR（检索邮件）、DELE（删除邮件）、QUIT（退出并提交删除）等命令管理和下载邮件。POP3会话有两个状态：认证状态（AUTHORIZATION，USER/PASS认证）和事务状态（TRANSACTION，LIST/RETR/DELE操作），QUIT后进入更新状态（UPDATE，提交删除）。",
+      "provenance": [
+        {
+          "file": "第十章 应用层协议（含答案解析）.docx",
+          "questionNumber": 30,
+          "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+        }
+      ]
+    },
+    {
+      "id": "collection-c10-q031",
+      "retainedId": "collection-c10-q011",
+      "analysis": "SMTP（简单邮件传输协议）用于发送电子邮件，包括：1）邮件客户端（MUA，邮件用户代理）到邮件服务器（MSA，邮件提交代理，端口587）的提交；2）邮件服务器之间（MTA，邮件传输代理，端口25）的中继传输（转发）。SMTP只负责\"送信\"（推送）不负责\"收信\"，收信用POP3/IMAP（客户端从服务器拉取）。SMTP基于TCP端口25，使用文本命令（HELO/EHLO、MAIL FROM、RCPT TO、DATA、QUIT等）。SMTP不加密（明文），扩展SMTP（ESMTP）支持AUTH认证和STARTTLS加密。",
+      "provenance": [
+        {
+          "file": "第十章 应用层协议（含答案解析）.docx",
+          "questionNumber": 31,
+          "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+        }
+      ]
+    },
+    {
+      "id": "collection-c10-q032",
+      "retainedId": "collection-c10-q012",
+      "analysis": "FTP匿名登录用户名为anonymous（密码通常为邮箱格式如user@example.com，或任意字符串），部分FTP服务器也接受ftp作为匿名用户名。FTP命令：put 本地文件名（上传文件到服务器）、get 远程文件名（从服务器下载文件）、mput 通配符（批量上传）、mget 通配符（批量下载）、ls/dir（列目录）、cd 目录（切换远程目录）、lcd 目录（切换本地目录）、delete 文件名（删除远程文件）、mkdir/rmdir（创建/删除目录）、binary/ascii（设置传输模式：二进制/文本）、bye/quit（退出）。copy/paste不是FTP命令，guest不是匿名用户名（guest是某些系统的访客账户名）。",
+      "provenance": [
+        {
+          "file": "第十章 应用层协议（含答案解析）.docx",
+          "questionNumber": 32,
+          "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+        }
+      ]
+    },
+    {
+      "id": "collection-c10-q033",
+      "retainedId": "collection-c10-q013",
+      "analysis": "HTTPS在HTTP基础上增加了SSL/TLS加密握手（首次连接需要额外的RTT进行密钥交换和证书验证）和加解密开销（每个数据包都需要加密/解密），响应速度比HTTP慢，不是更快。HTTPS需要CA颁发的SSL/TLS证书（用于验证服务器身份和协商密钥，端口443）。HTTP是明文传输（用户名密码、Cookie、数据都明文，易被窃听和篡改，端口80）。两者都基于TCP连接（HTTP/1.1和HTTP/2基于TCP，HTTP/3基于QUIC/UDP，但通常说HTTP/HTTPS指基于TCP的版本）。HTTPS的性能差距在现代硬件和TLS 1.3（0-RTT恢复）下已经很小。",
+      "provenance": [
+        {
+          "file": "第十章 应用层协议（含答案解析）.docx",
+          "questionNumber": 33,
+          "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+        }
+      ]
+    },
+    {
+      "id": "collection-c10-q034",
+      "retainedId": "collection-c10-q014",
+      "analysis": "常见HTTP状态码（5类）：1xx（信息性，如100 Continue继续）、2xx（成功，200 OK成功、201 Created创建、204 No Content无内容）、3xx（重定向，301 Moved Permanently永久重定向、302 Found临时重定向、304 Not Modified未修改（缓存）、307 Temporary Redirect临时重定向）、4xx（客户端错误，400 Bad Request错误请求、401 Unauthorized未授权（需认证）、403 Forbidden禁止访问（服务器拒绝，权限不足）、404 Not Found未找到资源（URL不存在）、405 Method Not Allowed方法不允许、408 Request Timeout请求超时、429 Too Many Requests请求过多（限流））、5xx（服务器错误，500 Internal Server Error服务器内部错误、502 Bad Gateway网关错误（上游服务器无效响应）、503 Service Unavailable服务不可用（过载/维护）、504 Gateway Timeout网关超时（上游服务器响应超时））。404表示服务器找不到请求的资源（URL错误、页面已删除、路径错误）。",
+      "provenance": [
+        {
+          "file": "第十章 应用层协议（含答案解析）.docx",
+          "questionNumber": 34,
+          "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+        }
+      ]
+    },
+    {
+      "id": "collection-c10-q035",
+      "retainedId": "collection-c10-q015",
+      "analysis": "DNS查询两种方式：1）递归查询（Recursive Query）：DNS服务器必须返回最终结果（成功解析的IP地址或失败/不存在），如果服务器不知道答案，必须替客户端去查询其他服务器直到得到最终结果。客户端→本地DNS服务器（递归DNS/Resolver）通常使用递归查询。2）迭代查询（Iterative Query）：DNS服务器返回自己知道的最佳答案（通常是下一级DNS服务器的地址，如根服务器→顶级域服务器→权威服务器），让查询者自己去问下一级。本地DNS服务器→根域/顶级域/权威域服务器使用迭代查询。递归查询对服务器负担重（需要替客户端完成整个解析过程），迭代查询对服务器负担轻（只返回已知信息）。DNS解析过程：客户端→本地DNS（递归）→根服务器（迭代，返回.com服务器）→.com顶级域服务器（迭代，返回example.com权威服务器）→example.com权威服务器（迭代，返回IP）→本地DNS缓存结果→返回客户端。",
+      "provenance": [
+        {
+          "file": "第十章 应用层协议（含答案解析）.docx",
+          "questionNumber": 35,
+          "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+        }
+      ]
+    },
+    {
+      "id": "collection-c10-q036",
+      "retainedId": "collection-c10-q016",
+      "analysis": "DHCP客户端收到DHCPACK后，在正式使用IP地址前，会通过ARP（地址冲突检测，ACD）检测该IP地址是否已被网络中其他主机使用。如果检测到IP地址冲突（已被使用），客户端发送DHCPDECLINE报文拒绝该地址，并重新开始DHCPDISCOVER过程（寻找新的IP地址）。DHCPNAK（Negative Acknowledgment，否定确认）是服务器发送给客户端的，用于拒绝客户端的DHCPREQUEST（如请求的IP地址已过期、已分配给其他客户端、或不在服务器作用域内）。DHCPACK是服务器确认分配，DHCPOFFER是服务器提供IP地址。DHCPRELEASE是客户端主动释放IP地址（如关机时）。",
+      "provenance": [
+        {
+          "file": "第十章 应用层协议（含答案解析）.docx",
+          "questionNumber": 36,
+          "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+        }
+      ]
+    },
+    {
+      "id": "collection-c10-q037",
+      "retainedId": "collection-c10-q017",
+      "analysis": "DNS默认端口53，通常使用UDP（53端口）进行常规查询（响应小于512字节时，UDP效率高、开销小），当响应超过512字节（如大量记录、DNSSEC）或进行区域传输（AXFR全区域传输/IXFR增量区域传输，主从DNS服务器同步）时使用TCP（53端口，可靠传输大报文）。DNS支持递归和迭代两种查询方式。DNS支持多种记录类型：A（IPv4）、AAAA（IPv6）、CNAME（别名）、MX（邮件交换）、NS（域名服务器）、PTR（反向解析）、SOA（起始授权）、TXT（文本）、SRV（服务定位）、CAA（证书颁发机构授权）、NAPTR（命名机构指针）等。",
+      "provenance": [
+        {
+          "file": "第十章 应用层协议（含答案解析）.docx",
+          "questionNumber": 37,
+          "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+        }
+      ]
+    },
+    {
+      "id": "collection-c10-q038",
+      "retainedId": "collection-c10-q018",
+      "analysis": "FTP两种模式：1）主动模式（PORT，Active）：客户端在控制连接上发送PORT命令告知服务器自己的数据端口（N+1），服务器使用20端口（源端口）主动连接客户端的数据端口（目的端口）建立数据连接。主动模式下服务器主动发起数据连接，适合服务器在公网、客户端在公网的场景，但客户端在防火墙/NAT后面时，服务器无法主动连接客户端（防火墙阻止入站连接）。2）被动模式（PASV，Passive）：客户端发送PASV命令，服务器回复自己的数据端口（随机高端口>1023），客户端主动连接服务器的数据端口建立数据连接。被动模式下客户端主动发起数据连接，适合客户端在防火墙/NAT后面的场景（防火墙允许出站连接），是大多数FTP客户端的默认模式。两者都使用控制连接（21）和数据连接，只是数据连接的发起方不同。",
+      "provenance": [
+        {
+          "file": "第十章 应用层协议（含答案解析）.docx",
+          "questionNumber": 38,
+          "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+        }
+      ]
+    },
+    {
+      "id": "collection-c10-q039",
+      "retainedId": "collection-c10-q019",
+      "analysis": "Telnet（远程登录协议，Telecommunication Network）使用明文传输用户名、密码和数据（不加密），不安全，容易被窃听（嗅探密码）和劫持（中间人攻击），默认TCP端口23。SSH（Secure Shell，安全外壳）使用加密传输（对称加密如AES加密数据+非对称加密如RSA/ECDSA交换密钥+哈希如HMAC保证完整性），提供身份认证（密码/公钥）、加密和完整性保护，比Telnet安全得多，默认TCP端口22。SSH还支持端口转发（SSH隧道）、SCP/SFTP文件传输、X11转发等功能。现代网络管理推荐使用SSH替代Telnet，许多网络设备默认禁用Telnet。",
+      "provenance": [
+        {
+          "file": "第十章 应用层协议（含答案解析）.docx",
+          "questionNumber": 39,
+          "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+        }
+      ]
+    },
+    {
+      "id": "collection-c10-q040",
+      "retainedId": "collection-c10-q020",
+      "analysis": "DNS主要使用UDP（53端口）进行常规查询，但也可以使用TCP（53端口）进行区域传输（AXFR/IXFR）和大于512字节的响应（EDNS0扩展后UDP可支持更大报文，但超过路径MTU时仍需TCP）。所以DNS不是\"只能\"使用UDP。HTTP是无状态协议（每次请求独立，服务器不保存客户端状态，通过Cookie/Session/Token维持状态）。FTP使用控制连接（21）和数据连接（20/被动模式高端口）两个TCP连接。SMTP用于发送邮件（客户端→服务器、服务器→服务器中继）。其他应用层协议：POP3/IMAP（接收邮件）、DNS（域名解析）、DHCP（动态IP配置）、SNMP（网络管理）、NTP（时间同步，UDP 123）、TFTP（简单文件传输，UDP 69）、LDAP（轻量目录访问，TCP 389）、RDP（远程桌面，TCP 3389）。",
+      "provenance": [
+        {
+          "file": "第十章 应用层协议（含答案解析）.docx",
+          "questionNumber": 40,
+          "sha256": "da53a7a8c832e285f46b3eb14334c7e8b6100373f09f4ec6c40c14610bc33e25"
+        }
+      ]
+    },
+    {
+      "id": "collection-c11-q010",
+      "retainedId": "collection-c09-q044",
+      "analysis": "Windows使用ipconfig查看IP地址配置。常用参数：/all（显示所有接口详细配置，含MAC、DNS、DHCP等）、/release（释放DHCP租约）、/renew（重新获取IP）、/flushdns（清除DNS缓存）、/displaydns（显示DNS缓存）。ifconfig是Linux命令。",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 10,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ]
+    },
+    {
+      "id": "collection-c11-q011",
+      "retainedId": "collection-c03-q032",
+      "analysis": "ipconfig /flushdns清除DNS解析器缓存。/displaydns显示缓存内容，/registerdns刷新所有DHCP租约并注册DNS，/renew更新DHCP租约。",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 11,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ]
+    },
+    {
+      "id": "collection-c11-q012",
+      "retainedId": "collection-c09-q045",
+      "analysis": "ping通过发送ICMP Echo Request并等待Echo Reply测试网络连通性和延迟。常用参数：-c count（发送次数，Linux）、-s size（数据包大小）、-i interval（间隔时间）。cd切换目录，chmod修改权限，grep文本搜索。",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 12,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ]
+    },
+    {
+      "id": "collection-c11-q013",
+      "retainedId": "collection-c09-q046",
+      "analysis": "netstat（传统）或ss（现代，iproute2包，更快）查看网络连接、端口监听、路由表等。常用：netstat -tlnp（TCP监听端口+进程）、ss -tulnp。ls列目录，ps查看进程，df查看磁盘使用。",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 13,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ]
+    },
+    {
+      "id": "collection-c11-q014",
+      "retainedId": "collection-c09-q047",
+      "analysis": "df（disk free）查看文件系统磁盘空间使用情况（总容量、已用、可用、挂载点），常用df -h（人类可读单位）。du（disk usage）查看目录/文件占用空间，常用du -sh 目录。ls列目录，dd用于磁盘拷贝/转换。",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 14,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ]
+    },
+    {
+      "id": "collection-c11-q016",
+      "retainedId": "collection-c09-q049",
+      "analysis": "Windows中netstat查看网络连接、端口监听、路由表、以太网统计。常用参数：-a（所有连接和监听端口）、-n（数字形式）、-o（显示进程ID）、-b（显示关联可执行文件）、-r（路由表）。ipconfig查看IP配置，ping测试连通性，tracert路由跟踪。",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 16,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ]
+    },
+    {
+      "id": "collection-c11-q025",
+      "retainedId": "collection-c11-q001",
+      "analysis": "cd - 切换到上次访问的目录（OLDPWD环境变量记录上次目录），并显示切换到的目录路径。cd /切换到根目录（/），cd ~或cd（不带参数）切换到当前用户家目录（$HOME，如/root或/home/username），cd .表示当前目录（无变化），cd ..切换到上级目录（父目录），cd 绝对路径/相对路径切换到指定目录。cd是bash等shell的内置命令（不是外部程序）。",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 25,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ]
+    },
+    {
+      "id": "collection-c11-q026",
+      "retainedId": "collection-c11-q002",
+      "analysis": "pwd（print working directory，打印工作目录）显示当前所在目录的绝对路径（如/root、/home/user、/etc）。passwd修改用户密码（注意不是pwd），rm删除文件/目录，chmod修改文件权限。pwd -P显示物理路径（解析符号链接后的真实路径），pwd -L显示逻辑路径（包含符号链接）。当前目录也存储在环境变量PWD中（echo $PWD），上次目录存储在OLDPWD中。",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 26,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ]
+    },
+    {
+      "id": "collection-c11-q027",
+      "retainedId": "collection-c11-q003",
+      "analysis": "chmod（change mode，更改模式）修改文件/目录的访问权限。两种方式：1）符号模式：chmod u+x file（用户增加执行权限）、chmod g-w file（组删除写权限）、chmod o=r file（其他用户只读）、chmod a+rx file（所有用户增加读和执行）；u=user属主，g=group属组，o=other其他，a=all所有；+增加权限，-删除权限，=设置权限；r=read读(4)，w=write写(2)，x=execute执行(1)。2）数字模式（八进制）：chmod 755 file（属主rwx=7，属组r-x=5，其他r-x=5）、chmod 644 file（属主rw-=6，属组r--=4，其他r--=4）、chmod 777 file（所有用户rwx，最高权限，不推荐）。chown修改属主和属组（chown user:group file），chgrp修改属组。attrib是Windows命令（修改文件属性如只读/隐藏/系统），file命令查看文件类型。",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 27,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ]
+    },
+    {
+      "id": "collection-c11-q028",
+      "retainedId": "collection-c11-q004",
+      "analysis": "less（less is more的缩写，more的增强版）分页浏览大文件，支持上下翻页（PageUp/PageDown、上下箭头）、搜索（/关键词向下搜索、?关键词向上搜索、n下一个匹配、N上一个匹配）、跳转（g跳到文件开头、G跳到文件末尾、:n跳到第n行）、显示行号（-N选项）、实时跟踪（F键，类似tail -f）等。less不会一次性加载整个文件到内存，适合查看超大文件（几个GB）。cat（concatenate）一次性全部输出（大文件会刷屏，且全部加载到内存），适合查看小文件或合并文件。tail查看文件末尾（默认10行，-n指定行数，-f实时跟踪追加内容），head查看文件开头（默认10行，-n指定行数）。more也可分页但功能不如less强大（只能向下翻页，不能向上）。",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 28,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ]
+    },
+    {
+      "id": "collection-c11-q029",
+      "retainedId": "collection-c11-q005",
+      "analysis": "ps（process status，进程状态）显示当前进程快照（不是实时动态）。常用：ps aux（BSD风格，显示所有用户的所有进程，含用户、PID、CPU%、MEM%、VSZ、RSS、TTY、STAT、START、TIME、COMMAND）、ps -ef（System V风格，显示所有进程全格式，含UID、PID、PPID、C、STIME、TTY、TIME、CMD）、ps -efH（树形显示进程层次）、ps aux --sort=-%cpu（按CPU使用率降序排序）、ps -p PID（查看指定PID进程）。top/htop动态实时显示进程状态（类似Windows任务管理器，按q退出，按k杀进程，按M按内存排序，按P按CPU排序）。pstree树形显示进程树。kill PID终止进程（默认SIGTERM，-9强制SIGKILL）。ls列目录，cd切换目录，pwd显示当前路径。",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 29,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ]
+    },
+    {
+      "id": "collection-c11-q030",
+      "retainedId": "collection-c11-q006",
+      "analysis": "Linux设备分类：1）块设备（Block Device）：按块（通常512字节或4KB）随机读写，支持缓冲，如硬盘（/dev/sda、/dev/sdb）、U盘、光盘（/dev/sr0）、SSD等，设备文件类型标识为b。2）字符设备（Character Device）：按字节流顺序读写，不支持随机访问和缓冲，如串口（/dev/ttyS0）、键盘、终端（/dev/tty、/dev/pts/0）、/dev/null（空设备，丢弃所有写入）、/dev/zero（零设备，输出无限零字节）、/dev/random（随机数设备），设备文件类型标识为c。3）网络设备：通过套接字（Socket）访问，不对应设备文件（如eth0、wlan0、lo，用ip link/ifconfig查看）。4）伪设备/虚拟设备：如/dev/null、/dev/zero、/dev/random、/dev/full（满设备，写入返回ENOSPC）。硬盘设备命名：IDE硬盘/dev/hd[a-d]，SCSI/SATA/USB硬盘/dev/sd[a-z]，分区/dev/sda1、/dev/sda2等，NVMe硬盘/dev/nvme0n1p1。",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 30,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ]
+    },
+    {
+      "id": "collection-c11-q031",
+      "retainedId": "collection-c11-q007",
+      "analysis": "安装Linux时必须创建根分区（/，root filesystem），根分区是整个文件系统的根，所有其他目录（/etc、/bin、/usr、/var、/home等）都在根分区下（除非单独挂载为独立分区）。没有根分区系统无法启动和运行。/root是root超级用户的家目录（不是必须单独分区，可在根分区下），/home是普通用户家目录（建议单独分区，重装系统时可保留用户数据），/bin是基本命令目录（在根分区下，现代系统通常是/usr/bin的符号链接）。建议单独创建的分区：1）/boot：引导分区（存放内核和引导加载程序，建议1GB，独立分区可避免根分区文件系统损坏导致无法启动）；2）/home：用户数据分区（重装系统保留数据）；3）/var：可变数据分区（日志、数据库、邮件，避免日志写满影响根分区）；4）swap：交换分区（虚拟内存，建议大小=内存或内存的1-2倍，内存>8GB时可较小或不设）；5）/tmp：临时文件分区（避免临时文件占满根分区）。现代系统（如Ubuntu）默认使用LVM（逻辑卷管理）和ext4/xfs文件系统，可灵活调整分区大小。UEFI启动还需要EFI系统分区（ESP，/boot/efi，FAT32，约512MB）。",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 31,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ]
+    },
+    {
+      "id": "collection-c11-q032",
+      "retainedId": "collection-c11-q008",
+      "analysis": "/etc（Editable Text Configuration/Extended Configuration，系统配置目录）包含大量系统级配置文件和管理工具脚本，如：passwd（用户账户信息）、shadow（用户密码哈希，仅root可读）、group（用户组信息）、gshadow（组密码）、hosts（主机名静态解析，IP↔主机名映射）、resolv.conf（DNS服务器配置）、hostname（主机名）、network（网络配置，旧版）、fstab（文件系统挂载表，开机自动挂载）、crontab（定时任务配置）、services（端口号与服务名映射）、profile（全局环境变量和登录脚本）、bashrc（全局bash配置）、sudoers（sudo权限配置，用visudo编辑）、sysconfig/（网络、服务等配置，RHEL/CentOS）、nginx/、apache2/、mysql/等服务配置目录。/bin（binaries，基本命令目录，存放所有用户都能使用的基本命令如ls、cp、mv、cat、bash，现代系统通常是/usr/bin的符号链接）。/dev（devices，设备文件目录，包含所有硬件设备和虚拟设备文件如/dev/sda、/dev/null、/dev/tty）。/root（root超级用户的家目录，普通用户家目录在/home下）。Linux目录结构遵循FHS（文件系统层次标准）：/bin、/sbin（系统管理命令）、/etc、/home、/root、/usr（Unix Software Resource，用户程序和数据，含/bin、/sbin、/lib、/local、/share、/src）、/var（variable，可变数据如日志/缓存/数据库/邮件，含/log、/run、/tmp、/spool、/www）、/tmp（临时文件，重启可能清空）、/boot（引导文件）、/dev（设备）、/proc（虚拟文件系统，进程和内核信息）、/sys（虚拟文件系统，设备和驱动信息）、/mnt（临时挂载点）、/media（可移动设备挂载点）、/opt（可选软件包）、/lib（共享库）、/srv（服务数据）。",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 32,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ]
+    },
+    {
+      "id": "collection-c11-q033",
+      "retainedId": "collection-c11-q009",
+      "analysis": "mstsc（Microsoft Terminal Services Client，微软终端服务客户端）打开远程桌面连接（RDP，Remote Desktop Protocol，默认端口3389），可以通过Win+R运行mstsc启动，或在开始菜单搜索\"远程桌面连接\"。mstsc常用参数：mstsc /v:服务器IP（直接连接指定服务器）、mstsc /admin（管理会话，连接到控制台会话）、mstsc /f（全屏模式）、mstsc /span（跨多显示器）、mstsc /edit file.rdp（编辑RDP配置文件）、mstsc /w:宽度 /h:高度（指定窗口大小）。telnet是远程命令行登录（端口23，明文，不安全，现代Windows默认未安装，需在\"启用或关闭Windows功能\"中安装Telnet客户端）。wscript是Windows脚本宿主（运行VBScript/JScript脚本）。config不是远程桌面命令（config是某些命令的子命令如net config、ipconfig）。远程桌面需要目标计算机启用远程桌面（系统属性→远程设置→允许远程连接），且目标系统为Windows专业版/企业版/服务器版（家庭版不支持作为远程桌面服务器，但可作为客户端连接其他计算机）。",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 33,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ]
+    },
+    {
+      "id": "collection-c11-q034",
+      "retainedId": "collection-c09-q044",
+      "analysis": "Windows使用ipconfig（Internet Protocol Configuration，IP配置）查看网络接口的IP地址配置（IPv4/IPv6地址、子网掩码、默认网关、DHCP服务器、DNS服务器、MAC地址（物理地址）、WINS服务器等）。常用参数：1）ipconfig（不带参数，简要显示所有接口的IPv4地址、子网掩码、默认网关）；2）ipconfig /all（显示所有接口的详细配置，含MAC地址、DHCP状态、租约获取/过期时间、DNS服务器、NetBIOS状态等）；3）ipconfig /release（释放DHCP租约，释放指定适配器如ipconfig /release \"以太网\"）；4）ipconfig /renew（重新获取DHCP租约/IP地址）；5）ipconfig /flushdns（清除DNS解析器缓存）；6）ipconfig /displaydns（显示DNS缓存内容）；7）ipconfig /registerdns（刷新所有DHCP租约并向DNS服务器动态注册主机名和IP）；8）ipconfig /showclassid（显示DHCP类ID）。ifconfig是Linux命令（Windows没有ifconfig，Windows 10+可通过PowerShell的Get-NetIPAddress或Get-NetIPConfiguration查看更详细的IP配置，或使用netsh interface ip show config）。ping测试网络连通性，tracert路由跟踪。",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 34,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ]
+    },
+    {
+      "id": "collection-c11-q035",
+      "retainedId": "collection-c03-q032",
+      "analysis": "ipconfig /flushdns清除DNS客户端解析器缓存（DNS Resolver Cache），当DNS解析异常（如域名已更换IP但缓存仍是旧地址）或DNS记录更新后需要刷新缓存时使用。执行后显示\"已成功刷新DNS解析缓存\"。/displaydns显示DNS缓存内容（包括记录名称、记录类型（A/AAAA/CNAME等）、生存时间TTL、数据长度、段、记录数据（IP地址/别名）），用于排查DNS解析问题。/registerdns刷新所有DHCP租约并向DNS服务器动态注册（Dynamic DNS Update）主机名和IP地址（用于DNS记录更新失败时手动触发注册）。/renew更新DHCP租约（重新从DHCP服务器获取IP地址配置，可指定适配器如ipconfig /renew \"WLAN\"）。/release释放DHCP租约（释放IP地址，适配器变为0.0.0.0）。清除浏览器DNS缓存：Chrome访问chrome://net-internals/#dns点击Clear host cache；Firefox访问about:networking#dns点击Clear DNS Cache。修改hosts文件（C:\\Windows\\System32\\drivers\\etc\\hosts）后通常不需要刷新DNS缓存（hosts文件优先级高于DNS查询，直接生效）。",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 35,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ]
+    },
+    {
+      "id": "collection-c11-q036",
+      "retainedId": "collection-c09-q045",
+      "analysis": "ping（Packet Internet Groper，因特网包探索器）通过发送ICMP Echo Request（类型8，回显请求）并等待ICMP Echo Reply（类型0，回显应答）测试网络连通性和往返延迟（RTT，Round-Trip Time）。常用参数：-c count（发送ICMP回显请求的次数，发送完自动停止并显示统计，如ping -c 4 192.168.1.1；不指定-c时Linux默认持续发送，需Ctrl+C停止，Windows默认发送4次）、-s size（发送的数据包大小，默认56字节+8字节ICMP头=64字节，如ping -s 1000）、-i interval（发送间隔秒数，默认1秒，如ping -i 0.5）、-W timeout（等待响应超时时间秒数，如ping -W 2）、-t ttl（设置TTL值，Time To Live，如ping -t 64）、-I interface（指定发送接口/源IP，如ping -I eth0）、-n（不解析主机名，数字形式输出）、-q（安静模式，只显示统计信息）、-f（洪水ping，快速发送，需root，用于压力测试）、-6（使用IPv6，ping6）。ping输出包括：目标IP、数据包大小、icmp_seq（序列号）、ttl（生存时间，每经过一个路由器减1，可推断经过的路由器跳数=初始TTL-当前TTL，Windows初始TTL=128，Linux=64）、time（往返时间毫秒）。统计信息包括：发送/接收包数、丢包率、总时间、往返时间min/avg/max/mdev（平均偏差）。注意：某些网络设备/服务器/防火墙可能禁用ICMP（丢弃ICMP Echo Request），此时ping不通不代表网络不通（服务可能正常），可使用telnet IP 端口、nc -zv IP 端口、curl http://IP等测试端口/服务连通性。cd切换目录，chmod修改文件权限，grep文本搜索（这些都不是网络连通性测试命令）。",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 36,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ]
+    },
+    {
+      "id": "collection-c11-q037",
+      "retainedId": "collection-c09-q046",
+      "analysis": "netstat（network statistics，网络统计，传统命令，net-tools包）或ss（socket statistics，套接字统计，现代命令，iproute2包，是netstat的替代，更快更强大）查看网络连接、端口监听、路由表、网络接口统计、套接字状态等。netstat常用：-a（所有连接和监听端口，含TCP/UDP）、-t（仅TCP连接）、-u（仅UDP连接）、-n（数字形式显示地址和端口，不解析主机名/服务名，加快速度）、-l（仅监听端口，Listening）、-p（显示进程ID/PID和程序名，需root才能看到所有进程）、-r（路由表，routing table）、-i（网络接口统计，interface）、-s（各协议统计，statistics）、-e（扩展信息，如用户/Inode）。常用组合：netstat -tlnp（TCP监听端口+进程，最常用，查看哪些服务在监听哪些端口）、netstat -anp（所有连接+进程，查看所有网络连接和对应进程）、netstat -tunlp（TCP+UDP监听端口+进程）、netstat -rn（路由表，数字形式）、netstat -i（接口流量统计，查看RX/TX错误/丢包）。ss常用：-t（TCP）、-u（UDP）、-l（监听）、-n（数字）、-p（进程）、-a（所有）、-s（统计摘要）、-e（扩展）、-o（计时器信息）、-m（内存使用）。常用组合：ss -tulnp（TCP+UDP监听端口+进程，替代netstat -tulnp）、ss -tnp（TCP连接+进程）、ss -s（连接统计摘要，显示TCP/UDP/RAW等套接字总数和各状态数量）、ss -tn state established（仅显示已建立的TCP连接）、ss -tn dst 192.168.1.1（过滤目标IP）、ss -tn dport = :80（过滤目标端口80）。ss比netstat更快（直接读取内核/proc/net/sockstat，不遍历/proc下所有进程），输出更详细，支持更强大的过滤语法。ls列目录内容，ps查看进程状态，df查看磁盘空间使用情况。查找占用端口的进程：ss -tlnp | grep :80 或 lsof -i :80（lsof需安装）。",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 37,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ]
+    },
+    {
+      "id": "collection-c11-q038",
+      "retainedId": "collection-c09-q047",
+      "analysis": "df（disk free，磁盘空闲/文件系统磁盘空间使用情况）查看已挂载文件系统的磁盘空间使用情况（总容量、已用、可用、使用率%、挂载点）。常用参数：-h（human-readable，人类可读单位，自动选择K/M/G/T，如df -h，最常用）、-H（类似-h但使用1000进制而非1024）、-k（以KB为单位，默认）、-m（以MB为单位）、-T（显示文件系统类型，如ext4/xfs/nfs/vfat，df -Th）、-t type（仅显示指定文件系统类型，如df -t ext4）、-x type（排除指定类型，如df -x tmpfs）、-i（显示inode使用情况，df -ih，inode耗尽也会导致无法创建文件即使磁盘有空间）、-a（显示所有文件系统，包括0大小的如/proc/sysfs）、--total（最后显示总计行）。输出列：Filesystem（文件系统/设备名）、Size（总大小）、Used（已用）、Avail（可用）、Use%（使用率百分比）、Mounted on（挂载点）。使用率100%或inode使用率100%会导致无法写入文件、服务异常（如日志无法写入、数据库报错），需及时清理。du（disk usage，磁盘使用量）查看目录/文件占用的磁盘空间（实际使用的块数，不是文件大小总和，因为稀疏文件、块分配、硬链接等差异）。常用：-h（人类可读）、-s（summarize，仅显示总计，不显示子目录，如du -sh /var/log）、-a（all，显示所有文件和目录）、--max-depth=N（显示N级子目录，如du -h --max-depth=1 /，查看根目录下一级子目录大小，最常用的排查大目录方法）、-c（最后显示总计grand total）、-x（--one-file-system，不跨文件系统，如du -shx /，不统计挂载的其他文件系统如/proc/sys/run）、--exclude=PATTERN（排除匹配的文件/目录，如du -sh --exclude=/proc --exclude=/sys /）。ls列目录（ls -lh显示文件大小，ls -lS按大小排序），dd用于磁盘拷贝/转换/镜像制作（如dd if=/dev/sda of=/backup/sda.img bs=4M，dd if=/dev/zero of=file bs=1M count=1024创建指定大小文件，dd if=/dev/urandom of=file bs=1M count=10创建随机数据文件）。注意：df显示的是文件系统级别的空间使用（已用+可用+保留=总大小，root保留空间默认5%，普通用户无法使用保留空间，所以Use%可能超过100%或Avail为0但root仍可写入），du显示的是目录/文件实际占用的空间（可能因为删除的文件仍被进程占用而df已用空间不释放，需重启进程或用lsof | grep deleted查找并处理）。排查磁盘满：先用df -h看哪个分区满，再用du -shx /* | sort -rh（或du -h --max-depth=1 / | sort -rh）找大目录，逐层深入找到大文件，清理日志（/var/log）、缓存（/var/cache、~/.cache）、旧内核（/boot）、Docker镜像/容器（docker system prune）、大文件（find / -type f -size +1G -exec ls -lh {} \\;）等。",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 38,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ]
+    },
+    {
+      "id": "collection-c11-q039",
+      "retainedId": "collection-c09-q048",
+      "analysis": "Linux系统日志通常存储在/var/log目录下，查看日志的常用方法：1）传统Syslog系统（如RHEL/CentOS 6、旧版Debian）：/var/log/messages（系统全局日志，含内核和应用程序日志，最常用）、/var/log/syslog（Debian/Ubuntu系统全局日志）、/var/log/secure（安全认证日志，如SSH登录、sudo，RHEL/CentOS）、/var/log/auth.log（安全认证日志，Debian/Ubuntu）、/var/log/dmesg（内核启动日志，硬件检测）、/var/log/boot.log（系统启动日志）、/var/log/cron（定时任务日志）、/var/log/maillog（邮件日志，RHEL/CentOS）、/var/log/maillog（邮件日志）、/var/log/httpd/（Apache日志，access_log/error_log）、/var/log/nginx/（Nginx日志）、/var/log/mysql/（MySQL日志）。查看命令：tail -f /var/log/messages（实时跟踪日志追加内容，-f=follow，新日志实时显示，最常用的监控日志方法，Ctrl+C退出）、tail -n 100 /var/log/messages（查看最后100行）、less /var/log/messages（分页浏览，支持搜索/翻页）、grep \"error\" /var/log/messages（搜索包含error的日志行）、grep -i \"fail\" /var/log/secure（忽略大小写搜索fail，查看登录失败）、head -n 50 /var/log/messages（查看前50行）、cat /var/log/messages（全部输出，适合小文件）、wc -l /var/log/messages（统计行数）。2）systemd系统（如RHEL/CentOS 7+、Ubuntu 16.04+、Fedora、Debian 9+，使用systemd-journald日志服务）：使用journalctl命令查看systemd日志（二进制格式存储在/var/log/journal/，不是纯文本文件）。journalctl常用：journalctl（查看所有日志，分页显示）、journalctl -f（实时跟踪新日志，类似tail -f）、journalctl -u 服务名（查看指定服务的日志，如journalctl -u nginx、journalctl -u sshd）、journalctl -u 服务名 -f（实时跟踪指定服务日志）、journalctl --since \"1 hour ago\"（查看最近1小时的日志）、journalctl --since \"2024-01-01 00:00:00\" --until \"2024-01-01 23:59:59\"（查看指定时间段）、journalctl -p err（仅显示错误级别及以上的日志，优先级emerg/alert/crit/err/warning/notice/info/debug）、journalctl -k（仅内核日志，类似dmesg）、journalctl -b（本次启动以来的日志，-b -1上次启动）、journalctl --disk-usage（查看日志占用磁盘空间）、journalctl --vacuum-size=500M（清理日志保留500MB）、journalctl --vacuum-time=7d（清理7天前的日志）、journalctl -n 100（最后100行）、journalctl --no-pager（不分页全部输出，适合管道grep）。cd切换目录，mkdir创建目录，rm删除文件（这些都不是查看日志的命令，且rm /var/log会删除日志目录，非常危险，绝对不能执行）。日志排查技巧：先看系统日志（messages/syslog）找错误/异常，再看服务日志（如nginx error.log、mysql error.log），用grep过滤关键词（error/fail/warn/critical/panic/exception），结合时间范围定位问题，注意日志轮转（logrotate，旧日志压缩为.gz如messages-20240101.gz，用zcat/zless查看）。",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 39,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ]
+    },
+    {
+      "id": "collection-c11-q040",
+      "retainedId": "collection-c09-q049",
+      "analysis": "Windows中netstat（network statistics，网络统计）查看网络连接、端口监听状态、路由表、以太网统计、各协议统计等。常用参数：-a（all，所有连接和监听端口，含TCP/UDP，显示已建立ESTABLISHED和监听LISTENING）、-n（numeric，数字形式显示地址和端口，不解析主机名和服务名，加快速度，避免DNS解析延迟）、-o（显示拥有该连接的进程ID/PID，可结合任务管理器或tasklist查看对应程序，最常用的查找占用端口进程的方法）、-b（binary，显示创建该连接的可执行文件名称，需管理员权限，比-o更详细但更慢）、-r（route，显示路由表，同route print）、-e（ethernet，显示以太网统计，如收发字节数/单播/非单播/丢弃/错误/未知协议，可与-s结合）、-s（statistics，显示各协议统计，按IP/IPv6/ICMP/ICMPv6/TCP/TCPv6/UDP/UDPv6分类，可与-e结合）、-p protocol（指定协议，如netstat -p tcp、netstat -p udp、netstat -p ip，可与-s结合）、-q（显示所有连接、监听端口和绑定端口，含TCP/UDP，Windows 10+）、-x（显示NetworkDirect连接，Windows Server 2012+）。常用组合：netstat -ano（所有连接+数字+PID，最常用，查看所有网络连接和对应PID）、netstat -an（所有连接+数字，快速查看）、netstat -tulnp（Linux风格，Windows不支持-t/-u/-l，用-a代替）、netstat -ano | findstr :80（查找占用80端口的连接和PID，findstr是Windows的grep）、netstat -ano | findstr LISTENING（仅查看监听端口）、netstat -ano | findstr ESTABLISHED（仅查看已建立连接）、netstat -r（路由表）、netstat -e -s（接口和协议统计，排查网络错误/丢包）。查找占用端口的进程完整步骤：1）netstat -ano | findstr :端口号（找到PID）；2）tasklist | findstr PID（或tasklist /FI \"PID eq PID\"，查看进程名）；3）如需结束进程：taskkill /PID PID /F（/F强制结束），或在任务管理器中结束。ipconfig查看IP配置，ping测试连通性，tracert路由跟踪。PowerShell替代命令：Get-NetTCPConnection（查看TCP连接，更强大，支持按状态/端口/进程过滤，如Get-NetTCPConnection -State Listen | Select-Object LocalAddress,LocalPort,OwningProcess）、Get-NetUDPEndpoint（查看UDP端点）、Test-NetConnection -ComputerName IP -Port 端口（测试端口连通性，替代telnet）。",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 40,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ]
+    },
+    {
+      "id": "collection-c11-q041",
+      "retainedId": "collection-c11-q017",
+      "analysis": "Linux中配置网络接口IP地址的命令：1）ifconfig（interface configuration，传统命令，net-tools包，旧版Linux默认安装，新版可能未安装需yum/apt install net-tools）：查看接口配置ifconfig（或ifconfig -a显示所有接口包括未启用的）；配置IP地址ifconfig eth0 192.168.1.10 netmask 255.255.255.0（或ifconfig eth0 192.168.1.10/24）；启用/禁用接口ifconfig eth0 up/ifconfig eth0 down（或ifup eth0/ifdown eth0）；配置MAC地址ifconfig eth0 hw ether 00:11:22:33:44:55；配置别名（子接口/虚拟接口）ifconfig eth0:0 192.168.2.10 netmask 255.255.255.0。注意：ifconfig配置的IP是临时的，重启网络服务或重启系统后失效，永久配置需修改配置文件（如RHEL/CentOS的/etc/sysconfig/network-scripts/ifcfg-eth0，Debian/Ubuntu的/etc/network/interfaces或/etc/netplan/*.yaml）。2）ip（iproute2包，现代Linux默认安装，是ifconfig/route/arp等命令的统一替代，更强大）：查看接口配置ip addr show（或ip a、ip addr）、ip link show（查看链路状态，ip l）；配置IP地址ip addr add 192.168.1.10/24 dev eth0（添加IP，一个接口可配置多个IP）；删除IP地址ip addr del 192.168.1.10/24 dev eth0；启用/禁用接口ip link set eth0 up/ip link set eth0 down；配置MAC地址ip link set eth0 address 00:11:22:33:44:55；配置接口别名ip addr add 192.168.2.10/24 dev eth0 label eth0:0；查看接口统计ip -s link show eth0（收发字节/包/错误/丢包）。ip命令配置也是临时的，永久配置需修改配置文件或使用NetworkManager（nmcli/nmtui）。3）NetworkManager（现代Linux桌面/服务器默认网络管理服务）：nmcli命令行工具（nmcli connection show查看连接、nmcli device status查看设备状态、nmcli connection modify eth0 ipv4.addresses 192.168.1.10/24 ipv4.gateway 192.168.1.1 ipv4.dns \"8.8.8.8\" ipv4.method manual修改配置、nmcli connection up eth0启用连接）；nmtui文本用户界面（交互式菜单配置）。4）永久配置文件：RHEL/CentOS 7-8：/etc/sysconfig/network-scripts/ifcfg-接口名（BOOTPROTO=static/dhcp、IPADDR、NETMASK、GATEWAY、DNS1、ONBOOT=yes等），修改后systemctl restart network（或nmcli connection reload）；RHEL/CentOS 9+/Fedora：/etc/NetworkManager/system-connections/（NetworkManager管理，用nmcli修改）；Debian/Ubuntu 18.04+：/etc/netplan/*.yaml（Netplan配置，YAML格式，配置后netplan apply生效）；Debian/Ubuntu旧版：/etc/network/interfaces（iface eth0 inet static/address/netmask/gateway/dns-nameservers，修改后systemctl restart networking或ifdown eth0 && ifup eth0）。netstat查看网络连接和端口，route/ip route查看/配置路由表，ping测试连通性。",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 41,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ]
+    },
+    {
+      "id": "collection-c11-q042",
+      "retainedId": "collection-c11-q018",
+      "analysis": "Linux中切换用户身份/提升权限的命令：1）su（switch user/substitute user，切换用户）：su - 用户名（完全切换，加载目标用户的环境变量、家目录、shell配置文件，如su - root切换到root，su - john切换到john，推荐使用-或-l选项）；su 用户名（不完全切换，保留当前用户的环境变量和当前目录，不推荐，可能导致环境变量混乱）；su（不带用户名，默认切换到root，需输入root密码）；su -c \"命令\" 用户名（以指定用户身份执行单条命令后返回，如su -c \"systemctl restart nginx\" root）；退出切换的用户用exit或Ctrl+D返回原用户。su需要知道目标用户的密码（切换到root需要root密码）。2）sudo（superuser do，以超级用户权限执行命令）：sudo 命令（以root权限执行单条命令，如sudo systemctl restart nginx、sudo yum install nginx、sudo vi /etc/hosts，需输入当前用户自己的密码（不是root密码），且当前用户需在sudoers配置中有权限）；sudo -u 用户名 命令（以指定用户身份执行命令，如sudo -u nobody /path/to/script）；sudo -i（切换到root的交互式登录shell，加载root环境，类似su - root但用当前用户密码）；sudo -s（切换到root shell但保留当前环境变量）；sudo -l（列出当前用户可执行的sudo权限）；sudo !!（以sudo执行上一条命令，最常用的快捷方式，当命令提示Permission denied时用这个）；sudo -k（清除sudo密码缓存，下次sudo需重新输入密码）；sudo -v（延长sudo密码缓存时间，默认5-15分钟）。sudo的权限配置在/etc/sudoers文件（必须用visudo命令编辑，visudo会检查语法错误，避免配置错误导致所有sudo都无法使用），格式：用户名 主机=(切换到的用户) 命令列表，如john ALL=(ALL) ALL（john可在所有主机以所有用户身份执行所有命令）、%wheel ALL=(ALL) ALL（wheel组所有用户）、john ALL=(ALL) NOPASSWD: /usr/bin/systemctl（无需密码执行systemctl）。sudo比su更安全（不需要共享root密码，可细粒度控制权限，所有sudo操作记录到日志/var/log/secure或auth.log，可审计），是现代Linux推荐的权限提升方式（Ubuntu默认禁用root登录，只能用sudo）。3）其他相关：runuser（以指定用户身份运行命令，不需要密码，仅root可使用，常用于服务启动脚本，如runuser -u nginx -- /path/to/script）、sg（切换到指定组执行命令）、newgrp（切换当前用户的有效组）。cd切换目录，ls列目录，pwd显示当前路径。",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 42,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ]
+    },
+    {
+      "id": "collection-c11-q043",
+      "retainedId": "collection-c11-q019",
+      "analysis": "Linux中管理系统服务（守护进程，daemon）的命令：1）systemctl（systemd系统的服务管理命令，现代Linux默认，如RHEL/CentOS 7+、Ubuntu 16.04+、Debian 9+、Fedora、Arch，最常用）：启动服务systemctl start 服务名（如systemctl start nginx）；停止服务systemctl stop 服务名；重启服务systemctl restart 服务名（停止再启动，连接会中断）；重载配置systemctl reload 服务名（重新加载配置文件而不中断服务，如nginx -s reload，支持reload的服务才能用）；查看状态systemctl status 服务名（显示服务运行状态、PID、内存、CPU、最近日志，最常用的排查服务问题命令）；启用开机自启systemctl enable 服务名（如systemctl enable nginx，创建符号链接到/etc/systemd/system/multi-user.target.wants/）；禁用开机自启systemctl disable 服务名；查看是否开机自启systemctl is-enabled 服务名；查看是否运行systemctl is-active 服务名；列出所有服务systemctl list-units --type=service（或systemctl list-unit-files --type=service查看所有服务文件和启用状态）；查看失败的服务systemctl --failed；重新加载systemd配置systemctl daemon-reload（修改/新增服务文件后必须执行，让systemd重新读取配置）；屏蔽服务（无法启动）systemctl mask 服务名（创建/dev/null符号链接，比disable更彻底）；取消屏蔽systemctl unmask 服务名；查看服务日志journalctl -u 服务名（如journalctl -u nginx -f实时跟踪）。服务名通常带.service后缀（可省略，如nginx=nginx.service），还有.target（目标，类似运行级别）、.socket（套接字激活）、.timer（定时任务）、.mount（挂载）、.path（路径监控）等单元类型。2）service（传统SysVinit系统的服务管理命令，旧版Linux如RHEL/CentOS 6、Ubuntu 14.04，现代系统中service命令通常是wrapper，会转发到systemctl）：启动service 服务名 start（如service nginx start）；停止service 服务名 stop；重启service 服务名 restart；重载service 服务名 reload；查看状态service 服务名 status；列出所有服务service --status-all（SysVinit）。SysVinit的服务脚本在/etc/init.d/目录下（如/etc/init.d/nginx），也可直接执行/etc/init.d/nginx start。运行级别（runlevel）：0关机、1单用户模式、2多用户无网络、3多用户命令行（服务器默认）、4未使用、5图形界面（桌面默认）、6重启，用chkconfig命令管理服务在各运行级别的启停（chkconfig --list、chkconfig nginx on、chkconfig --level 35 nginx on）。3）其他：查看服务监听端口ss -tlnp | grep 服务名、netstat -tlnp | grep 服务名；测试服务端口连通性telnet IP 端口、nc -zv IP 端口、curl http://IP:端口；查看服务进程ps aux | grep 服务名、pgrep -a 服务名；强制结束进程kill PID、killall 服务名、pkill 服务名（-9强制SIGKILL）。常见服务：nginx（Web服务器，端口80/443）、httpd/apache2（Apache Web服务器）、mysqld/mariadb（MySQL/MariaDB数据库，端口3306）、postgresql（PostgreSQL数据库，端口5432）、redis（Redis缓存，端口6379）、mongod（MongoDB数据库，端口27017）、sshd（SSH远程登录，端口22）、docker（Docker容器引擎）、kubelet（Kubernetes节点代理）、firewalld/iptables（防火墙）、NetworkManager（网络管理）、crond（定时任务）、rsyslog/syslog（日志服务）、postfix/sendmail（邮件服务）、named/bind9（DNS服务）、dhcpd（DHCP服务）、vsftpd（FTP服务）、smb/nmb（Samba文件共享）、nfs（NFS文件共享）。cd切换目录，ls列目录，pwd显示当前路径。",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 43,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ]
+    },
+    {
+      "id": "collection-c11-q044",
+      "retainedId": "collection-c11-q020",
+      "analysis": "Workstation服务（显示名称：Workstation，服务名：LanmanWorkstation，进程：svchost.exe -k NetworkService）是Windows核心网络服务，通过SMB（Server Message Block，服务器消息块，Windows文件共享协议，又称CIFS）协议创建并维护客户端计算机与远程服务器之间的网络连接，支持：1）访问网络共享文件和文件夹（\\服务器\\共享名，资源管理器中访问网络共享、映射网络驱动器）；2）访问共享打印机（网络打印机）；3）命名管道（Named Pipes）和RPC（远程过程调用）通信（许多Windows管理功能依赖，如远程管理、域认证）；4）网络浏览（网络邻居/网络发现）。该服务对应Windows的\"客户端\"功能（Microsoft网络客户端，在网络适配器属性中可见），停止Workstation服务后，计算机将无法访问网络共享（\\IP\\共享名报错\"找不到网络路径\"）、无法映射网络驱动器、无法使用网络打印机、部分域功能异常，但不影响其他计算机访问本机的共享（那是Server服务/LanmanServer的功能）。Workstation服务默认自动启动，依赖于Browser、SMB 1.x/CIFS支持（可选）、SMB Direct（RDMA，可选）等。提供Web服务的是IIS（World Wide Web Publishing Service/W3SVC）或第三方Web服务器（Apache/Nginx）。提供DNS解析服务的是DNS Client服务（Dnscache，客户端DNS缓存和解析）或DNS Server服务（服务器端DNS，仅服务器版）。管理用户账户和权限的是SAM（安全账户管理器）、Local Security Authority（LSA）、Netlogon等服务/组件，不是Workstation服务。相关服务：Server服务（LanmanServer，提供文件/打印机共享给其他计算机，即本机作为SMB服务器）、Computer Browser服务（Browser，维护网络计算机列表，网络邻居）、TCP/IP NetBIOS Helper服务（lmhosts，NetBIOS名称解析）、DNS Client服务（Dnscache，DNS解析和缓存）、DHCP Client服务（Dhcp，动态获取IP）。",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 44,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ]
+    },
+    {
+      "id": "collection-c11-q045",
+      "retainedId": "collection-c11-q021",
+      "analysis": "uname（unix name，打印系统信息）查看内核版本和系统信息。常用参数：-a（all，显示所有信息：内核名称、主机名、内核版本、内核编译时间、硬件架构、处理器类型、操作系统，如uname -a输出Linux hostname 5.15.0-78-generic #85-Ubuntu SMP ... x86_64 GNU/Linux）；-r（kernel release，内核版本号，如5.15.0-78-generic，最常用，uname -r）；-s（kernel name，内核名称，默认Linux）；-n（nodename，主机名）；-v（kernel version，内核编译版本/时间）；-m（machine，硬件架构，如x86_64、aarch64、armv7l）；-p（processor，处理器类型，通常unknown或x86_64）；-i（hardware platform，硬件平台）；-o（operating system，操作系统，通常GNU/Linux）。其他查看内核/系统版本的方法：1）cat /proc/version（内核版本和编译信息，含gcc版本）；2）cat /etc/os-release（发行版信息，如NAME=\"Ubuntu\"、VERSION=\"22.04.3 LTS\"、ID=ubuntu、PRETTY_NAME=\"Ubuntu 22.04.3 LTS\"，所有现代发行版都有这个文件，最常用的查看发行版方法）；3）lsb_release -a（LSB发行版信息，需安装lsb-release包，显示Distributor ID/Description/Release/Codename）；4）cat /etc/issue（登录提示信息，通常含发行版名称和版本，如Ubuntu 22.04.3 LTS \\n \\l）；5）hostnamectl（systemd系统，显示静态/瞬态/漂亮主机名、操作系统、内核、架构、虚拟化类型，如hostnamectl，最全面的系统信息查看命令）；6）dmesg | grep \"Linux version\"（内核启动日志中的版本信息）；7）cat /etc/redhat-release（RHEL/CentOS/Fedora发行版版本，如CentOS Linux release 7.9.2009）；8）cat /etc/debian_version（Debian/Ubuntu发行版版本号）。ls列目录，cd切换目录，pwd显示当前路径。内核版本号含义：如5.15.0-78-generic，5=主版本号，15=次版本号（偶数为稳定版，奇数为开发版，2.6版本后不再严格区分），0=修订号，78=补丁号/发行版补丁，generic=内核类型（generic通用、server服务器、lowlatency低延迟、rt实时、aws/azure/gcp云平台优化）。",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 45,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ]
+    },
+    {
+      "id": "collection-c11-q046",
+      "retainedId": "collection-c11-q022",
+      "analysis": "find（在目录树中查找文件/目录，最强大的文件查找命令）：find 路径 选项 操作。常用选项：-name 文件名（按名称查找，支持通配符*?[]，如find / -name \"*.conf\"、find /home -name \"*.log\"，注意通配符要加引号防止shell展开）；-iname 文件名（忽略大小写，如find / -iname \"ReadMe\"）；-type 类型（按类型查找：f普通文件、d目录、l符号链接、b块设备、c字符设备、s套接字、p管道，如find / -type d -name \"nginx\"、find /var/log -type f）；-size 大小（按大小查找，+n大于、-n小于、n等于，单位c字节、k KB、M MB、G GB，如find / -type f -size +1G（查找大于1GB的文件，排查大文件最常用）、find /tmp -type f -size -100c）；-mtime 时间（按修改时间查找，+n天前修改、-n最近n天修改、n第n天，如find /var/log -type f -mtime +30（查找30天前修改的日志，可配合-delete清理旧日志）、find / -type f -mtime -1（最近1天修改的文件））；-atime（按访问时间）、-ctime（按状态改变时间/权限修改时间）；-mmin n（按分钟，-mmin -30最近30分钟修改）；-user 用户名（按属主查找，如find / -user john）；-group 组名（按属组）；-perm 权限（按权限查找，如find / -perm -4000（查找SUID文件，安全排查）、find / -perm /u+s,g+s、find / -type f -perm 777（查找777权限文件））；-path 路径（按路径匹配，如find / -path \"*/nginx/*\"）；-maxdepth N（最大递归深度，如find / -maxdepth 2 -name \"*.conf\"，只查找2层，加快速度避免遍历太深）；-mindepth N（最小深度）；-newer 参考文件（查找比参考文件更新的文件，如find / -newer /tmp/reference）；-empty（查找空文件/空目录）；-links n（按硬链接数）；-inum n（按inode号，查找硬链接）。常用操作（默认-print打印路径）：-print（打印文件路径，默认行为）；-ls（显示详细信息，类似ls -l，如find / -size +1G -ls）；-delete（删除找到的文件/目录，危险！先确认再用，如find /tmp -type f -mtime +7 -delete）；-exec 命令 {} \\;（对找到的文件执行命令，{}代表找到的文件，\\;结束，如find / -name \"*.log\" -exec ls -lh {} \\;、find / -size +1G -exec du -h {} \\;，注意{}和\\;之间有空格，-exec会逐个执行命令效率低）；-exec 命令 {} +（批量执行，把多个文件作为参数一次传给命令，效率更高，如find / -name \"*.log\" -exec ls -lh {} +，类似xargs）；-ok 命令 {} \\;（交互式exec，执行前询问确认，更安全）；-print0（用null分隔文件名，配合xargs -0处理含空格/特殊字符的文件名，如find / -name \"*.txt\" -print0 | xargs -0 rm）。逻辑运算符：-a（and，与，默认）、-o（or，或）、!（not，非，取反），如find / \\( -name \"*.log\" -o -name \"*.txt\" \\) -mtime +7（查找.log或.txt且7天前的，括号需转义\\(\\)）。其他查找命令：1）locate（基于文件名数据库快速查找，如locate nginx.conf，速度极快但依赖数据库（/var/lib/mlocate/mlocate.db），需先updatedb更新数据库，新文件可能找不到，只按文件名查找不支持其他条件）；2）which（查找可执行命令的路径，如which nginx，在PATH环境变量中查找）；3）whereis（查找命令的二进制、源码、man手册页路径，如whereis nginx）；4）type（查看命令类型，如type cd，显示是内置命令/外部命令/别名/函数）；5）grep -r（递归搜索文件内容，如grep -r \"error\" /var/log，按内容查找不是按文件名）；6）fd（find的现代替代，更快速更友好，需安装，如fd -e log /var/log）。cd切换目录，pwd显示当前路径，ls列目录（ls只能列当前/指定目录内容，不能递归查找符合条件的文件，find可以）。",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 46,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ]
+    },
+    {
+      "id": "collection-c11-q047",
+      "retainedId": "collection-c11-q024",
+      "analysis": "tar（tape archive，磁带归档，最初用于磁带备份，现在是Linux最常用的打包压缩工具）：将多个文件/目录打包成一个归档文件（.tar，不压缩，只是打包），并可结合gzip/bzip2/xz/lzip/lz4/zstd等压缩工具进行压缩。常用参数（注意参数顺序，传统风格可连写如-czvf，也可用GNU风格--create --verbose --file）：-c（--create，创建新归档，打包时用）；-x（--extract，解压/提取归档，解压时用，与-c互斥）；-t（--list，列出归档内容，不解压，如tar -tzf file.tar.gz查看压缩包内容）；-v（--verbose，显示详细过程，显示正在处理的文件名，打包/解压时加-v可看到进度）；-f（--file，指定归档文件名，必须放在最后紧跟文件名，如tar -czvf output.tar.gz /path，-f是必须的，否则tar会操作磁带设备/dev/st0）；-z（--gzip，使用gzip压缩/解压，.tar.gz或.tgz，压缩速度快压缩率一般，最常用）；-j（--bzip2，使用bzip2压缩/解压，.tar.bz2或.tbz2，压缩率比gzip高但速度慢，内存占用大）；-J（--xz，使用xz压缩/解压，.tar.xz或.txz，压缩率最高但速度最慢，内存占用大，适合发布软件包）；--lzip（lzip压缩，.tar.lz）；--lz4（lz4压缩，.tar.lz4，压缩速度极快压缩率低）；--zstd（zstd压缩，.tar.zst，Facebook开发，压缩率和速度平衡很好，现代越来越流行）；-C 目录（--directory，解压到指定目录，如tar -xzf file.tar.gz -C /opt，先cd到/opt再解压，最常用的解压到指定目录方法）；-p（--preserve-permissions，保留文件权限，解压时默认保留，打包时默认保留）；--exclude=PATTERN（排除匹配的文件/目录，如tar -czvf backup.tar.gz --exclude=/home/user/.cache --exclude=\"*.log\" /home，注意--exclude要放在被打包路径之前或之后都可以，但路径匹配规则要注意）；-X 文件（--exclude-from，从文件读取排除列表）；-u（--update，仅更新比归档中新的文件）；-r（--append，追加文件到归档末尾，仅未压缩的.tar）；-A（--catenate，合并两个未压缩归档）；--remove-files（打包后删除源文件，危险）；-w（--interactive，交互式询问）；--totals（显示总字节数）。常用组合：打包压缩tar -czvf output.tar.gz /path/to/dir（gzip压缩，最常用）；tar -cjvf output.tar.bz2 /path（bzip2压缩）；tar -cJvf output.tar.xz /path（xz压缩）；tar -czvf output.tar.gz --exclude=node_modules --exclude=.git /project（排除目录后打包）；解压tar -xzvf file.tar.gz（gzip解压到当前目录，最常用）；tar -xjvf file.tar.bz2（bzip2解压）；tar -xJvf file.tar.xz（xz解压）；tar -xzvf file.tar.gz -C /opt（解压到/opt目录）；tar -xzvf file.tar.gz specific/file.txt（只解压归档中的特定文件）；查看内容tar -tzvf file.tar.gz（列出gzip压缩包内容）；tar -tzvf file.tar.gz | grep keyword（搜索压缩包中的文件）。注意：tar打包的文件路径默认保留相对路径或绝对路径（如果输入是绝对路径如/etc，解压时会解压到/etc覆盖原文件，危险！建议用相对路径或用-C指定目录打包，如tar -czvf etc.tar.gz -C / etc，这样打包的是相对路径etc/...，解压时不会覆盖系统/etc）。其他压缩/打包工具：1）gzip/gunzip/zcat（gzip压缩/解压/查看，gzip file压缩为file.gz并删除原文件，gunzip file.gz解压，zcat file.gz查看压缩文件内容，gzip只能压缩单个文件，不能打包目录，通常与tar结合）；2）bzip2/bunzip2/bzcat（bzip2压缩/解压/查看）；3）xz/unxz/xzcat（xz压缩/解压/查看）；4）zip/unzip（ZIP格式，跨平台，Windows常用，zip -r output.zip dir（递归打包压缩），unzip file.zip（解压），unzip -l file.zip（查看内容），unzip file.zip -d /opt（解压到指定目录），zip支持密码加密zip -e）；5）7z/7za（7-Zip格式，高压缩率，7z a output.7z dir（添加），7z x file.7z（解压，保留完整路径），7z l file.7z（查看），支持多种格式）；6）rar/unrar（RAR格式，Windows常用，unrar x file.rar解压）；7）cpio（另一种归档格式，initramfs使用）；8）dd（磁盘镜像，如dd if=/dev/sda of=backup.img bs=4M，制作整盘镜像）。cd切换目录，ls列目录，pwd显示当前路径。",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 47,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ]
+    }
+  ],
+  "needsReview": [
+    {
+      "reason": "题目要求选错误说法，但 D 项与解析均称 OSI 出现较晚；原答案 D 不成立，暂不发布",
+      "question": {
+        "id": "collection-c01-q050",
+        "question": "下列关于OSI模型和TCP/IP模型的说法，错误的是？",
+        "options": {
+          "A": "OSI模型是理论模型，TCP/IP模型是实际应用模型",
+          "B": "OSI模型有7层，TCP/IP模型有4层",
+          "C": "TCP/IP模型的网络接口层对应OSI的数据链路层和物理层",
+          "D": "OSI模型比TCP/IP模型出现得晚"
+        },
+        "answer": [
+          "D"
+        ],
+        "analysis": "TCP/IP模型（1970年代ARPANET发展而来）比OSI模型（1984年ISO正式发布）出现得早。OSI是理论参考模型，TCP/IP是实际广泛应用的模型。两者层次对应关系：TCP/IP应用层≈OSI应用+表示+会话层，传输层对应传输层，网络层对应网络层，网络接口层对应数据链路+物理层。",
+        "type": "single_choice",
+        "chapter": "网络体系结构",
+        "knowledgePoint": "TCP",
+        "difficulty": "medium",
+        "tags": [
+          "TCP",
+          "软考真题汇编"
+        ],
+        "provenance": [
+          {
+            "file": "第一章 网络体系结构（含答案解析）.docx",
+            "questionNumber": 50,
+            "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+          }
+        ],
+        "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+      }
+    }
+  ]
+}

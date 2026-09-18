@@ -1,0 +1,172 @@
+{
+  "importedAt": "2026-09-18T06:16:16.315Z",
+  "input": {
+    "fileName": "HCIA-Datacom_H12-811_题库.json",
+    "sha256": "6def685261cfe8e743b22bb08dee33617ad0ae85802a9e64e4a423b5254635c1",
+    "meta": {
+      "exam_code": "H12-811",
+      "exam_name": "HCIA-Datacom V2.0",
+      "total_questions": 180,
+      "passing_score": "600/1000",
+      "duration": "90分钟",
+      "question_count_per_exam": "约60道",
+      "generated_date": "2026-09-18",
+      "composition": {
+        "网络回忆题": 89,
+        "原创模拟题": 91,
+        "说明": "网络回忆题来自各公开备考站点（见每题的source_url，非华为官方原题，答案以解析为准）；原创模拟题按H12-811 V2.0考试大纲编写。"
+      },
+      "chapters": {
+        "数据通信网络基础": 20,
+        "以太网交换技术": 36,
+        "IP技术基础": 22,
+        "路由技术": 39,
+        "网络安全与服务": 20,
+        "WLAN技术基础": 12,
+        "网络运维与排障": 22,
+        "数据中心与园区网络": 9
+      },
+      "question_types": {
+        "单选": 85,
+        "多选": 30,
+        "判断": 65
+      },
+      "disclaimer": "本题库仅供学习参考，不构成官方考试内容承诺。华为会不定期更新题库，请以官方考试大纲和官方学习材料为准。"
+    }
+  },
+  "counts": {
+    "total": 180,
+    "userProvidedPublicRecalls": 89,
+    "userProvidedOriginalSimulations": 91,
+    "types": {
+      "single_choice": 84,
+      "multiple_choice": 29,
+      "true_false": 67
+    }
+  },
+  "sourceStatement": "按用户提供文件的说明导入：公开回忆题和原创模拟题均非华为官方真题；原始链接仅用于追溯来源，不代表本站认可其准确性。",
+  "sourceUrls": [
+    "https://blog.csdn.net/qq_45859163/article/details/161254384",
+    "https://blog.csdn.net/weixin_50281314/article/details/123973881",
+    "https://www.edudump.com/exams/Huawei/H12-811_V1.0/view/",
+    "https://www.actual4test.com/exam/H12-811-questions",
+    "http://www.runtimewh.com/xwzx/25420.html",
+    "https://www.59xuexi.com/?p=6188",
+    "https://www.pass4test.com/H12-811_V1.0-exam-questions.html",
+    "https://www.examstrack.com/huawei-exams/how-to-pass-h12-811_v1-0-test-3",
+    "https://certempire.com/practice-tests/free-h12-811_v1-0-practice-questions/",
+    "https://m.etest8.com/pxrz/hwzyrz/15953448.html"
+  ],
+  "chapterMapping": {
+    "数据通信网络基础": {
+      "IP 地址与配置": 5,
+      "以太网交换基础": 7,
+      "网络参考模型": 7,
+      "IP 路由基础": 1
+    },
+    "以太网交换技术": {
+      "VLAN 原理与配置": 11,
+      "以太网交换基础": 3,
+      "ACL 原理与配置": 1,
+      "生成树原理与配置": 16,
+      "以太网链路聚合": 3,
+      "园区网络典型组网方案": 1,
+      "网络设备管理": 1
+    },
+    "IP技术基础": {
+      "IPv6 地址与配置": 8,
+      "IP 地址与配置": 11,
+      "网络故障排除": 2,
+      "网络服务与应用": 1
+    },
+    "路由技术": {
+      "OSPF 原理与配置": 26,
+      "IP 路由基础": 10,
+      "华为网络设备操作系统": 1,
+      "网络编程自动化": 1,
+      "网络故障排除": 1
+    },
+    "网络安全与服务": {
+      "网络设备管理": 3,
+      "ACL 原理与配置": 8,
+      "数据中心网络基础": 1,
+      "NAT 原理与配置": 3,
+      "网络服务与应用": 3,
+      "AAA 原理与配置": 1,
+      "以太网交换基础": 1
+    },
+    "WLAN技术基础": {
+      "WLAN 组网架构": 3,
+      "WLAN 技术基础": 6,
+      "WLAN 工作原理与配置": 3
+    },
+    "网络运维与排障": {
+      "华为网络设备操作系统": 12,
+      "网络设备管理": 8,
+      "网络故障排除": 2
+    },
+    "数据中心与园区网络": {
+      "园区网络典型组网方案": 5,
+      "数据中心网络基础": 4
+    }
+  },
+  "structuralCorrections": [
+    {
+      "id": "hcia-h12-811-recall-019",
+      "originalQuestionId": 19,
+      "originalType": "单选",
+      "normalizedType": "true_false",
+      "reason": "原记录的答案为 True/False 或缺少选项，按判断题导入"
+    },
+    {
+      "id": "hcia-h12-811-recall-032",
+      "originalQuestionId": 32,
+      "originalType": "判断",
+      "normalizedType": "single_choice",
+      "reason": "原记录题型与选项及答案数量不一致，按实际结构导入"
+    },
+    {
+      "id": "hcia-h12-811-recall-049",
+      "originalQuestionId": 49,
+      "originalType": "单选",
+      "normalizedType": "true_false",
+      "reason": "原记录的答案为 True/False 或缺少选项，按判断题导入"
+    },
+    {
+      "id": "hcia-h12-811-recall-060",
+      "originalQuestionId": 60,
+      "originalType": "单选",
+      "normalizedType": "true_false",
+      "reason": "原记录的答案为 True/False 或缺少选项，按判断题导入"
+    },
+    {
+      "id": "hcia-h12-811-recall-066",
+      "originalQuestionId": 66,
+      "originalType": "多选",
+      "normalizedType": "single_choice",
+      "reason": "原记录题型与选项及答案数量不一致，按实际结构导入"
+    }
+  ],
+  "notedQuestions": [
+    {
+      "id": 24,
+      "note": "此题网传答案存在分歧：按IEEE 802.1D，Forwarding端口确实收发BPDU；按部分华为题库原意选False。建议结合教材理解。"
+    },
+    {
+      "id": 38,
+      "note": "网上多个版本题库答案不一致（有标C），按IEEE EUI-64规则正确答案为D（需翻转U/L位）。"
+    },
+    {
+      "id": 39,
+      "note": "此题网传答案有误（原站标True），按子网计算正确广播地址应为192.168.1.127。"
+    },
+    {
+      "id": 80,
+      "note": "注意：严格区分时，\"Ambiguous command\"才对应\"输入不明确\"，\"Unrecognized command\"通常指命令无法识别；本题按主流回忆题库取A。"
+    },
+    {
+      "id": 84,
+      "note": "此题网传答案严重不一致（Pass4Test标A、Actual4test标B），本JSON按华为VRP官方命令语义给出答案C（delete /unreserved 彻底删除）。"
+    }
+  ]
+}

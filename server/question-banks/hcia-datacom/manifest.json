@@ -1,0 +1,280 @@
+{
+  "schemaVersion": 1,
+  "certificate": {
+    "id": "hcia-datacom",
+    "name": "HCIA-Datacom V2.0",
+    "shortName": "HCIA-Datacom V2.0",
+    "description": "华为数通基础、数据中心网络、WLAN、自动化与故障排除",
+    "order": 2
+  },
+  "guidePath": "guide.json",
+  "syllabus": {
+    "version": "V2.0",
+    "examCode": "H12-811",
+    "examCodeNote": "考试代码沿用公开报考信息；正式报名时请在 Pearson VUE 再次核对",
+    "publicMockExamStartsAt": "2025-12-29",
+    "verifiedAt": "2026-09-17",
+    "scopeStatus": "officially_verified",
+    "scopeNote": "考点范围来自华为人才在线 V2.0 模拟考试介绍；模块练习权重由本站用于分层抽题，并非华为公布的考试占比。",
+    "weightType": "platform_practice_blueprint",
+    "sourceUrls": [
+      {
+        "name": "华为人才在线：HCIA-Datacom V2.0 模拟考试",
+        "url": "https://talent.shixizhi.huawei.com/iexam/1365189427395223554/examInfo?examId=2005554441662554114&sxz-lang=zh_CN",
+        "verified": true
+      },
+      {
+        "name": "Pearson VUE：华为认证考试",
+        "url": "https://www.pearsonvue.com/cn/zh/huawei.html",
+        "verified": true
+      }
+    ],
+    "modules": [
+      {
+        "id": "network-model",
+        "name": "网络参考模型",
+        "order": 1,
+        "weight": 5,
+        "targetQuestionCount": 10,
+        "knowledgePoints": [
+          "OSI 与 TCP/IP 模型",
+          "数据封装",
+          "TCP 与 UDP",
+          "常用协议"
+        ]
+      },
+      {
+        "id": "huawei-network-os",
+        "name": "华为网络设备操作系统",
+        "order": 2,
+        "weight": 5,
+        "targetQuestionCount": 10,
+        "knowledgePoints": [
+          "命令行视图",
+          "配置保存",
+          "SSH 与 STelnet",
+          "基础设备操作"
+        ]
+      },
+      {
+        "id": "ethernet-switching",
+        "name": "以太网交换基础",
+        "order": 3,
+        "weight": 5,
+        "targetQuestionCount": 10,
+        "knowledgePoints": ["以太网帧", "MAC 地址表", "交换机转发", "广播域"]
+      },
+      {
+        "id": "vlan",
+        "name": "VLAN 原理与配置",
+        "order": 4,
+        "weight": 6,
+        "targetQuestionCount": 10,
+        "knowledgePoints": [
+          "802.1Q",
+          "Access 接口",
+          "Trunk 接口",
+          "Hybrid 接口"
+        ]
+      },
+      {
+        "id": "spanning-tree",
+        "name": "生成树原理与配置",
+        "order": 5,
+        "weight": 5,
+        "targetQuestionCount": 10,
+        "knowledgePoints": ["根桥选举", "端口角色", "STP/RSTP", "二层环路"]
+      },
+      {
+        "id": "link-aggregation",
+        "name": "以太网链路聚合",
+        "order": 6,
+        "weight": 4,
+        "targetQuestionCount": 10,
+        "knowledgePoints": ["Eth-Trunk", "LACP", "负载分担", "成员接口"]
+      },
+      {
+        "id": "ip-addressing",
+        "name": "IP 地址与配置",
+        "order": 7,
+        "weight": 7,
+        "targetQuestionCount": 10,
+        "knowledgePoints": ["IPv4 地址", "子网划分", "ARP", "ICMP"]
+      },
+      {
+        "id": "ip-routing",
+        "name": "IP 路由基础",
+        "order": 8,
+        "weight": 5,
+        "targetQuestionCount": 10,
+        "knowledgePoints": ["路由表", "最长匹配", "静态路由", "默认路由"]
+      },
+      {
+        "id": "ospf",
+        "name": "OSPF 原理与配置",
+        "order": 9,
+        "weight": 7,
+        "targetQuestionCount": 10,
+        "knowledgePoints": ["Router ID", "邻居状态", "DR/BDR", "单区域 OSPF"]
+      },
+      {
+        "id": "ipv6",
+        "name": "IPv6 地址与配置",
+        "order": 10,
+        "weight": 5,
+        "targetQuestionCount": 10,
+        "knowledgePoints": [
+          "IPv6 地址类型",
+          "地址简写",
+          "邻居发现",
+          "IPv6 路由"
+        ]
+      },
+      {
+        "id": "acl",
+        "name": "ACL 原理与配置",
+        "order": 11,
+        "weight": 5,
+        "targetQuestionCount": 10,
+        "knowledgePoints": ["基本 ACL", "高级 ACL", "规则顺序", "通配符掩码"]
+      },
+      {
+        "id": "aaa",
+        "name": "AAA 原理与配置",
+        "order": 12,
+        "weight": 3,
+        "targetQuestionCount": 10,
+        "knowledgePoints": ["认证", "授权", "计费", "本地用户"]
+      },
+      {
+        "id": "network-services",
+        "name": "网络服务与应用",
+        "order": 13,
+        "weight": 4,
+        "targetQuestionCount": 10,
+        "knowledgePoints": ["DHCP", "DNS", "FTP/TFTP", "NTP"]
+      },
+      {
+        "id": "nat",
+        "name": "NAT 原理与配置",
+        "order": 14,
+        "weight": 5,
+        "targetQuestionCount": 10,
+        "knowledgePoints": ["静态 NAT", "动态 NAT", "Easy IP", "NAT Server"]
+      },
+      {
+        "id": "data-center",
+        "name": "数据中心网络基础",
+        "order": 15,
+        "weight": 3,
+        "targetQuestionCount": 10,
+        "knowledgePoints": [
+          "数据中心架构",
+          "Leaf-Spine",
+          "东西向流量",
+          "Underlay 与 Overlay"
+        ]
+      },
+      {
+        "id": "wlan-basics",
+        "name": "WLAN 技术基础",
+        "order": 16,
+        "weight": 3,
+        "targetQuestionCount": 10,
+        "knowledgePoints": ["802.11", "射频基础", "信道", "SSID/BSSID"]
+      },
+      {
+        "id": "wlan-architecture",
+        "name": "WLAN 组网架构",
+        "order": 17,
+        "weight": 3,
+        "targetQuestionCount": 10,
+        "knowledgePoints": ["AC 与 AP", "Fat/Fit AP", "CAPWAP", "转发模式"]
+      },
+      {
+        "id": "wlan-operation",
+        "name": "WLAN 工作原理与配置",
+        "order": 18,
+        "weight": 4,
+        "targetQuestionCount": 10,
+        "knowledgePoints": ["AP 上线", "STA 接入", "漫游", "WLAN 安全"]
+      },
+      {
+        "id": "device-management",
+        "name": "网络设备管理",
+        "order": 19,
+        "weight": 4,
+        "targetQuestionCount": 10,
+        "knowledgePoints": ["SNMP", "日志", "NTP", "远程管理"]
+      },
+      {
+        "id": "automation",
+        "name": "网络编程自动化",
+        "order": 20,
+        "weight": 4,
+        "targetQuestionCount": 10,
+        "knowledgePoints": [
+          "Python 基础",
+          "JSON/YAML",
+          "NETCONF/YANG",
+          "REST API"
+        ]
+      },
+      {
+        "id": "troubleshooting",
+        "name": "网络故障排除",
+        "order": 21,
+        "weight": 4,
+        "targetQuestionCount": 10,
+        "knowledgePoints": ["分层排障", "连通性检查", "配置核对", "故障定位"]
+      },
+      {
+        "id": "campus-design",
+        "name": "园区网络典型组网方案",
+        "order": 22,
+        "weight": 4,
+        "targetQuestionCount": 10,
+        "knowledgePoints": ["接入/汇聚/核心", "网关部署", "可靠性", "园区安全"]
+      }
+    ]
+  },
+  "banks": [
+    {
+      "id": "v2-syllabus-practice",
+      "name": "HCIA V2.0 大纲仿真题",
+      "description": "根据华为官方公开 V2.0 考点范围原创编写，不是官方真题或考试 Dump",
+      "source": "syllabus_practice",
+      "category": "syllabus_practice",
+      "verification": "original_from_official_scope",
+      "sourceUrl": "https://talent.shixizhi.huawei.com/iexam/1365189427395223554/examInfo?examId=2005554441662554114&sxz-lang=zh_CN",
+      "path": "questions/syllabus-practice",
+      "defaults": {
+        "sourceVerification": "原创仿真题：依据华为官方公开 V2.0 考点编写，不属于官方真题"
+      }
+    },
+    {
+      "id": "user-provided-recalls",
+      "name": "第三方公开回忆题（用户提供）",
+      "description": "89 道公开备考网站回忆题；非华为官方真题，部分题目保留题源争议备注。",
+      "source": "user_recall_collection",
+      "category": "unverified_collection",
+      "verification": "user_provided_public_recall",
+      "path": "questions/user-provided-recalls",
+      "defaults": {
+        "sourceVerification": "第三方公开回忆题（用户提供）：非华为官方真题，答案与版本仅供学习核对"
+      }
+    },
+    {
+      "id": "user-provided-simulations",
+      "name": "第三方原创模拟题（用户提供）",
+      "description": "91 道按 H12-811 范围编写的模拟题；非华为官方真题。",
+      "source": "user_simulation_collection",
+      "category": "syllabus_practice",
+      "verification": "user_provided_simulation",
+      "path": "questions/user-provided-simulations",
+      "defaults": {
+        "sourceVerification": "第三方原创模拟题（用户提供）：非华为官方真题"
+      }
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+[
+  {
+    "id": "hcia-v2-extra-12-radius",
+    "type": "single_choice",
+    "question": "RADIUS 在网络中常用于什么场景？",
+    "options": {
+      "A": "无线射频发射",
+      "B": "集中式用户认证、授权和计费",
+      "C": "二层环路控制",
+      "D": "IP 路由计算"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RADIUS 是常见 AAA 协议，可由网络接入设备向认证服务器请求用户认证。 本题考查“认证”，因此应选择“集中式用户认证、授权和计费”。",
+    "chapter": "AAA 原理与配置",
+    "knowledgePoint": "认证",
+    "difficulty": "medium",
+    "tags": [
+      "AAA 原理与配置",
+      "认证"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-extra-12-tacacs",
+    "type": "single_choice",
+    "question": "TACACS+ 在设备管理 AAA 场景中的一个常见优势是什么？",
+    "options": {
+      "A": "支持细粒度命令授权",
+      "B": "替代以太网帧",
+      "C": "分配 IPv6 前缀",
+      "D": "建立 STP 环路"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "TACACS+ 常用于网络设备管理，可对用户执行的命令实施授权和审计。 本题考查“授权”，因此应选择“支持细粒度命令授权”。",
+    "chapter": "AAA 原理与配置",
+    "knowledgePoint": "授权",
+    "difficulty": "hard",
+    "tags": [
+      "AAA 原理与配置",
+      "授权"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v2-extra-12-auth-order",
+    "type": "single_choice",
+    "question": "配置 AAA 认证方案时设置本地认证作为备用，主要是为了什么？",
+    "options": {
+      "A": "自动增加带宽",
+      "B": "让所有用户免认证",
+      "C": "替代日志服务器",
+      "D": "远程服务器不可达时仍保留管理入口"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "合理的备用认证可在远程 AAA 故障时保证受控的运维访问。 本题考查“认证”，因此应选择“远程服务器不可达时仍保留管理入口”。",
+    "chapter": "AAA 原理与配置",
+    "knowledgePoint": "认证",
+    "difficulty": "medium",
+    "tags": [
+      "AAA 原理与配置",
+      "认证"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v2-extra-12-least-privilege",
+    "type": "single_choice",
+    "question": "AAA 授权设计应遵循什么原则？",
+    "options": {
+      "A": "不记录操作",
+      "B": "共享管理员口令",
+      "C": "最小权限",
+      "D": "所有用户使用最高权限"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "按职责授予最少必要权限可降低误操作和账号滥用风险。 本题考查“授权”，因此应选择“最小权限”。",
+    "chapter": "AAA 原理与配置",
+    "knowledgePoint": "授权",
+    "difficulty": "easy",
+    "tags": [
+      "AAA 原理与配置",
+      "授权"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v2-extra-12-accounting-log",
+    "type": "single_choice",
+    "question": "AAA 计费记录最适合用于哪种工作？",
+    "options": {
+      "A": "配置无线信道",
+      "B": "追溯用户登录、登出和操作审计",
+      "C": "计算子网广播地址",
+      "D": "选举 OSPF DR"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Accounting 可保存会话和操作记录，支持安全审计和问题追溯。 本题考查“计费”，因此应选择“追溯用户登录、登出和操作审计”。",
+    "chapter": "AAA 原理与配置",
+    "knowledgePoint": "计费",
+    "difficulty": "easy",
+    "tags": [
+      "AAA 原理与配置",
+      "计费"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-extra-12-credential-policy",
+    "type": "single_choice",
+    "question": "设备本地用户口令策略中，哪项做法更合适？",
+    "options": {
+      "A": "使用唯一强口令并定期管理账号",
+      "B": "所有设备共用简单口令",
+      "C": "把口令写在接口描述中",
+      "D": "取消所有认证"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "强口令和账号生命周期管理是本地 AAA 的基本安全实践。 本题考查“本地用户”，因此应选择“使用唯一强口令并定期管理账号”。",
+    "chapter": "AAA 原理与配置",
+    "knowledgePoint": "本地用户",
+    "difficulty": "easy",
+    "tags": [
+      "AAA 原理与配置",
+      "本地用户"
+    ],
+    "stage": "基础理解"
+  }
+]

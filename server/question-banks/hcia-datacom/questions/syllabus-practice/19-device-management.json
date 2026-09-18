@@ -1,0 +1,94 @@
+[
+  {
+    "id": "hcia-v2-19-snmp",
+    "type": "single_choice",
+    "question": "SNMP 管理体系中，负责采集并提供本机管理信息的组件通常是什么？",
+    "options": {
+      "A": "Agent",
+      "B": "DNS Resolver",
+      "C": "DHCP Relay",
+      "D": "STP Root"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "SNMP Agent 运行在被管设备上，维护管理信息并响应管理站查询或发送通知。",
+    "chapter": "网络设备管理",
+    "knowledgePoint": "SNMP",
+    "difficulty": "easy",
+    "tags": [
+      "网络设备管理",
+      "SNMP"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-19-syslog",
+    "type": "single_choice",
+    "question": "把多台设备日志集中发送到日志服务器的主要好处是什么？",
+    "options": {
+      "A": "便于统一检索、关联和审计",
+      "B": "自动增加链路带宽",
+      "C": "替代所有设备配置",
+      "D": "取消时间同步需求"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "集中日志便于跨设备按统一时间线查询事件、关联告警并保留审计记录。",
+    "chapter": "网络设备管理",
+    "knowledgePoint": "日志",
+    "difficulty": "easy",
+    "tags": [
+      "网络设备管理",
+      "日志"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-19-time-sync",
+    "type": "single_choice",
+    "question": "网络排障时为什么应让设备通过 NTP 保持时间一致？",
+    "options": {
+      "A": "便于按时间关联不同设备的日志事件",
+      "B": "用于生成更多 MAC 地址",
+      "C": "为了改变 OSPF 开销",
+      "D": "为了扩大无线覆盖"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "一致的设备时间能让日志和告警顺序可信，避免因时钟偏差误判故障因果关系。",
+    "chapter": "网络设备管理",
+    "knowledgePoint": "NTP",
+    "difficulty": "medium",
+    "tags": [
+      "网络设备管理",
+      "NTP"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-19-secure-remote",
+    "type": "single_choice",
+    "question": "通过不可信网络远程管理设备时，优先选择哪种协议？",
+    "options": {
+      "A": "SSH/STelnet",
+      "B": "Telnet",
+      "C": "TFTP",
+      "D": "明文 HTTP"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "SSH/STelnet 能加密认证信息和管理会话，适合替代明文 Telnet。",
+    "chapter": "网络设备管理",
+    "knowledgePoint": "远程管理",
+    "difficulty": "easy",
+    "tags": [
+      "网络设备管理",
+      "远程管理"
+    ],
+    "stage": "变式计算"
+  }
+]

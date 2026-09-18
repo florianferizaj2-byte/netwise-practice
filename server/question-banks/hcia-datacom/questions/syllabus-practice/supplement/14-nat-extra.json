@@ -1,0 +1,140 @@
+[
+  {
+    "id": "hcia-v2-extra-14-pat",
+    "type": "single_choice",
+    "question": "多个内网主机共享一个公网 IPv4 地址访问互联网时，常见使用哪种机制？",
+    "options": {
+      "A": "静态一对一 NAT",
+      "B": "STP",
+      "C": "DHCP Snooping",
+      "D": "基于端口的地址转换 PAT"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "PAT 通过不同源端口区分会话，使多台私网主机可复用一个公网地址。 本题考查“Easy IP”，因此应选择“基于端口的地址转换 PAT”。",
+    "chapter": "NAT 原理与配置",
+    "knowledgePoint": "Easy IP",
+    "difficulty": "easy",
+    "tags": [
+      "NAT 原理与配置",
+      "Easy IP"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-extra-14-inside-outside",
+    "type": "single_choice",
+    "question": "部署源 NAT 时，通常应在什么方向识别内网发往公网的流量？",
+    "options": {
+      "A": "只处理无线管理帧",
+      "B": "只处理 DNS 响应",
+      "C": "从 inside 到 outside 的出站流量",
+      "D": "只处理二层 BPDU"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "源 NAT 常用于内部私网访问外部网络，在出口方向把私网源地址改写为公网地址。 本题考查“NAT 原理”，因此应选择“从 inside 到 outside 的出站流量”。",
+    "chapter": "NAT 原理与配置",
+    "knowledgePoint": "NAT 原理",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "NAT 原理"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v2-extra-14-nat-session",
+    "type": "single_choice",
+    "question": "NAT 会话表通常保存什么信息？",
+    "options": {
+      "A": "STP 根桥信息",
+      "B": "私网地址端口与公网地址端口的映射",
+      "C": "所有用户的明文口令",
+      "D": "MAC 地址表"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "会话映射让返回报文能够按公网地址端口找到对应的内部主机。 本题考查“动态 NAT”，因此应选择“私网地址端口与公网地址端口的映射”。",
+    "chapter": "NAT 原理与配置",
+    "knowledgePoint": "动态 NAT",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "动态 NAT"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v2-extra-14-server-port",
+    "type": "single_choice",
+    "question": "将公网 TCP 443 映射到内网 Web 服务器 TCP 443 属于哪类 NAT 应用？",
+    "options": {
+      "A": "NAT Server 发布服务",
+      "B": "Easy IP 出网",
+      "C": "动态路由",
+      "D": "链路聚合"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "NAT Server 让外部用户访问内网服务，需要把公网地址端口映射到内部服务器。 本题考查“NAT Server”，因此应选择“NAT Server 发布服务”。",
+    "chapter": "NAT 原理与配置",
+    "knowledgePoint": "NAT Server",
+    "difficulty": "easy",
+    "tags": [
+      "NAT 原理与配置",
+      "NAT Server"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v2-extra-14-nat-limit",
+    "type": "single_choice",
+    "question": "NAT 对端到端可达性可能带来的影响是什么？",
+    "options": {
+      "A": "所有流量自动加密",
+      "B": "自动消除路由需求",
+      "C": "不再需要端口号",
+      "D": "外部主动访问内网需额外映射或穿透机制"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "地址转换隐藏内网地址，外部发起连接通常需要显式 NAT Server 等规则。 本题考查“NAT 原理”，因此应选择“外部主动访问内网需额外映射或穿透机制”。",
+    "chapter": "NAT 原理与配置",
+    "knowledgePoint": "NAT 原理",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "NAT 原理"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-extra-14-easy-ip-interface",
+    "type": "single_choice",
+    "question": "Easy IP 适合哪种典型出口条件？",
+    "options": {
+      "A": "没有任何三层接口",
+      "B": "只使用 IPv6",
+      "C": "出口接口只有一个可用公网地址",
+      "D": "拥有大量固定公网地址池且要一对一映射"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Easy IP 复用出口接口地址，适合只有单一或动态公网地址的出网场景。 本题考查“Easy IP”，因此应选择“出口接口只有一个可用公网地址”。",
+    "chapter": "NAT 原理与配置",
+    "knowledgePoint": "Easy IP",
+    "difficulty": "easy",
+    "tags": [
+      "NAT 原理与配置",
+      "Easy IP"
+    ],
+    "stage": "基础理解"
+  }
+]

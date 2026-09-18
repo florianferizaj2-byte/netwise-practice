@@ -1,0 +1,94 @@
+[
+  {
+    "id": "hcia-v2-14-static-nat",
+    "type": "single_choice",
+    "question": "静态 NAT 的典型地址映射关系是什么？",
+    "options": {
+      "A": "固定的一对一映射",
+      "B": "随机多对多且不可预测",
+      "C": "只转换 MAC 地址",
+      "D": "只转换目的端口不转换地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "静态 NAT 预先建立一个私网地址与一个公网地址的固定对应关系。",
+    "chapter": "NAT 原理与配置",
+    "knowledgePoint": "静态 NAT",
+    "difficulty": "easy",
+    "tags": [
+      "NAT 原理与配置",
+      "静态 NAT"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-14-dynamic-nat",
+    "type": "single_choice",
+    "question": "动态 NAT 地址池的主要作用是什么？",
+    "options": {
+      "A": "为内部主机按需分配可用公网地址映射",
+      "B": "保存 DNS 域名",
+      "C": "选举无线控制器",
+      "D": "生成 OSPF LSA"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "动态 NAT 从配置的公网地址池中临时选择地址，与发起通信的内部地址建立映射。",
+    "chapter": "NAT 原理与配置",
+    "knowledgePoint": "动态 NAT",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "动态 NAT"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-14-easy-ip",
+    "type": "single_choice",
+    "question": "Easy IP 通常使用哪个地址作为内部流量转换后的公网源地址？",
+    "options": {
+      "A": "出接口当前的公网 IP 地址",
+      "B": "任意终端的私网地址",
+      "C": "DNS 服务器地址",
+      "D": "OSPF Router ID"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Easy IP 直接复用出接口地址并结合端口转换，适合出口公网地址动态变化的场景。",
+    "chapter": "NAT 原理与配置",
+    "knowledgePoint": "Easy IP",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "Easy IP"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-14-nat-server",
+    "type": "single_choice",
+    "question": "NAT Server 最适合解决哪个需求？",
+    "options": {
+      "A": "让公网用户访问内网发布的指定服务",
+      "B": "阻止所有内网访问公网",
+      "C": "同步设备时间",
+      "D": "创建二层环路"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "NAT Server 建立公网地址端口到内网服务器地址端口的映射，用于对外发布内部服务。",
+    "chapter": "NAT 原理与配置",
+    "knowledgePoint": "NAT Server",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "NAT Server"
+    ],
+    "stage": "变式计算"
+  }
+]

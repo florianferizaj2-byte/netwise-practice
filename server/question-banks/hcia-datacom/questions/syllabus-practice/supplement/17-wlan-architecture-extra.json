@@ -1,0 +1,140 @@
+[
+  {
+    "id": "hcia-v2-extra-17-fat-ap",
+    "type": "single_choice",
+    "question": "Fat AP 的典型特点是什么？",
+    "options": {
+      "A": "由 AP 本身承担较多配置和控制功能",
+      "B": "必须完全依赖 AC 下发所有配置",
+      "C": "不能提供无线接入",
+      "D": "只传递二层 BPDU"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Fat AP 具备较独立的控制与配置能力，适合小型或分散场景。 本题考查“Fat/Fit AP”，因此应选择“由 AP 本身承担较多配置和控制功能”。",
+    "chapter": "WLAN 组网架构",
+    "knowledgePoint": "Fat/Fit AP",
+    "difficulty": "easy",
+    "tags": [
+      "WLAN 组网架构",
+      "Fat/Fit AP"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-extra-17-ac-discovery",
+    "type": "single_choice",
+    "question": "Fit AP 上线时首先需要完成哪项关键过程？",
+    "options": {
+      "A": "成为 STP 根桥",
+      "B": "分配公网地址",
+      "C": "建立 BGP 联盟",
+      "D": "发现并连接 AC"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "集中式 WLAN 中 AP 需发现 AC、建立 CAPWAP 隧道并完成注册。 本题考查“AC 与 AP”，因此应选择“发现并连接 AC”。",
+    "chapter": "WLAN 组网架构",
+    "knowledgePoint": "AC 与 AP",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 组网架构",
+      "AC 与 AP"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v2-extra-17-tunnel-forward",
+    "type": "single_choice",
+    "question": "隧道转发模式的一个典型优势是什么？",
+    "options": {
+      "A": "终端无需关联",
+      "B": "无需任何 VLAN",
+      "C": "用户数据可集中经过 AC 统一策略控制",
+      "D": "AP 不再需要有线网络"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "数据隧道回 AC 便于集中控制和审计，但会增加 AC 侧转发负担。 本题考查“转发模式”，因此应选择“用户数据可集中经过 AC 统一策略控制”。",
+    "chapter": "WLAN 组网架构",
+    "knowledgePoint": "转发模式",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 组网架构",
+      "转发模式"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v2-extra-17-direct-forward",
+    "type": "single_choice",
+    "question": "直接转发模式的典型特点是什么？",
+    "options": {
+      "A": "只能使用 2.4 GHz",
+      "B": "用户数据由 AP 就近进入有线网络",
+      "C": "所有数据必须绕行 AC",
+      "D": "无法配置 VLAN"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "直接转发可减少 AC 的数据转发压力，需在接入网络侧做好 VLAN 和策略设计。 本题考查“转发模式”，因此应选择“用户数据由 AP 就近进入有线网络”。",
+    "chapter": "WLAN 组网架构",
+    "knowledgePoint": "转发模式",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 组网架构",
+      "转发模式"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v2-extra-17-ac-redundancy",
+    "type": "single_choice",
+    "question": "大型 WLAN 对 AC 部署冗余的主要原因是什么？",
+    "options": {
+      "A": "避免单个 AC 故障影响大量 AP 与用户",
+      "B": "提高 MAC 地址长度",
+      "C": "让 SSID 自动加密",
+      "D": "取消 CAPWAP"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "AC 是集中控制点，冗余可降低控制器单点故障对无线业务的影响。 本题考查“AC 与 AP”，因此应选择“避免单个 AC 故障影响大量 AP 与用户”。",
+    "chapter": "WLAN 组网架构",
+    "knowledgePoint": "AC 与 AP",
+    "difficulty": "easy",
+    "tags": [
+      "WLAN 组网架构",
+      "AC 与 AP"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-extra-17-ap-management-vlan",
+    "type": "single_choice",
+    "question": "AP 管理网络需要首先保障什么？",
+    "options": {
+      "A": "所有终端同一 VLAN",
+      "B": "不配置默认网关",
+      "C": "只允许广播",
+      "D": "AP 到 AC 的 IP 可达性"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "CAPWAP 基于 IP 传输，AP 管理地址到 AC 地址的三层可达是上线基础。 本题考查“CAPWAP”，因此应选择“AP 到 AC 的 IP 可达性”。",
+    "chapter": "WLAN 组网架构",
+    "knowledgePoint": "CAPWAP",
+    "difficulty": "easy",
+    "tags": [
+      "WLAN 组网架构",
+      "CAPWAP"
+    ],
+    "stage": "基础理解"
+  }
+]

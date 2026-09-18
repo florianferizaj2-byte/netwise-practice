@@ -1,0 +1,94 @@
+[
+  {
+    "id": "hcia-v2-07-ipv4-24-hosts",
+    "type": "single_choice",
+    "question": "一个普通 IPv4 /24 子网在排除网络地址和广播地址后有多少个可用主机地址？",
+    "options": {
+      "A": "126",
+      "B": "254",
+      "C": "255",
+      "D": "256"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "/24 子网共有 256 个地址，传统主机子网扣除网络地址和广播地址后剩 254 个。",
+    "chapter": "IP 地址与配置",
+    "knowledgePoint": "子网划分",
+    "difficulty": "easy",
+    "tags": [
+      "IP 地址与配置",
+      "子网划分"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-07-arp-purpose",
+    "type": "single_choice",
+    "question": "IPv4 局域网中，ARP 用于完成哪种解析？",
+    "options": {
+      "A": "域名到 IPv4 地址",
+      "B": "IPv4 地址到 MAC 地址",
+      "C": "MAC 地址到端口号",
+      "D": "端口号到进程名"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "ARP 根据同一链路上的 IPv4 地址获取对应 MAC 地址，跨网段时通常解析网关的 MAC 地址。",
+    "chapter": "IP 地址与配置",
+    "knowledgePoint": "ARP",
+    "difficulty": "easy",
+    "tags": [
+      "IP 地址与配置",
+      "ARP"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-07-ping-icmp",
+    "type": "single_choice",
+    "question": "常用 ping 命令主要利用哪种协议测试 IP 可达性？",
+    "options": {
+      "A": "ICMP",
+      "B": "FTP",
+      "C": "SNMP",
+      "D": "ARP"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "ping 通常发送 ICMP Echo Request 并等待 Echo Reply，以测试可达性和往返时延。",
+    "chapter": "IP 地址与配置",
+    "knowledgePoint": "ICMP",
+    "difficulty": "easy",
+    "tags": [
+      "IP 地址与配置",
+      "ICMP"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-07-same-subnet",
+    "type": "single_choice",
+    "question": "主机判断目的 IPv4 地址是否与自己处于同一子网时，主要使用什么参数？",
+    "options": {
+      "A": "子网掩码",
+      "B": "DNS 服务器地址",
+      "C": "TCP 窗口",
+      "D": "VLAN 名称"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "主机分别用子网掩码与本机地址、目的地址按位与，比较所得网络地址是否相同。",
+    "chapter": "IP 地址与配置",
+    "knowledgePoint": "IPv4 地址",
+    "difficulty": "medium",
+    "tags": [
+      "IP 地址与配置",
+      "IPv4 地址"
+    ],
+    "stage": "变式计算"
+  }
+]

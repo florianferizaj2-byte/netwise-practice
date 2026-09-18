@@ -1,0 +1,96 @@
+[
+  {
+    "id": "hcia-v2-21-interface-down",
+    "type": "single_choice",
+    "question": "发现设备接口物理状态为 Down 时，最先应检查什么？",
+    "options": {
+      "A": "线缆、光模块、对端端口与接口启用状态",
+      "B": "DNS 域名记录",
+      "C": "应用服务器数据库",
+      "D": "OSPF 外部路由"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "物理状态 Down 首先指向链路层以下问题，应先检查介质、模块、接口启用状态和对端。",
+    "chapter": "网络故障排除",
+    "knowledgePoint": "分层排障",
+    "difficulty": "easy",
+    "tags": [
+      "网络故障排除",
+      "分层排障"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-21-gateway-ping",
+    "type": "single_choice",
+    "question": "终端无法访问远端网络时，优先 ping 本网默认网关可以验证什么？",
+    "options": {
+      "A": "终端到本地三层出口的基本连通性",
+      "B": "远端 DNS 一定正常",
+      "C": "所有公网路由一定正常",
+      "D": "应用账号权限一定正常"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "默认网关测试能先确认终端 IP、掩码、VLAN 和本地链路到三层出口是否基本正常。",
+    "chapter": "网络故障排除",
+    "knowledgePoint": "连通性检查",
+    "difficulty": "easy",
+    "tags": [
+      "网络故障排除",
+      "连通性检查"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-21-traceroute",
+    "type": "single_choice",
+    "question": "traceroute 或 tracert 工具最适合帮助观察什么？",
+    "options": {
+      "A": "报文经过的逐跳路径及可能中断位置",
+      "B": "交换机电源温度",
+      "C": "用户口令强度",
+      "D": "VLAN 名称长度"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "逐跳探测能显示路径中的路由节点和响应时延，帮助缩小三层路径故障范围。",
+    "chapter": "网络故障排除",
+    "knowledgePoint": "故障定位",
+    "difficulty": "medium",
+    "tags": [
+      "网络故障排除",
+      "故障定位"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-21-method",
+    "type": "multiple_choice",
+    "question": "规范的网络故障处理流程通常包括哪些做法？",
+    "options": {
+      "A": "收集现象并明确影响范围",
+      "B": "建立假设后逐项验证",
+      "C": "记录变更与验证结果",
+      "D": "同时随机修改大量配置"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "有效排障需要先界定问题、基于证据验证假设并记录结果；无计划地大量修改会扩大风险。",
+    "chapter": "网络故障排除",
+    "knowledgePoint": "配置核对",
+    "difficulty": "medium",
+    "tags": [
+      "网络故障排除",
+      "配置核对"
+    ],
+    "stage": "变式计算"
+  }
+]

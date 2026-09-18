@@ -1,0 +1,96 @@
+[
+  {
+    "id": "hcia-v2-06-eth-trunk-purpose",
+    "type": "multiple_choice",
+    "question": "部署 Eth-Trunk 链路聚合通常可以获得哪些收益？",
+    "options": {
+      "A": "提高逻辑链路带宽",
+      "B": "提供成员链路冗余",
+      "C": "让同一报文复制到所有成员口",
+      "D": "简化上层对多条物理链路的使用"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "Eth-Trunk 把多条物理链路组合成一条逻辑链路，可提升带宽并在成员故障时保持可用性。",
+    "chapter": "以太网链路聚合",
+    "knowledgePoint": "Eth-Trunk",
+    "difficulty": "easy",
+    "tags": [
+      "以太网链路聚合",
+      "Eth-Trunk"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-06-lacp",
+    "type": "single_choice",
+    "question": "LACP 在链路聚合中的主要作用是什么？",
+    "options": {
+      "A": "动态协商并维护聚合成员",
+      "B": "分配终端 IP 地址",
+      "C": "选举 OSPF DR",
+      "D": "加密以太网帧"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "LACP 用于设备间协商聚合关系，选择活动成员并检测聚合链路状态。",
+    "chapter": "以太网链路聚合",
+    "knowledgePoint": "LACP",
+    "difficulty": "easy",
+    "tags": [
+      "以太网链路聚合",
+      "LACP"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-06-member-consistency",
+    "type": "single_choice",
+    "question": "把多个接口加入同一链路聚合组时，为什么要保持速率和双工等参数一致？",
+    "options": {
+      "A": "避免成员行为不一致影响转发",
+      "B": "为了生成更多广播",
+      "C": "为了关闭负载分担",
+      "D": "为了绕过 VLAN 检查"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "成员接口关键属性一致可以避免带宽计算、报文转发和链路状态出现异常。",
+    "chapter": "以太网链路聚合",
+    "knowledgePoint": "成员接口",
+    "difficulty": "medium",
+    "tags": [
+      "以太网链路聚合",
+      "成员接口"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-06-hashing",
+    "type": "single_choice",
+    "question": "链路聚合常按报文流特征进行哈希选择成员链路，主要是为了什么？",
+    "options": {
+      "A": "尽量负载分担并避免同一流乱序",
+      "B": "保证每个帧复制四份",
+      "C": "替代生成树根桥",
+      "D": "隐藏所有源地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "按流哈希能把不同流分散到成员链路，同时使同一流通常走固定链路以减少乱序。",
+    "chapter": "以太网链路聚合",
+    "knowledgePoint": "负载分担",
+    "difficulty": "medium",
+    "tags": [
+      "以太网链路聚合",
+      "负载分担"
+    ],
+    "stage": "变式计算"
+  }
+]

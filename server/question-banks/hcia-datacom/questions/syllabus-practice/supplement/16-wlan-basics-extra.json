@@ -1,0 +1,140 @@
+[
+  {
+    "id": "hcia-v2-extra-16-rssi",
+    "type": "single_choice",
+    "question": "WLAN 中 RSSI 常用于反映什么？",
+    "options": {
+      "A": "OSPF 邻居数",
+      "B": "接收信号强度",
+      "C": "用户 IP 地址",
+      "D": "交换机 MAC 数量"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RSSI 表示接收到的信号功率强弱，是评估无线覆盖的重要指标之一。 本题考查“射频基础”，因此应选择“接收信号强度”。",
+    "chapter": "WLAN 技术基础",
+    "knowledgePoint": "射频基础",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 技术基础",
+      "射频基础"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-extra-16-sni",
+    "type": "single_choice",
+    "question": "无线信号质量评估中，SNR 表示什么关系？",
+    "options": {
+      "A": "信号功率与噪声功率之比",
+      "B": "源地址与目的地址之比",
+      "C": "速率与端口数之比",
+      "D": "VLAN 与子网之比"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "信噪比越高通常说明信号相对噪声更清晰，有利于更稳定的无线通信。 本题考查“射频基础”，因此应选择“信号功率与噪声功率之比”。",
+    "chapter": "WLAN 技术基础",
+    "knowledgePoint": "射频基础",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 技术基础",
+      "射频基础"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v2-extra-16-channel-width",
+    "type": "single_choice",
+    "question": "在相同频段内把 WLAN 信道宽度从 20 MHz 加宽到 80 MHz，主要权衡是什么？",
+    "options": {
+      "A": "覆盖距离必定翻倍",
+      "B": "无需考虑邻居网络",
+      "C": "会取消所有认证",
+      "D": "更高理论速率但占用更多频谱并更易受干扰"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "更宽信道可提升吞吐潜力，但可用不重叠信道变少，规划要求更高。 本题考查“信道”，因此应选择“更高理论速率但占用更多频谱并更易受干扰”。",
+    "chapter": "WLAN 技术基础",
+    "knowledgePoint": "信道",
+    "difficulty": "hard",
+    "tags": [
+      "WLAN 技术基础",
+      "信道"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v2-extra-16-5g-benefit",
+    "type": "single_choice",
+    "question": "相较 2.4 GHz，5 GHz WLAN 常见的一个优势是什么？",
+    "options": {
+      "A": "不需要 AP",
+      "B": "没有任何衰减",
+      "C": "可用非重叠信道通常更多",
+      "D": "传播距离一定更远"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "5 GHz 频段通常提供更多可选信道，较适合高密度部署，但穿墙能力需结合现场评估。 本题考查“802.11”，因此应选择“可用非重叠信道通常更多”。",
+    "chapter": "WLAN 技术基础",
+    "knowledgePoint": "802.11",
+    "difficulty": "easy",
+    "tags": [
+      "WLAN 技术基础",
+      "802.11"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v2-extra-16-hidden-node",
+    "type": "single_choice",
+    "question": "无线网络中的隐藏节点问题可能导致什么？",
+    "options": {
+      "A": "交换机 MAC 表清空",
+      "B": "两个终端互相听不到却同时向 AP 发送而发生冲突",
+      "C": "所有终端自动漫游",
+      "D": "DHCP 地址池耗尽"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "隐藏节点因彼此不可感知，可能同时占用无线介质；RTS/CTS 等机制可在部分场景缓解。 本题考查“802.11”，因此应选择“两个终端互相听不到却同时向 AP 发送而发生冲突”。",
+    "chapter": "WLAN 技术基础",
+    "knowledgePoint": "802.11",
+    "difficulty": "hard",
+    "tags": [
+      "WLAN 技术基础",
+      "802.11"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-extra-16-bssid-ssid",
+    "type": "single_choice",
+    "question": "多个 AP 广播同一个 SSID 的常见目的是什么？",
+    "options": {
+      "A": "形成统一的无线业务网络便于终端移动接入",
+      "B": "让所有 AP 使用相同 MAC 地址",
+      "C": "关闭所有漫游",
+      "D": "让终端不需要认证"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "统一 SSID 可为用户提供一致网络名称，终端可在不同 AP 覆盖间进行漫游。 本题考查“SSID/BSSID”，因此应选择“形成统一的无线业务网络便于终端移动接入”。",
+    "chapter": "WLAN 技术基础",
+    "knowledgePoint": "SSID/BSSID",
+    "difficulty": "easy",
+    "tags": [
+      "WLAN 技术基础",
+      "SSID/BSSID"
+    ],
+    "stage": "基础理解"
+  }
+]

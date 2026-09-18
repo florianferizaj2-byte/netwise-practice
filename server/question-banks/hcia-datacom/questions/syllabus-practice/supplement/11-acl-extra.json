@@ -1,0 +1,140 @@
+[
+  {
+    "id": "hcia-v2-extra-11-implicit-deny",
+    "type": "single_choice",
+    "question": "ACL 中报文未匹配任何显式规则时，通常应注意什么默认行为？",
+    "options": {
+      "A": "自动转发给 DNS",
+      "B": "自动创建新规则",
+      "C": "末尾可能存在隐式拒绝",
+      "D": "一定自动允许"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "大多数 ACL 末尾存在隐式 deny，因此需要显式放行合法流量。 本题考查“规则顺序”，因此应选择“末尾可能存在隐式拒绝”。",
+    "chapter": "ACL 原理与配置",
+    "knowledgePoint": "规则顺序",
+    "difficulty": "easy",
+    "tags": [
+      "ACL 原理与配置",
+      "规则顺序"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-extra-11-acl-direction",
+    "type": "single_choice",
+    "question": "在接口入方向应用 ACL 时，通常在什么时机检查报文？",
+    "options": {
+      "A": "用户登录时",
+      "B": "报文进入接口后、路由查找前",
+      "C": "报文离开接口后",
+      "D": "设备重启时"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "入方向 ACL 尽早过滤流量，可在路由查找前丢弃不允许的报文。 本题考查“高级 ACL”，因此应选择“报文进入接口后、路由查找前”。",
+    "chapter": "ACL 原理与配置",
+    "knowledgePoint": "高级 ACL",
+    "difficulty": "medium",
+    "tags": [
+      "ACL 原理与配置",
+      "高级 ACL"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v2-extra-11-wildcard-255",
+    "type": "single_choice",
+    "question": "ACL 通配符掩码某位为 1 表示什么？",
+    "options": {
+      "A": "该位不参与精确匹配",
+      "B": "该位必须为 1",
+      "C": "该位必须为 0",
+      "D": "该规则失效"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "通配符中 1 表示忽略该位，0 表示该位需与地址精确匹配。 本题考查“通配符掩码”，因此应选择“该位不参与精确匹配”。",
+    "chapter": "ACL 原理与配置",
+    "knowledgePoint": "通配符掩码",
+    "difficulty": "easy",
+    "tags": [
+      "ACL 原理与配置",
+      "通配符掩码"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v2-extra-11-source-first",
+    "type": "single_choice",
+    "question": "为何 ACL 中应把更具体的规则放在较宽泛的规则之前？",
+    "options": {
+      "A": "后面的规则优先级更高",
+      "B": "设备随机选规则",
+      "C": "这样可以增加广播",
+      "D": "ACL 通常首条命中即停止匹配"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "首条命中原则决定了宽泛规则放在前面会遮蔽后面的具体规则。 本题考查“规则顺序”，因此应选择“ACL 通常首条命中即停止匹配”。",
+    "chapter": "ACL 原理与配置",
+    "knowledgePoint": "规则顺序",
+    "difficulty": "easy",
+    "tags": [
+      "ACL 原理与配置",
+      "规则顺序"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v2-extra-11-protocol-port",
+    "type": "single_choice",
+    "question": "高级 ACL 过滤 HTTP 流量时，通常可结合哪些条件？",
+    "options": {
+      "A": "OSPF Area ID",
+      "B": "DHCP 租约时间",
+      "C": "TCP 协议与目的端口 80",
+      "D": "源 MAC 与桥优先级"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "HTTP 常用 TCP 80，高级 ACL 可匹配 IP 协议类型和四层端口。 本题考查“高级 ACL”，因此应选择“TCP 协议与目的端口 80”。",
+    "chapter": "ACL 原理与配置",
+    "knowledgePoint": "高级 ACL",
+    "difficulty": "medium",
+    "tags": [
+      "ACL 原理与配置",
+      "高级 ACL"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-extra-11-acl-test",
+    "type": "single_choice",
+    "question": "修改生产 ACL 前更稳妥的做法是什么？",
+    "options": {
+      "A": "只修改备注不测试",
+      "B": "先明确流量方向并在维护窗口验证命中结果",
+      "C": "随机删除所有规则",
+      "D": "先关闭核心交换机"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "ACL 可能影响关键业务，需规划方向、顺序和验证方法后再变更。 本题考查“ACL 原理”，因此应选择“先明确流量方向并在维护窗口验证命中结果”。",
+    "chapter": "ACL 原理与配置",
+    "knowledgePoint": "ACL 原理",
+    "difficulty": "hard",
+    "tags": [
+      "ACL 原理与配置",
+      "ACL 原理"
+    ],
+    "stage": "基础理解"
+  }
+]

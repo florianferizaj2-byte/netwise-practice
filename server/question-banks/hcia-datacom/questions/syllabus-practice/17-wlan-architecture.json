@@ -1,0 +1,94 @@
+[
+  {
+    "id": "hcia-v2-17-ac-role",
+    "type": "single_choice",
+    "question": "集中式 WLAN 架构中，AC 的主要职责是什么？",
+    "options": {
+      "A": "集中管理和控制 AP",
+      "B": "为每台终端提供有线网卡",
+      "C": "替代所有核心交换机",
+      "D": "只负责 DNS 解析"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "无线控制器 AC 集中完成 AP 管理、业务配置下发和部分用户控制功能。",
+    "chapter": "WLAN 组网架构",
+    "knowledgePoint": "AC 与 AP",
+    "difficulty": "easy",
+    "tags": [
+      "WLAN 组网架构",
+      "AC 与 AP"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-17-fit-ap",
+    "type": "single_choice",
+    "question": "Fit AP 在典型集中式 WLAN 中通常具有什么特点？",
+    "options": {
+      "A": "由 AC 集中控制和下发配置",
+      "B": "完全独立且无需控制器",
+      "C": "只能作为有线路由器",
+      "D": "不支持射频功能"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Fit AP 把主要控制和管理能力交由 AC 统一处理，便于大规模部署和策略一致。",
+    "chapter": "WLAN 组网架构",
+    "knowledgePoint": "Fat/Fit AP",
+    "difficulty": "easy",
+    "tags": [
+      "WLAN 组网架构",
+      "Fat/Fit AP"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-17-capwap",
+    "type": "single_choice",
+    "question": "CAPWAP 在集中式 WLAN 中主要用于什么通信？",
+    "options": {
+      "A": "AC 与 AP 之间的控制及数据隧道",
+      "B": "终端与 DNS 之间的查询",
+      "C": "交换机间的 STP 选举",
+      "D": "路由器间的 OSPF 同步"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "CAPWAP 用于 AC 与 AP 之间建立控制通道，并可按组网方式承载用户数据。",
+    "chapter": "WLAN 组网架构",
+    "knowledgePoint": "CAPWAP",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 组网架构",
+      "CAPWAP"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-17-forward-mode",
+    "type": "single_choice",
+    "question": "WLAN 直接转发与隧道转发的主要区别是什么？",
+    "options": {
+      "A": "用户数据是否经 CAPWAP 集中送往 AC",
+      "B": "AP 是否发射无线信号",
+      "C": "终端是否需要 IP 地址",
+      "D": "SSID 是否可以广播"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "隧道转发把用户数据经 CAPWAP 送到 AC，直接转发则由 AP 就近转入有线网络。",
+    "chapter": "WLAN 组网架构",
+    "knowledgePoint": "转发模式",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 组网架构",
+      "转发模式"
+    ],
+    "stage": "变式计算"
+  }
+]

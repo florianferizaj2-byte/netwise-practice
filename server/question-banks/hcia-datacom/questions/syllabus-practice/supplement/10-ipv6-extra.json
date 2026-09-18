@@ -1,0 +1,140 @@
+[
+  {
+    "id": "hcia-v2-extra-10-global-unicast",
+    "type": "single_choice",
+    "question": "IPv6 全球单播地址常见的前缀范围是什么？",
+    "options": {
+      "A": "FE80::/10",
+      "B": "FF00::/8",
+      "C": "::1/128",
+      "D": "2000::/3"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "2000::/3 用于可在互联网路由的 IPv6 全球单播地址。 本题考查“IPv6 地址类型”，因此应选择“2000::/3”。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgePoint": "IPv6 地址类型",
+    "difficulty": "easy",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 地址类型"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-extra-10-loopback",
+    "type": "single_choice",
+    "question": "IPv6 回环地址是什么？",
+    "options": {
+      "A": "FE80::1/64",
+      "B": "FF02::1",
+      "C": "::1/128",
+      "D": "::/0"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "::1/128 仅指向本机，可用于验证本机 IPv6 协议栈。 本题考查“IPv6 地址类型”，因此应选择“::1/128”。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgePoint": "IPv6 地址类型",
+    "difficulty": "easy",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 地址类型"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v2-extra-10-ndp",
+    "type": "single_choice",
+    "question": "IPv6 使用哪项机制完成邻居地址解析等功能？",
+    "options": {
+      "A": "STP",
+      "B": "NDP",
+      "C": "ARP",
+      "D": "RARP"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IPv6 不使用 ARP，而通过 ICMPv6 的邻居发现协议完成地址解析和路由器发现。 本题考查“邻居发现”，因此应选择“NDP”。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgePoint": "邻居发现",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6 地址与配置",
+      "邻居发现"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v2-extra-10-slaac",
+    "type": "single_choice",
+    "question": "SLAAC 的主要价值是什么？",
+    "options": {
+      "A": "主机可依据路由器通告自动生成 IPv6 地址",
+      "B": "自动创建 VLAN",
+      "C": "替代所有路由协议",
+      "D": "加密应用数据"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "无状态地址自动配置通过路由器通告提供前缀，使主机可自动形成地址。 本题考查“IPv6 地址与配置”，因此应选择“主机可依据路由器通告自动生成 IPv6 地址”。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgePoint": "IPv6 地址与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 地址与配置"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v2-extra-10-prefix-64",
+    "type": "single_choice",
+    "question": "普通 IPv6 LAN 前缀通常建议使用多长的前缀长度？",
+    "options": {
+      "A": "/24",
+      "B": "/30",
+      "C": "/128",
+      "D": "/64"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "IPv6 终端网段通常使用 /64，便于地址自动配置和接口标识生成。 本题考查“IPv6 地址与配置”，因此应选择“/64”。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgePoint": "IPv6 地址与配置",
+    "difficulty": "easy",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 地址与配置"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-extra-10-multicast-allnodes",
+    "type": "single_choice",
+    "question": "IPv6 链路本地所有节点组播地址是什么？",
+    "options": {
+      "A": "::1",
+      "B": "FE80::1",
+      "C": "FF02::1",
+      "D": "FF02::2"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "FF02::1 表示本地链路所有 IPv6 节点，路由器不会转发该链路范围组播。 本题考查“邻居发现”，因此应选择“FF02::1”。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgePoint": "邻居发现",
+    "difficulty": "hard",
+    "tags": [
+      "IPv6 地址与配置",
+      "邻居发现"
+    ],
+    "stage": "基础理解"
+  }
+]

@@ -1,0 +1,140 @@
+[
+  {
+    "id": "hcia-v2-extra-06-manual-mode",
+    "type": "single_choice",
+    "question": "手工负载分担模式的 Eth-Trunk 与 LACP 模式相比缺少什么？",
+    "options": {
+      "A": "多条物理链路",
+      "B": "逻辑接口",
+      "C": "VLAN 转发能力",
+      "D": "协议自动协商和成员链路选择"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "手工模式依赖两端人工保持一致，不通过 LACP 协议协商成员状态。 本题考查“Eth-Trunk”，因此应选择“协议自动协商和成员链路选择”。",
+    "chapter": "以太网链路聚合",
+    "knowledgePoint": "Eth-Trunk",
+    "difficulty": "medium",
+    "tags": [
+      "以太网链路聚合",
+      "Eth-Trunk"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-extra-06-member-failure",
+    "type": "single_choice",
+    "question": "聚合组中的一条活动成员链路故障后，正常情况下业务会怎样？",
+    "options": {
+      "A": "自动删除设备配置",
+      "B": "改走无线网络",
+      "C": "转移到剩余可用成员链路",
+      "D": "所有成员必须同时关闭"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "链路聚合提供成员级冗余，故障链路退出后剩余成员继续承载流量。 本题考查“成员接口”，因此应选择“转移到剩余可用成员链路”。",
+    "chapter": "以太网链路聚合",
+    "knowledgePoint": "成员接口",
+    "difficulty": "easy",
+    "tags": [
+      "以太网链路聚合",
+      "成员接口"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v2-extra-06-logical-config",
+    "type": "single_choice",
+    "question": "在聚合链路上配置 VLAN 属性时，通常应配置在哪个接口上？",
+    "options": {
+      "A": "Console 接口",
+      "B": "Eth-Trunk 逻辑接口",
+      "C": "每台终端网卡",
+      "D": "Loopback 接口"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "业务属性通常统一配置在 Eth-Trunk 逻辑接口，由成员共同承载。 本题考查“Eth-Trunk”，因此应选择“Eth-Trunk 逻辑接口”。",
+    "chapter": "以太网链路聚合",
+    "knowledgePoint": "Eth-Trunk",
+    "difficulty": "easy",
+    "tags": [
+      "以太网链路聚合",
+      "Eth-Trunk"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v2-extra-06-lacp-active",
+    "type": "single_choice",
+    "question": "LACP 能根据什么自动调整活动成员？",
+    "options": {
+      "A": "链路状态和系统、端口优先级",
+      "B": "DNS 查询次数",
+      "C": "用户名长度",
+      "D": "NTP 层级"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "LACP 结合链路状态及优先级选择活动成员并维护聚合关系。 本题考查“LACP”，因此应选择“链路状态和系统、端口优先级”。",
+    "chapter": "以太网链路聚合",
+    "knowledgePoint": "LACP",
+    "difficulty": "hard",
+    "tags": [
+      "以太网链路聚合",
+      "LACP"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v2-extra-06-bandwidth-limit",
+    "type": "single_choice",
+    "question": "单一大流使用按流哈希的 Eth-Trunk 时，其吞吐量通常受什么限制？",
+    "options": {
+      "A": "所有成员速率之和必然全部可用",
+      "B": "交换机管理口速率",
+      "C": "VLAN ID 大小",
+      "D": "被选中的单条成员链路速率"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "按流哈希通常让同一流固定在一条成员链路，因此单流不会同时拆到所有成员。 本题考查“负载分担”，因此应选择“被选中的单条成员链路速率”。",
+    "chapter": "以太网链路聚合",
+    "knowledgePoint": "负载分担",
+    "difficulty": "hard",
+    "tags": [
+      "以太网链路聚合",
+      "负载分担"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-extra-06-peer-consistency",
+    "type": "single_choice",
+    "question": "Eth-Trunk 两端成员数量或聚合模式不一致可能导致什么？",
+    "options": {
+      "A": "增加 IPv6 地址长度",
+      "B": "生成新的 DNS 记录",
+      "C": "部分链路不能正常加入聚合或转发异常",
+      "D": "自动升级设备软件"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "聚合两端需保持模式和关键参数一致，否则成员选择及流量转发可能异常。 本题考查“成员接口”，因此应选择“部分链路不能正常加入聚合或转发异常”。",
+    "chapter": "以太网链路聚合",
+    "knowledgePoint": "成员接口",
+    "difficulty": "medium",
+    "tags": [
+      "以太网链路聚合",
+      "成员接口"
+    ],
+    "stage": "基础理解"
+  }
+]

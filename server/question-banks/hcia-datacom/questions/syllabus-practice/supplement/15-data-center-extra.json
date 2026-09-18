@@ -1,0 +1,140 @@
+[
+  {
+    "id": "hcia-v2-extra-15-spine-connect",
+    "type": "single_choice",
+    "question": "典型 Leaf-Spine 架构中，每台 Leaf 通常连接到什么设备？",
+    "options": {
+      "A": "所有终端 PC",
+      "B": "公网 DNS",
+      "C": "所有 Spine 交换机",
+      "D": "只连接一台 Leaf"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Leaf 与所有 Spine 建立等价上联，形成低时延、多路径的 Clos 拓扑。 本题考查“Leaf-Spine”，因此应选择“所有 Spine 交换机”。",
+    "chapter": "数据中心网络基础",
+    "knowledgePoint": "Leaf-Spine",
+    "difficulty": "easy",
+    "tags": [
+      "数据中心网络基础",
+      "Leaf-Spine"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-extra-15-ecmp",
+    "type": "single_choice",
+    "question": "Leaf-Spine 中存在多条等价路径时，常用什么能力分担流量？",
+    "options": {
+      "A": "单播泛洪",
+      "B": "ECMP",
+      "C": "STP 单路径阻塞",
+      "D": "静态 ARP"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "等价多路径 ECMP 可让多个下一跳共同转发不同流，利用冗余 Spine 路径。 本题考查“Leaf-Spine”，因此应选择“ECMP”。",
+    "chapter": "数据中心网络基础",
+    "knowledgePoint": "Leaf-Spine",
+    "difficulty": "medium",
+    "tags": [
+      "数据中心网络基础",
+      "Leaf-Spine"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v2-extra-15-north-south",
+    "type": "single_choice",
+    "question": "数据中心“南北向流量”通常描述什么？",
+    "options": {
+      "A": "数据中心与外部用户或互联网之间的流量",
+      "B": "同一机柜服务器之间的流量",
+      "C": "只有无线 AP 到 AC 的流量",
+      "D": "日志服务器内部流量"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "南北向流量从数据中心边界进出，常经过防火墙、负载均衡等设备。 本题考查“东西向流量”，因此应选择“数据中心与外部用户或互联网之间的流量”。",
+    "chapter": "数据中心网络基础",
+    "knowledgePoint": "东西向流量",
+    "difficulty": "easy",
+    "tags": [
+      "数据中心网络基础",
+      "东西向流量"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v2-extra-15-overlay-vtep",
+    "type": "single_choice",
+    "question": "VXLAN 等 Overlay 中，VTEP 的基本作用是什么？",
+    "options": {
+      "A": "分配 DHCP 地址",
+      "B": "计算 STP 根桥",
+      "C": "生成 SSH 密钥",
+      "D": "对报文进行隧道封装与解封装"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "VTEP 位于 Overlay 边缘，将二层或三层业务报文封装进底层 IP 网络传输。 本题考查“Underlay 与 Overlay”，因此应选择“对报文进行隧道封装与解封装”。",
+    "chapter": "数据中心网络基础",
+    "knowledgePoint": "Underlay 与 Overlay",
+    "difficulty": "hard",
+    "tags": [
+      "数据中心网络基础",
+      "Underlay 与 Overlay"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v2-extra-15-underlay-requirement",
+    "type": "single_choice",
+    "question": "部署 Overlay 前优先验证 Underlay 的哪项能力？",
+    "options": {
+      "A": "所有端口关闭 STP",
+      "B": "终端无须地址",
+      "C": "各 VTEP 之间 IP 路由可达且稳定收敛",
+      "D": "所有服务器同一 VLAN"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Overlay 隧道建立在 Underlay IP 网络之上，首先需要端点之间可靠的三层可达性。 本题考查“Underlay 与 Overlay”，因此应选择“各 VTEP 之间 IP 路由可达且稳定收敛”。",
+    "chapter": "数据中心网络基础",
+    "knowledgePoint": "Underlay 与 Overlay",
+    "difficulty": "easy",
+    "tags": [
+      "数据中心网络基础",
+      "Underlay 与 Overlay"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-extra-15-dc-reliability",
+    "type": "single_choice",
+    "question": "数据中心网络采用双归、ECMP 等设计的主要目标是什么？",
+    "options": {
+      "A": "关闭冗余链路",
+      "B": "降低单点故障并提升可用性",
+      "C": "减少所有地址数量",
+      "D": "取消设备监控"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "冗余链路和多路径可让单设备或单链路故障时业务继续通过其他路径承载。 本题考查“数据中心架构”，因此应选择“降低单点故障并提升可用性”。",
+    "chapter": "数据中心网络基础",
+    "knowledgePoint": "数据中心架构",
+    "difficulty": "medium",
+    "tags": [
+      "数据中心网络基础",
+      "数据中心架构"
+    ],
+    "stage": "基础理解"
+  }
+]

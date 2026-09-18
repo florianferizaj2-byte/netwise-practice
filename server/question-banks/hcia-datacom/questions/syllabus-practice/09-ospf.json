@@ -1,0 +1,94 @@
+[
+  {
+    "id": "hcia-v2-09-ip-protocol",
+    "type": "single_choice",
+    "question": "OSPF 报文直接封装在 IP 中时使用的 IP 协议号是多少？",
+    "options": {
+      "A": "6",
+      "B": "17",
+      "C": "89",
+      "D": "179"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "OSPF 直接使用 IP 协议号 89，不通过 TCP 或 UDP 端口承载。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgePoint": "单区域 OSPF",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF 原理与配置",
+      "单区域 OSPF"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-09-router-id",
+    "type": "single_choice",
+    "question": "OSPF Router ID 在一个 OSPF 进程中的主要作用是什么？",
+    "options": {
+      "A": "唯一标识该 OSPF 路由器",
+      "B": "表示接口带宽",
+      "C": "替代所有接口 IP",
+      "D": "指定 VLAN 编号"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Router ID 是 32 位标识，用于在 OSPF 域内唯一识别路由器并参与协议运行。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgePoint": "Router ID",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF 原理与配置",
+      "Router ID"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-09-backbone",
+    "type": "single_choice",
+    "question": "在多区域 OSPF 中，骨干区域的 Area ID 通常是多少？",
+    "options": {
+      "A": "Area 0",
+      "B": "Area 1",
+      "C": "Area 255",
+      "D": "Area 65535"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Area 0 是 OSPF 骨干区域，其他常规区域通常需要通过骨干区域进行区域间通信。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgePoint": "单区域 OSPF",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF 原理与配置",
+      "单区域 OSPF"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-09-priority-zero",
+    "type": "single_choice",
+    "question": "OSPF 广播网络接口优先级配置为 0 时，该接口上的路由器会怎样？",
+    "options": {
+      "A": "不能参与 DR/BDR 选举",
+      "B": "必定成为 DR",
+      "C": "无法发送 Hello",
+      "D": "自动退出 OSPF"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "接口优先级为 0 表示不具备 DR/BDR 候选资格，但仍可参与邻居发现和路由交换。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgePoint": "DR/BDR",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF 原理与配置",
+      "DR/BDR"
+    ],
+    "stage": "变式计算"
+  }
+]

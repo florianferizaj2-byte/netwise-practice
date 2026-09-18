@@ -1,0 +1,1427 @@
+[
+  {
+    "id": "collection-c08-q001",
+    "question": "下列关于网络防火墙的说法，错误的是？",
+    "options": {
+      "A": "防火墙不能解决来自内部网络的攻击",
+      "B": "防火墙能防止受病毒感染的文件传输",
+      "C": "防火墙不能防止策略配置不当引起的安全威胁",
+      "D": "防火墙不能防止本身安全漏洞的威胁"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "防火墙主要进行网络层/传输层访问控制（IP、端口、协议），无法检测文件内容中是否携带病毒，不能防止受病毒感染的文件传输。防病毒需要专门的防病毒软件或NGFW的内容检测。防火墙的局限性还包括：无法防范内部攻击、配置错误、自身漏洞。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "防火墙与入侵防御",
+    "difficulty": "medium",
+    "tags": [
+      "防火墙与入侵防御",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 1,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q002",
+    "question": "包过滤防火墙对数据包的检查内容一般不包括？",
+    "options": {
+      "A": "源地址",
+      "B": "目的地址",
+      "C": "协议",
+      "D": "有效载荷"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "包过滤防火墙检查数据包包头：源IP、目的IP、协议类型（TCP/UDP/ICMP）、源端口、目的端口、TCP标志位等。有效载荷（应用层数据内容）不属于包过滤检查范围。深度包检测（DPI）或应用层防火墙/NGFW才检查有效载荷。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "防火墙与入侵防御",
+    "difficulty": "medium",
+    "tags": [
+      "防火墙与入侵防御",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 2,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q003",
+    "question": "下列加密算法中，属于非对称加密算法的是？",
+    "options": {
+      "A": "DES",
+      "B": "3DES",
+      "C": "RSA",
+      "D": "AES"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "RSA属于非对称加密算法，使用公钥和私钥一对密钥，可用于加密、数字签名和密钥交换。DES、3DES、AES均属于对称加密算法（加密解密用相同密钥）。SHA-256、MD5属于哈希算法。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "密码与身份认证",
+    "difficulty": "medium",
+    "tags": [
+      "密码与身份认证",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 3,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q004",
+    "question": "某WEB服务器被利用Struts2漏洞发起远程攻击，最有效阻断该类攻击的设备是？",
+    "options": {
+      "A": "WEB应用防火墙WAF",
+      "B": "普通防火墙",
+      "C": "漏洞扫描系统",
+      "D": "入侵检测系统IDS"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "WAF专门防护Web应用层漏洞攻击（Struts2远程代码执行、SQL注入、XSS等）。普通防火墙只做五元组访问控制，无法识别应用层攻击。漏洞扫描只能发现漏洞不能阻断。IDS只能检测告警不能阻断。IPS可阻断但对Web应用层漏洞防护不如WAF专业。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "网络攻击与防护",
+    "difficulty": "medium",
+    "tags": [
+      "网络攻击与防护",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 4,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q005",
+    "question": "SSL/TLS协议中，服务器证书由谁颁发？用于验证什么？",
+    "options": {
+      "A": "服务器自行生成，验证客户端身份",
+      "B": "CA证书颁发机构颁发，验证服务器身份",
+      "C": "浏览器生成，验证数据完整性",
+      "D": "ISP颁发，验证网络连通性"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "SSL/TLS服务器证书由可信CA（证书颁发机构）颁发，证书包含服务器公钥和身份信息，客户端通过验证证书签名链确认服务器身份真实性，防止中间人攻击。证书还用于协商会话密钥。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "密码与身份认证",
+    "difficulty": "medium",
+    "tags": [
+      "密码与身份认证",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 5,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q006",
+    "question": "下列哪项不属于信息传输安全的主要措施？",
+    "options": {
+      "A": "链路加密",
+      "B": "节点加密",
+      "C": "端到端加密",
+      "D": "磁盘阵列RAID"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "链路加密、节点加密、端到端加密都是信息传输过程中的加密技术，保障数据传输机密性。RAID（磁盘阵列）是存储安全技术，通过数据冗余提高存储可用性，防止硬盘故障丢数据，不属于传输安全措施。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "网络安全",
+    "difficulty": "medium",
+    "tags": [
+      "网络安全",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 6,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q007",
+    "question": "下列关于IDS和IPS的描述，正确的是？",
+    "options": {
+      "A": "IDS可以阻断攻击，IPS只能告警",
+      "B": "IDS只能检测告警，IPS可以实时阻断",
+      "C": "IDS和IPS都只能检测不能阻断",
+      "D": "IDS和IPS都可以实时阻断攻击"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IDS（入侵检测系统）旁路部署，被动监听，发现攻击后告警但不能实时阻断。IPS（入侵防御系统）串接部署（在线模式），主动分析流量，发现攻击后可实时丢弃/阻断。题目中\"分析流量内容根据特征库告警但无法阻断\"描述的是IDS。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "防火墙与入侵防御",
+    "difficulty": "medium",
+    "tags": [
+      "防火墙与入侵防御",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 7,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q008",
+    "question": "根据Kerckhoffs原则，密码系统的安全性主要依赖于？",
+    "options": {
+      "A": "解密算法",
+      "B": "通信双方",
+      "C": "加密算法",
+      "D": "密钥"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "柯克霍夫原则（Kerckhoffs's Principle）：密码系统的安全不应依赖算法保密，而只依赖密钥的保密性，算法可以公开。即使攻击者知道加密算法，只要不知道密钥也无法破解。这是现代密码学的基本原则。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "密码与身份认证",
+    "difficulty": "medium",
+    "tags": [
+      "密码与身份认证",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 8,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q009",
+    "question": "下列关于数字签名的说法，错误的是？",
+    "options": {
+      "A": "数字签名可以防止发送方抵赖",
+      "B": "数字签名可以验证发送方身份",
+      "C": "数字签名可以保证数据完整性",
+      "D": "数字签名可以加密数据内容"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "数字签名使用发送方私钥对数据摘要加密，功能：1）防止发送方抵赖（不可否认性）；2）验证发送方身份（认证）；3）保证数据完整性（防篡改）。数字签名不加密数据内容，数据加密需要使用加密算法（对称或非对称加密）。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "密码与身份认证",
+    "difficulty": "medium",
+    "tags": [
+      "密码与身份认证",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 9,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q010",
+    "question": "下列属于国产商用密码算法的是？",
+    "options": {
+      "A": "RSA",
+      "B": "DES",
+      "C": "SM4",
+      "D": "AES"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "SM4是国密对称加密算法（分组密码，128位分组，128位密钥）。SM2是非对称加密/签名算法（基于椭圆曲线），SM3是哈希算法（256位摘要），SM9是标识密码算法，ZUC是祖冲之序列密码算法。RSA、DES、AES均为国外算法。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "密码与身份认证",
+    "difficulty": "medium",
+    "tags": [
+      "密码与身份认证",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 10,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q011",
+    "question": "SM2数字签名生成过程所使用的消息摘要辅助函数来自于？",
+    "options": {
+      "A": "SM3",
+      "B": "SM9",
+      "C": "SM4",
+      "D": "ZUC"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "SM2签名过程中，使用国密SM3哈希算法计算消息摘要（杂凑值），然后对摘要进行签名。SM4是对称加密，SM9是标识密码，ZUC是序列密码。国密SSL证书签名算法为SM3-with-SM2。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "密码与身份认证",
+    "difficulty": "medium",
+    "tags": [
+      "密码与身份认证",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 11,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q012",
+    "question": "下列关于防火墙工作层次的说法，正确的是？",
+    "options": {
+      "A": "工作层次越低，效率越高，安全性越高",
+      "B": "工作层次越低，效率越低，安全性越低",
+      "C": "工作层次越高，效率越高，安全性越低",
+      "D": "工作层次越高，效率越低，安全性越高"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "防火墙工作层次越高（如应用层代理防火墙），检查内容越深入，安全性越高，但处理速度越慢、效率越低。工作层次越低（如包过滤防火墙，网络层），处理速度越快、效率越高，但只能检查包头，安全性较低。状态检测防火墙在安全性和效率之间取得平衡。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "防火墙与入侵防御",
+    "difficulty": "medium",
+    "tags": [
+      "防火墙与入侵防御",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 12,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q013",
+    "question": "下列关于WEP无线加密技术的说法，错误的是？",
+    "options": {
+      "A": "WEP密钥最长为128位",
+      "B": "WEP使用RC4加密算法",
+      "C": "WEP密钥由初始向量+用户指定字符串+校验值组成",
+      "D": "WEP的初始向量在特定情况下可能会出现重复值"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "WEP支持64位（40位用户密钥+24位IV）和128位（104位用户密钥+24位IV），WEP用户密钥有效最长104位，不是128位（128位包含了24位IV）。WEP使用RC4加密，IV只有24位会重复，导致密钥流重用，安全性差，已被WPA/WPA2取代。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "无线网络",
+    "difficulty": "medium",
+    "tags": [
+      "无线网络",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 13,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q014",
+    "question": "下列关于网络安全等级保护的说法，错误的是？",
+    "options": {
+      "A": "信息系统定级时需要明确定级备案的责任部门和责任人",
+      "B": "信息系统在规划设计阶段就需要定级",
+      "C": "二级以上（含二级）信息系统定级后需要到公安机关备案",
+      "D": "一级至五级信息系统定级时都需要安全专家对定级结果进行论证和审定"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "等级保护：三级及以上系统需要专家评审论证，不是1-5级全部都要专家审定。等保定级依据系统重要性和遭到破坏后的危害程度，分为五级（一级最低，五级最高）。二级以上系统定级后30日内到公安机关备案。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "网络安全",
+    "difficulty": "medium",
+    "tags": [
+      "网络安全",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 14,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q015",
+    "question": "堡垒机的主要作用不包括？",
+    "options": {
+      "A": "禁止运维人员直接访问服务器",
+      "B": "所有运维行为留痕回溯",
+      "C": "可阻断运维人员执行高危命令",
+      "D": "提高服务器计算性能"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "堡垒机（运维审计系统）：1）代理访问，运维人员不能直连服务器；2）会话录像审计，所有操作留痕可回溯；3）命令拦截，可阻断高危命令。堡垒机是安全管控设备，不能提高服务器计算性能。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "网络安全",
+    "difficulty": "medium",
+    "tags": [
+      "网络安全",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 15,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q016",
+    "question": "震网病毒（Stuxnet）专门针对工业控制系统进行破坏，主要突破途径是？",
+    "options": {
+      "A": "移动介质（U盘）",
+      "B": "Office文档",
+      "C": "开源软件",
+      "D": "局域网"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "震网病毒（Stuxnet）最初依靠U盘等移动介质传播，攻击伊朗核设施的工业控制系统（西门子SIMATIC WinCC/S7）。它是第一个被发现的以物理基础设施为目标的网络武器，利用了多个Windows零日漏洞。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "网络攻击与防护",
+    "difficulty": "medium",
+    "tags": [
+      "网络攻击与防护",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 16,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      },
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 45,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q017",
+    "question": "下列关于对称加密和非对称加密的说法，正确的是？",
+    "options": {
+      "A": "对称加密速度快，适合加密大量数据",
+      "B": "非对称加密速度慢，适合密钥交换和数字签名",
+      "C": "对称加密密钥分发困难，非对称加密解决了密钥分发问题",
+      "D": "以上都正确"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "对称加密（DES/AES/SM4）：加解密用相同密钥，速度快，适合加密大量数据，但密钥分发困难。非对称加密（RSA/SM2）：公钥私钥对，速度慢，适合密钥交换和数字签名，解决了密钥分发问题。实际应用中通常结合使用：用非对称加密交换对称密钥，用对称密钥加密数据（混合加密）。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "密码与身份认证",
+    "difficulty": "medium",
+    "tags": [
+      "密码与身份认证",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 17,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q018",
+    "question": "下列关于哈希函数的说法，错误的是？",
+    "options": {
+      "A": "哈希函数是单向的，无法从摘要反推原文",
+      "B": "相同输入产生相同输出",
+      "C": "不同输入一定产生不同输出",
+      "D": "哈希函数可用于数据完整性校验"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "哈希函数（如MD5、SHA-256、SM3）将任意长度输入映射为固定长度摘要。特点：单向性（无法反推）、确定性（相同输入相同输出）、抗碰撞性（理论上不同输入可能产生相同输出即碰撞，但好的哈希函数使碰撞在计算上不可行）。不是\"一定\"不同输出，而是\"很难\"找到碰撞。哈希函数用于数据完整性校验、数字签名、密码存储等。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "密码与身份认证",
+    "difficulty": "medium",
+    "tags": [
+      "密码与身份认证",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 18,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q019",
+    "question": "下列关于VPN的说法，正确的是？",
+    "options": {
+      "A": "VPN在公共网络上建立加密的专用通道",
+      "B": "VPN只能用于远程访问",
+      "C": "VPN不使用加密技术",
+      "D": "VPN会降低网络安全性"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "VPN（虚拟专用网络）在公共网络（如Internet）上通过加密和隧道技术建立逻辑上的专用通道，实现安全的远程访问、站点间互联。VPN类型包括IPSec VPN、SSL VPN、L2TP等。VPN使用加密技术保证数据机密性和完整性，提高了网络安全性。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "VPN 与安全协议",
+    "difficulty": "medium",
+    "tags": [
+      "VPN 与安全协议",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 19,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q020",
+    "question": "下列关于DDoS攻击的说法，错误的是？",
+    "options": {
+      "A": "DDoS是分布式拒绝服务攻击",
+      "B": "DDoS通过大量傀儡机发送请求耗尽目标资源",
+      "C": "DDoS攻击可以通过防火墙完全防御",
+      "D": "DDoS攻击分为流量型和连接型"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "DDoS（分布式拒绝服务）利用大量傀儡机（僵尸网络）同时向目标发送请求，耗尽目标带宽、连接数或系统资源，导致正常用户无法访问。DDoS分为流量型（UDP/ICMP洪水，耗尽带宽）和连接型（SYN洪水，耗尽连接表）。DDoS难以通过普通防火墙完全防御，需要专业的DDoS清洗设备/服务（流量清洗、黑洞路由、CDN等）。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "网络攻击与防护",
+    "difficulty": "medium",
+    "tags": [
+      "网络攻击与防护",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 20,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q021",
+    "question": "下列关于社会工程学攻击的说法，正确的是？",
+    "options": {
+      "A": "社会工程学攻击利用人的心理弱点获取信息",
+      "B": "社会工程学攻击只涉及技术手段",
+      "C": "社会工程学攻击可以通过防火墙防御",
+      "D": "社会工程学攻击不构成安全威胁"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "社会工程学攻击利用人的心理弱点（信任、恐惧、好奇、贪婪等），通过欺骗、伪装、诱导等手段获取敏感信息（如密码、账号）或诱导执行危险操作。常见手段：钓鱼邮件、电话诈骗、假冒身份、尾随进入等。社会工程学攻击主要针对人，不是纯技术手段，防火墙无法防御，需要通过安全意识培训和管理措施来防范。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "网络攻击与防护",
+    "difficulty": "medium",
+    "tags": [
+      "网络攻击与防护",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 21,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q022",
+    "question": "下列关于零信任架构（Zero Trust）的说法，正确的是？",
+    "options": {
+      "A": "零信任默认信任内部网络的所有用户",
+      "B": "零信任的核心原则是\"永不信任，始终验证\"",
+      "C": "零信任不需要身份认证",
+      "D": "零信任只适用于外部网络"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "零信任架构（Zero Trust Architecture）的核心原则是\"永不信任，始终验证\"（Never Trust, Always Verify），不默认信任任何用户/设备/网络（无论内外），每次访问都需要进行身份认证、授权和持续验证。三大核心原则：1）持续验证（身份、设备、权限）；2）最小权限（仅授予必要权限）；3）假设 breach（假设已被攻破，进行监控和快速响应）。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "网络安全",
+    "difficulty": "medium",
+    "tags": [
+      "网络安全",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 22,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q023",
+    "question": "下列关于WPA2的说法，错误的是？",
+    "options": {
+      "A": "WPA2使用AES加密算法",
+      "B": "WPA2比WEP更安全",
+      "C": "WPA2支持802.1X认证和预共享密钥两种模式",
+      "D": "WPA2没有任何安全漏洞"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "WPA2（Wi-Fi Protected Access II）使用AES（高级加密标准）和CCMP加密模式，比WEP安全得多。WPA2支持企业模式（802.1X+RADIUS认证）和个人模式（预共享密钥PSK）。但WPA2并非没有安全漏洞，如KRACK攻击（密钥重装攻击）可在特定条件下解密WPA2流量，WPA3进一步增强了安全性。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "无线网络",
+    "difficulty": "medium",
+    "tags": [
+      "无线网络",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 23,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q024",
+    "question": "下列关于防火墙功能的说法，不正确的是？",
+    "options": {
+      "A": "防火墙能有效防范病毒的入侵",
+      "B": "防火墙能控制对特殊站点的访问",
+      "C": "防火墙能记录和审计网络访问日志",
+      "D": "防火墙能隐藏内部网络结构"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "防火墙不能有效防范病毒入侵，因为防火墙主要检查网络层/传输层包头，无法检测文件内容中的病毒。防范病毒需要防病毒软件/UTM/NGFW的内容检测功能。防火墙的功能包括：访问控制（控制对特殊站点/端口的访问）、日志审计、NAT（隐藏内部网络结构）、VPN支持等。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "防火墙与入侵防御",
+    "difficulty": "medium",
+    "tags": [
+      "防火墙与入侵防御",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 24,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      },
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 35,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q025",
+    "question": "下列关于应用层攻击的是？",
+    "options": {
+      "A": "IP欺骗",
+      "B": "SYN泛洪",
+      "C": "SQL注入",
+      "D": "ARP欺骗"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "SQL注入是应用层攻击，攻击者通过在输入中插入恶意SQL代码，绕过应用程序验证，非法访问/操作数据库。IP欺骗、ARP欺骗是网络层攻击，SYN泛洪是传输层攻击（DDoS的一种）。其他应用层攻击还包括XSS跨站脚本、CSRF跨站请求伪造、文件上传漏洞、命令注入等。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "网络攻击与防护",
+    "difficulty": "medium",
+    "tags": [
+      "网络攻击与防护",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 25,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q026",
+    "question": "下列关于入侵防御系统（IPS）的说法，正确的是？",
+    "options": {
+      "A": "IPS是旁路部署，只能告警不能阻断",
+      "B": "IPS是串接部署，可以实时检测并阻断攻击",
+      "C": "IPS和IDS完全相同",
+      "D": "IPS不能检测应用层攻击"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IPS（入侵防御系统）是串接（在线）部署，主动分析网络流量，发现攻击后可以实时丢弃/阻断数据包，不需要人工干预。IDS是旁路部署只能告警。IPS可以检测网络层到应用层的各种攻击（基于特征库和异常行为分析），但对Web应用层漏洞的防护不如WAF专业。NGFW（下一代防火墙）集成了IPS功能。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "防火墙与入侵防御",
+    "difficulty": "medium",
+    "tags": [
+      "防火墙与入侵防御",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 26,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q027",
+    "question": "下列关于CA（证书颁发机构）的说法，错误的是？",
+    "options": {
+      "A": "CA负责颁发和管理数字证书",
+      "B": "CA的私钥用于签名证书",
+      "C": "客户端需要信任CA的根证书才能验证证书链",
+      "D": "CA证书可以随意伪造"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "CA（Certificate Authority，证书颁发机构）负责颁发、管理、吊销数字证书。CA用自己的私钥签名证书，客户端用CA的公钥（根证书中）验证证书签名。客户端/浏览器预装了可信CA的根证书，才能验证证书链。CA证书不能随意伪造，因为CA的私钥严格保密，伪造的证书无法通过签名验证。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "密码与身份认证",
+    "difficulty": "medium",
+    "tags": [
+      "密码与身份认证",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 27,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      },
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 38,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q028",
+    "question": "下列关于IPSec VPN的说法，正确的是？",
+    "options": {
+      "A": "IPSec工作在网络层，对IP数据报进行加密和认证",
+      "B": "IPSec有传输模式和隧道模式两种",
+      "C": "IPSec包含AH和ESP两个协议",
+      "D": "以上都正确"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "IPSec（IP安全协议）工作在网络层，对IP数据报进行加密和认证，提供机密性、完整性、数据源认证和抗重放服务。IPSec有两种模式：传输模式（只加密IP数据报的有效载荷，保留原IP头，用于端到端通信）和隧道模式（加密整个IP数据报，添加新IP头，用于站点到站点VPN）。IPSec包含AH（认证头，仅认证不加密）和ESP（封装安全载荷，认证+加密）两个协议。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "防火墙与入侵防御",
+    "difficulty": "medium",
+    "tags": [
+      "防火墙与入侵防御",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 28,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q029",
+    "question": "远程移动用户接入VPN，终端无需固定IP，最适合的IPSec模式是？",
+    "options": {
+      "A": "传输模式+AH",
+      "B": "隧道模式+ESP",
+      "C": "传输模式+ESP",
+      "D": "隧道模式+AH"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "远程用户接入VPN通常使用隧道模式（封装整个原始IP包，添加新IP头，适应动态IP场景），且ESP（封装安全载荷）支持加密（保护数据内容），而AH（认证头）仅提供认证不加密。移动用户终端可能动态获取IP，隧道模式可将原始IP封装在新的IP头中。因此选隧道模式+ESP。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "防火墙与入侵防御",
+    "difficulty": "medium",
+    "tags": [
+      "防火墙与入侵防御",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 29,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q030",
+    "question": "下列关于SSL VPN和IPSec VPN的比较，错误的是？",
+    "options": {
+      "A": "SSL VPN工作在应用层，IPSec VPN工作在网络层",
+      "B": "SSL VPN无需安装客户端软件（通过浏览器），IPSec VPN通常需要安装客户端",
+      "C": "SSL VPN比IPSec VPN更安全",
+      "D": "SSL VPN适合远程用户访问Web应用，IPSec VPN适合站点到站点互联"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "SSL VPN（基于SSL/TLS，工作在传输层和应用层之间）和IPSec VPN（工作在网络层）各有优势，不能简单说SSL VPN更安全。SSL VPN无需安装客户端（通过浏览器HTTPS访问），适合远程用户访问Web应用和特定TCP应用；IPSec VPN通常需要安装客户端或在网关上配置，适合站点到站点（Site-to-Site）互联和全网络层访问。两者都提供加密和认证，安全性取决于配置和实现。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "防火墙与入侵防御",
+    "difficulty": "medium",
+    "tags": [
+      "防火墙与入侵防御",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 30,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q031",
+    "question": "下列关于DDoS攻击的说法，正确的是？",
+    "options": {
+      "A": "DDoS通过大量傀儡机发送请求耗尽目标资源",
+      "B": "DDoS分为流量型和连接型",
+      "C": "DDoS难以通过普通防火墙完全防御",
+      "D": "以上都正确"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "DDoS（分布式拒绝服务）利用大量傀儡机（僵尸网络）同时向目标发送请求，耗尽目标带宽、连接数或系统资源。DDoS分为流量型（UDP/ICMP洪水，耗尽带宽）和连接型（SYN洪水，耗尽连接表）。DDoS难以通过普通防火墙完全防御，需要专业的DDoS清洗设备/服务（流量清洗、黑洞路由、CDN、Anycast等）。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "网络攻击与防护",
+    "difficulty": "medium",
+    "tags": [
+      "网络攻击与防护",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 31,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q032",
+    "question": "下列关于社会工程学攻击的说法，错误的是？",
+    "options": {
+      "A": "社会工程学攻击利用人的心理弱点获取信息",
+      "B": "社会工程学攻击可以通过防火墙完全防御",
+      "C": "常见手段包括钓鱼邮件、电话诈骗、假冒身份",
+      "D": "社会工程学攻击主要针对人而非技术"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "社会工程学攻击利用人的心理弱点（信任、恐惧、好奇、贪婪等），通过欺骗、伪装、诱导等手段获取敏感信息或诱导执行危险操作。常见手段：钓鱼邮件、电话诈骗（vishing）、短信诈骗（smishing）、假冒身份、尾随进入（tailgating）、垃圾桶潜水（dumpster diving）等。社会工程学攻击主要针对人，不是纯技术手段，防火墙无法防御，需要通过安全意识培训和管理措施来防范。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "网络攻击与防护",
+    "difficulty": "medium",
+    "tags": [
+      "网络攻击与防护",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 32,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q033",
+    "question": "下列关于零信任架构（Zero Trust）的说法，错误的是？",
+    "options": {
+      "A": "零信任默认信任内部网络的所有用户",
+      "B": "零信任的核心原则是\"永不信任，始终验证\"",
+      "C": "零信任强调最小权限原则",
+      "D": "零信任需要持续验证身份和设备状态"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "零信任架构（Zero Trust Architecture）不默认信任任何用户/设备/网络（无论内外），核心原则是\"永不信任，始终验证\"（Never Trust, Always Verify）。三大核心原则：1）持续验证（身份、设备、权限、上下文）；2）最小权限（仅授予完成任务所需的最小权限）；3）假设 breach（假设已被攻破，进行持续监控和快速响应）。零信任不是默认信任内部网络，而是对所有访问都进行验证。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "网络安全",
+    "difficulty": "medium",
+    "tags": [
+      "网络安全",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 33,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q034",
+    "question": "下列关于WPA2的说法，正确的是？",
+    "options": {
+      "A": "WPA2使用AES加密算法",
+      "B": "WPA2比WEP更安全",
+      "C": "WPA2支持802.1X认证和预共享密钥两种模式",
+      "D": "以上都正确"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "WPA2（Wi-Fi Protected Access II，IEEE 802.11i）使用AES（高级加密标准）和CCMP（计数器模式密码块链消息完整码协议）加密模式，比WEP安全得多。WPA2支持两种模式：企业模式（WPA2-Enterprise，使用802.1X+RADIUS服务器认证，适合企业）和个人模式（WPA2-Personal，使用预共享密钥PSK，适合家庭/小型网络）。WPA2存在KRACK漏洞，WPA3进一步增强了安全性。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "无线网络",
+    "difficulty": "medium",
+    "tags": [
+      "无线网络",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 34,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q036",
+    "question": "下列攻击中，属于应用层攻击的是？",
+    "options": {
+      "A": "IP欺骗",
+      "B": "SYN泛洪",
+      "C": "SQL注入",
+      "D": "ARP欺骗"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "SQL注入是应用层攻击，攻击者通过在输入中插入恶意SQL代码，绕过应用程序验证，非法访问/操作数据库。IP欺骗是网络层攻击（伪造源IP地址），ARP欺骗是数据链路层攻击（伪造IP-MAC映射），SYN泛洪是传输层攻击（DDoS的一种，耗尽TCP连接表）。其他应用层攻击：XSS跨站脚本、CSRF跨站请求伪造、文件上传漏洞、命令注入、目录遍历等。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "网络攻击与防护",
+    "difficulty": "medium",
+    "tags": [
+      "网络攻击与防护",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 36,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q037",
+    "question": "下列关于入侵防御系统（IPS）的说法，错误的是？",
+    "options": {
+      "A": "IPS是串接部署，可以实时检测并阻断攻击",
+      "B": "IPS和IDS完全相同",
+      "C": "IPS可以检测网络层到应用层的各种攻击",
+      "D": "NGFW集成了IPS功能"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IPS（入侵防御系统）是串接（在线）部署，主动分析网络流量，发现攻击后可以实时丢弃/阻断数据包。IDS（入侵检测系统）是旁路部署，只能检测告警不能阻断。两者不完全相同：部署方式不同（串接vs旁路）、功能不同（阻断vs仅检测）、对网络的影响不同（IPS故障可能影响网络连通性，IDS故障不影响）。IPS可以检测网络层到应用层的各种攻击（基于特征库和异常行为分析）。NGFW（下一代防火墙）集成了IPS、应用识别、防病毒等功能。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "防火墙与入侵防御",
+    "difficulty": "medium",
+    "tags": [
+      "防火墙与入侵防御",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 37,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q039",
+    "question": "下列关于数字证书的说法，正确的是？",
+    "options": {
+      "A": "数字证书包含公钥和身份信息，由CA签名",
+      "B": "数字证书可以验证服务器身份",
+      "C": "数字证书有有效期，过期后需要更新",
+      "D": "以上都正确"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "数字证书（Digital Certificate）是由CA签名的电子文档，包含：证书持有者的公钥、持有者身份信息（域名/组织名）、证书序列号、有效期、颁发者CA名称、CA的数字签名等。数字证书用于验证服务器/用户身份（防止中间人攻击）、协商加密密钥。证书有有效期（通常1-2年，DV证书通常90天），过期后需要更新/续期。X.509是最常用的数字证书标准。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "密码与身份认证",
+    "difficulty": "medium",
+    "tags": [
+      "密码与身份认证",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 39,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q040",
+    "question": "下列关于哈希函数的说法，正确的是？",
+    "options": {
+      "A": "哈希函数是单向的，无法从摘要反推原文",
+      "B": "相同输入产生相同输出",
+      "C": "哈希函数可用于数据完整性校验和数字签名",
+      "D": "以上都正确"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "哈希函数（Hash Function，如MD5、SHA-1、SHA-256、SM3）将任意长度输入映射为固定长度摘要（散列值）。特点：1）单向性（抗原像攻击，无法从摘要反推原文）；2）确定性（相同输入相同输出）；3）抗碰撞性（第二原像抗性和碰撞抗性，很难找到两个不同输入产生相同摘要）。哈希函数用于数据完整性校验、数字签名（对摘要签名而非原文）、密码存储（加盐哈希）、消息认证码（HMAC）等。MD5和SHA-1已被破解，不推荐用于安全场景，推荐SHA-256/SM3。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "密码与身份认证",
+    "difficulty": "medium",
+    "tags": [
+      "密码与身份认证",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 40,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q041",
+    "question": "下列关于对称加密和非对称加密的说法，错误的是？",
+    "options": {
+      "A": "对称加密速度快，适合加密大量数据",
+      "B": "非对称加密速度慢，适合密钥交换和数字签名",
+      "C": "对称加密密钥分发困难，非对称加密解决了密钥分发问题",
+      "D": "非对称加密可以完全替代对称加密"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "对称加密（DES/3DES/AES/SM4）：加解密用相同密钥，速度快（硬件加速可达Gbps级），适合加密大量数据，但密钥分发困难（需要安全通道传递密钥）。非对称加密（RSA/SM2/ECC）：公钥私钥对，速度慢（比对称加密慢100-1000倍），适合密钥交换和数字签名，解决了密钥分发问题（公钥可公开，私钥保密）。非对称加密不能完全替代对称加密，因为速度太慢不适合加密大量数据。实际应用中通常结合使用（混合加密）：用非对称加密交换对称密钥，用对称密钥加密数据。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "密码与身份认证",
+    "difficulty": "medium",
+    "tags": [
+      "密码与身份认证",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 41,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q042",
+    "question": "下列关于VPN的说法，错误的是？",
+    "options": {
+      "A": "VPN在公共网络上建立加密的专用通道",
+      "B": "VPN只能用于远程访问",
+      "C": "VPN使用加密和隧道技术",
+      "D": "VPN类型包括IPSec VPN、SSL VPN、L2TP等"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "VPN（虚拟专用网络）在公共网络（如Internet）上通过加密和隧道技术建立逻辑上的专用通道，实现安全通信。VPN不仅用于远程访问（Remote Access VPN，如SSL VPN、L2TP/IPSec），还用于站点到站点互联（Site-to-Site VPN，如IPSec VPN，连接总部和分支机构）。VPN类型包括：IPSec VPN（网络层）、SSL VPN（传输层/应用层）、L2TP（第二层隧道协议，通常与IPSec结合使用）、PPTP（点对点隧道协议，已不安全）、GRE（通用路由封装，通常与IPSec结合）等。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "VPN 与安全协议",
+    "difficulty": "medium",
+    "tags": [
+      "VPN 与安全协议",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 42,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q043",
+    "question": "下列关于网络安全等级保护的说法，正确的是？",
+    "options": {
+      "A": "等级保护分为五级，一级最低，五级最高",
+      "B": "二级以上系统定级后需要到公安机关备案",
+      "C": "三级及以上系统需要专家评审论证",
+      "D": "以上都正确"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "网络安全等级保护（等保2.0）根据系统重要性和遭到破坏后的危害程度分为五级：一级（自主保护级，最低）、二级（指导保护级）、三级（监督保护级）、四级（强制保护级）、五级（专控保护级，最高）。二级以上（含二级）信息系统定级后30日内到公安机关备案。三级及以上系统定级时需要安全专家对定级结果进行论证和审定。等保工作包括：定级、备案、建设整改、等级测评、监督检查五个环节。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "网络安全",
+    "difficulty": "medium",
+    "tags": [
+      "网络安全",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 43,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q044",
+    "question": "下列关于堡垒机的说法，错误的是？",
+    "options": {
+      "A": "堡垒机禁止运维人员直接访问服务器",
+      "B": "堡垒机所有运维行为留痕回溯",
+      "C": "堡垒机可阻断运维人员执行高危命令",
+      "D": "堡垒机可以提高服务器计算性能"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "堡垒机（运维审计系统，Jump Server/Bastion Host）：1）代理访问，运维人员通过堡垒机访问服务器，不能直连服务器（集中管控入口）；2）会话录像审计，所有操作（命令、键盘输入、屏幕输出）留痕可回溯；3）命令拦截，可阻断高危命令（如rm -rf /、format等）；4）身份认证，支持多因素认证；5）权限控制，基于角色的访问控制（RBAC）。堡垒机是安全管控设备，不能提高服务器计算性能。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "网络安全",
+    "difficulty": "medium",
+    "tags": [
+      "网络安全",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 44,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q046",
+    "question": "下列关于WEP无线加密技术的说法，正确的是？",
+    "options": {
+      "A": "WEP使用RC4加密算法",
+      "B": "WEP密钥有效长度最长104位",
+      "C": "WEP的初始向量（IV）只有24位，会重复",
+      "D": "以上都正确"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "WEP（Wired Equivalent Privacy，有线等效保密）使用RC4流加密算法。WEP支持64位（40位用户密钥+24位IV）和128位（104位用户密钥+24位IV），用户密钥有效最长104位（不是128位，128位包含24位IV）。WEP的IV（初始向量）只有24位，在繁忙网络中会快速重复，导致密钥流重用，攻击者可通过统计分析（Fluhrer-Mantin-Shamir攻击）在几分钟内破解密钥。WEP已被WPA/WPA2/WPA3取代，不推荐使用。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "无线网络",
+    "difficulty": "medium",
+    "tags": [
+      "无线网络",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 46,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q047",
+    "question": "下列关于信息传输安全的主要措施，不包括？",
+    "options": {
+      "A": "链路加密",
+      "B": "节点加密",
+      "C": "端到端加密",
+      "D": "磁盘阵列RAID"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "信息传输安全的主要加密措施：1）链路加密（Link Encryption）：在通信链路两端加密，数据在每条链路上都是密文，但在中间节点解密再加密（节点处明文）；2）节点加密（Node Encryption）：与链路加密类似，但在节点处也保持密文（使用安全模块）；3）端到端加密（End-to-End Encryption）：数据在源端加密，在目的端解密，中间节点不解密（全程密文），安全性最高。RAID（磁盘阵列）是存储安全技术（数据冗余），不属于传输安全措施。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "网络安全",
+    "difficulty": "medium",
+    "tags": [
+      "网络安全",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 47,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q048",
+    "question": "下列关于包过滤防火墙的说法，错误的是？",
+    "options": {
+      "A": "包过滤防火墙检查数据包包头（源IP、目的IP、协议、端口）",
+      "B": "包过滤防火墙检查有效载荷（应用层数据）",
+      "C": "包过滤防火墙速度快，效率高",
+      "D": "包过滤防火墙无法检测应用层攻击"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "包过滤防火墙（Packet Filtering Firewall）检查数据包包头：源IP地址、目的IP地址、协议类型（TCP/UDP/ICMP）、源端口、目的端口、TCP标志位（SYN/ACK/FIN等）、ICMP类型等。包过滤防火墙不检查有效载荷（应用层数据内容），因此无法检测应用层攻击（如SQL注入、XSS、病毒）。包过滤防火墙速度快、效率高（基于规则匹配，通常由硬件实现），但安全性较低（无法识别应用层攻击和复杂攻击）。状态检测防火墙（Stateful Inspection）在包过滤基础上增加了连接状态跟踪，安全性更高。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "防火墙与入侵防御",
+    "difficulty": "medium",
+    "tags": [
+      "防火墙与入侵防御",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 48,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q049",
+    "question": "下列关于SSL/TLS协议的说法，正确的是？",
+    "options": {
+      "A": "SSL/TLS工作在传输层和应用层之间",
+      "B": "SSL/TLS提供加密、认证和完整性保护",
+      "C": "HTTPS是HTTP over SSL/TLS",
+      "D": "以上都正确"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "SSL（Secure Sockets Layer，安全套接字层）/TLS（Transport Layer Security，传输层安全）工作在传输层（TCP）和应用层之间，为应用层协议（HTTP、FTP、SMTP等）提供安全通信。SSL/TLS提供：1）机密性（对称加密，如AES）；2）认证（非对称加密+数字证书，验证服务器/客户端身份）；3）完整性（消息认证码MAC，如HMAC-SHA256）。HTTPS（HTTP Secure）是HTTP over SSL/TLS，默认端口443。TLS是SSL的标准化版本（IETF），最新版本TLS 1.3（2018年），SSL 3.0已被弃用（存在POODLE漏洞）。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "VPN 与安全协议",
+    "difficulty": "medium",
+    "tags": [
+      "VPN 与安全协议",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 49,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c08-q050",
+    "question": "下列关于Kerckhoffs原则（柯克霍夫原则）的说法，正确的是？",
+    "options": {
+      "A": "密码系统的安全性应依赖于算法保密",
+      "B": "密码系统的安全性应只依赖于密钥的保密性",
+      "C": "密码系统的算法和密钥都必须保密",
+      "D": "密码系统不需要密钥"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "柯克霍夫原则（Kerckhoffs's Principle，1883年由奥古斯特·柯克霍夫提出）：密码系统的安全不应依赖算法保密，而只依赖密钥的保密性，算法可以公开。即使攻击者知道加密算法，只要不知道密钥也无法破解。这是现代密码学的基本原则（如AES、RSA、SM4等算法都是公开的，安全性依赖于密钥）。与此相对的是\"通过隐晦来保证安全\"（Security through obscurity），被认为是不可靠的。",
+    "type": "single_choice",
+    "chapter": "网络安全",
+    "knowledgePoint": "网络安全",
+    "difficulty": "medium",
+    "tags": [
+      "网络安全",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第八章 网络安全（含答案解析）.docx",
+        "questionNumber": 50,
+        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  }
+]

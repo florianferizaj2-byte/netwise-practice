@@ -1,0 +1,94 @@
+[
+  {
+    "id": "hcia-v2-15-leaf-spine",
+    "type": "single_choice",
+    "question": "在典型 Leaf-Spine 数据中心网络中，两台不同 Leaf 之间的流量通常经过什么路径？",
+    "options": {
+      "A": "Leaf→Spine→Leaf",
+      "B": "Leaf→Leaf 直连",
+      "C": "Leaf→核心→汇聚→Leaf",
+      "D": "Spine→Spine→Leaf"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "典型 Leaf 连接所有 Spine，跨 Leaf 流量上行到一个 Spine 后再下行到目的 Leaf。",
+    "chapter": "数据中心网络基础",
+    "knowledgePoint": "Leaf-Spine",
+    "difficulty": "easy",
+    "tags": [
+      "数据中心网络基础",
+      "Leaf-Spine"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-15-east-west",
+    "type": "single_choice",
+    "question": "数据中心网络中的“东西向流量”通常指什么？",
+    "options": {
+      "A": "服务器或业务节点之间的内部流量",
+      "B": "互联网用户进入数据中心的流量",
+      "C": "机房供电监控流量",
+      "D": "只在无线终端之间的流量"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "东西向流量描述数据中心内部服务器、虚拟机或服务之间的横向通信。",
+    "chapter": "数据中心网络基础",
+    "knowledgePoint": "东西向流量",
+    "difficulty": "easy",
+    "tags": [
+      "数据中心网络基础",
+      "东西向流量"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-15-underlay",
+    "type": "single_choice",
+    "question": "在 Overlay 数据中心网络中，Underlay 网络首先需要提供什么能力？",
+    "options": {
+      "A": "隧道端点之间稳定的 IP 可达性",
+      "B": "所有租户共享同一二层广播域",
+      "C": "终端用户名认证",
+      "D": "应用层域名注册"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Underlay 是承载 Overlay 隧道的基础 IP 网络，需要先保证隧道端点之间的连通和路由收敛。",
+    "chapter": "数据中心网络基础",
+    "knowledgePoint": "Underlay 与 Overlay",
+    "difficulty": "medium",
+    "tags": [
+      "数据中心网络基础",
+      "Underlay 与 Overlay"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-15-overlay",
+    "type": "single_choice",
+    "question": "Overlay 技术在物理 Underlay 之上构建逻辑网络的主要价值是什么？",
+    "options": {
+      "A": "实现更灵活的虚拟网络与租户隔离",
+      "B": "取消所有 IP 地址",
+      "C": "让物理链路不再需要交换机",
+      "D": "替代服务器操作系统"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Overlay 把逻辑网络与物理拓扑解耦，可支持大规模虚拟网络、迁移和多租户隔离。",
+    "chapter": "数据中心网络基础",
+    "knowledgePoint": "Underlay 与 Overlay",
+    "difficulty": "medium",
+    "tags": [
+      "数据中心网络基础",
+      "Underlay 与 Overlay"
+    ],
+    "stage": "变式计算"
+  }
+]

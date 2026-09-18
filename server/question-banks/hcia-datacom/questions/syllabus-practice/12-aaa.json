@@ -1,0 +1,94 @@
+[
+  {
+    "id": "hcia-v2-12-authentication",
+    "type": "single_choice",
+    "question": "AAA 中用于确认访问者身份的过程是哪一项？",
+    "options": {
+      "A": "Authentication",
+      "B": "Authorization",
+      "C": "Accounting",
+      "D": "Aggregation"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Authentication 表示认证，用于验证用户名、口令或其他身份凭据。",
+    "chapter": "AAA 原理与配置",
+    "knowledgePoint": "认证",
+    "difficulty": "easy",
+    "tags": [
+      "AAA 原理与配置",
+      "认证"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-12-authorization",
+    "type": "single_choice",
+    "question": "AAA 中决定已认证用户可以执行哪些命令或访问哪些资源的是哪一项？",
+    "options": {
+      "A": "认证",
+      "B": "授权",
+      "C": "计费",
+      "D": "地址解析"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Authorization 即授权，在身份通过认证后决定用户拥有的权限范围。",
+    "chapter": "AAA 原理与配置",
+    "knowledgePoint": "授权",
+    "difficulty": "easy",
+    "tags": [
+      "AAA 原理与配置",
+      "授权"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-12-accounting",
+    "type": "single_choice",
+    "question": "AAA 中记录用户登录时间、操作或流量使用情况的功能是什么？",
+    "options": {
+      "A": "认证",
+      "B": "授权",
+      "C": "计费审计",
+      "D": "链路聚合"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Accounting 用于记录会话和资源使用信息，可服务于审计、统计或计费。",
+    "chapter": "AAA 原理与配置",
+    "knowledgePoint": "计费",
+    "difficulty": "easy",
+    "tags": [
+      "AAA 原理与配置",
+      "计费"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-12-local-user",
+    "type": "single_choice",
+    "question": "使用设备本地 AAA 认证时，用户凭据通常保存在哪里？",
+    "options": {
+      "A": "本台网络设备的本地用户数据库",
+      "B": "公共 DNS 服务器",
+      "C": "终端 ARP 缓存",
+      "D": "交换机 MAC 地址表"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "本地认证由设备自身保存并校验用户信息，适合规模较小或作为远程认证的备用方式。",
+    "chapter": "AAA 原理与配置",
+    "knowledgePoint": "本地用户",
+    "difficulty": "medium",
+    "tags": [
+      "AAA 原理与配置",
+      "本地用户"
+    ],
+    "stage": "变式计算"
+  }
+]

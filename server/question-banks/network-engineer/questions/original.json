@@ -1,0 +1,1037 @@
+[
+  {
+    "id": "practice-1",
+    "type": "single_choice",
+    "question": "OSI 参考模型中，负责端到端可靠传输的是哪一层？",
+    "options": {
+      "A": "网络层",
+      "B": "传输层",
+      "C": "数据链路层",
+      "D": "会话层"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "传输层提供端到端的数据传输，TCP 可提供可靠传输；网络层负责寻址与路由。",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "OSI 模型",
+    "difficulty": "medium",
+    "tags": [
+      "OSI 模型"
+    ]
+  },
+  {
+    "id": "practice-2",
+    "type": "single_choice",
+    "question": "以太网交换机通常根据什么信息转发数据帧？",
+    "options": {
+      "A": "目的 IP 地址",
+      "B": "源端口号",
+      "C": "目的 MAC 地址",
+      "D": "应用协议类型"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "二层交换机查询 MAC 地址表，根据目的 MAC 地址决定转发端口。",
+    "chapter": "网络体系结构",
+    "knowledgePoint": "协议数据单元",
+    "difficulty": "easy",
+    "tags": [
+      "协议数据单元"
+    ]
+  },
+  {
+    "id": "practice-3",
+    "type": "single_choice",
+    "question": "无噪声信道带宽为 3 kHz，采用 4 种离散信号，其理论最高数据速率是多少？",
+    "options": {
+      "A": "6 kbit/s",
+      "B": "12 kbit/s",
+      "C": "24 kbit/s",
+      "D": "3 kbit/s"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "奈奎斯特公式为 2B log2 M，因此 2 × 3000 × log2 4 = 12000 bit/s。",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "奈奎斯特定理",
+    "difficulty": "easy",
+    "tags": [
+      "奈奎斯特定理"
+    ]
+  },
+  {
+    "id": "practice-4",
+    "type": "single_choice",
+    "question": "其他条件不变时，提高信道的信噪比，香农信道容量将如何变化？",
+    "options": {
+      "A": "减小",
+      "B": "保持不变",
+      "C": "增大",
+      "D": "先增后减"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "香农容量 C = B log2(1 + S/N)。带宽固定时，信噪比提高会增大理论信道容量。",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "香农定理",
+    "difficulty": "medium",
+    "tags": [
+      "香农定理"
+    ]
+  },
+  {
+    "id": "practice-5",
+    "type": "single_choice",
+    "question": "TCP 建立连接采用三次握手，第二次握手的主要标志位是什么？",
+    "options": {
+      "A": "SYN 和 ACK",
+      "B": "FIN 和 ACK",
+      "C": "只有 RST",
+      "D": "只有 FIN"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "服务端收到 SYN 后发送 SYN+ACK，既确认客户端请求，又同步服务端的初始序列号。",
+    "chapter": "传输层协议",
+    "knowledgePoint": "TCP 连接",
+    "difficulty": "easy",
+    "tags": [
+      "TCP 连接"
+    ]
+  },
+  {
+    "id": "practice-6",
+    "type": "single_choice",
+    "question": "下列哪项是 UDP 相比 TCP 的典型特征？",
+    "options": {
+      "A": "提供重传保障",
+      "B": "面向连接",
+      "C": "首部固定为 20 字节",
+      "D": "无连接且不保证可靠交付"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "UDP 无连接，首部为 8 字节，不提供 TCP 式确认、重传、拥塞控制等可靠性机制。",
+    "chapter": "传输层协议",
+    "knowledgePoint": "UDP",
+    "difficulty": "easy",
+    "tags": [
+      "UDP"
+    ]
+  },
+  {
+    "id": "practice-7",
+    "type": "single_choice",
+    "question": "IEEE 802.1Q 帧标签中的 VLAN ID 字段长度是多少位？",
+    "options": {
+      "A": "8 位",
+      "B": "10 位",
+      "C": "12 位",
+      "D": "16 位"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "802.1Q 的 VLAN ID 占 12 位，通常可配置的 VLAN ID 为 1 到 4094。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "VLAN",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN"
+    ]
+  },
+  {
+    "id": "practice-8",
+    "type": "single_choice",
+    "question": "STP 选举根桥时，优先比较哪一项？",
+    "options": {
+      "A": "端口带宽",
+      "B": "桥优先级",
+      "C": "端口编号",
+      "D": "设备启动时间"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "STP 比较桥 ID，先比较桥优先级，数值越小越优先；相同再比较 MAC 地址。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "STP",
+    "difficulty": "easy",
+    "tags": [
+      "STP"
+    ]
+  },
+  {
+    "id": "practice-9",
+    "type": "single_choice",
+    "question": "STP 的主要目的是什么？",
+    "options": {
+      "A": "增加 IP 地址数量",
+      "B": "加密链路",
+      "C": "避免二层环路",
+      "D": "代替动态路由"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "STP 通过阻塞冗余路径形成逻辑无环拓扑，避免广播风暴与 MAC 地址表震荡。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "STP",
+    "difficulty": "easy",
+    "tags": [
+      "STP"
+    ]
+  },
+  {
+    "id": "practice-10",
+    "type": "single_choice",
+    "question": "OSPF 广播网络中，接口优先级为 0 的路由器能否成为 DR 或 BDR？",
+    "options": {
+      "A": "只能成为 DR",
+      "B": "只能成为 BDR",
+      "C": "两者都可以",
+      "D": "两者都不可以"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "OSPF 接口优先级为 0 表示不参与 DR/BDR 选举，但仍可建立邻接关系并交换路由信息。",
+    "chapter": "路由协议",
+    "knowledgePoint": "OSPF DR/BDR",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF DR/BDR"
+    ]
+  },
+  {
+    "id": "practice-11",
+    "type": "single_choice",
+    "question": "OSPF 广播网络已经选出 DR，随后加入优先级更高的路由器，通常会发生什么？",
+    "options": {
+      "A": "立即替换 DR",
+      "B": "立即替换所有邻居",
+      "C": "不会抢占现有 DR",
+      "D": "触发所有接口关闭"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "OSPF DR/BDR 选举具有非抢占性。新加入的高优先级路由器不会直接抢占现有 DR。",
+    "chapter": "路由协议",
+    "knowledgePoint": "OSPF DR/BDR",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF DR/BDR"
+    ]
+  },
+  {
+    "id": "practice-12",
+    "type": "single_choice",
+    "question": "未手工指定 Router ID 时，常见 OSPF 实现首先从哪里选择 Router ID？",
+    "options": {
+      "A": "最高的 Loopback IPv4 地址",
+      "B": "最低的物理接口地址",
+      "C": "默认网关地址",
+      "D": "组播地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "通常优先选择活动 Loopback 接口中最大的 IPv4 地址，没有 Loopback 时再选择活动物理接口中最大的 IPv4 地址。",
+    "chapter": "路由协议",
+    "knowledgePoint": "OSPF Router ID",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF Router ID"
+    ]
+  },
+  {
+    "id": "practice-13",
+    "type": "single_choice",
+    "question": "OSPF 广播网络上，两个 DROther 路由器之间通常停留在哪个邻居状态？",
+    "options": {
+      "A": "Down",
+      "B": "Init",
+      "C": "2-Way",
+      "D": "Full"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "DROther 之间通常维持 2-Way，与 DR/BDR 建立 Full 邻接，减少链路状态同步开销。",
+    "chapter": "路由协议",
+    "knowledgePoint": "OSPF 邻居状态",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF 邻居状态"
+    ]
+  },
+  {
+    "id": "practice-14",
+    "type": "single_choice",
+    "question": "RIP 路由协议把多少跳视为不可达？",
+    "options": {
+      "A": "8 跳",
+      "B": "15 跳",
+      "C": "16 跳",
+      "D": "255 跳"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "RIP 最大有效跳数为 15，度量为 16 表示不可达，因此适用于较小规模网络。",
+    "chapter": "路由协议",
+    "knowledgePoint": "RIP",
+    "difficulty": "easy",
+    "tags": [
+      "RIP"
+    ]
+  },
+  {
+    "id": "practice-15",
+    "type": "single_choice",
+    "question": "某 ACL 第一条允许所有 IP 流量，第二条拒绝主机 A。主机 A 的流量将如何处理？",
+    "options": {
+      "A": "被第二条拒绝",
+      "B": "被第一条允许",
+      "C": "随机选择一条",
+      "D": "需要匹配所有规则"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "ACL 通常按顺序逐条匹配，首条命中后停止。前面的允许所有流量会使后面的拒绝规则无法生效。",
+    "chapter": "网络安全",
+    "knowledgePoint": "ACL 匹配顺序",
+    "difficulty": "easy",
+    "tags": [
+      "ACL 匹配顺序"
+    ]
+  },
+  {
+    "id": "practice-16",
+    "type": "single_choice",
+    "question": "使用末尾隐式拒绝的 ACL 时，报文没有匹配任何显式规则，将如何处理？",
+    "options": {
+      "A": "允许通过",
+      "B": "转发给 DNS",
+      "C": "直接丢弃",
+      "D": "自动生成允许规则"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "末尾隐式拒绝表示未匹配显式允许规则的流量会被丢弃，配置时需要考虑业务放行范围。",
+    "chapter": "网络安全",
+    "knowledgePoint": "ACL 隐式拒绝",
+    "difficulty": "medium",
+    "tags": [
+      "ACL 隐式拒绝"
+    ]
+  },
+  {
+    "id": "practice-17",
+    "type": "single_choice",
+    "question": "以下哪一种属于对称加密算法？",
+    "options": {
+      "A": "RSA",
+      "B": "AES",
+      "C": "ECDSA",
+      "D": "SHA-256"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "AES 是对称加密算法，加密和解密使用同一密钥。RSA 属于非对称算法，SHA-256 是散列算法。",
+    "chapter": "网络安全",
+    "knowledgePoint": "对称加密",
+    "difficulty": "easy",
+    "tags": [
+      "对称加密"
+    ]
+  },
+  {
+    "id": "practice-18",
+    "type": "single_choice",
+    "question": "在以太网 IPv4 网络中，ARP 的主要作用是什么？",
+    "options": {
+      "A": "解析域名",
+      "B": "根据 IPv4 地址获取 MAC 地址",
+      "C": "为主机分配端口",
+      "D": "加密 IP 报文"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "ARP 在本地链路上解析 IPv4 地址对应的 MAC 地址。跨网段通信时，通常解析下一跳网关的 MAC 地址。",
+    "chapter": "网络层协议",
+    "knowledgePoint": "ARP",
+    "difficulty": "easy",
+    "tags": [
+      "ARP"
+    ]
+  },
+  {
+    "id": "practice-19",
+    "type": "single_choice",
+    "question": "常见 ping 工具主要使用哪种协议检测主机可达性？",
+    "options": {
+      "A": "ICMP",
+      "B": "SMTP",
+      "C": "SNMP",
+      "D": "FTP"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "ping 通常使用 ICMP Echo Request 和 Echo Reply 检测可达性与往返时延。",
+    "chapter": "网络层协议",
+    "knowledgePoint": "ICMP",
+    "difficulty": "medium",
+    "tags": [
+      "ICMP"
+    ]
+  },
+  {
+    "id": "practice-20",
+    "type": "single_choice",
+    "question": "DNS 资源记录中，MX 记录表示什么？",
+    "options": {
+      "A": "IPv6 地址",
+      "B": "邮件交换服务器",
+      "C": "域名别名",
+      "D": "权威服务器"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "MX 记录指定域的邮件交换服务器及优先级；A、AAAA 分别表示 IPv4 和 IPv6 地址。",
+    "chapter": "应用层协议",
+    "knowledgePoint": "DNS",
+    "difficulty": "easy",
+    "tags": [
+      "DNS"
+    ]
+  },
+  {
+    "id": "practice-21",
+    "type": "single_choice",
+    "question": "DHCP 客户端首次获取 IPv4 地址时，通常首先发送哪种消息？",
+    "options": {
+      "A": "DHCP ACK",
+      "B": "DHCP OFFER",
+      "C": "DHCP DISCOVER",
+      "D": "DHCP NAK"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "典型流程为 Discover、Offer、Request、ACK，客户端先广播 Discover 寻找 DHCP 服务器。",
+    "chapter": "应用层协议",
+    "knowledgePoint": "DHCP",
+    "difficulty": "easy",
+    "tags": [
+      "DHCP"
+    ]
+  },
+  {
+    "id": "practice-22",
+    "type": "single_choice",
+    "question": "SNMP 代理通常使用哪个 UDP 端口接收管理请求？",
+    "options": {
+      "A": "53",
+      "B": "123",
+      "C": "161",
+      "D": "443"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "SNMP 代理通常监听 UDP 161，Trap 通知通常发送到管理站的 UDP 162。",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP"
+    ]
+  },
+  {
+    "id": "practice-23",
+    "type": "single_choice",
+    "question": "Linux 文件权限 640 表示所有者拥有哪些权限？",
+    "options": {
+      "A": "只读",
+      "B": "读和写",
+      "C": "读和执行",
+      "D": "读写执行"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "权限位 6 = 4 + 2，表示读和写；组为只读，其他用户没有权限。",
+    "chapter": "网络操作系统与服务器配置",
+    "knowledgePoint": "Linux 权限",
+    "difficulty": "easy",
+    "tags": [
+      "Linux 权限"
+    ]
+  },
+  {
+    "id": "subnet-1",
+    "type": "single_choice",
+    "question": "主机 172.1.10.35/25 所在子网的广播地址是什么？",
+    "options": {
+      "A": "172.1.10.0",
+      "B": "172.1.10.1",
+      "C": "172.1.10.126",
+      "D": "172.1.10.127"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "/25 的每个子网包含 128 个地址。网络地址为 172.1.10.0，广播地址为 172.1.10.127，可用主机范围为 172.1.10.1 至 172.1.10.126。",
+    "chapter": "IPv4 与子网划分",
+    "knowledgePoint": "子网广播地址",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4",
+      "CIDR",
+      "子网"
+    ]
+  },
+  {
+    "id": "subnet-2",
+    "type": "single_choice",
+    "question": "主机 10.2.10.42/26 所在子网的最后一个可用主机地址是什么？",
+    "options": {
+      "A": "10.2.10.0",
+      "B": "10.2.10.1",
+      "C": "10.2.10.62",
+      "D": "10.2.10.63"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "/26 的每个子网包含 64 个地址。网络地址为 10.2.10.0，广播地址为 10.2.10.63，可用主机范围为 10.2.10.1 至 10.2.10.62。",
+    "chapter": "IPv4 与子网划分",
+    "knowledgePoint": "可用主机地址",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4",
+      "CIDR",
+      "子网"
+    ]
+  },
+  {
+    "id": "subnet-3",
+    "type": "single_choice",
+    "question": "主机 172.3.10.49/27 所在子网的网络地址是什么？",
+    "options": {
+      "A": "172.3.10.32",
+      "B": "172.3.10.33",
+      "C": "172.3.10.62",
+      "D": "172.3.10.63"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "/27 的每个子网包含 32 个地址。网络地址为 172.3.10.32，广播地址为 172.3.10.63，可用主机范围为 172.3.10.33 至 172.3.10.62。",
+    "chapter": "IPv4 与子网划分",
+    "knowledgePoint": "子网网络地址",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4",
+      "CIDR",
+      "子网"
+    ]
+  },
+  {
+    "id": "subnet-4",
+    "type": "single_choice",
+    "question": "主机 10.4.10.56/28 所在子网的广播地址是什么？",
+    "options": {
+      "A": "10.4.10.48",
+      "B": "10.4.10.49",
+      "C": "10.4.10.62",
+      "D": "10.4.10.63"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "/28 的每个子网包含 16 个地址。网络地址为 10.4.10.48，广播地址为 10.4.10.63，可用主机范围为 10.4.10.49 至 10.4.10.62。",
+    "chapter": "IPv4 与子网划分",
+    "knowledgePoint": "子网广播地址",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4",
+      "CIDR",
+      "子网"
+    ]
+  },
+  {
+    "id": "subnet-5",
+    "type": "single_choice",
+    "question": "主机 172.5.10.63/25 所在子网的最后一个可用主机地址是什么？",
+    "options": {
+      "A": "172.5.10.0",
+      "B": "172.5.10.1",
+      "C": "172.5.10.126",
+      "D": "172.5.10.127"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "/25 的每个子网包含 128 个地址。网络地址为 172.5.10.0，广播地址为 172.5.10.127，可用主机范围为 172.5.10.1 至 172.5.10.126。",
+    "chapter": "IPv4 与子网划分",
+    "knowledgePoint": "可用主机地址",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4",
+      "CIDR",
+      "子网"
+    ]
+  },
+  {
+    "id": "subnet-6",
+    "type": "single_choice",
+    "question": "主机 10.6.10.70/26 所在子网的网络地址是什么？",
+    "options": {
+      "A": "10.6.10.64",
+      "B": "10.6.10.65",
+      "C": "10.6.10.126",
+      "D": "10.6.10.127"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "/26 的每个子网包含 64 个地址。网络地址为 10.6.10.64，广播地址为 10.6.10.127，可用主机范围为 10.6.10.65 至 10.6.10.126。",
+    "chapter": "IPv4 与子网划分",
+    "knowledgePoint": "子网网络地址",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4",
+      "CIDR",
+      "子网"
+    ]
+  },
+  {
+    "id": "subnet-7",
+    "type": "single_choice",
+    "question": "主机 172.7.10.77/27 所在子网的广播地址是什么？",
+    "options": {
+      "A": "172.7.10.64",
+      "B": "172.7.10.65",
+      "C": "172.7.10.94",
+      "D": "172.7.10.95"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "/27 的每个子网包含 32 个地址。网络地址为 172.7.10.64，广播地址为 172.7.10.95，可用主机范围为 172.7.10.65 至 172.7.10.94。",
+    "chapter": "IPv4 与子网划分",
+    "knowledgePoint": "子网广播地址",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4",
+      "CIDR",
+      "子网"
+    ]
+  },
+  {
+    "id": "subnet-8",
+    "type": "single_choice",
+    "question": "主机 10.8.10.84/28 所在子网的最后一个可用主机地址是什么？",
+    "options": {
+      "A": "10.8.10.80",
+      "B": "10.8.10.81",
+      "C": "10.8.10.94",
+      "D": "10.8.10.95"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "/28 的每个子网包含 16 个地址。网络地址为 10.8.10.80，广播地址为 10.8.10.95，可用主机范围为 10.8.10.81 至 10.8.10.94。",
+    "chapter": "IPv4 与子网划分",
+    "knowledgePoint": "可用主机地址",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4",
+      "CIDR",
+      "子网"
+    ]
+  },
+  {
+    "id": "subnet-9",
+    "type": "single_choice",
+    "question": "主机 172.9.10.91/25 所在子网的网络地址是什么？",
+    "options": {
+      "A": "172.9.10.0",
+      "B": "172.9.10.1",
+      "C": "172.9.10.126",
+      "D": "172.9.10.127"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "/25 的每个子网包含 128 个地址。网络地址为 172.9.10.0，广播地址为 172.9.10.127，可用主机范围为 172.9.10.1 至 172.9.10.126。",
+    "chapter": "IPv4 与子网划分",
+    "knowledgePoint": "子网网络地址",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4",
+      "CIDR",
+      "子网"
+    ]
+  },
+  {
+    "id": "subnet-10",
+    "type": "single_choice",
+    "question": "主机 10.10.10.98/26 所在子网的广播地址是什么？",
+    "options": {
+      "A": "10.10.10.64",
+      "B": "10.10.10.65",
+      "C": "10.10.10.126",
+      "D": "10.10.10.127"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "/26 的每个子网包含 64 个地址。网络地址为 10.10.10.64，广播地址为 10.10.10.127，可用主机范围为 10.10.10.65 至 10.10.10.126。",
+    "chapter": "IPv4 与子网划分",
+    "knowledgePoint": "子网广播地址",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4",
+      "CIDR",
+      "子网"
+    ]
+  },
+  {
+    "id": "subnet-11",
+    "type": "single_choice",
+    "question": "主机 172.11.10.105/27 所在子网的最后一个可用主机地址是什么？",
+    "options": {
+      "A": "172.11.10.96",
+      "B": "172.11.10.97",
+      "C": "172.11.10.126",
+      "D": "172.11.10.127"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "/27 的每个子网包含 32 个地址。网络地址为 172.11.10.96，广播地址为 172.11.10.127，可用主机范围为 172.11.10.97 至 172.11.10.126。",
+    "chapter": "IPv4 与子网划分",
+    "knowledgePoint": "可用主机地址",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4",
+      "CIDR",
+      "子网"
+    ]
+  },
+  {
+    "id": "subnet-12",
+    "type": "single_choice",
+    "question": "主机 10.12.10.112/28 所在子网的网络地址是什么？",
+    "options": {
+      "A": "10.12.10.112",
+      "B": "10.12.10.113",
+      "C": "10.12.10.126",
+      "D": "10.12.10.127"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "/28 的每个子网包含 16 个地址。网络地址为 10.12.10.112，广播地址为 10.12.10.127，可用主机范围为 10.12.10.113 至 10.12.10.126。",
+    "chapter": "IPv4 与子网划分",
+    "knowledgePoint": "子网网络地址",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4",
+      "CIDR",
+      "子网"
+    ]
+  },
+  {
+    "id": "subnet-13",
+    "type": "single_choice",
+    "question": "主机 172.13.10.119/25 所在子网的广播地址是什么？",
+    "options": {
+      "A": "172.13.10.0",
+      "B": "172.13.10.1",
+      "C": "172.13.10.126",
+      "D": "172.13.10.127"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "/25 的每个子网包含 128 个地址。网络地址为 172.13.10.0，广播地址为 172.13.10.127，可用主机范围为 172.13.10.1 至 172.13.10.126。",
+    "chapter": "IPv4 与子网划分",
+    "knowledgePoint": "子网广播地址",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4",
+      "CIDR",
+      "子网"
+    ]
+  },
+  {
+    "id": "subnet-14",
+    "type": "single_choice",
+    "question": "主机 10.14.10.126/26 所在子网的最后一个可用主机地址是什么？",
+    "options": {
+      "A": "10.14.10.64",
+      "B": "10.14.10.65",
+      "C": "10.14.10.126",
+      "D": "10.14.10.127"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "/26 的每个子网包含 64 个地址。网络地址为 10.14.10.64，广播地址为 10.14.10.127，可用主机范围为 10.14.10.65 至 10.14.10.126。",
+    "chapter": "IPv4 与子网划分",
+    "knowledgePoint": "可用主机地址",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4",
+      "CIDR",
+      "子网"
+    ]
+  },
+  {
+    "id": "subnet-15",
+    "type": "single_choice",
+    "question": "主机 172.15.10.133/27 所在子网的网络地址是什么？",
+    "options": {
+      "A": "172.15.10.128",
+      "B": "172.15.10.129",
+      "C": "172.15.10.158",
+      "D": "172.15.10.159"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "/27 的每个子网包含 32 个地址。网络地址为 172.15.10.128，广播地址为 172.15.10.159，可用主机范围为 172.15.10.129 至 172.15.10.158。",
+    "chapter": "IPv4 与子网划分",
+    "knowledgePoint": "子网网络地址",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4",
+      "CIDR",
+      "子网"
+    ]
+  },
+  {
+    "id": "subnet-16",
+    "type": "single_choice",
+    "question": "主机 10.16.10.140/28 所在子网的广播地址是什么？",
+    "options": {
+      "A": "10.16.10.128",
+      "B": "10.16.10.129",
+      "C": "10.16.10.142",
+      "D": "10.16.10.143"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "/28 的每个子网包含 16 个地址。网络地址为 10.16.10.128，广播地址为 10.16.10.143，可用主机范围为 10.16.10.129 至 10.16.10.142。",
+    "chapter": "IPv4 与子网划分",
+    "knowledgePoint": "子网广播地址",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4",
+      "CIDR",
+      "子网"
+    ]
+  },
+  {
+    "id": "subnet-17",
+    "type": "single_choice",
+    "question": "主机 172.17.10.147/25 所在子网的最后一个可用主机地址是什么？",
+    "options": {
+      "A": "172.17.10.128",
+      "B": "172.17.10.129",
+      "C": "172.17.10.254",
+      "D": "172.17.10.255"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "/25 的每个子网包含 128 个地址。网络地址为 172.17.10.128，广播地址为 172.17.10.255，可用主机范围为 172.17.10.129 至 172.17.10.254。",
+    "chapter": "IPv4 与子网划分",
+    "knowledgePoint": "可用主机地址",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4",
+      "CIDR",
+      "子网"
+    ]
+  },
+  {
+    "id": "subnet-18",
+    "type": "single_choice",
+    "question": "主机 10.18.10.154/26 所在子网的网络地址是什么？",
+    "options": {
+      "A": "10.18.10.128",
+      "B": "10.18.10.129",
+      "C": "10.18.10.190",
+      "D": "10.18.10.191"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "/26 的每个子网包含 64 个地址。网络地址为 10.18.10.128，广播地址为 10.18.10.191，可用主机范围为 10.18.10.129 至 10.18.10.190。",
+    "chapter": "IPv4 与子网划分",
+    "knowledgePoint": "子网网络地址",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4",
+      "CIDR",
+      "子网"
+    ]
+  },
+  {
+    "id": "subnet-19",
+    "type": "single_choice",
+    "question": "主机 172.19.10.161/27 所在子网的广播地址是什么？",
+    "options": {
+      "A": "172.19.10.160",
+      "B": "172.19.10.161",
+      "C": "172.19.10.190",
+      "D": "172.19.10.191"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "/27 的每个子网包含 32 个地址。网络地址为 172.19.10.160，广播地址为 172.19.10.191，可用主机范围为 172.19.10.161 至 172.19.10.190。",
+    "chapter": "IPv4 与子网划分",
+    "knowledgePoint": "子网广播地址",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4",
+      "CIDR",
+      "子网"
+    ]
+  },
+  {
+    "id": "subnet-20",
+    "type": "single_choice",
+    "question": "主机 10.20.10.168/28 所在子网的最后一个可用主机地址是什么？",
+    "options": {
+      "A": "10.20.10.160",
+      "B": "10.20.10.161",
+      "C": "10.20.10.174",
+      "D": "10.20.10.175"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "/28 的每个子网包含 16 个地址。网络地址为 10.20.10.160，广播地址为 10.20.10.175，可用主机范围为 10.20.10.161 至 10.20.10.174。",
+    "chapter": "IPv4 与子网划分",
+    "knowledgePoint": "可用主机地址",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4",
+      "CIDR",
+      "子网"
+    ]
+  },
+  {
+    "id": "subnet-21",
+    "type": "single_choice",
+    "question": "主机 172.21.10.175/25 所在子网的网络地址是什么？",
+    "options": {
+      "A": "172.21.10.128",
+      "B": "172.21.10.129",
+      "C": "172.21.10.254",
+      "D": "172.21.10.255"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "/25 的每个子网包含 128 个地址。网络地址为 172.21.10.128，广播地址为 172.21.10.255，可用主机范围为 172.21.10.129 至 172.21.10.254。",
+    "chapter": "IPv4 与子网划分",
+    "knowledgePoint": "子网网络地址",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4",
+      "CIDR",
+      "子网"
+    ]
+  },
+  {
+    "id": "subnet-22",
+    "type": "single_choice",
+    "question": "主机 10.22.10.182/26 所在子网的广播地址是什么？",
+    "options": {
+      "A": "10.22.10.128",
+      "B": "10.22.10.129",
+      "C": "10.22.10.190",
+      "D": "10.22.10.191"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "/26 的每个子网包含 64 个地址。网络地址为 10.22.10.128，广播地址为 10.22.10.191，可用主机范围为 10.22.10.129 至 10.22.10.190。",
+    "chapter": "IPv4 与子网划分",
+    "knowledgePoint": "子网广播地址",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4",
+      "CIDR",
+      "子网"
+    ]
+  },
+  {
+    "id": "subnet-23",
+    "type": "single_choice",
+    "question": "主机 172.23.10.189/27 所在子网的最后一个可用主机地址是什么？",
+    "options": {
+      "A": "172.23.10.160",
+      "B": "172.23.10.161",
+      "C": "172.23.10.190",
+      "D": "172.23.10.191"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "/27 的每个子网包含 32 个地址。网络地址为 172.23.10.160，广播地址为 172.23.10.191，可用主机范围为 172.23.10.161 至 172.23.10.190。",
+    "chapter": "IPv4 与子网划分",
+    "knowledgePoint": "可用主机地址",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4",
+      "CIDR",
+      "子网"
+    ]
+  },
+  {
+    "id": "subnet-24",
+    "type": "single_choice",
+    "question": "主机 10.24.10.196/28 所在子网的网络地址是什么？",
+    "options": {
+      "A": "10.24.10.192",
+      "B": "10.24.10.193",
+      "C": "10.24.10.206",
+      "D": "10.24.10.207"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "/28 的每个子网包含 16 个地址。网络地址为 10.24.10.192，广播地址为 10.24.10.207，可用主机范围为 10.24.10.193 至 10.24.10.206。",
+    "chapter": "IPv4 与子网划分",
+    "knowledgePoint": "子网网络地址",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4",
+      "CIDR",
+      "子网"
+    ]
+  }
+]

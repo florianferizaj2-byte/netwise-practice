@@ -1,0 +1,94 @@
+[
+  {
+    "id": "hcia-v2-10-address-length",
+    "type": "single_choice",
+    "question": "IPv6 地址的二进制长度是多少位？",
+    "options": {
+      "A": "32 位",
+      "B": "48 位",
+      "C": "64 位",
+      "D": "128 位"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "IPv6 地址长度为 128 位，通常写成八组十六进制数。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgePoint": "IPv6 地址类型",
+    "difficulty": "easy",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 地址类型"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-10-link-local",
+    "type": "single_choice",
+    "question": "IPv6 链路本地单播地址通常属于哪个前缀范围？",
+    "options": {
+      "A": "FE80::/10",
+      "B": "FC00::/7",
+      "C": "2000::/3",
+      "D": "FF00::/8"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "FE80::/10 用于链路本地单播地址，只在本地链路有效，不由路由器转发到其他链路。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgePoint": "IPv6 地址类型",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 地址类型"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-10-no-broadcast",
+    "type": "single_choice",
+    "question": "IPv6 用什么机制替代了 IPv4 中的广播通信场景？",
+    "options": {
+      "A": "组播",
+      "B": "帧中继",
+      "C": "NAT",
+      "D": "ARP 广播"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IPv6 不定义广播地址，使用组播和任播等方式完成相应的一对多或就近通信。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgePoint": "邻居发现",
+    "difficulty": "easy",
+    "tags": [
+      "IPv6 地址与配置",
+      "邻居发现"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-10-compression",
+    "type": "single_choice",
+    "question": "一个 IPv6 地址文本中，双冒号“::”最多可以使用几次来压缩连续的零？",
+    "options": {
+      "A": "一次",
+      "B": "两次",
+      "C": "四次",
+      "D": "不限次数"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "为保证地址能唯一还原，一个 IPv6 地址中双冒号压缩只能出现一次。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgePoint": "地址简写",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6 地址与配置",
+      "地址简写"
+    ],
+    "stage": "变式计算"
+  }
+]

@@ -1,0 +1,140 @@
+[
+  {
+    "id": "hcia-v2-extra-03-known-unicast",
+    "type": "single_choice",
+    "question": "交换机已经学习到目的 MAC 地址时，通常如何转发已知单播帧？",
+    "options": {
+      "A": "只发送给默认网关",
+      "B": "直接丢弃",
+      "C": "只从 MAC 表指定的出接口转发",
+      "D": "在所有 VLAN 泛洪"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "已知单播可根据 MAC 地址表精确选择出接口。 本题考查“交换机转发”，因此应选择“只从 MAC 表指定的出接口转发”。",
+    "chapter": "以太网交换基础",
+    "knowledgePoint": "交换机转发",
+    "difficulty": "easy",
+    "tags": [
+      "以太网交换基础",
+      "交换机转发"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-extra-03-broadcast-mac",
+    "type": "single_choice",
+    "question": "以太网广播帧的目的 MAC 地址是什么？",
+    "options": {
+      "A": "设备自身源 MAC",
+      "B": "FF:FF:FF:FF:FF:FF",
+      "C": "00:00:00:00:00:00",
+      "D": "01:00:5E:00:00:05"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "全 F 的目的 MAC 地址表示二层广播，会在所属广播域内泛洪。 本题考查“以太网帧”，因此应选择“FF:FF:FF:FF:FF:FF”。",
+    "chapter": "以太网交换基础",
+    "knowledgePoint": "以太网帧",
+    "difficulty": "easy",
+    "tags": [
+      "以太网交换基础",
+      "以太网帧"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v2-extra-03-mac-aging",
+    "type": "single_choice",
+    "question": "动态 MAC 地址表项老化的主要目的是什么？",
+    "options": {
+      "A": "清除长期未使用的旧位置映射",
+      "B": "永久锁定终端端口",
+      "C": "增加 IP 地址数量",
+      "D": "关闭广播转发"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "终端可能移动，老化机制可避免过期 MAC 与端口关系长期残留。 本题考查“MAC 地址表”，因此应选择“清除长期未使用的旧位置映射”。",
+    "chapter": "以太网交换基础",
+    "knowledgePoint": "MAC 地址表",
+    "difficulty": "medium",
+    "tags": [
+      "以太网交换基础",
+      "MAC 地址表"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v2-extra-03-collision-domain",
+    "type": "single_choice",
+    "question": "交换机的每个普通以太网端口通常构成什么？",
+    "options": {
+      "A": "独立的 OSPF 区域",
+      "B": "独立的自治系统",
+      "C": "独立的 DNS 域",
+      "D": "独立的冲突域"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "交换机端口隔离冲突域，全双工环境中也不会发生共享介质冲突。 本题考查“广播域”，因此应选择“独立的冲突域”。",
+    "chapter": "以太网交换基础",
+    "knowledgePoint": "广播域",
+    "difficulty": "medium",
+    "tags": [
+      "以太网交换基础",
+      "广播域"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v2-extra-03-frame-fcs",
+    "type": "single_choice",
+    "question": "以太网帧中的 FCS 字段主要用于什么？",
+    "options": {
+      "A": "选择应用端口",
+      "B": "加密用户数据",
+      "C": "检测帧在传输中是否出现差错",
+      "D": "给主机分配 IP 地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "FCS 基于 CRC 计算，用于接收端发现帧比特差错。 本题考查“以太网帧”，因此应选择“检测帧在传输中是否出现差错”。",
+    "chapter": "以太网交换基础",
+    "knowledgePoint": "以太网帧",
+    "difficulty": "easy",
+    "tags": [
+      "以太网交换基础",
+      "以太网帧"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-extra-03-source-refresh",
+    "type": "single_choice",
+    "question": "交换机从某端口再次收到已学习源 MAC 的帧时，通常会做什么？",
+    "options": {
+      "A": "生成默认路由",
+      "B": "刷新该动态表项的老化计时并在必要时更新端口",
+      "C": "删除整个 VLAN",
+      "D": "修改目的 IP"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "持续根据源 MAC 学习可让表项反映终端的最新连接位置。 本题考查“MAC 地址表”，因此应选择“刷新该动态表项的老化计时并在必要时更新端口”。",
+    "chapter": "以太网交换基础",
+    "knowledgePoint": "MAC 地址表",
+    "difficulty": "medium",
+    "tags": [
+      "以太网交换基础",
+      "MAC 地址表"
+    ],
+    "stage": "基础理解"
+  }
+]

@@ -1,0 +1,1272 @@
+[
+  {
+    "id": "collection-c09-q001",
+    "question": "SNMP协议使用的传输层协议是？",
+    "options": {
+      "A": "UDP",
+      "B": "TCP",
+      "C": "IP",
+      "D": "ICMP"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "SNMP基于UDP协议，代理使用UDP 161端口接收管理站请求，管理站使用UDP 162端口接收代理发送的Trap告警。SNMP选择UDP是因为管理报文短、要求低开销。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP 与网络监控",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP 与网络监控",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 1,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q002",
+    "question": "SNMP协议中，用于代理主动向管理站发送紧急告警的报文类型是？",
+    "options": {
+      "A": "TRAP",
+      "B": "GET-RESPONSE",
+      "C": "GET-REQUEST",
+      "D": "INFORM"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "TRAP由代理主动发送给管理站，报告紧急事件（设备故障、链路中断），不需要管理站确认。INFORM也用于告警但需要确认。GET-REQUEST是管理站读取数据，GET-RESPONSE是代理应答。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP 与网络监控",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP 与网络监控",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 2,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q003",
+    "question": "下列关于SNMP的说法，错误的是？",
+    "options": {
+      "A": "SNMP采用轮询机制获取管理信息",
+      "B": "代理进程接收信息使用161端口",
+      "C": "SNMP基于TCP协议",
+      "D": "MIB定义了被管理对象的结构"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "SNMP基于UDP而非TCP，使用端口161（代理接收请求）和162（Trap发送）。SNMP主要采用轮询机制（管理站定期查询代理），同时支持Trap事件驱动告警。MIB定义被管理对象结构。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP 与网络监控",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP 与网络监控",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 3,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q004",
+    "question": "SNMPv3相比SNMPv1/v2c，最主要的增强是？",
+    "options": {
+      "A": "支持更多MIB对象",
+      "B": "增加基于用户的安全模型USM，提供认证和加密",
+      "C": "支持TCP传输",
+      "D": "提高传输速率"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "SNMPv3核心增强是安全机制，引入USM（基于用户的安全模型）提供数据认证（完整性+数据源认证）和加密（机密性），解决了v1/v2c使用共同体字符串明文传输安全性差的问题。SNMPv3还引入VACM（基于视图的访问控制模型）。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP 与网络监控",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP 与网络监控",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 4,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q005",
+    "question": "下列关于MIB的描述，正确的是？",
+    "options": {
+      "A": "MIB是SNMP的管理信息库，定义被管理对象的结构",
+      "B": "MIB存储在管理站上，代理不需要MIB",
+      "C": "MIB中的对象只能读取不能修改",
+      "D": "MIB使用IP地址标识每个对象"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "MIB（管理信息库）是SNMP核心，定义被管理设备上可管理对象的层次结构和属性，使用OID（对象标识符，如1.3.6.1.2.1）唯一标识。代理维护MIB实例，管理站通过SNMP操作读取/修改。MIB对象有只读（read-only）和读写（read-write）两种访问权限。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP 与网络监控",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP 与网络监控",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 5,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q006",
+    "question": "网络设备发生故障时，向网络管理系统发送什么类型的SNMP报文？",
+    "options": {
+      "A": "trap",
+      "B": "get-response",
+      "C": "set-request",
+      "D": "get-request"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "当被管设备发生故障或重要事件时，代理主动向管理站发送TRAP报文，报告差错或事件。get-request是管理站读取对象请求，get-response是代理应答，set-request是管理站修改对象请求。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP 与网络监控",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP 与网络监控",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 6,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q007",
+    "question": "SNMPv2c引入的新操作是？",
+    "options": {
+      "A": "Get-Request",
+      "B": "Get-Next-Request",
+      "C": "GetBulkRequest",
+      "D": "Set-Request"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "SNMPv2c增加了GetBulkRequest（批量获取）操作，可以高效地一次性获取大量数据（如整个路由表），减少了管理站和代理之间的交互次数，提高了效率。Get-Request、Get-Next-Request、Set-Request在SNMPv1中已有。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP 与网络监控",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP 与网络监控",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 7,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q008",
+    "question": "SNMPv1使用的认证方式是？",
+    "options": {
+      "A": "用户名和密码",
+      "B": "共同体字符串（Community String）",
+      "C": "数字证书",
+      "D": "生物识别"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "SNMPv1使用共同体字符串（Community String）作为简单的认证方式，明文传输，安全性差。只读共同体（默认public）用于读取，读写共同体（默认private）用于修改。SNMPv2c也使用共同体字符串。SNMPv3使用基于用户的安全模型（USM），支持认证和加密。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP 与网络监控",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP 与网络监控",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 8,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      },
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 28,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q009",
+    "question": "下列关于SNMP端口号的说法，正确的是？",
+    "options": {
+      "A": "代理使用UDP 161接收请求，管理站使用UDP 162接收Trap",
+      "B": "代理使用TCP 161接收请求，管理站使用TCP 162接收Trap",
+      "C": "代理和管理站都使用UDP 161",
+      "D": "代理和管理站都使用TCP 162"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "SNMP使用UDP：代理进程使用UDP 161端口接收管理站的请求（Get/Set/GetNext/GetBulk）；管理站使用UDP 162端口接收代理发送的Trap和Inform告警。SNMP不使用TCP。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP 与网络监控",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP 与网络监控",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 9,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      },
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 29,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q010",
+    "question": "下列关于网络管理功能的说法，错误的是？",
+    "options": {
+      "A": "故障管理：检测、定位和恢复网络故障",
+      "B": "配置管理：监控和管理网络设备配置",
+      "C": "性能管理：监控网络性能指标",
+      "D": "安全管理：负责网络设备的物理安全"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "OSI网络管理五大功能：1）故障管理（Fault）：检测、定位、恢复故障；2）配置管理（Configuration）：管理设备配置；3）性能管理（Performance）：监控性能指标（带宽、延迟、丢包率）；4）安全管理（Security）：访问控制、认证、加密、审计等网络安全管理，不是物理安全；5）计费管理（Accounting）：记录用户资源使用情况。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "网络管理",
+    "difficulty": "medium",
+    "tags": [
+      "网络管理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 10,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q011",
+    "question": "在Windows中，查看网络连接状态和端口统计的命令是？",
+    "options": {
+      "A": "ipconfig",
+      "B": "tracert",
+      "C": "ping",
+      "D": "netstat"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "netstat查看TCP/UDP连接、端口监听状态、路由表、网络接口统计等。常用参数：-a（所有连接和监听端口）、-n（数字形式显示地址和端口）、-o（显示进程ID）、-r（路由表）。ipconfig查看网卡配置，ping测试连通性，tracert路由跟踪。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "Windows 服务器",
+    "difficulty": "medium",
+    "tags": [
+      "Windows 服务器",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 11,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      },
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 34,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q012",
+    "question": "在Linux中，查看网络接口配置的命令是？",
+    "options": {
+      "A": "ifconfig 或 ip addr",
+      "B": "ping",
+      "C": "netstat",
+      "D": "route"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Linux中使用ifconfig（传统命令，net-tools包）或ip addr（现代命令，iproute2包）查看和配置网络接口IP地址。ping测试连通性，netstat/ss查看网络连接，route/ip route查看路由表。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "Linux 命令与管理",
+    "difficulty": "medium",
+    "tags": [
+      "Linux 命令与管理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 12,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      },
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 35,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q013",
+    "question": "在Windows中，清除DNS缓存的命令是？",
+    "options": {
+      "A": "ipconfig /flushdns",
+      "B": "ipconfig /displaydns",
+      "C": "ipconfig /registerdns",
+      "D": "ipconfig /renew"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "ipconfig /flushdns清除DNS解析器缓存。/displaydns显示缓存内容，/registerdns刷新所有DHCP租约并注册DNS名称，/renew更新DHCP租约（指定适配器），/release释放DHCP租约。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "DNS",
+    "difficulty": "medium",
+    "tags": [
+      "DNS",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 13,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      },
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 36,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q014",
+    "question": "在Linux中，ping命令的-c参数的作用是？",
+    "options": {
+      "A": "持续ping不停止",
+      "B": "指定发送的ICMP回显请求次数",
+      "C": "设置数据包大小",
+      "D": "设置TTL值"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Linux ping -c count指定发送ICMP回显请求的次数，发送完后自动停止并显示统计。不指定-c时Linux ping默认持续发送（需Ctrl+C停止），Windows ping默认发送4次。-s设置数据包大小，-t设置TTL（Linux中为-t ttl）。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "ICMP",
+    "difficulty": "medium",
+    "tags": [
+      "ICMP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 14,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      },
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 37,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q015",
+    "question": "tracert（Windows）/traceroute（Linux）命令的作用是？",
+    "options": {
+      "A": "测试网络连通性",
+      "B": "跟踪数据包从源到目标经过的路由路径",
+      "C": "查看网络连接状态",
+      "D": "查看DNS解析结果"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "tracert/traceroute（路由跟踪）通过发送TTL递增的数据包，利用ICMP超时消息（Windows用ICMP Echo，Linux默认用UDP）获取从源到目标经过的每一跳路由器的IP地址和延迟，用于诊断路由路径和定位网络故障点。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "ICMP",
+    "difficulty": "medium",
+    "tags": [
+      "ICMP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 15,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      },
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 38,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q017",
+    "question": "下列关于SNMP轮询机制的说法，正确的是？",
+    "options": {
+      "A": "管理站定期向代理发送请求获取管理信息",
+      "B": "代理定期向管理站发送所有信息",
+      "C": "轮询机制不需要管理站参与",
+      "D": "轮询机制只能获取一条信息"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "SNMP主要采用轮询（Polling）机制：管理站（NMS）定期向代理（Agent）发送Get-Request/GetNext-Request/GetBulkRequest请求，获取被管理对象的信息。轮询可以获取单个或批量信息。Trap机制是代理主动报告事件，与轮询互补。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP 与网络监控",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP 与网络监控",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 17,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q018",
+    "question": "SNMP中，OID（对象标识符）的作用是？",
+    "options": {
+      "A": "唯一标识MIB中的被管理对象",
+      "B": "标识设备的IP地址",
+      "C": "标识SNMP版本",
+      "D": "标识共同体字符串"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "OID（Object Identifier，对象标识符）是一串用点分隔的数字（如1.3.6.1.2.1.1.1.0表示系统描述），唯一标识MIB树中的每个被管理对象。OID采用树形层次结构，从根（iso=1）开始逐级分支，每个节点有编号和名称。管理站通过OID来读取或修改对应的被管理对象。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP 与网络监控",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP 与网络监控",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 18,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      },
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 30,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q019",
+    "question": "下列关于SNMPv3安全级别（Security Level）的说法，错误的是？",
+    "options": {
+      "A": "noAuthNoPriv：无认证无加密",
+      "B": "authNoPriv：有认证无加密",
+      "C": "authPriv：有认证有加密",
+      "D": "SNMPv3不支持无认证模式"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "SNMPv3定义三种安全级别：1）noAuthNoPriv（无认证无加密）：仅用户名，安全性最低；2）authNoPriv（有认证无加密）：使用HMAC-MD5或HMAC-SHA认证，不加密；3）authPriv（有认证有加密）：认证+加密（DES/AES），安全性最高。SNMPv3支持无认证模式（noAuthNoPriv），但通常建议使用authPriv。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP 与网络监控",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP 与网络监控",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 19,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      },
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 31,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q020",
+    "question": "下列关于网络管理协议的说法，正确的是？",
+    "options": {
+      "A": "SNMP是最常用的网络管理协议",
+      "B": "CMIP比SNMP更简单",
+      "C": "RMON只能管理局域网",
+      "D": "网络管理只能使用SNMP"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "SNMP（简单网络管理协议）是目前最常用的网络管理协议，基于TCP/IP，简单高效，广泛应用于各种网络设备。CMIP（公共管理信息协议）是OSI的网络管理协议，功能更强大但更复杂，实际应用较少。RMON（远程网络监控）是SNMP的MIB扩展，用于远程监控局域网和广域网。网络管理还可以使用Telnet/SSH、Syslog、NetFlow等协议/技术。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "网络管理",
+    "difficulty": "medium",
+    "tags": [
+      "网络管理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 20,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q021",
+    "question": "SNMP协议属于OSI参考模型的哪一层？",
+    "options": {
+      "A": "管理层",
+      "B": "应用层",
+      "C": "传输层",
+      "D": "网络层"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "SNMP（简单网络管理协议）是应用层协议，主要用于网络管理站（NMS）与被管设备（Agent）之间的通信，监控和管理网络设备。SNMP基于UDP传输（端口161/162），属于TCP/IP协议栈的应用层。OSI参考模型中没有专门的\"管理层\"，网络管理功能分布在各层，但SNMP协议本身工作在应用层。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "OSI 与 TCP/IP 模型",
+    "difficulty": "medium",
+    "tags": [
+      "OSI 与 TCP/IP 模型",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 21,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q022",
+    "question": "SNMP协议实体发送请求和应答报文的默认端口号是？",
+    "options": {
+      "A": "160",
+      "B": "161",
+      "C": "162",
+      "D": "163"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "SNMP代理（Agent）使用UDP端口161接收管理站（NMS）的请求（Get/Set/GetNext/GetBulk）并发送应答。SNMP管理站使用UDP端口162接收代理发送的Trap（陷阱）和Inform（通知）告警报文。注意：请求和应答使用161端口（代理端），Trap使用162端口（管理站端）。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP 与网络监控",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP 与网络监控",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 22,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q023",
+    "question": "SNMPv2特有的访问方法（操作）是？",
+    "options": {
+      "A": "Get-Request",
+      "B": "GetBulkRequest",
+      "C": "Set-Request",
+      "D": "Trap"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "SNMPv2c增加了GetBulkRequest（批量获取）操作，可以高效地一次性获取大量数据（如整个路由表、MAC地址表），减少了管理站和代理之间的交互次数。Get-Request、Get-Next-Request、Set-Request在SNMPv1中已有。SNMPv2还增加了Inform操作（需要确认的Trap）。记忆技巧：v2两大特有功能\"批量取（GetBulk）、网管聊（Inform）\"。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP 与网络监控",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP 与网络监控",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 23,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q024",
+    "question": "SNMPv3增加的核心功能是？",
+    "options": {
+      "A": "支持更多MIB对象",
+      "B": "基于用户的安全模型（USM），提供认证和加密",
+      "C": "支持TCP传输",
+      "D": "提高传输速率"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "SNMPv3核心增强是安全机制，引入USM（基于用户的安全模型，User-based Security Model）提供：1）数据认证（完整性+数据源认证，使用HMAC-MD5或HMAC-SHA）；2）数据加密（机密性，使用DES或AES）。SNMPv3还引入VACM（基于视图的访问控制模型，View-based Access Control Model）提供细粒度的访问控制。SNMPv1/v2c使用共同体字符串（Community String）明文传输，安全性差。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP 与网络监控",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP 与网络监控",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 24,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q025",
+    "question": "在SNMP各项功能中，属于网络控制功能的是？",
+    "options": {
+      "A": "性能管理",
+      "B": "计费管理",
+      "C": "配置管理",
+      "D": "故障管理"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "OSI网络管理五大功能（FCAPS）：1）故障管理（Fault Management）：检测、定位、恢复网络故障；2）配置管理（Configuration Management）：初始化网络与配置网络，可辨别、定义、控制和监视被管对象，实现某种特定功能，属于网络控制功能；3）性能管理（Performance Management）：监控网络性能指标（带宽、延迟、丢包率、吞吐量）；4）计费管理（Accounting Management）：记录用户资源使用情况，进行计费；5）安全管理（Security Management）：访问控制、认证、加密、审计等。配置管理是唯一具有\"控制\"性质的功能（可以修改设备配置）。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP 与网络监控",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP 与网络监控",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 25,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q026",
+    "question": "下列关于SNMP的说法，错误的是？",
+    "options": {
+      "A": "SNMP采用轮询机制获取管理信息",
+      "B": "SNMP可自定义MIB或者SMI",
+      "C": "代理进程接收信息使用161端口",
+      "D": "SNMP基于TCP协议"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "SNMP基于UDP协议，不是TCP。SNMP使用UDP端口161（代理接收请求）和162（Trap告警）。SNMP主要采用轮询机制（管理站定期查询代理），同时支持Trap事件驱动告警。MIB（管理信息库）定义被管理对象结构，SMI（管理信息结构）定义MIB的语法和类型，厂商可以自定义企业MIB（私有MIB）扩展管理对象。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP 与网络监控",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP 与网络监控",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 26,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q027",
+    "question": "下列关于MIB的描述，错误的是？",
+    "options": {
+      "A": "MIB是SNMP的管理信息库，定义被管理对象的结构",
+      "B": "MIB存储在管理站上，代理不需要MIB",
+      "C": "MIB中的对象有只读和读写两种访问权限",
+      "D": "MIB使用OID唯一标识每个对象"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "MIB（管理信息库，Management Information Base）是SNMP的核心，定义被管理设备上可管理对象的层次结构和属性。代理（Agent）维护MIB实例（实际的对象值），管理站（NMS）通过SNMP操作读取/修改代理的MIB对象。管理站也需要MIB（用于解析OID的含义和名称），但代理同样需要MIB（维护被管对象）。MIB对象有只读（read-only）和读写（read-write）两种访问权限。MIB使用OID（对象标识符，如1.3.6.1.2.1.1.1.0）唯一标识每个对象。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP 与网络监控",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP 与网络监控",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 27,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q032",
+    "question": "下列关于网络管理协议的说法，错误的是？",
+    "options": {
+      "A": "SNMP是最常用的网络管理协议",
+      "B": "CMIP比SNMP更简单",
+      "C": "RMON是SNMP的MIB扩展，用于远程监控",
+      "D": "网络管理还可以使用Telnet/SSH、Syslog、NetFlow等协议/技术"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "SNMP（简单网络管理协议）是目前最常用的网络管理协议，基于TCP/IP，简单高效，广泛应用于各种网络设备。CMIP（公共管理信息协议，Common Management Information Protocol）是OSI的网络管理协议，功能更强大（支持更多操作和更复杂的管理模型）但更复杂（使用OSI协议栈，配置和实现复杂），实际应用较少（主要在电信网络）。RMON（远程网络监控，Remote Monitoring）是SNMP的MIB扩展（RMON1/RMON2），用于远程监控局域网和广域网的流量和性能。网络管理还可以使用Telnet/SSH（设备管理）、Syslog（日志收集）、NetFlow/sFlow（流量分析）、ICMP（ping/traceroute）等协议/技术。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "网络管理",
+    "difficulty": "medium",
+    "tags": [
+      "网络管理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 32,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q033",
+    "question": "下列关于SNMP轮询机制的说法，错误的是？",
+    "options": {
+      "A": "管理站定期向代理发送请求获取管理信息",
+      "B": "轮询机制不需要管理站参与",
+      "C": "轮询可以获取单个或批量信息",
+      "D": "Trap机制与轮询互补，代理主动报告事件"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "SNMP主要采用轮询（Polling）机制：管理站（NMS）定期向代理（Agent）发送Get-Request/GetNext-Request/GetBulkRequest请求，获取被管理对象的信息。轮询需要管理站主动发起请求（管理站参与）。轮询可以获取单个信息（Get-Request）或批量信息（GetBulkRequest）。Trap机制是代理主动向管理站报告紧急事件（如设备故障、链路中断），与轮询互补：轮询用于定期收集常规信息，Trap用于实时报告紧急事件。Inform是需要确认的Trap（SNMPv2/v3）。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP 与网络监控",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP 与网络监控",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 33,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q040",
+    "question": "下列关于SNMP的描述，正确的是？",
+    "options": {
+      "A": "SNMPv1使用共同体字符串作为认证方式，安全性高",
+      "B": "SNMPv2c支持基于用户的安全模型（USM）",
+      "C": "MIB是SNMP的管理信息库，定义被管理对象的结构",
+      "D": "TRAP消息由管理站主动发送给代理"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "MIB（管理信息库）是SNMP的核心，定义了被管理设备的对象（如接口状态、CPU利用率、内存使用率）及其访问方式（C正确）。SNMPv1的共同体字符串是明文传输，安全性低（A错误）。SNMPv3支持USM（基于用户的安全模型），v2c仍使用共同体字符串（B错误）。TRAP由代理（Agent）主动发送给管理站（NMS），报告紧急事件（D错误）。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP 与网络监控",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP 与网络监控",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 40,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q041",
+    "question": "下列关于Syslog的说法，正确的是？",
+    "options": {
+      "A": "Syslog用于收集和转发系统日志消息",
+      "B": "Syslog使用UDP端口514",
+      "C": "Syslog消息包含设施（Facility）和严重性（Severity）",
+      "D": "以上都正确"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Syslog是一种日志协议，用于收集和转发系统/设备日志消息到集中的Syslog服务器。Syslog使用UDP端口514（默认，也可使用TCP 514或TLS 6514加密传输）。Syslog消息包含：1）设施（Facility）：产生消息的子系统（如kern内核、user用户、mail邮件、daemon守护进程、auth认证、syslog系统日志、local0-local7本地自定义）；2）严重性（Severity）：消息严重程度（0 Emergency紧急、1 Alert警报、2 Critical严重、3 Error错误、4 Warning警告、5 Notice通知、6 Informational信息、7 Debug调试）。Syslog广泛用于网络设备（路由器、交换机、防火墙）和服务器的日志集中管理。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "日志管理",
+    "difficulty": "medium",
+    "tags": [
+      "日志管理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 41,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q042",
+    "question": "下列关于NetFlow的说法，错误的是？",
+    "options": {
+      "A": "NetFlow是Cisco开发的网络流量分析技术",
+      "B": "NetFlow可以统计网络流量的源/目的IP、端口、协议、字节数等",
+      "C": "NetFlow使用UDP端口2055（默认）",
+      "D": "NetFlow可以替代SNMP进行设备管理"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "NetFlow是Cisco开发的网络流量分析技术（类似技术有sFlow、IPFIX），用于统计网络流量的详细信息：源IP、目的IP、源端口、目的端口、协议类型、TCP标志、字节数、包数、流开始/结束时间、输入/输出接口等。NetFlow将流记录导出到NetFlow采集器（Collector）进行分析，默认使用UDP端口2055（也可用9995、9996等）。NetFlow用于流量分析、计费、安全监控（异常流量检测），不能替代SNMP进行设备管理（SNMP用于设备状态监控和配置管理，NetFlow用于流量统计分析，两者互补）。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "网络管理",
+    "difficulty": "medium",
+    "tags": [
+      "网络管理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 42,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q043",
+    "question": "下列关于网络管理功能（FCAPS）的说法，错误的是？",
+    "options": {
+      "A": "故障管理：检测、定位和恢复网络故障",
+      "B": "配置管理：监控和管理网络设备配置",
+      "C": "性能管理：监控网络性能指标",
+      "D": "安全管理：负责网络设备的物理安全"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "OSI网络管理五大功能（FCAPS）：1）故障管理（Fault Management）：检测、定位、恢复网络故障（告警、诊断、修复）；2）配置管理（Configuration Management）：管理设备配置（发现、配置、变更、备份）；3）性能管理（Performance Management）：监控网络性能指标（带宽利用率、延迟、丢包率、吞吐量、响应时间），进行性能分析和优化；4）计费管理（Accounting Management）：记录用户资源使用情况，进行计费和配额管理；5）安全管理（Security Management）：网络安全管理（访问控制、身份认证、加密、安全审计、入侵检测），不是物理安全（物理安全属于机房/设施管理范畴）。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "网络管理",
+    "difficulty": "medium",
+    "tags": [
+      "网络管理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 43,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q044",
+    "question": "在Windows中，查看本机IP地址配置的命令是？",
+    "options": {
+      "A": "ifconfig",
+      "B": "ipconfig",
+      "C": "ping",
+      "D": "tracert"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Windows使用ipconfig查看IP地址配置（IPv4/IPv6地址、子网掩码、默认网关、DHCP服务器、DNS服务器、MAC地址等）。常用参数：/all（显示所有接口的详细配置）、/release（释放DHCP租约）、/renew（重新获取IP）、/flushdns（清除DNS缓存）、/displaydns（显示DNS缓存）、/registerdns（注册DNS）。ifconfig是Linux命令（Windows没有ifconfig，Windows 10+有类似的Get-NetIPAddress PowerShell命令）。ping测试连通性，tracert路由跟踪。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "IPv4",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 44,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      },
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 10,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      },
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 34,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q045",
+    "question": "在Linux中，用于测试网络连通性的命令是？",
+    "options": {
+      "A": "ping",
+      "B": "cd",
+      "C": "chmod",
+      "D": "grep"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "ping通过发送ICMP Echo Request（回显请求）并等待Echo Reply（回显应答）测试网络连通性和往返延迟。常用参数：-c count（发送次数，Linux）、-s size（数据包大小）、-i interval（发送间隔）、-W timeout（超时时间）、-t ttl（TTL值）。cd切换目录，chmod修改文件权限，grep文本搜索（这些都不是网络连通性测试命令）。注意：某些网络设备/服务器可能禁用ICMP（防火墙丢弃ICMP），此时ping不通不代表网络不通，可使用telnet/nc测试端口连通性。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "Linux 命令与管理",
+    "difficulty": "medium",
+    "tags": [
+      "Linux 命令与管理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 45,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      },
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 12,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      },
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 36,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q046",
+    "question": "在Linux中，查看网络连接状态的命令是？",
+    "options": {
+      "A": "netstat 或 ss",
+      "B": "ls",
+      "C": "ps",
+      "D": "df"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "netstat（传统，net-tools包）或ss（现代，iproute2包，更快更强大）查看网络连接、端口监听、路由表、网络接口统计等。常用：netstat -tlnp（TCP监听端口+进程ID）、netstat -anp（所有连接+进程）、ss -tulnp（TCP/UDP监听端口+进程）、ss -s（连接统计摘要）。ls列目录内容，ps查看进程状态，df查看磁盘空间使用情况。ss是netstat的现代替代，输出更详细、速度更快。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "Linux 命令与管理",
+    "difficulty": "medium",
+    "tags": [
+      "Linux 命令与管理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 46,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      },
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 13,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      },
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 37,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q047",
+    "question": "在Linux中，查看磁盘空间使用情况的命令是？",
+    "options": {
+      "A": "df",
+      "B": "du",
+      "C": "ls",
+      "D": "dd"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "df（disk free，磁盘空闲）查看文件系统磁盘空间使用情况（总容量、已用、可用、使用率、挂载点），常用df -h（人类可读单位，如G/M/K）、df -T（显示文件系统类型）、df -i（显示inode使用情况）。du（disk usage，磁盘使用）查看目录/文件占用空间，常用du -sh 目录（汇总显示）、du -h --max-depth=1（一级子目录大小）。ls列目录，dd用于磁盘拷贝/转换/镜像制作。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "Linux 命令与管理",
+    "difficulty": "medium",
+    "tags": [
+      "Linux 命令与管理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 47,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      },
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 14,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      },
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 38,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q048",
+    "question": "在Linux中，用于查看系统日志的命令是？",
+    "options": {
+      "A": "tail -f /var/log/messages",
+      "B": "cd /var/log",
+      "C": "mkdir /var/log",
+      "D": "rm /var/log"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "tail -f /var/log/messages（或/var/log/syslog，取决于发行版，如RHEL/CentOS用/var/log/messages，Debian/Ubuntu用/var/log/syslog）实时查看系统日志（-f参数跟踪文件追加内容，新日志实时显示）。systemd系统（如CentOS 7+、Ubuntu 16.04+）使用journalctl命令查看systemd日志（journalctl -f实时跟踪、journalctl -u 服务名查看特定服务日志、journalctl --since \"1 hour ago\"查看最近1小时日志）。cd切换目录，mkdir创建目录，rm删除文件（这些不是查看日志的命令）。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "日志管理",
+    "difficulty": "medium",
+    "tags": [
+      "日志管理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 48,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      },
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 39,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q049",
+    "question": "在Windows中，查看网络连接和端口的命令是？",
+    "options": {
+      "A": "netstat",
+      "B": "ipconfig",
+      "C": "ping",
+      "D": "tracert"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Windows中netstat查看网络连接、端口监听、路由表、以太网统计。常用参数：-a（所有连接和监听端口）、-n（数字形式显示地址和端口）、-o（显示进程ID/PID，可结合任务管理器查看对应程序）、-b（显示关联的可执行文件，需管理员权限）、-r（路由表）、-e（以太网统计）、-s（各协议统计）、-p protocol（指定协议，如netstat -p tcp）。ipconfig查看IP配置，ping测试连通性，tracert路由跟踪。查找占用端口的进程：netstat -ano | findstr :端口号，然后用tasklist | findstr PID查看进程名。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "Windows 服务器",
+    "difficulty": "medium",
+    "tags": [
+      "Windows 服务器",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 49,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      },
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 16,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      },
+      {
+        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+        "questionNumber": 40,
+        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c09-q050",
+    "question": "下列关于RMON（远程网络监控）的说法，正确的是？",
+    "options": {
+      "A": "RMON是SNMP的MIB扩展，用于远程监控网络流量和性能",
+      "B": "RMON1监控数据链路层和物理层，RMON2监控网络层到应用层",
+      "C": "RMON探针（Probe）收集数据并通过SNMP上报给管理站",
+      "D": "以上都正确"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "RMON（Remote Monitoring，远程网络监控）是SNMP的MIB扩展（RFC 2819 RMON1、RFC 2021 RMON2），用于远程监控局域网和广域网的流量和性能。RMON1监控数据链路层和物理层（统计、历史、告警、主机、主机TopN、矩阵、过滤、捕获、事件9个组），RMON2扩展监控网络层到应用层（协议目录、协议分布、地址映射、网络层主机/矩阵、应用层主机/矩阵等）。RMON探针（Probe，独立硬件设备或交换机/路由器内嵌的RMON代理）收集网络流量数据并通过SNMP上报给管理站（NMS），减少管理站的轮询开销。RMON可以提供历史趋势分析、流量统计、异常告警（阈值告警）、主机通信矩阵等功能，是网络性能监控和故障排查的重要工具。",
+    "type": "single_choice",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP 与网络监控",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP 与网络监控",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第九章 网络管理（含答案解析）.docx",
+        "questionNumber": 50,
+        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  }
+]

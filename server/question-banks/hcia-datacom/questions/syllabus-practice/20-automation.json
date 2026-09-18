@@ -1,0 +1,96 @@
+[
+  {
+    "id": "hcia-v2-20-json-object",
+    "type": "single_choice",
+    "question": "JSON 中表示一个键值对对象时，通常使用哪种括号？",
+    "options": {
+      "A": "花括号 {}",
+      "B": "圆括号 ()",
+      "C": "尖括号 <> ",
+      "D": "只能使用方括号 []"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "JSON 对象使用花括号并由键值对组成，数组则使用方括号。",
+    "chapter": "网络编程自动化",
+    "knowledgePoint": "JSON/YAML",
+    "difficulty": "easy",
+    "tags": [
+      "网络编程自动化",
+      "JSON/YAML"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-20-python-list",
+    "type": "single_choice",
+    "question": "Python 中用于保存有序且可修改元素集合的常用数据类型是什么？",
+    "options": {
+      "A": "list",
+      "B": "bool",
+      "C": "int",
+      "D": "None"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Python 列表 list 按顺序保存多个元素，并支持添加、删除和修改。",
+    "chapter": "网络编程自动化",
+    "knowledgePoint": "Python 基础",
+    "difficulty": "easy",
+    "tags": [
+      "网络编程自动化",
+      "Python 基础"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-20-netconf-yang",
+    "type": "multiple_choice",
+    "question": "关于 NETCONF 与 YANG 的描述，哪些是正确的？",
+    "options": {
+      "A": "NETCONF 可用于读取和修改设备配置",
+      "B": "YANG 用于描述配置与状态数据模型",
+      "C": "NETCONF 常使用结构化数据进行交互",
+      "D": "YANG 是二层环路协议"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "NETCONF 提供网络配置管理协议能力，YANG 定义结构化数据模型，两者常配合实现设备自动化。",
+    "chapter": "网络编程自动化",
+    "knowledgePoint": "NETCONF/YANG",
+    "difficulty": "medium",
+    "tags": [
+      "网络编程自动化",
+      "NETCONF/YANG"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-20-rest-api",
+    "type": "single_choice",
+    "question": "调用设备 REST API 自动化接口时，客户端通常通过什么承载请求？",
+    "options": {
+      "A": "HTTP/HTTPS 方法与资源 URI",
+      "B": "STP BPDU",
+      "C": "ARP 广播",
+      "D": "以太网冲突信号"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "REST API 通常通过 HTTP/HTTPS 的 GET、POST、PUT、DELETE 等方法访问资源 URI。",
+    "chapter": "网络编程自动化",
+    "knowledgePoint": "REST API",
+    "difficulty": "medium",
+    "tags": [
+      "网络编程自动化",
+      "REST API"
+    ],
+    "stage": "变式计算"
+  }
+]

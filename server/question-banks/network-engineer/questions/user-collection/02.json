@@ -1,0 +1,1507 @@
+[
+  {
+    "id": "collection-c02-q001",
+    "question": "在曼彻斯特编码中，若波特率为10Mbps，其数据速率为多少Mbps？",
+    "options": {
+      "A": "5",
+      "B": "10",
+      "C": "16",
+      "D": "20"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "曼彻斯特编码每个比特需要两次信号跳变，编码效率50%，数据速率是波特率的一半。10Mbps×50%=5Mbps。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "编码与调制",
+    "difficulty": "medium",
+    "tags": [
+      "编码与调制",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 1,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q002",
+    "question": "若16进制信号的码元速率是6000 Baud，则数据速率为多少kb/s？",
+    "options": {
+      "A": "24.4",
+      "B": "14.4",
+      "C": "24",
+      "D": "23"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "R = B × log2(N)。16进制N=16，log2(16)=4，R=6000×4=24000bps=24kbps。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "编码与调制",
+    "difficulty": "medium",
+    "tags": [
+      "编码与调制",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 2,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q003",
+    "question": "若8进制信号的码元速率是4800 Baud，则数据速率为多少kb/s？",
+    "options": {
+      "A": "9.6",
+      "B": "14.4",
+      "C": "19.2",
+      "D": "38.4"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "R = B × log2(N)。8进制N=8，log2(8)=3，R=4800×3=14400bps=14.4kbps。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "编码与调制",
+    "difficulty": "medium",
+    "tags": [
+      "编码与调制",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 3,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q004",
+    "question": "电话线路带宽为3KHz，根据奈奎斯特采样定理，最小采样频率应为？",
+    "options": {
+      "A": "300Hz",
+      "B": "3300Hz",
+      "C": "6000Hz",
+      "D": "6600Hz"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "采样频率必须大于模拟信号最高频率的二倍。最高频率3300Hz，最小采样频率=2×3300=6600Hz。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "奈奎斯特定理",
+    "difficulty": "medium",
+    "tags": [
+      "奈奎斯特定理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 4,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q005",
+    "question": "已知电话线路信噪比为30dB，带宽为3kHz，根据香农定理，最大数据传输速率约为？",
+    "options": {
+      "A": "30kbps",
+      "B": "20kbps",
+      "C": "10kbps",
+      "D": "3kbps"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "香农公式C=B×log2(1+S/N)。30dB=10log10(S/N)，S/N=1000。C=3000×log2(1001)≈3000×10=30kbps。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "香农定理",
+    "difficulty": "medium",
+    "tags": [
+      "香农定理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 5,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q006",
+    "question": "海明码是一种纠错码，若信息位k=4，纠正1位错误，监督位r最少应为？",
+    "options": {
+      "A": "5",
+      "B": "4",
+      "C": "2",
+      "D": "3"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "海明不等式2^r-1≥k+r。k=4时，r=3：2^3-1=7≥7成立；r=2：3≥6不成立。故r最小为3。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "差错控制",
+    "difficulty": "medium",
+    "tags": [
+      "差错控制",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 6,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q007",
+    "question": "以太网10BASE-T采用的编码方式是？",
+    "options": {
+      "A": "曼彻斯特编码",
+      "B": "4B/5B编码",
+      "C": "差分曼彻斯特编码",
+      "D": "归零编码"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "10BASE-T以太网物理层采用曼彻斯特编码。100BASE-TX采用4B/5B编码。令牌环网采用差分曼彻斯特编码。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "以太网与交换",
+    "difficulty": "medium",
+    "tags": [
+      "以太网与交换",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 7,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q008",
+    "question": "采用4B/5B编码的主要目的是？",
+    "options": {
+      "A": "提高数据速率",
+      "B": "减少直流分量，增加时钟同步机会",
+      "C": "检错和纠错",
+      "D": "压缩数据"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "4B/5B将4位数据映射为5位码组，保证不会出现连续超过3个0，提供足够跳变用于时钟同步，减少直流分量。用于100BASE-FX/TX。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "编码与调制",
+    "difficulty": "medium",
+    "tags": [
+      "编码与调制",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 8,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q009",
+    "question": "在差分曼彻斯特编码中，比特起始边界有跳变表示？",
+    "options": {
+      "A": "0",
+      "B": "1",
+      "C": "取决于前一个比特",
+      "D": "无意义"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "差分曼彻斯特编码：比特开始边界有跳变表示0，无跳变表示1。比特中间跳变仅用于时钟同步。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "编码与调制",
+    "difficulty": "medium",
+    "tags": [
+      "编码与调制",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 9,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q010",
+    "question": "以下关于CRC的描述中，错误的是？",
+    "options": {
+      "A": "CRC可以检测多位错误",
+      "B": "CRC通过模2除法计算冗余码",
+      "C": "CRC可以纠正任意位错误",
+      "D": "CRC的生成多项式决定检错能力"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "CRC主要用于检错，不能纠错。要纠错需使用海明码、BCH码等。A、B、D均为正确描述。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "差错控制",
+    "difficulty": "medium",
+    "tags": [
+      "差错控制",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 10,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q011",
+    "question": "以太网采用的介质访问控制协议是？",
+    "options": {
+      "A": "Token Ring",
+      "B": "CSMA/CD",
+      "C": "CSMA/CA",
+      "D": "TDMA"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "以太网（IEEE 802.3）使用CSMA/CD（载波监听多点接入/碰撞检测）。无线局域网使用CSMA/CA（碰撞避免）。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "以太网与交换",
+    "difficulty": "medium",
+    "tags": [
+      "以太网与交换",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 11,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q012",
+    "question": "E1载波的数据传输速率是？",
+    "options": {
+      "A": "1.544 Mbps",
+      "B": "2.048 Mbps",
+      "C": "8.448 Mbps",
+      "D": "34.368 Mbps"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "E1（欧洲标准，中国使用）速率为2.048Mbps，由32个时隙组成，每个时隙64kbps。T1（北美标准）为1.544Mbps。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "数据通信基础",
+    "difficulty": "medium",
+    "tags": [
+      "数据通信基础",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 12,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q013",
+    "question": "T1载波的数据传输速率是？",
+    "options": {
+      "A": "1.544 Mbps",
+      "B": "2.048 Mbps",
+      "C": "6.312 Mbps",
+      "D": "44.736 Mbps"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "T1由24个时隙组成，每帧加1位同步位，总位数193位，每秒8000帧，速率193×8000=1.544Mbps。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "数据通信基础",
+    "difficulty": "medium",
+    "tags": [
+      "数据通信基础",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 13,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q014",
+    "question": "以下调制方式中，抗噪声能力最强的是？",
+    "options": {
+      "A": "ASK",
+      "B": "FSK",
+      "C": "PSK",
+      "D": "三者相同"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "PSK利用相位变化携带信息，对幅度噪声不敏感，抗干扰能力优于ASK和FSK。QPSK等现代通信系统广泛采用。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "编码与调制",
+    "difficulty": "medium",
+    "tags": [
+      "编码与调制",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 14,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q015",
+    "question": "下列编码方式中，自带时钟同步能力且不含直流分量的是？",
+    "options": {
+      "A": "不归零码NRZ",
+      "B": "曼彻斯特编码",
+      "C": "归零码RZ",
+      "D": "极性编码"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "曼彻斯特编码每比特中间跳变，可提取时钟信号，且正负电平时间均衡无直流分量。NRZ连续相同比特时无跳变，时钟同步困难。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "编码与调制",
+    "difficulty": "medium",
+    "tags": [
+      "编码与调制",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 15,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q016",
+    "question": "某通信系统采用QPSK调制，码元速率为1000 Baud，数据速率为？",
+    "options": {
+      "A": "1000",
+      "B": "2000",
+      "C": "4000",
+      "D": "8000"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "QPSK有4种相位，每个码元携带log2(4)=2比特。数据速率=1000×2=2000bps。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "编码与调制",
+    "difficulty": "medium",
+    "tags": [
+      "编码与调制",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 16,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q017",
+    "question": "已知采用8PSK调制，数据速率为9000 bps，则码元速率为？",
+    "options": {
+      "A": "3000",
+      "B": "4500",
+      "C": "9000",
+      "D": "18000"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "8PSK有8种相位，log2(8)=3比特/码元。码元速率=数据速率/3=9000/3=3000 Baud。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "编码与调制",
+    "difficulty": "medium",
+    "tags": [
+      "编码与调制",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 17,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q018",
+    "question": "PCM（脉码调制）的正确步骤顺序是？",
+    "options": {
+      "A": "量化→采样→编码",
+      "B": "采样→量化→编码",
+      "C": "编码→采样→量化",
+      "D": "采样→编码→量化"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "PCM过程：采样（时间离散化）→量化（幅度离散化）→编码（二进制表示）。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "编码与调制",
+    "difficulty": "medium",
+    "tags": [
+      "编码与调制",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 18,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q019",
+    "question": "采用HDLC协议传输时，若出现连续5个1，发送端会自动插入一个0，这称为？",
+    "options": {
+      "A": "比特填充",
+      "B": "字符填充",
+      "C": "奇偶校验",
+      "D": "帧间隙"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "HDLC使用零比特填充法保证标志字段01111110的唯一性：发送端检测到连续5个1后插入一个0；接收端删除5个1后的0。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "数据通信基础",
+    "difficulty": "medium",
+    "tags": [
+      "数据通信基础",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 19,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q020",
+    "question": "以下传输介质中，抗电磁干扰能力最强的是？",
+    "options": {
+      "A": "双绞线",
+      "B": "同轴电缆",
+      "C": "多模光纤",
+      "D": "单模光纤"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "光纤传输光信号，不受电磁干扰。单模光纤比多模光纤带宽更高、传输距离更远。双绞线和同轴电缆为电信号传输，易受干扰。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "传输介质",
+    "difficulty": "medium",
+    "tags": [
+      "传输介质",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 20,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q021",
+    "question": "数据通信中，异步传输的特点是？",
+    "options": {
+      "A": "以帧为单位传输，需要同步时钟",
+      "B": "每个字符前后附加起始位和停止位",
+      "C": "传输效率高，开销小",
+      "D": "必须使用专用时钟线"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "异步传输以字符为单位，每个字符前加起始位（0），后加停止位（1），允许字符间任意间隔，无需共享时钟。缺点是效率较低。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "数据通信基础",
+    "difficulty": "medium",
+    "tags": [
+      "数据通信基础",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 21,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q022",
+    "question": "在CSMA/CD以太网中，数据速率100Mb/s，网段长2km，信号速率200m/μs，最小帧长是？",
+    "options": {
+      "A": "1000",
+      "B": "2000",
+      "C": "10000",
+      "D": "200000"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "传播延时=2km/(200m/μs)=10μs。最小帧长=2×数据速率×传播时延=2×100,000,000×0.00001=2000bit。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "以太网与交换",
+    "difficulty": "medium",
+    "tags": [
+      "以太网与交换",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 22,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q023",
+    "question": "以太网帧的最小长度是多少字节？",
+    "options": {
+      "A": "46",
+      "B": "64",
+      "C": "1518",
+      "D": "1500"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "以太网帧最小64字节（含14字节首部和4字节FCS，数据部分最小46字节），最大1518字节。MTU（最大传输单元）为1500字节。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "以太网与交换",
+    "difficulty": "medium",
+    "tags": [
+      "以太网与交换",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 23,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      },
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 39,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q024",
+    "question": "以下关于码元速率和比特速率的说法，正确的是？",
+    "options": {
+      "A": "码元速率总是大于比特速率",
+      "B": "比特速率总是大于码元速率",
+      "C": "当采用二进制调制时，两者数值相等",
+      "D": "两者没有关系"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "二进制调制（N=2）时，log2(2)=1，R=B×1，两者数值相等。多进制调制时，比特速率大于码元速率。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "编码与调制",
+    "difficulty": "medium",
+    "tags": [
+      "编码与调制",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 24,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q025",
+    "question": "某信道误码率为10^-5，每帧大小为10000位，该帧传输出错的概率约为？",
+    "options": {
+      "A": "0.01",
+      "B": "0.05",
+      "C": "0.095",
+      "D": "0.2"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "每帧出错概率=1-(1-10^-5)^10000≈1-e^(-0.1)≈1-0.9048=0.0952。近似值为帧长×误码率=0.1。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "差错控制",
+    "difficulty": "medium",
+    "tags": [
+      "差错控制",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 25,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q026",
+    "question": "以下关于正交振幅调制（QAM）的描述，正确的是？",
+    "options": {
+      "A": "QAM仅通过相位变化传输信息",
+      "B": "QAM仅通过振幅变化传输信息",
+      "C": "QAM同时利用相位和振幅携带信息",
+      "D": "QAM不能用于数字调制"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "QAM通过同时改变载波的振幅和相位表示不同码元状态，如16QAM、64QAM、256QAM，广泛应用于数字电视、Wi-Fi、4G/5G。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "编码与调制",
+    "difficulty": "medium",
+    "tags": [
+      "编码与调制",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 26,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q027",
+    "question": "在数字通信中，眼图可以用于观察？",
+    "options": {
+      "A": "误码率",
+      "B": "码间串扰程度",
+      "C": "数据传输速率",
+      "D": "信噪比"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "眼图是将接收信号在示波器上叠加显示的图形，通过眼睛张开程度判断码间串扰（ISI）和噪声影响。眼图越张开，传输质量越好。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "数据通信基础",
+    "difficulty": "medium",
+    "tags": [
+      "数据通信基础",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 27,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q028",
+    "question": "若采用PCM对语音信号数字化，电话语音带宽为4kHz，采样频率至少为？",
+    "options": {
+      "A": "4kHz",
+      "B": "6kHz",
+      "C": "8kHz",
+      "D": "16kHz"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "奈奎斯特采样定理：采样频率≥2×信号最高频率。语音最高频率4kHz，采样频率≥8kHz。电话系统实际采用8kHz采样。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "编码与调制",
+    "difficulty": "medium",
+    "tags": [
+      "编码与调制",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 28,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q029",
+    "question": "下列关于曼彻斯特编码的描述中，错误的是？",
+    "options": {
+      "A": "可以用高电平到低电平的转换边表示0",
+      "B": "可以用低电平到高电平的转换边表示1",
+      "C": "编码效率为100%",
+      "D": "比特中间的电平转换边既表示数据也作为定时信号"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "曼彻斯特编码效率为50%，不是100%。每个比特中间都有电平跳变，既传数据又传时钟。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "编码与调制",
+    "difficulty": "medium",
+    "tags": [
+      "编码与调制",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 29,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q030",
+    "question": "在数据通信中，利用电话交换网与调制解调器进行数据传输的方法属于？",
+    "options": {
+      "A": "频带传输",
+      "B": "基带传输",
+      "C": "宽带传输",
+      "D": "IP传输"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "通过电话交换网传输数据需要调制解调器将数字信号调制成模拟信号，属于频带传输。基带传输是直接传输数字信号。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "编码与调制",
+    "difficulty": "medium",
+    "tags": [
+      "编码与调制",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 30,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      },
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 41,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q031",
+    "question": "下列传输介质中，带宽最宽、抗干扰能力最强的是？",
+    "options": {
+      "A": "双绞线",
+      "B": "同轴电缆",
+      "C": "光纤",
+      "D": "微波"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "光纤带宽最宽（可达Tbps级），抗电磁干扰能力最强，传输距离远。双绞线和同轴电缆为电信号，微波受天气和障碍物影响。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "传输介质",
+    "difficulty": "medium",
+    "tags": [
+      "传输介质",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 31,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      },
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 42,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q032",
+    "question": "在数字通信中，使收发双方在时间基准上保持一致的技术是？",
+    "options": {
+      "A": "交换技术",
+      "B": "同步技术",
+      "C": "编码技术",
+      "D": "传输技术"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "同步技术解决收发双方时间基准一致性问题，包括位同步、帧同步等。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "数据通信基础",
+    "difficulty": "medium",
+    "tags": [
+      "数据通信基础",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 32,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      },
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 48,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q033",
+    "question": "某信道带宽为3000Hz，采用32种不同物理状态表示数据，无噪声环境下最大数据传输速率是？",
+    "options": {
+      "A": "100",
+      "B": "30",
+      "C": "50",
+      "D": "500"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "奈奎斯特定理：最大速率=2×带宽×log2(N)=2×3000×log2(32)=2×3000×5=30000bps=30kbps。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "数据通信基础",
+    "difficulty": "medium",
+    "tags": [
+      "数据通信基础",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 33,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q034",
+    "question": "假设一个10Mb/s适配器使用曼彻斯特编码发送全为1的比特流，每秒将有多少个跳变？",
+    "options": {
+      "A": "每秒1000万",
+      "B": "每秒500万",
+      "C": "每秒2000万",
+      "D": "没有跳变"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "曼彻斯特编码每比特中间有一次跳变，10Mb/s适配器每秒有10M比特，每比特2次电平变化（中间跳变+边界），实际每秒20M个跳变，即2000万个跳变。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "编码与调制",
+    "difficulty": "medium",
+    "tags": [
+      "编码与调制",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 34,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q035",
+    "question": "以太网链路聚合技术是将？",
+    "options": {
+      "A": "多个逻辑链路聚合成一个物理链路",
+      "B": "多个逻辑链路聚合成一个逻辑链路",
+      "C": "多个物理链路聚合成一个物理链路",
+      "D": "多个物理链路聚合成一个逻辑链路"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "IEEE 802.3ad LACP将多个物理链路聚合成一个逻辑链路，实现链路备份和负载均衡，提高总带宽。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "以太网与交换",
+    "difficulty": "medium",
+    "tags": [
+      "以太网与交换",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 35,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      },
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 35,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q036",
+    "question": "路由器Console端口默认的数据速率为？",
+    "options": {
+      "A": "2400b/s",
+      "B": "4800b/s",
+      "C": "9600b/s",
+      "D": "10Mb/s"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Console口默认参数：波特率9600，数据位8，校验位无，停止位1，流控无。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "数据通信基础",
+    "difficulty": "medium",
+    "tags": [
+      "数据通信基础",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 36,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q037",
+    "question": "无线局域网的介质访问控制方法是？",
+    "options": {
+      "A": "CSMA/CA",
+      "B": "Token Ring",
+      "C": "CSMA/CD",
+      "D": "Token Bus"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "无线局域网使用CSMA/CA（载波监听多路访问/冲突避免），因为无线环境难以检测冲突。有线以太网使用CSMA/CD。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "无线网络",
+    "difficulty": "medium",
+    "tags": [
+      "无线网络",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 37,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q038",
+    "question": "下列网络拓扑中，所有节点均需要连接至中心设备的是？",
+    "options": {
+      "A": "星型",
+      "B": "环型",
+      "C": "总线型",
+      "D": "网状"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "星型拓扑所有节点都连接到中心设备（如交换机）。环型首尾相连，总线型共享介质，网状节点间有多条路径。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "数据通信基础",
+    "difficulty": "medium",
+    "tags": [
+      "数据通信基础",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 38,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      },
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 43,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q039",
+    "question": "在CSMA/CD网络中，下列哪种情况会导致冲突？",
+    "options": {
+      "A": "两个节点同时发送数据",
+      "B": "一个节点在另一个节点发送数据时开始发送",
+      "C": "网络中只有一个节点发送数据",
+      "D": "A和B"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "CSMA/CD中，两个或多个节点同时发送，或一个节点在信号传播延迟内开始发送，都会导致冲突。只有一个节点发送不会冲突。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "以太网与交换",
+    "difficulty": "medium",
+    "tags": [
+      "以太网与交换",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 39,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q040",
+    "question": "下列关于以太网的说法中，正确的是？",
+    "options": {
+      "A": "以太网使用CSMA/CA协议",
+      "B": "以太网是星型拓扑结构",
+      "C": "以太网帧的地址字段是MAC地址",
+      "D": "以太网的数据传输速率固定为10Mbps"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "以太网使用CSMA/CD；拓扑可以是总线型或星型；速率有10/100/1000Mbps等多种；帧地址字段确实是MAC地址。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "以太网与交换",
+    "difficulty": "medium",
+    "tags": [
+      "以太网与交换",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 40,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      },
+      {
+        "file": "第六章 局域网与交换技术（含答案解析）.docx",
+        "questionNumber": 40,
+        "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q041",
+    "question": "以下调制中，调制效率最高的是？",
+    "options": {
+      "A": "BPSK",
+      "B": "QPSK",
+      "C": "16QAM",
+      "D": "64-QAM"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "BPSK每符号1bit，QPSK 2bit，16QAM 4bit，64-QAM每符号6bit，效率最高。调制效率=log2(状态数)。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "编码与调制",
+    "difficulty": "medium",
+    "tags": [
+      "编码与调制",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 41,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q042",
+    "question": "在双绞线中，STP和UTP分别代表？",
+    "options": {
+      "A": "非屏蔽双绞线和屏蔽双绞线",
+      "B": "铠装线缆和非铠装线缆",
+      "C": "屏蔽双绞线和非屏蔽双绞线",
+      "D": "3类线和5类线"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "STP=Shielded Twisted-Pair屏蔽双绞线；UTP=Unshielded Twisted-Pair非屏蔽双绞线。屏蔽双绞线抗干扰能力更强但成本更高。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "STP",
+    "difficulty": "medium",
+    "tags": [
+      "STP",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 42,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q043",
+    "question": "常用光功率的单位为？",
+    "options": {
+      "A": "mw",
+      "B": "dbm",
+      "C": "db",
+      "D": "dbu"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "光功率单位dBm（分贝毫瓦）。dB是相对损耗单位，mw是绝对功率毫瓦，光工程中常用dBm表示光功率。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "数据通信基础",
+    "difficulty": "medium",
+    "tags": [
+      "数据通信基础",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 43,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q044",
+    "question": "某企业搭建办公网络，最长布线不超过50米，要求千兆带宽且成本低，最符合的传输介质是？",
+    "options": {
+      "A": "多模光纤",
+      "B": "双绞线",
+      "C": "单模光纤",
+      "D": "同轴电缆"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "50米距离、千兆带宽、成本优先，选双绞线（超五类/六类）。光纤成本高，同轴电缆不支持千兆且已淘汰。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "传输介质",
+    "difficulty": "medium",
+    "tags": [
+      "传输介质",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 44,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q045",
+    "question": "根据CSMA/CD协议，以太网往返时延为100微秒，发生碰撞后最长需要多少时间检测到？",
+    "options": {
+      "A": "150微秒",
+      "B": "50微秒",
+      "C": "200微秒",
+      "D": "100微秒"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "CSMA/CD冲突检测最大时间等于往返时延RTT=100微秒。信号从一端到另一端需要50微秒，冲突信号返回又需要50微秒，总共100微秒。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "以太网与交换",
+    "difficulty": "medium",
+    "tags": [
+      "以太网与交换",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 45,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q046",
+    "question": "以下存储介质中，读写速度最快的是？",
+    "options": {
+      "A": "机械硬盘HDD",
+      "B": "固态硬盘SSD",
+      "C": "动态随机存储器DRAM",
+      "D": "静态随机存储器SRAM"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "速度排序：SRAM（Cache）>DRAM（主存）>SSD（闪存）>HDD（磁盘）。SRAM无需刷新，存取延迟极低（纳秒级），但集成度低、成本高。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "数据通信基础",
+    "difficulty": "medium",
+    "tags": [
+      "数据通信基础",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 46,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q047",
+    "question": "在5G技术中，哪个特性允许多个设备同时连接到网络并获得高速数据传输？",
+    "options": {
+      "A": "网络切片",
+      "B": "大规模MIMO",
+      "C": "正交频分多址OFDMA",
+      "D": "波束成形"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "OFDMA（正交频分多址）把子载波分配给不同用户，允许多设备同时高速传输。网络切片是逻辑划分独立网络；大规模MIMO是多天线提升容量；波束成形是定向波束提升信号质量。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "数据通信基础",
+    "difficulty": "medium",
+    "tags": [
+      "数据通信基础",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 47,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q049",
+    "question": "下列关于PCM编码的描述，正确的是？",
+    "options": {
+      "A": "PCM是一种模拟调制技术",
+      "B": "PCM包括采样、量化和编码三个步骤",
+      "C": "PCM的编码效率为100%",
+      "D": "PCM只能用于语音信号"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "PCM（脉冲编码调制）是将模拟信号数字化的技术，包括三个步骤：1）采样（按奈奎斯特定理采样，采样频率≥2倍最高频率）；2）量化（将采样值离散化为有限个电平）；3）编码（将量化值编码为二进制数字）。PCM可用于各种模拟信号数字化，不仅限于语音。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "编码与调制",
+    "difficulty": "medium",
+    "tags": [
+      "编码与调制",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 49,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  },
+  {
+    "id": "collection-c02-q050",
+    "question": "电话线路使用的带通滤波器带宽为3KHz（300~3300Hz），根据奈奎斯特采样定理，最小采样频率应为？",
+    "options": {
+      "A": "300Hz",
+      "B": "3300Hz",
+      "C": "6000Hz",
+      "D": "6600Hz"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "奈奎斯特采样定理：采样频率必须大于信号最高频率的2倍，即fs≥2fmax。电话线路最高频率为3300Hz，所以最小采样频率为2×3300=6600Hz。实际电话系统PCM采样率为8000Hz（高于奈奎斯特最低要求）。",
+    "type": "single_choice",
+    "chapter": "数据通信基础",
+    "knowledgePoint": "奈奎斯特定理",
+    "difficulty": "medium",
+    "tags": [
+      "奈奎斯特定理",
+      "软考真题汇编"
+    ],
+    "provenance": [
+      {
+        "file": "第二章 数据通信基础（含答案解析）.docx",
+        "questionNumber": 50,
+        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+      }
+    ],
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+  }
+]

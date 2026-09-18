@@ -1,0 +1,140 @@
+[
+  {
+    "id": "hcia-v2-extra-04-pvid-ingress",
+    "type": "single_choice",
+    "question": "Access 接口收到终端发送的无标签帧时，通常把它归入哪个 VLAN？",
+    "options": {
+      "A": "随机 VLAN",
+      "B": "接口的 PVID",
+      "C": "数值最大的 VLAN",
+      "D": "VLAN 4095"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "PVID 用于给进入端口的无标签帧确定所属 VLAN。 本题考查“Access 接口”，因此应选择“接口的 PVID”。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgePoint": "Access 接口",
+    "difficulty": "easy",
+    "tags": [
+      "VLAN 原理与配置",
+      "Access 接口"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-extra-04-trunk-allow",
+    "type": "single_choice",
+    "question": "两台交换机之间的 Trunk 链路无法传递某个 VLAN，首先应检查什么？",
+    "options": {
+      "A": "两端允许通过的 VLAN 列表",
+      "B": "终端 DNS 后缀",
+      "C": "OSPF Router ID",
+      "D": "NTP 时区"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Trunk 只转发被允许的 VLAN，两端放行范围不一致会导致业务中断。 本题考查“Trunk 接口”，因此应选择“两端允许通过的 VLAN 列表”。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgePoint": "Trunk 接口",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 原理与配置",
+      "Trunk 接口"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v2-extra-04-inter-vlan",
+    "type": "single_choice",
+    "question": "不同 VLAN 的终端需要互相通信时，通常还需要什么功能？",
+    "options": {
+      "A": "二层集线器",
+      "B": "只增加 MAC 表老化时间",
+      "C": "关闭所有标签",
+      "D": "三层路由或 VLANIF 网关"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "VLAN 之间在二层隔离，跨 VLAN 通信必须经过三层转发。 本题考查“VLAN 原理”，因此应选择“三层路由或 VLANIF 网关”。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgePoint": "VLAN 原理",
+    "difficulty": "easy",
+    "tags": [
+      "VLAN 原理与配置",
+      "VLAN 原理"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v2-extra-04-tag-position",
+    "type": "single_choice",
+    "question": "802.1Q 标签在以太网帧中插入在什么位置附近？",
+    "options": {
+      "A": "前导码之前",
+      "B": "IP 数据末尾",
+      "C": "源 MAC 地址之后、类型字段之前",
+      "D": "帧校验序列之后"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "802.1Q 标签位于源 MAC 与原类型/长度字段之间。 本题考查“802.1Q”，因此应选择“源 MAC 地址之后、类型字段之前”。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgePoint": "802.1Q",
+    "difficulty": "hard",
+    "tags": [
+      "VLAN 原理与配置",
+      "802.1Q"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v2-extra-04-hybrid-untagged",
+    "type": "single_choice",
+    "question": "Hybrid 接口将某 VLAN 配置为 untagged 的含义是什么？",
+    "options": {
+      "A": "接口不再学习 MAC",
+      "B": "该 VLAN 帧从此接口发出时去除标签",
+      "C": "该 VLAN 永远禁止进入",
+      "D": "接口只接收 IPv6"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "untagged 列表控制相应 VLAN 帧离开 Hybrid 接口时不携带标签。 本题考查“Hybrid 接口”，因此应选择“该 VLAN 帧从此接口发出时去除标签”。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgePoint": "Hybrid 接口",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 原理与配置",
+      "Hybrid 接口"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-extra-04-vlan-broadcast",
+    "type": "single_choice",
+    "question": "同一交换机上不同 VLAN 的广播帧默认会怎样？",
+    "options": {
+      "A": "不会被二层转发到另一个 VLAN",
+      "B": "自动跨所有 VLAN 泛洪",
+      "C": "转换成 OSPF 报文",
+      "D": "发往公网"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "每个 VLAN 是独立广播域，二层广播不会跨越 VLAN 边界。 本题考查“VLAN 原理”，因此应选择“不会被二层转发到另一个 VLAN”。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgePoint": "VLAN 原理",
+    "difficulty": "easy",
+    "tags": [
+      "VLAN 原理与配置",
+      "VLAN 原理"
+    ],
+    "stage": "基础理解"
+  }
+]

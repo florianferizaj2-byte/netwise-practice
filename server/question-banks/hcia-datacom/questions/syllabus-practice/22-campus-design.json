@@ -1,0 +1,96 @@
+[
+  {
+    "id": "hcia-v2-22-access-layer",
+    "type": "single_choice",
+    "question": "园区网络分层设计中，接入层的主要职责是什么？",
+    "options": {
+      "A": "连接用户终端和边缘设备",
+      "B": "承载所有互联网根路由",
+      "C": "替代服务器虚拟化",
+      "D": "只负责广域网计费"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "接入层直接连接 PC、电话、AP 等终端，并执行 VLAN、接入认证和边缘安全策略。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgePoint": "接入/汇聚/核心",
+    "difficulty": "easy",
+    "tags": [
+      "园区网络典型组网方案",
+      "接入/汇聚/核心"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-22-core-layer",
+    "type": "single_choice",
+    "question": "园区核心层设计通常更关注哪项能力？",
+    "options": {
+      "A": "高速、稳定地转发不同区域之间的流量",
+      "B": "直接连接每一台办公终端",
+      "C": "为终端安装应用软件",
+      "D": "保存用户文档"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "核心层承担骨干转发，应保持高带宽、高可靠和简洁稳定的策略。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgePoint": "接入/汇聚/核心",
+    "difficulty": "easy",
+    "tags": [
+      "园区网络典型组网方案",
+      "接入/汇聚/核心"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-22-gateway-placement",
+    "type": "single_choice",
+    "question": "把用户 VLAN 的三层网关部署在具备冗余的汇聚设备上，主要为了什么？",
+    "options": {
+      "A": "集中三层转发并提高网关可靠性",
+      "B": "取消所有 VLAN",
+      "C": "让终端不再需要 IP",
+      "D": "替代无线 AP"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "汇聚层可集中承载用户 VLAN 网关，并结合冗余机制降低单点故障影响。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgePoint": "网关部署",
+    "difficulty": "medium",
+    "tags": [
+      "园区网络典型组网方案",
+      "网关部署"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-22-segmentation",
+    "type": "multiple_choice",
+    "question": "园区网络进行业务分区和安全隔离时，哪些措施通常有效？",
+    "options": {
+      "A": "使用 VLAN 划分广播域",
+      "B": "在三层边界部署 ACL",
+      "C": "按业务设置访问策略",
+      "D": "把所有终端放入同一未受控网段"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "VLAN、三层 ACL 和按业务制定的访问策略可共同限制横向访问并缩小故障与安全影响范围。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgePoint": "园区安全",
+    "difficulty": "medium",
+    "tags": [
+      "园区网络典型组网方案",
+      "园区安全"
+    ],
+    "stage": "变式计算"
+  }
+]

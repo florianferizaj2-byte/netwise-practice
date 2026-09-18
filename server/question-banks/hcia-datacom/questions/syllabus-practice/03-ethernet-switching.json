@@ -1,0 +1,94 @@
+[
+  {
+    "id": "hcia-v2-03-mac-learning",
+    "type": "single_choice",
+    "question": "二层交换机学习 MAC 地址表时，主要依据收到帧中的哪项信息？",
+    "options": {
+      "A": "源 MAC 地址",
+      "B": "目的 MAC 地址",
+      "C": "源 IP 地址",
+      "D": "目的端口号"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "交换机把帧的源 MAC 地址与入接口关联写入 MAC 地址表，再根据目的 MAC 地址转发。",
+    "chapter": "以太网交换基础",
+    "knowledgePoint": "MAC 地址表",
+    "difficulty": "easy",
+    "tags": [
+      "以太网交换基础",
+      "MAC 地址表"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-03-unknown-unicast",
+    "type": "single_choice",
+    "question": "交换机收到目的 MAC 地址不在表中的单播帧时，通常如何处理？",
+    "options": {
+      "A": "只发往默认网关",
+      "B": "在同一 VLAN 内除入接口外泛洪",
+      "C": "立即丢弃",
+      "D": "发送到所有 VLAN"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "未知单播会在所属 VLAN 内泛洪到除入接口外的端口，以尝试找到目的主机。",
+    "chapter": "以太网交换基础",
+    "knowledgePoint": "交换机转发",
+    "difficulty": "medium",
+    "tags": [
+      "以太网交换基础",
+      "交换机转发"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v2-03-broadcast-domain",
+    "type": "single_choice",
+    "question": "默认情况下，哪种设备功能可以把一个二层广播域划分成多个广播域？",
+    "options": {
+      "A": "集线器级联",
+      "B": "创建不同 VLAN",
+      "C": "增大接口速率",
+      "D": "启用全双工"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "不同 VLAN 是彼此隔离的二层广播域，跨 VLAN 通信需要三层转发。",
+    "chapter": "以太网交换基础",
+    "knowledgePoint": "广播域",
+    "difficulty": "easy",
+    "tags": [
+      "以太网交换基础",
+      "广播域"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v2-03-full-duplex",
+    "type": "single_choice",
+    "question": "点到点全双工以太网链路的典型特征是什么？",
+    "options": {
+      "A": "需要 CSMA/CD 处理冲突",
+      "B": "收发可同时进行且不存在冲突域争用",
+      "C": "只能单向发送",
+      "D": "必须使用共享式集线器"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "全双工链路可同时收发，不发生共享介质上的冲突，因此无需 CSMA/CD。",
+    "chapter": "以太网交换基础",
+    "knowledgePoint": "以太网帧",
+    "difficulty": "medium",
+    "tags": [
+      "以太网交换基础",
+      "以太网帧"
+    ],
+    "stage": "变式计算"
+  }
+]
