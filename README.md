@@ -1,6 +1,8 @@
-# 网知 Netwise
+# AceExam
 
-一个由用户和 AI 一起扩充题库的网络认证学习平台。用户可以用自己的 AI 配置，根据错题生成针对性变式题；通过审核的题目可以分享给同证书的其他用户，让题库在使用过程中持续增长。
+AceExam（Ace + Exam）是一个面向职业认证考试的机考练习与模拟平台。用户可以用自己的 AI 配置，根据错题生成针对性变式题；通过审核的题目可以分享给同证书的其他用户，让题库在使用过程中持续增长。
+
+平台采用响应式网页：手机端适合章节练习、错题复习和 AI 变式训练，电脑端更适合限时模拟考试，可使用答题卡、统一交卷和考后逐题复盘。
 
 当前内置：
 
@@ -155,6 +157,8 @@ npm test
 
 完整的清单格式、题目 Schema 和扩展示例见 [`server/question-banks/README.md`](server/question-banks/README.md)。
 
+给后续 AI 使用的完整扩展流程见 [`docs/AI-QUESTION-BANK-OPERATIONS.md`](docs/AI-QUESTION-BANK-OPERATIONS.md)。任何新增证书、导入题目或扩展题库的操作，都应先阅读该文档。
+
 ## 从原始资料导入
 
 软考汇编导入器需要安装包含 `python-docx` 的 Python 环境：
@@ -192,7 +196,7 @@ BIND_HOST=127.0.0.1
 ALLOWED_HOSTS=learn.example.com
 TRUST_PROXY=1
 COOKIE_SECURE=1
-DATA_DIR=/var/lib/netwise
+DATA_DIR=/var/lib/aceexam
 AI_MASTER_KEY='<随机的 32 字节 base64 密钥>'
 npm start
 ```

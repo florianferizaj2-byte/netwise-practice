@@ -817,6 +817,6 @@ if (
   const port = Number(process.env.PORT) || 5173;
   const bindHost = process.env.BIND_HOST || "127.0.0.1";
   app.listen(port, bindHost, () =>
-    safeLog(`Netwise ready: http://${bindHost}:${port}`),
+    safeLog(`AceExam ready: http://${bindHost}:${port}`),
   );
 }

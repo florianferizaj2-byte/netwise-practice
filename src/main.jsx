@@ -216,7 +216,7 @@ function AuthScreen({ onAuth, initialError = "" }) {
         <div className="auth-mark">
           <Network size={28} />
         </div>
-        <p className="eyebrow">网知 NETWISE</p>
+        <p className="eyebrow">AceExam</p>
         <h1>{mode === "login" ? "登录学习账户" : "创建学习账户"}</h1>
         <p>登录后选择报考证书，系统会按对应知识点推荐练习题。</p>
         <form onSubmit={submit}>
@@ -289,8 +289,8 @@ function AnnouncementModal({ onClose }) {
               <Megaphone size={22} />
             </span>
             <div>
-              <span className="announcement-kicker">网知 NETWISE · 网站公告</span>
-              <h2 id="announcement-title">欢迎来到你的网络认证学习空间</h2>
+              <span className="announcement-kicker">AceExam · 网站公告</span>
+              <h2 id="announcement-title">欢迎来到你的机考练习空间</h2>
               <p>把零散的刷题时间，变成看得见的学习进度。</p>
             </div>
           </div>
@@ -363,7 +363,7 @@ function SponsorModal({ onClose }) {
       >
         <header>
           <div>
-            <span className="sponsor-kicker">支持网知 NETWISE</span>
+            <span className="sponsor-kicker">支持 AceExam</span>
             <h2 id="sponsor-title">赞助作者</h2>
             <p>如果这个学习工具对你有帮助，欢迎请作者喝杯咖啡。</p>
           </div>
@@ -651,7 +651,7 @@ function App() {
             <Network size={23} />
           </span>
           <strong>
-            网知<span>NETWISE</span>
+            AceExam<span>机考练习平台</span>
           </strong>
         </a>
         <div className="workspace-label">
@@ -1338,7 +1338,7 @@ function App() {
           )}
         </main>
         <footer>
-          网知 NETWISE<span>网络认证学习工作台</span>
+          AceExam<span>职业认证机考练习平台</span>
           <span className="local-status">
             <i />
             题库与学习数据保存在服务器
