@@ -48,6 +48,11 @@ import {
   Landmark,
   Megaphone,
   Heart,
+  Globe2,
+  ThumbsUp,
+  Flag,
+  Share2,
+  Users,
 } from "lucide-react";
 import "./style.css";
 
@@ -141,6 +146,7 @@ const navs = [
   ["chapters", "章节练习", BookOpen],
   ["wrong", "错题本", NotebookPen],
   ["training", "AI 专项训练", Sparkles],
+  ["community", "共享题库", Globe2],
   ["mastery", "知识掌握度", ChartNoAxesCombined],
   ["exam", "模拟考试", GraduationCap],
 ];
@@ -438,6 +444,7 @@ function App() {
     [useSharedAi, setUseSharedAi] = useState(false),
     [sharedAiQuestions, setSharedAiQuestions] = useState([]),
     [sharedAiLoading, setSharedAiLoading] = useState(false),
+    [aiGroups, setAiGroups] = useState([]),
     [announcementOpen, setAnnouncementOpen] = useState(false),
     [sponsorOpen, setSponsorOpen] = useState(false);
   const refresh = async () => {
@@ -540,12 +547,31 @@ function App() {
       setSharedAiLoading(false);
     }
   };
+  const loadSharedAi = async () => {
+    setSharedAiLoading(true);
+    setError("");
+    try {
+      const questions = await api("/questions/shared-ai");
+      setSharedAiQuestions(questions);
+      return questions;
+    } catch (e) {
+      setError(e.message);
+      return [];
+    } finally {
+      setSharedAiLoading(false);
+    }
+  };
   useEffect(() => {
-    if (page === "training")
-      api("/queue")
-        .then(setQueue)
+    if (page === "training") {
+      Promise.all([api("/queue"), api("/ai/groups")])
+        .then(([nextQueue, nextGroups]) => {
+          setQueue(nextQueue);
+          setAiGroups(nextGroups);
+        })
         .catch((e) => setError(e.message));
-  }, [page]);
+    }
+    if (page === "community") loadSharedAi();
+  }, [page, auth?.user?.certificateId]);
   if (auth === null)
     return (
       <div className="loading-page">
@@ -1152,7 +1178,20 @@ function App() {
                 questions={allQuestions}
                 wrong={wrong}
                 weak={weak}
-                queue={queue}
+                 queue={queue}
+                 groups={aiGroups}
+                 onShareChange={(id, shared) =>
+                   run("正在保存共享设置", async () => {
+                     await api(`/ai/groups/${id}/share`, { shared }, "PUT");
+                     setAiGroups((old) =>
+                       old.map((group) =>
+                         group.id === id ? { ...group, shared } : group,
+                       ),
+                     );
+                     await loadSharedAi();
+                     await refresh();
+                   })
+                 }
                 train={train}
                 start={start}
                 busy={busy}
@@ -1160,6 +1199,15 @@ function App() {
                 settings={() => go("settings")}
               />
             </>
+          )}
+          {page === "community" && (
+            <CommunityView
+              questions={sharedAiQuestions}
+              loading={sharedAiLoading}
+              stats={dashboard.community}
+              reload={loadSharedAi}
+              start={start}
+            />
           )}
           {page === "mastery" && (
             <>
@@ -1273,9 +1321,10 @@ function App() {
                 refresh={refresh}
                 run={run}
                 busy={busy}
-                train={train}
-                configured={dashboard.aiConfigured}
-                exit={() => go("home")}
+                 train={train}
+                 configured={dashboard.aiConfigured}
+                 community={dashboard.community}
+                 exit={() => go("home")}
               />
             ) : (
               <Empty title="选择一组题目开始练习">
@@ -1821,6 +1870,8 @@ function TrainingView({
   wrong,
   weak,
   queue,
+  groups,
+  onShareChange,
   train,
   start,
   busy,
@@ -1940,6 +1991,160 @@ function TrainingView({
           <Empty icon={Sparkles} title="暂无待完成的训练" />
         )}
       </section>
+      <section className="ai-groups-section">
+        <div className="section-heading">
+          <div>
+            <h2>
+              <Share2 size={20} />
+              我的 AI 题组
+            </h2>
+            <p className="muted">
+              共享后，同证书用户可以练习题目，但看不到你的账号和学习记录。
+            </p>
+          </div>
+          <span className="muted">{groups?.length || 0} 组</span>
+        </div>
+        {groups?.length ? (
+          <div className="ai-group-list">
+            {groups.map((group) => (
+              <article className="ai-group-card" key={group.id}>
+                <div>
+                  <span className="badge green">AI 生成</span>
+                  <strong>{group.topic}</strong>
+                  <small>
+                    {group.questionCount} 题 · 已完成 {group.completedCount} 题 ·{" "}
+                    {new Date(group.createdAt).toLocaleDateString("zh-CN")}
+                  </small>
+                </div>
+                <label className="shared-ai-toggle">
+                  <input
+                    type="checkbox"
+                    checked={group.shared}
+                    disabled={!!busy}
+                    onChange={(event) =>
+                      onShareChange?.(group.id, event.target.checked)
+                    }
+                  />
+                  <span>{group.shared ? "已共享" : "仅自己使用"}</span>
+                </label>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <Empty icon={Share2} title="还没有 AI 题组">
+            <p>在错题本中分析错因后，可以生成第一组针对性训练。</p>
+          </Empty>
+        )}
+      </section>
+    </>
+  );
+}
+function CommunityView({ questions, loading, stats, reload, start }) {
+  const [chapter, setChapter] = useState(""),
+    [sort, setSort] = useState("latest");
+  const chapters = [...new Set(questions.map((q) => q.chapter))].sort();
+  const filtered = questions
+    .filter((q) => !chapter || q.chapter === chapter)
+    .sort((a, b) => {
+      if (sort === "helpful")
+        return (b.feedback?.helpful || 0) - (a.feedback?.helpful || 0);
+      return String(b.createdAt || "").localeCompare(String(a.createdAt || ""));
+    });
+  return (
+    <>
+      <Heading
+        title="共享 AI 题库"
+        subtitle="用户共同贡献的变式题，练习记录彼此独立"
+      >
+        <button onClick={reload} disabled={loading}>
+          <RefreshCw size={16} className={loading ? "spin" : ""} />
+          刷新题库
+        </button>
+      </Heading>
+      <div className="stats community-stats">
+        {[
+          ["共享题目", stats?.sharedQuestionCount || 0, "题", Globe2],
+          ["贡献用户", stats?.contributorCount || 0, "人", Users],
+          ["累计练习", stats?.attemptCount || 0, "次", BookOpen],
+          ["我的贡献", stats?.myQuestionCount || 0, "题", Share2],
+        ].map(([label, value, unit, Icon]) => (
+          <div className="stat" key={label}>
+            <div>
+              <span>{label}</span>
+              <Icon size={18} />
+            </div>
+            <strong>
+              {value}
+              <small>{unit}</small>
+            </strong>
+            <span className="stat-note">
+              {label === "我的贡献" ? "审核通过后可被同证书用户练习" : "同证书范围"}
+            </span>
+          </div>
+        ))}
+      </div>
+      <div className="community-notice">
+        <Share2 size={19} />
+        <div>
+          <strong>一起把题库做大，也把题目做稳</strong>
+          <p>
+            AI 题经过服务端校验和独立审核才会进入共享列表。练习后可以反馈答案错误、表述不清或题目重复，帮助后续整理题库。
+          </p>
+        </div>
+      </div>
+      <div className="toolbar community-toolbar">
+        <label className="inline-label">
+          章节
+          <select value={chapter} onChange={(event) => setChapter(event.target.value)}>
+            <option value="">全部章节</option>
+            {chapters.map((item) => (
+              <option key={item}>{item}</option>
+            ))}
+          </select>
+        </label>
+        <label className="inline-label">
+          排序
+          <select value={sort} onChange={(event) => setSort(event.target.value)}>
+            <option value="latest">最新生成</option>
+            <option value="helpful">最多有帮助反馈</option>
+          </select>
+        </label>
+        <span className="muted">{filtered.length} 道可练习</span>
+      </div>
+      {loading ? (
+        <div className="alert working">
+          <LoaderCircle size={18} className="spin" />
+          <span>正在读取共享题库</span>
+        </div>
+      ) : filtered.length ? (
+        <div className="community-list">
+          {filtered.map((q) => (
+            <article className="community-card" key={q.id}>
+              <div className="question-meta">
+                <span className="badge green">AI 生成</span>
+                <span className="badge">{q.chapter}</span>
+                <span>{diff[q.difficulty] || "练习"}</span>
+                <span className="push-right feedback-count">
+                  <ThumbsUp size={14} /> {q.feedback?.helpful || 0}
+                </span>
+              </div>
+              <h3>{q.question}</h3>
+              <p className="community-topic">{q.knowledgePoint}</p>
+              <button
+                className="primary"
+                onClick={() => start([q], "共享 AI 练习")}
+              >
+                开始练习
+                <ArrowRight size={16} />
+              </button>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <Empty icon={Globe2} title="共享题库还在增长中">
+          <p>先从错题本生成一组 AI 训练题，审核通过后就能贡献给同证书用户。</p>
+        </Empty>
+      )}
     </>
   );
 }
@@ -2363,7 +2568,8 @@ function Practice({ session, refresh, run, busy, train, configured, exit }) {
     [hint, setHint] = useState(0),
     [history, setHistory] = useState([]),
     [done, setDone] = useState(false),
-    [teacherOpen, setTeacherOpen] = useState(false);
+    [teacherOpen, setTeacherOpen] = useState(false),
+    [feedbackKind, setFeedbackKind] = useState(null);
   const started = useRef(Date.now());
   const q = session.questions[index];
   const choose = (k) => {
@@ -2394,6 +2600,11 @@ function Practice({ session, refresh, run, busy, train, configured, exit }) {
       setTeacherOpen(true);
       await refresh();
     });
+  const sendFeedback = (kind) =>
+    run("正在保存题目反馈", async () => {
+      await api(`/questions/${q.id}/feedback`, { kind });
+      setFeedbackKind(kind);
+    });
   const next = () => {
     if (busy) return;
     if (index === session.questions.length - 1) {
@@ -2405,6 +2616,7 @@ function Practice({ session, refresh, run, busy, train, configured, exit }) {
     setResult(null);
     setTeacher("");
     setHint(0);
+    setFeedbackKind(null);
     started.current = Date.now();
   };
   const ask = (action, level = 0) =>
@@ -2525,6 +2737,41 @@ function Practice({ session, refresh, run, busy, train, configured, exit }) {
                 <span>正确答案 {result.answer.join("、")}</span>
               </h3>
               <p>{result.analysis}</p>
+            </div>
+          )}
+          {result && q.source === "ai_generated" && (
+            <div className="question-feedback">
+              <span>这道共享 AI 题怎么样？</span>
+              <button
+                className={feedbackKind === "helpful" ? "selected" : ""}
+                disabled={!!busy}
+                onClick={() => sendFeedback("helpful")}
+              >
+                <ThumbsUp size={15} />
+                {feedbackKind === "helpful" ? "已标记有帮助" : "有帮助"}
+              </button>
+              <button
+                className={feedbackKind === "wrong_answer" ? "selected" : ""}
+                disabled={!!busy}
+                onClick={() => sendFeedback("wrong_answer")}
+              >
+                <Flag size={15} />
+                {feedbackKind === "wrong_answer" ? "已反馈答案问题" : "答案有问题"}
+              </button>
+              <button
+                className={feedbackKind === "ambiguous" ? "selected" : ""}
+                disabled={!!busy}
+                onClick={() => sendFeedback("ambiguous")}
+              >
+                {feedbackKind === "ambiguous" ? "已反馈表述问题" : "表述不清"}
+              </button>
+              <button
+                className={feedbackKind === "duplicate" ? "selected" : ""}
+                disabled={!!busy}
+                onClick={() => sendFeedback("duplicate")}
+              >
+                {feedbackKind === "duplicate" ? "已反馈重复" : "题目重复"}
+              </button>
             </div>
           )}
           <div className="question-actions">

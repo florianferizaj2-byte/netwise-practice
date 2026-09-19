@@ -398,6 +398,48 @@ test("server-generated AI groups are immutable, shareable by certificate, and ke
     200,
   );
   assert.equal((await request(owner.cookie, "/queue")).data.length, 0);
+  const groups = await request(owner.cookie, "/ai/groups");
+  assert.equal(groups.data.length, 1);
+  assert.equal(groups.data[0].shared, true);
+  assert.equal(groups.data[0].questionCount, 1);
+  const community = await request(stranger.cookie, "/dashboard");
+  assert.equal(community.data.community.sharedQuestionCount, 1);
+  assert.equal(community.data.community.contributorCount, 1);
+  const feedback = await request(
+    stranger.cookie,
+    `/questions/${storedAi.id}/feedback`,
+    { kind: "helpful" },
+  );
+  assert.equal(feedback.status, 200);
+  assert.equal(feedback.data.feedback.helpful, 1);
+  assert.equal(
+    (await request(stranger.cookie, "/questions/shared-ai")).data[0].feedback
+      .helpful,
+    1,
+  );
+  assert.equal(
+    (
+      await request(
+        owner.cookie,
+        `/ai/groups/${storedAi.aiGroupId}/share`,
+        { shared: false },
+        "PUT",
+      )
+    ).status,
+    200,
+  );
+  assert.equal(
+    (await request(stranger.cookie, "/questions/shared-ai")).data.length,
+    0,
+  );
+  assert.equal(
+    (await request(stranger.cookie, `/questions/${storedAi.id}`)).status,
+    404,
+  );
+  assert.equal(
+    (await request(owner.cookie, `/questions/${storedAi.id}`)).status,
+    200,
+  );
 });
 test("invalid AI JSON retries, valid structured analysis persists and usage counts actual requests", async (t) => {
   let calls = 0;

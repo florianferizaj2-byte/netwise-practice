@@ -184,7 +184,9 @@ export async function createApp(options = {}) {
     if (q.source === "ai_generated") {
       const group = q.aiGroupId
         ? store.db
-            .prepare("SELECT user_id, certificate_id FROM ai_groups WHERE id=?")
+            .prepare(
+              "SELECT user_id, certificate_id, shared FROM ai_groups WHERE id=?",
+            )
             .get(q.aiGroupId)
         : null;
       const userId = req?.user?.id || "local";
@@ -193,6 +195,7 @@ export async function createApp(options = {}) {
         !group ||
         group.user_id !== q.ownerUserId ||
         (certificateId && group.certificate_id !== certificateId) ||
+        (group.user_id !== userId && !group.shared) ||
         (!req?.user && q.ownerUserId !== userId)
       ) {
         const e = new Error("题目不存在或不适用于当前证书");
@@ -290,7 +293,7 @@ export async function createApp(options = {}) {
     const groupIds = new Set(
       store.db
         .prepare(
-          "SELECT id FROM ai_groups WHERE certificate_id=? AND user_id<>?",
+          "SELECT id FROM ai_groups WHERE certificate_id=? AND user_id<>? AND shared=1",
         )
         .all(certificateId, userId)
         .map((group) => group.id),
@@ -307,7 +310,33 @@ export async function createApp(options = {}) {
         ...publicQuestion(q),
         sharedAi: true,
         sourceLabel: "其他用户生成的 AI 题",
+        feedback: store.questionFeedback(q.id, userId),
       }));
+  });
+  route("post", "/api/questions/:id/feedback", (req) => {
+    const q = requireQ(req.params.id, req);
+    if (q.source !== "ai_generated") {
+      const error = new Error("只有 AI 生成题支持社区反馈");
+      error.status = 400;
+      throw error;
+    }
+    const body = z
+      .object({
+        kind: z.enum(["helpful", "wrong_answer", "ambiguous", "duplicate"]),
+        note: z.string().trim().max(500).optional(),
+      })
+      .strict()
+      .parse(req.body);
+    store.saveQuestionFeedback(
+      req.user?.id || "local",
+      q.id,
+      body.kind,
+      body.note,
+    );
+    return {
+      saved: true,
+      feedback: store.questionFeedback(q.id, req.user?.id || "local"),
+    };
   });
   route("get", "/api/questions/:id", (req) =>
     publicQuestion(requireQ(req.params.id, req)),
@@ -369,13 +398,26 @@ export async function createApp(options = {}) {
       .map(publicQuestion),
   );
   route("get", "/api/ai/groups", (req) =>
-    store.db
-      .prepare(
-        "SELECT id, certificate_id AS certificateId, topic, harder, created_at AS createdAt FROM ai_groups WHERE user_id=? ORDER BY created_at DESC",
-      )
-      .all(req.user?.id || "local")
-      .map((group) => ({ ...group, harder: !!group.harder })),
+    store.aiGroups(req.user?.id || "local", req.user?.certificateId),
   );
+  route("put", "/api/ai/groups/:id/share", (req) => {
+    const shared = z
+      .object({ shared: z.boolean() })
+      .strict()
+      .parse(req.body).shared;
+    if (
+      !store.setAiGroupShared(
+        req.params.id,
+        req.user?.id || "local",
+        shared,
+      )
+    ) {
+      const error = new Error("题组不存在或不属于当前账号");
+      error.status = 404;
+      throw error;
+    }
+    return { saved: true, shared };
+  });
   route("get", "/api/dashboard", (req) => {
     const certificateId = requireCertificate(req);
     const currentQuestions = certificateQuestions(
@@ -437,6 +479,7 @@ export async function createApp(options = {}) {
       user: req.user ? userView(req.user) : null,
       certificate: certificates.find((c) => c.id === certificateId) || null,
       banks: banksForCertificate(certificateId),
+      community: store.communityStats(certificateId, req.user?.id),
       syllabus: syllabusProgress,
       recentDays: Array.from({ length: 7 }, (_, i) => {
         const d = new Date(Date.now() - (6 - i) * 86400000).toLocaleDateString(

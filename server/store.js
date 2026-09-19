@@ -32,7 +32,16 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
     certificate_id TEXT,
     topic TEXT NOT NULL,
     harder INTEGER NOT NULL DEFAULT 0,
-    created_at TEXT NOT NULL
+    created_at TEXT NOT NULL,
+    shared INTEGER NOT NULL DEFAULT 1
+  );
+  CREATE TABLE IF NOT EXISTS question_feedback (
+    user_id TEXT NOT NULL,
+    question_id TEXT NOT NULL REFERENCES questions(id),
+    kind TEXT NOT NULL,
+    note TEXT,
+    created_at TEXT NOT NULL,
+    PRIMARY KEY (user_id, question_id)
   );
   CREATE TABLE IF NOT EXISTS user_reviews (
     user_id TEXT NOT NULL,
@@ -46,6 +55,9 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
     data TEXT NOT NULL,
     PRIMARY KEY (user_id, question_id)
   );`);
+  try {
+    db.exec("ALTER TABLE ai_groups ADD COLUMN shared INTEGER NOT NULL DEFAULT 1");
+  } catch {}
   const existingUsers = db.prepare("SELECT id FROM users").all();
   if (existingUsers.length === 1) {
     const onlyUserId = existingUsers[0].id;
@@ -324,15 +336,116 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
               : [topic]),
         )
         .map((r) => getQ(r.question_id)),
+    aiGroups: (userId, certificateId) => {
+      const groups = db
+        .prepare(
+          "SELECT id, certificate_id AS certificateId, topic, harder, shared, created_at AS createdAt FROM ai_groups WHERE user_id=? AND (? IS NULL OR certificate_id=?) ORDER BY created_at DESC",
+        )
+        .all(userId || "local", certificateId || null, certificateId || null);
+      return groups.map((group) => {
+        const questions = allQ().filter((q) => q.aiGroupId === group.id);
+        const completed = db
+          .prepare(
+            "SELECT COUNT(*) AS count FROM queue WHERE group_id=? AND user_id=? AND completed=1",
+          )
+          .get(group.id, userId || "local").count;
+        return {
+          ...group,
+          harder: !!group.harder,
+          shared: !!group.shared,
+          questionCount: questions.length,
+          completedCount: completed,
+        };
+      });
+    },
+    setAiGroupShared: (id, userId, shared) =>
+      db
+        .prepare("UPDATE ai_groups SET shared=? WHERE id=? AND user_id=?")
+        .run(shared ? 1 : 0, id, userId || "local").changes > 0,
+    saveQuestionFeedback: (userId, questionId, kind, note = "") =>
+      db
+        .prepare(
+          "INSERT OR REPLACE INTO question_feedback (user_id,question_id,kind,note,created_at) VALUES (?,?,?,?,?)",
+        )
+        .run(
+          userId || "local",
+          questionId,
+          kind,
+          note || null,
+          new Date().toISOString(),
+        ),
+    questionFeedback: (questionId, userId) => {
+      const rows = db
+        .prepare(
+          "SELECT kind, COUNT(*) AS count FROM question_feedback WHERE question_id=? GROUP BY kind",
+        )
+        .all(questionId);
+      const summary = {
+        helpful: 0,
+        wrong_answer: 0,
+        ambiguous: 0,
+        duplicate: 0,
+        total: 0,
+        mine: null,
+      };
+      for (const row of rows) {
+        if (row.kind in summary) {
+          summary[row.kind] = row.count;
+          summary.total += row.count;
+        }
+      }
+      if (userId) {
+        summary.mine =
+          db
+            .prepare(
+              "SELECT kind FROM question_feedback WHERE question_id=? AND user_id=?",
+            )
+            .get(questionId, userId)?.kind || null;
+      }
+      return summary;
+    },
+    communityStats: (certificateId, userId) => {
+      const groups = db
+        .prepare(
+          "SELECT id, user_id AS userId, shared FROM ai_groups WHERE certificate_id=?",
+        )
+        .all(certificateId);
+      const groupMap = new Map(groups.map((group) => [group.id, group]));
+      const questions = allQ().filter(
+        (q) => q.source === "ai_generated" && groupMap.has(q.aiGroupId),
+      );
+      const shared = questions.filter((q) => groupMap.get(q.aiGroupId).shared);
+      const ids = [...new Set(shared.map((q) => q.id))];
+      const attemptCount = ids.length
+        ? db
+            .prepare(
+              `SELECT COUNT(*) AS count FROM attempts WHERE question_id IN (${ids.map(() => "?").join(",")})`,
+            )
+            .get(...ids).count
+        : 0;
+      return {
+        sharedQuestionCount: shared.length,
+        contributorCount: new Set(
+          shared.map((q) => groupMap.get(q.aiGroupId).userId),
+        ).size,
+        attemptCount,
+        myQuestionCount: shared.filter(
+          (q) => groupMap.get(q.aiGroupId).userId === (userId || "local"),
+        ).length,
+      };
+    },
     createAiGroup: (userId, certificateId, topic, harder = false) => {
       const id = crypto.randomUUID();
-      db.prepare("INSERT INTO ai_groups VALUES (?,?,?,?,?,?)").run(
+      db.prepare(
+        "INSERT INTO ai_groups (id,user_id,certificate_id,topic,harder,created_at,shared) VALUES (?,?,?,?,?,?,?)",
+      ).run(
         id,
         userId,
         certificateId,
         topic,
         harder ? 1 : 0,
         new Date().toISOString(),
+        1,
       );
       return id;
     },
