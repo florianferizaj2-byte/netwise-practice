@@ -1,0 +1,4853 @@
+[
+  {
+    "id": "ncre-office-user-docx-q001",
+    "type": "single_choice",
+    "question": "算法的有穷性是指（ ）。",
+    "options": {
+      "A": "算法程序的运行时间是有限的",
+      "B": "算法程序所处理的数据量是有限的",
+      "C": "算法程序的长度是有限的",
+      "D": "算法只能被有限的用户使用"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（算法程序的运行时间是有限的）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "算法复杂度",
+    "difficulty": "medium",
+    "tags": [
+      "算法复杂度",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 1,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q002",
+    "type": "single_choice",
+    "question": "算法的空间复杂度是指（ ）。",
+    "options": {
+      "A": "算法程序的长度",
+      "B": "算法程序中的指令条数",
+      "C": "算法程序所占的存储空间",
+      "D": "算法执行过程中所需要的存储空间"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（算法执行过程中所需要的存储空间）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "算法复杂度",
+    "difficulty": "medium",
+    "tags": [
+      "算法复杂度",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 2,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q003",
+    "type": "single_choice",
+    "question": "下列叙述中正确的是（ ）。",
+    "options": {
+      "A": "算法的时间复杂度与算法程序中的语句条数成正比",
+      "B": "算法的时间复杂度与计算机的运行速度有关",
+      "C": "算法的时间复杂度与运行算法时特定的输入有关",
+      "D": "算法的时间复杂度与算法程序编制者的水平有关"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（算法的时间复杂度与运行算法时特定的输入有关）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "算法复杂度",
+    "difficulty": "medium",
+    "tags": [
+      "算法复杂度",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 3,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q004",
+    "type": "single_choice",
+    "question": "下列叙述中正确的是（ ）。",
+    "options": {
+      "A": "程序执行的效率与数据的存储结构密切相关",
+      "B": "程序执行的效率只取决于程序的控制结构",
+      "C": "程序执行的效率只取决于所处理的数据量",
+      "D": "以上说法均错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（程序执行的效率与数据的存储结构密切相关）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "数据结构基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "数据结构基本概念",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 4,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q005",
+    "type": "single_choice",
+    "question": "数据的存储结构是指（ ）。",
+    "options": {
+      "A": "数据所占的存储空间量",
+      "B": "数据的逻辑结构在计算机中的表示",
+      "C": "数据在计算机中的顺序存储方式",
+      "D": "存储在外存中的数据"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（数据的逻辑结构在计算机中的表示）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "数据结构基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "数据结构基本概念",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 5,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q006",
+    "type": "single_choice",
+    "question": "数据结构中，与所使用的计算机无关的是数据的（ ）。",
+    "options": {
+      "A": "存储结构",
+      "B": "物理结构",
+      "C": "逻辑结构",
+      "D": "物理和存储结构"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（逻辑结构）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "数据结构基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "数据结构基本概念",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 6,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q007",
+    "type": "single_choice",
+    "question": "下列关于栈的叙述中，正确的是（ ）。",
+    "options": {
+      "A": "栈按“先进先出”组织数据",
+      "B": "栈按“先进后出”组织数据",
+      "C": "只能在栈底插入数据",
+      "D": "不能删除数据"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（栈按“先进后出”组织数据）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "栈与队列",
+    "difficulty": "medium",
+    "tags": [
+      "栈与队列",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 7,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q008",
+    "type": "single_choice",
+    "question": "下列关于队列的叙述中正确的是（ ）。",
+    "options": {
+      "A": "在队列中只能插入数据",
+      "B": "在队列中只能删除数据",
+      "C": "队列是先进先出的线性表",
+      "D": "队列是先进后出的线性表"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（队列是先进先出的线性表）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "栈与队列",
+    "difficulty": "medium",
+    "tags": [
+      "栈与队列",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 8,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q009",
+    "type": "single_choice",
+    "question": "栈和队列的共同点是（ ）。",
+    "options": {
+      "A": "都是先进后出",
+      "B": "都是先进先出",
+      "C": "只允许在端点处插入和删除元素",
+      "D": "没有共同点"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（只允许在端点处插入和删除元素）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "栈与队列",
+    "difficulty": "medium",
+    "tags": [
+      "栈与队列",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 9,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q010",
+    "type": "single_choice",
+    "question": "下列叙述中正确的是（ ）。",
+    "options": {
+      "A": "循环队列有队头和队尾两个指针，因此循环队列是非线性结构",
+      "B": "在循环队列中，只需要队头指针就能反映队列中元素的动态变化情况",
+      "C": "在循环队列中，只需要队尾指针就能反映队列中元素的动态变化情况",
+      "D": "循环队列中元素的个数是由队头指针和队尾指针共同决定"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（循环队列中元素的个数是由队头指针和队尾指针共同决定）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "栈与队列",
+    "difficulty": "medium",
+    "tags": [
+      "栈与队列",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 10,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q011",
+    "type": "single_choice",
+    "question": "设循环队列的存储空间为Q(1:35)，初始状态为front=rear=35。现经过一系列入队与退队运算后，front=15，rear=15，则循环队列中的元素个数为（ ）。",
+    "options": {
+      "A": "15",
+      "B": "16",
+      "C": "20",
+      "D": "0或35"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（0或35）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "栈与队列",
+    "difficulty": "medium",
+    "tags": [
+      "栈与队列",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 11,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q012",
+    "type": "single_choice",
+    "question": "设栈的顺序存储空间为S(0:49)，栈底指针bottom=49，栈顶指针top=30（指向栈顶元素）。则栈中的元素个数为（ ）。",
+    "options": {
+      "A": "30",
+      "B": "29",
+      "C": "20",
+      "D": "19"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（20）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "栈与队列",
+    "difficulty": "medium",
+    "tags": [
+      "栈与队列",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 12,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q013",
+    "type": "single_choice",
+    "question": "栈底至栈顶依次存放元素A、B、C、D，在第五个元素E入栈前，栈中元素可以出栈，则出栈序列可能是（ ）。",
+    "options": {
+      "A": "ABCED",
+      "B": "DBCEA",
+      "C": "CDABE",
+      "D": "DCBEA"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（DCBEA）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "栈与队列",
+    "difficulty": "medium",
+    "tags": [
+      "栈与队列",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 13,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q014",
+    "type": "single_choice",
+    "question": "如果进栈序列为e1，e2，e3，e4，则可能的出栈序列是（ ）。",
+    "options": {
+      "A": "e3，e1，e4，e2",
+      "B": "e2，e4，e3，e1",
+      "C": "e3，e4，e1，e2",
+      "D": "任意顺序"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（e2，e4，e3，e1）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "栈与队列",
+    "difficulty": "medium",
+    "tags": [
+      "栈与队列",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 14,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q015",
+    "type": "single_choice",
+    "question": "设有栈S和队列Q，初始状态均为空。首先依次将A、B、C、D、E、F入栈，然后从栈中退出三个元素依次入队，再将X、Y、Z入栈后，将栈中所有元素退出并依次入队，最后将队列中所有元素退出，则退队元素的顺序为（ ）。",
+    "options": {
+      "A": "DEFXYZABC",
+      "B": "FEDXYZCBA",
+      "C": "DEFZYXABC",
+      "D": "FEDZYXCBA"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（FEDZYXCBA）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "栈与队列",
+    "difficulty": "medium",
+    "tags": [
+      "栈与队列",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 15,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q016",
+    "type": "single_choice",
+    "question": "下列数据结构中，属于非线性结构的是（ ）。",
+    "options": {
+      "A": "循环队列",
+      "B": "带链队列",
+      "C": "二叉树",
+      "D": "带链栈"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（二叉树）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "树与二叉树",
+    "difficulty": "medium",
+    "tags": [
+      "树与二叉树",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 16,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q017",
+    "type": "single_choice",
+    "question": "下列关于二叉树的叙述中，正确的是（ ）。",
+    "options": {
+      "A": "叶子结点总是比度为2的结点少一个",
+      "B": "叶子结点总是比度为2的结点多一个",
+      "C": "叶子结点数是度为2的结点数的两倍",
+      "D": "度为2的结点数是度为1的结点数的两倍"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（叶子结点总是比度为2的结点多一个）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "树与二叉树",
+    "difficulty": "medium",
+    "tags": [
+      "树与二叉树",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 17,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q018",
+    "type": "single_choice",
+    "question": "一棵二叉树中共有80个叶子结点与70个度为1的结点，则该二叉树中的总结点数为（ ）。",
+    "options": {
+      "A": "219",
+      "B": "229",
+      "C": "230",
+      "D": "231"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（229）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "树与二叉树",
+    "difficulty": "medium",
+    "tags": [
+      "树与二叉树",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 18,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q019",
+    "type": "single_choice",
+    "question": "某二叉树中共有350个结点，其中200个为叶子结点，则该二叉树中度为2的结点数为（ ）。",
+    "options": {
+      "A": "150",
+      "B": "199",
+      "C": "不可能有这样的二叉树",
+      "D": "149"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（不可能有这样的二叉树）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "树与二叉树",
+    "difficulty": "medium",
+    "tags": [
+      "树与二叉树",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 19,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q020",
+    "type": "single_choice",
+    "question": "在深度为5的满二叉树中，叶子结点的个数为（ ）。",
+    "options": {
+      "A": "1",
+      "B": "11",
+      "C": "16",
+      "D": "15"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（16）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "树与二叉树",
+    "difficulty": "medium",
+    "tags": [
+      "树与二叉树",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 20,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q021",
+    "type": "single_choice",
+    "question": "设一棵完全二叉树共有699个结点，则在该二叉树中的叶子结点数为（ ）。",
+    "options": {
+      "A": "349",
+      "B": "350",
+      "C": "255",
+      "D": "351"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（350）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "树与二叉树",
+    "difficulty": "medium",
+    "tags": [
+      "树与二叉树",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 21,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q022",
+    "type": "single_choice",
+    "question": "在一棵二叉树上第5层的结点数最多是（ ）。",
+    "options": {
+      "A": "8",
+      "B": "16",
+      "C": "32",
+      "D": "15"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（16）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "树与二叉树",
+    "difficulty": "medium",
+    "tags": [
+      "树与二叉树",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 22,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q023",
+    "type": "single_choice",
+    "question": "设树T的度为4，其中度为1、2、3、4的结点个数分别为4、2、1、1。则T中的叶子结点数为（ ）。",
+    "options": {
+      "A": "8",
+      "B": "7",
+      "C": "6",
+      "D": "5"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（8）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "树与二叉树",
+    "difficulty": "medium",
+    "tags": [
+      "树与二叉树",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 23,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q024",
+    "type": "single_choice",
+    "question": "树的度为3，且有9个度为3的结点，20个叶子结点，但没有度为1的结点，则度为2的结点数为（ ）。",
+    "options": {
+      "A": "0",
+      "B": "1",
+      "C": "7",
+      "D": "不可能有这样的树"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（不可能有这样的树）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "树与二叉树",
+    "difficulty": "medium",
+    "tags": [
+      "树与二叉树",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 24,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q025",
+    "type": "single_choice",
+    "question": "若某二叉树的前序遍历访问顺序是abdgcefh，中序遍历访问顺序是dgbaechf，则其后序遍历的结点访问顺序是（ ）。",
+    "options": {
+      "A": "bdgcefha",
+      "B": "gdbecfha",
+      "C": "bdgaechf",
+      "D": "gdbehfca"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（gdbehfca）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "树与二叉树",
+    "difficulty": "medium",
+    "tags": [
+      "树与二叉树",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 25,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q026",
+    "type": "single_choice",
+    "question": "用链表表示线性表的优点是（ ）。",
+    "options": {
+      "A": "便于插入和删除操作",
+      "B": "数据元素的物理顺序与逻辑顺序相同",
+      "C": "花费的存储空间较顺序存储少",
+      "D": "便于随机存取"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（便于插入和删除操作）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "线性链表",
+    "difficulty": "medium",
+    "tags": [
+      "线性链表",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 26,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q027",
+    "type": "single_choice",
+    "question": "在单链表中，增加头结点的目的是（ ）。",
+    "options": {
+      "A": "方便运算的实现",
+      "B": "使单链表至少有一个结点",
+      "C": "标识表结点中首结点的位置",
+      "D": "说明单链表是线性表的链式存储实现"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（方便运算的实现）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "线性链表",
+    "difficulty": "medium",
+    "tags": [
+      "线性链表",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 27,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q028",
+    "type": "single_choice",
+    "question": "非空的循环单链表head的尾结点（由p所指向），满足（ ）。",
+    "options": {
+      "A": "p->next==NULL",
+      "B": "p==NULL",
+      "C": "p->next=head",
+      "D": "p=head"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（p->next=head）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "线性链表",
+    "difficulty": "medium",
+    "tags": [
+      "线性链表",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 28,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q029",
+    "type": "single_choice",
+    "question": "对长度为N的线性表进行顺序查找，在最坏情况下所需要的比较次数为（ ）。",
+    "options": {
+      "A": "N+1",
+      "B": "N",
+      "C": "(N+1)/2",
+      "D": "N/2"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（N）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "查找技术",
+    "difficulty": "medium",
+    "tags": [
+      "查找技术",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 29,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q030",
+    "type": "single_choice",
+    "question": "对长度为n的线性表排序，在最坏情况下，比较次数不是n(n-1)/2的排序方法是（ ）。",
+    "options": {
+      "A": "快速排序",
+      "B": "冒泡排序",
+      "C": "直接插入排序",
+      "D": "堆排序"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（堆排序）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "排序技术",
+    "difficulty": "medium",
+    "tags": [
+      "排序技术",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 30,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q031",
+    "type": "single_choice",
+    "question": "在待排序的元素序列基本有序的前提下，效率最高的排序方法是（ ）。",
+    "options": {
+      "A": "冒泡排序",
+      "B": "选择排序",
+      "C": "快速排序",
+      "D": "归并排序"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（冒泡排序）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "排序技术",
+    "difficulty": "medium",
+    "tags": [
+      "排序技术",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 31,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q032",
+    "type": "single_choice",
+    "question": "设有1000个元素，希望用最快的速度选出其中前10个最大的元素，最好选用（ ）排序法。",
+    "options": {
+      "A": "冒泡",
+      "B": "快速",
+      "C": "堆",
+      "D": "选择"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（堆）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "排序技术",
+    "difficulty": "medium",
+    "tags": [
+      "排序技术",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 32,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q033",
+    "type": "single_choice",
+    "question": "在下列几种排序方法中，要求内存量最大的是（ ）。",
+    "options": {
+      "A": "插入排序",
+      "B": "选择排序",
+      "C": "快速排序",
+      "D": "归并排序"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（归并排序）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "排序技术",
+    "difficulty": "medium",
+    "tags": [
+      "排序技术",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 33,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q034",
+    "type": "single_choice",
+    "question": "要在具有n个元素的有序顺序表中删除一个元素，删除后仍是有序顺序表，则在最坏情况下需要移动的元素个数为（ ）。",
+    "options": {
+      "A": "n-1",
+      "B": "n",
+      "C": "n/2",
+      "D": "n+1"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（n-1）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "线性表操作",
+    "difficulty": "medium",
+    "tags": [
+      "线性表操作",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 34,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q035",
+    "type": "single_choice",
+    "question": "设顺序表的长度为n。下列算法中，最坏情况下比较次数小于n的是（ ）。",
+    "options": {
+      "A": "寻找最大项",
+      "B": "堆排序",
+      "C": "快速排序",
+      "D": "顺序查找法"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（寻找最大项）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "查找技术",
+    "difficulty": "medium",
+    "tags": [
+      "查找技术",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 35,
+        "chapter": "第一章 数据结构与算法",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q036",
+    "type": "single_choice",
+    "question": "结构化程序设计的基本原则不包括（ ）。",
+    "options": {
+      "A": "多态性",
+      "B": "自顶向下",
+      "C": "模块化",
+      "D": "逐步求精"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（多态性）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "结构化程序设计",
+    "difficulty": "medium",
+    "tags": [
+      "结构化程序设计",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 36,
+        "chapter": "第二章 程序设计基础",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q037",
+    "type": "single_choice",
+    "question": "结构化程序设计的基本控制结构是（ ）。",
+    "options": {
+      "A": "顺序结构",
+      "B": "顺序、选择和循环结构",
+      "C": "选择结构",
+      "D": "循环结构"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（顺序、选择和循环结构）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "结构化程序设计",
+    "difficulty": "medium",
+    "tags": [
+      "结构化程序设计",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 37,
+        "chapter": "第二章 程序设计基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q038",
+    "type": "single_choice",
+    "question": "算法一般都可以用哪几种控制结构组合而成（ ）。",
+    "options": {
+      "A": "循环、分支、递归",
+      "B": "顺序、循环、嵌套",
+      "C": "循环、递归、选择",
+      "D": "顺序、选择、循环"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（顺序、选择、循环）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "结构化程序设计",
+    "difficulty": "medium",
+    "tags": [
+      "结构化程序设计",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 38,
+        "chapter": "第二章 程序设计基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q039",
+    "type": "single_choice",
+    "question": "在计算机中，算法是指（ ）。",
+    "options": {
+      "A": "查询方法",
+      "B": "加工方法",
+      "C": "解题方案的准确而完整的描述",
+      "D": "排序方法"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（解题方案的准确而完整的描述）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "算法基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "算法基本概念",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 39,
+        "chapter": "第二章 程序设计基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q040",
+    "type": "single_choice",
+    "question": "算法分析的目的是（ ）。",
+    "options": {
+      "A": "找出数据结构的合理性",
+      "B": "找出算法中输入和输出之间的关系",
+      "C": "分析算法的易懂性和可靠性",
+      "D": "分析算法的效率以求改进"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（分析算法的效率以求改进）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "算法基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "算法基本概念",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 40,
+        "chapter": "第二章 程序设计基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q041",
+    "type": "single_choice",
+    "question": "在下列选项中，哪个不是一个算法一般应该具有的基本特征（ ）。",
+    "options": {
+      "A": "确定性",
+      "B": "可行性",
+      "C": "无穷性",
+      "D": "拥有足够的情报"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（无穷性）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "算法基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "算法基本概念",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 41,
+        "chapter": "第二章 程序设计基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q042",
+    "type": "single_choice",
+    "question": "对建立良好的程序设计风格，下面描述正确的是（ ）。",
+    "options": {
+      "A": "程序应简单、清晰、可读性好",
+      "B": "符号名的命名要符合语法",
+      "C": "充分考虑程序的执行效率",
+      "D": "程序的注释可有可无"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（程序应简单、清晰、可读性好）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "程序设计风格",
+    "difficulty": "medium",
+    "tags": [
+      "程序设计风格",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 42,
+        "chapter": "第二章 程序设计基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q043",
+    "type": "single_choice",
+    "question": "下列选项中属于面向对象设计方法主要特征的是（ ）。",
+    "options": {
+      "A": "继承",
+      "B": "自顶向下",
+      "C": "模块化",
+      "D": "逐步求精"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（继承）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "面向对象基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "面向对象基本概念",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 43,
+        "chapter": "第二章 程序设计基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q044",
+    "type": "single_choice",
+    "question": "下面对对象概念描述错误的是（ ）。",
+    "options": {
+      "A": "任何对象都必须有继承性",
+      "B": "对象是属性和方法的封装体",
+      "C": "对象间的通讯靠消息传递",
+      "D": "操作是对象的动态性属性"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（任何对象都必须有继承性）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "面向对象基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "面向对象基本概念",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 44,
+        "chapter": "第二章 程序设计基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q045",
+    "type": "single_choice",
+    "question": "下面属于整数类I的实例的是（ ）。",
+    "options": {
+      "A": "229",
+      "B": "0.229",
+      "C": "2.29",
+      "D": "“229”"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（229）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "类与对象",
+    "difficulty": "medium",
+    "tags": [
+      "类与对象",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 45,
+        "chapter": "第二章 程序设计基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q046",
+    "type": "single_choice",
+    "question": "以下叙述中正确的是（ ）。",
+    "options": {
+      "A": "程序设计语言仅指高级语言",
+      "B": "面向对象方法与结构化方法在分解问题的思路上相同",
+      "C": "对象是属性和操作的封装体",
+      "D": "类是对象的实例"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（对象是属性和操作的封装体）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "类与对象",
+    "difficulty": "medium",
+    "tags": [
+      "类与对象",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 46,
+        "chapter": "第二章 程序设计基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q047",
+    "type": "single_choice",
+    "question": "下列关于结构化程序设计的叙述中，正确的是（ ）。",
+    "options": {
+      "A": "结构化程序设计提倡使用goto语句提高效率",
+      "B": "结构化程序设计采用自顶向下、逐步求精的方法",
+      "C": "结构化程序设计不支持模块化",
+      "D": "结构化程序设计的主要目标是提高程序执行速度"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（结构化程序设计采用自顶向下、逐步求精的方法）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "结构化程序设计",
+    "difficulty": "medium",
+    "tags": [
+      "结构化程序设计",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 47,
+        "chapter": "第二章 程序设计基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q048",
+    "type": "single_choice",
+    "question": "软件测试的目的是（ ）。",
+    "options": {
+      "A": "评估软件可靠性",
+      "B": "发现并改正程序中的错误",
+      "C": "改正程序中的错误",
+      "D": "发现程序中的错误"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（发现程序中的错误）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "软件测试",
+    "difficulty": "medium",
+    "tags": [
+      "软件测试",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 48,
+        "chapter": "第三章 软件工程基础",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q049",
+    "type": "single_choice",
+    "question": "下面叙述中错误的是（ ）。",
+    "options": {
+      "A": "软件测试的目的是发现错误并改正错误",
+      "B": "对被调试的程序进行“错误定位”是程序调试的必要步骤",
+      "C": "程序调试通常也称为Debug",
+      "D": "软件测试应严格执行测试计划，排除测试的随意性"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（软件测试的目的是发现错误并改正错误）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "软件测试",
+    "difficulty": "medium",
+    "tags": [
+      "软件测试",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 49,
+        "chapter": "第三章 软件工程基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q050",
+    "type": "single_choice",
+    "question": "在黑盒测试方法中，设计测试用例的主要根据是（ ）。",
+    "options": {
+      "A": "程序内部逻辑",
+      "B": "程序外部功能",
+      "C": "程序数据结构",
+      "D": "程序流程图"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（程序外部功能）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "软件测试",
+    "difficulty": "medium",
+    "tags": [
+      "软件测试",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 50,
+        "chapter": "第三章 软件工程基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q051",
+    "type": "single_choice",
+    "question": "代码编写阶段可进行的软件测试是（ ）。",
+    "options": {
+      "A": "集成测试",
+      "B": "单元测试",
+      "C": "确认测试",
+      "D": "系统测试"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（单元测试）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "软件测试",
+    "difficulty": "medium",
+    "tags": [
+      "软件测试",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 51,
+        "chapter": "第三章 软件工程基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q052",
+    "type": "single_choice",
+    "question": "在软件开发中，需求分析阶段可以使用的工具是（ ）。",
+    "options": {
+      "A": "N-S图",
+      "B": "DFD图",
+      "C": "PAD图",
+      "D": "程序流程图"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（DFD图）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "需求分析",
+    "difficulty": "medium",
+    "tags": [
+      "需求分析",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 52,
+        "chapter": "第三章 软件工程基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q053",
+    "type": "single_choice",
+    "question": "需求分析阶段产生的主要文档是（ ）。",
+    "options": {
+      "A": "需求规格说明书",
+      "B": "初步的用户手册",
+      "C": "确认测试计划",
+      "D": "数据流图和数据字典"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（需求规格说明书）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "需求分析",
+    "difficulty": "medium",
+    "tags": [
+      "需求分析",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 53,
+        "chapter": "第三章 软件工程基础",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q054",
+    "type": "single_choice",
+    "question": "在软件开发中，需求分析阶段产生的主要文档是（ ）。",
+    "options": {
+      "A": "可行性分析报告",
+      "B": "软件需求规格说明书",
+      "C": "概要设计说明书",
+      "D": "集成测试计划"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（软件需求规格说明书）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "需求分析",
+    "difficulty": "medium",
+    "tags": [
+      "需求分析",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 54,
+        "chapter": "第三章 软件工程基础",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q055",
+    "type": "single_choice",
+    "question": "下面不属于软件需求分析阶段任务的是（ ）。",
+    "options": {
+      "A": "需求配置",
+      "B": "需求获取",
+      "C": "需求分析",
+      "D": "需求评审"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（需求配置）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "需求分析",
+    "difficulty": "medium",
+    "tags": [
+      "需求分析",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 55,
+        "chapter": "第三章 软件工程基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q056",
+    "type": "single_choice",
+    "question": "软件设计中模块划分应遵循的准则是（ ）。",
+    "options": {
+      "A": "低内聚低耦合",
+      "B": "高内聚低耦合",
+      "C": "低内聚高耦合",
+      "D": "高内聚高耦合"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（高内聚低耦合）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "软件设计",
+    "difficulty": "medium",
+    "tags": [
+      "软件设计",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 56,
+        "chapter": "第三章 软件工程基础",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q057",
+    "type": "single_choice",
+    "question": "下面不属于软件设计阶段任务的是（ ）。",
+    "options": {
+      "A": "软件总体设计",
+      "B": "算法设计",
+      "C": "制定软件确认测试计划",
+      "D": "数据库设计"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（制定软件确认测试计划）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "软件设计",
+    "difficulty": "medium",
+    "tags": [
+      "软件设计",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 57,
+        "chapter": "第三章 软件工程基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q058",
+    "type": "single_choice",
+    "question": "下面描述中错误的是（ ）。",
+    "options": {
+      "A": "系统总体结构图支持软件系统的详细设计",
+      "B": "软件设计是将软件需求转换为软件表示的过程",
+      "C": "数据结构与数据库设计是软件设计的任务之一",
+      "D": "PAD图是软件详细设计的表示工具"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（系统总体结构图支持软件系统的详细设计）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "软件设计",
+    "difficulty": "medium",
+    "tags": [
+      "软件设计",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 58,
+        "chapter": "第三章 软件工程基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q059",
+    "type": "single_choice",
+    "question": "程序流程图中带有箭头的线段表示的是（ ）。",
+    "options": {
+      "A": "图元关系",
+      "B": "数据流",
+      "C": "控制流",
+      "D": "调用关系"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（控制流）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "软件设计工具",
+    "difficulty": "medium",
+    "tags": [
+      "软件设计工具",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 59,
+        "chapter": "第三章 软件工程基础",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q060",
+    "type": "single_choice",
+    "question": "软件生命周期可分为定义阶段、开发阶段和维护阶段，下面不属于开发阶段任务的是（ ）。",
+    "options": {
+      "A": "测试",
+      "B": "设计",
+      "C": "可行性研究",
+      "D": "实现"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（可行性研究）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "软件生命周期",
+    "difficulty": "medium",
+    "tags": [
+      "软件生命周期",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 60,
+        "chapter": "第三章 软件工程基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q061",
+    "type": "single_choice",
+    "question": "下面不属于软件工程三要素的是（ ）。",
+    "options": {
+      "A": "工具",
+      "B": "过程",
+      "C": "方法",
+      "D": "环境"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（环境）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "软件工程基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "软件工程基本概念",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 61,
+        "chapter": "第三章 软件工程基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q062",
+    "type": "single_choice",
+    "question": "软件生命周期中的活动不包括（ ）。",
+    "options": {
+      "A": "需求分析",
+      "B": "市场调研",
+      "C": "软件测试",
+      "D": "软件维护"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（市场调研）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "软件生命周期",
+    "difficulty": "medium",
+    "tags": [
+      "软件生命周期",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 62,
+        "chapter": "第三章 软件工程基础",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q063",
+    "type": "single_choice",
+    "question": "下列关于程序调试的叙述中，正确的是（ ）。",
+    "options": {
+      "A": "程序调试是为了发现程序中的错误",
+      "B": "程序调试的任务是诊断和改正程序中的错误",
+      "C": "程序调试通常在软件测试之前进行",
+      "D": "程序调试只需要由测试人员完成"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（程序调试的任务是诊断和改正程序中的错误）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "程序调试",
+    "difficulty": "medium",
+    "tags": [
+      "程序调试",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 63,
+        "chapter": "第三章 软件工程基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q064",
+    "type": "single_choice",
+    "question": "将E-R图转换为关系模式时，实体和联系都可以表示为（ ）。",
+    "options": {
+      "A": "属性",
+      "B": "键",
+      "C": "关系",
+      "D": "域"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（关系）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "E-R模型",
+    "difficulty": "medium",
+    "tags": [
+      "E-R模型",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 64,
+        "chapter": "第四章 数据库设计基础",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q065",
+    "type": "single_choice",
+    "question": "在数据库设计中，将E-R图转换成关系数据模型的过程属于（ ）。",
+    "options": {
+      "A": "需求分析阶段",
+      "B": "概念设计阶段",
+      "C": "逻辑设计阶段",
+      "D": "物理设计阶段"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（逻辑设计阶段）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "数据库设计",
+    "difficulty": "medium",
+    "tags": [
+      "数据库设计",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 65,
+        "chapter": "第四章 数据库设计基础",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q066",
+    "type": "single_choice",
+    "question": "用树型结构表示实体之间联系的模型是（ ）。",
+    "options": {
+      "A": "关系模型",
+      "B": "层次模型",
+      "C": "网状模型",
+      "D": "运算模型"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（层次模型）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "数据模型",
+    "difficulty": "medium",
+    "tags": [
+      "数据模型",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 66,
+        "chapter": "第四章 数据库设计基础",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q067",
+    "type": "single_choice",
+    "question": "层次型、网状型和关系型数据库划分原则是（ ）。",
+    "options": {
+      "A": "记录长度",
+      "B": "文件的大小",
+      "C": "联系的复杂程度",
+      "D": "数据之间的联系方式"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（数据之间的联系方式）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "数据模型",
+    "difficulty": "medium",
+    "tags": [
+      "数据模型",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 67,
+        "chapter": "第四章 数据库设计基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q068",
+    "type": "single_choice",
+    "question": "逻辑模型是面向数据库系统的模型，下面属于逻辑模型的是（ ）。",
+    "options": {
+      "A": "关系模型",
+      "B": "谓词模型",
+      "C": "物理模型",
+      "D": "实体-联系模型"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（关系模型）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "数据模型",
+    "difficulty": "medium",
+    "tags": [
+      "数据模型",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 68,
+        "chapter": "第四章 数据库设计基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q069",
+    "type": "single_choice",
+    "question": "数据库管理系统(DBMS)是（ ）。",
+    "options": {
+      "A": "系统软件",
+      "B": "硬件系统",
+      "C": "一个完整的数据库应用系统",
+      "D": "既包括硬件、也包括软件的系统"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（系统软件）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "数据库系统基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "数据库系统基本概念",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 69,
+        "chapter": "第四章 数据库设计基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q070",
+    "type": "single_choice",
+    "question": "数据库应用系统中的核心问题是（ ）。",
+    "options": {
+      "A": "数据库设计",
+      "B": "数据库系统设计",
+      "C": "数据库维护",
+      "D": "数据库管理员培训"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（数据库设计）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "数据库设计",
+    "difficulty": "medium",
+    "tags": [
+      "数据库设计",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 70,
+        "chapter": "第四章 数据库设计基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q071",
+    "type": "single_choice",
+    "question": "数据库设计过程不包括（ ）。",
+    "options": {
+      "A": "概念设计",
+      "B": "逻辑设计",
+      "C": "物理设计",
+      "D": "算法设计"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（算法设计）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "数据库设计",
+    "difficulty": "medium",
+    "tags": [
+      "数据库设计",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 71,
+        "chapter": "第四章 数据库设计基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q072",
+    "type": "single_choice",
+    "question": "在数据库的三级模式中，可以有任意多个（ ）。",
+    "options": {
+      "A": "外模式(用户模式)",
+      "B": "模式",
+      "C": "内模式(物理模式)",
+      "D": "概念模式"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（外模式(用户模式)）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "数据库系统结构",
+    "difficulty": "medium",
+    "tags": [
+      "数据库系统结构",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 72,
+        "chapter": "第四章 数据库设计基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q073",
+    "type": "single_choice",
+    "question": "数据库系统的三级模式不包括（ ）。",
+    "options": {
+      "A": "概念模式",
+      "B": "内模式",
+      "C": "外模式",
+      "D": "数据模式"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（数据模式）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "数据库系统结构",
+    "difficulty": "medium",
+    "tags": [
+      "数据库系统结构",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 73,
+        "chapter": "第四章 数据库设计基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q074",
+    "type": "single_choice",
+    "question": "数据库中对概念模式内容进行说明的语言是（ ）。",
+    "options": {
+      "A": "数据定义语言",
+      "B": "数据操纵语言",
+      "C": "数据控制语言",
+      "D": "以上都不对"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（数据定义语言）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "数据库系统结构",
+    "difficulty": "medium",
+    "tags": [
+      "数据库系统结构",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 74,
+        "chapter": "第四章 数据库设计基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q075",
+    "type": "single_choice",
+    "question": "数据库管理系统应能实现的专门关系运算包括（ ）。",
+    "options": {
+      "A": "显示、打印、制表",
+      "B": "排序、索引、统计",
+      "C": "关联、更新、排序",
+      "D": "选择、投影、连接"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（选择、投影、连接）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "关系代数",
+    "difficulty": "medium",
+    "tags": [
+      "关系代数",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 75,
+        "chapter": "第四章 数据库设计基础",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q076",
+    "type": "single_choice",
+    "question": "一般情况下，当对关系R和S进行自然连接时，要求R和S含有一个或者多个共有的（ ）。",
+    "options": {
+      "A": "记录",
+      "B": "行",
+      "C": "属性",
+      "D": "元组"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（属性）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "关系代数",
+    "difficulty": "medium",
+    "tags": [
+      "关系代数",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 76,
+        "chapter": "第四章 数据库设计基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q077",
+    "type": "single_choice",
+    "question": "有三个关系R、S和T，T是R与S取公共元组得到的结果，则所使用的运算为（ ）。",
+    "options": {
+      "A": "并",
+      "B": "自然连接",
+      "C": "笛卡尔积",
+      "D": "交"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（交）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "关系代数",
+    "difficulty": "medium",
+    "tags": [
+      "关系代数",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 77,
+        "chapter": "第四章 数据库设计基础",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q078",
+    "type": "single_choice",
+    "question": "在关系模式A(S,SN,D)和B(D,CN,NM)中，关系A的主键是S，关系B的主键是D，则属性D在关系A中称为（ ）。",
+    "options": {
+      "A": "超键",
+      "B": "主键",
+      "C": "候选键",
+      "D": "外键"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（外键）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "关系模型",
+    "difficulty": "medium",
+    "tags": [
+      "关系模型",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 78,
+        "chapter": "第四章 数据库设计基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q079",
+    "type": "single_choice",
+    "question": "第二范式是在第一范式的基础上消除了（ ）。",
+    "options": {
+      "A": "非主属性对键的部分函数依赖",
+      "B": "非主属性对键的传递函数依赖",
+      "C": "非主属性对键的完全函数依赖",
+      "D": "多值依赖"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（非主属性对键的部分函数依赖）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "数据库规范化",
+    "difficulty": "medium",
+    "tags": [
+      "数据库规范化",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 79,
+        "chapter": "第四章 数据库设计基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q080",
+    "type": "single_choice",
+    "question": "下列叙述中正确的是（ ）。",
+    "options": {
+      "A": "数据库系统减少了数据冗余",
+      "B": "经规范化后的数据库系统避免了一切冗余",
+      "C": "数据库系统中数据的一致性是指数据类型一致",
+      "D": "数据库系统比文件系统能管理更多的数据"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（数据库系统减少了数据冗余）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "数据库系统基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "数据库系统基本概念",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 80,
+        "chapter": "第四章 数据库设计基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q081",
+    "type": "single_choice",
+    "question": "在数据管理技术的发展过程中，经历了人工管理阶段、文件系统阶段和数据库系统阶段。其中数据独立性最高的阶段是（ ）。",
+    "options": {
+      "A": "数据库系统",
+      "B": "文件系统",
+      "C": "人工管理",
+      "D": "数据项管理"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（数据库系统）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "数据库系统基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "数据库系统基本概念",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 81,
+        "chapter": "第四章 数据库设计基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q082",
+    "type": "single_choice",
+    "question": "定义学生、教师和课程的关系模式：S(S#,Sn,Sd,SA)；C(C#,Cn,P#)；SC(S#,C#,G)。则该关系为（ ）。",
+    "options": {
+      "A": "第三范式",
+      "B": "第一范式",
+      "C": "第二范式",
+      "D": "BCNF范式"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（第三范式）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "公共基础知识",
+    "knowledgePoint": "数据库规范化",
+    "difficulty": "medium",
+    "tags": [
+      "数据库规范化",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 82,
+        "chapter": "第四章 数据库设计基础",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q083",
+    "type": "single_choice",
+    "question": "在Word文档中有一个占用3页篇幅的表格，如需将这个表格的标题行都出现在各页面首行，最优的操作方法是（ ）。",
+    "options": {
+      "A": "将表格的标题行复制到另外2页中",
+      "B": "利用“重复标题行”功能",
+      "C": "打开“表格属性”对话框，在列属性中进行设置",
+      "D": "打开“表格属性”对话框，在行属性中进行设置"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（利用“重复标题行”功能）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "表格处理",
+    "difficulty": "medium",
+    "tags": [
+      "表格处理",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 83,
+        "chapter": "第五章 Word 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q084",
+    "type": "single_choice",
+    "question": "在Word文档中包含了文档目录，将文档目录转变为纯文本格式的最优操作方法是（ ）。",
+    "options": {
+      "A": "文档目录本身就是纯文本格式，不需要再进行进一步操作",
+      "B": "使用Ctrl+Shift+F9组合键",
+      "C": "在文档目录上单击鼠标右键，然后执行“转换”命令",
+      "D": "复制文档目录，然后通过选择性粘贴功能以纯文本方式显示"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（使用Ctrl+Shift+F9组合键）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "目录与域",
+    "difficulty": "medium",
+    "tags": [
+      "目录与域",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 84,
+        "chapter": "第五章 Word 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q085",
+    "type": "single_choice",
+    "question": "小张完成了毕业论文，现需要在正文前添加论文目录以便检索和阅读，最优的操作方法是（ ）。",
+    "options": {
+      "A": "利用Word提供的“手动目录”功能创建目录",
+      "B": "直接输入作为目录的标题文字和相对应的页码创建目录",
+      "C": "将文档的各级标题设置为内置标题样式，然后基于内置标题样式自动插入目录",
+      "D": "不使用内置标题样式，而是直接基于自定义样式创建目录"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（将文档的各级标题设置为内置标题样式，然后基于内置标题样式自动插入目录）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "目录与样式",
+    "difficulty": "medium",
+    "tags": [
+      "目录与样式",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 85,
+        "chapter": "第五章 Word 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q086",
+    "type": "single_choice",
+    "question": "小王计划邀请30家客户参加答谢会，并为客户发送邀请函。快速制作30份邀请函的最优操作方法是（ ）。",
+    "options": {
+      "A": "发动同事帮忙制作邀请函，每个人写几份",
+      "B": "利用Word的邮件合并功能自动生成",
+      "C": "先制作好一份邀请函，然后复印30份，在每份上添加客户名称",
+      "D": "先在Word中制作一份邀请函，通过复制、粘贴功能生成30份，然后分别添加客户名称"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（利用Word的邮件合并功能自动生成）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "邮件合并",
+    "difficulty": "medium",
+    "tags": [
+      "邮件合并",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 86,
+        "chapter": "第五章 Word 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q087",
+    "type": "single_choice",
+    "question": "在Word中，邮件合并功能支持的数据源不包括（ ）。",
+    "options": {
+      "A": "Word数据源",
+      "B": "Excel工作表",
+      "C": "PowerPoint演示文稿",
+      "D": "HTML文件"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（PowerPoint演示文稿）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "邮件合并",
+    "difficulty": "medium",
+    "tags": [
+      "邮件合并",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 87,
+        "chapter": "第五章 Word 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q088",
+    "type": "single_choice",
+    "question": "以下不属于Word文档视图的是（ ）。",
+    "options": {
+      "A": "阅读版式视图",
+      "B": "放映视图",
+      "C": "Web版式视图",
+      "D": "大纲视图"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（放映视图）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "视图",
+    "difficulty": "medium",
+    "tags": [
+      "视图",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 88,
+        "chapter": "第五章 Word 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q089",
+    "type": "single_choice",
+    "question": "在Word文档中，不可直接操作的是（ ）。",
+    "options": {
+      "A": "录制屏幕操作视频",
+      "B": "插入Excel图表",
+      "C": "插入SmartArt",
+      "D": "屏幕截图"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（录制屏幕操作视频）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "文档编辑",
+    "difficulty": "medium",
+    "tags": [
+      "文档编辑",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 89,
+        "chapter": "第五章 Word 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q090",
+    "type": "single_choice",
+    "question": "下列文件扩展名，不属于Word模板文件的是（ ）。",
+    "options": {
+      "A": "DOCX",
+      "B": "DOTM",
+      "C": "DOTX",
+      "D": "DOT"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（DOCX）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "文件格式",
+    "difficulty": "medium",
+    "tags": [
+      "文件格式",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 90,
+        "chapter": "第五章 Word 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q091",
+    "type": "single_choice",
+    "question": "小张的毕业论文设置为2栏页面布局，现需在分栏之上插入一横跨两栏内容的论文标题，最优的操作方法是（ ）。",
+    "options": {
+      "A": "在两栏内容之上插入一个艺术字标题",
+      "B": "在两栏内容之上插入一个分节符，然后设置论文标题位置",
+      "C": "在两栏内容之上插入一个文本框，输入标题，并设置文本框的环绕方式",
+      "D": "在两栏内容之前空出几行，打印出来后手动写上标题"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（在两栏内容之上插入一个分节符，然后设置论文标题位置）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "分栏与分节",
+    "difficulty": "medium",
+    "tags": [
+      "分栏与分节",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 91,
+        "chapter": "第五章 Word 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q092",
+    "type": "single_choice",
+    "question": "在Word功能区中，拥有的选项卡分别是（ ）。",
+    "options": {
+      "A": "开始、插入、设计、布局、引用、邮件、审阅等",
+      "B": "开始、插入、编辑、设计、布局、引用、邮件等",
+      "C": "开始、插入、编辑、设计、布局、选项、邮件等",
+      "D": "开始、插入、编辑、设计、布局、选项、帮助等"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（开始、插入、设计、布局、引用、邮件、审阅等）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "Word界面",
+    "difficulty": "medium",
+    "tags": [
+      "Word界面",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 92,
+        "chapter": "第五章 Word 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q093",
+    "type": "single_choice",
+    "question": "在Word文档中，选择从某一段落开始位置到文档末尾的全部内容，最优的操作方法是（ ）。",
+    "options": {
+      "A": "将指针移动到该段落的开始位置，按住Shift键，单击文档的结束位置",
+      "B": "将指针移动到该段落的开始位置，按Ctrl+A组合键",
+      "C": "将指针移动到该段落的开始位置，按Alt+Ctrl+Shift+PageDown组合键",
+      "D": "将指针移动到该段落的开始位置，按Ctrl+Shift+End组合键"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（将指针移动到该段落的开始位置，按Ctrl+Shift+End组合键）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "文档编辑",
+    "difficulty": "medium",
+    "tags": [
+      "文档编辑",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 93,
+        "chapter": "第五章 Word 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q094",
+    "type": "single_choice",
+    "question": "Word文档的结构层次为“章-节-小节”，已完成第一章的多级列表设置，如需完成剩余章节的多级列表设置，最优的操作方法是（ ）。",
+    "options": {
+      "A": "利用格式刷功能，分别复制第一章中的“章、节、小节”格式，并应用到其他章节",
+      "B": "复制第一章中的“章、节、小节”段落，粘贴到其他章节对应位置",
+      "C": "逐个对其他章节标题应用“多级列表”格式，并调整段落结构层次",
+      "D": "将第一章中的“章、节、小节”格式保存为标题样式，并将其应用到其他章节对应段落"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（将第一章中的“章、节、小节”格式保存为标题样式，并将其应用到其他章节对应段落）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "样式与模板",
+    "difficulty": "medium",
+    "tags": [
+      "样式与模板",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 94,
+        "chapter": "第五章 Word 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q095",
+    "type": "single_choice",
+    "question": "在Word文档编辑过程中，如需将特定的计算机应用程序窗口画面作为文档的插图，最优的操作方法是（ ）。",
+    "options": {
+      "A": "利用Word插入“屏幕截图”功能，直接将所需窗口画面插入到Word文档指定位置",
+      "B": "使所需画面窗口处于活动状态，按下Alt+PrintScreen组合键，再粘贴到Word文档指定位置",
+      "C": "使所需画面窗口处于活动状态，按下PrintScreen键，再粘贴到Word文档指定位置",
+      "D": "在计算机系统中安装截屏工具软件，利用该软件实现屏幕画面的截取"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（利用Word插入“屏幕截图”功能，直接将所需窗口画面插入到Word文档指定位置）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "图文混排",
+    "difficulty": "medium",
+    "tags": [
+      "图文混排",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 95,
+        "chapter": "第五章 Word 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q096",
+    "type": "single_choice",
+    "question": "在Word文档中，学生“张晓民”的名字被多次错误地输入为“张晓明”“张晓敏”“张晓名”，纠正该错误的最优操作方法是（ ）。",
+    "options": {
+      "A": "利用Word“查找和替换”功能搜索文本“张晓?”，并将其全部替换为“张晓民”",
+      "B": "利用Word“查找和替换”功能搜索文本“张晓*”，并将其全部替换为“张晓民”",
+      "C": "利用Word“查找”功能搜索文本“张晓”，并逐一更正",
+      "D": "从前往后逐个查找错误的名字，并更正"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（利用Word“查找和替换”功能搜索文本“张晓?”，并将其全部替换为“张晓民”）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "查找与替换",
+    "difficulty": "medium",
+    "tags": [
+      "查找与替换",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 96,
+        "chapter": "第五章 Word 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q097",
+    "type": "single_choice",
+    "question": "小王利用Word撰写专业学术论文时，需要在论文结尾处罗列出所有参考文献或书目，最优的操作方法是（ ）。",
+    "options": {
+      "A": "利用Word中“插入尾注”功能，在论文结尾处插入参考文献或书目列表",
+      "B": "把所有参考文献信息保存在一个单独表格中，然后复制到论文结尾处",
+      "C": "直接在论文结尾处输入所参考文献的相关信息",
+      "D": "利用Word中“管理源”和“插入书目”功能，在论文结尾处插入参考文献或书目列表"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（利用Word中“管理源”和“插入书目”功能，在论文结尾处插入参考文献或书目列表）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "引用与参考文献",
+    "difficulty": "medium",
+    "tags": [
+      "引用与参考文献",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 97,
+        "chapter": "第五章 Word 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q098",
+    "type": "single_choice",
+    "question": "小明需要将Word文档内容以稿纸格式输出，最优的操作方法是（ ）。",
+    "options": {
+      "A": "适当调整文档内容的字号，然后将其直接打印到稿纸上",
+      "B": "利用Word中“表格”功能绘制稿纸，然后将文字内容复制到表格中",
+      "C": "利用Word中“文档网格”功能即可",
+      "D": "利用Word中“稿纸设置”功能即可"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（利用Word中“稿纸设置”功能即可）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "页面设置",
+    "difficulty": "medium",
+    "tags": [
+      "页面设置",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 98,
+        "chapter": "第五章 Word 操作知识",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q099",
+    "type": "single_choice",
+    "question": "小王需要在Word文档中将应用了“标题1”样式的所有段落格式调整为“段前、段后各12磅，单倍行距”，最优的操作方法是（ ）。",
+    "options": {
+      "A": "修改“标题1”样式，将其段落格式设置为“段前、段后各12磅，单倍行距”",
+      "B": "将其中一个段落设置为该格式，然后利用格式刷功能将格式复制到其他段落",
+      "C": "将每个段落逐一设置为该格式",
+      "D": "利用查找替换功能进行格式替换"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（修改“标题1”样式，将其段落格式设置为“段前、段后各12磅，单倍行距”）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "样式与模板",
+    "difficulty": "medium",
+    "tags": [
+      "样式与模板",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 99,
+        "chapter": "第五章 Word 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q100",
+    "type": "single_choice",
+    "question": "如果希望为一个多页的Word文档添加页面图片背景，最优的操作方法是（ ）。",
+    "options": {
+      "A": "利用水印功能，将图片设置为文档水印",
+      "B": "执行“插入”选项卡中的“页面背景”命令，将图片设置为页面背景",
+      "C": "在每一页中分别插入图片，并设置图片的环绕方式为衬于文字下方",
+      "D": "利用页面填充效果功能，将图片设置为页面背景"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（利用页面填充效果功能，将图片设置为页面背景）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "页面设置",
+    "difficulty": "medium",
+    "tags": [
+      "页面设置",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 100,
+        "chapter": "第五章 Word 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q101",
+    "type": "single_choice",
+    "question": "在Word中，不能作为文本转换为表格的分隔符的是（ ）。",
+    "options": {
+      "A": "段落标记",
+      "B": "制表符",
+      "C": "@",
+      "D": "##"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（##）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "表格处理",
+    "difficulty": "medium",
+    "tags": [
+      "表格处理",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 101,
+        "chapter": "第五章 Word 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q102",
+    "type": "single_choice",
+    "question": "将Word文档中的大写英文字母转换为小写，最优的操作方法是（ ）。",
+    "options": {
+      "A": "单击鼠标右键，执行右键菜单中的“更改大小写”命令",
+      "B": "执行“审阅”选项卡“格式”组中的“更改大小写”命令",
+      "C": "执行“引用”选项卡“格式”组中的“更改大小写”命令",
+      "D": "执行“开始”选项卡“字体”组中的“更改大小写”命令"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（执行“开始”选项卡“字体”组中的“更改大小写”命令）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "格式设置",
+    "difficulty": "medium",
+    "tags": [
+      "格式设置",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 102,
+        "chapter": "第五章 Word 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q103",
+    "type": "single_choice",
+    "question": "下列操作中，不能在Word文档中插入图片的操作是（ ）。",
+    "options": {
+      "A": "使用“插入图片”功能",
+      "B": "使用“插入对象”功能",
+      "C": "使用复制、粘贴功能",
+      "D": "使用“插入交叉引用”功能"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（使用“插入交叉引用”功能）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "图文混排",
+    "difficulty": "medium",
+    "tags": [
+      "图文混排",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 103,
+        "chapter": "第五章 Word 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q104",
+    "type": "single_choice",
+    "question": "在Word文档编辑状态下，将光标定位于任一段落位置，设置1.5倍行距后，结果将是（ ）。",
+    "options": {
+      "A": "全部文档按1.5倍行距调整段落格式",
+      "B": "光标所在段落按1.5倍行距调整格式",
+      "C": "光标所在行按1.5倍行距调整格式",
+      "D": "全部文档没有任何改变"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（光标所在段落按1.5倍行距调整格式）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "段落格式",
+    "difficulty": "medium",
+    "tags": [
+      "段落格式",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 104,
+        "chapter": "第五章 Word 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q105",
+    "type": "single_choice",
+    "question": "小李正在Word中编辑一篇包含12个章节的书稿，他希望每一章都能自动从新的一页开始，最优的操作方法是（ ）。",
+    "options": {
+      "A": "在每一章最后插入分页符",
+      "B": "将每一章标题指定为标题样式，并将样式的段落格式修改为“段前分页”",
+      "C": "将每一章标题的段落格式设为“段前分页”",
+      "D": "在每一章最后连续按回车键Enter，直到下一页面开始处"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（将每一章标题指定为标题样式，并将样式的段落格式修改为“段前分页”）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "长文档处理",
+    "difficulty": "medium",
+    "tags": [
+      "长文档处理",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 105,
+        "chapter": "第五章 Word 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q106",
+    "type": "single_choice",
+    "question": "小李的打印机不支持自动双面打印，但他希望将一篇在Word中编辑好的论文连续打印在A4纸的正反两面上，最优的操作方法是（ ）。",
+    "options": {
+      "A": "打印时先指定打印所有奇数页，将纸张翻过来后，再指定打印偶数页",
+      "B": "先单面打印一份论文，然后找复印机进行双面复印",
+      "C": "打印时先设置“手动双面打印”，等Word提示打印第二面时将纸张翻过来继续打印",
+      "D": "先在文档中选择所有奇数页并在打印时设置“打印所选内容”，将纸张翻过来后，再选择打印偶数页"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（打印时先设置“手动双面打印”，等Word提示打印第二面时将纸张翻过来继续打印）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "打印输出",
+    "difficulty": "medium",
+    "tags": [
+      "打印输出",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 106,
+        "chapter": "第五章 Word 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q107",
+    "type": "single_choice",
+    "question": "在Word 2016中，关于尾注说法错误的是（ ）。",
+    "options": {
+      "A": "尾注可以插入到文档的结尾处",
+      "B": "尾注可以插入到页脚中",
+      "C": "尾注可以插入到节的结尾处",
+      "D": "尾注可以转换为脚注"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（尾注可以插入到页脚中）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "脚注与尾注",
+    "difficulty": "medium",
+    "tags": [
+      "脚注与尾注",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 107,
+        "chapter": "第五章 Word 操作知识",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q108",
+    "type": "single_choice",
+    "question": "在Word 2016中，关于文档自动保存的说法，正确的是（ ）。",
+    "options": {
+      "A": "自动保存时间间隔越长越好",
+      "B": "自动保存时间间隔越短越好",
+      "C": "默认的自动保存时间间隔为10分钟",
+      "D": "如果不进行特别设置，Word 2016不会自动保存文档"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（默认的自动保存时间间隔为10分钟）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "文档保存",
+    "difficulty": "medium",
+    "tags": [
+      "文档保存",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 108,
+        "chapter": "第五章 Word 操作知识",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q109",
+    "type": "single_choice",
+    "question": "在Word 2016中，如果要对照查看一个上百页文档的不同部分，最佳的方法是（ ）。",
+    "options": {
+      "A": "将文档保存一份副本，打开并使用“并排查看”功能",
+      "B": "使用Word的定位功能来对照查看文档内容",
+      "C": "在“阅读视图”模式下对照查看文档不同部分内容",
+      "D": "使用“拆分”功能，将文档窗口拆分为两个部分，并对照查看不同部分内容"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（使用“拆分”功能，将文档窗口拆分为两个部分，并对照查看不同部分内容）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "长文档处理",
+    "difficulty": "medium",
+    "tags": [
+      "长文档处理",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 109,
+        "chapter": "第五章 Word 操作知识",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q110",
+    "type": "single_choice",
+    "question": "小明的毕业论文分别请两位老师进行了审阅，每位老师分别通过Word的修订功能对该论文进行了修改。现在，小明需要将两份经过修订的文档合并为一份，最优的操作方法是（ ）。",
+    "options": {
+      "A": "将修订较少的那部分舍弃，只保留修订较多的那份论文作为终稿",
+      "B": "请一位老师在另一位老师修订后的文档中再进行一次修订",
+      "C": "利用Word比较功能，将两位老师的修订合并到一个文档中",
+      "D": "将另一份修订较少的文档修改内容手动对照补充进去"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（利用Word比较功能，将两位老师的修订合并到一个文档中）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "修订与审阅",
+    "difficulty": "medium",
+    "tags": [
+      "修订与审阅",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 110,
+        "chapter": "第五章 Word 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q111",
+    "type": "single_choice",
+    "question": "张经理在对Word文档格式的工作报告修改过程中，希望在原始文档显示其修改的内容和状态，最优的操作方法是（ ）。",
+    "options": {
+      "A": "利用“审阅”选项卡的修订功能，选择带“显示标记”的文档修订查看方式后按下“修订”按钮，然后在文档中直接修改内容",
+      "B": "利用“插入”选项卡的文本功能，为文档中的每一处需要修改的地方添加文档部件",
+      "C": "利用“审阅”选项卡的批注功能，为文档中每一处需要修改的地方添加批注",
+      "D": "利用“插入”选项卡的修订标记功能插入修订符号"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（利用“审阅”选项卡的修订功能，选择带“显示标记”的文档修订查看方式后按下“修订”按钮，然后在文档中直接修改内容）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "修订与审阅",
+    "difficulty": "medium",
+    "tags": [
+      "修订与审阅",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 111,
+        "chapter": "第五章 Word 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q112",
+    "type": "single_choice",
+    "question": "在Excel工作表单元格中输入公式时，F$2的单元格引用方式称为（ ）。",
+    "options": {
+      "A": "交叉地址引用",
+      "B": "混合地址引用",
+      "C": "相对地址引用",
+      "D": "绝对地址引用"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（混合地址引用）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Excel 数据处理",
+    "knowledgePoint": "单元格引用",
+    "difficulty": "medium",
+    "tags": [
+      "单元格引用",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 112,
+        "chapter": "第六章 Excel 操作知识",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q113",
+    "type": "single_choice",
+    "question": "在Excel公式复制时，为使公式中的引用不随新位置而变化，必须使用（ ）。",
+    "options": {
+      "A": "相对地址引用",
+      "B": "绝对地址引用",
+      "C": "混合地址引用",
+      "D": "交叉地址引用"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（绝对地址引用）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Excel 数据处理",
+    "knowledgePoint": "单元格引用",
+    "difficulty": "medium",
+    "tags": [
+      "单元格引用",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 113,
+        "chapter": "第六章 Excel 操作知识",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q114",
+    "type": "single_choice",
+    "question": "将Excel工作表A1单元格中的公式SUM(B4)复制到B18单元格后，原公式将变为（ ）。",
+    "options": {
+      "A": "SUM(C19)",
+      "B": "SUM(C4)",
+      "C": "SUM(B19)",
+      "D": "SUM(B4)"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（SUM(C4)）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Excel 数据处理",
+    "knowledgePoint": "公式与函数",
+    "difficulty": "medium",
+    "tags": [
+      "公式与函数",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 114,
+        "chapter": "第六章 Excel 操作知识",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q115",
+    "type": "single_choice",
+    "question": "在同一个Excel工作簿中，如需区分不同工作表的单元格，则要在引用地址前面增加（ ）。",
+    "options": {
+      "A": "单元格地址",
+      "B": "公式",
+      "C": "工作表名称",
+      "D": "工作簿名称"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（工作表名称）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Excel 数据处理",
+    "knowledgePoint": "单元格引用",
+    "difficulty": "medium",
+    "tags": [
+      "单元格引用",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 115,
+        "chapter": "第六章 Excel 操作知识",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q116",
+    "type": "single_choice",
+    "question": "在Excel 2016中，将单元格B5中显示为“#”号的数据完整显示出来的最快捷的方法是（ ）。",
+    "options": {
+      "A": "设置单元格B5自动换行",
+      "B": "将单元格B5的字号减小",
+      "C": "双击B列列标的右边框",
+      "D": "将单元格B5与右侧的单元格C5合并"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（双击B列列标的右边框）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Excel 数据处理",
+    "knowledgePoint": "工作表编辑",
+    "difficulty": "medium",
+    "tags": [
+      "工作表编辑",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 116,
+        "chapter": "第六章 Excel 操作知识",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q117",
+    "type": "single_choice",
+    "question": "在Excel中，设定与使用“主题”的功能是指（ ）。",
+    "options": {
+      "A": "标题",
+      "B": "一段标题文字",
+      "C": "一个表格",
+      "D": "一组格式集合"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（一组格式集合）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Excel 数据处理",
+    "knowledgePoint": "工作表格式化",
+    "difficulty": "medium",
+    "tags": [
+      "工作表格式化",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 117,
+        "chapter": "第六章 Excel 操作知识",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q118",
+    "type": "single_choice",
+    "question": "在Excel某列单元格中，快速填充2011年～2013年每月最后一天日期的最优操作方法是（ ）。",
+    "options": {
+      "A": "在第一个单元格中输入“2011-1-31”，然后使用MONTH函数填充其余35个单元格",
+      "B": "在第一个单元格中输入“2011-1-31”，拖动填充柄，然后使用智能标记自动填充其余35个单元格",
+      "C": "在第一个单元格中输入“2011-1-31”，然后使用格式刷直接填充其余35个单元格",
+      "D": "在第一个单元格中输入“2011-1-31”，然后执行“开始”选项卡中的“填充”命令"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（在第一个单元格中输入“2011-1-31”，拖动填充柄，然后使用智能标记自动填充其余35个单元格）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Excel 数据处理",
+    "knowledgePoint": "数据填充",
+    "difficulty": "medium",
+    "tags": [
+      "数据填充",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 118,
+        "chapter": "第六章 Excel 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q119",
+    "type": "single_choice",
+    "question": "如果Excel单元格值大于0，则在本单元格中显示“已完成”；单元格值小于0，则显示“还未开始”；等于0，则显示“正在进行中”，最优的操作方法是（ ）。",
+    "options": {
+      "A": "使用IF函数",
+      "B": "通过自定义单元格格式，设置数据的显示方式",
+      "C": "使用条件格式命令",
+      "D": "使用自定义函数"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（通过自定义单元格格式，设置数据的显示方式）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Excel 数据处理",
+    "knowledgePoint": "单元格格式",
+    "difficulty": "medium",
+    "tags": [
+      "单元格格式",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 119,
+        "chapter": "第六章 Excel 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q120",
+    "type": "single_choice",
+    "question": "以下对Excel高级筛选功能，说法正确的是（ ）。",
+    "options": {
+      "A": "高级筛选通常需要在工作表中设置条件区域",
+      "B": "利用“数据”选项卡中的“排序和筛选”组内的“筛选”命令可进行高级筛选",
+      "C": "高级筛选之前必须对数据进行排序",
+      "D": "高级筛选就是自定义筛选"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（高级筛选通常需要在工作表中设置条件区域）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Excel 数据处理",
+    "knowledgePoint": "排序与筛选",
+    "difficulty": "medium",
+    "tags": [
+      "排序与筛选",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 120,
+        "chapter": "第六章 Excel 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q121",
+    "type": "single_choice",
+    "question": "以下错误的Excel公式形式是（ ）。",
+    "options": {
+      "A": "=SUM(B3:E3)*$F$3",
+      "B": "=SUM(B3:3E)*F3",
+      "C": "=SUM(B3:$E3)*F3",
+      "D": "=SUM(B3:E3)*F$3"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（=SUM(B3:3E)*F3）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Excel 数据处理",
+    "knowledgePoint": "公式与函数",
+    "difficulty": "medium",
+    "tags": [
+      "公式与函数",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 121,
+        "chapter": "第六章 Excel 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q122",
+    "type": "single_choice",
+    "question": "在Excel工作表多个不相邻的单元格中输入相同的数据，最优的操作方法是（ ）。",
+    "options": {
+      "A": "在其中一个位置输入数据，然后逐次将其复制到其他单元格",
+      "B": "在输入区域最左上方的单元格中输入数据，双击填充柄填充",
+      "C": "在其中一个位置输入数据，将其复制后，利用Ctrl键选择其他全部输入区域，再粘贴",
+      "D": "同时选中所有不相邻单元格，在活动单元格中输入数据，然后按Ctrl+Enter键"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（同时选中所有不相邻单元格，在活动单元格中输入数据，然后按Ctrl+Enter键）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Excel 数据处理",
+    "knowledgePoint": "数据输入",
+    "difficulty": "medium",
+    "tags": [
+      "数据输入",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 122,
+        "chapter": "第六章 Excel 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q123",
+    "type": "single_choice",
+    "question": "Excel工作表B列保存了11位手机号码信息，为了保护个人隐私，需将手机号码的后4位均用“*”表示，以B2单元格为例，最优的操作方法是（ ）。",
+    "options": {
+      "A": "=REPLACE(B2,7,4,“****”)",
+      "B": "=REPLACE(B2,8,4,“****”)",
+      "C": "=MID(B2,7,4,“****”)",
+      "D": "=MID(B2,8,4,“****”)"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（=REPLACE(B2,8,4,“****”)）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Excel 数据处理",
+    "knowledgePoint": "公式与函数",
+    "difficulty": "medium",
+    "tags": [
+      "公式与函数",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 123,
+        "chapter": "第六章 Excel 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q124",
+    "type": "single_choice",
+    "question": "在Excel工作表中，编码与分类信息以“编码|分类”的格式显示在了一个数据列内，若将编码与分类分为两列显示，最优的操作方法是（ ）。",
+    "options": {
+      "A": "重新在两列中分别输入编码列和分类列，将原来的列删除",
+      "B": "将编码与分类列在相邻位置复制一列，一列只保留编码，另一列只保留分类",
+      "C": "使用文本函数将编码与分类信息分开",
+      "D": "在编码与分类列右侧插入一个空列，然后利用Excel的分列功能将其分开"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（在编码与分类列右侧插入一个空列，然后利用Excel的分列功能将其分开）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Excel 数据处理",
+    "knowledgePoint": "数据分列",
+    "difficulty": "medium",
+    "tags": [
+      "数据分列",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 124,
+        "chapter": "第六章 Excel 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q125",
+    "type": "single_choice",
+    "question": "小刘用Excel 2016制作了一份员工档案表，但经理的计算机中只安装了Office 2003，能让经理正常打开员工档案表的最优操作方法是（ ）。",
+    "options": {
+      "A": "将文档另存为Excel 97-2003文档格式",
+      "B": "将文档另存为PDF格式",
+      "C": "建议经理安装Office 2016",
+      "D": "小刘自行安装Office 2003，并重新制作一份员工档案表"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（将文档另存为Excel 97-2003文档格式）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Excel 数据处理",
+    "knowledgePoint": "文件格式",
+    "difficulty": "medium",
+    "tags": [
+      "文件格式",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 125,
+        "chapter": "第六章 Excel 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q126",
+    "type": "single_choice",
+    "question": "初二年级各班的成绩单分别保存在独立的Excel工作簿文件中，李老师需要将这些成绩单合并到一个工作簿文件中进行管理，最优的操作方法是（ ）。",
+    "options": {
+      "A": "将各班成绩单中的数据分别通过复制、粘贴整合到一个工作簿中",
+      "B": "通过移动或复制工作表功能，将各班成绩单整合到一个工作簿中",
+      "C": "打开一个班的成绩单，将其他班级的数据录入到同一个工作簿的不同工作表中",
+      "D": "通过插入对象功能，将各班成绩单整合到一个工作簿中"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（通过移动或复制工作表功能，将各班成绩单整合到一个工作簿中）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Excel 数据处理",
+    "knowledgePoint": "工作表操作",
+    "difficulty": "medium",
+    "tags": [
+      "工作表操作",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 126,
+        "chapter": "第六章 Excel 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q127",
+    "type": "single_choice",
+    "question": "在Excel 2016工作表中存放了第一中学和第二中学所有班级总计300个学生的考试成绩，A到D列分别对应“学校”“班级”“学号”“成绩”，利用公式计算第一中学3班的平均分，最优的操作方法是（ ）。",
+    "options": {
+      "A": "=SUMIFS(D2:D301,A2:A301,“第一中学”,B2:B301,“3班”)/COUNTIFS(A2:A301,“第一中学”,B2:B301,“3班”)",
+      "B": "=AVERAGEIFS(D2:D301,A2:A301,“第一中学”,B2:B301,“3班”)",
+      "C": "=AVERAGEIF(D2:D301,A2:A301,“第一中学”,B2:B301,“3班”)",
+      "D": "=SUMIFS(D2:D301,B2:B301,“3班”)/COUNTIFS(B2:B301,“3班”)"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（=AVERAGEIFS(D2:D301,A2:A301,“第一中学”,B2:B301,“3班”)）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Excel 数据处理",
+    "knowledgePoint": "公式与函数",
+    "difficulty": "medium",
+    "tags": [
+      "公式与函数",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 127,
+        "chapter": "第六章 Excel 操作知识",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q128",
+    "type": "single_choice",
+    "question": "Excel 2016工作表D列保存了18位身份证号码信息，为了保护个人隐私，需将身份证信息的第9～12位用“*”表示，以D2单元格为例，最优的操作方法是（ ）。",
+    "options": {
+      "A": "=CONCATENATE(MID(D2,1,8),“****”,MID(D2,13,6))",
+      "B": "=REPLACE(D2,9,4,“****”)",
+      "C": "=MID(D2,1,8)+“****”+MID(D2,13,6)",
+      "D": "=MID(D2,9,4,“****”)"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（=REPLACE(D2,9,4,“****”)）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Excel 数据处理",
+    "knowledgePoint": "公式与函数",
+    "difficulty": "medium",
+    "tags": [
+      "公式与函数",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 128,
+        "chapter": "第六章 Excel 操作知识",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q129",
+    "type": "single_choice",
+    "question": "小金从网站上查到了最近一次全国人口普查的数据表格，他准备将这份表格中的数据引用到Excel 2016中以便进一步分析，最优的操作方法是（ ）。",
+    "options": {
+      "A": "通过复制、粘贴功能，将网页上的表格复制到Excel工作表中",
+      "B": "通过Excel中的“自网站获取外部数据”功能，直接将网页上的表格导入到Excel工作表中",
+      "C": "先将包含表格的网页保存为.htm或.mht格式文件，然后在Excel中直接打开该文件",
+      "D": "对照网页上的表格，直接将数据输入到Excel工作表中"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（通过Excel中的“自网站获取外部数据”功能，直接将网页上的表格导入到Excel工作表中）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Excel 数据处理",
+    "knowledgePoint": "外部数据导入",
+    "difficulty": "medium",
+    "tags": [
+      "外部数据导入",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 129,
+        "chapter": "第六章 Excel 操作知识",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q130",
+    "type": "single_choice",
+    "question": "小胡利用Excel 2016对销售人员的销售额进行统计，销售工作表中已包含每位销售人员对应的产品销量，且产品销售单价为308元，计算每位销售人员销售额的最优操作方法是（ ）。",
+    "options": {
+      "A": "将单价308定义名称为“单价”，然后在计算销售额的公式中引用该名称",
+      "B": "将单价308输入到某个单元格中，然后在计算销售额的公式中相对引用该单元格",
+      "C": "将单价308输入到某个单元格中，然后在计算销售额的公式中绝对引用该单元格",
+      "D": "直接通过公式“=销量*308”计算销售额"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（将单价308定义名称为“单价”，然后在计算销售额的公式中引用该名称）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Excel 数据处理",
+    "knowledgePoint": "公式与函数",
+    "difficulty": "medium",
+    "tags": [
+      "公式与函数",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 130,
+        "chapter": "第六章 Excel 操作知识",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q131",
+    "type": "single_choice",
+    "question": "小刘需要在Excel 2016中统计各类商品的全年销量冠军，最优的操作方法是（ ）。",
+    "options": {
+      "A": "通过设置条件格式，分别标出每类商品的销量冠军",
+      "B": "在销量表中直接找到每类商品的销量冠军，并用特殊的颜色标记",
+      "C": "通过自动筛选功能，分别找出每类商品的销量冠军，并用特殊的颜色标记",
+      "D": "分别对每类商品的销量进行排序，将销量冠军用特殊的颜色标记"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（通过设置条件格式，分别标出每类商品的销量冠军）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Excel 数据处理",
+    "knowledgePoint": "条件格式",
+    "difficulty": "medium",
+    "tags": [
+      "条件格式",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 131,
+        "chapter": "第六章 Excel 操作知识",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q132",
+    "type": "single_choice",
+    "question": "在Excel 2003中，各运算符的运算优先级由高到低顺序为（ ）。",
+    "options": {
+      "A": "算术运算符、关系运算符、逻辑运算符",
+      "B": "算术运算符、逻辑运算符、关系运算符",
+      "C": "关系运算符、算术运算符、逻辑运算符",
+      "D": "逻辑运算符、算术运算符、关系运算符"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（算术运算符、关系运算符、逻辑运算符）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Excel 数据处理",
+    "knowledgePoint": "公式与函数",
+    "difficulty": "medium",
+    "tags": [
+      "公式与函数",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 132,
+        "chapter": "第六章 Excel 操作知识",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q133",
+    "type": "single_choice",
+    "question": "在Excel 2003中，利用工作表数据建立图表时，引用的数据区域是（ ）单元格地址区域。",
+    "options": {
+      "A": "相对",
+      "B": "绝对",
+      "C": "混合",
+      "D": "任意"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（绝对）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "Excel 数据处理",
+    "knowledgePoint": "图表",
+    "difficulty": "medium",
+    "tags": [
+      "图表",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 133,
+        "chapter": "第六章 Excel 操作知识",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q134",
+    "type": "single_choice",
+    "question": "在PowerPoint中，旋转图片的最快捷方法是（ ）。",
+    "options": {
+      "A": "拖动图片四个角的任一控制点",
+      "B": "设置图片格式",
+      "C": "拖动图片上方旋转控制点",
+      "D": "设置图片效果"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（拖动图片上方旋转控制点）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgePoint": "图片编辑",
+    "difficulty": "medium",
+    "tags": [
+      "图片编辑",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 134,
+        "chapter": "第七章 PowerPoint 操作知识",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q135",
+    "type": "single_choice",
+    "question": "在PowerPoint中可以通过分节来组织演示文稿中的幻灯片，在幻灯片浏览视图中选中一节中所有幻灯片的最优方法是（ ）。",
+    "options": {
+      "A": "单击节名称即可",
+      "B": "按下Ctrl键不放，依次单击节中的幻灯片",
+      "C": "选择节中的第1张幻灯片，按下Shift键不放，再单击节中的末张幻灯片",
+      "D": "直接拖动鼠标选择节中的所有幻灯片"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（单击节名称即可）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgePoint": "幻灯片组织",
+    "difficulty": "medium",
+    "tags": [
+      "幻灯片组织",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 135,
+        "chapter": "第七章 PowerPoint 操作知识",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q136",
+    "type": "single_choice",
+    "question": "小李利用PowerPoint制作产品宣传方案，并希望在演示时能够满足不同对象的需要，处理该演示文稿的最优操作方法是（ ）。",
+    "options": {
+      "A": "制作一份包含适合所有人群的全部内容的演示文稿，每次放映时按需要进行删减",
+      "B": "制作一份包含适合所有人群的全部内容的演示文稿，放映前隐藏不需要的幻灯片",
+      "C": "制作一份包含适合所有人群的全部内容的演示文稿，然后利用自定义幻灯片放映功能创建不同的演示方案",
+      "D": "针对不同的人群，分别制作不同的演示文稿"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（制作一份包含适合所有人群的全部内容的演示文稿，然后利用自定义幻灯片放映功能创建不同的演示方案）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgePoint": "演示文稿放映",
+    "difficulty": "medium",
+    "tags": [
+      "演示文稿放映",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 136,
+        "chapter": "第七章 PowerPoint 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q137",
+    "type": "single_choice",
+    "question": "如果需要在一个演示文稿的每页幻灯片左下角相同位置插入学校的校徽图片，最优的操作方法是（ ）。",
+    "options": {
+      "A": "打开幻灯片母版视图，将校徽图片插入在母版中",
+      "B": "打开幻灯片普通视图，将校徽图片插入在幻灯片中",
+      "C": "打开幻灯片放映视图，将校徽图片插入在幻灯片中",
+      "D": "打开幻灯片浏览视图，将校徽图片插入在幻灯片中"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（打开幻灯片母版视图，将校徽图片插入在母版中）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgePoint": "幻灯片母版",
+    "difficulty": "medium",
+    "tags": [
+      "幻灯片母版",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 137,
+        "chapter": "第七章 PowerPoint 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q138",
+    "type": "single_choice",
+    "question": "在一次校园活动中拍摄了很多数码照片，现需将这些照片整理到一个PowerPoint演示文稿中，快速制作的最优操作方法是（ ）。",
+    "options": {
+      "A": "创建一个PowerPoint相册文件",
+      "B": "创建一个PowerPoint演示文稿，然后批量插入图片",
+      "C": "创建一个PowerPoint演示文稿，然后逐张插入图片",
+      "D": "在文件夹中选中所有照片，通过复制粘贴直接插入到PowerPoint中"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "原资料标注参考答案为 A（创建一个PowerPoint相册文件）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgePoint": "相册与图文",
+    "difficulty": "medium",
+    "tags": [
+      "相册与图文",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 138,
+        "chapter": "第七章 PowerPoint 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q139",
+    "type": "single_choice",
+    "question": "江老师使用Word编写完成了课程教案，需根据该教案创建PowerPoint课件，最优的操作方法是（ ）。",
+    "options": {
+      "A": "参考Word教案，直接在PowerPoint中输入相关内容",
+      "B": "在Word中直接将教案大纲发送到PowerPoint",
+      "C": "从Word文档中复制相关内容到幻灯片中",
+      "D": "通过插入对象方式将Word文档内容插入到幻灯片中"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（在Word中直接将教案大纲发送到PowerPoint）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgePoint": "Word与PPT协同",
+    "difficulty": "medium",
+    "tags": [
+      "Word与PPT协同",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 139,
+        "chapter": "第七章 PowerPoint 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q140",
+    "type": "single_choice",
+    "question": "可以在PowerPoint内置主题中设置的内容是（ ）。",
+    "options": {
+      "A": "字体、颜色和表格",
+      "B": "效果、背景和图片",
+      "C": "字体、颜色和效果",
+      "D": "效果、图片和表格"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（字体、颜色和效果）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgePoint": "主题与版式",
+    "difficulty": "medium",
+    "tags": [
+      "主题与版式",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 140,
+        "chapter": "第七章 PowerPoint 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q141",
+    "type": "single_choice",
+    "question": "在PowerPoint演示文稿中，不可以使用的对象是（ ）。",
+    "options": {
+      "A": "图片",
+      "B": "超链接",
+      "C": "视频",
+      "D": "书签"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（书签）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgePoint": "对象插入",
+    "difficulty": "medium",
+    "tags": [
+      "对象插入",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 141,
+        "chapter": "第七章 PowerPoint 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q142",
+    "type": "single_choice",
+    "question": "李老师在用PowerPoint制作课件，她希望将学校的徽标图片放在除标题页之外的所有幻灯片右下角，并为其指定一个动画效果。最优的操作方法是（ ）。",
+    "options": {
+      "A": "先在一张幻灯片上插入徽标图片，并设置动画，然后将该徽标图片复制到其他幻灯片上",
+      "B": "分别在每一张幻灯片上插入徽标图片，并分别设置动画",
+      "C": "先制作一张幻灯片并插入徽标图片，为其设置动画，然后多次复制该张幻灯片",
+      "D": "在幻灯片母版中插入徽标图片，并为其设置动画"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（在幻灯片母版中插入徽标图片，并为其设置动画）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgePoint": "母版与动画",
+    "difficulty": "medium",
+    "tags": [
+      "母版与动画",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 142,
+        "chapter": "第七章 PowerPoint 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q143",
+    "type": "single_choice",
+    "question": "李老师制作完成了一个带有动画效果的PowerPoint教案，她希望在课堂上可以按照自己讲课的节奏自动播放，最优的操作方法是（ ）。",
+    "options": {
+      "A": "为每张幻灯片设置特定的切换持续时间，并将演示文稿设置为自动播放",
+      "B": "在练习过程中，利用“排练计时”功能记录适合的幻灯片切换时间，然后播放即可",
+      "C": "根据讲课节奏，设置幻灯片中每一个对象的动画时间，以及每张幻灯片的自动换片时间",
+      "D": "将PowerPoint教案另存为视频文件"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（在练习过程中，利用“排练计时”功能记录适合的幻灯片切换时间，然后播放即可）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgePoint": "排练计时与放映",
+    "difficulty": "medium",
+    "tags": [
+      "排练计时与放映",
+      "用户提供DOCX",
+      "原文标注：真题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 143,
+        "chapter": "第七章 PowerPoint 操作知识",
+        "sourceType": "真题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q144",
+    "type": "single_choice",
+    "question": "在PowerPoint演示文稿中利用“大纲”窗格组织、排列幻灯片中的文字时，输入幻灯片标题后进入下一级文本输入状态的最快捷方法是（ ）。",
+    "options": {
+      "A": "按Ctrl+Enter组合键",
+      "B": "按Shift+Enter组合键",
+      "C": "按回车键Enter后，从右键菜单中选择“降级”",
+      "D": "按回车键Enter后，再按Tab键"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（按回车键Enter后，再按Tab键）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgePoint": "大纲视图",
+    "difficulty": "medium",
+    "tags": [
+      "大纲视图",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 144,
+        "chapter": "第七章 PowerPoint 操作知识",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q145",
+    "type": "single_choice",
+    "question": "在PowerPoint中，若要使幻灯片在放映时单击某个对象后跳转到指定幻灯片，应设置（ ）。",
+    "options": {
+      "A": "自定义动画",
+      "B": "幻灯片切换",
+      "C": "超链接或动作设置",
+      "D": "幻灯片版式"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原资料标注参考答案为 C（超链接或动作设置）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgePoint": "超链接与动作",
+    "difficulty": "medium",
+    "tags": [
+      "超链接与动作",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 145,
+        "chapter": "第七章 PowerPoint 操作知识",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q146",
+    "type": "single_choice",
+    "question": "在PowerPoint中，新建一张幻灯片时，下列说法正确的是（ ）。",
+    "options": {
+      "A": "只能在普通视图中新建幻灯片",
+      "B": "可以在幻灯片浏览视图中通过复制幻灯片新建",
+      "C": "新建幻灯片必须选择版式后才能编辑",
+      "D": "幻灯片的版式在新建后不能再更改"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "原资料标注参考答案为 B（可以在幻灯片浏览视图中通过复制幻灯片新建）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgePoint": "幻灯片版式",
+    "difficulty": "medium",
+    "tags": [
+      "幻灯片版式",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 146,
+        "chapter": "第七章 PowerPoint 操作知识",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  },
+  {
+    "id": "ncre-office-user-docx-q147",
+    "type": "single_choice",
+    "question": "下列关于PowerPoint母版的叙述中，错误的是（ ）。",
+    "options": {
+      "A": "幻灯片母版可以统一设置演示文稿中所有幻灯片的格式",
+      "B": "修改幻灯片母版会影响所有基于该母版的幻灯片",
+      "C": "一张幻灯片不能同时应用多个母版",
+      "D": "幻灯片母版中插入的图片可以在普通幻灯片中直接删除"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原资料标注参考答案为 D（幻灯片母版中插入的图片可以在普通幻灯片中直接删除）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgePoint": "幻灯片母版",
+    "difficulty": "medium",
+    "tags": [
+      "幻灯片母版",
+      "用户提供DOCX",
+      "原文标注：模拟题"
+    ],
+    "provenance": [
+      {
+        "file": "计算机二级MSOffice选择题题库.docx",
+        "questionNumber": 147,
+        "chapter": "第七章 PowerPoint 操作知识",
+        "sourceType": "模拟题",
+        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
+      }
+    ],
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+  }
+]

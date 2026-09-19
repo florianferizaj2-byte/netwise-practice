@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "certificate": {
+    "id": "ncre-ms-office",
+    "name": "全国计算机等级考试二级 MS Office",
+    "shortName": "NCRE 二级 MS Office",
+    "description": "Office 应用基础、Word 文档、Excel 数据分析与 PowerPoint 演示设计",
+    "order": 4
+  },
+  "guidePath": "guide.json",
+  "syllabus": {
+    "version": "2025 年版",
+    "examCode": "NCRE 二级 MS Office 高级应用与设计",
+    "examCodeNote": "报名科目名称和版本以中国教育考试网当期公告为准",
+    "verifiedAt": "2026-09-19",
+    "scopeStatus": "officially_verified",
+    "scopeNote": "模块依据中国教育考试网公布的 2025 年版考试大纲整理；本站权重用于练习抽题，不代表官方题量比例。",
+    "weightType": "platform_practice_blueprint",
+    "sourceUrls": [
+      {
+        "name": "中国教育考试网：NCRE 考试大纲",
+        "url": "https://ncre.neea.edu.cn/html1/report/2412/185-1.htm",
+        "verified": true
+      },
+      {
+        "name": "二级 MS Office 高级应用与设计考试大纲（2025 年版）",
+        "url": "https://ncre.neea.edu.cn/res/Home/2412/007b7cbab11984a769c33fdc605b7f85.pdf?download=%E4%BA%8C%E7%BA%A7MS_Office%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8%E4%B8%8E%E8%AE%BE%E8%AE%A1%E8%80%83%E8%AF%95%E5%A4%A7%E7%BA%B2%EF%BC%882025%E5%B9%B4%E7%89%88%EF%BC%89.pdf",
+        "verified": true
+      }
+    ],
+    "modules": [
+      {
+        "id": "public-foundations",
+        "name": "公共基础知识",
+        "order": 1,
+        "weight": 10,
+        "targetQuestionCount": 20,
+        "knowledgePoints": [
+          "数据结构与算法：栈、队列、链表、二叉树",
+          "数据结构与算法：查找与排序",
+          "算法复杂度",
+          "程序设计风格",
+          "结构化程序设计",
+          "面向对象程序设计",
+          "软件生命周期",
+          "结构化分析与设计",
+          "软件测试",
+          "数据模型与关系模型",
+          "关系代数与 SQL",
+          "数据库设计"
+        ]
+      },
+      {
+        "id": "office-basics",
+        "name": "Office 应用基础",
+        "order": 2,
+        "weight": 5,
+        "targetQuestionCount": 20,
+        "knowledgePoints": ["界面使用与功能设置", "各模块之间信息共享"]
+      },
+      {
+        "id": "word",
+        "name": "Word 文档处理",
+        "order": 3,
+        "weight": 30,
+        "targetQuestionCount": 20,
+        "knowledgePoints": [
+          "文档创建编辑保存打印保护",
+          "字体与段落",
+          "样式与主题",
+          "页面布局与分栏分页分节",
+          "表格与图表",
+          "图形图片 SmartArt 与文本框",
+          "符号与数学公式",
+          "页眉页脚与引用",
+          "审阅与修订",
+          "邮件合并",
+          "多窗口多文档与视图",
+          "控件宏与图文素材分析提取"
+        ]
+      },
+      {
+        "id": "excel",
+        "name": "Excel 数据处理",
+        "order": 4,
+        "weight": 35,
+        "targetQuestionCount": 20,
+        "knowledgePoints": [
+          "工作表基本操作与视图",
+          "数据输入与编辑",
+          "单元格格式化",
+          "工作表保护与版本比较",
+          "单元格引用",
+          "公式函数与数组",
+          "多工作表联动",
+          "迷你图与图表",
+          "排序筛选分类汇总",
+          "数据验证、分列与合并计算",
+          "数据透视表与数据透视图",
+          "模拟分析与预测、控件宏、外部数据、Power Pivot 与素材分析"
+        ]
+      },
+      {
+        "id": "powerpoint",
+        "name": "PowerPoint 演示文稿",
+        "order": 5,
+        "weight": 20,
+        "targetQuestionCount": 20,
+        "knowledgePoints": [
+          "基本操作与视图模式",
+          "主题与背景",
+          "幻灯片母版",
+          "文本、图形、图片、表格与图表",
+          "音视频与艺术字",
+          "动画与切换效果",
+          "超链接与交互",
+          "放映设置与打包输出",
+          "审阅与比较",
+          "素材分析与引用"
+        ]
+      }
+    ]
+  },
+  "banks": [
+    {
+      "id": "syllabus-practice",
+      "name": "二级 MS Office 大纲练习题",
+      "description": "依据中国教育考试网公布的考试大纲编写的原创练习，不属于官方历年真题",
+      "source": "syllabus_practice",
+      "category": "syllabus_practice",
+      "verification": "original_from_official_scope",
+      "sourceUrl": "https://ncre.neea.edu.cn/res/Home/2412/007b7cbab11984a769c33fdc605b7f85.pdf?download=%E4%BA%8C%E7%BA%A7MS_Office%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8%E4%B8%8E%E8%AE%BE%E8%AE%A1%E8%80%83%E8%AF%95%E5%A4%A7%E7%BA%B2%EF%BC%882025%E5%B9%B4%E7%89%88%EF%BC%89.pdf",
+      "path": "questions/original.json",
+      "defaults": {
+        "sourceVerification": "本站原创练习题：依据中国教育考试网 2025 年版大纲编写，不属于官方历年真题"
+      }
+    },
+    {
+      "id": "user-docx-collection",
+      "name": "用户提供 MS Office 选择题汇编",
+      "description": "来自用户提供的二级 MS Office DOCX；原文同时标注真题和模拟题，但没有官方题号、年份或可核验链接",
+      "source": "user_docx_collection",
+      "category": "unverified_collection",
+      "verification": "user_provided_docx_unverified",
+      "path": "questions/user-provided-docx.json",
+      "defaults": {
+        "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+      }
+    }
+  ]
+}

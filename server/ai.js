@@ -83,7 +83,9 @@ export class OpenAICompatibleProvider extends AIProvider {
         ? configuredLimit
         : 16 * 1024 * 1024;
   }
-  async call(messages, settings = this.store.settings(), options = {}) {
+  async call(messages, settings, options = {}) {
+    const userId = options.userId || "local";
+    settings ||= this.store.settings(userId);
     if (!settings.keyCipher) throw new Error("请先在设置中配置 AI API Key");
     if (!settings.model) throw new Error("请先配置模型名称");
     const url = validateBaseUrl(settings.baseUrl),
@@ -232,15 +234,26 @@ export class OpenAICompatibleProvider extends AIProvider {
         throw new Error("无法连接 AI 服务，请检查 Base URL、网络和 TLS 证书");
       throw new Error(redact(e.message, [key]));
     } finally {
-      this.store.saveUsage({
-        ...usage,
-        hasUsage: !!usage.hasUsage,
-        success,
-        model: settings.model,
-      });
+      this.store.saveUsage(
+        {
+          ...usage,
+          hasUsage: !!usage.hasUsage,
+          success,
+          model: settings.model,
+        },
+        userId,
+      );
     }
   }
-  async structured(instruction, payload, schema, check, settings, onChunk) {
+  async structured(
+    instruction,
+    payload,
+    schema,
+    check,
+    settings,
+    onChunk,
+    userId = "local",
+  ) {
     let last = "";
     for (let attempt = 0; attempt < 3; attempt++) {
       const result = await this.call(
@@ -252,7 +265,7 @@ export class OpenAICompatibleProvider extends AIProvider {
           { role: "user", content: JSON.stringify(payload) },
         ],
         settings,
-        onChunk ? { stream: true, onChunk } : undefined,
+        { ...(onChunk ? { stream: true, onChunk } : {}), userId },
       );
       try {
         const parsed = schema.parse(JSON.parse(result));
@@ -269,8 +282,8 @@ export class OpenAICompatibleProvider extends AIProvider {
     }
     throw new Error(`AI 输出连续 3 次未通过验证：${last}`);
   }
-  reviewSettings() {
-    return { ...this.store.settings(), temperature: 0 };
+  reviewSettings(userId = "local") {
+    return { ...this.store.settings(userId), temperature: 0 };
   }
   context(q, selected, userId) {
     const knowledgePoint = q.targetKnowledgePoint || q.knowledgePoint;
@@ -297,6 +310,7 @@ export class OpenAICompatibleProvider extends AIProvider {
     };
   }
   async analyzeWeakness(q, userId) {
+    userId ||= "local";
     const lastWrong = this.store
       .allA(userId)
       .filter((a) => a.questionId === q.id && !a.correct)
@@ -306,20 +320,25 @@ export class OpenAICompatibleProvider extends AIProvider {
       '分析用户具体错误原因，区分知识缺口和推测。返回 {"mistakeType":"snake_case","weakKnowledge":"具体薄弱知识","reason":"基于选择与历史的可能原因"}。',
       this.context(q, lastWrong.selected, userId),
       mistakeSchema,
+      undefined,
+      undefined,
+      undefined,
+      userId,
     );
-    this.store.saveMistake(q.id, result, userId || "local");
+    this.store.saveMistake(q.id, result, userId);
     return result;
   }
   async generateQuestion(q, request = {}) {
+    const userId = request.userId || "local";
     const target = q.targetKnowledgePoint || q.knowledgePoint;
     const mastery = this.store
-      .mastery()
+      .mastery(undefined, userId)
       .find((m) => m.knowledgePoint === target);
     const index = request.index || 0,
       stage = request.harder ? "综合应用" : stages[index % stages.length],
       difficulty = request.harder ? "hard" : chooseDifficulty(mastery, index);
     const context = {
-      ...this.context(q),
+      ...this.context(q, undefined, userId),
       mistake: request.mistake,
       stage,
       difficulty,
@@ -348,11 +367,158 @@ export class OpenAICompatibleProvider extends AIProvider {
           },
           reviewSchema,
           undefined,
-          this.reviewSettings(),
+          this.reviewSettings(userId),
+          undefined,
+          userId,
         );
         if (!reviewAccepted(verdict)) throw new Error(reviewFailure(verdict));
       },
+      undefined,
+      undefined,
+      userId,
     );
+  }
+  async generateBankExpansion(seed, count, options = {}) {
+    const userId = options.userId || "local";
+    const settings = options.settings || this.store.settings(userId);
+    const target = seed.targetKnowledgePoint || seed.knowledgePoint;
+    const existing = [...this.store.allQ(), ...(options.existing || [])];
+    const difficulty = options.difficulty;
+    const specs = Array.from({ length: count }, (_, index) => ({
+      index,
+      difficulty:
+        difficulty || ["easy", "medium", "medium", "hard"][index % 4],
+    }));
+    const accepted = new Map();
+    let pending = specs.map((spec) => ({ ...spec, feedback: "" }));
+    const progress = (message, extra = {}) =>
+      options.onProgress?.({ message, ...extra });
+    for (let round = 0; round < 3 && pending.length; round++) {
+      progress(
+        round === 0
+          ? `正在生成 ${pending.length} 道题`
+          : `正在修正 ${pending.length} 道未通过审核的题（第 ${round + 1}/3 轮）`,
+        { stage: "generate", round: round + 1, completed: accepted.size, total: specs.length },
+      );
+      const requested = pending.map(({ index, difficulty: level, feedback }) => ({
+        index,
+        difficulty: level,
+        ...(feedback ? { correction: feedback } : {}),
+      }));
+      const batch = await this.structured(
+        `一次生成 ${pending.length} 道题。所有题目必须围绕知识点“${target}”，章节必须严格为“${seed.chapter}”，题目之间要改变设问角度、情境或推理路径，不能只改数字或替换同义词。每题严格遵守对应 difficulty。返回 {"questions":[题目对象]}，不要返回 Markdown 或其他字段。`,
+        {
+          certificateId: options.certificateId,
+          chapter: seed.chapter,
+          knowledgePoint: target,
+          specs: requested,
+          previousQuestions: [seed, ...existing, ...accepted.values()]
+            .slice(-30)
+            .map((question) => question.question),
+        },
+        z
+          .object({ questions: z.array(z.unknown()).length(pending.length) })
+          .strict(),
+        undefined,
+        settings,
+        (_chunk, length) =>
+          progress("AI 正在输出题目内容…", {
+            stage: "streaming",
+            round: round + 1,
+            completed: accepted.size,
+            total: specs.length,
+            outputLength: length,
+          }),
+        userId,
+      );
+      progress("已收到题目，正在进行程序校验", {
+        stage: "validate",
+        round: round + 1,
+        completed: accepted.size,
+        total: specs.length,
+      });
+      const feedback = new Map();
+      const candidates = [];
+      for (let i = 0; i < batch.questions.length; i++) {
+        const request = pending[i];
+        try {
+          const raw = validateQuestion(
+            batch.questions[i],
+            [...existing, ...accepted.values(), ...candidates.map((item) => item.question)],
+            seed,
+          );
+          if (raw.knowledgePoint !== target)
+            throw new Error("题目知识点与扩充目标不一致");
+          if (raw.difficulty !== request.difficulty)
+            throw new Error("题目难度与扩充目标不一致");
+          candidates.push({ index: request.index, question: raw });
+        } catch (error) {
+          feedback.set(request.index, error.message.slice(0, 500));
+        }
+      }
+      if (candidates.length) {
+        progress(`正在审核 ${candidates.length} 道候选题`, {
+          stage: "review",
+          round: round + 1,
+          completed: accepted.size,
+          total: specs.length,
+        });
+        const review = await this.structured(
+          '逐题独立审核管理员题库扩充题，不信任给定答案。自行求解并检查答案唯一性、解析、知识点关联、题干完整性、与旧题重合度和选项矛盾。只要答案错误、无法唯一作答、题干不完整、知识点不符、与旧题高度重复或只是改数字，就 valid=false。返回 {"reviews":[{"index":数字,"valid":true或false,"relevant":true或false,"singleAnswerCorrect":true或false,"contradictions":[],"reason":"具体理由"}]}。',
+          {
+            items: candidates,
+            target,
+            original: seed,
+            previousQuestions: [...existing, ...accepted.values()].slice(-30),
+          },
+          z
+            .object({
+              reviews: z.array(batchReviewItemSchema).length(candidates.length),
+            })
+            .strict(),
+          (result) => {
+            const indexes = result.reviews.map((item) => item.index);
+            if (
+              new Set(indexes).size !== indexes.length ||
+              indexes.some((index) => !candidates.some((item) => item.index === index))
+            )
+              throw new Error("审核结果题号不完整");
+          },
+          settings,
+          (_chunk, length) =>
+            progress("AI 正在输出审核结果…", {
+              stage: "review-streaming",
+              round: round + 1,
+              completed: accepted.size,
+              total: specs.length,
+              outputLength: length,
+            }),
+          userId,
+        );
+        const verdicts = new Map(review.reviews.map((item) => [item.index, item]));
+        for (const candidate of candidates) {
+          const verdict = verdicts.get(candidate.index);
+          if (reviewAccepted(verdict)) accepted.set(candidate.index, candidate.question);
+          else feedback.set(candidate.index, reviewFailure(verdict));
+        }
+      }
+      pending = pending
+        .filter((request) => !accepted.has(request.index))
+        .map((request) => ({
+          ...request,
+          feedback: feedback.get(request.index) || request.feedback || "未通过质量校验",
+        }));
+    }
+    if (pending.length) {
+      const reasons = pending
+        .slice(0, 3)
+        .map(({ index, feedback }) => `第 ${index + 1} 题：${feedback}`)
+        .join("；");
+      throw new Error(
+        `AI 已修正 3 轮，仍有 ${pending.length} 道题未通过质量审核${reasons ? `：${reasons}` : ""}`,
+      );
+    }
+    return specs.map(({ index }) => accepted.get(index));
   }
   async generatePracticeSet(
     q,
@@ -361,13 +527,14 @@ export class OpenAICompatibleProvider extends AIProvider {
     onProgress,
     options = {},
   ) {
+    const userId = options.userId || "local";
     const progress = (message, extra = {}) =>
       onProgress?.({ message, ...extra });
     const target = q.targetKnowledgePoint || q.knowledgePoint;
     const topic = `${target}:${harder ? "hard" : "adaptive"}`;
     const cached = this.store.queue(
       topic,
-      options.userId,
+      userId,
       options.certificateId,
     );
     if (cached.length >= count) {
@@ -384,20 +551,20 @@ export class OpenAICompatibleProvider extends AIProvider {
       total: count,
     });
     const wrong = this.store
-      .wrongQuestions(options.userId)
+      .wrongQuestions(userId)
       .find((w) => w.id === q.id);
     const mistake = wrong
-      ? wrong.mistake || (await this.analyzeWeakness(q, options.userId))
+      ? wrong.mistake || (await this.analyzeWeakness(q, userId))
       : null;
     const mastery = this.store
-      .mastery(undefined, options.userId)
+      .mastery(undefined, userId)
       .find((m) => m.knowledgePoint === target);
     const past = this.store
       .allQ()
       .filter(
         (x) =>
           x.targetKnowledgePoint === target &&
-          (x.source !== "ai_generated" || x.ownerUserId === options.userId),
+          (x.source !== "ai_generated" || x.ownerUserId === userId),
       );
     const specs = Array.from({ length: count - cached.length }, (_, i) => {
       const index = past.length + i;
@@ -432,7 +599,7 @@ export class OpenAICompatibleProvider extends AIProvider {
       const batch = await this.structured(
         `一次生成 ${pending.length} 道针对性训练题，questions 必须与 specs 顺序一一对应。每题严格遵守对应的阶段和难度；specs 中有 correction 时必须针对该审核意见修正。不得仅修改数字，必须变化概念、设问方向或实际情境。章节必须为 ${q.chapter}。返回 {"questions":[题目对象]}。题目字段：type(single_choice或multiple_choice),question,options(恰好A/B/C/D),answer(字母数组),analysis,chapter,knowledgePoint,difficulty(easy/medium/hard),tags(字符串数组),stage。不要添加其他字段。题干必须自包含。IPv4计算题使用明确 IPv4/CIDR。`,
         {
-          ...this.context(q, undefined, options.userId),
+          ...this.context(q, undefined, userId),
           mistake,
           specs: requestedSpecs,
           previousQuestions: [q, ...past, ...accepted.values()]
@@ -453,6 +620,7 @@ export class OpenAICompatibleProvider extends AIProvider {
             outputLength: length,
           });
         },
+        userId,
       );
       progress(`已收到 ${pending.length} 道题，正在进行程序校验`, {
         stage: "validate",
@@ -516,7 +684,7 @@ export class OpenAICompatibleProvider extends AIProvider {
             )
               throw new Error("审核结果题号不完整");
           },
-          this.reviewSettings(),
+          this.reviewSettings(userId),
           (_chunk, length) => {
             progress("AI 正在输出审核结果…", {
               stage: "review-streaming",
@@ -526,6 +694,7 @@ export class OpenAICompatibleProvider extends AIProvider {
               outputLength: length,
             });
           },
+          userId,
         );
         const verdicts = new Map(
           review.reviews.map((verdict) => [verdict.index, verdict]),
@@ -582,17 +751,17 @@ export class OpenAICompatibleProvider extends AIProvider {
       targetKnowledgePoint: target,
     }));
     const groupId = this.store.createAiGroup?.(
-      options.userId || "local",
+      userId,
       options.certificateId || q.certificates?.[0] || null,
       target,
       harder,
     );
     for (const question of generated) {
-      question.ownerUserId = options.userId || "local";
+      question.ownerUserId = userId;
       question.aiGroupId = groupId;
     }
     this.store.addBatch(generated, topic, {
-      userId: options.userId || "local",
+      userId,
       groupId,
     });
     return {
@@ -601,6 +770,7 @@ export class OpenAICompatibleProvider extends AIProvider {
     };
   }
   async explainQuestion(q, action, selected, hintLevel = 0, userId) {
+    userId ||= "local";
     const hints = hintLevel > 0;
     const context = this.context(q, selected, userId);
     const result = await this.structured(
@@ -622,25 +792,32 @@ export class OpenAICompatibleProvider extends AIProvider {
               '审核苏格拉底式提示。若提示直接或间接给出最终答案、逐一排除到唯一选项、泄露答案数值或超过当前提示级别，则 safe=false。只返回 {"safe":true或false}。',
               { question: q, hint: r.text, level: hintLevel },
               z.object({ safe: z.boolean() }).strict(),
+              undefined,
+              undefined,
+              undefined,
+              userId,
             );
             if (!guard.safe) throw new Error("提示泄露答案或超过当前提示级别");
           }
         : undefined,
+      undefined,
+      undefined,
+      userId,
     );
     return result;
   }
-  async dailyPlan(questionIds) {
+  async dailyPlan(questionIds, userId = "local") {
     const allowed = questionIds ? new Set(questionIds) : null,
       questions = this.store
         .allQ()
         .filter((question) => !allowed || allowed.has(question.id)),
       attempts = this.store
-        .allA()
+        .allA(userId)
         .filter((attempt) => !allowed || allowed.has(attempt.questionId)),
       wrongQuestions = this.store
-        .wrongQuestions()
+        .wrongQuestions(userId)
         .filter((question) => !allowed || allowed.has(question.id)),
-      mastery = this.store.mastery(allowed);
+      mastery = this.store.mastery(allowed, userId);
     const data = {
       mastery,
       recentAttempts: attempts.slice(-100),
@@ -671,6 +848,9 @@ export class OpenAICompatibleProvider extends AIProvider {
         )
           throw new Error("未知知识点");
       },
+      undefined,
+      undefined,
+      userId,
     );
   }
 }

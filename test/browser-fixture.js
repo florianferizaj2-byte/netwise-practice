@@ -9,6 +9,7 @@ const app = await createApp({
   store,
   provider: new OpenAICompatibleProvider(store, { fetch: mockAI() }),
   production: true,
+  authRequired: false,
 });
 app.listen(5174, "127.0.0.1", () =>
   console.log("Disposable mock-AI fixture: http://127.0.0.1:5174"),

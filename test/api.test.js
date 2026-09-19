@@ -30,7 +30,12 @@ async function fixture(t, fetchImpl) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "netwise-api-")),
     store = createStore(dir),
     provider = new OpenAICompatibleProvider(store, { fetch: fetchImpl }),
-    app = await createApp({ store, provider, withFrontend: false });
+    app = await createApp({
+      store,
+      provider,
+      withFrontend: false,
+      authRequired: false,
+    });
   const server = app.listen(0, "127.0.0.1");
   await new Promise((r) => server.once("listening", r));
   const url = `http://127.0.0.1:${server.address().port}`;
@@ -182,8 +187,8 @@ test("accounts require login and certificate selection filters the question bank
   assert.equal(registration.status, 200);
   const registrationData = await registration.clone().json();
   assert.ok(
-    registrationData.certificates.every(
-      (certificate) => certificate.guide?.verifiedAt === "2026-09-18",
+    registrationData.certificates.every((certificate) =>
+      /^\d{4}-\d{2}-\d{2}$/.test(certificate.guide?.verifiedAt || ""),
     ),
   );
   const cookie = registration.headers.get("set-cookie").split(";")[0];
@@ -234,16 +239,68 @@ test("accounts require login and certificate selection filters the question bank
   assert.equal(switchedDashboard.syllabus, null);
 });
 
+test("AI settings are isolated by account even when the old auth bypass flag is present", async (t) => {
+  const previousMasterKey = process.env.AI_MASTER_KEY;
+  const previousDisableAuth = process.env.DISABLE_AUTH;
+  process.env.AI_MASTER_KEY = crypto.randomBytes(32).toString("base64");
+  process.env.DISABLE_AUTH = "1";
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "netwise-key-isolation-"));
+  const store = createStore(dir);
+  const app = await createApp({ store, withFrontend: false });
+  const server = app.listen(0, "127.0.0.1");
+  await new Promise((resolve) => server.once("listening", resolve));
+  const base = `http://127.0.0.1:${server.address().port}`;
+  t.after(async () => {
+    app.locals.stop();
+    await new Promise((resolve) => server.close(resolve));
+    store.db.close();
+    fs.rmSync(dir, { recursive: true, force: true });
+    if (previousMasterKey === undefined) delete process.env.AI_MASTER_KEY;
+    else process.env.AI_MASTER_KEY = previousMasterKey;
+    if (previousDisableAuth === undefined) delete process.env.DISABLE_AUTH;
+    else process.env.DISABLE_AUTH = previousDisableAuth;
+  });
+  assert.equal((await fetch(base + "/api/settings")).status, 401);
+  const register = async (username) => {
+    const response = await fetch(base + "/api/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password: "safe-password" }),
+    });
+    assert.equal(response.status, 200);
+    return {
+      cookie: response.headers.get("set-cookie").split(";")[0],
+      user: (await response.json()).user,
+    };
+  };
+  const request = async (cookie, route, body, method = body ? "POST" : "GET") => {
+    const response = await fetch(base + "/api" + route, {
+      method,
+      headers: { "Content-Type": "application/json", Cookie: cookie },
+      ...(body ? { body: JSON.stringify(body) } : {}),
+    });
+    return { status: response.status, data: await response.json() };
+  };
+  const first = await register("key_owner");
+  const second = await register("key_stranger");
+  const configuration = {
+    baseUrl: "https://example.com/v1",
+    model: "test-model",
+    apiKey: "first-account-only",
+    temperature: 0.7,
+  };
+  assert.equal((await request(first.cookie, "/settings", configuration, "PUT")).status, 200);
+  assert.equal((await request(first.cookie, "/settings")).data.hasKey, true);
+  assert.equal((await request(second.cookie, "/settings")).data.hasKey, false);
+  assert.ok(store.settings(first.user.id).keyCipher);
+  assert.equal(store.settings(second.user.id).keyCipher, undefined);
+  assert.equal(store.settings("local").keyCipher, undefined);
+});
+
 test("server-generated AI groups are immutable, shareable by certificate, and keep user progress isolated", async (t) => {
   process.env.AI_MASTER_KEY = crypto.randomBytes(32).toString("base64");
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "netwise-ai-owner-"));
   const store = createStore(dir);
-  store.saveSettings({
-    baseUrl: "https://example.com/v1",
-    model: "test",
-    keyCipher: encrypt("secret"),
-    temperature: 0.7,
-  });
   const provider = new OpenAICompatibleProvider(store, { fetch: mockAI() });
   const app = await createApp({
     store,
@@ -285,6 +342,12 @@ test("server-generated AI groups are immutable, shareable by certificate, and ke
     return { cookie, user };
   };
   const owner = await createUser("ai_owner");
+  store.saveSettings(owner.user.id, {
+    baseUrl: "https://example.com/v1",
+    model: "test",
+    keyCipher: encrypt("secret"),
+    temperature: 0.7,
+  });
   const stranger = await createUser("ai_stranger");
   const otherCertificate = await createUser(
     "ai_other_certificate",
@@ -844,4 +907,157 @@ test("AI outages produce specific safe errors and numeric or semantic failures n
     /独立质量审核/,
   );
   assert.equal(store.allQ().length, before);
+});
+
+test("管理员面板隔离管理员 API，支持扩题、重合检测、删题和封禁用户", async (t) => {
+  const previousMasterKey = process.env.AI_MASTER_KEY;
+  process.env.AI_MASTER_KEY = crypto.randomBytes(32).toString("base64");
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "netwise-admin-"));
+  let generated = 0;
+  const store = createStore(dir);
+  const provider = new OpenAICompatibleProvider(store, {
+    fetch: async (_url, options) => {
+      const { messages } = JSON.parse(options.body);
+      const system = messages[0].content;
+      const payload = messages[1] ? JSON.parse(messages[1].content) : {};
+      if (system.includes("Reply with OK")) return response("OK");
+      if (system.includes("逐题独立审核"))
+        return response({
+          reviews: payload.items.map(({ index }) => ({
+            index,
+            ...verdict,
+          })),
+        });
+      if (system.includes("一次生成"))
+        return response({
+          questions: payload.specs.map((spec) => ({
+            type: "single_choice",
+            question: `管理员扩充测试题 ${++generated}：${payload.knowledgePoint} 的关键判断是什么？`,
+            options: {
+              A: "选项一",
+              B: "选项二",
+              C: "选项三",
+              D: "选项四",
+            },
+            answer: ["A"],
+            analysis: "先确认目标知识点的判断条件，再结合题干选择唯一符合条件的选项。",
+            chapter: payload.chapter,
+            knowledgePoint: payload.knowledgePoint,
+            difficulty: spec.difficulty,
+            stage: "基础理解",
+            tags: ["管理员扩题测试"],
+          })),
+        });
+      return response({ text: "测试讲解" });
+    },
+  });
+  const app = await createApp({
+    store,
+    provider,
+    withFrontend: false,
+    authRequired: true,
+  });
+  const server = app.listen(0, "127.0.0.1");
+  await new Promise((resolve) => server.once("listening", resolve));
+  const base = `http://127.0.0.1:${server.address().port}`;
+  const register = async (username) => {
+    const res = await fetch(base + "/api/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password: "safe-password" }),
+    });
+    return {
+      status: res.status,
+      data: await res.json(),
+      cookie: res.headers.get("set-cookie")?.split(";")[0],
+    };
+  };
+  const request = async (cookie, route, body, method = body ? "POST" : "GET") => {
+    const res = await fetch(base + "/api" + route, {
+      method,
+      headers: { "Content-Type": "application/json", Cookie: cookie },
+      ...(body ? { body: JSON.stringify(body) } : {}),
+    });
+    return { status: res.status, data: await res.json() };
+  };
+  t.after(async () => {
+    app.locals.stop();
+    await new Promise((resolve) => server.close(resolve));
+    store.db.close();
+    fs.rmSync(dir, { recursive: true, force: true });
+    if (previousMasterKey === undefined) delete process.env.AI_MASTER_KEY;
+    else process.env.AI_MASTER_KEY = previousMasterKey;
+  });
+  const admin = await register("admin_owner");
+  const member = await register("ordinary_member");
+  assert.equal(admin.status, 200);
+  assert.equal(admin.data.user.isAdmin, true);
+  assert.equal(member.data.user.isAdmin, false);
+  assert.equal((await request(member.cookie, "/admin/overview")).status, 403);
+  const seed = store.allQ().find((question) => question.certificates?.includes("network-engineer"));
+  assert.ok(seed);
+  const configuration = {
+    baseUrl: "https://fixture.example/v1",
+    model: "admin-fixture",
+    apiKey: "admin-only-key",
+    temperature: 0.3,
+  };
+  assert.equal((await request(admin.cookie, "/admin/settings", configuration, "PUT")).status, 200);
+  assert.equal((await request(admin.cookie, "/admin/settings")).data.hasKey, true);
+  assert.equal((await request(member.cookie, "/settings")).data.hasKey, false);
+  assert.ok(!JSON.stringify(await request(admin.cookie, "/admin/settings")).includes("admin-only-key"));
+  const taxonomy = await request(admin.cookie, "/admin/options");
+  assert.equal(taxonomy.status, 200);
+  const targetChapter = taxonomy.data.certificates
+    .find((item) => item.id === seed.certificates[0])
+    .chapters.find((item) => item.name === seed.chapter);
+  const generatedResponse = await request(
+    admin.cookie,
+    "/admin/questions/generate",
+    {
+      certificateId: seed.certificates[0],
+      chapter: seed.chapter,
+      knowledgePoint: targetChapter.knowledgePoints[0],
+      count: 1,
+    },
+  );
+  assert.equal(generatedResponse.status, 200);
+  assert.equal(generatedResponse.data.inserted, 1);
+  assert.equal(store.allQ().filter((question) => question.source === "admin_generated").length, 1);
+  const duplicateBase = {
+    ...seed,
+    id: "admin-similar-a",
+    source: "admin_generated",
+    certificates: seed.certificates,
+    question: "管理员重合候选题：请判断这个知识点的关键结论是什么？",
+    options: { A: "正确结论", B: "错误结论一", C: "错误结论二", D: "错误结论三" },
+  };
+  const duplicateOther = {
+    ...duplicateBase,
+    id: "admin-similar-b",
+    options: { A: "正确结论", B: "错误结论甲", C: "错误结论乙", D: "错误结论丙" },
+  };
+  store.addAdminQuestions([duplicateBase, duplicateOther]);
+  const similar = await request(
+    admin.cookie,
+    "/admin/questions/similar?certificateId=network-engineer&threshold=0.8&limit=500",
+  );
+  assert.equal(similar.status, 200);
+  assert.ok(similar.data.pairs.some((pair) => pair.left.id === "admin-similar-a" && pair.right.id === "admin-similar-b"));
+  const deleted = await request(
+    admin.cookie,
+    "/admin/questions/admin-similar-a",
+    { confirm: true, reason: "测试删除" },
+    "DELETE",
+  );
+  assert.equal(deleted.status, 200);
+  assert.equal(store.getQ("admin-similar-a"), null);
+  const banned = await request(
+    admin.cookie,
+    `/admin/users/${member.data.user.id}/ban`,
+    { banned: true, reason: "测试封禁" },
+    "PUT",
+  );
+  assert.equal(banned.status, 200);
+  assert.equal((await request(member.cookie, "/settings")).status, 401);
 });

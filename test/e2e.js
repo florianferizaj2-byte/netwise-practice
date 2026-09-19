@@ -13,6 +13,7 @@ const app = await createApp({
   store,
   provider: new OpenAICompatibleProvider(store, { fetch: mockAI() }),
   production: true,
+  authRequired: false,
 });
 const server = app.listen(0, "127.0.0.1");
 await new Promise((r) => server.once("listening", r));

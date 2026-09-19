@@ -14,6 +14,7 @@ import {
   X,
   Clock,
   ChevronRight,
+  ChevronDown,
   LoaderCircle,
   Eye,
   EyeOff,
@@ -53,6 +54,8 @@ import {
   Flag,
   Share2,
   Users,
+  Ban,
+  ScanSearch,
 } from "lucide-react";
 import "./style.css";
 
@@ -131,6 +134,7 @@ const sources = {
   user_recall_collection: "第三方公开回忆题（用户提供）",
   user_simulation_collection: "第三方原创模拟题（用户提供）",
   ai_generated: "AI 生成练习题",
+  admin_generated: "管理员 AI 扩充题",
 };
 const sourceName = (q) => q.sourceLabel || sources[q.source] || q.source;
 const isSingleSelect = (question) =>
@@ -149,6 +153,7 @@ const navs = [
   ["community", "共享题库", Globe2],
   ["mastery", "知识掌握度", ChartNoAxesCombined],
   ["exam", "模拟考试", GraduationCap],
+  ["admin", "管理员面板", ShieldCheck],
 ];
 function IconButton({ icon: Icon, label, ...props }) {
   return (
@@ -193,6 +198,7 @@ function AuthScreen({ onAuth, initialError = "" }) {
     [password, setPassword] = useState(""),
     [error, setError] = useState(initialError),
     [busy, setBusy] = useState(false);
+  const isLogin = mode === "login";
   const submit = async (e) => {
     e.preventDefault();
     setBusy(true);
@@ -212,59 +218,172 @@ function AuthScreen({ onAuth, initialError = "" }) {
   };
   return (
     <main className="auth-page">
-      <section className="auth-panel">
-        <div className="auth-mark">
-          <Network size={28} />
-        </div>
-        <p className="eyebrow">AceExam</p>
-        <h1>{mode === "login" ? "登录学习账户" : "创建学习账户"}</h1>
-        <p>登录后选择报考证书，系统会按对应知识点推荐练习题。</p>
-        <form onSubmit={submit}>
-          <label>
-            账号
-            <input
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              minLength="3"
-              maxLength="40"
-              autoComplete="username"
-              placeholder="3-40 位字母、数字或 _ -"
-              required
-            />
-          </label>
-          <label>
-            密码
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              minLength="8"
-              maxLength="128"
-              autoComplete={
-                mode === "login" ? "current-password" : "new-password"
-              }
-              placeholder="至少 8 位"
-              required
-            />
-          </label>
-          {error && (
-            <p className="form-error" role="alert">
-              {error}
+      <div className="auth-ambient auth-ambient-one" />
+      <div className="auth-ambient auth-ambient-two" />
+      <section className="auth-shell">
+        <div className="auth-showcase">
+          <div className="auth-showcase-grid" aria-hidden="true" />
+          <div className="auth-showcase-header">
+            <div className="auth-brand-lockup">
+              <span className="auth-brand-logo">
+                <img src="/kaojiang-logo-192.png" alt="" />
+              </span>
+              <span>
+                <strong>考匠</strong>
+                <small>AceExam</small>
+              </span>
+            </div>
+            <span className="auth-status">
+              <i /> 认证考试训练平台
+            </span>
+          </div>
+          <div className="auth-hero-copy">
+            <span className="auth-kicker">
+              <Sparkles size={15} /> 把时间花在真正的进步上
+            </span>
+            <h2>
+              把每一次刷题，
+              <br />
+              <em>变成稳稳的掌握。</em>
+            </h2>
+            <p>
+              按证书定位范围，追踪每一个薄弱知识点，
+              <br className="auth-desktop-break" />
+              让下一道题刚好比上一道更懂你。
             </p>
-          )}
-          <button className="primary" disabled={busy}>
-            {busy ? "处理中..." : mode === "login" ? "登录" : "注册并继续"}
+          </div>
+          <div className="auth-feature-grid">
+            <div className="auth-feature">
+              <span className="auth-feature-icon">
+                <Target size={18} />
+              </span>
+              <span>
+                <strong>范围清晰</strong>
+                <small>围绕证书知识点练习</small>
+              </span>
+            </div>
+            <div className="auth-feature">
+              <span className="auth-feature-icon">
+                <ChartNoAxesCombined size={18} />
+              </span>
+              <span>
+                <strong>越练越准</strong>
+                <small>掌握度与错题自动沉淀</small>
+              </span>
+            </div>
+            <div className="auth-feature">
+              <span className="auth-feature-icon">
+                <Users size={18} />
+              </span>
+              <span>
+                <strong>共享题库</strong>
+                <small>AI 好题审核后共同练</small>
+              </span>
+            </div>
+          </div>
+          <div className="auth-cycle-card auth-community-card">
+            <div className="auth-cycle-orbit auth-community-orbit" aria-hidden="true">
+              <Users size={22} />
+            </div>
+            <div>
+              <div className="auth-community-heading">
+                <small>AI 题库持续生长</small>
+                <span className="auth-community-pill">
+                  <i /> 共享中
+                </span>
+              </div>
+              <strong>每一道好题，都不只为一个人服务</strong>
+              <p>
+                每道 AI 题通过校验后进入共享题库，同证书用户都能继续练习。
+              </p>
+            </div>
+          </div>
+          <p className="auth-showcase-footnote">
+            <ShieldCheck size={16} /> 学习记录按账号保存，换设备也能继续
+          </p>
+        </div>
+        <section className="auth-panel">
+          <div className="auth-panel-topline">
+            <span>{isLogin ? "欢迎回来" : "从今天开始"}</span>
+            <span className="auth-panel-step">{isLogin ? "01 / 02" : "01 / 01"}</span>
+          </div>
+          <p className="eyebrow">{isLogin ? "继续你的备考节奏" : "创建你的学习空间"}</p>
+          <h1>{isLogin ? "登录学习账户" : "创建学习账户"}</h1>
+          <p className="auth-panel-intro">
+            {isLogin
+              ? "欢迎回来，接着完成今天最值得练习的一组题。"
+              : "注册后选择报考证书，马上开始一套属于你的练习路径。"}
+          </p>
+          <form onSubmit={submit}>
+            <label>
+              <span className="auth-field-label">
+                <UserRound size={15} /> 账号
+              </span>
+              <span className="auth-input-wrap">
+                <UserRound size={17} />
+                <input
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  minLength="3"
+                  maxLength="40"
+                  autoComplete="username"
+                  placeholder="输入你的学习账号"
+                  required
+                />
+              </span>
+            </label>
+            <label>
+              <span className="auth-field-label">
+                <LockKeyhole size={15} /> 密码
+              </span>
+              <span className="auth-input-wrap">
+                <LockKeyhole size={17} />
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  minLength="8"
+                  maxLength="128"
+                  autoComplete={isLogin ? "current-password" : "new-password"}
+                  placeholder="至少 8 位字符"
+                  required
+                />
+              </span>
+            </label>
+            {error && (
+              <p className="form-error" role="alert">
+                {error}
+              </p>
+            )}
+            <button className="primary auth-submit" disabled={busy}>
+              {busy ? (
+                <>
+                  <LoaderCircle className="auth-spinner" size={17} /> 处理中...
+                </>
+              ) : (
+                <>
+                  {isLogin ? "进入我的学习空间" : "注册并开始学习"}
+                  <ArrowRight size={17} />
+                </>
+              )}
+            </button>
+          </form>
+          <div className="auth-panel-divider">
+            <span>或</span>
+          </div>
+          <button
+            className="text-button auth-switch"
+            onClick={() => {
+              setMode(isLogin ? "register" : "login");
+              setError("");
+            }}
+          >
+            {isLogin ? "还没有学习账户？立即注册" : "已经有账户？返回登录"}
           </button>
-        </form>
-        <button
-          className="text-button"
-          onClick={() => {
-            setMode(mode === "login" ? "register" : "login");
-            setError("");
-          }}
-        >
-          {mode === "login" ? "没有账号？注册" : "已有账号？登录"}
-        </button>
+          <p className="auth-privacy-note">
+            <ShieldCheck size={14} /> 你的学习数据与 AI 配置仅属于当前账号
+          </p>
+        </section>
       </section>
     </main>
   );
@@ -289,7 +408,7 @@ function AnnouncementModal({ onClose }) {
               <Megaphone size={22} />
             </span>
             <div>
-              <span className="announcement-kicker">AceExam · 网站公告</span>
+              <span className="announcement-kicker">考匠 · 网站公告</span>
               <h2 id="announcement-title">欢迎来到你的机考练习空间</h2>
               <p>把零散的刷题时间，变成看得见的学习进度。</p>
             </div>
@@ -300,7 +419,7 @@ function AnnouncementModal({ onClose }) {
           <div className="announcement-highlight">
             <strong>现在可以开始了</strong>
             <span>
-              当前支持软考中级网络工程师与 HCIA-Datacom，进入章节练习即可按证书和知识点开始学习。
+               当前支持网络、Linux 系统管理和 Office 应用方向，进入章节练习即可按证书和知识点开始学习。
             </span>
           </div>
           <ul className="announcement-list">
@@ -363,7 +482,7 @@ function SponsorModal({ onClose }) {
       >
         <header>
           <div>
-            <span className="sponsor-kicker">支持 AceExam</span>
+            <span className="sponsor-kicker">支持考匠</span>
             <h2 id="sponsor-title">赞助作者</h2>
             <p>如果这个学习工具对你有帮助，欢迎请作者喝杯咖啡。</p>
           </div>
@@ -446,7 +565,9 @@ function App() {
     [sharedAiLoading, setSharedAiLoading] = useState(false),
     [aiGroups, setAiGroups] = useState([]),
     [announcementOpen, setAnnouncementOpen] = useState(false),
-    [sponsorOpen, setSponsorOpen] = useState(false);
+    [sponsorOpen, setSponsorOpen] = useState(false),
+    [accountMenuOpen, setAccountMenuOpen] = useState(false);
+  const accountMenuRef = useRef(null);
   const refresh = async () => {
     const [d, w, q] = await Promise.all([
       api("/dashboard"),
@@ -481,6 +602,22 @@ function App() {
       setAnnouncementOpen(true);
     }
   }, [auth?.authenticated, auth?.user?.certificateId, dashboard]);
+  useEffect(() => {
+    if (!accountMenuOpen) return;
+    const closeOnOutsideClick = (event) => {
+      if (!accountMenuRef.current?.contains(event.target))
+        setAccountMenuOpen(false);
+    };
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") setAccountMenuOpen(false);
+    };
+    document.addEventListener("pointerdown", closeOnOutsideClick);
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.removeEventListener("pointerdown", closeOnOutsideClick);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [accountMenuOpen]);
   const dismissAnnouncement = () => {
     setAnnouncementOpen(false);
     try {
@@ -494,6 +631,21 @@ function App() {
     location.hash = p;
     setMobile(false);
     setError("");
+  };
+  const signOut = async () => {
+    setAccountMenuOpen(false);
+    setError("");
+    try {
+      await api("/auth/logout", {}, "POST");
+      setDashboard(null);
+      setSession(null);
+      setMobile(false);
+      setPage("home");
+      location.hash = "home";
+      setAuth({ authenticated: false, user: null, certificates: [] });
+    } catch (e) {
+      setError(e.message);
+    }
   };
   const run = async (label, fn) => {
     setBusy(label);
@@ -648,17 +800,19 @@ function App() {
       <aside className={"sidebar " + (mobile ? "open" : "")}>
         <a className="brand" href="#home" onClick={() => go("home")}>
           <span className="brand-icon">
-            <Network size={23} />
+            <img src="/kaojiang-logo-192.png" alt="" />
           </span>
           <strong>
-            AceExam<span>机考练习平台</span>
+            考匠<span>AceExam</span>
           </strong>
         </a>
         <div className="workspace-label">
           {dashboard.certificate?.shortName} · 学习工作台
         </div>
         <nav>
-          {navs.map(([id, label, Icon]) => (
+          {navs
+            .filter(([id]) => id !== "admin" || dashboard.user?.isAdmin)
+            .map(([id, label, Icon]) => (
             <button
               key={id}
               className={page === id ? "active" : ""}
@@ -670,15 +824,34 @@ function App() {
                 <small>{dashboard.wrongCount}</small>
               )}
             </button>
-          ))}
+            ))}
         </nav>
         <div className="sidebar-bottom">
-          <div className="local-profile">
-            <span>学</span>
-            <div>
+          <div className="account-menu-wrap" ref={accountMenuRef}>
+            <button
+              className="local-profile account-trigger"
+              aria-expanded={accountMenuOpen}
+              aria-haspopup="menu"
+              onClick={() => setAccountMenuOpen((open) => !open)}
+            >
+              <span className="account-avatar" aria-hidden="true">
+                <UserRound size={18} />
+              </span>
               <strong>{dashboard.user?.username || "学习账户"}</strong>
-              <small>{dashboard.certificate?.shortName || "已选证书"}</small>
-            </div>
+              <ChevronDown size={16} />
+            </button>
+            {accountMenuOpen && (
+              <div className="account-menu" role="menu">
+                <button role="menuitem" onClick={signOut}>
+                  <UserRound size={17} />
+                  切换账号
+                </button>
+                <button className="danger" role="menuitem" onClick={signOut}>
+                  <LogOut size={17} />
+                  退出登录
+                </button>
+              </div>
+            )}
           </div>
           <button
             className={page === "settings" ? "active" : ""}
@@ -694,16 +867,6 @@ function App() {
           >
             <Heart size={17} />
             赞助作者
-          </button>
-          <button
-            onClick={async () => {
-              await api("/auth/logout", {}, "POST");
-              setDashboard(null);
-              setAuth({ authenticated: false });
-            }}
-          >
-            <LogOut size={19} />
-            退出登录
           </button>
         </div>
       </aside>
@@ -1052,8 +1215,8 @@ function App() {
                     </strong>
                     <small>
                       {dashboard.syllabus
-                        ? `${dashboard.syllabus.modules.length} 个 V2.0 考点模块`
-                        : "从基础协议，到网络设计与安全"}
+                        ? `${dashboard.syllabus.version} · ${dashboard.syllabus.modules.length} 个考点模块`
+                        : "从基础概念，到岗位实操"}
                     </small>
                   </span>
                 </div>
@@ -1313,6 +1476,15 @@ function App() {
               }}
             />
           )}
+          {page === "admin" && dashboard.user?.isAdmin && (
+            <AdminView
+              run={run}
+              busy={busy}
+              notify={setNotice}
+              certificates={auth.certificates}
+              currentCertificateId={auth.user.certificateId}
+            />
+          )}
           {page === "practice" &&
             (session ? (
               <Practice
@@ -1338,7 +1510,7 @@ function App() {
           )}
         </main>
         <footer>
-          AceExam<span>职业认证机考练习平台</span>
+          考匠 · AceExam<span>职业认证机考练习平台</span>
           <span className="local-status">
             <i />
             题库与学习数据保存在服务器
@@ -1403,6 +1575,9 @@ function CertificateGuideView({ certificates, currentCertificateId }) {
   const certificate =
     certificates.find((item) => item.id === selectedId) || certificates[0];
   const guide = certificate?.guide;
+  const isNetworkGuide = ["network-engineer", "hcia-datacom"].includes(
+    certificate?.id,
+  );
   const factIcons = [
     BadgeInfo,
     Banknote,
@@ -1464,6 +1639,8 @@ function CertificateGuideView({ certificates, currentCertificateId }) {
             <span className="guide-tab-icon">
               {item.id === "network-engineer" ? (
                 <Landmark size={18} />
+              ) : item.id === "ncre-ms-office" ? (
+                <FileText size={18} />
               ) : (
                 <Network size={18} />
               )}
@@ -1673,32 +1850,34 @@ function CertificateGuideView({ certificates, currentCertificateId }) {
         </div>
       </section>
 
-      <section className="certificate-choice-band">
-        <header>
-          <span>怎么选</span>
-          <strong>同一套网络基础，两种职业价值</strong>
-        </header>
-        <div className="guide-choice-track">
-          <article>
-            <Landmark size={21} />
-            <span>国家资格与职称使用</span>
-            <strong>软考网络工程师</strong>
-            <p>适合国企、事业单位、职称聘任依据和需要广泛网络知识的场景。</p>
-          </article>
-          <article>
-            <Target size={21} />
-            <span>两证共同基础</span>
-            <strong>TCP/IP · VLAN · OSPF · ACL · NAT</strong>
-            <p>知识重叠明显，基础阶段可以共用学习成果。</p>
-          </article>
-          <article>
-            <Network size={21} />
-            <span>数通实操与华为生态</span>
-            <strong>HCIA-Datacom</strong>
-            <p>适合 ICT、网络运维、系统集成岗位，并继续进阶 HCIP/HCIE。</p>
-          </article>
-        </div>
-      </section>
+      {isNetworkGuide && (
+        <section className="certificate-choice-band">
+          <header>
+            <span>怎么选</span>
+            <strong>同一套网络基础，两种职业价值</strong>
+          </header>
+          <div className="guide-choice-track">
+            <article>
+              <Landmark size={21} />
+              <span>国家资格与职称使用</span>
+              <strong>软考网络工程师</strong>
+              <p>适合国企、事业单位、职称聘任依据和需要广泛网络知识的场景。</p>
+            </article>
+            <article>
+              <Target size={21} />
+              <span>两证共同基础</span>
+              <strong>TCP/IP · VLAN · OSPF · ACL · NAT</strong>
+              <p>知识重叠明显，基础阶段可以共用学习成果。</p>
+            </article>
+            <article>
+              <Network size={21} />
+              <span>数通实操与华为生态</span>
+              <strong>HCIA-Datacom</strong>
+              <p>适合 ICT、网络运维、系统集成岗位，并继续进阶 HCIP/HCIE。</p>
+            </article>
+          </div>
+        </section>
+      )}
 
       <section className="guide-section guide-sources">
         <div className="section-heading">
@@ -2556,6 +2735,511 @@ function SettingsView({
             </footer>
           </section>
         </div>
+      )}
+    </>
+  );
+}
+function AdminView({
+  run,
+  busy,
+  notify,
+  certificates,
+  currentCertificateId,
+}) {
+  const [tab, setTab] = useState("overview");
+  const [overview, setOverview] = useState(null);
+  const [taxonomy, setTaxonomy] = useState(null);
+  const [settings, setSettings] = useState(null);
+  const [adminKey, setAdminKey] = useState("");
+  const [showKey, setShowKey] = useState(false);
+  const [users, setUsers] = useState([]);
+  const [userSearch, setUserSearch] = useState("");
+  const [similar, setSimilar] = useState(null);
+  const [threshold, setThreshold] = useState("0.78");
+  const [generated, setGenerated] = useState([]);
+  const [audit, setAudit] = useState([]);
+  const [certificateId, setCertificateId] = useState(
+    currentCertificateId || certificates[0]?.id || "",
+  );
+  const [chapter, setChapter] = useState("");
+  const [knowledgePoint, setKnowledgePoint] = useState("");
+  const [count, setCount] = useState(5);
+  const [difficulty, setDifficulty] = useState("");
+
+  const loadOverview = async () => setOverview(await api("/admin/overview"));
+  const loadUsers = async (search = userSearch) =>
+    setUsers((await api(`/admin/users?search=${encodeURIComponent(search)}`)).users);
+  const loadAudit = async () => setAudit((await api("/admin/audit?limit=30")).entries);
+  const load = async () => {
+    const [nextOverview, nextTaxonomy, nextSettings, nextUsers, nextAudit] =
+      await Promise.all([
+        api("/admin/overview"),
+        api("/admin/options"),
+        api("/admin/settings"),
+        api("/admin/users"),
+        api("/admin/audit?limit=30"),
+      ]);
+    setOverview(nextOverview);
+    setTaxonomy(nextTaxonomy);
+    setSettings(nextSettings);
+    setUsers(nextUsers.users);
+    setAudit(nextAudit.entries);
+  };
+  useEffect(() => {
+    load().catch(() => {});
+  }, []);
+  useEffect(() => {
+    const item = taxonomy?.certificates.find((entry) => entry.id === certificateId);
+    const nextChapter = item?.chapters.find((entry) => entry.name === chapter) || item?.chapters[0];
+    if (nextChapter && nextChapter.name !== chapter) setChapter(nextChapter.name);
+    const nextPoint = nextChapter?.knowledgePoints.includes(knowledgePoint)
+      ? knowledgePoint
+      : nextChapter?.knowledgePoints[0] || "";
+    if (nextPoint !== knowledgePoint) setKnowledgePoint(nextPoint);
+  }, [taxonomy, certificateId, chapter, knowledgePoint]);
+  const selectedCertificate = taxonomy?.certificates.find(
+    (entry) => entry.id === certificateId,
+  );
+  const selectedChapter = selectedCertificate?.chapters.find(
+    (entry) => entry.name === chapter,
+  );
+  const changeCertificate = (value) => {
+    setCertificateId(value);
+    setChapter("");
+    setKnowledgePoint("");
+  };
+  const saveSettings = () =>
+    run("正在保存管理员 AI 配置", async () => {
+      await api(
+        "/admin/settings",
+        {
+          baseUrl: settings.baseUrl,
+          model: settings.model,
+          temperature: +settings.temperature,
+          ...(adminKey ? { apiKey: adminKey } : {}),
+        },
+        "PUT",
+      );
+      setAdminKey("");
+      setShowKey(false);
+      setSettings(await api("/admin/settings"));
+      notify("管理员 AI 配置已保存");
+    });
+  const testSettings = () =>
+    run("正在测试管理员 AI", async () => {
+      const result = await api("/admin/ai/test", {});
+      notify(result.message);
+    });
+  const generate = () =>
+    run("正在扩充共享题库", async () => {
+      const result = await api(
+        "/admin/questions/generate",
+        {
+          certificateId,
+          chapter,
+          knowledgePoint,
+          count: +count,
+          ...(difficulty ? { difficulty } : {}),
+        },
+        "POST",
+      );
+      setGenerated(result.questions || []);
+      notify(
+        `已向共享题库写入 ${result.inserted} 道题${
+          result.skipped?.length ? `，跳过 ${result.skipped.length} 道重复题` : ""
+        }`,
+      );
+      await loadOverview();
+      await loadAudit();
+    });
+  const scan = () =>
+    run("正在扫描题目重合度", async () => {
+      setSimilar(
+        await api(
+          `/admin/questions/similar?certificateId=${encodeURIComponent(
+            certificateId,
+            )}&threshold=${encodeURIComponent(threshold)}&limit=500`,
+        ),
+      );
+      setTab("quality");
+    });
+  const removeQuestion = (question) => {
+    if (!window.confirm(`确定删除这道题吗？\n\n${question.question}`)) return;
+    run("正在删除题目", async () => {
+      await api(
+        `/admin/questions/${encodeURIComponent(question.id)}`,
+        { confirm: true, reason: "管理员处理高重合题目" },
+        "DELETE",
+      );
+      notify("题目已删除，并已记录管理员操作");
+      await scan();
+      await loadOverview();
+      await loadAudit();
+    });
+  };
+  const toggleBan = (user) => {
+    const banned = !user.bannedAt;
+    if (
+      !window.confirm(
+        banned
+          ? `确定封禁用户 ${user.username} 吗？封禁后会立即退出其登录会话。`
+          : `确定解封用户 ${user.username} 吗？`,
+      )
+    )
+      return;
+    run(banned ? "正在封禁用户" : "正在解封用户", async () => {
+      await api(
+        `/admin/users/${encodeURIComponent(user.id)}/ban`,
+        { banned, ...(banned ? { reason: "管理员处理" } : {}) },
+        "PUT",
+      );
+      await loadUsers();
+      await loadAudit();
+      await loadOverview();
+      notify(banned ? "用户已封禁" : "用户已解封");
+    });
+  };
+  const updateSettings = (field, value) =>
+    setSettings((old) => ({ ...old, [field]: value }));
+  const statItems = overview
+    ? [
+        ["注册用户", overview.stats.users, Users],
+        ["已封禁用户", overview.stats.bannedUsers, Ban],
+        ["题库题目", overview.stats.questions, BookOpen],
+        ["管理员扩充题", overview.stats.adminGenerated, Sparkles],
+      ]
+    : [];
+  return (
+    <>
+      <Heading title="管理员面板" subtitle="控制 AI 题库、内容质量和用户安全">
+        <span className="badge green">
+          <ShieldCheck size={15} /> 管理员权限
+        </span>
+      </Heading>
+      <div className="admin-tabs" role="tablist" aria-label="管理员功能">
+        {[
+          ["overview", "总览"],
+          ["generate", "扩充题库"],
+          ["quality", "重合检测"],
+          ["users", "用户管理"],
+          ["api", "管理员 API"],
+          ["audit", "操作审计"],
+        ].map(([id, label]) => (
+          <button
+            key={id}
+            role="tab"
+            aria-selected={tab === id}
+            className={tab === id ? "active" : ""}
+            onClick={() => setTab(id)}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+      {tab === "overview" && (
+        <>
+          <div className="admin-stat-grid">
+            {statItems.map(([label, value, Icon]) => (
+              <div className="admin-stat" key={label}>
+                <span>{label}</span>
+                <Icon size={19} />
+                <strong>{value.toLocaleString()}</strong>
+              </div>
+            ))}
+          </div>
+          <div className="admin-overview-grid">
+            <section className="admin-card admin-quick-card">
+              <div className="section-heading">
+                <div>
+                  <h2>
+                    <Sparkles size={20} /> 题库运营
+                  </h2>
+                  <p>用管理员 API 按证书和知识点扩充共享题库。</p>
+                </div>
+              </div>
+              <div className="admin-quick-actions">
+                <button className="primary" onClick={() => setTab("generate")}>
+                  <Sparkles size={16} /> 扩充题库
+                </button>
+                <button onClick={scan}>
+                  <ScanSearch size={16} /> 扫描高重合题
+                </button>
+                <button onClick={() => setTab("users")}>
+                  <Users size={16} /> 管理用户
+                </button>
+              </div>
+              <p className="admin-tip">
+                当前发现 {overview?.similarCandidates ?? "--"} 组高重合候选。删除内置题会记录标记，服务重启后也不会自动恢复。
+              </p>
+            </section>
+            <section className="admin-card">
+              <div className="section-heading">
+                <h2>
+                  <Clock size={20} /> 最近操作
+                </h2>
+                <button className="text-button" onClick={() => setTab("audit")}>
+                  查看全部 <ArrowRight size={15} />
+                </button>
+              </div>
+              {overview?.recentAudit?.length ? (
+                <div className="admin-audit-list">
+                  {overview.recentAudit.slice(0, 6).map((entry) => (
+                    <div className="admin-audit-row" key={entry.id}>
+                      <strong>{entry.adminUsername || "管理员"}</strong>
+                      <span>{entry.action}</span>
+                      <small>{new Date(entry.createdAt).toLocaleString("zh-CN")}</small>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="muted">还没有管理员操作记录。</p>
+              )}
+            </section>
+          </div>
+        </>
+      )}
+      {tab === "generate" && (
+        <div className="admin-overview-grid">
+          <section className="admin-card">
+            <div className="section-heading">
+              <div>
+                <h2>
+                  <Sparkles size={20} /> 按知识点扩充共享题库
+                </h2>
+                <p>题目会经过程序校验和独立审核，写入后所有同证书用户可见。</p>
+              </div>
+              <span className="badge green">管理员专用 API</span>
+            </div>
+            {!settings?.hasKey && (
+              <div className="alert error">请先在“管理员 API”中配置你的 API Key。</div>
+            )}
+            <div className="admin-form-grid">
+              <label>
+                证书
+                <select
+                  aria-label="扩充证书"
+                  value={certificateId}
+                  onChange={(event) => changeCertificate(event.target.value)}
+                >
+                  {(taxonomy?.certificates || certificates).map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.shortName || item.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                章节模块
+                <select
+                  aria-label="扩充章节"
+                  value={chapter}
+                  onChange={(event) => {
+                    setChapter(event.target.value);
+                    setKnowledgePoint("");
+                  }}
+                >
+                  {(selectedCertificate?.chapters || []).map((item) => (
+                    <option key={item.name} value={item.name}>
+                      {item.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="wide">
+                知识点
+                <select
+                  aria-label="扩充知识点"
+                  value={knowledgePoint}
+                  onChange={(event) => setKnowledgePoint(event.target.value)}
+                >
+                  {(selectedChapter?.knowledgePoints || []).map((item) => (
+                    <option key={item} value={item}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                题量
+                <select value={count} onChange={(event) => setCount(event.target.value)}>
+                  {[1, 3, 5, 10, 20].map((value) => (
+                    <option key={value} value={value}>
+                      {value} 道
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                难度
+                <select value={difficulty} onChange={(event) => setDifficulty(event.target.value)}>
+                  <option value="">自适应</option>
+                  <option value="easy">基础</option>
+                  <option value="medium">进阶</option>
+                  <option value="hard">挑战</option>
+                </select>
+              </label>
+            </div>
+            <div className="item-actions">
+              <button
+                className="primary"
+                disabled={!!busy || !settings?.hasKey || !knowledgePoint}
+                onClick={generate}
+              >
+                <Sparkles size={16} /> 生成并写入共享题库
+              </button>
+              <small className="muted">每次最多 20 道，重复或审核不通过的题不会写入。</small>
+            </div>
+          </section>
+          <section className="admin-card">
+            <div className="section-heading">
+              <h2>
+                <Check size={20} /> 最近生成结果
+              </h2>
+              <span className="badge">{generated.length} 道</span>
+            </div>
+            {generated.length ? (
+              <div className="admin-generated-list">
+                {generated.map((question) => (
+                  <article key={question.id} className="admin-question-preview">
+                    <div className="question-meta">
+                      <span className="badge green">已入库</span>
+                      <span>{question.knowledgePoint}</span>
+                      <span>{diff[question.difficulty] || question.difficulty}</span>
+                    </div>
+                    <strong>{question.question}</strong>
+                    <small>{question.id}</small>
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <p className="muted">生成成功后会在这里显示题目摘要。</p>
+            )}
+          </section>
+        </div>
+      )}
+      {tab === "quality" && (
+        <section className="admin-card">
+          <div className="section-heading">
+            <div>
+              <h2>
+                <ScanSearch size={20} /> 高重合题检测
+              </h2>
+              <p>按题干和选项的字符片段计算相似度，只展示同章节、同证书的候选对。</p>
+            </div>
+            <div className="admin-inline-controls">
+              <label>
+                证书
+                <select value={certificateId} onChange={(event) => changeCertificate(event.target.value)}>
+                  {(taxonomy?.certificates || certificates).map((item) => (
+                    <option key={item.id} value={item.id}>{item.shortName || item.name}</option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                阈值
+                <input aria-label="相似度阈值" type="number" min="0.5" max="0.99" step="0.01" value={threshold} onChange={(event) => setThreshold(event.target.value)} />
+              </label>
+              <button className="primary" disabled={!!busy} onClick={scan}>
+                <RefreshCw size={16} /> 扫描
+              </button>
+            </div>
+          </div>
+          {similar ? (
+            similar.pairs.length ? (
+              <div className="similar-list">
+                {similar.pairs.map((pair) => (
+                  <article className="similar-pair" key={`${pair.left.id}-${pair.right.id}`}>
+                    <div className="similar-score">{Math.round(pair.score * 100)}% 相似</div>
+                    {[pair.left, pair.right].map((question, index) => (
+                      <div className="similar-question" key={question.id}>
+                        <div className="question-meta">
+                          <span className="badge">{index ? "题目 B" : "题目 A"}</span>
+                          <span>{sourceName(question)}</span>
+                          <span>{question.knowledgePoint}</span>
+                        </div>
+                        <strong>{question.question}</strong>
+                        <small>{question.id}</small>
+                        <button className="danger-button" onClick={() => removeQuestion(question)}>
+                          <Trash2 size={15} /> 删除这道题
+                        </button>
+                      </div>
+                    ))}
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <Empty icon={Check} title="暂未发现超过阈值的题目">
+                <p>可以降低阈值后再次扫描。</p>
+              </Empty>
+            )
+          ) : (
+            <Empty icon={ScanSearch} title="还没有开始扫描">
+              <p>选择证书和阈值后，点击扫描查看重合候选。</p>
+            </Empty>
+          )}
+        </section>
+      )}
+      {tab === "users" && (
+        <section className="admin-card">
+          <div className="section-heading">
+            <div>
+              <h2>
+                <Users size={20} /> 用户管理
+              </h2>
+              <p>封禁会立即撤销该用户的登录会话；管理员账号不能被普通管理员互相封禁。</p>
+            </div>
+            <div className="admin-inline-controls">
+              <input aria-label="搜索用户" placeholder="搜索账号" value={userSearch} onChange={(event) => setUserSearch(event.target.value)} />
+              <button onClick={() => run("正在搜索用户", () => loadUsers())}><RefreshCw size={16} /> 搜索</button>
+            </div>
+          </div>
+          <div className="table-scroll">
+            <table className="admin-users-table">
+              <thead>
+                <tr><th>账号</th><th>证书</th><th>注册时间</th><th>状态</th><th /></tr>
+              </thead>
+              <tbody>
+                {users.map((user) => (
+                  <tr key={user.id}>
+                    <td><strong>{user.username}</strong>{user.isAdmin && <small>管理员</small>}</td>
+                    <td>{certificates.find((item) => item.id === user.certificateId)?.shortName || "未选择"}</td>
+                    <td>{new Date(user.createdAt).toLocaleString("zh-CN")}</td>
+                    <td>{user.bannedAt ? <span className="badge red">已封禁</span> : <span className="badge green">正常</span>}</td>
+                    <td>{!user.isAdmin && <button className={user.bannedAt ? "" : "danger-button"} onClick={() => toggleBan(user)}>{user.bannedAt ? "解封" : "封禁"}</button>}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+      {tab === "api" && settings && (
+        <section className="admin-card admin-settings-card">
+          <div className="section-heading">
+            <div>
+              <h2>
+                <PlugZap size={20} /> 管理员 AI 服务
+              </h2>
+              <p>这里只服务管理员扩充题库，与普通用户各自的 AI 配置完全隔离。</p>
+            </div>
+            <span className={settings.hasKey ? "badge green" : "badge red"}>{settings.hasKey ? "已配置" : "未配置"}</span>
+          </div>
+          {!settings.encryptionReady && <div className="alert error">服务器未配置 AI_MASTER_KEY，不能保存 API Key。</div>}
+          <div className="admin-form-grid">
+            <label className="wide">API Base URL<input aria-label="管理员 API Base URL" value={settings.baseUrl} onChange={(event) => updateSettings("baseUrl", event.target.value)} placeholder="https://api.example.com/v1" /></label>
+            <label className="wide">API Key<div className="key-input"><input aria-label="管理员 API Key" type={showKey ? "text" : "password"} value={adminKey} onChange={(event) => setAdminKey(event.target.value)} placeholder={settings.hasKey ? "已保存 · 输入新 Key 可修改" : "输入管理员 API Key"} autoComplete="off" /><IconButton icon={showKey ? EyeOff : Eye} label={showKey ? "隐藏管理员 API Key" : "显示管理员 API Key"} disabled={!adminKey} onClick={() => setShowKey((old) => !old)} /><IconButton icon={Trash2} label="删除管理员 API Key" disabled={!settings.hasKey || !!busy} onClick={() => run("正在删除管理员 API Key", async () => { await api("/admin/settings/key", null, "DELETE"); setSettings(await api("/admin/settings")); notify("管理员 API Key 已删除"); })} /></div><small className="field-state">{settings.hasKey ? "已加密保存 · 原值不回传浏览器" : "尚未保存"}</small></label>
+            <label>模型名称<input aria-label="管理员模型名称" value={settings.model} onChange={(event) => updateSettings("model", event.target.value)} placeholder="deepseek-chat" /></label>
+            <label>Temperature<input type="number" min="0" max="2" step="0.1" value={settings.temperature} onChange={(event) => updateSettings("temperature", event.target.value)} /></label>
+          </div>
+          <div className="item-actions"><button className="primary" disabled={!!busy || !settings.encryptionReady} onClick={saveSettings}><Save size={16} /> 保存管理员配置</button><button disabled={!!busy || !settings.hasKey} onClick={testSettings}><PlugZap size={16} /> 测试管理员 AI</button></div>
+          <div className="admin-usage"><span>今日调用 <strong>{settings.usage.today.calls}</strong></span><span>今日 Token <strong>{settings.usage.today.total_tokens.toLocaleString()}</strong></span><span>累计调用 <strong>{settings.usage.total.calls}</strong></span><span>累计 Token <strong>{settings.usage.total.total_tokens.toLocaleString()}</strong></span></div>
+        </section>
+      )}
+      {tab === "audit" && (
+        <section className="admin-card">
+          <div className="section-heading"><div><h2><Clock size={20} /> 操作审计</h2><p>管理员的配置、扩题、删题、封禁操作都会保留时间和目标记录。</p></div><button onClick={() => run("正在刷新审计记录", loadAudit)}><RefreshCw size={16} /> 刷新</button></div>
+          <div className="admin-audit-list admin-audit-full">{audit.length ? audit.map((entry) => <div className="admin-audit-row" key={entry.id}><strong>{entry.adminUsername || "管理员"}</strong><span>{entry.action} · {entry.targetType}{entry.targetId ? ` · ${entry.targetId}` : ""}</span><small>{new Date(entry.createdAt).toLocaleString("zh-CN")}</small></div>) : <p className="muted">暂无记录。</p>}</div>
+        </section>
       )}
     </>
   );

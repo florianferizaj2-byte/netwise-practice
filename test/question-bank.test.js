@@ -52,10 +52,10 @@ test("11 source documents are reconciled without missing records or invented ans
   assert.ok(!bank.some((q) => q.id === "collection-c01-q050"));
 });
 
-test("manifest catalog discovers certificates and keeps HCIA V2.0 sources explicit", () => {
+test("manifest catalog discovers the certificate tracks and keeps sources explicit", () => {
   assert.deepEqual(
     certificates.map((item) => item.id),
-    ["network-engineer", "hcia-datacom"],
+    ["network-engineer", "hcia-datacom", "ncre-ms-office"],
   );
   assert.deepEqual(
     banksForCertificate("network-engineer").map((item) => item.source),
@@ -68,6 +68,10 @@ test("manifest catalog discovers certificates and keeps HCIA V2.0 sources explic
       "user_recall_collection",
       "user_simulation_collection",
     ],
+  );
+  assert.deepEqual(
+    banksForCertificate("ncre-ms-office").map((item) => item.source),
+    ["syllabus_practice", "user_docx_collection"],
   );
   const practice = bundledQuestions().find((q) => q.id === "practice-1");
   assert.deepEqual(practice.certificates, ["network-engineer"]);
@@ -107,6 +111,41 @@ test("manifest catalog discovers certificates and keeps HCIA V2.0 sources explic
     "single_choice",
   );
   assert.equal(certificates[1].syllabus.version, "V2.0");
+  assert.equal(certificates[2].syllabus.examCode, "NCRE 二级 MS Office 高级应用与设计");
+  const officeSyllabus = syllabusForCertificate("ncre-ms-office");
+  assert.deepEqual(
+    officeSyllabus.modules.map((module) => module.name),
+    [
+      "公共基础知识",
+      "Office 应用基础",
+      "Word 文档处理",
+      "Excel 数据处理",
+      "PowerPoint 演示文稿",
+    ],
+  );
+  assert.equal(
+    officeSyllabus.modules.reduce((sum, module) => sum + module.weight, 0),
+    100,
+  );
+  assert.ok(
+    officeSyllabus.modules
+      .find((module) => module.name === "Word 文档处理")
+      .knowledgePoints.includes("邮件合并"),
+  );
+  assert.ok(
+    officeSyllabus.modules
+      .find((module) => module.name === "Excel 数据处理")
+      .knowledgePoints.includes("数据透视表与数据透视图"),
+  );
+  assert.ok(
+    officeSyllabus.modules
+      .find((module) => module.name === "PowerPoint 演示文稿")
+      .knowledgePoints.includes("幻灯片母版"),
+  );
+  assert.equal(
+    bundledQuestions().filter((q) => hasCertificateQuestion(q, "ncre-ms-office")).length,
+    180,
+  );
 });
 
 test("certificate guides retain verified dates, exam facts, and official HTTPS sources", () => {
@@ -195,10 +234,10 @@ test("server initializes the bundled collection idempotently and preserves learn
     assert.equal(q.options.C, "192.168.10.64");
     assert.deepEqual(q.answer, ["C"]);
     assert.equal(store.recordAttempt(q.id, ["C"], 2000).correct, true);
-    assert.equal(store.allQ().length, 906);
+    assert.equal(store.allQ().length, 1086);
     store.db.close();
     store = createStore(directory);
-    assert.equal(store.allQ().length, 906);
+    assert.equal(store.allQ().length, 1086);
     assert.equal(store.allA().length, 1);
     assert.equal(store.getQ(q.id).provenance[0].questionNumber, 3);
   } finally {

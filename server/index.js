@@ -20,6 +20,7 @@ import {
   syllabusForCertificate,
 } from "./certificates.js";
 import { buildSyllabusProgress, stratifiedSample } from "./syllabus.js";
+import { findSimilarQuestions } from "./question-similarity.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const publicQuestion = (q) => {
@@ -31,16 +32,17 @@ const privateQuestion = (q) => {
   return rest;
 };
 export async function createApp(options = {}) {
-  const injectedStore = !!options.store;
   const {
     store = createStore(),
     provider = new OpenAICompatibleProvider(store),
     withFrontend = true,
     production = process.argv.includes("--production"),
   } = options;
-  const authRequired =
-    options.authRequired ??
-    (!injectedStore && process.env.DISABLE_AUTH !== "1");
+  // A real app must always resolve settings through the authenticated user.
+  // The old DISABLE_AUTH escape hatch made every account share the `local`
+  // profile, including its encrypted AI API key. Tests/local fixtures can
+  // still opt into anonymous mode explicitly with { authRequired: false }.
+  const authRequired = options.authRequired ?? true;
   const app = express();
   const allowedHosts = new Set(
     (process.env.ALLOWED_HOSTS || "127.0.0.1,localhost,::1")
@@ -135,6 +137,13 @@ export async function createApp(options = {}) {
       error.status = 401;
       throw error;
     }
+    if (user.bannedAt) {
+      const error = new Error(
+        `账号已被封禁${user.banReason ? `：${user.banReason}` : ""}`,
+      );
+      error.status = 403;
+      throw error;
+    }
     sessionCookie(res, store.createAuthSession(user.id));
     return { user: userView(user), certificates };
   });
@@ -147,6 +156,10 @@ export async function createApp(options = {}) {
     if (!authRequired) return next();
     const user = store.authUser(cookie(req, "netwise_session"));
     if (!user) return res.status(401).json({ error: "请先登录" });
+    if (user.bannedAt)
+      return res.status(403).json({
+        error: `账号已被封禁${user.banReason ? `：${user.banReason}` : ""}`,
+      });
     req.user = user;
     next();
   });
@@ -209,6 +222,10 @@ export async function createApp(options = {}) {
     new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Shanghai" });
   const dailyKey = (certificateId, date = day()) =>
     `${certificateId || "all"}:${date}`;
+  const requestUserId = (req) => {
+    if (authRequired && !req.user?.id) throw new Error("请先登录");
+    return req.user?.id || "local";
+  };
   const settingsSchema = z
     .object({
       baseUrl: z.string().max(1000),
@@ -218,36 +235,350 @@ export async function createApp(options = {}) {
       maxTokens: z.number().int().positive().optional(),
     })
     .strict();
-  route("get", "/api/settings", () => {
-    const { keyCipher, maxTokens: _ignoredMaxTokens, ...s } = store.settings();
+  route("get", "/api/settings", (req) => {
+    const userId = requestUserId(req);
+    const { keyCipher, maxTokens: _ignoredMaxTokens, ...s } =
+      store.settings(userId);
     let encryptionReady = true;
     try {
       masterKey();
     } catch {
       encryptionReady = false;
     }
-    return { ...s, hasKey: !!keyCipher, encryptionReady, usage: store.usage() };
+    return {
+      ...s,
+      hasKey: !!keyCipher,
+      encryptionReady,
+      usage: store.usage(userId),
+    };
   });
   route("put", "/api/settings", (req) => {
+    const userId = requestUserId(req);
     const s = settingsSchema.parse(req.body);
     s.baseUrl = validateBaseUrl(s.baseUrl);
-    const old = store.settings();
+    const old = store.settings(userId);
     const keyCipher = s.apiKey ? encrypt(s.apiKey) : old.keyCipher;
     delete s.apiKey;
     const { maxTokens: _ignoredMaxTokens, ...settings } = s;
-    store.saveSettings({ ...settings, keyCipher });
+    store.saveSettings(userId, { ...settings, keyCipher });
     return { saved: true };
   });
-  route("delete", "/api/settings/key", () => {
-    const s = store.settings();
+  route("delete", "/api/settings/key", (req) => {
+    const userId = requestUserId(req);
+    const s = store.settings(userId);
     delete s.keyCipher;
-    store.saveSettings(s);
+    store.saveSettings(userId, s);
     return { deleted: true };
   });
-  route("post", "/api/ai/test", () =>
+  route("post", "/api/ai/test", (req) =>
     ai(async () => {
-      await provider.call([{ role: "user", content: "Reply with OK." }]);
+      await provider.call(
+        [{ role: "user", content: "Reply with OK." }],
+        undefined,
+        { userId: requestUserId(req) },
+      );
       return { message: "AI 服务连接成功" };
+    }),
+  );
+  const requireAdmin = (req) => {
+    if (!req.user?.isAdmin) {
+      const error = new Error("只有管理员可以访问此功能");
+      error.status = 403;
+      throw error;
+    }
+  };
+  const adminQuestion = (question) => ({ ...question });
+  const adminTaxonomy = () =>
+    certificates.map((certificate) => {
+      const questions = store
+        .allQ()
+        .filter((question) => hasCertificateQuestion(question, certificate.id));
+      const chapters = new Map();
+      for (const question of questions) {
+        if (!chapters.has(question.chapter)) chapters.set(question.chapter, new Set());
+        chapters.get(question.chapter).add(question.knowledgePoint);
+      }
+      for (const module of certificate.syllabus?.modules || []) {
+        if (!chapters.has(module.name)) chapters.set(module.name, new Set());
+        for (const knowledgePoint of module.knowledgePoints)
+          chapters.get(module.name).add(knowledgePoint);
+      }
+      return {
+        id: certificate.id,
+        name: certificate.name,
+        shortName: certificate.shortName,
+        chapters: [...chapters.entries()].map(([name, points]) => ({
+          name,
+          knowledgePoints: [...points].sort((a, b) => a.localeCompare(b, "zh-CN")),
+        })),
+      };
+    });
+  const adminQuestionFilters = (query) => {
+    const parsed = z
+      .object({
+        certificateId: z.string().trim().optional(),
+        chapter: z.string().trim().optional(),
+        knowledgePoint: z.string().trim().optional(),
+        source: z.string().trim().optional(),
+        search: z.string().trim().max(200).optional(),
+        limit: z.coerce.number().int().min(1).max(500).default(200),
+      })
+      .parse(query);
+    const search = parsed.search?.toLowerCase();
+    const questions = store
+      .allQ()
+      .filter(
+        (question) =>
+          (!parsed.certificateId ||
+            hasCertificateQuestion(question, parsed.certificateId)) &&
+          (!parsed.chapter || question.chapter === parsed.chapter) &&
+          (!parsed.knowledgePoint ||
+            (question.targetKnowledgePoint || question.knowledgePoint) ===
+              parsed.knowledgePoint) &&
+          (!parsed.source || question.source === parsed.source) &&
+          (!search ||
+            [question.question, ...Object.values(question.options || {})]
+              .join(" ")
+              .toLowerCase()
+              .includes(search)),
+      )
+      .slice(0, parsed.limit);
+    return { ...parsed, questions };
+  };
+  route("get", "/api/admin/options", (req) => {
+    requireAdmin(req);
+    return { certificates: adminTaxonomy() };
+  });
+  route("get", "/api/admin/overview", (req) => {
+    requireAdmin(req);
+    return {
+      stats: store.adminStats(),
+      similarCandidates: findSimilarQuestions(store.allQ(), {
+        threshold: 0.86,
+        limit: 5,
+      }).length,
+      recentAudit: store.auditRows(12),
+    };
+  });
+  route("get", "/api/admin/settings", (req) => {
+    requireAdmin(req);
+    const { keyCipher, ...settings } = store.adminSettings(req.user.id);
+    let encryptionReady = true;
+    try {
+      masterKey();
+    } catch {
+      encryptionReady = false;
+    }
+    return {
+      ...settings,
+      hasKey: !!keyCipher,
+      encryptionReady,
+      usage: store.usage(req.user.id),
+    };
+  });
+  route("put", "/api/admin/settings", (req) => {
+    requireAdmin(req);
+    const settings = settingsSchema.parse(req.body);
+    settings.baseUrl = validateBaseUrl(settings.baseUrl);
+    const previous = store.adminSettings(req.user.id);
+    const keyCipher = settings.apiKey
+      ? encrypt(settings.apiKey)
+      : previous.keyCipher;
+    delete settings.apiKey;
+    const { maxTokens: _ignoredMaxTokens, ...saved } = settings;
+    store.saveAdminSettings(req.user.id, { ...saved, keyCipher });
+    store.audit(req.user.id, "admin_settings_saved", "admin_settings", req.user.id, {
+      baseUrl: saved.baseUrl,
+      model: saved.model,
+      keyChanged: !!req.body.apiKey,
+    });
+    return { saved: true };
+  });
+  route("delete", "/api/admin/settings/key", (req) => {
+    requireAdmin(req);
+    const settings = store.adminSettings(req.user.id);
+    delete settings.keyCipher;
+    store.saveAdminSettings(req.user.id, settings);
+    store.audit(req.user.id, "admin_settings_key_deleted", "admin_settings", req.user.id);
+    return { deleted: true };
+  });
+  route("post", "/api/admin/ai/test", (req) =>
+    ai(async () => {
+      requireAdmin(req);
+      await provider.call(
+        [{ role: "user", content: "Reply with OK." }],
+        store.adminSettings(req.user.id),
+        { userId: req.user.id },
+      );
+      return { message: "管理员 AI 服务连接成功" };
+    }),
+  );
+  route("get", "/api/admin/users", (req) => {
+    requireAdmin(req);
+    const search = z
+      .object({ search: z.string().max(100).optional() })
+      .parse(req.query).search || "";
+    return { users: store.adminUsers(search) };
+  });
+  route("put", "/api/admin/users/:id/ban", (req) => {
+    requireAdmin(req);
+    const body = z
+      .object({ banned: z.boolean(), reason: z.string().trim().max(200).optional() })
+      .strict()
+      .parse(req.body);
+    const target = store.adminUsers().find((user) => user.id === req.params.id);
+    if (!target) {
+      const error = new Error("用户不存在");
+      error.status = 404;
+      throw error;
+    }
+    if (target.id === req.user.id)
+      throw new Error("不能封禁当前管理员账号");
+    if (target.isAdmin)
+      throw new Error("不能封禁其他管理员账号");
+    if (!store.setUserBanned(target.id, body.banned, body.reason)) {
+      const error = new Error("用户状态更新失败");
+      error.status = 404;
+      throw error;
+    }
+    store.audit(req.user.id, body.banned ? "user_banned" : "user_unbanned", "user", target.id, {
+      username: target.username,
+      reason: body.reason || "",
+    });
+    return { saved: true, user: store.adminUsers().find((user) => user.id === target.id) };
+  });
+  route("get", "/api/admin/questions/similar", (req) => {
+    requireAdmin(req);
+    const parsed = z
+      .object({
+        certificateId: z.string().trim().optional(),
+        threshold: z.coerce.number().min(0.5).max(0.99).default(0.78),
+        limit: z.coerce.number().int().min(1).max(500).default(100),
+      })
+      .parse(req.query);
+    const questions = store
+      .allQ()
+      .filter(
+        (question) =>
+          !parsed.certificateId ||
+          hasCertificateQuestion(question, parsed.certificateId),
+      );
+    return {
+      threshold: parsed.threshold,
+      pairs: findSimilarQuestions(questions, parsed).map((pair) => ({
+        score: pair.score,
+        left: adminQuestion(pair.left),
+        right: adminQuestion(pair.right),
+      })),
+    };
+  });
+  route("get", "/api/admin/questions", (req) => {
+    requireAdmin(req);
+    const { questions, ...filters } = adminQuestionFilters(req.query);
+    return { filters, questions: questions.map(adminQuestion) };
+  });
+  route("delete", "/api/admin/questions/:id", (req) => {
+    requireAdmin(req);
+    const body = z
+      .object({ confirm: z.literal(true), reason: z.string().trim().max(200).optional() })
+      .strict()
+      .parse(req.body);
+    const question = store.getQ(req.params.id);
+    if (!question) {
+      const error = new Error("题目不存在或已经删除");
+      error.status = 404;
+      throw error;
+    }
+    store.deleteQuestion(question.id, req.user.id, body.reason);
+    store.audit(req.user.id, "question_deleted", "question", question.id, {
+      source: question.source,
+      chapter: question.chapter,
+      knowledgePoint: question.knowledgePoint,
+      reason: body.reason || "",
+    });
+    return { deleted: true, questionId: question.id };
+  });
+  route("get", "/api/admin/audit", (req) => {
+    requireAdmin(req);
+    const limit = z
+      .object({ limit: z.coerce.number().int().min(1).max(200).default(50) })
+      .parse(req.query).limit;
+    return { entries: store.auditRows(limit) };
+  });
+  route("post", "/api/admin/questions/generate", (req) =>
+    ai(async () => {
+      requireAdmin(req);
+      const body = z
+        .object({
+          certificateId: z.string().min(1),
+          chapter: z.string().min(1).max(100),
+          knowledgePoint: z.string().min(1).max(100),
+          count: z.number().int().min(1).max(20),
+          difficulty: z.enum(["easy", "medium", "hard"]).optional(),
+        })
+        .strict()
+        .parse(req.body);
+      const certificate = certificates.find((item) => item.id === body.certificateId);
+      if (!certificate) throw new Error("证书不存在");
+      const taxonomy = adminTaxonomy().find((item) => item.id === body.certificateId);
+      const chapter = taxonomy?.chapters.find((item) => item.name === body.chapter);
+      if (!chapter?.knowledgePoints.includes(body.knowledgePoint))
+        throw new Error("章节或知识点不属于当前证书");
+      const source = store
+        .allQ()
+        .find(
+          (question) =>
+            hasCertificateQuestion(question, body.certificateId) &&
+            question.chapter === body.chapter &&
+            (question.targetKnowledgePoint || question.knowledgePoint) ===
+              body.knowledgePoint,
+        ) ||
+        store
+          .allQ()
+          .find(
+            (question) =>
+              hasCertificateQuestion(question, body.certificateId) &&
+              question.chapter === body.chapter,
+          );
+      if (!source) throw new Error("当前章节还没有可供 AI 参考的题目");
+      const settings = store.adminSettings(req.user.id);
+      if (!settings.keyCipher) throw new Error("请先在管理员面板配置 API Key");
+      const generated = await provider.generateBankExpansion(
+        { ...source, knowledgePoint: body.knowledgePoint },
+        body.count,
+        {
+          userId: req.user.id,
+          certificateId: body.certificateId,
+          settings,
+          difficulty: body.difficulty,
+          existing: store.allQ(),
+          onProgress: (event) => {},
+        },
+      );
+      const prepared = generated.map((question) => ({
+        ...question,
+        id: `admin-${crypto.randomUUID()}`,
+        source: "admin_generated",
+        sourceLabel: "管理员 AI 扩充题",
+        certificates: [body.certificateId],
+        ownerUserId: req.user.id,
+        adminGeneratedAt: new Date().toISOString(),
+        targetKnowledgePoint: body.knowledgePoint,
+      }));
+      const saved = store.addAdminQuestions(prepared);
+      store.audit(req.user.id, "questions_generated", "knowledge_point", body.knowledgePoint, {
+        certificateId: body.certificateId,
+        chapter: body.chapter,
+        requested: body.count,
+        inserted: saved.inserted.length,
+        skipped: saved.skipped.length,
+      });
+      return {
+        requested: body.count,
+        inserted: saved.inserted.length,
+        skipped: saved.skipped,
+        questions: saved.inserted,
+      };
     }),
   );
   const certificateQuestions = (
@@ -420,16 +751,17 @@ export async function createApp(options = {}) {
   });
   route("get", "/api/dashboard", (req) => {
     const certificateId = requireCertificate(req);
+    const userId = requestUserId(req);
     const currentQuestions = certificateQuestions(
         certificateId,
-        req.user?.id,
+        userId,
         true,
       ),
       currentIds = new Set(currentQuestions.map((question) => question.id)),
       attempts = store
-        .allA(req.user?.id)
+        .allA(userId)
         .filter((attempt) => currentIds.has(attempt.questionId)),
-      mastery = store.mastery(currentIds, req.user?.id),
+      mastery = store.mastery(currentIds, userId),
       today = day(),
       todayAttempts = attempts.filter(
         (a) =>
@@ -438,7 +770,7 @@ export async function createApp(options = {}) {
           }) === today,
       ),
       wrong = store
-        .wrongQuestions(req.user?.id)
+        .wrongQuestions(userId)
         .filter((question) => currentIds.has(question.id)),
       syllabus = syllabusForCertificate(certificateId),
       syllabusProgress = buildSyllabusProgress(
@@ -473,13 +805,13 @@ export async function createApp(options = {}) {
       wrongCount: wrong.length,
       mastery,
       chapters,
-      aiConfigured: !!store.settings().keyCipher,
+      aiConfigured: !!store.settings(userId).keyCipher,
       aiBusy,
-      plan: store.getDaily(dailyKey(certificateId, today)),
+      plan: store.getDaily(userId, dailyKey(certificateId, today)),
       user: req.user ? userView(req.user) : null,
       certificate: certificates.find((c) => c.id === certificateId) || null,
       banks: banksForCertificate(certificateId),
-      community: store.communityStats(certificateId, req.user?.id),
+      community: store.communityStats(certificateId, userId),
       syllabus: syllabusProgress,
       recentDays: Array.from({ length: 7 }, (_, i) => {
         const d = new Date(Date.now() - (6 - i) * 86400000).toLocaleDateString(
@@ -638,24 +970,29 @@ export async function createApp(options = {}) {
       );
     }),
   );
-  async function generateDaily(certificateId, force = false) {
+  async function generateDaily(userId, certificateId, force = false) {
     const key = dailyKey(certificateId);
-    if (!force && store.getDaily(key)) return store.getDaily(key);
+    if (!force && store.getDaily(userId, key))
+      return store.getDaily(userId, key);
     return ai(async () => {
-      const questionIds = certificateQuestions(certificateId).map(
+      const questionIds = certificateQuestions(certificateId, userId).map(
         (question) => question.id,
       );
       const plan = {
-        ...(await provider.dailyPlan(questionIds)),
+        ...(await provider.dailyPlan(questionIds, userId)),
         generatedAt: new Date().toISOString(),
         source: "ai",
       };
-      store.saveDaily(key, plan);
+      store.saveDaily(userId, key, plan);
       return plan;
     });
   }
   route("post", "/api/ai/daily", (req) =>
-    generateDaily(requireCertificate(req), req.body?.refresh === true),
+    generateDaily(
+      requestUserId(req),
+      requireCertificate(req),
+      req.body?.refresh === true,
+    ),
   );
   route("post", "/api/exams", (req) => {
     const b = z
@@ -791,18 +1128,23 @@ export async function createApp(options = {}) {
       app.locals.vite = vite;
     }
   }
-  let dailyRetryAt = 0;
+  const dailyRetryAt = new Map();
   const timer = setInterval(() => {
-    if (
-      Date.now() >= dailyRetryAt &&
-      store.settings().keyCipher &&
-      !store.getDaily(day()) &&
-      !aiBusy &&
-      store.allA().length
-    ) {
-      dailyRetryAt = Date.now() + 3600000;
-      generateDaily().catch(() => {});
-    }
+    if (aiBusy) return;
+    const now = Date.now();
+    const candidates = authRequired
+      ? store.allUsers().filter((user) => user.certificateId)
+      : [{ id: "local", certificateId: undefined }];
+    const candidate = candidates.find(
+      (user) =>
+        now >= (dailyRetryAt.get(user.id) || 0) &&
+        store.settings(user.id).keyCipher &&
+        !store.getDaily(user.id, dailyKey(user.certificateId)) &&
+        store.allA(user.id).length,
+    );
+    if (!candidate) return;
+    dailyRetryAt.set(candidate.id, now + 3600000);
+    generateDaily(candidate.id, candidate.certificateId).catch(() => {});
   }, 60000);
   timer.unref();
   app.locals.store = store;
@@ -817,6 +1159,6 @@ if (
   const port = Number(process.env.PORT) || 5173;
   const bindHost = process.env.BIND_HOST || "127.0.0.1";
   app.listen(port, bindHost, () =>
-    safeLog(`AceExam ready: http://${bindHost}:${port}`),
+    safeLog(`考匠 AceExam ready: http://${bindHost}:${port}`),
   );
 }

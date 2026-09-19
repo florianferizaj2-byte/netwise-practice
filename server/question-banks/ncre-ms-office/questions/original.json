@@ -1,0 +1,563 @@
+[
+  {
+    "id": "ncre-office-basics-001",
+    "type": "single_choice",
+    "question": "在 Word、Excel 和 PowerPoint 之间复制内容时，使用“选择性粘贴”的主要价值是什么？",
+    "options": {
+      "A": "只能复制纯文本",
+      "B": "可以选择目标格式或链接方式",
+      "C": "会自动删除源文件",
+      "D": "只能在同一个应用内使用"
+    },
+    "answer": ["B"],
+    "analysis": "选择性粘贴可以根据目标任务选择保留源格式、匹配目标格式、粘贴为图片或建立链接，是 Office 跨应用协作的重要功能。",
+    "chapter": "Office 应用基础",
+    "knowledgePoint": "各模块之间信息共享",
+    "difficulty": "easy",
+    "tags": ["Office", "选择性粘贴"]
+  },
+  {
+    "id": "ncre-office-basics-002",
+    "type": "single_choice",
+    "question": "在 Office 文档中需要多人共同修改并保留修改痕迹时，最适合使用哪项功能？",
+    "options": {
+      "A": "修订和批注",
+      "B": "屏幕截图",
+      "C": "自动求和",
+      "D": "幻灯片切换"
+    },
+    "answer": ["A"],
+    "analysis": "Word 的修订和批注功能可以记录修改者、插入删除内容和审阅意见，适合多人协作审阅文档。",
+    "chapter": "Office 应用基础",
+    "knowledgePoint": "各模块之间信息共享",
+    "difficulty": "easy",
+    "tags": ["协作", "修订"]
+  },
+  {
+    "id": "ncre-office-word-001",
+    "type": "single_choice",
+    "question": "若要让 Word 自动生成并更新目录，标题内容最应该使用什么来组织？",
+    "options": {
+      "A": "连续输入空格",
+      "B": "标题样式",
+      "C": "文本框",
+      "D": "手动下划线"
+    },
+    "answer": ["B"],
+    "analysis": "Word 目录依据标题级别和标题样式建立层级，使用标题样式后可以自动生成并更新目录。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "样式与排版",
+    "difficulty": "easy",
+    "tags": ["Word", "样式", "目录"]
+  },
+  {
+    "id": "ncre-office-word-002",
+    "type": "single_choice",
+    "question": "同一份 Word 文档中需要让某一页单独使用横向纸张，最合适的做法是什么？",
+    "options": {
+      "A": "插入分页符后直接改整篇方向",
+      "B": "使用分节符分隔页面后设置节方向",
+      "C": "把该页截图后插入文档",
+      "D": "只修改该页的字体方向"
+    },
+    "answer": ["B"],
+    "analysis": "页面方向属于节级别设置，需要先用分节符把目标页分隔成独立节，再修改该节的页面方向。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "样式与排版",
+    "difficulty": "medium",
+    "tags": ["Word", "分节符", "页面布局"]
+  },
+  {
+    "id": "ncre-office-word-003",
+    "type": "single_choice",
+    "question": "Word 邮件合并中，收件人姓名、地址等每条记录不同的信息通常来自哪里？",
+    "options": {
+      "A": "数据源",
+      "B": "页眉",
+      "C": "主题颜色",
+      "D": "剪贴板历史"
+    },
+    "answer": ["A"],
+    "analysis": "邮件合并以主文档为模板，从 Excel 或其他数据源读取每条记录的字段，并将字段插入生成的文档。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "邮件合并",
+    "difficulty": "easy",
+    "tags": ["Word", "邮件合并"]
+  },
+  {
+    "id": "ncre-office-word-004",
+    "type": "single_choice",
+    "question": "在 Word 中审阅他人修改并决定接受或拒绝修改，主要使用哪个功能区？",
+    "options": {
+      "A": "插入",
+      "B": "页面布局",
+      "C": "审阅",
+      "D": "视图"
+    },
+    "answer": ["C"],
+    "analysis": "修订、批注以及接受或拒绝修改等功能主要位于“审阅”选项卡，适合对文档变更进行集中处理。",
+    "chapter": "Word 文档处理",
+    "knowledgePoint": "引用与审阅",
+    "difficulty": "easy",
+    "tags": ["Word", "审阅", "修订"]
+  },
+  {
+    "id": "ncre-office-excel-001",
+    "type": "single_choice",
+    "question": "在 Excel 公式中，若希望复制公式时始终引用单元格 B2，应使用哪种引用？",
+    "options": {
+      "A": "B2",
+      "B": "$B$2",
+      "C": "B$2$",
+      "D": "#B#2"
+    },
+    "answer": ["B"],
+    "analysis": "列和行前都加美元符号形成绝对引用 $B$2，复制公式时行列都不会改变。",
+    "chapter": "Excel 数据处理",
+    "knowledgePoint": "公式与函数",
+    "difficulty": "easy",
+    "tags": ["Excel", "绝对引用"]
+  },
+  {
+    "id": "ncre-office-excel-002",
+    "type": "single_choice",
+    "question": "若要统计区域 A2:A100 中大于等于 60 的成绩个数，最适合使用哪个函数？",
+    "options": {
+      "A": "COUNTIF",
+      "B": "SUM",
+      "C": "AVERAGE",
+      "D": "MAX"
+    },
+    "answer": ["A"],
+    "analysis": "COUNTIF 用于按一个条件统计满足条件的单元格数量，可使用大于等于 60 作为条件。",
+    "chapter": "Excel 数据处理",
+    "knowledgePoint": "公式与函数",
+    "difficulty": "easy",
+    "tags": ["Excel", "COUNTIF"]
+  },
+  {
+    "id": "ncre-office-excel-003",
+    "type": "single_choice",
+    "question": "Excel 的筛选操作与排序操作相比，主要区别是什么？",
+    "options": {
+      "A": "筛选会删除不符合条件的数据",
+      "B": "排序只能处理数字",
+      "C": "筛选暂时隐藏不符合条件的记录，通常不删除源数据",
+      "D": "两者完全相同"
+    },
+    "answer": ["C"],
+    "analysis": "筛选通过条件控制记录的显示，未显示的行仍保留在数据区域中；排序则改变记录的排列顺序。",
+    "chapter": "Excel 数据处理",
+    "knowledgePoint": "数据整理",
+    "difficulty": "easy",
+    "tags": ["Excel", "筛选", "排序"]
+  },
+  {
+    "id": "ncre-office-excel-004",
+    "type": "single_choice",
+    "question": "当需要按部门汇总销售额，并能快速切换行列字段时，Excel 中最适合使用什么工具？",
+    "options": {
+      "A": "数据透视表",
+      "B": "拼音排序",
+      "C": "格式刷",
+      "D": "自动更正"
+    },
+    "answer": ["A"],
+    "analysis": "数据透视表适合对明细数据进行分组、汇总和交互式分析，并可通过拖动字段快速改变分析维度。",
+    "chapter": "Excel 数据处理",
+    "knowledgePoint": "数据分析",
+    "difficulty": "medium",
+    "tags": ["Excel", "数据透视表"]
+  },
+  {
+    "id": "ncre-office-excel-005",
+    "type": "single_choice",
+    "question": "一列时间序列数据需要展示趋势，通常优先选择哪类图表？",
+    "options": {
+      "A": "折线图",
+      "B": "饼图",
+      "C": "雷达图",
+      "D": "曲面图"
+    },
+    "answer": ["A"],
+    "analysis": "折线图适合展示数据随时间或有序类别变化的趋势；饼图更适合表达组成比例。",
+    "chapter": "Excel 数据处理",
+    "knowledgePoint": "图表与打印",
+    "difficulty": "easy",
+    "tags": ["Excel", "图表"]
+  },
+  {
+    "id": "ncre-office-excel-006",
+    "type": "single_choice",
+    "question": "打印 Excel 长表格时，如果希望每页顶部重复显示标题行，应设置哪项功能？",
+    "options": {
+      "A": "冻结窗格",
+      "B": "打印标题",
+      "C": "条件格式",
+      "D": "数据验证"
+    },
+    "answer": ["B"],
+    "analysis": "“打印标题”可以指定每页重复打印的顶端标题行；冻结窗格只影响屏幕滚动时的显示。",
+    "chapter": "Excel 数据处理",
+    "knowledgePoint": "图表与打印",
+    "difficulty": "medium",
+    "tags": ["Excel", "打印标题"]
+  },
+  {
+    "id": "ncre-office-ppt-001",
+    "type": "single_choice",
+    "question": "若要统一修改整套 PowerPoint 幻灯片的字体、颜色和占位符布局，应优先编辑什么？",
+    "options": {
+      "A": "幻灯片母版",
+      "B": "备注页",
+      "C": "阅读视图",
+      "D": "动画窗格"
+    },
+    "answer": ["A"],
+    "analysis": "幻灯片母版用于集中控制版式、字体、颜色和占位符，修改后可以统一影响使用该母版的幻灯片。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgePoint": "版式与主题",
+    "difficulty": "easy",
+    "tags": ["PowerPoint", "母版"]
+  },
+  {
+    "id": "ncre-office-ppt-002",
+    "type": "single_choice",
+    "question": "PowerPoint 中“切换”效果和“动画”效果的主要区别是什么？",
+    "options": {
+      "A": "切换作用于幻灯片之间，动画作用于幻灯片内对象",
+      "B": "切换只能用于文字，动画只能用于图片",
+      "C": "切换会改变主题，动画会改变文件格式",
+      "D": "两者没有区别"
+    },
+    "answer": ["A"],
+    "analysis": "切换描述从一张幻灯片进入下一张幻灯片的效果；动画描述当前幻灯片内文本、图片或形状的出现和运动。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgePoint": "对象与动画",
+    "difficulty": "easy",
+    "tags": ["PowerPoint", "动画", "切换"]
+  },
+  {
+    "id": "ncre-office-ppt-003",
+    "type": "single_choice",
+    "question": "正式演示前要检查幻灯片播放顺序、动画和讲解节奏，最合适的操作是？",
+    "options": {
+      "A": "只查看大纲视图",
+      "B": "运行幻灯片放映并进行排练",
+      "C": "关闭所有动画",
+      "D": "把文件另存为文本"
+    },
+    "answer": ["B"],
+    "analysis": "运行放映和排练计时可以在接近实际演示的状态下检查顺序、动画、讲解节奏和时间分配。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgePoint": "演示与输出",
+    "difficulty": "easy",
+    "tags": ["PowerPoint", "放映", "排练"]
+  },
+  {
+    "id": "ncre-office-integrated-001",
+    "type": "single_choice",
+    "question": "把 Excel 数据制作成 Word 报告时，先明确字段含义和筛选条件的主要目的是什么？",
+    "options": {
+      "A": "避免把无关或错误口径的数据带入报告",
+      "B": "让 Word 自动安装 Excel",
+      "C": "把所有数据都转换成图片",
+      "D": "删除 Excel 原始数据"
+    },
+    "answer": ["A"],
+    "analysis": "综合办公任务首先要理解素材口径和任务要求，再选择数据、计算结果和呈现方式，避免报告内容与源数据含义不一致。",
+    "chapter": "Office 应用基础",
+    "knowledgePoint": "各模块之间信息共享",
+    "difficulty": "medium",
+    "tags": ["综合应用", "数据口径"]
+  },
+  {
+    "id": "ncre-office-basics-003",
+    "type": "single_choice",
+    "question": "在 Word、Excel 和 PowerPoint 中，承载“开始”“插入”等命令分类的区域通常称为什么？",
+    "options": {
+      "A": "功能区",
+      "B": "状态栏",
+      "C": "标题栏",
+      "D": "滚动条"
+    },
+    "answer": ["A"],
+    "analysis": "功能区按选项卡和组组织常用命令；标题栏显示文件或程序名称，状态栏显示当前文档状态，滚动条用于移动视图。",
+    "chapter": "Office 应用基础",
+    "knowledgePoint": "界面使用与功能设置",
+    "difficulty": "easy",
+    "tags": ["Office", "功能区", "界面"]
+  },
+  {
+    "id": "ncre-office-basics-004",
+    "type": "single_choice",
+    "question": "如果某个命令经常使用，希望不受当前选项卡影响而快速调用，最适合将它添加到哪里？",
+    "options": {
+      "A": "快速访问工具栏",
+      "B": "状态栏",
+      "C": "导航窗格",
+      "D": "标尺"
+    },
+    "answer": ["A"],
+    "analysis": "快速访问工具栏用于放置经常使用的命令，通常在不同选项卡和文档状态下都能快速访问。",
+    "chapter": "Office 应用基础",
+    "knowledgePoint": "界面使用与功能设置",
+    "difficulty": "easy",
+    "tags": ["Office", "快速访问工具栏"]
+  },
+  {
+    "id": "ncre-office-basics-005",
+    "type": "single_choice",
+    "question": "在 Office 中需要进行新建、打开、保存、打印和共享等文件级操作时，通常应先打开哪个区域？",
+    "options": {
+      "A": "文件选项卡的后台视图",
+      "B": "审阅选项卡",
+      "C": "视图选项卡",
+      "D": "状态栏菜单"
+    },
+    "answer": ["A"],
+    "analysis": "文件选项卡进入后台视图后，可以集中处理新建、打开、保存、打印、共享、导出和选项设置等文件级任务。",
+    "chapter": "Office 应用基础",
+    "knowledgePoint": "界面使用与功能设置",
+    "difficulty": "easy",
+    "tags": ["Office", "后台视图", "文件操作"]
+  },
+  {
+    "id": "ncre-office-basics-006",
+    "type": "single_choice",
+    "question": "使用 Office 模板创建新文档的主要好处是什么？",
+    "options": {
+      "A": "直接复用预设的版式、样式和结构",
+      "B": "自动把文件保存到所有用户电脑",
+      "C": "保证文档不需要任何编辑",
+      "D": "把文档转换成程序代码"
+    },
+    "answer": ["A"],
+    "analysis": "模板可以预先提供主题、版式、样式和内容结构，使用者只需替换或补充具体内容，能提高文档制作效率和一致性。",
+    "chapter": "Office 应用基础",
+    "knowledgePoint": "界面使用与功能设置",
+    "difficulty": "easy",
+    "tags": ["Office", "模板", "版式"]
+  },
+  {
+    "id": "ncre-office-basics-007",
+    "type": "single_choice",
+    "question": "在较新的 Office 版本中，最常见且适合继续编辑的 Word 文档扩展名是哪个？",
+    "options": {
+      "A": ".docx",
+      "B": ".xlsx",
+      "C": ".pptx",
+      "D": ".accdb"
+    },
+    "answer": ["A"],
+    "analysis": ".docx 是 Word 文档的常用扩展名；.xlsx 对应 Excel 工作簿，.pptx 对应 PowerPoint 演示文稿，.accdb 常用于 Access 数据库。",
+    "chapter": "Office 应用基础",
+    "knowledgePoint": "各模块之间信息共享",
+    "difficulty": "easy",
+    "tags": ["Office", "文件格式", "Word"]
+  },
+  {
+    "id": "ncre-office-basics-008",
+    "type": "single_choice",
+    "question": "打开从网络或邮件附件获得的 Office 文件时，程序可能先以“受保护的视图”打开，其主要目的是什么？",
+    "options": {
+      "A": "降低不可信文件中的恶意内容带来的风险",
+      "B": "自动把文件翻译成中文",
+      "C": "强制把文件转换成 PDF",
+      "D": "删除文件中的所有宏"
+    },
+    "answer": ["A"],
+    "analysis": "受保护的视图限制来自不可信位置的文件直接编辑或执行部分内容，用户确认来源安全后再决定是否启用编辑。",
+    "chapter": "Office 应用基础",
+    "knowledgePoint": "界面使用与功能设置",
+    "difficulty": "medium",
+    "tags": ["Office", "受保护的视图", "安全"]
+  },
+  {
+    "id": "ncre-office-basics-009",
+    "type": "single_choice",
+    "question": "准备把 Office 文件发给外部人员前，若要检查隐藏属性、批注和个人信息，最适合使用什么功能？",
+    "options": {
+      "A": "检查文档",
+      "B": "格式刷",
+      "C": "自动套用格式",
+      "D": "窗口重排"
+    },
+    "answer": ["A"],
+    "analysis": "“检查文档”可以帮助发现批注、修订、隐藏文字、文档属性和个人信息等内容，便于在共享前进行清理。",
+    "chapter": "Office 应用基础",
+    "knowledgePoint": "各模块之间信息共享",
+    "difficulty": "medium",
+    "tags": ["Office", "检查文档", "共享安全"]
+  },
+  {
+    "id": "ncre-office-basics-010",
+    "type": "single_choice",
+    "question": "Office 的自动恢复信息主要用于什么场景？",
+    "options": {
+      "A": "程序异常关闭后尝试恢复未保存的编辑内容",
+      "B": "把所有文件永久保存为多个副本",
+      "C": "自动修正所有计算公式",
+      "D": "替代用户设置的正式保存位置"
+    },
+    "answer": ["A"],
+    "analysis": "自动恢复会按设定间隔保存恢复信息，程序异常关闭后可帮助找回部分未保存内容，但不能替代用户主动保存和备份。",
+    "chapter": "Office 应用基础",
+    "knowledgePoint": "界面使用与功能设置",
+    "difficulty": "medium",
+    "tags": ["Office", "自动恢复", "保存"]
+  },
+  {
+    "id": "ncre-office-basics-011",
+    "type": "single_choice",
+    "question": "打印一份包含表格和分页内容的 Office 文档前，先使用打印预览的主要作用是什么？",
+    "options": {
+      "A": "检查分页、版式和打印范围是否符合预期",
+      "B": "自动提高打印机墨水容量",
+      "C": "把所有公式改成文本",
+      "D": "删除文档中的空白页"
+    },
+    "answer": ["A"],
+    "analysis": "打印预览能够提前查看页面排列、边距、缩放、页眉页脚和打印范围，发现问题后可以先调整再输出。",
+    "chapter": "Office 应用基础",
+    "knowledgePoint": "界面使用与功能设置",
+    "difficulty": "easy",
+    "tags": ["Office", "打印预览", "页面布局"]
+  },
+  {
+    "id": "ncre-office-basics-012",
+    "type": "single_choice",
+    "question": "要检查演示文稿或文档是否缺少图片替代文字、存在阅读顺序等无障碍问题，应优先使用什么工具？",
+    "options": {
+      "A": "检查辅助功能",
+      "B": "剪贴板",
+      "C": "格式刷",
+      "D": "缩放滑块"
+    },
+    "answer": ["A"],
+    "analysis": "检查辅助功能可以提示替代文字、颜色对比度、阅读顺序等可能影响不同用户阅读和使用的问题。",
+    "chapter": "Office 应用基础",
+    "knowledgePoint": "界面使用与功能设置",
+    "difficulty": "medium",
+    "tags": ["Office", "辅助功能", "可访问性"]
+  },
+  {
+    "id": "ncre-office-basics-013",
+    "type": "single_choice",
+    "question": "通过云端共享 Office 文件给同事时，除了指定对象，通常还需要明确什么信息？",
+    "options": {
+      "A": "对方的访问权限，例如查看或编辑",
+      "B": "电脑显示器的尺寸",
+      "C": "打印机的品牌",
+      "D": "键盘的布局语言"
+    },
+    "answer": ["A"],
+    "analysis": "共享文件不仅要确定接收者，还要遵循最小必要权限原则，明确对方只能查看还是可以编辑、评论或再次共享。",
+    "chapter": "Office 应用基础",
+    "knowledgePoint": "各模块之间信息共享",
+    "difficulty": "easy",
+    "tags": ["Office", "云端共享", "权限"]
+  },
+  {
+    "id": "ncre-office-basics-014",
+    "type": "single_choice",
+    "question": "多人要同时编辑同一个 Office 文件并看到彼此的修改，通常需要满足什么条件？",
+    "options": {
+      "A": "文件存放在支持协同的云位置且参与者拥有相应权限",
+      "B": "每个人编辑一份同名本地副本",
+      "C": "把文件扩展名改成 .txt",
+      "D": "关闭所有保存功能"
+    },
+    "answer": ["A"],
+    "analysis": "实时协同通常依赖云端或组织存储中的同一文件，并要求参与者被授予访问权限；本地同名副本不会自动合并修改。",
+    "chapter": "Office 应用基础",
+    "knowledgePoint": "各模块之间信息共享",
+    "difficulty": "medium",
+    "tags": ["Office", "协同编辑", "云端"]
+  },
+  {
+    "id": "ncre-office-basics-015",
+    "type": "single_choice",
+    "question": "将 Excel 图表插入 Word 报告时，如果希望 Word 中的对象能随源工作簿数据更新，应优先采用哪种方式？",
+    "options": {
+      "A": "以链接方式插入",
+      "B": "只粘贴为纯文本",
+      "C": "截取屏幕截图",
+      "D": "把工作簿删除后再粘贴"
+    },
+    "answer": ["A"],
+    "analysis": "链接对象会保留与源工作簿的关联，源数据变化后可以更新报告中的对象；纯文本和截图不会保持这种数据联系。",
+    "chapter": "Office 应用基础",
+    "knowledgePoint": "各模块之间信息共享",
+    "difficulty": "medium",
+    "tags": ["Office", "Excel", "Word", "链接对象"]
+  },
+  {
+    "id": "ncre-office-basics-016",
+    "type": "single_choice",
+    "question": "使用链接对象把 Excel 内容放入 Word 后，源 Excel 文件的位置发生变化，最可能出现什么情况？",
+    "options": {
+      "A": "Word 可能无法找到源文件并提示更新链接",
+      "B": "Word 会自动把源文件恢复到原位置",
+      "C": "链接对象一定变成普通文本",
+      "D": "所有 Word 页面都会被删除"
+    },
+    "answer": ["A"],
+    "analysis": "链接对象依赖源文件路径或连接信息，源文件被移动、重命名或不可访问时，更新时可能提示找不到源文件，需要重新指定位置。",
+    "chapter": "Office 应用基础",
+    "knowledgePoint": "各模块之间信息共享",
+    "difficulty": "medium",
+    "tags": ["Office", "链接对象", "文件路径"]
+  },
+  {
+    "id": "ncre-office-basics-017",
+    "type": "single_choice",
+    "question": "需要把最终版 Office 文档发送给不同设备上的人员，并尽量保持版式不变时，常见做法是导出为哪种格式？",
+    "options": {
+      "A": "PDF",
+      "B": "临时缓存文件",
+      "C": "纯文本 TXT",
+      "D": "程序源代码"
+    },
+    "answer": ["A"],
+    "analysis": "PDF 更适合固定版式的阅读和分发，可以减少因软件版本、字体或页面设置差异导致的排版变化；若还需继续编辑，则应保留源文件。",
+    "chapter": "Office 应用基础",
+    "knowledgePoint": "各模块之间信息共享",
+    "difficulty": "easy",
+    "tags": ["Office", "PDF", "导出"]
+  },
+  {
+    "id": "ncre-office-basics-018",
+    "type": "single_choice",
+    "question": "在共同审阅文档时，批注和修订的区别是什么？",
+    "options": {
+      "A": "批注用于提出意见，修订用于记录对正文内容的修改",
+      "B": "批注一定会改变正文，修订只用于播放动画",
+      "C": "两者都只能用于 Excel 公式",
+      "D": "批注和修订都是打印机设置"
+    },
+    "answer": ["A"],
+    "analysis": "批注通常用于提问、说明或提出建议；修订会记录插入、删除和格式等编辑变化，便于审阅者接受或拒绝修改。",
+    "chapter": "Office 应用基础",
+    "knowledgePoint": "各模块之间信息共享",
+    "difficulty": "easy",
+    "tags": ["Office", "批注", "修订", "协作"]
+  },
+  {
+    "id": "ncre-office-basics-019",
+    "type": "single_choice",
+    "question": "多人反复修改共享 Office 文件后，想查看并恢复到较早版本，通常应使用什么功能？",
+    "options": {
+      "A": "版本历史记录",
+      "B": "自动更正",
+      "C": "格式刷",
+      "D": "屏幕截图"
+    },
+    "answer": ["A"],
+    "analysis": "版本历史记录保存了文件在不同时间点的状态，用户可以比较较早版本并在确认后恢复，适合协作编辑中的追溯和回退。",
+    "chapter": "Office 应用基础",
+    "knowledgePoint": "各模块之间信息共享",
+    "difficulty": "medium",
+    "tags": ["Office", "版本历史", "协作"]
+  }
+]

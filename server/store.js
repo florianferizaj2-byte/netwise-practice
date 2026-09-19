@@ -18,8 +18,53 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
  CREATE TABLE IF NOT EXISTS usage (id TEXT PRIMARY KEY, data TEXT NOT NULL);
  CREATE TABLE IF NOT EXISTS daily (day TEXT PRIMARY KEY, data TEXT NOT NULL);
  CREATE TABLE IF NOT EXISTS sessions (id TEXT PRIMARY KEY, data TEXT NOT NULL);
- CREATE TABLE IF NOT EXISTS users (id TEXT PRIMARY KEY, username TEXT UNIQUE NOT NULL, password_hash TEXT NOT NULL, salt TEXT NOT NULL, certificate_id TEXT, created_at TEXT NOT NULL);
+ CREATE TABLE IF NOT EXISTS users (id TEXT PRIMARY KEY, username TEXT UNIQUE NOT NULL, password_hash TEXT NOT NULL, salt TEXT NOT NULL, certificate_id TEXT, created_at TEXT NOT NULL, is_admin INTEGER NOT NULL DEFAULT 0, banned_at TEXT, ban_reason TEXT);
  CREATE TABLE IF NOT EXISTS auth_sessions (token_hash TEXT PRIMARY KEY, user_id TEXT NOT NULL REFERENCES users(id), expires_at TEXT NOT NULL);`);
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS user_settings (
+      user_id TEXT PRIMARY KEY,
+      data TEXT NOT NULL
+    );
+    CREATE TABLE IF NOT EXISTS user_usage (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL,
+      data TEXT NOT NULL
+    );
+    CREATE TABLE IF NOT EXISTS user_daily (
+      user_id TEXT NOT NULL,
+      day TEXT NOT NULL,
+      data TEXT NOT NULL,
+      PRIMARY KEY (user_id, day)
+    );
+    CREATE TABLE IF NOT EXISTS admin_settings (
+      user_id TEXT PRIMARY KEY,
+      data TEXT NOT NULL
+    );
+    CREATE TABLE IF NOT EXISTS question_tombstones (
+      question_id TEXT PRIMARY KEY,
+      deleted_by TEXT NOT NULL,
+      reason TEXT,
+      deleted_at TEXT NOT NULL
+    );
+    CREATE TABLE IF NOT EXISTS admin_audit (
+      id TEXT PRIMARY KEY,
+      admin_user_id TEXT NOT NULL,
+      action TEXT NOT NULL,
+      target_type TEXT NOT NULL,
+      target_id TEXT,
+      data TEXT NOT NULL,
+      created_at TEXT NOT NULL
+    );
+  `);
+  for (const statement of [
+    "ALTER TABLE users ADD COLUMN is_admin INTEGER NOT NULL DEFAULT 0",
+    "ALTER TABLE users ADD COLUMN banned_at TEXT",
+    "ALTER TABLE users ADD COLUMN ban_reason TEXT",
+  ]) {
+    try {
+      db.exec(statement);
+    } catch {}
+  }
   try {
     db.exec("ALTER TABLE queue ADD COLUMN user_id TEXT");
   } catch {}
@@ -58,6 +103,106 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
   try {
     db.exec("ALTER TABLE ai_groups ADD COLUMN shared INTEGER NOT NULL DEFAULT 1");
   } catch {}
+  // An intermediate local build briefly created user_settings with a foreign
+  // key. Rebuild it without that constraint so the no-auth "local" profile
+  // remains supported as well as real authenticated user IDs.
+  if (db.prepare("PRAGMA foreign_key_list(user_settings)").all().length) {
+    db.exec(`
+      ALTER TABLE user_settings RENAME TO user_settings_with_user_fk;
+      CREATE TABLE user_settings (user_id TEXT PRIMARY KEY, data TEXT NOT NULL);
+      INSERT OR REPLACE INTO user_settings SELECT user_id, data FROM user_settings_with_user_fk;
+      DROP TABLE user_settings_with_user_fk;
+    `);
+  }
+  const existingUserIds = db
+    .prepare("SELECT id FROM users ORDER BY created_at, rowid")
+    .all();
+  // Older builds stored settings in one global row, or in the anonymous
+  // `local` profile. When accounts already exist, that profile represents the
+  // first account that configured the site. Migrate it only to that account;
+  // never leave it available as a shared fallback for later accounts.
+  const legacyOwnerId = existingUserIds[0]?.id || "local";
+  const legacySettings = db
+    .prepare("SELECT data FROM settings WHERE id=1")
+    .get();
+  if (
+    legacyOwnerId &&
+    legacySettings &&
+    !db.prepare("SELECT 1 FROM user_settings LIMIT 1").get()
+  ) {
+    db.prepare("INSERT INTO user_settings (user_id,data) VALUES (?,?)").run(
+      legacyOwnerId,
+      legacySettings.data,
+    );
+  }
+  const userSettingRows = db
+    .prepare("SELECT user_id, data FROM user_settings")
+    .all();
+  if (
+    existingUserIds.length &&
+    userSettingRows.length &&
+    userSettingRows.every((row) => row.user_id === "local")
+  ) {
+    db.prepare(
+      "INSERT OR REPLACE INTO user_settings (user_id,data) VALUES (?,?)",
+    ).run(existingUserIds[0].id, userSettingRows[0].data);
+    db.prepare("DELETE FROM user_settings WHERE user_id='local'").run();
+  }
+  const legacyUsage = db.prepare("SELECT id, data FROM usage").all();
+  if (
+    legacyOwnerId &&
+    legacyUsage.length &&
+    !db.prepare("SELECT 1 FROM user_usage LIMIT 1").get()
+  ) {
+    db.exec("BEGIN");
+    try {
+      const insertUsage = db.prepare(
+        "INSERT INTO user_usage (id,user_id,data) VALUES (?,?,?)",
+      );
+      for (const row of legacyUsage)
+        insertUsage.run(row.id, legacyOwnerId, row.data);
+      db.exec("COMMIT");
+    } catch (error) {
+      db.exec("ROLLBACK");
+      throw error;
+    }
+  }
+  const legacyDaily = db.prepare("SELECT day, data FROM daily").all();
+  if (
+    legacyOwnerId &&
+    legacyDaily.length &&
+    !db.prepare("SELECT 1 FROM user_daily LIMIT 1").get()
+  ) {
+    db.exec("BEGIN");
+    try {
+      const insertDaily = db.prepare(
+        "INSERT OR REPLACE INTO user_daily (user_id,day,data) VALUES (?,?,?)",
+      );
+      for (const row of legacyDaily)
+        insertDaily.run(legacyOwnerId, row.day, row.data);
+      db.exec("COMMIT");
+    } catch (error) {
+      db.exec("ROLLBACK");
+      throw error;
+    }
+  }
+  // The old tables were global. They are migrated above and then emptied so
+  // an accidental legacy read can never expose one account's settings.
+  db.prepare("DELETE FROM settings WHERE id=1").run();
+  db.prepare("DELETE FROM usage").run();
+  db.prepare("DELETE FROM daily").run();
+  const configuredAdmin = process.env.ADMIN_USERNAME?.trim();
+  if (configuredAdmin)
+    db.prepare("UPDATE users SET is_admin=1 WHERE username=?").run(
+      configuredAdmin,
+    );
+  if (!db.prepare("SELECT 1 FROM users WHERE is_admin=1 LIMIT 1").get()) {
+    const firstUser = db
+      .prepare("SELECT id FROM users ORDER BY created_at, rowid LIMIT 1")
+      .get();
+    if (firstUser)
+      db.prepare("UPDATE users SET is_admin=1 WHERE id=?").run(firstUser.id);
+  }
   const existingUsers = db.prepare("SELECT id FROM users").all();
   if (existingUsers.length === 1) {
     const onlyUserId = existingUsers[0].id;
@@ -136,7 +281,10 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
     db
       .prepare("INSERT INTO questions VALUES (?,?,?)")
       .run(q.id, fingerprint(q), JSON.stringify(q));
+  const isQuestionDeleted = (id) =>
+    !!db.prepare("SELECT 1 FROM question_tombstones WHERE question_id=?").get(id);
   for (const q of bundledQuestions()) {
+    if (isQuestionDeleted(q.id)) continue;
     const existing = getQ(q.id);
     if (existing) {
       if (JSON.stringify(existing) !== JSON.stringify(q))
@@ -153,16 +301,49 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
     allQ,
     allA,
     addQ,
-    settings: () => {
-      const r = db.prepare("SELECT data FROM settings WHERE id=1").get();
+    settings: (userId = "local") => {
+      const r = db
+        .prepare("SELECT data FROM user_settings WHERE user_id=?")
+        .get(userId);
       return r
         ? JSON.parse(r.data)
         : { baseUrl: "", model: "", temperature: 0.7 };
     },
-    saveSettings: (s) =>
-      db
-        .prepare("INSERT OR REPLACE INTO settings VALUES (1,?)")
-        .run(JSON.stringify(s)),
+    saveSettings(userId, settings) {
+      if (settings === undefined && userId && typeof userId === "object") {
+        settings = userId;
+        userId = "local";
+      }
+      return db
+        .prepare("INSERT OR REPLACE INTO user_settings VALUES (?,?)")
+        .run(userId || "local", JSON.stringify(settings));
+    },
+    adminSettings: (userId) => {
+      const r = db
+        .prepare("SELECT data FROM admin_settings WHERE user_id=?")
+        .get(userId);
+      return r ? JSON.parse(r.data) : { baseUrl: "", model: "", temperature: 0.3 };
+    },
+    saveAdminSettings(userId, settings) {
+      return db
+        .prepare("INSERT OR REPLACE INTO admin_settings VALUES (?,?)")
+        .run(userId, JSON.stringify(settings));
+    },
+    adminStats: () => {
+      const questions = allQ();
+      const bySource = {};
+      for (const q of questions) bySource[q.source] = (bySource[q.source] || 0) + 1;
+      return {
+        users: db.prepare("SELECT COUNT(*) AS count FROM users").get().count,
+        bannedUsers: db
+          .prepare("SELECT COUNT(*) AS count FROM users WHERE banned_at IS NOT NULL")
+          .get().count,
+        questions: questions.length,
+        adminGenerated: questions.filter((q) => q.source === "admin_generated").length,
+        aiGenerated: questions.filter((q) => q.source === "ai_generated").length,
+        bySource,
+      };
+    },
     mastery: (questionIds, userId) => {
       const allowed = questionIds ? new Set(questionIds) : null;
       const questions = visibleQuestions(userId).filter(
@@ -277,15 +458,20 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
           id,
           JSON.stringify({ ...m, analyzedAt: new Date().toISOString() }),
         ),
-    saveUsage: (u) =>
+    saveUsage: (u, userId = "local") =>
       db
-        .prepare("INSERT INTO usage VALUES (?,?)")
+        .prepare("INSERT INTO user_usage VALUES (?,?,?)")
         .run(
           crypto.randomUUID(),
+          userId || "local",
           JSON.stringify({ ...u, createdAt: new Date().toISOString() }),
         ),
-    usage: () => {
-      const rows = parse(db.prepare("SELECT data FROM usage").all()),
+    usage: (userId = "local") => {
+      const rows = parse(
+          db
+            .prepare("SELECT data FROM user_usage WHERE user_id=?")
+            .all(userId || "local"),
+        ),
         today = new Date().toLocaleDateString("en-CA", {
           timeZone: "Asia/Shanghai",
         });
@@ -311,14 +497,26 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         total: sum(rows),
       };
     },
-    getDaily: (day) => {
-      const r = db.prepare("SELECT data FROM daily WHERE day=?").get(day);
+    getDaily: (userId, day) => {
+      if (day === undefined) {
+        day = userId;
+        userId = "local";
+      }
+      const r = db
+        .prepare("SELECT data FROM user_daily WHERE user_id=? AND day=?")
+        .get(userId || "local", day);
       return r ? JSON.parse(r.data) : null;
     },
-    saveDaily: (day, data) =>
-      db
-        .prepare("INSERT OR REPLACE INTO daily VALUES (?,?)")
-        .run(day, JSON.stringify(data)),
+    saveDaily(userId, day, data) {
+      if (data === undefined) {
+        data = day;
+        day = userId;
+        userId = "local";
+      }
+      return db
+        .prepare("INSERT OR REPLACE INTO user_daily VALUES (?,?,?)")
+        .run(userId || "local", day, JSON.stringify(data));
+    },
     queue: (topic, userId, certificateId) =>
       db
         .prepare(
@@ -469,6 +667,99 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         throw e;
       }
     },
+    addAdminQuestions: (qs) => {
+      const inserted = [];
+      const skipped = [];
+      db.exec("BEGIN");
+      try {
+        for (const q of qs) {
+          const existing = db
+            .prepare("SELECT id FROM questions WHERE fingerprint=? OR id=?")
+            .get(fingerprint(q), q.id);
+          if (existing) {
+            skipped.push({ id: q.id, existingId: existing.id });
+            continue;
+          }
+          addQ(q);
+          inserted.push(q);
+        }
+        db.exec("COMMIT");
+      } catch (error) {
+        db.exec("ROLLBACK");
+        throw error;
+      }
+      return { inserted, skipped };
+    },
+    deleteQuestion: (questionId, deletedBy, reason = "") => {
+      const question = getQ(questionId);
+      if (!question) return false;
+      db.exec("BEGIN");
+      try {
+        db.prepare(
+          "INSERT OR REPLACE INTO question_tombstones (question_id,deleted_by,reason,deleted_at) VALUES (?,?,?,?)",
+        ).run(questionId, deletedBy, reason || null, new Date().toISOString());
+        for (const table of [
+          "attempts",
+          "reviews",
+          "mistakes",
+          "queue",
+          "question_feedback",
+          "user_reviews",
+          "user_mistakes",
+        ])
+          db.prepare(`DELETE FROM ${table} WHERE question_id=?`).run(questionId);
+        const sessions = db.prepare("SELECT id,data FROM sessions").all();
+        for (const session of sessions) {
+          const value = JSON.parse(session.data);
+          if (value.questionIds?.includes(questionId))
+            db.prepare("DELETE FROM sessions WHERE id=?").run(session.id);
+        }
+        db.prepare("DELETE FROM questions WHERE id=?").run(questionId);
+        db.exec("COMMIT");
+      } catch (error) {
+        db.exec("ROLLBACK");
+        throw error;
+      }
+      return true;
+    },
+    adminUsers: (search = "") => {
+      const like = `%${search.trim()}%`;
+      return db
+        .prepare(
+          "SELECT id, username, certificate_id AS certificateId, created_at AS createdAt, is_admin AS isAdmin, banned_at AS bannedAt, ban_reason AS banReason FROM users WHERE (?='' OR username LIKE ?) ORDER BY created_at, rowid",
+        )
+        .all(search.trim(), like)
+        .map((user) => ({ ...user, isAdmin: !!user.isAdmin }));
+    },
+    setUserBanned: (userId, banned, reason = "") => {
+      const result = db
+        .prepare("UPDATE users SET banned_at=?, ban_reason=? WHERE id=?")
+        .run(banned ? new Date().toISOString() : null, banned ? reason || null : null, userId);
+      if (banned)
+        db.prepare("DELETE FROM auth_sessions WHERE user_id=?").run(userId);
+      return result.changes > 0;
+    },
+    audit: (adminUserId, action, targetType, targetId, data = {}) =>
+      db
+        .prepare(
+          "INSERT INTO admin_audit (id,admin_user_id,action,target_type,target_id,data,created_at) VALUES (?,?,?,?,?,?,?)",
+        )
+        .run(
+          crypto.randomUUID(),
+          adminUserId,
+          action,
+          targetType,
+          targetId || null,
+          JSON.stringify(data),
+          new Date().toISOString(),
+        ),
+    auditRows: (limit = 50) =>
+      db
+        .prepare(
+          "SELECT a.id, a.admin_user_id AS adminUserId, u.username AS adminUsername, a.action, a.target_type AS targetType, a.target_id AS targetId, a.data, a.created_at AS createdAt FROM admin_audit a LEFT JOIN users u ON u.id=a.admin_user_id ORDER BY a.created_at DESC LIMIT ?",
+        )
+        .all(Math.max(1, Math.min(200, Number(limit) || 50)))
+        .map((row) => ({ ...row, data: JSON.parse(row.data) })),
     session: (id) => {
       const r = db.prepare("SELECT data FROM sessions WHERE id=?").get(id);
       return r ? JSON.parse(r.data) : null;
@@ -482,15 +773,31 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       const passwordHash = crypto
         .scryptSync(password, salt, 64)
         .toString("base64");
-      const user = { id: crypto.randomUUID(), username, certificateId: null };
+      const firstUser = !db.prepare("SELECT 1 FROM users LIMIT 1").get();
+      const isAdmin =
+        firstUser ||
+        (!!process.env.ADMIN_USERNAME && process.env.ADMIN_USERNAME === username);
+      const user = {
+        id: crypto.randomUUID(),
+        username,
+        certificateId: null,
+        isAdmin,
+        bannedAt: null,
+        banReason: null,
+      };
       try {
-        db.prepare("INSERT INTO users VALUES (?,?,?,?,?,?)").run(
+        db.prepare(
+          "INSERT INTO users (id,username,password_hash,salt,certificate_id,created_at,is_admin,banned_at,ban_reason) VALUES (?,?,?,?,?,?,?,?,?)",
+        ).run(
           user.id,
           username,
           passwordHash,
           salt,
           null,
           new Date().toISOString(),
+          isAdmin ? 1 : 0,
+          null,
+          null,
         );
       } catch (e) {
         if (String(e.message).includes("UNIQUE")) throw new Error("账号已存在");
@@ -498,6 +805,12 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       }
       return user;
     },
+    allUsers: () =>
+      db
+        .prepare(
+          "SELECT id, username, certificate_id AS certificateId, created_at AS createdAt, is_admin AS isAdmin, banned_at AS bannedAt, ban_reason AS banReason FROM users ORDER BY created_at, rowid",
+        )
+        .all(),
     authenticate(username, password) {
       const row = db
         .prepare("SELECT * FROM users WHERE username=?")
@@ -510,6 +823,9 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         id: row.id,
         username: row.username,
         certificateId: row.certificate_id,
+        isAdmin: !!row.is_admin,
+        bannedAt: row.banned_at,
+        banReason: row.ban_reason,
       };
     },
     createAuthSession(userId) {
@@ -536,6 +852,9 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
             id: row.id,
             username: row.username,
             certificateId: row.certificate_id,
+            isAdmin: !!row.is_admin,
+            bannedAt: row.banned_at,
+            banReason: row.ban_reason,
           }
         : null;
     },
