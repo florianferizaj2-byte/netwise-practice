@@ -1,8 +1,7 @@
 function normalize(value = "") {
   return String(value)
     .toLowerCase()
-    .replace(/[\s\u3000，。？?！!、：:；;（）()【】[\]“”‘’《》<>「」,.!?;:'"`~·…—_\-]/g, "")
-    .replace(/\d+(?:\.\d+)?/g, "#");
+    .replace(/[\s\u3000，。？?！!、：:；;（）()【】[\]“”‘’《》<>「」,.!?;:'"`~·…—_\-]/g, "");
 }
 
 function shingles(value) {
@@ -26,17 +25,27 @@ function optionText(question) {
     .join("");
 }
 
+function answerScore(left, right) {
+  const leftAnswers = new Set(left.answer || []);
+  const rightAnswers = new Set(right.answer || []);
+  const union = new Set([...leftAnswers, ...rightAnswers]);
+  if (!union.size) return 1;
+  let intersection = 0;
+  for (const answer of leftAnswers) if (rightAnswers.has(answer)) intersection++;
+  return intersection / union.size;
+}
+
 export function questionSimilarity(left, right) {
   if (!left || !right) return 0;
-  const leftStem = normalize(left.question);
-  const rightStem = normalize(right.question);
-  if (leftStem && leftStem === rightStem) return 1;
   const stemScore = jaccard(shingles(left.question), shingles(right.question));
   const optionScore = jaccard(
     shingles(optionText(left)),
     shingles(optionText(right)),
   );
-  return Math.round((stemScore * 0.78 + optionScore * 0.22) * 1000) / 1000;
+  const correctAnswerScore = answerScore(left, right);
+  return Math.round(
+    (stemScore * 0.6 + optionScore * 0.3 + correctAnswerScore * 0.1) * 1000,
+  ) / 1000;
 }
 
 function sharesCertificate(left, right) {
@@ -67,4 +76,3 @@ export function findSimilarQuestions(
     .sort((a, b) => b.score - a.score)
     .slice(0, safeLimit);
 }
-

@@ -26,7 +26,7 @@ test("11 source documents are reconciled without missing records or invented ans
   const bank = bundledQuestions().filter((q) => q.source === "user_collection");
   assert.equal(report.documents.length, 11);
   assert.equal(report.sourceCount, 550);
-  assert.equal(bank.length, 459);
+  assert.equal(bank.length, 443);
   assert.equal(
     bank.length + report.duplicates.length + report.needsReview.length,
     550,
@@ -35,6 +35,9 @@ test("11 source documents are reconciled without missing records or invented ans
   assert.equal(new Set(bank.map((q) => q.chapter)).size, 11);
   const references = [
     ...bank.flatMap((q) => q.provenance),
+    ...report.duplicates
+      .filter((duplicate) => duplicate.manual)
+      .flatMap((duplicate) => duplicate.provenance || []),
     ...report.needsReview.flatMap((r) => r.question.provenance),
   ];
   assert.equal(references.length, 550);
@@ -234,10 +237,10 @@ test("server initializes the bundled collection idempotently and preserves learn
     assert.equal(q.options.C, "192.168.10.64");
     assert.deepEqual(q.answer, ["C"]);
     assert.equal(store.recordAttempt(q.id, ["C"], 2000).correct, true);
-    assert.equal(store.allQ().length, 1086);
+    assert.equal(store.allQ().length, 1070);
     store.db.close();
     store = createStore(directory);
-    assert.equal(store.allQ().length, 1086);
+    assert.equal(store.allQ().length, 1070);
     assert.equal(store.allA().length, 1);
     assert.equal(store.getQ(q.id).provenance[0].questionNumber, 3);
   } finally {

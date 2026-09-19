@@ -1473,35 +1473,5 @@
       }
     ],
     "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
-  },
-  {
-    "id": "collection-c02-q050",
-    "question": "电话线路使用的带通滤波器带宽为3KHz（300~3300Hz），根据奈奎斯特采样定理，最小采样频率应为？",
-    "options": {
-      "A": "300Hz",
-      "B": "3300Hz",
-      "C": "6000Hz",
-      "D": "6600Hz"
-    },
-    "answer": [
-      "D"
-    ],
-    "analysis": "奈奎斯特采样定理：采样频率必须大于信号最高频率的2倍，即fs≥2fmax。电话线路最高频率为3300Hz，所以最小采样频率为2×3300=6600Hz。实际电话系统PCM采样率为8000Hz（高于奈奎斯特最低要求）。",
-    "type": "single_choice",
-    "chapter": "数据通信基础",
-    "knowledgePoint": "奈奎斯特定理",
-    "difficulty": "medium",
-    "tags": [
-      "奈奎斯特定理",
-      "软考真题汇编"
-    ],
-    "provenance": [
-      {
-        "file": "第二章 数据通信基础（含答案解析）.docx",
-        "questionNumber": 50,
-        "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
-      }
-    ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
   }
 ]

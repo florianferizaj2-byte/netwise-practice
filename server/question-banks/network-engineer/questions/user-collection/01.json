@@ -1,35 +1,5 @@
 [
   {
-    "id": "collection-c01-q001",
-    "question": "OSI参考模型中，负责端到端可靠数据传输的层次是？",
-    "options": {
-      "A": "网络层",
-      "B": "传输层",
-      "C": "数据链路层",
-      "D": "会话层"
-    },
-    "answer": [
-      "B"
-    ],
-    "analysis": "传输层（如TCP）通过确认、重传、流量控制等机制实现端到端可靠性。网络层提供尽力而为的不可靠传输；数据链路层负责相邻节点间帧传输。",
-    "type": "single_choice",
-    "chapter": "网络体系结构",
-    "knowledgePoint": "OSI 与 TCP/IP 模型",
-    "difficulty": "medium",
-    "tags": [
-      "OSI 与 TCP/IP 模型",
-      "软考真题汇编"
-    ],
-    "provenance": [
-      {
-        "file": "第一章 网络体系结构（含答案解析）.docx",
-        "questionNumber": 1,
-        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
-      }
-    ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
-  },
-  {
     "id": "collection-c01-q002",
     "question": "TCP/IP体系结构中，网际层的主要功能是？",
     "options": {
@@ -174,66 +144,6 @@
       {
         "file": "第一章 网络体系结构（含答案解析）.docx",
         "questionNumber": 6,
-        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
-      }
-    ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
-  },
-  {
-    "id": "collection-c01-q007",
-    "question": "TCP三次握手过程中，服务器发送的SYN+ACK报文包含的标志位是？",
-    "options": {
-      "A": "SYN=1, ACK=0",
-      "B": "SYN=1, ACK=1",
-      "C": "SYN=0, ACK=1",
-      "D": "SYN=0, ACK=0"
-    },
-    "answer": [
-      "B"
-    ],
-    "analysis": "三次握手：客户端SYN=1；服务器SYN=1,ACK=1；客户端ACK=1。第二次握手同时设置SYN和ACK。",
-    "type": "single_choice",
-    "chapter": "网络体系结构",
-    "knowledgePoint": "TCP 连接",
-    "difficulty": "medium",
-    "tags": [
-      "TCP 连接",
-      "软考真题汇编"
-    ],
-    "provenance": [
-      {
-        "file": "第一章 网络体系结构（含答案解析）.docx",
-        "questionNumber": 7,
-        "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
-      }
-    ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
-  },
-  {
-    "id": "collection-c01-q008",
-    "question": "TCP协议中，用于流量控制的机制是？",
-    "options": {
-      "A": "拥塞窗口",
-      "B": "滑动窗口",
-      "C": "超时重传",
-      "D": "慢启动"
-    },
-    "answer": [
-      "B"
-    ],
-    "analysis": "流量控制使用滑动窗口机制，接收端通过通告窗口大小告知发送方可接收的数据量。拥塞窗口用于拥塞控制。",
-    "type": "single_choice",
-    "chapter": "网络体系结构",
-    "knowledgePoint": "TCP",
-    "difficulty": "medium",
-    "tags": [
-      "TCP",
-      "软考真题汇编"
-    ],
-    "provenance": [
-      {
-        "file": "第一章 网络体系结构（含答案解析）.docx",
-        "questionNumber": 8,
         "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
       }
     ],

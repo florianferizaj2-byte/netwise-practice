@@ -180,36 +180,6 @@
     "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
   },
   {
-    "id": "collection-c04-q007",
-    "question": "TCP拥塞控制中，慢启动阶段拥塞窗口的变化规律是？",
-    "options": {
-      "A": "线性增长",
-      "B": "指数增长",
-      "C": "保持不变",
-      "D": "先指数后线性"
-    },
-    "answer": [
-      "B"
-    ],
-    "analysis": "慢启动阶段，拥塞窗口从1个MSS开始，每收到一个ACK增加1个MSS，每经过一个RTT窗口翻倍，呈指数增长。达到慢启动阈值后进入拥塞避免阶段（线性增长）。",
-    "type": "single_choice",
-    "chapter": "传输层协议",
-    "knowledgePoint": "TCP",
-    "difficulty": "medium",
-    "tags": [
-      "TCP",
-      "软考真题汇编"
-    ],
-    "provenance": [
-      {
-        "file": "第四章 传输层协议（含答案解析）.docx",
-        "questionNumber": 7,
-        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
-      }
-    ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
-  },
-  {
     "id": "collection-c04-q008",
     "question": "TCP拥塞控制中，拥塞避免阶段拥塞窗口的变化规律是？",
     "options": {
@@ -234,36 +204,6 @@
       {
         "file": "第四章 传输层协议（含答案解析）.docx",
         "questionNumber": 8,
-        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
-      }
-    ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
-  },
-  {
-    "id": "collection-c04-q009",
-    "question": "TCP协议中，URG标志位的作用是？",
-    "options": {
-      "A": "表示确认号有效",
-      "B": "表示紧急指针有效，数据需优先处理",
-      "C": "表示复位连接",
-      "D": "表示同步序列号"
-    },
-    "answer": [
-      "B"
-    ],
-    "analysis": "URG=1表示紧急指针字段有效，指出本报文段中有紧急数据，接收方应优先处理。紧急指针指出紧急数据在数据字段中的末尾位置。ACK表示确认号有效，RST复位连接，SYN同步序列号。",
-    "type": "single_choice",
-    "chapter": "传输层协议",
-    "knowledgePoint": "TCP",
-    "difficulty": "medium",
-    "tags": [
-      "TCP",
-      "软考真题汇编"
-    ],
-    "provenance": [
-      {
-        "file": "第四章 传输层协议（含答案解析）.docx",
-        "questionNumber": 9,
         "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
       }
     ],
@@ -414,36 +354,6 @@
       {
         "file": "第四章 传输层协议（含答案解析）.docx",
         "questionNumber": 14,
-        "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
-      }
-    ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
-  },
-  {
-    "id": "collection-c04-q015",
-    "question": "TCP快速重传（Fast Retransmit）的触发条件是？",
-    "options": {
-      "A": "收到1个重复ACK",
-      "B": "收到3个重复ACK",
-      "C": "超时",
-      "D": "收到5个重复ACK"
-    },
-    "answer": [
-      "B"
-    ],
-    "analysis": "快速重传：发送方收到3个重复的ACK（duplicate ACK）时，不等超时计时器到期，直接重传丢失的报文段。这可以大大减少重传延迟。快速恢复（Fast Recovery）与快速重传配合使用。",
-    "type": "single_choice",
-    "chapter": "传输层协议",
-    "knowledgePoint": "TCP",
-    "difficulty": "medium",
-    "tags": [
-      "TCP",
-      "软考真题汇编"
-    ],
-    "provenance": [
-      {
-        "file": "第四章 传输层协议（含答案解析）.docx",
-        "questionNumber": 15,
         "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
       }
     ],

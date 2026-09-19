@@ -56,6 +56,8 @@ import {
   Users,
   Ban,
   ScanSearch,
+  List,
+  Search,
 } from "lucide-react";
 import "./style.css";
 
@@ -2758,6 +2760,15 @@ function AdminView({
   const [threshold, setThreshold] = useState("0.78");
   const [generated, setGenerated] = useState([]);
   const [audit, setAudit] = useState([]);
+  const [adminQuestions, setAdminQuestions] = useState([]);
+  const [adminQuestionTotal, setAdminQuestionTotal] = useState(0);
+  const [questionPage, setQuestionPage] = useState(0);
+  const [questionChapter, setQuestionChapter] = useState("");
+  const [questionKnowledgePoint, setQuestionKnowledgePoint] = useState("");
+  const [questionSource, setQuestionSource] = useState("");
+  const [questionSearchInput, setQuestionSearchInput] = useState("");
+  const [questionSearch, setQuestionSearch] = useState("");
+  const [questionLoading, setQuestionLoading] = useState(false);
   const [certificateId, setCertificateId] = useState(
     currentCertificateId || certificates[0]?.id || "",
   );
@@ -2770,6 +2781,26 @@ function AdminView({
   const loadUsers = async (search = userSearch) =>
     setUsers((await api(`/admin/users?search=${encodeURIComponent(search)}`)).users);
   const loadAudit = async () => setAudit((await api("/admin/audit?limit=30")).entries);
+  const loadQuestions = async (page = questionPage) => {
+    setQuestionLoading(true);
+    try {
+      const params = new URLSearchParams({
+        certificateId,
+        limit: "50",
+        offset: String(page * 50),
+      });
+      if (questionChapter) params.set("chapter", questionChapter);
+      if (questionKnowledgePoint)
+        params.set("knowledgePoint", questionKnowledgePoint);
+      if (questionSource) params.set("source", questionSource);
+      if (questionSearch) params.set("search", questionSearch);
+      const result = await api(`/admin/questions?${params.toString()}`);
+      setAdminQuestions(result.questions);
+      setAdminQuestionTotal(result.total);
+    } finally {
+      setQuestionLoading(false);
+    }
+  };
   const load = async () => {
     const [nextOverview, nextTaxonomy, nextSettings, nextUsers, nextAudit] =
       await Promise.all([
@@ -2789,6 +2820,19 @@ function AdminView({
     load().catch(() => {});
   }, []);
   useEffect(() => {
+    if (tab !== "questions" || !taxonomy) return;
+    loadQuestions(questionPage).catch(() => {});
+  }, [
+    tab,
+    taxonomy,
+    certificateId,
+    questionPage,
+    questionChapter,
+    questionKnowledgePoint,
+    questionSource,
+    questionSearch,
+  ]);
+  useEffect(() => {
     const item = taxonomy?.certificates.find((entry) => entry.id === certificateId);
     const nextChapter = item?.chapters.find((entry) => entry.name === chapter) || item?.chapters[0];
     if (nextChapter && nextChapter.name !== chapter) setChapter(nextChapter.name);
@@ -2807,6 +2851,9 @@ function AdminView({
     setCertificateId(value);
     setChapter("");
     setKnowledgePoint("");
+    setQuestionChapter("");
+    setQuestionKnowledgePoint("");
+    setQuestionPage(0);
   };
   const saveSettings = () =>
     run("正在保存管理员 AI 配置", async () => {
@@ -2863,7 +2910,7 @@ function AdminView({
       );
       setTab("quality");
     });
-  const removeQuestion = (question) => {
+  const removeQuestion = (question, afterDelete = scan) => {
     if (!window.confirm(`确定删除这道题吗？\n\n${question.question}`)) return;
     run("正在删除题目", async () => {
       await api(
@@ -2872,7 +2919,7 @@ function AdminView({
         "DELETE",
       );
       notify("题目已删除，并已记录管理员操作");
-      await scan();
+      await afterDelete?.();
       await loadOverview();
       await loadAudit();
     });
@@ -2909,6 +2956,10 @@ function AdminView({
         ["管理员扩充题", overview.stats.adminGenerated, Sparkles],
       ]
     : [];
+  const selectedQuestionChapter = selectedCertificate?.chapters.find(
+    (item) => item.name === questionChapter,
+  );
+  const questionTotalPages = Math.max(1, Math.ceil(adminQuestionTotal / 50));
   return (
     <>
       <Heading title="管理员面板" subtitle="控制 AI 题库、内容质量和用户安全">
@@ -2920,6 +2971,7 @@ function AdminView({
         {[
           ["overview", "总览"],
           ["generate", "扩充题库"],
+          ["questions", "题目列表"],
           ["quality", "重合检测"],
           ["users", "用户管理"],
           ["api", "管理员 API"],
@@ -2963,6 +3015,9 @@ function AdminView({
                 </button>
                 <button onClick={scan}>
                   <ScanSearch size={16} /> 扫描高重合题
+                </button>
+                <button onClick={() => setTab("questions")}>
+                  <List size={16} /> 查看题目列表
                 </button>
                 <button onClick={() => setTab("users")}>
                   <Users size={16} /> 管理用户
@@ -3117,6 +3172,174 @@ function AdminView({
           </section>
         </div>
       )}
+      {tab === "questions" && (
+        <section className="admin-card">
+          <div className="section-heading">
+            <div>
+              <h2>
+                <List size={20} /> 题目列表
+              </h2>
+              <p>按证书、章节、知识点、来源或关键词查看题目，并可直接处理单题。</p>
+            </div>
+            <span className="badge green">共 {adminQuestionTotal.toLocaleString()} 道</span>
+          </div>
+          <form
+            className="admin-question-toolbar"
+            onSubmit={(event) => {
+              event.preventDefault();
+              setQuestionPage(0);
+              setQuestionSearch(questionSearchInput.trim());
+            }}
+          >
+            <label>
+              证书
+              <select
+                value={certificateId}
+                onChange={(event) => changeCertificate(event.target.value)}
+              >
+                {(taxonomy?.certificates || certificates).map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.shortName || item.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              章节
+              <select
+                value={questionChapter}
+                onChange={(event) => {
+                  setQuestionChapter(event.target.value);
+                  setQuestionKnowledgePoint("");
+                  setQuestionPage(0);
+                }}
+              >
+                <option value="">全部章节</option>
+                {(selectedCertificate?.chapters || []).map((item) => (
+                  <option key={item.name} value={item.name}>
+                    {item.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              知识点
+              <select
+                value={questionKnowledgePoint}
+                onChange={(event) => {
+                  setQuestionKnowledgePoint(event.target.value);
+                  setQuestionPage(0);
+                }}
+              >
+                <option value="">全部知识点</option>
+                {(selectedQuestionChapter?.knowledgePoints || []).map((item) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              来源
+              <select
+                value={questionSource}
+                onChange={(event) => {
+                  setQuestionSource(event.target.value);
+                  setQuestionPage(0);
+                }}
+              >
+                <option value="">全部来源</option>
+                {Object.entries(sources).map(([id, label]) => (
+                  <option key={id} value={id}>
+                    {label}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="admin-question-search">
+              关键词
+              <div>
+                <input
+                  value={questionSearchInput}
+                  onChange={(event) => setQuestionSearchInput(event.target.value)}
+                  placeholder="搜索题干或选项"
+                />
+                <button type="submit" className="primary" disabled={questionLoading}>
+                  <Search size={16} /> 搜索
+                </button>
+              </div>
+            </label>
+          </form>
+          {questionLoading ? (
+            <div className="admin-list-loading">
+              <LoaderCircle className="spin" size={22} /> 正在读取题目列表…
+            </div>
+          ) : adminQuestions.length ? (
+            <div className="admin-question-list">
+              {adminQuestions.map((question, rowIndex) => (
+                <article className="admin-list-question" key={question.id}>
+                  <div className="admin-list-question-head">
+                    <div className="question-meta">
+                      <span className="badge green">#{questionPage * 50 + rowIndex + 1}</span>
+                      <span>{sourceName(question)}</span>
+                      <span>{question.chapter}</span>
+                      <span>{question.targetKnowledgePoint || question.knowledgePoint}</span>
+                    </div>
+                    <button
+                      className="danger-button"
+                      onClick={() =>
+                        removeQuestion(question, () => loadQuestions(questionPage))
+                      }
+                    >
+                      <Trash2 size={15} /> 删除
+                    </button>
+                  </div>
+                  <strong>{question.question}</strong>
+                  <small className="admin-question-id">{question.id}</small>
+                  <details>
+                    <summary>查看选项、答案与解析</summary>
+                    <div className="admin-question-details">
+                      <div className="admin-option-list">
+                        {Object.entries(question.options || {}).map(([key, value]) => (
+                          <span key={key}>
+                            <b>{key}</b> {value}
+                          </span>
+                        ))}
+                      </div>
+                      <p>
+                        <b>答案：{question.answer?.join("、")}</b>
+                        <br />
+                        {question.analysis}
+                      </p>
+                    </div>
+                  </details>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <Empty icon={List} title="没有匹配的题目">
+              <p>调整筛选条件或关键词后再试。</p>
+            </Empty>
+          )}
+          <div className="admin-pagination">
+            <button
+              disabled={questionLoading || questionPage === 0}
+              onClick={() => setQuestionPage((page) => Math.max(0, page - 1))}
+            >
+              <ArrowLeft size={16} /> 上一页
+            </button>
+            <span>
+              第 {Math.min(questionPage + 1, questionTotalPages)} / {questionTotalPages} 页 · 每页 50 题
+            </span>
+            <button
+              disabled={questionLoading || questionPage >= questionTotalPages - 1}
+              onClick={() => setQuestionPage((page) => Math.min(questionTotalPages - 1, page + 1))}
+            >
+              下一页 <ArrowRight size={16} />
+            </button>
+          </div>
+        </section>
+      )}
       {tab === "quality" && (
         <section className="admin-card">
           <div className="section-heading">
@@ -3246,25 +3469,47 @@ function AdminView({
 }
 function Practice({ session, refresh, run, busy, train, configured, exit }) {
   const [index, setIndex] = useState(0),
-    [selected, setSelected] = useState([]),
-    [result, setResult] = useState(null),
-    [teacher, setTeacher] = useState(""),
-    [hint, setHint] = useState(0),
-    [history, setHistory] = useState([]),
+    [responses, setResponses] = useState({}),
     [done, setDone] = useState(false),
-    [teacherOpen, setTeacherOpen] = useState(false),
-    [feedbackKind, setFeedbackKind] = useState(null);
+    [teacherOpen, setTeacherOpen] = useState(false);
   const started = useRef(Date.now());
   const q = session.questions[index];
+  const current = responses[q.id] || {};
+  const selected = current.selected || [];
+  const result = current.result || null;
+  const teacher = current.teacher || "";
+  const hint = current.hint || 0;
+  const feedbackKind = current.feedbackKind || null;
+  const history = session.questions
+    .map((question) => responses[question.id])
+    .filter((response) => response?.submitted)
+    .map((response) => response.result);
+  const answeredIds = new Set(history.map((item) => item.questionId));
+  const revealedIds = new Set(
+    session.questions
+      .filter((question) => responses[question.id]?.revealed)
+      .map((question) => question.id),
+  );
+  const updateCurrent = (patch) =>
+    setResponses((old) => ({
+      ...old,
+      [q.id]: { ...old[q.id], ...patch },
+    }));
   const choose = (k) => {
     if (result) return;
-    setSelected(
-      isSingleSelect(q)
+    updateCurrent({
+      selected: isSingleSelect(q)
         ? [k]
         : selected.includes(k)
           ? selected.filter((x) => x !== k)
           : [...selected, k],
-    );
+    });
+  };
+  const jumpTo = (nextIndex) => {
+    if (busy || nextIndex < 0 || nextIndex >= session.questions.length) return;
+    setIndex(nextIndex);
+    setTeacherOpen(false);
+    started.current = Date.now();
   };
   const submit = () =>
     run("正在记录作答", async () => {
@@ -3273,21 +3518,20 @@ function Practice({ session, refresh, run, busy, train, configured, exit }) {
         selected,
         timeMs: Math.min(86400000, Date.now() - started.current),
       });
-      setResult(r);
-      setHistory([...history, r]);
+      updateCurrent({ result: r, submitted: true, revealed: false });
       await refresh();
     });
   const analyzeMistake = () =>
     run("正在分析错误原因", async () => {
       const m = await api("/ai/analyze", { questionId: q.id });
-      setTeacher(`${m.weakKnowledge}\n\n${m.reason}`);
+      updateCurrent({ teacher: `${m.weakKnowledge}\n\n${m.reason}` });
       setTeacherOpen(true);
       await refresh();
     });
   const sendFeedback = (kind) =>
     run("正在保存题目反馈", async () => {
       await api(`/questions/${q.id}/feedback`, { kind });
-      setFeedbackKind(kind);
+      updateCurrent({ feedbackKind: kind });
     });
   const next = () => {
     if (busy) return;
@@ -3295,13 +3539,7 @@ function Practice({ session, refresh, run, busy, train, configured, exit }) {
       setDone(true);
       return;
     }
-    setIndex(index + 1);
-    setSelected([]);
-    setResult(null);
-    setTeacher("");
-    setHint(0);
-    setFeedbackKind(null);
-    started.current = Date.now();
+    jumpTo(index + 1);
   };
   const ask = (action, level = 0) =>
     run("AI 老师正在思考", async () => {
@@ -3311,8 +3549,7 @@ function Practice({ session, refresh, run, busy, train, configured, exit }) {
         selected,
         hintLevel: level,
       });
-      setTeacher(r.text);
-      if (level) setHint(level);
+      updateCurrent({ teacher: r.text, ...(level ? { hint: level } : {}) });
       setTeacherOpen(true);
     });
   if (done)
@@ -3365,6 +3602,21 @@ function Practice({ session, refresh, run, busy, train, configured, exit }) {
             >
               {sourceName(q)}
             </span>
+            <label className="question-jump">
+              跳转
+              <select
+                aria-label="选择题号"
+                value={index}
+                disabled={!!busy}
+                onChange={(event) => jumpTo(Number(event.target.value))}
+              >
+                {session.questions.map((_, questionIndex) => (
+                  <option key={questionIndex} value={questionIndex}>
+                    第 {questionIndex + 1} 题
+                  </option>
+                ))}
+              </select>
+            </label>
           </div>
           <div className="progress">
             <i
@@ -3372,6 +3624,38 @@ function Practice({ session, refresh, run, busy, train, configured, exit }) {
                 width: ((index + 1) / session.questions.length) * 100 + "%",
               }}
             />
+          </div>
+          <div className="practice-question-nav">
+            <div className="practice-question-nav-head">
+              <strong>题目导航</strong>
+              <small>可直接选择题号，已作答题目会保留状态</small>
+            </div>
+            <div className="question-number-grid">
+              {session.questions.map((question, questionIndex) => {
+                const isAnswered = answeredIds.has(question.id);
+                const isRevealed = revealedIds.has(question.id);
+                return (
+                  <button
+                    key={question.id}
+                    className={[
+                      questionIndex === index ? "current" : "",
+                      isAnswered ? "answered" : "",
+                      isRevealed ? "revealed" : "",
+                    ]
+                      .filter(Boolean)
+                      .join(" ")}
+                    aria-label={`第 ${questionIndex + 1} 题`}
+                    aria-current={
+                      questionIndex === index ? "step" : undefined
+                    }
+                    disabled={!!busy}
+                    onClick={() => jumpTo(questionIndex)}
+                  >
+                    {questionIndex + 1}
+                  </button>
+                );
+              })}
+            </div>
           </div>
           <div className="question-meta">
             <span className="badge">{questionTypeName(q)}</span>
@@ -3470,9 +3754,14 @@ function Practice({ session, refresh, run, busy, train, configured, exit }) {
               className="text-button"
               disabled={!!busy || !!result}
               onClick={() =>
-                run("正在查看答案", async () =>
-                  setResult(await api(`/questions/${q.id}/reveal`, {})),
-                )
+                run("正在查看答案", async () => {
+                  const revealed = await api(`/questions/${q.id}/reveal`, {});
+                  updateCurrent({
+                    result: revealed,
+                    submitted: false,
+                    revealed: true,
+                  });
+                })
               }
             >
               查看答案

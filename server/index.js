@@ -322,10 +322,11 @@ export async function createApp(options = {}) {
         source: z.string().trim().optional(),
         search: z.string().trim().max(200).optional(),
         limit: z.coerce.number().int().min(1).max(500).default(200),
+        offset: z.coerce.number().int().min(0).default(0),
       })
       .parse(query);
     const search = parsed.search?.toLowerCase();
-    const questions = store
+    const filtered = store
       .allQ()
       .filter(
         (question) =>
@@ -341,9 +342,12 @@ export async function createApp(options = {}) {
               .join(" ")
               .toLowerCase()
               .includes(search)),
-      )
-      .slice(0, parsed.limit);
-    return { ...parsed, questions };
+      );
+    return {
+      ...parsed,
+      total: filtered.length,
+      questions: filtered.slice(parsed.offset, parsed.offset + parsed.limit),
+    };
   };
   route("get", "/api/admin/options", (req) => {
     requireAdmin(req);
@@ -475,7 +479,7 @@ export async function createApp(options = {}) {
   route("get", "/api/admin/questions", (req) => {
     requireAdmin(req);
     const { questions, ...filters } = adminQuestionFilters(req.query);
-    return { filters, questions: questions.map(adminQuestion) };
+    return { ...filters, questions: questions.map(adminQuestion) };
   });
   route("delete", "/api/admin/questions/:id", (req) => {
     requireAdmin(req);

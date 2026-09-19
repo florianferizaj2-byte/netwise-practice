@@ -1008,6 +1008,19 @@ test("管理员面板隔离管理员 API，支持扩题、重合检测、删题�
   assert.ok(!JSON.stringify(await request(admin.cookie, "/admin/settings")).includes("admin-only-key"));
   const taxonomy = await request(admin.cookie, "/admin/options");
   assert.equal(taxonomy.status, 200);
+  const adminQuestions = await request(
+    admin.cookie,
+    "/admin/questions?certificateId=network-engineer&limit=2&offset=0",
+  );
+  assert.equal(adminQuestions.status, 200);
+  assert.equal(adminQuestions.data.questions.length, 2);
+  assert.ok(adminQuestions.data.total >= 2);
+  assert.ok(adminQuestions.data.questions[0].answer);
+  const memberQuestions = await request(
+    member.cookie,
+    "/admin/questions?certificateId=network-engineer&limit=1",
+  );
+  assert.equal(memberQuestions.status, 403);
   const targetChapter = taxonomy.data.certificates
     .find((item) => item.id === seed.certificates[0])
     .chapters.find((item) => item.name === seed.chapter);

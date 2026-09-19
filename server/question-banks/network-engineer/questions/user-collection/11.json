@@ -315,36 +315,6 @@
     "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
   },
   {
-    "id": "collection-c11-q015",
-    "question": "在Linux中，用于查看系统日志的命令是？",
-    "options": {
-      "A": "tail /var/log/messages",
-      "B": "cd /var/log",
-      "C": "mkdir /var/log",
-      "D": "rm /var/log"
-    },
-    "answer": [
-      "A"
-    ],
-    "analysis": "tail -f /var/log/messages（或/var/log/syslog，取决于发行版）实时查看系统日志。systemd系统使用journalctl命令查看日志。cd切换目录，mkdir创建目录，rm删除文件（这些不是查看日志的命令）。",
-    "type": "single_choice",
-    "chapter": "网络操作系统与服务器配置",
-    "knowledgePoint": "日志管理",
-    "difficulty": "medium",
-    "tags": [
-      "日志管理",
-      "软考真题汇编"
-    ],
-    "provenance": [
-      {
-        "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
-        "questionNumber": 15,
-        "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
-      }
-    ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
-  },
-  {
     "id": "collection-c11-q017",
     "question": "在Linux中，用于配置网络接口IP地址的命令是？",
     "options": {

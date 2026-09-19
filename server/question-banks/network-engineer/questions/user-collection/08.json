@@ -1035,36 +1035,6 @@
     "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
   },
   {
-    "id": "collection-c08-q036",
-    "question": "下列攻击中，属于应用层攻击的是？",
-    "options": {
-      "A": "IP欺骗",
-      "B": "SYN泛洪",
-      "C": "SQL注入",
-      "D": "ARP欺骗"
-    },
-    "answer": [
-      "C"
-    ],
-    "analysis": "SQL注入是应用层攻击，攻击者通过在输入中插入恶意SQL代码，绕过应用程序验证，非法访问/操作数据库。IP欺骗是网络层攻击（伪造源IP地址），ARP欺骗是数据链路层攻击（伪造IP-MAC映射），SYN泛洪是传输层攻击（DDoS的一种，耗尽TCP连接表）。其他应用层攻击：XSS跨站脚本、CSRF跨站请求伪造、文件上传漏洞、命令注入、目录遍历等。",
-    "type": "single_choice",
-    "chapter": "网络安全",
-    "knowledgePoint": "网络攻击与防护",
-    "difficulty": "medium",
-    "tags": [
-      "网络攻击与防护",
-      "软考真题汇编"
-    ],
-    "provenance": [
-      {
-        "file": "第八章 网络安全（含答案解析）.docx",
-        "questionNumber": 36,
-        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
-      }
-    ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
-  },
-  {
     "id": "collection-c08-q037",
     "question": "下列关于入侵防御系统（IPS）的说法，错误的是？",
     "options": {
@@ -1299,36 +1269,6 @@
       {
         "file": "第八章 网络安全（含答案解析）.docx",
         "questionNumber": 46,
-        "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
-      }
-    ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
-  },
-  {
-    "id": "collection-c08-q047",
-    "question": "下列关于信息传输安全的主要措施，不包括？",
-    "options": {
-      "A": "链路加密",
-      "B": "节点加密",
-      "C": "端到端加密",
-      "D": "磁盘阵列RAID"
-    },
-    "answer": [
-      "D"
-    ],
-    "analysis": "信息传输安全的主要加密措施：1）链路加密（Link Encryption）：在通信链路两端加密，数据在每条链路上都是密文，但在中间节点解密再加密（节点处明文）；2）节点加密（Node Encryption）：与链路加密类似，但在节点处也保持密文（使用安全模块）；3）端到端加密（End-to-End Encryption）：数据在源端加密，在目的端解密，中间节点不解密（全程密文），安全性最高。RAID（磁盘阵列）是存储安全技术（数据冗余），不属于传输安全措施。",
-    "type": "single_choice",
-    "chapter": "网络安全",
-    "knowledgePoint": "网络安全",
-    "difficulty": "medium",
-    "tags": [
-      "网络安全",
-      "软考真题汇编"
-    ],
-    "provenance": [
-      {
-        "file": "第八章 网络安全（含答案解析）.docx",
-        "questionNumber": 47,
         "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
       }
     ],

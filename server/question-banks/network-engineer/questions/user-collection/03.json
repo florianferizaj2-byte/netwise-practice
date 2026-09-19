@@ -430,36 +430,6 @@
     "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
   },
   {
-    "id": "collection-c03-q015",
-    "question": "下列关于NAT的描述，正确的是？",
-    "options": {
-      "A": "NAT可以将私有IP转换为公有IP",
-      "B": "NAT只能用于IPv4",
-      "C": "NAT会增加网络安全性",
-      "D": "A和C"
-    },
-    "answer": [
-      "D"
-    ],
-    "analysis": "NAT主要功能是地址转换（私有→公有），隐藏内部网络结构，增加安全性。NAT64可用于IPv6到IPv4的转换，所以NAT不仅限于IPv4。",
-    "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "NAT",
-    "difficulty": "medium",
-    "tags": [
-      "NAT",
-      "软考真题汇编"
-    ],
-    "provenance": [
-      {
-        "file": "第三章 网络层协议（含答案解析）.docx",
-        "questionNumber": 15,
-        "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
-      }
-    ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
-  },
-  {
     "id": "collection-c03-q016",
     "question": "子网掩码255.255.255.224可以划分多少个子网（按C类地址）？",
     "options": {
@@ -1339,36 +1309,6 @@
       {
         "file": "第三章 网络层协议（含答案解析）.docx",
         "questionNumber": 46,
-        "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
-      }
-    ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
-  },
-  {
-    "id": "collection-c03-q049",
-    "question": "下列关于IPv6任播地址的描述，正确的是？",
-    "options": {
-      "A": "任播地址从单播地址空间中分配",
-      "B": "任播地址与组播地址相同",
-      "C": "任播地址只能用于IPv4",
-      "D": "任播地址表示一组接口中的所有接口"
-    },
-    "answer": [
-      "A"
-    ],
-    "analysis": "IPv6任播地址（Anycast）从单播地址空间中分配，格式与单播地址相同，分配给多个接口（通常在不同节点上）。发送到任播地址的数据包会被路由到最近的（根据路由协议度量）一个接口。任播用于DNS根服务器、CDN等场景。任播与组播不同：组播发送到所有组成员，任播只发送到最近的一个成员。",
-    "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "IPv6",
-    "difficulty": "medium",
-    "tags": [
-      "IPv6",
-      "软考真题汇编"
-    ],
-    "provenance": [
-      {
-        "file": "第三章 网络层协议（含答案解析）.docx",
-        "questionNumber": 49,
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],

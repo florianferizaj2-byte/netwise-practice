@@ -380,41 +380,6 @@
     "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
   },
   {
-    "id": "collection-c09-q013",
-    "question": "在Windows中，清除DNS缓存的命令是？",
-    "options": {
-      "A": "ipconfig /flushdns",
-      "B": "ipconfig /displaydns",
-      "C": "ipconfig /registerdns",
-      "D": "ipconfig /renew"
-    },
-    "answer": [
-      "A"
-    ],
-    "analysis": "ipconfig /flushdns清除DNS解析器缓存。/displaydns显示缓存内容，/registerdns刷新所有DHCP租约并注册DNS名称，/renew更新DHCP租约（指定适配器），/release释放DHCP租约。",
-    "type": "single_choice",
-    "chapter": "网络管理",
-    "knowledgePoint": "DNS",
-    "difficulty": "medium",
-    "tags": [
-      "DNS",
-      "软考真题汇编"
-    ],
-    "provenance": [
-      {
-        "file": "第九章 网络管理（含答案解析）.docx",
-        "questionNumber": 13,
-        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
-      },
-      {
-        "file": "第九章 网络管理（含答案解析）.docx",
-        "questionNumber": 36,
-        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
-      }
-    ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
-  },
-  {
     "id": "collection-c09-q014",
     "question": "在Linux中，ping命令的-c参数的作用是？",
     "options": {
@@ -969,36 +934,6 @@
       {
         "file": "第九章 网络管理（含答案解析）.docx",
         "questionNumber": 42,
-        "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
-      }
-    ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
-  },
-  {
-    "id": "collection-c09-q043",
-    "question": "下列关于网络管理功能（FCAPS）的说法，错误的是？",
-    "options": {
-      "A": "故障管理：检测、定位和恢复网络故障",
-      "B": "配置管理：监控和管理网络设备配置",
-      "C": "性能管理：监控网络性能指标",
-      "D": "安全管理：负责网络设备的物理安全"
-    },
-    "answer": [
-      "D"
-    ],
-    "analysis": "OSI网络管理五大功能（FCAPS）：1）故障管理（Fault Management）：检测、定位、恢复网络故障（告警、诊断、修复）；2）配置管理（Configuration Management）：管理设备配置（发现、配置、变更、备份）；3）性能管理（Performance Management）：监控网络性能指标（带宽利用率、延迟、丢包率、吞吐量、响应时间），进行性能分析和优化；4）计费管理（Accounting Management）：记录用户资源使用情况，进行计费和配额管理；5）安全管理（Security Management）：网络安全管理（访问控制、身份认证、加密、安全审计、入侵检测），不是物理安全（物理安全属于机房/设施管理范畴）。",
-    "type": "single_choice",
-    "chapter": "网络管理",
-    "knowledgePoint": "网络管理",
-    "difficulty": "medium",
-    "tags": [
-      "网络管理",
-      "软考真题汇编"
-    ],
-    "provenance": [
-      {
-        "file": "第九章 网络管理（含答案解析）.docx",
-        "questionNumber": 43,
         "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
       }
     ],

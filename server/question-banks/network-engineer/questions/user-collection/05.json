@@ -1110,36 +1110,6 @@
     "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
   },
   {
-    "id": "collection-c05-q038",
-    "question": "RIP协议中，最大跳数是多少？超过该跳数表示网络不可达？",
-    "options": {
-      "A": "15",
-      "B": "16",
-      "C": "32",
-      "D": "255"
-    },
-    "answer": [
-      "A"
-    ],
-    "analysis": "RIP（路由信息协议）是距离矢量路由协议，度量值为跳数（Hop Count），最大有效跳数为15，跳数16表示网络不可达（无穷大）。这限制了RIP只能用于小型网络（直径不超过15跳）。RIPv1使用广播更新（255.255.255.255），不支持VLSM；RIPv2使用组播更新（224.0.0.9），支持VLSM和认证。",
-    "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "RIP",
-    "difficulty": "medium",
-    "tags": [
-      "RIP",
-      "软考真题汇编"
-    ],
-    "provenance": [
-      {
-        "file": "第五章 路由协议（含答案解析）.docx",
-        "questionNumber": 38,
-        "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
-      }
-    ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
-  },
-  {
     "id": "collection-c05-q039",
     "question": "BGP协议使用的传输层协议和端口号是？",
     "options": {

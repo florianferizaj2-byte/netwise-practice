@@ -1,7 +1,7 @@
 {
   "sourceCount": 550,
-  "publishedCount": 459,
-  "duplicateCount": 90,
+  "publishedCount": 443,
+  "duplicateCount": 106,
   "reviewCount": 1,
   "documents": [
     {
@@ -1162,6 +1162,219 @@
           "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
         }
       ]
+    },
+    {
+      "id": "collection-c01-q001",
+      "retainedId": "practice-1",
+      "analysis": "与内置 OSI 可靠传输题重复，仅保留内置版本",
+      "provenance": [
+        {
+          "file": "第一章 网络体系结构（含答案解析）.docx",
+          "questionNumber": 1,
+          "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+        }
+      ],
+      "manual": true
+    },
+    {
+      "id": "collection-c01-q007",
+      "retainedId": "collection-c04-q003",
+      "analysis": "与 TCP 三次握手第二次握手题重复，仅保留传输层版本",
+      "provenance": [
+        {
+          "file": "第一章 网络体系结构（含答案解析）.docx",
+          "questionNumber": 7,
+          "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+        }
+      ],
+      "manual": true
+    },
+    {
+      "id": "collection-c01-q008",
+      "retainedId": "collection-c04-q006",
+      "analysis": "与 TCP 流量控制题重复，仅保留传输层版本",
+      "provenance": [
+        {
+          "file": "第一章 网络体系结构（含答案解析）.docx",
+          "questionNumber": 8,
+          "sha256": "9beeed9d55c7f031ef9be051479ce5d507a771f01872930a339f0ed7037211af"
+        }
+      ],
+      "manual": true
+    },
+    {
+      "id": "collection-c02-q050",
+      "retainedId": "collection-c02-q004",
+      "analysis": "与奈奎斯特采样频率题重复，仅保留一题",
+      "provenance": [
+        {
+          "file": "第二章 数据通信基础（含答案解析）.docx",
+          "questionNumber": 50,
+          "sha256": "1ce6e14e0465bf4b9767a381490f77045de746f347cfd794ec3b2bcb893dd30f"
+        }
+      ],
+      "manual": true
+    },
+    {
+      "id": "collection-c03-q015",
+      "retainedId": "collection-c03-q046",
+      "analysis": "与 NAT 描述题重复，仅保留措辞更完整版本",
+      "provenance": [
+        {
+          "file": "第三章 网络层协议（含答案解析）.docx",
+          "questionNumber": 15,
+          "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
+        }
+      ],
+      "manual": true
+    },
+    {
+      "id": "collection-c03-q049",
+      "retainedId": "collection-c03-q027",
+      "analysis": "与 IPv6 任播题重复，仅保留一题",
+      "provenance": [
+        {
+          "file": "第三章 网络层协议（含答案解析）.docx",
+          "questionNumber": 49,
+          "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
+        }
+      ],
+      "manual": true
+    },
+    {
+      "id": "collection-c04-q007",
+      "retainedId": "collection-c04-q039",
+      "analysis": "与 TCP 慢启动题重复，仅保留解析更完整版本",
+      "provenance": [
+        {
+          "file": "第四章 传输层协议（含答案解析）.docx",
+          "questionNumber": 7,
+          "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+        }
+      ],
+      "manual": true
+    },
+    {
+      "id": "collection-c04-q009",
+      "retainedId": "collection-c04-q042",
+      "analysis": "与 TCP URG 标志位题重复，仅保留措辞更完整版本",
+      "provenance": [
+        {
+          "file": "第四章 传输层协议（含答案解析）.docx",
+          "questionNumber": 9,
+          "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+        }
+      ],
+      "manual": true
+    },
+    {
+      "id": "collection-c04-q015",
+      "retainedId": "collection-c04-q046",
+      "analysis": "与 TCP 快速重传题重复，仅保留解析更完整版本",
+      "provenance": [
+        {
+          "file": "第四章 传输层协议（含答案解析）.docx",
+          "questionNumber": 15,
+          "sha256": "29355e253658611e2cab62793198edc7c348f5c8ae71aeffbc364bdf43b3b1c8"
+        }
+      ],
+      "manual": true
+    },
+    {
+      "id": "collection-c05-q038",
+      "retainedId": "collection-c05-q002",
+      "analysis": "与 RIP 最大跳数题重复，仅保留一题",
+      "provenance": [
+        {
+          "file": "第五章 路由协议（含答案解析）.docx",
+          "questionNumber": 38,
+          "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
+        }
+      ],
+      "manual": true
+    },
+    {
+      "id": "collection-c06-q038",
+      "retainedId": "collection-c02-q029",
+      "analysis": "与曼彻斯特编码题重复，仅保留数据通信章节版本",
+      "provenance": [
+        {
+          "file": "第六章 局域网与交换技术（含答案解析）.docx",
+          "questionNumber": 38,
+          "sha256": "bbb5b721b27874b4e912a2f955220413512674688eb7cd355cc914b8459e6c48"
+        }
+      ],
+      "manual": true
+    },
+    {
+      "id": "collection-c08-q036",
+      "retainedId": "collection-c08-q025",
+      "analysis": "与应用层攻击题重复，仅保留一题",
+      "provenance": [
+        {
+          "file": "第八章 网络安全（含答案解析）.docx",
+          "questionNumber": 36,
+          "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+        }
+      ],
+      "manual": true
+    },
+    {
+      "id": "collection-c08-q047",
+      "retainedId": "collection-c08-q006",
+      "analysis": "与信息传输安全措施题重复，仅保留一题",
+      "provenance": [
+        {
+          "file": "第八章 网络安全（含答案解析）.docx",
+          "questionNumber": 47,
+          "sha256": "db2d2cd467635ebc537f9ea925f750d35ce12d420724aa1cd362d6686eefffd1"
+        }
+      ],
+      "manual": true
+    },
+    {
+      "id": "collection-c09-q013",
+      "retainedId": "collection-c03-q032",
+      "analysis": "与 Windows 清理 DNS 缓存题重复，仅保留一题",
+      "provenance": [
+        {
+          "file": "第九章 网络管理（含答案解析）.docx",
+          "questionNumber": 13,
+          "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+        },
+        {
+          "file": "第九章 网络管理（含答案解析）.docx",
+          "questionNumber": 36,
+          "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+        }
+      ],
+      "manual": true
+    },
+    {
+      "id": "collection-c09-q043",
+      "retainedId": "collection-c09-q010",
+      "analysis": "与 FCAPS 网络管理题重复，仅保留一题",
+      "provenance": [
+        {
+          "file": "第九章 网络管理（含答案解析）.docx",
+          "questionNumber": 43,
+          "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
+        }
+      ],
+      "manual": true
+    },
+    {
+      "id": "collection-c11-q015",
+      "retainedId": "collection-c09-q048",
+      "analysis": "与 Linux 系统日志查看题重复，仅保留网络管理章节版本",
+      "provenance": [
+        {
+          "file": "第十一章 网络操作系统与服务器配置（含答案解析）.docx",
+          "questionNumber": 15,
+          "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
+        }
+      ],
+      "manual": true
     }
   ],
   "needsReview": [
