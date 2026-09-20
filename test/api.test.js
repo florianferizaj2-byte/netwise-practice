@@ -1121,6 +1121,12 @@ test("管理员面板隔离管理员 API，支持扩题、重合检测、删题�
   assert.equal(admin.data.user.isAdmin, true);
   assert.equal(member.data.user.isAdmin, false);
   assert.equal((await request(member.cookie, "/admin/overview")).status, 403);
+  const overviewStarted = performance.now();
+  const overviewResponse = await request(admin.cookie, "/admin/overview");
+  const overviewMs = performance.now() - overviewStarted;
+  assert.equal(overviewResponse.status, 200);
+  assert.ok(overviewMs < 3000, `Overview blocked for ${overviewMs}ms`);
+  console.log(`Admin overview with ${store.allQ().length} questions: ${Math.round(overviewMs)}ms`);
   const seed = store.allQ().find((question) => question.certificates?.includes("network-engineer"));
   assert.ok(seed);
   const configuration = {
@@ -1157,6 +1163,11 @@ test("管理员面板隔离管理员 API，支持扩题、重合检测、删题�
   const feedbackRow = feedback.data.feedback.find((row) => row.questionId === seed.id);
   assert.ok(feedbackRow);
   assert.equal(feedbackRow.note, "测试反馈：请管理员复核答案。");
+  const emptyPage = await request(admin.cookie, "/admin/feedback?certificateId=network-engineer&limit=1&offset=1");
+  assert.equal(emptyPage.data.total, 1);
+  assert.equal(emptyPage.data.feedback.length, 0);
+  const otherCertificate = await request(admin.cookie, "/admin/feedback?certificateId=veterinary-practitioner");
+  assert.equal(otherCertificate.data.total, 0);
   const edited = await request(
     admin.cookie,
     `/admin/questions/${seed.id}`,

@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import crypto from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { z } from "zod";
@@ -177,6 +178,259 @@ function validateManifest(manifest, directory) {
   }
 }
 
+const sharedQuestionMarker =
+  /共享题干题\s*(?:【题干】)?|【题干】|[（(]共用题干[）)]/g;
+
+function cleanSharedStem(value) {
+  return String(value || "")
+    .replace(/\s+/g, " ")
+    .replace(/([\u4e00-\u9fff])\s+(?=[\u4e00-\u9fff])/g, "$1")
+    .replace(/^[\s:：,，。；;、-]+|[\s:：,，。；;、-]+$/g, "")
+    .trim();
+}
+
+function analysisSharedStem(analysis) {
+  const text = String(analysis || "");
+  let match;
+  let last = null;
+  for (const candidate of text.matchAll(sharedQuestionMarker)) last = candidate;
+  if (!last) return null;
+  const stem = cleanSharedStem(text.slice(last.index + last[0].length));
+  // A marker without material is common in imperfect recall-question
+  // extraction. It is not safe to bind every following question to it.
+  return stem.length >= 16 ? stem : null;
+}
+
+function questionSharedMarker(question) {
+  const match = String(question || "").match(
+    /^\s*题共用(题干|备选答案)\)\s*/,
+  );
+  if (!match) return null;
+  return {
+    kind: match[1] === "题干" ? "stem" : "options",
+    text: String(question).slice(match[0].length).trim(),
+  };
+}
+
+function likelySharedChild(stem, question, order, sourceGap) {
+  const text = String(question || "");
+  if (/^\s*(?:某|一头|一只|一群|一牛|一猪|一犬|一猫|一马|一羊|一鸡|一鸭|北京犬|贵宾犬|泰迪犬|奶牛|肉鸡|病牛|病猪)/.test(text))
+    return false;
+  const stemChunks = cleanSharedStem(stem).match(/[\u4e00-\u9fff]{2,}/g) || [];
+  const overlaps = stemChunks.some((chunk) => {
+    const chars = [...chunk];
+    for (let length = Math.min(8, chars.length); length >= 3; length -= 1)
+      for (let start = 0; start + length <= chars.length; start += 1)
+        if (text.includes(chars.slice(start, start + length).join(""))) return true;
+    return false;
+  });
+  if (overlaps) return true;
+  if (sourceGap > 1 && order >= 3) return false;
+  return /本病|该病|此病|上述|以上|该群|此群|该动物|该病例|此病例|该寄生虫|根据题干|根据病状|首选|确诊|诊断|防控|治疗|病原|病因|传播途径|传播媒介|易感|临床表现/.test(text);
+}
+
+function sharedStreamKey(question, fallback) {
+  const provenance = question.provenance?.[0];
+  return [
+    provenance?.file || question.sourceLabel || "unknown-source",
+    provenance?.sha256 || "",
+    question.source || fallback,
+  ].join("\u001f");
+}
+
+function stableSharedId(kind, stream, anchor) {
+  const digest = crypto
+    .createHash("sha1")
+    .update(`${kind}\u001f${stream}\u001f${anchor}`)
+    .digest("hex")
+    .slice(0, 16);
+  return `vet-shared-${kind}-${digest}`;
+}
+
+function commonTextPrefix(values) {
+  if (!values.length) return "";
+  let prefix = values[0];
+  for (const value of values.slice(1)) {
+    let end = 0;
+    while (end < prefix.length && end < value.length && prefix[end] === value[end])
+      end += 1;
+    prefix = prefix.slice(0, end);
+    if (!prefix) break;
+  }
+  return cleanSharedStem(prefix);
+}
+
+function setSharedFields(question, fields) {
+  if (question.sharedGroupId) return;
+  Object.assign(question, fields);
+}
+
+const veterinaryPdfImages = {
+  "vet-2026-recall-preventive-00032": {
+    src: "/vet-images/dicrocoelium-egg.jpg",
+    alt: "歧腔吸虫虫卵显微图",
+    caption: "原题 PDF 配图：粪便检查所见虫卵",
+  },
+  "vet-2026-recall-preventive-00036": {
+    src: "/vet-images/trypanosome.jpg",
+    alt: "伊氏锥虫血液涂片图",
+    caption: "原题 PDF 配图：末梢血液涂片所见虫体",
+  },
+  "vet-2026-recall-preventive-00038": {
+    src: "/vet-images/dipylidium-egg.jpg",
+    alt: "犬复孔绦虫虫卵显微图",
+    caption: "原题 PDF 配图：犬粪便镜检所见虫卵",
+  },
+};
+
+function decorateDirectSharedGroups(rows, stream) {
+  let active = null;
+  const finish = () => {
+    if (!active || active.rows.length < 2) return;
+    const stem = active.kind === "stem"
+      ? commonTextPrefix(active.rows.map((row) => row.marker.text))
+      : "";
+    active.rows.forEach((row, index) => {
+      setSharedFields(row.question, {
+        sharedGroupId: active.id,
+        sharedKind: active.kind,
+        ...(stem ? { sharedStem: stem } : {}),
+        sharedOrder: index + 1,
+      });
+    });
+  };
+
+  rows.forEach((row) => {
+    const marker = questionSharedMarker(row.question.question);
+    if (!marker) {
+      finish();
+      active = null;
+      return;
+    }
+    const signature = JSON.stringify(row.question.options || {});
+    const compatible =
+      active &&
+      active.lastIndex === row.index - 1 &&
+      active.kind === marker.kind &&
+      (marker.kind === "options"
+        ? active.signature === signature
+        : commonTextPrefix([
+            ...active.rows.map((item) => item.marker.text),
+            marker.text,
+          ]).length >= 16);
+    if (!compatible) {
+      finish();
+      active = {
+        id: stableSharedId(marker.kind, stream, row.anchor),
+        kind: marker.kind,
+        signature,
+        rows: [],
+        lastIndex: row.index,
+        anchor: row.anchor,
+      };
+    }
+    active.rows.push({ ...row, marker });
+    active.lastIndex = row.index;
+  });
+  finish();
+}
+
+function decorateAnalysisSharedGroups(rows, stream) {
+  let pending = null;
+  rows.forEach((row) => {
+    if (pending) {
+      const sourceGap = row.anchor - pending.lastAnchor;
+      if (
+        pending.order <= 8 &&
+        likelySharedChild(
+          pending.stem,
+          row.question.question,
+          pending.order,
+          sourceGap,
+        )
+      ) {
+        setSharedFields(row.question, {
+          sharedGroupId: pending.id,
+          sharedKind: "stem",
+          sharedStem: pending.stem,
+          sharedOrder: pending.order,
+        });
+        pending.order += 1;
+        pending.lastAnchor = row.anchor;
+      } else {
+        pending = null;
+      }
+    }
+    const stem = analysisSharedStem(row.question.analysis);
+    if (stem) {
+      pending = {
+        id: stableSharedId("stem", stream, row.anchor),
+        stem,
+        order: 1,
+        lastAnchor: row.anchor,
+      };
+    }
+  });
+}
+
+function decorateVeterinarySharedGroups(questions) {
+  const rowsByStream = new Map();
+  questions.forEach((question, index) => {
+    if (!question.certificates?.includes("veterinary-practitioner")) return;
+    const provenance = question.provenance?.[0];
+    const stream = sharedStreamKey(question, index);
+    const sourceIndex = Number.isInteger(provenance?.sourceIndex)
+      ? provenance.sourceIndex
+      : Number.isInteger(provenance?.questionNumber)
+        ? provenance.questionNumber
+        : index;
+    if (!rowsByStream.has(stream)) rowsByStream.set(stream, []);
+    rowsByStream.get(stream).push({
+      question,
+      index,
+      anchor: sourceIndex,
+    });
+  });
+
+  for (const [stream, rows] of rowsByStream) {
+    rows.sort((a, b) => a.anchor - b.anchor || a.index - b.index);
+    decorateDirectSharedGroups(rows, stream);
+    decorateAnalysisSharedGroups(rows, stream);
+  }
+
+  const groups = new Map();
+  for (const question of questions) {
+    if (!question.sharedGroupId) continue;
+    if (!groups.has(question.sharedGroupId)) groups.set(question.sharedGroupId, []);
+    groups.get(question.sharedGroupId).push(question);
+  }
+  // PDF chapter labels occasionally change in the middle of a case block.
+  // Keep the whole case in one syllabus module so an exam cannot split it.
+  for (const group of groups.values()) {
+    if (group.length < 2) continue;
+    const counts = new Map();
+    for (const question of group)
+      counts.set(question.chapter, (counts.get(question.chapter) || 0) + 1);
+    const targetChapter = [...counts.entries()].sort((a, b) => b[1] - a[1])[0]?.[0];
+    if (targetChapter) {
+      for (const question of group) question.chapter = targetChapter;
+    }
+  }
+
+  for (const [questionId, image] of Object.entries(veterinaryPdfImages)) {
+    const question = questions.find((item) => item.id === questionId);
+    if (!question) continue;
+    const group = question.sharedGroupId
+      ? groups.get(question.sharedGroupId) || [question]
+      : [question];
+    for (const item of group) {
+      const images = Array.isArray(item.images) ? item.images : [];
+      if (!images.some((entry) => entry?.src === image.src))
+        item.images = [...images, image];
+    }
+  }
+}
+
 function loadCatalog() {
   const manifests = fs
     .readdirSync(root, { withFileTypes: true })
@@ -254,6 +508,7 @@ function loadCatalog() {
       }
     }
   }
+  decorateVeterinarySharedGroups([...questions.values()]);
   return {
     manifests,
     certificates: manifests.map((entry) => ({

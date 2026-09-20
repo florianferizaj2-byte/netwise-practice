@@ -612,6 +612,23 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
           "SELECT f.user_id AS userId, u.username, f.kind, f.note, f.created_at AS createdAt FROM question_feedback f LEFT JOIN users u ON u.id=f.user_id WHERE f.question_id=? AND f.kind<>? ORDER BY f.created_at DESC",
         )
         .all(questionId, "helpful"),
+    questionFeedbackPage: ({ certificateId = "", limit = 50, offset = 0 }) => {
+      const from = `FROM question_feedback f
+        JOIN questions q ON q.id=f.question_id
+        WHERE f.kind<>'helpful' AND (?='' OR EXISTS (
+          SELECT 1 FROM json_each(q.data, '$.certificates') WHERE value=?
+        ))`;
+      const total = db.prepare(`SELECT COUNT(*) AS count ${from}`)
+        .get(certificateId, certificateId).count;
+      const feedback = db.prepare(`SELECT f.user_id AS userId,
+        (SELECT username FROM users WHERE id=f.user_id) AS username,
+        f.question_id AS questionId, f.kind, f.note, f.created_at AS createdAt,
+        q.data AS questionData ${from}
+        ORDER BY f.created_at DESC, f.user_id, f.question_id LIMIT ? OFFSET ?`)
+        .all(certificateId, certificateId, limit, offset)
+        .map(({ questionData, ...row }) => ({ ...row, question: JSON.parse(questionData) }));
+      return { total, feedback };
+    },
     questionFeedbackRows: () =>
       db
         .prepare(

@@ -173,6 +173,33 @@ test("manifest catalog discovers the certificate tracks and keeps sources explic
     ),
   );
   assert.ok(new Set(veterinaryQuestions.map((q) => q.knowledgePoint)).size > 12);
+  const mediaIds = [
+    "vet-2009-2022-past-exams-00069",
+    "vet-2009-2022-past-exams-00164",
+    "vet-2009-2022-past-exams-00686",
+    "vet-2009-2022-past-exams-00699",
+    "vet-2009-2022-past-exams-00811",
+    "vet-2009-2022-past-exams-00812",
+    "vet-2009-2022-past-exams-00813",
+    "vet-2009-2022-past-exams-00814",
+    "vet-2009-2022-past-exams-00815",
+    "vet-2009-2022-past-exams-00816",
+    "vet-2009-2022-past-exams-00862",
+    "vet-2009-2022-past-exams-00863",
+    "vet-2009-2022-past-exams-00864",
+    "vet-2024-past-exam-00095",
+    "vet-2025-preventive-00046",
+  ];
+  const mediaQuestions = mediaIds.map((id) => veterinaryQuestions.find((q) => q.id === id));
+  assert.ok(mediaQuestions.every((q) => q?.images?.length));
+  assert.deepEqual(
+    mediaQuestions.slice(4, 7).map((q) => q.sharedOrder),
+    [1, 2, 3],
+  );
+  assert.deepEqual(
+    mediaQuestions.slice(10, 13).map((q) => q.sharedOrder),
+    [1, 2, 3],
+  );
 });
 
 test("certificate guides retain verified dates, exam facts, and official HTTPS sources", () => {
@@ -282,6 +309,18 @@ test("执兽模拟考试固定四科各抽100题并按总分240分及格", () =>
     );
   assert.equal(syllabus.examBlueprint.passingScore, 240);
   assert.equal(syllabus.examBlueprint.questionsPerModule, 100);
+  const selectedGroups = new Map();
+  for (const [index, question] of sample.entries()) {
+    if (!question.sharedGroupId) continue;
+    if (!selectedGroups.has(question.sharedGroupId)) selectedGroups.set(question.sharedGroupId, []);
+    selectedGroups.get(question.sharedGroupId).push(index);
+  }
+  for (const [groupId, indexes] of selectedGroups) {
+    const allIndexes = questions
+      .map((question, index) => (question.sharedGroupId === groupId ? index : -1))
+      .filter((index) => index >= 0);
+    assert.equal(indexes.length, allIndexes.length, `共享题组 ${groupId} 被拆分`);
+  }
 });
 
 test("server initializes the bundled collection idempotently and preserves learning records", () => {

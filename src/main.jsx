@@ -71,7 +71,11 @@ async function api(url, body, method) {
     ...(body ? { body: JSON.stringify(body) } : {}),
   });
   const data = await res.json();
-  if (!res.ok) throw new Error(data.error || "请求失败");
+  if (!res.ok) {
+    const error = new Error(data.error || "请求失败");
+    error.status = res.status;
+    throw error;
+  }
   return data;
 }
 async function streamApi(url, body, onEvent) {
@@ -90,7 +94,9 @@ async function streamApi(url, body, onEvent) {
     } catch {
       data = null;
     }
-    throw new Error(data?.error || "请求失败");
+    const error = new Error(data?.error || "请求失败");
+    error.status = res.status;
+    throw error;
   }
   if (!res.body) throw new Error("浏览器不支持 AI 流式响应");
   const reader = res.body.getReader();
@@ -148,6 +154,156 @@ const questionTypeName = (question, compact = false) => {
   if (question.type === "true_false") return "判断题";
   if (question.type === "multiple_choice") return compact ? "多选" : "多选题";
   return compact ? "单选" : "单选题";
+};
+const veterinaryModules = ["基础科目", "预防科目", "临床科目", "综合科目"];
+const questionImages = (question) => {
+  const images = Array.isArray(question?.images) ? question.images : [];
+  const legacy = question?.image
+    ? Array.isArray(question.image)
+      ? question.image
+      : [question.image]
+    : [];
+  return [...images, ...legacy]
+    .map((image) =>
+      typeof image === "string" ? { src: image } : image,
+    )
+    .filter((image) => image?.src);
+};
+function QuestionImage({ image, index }) {
+  const [failed, setFailed] = useState(false);
+  if (failed)
+    return (
+      <div className="question-image-missing" role="status">
+        <TriangleAlert size={18} />
+        <span>第 {index + 1} 张题图暂时无法加载</span>
+      </div>
+    );
+  return (
+    <figure className="question-image-card">
+      <img
+        src={image.src}
+        alt={image.alt || `题目配图 ${index + 1}`}
+        loading="lazy"
+        onError={() => setFailed(true)}
+      />
+      {image.caption && <figcaption>{image.caption}</figcaption>}
+    </figure>
+  );
+}
+function QuestionImages({ question }) {
+  const images = questionImages(question);
+  if (!images.length) return null;
+  return (
+    <div className="question-images" aria-label="题目图片">
+      {images.map((image, index) => (
+        <QuestionImage key={`${image.src}-${index}`} image={image} index={index} />
+      ))}
+    </div>
+  );
+}
+const sharedMarker = (question) => {
+  const match = String(question?.question || "").match(
+    /^\s*题共用(题干|备选答案)\)\s*/,
+  );
+  if (!match && !question?.sharedGroupId) return null;
+  const inferredKind = match?.[1] === "题干"
+    ? "stem"
+    : match?.[1] === "备选答案"
+      ? "options"
+      : question?.sharedStem
+        ? "stem"
+        : "options";
+  return {
+    kind: question?.sharedKind || inferredKind,
+    label: match?.[1] || (question?.sharedKind === "stem" || question?.sharedStem ? "题干" : "备选答案"),
+    text: match ? String(question.question).slice(match[0].length).trim() : String(question.question || ""),
+  };
+};
+const optionSignature = (question) => JSON.stringify(question?.options || {});
+const commonPrefix = (values) => {
+  if (!values.length) return "";
+  let prefix = values[0];
+  for (const value of values.slice(1)) {
+    let end = 0;
+    while (end < prefix.length && end < value.length && prefix[end] === value[end]) end += 1;
+    prefix = prefix.slice(0, end);
+    if (!prefix) break;
+  }
+  return prefix.replace(/[\s,，。；;：:、]+$/g, "").trim();
+};
+function buildVeterinaryGroups(questions) {
+  const groups = [];
+  const explicitGroups = new Map();
+  questions.forEach((question, index) => {
+    const marker = sharedMarker(question);
+    if (question.sharedGroupId) {
+      let group = explicitGroups.get(question.sharedGroupId);
+      if (!group) {
+        group = {
+          id: `explicit:${question.sharedGroupId}`,
+          key: `explicit:${question.sharedGroupId}`,
+          kind: question.sharedKind || marker?.kind || "stem",
+          questions: [],
+          indexes: [],
+          stem: question.sharedStem || "",
+        };
+        explicitGroups.set(question.sharedGroupId, group);
+        groups.push(group);
+      }
+      group.questions.push(question);
+      group.indexes.push(index);
+      group.kind ||= question.sharedKind || marker?.kind || "stem";
+      if (!group.stem && question.sharedStem) group.stem = question.sharedStem;
+      return;
+    }
+    const kind = marker?.kind || null;
+    const candidate = marker ? `${kind}:${optionSignature(question)}` : null;
+    const previous = groups[groups.length - 1];
+    const canJoinInferred =
+      Boolean(candidate && previous && previous.key === candidate) &&
+      (kind === "options" ||
+        commonPrefix([
+          ...previous.questions.map(
+            (item) => sharedMarker(item)?.text || item.question,
+          ),
+          marker?.text || question.question,
+        ]).length >= 16);
+    if (!canJoinInferred) {
+      groups.push({
+        id: candidate || `single:${question.id}`,
+        key: candidate,
+        kind,
+        questions: [question],
+        indexes: [index],
+        stem: question.sharedStem || "",
+      });
+      return;
+    }
+    previous.questions.push(question);
+    previous.indexes.push(index);
+    previous.kind ||= kind;
+    if (!previous.stem && question.sharedStem) previous.stem = question.sharedStem;
+  });
+  return groups.map((group) => {
+    const markedTexts = group.questions
+      .map((question) => sharedMarker(question)?.text || question.question)
+      .filter(Boolean);
+    const inferredStem = group.kind === "stem" ? commonPrefix(markedTexts) : "";
+    return {
+      ...group,
+      shared: Boolean(
+        group.kind || group.questions.some((question) => question.sharedGroupId),
+      ),
+      stem: (group.stem || inferredStem).trim(),
+    };
+  }).sort((a, b) => Math.min(...a.indexes) - Math.min(...b.indexes));
+}
+const questionTextForGroup = (question, group) => {
+  const marker = sharedMarker(question);
+  let text = marker?.text || question.question;
+  if (group?.kind === "stem" && group.stem && text.startsWith(group.stem))
+    text = text.slice(group.stem.length).trim();
+  return text.replace(/^[-—:：，,。\s]+/, "").trim();
 };
 const navs = [
   ["home", "学习总览", LayoutDashboard],
@@ -208,19 +364,29 @@ function QuestionReport({ question, busy, run }) {
   const [kind, setKind] = useState("wrong_answer");
   const [note, setNote] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [reportError, setReportError] = useState("");
+  const [sending, setSending] = useState(false);
   useEffect(() => {
     setOpen(false);
     setKind("wrong_answer");
     setNote("");
     setSubmitted(false);
+    setReportError("");
   }, [question.id]);
   const submit = async () => {
+    if (sending || busy) return;
+    setSending(true);
+    setReportError("");
     const saved = await run("正在提交题目举报", () =>
-      api(`/questions/${question.id}/feedback`, {
+      api(`/questions/${encodeURIComponent(question.id)}/feedback`, {
         kind,
         ...(note.trim() ? { note: note.trim() } : {}),
+      }).catch((error) => {
+        setReportError(error.status === 401 ? "登录已失效，请重新登录后提交举报。" : error.message);
+        throw error;
       }),
     );
+    setSending(false);
     if (saved) {
       setSubmitted(true);
       setOpen(false);
@@ -254,6 +420,7 @@ function QuestionReport({ question, busy, run }) {
               <IconButton
                 icon={X}
                 label="关闭举报窗口"
+                disabled={sending}
                 onClick={() => setOpen(false)}
               />
             </div>
@@ -281,14 +448,15 @@ function QuestionReport({ question, busy, run }) {
               />
               <small>{note.length} / 500</small>
             </label>
+            {reportError && <div className="alert error" role="alert">{reportError}</div>}
             <div className="question-report-actions">
-              <button type="button" onClick={() => setOpen(false)}>
+              <button type="button" disabled={sending} onClick={() => setOpen(false)}>
                 取消
               </button>
               <button
                 type="button"
                 className="primary"
-                disabled={!!busy}
+                disabled={!!busy || sending}
                 onClick={submit}
               >
                 <Flag size={16} /> 提交举报
@@ -314,6 +482,14 @@ function AdminQuestionEditor({ question, busy, run, onClose, onSaved }) {
     knowledgePoint: question.targetKnowledgePoint || question.knowledgePoint || "",
     difficulty: question.difficulty || "medium",
     tags: (question.tags || ["管理员修订"]).join("、"),
+    images: (question.images || [])
+      .map((image) => image.src)
+      .filter(Boolean)
+      .join("\n"),
+    sharedGroupId: question.sharedGroupId || "",
+    sharedKind: question.sharedKind || "stem",
+    sharedStem: question.sharedStem || "",
+    sharedOrder: question.sharedOrder || "",
   }));
   const update = (field, value) => setDraft((old) => ({ ...old, [field]: value }));
   const optionKeys =
@@ -342,6 +518,11 @@ function AdminQuestionEditor({ question, busy, run, onClose, onSaved }) {
       .split(/[,，、;；/\n]+/)
       .map((value) => value.trim())
       .filter(Boolean);
+    const images = draft.images
+      .split(/\n+/)
+      .map((src) => src.trim())
+      .filter(Boolean)
+      .map((src) => ({ src, alt: "执兽题目配图" }));
     const result = await run("正在保存题目修改", () =>
       api(
         `/admin/questions/${encodeURIComponent(question.id)}`,
@@ -357,6 +538,13 @@ function AdminQuestionEditor({ question, busy, run, onClose, onSaved }) {
           knowledgePoint: draft.knowledgePoint.trim(),
           difficulty: draft.difficulty,
           ...(tags.length ? { tags } : {}),
+          images,
+          ...(draft.sharedGroupId.trim()
+            ? { sharedGroupId: draft.sharedGroupId.trim() }
+            : {}),
+          ...(draft.sharedGroupId.trim()
+            ? { sharedKind: draft.sharedKind, ...(draft.sharedStem.trim() ? { sharedStem: draft.sharedStem.trim() } : {}), ...(draft.sharedOrder ? { sharedOrder: Number(draft.sharedOrder) } : {}) }
+            : {}),
         },
         "PUT",
       ),
@@ -414,6 +602,39 @@ function AdminQuestionEditor({ question, busy, run, onClose, onSaved }) {
             解析
             <textarea rows="5" value={draft.analysis} onChange={(event) => update("analysis", event.target.value)} />
           </label>
+          <div className="admin-editor-media">
+            <label>
+              题目图片地址
+              <textarea
+                rows="3"
+                value={draft.images}
+                onChange={(event) => update("images", event.target.value)}
+                placeholder="每行一个图片地址；可填 /vet-images/xxx.png 或完整图片 URL"
+              />
+              <small>题图会在执兽专项刷题区的题干前展示。</small>
+            </label>
+            <div className="admin-editor-grid">
+              <label>
+                共用题干组 ID
+                <input value={draft.sharedGroupId} onChange={(event) => update("sharedGroupId", event.target.value)} placeholder="例如 case-2026-001" />
+              </label>
+              <label>
+                共用类型
+                <select value={draft.sharedKind} onChange={(event) => update("sharedKind", event.target.value)}>
+                  <option value="stem">共用题干 / 病例</option>
+                  <option value="options">共用备选答案</option>
+                </select>
+              </label>
+              <label>
+                小题顺序
+                <input type="number" min="1" max="200" value={draft.sharedOrder} onChange={(event) => update("sharedOrder", event.target.value)} placeholder="可选" />
+              </label>
+              <label>
+                共用材料
+                <textarea rows="3" value={draft.sharedStem} onChange={(event) => update("sharedStem", event.target.value)} placeholder="可选；留空时由题库标记自动归纳" />
+              </label>
+            </div>
+          </div>
           <div className="admin-editor-grid">
             <label>
               章节
@@ -459,12 +680,14 @@ function AuthScreen({ onAuth, initialError = "" }) {
     setBusy(true);
     setError("");
     try {
-      onAuth(
-        await api(`/auth/${mode === "login" ? "login" : "register"}`, {
+      await api(`/auth/${mode === "login" ? "login" : "register"}`, {
           username,
           password,
-        }),
-      );
+        });
+      const session = await api("/auth/me");
+      if (!session.authenticated)
+        throw new Error("登录凭据未能保存，请允许本站 Cookie，并使用同一个网站地址登录。HTTPS 部署请检查安全 Cookie 配置。");
+      onAuth(session);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -911,7 +1134,19 @@ function App() {
     try {
       return await fn();
     } catch (e) {
-      setError(e.message);
+      if (e.status === 401) {
+        setDashboard(null);
+        setSession(null);
+        setQueue([]);
+        setAllQuestions([]);
+        setWrong([]);
+        setSharedAiQuestions([]);
+        setAiGroups([]);
+        setAuth({ authenticated: false, user: null, certificates: [] });
+        setError("登录已失效，请重新登录后继续。");
+      } else {
+        setError(e.message);
+      }
       return null;
     } finally {
       setBusy("");
@@ -922,7 +1157,12 @@ function App() {
       setError("暂无可练习题目");
       return;
     }
-    setSession({ questions, title, key: Date.now() });
+    setSession({
+      questions,
+      title,
+      certificateId: auth.user?.certificateId || dashboard?.certificate?.id || null,
+      key: Date.now(),
+    });
     go("practice");
   };
   const openChapter = (name) => {
@@ -1004,16 +1244,26 @@ function App() {
     }
   };
   useEffect(() => {
+    if (!auth?.authenticated || !auth.user?.certificateId) return;
+    let active = true;
     if (page === "training") {
       Promise.all([api("/queue"), api("/ai/groups")])
         .then(([nextQueue, nextGroups]) => {
+          if (!active) return;
           setQueue(nextQueue);
           setAiGroups(nextGroups);
         })
-        .catch((e) => setError(e.message));
+        .catch((e) => { if (active) setError(e.message); });
     }
-    if (page === "community") loadSharedAi();
-  }, [page, auth?.user?.certificateId]);
+    if (page === "community") {
+      setSharedAiLoading(true);
+      api("/questions/shared-ai")
+        .then((questions) => { if (active) setSharedAiQuestions(questions); })
+        .catch((e) => { if (active) setError(e.message); })
+        .finally(() => { if (active) setSharedAiLoading(false); });
+    }
+    return () => { active = false; };
+  }, [page, auth?.authenticated, auth?.user?.certificateId]);
   if (auth === null)
     return (
       <div className="loading-page">
@@ -1025,7 +1275,10 @@ function App() {
     return (
       <AuthScreen
         initialError={error}
-        onAuth={(result) => setAuth({ authenticated: true, ...result })}
+        onAuth={(result) => {
+          setError("");
+          setAuth(result);
+        }}
       />
     );
   if (!auth.user.certificateId)
@@ -3139,6 +3392,7 @@ function AdminView({
   const [feedbackTotal, setFeedbackTotal] = useState(0);
   const [feedbackPage, setFeedbackPage] = useState(0);
   const [feedbackLoading, setFeedbackLoading] = useState(false);
+  const [feedbackError, setFeedbackError] = useState("");
   const [editingQuestion, setEditingQuestion] = useState(null);
   const [certificateId, setCertificateId] = useState(
     currentCertificateId || certificates[0]?.id || "",
@@ -3174,6 +3428,7 @@ function AdminView({
   };
   const loadFeedback = async (page = feedbackPage) => {
     setFeedbackLoading(true);
+    setFeedbackError("");
     try {
       const params = new URLSearchParams({
         certificateId,
@@ -3184,6 +3439,9 @@ function AdminView({
       setFeedbackRows(result.feedback);
       setFeedbackTotal(result.total);
       return result;
+    } catch (error) {
+      setFeedbackError(error.message);
+      throw error;
     } finally {
       setFeedbackLoading(false);
     }
@@ -3444,7 +3702,7 @@ function AdminView({
                 </button>
               </div>
               <p className="admin-tip">
-                当前发现 {overview?.similarCandidates ?? "--"} 组高重合候选。删除内置题会记录标记，服务重启后也不会自动恢复。
+                点击“扫描高重合题”后开始查重。删除内置题会记录标记，服务重启后也不会自动恢复。
               </p>
             </section>
             <section className="admin-card">
@@ -3800,7 +4058,12 @@ function AdminView({
               <span className="badge red">待处理 {feedbackTotal.toLocaleString()} 条</span>
             </div>
           </div>
-          {feedbackLoading ? (
+          {feedbackError ? (
+            <div className="alert error" role="alert">
+              <span>反馈读取失败：{feedbackError}</span>
+              <button disabled={feedbackLoading} onClick={() => loadFeedback().catch(() => {})}>重新读取</button>
+            </div>
+          ) : feedbackLoading ? (
             <div className="admin-list-loading">
               <LoaderCircle className="spin" size={22} /> 正在读取用户反馈…
             </div>
@@ -4001,7 +4264,12 @@ function AdminView({
     </>
   );
 }
-function Practice({ session, refresh, run, busy, train, configured, exit }) {
+function Practice(props) {
+  if (props.session?.certificateId === "veterinary-practitioner")
+    return <VeterinaryPractice {...props} />;
+  return <GenericPractice {...props} />;
+}
+function GenericPractice({ session, refresh, run, busy, train, configured, exit }) {
   const [outcome, setOutcome] = useState({ serial: 0, streak: 0 });
   const [index, setIndex] = useState(0),
     [responses, setResponses] = useState({}),
@@ -4205,6 +4473,7 @@ function Practice({ session, refresh, run, busy, train, configured, exit }) {
             <span>{diff[q.difficulty]}</span>
             {q.stage && <span>{q.stage}</span>}
           </div>
+          <QuestionImages question={q} />
           <h2 className="question-text">{q.question}</h2>
           <QuestionOrigin question={q} />
           <div className="options">
@@ -4400,6 +4669,387 @@ function Practice({ session, refresh, run, busy, train, configured, exit }) {
     </>
   );
 }
+function VeterinaryPractice({ session, refresh, run, busy, train, exit }) {
+  const [outcome, setOutcome] = useState({ serial: 0, streak: 0 });
+  const [index, setIndex] = useState(0);
+  const [responses, setResponses] = useState({});
+  const [done, setDone] = useState(false);
+  const [teacherOpen, setTeacherOpen] = useState(false);
+  const started = useRef(Date.now());
+  const groups = buildVeterinaryGroups(session.questions);
+  const group =
+    groups.find((item) => item.indexes.includes(index)) || groups[0];
+  const q = session.questions[index];
+  const current = responses[q.id] || {};
+  const selected = current.selected || [];
+  const result = current.result || null;
+  const teacher = current.teacher || "";
+  const hint = current.hint || 0;
+  const feedbackKind = current.feedbackKind || null;
+  const history = session.questions
+    .map((question) => responses[question.id])
+    .filter((response) => response?.submitted)
+    .map((response) => response.result);
+  const answeredIds = new Set(history.map((item) => item.questionId));
+  const revealedIds = new Set(
+    session.questions
+      .filter((question) => responses[question.id]?.revealed)
+      .map((question) => question.id),
+  );
+  const updateCurrent = (patch) =>
+    setResponses((old) => ({
+      ...old,
+      [q.id]: { ...old[q.id], ...patch },
+    }));
+  const jumpTo = (nextIndex) => {
+    if (busy || nextIndex < 0 || nextIndex >= session.questions.length) return;
+    setIndex(nextIndex);
+    setTeacherOpen(false);
+    started.current = Date.now();
+  };
+  const choose = (key) => {
+    if (result) return;
+    updateCurrent({
+      selected: isSingleSelect(q)
+        ? [key]
+        : selected.includes(key)
+          ? selected.filter((item) => item !== key)
+          : [...selected, key],
+    });
+  };
+  const submit = () =>
+    run("正在记录作答", async () => {
+      const answerResult = await api("/attempts", {
+        questionId: q.id,
+        selected,
+        timeMs: Math.min(86400000, Date.now() - started.current),
+      });
+      updateCurrent({ result: answerResult, submitted: true, revealed: false });
+      setOutcome((old) => ({
+        serial: old.serial + 1,
+        streak: answerResult.correct === true ? old.streak + 1 : 0,
+      }));
+      await refresh();
+    });
+  const sendFeedback = (kind) =>
+    run("正在保存题目反馈", async () => {
+      await api(`/questions/${q.id}/feedback`, { kind });
+      updateCurrent({ feedbackKind: kind });
+    });
+  const analyzeMistake = () =>
+    run("正在分析错误原因", async () => {
+      const analysis = await api("/ai/analyze", { questionId: q.id });
+      updateCurrent({ teacher: `${analysis.weakKnowledge}\n\n${analysis.reason}` });
+      setTeacherOpen(true);
+      await refresh();
+    });
+  const ask = (action, level = 0) =>
+    run("AI 老师正在思考", async () => {
+      const answer = await api("/ai/teacher", {
+        questionId: q.id,
+        action,
+        selected,
+        hintLevel: level,
+      });
+      updateCurrent({ teacher: answer.text, ...(level ? { hint: level } : {}) });
+      setTeacherOpen(true);
+    });
+  const next = () => {
+    if (busy) return;
+    if (index === session.questions.length - 1) setDone(true);
+    else jumpTo(index + 1);
+  };
+  const chapterCount = (name) =>
+    session.questions.filter((question) => question.chapter === name).length;
+  const renderOptions = () => (
+    <div className="options vet-options">
+      {Object.entries(q.options).map(([key, value]) => (
+        <button
+          key={key}
+          disabled={!!result}
+          className={
+            "option " +
+            (selected.includes(key) ? "chosen " : "") +
+            (result?.answer.includes(key)
+              ? "correct "
+              : result && selected.includes(key)
+                ? "incorrect"
+                : "")
+          }
+          onClick={() => choose(key)}
+        >
+          <span className="option-letter">{key}</span>
+          <span>{value}</span>
+          {result?.answer.includes(key) ? (
+            <Check size={20} />
+          ) : result && selected.includes(key) ? (
+            <X size={20} />
+          ) : null}
+        </button>
+      ))}
+    </div>
+  );
+  if (done)
+    return (
+      <div className="completion vet-completion">
+        <Stethoscope size={54} />
+        <span className="eyebrow">执业兽医专项训练</span>
+        <h1>本轮专项练习完成</h1>
+        <p>{session.title}</p>
+        <div className="completion-stats">
+          <strong>
+            {history.filter((item) => item.correct).length}
+            <small>答对</small>
+          </strong>
+          <strong>
+            {history.filter((item) => !item.correct).length}
+            <small>答错</small>
+          </strong>
+          <strong>
+            {session.questions.length - history.length}
+            <small>未完成</small>
+          </strong>
+        </div>
+        <button className="primary" onClick={exit}>
+          返回执兽学习区
+          <ArrowRight size={17} />
+        </button>
+      </div>
+    );
+  return (
+    <>
+      <Heading
+        title="执业兽医专项刷题"
+        subtitle="基础、预防、临床、综合四科分层训练；病例题按共用题干逐问作答"
+      >
+        <button onClick={exit}>
+          <ArrowLeft size={16} />
+          结束练习
+        </button>
+      </Heading>
+      <section className="vet-practice-banner">
+        <div className="vet-practice-banner-copy">
+          <span className="eyebrow">
+            <Stethoscope size={15} /> 兽医全科专属练习区
+          </span>
+          <h2>{session.title}</h2>
+          <p>
+            题图会直接显示在题干前；共用题干题会先固定病例材料，再逐道保存答案。
+          </p>
+        </div>
+        <div className="vet-practice-banner-stat">
+          <strong>{history.length}</strong>
+          <span>/ {session.questions.length} 已完成</span>
+        </div>
+      </section>
+      <div className="vet-module-tabs" aria-label="执兽四大科目">
+        {veterinaryModules.map((module) => {
+          const first = session.questions.findIndex((question) => question.chapter === module);
+          const active = q.chapter === module;
+          return (
+            <button
+              key={module}
+              className={active ? "active" : ""}
+              disabled={first < 0 || !!busy}
+              onClick={() => first >= 0 && jumpTo(first)}
+            >
+              <span>{module.replace("科目", "")}</span>
+              <small>{chapterCount(module)} 题</small>
+            </button>
+          );
+        })}
+      </div>
+      <div className="practice-layout vet-practice-layout">
+        <section className="question-panel vet-question-panel">
+          <PracticeModes outcome={outcome} />
+          <div className="question-top">
+            <span>
+              第 <b>{index + 1}</b> / {session.questions.length} 题
+            </span>
+            <span className="badge">{q.chapter}</span>
+            <label className="question-jump">
+              跳转
+              <select
+                aria-label="选择执兽题号"
+                value={index}
+                disabled={!!busy}
+                onChange={(event) => jumpTo(Number(event.target.value))}
+              >
+                {session.questions.map((_, questionIndex) => (
+                  <option key={questionIndex} value={questionIndex}>
+                    第 {questionIndex + 1} 题
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+          <div className="progress">
+            <i style={{ width: ((index + 1) / session.questions.length) * 100 + "%" }} />
+          </div>
+          <div className="vet-question-nav">
+            <div className="practice-question-nav-head">
+              <strong>执兽题目导航</strong>
+              <small>病例组内可切换小题，作答状态会自动保留</small>
+            </div>
+            <div className="question-number-grid">
+              {session.questions.map((question, questionIndex) => {
+                const isAnswered = answeredIds.has(question.id);
+                const isWrong = isAnswered && responses[question.id]?.result?.correct === false;
+                const isRevealed = revealedIds.has(question.id);
+                return (
+                  <button
+                    key={question.id}
+                    className={[
+                      questionIndex === index ? "current" : "",
+                      isAnswered ? "answered" : "",
+                      isWrong ? "wrong" : "",
+                      isRevealed ? "revealed" : "",
+                    ].filter(Boolean).join(" ")}
+                    aria-label={`第 ${questionIndex + 1} 题`}
+                    disabled={!!busy}
+                    onClick={() => jumpTo(questionIndex)}
+                  >
+                    {questionIndex + 1}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+          {group?.shared && (
+            <section className={`vet-shared-card ${group.kind || "stem"}`}>
+              <div className="vet-shared-card-head">
+                <span>{group.kind === "options" ? "共用备选答案" : "共用题干 / 病例材料"}</span>
+                <small>本组 {group.questions.length} 道题</small>
+              </div>
+              {group.kind === "stem" && group.stem ? (
+                <p>{group.stem}</p>
+              ) : group.kind === "options" ? (
+                <p>以下小题共用同一组选项，请根据每道题的问法分别选择答案。</p>
+              ) : (
+                <p>本组小题共用一段材料，请先阅读题干后逐题作答。</p>
+              )}
+              <div className="vet-case-steps">
+                {group.indexes.map((questionIndex, step) => {
+                  const child = session.questions[questionIndex];
+                  const childResult = responses[child.id]?.result;
+                  return (
+                    <button
+                      key={child.id}
+                      className={questionIndex === index ? "active" : ""}
+                      disabled={!!busy}
+                      onClick={() => jumpTo(questionIndex)}
+                    >
+                      <b>{step + 1}</b>
+                      <span>{childResult ? (childResult.correct ? "答对" : "需复习") : "待作答"}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </section>
+          )}
+          <div className="question-meta">
+            <span className="badge">{questionTypeName(q)}</span>
+            <span>{diff[q.difficulty]}</span>
+            <span>{q.knowledgePoint}</span>
+            {q.sharedGroupId && <span>管理员已分组</span>}
+          </div>
+          <QuestionImages question={q} />
+          <h2 className="question-text vet-question-text">
+            {questionTextForGroup(q, group) || q.question}
+          </h2>
+          <QuestionOrigin question={q} />
+          {group?.kind === "options" && <div className="vet-options-label">本题从共用备选答案中选择</div>}
+          {renderOptions()}
+          {result && (
+            <div className={`result-block ${result.correct === false ? "wrong" : ""}`}>
+              <h3>
+                {result.correct === undefined ? "答案解析" : result.correct ? "回答正确" : "这道题还需要巩固"}
+                <span>正确答案 {result.answer.join("、")}</span>
+              </h3>
+              <p>{result.analysis}</p>
+            </div>
+          )}
+          {result && q.source === "ai_generated" && (
+            <div className="question-feedback">
+              <span>这道共享 AI 题怎么样？</span>
+              {[
+                ["helpful", "有帮助"],
+                ["wrong_answer", "答案有问题"],
+                ["ambiguous", "表述不清"],
+                ["duplicate", "题目重复"],
+              ].map(([kind, label]) => (
+                <button
+                  key={kind}
+                  className={feedbackKind === kind ? "selected" : ""}
+                  disabled={!!busy}
+                  onClick={() => sendFeedback(kind)}
+                >
+                  {feedbackKind === kind ? `已反馈${label}` : label}
+                </button>
+              ))}
+            </div>
+          )}
+          <div className="question-actions">
+            <button disabled={!!busy || hint >= 3 || !!result} onClick={() => ask("给我提示", hint + 1)}>
+              <Lightbulb size={17} /> 给我提示 {hint}/3
+            </button>
+            <button
+              className="text-button"
+              disabled={!!busy || !!result}
+              onClick={() =>
+                run("正在查看答案", async () => {
+                  const revealed = await api(`/questions/${q.id}/reveal`, {});
+                  setOutcome((old) => ({ serial: old.serial + 1, streak: 0 }));
+                  updateCurrent({ result: revealed, submitted: false, revealed: true });
+                })
+              }
+            >
+              查看答案
+            </button>
+            <QuestionReport question={q} busy={busy} run={run} />
+            {result ? (
+              <>
+                {result.correct === false && (
+                  <button className="ai-analysis-button" onClick={analyzeMistake} disabled={!!busy}>
+                    <MessageCircle size={17} /> AI 解析
+                  </button>
+                )}
+                <button className="primary push-right" onClick={next} disabled={!!busy}>
+                  {index === session.questions.length - 1 ? "完成练习" : group?.shared && group.indexes.indexOf(index) < group.questions.length - 1 ? "下一小题" : "下一题"}
+                  <ArrowRight size={17} />
+                </button>
+              </>
+            ) : (
+              <button className="primary push-right" disabled={!selected.length || !!busy} onClick={submit}>
+                提交本题 <Check size={17} />
+              </button>
+            )}
+          </div>
+        </section>
+        <aside className="teacher-panel vet-teacher-panel">
+          <h2><Stethoscope size={21} /> 兽医考点教练</h2>
+          <p className="vet-teacher-note">当前知识点：{q.knowledgePoint}</p>
+          <button className="teacher-open" onClick={() => setTeacherOpen(!teacherOpen)}>
+            <MessageCircle size={17} /> 问 AI <ChevronRight size={16} />
+          </button>
+          {teacherOpen && (
+            <>
+              <div className="teacher-actions">
+                {["为什么我错了？", "详细讲解", "换一种方法解释", "举一个实际病例"].map((action) => (
+                  <button key={action} disabled={!!busy || !result} onClick={() => ask(action)}>{action}</button>
+                ))}
+                <button disabled={!!busy} onClick={() => train(q, 1)}>生成一道同知识点题</button>
+                <button disabled={!!busy} onClick={() => train(q, 1, true)}>生成一道进阶病例题</button>
+              </div>
+              {!result && <small className="muted">完成本题或查看答案后，可让 AI 结合兽医知识点讲解。</small>}
+            </>
+          )}
+          {teacher ? <div className="teacher-response">{teacher}</div> : <div className="teacher-idle"><Lightbulb size={28} /><span>从病例线索找到诊断方向</span></div>}
+        </aside>
+      </div>
+    </>
+  );
+}
 function ExamView({ run, refresh, dashboard }) {
   const [exam, setExam] = useState(null),
     [answers, setAnswers] = useState({}),
@@ -4560,6 +5210,7 @@ function ExamView({ run, refresh, dashboard }) {
               <h3>
                 {i + 1}. {r.question}
               </h3>
+              <QuestionImages question={r} />
               <p>
                 我的答案：{r.selected.join("、") || "未作答"} · 正确答案：
                 {r.answer.join("、")}
@@ -4639,6 +5290,10 @@ function ExamView({ run, refresh, dashboard }) {
     );
   const q = exam.questions[index],
     selected = answers[q.id] || [];
+  const examGroups = dashboard.certificate?.id === "veterinary-practitioner"
+    ? buildVeterinaryGroups(exam.questions)
+    : [];
+  const examGroup = examGroups.find((group) => group.indexes.includes(index));
   return (
     <>
       <Heading
@@ -4655,7 +5310,35 @@ function ExamView({ run, refresh, dashboard }) {
           <span className="badge">
             第 {index + 1} 题 · {questionTypeName(q, true)}
           </span>
-          <h2 className="question-text">{q.question}</h2>
+          {examGroup?.shared && (
+            <section className={`vet-shared-card ${examGroup.kind || "stem"}`}>
+              <div className="vet-shared-card-head">
+                <span>{examGroup.kind === "options" ? "共用备选答案" : "共用题干 / 病例材料"}</span>
+                <small>本组 {examGroup.questions.length} 道题</small>
+              </div>
+              {examGroup.kind === "stem" && examGroup.stem ? (
+                <p>{examGroup.stem}</p>
+              ) : examGroup.kind === "options" ? (
+                <p>以下小题共用同一组选项，请根据每道题的问法分别选择答案。</p>
+              ) : (
+                <p>本组小题共用一段材料，请先阅读题干后逐题作答。</p>
+              )}
+              <div className="vet-case-steps">
+                {examGroup.indexes.map((questionIndex, step) => (
+                  <button
+                    key={exam.questions[questionIndex].id}
+                    className={questionIndex === index ? "active" : ""}
+                    onClick={() => setIndex(questionIndex)}
+                  >
+                    <b>{step + 1}</b>
+                    <span>{answers[exam.questions[questionIndex].id]?.length ? "已作答" : "待作答"}</span>
+                  </button>
+                ))}
+              </div>
+            </section>
+          )}
+          <QuestionImages question={q} />
+          <h2 className="question-text">{questionTextForGroup(q, examGroup) || q.question}</h2>
           <QuestionOrigin question={q} />
           <div className="options">
             {Object.entries(q.options).map(([k, v]) => (

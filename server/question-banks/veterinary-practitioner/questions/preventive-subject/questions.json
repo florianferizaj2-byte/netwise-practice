@@ -1486,39 +1486,6 @@
     "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
   },
   {
-    "id": "vet-2025-preventive-00046",
-    "type": "single_choice",
-    "question": "德国牧羊犬,3 岁,体温升高,呈不规则间歇热,精神沉郁,喜卧厌动; 可视黏膜苍白,尿液呈黄色;体表发现有硬蜱寄生;耳尖血涂片染色镜检 如图。 该病的初步诊断是",
-    "options": {
-      "A": "隐孢子虫病",
-      "B": "肉孢子虫病",
-      "C": "毛滴虫病",
-      "D": "巴贝斯虫病",
-      "E": "球虫病"
-    },
-    "answer": [
-      "D"
-    ],
-    "analysis": "从图中看,该虫寄生在红细胞中,结合选项可知,只有巴贝斯虫是 寄生在红细胞中。",
-    "chapter": "预防科目",
-    "knowledgePoint": "兽医寄生虫学",
-    "difficulty": "medium",
-    "tags": [
-      "执业兽医",
-      "预防科目",
-      "2025 真题"
-    ],
-    "provenance": [
-      {
-        "file": "2025年执兽考试预防真题及答案.pdf",
-        "questionNumber": 79,
-        "sourceIndex": 81,
-        "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
-      }
-    ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
-  },
-  {
     "id": "vet-2025-preventive-00047",
     "type": "single_choice",
     "question": "产生抗体的主要外周淋巴器官是",

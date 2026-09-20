@@ -1,0 +1,54 @@
+import { chromium, expect } from "@playwright/test";
+import assert from "node:assert/strict";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import { createApp } from "../server/index.js";
+import { createStore } from "../server/store.js";
+
+const dir = fs.mkdtempSync(path.join(os.tmpdir(), "aceexam-feedback-"));
+const store = createStore(dir);
+const user = store.register("feedback_tester", "test-password");
+store.selectCertificate(user.id, "network-engineer");
+const app = await createApp({ store, production: true });
+const server = app.listen(0, "127.0.0.1");
+await new Promise(resolve => server.once("listening", resolve));
+let browser;
+try {
+  browser = await chromium.launch({ headless: true });
+  const page = await browser.newPage();
+  const failures = [];
+  page.on("response", r => { if (r.status() === 401) failures.push(r.url()); });
+  const base = `http://127.0.0.1:${server.address().port}`;
+  await page.goto(base + "/#training");
+  await page.getByPlaceholder("输入你的学习账号").fill("feedback_tester");
+  await page.getByPlaceholder("至少 8 位字符").fill("test-password");
+  await page.getByRole("button", { name: "进入我的学习空间" }).click();
+  await page.getByRole("button", { name: "知道了，开始学习" }).click();
+  assert.deepEqual(failures, [], "No protected requests before authentication");
+  await expect(page.getByText("请先登录", { exact: true })).toHaveCount(0);
+  await page.getByRole("button", { name: "章节练习", exact: true }).click();
+  await page.getByRole("button", { name: /网络体系结构.*题/ }).click();
+  await page.getByRole("button", { name: "练习本章全部题" }).click();
+  await page.getByRole("button", { name: "举报题目", exact: true }).click();
+  await page.getByPlaceholder("例如：第 3 个选项与解析中的结论不一致").fill("请检查这个选项");
+  await page.getByRole("button", { name: "提交举报", exact: true }).click();
+  await expect(page.getByRole("button", { name: "已举报", exact: true })).toBeVisible();
+  assert.equal(store.questionFeedbackRows()[0].note, "请检查这个选项");
+  await page.getByRole("button", { name: "已举报", exact: true }).click();
+  await page.route("**/api/questions/*/feedback", route => route.fulfill({ status: 400, contentType: "application/json", body: JSON.stringify({ error: "测试错误提示" }) }));
+  await page.getByRole("button", { name: "提交举报", exact: true }).click();
+  await expect(page.getByRole("dialog").getByRole("alert")).toHaveText("测试错误提示");
+  await page.unroute("**/api/questions/*/feedback");
+  store.db.prepare("DELETE FROM auth_sessions").run();
+  await page.getByRole("button", { name: "提交举报", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "登录学习账户" })).toBeVisible();
+  await expect(page.getByText("登录已失效，请重新登录后继续。", { exact: true })).toBeVisible();
+  console.log("PASS: login from training, report persistence, visible error and expired session recovery");
+} finally {
+  await browser?.close();
+  app.locals.stop();
+  await new Promise(resolve => server.close(resolve));
+  store.db.close();
+  fs.rmSync(dir, { recursive: true, force: true });
+}

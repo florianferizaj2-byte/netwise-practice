@@ -21,7 +21,7 @@ import {
 } from "./certificates.js";
 import { buildSyllabusProgress, sampleExamQuestions } from "./syllabus.js";
 import { findSimilarQuestions } from "./question-similarity.js";
-import { validateQuestion } from "./domain.js";
+import { questionImageSchema, validateQuestion } from "./domain.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const publicQuestion = (q) => {
@@ -297,10 +297,10 @@ export async function createApp(options = {}) {
         }
       : {}),
   });
-  const adminTaxonomy = () =>
-    certificates.map((certificate) => {
-      const questions = store
-        .allQ()
+  const adminTaxonomy = () => {
+    const allQuestions = store.allQ();
+    return certificates.map((certificate) => {
+      const questions = allQuestions
         .filter((question) => hasCertificateQuestion(question, certificate.id));
       const chapters = new Map();
       for (const question of questions) {
@@ -322,6 +322,7 @@ export async function createApp(options = {}) {
         })),
       };
     });
+  };
   const adminQuestionFilters = (query) => {
     const parsed = z
       .object({
@@ -366,10 +367,8 @@ export async function createApp(options = {}) {
     requireAdmin(req);
     return {
       stats: store.adminStats(),
-      similarCandidates: findSimilarQuestions(store.allQ(), {
-        threshold: 0.86,
-        limit: 5,
-      }).length,
+      // Similarity scans are expensive and must only run on explicit request.
+      similarCandidates: null,
       recentAudit: store.auditRows(12),
     };
   });
@@ -502,18 +501,11 @@ export async function createApp(options = {}) {
         offset: z.coerce.number().int().min(0).default(0),
       })
       .parse(req.query);
-    const filtered = store
-      .questionFeedbackRows()
-      .filter(
-        ({ question }) =>
-          !parsed.certificateId ||
-          hasCertificateQuestion(question, parsed.certificateId),
-      );
+    const result = store.questionFeedbackPage(parsed);
     return {
       ...parsed,
-      total: filtered.length,
-      feedback: filtered
-        .slice(parsed.offset, parsed.offset + parsed.limit)
+      total: result.total,
+      feedback: result.feedback
         .map(({ question, ...row }) => ({
           ...row,
           question: adminQuestion(question),
@@ -544,6 +536,11 @@ export async function createApp(options = {}) {
         knowledgePoint: z.string().trim().min(1).max(100),
         difficulty: z.enum(["easy", "medium", "hard"]),
         tags: z.array(z.string().trim().max(50)).min(1).max(12).optional(),
+        images: z.array(questionImageSchema).max(8).optional(),
+        sharedGroupId: z.string().trim().min(1).max(120).optional(),
+        sharedKind: z.enum(["stem", "options"]).optional(),
+        sharedStem: z.string().trim().max(4000).optional(),
+        sharedOrder: z.number().int().min(1).max(200).optional(),
       })
       .strict()
       .parse(req.body);
@@ -558,6 +555,31 @@ export async function createApp(options = {}) {
       tags: body.tags || existing.tags || ["管理员修订"],
       ...(existing.certificates ? { certificates: existing.certificates } : {}),
       ...(existing.stage ? { stage: existing.stage } : {}),
+      ...(body.images !== undefined
+        ? { images: body.images }
+        : existing.images
+          ? { images: existing.images }
+          : {}),
+      ...(body.sharedGroupId !== undefined
+        ? { sharedGroupId: body.sharedGroupId }
+        : existing.sharedGroupId
+          ? { sharedGroupId: existing.sharedGroupId }
+          : {}),
+      ...(body.sharedKind !== undefined
+        ? { sharedKind: body.sharedKind }
+        : existing.sharedKind
+          ? { sharedKind: existing.sharedKind }
+          : {}),
+      ...(body.sharedStem !== undefined
+        ? { sharedStem: body.sharedStem }
+        : existing.sharedStem
+          ? { sharedStem: existing.sharedStem }
+          : {}),
+      ...(body.sharedOrder !== undefined
+        ? { sharedOrder: body.sharedOrder }
+        : existing.sharedOrder !== undefined
+          ? { sharedOrder: existing.sharedOrder }
+          : {}),
     };
     const validated = validateQuestion(
       candidate,
@@ -1225,6 +1247,11 @@ export async function createApp(options = {}) {
             "exam",
           ),
           question: q.question,
+          ...(q.images ? { images: q.images } : {}),
+          ...(q.sharedGroupId ? { sharedGroupId: q.sharedGroupId } : {}),
+          ...(q.sharedKind ? { sharedKind: q.sharedKind } : {}),
+          ...(q.sharedStem ? { sharedStem: q.sharedStem } : {}),
+          ...(q.sharedOrder ? { sharedOrder: q.sharedOrder } : {}),
         })),
         elapsed,
       };

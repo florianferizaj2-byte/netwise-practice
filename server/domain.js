@@ -226,6 +226,14 @@ export function normalizeQuestionDraft(raw, context = {}) {
   if (certificates.length) draft.certificates = certificates;
   return draft;
 }
+export const questionImageSchema = z
+  .object({
+    src: z.string().trim().min(1).max(1000),
+    alt: z.string().trim().max(200).optional(),
+    caption: z.string().trim().max(300).optional(),
+  })
+  .strict();
+
 export const questionSchema = z
   .object({
     type: z.enum(["single_choice", "multiple_choice", "true_false"]),
@@ -248,6 +256,11 @@ export const questionSchema = z
     knowledgePoint: z.string().min(1).max(100),
     difficulty: z.enum(["easy", "medium", "hard"]),
     tags: z.array(z.string().max(50)).min(1).max(12),
+    images: z.array(questionImageSchema).max(8).optional(),
+    sharedGroupId: z.string().trim().min(1).max(120).optional(),
+    sharedKind: z.enum(["stem", "options"]).optional(),
+    sharedStem: z.string().trim().max(4000).optional(),
+    sharedOrder: z.number().int().min(1).max(200).optional(),
     certificates: z
       .array(z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/))
       .min(1)
