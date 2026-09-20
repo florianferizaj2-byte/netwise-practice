@@ -241,6 +241,45 @@ test("accounts require login and certificate selection filters the question bank
   assert.equal(switchedDashboard.syllabus, null);
 });
 
+test("secure cookie follows the actual HTTP protocol", async (t) => {
+  const previousCookieSecure = process.env.COOKIE_SECURE;
+  process.env.COOKIE_SECURE = "1";
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "netwise-cookie-protocol-"));
+  const store = createStore(dir);
+  const app = await createApp({
+    store,
+    withFrontend: false,
+    authRequired: true,
+  });
+  const server = app.listen(0, "127.0.0.1");
+  await new Promise((r) => server.once("listening", r));
+  const base = `http://127.0.0.1:${server.address().port}`;
+  t.after(async () => {
+    app.locals.stop();
+    await new Promise((r) => server.close(r));
+    store.db.close();
+    fs.rmSync(dir, { recursive: true, force: true });
+    if (previousCookieSecure === undefined) delete process.env.COOKIE_SECURE;
+    else process.env.COOKIE_SECURE = previousCookieSecure;
+  });
+  const registration = await fetch(base + "/api/auth/register", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      username: "cookie_protocol",
+      password: "safe-password",
+    }),
+  });
+  assert.equal(registration.status, 200);
+  const setCookie = registration.headers.get("set-cookie");
+  assert.ok(setCookie);
+  assert.doesNotMatch(setCookie, /;\s*Secure(?:;|$)/i);
+  const auth = await fetch(base + "/api/auth/me", {
+    headers: { Cookie: setCookie.split(";")[0] },
+  });
+  assert.equal((await auth.json()).authenticated, true);
+});
+
 test("AI settings are isolated by account even when the old auth bypass flag is present", async (t) => {
   const previousMasterKey = process.env.AI_MASTER_KEY;
   const previousDisableAuth = process.env.DISABLE_AUTH;

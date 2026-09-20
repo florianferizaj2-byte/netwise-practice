@@ -87,11 +87,15 @@ export async function createApp(options = {}) {
       ?.split(";")
       .map((part) => part.trim().split("="))
       .find(([key]) => key === name)?.[1];
-  const sessionCookie = (res, token, expires = true) =>
+  const sessionCookie = (req, res, token, expires = true) =>
     res.cookie("netwise_session", token || "", {
       httpOnly: true,
       sameSite: "lax",
-      secure: process.env.COOKIE_SECURE === "1",
+      // Only mark the cookie Secure when the current request is actually
+      // HTTPS. Express resolves req.secure through TRUST_PROXY when TLS is
+      // terminated by a trusted reverse proxy, while HTTP deployments remain
+      // usable even if COOKIE_SECURE was left enabled accidentally.
+      secure: process.env.COOKIE_SECURE !== "0" && req.secure,
       path: "/",
       ...(expires ? { maxAge: 30 * 86400000 } : { maxAge: 0 }),
     });
@@ -121,7 +125,7 @@ export async function createApp(options = {}) {
       .strict()
       .parse(req.body);
     const user = store.register(body.username, body.password);
-    sessionCookie(res, store.createAuthSession(user.id));
+    sessionCookie(req, res, store.createAuthSession(user.id));
     return { user: userView(user), certificates };
   });
   route("post", "/api/auth/login", (req, res) => {
@@ -145,12 +149,12 @@ export async function createApp(options = {}) {
       error.status = 403;
       throw error;
     }
-    sessionCookie(res, store.createAuthSession(user.id));
+    sessionCookie(req, res, store.createAuthSession(user.id));
     return { user: userView(user), certificates };
   });
   route("post", "/api/auth/logout", (req, res) => {
     store.deleteAuthSession(cookie(req, "netwise_session"));
-    sessionCookie(res, null, false);
+    sessionCookie(req, res, null, false);
     return { loggedOut: true };
   });
   app.use("/api", (req, res, next) => {

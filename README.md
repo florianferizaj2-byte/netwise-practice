@@ -104,7 +104,8 @@ DATA_DIR=./data
 - `BIND_HOST`：监听地址，默认 `127.0.0.1`
 - `ALLOWED_HOSTS`：允许访问的 Host，使用逗号分隔
 - `DATA_DIR`：SQLite 数据库目录，默认 `./data`
-- `COOKIE_SECURE=1`：通过 HTTPS 部署时启用安全 Cookie
+- `COOKIE_SECURE=1`：HTTPS 请求自动启用安全 Cookie；即使误用 HTTP 地址也不会发出浏览器无法保存的 `Secure` Cookie
+- `COOKIE_SECURE=0`：强制关闭安全 Cookie，仅建议本机 HTTP 开发使用
 - `TRUST_PROXY=1`：Node 位于可信反向代理之后时启用
 - `AI_MASTER_KEY`：加密保存用户 AI API Key 的 AES-256-GCM 主密钥
 - `ADMIN_USERNAME`：可选，明确指定拥有管理员面板权限的账号；不设置时使用最早创建的账号
