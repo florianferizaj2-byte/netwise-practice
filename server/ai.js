@@ -3,6 +3,7 @@ import { z } from "zod";
 import { decrypt, validateBaseUrl, redact } from "./security.js";
 import {
   validateQuestion,
+  normalizeQuestionDraft,
   mistakeSchema,
   stages,
   chooseDifficulty,
@@ -406,7 +407,7 @@ export class OpenAICompatibleProvider extends AIProvider {
         ...(feedback ? { correction: feedback } : {}),
       }));
       const batch = await this.structured(
-        `一次生成 ${pending.length} 道题。所有题目必须围绕知识点“${target}”，章节必须严格为“${seed.chapter}”，题目之间要改变设问角度、情境或推理路径，不能只改数字或替换同义词。每题严格遵守对应 difficulty。返回 {"questions":[题目对象]}，不要返回 Markdown 或其他字段。`,
+        `一次生成 ${pending.length} 道题。所有题目必须围绕知识点“${target}”，章节必须严格为“${seed.chapter}”，题目之间要改变设问角度、情境或推理路径，不能只改数字或替换同义词。每题严格遵守对应 difficulty。返回 {"questions":[题目对象]}，不要返回 Markdown 或其他字段。题目对象的 type 只能是英文枚举 "single_choice"、"multiple_choice" 或 "true_false"；options 必须是 JSON 对象而不是数组，格式为 {"A":"...","B":"...","C":"...","D":"..."}；answer 必须是字母数组，例如单选 ["A"]、多选 ["A","C"]。如果 specs 中有 correction，必须优先修正该问题。`,
         {
           certificateId: options.certificateId,
           chapter: seed.chapter,
@@ -438,12 +439,17 @@ export class OpenAICompatibleProvider extends AIProvider {
         total: specs.length,
       });
       const feedback = new Map();
-      const candidates = [];
+        const candidates = [];
       for (let i = 0; i < batch.questions.length; i++) {
         const request = pending[i];
         try {
+          const draft = normalizeQuestionDraft(batch.questions[i], {
+            chapter: seed.chapter,
+            knowledgePoint: target,
+            difficulty: request.difficulty,
+          });
           const raw = validateQuestion(
-            batch.questions[i],
+            draft,
             [...existing, ...accepted.values(), ...candidates.map((item) => item.question)],
             seed,
           );

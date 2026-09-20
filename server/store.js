@@ -583,13 +583,17 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         wrong_answer: 0,
         ambiguous: 0,
         duplicate: 0,
+        other: 0,
         total: 0,
+        reportTotal: 0,
         mine: null,
       };
       for (const row of rows) {
         if (row.kind in summary) {
           summary[row.kind] = row.count;
-          summary.total += row.count;
+          if (row.kind !== "reportTotal" && row.kind !== "mine")
+            summary.total += row.count;
+          if (row.kind !== "helpful") summary.reportTotal += row.count;
         }
       }
       if (userId) {
@@ -602,6 +606,26 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       }
       return summary;
     },
+    questionFeedbackDetails: (questionId) =>
+      db
+        .prepare(
+          "SELECT f.user_id AS userId, u.username, f.kind, f.note, f.created_at AS createdAt FROM question_feedback f LEFT JOIN users u ON u.id=f.user_id WHERE f.question_id=? AND f.kind<>? ORDER BY f.created_at DESC",
+        )
+        .all(questionId, "helpful"),
+    questionFeedbackRows: () =>
+      db
+        .prepare(
+          "SELECT f.user_id AS userId, u.username, f.question_id AS questionId, f.kind, f.note, f.created_at AS createdAt, q.data AS questionData FROM question_feedback f LEFT JOIN users u ON u.id=f.user_id INNER JOIN questions q ON q.id=f.question_id WHERE f.kind<>? ORDER BY f.created_at DESC",
+        )
+        .all("helpful")
+        .map(({ questionData, ...row }) => ({
+          ...row,
+          question: JSON.parse(questionData),
+        })),
+    deleteQuestionFeedback: (userId, questionId) =>
+      db
+        .prepare("DELETE FROM question_feedback WHERE user_id=? AND question_id=?")
+        .run(userId, questionId).changes > 0,
     communityStats: (certificateId, userId) => {
       const groups = db
         .prepare(
@@ -689,6 +713,21 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         throw error;
       }
       return { inserted, skipped };
+    },
+    updateQuestion: (questionId, question) => {
+      const existing = getQ(questionId);
+      if (!existing) return null;
+      const next = { ...existing, ...question, id: existing.id };
+      const duplicate = db
+        .prepare("SELECT id FROM questions WHERE fingerprint=? AND id<>?")
+        .get(fingerprint(next), questionId);
+      if (duplicate) throw new Error("修改后与其他题目重复");
+      db.prepare("UPDATE questions SET fingerprint=?, data=? WHERE id=?").run(
+        fingerprint(next),
+        JSON.stringify(next),
+        questionId,
+      );
+      return next;
     },
     deleteQuestion: (questionId, deletedBy, reason = "") => {
       const question = getQ(questionId);

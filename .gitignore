@@ -7,3 +7,4 @@ data/
 test-output/
 *.log
 *.tgz
+__pycache__/

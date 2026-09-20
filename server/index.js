@@ -19,8 +19,9 @@ import {
   banksForCertificate,
   syllabusForCertificate,
 } from "./certificates.js";
-import { buildSyllabusProgress, stratifiedSample } from "./syllabus.js";
+import { buildSyllabusProgress, sampleExamQuestions } from "./syllabus.js";
 import { findSimilarQuestions } from "./question-similarity.js";
+import { validateQuestion } from "./domain.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const publicQuestion = (q) => {
@@ -287,7 +288,15 @@ export async function createApp(options = {}) {
       throw error;
     }
   };
-  const adminQuestion = (question) => ({ ...question });
+  const adminQuestion = (question, includeFeedback = false) => ({
+    ...question,
+    ...(includeFeedback
+      ? {
+          feedback: store.questionFeedback(question.id),
+          feedbackDetails: store.questionFeedbackDetails(question.id),
+        }
+      : {}),
+  });
   const adminTaxonomy = () =>
     certificates.map((certificate) => {
       const questions = store
@@ -479,7 +488,119 @@ export async function createApp(options = {}) {
   route("get", "/api/admin/questions", (req) => {
     requireAdmin(req);
     const { questions, ...filters } = adminQuestionFilters(req.query);
-    return { ...filters, questions: questions.map(adminQuestion) };
+    return {
+      ...filters,
+      questions: questions.map((question) => adminQuestion(question, true)),
+    };
+  });
+  route("get", "/api/admin/feedback", (req) => {
+    requireAdmin(req);
+    const parsed = z
+      .object({
+        certificateId: z.string().trim().optional(),
+        limit: z.coerce.number().int().min(1).max(100).default(50),
+        offset: z.coerce.number().int().min(0).default(0),
+      })
+      .parse(req.query);
+    const filtered = store
+      .questionFeedbackRows()
+      .filter(
+        ({ question }) =>
+          !parsed.certificateId ||
+          hasCertificateQuestion(question, parsed.certificateId),
+      );
+    return {
+      ...parsed,
+      total: filtered.length,
+      feedback: filtered
+        .slice(parsed.offset, parsed.offset + parsed.limit)
+        .map(({ question, ...row }) => ({
+          ...row,
+          question: adminQuestion(question),
+        })),
+    };
+  });
+  route("put", "/api/admin/questions/:id", (req) => {
+    requireAdmin(req);
+    const body = z
+      .object({
+        type: z.enum(["single_choice", "multiple_choice", "true_false"]),
+        question: z.string().trim().min(10).max(2000),
+        options: z
+          .object({
+            A: z.string().trim().min(1).max(800),
+            B: z.string().trim().min(1).max(800),
+            C: z.string().trim().min(1).max(800).optional(),
+            D: z.string().trim().min(1).max(800).optional(),
+            E: z.string().trim().min(1).max(800).optional(),
+          })
+          .strict(),
+        answer: z
+          .array(z.enum(["A", "B", "C", "D", "E"]))
+          .min(1)
+          .max(5),
+        analysis: z.string().trim().min(12).max(5000),
+        chapter: z.string().trim().min(1).max(100),
+        knowledgePoint: z.string().trim().min(1).max(100),
+        difficulty: z.enum(["easy", "medium", "hard"]),
+        tags: z.array(z.string().trim().max(50)).min(1).max(12).optional(),
+      })
+      .strict()
+      .parse(req.body);
+    const existing = store.getQ(req.params.id);
+    if (!existing) {
+      const error = new Error("题目不存在或已经删除");
+      error.status = 404;
+      throw error;
+    }
+    const candidate = {
+      ...body,
+      tags: body.tags || existing.tags || ["管理员修订"],
+      ...(existing.certificates ? { certificates: existing.certificates } : {}),
+      ...(existing.stage ? { stage: existing.stage } : {}),
+    };
+    const validated = validateQuestion(
+      candidate,
+      store.allQ().filter((question) => question.id !== existing.id),
+    );
+    const saved = store.updateQuestion(existing.id, {
+      ...validated,
+      ...(Object.prototype.hasOwnProperty.call(existing, "targetKnowledgePoint")
+        ? { targetKnowledgePoint: validated.knowledgePoint }
+        : {}),
+    });
+    store.audit(req.user.id, "question_updated", "question", existing.id, {
+      chapter: saved.chapter,
+      knowledgePoint: saved.targetKnowledgePoint || saved.knowledgePoint,
+    });
+    return { question: adminQuestion(saved, true) };
+  });
+  route("delete", "/api/admin/feedback", (req) => {
+    requireAdmin(req);
+    const body = z
+      .object({
+        userId: z.string().trim().min(1).max(200),
+        questionId: z.string().trim().min(1).max(200),
+      })
+      .strict()
+      .parse(req.body);
+    const feedback = store
+      .questionFeedbackRows()
+      .find(
+        (row) =>
+          row.userId === body.userId && row.questionId === body.questionId,
+      );
+    if (!feedback) {
+      const error = new Error("反馈不存在或已经取消");
+      error.status = 404;
+      throw error;
+    }
+    store.deleteQuestionFeedback(body.userId, body.questionId);
+    store.audit(req.user.id, "question_feedback_cancelled", "question", body.questionId, {
+      userId: body.userId,
+      kind: feedback.kind,
+    });
+    return { deleted: true };
   });
   route("delete", "/api/admin/questions/:id", (req) => {
     requireAdmin(req);
@@ -650,18 +771,24 @@ export async function createApp(options = {}) {
   });
   route("post", "/api/questions/:id/feedback", (req) => {
     const q = requireQ(req.params.id, req);
-    if (q.source !== "ai_generated") {
-      const error = new Error("只有 AI 生成题支持社区反馈");
-      error.status = 400;
-      throw error;
-    }
     const body = z
       .object({
-        kind: z.enum(["helpful", "wrong_answer", "ambiguous", "duplicate"]),
+        kind: z.enum([
+          "helpful",
+          "wrong_answer",
+          "ambiguous",
+          "duplicate",
+          "other",
+        ]),
         note: z.string().trim().max(500).optional(),
       })
       .strict()
       .parse(req.body);
+    if (q.source !== "ai_generated" && body.kind === "helpful") {
+      const error = new Error("普通题目只能提交异常反馈");
+      error.status = 400;
+      throw error;
+    }
     store.saveQuestionFeedback(
       req.user?.id || "local",
       q.id,
@@ -1000,14 +1127,18 @@ export async function createApp(options = {}) {
   );
   route("post", "/api/exams", (req) => {
     const b = z
-      .object({ count: z.number().int().min(5).max(75).default(20) })
+      .object({ count: z.number().int().min(5).max(400).default(20) })
       .parse(req.body || {});
     const certificateId = requireCertificate(req);
     const pool = certificateQuestions(certificateId, req.user?.id).filter(
       (q) => q.source !== "ai_generated",
     );
     const syllabus = syllabusForCertificate(certificateId);
-    const qs = stratifiedSample(pool, syllabus, b.count);
+    const examCount = syllabus?.examBlueprint?.questionCount || b.count;
+    if (!syllabus?.examBlueprint && b.count > 75)
+      throw new Error("普通模拟考试最多 75 道题");
+    const qs = sampleExamQuestions(pool, syllabus, examCount);
+    const durationMinutes = syllabus?.examBlueprint?.durationMinutes;
     const session = {
       id: crypto.randomUUID(),
       certificateId,
@@ -1021,7 +1152,9 @@ export async function createApp(options = {}) {
       ),
       answers: {},
       createdAt: new Date().toISOString(),
-      expiresAt: new Date(Date.now() + qs.length * 120000).toISOString(),
+      expiresAt: new Date(
+        Date.now() + (durationMinutes ? durationMinutes * 60000 : qs.length * 120000),
+      ).toISOString(),
       submitted: false,
     };
     store.saveSession(session);
@@ -1062,6 +1195,10 @@ export async function createApp(options = {}) {
     const s = store.session(req.params.id);
     if (!s) throw new Error("考试不存在");
     if (s.submitted) return s.result;
+    const examBlueprint = syllabusForCertificate(s.certificateId)?.examBlueprint;
+    const durationMs = examBlueprint?.durationMinutes
+      ? examBlueprint.durationMinutes * 60000
+      : s.questionIds.length * 120000;
     const answers =
       Date.now() > new Date(s.expiresAt)
         ? s.answers
@@ -1070,7 +1207,7 @@ export async function createApp(options = {}) {
       0,
       Math.min(
         Date.now() - new Date(s.createdAt),
-        s.questionIds.length * 120000,
+        durationMs,
       ),
     );
     store.db.exec("BEGIN");
@@ -1091,11 +1228,15 @@ export async function createApp(options = {}) {
         })),
         elapsed,
       };
-      s.result.score = Math.round(
-        (s.result.results.filter((r) => r.correct).length /
-          s.questionIds.length) *
-          100,
-      );
+      const correctCount = s.result.results.filter((r) => r.correct).length;
+      s.result.score = examBlueprint
+        ? correctCount
+        : Math.round((correctCount / s.questionIds.length) * 100);
+      s.result.maxScore = examBlueprint ? s.questionIds.length : 100;
+      if (examBlueprint?.passingScore !== undefined) {
+        s.result.passingScore = examBlueprint.passingScore;
+        s.result.passed = s.result.score >= examBlueprint.passingScore;
+      }
       s.submitted = true;
       store.saveSession(s);
       store.db.exec("COMMIT");

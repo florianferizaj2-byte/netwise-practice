@@ -25,7 +25,7 @@ const question = (i) =>
     ],
     difficulty: "easy",
   });
-async function fixture(t, fetchImpl) {
+async function fixture(t, fetchImpl, options = {}) {
   process.env.AI_MASTER_KEY = crypto.randomBytes(32).toString("base64");
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "netwise-api-")),
     store = createStore(dir),
@@ -34,7 +34,7 @@ async function fixture(t, fetchImpl) {
       store,
       provider,
       withFrontend: false,
-      authRequired: false,
+      authRequired: options.authRequired ?? false,
     });
   const server = app.listen(0, "127.0.0.1");
   await new Promise((r) => server.once("listening", r));
@@ -187,9 +187,11 @@ test("accounts require login and certificate selection filters the question bank
   assert.equal(registration.status, 200);
   const registrationData = await registration.clone().json();
   assert.ok(
-    registrationData.certificates.every((certificate) =>
+    registrationData.certificates
+      .filter((certificate) => certificate.guide)
+      .every((certificate) =>
       /^\d{4}-\d{2}-\d{2}$/.test(certificate.guide?.verifiedAt || ""),
-    ),
+      ),
   );
   const cookie = registration.headers.get("set-cookie").split(";")[0];
   assert.equal(
@@ -504,6 +506,21 @@ test("server-generated AI groups are immutable, shareable by certificate, and ke
     200,
   );
 });
+test("普通题目可以提交异常举报并保存补充说明", async (t) => {
+  const { req, store } = await fixture(t);
+  const question = store.allQ().find((item) => item.source !== "ai_generated");
+  const response = await req(`/questions/${question.id}/feedback`, {
+    kind: "other",
+    note: "题干与选项看起来不一致，请管理员复核。",
+  });
+  assert.equal(response.status, 200);
+  assert.equal(response.data.feedback.other, 1);
+  assert.equal(response.data.feedback.reportTotal, 1);
+  const details = store.questionFeedbackDetails(question.id);
+  assert.equal(details.length, 1);
+  assert.equal(details[0].kind, "other");
+  assert.equal(details[0].note, "题干与选项看起来不一致，请管理员复核。");
+});
 test("invalid AI JSON retries, valid structured analysis persists and usage counts actual requests", async (t) => {
   let calls = 0;
   const { store, provider } = await fixture(t, async () =>
@@ -630,6 +647,58 @@ test("batch generation keeps accepted questions and regenerates only rejected sl
   assert.equal(store.allQ().length, before + 3);
 });
 
+test("管理员扩题兼容中文题型和选项数组输出", async (t) => {
+  const { store, provider } = await fixture(t, async (_url, opts) => {
+    const messages = JSON.parse(opts.body).messages;
+    const system = messages[0].content;
+    const payload = JSON.parse(messages[1].content);
+    if (system.includes("逐题独立审核"))
+      return response({
+        reviews: payload.items.map(({ index }) => ({ index, ...verdict })),
+      });
+    const spec = payload.specs[0];
+    return response({
+      questions: [
+        {
+          type: "单选题",
+          question: `管理员格式兼容测试：${payload.knowledgePoint} 的关键判断是什么？`,
+          options: [
+            "A. 正确结论",
+            "B. 错误结论一",
+            "C. 错误结论二",
+            "D. 错误结论三",
+          ],
+          answer: "A",
+          analysis: "先确认目标知识点的判断条件，再结合题干选择唯一符合条件的选项。",
+          chapter: payload.chapter,
+          knowledgePoint: payload.knowledgePoint,
+          difficulty: spec.difficulty,
+          tags: "管理员扩题",
+        },
+      ],
+    });
+  });
+  store.saveSettings({
+    baseUrl: "https://example.com/v1",
+    model: "test",
+    keyCipher: encrypt("secret"),
+    temperature: 0.7,
+    maxTokens: 4096,
+  });
+  const seed = store.allQ().find((item) => item.knowledgePoint === "OSPF DR/BDR");
+  const [generated] = await provider.generateBankExpansion(seed, 1, {
+    certificateId: "network-engineer",
+  });
+  assert.equal(generated.type, "single_choice");
+  assert.deepEqual(generated.options, {
+    A: "正确结论",
+    B: "错误结论一",
+    C: "错误结论二",
+    D: "错误结论三",
+  });
+  assert.deepEqual(generated.answer, ["A"]);
+});
+
 test("AI training stream sends progress events and a final result", async (t) => {
   let generated = 0;
   const { store, url } = await fixture(t, async (_url, opts) => {
@@ -738,6 +807,64 @@ test("exam is resumable, grades once, rejects forged answers and uses server dea
     ),
   });
   assert.equal(late.data.score, 0);
+});
+
+test("执兽模拟考试按四科400题计分，240分及格且不设单科门槛", async (t) => {
+  const { req, store, url } = await fixture(t, undefined, {
+    authRequired: true,
+  });
+  const registration = await fetch(url + "/api/auth/register", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      username: "vet_exam_tester",
+      password: "safe-password",
+    }),
+  });
+  const cookie = registration.headers.get("set-cookie").split(";")[0];
+  assert.equal(
+    (
+      await req(
+        "/auth/certificate",
+        { certificateId: "veterinary-practitioner" },
+        "PUT",
+        { Cookie: cookie },
+      )
+    ).status,
+    200,
+  );
+  const exam = (await req("/exams", { count: 400 }, "POST", { Cookie: cookie })).data;
+  assert.equal(exam.questions.length, 400);
+  assert.deepEqual(
+    Object.values(exam.distribution).sort((a, b) => a - b),
+    [100, 100, 100, 100],
+  );
+  const atLeastPassing = Object.fromEntries(
+    exam.questionIds.map((id, index) => [
+      id,
+      index < 240 ? store.getQ(id).answer : [],
+    ]),
+  );
+  const passed = await req("/exams/" + exam.id + "/submit", {
+    answers: atLeastPassing,
+  }, "POST", { Cookie: cookie });
+  assert.equal(passed.data.score, 240);
+  assert.equal(passed.data.maxScore, 400);
+  assert.equal(passed.data.passingScore, 240);
+  assert.equal(passed.data.passed, true);
+
+  const second = (await req("/exams", { count: 400 }, "POST", { Cookie: cookie })).data;
+  const belowPassing = Object.fromEntries(
+    second.questionIds.map((id, index) => [
+      id,
+      index < 239 ? store.getQ(id).answer : [],
+    ]),
+  );
+  const failed = await req("/exams/" + second.id + "/submit", {
+    answers: belowPassing,
+  }, "POST", { Cookie: cookie });
+  assert.equal(failed.data.score, 239);
+  assert.equal(failed.data.passed, false);
 });
 
 test("real HTTP compatible endpoint receives model, bearer auth and tuning parameters", async (t) => {
@@ -1016,6 +1143,49 @@ test("管理员面板隔离管理员 API，支持扩题、重合检测、删题�
   assert.equal(adminQuestions.data.questions.length, 2);
   assert.ok(adminQuestions.data.total >= 2);
   assert.ok(adminQuestions.data.questions[0].answer);
+  const reported = await request(
+    member.cookie,
+    `/questions/${seed.id}/feedback`,
+    { kind: "wrong_answer", note: "测试反馈：请管理员复核答案。" },
+  );
+  assert.equal(reported.status, 200);
+  const feedback = await request(
+    admin.cookie,
+    "/admin/feedback?certificateId=network-engineer&limit=50",
+  );
+  assert.equal(feedback.status, 200);
+  const feedbackRow = feedback.data.feedback.find((row) => row.questionId === seed.id);
+  assert.ok(feedbackRow);
+  assert.equal(feedbackRow.note, "测试反馈：请管理员复核答案。");
+  const edited = await request(
+    admin.cookie,
+    `/admin/questions/${seed.id}`,
+    {
+      type: seed.type,
+      question: seed.question,
+      options: seed.options,
+      answer: seed.answer,
+      analysis: `${seed.analysis} 管理员已复核。`,
+      chapter: seed.chapter,
+      knowledgePoint: seed.knowledgePoint,
+      difficulty: seed.difficulty,
+      tags: seed.tags || ["管理员修订"],
+    },
+    "PUT",
+  );
+  assert.equal(edited.status, 200);
+  assert.match(edited.data.question.analysis, /管理员已复核/);
+  const cancelledFeedback = await request(
+    admin.cookie,
+    "/admin/feedback",
+    { userId: member.data.user.id, questionId: seed.id },
+    "DELETE",
+  );
+  assert.equal(cancelledFeedback.status, 200);
+  assert.equal(
+    (await request(admin.cookie, "/admin/feedback?certificateId=network-engineer")).data.total,
+    0,
+  );
   const memberQuestions = await request(
     member.cookie,
     "/admin/questions?certificateId=network-engineer&limit=1",

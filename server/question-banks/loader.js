@@ -203,6 +203,9 @@ function loadCatalog() {
     const syllabusChapters = new Set(
       manifest.syllabus?.modules.map((module) => module.name) || [],
     );
+    const allowUnmappedChapters = Boolean(
+      manifest.syllabus?.allowUnmappedChapters,
+    );
     for (const bank of manifest.banks) {
       for (const file of filesAt(path.join(manifest.directory, bank.path))) {
         const rows = json(file);
@@ -227,7 +230,11 @@ function loadCatalog() {
           } = candidate;
           if (!id || !slug.test(id)) throw new Error(`题目 ID 不合法：${file}`);
           questionSchema.parse({ ...raw, certificates });
-          if (syllabusChapters.size && !syllabusChapters.has(raw.chapter))
+          if (
+            syllabusChapters.size &&
+            !syllabusChapters.has(raw.chapter) &&
+            !allowUnmappedChapters
+          )
             throw new Error(
               `题目章节不在 ${manifest.certificate.shortName} ${manifest.syllabus.version} 大纲中：${id} / ${raw.chapter}`,
             );

@@ -12,7 +12,11 @@ import {
 import { createStore } from "../server/store.js";
 import { fingerprint } from "../server/domain.js";
 import { hasCertificateQuestion } from "../server/certificates.js";
-import { buildSyllabusProgress, stratifiedSample } from "../server/syllabus.js";
+import {
+  buildSyllabusProgress,
+  sampleExamQuestions,
+  stratifiedSample,
+} from "../server/syllabus.js";
 
 test("11 source documents are reconciled without missing records or invented answers", () => {
   const report = JSON.parse(
@@ -58,7 +62,12 @@ test("11 source documents are reconciled without missing records or invented ans
 test("manifest catalog discovers the certificate tracks and keeps sources explicit", () => {
   assert.deepEqual(
     certificates.map((item) => item.id),
-    ["network-engineer", "hcia-datacom", "ncre-ms-office"],
+    [
+      "network-engineer",
+      "hcia-datacom",
+      "ncre-ms-office",
+      "veterinary-practitioner",
+    ],
   );
   assert.deepEqual(
     banksForCertificate("network-engineer").map((item) => item.source),
@@ -75,6 +84,10 @@ test("manifest catalog discovers the certificate tracks and keeps sources explic
   assert.deepEqual(
     banksForCertificate("ncre-ms-office").map((item) => item.source),
     ["syllabus_practice", "user_docx_collection"],
+  );
+  assert.deepEqual(
+    banksForCertificate("veterinary-practitioner").map((item) => item.source),
+    ["vet_admin_added"],
   );
   const practice = bundledQuestions().find((q) => q.id === "practice-1");
   assert.deepEqual(practice.certificates, ["network-engineer"]);
@@ -149,6 +162,17 @@ test("manifest catalog discovers the certificate tracks and keeps sources explic
     bundledQuestions().filter((q) => hasCertificateQuestion(q, "ncre-ms-office")).length,
     180,
   );
+  const veterinaryQuestions = bundledQuestions().filter((q) =>
+    hasCertificateQuestion(q, "veterinary-practitioner"),
+  );
+  assert.equal(veterinaryQuestions.length, 7888);
+  assert.ok(veterinaryQuestions.every((q) => q.source === "vet_admin_added"));
+  assert.ok(
+    veterinaryQuestions.every((q) =>
+      ["基础科目", "预防科目", "临床科目", "综合科目"].includes(q.chapter),
+    ),
+  );
+  assert.ok(new Set(veterinaryQuestions.map((q) => q.knowledgePoint)).size > 12);
 });
 
 test("certificate guides retain verified dates, exam facts, and official HTTPS sources", () => {
@@ -156,11 +180,16 @@ test("certificate guides retain verified dates, exam facts, and official HTTPS s
     (item) => item.id === "network-engineer",
   );
   const hcia = certificates.find((item) => item.id === "hcia-datacom");
+  const veterinary = certificates.find(
+    (item) => item.id === "veterinary-practitioner",
+  );
 
   assert.ok(networkEngineer.guide);
   assert.ok(hcia.guide);
+  assert.ok(veterinary.guide);
   assert.equal(networkEngineer.guide.verifiedAt, "2026-09-18");
   assert.equal(hcia.guide.verifiedAt, "2026-09-18");
+  assert.equal(veterinary.guide.verifiedAt, "2026-09-19");
   assert.ok(
     networkEngineer.guide.schedule.items.some(
       (item) => item.date === "5 月 23 日" && /网络工程师/.test(item.title),
@@ -176,7 +205,17 @@ test("certificate guides retain verified dates, exam facts, and official HTTPS s
       (fact) => fact.label === "证书有效期" && /3 年/.test(fact.value),
     ),
   );
-  for (const certificate of certificates) {
+  assert.equal(veterinary.syllabus.version, "2025版");
+  assert.deepEqual(
+    veterinary.syllabus.modules.map((module) => module.name),
+    ["基础科目", "预防科目", "临床科目", "综合科目"],
+  );
+  assert.ok(
+    veterinary.guide.facts.some(
+      (fact) => fact.label === "考试方式" && /计算机考试/.test(fact.value),
+    ),
+  );
+  for (const certificate of certificates.filter((item) => item.guide)) {
     assert.ok(certificate.guide.sources.length >= 2);
     assert.ok(
       certificate.guide.sources.every((source) =>
@@ -228,6 +267,23 @@ test("HCIA syllabus reports coverage and creates weighted exam samples", () => {
   assert.ok(count("IP 地址与配置") >= count("AAA 原理与配置"));
 });
 
+test("执兽模拟考试固定四科各抽100题并按总分240分及格", () => {
+  const syllabus = syllabusForCertificate("veterinary-practitioner");
+  const questions = bundledQuestions().filter((q) =>
+    hasCertificateQuestion(q, "veterinary-practitioner"),
+  );
+  const sample = sampleExamQuestions(questions, syllabus, 400, () => 0);
+  assert.equal(sample.length, 400);
+  assert.equal(new Set(sample.map((q) => q.id)).size, 400);
+  for (const module of syllabus.modules)
+    assert.equal(
+      sample.filter((q) => q.chapter === module.name).length,
+      100,
+    );
+  assert.equal(syllabus.examBlueprint.passingScore, 240);
+  assert.equal(syllabus.examBlueprint.questionsPerModule, 100);
+});
+
 test("server initializes the bundled collection idempotently and preserves learning records", () => {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), "netwise-bank-"));
   let store;
@@ -237,10 +293,10 @@ test("server initializes the bundled collection idempotently and preserves learn
     assert.equal(q.options.C, "192.168.10.64");
     assert.deepEqual(q.answer, ["C"]);
     assert.equal(store.recordAttempt(q.id, ["C"], 2000).correct, true);
-    assert.equal(store.allQ().length, 1070);
+    assert.equal(store.allQ().length, 8958);
     store.db.close();
     store = createStore(directory);
-    assert.equal(store.allQ().length, 1070);
+    assert.equal(store.allQ().length, 8958);
     assert.equal(store.allA().length, 1);
     assert.equal(store.getQ(q.id).provenance[0].questionNumber, 3);
   } finally {

@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "certificate": {
+    "id": "veterinary-practitioner",
+    "name": "全国执业兽医资格考试（兽医全科类）",
+    "shortName": "执业兽医（全科类）",
+    "description": "全国执业兽医资格考试兽医全科类；覆盖基础、预防、临床和综合应用四科",
+    "order": 5
+  },
+  "guidePath": "guide.json",
+  "syllabus": {
+    "version": "2025版",
+    "examCode": "兽医全科类",
+    "examCodeLabel": "报考类别",
+    "examCodeNote": "2026年全国执业兽医资格考试公告将兽医全科类列为独立考试类别；报名时以中国兽医网当期页面为准",
+    "verifiedAt": "2026-09-19",
+    "scopeStatus": "officially_verified",
+    "allowUnmappedChapters": true,
+    "scopeNote": "考试科目和知识范围按全国执业兽医资格考试委员会发布的2026年公告及2025版考试大纲整理；本站权重仅用于分层抽题，不代表官方题量比例。",
+    "weightType": "platform_practice_blueprint",
+    "examBlueprint": {
+      "mode": "fixed_module",
+      "questionCount": 400,
+      "questionsPerModule": 100,
+      "passingScore": 240,
+      "durationMinutes": 240
+    },
+    "sourceUrls": [
+      {
+        "name": "农业农村部：中国农业农村信息网·2026年考试公告",
+        "url": "https://www.agri.cn/zx/hxgg/202512/t20251225_8797669.htm",
+        "verified": true
+      },
+      {
+        "name": "中国兽医网：全国执业兽医资格考试信息平台",
+        "url": "https://zysy-ksgl.cadc.net.cn/EXAMVET/public/noticeTzgg.jsp",
+        "verified": true
+      }
+    ],
+    "modules": [
+      {
+        "id": "basic-subject",
+        "name": "基础科目",
+        "order": 1,
+        "weight": 25,
+        "targetQuestionCount": 100,
+        "knowledgePoints": [
+          "兽医法律法规和职业道德",
+          "动物解剖学、组织学与胚胎学",
+          "动物生理学",
+          "动物生物化学",
+          "动物病理学",
+          "兽医药理学",
+          "基础综合题"
+        ]
+      },
+      {
+        "id": "preventive-subject",
+        "name": "预防科目",
+        "order": 2,
+        "weight": 25,
+        "targetQuestionCount": 100,
+        "knowledgePoints": [
+          "兽医微生物学与免疫学",
+          "兽医传染病学",
+          "兽医寄生虫学",
+          "兽医公共卫生学",
+          "预防综合题"
+        ]
+      },
+      {
+        "id": "clinical-subject",
+        "name": "临床科目",
+        "order": 3,
+        "weight": 25,
+        "targetQuestionCount": 100,
+        "knowledgePoints": [
+          "兽医临床诊断学",
+          "兽医内科学",
+          "兽医外科与手术学",
+          "兽医产科学",
+          "中兽医学",
+          "临床综合题"
+        ]
+      },
+      {
+        "id": "comprehensive-subject",
+        "name": "综合科目",
+        "order": 4,
+        "weight": 25,
+        "targetQuestionCount": 100,
+        "knowledgePoints": [
+          "猪病",
+          "禽病",
+          "牛羊病",
+          "犬猫病",
+          "其他动物病",
+          "综合病例题"
+        ]
+      }
+    ]
+  },
+  "banks": [
+    {
+      "id": "admin-added",
+      "name": "管理员添加",
+      "description": "管理员整理并添加的执业兽医题库；原始 PDF 文件、题号、来源类型和解析 provenance 保留在题目记录中",
+      "source": "vet_admin_added",
+      "category": "admin_added",
+      "verification": "user_provided_sources_pending_import",
+      "path": "questions"
+    }
+  ]
+}

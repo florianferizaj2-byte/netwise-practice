@@ -98,3 +98,49 @@ export function stratifiedSample(
     randomInt,
   );
 }
+
+export function sampleExamQuestions(
+  questions,
+  syllabus,
+  requestedCount,
+  randomInt = (max) => crypto.randomInt(max),
+) {
+  const blueprint = syllabus?.examBlueprint;
+  if (!blueprint?.questionsPerModule) {
+    return stratifiedSample(questions, syllabus, requestedCount, randomInt);
+  }
+
+  const modules = [...(syllabus.modules || [])].sort(
+    (a, b) => a.order - b.order,
+  );
+  const expectedCount =
+    blueprint.questionCount || modules.length * blueprint.questionsPerModule;
+  if (requestedCount !== expectedCount) {
+    throw new Error(`本场模拟考试必须包含 ${expectedCount} 道题`);
+  }
+
+  const groups = modules.map((module) => ({
+    module,
+    questions: questions.filter(
+      (question) => question.chapter === module.name,
+    ),
+  }));
+  const missing = groups.find(
+    (group) => group.questions.length < blueprint.questionsPerModule,
+  );
+  if (missing) {
+    throw new Error(
+      `${missing.module.name} 题库不足 ${blueprint.questionsPerModule} 道，暂时无法组卷`,
+    );
+  }
+
+  return shuffle(
+    groups.flatMap((group) =>
+      shuffle(group.questions, randomInt).slice(
+        0,
+        blueprint.questionsPerModule,
+      ),
+    ),
+    randomInt,
+  );
+}

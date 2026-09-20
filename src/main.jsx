@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { createRoot } from "react-dom/client";
+import { PracticeModes } from "./practice-modes.jsx";
 import {
   LayoutDashboard,
   BookOpen,
@@ -46,6 +47,7 @@ import {
   BriefcaseBusiness,
   Scale,
   Compass,
+  Stethoscope,
   Landmark,
   Megaphone,
   Heart,
@@ -58,6 +60,7 @@ import {
   ScanSearch,
   List,
   Search,
+  Pencil,
 } from "lucide-react";
 import "./style.css";
 
@@ -192,6 +195,256 @@ function QuestionOrigin({ question }) {
         .join("；")}
       <span>按原文收录，未核实官方出处与考试年份</span>
     </p>
+  );
+}
+const reportReasons = [
+  { value: "wrong_answer", label: "答案或解析有误" },
+  { value: "ambiguous", label: "题干或选项表述有问题" },
+  { value: "duplicate", label: "题目重复" },
+  { value: "other", label: "其他异常" },
+];
+function QuestionReport({ question, busy, run }) {
+  const [open, setOpen] = useState(false);
+  const [kind, setKind] = useState("wrong_answer");
+  const [note, setNote] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  useEffect(() => {
+    setOpen(false);
+    setKind("wrong_answer");
+    setNote("");
+    setSubmitted(false);
+  }, [question.id]);
+  const submit = async () => {
+    const saved = await run("正在提交题目举报", () =>
+      api(`/questions/${question.id}/feedback`, {
+        kind,
+        ...(note.trim() ? { note: note.trim() } : {}),
+      }),
+    );
+    if (saved) {
+      setSubmitted(true);
+      setOpen(false);
+      setNote("");
+    }
+  };
+  return (
+    <div className="question-report">
+      <button
+        type="button"
+        className={"report-trigger" + (submitted ? " reported" : "")}
+        disabled={!!busy}
+        onClick={() => setOpen(true)}
+      >
+        <Flag size={16} />
+        {submitted ? "已举报" : "举报题目"}
+      </button>
+      {open && (
+        <div className="report-backdrop" role="presentation">
+          <section
+            className="question-report-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="question-report-title"
+          >
+            <div className="question-report-head">
+              <div>
+                <span className="report-kicker">题目反馈</span>
+                <h2 id="question-report-title">这道题哪里需要修正？</h2>
+              </div>
+              <IconButton
+                icon={X}
+                label="关闭举报窗口"
+                onClick={() => setOpen(false)}
+              />
+            </div>
+            <div className="report-reasons">
+              {reportReasons.map((reason) => (
+                <label key={reason.value}>
+                  <input
+                    type="radio"
+                    name={`report-reason-${question.id}`}
+                    value={reason.value}
+                    checked={kind === reason.value}
+                    onChange={() => setKind(reason.value)}
+                  />
+                  <span>{reason.label}</span>
+                </label>
+              ))}
+            </div>
+            <label className="report-note-label">
+              补充说明 <span>选填</span>
+              <textarea
+                value={note}
+                maxLength={500}
+                onChange={(event) => setNote(event.target.value)}
+                placeholder="例如：第 3 个选项与解析中的结论不一致"
+              />
+              <small>{note.length} / 500</small>
+            </label>
+            <div className="question-report-actions">
+              <button type="button" onClick={() => setOpen(false)}>
+                取消
+              </button>
+              <button
+                type="button"
+                className="primary"
+                disabled={!!busy}
+                onClick={submit}
+              >
+                <Flag size={16} /> 提交举报
+              </button>
+            </div>
+          </section>
+        </div>
+      )}
+    </div>
+  );
+}
+function AdminQuestionEditor({ question, busy, run, onClose, onSaved }) {
+  const initialOptionKeys = ["A", "B", "C", "D", "E"].filter((key) =>
+    Object.prototype.hasOwnProperty.call(question.options || {}, key),
+  );
+  const [draft, setDraft] = useState(() => ({
+    type: question.type,
+    question: question.question,
+    options: { ...question.options },
+    answer: (question.answer || []).join("、"),
+    analysis: question.analysis || "",
+    chapter: question.chapter || "",
+    knowledgePoint: question.targetKnowledgePoint || question.knowledgePoint || "",
+    difficulty: question.difficulty || "medium",
+    tags: (question.tags || ["管理员修订"]).join("、"),
+  }));
+  const update = (field, value) => setDraft((old) => ({ ...old, [field]: value }));
+  const optionKeys =
+    draft.type === "true_false"
+      ? ["A", "B"]
+      : ["A", "B", "C", "D", ...(initialOptionKeys.includes("E") ? ["E"] : [])];
+  const updateType = (value) =>
+    setDraft((old) => ({
+      ...old,
+      type: value,
+      options:
+        value === "true_false"
+          ? old.options
+          : { C: old.options.C || "", D: old.options.D || "", ...old.options },
+    }));
+  const updateOption = (key, value) =>
+    setDraft((old) => ({ ...old, options: { ...old.options, [key]: value } }));
+  const save = async (event) => {
+    event.preventDefault();
+    const answer = draft.answer
+      .toUpperCase()
+      .split(/[,，、;；/\s]+/)
+      .map((value) => value.trim())
+      .filter(Boolean);
+    const tags = draft.tags
+      .split(/[,，、;；/\n]+/)
+      .map((value) => value.trim())
+      .filter(Boolean);
+    const result = await run("正在保存题目修改", () =>
+      api(
+        `/admin/questions/${encodeURIComponent(question.id)}`,
+        {
+          type: draft.type,
+          question: draft.question.trim(),
+          options: Object.fromEntries(
+            optionKeys.map((key) => [key, (draft.options[key] || "").trim()]),
+          ),
+          answer,
+          analysis: draft.analysis.trim(),
+          chapter: draft.chapter.trim(),
+          knowledgePoint: draft.knowledgePoint.trim(),
+          difficulty: draft.difficulty,
+          ...(tags.length ? { tags } : {}),
+        },
+        "PUT",
+      ),
+    );
+    if (result) {
+      await onSaved?.(result.question);
+      onClose();
+    }
+  };
+  return (
+    <div className="admin-editor-backdrop" role="presentation">
+      <section
+        className="admin-question-editor"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="admin-question-editor-title"
+      >
+        <div className="question-report-head">
+          <div>
+            <span className="report-kicker">管理员处理反馈</span>
+            <h2 id="admin-question-editor-title">修改题目</h2>
+          </div>
+          <IconButton icon={X} label="关闭题目编辑" onClick={onClose} />
+        </div>
+        <form className="admin-editor-form" onSubmit={save}>
+          <div className="admin-editor-meta">
+            <span className="badge">{questionTypeName(question)}</span>
+            <span>{question.id}</span>
+          </div>
+          <label>
+            题型
+            <select value={draft.type} onChange={(event) => updateType(event.target.value)}>
+              <option value="single_choice">单选题</option>
+              <option value="multiple_choice">多选题</option>
+              <option value="true_false">判断题</option>
+            </select>
+          </label>
+          <label>
+            题干
+            <textarea rows="4" value={draft.question} onChange={(event) => update("question", event.target.value)} />
+          </label>
+          <div className="admin-editor-options">
+            {optionKeys.map((key) => (
+              <label key={key}>
+                选项 {key}
+                <input value={draft.options[key] || ""} onChange={(event) => updateOption(key, event.target.value)} />
+              </label>
+            ))}
+          </div>
+          <label>
+            正确答案
+            <input value={draft.answer} onChange={(event) => update("answer", event.target.value)} placeholder="例如：A 或 A、C" />
+          </label>
+          <label>
+            解析
+            <textarea rows="5" value={draft.analysis} onChange={(event) => update("analysis", event.target.value)} />
+          </label>
+          <div className="admin-editor-grid">
+            <label>
+              章节
+              <input value={draft.chapter} onChange={(event) => update("chapter", event.target.value)} />
+            </label>
+            <label>
+              知识点
+              <input value={draft.knowledgePoint} onChange={(event) => update("knowledgePoint", event.target.value)} />
+            </label>
+            <label>
+              难度
+              <select value={draft.difficulty} onChange={(event) => update("difficulty", event.target.value)}>
+                <option value="easy">基础</option>
+                <option value="medium">进阶</option>
+                <option value="hard">挑战</option>
+              </select>
+            </label>
+            <label>
+              标签
+              <input value={draft.tags} onChange={(event) => update("tags", event.target.value)} placeholder="用顿号分隔" />
+            </label>
+          </div>
+          <div className="question-report-actions">
+            <button type="button" onClick={onClose}>取消</button>
+            <button type="submit" className="primary" disabled={!!busy}>
+              <Save size={16} /> 保存修改
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
   );
 }
 function AuthScreen({ onAuth, initialError = "" }) {
@@ -410,51 +663,51 @@ function AnnouncementModal({ onClose }) {
               <Megaphone size={22} />
             </span>
             <div>
-              <span className="announcement-kicker">考匠 · 网站公告</span>
-              <h2 id="announcement-title">欢迎来到你的机考练习空间</h2>
-              <p>把零散的刷题时间，变成看得见的学习进度。</p>
+              <span className="announcement-kicker">考匠 · 更新公告</span>
+              <h2 id="announcement-title">执兽题库与反馈处理已更新</h2>
+              <p>把发现的问题交给管理员，把每一次练习变成更可靠的进步。</p>
             </div>
           </div>
           <IconButton icon={X} label="关闭网站公告" onClick={onClose} />
         </header>
         <div className="announcement-body">
           <div className="announcement-highlight">
-            <strong>现在可以开始了</strong>
+            <strong>执兽模拟考试规则已确定</strong>
             <span>
-               当前支持网络、Linux 系统管理和 Office 应用方向，进入章节练习即可按证书和知识点开始学习。
+              四大章节各抽 100 题，共 400 题、每题 1 分；总分达到 240 分即为及格，不设单科门槛。
             </span>
           </div>
           <ul className="announcement-list">
             <li>
               <span>01</span>
               <div>
-                <strong>题库来源会清楚标注</strong>
+                <strong>执兽题库按章节和知识点整理</strong>
                 <p>
-                  内置练习、用户提供资料和 AI 生成题会分开显示；第三方资料仅作为学习参考，请结合官方范围复核。
+                  基础、临床、预防、综合四大章节继续向下细分知识点，题库来源统一由管理员维护。
                 </p>
               </div>
             </li>
             <li>
               <span>02</span>
               <div>
-                <strong>AI 功能按需使用</strong>
+                <strong>做题区新增题目举报</strong>
                 <p>
-                  答错后可以先看内置解析，只有点击 AI 解析或生成训练题时才会调用你配置的 API。
+                  发现答案、解析、题干、选项或重复题异常时，可以提交原因和补充说明。
                 </p>
               </div>
             </li>
             <li>
               <span>03</span>
               <div>
-                <strong>学习记录跟随账号保存</strong>
+                <strong>管理员新增用户反馈区</strong>
                 <p>
-                  错题、掌握度、复习计划和 AI 题组保存在服务器，换设备登录后也能继续学习。
+                  管理员可以查看反馈详情，直接修改题目，或确认后取消反馈；所有操作都会留下审计记录。
                 </p>
               </div>
             </li>
           </ul>
           <p className="announcement-footnote">
-            使用中遇到问题，可以先刷新页面；题目或解析存在疑问时，优先以考试主办方和认证机构的最新信息为准。
+            题目或解析存在疑问时，欢迎先提交反馈；正式考试信息仍请以中国兽医网和相关主管部门的最新公告为准。
           </p>
         </div>
         <footer className="announcement-footer">
@@ -536,7 +789,8 @@ function CertificatePicker({ certificates, onSelect }) {
                 <small>{certificate.description}</small>
                 {certificate.syllabus && (
                   <small className="certificate-meta">
-                    {certificate.syllabus.version} · 考试代码{" "}
+                    {certificate.syllabus.version} ·{" "}
+                    {certificate.syllabus.examCodeLabel || "考试代码"}{" "}
                     {certificate.syllabus.examCode}（报名前复核）
                   </small>
                 )}
@@ -553,6 +807,7 @@ function App() {
   const [page, setPage] = useState(location.hash.slice(1) || "home"),
     [auth, setAuth] = useState(null),
     [bankSource, setBankSource] = useState("all"),
+    [chapterFocus, setChapterFocus] = useState(""),
     [dashboard, setDashboard] = useState(null),
     [error, setError] = useState(""),
     [notice, setNotice] = useState(""),
@@ -598,7 +853,7 @@ function App() {
   useEffect(() => {
     if (!auth?.authenticated || !auth.user?.certificateId || !dashboard) return;
     try {
-      if (localStorage.getItem("netwise-announcement-2026-09-v1") !== "seen")
+      if (localStorage.getItem("netwise-announcement-2026-09-v2") !== "seen")
         setAnnouncementOpen(true);
     } catch {
       setAnnouncementOpen(true);
@@ -623,13 +878,14 @@ function App() {
   const dismissAnnouncement = () => {
     setAnnouncementOpen(false);
     try {
-      localStorage.setItem("netwise-announcement-2026-09-v1", "seen");
+      localStorage.setItem("netwise-announcement-2026-09-v2", "seen");
     } catch {
       // Private browsing may disable localStorage; closing still works for this render.
     }
   };
   const go = (p) => {
     setPage(p);
+    if (p !== "chapters") setChapterFocus("");
     location.hash = p;
     setMobile(false);
     setError("");
@@ -669,6 +925,38 @@ function App() {
     setSession({ questions, title, key: Date.now() });
     go("practice");
   };
+  const openChapter = (name) => {
+    setChapterFocus(name);
+    go("chapters");
+  };
+  const questionsForChapter = (name) => [
+    ...allQuestions.filter(
+      (q) =>
+        q.chapter === name &&
+        q.source !== "ai_generated" &&
+        (bankSource === "all" || q.source === bankSource),
+    ),
+    ...(useSharedAi
+      ? sharedAiQuestions.filter((q) => q.chapter === name)
+      : []),
+  ];
+  const selectedChapter = dashboard?.chapters?.find(
+    (chapter) => chapter.name === chapterFocus,
+  );
+  const selectedChapterQuestions = selectedChapter
+    ? questionsForChapter(selectedChapter.name)
+    : [];
+  const selectedKnowledgePoints = selectedChapter
+    ? [
+        ...new Set([
+          ...(selectedChapter.knowledgePoints || []),
+          ...selectedChapterQuestions.map(
+            (question) =>
+              question.targetKnowledgePoint || question.knowledgePoint,
+          ),
+        ]),
+      ]
+    : [];
   const train = async (q, count = 5, harder = false) =>
     run(`准备生成 ${count} 道针对题`, async () => {
       const r = await streamApi(
@@ -954,7 +1242,8 @@ function App() {
                     <span className="badge green">官方范围已核实</span>
                     <strong>{dashboard.certificate.shortName}</strong>
                     <small>
-                      考试范围核实于 {dashboard.syllabus.verifiedAt} · 考试代码{" "}
+                      考试范围核实于 {dashboard.syllabus.verifiedAt} ·{" "}
+                      {dashboard.syllabus.examCodeLabel || "考试代码"}{" "}
                       {dashboard.syllabus.examCode}（报名前复核）
                     </small>
                   </div>
@@ -1193,15 +1482,7 @@ function App() {
                 </div>
                 <ChapterGrid
                   chapters={dashboard.chapters.slice(0, 6)}
-                  start={(name) =>
-                    start(
-                      allQuestions.filter(
-                        (q) =>
-                          q.chapter === name && q.source !== "ai_generated",
-                      ),
-                      name,
-                    )
-                  }
+                  start={openChapter}
                 />
               </section>
               <div className="bottom-band">
@@ -1232,18 +1513,26 @@ function App() {
           {page === "chapters" && (
             <>
               <Heading
-                title="章节练习"
-                subtitle={`${dashboard.chapters.length} 个${dashboard.syllabus ? "考点模块" : "章节"} · ${dashboard.banks.map((bank) => `${allQuestions.filter((q) => q.source === bank.source).length} 道${bank.name}`).join(" · ")}`}
+                title={chapterFocus ? `${chapterFocus} · 知识点` : "章节练习"}
+                subtitle={
+                  chapterFocus
+                    ? `${selectedChapterQuestions.length} 道题 · ${selectedKnowledgePoints.length} 个知识点`
+                    : `${dashboard.chapters.length} 个${dashboard.syllabus ? "考点模块" : "章节"} · ${dashboard.banks.map((bank) => `${allQuestions.filter((q) => q.source === bank.source).length} 道${bank.name}`).join(" · ")}`
+                }
               />
               {dashboard.syllabus && (
                 <div className="source-notice">
                   <CircleCheck size={19} />
                   <div>
-                    <strong>题库来源分级已启用</strong>
+                    <strong>
+                      {dashboard.certificate.id === "veterinary-practitioner"
+                        ? "执兽题库统一归档"
+                        : "题库来源分级已启用"}
+                    </strong>
                     <p>
-                      当前收录的是依据官方 V2.0
-                      范围编写的原创仿真题。尚未发现华为官方公开的完整历年真题库，因此不会把第三方
-                      Dump 标成官方真题。
+                      {dashboard.certificate.id === "veterinary-practitioner"
+                        ? "现有执兽题目统一显示为“管理员添加”，原始 PDF 文件、题号和来源类型仍保留在题目 provenance 中。"
+                        : "当前收录的是依据官方 V2.0 范围编写的原创仿真题。尚未发现华为官方公开的完整历年真题库，因此不会把第三方 Dump 标成官方真题。"}
                     </p>
                   </div>
                 </div>
@@ -1281,40 +1570,32 @@ function App() {
                   )}
                 </label>
               </div>
-              <ChapterGrid
-                chapters={dashboard.chapters
-                  .map((c) => ({
-                    ...c,
-                    total:
-                      allQuestions.filter(
-                        (q) =>
-                          q.chapter === c.name &&
-                          q.source !== "ai_generated" &&
-                          (bankSource === "all" || q.source === bankSource),
-                      ).length +
-                      (useSharedAi
-                        ? sharedAiQuestions.filter((q) => q.chapter === c.name)
-                            .length
-                        : 0),
-                  }))
-                  .filter((c) => c.total > 0)}
-                start={(name) =>
-                  start(
-                    [
-                      ...allQuestions.filter(
-                        (q) =>
-                          q.chapter === name &&
-                          q.source !== "ai_generated" &&
-                          (bankSource === "all" || q.source === bankSource),
-                      ),
-                      ...(useSharedAi
-                        ? sharedAiQuestions.filter((q) => q.chapter === name)
-                        : []),
-                    ],
-                    name,
-                  )
-                }
-              />
+              {!chapterFocus ? (
+                <ChapterGrid
+                  chapters={dashboard.chapters
+                    .map((chapter) => ({
+                      ...chapter,
+                      total: questionsForChapter(chapter.name).length,
+                    }))
+                    .filter((chapter) => chapter.total > 0)}
+                  start={openChapter}
+                />
+              ) : selectedChapter ? (
+                <KnowledgePointGrid
+                  chapter={selectedChapter.name}
+                  points={selectedKnowledgePoints}
+                  questions={selectedChapterQuestions}
+                  mastery={dashboard.mastery}
+                  start={start}
+                  back={() => setChapterFocus("")}
+                />
+              ) : (
+                <Empty title="找不到这个科目">
+                  <button className="primary" onClick={() => setChapterFocus("")}>
+                    返回四大科目
+                  </button>
+                </Empty>
+              )}
             </>
           )}
           {page === "guide" && (
@@ -1571,6 +1852,88 @@ function ChapterGrid({ chapters, start }) {
     </div>
   );
 }
+function KnowledgePointGrid({
+  chapter,
+  points,
+  questions,
+  mastery,
+  start,
+  back,
+}) {
+  const groups = points.map((knowledgePoint) => {
+    const pointQuestions = questions.filter(
+      (question) =>
+        (question.targetKnowledgePoint || question.knowledgePoint) ===
+        knowledgePoint,
+    );
+    const progress = mastery.find(
+      (item) => item.knowledgePoint === knowledgePoint,
+    );
+    return {
+      knowledgePoint,
+      questions: pointQuestions,
+      attempted: progress?.attemptCount || 0,
+      masteryScore: progress?.masteryScore || 0,
+    };
+  });
+  return (
+    <>
+      <div className="chapter-drilldown-toolbar">
+        <button className="text-button" onClick={back}>
+          <ArrowLeft size={15} />
+          返回四大科目
+        </button>
+        <button
+          className="primary"
+          disabled={!questions.length}
+          onClick={() => start(questions, chapter)}
+        >
+          练习本章全部题
+          <ArrowRight size={15} />
+        </button>
+      </div>
+      <div className="knowledge-point-grid">
+        {groups.map((group, index) => (
+          <button
+            className="knowledge-point-item"
+            key={group.knowledgePoint}
+            disabled={!group.questions.length}
+            onClick={() =>
+              start(group.questions, chapter + " · " + group.knowledgePoint)
+            }
+          >
+            <div
+              className={"knowledge-point-icon tone-" + (index % 4)}
+            >
+              <Target size={19} />
+            </div>
+            <div className="knowledge-point-info">
+              <strong>{group.knowledgePoint}</strong>
+              <small>
+                {group.questions.length} 题 <span>·</span> 已练{" "}
+                {group.attempted} 题
+              </small>
+              <div className="progress">
+                <i
+                  style={{
+                    width:
+                      group.questions.length > 0
+                        ? Math.min(
+                            100,
+                            (group.attempted / group.questions.length) * 100,
+                          ) + "%"
+                        : "0%",
+                  }}
+                />
+              </div>
+            </div>
+            <ChevronRight size={17} />
+          </button>
+        ))}
+      </div>
+    </>
+  );
+}
 function CertificateGuideView({ certificates, currentCertificateId }) {
   const [selectedId, setSelectedId] = useState(currentCertificateId);
   useEffect(() => setSelectedId(currentCertificateId), [currentCertificateId]);
@@ -1643,6 +2006,8 @@ function CertificateGuideView({ certificates, currentCertificateId }) {
                 <Landmark size={18} />
               ) : item.id === "ncre-ms-office" ? (
                 <FileText size={18} />
+              ) : item.id === "veterinary-practitioner" ? (
+                <Stethoscope size={18} />
               ) : (
                 <Network size={18} />
               )}
@@ -2428,7 +2793,8 @@ function SettingsView({
                   <small>{certificate.description}</small>
                   {certificate.syllabus && (
                     <small className="certificate-setting-meta">
-                      {certificate.syllabus.version} · 考试代码{" "}
+                      {certificate.syllabus.version} ·{" "}
+                      {certificate.syllabus.examCodeLabel || "考试代码"}{" "}
                       {certificate.syllabus.examCode}
                     </small>
                   )}
@@ -2769,6 +3135,11 @@ function AdminView({
   const [questionSearchInput, setQuestionSearchInput] = useState("");
   const [questionSearch, setQuestionSearch] = useState("");
   const [questionLoading, setQuestionLoading] = useState(false);
+  const [feedbackRows, setFeedbackRows] = useState([]);
+  const [feedbackTotal, setFeedbackTotal] = useState(0);
+  const [feedbackPage, setFeedbackPage] = useState(0);
+  const [feedbackLoading, setFeedbackLoading] = useState(false);
+  const [editingQuestion, setEditingQuestion] = useState(null);
   const [certificateId, setCertificateId] = useState(
     currentCertificateId || certificates[0]?.id || "",
   );
@@ -2799,6 +3170,22 @@ function AdminView({
       setAdminQuestionTotal(result.total);
     } finally {
       setQuestionLoading(false);
+    }
+  };
+  const loadFeedback = async (page = feedbackPage) => {
+    setFeedbackLoading(true);
+    try {
+      const params = new URLSearchParams({
+        certificateId,
+        limit: "50",
+        offset: String(page * 50),
+      });
+      const result = await api(`/admin/feedback?${params.toString()}`);
+      setFeedbackRows(result.feedback);
+      setFeedbackTotal(result.total);
+      return result;
+    } finally {
+      setFeedbackLoading(false);
     }
   };
   const load = async () => {
@@ -2833,6 +3220,10 @@ function AdminView({
     questionSearch,
   ]);
   useEffect(() => {
+    if (tab !== "feedback") return;
+    loadFeedback(feedbackPage).catch(() => {});
+  }, [tab, certificateId, feedbackPage]);
+  useEffect(() => {
     const item = taxonomy?.certificates.find((entry) => entry.id === certificateId);
     const nextChapter = item?.chapters.find((entry) => entry.name === chapter) || item?.chapters[0];
     if (nextChapter && nextChapter.name !== chapter) setChapter(nextChapter.name);
@@ -2854,6 +3245,7 @@ function AdminView({
     setQuestionChapter("");
     setQuestionKnowledgePoint("");
     setQuestionPage(0);
+    setFeedbackPage(0);
   };
   const saveSettings = () =>
     run("正在保存管理员 AI 配置", async () => {
@@ -2924,6 +3316,29 @@ function AdminView({
       await loadAudit();
     });
   };
+  const cancelFeedback = (row) => {
+    if (!window.confirm(`确定取消这条用户反馈吗？\n\n${row.question.question}`)) return;
+    run("正在取消用户反馈", async () => {
+      await api(
+        "/admin/feedback",
+        { userId: row.userId, questionId: row.questionId },
+        "DELETE",
+      );
+      const result = await loadFeedback(feedbackPage);
+      if (!result.feedback.length && feedbackPage > 0)
+        setFeedbackPage((page) => Math.max(0, page - 1));
+      await loadAudit();
+      notify("这条用户反馈已取消");
+    });
+  };
+  const afterQuestionSaved = async () => {
+    setEditingQuestion(null);
+    if (tab === "feedback") await loadFeedback(feedbackPage);
+    if (tab === "questions") await loadQuestions(questionPage);
+    await loadOverview();
+    await loadAudit();
+    notify("题目已修改，并已记录管理员操作");
+  };
   const toggleBan = (user) => {
     const banned = !user.bannedAt;
     if (
@@ -2960,6 +3375,7 @@ function AdminView({
     (item) => item.name === questionChapter,
   );
   const questionTotalPages = Math.max(1, Math.ceil(adminQuestionTotal / 50));
+  const feedbackTotalPages = Math.max(1, Math.ceil(feedbackTotal / 50));
   return (
     <>
       <Heading title="管理员面板" subtitle="控制 AI 题库、内容质量和用户安全">
@@ -2972,6 +3388,7 @@ function AdminView({
           ["overview", "总览"],
           ["generate", "扩充题库"],
           ["questions", "题目列表"],
+          ["feedback", "用户反馈"],
           ["quality", "重合检测"],
           ["users", "用户管理"],
           ["api", "管理员 API"],
@@ -3018,6 +3435,9 @@ function AdminView({
                 </button>
                 <button onClick={() => setTab("questions")}>
                   <List size={16} /> 查看题目列表
+                </button>
+                <button onClick={() => setTab("feedback")}>
+                  <Flag size={16} /> 处理用户反馈
                 </button>
                 <button onClick={() => setTab("users")}>
                   <Users size={16} /> 管理用户
@@ -3284,6 +3704,11 @@ function AdminView({
                       <span>{sourceName(question)}</span>
                       <span>{question.chapter}</span>
                       <span>{question.targetKnowledgePoint || question.knowledgePoint}</span>
+                      {question.feedback?.reportTotal ? (
+                        <span className="badge red">
+                          <Flag size={13} /> 异常反馈 {question.feedback.reportTotal}
+                        </span>
+                      ) : null}
                     </div>
                     <button
                       className="danger-button"
@@ -3311,6 +3736,20 @@ function AdminView({
                         <br />
                         {question.analysis}
                       </p>
+                      {question.feedbackDetails?.length ? (
+                        <div className="admin-feedback-details">
+                          <strong>异常反馈记录</strong>
+                          {question.feedbackDetails.map((item, index) => (
+                            <div key={`${item.createdAt}-${index}`}>
+                              <span>
+                                {reportReasons.find((reason) => reason.value === item.kind)?.label || item.kind}
+                              </span>
+                              {item.note && <p>{item.note}</p>}
+                              <small>{new Date(item.createdAt).toLocaleString("zh-CN")}</small>
+                            </div>
+                          ))}
+                        </div>
+                      ) : null}
                     </div>
                   </details>
                 </article>
@@ -3334,6 +3773,92 @@ function AdminView({
             <button
               disabled={questionLoading || questionPage >= questionTotalPages - 1}
               onClick={() => setQuestionPage((page) => Math.min(questionTotalPages - 1, page + 1))}
+            >
+              下一页 <ArrowRight size={16} />
+            </button>
+          </div>
+        </section>
+      )}
+      {tab === "feedback" && (
+        <section className="admin-card">
+          <div className="section-heading">
+            <div>
+              <h2>
+                <Flag size={20} /> 用户反馈
+              </h2>
+              <p>集中查看用户在做题区提交的异常反馈。你可以先修改题目，或确认后取消这条反馈。</p>
+            </div>
+            <div className="admin-inline-controls">
+              <label>
+                证书
+                <select value={certificateId} onChange={(event) => changeCertificate(event.target.value)}>
+                  {(taxonomy?.certificates || certificates).map((item) => (
+                    <option key={item.id} value={item.id}>{item.shortName || item.name}</option>
+                  ))}
+                </select>
+              </label>
+              <span className="badge red">待处理 {feedbackTotal.toLocaleString()} 条</span>
+            </div>
+          </div>
+          {feedbackLoading ? (
+            <div className="admin-list-loading">
+              <LoaderCircle className="spin" size={22} /> 正在读取用户反馈…
+            </div>
+          ) : feedbackRows.length ? (
+            <div className="admin-feedback-list">
+              {feedbackRows.map((row) => {
+                const reason = reportReasons.find((item) => item.value === row.kind);
+                return (
+                  <article className="admin-feedback-item" key={`${row.userId}-${row.questionId}`}>
+                    <div className="admin-feedback-item-head">
+                      <div className="question-meta">
+                        <span className="badge red"><Flag size={13} /> {reason?.label || row.kind}</span>
+                        <span>{row.username || "匿名用户"}</span>
+                        <span>{row.question.chapter}</span>
+                        <span>{row.question.targetKnowledgePoint || row.question.knowledgePoint}</span>
+                      </div>
+                      <small>{new Date(row.createdAt).toLocaleString("zh-CN")}</small>
+                    </div>
+                    <strong>{row.question.question}</strong>
+                    <div className="admin-feedback-item-meta">
+                      <span>{sourceName(row.question)}</span>
+                      <span>正确答案：{row.question.answer?.join("、")}</span>
+                      <span className="admin-question-id">{row.questionId}</span>
+                    </div>
+                    <div className="admin-feedback-note">
+                      <b>用户说明</b>
+                      <p>{row.note || "用户未补充说明。"}</p>
+                    </div>
+                    <div className="item-actions">
+                      <button className="primary" disabled={!!busy} onClick={() => setEditingQuestion(row.question)}>
+                        <Pencil size={15} /> 修改题目
+                      </button>
+                      <button className="danger-button" disabled={!!busy} onClick={() => cancelFeedback(row)}>
+                        <X size={15} /> 取消反馈
+                      </button>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          ) : (
+            <Empty icon={Flag} title="暂无待处理反馈">
+              <p>用户提交题目异常后，会在这里集中显示。</p>
+            </Empty>
+          )}
+          <div className="admin-pagination">
+            <button
+              disabled={feedbackLoading || feedbackPage === 0}
+              onClick={() => setFeedbackPage((page) => Math.max(0, page - 1))}
+            >
+              <ArrowLeft size={16} /> 上一页
+            </button>
+            <span>
+              第 {Math.min(feedbackPage + 1, feedbackTotalPages)} / {feedbackTotalPages} 页 · 每页 50 条
+            </span>
+            <button
+              disabled={feedbackLoading || feedbackPage >= feedbackTotalPages - 1}
+              onClick={() => setFeedbackPage((page) => Math.min(feedbackTotalPages - 1, page + 1))}
             >
               下一页 <ArrowRight size={16} />
             </button>
@@ -3464,10 +3989,20 @@ function AdminView({
           <div className="admin-audit-list admin-audit-full">{audit.length ? audit.map((entry) => <div className="admin-audit-row" key={entry.id}><strong>{entry.adminUsername || "管理员"}</strong><span>{entry.action} · {entry.targetType}{entry.targetId ? ` · ${entry.targetId}` : ""}</span><small>{new Date(entry.createdAt).toLocaleString("zh-CN")}</small></div>) : <p className="muted">暂无记录。</p>}</div>
         </section>
       )}
+      {editingQuestion && (
+        <AdminQuestionEditor
+          question={editingQuestion}
+          busy={busy}
+          run={run}
+          onClose={() => setEditingQuestion(null)}
+          onSaved={afterQuestionSaved}
+        />
+      )}
     </>
   );
 }
 function Practice({ session, refresh, run, busy, train, configured, exit }) {
+  const [outcome, setOutcome] = useState({ serial: 0, streak: 0 });
   const [index, setIndex] = useState(0),
     [responses, setResponses] = useState({}),
     [done, setDone] = useState(false),
@@ -3519,6 +4054,10 @@ function Practice({ session, refresh, run, busy, train, configured, exit }) {
         timeMs: Math.min(86400000, Date.now() - started.current),
       });
       updateCurrent({ result: r, submitted: true, revealed: false });
+      setOutcome((old) => ({
+        serial: old.serial + 1,
+        streak: r.correct === true ? old.streak + 1 : 0,
+      }));
       await refresh();
     });
   const analyzeMistake = () =>
@@ -3591,6 +4130,7 @@ function Practice({ session, refresh, run, busy, train, configured, exit }) {
       </Heading>
       <div className="practice-layout">
         <section className="question-panel">
+          <PracticeModes outcome={outcome} />
           <div className="question-top">
             <span>
               第 <b>{index + 1}</b> / {session.questions.length} 题
@@ -3633,6 +4173,7 @@ function Practice({ session, refresh, run, busy, train, configured, exit }) {
             <div className="question-number-grid">
               {session.questions.map((question, questionIndex) => {
                 const isAnswered = answeredIds.has(question.id);
+                const isWrong = isAnswered && responses[question.id]?.result?.correct === false;
                 const isRevealed = revealedIds.has(question.id);
                 return (
                   <button
@@ -3640,11 +4181,13 @@ function Practice({ session, refresh, run, busy, train, configured, exit }) {
                     className={[
                       questionIndex === index ? "current" : "",
                       isAnswered ? "answered" : "",
+                      isWrong ? "wrong" : "",
                       isRevealed ? "revealed" : "",
                     ]
                       .filter(Boolean)
                       .join(" ")}
                     aria-label={`第 ${questionIndex + 1} 题`}
+                    title={isWrong ? "回答错误" : isAnswered ? "回答正确" : isRevealed ? "已查看答案" : "未作答"}
                     aria-current={
                       questionIndex === index ? "step" : undefined
                     }
@@ -3756,6 +4299,7 @@ function Practice({ session, refresh, run, busy, train, configured, exit }) {
               onClick={() =>
                 run("正在查看答案", async () => {
                   const revealed = await api(`/questions/${q.id}/reveal`, {});
+                  setOutcome((old) => ({ serial: old.serial + 1, streak: 0 }));
                   updateCurrent({
                     result: revealed,
                     submitted: false,
@@ -3766,6 +4310,7 @@ function Practice({ session, refresh, run, busy, train, configured, exit }) {
             >
               查看答案
             </button>
+            <QuestionReport question={q} busy={busy} run={run} />
             {result ? (
               <>
                 {result.correct === false && (
@@ -3863,6 +4408,8 @@ function ExamView({ run, refresh, dashboard }) {
     [count, setCount] = useState(20),
     [remaining, setRemaining] = useState(0),
     [submitting, setSubmitting] = useState(false);
+  const examBlueprint = dashboard.syllabus?.examBlueprint;
+  const examModules = dashboard.syllabus?.modules || [];
   const autoSubmit = useRef(false);
   useEffect(() => {
     const saved = localStorage.getItem("netwise-exam");
@@ -3937,13 +4484,25 @@ function ExamView({ run, refresh, dashboard }) {
   }, [exam, answers, result, submitting]);
   const begin = () =>
     run("正在创建模拟考试", async () => {
-      const e = await api("/exams", { count });
+      const e = await api("/exams", {
+        count: examBlueprint?.questionCount || count,
+      });
       setExam(e);
       setAnswers({});
       setIndex(0);
       setResult(null);
       autoSubmit.current = false;
     });
+  const chapterScores = examBlueprint
+    ? examModules.map((module) => ({
+        ...module,
+        correct: result
+          ? result.results.filter(
+              (item) => item.chapter === module.name && item.correct,
+            ).length
+          : 0,
+      }))
+    : [];
   if (result)
     return (
       <>
@@ -3952,13 +4511,19 @@ function ExamView({ run, refresh, dashboard }) {
           subtitle={`用时 ${Math.round(result.elapsed / 60000)} 分钟`}
         />
         <div className="exam-score">
+          {examBlueprint && (
+            <div className={"exam-result-status " + (result.passed ? "passed" : "failed")}>
+              {result.passed ? "考试通过" : "暂未通过"}
+            </div>
+          )}
           <strong>
             {result.score}
             <small>分</small>
           </strong>
           <p>
-            答对 {result.results.filter((r) => r.correct).length} /{" "}
-            {result.results.length} 题
+            {examBlueprint
+              ? `答对 ${result.results.filter((r) => r.correct).length} / ${result.results.length} 题 · ${result.passed ? "达到" : "未达到"} ${result.passingScore} 分及格线`
+              : `答对 ${result.results.filter((r) => r.correct).length} / ${result.results.length} 题`}
           </p>
           <button
             className="primary"
@@ -3971,6 +4536,21 @@ function ExamView({ run, refresh, dashboard }) {
             <RotateCcw size={17} />
           </button>
         </div>
+        {examBlueprint && (
+          <div className="exam-section-scores">
+            {chapterScores.map((section) => (
+              <div key={section.name}>
+                <span>{section.name}</span>
+                <strong>
+                  {section.correct} / {examBlueprint.questionsPerModule} 题
+                </strong>
+              </div>
+            ))}
+            <small>
+              四科合计达到 {examBlueprint.passingScore} 分即可通过，单科不设最低分。
+            </small>
+          </div>
+        )}
         <div className="wrong-list">
           {result.results.map((r, i) => (
             <article className="wrong-item" key={r.questionId}>
@@ -3996,9 +4576,11 @@ function ExamView({ run, refresh, dashboard }) {
         <Heading
           title="模拟考试"
           subtitle={
-            dashboard.syllabus
-              ? `${dashboard.syllabus.version} 考点 · 按本站练习配比分层抽题 · 交卷后统一评分`
-              : "当前证书题库 · 限时作答 · 交卷后统一评分"
+            examBlueprint
+              ? `${dashboard.syllabus.version} · 四大科目各抽 ${examBlueprint.questionsPerModule} 题 · 总分 ${examBlueprint.passingScore} 分及格`
+              : dashboard.syllabus
+                ? `${dashboard.syllabus.version} 考点 · 按本站练习配比分层抽题 · 交卷后统一评分`
+                : "当前证书题库 · 限时作答 · 交卷后统一评分"
           }
         />
         <section className="exam-intro">
@@ -4006,26 +4588,48 @@ function ExamView({ run, refresh, dashboard }) {
           <h2>{dashboard.certificate.shortName} 模拟测试</h2>
           {dashboard.syllabus && (
             <p className="exam-blueprint-note">
-              覆盖 {dashboard.syllabus.coveredModules}{" "}
-              个考点模块；抽题比例为本站练习蓝图，不代表官方考试权重。
+              {examBlueprint
+                ? `基础、预防、临床、综合四科各抽 ${examBlueprint.questionsPerModule} 道题，每题 1 分，四科合计达到 ${examBlueprint.passingScore} 分即可通过。`
+                : `覆盖 ${dashboard.syllabus.coveredModules} 个考点模块；抽题比例为本站练习蓝图，不代表官方考试权重。`}
             </p>
           )}
-          <div className="exam-settings">
-            <label>
-              试题数量
-              <select value={count} onChange={(e) => setCount(+e.target.value)}>
-                {[10, 20, 40].map((n) => (
-                  <option key={n} value={n}>
-                    {n} 题
-                  </option>
-                ))}
-              </select>
-            </label>
-            <div>
-              <span>考试时间</span>
-              <strong>{count * 2} 分钟</strong>
+          {examBlueprint ? (
+            <div className="exam-settings exam-fixed-settings">
+              <div>
+                <span>试题数量</span>
+                <strong>{examBlueprint.questionCount} 题</strong>
+              </div>
+              <div>
+                <span>计分方式</span>
+                <strong>每题 1 分</strong>
+              </div>
+              <div>
+                <span>及格线</span>
+                <strong>{examBlueprint.passingScore} 分</strong>
+              </div>
+              <div>
+                <span>考试时间</span>
+                <strong>{Math.round(examBlueprint.durationMinutes / 60)} 小时</strong>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="exam-settings">
+              <label>
+                试题数量
+                <select value={count} onChange={(e) => setCount(+e.target.value)}>
+                  {[10, 20, 40].map((n) => (
+                    <option key={n} value={n}>
+                      {n} 题
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <div>
+                <span>考试时间</span>
+                <strong>{count * 2} 分钟</strong>
+              </div>
+            </div>
+          )}
           <button className="primary" onClick={begin}>
             开始考试
             <ArrowRight size={18} />
@@ -4088,6 +4692,7 @@ function ExamView({ run, refresh, dashboard }) {
               disabled={index === exam.questions.length - 1}
               onClick={() => setIndex(index + 1)}
             />
+            <QuestionReport question={q} busy={submitting} run={run} />
             <button
               className="primary push-right"
               disabled={submitting}

@@ -1,0 +1,2906 @@
+[
+  {
+    "id": "vet-2025-basic-00001",
+    "type": "single_choice",
+    "question": "与瘤胃内微生物活动无关的是",
+    "options": {
+      "A": "皱胃容积",
+      "B": "瘤胃的厌氧环境",
+      "C": "瘤胃的营养环境",
+      "D": "瘤胃温度",
+      "E": "瘤胃 PH 值"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "瘤胃内具有微生物所需的营养物质,渗透压与血浆渗透压相近,温 度通常为 38~41°C,pH 维持在 6~7。此外,瘤胃背囊的气体多为二氧化碳、 甲烷及少量氮、氢等气体,随饲料进入的少量氧很快会被微生物利用,从 而形成厌氧环境。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 1,
+        "sourceIndex": 1,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00002",
+    "type": "single_choice",
+    "question": "动物体内最大的消化腺是",
+    "options": {
+      "A": "小肠腺",
+      "B": "食管腺",
+      "C": "肝",
+      "D": "十二指肠腺",
+      "E": "胃腺"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "动物体内最大的消化腺是肝。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 2,
+        "sourceIndex": 2,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00003",
+    "type": "single_choice",
+    "question": "动物皮肤中决定皮肤颜色的细胞是",
+    "options": {
+      "A": "朗格汉斯细胞",
+      "B": "角质形成细胞",
+      "C": "梅克尔细胞",
+      "D": "黑素细胞",
+      "E": "皮肤干细胞"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "皮肤的颜色是由表皮中的黑素细胞所产生的黑色素决定的。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 5,
+        "sourceIndex": 5,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00004",
+    "type": "single_choice",
+    "question": "淋巴结浅层皮质中的主要淋巴细胞是",
+    "options": {
+      "A": "nk 细胞",
+      "B": "树突细胞",
+      "C": "k 细胞",
+      "D": "B 淋巴细胞",
+      "E": "T 淋巴细胞"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "淋巴结皮质浅层主要含有 B 淋巴细胞,巨噬细胞,以及少量的 T 淋巴细 胞和浆细胞。淋巴结皮质深层主要含有 T 淋巴细胞。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物解剖学、组织学与胚胎学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 7,
+        "sourceIndex": 7,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00005",
+    "type": "single_choice",
+    "question": "家禽进行气体交换的肺部结构是什么",
+    "options": {
+      "A": "初级支气管",
+      "B": "次级支气管",
+      "C": "三级支气管",
+      "D": "肺毛细管",
+      "E": "小支气管"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "家禽的肺由三级支气管(初级支气管、次级支气管和三级支气管)和肺房、 漏斗和肺毛细管组成,肺毛细管相当于哺乳动物的肺泡,是进行气体交换的地方。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 9,
+        "sourceIndex": 9,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00006",
+    "type": "single_choice",
+    "question": "鼻腔呼吸区的黏膜上皮是",
+    "options": {
+      "A": "单层柱状上皮",
+      "B": "假复层纤毛柱状上皮",
+      "C": "变移上皮",
+      "D": "单层立方上皮",
+      "E": "复层柱状上皮"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "鼻腔分为呼吸区和嗅区,嗅区的黏膜属于被覆嗅上皮。呼吸区被覆假复层 柱状纤毛上皮。 固有鼻腔、咽、喉、气管、支气管:假复层柱状纤毛上皮 细支气管、终末细支气管:单层柱状纤毛柱状上皮。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物解剖学、组织学与胚胎学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 10,
+        "sourceIndex": 10,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00007",
+    "type": "single_choice",
+    "question": "肾上腺中细胞排列成条束状的区域是",
+    "options": {
+      "A": "网状带",
+      "B": "束状带",
+      "C": "多形带",
+      "D": "球状带",
+      "E": "中间带"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "肾上腺皮质从浅层到深层的细胞排列顺序,分别是多形带,束状带,网状 带。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 11,
+        "sourceIndex": 11,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00008",
+    "type": "single_choice",
+    "question": "中动脉内膜与中膜的分界线",
+    "options": {
+      "A": "内皮下层",
+      "B": "微丝",
+      "C": "中弹性膜",
+      "D": "内弹性膜",
+      "E": "外弹性膜"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "中动脉分为内膜,中膜和外膜。内膜由内皮、内皮下层和内弹性膜构成, 内弹性膜由弹性,有利于血管的收缩,呈波浪状,折光性强,一般以此膜作为内 膜和中膜的分界线。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 17,
+        "sourceIndex": 17,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00009",
+    "type": "single_choice",
+    "question": "下列骨骼中具有髋臼的是",
+    "options": {
+      "A": "跖骨",
+      "B": "跗骨",
+      "C": "骨盆骨",
+      "D": "髌骨",
+      "E": "股骨"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "骨盆骨包括髂骨、耻骨和坐骨,三者连接处共同形成一凹陷成为髋臼,髋 臼和股骨形成髋关节",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物解剖学、组织学与胚胎学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 20,
+        "sourceIndex": 20,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00010",
+    "type": "single_choice",
+    "question": "实验室中常用的病理组织固定液是:",
+    "options": {
+      "A": "10%甲醛",
+      "B": "10%福尔马林",
+      "C": "95%酒精",
+      "D": "75%酒精",
+      "E": "1%盐酸乙醇"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "病理组织固定液为 10%的甲醛溶液。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物病理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 22,
+        "sourceIndex": 22,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00011",
+    "type": "single_choice",
+    "question": "骨骼肌光镜下可见明显的",
+    "options": {
+      "A": "纵纹",
+      "B": "横纹",
+      "C": "纹状缘",
+      "D": "虎斑纹",
+      "E": "刷状缘"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "骨骼肌在光学显微镜下可见明显的横纹,故又称横纹肌。是因为其内部包 含众多粗肌丝和细肌丝,交错分布,形成光镜下明显的横纹。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物解剖学、组织学与胚胎学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 38,
+        "sourceIndex": 38,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00012",
+    "type": "single_choice",
+    "question": "能增强心肌收缩力,并使心率减慢的药物是洋地黄毒苷",
+    "options": {
+      "A": "肾上腺素",
+      "B": "洋地黄毒苷",
+      "C": "苷去甲肾上腺素",
+      "D": "阿托品",
+      "E": "氨茶碱"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "洋地黄毒苷的属于强心苷类药物,主要作用时增强心肌收缩力,降低心肌 耗氧量,减慢心率",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医药理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 41,
+        "sourceIndex": 41,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00013",
+    "type": "single_choice",
+    "question": "氨甲酰胆碱中毒的首选解毒药是",
+    "options": {
+      "A": "毛果芸香碱",
+      "B": "新斯的明",
+      "C": "肾上腺素",
+      "D": "阿托品",
+      "E": "维生素 C"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "氨甲酰胆碱中毒首选的解毒药是阿托品。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医药理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 44,
+        "sourceIndex": 44,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00014",
+    "type": "single_choice",
+    "question": "哺乳动物心脏的起搏点位于",
+    "options": {
+      "A": "房室结",
+      "B": "心房",
+      "C": "静脉窦",
+      "D": "心室",
+      "E": "窦房结"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "窦房结是引导整个心脏兴奋和搏动的正常部位,故称为正常起搏点。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 48,
+        "sourceIndex": 48,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00015",
+    "type": "single_choice",
+    "question": "下列能使胆碱酯酶失活的药物有",
+    "options": {
+      "A": "巯基乙醇",
+      "B": "乙酰胆碱",
+      "C": "丝氨酸",
+      "D": "磺胺药",
+      "E": "有机磷杀虫剂"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "有机磷杀虫剂都是有机磷化合物,属于酶的不可逆抑制剂,可抑制 胆碱酯酶的活性,导致乙酰胆碱不能水解而堆积,出现中毒症状。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生物化学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 55,
+        "sourceIndex": 55,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00016",
+    "type": "single_choice",
+    "question": "《动物检疫管理办法》规定,可以随时申报检疫的情形是",
+    "options": {
+      "A": "屠宰动物的",
+      "B": "急宰动物的",
+      "C": "出售动物的",
+      "D": "运输动物的",
+      "E": "向无规定动物疫病区输入相关易感动物的"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "屠宰动物的,应提前 6 小时向所在地动物卫生监督机构申报检疫, 急宰动物的,可以随时申报。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 70,
+        "sourceIndex": 70,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00017",
+    "type": "single_choice",
+    "question": "必需脂肪酸的烃链通常是",
+    "options": {
+      "A": "单不饱和的",
+      "B": "多不饱和的",
+      "C": "短链的",
+      "D": "饱和的",
+      "E": "含硫的"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "必需脂肪酸指的动物维持正常生理机能必需但是自身不能合成,必需从食 物中摄取的脂肪酸,包括亚油酸、α-亚麻酸和花生四烯酸,他们分别是十八碳 二烯酸、十八碳三烯酸和二十碳四烯酸,所以都是多不饱和脂肪酸",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生物化学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 76,
+        "sourceIndex": 76,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00018",
+    "type": "single_choice",
+    "question": "细胞外液的主要阴离子是",
+    "options": {
+      "A": "磷酸根和氯离子",
+      "B": "碳酸根和磷酸根",
+      "C": "碳酸根和氯离子",
+      "D": "碳酸氢根和磷酸根",
+      "E": "碳酸氢根和氯离子"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "细胞外液阳离子含量最高的是钠离子,阴离子主要是氯离子和碳酸 氢根离子。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 77,
+        "sourceIndex": 77,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00019",
+    "type": "single_choice",
+    "question": "呼吸道黏膜上皮的纤毛运动属于",
+    "options": {
+      "A": "吞噬",
+      "B": "溶解",
+      "C": "排除",
+      "D": "消毒(解毒)",
+      "E": "杀菌"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "呼吸道黏膜上皮属于假复层柱状纤毛上皮,通过纤毛的摆动,可将 黏附的异物推向呼吸道外侧而排除异物。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物解剖学、组织学与胚胎学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 78,
+        "sourceIndex": 78,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00020",
+    "type": "single_choice",
+    "question": "肉鸡群 20 日龄,厌食,行动迟缓,腿和翅关节肿大,跛行,腹泻,剖 检见肾肿大,肾和关节有大量尿酸盐沉着,引起该鸡群发病的原因可能",
+    "options": {
+      "A": "嘧啶代谢异常",
+      "B": "三酰甘油代谢异常",
+      "C": "葡萄糖代谢异常",
+      "D": "α酮酸代谢异常",
+      "E": "嘌呤代谢异常"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "鸟类(包含家禽)嘌呤代谢的产物是尿酸,嘌呤代谢异常时产生过 多的尿酸,会以尿酸盐的形式沉积于肾脏、肝脏等器官及关节,造成器官 肿大变硬、关节型痛风、营养代谢紊乱、免疫功能下降。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物解剖学、组织学与胚胎学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 79,
+        "sourceIndex": 79,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00021",
+    "type": "single_choice",
+    "question": "抑制乳汁分泌的卵巢的激素是?",
+    "options": {
+      "A": "醛固酮",
+      "B": "皮质素",
+      "C": "孕酮",
+      "D": "雌二醇",
+      "E": "催产素"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "卵巢主要分泌雌激素、孕激素、抑制素和松弛素等。其中雌激素(雌二醇) 可通过负反馈作用抑制催乳素的分泌,从而抑制乳汁生成;孕激素(孕酮)与雌 激素协同抑制泌乳,但单独作用较弱。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 86,
+        "sourceIndex": 86,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00022",
+    "type": "single_choice",
+    "question": "急性失血时,对机体产生明显影响的失血量是机体的",
+    "options": {
+      "A": "1%",
+      "B": "5%",
+      "C": "10%",
+      "D": "15%",
+      "E": "20%"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "一次失血若不超过血量的 10%,一般不会影响健康。一次急性失血若达到 血量的 20%时,生命活动将受到明显影响。一次急性失血超过血量的 30%时,则 会危及生命。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 87,
+        "sourceIndex": 87,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00023",
+    "type": "single_choice",
+    "question": "调节躯体运动最基本的反射中枢是",
+    "options": {
+      "A": "小脑",
+      "B": "脊髓",
+      "C": "大脑皮层",
+      "D": "脑干",
+      "E": "基底神经节"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "躯体运动的基本反射中枢是脊髓,高级中枢是大脑皮层。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 89,
+        "sourceIndex": 89,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00024",
+    "type": "single_choice",
+    "question": "尿中含有直接胆红素的是什么黄疸",
+    "options": {
+      "A": "溶血性",
+      "B": "肝性黄疸",
+      "C": "阻塞性黄疸",
+      "D": "退行性黄疸",
+      "E": "实质性黄疸"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "阻塞性黄疸时,胆道阻塞导致结合胆红素(直接胆红素)无法排入肠道,逆 流入血,经肾脏排出,使尿中出现直接胆红素;溶血性黄疸尿中无直接胆红素, 肝性黄疸尿中可有少量直接胆红素。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生物化学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 96,
+        "sourceIndex": 96,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00001",
+    "type": "single_choice",
+    "question": "《动物诊疗机构管理办法》所称的动物诊疗活动不包括",
+    "options": {
+      "A": "动物疫病检疫",
+      "B": "动物绝育手术",
+      "C": "动物疾病的预防",
+      "D": "动物疾病的诊断",
+      "E": "动物疾病的治疗"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "动物诊疗包括动物疾病的预防、诊断、治疗和绝育手术等经营活动。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 1,
+        "sourceIndex": 1,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00002",
+    "type": "single_choice",
+    "question": "斑状出血灶的出血范围",
+    "options": {
+      "A": "0.3~0.6mm",
+      "B": ">10mm",
+      "C": "1~3mm",
+      "D": "0.6~0.8",
+      "E": "1~10mm"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "斑状出血为瘀斑,直径>10mm",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物病理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 3,
+        "sourceIndex": 3,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00003",
+    "type": "single_choice",
+    "question": "未按规定处置病死畜禽,罚款区间",
+    "options": {
+      "A": "3000~30000",
+      "B": "1000~3000",
+      "C": "500~2000",
+      "D": "5 万~10 万",
+      "E": "3 万~10 万"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "未按照规定处理病死畜禽和病害畜禽产品的,由县级以上地方人民政府农 业农村主管部门责令改正,处三千元以上三万元以下罚款;情节严重的,责令停 业整顿,并处三万元以上十万元以下罚款。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 4,
+        "sourceIndex": 4,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00004",
+    "type": "single_choice",
+    "question": "根据《动物诊疗病历管理规范》规定,门诊病历负责盖章的人员是",
+    "options": {
+      "A": "防治员",
+      "B": "B 超操作人员",
+      "C": "诊疗机构负责人",
+      "D": "主管执业兽医",
+      "E": "化验员"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "病历记录包括就诊时间、主诉、现病史、既往史、检查结果、诊断及治疗 意见、医嘱等。门(急)诊病历记录应当由接诊执业兽医师在动物就诊时完成并 签名(盖章)确认。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 5,
+        "sourceIndex": 5,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00005",
+    "type": "single_choice",
+    "question": "犬传染性肝炎(犬病毒性肝炎二型),生化检测哪个酶异常升高",
+    "options": {
+      "A": "淀粉酶",
+      "B": "脂肪酶",
+      "C": "胃蛋白酶",
+      "D": "丙氨酸氨基转移酶",
+      "E": "肌酸激酶"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "犬传染性肝炎损伤肝细胞,肝细胞内丙氨酸氨基转移酶(ALT)大量释放 入血,指标显著升高。淀粉酶、脂肪酶多用于胰腺疾病,肌酸激酶对应肌肉损伤。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生物化学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 7,
+        "sourceIndex": 7,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00006",
+    "type": "single_choice",
+    "question": "肠道产生的胺类被吸收后,需要肝脏解毒的反应",
+    "options": {
+      "A": "氧化反应",
+      "B": "结合反应",
+      "C": "还原反应",
+      "D": "聚合反应",
+      "E": "水解反应"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "肠内腐败产生的有毒胺类被吸收后,进入肝脏,大部分在肝脏中经胺氧化 酶的催化,先被氧化成醛及氨,醛再氧化成酸,最后氧化成二氧化碳和水,氨则 大部分在肝脏合成尿素,从而使胺类物质丧失活性。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 8,
+        "sourceIndex": 8,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00007",
+    "type": "single_choice",
+    "question": "在胃内降低泡沫表面张力而产生消沫作用药物的是",
+    "options": {
+      "A": "乳酸",
+      "B": "大蒜",
+      "C": "甲醛",
+      "D": "二甲硅油",
+      "E": "鱼石脂"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "二甲硅油表面张力低,内服后能迅速降低瘤胃内泡沫液膜的表面张力,使 小气泡破裂,融合成大气泡,随嗳气排出,产生消除泡沫的作用。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 9,
+        "sourceIndex": 9,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00008",
+    "type": "single_choice",
+    "question": "交感-肾上腺髓质系统兴奋时分泌的激素是",
+    "options": {
+      "A": "胰岛素",
+      "B": "生长激素",
+      "C": "儿茶酚胺",
+      "D": "糖皮质激素",
+      "E": "胰高血糖素"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "交感神经兴奋可同步激活肾上腺髓质,使其大量分泌肾上腺素与去甲肾上 腺素,二者均属于儿茶酚胺类物质,是交感-肾上腺髓质系统兴奋时的核心效应 激素,可引发心率加快、血管收缩、血糖升高等一系列应激反应。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 10,
+        "sourceIndex": 10,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00009",
+    "type": "single_choice",
+    "question": "抑制甲状旁腺激素分泌的因素是",
+    "options": {
+      "A": "低血磷",
+      "B": "高血磷",
+      "C": "低血钙",
+      "D": "高血钙",
+      "E": "低血镁"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "甲状旁腺激素是调节血钙和血磷水平最重要的激素之一,它使血钙升高、 血磷降低。高血钙直接抑制甲状旁腺分泌甲状旁腺激素。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 11,
+        "sourceIndex": 11,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00010",
+    "type": "single_choice",
+    "question": "可促进小肠液分泌的胃肠激素是",
+    "options": {
+      "A": "胃泌素",
+      "B": "抑胃肽",
+      "C": "胰高血糖",
+      "D": "胰岛素",
+      "E": "素生长抑素"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "胃泌素可轻度促进小肠液分泌,其余选项均抑制消化液或不属于胃肠调节 肠液分泌激素。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 12,
+        "sourceIndex": 12,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00011",
+    "type": "single_choice",
+    "question": "用于杀灭犬虱的药物是",
+    "options": {
+      "A": "阿苯达唑",
+      "B": "左旋咪唑",
+      "C": "溴氰菊酯",
+      "D": "吡喹酮",
+      "E": "三氮脒"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "溴氰菊酯拟除虫菊酯类,外用杀虫剂,可以杀灭虱、蜱、跳蚤等体外寄生 虫。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 14,
+        "sourceIndex": 14,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00012",
+    "type": "single_choice",
+    "question": "《一、二、三类动物疫病病种名录》一类动物疫病不包括",
+    "options": {
+      "A": "猪水疱病",
+      "B": "非洲马瘟",
+      "C": "牛海绵状脑病",
+      "D": "狂犬病",
+      "E": "小反刍兽疫"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "一类动物疫病(11 种)口蹄疫、猪水疱病、非洲猪瘟、尼帕病毒性脑炎、 非洲马瘟、牛海绵状脑病、牛瘟、牛传染性胸膜肺炎、痒病、小反刍兽疫、高致 病性禽流感。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 15,
+        "sourceIndex": 15,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00013",
+    "type": "single_choice",
+    "question": "根据《中华人民共和国动物防疫法》,不属于地方农业农村兽医主管部门监 管的是",
+    "options": {
+      "A": "动物产品储存",
+      "B": "动物产品加工",
+      "C": "动物产品进口",
+      "D": "动物产品经营",
+      "E": "动物产品生产"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "县级以上地方人民政府农业农村主管部门依照本法规定,对动物饲养、屠 宰、经营、隔离、运输以及动物产品生产、经营、加工、贮藏、运输等活动中的 动物防疫实施监督管理。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 16,
+        "sourceIndex": 16,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00014",
+    "type": "single_choice",
+    "question": "《兽药经营质量管理规范》规定,不同区域、不同类型的兽药应当具有明显 的识别标识。其中退货兽药的识别标识字体颜色为",
+    "options": {
+      "A": "绿色",
+      "B": "黄色",
+      "C": "红色",
+      "D": "黑色",
+      "E": "蓝色"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "《兽药经营质量管理规范》规定,不同区域、不同类型的兽药应当具有明 显的识别标识。标识应当放置准确、字迹清楚。不合格兽药以红色字体标识;待 验和退货兽药以黄色字体标识;合格兽药以绿色字体标识。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 19,
+        "sourceIndex": 19,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00015",
+    "type": "single_choice",
+    "question": "皮肤冻伤属于以下哪个",
+    "options": {
+      "A": "湿性坏疽",
+      "B": "凝固性坏死",
+      "C": "干性坏疽",
+      "D": "液化性坏死",
+      "E": "气性坏疽"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "皮肤冻伤形成的皮肤坏死属于干性坏疽,坏死灶干燥、皱缩,质硬、呈灰 黑色,腐败菌感染较轻,坏疽区与周围健康组织有一条较明显的炎性反应带分隔, 边界清楚。最终坏疽部分可完全从正常组织分离脱落。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物病理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 20,
+        "sourceIndex": 20,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00016",
+    "type": "single_choice",
+    "question": "根据《兽药管理条例》,兽药经营许可证不包括",
+    "options": {
+      "A": "经营方式",
+      "B": "经营时间",
+      "C": "经营范围",
+      "D": "法定负责人",
+      "E": "经营地点"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "兽药经营许可证应当载明经营范围、经营地点、有效期和法定代表人姓名、 住址等事项。兽药经营许可证的有效期为 5 年。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 21,
+        "sourceIndex": 21,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00017",
+    "type": "single_choice",
+    "question": "暂时储存尿液的器官是",
+    "options": {
+      "A": "直肠",
+      "B": "肛门囊",
+      "C": "膀胱",
+      "D": "尿道",
+      "E": "肾脏"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "膀胱是储存尿液的器官。膀胱呈长卵圆形或梨形,分为膀胱顶、膀胱体和 膀胱颈。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 22,
+        "sourceIndex": 22,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00018",
+    "type": "single_choice",
+    "question": "根据《中华人民共和国动物防疫法》,动物卫生监督机构负责的是",
+    "options": {
+      "A": "动物防疫监督管理",
+      "B": "动物疫病流行病学调查",
+      "C": "动物、动物产品检疫",
+      "D": "动物疫病诊断",
+      "E": "动物疫病监测"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "动物卫生监督机构依照《中华人民共和国动物防疫法》和国务院农业农村 主管部门的规定对动物、动物产品实施检疫。动物卫生监督机构的官方兽医具体 实施动物、动物产品检疫。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 24,
+        "sourceIndex": 24,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00019",
+    "type": "single_choice",
+    "question": "最常发生细胞内玻璃样变的器官是",
+    "options": {
+      "A": "心",
+      "B": "肝",
+      "C": "肾",
+      "D": "脾",
+      "E": "肺"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "细胞内玻璃样变性:也称为细胞内透明滴样变,是指在变性的细胞内(胞 浆中)出现大小不一、均质红染的玻璃样圆形小滴。常见于肾小球肾炎时,或其 他疾病面伴有明显的蛋白尿时,肾小管上皮细胞内可出现多个大小不等的透明红 染的圆形小滴。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物病理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 28,
+        "sourceIndex": 28,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00020",
+    "type": "single_choice",
+    "question": "胎儿的代谢产物通过什么血管传送到母体体内",
+    "options": {
+      "A": "脐静脉",
+      "B": "脐动脉",
+      "C": "卵圆孔",
+      "D": "动脉导管",
+      "E": "静脉导管"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "脐静脉输送氧气、营养物质给胎儿。脐动脉携带胎儿产生的代谢废物,从 胎儿流向胎盘,再由母体排出。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 29,
+        "sourceIndex": 29,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00021",
+    "type": "single_choice",
+    "question": "下列哪个不属于抗生素单只注射剂包装说明书应注明的内容的是",
+    "options": {
+      "A": "性状",
+      "B": "生产日期/兽用标识",
+      "C": "应用范围",
+      "D": "半衰期",
+      "E": "生产企业信息"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "兽用化学药品、抗生素产品的单方、复方及中西复方制剂的说明书必须注 明以下内容:兽用标识、兽药名称、主要成分、性状、药理作用、适应证(或功 能与主治)、用法与用量、不良反应、注意事项、停药期、外用杀虫药及其他对 人体或环境有毒有害的废弃包装的处理措施、有效期、含量/包装规格、贮藏、 批准文号、生产企业信息等。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医药理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 30,
+        "sourceIndex": 30,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00022",
+    "type": "single_choice",
+    "question": "根据《动物检疫管理办法》,对出售或运输的动物实施检疫时,不符合《动 物检疫合格证明》出具条件的是",
+    "options": {
+      "A": "临床检查健康的",
+      "B": "畜禽标识符合规定",
+      "C": "申报材料符合检疫规程规定",
+      "D": "来自非封锁区和未发生动物疫情的饲养场(户)",
+      "E": "饲养场(户)须有一定规模"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "出具动物检疫合格证明的条件不要求饲养场(户)具备一定规模,散户养 殖只要满足疫区、免疫、标识、临床健康等要求即可开具证明,不包括 E 选项。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 31,
+        "sourceIndex": 31,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00023",
+    "type": "single_choice",
+    "question": "内服难吸收但用于治疗猪肠道细菌感染的药物",
+    "options": {
+      "A": "磺胺嘧啶",
+      "B": "恩诺沙星",
+      "C": "氟苯尼考",
+      "D": "甲氧苄啶",
+      "E": "新霉素"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "新霉素氨基糖苷类,内服肠道吸收极差,主要停留于肠道,专门治疗肠道 细菌感染;全身感染不能口服新霉素。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 32,
+        "sourceIndex": 32,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00024",
+    "type": "single_choice",
+    "question": "真核生物 tRNA 包含",
+    "options": {
+      "A": "启动子",
+      "B": "外显子",
+      "C": "内含子",
+      "D": "增强子",
+      "E": "反密码子"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "tRNA 上存在反密码子,用于配对 mRNA 密码子。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生物化学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 33,
+        "sourceIndex": 33,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00025",
+    "type": "single_choice",
+    "question": "三羧酸循环中草酰乙酸氨基化形成的是",
+    "options": {
+      "A": "谷氨酸",
+      "B": "甘氨酸",
+      "C": "天冬氨酸",
+      "D": "丙氨酸",
+      "E": "苏氨酸"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "三羧酸循环是糖、脂肪、氨基酸及其他有机物质代谢的联系枢纽。糖有氧 分解过程中产生的丙酮酸、α-酮戊二酸、草酰乙酸可以氨基化转变为丙氨酸、 谷氨酸、天冬氨酸。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生物化学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 34,
+        "sourceIndex": 34,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00026",
+    "type": "single_choice",
+    "question": "经脱羧基反应生成γ-氨基丁酸的氨基酸是",
+    "options": {
+      "A": "谷氨酸",
+      "B": "甘氨酸",
+      "C": "天冬氨酸",
+      "D": "丙氨酸",
+      "E": "苏氨酸"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "γ-氨基丁酸(GABA)是一种重要的抑制性神经递质。在生物体内,它是由 谷氨酸在谷氨酸脱羧酶的催化下,经脱羧基反应直接生成的。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生物化学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 35,
+        "sourceIndex": 35,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00027",
+    "type": "single_choice",
+    "question": "可阻断电子由细胞色素 c 传递至细胞色素 aa3 的是",
+    "options": {
+      "A": "抗霉素 A",
+      "B": "氰化物",
+      "C": "鱼藤酮",
+      "D": "萎锈灵",
+      "E": "杀粉蝶菌素"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "氰化物抑制细胞色素 aa3 (细胞色素 c 氧化酶),阻断电子从细胞色素 c 传递给 O2",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 36,
+        "sourceIndex": 36,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00028",
+    "type": "single_choice",
+    "question": "猪链球菌感染造成关节炎处增多的细胞是",
+    "options": {
+      "A": "淋巴细胞",
+      "B": "中性粒细胞",
+      "C": "嗜酸性粒细胞",
+      "D": "嗜碱性粒细胞",
+      "E": "单核细胞"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "猪链球菌属于细菌感染,急性细菌性炎症病灶以中性粒细胞大量浸润为主。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物解剖学、组织学与胚胎学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 37,
+        "sourceIndex": 37,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00029",
+    "type": "single_choice",
+    "question": "机体脱水时产生的尿是",
+    "options": {
+      "A": "糖尿",
+      "B": "低渗尿",
+      "C": "高渗尿",
+      "D": "血尿",
+      "E": "蛋白尿"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "机体脱水,肾小管重吸收水分增多,尿液溶质浓度升高,形成高渗尿。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 38,
+        "sourceIndex": 38,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00030",
+    "type": "single_choice",
+    "question": "维生素 A 缺乏可引起鸡的食管腺发生",
+    "options": {
+      "A": "再生",
+      "B": "萎缩",
+      "C": "增生",
+      "D": "肥大",
+      "E": "化生"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "维生素 A 是维持上皮组织正常分化与结构完整的必需物质,当其缺乏时, 鸡食道腺的单层柱状上皮会失去正常的分化状态,转变为耐受力更强的复层鳞状 上皮,该过程属于鳞状化生,是化生的典型类型之一。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物解剖学、组织学与胚胎学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 39,
+        "sourceIndex": 39,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00031",
+    "type": "single_choice",
+    "question": "引起鸡渗出性素质的是缺乏的维生素是",
+    "options": {
+      "A": "维生素 A",
+      "B": "维生素 B",
+      "C": "维生素 C",
+      "D": "维生素 D",
+      "E": "维生素 E"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "雏鸡小脑软化和渗出性素质提示维生素 E 与硒缺乏,应给予维生素 E 和亚 硒酸钠进行治疗。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生物化学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 40,
+        "sourceIndex": 40,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00032",
+    "type": "single_choice",
+    "question": "治疗犊牛大肠杆菌性腹泻,之前用了抑制 DNA 回旋酶的药,为了避免耐药性 的产生,后续应选择的治疗药物是",
+    "options": {
+      "A": "环丙沙星",
+      "B": "磺胺脒",
+      "C": "红霉素",
+      "D": "替米考星",
+      "E": "青霉素"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "磺胺脒属于磺胺类药物。其作用机制是抑制细菌的二氢叶酸合成酶,干扰 叶酸的合成。这与抑制 DNA 回旋酶的机制完全不同,且对肠道革兰氏阴性菌(如 大肠杆菌)有效,因此是合理的换药选择。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生物化学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 41,
+        "sourceIndex": 41,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00033",
+    "type": "single_choice",
+    "question": "我国规定,对布鲁菌的阳性奶牛及其产品的处理方式是",
+    "options": {
+      "A": "高温",
+      "B": "销毁",
+      "C": "产酸",
+      "D": "化制",
+      "E": "消毒"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "布鲁菌阳性奶牛必须扑杀,奶牛及其乳、肉等产品统一销毁无害化处理",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 42,
+        "sourceIndex": 42,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00034",
+    "type": "single_choice",
+    "question": "具有增加肠内容积、软化粪便、加速粪便排泄的药物是",
+    "options": {
+      "A": "稀盐酸",
+      "B": "鞣酸蛋白",
+      "C": "鱼石脂",
+      "D": "铋制剂",
+      "E": "硫酸钠"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "硫酸钠内服后在肠内可解离出 Na+和 SO32−,提高肠内渗透压,在肠管中 保持大量水分,扩大肠管容积,软化粪便,并刺激肠壁增强其蠕动,从而产生泻 下作用。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 43,
+        "sourceIndex": 43,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00035",
+    "type": "single_choice",
+    "question": "马霉玉米中毒引起的特征性症状是",
+    "options": {
+      "A": "大脑软化",
+      "B": "脑萎缩",
+      "C": "化脓性脑炎",
+      "D": "非化脓性脑炎",
+      "E": "小脑软化"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "脑软化指脑液化性坏死,分大脑软化(马霉玉米中毒)、小脑软化(鸡维 生素 E-硒缺乏)。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医药理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 44,
+        "sourceIndex": 44,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00036",
+    "type": "single_choice",
+    "question": "糖尿病肾病的病理变化是",
+    "options": {
+      "A": "肾小管淀粉样病变",
+      "B": "肾小球硬化",
+      "C": "肾小球软化",
+      "D": "肾小球萎缩",
+      "E": "肾小管尿酸盐沉积"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "糖尿病对肾的影响可波及肾小球、肾小管、肾血管和肾间质。糖尿病导致 的肾小球病变具有一定的病理学特点,即形成糖尿病肾小球硬化症。糖尿病肾病 的超微结构变化特点是肾小球毛细血管基底膜弥漫性增厚,上皮细胞与足突融合。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 45,
+        "sourceIndex": 45,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00037",
+    "type": "single_choice",
+    "question": "《兽药管理条例》规定动物产品兽药残留超标,养殖场对结果有异议,申请 复检的时限是收到检验结果后",
+    "options": {
+      "A": "5 个工作日",
+      "B": "7 个工作日",
+      "C": "10 个工作日",
+      "D": "15 个工作日",
+      "E": "30 个工作日"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": ".兽药检验工作由国务院兽医行政管理部门和省、自治区、直辖市人民政 府兽医行政管理部门设立的兽药检验机构承担。当事人对兽药检验结果有异议的, 可以自收到检验结果之日起 7 个工作日内向实施检验的机构或者上级兽医行政 管理部门设立的检验机构申请复检。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 47,
+        "sourceIndex": 47,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00038",
+    "type": "single_choice",
+    "question": "肾小管重吸收葡萄糖是在",
+    "options": {
+      "A": "集合管",
+      "B": "肾小球",
+      "C": "近曲小管",
+      "D": "远曲小管",
+      "E": "髓袢升支细段"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "葡萄糖在近曲小管中通过继发性主动转运进行重吸收。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 48,
+        "sourceIndex": 48,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00039",
+    "type": "single_choice",
+    "question": "重大动物疫情应急工作的指导方针不包括的是",
+    "options": {
+      "A": "饲养管理",
+      "B": "加强领导",
+      "C": "依靠科学",
+      "D": "依法防治",
+      "E": "果断处理"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "重大动物疫情应急工作应当坚持加强领导、密切配合,依靠科学、依法防 治,群防群控、果断处置的 24 字方针。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 49,
+        "sourceIndex": 49,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00040",
+    "type": "single_choice",
+    "question": "家畜卵子受精的部位是输卵管",
+    "options": {
+      "A": "漏斗部",
+      "B": "峡部",
+      "C": "伞部",
+      "D": "子宫部",
+      "E": "壶腹部"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "输卵管是输送卵子到子宫的细而弯曲的肌性管道,也是受精的场所。输卵 管分为漏斗、壶腹、峡和子宫部。输卵管壶腹:为输卵管漏斗后方管腔较粗的部 分,是精子和卵子结合受精的部位。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 50,
+        "sourceIndex": 50,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00041",
+    "type": "single_choice",
+    "question": "病死动物尸体焚烧后,焚烧炉出口烟气含氧量(干气)标准为",
+    "options": {
+      "A": "2%",
+      "B": "3%",
+      "C": "4%",
+      "D": "5%",
+      "E": "6%"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "直接焚烧法:燃烧室温度应≥850°C。燃烧所产生的烟气从最后的助燃空 气喷射口或燃烧器出口到换热面或烟道冷风引射口之间的停留时间应≥2s。焚烧 炉出口烟气中氧含量应为 6%~10%(干气)。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 51,
+        "sourceIndex": 51,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00042",
+    "type": "single_choice",
+    "question": "硬膜外麻醉时,将麻醉剂注入的常用部位是",
+    "options": {
+      "A": "荐尾间隙",
+      "B": "腰荐间隙",
+      "C": "寰枢间隙",
+      "D": "颈胸间隙",
+      "E": "胸腰间隙"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "脊硬膜和椎管之间为硬膜外腔。硬膜外麻醉即自腰荐间隙将麻醉剂注入硬 膜外腔。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医药理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 52,
+        "sourceIndex": 52,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00043",
+    "type": "single_choice",
+    "question": "中心静脉压指的是哪个位置的血压",
+    "options": {
+      "A": "左心房",
+      "B": "右心房",
+      "C": "肺静脉",
+      "D": "肝门静脉",
+      "E": "颈静脉"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "通常将右心房和胸腔内大静脉的血压称为中心静脉压,而各器官静脉的血 压称为外周静脉压。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 53,
+        "sourceIndex": 53,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00044",
+    "type": "single_choice",
+    "question": "具有主动脉裂孔、食管裂孔、后腔静脉裂孔的是",
+    "options": {
+      "A": "呼气肌",
+      "B": "吸气肌",
+      "C": "膈肌",
+      "D": "肋间外肌",
+      "E": "肋间内肌"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "膈肌上有三个标志性裂孔:主动脉裂孔、食管裂孔、后腔静脉裂孔。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 56,
+        "sourceIndex": 56,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00045",
+    "type": "single_choice",
+    "question": "家畜颅骨后方两耳之间部位称为",
+    "options": {
+      "A": "颞骨",
+      "B": "耳廓骨",
+      "C": "顶骨",
+      "D": "额骨",
+      "E": "枕骨"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "枕骨位于颅骨后方,两耳之间,形成枕部。顶骨为成对骨,位于颅腔的顶 壁。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 57,
+        "sourceIndex": 57,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00046",
+    "type": "single_choice",
+    "question": "心包的壁层和脏层的液体是",
+    "options": {
+      "A": "组织液",
+      "B": "血液",
+      "C": "心包液",
+      "D": "渗出液",
+      "E": "淋巴液"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "心包为包在心脏外面的圆锥形纤维浆膜囊,分纤维层和浆膜层。纤维层为 心包的外层,浆膜层为心包的内层,分壁层和脏层,壁层紧贴于纤维层内面,脏 层紧贴于心脏外面,构成心外膜。壁层和脏层之间的腔隙称为心包腔,内含心包 液,起润滑作用,可减少心搏动时的摩擦。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 58,
+        "sourceIndex": 58,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00047",
+    "type": "single_choice",
+    "question": "血浆蛋白的主要功能是",
+    "options": {
+      "A": "形成晶体渗透压",
+      "B": "运输氧气",
+      "C": "运输二氧化碳",
+      "D": "体液调节",
+      "E": "形成胶体渗透压"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "血浆白蛋白的主要功能有:形成血浆胶体渗透压,运输激素、营养物质和 代谢产物,保持血浆 pH 的相对恒定。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 60,
+        "sourceIndex": 60,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00048",
+    "type": "single_choice",
+    "question": "血液中既能运输氧气,又能运输二氧化碳的物质是",
+    "options": {
+      "A": "补体蛋白",
+      "B": "纤维蛋白",
+      "C": "血红蛋白",
+      "D": "球蛋白",
+      "E": "白蛋白"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "血红蛋白是一种含铁的特殊蛋白质,既能与氧结合,形成氧合血红蛋白 (HbO2 )又易于将它释放,形成脱氧血红蛋白(或还原血红蛋白,HHb)。此 外,二氧化碳也可与 Hb 结合,以氨基甲酸血红蛋白形式经血液运输。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 61,
+        "sourceIndex": 61,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00049",
+    "type": "single_choice",
+    "question": "牛右肺后下方存在小肺叶是",
+    "options": {
+      "A": "前叶",
+      "B": "后叶",
+      "C": "膈叶",
+      "D": "副叶",
+      "E": "肺小叶"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "牛仅右肺有副叶,位于右肺膈叶后下方、心脏背侧的独立小叶,左肺无副 叶。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 63,
+        "sourceIndex": 63,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00050",
+    "type": "single_choice",
+    "question": "可用于因黄体分泌失调导致习惯性流产的药物是",
+    "options": {
+      "A": "雌激素",
+      "B": "雄激素",
+      "C": "FGE2",
+      "D": "孕激素",
+      "E": "睾酮"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "孕激素孕酮主要由黄体、胎盘分泌,起保胎作用。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 64,
+        "sourceIndex": 64,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00051",
+    "type": "single_choice",
+    "question": "细菌对头孢产生耐药的原理",
+    "options": {
+      "A": "产生β内酰胺酶",
+      "B": "改变核糖体结构",
+      "C": "叶酸代谢途径改变",
+      "D": "细胞膜通透性增加",
+      "E": "增加药物外排泵"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "头孢属于β-内酰胺类抗生素,细菌最主要耐药机制是产生β-内酰胺酶, 水解破坏药物β-内酰胺环使其失效。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医药理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 65,
+        "sourceIndex": 65,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00052",
+    "type": "single_choice",
+    "question": "牛过量采食小麦,瘤胃内显著增多的物质是",
+    "options": {
+      "A": "乳酸",
+      "B": "乙酸",
+      "C": "pH 增高",
+      "D": "碳酸",
+      "E": "丙酸"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "大量谷物发酵产生大量乳酸,引发瘤胃酸中毒。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 66,
+        "sourceIndex": 66,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00053",
+    "type": "single_choice",
+    "question": "动物诊疗机构对废弃物的处理原则是",
+    "options": {
+      "A": "运送郊外自行处理",
+      "B": "深埋",
+      "C": "就近集中处理",
+      "D": "消毒后丢进公共垃圾桶",
+      "E": "消毒再利用"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "动物诊疗机构应当根据就近集中处置的原则,及时将医疗废物交由医疗废 物集中处置单位处置。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 67,
+        "sourceIndex": 67,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00054",
+    "type": "single_choice",
+    "question": "细胞膜上糖蛋白的连接结构是",
+    "options": {
+      "A": "离子键",
+      "B": "肽键",
+      "C": "糖苷键",
+      "D": "二硫键",
+      "E": "氢键"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "糖蛋白是糖类与蛋白质通过糖苷键共价连接而成。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 68,
+        "sourceIndex": 68,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00055",
+    "type": "single_choice",
+    "question": "犬,起于锁骨,分别至于颈部中线、颞骨的乳突和肱骨前缘内侧的肌肉是",
+    "options": {
+      "A": "斜方肌",
+      "B": "背阔肌",
+      "C": "臂三头肌",
+      "D": "肩胛横突肌",
+      "E": "臂头肌"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "臂头肌起点为锁骨,分三支止点:颈部中线、颞骨乳突、肱骨前缘内侧, 主要功能牵引头颈、伸展前肢。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 69,
+        "sourceIndex": 69,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00056",
+    "type": "single_choice",
+    "question": "磷酸戊糖途径中可汇入糖酵解的代谢产物是",
+    "options": {
+      "A": "肾上腺素",
+      "B": "利多卡因",
+      "C": "阿托品",
+      "D": "酚妥拉明",
+      "E": "毛果芸香碱"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "磷酸戊糖途径的反应在胞液中进行。其途径可分为两个阶段:第一阶段是 氧化反应,包括葡萄糖-6-磷酸 2 次脱氢、1 次脱羧,形成五碳糖(核酮糖-5-磷酸), 生成 CO2和 NADPH+H+;第二阶段是非氧化反应,包括核酮糖-5-磷酸异构化为 核糖-5-磷酸,核酮糖-5-磷酸还通过差向异构形成木酮糖-5-磷酸,再通过转酮基 反应和转醛基反应,将磷酸戊糖途径与糖无氧分解途径联系起来。 (共用选项)",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 73,
+        "sourceIndex": 73,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00057",
+    "type": "single_choice",
+    "question": "母犬绝育,局部麻醉,使用的药物是",
+    "options": {
+      "A": "肾上腺素",
+      "B": "利多卡因",
+      "C": "酚磺乙胺",
+      "D": "丁卡因",
+      "E": "东菪莨碱"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "利多卡因是临床最常用局部浸润麻醉药,起效快、毒性低,适合手术局部 麻醉。 (共用选项)",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医药理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 75,
+        "sourceIndex": 75,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00058",
+    "type": "single_choice",
+    "question": "牧羊犬,三岁,遇车祸,大量出血,首选的急救药物是 C",
+    "options": {
+      "A": "睾丸",
+      "B": "阴茎沟",
+      "C": "阴茎体",
+      "D": "输精管乳头",
+      "E": "附睾"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "酚磺乙胺为止血药,增强血小板聚集、缩短凝血时间,外伤大出血急救止 血首选。 (共用选项)",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物病理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 77,
+        "sourceIndex": 77,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00059",
+    "type": "single_choice",
+    "question": "位于泄殖腔输尿管开口腹内侧的结构是",
+    "options": {
+      "A": "浦肯野细胞层",
+      "B": "大分子细胞层",
+      "C": "颗粒细胞层",
+      "D": "多形细胞层",
+      "E": "锥形细胞层"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "输精管末端膨大形成输精管乳头,位于泄殖腔输尿管开口腹内侧。 (共用选项)",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 80,
+        "sourceIndex": 80,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00060",
+    "type": "single_choice",
+    "question": "小脑皮质中细胞分布量最少的一层是",
+    "options": {
+      "A": "凝血酶原",
+      "B": "纤溶酶原",
+      "C": "纤溶酶",
+      "D": "凝血酶",
+      "E": "蛋白质 C"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "小脑的浅层为灰质,称小脑皮质,其结构由外向内分为 3 层:分子层细胞 稀少;浦肯野细胞层的细胞体积最大,整齐排列为一层;颗粒层细胞数量最多。 (共用选项)",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生物化学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 83,
+        "sourceIndex": 83,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00061",
+    "type": "single_choice",
+    "question": "催化纤维蛋白原变成纤维蛋白的是",
+    "options": {
+      "A": "心性水肿",
+      "B": "肝性水肿",
+      "C": "肾性水肿",
+      "D": "炎性水肿",
+      "E": "营养不良性水肿"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "凝血酶是凝血过程的关键终末酶,其核心作用是将可溶性纤维蛋白原水解 为不溶性纤维蛋白单体,后者自发聚合形成纤维蛋白多聚体,构成血凝块的网状 支架。 (共用选项)",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物病理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 86,
+        "sourceIndex": 86,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00062",
+    "type": "single_choice",
+    "question": "下列饲料厂行为中属于违法行为的是",
+    "options": {
+      "A": "直接排放污水",
+      "B": "发酵粪便",
+      "C": "按照规定疫情防控",
+      "D": "按照规定扑杀染疫动物",
+      "E": "根据防疫需要调整消毒频次"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "饲料厂生产废水必须经处理达标、取得排污许可后才能排放,未经处理直 接排放污水属于环境违法行为,会被处罚、责令整改。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 90,
+        "sourceIndex": 90,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00063",
+    "type": "single_choice",
+    "question": "引起阻塞性肺萎陷的是",
+    "options": {
+      "A": "肝腹水",
+      "B": "肾积水",
+      "C": "胃膨胀",
+      "D": "支气管炎",
+      "E": "腹腔积液"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "支气管被炎性渗出物、分泌物堵塞后,阻塞远端肺泡内原有气体被血液吸 收,肺泡塌陷,形成阻塞性肺萎陷。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 91,
+        "sourceIndex": 91,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00064",
+    "type": "single_choice",
+    "question": "可用于降低脑膜炎患畜颅内压的药物是",
+    "options": {
+      "A": "生理盐水",
+      "B": "二硫丙醇",
+      "C": "亚甲蓝",
+      "D": "甘露醇",
+      "E": "阿托品"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "甘露醇是一种高渗性脱水剂,静脉注射后能通过渗透作用将脑组织内的水 分吸入血液中,从而有效减轻脑水肿,降低颅内压。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 92,
+        "sourceIndex": 92,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  }
+]

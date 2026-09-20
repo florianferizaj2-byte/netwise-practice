@@ -1,0 +1,19 @@
+{
+  "status": "text_pdf_imported_ocr_skipped_review_pending",
+  "certificateId": "veterinary-practitioner",
+  "sourcePolicy": "用户提供资料先按未核验汇编处理；导入时保留文件名、题号、重复题和待核对记录，不宣称为官方核验真题。",
+  "providedSourceForNextImport": {
+    "file": "E:/BaiduNetdiskDownload/1.2009-2022年真题+解析【执业兽医（全科类）】.pdf",
+    "status": "已纳入历年真题导入范围；待核对题保留在 import-report.json",
+    "ocr": "not_requested"
+  },
+  "banks": [
+    { "id": "basic-subject", "plannedContent": "基础科目" },
+    { "id": "clinical-subject", "plannedContent": "临床科目" },
+    { "id": "preventive-subject", "plannedContent": "预防科目" },
+    { "id": "comprehensive-subject", "plannedContent": "综合科目" },
+    { "id": "past-exams", "plannedContent": "历年真题与解析" },
+    { "id": "chapter-practice", "plannedContent": "章节练习题" },
+    { "id": "mock-exams", "plannedContent": "模拟与考前点题卷" }
+  ]
+}
