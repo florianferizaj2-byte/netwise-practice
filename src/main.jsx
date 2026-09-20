@@ -3935,17 +3935,19 @@ function AdminView({
               </select>
             </label>
             <label className="admin-question-search">
-              关键词
+              题目搜索
               <div>
                 <input
                   value={questionSearchInput}
                   onChange={(event) => setQuestionSearchInput(event.target.value)}
-                  placeholder="搜索题干或选项"
+                  placeholder="题干、题号、ID；支持 * 和 ?"
+                  autoComplete="off"
                 />
                 <button type="submit" className="primary" disabled={questionLoading}>
                   <Search size={16} /> 搜索
                 </button>
               </div>
+              <small>普通文字为包含搜索；例如：*本病*、vet-2009-*、*防治?</small>
             </label>
           </form>
           {questionLoading ? (
@@ -4675,6 +4677,13 @@ function VeterinaryPractice({ session, refresh, run, busy, train, exit }) {
   const [responses, setResponses] = useState({});
   const [done, setDone] = useState(false);
   const [teacherOpen, setTeacherOpen] = useState(false);
+  const [navOpen, setNavOpen] = useState(false);
+  const [navFilter, setNavFilter] = useState("all");
+  const [navChapter, setNavChapter] = useState(
+    session.questions[0]?.chapter || veterinaryModules[0],
+  );
+  const [navPage, setNavPage] = useState(0);
+  const [jumpValue, setJumpValue] = useState("1");
   const started = useRef(Date.now());
   const groups = buildVeterinaryGroups(session.questions);
   const group =
@@ -4704,8 +4713,18 @@ function VeterinaryPractice({ session, refresh, run, busy, train, exit }) {
   const jumpTo = (nextIndex) => {
     if (busy || nextIndex < 0 || nextIndex >= session.questions.length) return;
     setIndex(nextIndex);
+    setJumpValue(String(nextIndex + 1));
+    const nextChapter = session.questions[nextIndex]?.chapter;
+    if (nextChapter && nextChapter !== navChapter) {
+      setNavChapter(nextChapter);
+      setNavPage(0);
+    }
     setTeacherOpen(false);
     started.current = Date.now();
+  };
+  const submitJump = () => {
+    const nextIndex = Number.parseInt(jumpValue, 10) - 1;
+    if (Number.isInteger(nextIndex)) jumpTo(nextIndex);
   };
   const choose = (key) => {
     if (result) return;
@@ -4761,6 +4780,48 @@ function VeterinaryPractice({ session, refresh, run, busy, train, exit }) {
   };
   const chapterCount = (name) =>
     session.questions.filter((question) => question.chapter === name).length;
+  const navGroups = groups
+    .map((candidate) => {
+      const indexes = candidate.indexes.filter(
+        (questionIndex) =>
+          session.questions[questionIndex]?.chapter === navChapter,
+      );
+      if (!indexes.length) return null;
+      const matchesFilter = indexes.some((questionIndex) => {
+        const question = session.questions[questionIndex];
+        const response = responses[question.id];
+        const isAnswered = !!response?.submitted;
+        if (navFilter === "answered") return isAnswered;
+        if (navFilter === "unanswered") return !isAnswered;
+        if (navFilter === "wrong") return response?.result?.correct === false;
+        if (navFilter === "revealed") return !!response?.revealed;
+        return true;
+      });
+      return matchesFilter ? indexes : null;
+    })
+    .filter(Boolean);
+  const navPages = [];
+  let navPageIndexes = [];
+  navGroups.forEach((indexes) => {
+    if (
+      navPageIndexes.length &&
+      navPageIndexes.length + indexes.length > 50
+    ) {
+      navPages.push(navPageIndexes);
+      navPageIndexes = [];
+    }
+    navPageIndexes = [...navPageIndexes, ...indexes];
+  });
+  if (navPageIndexes.length || !navPages.length) navPages.push(navPageIndexes);
+  const currentNavPage = Math.min(navPage, Math.max(0, navPages.length - 1));
+  const visibleNavIndexes = navPages[currentNavPage] || [];
+  const openQuestionNav = () => {
+    if (!navOpen) {
+      const currentPage = navPages.findIndex((page) => page.includes(index));
+      setNavPage(currentPage >= 0 ? currentPage : 0);
+    }
+    setNavOpen((old) => !old);
+  };
   const renderOptions = () => (
     <div className="options vet-options">
       {Object.entries(q.options).map(([key, value]) => (
@@ -4869,51 +4930,146 @@ function VeterinaryPractice({ session, refresh, run, busy, train, exit }) {
             <span className="badge">{q.chapter}</span>
             <label className="question-jump">
               跳转
-              <select
-                aria-label="选择执兽题号"
-                value={index}
+              <input
+                aria-label="输入执兽题号"
+                type="number"
+                min="1"
+                max={session.questions.length}
+                value={jumpValue}
                 disabled={!!busy}
-                onChange={(event) => jumpTo(Number(event.target.value))}
-              >
-                {session.questions.map((_, questionIndex) => (
-                  <option key={questionIndex} value={questionIndex}>
-                    第 {questionIndex + 1} 题
-                  </option>
-                ))}
-              </select>
+                onChange={(event) => setJumpValue(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") submitJump();
+                }}
+              />
+              <button type="button" disabled={!!busy} onClick={submitJump}>
+                确定
+              </button>
             </label>
           </div>
           <div className="progress">
             <i style={{ width: ((index + 1) / session.questions.length) * 100 + "%" }} />
           </div>
           <div className="vet-question-nav">
-            <div className="practice-question-nav-head">
-              <strong>执兽题目导航</strong>
-              <small>病例组内可切换小题，作答状态会自动保留</small>
+            <div className="practice-question-nav-head vet-nav-head">
+              <div>
+                <strong>执兽答题卡</strong>
+                <small>
+                  当前 {q.chapter} · 已完成 {history.length} / {session.questions.length}
+                </small>
+              </div>
+              <button
+                type="button"
+                className="vet-nav-toggle"
+                disabled={!!busy}
+                onClick={openQuestionNav}
+              >
+                {navOpen ? "收起题号" : "打开题号"}
+                <ChevronDown size={15} className={navOpen ? "is-open" : ""} />
+              </button>
             </div>
-            <div className="question-number-grid">
-              {session.questions.map((question, questionIndex) => {
-                const isAnswered = answeredIds.has(question.id);
-                const isWrong = isAnswered && responses[question.id]?.result?.correct === false;
-                const isRevealed = revealedIds.has(question.id);
-                return (
+            {navOpen && (
+              <>
+                <div className="vet-nav-toolbar">
+                  <label>
+                    科目
+                    <select
+                      value={navChapter}
+                      disabled={!!busy}
+                      onChange={(event) => {
+                        setNavChapter(event.target.value);
+                        setNavPage(0);
+                      }}
+                    >
+                      {veterinaryModules.map((module) => (
+                        <option key={module} value={module} disabled={!chapterCount(module)}>
+                          {module.replace("科目", "")}（{chapterCount(module)}题）
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                  <label>
+                    状态
+                    <select
+                      value={navFilter}
+                      disabled={!!busy}
+                      onChange={(event) => {
+                        setNavFilter(event.target.value);
+                        setNavPage(0);
+                      }}
+                    >
+                      <option value="all">全部题目</option>
+                      <option value="unanswered">未作答</option>
+                      <option value="answered">已作答</option>
+                      <option value="wrong">答错题</option>
+                      <option value="revealed">看过答案</option>
+                    </select>
+                  </label>
+                </div>
+                <div className="vet-nav-pagebar">
                   <button
-                    key={question.id}
-                    className={[
-                      questionIndex === index ? "current" : "",
-                      isAnswered ? "answered" : "",
-                      isWrong ? "wrong" : "",
-                      isRevealed ? "revealed" : "",
-                    ].filter(Boolean).join(" ")}
-                    aria-label={`第 ${questionIndex + 1} 题`}
-                    disabled={!!busy}
-                    onClick={() => jumpTo(questionIndex)}
+                    type="button"
+                    disabled={!!busy || currentNavPage === 0}
+                    onClick={() => setNavPage((page) => Math.max(0, page - 1))}
                   >
-                    {questionIndex + 1}
+                    上一页
                   </button>
-                );
-              })}
-            </div>
+                  <span>
+                    第 {currentNavPage + 1} / {navPages.length} 页 · 每页最多 50 题
+                  </span>
+                  <button
+                    type="button"
+                    disabled={!!busy || currentNavPage >= navPages.length - 1}
+                    onClick={() =>
+                      setNavPage((page) => Math.min(navPages.length - 1, page + 1))
+                    }
+                  >
+                    下一页
+                  </button>
+                </div>
+                {visibleNavIndexes.length ? (
+                  <div className="question-number-grid">
+                    {visibleNavIndexes.map((questionIndex) => {
+                      const question = session.questions[questionIndex];
+                      const isAnswered =
+                        answeredIds.has(question.id) ||
+                        !!responses[question.id]?.submitted;
+                      const isWrong =
+                        isAnswered && responses[question.id]?.result?.correct === false;
+                      const isRevealed = revealedIds.has(question.id);
+                      const sharedGroup = groups.find((candidate) =>
+                        candidate.indexes.includes(questionIndex),
+                      );
+                      return (
+                        <button
+                          key={question.id}
+                          className={[
+                            questionIndex === index ? "current" : "",
+                            isAnswered ? "answered" : "",
+                            isWrong ? "wrong" : "",
+                            isRevealed ? "revealed" : "",
+                            sharedGroup?.shared ? "shared" : "",
+                          ].filter(Boolean).join(" ")}
+                          aria-label={`第 ${questionIndex + 1} 题`}
+                          disabled={!!busy}
+                          onClick={() => jumpTo(questionIndex)}
+                        >
+                          {questionIndex + 1}
+                        </button>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <p className="vet-nav-empty">这个筛选条件下暂时没有题目。</p>
+                )}
+                <div className="vet-nav-legend">
+                  <span><i className="current" />当前</span>
+                  <span><i className="answered" />已作答</span>
+                  <span><i className="wrong" />答错</span>
+                  <span><i className="shared" />共用题干组</span>
+                </div>
+              </>
+            )}
           </div>
           {group?.shared && (
             <section className={`vet-shared-card ${group.kind || "stem"}`}>

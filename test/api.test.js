@@ -1271,6 +1271,15 @@ test("管理员面板隔离管理员 API，支持扩题、重合检测、删题�
     options: { A: "正确结论", B: "错误结论甲", C: "错误结论乙", D: "错误结论丙" },
   };
   store.addAdminQuestions([duplicateBase, duplicateOther]);
+  const wildcardQuestions = await request(
+    admin.cookie,
+    "/admin/questions?certificateId=network-engineer&search=admin-similar-?&limit=10",
+  );
+  assert.equal(wildcardQuestions.status, 200);
+  assert.deepEqual(
+    wildcardQuestions.data.questions.map((question) => question.id).sort(),
+    ["admin-similar-a", "admin-similar-b"],
+  );
   const similar = await request(
     admin.cookie,
     "/admin/questions/similar?certificateId=network-engineer&threshold=0.8&limit=500",

@@ -212,23 +212,6 @@ function questionSharedMarker(question) {
   };
 }
 
-function likelySharedChild(stem, question, order, sourceGap) {
-  const text = String(question || "");
-  if (/^\s*(?:某|一头|一只|一群|一牛|一猪|一犬|一猫|一马|一羊|一鸡|一鸭|北京犬|贵宾犬|泰迪犬|奶牛|肉鸡|病牛|病猪)/.test(text))
-    return false;
-  const stemChunks = cleanSharedStem(stem).match(/[\u4e00-\u9fff]{2,}/g) || [];
-  const overlaps = stemChunks.some((chunk) => {
-    const chars = [...chunk];
-    for (let length = Math.min(8, chars.length); length >= 3; length -= 1)
-      for (let start = 0; start + length <= chars.length; start += 1)
-        if (text.includes(chars.slice(start, start + length).join(""))) return true;
-    return false;
-  });
-  if (overlaps) return true;
-  if (sourceGap > 1 && order >= 3) return false;
-  return /本病|该病|此病|上述|以上|该群|此群|该动物|该病例|此病例|该寄生虫|根据题干|根据病状|首选|确诊|诊断|防控|治疗|病原|病因|传播途径|传播媒介|易感|临床表现/.test(text);
-}
-
 function sharedStreamKey(question, fallback) {
   const provenance = question.provenance?.[0];
   return [
@@ -340,14 +323,17 @@ function decorateAnalysisSharedGroups(rows, stream) {
   rows.forEach((row) => {
     if (pending) {
       const sourceGap = row.anchor - pending.lastAnchor;
+      const belongsToAnotherGroup =
+        row.question.sharedGroupId && row.question.sharedGroupId !== pending.id;
+      // In the extracted PDFs, the next case marker is stored at the end of
+      // the last child question's analysis. Once a stem has been found, every
+      // consecutive question before that next marker belongs to the case;
+      // relying only on words such as “本病” incorrectly split questions like
+      // “若进行腹腔穿刺……” and “防治本病的措施……”。
       if (
         pending.order <= 8 &&
-        likelySharedChild(
-          pending.stem,
-          row.question.question,
-          pending.order,
-          sourceGap,
-        )
+        sourceGap === 1 &&
+        !belongsToAnotherGroup
       ) {
         setSharedFields(row.question, {
           sharedGroupId: pending.id,

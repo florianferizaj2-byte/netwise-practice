@@ -327,6 +327,45 @@ export async function createApp(options = {}) {
       };
     });
   };
+  const escapeSearchRegex = (value) =>
+    value.replace(/[\\^$.*+?()[\]{}|]/g, "\\$&");
+  const compileWildcardSearch = (value) => {
+    const normalized = String(value || "").toLocaleLowerCase("zh-CN");
+    if (!normalized.includes("*") && !normalized.includes("?")) return null;
+    const source = [...normalized]
+      .map((character) => {
+        if (character === "*") return ".*";
+        if (character === "?") return ".";
+        return escapeSearchRegex(character);
+      })
+      .join("");
+    return new RegExp(`^${source}$`, "iu");
+  };
+  const questionSearchFields = (question) => [
+    question.id,
+    question.question,
+    question.chapter,
+    question.knowledgePoint,
+    question.targetKnowledgePoint,
+    question.source,
+    question.sourceLabel,
+    ...(question.tags || []),
+    ...(question.provenance || []).flatMap((item) => [
+      item.file,
+      item.questionNumber,
+      item.sourceIndex,
+    ]),
+    ...Object.values(question.options || {}),
+  ]
+    .filter((value) => value !== undefined && value !== null)
+    .map((value) => String(value).toLocaleLowerCase("zh-CN"));
+  const matchesQuestionSearch = (question, value) => {
+    if (!value) return true;
+    const wildcard = compileWildcardSearch(value);
+    return questionSearchFields(question).some((field) =>
+      wildcard ? wildcard.test(field) : field.includes(value),
+    );
+  };
   const adminQuestionFilters = (query) => {
     const parsed = z
       .object({
@@ -339,7 +378,7 @@ export async function createApp(options = {}) {
         offset: z.coerce.number().int().min(0).default(0),
       })
       .parse(query);
-    const search = parsed.search?.toLowerCase();
+    const search = parsed.search?.toLocaleLowerCase("zh-CN");
     const filtered = store
       .allQ()
       .filter(
@@ -351,11 +390,7 @@ export async function createApp(options = {}) {
             (question.targetKnowledgePoint || question.knowledgePoint) ===
               parsed.knowledgePoint) &&
           (!parsed.source || question.source === parsed.source) &&
-          (!search ||
-            [question.question, ...Object.values(question.options || {})]
-              .join(" ")
-              .toLowerCase()
-              .includes(search)),
+          (!search || matchesQuestionSearch(question, search)),
       );
     return {
       ...parsed,
