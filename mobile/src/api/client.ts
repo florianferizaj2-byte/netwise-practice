@@ -102,6 +102,29 @@ export type AttemptResponse = {
   analysis?: string;
 };
 
+export type FeedbackKind =
+  | 'wrong_answer'
+  | 'ambiguous'
+  | 'duplicate'
+  | 'other';
+
+export type AiAnalysisResponse = {
+  mistakeType: string;
+  weakKnowledge: string;
+  reason: string;
+};
+
+export type AiTeacherAction =
+  | '详细讲解'
+  | '换一种方法解释'
+  | '举一个实际例子'
+  | '给我提示';
+
+export type AiTrainingResponse = {
+  questions: Question[];
+  cached: boolean;
+};
+
 export const mobileApi = {
   async login(username: string, password: string) {
     const response = await request<AuthResponse>('/auth/login', {
@@ -157,6 +180,42 @@ export const mobileApi = {
     return request<AttemptResponse>('/attempts', {
       method: 'POST',
       body: JSON.stringify({ questionId, selected, timeMs }),
+    });
+  },
+
+  feedback(questionId: string, kind: FeedbackKind, note?: string) {
+    return request<{ saved: boolean }>(
+      `/questions/${encodeURIComponent(questionId)}/feedback`,
+      {
+        method: 'POST',
+        body: JSON.stringify({ kind, ...(note ? { note } : {}) }),
+      },
+    );
+  },
+
+  analyze(questionId: string) {
+    return request<AiAnalysisResponse>('/ai/analyze', {
+      method: 'POST',
+      body: JSON.stringify({ questionId }),
+    });
+  },
+
+  teacher(
+    questionId: string,
+    action: AiTeacherAction,
+    selected: string[],
+    hintLevel = 0,
+  ) {
+    return request<{ text: string }>('/ai/teacher', {
+      method: 'POST',
+      body: JSON.stringify({ questionId, action, selected, hintLevel }),
+    });
+  },
+
+  train(questionId: string, count: 1 | 3 | 5 | 10 = 3, harder = false) {
+    return request<AiTrainingResponse>('/ai/train', {
+      method: 'POST',
+      body: JSON.stringify({ questionId, count, harder }),
     });
   },
 

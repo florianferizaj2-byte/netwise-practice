@@ -2,17 +2,23 @@ import { useEffect, useState, type ReactNode } from 'react';
 import {
   ActivityIndicator,
   Animated,
+  Image,
+  Modal,
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   View,
 } from 'react-native';
 
 import {
   mobileApi,
+  type AiAnalysisResponse,
+  type AiTeacherAction,
   type AttemptResponse,
   type AuthResponse,
   type DashboardResponse,
+  type FeedbackKind,
   type Question,
 } from '../api/client';
 import { BrandMark } from '../components/BrandMark';
@@ -55,6 +61,13 @@ const previewQuestion: Question = {
   chapter: '路由协议',
   knowledgePoint: 'OSPF 选举资格',
 };
+
+const reportOptions: Array<{ kind: FeedbackKind; label: string }> = [
+  { kind: 'wrong_answer', label: '答案或解析错误' },
+  { kind: 'ambiguous', label: '题干或选项表述有问题' },
+  { kind: 'duplicate', label: '题目重复' },
+  { kind: 'other', label: '其他问题' },
+];
 
 function ScreenContainer({ children }: { children: ReactNode }) {
   return (
@@ -245,6 +258,17 @@ export function PracticeScreen({
   const [error, setError] = useState<string | null>(null);
   const [reloadKey, setReloadKey] = useState(0);
   const [startedAt, setStartedAt] = useState(Date.now());
+  const [aiBusy, setAiBusy] = useState('');
+  const [aiError, setAiError] = useState<string | null>(null);
+  const [hintText, setHintText] = useState('');
+  const [teacherText, setTeacherText] = useState('');
+  const [aiAnalysis, setAiAnalysis] = useState<AiAnalysisResponse | null>(null);
+  const [trainingNotice, setTrainingNotice] = useState('');
+  const [reportOpen, setReportOpen] = useState(false);
+  const [reportKind, setReportKind] = useState<FeedbackKind>('wrong_answer');
+  const [reportNote, setReportNote] = useState('');
+  const [reportBusy, setReportBusy] = useState(false);
+  const [reportNotice, setReportNotice] = useState('');
 
   useEffect(() => {
     let mounted = true;
@@ -255,6 +279,15 @@ export function PracticeScreen({
     setSelected([]);
     setResult(null);
     setFinished(false);
+    setAiBusy('');
+    setAiError(null);
+    setHintText('');
+    setTeacherText('');
+    setAiAnalysis(null);
+    setTrainingNotice('');
+    setReportOpen(false);
+    setReportNote('');
+    setReportNotice('');
 
     if (preview) {
       setQuestions([previewQuestion]);
@@ -299,6 +332,13 @@ export function PracticeScreen({
 
   useEffect(() => {
     setStartedAt(Date.now());
+    setAiBusy('');
+    setAiError(null);
+    setHintText('');
+    setTeacherText('');
+    setAiAnalysis(null);
+    setTrainingNotice('');
+    setReportNotice('');
   }, [currentQuestion?.id]);
 
   function toggleOption(option: string) {
@@ -379,6 +419,127 @@ export function PracticeScreen({
       );
     } finally {
       setSubmitting(false);
+    }
+  }
+
+  async function askAiTeacher(action: AiTeacherAction, hintLevel = 0) {
+    if (!currentQuestion || aiBusy) return;
+    setAiError(null);
+    setAiBusy(action === '给我提示' ? 'hint' : 'teacher');
+    if (preview) {
+      const previewText =
+        action === '给我提示'
+          ? '预览模式只展示页面结构。登录并配置 AI 后，这里会返回不会直接泄露答案的分步提示。'
+          : '预览模式只展示页面结构。登录并配置 AI 后，这里会返回针对当前题目的详细讲解。';
+      if (action === '给我提示') setHintText(previewText);
+      else setTeacherText(previewText);
+      setAiBusy('');
+      return;
+    }
+    try {
+      const response = await mobileApi.teacher(
+        currentQuestion.id,
+        action,
+        selected,
+        hintLevel,
+      );
+      if (action === '给我提示') setHintText(response.text);
+      else setTeacherText(response.text);
+    } catch (requestError) {
+      setAiError(
+        requestError instanceof Error
+          ? requestError.message
+          : 'AI 服务暂时不可用，请稍后重试',
+      );
+    } finally {
+      setAiBusy('');
+    }
+  }
+
+  async function analyzeWithAi() {
+    if (!currentQuestion || aiBusy) return;
+    setAiError(null);
+    setAiBusy('analysis');
+    if (preview) {
+      setAiAnalysis({
+        mistakeType: '预览示例',
+        weakKnowledge: 'OSPF 选举资格',
+        reason: '登录并配置 AI 后，服务会结合你的错误选项和历史作答记录分析薄弱点。',
+      });
+      setAiBusy('');
+      return;
+    }
+    try {
+      setAiAnalysis(await mobileApi.analyze(currentQuestion.id));
+    } catch (requestError) {
+      setAiError(
+        requestError instanceof Error
+          ? requestError.message
+          : 'AI 解析暂时不可用，请稍后重试',
+      );
+    } finally {
+      setAiBusy('');
+    }
+  }
+
+  async function generateAiPractice() {
+    if (!currentQuestion || aiBusy) return;
+    setAiError(null);
+    setAiBusy('train');
+    if (preview) {
+      setTrainingNotice('登录并配置 AI 后，这里会根据当前知识点生成 3 道变式题。');
+      setAiBusy('');
+      return;
+    }
+    try {
+      const response = await mobileApi.train(currentQuestion.id, 3);
+      const existingIds = new Set(questions.map((question) => question.id));
+      const freshQuestions = response.questions.filter(
+        (question) => !existingIds.has(question.id),
+      );
+      if (freshQuestions.length) {
+        setQuestions((current) => [...current, ...freshQuestions]);
+      }
+      setTrainingNotice(
+        freshQuestions.length
+          ? `AI 已准备 ${freshQuestions.length} 道变式题，完成当前题后继续练习。`
+          : 'AI 训练题已在当前题组中，可以继续下一题。',
+      );
+    } catch (requestError) {
+      setAiError(
+        requestError instanceof Error
+          ? requestError.message
+          : 'AI 变式训练暂时不可用，请稍后重试',
+      );
+    } finally {
+      setAiBusy('');
+    }
+  }
+
+  async function submitReport() {
+    if (!currentQuestion || reportBusy) return;
+    setReportBusy(true);
+    try {
+      if (!preview) {
+        await mobileApi.feedback(
+          currentQuestion.id,
+          reportKind,
+          reportNote.trim() || undefined,
+        );
+      }
+      setReportOpen(false);
+      setReportNote('');
+      setReportNotice(
+        preview ? '预览模式不会提交数据，登录后即可举报题目。' : '举报已提交，感谢你帮助我们改进题库。',
+      );
+    } catch (requestError) {
+      setReportNotice(
+        requestError instanceof Error
+          ? requestError.message
+          : '举报提交失败，请稍后重试',
+      );
+    } finally {
+      setReportBusy(false);
     }
   }
 
@@ -494,6 +655,30 @@ export function PracticeScreen({
         <Text style={styles.questionText}>{currentQuestion.question}</Text>
       </EntranceView>
 
+      <View style={styles.questionUtilities}>
+        <AnimatedPressable
+          accessibilityRole="button"
+          disabled={reportBusy}
+          onPress={() => setReportOpen(true)}
+          style={styles.utilityButton}
+        >
+          <Text style={styles.utilityButtonText}>举报题目</Text>
+        </AnimatedPressable>
+        {!result && (
+          <AnimatedPressable
+            accessibilityRole="button"
+            disabled={!selected.length || !!aiBusy}
+            onPress={() => askAiTeacher('给我提示', 1)}
+            style={[styles.utilityButton, styles.aiUtilityButton]}
+          >
+            <Text style={styles.aiUtilityButtonText}>
+              {aiBusy === 'hint' ? 'AI 提示中…' : 'AI 提示'}
+            </Text>
+          </AnimatedPressable>
+        )}
+      </View>
+      {!!reportNotice && <Text style={styles.reportNotice}>{reportNotice}</Text>}
+
       <View style={styles.optionsList}>
         {optionKeys.map((option, optionIndex) => {
           const isSelected = selected.includes(option);
@@ -547,6 +732,65 @@ export function PracticeScreen({
         </EntranceView>
       )}
 
+      {result && (
+        <View style={styles.aiTools}>
+          {result.correct === false && (
+            <AnimatedPressable
+              accessibilityRole="button"
+              disabled={!!aiBusy}
+              onPress={analyzeWithAi}
+              style={styles.aiToolButton}
+            >
+              <Text style={styles.aiToolButtonText}>
+                {aiBusy === 'analysis' ? 'AI 解析中…' : 'AI 解析错因'}
+              </Text>
+            </AnimatedPressable>
+          )}
+          <AnimatedPressable
+            accessibilityRole="button"
+            disabled={!!aiBusy}
+            onPress={() => askAiTeacher('详细讲解')}
+            style={styles.aiToolButton}
+          >
+            <Text style={styles.aiToolButtonText}>
+              {aiBusy === 'teacher' ? 'AI 老师思考中…' : 'AI 详细讲解'}
+            </Text>
+          </AnimatedPressable>
+          <AnimatedPressable
+            accessibilityRole="button"
+            disabled={!!aiBusy}
+            onPress={generateAiPractice}
+            style={styles.aiToolButton}
+          >
+            <Text style={styles.aiToolButtonText}>
+              {aiBusy === 'train' ? '生成中…' : '生成 3 道变式题'}
+            </Text>
+          </AnimatedPressable>
+        </View>
+      )}
+
+      {!!hintText && (
+        <View style={styles.aiResponseCard}>
+          <Text style={styles.aiResponseTitle}>AI 提示</Text>
+          <Text style={styles.aiResponseText}>{hintText}</Text>
+        </View>
+      )}
+      {!!aiAnalysis && (
+        <View style={styles.aiResponseCard}>
+          <Text style={styles.aiResponseTitle}>AI 错因解析</Text>
+          <Text style={styles.aiResponseMeta}>薄弱知识：{aiAnalysis.weakKnowledge}</Text>
+          <Text style={styles.aiResponseText}>{aiAnalysis.reason}</Text>
+        </View>
+      )}
+      {!!teacherText && (
+        <View style={styles.aiResponseCard}>
+          <Text style={styles.aiResponseTitle}>AI 老师讲解</Text>
+          <Text style={styles.aiResponseText}>{teacherText}</Text>
+        </View>
+      )}
+      {!!trainingNotice && <Text style={styles.trainingNotice}>{trainingNotice}</Text>}
+      {!!aiError && <Text style={styles.aiError}>{aiError}</Text>}
+
       <EntranceView delay={result || submitting ? 0 : 160} distance={8}>
         <PrimaryAction
           disabled={submitting}
@@ -555,6 +799,74 @@ export function PracticeScreen({
           {submitting ? '正在判分…' : result ? '下一题' : '确认答案'}
         </PrimaryAction>
       </EntranceView>
+      <Modal
+        animationType="slide"
+        onRequestClose={() => {
+          if (!reportBusy) setReportOpen(false);
+        }}
+        transparent
+        visible={reportOpen}
+      >
+        <View style={styles.modalBackdrop}>
+          <View style={styles.reportModal}>
+            <Text style={styles.modalTitle}>举报题目</Text>
+            <Text style={styles.modalIntro}>
+              请选择问题类型，帮助我们更快修正题库。
+            </Text>
+            <View style={styles.reportOptions}>
+              {reportOptions.map((option) => (
+                <AnimatedPressable
+                  accessibilityRole="button"
+                  disabled={reportBusy}
+                  key={option.kind}
+                  onPress={() => setReportKind(option.kind)}
+                  style={[
+                    styles.reportOption,
+                    reportKind === option.kind && styles.selectedReportOption,
+                  ]}
+                >
+                  <Text
+                    style={[
+                      styles.reportOptionText,
+                      reportKind === option.kind && styles.selectedReportOptionText,
+                    ]}
+                  >
+                    {option.label}
+                  </Text>
+                  {reportKind === option.kind && <Text style={styles.reportCheck}>✓</Text>}
+                </AnimatedPressable>
+              ))}
+            </View>
+            <TextInput
+              editable={!reportBusy}
+              multiline
+              onChangeText={setReportNote}
+              placeholder="补充说明（可选）"
+              placeholderTextColor={colors.textFaint}
+              style={styles.reportInput}
+              value={reportNote}
+            />
+            <View style={styles.modalActions}>
+              <AnimatedPressable
+                disabled={reportBusy}
+                onPress={() => setReportOpen(false)}
+                style={styles.modalSecondaryButton}
+              >
+                <Text style={styles.modalSecondaryText}>取消</Text>
+              </AnimatedPressable>
+              <AnimatedPressable
+                disabled={reportBusy}
+                onPress={submitReport}
+                style={styles.modalPrimaryButton}
+              >
+                <Text style={styles.modalPrimaryText}>
+                  {reportBusy ? '提交中…' : '提交举报'}
+                </Text>
+              </AnimatedPressable>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </ScreenContainer>
   );
 }
@@ -709,6 +1021,8 @@ export function ExamScreen({ onNavigate }: ScreenProps) {
 }
 
 export function ProfileScreen({ onLogout, user }: ScreenProps) {
+  const [sponsorOpen, setSponsorOpen] = useState(false);
+
   return (
     <ScreenContainer>
       <ScreenHeader eyebrow="我的考匠" title="把学习设置好" />
@@ -727,7 +1041,16 @@ export function ProfileScreen({ onLogout, user }: ScreenProps) {
         <SettingRow title="证书与题库" value={user ? '已同步' : '预览模式'} />
         <SettingRow title="AI 学习助手" value="按账号配置" />
         <SettingRow title="服务器地址" value="aceexam.top" />
-        <SettingRow title="关于考匠" value="移动端 v0.1.1" />
+        <SettingRow title="关于考匠" value="移动端 v0.1.2" />
+      </EntranceView>
+      <EntranceView delay={200} distance={12} style={styles.aiServiceCard}>
+        <Text style={styles.aiServiceTitle}>AI 学习服务</Text>
+        <Text style={styles.aiServiceText}>
+          做题后可使用 AI 提示、错因解析、详细讲解和变式训练。AI Key 仍由你的账号配置，App 不保存密钥。
+        </Text>
+      </EntranceView>
+      <EntranceView delay={250} distance={10}>
+        <PrimaryAction onPress={() => setSponsorOpen(true)}>赞助作者</PrimaryAction>
       </EntranceView>
       <EntranceView delay={240} distance={8} style={styles.mutedNotice}>
         <Text style={styles.mutedNoticeText}>AI Key 仍然只保存于对应用户的后端设置，不会写入 App。</Text>
@@ -739,6 +1062,33 @@ export function ProfileScreen({ onLogout, user }: ScreenProps) {
           </AnimatedPressable>
         </EntranceView>
       )}
+      <Modal
+        animationType="fade"
+        onRequestClose={() => setSponsorOpen(false)}
+        transparent
+        visible={sponsorOpen}
+      >
+        <View style={styles.modalBackdrop}>
+          <View style={styles.sponsorModal}>
+            <Text style={styles.modalTitle}>赞助作者</Text>
+            <Text style={styles.modalIntro}>
+              如果考匠帮你节省了复习时间，欢迎支持作者继续维护题库和 AI 服务。
+            </Text>
+            <Image
+              accessibilityLabel="微信赞助二维码"
+              source={require('../../assets/sponsor-wechat.jpg')}
+              style={styles.sponsorImage}
+            />
+            <Text style={styles.sponsorHint}>使用微信扫一扫</Text>
+            <AnimatedPressable
+              onPress={() => setSponsorOpen(false)}
+              style={[styles.modalPrimaryButton, styles.sponsorCloseButton]}
+            >
+              <Text style={styles.modalPrimaryText}>暂时关闭</Text>
+            </AnimatedPressable>
+          </View>
+        </View>
+      </Modal>
     </ScreenContainer>
   );
 }
@@ -1003,6 +1353,39 @@ const styles = StyleSheet.create({
     padding: spacing.lg,
     ...shadow.card,
   },
+  questionUtilities: {
+    flexDirection: 'row',
+    gap: spacing.sm,
+  },
+  utilityButton: {
+    alignItems: 'center',
+    borderColor: colors.border,
+    borderRadius: radius.pill,
+    borderWidth: 1,
+    flex: 1,
+    justifyContent: 'center',
+    minHeight: 40,
+    paddingHorizontal: spacing.sm,
+  },
+  utilityButtonText: {
+    color: colors.textMuted,
+    fontSize: 13,
+    fontWeight: '700',
+  },
+  aiUtilityButton: {
+    backgroundColor: colors.surfaceMuted,
+    borderColor: '#B8D9C3',
+  },
+  aiUtilityButtonText: {
+    color: colors.brandDark,
+    fontSize: 13,
+    fontWeight: '800',
+  },
+  reportNotice: {
+    color: colors.brandDark,
+    fontSize: 13,
+    lineHeight: 20,
+  },
   questionMetaRow: {
     alignItems: 'center',
     flexDirection: 'row',
@@ -1141,6 +1524,163 @@ const styles = StyleSheet.create({
     color: colors.textMuted,
     fontSize: 14,
     lineHeight: 22,
+  },
+  aiTools: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: spacing.sm,
+  },
+  aiToolButton: {
+    alignItems: 'center',
+    backgroundColor: colors.surfaceMuted,
+    borderColor: '#B8D9C3',
+    borderRadius: radius.sm,
+    borderWidth: 1,
+    justifyContent: 'center',
+    minHeight: 44,
+    paddingHorizontal: spacing.md,
+  },
+  aiToolButtonText: {
+    color: colors.brandDark,
+    fontSize: 13,
+    fontWeight: '800',
+  },
+  aiResponseCard: {
+    backgroundColor: '#F2F8F4',
+    borderColor: '#CFE2D5',
+    borderRadius: radius.md,
+    borderWidth: 1,
+    gap: 6,
+    padding: spacing.md,
+  },
+  aiResponseTitle: {
+    color: colors.brandDark,
+    fontSize: 15,
+    fontWeight: '800',
+  },
+  aiResponseMeta: {
+    color: colors.brand,
+    fontSize: 13,
+    fontWeight: '700',
+  },
+  aiResponseText: {
+    color: colors.textMuted,
+    fontSize: 14,
+    lineHeight: 22,
+  },
+  trainingNotice: {
+    backgroundColor: colors.goldSoft,
+    borderRadius: radius.sm,
+    color: '#8D6725',
+    fontSize: 13,
+    lineHeight: 20,
+    padding: spacing.sm,
+  },
+  aiError: {
+    color: colors.warning,
+    fontSize: 13,
+    fontWeight: '700',
+    lineHeight: 20,
+  },
+  modalBackdrop: {
+    alignItems: 'center',
+    backgroundColor: 'rgba(16, 37, 29, 0.42)',
+    flex: 1,
+    justifyContent: 'flex-end',
+    padding: spacing.md,
+  },
+  reportModal: {
+    backgroundColor: colors.surface,
+    borderRadius: radius.lg,
+    gap: spacing.md,
+    maxHeight: '92%',
+    padding: spacing.lg,
+    width: '100%',
+    ...shadow.card,
+  },
+  modalTitle: {
+    color: colors.text,
+    fontSize: 22,
+    fontWeight: '800',
+  },
+  modalIntro: {
+    color: colors.textMuted,
+    fontSize: 14,
+    lineHeight: 21,
+  },
+  reportOptions: {
+    gap: spacing.sm,
+  },
+  reportOption: {
+    alignItems: 'center',
+    borderColor: colors.border,
+    borderRadius: radius.sm,
+    borderWidth: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    minHeight: 46,
+    paddingHorizontal: spacing.md,
+  },
+  selectedReportOption: {
+    backgroundColor: colors.surfaceMuted,
+    borderColor: '#9DC9AE',
+  },
+  reportOptionText: {
+    color: colors.textMuted,
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  selectedReportOptionText: {
+    color: colors.brandDark,
+    fontWeight: '800',
+  },
+  reportCheck: {
+    color: colors.brand,
+    fontSize: 18,
+    fontWeight: '800',
+  },
+  reportInput: {
+    backgroundColor: '#FAFCFA',
+    borderColor: colors.border,
+    borderRadius: radius.sm,
+    borderWidth: 1,
+    color: colors.text,
+    fontSize: 14,
+    minHeight: 88,
+    padding: spacing.sm,
+    textAlignVertical: 'top',
+  },
+  modalActions: {
+    flexDirection: 'row',
+    gap: spacing.sm,
+  },
+  modalSecondaryButton: {
+    alignItems: 'center',
+    borderColor: colors.border,
+    borderRadius: radius.sm,
+    borderWidth: 1,
+    flex: 1,
+    justifyContent: 'center',
+    minHeight: 48,
+  },
+  modalSecondaryText: {
+    color: colors.textMuted,
+    fontSize: 14,
+    fontWeight: '700',
+  },
+  modalPrimaryButton: {
+    alignItems: 'center',
+    backgroundColor: colors.brand,
+    borderRadius: radius.sm,
+    flex: 1,
+    justifyContent: 'center',
+    minHeight: 48,
+    paddingHorizontal: spacing.md,
+  },
+  modalPrimaryText: {
+    color: colors.white,
+    fontSize: 14,
+    fontWeight: '800',
   },
   emptyCard: {
     backgroundColor: colors.surface,
@@ -1331,6 +1871,24 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.md,
     ...shadow.card,
   },
+  aiServiceCard: {
+    backgroundColor: colors.surfaceMuted,
+    borderColor: '#CFE2D5',
+    borderRadius: radius.md,
+    borderWidth: 1,
+    gap: spacing.sm,
+    padding: spacing.md,
+  },
+  aiServiceTitle: {
+    color: colors.brandDark,
+    fontSize: 16,
+    fontWeight: '800',
+  },
+  aiServiceText: {
+    color: colors.textMuted,
+    fontSize: 14,
+    lineHeight: 22,
+  },
   settingRow: {
     alignItems: 'center',
     borderBottomColor: colors.border,
@@ -1360,6 +1918,29 @@ const styles = StyleSheet.create({
     color: colors.warning,
     fontSize: 15,
     fontWeight: '800',
+  },
+  sponsorModal: {
+    alignItems: 'center',
+    backgroundColor: colors.surface,
+    borderRadius: radius.lg,
+    gap: spacing.md,
+    padding: spacing.lg,
+    width: '100%',
+    ...shadow.card,
+  },
+  sponsorImage: {
+    borderRadius: radius.sm,
+    height: 250,
+    width: 250,
+  },
+  sponsorHint: {
+    color: colors.textMuted,
+    fontSize: 14,
+    fontWeight: '700',
+  },
+  sponsorCloseButton: {
+    alignSelf: 'stretch',
+    flex: 0,
   },
 });
 

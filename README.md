@@ -14,9 +14,9 @@
 
 ## 最近更新 · 2026-09-21
 
-- 发布考匠移动端 v0.1.1（Android APK）。登录、证书选择、今日概览、题库练习和错题复习复用现有后端，移动端使用 Bearer 会话，学习记录按账号保存。
-- 网站账号菜单新增“下载 App”，部署后可直接下载 [`kaojiang-v0.1.1.apk`](public/downloads/kaojiang-v0.1.1.apk)。
-- 移动端修正日期显示和错题复习来源，支持顺序刷题与随机刷题；提交答案后优先本地展示判题结果，减少反馈等待。
+- 发布考匠移动端 v0.1.2（Android APK）。登录、证书选择、今日概览、题库练习和错题复习复用现有后端，移动端使用 Bearer 会话，学习记录按账号保存。
+- 登录页和网站账号菜单都提供“下载 App”，部署后可直接下载 [`kaojiang-v0.1.2.apk`](public/downloads/kaojiang-v0.1.2.apk)。
+- 移动端支持题目举报、AI 提示、AI 错因解析、AI 详细讲解和 3 道 AI 变式训练；AI 配置仍严格按账号隔离。
 - 网站端更新注册密码确认、登录页动效、证书引导响应式布局和作者 API 配置入口。
 - 执兽模拟考试固定从基础、临床、预防、综合四大章节各抽 100 题，共 400 分；每题 1 分，总分达到 240 分及格，不设单科门槛。
 - 做题区新增题目异常举报，用户可以选择答案/解析错误、题干/选项表述问题、题目重复或其他异常，并补充说明。
@@ -87,7 +87,7 @@ npm run dev
 
 ## 移动端 App
 
-Android v0.1.1 已接入现有网站 API，支持登录、证书选择、今日学习概览、题库练习、错题复习、顺序刷题和随机刷题。网站部署后，登录账号菜单中的“下载 App”会提供安装包；源码中的 APK 位于 [`public/downloads/kaojiang-v0.1.1.apk`](public/downloads/kaojiang-v0.1.1.apk)。
+Android v0.1.2 已接入现有网站 API，支持登录、证书选择、今日学习概览、题库练习、错题复习、顺序刷题、随机刷题、题目举报和 AI 学习服务。网站部署后，登录页和账号菜单中的“下载 App”会提供安装包；源码中的 APK 位于 [`public/downloads/kaojiang-v0.1.2.apk`](public/downloads/kaojiang-v0.1.2.apk)。
 
 移动端本地开发和 API 配置见 [`mobile/README.md`](mobile/README.md)。生产 API 默认使用 `https://aceexam.top/api`，不要把账号密码、API Key 或生产数据写入 App 源码。
 

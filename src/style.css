@@ -4932,6 +4932,31 @@ td small {
   border-color: transparent;
   color: #812f35;
 }
+.auth-app-download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin: 13px auto 0;
+  padding: 8px 12px;
+  border: 1px solid #d7e5dc;
+  border-radius: 999px;
+  background: #f3f8f4;
+  color: #27724d;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    transform 0.2s;
+}
+.auth-app-download:hover {
+  border-color: #a4c7b7;
+  background: #eaf5ee;
+  color: #17613f;
+  transform: translateY(-1px);
+}
 .auth-privacy-note {
   display: flex;
   align-items: center;

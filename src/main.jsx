@@ -923,6 +923,14 @@ function AuthScreen({ onAuth, initialError = "" }) {
           >
             {isLogin ? "还没有学习账户？立即注册" : "已经有账户？返回登录"}
           </button>
+          <a
+            className="auth-app-download"
+            href="/downloads/kaojiang-v0.1.2.apk"
+            download="kaojiang-v0.1.2.apk"
+          >
+            <Download size={16} />
+            下载考匠 App · Android v0.1.2
+          </a>
           <p className="auth-privacy-note">
             <ShieldCheck size={14} /> 你的学习数据与 AI 配置仅属于当前账号
           </p>
@@ -952,50 +960,50 @@ function AnnouncementModal({ onClose }) {
             </span>
             <div>
               <span className="announcement-kicker">考匠 · 更新公告</span>
-              <h2 id="announcement-title">移动端 v0.1.1 与刷题体验更新</h2>
-              <p>网站和 App 共用账号与题库，随时练习，随时复盘。</p>
+              <h2 id="announcement-title">移动端 v0.1.2 AI 服务更新</h2>
+              <p>举报题目、AI 解析和变式训练现在都能在手机上完成。</p>
             </div>
           </div>
           <IconButton icon={X} label="关闭网站公告" onClick={onClose} />
         </header>
         <div className="announcement-body">
           <div className="announcement-highlight">
-                <strong>考匠 App v0.1.1 已发布</strong>
+                <strong>考匠 App v0.1.2 已发布</strong>
                 <span>
-                  在账号菜单点击“下载 App”即可获取 Android 安装包，登录后连接现有网站后端。
+                  在登录页或账号菜单点击“下载 App”即可获取 Android 安装包，登录后连接现有网站后端。
                 </span>
           </div>
           <ul className="announcement-list">
             <li>
               <span>01</span>
               <div>
-                <strong>网站与 App 账号同步</strong>
+                <strong>AI 服务接入移动端</strong>
                 <p>
-                  移动端使用安全会话连接现有 API，证书、题库、错题和学习记录按账号保存。
+                  做题后可使用 AI 提示、AI 错因解析、详细讲解和 3 道变式训练，AI 配置仍按账号隔离。
                 </p>
               </div>
             </li>
             <li>
               <span>02</span>
               <div>
-                <strong>刷题模式更清晰</strong>
+                <strong>题目反馈更顺手</strong>
                 <p>
-                  练习区区分顺序刷题和随机刷题，错题入口只加载错题集，提交后优先快速显示判题结果。
+                  练习中可直接举报答案、解析、题干、选项或重复题，错题入口只加载错题集。
                 </p>
               </div>
             </li>
             <li>
               <span>03</span>
               <div>
-                <strong>网站体验同步更新</strong>
+                <strong>顺序与随机刷题继续保留</strong>
                 <p>
-                  更新账号注册校验、移动端下载入口、登录页动效和证书引导布局，并保留题目异常反馈流程。
+                  练习区支持顺序刷题和随机刷题，提交后优先快速显示判题结果，网站与 App 共用同一题库。
                 </p>
               </div>
             </li>
           </ul>
           <p className="announcement-footnote">
-            App 当前提供 Android v0.1.1 安装包；正式考试信息仍请以对应认证机构和相关主管部门的最新公告为准。
+            App 当前提供 Android v0.1.2 安装包；正式考试信息仍请以对应认证机构和相关主管部门的最新公告为准。
           </p>
         </div>
         <footer className="announcement-footer">
@@ -1141,7 +1149,7 @@ function App() {
   useEffect(() => {
     if (!auth?.authenticated || !auth.user?.certificateId || !dashboard) return;
     try {
-      if (localStorage.getItem("netwise-announcement-2026-09-v3") !== "seen")
+      if (localStorage.getItem("netwise-announcement-2026-09-v4") !== "seen")
         setAnnouncementOpen(true);
     } catch {
       setAnnouncementOpen(true);
@@ -1166,7 +1174,7 @@ function App() {
   const dismissAnnouncement = () => {
     setAnnouncementOpen(false);
     try {
-      localStorage.setItem("netwise-announcement-2026-09-v3", "seen");
+      localStorage.setItem("netwise-announcement-2026-09-v4", "seen");
     } catch {
       // Private browsing may disable localStorage; closing still works for this render.
     }
@@ -1453,8 +1461,8 @@ function App() {
                 <a
                   className="account-menu-link"
                   role="menuitem"
-                  href="/downloads/kaojiang-v0.1.1.apk"
-                  download="kaojiang-v0.1.1.apk"
+                  href="/downloads/kaojiang-v0.1.2.apk"
+                  download="kaojiang-v0.1.2.apk"
                   onClick={() => setAccountMenuOpen(false)}
                 >
                   <Download size={17} />

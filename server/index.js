@@ -1221,7 +1221,7 @@ export async function createApp(options = {}) {
             "给我提示",
           ]),
           selected: z
-            .array(z.enum(["A", "B", "C", "D"]))
+            .array(z.enum(["A", "B", "C", "D", "E"]))
             .max(4)
             .default([]),
           hintLevel: z.number().int().min(0).max(3).default(0),
