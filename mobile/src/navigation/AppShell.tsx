@@ -12,6 +12,7 @@ import { mobileApi, type AuthResponse, type DashboardResponse } from '../api/cli
 import { AnimatedPressable } from '../components/Motion';
 import { AuthScreen } from '../screens/AuthScreen';
 import { CertificateScreen } from '../screens/CertificateScreen';
+import { CommunityScreen } from '../screens/CommunityScreen';
 import {
   ExamScreen,
   PracticeScreen,
@@ -32,6 +33,7 @@ const tabs: Array<{ id: AppTab; label: string; icon: string }> = [
   { id: 'practice', label: '练习', icon: '✦' },
   { id: 'wrong', label: '错题', icon: '×' },
   { id: 'exam', label: '考试', icon: '□' },
+  { id: 'community', label: '社区', icon: '◉' },
   { id: 'profile', label: '我的', icon: '◎' },
 ];
 
@@ -42,6 +44,7 @@ export function AppShell() {
   const [activeTab, setActiveTab] = useState<AppTab>('today');
   const [practiceMode, setPracticeMode] = useState<PracticeMode>('sequential');
   const [practiceSource, setPracticeSource] = useState<PracticeSource>('all');
+  const [certificatePickerOpen, setCertificatePickerOpen] = useState(false);
   const screenOpacity = useRef(new Animated.Value(1)).current;
   const screenOffset = useRef(new Animated.Value(0)).current;
 
@@ -89,6 +92,7 @@ export function AppShell() {
   function handleAuthenticated(response: AuthResponse) {
     setSession(response);
     setIsPreview(false);
+    setCertificatePickerOpen(false);
     setDashboard(null);
     setPracticeSource('all');
     setActiveTab('today');
@@ -96,7 +100,12 @@ export function AppShell() {
 
   function handleCertificateSelected(user: AuthResponse['user']) {
     setSession((current) => (current ? { ...current, user } : current));
+    setCertificatePickerOpen(false);
     setActiveTab('today');
+  }
+
+  function handleUserUpdated(user: AuthResponse['user']) {
+    setSession((current) => (current ? { ...current, user } : current));
   }
 
   function handleLogout() {
@@ -104,7 +113,12 @@ export function AppShell() {
     setSession(null);
     setDashboard(null);
     setIsPreview(false);
+    setCertificatePickerOpen(false);
     setPracticeSource('all');
+  }
+
+  function handleOpenCertificatePicker() {
+    if (session?.certificates.length) setCertificatePickerOpen(true);
   }
 
   function handleNavigate(tab: AppTab, options?: NavigationOptions) {
@@ -133,6 +147,20 @@ export function AppShell() {
     );
   }
 
+  if (session && certificatePickerOpen) {
+    return (
+      <SafeAreaView style={styles.safeArea}>
+        <StatusBar style="dark" />
+        <CertificateScreen
+          certificates={session.certificates}
+          currentCertificateId={session.user.certificateId}
+          onCancel={() => setCertificatePickerOpen(false)}
+          onSelected={handleCertificateSelected}
+        />
+      </SafeAreaView>
+    );
+  }
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar style="dark" />
@@ -153,7 +181,10 @@ export function AppShell() {
             practiceMode,
             practiceSource,
             onPracticeModeChange: setPracticeMode,
+            onOpenCertificatePicker: handleOpenCertificatePicker,
+            onUserUpdated: handleUserUpdated,
             user: session?.user,
+            certificates: session?.certificates ?? [],
           })}
         </Animated.View>
         <TabBar activeTab={activeTab} onChange={handleNavigate} />
@@ -172,7 +203,10 @@ function renderScreen(
     practiceMode: PracticeMode;
     practiceSource: PracticeSource;
     onPracticeModeChange: (mode: PracticeMode) => void;
+    onOpenCertificatePicker: () => void;
+    onUserUpdated: (user: AuthResponse['user']) => void;
     user: AuthResponse['user'] | undefined;
+    certificates: AuthResponse['certificates'];
   },
 ) {
   switch (activeTab) {
@@ -182,6 +216,8 @@ function renderScreen(
       return <WrongScreen onNavigate={onNavigate} {...data} />;
     case 'exam':
       return <ExamScreen onNavigate={onNavigate} {...data} />;
+    case 'community':
+      return <CommunityScreen {...data} />;
     case 'profile':
       return <ProfileScreen onNavigate={onNavigate} {...data} />;
     case 'today':

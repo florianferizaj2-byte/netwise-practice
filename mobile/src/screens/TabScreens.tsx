@@ -3,6 +3,7 @@ import {
   ActivityIndicator,
   Animated,
   Image,
+  Linking,
   Modal,
   ScrollView,
   StyleSheet,
@@ -14,6 +15,7 @@ import {
 import {
   mobileApi,
   type AiAnalysisResponse,
+  type AiSettingsResponse,
   type AiTeacherAction,
   type AttemptResponse,
   type AuthResponse,
@@ -45,6 +47,8 @@ type ScreenProps = {
   practiceMode?: PracticeMode;
   practiceSource?: PracticeSource;
   preview?: boolean;
+  onOpenCertificatePicker?: () => void;
+  onUserUpdated?: (user: AuthResponse['user']) => void;
   user?: AuthResponse['user'];
 };
 
@@ -1020,8 +1024,156 @@ export function ExamScreen({ onNavigate }: ScreenProps) {
   );
 }
 
-export function ProfileScreen({ onLogout, user }: ScreenProps) {
+export function ProfileScreen({
+  onLogout,
+  onOpenCertificatePicker,
+  onUserUpdated,
+  preview = false,
+  user,
+}: ScreenProps) {
   const [sponsorOpen, setSponsorOpen] = useState(false);
+  const [aiSettingsOpen, setAiSettingsOpen] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
+  const [tutorialOpen, setTutorialOpen] = useState(false);
+  const [authorApiOpen, setAuthorApiOpen] = useState(false);
+  const [communityNameOpen, setCommunityNameOpen] = useState(false);
+  const [communityName, setCommunityName] = useState('');
+  const [communityNameBusy, setCommunityNameBusy] = useState(false);
+  const [communityNameError, setCommunityNameError] = useState('');
+  const [settings, setSettings] = useState<AiSettingsResponse | null>(null);
+  const [settingsBusy, setSettingsBusy] = useState(false);
+  const [settingsSaveBusy, setSettingsSaveBusy] = useState(false);
+  const [settingsNotice, setSettingsNotice] = useState('');
+  const [settingsError, setSettingsError] = useState('');
+  const [apiKey, setApiKey] = useState('');
+  const [authorPassword, setAuthorPassword] = useState('');
+  const [aiForm, setAiForm] = useState({
+    baseUrl: 'https://api.deepseek.com',
+    model: 'deepseek-chat',
+    temperature: '0.3',
+  });
+
+  function openCommunityNameSettings() {
+    setCommunityName(user?.communityName || user?.username || '');
+    setCommunityNameError('');
+    setCommunityNameOpen(true);
+  }
+
+  async function saveCommunityName() {
+    if (!user || preview) return;
+    const name = communityName.trim();
+    if (!name) {
+      setCommunityNameError('社区昵称不能为空');
+      return;
+    }
+    setCommunityNameBusy(true);
+    setCommunityNameError('');
+    try {
+      const result = await mobileApi.updateCommunityProfile(name);
+      onUserUpdated?.(result.user);
+      setCommunityNameOpen(false);
+    } catch (cause: unknown) {
+      setCommunityNameError(
+        cause instanceof Error ? cause.message : '社区昵称保存失败',
+      );
+    } finally {
+      setCommunityNameBusy(false);
+    }
+  }
+
+  function openAiSettings() {
+    setAiSettingsOpen(true);
+    setTutorialOpen(false);
+    setAuthorApiOpen(false);
+    setSettingsNotice('');
+    setSettingsError('');
+    setApiKey('');
+    if (!user || preview) return;
+
+    setSettingsBusy(true);
+    void mobileApi
+      .settings()
+      .then((result) => {
+        setSettings(result);
+        setAiForm({
+          baseUrl: result.baseUrl,
+          model: result.model,
+          temperature: String(result.temperature),
+        });
+      })
+      .catch((error: unknown) => {
+        setSettingsError(error instanceof Error ? error.message : '读取 AI 配置失败');
+      })
+      .finally(() => setSettingsBusy(false));
+  }
+
+  async function saveAiSettings() {
+    if (!user || preview) {
+      setSettingsError('登录后才能保存当前账号的 AI 配置');
+      return;
+    }
+    const temperature = Number(aiForm.temperature);
+    if (!Number.isFinite(temperature) || temperature < 0 || temperature > 2) {
+      setSettingsError('温度需要填写 0 到 2 之间的数字');
+      return;
+    }
+    if (!aiForm.baseUrl.trim() || !aiForm.model.trim()) {
+      setSettingsError('请填写 API 地址和模型名称');
+      return;
+    }
+
+    setSettingsSaveBusy(true);
+    setSettingsError('');
+    setSettingsNotice('');
+    try {
+      await mobileApi.saveSettings({
+        baseUrl: aiForm.baseUrl.trim(),
+        model: aiForm.model.trim(),
+        temperature,
+        ...(apiKey.trim() ? { apiKey: apiKey.trim() } : {}),
+      });
+      const result = await mobileApi.settings();
+      setSettings(result);
+      setApiKey('');
+      setSettingsNotice('已保存到当前账号，做题时即可使用 AI 服务。');
+    } catch (error: unknown) {
+      setSettingsError(error instanceof Error ? error.message : '保存 AI 配置失败');
+    } finally {
+      setSettingsSaveBusy(false);
+    }
+  }
+
+  async function deployAuthorApi() {
+    if (!user || preview) {
+      setSettingsError('登录后才能为当前账号部署作者 API');
+      return;
+    }
+    if (!authorPassword.trim()) {
+      setSettingsError('请输入作者提供的部署密码');
+      return;
+    }
+
+    setSettingsSaveBusy(true);
+    setSettingsError('');
+    setSettingsNotice('');
+    try {
+      await mobileApi.deployAuthorApi(authorPassword.trim());
+      const result = await mobileApi.settings();
+      setSettings(result);
+      setAiForm({
+        baseUrl: result.baseUrl,
+        model: result.model,
+        temperature: String(result.temperature),
+      });
+      setAuthorPassword('');
+      setAuthorApiOpen(false);
+      setSettingsNotice('作者 API 已配置到当前账号，可以开始使用 AI 服务。');
+    } catch (error: unknown) {
+      setSettingsError(error instanceof Error ? error.message : '作者 API 部署失败');
+    } finally {
+      setSettingsSaveBusy(false);
+    }
+  }
 
   return (
     <ScreenContainer>
@@ -1038,10 +1190,23 @@ export function ProfileScreen({ onLogout, user }: ScreenProps) {
         </View>
       </EntranceView>
       <EntranceView delay={130} distance={16} style={styles.settingsCard}>
-        <SettingRow title="证书与题库" value={user ? '已同步' : '预览模式'} />
-        <SettingRow title="AI 学习助手" value="按账号配置" />
+        <SettingRow
+          onPress={user ? onOpenCertificatePicker : undefined}
+          title="证书与题库"
+          value={user ? '已同步' : '预览模式'}
+        />
+        <SettingRow onPress={openAiSettings} title="AI 学习助手" value="按账号配置" />
+        <SettingRow
+          onPress={user ? openCommunityNameSettings : undefined}
+          title="社区昵称"
+          value={user?.communityName || user?.username || '登录后设置'}
+        />
         <SettingRow title="服务器地址" value="aceexam.top" />
-        <SettingRow title="关于考匠" value="移动端 v0.1.2" />
+        <SettingRow
+          onPress={() => setAboutOpen(true)}
+          title="关于考匠"
+          value="移动端 v0.1.2"
+        />
       </EntranceView>
       <EntranceView delay={200} distance={12} style={styles.aiServiceCard}>
         <Text style={styles.aiServiceTitle}>AI 学习服务</Text>
@@ -1089,7 +1254,318 @@ export function ProfileScreen({ onLogout, user }: ScreenProps) {
           </View>
         </View>
       </Modal>
+      <Modal
+        animationType="fade"
+        onRequestClose={() => {
+          if (!communityNameBusy) setCommunityNameOpen(false);
+        }}
+        transparent
+        visible={communityNameOpen}
+      >
+        <View style={styles.modalBackdrop}>
+          <View style={styles.nameModal}>
+            <Text style={styles.modalTitle}>设置社区昵称</Text>
+            <Text style={styles.modalIntro}>
+              这是你在公共大群里显示的名字，不会改变登录账号。最多 24 个字符。
+            </Text>
+            <TextInput
+              editable={!communityNameBusy}
+              maxLength={24}
+              onChangeText={setCommunityName}
+              placeholder="输入社区昵称"
+              placeholderTextColor={colors.textFaint}
+              style={styles.settingsInput}
+              value={communityName}
+            />
+            {!!communityNameError && (
+              <Text style={styles.settingsError}>{communityNameError}</Text>
+            )}
+            <View style={styles.modalActions}>
+              <AnimatedPressable
+                disabled={communityNameBusy}
+                onPress={() => setCommunityNameOpen(false)}
+                style={styles.modalSecondaryButton}
+              >
+                <Text style={styles.modalSecondaryText}>取消</Text>
+              </AnimatedPressable>
+              <AnimatedPressable
+                disabled={communityNameBusy}
+                onPress={() => void saveCommunityName()}
+                style={styles.modalPrimaryButton}
+              >
+                {communityNameBusy ? (
+                  <ActivityIndicator color={colors.white} />
+                ) : (
+                  <Text style={styles.modalPrimaryText}>保存昵称</Text>
+                )}
+              </AnimatedPressable>
+            </View>
+          </View>
+        </View>
+      </Modal>
+      <Modal
+        animationType="slide"
+        onRequestClose={() => setAiSettingsOpen(false)}
+        transparent
+        visible={aiSettingsOpen}
+      >
+        <View style={styles.modalBackdrop}>
+          <View style={styles.settingsModal}>
+            <ScrollView
+              contentContainerStyle={styles.settingsModalScroll}
+              showsVerticalScrollIndicator={false}
+            >
+              <View style={styles.modalHeader}>
+                <View style={styles.modalHeaderCopy}>
+                  <Text style={styles.modalTitle}>AI 学习助手</Text>
+                  <Text style={styles.modalKicker}>只为当前账号保存</Text>
+                </View>
+                <AnimatedPressable
+                  accessibilityLabel="关闭 AI 配置"
+                  accessibilityRole="button"
+                  onPress={() => setAiSettingsOpen(false)}
+                  style={styles.modalCloseButton}
+                >
+                  <Text style={styles.modalCloseText}>关闭</Text>
+                </AnimatedPressable>
+              </View>
+              <Text style={styles.modalIntro}>
+                配置后，做题页可以使用 AI 提示、错因解析、详细讲解和变式训练。密钥只会提交到当前账号的后端设置，不会写入 App。
+              </Text>
+
+              <View style={styles.settingsStatusCard}>
+                <View>
+                  <Text style={styles.settingsStatusLabel}>当前 AI 状态</Text>
+                  <Text style={styles.settingsStatusHint}>
+                    {preview
+                      ? '预览模式，登录后可保存'
+                      : settingsBusy
+                        ? '正在读取配置…'
+                        : settings?.hasKey
+                          ? '已配置，可以调用'
+                          : '尚未配置 API Key'}
+                  </Text>
+                </View>
+                <Text style={styles.settingsStatusIcon}>{settings?.hasKey ? '✓' : '✦'}</Text>
+              </View>
+
+              <Text style={styles.settingsSectionTitle}>服务配置</Text>
+              <Text style={styles.settingsLabel}>API 地址</Text>
+              <TextInput
+                autoCapitalize="none"
+                editable={!preview && !settingsSaveBusy}
+                keyboardType="url"
+                onChangeText={(baseUrl) => setAiForm((current) => ({ ...current, baseUrl }))}
+                placeholder="https://api.deepseek.com"
+                placeholderTextColor={colors.textFaint}
+                style={styles.settingsInput}
+                value={aiForm.baseUrl}
+              />
+              <Text style={styles.settingsLabel}>模型名称</Text>
+              <TextInput
+                autoCapitalize="none"
+                editable={!preview && !settingsSaveBusy}
+                onChangeText={(model) => setAiForm((current) => ({ ...current, model }))}
+                placeholder="deepseek-chat"
+                placeholderTextColor={colors.textFaint}
+                style={styles.settingsInput}
+                value={aiForm.model}
+              />
+              <Text style={styles.settingsLabel}>温度（0 - 2）</Text>
+              <TextInput
+                editable={!preview && !settingsSaveBusy}
+                keyboardType="decimal-pad"
+                onChangeText={(temperature) =>
+                  setAiForm((current) => ({ ...current, temperature }))
+                }
+                placeholder="0.3"
+                placeholderTextColor={colors.textFaint}
+                style={styles.settingsInput}
+                value={aiForm.temperature}
+              />
+              <Text style={styles.settingsLabel}>API Key（可选）</Text>
+              <TextInput
+                autoCapitalize="none"
+                editable={!preview && !settingsSaveBusy}
+                onChangeText={setApiKey}
+                placeholder={settings?.hasKey ? '已配置，留空可保留原 Key' : '粘贴你的 API Key'}
+                placeholderTextColor={colors.textFaint}
+                secureTextEntry
+                style={styles.settingsInput}
+                value={apiKey}
+              />
+              <Text style={styles.settingsHint}>
+                不填写 API Key 时，保存会保留当前账号已有的密钥；作者 API 也只会写入当前账号。
+              </Text>
+
+              <View style={styles.settingsToolRow}>
+                <AnimatedPressable
+                  onPress={() => setTutorialOpen((current) => !current)}
+                  style={styles.settingsToolButton}
+                >
+                  <Text style={styles.settingsToolText}>配置教程</Text>
+                </AnimatedPressable>
+                <AnimatedPressable
+                  onPress={() => setAuthorApiOpen((current) => !current)}
+                  style={[styles.settingsToolButton, styles.settingsToolButtonAccent]}
+                >
+                  <Text style={styles.settingsToolText}>使用作者 API</Text>
+                </AnimatedPressable>
+              </View>
+
+              {authorApiOpen && (
+                <View style={styles.authorApiCard}>
+                  <Text style={styles.authorApiTitle}>使用作者 API</Text>
+                  <Text style={styles.authorApiText}>
+                    输入作者提供的部署密码后，服务器会把作者 API 安全配置到你的账号。App 不保存密码。
+                  </Text>
+                  <TextInput
+                    autoCapitalize="none"
+                    editable={!settingsSaveBusy}
+                    onChangeText={setAuthorPassword}
+                    placeholder="请输入部署密码"
+                    placeholderTextColor={colors.textFaint}
+                    secureTextEntry
+                    style={styles.settingsInput}
+                    value={authorPassword}
+                  />
+                  <AnimatedPressable
+                    disabled={settingsSaveBusy || preview}
+                    onPress={() => void deployAuthorApi()}
+                    style={[styles.modalPrimaryButton, styles.authorApiButton]}
+                  >
+                    {settingsSaveBusy ? (
+                      <ActivityIndicator color={colors.white} />
+                    ) : (
+                      <Text style={styles.modalPrimaryText}>部署到当前账号</Text>
+                    )}
+                  </AnimatedPressable>
+                </View>
+              )}
+
+              {tutorialOpen && (
+                <View style={styles.guideCard}>
+                  <Text style={styles.guideTitle}>DeepSeek 配置教程</Text>
+                  <GuideStep number="1" text="打开 DeepSeek 开放平台并登录账号。" />
+                  <GuideStep number="2" text="在 API Keys 页面创建一个新的 Key。" />
+                  <GuideStep number="3" text="回到这里，填写 API 地址、模型和 Key。" />
+                  <GuideStep number="4" text="点击底部保存，之后做题页就能调用 AI。" />
+                  <AnimatedPressable
+                    onPress={() =>
+                      void Linking.openURL('https://platform.deepseek.com/api_keys').catch(
+                        () => undefined,
+                      )
+                    }
+                    style={styles.guideLinkButton}
+                  >
+                    <Text style={styles.guideLinkText}>打开 DeepSeek API Keys</Text>
+                  </AnimatedPressable>
+                </View>
+              )}
+
+              {!!settingsNotice && <Text style={styles.settingsNotice}>{settingsNotice}</Text>}
+              {!!settingsError && <Text style={styles.settingsError}>{settingsError}</Text>}
+              <View style={styles.modalActions}>
+                <AnimatedPressable
+                  disabled={settingsSaveBusy}
+                  onPress={() => setAiSettingsOpen(false)}
+                  style={styles.modalSecondaryButton}
+                >
+                  <Text style={styles.modalSecondaryText}>稍后配置</Text>
+                </AnimatedPressable>
+                <AnimatedPressable
+                  disabled={settingsSaveBusy || preview}
+                  onPress={() => void saveAiSettings()}
+                  style={styles.modalPrimaryButton}
+                >
+                  {settingsSaveBusy ? (
+                    <ActivityIndicator color={colors.white} />
+                  ) : (
+                    <Text style={styles.modalPrimaryText}>保存配置</Text>
+                  )}
+                </AnimatedPressable>
+              </View>
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
+      <Modal
+        animationType="slide"
+        onRequestClose={() => setAboutOpen(false)}
+        transparent
+        visible={aboutOpen}
+      >
+        <View style={styles.modalBackdrop}>
+          <View style={styles.settingsModal}>
+            <ScrollView
+              contentContainerStyle={styles.settingsModalScroll}
+              showsVerticalScrollIndicator={false}
+            >
+              <View style={styles.modalHeader}>
+                <View style={styles.modalHeaderCopy}>
+                  <Text style={styles.modalTitle}>关于考匠</Text>
+                  <Text style={styles.modalKicker}>让学习回到每个人手里</Text>
+                </View>
+                <AnimatedPressable
+                  accessibilityLabel="关闭关于考匠"
+                  accessibilityRole="button"
+                  onPress={() => setAboutOpen(false)}
+                  style={styles.modalCloseButton}
+                >
+                  <Text style={styles.modalCloseText}>关闭</Text>
+                </AnimatedPressable>
+              </View>
+              <View style={styles.aboutHero}>
+                <Text style={styles.aboutHeroMark}>考</Text>
+                <View style={styles.aboutHeroCopy}>
+                  <Text style={styles.aboutHeroTitle}>考匠 · AceExam</Text>
+                  <Text style={styles.aboutHeroText}>把精练题、碎片时间和现代化 AI 教育放在一起。</Text>
+                </View>
+              </View>
+              <Text style={styles.aboutSectionTitle}>作者想说</Text>
+              <View style={styles.authorMessageCard}>
+                <Text style={styles.authorMessageLead}>我做考匠，起初只是因为相信：</Text>
+                <Text style={styles.authorMessage}>
+                  每一个认真学习的人，都应该拥有一条不被费用和时间挡住的路。
+                </Text>
+                <Text style={styles.authorMessage}>
+                  我希望，让暂时无力承担学费的同学，也能接触到经过整理、真正精练有用的题目；让没有时间参加补课的同学，也能利用通勤、排队和睡前的碎片时间，一点点向前进步；让每个人都能体验到更现代、更贴近自己的 AI 教育。
+                </Text>
+                <Text style={styles.authorMessage}>
+                  考匠网站永久免费。唯一可能产生费用的部分，是 AI 供应商收取的 API 使用费，这笔费用不会进入作者口袋。
+                </Text>
+                <Text style={styles.authorMessage}>
+                  如果考匠对你有帮助，欢迎打赏一笔小小的支持，帮助我们持续维护题库、改进体验，让考匠社区越来越好。
+                </Text>
+              </View>
+              <Text style={styles.aboutFootnote}>
+                愿每一次短暂练习，都能变成看得见的进步。感谢你把时间交给考匠。
+              </Text>
+              <AnimatedPressable
+                onPress={() => {
+                  setAboutOpen(false);
+                  setSponsorOpen(true);
+                }}
+                style={styles.modalPrimaryButton}
+              >
+                <Text style={styles.modalPrimaryText}>去赞助作者</Text>
+              </AnimatedPressable>
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
     </ScreenContainer>
+  );
+}
+
+function GuideStep({ number, text }: { number: string; text: string }) {
+  return (
+    <View style={styles.guideStep}>
+      <View style={styles.guideStepNumber}>
+        <Text style={styles.guideStepNumberText}>{number}</Text>
+      </View>
+      <Text style={styles.guideStepText}>{text}</Text>
+    </View>
   );
 }
 
@@ -1598,6 +2074,212 @@ const styles = StyleSheet.create({
     width: '100%',
     ...shadow.card,
   },
+  settingsModal: {
+    backgroundColor: colors.surface,
+    borderRadius: radius.lg,
+    maxHeight: '92%',
+    width: '100%',
+    ...shadow.card,
+  },
+  nameModal: {
+    backgroundColor: colors.surface,
+    borderRadius: radius.lg,
+    gap: spacing.md,
+    padding: spacing.lg,
+    width: '100%',
+    ...shadow.card,
+  },
+  settingsModalScroll: {
+    gap: spacing.md,
+    padding: spacing.lg,
+    paddingBottom: spacing.xl,
+  },
+  modalHeader: {
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  modalHeaderCopy: {
+    flex: 1,
+    gap: 4,
+  },
+  modalKicker: {
+    color: colors.brand,
+    fontSize: 12,
+    fontWeight: '800',
+  },
+  modalCloseButton: {
+    borderColor: colors.border,
+    borderRadius: radius.pill,
+    borderWidth: 1,
+    paddingHorizontal: spacing.sm,
+    paddingVertical: 7,
+  },
+  modalCloseText: {
+    color: colors.textMuted,
+    fontSize: 12,
+    fontWeight: '800',
+  },
+  settingsStatusCard: {
+    alignItems: 'center',
+    backgroundColor: colors.surfaceMuted,
+    borderColor: '#CFE2D5',
+    borderRadius: radius.md,
+    borderWidth: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: spacing.md,
+  },
+  settingsStatusLabel: {
+    color: colors.brandDark,
+    fontSize: 14,
+    fontWeight: '800',
+  },
+  settingsStatusHint: {
+    color: colors.textMuted,
+    fontSize: 13,
+    marginTop: 4,
+  },
+  settingsStatusIcon: {
+    color: colors.brand,
+    fontSize: 25,
+    fontWeight: '800',
+  },
+  settingsSectionTitle: {
+    color: colors.text,
+    fontSize: 16,
+    fontWeight: '800',
+    marginTop: spacing.xs,
+  },
+  settingsLabel: {
+    color: colors.textMuted,
+    fontSize: 13,
+    fontWeight: '700',
+    marginBottom: -spacing.sm,
+  },
+  settingsInput: {
+    backgroundColor: '#FAFCFA',
+    borderColor: colors.border,
+    borderRadius: radius.sm,
+    borderWidth: 1,
+    color: colors.text,
+    fontSize: 14,
+    minHeight: 48,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
+  },
+  settingsHint: {
+    color: colors.textFaint,
+    fontSize: 12,
+    lineHeight: 18,
+  },
+  settingsToolRow: {
+    flexDirection: 'row',
+    gap: spacing.sm,
+  },
+  settingsToolButton: {
+    alignItems: 'center',
+    backgroundColor: colors.surfaceMuted,
+    borderColor: '#B8D9C3',
+    borderRadius: radius.sm,
+    borderWidth: 1,
+    flex: 1,
+    justifyContent: 'center',
+    minHeight: 46,
+    paddingHorizontal: spacing.sm,
+  },
+  settingsToolButtonAccent: {
+    backgroundColor: colors.brandSoft,
+  },
+  settingsToolText: {
+    color: colors.brandDark,
+    fontSize: 13,
+    fontWeight: '800',
+  },
+  authorApiCard: {
+    backgroundColor: '#F9F5EC',
+    borderColor: '#E9D8AE',
+    borderRadius: radius.md,
+    borderWidth: 1,
+    gap: spacing.sm,
+    padding: spacing.md,
+  },
+  authorApiTitle: {
+    color: '#8D6725',
+    fontSize: 15,
+    fontWeight: '800',
+  },
+  authorApiText: {
+    color: colors.textMuted,
+    fontSize: 13,
+    lineHeight: 20,
+  },
+  authorApiButton: {
+    alignSelf: 'stretch',
+    flex: 0,
+  },
+  guideCard: {
+    backgroundColor: '#F2F8F4',
+    borderColor: '#CFE2D5',
+    borderRadius: radius.md,
+    borderWidth: 1,
+    gap: spacing.sm,
+    padding: spacing.md,
+  },
+  guideTitle: {
+    color: colors.brandDark,
+    fontSize: 15,
+    fontWeight: '800',
+  },
+  guideStep: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: spacing.sm,
+  },
+  guideStepNumber: {
+    alignItems: 'center',
+    backgroundColor: colors.brand,
+    borderRadius: radius.pill,
+    height: 24,
+    justifyContent: 'center',
+    width: 24,
+  },
+  guideStepNumberText: {
+    color: colors.white,
+    fontSize: 12,
+    fontWeight: '800',
+  },
+  guideStepText: {
+    color: colors.textMuted,
+    flex: 1,
+    fontSize: 13,
+    lineHeight: 19,
+  },
+  guideLinkButton: {
+    alignSelf: 'flex-start',
+    paddingVertical: spacing.xs,
+  },
+  guideLinkText: {
+    color: colors.brand,
+    fontSize: 13,
+    fontWeight: '800',
+  },
+  settingsNotice: {
+    backgroundColor: colors.surfaceMuted,
+    borderRadius: radius.sm,
+    color: colors.brandDark,
+    fontSize: 13,
+    lineHeight: 20,
+    padding: spacing.sm,
+  },
+  settingsError: {
+    backgroundColor: colors.warningSoft,
+    borderRadius: radius.sm,
+    color: colors.warning,
+    fontSize: 13,
+    lineHeight: 20,
+    padding: spacing.sm,
+  },
   modalTitle: {
     color: colors.text,
     fontSize: 22,
@@ -1906,6 +2588,16 @@ const styles = StyleSheet.create({
     color: colors.textMuted,
     fontSize: 13,
   },
+  settingValueWrap: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: spacing.xs,
+  },
+  settingArrow: {
+    color: colors.brand,
+    fontSize: 22,
+    lineHeight: 22,
+  },
   logoutButton: {
     alignItems: 'center',
     borderColor: '#F2D7D3',
@@ -1942,13 +2634,106 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     flex: 0,
   },
+  aboutHero: {
+    alignItems: 'center',
+    backgroundColor: colors.brand,
+    borderRadius: radius.lg,
+    flexDirection: 'row',
+    gap: spacing.md,
+    overflow: 'hidden',
+    padding: spacing.lg,
+  },
+  aboutHeroMark: {
+    alignItems: 'center',
+    backgroundColor: '#2C9478',
+    borderColor: '#75BBA2',
+    borderRadius: radius.md,
+    borderWidth: 2,
+    color: colors.white,
+    fontSize: 28,
+    fontWeight: '800',
+    height: 58,
+    lineHeight: 54,
+    textAlign: 'center',
+    width: 58,
+  },
+  aboutHeroCopy: {
+    flex: 1,
+    gap: 5,
+  },
+  aboutHeroTitle: {
+    color: colors.white,
+    fontSize: 17,
+    fontWeight: '800',
+  },
+  aboutHeroText: {
+    color: '#D9F0E3',
+    fontSize: 13,
+    lineHeight: 20,
+  },
+  aboutSectionTitle: {
+    color: colors.text,
+    fontSize: 17,
+    fontWeight: '800',
+    marginTop: spacing.xs,
+  },
+  authorMessageCard: {
+    backgroundColor: '#FFFDF8',
+    borderColor: '#EBDDBD',
+    borderRadius: radius.md,
+    borderWidth: 1,
+    gap: spacing.sm,
+    padding: spacing.lg,
+  },
+  authorMessageLead: {
+    color: '#8D6725',
+    fontSize: 15,
+    fontWeight: '800',
+    lineHeight: 23,
+  },
+  authorMessage: {
+    color: colors.textMuted,
+    fontSize: 14,
+    lineHeight: 23,
+  },
+  aboutFootnote: {
+    color: colors.textMuted,
+    fontSize: 13,
+    lineHeight: 21,
+  },
 });
 
-function SettingRow({ title, value }: { title: string; value: string }) {
-  return (
-    <View style={styles.settingRow}>
+function SettingRow({
+  onPress,
+  title,
+  value,
+}: {
+  onPress?: () => void;
+  title: string;
+  value: string;
+}) {
+  const content = (
+    <>
       <Text style={styles.settingTitle}>{title}</Text>
-      <Text style={styles.settingValue}>{value}</Text>
-    </View>
+      <View style={styles.settingValueWrap}>
+        <Text style={styles.settingValue}>{value}</Text>
+        {onPress && <Text style={styles.settingArrow}>›</Text>}
+      </View>
+    </>
   );
+
+  if (onPress) {
+    return (
+      <AnimatedPressable
+        accessibilityLabel={`${title}设置`}
+        accessibilityRole="button"
+        onPress={onPress}
+        style={styles.settingRow}
+      >
+        {content}
+      </AnimatedPressable>
+    );
+  }
+
+  return <View style={styles.settingRow}>{content}</View>;
 }

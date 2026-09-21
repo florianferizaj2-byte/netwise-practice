@@ -1,4 +1,10 @@
-export type AppTab = 'today' | 'practice' | 'wrong' | 'exam' | 'profile';
+export type AppTab =
+  | 'today'
+  | 'practice'
+  | 'wrong'
+  | 'exam'
+  | 'community'
+  | 'profile';
 
 export type AuthMode = 'login' | 'register';
 

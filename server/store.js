@@ -7,6 +7,10 @@ import { calculateMastery, nextReview, fingerprint } from "./domain.js";
 
 export function createStore(dir = process.env.DATA_DIR || "data") {
   fs.mkdirSync(dir, { recursive: true });
+  const communityUploadDir = path.join(dir, "community", "uploads");
+  fs.mkdirSync(communityUploadDir, { recursive: true });
+  const communityStorageLimit =
+    Number(process.env.COMMUNITY_STORAGE_LIMIT_BYTES) || 2 * 1024 ** 3;
   const db = new DatabaseSync(path.join(dir, "netwise.sqlite"));
   db.exec(`PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON;
  CREATE TABLE IF NOT EXISTS settings (id INTEGER PRIMARY KEY CHECK(id=1), data TEXT NOT NULL);
@@ -18,7 +22,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
  CREATE TABLE IF NOT EXISTS usage (id TEXT PRIMARY KEY, data TEXT NOT NULL);
  CREATE TABLE IF NOT EXISTS daily (day TEXT PRIMARY KEY, data TEXT NOT NULL);
  CREATE TABLE IF NOT EXISTS sessions (id TEXT PRIMARY KEY, data TEXT NOT NULL);
- CREATE TABLE IF NOT EXISTS users (id TEXT PRIMARY KEY, username TEXT UNIQUE NOT NULL, password_hash TEXT NOT NULL, salt TEXT NOT NULL, certificate_id TEXT, created_at TEXT NOT NULL, is_admin INTEGER NOT NULL DEFAULT 0, banned_at TEXT, ban_reason TEXT);
+ CREATE TABLE IF NOT EXISTS users (id TEXT PRIMARY KEY, username TEXT UNIQUE NOT NULL, password_hash TEXT NOT NULL, salt TEXT NOT NULL, certificate_id TEXT, created_at TEXT NOT NULL, is_admin INTEGER NOT NULL DEFAULT 0, banned_at TEXT, ban_reason TEXT, community_name TEXT);
  CREATE TABLE IF NOT EXISTS auth_sessions (token_hash TEXT PRIMARY KEY, user_id TEXT NOT NULL REFERENCES users(id), expires_at TEXT NOT NULL);`);
   db.exec(`
     CREATE TABLE IF NOT EXISTS user_settings (
@@ -55,11 +59,28 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       data TEXT NOT NULL,
       created_at TEXT NOT NULL
     );
+    CREATE TABLE IF NOT EXISTS community_messages (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL,
+      text TEXT NOT NULL DEFAULT '',
+      image_path TEXT,
+      image_mime TEXT,
+      image_bytes INTEGER NOT NULL DEFAULT 0,
+      created_at TEXT NOT NULL
+    );
+    CREATE INDEX IF NOT EXISTS community_messages_created_at_idx
+      ON community_messages(created_at);
+    CREATE TABLE IF NOT EXISTS community_storage (
+      id INTEGER PRIMARY KEY CHECK(id=1),
+      used_bytes INTEGER NOT NULL DEFAULT 0
+    );
+    INSERT OR IGNORE INTO community_storage (id, used_bytes) VALUES (1, 0);
   `);
   for (const statement of [
     "ALTER TABLE users ADD COLUMN is_admin INTEGER NOT NULL DEFAULT 0",
     "ALTER TABLE users ADD COLUMN banned_at TEXT",
     "ALTER TABLE users ADD COLUMN ban_reason TEXT",
+    "ALTER TABLE users ADD COLUMN community_name TEXT",
   ]) {
     try {
       db.exec(statement);
@@ -297,6 +318,8 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
   }
   const store = {
     db,
+    communityUploadDir,
+    communityStorageLimit,
     getQ,
     allQ,
     allA,
@@ -836,6 +859,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       const user = {
         id: crypto.randomUUID(),
         username,
+        communityName: null,
         certificateId: null,
         isAdmin,
         bannedAt: null,
@@ -843,7 +867,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       };
       try {
         db.prepare(
-          "INSERT INTO users (id,username,password_hash,salt,certificate_id,created_at,is_admin,banned_at,ban_reason) VALUES (?,?,?,?,?,?,?,?,?)",
+          "INSERT INTO users (id,username,password_hash,salt,certificate_id,created_at,is_admin,banned_at,ban_reason,community_name) VALUES (?,?,?,?,?,?,?,?,?,?)",
         ).run(
           user.id,
           username,
@@ -852,6 +876,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
           null,
           new Date().toISOString(),
           isAdmin ? 1 : 0,
+          null,
           null,
           null,
         );
@@ -878,6 +903,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       return {
         id: row.id,
         username: row.username,
+        communityName: row.community_name,
         certificateId: row.certificate_id,
         isAdmin: !!row.is_admin,
         bannedAt: row.banned_at,
@@ -907,6 +933,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         ? {
             id: row.id,
             username: row.username,
+            communityName: row.community_name,
             certificateId: row.certificate_id,
             isAdmin: !!row.is_admin,
             bannedAt: row.banned_at,
@@ -928,6 +955,113 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         userId,
       );
       return certificates.find((c) => c.id === certificateId);
+    },
+    communityProfile(userId) {
+      const row = db
+        .prepare(
+          "SELECT username, community_name AS communityName FROM users WHERE id=?",
+        )
+        .get(userId);
+      if (!row) return { name: "考匠用户", customized: false };
+      return {
+        name: row.communityName || row.username,
+        customized: !!row.communityName,
+      };
+    },
+    updateCommunityName(userId, name) {
+      db.prepare("UPDATE users SET community_name=? WHERE id=?").run(
+        name,
+        userId,
+      );
+      const row = db
+        .prepare(
+          "SELECT id, username, community_name AS communityName, certificate_id AS certificateId, is_admin AS isAdmin, banned_at AS bannedAt, ban_reason AS banReason FROM users WHERE id=?",
+        )
+        .get(userId);
+      return row
+        ? {
+            ...row,
+            isAdmin: !!row.isAdmin,
+          }
+        : null;
+    },
+    communityStorage() {
+      const row = db
+        .prepare("SELECT used_bytes AS usedBytes FROM community_storage WHERE id=1")
+        .get();
+      return {
+        usedBytes: Number(row?.usedBytes || 0),
+        limitBytes: communityStorageLimit,
+      };
+    },
+    communityMessageCount() {
+      return db.prepare("SELECT COUNT(*) AS count FROM community_messages").get().count;
+    },
+    communityMessages({ before = "", limit = 50 } = {}) {
+      const safeLimit = Math.max(1, Math.min(100, Number(limit) || 50));
+      const rows = before
+        ? db
+            .prepare(
+              `SELECT m.id, m.user_id AS userId, m.text, m.image_path AS imagePath,
+                      m.image_mime AS imageMime, m.image_bytes AS imageBytes,
+                      m.created_at AS createdAt,
+                      COALESCE(NULLIF(u.community_name, ''), u.username, '考匠用户') AS authorName
+                 FROM community_messages m
+                 LEFT JOIN users u ON u.id=m.user_id
+                WHERE m.created_at < ?
+                ORDER BY m.created_at DESC, m.rowid DESC
+                LIMIT ?`,
+            )
+            .all(before, safeLimit)
+        : db
+            .prepare(
+              `SELECT m.id, m.user_id AS userId, m.text, m.image_path AS imagePath,
+                      m.image_mime AS imageMime, m.image_bytes AS imageBytes,
+                      m.created_at AS createdAt,
+                      COALESCE(NULLIF(u.community_name, ''), u.username, '考匠用户') AS authorName
+                 FROM community_messages m
+                 LEFT JOIN users u ON u.id=m.user_id
+                ORDER BY m.created_at DESC, m.rowid DESC
+                LIMIT ?`,
+            )
+            .all(safeLimit);
+      return rows.reverse();
+    },
+    addCommunityMessage(message, storageBytes) {
+      const bytes = Math.max(0, Number(storageBytes) || 0);
+      db.exec("BEGIN IMMEDIATE");
+      try {
+        const current = db
+          .prepare("SELECT used_bytes AS usedBytes FROM community_storage WHERE id=1")
+          .get();
+        const usedBytes = Number(current?.usedBytes || 0);
+        if (usedBytes + bytes > communityStorageLimit) {
+          const error = new Error("社区聊天存储空间已达到 2GB 上限，请稍后再试");
+          error.status = 507;
+          throw error;
+        }
+        db.prepare(
+          "INSERT INTO community_messages (id,user_id,text,image_path,image_mime,image_bytes,created_at) VALUES (?,?,?,?,?,?,?)",
+        ).run(
+          message.id,
+          message.userId,
+          message.text,
+          message.imagePath || null,
+          message.imageMime || null,
+          message.imageBytes || 0,
+          message.createdAt,
+        );
+        db.prepare("UPDATE community_storage SET used_bytes=? WHERE id=1").run(
+          usedBytes + bytes,
+        );
+        db.exec("COMMIT");
+        return message;
+      } catch (error) {
+        try {
+          db.exec("ROLLBACK");
+        } catch {}
+        throw error;
+      }
     },
   };
   return store;

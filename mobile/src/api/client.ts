@@ -62,6 +62,7 @@ export type AuthResponse = {
   user: {
     id: string;
     username: string;
+    communityName?: string | null;
     certificateId?: string | null;
   };
   certificates: Array<{ id: string; name: string }>;
@@ -123,6 +124,67 @@ export type AiTeacherAction =
 export type AiTrainingResponse = {
   questions: Question[];
   cached: boolean;
+};
+
+export type AiSettingsResponse = {
+  baseUrl: string;
+  model: string;
+  temperature: number;
+  hasKey: boolean;
+  encryptionReady: boolean;
+  usage: {
+    today: {
+      calls: number;
+      total_tokens: number;
+    };
+    total: {
+      calls: number;
+      prompt_tokens: number;
+      completion_tokens: number;
+      total_tokens: number;
+      unknownUsage: number;
+    };
+  };
+};
+
+export type AiSettingsPayload = {
+  baseUrl: string;
+  model: string;
+  temperature: number;
+  apiKey?: string;
+};
+
+export type CommunityMessage = {
+  id: string;
+  userId: string;
+  authorName: string;
+  text: string;
+  createdAt: string;
+  imageUrl?: string;
+  imageMime?: string;
+  imageBytes?: number;
+};
+
+export type CommunityRoom = {
+  id: 'global';
+  name: string;
+  description: string;
+  memberCount: number;
+  messageCount: number;
+  storageUsedBytes: number;
+  storageLimitBytes: number;
+};
+
+export type CommunityResponse = {
+  room: CommunityRoom;
+  messages: CommunityMessage[];
+  hasMore: boolean;
+  nextBefore: string | null;
+};
+
+export type CommunityImagePayload = {
+  data: string;
+  mimeType: 'image/jpeg' | 'image/png' | 'image/gif' | 'image/webp';
 };
 
 export const mobileApi = {
@@ -216,6 +278,63 @@ export const mobileApi = {
     return request<AiTrainingResponse>('/ai/train', {
       method: 'POST',
       body: JSON.stringify({ questionId, count, harder }),
+    });
+  },
+
+  communityMessages(before?: string, limit = 50) {
+    const params = new URLSearchParams({ limit: String(limit) });
+    if (before) params.set('before', before);
+    return request<CommunityResponse>(`/community/messages?${params.toString()}`);
+  },
+
+  sendCommunityMessage(text: string, image?: CommunityImagePayload) {
+    return request<{ room: CommunityRoom; message: CommunityMessage }>(
+      '/community/messages',
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          ...(text ? { text } : {}),
+          ...(image ? { image } : {}),
+        }),
+      },
+    );
+  },
+
+  updateCommunityProfile(name: string) {
+    return request<{
+      profile: { name: string; customized: boolean };
+      user: AuthResponse['user'];
+    }>('/community/profile', {
+      method: 'PUT',
+      body: JSON.stringify({ name }),
+    });
+  },
+
+  communityImageUrl(imageUrl: string) {
+    if (/^https?:\/\//i.test(imageUrl)) return imageUrl;
+    return `${API_BASE_URL.replace(/\/api\/?$/, '')}${imageUrl}`;
+  },
+
+  settings() {
+    return request<AiSettingsResponse>('/settings');
+  },
+
+  saveSettings(payload: AiSettingsPayload) {
+    return request<{ saved: boolean }>('/settings', {
+      method: 'PUT',
+      body: JSON.stringify(payload),
+    });
+  },
+
+  deployAuthorApi(password: string) {
+    return request<{
+      deployed: boolean;
+      baseUrl: string;
+      model: string;
+      temperature: number;
+    }>('/settings/author-deploy', {
+      method: 'POST',
+      body: JSON.stringify({ password }),
     });
   },
 

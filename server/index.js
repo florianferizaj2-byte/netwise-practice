@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import crypto from "node:crypto";
+import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { z } from "zod";
@@ -32,6 +33,39 @@ const privateQuestion = (q) => {
   const { ownerUserId, aiGroupId, ...rest } = q;
   return rest;
 };
+const communityImageTypes = new Map([
+  ["image/jpeg", ".jpg"],
+  ["image/png", ".png"],
+  ["image/gif", ".gif"],
+  ["image/webp", ".webp"],
+]);
+const communityImageMaxBytes = 6 * 1024 * 1024;
+const communityMessageMaxLength = 2000;
+function decodeCommunityImage(image) {
+  if (!image) return null;
+  const extension = communityImageTypes.get(image.mimeType);
+  if (!extension) throw new Error("社区只支持 JPG、PNG、GIF 或 WebP 图片");
+  const raw = image.data
+    .replace(/^data:image\/(?:jpeg|png|gif|webp);base64,/i, "")
+    .replace(/\s/g, "");
+  if (!raw || !/^[A-Za-z0-9+/]*={0,2}$/.test(raw))
+    throw new Error("图片数据格式不正确");
+  let buffer;
+  try {
+    buffer = Buffer.from(raw, "base64");
+  } catch {
+    throw new Error("图片数据无法读取");
+  }
+  if (!buffer.length || buffer.length > communityImageMaxBytes)
+    throw new Error("单张图片不能超过 6MB");
+  const isJpeg = image.mimeType === "image/jpeg" && buffer.subarray(0, 3).equals(Buffer.from([0xff, 0xd8, 0xff]));
+  const isPng = image.mimeType === "image/png" && buffer.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]));
+  const isGif = image.mimeType === "image/gif" && buffer.subarray(0, 4).toString("ascii") === "GIF8";
+  const isWebp = image.mimeType === "image/webp" && buffer.subarray(0, 4).toString("ascii") === "RIFF" && buffer.subarray(8, 12).toString("ascii") === "WEBP";
+  if (!isJpeg && !isPng && !isGif && !isWebp)
+    throw new Error("图片内容与声明的格式不一致");
+  return { buffer, extension, mimeType: image.mimeType };
+}
 export async function createApp(options = {}) {
   const {
     store = createStore(),
@@ -53,7 +87,7 @@ export async function createApp(options = {}) {
   );
   if (process.env.TRUST_PROXY === "1") app.set("trust proxy", 1);
   app.disable("x-powered-by");
-  app.use(express.json({ limit: "32kb" }));
+  app.use(express.json({ limit: "12mb" }));
   app.use("/api", (req, res, next) => {
     res.set("Cache-Control", "no-store");
     res.set("X-Content-Type-Options", "nosniff");
@@ -192,6 +226,115 @@ export async function createApp(options = {}) {
     store.selectCertificate(req.user.id, certificateId);
     req.user.certificateId = certificateId;
     return { user: userView(req.user) };
+  });
+  const communityMessageView = (message) => ({
+    id: message.id,
+    userId: message.userId,
+    authorName: message.authorName,
+    text: message.text,
+    createdAt: message.createdAt,
+    ...(message.imagePath
+      ? {
+          imageUrl: `/community/uploads/${path.basename(message.imagePath)}`,
+          imageMime: message.imageMime,
+          imageBytes: message.imageBytes,
+        }
+      : {}),
+  });
+  const communityRoomView = () => {
+    const storage = store.communityStorage();
+    return {
+      id: "global",
+      name: "考匠社区",
+      description: "一个大群，和所有正在努力的人交流。",
+      memberCount: store.allUsers().length,
+      messageCount: store.communityMessageCount(),
+      storageUsedBytes: storage.usedBytes,
+      storageLimitBytes: storage.limitBytes,
+    };
+  };
+  route("get", "/api/community/profile", (req) => ({
+    profile: store.communityProfile(req.user?.id || "local"),
+  }));
+  route("put", "/api/community/profile", (req) => {
+    const { name } = z
+      .object({
+        name: z
+          .string()
+          .trim()
+          .min(1, "社区昵称不能为空")
+          .max(24, "社区昵称最多 24 个字符")
+          .refine((value) => !/[\u0000-\u001f\u007f\n\r]/.test(value), "社区昵称不能包含控制字符"),
+      })
+      .strict()
+      .parse(req.body);
+    const user = store.updateCommunityName(req.user?.id || "local", name);
+    if (!user) throw new Error("用户不存在");
+    return { profile: store.communityProfile(req.user?.id || "local"), user: userView(user) };
+  });
+  route("get", "/api/community/messages", (req) => {
+    const query = z
+      .object({
+        before: z.string().trim().max(80).optional(),
+        limit: z.coerce.number().int().min(1).max(100).default(50),
+      })
+      .parse(req.query);
+    const messages = store.communityMessages(query);
+    return {
+      room: communityRoomView(),
+      messages: messages.map(communityMessageView),
+      hasMore: messages.length === query.limit,
+      nextBefore: messages[0]?.createdAt || null,
+    };
+  });
+  route("post", "/api/community/messages", async (req) => {
+    const body = z
+      .object({
+        text: z.string().max(4000).optional(),
+        image: z
+          .object({
+            data: z.string().min(1).max(8_500_000),
+            mimeType: z.enum(["image/jpeg", "image/png", "image/gif", "image/webp"]),
+          })
+          .strict()
+          .optional(),
+      })
+      .strict()
+      .parse(req.body);
+    const text = (body.text || "").trim();
+    if ([...text].length > communityMessageMaxLength)
+      throw new Error(`消息最多 ${communityMessageMaxLength} 个字符`);
+    if (!text && !body.image) throw new Error("消息内容不能为空");
+    const image = decodeCommunityImage(body.image);
+    const fileName = image ? `${crypto.randomUUID()}${image.extension}` : null;
+    const imagePath = fileName ? path.join(store.communityUploadDir, fileName) : null;
+    if (image && imagePath) await fs.promises.writeFile(imagePath, image.buffer);
+    const userId = req.user?.id || "local";
+    const message = {
+      id: crypto.randomUUID(),
+      userId,
+      text,
+      imagePath: fileName,
+      imageMime: image?.mimeType || null,
+      imageBytes: image?.buffer.length || 0,
+      createdAt: new Date().toISOString(),
+    };
+    try {
+      store.addCommunityMessage(
+        message,
+        Buffer.byteLength(text, "utf8") + (image?.buffer.length || 0),
+      );
+    } catch (error) {
+      if (imagePath) await fs.promises.unlink(imagePath).catch(() => {});
+      throw error;
+    }
+    return {
+      room: communityRoomView(),
+      message: communityMessageView({
+        ...message,
+        authorName: store.communityProfile(userId).name,
+      }),
+    };
   });
   let aiBusy = false;
   const ai = async (fn) => {
@@ -1388,6 +1531,15 @@ export async function createApp(options = {}) {
       store.db.exec("ROLLBACK");
       throw e;
     }
+  });
+  app.get("/community/uploads/:file", (req, res, next) => {
+    const file = req.params.file || "";
+    if (!/^[a-f0-9-]{36}\.(jpg|png|gif|webp)$/i.test(file))
+      return res.status(404).end();
+    res.set("Cache-Control", "public, max-age=31536000, immutable");
+    res.sendFile(path.join(store.communityUploadDir, file), (error) => {
+      if (error && !res.headersSent) next(error);
+    });
   });
   app.use("/api", (req, res) => res.status(404).json({ error: "接口不存在" }));
   app.use((err, req, res, next) => {

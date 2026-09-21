@@ -8,6 +8,7 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "description": "考匠移动端学习应用",
+    "plugins": ["expo-image-picker"],
     "ios": {
       "supportsTablet": true
     },

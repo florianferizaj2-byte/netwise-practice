@@ -313,6 +313,7 @@ const navs = [
   ["wrong", "错题本", NotebookPen],
   ["training", "AI 专项训练", Sparkles],
   ["community", "共享题库", Globe2],
+  ["chat", "社区交流", MessageCircle],
   ["mastery", "知识掌握度", ChartNoAxesCombined],
   ["exam", "模拟考试", GraduationCap],
   ["admin", "管理员面板", ShieldCheck],
@@ -1488,6 +1489,14 @@ function App() {
             <ChevronRight size={15} />
           </button>
           <button
+            className={page === "about" ? "active" : ""}
+            onClick={() => go("about")}
+          >
+            <BadgeInfo size={19} />
+            关于考匠
+            <ChevronRight size={15} />
+          </button>
+          <button
             className="sponsor-sidebar-button"
             onClick={() => setSponsorOpen(true)}
           >
@@ -1509,7 +1518,11 @@ function App() {
             <ChevronRight size={14} />
             <strong>
               {navs.find((n) => n[0] === page)?.[1] ||
-                { settings: "设置", practice: session?.title || "练习中" }[
+                {
+                  settings: "设置",
+                  about: "关于考匠",
+                  practice: session?.title || "练习中",
+                }[
                   page
                 ] ||
                 "学习总览"}
@@ -1991,6 +2004,8 @@ function App() {
               start={start}
             />
           )}
+          {page === "chat" && <CommunityChatView currentUserId={auth.user?.id} />}
+          {page === "about" && <AboutView onSponsor={() => setSponsorOpen(true)} />}
           {page === "mastery" && (
             <>
               <Heading
@@ -2078,6 +2093,9 @@ function App() {
               refresh={refresh}
               certificates={auth.certificates}
               currentCertificateId={auth.user.certificateId}
+              onUserUpdated={(user) =>
+                setAuth((old) => ({ ...old, user }))
+              }
               onCertificateChange={async (certificateId) => {
                 const result = await api(
                   "/auth/certificate",
@@ -3030,6 +3048,313 @@ function CommunityView({ questions, loading, stats, reload, start }) {
     </>
   );
 }
+const mergeCommunityMessages = (current, incoming) => {
+  const byId = new Map(current.map((message) => [message.id, message]));
+  incoming.forEach((message) => byId.set(message.id, message));
+  return [...byId.values()].sort((a, b) => {
+    const created = String(a.createdAt || "").localeCompare(String(b.createdAt || ""));
+    return created || String(a.id).localeCompare(String(b.id));
+  });
+};
+const formatCommunityBytes = (bytes) => {
+  const value = Number(bytes) || 0;
+  if (value >= 1024 ** 3) return `${(value / 1024 ** 3).toFixed(2)} GB`;
+  if (value >= 1024 ** 2) return `${(value / 1024 ** 2).toFixed(1)} MB`;
+  if (value >= 1024) return `${Math.round(value / 1024)} KB`;
+  return `${value} B`;
+};
+const formatCommunityTime = (value) => {
+  const date = new Date(value);
+  return Number.isNaN(date.getTime())
+    ? ""
+    : date.toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit" });
+};
+function CommunityChatView({ currentUserId }) {
+  const [room, setRoom] = useState(null),
+    [messages, setMessages] = useState([]),
+    [draft, setDraft] = useState(""),
+    [attachment, setAttachment] = useState(null),
+    [loading, setLoading] = useState(true),
+    [refreshing, setRefreshing] = useState(false),
+    [loadingMore, setLoadingMore] = useState(false),
+    [sending, setSending] = useState(false),
+    [hasMore, setHasMore] = useState(false),
+    [before, setBefore] = useState(""),
+    [chatError, setChatError] = useState("");
+  const messagesRef = useRef(null);
+  const firstLoadRef = useRef(true);
+  useEffect(() => {
+    let active = true;
+    const loadLatest = async (initial = false) => {
+      try {
+        const result = await api("/community/messages?limit=50");
+        if (!active) return;
+        setRoom(result.room);
+        setMessages((current) =>
+          initial ? result.messages : mergeCommunityMessages(current, result.messages),
+        );
+        setHasMore((current) => (initial ? result.hasMore : current || result.hasMore));
+        if (initial) setBefore(result.nextBefore || "");
+        setChatError("");
+      } catch (error) {
+        if (active) setChatError(error.message);
+      } finally {
+        if (active && initial) setLoading(false);
+      }
+    };
+    loadLatest(true);
+    const timer = window.setInterval(() => loadLatest(false), 10000);
+    return () => {
+      active = false;
+      window.clearInterval(timer);
+    };
+  }, []);
+  useEffect(() => {
+    if (!firstLoadRef.current || loading || !messages.length) return;
+    const element = messagesRef.current;
+    if (element) element.scrollTop = element.scrollHeight;
+    firstLoadRef.current = false;
+  }, [loading, messages.length]);
+  const refresh = async () => {
+    setRefreshing(true);
+    try {
+      const result = await api("/community/messages?limit=50");
+      setRoom(result.room);
+      setMessages((current) => mergeCommunityMessages(current, result.messages));
+      setHasMore((current) => current || result.hasMore);
+      if (!before) setBefore(result.nextBefore || "");
+      setChatError("");
+    } catch (error) {
+      setChatError(error.message);
+    } finally {
+      setRefreshing(false);
+    }
+  };
+  const loadOlder = async () => {
+    if (!hasMore || !before || loadingMore) return;
+    const element = messagesRef.current;
+    const previousHeight = element?.scrollHeight || 0;
+    const previousTop = element?.scrollTop || 0;
+    setLoadingMore(true);
+    try {
+      const result = await api(
+        `/community/messages?limit=50&before=${encodeURIComponent(before)}`,
+      );
+      setMessages((current) => mergeCommunityMessages(result.messages, current));
+      setBefore(result.nextBefore || "");
+      setHasMore(result.hasMore);
+      setRoom(result.room);
+      setChatError("");
+      window.requestAnimationFrame(() => {
+        if (element) element.scrollTop = element.scrollHeight - previousHeight + previousTop;
+      });
+    } catch (error) {
+      setChatError(error.message);
+    } finally {
+      setLoadingMore(false);
+    }
+  };
+  const chooseImage = (event) => {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+    if (!file) return;
+    const supported = ["image/jpeg", "image/png", "image/gif", "image/webp"];
+    if (!supported.includes(file.type)) {
+      setChatError("只支持 JPG、PNG、GIF 或 WebP 图片");
+      return;
+    }
+    if (file.size > 6 * 1024 * 1024) {
+      setChatError("单张图片不能超过 6MB");
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      const dataUrl = String(reader.result || "");
+      const comma = dataUrl.indexOf(",");
+      if (comma < 0) {
+        setChatError("图片读取失败，请重试");
+        return;
+      }
+      setAttachment({
+        name: file.name,
+        size: file.size,
+        mimeType: file.type,
+        data: dataUrl.slice(comma + 1),
+        preview: dataUrl,
+      });
+      setChatError("");
+    };
+    reader.onerror = () => setChatError("图片读取失败，请重试");
+    reader.readAsDataURL(file);
+  };
+  const send = async () => {
+    const text = draft.trim();
+    if (sending || (!text && !attachment)) return;
+    setSending(true);
+    try {
+      const result = await api(
+        "/community/messages",
+        {
+          ...(text ? { text } : {}),
+          ...(attachment
+            ? { image: { data: attachment.data, mimeType: attachment.mimeType } }
+            : {}),
+        },
+        "POST",
+      );
+      setRoom(result.room);
+      setMessages((current) => mergeCommunityMessages(current, [result.message]));
+      setDraft("");
+      setAttachment(null);
+      setChatError("");
+      window.requestAnimationFrame(() => {
+        const element = messagesRef.current;
+        if (element) element.scrollTop = element.scrollHeight;
+      });
+    } catch (error) {
+      setChatError(error.message);
+    } finally {
+      setSending(false);
+    }
+  };
+  return (
+    <>
+      <Heading title="考匠社区" subtitle="一个公共大群 · 不加好友 · 和所有正在努力的人交流">
+        <button onClick={refresh} disabled={refreshing || loading}>
+          <RefreshCw size={16} className={refreshing ? "spin" : ""} />
+          刷新消息
+        </button>
+      </Heading>
+      {chatError && (
+        <div className="alert error" role="alert">
+          <TriangleAlert size={18} />
+          <span>{chatError}</span>
+          <IconButton icon={X} label="关闭社区提示" onClick={() => setChatError("")} />
+        </div>
+      )}
+      {room && (
+        <section className="chat-room-summary">
+          <div className="chat-room-icon"><Users size={23} /></div>
+          <div className="chat-room-copy">
+            <strong>{room.name}</strong>
+            <p>{room.description}</p>
+            <small>{room.memberCount} 位成员 · {room.messageCount} 条消息</small>
+          </div>
+          <div className="chat-room-storage">
+            <span>公共存储</span>
+            <strong>{formatCommunityBytes(room.storageUsedBytes)} / {formatCommunityBytes(room.storageLimitBytes)}</strong>
+          </div>
+        </section>
+      )}
+      <section className="community-chat-shell">
+        <div className="community-chat-messages" ref={messagesRef}>
+          {hasMore && (
+            <button className="chat-load-more" onClick={loadOlder} disabled={loadingMore}>
+              {loadingMore ? <LoaderCircle size={15} className="spin" /> : <ChevronDown size={15} />}
+              {loadingMore ? "正在加载" : "加载更早消息"}
+            </button>
+          )}
+          {loading ? (
+            <div className="chat-empty"><LoaderCircle size={24} className="spin" /><span>正在进入考匠社区…</span></div>
+          ) : messages.length ? (
+            messages.map((message) => {
+              const own = message.userId === currentUserId;
+              return (
+                <article className={`chat-message-row ${own ? "own" : ""}`} key={message.id}>
+                  <div className="chat-message-block">
+                    <div className="chat-author">
+                      <strong>{own ? "我" : message.authorName || "考匠用户"}</strong>
+                      <time>{formatCommunityTime(message.createdAt)}</time>
+                    </div>
+                    <div className={`chat-bubble ${own ? "own" : ""}`}>
+                      {message.text && <p className="chat-text">{message.text}</p>}
+                      {message.imageUrl && (
+                        <img className="chat-image" src={message.imageUrl} alt="社区图片" loading="lazy" />
+                      )}
+                    </div>
+                  </div>
+                </article>
+              );
+            })
+          ) : (
+            <div className="chat-empty"><MessageCircle size={28} /><strong>社区还没有消息</strong><span>发一条文字、Emoji 或图片，和大家打个招呼吧。</span></div>
+          )}
+        </div>
+        <div className="community-chat-composer">
+          {attachment && (
+            <div className="chat-attachment-preview">
+              <img src={attachment.preview} alt={attachment.name} />
+              <div><strong>{attachment.name}</strong><small>{formatCommunityBytes(attachment.size)}</small></div>
+              <button type="button" onClick={() => setAttachment(null)} aria-label="移除图片"><X size={16} /></button>
+            </div>
+          )}
+          <div className="chat-emoji-row" aria-label="常用 Emoji">
+            {['😀', '👏', '💪', '📚', '🎉', '❤️'].map((emoji) => (
+              <button type="button" className="chat-emoji-button" key={emoji} onClick={() => setDraft((value) => value + emoji)}>{emoji}</button>
+            ))}
+          </div>
+          <div className="chat-input-row">
+            <label className="chat-attach" title="发送图片">
+              <input type="file" accept="image/jpeg,image/png,image/gif,image/webp" onChange={chooseImage} />
+              <FileText size={18} />
+              <span>图片</span>
+            </label>
+            <textarea
+              value={draft}
+              maxLength={2000}
+              placeholder="输入消息，Enter 发送，Shift + Enter 换行"
+              onChange={(event) => setDraft(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing) {
+                  event.preventDefault();
+                  send();
+                }
+              }}
+            />
+            <button className="primary chat-send" onClick={send} disabled={sending || (!draft.trim() && !attachment)}>
+              {sending ? <LoaderCircle size={17} className="spin" /> : <ArrowRight size={17} />}
+              {sending ? "发送中" : "发送"}
+            </button>
+          </div>
+          <div className="chat-composer-foot"><span>仅支持文字、Emoji 和图片 · 图片单张最大 6MB</span><small>{draft.length} / 2000</small></div>
+        </div>
+      </section>
+    </>
+  );
+}
+function AboutView({ onSponsor }) {
+  return (
+    <>
+      <Heading title="关于考匠" subtitle="让学习回到每个人手里">
+        <button onClick={onSponsor}><Heart size={16} />赞助作者</button>
+      </Heading>
+      <section className="about-hero-card">
+        <div className="about-hero-mark">考</div>
+        <div>
+          <span className="eyebrow">考匠 · AceExam</span>
+          <h2>把精练题、碎片时间和现代化 AI 教育放在一起。</h2>
+          <p>网站端与移动端共用账号、题库和学习记录，也共用考匠社区。</p>
+        </div>
+      </section>
+      <section className="about-author-card">
+        <div className="section-heading">
+          <div><h2>作者想说</h2><p>我做考匠，起初只是因为相信：</p></div>
+          <BadgeInfo size={23} />
+        </div>
+        <p>每一个认真学习的人，都应该拥有一条不被费用和时间挡住的路。</p>
+        <p>我希望，让暂时无力承担学费的同学，也能接触到经过整理、真正精练有用的题目；让没有时间参加补课的同学，也能利用通勤、排队和睡前的碎片时间，一点点向前进步；让每个人都能体验到更现代、更贴近自己的 AI 教育。</p>
+        <p>考匠网站永久免费。唯一可能产生费用的部分，是 AI 供应商收取的 API 使用费，这笔费用不会进入作者口袋。</p>
+        <p>如果考匠对你有帮助，欢迎打赏一笔小小的支持，帮助我们持续维护题库、改进体验，让考匠社区越来越好。</p>
+      </section>
+      <div className="about-value-grid">
+        <article><BookOpen size={20} /><strong>精练题库</strong><span>围绕真实学习目标整理练习。</span></article>
+        <article><Clock size={20} /><strong>碎片学习</strong><span>随时打开，利用几分钟持续进步。</span></article>
+        <article><Sparkles size={20} /><strong>AI 助学</strong><span>解析、错因和变式训练按账号独立配置。</span></article>
+      </div>
+      <div className="about-footnote"><span>愿每一次短暂练习，都能变成看得见的进步。</span><button className="primary" onClick={onSponsor}><Heart size={16} />去赞助作者</button></div>
+    </>
+  );
+}
 function SettingsView({
   run,
   busy,
@@ -3037,9 +3362,12 @@ function SettingsView({
   refresh,
   certificates,
   currentCertificateId,
+  onUserUpdated,
   onCertificateChange,
 }) {
   const [s, setS] = useState(null),
+    [communityProfile, setCommunityProfile] = useState(null),
+    [communityName, setCommunityName] = useState(""),
     [key, setKey] = useState(""),
     [show, setShow] = useState(false),
     [dirty, setDirty] = useState(false),
@@ -3051,6 +3379,12 @@ function SettingsView({
   const load = () => api("/settings").then(setS);
   useEffect(() => {
     load();
+    api("/community/profile")
+      .then(({ profile }) => {
+        setCommunityProfile(profile);
+        setCommunityName(profile.name);
+      })
+      .catch(() => {});
   }, []);
   useEffect(() => {
     if (!deepSeekGuideOpen) return;
@@ -3094,6 +3428,20 @@ function SettingsView({
     setDirty(true);
     setDeepSeekGuideOpen(false);
     notify("已填入 DeepSeek 推荐参数，请粘贴 API Key");
+  };
+  const saveCommunityName = () => {
+    const name = communityName.trim();
+    if (!name) {
+      notify("社区昵称不能为空");
+      return;
+    }
+    run("正在保存社区昵称", async () => {
+      const result = await api("/community/profile", { name }, "PUT");
+      setCommunityProfile(result.profile);
+      setCommunityName(result.profile.name);
+      onUserUpdated?.(result.user);
+      notify("社区昵称已保存");
+    });
   };
   const deployAuthorApi = () => {
     if (!authorPassword.trim() || authorDeployBusy) return;
@@ -3170,6 +3518,34 @@ function SettingsView({
               </button>
             );
           })}
+        </div>
+      </section>
+      <section className="community-profile-settings">
+        <div className="section-heading">
+          <div>
+            <h2><MessageCircle size={21} />社区昵称</h2>
+            <p>这个名字只会显示在考匠社区公共大群里，不影响登录账号。</p>
+          </div>
+          <span className="badge">同步到 App</span>
+        </div>
+        <div className="community-profile-form">
+          <label>
+            群内显示名称
+            <input
+              value={communityName}
+              maxLength={24}
+              placeholder={communityProfile ? "输入社区昵称" : "正在读取…"}
+              disabled={!communityProfile || !!busy}
+              onChange={(event) => setCommunityName(event.target.value)}
+            />
+          </label>
+          <button
+            className="primary"
+            disabled={!communityProfile || !!busy || !communityName.trim() || communityName.trim() === communityProfile.name}
+            onClick={saveCommunityName}
+          >
+            <Save size={16} />保存昵称
+          </button>
         </div>
       </section>
       <div className="settings-tabs">

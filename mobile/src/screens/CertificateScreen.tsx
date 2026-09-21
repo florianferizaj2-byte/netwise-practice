@@ -7,11 +7,15 @@ import { colors, radius, shadow, spacing } from '../theme';
 
 type CertificateScreenProps = {
   certificates: AuthResponse['certificates'];
+  currentCertificateId?: string | null;
+  onCancel?: () => void;
   onSelected: (user: AuthResponse['user']) => void;
 };
 
 export function CertificateScreen({
   certificates,
+  currentCertificateId,
+  onCancel,
   onSelected,
 }: CertificateScreenProps) {
   const [busyId, setBusyId] = useState<string | null>(null);
@@ -32,37 +36,58 @@ export function CertificateScreen({
 
   return (
     <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
+      {onCancel && (
+        <AnimatedPressable
+          accessibilityLabel="返回我的"
+          accessibilityRole="button"
+          onPress={onCancel}
+          style={styles.backButton}
+        >
+          <Text style={styles.backText}>‹ 返回我的</Text>
+        </AnimatedPressable>
+      )}
       <EntranceView distance={12} style={styles.hero}>
         <Text style={styles.kicker}>先确定学习目标</Text>
-        <Text style={styles.title}>选择你的报考证书</Text>
-        <Text style={styles.subtitle}>之后可以在“我的”里切换，学习记录会跟随账号同步。</Text>
+        <Text style={styles.title}>{onCancel ? '切换学习证书' : '选择你的报考证书'}</Text>
+        <Text style={styles.subtitle}>
+          {onCancel
+            ? '切换后会同步对应题库、学习计划和错题记录。'
+            : '之后可以在“我的”里切换，学习记录会跟随账号同步。'}
+        </Text>
       </EntranceView>
 
       <View style={styles.list}>
-        {certificates.map((certificate, index) => (
-          <EntranceView
-            delay={80 + index * 55}
-            distance={14}
-            key={certificate.id}
-          >
-            <AnimatedPressable
-              disabled={!!busyId}
-              onPress={() => choose(certificate.id)}
-              style={styles.certificateCard}
+        {certificates.map((certificate, index) => {
+          const selected = certificate.id === currentCertificateId;
+          return (
+            <EntranceView
+              delay={80 + index * 55}
+              distance={14}
+              key={certificate.id}
             >
-              <View style={styles.badge}>
-                <Text style={styles.badgeText}>{certificate.name.slice(0, 1)}</Text>
-              </View>
-              <View style={styles.copy}>
-                <Text style={styles.name}>{certificate.name}</Text>
-                <Text style={styles.meta}>
-                  {busyId === certificate.id ? '正在准备题库…' : '进入对应题库和学习计划'}
-                </Text>
-              </View>
-              <Text style={styles.arrow}>›</Text>
-            </AnimatedPressable>
-          </EntranceView>
-        ))}
+              <AnimatedPressable
+                disabled={!!busyId || selected}
+                onPress={() => choose(certificate.id)}
+                style={[styles.certificateCard, selected && styles.selectedCertificateCard]}
+              >
+                <View style={styles.badge}>
+                  <Text style={styles.badgeText}>{certificate.name.slice(0, 1)}</Text>
+                </View>
+                <View style={styles.copy}>
+                  <Text style={styles.name}>{certificate.name}</Text>
+                  <Text style={styles.meta}>
+                    {selected
+                      ? '当前正在学习'
+                      : busyId === certificate.id
+                        ? '正在准备题库…'
+                        : '进入对应题库和学习计划'}
+                  </Text>
+                </View>
+                <Text style={styles.arrow}>{selected ? '✓' : '›'}</Text>
+              </AnimatedPressable>
+            </EntranceView>
+          );
+        })}
       </View>
 
       {!!error && <Text style={styles.error}>{error}</Text>}
@@ -101,6 +126,16 @@ const styles = StyleSheet.create({
   list: {
     gap: spacing.md,
   },
+  backButton: {
+    alignSelf: 'flex-start',
+    marginBottom: spacing.sm,
+    paddingVertical: spacing.xs,
+  },
+  backText: {
+    color: colors.brand,
+    fontSize: 15,
+    fontWeight: '800',
+  },
   certificateCard: {
     alignItems: 'center',
     backgroundColor: colors.surface,
@@ -111,6 +146,10 @@ const styles = StyleSheet.create({
     minHeight: 82,
     padding: spacing.md,
     ...shadow.card,
+  },
+  selectedCertificateCard: {
+    backgroundColor: colors.surfaceMuted,
+    borderColor: '#9DC9AE',
   },
   badge: {
     alignItems: 'center',
