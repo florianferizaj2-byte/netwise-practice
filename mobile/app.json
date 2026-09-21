@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "考匠",
+    "slug": "kaojiang",
+    "version": "0.1.1",
+    "scheme": "kaojiang",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "description": "考匠移动端学习应用",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.kaojiang.app",
+      "versionCode": 2,
+      "adaptiveIcon": {
+        "backgroundColor": "#F6F8F7",
+        "foregroundImage": "./assets/icon.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/icon.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}

@@ -35,6 +35,7 @@ import {
   LockKeyhole,
   UserRound,
   LogOut,
+  Download,
   ExternalLink,
   BadgeInfo,
   Monitor,
@@ -668,15 +669,55 @@ function AdminQuestionEditor({ question, busy, run, onClose, onSaved }) {
     </div>
   );
 }
+const AUTH_LOOP_STEPS = [
+  {
+    eyebrow: "01 · 错题定位",
+    title: "先找到真正的薄弱点",
+    description: "错题、章节与知识点会沉淀成清晰的下一步。",
+    progress: 36,
+    icon: Target,
+  },
+  {
+    eyebrow: "02 · AI 解析",
+    title: "每一道题，都讲到你听懂",
+    description: "围绕你的错题生成专项训练，把理解变成能力。",
+    progress: 68,
+    icon: Sparkles,
+  },
+  {
+    eyebrow: "03 · 掌握提升",
+    title: "下一次遇到，答得更稳",
+    description: "掌握度与学习记录持续更新，进步看得见。",
+    progress: 92,
+    icon: ChartNoAxesCombined,
+  },
+];
+
 function AuthScreen({ onAuth, initialError = "" }) {
   const [mode, setMode] = useState("login"),
     [username, setUsername] = useState(""),
     [password, setPassword] = useState(""),
+    [confirmPassword, setConfirmPassword] = useState(""),
     [error, setError] = useState(initialError),
     [busy, setBusy] = useState(false);
+  const [loopIndex, setLoopIndex] = useState(0);
   const isLogin = mode === "login";
+  useEffect(() => {
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches)
+      return undefined;
+    const timer = window.setInterval(() => {
+      setLoopIndex((index) => (index + 1) % AUTH_LOOP_STEPS.length);
+    }, 3600);
+    return () => window.clearInterval(timer);
+  }, []);
+  const loop = AUTH_LOOP_STEPS[loopIndex];
+  const LoopIcon = loop.icon;
   const submit = async (e) => {
     e.preventDefault();
+    if (!isLogin && password !== confirmPassword) {
+      setError("两次输入的密码不一致");
+      return;
+    }
     setBusy(true);
     setError("");
     try {
@@ -759,21 +800,24 @@ function AuthScreen({ onAuth, initialError = "" }) {
               </span>
             </div>
           </div>
-          <div className="auth-cycle-card auth-community-card">
+          <div className="auth-cycle-card auth-community-card" aria-live="polite">
             <div className="auth-cycle-orbit auth-community-orbit" aria-hidden="true">
-              <Users size={22} />
+              <span className="auth-orbit-pulse" />
+              <LoopIcon size={22} />
             </div>
-            <div>
+            <div className="auth-loop-copy" key={loopIndex}>
               <div className="auth-community-heading">
-                <small>AI 题库持续生长</small>
+                <small>{loop.eyebrow}</small>
                 <span className="auth-community-pill">
                   <i /> 共享中
                 </span>
               </div>
-              <strong>每一道好题，都不只为一个人服务</strong>
-              <p>
-                每道 AI 题通过校验后进入共享题库，同证书用户都能继续练习。
-              </p>
+              <strong>{loop.title}</strong>
+              <p>{loop.description}</p>
+              <div className="auth-progress" aria-label={`学习闭环进度 ${loop.progress}%`}>
+                <i style={{ width: `${loop.progress}%` }} />
+                <span>{loop.progress}%</span>
+              </div>
             </div>
           </div>
           <p className="auth-showcase-footnote">
@@ -828,6 +872,26 @@ function AuthScreen({ onAuth, initialError = "" }) {
                 />
               </span>
             </label>
+            {!isLogin && (
+              <label>
+                <span className="auth-field-label">
+                  <LockKeyhole size={15} /> 确认密码
+                </span>
+                <span className="auth-input-wrap">
+                  <LockKeyhole size={17} />
+                  <input
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    minLength="8"
+                    maxLength="128"
+                    autoComplete="new-password"
+                    placeholder="再次输入密码"
+                    required
+                  />
+                </span>
+              </label>
+            )}
             {error && (
               <p className="form-error" role="alert">
                 {error}
@@ -853,6 +917,7 @@ function AuthScreen({ onAuth, initialError = "" }) {
             className="text-button auth-switch"
             onClick={() => {
               setMode(isLogin ? "register" : "login");
+              setConfirmPassword("");
               setError("");
             }}
           >
@@ -887,50 +952,50 @@ function AnnouncementModal({ onClose }) {
             </span>
             <div>
               <span className="announcement-kicker">考匠 · 更新公告</span>
-              <h2 id="announcement-title">执兽题库与反馈处理已更新</h2>
-              <p>把发现的问题交给管理员，把每一次练习变成更可靠的进步。</p>
+              <h2 id="announcement-title">移动端 v0.1.1 与刷题体验更新</h2>
+              <p>网站和 App 共用账号与题库，随时练习，随时复盘。</p>
             </div>
           </div>
           <IconButton icon={X} label="关闭网站公告" onClick={onClose} />
         </header>
         <div className="announcement-body">
           <div className="announcement-highlight">
-            <strong>执兽模拟考试规则已确定</strong>
-            <span>
-              四大章节各抽 100 题，共 400 题、每题 1 分；总分达到 240 分即为及格，不设单科门槛。
-            </span>
+                <strong>考匠 App v0.1.1 已发布</strong>
+                <span>
+                  在账号菜单点击“下载 App”即可获取 Android 安装包，登录后连接现有网站后端。
+                </span>
           </div>
           <ul className="announcement-list">
             <li>
               <span>01</span>
               <div>
-                <strong>执兽题库按章节和知识点整理</strong>
+                <strong>网站与 App 账号同步</strong>
                 <p>
-                  基础、临床、预防、综合四大章节继续向下细分知识点，题库来源统一由管理员维护。
+                  移动端使用安全会话连接现有 API，证书、题库、错题和学习记录按账号保存。
                 </p>
               </div>
             </li>
             <li>
               <span>02</span>
               <div>
-                <strong>做题区新增题目举报</strong>
+                <strong>刷题模式更清晰</strong>
                 <p>
-                  发现答案、解析、题干、选项或重复题异常时，可以提交原因和补充说明。
+                  练习区区分顺序刷题和随机刷题，错题入口只加载错题集，提交后优先快速显示判题结果。
                 </p>
               </div>
             </li>
             <li>
               <span>03</span>
               <div>
-                <strong>管理员新增用户反馈区</strong>
+                <strong>网站体验同步更新</strong>
                 <p>
-                  管理员可以查看反馈详情，直接修改题目，或确认后取消反馈；所有操作都会留下审计记录。
+                  更新账号注册校验、移动端下载入口、登录页动效和证书引导布局，并保留题目异常反馈流程。
                 </p>
               </div>
             </li>
           </ul>
           <p className="announcement-footnote">
-            题目或解析存在疑问时，欢迎先提交反馈；正式考试信息仍请以中国兽医网和相关主管部门的最新公告为准。
+            App 当前提供 Android v0.1.1 安装包；正式考试信息仍请以对应认证机构和相关主管部门的最新公告为准。
           </p>
         </div>
         <footer className="announcement-footer">
@@ -1076,7 +1141,7 @@ function App() {
   useEffect(() => {
     if (!auth?.authenticated || !auth.user?.certificateId || !dashboard) return;
     try {
-      if (localStorage.getItem("netwise-announcement-2026-09-v2") !== "seen")
+      if (localStorage.getItem("netwise-announcement-2026-09-v3") !== "seen")
         setAnnouncementOpen(true);
     } catch {
       setAnnouncementOpen(true);
@@ -1101,7 +1166,7 @@ function App() {
   const dismissAnnouncement = () => {
     setAnnouncementOpen(false);
     try {
-      localStorage.setItem("netwise-announcement-2026-09-v2", "seen");
+      localStorage.setItem("netwise-announcement-2026-09-v3", "seen");
     } catch {
       // Private browsing may disable localStorage; closing still works for this render.
     }
@@ -1385,6 +1450,16 @@ function App() {
             </button>
             {accountMenuOpen && (
               <div className="account-menu" role="menu">
+                <a
+                  className="account-menu-link"
+                  role="menuitem"
+                  href="/downloads/kaojiang-v0.1.1.apk"
+                  download="kaojiang-v0.1.1.apk"
+                  onClick={() => setAccountMenuOpen(false)}
+                >
+                  <Download size={17} />
+                  下载 App
+                </a>
                 <button role="menuitem" onClick={signOut}>
                   <UserRound size={17} />
                   切换账号
@@ -2960,7 +3035,11 @@ function SettingsView({
     [key, setKey] = useState(""),
     [show, setShow] = useState(false),
     [dirty, setDirty] = useState(false),
-    [deepSeekGuideOpen, setDeepSeekGuideOpen] = useState(false);
+    [deepSeekGuideOpen, setDeepSeekGuideOpen] = useState(false),
+    [authorDeployOpen, setAuthorDeployOpen] = useState(false),
+    [authorPassword, setAuthorPassword] = useState(""),
+    [authorDeployError, setAuthorDeployError] = useState(""),
+    [authorDeployBusy, setAuthorDeployBusy] = useState(false);
   const load = () => api("/settings").then(setS);
   useEffect(() => {
     load();
@@ -3007,6 +3086,33 @@ function SettingsView({
     setDirty(true);
     setDeepSeekGuideOpen(false);
     notify("已填入 DeepSeek 推荐参数，请粘贴 API Key");
+  };
+  const deployAuthorApi = () => {
+    if (!authorPassword.trim() || authorDeployBusy) return;
+    setAuthorDeployError("");
+    setAuthorDeployBusy(true);
+    run("正在部署作者 API", async () => {
+      try {
+        await api(
+          "/settings/author-deploy",
+          { password: authorPassword },
+          "POST",
+        );
+        setKey("");
+        setShow(false);
+        setDirty(false);
+        setAuthorPassword("");
+        setAuthorDeployOpen(false);
+        setDeepSeekGuideOpen(false);
+        await load();
+        await refresh();
+        notify("作者 API 已部署到当前账号");
+      } catch (error) {
+        setAuthorDeployError(error.message);
+      } finally {
+        setAuthorDeployBusy(false);
+      }
+    });
   };
   return (
     <>
@@ -3345,7 +3451,71 @@ function SettingsView({
               </a>
             </div>
 
+            {authorDeployOpen && (
+              <form
+                className="author-api-deploy"
+                onSubmit={(event) => {
+                  event.preventDefault();
+                  deployAuthorApi();
+                }}
+              >
+                <div className="author-api-deploy-copy">
+                  <strong>使用作者 API</strong>
+                  <p>输入部署密码后，将 DeepSeek 配置保存到当前账号。</p>
+                </div>
+                <div className="author-api-deploy-row">
+                  <label>
+                    部署密码
+                    <input
+                      type="password"
+                      value={authorPassword}
+                      onChange={(event) => {
+                        setAuthorPassword(event.target.value);
+                        setAuthorDeployError("");
+                      }}
+                      autoComplete="current-password"
+                      placeholder="输入部署密码"
+                      autoFocus
+                      required
+                    />
+                  </label>
+                  <button
+                    className="primary"
+                    type="submit"
+                    disabled={authorDeployBusy || !!busy || !authorPassword.trim()}
+                  >
+                    {authorDeployBusy ? (
+                      <>
+                        <LoaderCircle className="spin" size={16} /> 部署中...
+                      </>
+                    ) : (
+                      <>
+                        <PlugZap size={16} /> 一键部署
+                      </>
+                    )}
+                  </button>
+                </div>
+                {authorDeployError && (
+                  <p className="author-api-deploy-error" role="alert">
+                    {authorDeployError}
+                  </p>
+                )}
+              </form>
+            )}
+
             <footer>
+              <button
+                className="author-api-trigger"
+                type="button"
+                onClick={() => {
+                  setAuthorDeployOpen((open) => !open);
+                  setAuthorDeployError("");
+                }}
+                disabled={!!busy || authorDeployBusy}
+              >
+                <LockKeyhole size={15} />
+                {authorDeployOpen ? "收起作者 API" : "使用作者 API"}
+              </button>
               <button onClick={() => setDeepSeekGuideOpen(false)}>
                 稍后配置
               </button>

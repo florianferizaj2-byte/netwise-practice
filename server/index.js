@@ -87,6 +87,19 @@ export async function createApp(options = {}) {
       ?.split(";")
       .map((part) => part.trim().split("="))
       .find(([key]) => key === name)?.[1];
+  const bearerToken = (req) => {
+    const header = req.headers.authorization;
+    if (typeof header !== "string") return null;
+    const match = header.match(/^Bearer\s+(.+)$/i);
+    return match?.[1] || null;
+  };
+  const requestToken = (req) => bearerToken(req) || cookie(req, "netwise_session");
+  const isMobileClient = (req) => req.get("x-client")?.toLowerCase() === "mobile";
+  const authResponse = (req, user, token) => ({
+    user: userView(user),
+    certificates,
+    ...(isMobileClient(req) ? { sessionToken: token } : {}),
+  });
   const sessionCookie = (req, res, token, expires = true) =>
     res.cookie("netwise_session", token || "", {
       httpOnly: true,
@@ -104,7 +117,7 @@ export async function createApp(options = {}) {
     certificate: certificates.find((c) => c.id === user.certificateId) || null,
   });
   route("get", "/api/auth/me", (req) => {
-    const user = store.authUser(cookie(req, "netwise_session"));
+    const user = store.authUser(requestToken(req));
     return {
       authenticated: !!user,
       user: user ? userView(user) : null,
@@ -125,8 +138,9 @@ export async function createApp(options = {}) {
       .strict()
       .parse(req.body);
     const user = store.register(body.username, body.password);
-    sessionCookie(req, res, store.createAuthSession(user.id));
-    return { user: userView(user), certificates };
+    const token = store.createAuthSession(user.id);
+    sessionCookie(req, res, token);
+    return authResponse(req, user, token);
   });
   route("post", "/api/auth/login", (req, res) => {
     const body = z
@@ -149,17 +163,18 @@ export async function createApp(options = {}) {
       error.status = 403;
       throw error;
     }
-    sessionCookie(req, res, store.createAuthSession(user.id));
-    return { user: userView(user), certificates };
+    const token = store.createAuthSession(user.id);
+    sessionCookie(req, res, token);
+    return authResponse(req, user, token);
   });
   route("post", "/api/auth/logout", (req, res) => {
-    store.deleteAuthSession(cookie(req, "netwise_session"));
+    store.deleteAuthSession(requestToken(req));
     sessionCookie(req, res, null, false);
     return { loggedOut: true };
   });
   app.use("/api", (req, res, next) => {
     if (!authRequired) return next();
-    const user = store.authUser(cookie(req, "netwise_session"));
+    const user = store.authUser(requestToken(req));
     if (!user) return res.status(401).json({ error: "请先登录" });
     if (user.bannedAt)
       return res.status(403).json({
@@ -267,6 +282,45 @@ export async function createApp(options = {}) {
     const { maxTokens: _ignoredMaxTokens, ...settings } = s;
     store.saveSettings(userId, { ...settings, keyCipher });
     return { saved: true };
+  });
+  route("post", "/api/settings/author-deploy", (req) => {
+    const userId = requestUserId(req);
+    const { password } = z
+      .object({ password: z.string().min(1).max(128) })
+      .strict()
+      .parse(req.body);
+    const expectedPassword = process.env.AUTHOR_API_PASSWORD || "";
+    const authorApiKey = process.env.AUTHOR_API_KEY || "";
+    const supplied = Buffer.from(password, "utf8");
+    const expected = Buffer.from(expectedPassword, "utf8");
+    const matches =
+      !!expectedPassword &&
+      supplied.length === expected.length &&
+      crypto.timingSafeEqual(supplied, expected);
+    if (!matches) {
+      const error = new Error("作者 API 部署密码不正确");
+      error.status = 401;
+      throw error;
+    }
+    if (!authorApiKey) {
+      const error = new Error("作者 API 尚未配置，请联系管理员");
+      error.status = 503;
+      throw error;
+    }
+    const current = store.settings(userId);
+    store.saveSettings(userId, {
+      ...current,
+      baseUrl: "https://api.deepseek.com",
+      model: "deepseek-chat",
+      temperature: 0.3,
+      keyCipher: encrypt(authorApiKey),
+    });
+    return {
+      deployed: true,
+      baseUrl: "https://api.deepseek.com",
+      model: "deepseek-chat",
+      temperature: 0.3,
+    };
   });
   route("delete", "/api/settings/key", (req) => {
     const userId = requestUserId(req);
@@ -793,17 +847,40 @@ export async function createApp(options = {}) {
     }
     return req.user?.certificateId;
   };
-  route("get", "/api/questions", (req) =>
-    certificateQuestions(requireCertificate(req), req.user?.id)
-      .filter(
-        (q) =>
-          (!req.query.chapter || q.chapter === req.query.chapter) &&
-          (!req.query.knowledgePoint ||
-            q.knowledgePoint === req.query.knowledgePoint) &&
-          (!req.query.source || q.source === req.query.source),
-      )
-      .map(publicQuestion),
-  );
+  route("get", "/api/questions", (req) => {
+    const questions = certificateQuestions(
+      requireCertificate(req),
+      req.user?.id,
+    ).filter(
+      (q) =>
+        (!req.query.chapter || q.chapter === req.query.chapter) &&
+        (!req.query.knowledgePoint ||
+          q.knowledgePoint === req.query.knowledgePoint) &&
+        (!req.query.source || q.source === req.query.source),
+    );
+    const parsedLimit = Number.parseInt(req.query.limit, 10);
+    const limit = Number.isInteger(parsedLimit)
+      ? Math.min(100, Math.max(1, parsedLimit))
+      : undefined;
+    const parsedOffset = Number.parseInt(req.query.offset, 10);
+    const offset = Number.isInteger(parsedOffset) ? Math.max(0, parsedOffset) : 0;
+    const random = req.query.random === "1" || req.query.random === "true";
+
+    if (random) {
+      for (let index = questions.length - 1; index > 0; index -= 1) {
+        const swapIndex = Math.floor(Math.random() * (index + 1));
+        [questions[index], questions[swapIndex]] = [
+          questions[swapIndex],
+          questions[index],
+        ];
+      }
+      return questions.slice(0, limit).map(publicQuestion);
+    }
+
+    return questions
+      .slice(offset, limit === undefined ? undefined : offset + limit)
+      .map(publicQuestion);
+  });
   route("get", "/api/questions/shared-ai", (req) => {
     const certificateId = requireCertificate(req);
     const userId = req.user?.id || "local";

@@ -211,6 +211,12 @@ test("accounts require login and certificate selection filters the question bank
   const data = await questions.json();
   assert.ok(data.length > 0 && data.length < store.allQ().length);
   assert.ok(data.every((q) => q.certificates.includes("hcia-datacom")));
+  const randomQuestions = await fetch(
+    base + "/api/questions?limit=5&random=1",
+    { headers: { Cookie: cookie } },
+  ).then((response) => response.json());
+  assert.equal(randomQuestions.length, 5);
+  assert.ok(randomQuestions.every((q) => q.certificates.includes("hcia-datacom")));
   const dashboard = await fetch(base + "/api/dashboard", {
     headers: { Cookie: cookie },
   }).then((response) => response.json());
@@ -239,6 +245,59 @@ test("accounts require login and certificate selection filters the question bank
   }).then((response) => response.json());
   assert.equal(switchedDashboard.certificate.id, "network-engineer");
   assert.equal(switchedDashboard.syllabus, null);
+});
+
+test("mobile clients can use a bearer session without browser cookies", async (t) => {
+  process.env.AI_MASTER_KEY = crypto.randomBytes(32).toString("base64");
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "netwise-mobile-auth-"));
+  const store = createStore(dir);
+  const app = await createApp({
+    store,
+    withFrontend: false,
+    authRequired: true,
+  });
+  const server = app.listen(0, "127.0.0.1");
+  await new Promise((r) => server.once("listening", r));
+  const base = `http://127.0.0.1:${server.address().port}`;
+  t.after(async () => {
+    app.locals.stop();
+    await new Promise((r) => server.close(r));
+    store.db.close();
+    fs.rmSync(dir, { recursive: true, force: true });
+  });
+
+  const registration = await fetch(base + "/api/auth/register", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Client": "mobile",
+    },
+    body: JSON.stringify({
+      username: "mobile_candidate",
+      password: "safe-password",
+    }),
+  });
+  assert.equal(registration.status, 200);
+  const data = await registration.json();
+  assert.match(data.sessionToken, /^[A-Za-z0-9_-]+$/);
+
+  const me = await fetch(base + "/api/auth/me", {
+    headers: { Authorization: `Bearer ${data.sessionToken}` },
+  }).then((response) => response.json());
+  assert.equal(me.authenticated, true);
+  assert.equal(me.user.username, "mobile_candidate");
+
+  const logout = await fetch(base + "/api/auth/logout", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${data.sessionToken}` },
+  });
+  assert.equal(logout.status, 200);
+  assert.equal(
+    (await fetch(base + "/api/auth/me", {
+      headers: { Authorization: `Bearer ${data.sessionToken}` },
+    }).then((response) => response.json())).authenticated,
+    false,
+  );
 });
 
 test("secure cookie follows the actual HTTP protocol", async (t) => {
