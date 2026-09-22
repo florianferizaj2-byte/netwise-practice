@@ -271,7 +271,7 @@ test("mobile clients can use a bearer session without browser cookies", async (t
     headers: {
       "Content-Type": "application/json",
       "X-Client": "mobile",
-      "X-App-Version": "0.2.2",
+      "X-App-Version": "0.2.3",
     },
     body: JSON.stringify({
       username: "mobile_candidate",
@@ -286,7 +286,7 @@ test("mobile clients can use a bearer session without browser cookies", async (t
     headers: {
       Authorization: `Bearer ${data.sessionToken}`,
       "X-Client": "mobile",
-      "X-App-Version": "0.2.2",
+      "X-App-Version": "0.2.3",
     },
   }).then((response) => response.json());
   assert.equal(me.authenticated, true);
@@ -311,7 +311,7 @@ test("mobile clients can use a bearer session without browser cookies", async (t
       headers: {
         Authorization: `Bearer ${data.sessionToken}`,
         "X-Client": "mobile",
-        "X-App-Version": "0.2.2",
+        "X-App-Version": "0.2.3",
       },
     }).then((response) => response.json())).authenticated,
     false,

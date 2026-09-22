@@ -26,7 +26,7 @@ import { questionImageSchema, validateQuestion } from "./domain.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const mobileRelease = () => {
-  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.2.2";
+  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.2.3";
   const minimumVersion =
     process.env.MOBILE_MINIMUM_VERSION || latestVersion;
   return {
@@ -37,7 +37,7 @@ const mobileRelease = () => {
       `/downloads/kaojiang-v${latestVersion}.apk`,
     releaseNotes:
       process.env.MOBILE_RELEASE_NOTES ||
-      "新增应用内下载更新并保留浏览器下载；今日学习随机抽取 30 题，普通练习保留顺序与随机模式。",
+      "新增启动自动恢复登录会话；保留应用内更新和浏览器下载，修复每次退出后重复登录。",
   };
 };
 const versionParts = (value) => {

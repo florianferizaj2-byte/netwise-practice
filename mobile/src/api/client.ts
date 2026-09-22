@@ -1,4 +1,5 @@
 import { APP_VERSION } from '../version';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type JsonRecord = Record<string, unknown>;
 
@@ -15,14 +16,33 @@ export type AppVersionResponse = {
   forceUpdate: boolean;
 };
 
+const SESSION_TOKEN_KEY = 'kaojiang-session-token';
 let sessionToken: string | null = null;
 
-export function setSessionToken(token: string | null) {
+export async function setSessionToken(token: string | null) {
   sessionToken = token;
+  try {
+    if (token) {
+      await AsyncStorage.setItem(SESSION_TOKEN_KEY, token);
+    } else {
+      await AsyncStorage.removeItem(SESSION_TOKEN_KEY);
+    }
+  } catch {
+    // Keep the in-memory session usable if local storage is temporarily unavailable.
+  }
 }
 
-export function clearSessionToken() {
-  sessionToken = null;
+export async function restoreSessionToken() {
+  try {
+    sessionToken = await AsyncStorage.getItem(SESSION_TOKEN_KEY);
+  } catch {
+    sessionToken = null;
+  }
+  return sessionToken;
+}
+
+export async function clearSessionToken() {
+  await setSessionToken(null);
 }
 
 export class ApiError extends Error {
@@ -218,7 +238,7 @@ export const mobileApi = {
       method: 'POST',
       body: JSON.stringify({ username, password }),
     });
-    setSessionToken(response.sessionToken ?? null);
+    await setSessionToken(response.sessionToken ?? null);
     return response;
   },
 
@@ -227,7 +247,7 @@ export const mobileApi = {
       method: 'POST',
       body: JSON.stringify({ username, password }),
     });
-    setSessionToken(response.sessionToken ?? null);
+    await setSessionToken(response.sessionToken ?? null);
     return response;
   },
 
@@ -237,6 +257,29 @@ export const mobileApi = {
       user: AuthResponse['user'] | null;
       certificates: AuthResponse['certificates'];
     }>('/auth/me');
+  },
+
+  async restoreSession() {
+    const token = await restoreSessionToken();
+    if (!token) return null;
+
+    try {
+      const response = await this.me();
+      if (!response.authenticated || !response.user) {
+        await clearSessionToken();
+        return null;
+      }
+
+      return {
+        user: response.user,
+        certificates: response.certificates,
+      } satisfies AuthResponse;
+    } catch (error) {
+      if (error instanceof ApiError && [401, 403].includes(error.status)) {
+        await clearSessionToken();
+      }
+      throw error;
+    }
   },
 
   selectCertificate(certificateId: string) {
@@ -363,11 +406,13 @@ export const mobileApi = {
     });
   },
 
-  logout() {
-    const result = request<{ loggedOut: boolean }>('/auth/logout', {
-      method: 'POST',
-    });
-    clearSessionToken();
-    return result;
+  async logout() {
+    try {
+      return await request<{ loggedOut: boolean }>('/auth/logout', {
+        method: 'POST',
+      });
+    } finally {
+      await clearSessionToken();
+    }
   },
 };

@@ -159,9 +159,11 @@ function sameAnswers(left: string[], right: string[]) {
 function PrimaryAction({
   children,
   disabled = false,
+  compact = false,
   onPress,
 }: {
   children: ReactNode;
+  compact?: boolean;
   disabled?: boolean;
   onPress?: () => void;
 }) {
@@ -170,7 +172,7 @@ function PrimaryAction({
     <AnimatedPressable
       disabled={disabled}
       onPress={onPress}
-      style={[styles.primaryAction, disabled && styles.disabledAction]}
+      style={[styles.primaryAction, compact && styles.compactPrimaryAction, disabled && styles.disabledAction]}
     >
       <Text style={styles.primaryActionText}>{children}</Text>
       <Text style={styles.actionArrow}>›</Text>
@@ -725,18 +727,19 @@ export function PracticeScreen({
           </Text>
         </View>
         <Text style={styles.questionText}>{currentQuestion.question}</Text>
-      </EntranceView>
-
-      <View style={styles.questionUtilities}>
         <AnimatedPressable
+          accessibilityLabel="举报题目"
           accessibilityRole="button"
           disabled={reportBusy}
           onPress={() => setReportOpen(true)}
-          style={styles.utilityButton}
+          style={styles.questionReportButton}
         >
-          <Text style={styles.utilityButtonText}>举报题目</Text>
+          <Text style={styles.questionReportIcon}>⚠︎</Text>
         </AnimatedPressable>
-        {!result && (
+      </EntranceView>
+
+      {!result && (
+        <View style={styles.questionUtilities}>
           <AnimatedPressable
             accessibilityRole="button"
             disabled={!selected.length || !!aiBusy}
@@ -747,9 +750,8 @@ export function PracticeScreen({
               {aiBusy === 'hint' ? 'AI 提示中…' : 'AI 提示'}
             </Text>
           </AnimatedPressable>
-        )}
-      </View>
-      {!!reportNotice && <Text style={styles.reportNotice}>{reportNotice}</Text>}
+        </View>
+      )}
 
       <View style={styles.optionsList}>
         {optionKeys.map((option, optionIndex) => {
@@ -843,6 +845,7 @@ export function PracticeScreen({
 
       <EntranceView delay={result || submitting ? 0 : 160} distance={8}>
         <PrimaryAction
+          compact
           disabled={submitting}
           onPress={result ? nextQuestion : submitAnswer}
         >
@@ -871,6 +874,8 @@ export function PracticeScreen({
       )}
       {!!trainingNotice && <Text style={styles.trainingNotice}>{trainingNotice}</Text>}
       {!!aiError && <Text style={styles.aiError}>{aiError}</Text>}
+
+      {!!reportNotice && <Text style={styles.reportNotice}>{reportNotice}</Text>}
 
       <Modal
         animationType="slide"
@@ -1745,8 +1750,8 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
     paddingBottom: spacing.xxl,
   },
   compactContent: {
-    gap: spacing.sm,
-    paddingBottom: spacing.lg,
+    gap: spacing.xs,
+    paddingBottom: spacing.md,
   },
   header: {
     alignItems: 'center',
@@ -1925,6 +1930,10 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
     paddingHorizontal: spacing.md,
     ...shadow.card,
   },
+  compactPrimaryAction: {
+    minHeight: 50,
+    paddingHorizontal: spacing.sm,
+  },
   disabledAction: {
     opacity: 0.55,
   },
@@ -2049,14 +2058,14 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
   },
   questionCard: {
     backgroundColor: colors.surface,
-    borderRadius: radius.lg,
-    gap: spacing.sm,
-    padding: spacing.md,
+    borderRadius: radius.md,
+    gap: spacing.xs,
+    padding: spacing.sm,
+    position: 'relative',
     ...shadow.card,
   },
   questionUtilities: {
-    flexDirection: 'row',
-    gap: spacing.sm,
+    marginTop: -2,
   },
   utilityButton: {
     alignItems: 'center',
@@ -2065,13 +2074,8 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
     borderWidth: 1,
     flex: 1,
     justifyContent: 'center',
-    minHeight: 40,
-    paddingHorizontal: spacing.sm,
-  },
-  utilityButtonText: {
-    color: colors.textMuted,
-    fontSize: 13,
-    fontWeight: '700',
+    minHeight: 34,
+    paddingHorizontal: spacing.xs,
   },
   aiUtilityButton: {
     backgroundColor: colors.surfaceMuted,
@@ -2087,11 +2091,25 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
     fontSize: 13,
     lineHeight: 20,
   },
+  questionReportButton: {
+    alignItems: 'center',
+    bottom: 5,
+    height: 30,
+    justifyContent: 'center',
+    position: 'absolute',
+    right: 6,
+    width: 30,
+  },
+  questionReportIcon: {
+    color: colors.textFaint,
+    fontSize: 17,
+    lineHeight: 20,
+  },
   questionMetaRow: {
     alignItems: 'center',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: spacing.sm,
+    gap: spacing.xs,
     justifyContent: 'space-between',
   },
   questionType: {
@@ -2102,7 +2120,7 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
     fontWeight: '800',
     overflow: 'hidden',
     paddingHorizontal: 10,
-    paddingVertical: 6,
+    paddingVertical: 5,
   },
   questionKnowledge: {
     color: colors.textMuted,
@@ -2111,12 +2129,13 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
   },
   questionText: {
     color: colors.text,
-    fontSize: 18,
+    fontSize: 17,
     fontWeight: '800',
-    lineHeight: 26,
+    lineHeight: 23,
+    paddingRight: 24,
   },
   optionsList: {
-    gap: spacing.sm,
+    gap: spacing.xs,
   },
   questionOption: {
     alignItems: 'center',
@@ -2125,10 +2144,10 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
     borderRadius: radius.md,
     borderWidth: 1,
     flexDirection: 'row',
-    gap: spacing.sm,
-    minHeight: 52,
-    paddingHorizontal: 12,
-    paddingVertical: 7,
+    gap: spacing.xs,
+    minHeight: 46,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
     ...shadow.card,
   },
   selectedOption: {
@@ -2147,9 +2166,9 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.surfaceMuted,
     borderRadius: radius.pill,
-    height: 28,
+    height: 26,
     justifyContent: 'center',
-    width: 28,
+    width: 26,
   },
   selectedOptionLetter: {
     backgroundColor: colors.brand,
@@ -2162,18 +2181,18 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
   },
   optionLetterText: {
     color: colors.brandDark,
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '800',
   },
   questionOptionText: {
     color: colors.text,
     flex: 1,
     fontSize: 14,
-    lineHeight: 20,
+    lineHeight: 18,
   },
   optionStatus: {
     color: colors.brand,
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: '800',
   },
   formError: {
@@ -2187,24 +2206,24 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
     borderColor: colors.brandSoft,
     borderRadius: radius.md,
     borderWidth: 1,
-    gap: 4,
-    padding: spacing.sm,
+    gap: 3,
+    padding: spacing.xs,
   },
   feedbackBad: {
     backgroundColor: colors.warningSoft,
     borderColor: '#F0C8C3',
     borderRadius: radius.md,
     borderWidth: 1,
-    gap: 4,
-    padding: spacing.sm,
+    gap: 3,
+    padding: spacing.xs,
   },
   feedbackPending: {
     alignItems: 'center',
     backgroundColor: colors.surfaceMuted,
     borderRadius: radius.md,
     flexDirection: 'row',
-    gap: spacing.sm,
-    padding: spacing.sm,
+    gap: spacing.xs,
+    padding: spacing.xs,
   },
   feedbackPendingText: {
     color: colors.textMuted,
@@ -2213,7 +2232,7 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
   },
   feedbackTitle: {
     color: colors.text,
-    fontSize: 17,
+    fontSize: 16,
     fontWeight: '800',
   },
   feedbackAnswer: {
@@ -2238,8 +2257,8 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
     borderRadius: radius.sm,
     borderWidth: 1,
     justifyContent: 'center',
-    minHeight: 40,
-    paddingHorizontal: spacing.sm,
+    minHeight: 36,
+    paddingHorizontal: spacing.xs,
   },
   aiToolButtonText: {
     color: colors.brandDark,
@@ -2251,8 +2270,8 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
     borderColor: colors.border,
     borderRadius: radius.md,
     borderWidth: 1,
-    gap: 4,
-    padding: spacing.sm,
+    gap: 3,
+    padding: spacing.xs,
   },
   aiResponseTitle: {
     color: colors.brandDark,

@@ -62,10 +62,32 @@ export function AppShell() {
   const [practiceSource, setPracticeSource] = useState<PracticeSource>('all');
   const [certificatePickerOpen, setCertificatePickerOpen] = useState(false);
   const [versionChecked, setVersionChecked] = useState(false);
+  const [sessionRestored, setSessionRestored] = useState(false);
   const [updateRelease, setUpdateRelease] = useState<AppVersionResponse | null>(null);
   const [versionCheckKey, setVersionCheckKey] = useState(0);
   const screenOpacity = useRef(new Animated.Value(1)).current;
   const screenOffset = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    let mounted = true;
+    void mobileApi
+      .restoreSession()
+      .then((restoredSession) => {
+        if (!mounted || !restoredSession) return;
+        setSession(restoredSession);
+        setIsPreview(false);
+      })
+      .catch(() => {
+        // Keep the saved token for a later launch if this was only a network failure.
+      })
+      .finally(() => {
+        if (mounted) setSessionRestored(true);
+      });
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     let mounted = true;
@@ -185,7 +207,7 @@ export function AppShell() {
     setVersionCheckKey((current) => current + 1);
   }
 
-  if (!versionChecked) {
+  if (!versionChecked || !sessionRestored) {
     return <VersionCheckingScreen />;
   }
 
@@ -273,7 +295,7 @@ function VersionCheckingScreen() {
       <StatusBar style={resolvedMode === 'dark' ? 'light' : 'dark'} />
       <View style={styles.updateScreen}>
         <ActivityIndicator color={colors.brand} size="large" />
-        <Text style={styles.updateLoadingText}>正在检查 App 版本…</Text>
+        <Text style={styles.updateLoadingText}>正在检查版本并恢复登录…</Text>
       </View>
     </SafeAreaView>
   );
