@@ -926,11 +926,11 @@ function AuthScreen({ onAuth, initialError = "" }) {
           </button>
           <a
             className="auth-app-download"
-            href="/downloads/kaojiang-v0.2.1.apk"
-            download="kaojiang-v0.2.1.apk"
+            href="/downloads/kaojiang-v0.2.2.apk"
+            download="kaojiang-v0.2.2.apk"
           >
             <Download size={16} />
-            下载考匠 App · Android v0.2.1
+            下载考匠 App · Android v0.2.2
           </a>
           <p className="auth-privacy-note">
             <ShieldCheck size={14} /> 你的学习数据与 AI 配置仅属于当前账号
@@ -961,15 +961,15 @@ function AnnouncementModal({ onClose }) {
             </span>
             <div>
               <span className="announcement-kicker">考匠 · 更新公告</span>
-              <h2 id="announcement-title">移动端 v0.2.1 更新</h2>
-              <p>新增版本校验，旧版 App 必须更新后才能继续使用。</p>
+              <h2 id="announcement-title">移动端 v0.2.2 更新</h2>
+              <p>支持应用内下载更新，同时保留浏览器下载；今日学习固定随机 30 题。</p>
             </div>
           </div>
           <IconButton icon={X} label="关闭网站公告" onClick={onClose} />
         </header>
         <div className="announcement-body">
           <div className="announcement-highlight">
-                <strong>考匠 App v0.2.1 已发布</strong>
+                <strong>考匠 App v0.2.2 已发布</strong>
                 <span>
                   在登录页或账号菜单点击“下载 App”即可获取最新版 Android 安装包，登录后连接现有网站后端。
                 </span>
@@ -996,15 +996,15 @@ function AnnouncementModal({ onClose }) {
             <li>
               <span>03</span>
               <div>
-                <strong>顺序与随机刷题继续保留</strong>
+                <strong>今日学习与普通练习分开</strong>
                 <p>
-                  练习区支持顺序刷题和随机刷题，提交后优先快速显示判题结果，网站与 App 共用同一题库。
+                  今日学习从题库随机抽取 30 道题；普通练习继续支持顺序刷题和随机刷题，提交后优先快速显示判题结果。
                 </p>
               </div>
             </li>
           </ul>
           <p className="announcement-footnote">
-            App 当前提供 Android v0.2.1 安装包；低于最低支持版本的旧 App 必须更新后才能继续使用。正式考试信息仍请以对应认证机构和相关主管部门的最新公告为准。
+            App 当前提供 Android v0.2.2 安装包；低于最低支持版本的旧 App 必须更新后才能继续使用。正式考试信息仍请以对应认证机构和相关主管部门的最新公告为准。
           </p>
         </div>
         <footer className="announcement-footer">
@@ -1462,8 +1462,8 @@ function App() {
                 <a
                   className="account-menu-link"
                   role="menuitem"
-                  href="/downloads/kaojiang-v0.2.1.apk"
-                  download="kaojiang-v0.2.1.apk"
+                  href="/downloads/kaojiang-v0.2.2.apk"
+                  download="kaojiang-v0.2.2.apk"
                   onClick={() => setAccountMenuOpen(false)}
                 >
                   <Download size={17} />

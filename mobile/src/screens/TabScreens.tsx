@@ -45,8 +45,10 @@ import type {
   AppTab,
   NavigationOptions,
   PracticeMode,
+  PracticeSession,
   PracticeSource,
 } from '../types';
+import { APP_VERSION } from '../version';
 
 type ScreenProps = {
   dashboard?: DashboardResponse | null;
@@ -54,6 +56,7 @@ type ScreenProps = {
   onLogout?: () => void;
   onPracticeModeChange?: (mode: PracticeMode) => void;
   practiceMode?: PracticeMode;
+  practiceSession?: PracticeSession;
   practiceSource?: PracticeSource;
   preview?: boolean;
   onOpenCertificatePicker?: () => void;
@@ -93,6 +96,8 @@ const themeOptions: Array<{ id: ThemeMode; label: string; hint: string }> = [
   { id: 'light', label: '浅色模式', hint: '保持明亮清爽' },
   { id: 'dark', label: '深色模式', hint: '夜间使用更舒适' },
 ];
+
+const DAILY_PRACTICE_COUNT = 30;
 
 function ScreenContainer({ children, compact = false }: { children: ReactNode; compact?: boolean }) {
   const styles = useThemedStyles(createStyles);
@@ -187,7 +192,7 @@ export function TodayScreen({ dashboard, onNavigate, preview = false }: ScreenPr
   const streak = preview
     ? '7 天'
     : `${dashboard?.recentDays?.filter((item) => item.count > 0).length ?? 0} 天`;
-  const progress = Math.min(100, Math.round((todayCount / 20) * 100));
+  const progress = Math.min(100, Math.round((todayCount / DAILY_PRACTICE_COUNT) * 100));
 
   return (
     <ScreenContainer>
@@ -199,12 +204,16 @@ export function TodayScreen({ dashboard, onNavigate, preview = false }: ScreenPr
           <View style={styles.welcomeCopy}>
             <Text style={styles.welcomeKicker}>今日学习</Text>
             <Text style={styles.welcomeTitle}>
-              {todayCount >= 20 ? '今日目标完成' : todayCount ? '继续保持节奏' : '从一组练习开始'}
+              {todayCount >= DAILY_PRACTICE_COUNT
+                ? '今日目标完成'
+                : todayCount
+                  ? '继续保持节奏'
+                  : '从一组练习开始'}
             </Text>
             <Text style={styles.welcomeText}>
-              {todayCount >= 20
+              {todayCount >= DAILY_PRACTICE_COUNT
                 ? '很棒，明天继续保持。'
-                : `还差 ${Math.max(0, 20 - todayCount)} 道题完成今日目标`}
+                : `还差 ${Math.max(0, DAILY_PRACTICE_COUNT - todayCount)} 道题完成今日目标`}
             </Text>
           </View>
           <Animated.View
@@ -219,7 +228,8 @@ export function TodayScreen({ dashboard, onNavigate, preview = false }: ScreenPr
           accessibilityRole="button"
           onPress={() =>
             onNavigate('practice', {
-              practiceMode: 'sequential',
+              practiceMode: 'random',
+              practiceSession: 'daily',
               practiceSource: 'all',
             })
           }
@@ -234,7 +244,7 @@ export function TodayScreen({ dashboard, onNavigate, preview = false }: ScreenPr
 
       <EntranceView delay={140} distance={10} style={styles.sectionHeading}>
         <Text style={styles.sectionTitle}>今日任务</Text>
-        <Text style={styles.sectionMeta}>{todayCount} / 20 题</Text>
+        <Text style={styles.sectionMeta}>{todayCount} / {DAILY_PRACTICE_COUNT} 题</Text>
       </EntranceView>
       <EntranceView delay={170} distance={6}>
         <ProgressBar value={progress} />
@@ -288,11 +298,13 @@ export function PracticeScreen({
   onNavigate,
   onPracticeModeChange,
   practiceMode = 'sequential',
+  practiceSession = 'standard',
   practiceSource = 'all',
   preview = false,
 }: ScreenProps) {
   const { colors } = useTheme();
   const styles = useThemedStyles(createStyles);
+  const isDailyPractice = practiceSession === 'daily';
   const [questions, setQuestions] = useState<Question[]>([]);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [selected, setSelected] = useState<string[]>([]);
@@ -342,17 +354,25 @@ export function PracticeScreen({
       };
     }
 
+    const requestLimit = isDailyPractice
+      ? DAILY_PRACTICE_COUNT
+      : practiceMode === 'random'
+        ? 20
+        : 10;
+    const shouldRandomize = isDailyPractice || practiceMode === 'random';
     const loadQuestions =
       practiceSource === 'wrong'
         ? mobileApi.wrong()
-        : mobileApi.questions(practiceMode === 'random' ? 20 : 10, 0, practiceMode === 'random');
+        : mobileApi.questions(requestLimit, 0, shouldRandomize);
 
     loadQuestions
       .then((items) => {
         if (!mounted) return;
         setQuestions(
-          practiceMode === 'random'
-            ? shuffleQuestions(items).slice(0, 10)
+          isDailyPractice
+            ? shuffleQuestions(items).slice(0, DAILY_PRACTICE_COUNT)
+            : practiceMode === 'random'
+              ? shuffleQuestions(items).slice(0, 10)
             : items,
         );
       })
@@ -371,7 +391,7 @@ export function PracticeScreen({
     return () => {
       mounted = false;
     };
-  }, [practiceMode, practiceSource, preview, reloadKey]);
+  }, [isDailyPractice, practiceMode, practiceSource, preview, reloadKey]);
 
   const currentQuestion = questions[questionIndex];
 
@@ -657,16 +677,23 @@ export function PracticeScreen({
   const optionKeys = Object.keys(currentQuestion.options);
   const isMultiple = currentQuestion.type === 'multiple_choice';
   const answerText = result?.answer.join('、') ?? '';
-  const sourceLabel = practiceSource === 'wrong' ? '错题复习' : '题库练习';
+  const sourceLabel = isDailyPractice
+    ? '今日练习'
+    : practiceSource === 'wrong'
+      ? '错题复习'
+      : '题库练习';
   const modeLabel = practiceMode === 'random' ? '随机刷题' : '顺序刷题';
+  const headerParts = [sourceLabel];
+  if (!isDailyPractice) headerParts.push(modeLabel);
+  headerParts.push(`${questionIndex + 1}/${questions.length}`);
 
   return (
     <ScreenContainer compact>
       <ScreenHeader
-        eyebrow={`${sourceLabel} · ${modeLabel} · ${questionIndex + 1}/${questions.length}`}
+        eyebrow={headerParts.join(' · ')}
         title={isMultiple ? '选择所有正确答案' : '选出你的答案'}
       />
-      <EntranceView delay={20} distance={6} style={styles.modeSwitch}>
+      {!isDailyPractice && <EntranceView delay={20} distance={6} style={styles.modeSwitch}>
         <AnimatedPressable
           accessibilityLabel="顺序刷题"
           disabled={submitting}
@@ -689,7 +716,7 @@ export function PracticeScreen({
           </Text>
           <Text style={styles.modeButtonHint}>打乱本组题目</Text>
         </AnimatedPressable>
-      </EntranceView>
+      </EntranceView>}
       <EntranceView delay={50} distance={12} style={styles.questionCard}>
         <View style={styles.questionMetaRow}>
           <Text style={styles.questionType}>{isMultiple ? '多选题' : '单选题'}</Text>
@@ -1262,7 +1289,7 @@ export function ProfileScreen({
         <SettingRow
           onPress={() => setAboutOpen(true)}
           title="关于考匠"
-          value="移动端 v0.2.1"
+          value={`移动端 v${APP_VERSION}`}
         />
       </EntranceView>
       <EntranceView delay={200} distance={12} style={styles.aiServiceCard}>

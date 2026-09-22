@@ -32,10 +32,12 @@ import {
   type ThemeColors,
 } from '../theme';
 import { APP_VERSION } from '../version';
+import { downloadAndInstallUpdate } from '../update';
 import type {
   AppTab,
   NavigationOptions,
   PracticeMode,
+  PracticeSession,
   PracticeSource,
 } from '../types';
 
@@ -56,6 +58,7 @@ export function AppShell() {
   const [dashboard, setDashboard] = useState<DashboardResponse | null>(null);
   const [activeTab, setActiveTab] = useState<AppTab>('today');
   const [practiceMode, setPracticeMode] = useState<PracticeMode>('sequential');
+  const [practiceSession, setPracticeSession] = useState<PracticeSession>('standard');
   const [practiceSource, setPracticeSource] = useState<PracticeSource>('all');
   const [certificatePickerOpen, setCertificatePickerOpen] = useState(false);
   const [versionChecked, setVersionChecked] = useState(false);
@@ -133,6 +136,8 @@ export function AppShell() {
     setIsPreview(false);
     setCertificatePickerOpen(false);
     setDashboard(null);
+    setPracticeSession('standard');
+    setPracticeMode('sequential');
     setPracticeSource('all');
     setActiveTab('today');
   }
@@ -153,6 +158,8 @@ export function AppShell() {
     setDashboard(null);
     setIsPreview(false);
     setCertificatePickerOpen(false);
+    setPracticeSession('standard');
+    setPracticeMode('sequential');
     setPracticeSource('all');
   }
 
@@ -162,8 +169,12 @@ export function AppShell() {
 
   function handleNavigate(tab: AppTab, options?: NavigationOptions) {
     if (tab === 'practice') {
+      const nextSession = options?.practiceSession ?? 'standard';
+      setPracticeSession(nextSession);
       setPracticeSource(options?.practiceSource ?? 'all');
-      if (options?.practiceMode) setPracticeMode(options.practiceMode);
+      setPracticeMode(
+        options?.practiceMode ?? (nextSession === 'daily' ? 'random' : 'sequential'),
+      );
     }
     setActiveTab(tab);
   }
@@ -238,6 +249,7 @@ export function AppShell() {
             onLogout: handleLogout,
             preview: isPreview,
             practiceMode,
+            practiceSession,
             practiceSource,
             onPracticeModeChange: setPracticeMode,
             onOpenCertificatePicker: handleOpenCertificatePicker,
@@ -277,6 +289,43 @@ function UpdateRequiredScreen({
   const { resolvedMode } = useTheme();
   const styles = useThemedStyles(createStyles);
   const downloadUrl = mobileApi.resolveDownloadUrl(release.downloadUrl);
+  const [downloadState, setDownloadState] = useState<
+    'idle' | 'downloading' | 'installing' | 'error'
+  >('idle');
+  const [downloadProgress, setDownloadProgress] = useState<number | null>(null);
+  const [downloadError, setDownloadError] = useState('');
+
+  async function handleInAppUpdate() {
+    if (downloadState === 'downloading' || downloadState === 'installing') return;
+
+    setDownloadState('downloading');
+    setDownloadProgress(0);
+    setDownloadError('');
+    try {
+      await downloadAndInstallUpdate(
+        downloadUrl,
+        release.latestVersion,
+        setDownloadProgress,
+        () => setDownloadState('installing'),
+      );
+      setDownloadState('idle');
+      setDownloadProgress(null);
+    } catch (error) {
+      setDownloadState('error');
+      setDownloadError(
+        error instanceof Error ? error.message : '应用内更新失败，请改用浏览器下载。',
+      );
+    }
+  }
+
+  const inAppButtonLabel =
+    downloadState === 'downloading'
+      ? downloadProgress === null
+        ? '正在下载新版…'
+        : `正在下载 ${downloadProgress}%`
+      : downloadState === 'installing'
+        ? '请在系统页面确认安装'
+        : '应用内下载并安装';
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -287,7 +336,7 @@ function UpdateRequiredScreen({
           <Text style={styles.updateKicker}>版本更新</Text>
           <Text style={styles.updateTitle}>请更新到最新版</Text>
           <Text style={styles.updateText}>
-            当前 App 版本已停止服务，请下载最新版后继续使用考匠。
+            当前 App 版本已停止服务。你可以直接在 App 内下载并安装，也可以改用浏览器下载新版。
           </Text>
           <View style={styles.updateVersionRow}>
             <Text style={styles.updateVersionLabel}>当前版本</Text>
@@ -299,13 +348,33 @@ function UpdateRequiredScreen({
             <Text style={styles.updateNotes}>本次更新：{release.releaseNotes}</Text>
           )}
           <AnimatedPressable
-            accessibilityLabel="下载最新版 App"
+            accessibilityLabel="在应用内下载并安装最新版 App"
+            accessibilityRole="button"
+            disabled={downloadState === 'downloading' || downloadState === 'installing'}
+            onPress={() => void handleInAppUpdate()}
+            style={[
+              styles.updateButton,
+              (downloadState === 'downloading' || downloadState === 'installing') &&
+                styles.updateButtonDisabled,
+            ]}
+          >
+            {downloadState === 'downloading' && (
+              <ActivityIndicator color={styles.updateButtonText.color} size="small" />
+            )}
+            <Text style={styles.updateButtonText}>{inAppButtonLabel}</Text>
+            {downloadState === 'downloading' && downloadProgress !== null && (
+              <Text style={styles.updateButtonProgress}>{downloadProgress}%</Text>
+            )}
+          </AnimatedPressable>
+          {downloadError && <Text style={styles.updateError}>{downloadError}</Text>}
+          <AnimatedPressable
+            accessibilityLabel="改用浏览器下载最新版 App"
             accessibilityRole="button"
             onPress={() => void Linking.openURL(downloadUrl).catch(() => undefined)}
-            style={styles.updateButton}
+            style={styles.updateBrowserButton}
           >
-            <Text style={styles.updateButtonText}>下载最新版 App</Text>
-            <Text style={styles.updateButtonArrow}>→</Text>
+            <Text style={styles.updateBrowserButtonText}>改用浏览器下载新版</Text>
+            <Text style={styles.updateBrowserButtonArrow}>→</Text>
           </AnimatedPressable>
           <AnimatedPressable
             accessibilityLabel="重新检查版本"
@@ -329,6 +398,7 @@ function renderScreen(
     onLogout: () => void;
     preview: boolean;
     practiceMode: PracticeMode;
+    practiceSession: PracticeSession;
     practiceSource: PracticeSource;
     onPracticeModeChange: (mode: PracticeMode) => void;
     onOpenCertificatePicker: () => void;
@@ -504,15 +574,48 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
     minHeight: 54,
     paddingHorizontal: spacing.md,
   },
+  updateButtonDisabled: {
+    opacity: 0.72,
+  },
   updateButtonText: {
     color: colors.white,
     fontSize: 16,
+    fontWeight: '800',
+  },
+  updateButtonProgress: {
+    color: colors.white,
+    fontSize: 13,
     fontWeight: '800',
   },
   updateButtonArrow: {
     color: colors.white,
     fontSize: 22,
     fontWeight: '800',
+  },
+  updateBrowserButton: {
+    alignItems: 'center',
+    borderColor: colors.brand,
+    borderRadius: radius.md,
+    borderWidth: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    minHeight: 50,
+    paddingHorizontal: spacing.md,
+  },
+  updateBrowserButtonText: {
+    color: colors.brand,
+    fontSize: 15,
+    fontWeight: '800',
+  },
+  updateBrowserButtonArrow: {
+    color: colors.brand,
+    fontSize: 20,
+    fontWeight: '800',
+  },
+  updateError: {
+    color: colors.warning,
+    fontSize: 13,
+    lineHeight: 19,
   },
   updateRetryButton: {
     alignItems: 'center',
