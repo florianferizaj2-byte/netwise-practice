@@ -926,11 +926,11 @@ function AuthScreen({ onAuth, initialError = "" }) {
           </button>
           <a
             className="auth-app-download"
-            href="/downloads/kaojiang-v0.1.2.apk"
-            download="kaojiang-v0.1.2.apk"
+            href="/downloads/kaojiang-v0.2.0.apk"
+            download="kaojiang-v0.2.0.apk"
           >
             <Download size={16} />
-            下载考匠 App · Android v0.1.2
+            下载考匠 App · Android v0.2.0
           </a>
           <p className="auth-privacy-note">
             <ShieldCheck size={14} /> 你的学习数据与 AI 配置仅属于当前账号
@@ -961,7 +961,7 @@ function AnnouncementModal({ onClose }) {
             </span>
             <div>
               <span className="announcement-kicker">考匠 · 更新公告</span>
-              <h2 id="announcement-title">移动端 v0.1.2 AI 服务更新</h2>
+              <h2 id="announcement-title">移动端 v0.2.0 社区更新</h2>
               <p>举报题目、AI 解析和变式训练现在都能在手机上完成。</p>
             </div>
           </div>
@@ -969,7 +969,7 @@ function AnnouncementModal({ onClose }) {
         </header>
         <div className="announcement-body">
           <div className="announcement-highlight">
-                <strong>考匠 App v0.1.2 已发布</strong>
+                <strong>考匠 App v0.2.0 已发布</strong>
                 <span>
                   在登录页或账号菜单点击“下载 App”即可获取 Android 安装包，登录后连接现有网站后端。
                 </span>
@@ -1004,7 +1004,7 @@ function AnnouncementModal({ onClose }) {
             </li>
           </ul>
           <p className="announcement-footnote">
-            App 当前提供 Android v0.1.2 安装包；正式考试信息仍请以对应认证机构和相关主管部门的最新公告为准。
+            App 当前提供 Android v0.2.0 安装包；正式考试信息仍请以对应认证机构和相关主管部门的最新公告为准。
           </p>
         </div>
         <footer className="announcement-footer">
@@ -1150,7 +1150,7 @@ function App() {
   useEffect(() => {
     if (!auth?.authenticated || !auth.user?.certificateId || !dashboard) return;
     try {
-      if (localStorage.getItem("netwise-announcement-2026-09-v4") !== "seen")
+      if (localStorage.getItem("netwise-announcement-2026-09-v5") !== "seen")
         setAnnouncementOpen(true);
     } catch {
       setAnnouncementOpen(true);
@@ -1175,7 +1175,7 @@ function App() {
   const dismissAnnouncement = () => {
     setAnnouncementOpen(false);
     try {
-      localStorage.setItem("netwise-announcement-2026-09-v4", "seen");
+      localStorage.setItem("netwise-announcement-2026-09-v5", "seen");
     } catch {
       // Private browsing may disable localStorage; closing still works for this render.
     }
@@ -1462,8 +1462,8 @@ function App() {
                 <a
                   className="account-menu-link"
                   role="menuitem"
-                  href="/downloads/kaojiang-v0.1.2.apk"
-                  download="kaojiang-v0.1.2.apk"
+                  href="/downloads/kaojiang-v0.2.0.apk"
+                  download="kaojiang-v0.2.0.apk"
                   onClick={() => setAccountMenuOpen(false)}
                 >
                   <Download size={17} />

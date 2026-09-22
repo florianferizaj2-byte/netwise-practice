@@ -1205,7 +1205,7 @@ export function ProfileScreen({
         <SettingRow
           onPress={() => setAboutOpen(true)}
           title="关于考匠"
-          value="移动端 v0.1.2"
+          value="移动端 v0.2.0"
         />
       </EntranceView>
       <EntranceView delay={200} distance={12} style={styles.aiServiceCard}>
