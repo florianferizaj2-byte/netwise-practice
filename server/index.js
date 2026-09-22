@@ -26,7 +26,7 @@ import { questionImageSchema, validateQuestion } from "./domain.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const mobileRelease = () => {
-  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.2.3";
+  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.2.4";
   const minimumVersion =
     process.env.MOBILE_MINIMUM_VERSION || latestVersion;
   return {
@@ -37,9 +37,47 @@ const mobileRelease = () => {
       `/downloads/kaojiang-v${latestVersion}.apk`,
     releaseNotes:
       process.env.MOBILE_RELEASE_NOTES ||
-      "新增启动自动恢复登录会话；保留应用内更新和浏览器下载，修复每次退出后重复登录。",
+      "新增知识点选择与刷题进度；普通练习加载完整题库；支持收藏题目和错题移除。",
   };
 };
+async function exchangeWechatMiniProgramCode(code) {
+  const appid = process.env.WECHAT_MINIPROGRAM_APP_ID?.trim();
+  const secret = process.env.WECHAT_MINIPROGRAM_APP_SECRET?.trim();
+  if (!appid || !secret) {
+    const error = new Error("微信小程序登录尚未配置 AppID 和 AppSecret");
+    error.status = 503;
+    error.code = "WECHAT_MINIPROGRAM_NOT_CONFIGURED";
+    throw error;
+  }
+  const endpoint = new URL("https://api.weixin.qq.com/sns/jscode2session");
+  endpoint.search = new URLSearchParams({
+    appid,
+    secret,
+    js_code: code,
+    grant_type: "authorization_code",
+  }).toString();
+  const response = await fetch(endpoint);
+  let data;
+  try {
+    data = await response.json();
+  } catch {
+    const error = new Error("微信登录服务返回了无法识别的响应");
+    error.status = 502;
+    throw error;
+  }
+  if (!response.ok || data?.errcode || !data?.openid) {
+    const error = new Error(
+      data?.errmsg ? `微信登录失败：${data.errmsg}` : "微信登录失败，请稍后重试",
+    );
+    error.status = 502;
+    throw error;
+  }
+  return {
+    appid,
+    openid: String(data.openid),
+    unionid: data.unionid ? String(data.unionid) : null,
+  };
+}
 const versionParts = (value) => {
   const match = String(value || "").trim().match(/^v?(\d+(?:\.\d+){0,3})/i);
   return match
@@ -102,6 +140,7 @@ export async function createApp(options = {}) {
     provider = new OpenAICompatibleProvider(store),
     withFrontend = true,
     production = process.argv.includes("--production"),
+    wechatCodeExchange = exchangeWechatMiniProgramCode,
   } = options;
   // A real app must always resolve settings through the authenticated user.
   // The old DISABLE_AUTH escape hatch made every account share the `local`
@@ -159,6 +198,8 @@ export async function createApp(options = {}) {
   };
   const requestToken = (req) => bearerToken(req) || cookie(req, "netwise_session");
   const isMobileClient = (req) => req.get("x-client")?.toLowerCase() === "mobile";
+  const isTokenClient = (req) =>
+    ["mobile", "miniprogram"].includes(req.get("x-client")?.toLowerCase());
   app.use("/api", (req, res, next) => {
     if (req.path === "/mobile/version" || !isMobileClient(req)) return next();
     const release = mobileRelease();
@@ -179,7 +220,7 @@ export async function createApp(options = {}) {
   const authResponse = (req, user, token) => ({
     user: userView(user),
     certificates,
-    ...(isMobileClient(req) ? { sessionToken: token } : {}),
+    ...(isTokenClient(req) ? { sessionToken: token } : {}),
   });
   const sessionCookie = (req, res, token, expires = true) =>
     res.cookie("netwise_session", token || "", {
@@ -247,6 +288,125 @@ export async function createApp(options = {}) {
     const token = store.createAuthSession(user.id);
     sessionCookie(req, res, token);
     return authResponse(req, user, token);
+  });
+  route("post", "/api/auth/wechat/mini-login", async (req, res) => {
+    const { code } = z
+      .object({ code: z.string().trim().min(1).max(512) })
+      .strict()
+      .parse(req.body);
+    const identity = await wechatCodeExchange(code);
+    if (!identity?.appid || !identity?.openid) {
+      const error = new Error("微信登录身份无效");
+      error.status = 502;
+      throw error;
+    }
+    const bound = store.wechatIdentity(identity.appid, identity.openid);
+    if (bound) {
+      const user = store.userById(bound.userId);
+      if (!user) {
+        const error = new Error("微信绑定的考匠账号不存在");
+        error.status = 409;
+        throw error;
+      }
+      if (user.bannedAt) {
+        const error = new Error(
+          `账号已被封禁${user.banReason ? `：${user.banReason}` : ""}`,
+        );
+        error.status = 403;
+        throw error;
+      }
+      const token = store.createAuthSession(user.id);
+      sessionCookie(req, res, token);
+      return {
+        linked: true,
+        needsBinding: false,
+        ...authResponse(req, user, token),
+      };
+    }
+    return {
+      linked: false,
+      needsBinding: true,
+      bindingToken: store.createWechatLoginChallenge(identity),
+    };
+  });
+  route("post", "/api/auth/wechat/bind", (req, res) => {
+    const body = z
+      .object({
+        bindingToken: z.string().trim().min(20).max(200),
+        username: z.string().trim().min(3).max(40),
+        password: z.string().min(8).max(128),
+      })
+      .strict()
+      .parse(req.body);
+    const challenge = store.wechatLoginChallenge(body.bindingToken);
+    if (!challenge) {
+      const error = new Error("微信绑定已过期，请重新点击微信登录");
+      error.status = 401;
+      throw error;
+    }
+    const user = store.authenticate(body.username, body.password);
+    if (!user) {
+      const error = new Error("账号或密码不正确");
+      error.status = 401;
+      throw error;
+    }
+    if (user.bannedAt) {
+      const error = new Error(
+        `账号已被封禁${user.banReason ? `：${user.banReason}` : ""}`,
+      );
+      error.status = 403;
+      throw error;
+    }
+    store.bindWechatIdentity({
+      appid: challenge.appid,
+      openid: challenge.openid,
+      unionid: challenge.unionid,
+      userId: user.id,
+    });
+    store.consumeWechatLoginChallenge(body.bindingToken);
+    const token = store.createAuthSession(user.id);
+    sessionCookie(req, res, token);
+    return {
+      linked: true,
+      needsBinding: false,
+      ...authResponse(req, user, token),
+    };
+  });
+  route("post", "/api/auth/wechat/register", (req, res) => {
+    const body = z
+      .object({
+        bindingToken: z.string().trim().min(20).max(200),
+        username: z
+          .string()
+          .trim()
+          .min(3)
+          .max(40)
+          .regex(/^[A-Za-z0-9_-]+$/, "账号只能使用字母、数字、下划线或连字符"),
+        password: z.string().min(8).max(128),
+      })
+      .strict()
+      .parse(req.body);
+    const challenge = store.wechatLoginChallenge(body.bindingToken);
+    if (!challenge) {
+      const error = new Error("微信绑定已过期，请重新点击微信登录");
+      error.status = 401;
+      throw error;
+    }
+    const user = store.register(body.username, body.password);
+    store.bindWechatIdentity({
+      appid: challenge.appid,
+      openid: challenge.openid,
+      unionid: challenge.unionid,
+      userId: user.id,
+    });
+    store.consumeWechatLoginChallenge(body.bindingToken);
+    const token = store.createAuthSession(user.id);
+    sessionCookie(req, res, token);
+    return {
+      linked: true,
+      needsBinding: false,
+      ...authResponse(req, user, token),
+    };
   });
   route("post", "/api/auth/logout", (req, res) => {
     store.deleteAuthSession(requestToken(req));
@@ -1050,15 +1210,35 @@ export async function createApp(options = {}) {
     }
     return req.user?.certificateId;
   };
+  const questionState = (req) => {
+    const userId = req.user?.id || "local";
+    return {
+      userId,
+      attemptedIds: store.attemptedQuestionIds(userId),
+      favoriteIds: store.favoriteQuestionIds(userId),
+    };
+  };
+  const publicQuestionForUser = (question, state) => ({
+    ...publicQuestion(question),
+    attempted: state.attemptedIds.has(question.id),
+    favorite: state.favoriteIds.has(question.id),
+  });
+  const privateQuestionForUser = (question, state) => ({
+    ...privateQuestion(question),
+    attempted: state.attemptedIds.has(question.id),
+    favorite: state.favoriteIds.has(question.id),
+  });
   route("get", "/api/questions", (req) => {
+    const state = questionState(req);
     const questions = certificateQuestions(
       requireCertificate(req),
-      req.user?.id,
+      state.userId,
     ).filter(
       (q) =>
         (!req.query.chapter || q.chapter === req.query.chapter) &&
         (!req.query.knowledgePoint ||
-          q.knowledgePoint === req.query.knowledgePoint) &&
+          (q.targetKnowledgePoint || q.knowledgePoint) ===
+            req.query.knowledgePoint) &&
         (!req.query.source || q.source === req.query.source),
     );
     const parsedLimit = Number.parseInt(req.query.limit, 10);
@@ -1077,16 +1257,81 @@ export async function createApp(options = {}) {
           questions[index],
         ];
       }
-      return questions.slice(0, limit).map(publicQuestion);
+      return questions
+        .slice(0, limit === undefined ? undefined : limit)
+        .map((question) => publicQuestionForUser(question, state));
     }
 
     return questions
       .slice(offset, limit === undefined ? undefined : offset + limit)
-      .map(publicQuestion);
+      .map((question) => publicQuestionForUser(question, state));
+  });
+  route("get", "/api/practice/catalog", (req) => {
+    const certificateId = requireCertificate(req);
+    const state = questionState(req);
+    const questions = certificateQuestions(certificateId, state.userId);
+    const chapters = new Map();
+
+    for (const question of questions) {
+      const chapterName = question.chapter || "综合练习";
+      const knowledgePointName =
+        question.targetKnowledgePoint || question.knowledgePoint || "综合练习";
+      let chapter = chapters.get(chapterName);
+      if (!chapter) {
+        chapter = {
+          name: chapterName,
+          questionCount: 0,
+          attemptedCount: 0,
+          knowledgePoints: new Map(),
+        };
+        chapters.set(chapterName, chapter);
+      }
+      chapter.questionCount += 1;
+      if (state.attemptedIds.has(question.id)) chapter.attemptedCount += 1;
+
+      let point = chapter.knowledgePoints.get(knowledgePointName);
+      if (!point) {
+        point = {
+          name: knowledgePointName,
+          questionCount: 0,
+          attemptedCount: 0,
+        };
+        chapter.knowledgePoints.set(knowledgePointName, point);
+      }
+      point.questionCount += 1;
+      if (state.attemptedIds.has(question.id)) point.attemptedCount += 1;
+    }
+
+    const progress = (attemptedCount, questionCount) =>
+      questionCount ? Math.round((attemptedCount / questionCount) * 100) : 0;
+    return {
+      total: questions.length,
+      attemptedCount: questions.filter((question) =>
+        state.attemptedIds.has(question.id),
+      ).length,
+      favoriteCount: questions.filter((question) =>
+        state.favoriteIds.has(question.id),
+      ).length,
+      chapters: [...chapters.values()]
+        .sort((left, right) => left.name.localeCompare(right.name, "zh-CN"))
+        .map((chapter) => ({
+          name: chapter.name,
+          questionCount: chapter.questionCount,
+          attemptedCount: chapter.attemptedCount,
+          progress: progress(chapter.attemptedCount, chapter.questionCount),
+          knowledgePoints: [...chapter.knowledgePoints.values()]
+            .sort((left, right) => left.name.localeCompare(right.name, "zh-CN"))
+            .map((point) => ({
+              ...point,
+              progress: progress(point.attemptedCount, point.questionCount),
+            })),
+        })),
+    };
   });
   route("get", "/api/questions/shared-ai", (req) => {
     const certificateId = requireCertificate(req);
-    const userId = req.user?.id || "local";
+    const state = questionState(req);
+    const userId = state.userId;
     const groupIds = new Set(
       store.db
         .prepare(
@@ -1104,11 +1349,26 @@ export async function createApp(options = {}) {
           hasCertificateQuestion(q, certificateId),
       )
       .map((q) => ({
-        ...publicQuestion(q),
+        ...publicQuestionForUser(q, state),
         sharedAi: true,
         sourceLabel: "其他用户生成的 AI 题",
         feedback: store.questionFeedback(q.id, userId),
       }));
+  });
+  route("put", "/api/questions/:id/favorite", (req) => {
+    const question = requireQ(req.params.id, req);
+    const certificateId = requireCertificate(req);
+    if (certificateId && !hasCertificateQuestion(question, certificateId)) {
+      const error = new Error("题目不适用于当前证书");
+      error.status = 404;
+      throw error;
+    }
+    const favorite = z
+      .object({ favorite: z.boolean() })
+      .strict()
+      .parse(req.body).favorite;
+    store.setQuestionFavorite(req.user?.id || "local", question.id, favorite);
+    return { saved: true, favorite };
   });
   route("post", "/api/questions/:id/feedback", (req) => {
     const q = requireQ(req.params.id, req);
@@ -1141,9 +1401,10 @@ export async function createApp(options = {}) {
       feedback: store.questionFeedback(q.id, req.user?.id || "local"),
     };
   });
-  route("get", "/api/questions/:id", (req) =>
-    publicQuestion(requireQ(req.params.id, req)),
-  );
+  route("get", "/api/questions/:id", (req) => {
+    const state = questionState(req);
+    return publicQuestionForUser(requireQ(req.params.id, req), state);
+  });
   route("post", "/api/questions/:id/reveal", (req) => {
     const q = requireQ(req.params.id, req);
     return { answer: q.answer, analysis: q.analysis };
@@ -1178,13 +1439,36 @@ export async function createApp(options = {}) {
   });
   route("get", "/api/wrong", (req) => {
     const certificateId = requireCertificate(req);
+    const state = questionState(req);
     return store
-      .wrongQuestions(req.user?.id)
+      .wrongQuestions(state.userId)
       .filter(
         (question) =>
           !certificateId || hasCertificateQuestion(question, certificateId),
       )
-      .map(privateQuestion);
+      .map((question) => privateQuestionForUser(question, state));
+  });
+  route("get", "/api/favorites", (req) => {
+    const certificateId = requireCertificate(req);
+    const state = questionState(req);
+    return store
+      .favoriteQuestions(state.userId)
+      .filter(
+        (question) =>
+          !certificateId || hasCertificateQuestion(question, certificateId),
+      )
+      .map((question) => publicQuestionForUser(question, state));
+  });
+  route("delete", "/api/wrong/:id", (req) => {
+    const question = requireQ(req.params.id, req);
+    const certificateId = requireCertificate(req);
+    if (certificateId && !hasCertificateQuestion(question, certificateId)) {
+      const error = new Error("题目不适用于当前证书");
+      error.status = 404;
+      throw error;
+    }
+    store.dismissWrongQuestion(req.user?.id || "local", question.id);
+    return { deleted: true, questionId: question.id };
   });
   route("get", "/api/queue", (req) =>
     store.db

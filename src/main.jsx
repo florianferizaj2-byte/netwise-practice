@@ -55,6 +55,7 @@ import {
   Globe2,
   ThumbsUp,
   Flag,
+  Star,
   Share2,
   Users,
   Ban,
@@ -468,6 +469,39 @@ function QuestionReport({ question, busy, run }) {
         </div>
       )}
     </div>
+  );
+}
+function QuestionFavorite({ question, busy, run, onChanged }) {
+  const [favorite, setFavorite] = useState(!!question.favorite);
+  const [saving, setSaving] = useState(false);
+  useEffect(() => setFavorite(!!question.favorite), [question.id, question.favorite]);
+  const toggle = async () => {
+    if (saving || busy) return;
+    setSaving(true);
+    const saved = await run("正在保存收藏状态", () =>
+      api(
+        `/questions/${encodeURIComponent(question.id)}/favorite`,
+        { favorite: !favorite },
+        "PUT",
+      ),
+    );
+    setSaving(false);
+    if (saved) {
+      setFavorite(saved.favorite);
+      await onChanged?.();
+    }
+  };
+  return (
+    <button
+      type="button"
+      className={"favorite-trigger" + (favorite ? " active" : "")}
+      disabled={!!busy || saving}
+      onClick={toggle}
+      title={favorite ? "取消收藏题目" : "收藏题目"}
+    >
+      <Star size={16} fill={favorite ? "currentColor" : "none"} />
+      {favorite ? "已收藏" : "收藏题目"}
+    </button>
   );
 }
 function AdminQuestionEditor({ question, busy, run, onClose, onSaved }) {
@@ -926,11 +960,11 @@ function AuthScreen({ onAuth, initialError = "" }) {
           </button>
           <a
             className="auth-app-download"
-            href="/downloads/kaojiang-v0.2.3.apk"
-            download="kaojiang-v0.2.3.apk"
+            href="/downloads/kaojiang-v0.2.4.apk"
+            download="kaojiang-v0.2.4.apk"
           >
             <Download size={16} />
-            下载考匠 App · Android v0.2.3
+            下载考匠 App · Android v0.2.4
           </a>
           <p className="auth-privacy-note">
             <ShieldCheck size={14} /> 你的学习数据与 AI 配置仅属于当前账号
@@ -961,15 +995,15 @@ function AnnouncementModal({ onClose }) {
             </span>
             <div>
               <span className="announcement-kicker">考匠 · 更新公告</span>
-              <h2 id="announcement-title">移动端 v0.2.3 更新</h2>
-              <p>新增启动自动恢复登录会话，答题页更紧凑，并将举报入口放到题干右下角。</p>
+              <h2 id="announcement-title">移动端 v0.2.4 更新</h2>
+              <p>练习区新增知识点选择和刷题进度，题库练习不再限制为 10 道。</p>
             </div>
           </div>
           <IconButton icon={X} label="关闭网站公告" onClick={onClose} />
         </header>
         <div className="announcement-body">
           <div className="announcement-highlight">
-                <strong>考匠 App v0.2.3 已发布</strong>
+                <strong>考匠 App v0.2.4 已发布</strong>
                 <span>
                   在登录页或账号菜单点击“下载 App”即可获取最新版 Android 安装包，登录后连接现有网站后端。
                 </span>
@@ -978,33 +1012,33 @@ function AnnouncementModal({ onClose }) {
             <li>
               <span>01</span>
               <div>
-                <strong>AI 服务接入移动端</strong>
+                <strong>知识点进度更清晰</strong>
                 <p>
-                  做题后可使用 AI 提示、AI 错因解析、详细讲解和 3 道变式训练，AI 配置仍按账号隔离。
+                  练习区先选择章节和知识点，每个知识点都会显示已刷题数与题库总题数的进度条。
                 </p>
               </div>
             </li>
             <li>
               <span>02</span>
               <div>
-                <strong>题目反馈更顺手</strong>
+                <strong>完整题库与收藏</strong>
                 <p>
-                  练习中可直接举报答案、解析、题干、选项或重复题，错题入口只加载错题集。
+                  进入知识点后加载完整题库，随机刷题不再截断到 10 道；新增星标收藏和收藏题目入口。
                 </p>
               </div>
             </li>
             <li>
               <span>03</span>
               <div>
-                <strong>今日学习与普通练习分开</strong>
+                <strong>错题复习更好管理</strong>
                 <p>
-                  今日学习从题库随机抽取 30 道题；普通练习继续支持顺序刷题和随机刷题，提交后优先快速显示判题结果。
+                  错题答对后可以手动移除，举报入口、AI 服务和今日学习流程继续保留。
                 </p>
               </div>
             </li>
           </ul>
           <p className="announcement-footnote">
-            App 当前提供 Android v0.2.3 安装包；低于最低支持版本的旧 App 必须更新后才能继续使用。正式考试信息仍请以对应认证机构和相关主管部门的最新公告为准。
+            App 当前提供 Android v0.2.4 安装包；低于最低支持版本的旧 App 必须更新后才能继续使用。正式考试信息仍请以对应认证机构和相关主管部门的最新公告为准。
           </p>
         </div>
         <footer className="announcement-footer">
@@ -1150,7 +1184,7 @@ function App() {
   useEffect(() => {
     if (!auth?.authenticated || !auth.user?.certificateId || !dashboard) return;
     try {
-      if (localStorage.getItem("netwise-announcement-2026-09-v5") !== "seen")
+      if (localStorage.getItem("netwise-announcement-2026-09-v6") !== "seen")
         setAnnouncementOpen(true);
     } catch {
       setAnnouncementOpen(true);
@@ -1175,7 +1209,7 @@ function App() {
   const dismissAnnouncement = () => {
     setAnnouncementOpen(false);
     try {
-      localStorage.setItem("netwise-announcement-2026-09-v5", "seen");
+      localStorage.setItem("netwise-announcement-2026-09-v6", "seen");
     } catch {
       // Private browsing may disable localStorage; closing still works for this render.
     }
@@ -1271,6 +1305,7 @@ function App() {
         ]),
       ]
     : [];
+  const favoriteQuestions = allQuestions.filter((question) => question.favorite);
   const train = async (q, count = 5, harder = false) =>
     run(`准备生成 ${count} 道针对题`, async () => {
       const r = await streamApi(
@@ -1462,8 +1497,8 @@ function App() {
                 <a
                   className="account-menu-link"
                   role="menuitem"
-                  href="/downloads/kaojiang-v0.2.3.apk"
-                  download="kaojiang-v0.2.3.apk"
+                  href="/downloads/kaojiang-v0.2.4.apk"
+                  download="kaojiang-v0.2.4.apk"
                   onClick={() => setAccountMenuOpen(false)}
                 >
                   <Download size={17} />
@@ -1919,6 +1954,24 @@ function App() {
                   )}
                 </label>
               </div>
+              <button
+                className="favorite-practice-entry"
+                disabled={!favoriteQuestions.length}
+                onClick={() => start(favoriteQuestions, "收藏题目")}
+              >
+                <span className="favorite-practice-icon">
+                  <Star size={20} fill="currentColor" />
+                </span>
+                <span className="favorite-practice-copy">
+                  <strong>收藏题目</strong>
+                  <small>
+                    {favoriteQuestions.length
+                      ? `${favoriteQuestions.length} 道已收藏题目`
+                      : "在答题页点击星标收藏题目"}
+                  </small>
+                </span>
+                <ChevronRight size={18} />
+              </button>
               {!chapterFocus ? (
                 <ChapterGrid
                   chapters={dashboard.chapters
@@ -2220,14 +2273,10 @@ function KnowledgePointGrid({
         (question.targetKnowledgePoint || question.knowledgePoint) ===
         knowledgePoint,
     );
-    const progress = mastery.find(
-      (item) => item.knowledgePoint === knowledgePoint,
-    );
     return {
       knowledgePoint,
       questions: pointQuestions,
-      attempted: progress?.attemptCount || 0,
-      masteryScore: progress?.masteryScore || 0,
+      attempted: pointQuestions.filter((question) => question.attempted).length,
     };
   });
   return (
@@ -4884,6 +4933,12 @@ function GenericPractice({ session, refresh, run, busy, train, configured, exit 
       }));
       await refresh();
     });
+  const removeWrong = () =>
+    run("正在移除错题", async () => {
+      await api(`/wrong/${encodeURIComponent(q.id)}`, null, "DELETE");
+      updateCurrent({ wrongRemoved: true });
+      await refresh();
+    });
   const analyzeMistake = () =>
     run("正在分析错误原因", async () => {
       const m = await api("/ai/analyze", { questionId: q.id });
@@ -5135,6 +5190,12 @@ function GenericPractice({ session, refresh, run, busy, train, configured, exit 
             >
               查看答案
             </button>
+            <QuestionFavorite
+              question={q}
+              busy={busy}
+              run={run}
+              onChanged={refresh}
+            />
             <QuestionReport question={q} busy={busy} run={run} />
             {result ? (
               <>
@@ -5146,6 +5207,16 @@ function GenericPractice({ session, refresh, run, busy, train, configured, exit 
                   >
                     <MessageCircle size={17} />
                     AI 解析
+                  </button>
+                )}
+                {result.correct === true && session.title === "错题复习" && (
+                  <button
+                    className="wrong-remove"
+                    disabled={!!busy || current.wrongRemoved}
+                    onClick={removeWrong}
+                  >
+                    <Trash2 size={16} />
+                    {current.wrongRemoved ? "已移除错题" : "移除错题"}
                   </button>
                 )}
                 <button
@@ -5302,6 +5373,12 @@ function VeterinaryPractice({ session, refresh, run, busy, train, exit }) {
         serial: old.serial + 1,
         streak: answerResult.correct === true ? old.streak + 1 : 0,
       }));
+      await refresh();
+    });
+  const removeWrong = () =>
+    run("正在移除错题", async () => {
+      await api(`/wrong/${encodeURIComponent(q.id)}`, null, "DELETE");
+      updateCurrent({ wrongRemoved: true });
       await refresh();
     });
   const sendFeedback = (kind) =>
@@ -5716,12 +5793,28 @@ function VeterinaryPractice({ session, refresh, run, busy, train, exit }) {
             >
               查看答案
             </button>
+            <QuestionFavorite
+              question={q}
+              busy={busy}
+              run={run}
+              onChanged={refresh}
+            />
             <QuestionReport question={q} busy={busy} run={run} />
             {result ? (
               <>
                 {result.correct === false && (
                   <button className="ai-analysis-button" onClick={analyzeMistake} disabled={!!busy}>
                     <MessageCircle size={17} /> AI 解析
+                  </button>
+                )}
+                {result.correct === true && session.title === "错题复习" && (
+                  <button
+                    className="wrong-remove"
+                    disabled={!!busy || current.wrongRemoved}
+                    onClick={removeWrong}
+                  >
+                    <Trash2 size={16} />
+                    {current.wrongRemoved ? "已移除错题" : "移除错题"}
                   </button>
                 )}
                 <button className="primary push-right" onClick={next} disabled={!!busy}>
@@ -6084,6 +6177,12 @@ function ExamView({ run, refresh, dashboard }) {
               label="下一题"
               disabled={index === exam.questions.length - 1}
               onClick={() => setIndex(index + 1)}
+            />
+            <QuestionFavorite
+              question={q}
+              busy={submitting}
+              run={run}
+              onChanged={refresh}
             />
             <QuestionReport question={q} busy={submitting} run={run} />
             <button

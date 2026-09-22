@@ -157,6 +157,67 @@ test("practice API accepts five-option answers and keeps judgments single-select
   );
 });
 
+test("practice catalog tracks unique question progress, favorites, and wrong removal", async (t) => {
+  const { req, store } = await fixture(t, async () => response({}));
+  const original = store
+    .allQ()
+    .find((candidate) => candidate.source !== "ai_generated");
+  assert.ok(original);
+  const publicQuestion = (
+    await req(`/questions/${encodeURIComponent(original.id)}`)
+  ).data;
+  assert.equal(publicQuestion.attempted, false);
+  assert.equal(publicQuestion.favorite, false);
+  const allQuestions = (await req("/questions")).data;
+  const randomQuestions = (await req("/questions?random=1")).data;
+  assert.ok(allQuestions.length > 10);
+  assert.equal(randomQuestions.length, allQuestions.length);
+
+  assert.equal(
+    (
+      await req(
+        `/questions/${encodeURIComponent(original.id)}/favorite`,
+        { favorite: true },
+        "PUT",
+      )
+    ).status,
+    200,
+  );
+  assert.equal((await req("/favorites")).data[0].id, original.id);
+
+  const wrongOption = Object.keys(original.options).find(
+    (option) => !original.answer.includes(option),
+  );
+  assert.ok(wrongOption);
+  await req("/attempts", {
+    questionId: original.id,
+    selected: [wrongOption],
+    timeMs: 100,
+  });
+  assert.ok((await req("/wrong")).data.some((item) => item.id === original.id));
+
+  const catalog = (await req("/practice/catalog")).data;
+  const chapter = catalog.chapters.find((item) => item.name === original.chapter);
+  const pointName = original.targetKnowledgePoint || original.knowledgePoint;
+  const point = chapter?.knowledgePoints.find((item) => item.name === pointName);
+  assert.ok(point);
+  assert.equal(point.questionCount, store.allQ().filter(
+    (candidate) =>
+      candidate.chapter === original.chapter &&
+      (candidate.targetKnowledgePoint || candidate.knowledgePoint) === pointName,
+  ).length);
+  assert.equal(point.attemptedCount, 1);
+  assert.equal(point.progress, Math.round((point.attemptedCount / point.questionCount) * 100));
+
+  assert.equal(
+    (
+      await req(`/wrong/${encodeURIComponent(original.id)}`, null, "DELETE")
+    ).status,
+    200,
+  );
+  assert.ok(!(await req("/wrong")).data.some((item) => item.id === original.id));
+});
+
 test("accounts require login and certificate selection filters the question bank", async (t) => {
   process.env.AI_MASTER_KEY = crypto.randomBytes(32).toString("base64");
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "netwise-auth-"));
@@ -271,7 +332,7 @@ test("mobile clients can use a bearer session without browser cookies", async (t
     headers: {
       "Content-Type": "application/json",
       "X-Client": "mobile",
-      "X-App-Version": "0.2.3",
+      "X-App-Version": "0.2.4",
     },
     body: JSON.stringify({
       username: "mobile_candidate",
@@ -286,7 +347,7 @@ test("mobile clients can use a bearer session without browser cookies", async (t
     headers: {
       Authorization: `Bearer ${data.sessionToken}`,
       "X-Client": "mobile",
-      "X-App-Version": "0.2.3",
+      "X-App-Version": "0.2.4",
     },
   }).then((response) => response.json());
   assert.equal(me.authenticated, true);
@@ -311,10 +372,90 @@ test("mobile clients can use a bearer session without browser cookies", async (t
       headers: {
         Authorization: `Bearer ${data.sessionToken}`,
         "X-Client": "mobile",
-        "X-App-Version": "0.2.3",
+        "X-App-Version": "0.2.4",
       },
     }).then((response) => response.json())).authenticated,
     false,
+  );
+});
+
+test("微信小程序首次登录绑定已有账号，后续直接复用同一账号", async (t) => {
+  process.env.AI_MASTER_KEY = crypto.randomBytes(32).toString("base64");
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "netwise-wechat-auth-"));
+  const store = createStore(dir);
+  const app = await createApp({
+    store,
+    withFrontend: false,
+    authRequired: true,
+    wechatCodeExchange: async (code) => ({
+      appid: "test-mini-program",
+      openid: `openid:${code}`,
+      unionid: `unionid:${code}`,
+    }),
+  });
+  const server = app.listen(0, "127.0.0.1");
+  await new Promise((resolve) => server.once("listening", resolve));
+  const base = `http://127.0.0.1:${server.address().port}`;
+  t.after(async () => {
+    app.locals.stop();
+    await new Promise((resolve) => server.close(resolve));
+    store.db.close();
+    fs.rmSync(dir, { recursive: true, force: true });
+  });
+
+  const headers = {
+    "Content-Type": "application/json",
+    "X-Client": "miniprogram",
+  };
+  const firstLogin = await fetch(base + "/api/auth/wechat/mini-login", {
+    method: "POST",
+    headers,
+    body: JSON.stringify({ code: "first-user" }),
+  });
+  assert.equal(firstLogin.status, 200);
+  const firstLoginData = await firstLogin.json();
+  assert.equal(firstLoginData.needsBinding, true);
+  assert.match(firstLoginData.bindingToken, /^[A-Za-z0-9_-]+$/);
+
+  const registration = await fetch(base + "/api/auth/register", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username: "wechat_existing", password: "safe-password" }),
+  });
+  assert.equal(registration.status, 200);
+  const existingUser = (await registration.clone().json()).user;
+
+  const bind = await fetch(base + "/api/auth/wechat/bind", {
+    method: "POST",
+    headers,
+    body: JSON.stringify({
+      bindingToken: firstLoginData.bindingToken,
+      username: "wechat_existing",
+      password: "safe-password",
+    }),
+  });
+  assert.equal(bind.status, 200);
+  const bindData = await bind.json();
+  assert.equal(bindData.linked, true);
+  assert.equal(bindData.user.id, existingUser.id);
+  assert.match(bindData.sessionToken, /^[A-Za-z0-9_-]+$/);
+
+  const secondLogin = await fetch(base + "/api/auth/wechat/mini-login", {
+    method: "POST",
+    headers,
+    body: JSON.stringify({ code: "first-user" }),
+  });
+  assert.equal(secondLogin.status, 200);
+  const secondLoginData = await secondLogin.json();
+  assert.equal(secondLoginData.linked, true);
+  assert.equal(secondLoginData.needsBinding, false);
+  assert.equal(secondLoginData.user.id, existingUser.id);
+  assert.equal(store.db.prepare("SELECT COUNT(*) AS count FROM users").get().count, 1);
+  assert.equal(
+    store.db
+      .prepare("SELECT user_id AS userId FROM wechat_identities WHERE appid=? AND openid=?")
+      .get("test-mini-program", "openid:first-user").userId,
+    existingUser.id,
   );
 });
 

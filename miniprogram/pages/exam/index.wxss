@@ -1,0 +1,61 @@
+.exam-page {
+  padding-top: 34rpx;
+}
+
+.exam-hero {
+  background: linear-gradient(145deg, #1e4638, #17231f);
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+  overflow: hidden;
+  padding: 34rpx;
+  position: relative;
+}
+
+.exam-sparkle {
+  color: #78e0b9;
+  font-size: 80rpx;
+  position: absolute;
+  right: 32rpx;
+  top: 18rpx;
+}
+
+.exam-tag {
+  color: #78e0b9;
+  font-size: 24rpx;
+  font-weight: 700;
+}
+
+.exam-title {
+  color: #f3f8f5;
+  font-size: 40rpx;
+  font-weight: 800;
+  line-height: 1.35;
+  max-width: 80%;
+}
+
+.exam-text,
+.muted-notice {
+  color: #a9bdb4;
+  font-size: 26rpx;
+  line-height: 1.7;
+}
+
+.exam-meta-row {
+  display: flex;
+  gap: 18rpx;
+  margin: 8rpx 0;
+}
+
+.exam-meta-row text {
+  background: #20362e;
+  border-radius: 999rpx;
+  color: #c0d7cc;
+  font-size: 22rpx;
+  padding: 10rpx 14rpx;
+}
+
+.muted-notice {
+  margin-top: 22rpx;
+  padding: 24rpx;
+}

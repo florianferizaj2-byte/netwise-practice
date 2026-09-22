@@ -1,0 +1,61 @@
+<view class="auth-page">
+  <view class="auth-hero">
+    <brand-mark />
+    <text class="auth-kicker">移动学习空间</text>
+    <text class="auth-title">{{phase === 'bind' || phase === 'register' ? '关联你的考匠账号' : '欢迎回来'}}</text>
+    <text class="auth-subtitle">随时练习，随时复盘，把每一次答题都变成真正的掌握。</text>
+  </view>
+
+  <view class="auth-card card">
+    <view class="segment-bar">
+      <view class="segment {{phase === 'wechat' || phase === 'bind' || phase === 'register' ? 'segment-active' : ''}}" bindtap="chooseWechat">微信登录</view>
+      <view class="segment {{phase === 'password' ? 'segment-active' : ''}}" bindtap="choosePassword">账号登录</view>
+    </view>
+
+    <block wx:if="{{phase === 'wechat'}}">
+      <view class="wechat-intro">
+        <view class="wechat-mark">微</view>
+        <view class="wechat-copy">
+          <text class="wechat-title">微信一键登录</text>
+          <text class="wechat-text">首次使用会提示绑定已有考匠账号，绑定一次后以后自动进入。</text>
+        </view>
+      </view>
+      <button class="primary-button" loading="{{busy}}" disabled="{{busy}}" bindtap="handleWechatLogin">{{busy ? '正在登录…' : '微信一键登录'}}</button>
+      <text class="auth-note">微信身份只用于登录，学习记录仍归属于你的考匠账号。</text>
+    </block>
+
+    <block wx:elif="{{phase === 'bind' || phase === 'register'}}">
+      <view class="bind-banner">
+        <text class="bind-banner-title">这次微信还没有绑定考匠账号</text>
+        <text class="bind-banner-text">{{phase === 'bind' ? '输入你在网页或 App 使用的账号，学习数据会保持一致。' : '创建账号后，微信会自动与它绑定。'}}</text>
+      </view>
+      <view class="bind-segments">
+        <view class="bind-segment {{phase === 'bind' ? 'bind-active' : ''}}" data-mode="bind" bindtap="switchBindMode">绑定已有账号</view>
+        <view class="bind-segment {{phase === 'register' ? 'bind-active' : ''}}" data-mode="register" bindtap="switchBindMode">注册新账号</view>
+      </view>
+      <text class="field-label">账号</text>
+      <input class="text-input" value="{{username}}" data-field="username" bindinput="handleInput" placeholder="输入考匠账号" placeholder-class="input-placeholder" maxlength="40" />
+      <text class="field-label">密码</text>
+      <input class="text-input" value="{{password}}" data-field="password" bindinput="handleInput" password placeholder="至少 8 位密码" placeholder-class="input-placeholder" maxlength="128" />
+      <block wx:if="{{phase === 'register'}}">
+        <text class="field-label">确认密码</text>
+        <input class="text-input" value="{{passwordConfirm}}" data-field="passwordConfirm" bindinput="handleInput" password placeholder="再次输入密码" placeholder-class="input-placeholder" maxlength="128" />
+      </block>
+      <button class="primary-button" loading="{{busy}}" disabled="{{busy}}" bindtap="handleBindingSubmit">{{busy ? '处理中…' : (phase === 'bind' ? '绑定并登录' : '注册并登录')}}</button>
+      <button class="secondary-button back-wechat" bindtap="chooseWechat">返回微信登录</button>
+    </block>
+
+    <block wx:elif="{{phase === 'password'}}">
+      <text class="field-label">账号</text>
+      <input class="text-input" value="{{username}}" data-field="username" bindinput="handleInput" placeholder="输入账号" placeholder-class="input-placeholder" maxlength="40" />
+      <text class="field-label">密码</text>
+      <input class="text-input" value="{{password}}" data-field="password" bindinput="handleInput" password placeholder="至少 8 位密码" placeholder-class="input-placeholder" maxlength="128" />
+      <button class="primary-button" loading="{{busy}}" disabled="{{busy}}" bindtap="handlePasswordLogin">{{busy ? '登录中…' : '登录'}}</button>
+      <button class="secondary-button back-wechat" bindtap="chooseWechat">返回微信登录</button>
+    </block>
+
+    <text wx:if="{{error}}" class="error-text">{{error}}</text>
+  </view>
+
+  <text class="auth-footer">考匠永久免费 · 题库和学习进度与网页端同步</text>
+</view>

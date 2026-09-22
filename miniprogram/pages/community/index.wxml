@@ -1,0 +1,46 @@
+<view class="page-shell community-page">
+  <view class="page-header community-header">
+    <view>
+      <text class="eyebrow">一起学习</text>
+      <text class="page-title">考匠社区</text>
+    </view>
+    <brand-mark compact="true" />
+  </view>
+
+  <view class="room-card card">
+    <view class="room-icon">◎</view>
+    <view class="room-copy">
+      <text class="room-title">考匠学习大群</text>
+      <text class="room-text">和所有正在努力的人交流学习心得。</text>
+    </view>
+  </view>
+
+  <scroll-view class="message-scroll" scroll-y="true" scroll-into-view="{{scrollIntoView}}" scroll-with-animation="true">
+    <view wx:if="{{loading}}" class="community-loading"><text class="loading-icon">✦</text><text class="muted">正在进入社区…</text></view>
+    <view wx:elif="{{!messages.length}}" class="community-empty"><text class="empty-symbol">✦</text><text class="empty-title">社区还很安静</text><text class="muted">发送第一条消息，和大家打个招呼吧。</text></view>
+    <block wx:else>
+      <block wx:for="{{messages}}" wx:key="id">
+        <view id="message-{{item.id}}" class="message-row {{item.own ? 'message-own' : ''}}">
+          <view class="message-block">
+            <text wx:if="{{!item.own}}" class="author-name">{{item.authorName}}</text>
+            <view class="message-bubble {{item.own ? 'bubble-own' : ''}}"><text>{{item.text}}</text></view>
+            <text class="message-time">{{item.timeLabel}}</text>
+          </view>
+        </view>
+      </block>
+    </block>
+  </scroll-view>
+
+  <view class="composer-card card">
+    <view class="emoji-row">
+      <block wx:for="{{quickEmojis}}" wx:key="*this"><text class="emoji" data-emoji="{{item}}" bindtap="addEmoji">{{item}}</text></block>
+    </view>
+    <view class="composer-row">
+      <textarea class="composer-input" value="{{draft}}" bindinput="onDraftInput" bindconfirm="onConfirm" confirm-type="send" maxlength="2000" auto-height="true" placeholder="说点什么…" placeholder-class="input-placeholder" />
+      <button class="send-button" loading="{{sending}}" disabled="{{sending}}" bindtap="sendMessage">发送</button>
+    </view>
+  </view>
+
+  <text wx:if="{{error}}" class="error-text">{{error}}</text>
+  <tab-bar current="community" bind:change="onTabChange" />
+</view>

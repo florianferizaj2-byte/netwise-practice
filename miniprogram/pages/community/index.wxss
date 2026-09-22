@@ -1,0 +1,170 @@
+.community-page {
+  padding-top: 34rpx;
+}
+
+.room-card {
+  align-items: center;
+  background: #1e4638;
+  display: flex;
+  gap: 18rpx;
+  padding: 22rpx;
+}
+
+.room-icon {
+  align-items: center;
+  background: #2c9478;
+  border-radius: 50%;
+  color: #d8f0e3;
+  display: flex;
+  font-size: 38rpx;
+  height: 70rpx;
+  justify-content: center;
+  width: 70rpx;
+}
+
+.room-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.room-title {
+  color: #f3f8f5;
+  font-size: 28rpx;
+  font-weight: 800;
+}
+
+.room-text {
+  color: #c0d7cc;
+  font-size: 22rpx;
+}
+
+.message-scroll {
+  height: 58vh;
+  margin-top: 20rpx;
+}
+
+.community-loading,
+.community-empty {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 14rpx;
+  padding: 70rpx 0;
+  text-align: center;
+}
+
+.empty-symbol {
+  color: #3ac096;
+  font-size: 60rpx;
+}
+
+.empty-title {
+  color: #f3f8f5;
+  font-size: 30rpx;
+  font-weight: 800;
+}
+
+.message-row {
+  display: flex;
+  justify-content: flex-start;
+  margin: 18rpx 4rpx;
+}
+
+.message-own {
+  justify-content: flex-end;
+}
+
+.message-block {
+  max-width: 78%;
+}
+
+.author-name {
+  color: #71877d;
+  display: block;
+  font-size: 21rpx;
+  margin: 0 12rpx 6rpx;
+}
+
+.message-bubble {
+  background: #17231f;
+  border: 1rpx solid #2d473d;
+  border-radius: 18rpx 18rpx 18rpx 4rpx;
+  color: #d8e6df;
+  font-size: 26rpx;
+  line-height: 1.55;
+  padding: 16rpx 20rpx;
+  white-space: pre-wrap;
+}
+
+.bubble-own {
+  background: #1e604b;
+  border-color: #2d8065;
+  border-radius: 18rpx 18rpx 4rpx 18rpx;
+  color: #f3f8f5;
+}
+
+.message-time {
+  color: #71877d;
+  display: block;
+  font-size: 19rpx;
+  margin: 6rpx 10rpx 0;
+}
+
+.message-own .message-time {
+  text-align: right;
+}
+
+.composer-card {
+  margin-top: 12rpx;
+  padding: 16rpx;
+}
+
+.emoji-row {
+  display: flex;
+  gap: 10rpx;
+  margin-bottom: 12rpx;
+}
+
+.emoji {
+  align-items: center;
+  background: #20362e;
+  border-radius: 50%;
+  display: flex;
+  font-size: 28rpx;
+  height: 50rpx;
+  justify-content: center;
+  width: 50rpx;
+}
+
+.composer-row {
+  align-items: flex-end;
+  display: flex;
+  gap: 12rpx;
+}
+
+.composer-input {
+  background: #0d1714;
+  border: 1rpx solid #2d473d;
+  border-radius: 14rpx;
+  color: #f3f8f5;
+  flex: 1;
+  font-size: 26rpx;
+  min-height: 76rpx;
+  padding: 16rpx;
+}
+
+.send-button {
+  background: #3ac096;
+  border-radius: 14rpx;
+  color: #082016;
+  font-size: 24rpx;
+  font-weight: 800;
+  min-height: 76rpx;
+  padding: 0 20rpx;
+}
+
+.send-button[disabled] {
+  opacity: 0.55;
+}

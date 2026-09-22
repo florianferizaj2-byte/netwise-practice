@@ -125,6 +125,30 @@ export type Question = {
   answer?: string[];
   analysis?: string;
   wrongCount?: number;
+  attempted?: boolean;
+  favorite?: boolean;
+};
+
+export type PracticeKnowledgePoint = {
+  name: string;
+  questionCount: number;
+  attemptedCount: number;
+  progress: number;
+};
+
+export type PracticeCatalogChapter = {
+  name: string;
+  questionCount: number;
+  attemptedCount: number;
+  progress: number;
+  knowledgePoints: PracticeKnowledgePoint[];
+};
+
+export type PracticeCatalogResponse = {
+  total: number;
+  attemptedCount: number;
+  favoriteCount: number;
+  chapters: PracticeCatalogChapter[];
 };
 
 export type AttemptResponse = {
@@ -293,17 +317,48 @@ export const mobileApi = {
     return request<DashboardResponse>('/dashboard');
   },
 
-  questions(limit = 10, offset = 0, random = false) {
-    const params = new URLSearchParams({
-      limit: String(limit),
-      offset: String(offset),
-    });
+  questions(
+    limit?: number,
+    offset = 0,
+    random = false,
+    filters?: { chapter?: string; knowledgePoint?: string },
+  ) {
+    const params = new URLSearchParams();
+    if (limit != null) params.set('limit', String(limit));
+    if (offset) params.set('offset', String(offset));
     if (random) params.set('random', '1');
+    if (filters?.chapter) params.set('chapter', filters.chapter);
+    if (filters?.knowledgePoint) params.set('knowledgePoint', filters.knowledgePoint);
     return request<Question[]>(`/questions?${params.toString()}`);
+  },
+
+  practiceCatalog() {
+    return request<PracticeCatalogResponse>('/practice/catalog');
+  },
+
+  favorites() {
+    return request<Question[]>('/favorites');
   },
 
   wrong() {
     return request<Question[]>('/wrong');
+  },
+
+  favorite(questionId: string, favorite: boolean) {
+    return request<{ saved: boolean; favorite: boolean }>(
+      `/questions/${encodeURIComponent(questionId)}/favorite`,
+      {
+        method: 'PUT',
+        body: JSON.stringify({ favorite }),
+      },
+    );
+  },
+
+  removeWrong(questionId: string) {
+    return request<{ deleted: boolean; questionId: string }>(
+      `/wrong/${encodeURIComponent(questionId)}`,
+      { method: 'DELETE' },
+    );
   },
 
   recordAttempt(questionId: string, selected: string[], timeMs: number) {

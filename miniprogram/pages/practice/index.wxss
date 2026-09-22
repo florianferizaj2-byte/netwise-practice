@@ -1,0 +1,259 @@
+.practice-page {
+  padding-top: 34rpx;
+}
+
+.mode-switch {
+  background: #17231f;
+  border: 1rpx solid #2d473d;
+  border-radius: 16rpx;
+  display: flex;
+  gap: 8rpx;
+  margin-bottom: 20rpx;
+  padding: 6rpx;
+}
+
+.mode-button {
+  border-radius: 12rpx;
+  color: #a9bdb4;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  font-size: 24rpx;
+  gap: 4rpx;
+  padding: 16rpx 10rpx;
+  text-align: center;
+}
+
+.mode-active {
+  background: #20362e;
+  color: #3ac096;
+  font-weight: 800;
+}
+
+.mode-hint {
+  color: #71877d;
+  font-size: 20rpx;
+  font-weight: 400;
+}
+
+.loading-card,
+.empty-card,
+.complete-card {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+  padding: 44rpx 30rpx;
+  text-align: center;
+}
+
+.loading-icon,
+.complete-icon {
+  color: #3ac096;
+  font-size: 64rpx;
+}
+
+.complete-title,
+.empty-title {
+  color: #f3f8f5;
+  font-size: 36rpx;
+  font-weight: 800;
+}
+
+.complete-text,
+.empty-card .muted {
+  color: #a9bdb4;
+  font-size: 26rpx;
+  line-height: 1.7;
+}
+
+.complete-card .primary-button,
+.complete-card .secondary-button,
+.empty-card .primary-button {
+  width: 100%;
+}
+
+.question-card {
+  padding: 28rpx;
+}
+
+.question-meta {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 22rpx;
+}
+
+.question-type {
+  background: #20362e;
+  border-radius: 999rpx;
+  color: #78e0b9;
+  font-size: 22rpx;
+  font-weight: 700;
+  padding: 8rpx 16rpx;
+}
+
+.question-knowledge {
+  color: #71877d;
+  font-size: 22rpx;
+  max-width: 55%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.question-text {
+  color: #f3f8f5;
+  display: block;
+  font-size: 32rpx;
+  font-weight: 700;
+  line-height: 1.65;
+  white-space: pre-wrap;
+}
+
+.ai-hint-button {
+  align-items: center;
+  background: #20362e;
+  border: 1rpx solid #2d473d;
+  border-radius: 14rpx;
+  color: #78e0b9;
+  display: flex;
+  font-size: 24rpx;
+  font-weight: 700;
+  justify-content: space-between;
+  margin-top: 18rpx;
+  padding: 20rpx 24rpx;
+}
+
+.options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14rpx;
+  margin-top: 22rpx;
+}
+
+.option-card {
+  align-items: center;
+  background: #17231f;
+  border: 1rpx solid #2d473d;
+  border-radius: 18rpx;
+  display: flex;
+  gap: 20rpx;
+  min-height: 94rpx;
+  padding: 18rpx 22rpx;
+}
+
+.option-selected {
+  background: #20362e;
+  border-color: #3ac096;
+}
+
+.option-correct {
+  background: #163b2d;
+  border-color: #3ac096;
+}
+
+.option-wrong {
+  background: #422726;
+  border-color: #f19a93;
+}
+
+.option-key {
+  align-items: center;
+  border: 1rpx solid #3f6254;
+  border-radius: 50%;
+  color: #78e0b9;
+  display: flex;
+  font-size: 25rpx;
+  font-weight: 800;
+  height: 52rpx;
+  justify-content: center;
+  min-width: 52rpx;
+}
+
+.option-label {
+  color: #d8e6df;
+  flex: 1;
+  font-size: 27rpx;
+  line-height: 1.5;
+}
+
+.option-status {
+  color: #78e0b9;
+  font-size: 34rpx;
+  font-weight: 800;
+}
+
+.option-wrong .option-status {
+  color: #f19a93;
+}
+
+.answer-actions {
+  margin-top: 24rpx;
+}
+
+.result-card {
+  border: 1rpx solid #3ac096;
+  border-radius: 22rpx;
+  margin-top: 24rpx;
+  padding: 26rpx;
+}
+
+.result-correct {
+  background: #163b2d;
+}
+
+.result-wrong {
+  background: #32251f;
+  border-color: #e4b45e;
+}
+
+.result-head {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.result-title {
+  color: #78e0b9;
+  font-size: 30rpx;
+  font-weight: 800;
+}
+
+.result-wrong .result-title {
+  color: #e4b45e;
+}
+
+.result-answer {
+  color: #a9bdb4;
+  font-size: 23rpx;
+}
+
+.result-analysis,
+.ai-response {
+  color: #c6d8ce;
+  display: block;
+  font-size: 25rpx;
+  line-height: 1.7;
+  margin-top: 18rpx;
+  white-space: pre-wrap;
+}
+
+.ai-response {
+  background: rgba(58, 192, 150, 0.09);
+  border-radius: 12rpx;
+  color: #d8e6df;
+  padding: 18rpx;
+}
+
+.result-actions {
+  display: flex;
+  gap: 14rpx;
+  margin-top: 24rpx;
+}
+
+.result-actions button {
+  flex: 1;
+  font-size: 24rpx;
+  min-height: 80rpx;
+}

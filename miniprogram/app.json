@@ -1,0 +1,21 @@
+{
+  "pages": [
+    "pages/auth/index",
+    "pages/certificate/index",
+    "pages/today/index",
+    "pages/practice/index",
+    "pages/wrong/index",
+    "pages/exam/index",
+    "pages/community/index",
+    "pages/profile/index"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#0D1714",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "考匠",
+    "backgroundColor": "#0D1714",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": false
+  },
+  "sitemapLocation": "sitemap.json"
+}

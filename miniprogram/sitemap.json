@@ -1,0 +1,29 @@
+{
+  "desc": "考匠小程序页面索引",
+  "rules": [
+    {
+      "action": "allow",
+      "page": "pages/today/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/practice/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/wrong/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/exam/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/community/index"
+    },
+    {
+      "action": "allow",
+      "page": "pages/profile/index"
+    }
+  ]
+}

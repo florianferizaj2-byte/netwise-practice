@@ -1,0 +1,84 @@
+<view class="page-shell practice-page">
+  <view class="page-header">
+    <view>
+      <text class="eyebrow">{{sourceLabel}} · {{modeLabel}} · {{questions.length ? questionIndex + 1 : 0}}/{{questions.length}}</text>
+      <text class="page-title">{{question ? (question.type === 'multiple_choice' ? '选择所有正确答案' : '选出你的答案') : '开始练习'}}</text>
+    </view>
+    <brand-mark compact="true" />
+  </view>
+
+  <view wx:if="{{session !== 'daily' && !loading && question}}" class="mode-switch">
+    <view class="mode-button {{mode === 'sequential' ? 'mode-active' : ''}}" data-mode="sequential" bindtap="changeMode">
+      <text>顺序刷题</text><text class="mode-hint">按题库顺序</text>
+    </view>
+    <view class="mode-button {{mode === 'random' ? 'mode-active' : ''}}" data-mode="random" bindtap="changeMode">
+      <text>随机刷题</text><text class="mode-hint">打乱本组题目</text>
+    </view>
+  </view>
+
+  <view wx:if="{{loading}}" class="loading-card card">
+    <text class="loading-icon">✦</text>
+    <text class="muted">正在从考匠题库同步…</text>
+  </view>
+
+  <view wx:elif="{{finished}}" class="complete-card card">
+    <text class="complete-icon">✦</text>
+    <text class="complete-title">这一组完成啦</text>
+    <text class="complete-text">本组已提交到你的账号，回到首页可以查看最新学习进度。</text>
+    <button class="primary-button" bindtap="goToday">查看今日进度</button>
+    <button class="secondary-button" bindtap="restart">再练一组</button>
+  </view>
+
+  <view wx:elif="{{!question}}" class="empty-card card">
+    <text class="empty-title">暂时没有可练题目</text>
+    <text class="muted">请确认已经选择证书，或稍后重新同步你的题库。</text>
+    <button class="primary-button" bindtap="loadQuestions">重新加载</button>
+  </view>
+
+  <block wx:else>
+    <view class="question-card card">
+      <view class="question-meta">
+        <text class="question-type">{{question.type === 'multiple_choice' ? '多选题' : (question.type === 'true_false' ? '判断题' : '单选题')}}</text>
+        <text class="question-knowledge">{{question.knowledgePoint || '综合练习'}}</text>
+      </view>
+      <text class="question-text">{{question.question}}</text>
+    </view>
+
+    <view wx:if="{{!result}}" class="ai-hint-button" bindtap="askAi">
+      <text>{{aiBusy ? 'AI 思考中…' : 'AI 详细讲解'}}</text>
+      <text>✦</text>
+    </view>
+
+    <view class="options-list">
+      <block wx:for="{{optionEntries}}" wx:key="key">
+        <view class="option-card {{item.selected ? 'option-selected' : ''}} {{item.correct ? 'option-correct' : ''}} {{item.wrong ? 'option-wrong' : ''}}" data-key="{{item.key}}" bindtap="toggleOption">
+          <view class="option-key">{{item.key}}</view>
+          <text class="option-label">{{item.label}}</text>
+          <text wx:if="{{result && item.correct}}" class="option-status">✓</text>
+          <text wx:if="{{result && item.wrong}}" class="option-status">×</text>
+        </view>
+      </block>
+    </view>
+
+    <view wx:if="{{error}}" class="error-text">{{error}}</view>
+
+    <view wx:if="{{!result}}" class="answer-actions">
+      <button class="primary-button" loading="{{submitting}}" disabled="{{submitting}}" bindtap="submitAnswer">{{submitting ? '提交中…' : '提交答案'}}</button>
+    </view>
+
+    <view wx:if="{{result}}" class="result-card {{result.correct ? 'result-correct' : 'result-wrong'}}">
+      <view class="result-head">
+        <text class="result-title">{{result.correct ? '回答正确' : '再复习一下'}}</text>
+        <text class="result-answer">答案：{{result.answer.join('、')}}</text>
+      </view>
+      <text wx:if="{{result.analysis}}" class="result-analysis">{{result.analysis}}</text>
+      <text wx:if="{{aiText}}" class="ai-response">{{aiText}}</text>
+      <view class="result-actions">
+        <button class="secondary-button" bindtap="askAi">{{aiBusy ? 'AI 思考中…' : 'AI 详细讲解'}}</button>
+        <button class="primary-button" bindtap="nextQuestion">{{questionIndex + 1 >= questions.length ? '完成本组' : '下一题'}}</button>
+      </view>
+    </view>
+  </block>
+
+  <tab-bar current="practice" bind:change="onTabChange" />
+</view>

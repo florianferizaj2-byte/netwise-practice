@@ -1,0 +1,64 @@
+<view class="page-shell today-page">
+  <view class="page-header">
+    <view>
+      <text class="eyebrow">{{dateLabel}}</text>
+      <text class="page-title">今天学什么？</text>
+    </view>
+    <brand-mark compact="true" />
+  </view>
+
+  <view wx:if="{{loading}}" class="loading-card card">
+    <text class="loading-icon">✦</text>
+    <text class="muted">正在同步你的学习数据…</text>
+  </view>
+
+  <block wx:else>
+    <view class="focus-card card">
+      <view class="focus-top">
+        <view class="focus-copy">
+          <text class="focus-kicker">今日学习</text>
+          <text class="focus-title">{{headline}}</text>
+          <text class="focus-text">{{subline}}</text>
+        </view>
+        <view class="progress-circle">
+          <text class="progress-number">{{progress}}%</text>
+          <text class="progress-label">已完成</text>
+        </view>
+      </view>
+      <button class="focus-button" bindtap="startToday"><text>{{startLabel}}</text><text>→</text></button>
+    </view>
+
+    <view class="section-heading">
+      <text class="section-title">今日任务</text>
+      <text class="section-meta">{{todayCount}} / 30 题</text>
+    </view>
+    <view class="progress-track"><view class="progress-fill" style="width: {{progress}}%;"></view></view>
+
+    <view class="stats-row">
+      <view class="stat-card card">
+        <view class="stat-dot"></view>
+        <text class="stat-value">{{streak}}</text>
+        <text class="stat-label">连续学习</text>
+      </view>
+      <view class="stat-card card">
+        <view class="stat-dot stat-dot-gold"></view>
+        <text class="stat-value">{{accuracyText}}</text>
+        <text class="stat-label">近期正确率</text>
+      </view>
+    </view>
+
+    <view class="section-heading continue-heading">
+      <text class="section-title">继续学习</text>
+    </view>
+    <view class="continue-card card" bindtap="openWrong">
+      <view>
+        <text class="continue-title">错题复习</text>
+        <text class="continue-meta">{{wrongCount}} 道待巩固</text>
+      </view>
+      <text class="continue-arrow">›</text>
+    </view>
+  </block>
+
+  <text wx:if="{{error}}" class="error-text">{{error}}</text>
+  <tab-bar current="today" bind:change="onTabChange" />
+</view>

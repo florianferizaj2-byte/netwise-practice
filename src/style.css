@@ -2117,6 +2117,27 @@ td small {
   border-color: #dba795;
   background: #fff1ec;
 }
+.favorite-trigger {
+  color: #9a7834;
+  background: #fffdf3;
+  border-color: #eadcae;
+}
+.favorite-trigger:hover:not(:disabled),
+.favorite-trigger.active {
+  color: #a47719;
+  border-color: #d9bb63;
+  background: #fff7d8;
+}
+.wrong-remove {
+  color: #a34f36;
+  background: #fff5f2;
+  border-color: #e4b6aa;
+}
+.wrong-remove:hover:not(:disabled) {
+  color: #8f3925;
+  border-color: #ca8c7d;
+  background: #ffebe5;
+}
 .report-backdrop {
   position: fixed;
   inset: 0;
@@ -5055,6 +5076,52 @@ td small {
   gap: 20px;
   flex-wrap: wrap;
   margin-bottom: 20px;
+}
+.favorite-practice-entry {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 66px;
+  gap: 12px;
+  margin: 0 0 20px;
+  padding: 12px 15px;
+  border: 1px solid #eadcae;
+  border-radius: 7px;
+  background: #fffdf4;
+  color: #47564b;
+  text-align: left;
+}
+.favorite-practice-entry:not(:disabled):hover {
+  border-color: #d9bb63;
+  background: #fff8df;
+}
+.favorite-practice-entry:disabled {
+  cursor: default;
+  opacity: .7;
+}
+.favorite-practice-icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  border-radius: 5px;
+  background: #fff3c5;
+  color: #b58822;
+}
+.favorite-practice-copy {
+  display: grid;
+  min-width: 0;
+  flex: 1;
+  gap: 3px;
+}
+.favorite-practice-copy strong {
+  color: #3c5144;
+  font-size: 15px;
+}
+.favorite-practice-copy small {
+  color: #78847c;
+  font-size: 12px;
 }
 .bank-filter {
   display: flex;

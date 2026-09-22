@@ -1,0 +1,39 @@
+<view class="page-shell wrong-page">
+  <view class="page-header">
+    <view>
+      <text class="eyebrow">错题复习</text>
+      <text class="page-title">把不会的变成会的</text>
+    </view>
+    <brand-mark compact="true" />
+  </view>
+
+  <view class="wrong-summary card">
+    <view>
+      <text class="wrong-count">{{wrongCount}}</text>
+      <text class="wrong-label">待复习错题</text>
+    </view>
+    <text class="wrong-symbol">↗</text>
+  </view>
+  <text class="body-text">按照遗忘曲线安排复习，优先处理最需要巩固的题目。</text>
+  <button class="primary-button review-button" bindtap="startReview">开始错题复习</button>
+
+  <view class="wrong-list card">
+    <view wx:if="{{loading}}" class="list-loading"><text class="loading-icon">✦</text><text class="muted">正在同步错题…</text></view>
+    <block wx:elif="{{questions.length}}">
+      <block wx:for="{{questions}}" wx:key="id">
+        <view class="list-row" bindtap="startReview">
+          <view class="wrong-bullet"></view>
+          <view class="list-copy">
+            <text class="list-title">{{item.question}}</text>
+            <text class="list-meta">{{item.chapter || '综合练习'}} · {{item.wrongCount || 1}} 次错误</text>
+          </view>
+          <text class="row-arrow">›</text>
+        </view>
+      </block>
+    </block>
+    <text wx:else class="empty-list">太好了，当前还没有错题。</text>
+  </view>
+
+  <text wx:if="{{error}}" class="error-text">{{error}}</text>
+  <tab-bar current="wrong" bind:change="onTabChange" />
+</view>

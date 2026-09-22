@@ -1,0 +1,68 @@
+<view class="page-shell profile-page">
+  <view class="profile-card card">
+    <view class="avatar"><text>考</text></view>
+    <view class="profile-copy">
+      <text class="profile-name">{{user.username}}</text>
+      <text class="profile-subtitle">考匠学习者</text>
+    </view>
+  </view>
+
+  <view class="settings-card card">
+    <view class="setting-row" bindtap="openAppearance"><text>设置</text><text class="setting-value">动画与外观 <text class="setting-arrow">›</text></text></view>
+    <view class="setting-row" bindtap="openCertificate"><text>证书与题库</text><text class="setting-value">{{certificateName}} <text class="setting-arrow">›</text></text></view>
+    <view class="setting-row" bindtap="showAi"><text>AI 学习助手</text><text class="setting-value">按账号配置 <text class="setting-arrow">›</text></text></view>
+    <view class="setting-row" bindtap="openNickname"><text>社区昵称</text><text class="setting-value">{{nickname}} <text class="setting-arrow">›</text></text></view>
+    <view class="setting-row"><text>服务器地址</text><text class="setting-value">aceexam.top</text></view>
+    <view class="setting-row"><text>关于考匠</text><text class="setting-value">微信小程序版</text></view>
+  </view>
+
+  <view class="ai-card card">
+    <text class="ai-title">AI 学习服务</text>
+    <text class="ai-text">做题后可使用 AI 提示、错因解析、详细讲解和变式训练。AI Key 仍由你的账号配置，小程序不保存密钥。</text>
+  </view>
+
+  <button class="primary-button sponsor-button" bindtap="openSponsor">赞助作者</button>
+  <text class="secure-note">AI Key 只保存于对应用户的后端设置，不会写入小程序。</text>
+  <button class="logout-button" loading="{{busy}}" bindtap="logout">退出登录</button>
+
+  <view wx:if="{{appearanceOpen}}" class="modal-mask" bindtap="closeAppearance">
+    <view class="modal-card" catchtap="noop">
+      <text class="modal-title">动画与外观</text>
+      <text class="modal-text">小程序版默认采用考匠深色主题，并跟随微信系统安全区域适配。</text>
+      <button class="primary-button" bindtap="closeAppearance">完成</button>
+    </view>
+  </view>
+
+  <view wx:if="{{aiOpen}}" class="modal-mask" bindtap="closeAi">
+    <view class="modal-card" catchtap="noop">
+      <text class="modal-title">AI 学习助手</text>
+      <text class="modal-text">AI 配置仍然属于当前考匠账号。小程序端会复用后端设置，不会把 API Key 写进微信端。</text>
+      <button class="primary-button" bindtap="closeAi">知道了</button>
+    </view>
+  </view>
+
+  <view wx:if="{{nicknameOpen}}" class="modal-mask" bindtap="closeNickname">
+    <view class="modal-card" catchtap="noop">
+      <text class="modal-title">设置社区昵称</text>
+      <text class="modal-text">这是你在公共大群里显示的名字，不会改变登录账号。最多 24 个字符。</text>
+      <input class="modal-input" value="{{nicknameDraft}}" bindinput="onNicknameInput" maxlength="24" placeholder="输入社区昵称" placeholder-class="input-placeholder" />
+      <text wx:if="{{error}}" class="error-text">{{error}}</text>
+      <view class="modal-actions">
+        <button class="secondary-button" bindtap="closeNickname">取消</button>
+        <button class="primary-button" loading="{{busy}}" bindtap="saveNickname">保存</button>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{sponsorOpen}}" class="modal-mask" bindtap="closeSponsor">
+    <view class="modal-card sponsor-modal" catchtap="noop">
+      <text class="modal-title">赞助作者</text>
+      <text class="modal-text">如果考匠帮你节省了复习时间，欢迎支持作者继续维护题库和 AI 服务。</text>
+      <image class="sponsor-image" src="/assets/sponsor-wechat.jpg" mode="aspectFit" />
+      <text class="modal-text">使用微信扫一扫</text>
+      <button class="primary-button" bindtap="closeSponsor">暂时关闭</button>
+    </view>
+  </view>
+
+  <tab-bar current="profile" bind:change="onTabChange" />
+</view>

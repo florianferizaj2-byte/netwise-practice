@@ -1,0 +1,164 @@
+.auth-page {
+  min-height: 100vh;
+  padding: 54rpx 40rpx 70rpx;
+}
+
+.auth-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+  padding: 16rpx 0 42rpx;
+}
+
+.auth-kicker {
+  color: #3ac096;
+  font-size: 25rpx;
+  font-weight: 700;
+  margin-top: 22rpx;
+}
+
+.auth-title {
+  color: #f3f8f5;
+  font-size: 62rpx;
+  font-weight: 800;
+  line-height: 1.18;
+}
+
+.auth-subtitle {
+  color: #a9bdb4;
+  font-size: 28rpx;
+  line-height: 1.7;
+}
+
+.auth-card {
+  padding: 30rpx;
+}
+
+.segment-bar,
+.bind-segments {
+  background: #0d1714;
+  border-radius: 14rpx;
+  display: flex;
+  margin-bottom: 30rpx;
+  padding: 6rpx;
+}
+
+.segment,
+.bind-segment {
+  border-radius: 10rpx;
+  color: #a9bdb4;
+  flex: 1;
+  font-size: 27rpx;
+  font-weight: 700;
+  padding: 20rpx 8rpx;
+  text-align: center;
+}
+
+.segment-active,
+.bind-active {
+  background: #20362e;
+  color: #3ac096;
+}
+
+.wechat-intro {
+  align-items: center;
+  display: flex;
+  gap: 22rpx;
+  margin: 22rpx 0 34rpx;
+}
+
+.wechat-mark {
+  align-items: center;
+  background: #2ca86f;
+  border-radius: 50%;
+  color: #082016;
+  display: flex;
+  font-size: 38rpx;
+  font-weight: 800;
+  height: 92rpx;
+  justify-content: center;
+  width: 92rpx;
+}
+
+.wechat-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.wechat-title,
+.bind-banner-title {
+  color: #f3f8f5;
+  font-size: 30rpx;
+  font-weight: 800;
+}
+
+.wechat-text,
+.bind-banner-text {
+  color: #a9bdb4;
+  font-size: 24rpx;
+  line-height: 1.55;
+}
+
+.auth-note,
+.auth-footer {
+  color: #71877d;
+  display: block;
+  font-size: 23rpx;
+  line-height: 1.6;
+  margin-top: 24rpx;
+  text-align: center;
+}
+
+.bind-banner {
+  background: #20362e;
+  border-radius: 16rpx;
+  margin-bottom: 26rpx;
+  padding: 22rpx;
+}
+
+.bind-banner-title {
+  display: block;
+  font-size: 27rpx;
+  margin-bottom: 8rpx;
+}
+
+.bind-segments {
+  margin-bottom: 18rpx;
+}
+
+.bind-segment {
+  font-size: 24rpx;
+  padding: 16rpx 8rpx;
+}
+
+.field-label {
+  color: #f3f8f5;
+  display: block;
+  font-size: 25rpx;
+  font-weight: 700;
+  margin: 22rpx 0 10rpx;
+}
+
+.text-input {
+  background: #0d1714;
+  border: 1rpx solid #2d473d;
+  border-radius: 14rpx;
+  color: #f3f8f5;
+  font-size: 28rpx;
+  min-height: 92rpx;
+  padding: 0 24rpx;
+}
+
+.input-placeholder {
+  color: #71877d;
+}
+
+.back-wechat {
+  margin-top: 18rpx;
+}
+
+.auth-footer {
+  margin-top: 36rpx;
+}

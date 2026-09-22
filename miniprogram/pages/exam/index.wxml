@@ -1,0 +1,22 @@
+<view class="page-shell exam-page">
+  <view class="page-header">
+    <view>
+      <text class="eyebrow">模拟考试</text>
+      <text class="page-title">用一次完整考试检验自己</text>
+    </view>
+    <brand-mark compact="true" />
+  </view>
+
+  <view class="exam-hero card">
+    <view class="exam-sparkle">✦</view>
+    <text class="exam-tag">考试模式</text>
+    <text class="exam-title">HCIA-Datacom 模拟考试</text>
+    <text class="exam-text">按正式考试节奏完成整套题目，提交后查看成绩和薄弱点。</text>
+    <view class="exam-meta-row">
+      <text>60 道题</text><text>90 分钟</text><text>可自动保存</text>
+    </view>
+    <button class="primary-button" bindtap="createExam">创建模拟考试</button>
+  </view>
+  <view class="muted-notice card">考试会话和自动保存将复用现有后端；当前先开放练习闭环，正式考试页面随后接入。</view>
+  <tab-bar current="exam" bind:change="onTabChange" />
+</view>

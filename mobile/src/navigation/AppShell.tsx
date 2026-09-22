@@ -60,6 +60,8 @@ export function AppShell() {
   const [practiceMode, setPracticeMode] = useState<PracticeMode>('sequential');
   const [practiceSession, setPracticeSession] = useState<PracticeSession>('standard');
   const [practiceSource, setPracticeSource] = useState<PracticeSource>('all');
+  const [practiceChapter, setPracticeChapter] = useState<string | undefined>();
+  const [practiceKnowledgePoint, setPracticeKnowledgePoint] = useState<string | undefined>();
   const [certificatePickerOpen, setCertificatePickerOpen] = useState(false);
   const [versionChecked, setVersionChecked] = useState(false);
   const [sessionRestored, setSessionRestored] = useState(false);
@@ -161,6 +163,8 @@ export function AppShell() {
     setPracticeSession('standard');
     setPracticeMode('sequential');
     setPracticeSource('all');
+    setPracticeChapter(undefined);
+    setPracticeKnowledgePoint(undefined);
     setActiveTab('today');
   }
 
@@ -183,6 +187,8 @@ export function AppShell() {
     setPracticeSession('standard');
     setPracticeMode('sequential');
     setPracticeSource('all');
+    setPracticeChapter(undefined);
+    setPracticeKnowledgePoint(undefined);
   }
 
   function handleOpenCertificatePicker() {
@@ -194,6 +200,8 @@ export function AppShell() {
       const nextSession = options?.practiceSession ?? 'standard';
       setPracticeSession(nextSession);
       setPracticeSource(options?.practiceSource ?? 'all');
+      setPracticeChapter(options?.practiceChapter);
+      setPracticeKnowledgePoint(options?.practiceKnowledgePoint);
       setPracticeMode(
         options?.practiceMode ?? (nextSession === 'daily' ? 'random' : 'sequential'),
       );
@@ -273,6 +281,8 @@ export function AppShell() {
             practiceMode,
             practiceSession,
             practiceSource,
+            practiceChapter,
+            practiceKnowledgePoint,
             onPracticeModeChange: setPracticeMode,
             onOpenCertificatePicker: handleOpenCertificatePicker,
             onUserUpdated: handleUserUpdated,
@@ -422,6 +432,8 @@ function renderScreen(
     practiceMode: PracticeMode;
     practiceSession: PracticeSession;
     practiceSource: PracticeSource;
+    practiceChapter?: string;
+    practiceKnowledgePoint?: string;
     onPracticeModeChange: (mode: PracticeMode) => void;
     onOpenCertificatePicker: () => void;
     onUserUpdated: (user: AuthResponse['user']) => void;

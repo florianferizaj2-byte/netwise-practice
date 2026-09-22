@@ -1,0 +1,24 @@
+<view class="certificate-page">
+  <view class="certificate-header">
+    <text class="eyebrow">学习方向</text>
+    <text class="page-title">选择你的报考证书</text>
+    <text class="subtitle">选择后会同步对应题库、学习计划和错题记录。</text>
+  </view>
+
+  <view class="certificate-list">
+    <block wx:for="{{certificates}}" wx:key="id">
+      <view class="certificate-card {{currentId === item.id ? 'certificate-active' : ''}}" data-id="{{item.id}}" bindtap="choose">
+        <view class="certificate-check">{{currentId === item.id ? '✓' : ''}}</view>
+        <view class="certificate-copy">
+          <text class="certificate-name">{{item.name}}</text>
+          <text class="certificate-id">{{item.id}}</text>
+        </view>
+        <text class="certificate-arrow">›</text>
+      </view>
+    </block>
+  </view>
+
+  <text wx:if="{{error}}" class="error-text">{{error}}</text>
+  <button class="primary-button confirm-button" loading="{{busy}}" disabled="{{busy}}" bindtap="confirm">{{busy ? '同步中…' : '确认并开始学习'}}</button>
+  <button wx:if="{{fromProfile}}" class="secondary-button cancel-button" bindtap="cancel">取消</button>
+</view>

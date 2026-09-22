@@ -1,0 +1,4 @@
+<view class="brand {{compact ? 'brand-compact' : ''}}">
+  <view class="seal"><text>考</text></view>
+  <text wx:if="{{!compact}}" class="wordmark">考匠</text>
+</view>

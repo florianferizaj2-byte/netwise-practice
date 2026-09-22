@@ -23,7 +23,25 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
  CREATE TABLE IF NOT EXISTS daily (day TEXT PRIMARY KEY, data TEXT NOT NULL);
  CREATE TABLE IF NOT EXISTS sessions (id TEXT PRIMARY KEY, data TEXT NOT NULL);
  CREATE TABLE IF NOT EXISTS users (id TEXT PRIMARY KEY, username TEXT UNIQUE NOT NULL, password_hash TEXT NOT NULL, salt TEXT NOT NULL, certificate_id TEXT, created_at TEXT NOT NULL, is_admin INTEGER NOT NULL DEFAULT 0, banned_at TEXT, ban_reason TEXT, community_name TEXT);
- CREATE TABLE IF NOT EXISTS auth_sessions (token_hash TEXT PRIMARY KEY, user_id TEXT NOT NULL REFERENCES users(id), expires_at TEXT NOT NULL);`);
+ CREATE TABLE IF NOT EXISTS auth_sessions (token_hash TEXT PRIMARY KEY, user_id TEXT NOT NULL REFERENCES users(id), expires_at TEXT NOT NULL);
+ CREATE TABLE IF NOT EXISTS wechat_identities (
+   appid TEXT NOT NULL,
+   openid TEXT NOT NULL,
+   unionid TEXT,
+   user_id TEXT NOT NULL REFERENCES users(id),
+   created_at TEXT NOT NULL,
+   updated_at TEXT NOT NULL,
+   PRIMARY KEY (appid, openid),
+   UNIQUE (user_id, appid)
+ );
+ CREATE TABLE IF NOT EXISTS wechat_login_challenges (
+   token_hash TEXT PRIMARY KEY,
+   appid TEXT NOT NULL,
+   openid TEXT NOT NULL,
+   unionid TEXT,
+   expires_at TEXT NOT NULL,
+   created_at TEXT NOT NULL
+ );`);
   db.exec(`
     CREATE TABLE IF NOT EXISTS user_settings (
       user_id TEXT PRIMARY KEY,
@@ -119,6 +137,18 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
     user_id TEXT NOT NULL,
     question_id TEXT NOT NULL REFERENCES questions(id),
     data TEXT NOT NULL,
+    PRIMARY KEY (user_id, question_id)
+  );
+  CREATE TABLE IF NOT EXISTS question_favorites (
+    user_id TEXT NOT NULL,
+    question_id TEXT NOT NULL REFERENCES questions(id),
+    created_at TEXT NOT NULL,
+    PRIMARY KEY (user_id, question_id)
+  );
+  CREATE TABLE IF NOT EXISTS wrong_dismissals (
+    user_id TEXT NOT NULL,
+    question_id TEXT NOT NULL REFERENCES questions(id),
+    dismissed_at TEXT NOT NULL,
     PRIMARY KEY (user_id, question_id)
   );`);
   try {
@@ -324,6 +354,45 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
     allQ,
     allA,
     addQ,
+    attemptedQuestionIds: (userId = "local") =>
+      new Set(allA(userId || "local").map((attempt) => attempt.questionId)),
+    favoriteQuestionIds: (userId = "local") =>
+      new Set(
+        db
+          .prepare("SELECT question_id AS questionId FROM question_favorites WHERE user_id=?")
+          .all(userId || "local")
+          .map((row) => row.questionId),
+      ),
+    setQuestionFavorite: (userId, questionId, favorite) => {
+      const normalizedUserId = userId || "local";
+      if (favorite) {
+        db.prepare(
+          "INSERT OR IGNORE INTO question_favorites (user_id,question_id,created_at) VALUES (?,?,?)",
+        ).run(normalizedUserId, questionId, new Date().toISOString());
+      } else {
+        db.prepare(
+          "DELETE FROM question_favorites WHERE user_id=? AND question_id=?",
+        ).run(normalizedUserId, questionId);
+      }
+      return favorite;
+    },
+    favoriteQuestions: (userId = "local") => {
+      const ids = new Set(
+        db
+          .prepare("SELECT question_id AS questionId FROM question_favorites WHERE user_id=? ORDER BY created_at DESC")
+          .all(userId || "local")
+          .map((row) => row.questionId),
+      );
+      return visibleQuestions(userId || "local")
+        .filter((question) => ids.has(question.id))
+        .map((question) => ({ ...question, favorite: true }));
+    },
+    dismissWrongQuestion: (userId, questionId) =>
+      db
+        .prepare(
+          "INSERT OR REPLACE INTO wrong_dismissals (user_id,question_id,dismissed_at) VALUES (?,?,?)",
+        )
+        .run(userId || "local", questionId, new Date().toISOString()),
     settings: (userId = "local") => {
       const r = db
         .prepare("SELECT data FROM user_settings WHERE user_id=?")
@@ -425,6 +494,10 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
           questionId,
           JSON.stringify(a),
         );
+        if (!correct)
+          db
+            .prepare("DELETE FROM wrong_dismissals WHERE user_id=? AND question_id=?")
+            .run(userId || "local", questionId);
         const r = db
           .prepare(
             "SELECT data FROM user_reviews WHERE user_id=? AND question_id=?",
@@ -447,10 +520,19 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       }
       return { ...a, answer: q.answer, analysis: q.analysis };
     },
-    wrongQuestions: (userId) =>
-      visibleQuestions(userId)
-        .filter((q) =>
-          allA(userId).some((a) => a.questionId === q.id && !a.correct),
+    wrongQuestions: (userId) => {
+      const normalizedUserId = userId || "local";
+      const dismissed = new Set(
+        db
+          .prepare("SELECT question_id AS questionId FROM wrong_dismissals WHERE user_id=?")
+          .all(normalizedUserId)
+          .map((row) => row.questionId),
+      );
+      return visibleQuestions(userId)
+        .filter(
+          (q) =>
+            !dismissed.has(q.id) &&
+            allA(userId).some((a) => a.questionId === q.id && !a.correct),
         )
         .map((q) => {
           const history = allA(userId).filter((a) => a.questionId === q.id);
@@ -472,7 +554,8 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
             review: r ? JSON.parse(r.data) : null,
             mistake: m ? JSON.parse(m.data) : null,
           };
-        }),
+        });
+    },
     saveMistake: (id, m, userId = "local") =>
       db
         .prepare("INSERT OR REPLACE INTO user_mistakes VALUES (?,?,?)")
@@ -785,6 +868,8 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
           "question_feedback",
           "user_reviews",
           "user_mistakes",
+          "question_favorites",
+          "wrong_dismissals",
         ])
           db.prepare(`DELETE FROM ${table} WHERE question_id=?`).run(questionId);
         const sessions = db.prepare("SELECT id,data FROM sessions").all();
@@ -885,6 +970,83 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         throw e;
       }
       return user;
+    },
+    userById(userId) {
+      const row = db.prepare("SELECT * FROM users WHERE id=?").get(userId);
+      if (!row) return null;
+      return {
+        id: row.id,
+        username: row.username,
+        communityName: row.community_name,
+        certificateId: row.certificate_id,
+        isAdmin: !!row.is_admin,
+        bannedAt: row.banned_at,
+        banReason: row.ban_reason,
+      };
+    },
+    wechatIdentity(appid, openid) {
+      return db
+        .prepare(
+          "SELECT appid, openid, unionid, user_id AS userId, created_at AS createdAt, updated_at AS updatedAt FROM wechat_identities WHERE appid=? AND openid=?",
+        )
+        .get(appid, openid) || null;
+    },
+    createWechatLoginChallenge({ appid, openid, unionid, ttlMs = 10 * 60 * 1000 }) {
+      const token = crypto.randomBytes(32).toString("base64url");
+      const now = new Date();
+      db.prepare(
+        "INSERT INTO wechat_login_challenges (token_hash,appid,openid,unionid,expires_at,created_at) VALUES (?,?,?,?,?,?)",
+      ).run(
+        crypto.createHash("sha256").update(token).digest("hex"),
+        appid,
+        openid,
+        unionid || null,
+        new Date(now.getTime() + ttlMs).toISOString(),
+        now.toISOString(),
+      );
+      db.prepare("DELETE FROM wechat_login_challenges WHERE expires_at<=?").run(
+        now.toISOString(),
+      );
+      return token;
+    },
+    wechatLoginChallenge(token) {
+      if (!token || typeof token !== "string") return null;
+      const row = db
+        .prepare(
+          "SELECT appid, openid, unionid, expires_at AS expiresAt FROM wechat_login_challenges WHERE token_hash=? AND expires_at>?",
+        )
+        .get(
+          crypto.createHash("sha256").update(token).digest("hex"),
+          new Date().toISOString(),
+        );
+      return row || null;
+    },
+    consumeWechatLoginChallenge(token) {
+      if (!token || typeof token !== "string") return;
+      db.prepare("DELETE FROM wechat_login_challenges WHERE token_hash=?").run(
+        crypto.createHash("sha256").update(token).digest("hex"),
+      );
+    },
+    bindWechatIdentity({ appid, openid, unionid, userId }) {
+      const existing = db
+        .prepare("SELECT user_id AS userId FROM wechat_identities WHERE appid=? AND openid=?")
+        .get(appid, openid);
+      if (existing && existing.userId !== userId) {
+        throw new Error("这个微信已经绑定了其他考匠账号");
+      }
+      const otherIdentity = db
+        .prepare("SELECT user_id AS userId FROM wechat_identities WHERE appid=? AND user_id=?")
+        .get(appid, userId);
+      if (otherIdentity && (!existing || otherIdentity.userId !== existing.userId)) {
+        throw new Error("这个考匠账号已经绑定了其他微信");
+      }
+      const now = new Date().toISOString();
+      db.prepare(
+        `INSERT INTO wechat_identities (appid,openid,unionid,user_id,created_at,updated_at)
+         VALUES (?,?,?,?,?,?)
+         ON CONFLICT(appid,openid) DO UPDATE SET unionid=excluded.unionid, updated_at=excluded.updated_at`,
+      ).run(appid, openid, unionid || null, userId, now, now);
+      return this.wechatIdentity(appid, openid);
     },
     allUsers: () =>
       db

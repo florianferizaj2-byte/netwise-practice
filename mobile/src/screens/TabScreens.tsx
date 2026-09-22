@@ -21,6 +21,7 @@ import {
   type AuthResponse,
   type DashboardResponse,
   type FeedbackKind,
+  type PracticeCatalogResponse,
   type Question,
 } from '../api/client';
 import { BrandMark } from '../components/BrandMark';
@@ -58,6 +59,8 @@ type ScreenProps = {
   practiceMode?: PracticeMode;
   practiceSession?: PracticeSession;
   practiceSource?: PracticeSource;
+  practiceChapter?: string;
+  practiceKnowledgePoint?: string;
   preview?: boolean;
   onOpenCertificatePicker?: () => void;
   onUserUpdated?: (user: AuthResponse['user']) => void;
@@ -296,12 +299,213 @@ function StatCard({
   );
 }
 
+function PracticePicker({
+  onNavigate,
+  onPracticeModeChange,
+  practiceMode = 'sequential',
+  preview = false,
+}: ScreenProps) {
+  const { colors } = useTheme();
+  const styles = useThemedStyles(createStyles);
+  const [catalog, setCatalog] = useState<PracticeCatalogResponse | null>(null);
+  const [loading, setLoading] = useState(!preview);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    if (preview) {
+      setCatalog({
+        total: 30,
+        attemptedCount: 12,
+        favoriteCount: 3,
+        chapters: [
+          {
+            name: '路由协议',
+            questionCount: 16,
+            attemptedCount: 8,
+            progress: 50,
+            knowledgePoints: [
+              { name: 'OSPF 选举资格', questionCount: 8, attemptedCount: 5, progress: 63 },
+              { name: 'OSPF 邻居关系', questionCount: 8, attemptedCount: 3, progress: 38 },
+            ],
+          },
+          {
+            name: '网络基础',
+            questionCount: 14,
+            attemptedCount: 4,
+            progress: 29,
+            knowledgePoints: [
+              { name: '子网划分', questionCount: 7, attemptedCount: 2, progress: 29 },
+              { name: '地址与掩码', questionCount: 7, attemptedCount: 2, progress: 29 },
+            ],
+          },
+        ],
+      });
+      setLoading(false);
+      return;
+    }
+
+    let mounted = true;
+    setLoading(true);
+    setError('');
+    mobileApi
+      .practiceCatalog()
+      .then((result) => {
+        if (mounted) setCatalog(result);
+      })
+      .catch((requestError) => {
+        if (mounted) {
+          setCatalog(null);
+          setError(
+            requestError instanceof Error
+              ? requestError.message
+              : '知识点加载失败，请稍后重试',
+          );
+        }
+      })
+      .finally(() => {
+        if (mounted) setLoading(false);
+      });
+
+    return () => {
+      mounted = false;
+    };
+  }, [preview]);
+
+  return (
+    <ScreenContainer>
+      <ScreenHeader eyebrow="选择练习内容" title="先选知识点，再开始刷题" />
+      <EntranceView delay={50} distance={12} style={styles.pickerSummary}>
+        <View>
+          <Text style={styles.pickerSummaryTitle}>题库练习</Text>
+          <Text style={styles.pickerSummaryText}>
+            {catalog ? `${catalog.total} 道题 · 已刷 ${catalog.attemptedCount} 道` : '正在同步你的题库'}
+          </Text>
+        </View>
+        <Text style={styles.pickerSummaryMark}>✦</Text>
+      </EntranceView>
+
+      <EntranceView delay={90} distance={8} style={styles.modeSwitch}>
+        <AnimatedPressable
+          accessibilityLabel="顺序刷题"
+          onPress={() => onPracticeModeChange?.('sequential')}
+          style={[styles.modeButton, practiceMode === 'sequential' && styles.activeModeButton]}
+        >
+          <Text style={[styles.modeButtonText, practiceMode === 'sequential' && styles.activeModeButtonText]}>
+            顺序刷题
+          </Text>
+          <Text style={styles.modeButtonHint}>按题库顺序</Text>
+        </AnimatedPressable>
+        <AnimatedPressable
+          accessibilityLabel="随机刷题"
+          onPress={() => onPracticeModeChange?.('random')}
+          style={[styles.modeButton, practiceMode === 'random' && styles.activeModeButton]}
+        >
+          <Text style={[styles.modeButtonText, practiceMode === 'random' && styles.activeModeButtonText]}>
+            随机刷题
+          </Text>
+          <Text style={styles.modeButtonHint}>打乱所选题库</Text>
+        </AnimatedPressable>
+      </EntranceView>
+
+      {catalog && (
+        <EntranceView delay={120} distance={10}>
+          <AnimatedPressable
+            accessibilityLabel="进入收藏题目"
+            disabled={!catalog.favoriteCount}
+            onPress={() =>
+              onNavigate('practice', {
+                practiceMode,
+                practiceSource: 'favorites',
+              })
+            }
+            style={styles.pickerFavoriteCard}
+          >
+            <Text style={styles.pickerFavoriteStar}>★</Text>
+            <View style={styles.pickerCardCopy}>
+              <Text style={styles.pickerFavoriteTitle}>收藏题目</Text>
+              <Text style={styles.pickerCardMeta}>{catalog.favoriteCount} 道已收藏题目</Text>
+            </View>
+            <Text style={styles.actionArrow}>›</Text>
+          </AnimatedPressable>
+        </EntranceView>
+      )}
+
+      {loading && (
+        <View style={styles.loadingState}>
+          <ActivityIndicator color={colors.brand} size="large" />
+          <Text style={styles.loadingText}>正在读取知识点进度…</Text>
+        </View>
+      )}
+      {!!error && <Text style={styles.formError}>{error}</Text>}
+      {!loading && catalog && (
+        <View style={styles.pickerChapters}>
+          {catalog.chapters.map((chapter, chapterIndex) => (
+            <EntranceView
+              delay={150 + chapterIndex * 35}
+              distance={10}
+              key={chapter.name}
+              style={styles.pickerChapter}
+            >
+              <View style={styles.pickerChapterHeader}>
+                <View style={styles.pickerCardCopy}>
+                  <Text style={styles.pickerChapterTitle}>{chapter.name}</Text>
+                  <Text style={styles.pickerCardMeta}>
+                    {chapter.questionCount} 道题 · 已刷 {chapter.attemptedCount} 道
+                  </Text>
+                </View>
+                <Text style={styles.pickerChapterProgress}>{chapter.progress}%</Text>
+              </View>
+              <View style={styles.pickerKnowledgeList}>
+                {chapter.knowledgePoints.map((point) => (
+                  <AnimatedPressable
+                    accessibilityLabel={`练习知识点 ${point.name}`}
+                    key={point.name}
+                    onPress={() =>
+                      onNavigate('practice', {
+                        practiceMode,
+                        practiceSource: 'all',
+                        practiceChapter: chapter.name,
+                        practiceKnowledgePoint: point.name,
+                      })
+                    }
+                    style={styles.pickerKnowledgeItem}
+                  >
+                    <View style={styles.pickerKnowledgeTop}>
+                      <Text style={styles.pickerKnowledgeName}>{point.name}</Text>
+                      <Text style={styles.pickerKnowledgeMeta}>
+                        已刷 {point.attemptedCount}/{point.questionCount} 题
+                      </Text>
+                    </View>
+                    <AnimatedProgressBar
+                      color={colors.brand}
+                      trackColor={colors.surfaceMuted}
+                      value={point.progress}
+                    />
+                  </AnimatedPressable>
+                ))}
+              </View>
+            </EntranceView>
+          ))}
+        </View>
+      )}
+      {!loading && catalog && !catalog.chapters.length && (
+        <View style={styles.emptyCard}>
+          <Text style={styles.emptyTitle}>当前题库还没有知识点</Text>
+          <Text style={styles.emptyText}>请先在“我的”里选择并同步证书题库。</Text>
+        </View>
+      )}
+    </ScreenContainer>
+  );
+}
+
 export function PracticeScreen({
   onNavigate,
   onPracticeModeChange,
   practiceMode = 'sequential',
   practiceSession = 'standard',
   practiceSource = 'all',
+  practiceChapter,
+  practiceKnowledgePoint,
   preview = false,
 }: ScreenProps) {
   const { colors } = useTheme();
@@ -328,6 +532,8 @@ export function PracticeScreen({
   const [reportNote, setReportNote] = useState('');
   const [reportBusy, setReportBusy] = useState(false);
   const [reportNotice, setReportNotice] = useState('');
+  const [favoriteBusy, setFavoriteBusy] = useState(false);
+  const [wrongDeleteBusy, setWrongDeleteBusy] = useState(false);
 
   useEffect(() => {
     let mounted = true;
@@ -347,6 +553,8 @@ export function PracticeScreen({
     setReportOpen(false);
     setReportNote('');
     setReportNotice('');
+    setFavoriteBusy(false);
+    setWrongDeleteBusy(false);
 
     if (preview) {
       setQuestions([previewQuestion]);
@@ -356,16 +564,27 @@ export function PracticeScreen({
       };
     }
 
-    const requestLimit = isDailyPractice
-      ? DAILY_PRACTICE_COUNT
-      : practiceMode === 'random'
-        ? 20
-        : 10;
-    const shouldRandomize = isDailyPractice || practiceMode === 'random';
-    const loadQuestions =
-      practiceSource === 'wrong'
+    if (
+      !isDailyPractice &&
+      practiceSource === 'all' &&
+      !practiceKnowledgePoint
+    ) {
+      setLoading(false);
+      return () => {
+        mounted = false;
+      };
+    }
+
+    const loadQuestions = isDailyPractice
+      ? mobileApi.questions(DAILY_PRACTICE_COUNT, 0, true)
+      : practiceSource === 'wrong'
         ? mobileApi.wrong()
-        : mobileApi.questions(requestLimit, 0, shouldRandomize);
+        : practiceSource === 'favorites'
+          ? mobileApi.favorites()
+          : mobileApi.questions(undefined, 0, practiceMode === 'random', {
+              chapter: practiceChapter,
+              knowledgePoint: practiceKnowledgePoint,
+            });
 
     loadQuestions
       .then((items) => {
@@ -374,8 +593,8 @@ export function PracticeScreen({
           isDailyPractice
             ? shuffleQuestions(items).slice(0, DAILY_PRACTICE_COUNT)
             : practiceMode === 'random'
-              ? shuffleQuestions(items).slice(0, 10)
-            : items,
+              ? shuffleQuestions(items)
+              : items,
         );
       })
       .catch((requestError) => {
@@ -393,7 +612,15 @@ export function PracticeScreen({
     return () => {
       mounted = false;
     };
-  }, [isDailyPractice, practiceMode, practiceSource, preview, reloadKey]);
+  }, [
+    isDailyPractice,
+    practiceChapter,
+    practiceKnowledgePoint,
+    practiceMode,
+    practiceSource,
+    preview,
+    reloadKey,
+  ]);
 
   const currentQuestion = questions[questionIndex];
 
@@ -610,6 +837,68 @@ export function PracticeScreen({
     }
   }
 
+  async function toggleFavorite() {
+    if (!currentQuestion || favoriteBusy) return;
+    const nextFavorite = !currentQuestion.favorite;
+    setFavoriteBusy(true);
+    setError(null);
+    try {
+      const saved = preview
+        ? { favorite: nextFavorite }
+        : await mobileApi.favorite(currentQuestion.id, nextFavorite);
+      setQuestions((current) =>
+        current.map((question) =>
+          question.id === currentQuestion.id
+            ? { ...question, favorite: saved.favorite }
+            : question,
+        ),
+      );
+      setReportNotice(saved.favorite ? '已收藏这道题。' : '已取消收藏。');
+    } catch (requestError) {
+      setError(
+        requestError instanceof Error
+          ? requestError.message
+          : '收藏状态保存失败，请稍后重试',
+      );
+    } finally {
+      setFavoriteBusy(false);
+    }
+  }
+
+  async function removeCurrentWrong() {
+    if (
+      !currentQuestion ||
+      practiceSource !== 'wrong' ||
+      !result?.correct ||
+      wrongDeleteBusy
+    )
+      return;
+    setWrongDeleteBusy(true);
+    setError(null);
+    try {
+      if (!preview) await mobileApi.removeWrong(currentQuestion.id);
+      const remaining = questions.filter((question) => question.id !== currentQuestion.id);
+      setReportNotice('已从错题中移除。');
+      if (!remaining.length) {
+        setQuestions([]);
+        setFinished(true);
+      } else {
+        setQuestions(remaining);
+        setQuestionIndex((current) => Math.min(current, remaining.length - 1));
+        setSelected([]);
+        setResult(null);
+      }
+    } catch (requestError) {
+      setError(
+        requestError instanceof Error
+          ? requestError.message
+          : '移除错题失败，请稍后重试',
+      );
+    } finally {
+      setWrongDeleteBusy(false);
+    }
+  }
+
   function nextQuestion() {
     if (questionIndex >= questions.length - 1) {
       setFinished(true);
@@ -630,6 +919,22 @@ export function PracticeScreen({
           <Text style={styles.loadingText}>正在从考匠题库同步…</Text>
         </View>
       </ScreenContainer>
+    );
+  }
+
+  if (
+    !preview &&
+    !isDailyPractice &&
+    practiceSource === 'all' &&
+    !practiceKnowledgePoint
+  ) {
+    return (
+      <PracticePicker
+        onNavigate={onNavigate}
+        onPracticeModeChange={onPracticeModeChange}
+        practiceMode={practiceMode}
+        preview={preview}
+      />
     );
   }
 
@@ -683,10 +988,13 @@ export function PracticeScreen({
     ? '今日练习'
     : practiceSource === 'wrong'
       ? '错题复习'
+      : practiceSource === 'favorites'
+        ? '收藏题目'
       : '题库练习';
   const modeLabel = practiceMode === 'random' ? '随机刷题' : '顺序刷题';
   const headerParts = [sourceLabel];
   if (!isDailyPractice) headerParts.push(modeLabel);
+  if (practiceKnowledgePoint) headerParts.push(practiceKnowledgePoint);
   headerParts.push(`${questionIndex + 1}/${questions.length}`);
 
   return (
@@ -727,15 +1035,33 @@ export function PracticeScreen({
           </Text>
         </View>
         <Text style={styles.questionText}>{currentQuestion.question}</Text>
-        <AnimatedPressable
-          accessibilityLabel="举报题目"
-          accessibilityRole="button"
-          disabled={reportBusy}
-          onPress={() => setReportOpen(true)}
-          style={styles.questionReportButton}
-        >
-          <Text style={styles.questionReportIcon}>⚠︎</Text>
-        </AnimatedPressable>
+        <View style={styles.questionUtilityIcons}>
+          <AnimatedPressable
+            accessibilityLabel={currentQuestion.favorite ? '取消收藏题目' : '收藏题目'}
+            accessibilityRole="button"
+            disabled={favoriteBusy}
+            onPress={() => void toggleFavorite()}
+            style={styles.questionIconButton}
+          >
+            <Text
+              style={[
+                styles.questionStarIcon,
+                currentQuestion.favorite && styles.questionStarActive,
+              ]}
+            >
+              ★
+            </Text>
+          </AnimatedPressable>
+          <AnimatedPressable
+            accessibilityLabel="举报题目"
+            accessibilityRole="button"
+            disabled={reportBusy}
+            onPress={() => setReportOpen(true)}
+            style={styles.questionIconButton}
+          >
+            <Text style={styles.questionReportIcon}>⚠︎</Text>
+          </AnimatedPressable>
+        </View>
       </EntranceView>
 
       {!result && (
@@ -804,6 +1130,23 @@ export function PracticeScreen({
           <Text style={styles.feedbackAnswer}>正确答案：{answerText}</Text>
           {!!result.analysis && <Text style={styles.feedbackText}>{result.analysis}</Text>}
         </EntranceView>
+      )}
+
+      {result && (
+        <>
+          {practiceSource === 'wrong' && result.correct && (
+            <AnimatedPressable
+              accessibilityRole="button"
+              disabled={wrongDeleteBusy}
+              onPress={() => void removeCurrentWrong()}
+              style={[styles.removeWrongButton, wrongDeleteBusy && styles.disabledAction]}
+            >
+              <Text style={styles.removeWrongButtonText}>
+                {wrongDeleteBusy ? '移除中…' : '从错题中移除'}
+              </Text>
+            </AnimatedPressable>
+          )}
+        </>
       )}
 
       {result && (
@@ -1997,6 +2340,111 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
     fontSize: 11,
     marginTop: 2,
   },
+  pickerSummary: {
+    alignItems: 'center',
+    backgroundColor: colors.brand,
+    borderRadius: radius.lg,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: spacing.md,
+    ...shadow.card,
+  },
+  pickerSummaryTitle: {
+    color: colors.white,
+    fontSize: 19,
+    fontWeight: '800',
+  },
+  pickerSummaryText: {
+    color: '#D9F0E5',
+    fontSize: 13,
+    marginTop: 4,
+  },
+  pickerSummaryMark: {
+    color: '#BFE5D3',
+    fontSize: 38,
+  },
+  pickerFavoriteCard: {
+    alignItems: 'center',
+    backgroundColor: colors.surface,
+    borderColor: colors.gold,
+    borderRadius: radius.md,
+    borderWidth: 1,
+    flexDirection: 'row',
+    gap: spacing.sm,
+    minHeight: 66,
+    paddingHorizontal: spacing.md,
+    ...shadow.card,
+  },
+  pickerFavoriteStar: {
+    color: colors.gold,
+    fontSize: 28,
+    width: 32,
+  },
+  pickerFavoriteTitle: {
+    color: colors.text,
+    fontSize: 16,
+    fontWeight: '800',
+  },
+  pickerChapters: {
+    gap: spacing.sm,
+  },
+  pickerChapter: {
+    backgroundColor: colors.surface,
+    borderRadius: radius.md,
+    gap: spacing.sm,
+    padding: spacing.sm,
+    ...shadow.card,
+  },
+  pickerChapterHeader: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 2,
+  },
+  pickerChapterTitle: {
+    color: colors.text,
+    fontSize: 17,
+    fontWeight: '800',
+  },
+  pickerChapterProgress: {
+    color: colors.brand,
+    fontSize: 16,
+    fontWeight: '800',
+  },
+  pickerCardCopy: {
+    flex: 1,
+  },
+  pickerCardMeta: {
+    color: colors.textMuted,
+    fontSize: 12,
+    marginTop: 3,
+  },
+  pickerKnowledgeList: {
+    gap: 4,
+  },
+  pickerKnowledgeItem: {
+    backgroundColor: colors.surfaceMuted,
+    borderRadius: radius.sm,
+    gap: 7,
+    paddingHorizontal: spacing.sm,
+    paddingVertical: 9,
+  },
+  pickerKnowledgeTop: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  pickerKnowledgeName: {
+    color: colors.text,
+    flex: 1,
+    fontSize: 14,
+    fontWeight: '700',
+  },
+  pickerKnowledgeMeta: {
+    color: colors.brandDark,
+    fontSize: 12,
+    fontWeight: '800',
+  },
   actionArrow: {
     color: colors.brand,
     fontSize: 28,
@@ -2091,14 +2539,27 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
     fontSize: 13,
     lineHeight: 20,
   },
-  questionReportButton: {
+  questionUtilityIcons: {
     alignItems: 'center',
-    bottom: 5,
+    bottom: 4,
+    flexDirection: 'row',
+    gap: 2,
+    position: 'absolute',
+    right: 5,
+  },
+  questionIconButton: {
+    alignItems: 'center',
     height: 30,
     justifyContent: 'center',
-    position: 'absolute',
-    right: 6,
-    width: 30,
+    width: 28,
+  },
+  questionStarIcon: {
+    color: colors.textFaint,
+    fontSize: 17,
+    lineHeight: 20,
+  },
+  questionStarActive: {
+    color: colors.gold,
   },
   questionReportIcon: {
     color: colors.textFaint,
@@ -2132,7 +2593,7 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
     fontSize: 17,
     fontWeight: '800',
     lineHeight: 23,
-    paddingRight: 24,
+    paddingRight: 54,
   },
   optionsList: {
     gap: spacing.xs,
@@ -2249,6 +2710,20 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: spacing.xs,
+  },
+  removeWrongButton: {
+    alignItems: 'center',
+    borderColor: colors.warning,
+    borderRadius: radius.sm,
+    borderWidth: 1,
+    minHeight: 38,
+    justifyContent: 'center',
+    paddingHorizontal: spacing.sm,
+  },
+  removeWrongButtonText: {
+    color: colors.warning,
+    fontSize: 13,
+    fontWeight: '800',
   },
   aiToolButton: {
     alignItems: 'center',

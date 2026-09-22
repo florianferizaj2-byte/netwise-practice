@@ -1,0 +1,22 @@
+{
+  "description": "考匠微信小程序",
+  "packOptions": {
+    "ignore": []
+  },
+  "compileType": "miniprogram",
+  "libVersion": "3.7.0",
+  "appid": "wx631acf4b75813076",
+  "projectname": "kaojiang-miniprogram",
+  "miniprogramRoot": "./",
+  "setting": {
+    "es6": true,
+    "es7": true,
+    "minified": true,
+    "urlCheck": true,
+    "postcss": true,
+    "checkSiteMap": false,
+    "coverView": true,
+    "condition": false
+  },
+  "simulatorType": "wechat"
+}
