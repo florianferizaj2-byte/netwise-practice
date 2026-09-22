@@ -12,7 +12,7 @@ import {
 import { BrandMark } from '../components/BrandMark';
 import { AnimatedPressable, EntranceView } from '../components/Motion';
 import { ApiError, mobileApi } from '../api/client';
-import { colors, radius, shadow, spacing } from '../theme';
+import { radius, shadow, spacing, useThemedStyles, useTheme, type ThemeColors } from '../theme';
 import type { AuthMode } from '../types';
 import type { AuthResponse } from '../api/client';
 
@@ -22,6 +22,8 @@ type AuthScreenProps = {
 };
 
 export function AuthScreen({ onAuthenticated, onPreview }: AuthScreenProps) {
+  const { colors } = useTheme();
+  const styles = useThemedStyles(createStyles);
   const [mode, setMode] = useState<AuthMode>('login');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -141,7 +143,7 @@ export function AuthScreen({ onAuthenticated, onPreview }: AuthScreenProps) {
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: ThemeColors) => StyleSheet.create({
   flex: { flex: 1 },
   content: {
     backgroundColor: colors.background,

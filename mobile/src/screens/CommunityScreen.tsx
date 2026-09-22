@@ -17,11 +17,10 @@ import {
   type AuthResponse,
   type CommunityImagePayload,
   type CommunityMessage,
-  type CommunityRoom,
 } from '../api/client';
 import { BrandMark } from '../components/BrandMark';
 import { AnimatedPressable, EntranceView } from '../components/Motion';
-import { colors, radius, shadow, spacing } from '../theme';
+import { radius, shadow, spacing, useThemedStyles, useTheme, type ThemeColors } from '../theme';
 
 const quickEmojis = ['😀', '🤝', '🎉', '💪', '❤️', '😂'];
 
@@ -49,13 +48,6 @@ const previewMessages: CommunityMessage[] = [
   },
 ];
 
-function formatBytes(bytes: number) {
-  if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`;
-  if (bytes < 1024 * 1024 * 1024)
-    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
-  return `${(bytes / (1024 * 1024 * 1024)).toFixed(2)} GB`;
-}
-
 function formatMessageTime(value: string) {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return '';
@@ -76,8 +68,9 @@ function imageMimeType(value?: string): PendingImage['mimeType'] {
 }
 
 export function CommunityScreen({ preview = false, user }: CommunityScreenProps) {
+  const { colors } = useTheme();
+  const styles = useThemedStyles(createStyles);
   const [messages, setMessages] = useState<CommunityMessage[]>([]);
-  const [room, setRoom] = useState<CommunityRoom | null>(null);
   const [hasMore, setHasMore] = useState(false);
   const [nextBefore, setNextBefore] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -94,15 +87,6 @@ export function CommunityScreen({ preview = false, user }: CommunityScreenProps)
     setError('');
     if (preview) {
       setMessages(previewMessages);
-      setRoom({
-        id: 'global',
-        name: '考匠社区',
-        description: '一个大群，和所有正在努力的人交流。',
-        memberCount: 128,
-        messageCount: previewMessages.length,
-        storageUsedBytes: 0,
-        storageLimitBytes: 2 * 1024 ** 3,
-      });
       setHasMore(false);
       setNextBefore(null);
       setLoading(false);
@@ -116,7 +100,6 @@ export function CommunityScreen({ preview = false, user }: CommunityScreenProps)
       .then((result) => {
         if (!active) return;
         setMessages(result.messages);
-        setRoom(result.room);
         setHasMore(result.hasMore);
         setNextBefore(result.nextBefore);
       })
@@ -152,7 +135,6 @@ export function CommunityScreen({ preview = false, user }: CommunityScreenProps)
                 new Date(left.createdAt).getTime() - new Date(right.createdAt).getTime(),
             );
           });
-          setRoom(result.room);
           setHasMore(result.hasMore);
           setNextBefore(result.nextBefore);
         })
@@ -225,7 +207,6 @@ export function CommunityScreen({ preview = false, user }: CommunityScreenProps)
     try {
       const result = await mobileApi.sendCommunityMessage(text, attachment || undefined);
       setMessages((current) => [...current, result.message]);
-      setRoom(result.room);
       setDraft('');
       setAttachment(null);
     } catch (cause: unknown) {
@@ -243,30 +224,9 @@ export function CommunityScreen({ preview = false, user }: CommunityScreenProps)
       <View style={styles.screen}>
         <View style={styles.header}>
           <View>
-            <Text style={styles.eyebrow}>公共交流空间</Text>
             <Text style={styles.title}>考匠社区</Text>
           </View>
           <BrandMark compact />
-        </View>
-
-        <View style={styles.roomCard}>
-          <View style={styles.roomIcon}>
-            <Text style={styles.roomIconText}>◎</Text>
-          </View>
-          <View style={styles.roomCopy}>
-            <Text style={styles.roomTitle}>一个大群 · 不加好友</Text>
-            <Text style={styles.roomText}>
-              {room?.memberCount ?? 0} 位同学正在这里交流 · 仅支持文字、Emoji 和图片
-            </Text>
-          </View>
-          <Text style={styles.roomStatus}>在线</Text>
-        </View>
-
-        <View style={styles.storageLine}>
-          <Text style={styles.storageText}>社区消息会保存到服务器</Text>
-          <Text style={styles.storageText}>
-            {formatBytes(room?.storageUsedBytes ?? 0)} / 2GB
-          </Text>
         </View>
 
         <ScrollView
@@ -323,7 +283,6 @@ export function CommunityScreen({ preview = false, user }: CommunityScreenProps)
             <View style={styles.emptyState}>
               <Text style={styles.emptyEmoji}>✦</Text>
               <Text style={styles.emptyTitle}>社区还很安静</Text>
-              <Text style={styles.emptyText}>发一句话，和第一位同学打个招呼吧。</Text>
             </View>
           )}
           {!!error && <Text style={styles.errorText}>{error}</Text>}
@@ -381,7 +340,7 @@ export function CommunityScreen({ preview = false, user }: CommunityScreenProps)
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: ThemeColors) => StyleSheet.create({
   flex: { flex: 1 },
   screen: {
     backgroundColor: colors.background,
@@ -554,7 +513,7 @@ const styles = StyleSheet.create({
   attachmentPreview: {
     alignItems: 'center',
     backgroundColor: colors.surfaceMuted,
-    borderColor: '#CFE2D5',
+    borderColor: colors.border,
     borderRadius: radius.sm,
     borderWidth: 1,
     flexDirection: 'row',

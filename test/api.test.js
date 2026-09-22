@@ -271,6 +271,7 @@ test("mobile clients can use a bearer session without browser cookies", async (t
     headers: {
       "Content-Type": "application/json",
       "X-Client": "mobile",
+      "X-App-Version": "0.2.1",
     },
     body: JSON.stringify({
       username: "mobile_candidate",
@@ -282,10 +283,23 @@ test("mobile clients can use a bearer session without browser cookies", async (t
   assert.match(data.sessionToken, /^[A-Za-z0-9_-]+$/);
 
   const me = await fetch(base + "/api/auth/me", {
-    headers: { Authorization: `Bearer ${data.sessionToken}` },
+    headers: {
+      Authorization: `Bearer ${data.sessionToken}`,
+      "X-Client": "mobile",
+      "X-App-Version": "0.2.1",
+    },
   }).then((response) => response.json());
   assert.equal(me.authenticated, true);
   assert.equal(me.user.username, "mobile_candidate");
+
+  const outdated = await fetch(base + "/api/auth/me", {
+    headers: {
+      Authorization: `Bearer ${data.sessionToken}`,
+      "X-Client": "mobile",
+    },
+  });
+  assert.equal(outdated.status, 426);
+  assert.equal((await outdated.json()).code, "APP_UPDATE_REQUIRED");
 
   const logout = await fetch(base + "/api/auth/logout", {
     method: "POST",
@@ -294,10 +308,42 @@ test("mobile clients can use a bearer session without browser cookies", async (t
   assert.equal(logout.status, 200);
   assert.equal(
     (await fetch(base + "/api/auth/me", {
-      headers: { Authorization: `Bearer ${data.sessionToken}` },
+      headers: {
+        Authorization: `Bearer ${data.sessionToken}`,
+        "X-Client": "mobile",
+        "X-App-Version": "0.2.1",
+      },
     }).then((response) => response.json())).authenticated,
     false,
   );
+});
+
+test("mobile version endpoint blocks outdated clients and exposes the APK link", async (t) => {
+  const previous = {
+    latest: process.env.MOBILE_LATEST_VERSION,
+    minimum: process.env.MOBILE_MINIMUM_VERSION,
+    download: process.env.MOBILE_DOWNLOAD_URL,
+  };
+  process.env.MOBILE_LATEST_VERSION = "0.2.1";
+  process.env.MOBILE_MINIMUM_VERSION = "0.2.1";
+  process.env.MOBILE_DOWNLOAD_URL = "/downloads/kaojiang-v0.2.1.apk";
+  t.after(() => {
+    if (previous.latest === undefined) delete process.env.MOBILE_LATEST_VERSION;
+    else process.env.MOBILE_LATEST_VERSION = previous.latest;
+    if (previous.minimum === undefined) delete process.env.MOBILE_MINIMUM_VERSION;
+    else process.env.MOBILE_MINIMUM_VERSION = previous.minimum;
+    if (previous.download === undefined) delete process.env.MOBILE_DOWNLOAD_URL;
+    else process.env.MOBILE_DOWNLOAD_URL = previous.download;
+  });
+
+  const { req } = await fixture(t, async () => new Response("unused", { status: 500 }));
+  const oldVersion = await req("/mobile/version?version=0.2.0");
+  assert.equal(oldVersion.status, 200);
+  assert.equal(oldVersion.data.forceUpdate, true);
+  assert.equal(oldVersion.data.downloadUrl, "/downloads/kaojiang-v0.2.1.apk");
+
+  const currentVersion = await req("/mobile/version?version=0.2.1");
+  assert.equal(currentVersion.data.forceUpdate, false);
 });
 
 test("secure cookie follows the actual HTTP protocol", async (t) => {

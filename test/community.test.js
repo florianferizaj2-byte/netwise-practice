@@ -26,7 +26,11 @@ test("community supports one public room, custom names, text, emoji and images",
   const register = async (username) => {
     const response = await fetch(`${base}/api/auth/register`, {
       method: "POST",
-      headers: { "Content-Type": "application/json", "X-Client": "mobile" },
+      headers: {
+        "Content-Type": "application/json",
+        "X-Client": "mobile",
+        "X-App-Version": "0.2.1",
+      },
       body: JSON.stringify({ username, password: "safe-password" }),
     });
     assert.equal(response.status, 200);
@@ -39,6 +43,7 @@ test("community supports one public room, custom names, text, emoji and images",
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
         "X-Client": "mobile",
+        "X-App-Version": "0.2.1",
       },
       ...(body ? { body: JSON.stringify(body) } : {}),
     });

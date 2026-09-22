@@ -2,11 +2,11 @@
   "expo": {
     "name": "考匠",
     "slug": "kaojiang",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "scheme": "kaojiang",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "description": "考匠移动端学习应用",
     "plugins": ["expo-image-picker"],
     "ios": {
@@ -14,9 +14,9 @@
     },
     "android": {
       "package": "com.kaojiang.app",
-      "versionCode": 4,
+      "versionCode": 5,
       "adaptiveIcon": {
-        "backgroundColor": "#F6F8F7",
+        "backgroundColor": "#C50606",
         "foregroundImage": "./assets/icon.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/icon.png"

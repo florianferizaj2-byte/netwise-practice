@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { mobileApi, type AuthResponse } from '../api/client';
 import { AnimatedPressable, EntranceView } from '../components/Motion';
-import { colors, radius, shadow, spacing } from '../theme';
+import { radius, shadow, spacing, useThemedStyles, type ThemeColors } from '../theme';
 
 type CertificateScreenProps = {
   certificates: AuthResponse['certificates'];
@@ -18,6 +18,7 @@ export function CertificateScreen({
   onCancel,
   onSelected,
 }: CertificateScreenProps) {
+  const styles = useThemedStyles(createStyles);
   const [busyId, setBusyId] = useState<string | null>(null);
   const [error, setError] = useState('');
 
@@ -95,7 +96,7 @@ export function CertificateScreen({
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: ThemeColors) => StyleSheet.create({
   content: {
     backgroundColor: colors.background,
     flexGrow: 1,
@@ -149,7 +150,7 @@ const styles = StyleSheet.create({
   },
   selectedCertificateCard: {
     backgroundColor: colors.surfaceMuted,
-    borderColor: '#9DC9AE',
+    borderColor: colors.brand,
   },
   badge: {
     alignItems: 'center',

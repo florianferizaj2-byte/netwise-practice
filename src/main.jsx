@@ -926,11 +926,11 @@ function AuthScreen({ onAuth, initialError = "" }) {
           </button>
           <a
             className="auth-app-download"
-            href="/downloads/kaojiang-v0.2.0.apk"
-            download="kaojiang-v0.2.0.apk"
+            href="/downloads/kaojiang-v0.2.1.apk"
+            download="kaojiang-v0.2.1.apk"
           >
             <Download size={16} />
-            下载考匠 App · Android v0.2.0
+            下载考匠 App · Android v0.2.1
           </a>
           <p className="auth-privacy-note">
             <ShieldCheck size={14} /> 你的学习数据与 AI 配置仅属于当前账号
@@ -961,17 +961,17 @@ function AnnouncementModal({ onClose }) {
             </span>
             <div>
               <span className="announcement-kicker">考匠 · 更新公告</span>
-              <h2 id="announcement-title">移动端 v0.2.0 社区更新</h2>
-              <p>举报题目、AI 解析和变式训练现在都能在手机上完成。</p>
+              <h2 id="announcement-title">移动端 v0.2.1 更新</h2>
+              <p>新增版本校验，旧版 App 必须更新后才能继续使用。</p>
             </div>
           </div>
           <IconButton icon={X} label="关闭网站公告" onClick={onClose} />
         </header>
         <div className="announcement-body">
           <div className="announcement-highlight">
-                <strong>考匠 App v0.2.0 已发布</strong>
+                <strong>考匠 App v0.2.1 已发布</strong>
                 <span>
-                  在登录页或账号菜单点击“下载 App”即可获取 Android 安装包，登录后连接现有网站后端。
+                  在登录页或账号菜单点击“下载 App”即可获取最新版 Android 安装包，登录后连接现有网站后端。
                 </span>
           </div>
           <ul className="announcement-list">
@@ -1004,7 +1004,7 @@ function AnnouncementModal({ onClose }) {
             </li>
           </ul>
           <p className="announcement-footnote">
-            App 当前提供 Android v0.2.0 安装包；正式考试信息仍请以对应认证机构和相关主管部门的最新公告为准。
+            App 当前提供 Android v0.2.1 安装包；低于最低支持版本的旧 App 必须更新后才能继续使用。正式考试信息仍请以对应认证机构和相关主管部门的最新公告为准。
           </p>
         </div>
         <footer className="announcement-footer">
@@ -1462,8 +1462,8 @@ function App() {
                 <a
                   className="account-menu-link"
                   role="menuitem"
-                  href="/downloads/kaojiang-v0.2.0.apk"
-                  download="kaojiang-v0.2.0.apk"
+                  href="/downloads/kaojiang-v0.2.1.apk"
+                  download="kaojiang-v0.2.1.apk"
                   onClick={() => setAccountMenuOpen(false)}
                 >
                   <Download size={17} />

@@ -1,7 +1,19 @@
+import { APP_VERSION } from '../version';
+
 type JsonRecord = Record<string, unknown>;
 
 export const API_BASE_URL =
   process.env.EXPO_PUBLIC_API_URL ?? 'https://aceexam.top/api';
+
+export type AppVersionResponse = {
+  currentVersion: string;
+  latestVersion: string;
+  minimumVersion: string;
+  downloadUrl: string;
+  releaseNotes: string;
+  updateAvailable: boolean;
+  forceUpdate: boolean;
+};
 
 let sessionToken: string | null = null;
 
@@ -33,6 +45,7 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
       Accept: 'application/json',
       'Content-Type': 'application/json',
       'X-Client': 'mobile',
+      'X-App-Version': APP_VERSION,
       ...(sessionToken ? { Authorization: `Bearer ${sessionToken}` } : {}),
       ...init.headers,
     },
@@ -188,6 +201,18 @@ export type CommunityImagePayload = {
 };
 
 export const mobileApi = {
+  appVersion(version: string) {
+    return request<AppVersionResponse>(
+      `/mobile/version?version=${encodeURIComponent(version)}`,
+    );
+  },
+
+  resolveDownloadUrl(url: string) {
+    if (/^https?:\/\//i.test(url)) return url;
+    const origin = API_BASE_URL.replace(/\/api\/?$/, '');
+    return `${origin}${url.startsWith('/') ? url : `/${url}`}`;
+  },
+
   async login(username: string, password: string) {
     const response = await request<AuthResponse>('/auth/login', {
       method: 'POST',

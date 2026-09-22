@@ -31,7 +31,16 @@ import {
   FloatingSparkles,
   usePulse,
 } from '../components/Motion';
-import { colors, radius, shadow, spacing } from '../theme';
+import {
+  radius,
+  shadow,
+  spacing,
+  useThemedStyles,
+  useTheme,
+  type AnimationSpeed,
+  type ThemeColors,
+  type ThemeMode,
+} from '../theme';
 import type {
   AppTab,
   NavigationOptions,
@@ -73,10 +82,23 @@ const reportOptions: Array<{ kind: FeedbackKind; label: string }> = [
   { kind: 'other', label: '其他问题' },
 ];
 
-function ScreenContainer({ children }: { children: ReactNode }) {
+const animationOptions: Array<{ id: AnimationSpeed; label: string; hint: string }> = [
+  { id: 'slow', label: '舒缓', hint: '更从容的转场与反馈' },
+  { id: 'normal', label: '标准', hint: '推荐的平衡体验' },
+  { id: 'fast', label: '灵动', hint: '更快进入下一步' },
+];
+
+const themeOptions: Array<{ id: ThemeMode; label: string; hint: string }> = [
+  { id: 'system', label: '跟随系统', hint: '根据手机系统自动切换' },
+  { id: 'light', label: '浅色模式', hint: '保持明亮清爽' },
+  { id: 'dark', label: '深色模式', hint: '夜间使用更舒适' },
+];
+
+function ScreenContainer({ children, compact = false }: { children: ReactNode; compact?: boolean }) {
+  const styles = useThemedStyles(createStyles);
   return (
     <ScrollView
-      contentContainerStyle={styles.content}
+      contentContainerStyle={[styles.content, compact && styles.compactContent]}
       showsVerticalScrollIndicator={false}
     >
       {children}
@@ -85,6 +107,7 @@ function ScreenContainer({ children }: { children: ReactNode }) {
 }
 
 function ScreenHeader({ eyebrow, title }: { eyebrow: string; title: string }) {
+  const styles = useThemedStyles(createStyles);
   return (
     <EntranceView style={styles.header} distance={8}>
       <View>
@@ -97,6 +120,7 @@ function ScreenHeader({ eyebrow, title }: { eyebrow: string; title: string }) {
 }
 
 function ProgressBar({ value }: { value: number }) {
+  const { colors } = useTheme();
   return (
     <AnimatedProgressBar
       color={colors.brand}
@@ -136,6 +160,7 @@ function PrimaryAction({
   disabled?: boolean;
   onPress?: () => void;
 }) {
+  const styles = useThemedStyles(createStyles);
   return (
     <AnimatedPressable
       disabled={disabled}
@@ -149,6 +174,7 @@ function PrimaryAction({
 }
 
 export function TodayScreen({ dashboard, onNavigate, preview = false }: ScreenProps) {
+  const styles = useThemedStyles(createStyles);
   const progressPulse = usePulse({ duration: 2100, maxScale: 1.028 });
   const todayCount = dashboard?.todayCount ?? (preview ? 12 : 0);
   const wrongCount = dashboard?.wrongCount ?? (preview ? 18 : 0);
@@ -165,27 +191,45 @@ export function TodayScreen({ dashboard, onNavigate, preview = false }: ScreenPr
 
   return (
     <ScreenContainer>
-      <ScreenHeader eyebrow={todayLabel()} title="今天也来练一组" />
+      <ScreenHeader eyebrow={todayLabel()} title="今天学什么？" />
 
-      <EntranceView delay={60} style={styles.welcomeCard} distance={18}>
+      <EntranceView delay={60} style={styles.todayFocusCard} distance={18}>
         <FloatingSparkles />
-        <View style={styles.welcomeCopy}>
-          <Text style={styles.welcomeKicker}>今日学习进度</Text>
-          <Text style={styles.welcomeTitle}>
-            {dashboard || preview ? '保持节奏，稳稳掌握' : '正在同步你的学习'}
-          </Text>
-          <Text style={styles.welcomeText}>
-            {dashboard || preview
-              ? '完成今天的练习，就离目标更近一步。'
-              : '连接成功后，这里会显示你的真实学习进度。'}
-          </Text>
+        <View style={styles.todayFocusTop}>
+          <View style={styles.welcomeCopy}>
+            <Text style={styles.welcomeKicker}>今日学习</Text>
+            <Text style={styles.welcomeTitle}>
+              {todayCount >= 20 ? '今日目标完成' : todayCount ? '继续保持节奏' : '从一组练习开始'}
+            </Text>
+            <Text style={styles.welcomeText}>
+              {todayCount >= 20
+                ? '很棒，明天继续保持。'
+                : `还差 ${Math.max(0, 20 - todayCount)} 道题完成今日目标`}
+            </Text>
+          </View>
+          <Animated.View
+            style={[styles.progressCircle, { transform: [{ scale: progressPulse }] }]}
+          >
+            <Text style={styles.progressNumber}>{progress}%</Text>
+            <Text style={styles.progressLabel}>已完成</Text>
+          </Animated.View>
         </View>
-        <Animated.View
-          style={[styles.progressCircle, { transform: [{ scale: progressPulse }] }]}
+        <AnimatedPressable
+          accessibilityLabel="开始今日学习"
+          accessibilityRole="button"
+          onPress={() =>
+            onNavigate('practice', {
+              practiceMode: 'sequential',
+              practiceSource: 'all',
+            })
+          }
+          style={styles.todayStartButton}
         >
-          <Text style={styles.progressNumber}>{progress}%</Text>
-          <Text style={styles.progressLabel}>已完成</Text>
-        </Animated.View>
+          <Text style={styles.todayStartButtonText}>
+            {todayCount ? '继续今日学习' : '开始今日学习'}
+          </Text>
+          <Text style={styles.todayStartButtonArrow}>→</Text>
+        </AnimatedPressable>
       </EntranceView>
 
       <EntranceView delay={140} distance={10} style={styles.sectionHeading}>
@@ -206,22 +250,16 @@ export function TodayScreen({ dashboard, onNavigate, preview = false }: ScreenPr
       </View>
 
       <EntranceView delay={340} distance={8} style={styles.sectionHeading}>
-        <Text style={styles.sectionTitle}>快速开始</Text>
+        <Text style={styles.sectionTitle}>继续学习</Text>
       </EntranceView>
       <EntranceView delay={380} distance={12}>
-        <PrimaryAction
-          onPress={() =>
-            onNavigate('practice', {
-              practiceMode: 'sequential',
-              practiceSource: 'all',
-            })
-          }
-        >
-          继续今日练习
-        </PrimaryAction>
-      </EntranceView>
-      <EntranceView delay={430} distance={12}>
-        <PrimaryAction onPress={() => onNavigate('wrong')}>复习 {wrongCount} 道错题</PrimaryAction>
+        <AnimatedPressable onPress={() => onNavigate('wrong')} style={styles.secondaryAction}>
+          <View>
+            <Text style={styles.secondaryActionText}>错题复习</Text>
+            <Text style={styles.secondaryActionMeta}>{wrongCount} 道待巩固</Text>
+          </View>
+          <Text style={styles.actionArrow}>›</Text>
+        </AnimatedPressable>
       </EntranceView>
     </ScreenContainer>
   );
@@ -236,6 +274,7 @@ function StatCard({
   tone: 'green' | 'gold';
   value: string;
 }) {
+  const styles = useThemedStyles(createStyles);
   return (
     <View style={styles.statCard}>
       <View style={[styles.statDot, tone === 'gold' && styles.goldDot]} />
@@ -252,6 +291,8 @@ export function PracticeScreen({
   practiceSource = 'all',
   preview = false,
 }: ScreenProps) {
+  const { colors } = useTheme();
+  const styles = useThemedStyles(createStyles);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [selected, setSelected] = useState<string[]>([]);
@@ -620,7 +661,7 @@ export function PracticeScreen({
   const modeLabel = practiceMode === 'random' ? '随机刷题' : '顺序刷题';
 
   return (
-    <ScreenContainer>
+    <ScreenContainer compact>
       <ScreenHeader
         eyebrow={`${sourceLabel} · ${modeLabel} · ${questionIndex + 1}/${questions.length}`}
         title={isMultiple ? '选择所有正确答案' : '选出你的答案'}
@@ -773,6 +814,15 @@ export function PracticeScreen({
         </View>
       )}
 
+      <EntranceView delay={result || submitting ? 0 : 160} distance={8}>
+        <PrimaryAction
+          disabled={submitting}
+          onPress={result ? nextQuestion : submitAnswer}
+        >
+          {submitting ? '正在判分…' : result ? '下一题' : '确认答案'}
+        </PrimaryAction>
+      </EntranceView>
+
       {!!hintText && (
         <View style={styles.aiResponseCard}>
           <Text style={styles.aiResponseTitle}>AI 提示</Text>
@@ -795,14 +845,6 @@ export function PracticeScreen({
       {!!trainingNotice && <Text style={styles.trainingNotice}>{trainingNotice}</Text>}
       {!!aiError && <Text style={styles.aiError}>{aiError}</Text>}
 
-      <EntranceView delay={result || submitting ? 0 : 160} distance={8}>
-        <PrimaryAction
-          disabled={submitting}
-          onPress={result ? nextQuestion : submitAnswer}
-        >
-          {submitting ? '正在判分…' : result ? '下一题' : '确认答案'}
-        </PrimaryAction>
-      </EntranceView>
       <Modal
         animationType="slide"
         onRequestClose={() => {
@@ -876,6 +918,8 @@ export function PracticeScreen({
 }
 
 export function WrongScreen({ dashboard, onNavigate, preview = false }: ScreenProps) {
+  const { colors } = useTheme();
+  const styles = useThemedStyles(createStyles);
   const [wrongQuestions, setWrongQuestions] = useState<Question[]>([]);
   const [loading, setLoading] = useState(!preview);
 
@@ -976,6 +1020,7 @@ function ListRow({
   onPress: () => void;
   title: string;
 }) {
+  const styles = useThemedStyles(createStyles);
   return (
     <AnimatedPressable
       accessibilityRole="button"
@@ -993,6 +1038,7 @@ function ListRow({
 }
 
 export function ExamScreen({ onNavigate }: ScreenProps) {
+  const styles = useThemedStyles(createStyles);
   return (
     <ScreenContainer>
       <ScreenHeader eyebrow="模拟考试" title="用一次完整考试检验自己" />
@@ -1031,7 +1077,17 @@ export function ProfileScreen({
   preview = false,
   user,
 }: ScreenProps) {
+  const {
+    animationSpeed,
+    colors,
+    mode,
+    resolvedMode,
+    setAnimationSpeed,
+    setMode,
+  } = useTheme();
+  const styles = useThemedStyles(createStyles);
   const [sponsorOpen, setSponsorOpen] = useState(false);
+  const [appSettingsOpen, setAppSettingsOpen] = useState(false);
   const [aiSettingsOpen, setAiSettingsOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [tutorialOpen, setTutorialOpen] = useState(false);
@@ -1177,19 +1233,20 @@ export function ProfileScreen({
 
   return (
     <ScreenContainer>
-      <ScreenHeader eyebrow="我的考匠" title="把学习设置好" />
       <EntranceView delay={60} distance={16} style={styles.profileCard}>
         <View style={styles.avatar}>
           <Text style={styles.avatarText}>考</Text>
         </View>
         <View>
           <Text style={styles.profileName}>{user?.username ?? '未登录用户'}</Text>
-          <Text style={styles.profileMeta}>
-            {user ? '账号已连接，学习记录会同步' : '登录后同步学习记录'}
-          </Text>
         </View>
       </EntranceView>
       <EntranceView delay={130} distance={16} style={styles.settingsCard}>
+        <SettingRow
+          onPress={() => setAppSettingsOpen(true)}
+          title="设置"
+          value="动画与外观"
+        />
         <SettingRow
           onPress={user ? onOpenCertificatePicker : undefined}
           title="证书与题库"
@@ -1205,7 +1262,7 @@ export function ProfileScreen({
         <SettingRow
           onPress={() => setAboutOpen(true)}
           title="关于考匠"
-          value="移动端 v0.2.0"
+          value="移动端 v0.2.1"
         />
       </EntranceView>
       <EntranceView delay={200} distance={12} style={styles.aiServiceCard}>
@@ -1227,6 +1284,88 @@ export function ProfileScreen({
           </AnimatedPressable>
         </EntranceView>
       )}
+      <Modal
+        animationType="slide"
+        onRequestClose={() => setAppSettingsOpen(false)}
+        transparent
+        visible={appSettingsOpen}
+      >
+        <View style={styles.modalBackdrop}>
+          <View style={styles.settingsModal}>
+            <ScrollView
+              contentContainerStyle={styles.settingsModalScroll}
+              showsVerticalScrollIndicator={false}
+            >
+              <View style={styles.modalHeader}>
+                <View style={styles.modalHeaderCopy}>
+                  <Text style={styles.modalTitle}>设置</Text>
+                  <Text style={styles.modalKicker}>动画与外观</Text>
+                </View>
+                <AnimatedPressable
+                  accessibilityLabel="关闭设置"
+                  accessibilityRole="button"
+                  onPress={() => setAppSettingsOpen(false)}
+                  style={styles.modalCloseButton}
+                >
+                  <Text style={styles.modalCloseText}>关闭</Text>
+                </AnimatedPressable>
+              </View>
+              <Text style={styles.modalIntro}>选择你喜欢的节奏和显示方式，修改会立即生效。</Text>
+              <Text style={styles.settingsSectionTitle}>动画速度</Text>
+              <View style={styles.appearanceOptions}>
+                {animationOptions.map((option) => {
+                  const active = animationSpeed === option.id;
+                  return (
+                    <AnimatedPressable
+                      key={option.id}
+                      onPress={() => setAnimationSpeed(option.id)}
+                      style={[styles.appearanceOption, active && styles.appearanceOptionActive]}
+                    >
+                      <View style={styles.appearanceOptionCopy}>
+                        <Text style={[styles.appearanceOptionText, active && styles.appearanceOptionTextActive]}>
+                          {option.label}
+                        </Text>
+                        <Text style={styles.appearanceOptionHint}>{option.hint}</Text>
+                      </View>
+                      {active && <Text style={styles.appearanceCheck}>✓</Text>}
+                    </AnimatedPressable>
+                  );
+                })}
+              </View>
+              <Text style={styles.settingsSectionTitle}>主题模式</Text>
+              <View style={styles.appearanceOptions}>
+                {themeOptions.map((option) => {
+                  const active = mode === option.id;
+                  return (
+                    <AnimatedPressable
+                      key={option.id}
+                      onPress={() => setMode(option.id)}
+                      style={[styles.appearanceOption, active && styles.appearanceOptionActive]}
+                    >
+                      <View style={styles.appearanceOptionCopy}>
+                        <Text style={[styles.appearanceOptionText, active && styles.appearanceOptionTextActive]}>
+                          {option.label}
+                        </Text>
+                        <Text style={styles.appearanceOptionHint}>{option.hint}</Text>
+                      </View>
+                      {active && <Text style={styles.appearanceCheck}>✓</Text>}
+                    </AnimatedPressable>
+                  );
+                })}
+              </View>
+              <Text style={styles.settingsHint}>
+                当前显示：{resolvedMode === 'dark' ? '深色' : '浅色'}模式
+              </Text>
+              <AnimatedPressable
+                onPress={() => setAppSettingsOpen(false)}
+                style={[styles.modalPrimaryButton, styles.appearanceDoneButton]}
+              >
+                <Text style={styles.modalPrimaryText}>完成</Text>
+              </AnimatedPressable>
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
       <Modal
         animationType="fade"
         onRequestClose={() => setSponsorOpen(false)}
@@ -1559,6 +1698,7 @@ export function ProfileScreen({
 }
 
 function GuideStep({ number, text }: { number: string; text: string }) {
+  const styles = useThemedStyles(createStyles);
   return (
     <View style={styles.guideStep}>
       <View style={styles.guideStepNumber}>
@@ -1569,13 +1709,17 @@ function GuideStep({ number, text }: { number: string; text: string }) {
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: ThemeColors) => StyleSheet.create({
   content: {
     backgroundColor: colors.background,
     flexGrow: 1,
     gap: spacing.md,
     padding: spacing.lg,
     paddingBottom: spacing.xxl,
+  },
+  compactContent: {
+    gap: spacing.sm,
+    paddingBottom: spacing.lg,
   },
   header: {
     alignItems: 'center',
@@ -1605,6 +1749,19 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     padding: spacing.lg,
     ...shadow.card,
+  },
+  todayFocusCard: {
+    backgroundColor: colors.brand,
+    borderRadius: radius.lg,
+    gap: spacing.md,
+    overflow: 'hidden',
+    padding: spacing.md,
+    ...shadow.card,
+  },
+  todayFocusTop: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    minHeight: 124,
   },
   welcomeCopy: {
     flex: 1,
@@ -1647,6 +1804,25 @@ const styles = StyleSheet.create({
     color: '#D1EFE0',
     fontSize: 12,
     marginTop: 2,
+  },
+  todayStartButton: {
+    alignItems: 'center',
+    backgroundColor: colors.white,
+    borderRadius: radius.md,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    minHeight: 52,
+    paddingHorizontal: spacing.md,
+  },
+  todayStartButtonText: {
+    color: colors.brandDark,
+    fontSize: 16,
+    fontWeight: '800',
+  },
+  todayStartButtonArrow: {
+    color: colors.brand,
+    fontSize: 25,
+    fontWeight: '700',
   },
   sectionHeading: {
     alignItems: 'center',
@@ -1729,6 +1905,28 @@ const styles = StyleSheet.create({
     color: colors.text,
     fontSize: 16,
     fontWeight: '700',
+  },
+  secondaryAction: {
+    alignItems: 'center',
+    backgroundColor: colors.surface,
+    borderColor: colors.border,
+    borderRadius: radius.md,
+    borderWidth: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    minHeight: 58,
+    paddingHorizontal: spacing.md,
+    ...shadow.card,
+  },
+  secondaryActionText: {
+    color: colors.text,
+    fontSize: 16,
+    fontWeight: '800',
+  },
+  secondaryActionMeta: {
+    color: colors.textMuted,
+    fontSize: 12,
+    marginTop: 3,
   },
   modeSwitch: {
     backgroundColor: colors.surfaceMuted,
@@ -1825,8 +2023,8 @@ const styles = StyleSheet.create({
   questionCard: {
     backgroundColor: colors.surface,
     borderRadius: radius.lg,
-    gap: spacing.md,
-    padding: spacing.lg,
+    gap: spacing.sm,
+    padding: spacing.md,
     ...shadow.card,
   },
   questionUtilities: {
@@ -1886,9 +2084,9 @@ const styles = StyleSheet.create({
   },
   questionText: {
     color: colors.text,
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: '800',
-    lineHeight: 31,
+    lineHeight: 26,
   },
   optionsList: {
     gap: spacing.sm,
@@ -1901,9 +2099,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     flexDirection: 'row',
     gap: spacing.sm,
-    minHeight: 64,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
+    minHeight: 52,
+    paddingHorizontal: 12,
+    paddingVertical: 7,
     ...shadow.card,
   },
   selectedOption: {
@@ -1911,7 +2109,7 @@ const styles = StyleSheet.create({
     borderColor: colors.brand,
   },
   correctOption: {
-    backgroundColor: '#ECF8F0',
+    backgroundColor: colors.surfaceMuted,
     borderColor: colors.brand,
   },
   wrongOption: {
@@ -1922,9 +2120,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.surfaceMuted,
     borderRadius: radius.pill,
-    height: 32,
+    height: 28,
     justifyContent: 'center',
-    width: 32,
+    width: 28,
   },
   selectedOptionLetter: {
     backgroundColor: colors.brand,
@@ -1943,8 +2141,8 @@ const styles = StyleSheet.create({
   questionOptionText: {
     color: colors.text,
     flex: 1,
-    fontSize: 15,
-    lineHeight: 22,
+    fontSize: 14,
+    lineHeight: 20,
   },
   optionStatus: {
     color: colors.brand,
@@ -1958,20 +2156,20 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
   feedbackGood: {
-    backgroundColor: '#ECF8F0',
-    borderColor: '#B9DEC5',
+    backgroundColor: colors.surfaceMuted,
+    borderColor: colors.brandSoft,
     borderRadius: radius.md,
     borderWidth: 1,
-    gap: 5,
-    padding: spacing.md,
+    gap: 4,
+    padding: spacing.sm,
   },
   feedbackBad: {
     backgroundColor: colors.warningSoft,
     borderColor: '#F0C8C3',
     borderRadius: radius.md,
     borderWidth: 1,
-    gap: 5,
-    padding: spacing.md,
+    gap: 4,
+    padding: spacing.sm,
   },
   feedbackPending: {
     alignItems: 'center',
@@ -1979,7 +2177,7 @@ const styles = StyleSheet.create({
     borderRadius: radius.md,
     flexDirection: 'row',
     gap: spacing.sm,
-    padding: spacing.md,
+    padding: spacing.sm,
   },
   feedbackPendingText: {
     color: colors.textMuted,
@@ -1998,36 +2196,36 @@ const styles = StyleSheet.create({
   },
   feedbackText: {
     color: colors.textMuted,
-    fontSize: 14,
-    lineHeight: 22,
+    fontSize: 13,
+    lineHeight: 20,
   },
   aiTools: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: spacing.sm,
+    gap: spacing.xs,
   },
   aiToolButton: {
     alignItems: 'center',
     backgroundColor: colors.surfaceMuted,
-    borderColor: '#B8D9C3',
+    borderColor: colors.border,
     borderRadius: radius.sm,
     borderWidth: 1,
     justifyContent: 'center',
-    minHeight: 44,
-    paddingHorizontal: spacing.md,
+    minHeight: 40,
+    paddingHorizontal: spacing.sm,
   },
   aiToolButtonText: {
     color: colors.brandDark,
-    fontSize: 13,
+    fontSize: 12,
     fontWeight: '800',
   },
   aiResponseCard: {
-    backgroundColor: '#F2F8F4',
-    borderColor: '#CFE2D5',
+    backgroundColor: colors.surfaceMuted,
+    borderColor: colors.border,
     borderRadius: radius.md,
     borderWidth: 1,
-    gap: 6,
-    padding: spacing.md,
+    gap: 4,
+    padding: spacing.sm,
   },
   aiResponseTitle: {
     color: colors.brandDark,
@@ -2047,7 +2245,7 @@ const styles = StyleSheet.create({
   trainingNotice: {
     backgroundColor: colors.goldSoft,
     borderRadius: radius.sm,
-    color: '#8D6725',
+    color: colors.gold,
     fontSize: 13,
     lineHeight: 20,
     padding: spacing.sm,
@@ -2123,7 +2321,7 @@ const styles = StyleSheet.create({
   settingsStatusCard: {
     alignItems: 'center',
     backgroundColor: colors.surfaceMuted,
-    borderColor: '#CFE2D5',
+    borderColor: colors.border,
     borderRadius: radius.md,
     borderWidth: 1,
     flexDirection: 'row',
@@ -2151,6 +2349,50 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     marginTop: spacing.xs,
   },
+  appearanceOptions: {
+    gap: spacing.xs,
+  },
+  appearanceOption: {
+    alignItems: 'center',
+    borderColor: colors.border,
+    borderRadius: radius.sm,
+    borderWidth: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    minHeight: 56,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
+  },
+  appearanceOptionActive: {
+    backgroundColor: colors.surfaceMuted,
+    borderColor: colors.brand,
+  },
+  appearanceOptionCopy: {
+    flex: 1,
+    gap: 3,
+  },
+  appearanceOptionText: {
+    color: colors.text,
+    fontSize: 14,
+    fontWeight: '700',
+  },
+  appearanceOptionTextActive: {
+    color: colors.brandDark,
+    fontWeight: '800',
+  },
+  appearanceOptionHint: {
+    color: colors.textMuted,
+    fontSize: 12,
+  },
+  appearanceCheck: {
+    color: colors.brand,
+    fontSize: 20,
+    fontWeight: '800',
+    paddingLeft: spacing.sm,
+  },
+  appearanceDoneButton: {
+    marginTop: spacing.xs,
+  },
   settingsLabel: {
     color: colors.textMuted,
     fontSize: 13,
@@ -2158,7 +2400,7 @@ const styles = StyleSheet.create({
     marginBottom: -spacing.sm,
   },
   settingsInput: {
-    backgroundColor: '#FAFCFA',
+    backgroundColor: colors.background,
     borderColor: colors.border,
     borderRadius: radius.sm,
     borderWidth: 1,
@@ -2180,7 +2422,7 @@ const styles = StyleSheet.create({
   settingsToolButton: {
     alignItems: 'center',
     backgroundColor: colors.surfaceMuted,
-    borderColor: '#B8D9C3',
+    borderColor: colors.border,
     borderRadius: radius.sm,
     borderWidth: 1,
     flex: 1,
@@ -2197,15 +2439,15 @@ const styles = StyleSheet.create({
     fontWeight: '800',
   },
   authorApiCard: {
-    backgroundColor: '#F9F5EC',
-    borderColor: '#E9D8AE',
+    backgroundColor: colors.goldSoft,
+    borderColor: colors.border,
     borderRadius: radius.md,
     borderWidth: 1,
     gap: spacing.sm,
     padding: spacing.md,
   },
   authorApiTitle: {
-    color: '#8D6725',
+    color: colors.gold,
     fontSize: 15,
     fontWeight: '800',
   },
@@ -2219,8 +2461,8 @@ const styles = StyleSheet.create({
     flex: 0,
   },
   guideCard: {
-    backgroundColor: '#F2F8F4',
-    borderColor: '#CFE2D5',
+    backgroundColor: colors.surfaceMuted,
+    borderColor: colors.border,
     borderRadius: radius.md,
     borderWidth: 1,
     gap: spacing.sm,
@@ -2305,7 +2547,7 @@ const styles = StyleSheet.create({
   },
   selectedReportOption: {
     backgroundColor: colors.surfaceMuted,
-    borderColor: '#9DC9AE',
+    borderColor: colors.brand,
   },
   reportOptionText: {
     color: colors.textMuted,
@@ -2322,7 +2564,7 @@ const styles = StyleSheet.create({
     fontWeight: '800',
   },
   reportInput: {
-    backgroundColor: '#FAFCFA',
+    backgroundColor: colors.background,
     borderColor: colors.border,
     borderRadius: radius.sm,
     borderWidth: 1,
@@ -2405,7 +2647,7 @@ const styles = StyleSheet.create({
   wrongSummary: {
     alignItems: 'center',
     backgroundColor: colors.warningSoft,
-    borderColor: '#F2D7D3',
+    borderColor: colors.border,
     borderRadius: radius.lg,
     borderWidth: 1,
     flexDirection: 'row',
@@ -2418,7 +2660,7 @@ const styles = StyleSheet.create({
     fontWeight: '800',
   },
   wrongLabel: {
-    color: '#96645F',
+    color: colors.warning,
     fontSize: 14,
     marginTop: 2,
   },
@@ -2555,7 +2797,7 @@ const styles = StyleSheet.create({
   },
   aiServiceCard: {
     backgroundColor: colors.surfaceMuted,
-    borderColor: '#CFE2D5',
+    borderColor: colors.border,
     borderRadius: radius.md,
     borderWidth: 1,
     gap: spacing.sm,
@@ -2600,7 +2842,7 @@ const styles = StyleSheet.create({
   },
   logoutButton: {
     alignItems: 'center',
-    borderColor: '#F2D7D3',
+    borderColor: colors.border,
     borderRadius: radius.md,
     borderWidth: 1,
     minHeight: 52,
@@ -2678,15 +2920,15 @@ const styles = StyleSheet.create({
     marginTop: spacing.xs,
   },
   authorMessageCard: {
-    backgroundColor: '#FFFDF8',
-    borderColor: '#EBDDBD',
+    backgroundColor: colors.goldSoft,
+    borderColor: colors.border,
     borderRadius: radius.md,
     borderWidth: 1,
     gap: spacing.sm,
     padding: spacing.lg,
   },
   authorMessageLead: {
-    color: '#8D6725',
+    color: colors.gold,
     fontSize: 15,
     fontWeight: '800',
     lineHeight: 23,
@@ -2712,6 +2954,7 @@ function SettingRow({
   title: string;
   value: string;
 }) {
+  const styles = useThemedStyles(createStyles);
   const content = (
     <>
       <Text style={styles.settingTitle}>{title}</Text>

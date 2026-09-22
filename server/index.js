@@ -25,6 +25,36 @@ import { findSimilarQuestions } from "./question-similarity.js";
 import { questionImageSchema, validateQuestion } from "./domain.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
+const mobileRelease = () => {
+  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.2.1";
+  const minimumVersion =
+    process.env.MOBILE_MINIMUM_VERSION || latestVersion;
+  return {
+    latestVersion,
+    minimumVersion,
+    downloadUrl:
+      process.env.MOBILE_DOWNLOAD_URL ||
+      `/downloads/kaojiang-v${latestVersion}.apk`,
+    releaseNotes:
+      process.env.MOBILE_RELEASE_NOTES ||
+      "优化首页重点、答题布局、社区界面、动画设置和深色模式。",
+  };
+};
+const versionParts = (value) => {
+  const match = String(value || "").trim().match(/^v?(\d+(?:\.\d+){0,3})/i);
+  return match
+    ? match[1].split(".").map((part) => Number(part) || 0)
+    : [0];
+};
+const compareVersions = (left, right) => {
+  const a = versionParts(left);
+  const b = versionParts(right);
+  for (let index = 0; index < Math.max(a.length, b.length); index += 1) {
+    const difference = (a[index] || 0) - (b[index] || 0);
+    if (difference) return difference > 0 ? 1 : -1;
+  }
+  return 0;
+};
 const publicQuestion = (q) => {
   const { answer, analysis, ownerUserId, aiGroupId, ...rest } = q;
   return rest;
@@ -129,6 +159,23 @@ export async function createApp(options = {}) {
   };
   const requestToken = (req) => bearerToken(req) || cookie(req, "netwise_session");
   const isMobileClient = (req) => req.get("x-client")?.toLowerCase() === "mobile";
+  app.use("/api", (req, res, next) => {
+    if (req.path === "/mobile/version" || !isMobileClient(req)) return next();
+    const release = mobileRelease();
+    const currentVersion = String(req.headers["x-app-version"] || "0.0.0");
+    if (compareVersions(currentVersion, release.minimumVersion) < 0) {
+      return res.status(426).json({
+        error: "当前考匠 App 版本过低，请下载最新版后继续使用",
+        code: "APP_UPDATE_REQUIRED",
+        currentVersion,
+        latestVersion: release.latestVersion,
+        minimumVersion: release.minimumVersion,
+        downloadUrl: release.downloadUrl,
+        releaseNotes: release.releaseNotes,
+      });
+    }
+    next();
+  });
   const authResponse = (req, user, token) => ({
     user: userView(user),
     certificates,
@@ -205,6 +252,19 @@ export async function createApp(options = {}) {
     store.deleteAuthSession(requestToken(req));
     sessionCookie(req, res, null, false);
     return { loggedOut: true };
+  });
+  route("get", "/api/mobile/version", (req) => {
+    const release = mobileRelease();
+    const currentVersion = String(req.query.version || "0.0.0");
+    return {
+      currentVersion,
+      latestVersion: release.latestVersion,
+      minimumVersion: release.minimumVersion,
+      downloadUrl: release.downloadUrl,
+      releaseNotes: release.releaseNotes,
+      updateAvailable: compareVersions(currentVersion, release.latestVersion) < 0,
+      forceUpdate: compareVersions(currentVersion, release.minimumVersion) < 0,
+    };
   });
   app.use("/api", (req, res, next) => {
     if (!authRequired) return next();

@@ -1,12 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-import { colors, radius } from '../theme';
+import { radius, useThemedStyles, type ThemeColors } from '../theme';
 
 type BrandMarkProps = {
   compact?: boolean;
 };
 
 export function BrandMark({ compact = false }: BrandMarkProps) {
+  const styles = useThemedStyles(createStyles);
   return (
     <View style={styles.row}>
       <View style={[styles.seal, compact && styles.compactSeal]}>
@@ -19,7 +20,7 @@ export function BrandMark({ compact = false }: BrandMarkProps) {
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (colors: ThemeColors) => StyleSheet.create({
   row: {
     alignItems: 'center',
     flexDirection: 'row',

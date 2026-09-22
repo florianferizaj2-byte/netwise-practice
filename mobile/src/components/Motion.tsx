@@ -8,6 +8,7 @@ import {
   type StyleProp,
   type ViewStyle,
 } from 'react-native';
+import { useTheme } from '../theme';
 
 const MotionPressable = Animated.createAnimatedComponent(Pressable);
 
@@ -20,22 +21,23 @@ export function useEntrance({
   delay = 0,
   distance = 16,
 }: EntranceOptions = {}) {
+  const { animationScale } = useTheme();
   const opacity = useRef(new Animated.Value(0)).current;
   const translateY = useRef(new Animated.Value(distance)).current;
 
   useEffect(() => {
     const animation = Animated.parallel([
       Animated.timing(opacity, {
-        delay,
-        duration: 420,
+        delay: Math.round(delay * animationScale),
+        duration: Math.max(1, Math.round(420 * animationScale)),
         easing: Easing.out(Easing.cubic),
         toValue: 1,
         useNativeDriver: true,
       }),
       Animated.spring(translateY, {
-        delay,
-        friction: 8,
-        tension: 62,
+        delay: Math.round(delay * animationScale),
+        friction: Math.max(4, Math.round(8 * animationScale)),
+        tension: Math.round(62 / animationScale),
         toValue: 0,
         useNativeDriver: true,
       }),
@@ -43,7 +45,7 @@ export function useEntrance({
 
     animation.start();
     return () => animation.stop();
-  }, [delay, opacity, translateY]);
+  }, [animationScale, delay, opacity, translateY]);
 
   return {
     opacity,
@@ -60,19 +62,20 @@ export function usePulse({
   maxScale?: number;
   duration?: number;
 } = {}) {
+  const { animationScale } = useTheme();
   const scale = useRef(new Animated.Value(minScale)).current;
 
   useEffect(() => {
     const animation = Animated.loop(
       Animated.sequence([
         Animated.timing(scale, {
-          duration,
+          duration: Math.max(1, Math.round(duration * animationScale)),
           easing: Easing.inOut(Easing.sin),
           toValue: maxScale,
           useNativeDriver: true,
         }),
         Animated.timing(scale, {
-          duration,
+          duration: Math.max(1, Math.round(duration * animationScale)),
           easing: Easing.inOut(Easing.sin),
           toValue: minScale,
           useNativeDriver: true,
@@ -82,7 +85,7 @@ export function usePulse({
 
     animation.start();
     return () => animation.stop();
-  }, [duration, maxScale, minScale, scale]);
+  }, [animationScale, duration, maxScale, minScale, scale]);
 
   return scale;
 }
@@ -119,12 +122,13 @@ export function AnimatedPressable({
   style,
   ...accessibilityProps
 }: AnimatedPressableProps) {
+  const { animationScale } = useTheme();
   const scale = useRef(new Animated.Value(1)).current;
 
   const pressIn = () => {
     Animated.spring(scale, {
-      friction: 7,
-      tension: 260,
+      friction: Math.max(4, Math.round(7 * animationScale)),
+      tension: Math.round(260 / animationScale),
       toValue: 0.965,
       useNativeDriver: true,
     }).start();
@@ -132,8 +136,8 @@ export function AnimatedPressable({
 
   const pressOut = () => {
     Animated.spring(scale, {
-      friction: 5,
-      tension: 230,
+      friction: Math.max(4, Math.round(5 * animationScale)),
+      tension: Math.round(230 / animationScale),
       toValue: 1,
       useNativeDriver: true,
     }).start();
@@ -163,16 +167,17 @@ export function AnimatedProgressBar({
   trackColor: string;
   value: number;
 }) {
+  const { animationScale } = useTheme();
   const progress = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     Animated.timing(progress, {
-      duration: 900,
+      duration: Math.max(1, Math.round(900 * animationScale)),
       easing: Easing.out(Easing.cubic),
       toValue: value,
       useNativeDriver: false,
     }).start();
-  }, [progress, value]);
+  }, [animationScale, progress, value]);
 
   const width = progress.interpolate({
     inputRange: [0, 100],
