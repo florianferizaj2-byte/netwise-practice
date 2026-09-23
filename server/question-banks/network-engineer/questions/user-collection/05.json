@@ -13,8 +13,8 @@
     ],
     "analysis": "BGP（边界网关协议）是外部网关协议（EGP），用于AS之间交换路由信息。RIP、OSPF、IS-IS均为内部网关协议（IGP），用于AS内部路由选择。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "路由协议",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "AS与路径矢量",
     "difficulty": "medium",
     "tags": [
       "路由协议",
@@ -27,7 +27,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "BGP"
   },
   {
     "id": "collection-c05-q002",
@@ -43,8 +44,8 @@
     ],
     "analysis": "RIP以跳数为度量，最大有效跳数为15，跳数16表示网络不可达。这一限制使RIP仅适用于小型网络，防止计数到无穷大问题。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "RIP",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "距离矢量与最大跳数",
     "difficulty": "medium",
     "tags": [
       "RIP",
@@ -57,7 +58,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "RIP"
   },
   {
     "id": "collection-c05-q003",
@@ -73,8 +75,8 @@
     ],
     "analysis": "OSPF DR选举：先比较优先级（越高越优先，0表示不参与），相同则比较Router ID（越大越优先）。Router ID选取：手动配置>环回接口最大IP>物理接口最大IP。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "OSPF DR/BDR",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "DR/BDR选举",
     "difficulty": "medium",
     "tags": [
       "OSPF DR/BDR",
@@ -87,7 +89,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "OSPF"
   },
   {
     "id": "collection-c05-q004",
@@ -103,8 +106,8 @@
     ],
     "analysis": "OSPF中Area 0（骨干区域）是核心区域，所有其他区域必须直接连接到Area 0。区域间路由必须通过骨干区域转发，防止区域间路由环路。ABR连接骨干区域和非骨干区域。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "OSPF",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "区域、LSA与邻居状态",
     "difficulty": "medium",
     "tags": [
       "OSPF",
@@ -117,7 +120,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "OSPF"
   },
   {
     "id": "collection-c05-q005",
@@ -133,8 +137,8 @@
     ],
     "analysis": "BGP是外部网关协议（EGP），用于AS之间路由选择，不是内部网关协议。BGP基于TCP（端口179）保证可靠性，使用keepalive维持邻居，支持路由汇聚。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "BGP",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "AS与路径矢量",
     "difficulty": "medium",
     "tags": [
       "BGP",
@@ -147,7 +151,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "BGP"
   },
   {
     "id": "collection-c05-q006",
@@ -163,8 +168,8 @@
     ],
     "analysis": "水平分割（Split Horizon）：路由器不从收到路由的接口再发送该路由回去，防止两节点间的路由环路。反向毒化（Poison Reverse）是将该路由度量设为16（不可达）再发回，更主动。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "RIP",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "水平分割、毒性逆转与触发更新",
     "difficulty": "medium",
     "tags": [
       "RIP",
@@ -177,7 +182,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "RIP"
   },
   {
     "id": "collection-c05-q007",
@@ -193,8 +199,8 @@
     ],
     "analysis": "OSPF Hello报文用于发现邻居、建立和维护邻居关系（保活），还用于选举DR/BDR。Hello间隔默认10秒（广播网络），Dead间隔默认40秒。DD报文交换LSA摘要，LSR/LSU/LSAck用于链路状态信息交换。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "OSPF",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "区域、LSA与邻居状态",
     "difficulty": "medium",
     "tags": [
       "OSPF",
@@ -207,7 +213,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "OSPF"
   },
   {
     "id": "collection-c05-q008",
@@ -223,8 +230,8 @@
     ],
     "analysis": "BGP选路顺序（简化）：1）权重（Cisco私有，越大越优）；2）本地优先级（越大越优）；3）本地始发路由；4）AS-PATH最短；5）ORIGIN类型（IGP>EGP>Incomplete）；6）MED最小；7）EBGP优于IBGP。题目说优先级相同，按顺序EBGP优先。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "BGP",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "BGP路由属性与选路",
     "difficulty": "medium",
     "tags": [
       "BGP",
@@ -237,7 +244,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "BGP"
   },
   {
     "id": "collection-c05-q009",
@@ -253,8 +261,8 @@
     ],
     "analysis": "OSPF和IS-IS是链路状态协议，每台路由器维护完整的网络拓扑图（链路状态数据库），使用SPF（最短路径优先）算法计算最短路径。RIP是距离矢量协议，BGP是路径矢量协议。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "路由协议",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "路由协议类型与算法",
     "difficulty": "medium",
     "tags": [
       "路由协议",
@@ -267,7 +275,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "路由基础"
   },
   {
     "id": "collection-c05-q010",
@@ -283,8 +292,8 @@
     ],
     "analysis": "RIP使用UDP端口520。RIPv1使用广播更新，RIPv2使用组播（224.0.0.9）更新。BGP使用TCP 179，OSPF直接使用IP协议号89，SNMP使用UDP 161/162。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "RIP",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "距离矢量与最大跳数",
     "difficulty": "medium",
     "tags": [
       "RIP",
@@ -297,7 +306,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "RIP"
   },
   {
     "id": "collection-c05-q011",
@@ -313,8 +323,8 @@
     ],
     "analysis": "ABR（Area Border Router）同时连接骨干区域（Area 0）和一个或多个非骨干区域，负责将非骨干区域的路由汇总发布到骨干区域，以及将骨干区域的路由发布到非骨干区域。ASBR连接OSPF和外部路由协议（如BGP、RIP）。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "OSPF",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "区域、LSA与邻居状态",
     "difficulty": "medium",
     "tags": [
       "OSPF",
@@ -327,7 +337,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "OSPF"
   },
   {
     "id": "collection-c05-q012",
@@ -343,8 +354,8 @@
     ],
     "analysis": "RIPv1：有类路由，不支持VLSM/CIDR，广播更新（255.255.255.255），不支持认证。RIPv2：无类路由，支持VLSM/CIDR，组播更新（224.0.0.9），支持明文和MD5认证。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "RIP",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "距离矢量与最大跳数",
     "difficulty": "medium",
     "tags": [
       "RIP",
@@ -357,7 +368,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "RIP"
   },
   {
     "id": "collection-c05-q013",
@@ -373,8 +385,8 @@
     ],
     "analysis": "LSA（Link State Advertisement）是OSPF中描述路由器链路状态信息的数据结构，包含链路类型、链路ID、度量值等。每台路由器生成自己的LSA，泛洪到整个区域，所有路由器维护相同的链路状态数据库（LSDB），基于LSDB运行SPF算法计算路由。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "OSPF",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "区域、LSA与邻居状态",
     "difficulty": "medium",
     "tags": [
       "OSPF",
@@ -387,7 +399,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "OSPF"
   },
   {
     "id": "collection-c05-q014",
@@ -403,8 +416,8 @@
     ],
     "analysis": "IBGP（Internal BGP）：同一AS内的BGP邻居关系，用于在AS内传递BGP路由。EBGP（External BGP）：不同AS之间的BGP邻居关系，用于在AS之间交换路由。两者都使用TCP 179。IBGP水平分割规则：从IBGP邻居学到的路由不再通告给其他IBGP邻居（需要全互联或路由反射器/联盟）。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "BGP",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "AS与路径矢量",
     "difficulty": "medium",
     "tags": [
       "BGP",
@@ -417,7 +430,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "BGP"
   },
   {
     "id": "collection-c05-q015",
@@ -433,8 +447,8 @@
     ],
     "analysis": "ASBR（AS Boundary Router）连接OSPF和其他路由协议（如BGP、RIP、静态路由），负责将外部路由引入OSPF（以AS-External LSA，即类型5 LSA泛洪）。ABR连接OSPF不同区域。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "OSPF",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "区域、LSA与邻居状态",
     "difficulty": "medium",
     "tags": [
       "OSPF",
@@ -447,7 +461,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "OSPF"
   },
   {
     "id": "collection-c05-q016",
@@ -463,8 +478,8 @@
     ],
     "analysis": "静态路由由管理员手动配置，适合小型、拓扑稳定的网络，不消耗路由器资源，可用于浮动静态路由备份。动态路由通过路由协议自动学习和更新路由，适合大型、拓扑变化的网络，但消耗CPU、内存和带宽资源。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "路由选择",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "路由表、静态路由与默认路由",
     "difficulty": "medium",
     "tags": [
       "路由选择",
@@ -477,7 +492,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "路由基础"
   },
   {
     "id": "collection-c05-q017",
@@ -493,8 +509,8 @@
     ],
     "analysis": "OSPF中，DR/BDR只在广播型网络（如以太网）和NBMA网络中选举。点到点（P2P）链路和点到多点（P2MP）链路不选举DR/BDR，因为只有两个邻居，不需要DR来减少LSA泛洪。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "OSPF DR/BDR",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "DR/BDR选举",
     "difficulty": "medium",
     "tags": [
       "OSPF DR/BDR",
@@ -507,7 +523,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "OSPF"
   },
   {
     "id": "collection-c05-q018",
@@ -523,8 +540,8 @@
     ],
     "analysis": "RIP默认每30秒发送一次完整路由表更新（Update timer）。路由老化时间（Invalid timer）默认180秒（6个更新周期未收到更新则标记为不可达），垃圾收集时间（Garbage-collect timer）默认240秒。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "RIP",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "距离矢量与最大跳数",
     "difficulty": "medium",
     "tags": [
       "RIP",
@@ -537,7 +554,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "RIP"
   },
   {
     "id": "collection-c05-q019",
@@ -553,8 +571,8 @@
     ],
     "analysis": "AS-PATH是BGP的必选公认属性，记录路由经过的AS号序列。作用：1）防止路由环路（收到包含本地AS号的路由则丢弃）；2）选路（AS-PATH越短越优先）。BGP通过携带AS路径信息避免域间环路。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "BGP",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "BGP路由属性与选路",
     "difficulty": "medium",
     "tags": [
       "BGP",
@@ -567,7 +585,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "BGP"
   },
   {
     "id": "collection-c05-q020",
@@ -583,8 +602,8 @@
     ],
     "analysis": "OSPF使用Cost（开销）作为度量，默认基于接口带宽计算：Cost=参考带宽/接口带宽（参考带宽默认100Mbps）。带宽越大，Cost越小，路径越优先。Cost可以手动修改（ip ospf cost）。与RIP使用跳数不同。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "OSPF",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "区域、LSA与邻居状态",
     "difficulty": "medium",
     "tags": [
       "OSPF",
@@ -597,7 +616,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "OSPF"
   },
   {
     "id": "collection-c05-q021",
@@ -613,8 +633,8 @@
     ],
     "analysis": "SPF（Shortest Path First，最短路径优先）算法，也叫Dijkstra算法，OSPF路由器基于链路状态数据库（LSDB）运行SPF算法，计算以自己为根的最短路径树，然后根据最短路径树生成路由表。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "OSPF",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "区域、LSA与邻居状态",
     "difficulty": "medium",
     "tags": [
       "OSPF",
@@ -627,7 +647,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "OSPF"
   },
   {
     "id": "collection-c05-q022",
@@ -643,8 +664,8 @@
     ],
     "analysis": "RIP是距离矢量协议，路由器只知道到目标网络的距离（跳数）和方向（下一跳），不知道完整拓扑。OSPF和IS-IS是链路状态协议（知道完整拓扑）。BGP是路径矢量协议（知道经过的AS路径）。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "路由协议",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "路由协议类型与算法",
     "difficulty": "medium",
     "tags": [
       "路由协议",
@@ -657,7 +678,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "路由基础"
   },
   {
     "id": "collection-c05-q023",
@@ -673,8 +695,8 @@
     ],
     "analysis": "IBGP水平分割规则要求IBGP邻居全互联（n台路由器需要n(n-1)/2条IBGP连接），扩展性差。路由反射器（RR）允许将从IBGP客户学到的路由反射给其他IBGP客户，从而减少IBGP邻居数量，解决全互联问题。联盟（Confederation）是另一种解决方案。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "BGP",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "AS与路径矢量",
     "difficulty": "medium",
     "tags": [
       "BGP",
@@ -687,7 +709,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "BGP"
   },
   {
     "id": "collection-c05-q024",
@@ -703,8 +726,8 @@
     ],
     "analysis": "Stub Area（末梢区域）不允许AS外部路由（类型5 LSA）进入，ABR向该区域发布一条默认路由（类型3 LSA）代替外部路由，减少区域内路由器的路由表规模和LSDB大小。完全末梢区域（Totally Stubby）还不允许类型3 LSA（除默认路由外）。NSSA允许引入少量外部路由（类型7 LSA）。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "OSPF",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "区域、LSA与邻居状态",
     "difficulty": "medium",
     "tags": [
       "OSPF",
@@ -717,7 +740,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "OSPF"
   },
   {
     "id": "collection-c05-q025",
@@ -733,8 +757,8 @@
     ],
     "analysis": "路由表中到同一目标网络可以有多条等价路由（度量相同），实现等价负载均衡（ECMP）。可以有多个默认路由（不同管理距离或度量）。路由表包含静态路由和动态路由。路由表需要动态维护（更新、老化、删除）。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "路由协议",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "路由表、静态路由与默认路由",
     "difficulty": "medium",
     "tags": [
       "路由协议",
@@ -747,7 +771,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "路由基础"
   },
   {
     "id": "collection-c05-q026",
@@ -763,8 +788,8 @@
     ],
     "analysis": "OSPF路由器优先级（0-255，默认1）为0表示该路由器不参与DR/BDR选举，永远不会成为DR或BDR。优先级越高越容易当选DR。通过将某些路由器优先级设为0，可以控制DR选举结果。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "OSPF",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "DR/BDR选举",
     "difficulty": "medium",
     "tags": [
       "OSPF",
@@ -777,7 +802,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "OSPF"
   },
   {
     "id": "collection-c05-q027",
@@ -793,8 +819,8 @@
     ],
     "analysis": "MED（Multi-Exit Discriminator）是可选非传递属性，用于影响相邻AS的入站流量选择：当本AS有多个入口点时，通过MED告诉邻居AS优选MED值较小的入口。MED值越小越优先。MED只在相邻AS之间传递，不传递给第三方AS（非传递）。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "BGP",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "BGP路由属性与选路",
     "difficulty": "medium",
     "tags": [
       "BGP",
@@ -807,7 +833,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "BGP"
   },
   {
     "id": "collection-c05-q028",
@@ -823,8 +850,8 @@
     ],
     "analysis": "管理距离（AD）用于判断不同路由协议来源的路由的可信度，AD越小越可信。例如Cisco设备：直连0、静态1、EBGP 20、OSPF 110、RIP 120。当从不同协议学到同一目标网络的路由时，选择AD最小的。度量值（Metric）用于同一协议内不同路径的选择。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "路由选择",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "路由优先级、管理距离与度量值",
     "difficulty": "medium",
     "tags": [
       "路由选择",
@@ -837,7 +864,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "路由基础"
   },
   {
     "id": "collection-c05-q029",
@@ -853,8 +881,8 @@
     ],
     "analysis": "OSPF的network命令（network 网络地址 反掩码 area 区域号）用于指定哪些接口的IP地址落在该网络范围内，这些接口启用OSPF并加入指定区域。接口启用OSPF后才会发送Hello报文、建立邻居、泛洪LSA。华为设备也可在接口视图下直接使用ospf enable area命令。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "OSPF",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "区域、LSA与邻居状态",
     "difficulty": "medium",
     "tags": [
       "OSPF",
@@ -867,7 +895,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "OSPF"
   },
   {
     "id": "collection-c05-q030",
@@ -883,8 +912,8 @@
     ],
     "analysis": "毒性逆转（Poison Reverse）：路由器从某个接口学到路由后，将该路由的度量设置为16（不可达），再从该接口发回给邻居，明确告知该路由不可达，防止路由环路。比单纯水平分割更主动，但会增加路由更新的大小。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "RIP",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "水平分割、毒性逆转与触发更新",
     "difficulty": "medium",
     "tags": [
       "RIP",
@@ -897,7 +926,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "RIP"
   },
   {
     "id": "collection-c05-q031",
@@ -913,8 +943,8 @@
     ],
     "analysis": "OSPF和IS-IS都是链路状态协议，都使用SPF算法。但OSPF基于IP协议（协议号89），IS-IS基于CLNP（ISO协议），直接封装在数据链路层帧中。两者在区域划分、LSA类型、邻居建立等方面都有差异，不是完全相同。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "OSPF",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "路由协议类型与算法",
     "difficulty": "medium",
     "tags": [
       "OSPF",
@@ -927,7 +957,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "路由基础"
   },
   {
     "id": "collection-c05-q032",
@@ -943,8 +974,8 @@
     ],
     "analysis": "BGP公认必选属性：ORIGIN（起源）、AS-PATH（AS路径）、NEXT-HOP（下一跳）。这些属性必须存在于所有BGP更新报文中，所有BGP路由器都必须识别。MED是可选非传递属性，不是必选的。LOCAL-PREF是公认自由决定属性（所有路由器识别但不必存在）。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "BGP",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "BGP路由属性与选路",
     "difficulty": "medium",
     "tags": [
       "BGP",
@@ -957,7 +988,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "BGP"
   },
   {
     "id": "collection-c05-q033",
@@ -973,8 +1005,8 @@
     ],
     "analysis": "Stub Area阻止类型5 LSA（外部路由），但允许类型3 LSA（区域间路由）。Totally Stubby Area不仅阻止类型5 LSA，还阻止类型3 LSA（除ABR发布的默认路由外），进一步减少路由表规模。Totally Stubby是Cisco扩展特性。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "OSPF",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "区域、LSA与邻居状态",
     "difficulty": "medium",
     "tags": [
       "OSPF",
@@ -987,7 +1019,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "OSPF"
   },
   {
     "id": "collection-c05-q034",
@@ -1003,8 +1036,8 @@
     ],
     "analysis": "路由聚合（汇总）将多条连续的具体子网路由合并为一条大的汇总路由，大幅减少路由表条目，降低路由器资源消耗，提高网络稳定性。可在OSPF（ABR上区域间汇总、ASBR上外部路由汇总）、BGP、RIP等多种协议中使用。CIDR就是基于路由聚合的。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "路由协议",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "路由协议类型与算法",
     "difficulty": "medium",
     "tags": [
       "路由协议",
@@ -1017,7 +1050,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "路由基础"
   },
   {
     "id": "collection-c05-q035",
@@ -1033,8 +1067,8 @@
     ],
     "analysis": "OSPF要求所有非骨干区域必须直接连接骨干区域（Area 0）。如果某个区域无法直接连接Area 0，可以通过虚链路（Virtual Link）穿越一个中转区域（Transit Area）逻辑连接到骨干区域。虚链路是临时修复手段，不建议长期使用。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "OSPF",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "Router ID与虚链路",
     "difficulty": "medium",
     "tags": [
       "OSPF",
@@ -1047,7 +1081,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "OSPF"
   },
   {
     "id": "collection-c05-q036",
@@ -1063,8 +1098,8 @@
     ],
     "analysis": "OSPF在广播网络（如以太网）和NBMA网络中选举DR和BDR：1）首先比较接口优先级（Priority，0-255，默认1，0表示不参与选举），优先级最高的当选DR，次高的当选BDR；2）优先级相同则比较Router ID，Router ID越大越优先。DR/BDR选举是非抢占式的，稳定后新加入的高优先级路由器不会抢占DR。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "OSPF DR/BDR",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "DR/BDR选举",
     "difficulty": "medium",
     "tags": [
       "OSPF DR/BDR",
@@ -1077,7 +1112,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "OSPF"
   },
   {
     "id": "collection-c05-q037",
@@ -1093,8 +1129,8 @@
     ],
     "analysis": "OSPF使用区域（Area）分层设计，Area 0是骨干区域（Backbone Area），所有其他非骨干区域必须直接连接到Area 0（通过ABR区域边界路由器），区域间路由信息必须通过骨干区域传递。如果某个区域无法直接连接Area 0，需要配置虚连接（Virtual Link）逻辑连接到骨干区域。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "OSPF",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "区域、LSA与邻居状态",
     "difficulty": "medium",
     "tags": [
       "OSPF",
@@ -1107,7 +1143,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "OSPF"
   },
   {
     "id": "collection-c05-q039",
@@ -1123,8 +1160,8 @@
     ],
     "analysis": "BGP（边界网关协议）使用TCP协议，端口号179。BGP是外部网关协议（EGP），用于不同自治系统（AS）之间交换路由信息。BGP使用TCP是因为需要可靠传输（路由信息不能丢失），且TCP的面向连接特性便于维护BGP邻居关系。RIP使用UDP 520，OSPF使用IP协议号89（不使用TCP/UDP），EIGRP使用IP协议号88。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "BGP",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "AS与路径矢量",
     "difficulty": "medium",
     "tags": [
       "BGP",
@@ -1137,7 +1174,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "BGP"
   },
   {
     "id": "collection-c05-q040",
@@ -1153,8 +1191,8 @@
     ],
     "analysis": "静态路由由管理员手动配置，不会自动适应拓扑变化，开销小（不占用带宽和CPU），适合小型稳定网络和默认路由。动态路由由路由协议（RIP/OSPF/BGP等）自动学习和更新，能适应拓扑变化，开销大（占用带宽和CPU），适合大型复杂网络。静态路由通常比动态路由更安全（不需要交换路由信息，不易被攻击），动态路由需要配置认证防止路由欺骗。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "路由选择",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "路由表、静态路由与默认路由",
     "difficulty": "medium",
     "tags": [
       "路由选择",
@@ -1167,7 +1205,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "路由基础"
   },
   {
     "id": "collection-c05-q041",
@@ -1183,8 +1222,8 @@
     ],
     "analysis": "ABR（Area Border Router，区域边界路由器）同时连接多个OSPF区域（至少一个是Area 0骨干区域），负责：1）将非骨干区域的路由信息汇总后传递到骨干区域；2）将骨干区域的路由信息传递到非骨干区域；3）生成区域间路由（Type 3 LSA）。ASBR（自治系统边界路由器）连接不同自治系统，引入外部路由。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "OSPF",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "区域、LSA与邻居状态",
     "difficulty": "medium",
     "tags": [
       "OSPF",
@@ -1197,7 +1236,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "OSPF"
   },
   {
     "id": "collection-c05-q042",
@@ -1213,8 +1253,8 @@
     ],
     "analysis": "路由协议分类：1）按工作范围：IGP（内部网关协议，AS内）如RIP、OSPF、IS-IS、EIGRP；EGP（外部网关协议，AS间）如BGP。2）按算法：距离矢量（Distance Vector）如RIP、BGP（路径矢量，距离矢量的变种）；链路状态（Link State）如OSPF、IS-IS。RIP是距离矢量，OSPF是链路状态，BGP是路径矢量。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "路由协议",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "路由协议类型与算法",
     "difficulty": "medium",
     "tags": [
       "路由协议",
@@ -1227,7 +1267,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "路由基础"
   },
   {
     "id": "collection-c05-q043",
@@ -1243,8 +1284,8 @@
     ],
     "analysis": "OSPF五种报文类型：1）Hello：发现和维护邻居关系，选举DR/BDR，默认10秒发送一次（广播网络），Dead Interval 40秒；2）DBD（数据库描述）：交换链路状态数据库摘要；3）LSR（链路状态请求）：请求特定的LSA；4）LSU（链路状态更新）：发送完整的LSA；5）LSAck（链路状态确认）：确认收到LSU。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "OSPF",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "区域、LSA与邻居状态",
     "difficulty": "medium",
     "tags": [
       "OSPF",
@@ -1257,7 +1298,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "OSPF"
   },
   {
     "id": "collection-c05-q044",
@@ -1273,8 +1315,8 @@
     ],
     "analysis": "RIP（距离矢量协议）防止路由环路的机制：1）水平分割（Split Horizon）：不从收到路由的接口再发回该路由；2）毒性逆转（Poison Reverse）：从收到路由的接口发回该路由但度量为16（不可达）；3）触发更新（Triggered Update）：拓扑变化时立即发送更新，不必等待更新周期；4）最大跳数16（无穷大）；5）抑制计时（Holddown Timer）。SPF（最短路径优先）算法是OSPF使用的，不是RIP的防环机制。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "RIP",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "水平分割、毒性逆转与触发更新",
     "difficulty": "medium",
     "tags": [
       "RIP",
@@ -1287,7 +1329,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "RIP"
   },
   {
     "id": "collection-c05-q045",
@@ -1303,8 +1346,8 @@
     ],
     "analysis": "OSPF度量值为链路开销（Cost，默认基于带宽，Cost=参考带宽/接口带宽，参考带宽默认100Mbps），RIP度量值为跳数（最大15跳）。选项C说反了。OSPF收敛快（触发更新、SPF算法）、支持VLSM、无跳数限制、适合大型网络；RIP收敛慢、RIPv1不支持VLSM、最大15跳、适合小型网络。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "OSPF",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "路由协议类型与算法",
     "difficulty": "medium",
     "tags": [
       "OSPF",
@@ -1317,7 +1360,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "路由基础"
   },
   {
     "id": "collection-c05-q046",
@@ -1333,8 +1377,8 @@
     ],
     "analysis": "BGP的AS_PATH属性记录路由经过的AS号序列，两个作用：1）路由选择：AS_PATH越短越优先（BGP选路规则之一）；2）防止环路：当BGP路由器收到的路由的AS_PATH中包含自己的AS号时，说明该路由已经经过自己的AS，存在环路，拒绝接收。AS_PATH是BGP的公认必遵属性。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "BGP",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "BGP路由属性与选路",
     "difficulty": "medium",
     "tags": [
       "BGP",
@@ -1347,7 +1391,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "BGP"
   },
   {
     "id": "collection-c05-q047",
@@ -1363,8 +1408,8 @@
     ],
     "analysis": "OSPF末节区域（Stub Area）：不允许注入AS外部路由（Type 5 LSA），ABR向该区域发送一条默认路由（0.0.0.0）代替外部路由，减少区域内路由器的路由表规模和LSDB大小。完全末节区域（Totally Stubby Area，Cisco专有）还不允许区域间路由（Type 3 LSA），只保留默认路由。末节区域不能是Area 0，不能包含ASBR，不能配置虚连接。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "OSPF",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "区域、LSA与邻居状态",
     "difficulty": "medium",
     "tags": [
       "OSPF",
@@ -1377,7 +1422,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "OSPF"
   },
   {
     "id": "collection-c05-q048",
@@ -1393,8 +1439,8 @@
     ],
     "analysis": "路由表包含：目的网络/前缀、下一跳IP地址、出接口、度量值（Metric）、路由来源（直连/静态/动态协议）、优先级（Administrative Distance）等。路由器根据最长匹配原则（Longest Match）选择路由：目的IP与多条路由匹配时，选择前缀最长（掩码最长）的路由。默认路由0.0.0.0/0前缀最短，在没有更具体匹配时使用。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "路由协议",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "路由表、静态路由与默认路由",
     "difficulty": "medium",
     "tags": [
       "路由协议",
@@ -1407,7 +1453,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "路由基础"
   },
   {
     "id": "collection-c05-q049",
@@ -1423,8 +1470,8 @@
     ],
     "analysis": "IS-IS（中间系统到中间系统）是ISO标准协议（ISO 10589），最初为CLNP设计，后扩展支持IP（集成IS-IS）；OSPF是IETF标准协议（RFC 2328），专为IP设计。IS-IS使用NET（网络实体标题，基于NSAP地址）标识路由器，OSPF使用Router ID（IP地址格式）。IS-IS骨干是连续的Level-2路由器（逻辑上的骨干，不局限于特定区域），OSPF骨干是Area 0。两者都是链路状态协议，都使用SPF算法。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "OSPF",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "路由协议类型与算法",
     "difficulty": "medium",
     "tags": [
       "OSPF",
@@ -1437,7 +1484,8 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "路由基础"
   },
   {
     "id": "collection-c05-q050",
@@ -1453,8 +1501,8 @@
     ],
     "analysis": "路由优先级（Administrative Distance，管理距离）用于判断不同路由来源的可信度，数值越小越优先。Cisco默认优先级：直连路由0（最高）、静态路由1、EIGRP汇总5、外部BGP20、内部EIGRP90、IGRP100、OSPF110、IS-IS115、RIP120、外部EIGRP170、内部BGP200。当同一目的网络有多个不同来源的路由时，选择优先级最高（数值最小）的路由放入路由表。",
     "type": "single_choice",
-    "chapter": "路由协议",
-    "knowledgePoint": "路由选择",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "路由优先级、管理距离与度量值",
     "difficulty": "medium",
     "tags": [
       "路由选择",
@@ -1467,6 +1515,7 @@
         "sha256": "44350d4a973ddb52a43fc149b023ebbce367f15031a77102ce88c06fb32aec0a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "路由基础"
   }
 ]

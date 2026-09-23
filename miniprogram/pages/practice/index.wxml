@@ -39,6 +39,7 @@
     <view class="question-card card">
       <view class="question-meta">
         <text class="question-type">{{question.type === 'multiple_choice' ? '多选题' : (question.type === 'true_false' ? '判断题' : '单选题')}}</text>
+        <text wx:if="{{question.knowledgeSection}}" class="question-knowledge">{{question.knowledgeSection}}</text>
         <text class="question-knowledge">{{question.knowledgePoint || '综合练习'}}</text>
       </view>
       <text class="question-text">{{question.question}}</text>

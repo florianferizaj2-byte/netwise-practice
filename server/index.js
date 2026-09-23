@@ -723,24 +723,70 @@ export async function createApp(options = {}) {
     return certificates.map((certificate) => {
       const questions = allQuestions
         .filter((question) => hasCertificateQuestion(question, certificate.id));
-      const chapters = new Map();
-      for (const question of questions) {
-        if (!chapters.has(question.chapter)) chapters.set(question.chapter, new Set());
-        chapters.get(question.chapter).add(question.knowledgePoint);
-      }
-      for (const module of certificate.syllabus?.modules || []) {
-        if (!chapters.has(module.name)) chapters.set(module.name, new Set());
-        for (const knowledgePoint of module.knowledgePoints)
-          chapters.get(module.name).add(knowledgePoint);
-      }
+      const configuredModules = certificate.taxonomy?.modules || [];
+      const chapterNames = [
+        ...configuredModules.map((module) => module.name),
+        ...new Set(questions.map((question) => question.chapter)),
+      ].filter((name, index, names) => names.indexOf(name) === index);
+      const chapters = chapterNames.map((name) => {
+        const chapterQuestions = questions.filter(
+          (question) => question.chapter === name,
+        );
+        const configuredModule = configuredModules.find(
+          (module) => module.name === name,
+        );
+        const configuredSections = configuredModule?.sections || [];
+        const sectionNames = [
+          ...configuredSections.map((section) => section.name),
+          ...new Set(
+            chapterQuestions
+              .map((question) => question.knowledgeSection)
+              .filter(Boolean),
+          ),
+        ].filter((sectionName, index, names) => names.indexOf(sectionName) === index);
+        const sections = sectionNames.map((sectionName) => {
+          const sectionQuestions = chapterQuestions.filter(
+            (question) => question.knowledgeSection === sectionName,
+          );
+          const configuredSection = configuredSections.find(
+            (section) => section.name === sectionName,
+          );
+          const configuredPoints = (configuredSection?.knowledgePoints || []).map(
+            (point) => point.name,
+          );
+          const knowledgePoints = [
+            ...configuredPoints,
+            ...new Set(
+              sectionQuestions.map(
+                (question) =>
+                  question.targetKnowledgePoint || question.knowledgePoint,
+              ),
+            ),
+          ].filter((point, index, points) => points.indexOf(point) === index);
+          return { name: sectionName, knowledgePoints };
+        });
+        const flatPoints = [
+          ...sections.flatMap((section) => section.knowledgePoints),
+          ...new Set(
+            chapterQuestions.map(
+              (question) =>
+                question.targetKnowledgePoint || question.knowledgePoint,
+            ),
+          ),
+        ].filter((point, index, points) => points.indexOf(point) === index);
+        return {
+          name,
+          knowledgePoints: configuredModules.length
+            ? flatPoints
+            : [...flatPoints].sort((a, b) => a.localeCompare(b, "zh-CN")),
+          ...(configuredModules.length ? { sections } : {}),
+        };
+      });
       return {
         id: certificate.id,
         name: certificate.name,
         shortName: certificate.shortName,
-        chapters: [...chapters.entries()].map(([name, points]) => ({
-          name,
-          knowledgePoints: [...points].sort((a, b) => a.localeCompare(b, "zh-CN")),
-        })),
+        chapters,
       };
     });
   };
@@ -762,6 +808,7 @@ export async function createApp(options = {}) {
     question.id,
     question.question,
     question.chapter,
+    question.knowledgeSection,
     question.knowledgePoint,
     question.targetKnowledgePoint,
     question.source,
@@ -788,6 +835,7 @@ export async function createApp(options = {}) {
       .object({
         certificateId: z.string().trim().optional(),
         chapter: z.string().trim().optional(),
+        knowledgeSection: z.string().trim().optional(),
         knowledgePoint: z.string().trim().optional(),
         source: z.string().trim().optional(),
         search: z.string().trim().max(200).optional(),
@@ -803,6 +851,8 @@ export async function createApp(options = {}) {
           (!parsed.certificateId ||
             hasCertificateQuestion(question, parsed.certificateId)) &&
           (!parsed.chapter || question.chapter === parsed.chapter) &&
+          (!parsed.knowledgeSection ||
+            question.knowledgeSection === parsed.knowledgeSection) &&
           (!parsed.knowledgePoint ||
             (question.targetKnowledgePoint || question.knowledgePoint) ===
               parsed.knowledgePoint) &&
@@ -989,6 +1039,7 @@ export async function createApp(options = {}) {
           .max(5),
         analysis: z.string().trim().min(12).max(5000),
         chapter: z.string().trim().min(1).max(100),
+        knowledgeSection: z.string().trim().min(1).max(100).optional(),
         knowledgePoint: z.string().trim().min(1).max(100),
         difficulty: z.enum(["easy", "medium", "hard"]),
         tags: z.array(z.string().trim().max(50)).min(1).max(12).optional(),
@@ -1037,6 +1088,25 @@ export async function createApp(options = {}) {
           ? { sharedOrder: existing.sharedOrder }
           : {}),
     };
+    const editedTaxonomy = certificates.find(
+      (certificate) =>
+        certificate.taxonomy &&
+        existing.certificates?.includes(certificate.id),
+    )?.taxonomy;
+    if (editedTaxonomy) {
+      const module = editedTaxonomy.modules.find(
+        (item) => item.name === candidate.chapter,
+      );
+      const section = module?.sections.find(
+        (item) => item.name === candidate.knowledgeSection,
+      );
+      if (
+        !section?.knowledgePoints.some(
+          (point) => point.name === candidate.knowledgePoint,
+        )
+      )
+        throw new Error("章节、二级分类或知识点不属于当前证书");
+    }
     const validated = validateQuestion(
       candidate,
       store.allQ().filter((question) => question.id !== existing.id),
@@ -1050,6 +1120,7 @@ export async function createApp(options = {}) {
     store.audit(req.user.id, "question_updated", "question", existing.id, {
       chapter: saved.chapter,
       knowledgePoint: saved.targetKnowledgePoint || saved.knowledgePoint,
+      knowledgeSection: saved.knowledgeSection || null,
     });
     return { question: adminQuestion(saved, true) };
   });
@@ -1115,6 +1186,7 @@ export async function createApp(options = {}) {
         .object({
           certificateId: z.string().min(1),
           chapter: z.string().min(1).max(100),
+          knowledgeSection: z.string().min(1).max(100).optional(),
           knowledgePoint: z.string().min(1).max(100),
           count: z.number().int().min(1).max(20),
           difficulty: z.enum(["easy", "medium", "hard"]).optional(),
@@ -1125,7 +1197,15 @@ export async function createApp(options = {}) {
       if (!certificate) throw new Error("证书不存在");
       const taxonomy = adminTaxonomy().find((item) => item.id === body.certificateId);
       const chapter = taxonomy?.chapters.find((item) => item.name === body.chapter);
-      if (!chapter?.knowledgePoints.includes(body.knowledgePoint))
+      const section = chapter?.sections?.find(
+        (item) => item.name === body.knowledgeSection,
+      );
+      if (
+        (chapter?.sections?.length && !section) ||
+        !(section?.knowledgePoints || chapter?.knowledgePoints || []).includes(
+          body.knowledgePoint,
+        )
+      )
         throw new Error("章节或知识点不属于当前证书");
       const source = store
         .allQ()
@@ -1133,21 +1213,31 @@ export async function createApp(options = {}) {
           (question) =>
             hasCertificateQuestion(question, body.certificateId) &&
             question.chapter === body.chapter &&
+            (!body.knowledgeSection ||
+              question.knowledgeSection === body.knowledgeSection) &&
             (question.targetKnowledgePoint || question.knowledgePoint) ===
               body.knowledgePoint,
         ) ||
         store
-          .allQ()
-          .find(
+        .allQ()
+        .find(
             (question) =>
               hasCertificateQuestion(question, body.certificateId) &&
-              question.chapter === body.chapter,
+              question.chapter === body.chapter &&
+              (!body.knowledgeSection ||
+                question.knowledgeSection === body.knowledgeSection),
           );
       if (!source) throw new Error("当前章节还没有可供 AI 参考的题目");
       const settings = store.adminSettings(req.user.id);
       if (!settings.keyCipher) throw new Error("请先在管理员面板配置 API Key");
       const generated = await provider.generateBankExpansion(
-        { ...source, knowledgePoint: body.knowledgePoint },
+        {
+          ...source,
+          ...(body.knowledgeSection
+            ? { knowledgeSection: body.knowledgeSection }
+            : {}),
+          knowledgePoint: body.knowledgePoint,
+        },
         body.count,
         {
           userId: req.user.id,
@@ -1164,6 +1254,9 @@ export async function createApp(options = {}) {
         source: "admin_generated",
         sourceLabel: "管理员 AI 扩充题",
         certificates: [body.certificateId],
+        ...(body.knowledgeSection
+          ? { knowledgeSection: body.knowledgeSection }
+          : {}),
         ownerUserId: req.user.id,
         adminGeneratedAt: new Date().toISOString(),
         targetKnowledgePoint: body.knowledgePoint,
@@ -1172,6 +1265,7 @@ export async function createApp(options = {}) {
       store.audit(req.user.id, "questions_generated", "knowledge_point", body.knowledgePoint, {
         certificateId: body.certificateId,
         chapter: body.chapter,
+        knowledgeSection: body.knowledgeSection || null,
         requested: body.count,
         inserted: saved.inserted.length,
         skipped: saved.skipped.length,
@@ -1236,6 +1330,8 @@ export async function createApp(options = {}) {
     ).filter(
       (q) =>
         (!req.query.chapter || q.chapter === req.query.chapter) &&
+        (!req.query.knowledgeSection ||
+          q.knowledgeSection === req.query.knowledgeSection) &&
         (!req.query.knowledgePoint ||
           (q.targetKnowledgePoint || q.knowledgePoint) ===
             req.query.knowledgePoint) &&
@@ -1270,6 +1366,9 @@ export async function createApp(options = {}) {
     const certificateId = requireCertificate(req);
     const state = questionState(req);
     const questions = certificateQuestions(certificateId, state.userId);
+    const configuredModules =
+      certificates.find((certificate) => certificate.id === certificateId)
+        ?.taxonomy?.modules || [];
     const chapters = new Map();
 
     for (const question of questions) {
@@ -1283,16 +1382,34 @@ export async function createApp(options = {}) {
           questionCount: 0,
           attemptedCount: 0,
           knowledgePoints: new Map(),
+          sections: new Map(),
         };
         chapters.set(chapterName, chapter);
       }
       chapter.questionCount += 1;
       if (state.attemptedIds.has(question.id)) chapter.attemptedCount += 1;
 
+      const sectionName = question.knowledgeSection;
+      let section = sectionName ? chapter.sections.get(sectionName) : null;
+      if (sectionName && !section) {
+        section = {
+          name: sectionName,
+          questionCount: 0,
+          attemptedCount: 0,
+          knowledgePoints: new Map(),
+        };
+        chapter.sections.set(sectionName, section);
+      }
+      if (section) {
+        section.questionCount += 1;
+        if (state.attemptedIds.has(question.id)) section.attemptedCount += 1;
+      }
+
       let point = chapter.knowledgePoints.get(knowledgePointName);
       if (!point) {
         point = {
           name: knowledgePointName,
+          ...(sectionName ? { knowledgeSection: sectionName } : {}),
           questionCount: 0,
           attemptedCount: 0,
         };
@@ -1300,6 +1417,7 @@ export async function createApp(options = {}) {
       }
       point.questionCount += 1;
       if (state.attemptedIds.has(question.id)) point.attemptedCount += 1;
+      if (section) section.knowledgePoints.set(knowledgePointName, point);
     }
 
     const progress = (attemptedCount, questionCount) =>
@@ -1313,7 +1431,17 @@ export async function createApp(options = {}) {
         state.favoriteIds.has(question.id),
       ).length,
       chapters: [...chapters.values()]
-        .sort((left, right) => left.name.localeCompare(right.name, "zh-CN"))
+        .sort((left, right) => {
+          const leftOrder = configuredModules.find(
+            (module) => module.name === left.name,
+          )?.order;
+          const rightOrder = configuredModules.find(
+            (module) => module.name === right.name,
+          )?.order;
+          return leftOrder !== undefined && rightOrder !== undefined
+            ? leftOrder - rightOrder
+            : left.name.localeCompare(right.name, "zh-CN");
+        })
         .map((chapter) => ({
           name: chapter.name,
           questionCount: chapter.questionCount,
@@ -1325,6 +1453,53 @@ export async function createApp(options = {}) {
               ...point,
               progress: progress(point.attemptedCount, point.questionCount),
             })),
+          ...(chapter.sections.size
+            ? {
+                sections: [...chapter.sections.values()]
+                  .sort((left, right) => {
+                    const sectionConfig = configuredModules
+                      .find((module) => module.name === chapter.name)
+                      ?.sections.find((item) => item.name === left.name);
+                    const rightConfig = configuredModules
+                      .find((module) => module.name === chapter.name)
+                      ?.sections.find((item) => item.name === right.name);
+                    return (sectionConfig?.order ?? Number.MAX_SAFE_INTEGER) -
+                      (rightConfig?.order ?? Number.MAX_SAFE_INTEGER);
+                  })
+                  .map((section) => ({
+                    name: section.name,
+                    questionCount: section.questionCount,
+                    attemptedCount: section.attemptedCount,
+                    progress: progress(
+                      section.attemptedCount,
+                      section.questionCount,
+                    ),
+                    knowledgePoints: [...section.knowledgePoints.values()]
+                      .sort((left, right) => {
+                        const points = configuredModules
+                          .find((module) => module.name === chapter.name)
+                          ?.sections.find((item) => item.name === section.name)
+                          ?.knowledgePoints || [];
+                        const leftOrder = points.find(
+                          (point) => point.name === left.name,
+                        )?.order;
+                        const rightOrder = points.find(
+                          (point) => point.name === right.name,
+                        )?.order;
+                        return leftOrder !== undefined && rightOrder !== undefined
+                          ? leftOrder - rightOrder
+                          : left.name.localeCompare(right.name, "zh-CN");
+                      })
+                      .map((point) => ({
+                        ...point,
+                        progress: progress(
+                          point.attemptedCount,
+                          point.questionCount,
+                        ),
+                      })),
+                  })),
+              }
+            : {}),
         })),
     };
   });
@@ -1534,19 +1709,99 @@ export async function createApp(options = {}) {
         attempts,
         syllabus,
       );
+    const categoryTaxonomy = certificates.find(
+      (certificate) => certificate.id === certificateId,
+    )?.taxonomy;
+    const categoryMetrics = (categoryQuestions) => {
+      const questionIds = new Set(categoryQuestions.map((question) => question.id));
+      const categoryAttempts = attempts.filter((attempt) =>
+        questionIds.has(attempt.questionId),
+      );
+      return {
+        total: categoryQuestions.length,
+        attempted: new Set(categoryAttempts.map((attempt) => attempt.questionId)).size,
+        accuracy: categoryAttempts.length
+          ? categoryAttempts.filter((attempt) => attempt.correct).length /
+            categoryAttempts.length
+          : null,
+      };
+    };
+    const configuredModules = categoryTaxonomy?.modules || [];
     const chapters = syllabusProgress
       ? syllabusProgress.modules
-      : [...new Set(currentQuestions.map((q) => q.chapter))].map((name) => {
-          const a = attempts.filter((attempt) => attempt.chapter === name);
-          return {
-            name,
-            total: currentQuestions.filter((q) => q.chapter === name).length,
-            attempted: new Set(a.map((attempt) => attempt.questionId)).size,
-            accuracy: a.length
-              ? a.filter((attempt) => attempt.correct).length / a.length
-              : null,
-          };
-        });
+      : configuredModules.length
+        ? [
+            ...configuredModules.map((module) => {
+              const moduleQuestions = currentQuestions.filter(
+                (question) => question.chapter === module.name,
+              );
+              const sectionNames = [
+                ...module.sections.map((section) => section.name),
+                ...new Set(
+                  moduleQuestions
+                    .map((question) => question.knowledgeSection)
+                    .filter(Boolean),
+                ),
+              ].filter((name, index, names) => names.indexOf(name) === index);
+              const sections = sectionNames.map((sectionName) => {
+                const sectionQuestions = moduleQuestions.filter(
+                  (question) => question.knowledgeSection === sectionName,
+                );
+                const configuredSection = module.sections.find(
+                  (section) => section.name === sectionName,
+                );
+                const pointNames = [
+                  ...(configuredSection?.knowledgePoints || []).map(
+                    (point) => point.name,
+                  ),
+                  ...new Set(
+                    sectionQuestions.map(
+                      (question) =>
+                        question.targetKnowledgePoint || question.knowledgePoint,
+                    ),
+                  ),
+                ].filter((name, index, names) => names.indexOf(name) === index);
+                const knowledgePoints = pointNames.map((pointName) => {
+                  const pointQuestions = sectionQuestions.filter(
+                    (question) =>
+                      (question.targetKnowledgePoint || question.knowledgePoint) ===
+                      pointName,
+                  );
+                  return {
+                    name: pointName,
+                    ...categoryMetrics(pointQuestions),
+                  };
+                });
+                return {
+                  name: sectionName,
+                  ...categoryMetrics(sectionQuestions),
+                  knowledgePoints,
+                };
+              });
+              return {
+                name: module.name,
+                ...categoryMetrics(moduleQuestions),
+                sections,
+              };
+            }),
+            ...[...new Set(
+              currentQuestions
+                .map((question) => question.chapter)
+                .filter((name) => !configuredModules.some((module) => module.name === name)),
+            )].map((name) => ({
+              name,
+              ...categoryMetrics(
+                currentQuestions.filter((question) => question.chapter === name),
+              ),
+              sections: [],
+            })),
+          ]
+        : [...new Set(currentQuestions.map((q) => q.chapter))].map((name) => {
+            const chapterQuestions = currentQuestions.filter(
+              (question) => question.chapter === name,
+            );
+            return { name, ...categoryMetrics(chapterQuestions) };
+          });
     return {
       todayCount: todayAttempts.length,
       totalCount: attempts.length,

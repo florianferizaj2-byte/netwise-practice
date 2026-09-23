@@ -13,8 +13,8 @@
     ],
     "analysis": "IPv4地址长度为32位，通常用点分十进制表示，如192.168.1.1。IPv6地址长度为128位。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "IPv4",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "IPv4地址类别与特殊地址",
     "difficulty": "medium",
     "tags": [
       "IPv4",
@@ -27,7 +27,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c03-q002",
@@ -43,8 +44,8 @@
     ],
     "analysis": "IPv6地址长度为128位，采用冒分十六进制表示，分为8组每组16位。IPv6地址空间远大于IPv4，解决了地址耗尽问题。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "IPv6",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "地址表示与地址类型",
     "difficulty": "medium",
     "tags": [
       "IPv6",
@@ -57,7 +58,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv6"
   },
   {
     "id": "collection-c03-q003",
@@ -73,8 +75,8 @@
     ],
     "analysis": "A类1-126，B类128-191，C类192-223，D类224-239（组播），E类240-255（保留）。127为环回地址。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "IPv4",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "IPv4地址类别与特殊地址",
     "difficulty": "medium",
     "tags": [
       "IPv4",
@@ -87,7 +89,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c03-q004",
@@ -103,8 +106,8 @@
     ],
     "analysis": "私有地址范围：10.0.0.0/8、172.16.0.0/12（172.16-31）、192.168.0.0/16。192.168.1.1属于C类私有地址。172.32不在私有范围。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "IPv4",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "IPv4地址类别与特殊地址",
     "difficulty": "medium",
     "tags": [
       "IPv4",
@@ -117,7 +120,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c03-q005",
@@ -133,8 +137,8 @@
     ],
     "analysis": "169.254.0.0/16是APIPA（自动私有IP地址），当DHCP客户端无法获取IP时Windows自动分配，仅在本地链路有效，路由器不转发。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "网络层协议",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "ICMP与控制报文",
     "difficulty": "medium",
     "tags": [
       "网络层协议",
@@ -147,7 +151,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "网际层协议"
   },
   {
     "id": "collection-c03-q006",
@@ -163,8 +168,8 @@
     ],
     "analysis": "ARP（地址解析协议）将IP地址映射为MAC地址。RARP相反（MAC→IP），DNS将域名解析为IP地址。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "IPv4",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "ARP与RARP",
     "difficulty": "medium",
     "tags": [
       "IPv4",
@@ -177,7 +182,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "网际层协议"
   },
   {
     "id": "collection-c03-q007",
@@ -193,8 +199,8 @@
     ],
     "analysis": "IPv6 NDP（邻居发现协议）完成地址解析等功能，替代IPv4的ARP协议。NDP还包括路由器发现、前缀发现、地址自动配置等功能。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "IPv6 邻居发现",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "邻居发现协议NDP",
     "difficulty": "medium",
     "tags": [
       "IPv6 邻居发现",
@@ -207,7 +213,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv6"
   },
   {
     "id": "collection-c03-q008",
@@ -223,8 +230,8 @@
     ],
     "analysis": "ping使用ICMP Echo Request（类型8）和Echo Reply（类型0）来测试网络连通性。目标不可达（类型3）、超时（类型11）、重定向（类型5）是其他ICMP报文。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "ICMP",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "ICMP与控制报文",
     "difficulty": "medium",
     "tags": [
       "ICMP",
@@ -237,7 +244,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "网际层协议"
   },
   {
     "id": "collection-c03-q009",
@@ -253,8 +261,8 @@
     ],
     "analysis": "tracert（Windows）/traceroute（Linux）通过发送TTL递增的数据包，利用ICMP超时消息（类型11）获取路径上的每一跳路由器。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "ICMP",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "IPv4首部、分片、组播与TTL",
     "difficulty": "medium",
     "tags": [
       "ICMP",
@@ -267,7 +275,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c03-q010",
@@ -283,8 +292,8 @@
     ],
     "analysis": "TTL（生存时间）每经过一个路由器减1，减为0时丢弃数据包并发送ICMP超时消息，防止数据包在环路中无限转发。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "网络层协议",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "IPv4地址类别与特殊地址",
     "difficulty": "medium",
     "tags": [
       "网络层协议",
@@ -297,7 +306,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c03-q011",
@@ -313,8 +323,8 @@
     ],
     "analysis": "ICMP是网络层协议，封装在IP数据报中传输，不能作为独立的传输层协议。ICMP用于报告错误和网络诊断，是IP协议的补充。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "ICMP",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "ICMP与控制报文",
     "difficulty": "medium",
     "tags": [
       "ICMP",
@@ -332,7 +342,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "网际层协议"
   },
   {
     "id": "collection-c03-q012",
@@ -348,8 +359,8 @@
     ],
     "analysis": "IP分片：同一报文所有分片标识符相同，片偏移区分顺序；重组只在目的主机完成，路由器不重组；中间路由器也可以分片（当DF位未设置时）。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "IPv4",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "IPv4首部、分片、组播与TTL",
     "difficulty": "medium",
     "tags": [
       "IPv4",
@@ -362,7 +373,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c03-q013",
@@ -378,8 +390,8 @@
     ],
     "analysis": "FF02::1是IPv6链路本地范围的所有节点组播地址；FF02::2是所有路由器；FF02::5是所有OSPF路由器。FE80::/10是链路本地单播地址。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "IPv6",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "地址表示与地址类型",
     "difficulty": "medium",
     "tags": [
       "IPv6",
@@ -397,7 +409,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv6"
   },
   {
     "id": "collection-c03-q014",
@@ -413,8 +426,8 @@
     ],
     "analysis": "IPv6全球单播地址前缀为2000::/3（二进制以001开头）。FE80::/10是链路本地地址。FF00::/8是组播地址。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "IPv6",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "地址表示与地址类型",
     "difficulty": "medium",
     "tags": [
       "IPv6",
@@ -427,7 +440,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv6"
   },
   {
     "id": "collection-c03-q016",
@@ -443,8 +457,8 @@
     ],
     "analysis": "224=11100000，借用3位主机位作为子网位，可划分2^3=8个子网。早期设备不支持全0和全1子网时可用6个，现代设备均支持8个。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "子网划分与 CIDR",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "VLSM子网划分",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -457,7 +471,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c03-q017",
@@ -473,8 +488,8 @@
     ],
     "analysis": "需要6个子网，借用3位（2^3=8≥6），剩余5位主机位（2^5-2=30≥30），掩码为255.255.255.224（/27）。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "子网划分与 CIDR",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "VLSM子网划分",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -487,7 +502,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c03-q018",
@@ -503,8 +519,8 @@
     ],
     "analysis": "IPv6内置支持IPSec（在IPv4中是可选扩展），取消了广播地址，使用组播代替。IPv6地址128位，冒分十六进制表示，可省略前导零和使用::压缩连续零段。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "IPv6",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "地址表示与地址类型",
     "difficulty": "medium",
     "tags": [
       "IPv6",
@@ -522,7 +538,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv6"
   },
   {
     "id": "collection-c03-q019",
@@ -538,8 +555,8 @@
     ],
     "analysis": "/27掩码255.255.255.224，块大小32。子网：0,32,64,96,128,160,192,224。215落在192-223网段，网络号为192.168.10.192。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "子网网络地址",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "IPv4地址类别与特殊地址",
     "difficulty": "medium",
     "tags": [
       "子网网络地址",
@@ -557,7 +574,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c03-q020",
@@ -573,8 +591,8 @@
     ],
     "analysis": "三个网络前22位相同（192.168.000000 01/02/03.0），可以聚合为192.168.0.0/22，包含192.168.0.0-192.168.3.255。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "网络层协议",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "ICMP与控制报文",
     "difficulty": "medium",
     "tags": [
       "网络层协议",
@@ -592,7 +610,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "网际层协议"
   },
   {
     "id": "collection-c03-q021",
@@ -608,8 +627,8 @@
     ],
     "analysis": "190.255.255.255/24主机位全1，是定向广播地址，不能作为源地址。0.0.0.0可作为初始化源地址（DHCP Discover），127.0.0.1是环回地址可作为源地址。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "IPv4",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "IPv4地址类别与特殊地址",
     "difficulty": "medium",
     "tags": [
       "IPv4",
@@ -627,7 +646,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c03-q022",
@@ -643,8 +663,8 @@
     ],
     "analysis": "ARP是二层协议，ARP攻击只能在局域网内实施。ARP欺骗伪造IP-MAC映射，ARP泛洪耗尽MAC表导致交换机泛洪。DAI结合DHCP Snooping可以防止ARP欺骗。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "ARP",
+    "chapter": "网络安全",
+    "knowledgePoint": "ARP欺骗",
     "difficulty": "medium",
     "tags": [
       "ARP",
@@ -657,7 +677,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "网络攻击"
   },
   {
     "id": "collection-c03-q023",
@@ -673,8 +694,8 @@
     ],
     "analysis": "可省略前导零，并用::代替连续的零段（只能用一次）。2001:0DB8→2001:DB8，0000:0000:0000→::，0042→42。最简写法为2001:DB8::FF00:42:8329。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "IPv6",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "地址表示与地址类型",
     "difficulty": "medium",
     "tags": [
       "IPv6",
@@ -692,7 +713,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv6"
   },
   {
     "id": "collection-c03-q024",
@@ -708,8 +730,8 @@
     ],
     "analysis": "IP首部的标识符字段用于标识哪些分片属于同一个原始数据报。目的主机根据标识符、源地址、目的地址和协议来重组分片。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "网络层协议",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "IPv4首部、分片、组播与TTL",
     "difficulty": "medium",
     "tags": [
       "网络层协议",
@@ -722,7 +744,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c03-q025",
@@ -738,8 +761,8 @@
     ],
     "analysis": "A类最高位0（1-126），B类最高两位10（128-191），C类最高三位110（192-223），D类最高四位1110（224-239）。以上说法均正确。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "IPv4",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "IPv4地址类别与特殊地址",
     "difficulty": "medium",
     "tags": [
       "IPv4",
@@ -752,7 +775,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c03-q026",
@@ -768,8 +792,8 @@
     ],
     "analysis": "ICMP类型3是目标不可达，其中代码3表示端口不可达（UDP traceroute使用）。类型0/0是Echo Reply，类型11/0是TTL超时，类型8/0是Echo Request。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "ICMP",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "ICMP与控制报文",
     "difficulty": "medium",
     "tags": [
       "ICMP",
@@ -782,7 +806,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "网际层协议"
   },
   {
     "id": "collection-c03-q027",
@@ -798,8 +823,8 @@
     ],
     "analysis": "IPv6任播地址从单播地址空间分配，标识一组接口，数据包发送给最近的一个接口（根据路由协议度量），而非所有接口（那是组播）。任播用于DNS根服务器、CDN等场景。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "IPv6",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "地址表示与地址类型",
     "difficulty": "medium",
     "tags": [
       "IPv6",
@@ -812,7 +837,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv6"
   },
   {
     "id": "collection-c03-q028",
@@ -828,8 +854,8 @@
     ],
     "analysis": "Linux中使用ip route show（现代）或route -n（传统）查看路由表。ifconfig查看网络接口，ping测试连通性，arp -a查看ARP缓存。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "Linux 命令与管理",
+    "chapter": "网络管理",
+    "knowledgePoint": "ipconfig、netstat与路由工具",
     "difficulty": "medium",
     "tags": [
       "Linux 命令与管理",
@@ -852,7 +878,8 @@
         "sha256": "3bebf446321a4d0085af99288649635e14581d7d1631a41e3e64b8eade64d87a"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "诊断工具与设备排查"
   },
   {
     "id": "collection-c03-q029",
@@ -868,8 +895,8 @@
     ],
     "analysis": "IP首部的片偏移字段（13位）以8字节为单位，表示该分片的数据在原始数据报中的偏移位置。因此每个分片的数据部分长度必须是8字节的整数倍（最后一个分片除外）。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "网络层协议",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "IPv4首部、分片、组播与TTL",
     "difficulty": "medium",
     "tags": [
       "网络层协议",
@@ -882,7 +909,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c03-q030",
@@ -898,8 +926,8 @@
     ],
     "analysis": "CIDR主要用于IPv4，消除了分类地址概念，使用VLSM，支持路由聚合减少路由表。IPv6本身就是无类别的，CIDR概念同样适用但不是\"只能用于IPv6\"。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "OSPF DR/BDR",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "CIDR与路由聚合",
     "difficulty": "medium",
     "tags": [
       "OSPF DR/BDR",
@@ -912,7 +940,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c03-q031",
@@ -928,8 +957,8 @@
     ],
     "analysis": "域名已解析成功说明DNS正常。返回目标网络不可达（ICMP类型3代码0），说明本机无法将数据包转发到外部网络，最可能是网关配置错误或网关不可达。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "ICMP",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "ICMP与控制报文",
     "difficulty": "medium",
     "tags": [
       "ICMP",
@@ -942,7 +971,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "网际层协议"
   },
   {
     "id": "collection-c03-q032",
@@ -958,7 +988,7 @@
     ],
     "analysis": "ipconfig /flushdns清除DNS解析缓存。/displaydns显示缓存内容，/registerdns刷新所有DHCP租约并注册DNS，/renew更新DHCP租约。",
     "type": "single_choice",
-    "chapter": "网络层协议",
+    "chapter": "网络体系结构与TCP/IP",
     "knowledgePoint": "DNS",
     "difficulty": "medium",
     "tags": [
@@ -982,7 +1012,8 @@
         "sha256": "1d9d45f10f5da7c7bd7b017f5231b2ee348f653702674f68431d3f35d15014c4"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "应用层协议与端口"
   },
   {
     "id": "collection-c03-q033",
@@ -998,8 +1029,8 @@
     ],
     "analysis": "组播数据包只发送给加入该组播组的主机，而非所有主机（那是广播）。组播地址D类224.0.0.0/4，使用IGMP管理组成员，组播可以大幅节省带宽（一份数据多主机接收）。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "网络层协议",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "IPv4首部、分片、组播与TTL",
     "difficulty": "medium",
     "tags": [
       "网络层协议",
@@ -1012,7 +1043,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c03-q034",
@@ -1028,8 +1060,8 @@
     ],
     "analysis": "IP首部协议字段：1=ICMP，2=IGMP，6=TCP，17=UDP，89=OSPF，47=GRE。协议字段值6表示TCP。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "IPv4",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "IPv4首部、分片、组播与TTL",
     "difficulty": "medium",
     "tags": [
       "IPv4",
@@ -1042,7 +1074,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c03-q035",
@@ -1058,8 +1091,8 @@
     ],
     "analysis": "IPv6支持无状态地址自动配置（SLAAC），主机通过路由器通告（RA）获取前缀，自动生成IPv6地址和默认网关，无需DHCP。也支持DHCPv6有状态配置。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "IPv6",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "地址表示与地址类型",
     "difficulty": "medium",
     "tags": [
       "IPv6",
@@ -1072,7 +1105,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv6"
   },
   {
     "id": "collection-c03-q036",
@@ -1088,8 +1122,8 @@
     ],
     "analysis": "默认路由用0.0.0.0/0表示，匹配所有目的地址。当路由表中没有更具体的匹配路由时，使用默认路由转发数据包。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "路由选择",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "路由表、静态路由与默认路由",
     "difficulty": "medium",
     "tags": [
       "路由选择",
@@ -1102,7 +1136,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "路由基础"
   },
   {
     "id": "collection-c03-q037",
@@ -1118,8 +1153,8 @@
     ],
     "analysis": "ICMP重定向（类型5）：当路由器发现主机将数据包发送给自己但存在更优的下一跳路由器时，向主机发送重定向报文，告知主机应使用更优的路由。主机收到后更新路由表。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "ICMP",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "ICMP与控制报文",
     "difficulty": "medium",
     "tags": [
       "ICMP",
@@ -1132,7 +1167,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "网际层协议"
   },
   {
     "id": "collection-c03-q038",
@@ -1148,8 +1184,8 @@
     ],
     "analysis": "IPv6分片首部（Fragment Header）用于处理数据包分片，包含分片偏移、更多分片标志和标识符。与IPv4不同，IPv6只有源主机可以分片，路由器不分片（PMTU发现）。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "IPv6",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "地址表示与地址类型",
     "difficulty": "medium",
     "tags": [
       "IPv6",
@@ -1162,7 +1198,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv6"
   },
   {
     "id": "collection-c03-q039",
@@ -1178,8 +1215,8 @@
     ],
     "analysis": "私有地址：10.0.0.0/8、172.16.0.0/12（172.16-31）、192.168.0.0/16。172.32不在172.16-31范围内，属于公网地址。169.254.x.x是链路本地地址不可路由。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "IPv4",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "IPv4地址类别与特殊地址",
     "difficulty": "medium",
     "tags": [
       "IPv4",
@@ -1192,7 +1229,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c03-q040",
@@ -1208,8 +1246,8 @@
     ],
     "analysis": "IP首部长度字段（IHL，4位）以4字节（32位字）为单位。最小值为5（5×4=20字节，无选项字段时），最大值为15（15×4=60字节）。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "IPv4",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "IPv4首部、分片、组播与TTL",
     "difficulty": "medium",
     "tags": [
       "IPv4",
@@ -1222,7 +1260,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c03-q041",
@@ -1238,8 +1277,8 @@
     ],
     "analysis": "ICMPv6（类型号从1开始重新定义）与ICMPv4类型号不同。ICMPv6集成了邻居发现（替代ARP）、组播侦听者发现（替代IGMP）等功能，是IPv6的必要组成部分，没有ICMPv6 IPv6无法正常工作。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "ICMP",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "ICMP与控制报文",
     "difficulty": "medium",
     "tags": [
       "ICMP",
@@ -1252,7 +1291,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "网际层协议"
   },
   {
     "id": "collection-c03-q043",
@@ -1268,8 +1308,8 @@
     ],
     "analysis": "ARP（地址解析协议）将IP地址映射为MAC地址（同一局域网内）。工作过程：发送方广播ARP请求（谁有IP x.x.x.x，请回复MAC），目标主机单播ARP应答（我的MAC是xx:xx:xx:xx:xx:xx）。RARP相反（MAC→IP），DNS将域名解析为IP地址。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "ARP",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "ARP与RARP",
     "difficulty": "medium",
     "tags": [
       "ARP",
@@ -1282,7 +1322,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "网际层协议"
   },
   {
     "id": "collection-c03-q046",
@@ -1298,8 +1339,8 @@
     ],
     "analysis": "NAT（网络地址转换）主要功能是将私有IP地址转换为公有IP地址，使多个内网主机共享少量公网IP访问互联网。NAT隐藏了内部网络结构，增加了一定的安全性（外部无法直接访问内部主机）。NAT64可用于IPv6到IPv4的转换，所以NAT不是只能用于IPv4。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "NAT",
+    "chapter": "网络安全",
+    "knowledgePoint": "静态NAT、动态NAT与PAT",
     "difficulty": "medium",
     "tags": [
       "NAT",
@@ -1312,7 +1353,8 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "访问控制与NAT"
   },
   {
     "id": "collection-c03-q050",
@@ -1328,8 +1370,8 @@
     ],
     "analysis": "NDP（邻居发现协议）替代了IPv4的ARP和ICMP路由器发现。NS（Neighbor Solicitation，邻居请求）用于查询目标节点的MAC地址（类似IPv4的ARP请求），NA（Neighbor Advertisement，邻居通告）用于响应NS或主动宣告自身MAC地址。RS（路由器请求）用于请求路由器发送RA，RA（路由器通告）用于宣告路由器存在和网络前缀。",
     "type": "single_choice",
-    "chapter": "网络层协议",
-    "knowledgePoint": "IPv6 邻居发现",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "邻居发现协议NDP",
     "difficulty": "medium",
     "tags": [
       "IPv6 邻居发现",
@@ -1342,6 +1384,7 @@
         "sha256": "a2b227e655434529cd26177260f31d8c9c8af6f56e9d09f8b138d877e5a24ff8"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv6"
   }
 ]

@@ -515,6 +515,7 @@ function AdminQuestionEditor({ question, busy, run, onClose, onSaved }) {
     answer: (question.answer || []).join("、"),
     analysis: question.analysis || "",
     chapter: question.chapter || "",
+    knowledgeSection: question.knowledgeSection || "",
     knowledgePoint: question.targetKnowledgePoint || question.knowledgePoint || "",
     difficulty: question.difficulty || "medium",
     tags: (question.tags || ["管理员修订"]).join("、"),
@@ -571,6 +572,9 @@ function AdminQuestionEditor({ question, busy, run, onClose, onSaved }) {
           answer,
           analysis: draft.analysis.trim(),
           chapter: draft.chapter.trim(),
+          ...(draft.knowledgeSection.trim()
+            ? { knowledgeSection: draft.knowledgeSection.trim() }
+            : {}),
           knowledgePoint: draft.knowledgePoint.trim(),
           difficulty: draft.difficulty,
           ...(tags.length ? { tags } : {}),
@@ -675,6 +679,10 @@ function AdminQuestionEditor({ question, busy, run, onClose, onSaved }) {
             <label>
               章节
               <input value={draft.chapter} onChange={(event) => update("chapter", event.target.value)} />
+            </label>
+            <label>
+              二级分类
+              <input value={draft.knowledgeSection} onChange={(event) => update("knowledgeSection", event.target.value)} />
             </label>
             <label>
               知识点
@@ -1139,6 +1147,7 @@ function App() {
     [auth, setAuth] = useState(null),
     [bankSource, setBankSource] = useState("all"),
     [chapterFocus, setChapterFocus] = useState(""),
+    [sectionFocus, setSectionFocus] = useState(""),
     [dashboard, setDashboard] = useState(null),
     [error, setError] = useState(""),
     [notice, setNotice] = useState(""),
@@ -1275,6 +1284,7 @@ function App() {
   };
   const openChapter = (name) => {
     setChapterFocus(name);
+    setSectionFocus("");
     go("chapters");
   };
   const questionsForChapter = (name) => [
@@ -1294,11 +1304,23 @@ function App() {
   const selectedChapterQuestions = selectedChapter
     ? questionsForChapter(selectedChapter.name)
     : [];
+  const selectedChapterSections = selectedChapter?.sections || [];
+  const selectedSectionQuestions = sectionFocus
+    ? selectedChapterQuestions.filter(
+        (question) => question.knowledgeSection === sectionFocus,
+      )
+    : selectedChapterQuestions;
   const selectedKnowledgePoints = selectedChapter
     ? [
         ...new Set([
-          ...(selectedChapter.knowledgePoints || []),
-          ...selectedChapterQuestions.map(
+          ...(sectionFocus
+            ? selectedChapterSections.find(
+                (section) => section.name === sectionFocus,
+              )?.knowledgePoints || []
+            : selectedChapterSections.length
+              ? []
+              : selectedChapter.knowledgePoints || []),
+          ...selectedSectionQuestions.map(
             (question) =>
               question.targetKnowledgePoint || question.knowledgePoint,
           ),
@@ -1897,10 +1919,22 @@ function App() {
           {page === "chapters" && (
             <>
               <Heading
-                title={chapterFocus ? `${chapterFocus} · 知识点` : "章节练习"}
+                title={
+                  !chapterFocus
+                    ? "章节练习"
+                    : sectionFocus
+                      ? `${sectionFocus} · 三级知识点`
+                      : selectedChapterSections.length
+                        ? `${chapterFocus} · 二级分类`
+                        : `${chapterFocus} · 知识点`
+                }
                 subtitle={
                   chapterFocus
-                    ? `${selectedChapterQuestions.length} 道题 · ${selectedKnowledgePoints.length} 个知识点`
+                    ? sectionFocus
+                      ? `${selectedSectionQuestions.length} 道题 · ${selectedKnowledgePoints.length} 个考点`
+                      : selectedChapterSections.length
+                        ? `${selectedChapterQuestions.length} 道题 · ${selectedChapterSections.filter((section) => section.total > 0).length} 个二级分类`
+                        : `${selectedChapterQuestions.length} 道题 · ${selectedKnowledgePoints.length} 个知识点`
                     : `${dashboard.chapters.length} 个${dashboard.syllabus ? "考点模块" : "章节"} · ${dashboard.banks.map((bank) => `${allQuestions.filter((q) => q.source === bank.source).length} 道${bank.name}`).join(" · ")}`
                 }
               />
@@ -1983,18 +2017,35 @@ function App() {
                   start={openChapter}
                 />
               ) : selectedChapter ? (
-                <KnowledgePointGrid
-                  chapter={selectedChapter.name}
-                  points={selectedKnowledgePoints}
-                  questions={selectedChapterQuestions}
-                  mastery={dashboard.mastery}
-                  start={start}
-                  back={() => setChapterFocus("")}
-                />
+                selectedChapterSections.length && !sectionFocus ? (
+                  <KnowledgeSectionGrid
+                    chapter={selectedChapter.name}
+                    sections={selectedChapterSections}
+                    questions={selectedChapterQuestions}
+                    start={start}
+                    select={(name) => setSectionFocus(name)}
+                    back={() => setChapterFocus("")}
+                  />
+                ) : (
+                  <KnowledgePointGrid
+                    chapter={`${selectedChapter.name}${sectionFocus ? ` · ${sectionFocus}` : ""}`}
+                    points={selectedKnowledgePoints}
+                    questions={selectedSectionQuestions}
+                    mastery={dashboard.mastery}
+                    start={start}
+                    back={() =>
+                      sectionFocus
+                        ? setSectionFocus("")
+                        : setChapterFocus("")
+                    }
+                    backLabel={sectionFocus ? "返回二级分类" : "返回章节"}
+                    allLabel={sectionFocus ? "练习本分类全部题" : "练习本章全部题"}
+                  />
+                )
               ) : (
                 <Empty title="找不到这个科目">
                   <button className="primary" onClick={() => setChapterFocus("")}>
-                    返回四大科目
+                    返回章节
                   </button>
                 </Empty>
               )}
@@ -2259,6 +2310,74 @@ function ChapterGrid({ chapters, start }) {
     </div>
   );
 }
+function KnowledgeSectionGrid({
+  chapter,
+  sections,
+  questions,
+  start,
+  select,
+  back,
+}) {
+  const groups = sections.map((section) => {
+    const sectionQuestions = questions.filter(
+      (question) => question.knowledgeSection === section.name,
+    );
+    return {
+      ...section,
+      questions: sectionQuestions,
+      attempted: sectionQuestions.filter((question) => question.attempted).length,
+    };
+  });
+  return (
+    <>
+      <div className="chapter-drilldown-toolbar">
+        <button className="text-button" onClick={back}>
+          <ArrowLeft size={15} />
+          返回章节
+        </button>
+        <button
+          className="primary"
+          disabled={!questions.length}
+          onClick={() => start(questions, chapter)}
+        >
+          练习本章全部题
+          <ArrowRight size={15} />
+        </button>
+      </div>
+      <div className="knowledge-point-grid">
+        {groups.map((group, index) => (
+          <button
+            className="knowledge-point-item"
+            key={group.name}
+            disabled={!group.questions.length}
+            onClick={() => select(group.name)}
+          >
+            <div className={"knowledge-point-icon tone-" + (index % 4)}>
+              <Network size={19} />
+            </div>
+            <div className="knowledge-point-info">
+              <strong>{group.name}</strong>
+              <small>
+                {group.questions.length} 题 <span>·</span> 已练 {group.attempted} 题
+              </small>
+              <div className="progress">
+                <i
+                  style={{
+                    width:
+                      group.questions.length > 0
+                        ? Math.min(100, (group.attempted / group.questions.length) * 100) + "%"
+                        : "0%",
+                  }}
+                />
+              </div>
+            </div>
+            <ChevronRight size={17} />
+          </button>
+        ))}
+      </div>
+    </>
+  );
+}
 function KnowledgePointGrid({
   chapter,
   points,
@@ -2266,6 +2385,8 @@ function KnowledgePointGrid({
   mastery,
   start,
   back,
+  backLabel = "返回章节",
+  allLabel = "练习本章全部题",
 }) {
   const groups = points.map((knowledgePoint) => {
     const pointQuestions = questions.filter(
@@ -2284,14 +2405,14 @@ function KnowledgePointGrid({
       <div className="chapter-drilldown-toolbar">
         <button className="text-button" onClick={back}>
           <ArrowLeft size={15} />
-          返回四大科目
+          {backLabel}
         </button>
         <button
           className="primary"
           disabled={!questions.length}
           onClick={() => start(questions, chapter)}
         >
-          练习本章全部题
+          {allLabel}
           <ArrowRight size={15} />
         </button>
       </div>
@@ -3986,6 +4107,7 @@ function AdminView({
   const [adminQuestionTotal, setAdminQuestionTotal] = useState(0);
   const [questionPage, setQuestionPage] = useState(0);
   const [questionChapter, setQuestionChapter] = useState("");
+  const [questionKnowledgeSection, setQuestionKnowledgeSection] = useState("");
   const [questionKnowledgePoint, setQuestionKnowledgePoint] = useState("");
   const [questionSource, setQuestionSource] = useState("");
   const [questionSearchInput, setQuestionSearchInput] = useState("");
@@ -4001,6 +4123,7 @@ function AdminView({
     currentCertificateId || certificates[0]?.id || "",
   );
   const [chapter, setChapter] = useState("");
+  const [knowledgeSection, setKnowledgeSection] = useState("");
   const [knowledgePoint, setKnowledgePoint] = useState("");
   const [count, setCount] = useState(5);
   const [difficulty, setDifficulty] = useState("");
@@ -4018,6 +4141,8 @@ function AdminView({
         offset: String(page * 50),
       });
       if (questionChapter) params.set("chapter", questionChapter);
+      if (questionKnowledgeSection)
+        params.set("knowledgeSection", questionKnowledgeSection);
       if (questionKnowledgePoint)
         params.set("knowledgePoint", questionKnowledgePoint);
       if (questionSource) params.set("source", questionSource);
@@ -4076,6 +4201,7 @@ function AdminView({
     certificateId,
     questionPage,
     questionChapter,
+    questionKnowledgeSection,
     questionKnowledgePoint,
     questionSource,
     questionSearch,
@@ -4088,22 +4214,34 @@ function AdminView({
     const item = taxonomy?.certificates.find((entry) => entry.id === certificateId);
     const nextChapter = item?.chapters.find((entry) => entry.name === chapter) || item?.chapters[0];
     if (nextChapter && nextChapter.name !== chapter) setChapter(nextChapter.name);
-    const nextPoint = nextChapter?.knowledgePoints.includes(knowledgePoint)
+    const sections = nextChapter?.sections || [];
+    const nextSection = sections.some((section) => section.name === knowledgeSection)
+      ? knowledgeSection
+      : sections[0]?.name || "";
+    if (nextSection !== knowledgeSection) setKnowledgeSection(nextSection);
+    const selectedSection = sections.find((section) => section.name === nextSection);
+    const sectionPoints = selectedSection?.knowledgePoints || nextChapter?.knowledgePoints || [];
+    const nextPoint = sectionPoints.includes(knowledgePoint)
       ? knowledgePoint
-      : nextChapter?.knowledgePoints[0] || "";
+      : sectionPoints[0] || "";
     if (nextPoint !== knowledgePoint) setKnowledgePoint(nextPoint);
-  }, [taxonomy, certificateId, chapter, knowledgePoint]);
+  }, [taxonomy, certificateId, chapter, knowledgeSection, knowledgePoint]);
   const selectedCertificate = taxonomy?.certificates.find(
     (entry) => entry.id === certificateId,
   );
   const selectedChapter = selectedCertificate?.chapters.find(
     (entry) => entry.name === chapter,
   );
+  const selectedSection = selectedChapter?.sections?.find(
+    (entry) => entry.name === knowledgeSection,
+  );
   const changeCertificate = (value) => {
     setCertificateId(value);
     setChapter("");
+    setKnowledgeSection("");
     setKnowledgePoint("");
     setQuestionChapter("");
+    setQuestionKnowledgeSection("");
     setQuestionKnowledgePoint("");
     setQuestionPage(0);
     setFeedbackPage(0);
@@ -4137,6 +4275,7 @@ function AdminView({
         {
           certificateId,
           chapter,
+          ...(knowledgeSection ? { knowledgeSection } : {}),
           knowledgePoint,
           count: +count,
           ...(difficulty ? { difficulty } : {}),
@@ -4234,6 +4373,9 @@ function AdminView({
     : [];
   const selectedQuestionChapter = selectedCertificate?.chapters.find(
     (item) => item.name === questionChapter,
+  );
+  const selectedQuestionSection = selectedQuestionChapter?.sections?.find(
+    (item) => item.name === questionKnowledgeSection,
   );
   const questionTotalPages = Math.max(1, Math.ceil(adminQuestionTotal / 50));
   const feedbackTotalPages = Math.max(1, Math.ceil(feedbackTotal / 50));
@@ -4371,6 +4513,7 @@ function AdminView({
                   value={chapter}
                   onChange={(event) => {
                     setChapter(event.target.value);
+                    setKnowledgeSection("");
                     setKnowledgePoint("");
                   }}
                 >
@@ -4381,6 +4524,25 @@ function AdminView({
                   ))}
                 </select>
               </label>
+              {selectedChapter?.sections?.length > 0 && (
+                <label>
+                  二级分类
+                  <select
+                    aria-label="扩充二级分类"
+                    value={knowledgeSection}
+                    onChange={(event) => {
+                      setKnowledgeSection(event.target.value);
+                      setKnowledgePoint("");
+                    }}
+                  >
+                    {(selectedChapter.sections || []).map((item) => (
+                      <option key={item.name} value={item.name}>
+                        {item.name}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              )}
               <label className="wide">
                 知识点
                 <select
@@ -4388,7 +4550,11 @@ function AdminView({
                   value={knowledgePoint}
                   onChange={(event) => setKnowledgePoint(event.target.value)}
                 >
-                  {(selectedChapter?.knowledgePoints || []).map((item) => (
+                  {(
+                    selectedSection?.knowledgePoints ||
+                    selectedChapter?.knowledgePoints ||
+                    []
+                  ).map((item) => (
                     <option key={item} value={item}>
                       {item}
                     </option>
@@ -4439,6 +4605,7 @@ function AdminView({
                   <article key={question.id} className="admin-question-preview">
                     <div className="question-meta">
                       <span className="badge green">已入库</span>
+                      {question.knowledgeSection && <span>{question.knowledgeSection}</span>}
                       <span>{question.knowledgePoint}</span>
                       <span>{diff[question.difficulty] || question.difficulty}</span>
                     </div>
@@ -4460,7 +4627,7 @@ function AdminView({
               <h2>
                 <List size={20} /> 题目列表
               </h2>
-              <p>按证书、章节、知识点、来源或关键词查看题目，并可直接处理单题。</p>
+              <p>按证书、章节、二级分类、知识点、来源或关键词查看题目，并可直接处理单题。</p>
             </div>
             <span className="badge green">共 {adminQuestionTotal.toLocaleString()} 道</span>
           </div>
@@ -4491,12 +4658,31 @@ function AdminView({
                 value={questionChapter}
                 onChange={(event) => {
                   setQuestionChapter(event.target.value);
+                  setQuestionKnowledgeSection("");
                   setQuestionKnowledgePoint("");
                   setQuestionPage(0);
                 }}
               >
                 <option value="">全部章节</option>
                 {(selectedCertificate?.chapters || []).map((item) => (
+                  <option key={item.name} value={item.name}>
+                    {item.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              二级分类
+              <select
+                value={questionKnowledgeSection}
+                onChange={(event) => {
+                  setQuestionKnowledgeSection(event.target.value);
+                  setQuestionKnowledgePoint("");
+                  setQuestionPage(0);
+                }}
+              >
+                <option value="">全部分类</option>
+                {(selectedQuestionChapter?.sections || []).map((item) => (
                   <option key={item.name} value={item.name}>
                     {item.name}
                   </option>
@@ -4513,7 +4699,11 @@ function AdminView({
                 }}
               >
                 <option value="">全部知识点</option>
-                {(selectedQuestionChapter?.knowledgePoints || []).map((item) => (
+                {(
+                  selectedQuestionSection?.knowledgePoints ||
+                  selectedQuestionChapter?.knowledgePoints ||
+                  []
+                ).map((item) => (
                   <option key={item} value={item}>
                     {item}
                   </option>
@@ -4566,6 +4756,7 @@ function AdminView({
                       <span className="badge green">#{questionPage * 50 + rowIndex + 1}</span>
                       <span>{sourceName(question)}</span>
                       <span>{question.chapter}</span>
+                      {question.knowledgeSection && <span>{question.knowledgeSection}</span>}
                       <span>{question.targetKnowledgePoint || question.knowledgePoint}</span>
                       {question.feedback?.reportTotal ? (
                         <span className="badge red">
@@ -4683,6 +4874,7 @@ function AdminView({
                         <span className="badge red"><Flag size={13} /> {reason?.label || row.kind}</span>
                         <span>{row.username || "匿名用户"}</span>
                         <span>{row.question.chapter}</span>
+                        {row.question.knowledgeSection && <span>{row.question.knowledgeSection}</span>}
                         <span>{row.question.targetKnowledgePoint || row.question.knowledgePoint}</span>
                       </div>
                       <small>{new Date(row.createdAt).toLocaleString("zh-CN")}</small>
@@ -5000,7 +5192,7 @@ function GenericPractice({ session, refresh, run, busy, train, configured, exit 
     <>
       <Heading
         title={session.title}
-        subtitle={`${q.chapter} · ${q.knowledgePoint}`}
+        subtitle={`${q.chapter}${q.knowledgeSection ? ` · ${q.knowledgeSection}` : ""} · ${q.targetKnowledgePoint || q.knowledgePoint}`}
       >
         <button onClick={exit}>
           <ArrowLeft size={16} />
@@ -5737,7 +5929,8 @@ function VeterinaryPractice({ session, refresh, run, busy, train, exit }) {
           <div className="question-meta">
             <span className="badge">{questionTypeName(q)}</span>
             <span>{diff[q.difficulty]}</span>
-            <span>{q.knowledgePoint}</span>
+            {q.knowledgeSection && <span>{q.knowledgeSection}</span>}
+            <span>{q.targetKnowledgePoint || q.knowledgePoint}</span>
             {q.sharedGroupId && <span>管理员已分组</span>}
           </div>
           <QuestionImages question={q} />

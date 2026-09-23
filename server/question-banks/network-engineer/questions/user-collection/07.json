@@ -13,8 +13,8 @@
     ],
     "analysis": "需要100个子网，借用7位（2^7=128≥100），剩余9位主机位（2^9-2=510≥500），掩码为255.255.254.0（/23）。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "子网划分与 CIDR",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "VLSM子网划分",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -27,7 +27,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q002",
@@ -43,8 +44,8 @@
     ],
     "analysis": "容纳8台主机需2^h-2≥8，h=4时2^4-2=14≥8，需要4位主机位，网络位=32-4=28位，即/28（255.255.255.240）。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "子网划分与 CIDR",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "VLSM子网划分",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -62,7 +63,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q003",
@@ -78,8 +80,8 @@
     ],
     "analysis": "掩码255.255.255.192=/26，块大小=256-192=64。子网：0,64,128,192。70在64-127范围内，网络地址为192.168.10.64，广播地址192.168.10.127。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "子网网络地址",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "VLSM子网划分",
     "difficulty": "medium",
     "tags": [
       "子网网络地址",
@@ -97,7 +99,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q004",
@@ -113,8 +116,8 @@
     ],
     "analysis": "掩码/27，块大小32。子网：0,32,64...。33在32-63范围内，网络地址10.10.1.32，广播地址=下一个子网地址-1=64-1=63，即10.10.1.63。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "子网广播地址",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "VLSM子网划分",
     "difficulty": "medium",
     "tags": [
       "子网广播地址",
@@ -132,7 +135,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q005",
@@ -148,8 +152,8 @@
     ],
     "analysis": "主机位n，2^n-2≥10000，n≥14位（2^14-2=16382≥10000）。网络位=32-14=18位，掩码255.255.128.0（/18）。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "子网划分与 CIDR",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "VLSM子网划分",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -167,7 +171,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q006",
@@ -183,8 +188,8 @@
     ],
     "analysis": "172.24.0.0-172.24.7.255共8个C类，掩码21位（/21=255.255.248.0）。总地址数2^11=2048，减去网络号和广播，可用主机=2048-2=2046。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "子网网络地址",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "CIDR与路由聚合",
     "difficulty": "medium",
     "tags": [
       "子网网络地址",
@@ -202,7 +207,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q007",
@@ -218,8 +224,8 @@
     ],
     "analysis": "2^h-2≥50，h=6时2^6-2=62≥50，h=5时2^5-2=30<50。故主机位最少6位，网络位=32-6=26位（/26），可划分2^2=4个子网（借用2位）。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "子网划分与 CIDR",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "VLSM子网划分",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -237,7 +243,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q008",
@@ -253,8 +260,8 @@
     ],
     "analysis": "CIDR（无类别域间路由）消除了分类地址概念，使用VLSM（可变长子网掩码），支持路由聚合（将多条连续子网路由合并为一条汇总路由），大幅减少路由表条目。以上都是CIDR的特点。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "OSPF DR/BDR",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "CIDR与路由聚合",
     "difficulty": "medium",
     "tags": [
       "OSPF DR/BDR",
@@ -267,7 +274,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q009",
@@ -283,8 +291,8 @@
     ],
     "analysis": "172.16.26.0/23：掩码255.255.254.0，块大小2。子网：172.16.26.0和172.16.28.0，26.0正好是网络号。A：/26块64，126在64子网（64-127），不是网络号。B：/24网络号是10.0.2.0。D：/22块4，128在124子网（124-127），不是网络号。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "子网网络地址",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "IPv4地址类别与特殊地址",
     "difficulty": "medium",
     "tags": [
       "子网网络地址",
@@ -297,7 +305,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q010",
@@ -313,8 +322,8 @@
     ],
     "analysis": "每个C类可容纳254台主机。1000/254≈3.94，向上取整需4个C类。4个C类聚合需借用2位网络位（2^2=4），掩码从/24变为/22，即255.255.252.0。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "子网划分与 CIDR",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "CIDR与路由聚合",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -327,7 +336,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q012",
@@ -343,8 +353,8 @@
     ],
     "analysis": "169.254.0.0/16是APIPA（链路本地地址），不是RFC 1918定义的私有地址。私有地址范围：10.0.0.0/8（A类）、172.16.0.0/12（B类，172.16-31）、192.168.0.0/16（C类）。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "IP地址与子网划分",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "IPv4地址类别与特殊地址",
     "difficulty": "medium",
     "tags": [
       "IP地址与子网划分",
@@ -357,7 +367,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q013",
@@ -373,8 +384,8 @@
     ],
     "analysis": "240=11110000，借用4位主机位作为子网位，可划分2^4=16个子网。剩余4位主机位，可用主机数=2^4-2=14台（减去网络地址和广播地址）。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "子网划分与 CIDR",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "VLSM子网划分",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -387,7 +398,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q014",
@@ -403,8 +415,8 @@
     ],
     "analysis": "VLSM（可变长子网掩码）允许在同一主类网络（如一个C类地址）中根据不同子网的主机数量需求使用不同长度的子网掩码，从而更高效地利用IP地址，减少浪费。VLSM是CIDR的基础，RIPv2、OSPF、EIGRP、BGP等无类路由协议支持VLSM。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "子网划分与 CIDR",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "VLSM子网划分",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -417,7 +429,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q015",
@@ -433,8 +446,8 @@
     ],
     "analysis": "C类/24借3位，网络位变为27位（/27），主机位剩余5位。可用主机数=2^5-2=30台（减去网络地址和广播地址）。可划分2^3=8个子网。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "子网划分与 CIDR",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "VLSM子网划分",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -452,7 +465,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q016",
@@ -468,8 +482,8 @@
     ],
     "analysis": "广播地址的主机位全为1，用于向该子网内所有主机发送数据。广播地址不能作为源地址。255.255.255.255是受限广播地址（本地广播，路由器不转发），定向广播地址是特定子网的广播地址（如192.168.1.255/24）。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "子网广播地址",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "网络地址、广播地址与可用主机",
     "difficulty": "medium",
     "tags": [
       "子网广播地址",
@@ -482,7 +496,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q017",
@@ -498,8 +513,8 @@
     ],
     "analysis": "A类1-126，B类128-191，C类192-223，D类224-239。202在192-223范围内，属于C类地址。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "IPv4",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "IPv4地址类别与特殊地址",
     "difficulty": "medium",
     "tags": [
       "IPv4",
@@ -517,7 +532,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q018",
@@ -533,8 +549,8 @@
     ],
     "analysis": "子网划分后，每个子网都需要保留网络地址和广播地址（各1个不可用），子网数量越多，不可用地址越多，可用主机总数会减少（而非增加）。子网划分提高了地址利用率（按需分配）、隔离了广播域、便于管理。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "子网划分与 CIDR",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "VLSM子网划分",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -547,7 +563,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q019",
@@ -563,8 +580,8 @@
     ],
     "analysis": "需要6个子网，借用3位（2^3=8≥6），剩余5位主机位（2^5-2=30≥30），掩码为255.255.255.224（/27）。每个子网可用主机30台，共8个子网（可用6个，全0全1在早期设备中保留，现代设备均可用）。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "子网划分与 CIDR",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "VLSM子网划分",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -582,7 +599,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q020",
@@ -598,8 +616,8 @@
     ],
     "analysis": "/60到/64借用了4位（64-60=4），可划分2^4=16个/64子网。IPv6子网划分通常在/64边界进行，因为/64是标准子网前缀（SLAAC无状态自动配置需要/64）。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "IPv6",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "地址表示与地址类型",
     "difficulty": "medium",
     "tags": [
       "IPv6",
@@ -612,7 +630,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv6"
   },
   {
     "id": "collection-c07-q021",
@@ -628,8 +647,8 @@
     ],
     "analysis": "网络地址（子网地址）的主机位全为0，用于标识一个子网，不能分配给主机使用。广播地址的主机位全为1，也不能分配给主机。可用主机地址是网络地址和广播地址之间的地址。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "子网网络地址",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "网络地址、广播地址与可用主机",
     "difficulty": "medium",
     "tags": [
       "子网网络地址",
@@ -647,7 +666,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q022",
@@ -663,8 +683,8 @@
     ],
     "analysis": "/8到/24借用了16位（24-8=16），可划分2^16=65536个/24子网。每个/24子网有256个地址（254个可用主机）。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "子网划分与 CIDR",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "VLSM子网划分",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -682,7 +702,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q023",
@@ -698,8 +719,8 @@
     ],
     "analysis": "超网（Supernetting）是子网划分的反向操作，将多个连续的较小网络（如多个C类网络）合并为一个较大的网络，使用比默认掩码更短的掩码。超网可以减少路由表条目（路由聚合），是CIDR的重要应用。例如将4个连续C类合并为一个/22超网。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "IP地址与子网划分",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "CIDR与路由聚合",
     "difficulty": "medium",
     "tags": [
       "IP地址与子网划分",
@@ -712,7 +733,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q024",
@@ -728,8 +750,8 @@
     ],
     "analysis": "/27块大小32。33在32-63子网内，网络地址10.10.1.32，广播地址10.10.1.63。可用主机地址范围是网络地址+1到广播地址-1，即10.10.1.33-10.10.1.62，共30个可用地址。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "子网划分与 CIDR",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "网络地址、广播地址与可用主机",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -747,7 +769,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q025",
@@ -763,8 +786,8 @@
     ],
     "analysis": "D类地址（224.0.0.0-239.255.255.255）用于组播（多播），不是单播。A类网络位8位主机位24位，B类各16位，C类网络位24位主机位8位。E类（240-255）保留用于实验。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "IPv4",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "IPv4地址类别与特殊地址",
     "difficulty": "medium",
     "tags": [
       "IPv4",
@@ -777,7 +800,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q026",
@@ -793,8 +817,8 @@
     ],
     "analysis": "248=11111000，主机位3位。可用主机数=2^3-2=8-2=6台（减去网络地址和广播地址）。可划分的子网数取决于借用了多少位作为子网位。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "子网划分与 CIDR",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "VLSM子网划分",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -812,7 +836,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q027",
@@ -828,8 +853,8 @@
     ],
     "analysis": "默认路由用0.0.0.0/0表示，匹配所有目的地址（最长匹配原则下最后匹配）。当路由表中没有更具体的匹配路由时，使用默认路由转发。默认路由可以是静态配置的，也可以是动态路由协议发布的。IPv6的默认路由是::/0。默认路由优先级不是最高，而是最低（最后匹配）。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "路由选择",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "路由表、静态路由与默认路由",
     "difficulty": "medium",
     "tags": [
       "路由选择",
@@ -842,7 +867,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "路由基础"
   },
   {
     "id": "collection-c07-q028",
@@ -858,8 +884,8 @@
     ],
     "analysis": "192.168.1.0-192.168.4.0，需要覆盖1-4。/22（块4）覆盖0-3或4-7，无法同时覆盖1-4。/21（块8）覆盖0-7，可以包含1-4。虽然/21包含了额外的0和5-7，但这是能同时覆盖1-4的最短掩码（最精确聚合）。实际中如果这4个网络是连续的1-4，最佳聚合是/21。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "IP地址与子网划分",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "网络地址、广播地址与可用主机",
     "difficulty": "medium",
     "tags": [
       "IP地址与子网划分",
@@ -872,7 +898,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q029",
@@ -888,8 +915,8 @@
     ],
     "analysis": "子网掩码必须由连续的1后跟连续的0组成（如11111111.11111111.11111111.10000000），不能是任意的32位二进制数（如10101010这种不连续的是无效的子网掩码）。掩码中1对应网络位，0对应主机位，用于区分网络位和主机位。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "子网划分与 CIDR",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "VLSM子网划分",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -902,7 +929,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q030",
@@ -918,8 +946,8 @@
     ],
     "analysis": "/23到/27借用了4位（27-23=4），可划分2^4=16个子网。/27主机位5位，可用主机数=2^5-2=30台。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "子网划分与 CIDR",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "VLSM子网划分",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -932,7 +960,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q032",
@@ -948,8 +977,8 @@
     ],
     "analysis": "IPv6地址可以使用双冒号::压缩连续的全零段，但::在一个地址中只能使用一次（否则无法确定每段零的数量）。IPv6地址长度128位，使用冒分十六进制表示（8段，每段16位），每段中的前导零可以省略。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "IPv6",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "地址表示与地址类型",
     "difficulty": "medium",
     "tags": [
       "IPv6",
@@ -962,7 +991,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv6"
   },
   {
     "id": "collection-c07-q033",
@@ -978,8 +1008,8 @@
     ],
     "analysis": "超网（Supernetting）是子网划分的反向操作，将多个连续的较小网络（如多个C类网络）合并为一个较大的网络，使用比默认掩码更短的掩码（如4个C类/24合并为/22）。超网可以减少路由表条目（路由聚合/路由汇总），是CIDR的重要应用。选项C说反了，超网减少而非增加路由表条目。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "IP地址与子网划分",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "CIDR与路由聚合",
     "difficulty": "medium",
     "tags": [
       "IP地址与子网划分",
@@ -992,7 +1022,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q036",
@@ -1008,8 +1039,8 @@
     ],
     "analysis": "默认路由0.0.0.0/0匹配所有目的地址（前缀最短，最长匹配原则下最后匹配），当路由表中没有更具体的匹配路由时使用。默认路由可以静态配置（ip route 0.0.0.0 0.0.0.0 下一跳），也可以由动态路由协议发布（如OSPF的default-information originate、BGP发布默认路由）。IPv6的默认路由是::/0。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "路由选择",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "路由表、静态路由与默认路由",
     "difficulty": "medium",
     "tags": [
       "路由选择",
@@ -1022,7 +1053,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "路由基础"
   },
   {
     "id": "collection-c07-q038",
@@ -1038,8 +1070,8 @@
     ],
     "analysis": "子网掩码（Subnet Mask）是32位二进制数，由连续的1后跟连续的0组成（如11111111.11111111.11111111.10000000=255.255.255.128）。掩码中1对应网络位（含子网位），0对应主机位。子网掩码与IP地址按位与运算得到网络地址。CIDR表示法中用前缀长度表示（如/24表示前24位为网络位）。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "子网划分与 CIDR",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "VLSM子网划分",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -1052,7 +1084,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q041",
@@ -1068,8 +1101,8 @@
     ],
     "analysis": "VLSM（可变长子网掩码）允许在同一主类网络中根据不同子网的主机数量需求使用不同长度的子网掩码，从而更高效地利用IP地址，减少浪费。VLSM需要无类路由协议（RIPv2、OSPF、EIGRP、IS-IS、BGP）支持，有类路由协议（RIPv1、IGRP）不支持VLSM（因为它们在路由更新中不发送子网掩码）。VLSM是CIDR的基础。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "子网划分与 CIDR",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "VLSM子网划分",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -1082,7 +1115,8 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c07-q043",
@@ -1098,8 +1132,8 @@
     ],
     "analysis": "广播地址的主机位全为1，用于向该子网内所有主机发送数据。广播地址不能作为源地址（源地址必须是单播地址或0.0.0.0）。255.255.255.255是受限广播地址（本地广播，路由器不转发，仅在本地网段传播）。定向广播地址（如192.168.1.255/24）是特定子网的广播地址，现代路由器默认不转发定向广播（防止Smurf攻击），但可配置允许转发。",
     "type": "single_choice",
-    "chapter": "IPv4 与子网划分",
-    "knowledgePoint": "子网广播地址",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "网络地址、广播地址与可用主机",
     "difficulty": "medium",
     "tags": [
       "子网广播地址",
@@ -1112,6 +1146,7 @@
         "sha256": "dd9b5158afa59e062f209adb52b3f0e27b8a148ab36d1caf74a8cb18f20ac67e"
       }
     ],
-    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份"
+    "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
+    "knowledgeSection": "IPv4与子网"
   }
 ]

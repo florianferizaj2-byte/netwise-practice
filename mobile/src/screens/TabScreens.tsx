@@ -60,6 +60,7 @@ type ScreenProps = {
   practiceSession?: PracticeSession;
   practiceSource?: PracticeSource;
   practiceChapter?: string;
+  practiceKnowledgeSection?: string;
   practiceKnowledgePoint?: string;
   practiceSelectionComplete?: boolean;
   practiceQuestionId?: string;
@@ -157,9 +158,13 @@ function shuffleQuestions(items: Question[]) {
   return shuffled;
 }
 
-async function loadDailyPracticeQuestions(chapter?: string, knowledgePoint?: string) {
-  const filters = { chapter, knowledgePoint };
-  const hasSelection = Boolean(chapter || knowledgePoint);
+async function loadDailyPracticeQuestions(
+  chapter?: string,
+  knowledgeSection?: string,
+  knowledgePoint?: string,
+) {
+  const filters = { chapter, knowledgeSection, knowledgePoint };
+  const hasSelection = Boolean(chapter || knowledgeSection || knowledgePoint);
   const selectedQuestions = await mobileApi.questions(
     DAILY_PRACTICE_COUNT,
     0,
@@ -340,6 +345,7 @@ function PracticePicker({
   const [loading, setLoading] = useState(!preview);
   const [error, setError] = useState('');
   const [expandedChapters, setExpandedChapters] = useState<Set<string>>(() => new Set());
+  const [expandedSections, setExpandedSections] = useState<Set<string>>(() => new Set());
 
   useEffect(() => {
     if (preview) {
@@ -561,35 +567,130 @@ function PracticePicker({
               </Text>
               {expandedChapters.has(chapter.name) && (
                 <View style={styles.pickerKnowledgeList}>
-                  {chapter.knowledgePoints.map((point) => (
-                    <AnimatedPressable
-                      accessibilityLabel={`练习知识点 ${point.name}`}
-                      key={point.name}
-                      onPress={() =>
-                        onNavigate('practice', {
-                          practiceMode: isDailyPractice ? 'random' : practiceMode,
-                          practiceSession: isDailyPractice ? 'daily' : 'standard',
-                          practiceSource: 'all',
-                          practiceChapter: chapter.name,
-                          practiceKnowledgePoint: point.name,
-                          practiceSelectionComplete: isDailyPractice,
-                        })
-                      }
-                      style={styles.pickerKnowledgeItem}
-                    >
-                      <View style={styles.pickerKnowledgeTop}>
-                        <Text style={styles.pickerKnowledgeName}>{point.name}</Text>
-                        <Text style={styles.pickerKnowledgeMeta}>
-                          已刷 {point.attemptedCount}/{point.questionCount} 题
-                        </Text>
-                      </View>
-                      <AnimatedProgressBar
-                        color={colors.brand}
-                        trackColor={colors.surfaceMuted}
-                        value={point.progress}
-                      />
-                    </AnimatedPressable>
-                  ))}
+                  {chapter.sections?.length
+                    ? chapter.sections.map((section) => {
+                        const sectionKey = `${chapter.name}/${section.name}`;
+                        const isExpanded = expandedSections.has(sectionKey);
+                        return (
+                          <View key={section.name} style={styles.pickerSectionBlock}>
+                            <View style={styles.pickerSectionHeader}>
+                              <AnimatedPressable
+                                accessibilityLabel={`练习二级分类 ${section.name}`}
+                                accessibilityRole="button"
+                                onPress={() =>
+                                  onNavigate('practice', {
+                                    practiceMode: isDailyPractice ? 'random' : practiceMode,
+                                    practiceSession: isDailyPractice ? 'daily' : 'standard',
+                                    practiceSource: 'all',
+                                    practiceChapter: chapter.name,
+                                    practiceKnowledgeSection: section.name,
+                                    practiceSelectionComplete: isDailyPractice,
+                                  })
+                                }
+                                style={styles.pickerSectionStart}
+                              >
+                                <View style={styles.pickerCardCopy}>
+                                  <Text style={styles.pickerKnowledgeName}>{section.name}</Text>
+                                  <Text style={styles.pickerCardMeta}>
+                                    {section.questionCount} 道题 · 已刷 {section.attemptedCount} 道
+                                  </Text>
+                                </View>
+                                <Text style={styles.pickerChapterProgress}>
+                                  {section.progress}%
+                                </Text>
+                              </AnimatedPressable>
+                              <AnimatedPressable
+                                accessibilityLabel={`${isExpanded ? '收起' : '展开'}${section.name}考点`}
+                                accessibilityRole="button"
+                                onPress={() =>
+                                  setExpandedSections((current) => {
+                                    const next = new Set(current);
+                                    if (next.has(sectionKey)) next.delete(sectionKey);
+                                    else next.add(sectionKey);
+                                    return next;
+                                  })
+                                }
+                                style={styles.pickerSectionExpand}
+                              >
+                                <Text style={styles.pickerChapterExpandText}>
+                                  {isExpanded ? '收起' : '考点'}
+                                </Text>
+                                <Text style={styles.pickerChapterExpandIcon}>
+                                  {isExpanded ? '⌃' : '⌄'}
+                                </Text>
+                              </AnimatedPressable>
+                            </View>
+                            <AnimatedProgressBar
+                              color={colors.brand}
+                              trackColor={colors.surfaceMuted}
+                              value={section.progress}
+                            />
+                            {isExpanded && (
+                              <View style={styles.pickerSectionPoints}>
+                                {section.knowledgePoints.map((point) => (
+                                  <AnimatedPressable
+                                    accessibilityLabel={`练习知识点 ${point.name}`}
+                                    key={point.name}
+                                    onPress={() =>
+                                      onNavigate('practice', {
+                                        practiceMode: isDailyPractice ? 'random' : practiceMode,
+                                        practiceSession: isDailyPractice ? 'daily' : 'standard',
+                                        practiceSource: 'all',
+                                        practiceChapter: chapter.name,
+                                        practiceKnowledgeSection: section.name,
+                                        practiceKnowledgePoint: point.name,
+                                        practiceSelectionComplete: isDailyPractice,
+                                      })
+                                    }
+                                    style={styles.pickerKnowledgeItem}
+                                  >
+                                    <View style={styles.pickerKnowledgeTop}>
+                                      <Text style={styles.pickerKnowledgeName}>{point.name}</Text>
+                                      <Text style={styles.pickerKnowledgeMeta}>
+                                        已刷 {point.attemptedCount}/{point.questionCount} 题
+                                      </Text>
+                                    </View>
+                                    <AnimatedProgressBar
+                                      color={colors.brand}
+                                      trackColor={colors.surfaceMuted}
+                                      value={point.progress}
+                                    />
+                                  </AnimatedPressable>
+                                ))}
+                              </View>
+                            )}
+                          </View>
+                        );
+                      })
+                    : chapter.knowledgePoints.map((point) => (
+                        <AnimatedPressable
+                          accessibilityLabel={`练习知识点 ${point.name}`}
+                          key={point.name}
+                          onPress={() =>
+                            onNavigate('practice', {
+                              practiceMode: isDailyPractice ? 'random' : practiceMode,
+                              practiceSession: isDailyPractice ? 'daily' : 'standard',
+                              practiceSource: 'all',
+                              practiceChapter: chapter.name,
+                              practiceKnowledgePoint: point.name,
+                              practiceSelectionComplete: isDailyPractice,
+                            })
+                          }
+                          style={styles.pickerKnowledgeItem}
+                        >
+                          <View style={styles.pickerKnowledgeTop}>
+                            <Text style={styles.pickerKnowledgeName}>{point.name}</Text>
+                            <Text style={styles.pickerKnowledgeMeta}>
+                              已刷 {point.attemptedCount}/{point.questionCount} 题
+                            </Text>
+                          </View>
+                          <AnimatedProgressBar
+                            color={colors.brand}
+                            trackColor={colors.surfaceMuted}
+                            value={point.progress}
+                          />
+                        </AnimatedPressable>
+                      ))}
                 </View>
               )}
             </EntranceView>
@@ -613,6 +714,7 @@ export function PracticeScreen({
   practiceSession = 'standard',
   practiceSource = 'all',
   practiceChapter,
+  practiceKnowledgeSection,
   practiceKnowledgePoint,
   practiceSelectionComplete = false,
   practiceQuestionId,
@@ -652,7 +754,7 @@ export function PracticeScreen({
     practiceSource === 'all' &&
     (isDailyPractice
       ? !practiceSelectionComplete
-      : !practiceChapter && !practiceKnowledgePoint);
+      : !practiceChapter && !practiceKnowledgeSection && !practiceKnowledgePoint);
 
   useEffect(() => {
     let mounted = true;
@@ -690,13 +792,18 @@ export function PracticeScreen({
     }
 
     const loadQuestions = isDailyPractice
-      ? loadDailyPracticeQuestions(practiceChapter, practiceKnowledgePoint)
+      ? loadDailyPracticeQuestions(
+          practiceChapter,
+          practiceKnowledgeSection,
+          practiceKnowledgePoint,
+        )
       : practiceSource === 'wrong'
         ? mobileApi.wrong()
         : practiceSource === 'favorites'
           ? mobileApi.favorites()
           : mobileApi.questions(undefined, 0, practiceMode === 'random', {
               chapter: practiceChapter,
+              knowledgeSection: practiceKnowledgeSection,
               knowledgePoint: practiceKnowledgePoint,
             });
 
@@ -732,6 +839,7 @@ export function PracticeScreen({
   }, [
     isDailyPractice,
     practiceChapter,
+    practiceKnowledgeSection,
     practiceKnowledgePoint,
     practiceMode,
     practiceQuestionId,
@@ -1138,6 +1246,7 @@ export function PracticeScreen({
   const modeLabel = practiceMode === 'random' ? '随机刷题' : '顺序刷题';
   const headerParts = [sourceLabel];
   if (!isDailyPractice) headerParts.push(modeLabel);
+  if (practiceKnowledgeSection) headerParts.push(practiceKnowledgeSection);
   if (practiceKnowledgePoint) headerParts.push(practiceKnowledgePoint);
   headerParts.push(`${questionIndex + 1}/${questions.length}`);
 
@@ -1174,6 +1283,9 @@ export function PracticeScreen({
       <EntranceView delay={50} distance={12} style={styles.questionCard}>
         <View style={styles.questionMetaRow}>
           <Text style={styles.questionType}>{isMultiple ? '多选题' : '单选题'}</Text>
+          {currentQuestion.knowledgeSection ? (
+            <Text style={styles.questionKnowledge}>{currentQuestion.knowledgeSection}</Text>
+          ) : null}
           <Text style={styles.questionKnowledge}>
             {currentQuestion.knowledgePoint ?? '综合练习'}
           </Text>
@@ -2646,6 +2758,39 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
   },
   pickerKnowledgeList: {
     gap: 4,
+  },
+  pickerSectionBlock: {
+    backgroundColor: colors.surfaceMuted,
+    borderRadius: radius.sm,
+    gap: 6,
+    padding: spacing.xs,
+  },
+  pickerSectionHeader: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: spacing.xs,
+  },
+  pickerSectionStart: {
+    alignItems: 'center',
+    backgroundColor: colors.surface,
+    borderRadius: radius.sm,
+    flex: 1,
+    flexDirection: 'row',
+    gap: spacing.xs,
+    minHeight: 46,
+    paddingHorizontal: spacing.sm,
+  },
+  pickerSectionExpand: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 2,
+    justifyContent: 'center',
+    minHeight: 42,
+    paddingHorizontal: spacing.xs,
+  },
+  pickerSectionPoints: {
+    gap: 4,
+    paddingLeft: spacing.sm,
   },
   pickerKnowledgeItem: {
     backgroundColor: colors.surfaceMuted,

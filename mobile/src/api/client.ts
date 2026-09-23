@@ -131,6 +131,7 @@ export type Question = {
   question: string;
   options: Record<string, string>;
   chapter?: string;
+  knowledgeSection?: string;
   knowledgePoint?: string;
   difficulty?: string;
   tags?: string[];
@@ -143,9 +144,18 @@ export type Question = {
 
 export type PracticeKnowledgePoint = {
   name: string;
+  knowledgeSection?: string;
   questionCount: number;
   attemptedCount: number;
   progress: number;
+};
+
+export type PracticeCatalogSection = {
+  name: string;
+  questionCount: number;
+  attemptedCount: number;
+  progress: number;
+  knowledgePoints: PracticeKnowledgePoint[];
 };
 
 export type PracticeCatalogChapter = {
@@ -154,6 +164,7 @@ export type PracticeCatalogChapter = {
   attemptedCount: number;
   progress: number;
   knowledgePoints: PracticeKnowledgePoint[];
+  sections?: PracticeCatalogSection[];
 };
 
 export type PracticeCatalogResponse = {
@@ -358,13 +369,18 @@ export const mobileApi = {
     limit?: number,
     offset = 0,
     random = false,
-    filters?: { chapter?: string; knowledgePoint?: string },
+    filters?: {
+      chapter?: string;
+      knowledgeSection?: string;
+      knowledgePoint?: string;
+    },
   ) {
     const params = new URLSearchParams();
     if (limit != null) params.set('limit', String(limit));
     if (offset) params.set('offset', String(offset));
     if (random) params.set('random', '1');
     if (filters?.chapter) params.set('chapter', filters.chapter);
+    if (filters?.knowledgeSection) params.set('knowledgeSection', filters.knowledgeSection);
     if (filters?.knowledgePoint) params.set('knowledgePoint', filters.knowledgePoint);
     return request<Question[]>(`/questions?${params.toString()}`);
   },

@@ -288,12 +288,24 @@ export class OpenAICompatibleProvider extends AIProvider {
   }
   context(q, selected, userId) {
     const knowledgePoint = q.targetKnowledgePoint || q.knowledgePoint;
+    const relatedQuestionIds = new Set(
+      this.store
+        .allQ()
+        .filter(
+          (question) =>
+            question.chapter === q.chapter &&
+            question.knowledgeSection === q.knowledgeSection &&
+            (question.targetKnowledgePoint || question.knowledgePoint) ===
+              knowledgePoint,
+        )
+        .map((question) => question.id),
+    );
     const history = this.store
         .allA(userId)
         .filter((a) => a.questionId === q.id),
       related = this.store
         .allA(userId)
-        .filter((a) => a.knowledgePoint === knowledgePoint);
+        .filter((attempt) => relatedQuestionIds.has(attempt.questionId));
     return {
       question: q,
       userSelection: selected ?? history.at(-1)?.selected ?? [],
@@ -306,7 +318,12 @@ export class OpenAICompatibleProvider extends AIProvider {
         : null,
       mastery: this.store
         .mastery(undefined, userId)
-        .find((m) => m.knowledgePoint === knowledgePoint),
+        .find(
+          (m) =>
+            m.knowledgePoint === knowledgePoint &&
+            m.chapter === q.chapter &&
+            (m.knowledgeSection || null) === (q.knowledgeSection || null),
+        ),
       recentAttempts: history.slice(-8),
     };
   }
@@ -383,6 +400,7 @@ export class OpenAICompatibleProvider extends AIProvider {
     const userId = options.userId || "local";
     const settings = options.settings || this.store.settings(userId);
     const target = seed.targetKnowledgePoint || seed.knowledgePoint;
+    const targetSection = seed.knowledgeSection;
     const existing = [...this.store.allQ(), ...(options.existing || [])];
     const difficulty = options.difficulty;
     const specs = Array.from({ length: count }, (_, index) => ({
@@ -407,10 +425,11 @@ export class OpenAICompatibleProvider extends AIProvider {
         ...(feedback ? { correction: feedback } : {}),
       }));
       const batch = await this.structured(
-        `一次生成 ${pending.length} 道题。所有题目必须围绕知识点“${target}”，章节必须严格为“${seed.chapter}”，题目之间要改变设问角度、情境或推理路径，不能只改数字或替换同义词。每题严格遵守对应 difficulty。返回 {"questions":[题目对象]}，不要返回 Markdown 或其他字段。题目对象的 type 只能是英文枚举 "single_choice"、"multiple_choice" 或 "true_false"；options 必须是 JSON 对象而不是数组，格式为 {"A":"...","B":"...","C":"...","D":"..."}；answer 必须是字母数组，例如单选 ["A"]、多选 ["A","C"]。如果 specs 中有 correction，必须优先修正该问题。`,
+        `一次生成 ${pending.length} 道题。所有题目必须围绕知识点“${target}”，章节必须严格为“${seed.chapter}”${targetSection ? `，二级分类必须严格为“${targetSection}”` : ""}，题目之间要改变设问角度、情境或推理路径，不能只改数字或替换同义词。每题严格遵守对应 difficulty。返回 {"questions":[题目对象]}，不要返回 Markdown 或其他字段。题目对象的 type 只能是英文枚举 "single_choice"、"multiple_choice" 或 "true_false"；options 必须是 JSON 对象而不是数组，格式为 {"A":"...","B":"...","C":"...","D":"..."}；answer 必须是字母数组，例如单选 ["A"]、多选 ["A","C"]。如果 specs 中有 correction，必须优先修正该问题。`,
         {
           certificateId: options.certificateId,
           chapter: seed.chapter,
+          ...(targetSection ? { knowledgeSection: targetSection } : {}),
           knowledgePoint: target,
           specs: requested,
           previousQuestions: [seed, ...existing, ...accepted.values()]
@@ -445,6 +464,7 @@ export class OpenAICompatibleProvider extends AIProvider {
         try {
           const draft = normalizeQuestionDraft(batch.questions[i], {
             chapter: seed.chapter,
+            ...(targetSection ? { knowledgeSection: targetSection } : {}),
             knowledgePoint: target,
             difficulty: request.difficulty,
           });
@@ -455,6 +475,8 @@ export class OpenAICompatibleProvider extends AIProvider {
           );
           if (raw.knowledgePoint !== target)
             throw new Error("题目知识点与扩充目标不一致");
+          if (targetSection && raw.knowledgeSection !== targetSection)
+            throw new Error("题目二级分类与扩充目标不一致");
           if (raw.difficulty !== request.difficulty)
             throw new Error("题目难度与扩充目标不一致");
           candidates.push({ index: request.index, question: raw });

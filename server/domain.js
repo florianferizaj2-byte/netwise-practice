@@ -201,6 +201,11 @@ export function normalizeQuestionDraft(raw, context = {}) {
       context.analysis,
     ),
     chapter: readDraftField(source, ["chapter", "章节"], context.chapter),
+    knowledgeSection: readDraftField(
+      source,
+      ["knowledgeSection", "二级分类", "分类"],
+      context.knowledgeSection,
+    ),
     knowledgePoint: readDraftField(
       source,
       ["knowledgePoint", "targetKnowledgePoint", "知识点"],
@@ -253,6 +258,7 @@ export const questionSchema = z
       .max(5),
     analysis: z.string().min(12).max(5000),
     chapter: z.string().min(1).max(100),
+    knowledgeSection: z.string().trim().min(1).max(100).optional(),
     knowledgePoint: z.string().min(1).max(100),
     difficulty: z.enum(["easy", "medium", "hard"]),
     tags: z.array(z.string().max(50)).min(1).max(12),

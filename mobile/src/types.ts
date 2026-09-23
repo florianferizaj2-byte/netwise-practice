@@ -19,6 +19,7 @@ export type NavigationOptions = {
   practiceSession?: PracticeSession;
   practiceSource?: PracticeSource;
   practiceChapter?: string;
+  practiceKnowledgeSection?: string;
   practiceKnowledgePoint?: string;
   practiceSelectionComplete?: boolean;
   practiceQuestionId?: string;

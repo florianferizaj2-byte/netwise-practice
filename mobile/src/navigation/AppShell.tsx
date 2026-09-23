@@ -61,6 +61,7 @@ export function AppShell() {
   const [practiceSession, setPracticeSession] = useState<PracticeSession>('standard');
   const [practiceSource, setPracticeSource] = useState<PracticeSource>('all');
   const [practiceChapter, setPracticeChapter] = useState<string | undefined>();
+  const [practiceKnowledgeSection, setPracticeKnowledgeSection] = useState<string | undefined>();
   const [practiceKnowledgePoint, setPracticeKnowledgePoint] = useState<string | undefined>();
   const [practiceSelectionComplete, setPracticeSelectionComplete] = useState(false);
   const [practiceQuestionId, setPracticeQuestionId] = useState<string | undefined>();
@@ -178,6 +179,7 @@ export function AppShell() {
     setPracticeMode('sequential');
     setPracticeSource('all');
     setPracticeChapter(undefined);
+    setPracticeKnowledgeSection(undefined);
     setPracticeKnowledgePoint(undefined);
     setPracticeSelectionComplete(false);
     setPracticeQuestionId(undefined);
@@ -212,6 +214,7 @@ export function AppShell() {
     setPracticeMode('sequential');
     setPracticeSource('all');
     setPracticeChapter(undefined);
+    setPracticeKnowledgeSection(undefined);
     setPracticeKnowledgePoint(undefined);
     setPracticeSelectionComplete(false);
     setPracticeQuestionId(undefined);
@@ -227,6 +230,7 @@ export function AppShell() {
       setPracticeSession(nextSession);
       setPracticeSource(options?.practiceSource ?? 'all');
       setPracticeChapter(options?.practiceChapter);
+      setPracticeKnowledgeSection(options?.practiceKnowledgeSection);
       setPracticeKnowledgePoint(options?.practiceKnowledgePoint);
       setPracticeSelectionComplete(options?.practiceSelectionComplete ?? false);
       setPracticeQuestionId(options?.practiceQuestionId);
@@ -308,6 +312,7 @@ export function AppShell() {
             practiceSession,
             practiceSource,
             practiceChapter,
+            practiceKnowledgeSection,
             practiceKnowledgePoint,
             practiceSelectionComplete,
             practiceQuestionId,
@@ -464,6 +469,7 @@ function renderScreen(
     practiceSession: PracticeSession;
     practiceSource: PracticeSource;
     practiceChapter?: string;
+    practiceKnowledgeSection?: string;
     practiceKnowledgePoint?: string;
     practiceSelectionComplete: boolean;
     practiceQuestionId?: string;

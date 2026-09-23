@@ -448,18 +448,28 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         ...new Set(
           questions.map((q) => q.targetKnowledgePoint || q.knowledgePoint),
         ),
-      ].map((knowledgePoint) => ({
-        userId: userId || "local",
-        knowledgePointId: knowledgePoint,
-        knowledgePoint,
-        chapter: questions.find(
-          (q) =>
-            (q.targetKnowledgePoint || q.knowledgePoint) === knowledgePoint,
-        ).chapter,
-        ...calculateMastery(
-          attempts.filter((a) => a.knowledgePoint === knowledgePoint),
-        ),
-      }));
+      ].map((knowledgePoint) => {
+        const pointQuestions = questions.filter(
+          (question) =>
+            (question.targetKnowledgePoint || question.knowledgePoint) ===
+            knowledgePoint,
+        );
+        const pointQuestionIds = new Set(
+          pointQuestions.map((question) => question.id),
+        );
+        return {
+          userId: userId || "local",
+          knowledgePointId: knowledgePoint,
+          knowledgePoint,
+          chapter: pointQuestions[0].chapter,
+          knowledgeSection: pointQuestions[0].knowledgeSection || null,
+          ...calculateMastery(
+            attempts.filter((attempt) =>
+              pointQuestionIds.has(attempt.questionId),
+            ),
+          ),
+        };
+      });
     },
     recordAttempt(
       questionId,
