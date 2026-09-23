@@ -62,8 +62,9 @@ export function AppShell() {
   const [practiceSource, setPracticeSource] = useState<PracticeSource>('all');
   const [practiceChapter, setPracticeChapter] = useState<string | undefined>();
   const [practiceKnowledgePoint, setPracticeKnowledgePoint] = useState<string | undefined>();
+  const [practiceSelectionComplete, setPracticeSelectionComplete] = useState(false);
+  const [practiceQuestionId, setPracticeQuestionId] = useState<string | undefined>();
   const [certificatePickerOpen, setCertificatePickerOpen] = useState(false);
-  const [versionChecked, setVersionChecked] = useState(false);
   const [sessionRestored, setSessionRestored] = useState(false);
   const [updateRelease, setUpdateRelease] = useState<AppVersionResponse | null>(null);
   const [versionCheckKey, setVersionCheckKey] = useState(0);
@@ -72,19 +73,37 @@ export function AppShell() {
 
   useEffect(() => {
     let mounted = true;
-    void mobileApi
-      .restoreSession()
-      .then((restoredSession) => {
-        if (!mounted || !restoredSession) return;
+    void mobileApi.restoreSession().then(({ session: restoredSession, shouldValidate }) => {
+      if (!mounted) return;
+      if (restoredSession) {
         setSession(restoredSession);
         setIsPreview(false);
-      })
-      .catch(() => {
-        // Keep the saved token for a later launch if this was only a network failure.
-      })
-      .finally(() => {
-        if (mounted) setSessionRestored(true);
-      });
+        setSessionRestored(true);
+      }
+      if (!shouldValidate) {
+        setSessionRestored(true);
+        return;
+      }
+
+      const refreshSession = () =>
+        mobileApi
+          .refreshSession()
+          .then((currentSession) => {
+            if (!mounted) return;
+            if (currentSession) setSession(currentSession);
+            else setSession(null);
+            setSessionRestored(true);
+          })
+          .catch(() => {
+            // Keep the cached session visible if this was only a network failure.
+            if (mounted) setSessionRestored(true);
+          });
+
+      void refreshSession();
+    }).catch(() => {
+      // Keep the saved token for a later launch if this was only a network failure.
+      if (mounted) setSessionRestored(true);
+    });
 
     return () => {
       mounted = false;
@@ -93,7 +112,6 @@ export function AppShell() {
 
   useEffect(() => {
     let mounted = true;
-    setVersionChecked(false);
     void mobileApi
       .appVersion(APP_VERSION)
       .then((release) => {
@@ -103,10 +121,6 @@ export function AppShell() {
       .catch(() => {
         // A temporary network failure should not brick the app; normal API requests
         // will still report their own connection state after the check completes.
-        if (mounted) setUpdateRelease(null);
-      })
-      .finally(() => {
-        if (mounted) setVersionChecked(true);
       });
 
     return () => {
@@ -165,17 +179,27 @@ export function AppShell() {
     setPracticeSource('all');
     setPracticeChapter(undefined);
     setPracticeKnowledgePoint(undefined);
+    setPracticeSelectionComplete(false);
+    setPracticeQuestionId(undefined);
     setActiveTab('today');
   }
 
   function handleCertificateSelected(user: AuthResponse['user']) {
-    setSession((current) => (current ? { ...current, user } : current));
+    if (session) {
+      const updatedSession = { ...session, user };
+      setSession(updatedSession);
+      void mobileApi.cacheSession(updatedSession);
+    }
     setCertificatePickerOpen(false);
     setActiveTab('today');
   }
 
   function handleUserUpdated(user: AuthResponse['user']) {
-    setSession((current) => (current ? { ...current, user } : current));
+    if (session) {
+      const updatedSession = { ...session, user };
+      setSession(updatedSession);
+      void mobileApi.cacheSession(updatedSession);
+    }
   }
 
   function handleLogout() {
@@ -189,6 +213,8 @@ export function AppShell() {
     setPracticeSource('all');
     setPracticeChapter(undefined);
     setPracticeKnowledgePoint(undefined);
+    setPracticeSelectionComplete(false);
+    setPracticeQuestionId(undefined);
   }
 
   function handleOpenCertificatePicker() {
@@ -202,6 +228,8 @@ export function AppShell() {
       setPracticeSource(options?.practiceSource ?? 'all');
       setPracticeChapter(options?.practiceChapter);
       setPracticeKnowledgePoint(options?.practiceKnowledgePoint);
+      setPracticeSelectionComplete(options?.practiceSelectionComplete ?? false);
+      setPracticeQuestionId(options?.practiceQuestionId);
       setPracticeMode(
         options?.practiceMode ?? (nextSession === 'daily' ? 'random' : 'sequential'),
       );
@@ -210,12 +238,10 @@ export function AppShell() {
   }
 
   function retryVersionCheck() {
-    setUpdateRelease(null);
-    setVersionChecked(false);
     setVersionCheckKey((current) => current + 1);
   }
 
-  if (!versionChecked || !sessionRestored) {
+  if (!sessionRestored) {
     return <VersionCheckingScreen />;
   }
 
@@ -283,6 +309,8 @@ export function AppShell() {
             practiceSource,
             practiceChapter,
             practiceKnowledgePoint,
+            practiceSelectionComplete,
+            practiceQuestionId,
             onPracticeModeChange: setPracticeMode,
             onOpenCertificatePicker: handleOpenCertificatePicker,
             onUserUpdated: handleUserUpdated,
@@ -297,15 +325,18 @@ export function AppShell() {
 }
 
 function VersionCheckingScreen() {
-  const { colors, resolvedMode } = useTheme();
+  const { resolvedMode } = useTheme();
   const styles = useThemedStyles(createStyles);
 
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar style={resolvedMode === 'dark' ? 'light' : 'dark'} />
       <View style={styles.updateScreen}>
-        <ActivityIndicator color={colors.brand} size="large" />
-        <Text style={styles.updateLoadingText}>正在检查版本并恢复登录…</Text>
+        <EntranceView distance={14} style={styles.updateCard}>
+          <BrandMark />
+          <Text style={styles.updateKicker}>考匠</Text>
+          <Text style={styles.updateLoadingText}>正在准备你的学习空间…</Text>
+        </EntranceView>
       </View>
     </SafeAreaView>
   );
@@ -434,6 +465,8 @@ function renderScreen(
     practiceSource: PracticeSource;
     practiceChapter?: string;
     practiceKnowledgePoint?: string;
+    practiceSelectionComplete: boolean;
+    practiceQuestionId?: string;
     onPracticeModeChange: (mode: PracticeMode) => void;
     onOpenCertificatePicker: () => void;
     onUserUpdated: (user: AuthResponse['user']) => void;

@@ -26,7 +26,7 @@ import { questionImageSchema, validateQuestion } from "./domain.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const mobileRelease = () => {
-  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.2.4";
+  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.2.5";
   const minimumVersion =
     process.env.MOBILE_MINIMUM_VERSION || latestVersion;
   return {

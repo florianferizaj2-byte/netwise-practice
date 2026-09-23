@@ -20,4 +20,6 @@ export type NavigationOptions = {
   practiceSource?: PracticeSource;
   practiceChapter?: string;
   practiceKnowledgePoint?: string;
+  practiceSelectionComplete?: boolean;
+  practiceQuestionId?: string;
 };

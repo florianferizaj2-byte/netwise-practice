@@ -29,7 +29,7 @@ test("community supports one public room, custom names, text, emoji and images",
       headers: {
         "Content-Type": "application/json",
         "X-Client": "mobile",
-        "X-App-Version": "0.2.4",
+        "X-App-Version": "0.2.5",
       },
       body: JSON.stringify({ username, password: "safe-password" }),
     });
@@ -43,7 +43,7 @@ test("community supports one public room, custom names, text, emoji and images",
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
         "X-Client": "mobile",
-        "X-App-Version": "0.2.4",
+        "X-App-Version": "0.2.5",
       },
       ...(body ? { body: JSON.stringify(body) } : {}),
     });

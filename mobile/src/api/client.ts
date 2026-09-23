@@ -17,6 +17,7 @@ export type AppVersionResponse = {
 };
 
 const SESSION_TOKEN_KEY = 'kaojiang-session-token';
+const SESSION_PROFILE_KEY = 'kaojiang-session-profile';
 let sessionToken: string | null = null;
 
 export async function setSessionToken(token: string | null) {
@@ -25,7 +26,7 @@ export async function setSessionToken(token: string | null) {
     if (token) {
       await AsyncStorage.setItem(SESSION_TOKEN_KEY, token);
     } else {
-      await AsyncStorage.removeItem(SESSION_TOKEN_KEY);
+      await AsyncStorage.multiRemove([SESSION_TOKEN_KEY, SESSION_PROFILE_KEY]);
     }
   } catch {
     // Keep the in-memory session usable if local storage is temporarily unavailable.
@@ -43,6 +44,17 @@ export async function restoreSessionToken() {
 
 export async function clearSessionToken() {
   await setSessionToken(null);
+}
+
+async function cacheSessionProfile(session: Pick<AuthResponse, 'user' | 'certificates'>) {
+  try {
+    await AsyncStorage.setItem(
+      SESSION_PROFILE_KEY,
+      JSON.stringify({ user: session.user, certificates: session.certificates }),
+    );
+  } catch {
+    // The network session remains usable if profile caching is unavailable.
+  }
 }
 
 export class ApiError extends Error {
@@ -263,6 +275,7 @@ export const mobileApi = {
       body: JSON.stringify({ username, password }),
     });
     await setSessionToken(response.sessionToken ?? null);
+    await cacheSessionProfile(response);
     return response;
   },
 
@@ -272,6 +285,7 @@ export const mobileApi = {
       body: JSON.stringify({ username, password }),
     });
     await setSessionToken(response.sessionToken ?? null);
+    await cacheSessionProfile(response);
     return response;
   },
 
@@ -285,8 +299,24 @@ export const mobileApi = {
 
   async restoreSession() {
     const token = await restoreSessionToken();
-    if (!token) return null;
+    if (!token) return { session: null, shouldValidate: false };
 
+    try {
+      const cached = await AsyncStorage.getItem(SESSION_PROFILE_KEY);
+      if (cached) {
+        const profile = JSON.parse(cached) as Pick<AuthResponse, 'user' | 'certificates'>;
+        if (profile.user?.id && Array.isArray(profile.certificates)) {
+          return { session: profile, shouldValidate: true };
+        }
+      }
+    } catch {
+      // Validate the saved token if the cached profile is missing or malformed.
+    }
+
+    return { session: null, shouldValidate: true };
+  },
+
+  async refreshSession() {
     try {
       const response = await this.me();
       if (!response.authenticated || !response.user) {
@@ -294,16 +324,23 @@ export const mobileApi = {
         return null;
       }
 
-      return {
+      const refreshedSession = {
         user: response.user,
         certificates: response.certificates,
       } satisfies AuthResponse;
+      await cacheSessionProfile(refreshedSession);
+      return refreshedSession;
     } catch (error) {
       if (error instanceof ApiError && [401, 403].includes(error.status)) {
         await clearSessionToken();
+        return null;
       }
       throw error;
     }
+  },
+
+  cacheSession(session: AuthResponse) {
+    return cacheSessionProfile(session);
   },
 
   selectCertificate(certificateId: string) {

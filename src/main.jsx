@@ -960,11 +960,11 @@ function AuthScreen({ onAuth, initialError = "" }) {
           </button>
           <a
             className="auth-app-download"
-            href="/downloads/kaojiang-v0.2.4.apk"
-            download="kaojiang-v0.2.4.apk"
+            href="/downloads/kaojiang-v0.2.5.apk"
+            download="kaojiang-v0.2.5.apk"
           >
             <Download size={16} />
-            下载考匠 App · Android v0.2.4
+            下载考匠 App · Android v0.2.5
           </a>
           <p className="auth-privacy-note">
             <ShieldCheck size={14} /> 你的学习数据与 AI 配置仅属于当前账号
@@ -995,15 +995,15 @@ function AnnouncementModal({ onClose }) {
             </span>
             <div>
               <span className="announcement-kicker">考匠 · 更新公告</span>
-              <h2 id="announcement-title">移动端 v0.2.4 更新</h2>
-              <p>练习区新增知识点选择和刷题进度，题库练习不再限制为 10 道。</p>
+              <h2 id="announcement-title">移动端 v0.2.5 更新</h2>
+              <p>今日练习支持按知识范围随机选题，启动、收藏和错题复习体验更顺畅。</p>
             </div>
           </div>
           <IconButton icon={X} label="关闭网站公告" onClick={onClose} />
         </header>
         <div className="announcement-body">
           <div className="announcement-highlight">
-                <strong>考匠 App v0.2.4 已发布</strong>
+                <strong>考匠 App v0.2.5 已发布</strong>
                 <span>
                   在登录页或账号菜单点击“下载 App”即可获取最新版 Android 安装包，登录后连接现有网站后端。
                 </span>
@@ -1012,33 +1012,33 @@ function AnnouncementModal({ onClose }) {
             <li>
               <span>01</span>
               <div>
-                <strong>知识点进度更清晰</strong>
+                <strong>每日刷题范围可选</strong>
                 <p>
-                  练习区先选择章节和知识点，每个知识点都会显示已刷题数与题库总题数的进度条。
+                  选择整个大知识点或具体子知识点后随机抽取 30 题；题量不足时从其他题目中补足。
                 </p>
               </div>
             </li>
             <li>
               <span>02</span>
               <div>
-                <strong>完整题库与收藏</strong>
+                <strong>练习目录更清楚，操作更即时</strong>
                 <p>
-                  进入知识点后加载完整题库，随机刷题不再截断到 10 道；新增星标收藏和收藏题目入口。
+                  大知识点可折叠、直达并查看总进度；收藏星标立即响应，后台保存失败会自动恢复。
                 </p>
               </div>
             </li>
             <li>
               <span>03</span>
               <div>
-                <strong>错题复习更好管理</strong>
+                <strong>错题列表完整呈现</strong>
                 <p>
-                  错题答对后可以手动移除，举报入口、AI 服务和今日学习流程继续保留。
+                  显示全部错题及知识点分布，点击某题即可直接复习该题；版本检查移至后台进行。
                 </p>
               </div>
             </li>
           </ul>
           <p className="announcement-footnote">
-            App 当前提供 Android v0.2.4 安装包；低于最低支持版本的旧 App 必须更新后才能继续使用。正式考试信息仍请以对应认证机构和相关主管部门的最新公告为准。
+            App 当前提供 Android v0.2.5 安装包；低于最低支持版本的旧 App 必须更新后才能继续使用。正式考试信息仍请以对应认证机构和相关主管部门的最新公告为准。
           </p>
         </div>
         <footer className="announcement-footer">
@@ -1497,8 +1497,8 @@ function App() {
                 <a
                   className="account-menu-link"
                   role="menuitem"
-                  href="/downloads/kaojiang-v0.2.4.apk"
-                  download="kaojiang-v0.2.4.apk"
+                  href="/downloads/kaojiang-v0.2.5.apk"
+                  download="kaojiang-v0.2.5.apk"
                   onClick={() => setAccountMenuOpen(false)}
                 >
                   <Download size={17} />
