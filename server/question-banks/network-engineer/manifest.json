@@ -17,6 +17,13 @@
       "path": "questions/original.json"
     },
     {
+      "id": "network-engineer-supplement-20260923",
+      "name": "网络工程师原创补充题（2026-09-23）",
+      "description": "按已确认服务器分类整理的原创单选练习题，答案与解析已复核；非官方真题。",
+      "source": "network_engineer_supplement",
+      "path": "questions/network-engineer-supplement-20260923.json"
+    },
+    {
       "id": "user-collection",
       "name": "真题汇编（用户提供）",
       "description": "保留原文档答案、解析、文件名与题号，未核实官方出处",
@@ -41,14 +48,14 @@
                 "order": 1,
                 "code": "01.01.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 4
               },
               {
                 "name": "原码、反码、补码与移码",
                 "order": 2,
                 "code": "01.01.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 6
               }
             ]
           },
@@ -61,21 +68,21 @@
                 "order": 1,
                 "code": "01.02.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 4
               },
               {
                 "name": "海明校验",
                 "order": 2,
                 "code": "01.02.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 1
+                "questionCount": 4
               },
               {
                 "name": "CRC循环冗余校验",
                 "order": 3,
                 "code": "01.02.03",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 1
+                "questionCount": 4
               },
               {
                 "name": "误码率与帧错误概率",
@@ -95,14 +102,14 @@
                 "order": 1,
                 "code": "01.03.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 3
               },
               {
                 "name": "内存、磁盘与RAID",
                 "order": 2,
                 "code": "01.03.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 5
               },
               {
                 "name": "存储介质性能比较",
@@ -116,7 +123,7 @@
                 "order": 4,
                 "code": "01.03.04",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 2
               }
             ]
           },
@@ -129,14 +136,14 @@
                 "order": 1,
                 "code": "01.04.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 5
               },
               {
                 "name": "总线分类",
                 "order": 2,
                 "code": "01.04.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 5
               }
             ]
           },
@@ -149,14 +156,14 @@
                 "order": 1,
                 "code": "01.05.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 5
               },
               {
                 "name": "分页与分段虚拟内存",
                 "order": 2,
                 "code": "01.05.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 5
               }
             ]
           }
@@ -175,21 +182,21 @@
                 "order": 1,
                 "code": "02.01.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 2
               },
               {
                 "name": "TCP/IP四层模型与映射",
                 "order": 2,
                 "code": "02.01.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 1
               },
               {
                 "name": "协议、服务、PDU与设备所在层",
                 "order": 3,
                 "code": "02.01.03",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 29
+                "questionCount": 32
               }
             ]
           },
@@ -202,35 +209,35 @@
                 "order": 1,
                 "code": "02.02.01",
                 "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
-                "questionCount": 5
+                "questionCount": 7
               },
               {
                 "name": "同步与传输方式",
                 "order": 2,
                 "code": "02.02.02",
                 "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
-                "questionCount": 0
+                "questionCount": 4
               },
               {
                 "name": "信道容量与数据速率",
                 "order": 3,
                 "code": "02.02.03",
                 "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
-                "questionCount": 21
+                "questionCount": 23
               },
               {
                 "name": "信号质量与眼图",
                 "order": 4,
                 "code": "02.02.04",
                 "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
-                "questionCount": 0
+                "questionCount": 1
               },
               {
                 "name": "采样定理与PCM",
                 "order": 5,
                 "code": "02.02.05",
                 "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
-                "questionCount": 4
+                "questionCount": 5
               }
             ]
           },
@@ -243,35 +250,35 @@
                 "order": 1,
                 "code": "02.03.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 13
+                "questionCount": 15
               },
               {
                 "name": "网络地址、广播地址与可用主机",
                 "order": 2,
                 "code": "02.03.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 29
+                "questionCount": 32
               },
               {
                 "name": "VLSM子网划分",
                 "order": 3,
                 "code": "02.03.03",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 19
+                "questionCount": 20
               },
               {
                 "name": "CIDR与路由聚合",
                 "order": 4,
                 "code": "02.03.04",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 6
+                "questionCount": 7
               },
               {
                 "name": "IPv4首部、分片、组播与TTL",
                 "order": 5,
                 "code": "02.03.05",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 8
+                "questionCount": 11
               }
             ]
           },
@@ -284,14 +291,14 @@
                 "order": 1,
                 "code": "02.04.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 4
+                "questionCount": 9
               },
               {
                 "name": "ICMP与控制报文",
                 "order": 2,
                 "code": "02.04.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 10
+                "questionCount": 15
               }
             ]
           },
@@ -304,28 +311,28 @@
                 "order": 1,
                 "code": "02.05.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 34
+                "questionCount": 40
               },
               {
                 "name": "TCP窗口、流量控制与拥塞控制",
                 "order": 2,
                 "code": "02.05.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 11
+                "questionCount": 14
               },
               {
                 "name": "UDP特性与应用场景",
                 "order": 3,
                 "code": "02.05.03",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 7
+                "questionCount": 8
               },
               {
                 "name": "端口号与多路复用",
                 "order": 4,
                 "code": "02.05.04",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 6
+                "questionCount": 9
               }
             ]
           },
@@ -338,35 +345,35 @@
                 "order": 1,
                 "code": "02.06.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 7
+                "questionCount": 10
               },
               {
                 "name": "DHCP",
                 "order": 2,
                 "code": "02.06.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 2
+                "questionCount": 4
               },
               {
                 "name": "HTTP与HTTPS",
                 "order": 3,
                 "code": "02.06.03",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 6
+                "questionCount": 9
               },
               {
                 "name": "FTP与TFTP",
                 "order": 4,
                 "code": "02.06.04",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 4
+                "questionCount": 5
               },
               {
                 "name": "电子邮件、LDAP与远程登录",
                 "order": 5,
                 "code": "02.06.05",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 5
+                "questionCount": 6
               },
               {
                 "name": "常用协议端口综合",
@@ -386,7 +393,7 @@
                 "order": 1,
                 "code": "02.07.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 10
+                "questionCount": 18
               },
               {
                 "name": "邻居发现协议NDP",
@@ -400,7 +407,7 @@
                 "order": 3,
                 "code": "02.07.03",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 2
               }
             ]
           }
@@ -419,21 +426,21 @@
                 "order": 1,
                 "code": "03.01.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 6
               },
               {
                 "name": "冲突域、广播域与网络设备",
                 "order": 2,
                 "code": "03.01.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 13
+                "questionCount": 15
               },
               {
                 "name": "MAC地址学习与交换转发",
                 "order": 3,
                 "code": "03.01.03",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 3
+                "questionCount": 7
               }
             ]
           },
@@ -446,14 +453,14 @@
                 "order": 1,
                 "code": "03.02.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 6
+                "questionCount": 9
               },
               {
                 "name": "Access、Trunk与Hybrid端口",
                 "order": 2,
                 "code": "03.02.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 3
+                "questionCount": 9
               }
             ]
           },
@@ -473,14 +480,14 @@
                 "order": 2,
                 "code": "03.03.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 10
+                "questionCount": 16
               },
               {
                 "name": "收敛过程与协议版本",
                 "order": 3,
                 "code": "03.03.03",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 4
               }
             ]
           },
@@ -493,14 +500,14 @@
                 "order": 1,
                 "code": "03.04.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 1
+                "questionCount": 2
               },
               {
                 "name": "端口安全与DHCP Snooping",
                 "order": 2,
                 "code": "03.04.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 3
+                "questionCount": 13
               },
               {
                 "name": "链路聚合、堆叠、QinQ与PoE",
@@ -527,14 +534,14 @@
                 "order": 1,
                 "code": "03.05.01",
                 "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
-                "questionCount": 3
+                "questionCount": 8
               },
               {
                 "name": "AP类型与WLAN架构",
                 "order": 2,
                 "code": "03.05.02",
                 "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
-                "questionCount": 2
+                "questionCount": 6
               }
             ]
           }
@@ -553,21 +560,21 @@
                 "order": 1,
                 "code": "04.01.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 7
+                "questionCount": 13
               },
               {
                 "name": "路由优先级、管理距离与度量值",
                 "order": 2,
                 "code": "04.01.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 2
+                "questionCount": 5
               },
               {
                 "name": "路由协议类型与算法",
                 "order": 3,
                 "code": "04.01.03",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 7
+                "questionCount": 8
               }
             ]
           },
@@ -580,14 +587,14 @@
                 "order": 1,
                 "code": "04.02.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 5
+                "questionCount": 12
               },
               {
                 "name": "水平分割、毒性逆转与触发更新",
                 "order": 2,
                 "code": "04.02.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 3
+                "questionCount": 6
               }
             ]
           },
@@ -600,14 +607,14 @@
                 "order": 1,
                 "code": "04.03.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 14
+                "questionCount": 23
               },
               {
                 "name": "DR/BDR选举",
                 "order": 2,
                 "code": "04.03.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 7
+                "questionCount": 8
               },
               {
                 "name": "Router ID与虚链路",
@@ -627,14 +634,14 @@
                 "order": 1,
                 "code": "04.04.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 5
+                "questionCount": 8
               },
               {
                 "name": "BGP路由属性与选路",
                 "order": 2,
                 "code": "04.04.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 5
+                "questionCount": 12
               }
             ]
           },
@@ -647,7 +654,7 @@
                 "order": 1,
                 "code": "04.05.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 10
               },
               {
                 "name": "E1/T1与专线基础",
@@ -673,21 +680,21 @@
                 "order": 1,
                 "code": "05.01.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 4
+                "questionCount": 6
               },
               {
                 "name": "非对称加密与Hash摘要",
                 "order": 2,
                 "code": "05.01.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 4
+                "questionCount": 8
               },
               {
                 "name": "密码学原则与传输加密",
                 "order": 3,
                 "code": "05.01.03",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 2
+                "questionCount": 3
               }
             ]
           },
@@ -700,14 +707,14 @@
                 "order": 1,
                 "code": "05.02.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 3
+                "questionCount": 8
               },
               {
                 "name": "证书验证与CRL吊销",
                 "order": 2,
                 "code": "05.02.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 8
               }
             ]
           },
@@ -720,14 +727,14 @@
                 "order": 1,
                 "code": "05.03.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 2
+                "questionCount": 6
               },
               {
                 "name": "静态NAT、动态NAT与PAT",
                 "order": 2,
                 "code": "05.03.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 1
+                "questionCount": 5
               }
             ]
           },
@@ -740,21 +747,21 @@
                 "order": 1,
                 "code": "05.04.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 6
+                "questionCount": 13
               },
               {
                 "name": "IDS与IPS",
                 "order": 2,
                 "code": "05.04.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 3
+                "questionCount": 5
               },
               {
                 "name": "堡垒机与零信任架构",
                 "order": 3,
                 "code": "05.04.03",
                 "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
-                "questionCount": 4
+                "questionCount": 7
               }
             ]
           },
@@ -774,14 +781,14 @@
                 "order": 2,
                 "code": "05.05.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 2
+                "questionCount": 5
               },
               {
                 "name": "Web攻击与常见漏洞",
                 "order": 3,
                 "code": "05.05.03",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 5
+                "questionCount": 10
               }
             ]
           },
@@ -794,14 +801,14 @@
                 "order": 1,
                 "code": "05.06.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 5
+                "questionCount": 15
               },
               {
                 "name": "TLS与安全传输协议",
                 "order": 2,
                 "code": "05.06.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 2
+                "questionCount": 3
               }
             ]
           },
@@ -814,7 +821,7 @@
                 "order": 1,
                 "code": "05.07.01",
                 "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
-                "questionCount": 5
+                "questionCount": 6
               }
             ]
           }
@@ -833,21 +840,21 @@
                 "order": 1,
                 "code": "06.01.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 3
+                "questionCount": 6
               },
               {
                 "name": "DNS与DHCP服务器",
                 "order": 2,
                 "code": "06.01.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 3
               },
               {
                 "name": "IIS与NTFS权限",
                 "order": 3,
                 "code": "06.01.03",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 4
               },
               {
                 "name": "Windows服务与远程管理",
@@ -867,21 +874,21 @@
                 "order": 1,
                 "code": "06.02.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 19
+                "questionCount": 21
               },
               {
                 "name": "权限、进程与文件系统",
                 "order": 2,
                 "code": "06.02.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 4
               },
               {
                 "name": "网络接口与服务配置",
                 "order": 3,
                 "code": "06.02.03",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 1
+                "questionCount": 5
               }
             ]
           }
@@ -900,7 +907,7 @@
                 "order": 1,
                 "code": "07.01.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 3
+                "questionCount": 13
               }
             ]
           },
@@ -913,14 +920,14 @@
                 "order": 1,
                 "code": "07.02.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 19
+                "questionCount": 29
               },
               {
                 "name": "Syslog、NetFlow与NTP",
                 "order": 2,
                 "code": "07.02.02",
                 "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
-                "questionCount": 3
+                "questionCount": 9
               }
             ]
           },
@@ -933,21 +940,21 @@
                 "order": 1,
                 "code": "07.03.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 1
+                "questionCount": 3
               },
               {
                 "name": "ipconfig、netstat与路由工具",
                 "order": 2,
                 "code": "07.03.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 8
+                "questionCount": 15
               },
               {
                 "name": "设备Console与维护接入",
                 "order": 3,
                 "code": "07.03.03",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 1
+                "questionCount": 6
               }
             ]
           }
@@ -966,14 +973,14 @@
                 "order": 1,
                 "code": "08.01.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 7
               },
               {
                 "name": "安装规范与点位",
                 "order": 2,
                 "code": "08.01.02",
                 "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
-                "questionCount": 2
+                "questionCount": 5
               }
             ]
           },
@@ -986,28 +993,28 @@
                 "order": 1,
                 "code": "08.02.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 1
+                "questionCount": 5
               },
               {
                 "name": "单模与多模光纤",
                 "order": 2,
                 "code": "08.02.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 2
               },
               {
                 "name": "光功率与光链路基础",
                 "order": 3,
                 "code": "08.02.03",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 1
+                "questionCount": 3
               },
               {
                 "name": "传输介质特性与选型",
                 "order": 4,
                 "code": "08.02.04",
                 "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
-                "questionCount": 3
+                "questionCount": 5
               }
             ]
           },
@@ -1027,7 +1034,7 @@
                 "order": 2,
                 "code": "08.03.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 10
               }
             ]
           }
@@ -1046,14 +1053,14 @@
                 "order": 1,
                 "code": "09.01.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 9
               },
               {
                 "name": "PERT三点估算",
                 "order": 2,
                 "code": "09.01.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 1
               }
             ]
           },
@@ -1066,21 +1073,21 @@
                 "order": 1,
                 "code": "09.02.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 4
               },
               {
                 "name": "质量管理",
                 "order": 2,
                 "code": "09.02.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 2
               },
               {
                 "name": "配置管理",
                 "order": 3,
                 "code": "09.02.03",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 4
               }
             ]
           },
@@ -1093,21 +1100,21 @@
                 "order": 1,
                 "code": "09.03.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 5
               },
               {
                 "name": "著作权与专利",
                 "order": 2,
                 "code": "09.03.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 3
               },
               {
                 "name": "等保2.0",
                 "order": 3,
                 "code": "09.03.03",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 2
+                "questionCount": 4
               }
             ]
           }
@@ -1126,21 +1133,21 @@
                 "order": 1,
                 "code": "10.01.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 7
               },
               {
                 "name": "NFV网络功能虚拟化",
                 "order": 2,
                 "code": "10.01.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 3
               },
               {
                 "name": "云计算与容器",
                 "order": 3,
                 "code": "10.01.03",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 10
               }
             ]
           },
@@ -1153,14 +1160,14 @@
                 "order": 1,
                 "code": "10.02.01",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 1
+                "questionCount": 9
               },
               {
                 "name": "NB-IoT",
                 "order": 2,
                 "code": "10.02.02",
                 "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "questionCount": 2
               }
             ]
           }
