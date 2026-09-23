@@ -750,7 +750,36 @@ main {
   height: 3px;
   margin-top: 9px;
 }
+.knowledge-point-enter {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 7px;
+  color: #487360;
+  font-size: 13px;
+}
+.knowledge-section-item {
+  align-items: flex-start;
+}
+.knowledge-section-item .knowledge-point-icon {
+  margin-top: 2px;
+}
+.chapter-category-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 9px;
+}
+.chapter-category-actions .text-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 30px;
+  font-size: 13px;
+}
 .chapter-item {
+  display: flex;
   border: 1px solid #dfe7e1;
   padding: 18px 15px;
   min-height: 104px;

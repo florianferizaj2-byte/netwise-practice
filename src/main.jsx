@@ -968,11 +968,11 @@ function AuthScreen({ onAuth, initialError = "" }) {
           </button>
           <a
             className="auth-app-download"
-            href="/downloads/kaojiang-v0.2.5.apk"
-            download="kaojiang-v0.2.5.apk"
+            href="/downloads/kaojiang-v0.2.6.apk"
+            download="kaojiang-v0.2.6.apk"
           >
             <Download size={16} />
-            下载考匠 App · Android v0.2.5
+            下载考匠 App · Android v0.2.6
           </a>
           <p className="auth-privacy-note">
             <ShieldCheck size={14} /> 你的学习数据与 AI 配置仅属于当前账号
@@ -1003,15 +1003,15 @@ function AnnouncementModal({ onClose }) {
             </span>
             <div>
               <span className="announcement-kicker">考匠 · 更新公告</span>
-              <h2 id="announcement-title">移动端 v0.2.5 更新</h2>
-              <p>今日练习支持按知识范围随机选题，启动、收藏和错题复习体验更顺畅。</p>
+              <h2 id="announcement-title">移动端 v0.2.6 更新</h2>
+              <p>新增一级、二级、三级知识点目录，各级都可直接练习或继续展开。</p>
             </div>
           </div>
           <IconButton icon={X} label="关闭网站公告" onClick={onClose} />
         </header>
         <div className="announcement-body">
           <div className="announcement-highlight">
-                <strong>考匠 App v0.2.5 已发布</strong>
+                <strong>考匠 App v0.2.6 已发布</strong>
                 <span>
                   在登录页或账号菜单点击“下载 App”即可获取最新版 Android 安装包，登录后连接现有网站后端。
                 </span>
@@ -1020,33 +1020,33 @@ function AnnouncementModal({ onClose }) {
             <li>
               <span>01</span>
               <div>
-                <strong>每日刷题范围可选</strong>
+                <strong>三级知识点都能直接练习</strong>
                 <p>
-                  选择整个大知识点或具体子知识点后随机抽取 30 题；题量不足时从其他题目中补足。
+                  一级分类和二级分类都可以直接进入题库，也可展开下一级；三级考点可直接刷题。
                 </p>
               </div>
             </li>
             <li>
               <span>02</span>
               <div>
-                <strong>练习目录更清楚，操作更即时</strong>
+                <strong>分类进度逐级查看</strong>
                 <p>
-                  大知识点可折叠、直达并查看总进度；收藏星标立即响应，后台保存失败会自动恢复。
+                  一级、二级和三级分类分别显示题量与练习进度，便于从大纲快速定位考点。
                 </p>
               </div>
             </li>
             <li>
               <span>03</span>
               <div>
-                <strong>错题列表完整呈现</strong>
+                <strong>保留已有练习功能</strong>
                 <p>
-                  显示全部错题及知识点分布，点击某题即可直接复习该题；版本检查移至后台进行。
+                  每日范围练习、收藏题、错题复习和 App 内更新继续可用。
                 </p>
               </div>
             </li>
           </ul>
           <p className="announcement-footnote">
-            App 当前提供 Android v0.2.5 安装包；低于最低支持版本的旧 App 必须更新后才能继续使用。正式考试信息仍请以对应认证机构和相关主管部门的最新公告为准。
+            App 当前提供 Android v0.2.6 安装包；低于最低支持版本的旧 App 必须更新后才能继续使用。正式考试信息仍请以对应认证机构和相关主管部门的最新公告为准。
           </p>
         </div>
         <footer className="announcement-footer">
@@ -1310,22 +1310,27 @@ function App() {
         (question) => question.knowledgeSection === sectionFocus,
       )
     : selectedChapterQuestions;
+  const knowledgePointName = (point) =>
+    typeof point === "string" ? point : point?.name || "";
+  const selectedSectionPoints =
+    selectedChapterSections.find((section) => section.name === sectionFocus)
+      ?.knowledgePoints || [];
   const selectedKnowledgePoints = selectedChapter
     ? [
         ...new Set([
           ...(sectionFocus
-            ? selectedChapterSections.find(
-                (section) => section.name === sectionFocus,
-              )?.knowledgePoints || []
+            ? selectedSectionPoints.map(knowledgePointName)
             : selectedChapterSections.length
               ? []
-              : selectedChapter.knowledgePoints || []),
+              : (selectedChapter.knowledgePoints || []).map(
+                  knowledgePointName,
+                )),
           ...selectedSectionQuestions.map(
             (question) =>
               question.targetKnowledgePoint || question.knowledgePoint,
           ),
         ]),
-      ]
+      ].filter(Boolean)
     : [];
   const favoriteQuestions = allQuestions.filter((question) => question.favorite);
   const train = async (q, count = 5, harder = false) =>
@@ -1519,8 +1524,8 @@ function App() {
                 <a
                   className="account-menu-link"
                   role="menuitem"
-                  href="/downloads/kaojiang-v0.2.5.apk"
-                  download="kaojiang-v0.2.5.apk"
+                  href="/downloads/kaojiang-v0.2.6.apk"
+                  download="kaojiang-v0.2.6.apk"
                   onClick={() => setAccountMenuOpen(false)}
                 >
                   <Download size={17} />
@@ -1887,8 +1892,12 @@ function App() {
                   </button>
                 </div>
                 <ChapterGrid
-                  chapters={dashboard.chapters.slice(0, 6)}
-                  start={openChapter}
+                  chapters={dashboard.chapters.slice(0, 6).map((chapter) => {
+                    const questions = questionsForChapter(chapter.name);
+                    return { ...chapter, questions, total: questions.length };
+                  })}
+                  start={start}
+                  expand={openChapter}
                 />
               </section>
               <div className="bottom-band">
@@ -2009,12 +2018,13 @@ function App() {
               {!chapterFocus ? (
                 <ChapterGrid
                   chapters={dashboard.chapters
-                    .map((chapter) => ({
-                      ...chapter,
-                      total: questionsForChapter(chapter.name).length,
-                    }))
+                    .map((chapter) => {
+                      const questions = questionsForChapter(chapter.name);
+                      return { ...chapter, questions, total: questions.length };
+                    })
                     .filter((chapter) => chapter.total > 0)}
-                  start={openChapter}
+                  start={start}
+                  expand={openChapter}
                 />
               ) : selectedChapter ? (
                 selectedChapterSections.length && !sectionFocus ? (
@@ -2274,15 +2284,11 @@ function Heading({ title, subtitle, children }) {
     </div>
   );
 }
-function ChapterGrid({ chapters, start }) {
+function ChapterGrid({ chapters, start, expand }) {
   return (
     <div className="chapter-grid">
       {chapters.map((c, i) => (
-        <button
-          className="chapter-item"
-          key={c.name}
-          onClick={() => start(c.name)}
-        >
+        <article className="chapter-item" key={c.name}>
           <div className={"chapter-icon tone-" + (i % 4)}>
             <Network size={22} />
           </div>
@@ -2303,9 +2309,27 @@ function ChapterGrid({ chapters, start }) {
                 }}
               />
             </div>
+            <div className="chapter-category-actions">
+              <button
+                className="text-button"
+                disabled={!c.questions?.length}
+                onClick={() => start(c.questions || [], c.name)}
+              >
+                练习本级题库
+                <ArrowRight size={14} />
+              </button>
+              {(c.sections?.length || c.knowledgePoints?.length) > 0 && (
+                <button
+                  className="text-button"
+                  onClick={() => expand(c.name)}
+                >
+                  展开下一级
+                  <ChevronRight size={14} />
+                </button>
+              )}
+            </div>
           </div>
-          <ChevronRight size={17} />
-        </button>
+        </article>
       ))}
     </div>
   );
@@ -2346,11 +2370,9 @@ function KnowledgeSectionGrid({
       </div>
       <div className="knowledge-point-grid">
         {groups.map((group, index) => (
-          <button
-            className="knowledge-point-item"
+          <article
+            className="knowledge-point-item knowledge-section-item"
             key={group.name}
-            disabled={!group.questions.length}
-            onClick={() => select(group.name)}
           >
             <div className={"knowledge-point-icon tone-" + (index % 4)}>
               <Network size={19} />
@@ -2366,13 +2388,31 @@ function KnowledgeSectionGrid({
                     width:
                       group.questions.length > 0
                         ? Math.min(100, (group.attempted / group.questions.length) * 100) + "%"
-                        : "0%",
+                      : "0%",
                   }}
                 />
               </div>
+              <div className="chapter-category-actions">
+                <button
+                  className="text-button"
+                  disabled={!group.questions.length}
+                  onClick={() =>
+                    start(group.questions, `${chapter} · ${group.name}`)
+                  }
+                >
+                  练习本分类
+                  <ArrowRight size={14} />
+                </button>
+                <button
+                  className="text-button"
+                  onClick={() => select(group.name)}
+                >
+                  展开考点
+                  <ChevronRight size={14} />
+                </button>
+              </div>
             </div>
-            <ChevronRight size={17} />
-          </button>
+          </article>
         ))}
       </div>
     </>
@@ -2388,7 +2428,10 @@ function KnowledgePointGrid({
   backLabel = "返回章节",
   allLabel = "练习本章全部题",
 }) {
-  const groups = points.map((knowledgePoint) => {
+  const pointNames = points
+    .map((point) => (typeof point === "string" ? point : point?.name || ""))
+    .filter(Boolean);
+  const groups = pointNames.map((knowledgePoint) => {
     const pointQuestions = questions.filter(
       (question) =>
         (question.targetKnowledgePoint || question.knowledgePoint) ===
@@ -2450,6 +2493,10 @@ function KnowledgePointGrid({
                   }}
                 />
               </div>
+              <span className="knowledge-point-enter">
+                进入题库
+                <ArrowRight size={13} />
+              </span>
             </div>
             <ChevronRight size={17} />
           </button>

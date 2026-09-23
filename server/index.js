@@ -26,7 +26,7 @@ import { questionImageSchema, validateQuestion } from "./domain.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const mobileRelease = () => {
-  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.2.5";
+  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.2.6";
   const minimumVersion =
     process.env.MOBILE_MINIMUM_VERSION || latestVersion;
   return {
@@ -37,7 +37,7 @@ const mobileRelease = () => {
       `/downloads/kaojiang-v${latestVersion}.apk`,
     releaseNotes:
       process.env.MOBILE_RELEASE_NOTES ||
-      "新增知识点选择与刷题进度；普通练习加载完整题库；支持收藏题目和错题移除。",
+      "新增一级、二级、三级知识点目录；各级可直接练习或展开下一级。",
   };
 };
 async function exchangeWechatMiniProgramCode(code) {
