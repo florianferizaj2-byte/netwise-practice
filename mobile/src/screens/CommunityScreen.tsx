@@ -4,6 +4,7 @@ import {
   ActivityIndicator,
   Image,
   KeyboardAvoidingView,
+  Modal,
   Platform,
   ScrollView,
   StyleSheet,
@@ -17,12 +18,19 @@ import {
   type AuthResponse,
   type CommunityImagePayload,
   type CommunityMessage,
+  type LeaderboardResponse,
 } from '../api/client';
-import { BrandMark } from '../components/BrandMark';
 import { AnimatedPressable, EntranceView } from '../components/Motion';
 import { radius, shadow, spacing, useThemedStyles, useTheme, type ThemeColors } from '../theme';
 
 const quickEmojis = ['😀', '🤝', '🎉', '💪', '❤️', '😂'];
+const leaderboardTabs = [
+  { key: 'answered', label: '刷题量', unit: '题' },
+  { key: 'accuracy', label: '正确率', unit: '%' },
+  { key: 'streakDays', label: '坚持天数', unit: '天' },
+  { key: 'submitted', label: '提交题目', unit: '题' },
+] as const;
+type LeaderboardTab = typeof leaderboardTabs[number]['key'];
 
 type CommunityScreenProps = {
   preview?: boolean;
@@ -79,6 +87,11 @@ export function CommunityScreen({ preview = false, user }: CommunityScreenProps)
   const [draft, setDraft] = useState('');
   const [attachment, setAttachment] = useState<PendingImage | null>(null);
   const [error, setError] = useState('');
+  const [leaderboardOpen, setLeaderboardOpen] = useState(false);
+  const [leaderboard, setLeaderboard] = useState<LeaderboardResponse | null>(null);
+  const [leaderboardTab, setLeaderboardTab] = useState<LeaderboardTab>('answered');
+  const [leaderboardLoading, setLeaderboardLoading] = useState(false);
+  const [leaderboardError, setLeaderboardError] = useState('');
   const scrollRef = useRef<ScrollView | null>(null);
 
   useEffect(() => {
@@ -216,6 +229,23 @@ export function CommunityScreen({ preview = false, user }: CommunityScreenProps)
     }
   }
 
+  async function openLeaderboard() {
+    setLeaderboardOpen(true);
+    setLeaderboardError('');
+    if (preview) return;
+    setLeaderboardLoading(true);
+    try {
+      setLeaderboard(await mobileApi.leaderboards());
+    } catch (cause: unknown) {
+      setLeaderboardError(cause instanceof Error ? cause.message : '排行榜加载失败');
+    } finally {
+      setLeaderboardLoading(false);
+    }
+  }
+
+  const activeBoard = leaderboard?.[leaderboardTab];
+  const activeTab = leaderboardTabs.find((tab) => tab.key === leaderboardTab)!;
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -226,7 +256,14 @@ export function CommunityScreen({ preview = false, user }: CommunityScreenProps)
           <View>
             <Text style={styles.title}>考匠社区</Text>
           </View>
-          <BrandMark compact />
+          <AnimatedPressable
+            accessibilityLabel="打开排行榜"
+            accessibilityRole="button"
+            onPress={() => void openLeaderboard()}
+            style={styles.leaderboardEntry}
+          >
+            <Text style={styles.leaderboardEntryText}>♛ 排行榜</Text>
+          </AnimatedPressable>
         </View>
 
         <ScrollView
@@ -335,6 +372,72 @@ export function CommunityScreen({ preview = false, user }: CommunityScreenProps)
             {sending ? <ActivityIndicator color={colors.white} size="small" /> : <Text style={styles.sendText}>发送</Text>}
           </AnimatedPressable>
         </View>
+        <Modal
+          animationType="slide"
+          onRequestClose={() => setLeaderboardOpen(false)}
+          transparent
+          visible={leaderboardOpen}
+        >
+          <View style={styles.leaderboardBackdrop}>
+            <View style={styles.leaderboardPanel}>
+              <View style={styles.leaderboardHeader}>
+                <View>
+                  <Text style={styles.leaderboardTitle}>社区排行榜</Text>
+                  <Text style={styles.leaderboardSubtitle}>一起记录每天的进步</Text>
+                </View>
+                <AnimatedPressable accessibilityLabel="关闭排行榜" onPress={() => setLeaderboardOpen(false)} style={styles.leaderboardClose}>
+                  <Text style={styles.leaderboardCloseText}>×</Text>
+                </AnimatedPressable>
+              </View>
+              <View style={styles.leaderboardTabs}>
+                {leaderboardTabs.map((tab) => (
+                  <AnimatedPressable
+                    accessibilityLabel={`${tab.label}榜单`}
+                    key={tab.key}
+                    onPress={() => setLeaderboardTab(tab.key)}
+                    style={[styles.leaderboardTab, leaderboardTab === tab.key && styles.leaderboardTabActive]}
+                  >
+                    <Text style={[styles.leaderboardTabText, leaderboardTab === tab.key && styles.leaderboardTabTextActive]}>{tab.label}</Text>
+                  </AnimatedPressable>
+                ))}
+              </View>
+              <Text style={styles.leaderboardRule}>
+                {leaderboardTab === 'accuracy'
+                  ? `至少作答 ${leaderboard?.accuracyMinAttempts ?? 20} 题参与正确率排行`
+                  : leaderboardTab === 'streakDays'
+                    ? '按北京时间计算连续刷题天数，今天未刷时保留昨日连续记录'
+                    : leaderboardTab === 'submitted'
+                      ? '统计通过双重核验并提交到服务器的题目'
+                      : '统计累计作答次数'}
+              </Text>
+              {leaderboardLoading && <ActivityIndicator color={colors.brand} />}
+              {!!leaderboardError && <Text style={styles.errorText}>{leaderboardError}</Text>}
+              <ScrollView contentContainerStyle={styles.leaderboardRows} showsVerticalScrollIndicator={false}>
+                {preview && <Text style={styles.leaderboardEmpty}>登录后查看真实榜单</Text>}
+                {!preview && !leaderboardLoading && !leaderboardError && !activeBoard?.top.length && (
+                  <Text style={styles.leaderboardEmpty}>这个榜单还没有记录，开始刷题吧。</Text>
+                )}
+                {activeBoard?.top.map((entry) => (
+                  <View key={entry.userId} style={[styles.leaderboardRow, entry.userId === user?.id && styles.leaderboardOwnRow]}>
+                    <Text style={styles.leaderboardRank}>{entry.rank}</Text>
+                    <View style={styles.leaderboardPerson}>
+                      <Text style={styles.leaderboardName}>{entry.name}{entry.userId === user?.id ? ' · 我' : ''}</Text>
+                      {leaderboardTab === 'accuracy' && <Text style={styles.leaderboardDetail}>{entry.correct}/{entry.answered} 题正确</Text>}
+                    </View>
+                    <Text style={styles.leaderboardValue}>{entry.value}{activeTab.unit}</Text>
+                  </View>
+                ))}
+              </ScrollView>
+              {activeBoard?.me && activeBoard.me.rank > activeBoard.top.length && (
+                <View style={[styles.leaderboardRow, styles.leaderboardOwnRow]}>
+                  <Text style={styles.leaderboardRank}>{activeBoard.me.rank}</Text>
+                  <Text style={styles.leaderboardName}>我的排名</Text>
+                  <Text style={styles.leaderboardValue}>{activeBoard.me.value}{activeTab.unit}</Text>
+                </View>
+              )}
+            </View>
+          </View>
+        </Modal>
       </View>
     </KeyboardAvoidingView>
   );
@@ -365,6 +468,36 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
     fontWeight: '800',
     lineHeight: 36,
   },
+  leaderboardEntry: {
+    backgroundColor: colors.brandSoft,
+    borderRadius: radius.pill,
+    minHeight: 36,
+    justifyContent: 'center',
+    paddingHorizontal: spacing.sm,
+  },
+  leaderboardEntryText: { color: colors.brandDark, fontSize: 13, fontWeight: '800' },
+  leaderboardBackdrop: { backgroundColor: '#0008', flex: 1, justifyContent: 'flex-end' },
+  leaderboardPanel: { backgroundColor: colors.background, borderTopLeftRadius: radius.lg, borderTopRightRadius: radius.lg, gap: spacing.sm, height: '82%', padding: spacing.lg },
+  leaderboardHeader: { alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between' },
+  leaderboardTitle: { color: colors.text, fontSize: 23, fontWeight: '800' },
+  leaderboardSubtitle: { color: colors.textMuted, fontSize: 12, marginTop: 3 },
+  leaderboardClose: { alignItems: 'center', height: 36, justifyContent: 'center', width: 36 },
+  leaderboardCloseText: { color: colors.textMuted, fontSize: 28 },
+  leaderboardTabs: { flexDirection: 'row', gap: 3 },
+  leaderboardTab: { alignItems: 'center', borderRadius: radius.sm, flex: 1, minHeight: 36, justifyContent: 'center' },
+  leaderboardTabActive: { backgroundColor: colors.brandSoft },
+  leaderboardTabText: { color: colors.textMuted, fontSize: 12, fontWeight: '700' },
+  leaderboardTabTextActive: { color: colors.brandDark, fontWeight: '800' },
+  leaderboardRule: { color: colors.textMuted, fontSize: 12, lineHeight: 18 },
+  leaderboardRows: { gap: 5, paddingBottom: spacing.xl },
+  leaderboardRow: { alignItems: 'center', backgroundColor: colors.surface, borderRadius: radius.sm, flexDirection: 'row', gap: spacing.sm, minHeight: 56, padding: spacing.sm },
+  leaderboardOwnRow: { borderColor: colors.brand, borderWidth: 1 },
+  leaderboardRank: { color: colors.brand, fontSize: 17, fontWeight: '800', textAlign: 'center', width: 32 },
+  leaderboardPerson: { flex: 1 },
+  leaderboardName: { color: colors.text, fontSize: 14, fontWeight: '700' },
+  leaderboardDetail: { color: colors.textMuted, fontSize: 11, marginTop: 2 },
+  leaderboardValue: { color: colors.brandDark, fontSize: 15, fontWeight: '800' },
+  leaderboardEmpty: { color: colors.textMuted, fontSize: 14, paddingVertical: spacing.xl, textAlign: 'center' },
   roomCard: {
     alignItems: 'center',
     backgroundColor: colors.brand,

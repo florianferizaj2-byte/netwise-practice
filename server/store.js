@@ -93,6 +93,23 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       used_bytes INTEGER NOT NULL DEFAULT 0
     );
     INSERT OR IGNORE INTO community_storage (id, used_bytes) VALUES (1, 0);
+    CREATE TABLE IF NOT EXISTS user_question_drafts (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL,
+      certificate_id TEXT NOT NULL,
+      data TEXT NOT NULL,
+      created_at TEXT NOT NULL
+    );
+    CREATE INDEX IF NOT EXISTS user_question_drafts_owner_idx
+      ON user_question_drafts(user_id, certificate_id);
+    CREATE TABLE IF NOT EXISTS user_question_submissions (
+      question_id TEXT PRIMARY KEY REFERENCES questions(id),
+      user_id TEXT NOT NULL,
+      certificate_id TEXT NOT NULL,
+      submitted_at TEXT NOT NULL
+    );
+    CREATE INDEX IF NOT EXISTS user_question_submissions_owner_idx
+      ON user_question_submissions(user_id);
   `);
   for (const statement of [
     "ALTER TABLE users ADD COLUMN is_admin INTEGER NOT NULL DEFAULT 0",
@@ -354,6 +371,127 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
     allQ,
     allA,
     addQ,
+    saveUserQuestionDraft(userId, certificateId, question) {
+      const id = crypto.randomUUID();
+      db.prepare(
+        "INSERT INTO user_question_drafts (id,user_id,certificate_id,data,created_at) VALUES (?,?,?,?,?)",
+      ).run(id, userId, certificateId, JSON.stringify(question), new Date().toISOString());
+      return { id, question };
+    },
+    userQuestionDraft(id, userId, certificateId) {
+      const row = db.prepare(
+        "SELECT data FROM user_question_drafts WHERE id=? AND user_id=? AND certificate_id=?",
+      ).get(id, userId, certificateId);
+      return row ? JSON.parse(row.data) : null;
+    },
+    latestUserQuestionDraft(userId, certificateId, chapter, knowledgeSection, knowledgePoint) {
+      const rows = db.prepare(
+        "SELECT id,data FROM user_question_drafts WHERE user_id=? AND certificate_id=? ORDER BY created_at DESC",
+      ).all(userId, certificateId);
+      for (const row of rows) {
+        const question = JSON.parse(row.data);
+        if (question.chapter === chapter &&
+            (question.knowledgeSection || null) === (knowledgeSection || null) &&
+            question.knowledgePoint === knowledgePoint)
+          return { id: row.id, question };
+      }
+      return null;
+    },
+    deleteUserQuestionDraft(id, userId, certificateId) {
+      return db.prepare(
+        "DELETE FROM user_question_drafts WHERE id=? AND user_id=? AND certificate_id=?",
+      ).run(id, userId, certificateId).changes > 0;
+    },
+    submitUserQuestionDraft(id, userId, certificateId, question) {
+      db.exec("SAVEPOINT user_question_submission");
+      try {
+        const draft = db.prepare(
+          "SELECT 1 FROM user_question_drafts WHERE id=? AND user_id=? AND certificate_id=?",
+        ).get(id, userId, certificateId);
+        if (!draft) throw new Error("待提交题目不存在");
+        addQ(question);
+        db.prepare(
+          "INSERT INTO user_question_submissions (question_id,user_id,certificate_id,submitted_at) VALUES (?,?,?,?)",
+        ).run(question.id, userId, certificateId, new Date().toISOString());
+        db.prepare("DELETE FROM user_question_drafts WHERE id=?").run(id);
+        db.exec("RELEASE user_question_submission");
+        return question;
+      } catch (error) {
+        db.exec("ROLLBACK TO user_question_submission");
+        db.exec("RELEASE user_question_submission");
+        throw error;
+      }
+    },
+    communityLeaderboards(userId) {
+      const users = db.prepare(
+        "SELECT id, username, community_name AS communityName FROM users WHERE banned_at IS NULL",
+      ).all();
+      const stats = new Map(users.map((user) => [user.id, {
+        userId: user.id,
+        name: user.communityName || (/^1\d{10}$/.test(user.username)
+          ? `考匠用户 ${user.username.slice(-4)}`
+          : user.username),
+        answered: 0,
+        correct: 0,
+        accuracy: 0,
+        streakDays: 0,
+        submitted: 0,
+        days: new Set(),
+      }]));
+      for (const attempt of allA()) {
+        const entry = stats.get(attempt.userId);
+        if (!entry) continue;
+        entry.answered += 1;
+        if (attempt.correct) entry.correct += 1;
+        if (attempt.createdAt && !Number.isNaN(Date.parse(attempt.createdAt))) {
+          entry.days.add(new Date(attempt.createdAt).toLocaleDateString("en-CA", { timeZone: "Asia/Shanghai" }));
+        }
+      }
+      for (const row of db.prepare(
+        "SELECT user_id AS userId, COUNT(*) AS count FROM user_question_submissions GROUP BY user_id",
+      ).all()) {
+        const entry = stats.get(row.userId);
+        if (entry) entry.submitted = row.count;
+      }
+      const today = new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Shanghai" });
+      const previousDay = (day) => new Date(Date.parse(`${day}T00:00:00Z`) - 86400000).toISOString().slice(0, 10);
+      for (const entry of stats.values()) {
+        entry.accuracy = entry.answered ? Math.round(entry.correct / entry.answered * 1000) / 10 : 0;
+        let day = entry.days.has(today) ? today : previousDay(today);
+        while (entry.days.has(day)) {
+          entry.streakDays += 1;
+          day = previousDay(day);
+        }
+        delete entry.days;
+      }
+      const items = [...stats.values()];
+      const ranked = (key, eligible) => {
+        const rows = items.filter(eligible).sort((a, b) =>
+          b[key] - a[key] || b.answered - a.answered || a.name.localeCompare(b.name, "zh-CN"),
+        );
+        const format = (entry, index) => ({
+          rank: index + 1,
+          userId: entry.userId,
+          name: entry.name,
+          value: entry[key],
+          answered: entry.answered,
+          correct: entry.correct,
+        });
+        return {
+          top: rows.slice(0, 50).map(format),
+          me: rows.findIndex((entry) => entry.userId === userId) < 0
+            ? null
+            : format(rows.find((entry) => entry.userId === userId), rows.findIndex((entry) => entry.userId === userId)),
+        };
+      };
+      return {
+        answered: ranked("answered", (entry) => entry.answered > 0),
+        accuracy: ranked("accuracy", (entry) => entry.answered >= 20),
+        streakDays: ranked("streakDays", (entry) => entry.streakDays > 0),
+        submitted: ranked("submitted", (entry) => entry.submitted > 0),
+        accuracyMinAttempts: 20,
+      };
+    },
     attemptedQuestionIds: (userId = "local") =>
       new Set(allA(userId || "local").map((attempt) => attempt.questionId)),
     favoriteQuestionIds: (userId = "local") =>
@@ -477,18 +615,22 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       timeMs,
       mode = "practice",
       userId = "local",
+      response,
     ) {
       const q = getQ(questionId);
       if (!q) throw new Error("题目不存在");
       const correct =
-        JSON.stringify([...selected].sort()) ===
-        JSON.stringify([...q.answer].sort());
+        q.type === "short_answer"
+          ? selected[0] === "A"
+          : JSON.stringify([...selected].sort()) ===
+            JSON.stringify([...q.answer].sort());
       const a = {
         id: crypto.randomUUID(),
         userId,
         questionId,
         selected,
         correct,
+        ...(response !== undefined ? { response } : {}),
         timeMs,
         mode,
         chapter: q.chapter,
@@ -528,7 +670,12 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         db.exec("RELEASE attempt");
         throw e;
       }
-      return { ...a, answer: q.answer, analysis: q.analysis };
+      return {
+        ...a,
+        answer: q.answer,
+        ...(q.type === "short_answer" ? { expectedAnswer: q.expectedAnswer } : {}),
+        analysis: q.analysis,
+      };
     },
     wrongQuestions: (userId) => {
       const normalizedUserId = userId || "local";
@@ -880,6 +1027,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
           "user_mistakes",
           "question_favorites",
           "wrong_dismissals",
+          "user_question_submissions",
         ])
           db.prepare(`DELETE FROM ${table} WHERE question_id=?`).run(questionId);
         const sessions = db.prepare("SELECT id,data FROM sessions").all();

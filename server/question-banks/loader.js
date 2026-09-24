@@ -227,6 +227,13 @@ function cleanSharedStem(value) {
     .trim();
 }
 
+function normalizeSharedText(value) {
+  return String(value || "")
+    .replace(/\s+/g, " ")
+    .replace(/([\u4e00-\u9fff])\s+(?=[\u4e00-\u9fff])/g, "$1")
+    .trim();
+}
+
 function analysisSharedStem(analysis) {
   const text = String(analysis || "");
   let match;
@@ -427,6 +434,30 @@ function decorateVeterinarySharedGroups(questions) {
     if (!question.sharedGroupId) continue;
     if (!groups.has(question.sharedGroupId)) groups.set(question.sharedGroupId, []);
     groups.get(question.sharedGroupId).push(question);
+  }
+  // Keep each case question complete when it is viewed on its own (for
+  // example in the admin question list). Grouped practice still uses
+  // sharedStem to display the case material once and remove this prefix.
+  for (const group of groups.values()) {
+    const stem = group.find(
+      (question) => question.sharedKind === "stem" && question.sharedStem,
+    )?.sharedStem;
+    if (!stem) continue;
+    const normalizedStem = cleanSharedStem(stem);
+    for (const question of group) {
+      const marker = questionSharedMarker(question.question);
+      const standaloneQuestion =
+        marker?.kind === "stem"
+          ? marker.text.trim()
+          : String(question.question || "").trim();
+      if (!standaloneQuestion) continue;
+      const normalizedQuestion = normalizeSharedText(standaloneQuestion);
+      question.question = standaloneQuestion.startsWith(normalizedStem)
+        ? standaloneQuestion
+        : normalizedQuestion.startsWith(normalizedStem)
+          ? normalizedQuestion
+          : `${normalizedStem}。${standaloneQuestion}`;
+    }
   }
   // PDF chapter labels occasionally change in the middle of a case block.
   // Keep the whole case in one syllabus module so an exam cannot split it.

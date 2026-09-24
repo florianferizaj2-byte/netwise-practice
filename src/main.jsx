@@ -146,6 +146,8 @@ const sources = {
   syllabus_practice: "HCIA V2.0 大纲仿真题",
   user_recall_collection: "第三方公开回忆题（用户提供）",
   user_simulation_collection: "第三方原创模拟题（用户提供）",
+  user_external_2026_h1: "2026上半年网络工程师模拟题（用户提供）",
+  user_external_2026_h1_lastset: "2026上半年网络工程师最后一套卷（用户提供）",
   ai_generated: "AI 生成练习题",
   admin_generated: "管理员 AI 扩充题",
 };
@@ -155,6 +157,7 @@ const isSingleSelect = (question) =>
 const questionTypeName = (question, compact = false) => {
   if (question.type === "true_false") return "判断题";
   if (question.type === "multiple_choice") return compact ? "多选" : "多选题";
+  if (question.type === "short_answer") return compact ? "简答" : "简答题";
   return compact ? "单选" : "单选题";
 };
 const veterinaryModules = ["基础科目", "预防科目", "临床科目", "综合科目"];
@@ -968,11 +971,11 @@ function AuthScreen({ onAuth, initialError = "" }) {
           </button>
           <a
             className="auth-app-download"
-            href="/downloads/kaojiang-v0.2.6.apk"
-            download="kaojiang-v0.2.6.apk"
+            href="/downloads/kaojiang-v0.2.7.apk"
+            download="kaojiang-v0.2.7.apk"
           >
             <Download size={16} />
-            下载考匠 App · Android v0.2.6
+            下载考匠 App · Android v0.2.7
           </a>
           <p className="auth-privacy-note">
             <ShieldCheck size={14} /> 你的学习数据与 AI 配置仅属于当前账号
@@ -1003,15 +1006,15 @@ function AnnouncementModal({ onClose }) {
             </span>
             <div>
               <span className="announcement-kicker">考匠 · 更新公告</span>
-              <h2 id="announcement-title">移动端 v0.2.6 更新</h2>
-              <p>新增一级、二级、三级知识点目录，各级都可直接练习或继续展开。</p>
+              <h2 id="announcement-title">移动端 v0.2.7 更新</h2>
+              <p>支持图片题、AI 实时出题与社区排行榜。</p>
             </div>
           </div>
           <IconButton icon={X} label="关闭网站公告" onClick={onClose} />
         </header>
         <div className="announcement-body">
           <div className="announcement-highlight">
-                <strong>考匠 App v0.2.6 已发布</strong>
+                <strong>考匠 App v0.2.7 已发布</strong>
                 <span>
                   在登录页或账号菜单点击“下载 App”即可获取最新版 Android 安装包，登录后连接现有网站后端。
                 </span>
@@ -1020,33 +1023,27 @@ function AnnouncementModal({ onClose }) {
             <li>
               <span>01</span>
               <div>
-                <strong>三级知识点都能直接练习</strong>
-                <p>
-                  一级分类和二级分类都可以直接进入题库，也可展开下一级；三级考点可直接刷题。
-                </p>
+                <strong>图片题与简答题</strong>
+                <p>App 中可查看原题配图，也能填写简答题并自评。</p>
               </div>
             </li>
             <li>
               <span>02</span>
               <div>
-                <strong>分类进度逐级查看</strong>
-                <p>
-                  一级、二级和三级分类分别显示题量与练习进度，便于从大纲快速定位考点。
-                </p>
+                <strong>AI 出题实时反馈</strong>
+                <p>按知识点生成题目，程序查重和独立审核后可选择提交或删除。</p>
               </div>
             </li>
             <li>
               <span>03</span>
               <div>
-                <strong>保留已有练习功能</strong>
-                <p>
-                  每日范围练习、收藏题、错题复习和 App 内更新继续可用。
-                </p>
+                <strong>社区排行榜</strong>
+                <p>查看刷题量、正确率、连续天数和提交题目四个榜单。</p>
               </div>
             </li>
           </ul>
           <p className="announcement-footnote">
-            App 当前提供 Android v0.2.6 安装包；低于最低支持版本的旧 App 必须更新后才能继续使用。正式考试信息仍请以对应认证机构和相关主管部门的最新公告为准。
+            App 当前提供 Android v0.2.7 安装包；正式考试信息仍请以对应认证机构和相关主管部门的最新公告为准。
           </p>
         </div>
         <footer className="announcement-footer">
@@ -1193,7 +1190,7 @@ function App() {
   useEffect(() => {
     if (!auth?.authenticated || !auth.user?.certificateId || !dashboard) return;
     try {
-      if (localStorage.getItem("netwise-announcement-2026-09-v6") !== "seen")
+      if (localStorage.getItem("netwise-announcement-2026-09-v7") !== "seen")
         setAnnouncementOpen(true);
     } catch {
       setAnnouncementOpen(true);
@@ -1218,7 +1215,7 @@ function App() {
   const dismissAnnouncement = () => {
     setAnnouncementOpen(false);
     try {
-      localStorage.setItem("netwise-announcement-2026-09-v6", "seen");
+      localStorage.setItem("netwise-announcement-2026-09-v7", "seen");
     } catch {
       // Private browsing may disable localStorage; closing still works for this render.
     }
@@ -1524,8 +1521,8 @@ function App() {
                 <a
                   className="account-menu-link"
                   role="menuitem"
-                  href="/downloads/kaojiang-v0.2.6.apk"
-                  download="kaojiang-v0.2.6.apk"
+                  href="/downloads/kaojiang-v0.2.7.apk"
+                  download="kaojiang-v0.2.7.apk"
                   onClick={() => setAccountMenuOpen(false)}
                 >
                   <Download size={17} />
@@ -2933,12 +2930,19 @@ function WrongView({ wrong, start, train, busy, run, refresh }) {
                 </span>
               </div>
               <h3>{q.question}</h3>
-              <p className="answer-line">
-                上次错选 <b>{q.lastWrong.selected.join("、") || "未作答"}</b>
-                <span>
-                  正确答案 <strong>{q.answer.join("、")}</strong>
-                </span>
-              </p>
+              {q.type === "short_answer" ? (
+                <div className="wrong-short-answer">
+                  <p>上次作答：{q.lastWrong.response || "未填写"}</p>
+                  <p>参考答案：{q.expectedAnswer}</p>
+                </div>
+              ) : (
+                <p className="answer-line">
+                  上次错选 <b>{q.lastWrong.selected.join("、") || "未作答"}</b>
+                  <span>
+                    正确答案 <strong>{q.answer.join("、")}</strong>
+                  </span>
+                </p>
+              )}
               {q.mistake && (
                 <div className="mistake-detail">
                   <Sparkles size={17} />
@@ -3297,7 +3301,36 @@ function CommunityChatView({ currentUserId }) {
     [sending, setSending] = useState(false),
     [hasMore, setHasMore] = useState(false),
     [before, setBefore] = useState(""),
-    [chatError, setChatError] = useState("");
+    [chatError, setChatError] = useState(""),
+    [leaderboards, setLeaderboards] = useState(null),
+    [leaderboardOpen, setLeaderboardOpen] = useState(false),
+    [leaderboardBusy, setLeaderboardBusy] = useState(false),
+    [leaderboardError, setLeaderboardError] = useState(""),
+    [leaderboardTab, setLeaderboardTab] = useState("answered");
+  const leaderboardTypes = [
+    ["answered", "刷题量", "题"],
+    ["accuracy", "正确率", "%"],
+    ["streakDays", "坚持天数", "天"],
+    ["submitted", "提交题目", "题"],
+  ];
+  const activeBoard = leaderboards?.[leaderboardTab];
+  const leaderboardUnit = leaderboardTypes.find(([id]) => id === leaderboardTab)?.[2] || "";
+  const openLeaderboard = async () => {
+    if (leaderboardOpen) {
+      setLeaderboardOpen(false);
+      return;
+    }
+    setLeaderboardOpen(true);
+    setLeaderboardBusy(true);
+    setLeaderboardError("");
+    try {
+      setLeaderboards(await api("/community/leaderboards"));
+    } catch (error) {
+      setLeaderboardError(error.message);
+    } finally {
+      setLeaderboardBusy(false);
+    }
+  };
   const messagesRef = useRef(null);
   const firstLoadRef = useRef(true);
   useEffect(() => {
@@ -3437,11 +3470,58 @@ function CommunityChatView({ currentUserId }) {
   return (
     <>
       <Heading title="考匠社区" subtitle="一个公共大群 · 不加好友 · 和所有正在努力的人交流">
+        <button onClick={openLeaderboard} aria-expanded={leaderboardOpen}>
+          <ChartNoAxesCombined size={16} />排行榜
+        </button>
         <button onClick={refresh} disabled={refreshing || loading}>
           <RefreshCw size={16} className={refreshing ? "spin" : ""} />
           刷新消息
         </button>
       </Heading>
+      {leaderboardOpen && (
+        <section className="community-leaderboards" aria-label="社区排行榜">
+          <div className="community-leaderboard-tabs" role="tablist" aria-label="榜单类型">
+            {leaderboardTypes.map(([id, label]) => (
+              <button
+                key={id}
+                role="tab"
+                aria-selected={leaderboardTab === id}
+                className={leaderboardTab === id ? "active" : ""}
+                onClick={() => setLeaderboardTab(id)}
+              >{label}</button>
+            ))}
+          </div>
+          <p className="community-leaderboard-rule">
+            {leaderboardTab === "accuracy"
+              ? `至少作答 ${leaderboards?.accuracyMinAttempts ?? 20} 题参与正确率排行`
+              : leaderboardTab === "streakDays"
+                ? "按北京时间计算连续刷题天数；今天未刷时保留昨日连续记录"
+                : leaderboardTab === "submitted"
+                  ? "统计通过双重核验并提交到服务器的题目"
+                  : "统计累计作答次数"}
+          </p>
+          {leaderboardBusy && <p className="community-leaderboard-empty"><LoaderCircle size={18} className="spin" />正在读取榜单…</p>}
+          {leaderboardError && <p className="community-leaderboard-error" role="alert">{leaderboardError}</p>}
+          {!leaderboardBusy && !leaderboardError && !activeBoard?.top.length && (
+            <p className="community-leaderboard-empty">这个榜单还没有记录，开始刷题吧。</p>
+          )}
+          {!!activeBoard?.top.length && (
+            <ol className="community-leaderboard-list">
+              {activeBoard.top.map((entry) => (
+                <li key={entry.userId} className={entry.userId === currentUserId ? "own" : ""}>
+                  <strong className="community-leaderboard-rank">{entry.rank}</strong>
+                  <span>{entry.name}{entry.userId === currentUserId ? " · 我" : ""}</span>
+                  {leaderboardTab === "accuracy" && <small>{entry.correct}/{entry.answered} 题正确</small>}
+                  <b>{entry.value}{leaderboardUnit}</b>
+                </li>
+              ))}
+            </ol>
+          )}
+          {activeBoard?.me && activeBoard.me.rank > activeBoard.top.length && (
+            <div className="community-leaderboard-me">我的排名 #{activeBoard.me.rank} · {activeBoard.me.value}{leaderboardUnit}</div>
+          )}
+        </section>
+      )}
       {chatError && (
         <div className="alert error" role="alert">
           <TriangleAlert size={18} />
@@ -5163,6 +5243,7 @@ function GenericPractice({ session, refresh, run, busy, train, configured, exit 
       const r = await api("/attempts", {
         questionId: q.id,
         selected,
+        ...(q.type === "short_answer" ? { response: current.responseDraft || "" } : {}),
         timeMs: Math.min(86400000, Date.now() - started.current),
       });
       updateCurrent({ result: r, submitted: true, revealed: false });
@@ -5326,32 +5407,68 @@ function GenericPractice({ session, refresh, run, busy, train, configured, exit 
           <QuestionImages question={q} />
           <h2 className="question-text">{q.question}</h2>
           <QuestionOrigin question={q} />
-          <div className="options">
-            {Object.entries(q.options).map(([k, v]) => (
-              <button
-                key={k}
-                disabled={!!result}
-                className={
-                  "option " +
-                  (selected.includes(k) ? "chosen " : "") +
-                  (result?.answer.includes(k)
-                    ? "correct "
-                    : result && selected.includes(k)
-                      ? "incorrect"
-                      : "")
-                }
-                onClick={() => choose(k)}
-              >
-                <span className="option-letter">{k}</span>
-                <span>{v}</span>
-                {result?.answer.includes(k) ? (
-                  <Check size={20} />
-                ) : result && selected.includes(k) ? (
-                  <X size={20} />
-                ) : null}
-              </button>
-            ))}
-          </div>
+          {q.type === "short_answer" ? (
+            <div className="short-answer-editor">
+              <label htmlFor={`short-answer-${q.id}`}>我的作答</label>
+              <textarea
+                id={`short-answer-${q.id}`}
+                rows={5}
+                maxLength={5000}
+                placeholder="在这里填写配置命令、计算过程或文字答案…"
+                value={result?.response ?? current.responseDraft ?? ""}
+                disabled={!!result || !!busy}
+                onChange={(event) => updateCurrent({ responseDraft: event.target.value })}
+              />
+              {!result && (
+                <div className="short-answer-self-rate" role="group" aria-label="自我评估答案">
+                  <span>对照题意完成作答后，自评：</span>
+                  <button
+                    type="button"
+                    className={selected[0] === "A" ? "selected correct" : ""}
+                    disabled={!!busy}
+                    onClick={() => updateCurrent({ selected: ["A"] })}
+                  >
+                    我答对了
+                  </button>
+                  <button
+                    type="button"
+                    className={selected[0] === "B" ? "selected review" : ""}
+                    disabled={!!busy}
+                    onClick={() => updateCurrent({ selected: ["B"] })}
+                  >
+                    需要复习
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="options">
+              {Object.entries(q.options).map(([k, v]) => (
+                <button
+                  key={k}
+                  disabled={!!result}
+                  className={
+                    "option " +
+                    (selected.includes(k) ? "chosen " : "") +
+                    (result?.answer.includes(k)
+                      ? "correct "
+                      : result && selected.includes(k)
+                        ? "incorrect"
+                        : "")
+                  }
+                  onClick={() => choose(k)}
+                >
+                  <span className="option-letter">{k}</span>
+                  <span>{v}</span>
+                  {result?.answer.includes(k) ? (
+                    <Check size={20} />
+                  ) : result && selected.includes(k) ? (
+                    <X size={20} />
+                  ) : null}
+                </button>
+              ))}
+            </div>
+          )}
           {result && (
             <div
               className={
@@ -5364,8 +5481,15 @@ function GenericPractice({ session, refresh, run, busy, train, configured, exit 
                   : result.correct
                     ? "回答正确"
                     : "这道题还需要巩固"}
-                <span>正确答案 {result.answer.join("、")}</span>
+                <span>
+                  {q.type === "short_answer"
+                    ? "参考答案"
+                    : "正确答案 " + result.answer.join("、")}
+                </span>
               </h3>
+              {q.type === "short_answer" && result.expectedAnswer && (
+                <div className="expected-answer">{result.expectedAnswer}</div>
+              )}
               <p>{result.analysis}</p>
             </div>
           )}
@@ -5472,10 +5596,14 @@ function GenericPractice({ session, refresh, run, busy, train, configured, exit 
             ) : (
               <button
                 className="primary push-right"
-                disabled={!selected.length || !!busy}
+                disabled={
+                  !selected.length ||
+                  (q.type === "short_answer" && !current.responseDraft?.trim()) ||
+                  !!busy
+                }
                 onClick={submit}
               >
-                提交答案
+                {q.type === "short_answer" ? "提交自评" : "提交答案"}
                 <Check size={17} />
               </button>
             )}

@@ -1,5 +1,6 @@
 import { APP_VERSION } from '../version';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { fetch as streamingFetch } from 'expo/fetch';
 
 type JsonRecord = Record<string, unknown>;
 
@@ -102,6 +103,73 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
   return data as T;
 }
 
+export type AiStreamProgress = {
+  stage?: string;
+  message: string;
+  outputLength?: number;
+  round?: number;
+};
+
+async function streamRequest<T>(
+  path: string,
+  body: Record<string, unknown>,
+  onProgress: (event: AiStreamProgress) => void,
+): Promise<T> {
+  const response = await streamingFetch(`${API_BASE_URL}${path}`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      Accept: 'text/event-stream',
+      'Content-Type': 'application/json',
+      'X-Client': 'mobile',
+      'X-App-Version': APP_VERSION,
+      ...(sessionToken ? { Authorization: `Bearer ${sessionToken}` } : {}),
+    },
+    body: JSON.stringify(body),
+  });
+  if (!response.ok) {
+    const raw = await response.text();
+    let message = `请求失败（${response.status}）`;
+    try { message = JSON.parse(raw).error || message; } catch { /* Keep HTTP status. */ }
+    throw new ApiError(message, response.status, raw);
+  }
+  if (!response.body) throw new Error('服务器没有返回可读取的 AI 进度');
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '';
+  let result: T | undefined;
+  const consume = (record: string) => {
+    const data = record.split(/\r?\n/)
+      .filter((line) => line.startsWith('data:'))
+      .map((line) => line.slice(5).trim())
+      .join('\n');
+    if (!data) return;
+    const event = JSON.parse(data) as
+      | ({ type: 'progress' } & AiStreamProgress)
+      | { type: 'done'; result: T }
+      | { type: 'error'; message: string };
+    if (event.type === 'progress') onProgress(event);
+    if (event.type === 'done') result = event.result;
+    if (event.type === 'error') throw new Error(event.message);
+  };
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      const records = buffer.split(/\r?\n\r?\n/);
+      buffer = records.pop() || '';
+      records.forEach(consume);
+    }
+    buffer += decoder.decode();
+    if (buffer.trim()) consume(buffer);
+  } finally {
+    reader.releaseLock();
+  }
+  if (result === undefined) throw new Error('AI 任务中断，请重试');
+  return result;
+}
+
 export type AuthResponse = {
   sessionToken?: string;
   user: {
@@ -127,9 +195,13 @@ export type DashboardResponse = {
 
 export type Question = {
   id: string;
-  type: 'single_choice' | 'multiple_choice' | 'true_false';
+  type: 'single_choice' | 'multiple_choice' | 'true_false' | 'short_answer';
   question: string;
   options: Record<string, string>;
+  images?: Array<{ src: string; alt?: string; caption?: string }>;
+  image?: string | Array<string | { src: string; alt?: string; caption?: string }>;
+  sharedStem?: string;
+  expectedAnswer?: string;
   chapter?: string;
   knowledgeSection?: string;
   knowledgePoint?: string;
@@ -181,6 +253,30 @@ export type AttemptResponse = {
   timeMs: number;
   answer: string[];
   analysis?: string;
+  expectedAnswer?: string;
+};
+
+export type AiQuestionDraft = {
+  id: string;
+  question: Question;
+  checks: { rulesAndDuplicates: boolean; independentAiReview: boolean };
+};
+
+export type LeaderboardEntry = {
+  rank: number;
+  userId: string;
+  name: string;
+  value: number;
+  answered: number;
+  correct: number;
+};
+
+export type LeaderboardResponse = {
+  answered: { top: LeaderboardEntry[]; me: LeaderboardEntry | null };
+  accuracy: { top: LeaderboardEntry[]; me: LeaderboardEntry | null };
+  streakDays: { top: LeaderboardEntry[]; me: LeaderboardEntry | null };
+  submitted: { top: LeaderboardEntry[]; me: LeaderboardEntry | null };
+  accuracyMinAttempts: number;
 };
 
 export type FeedbackKind =
@@ -414,10 +510,10 @@ export const mobileApi = {
     );
   },
 
-  recordAttempt(questionId: string, selected: string[], timeMs: number) {
+  recordAttempt(questionId: string, selected: string[], timeMs: number, response?: string) {
     return request<AttemptResponse>('/attempts', {
       method: 'POST',
-      body: JSON.stringify({ questionId, selected, timeMs }),
+      body: JSON.stringify({ questionId, selected, timeMs, ...(response ? { response } : {}) }),
     });
   },
 
@@ -455,6 +551,45 @@ export const mobileApi = {
       method: 'POST',
       body: JSON.stringify({ questionId, count, harder }),
     });
+  },
+
+  trainStream(
+    questionId: string,
+    count: 1 | 3 | 5 | 10,
+    onProgress: (event: AiStreamProgress) => void,
+  ) {
+    return streamRequest<AiTrainingResponse>('/ai/train/stream', { questionId, count }, onProgress);
+  },
+
+  generateQuestionDraft(
+    selection: { chapter: string; knowledgeSection?: string; knowledgePoint: string },
+    onProgress: (event: AiStreamProgress) => void,
+  ) {
+    return streamRequest<AiQuestionDraft>('/ai/questions/draft/stream', selection, onProgress);
+  },
+
+  currentQuestionDraft(selection: { chapter: string; knowledgeSection?: string; knowledgePoint: string }) {
+    const params = new URLSearchParams({ chapter: selection.chapter, knowledgePoint: selection.knowledgePoint });
+    if (selection.knowledgeSection) params.set('knowledgeSection', selection.knowledgeSection);
+    return request<{ draft: AiQuestionDraft | null }>(`/ai/questions/draft?${params.toString()}`);
+  },
+
+  submitQuestionDraft(id: string) {
+    return request<{ submitted: boolean; question: Question }>(
+      `/ai/questions/draft/${encodeURIComponent(id)}/submit`,
+      { method: 'POST', body: '{}' },
+    );
+  },
+
+  deleteQuestionDraft(id: string) {
+    return request<{ deleted: boolean }>(
+      `/ai/questions/draft/${encodeURIComponent(id)}`,
+      { method: 'DELETE' },
+    );
+  },
+
+  leaderboards() {
+    return request<LeaderboardResponse>('/community/leaderboards');
   },
 
   communityMessages(before?: string, limit = 50) {

@@ -32,6 +32,12 @@ const typeAliases = new Map([
   ["truefalse", "true_false"],
   ["判断", "true_false"],
   ["判断题", "true_false"],
+  ["short_answer", "short_answer"],
+  ["written_response", "short_answer"],
+  ["简答", "short_answer"],
+  ["简答题", "short_answer"],
+  ["填空", "short_answer"],
+  ["填空题", "short_answer"],
 ]);
 const difficultyAliases = new Map([
   ["easy", "easy"],
@@ -195,6 +201,11 @@ export function normalizeQuestionDraft(raw, context = {}) {
     question: readDraftField(source, ["question", "题干", "题目", "stem"], context.question),
     options,
     answer,
+    expectedAnswer: readDraftField(
+      source,
+      ["expectedAnswer", "参考答案", "标准答案", "answerText"],
+      context.expectedAnswer,
+    ),
     analysis: readDraftField(
       source,
       ["analysis", "解析", "explanation", "explain"],
@@ -241,12 +252,12 @@ export const questionImageSchema = z
 
 export const questionSchema = z
   .object({
-    type: z.enum(["single_choice", "multiple_choice", "true_false"]),
+    type: z.enum(["single_choice", "multiple_choice", "true_false", "short_answer"]),
     question: z.string().min(10).max(2000),
     options: z
       .object({
-        A: optionText,
-        B: optionText,
+        A: optionText.optional(),
+        B: optionText.optional(),
         C: optionText.optional(),
         D: optionText.optional(),
         E: optionText.optional(),
@@ -254,8 +265,8 @@ export const questionSchema = z
       .strict(),
     answer: z
       .array(z.enum(["A", "B", "C", "D", "E"]))
-      .min(1)
       .max(5),
+    expectedAnswer: z.string().trim().min(2).max(5000).optional(),
     analysis: z.string().min(12).max(5000),
     chapter: z.string().min(1).max(100),
     knowledgeSection: z.string().trim().min(1).max(100).optional(),
@@ -277,6 +288,19 @@ export const questionSchema = z
   .strict()
   .superRefine((q, ctx) => {
     const optionKeys = Object.keys(q.options);
+    if (q.type === "short_answer") {
+      if (optionKeys.length || q.answer.length)
+        ctx.addIssue({ code: "custom", message: "简答题不能包含选择项或字母答案" });
+      if (!q.expectedAnswer)
+        ctx.addIssue({ code: "custom", message: "简答题必须提供参考答案" });
+      return;
+    }
+    if (!q.options.A || !q.options.B)
+      ctx.addIssue({ code: "custom", message: "选择题必须包含A、B选项" });
+    if (q.answer.length < 1)
+      ctx.addIssue({ code: "custom", message: "选择题必须提供答案" });
+    if (q.expectedAnswer !== undefined)
+      ctx.addIssue({ code: "custom", message: "选择题不应提供简答题参考答案字段" });
     const isTrueFalse = q.type === "true_false";
     const standardOptions = ["A", "B", "C", "D"];
     if (
@@ -394,7 +418,7 @@ export function validateQuestion(raw, existing = [], context) {
     throw new Error("题干信息不完整");
   if (context && q.chapter !== context.chapter)
     throw new Error("题目偏离当前章节");
-  verifyCalculation(q);
+  if (q.type !== "short_answer") verifyCalculation(q);
   return q;
 }
 export function calculateMastery(attempts, now = Date.now()) {

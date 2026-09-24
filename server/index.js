@@ -21,14 +21,14 @@ import {
   syllabusForCertificate,
 } from "./certificates.js";
 import { buildSyllabusProgress, sampleExamQuestions } from "./syllabus.js";
-import { findSimilarQuestions } from "./question-similarity.js";
+import { findSimilarQuestions, questionSimilarity } from "./question-similarity.js";
 import { questionImageSchema, validateQuestion } from "./domain.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const mobileRelease = () => {
-  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.2.6";
+  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.2.7";
   const minimumVersion =
-    process.env.MOBILE_MINIMUM_VERSION || latestVersion;
+    process.env.MOBILE_MINIMUM_VERSION || "0.2.6";
   return {
     latestVersion,
     minimumVersion,
@@ -37,7 +37,7 @@ const mobileRelease = () => {
       `/downloads/kaojiang-v${latestVersion}.apk`,
     releaseNotes:
       process.env.MOBILE_RELEASE_NOTES ||
-      "新增一级、二级、三级知识点目录；各级可直接练习或展开下一级。",
+      "支持图片题与简答题；AI 出题流式反馈和双重核验；新增社区排行榜。",
   };
 };
 async function exchangeWechatMiniProgramCode(code) {
@@ -94,7 +94,7 @@ const compareVersions = (left, right) => {
   return 0;
 };
 const publicQuestion = (q) => {
-  const { answer, analysis, ownerUserId, aiGroupId, ...rest } = q;
+  const { answer, analysis, expectedAnswer, ownerUserId, aiGroupId, ...rest } = q;
   return rest;
 };
 const privateQuestion = (q) => {
@@ -507,6 +507,9 @@ export async function createApp(options = {}) {
       nextBefore: messages[0]?.createdAt || null,
     };
   });
+  route("get", "/api/community/leaderboards", (req) =>
+    store.communityLeaderboards(req.user?.id || "local"),
+  );
   route("post", "/api/community/messages", async (req) => {
     const body = z
       .object({
@@ -1582,7 +1585,11 @@ export async function createApp(options = {}) {
   });
   route("post", "/api/questions/:id/reveal", (req) => {
     const q = requireQ(req.params.id, req);
-    return { answer: q.answer, analysis: q.analysis };
+    return {
+      answer: q.answer,
+      analysis: q.analysis,
+      ...(q.type === "short_answer" ? { expectedAnswer: q.expectedAnswer } : {}),
+    };
   });
   route("post", "/api/attempts", (req) => {
     const b = z
@@ -1592,6 +1599,7 @@ export async function createApp(options = {}) {
           .array(z.enum(["A", "B", "C", "D", "E"]))
           .min(1)
           .max(5),
+        response: z.string().max(5000).optional(),
         timeMs: z.number().int().min(0).max(86400000),
       })
       .strict()
@@ -1599,7 +1607,14 @@ export async function createApp(options = {}) {
     if (new Set(b.selected).size !== b.selected.length)
       throw new Error("答案不能重复");
     const q = requireQ(b.questionId, req);
-    if (
+    if (q.type === "short_answer") {
+      if (
+        b.selected.length !== 1 ||
+        !["A", "B"].includes(b.selected[0]) ||
+        !b.response?.trim()
+      )
+        throw new Error("简答题请先填写作答内容，再自评是否答对");
+    } else if (
       (q.type === "single_choice" || q.type === "true_false") &&
       b.selected.length !== 1
     )
@@ -1610,6 +1625,7 @@ export async function createApp(options = {}) {
       b.timeMs,
       "practice",
       req.user?.id || "local",
+      b.response,
     );
   });
   route("get", "/api/wrong", (req) => {
@@ -1880,6 +1896,141 @@ export async function createApp(options = {}) {
       return { ...batch, questions: batch.questions.map(publicQuestion) };
     }),
   );
+  const userQuestionDraftSchema = z.object({
+    chapter: z.string().trim().min(1).max(100),
+    knowledgeSection: z.string().trim().min(1).max(100).optional(),
+    knowledgePoint: z.string().trim().min(1).max(100),
+  }).strict();
+  const userQuestionDraft = (req) => {
+    const certificateId = requireCertificate(req);
+    const userId = requestUserId(req);
+    const draft = store.userQuestionDraft(req.params.id, userId, certificateId);
+    if (!draft) {
+      const error = new Error("待提交题目不存在或不属于当前账号");
+      error.status = 404;
+      throw error;
+    }
+    return { draft, certificateId, userId };
+  };
+  route("get", "/api/ai/questions/draft", (req) => {
+    const selection = userQuestionDraftSchema.parse(req.query);
+    const saved = store.latestUserQuestionDraft(
+      requestUserId(req), requireCertificate(req),
+      selection.chapter, selection.knowledgeSection, selection.knowledgePoint,
+    );
+    return {
+      draft: saved ? {
+        ...saved,
+        checks: { rulesAndDuplicates: true, independentAiReview: true },
+      } : null,
+    };
+  });
+  app.post("/api/ai/questions/draft/stream", async (req, res, next) => {
+    const send = (event) => {
+      if (!res.writableEnded && !res.destroyed)
+        res.write(`data: ${JSON.stringify(event)}\n\n`);
+    };
+    try {
+      if (aiBusy) {
+        const error = new Error("已有 AI 任务正在执行，请稍候");
+        error.status = 409;
+        throw error;
+      }
+      const body = userQuestionDraftSchema.parse(req.body);
+      const certificateId = requireCertificate(req);
+      const userId = requestUserId(req);
+      if (store.latestUserQuestionDraft(
+        userId, certificateId,
+        body.chapter, body.knowledgeSection, body.knowledgePoint,
+      )) throw new Error("当前知识点已有待提交草稿，请先提交或删除");
+      const seed = store.allQ().find((question) =>
+        hasCertificateQuestion(question, certificateId) &&
+        question.chapter === body.chapter &&
+        (question.knowledgeSection || null) === (body.knowledgeSection || null) &&
+        (question.targetKnowledgePoint || question.knowledgePoint) === body.knowledgePoint &&
+        (question.source !== "ai_generated" || question.ownerUserId === userId),
+      );
+      if (!seed) throw new Error("该知识点暂无可参考的题目，请先选择具体知识点");
+      res.status(200).set({
+        "Content-Type": "text/event-stream; charset=utf-8",
+        "Cache-Control": "no-cache, no-transform",
+        Connection: "keep-alive",
+        "X-Accel-Buffering": "no",
+      });
+      res.flushHeaders?.();
+      send({ type: "progress", stage: "prepare", message: "正在读取当前知识点已有题目" });
+      const heartbeat = setInterval(() =>
+        send({ type: "progress", stage: "heartbeat", message: "AI 正在继续处理…" }),
+      12000);
+      aiBusy = true;
+      try {
+        const [question] = await provider.generateBankExpansion(seed, 1, {
+          userId,
+          certificateId,
+          onProgress: (event) => send({ type: "progress", ...event }),
+        });
+        send({ type: "progress", stage: "second-check", message: "独立审核已通过，正在再次查重" });
+        const allQuestions = store.allQ();
+        const verified = validateQuestion(question, allQuestions, seed);
+        const related = allQuestions.filter((old) =>
+          old.chapter === body.chapter &&
+          (old.knowledgeSection || null) === (body.knowledgeSection || null) &&
+          (old.targetKnowledgePoint || old.knowledgePoint) === body.knowledgePoint,
+        );
+        if (related.some((old) => questionSimilarity(verified, old) >= 0.9))
+          throw new Error("新题与已有题目高度相似，请重新生成");
+        const saved = store.saveUserQuestionDraft(userId, certificateId, verified);
+        send({
+          type: "done",
+          result: {
+            ...saved,
+            checks: { rulesAndDuplicates: true, independentAiReview: true },
+          },
+        });
+      } finally {
+        clearInterval(heartbeat);
+        aiBusy = false;
+      }
+      res.end();
+    } catch (error) {
+      if (!res.headersSent) return next(error);
+      send({ type: "error", message: redact(error.message) });
+      res.end();
+    }
+  });
+  route("post", "/api/ai/questions/draft/:id/submit", (req) => {
+    const { draft, certificateId, userId } = userQuestionDraft(req);
+    const seed = store.allQ().find((question) =>
+      hasCertificateQuestion(question, certificateId) &&
+      question.chapter === draft.chapter &&
+      (question.knowledgeSection || null) === (draft.knowledgeSection || null) &&
+      (question.targetKnowledgePoint || question.knowledgePoint) === draft.knowledgePoint,
+    );
+    if (!seed) throw new Error("该知识点已不可用，请重新选择");
+    const allQuestions = store.allQ();
+    const verified = validateQuestion(draft, allQuestions, seed);
+    if (allQuestions.some((old) =>
+      old.chapter === draft.chapter &&
+      (old.knowledgeSection || null) === (draft.knowledgeSection || null) &&
+      (old.targetKnowledgePoint || old.knowledgePoint) === draft.knowledgePoint &&
+      questionSimilarity(verified, old) >= 0.9,
+    )) throw new Error("提交时发现题库中已有相似题目，请删除草稿后重新生成");
+    const question = store.submitUserQuestionDraft(req.params.id, userId, certificateId, {
+      ...verified,
+      id: `contributed-${crypto.randomUUID()}`,
+      source: "user_submitted",
+      sourceLabel: "用户 AI 审核投稿",
+      certificates: [certificateId],
+      contributedBy: userId,
+      createdAt: new Date().toISOString(),
+    });
+    return { submitted: true, question: publicQuestion(question) };
+  });
+  route("delete", "/api/ai/questions/draft/:id", (req) => {
+    const { certificateId, userId } = userQuestionDraft(req);
+    store.deleteUserQuestionDraft(req.params.id, userId, certificateId);
+    return { deleted: true };
+  });
   app.post("/api/ai/train/stream", async (req, res, next) => {
     const send = (event) => {
       if (res.writableEnded || res.destroyed) return;
@@ -2011,7 +2162,7 @@ export async function createApp(options = {}) {
       .parse(req.body || {});
     const certificateId = requireCertificate(req);
     const pool = certificateQuestions(certificateId, req.user?.id).filter(
-      (q) => q.source !== "ai_generated",
+      (q) => q.source !== "ai_generated" && q.type !== "short_answer",
     );
     const syllabus = syllabusForCertificate(certificateId);
     const examCount = syllabus?.examBlueprint?.questionCount || b.count;
@@ -2140,6 +2291,15 @@ export async function createApp(options = {}) {
       if (error && !res.headersSent) next(error);
     });
   });
+  app.use(
+    "/question-images",
+    express.static(path.join(root, "public", "question-images"), {
+      dotfiles: "deny",
+      fallthrough: false,
+      immutable: true,
+      maxAge: "1y",
+    }),
+  );
   app.use("/api", (req, res) => res.status(404).json({ error: "接口不存在" }));
   app.use((err, req, res, next) => {
     res.status(err.status || 400).json({

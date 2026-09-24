@@ -1,6 +1,7 @@
 import crypto from "node:crypto";
 import { z } from "zod";
 import { decrypt, validateBaseUrl, redact } from "./security.js";
+import { questionSimilarity } from "./question-similarity.js";
 import {
   validateQuestion,
   normalizeQuestionDraft,
@@ -402,6 +403,12 @@ export class OpenAICompatibleProvider extends AIProvider {
     const target = seed.targetKnowledgePoint || seed.knowledgePoint;
     const targetSection = seed.knowledgeSection;
     const existing = [...this.store.allQ(), ...(options.existing || [])];
+    const related = existing.filter((question) =>
+      question.chapter === seed.chapter &&
+      (question.knowledgeSection || null) === (targetSection || null) &&
+      (question.targetKnowledgePoint || question.knowledgePoint) === target &&
+      (question.source !== "ai_generated" || question.ownerUserId === userId),
+    );
     const difficulty = options.difficulty;
     const specs = Array.from({ length: count }, (_, index) => ({
       index,
@@ -432,9 +439,10 @@ export class OpenAICompatibleProvider extends AIProvider {
           ...(targetSection ? { knowledgeSection: targetSection } : {}),
           knowledgePoint: target,
           specs: requested,
-          previousQuestions: [seed, ...existing, ...accepted.values()]
-            .slice(-30)
-            .map((question) => question.question),
+          existingQuestionCount: related.length,
+          previousQuestions: [...related, ...accepted.values()]
+            .slice(-50)
+            .map((question) => ({ question: question.question, options: question.options })),
         },
         z
           .object({ questions: z.array(z.unknown()).length(pending.length) })
@@ -473,6 +481,11 @@ export class OpenAICompatibleProvider extends AIProvider {
             [...existing, ...accepted.values(), ...candidates.map((item) => item.question)],
             seed,
           );
+          const nearest = related
+            .map((question) => ({ question, score: questionSimilarity(raw, question) }))
+            .sort((left, right) => right.score - left.score);
+          if (nearest[0]?.score >= 0.9)
+            throw new Error("与当前知识点已有题目高度相似");
           if (raw.knowledgePoint !== target)
             throw new Error("题目知识点与扩充目标不一致");
           if (targetSection && raw.knowledgeSection !== targetSection)
@@ -497,7 +510,13 @@ export class OpenAICompatibleProvider extends AIProvider {
             items: candidates,
             target,
             original: seed,
-            previousQuestions: [...existing, ...accepted.values()].slice(-30),
+            previousQuestions: candidates.flatMap(({ question }) =>
+              related
+                .map((old) => ({ old, score: questionSimilarity(question, old) }))
+                .sort((left, right) => right.score - left.score)
+                .slice(0, 8)
+                .map(({ old, score }) => ({ ...old, similarity: score })),
+            ),
           },
           z
             .object({

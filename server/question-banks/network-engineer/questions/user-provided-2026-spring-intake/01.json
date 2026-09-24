@@ -1,0 +1,3153 @@
+[
+  {
+    "id": "intake-2026-spring-q001",
+    "type": "single_choice",
+    "question": "某存储器芯片有12根地址线、8根数据线，其存储容量为（）。",
+    "options": {
+      "A": "16KB",
+      "B": "4KB",
+      "C": "32KB",
+      "D": "8KB"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "12根地址线可寻址2^12个存储单元，每个单元由8根数据线存1字节，因此容量为4096字节，即4KB，选B。",
+    "chapter": "计算机基础知识",
+    "knowledgePoint": "内存、磁盘与RAID",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "存储芯片容量",
+      "内存、磁盘与RAID",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 1,
+        "pages": [
+          1
+        ],
+        "answerPage": 15,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "存储器与可靠性"
+  },
+  {
+    "id": "intake-2026-spring-q002",
+    "type": "single_choice",
+    "question": "下列哪一项不属于RISC的特征（）。",
+    "options": {
+      "A": "避免使用复杂指令",
+      "B": "CPU用寄存器数量相多",
+      "C": "以微程序控制方式为主",
+      "D": "指令长度固定，指令格式种类少，寻址方式种类少"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "RISC强调指令简单、定长、格式和寻址方式少，通常采用硬布线控制；以微程序控制为主是CISC的典型特点，所以选C。",
+    "chapter": "计算机基础知识",
+    "knowledgePoint": "CPU流水线",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "RISC与CISC",
+      "CPU流水线",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 2,
+        "pages": [
+          1
+        ],
+        "answerPage": 15,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "计算机组成"
+  },
+  {
+    "id": "intake-2026-spring-q003",
+    "type": "single_choice",
+    "question": "将一条指令的执行过程分解为取指、分析和执行三步，按照流水方式执行。若取指时间为4Δt，分析时间为2Δt，执行时间为3Δt，则执行完100条指令需要的时间为（ ）Δt。",
+    "options": {
+      "A": "200",
+      "B": "300",
+      "C": "400",
+      "D": "405"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "第一条指令需经历三个阶段，共4+2+3=9Δt；流水线填满后每条受最长的取指阶段限制，再用99×4Δt。总计9+396=405Δt，选D。",
+    "chapter": "计算机基础知识",
+    "knowledgePoint": "CPU流水线",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "CPU流水线",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 3,
+        "pages": [
+          1
+        ],
+        "answerPage": 15,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "计算机组成"
+  },
+  {
+    "id": "intake-2026-spring-q004",
+    "type": "single_choice",
+    "question": "在无噪声情况下，若某通信链路的带宽为3kHz，采用4个相位、每个相位具有4种振幅的QAM调制技术，则该通信链路的最大数据传输速率是（）。",
+    "options": {
+      "A": "12kbps",
+      "B": "24kbps",
+      "C": "48kbps",
+      "D": "96kbps"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "4种相位与4种振幅组合成16种信号状态，每个符号携带log2(16)=4bit。奈奎斯特上限为2×3000×4=24000bit/s，即24kbps，选B。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "编码与调制",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "编码与调制",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 4,
+        "pages": [
+          1
+        ],
+        "answerPage": 15,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "数据通信与传输"
+  },
+  {
+    "id": "intake-2026-spring-q005",
+    "type": "single_choice",
+    "question": "10个64kb/s的信息通过统计复用到一条主干线路，如果此主干线路的开销为20%，则其主干线路带宽应该是（ ）kb/s。",
+    "options": {
+      "A": "410",
+      "B": "512",
+      "C": "640",
+      "D": "800"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "有效信息速率为10×64=640kb/s。线路开销占容量的20%，有效部分占80%，所以线路容量至少为640÷0.8=800kb/s，选D。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "信道容量与数据速率",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "统计复用",
+      "信道容量与数据速率",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 5,
+        "pages": [
+          1
+        ],
+        "answerPage": 15,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "数据通信与传输"
+  },
+  {
+    "id": "intake-2026-spring-q006-a",
+    "type": "single_choice",
+    "question": "第1空：该内存共有多少字？",
+    "options": {
+      "A": "16K",
+      "B": "64K",
+      "C": "4K",
+      "D": "10K"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "地址范围首尾均包含，字数为BFFFFH−B0000H+1=10000H=65536=64K个字，选B。",
+    "chapter": "计算机基础知识",
+    "knowledgePoint": "内存、磁盘与RAID",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "存储器容量与芯片组织",
+      "内存、磁盘与RAID",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 6,
+        "pages": [
+          2
+        ],
+        "answerPage": 15,
+        "sourceAnswers": [
+          "B",
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "sharedGroupId": "intake-2026-spring-q006",
+    "sharedKind": "stem",
+    "sharedStem": "内存按字编址，字为16bit，地址从B0000H到BFFFFH，共有（ ）字。若用存储容量为32K×16bit的存储芯片构成该内存，至少需要（ ）片。",
+    "sharedOrder": 1,
+    "knowledgeSection": "存储器与可靠性"
+  },
+  {
+    "id": "intake-2026-spring-q006-b",
+    "type": "single_choice",
+    "question": "第2空：至少需要多少片存储芯片？",
+    "options": {
+      "A": "2",
+      "B": "5",
+      "C": "8",
+      "D": "10"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "目标容量为64K×16bit，单片容量为32K×16bit，字宽相同，只需扩展字数：64K÷32K=2片，选A。",
+    "chapter": "计算机基础知识",
+    "knowledgePoint": "内存、磁盘与RAID",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "存储器容量与芯片组织",
+      "内存、磁盘与RAID",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 6,
+        "pages": [
+          2
+        ],
+        "answerPage": 15,
+        "sourceAnswers": [
+          "B",
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "sharedGroupId": "intake-2026-spring-q006",
+    "sharedKind": "stem",
+    "sharedStem": "内存按字编址，字为16bit，地址从B0000H到BFFFFH，共有（ ）字。若用存储容量为32K×16bit的存储芯片构成该内存，至少需要（ ）片。",
+    "sharedOrder": 2,
+    "knowledgeSection": "存储器与可靠性"
+  },
+  {
+    "id": "intake-2026-spring-q008",
+    "type": "single_choice",
+    "question": "CRC是链路层常用的检错码，若生成多项式为x⁵+x³+1，传输数据为1010110，得到的CRC校验码是（）。",
+    "options": {
+      "A": "01000",
+      "B": "01001",
+      "C": "1001",
+      "D": "1000"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "按标准CRC做法，数据1010110后补5个0，再用101001作模2除法，余数为01101。该余数不在选项内，答案页标A（01000）也不吻合；题目或选项疑有误，先保留原答案标注，需勘误后再用。",
+    "chapter": "计算机基础知识",
+    "knowledgePoint": "CRC循环冗余校验",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "CRC差错控制",
+      "CRC循环冗余校验",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 8,
+        "pages": [
+          2
+        ],
+        "answerPage": 15,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "校验码与差错控制"
+  },
+  {
+    "id": "intake-2026-spring-q009",
+    "type": "single_choice",
+    "question": "下列关于交换机堆叠的说法，正确的是（）。",
+    "options": {
+      "A": "Master交换机故障后，Slave交换机中优先级值最大的会被选举为Master交换机，承担控制层面功能",
+      "B": "堆叠就是将多台交换机相互堆叠",
+      "C": "Master交换机和Standby、Slave交换机共同承担数据转发",
+      "D": "必须使用专用堆叠卡和堆叠线缆"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "堆叠成员对外作为一个逻辑交换系统工作，Master、Standby和Slave成员都参与数据转发；控制层面由Master承担，因此选C。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "链路聚合、堆叠、QinQ与PoE",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "交换机堆叠",
+      "链路聚合、堆叠、QinQ与PoE",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 9,
+        "pages": [
+          2,
+          3
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "其他交换技术"
+  },
+  {
+    "id": "intake-2026-spring-q010",
+    "type": "single_choice",
+    "question": "若在光纤通信系统中使用100mW的激光器，当其发射波长为1550nm时，其功率为（）。",
+    "options": {
+      "A": "40dBm",
+      "B": "20dBm",
+      "C": "10dBm",
+      "D": "30dBm"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "dBm以1mW为基准，功率为10log10(100mW/1mW)=20dBm。题干给出的波长不影响这项换算，选B。",
+    "chapter": "综合布线与网络规划",
+    "knowledgePoint": "光功率与光链路基础",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "光纤通信",
+      "光功率与光链路基础",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 10,
+        "pages": [
+          2,
+          3
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "传输介质"
+  },
+  {
+    "id": "intake-2026-spring-q011",
+    "type": "single_choice",
+    "question": "VxLAN与QinQ相比，说法错误的是（）。",
+    "options": {
+      "A": "通过MAC-in-UDP封装数据包",
+      "B": "增加VLAN ID数量",
+      "C": "其工作层具有更高的可扩展性，适应云计算要求",
+      "D": "技术更贵、更复杂，不是所有交换机都支持"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "VXLAN用MAC-in-UDP封装并以24位VNI标识覆盖网络，增加的是可用的二层网络标识空间，不是VLAN ID数量；错误说法是B。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "链路聚合、堆叠、QinQ与PoE",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "VXLAN与QinQ",
+      "链路聚合、堆叠、QinQ与PoE",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 11,
+        "pages": [
+          3
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "其他交换技术"
+  },
+  {
+    "id": "intake-2026-spring-q012",
+    "type": "single_choice",
+    "question": "以下哪种技术能够实现多个VLAN公用一个网段IP？",
+    "options": {
+      "A": "SUPER VLAN",
+      "B": "生成树",
+      "C": "VLAN修剪",
+      "D": "静态路由"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "SUPER VLAN可让多个子VLAN共享一个三层网段及其网关接口，减少网关地址占用，选A。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "802.1Q与VLAN标签",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "Super VLAN",
+      "802.1Q与VLAN标签",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 12,
+        "pages": [
+          3
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "VLAN"
+  },
+  {
+    "id": "intake-2026-spring-q013",
+    "type": "single_choice",
+    "question": "MSTP解决了很多RSTP和STP单生成树的缺陷，关于MSTP的说明正确的是（）。",
+    "options": {
+      "A": "每个MST Instance都使用单独的STP算法，计算单独的生成树",
+      "B": "每一个MST Instance都有一个标识（MSTID），MSTID是一字节的整数",
+      "C": "默认所有VLAN映射到MST Instance 1",
+      "D": "MSTP允许将一个或多个VLAN映射到一个或多个生成树实例（MST Instance）上，并为每个MST Instance单独计算根交换机、单独设置端口状态"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "MSTP可把一个或多个VLAN映射到MST实例，并让各实例独立计算生成树及端口状态，符合D。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "收敛过程与协议版本",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "MSTP",
+      "收敛过程与协议版本",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 13,
+        "pages": [
+          3
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "STP生成树"
+  },
+  {
+    "id": "intake-2026-spring-q014",
+    "type": "single_choice",
+    "question": "RSTP协议提供了多种保护功能。例如，当边缘端口配置为保护状态时，边缘端口接收到BPDU报文后的处理方法是（）。",
+    "options": {
+      "A": "根据要求转发BPDU报文",
+      "B": "BPDU报文后获取相关信息",
+      "C": "关闭该端口",
+      "D": "直接丢弃BPDU报文"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "边缘端口启用BPDU保护后若收到BPDU，通常会触发保护并关闭该端口，防止误接交换设备改变生成树，选C。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "端口角色与BPDU",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "RSTP边缘端口保护",
+      "端口角色与BPDU",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 14,
+        "pages": [
+          3
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "STP生成树"
+  },
+  {
+    "id": "intake-2026-spring-q015",
+    "type": "single_choice",
+    "question": "AP与AC间跨三层时，使用DHCP的Option（ ）选项字段获得AC的地址。",
+    "options": {
+      "A": "43",
+      "B": "38",
+      "C": "183",
+      "D": "82"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "DHCP Option 43是厂商特定信息选项，常用于向无线AP提供AC等厂商设备的发现信息，选A。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "AP类型与WLAN架构",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "DHCP Option",
+      "AP类型与WLAN架构",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 15,
+        "pages": [
+          3,
+          4
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "无线局域网"
+  },
+  {
+    "id": "intake-2026-spring-q016",
+    "type": "single_choice",
+    "question": "802.11 MAC层报文的帧类型不包括（）。",
+    "options": {
+      "A": "数据帧",
+      "B": "控制帧",
+      "C": "数字帧",
+      "D": "管理帧"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "802.11 MAC帧分为数据帧、控制帧和管理帧；“数字帧”不是该层定义的帧类型，选C。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "802.11与介质访问",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "802.11 MAC帧",
+      "802.11与介质访问",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 16,
+        "pages": [
+          4
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "无线局域网"
+  },
+  {
+    "id": "intake-2026-spring-q017",
+    "type": "single_choice",
+    "question": "在5G网络架构中，网络切片（Network Slicing）的主要优势是（）。",
+    "options": {
+      "A": "扩大信号范围",
+      "B": "降低设备成本",
+      "C": "为不同应用提供定制化服务",
+      "D": "提高用户入网时的认证速度"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "网络切片可在共享基础设施上建立逻辑隔离、能力不同的网络，为不同业务场景定制时延、带宽和可靠性等服务，选C。",
+    "chapter": "新技术",
+    "knowledgePoint": "5G",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "5G网络切片",
+      "5G",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 17,
+        "pages": [
+          4
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "移动与物联网"
+  },
+  {
+    "id": "intake-2026-spring-q018",
+    "type": "single_choice",
+    "question": "数据链路层采用后退N帧（GBN）协议，采用累计确认机制，发送方已发送编号为0～7的帧。当计时器超时，若发送方只收到0、2、3号帧的确认，则发送方需要重发的帧数是（）。",
+    "options": {
+      "A": "2",
+      "B": "3",
+      "C": "4",
+      "D": "5"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "累计确认到3号帧表示0至3号帧均已确认。超时后最早未确认的是4号，GBN需从4号重发至7号，共4帧，选C。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "协议、服务、PDU与设备所在层",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "后退N帧协议",
+      "协议、服务、PDU与设备所在层",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 18,
+        "pages": [
+          4
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "网络模型与分层"
+  },
+  {
+    "id": "intake-2026-spring-q019",
+    "type": "single_choice",
+    "question": "关于PAP，说法正确的是（）。",
+    "options": {
+      "A": "发送加密形式的口令",
+      "B": "通过哈希值进行认证",
+      "C": "可发起多次认证",
+      "D": "使用两次握手"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "PAP采用两次握手：发起方发送用户名和口令，认证方返回结果。PAP本身不加密口令；题目问正确说法，选D。",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "PPP、HDLC与帧中继",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "PPP认证",
+      "PPP、HDLC与帧中继",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 19,
+        "pages": [
+          4
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "广域网链路"
+  },
+  {
+    "id": "intake-2026-spring-q020",
+    "type": "single_choice",
+    "question": "PPP协议中，（ ）可用于给用户计算机分配网络参数。",
+    "options": {
+      "A": "LCP",
+      "B": "PAP",
+      "C": "CHAP",
+      "D": "NCP"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "LCP负责建立和维护PPP链路，PAP/CHAP用于认证；NCP协商网络层协议参数，例如IP配置，因此选D。",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "PPP、HDLC与帧中继",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "PPP与NCP",
+      "PPP、HDLC与帧中继",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 20,
+        "pages": [
+          4,
+          5
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "广域网链路"
+  },
+  {
+    "id": "intake-2026-spring-q021-a",
+    "type": "single_choice",
+    "question": "第1空：子网划分后主机位数最长是多少位？",
+    "options": {
+      "A": "5",
+      "B": "8",
+      "C": "7",
+      "D": "6"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "从/24划分至少3个子网，至少要借2位作为子网位（2^2=4个子网），剩余主机位为6位，选D。原答案页标C（7位），与题干条件不符；本稿按计算订正。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "VLSM子网划分",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "IPv4子网划分",
+      "VLSM子网划分",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 21,
+        "pages": [
+          5,
+          6
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "C",
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "原卷答案页标C；按至少3个子网复核后，本稿答案订正为D，原始标注保留在provenance.sourceAnswers。原卷未附逐题解析。",
+    "sharedGroupId": "intake-2026-spring-q021",
+    "sharedKind": "stem",
+    "sharedStem": "在IPv4地址段10.20.30.0/24中，划分至少3个子网，其主机位数最长是（ ）位，子网掩码是（）。",
+    "sharedOrder": 1,
+    "knowledgeSection": "IPv4与子网"
+  },
+  {
+    "id": "intake-2026-spring-q021-b",
+    "type": "single_choice",
+    "question": "第2空：对应的子网掩码是（）。",
+    "options": {
+      "A": "255.255.255.192",
+      "B": "255.255.255.128",
+      "C": "255.255.255.224",
+      "D": "255.255.255.0"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "借2位后前缀为/26，掩码是255.255.255.192，选A。原答案页标B（/25），只能划出2个子网，达不到至少3个；本稿按计算订正。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "VLSM子网划分",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "IPv4子网划分",
+      "VLSM子网划分",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 21,
+        "pages": [
+          5,
+          6
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "C",
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "原卷答案页标B；按至少3个子网复核后，本稿答案订正为A，原始标注保留在provenance.sourceAnswers。原卷未附逐题解析。",
+    "sharedGroupId": "intake-2026-spring-q021",
+    "sharedKind": "stem",
+    "sharedStem": "在IPv4地址段10.20.30.0/24中，划分至少3个子网，其主机位数最长是（ ）位，子网掩码是（）。",
+    "sharedOrder": 2,
+    "knowledgeSection": "IPv4与子网"
+  },
+  {
+    "id": "intake-2026-spring-q022",
+    "type": "single_choice",
+    "question": "某路由表中有转发接口相同的4条路由表项，其目的网络分别为35.230.32.0/21、35.230.40.0/21、35.230.48.0/21和35.230.56.0/21。将这4条路由聚合后的目的网络地址是（）。",
+    "options": {
+      "A": "35.230.0.0/19",
+      "B": "35.230.0.0/20",
+      "C": "35.230.32.0/19",
+      "D": "35.230.32.0/20"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "每个/21覆盖第三个八位组的8个连续取值；32、40、48、56四段合计32个取值，聚合前缀为/19，起始网络是35.230.32.0，选C。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "CIDR与路由聚合",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "路由汇总",
+      "CIDR与路由聚合",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 22,
+        "pages": [
+          5
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "IPv4与子网"
+  },
+  {
+    "id": "intake-2026-spring-q023",
+    "type": "single_choice",
+    "question": "若某个IP分段是原报文的第一个分段，其（ ）值为“0”。",
+    "options": {
+      "A": "片偏移值",
+      "B": "M标志",
+      "C": "TTL值",
+      "D": "数据长度"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IPv4分片偏移以原数据报数据区起点为基准，第一个分片从起点开始，因此片偏移为0，选A。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "IPv4首部、分片、组播与TTL",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "IPv4分片",
+      "IPv4首部、分片、组播与TTL",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 23,
+        "pages": [
+          5
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "IPv4与子网"
+  },
+  {
+    "id": "intake-2026-spring-q024",
+    "type": "multiple_choice",
+    "question": "IP数据报的分段和重装配要用到报头部的报文ID、数据长度、段偏置值和M标志4个字段，其中（ ）的作用是指示每个分段在原报文中的位置；若某个分段是原报文的最后一个分段，其（ ）值为“0”。",
+    "options": {
+      "A": "段偏置值",
+      "B": "M标志",
+      "C": "报文ID",
+      "D": "数据长度"
+    },
+    "answer": [
+      "A",
+      "B"
+    ],
+    "analysis": "片偏移字段表示分片数据在原数据报中的位置；MF（更多分片）为0表示后面没有分片，即当前片是最后一片，因此依次选A、B。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "IPv4首部、分片、组播与TTL",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "IPv4分片与重组",
+      "IPv4首部、分片、组播与TTL",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 24,
+        "pages": [
+          5
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "A",
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "IPv4与子网"
+  },
+  {
+    "id": "intake-2026-spring-q025",
+    "type": "single_choice",
+    "question": "主机A发送IP数据报给主机B，途中经过3个路由器，则在主机A整个过程中最多发起（ ）次ARP询问。",
+    "options": {
+      "A": "4",
+      "B": "3",
+      "C": "2",
+      "D": "1"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "主机A只需解析本地链路上的下一跳MAC地址；若目的主机在异网，下一跳是默认网关。后续路由器各自在本地链路处理ARP，不会让A逐个询问，最多1次，选D。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "ARP与RARP",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "ARP",
+      "ARP与RARP",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 25,
+        "pages": [
+          6
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "网际层协议"
+  },
+  {
+    "id": "intake-2026-spring-q026",
+    "type": "single_choice",
+    "question": "ICMPv6报文被广泛应用于其他协议中，包括NDP、Path MTU发现机制等。在NDP中，IPv6地址解析使用（ ）和NA报文实现。",
+    "options": {
+      "A": "RS",
+      "B": "RA",
+      "C": "NS",
+      "D": "R"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "IPv6邻居发现协议用邻居请求NS探测目标地址，再由邻居通告NA回应，完成地址解析，选C。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "邻居发现协议NDP",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "IPv6邻居发现",
+      "邻居发现协议NDP",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 26,
+        "pages": [
+          6
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "IPv6"
+  },
+  {
+    "id": "intake-2026-spring-q027",
+    "type": "single_choice",
+    "question": "RSVP协议通过（ ）来预留资源。",
+    "options": {
+      "A": "发送方向路由器请求",
+      "B": "接收方向路由器请求",
+      "C": "发送方向接收方请求",
+      "D": "接收方向发送方请求"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RSVP资源预留由接收方发起RESV消息，沿数据路径向发送方方向请求预留资源，选B。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "协议、服务、PDU与设备所在层",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "RSVP资源预留",
+      "协议、服务、PDU与设备所在层",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 27,
+        "pages": [
+          6
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "网络模型与分层"
+  },
+  {
+    "id": "intake-2026-spring-q028",
+    "type": "single_choice",
+    "question": "路由器收到一个IP数据包，可通过流类型、流标签等字段进行QoS转发。当路由器完整接收数据包后，发现其大小超出设备支持的最大MTU，此时路由器有可能采取的动作是（）。",
+    "options": {
+      "A": "对该数据包进行分片，然后继续转发",
+      "B": "直接转发数据包",
+      "C": "直接丢弃数据包",
+      "D": "丢弃该数据包，并通知源主机数据包大于MTU"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "题干提到流标签，指向IPv6。IPv6中途路由器不能替数据包分片；超出出接口MTU时会丢弃并向源地址发送Packet Too Big通知，选D。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "IPv6过渡技术",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "MTU与分片",
+      "IPv6过渡技术",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 28,
+        "pages": [
+          6
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "IPv6"
+  },
+  {
+    "id": "intake-2026-spring-q029",
+    "type": "single_choice",
+    "question": "IPv6报文中的扩展首部中，需要途经的每个路由器处理的是（）。",
+    "options": {
+      "A": "逐跳选项首部",
+      "B": "路由选择首部",
+      "C": "目标选项",
+      "D": "封装安全负荷"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "逐跳选项首部用于携带需要沿途节点检查的选项；目标选项只由目的节点处理，路由首部由指定节点处理，因此选A。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "IPv6过渡技术",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "IPv6扩展首部",
+      "IPv6过渡技术",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 29,
+        "pages": [
+          6,
+          7
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "IPv6"
+  },
+  {
+    "id": "intake-2026-spring-q030",
+    "type": "single_choice",
+    "question": "主机甲与主机乙之间建立一个TCP连接。主机甲向主机乙发送了3个连续的TCP段，分别包含300B、400B和500B的有效载荷，第3个段的序号为900。若主机乙只正确接收到第1段和第3段，则主机乙发送给主机甲的确认序号是（）。",
+    "options": {
+      "A": "300",
+      "B": "500",
+      "C": "1200",
+      "D": "1400"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "第三段从序号900开始，第二段应覆盖500至899。由于第二段缺失，即使收到第三段，接收方仍按累计确认等待序号500，选B。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "TCP连接与可靠传输",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "TCP确认机制",
+      "TCP连接与可靠传输",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 30,
+        "pages": [
+          7
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "传输层"
+  },
+  {
+    "id": "intake-2026-spring-q031",
+    "type": "single_choice",
+    "question": "若主机甲与主机乙已建立一条TCP连接，最大段长（MSS）为1KB，往返时间（RTT）为2ms，则在不出现拥塞的前提下，拥塞窗口从8KB增大到32KB所需的最短时间是（）。",
+    "options": {
+      "A": "4ms",
+      "B": "8ms",
+      "C": "24ms",
+      "D": "48ms"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "按原答案采用拥塞避免阶段计算：每个RTT窗口约增加1个MSS，从8KB到32KB需增加24个MSS，即24×2ms=48ms，选D。题干未说明TCP所处阶段；若处于慢启动，时间会不同。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "TCP窗口、流量控制与拥塞控制",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "TCP拥塞控制",
+      "TCP窗口、流量控制与拥塞控制",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 31,
+        "pages": [
+          7
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "传输层"
+  },
+  {
+    "id": "intake-2026-spring-q032",
+    "type": "single_choice",
+    "question": "主机A的主域名服务器为202.112.115.3，辅助域名服务器为202.112.115.5，域名www.aaa.com的授权域名服务器为102.117.112.254。若主机A访问www.aaa.com时，由202.112.115.3返回域名解析结果，则（）。",
+    "options": {
+      "A": "若202.112.115.3工作正常，其必定采用了迭代算法",
+      "B": "若202.112.115.3工作正常，其必定采用了递归算法",
+      "C": "102.117.112.254必定采用了迭代算法",
+      "D": "102.117.112.254必定采用了递归算法"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "按常见的无缓存解析流程，本地域名服务器202.112.115.3向根、顶级及授权服务器逐级发起迭代查询，再把结果返回主机，因此原卷选A。若本地已有缓存则可直接回答，题干中的“必定”并非严格成立。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "DNS",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "DNS解析",
+      "DNS",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 32,
+        "pages": [
+          7
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "应用层协议与端口"
+  },
+  {
+    "id": "intake-2026-spring-q033-a",
+    "type": "single_choice",
+    "question": "第1空：主机首先发送哪种DHCP报文？",
+    "options": {
+      "A": "DHCP discover",
+      "B": "DHCP request",
+      "C": "DHCP renew",
+      "D": "DHCP ack"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "尚未获得地址的DHCP客户端会先广播DHCP Discover寻找服务器，选A。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "DHCP",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "DHCP地址获取",
+      "DHCP",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 33,
+        "pages": [
+          7,
+          8
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "A",
+          "C",
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "sharedGroupId": "intake-2026-spring-q033",
+    "sharedKind": "stem",
+    "sharedStem": "某主机的MAC地址为00-FF-12-CD-10-22，其IP地址配置选项设置为“自动配置”。该主机可以通过发送（ ）报文查找DHCP服务器并请求IP地址配置信息，报文的源MAC地址是（），源IP地址是（）。",
+    "sharedOrder": 1,
+    "knowledgeSection": "应用层协议与端口"
+  },
+  {
+    "id": "intake-2026-spring-q033-b",
+    "type": "single_choice",
+    "question": "第2空：该报文的源MAC地址是（）。",
+    "options": {
+      "A": "00:00:00:00:00:00",
+      "B": "FF:FF:FF:FF:FF:FF",
+      "C": "00-FF-12-CD-10-22",
+      "D": "00-FF-12-CD-FF-FF"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "DHCP客户端已知自己的网卡地址，所以Discover报文源MAC仍是00-FF-12-CD-10-22，选C。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "DHCP",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "DHCP地址获取",
+      "DHCP",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 33,
+        "pages": [
+          7,
+          8
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "A",
+          "C",
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "sharedGroupId": "intake-2026-spring-q033",
+    "sharedKind": "stem",
+    "sharedStem": "某主机的MAC地址为00-FF-12-CD-10-22，其IP地址配置选项设置为“自动配置”。该主机可以通过发送（ ）报文查找DHCP服务器并请求IP地址配置信息，报文的源MAC地址是（），源IP地址是（）。",
+    "sharedOrder": 2,
+    "knowledgeSection": "应用层协议与端口"
+  },
+  {
+    "id": "intake-2026-spring-q033-c",
+    "type": "single_choice",
+    "question": "第3空：该报文的源IP地址是（）。",
+    "options": {
+      "A": "127.0.0.1",
+      "B": "255.255.255.255",
+      "C": "0.0.0.0",
+      "D": "169.254.18.254"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "首次申请地址时客户端还没有可用IPv4地址，Discover报文源IP为0.0.0.0，选C。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "DHCP",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "DHCP地址获取",
+      "DHCP",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 33,
+        "pages": [
+          7,
+          8
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "A",
+          "C",
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "sharedGroupId": "intake-2026-spring-q033",
+    "sharedKind": "stem",
+    "sharedStem": "某主机的MAC地址为00-FF-12-CD-10-22，其IP地址配置选项设置为“自动配置”。该主机可以通过发送（ ）报文查找DHCP服务器并请求IP地址配置信息，报文的源MAC地址是（），源IP地址是（）。",
+    "sharedOrder": 3,
+    "knowledgeSection": "应用层协议与端口"
+  },
+  {
+    "id": "intake-2026-spring-q034",
+    "type": "single_choice",
+    "question": "在浏览器地址栏输入192.168.1.1进行访问时，首先执行的操作是（）。",
+    "options": {
+      "A": "域名解析",
+      "B": "解释执行",
+      "C": "发送页面请求报文",
+      "D": "建立TCP连接"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "地址栏直接输入IPv4字面地址，不需先做DNS域名解析；在发送页面请求前，浏览器需先建立TCP连接，选D。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "HTTP与HTTPS",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "浏览器访问流程",
+      "HTTP与HTTPS",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 34,
+        "pages": [
+          8
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "应用层协议与端口"
+  },
+  {
+    "id": "intake-2026-spring-q035",
+    "type": "single_choice",
+    "question": "若用户1与用户2之间发送和接收电子邮件的过程如图所示，则图中①、②、③处分别使用的应用层协议应是（）。",
+    "options": {
+      "A": "SMTP、SMTP、SMTP",
+      "B": "POP3、SMTP、POP3",
+      "C": "POP3、SMTP、SMTP",
+      "D": "SMTP、SMTP、POP3"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "图中①是用户1把邮件提交给邮件服务器，②是邮件服务器间转发，二者使用SMTP；③是用户2从服务器收信，使用POP3，故选D。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "电子邮件、LDAP与远程登录",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "电子邮件协议",
+      "电子邮件、LDAP与远程登录",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 35,
+        "pages": [
+          8
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-spring-intake/q035.png",
+        "alt": "用户1通过两个邮件服务器向用户2发送电子邮件的流程图",
+        "caption": "原卷第35题插图"
+      }
+    ],
+    "knowledgeSection": "应用层协议与端口"
+  },
+  {
+    "id": "intake-2026-spring-q036",
+    "type": "single_choice",
+    "question": "在SDN体系中，OpenFlow协议主要用于（）。",
+    "options": {
+      "A": "网络设备之间的通信",
+      "B": "网络设备的远程管理",
+      "C": "网络设备的配置",
+      "D": "网络设备与控制平面之间的通信"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "OpenFlow是SDN控制器与转发设备之间的南向通信协议，用于下发流表和获取设备状态，选D。",
+    "chapter": "新技术",
+    "knowledgePoint": "SDN软件定义网络",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "OpenFlow",
+      "SDN软件定义网络",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 36,
+        "pages": [
+          8
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "网络架构新技术"
+  },
+  {
+    "id": "intake-2026-spring-q037",
+    "type": "single_choice",
+    "question": "以下选项中，智能门锁属于哪一项应用（）。",
+    "options": {
+      "A": "物联网",
+      "B": "云计算",
+      "C": "区块链",
+      "D": "虚拟现实"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "智能门锁通过联网设备完成状态感知、远程控制或联动，属于物联网应用，选A。",
+    "chapter": "新技术",
+    "knowledgePoint": "NB-IoT",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "物联网",
+      "NB-IoT",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 37,
+        "pages": [
+          9
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "移动与物联网"
+  },
+  {
+    "id": "intake-2026-spring-q038",
+    "type": "single_choice",
+    "question": "在5G关键技术中，将传统互联网控制平面与数据平面分离，使网络的灵活性、可管理性和可扩展性大幅提升的是（）。",
+    "options": {
+      "A": "软件定义网络（SDN）",
+      "B": "大规模多输入多输出（MIMO）",
+      "C": "网络功能虚拟化（NFV）",
+      "D": "长期演进（LTE）"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "SDN将控制平面与数据转发平面分离，并通过软件集中编排网络行为，提升灵活性和可管理性，选A。",
+    "chapter": "新技术",
+    "knowledgePoint": "SDN软件定义网络",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "软件定义网络",
+      "SDN软件定义网络",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 38,
+        "pages": [
+          9
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "网络架构新技术"
+  },
+  {
+    "id": "intake-2026-spring-q040",
+    "type": "single_choice",
+    "question": "下列关于光纤FC交换机的说法中，错误的是（）。",
+    "options": {
+      "A": "光纤FC交换机用Zone划分逻辑通道，不同Zone的设备无法互相通信",
+      "B": "光纤FC交换机连接存储设备、服务器等设备组成光纤通道网络",
+      "C": "光纤FC交换机与以太网交换机相同，都是基于IP协议工作的",
+      "D": "光纤FC交换机与以太网交换机相比，具有低延迟和无损数据传输等优点"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "FC交换机工作在光纤通道Fabric中，使用FC协议连接服务器和存储，并非像以太网交换机那样基于IP转发，因此错误项是C。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "协议、服务、PDU与设备所在层",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "光纤通道网络",
+      "协议、服务、PDU与设备所在层",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 40,
+        "pages": [
+          9
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "网络模型与分层"
+  },
+  {
+    "id": "intake-2026-spring-q041",
+    "type": "single_choice",
+    "question": "某存储系统规划配置25块8TB磁盘，创建2个RAID6组，配置1块热备盘，则该存储系统实际存储容量是（）。",
+    "options": {
+      "A": "200TB",
+      "B": "192TB",
+      "C": "176TB",
+      "D": "160TB"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "热备盘不计入两个RAID6组的可用容量；剩余24盘平均组成两个12盘组，每组扣除2盘校验，合计可用20盘，20×8=160TB，选D。",
+    "chapter": "计算机基础知识",
+    "knowledgePoint": "内存、磁盘与RAID",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "RAID容量计算",
+      "内存、磁盘与RAID",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 41,
+        "pages": [
+          9
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "存储器与可靠性"
+  },
+  {
+    "id": "intake-2026-spring-q042",
+    "type": "single_choice",
+    "question": "攻击者通过发送ICMP应答请求，并将请求包的目的地址设为受害网络的广播地址，以实现攻击目的。那么这种行为属于以下哪一种攻击？",
+    "options": {
+      "A": "IP欺骗攻击",
+      "B": "Smurf攻击",
+      "C": "SYN Flood攻击",
+      "D": "ICMP重定向攻击"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "把ICMP Echo请求发往受害网络广播地址，会使多台主机向受害者回应并放大流量，这是Smurf攻击，选B。",
+    "chapter": "网络安全",
+    "knowledgePoint": "DDoS",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "Smurf攻击",
+      "DDoS",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 42,
+        "pages": [
+          9,
+          10
+        ],
+        "answerPage": 16,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "网络攻击"
+  },
+  {
+    "id": "intake-2026-spring-q043",
+    "type": "single_choice",
+    "question": "在短时间内向网络中的某台服务器发送大量无效连接请求，导致服务器无法提供正常访问服务，这种攻击行为破坏了（）。",
+    "options": {
+      "A": "机密性",
+      "B": "完整性",
+      "C": "可用性",
+      "D": "可控性"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "大量无效请求使正常用户无法访问服务，影响的是系统或服务的可用性，选C。",
+    "chapter": "网络安全",
+    "knowledgePoint": "DDoS",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "拒绝服务与可用性",
+      "DDoS",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 43,
+        "pages": [
+          10
+        ],
+        "answerPage": 17,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "网络攻击"
+  },
+  {
+    "id": "intake-2026-spring-q044",
+    "type": "single_choice",
+    "question": "当发现主机受到ARP攻击时，需要清除ARP缓存，使用的命令是（）。",
+    "options": {
+      "A": "arp -a",
+      "B": "arp -s",
+      "C": "arp -d",
+      "D": "arp -g"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "arp -d用于删除ARP缓存项；arp -a用于查看，arp -s用于添加静态项，因此选C。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "ARP与RARP",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "ARP缓存",
+      "ARP与RARP",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 44,
+        "pages": [
+          10
+        ],
+        "answerPage": 17,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "网际层协议"
+  },
+  {
+    "id": "intake-2026-spring-q045",
+    "type": "single_choice",
+    "question": "下列加密算法可以抵抗量子计算攻击的是（）。",
+    "options": {
+      "A": "AES",
+      "B": "RSA",
+      "C": "同态加密",
+      "D": "格基加密"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "格基密码是后量子密码的重要路线之一；RSA所依赖的整数分解问题可被足够强的量子算法有效攻击，选D。",
+    "chapter": "网络安全",
+    "knowledgePoint": "非对称加密与Hash摘要",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "后量子密码",
+      "非对称加密与Hash摘要",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 45,
+        "pages": [
+          10
+        ],
+        "answerPage": 17,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "密码与加密"
+  },
+  {
+    "id": "intake-2026-spring-q046",
+    "type": "single_choice",
+    "question": "DES加密算法对输入的明文首先进行（）。",
+    "options": {
+      "A": "左右分离",
+      "B": "初始置换",
+      "C": "乘法运算",
+      "D": "迭代运算"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "DES对64位明文分组先执行固定初始置换，再进入左右分组和16轮迭代，选B。",
+    "chapter": "网络安全",
+    "knowledgePoint": "对称加密算法",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "DES",
+      "对称加密算法",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 46,
+        "pages": [
+          10
+        ],
+        "answerPage": 17,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "密码与加密"
+  },
+  {
+    "id": "intake-2026-spring-q047",
+    "type": "single_choice",
+    "question": "下列（ ）协议可以加密传输电子邮件。",
+    "options": {
+      "A": "SSL",
+      "B": "IMAP",
+      "C": "SMTP",
+      "D": "POP3"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "给出的选项中SSL可为邮件连接提供加密传输，因此选A。SSL已淘汰，实际部署应使用TLS，例如STARTTLS或TLS封装的邮件协议。",
+    "chapter": "网络安全",
+    "knowledgePoint": "TLS与安全传输协议",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "邮件传输加密",
+      "TLS与安全传输协议",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 47,
+        "pages": [
+          10,
+          11
+        ],
+        "answerPage": 17,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "VPN与安全传输"
+  },
+  {
+    "id": "intake-2026-spring-q048",
+    "type": "single_choice",
+    "question": "UTM（统一威胁管理系统）的功能不包括（）。",
+    "options": {
+      "A": "重要数据加密和备份",
+      "B": "恶意软件过滤",
+      "C": "访问控制",
+      "D": "垃圾邮件拦截"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "UTM常整合访问控制、恶意软件过滤、垃圾邮件拦截等网关防护；重要数据的加密和备份属于其他数据保护/备份能力，不是其典型核心功能，选A。",
+    "chapter": "网络安全",
+    "knowledgePoint": "防火墙与DMZ",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "统一威胁管理",
+      "防火墙与DMZ",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 48,
+        "pages": [
+          11
+        ],
+        "answerPage": 17,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "网络设备与边界防护"
+  },
+  {
+    "id": "intake-2026-spring-q049-a",
+    "type": "single_choice",
+    "question": "第1空：导致主机A到主机B无法Ping通的原因可能是（）。",
+    "options": {
+      "A": "甲乙两地存在网络链路故障",
+      "B": "甲乙两地防火墙未配置虚拟路由或虚拟路由配置错误",
+      "C": "甲乙两地防火墙策略路由配置错误",
+      "D": "甲乙两地防火墙互联网络接口配置错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "图中主机A与主机B位于不同私网，VPN协商成功仍需正确的虚拟路由/路由表把两侧内网流量送入隧道；虚拟路由缺失或配置错误会导致不可达，选B。",
+    "chapter": "网络安全",
+    "knowledgePoint": "IPsec VPN与SSL VPN",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "IPSec VPN排错",
+      "IPsec VPN与SSL VPN",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 49,
+        "pages": [
+          11
+        ],
+        "answerPage": 17,
+        "sourceAnswers": [
+          "B",
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "sharedGroupId": "intake-2026-spring-q049",
+    "sharedKind": "stem",
+    "sharedStem": "如图所示，某公司甲、乙两地通过建立IPSec VPN隧道，实现主机A和主机B的互访。VPN隧道协商成功后，甲乙两地访问互联网均正常，但主机A到主机B ping不通，原因可能是（ ）、（）。",
+    "sharedOrder": 1,
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-spring-intake/q049.png",
+        "alt": "甲乙两地通过互联网和防火墙建立IPSec VPN隧道的网络拓扑图",
+        "caption": "原卷第49题插图"
+      }
+    ],
+    "knowledgeSection": "VPN与安全传输"
+  },
+  {
+    "id": "intake-2026-spring-q049-b",
+    "type": "single_choice",
+    "question": "第2空：另一种可能原因是（）。",
+    "options": {
+      "A": "甲乙两地防火墙未配置NAT转换",
+      "B": "甲乙两地防火墙未配置合理的访问控制策略",
+      "C": "甲乙两地防火墙的VPN配置中未使用野蛮模式",
+      "D": "甲乙两地防火墙NAT转换未排除主机A、B的IP地址"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "两端内网地址需匹配IPSec保护流量；若普通NAT先改写主机A、B地址，流量可能不再匹配隧道策略。应配置NAT豁免，选D。",
+    "chapter": "网络安全",
+    "knowledgePoint": "IPsec VPN与SSL VPN",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "IPSec VPN排错",
+      "IPsec VPN与SSL VPN",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 49,
+        "pages": [
+          11
+        ],
+        "answerPage": 17,
+        "sourceAnswers": [
+          "B",
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "sharedGroupId": "intake-2026-spring-q049",
+    "sharedKind": "stem",
+    "sharedStem": "如图所示，某公司甲、乙两地通过建立IPSec VPN隧道，实现主机A和主机B的互访。VPN隧道协商成功后，甲乙两地访问互联网均正常，但主机A到主机B ping不通，原因可能是（ ）、（）。",
+    "sharedOrder": 2,
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-spring-intake/q049.png",
+        "alt": "甲乙两地通过互联网和防火墙建立IPSec VPN隧道的网络拓扑图",
+        "caption": "原卷第49题插图"
+      }
+    ],
+    "knowledgeSection": "VPN与安全传输"
+  },
+  {
+    "id": "intake-2026-spring-q050",
+    "type": "single_choice",
+    "question": "关于不同类型防火墙的说法，描述不正确的是（）。",
+    "options": {
+      "A": "状态检测防火墙需要配置报文的“五元组”和“回”两个方向的安全策略",
+      "B": "包过滤防火墙对于通过防火墙的每个数据包，都要进行ACL匹配检查",
+      "C": "代理防火墙代理内部网络和外部网络用户之间的业务",
+      "D": "状态检测防火墙只对没有命中会话的首包进行安全策略检查"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "状态检测防火墙为首包检查策略并建立会话状态，符合会话的返回流量可按状态放行，通常不需另配反向策略；所以A所述不正确，选A。",
+    "chapter": "网络安全",
+    "knowledgePoint": "防火墙与DMZ",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "防火墙类型",
+      "防火墙与DMZ",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 50,
+        "pages": [
+          11
+        ],
+        "answerPage": 17,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "网络设备与边界防护"
+  },
+  {
+    "id": "intake-2026-spring-q051",
+    "type": "single_choice",
+    "question": "在网络工程的需求获取过程中，（ ）是关键。",
+    "options": {
+      "A": "设计",
+      "B": "沟通",
+      "C": "选型",
+      "D": "运维"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "需求获取要通过访谈、沟通和澄清来理解用户目标与约束；缺少沟通容易把需求理解错误，选B。",
+    "chapter": "综合布线与网络规划",
+    "knowledgePoint": "网络拓扑",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "需求获取",
+      "网络拓扑",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 51,
+        "pages": [
+          12
+        ],
+        "answerPage": 17,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "网络规划与性能"
+  },
+  {
+    "id": "intake-2026-spring-q052",
+    "type": "single_choice",
+    "question": "在交换机上配置如下路由策略：ip ip-prefix ipprefix3 permit 0.0.0.0 0 greater-equal 32。则下列网络中会被放行的是（）。",
+    "options": {
+      "A": "任意路由",
+      "B": "默认路由",
+      "C": "主机路由",
+      "D": "缺省路由"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "基准前缀是0.0.0.0/0，并要求前缀长度至少32；IPv4最大长度也是32，因此只匹配/32主机路由，选C。",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "路由表、静态路由与默认路由",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "IP前缀列表",
+      "路由表、静态路由与默认路由",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 52,
+        "pages": [
+          12
+        ],
+        "answerPage": 17,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "路由基础"
+  },
+  {
+    "id": "intake-2026-spring-q053",
+    "type": "single_choice",
+    "question": "下列关于GRE描述错误的是（）。",
+    "options": {
+      "A": "GRE是一种隧道技术",
+      "B": "GRE规定如何将一种网络协议封装在另一种网络协议中",
+      "C": "使用GRE可以将OSPF封装在EGP中",
+      "D": "GRE支持加密，具有较高的安全性"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "GRE负责把一种网络层协议封装进另一种协议的隧道中，但本身不提供加密和强认证；需叠加IPsec等安全机制，错误项是D。",
+    "chapter": "网络安全",
+    "knowledgePoint": "IPsec VPN与SSL VPN",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "GRE隧道",
+      "IPsec VPN与SSL VPN",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 53,
+        "pages": [
+          12
+        ],
+        "answerPage": 17,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "VPN与安全传输"
+  },
+  {
+    "id": "intake-2026-spring-q054",
+    "type": "single_choice",
+    "question": "以下说法不正确的是（）。",
+    "options": {
+      "A": "BGP水平分割是指通过BGP学习到的路由信息不能通告给它的BGP邻居，其主要目的是防止AS内部产生路由环路",
+      "B": "BGP路由衰减用来解决路由不稳定的问题",
+      "C": "当两个优选规则相同的情况下，BGP会比较AS_Path长度；当AS_Path长度相同时会比较AS号的大小",
+      "D": "BGP路由反射器从客户机学习到的路由会反射给所有客户机和客户端"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "BGP路径选择可比较AS_PATH长度，但不会再以AS号数值大小作为该路径的通用优先级规则；C的说法错误，选C。",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "BGP路由属性与选路",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "BGP路由选择",
+      "BGP路由属性与选路",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 54,
+        "pages": [
+          12
+        ],
+        "answerPage": 17,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "BGP"
+  },
+  {
+    "id": "intake-2026-spring-q055",
+    "type": "single_choice",
+    "question": "OSPF协议对跳数的限制是（）。",
+    "options": {
+      "A": "15",
+      "B": "16",
+      "C": "110",
+      "D": "没有限制"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "OSPF按链路开销计算最短路径，没有类似RIP最大15跳的协议跳数上限，选D。",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "区域、LSA与邻居状态",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "OSPF",
+      "区域、LSA与邻居状态",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 55,
+        "pages": [
+          12
+        ],
+        "answerPage": 17,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "OSPF"
+  },
+  {
+    "id": "intake-2026-spring-q056",
+    "type": "single_choice",
+    "question": "下面关于BGP中AS_PATH的描述，不正确的是（）。",
+    "options": {
+      "A": "当路由器中存在两条或两条以上到同一目的地的路由时，可以通过比较属性决定优先级；AS_PATH越长的路径越优先",
+      "B": "AS_PATH是指BGP路由在传递中所经历的AS列表",
+      "C": "BGP不会接受AS_PATH属性中包含本AS Number的路由",
+      "D": "AS_PATH是BGP中的公认必遵属性"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "BGP通常优先选择较短的AS_PATH；“AS_PATH越长越优先”颠倒了规则，因此不正确的是A。",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "AS与路径矢量",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "BGP AS_PATH",
+      "AS与路径矢量",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 56,
+        "pages": [
+          13
+        ],
+        "answerPage": 17,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "BGP"
+  },
+  {
+    "id": "intake-2026-spring-q057",
+    "type": "single_choice",
+    "question": "下列概念中，与操作系统并发无关的是（）。",
+    "options": {
+      "A": "虚拟存储器",
+      "B": "优先级调度",
+      "C": "时间片轮转",
+      "D": "上下文切换"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "虚拟存储器用于扩展可用地址空间和内存管理；优先级调度、时间片轮转及上下文切换直接服务于进程并发，选A。",
+    "chapter": "计算机基础知识",
+    "knowledgePoint": "进程、线程与死锁",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "操作系统并发",
+      "进程、线程与死锁",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 57,
+        "pages": [
+          13
+        ],
+        "answerPage": 17,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "操作系统基础"
+  },
+  {
+    "id": "intake-2026-spring-q058",
+    "type": "single_choice",
+    "question": "根据《中华人民共和国数据安全法》，国家（ ）依照本法和有关法律、行政法规的规定，负责统筹协调网络数据安全和相关监管工作。",
+    "options": {
+      "A": "网信部门",
+      "B": "工信部门",
+      "C": "公安机关",
+      "D": "检察机关"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "《数据安全法》第九条规定，国家网信部门负责统筹协调网络数据安全和相关监管工作，选A。",
+    "chapter": "项目管理与法律法规",
+    "knowledgePoint": "网络安全法与数据安全法",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "数据安全法",
+      "网络安全法与数据安全法",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 58,
+        "pages": [
+          13
+        ],
+        "answerPage": 17,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "法律法规与合规"
+  },
+  {
+    "id": "intake-2026-spring-q059",
+    "type": "single_choice",
+    "question": "4G网络中主要运用的技术有（）。",
+    "options": {
+      "A": "CDMA",
+      "B": "CDMA2000",
+      "C": "TD-LTE",
+      "D": "SDR"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "TD-LTE是LTE/4G系统中的时分双工制式之一；其余选项不是本题所指的4G主要技术，选C。",
+    "chapter": "新技术",
+    "knowledgePoint": "5G",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "4G技术",
+      "5G",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 59,
+        "pages": [
+          13
+        ],
+        "answerPage": 17,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "移动与物联网"
+  },
+  {
+    "id": "intake-2026-spring-q060",
+    "type": "single_choice",
+    "question": "现有一台交换机通过某端口与一个指定端口相连，但是该端口不转发任何报文，却可以通过接收BPDU来监听网络变化，那么该端口的角色应该是（）。",
+    "options": {
+      "A": "Disable",
+      "B": "Alternate",
+      "C": "Root",
+      "D": "Designated"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RSTP Alternate端口通过接收BPDU了解备用路径，但处于非转发状态；根端口失效时可接替转发，选B。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "端口角色与BPDU",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "STP端口角色",
+      "端口角色与BPDU",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 60,
+        "pages": [
+          13
+        ],
+        "answerPage": 17,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "STP生成树"
+  },
+  {
+    "id": "intake-2026-spring-q061",
+    "type": "single_choice",
+    "question": "下列网络设备中，能够抑制广播风暴的是（）。设备：I.中继器；II.集线器；III.网桥；IV.路由器。",
+    "options": {
+      "A": "仅I和II",
+      "B": "仅III",
+      "C": "仅III和IV",
+      "D": "仅IV"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "中继器、集线器和网桥都不会隔离二层广播域；路由器在三层分隔广播域，因此只有设备IV能抑制跨网段广播，选D。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "冲突域、广播域与网络设备",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "广播域与路由器",
+      "冲突域、广播域与网络设备",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 61,
+        "pages": [
+          13,
+          14
+        ],
+        "answerPage": 17,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "以太网基础"
+  },
+  {
+    "id": "intake-2026-spring-q062",
+    "type": "single_choice",
+    "question": "某主机的IP地址为180.80.77.55，子网掩码为255.255.252.0。若该主机向所在子网发送广播分组，则目的地址可以是（）。",
+    "options": {
+      "A": "180.80.76.0",
+      "B": "180.80.76.255",
+      "C": "180.80.77.255",
+      "D": "180.80.79.255"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "/22在第三个八位组的块大小为4，77落在76至79这一段；该子网广播地址是180.80.79.255，选D。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "网络地址、广播地址与可用主机",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "IPv4子网广播地址",
+      "网络地址、广播地址与可用主机",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 62,
+        "pages": [
+          14
+        ],
+        "answerPage": 17,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "IPv4与子网"
+  },
+  {
+    "id": "intake-2026-spring-q063",
+    "type": "single_choice",
+    "question": "在TCP/IP体系结构中，直接为ICMP提供服务的协议是（）。",
+    "options": {
+      "A": "PPP",
+      "B": "IP",
+      "C": "UDP",
+      "D": "TCP"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "ICMP报文直接封装在IP数据报中，不经过TCP或UDP端口复用，因此直接提供承载的是IP，选B。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "ICMP与控制报文",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "ICMP与IP",
+      "ICMP与控制报文",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 63,
+        "pages": [
+          14
+        ],
+        "answerPage": 17,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "网际层协议"
+  },
+  {
+    "id": "intake-2026-spring-q064",
+    "type": "single_choice",
+    "question": "在IPv6网络中，分片功能由源主机完成，发送方可使用（ ）探测链路的MTU。",
+    "options": {
+      "A": "RA",
+      "B": "RS",
+      "C": "Path MTU",
+      "D": "DAD"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Path MTU Discovery依据沿途MTU限制探测一条路径可用的最大分组尺寸；IPv6路由器以Packet Too Big消息反馈，选C。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "IPv6过渡技术",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "IPv6 Path MTU发现",
+      "IPv6过渡技术",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 64,
+        "pages": [
+          14
+        ],
+        "answerPage": 17,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "knowledgeSection": "IPv6"
+  },
+  {
+    "id": "intake-2026-spring-q065-a",
+    "type": "single_choice",
+    "question": "Question 1: Which word completes blank (1)?",
+    "options": {
+      "A": "vector",
+      "B": "link-state",
+      "C": "path",
+      "D": "hybrid"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "RIP是距离向量（distance-vector）路由协议，空(1)应填vector，选A。",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "距离矢量与最大跳数",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "RIP路由协议完形填空",
+      "距离矢量与最大跳数",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 65,
+        "pages": [
+          14,
+          15
+        ],
+        "answerPage": 17,
+        "sourceAnswers": [
+          "A",
+          "C",
+          "B",
+          "B",
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "sharedGroupId": "intake-2026-spring-q065",
+    "sharedKind": "stem",
+    "sharedStem": "RIP is a distance (1) routing protocol. Each router running RIP maintains a route table which lists the (2) to every known destination. The metric used is (3) count, with a maximum value of 15 to prevent (4) loops. Routing information is exchanged between neighbors every (5) seconds via broadcast or multicast.",
+    "sharedOrder": 1,
+    "knowledgeSection": "RIP"
+  },
+  {
+    "id": "intake-2026-spring-q065-b",
+    "type": "single_choice",
+    "question": "Question 2: Which word completes blank (2)?",
+    "options": {
+      "A": "vector",
+      "B": "next hop",
+      "C": "cost",
+      "D": "path"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "RIP路由表项包含到目的地的度量值/开销（cost）；实际表项通常也记录下一跳，按本句空格选择C。",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "距离矢量与最大跳数",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "RIP路由协议完形填空",
+      "距离矢量与最大跳数",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 65,
+        "pages": [
+          14,
+          15
+        ],
+        "answerPage": 17,
+        "sourceAnswers": [
+          "A",
+          "C",
+          "B",
+          "B",
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "sharedGroupId": "intake-2026-spring-q065",
+    "sharedKind": "stem",
+    "sharedStem": "RIP is a distance (1) routing protocol. Each router running RIP maintains a route table which lists the (2) to every known destination. The metric used is (3) count, with a maximum value of 15 to prevent (4) loops. Routing information is exchanged between neighbors every (5) seconds via broadcast or multicast.",
+    "sharedOrder": 2,
+    "knowledgeSection": "RIP"
+  },
+  {
+    "id": "intake-2026-spring-q065-c",
+    "type": "single_choice",
+    "question": "Question 3: Which word completes blank (3)?",
+    "options": {
+      "A": "bandwidth",
+      "B": "hop",
+      "C": "delay",
+      "D": "load"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RIP使用跳数作为度量，因此固定搭配是hop count，选B。",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "距离矢量与最大跳数",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "RIP路由协议完形填空",
+      "距离矢量与最大跳数",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 65,
+        "pages": [
+          14,
+          15
+        ],
+        "answerPage": 17,
+        "sourceAnswers": [
+          "A",
+          "C",
+          "B",
+          "B",
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "sharedGroupId": "intake-2026-spring-q065",
+    "sharedKind": "stem",
+    "sharedStem": "RIP is a distance (1) routing protocol. Each router running RIP maintains a route table which lists the (2) to every known destination. The metric used is (3) count, with a maximum value of 15 to prevent (4) loops. Routing information is exchanged between neighbors every (5) seconds via broadcast or multicast.",
+    "sharedOrder": 3,
+    "knowledgeSection": "RIP"
+  },
+  {
+    "id": "intake-2026-spring-q065-d",
+    "type": "single_choice",
+    "question": "Question 4: Which word completes blank (4)?",
+    "options": {
+      "A": "switching",
+      "B": "routing",
+      "C": "bridging",
+      "D": "counting"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RIP把16视为不可达，最大可用度量15，用于限制路由环路影响；此处应为routing loops，选B。",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "距离矢量与最大跳数",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "RIP路由协议完形填空",
+      "距离矢量与最大跳数",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 65,
+        "pages": [
+          14,
+          15
+        ],
+        "answerPage": 17,
+        "sourceAnswers": [
+          "A",
+          "C",
+          "B",
+          "B",
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "sharedGroupId": "intake-2026-spring-q065",
+    "sharedKind": "stem",
+    "sharedStem": "RIP is a distance (1) routing protocol. Each router running RIP maintains a route table which lists the (2) to every known destination. The metric used is (3) count, with a maximum value of 15 to prevent (4) loops. Routing information is exchanged between neighbors every (5) seconds via broadcast or multicast.",
+    "sharedOrder": 4,
+    "knowledgeSection": "RIP"
+  },
+  {
+    "id": "intake-2026-spring-q065-e",
+    "type": "single_choice",
+    "question": "Question 5: Which number completes blank (5)?",
+    "options": {
+      "A": "10",
+      "B": "30",
+      "C": "60",
+      "D": "90"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RIP按周期向邻居发送路由更新，默认周期为30秒（实现可对定时器加入少量随机偏移），选B。",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "距离矢量与最大跳数",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年新生入学卷",
+      "RIP路由协议完形填空",
+      "距离矢量与最大跳数",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师新生入学卷.pdf",
+        "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+        "questionNumber": 65,
+        "pages": [
+          14,
+          15
+        ],
+        "answerPage": 17,
+        "sourceAnswers": [
+          "A",
+          "C",
+          "B",
+          "B",
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
+    "sharedGroupId": "intake-2026-spring-q065",
+    "sharedKind": "stem",
+    "sharedStem": "RIP is a distance (1) routing protocol. Each router running RIP maintains a route table which lists the (2) to every known destination. The metric used is (3) count, with a maximum value of 15 to prevent (4) loops. Routing information is exchanged between neighbors every (5) seconds via broadcast or multicast.",
+    "sharedOrder": 5,
+    "knowledgeSection": "RIP"
+  }
+]

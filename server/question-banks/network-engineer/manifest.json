@@ -29,6 +29,27 @@
       "description": "保留原文档答案、解析、文件名与题号，未核实官方出处",
       "source": "user_collection",
       "path": "questions/user-collection"
+    },
+    {
+      "id": "user-provided-2026-spring-intake",
+      "name": "2026上半年网络工程师练习卷（用户提供）",
+      "description": "用户提供的入学练习卷；来源与官方性未核实。重复题已与现有题库比对。",
+      "source": "user_simulation_collection",
+      "path": "questions/user-provided-2026-spring-intake"
+    },
+    {
+      "id": "user-provided-2026-h1-external",
+      "name": "2026上半年网络工程师模拟题（用户提供）",
+      "description": "押题密卷上午卷客观题，以及案例模拟题与押题密卷下午卷简答题；配套答案解析已整理，经典100题仍在独立 OCR 复核稿中。",
+      "source": "user_external_2026_h1",
+      "path": "questions/user-provided-2026-h1-external"
+    },
+    {
+      "id": "user-provided-2026-h1-last-set",
+      "name": "2026上半年网络工程师最后一套卷（用户提供）",
+      "description": "综合知识客观题与案例分析简答题；附逐题答案解析及原卷图表，来源与官方性未核实。",
+      "source": "user_external_2026_h1_lastset",
+      "path": "questions/user-provided-2026-h1-last-set"
     }
   ],
   "taxonomy": {

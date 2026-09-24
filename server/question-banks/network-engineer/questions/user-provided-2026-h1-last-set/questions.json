@@ -1,0 +1,3575 @@
+[
+  {
+    "id": "lastset-general-2026h1-q001",
+    "type": "single_choice",
+    "question": "项目执行阶段发现需求遗漏，此时应采取的措施是？",
+    "options": {
+      "A": "提交变更请求，由变更控制审批后更新项目管理计划",
+      "B": "暂不处理，待项目结束再补充",
+      "C": "直接修改范围基准",
+      "D": "要求团队压缩后续工期"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "发现需求遗漏应先走正式变更控制，由授权方评估批准后更新相关基准，不能私自改范围。",
+    "chapter": "项目管理与法律法规",
+    "knowledgeSection": "项目控制",
+    "knowledgePoint": "配置管理",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "配置管理",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 1,
+        "pages": [
+          1
+        ],
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q002",
+    "type": "single_choice",
+    "question": "【考生回忆版】小李只向AI工具输入“给我生成一幅山水画”。关于生成画作的著作权，以下表述正确的是？",
+    "options": {
+      "A": "仅凭这一句通用提示，不能当然认定使用者享有该画作著作权",
+      "B": "当然归属于AI工具的所有者或使用者",
+      "C": "当然归属于AI程序的开发者",
+      "D": "归属于人工智能本身"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "按卷内答案，单一通用提示本身通常不足以证明使用者对最终画面表达有实质创作控制，AI也不是作者。现实判断需看人类对提示、生成过程、筛选和后期修改是否作出足够的原创性贡献，不能把本题简化成所有AI图一律无版权。",
+    "chapter": "项目管理与法律法规",
+    "knowledgeSection": "法律法规与合规",
+    "knowledgePoint": "著作权与专利",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "著作权与专利",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 2,
+        "pages": [
+          1,
+          2
+        ],
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q003",
+    "type": "single_choice",
+    "question": "某系统采用页式存储管理，用位图管理空闲页框。页大小为4KB、物理内存为16GB，位图占用空间约为多少？",
+    "options": {
+      "A": "128B",
+      "B": "128KB",
+      "C": "512KB",
+      "D": "4MB"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "页框数为16GB÷4KB=2²²，位图需要2²²位，即2¹⁹字节=512KB。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "操作系统基础",
+    "knowledgePoint": "分页与分段虚拟内存",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "分页与分段虚拟内存",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 3,
+        "pages": [
+          2
+        ],
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q004",
+    "type": "single_choice",
+    "question": "衡量计算机执行浮点数运算速度和性能的指标是？",
+    "options": {
+      "A": "MIPS",
+      "B": "CPI",
+      "C": "MFLOPS",
+      "D": "PCI"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "MFLOPS表示每秒百万次浮点运算，常用于衡量浮点运算性能。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "计算机组成",
+    "knowledgePoint": "CPU流水线",
+    "difficulty": "easy",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "CPU流水线",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 4,
+        "pages": [
+          2,
+          3
+        ],
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q005",
+    "type": "single_choice",
+    "question": "图示系统每个部件的千小时可靠度均为0.9，则系统千小时可靠度约为多少？",
+    "options": {
+      "A": "0.882",
+      "B": "0.867",
+      "C": "0.9",
+      "D": "0.99"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "左侧部件与右侧并联系统串联。上、下两条支路各有两个0.9部件串联，支路可靠度为0.81；并联可靠度为1−(1−0.81)²=0.9639，再乘左侧0.9，约为0.8675。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "存储器与可靠性",
+    "knowledgePoint": "串并联系统可靠性",
+    "difficulty": "hard",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "串并联系统可靠性",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 5,
+        "pages": [
+          3
+        ],
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-last-set/general-q005.png",
+        "alt": "串并联可靠性结构图",
+        "caption": "原卷配图"
+      }
+    ]
+  },
+  {
+    "id": "lastset-general-2026h1-q006",
+    "type": "single_choice",
+    "question": "图A所示差分曼彻斯特编码表示的数据是？",
+    "options": {
+      "A": "010011101",
+      "B": "011010011",
+      "C": "101100010",
+      "D": "000101100"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "差分曼彻斯特在每个码元中间必有跳变，码元起始处是否跳变表示数据。按图逐位读取，得到011010011。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "数据通信与传输",
+    "knowledgePoint": "编码与调制",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "编码与调制",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 6,
+        "pages": [
+          4
+        ],
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-last-set/general-q006.png",
+        "alt": "差分曼彻斯特编码波形图",
+        "caption": "原卷配图"
+      }
+    ]
+  },
+  {
+    "id": "lastset-general-2026h1-q007",
+    "type": "single_choice",
+    "question": "差分曼彻斯特编码每个数据位用两个半位信号单元表示，其编码效率是？",
+    "options": {
+      "A": "100%",
+      "B": "80%",
+      "C": "75%",
+      "D": "50%"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "一个数据位需要两个信号单元表示，按本题采用的编码效率定义，效率为1/2，即50%。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "数据通信与传输",
+    "knowledgePoint": "编码与调制",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "编码与调制",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 7,
+        "pages": [
+          4,
+          5
+        ],
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-last-set/general-q006.png",
+        "alt": "差分曼彻斯特编码波形图",
+        "caption": "原卷配图"
+      }
+    ]
+  },
+  {
+    "id": "lastset-general-2026h1-q008",
+    "type": "single_choice",
+    "question": "某通信系统采用(7,4)汉明码，接收端收到码字1011010并检测到单比特错误。原始信息位（按高位到低位排列）应为？",
+    "options": {
+      "A": "0111",
+      "B": "1011",
+      "C": "1101",
+      "D": "1010"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "按常用(7,4)汉明码位置编号计算，综合值指向校验位位置；纠正后信息位保持为数据位序列1010。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "校验码与差错控制",
+    "knowledgePoint": "海明校验",
+    "difficulty": "hard",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "海明校验",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 8,
+        "pages": [
+          5
+        ],
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q009",
+    "type": "single_choice",
+    "question": "关于循环冗余校验（CRC），以下描述错误的是？",
+    "options": {
+      "A": "CRC基于模2运算（异或）",
+      "B": "检错能力与生成多项式的选择有关",
+      "C": "有r位校验位时能检测所有长度小于或等于r+1的突发错误",
+      "D": "CRC通常用于检错，不能直接纠错"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "r位CRC可保证检测所有长度不超过r位的突发错误；长度为r+1的突发错误并非都能检测。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "校验码与差错控制",
+    "knowledgePoint": "CRC循环冗余校验",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "CRC循环冗余校验",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 9,
+        "pages": [
+          6
+        ],
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q010",
+    "type": "single_choice",
+    "question": "采用8种相位、每种相位有两种幅度的QAM，在1200 Baud下可达到的数据传输速率是多少？",
+    "options": {
+      "A": "2400b/s",
+      "B": "3600b/s",
+      "C": "9600b/s",
+      "D": "4800b/s"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "8种相位乘2种幅度共有16种状态，每个码元携带log₂16=4bit；1200×4=4800b/s。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "数据通信与传输",
+    "knowledgePoint": "编码与调制",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "编码与调制",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 10,
+        "pages": [
+          6
+        ],
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q011",
+    "type": "single_choice",
+    "question": "以太网CSMA/CD使用二进制指数退避机制，其概率统计作用是？",
+    "options": {
+      "A": "保证重传一定成功",
+      "B": "随冲突次数增加而提高重传间隔的期望值",
+      "C": "增加平均吞吐量",
+      "D": "降低单次传输时延"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "冲突次数越多，随机退避窗口越大，重传等待时间的期望值随之增加，以降低持续冲突的概率。",
+    "chapter": "局域网与交换技术",
+    "knowledgeSection": "以太网基础",
+    "knowledgePoint": "CSMA/CD与以太网帧",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "CSMA/CD与以太网帧",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 11,
+        "pages": [
+          7
+        ],
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q012",
+    "type": "single_choice",
+    "question": "按图1拓扑和图2抓包信息，抓包接口是？",
+    "options": {
+      "A": "LSW1的GE0/0/3",
+      "B": "PC1的Ethernet接口",
+      "C": "LSW2的GE0/0/2",
+      "D": "LSW1的GE0/0/2"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "抓包中的报文方向及源、目的主机对应图1路径；对应的交换机观察端口为LSW1的GE0/0/3。",
+    "chapter": "局域网与交换技术",
+    "knowledgeSection": "以太网基础",
+    "knowledgePoint": "MAC地址学习与交换转发",
+    "difficulty": "hard",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "MAC地址学习与交换转发",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 12,
+        "pages": [
+          7,
+          8
+        ],
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-last-set/general-q012-topology.png",
+        "alt": "交换机与主机连接拓扑图",
+        "caption": "原卷配图"
+      },
+      {
+        "src": "/question-images/network-engineer/2026-h1-last-set/general-q012-capture.png",
+        "alt": "原卷抓包截图",
+        "caption": "原卷配图"
+      }
+    ]
+  },
+  {
+    "id": "lastset-general-2026h1-q013",
+    "type": "single_choice",
+    "question": "自动专用IP地址（APIPA）的地址范围是？",
+    "options": {
+      "A": "127.0.0.0–127.255.255.255",
+      "B": "169.254.0.0–169.254.255.255",
+      "C": "192.168.0.0–192.168.255.255",
+      "D": "224.0.0.0–224.0.255.255"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IPv4链路本地自动配置地址使用169.254.0.0/16。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "IPv4与子网",
+    "knowledgePoint": "IPv4地址类别与特殊地址",
+    "difficulty": "easy",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "IPv4地址类别与特殊地址",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 13,
+        "pages": [
+          8,
+          9
+        ],
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q014",
+    "type": "single_choice",
+    "question": "主机通常在什么情况下会使用APIPA地址？",
+    "options": {
+      "A": "在本机上测试网络程序",
+      "B": "接收不到DHCP服务器分配的IP地址",
+      "C": "公网IPv4地址不足",
+      "D": "自建视频点播服务器"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "DHCP配置失败且系统启用自动专用地址时，主机可自分配169.254.0.0/16中的地址进行同链路通信。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "IPv4与子网",
+    "knowledgePoint": "IPv4地址类别与特殊地址",
+    "difficulty": "easy",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "IPv4地址类别与特殊地址",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 14,
+        "pages": [
+          8,
+          9
+        ],
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q015",
+    "type": "single_choice",
+    "question": "CSMA/CD中，同一冲突域的主机经过5次冲突后，退避随机整数K的取值范围是？",
+    "options": {
+      "A": "0–5",
+      "B": "1–5",
+      "C": "0–7",
+      "D": "0–31"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "二进制指数退避窗口为[0,2^k−1]，此处k=min(冲突次数,10)=5，因此K∈[0,31]。",
+    "chapter": "局域网与交换技术",
+    "knowledgeSection": "以太网基础",
+    "knowledgePoint": "CSMA/CD与以太网帧",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "CSMA/CD与以太网帧",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 15,
+        "pages": [
+          9,
+          10
+        ],
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q016",
+    "type": "single_choice",
+    "question": "上述退避算法中，主机实际等待时间采用哪种表达式？",
+    "options": {
+      "A": "K×512ms",
+      "B": "K×512比特时间",
+      "C": "K×1024ms",
+      "D": "K×1024比特时间"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "以太网退避槽时间为512比特时间，等待时间为随机整数K乘以该槽时间，不是毫秒。",
+    "chapter": "局域网与交换技术",
+    "knowledgeSection": "以太网基础",
+    "knowledgePoint": "CSMA/CD与以太网帧",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "CSMA/CD与以太网帧",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 16,
+        "pages": [
+          9,
+          10
+        ],
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q017",
+    "type": "single_choice",
+    "question": "VRRP的“上行链路跟踪”功能实现了什么？",
+    "options": {
+      "A": "监控Backup路由器的状态",
+      "B": "根据上行链路通断动态调整本路由器VRRP优先级",
+      "C": "为上行链路提供负载均衡",
+      "D": "加密上行链路流量"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "跟踪接口或链路故障后可降低本机VRRP优先级，促使另一台优先级更高的路由器接管Master角色。",
+    "chapter": "路由与广域网技术",
+    "knowledgeSection": "路由基础",
+    "knowledgePoint": "路由优先级、管理距离与度量值",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "路由优先级、管理距离与度量值",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 17,
+        "pages": [
+          11
+        ],
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q018",
+    "type": "single_choice",
+    "question": "H1向H2发送IP分组P时，封装P的以太网帧的目的MAC地址、以及H2收到的帧的源MAC地址分别是什么？",
+    "options": {
+      "A": "00-a1-b2-c3-d4-62；00-1a-2b-3c-4d-52",
+      "B": "00-a1-b2-c3-d4-62；00-a1-b2-c3-d4-61",
+      "C": "00-1a-2b-3c-4d-51；00-1a-2b-3c-4d-52",
+      "D": "00-1a-2b-3c-4d-51；00-a1-b2-c3-d4-61"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "H1先把帧交给本地网关，因此目的MAC是R在H1网段的接口地址；R转发到H2网段时重建二层帧，源MAC变为R在H2网段的接口地址。",
+    "chapter": "局域网与交换技术",
+    "knowledgeSection": "以太网基础",
+    "knowledgePoint": "MAC地址学习与交换转发",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "MAC地址学习与交换转发",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 18,
+        "pages": [
+          11,
+          12
+        ],
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-last-set/general-q018-mac.png",
+        "alt": "路由器、交换机与主机的MAC地址拓扑图",
+        "caption": "原卷配图"
+      }
+    ]
+  },
+  {
+    "id": "lastset-general-2026h1-q019",
+    "type": "single_choice",
+    "question": "下列关于ICMP报文的说法中，错误的是？",
+    "options": {
+      "A": "ICMP报文直接封装在数据链路层帧中发送",
+      "B": "ICMP可报告IP数据报发送错误",
+      "C": "ICMP报文封装在IP数据报中发送",
+      "D": "携带ICMP差错报文的分组通常不再触发新的ICMP差错报文"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "ICMP属于网际层协议，封装在IP数据报中；IP数据报再由数据链路层帧承载。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "网际层协议",
+    "knowledgePoint": "ICMP与控制报文",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "ICMP与控制报文",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 19,
+        "pages": [
+          12
+        ],
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q020",
+    "type": "single_choice",
+    "question": "管理员要给路由器GE0/0/0接口配置IP地址，以下哪个地址有效？",
+    "options": {
+      "A": "192.168.10.11/30",
+      "B": "237.6.1.2/24",
+      "C": "127.3.1.4/28",
+      "D": "145.4.2.55/26"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "A是/30子网的广播地址，B为组播地址，C为环回地址；D是可分配的单播主机地址。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "IPv4与子网",
+    "knowledgePoint": "IPv4地址类别与特殊地址",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "IPv4地址类别与特殊地址",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 20,
+        "pages": [
+          13
+        ],
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q021",
+    "type": "single_choice",
+    "question": "图示STP网络中，哪条链路会被逻辑阻塞作为备份？",
+    "options": {
+      "A": "SW1与SW2之间",
+      "B": "SW1与SW3之间",
+      "C": "SW2与SW3之间",
+      "D": "任意断开一条皆可"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "SW2以较低BID成为根桥；SW3经SW1到根桥的路径开销小于经100M链路直达SW2的开销，因此SW2–SW3链路被阻塞。",
+    "chapter": "局域网与交换技术",
+    "knowledgeSection": "STP生成树",
+    "knowledgePoint": "端口角色与BPDU",
+    "difficulty": "hard",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "端口角色与BPDU",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 21,
+        "pages": [
+          13,
+          14
+        ],
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-last-set/general-q021-stp.png",
+        "alt": "生成树交换机拓扑及端口速率图",
+        "caption": "原卷配图"
+      }
+    ]
+  },
+  {
+    "id": "lastset-general-2026h1-q022",
+    "type": "single_choice",
+    "question": "图示R1、R2配置OSPF后，市场部和财务部主机都能ping通各自网关，但两网段无法互通，最可能的原因是？",
+    "options": {
+      "A": "R1的network命令通配符掩码配置错误",
+      "B": "R1与R2直连接口子网掩码不一致，无法建立OSPF邻居",
+      "C": "两端OSPF进程ID冲突",
+      "D": "两条LAN的network语句掩码错误，无法互相学习路由"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "直连接口分别配置/29和/24，OSPF邻居链路两端掩码不一致；OSPF进程号不要求两端相同。",
+    "chapter": "路由与广域网技术",
+    "knowledgeSection": "OSPF",
+    "knowledgePoint": "区域、LSA与邻居状态",
+    "difficulty": "hard",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "区域、LSA与邻居状态",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 22,
+        "pages": [
+          14,
+          15,
+          16
+        ],
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-last-set/general-q022-ospf.png",
+        "alt": "OSPF路由器与网段拓扑图",
+        "caption": "原卷配图"
+      }
+    ]
+  },
+  {
+    "id": "lastset-general-2026h1-q023",
+    "type": "single_choice",
+    "question": "边界网关协议BGP由哪种传输层协议承载？",
+    "options": {
+      "A": "ICMP",
+      "B": "IP",
+      "C": "UDP",
+      "D": "TCP"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "BGP运行在TCP之上，以获得可靠的有序传输。",
+    "chapter": "路由与广域网技术",
+    "knowledgeSection": "BGP",
+    "knowledgePoint": "AS与路径矢量",
+    "difficulty": "easy",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "AS与路径矢量",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 23,
+        "pages": [
+          16
+        ],
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q024",
+    "type": "single_choice",
+    "question": "BGP使用的TCP端口号是？",
+    "options": {
+      "A": "23",
+      "B": "89",
+      "C": "179",
+      "D": "520"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "BGP使用TCP端口179建立对等体连接。",
+    "chapter": "路由与广域网技术",
+    "knowledgeSection": "BGP",
+    "knowledgePoint": "AS与路径矢量",
+    "difficulty": "easy",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "AS与路径矢量",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 24,
+        "pages": [
+          16,
+          17
+        ],
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q025",
+    "type": "single_choice",
+    "question": "华为设备查看OSPF路由计算统计信息，应使用哪个命令？",
+    "options": {
+      "A": "display ospf cumulative",
+      "B": "display ospf spf-statistics",
+      "C": "display ospf global-statistics",
+      "D": "display ospf request-queue"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "SPF统计信息通过display ospf spf-statistics查看。",
+    "chapter": "路由与广域网技术",
+    "knowledgeSection": "OSPF",
+    "knowledgePoint": "区域、LSA与邻居状态",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "区域、LSA与邻居状态",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 25,
+        "pages": [
+          17,
+          18
+        ],
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q026",
+    "type": "single_choice",
+    "question": "华为设备查看OSPF邻居状态信息，应使用哪个命令？",
+    "options": {
+      "A": "display ospf peer",
+      "B": "display ip ospf peer",
+      "C": "display ospf neighbor",
+      "D": "display ip ospf neighbor"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "华为VRP常用display ospf peer查看OSPF邻居状态。",
+    "chapter": "路由与广域网技术",
+    "knowledgeSection": "OSPF",
+    "knowledgePoint": "区域、LSA与邻居状态",
+    "difficulty": "easy",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "区域、LSA与邻居状态",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 26,
+        "pages": [
+          18
+        ],
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q027",
+    "type": "single_choice",
+    "question": "OSPF区域1中连接网段192.168.10.0/23，正确的network命令是？",
+    "options": {
+      "A": "network 192.168.10.0 0.255.255.255",
+      "B": "network 192.168.10.0 255.255.255.0",
+      "C": "network 192.168.10.0 0.0.3.255",
+      "D": "network 192.168.10.0 0.0.1.255"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "/23子网掩码为255.255.254.0，反掩码为0.0.1.255。",
+    "chapter": "路由与广域网技术",
+    "knowledgeSection": "OSPF",
+    "knowledgePoint": "区域、LSA与邻居状态",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "区域、LSA与邻居状态",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 27,
+        "pages": [
+          18,
+          19
+        ],
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q028",
+    "type": "single_choice",
+    "question": "若路由器采用RIP协议，要宣告192.168.10.0网段，应使用哪条命令？",
+    "options": {
+      "A": "network 192.168.10.0",
+      "B": "network 192.168.10.0 255.255.255.0",
+      "C": "network 192.168.10.0 255.255.252.0",
+      "D": "network 192.168.10.0 0.0.1.255"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "RIP的network命令按网络地址启用相应接口，不像OSPF network语句那样带通配符掩码。",
+    "chapter": "路由与广域网技术",
+    "knowledgeSection": "RIP",
+    "knowledgePoint": "距离矢量与最大跳数",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "距离矢量与最大跳数",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 28,
+        "pages": [
+          19
+        ],
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q029",
+    "type": "single_choice",
+    "question": "路由策略在路由重分发过程中的主要作用是？",
+    "options": {
+      "A": "决定哪些路由被引入并可修改其属性",
+      "B": "加快路由收敛",
+      "C": "防止物理接口故障",
+      "D": "加密路由更新"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "路由策略可筛选被重分发的路由，并设置路由属性以控制路由传播和选路。",
+    "chapter": "路由与广域网技术",
+    "knowledgeSection": "路由基础",
+    "knowledgePoint": "路由协议类型与算法",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "路由协议类型与算法",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 29,
+        "pages": [
+          19,
+          20
+        ],
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q030",
+    "type": "single_choice",
+    "question": "前缀列表相比ACL用于匹配路由的主要优势是？",
+    "options": {
+      "A": "匹配速度更快",
+      "B": "可同时匹配网络地址和前缀长度",
+      "C": "可匹配传输层端口",
+      "D": "配置更简单"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "前缀列表可同时限定路由前缀和掩码长度范围，适合路由过滤。",
+    "chapter": "路由与广域网技术",
+    "knowledgeSection": "路由基础",
+    "knowledgePoint": "路由协议类型与算法",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "路由协议类型与算法",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 30,
+        "pages": [
+          20
+        ],
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q031",
+    "type": "single_choice",
+    "question": "BGP的Next_Hop属性通常在什么情况下被改变？",
+    "options": {
+      "A": "永远不需要改变",
+      "B": "路由通告给eBGP对等体时，下一跳通常改为本端出口地址",
+      "C": "路由通告给iBGP对等体时必然改为出口地址",
+      "D": "每次转发Update报文都改变"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "默认情况下向eBGP邻居通告路由时，Next_Hop被设置为本路由器；iBGP传播通常保留下一跳。",
+    "chapter": "路由与广域网技术",
+    "knowledgeSection": "BGP",
+    "knowledgePoint": "BGP路由属性与选路",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "BGP路由属性与选路",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 31,
+        "pages": [
+          20,
+          21
+        ],
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q032",
+    "type": "single_choice",
+    "question": "哪类OSPF LSA仅在其产生的区域内泛洪，不穿越ABR？",
+    "options": {
+      "A": "Type 1和Type 2",
+      "B": "Type 3和Type 4",
+      "C": "Type 5和Type 7",
+      "D": "Type 3和Type 5"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Router-LSA（Type 1）和Network-LSA（Type 2）是区域内LSA，不由ABR向其他区域泛洪。",
+    "chapter": "路由与广域网技术",
+    "knowledgeSection": "OSPF",
+    "knowledgePoint": "区域、LSA与邻居状态",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "区域、LSA与邻居状态",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 32,
+        "pages": [
+          21
+        ],
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q033",
+    "type": "single_choice",
+    "question": "下列哪种BGP属性不会随Update报文通告给邻居？",
+    "options": {
+      "A": "PrefVal",
+      "B": "Next-hop",
+      "C": "AS-Path",
+      "D": "Origin"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "华为PrefVal是本地设备上的优先值，不作为BGP路径属性通告给邻居；其余选项属于BGP路径属性。",
+    "chapter": "路由与广域网技术",
+    "knowledgeSection": "BGP",
+    "knowledgePoint": "BGP路由属性与选路",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "BGP路由属性与选路",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 33,
+        "pages": [
+          22
+        ],
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q034",
+    "type": "single_choice",
+    "question": "抓包中出现IPv4源地址0.0.0.0、目的地址255.255.255.255、UDP源端口68和目的端口67，抓取的是什么协议报文？",
+    "options": {
+      "A": "HTTP",
+      "B": "DHCP",
+      "C": "DNS",
+      "D": "ARP"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "客户端尚未获得地址时以0.0.0.0发送DHCP Discover，并通过UDP 68→67进行广播。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "应用层协议与端口",
+    "knowledgePoint": "DHCP",
+    "difficulty": "easy",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "DHCP",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 34,
+        "pages": [
+          22,
+          23
+        ],
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-last-set/general-q034-capture.png",
+        "alt": "DHCP报文抓包截图",
+        "caption": "原卷配图"
+      }
+    ]
+  },
+  {
+    "id": "lastset-general-2026h1-q035",
+    "type": "single_choice",
+    "question": "Windows中负责启动DNS缓存服务的服务名称是？",
+    "options": {
+      "A": "DNS Cache",
+      "B": "DNS Client",
+      "C": "DNS Flush",
+      "D": "DNS Start"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Windows DNS客户端服务（Dnscache）维护本地DNS缓存。",
+    "chapter": "服务器配置",
+    "knowledgeSection": "Windows服务器",
+    "knowledgePoint": "Windows服务与远程管理",
+    "difficulty": "easy",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "Windows服务与远程管理",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 35,
+        "pages": [
+          23
+        ],
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q037",
+    "type": "single_choice",
+    "question": "TCP三次握手中，第二个报文的ACK字段X应填写什么？第一个报文的序号为a。",
+    "options": {
+      "A": "a",
+      "B": "b",
+      "C": "a+1",
+      "D": "b+1"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "第二个报文确认第一个SYN；SYN占用一个序号，因此确认号为a+1。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "传输层",
+    "knowledgePoint": "TCP连接与可靠传输",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "TCP连接与可靠传输",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 37,
+        "pages": [
+          24,
+          25
+        ],
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-last-set/general-q037-tcp.png",
+        "alt": "TCP三次握手序列号示意图",
+        "caption": "原卷配图"
+      }
+    ]
+  },
+  {
+    "id": "lastset-general-2026h1-q038",
+    "type": "single_choice",
+    "question": "TCP三次握手中，第三个报文的序号字段Y应填写什么？第一个报文的序号为a。",
+    "options": {
+      "A": "a",
+      "B": "b",
+      "C": "a+1",
+      "D": "b+1"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "第三个报文由最初发起连接的主机发送，其序号从已发送的SYN之后继续，因此为a+1。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "传输层",
+    "knowledgePoint": "TCP连接与可靠传输",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "TCP连接与可靠传输",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 38,
+        "pages": [
+          24,
+          25
+        ],
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-last-set/general-q037-tcp.png",
+        "alt": "TCP三次握手序列号示意图",
+        "caption": "原卷配图"
+      }
+    ]
+  },
+  {
+    "id": "lastset-general-2026h1-q039",
+    "type": "single_choice",
+    "question": "关于交换机上的DHCP Snooping，错误的描述是？",
+    "options": {
+      "A": "区分连接DHCP服务器的可信接口和客户端不可信接口",
+      "B": "监听DHCP交互并生成IP、MAC、端口、VLAN绑定表",
+      "C": "可用于防范DHCP相关攻击",
+      "D": "能够代替DHCP服务器为客户端分配IP地址"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "DHCP Snooping负责监听和过滤DHCP报文，不负责给客户端分配地址。",
+    "chapter": "局域网与交换技术",
+    "knowledgeSection": "其他交换技术",
+    "knowledgePoint": "端口安全与DHCP Snooping",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "端口安全与DHCP Snooping",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 39,
+        "pages": [
+          26
+        ],
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q040",
+    "type": "single_choice",
+    "question": "客户端收到DHCP Offer后，以广播形式发送DHCP Request的主要原因是？",
+    "options": {
+      "A": "通知所有DHCP服务器它选择了哪个Offer",
+      "B": "为了加快传输速度",
+      "C": "因为此时还没有IP地址，无法单播",
+      "D": "通知同网段其他客户端"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "广播Request使多个DHCP服务器都能获知客户端选择的Offer，未被选择的服务器可释放预留地址。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "应用层协议与端口",
+    "knowledgePoint": "DHCP",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "DHCP",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 40,
+        "pages": [
+          26
+        ],
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q041",
+    "type": "single_choice",
+    "question": "TCP发生超时重传时通常执行哪项拥塞控制操作？",
+    "options": {
+      "A": "ssthresh设为当前cwnd一半，cwnd重置为1并进入慢启动",
+      "B": "ssthresh设为一半，cwnd设为ssthresh并进入拥塞避免",
+      "C": "cwnd减半后进入快速恢复",
+      "D": "cwnd设为1但ssthresh不变"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "超时表示拥塞较严重，TCP把ssthresh降至原拥塞窗口的一半，并将cwnd降到初始小窗口后慢启动。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "传输层",
+    "knowledgePoint": "TCP窗口、流量控制与拥塞控制",
+    "difficulty": "hard",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "TCP窗口、流量控制与拥塞控制",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 41,
+        "pages": [
+          27
+        ],
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q042",
+    "type": "single_choice",
+    "question": "DNS资源记录中，定义区域权威域名服务器的是？",
+    "options": {
+      "A": "SOA",
+      "B": "NS",
+      "C": "PTR",
+      "D": "MX"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "NS记录指定某个域或区域的权威名称服务器；SOA记录描述区域起始授权信息。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "应用层协议与端口",
+    "knowledgePoint": "DNS",
+    "difficulty": "easy",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "DNS",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 42,
+        "pages": [
+          27,
+          28
+        ],
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q043",
+    "type": "single_choice",
+    "question": "NETCONF的<get>操作通常返回什么数据格式？",
+    "options": {
+      "A": "JSON",
+      "B": "XML",
+      "C": "YAML",
+      "D": "Protocol Buffers"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "NETCONF基于XML编码RPC消息及配置、状态数据。",
+    "chapter": "网络管理",
+    "knowledgeSection": "管理协议与监控",
+    "knowledgePoint": "SNMP版本、MIB与报文",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "SNMP版本、MIB与报文",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 43,
+        "pages": [
+          28
+        ],
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q044",
+    "type": "single_choice",
+    "question": "Linux系统运行日志通常存放在哪个目录？",
+    "options": {
+      "A": "/var/log",
+      "B": "/usr/log",
+      "C": "/etc/log",
+      "D": "/tmp/log"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "/var/log是Linux系统和服务日志的常用目录。",
+    "chapter": "服务器配置",
+    "knowledgeSection": "Linux服务器",
+    "knowledgePoint": "常用命令与系统管理",
+    "difficulty": "easy",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "常用命令与系统管理",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 44,
+        "pages": [
+          28,
+          29
+        ],
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q045",
+    "type": "single_choice",
+    "question": "Windows主机要配置IPv6缺省路由，应使用哪条netsh命令？",
+    "options": {
+      "A": "netsh interface ipv6 add address ...",
+      "B": "netsh interface ipv6 add route 2001:.../64 ...",
+      "C": "netsh interface ipv6 add route ::/0 \"local\" 2001:200:2020:1000::1",
+      "D": "netsh interface ipv6 add dns ..."
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "IPv6缺省路由的目的前缀为::/0，命令通过add route把默认前缀指向下一跳。",
+    "chapter": "网络管理",
+    "knowledgeSection": "诊断工具与设备排查",
+    "knowledgePoint": "ipconfig、netstat与路由工具",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "ipconfig、netstat与路由工具",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 45,
+        "pages": [
+          29
+        ],
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q046",
+    "type": "single_choice",
+    "question": "2.4GHz频段部署3个AP，哪组信道规划能较好避免同频干扰？",
+    "options": {
+      "A": "AP1信道1、AP2信道6、AP3信道11",
+      "B": "所有AP固定使用信道6",
+      "C": "都使用动态切换信道（DFS）",
+      "D": "AP1信道3、AP2信道7、AP3信道11"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "在常用20/22MHz信道规划中，1、6、11互不重叠；DFS主要用于5GHz频段。",
+    "chapter": "局域网与交换技术",
+    "knowledgeSection": "无线局域网",
+    "knowledgePoint": "802.11与介质访问",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "802.11与介质访问",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 46,
+        "pages": [
+          30
+        ],
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q047",
+    "type": "single_choice",
+    "question": "使用6to4隧道时，IPv4地址190.25.1.1对应的6to4前缀是哪项？",
+    "options": {
+      "A": "2002:0C01:0101:BE19:0101::/90",
+      "B": "2002:BE19:0101::/48",
+      "C": "::BE19:0101/48",
+      "D": "2002:0C01:0101::BE19:0101/128"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "190.25.1.1转换为十六进制BE.19.01.01，嵌入2002::/16后得到2002:BE19:0101::/48。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "IPv6",
+    "knowledgePoint": "IPv6过渡技术",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "IPv6过渡技术",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 47,
+        "pages": [
+          30
+        ],
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q048",
+    "type": "single_choice",
+    "question": "以下哪个频段属于5G常用的高频段（毫米波）？",
+    "options": {
+      "A": "700MHz",
+      "B": "2.6GHz",
+      "C": "3.5GHz",
+      "D": "28GHz"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "28GHz属于毫米波高频段；700MHz、2.6GHz和3.5GHz为较低频段。",
+    "chapter": "新技术",
+    "knowledgeSection": "移动与物联网",
+    "knowledgePoint": "5G",
+    "difficulty": "easy",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "5G",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 48,
+        "pages": [
+          31
+        ],
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q049",
+    "type": "single_choice",
+    "question": "5G标准中，eMBB场景下数据信道采用的编码方案是？",
+    "options": {
+      "A": "Turbo码",
+      "B": "Polar码",
+      "C": "LDPC码",
+      "D": "卷积码"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "5G NR中数据信道使用LDPC编码，控制信道使用Polar编码。",
+    "chapter": "新技术",
+    "knowledgeSection": "移动与物联网",
+    "knowledgePoint": "5G",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "5G",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 49,
+        "pages": [
+          31,
+          32
+        ],
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q050",
+    "type": "single_choice",
+    "question": "宿舍无线网络网速慢、用户无法登录，可采取哪些优化措施？①调整AP功率；②密集区域更换高密AP；③调整带宽；④干扰调整；⑤馈线入户。",
+    "options": {
+      "A": "①②",
+      "B": "①②③",
+      "C": "①②③④",
+      "D": "①②③④⑤"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "本题答案按原卷为D，即上述五项均选；功率、容量、信道干扰、带宽及覆盖方式都可能影响无线体验。",
+    "chapter": "局域网与交换技术",
+    "knowledgeSection": "无线局域网",
+    "knowledgePoint": "AP类型与WLAN架构",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "AP类型与WLAN架构",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 50,
+        "pages": [
+          32
+        ],
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q051",
+    "type": "single_choice",
+    "question": "以下应用中，对网络延迟抖动最为敏感的是？",
+    "options": {
+      "A": "浏览网页",
+      "B": "视频会议",
+      "C": "邮件接收",
+      "D": "文件传输"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "实时交互媒体要求连续、及时播放，对时延变化和抖动较敏感。",
+    "chapter": "综合布线与网络规划",
+    "knowledgeSection": "网络规划与性能",
+    "knowledgePoint": "带宽、时延、丢包率与吞吐量",
+    "difficulty": "easy",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "带宽、时延、丢包率与吞吐量",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 51,
+        "pages": [
+          32,
+          33
+        ],
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q052",
+    "type": "single_choice",
+    "question": "IPsec部署需同时提供加密和完整性校验，题目所列选项中应选择哪种协议与模式组合？",
+    "options": {
+      "A": "AH＋隧道模式",
+      "B": "AH＋传输模式",
+      "C": "ESP＋传输模式",
+      "D": "ESP＋隧道模式"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "ESP可提供机密性并支持完整性校验；隧道模式封装原始IP包。若路径中存在NAT，实际部署通常还需启用NAT-T，单靠隧道模式并不会自动解决NAT穿越。",
+    "chapter": "网络安全",
+    "knowledgeSection": "VPN与安全传输",
+    "knowledgePoint": "IPsec VPN与SSL VPN",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "IPsec VPN与SSL VPN",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 52,
+        "pages": [
+          33
+        ],
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q053",
+    "type": "single_choice",
+    "question": "双因素认证中，属于“知识＋所持有”因素的组合是？",
+    "options": {
+      "A": "口令＋智能卡",
+      "B": "口令＋指纹",
+      "C": "人脸识别＋虹膜扫描",
+      "D": "短信验证码＋安全令牌"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "口令属于知识因素，智能卡属于持有因素；指纹、人脸和虹膜属于生物特征因素。",
+    "chapter": "网络安全",
+    "knowledgeSection": "密码与加密",
+    "knowledgePoint": "密码学原则与传输加密",
+    "difficulty": "easy",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "密码学原则与传输加密",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 53,
+        "pages": [
+          34
+        ],
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q054",
+    "type": "single_choice",
+    "question": "网站域名解析记录被非法篡改，最有效的技术防护措施是？",
+    "options": {
+      "A": "部署Web应用防火墙",
+      "B": "部署IDS/IPS监测异常",
+      "C": "使用DNSSEC验证解析记录的完整性和真实性",
+      "D": "对解析请求限速"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "DNSSEC通过数字签名验证DNS数据来源和完整性，可帮助识别伪造或被篡改的解析记录。",
+    "chapter": "网络安全",
+    "knowledgeSection": "PKI与数字证书",
+    "knowledgePoint": "CA、数字证书与数字签名",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "CA、数字证书与数字签名",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 54,
+        "pages": [
+          34,
+          35
+        ],
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q055",
+    "type": "single_choice",
+    "question": "下列算法中，不属于非对称加密算法的是？",
+    "options": {
+      "A": "DES",
+      "B": "DH",
+      "C": "ElGamal",
+      "D": "ECC"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "DES是对称分组加密算法；DH、ElGamal和ECC属于公钥密码相关算法。",
+    "chapter": "网络安全",
+    "knowledgeSection": "密码与加密",
+    "knowledgePoint": "对称加密算法",
+    "difficulty": "easy",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "对称加密算法",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 55,
+        "pages": [
+          35
+        ],
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q056",
+    "type": "single_choice",
+    "question": "对称加密算法相较于非对称算法，最大的不足通常是？",
+    "options": {
+      "A": "密钥产生不便",
+      "B": "密钥使用不便",
+      "C": "密钥分发不安全",
+      "D": "密文容易被破解"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "通信双方必须安全地共享同一密钥；如何安全分发和更新密钥是对称加密的主要难点。",
+    "chapter": "网络安全",
+    "knowledgeSection": "密码与加密",
+    "knowledgePoint": "对称加密算法",
+    "difficulty": "easy",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "对称加密算法",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 56,
+        "pages": [
+          35,
+          36
+        ],
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q057",
+    "type": "single_choice",
+    "question": "使用防火墙进行区域隔离时，默认安全策略应如何设置？",
+    "options": {
+      "A": "允许所有流量",
+      "B": "拒绝所有流量，按需开放",
+      "C": "只允许内网流量",
+      "D": "只允许DNS流量"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "默认拒绝并按业务需要显式开放，遵循最小权限原则。",
+    "chapter": "网络安全",
+    "knowledgeSection": "网络设备与边界防护",
+    "knowledgePoint": "防火墙与DMZ",
+    "difficulty": "easy",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "防火墙与DMZ",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 57,
+        "pages": [
+          36
+        ],
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q058",
+    "type": "single_choice",
+    "question": "攻击者发送大量伪造源IP的SYN报文但不完成握手，以耗尽服务器连接队列，这种攻击是？",
+    "options": {
+      "A": "ACK Flood",
+      "B": "SYN Flood",
+      "C": "HTTP Flood",
+      "D": "Slowloris"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "半开连接持续占用服务器等待队列，是典型SYN Flood攻击。",
+    "chapter": "网络安全",
+    "knowledgeSection": "网络攻击",
+    "knowledgePoint": "DDoS",
+    "difficulty": "easy",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "DDoS",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 58,
+        "pages": [
+          36,
+          37
+        ],
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q059",
+    "type": "single_choice",
+    "question": "关于入侵检测系统（IDS）的描述，错误的是？",
+    "options": {
+      "A": "可由探测、分析、响应和事件数据库等部分组成",
+      "B": "可发现攻击探测行为并告警",
+      "C": "通常采用串接方式部署在网络流量路径上",
+      "D": "可采用误用检测和异常检测"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "IDS通常旁路接收镜像流量；串接在流量路径上并主动阻断更符合IPS的部署方式。",
+    "chapter": "网络安全",
+    "knowledgeSection": "网络设备与边界防护",
+    "knowledgePoint": "IDS与IPS",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "IDS与IPS",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 59,
+        "pages": [
+          37
+        ],
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q060",
+    "type": "single_choice",
+    "question": "MPLS转发中执行压入标签（PUSH）操作的设备通常是？",
+    "options": {
+      "A": "报文进入MPLS网络处的LER",
+      "B": "所有LSR",
+      "C": "离开MPLS网络处的LER",
+      "D": "网络中的所有设备"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "入口LER根据转发等价类为IP报文压入标签，核心LSR主要执行标签交换。",
+    "chapter": "路由与广域网技术",
+    "knowledgeSection": "路由基础",
+    "knowledgePoint": "路由协议类型与算法",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "路由协议类型与算法",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 60,
+        "pages": [
+          38
+        ],
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q061",
+    "type": "single_choice",
+    "question": "将网络数据平面、控制平面和应用平面分离的技术是？",
+    "options": {
+      "A": "网络切片",
+      "B": "边缘计算",
+      "C": "网络隔离",
+      "D": "软件定义网络"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "SDN通过控制与转发解耦并提供可编程控制能力，实现集中管理和灵活控制。",
+    "chapter": "新技术",
+    "knowledgeSection": "网络架构新技术",
+    "knowledgePoint": "SDN软件定义网络",
+    "difficulty": "easy",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "SDN软件定义网络",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 61,
+        "pages": [
+          38,
+          39
+        ],
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q062",
+    "type": "single_choice",
+    "question": "下列不同类型防火墙的说法中，错误的是？",
+    "options": {
+      "A": "状态检测防火墙通常必须为报文去、回两个方向分别配置策略",
+      "B": "包过滤防火墙可对每个数据包进行ACL匹配",
+      "C": "代理防火墙代理内外网用户之间的业务",
+      "D": "状态检测防火墙通常检查未命中会话的首包"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "状态检测防火墙跟踪连接状态，符合策略的会话通常可自动允许返回流量，不必把状态无关的回程规则重复配置一遍。",
+    "chapter": "网络安全",
+    "knowledgeSection": "网络设备与边界防护",
+    "knowledgePoint": "防火墙与DMZ",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "防火墙与DMZ",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 62,
+        "pages": [
+          39
+        ],
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q063",
+    "type": "single_choice",
+    "question": "设计多租户VXLAN网络时，隔离不同租户流量的关键机制是？",
+    "options": {
+      "A": "为每个租户分配独立VNI",
+      "B": "使用不同物理交换机端口连接租户",
+      "C": "限制每个租户的MTU",
+      "D": "为每个租户配置独立VTEP地址池"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "VNI标识VXLAN覆盖网络，可在同一物理承载网上区分不同二层租户网络。",
+    "chapter": "局域网与交换技术",
+    "knowledgeSection": "VLAN",
+    "knowledgePoint": "802.1Q与VLAN标签",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "802.1Q与VLAN标签",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 63,
+        "pages": [
+          39,
+          40
+        ],
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q064",
+    "type": "single_choice",
+    "question": "3块80GB硬盘组成RAID 5，阵列可用容量是多少？",
+    "options": {
+      "A": "240GB",
+      "B": "160GB",
+      "C": "80GB",
+      "D": "40GB"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RAID 5可用容量为(N−1)×最小单盘容量；(3−1)×80=160GB。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "存储器与可靠性",
+    "knowledgePoint": "内存、磁盘与RAID",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "内存、磁盘与RAID",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 64,
+        "pages": [
+          40,
+          41
+        ],
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q065",
+    "type": "single_choice",
+    "question": "2块80GB和1块40GB硬盘组成RAID 5，阵列可用容量是多少？",
+    "options": {
+      "A": "40GB",
+      "B": "80GB",
+      "C": "160GB",
+      "D": "200GB"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RAID 5各盘按最小盘容量参与计算，(3−1)×40=80GB。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "存储器与可靠性",
+    "knowledgePoint": "内存、磁盘与RAID",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "内存、磁盘与RAID",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 65,
+        "pages": [
+          40,
+          41
+        ],
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q066",
+    "type": "single_choice",
+    "question": "在RAID 2.0+中，数据重建的基本单位是？",
+    "options": {
+      "A": "整块物理硬盘（PHD）",
+      "B": "Chunk",
+      "C": "逻辑卷（LUN）",
+      "D": "存储池（Pool）"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RAID 2.0+把磁盘划分为多个Chunk并分散组织；重建按Chunk粒度处理，而非整盘重建。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "存储器与可靠性",
+    "knowledgePoint": "内存、磁盘与RAID",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "内存、磁盘与RAID",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 66,
+        "pages": [
+          41
+        ],
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q067",
+    "type": "single_choice",
+    "question": "NAS与SAN的根本区别是？",
+    "options": {
+      "A": "NAS使用TCP/IP，SAN只能使用光纤通道",
+      "B": "NAS提供文件级访问，SAN提供块级访问",
+      "C": "NAS成本更低、SAN性能更高",
+      "D": "NAS易管理、SAN配置复杂"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "NAS以文件为访问对象，SAN向主机提供块设备访问；底层网络技术和成本并非绝对限定。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "存储器与可靠性",
+    "knowledgePoint": "存储介质性能比较",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "存储介质性能比较",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 67,
+        "pages": [
+          42
+        ],
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q068",
+    "type": "single_choice",
+    "question": "以下哪项不属于企业网络逻辑设计的具体内容？",
+    "options": {
+      "A": "VLAN划分、IP地址规划、路由协议选择",
+      "B": "布线图纸、设备指标",
+      "C": "安全域划分、设备加固和ACL策略",
+      "D": "技术选型和架构设计"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "布线图纸和设备指标属于物理设计内容；逻辑设计关注地址、VLAN、路由、安全和架构。",
+    "chapter": "综合布线与网络规划",
+    "knowledgeSection": "网络规划与性能",
+    "knowledgePoint": "网络拓扑",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "网络拓扑",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 68,
+        "pages": [
+          42
+        ],
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q069",
+    "type": "single_choice",
+    "question": "系统可用性达到99.999%（五个9），年停机时间约为？",
+    "options": {
+      "A": "5.26分钟",
+      "B": "52.6分钟",
+      "C": "8.76小时",
+      "D": "43.8分钟"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "年停机比例为0.001%；365×24×60×0.00001≈5.26分钟。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "存储器与可靠性",
+    "knowledgePoint": "串并联系统可靠性",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "串并联系统可靠性",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 69,
+        "pages": [
+          43
+        ],
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q070",
+    "type": "single_choice",
+    "question": "BGP is designed to be used between multiple autonomous (1). Which word completes the sentence?",
+    "options": {
+      "A": "routers",
+      "B": "systems",
+      "C": "computers",
+      "D": "sources"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "The standard phrase is “autonomous systems”; the passage describes BGP between multiple ASes.",
+    "chapter": "路由与广域网技术",
+    "knowledgeSection": "BGP",
+    "knowledgePoint": "AS与路径矢量",
+    "difficulty": "easy",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "AS与路径矢量",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 70,
+        "pages": [
+          43,
+          44
+        ],
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q071",
+    "type": "single_choice",
+    "question": "Intra-autonomous system (2) protocols are used for routing within an AS. Which word completes the phrase?",
+    "options": {
+      "A": "routing",
+      "B": "switching",
+      "C": "transmitting",
+      "D": "receiving"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "The standard networking term is “intra-autonomous system routing protocol.”",
+    "chapter": "路由与广域网技术",
+    "knowledgeSection": "BGP",
+    "knowledgePoint": "AS与路径矢量",
+    "difficulty": "easy",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "AS与路径矢量",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 71,
+        "pages": [
+          43,
+          45
+        ],
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q072",
+    "type": "single_choice",
+    "question": "The exchanged information can support routing (3) decisions at the autonomous-system level. Which word fits?",
+    "options": {
+      "A": "connection",
+      "B": "policy",
+      "C": "source",
+      "D": "consideration"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "“Routing policy decisions” is the conventional phrase used for interdomain route policy.",
+    "chapter": "路由与广域网技术",
+    "knowledgeSection": "BGP",
+    "knowledgePoint": "AS与路径矢量",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "AS与路径矢量",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 72,
+        "pages": [
+          43,
+          45
+        ],
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q073",
+    "type": "single_choice",
+    "question": "BGP Path (4) are partitioned into well-known and optional. Which word completes the sentence?",
+    "options": {
+      "A": "states",
+      "B": "searches",
+      "C": "attributes",
+      "D": "researches"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "BGP path attributes are classified as well-known or optional.",
+    "chapter": "路由与广域网技术",
+    "knowledgeSection": "BGP",
+    "knowledgePoint": "BGP路由属性与选路",
+    "difficulty": "easy",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "BGP路由属性与选路",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 73,
+        "pages": [
+          44,
+          46
+        ],
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q074",
+    "type": "single_choice",
+    "question": "Optional attributes allow experimentation involving a group of BGP (5) without affecting the rest of the Internet. Which word fits?",
+    "options": {
+      "A": "routers",
+      "B": "states",
+      "C": "meters",
+      "D": "costs"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A group of BGP routers can exchange optional attributes while other routers ignore attributes they do not understand.",
+    "chapter": "路由与广域网技术",
+    "knowledgeSection": "BGP",
+    "knowledgePoint": "AS与路径矢量",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "AS与路径矢量",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 74,
+        "pages": [
+          44,
+          46
+        ],
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-general-2026h1-q075",
+    "type": "single_choice",
+    "question": "需求分析阶段总结的内容包括哪些？①接触过的群体和代表人名单；②标明收集信息的方法；③访谈、调查次数；④取得的原始资料数量；⑤调查中遇到的困难。",
+    "options": {
+      "A": "①②③④⑤",
+      "B": "①②③④",
+      "C": "②③④",
+      "D": "②③④⑤"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "需求分析总结需要记录对象、采用的方法、工作数量、取得的资料和执行中的困难，五项均应纳入。该类需求分析知识点在当前细分目录中没有专门节点，暂归项目文档管理。",
+    "chapter": "项目管理与法律法规",
+    "knowledgeSection": "项目控制",
+    "knowledgePoint": "配置管理",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "最后一套卷·综合知识",
+      "配置管理",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+        "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+        "questionNumber": 75,
+        "pages": [
+          47
+        ],
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（综合知识）》PDF；出版方、官方性及答案权威性未独立核实。答案按卷内答案整理，并对计算、协议行为及图题作了复核。"
+  },
+  {
+    "id": "lastset-case-2026h1-c1-q01",
+    "type": "short_answer",
+    "question": "【案例一：总部与分支VPN】VPN的全称是什么？按工作层次属于网络层的类型有哪些？IPsec有哪两种工作模式？局域网到局域网经公网通信常用哪种模式？AH与ESP中，哪一种同时支持加密和认证？",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "VPN：虚拟专用网；网络层VPN：IPsec VPN、GRE VPN；IPsec模式：隧道模式、传输模式；站点到站点常用隧道模式；能提供加密并可进行认证的是ESP。",
+    "analysis": "IPsec工作在网络层，GRE也可承载网络层隧道流量；隧道模式封装原始IP包，常用于网关间站点到站点连接。AH提供认证和完整性但不加密，ESP可提供加密并支持完整性认证。",
+    "chapter": "网络安全",
+    "knowledgeSection": "VPN与安全传输",
+    "knowledgePoint": "IPsec VPN与SSL VPN",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "案例题",
+      "最后一套卷·案例分析",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（案例分析）.pdf",
+        "sha256": "38FE171E8CE711D0582702F9D1179EA9A0F16B8D7E27D672E20E6A79C6B4FF5C",
+        "questionNumber": 1,
+        "subQuestionNumber": 1,
+        "pages": [
+          1
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（案例分析）》PDF；出版方、官方性及答案权威性未独立核实。参考答案按卷内试题答案整理并校对。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-last-set/case-c1-vpn.png",
+        "alt": "总部与分支机构VPN拓扑图",
+        "caption": "原卷配图"
+      }
+    ]
+  },
+  {
+    "id": "lastset-case-2026h1-c1-q02",
+    "type": "short_answer",
+    "question": "【案例一：总部与分支VPN】按题面补齐R1与R2的静态路由、保护流量ACL、IPsec提议、IKE对等体、策略映射及接口应用配置。总部网段为172.22.1.0/24，分支网段为172.22.2.0/24，对端公网地址为167.1.1.1和168.1.1.1，共享密钥为huawei。",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "（1）system-view；（2）R1配置ip route-static默认路由，下一跳168.1.1.2；（3）3000；（4）source 172.22.1.0 0.0.0.255 destination 172.22.2.0 0.0.0.255；（5）tran1；（6）sha1；（7）预共享密钥huawei；（8）167.1.1.1；（9）security；（10）peer1；（11）csaimap；（12）3des；（13）huawei；（14）168.1.1.1；（15）return。",
+    "analysis": "R1经公网网关168.1.1.2配置缺省路由，ACL 3000匹配总部到分支的私网流量；两端使用一致的ESP/3DES/SHA1提议和huawei预共享密钥，远端地址互相指向，最后把IPsec策略应用到串口。卷面将若干命令省略，填空答案按原卷答案表逐项归纳。",
+    "chapter": "网络安全",
+    "knowledgeSection": "VPN与安全传输",
+    "knowledgePoint": "IPsec VPN与SSL VPN",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "案例题",
+      "最后一套卷·案例分析",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（案例分析）.pdf",
+        "sha256": "38FE171E8CE711D0582702F9D1179EA9A0F16B8D7E27D672E20E6A79C6B4FF5C",
+        "questionNumber": 1,
+        "subQuestionNumber": 2,
+        "pages": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（案例分析）》PDF；出版方、官方性及答案权威性未独立核实。参考答案按卷内试题答案整理并校对。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-last-set/case-c1-vpn.png",
+        "alt": "总部与分支机构VPN拓扑图",
+        "caption": "原卷配图"
+      }
+    ]
+  },
+  {
+    "id": "lastset-case-2026h1-c2-q01",
+    "type": "short_answer",
+    "question": "【案例二：数据中心安全分区】根据拓扑图，为设备①②③分别选择合适的安全设备，实现Web应用防护、数据库区域访问控制和服务器漏洞扫描。",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "①部署Web应用防火墙（WAF）；②部署防火墙；③部署漏洞扫描设备。",
+    "analysis": "WAF针对HTTP/HTTPS应用层攻击；防火墙实施区域边界访问控制；漏洞扫描设备定期检查服务器等资产的已知漏洞。",
+    "chapter": "网络安全",
+    "knowledgeSection": "网络设备与边界防护",
+    "knowledgePoint": "防火墙与DMZ",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "案例题",
+      "最后一套卷·案例分析",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（案例分析）.pdf",
+        "sha256": "38FE171E8CE711D0582702F9D1179EA9A0F16B8D7E27D672E20E6A79C6B4FF5C",
+        "questionNumber": 2,
+        "subQuestionNumber": 1,
+        "pages": [
+          6,
+          7
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（案例分析）》PDF；出版方、官方性及答案权威性未独立核实。参考答案按卷内试题答案整理并校对。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-last-set/case-c2-datacenter.png",
+        "alt": "数据中心安全分区与设备拓扑图",
+        "caption": "原卷配图"
+      }
+    ]
+  },
+  {
+    "id": "lastset-case-2026h1-c2-q02",
+    "type": "short_answer",
+    "question": "【案例二：数据中心安全分区】等保管理要求中，机房位置、防雷、防火、防水防潮、静电和电磁防护属于哪个方面？人员录用、离岗、安全意识培训和外部人员访问管理属于哪个方面？",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "机房及环境要求属于安全物理环境；人员录用、离岗、培训和外部人员访问属于安全管理人员。",
+    "analysis": "等保要求把物理位置、设施防护和环境控制归为安全物理环境；人员生命周期和人员安全教育归为安全管理人员。",
+    "chapter": "项目管理与法律法规",
+    "knowledgeSection": "法律法规与合规",
+    "knowledgePoint": "等保2.0",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "案例题",
+      "最后一套卷·案例分析",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（案例分析）.pdf",
+        "sha256": "38FE171E8CE711D0582702F9D1179EA9A0F16B8D7E27D672E20E6A79C6B4FF5C",
+        "questionNumber": 2,
+        "subQuestionNumber": 2,
+        "pages": [
+          6,
+          7,
+          8
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（案例分析）》PDF；出版方、官方性及答案权威性未独立核实。参考答案按卷内试题答案整理并校对。"
+  },
+  {
+    "id": "lastset-case-2026h1-c2-q03",
+    "type": "short_answer",
+    "question": "【案例二：数据中心安全分区】DDoS主要影响信息系统的哪项安全属性？写出两种攻击特征，并至少列出三种防范方法。",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "主要影响可用性。特征可包括攻击源地址分散、服务器收到大量异常报文、带宽或连接等资源耗尽。防范方法可列：及时修补系统、关闭未用服务和端口、部署流量清洗、使用CDN、增加带宽、负载分担。",
+    "analysis": "DDoS通过大量分布式流量或请求耗尽目标带宽、连接或计算资源，使服务无法正常提供；防护通常结合源头加固、流量清洗、分散承载和容量扩展。",
+    "chapter": "网络安全",
+    "knowledgeSection": "网络攻击",
+    "knowledgePoint": "DDoS",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "案例题",
+      "最后一套卷·案例分析",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（案例分析）.pdf",
+        "sha256": "38FE171E8CE711D0582702F9D1179EA9A0F16B8D7E27D672E20E6A79C6B4FF5C",
+        "questionNumber": 2,
+        "subQuestionNumber": 3,
+        "pages": [
+          7,
+          8
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（案例分析）》PDF；出版方、官方性及答案权威性未独立核实。参考答案按卷内试题答案整理并校对。"
+  },
+  {
+    "id": "lastset-case-2026h1-c2-q04",
+    "type": "short_answer",
+    "question": "【案例二：数据中心安全分区】从图中判断当前使用的存储方案；若从经济性考虑希望节省成本，可改用哪种方案？简述原因。",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "当前为FC-SAN；可考虑IP-SAN。FC-SAN通常性能较好但需要光纤通道交换机等专用设备，IP-SAN可利用以太网设备，成本通常更低。",
+    "analysis": "图示服务器通过FC交换机连接存储，因此是FC-SAN。IP-SAN基于IP以太网传输块存储数据，设备和布线成本通常较低。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "存储器与可靠性",
+    "knowledgePoint": "存储介质性能比较",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "案例题",
+      "最后一套卷·案例分析",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（案例分析）.pdf",
+        "sha256": "38FE171E8CE711D0582702F9D1179EA9A0F16B8D7E27D672E20E6A79C6B4FF5C",
+        "questionNumber": 2,
+        "subQuestionNumber": 4,
+        "pages": [
+          8,
+          9
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（案例分析）》PDF；出版方、官方性及答案权威性未独立核实。参考答案按卷内试题答案整理并校对。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-last-set/case-c2-datacenter.png",
+        "alt": "数据中心安全分区与设备拓扑图",
+        "caption": "原卷配图"
+      }
+    ]
+  },
+  {
+    "id": "lastset-case-2026h1-c3-q01",
+    "type": "short_answer",
+    "question": "【案例三：楼层网络QoS】Best-Effort、IntServ和DiffServ三种服务模型中，Internet默认采用哪一种？需要通过RSVP进行资源预留的是哪一种？",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "Internet默认使用Best-Effort服务模型；需要使用RSVP进行资源预留的是IntServ服务模型。",
+    "analysis": "Best-Effort不预留资源，是Internet常见默认服务；IntServ按流进行资源预留，通常借助RSVP信令。",
+    "chapter": "综合布线与网络规划",
+    "knowledgeSection": "网络规划与性能",
+    "knowledgePoint": "带宽、时延、丢包率与吞吐量",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "案例题",
+      "最后一套卷·案例分析",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（案例分析）.pdf",
+        "sha256": "38FE171E8CE711D0582702F9D1179EA9A0F16B8D7E27D672E20E6A79C6B4FF5C",
+        "questionNumber": 3,
+        "subQuestionNumber": 1,
+        "pages": [
+          9,
+          10,
+          12
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（案例分析）》PDF；出版方、官方性及答案权威性未独立核实。参考答案按卷内试题答案整理并校对。"
+  },
+  {
+    "id": "lastset-case-2026h1-c3-q02",
+    "type": "short_answer",
+    "question": "【案例三：楼层网络QoS】按题图和需求补齐Switch配置：VLAN 10与20的Trunk放行；用ACL分别匹配192.168.1.0/24和192.168.2.0/24；两类流量分别整形，CIR均为6000/8000kbps、PIR均为10000kbps；最后在GE0/0/3出口应用策略。",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "答案表的关键填空依次为：port trunk allow-pass vlan 10 20；ACL 2000匹配192.168.1.0 0.0.0.255；ACL 2001匹配192.168.2.0 0.0.0.255；classifier c1/c2分别匹配ACL；c1使用CIR 6000、PIR 10000，c2使用CIR 8000、PIR 10000；建立traffic behavior b2；策略中c2关联b2；在GE0/0/3应用traffic-policy p1 outbound。",
+    "analysis": "先用VLAN和ACL区分两个用户网段，再用流分类关联流量行为与CIR/PIR参数，最后在上行接口出方向应用策略。原卷以多处空格展示命令，答案按其空格顺序归纳。",
+    "chapter": "综合布线与网络规划",
+    "knowledgeSection": "网络规划与性能",
+    "knowledgePoint": "带宽、时延、丢包率与吞吐量",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "案例题",
+      "最后一套卷·案例分析",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（案例分析）.pdf",
+        "sha256": "38FE171E8CE711D0582702F9D1179EA9A0F16B8D7E27D672E20E6A79C6B4FF5C",
+        "questionNumber": 3,
+        "subQuestionNumber": 2,
+        "pages": [
+          9,
+          10,
+          11,
+          12,
+          13
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（案例分析）》PDF；出版方、官方性及答案权威性未独立核实。参考答案按卷内试题答案整理并校对。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-last-set/case-c3-qos.png",
+        "alt": "按楼层划分VLAN的QoS网络拓扑图",
+        "caption": "原卷配图"
+      }
+    ]
+  },
+  {
+    "id": "lastset-case-2026h1-c3-q03",
+    "type": "short_answer",
+    "question": "【案例三：楼层网络QoS】拓扑中缺少哪种边界安全设备？其安全级别最高的区域是什么？除直连部署外，还可采用什么方式连接到核心交换机进行流量过滤？",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "缺少防火墙；安全级别最高的区域为Local；还可采用旁挂方式部署。",
+    "analysis": "防火墙提供区域间访问控制，Local区域代表设备自身，默认安全级别最高；旁挂部署可通过流量引导或镜像等方式实现过滤。",
+    "chapter": "网络安全",
+    "knowledgeSection": "网络设备与边界防护",
+    "knowledgePoint": "防火墙与DMZ",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "案例题",
+      "最后一套卷·案例分析",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（案例分析）.pdf",
+        "sha256": "38FE171E8CE711D0582702F9D1179EA9A0F16B8D7E27D672E20E6A79C6B4FF5C",
+        "questionNumber": 3,
+        "subQuestionNumber": 3,
+        "pages": [
+          12,
+          13
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（案例分析）》PDF；出版方、官方性及答案权威性未独立核实。参考答案按卷内试题答案整理并校对。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-last-set/case-c3-qos.png",
+        "alt": "按楼层划分VLAN的QoS网络拓扑图",
+        "caption": "原卷配图"
+      }
+    ]
+  },
+  {
+    "id": "lastset-case-2026h1-c4-q01",
+    "type": "short_answer",
+    "question": "【案例四：MSTP与地址规划】根据拓扑与配置补齐MSTP项目：设置域名和VLAN实例映射；选择路径开销标准；在相应端口启用根保护、BPDU保护及边缘端口功能。",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "①MST域名RG1；②实例1映射VLAN 2至10；③路径开销标准legacy；④在SwitchA连接下游交换机的端口启用根保护；⑤在SwitchC启用BPDU保护；⑥在SwitchD面向终端的接口配置stp edged-port。",
+    "analysis": "MST域内各交换机需要一致的域名、修订级别和VLAN映射；根保护防止下游设备争夺根角色，BPDU保护用于保护边缘端口，边缘端口用于连接终端。",
+    "chapter": "局域网与交换技术",
+    "knowledgeSection": "STP生成树",
+    "knowledgePoint": "端口角色与BPDU",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "案例题",
+      "最后一套卷·案例分析",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（案例分析）.pdf",
+        "sha256": "38FE171E8CE711D0582702F9D1179EA9A0F16B8D7E27D672E20E6A79C6B4FF5C",
+        "questionNumber": 4,
+        "subQuestionNumber": 1,
+        "pages": [
+          14,
+          15,
+          16,
+          17
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（案例分析）》PDF；出版方、官方性及答案权威性未独立核实。参考答案按卷内试题答案整理并校对。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-last-set/case-c4-mstp.png",
+        "alt": "MSTP多交换机网络拓扑图",
+        "caption": "原卷配图"
+      }
+    ]
+  },
+  {
+    "id": "lastset-case-2026h1-c4-q02",
+    "type": "short_answer",
+    "question": "【案例四：MSTP与地址规划】根据配置描述instance 1和instance 2的正常转发路径；若根桥故障，路径如何变化？",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "正常情况下，instance 1经SwitchC→SwitchA（也可继续经SwitchB到上游）；instance 2经SwitchD→SwitchB（也可继续经SwitchA到上游）。根桥故障时，instance 1可经SwitchC→SwitchD→SwitchB；instance 2可经SwitchD→SwitchC→SwitchA。",
+    "analysis": "instance 1以SwitchA为主根、SwitchB为备份根；instance 2相反。MSTP按实例分别计算无环树，主根失效后由备用根接管并改变上行路径。",
+    "chapter": "局域网与交换技术",
+    "knowledgeSection": "STP生成树",
+    "knowledgePoint": "端口角色与BPDU",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "案例题",
+      "最后一套卷·案例分析",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（案例分析）.pdf",
+        "sha256": "38FE171E8CE711D0582702F9D1179EA9A0F16B8D7E27D672E20E6A79C6B4FF5C",
+        "questionNumber": 4,
+        "subQuestionNumber": 2,
+        "pages": [
+          14,
+          17,
+          19
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（案例分析）》PDF；出版方、官方性及答案权威性未独立核实。参考答案按卷内试题答案整理并校对。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-last-set/case-c4-mstp.png",
+        "alt": "MSTP多交换机网络拓扑图",
+        "caption": "原卷配图"
+      }
+    ]
+  },
+  {
+    "id": "lastset-case-2026h1-c4-q03",
+    "type": "short_answer",
+    "question": "【案例四：MSTP与地址规划】按图中部门主机数量与已给地址，填写四个缺失项：（7）生产部地址范围终点；（8）销售部子网掩码；（9）研发部地址范围起点；（10）服务器地址范围终点。",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "（7）172.17.101.254；（8）255.255.255.128；（9）172.17.102.1；（10）172.17.103.190。",
+    "analysis": "按部门规模使用VLSM分配：生产部使用172.17.100.0/23；销售部使用/25；研发部使用172.17.102.0/25；服务器使用172.17.103.128/26，因此各空的边界地址如答案所列。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "IPv4与子网",
+    "knowledgePoint": "VLSM子网划分",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "案例题",
+      "最后一套卷·案例分析",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（案例分析）.pdf",
+        "sha256": "38FE171E8CE711D0582702F9D1179EA9A0F16B8D7E27D672E20E6A79C6B4FF5C",
+        "questionNumber": 4,
+        "subQuestionNumber": 3,
+        "pages": [
+          18,
+          19
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（案例分析）》PDF；出版方、官方性及答案权威性未独立核实。参考答案按卷内试题答案整理并校对。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-last-set/case-c4-vlsm.png",
+        "alt": "部门主机地址分配表",
+        "caption": "原卷配图"
+      }
+    ]
+  },
+  {
+    "id": "lastset-case-2026h1-c4-q04",
+    "type": "short_answer",
+    "question": "【案例四：MSTP与地址规划】简述该网络的主要安全隐患及解决方案。",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "网络已通过MSTP、链路聚合等保障可靠性，但安全部署不足。可在网络边界部署防火墙和边界路由器；在用户接入侧部署接入认证等措施。",
+    "analysis": "冗余链路和生成树解决的是可用性问题，并不自动提供访问控制或身份鉴别；需要在边界和接入侧补充安全控制。",
+    "chapter": "网络安全",
+    "knowledgeSection": "网络设备与边界防护",
+    "knowledgePoint": "防火墙与DMZ",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "案例题",
+      "最后一套卷·案例分析",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（案例分析）.pdf",
+        "sha256": "38FE171E8CE711D0582702F9D1179EA9A0F16B8D7E27D672E20E6A79C6B4FF5C",
+        "questionNumber": 4,
+        "subQuestionNumber": 4,
+        "pages": [
+          18,
+          19
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（案例分析）》PDF；出版方、官方性及答案权威性未独立核实。参考答案按卷内试题答案整理并校对。"
+  }
+]

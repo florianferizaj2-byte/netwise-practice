@@ -25,6 +25,8 @@ import {
   type Question,
 } from '../api/client';
 import { BrandMark } from '../components/BrandMark';
+import { QuestionImages } from '../components/QuestionImages';
+import { AiQuestionDraftScreen } from './AiQuestionDraftScreen';
 import {
   AnimatedPressable,
   AnimatedProgressBar,
@@ -105,11 +107,11 @@ const themeOptions: Array<{ id: ThemeMode; label: string; hint: string }> = [
 
 const DAILY_PRACTICE_COUNT = 30;
 
-function ScreenContainer({ children, compact = false }: { children: ReactNode; compact?: boolean }) {
+function ScreenContainer({ children, compact = false, profile = false }: { children: ReactNode; compact?: boolean; profile?: boolean }) {
   const styles = useThemedStyles(createStyles);
   return (
     <ScrollView
-      contentContainerStyle={[styles.content, compact && styles.compactContent]}
+      contentContainerStyle={[styles.content, compact && styles.compactContent, profile && styles.profileContent]}
       showsVerticalScrollIndicator={false}
     >
       {children}
@@ -409,10 +411,6 @@ function PracticePicker({
 
   return (
     <ScreenContainer>
-      <ScreenHeader
-        eyebrow={isDailyPractice ? '今日刷题' : '选择练习内容'}
-        title={isDailyPractice ? '选择今日刷题范围' : '先选知识点，再开始刷题'}
-      />
       <EntranceView delay={50} distance={12} style={styles.pickerSummary}>
         <View>
           <Text style={styles.pickerSummaryTitle}>{isDailyPractice ? '随机生成今日题目' : '题库练习'}</Text>
@@ -449,7 +447,18 @@ function PracticePicker({
             </Text>
             <Text style={styles.modeButtonHint}>打乱所选题库</Text>
           </AnimatedPressable>
+          <AnimatedPressable
+            accessibilityLabel="AI生成题目"
+            onPress={() => onPracticeModeChange?.('ai')}
+            style={[styles.modeButton, practiceMode === 'ai' && styles.activeModeButton]}
+          >
+            <Text style={[styles.modeButtonText, practiceMode === 'ai' && styles.activeModeButtonText]}>AI生成题目</Text>
+            <Text style={styles.modeButtonHint}>按知识点出题</Text>
+          </AnimatedPressable>
         </EntranceView>
+      )}
+      {practiceMode === 'ai' && !isDailyPractice && (
+        <Text style={styles.aiPickerHint}>请选择下方具体知识点，AI 会参考该知识点已有题目。</Text>
       )}
 
       {catalog && !isDailyPractice && (
@@ -517,15 +526,19 @@ function PracticePicker({
                 <AnimatedPressable
                   accessibilityLabel={`直接练习大知识点 ${chapter.name}`}
                   accessibilityRole="button"
-                  onPress={() =>
+                  onPress={() => {
+                    if (practiceMode === 'ai') {
+                      setExpandedChapters((current) => new Set(current).add(chapter.name));
+                      return;
+                    }
                     onNavigate('practice', {
                       practiceMode: isDailyPractice ? 'random' : practiceMode,
                       practiceSession: isDailyPractice ? 'daily' : 'standard',
                       practiceSource: 'all',
                       practiceChapter: chapter.name,
                       practiceSelectionComplete: isDailyPractice,
-                    })
-                  }
+                    });
+                  }}
                   style={styles.pickerChapterStart}
                 >
                   <View style={styles.pickerCardCopy}>
@@ -577,7 +590,11 @@ function PracticePicker({
                               <AnimatedPressable
                                 accessibilityLabel={`练习二级分类 ${section.name}`}
                                 accessibilityRole="button"
-                                onPress={() =>
+                                onPress={() => {
+                                  if (practiceMode === 'ai') {
+                                    setExpandedSections((current) => new Set(current).add(sectionKey));
+                                    return;
+                                  }
                                   onNavigate('practice', {
                                     practiceMode: isDailyPractice ? 'random' : practiceMode,
                                     practiceSession: isDailyPractice ? 'daily' : 'standard',
@@ -585,8 +602,8 @@ function PracticePicker({
                                     practiceChapter: chapter.name,
                                     practiceKnowledgeSection: section.name,
                                     practiceSelectionComplete: isDailyPractice,
-                                  })
-                                }
+                                  });
+                                }}
                                 style={styles.pickerSectionStart}
                               >
                                 <View style={styles.pickerCardCopy}>
@@ -726,6 +743,7 @@ export function PracticeScreen({
   const [questions, setQuestions] = useState<Question[]>([]);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [selected, setSelected] = useState<string[]>([]);
+  const [responseDraft, setResponseDraft] = useState('');
   const [result, setResult] = useState<AttemptResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
@@ -734,6 +752,7 @@ export function PracticeScreen({
   const [reloadKey, setReloadKey] = useState(0);
   const [startedAt, setStartedAt] = useState(Date.now());
   const [aiBusy, setAiBusy] = useState('');
+  const [aiProgress, setAiProgress] = useState('');
   const [aiError, setAiError] = useState<string | null>(null);
   const [hintText, setHintText] = useState('');
   const [teacherText, setTeacherText] = useState('');
@@ -754,7 +773,9 @@ export function PracticeScreen({
     practiceSource === 'all' &&
     (isDailyPractice
       ? !practiceSelectionComplete
-      : !practiceChapter && !practiceKnowledgeSection && !practiceKnowledgePoint);
+      : practiceMode === 'ai'
+        ? !practiceChapter || !practiceKnowledgePoint
+        : !practiceChapter && !practiceKnowledgeSection && !practiceKnowledgePoint);
 
   useEffect(() => {
     let mounted = true;
@@ -763,6 +784,7 @@ export function PracticeScreen({
     setQuestions([]);
     setQuestionIndex(0);
     setSelected([]);
+    setResponseDraft('');
     setResult(null);
     setFinished(false);
     setAiBusy('');
@@ -789,6 +811,11 @@ export function PracticeScreen({
       return () => {
         mounted = false;
       };
+    }
+
+    if (practiceMode === 'ai') {
+      setLoading(false);
+      return () => { mounted = false; };
     }
 
     const loadQuestions = isDailyPractice
@@ -854,6 +881,7 @@ export function PracticeScreen({
   useEffect(() => {
     setStartedAt(Date.now());
     setAiBusy('');
+    setAiProgress('');
     setAiError(null);
     setHintText('');
     setTeacherText('');
@@ -878,8 +906,12 @@ export function PracticeScreen({
 
   async function submitAnswer() {
     if (!currentQuestion || result || submitting) return;
+    if (currentQuestion.type === 'short_answer' && !responseDraft.trim()) {
+      setError('请先填写作答内容，再选择自评结果');
+      return;
+    }
     if (!selected.length) {
-      setError('先选择一个答案');
+      setError(currentQuestion.type === 'short_answer' ? '请选择自评结果' : '先选择一个答案');
       return;
     }
     setError(null);
@@ -914,7 +946,7 @@ export function PracticeScreen({
       });
       setSubmitting(false);
       void mobileApi
-        .recordAttempt(currentQuestion.id, selected, timeMs)
+        .recordAttempt(currentQuestion.id, selected, timeMs, currentQuestion.type === 'short_answer' ? responseDraft.trim() : undefined)
         .catch((requestError) => {
           setError(
             requestError instanceof Error
@@ -930,6 +962,7 @@ export function PracticeScreen({
         currentQuestion.id,
         selected,
         timeMs,
+        currentQuestion.type === 'short_answer' ? responseDraft.trim() : undefined,
       );
       setResult(response);
     } catch (requestError) {
@@ -1013,7 +1046,9 @@ export function PracticeScreen({
       return;
     }
     try {
-      const response = await mobileApi.train(currentQuestion.id, 3);
+      const response = await mobileApi.trainStream(currentQuestion.id, 3, (event) => {
+        if (event.stage !== 'heartbeat') setAiProgress(event.message);
+      });
       const existingIds = new Set(questions.map((question) => question.id));
       const freshQuestions = response.questions.filter(
         (question) => !existingIds.has(question.id),
@@ -1034,6 +1069,7 @@ export function PracticeScreen({
       );
     } finally {
       setAiBusy('');
+      setAiProgress('');
     }
   }
 
@@ -1142,6 +1178,7 @@ export function PracticeScreen({
         setQuestions(remaining);
         setQuestionIndex((current) => Math.min(current, remaining.length - 1));
         setSelected([]);
+        setResponseDraft('');
         setResult(null);
       }
     } catch (requestError) {
@@ -1162,6 +1199,7 @@ export function PracticeScreen({
     }
     setQuestionIndex((current) => current + 1);
     setSelected([]);
+    setResponseDraft('');
     setResult(null);
     setError(null);
   }
@@ -1190,6 +1228,13 @@ export function PracticeScreen({
     );
   }
 
+  if (practiceMode === 'ai' && practiceChapter && practiceKnowledgePoint) {
+    return <AiQuestionDraftScreen
+      selection={{ chapter: practiceChapter, knowledgeSection: practiceKnowledgeSection, knowledgePoint: practiceKnowledgePoint }}
+      onBack={() => onNavigate('practice', { practiceMode: 'ai' })}
+    />;
+  }
+
   if (finished) {
     return (
       <ScreenContainer>
@@ -1205,6 +1250,7 @@ export function PracticeScreen({
             onPress={() => {
               setQuestionIndex(0);
               setSelected([]);
+              setResponseDraft('');
               setResult(null);
               setFinished(false);
             }}
@@ -1252,10 +1298,7 @@ export function PracticeScreen({
 
   return (
     <ScreenContainer compact>
-      <ScreenHeader
-        eyebrow={headerParts.join(' · ')}
-        title={isMultiple ? '选择所有正确答案' : '选出你的答案'}
-      />
+      <Text style={styles.practiceProgressLabel}>{headerParts.join(' · ')}</Text>
       {!isDailyPractice && <EntranceView delay={20} distance={6} style={styles.modeSwitch}>
         <AnimatedPressable
           accessibilityLabel="顺序刷题"
@@ -1282,7 +1325,7 @@ export function PracticeScreen({
       </EntranceView>}
       <EntranceView delay={50} distance={12} style={styles.questionCard}>
         <View style={styles.questionMetaRow}>
-          <Text style={styles.questionType}>{isMultiple ? '多选题' : '单选题'}</Text>
+          <Text style={styles.questionType}>{currentQuestion.type === 'short_answer' ? '简答题' : currentQuestion.type === 'true_false' ? '判断题' : isMultiple ? '多选题' : '单选题'}</Text>
           {currentQuestion.knowledgeSection ? (
             <Text style={styles.questionKnowledge}>{currentQuestion.knowledgeSection}</Text>
           ) : null}
@@ -1290,6 +1333,7 @@ export function PracticeScreen({
             {currentQuestion.knowledgePoint ?? '综合练习'}
           </Text>
         </View>
+        <QuestionImages question={currentQuestion} />
         <Text style={styles.questionText}>{currentQuestion.question}</Text>
         <View style={styles.questionUtilityIcons}>
           <AnimatedPressable
@@ -1319,7 +1363,7 @@ export function PracticeScreen({
         </View>
       </EntranceView>
 
-      {!result && (
+      {!result && currentQuestion.type !== 'short_answer' && (
         <View style={styles.questionUtilities}>
           <AnimatedPressable
             accessibilityRole="button"
@@ -1334,7 +1378,32 @@ export function PracticeScreen({
         </View>
       )}
 
-      <View style={styles.optionsList}>
+      {currentQuestion.type === 'short_answer' ? (
+        <View style={styles.shortAnswerCard}>
+          <Text style={styles.shortAnswerLabel}>我的作答</Text>
+          <TextInput
+            editable={!result && !submitting}
+            multiline
+            onChangeText={(value) => setResponseDraft(value.slice(0, 5000))}
+            placeholder="填写配置命令、计算过程或文字答案…"
+            placeholderTextColor={colors.textFaint}
+            style={styles.shortAnswerInput}
+            textAlignVertical="top"
+            value={responseDraft}
+          />
+          {!result && <View style={styles.selfRatingRow}>
+            {([['A', '我答对了'], ['B', '需要复习']] as const).map(([value, label]) => (
+              <AnimatedPressable
+                key={value}
+                onPress={() => setSelected([value])}
+                style={[styles.selfRatingButton, selected[0] === value && styles.selectedOption]}
+              >
+                <Text style={styles.selfRatingText}>{label}</Text>
+              </AnimatedPressable>
+            ))}
+          </View>}
+        </View>
+      ) : <View style={styles.optionsList}>
         {optionKeys.map((option, optionIndex) => {
           const isSelected = selected.includes(option);
           const isCorrect = !!result?.answer.includes(option);
@@ -1368,7 +1437,7 @@ export function PracticeScreen({
             </EntranceView>
           );
         })}
-      </View>
+      </View>}
 
       {error && <Text style={styles.formError}>{error}</Text>}
 
@@ -1382,7 +1451,8 @@ export function PracticeScreen({
       {result && (
         <EntranceView delay={0} distance={6} style={result.correct ? styles.feedbackGood : styles.feedbackBad}>
           <Text style={styles.feedbackTitle}>{result.correct ? '回答正确！' : '再想一想'}</Text>
-          <Text style={styles.feedbackAnswer}>正确答案：{answerText}</Text>
+          <Text style={styles.feedbackAnswer}>{currentQuestion.type === 'short_answer' ? '参考答案' : `正确答案：${answerText}`}</Text>
+          {currentQuestion.type === 'short_answer' && !!result.expectedAnswer && <Text style={styles.feedbackText}>{result.expectedAnswer}</Text>}
           {!!result.analysis && <Text style={styles.feedbackText}>{result.analysis}</Text>}
         </EntranceView>
       )}
@@ -1435,7 +1505,7 @@ export function PracticeScreen({
             style={styles.aiToolButton}
           >
             <Text style={styles.aiToolButtonText}>
-              {aiBusy === 'train' ? '生成中…' : '生成 3 道变式题'}
+              {aiBusy === 'train' ? (aiProgress || '正在准备生成…') : '生成 3 道变式题'}
             </Text>
           </AnimatedPressable>
         </View>
@@ -1447,7 +1517,7 @@ export function PracticeScreen({
           disabled={submitting}
           onPress={result ? nextQuestion : submitAnswer}
         >
-          {submitting ? '正在判分…' : result ? '下一题' : '确认答案'}
+          {submitting ? '正在判分…' : result ? '下一题' : currentQuestion.type === 'short_answer' ? '提交自评' : '确认答案'}
         </PrimaryAction>
       </EntranceView>
 
@@ -1904,7 +1974,7 @@ export function ProfileScreen({
   }
 
   return (
-    <ScreenContainer>
+    <ScreenContainer profile>
       <EntranceView delay={60} distance={16} style={styles.profileCard}>
         <View style={styles.avatar}>
           <Text style={styles.avatarText}>考</Text>
@@ -2393,6 +2463,15 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
     gap: spacing.xs,
     paddingBottom: spacing.md,
   },
+  profileContent: { paddingTop: spacing.xxl + spacing.sm },
+  practiceProgressLabel: { color: colors.brand, fontSize: 13, fontWeight: '700', marginBottom: 2 },
+  aiPickerHint: { color: colors.brandDark, fontSize: 13, lineHeight: 20, paddingHorizontal: 4 },
+  shortAnswerCard: { backgroundColor: colors.surface, borderRadius: radius.md, gap: spacing.sm, padding: spacing.md },
+  shortAnswerLabel: { color: colors.text, fontSize: 14, fontWeight: '800' },
+  shortAnswerInput: { borderColor: colors.border, borderRadius: radius.sm, borderWidth: 1, color: colors.text, fontSize: 14, minHeight: 130, padding: spacing.sm },
+  selfRatingRow: { flexDirection: 'row', gap: spacing.sm },
+  selfRatingButton: { alignItems: 'center', borderColor: colors.border, borderRadius: radius.sm, borderWidth: 1, flex: 1, minHeight: 42, justifyContent: 'center' },
+  selfRatingText: { color: colors.brandDark, fontSize: 14, fontWeight: '700' },
   header: {
     alignItems: 'center',
     flexDirection: 'row',

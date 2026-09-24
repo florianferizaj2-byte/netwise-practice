@@ -8,7 +8,7 @@ export type AppTab =
 
 export type AuthMode = 'login' | 'register';
 
-export type PracticeMode = 'sequential' | 'random';
+export type PracticeMode = 'sequential' | 'random' | 'ai';
 
 export type PracticeSource = 'all' | 'wrong' | 'favorites';
 

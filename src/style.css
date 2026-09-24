@@ -2064,6 +2064,73 @@ td small {
   flex-direction: column;
   gap: 13px;
 }
+.short-answer-editor {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+.short-answer-editor > label {
+  color: #436454;
+  font-size: 14px;
+  font-weight: 650;
+}
+.short-answer-editor textarea {
+  width: 100%;
+  min-height: 132px;
+  padding: 13px 15px;
+  border: 1px solid #d6e3db;
+  border-radius: 8px;
+  background: #fbfdfb;
+  color: #263d32;
+  font: inherit;
+  line-height: 1.7;
+  resize: vertical;
+}
+.short-answer-editor textarea:focus {
+  outline: 2px solid #319071;
+  outline-offset: 1px;
+}
+.short-answer-editor textarea:disabled {
+  background: #f4f7f5;
+  color: #526b5e;
+}
+.short-answer-self-rate {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: #6c8074;
+  font-size: 13px;
+}
+.short-answer-self-rate button {
+  padding: 7px 12px;
+  border: 1px solid #d6e3db;
+  border-radius: 7px;
+  background: #fff;
+  color: #526b5e;
+  font-size: 13px;
+}
+.short-answer-self-rate button.selected.correct {
+  border-color: #45a17c;
+  background: #edf8f0;
+  color: #297953;
+}
+.short-answer-self-rate button.selected.review {
+  border-color: #d8958a;
+  background: #fff0ed;
+  color: #a85447;
+}
+.expected-answer {
+  margin-top: 12px;
+  padding: 14px 16px;
+  border: 1px solid #dbe8df;
+  border-radius: 7px;
+  background: #fff;
+  color: #314d3e;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
 .option {
   padding: 13px 16px;
   justify-content: flex-start;
@@ -2300,6 +2367,21 @@ td small {
   margin-top: 10px;
   color: #67806d;
   white-space: pre-wrap;
+}
+.wrong-short-answer {
+  display: grid;
+  gap: 8px;
+  margin: 12px 0;
+  padding: 12px 14px;
+  border-radius: 7px;
+  background: #f7faf8;
+  color: #5c7165;
+  line-height: 1.7;
+}
+.wrong-short-answer p {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 .teacher-panel {
   padding: 22px 0 22px 23px;
@@ -5345,6 +5427,93 @@ td small {
   border-color: #77ad8b;
   background: #eaf6ee;
   color: #23724c;
+}
+.community-leaderboards {
+  margin-bottom: 18px;
+  padding: 18px;
+  border: 1px solid #cfe4d6;
+  border-radius: 12px;
+  background: #f8fcf9;
+}
+.community-leaderboard-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+}
+.community-leaderboard-tabs button {
+  border-radius: 8px;
+  padding: 8px 5px;
+  font-size: 13px;
+}
+.community-leaderboard-tabs button.active {
+  color: #176b4e;
+  border-color: #88c5aa;
+  background: #e5f5ed;
+  font-weight: 700;
+}
+.community-leaderboard-rule {
+  margin: 12px 2px;
+  color: #66786f;
+  font-size: 13px;
+}
+.community-leaderboard-list {
+  display: grid;
+  gap: 6px;
+  max-height: 360px;
+  overflow: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.community-leaderboard-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 49px;
+  padding: 8px 12px;
+  border: 1px solid #e2eae5;
+  border-radius: 8px;
+  background: #fff;
+}
+.community-leaderboard-list li.own {
+  border-color: #78b994;
+  background: #eef9f1;
+}
+.community-leaderboard-rank {
+  width: 26px;
+  color: #24734e;
+  text-align: center;
+}
+.community-leaderboard-list li span {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.community-leaderboard-list li small { color: #708177; }
+.community-leaderboard-list li b { color: #176b4e; }
+.community-leaderboard-empty,
+.community-leaderboard-error,
+.community-leaderboard-me {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 20px 5px;
+  color: #66786f;
+}
+.community-leaderboard-error { color: #aa413b; }
+.community-leaderboard-me {
+  padding: 10px 4px 0;
+  color: #176b4e;
+  font-weight: 700;
+}
+@media (max-width: 480px) {
+  .community-leaderboard-tabs { gap: 3px; }
+  .community-leaderboard-tabs button { font-size: 11px; }
+  .community-leaderboard-list li { gap: 7px; }
+  .community-leaderboard-list li small { display: none; }
 }
 .chat-room-summary {
   display: flex;
