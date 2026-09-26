@@ -23,12 +23,14 @@ import {
 import { buildSyllabusProgress, sampleExamQuestions } from "./syllabus.js";
 import { findSimilarQuestions, questionSimilarity } from "./question-similarity.js";
 import { questionImageSchema, validateQuestion } from "./domain.js";
+import { questionPage } from "./question-paging.js";
+import { studySummary } from "./study-summary.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const mobileRelease = () => {
-  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.2.7";
+  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.2.8";
   const minimumVersion =
-    process.env.MOBILE_MINIMUM_VERSION || "0.2.6";
+    process.env.MOBILE_MINIMUM_VERSION || "0.2.7";
   return {
     latestVersion,
     minimumVersion,
@@ -37,7 +39,7 @@ const mobileRelease = () => {
       `/downloads/kaojiang-v${latestVersion}.apk`,
     releaseNotes:
       process.env.MOBILE_RELEASE_NOTES ||
-      "支持图片题与简答题；AI 出题流式反馈和双重核验；新增社区排行榜。",
+      "优化页面切换与题目加载；支持按账号安全缓存题库目录和已访问题目，断网可继续阅读缓存内容。",
   };
 };
 async function exchangeWechatMiniProgramCode(code) {
@@ -495,16 +497,18 @@ export async function createApp(options = {}) {
   route("get", "/api/community/messages", (req) => {
     const query = z
       .object({
-        before: z.string().trim().max(80).optional(),
+        before: z.string().trim().max(160).optional(),
         limit: z.coerce.number().int().min(1).max(100).default(50),
       })
       .parse(req.query);
-    const messages = store.communityMessages(query);
+    const fetched = store.communityMessages({ ...query, limit: query.limit + 1 });
+    const hasMore = fetched.length > query.limit;
+    const messages = hasMore ? fetched.slice(1) : fetched;
     return {
       room: communityRoomView(),
       messages: messages.map(communityMessageView),
-      hasMore: messages.length === query.limit,
-      nextBefore: messages[0]?.createdAt || null,
+      hasMore,
+      nextBefore: messages[0] ? `${messages[0].createdAt}|${messages[0].id}` : null,
     };
   });
   route("get", "/api/community/leaderboards", (req) =>
@@ -579,6 +583,11 @@ export async function createApp(options = {}) {
       const e = new Error("题目不存在");
       e.status = 404;
       throw e;
+    }
+    if (req?.user?.certificateId && !hasCertificateQuestion(q, req.user.certificateId)) {
+      const error = new Error("题目不存在或不适用于当前证书");
+      error.status = 404;
+      throw error;
     }
     if (q.source === "ai_generated") {
       const group = q.aiGroupId
@@ -1348,6 +1357,12 @@ export async function createApp(options = {}) {
     const offset = Number.isInteger(parsedOffset) ? Math.max(0, parsedOffset) : 0;
     const random = req.query.random === "1" || req.query.random === "true";
 
+    if (req.query.page === "1") {
+      const seed = random ? z.string().min(1).max(64).parse(req.query.seed) : undefined;
+      const page = questionPage(questions, { offset, limit: limit ?? 40, seed });
+      return { ...page, items: page.items.map((question) => publicQuestionForUser(question, state)) };
+    }
+
     if (random) {
       for (let index = questions.length - 1; index > 0; index -= 1) {
         const swapIndex = Math.floor(Math.random() * (index + 1));
@@ -1408,7 +1423,8 @@ export async function createApp(options = {}) {
         if (state.attemptedIds.has(question.id)) section.attemptedCount += 1;
       }
 
-      let point = chapter.knowledgePoints.get(knowledgePointName);
+      const pointKey = JSON.stringify([sectionName || "", knowledgePointName]);
+      let point = chapter.knowledgePoints.get(pointKey);
       if (!point) {
         point = {
           name: knowledgePointName,
@@ -1416,7 +1432,7 @@ export async function createApp(options = {}) {
           questionCount: 0,
           attemptedCount: 0,
         };
-        chapter.knowledgePoints.set(knowledgePointName, point);
+        chapter.knowledgePoints.set(pointKey, point);
       }
       point.questionCount += 1;
       if (state.attemptedIds.has(question.id)) point.attemptedCount += 1;
@@ -1667,12 +1683,13 @@ export async function createApp(options = {}) {
         "SELECT question_id FROM queue WHERE completed=0 AND user_id=? ORDER BY rowid",
       )
       .all(req.user?.id || "local")
-      .map((r) => requireQ(r.question_id, req))
+      .map((r) => store.getQ(r.question_id))
       .filter(
         (question) =>
-          !requireCertificate(req) ||
-          hasCertificateQuestion(question, requireCertificate(req)),
+          question && (!requireCertificate(req) ||
+          hasCertificateQuestion(question, requireCertificate(req))),
       )
+      .map((question) => requireQ(question.id, req))
       .map(publicQuestion),
   );
   route("get", "/api/ai/groups", (req) =>
@@ -1708,17 +1725,13 @@ export async function createApp(options = {}) {
       attempts = store
         .allA(userId)
         .filter((attempt) => currentIds.has(attempt.questionId)),
-      mastery = store.mastery(currentIds, userId),
       today = day(),
-      todayAttempts = attempts.filter(
-        (a) =>
-          new Date(a.createdAt).toLocaleDateString("en-CA", {
-            timeZone: "Asia/Shanghai",
-          }) === today,
-      ),
       wrong = store
         .wrongQuestions(userId)
         .filter((question) => currentIds.has(question.id)),
+      summary = studySummary(attempts, wrong);
+    if (req.query.summary === "1") return summary;
+    const mastery = store.mastery(currentIds, userId),
       syllabus = syllabusForCertificate(certificateId),
       syllabusProgress = buildSyllabusProgress(
         currentQuestions,
@@ -1819,17 +1832,7 @@ export async function createApp(options = {}) {
             return { name, ...categoryMetrics(chapterQuestions) };
           });
     return {
-      todayCount: todayAttempts.length,
-      totalCount: attempts.length,
-      accuracy: attempts.length
-        ? attempts.filter((a) => a.correct).length / attempts.length
-        : null,
-      minutes: Math.round(
-        todayAttempts.reduce((s, a) => s + a.timeMs, 0) / 60000,
-      ),
-      dueCount: wrong.filter((q) => q.review?.dueAt <= new Date().toISOString())
-        .length,
-      wrongCount: wrong.length,
+      ...summary,
       mastery,
       chapters,
       aiConfigured: !!store.settings(userId).keyCipher,
@@ -1840,21 +1843,6 @@ export async function createApp(options = {}) {
       banks: banksForCertificate(certificateId),
       community: store.communityStats(certificateId, userId),
       syllabus: syllabusProgress,
-      recentDays: Array.from({ length: 7 }, (_, i) => {
-        const d = new Date(Date.now() - (6 - i) * 86400000).toLocaleDateString(
-          "en-CA",
-          { timeZone: "Asia/Shanghai" },
-        );
-        return {
-          day: d,
-          count: attempts.filter(
-            (a) =>
-              new Date(a.createdAt).toLocaleDateString("en-CA", {
-                timeZone: "Asia/Shanghai",
-              }) === d,
-          ).length,
-        };
-      }),
     };
   });
   route("post", "/api/ai/analyze", (req) =>

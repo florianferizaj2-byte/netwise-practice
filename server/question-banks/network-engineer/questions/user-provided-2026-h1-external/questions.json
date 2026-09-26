@@ -15,12 +15,12 @@
     "analysis": "寄存器间接寻址先把寄存器内容当作有效地址，再从该地址指向的存储单元中读取操作数。",
     "chapter": "计算机基础知识",
     "knowledgeSection": "计算机组成",
-    "knowledgePoint": "CPU流水线",
+    "knowledgePoint": "指令系统、寻址与中断",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年押题密卷上午卷",
-      "CPU流水线",
+      "指令系统、寻址与中断",
       "用户提供",
       "来源未核实"
     ],
@@ -56,12 +56,12 @@
     "analysis": "中断响应包括处理器响应中断、保存现场并转入服务程序的过程；中断向量用于定位服务程序，不是执行状态标记。",
     "chapter": "计算机基础知识",
     "knowledgeSection": "计算机组成",
-    "knowledgePoint": "CPU流水线",
+    "knowledgePoint": "指令系统、寻址与中断",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年押题密卷上午卷",
-      "CPU流水线",
+      "指令系统、寻址与中断",
       "用户提供",
       "来源未核实"
     ],
@@ -138,12 +138,12 @@
     "analysis": "阶码位数决定可表示的数量级范围，尾数位数决定有效数字的精度。",
     "chapter": "计算机基础知识",
     "knowledgeSection": "数制与编码",
-    "knowledgePoint": "原码、反码、补码与移码",
+    "knowledgePoint": "浮点数表示",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年押题密卷上午卷",
-      "原码、反码、补码与移码",
+      "浮点数表示",
       "用户提供",
       "来源未核实"
     ],
@@ -218,14 +218,14 @@
       "C"
     ],
     "analysis": "测试值选在输入边界及其刚刚越界的位置，属于边界值分析。",
-    "chapter": "项目管理与法律法规",
-    "knowledgeSection": "项目控制",
-    "knowledgePoint": "质量管理",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "软件工程基础",
+    "knowledgePoint": "软件测试方法",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年押题密卷上午卷",
-      "质量管理",
+      "软件测试方法",
       "用户提供",
       "来源未核实"
     ],
@@ -259,14 +259,14 @@
       "A"
     ],
     "analysis": "快速原型让用户先体验可运行的模型，再据此澄清和细化需求。",
-    "chapter": "项目管理与法律法规",
-    "knowledgeSection": "项目控制",
-    "knowledgePoint": "质量管理",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "软件工程基础",
+    "knowledgePoint": "开发模型与需求分析",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年押题密卷上午卷",
-      "质量管理",
+      "开发模型与需求分析",
       "用户提供",
       "来源未核实"
     ],
@@ -543,12 +543,12 @@
     "analysis": "数据帧发送需62.5ms，往返传播约540ms，忽略短确认帧后利用率约为62.5/(62.5+540)=0.104。",
     "chapter": "网络体系结构与TCP/IP",
     "knowledgeSection": "数据通信与传输",
-    "knowledgePoint": "信道容量与数据速率",
+    "knowledgePoint": "数据链路层流量控制与ARQ",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年押题密卷上午卷",
-      "信道容量与数据速率",
+      "数据链路层流量控制与ARQ",
       "用户提供",
       "来源未核实"
     ],
@@ -1363,12 +1363,12 @@
     "analysis": "端到端加密使数据在源端加密、目的端解密，能覆盖中间网络传输路径。",
     "chapter": "网络安全",
     "knowledgeSection": "密码与加密",
-    "knowledgePoint": "密码学原则与传输加密",
+    "knowledgePoint": "密码学原则与加密方式",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年押题密卷上午卷",
-      "密码学原则与传输加密",
+      "密码学原则与加密方式",
       "用户提供",
       "来源未核实"
     ],
@@ -1486,12 +1486,12 @@
     "analysis": "划分为至少10个子网需借4位，得到/21；第三字节网段边界按8递增，162不是8的倍数。",
     "chapter": "网络体系结构与TCP/IP",
     "knowledgeSection": "IPv4与子网",
-    "knowledgePoint": "VLSM子网划分",
+    "knowledgePoint": "子网划分与VLSM",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年押题密卷上午卷",
-      "VLSM子网划分",
+      "子网划分与VLSM",
       "用户提供",
       "来源未核实"
     ],
@@ -1567,13 +1567,13 @@
     ],
     "analysis": "IPv4链路本地自动配置使用169.254.0.0/16地址段。",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgeSection": "应用层协议与端口",
-    "knowledgePoint": "DHCP",
+    "knowledgeSection": "IPv4与子网",
+    "knowledgePoint": "IPv4地址类别与特殊地址",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年押题密卷上午卷",
-      "DHCP",
+      "IPv4地址类别与特殊地址",
       "用户提供",
       "来源未核实"
     ],
@@ -1650,12 +1650,12 @@
     "analysis": "FTP分别建立控制连接和数据连接。",
     "chapter": "网络体系结构与TCP/IP",
     "knowledgeSection": "应用层协议与端口",
-    "knowledgePoint": "FTP与TFTP",
+    "knowledgePoint": "文件传输协议FTP、TFTP与SFTP",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年押题密卷上午卷",
-      "FTP与TFTP",
+      "文件传输协议FTP、TFTP与SFTP",
       "用户提供",
       "来源未核实"
     ],
@@ -1691,12 +1691,12 @@
     "analysis": "被动模式下服务器选择高位端口并通知客户端，由客户端主动连接该端口传输数据。",
     "chapter": "网络体系结构与TCP/IP",
     "knowledgeSection": "应用层协议与端口",
-    "knowledgePoint": "FTP与TFTP",
+    "knowledgePoint": "文件传输协议FTP、TFTP与SFTP",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年押题密卷上午卷",
-      "FTP与TFTP",
+      "文件传输协议FTP、TFTP与SFTP",
       "用户提供",
       "来源未核实"
     ],
@@ -1814,12 +1814,12 @@
     "analysis": "先确认端口没有被关闭，再核对配置、光模块和链路，最后通过更换器件定位硬件故障。",
     "chapter": "网络管理",
     "knowledgeSection": "诊断工具与设备排查",
-    "knowledgePoint": "设备Console与维护接入",
+    "knowledgePoint": "设备接入与接口排障",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年押题密卷上午卷",
-      "设备Console与维护接入",
+      "设备接入与接口排障",
       "用户提供",
       "来源未核实"
     ],
@@ -1978,12 +1978,12 @@
     "analysis": "原卷答案页将D列为错误项；SLAAC的接口标识生成方式并非必定随机，传统方式可由MAC地址构造。",
     "chapter": "网络体系结构与TCP/IP",
     "knowledgeSection": "IPv6",
-    "knowledgePoint": "地址表示与地址类型",
+    "knowledgePoint": "IPv6地址自动配置与DHCPv6",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年押题密卷上午卷",
-      "地址表示与地址类型",
+      "IPv6地址自动配置与DHCPv6",
       "用户提供",
       "来源未核实"
     ],
@@ -2328,12 +2328,12 @@
     "analysis": "反向连接由内网被控端主动向外建立会话，可绕过许多入站访问限制。",
     "chapter": "网络安全",
     "knowledgeSection": "网络攻击",
-    "knowledgePoint": "Web攻击与常见漏洞",
+    "knowledgePoint": "恶意软件、社会工程与应急响应",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年押题密卷上午卷",
-      "Web攻击与常见漏洞",
+      "恶意软件、社会工程与应急响应",
       "用户提供",
       "来源未核实"
     ],
@@ -2492,12 +2492,12 @@
     "analysis": "RIPv1通常按周期发送完整路由表，而不只是发送发生变化的条目。",
     "chapter": "路由与广域网技术",
     "knowledgeSection": "RIP",
-    "knowledgePoint": "水平分割、毒性逆转与触发更新",
+    "knowledgePoint": "RIP工作原理、版本与报文",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年押题密卷上午卷",
-      "水平分割、毒性逆转与触发更新",
+      "RIP工作原理、版本与报文",
       "用户提供",
       "来源未核实"
     ],
@@ -2656,12 +2656,12 @@
     "analysis": "IntServ通常使用RSVP在通信开始前预留资源，以便为流量提供所需服务质量。",
     "chapter": "综合布线与网络规划",
     "knowledgeSection": "网络规划与性能",
-    "knowledgePoint": "带宽、时延、丢包率与吞吐量",
+    "knowledgePoint": "QoS服务模型与流量管理",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年押题密卷上午卷",
-      "带宽、时延、丢包率与吞吐量",
+      "QoS服务模型与流量管理",
       "用户提供",
       "来源未核实"
     ],
@@ -2779,12 +2779,12 @@
     "analysis": "需求分析首先明确建设目标、业务功能和性能指标，为后续架构和设备选型提供依据。",
     "chapter": "综合布线与网络规划",
     "knowledgeSection": "网络规划与性能",
-    "knowledgePoint": "网络拓扑",
+    "knowledgePoint": "网络需求分析与拓扑设计",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年押题密卷上午卷",
-      "网络拓扑",
+      "网络需求分析与拓扑设计",
       "用户提供",
       "来源未核实"
     ],
@@ -2820,12 +2820,12 @@
     "analysis": "汇聚层负责汇聚接入流量并提供三层转发、策略连接和VLAN间路由；高速转发主要由核心层承担。",
     "chapter": "综合布线与网络规划",
     "knowledgeSection": "网络规划与性能",
-    "knowledgePoint": "网络拓扑",
+    "knowledgePoint": "网络需求分析与拓扑设计",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年押题密卷上午卷",
-      "网络拓扑",
+      "网络需求分析与拓扑设计",
       "用户提供",
       "来源未核实"
     ],
@@ -2912,13 +2912,13 @@
     ],
     "analysis": "网络层可向传输层提供虚电路或数据报两种服务模型，故选A。",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgeSection": "网络模型与分层",
-    "knowledgePoint": "协议、服务、PDU与设备所在层",
+    "knowledgeSection": "网际层协议",
+    "knowledgePoint": "网络层服务与分组交换",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年押题密卷上午卷",
-      "协议、服务、PDU与设备所在层",
+      "网络层服务与分组交换",
       "用户提供",
       "来源未核实"
     ],
@@ -2956,14 +2956,14 @@
       "B"
     ],
     "analysis": "网络层的核心职责是将分组从源端路由到目的端。",
-    "chapter": "网络体系结构与TCP/IP",
-    "knowledgeSection": "网络模型与分层",
-    "knowledgePoint": "协议、服务、PDU与设备所在层",
+    "chapter": "路由与广域网技术",
+    "knowledgeSection": "路由基础",
+    "knowledgePoint": "路由表、静态路由与默认路由",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年押题密卷上午卷",
-      "协议、服务、PDU与设备所在层",
+      "路由表、静态路由与默认路由",
       "用户提供",
       "来源未核实"
     ],
@@ -3046,12 +3046,12 @@
     "analysis": "重传策略、缓存和流量控制均是网络设计中用于减轻拥塞影响的技术。",
     "chapter": "综合布线与网络规划",
     "knowledgeSection": "网络规划与性能",
-    "knowledgePoint": "带宽、时延、丢包率与吞吐量",
+    "knowledgePoint": "QoS服务模型与流量管理",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年押题密卷上午卷",
-      "带宽、时延、丢包率与吞吐量",
+      "QoS服务模型与流量管理",
       "用户提供",
       "来源未核实"
     ],
@@ -3090,12 +3090,12 @@
     "analysis": "资源预留与准入控制可在会话开始前为流量安排所需网络资源。",
     "chapter": "综合布线与网络规划",
     "knowledgeSection": "网络规划与性能",
-    "knowledgePoint": "带宽、时延、丢包率与吞吐量",
+    "knowledgePoint": "QoS服务模型与流量管理",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年押题密卷上午卷",
-      "带宽、时延、丢包率与吞吐量",
+      "QoS服务模型与流量管理",
       "用户提供",
       "来源未核实"
     ],
@@ -3128,7 +3128,7 @@
     "analysis": "静默接口不向该端口发送 RIP 更新，同时仍可在其他接口正常交换路由信息。",
     "chapter": "路由与广域网技术",
     "knowledgeSection": "RIP",
-    "knowledgePoint": "距离矢量与最大跳数",
+    "knowledgePoint": "RIP工作原理、版本与报文",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
@@ -3208,7 +3208,7 @@
     "analysis": "策略路由按流量特征选择转发路径；需要把匹配条件与出口接口一一对应，并在流量进入路由器的接口启用策略。",
     "chapter": "路由与广域网技术",
     "knowledgeSection": "路由基础",
-    "knowledgePoint": "路由表、静态路由与默认路由",
+    "knowledgePoint": "策略路由、路由策略与重分发",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
@@ -3248,7 +3248,7 @@
     "analysis": "路由引入可在不同路由协议之间传播路由信息。题目要求两个自治系统相互学习，因此需要在边界设备上分别向对方协议引入路由。",
     "chapter": "路由与广域网技术",
     "knowledgeSection": "路由基础",
-    "knowledgePoint": "路由协议类型与算法",
+    "knowledgePoint": "策略路由、路由策略与重分发",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
@@ -3326,7 +3326,7 @@
     "analysis": "配套答案明确给出 R2 初始状态为 Backup、优先级 100、抢占 YES；把 R2 优先级提高到 120（R3 保持默认优先级）后，R2 可成为 Master。Master 通过免费 ARP 刷新局域网中的地址映射。",
     "chapter": "路由与广域网技术",
     "knowledgeSection": "路由基础",
-    "knowledgePoint": "路由优先级、管理距离与度量值",
+    "knowledgePoint": "VRRP与网关冗余",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
@@ -3367,7 +3367,7 @@
     "analysis": "VRRP 链路跟踪解决上行链路故障但网关接口仍存活的问题；多组 VRRP 可分担不同主机流量；BFD 用于快速检测链路或邻接故障。",
     "chapter": "路由与广域网技术",
     "knowledgeSection": "路由基础",
-    "knowledgePoint": "路由优先级、管理距离与度量值",
+    "knowledgePoint": "VRRP与网关冗余",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
@@ -3690,9 +3690,9 @@
     "answer": [],
     "expectedAnswer": "编辑 `/etc/vsftpd.conf`，设置 `anon_umask`。",
     "analysis": "vsftpd 使用配置文件管理服务参数；题目场景是虚拟用户，因此按配套解析使用 anon_umask。",
-    "chapter": "网络体系结构与TCP/IP",
-    "knowledgeSection": "应用层协议与端口",
-    "knowledgePoint": "FTP与TFTP",
+    "chapter": "服务器配置",
+    "knowledgeSection": "Linux服务器",
+    "knowledgePoint": "网络接口与服务配置",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
@@ -3752,9 +3752,9 @@
     "answer": [],
     "expectedAnswer": "能登录。启用用户列表且 `userlist_deny=NO` 时，列表作为允许登录的白名单。",
     "analysis": "userlist_deny 为 NO 表示只有列表内账户允许登录；本题 wang 已列入名单。",
-    "chapter": "网络体系结构与TCP/IP",
-    "knowledgeSection": "应用层协议与端口",
-    "knowledgePoint": "FTP与TFTP",
+    "chapter": "服务器配置",
+    "knowledgeSection": "Linux服务器",
+    "knowledgePoint": "网络接口与服务配置",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
@@ -3971,7 +3971,7 @@
     "analysis": "攻击者将 SQL 片段拼入请求参数，诱使数据库执行非预期查询；参数化查询可将数据与 SQL 语句结构分离。",
     "chapter": "网络安全",
     "knowledgeSection": "网络攻击",
-    "knowledgePoint": "Web攻击与常见漏洞",
+    "knowledgePoint": "Web攻击与漏洞防护",
     "difficulty": "medium",
     "tags": [
       "网络工程师",

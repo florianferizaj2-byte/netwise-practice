@@ -45,7 +45,7 @@
     "analysis": "RIP以跳数为度量，最大有效跳数为15，跳数16表示网络不可达。这一限制使RIP仅适用于小型网络，防止计数到无穷大问题。",
     "type": "single_choice",
     "chapter": "路由与广域网技术",
-    "knowledgePoint": "距离矢量与最大跳数",
+    "knowledgePoint": "RIP工作原理、版本与报文",
     "difficulty": "medium",
     "tags": [
       "RIP",
@@ -293,7 +293,7 @@
     "analysis": "RIP使用UDP端口520。RIPv1使用广播更新，RIPv2使用组播（224.0.0.9）更新。BGP使用TCP 179，OSPF直接使用IP协议号89，SNMP使用UDP 161/162。",
     "type": "single_choice",
     "chapter": "路由与广域网技术",
-    "knowledgePoint": "距离矢量与最大跳数",
+    "knowledgePoint": "RIP工作原理、版本与报文",
     "difficulty": "medium",
     "tags": [
       "RIP",
@@ -355,7 +355,7 @@
     "analysis": "RIPv1：有类路由，不支持VLSM/CIDR，广播更新（255.255.255.255），不支持认证。RIPv2：无类路由，支持VLSM/CIDR，组播更新（224.0.0.9），支持明文和MD5认证。",
     "type": "single_choice",
     "chapter": "路由与广域网技术",
-    "knowledgePoint": "距离矢量与最大跳数",
+    "knowledgePoint": "RIP工作原理、版本与报文",
     "difficulty": "medium",
     "tags": [
       "RIP",
@@ -541,7 +541,7 @@
     "analysis": "RIP默认每30秒发送一次完整路由表更新（Update timer）。路由老化时间（Invalid timer）默认180秒（6个更新周期未收到更新则标记为不可达），垃圾收集时间（Garbage-collect timer）默认240秒。",
     "type": "single_choice",
     "chapter": "路由与广域网技术",
-    "knowledgePoint": "距离矢量与最大跳数",
+    "knowledgePoint": "RIP工作原理、版本与报文",
     "difficulty": "medium",
     "tags": [
       "RIP",
@@ -603,7 +603,7 @@
     "analysis": "OSPF使用Cost（开销）作为度量，默认基于接口带宽计算：Cost=参考带宽/接口带宽（参考带宽默认100Mbps）。带宽越大，Cost越小，路径越优先。Cost可以手动修改（ip ospf cost）。与RIP使用跳数不同。",
     "type": "single_choice",
     "chapter": "路由与广域网技术",
-    "knowledgePoint": "区域、LSA与邻居状态",
+    "knowledgePoint": "OSPF度量与路由计算",
     "difficulty": "medium",
     "tags": [
       "OSPF",
@@ -634,7 +634,7 @@
     "analysis": "SPF（Shortest Path First，最短路径优先）算法，也叫Dijkstra算法，OSPF路由器基于链路状态数据库（LSDB）运行SPF算法，计算以自己为根的最短路径树，然后根据最短路径树生成路由表。",
     "type": "single_choice",
     "chapter": "路由与广域网技术",
-    "knowledgePoint": "区域、LSA与邻居状态",
+    "knowledgePoint": "OSPF度量与路由计算",
     "difficulty": "medium",
     "tags": [
       "OSPF",
@@ -1036,8 +1036,8 @@
     ],
     "analysis": "路由聚合（汇总）将多条连续的具体子网路由合并为一条大的汇总路由，大幅减少路由表条目，降低路由器资源消耗，提高网络稳定性。可在OSPF（ABR上区域间汇总、ASBR上外部路由汇总）、BGP、RIP等多种协议中使用。CIDR就是基于路由聚合的。",
     "type": "single_choice",
-    "chapter": "路由与广域网技术",
-    "knowledgePoint": "路由协议类型与算法",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgePoint": "CIDR与路由聚合",
     "difficulty": "medium",
     "tags": [
       "路由协议",
@@ -1051,7 +1051,7 @@
       }
     ],
     "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
-    "knowledgeSection": "路由基础"
+    "knowledgeSection": "IPv4与子网"
   },
   {
     "id": "collection-c05-q035",

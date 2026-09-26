@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import * as ImagePicker from 'expo-image-picker';
 import {
   ActivityIndicator,
+  FlatList,
   Image,
   KeyboardAvoidingView,
   Modal,
@@ -21,6 +22,8 @@ import {
   type LeaderboardResponse,
 } from '../api/client';
 import { AnimatedPressable, EntranceView } from '../components/Motion';
+import { useScreenActive } from '../navigation/ScreenActivity';
+import { mergeMessages } from '../api/communityMessages';
 import { radius, shadow, spacing, useThemedStyles, useTheme, type ThemeColors } from '../theme';
 
 const quickEmojis = ['😀', '🤝', '🎉', '💪', '❤️', '😂'];
@@ -78,6 +81,7 @@ function imageMimeType(value?: string): PendingImage['mimeType'] {
 export function CommunityScreen({ preview = false, user }: CommunityScreenProps) {
   const { colors } = useTheme();
   const styles = useThemedStyles(createStyles);
+  const active = useScreenActive();
   const [messages, setMessages] = useState<CommunityMessage[]>([]);
   const [hasMore, setHasMore] = useState(false);
   const [nextBefore, setNextBefore] = useState<string | null>(null);
@@ -92,11 +96,19 @@ export function CommunityScreen({ preview = false, user }: CommunityScreenProps)
   const [leaderboardTab, setLeaderboardTab] = useState<LeaderboardTab>('answered');
   const [leaderboardLoading, setLeaderboardLoading] = useState(false);
   const [leaderboardError, setLeaderboardError] = useState('');
-  const scrollRef = useRef<ScrollView | null>(null);
+  const scrollRef = useRef<FlatList<CommunityMessage> | null>(null);
+  const initialized = useRef(false);
+  const historyLoaded = useRef(false);
+  const sendPending = useRef(false);
+  const nearBottom = useRef(true);
+  const scrollAfterUpdate = useRef(false);
 
   useEffect(() => {
-    let active = true;
-    setLoading(true);
+    if (!active) return;
+    let mounted = true;
+    let polling = false;
+    const controller = new AbortController();
+    if (!initialized.current) setLoading(true);
     setError('');
     if (preview) {
       setMessages(previewMessages);
@@ -104,65 +116,46 @@ export function CommunityScreen({ preview = false, user }: CommunityScreenProps)
       setNextBefore(null);
       setLoading(false);
       return () => {
-        active = false;
+        mounted = false;
       };
     }
 
-    void mobileApi
-      .communityMessages()
-      .then((result) => {
-        if (!active) return;
-        setMessages(result.messages);
-        setHasMore(result.hasMore);
-        setNextBefore(result.nextBefore);
-      })
-      .catch((cause: unknown) => {
-        if (active) setError(cause instanceof Error ? cause.message : '社区加载失败');
-      })
-      .finally(() => {
-        if (active) setLoading(false);
-      });
-
-    return () => {
-      active = false;
-    };
-  }, [preview]);
-
-  useEffect(() => {
-    if (!messages.length) return;
-    const timer = setTimeout(() => scrollRef.current?.scrollToEnd({ animated: true }), 60);
-    return () => clearTimeout(timer);
-  }, [messages.length]);
-
-  useEffect(() => {
-    if (preview) return;
-    const timer = setInterval(() => {
-      void mobileApi
-        .communityMessages()
-        .then((result) => {
-          setMessages((current) => {
-            const byId = new Map(current.map((message) => [message.id, message]));
-            result.messages.forEach((message) => byId.set(message.id, message));
-            return [...byId.values()].sort(
-              (left, right) =>
-                new Date(left.createdAt).getTime() - new Date(right.createdAt).getTime(),
-            );
-          });
+    async function refresh() {
+      if (polling) return;
+      polling = true;
+      try {
+        const result = await mobileApi.communityMessages(undefined, 50, controller.signal);
+        if (!mounted) return;
+        scrollAfterUpdate.current = !initialized.current || nearBottom.current;
+        setMessages((current) => mergeMessages(current, result.messages));
+        // The older-history cursor belongs to loadOlder, never to polling.
+        if (!historyLoaded.current) {
           setHasMore(result.hasMore);
           setNextBefore(result.nextBefore);
-        })
-        .catch(() => undefined);
-    }, 10000);
-    return () => clearInterval(timer);
-  }, [preview]);
+        }
+        initialized.current = true;
+        setError('');
+      } catch (cause: unknown) {
+        if (mounted) setError(cause instanceof Error ? cause.message : '社区加载失败');
+      } finally {
+        polling = false;
+        if (mounted) setLoading(false);
+      }
+    }
+    void refresh();
+    const timer = setInterval(() => { void refresh(); }, 10000);
+    return () => { mounted = false; controller.abort(); clearInterval(timer); };
+  }, [active, preview]);
 
   async function loadOlder() {
     if (preview || loadingMore || !hasMore || !nextBefore) return;
     setLoadingMore(true);
+    historyLoaded.current = true;
+    scrollAfterUpdate.current = false;
     setError('');
     try {
       const result = await mobileApi.communityMessages(nextBefore);
-      setMessages((current) => [...result.messages, ...current]);
+      setMessages((current) => mergeMessages(current, result.messages));
       setHasMore(result.hasMore);
       setNextBefore(result.nextBefore);
     } catch (cause: unknown) {
@@ -205,6 +198,7 @@ export function CommunityScreen({ preview = false, user }: CommunityScreenProps)
   }
 
   async function sendMessage() {
+    if (sendPending.current) return;
     const text = draft.trim();
     if (preview) {
       setDraft('');
@@ -216,15 +210,18 @@ export function CommunityScreen({ preview = false, user }: CommunityScreenProps)
       return;
     }
     setSending(true);
+    sendPending.current = true;
     setError('');
     try {
       const result = await mobileApi.sendCommunityMessage(text, attachment || undefined);
-      setMessages((current) => [...current, result.message]);
+      scrollAfterUpdate.current = true;
+      setMessages((current) => mergeMessages(current, [result.message]));
       setDraft('');
       setAttachment(null);
     } catch (cause: unknown) {
       setError(cause instanceof Error ? cause.message : '消息发送失败');
     } finally {
+      sendPending.current = false;
       setSending(false);
     }
   }
@@ -266,13 +263,28 @@ export function CommunityScreen({ preview = false, user }: CommunityScreenProps)
           </AnimatedPressable>
         </View>
 
-        <ScrollView
+        <FlatList
           ref={scrollRef}
+          data={messages}
+          keyExtractor={(message) => message.id}
+          initialNumToRender={15}
+          maxToRenderPerBatch={10}
+          windowSize={7}
           contentContainerStyle={styles.messageContent}
           keyboardShouldPersistTaps="handled"
           showsVerticalScrollIndicator={false}
-        >
-          {hasMore && (
+          maintainVisibleContentPosition={{ minIndexForVisible: 0 }}
+          onScroll={({ nativeEvent: { contentOffset, contentSize, layoutMeasurement } }) => {
+            nearBottom.current = contentSize.height - contentOffset.y - layoutMeasurement.height < 100;
+          }}
+          scrollEventThrottle={100}
+          onContentSizeChange={() => {
+            if (scrollAfterUpdate.current) {
+              scrollAfterUpdate.current = false;
+              scrollRef.current?.scrollToEnd({ animated: false });
+            }
+          }}
+          ListHeaderComponent={hasMore ? (
             <AnimatedPressable
               disabled={loadingMore}
               onPress={() => void loadOlder()}
@@ -284,17 +296,22 @@ export function CommunityScreen({ preview = false, user }: CommunityScreenProps)
                 <Text style={styles.loadOlderText}>加载更早消息</Text>
               )}
             </AnimatedPressable>
-          )}
-          {loading ? (
+          ) : null}
+          ListEmptyComponent={loading ? (
             <View style={styles.loadingState}>
               <ActivityIndicator color={colors.brand} />
               <Text style={styles.loadingText}>正在进入社区…</Text>
             </View>
-          ) : messages.length ? (
-            messages.map((message, index) => {
+          ) : (
+            <View style={styles.emptyState}>
+              <Text style={styles.emptyEmoji}>✦</Text>
+              <Text style={styles.emptyTitle}>社区还很安静</Text>
+            </View>
+          )}
+          renderItem={({ item: message }) => {
               const own = message.userId === user?.id || (preview && message.userId === 'preview');
               return (
-                <EntranceView delay={Math.min(220, index * 25)} distance={8} key={message.id}>
+                <View>
                   <View style={[styles.messageRow, own && styles.messageRowOwn]}>
                     <View style={[styles.messageBlock, own && styles.messageBlockOwn]}>
                       {!own && <Text style={styles.authorName}>{message.authorName}</Text>}
@@ -313,17 +330,11 @@ export function CommunityScreen({ preview = false, user }: CommunityScreenProps)
                       </Text>
                     </View>
                   </View>
-                </EntranceView>
+                </View>
               );
-            })
-          ) : (
-            <View style={styles.emptyState}>
-              <Text style={styles.emptyEmoji}>✦</Text>
-              <Text style={styles.emptyTitle}>社区还很安静</Text>
-            </View>
-          )}
-          {!!error && <Text style={styles.errorText}>{error}</Text>}
-        </ScrollView>
+          }}
+          ListFooterComponent={error ? <Text style={styles.errorText}>{error}</Text> : null}
+        />
 
         {attachment && (
           <View style={styles.attachmentPreview}>
@@ -376,7 +387,7 @@ export function CommunityScreen({ preview = false, user }: CommunityScreenProps)
           animationType="slide"
           onRequestClose={() => setLeaderboardOpen(false)}
           transparent
-          visible={leaderboardOpen}
+        visible={active && leaderboardOpen}
         >
           <View style={styles.leaderboardBackdrop}>
             <View style={styles.leaderboardPanel}>

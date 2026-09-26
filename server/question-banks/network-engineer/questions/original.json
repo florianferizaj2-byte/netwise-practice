@@ -14,7 +14,7 @@
     ],
     "analysis": "传输层提供端到端的数据传输，TCP 可提供可靠传输；网络层负责寻址与路由。",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "协议、服务、PDU与设备所在层",
+    "knowledgePoint": "OSI七层模型",
     "difficulty": "medium",
     "tags": [
       "OSI 模型"
@@ -36,7 +36,7 @@
     ],
     "analysis": "二层交换机查询 MAC 地址表，根据目的 MAC 地址决定转发端口。",
     "chapter": "局域网与交换技术",
-    "knowledgePoint": "冲突域、广播域与网络设备",
+    "knowledgePoint": "MAC地址学习与交换转发",
     "difficulty": "easy",
     "tags": [
       "协议数据单元"
@@ -124,7 +124,7 @@
     ],
     "analysis": "UDP 无连接，首部为 8 字节，不提供 TCP 式确认、重传、拥塞控制等可靠性机制。",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "端口号与多路复用",
+    "knowledgePoint": "UDP特性与应用场景",
     "difficulty": "easy",
     "tags": [
       "UDP"
@@ -300,7 +300,7 @@
     ],
     "analysis": "RIP 最大有效跳数为 15，度量为 16 表示不可达，因此适用于较小规模网络。",
     "chapter": "路由与广域网技术",
-    "knowledgePoint": "距离矢量与最大跳数",
+    "knowledgePoint": "RIP工作原理、版本与报文",
     "difficulty": "easy",
     "tags": [
       "RIP"
@@ -454,12 +454,12 @@
     ],
     "analysis": "典型流程为 Discover、Offer、Request、ACK，客户端先广播 Discover 寻找 DHCP 服务器。",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "IPv4地址类别与特殊地址",
+    "knowledgePoint": "DHCP",
     "difficulty": "easy",
     "tags": [
       "DHCP"
     ],
-    "knowledgeSection": "IPv4与子网"
+    "knowledgeSection": "应用层协议与端口"
   },
   {
     "id": "practice-22",
@@ -475,13 +475,13 @@
       "C"
     ],
     "analysis": "SNMP 代理通常监听 UDP 161，Trap 通知通常发送到管理站的 UDP 162。",
-    "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "常用协议端口综合",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP版本、MIB与报文",
     "difficulty": "medium",
     "tags": [
       "SNMP"
     ],
-    "knowledgeSection": "应用层协议与端口"
+    "knowledgeSection": "管理协议与监控"
   },
   {
     "id": "practice-23",
@@ -498,7 +498,7 @@
     ],
     "analysis": "权限位 6 = 4 + 2，表示读和写；组为只读，其他用户没有权限。",
     "chapter": "服务器配置",
-    "knowledgePoint": "常用命令与系统管理",
+    "knowledgePoint": "权限、进程与文件系统",
     "difficulty": "easy",
     "tags": [
       "Linux 权限"

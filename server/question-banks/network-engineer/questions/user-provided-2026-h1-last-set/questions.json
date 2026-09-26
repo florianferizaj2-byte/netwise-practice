@@ -136,12 +136,12 @@
     "analysis": "MFLOPS表示每秒百万次浮点运算，常用于衡量浮点运算性能。",
     "chapter": "计算机基础知识",
     "knowledgeSection": "计算机组成",
-    "knowledgePoint": "CPU流水线",
+    "knowledgePoint": "计算机性能指标",
     "difficulty": "easy",
     "tags": [
       "网络工程师",
       "最后一套卷·综合知识",
-      "CPU流水线",
+      "计算机性能指标",
       "用户提供",
       "来源未核实"
     ],
@@ -177,12 +177,12 @@
     "analysis": "左侧部件与右侧并联系统串联。上、下两条支路各有两个0.9部件串联，支路可靠度为0.81；并联可靠度为1−(1−0.81)²=0.9639，再乘左侧0.9，约为0.8675。",
     "chapter": "计算机基础知识",
     "knowledgeSection": "存储器与可靠性",
-    "knowledgePoint": "串并联系统可靠性",
+    "knowledgePoint": "系统可靠性与可用性",
     "difficulty": "hard",
     "tags": [
       "网络工程师",
       "最后一套卷·综合知识",
-      "串并联系统可靠性",
+      "系统可靠性与可用性",
       "用户提供",
       "来源未核实"
     ],
@@ -696,12 +696,12 @@
     "analysis": "跟踪接口或链路故障后可降低本机VRRP优先级，促使另一台优先级更高的路由器接管Master角色。",
     "chapter": "路由与广域网技术",
     "knowledgeSection": "路由基础",
-    "knowledgePoint": "路由优先级、管理距离与度量值",
+    "knowledgePoint": "VRRP与网关冗余",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "最后一套卷·综合知识",
-      "路由优先级、管理距离与度量值",
+      "VRRP与网关冗余",
       "用户提供",
       "来源未核实"
     ],
@@ -1042,12 +1042,12 @@
     "analysis": "SPF统计信息通过display ospf spf-statistics查看。",
     "chapter": "路由与广域网技术",
     "knowledgeSection": "OSPF",
-    "knowledgePoint": "区域、LSA与邻居状态",
+    "knowledgePoint": "OSPF度量与路由计算",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "最后一套卷·综合知识",
-      "区域、LSA与邻居状态",
+      "OSPF度量与路由计算",
       "用户提供",
       "来源未核实"
     ],
@@ -1164,12 +1164,12 @@
     "analysis": "RIP的network命令按网络地址启用相应接口，不像OSPF network语句那样带通配符掩码。",
     "chapter": "路由与广域网技术",
     "knowledgeSection": "RIP",
-    "knowledgePoint": "距离矢量与最大跳数",
+    "knowledgePoint": "RIP工作原理、版本与报文",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "最后一套卷·综合知识",
-      "距离矢量与最大跳数",
+      "RIP工作原理、版本与报文",
       "用户提供",
       "来源未核实"
     ],
@@ -1204,12 +1204,12 @@
     "analysis": "路由策略可筛选被重分发的路由，并设置路由属性以控制路由传播和选路。",
     "chapter": "路由与广域网技术",
     "knowledgeSection": "路由基础",
-    "knowledgePoint": "路由协议类型与算法",
+    "knowledgePoint": "策略路由、路由策略与重分发",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "最后一套卷·综合知识",
-      "路由协议类型与算法",
+      "策略路由、路由策略与重分发",
       "用户提供",
       "来源未核实"
     ],
@@ -1245,12 +1245,12 @@
     "analysis": "前缀列表可同时限定路由前缀和掩码长度范围，适合路由过滤。",
     "chapter": "路由与广域网技术",
     "knowledgeSection": "路由基础",
-    "knowledgePoint": "路由协议类型与算法",
+    "knowledgePoint": "策略路由、路由策略与重分发",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "最后一套卷·综合知识",
-      "路由协议类型与算法",
+      "策略路由、路由策略与重分发",
       "用户提供",
       "来源未核实"
     ],
@@ -1751,12 +1751,12 @@
     "analysis": "NETCONF基于XML编码RPC消息及配置、状态数据。",
     "chapter": "网络管理",
     "knowledgeSection": "管理协议与监控",
-    "knowledgePoint": "SNMP版本、MIB与报文",
+    "knowledgePoint": "NETCONF与配置自动化",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "最后一套卷·综合知识",
-      "SNMP版本、MIB与报文",
+      "NETCONF与配置自动化",
       "用户提供",
       "来源未核实"
     ],
@@ -1952,12 +1952,12 @@
     "analysis": "28GHz属于毫米波高频段；700MHz、2.6GHz和3.5GHz为较低频段。",
     "chapter": "新技术",
     "knowledgeSection": "移动与物联网",
-    "knowledgePoint": "5G",
+    "knowledgePoint": "4G与5G移动通信",
     "difficulty": "easy",
     "tags": [
       "网络工程师",
       "最后一套卷·综合知识",
-      "5G",
+      "4G与5G移动通信",
       "用户提供",
       "来源未核实"
     ],
@@ -1992,12 +1992,12 @@
     "analysis": "5G NR中数据信道使用LDPC编码，控制信道使用Polar编码。",
     "chapter": "新技术",
     "knowledgeSection": "移动与物联网",
-    "knowledgePoint": "5G",
+    "knowledgePoint": "4G与5G移动通信",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "最后一套卷·综合知识",
-      "5G",
+      "4G与5G移动通信",
       "用户提供",
       "来源未核实"
     ],
@@ -2153,13 +2153,13 @@
     ],
     "analysis": "口令属于知识因素，智能卡属于持有因素；指纹、人脸和虹膜属于生物特征因素。",
     "chapter": "网络安全",
-    "knowledgeSection": "密码与加密",
-    "knowledgePoint": "密码学原则与传输加密",
+    "knowledgeSection": "网络设备与边界防护",
+    "knowledgePoint": "身份认证与安全运维",
     "difficulty": "easy",
     "tags": [
       "网络工程师",
       "最后一套卷·综合知识",
-      "密码学原则与传输加密",
+      "身份认证与安全运维",
       "用户提供",
       "来源未核实"
     ],
@@ -2193,13 +2193,13 @@
     ],
     "analysis": "DNSSEC通过数字签名验证DNS数据来源和完整性，可帮助识别伪造或被篡改的解析记录。",
     "chapter": "网络安全",
-    "knowledgeSection": "PKI与数字证书",
-    "knowledgePoint": "CA、数字证书与数字签名",
+    "knowledgeSection": "网络攻击",
+    "knowledgePoint": "DNS欺骗与DNSSEC",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "最后一套卷·综合知识",
-      "CA、数字证书与数字签名",
+      "DNS欺骗与DNSSEC",
       "用户提供",
       "来源未核实"
     ],
@@ -2356,12 +2356,12 @@
     "analysis": "半开连接持续占用服务器等待队列，是典型SYN Flood攻击。",
     "chapter": "网络安全",
     "knowledgeSection": "网络攻击",
-    "knowledgePoint": "DDoS",
+    "knowledgePoint": "DoS与DDoS",
     "difficulty": "easy",
     "tags": [
       "网络工程师",
       "最后一套卷·综合知识",
-      "DDoS",
+      "DoS与DDoS",
       "用户提供",
       "来源未核实"
     ],
@@ -2436,13 +2436,13 @@
     ],
     "analysis": "入口LER根据转发等价类为IP报文压入标签，核心LSR主要执行标签交换。",
     "chapter": "路由与广域网技术",
-    "knowledgeSection": "路由基础",
-    "knowledgePoint": "路由协议类型与算法",
+    "knowledgeSection": "广域网链路",
+    "knowledgePoint": "MPLS标签转发",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "最后一套卷·综合知识",
-      "路由协议类型与算法",
+      "MPLS标签转发",
       "用户提供",
       "来源未核实"
     ],
@@ -2556,14 +2556,14 @@
       "A"
     ],
     "analysis": "VNI标识VXLAN覆盖网络，可在同一物理承载网上区分不同二层租户网络。",
-    "chapter": "局域网与交换技术",
-    "knowledgeSection": "VLAN",
-    "knowledgePoint": "802.1Q与VLAN标签",
+    "chapter": "新技术",
+    "knowledgeSection": "网络架构新技术",
+    "knowledgePoint": "VXLAN与Overlay网络",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "最后一套卷·综合知识",
-      "802.1Q与VLAN标签",
+      "VXLAN与Overlay网络",
       "用户提供",
       "来源未核实"
     ],
@@ -2721,12 +2721,12 @@
     "analysis": "NAS以文件为访问对象，SAN向主机提供块设备访问；底层网络技术和成本并非绝对限定。",
     "chapter": "计算机基础知识",
     "knowledgeSection": "存储器与可靠性",
-    "knowledgePoint": "存储介质性能比较",
+    "knowledgePoint": "NAS、SAN与存储网络",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "最后一套卷·综合知识",
-      "存储介质性能比较",
+      "NAS、SAN与存储网络",
       "用户提供",
       "来源未核实"
     ],
@@ -2761,12 +2761,12 @@
     "analysis": "布线图纸和设备指标属于物理设计内容；逻辑设计关注地址、VLAN、路由、安全和架构。",
     "chapter": "综合布线与网络规划",
     "knowledgeSection": "网络规划与性能",
-    "knowledgePoint": "网络拓扑",
+    "knowledgePoint": "网络需求分析与拓扑设计",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "最后一套卷·综合知识",
-      "网络拓扑",
+      "网络需求分析与拓扑设计",
       "用户提供",
       "来源未核实"
     ],
@@ -2801,12 +2801,12 @@
     "analysis": "年停机比例为0.001%；365×24×60×0.00001≈5.26分钟。",
     "chapter": "计算机基础知识",
     "knowledgeSection": "存储器与可靠性",
-    "knowledgePoint": "串并联系统可靠性",
+    "knowledgePoint": "系统可靠性与可用性",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "最后一套卷·综合知识",
-      "串并联系统可靠性",
+      "系统可靠性与可用性",
       "用户提供",
       "来源未核实"
     ],
@@ -3044,14 +3044,14 @@
       "A"
     ],
     "analysis": "需求分析总结需要记录对象、采用的方法、工作数量、取得的资料和执行中的困难，五项均应纳入。该类需求分析知识点在当前细分目录中没有专门节点，暂归项目文档管理。",
-    "chapter": "项目管理与法律法规",
-    "knowledgeSection": "项目控制",
-    "knowledgePoint": "配置管理",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "软件工程基础",
+    "knowledgePoint": "开发模型与需求分析",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "最后一套卷·综合知识",
-      "配置管理",
+      "开发模型与需求分析",
       "用户提供",
       "来源未核实"
     ],
@@ -3236,7 +3236,7 @@
     "analysis": "DDoS通过大量分布式流量或请求耗尽目标带宽、连接或计算资源，使服务无法正常提供；防护通常结合源头加固、流量清洗、分散承载和容量扩展。",
     "chapter": "网络安全",
     "knowledgeSection": "网络攻击",
-    "knowledgePoint": "DDoS",
+    "knowledgePoint": "DoS与DDoS",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
@@ -3269,7 +3269,7 @@
     "analysis": "图示服务器通过FC交换机连接存储，因此是FC-SAN。IP-SAN基于IP以太网传输块存储数据，设备和布线成本通常较低。",
     "chapter": "计算机基础知识",
     "knowledgeSection": "存储器与可靠性",
-    "knowledgePoint": "存储介质性能比较",
+    "knowledgePoint": "NAS、SAN与存储网络",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
@@ -3309,7 +3309,7 @@
     "analysis": "Best-Effort不预留资源，是Internet常见默认服务；IntServ按流进行资源预留，通常借助RSVP信令。",
     "chapter": "综合布线与网络规划",
     "knowledgeSection": "网络规划与性能",
-    "knowledgePoint": "带宽、时延、丢包率与吞吐量",
+    "knowledgePoint": "QoS服务模型与流量管理",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
@@ -3343,7 +3343,7 @@
     "analysis": "先用VLAN和ACL区分两个用户网段，再用流分类关联流量行为与CIR/PIR参数，最后在上行接口出方向应用策略。原卷以多处空格展示命令，答案按其空格顺序归纳。",
     "chapter": "综合布线与网络规划",
     "knowledgeSection": "网络规划与性能",
-    "knowledgePoint": "带宽、时延、丢包率与吞吐量",
+    "knowledgePoint": "QoS服务模型与流量管理",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
@@ -3426,7 +3426,7 @@
     "analysis": "MST域内各交换机需要一致的域名、修订级别和VLAN映射；根保护防止下游设备争夺根角色，BPDU保护用于保护边缘端口，边缘端口用于连接终端。",
     "chapter": "局域网与交换技术",
     "knowledgeSection": "STP生成树",
-    "knowledgePoint": "端口角色与BPDU",
+    "knowledgePoint": "收敛过程与协议版本",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
@@ -3509,7 +3509,7 @@
     "analysis": "按部门规模使用VLSM分配：生产部使用172.17.100.0/23；销售部使用/25；研发部使用172.17.102.0/25；服务器使用172.17.103.128/26，因此各空的边界地址如答案所列。",
     "chapter": "网络体系结构与TCP/IP",
     "knowledgeSection": "IPv4与子网",
-    "knowledgePoint": "VLSM子网划分",
+    "knowledgePoint": "子网划分与VLSM",
     "difficulty": "medium",
     "tags": [
       "网络工程师",

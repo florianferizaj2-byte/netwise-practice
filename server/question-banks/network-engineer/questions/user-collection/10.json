@@ -14,7 +14,7 @@
     "analysis": "SMTP（简单邮件传输协议）用于发送邮件，默认TCP端口25。FTP使用TCP 21（控制）和20（数据），DNS使用UDP/TCP 53，Telnet使用TCP 23。接收邮件使用POP3（110）或IMAP（143）。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "常用协议端口综合",
+    "knowledgePoint": "电子邮件、LDAP与远程登录",
     "difficulty": "medium",
     "tags": [
       "电子邮件",
@@ -86,7 +86,7 @@
     "analysis": "FTP使用双通道：控制连接使用TCP 21端口（传输命令和响应，持续连接），数据连接使用TCP 20端口（主动模式PORT下，传输文件数据，临时连接）。被动模式PASV下数据端口由服务器随机分配（>1023）。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "常用协议端口综合",
+    "knowledgePoint": "文件传输协议FTP、TFTP与SFTP",
     "difficulty": "medium",
     "tags": [
       "FTP",
@@ -194,7 +194,7 @@
     "analysis": "SNMP使用UDP 161（代理接收请求）和162（Trap告警），不是8080。8080通常是HTTP代理/备用端口。HTTP=80，HTTPS=443，DNS=53，FTP=21/20，SSH=22，Telnet=23，SMTP=25，POP3=110，RDP=3389，DHCP=67/68。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "常用协议端口综合",
+    "knowledgePoint": "跨协议端口与传输协议辨析",
     "difficulty": "medium",
     "tags": [
       "应用层协议",
@@ -302,7 +302,7 @@
     "analysis": "POP3使用TCP端口110，邮件客户端连接服务器的110端口接收邮件。25端口是SMTP（发送邮件）。IMAP使用143端口。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "常用协议端口综合",
+    "knowledgePoint": "电子邮件、LDAP与远程登录",
     "difficulty": "medium",
     "tags": [
       "电子邮件",
@@ -410,7 +410,7 @@
     "analysis": "FTP匿名登录用户名为anonymous（密码通常为邮箱格式或任意）。FTP命令：put上传文件到服务器，get从服务器下载文件，mput/mget批量上传/下载，ls列目录，cd切换目录，bye退出。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "FTP与TFTP",
+    "knowledgePoint": "文件传输协议FTP、TFTP与SFTP",
     "difficulty": "medium",
     "tags": [
       "FTP",
@@ -626,7 +626,7 @@
     "analysis": "FTP主动模式（PORT）：客户端告诉服务器自己的数据端口，服务器使用20端口主动连接客户端的数据端口建立数据连接。被动模式（PASV）：服务器告诉客户端自己的数据端口（随机>1023），客户端主动连接服务器的数据端口。被动模式适合客户端在防火墙/NAT后面的场景。两者都使用数据连接。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "FTP与TFTP",
+    "knowledgePoint": "文件传输协议FTP、TFTP与SFTP",
     "difficulty": "medium",
     "tags": [
       "FTP",
@@ -698,7 +698,7 @@
     "analysis": "DNS主要使用UDP（53端口）进行常规查询，但也可以使用TCP（53端口）进行区域传输和大于512字节的响应。所以DNS不是\"只能\"使用UDP。HTTP是无状态协议（每次请求独立，服务器不保存客户端状态，通过Cookie/Session维持状态）。FTP使用控制连接（21）和数据连接（20）两个TCP连接。SMTP用于发送邮件。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "常用协议端口综合",
+    "knowledgePoint": "跨协议端口与传输协议辨析",
     "difficulty": "medium",
     "tags": [
       "应用层协议",
@@ -765,7 +765,7 @@
     "analysis": "TFTP（简单文件传输协议，Trivial File Transfer Protocol）使用UDP端口69，是FTP的简化版，功能非常简单：只支持文件上传（WRQ）和下载（RRQ），不支持列目录（LIST）、不支持删除/重命名、不支持用户名密码认证（无认证机制，安全性低）、不支持加密。TFTP使用停止等待协议（每发送一个数据块等待ACK，块大小默认512字节），传输效率低，但实现简单、占用资源少。TFTP常用于网络设备（路由器、交换机、防火墙）的操作系统/固件升级（IOS升级）和配置文件备份/恢复（如思科设备的copy tftp flash、copy running-config tftp），以及无盘工作站（PXE）的启动文件传输。由于TFTP无认证且明文，应仅在受信任的内部网络使用，或通过ACL限制访问。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "FTP与TFTP",
+    "knowledgePoint": "文件传输协议FTP、TFTP与SFTP",
     "difficulty": "medium",
     "tags": [
       "FTP",
@@ -827,7 +827,7 @@
     "analysis": "RDP（远程桌面协议，Remote Desktop Protocol）是Microsoft开发的远程桌面协议，用于Windows远程桌面连接（mstsc.exe），允许用户通过网络远程控制另一台计算机的桌面。RDP默认TCP端口3389（也使用UDP 3389用于UDP传输，RDP 8.0+支持UDP加速）。RDP支持加密（默认使用TLS 1.0/1.1/1.2加密，早期版本使用RC4加密，可配置网络级别认证NLA提高安全性）。RDP支持多种重定向：音频重定向（远程声音在本地播放）、打印机重定向（本地打印机在远程会话中可用）、剪贴板重定向（本地和远程之间复制粘贴文本/文件）、驱动器重定向（本地磁盘在远程会话中可用）、USB设备重定向、串口重定向等。RDP是Windows服务器管理的常用工具，但暴露在公网的RDP服务常被暴力破解攻击，应使用强密码、NLA、VPN、限制源IP、更改默认端口等措施加固。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "常用协议端口综合",
+    "knowledgePoint": "电子邮件、LDAP与远程登录",
     "difficulty": "medium",
     "tags": [
       "应用层协议",
@@ -889,7 +889,7 @@
     "analysis": "Cookie和Session都是用于维持HTTP无状态协议的会话状态机制：1）Cookie：存储在客户端（浏览器），服务器通过Set-Cookie响应头设置Cookie，浏览器后续请求自动携带Cookie。Cookie有大小限制（单个约4KB，每个域名约20-50个），安全性较低（存储在客户端，可被用户查看/修改/删除，易受XSS窃取和CSRF攻击，可设置HttpOnly/Secure/SameSite属性提高安全性）。2）Session：存储在服务器端（内存/文件/数据库/Redis），安全性较高（数据不暴露给客户端），没有严格的大小限制（但受服务器资源限制）。Session通过Session ID（唯一标识符，通常存储在Cookie中如PHPSESSID/JSESSIONID，或通过URL重写传递）与客户端关联，客户端只持有Session ID，实际数据在服务器。Session有过期时间（默认20-30分钟无活动则过期）。由于Session存储在服务器端，分布式系统需要Session共享（如Redis集中存储）或使用JWT（无状态Token）替代。Cookie可设置过期时间（持久Cookie）或不设置（会话Cookie，浏览器关闭即失效）。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "常用协议端口综合",
+    "knowledgePoint": "HTTP与HTTPS",
     "difficulty": "medium",
     "tags": [
       "应用层协议",
@@ -982,7 +982,7 @@
     "analysis": "REST（Representational State Transfer，表述性状态转移）是一种软件架构风格，不是标准协议，用于设计网络API。核心原则：1）资源（Resource）：使用URI标识资源（如/users/123、/products/456），每个资源有唯一URI；2）统一接口：使用HTTP方法对应CRUD操作（GET=查询/Read、POST=创建/Create、PUT=更新/Update（完整替换）、PATCH=部分更新、DELETE=删除/Delete）；3）无状态（Stateless）：服务器不保存客户端状态，每个请求包含所有必要信息（认证信息在请求头如Token/JWT），便于水平扩展；4）客户端-服务器分离；5）可缓存（Cacheable）：响应可被缓存（HTTP缓存头Cache-Control/ETag/Last-Modified）；6）分层系统（客户端不知道直接连接的是最终服务器还是中间代理/网关）。REST API数据格式通常使用JSON（JavaScript Object Notation，轻量、易解析，最常用），也可以使用XML、YAML、纯文本等，不是必须使用XML（SOAP API才强制使用XML）。RESTful API设计最佳实践：使用名词复数（/users而非/getUsers）、使用HTTP状态码（200成功、201创建、400参数错误、401未认证、403禁止、404未找到、500服务器错误）、版本控制（/api/v1/users）、分页（?page=1&size=20）、过滤排序（?status=active&sort=-created_at）、使用HTTPS、认证用Bearer Token/JWT。与REST对比：SOAP（Simple Object Access Protocol，简单对象访问协议）是严格的XML协议，使用WSDL描述，支持WS-Security等企业级特性，较重；GraphQL是Facebook开发的查询语言，客户端可以精确请求需要的数据（避免过度获取/不足获取），单端点查询；gRPC是Google的高性能RPC框架，使用Protocol Buffers序列化，基于HTTP/2，支持流式传输，适合微服务间通信。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "常用协议端口综合",
+    "knowledgePoint": "HTTP与HTTPS",
     "difficulty": "medium",
     "tags": [
       "应用层协议",

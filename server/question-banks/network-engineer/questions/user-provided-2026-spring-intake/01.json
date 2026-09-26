@@ -56,13 +56,13 @@
     ],
     "analysis": "RISC强调指令简单、定长、格式和寻址方式少，通常采用硬布线控制；以微程序控制为主是CISC的典型特点，所以选C。",
     "chapter": "计算机基础知识",
-    "knowledgePoint": "CPU流水线",
+    "knowledgePoint": "指令系统、寻址与中断",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
       "RISC与CISC",
-      "CPU流水线",
+      "指令系统、寻址与中断",
       "用户提供",
       "来源未核实"
     ],
@@ -139,12 +139,12 @@
     ],
     "analysis": "4种相位与4种振幅组合成16种信号状态，每个符号携带log2(16)=4bit。奈奎斯特上限为2×3000×4=24000bit/s，即24kbps，选B。",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "编码与调制",
+    "knowledgePoint": "信道容量与数据速率",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
-      "编码与调制",
+      "信道容量与数据速率",
       "用户提供",
       "来源未核实"
     ],
@@ -180,13 +180,13 @@
     ],
     "analysis": "有效信息速率为10×64=640kb/s。线路开销占容量的20%，有效部分占80%，所以线路容量至少为640÷0.8=800kb/s，选D。",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "信道容量与数据速率",
+    "knowledgePoint": "同步、双工与多路复用",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
       "统计复用",
-      "信道容量与数据速率",
+      "同步、双工与多路复用",
       "用户提供",
       "来源未核实"
     ],
@@ -443,14 +443,14 @@
       "B"
     ],
     "analysis": "VXLAN用MAC-in-UDP封装并以24位VNI标识覆盖网络，增加的是可用的二层网络标识空间，不是VLAN ID数量；错误说法是B。",
-    "chapter": "局域网与交换技术",
-    "knowledgePoint": "链路聚合、堆叠、QinQ与PoE",
+    "chapter": "新技术",
+    "knowledgePoint": "VXLAN与Overlay网络",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
       "VXLAN与QinQ",
-      "链路聚合、堆叠、QinQ与PoE",
+      "VXLAN与Overlay网络",
       "用户提供",
       "来源未核实"
     ],
@@ -469,7 +469,7 @@
       }
     ],
     "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
-    "knowledgeSection": "其他交换技术"
+    "knowledgeSection": "网络架构新技术"
   },
   {
     "id": "intake-2026-spring-q012",
@@ -486,13 +486,13 @@
     ],
     "analysis": "SUPER VLAN可让多个子VLAN共享一个三层网段及其网关接口，减少网关地址占用，选A。",
     "chapter": "局域网与交换技术",
-    "knowledgePoint": "802.1Q与VLAN标签",
+    "knowledgePoint": "VLAN间路由与VLAN聚合",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
       "Super VLAN",
-      "802.1Q与VLAN标签",
+      "VLAN间路由与VLAN聚合",
       "用户提供",
       "来源未核实"
     ],
@@ -697,13 +697,13 @@
     ],
     "analysis": "网络切片可在共享基础设施上建立逻辑隔离、能力不同的网络，为不同业务场景定制时延、带宽和可靠性等服务，选C。",
     "chapter": "新技术",
-    "knowledgePoint": "5G",
+    "knowledgePoint": "4G与5G移动通信",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
       "5G网络切片",
-      "5G",
+      "4G与5G移动通信",
       "用户提供",
       "来源未核实"
     ],
@@ -739,13 +739,13 @@
     ],
     "analysis": "累计确认到3号帧表示0至3号帧均已确认。超时后最早未确认的是4号，GBN需从4号重发至7号，共4帧，选C。",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "协议、服务、PDU与设备所在层",
+    "knowledgePoint": "数据链路层流量控制与ARQ",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
       "后退N帧协议",
-      "协议、服务、PDU与设备所在层",
+      "数据链路层流量控制与ARQ",
       "用户提供",
       "来源未核实"
     ],
@@ -764,7 +764,7 @@
       }
     ],
     "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
-    "knowledgeSection": "网络模型与分层"
+    "knowledgeSection": "数据通信与传输"
   },
   {
     "id": "intake-2026-spring-q019",
@@ -866,13 +866,13 @@
     ],
     "analysis": "从/24划分至少3个子网，至少要借2位作为子网位（2^2=4个子网），剩余主机位为6位，选D。原答案页标C（7位），与题干条件不符；本稿按计算订正。",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "VLSM子网划分",
+    "knowledgePoint": "子网划分与VLSM",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
       "IPv4子网划分",
-      "VLSM子网划分",
+      "子网划分与VLSM",
       "用户提供",
       "来源未核实"
     ],
@@ -914,13 +914,13 @@
     ],
     "analysis": "借2位后前缀为/26，掩码是255.255.255.192，选A。原答案页标B（/25），只能划出2个子网，达不到至少3个；本稿按计算订正。",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "VLSM子网划分",
+    "knowledgePoint": "子网划分与VLSM",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
       "IPv4子网划分",
-      "VLSM子网划分",
+      "子网划分与VLSM",
       "用户提供",
       "来源未核实"
     ],
@@ -1173,14 +1173,14 @@
       "B"
     ],
     "analysis": "RSVP资源预留由接收方发起RESV消息，沿数据路径向发送方方向请求预留资源，选B。",
-    "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "协议、服务、PDU与设备所在层",
+    "chapter": "综合布线与网络规划",
+    "knowledgePoint": "QoS服务模型与流量管理",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
       "RSVP资源预留",
-      "协议、服务、PDU与设备所在层",
+      "QoS服务模型与流量管理",
       "用户提供",
       "来源未核实"
     ],
@@ -1199,7 +1199,7 @@
       }
     ],
     "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
-    "knowledgeSection": "网络模型与分层"
+    "knowledgeSection": "网络规划与性能"
   },
   {
     "id": "intake-2026-spring-q028",
@@ -1216,13 +1216,13 @@
     ],
     "analysis": "题干提到流标签，指向IPv6。IPv6中途路由器不能替数据包分片；超出出接口MTU时会丢弃并向源地址发送Packet Too Big通知，选D。",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "IPv6过渡技术",
+    "knowledgePoint": "IPv6报文与协议特性",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
       "MTU与分片",
-      "IPv6过渡技术",
+      "IPv6报文与协议特性",
       "用户提供",
       "来源未核实"
     ],
@@ -1258,13 +1258,13 @@
     ],
     "analysis": "逐跳选项首部用于携带需要沿途节点检查的选项；目标选项只由目的节点处理，路由首部由指定节点处理，因此选A。",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "IPv6过渡技术",
+    "knowledgePoint": "IPv6报文与协议特性",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
       "IPv6扩展首部",
-      "IPv6过渡技术",
+      "IPv6报文与协议特性",
       "用户提供",
       "来源未核实"
     ],
@@ -1707,13 +1707,13 @@
     ],
     "analysis": "智能门锁通过联网设备完成状态感知、远程控制或联动，属于物联网应用，选A。",
     "chapter": "新技术",
-    "knowledgePoint": "NB-IoT",
+    "knowledgePoint": "物联网与NB-IoT",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
       "物联网",
-      "NB-IoT",
+      "物联网与NB-IoT",
       "用户提供",
       "来源未核实"
     ],
@@ -1790,14 +1790,14 @@
       "C"
     ],
     "analysis": "FC交换机工作在光纤通道Fabric中，使用FC协议连接服务器和存储，并非像以太网交换机那样基于IP转发，因此错误项是C。",
-    "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "协议、服务、PDU与设备所在层",
+    "chapter": "计算机基础知识",
+    "knowledgePoint": "NAS、SAN与存储网络",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
       "光纤通道网络",
-      "协议、服务、PDU与设备所在层",
+      "NAS、SAN与存储网络",
       "用户提供",
       "来源未核实"
     ],
@@ -1816,7 +1816,7 @@
       }
     ],
     "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
-    "knowledgeSection": "网络模型与分层"
+    "knowledgeSection": "存储器与可靠性"
   },
   {
     "id": "intake-2026-spring-q041",
@@ -1875,13 +1875,13 @@
     ],
     "analysis": "把ICMP Echo请求发往受害网络广播地址，会使多台主机向受害者回应并放大流量，这是Smurf攻击，选B。",
     "chapter": "网络安全",
-    "knowledgePoint": "DDoS",
+    "knowledgePoint": "DoS与DDoS",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
       "Smurf攻击",
-      "DDoS",
+      "DoS与DDoS",
       "用户提供",
       "来源未核实"
     ],
@@ -1918,13 +1918,13 @@
     ],
     "analysis": "大量无效请求使正常用户无法访问服务，影响的是系统或服务的可用性，选C。",
     "chapter": "网络安全",
-    "knowledgePoint": "DDoS",
+    "knowledgePoint": "DoS与DDoS",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
       "拒绝服务与可用性",
-      "DDoS",
+      "DoS与DDoS",
       "用户提供",
       "来源未核实"
     ],
@@ -1959,14 +1959,14 @@
       "C"
     ],
     "analysis": "arp -d用于删除ARP缓存项；arp -a用于查看，arp -s用于添加静态项，因此选C。",
-    "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "ARP与RARP",
+    "chapter": "网络管理",
+    "knowledgePoint": "ipconfig、netstat与路由工具",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
       "ARP缓存",
-      "ARP与RARP",
+      "ipconfig、netstat与路由工具",
       "用户提供",
       "来源未核实"
     ],
@@ -1985,7 +1985,7 @@
       }
     ],
     "sourceVerification": "用户提供的网络工程师练习卷；未核实官方真题来源。答案按原卷答案页录入，原卷未附详细解析。",
-    "knowledgeSection": "网际层协议"
+    "knowledgeSection": "诊断工具与设备排查"
   },
   {
     "id": "intake-2026-spring-q045",
@@ -2002,13 +2002,13 @@
     ],
     "analysis": "格基密码是后量子密码的重要路线之一；RSA所依赖的整数分解问题可被足够强的量子算法有效攻击，选D。",
     "chapter": "网络安全",
-    "knowledgePoint": "非对称加密与Hash摘要",
+    "knowledgePoint": "非对称加密算法",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
       "后量子密码",
-      "非对称加密与Hash摘要",
+      "非对称加密算法",
       "用户提供",
       "来源未核实"
     ],
@@ -2321,13 +2321,13 @@
     ],
     "analysis": "需求获取要通过访谈、沟通和澄清来理解用户目标与约束；缺少沟通容易把需求理解错误，选B。",
     "chapter": "综合布线与网络规划",
-    "knowledgePoint": "网络拓扑",
+    "knowledgePoint": "网络需求分析与拓扑设计",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
       "需求获取",
-      "网络拓扑",
+      "网络需求分析与拓扑设计",
       "用户提供",
       "来源未核实"
     ],
@@ -2363,13 +2363,13 @@
     ],
     "analysis": "基准前缀是0.0.0.0/0，并要求前缀长度至少32；IPv4最大长度也是32，因此只匹配/32主机路由，选C。",
     "chapter": "路由与广域网技术",
-    "knowledgePoint": "路由表、静态路由与默认路由",
+    "knowledgePoint": "策略路由、路由策略与重分发",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
       "IP前缀列表",
-      "路由表、静态路由与默认路由",
+      "策略路由、路由策略与重分发",
       "用户提供",
       "来源未核实"
     ],
@@ -2405,13 +2405,12 @@
     ],
     "analysis": "GRE负责把一种网络层协议封装进另一种协议的隧道中，但本身不提供加密和强认证；需叠加IPsec等安全机制，错误项是D。",
     "chapter": "网络安全",
-    "knowledgePoint": "IPsec VPN与SSL VPN",
+    "knowledgePoint": "GRE隧道",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
       "GRE隧道",
-      "IPsec VPN与SSL VPN",
       "用户提供",
       "来源未核实"
     ],
@@ -2489,13 +2488,13 @@
     ],
     "analysis": "OSPF按链路开销计算最短路径，没有类似RIP最大15跳的协议跳数上限，选D。",
     "chapter": "路由与广域网技术",
-    "knowledgePoint": "区域、LSA与邻居状态",
+    "knowledgePoint": "OSPF度量与路由计算",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
       "OSPF",
-      "区域、LSA与邻居状态",
+      "OSPF度量与路由计算",
       "用户提供",
       "来源未核实"
     ],
@@ -2531,13 +2530,13 @@
     ],
     "analysis": "BGP通常优先选择较短的AS_PATH；“AS_PATH越长越优先”颠倒了规则，因此不正确的是A。",
     "chapter": "路由与广域网技术",
-    "knowledgePoint": "AS与路径矢量",
+    "knowledgePoint": "BGP路由属性与选路",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
       "BGP AS_PATH",
-      "AS与路径矢量",
+      "BGP路由属性与选路",
       "用户提供",
       "来源未核实"
     ],
@@ -2657,13 +2656,13 @@
     ],
     "analysis": "TD-LTE是LTE/4G系统中的时分双工制式之一；其余选项不是本题所指的4G主要技术，选C。",
     "chapter": "新技术",
-    "knowledgePoint": "5G",
+    "knowledgePoint": "4G与5G移动通信",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
       "4G技术",
-      "5G",
+      "4G与5G移动通信",
       "用户提供",
       "来源未核实"
     ],
@@ -2868,13 +2867,13 @@
     ],
     "analysis": "Path MTU Discovery依据沿途MTU限制探测一条路径可用的最大分组尺寸；IPv6路由器以Packet Too Big消息反馈，选C。",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "IPv6过渡技术",
+    "knowledgePoint": "IPv6报文与协议特性",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
       "IPv6 Path MTU发现",
-      "IPv6过渡技术",
+      "IPv6报文与协议特性",
       "用户提供",
       "来源未核实"
     ],
@@ -2910,13 +2909,13 @@
     ],
     "analysis": "RIP是距离向量（distance-vector）路由协议，空(1)应填vector，选A。",
     "chapter": "路由与广域网技术",
-    "knowledgePoint": "距离矢量与最大跳数",
+    "knowledgePoint": "RIP工作原理、版本与报文",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
       "RIP路由协议完形填空",
-      "距离矢量与最大跳数",
+      "RIP工作原理、版本与报文",
       "用户提供",
       "来源未核实"
     ],
@@ -2961,13 +2960,13 @@
     ],
     "analysis": "RIP路由表项包含到目的地的度量值/开销（cost）；实际表项通常也记录下一跳，按本句空格选择C。",
     "chapter": "路由与广域网技术",
-    "knowledgePoint": "距离矢量与最大跳数",
+    "knowledgePoint": "RIP工作原理、版本与报文",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
       "RIP路由协议完形填空",
-      "距离矢量与最大跳数",
+      "RIP工作原理、版本与报文",
       "用户提供",
       "来源未核实"
     ],
@@ -3012,13 +3011,13 @@
     ],
     "analysis": "RIP使用跳数作为度量，因此固定搭配是hop count，选B。",
     "chapter": "路由与广域网技术",
-    "knowledgePoint": "距离矢量与最大跳数",
+    "knowledgePoint": "RIP工作原理、版本与报文",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
       "RIP路由协议完形填空",
-      "距离矢量与最大跳数",
+      "RIP工作原理、版本与报文",
       "用户提供",
       "来源未核实"
     ],
@@ -3063,13 +3062,13 @@
     ],
     "analysis": "RIP把16视为不可达，最大可用度量15，用于限制路由环路影响；此处应为routing loops，选B。",
     "chapter": "路由与广域网技术",
-    "knowledgePoint": "距离矢量与最大跳数",
+    "knowledgePoint": "RIP工作原理、版本与报文",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
       "RIP路由协议完形填空",
-      "距离矢量与最大跳数",
+      "RIP工作原理、版本与报文",
       "用户提供",
       "来源未核实"
     ],
@@ -3114,13 +3113,13 @@
     ],
     "analysis": "RIP按周期向邻居发送路由更新，默认周期为30秒（实现可对定时器加入少量随机偏移），选B。",
     "chapter": "路由与广域网技术",
-    "knowledgePoint": "距离矢量与最大跳数",
+    "knowledgePoint": "RIP工作原理、版本与报文",
     "difficulty": "medium",
     "tags": [
       "网络工程师",
       "2026上半年新生入学卷",
       "RIP路由协议完形填空",
-      "距离矢量与最大跳数",
+      "RIP工作原理、版本与报文",
       "用户提供",
       "来源未核实"
     ],

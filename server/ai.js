@@ -794,6 +794,9 @@ export class OpenAICompatibleProvider extends AIProvider {
       id: crypto.randomUUID(),
       source: "ai_generated",
       certificates: q.certificates || ["network-engineer"],
+      // The reviewed variant belongs to its seed's canonical directory. The
+      // model's narrower skill label must not create a second section/entry.
+      ...(q.knowledgeSection ? { knowledgeSection: q.knowledgeSection } : {}),
       createdAt: new Date().toISOString(),
       targetKnowledgePoint: target,
     }));

@@ -1,8 +1,10 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import {
   ActivityIndicator,
   Animated,
   Image,
+  FlatList,
+  RefreshControl,
   Linking,
   Modal,
   ScrollView,
@@ -23,7 +25,11 @@ import {
   type FeedbackKind,
   type PracticeCatalogResponse,
   type Question,
+  type QuestionPage,
 } from '../api/client';
+import { useCachedQuery } from '../api/useCachedQuery';
+import { useScreenActive } from '../navigation/ScreenActivity';
+import { useActiveTimer } from '../navigation/useActiveTimer';
 import { BrandMark } from '../components/BrandMark';
 import { QuestionImages } from '../components/QuestionImages';
 import { AiQuestionDraftScreen } from './AiQuestionDraftScreen';
@@ -107,12 +113,13 @@ const themeOptions: Array<{ id: ThemeMode; label: string; hint: string }> = [
 
 const DAILY_PRACTICE_COUNT = 30;
 
-function ScreenContainer({ children, compact = false, profile = false }: { children: ReactNode; compact?: boolean; profile?: boolean }) {
+function ScreenContainer({ children, compact = false, profile = false, onRefresh, refreshing = false }: { children: ReactNode; compact?: boolean; profile?: boolean; onRefresh?: () => void; refreshing?: boolean }) {
   const styles = useThemedStyles(createStyles);
   return (
     <ScrollView
       contentContainerStyle={[styles.content, compact && styles.compactContent, profile && styles.profileContent]}
       showsVerticalScrollIndicator={false}
+      refreshControl={onRefresh ? <RefreshControl refreshing={refreshing} onRefresh={onRefresh} /> : undefined}
     >
       {children}
     </ScrollView>
@@ -185,7 +192,7 @@ async function loadDailyPracticeQuestions(
   );
   return shuffleQuestions([
     ...selectedQuestions,
-    ...additionalQuestions.filter((question) => !selectedIds.has(question.id)),
+    ...additionalQuestions.filter((question) => !selectedIds.has(question.id)).slice(0, DAILY_PRACTICE_COUNT - selectedQuestions.length),
   ]).slice(0, DAILY_PRACTICE_COUNT);
 }
 
@@ -219,6 +226,7 @@ function PrimaryAction({
 
 export function TodayScreen({ dashboard, onNavigate, preview = false }: ScreenProps) {
   const styles = useThemedStyles(createStyles);
+  const query = useCachedQuery('/dashboard?summary=1', mobileApi.dashboard, !preview);
   const progressPulse = usePulse({ duration: 2100, maxScale: 1.028 });
   const todayCount = dashboard?.todayCount ?? (preview ? 12 : 0);
   const wrongCount = dashboard?.wrongCount ?? (preview ? 18 : 0);
@@ -230,11 +238,12 @@ export function TodayScreen({ dashboard, onNavigate, preview = false }: ScreenPr
       : `${Math.round(dashboard.accuracy * 100)}%`;
   const streak = preview
     ? '7 天'
-    : `${dashboard?.recentDays?.filter((item) => item.count > 0).length ?? 0} 天`;
+    : `${dashboard?.streakDays ?? 0} 天`;
   const progress = Math.min(100, Math.round((todayCount / DAILY_PRACTICE_COUNT) * 100));
 
   return (
-    <ScreenContainer>
+    <ScreenContainer onRefresh={preview ? undefined : query.refresh} refreshing={query.fetching && !!dashboard}>
+      {!!query.error && <Text style={styles.formError}>{dashboard ? '当前显示上次同步的进度。' : ''}{query.error.message}</Text>}
       <ScreenHeader eyebrow={todayLabel()} title="今天学什么？" />
 
       <EntranceView delay={60} style={styles.todayFocusCard} distance={18}>
@@ -343,9 +352,11 @@ function PracticePicker({
   const { colors } = useTheme();
   const styles = useThemedStyles(createStyles);
   const isDailyPractice = practiceSession === 'daily';
-  const [catalog, setCatalog] = useState<PracticeCatalogResponse | null>(null);
-  const [loading, setLoading] = useState(!preview);
-  const [error, setError] = useState('');
+  const query = useCachedQuery('/practice/catalog', mobileApi.practiceCatalog, !preview);
+  const [previewCatalog, setCatalog] = useState<PracticeCatalogResponse | null>(null);
+  const catalog = preview ? previewCatalog : query.data;
+  const loading = !preview && query.loading;
+  const error = query.error ? `${catalog ? '当前显示已缓存的题库。' : ''}${query.error.message}` : '';
   const [expandedChapters, setExpandedChapters] = useState<Set<string>>(() => new Set());
   const [expandedSections, setExpandedSections] = useState<Set<string>>(() => new Set());
 
@@ -378,39 +389,12 @@ function PracticePicker({
           },
         ],
       });
-      setLoading(false);
       return;
     }
-
-    let mounted = true;
-    setLoading(true);
-    setError('');
-    mobileApi
-      .practiceCatalog()
-      .then((result) => {
-        if (mounted) setCatalog(result);
-      })
-      .catch((requestError) => {
-        if (mounted) {
-          setCatalog(null);
-          setError(
-            requestError instanceof Error
-              ? requestError.message
-              : '知识点加载失败，请稍后重试',
-          );
-        }
-      })
-      .finally(() => {
-        if (mounted) setLoading(false);
-      });
-
-    return () => {
-      mounted = false;
-    };
   }, [preview]);
 
   return (
-    <ScreenContainer>
+    <ScreenContainer onRefresh={preview ? undefined : query.refresh} refreshing={query.fetching && !!catalog}>
       <EntranceView delay={50} distance={12} style={styles.pickerSummary}>
         <View>
           <Text style={styles.pickerSummaryTitle}>{isDailyPractice ? '随机生成今日题目' : '题库练习'}</Text>
@@ -739,8 +723,16 @@ export function PracticeScreen({
 }: ScreenProps) {
   const { colors } = useTheme();
   const styles = useThemedStyles(createStyles);
+  const active = useScreenActive();
   const isDailyPractice = practiceSession === 'daily';
   const [questions, setQuestions] = useState<Question[]>([]);
+  const [nextOffset, setNextOffset] = useState<number | null>(null);
+  const [totalQuestions, setTotalQuestions] = useState(0);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [pageError, setPageError] = useState('');
+  const pageGeneration = useRef(0);
+  const pageSeed = useRef('');
+  const pageFlight = useRef<Promise<number> | null>(null);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [selected, setSelected] = useState<string[]>([]);
   const [responseDraft, setResponseDraft] = useState('');
@@ -750,7 +742,6 @@ export function PracticeScreen({
   const [finished, setFinished] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [reloadKey, setReloadKey] = useState(0);
-  const [startedAt, setStartedAt] = useState(Date.now());
   const [aiBusy, setAiBusy] = useState('');
   const [aiProgress, setAiProgress] = useState('');
   const [aiError, setAiError] = useState<string | null>(null);
@@ -779,6 +770,13 @@ export function PracticeScreen({
 
   useEffect(() => {
     let mounted = true;
+    pageGeneration.current += 1;
+    pageSeed.current = Math.random().toString(36).slice(2);
+    pageFlight.current = null;
+    setNextOffset(null);
+    setTotalQuestions(0);
+    setLoadingMore(false);
+    setPageError('');
     setLoading(true);
     setError(null);
     setQuestions([]);
@@ -786,6 +784,7 @@ export function PracticeScreen({
     setSelected([]);
     setResponseDraft('');
     setResult(null);
+    setSubmitting(false);
     setFinished(false);
     setAiBusy('');
     setAiError(null);
@@ -828,16 +827,19 @@ export function PracticeScreen({
         ? mobileApi.wrong()
         : practiceSource === 'favorites'
           ? mobileApi.favorites()
-          : mobileApi.questions(undefined, 0, practiceMode === 'random', {
+          : mobileApi.questionPage(0, {
               chapter: practiceChapter,
               knowledgeSection: practiceKnowledgeSection,
               knowledgePoint: practiceKnowledgePoint,
-            });
+            }, practiceMode === 'random' ? pageSeed.current : undefined, reloadKey > 0);
 
     loadQuestions
-      .then((items) => {
+      .then((loaded: Question[] | QuestionPage) => {
         if (!mounted) return;
-        const nextQuestions = isDailyPractice
+        const items = Array.isArray(loaded) ? loaded : loaded.items;
+        setNextOffset(Array.isArray(loaded) ? null : loaded.nextOffset);
+        setTotalQuestions(Array.isArray(loaded) ? items.length : loaded.total);
+        const nextQuestions = !Array.isArray(loaded) || isDailyPractice
           ? items
           : practiceMode === 'random'
             ? shuffleQuestions(items)
@@ -862,6 +864,7 @@ export function PracticeScreen({
 
     return () => {
       mounted = false;
+      pageGeneration.current += 1;
     };
   }, [
     isDailyPractice,
@@ -877,9 +880,50 @@ export function PracticeScreen({
   ]);
 
   const currentQuestion = questions[questionIndex];
+  const questionIdRef = useRef(currentQuestion?.id);
+  questionIdRef.current = currentQuestion?.id;
+  const elapsedTime = useActiveTimer(currentQuestion?.id);
+
+  function questionTask() {
+    const generation = pageGeneration.current;
+    const questionId = currentQuestion?.id;
+    return () => generation === pageGeneration.current && questionId === questionIdRef.current;
+  }
+
+  async function loadMoreQuestions() {
+    if (pageFlight.current) return pageFlight.current;
+    if (nextOffset === null) return 0;
+    const generation = pageGeneration.current;
+    setLoadingMore(true);
+    setPageError('');
+    const pending = mobileApi.questionPage(nextOffset, {
+      chapter: practiceChapter, knowledgeSection: practiceKnowledgeSection, knowledgePoint: practiceKnowledgePoint,
+    }, practiceMode === 'random' ? pageSeed.current : undefined).then((page) => {
+      if (generation !== pageGeneration.current) return 0;
+      setQuestions((current) => {
+        const ids = new Set(current.map((question) => question.id));
+        return [...current, ...page.items.filter((question) => !ids.has(question.id))];
+      });
+      setNextOffset(page.nextOffset);
+      setTotalQuestions(page.total);
+      return page.items.length;
+    }).catch((cause: unknown) => {
+      if (generation === pageGeneration.current) setPageError(cause instanceof Error ? cause.message : '后续题目加载失败，请重试');
+      return -1;
+    }).finally(() => {
+      if (generation === pageGeneration.current) { setLoadingMore(false); pageFlight.current = null; }
+    });
+    pageFlight.current = pending;
+    return pending;
+  }
 
   useEffect(() => {
-    setStartedAt(Date.now());
+    if (active && !loading && !loadingMore && !pageError && nextOffset !== null && questions.length - questionIndex <= 8) {
+      void loadMoreQuestions();
+    }
+  }, [active, loading, loadingMore, pageError, nextOffset, questionIndex, questions.length]);
+
+  useEffect(() => {
     setAiBusy('');
     setAiProgress('');
     setAiError(null);
@@ -916,10 +960,7 @@ export function PracticeScreen({
     }
     setError(null);
     setSubmitting(true);
-    const timeMs = Math.min(
-      86400000,
-      Math.max(0, Date.now() - startedAt),
-    );
+    const timeMs = elapsedTime();
 
     if (preview) {
       setResult({
@@ -934,29 +975,7 @@ export function PracticeScreen({
       return;
     }
 
-    // 错题接口已经返回答案，先在本地展示结果，再后台保存记录，避免复习时等待网络。
-    if (currentQuestion.answer?.length) {
-      setResult({
-        questionId: currentQuestion.id,
-        selected,
-        correct: sameAnswers(selected, currentQuestion.answer),
-        timeMs,
-        answer: currentQuestion.answer,
-        analysis: currentQuestion.analysis,
-      });
-      setSubmitting(false);
-      void mobileApi
-        .recordAttempt(currentQuestion.id, selected, timeMs, currentQuestion.type === 'short_answer' ? responseDraft.trim() : undefined)
-        .catch((requestError) => {
-          setError(
-            requestError instanceof Error
-              ? `结果已显示，但同步失败：${requestError.message}`
-              : '结果已显示，但答题记录同步失败',
-          );
-        });
-      return;
-    }
-
+    const generation = pageGeneration.current;
     try {
       const response = await mobileApi.recordAttempt(
         currentQuestion.id,
@@ -964,20 +983,22 @@ export function PracticeScreen({
         timeMs,
         currentQuestion.type === 'short_answer' ? responseDraft.trim() : undefined,
       );
-      setResult(response);
+      if (generation === pageGeneration.current) setResult(response);
     } catch (requestError) {
+      if (generation !== pageGeneration.current) return;
       setError(
         requestError instanceof Error
           ? requestError.message
           : '提交失败，请检查网络后重试',
       );
     } finally {
-      setSubmitting(false);
+      if (generation === pageGeneration.current) setSubmitting(false);
     }
   }
 
   async function askAiTeacher(action: AiTeacherAction, hintLevel = 0) {
     if (!currentQuestion || aiBusy) return;
+    const current = questionTask();
     setAiError(null);
     setAiBusy(action === '给我提示' ? 'hint' : 'teacher');
     if (preview) {
@@ -997,21 +1018,24 @@ export function PracticeScreen({
         selected,
         hintLevel,
       );
+      if (!current()) return;
       if (action === '给我提示') setHintText(response.text);
       else setTeacherText(response.text);
     } catch (requestError) {
+      if (!current()) return;
       setAiError(
         requestError instanceof Error
           ? requestError.message
           : 'AI 服务暂时不可用，请稍后重试',
       );
     } finally {
-      setAiBusy('');
+      if (current()) setAiBusy('');
     }
   }
 
   async function analyzeWithAi() {
     if (!currentQuestion || aiBusy) return;
+    const current = questionTask();
     setAiError(null);
     setAiBusy('analysis');
     if (preview) {
@@ -1024,20 +1048,23 @@ export function PracticeScreen({
       return;
     }
     try {
-      setAiAnalysis(await mobileApi.analyze(currentQuestion.id));
+      const analysis = await mobileApi.analyze(currentQuestion.id);
+      if (current()) setAiAnalysis(analysis);
     } catch (requestError) {
+      if (!current()) return;
       setAiError(
         requestError instanceof Error
           ? requestError.message
           : 'AI 解析暂时不可用，请稍后重试',
       );
     } finally {
-      setAiBusy('');
+      if (current()) setAiBusy('');
     }
   }
 
   async function generateAiPractice() {
     if (!currentQuestion || aiBusy) return;
+    const current = questionTask();
     setAiError(null);
     setAiBusy('train');
     if (preview) {
@@ -1047,8 +1074,9 @@ export function PracticeScreen({
     }
     try {
       const response = await mobileApi.trainStream(currentQuestion.id, 3, (event) => {
-        if (event.stage !== 'heartbeat') setAiProgress(event.message);
+        if (current() && event.stage !== 'heartbeat') setAiProgress(event.message);
       });
+      if (!current()) return;
       const existingIds = new Set(questions.map((question) => question.id));
       const freshQuestions = response.questions.filter(
         (question) => !existingIds.has(question.id),
@@ -1062,19 +1090,20 @@ export function PracticeScreen({
           : 'AI 训练题已在当前题组中，可以继续下一题。',
       );
     } catch (requestError) {
+      if (!current()) return;
       setAiError(
         requestError instanceof Error
           ? requestError.message
           : 'AI 变式训练暂时不可用，请稍后重试',
       );
     } finally {
-      setAiBusy('');
-      setAiProgress('');
+      if (current()) { setAiBusy(''); setAiProgress(''); }
     }
   }
 
   async function submitReport() {
     if (!currentQuestion || reportBusy) return;
+    const current = questionTask();
     setReportBusy(true);
     try {
       if (!preview) {
@@ -1084,24 +1113,27 @@ export function PracticeScreen({
           reportNote.trim() || undefined,
         );
       }
+      if (!current()) return;
       setReportOpen(false);
       setReportNote('');
       setReportNotice(
         preview ? '预览模式不会提交数据，登录后即可举报题目。' : '举报已提交，感谢你帮助我们改进题库。',
       );
     } catch (requestError) {
+      if (!current()) return;
       setReportNotice(
         requestError instanceof Error
           ? requestError.message
           : '举报提交失败，请稍后重试',
       );
     } finally {
-      setReportBusy(false);
+      if (current()) setReportBusy(false);
     }
   }
 
   function toggleFavorite() {
     if (!currentQuestion) return;
+    const generation = pageGeneration.current;
     const questionId = currentQuestion.id;
     if (!favoriteConfirmedRef.current.has(questionId)) {
       favoriteConfirmedRef.current.set(questionId, Boolean(currentQuestion.favorite));
@@ -1124,7 +1156,9 @@ export function PracticeScreen({
     const save = previousSave
       .catch(() => undefined)
       .then(async () => {
+        if (generation !== pageGeneration.current) return;
         const saved = await mobileApi.favorite(questionId, nextFavorite);
+        if (generation !== pageGeneration.current) return;
         favoriteConfirmedRef.current.set(questionId, saved.favorite);
         if (favoriteRevisionRef.current.get(questionId) === revision) {
           favoriteDesiredRef.current.set(questionId, saved.favorite);
@@ -1138,6 +1172,7 @@ export function PracticeScreen({
         }
       })
       .catch((requestError) => {
+        if (generation !== pageGeneration.current) return;
         if (favoriteRevisionRef.current.get(questionId) !== revision) return;
         const confirmedFavorite = favoriteConfirmedRef.current.get(questionId) ?? false;
         favoriteDesiredRef.current.set(questionId, confirmedFavorite);
@@ -1155,6 +1190,9 @@ export function PracticeScreen({
         );
       });
     favoriteSaveQueuesRef.current.set(questionId, save);
+    void save.finally(() => {
+      if (favoriteSaveQueuesRef.current.get(questionId) === save) favoriteSaveQueuesRef.current.delete(questionId);
+    });
   }
 
   async function removeCurrentWrong() {
@@ -1165,10 +1203,12 @@ export function PracticeScreen({
       wrongDeleteBusy
     )
       return;
+    const current = questionTask();
     setWrongDeleteBusy(true);
     setError(null);
     try {
       if (!preview) await mobileApi.removeWrong(currentQuestion.id);
+      if (!current()) return;
       const remaining = questions.filter((question) => question.id !== currentQuestion.id);
       setReportNotice('已从错题中移除。');
       if (!remaining.length) {
@@ -1182,18 +1222,30 @@ export function PracticeScreen({
         setResult(null);
       }
     } catch (requestError) {
+      if (!current()) return;
       setError(
         requestError instanceof Error
           ? requestError.message
           : '移除错题失败，请稍后重试',
       );
     } finally {
-      setWrongDeleteBusy(false);
+      if (current()) setWrongDeleteBusy(false);
     }
   }
 
-  function nextQuestion() {
+  async function nextQuestion() {
+    const current = questionTask();
     if (questionIndex >= questions.length - 1) {
+      if (nextOffset !== null) {
+        const count = await loadMoreQuestions();
+        if (!current()) return;
+        if (count < 0) return;
+        if (count > 0) {
+          setQuestionIndex((current) => current + 1);
+          setSelected([]); setResponseDraft(''); setResult(null); setError(null);
+          return;
+        }
+      }
       setFinished(true);
       return;
     }
@@ -1294,15 +1346,20 @@ export function PracticeScreen({
   if (!isDailyPractice) headerParts.push(modeLabel);
   if (practiceKnowledgeSection) headerParts.push(practiceKnowledgeSection);
   if (practiceKnowledgePoint) headerParts.push(practiceKnowledgePoint);
-  headerParts.push(`${questionIndex + 1}/${questions.length}`);
+  headerParts.push(`${questionIndex + 1}/${Math.max(totalQuestions, questions.length)}`);
 
   return (
     <ScreenContainer compact>
+      <AnimatedPressable accessibilityLabel="返回题库目录" onPress={() => onNavigate('practice', { practiceMode, practiceSession })}>
+        <Text style={styles.bodyText}>‹ 返回题库目录</Text>
+      </AnimatedPressable>
+      {!!pageError && <Text style={styles.formError}>{pageError}，点击下一题可重试。</Text>}
+      {loadingMore && <Text style={styles.loadingText}>正在准备后续题目…</Text>}
       <Text style={styles.practiceProgressLabel}>{headerParts.join(' · ')}</Text>
       {!isDailyPractice && <EntranceView delay={20} distance={6} style={styles.modeSwitch}>
         <AnimatedPressable
           accessibilityLabel="顺序刷题"
-          disabled={submitting}
+          disabled={submitting || (loadingMore && questionIndex >= questions.length - 1)}
           onPress={() => onPracticeModeChange?.('sequential')}
           style={[styles.modeButton, practiceMode === 'sequential' && styles.activeModeButton]}
         >
@@ -1551,7 +1608,7 @@ export function PracticeScreen({
           if (!reportBusy) setReportOpen(false);
         }}
         transparent
-        visible={reportOpen}
+        visible={active && reportOpen}
       >
         <View style={styles.modalBackdrop}>
           <View style={styles.reportModal}>
@@ -1620,60 +1677,38 @@ export function PracticeScreen({
 export function WrongScreen({ dashboard, onNavigate, preview = false }: ScreenProps) {
   const { colors } = useTheme();
   const styles = useThemedStyles(createStyles);
-  const [wrongQuestions, setWrongQuestions] = useState<Question[]>([]);
-  const [loading, setLoading] = useState(!preview);
-  const [loadError, setLoadError] = useState('');
-
-  useEffect(() => {
-    if (preview) {
-      setWrongQuestions([
-        { ...previewQuestion, wrongCount: 3 },
-        {
-          ...previewQuestion,
-          id: 'mobile-preview-question-2',
-          question: 'HTTP 方法中，哪一个通常用于获取资源？',
-          options: { A: 'GET', B: 'POST', C: 'PATCH', D: 'DELETE' },
-          wrongCount: 1,
-        },
-      ]);
-      setLoading(false);
-      return;
-    }
-    let mounted = true;
-    setLoading(true);
-    setLoadError('');
-    mobileApi
-      .wrong()
-      .then((items) => {
-        if (mounted) setWrongQuestions(items);
-      })
-      .catch((requestError) => {
-        if (mounted) {
-          setWrongQuestions([]);
-          setLoadError(
-            requestError instanceof Error ? requestError.message : '错题加载失败，请稍后重试',
-          );
-        }
-      })
-      .finally(() => {
-        if (mounted) setLoading(false);
-      });
-    return () => {
-      mounted = false;
-    };
-  }, [preview]);
-
-  const wrongCount = dashboard?.wrongCount ?? wrongQuestions.length;
-  const knowledgeDistribution = [...wrongQuestions.reduce((counts, question) => {
+  const query = useCachedQuery('/wrong', mobileApi.wrong, !preview);
+  const wrongQuestions = useMemo(() => preview ? [{ ...previewQuestion, wrongCount: 3 }] : query.data ?? [], [preview, query.data]);
+  const loading = !preview && query.loading;
+  const loadError = query.error?.message ?? '';
+  const [allDistribution, setAllDistribution] = useState(false);
+  const wrongCount = query.data || preview ? wrongQuestions.length : dashboard?.wrongCount ?? 0;
+  const knowledgeDistribution = useMemo(() => [...wrongQuestions.reduce((counts, question) => {
     const knowledgePoint = question.knowledgePoint || question.chapter || '未分类';
     counts.set(knowledgePoint, (counts.get(knowledgePoint) ?? 0) + 1);
     return counts;
   }, new Map<string, number>()).entries()]
     .map(([name, count]) => ({ name, count }))
-    .sort((left, right) => right.count - left.count || left.name.localeCompare(right.name));
+    .sort((left, right) => right.count - left.count || left.name.localeCompare(right.name)), [wrongQuestions]);
 
   return (
-    <ScreenContainer>
+    <FlatList
+      data={wrongQuestions}
+      keyExtractor={(question) => question.id}
+      initialNumToRender={12}
+      maxToRenderPerBatch={10}
+      windowSize={7}
+      contentContainerStyle={styles.content}
+      onRefresh={preview ? undefined : query.refresh}
+      refreshing={query.fetching && !!query.data}
+      renderItem={({ item: question }) => (
+        <ListRow
+          onPress={() => onNavigate('practice', { practiceSource: 'wrong', practiceMode: 'sequential', practiceQuestionId: question.id })}
+          title={question.question}
+          meta={`${question.knowledgePoint ?? question.chapter ?? '综合练习'} · ${question.wrongCount ?? 1} 次错误`}
+        />
+      )}
+      ListHeaderComponent={<>
       <ScreenHeader eyebrow="错题复习" title="把不会的变成会的" />
       <EntranceView delay={60} distance={16} style={styles.wrongSummary}>
         <View>
@@ -1685,15 +1720,15 @@ export function WrongScreen({ dashboard, onNavigate, preview = false }: ScreenPr
       <EntranceView delay={120} distance={8}>
         <Text style={styles.bodyText}>按照遗忘曲线安排复习，优先处理最需要巩固的题目。</Text>
       </EntranceView>
-      {!loading && !!loadError && <Text style={styles.formError}>{loadError}</Text>}
-      {!loading && !loadError && wrongQuestions.length > 0 && (
+      {!loading && !!loadError && <Text style={styles.formError}>{wrongQuestions.length ? '当前显示上次同步的错题。' : ''}{loadError}</Text>}
+      {!loading && wrongQuestions.length > 0 && (
         <EntranceView delay={145} distance={10} style={styles.wrongDistributionCard}>
           <View style={styles.wrongDistributionHeader}>
             <Text style={styles.wrongDistributionTitle}>错题知识点分布</Text>
             <Text style={styles.wrongDistributionMeta}>{wrongQuestions.length} 道 · {knowledgeDistribution.length} 个知识点</Text>
           </View>
           <View style={styles.wrongDistributionList}>
-            {knowledgeDistribution.map((item) => (
+            {(allDistribution ? knowledgeDistribution : knowledgeDistribution.slice(0, 8)).map((item) => (
               <View key={item.name} style={styles.wrongDistributionItem}>
                 <View style={styles.wrongDistributionLabels}>
                   <Text style={styles.wrongDistributionName}>{item.name}</Text>
@@ -1706,6 +1741,9 @@ export function WrongScreen({ dashboard, onNavigate, preview = false }: ScreenPr
                 />
               </View>
             ))}
+            {knowledgeDistribution.length > 8 && <AnimatedPressable onPress={() => setAllDistribution((value) => !value)}>
+              <Text style={styles.bodyText}>{allDistribution ? '收起分布' : `展开全部 ${knowledgeDistribution.length} 个知识点`}</Text>
+            </AnimatedPressable>}
           </View>
         </EntranceView>
       )}
@@ -1721,35 +1759,19 @@ export function WrongScreen({ dashboard, onNavigate, preview = false }: ScreenPr
           开始错题复习
         </PrimaryAction>
       </EntranceView>
-      <EntranceView delay={230} distance={18} style={styles.listCard}>
-        {loading ? (
+      {!!wrongQuestions.length && <Text style={styles.wrongListTitle}>全部错题 · {wrongQuestions.length} 道</Text>}
+      </>}
+      ListEmptyComponent={loading ? (
           <View style={styles.listLoading}>
             <ActivityIndicator color={colors.brand} />
             <Text style={styles.loadingText}>正在同步错题…</Text>
           </View>
-        ) : loadError ? null : wrongQuestions.length ? (
-          <>
-            <Text style={styles.wrongListTitle}>全部错题 · {wrongQuestions.length} 道</Text>
-            {wrongQuestions.map((question) => (
-              <ListRow
-                key={question.id}
-                onPress={() =>
-                  onNavigate('practice', {
-                    practiceSource: 'wrong',
-                    practiceMode: 'sequential',
-                    practiceQuestionId: question.id,
-                  })
-                }
-                title={question.question}
-                meta={`${question.knowledgePoint ?? question.chapter ?? '综合练习'} · ${question.wrongCount ?? 1} 次错误`}
-              />
-            ))}
-          </>
+        ) : loadError ? (
+          <PrimaryAction onPress={query.refresh}>重新同步</PrimaryAction>
         ) : (
           <Text style={styles.emptyListText}>太好了，当前还没有错题。</Text>
         )}
-      </EntranceView>
-    </ScreenContainer>
+    />
   );
 }
 
@@ -1819,6 +1841,7 @@ export function ProfileScreen({
   preview = false,
   user,
 }: ScreenProps) {
+  const active = useScreenActive();
   const {
     animationSpeed,
     colors,
@@ -1842,6 +1865,7 @@ export function ProfileScreen({
   const [settingsBusy, setSettingsBusy] = useState(false);
   const [settingsSaveBusy, setSettingsSaveBusy] = useState(false);
   const [settingsNotice, setSettingsNotice] = useState('');
+  const [cacheNotice, setCacheNotice] = useState('');
   const [settingsError, setSettingsError] = useState('');
   const [apiKey, setApiKey] = useState('');
   const [authorPassword, setAuthorPassword] = useState('');
@@ -2001,6 +2025,9 @@ export function ProfileScreen({
           value={user?.communityName || user?.username || '登录后设置'}
         />
         <SettingRow title="服务器地址" value="aceexam.top" />
+        <SettingRow title="清理学习缓存" value={cacheNotice || '自动缓存 · 可清理'} onPress={() => {
+          void mobileApi.clearStudyCache().then(() => setCacheNotice('已清理'));
+        }} />
         <SettingRow
           onPress={() => setAboutOpen(true)}
           title="关于考匠"
@@ -2030,7 +2057,7 @@ export function ProfileScreen({
         animationType="slide"
         onRequestClose={() => setAppSettingsOpen(false)}
         transparent
-        visible={appSettingsOpen}
+        visible={active && appSettingsOpen}
       >
         <View style={styles.modalBackdrop}>
           <View style={styles.settingsModal}>
@@ -2112,7 +2139,7 @@ export function ProfileScreen({
         animationType="fade"
         onRequestClose={() => setSponsorOpen(false)}
         transparent
-        visible={sponsorOpen}
+        visible={active && sponsorOpen}
       >
         <View style={styles.modalBackdrop}>
           <View style={styles.sponsorModal}>
@@ -2141,7 +2168,7 @@ export function ProfileScreen({
           if (!communityNameBusy) setCommunityNameOpen(false);
         }}
         transparent
-        visible={communityNameOpen}
+        visible={active && communityNameOpen}
       >
         <View style={styles.modalBackdrop}>
           <View style={styles.nameModal}>
@@ -2188,7 +2215,7 @@ export function ProfileScreen({
         animationType="slide"
         onRequestClose={() => setAiSettingsOpen(false)}
         transparent
-        visible={aiSettingsOpen}
+        visible={active && aiSettingsOpen}
       >
         <View style={styles.modalBackdrop}>
           <View style={styles.settingsModal}>
@@ -2374,7 +2401,7 @@ export function ProfileScreen({
         animationType="slide"
         onRequestClose={() => setAboutOpen(false)}
         transparent
-        visible={aboutOpen}
+        visible={active && aboutOpen}
       >
         <View style={styles.modalBackdrop}>
           <View style={styles.settingsModal}>

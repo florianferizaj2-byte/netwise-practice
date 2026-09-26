@@ -9,6 +9,7 @@ import {
   type ViewStyle,
 } from 'react-native';
 import { useTheme } from '../theme';
+import { useScreenActive } from '../navigation/ScreenActivity';
 
 const MotionPressable = Animated.createAnimatedComponent(Pressable);
 
@@ -22,33 +23,27 @@ export function useEntrance({
   distance = 16,
 }: EntranceOptions = {}) {
   const { animationScale } = useTheme();
-  const opacity = useRef(new Animated.Value(0)).current;
-  const translateY = useRef(new Animated.Value(distance)).current;
+  const translateY = useRef(new Animated.Value(Math.min(distance, 8))).current;
+  const active = useScreenActive();
 
   useEffect(() => {
-    const animation = Animated.parallel([
-      Animated.timing(opacity, {
-        delay: Math.round(delay * animationScale),
-        duration: Math.max(1, Math.round(420 * animationScale)),
-        easing: Easing.out(Easing.cubic),
-        toValue: 1,
-        useNativeDriver: true,
-      }),
-      Animated.spring(translateY, {
-        delay: Math.round(delay * animationScale),
-        friction: Math.max(4, Math.round(8 * animationScale)),
-        tension: Math.round(62 / animationScale),
-        toValue: 0,
-        useNativeDriver: true,
-      }),
-    ]);
+    if (!active) {
+      translateY.setValue(0);
+      return;
+    }
+    const animation = Animated.spring(translateY, {
+      delay: Math.min(120, Math.round(delay * animationScale)),
+      friction: Math.max(4, Math.round(8 * animationScale)),
+      tension: Math.round(62 / animationScale),
+      toValue: 0,
+      useNativeDriver: true,
+    });
 
     animation.start();
     return () => animation.stop();
-  }, [animationScale, delay, opacity, translateY]);
+  }, [active, animationScale, delay, translateY]);
 
   return {
-    opacity,
     transform: [{ translateY }],
   };
 }
@@ -63,19 +58,23 @@ export function usePulse({
   duration?: number;
 } = {}) {
   const { animationScale } = useTheme();
+  const active = useScreenActive();
   const scale = useRef(new Animated.Value(minScale)).current;
 
   useEffect(() => {
+    if (!active) return;
     const animation = Animated.loop(
       Animated.sequence([
         Animated.timing(scale, {
           duration: Math.max(1, Math.round(duration * animationScale)),
+          isInteraction: false,
           easing: Easing.inOut(Easing.sin),
           toValue: maxScale,
           useNativeDriver: true,
         }),
         Animated.timing(scale, {
           duration: Math.max(1, Math.round(duration * animationScale)),
+          isInteraction: false,
           easing: Easing.inOut(Easing.sin),
           toValue: minScale,
           useNativeDriver: true,
@@ -85,7 +84,7 @@ export function usePulse({
 
     animation.start();
     return () => animation.stop();
-  }, [animationScale, duration, maxScale, minScale, scale]);
+  }, [active, animationScale, duration, maxScale, minScale, scale]);
 
   return scale;
 }
@@ -108,7 +107,11 @@ export function EntranceView({
 
 type AnimatedPressableProps = Pick<
   PressableProps,
-  'accessibilityLabel' | 'accessibilityRole' | 'disabled' | 'onLongPress' | 'onPress'
+  | 'accessibilityLabel'
+  | 'accessibilityRole'
+  | 'disabled'
+  | 'onLongPress'
+  | 'onPress'
 > & {
   children: ReactNode;
   style?: StyleProp<ViewStyle>;
@@ -185,8 +188,12 @@ export function AnimatedProgressBar({
   });
 
   return (
-    <Animated.View style={[styles.progressTrack, { backgroundColor: trackColor }]}>
-      <Animated.View style={[styles.progressValue, { backgroundColor: color, width }]} />
+    <Animated.View
+      style={[styles.progressTrack, { backgroundColor: trackColor }]}
+    >
+      <Animated.View
+        style={[styles.progressValue, { backgroundColor: color, width }]}
+      />
     </Animated.View>
   );
 }
@@ -196,11 +203,20 @@ export function FloatingSparkles() {
 
   return (
     <Animated.View
-      style={[styles.sparkles, { pointerEvents: 'none', transform: [{ scale: drift }] }]}
+      style={[
+        styles.sparkles,
+        { pointerEvents: 'none', transform: [{ scale: drift }] },
+      ]}
     >
-      <Animated.Text style={[styles.sparkle, styles.sparkleOne]}>✦</Animated.Text>
-      <Animated.Text style={[styles.sparkle, styles.sparkleTwo]}>•</Animated.Text>
-      <Animated.Text style={[styles.sparkle, styles.sparkleThree]}>✦</Animated.Text>
+      <Animated.Text style={[styles.sparkle, styles.sparkleOne]}>
+        ✦
+      </Animated.Text>
+      <Animated.Text style={[styles.sparkle, styles.sparkleTwo]}>
+        •
+      </Animated.Text>
+      <Animated.Text style={[styles.sparkle, styles.sparkleThree]}>
+        ✦
+      </Animated.Text>
     </Animated.View>
   );
 }

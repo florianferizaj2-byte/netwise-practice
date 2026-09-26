@@ -6,6 +6,8 @@ import path from "node:path";
 import { createStore } from "../server/store.js";
 import { createApp } from "../server/index.js";
 
+const currentMobileVersion = JSON.parse(fs.readFileSync(new URL('../mobile/package.json', import.meta.url), 'utf8')).version;
+
 const tinyPng =
   "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=";
 
@@ -29,7 +31,7 @@ test("community supports one public room, custom names, text, emoji and images",
       headers: {
         "Content-Type": "application/json",
         "X-Client": "mobile",
-        "X-App-Version": "0.2.5",
+        "X-App-Version": currentMobileVersion,
       },
       body: JSON.stringify({ username, password: "safe-password" }),
     });
@@ -43,7 +45,7 @@ test("community supports one public room, custom names, text, emoji and images",
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
         "X-Client": "mobile",
-        "X-App-Version": "0.2.5",
+        "X-App-Version": currentMobileVersion,
       },
       ...(body ? { body: JSON.stringify(body) } : {}),
     });

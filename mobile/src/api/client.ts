@@ -1,8 +1,10 @@
 import { APP_VERSION } from '../version';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { fetch as streamingFetch } from 'expo/fetch';
-
-type JsonRecord = Record<string, unknown>;
+import { ResourceCache, CacheCancelledError } from './resourceCache';
+import { persistentStudyData, studyCachePolicy } from './cachePolicy';
+import { ApiError, fetchJson } from './transport';
+export { ApiError } from './transport';
 
 export const API_BASE_URL =
   process.env.EXPO_PUBLIC_API_URL ?? 'https://aceexam.top/api';
@@ -20,18 +22,40 @@ export type AppVersionResponse = {
 const SESSION_TOKEN_KEY = 'kaojiang-session-token';
 const SESSION_PROFILE_KEY = 'kaojiang-session-profile';
 let sessionToken: string | null = null;
+let sessionRevision = 0;
+let studyScope: string | null = null;
+const streamControllers = new Set<AbortController>();
+let sessionWrites: Promise<unknown> = Promise.resolve();
+export const studyCache = new ResourceCache(
+  AsyncStorage,
+  studyCachePolicy,
+  persistentStudyData,
+);
+const statusListeners = new Set<(status: 'expired' | 'update') => void>();
+
+function writeSession(task: () => Promise<unknown>) {
+  const pending = sessionWrites.then(task, task);
+  sessionWrites = pending.catch(() => undefined);
+  return sessionWrites;
+}
 
 export async function setSessionToken(token: string | null) {
   sessionToken = token;
-  try {
+  sessionRevision += 1;
+  streamControllers.forEach((controller) => controller.abort());
+  studyScope = null;
+  void studyCache.setScope(null);
+  if (!token) {
+    statusListeners.forEach((listener) => listener('expired'));
+  }
+  await writeSession(async () => {
     if (token) {
+      await AsyncStorage.removeItem(SESSION_PROFILE_KEY);
       await AsyncStorage.setItem(SESSION_TOKEN_KEY, token);
     } else {
       await AsyncStorage.multiRemove([SESSION_TOKEN_KEY, SESSION_PROFILE_KEY]);
     }
-  } catch {
-    // Keep the in-memory session usable if local storage is temporarily unavailable.
-  }
+  });
 }
 
 export async function restoreSessionToken() {
@@ -47,60 +71,96 @@ export async function clearSessionToken() {
   await setSessionToken(null);
 }
 
-async function cacheSessionProfile(session: Pick<AuthResponse, 'user' | 'certificates'>) {
-  try {
+async function cacheSessionProfile(
+  session: Pick<AuthResponse, 'user' | 'certificates'>,
+) {
+  const ready = activateStudyScope(session.user);
+  const revision = sessionRevision;
+  await ready;
+  if (revision !== sessionRevision) throw new CacheCancelledError();
+  await writeSession(async () => {
+    if (revision !== sessionRevision) return;
     await AsyncStorage.setItem(
       SESSION_PROFILE_KEY,
-      JSON.stringify({ user: session.user, certificates: session.certificates }),
+      JSON.stringify({
+        user: session.user,
+        certificates: session.certificates,
+      }),
     );
-  } catch {
-    // The network session remains usable if profile caching is unavailable.
-  }
+  });
+  if (revision !== sessionRevision) throw new CacheCancelledError();
 }
 
-export class ApiError extends Error {
-  status: number;
-  data: unknown;
-
-  constructor(message: string, status: number, data: unknown) {
-    super(message);
-    this.name = 'ApiError';
-    this.status = status;
-    this.data = data;
+function activateStudyScope(user: AuthResponse['user']) {
+  const next = JSON.stringify([
+    API_BASE_URL,
+    user.id,
+    user.certificateId ?? '',
+  ]);
+  if (studyScope !== next) {
+    studyScope = next;
+    sessionRevision += 1;
+    streamControllers.forEach((controller) => controller.abort());
   }
+  return studyCache.setScope(next);
 }
 
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
-  const response = await fetch(`${API_BASE_URL}${path}`, {
-    ...init,
-    credentials: 'include',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'X-Client': 'mobile',
-      'X-App-Version': APP_VERSION,
-      ...(sessionToken ? { Authorization: `Bearer ${sessionToken}` } : {}),
-      ...init.headers,
-    },
-  });
-
-  const raw = await response.text();
-  let data: unknown = null;
+  const revision = sessionRevision;
+  const token = sessionToken;
+  let data: T;
   try {
-    data = raw ? (JSON.parse(raw) as unknown) : null;
-  } catch {
-    data = raw;
+    data = await fetchJson<T>(
+      `${API_BASE_URL}${path}`,
+      {
+        ...init,
+        credentials: 'omit',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'X-Client': 'mobile',
+          'X-App-Version': APP_VERSION,
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          ...init.headers,
+        },
+      },
+      path.startsWith('/ai/') ? 120000 : 30000,
+    );
+  } catch (error) {
+    if (revision !== sessionRevision) throw new CacheCancelledError();
+    if (error instanceof ApiError && error.status === 401 && token)
+      void clearSessionToken();
+    if (error instanceof ApiError && error.status === 426)
+      statusListeners.forEach((listener) => listener('update'));
+    throw error;
   }
-
-  if (!response.ok) {
-    const message =
-      typeof data === 'object' && data !== null && 'error' in data
-        ? String((data as JsonRecord).error)
-        : `请求失败（${response.status}）`;
-    throw new ApiError(message, response.status, data);
+  if (revision !== sessionRevision) throw new CacheCancelledError();
+  if (init.method && init.method !== 'GET') {
+    if (
+      path === '/attempts' ||
+      path.startsWith('/wrong/') ||
+      path.endsWith('/favorite')
+    ) {
+      studyCache.invalidate([
+        '/dashboard',
+        '/practice/catalog',
+        '/wrong',
+        '/favorites',
+        '/questions?',
+      ]);
+    } else if (path.endsWith('/submit') || path === '/ai/train') {
+      studyCache.invalidate([
+        '/practice/catalog',
+        '/questions?',
+        '/community/leaderboards',
+      ]);
+    }
   }
+  return data;
+}
 
-  return data as T;
+function cachedRequest<T>(path: string, force = false) {
+  return studyCache.read(path, (signal) => request<T>(path, { signal }), force);
 }
 
 export type AiStreamProgress = {
@@ -115,59 +175,87 @@ async function streamRequest<T>(
   body: Record<string, unknown>,
   onProgress: (event: AiStreamProgress) => void,
 ): Promise<T> {
-  const response = await streamingFetch(`${API_BASE_URL}${path}`, {
-    method: 'POST',
-    credentials: 'include',
-    headers: {
-      Accept: 'text/event-stream',
-      'Content-Type': 'application/json',
-      'X-Client': 'mobile',
-      'X-App-Version': APP_VERSION,
-      ...(sessionToken ? { Authorization: `Bearer ${sessionToken}` } : {}),
-    },
-    body: JSON.stringify(body),
-  });
-  if (!response.ok) {
-    const raw = await response.text();
-    let message = `请求失败（${response.status}）`;
-    try { message = JSON.parse(raw).error || message; } catch { /* Keep HTTP status. */ }
-    throw new ApiError(message, response.status, raw);
-  }
-  if (!response.body) throw new Error('服务器没有返回可读取的 AI 进度');
-  const reader = response.body.getReader();
-  const decoder = new TextDecoder();
-  let buffer = '';
-  let result: T | undefined;
-  const consume = (record: string) => {
-    const data = record.split(/\r?\n/)
-      .filter((line) => line.startsWith('data:'))
-      .map((line) => line.slice(5).trim())
-      .join('\n');
-    if (!data) return;
-    const event = JSON.parse(data) as
-      | ({ type: 'progress' } & AiStreamProgress)
-      | { type: 'done'; result: T }
-      | { type: 'error'; message: string };
-    if (event.type === 'progress') onProgress(event);
-    if (event.type === 'done') result = event.result;
-    if (event.type === 'error') throw new Error(event.message);
-  };
+  const revision = sessionRevision;
+  const controller = new AbortController();
+  streamControllers.add(controller);
+  const timer = setTimeout(() => controller.abort(), 240000);
   try {
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      buffer += decoder.decode(value, { stream: true });
-      const records = buffer.split(/\r?\n\r?\n/);
-      buffer = records.pop() || '';
-      records.forEach(consume);
+    const response = await streamingFetch(`${API_BASE_URL}${path}`, {
+      method: 'POST',
+      credentials: 'omit',
+      headers: {
+        Accept: 'text/event-stream',
+        'Content-Type': 'application/json',
+        'X-Client': 'mobile',
+        'X-App-Version': APP_VERSION,
+        ...(sessionToken ? { Authorization: `Bearer ${sessionToken}` } : {}),
+      },
+      body: JSON.stringify(body),
+      signal: controller.signal,
+    });
+    if (revision !== sessionRevision) throw new CacheCancelledError();
+    if (!response.ok) {
+      const raw = await response.text();
+      let message = `请求失败（${response.status}）`;
+      try {
+        message = JSON.parse(raw).error || message;
+      } catch {
+        /* Keep HTTP status. */
+      }
+      throw new ApiError(message, response.status, raw);
     }
-    buffer += decoder.decode();
-    if (buffer.trim()) consume(buffer);
+    if (!response.body) throw new Error('服务器没有返回可读取的 AI 进度');
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+    let result: T | undefined;
+    const consume = (record: string) => {
+      if (revision !== sessionRevision) throw new CacheCancelledError();
+      const data = record
+        .split(/\r?\n/)
+        .filter((line) => line.startsWith('data:'))
+        .map((line) => line.slice(5).trim())
+        .join('\n');
+      if (!data) return;
+      const event = JSON.parse(data) as
+        | ({ type: 'progress' } & AiStreamProgress)
+        | { type: 'done'; result: T }
+        | { type: 'error'; message: string };
+      if (event.type === 'progress') onProgress(event);
+      if (event.type === 'done') result = event.result;
+      if (event.type === 'error') throw new Error(event.message);
+    };
+    try {
+      while (true) {
+        const { done, value } = await reader.read();
+        if (revision !== sessionRevision) throw new CacheCancelledError();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+        const records = buffer.split(/\r?\n\r?\n/);
+        buffer = records.pop() || '';
+        records.forEach(consume);
+      }
+      buffer += decoder.decode();
+      if (buffer.trim()) consume(buffer);
+    } finally {
+      void reader.cancel().catch(() => undefined);
+      reader.releaseLock();
+    }
+    if (result === undefined) throw new Error('AI 任务中断，请重试');
+    studyCache.invalidate(['/practice/catalog', '/questions?']);
+    return result;
+  } catch (error) {
+    if (revision !== sessionRevision) throw new CacheCancelledError();
+    if (error instanceof ApiError && error.status === 401)
+      void clearSessionToken();
+    if (error instanceof ApiError && error.status === 426)
+      statusListeners.forEach((listener) => listener('update'));
+    if (controller.signal.aborted) throw new Error('AI 请求超时，请稍后重试');
+    throw error;
   } finally {
-    reader.releaseLock();
+    clearTimeout(timer);
+    streamControllers.delete(controller);
   }
-  if (result === undefined) throw new Error('AI 任务中断，请重试');
-  return result;
 }
 
 export type AuthResponse = {
@@ -188,6 +276,7 @@ export type DashboardResponse = {
   minutes: number;
   dueCount: number;
   wrongCount: number;
+  streakDays?: number;
   recentDays?: Array<{ day: string; count: number }>;
   certificate?: { id: string; name: string } | null;
   user?: AuthResponse['user'] | null;
@@ -199,7 +288,8 @@ export type Question = {
   question: string;
   options: Record<string, string>;
   images?: Array<{ src: string; alt?: string; caption?: string }>;
-  image?: string | Array<string | { src: string; alt?: string; caption?: string }>;
+  image?:
+    string | Array<string | { src: string; alt?: string; caption?: string }>;
   sharedStem?: string;
   expectedAnswer?: string;
   chapter?: string;
@@ -212,6 +302,18 @@ export type Question = {
   wrongCount?: number;
   attempted?: boolean;
   favorite?: boolean;
+  source?: string;
+};
+
+export type QuestionFilters = {
+  chapter?: string;
+  knowledgeSection?: string;
+  knowledgePoint?: string;
+};
+export type QuestionPage = {
+  items: Question[];
+  total: number;
+  nextOffset: number | null;
 };
 
 export type PracticeKnowledgePoint = {
@@ -279,11 +381,7 @@ export type LeaderboardResponse = {
   accuracyMinAttempts: number;
 };
 
-export type FeedbackKind =
-  | 'wrong_answer'
-  | 'ambiguous'
-  | 'duplicate'
-  | 'other';
+export type FeedbackKind = 'wrong_answer' | 'ambiguous' | 'duplicate' | 'other';
 
 export type AiAnalysisResponse = {
   mistakeType: string;
@@ -292,10 +390,7 @@ export type AiAnalysisResponse = {
 };
 
 export type AiTeacherAction =
-  | '详细讲解'
-  | '换一种方法解释'
-  | '举一个实际例子'
-  | '给我提示';
+  '详细讲解' | '换一种方法解释' | '举一个实际例子' | '给我提示';
 
 export type AiTrainingResponse = {
   questions: Question[];
@@ -364,6 +459,16 @@ export type CommunityImagePayload = {
 };
 
 export const mobileApi = {
+  onStatus(listener: (status: 'expired' | 'update') => void) {
+    statusListeners.add(listener);
+    return () => {
+      statusListeners.delete(listener);
+    };
+  },
+
+  clearStudyCache() {
+    return studyCache.clear();
+  },
   appVersion(version: string) {
     return request<AppVersionResponse>(
       `/mobile/version?version=${encodeURIComponent(version)}`,
@@ -411,8 +516,12 @@ export const mobileApi = {
     try {
       const cached = await AsyncStorage.getItem(SESSION_PROFILE_KEY);
       if (cached) {
-        const profile = JSON.parse(cached) as Pick<AuthResponse, 'user' | 'certificates'>;
+        const profile = JSON.parse(cached) as Pick<
+          AuthResponse,
+          'user' | 'certificates'
+        >;
         if (profile.user?.id && Array.isArray(profile.certificates)) {
+          await activateStudyScope(profile.user);
           return { session: profile, shouldValidate: true };
         }
       }
@@ -424,6 +533,7 @@ export const mobileApi = {
   },
 
   async refreshSession() {
+    const revision = sessionRevision;
     try {
       const response = await this.me();
       if (!response.authenticated || !response.user) {
@@ -438,6 +548,7 @@ export const mobileApi = {
       await cacheSessionProfile(refreshedSession);
       return refreshedSession;
     } catch (error) {
+      if (revision !== sessionRevision) throw new CacheCancelledError();
       if (error instanceof ApiError && [401, 403].includes(error.status)) {
         await clearSessionToken();
         return null;
@@ -450,15 +561,20 @@ export const mobileApi = {
     return cacheSessionProfile(session);
   },
 
-  selectCertificate(certificateId: string) {
-    return request<{ user: AuthResponse['user'] }>('/auth/certificate', {
-      method: 'PUT',
-      body: JSON.stringify({ certificateId }),
-    });
+  async selectCertificate(certificateId: string) {
+    const response = await request<{ user: AuthResponse['user'] }>(
+      '/auth/certificate',
+      {
+        method: 'PUT',
+        body: JSON.stringify({ certificateId }),
+      },
+    );
+    await activateStudyScope(response.user);
+    return response;
   },
 
-  dashboard() {
-    return request<DashboardResponse>('/dashboard');
+  dashboard(force = false) {
+    return cachedRequest<DashboardResponse>('/dashboard?summary=1', force);
   },
 
   questions(
@@ -476,21 +592,45 @@ export const mobileApi = {
     if (offset) params.set('offset', String(offset));
     if (random) params.set('random', '1');
     if (filters?.chapter) params.set('chapter', filters.chapter);
-    if (filters?.knowledgeSection) params.set('knowledgeSection', filters.knowledgeSection);
-    if (filters?.knowledgePoint) params.set('knowledgePoint', filters.knowledgePoint);
-    return request<Question[]>(`/questions?${params.toString()}`);
+    if (filters?.knowledgeSection)
+      params.set('knowledgeSection', filters.knowledgeSection);
+    if (filters?.knowledgePoint)
+      params.set('knowledgePoint', filters.knowledgePoint);
+    return random
+      ? request<Question[]>(`/questions?${params.toString()}`)
+      : cachedRequest<Question[]>(`/questions?${params.toString()}`);
   },
 
-  practiceCatalog() {
-    return request<PracticeCatalogResponse>('/practice/catalog');
+  questionPage(
+    offset = 0,
+    filters?: QuestionFilters,
+    seed?: string,
+    force = false,
+  ) {
+    const params = new URLSearchParams({
+      page: '1',
+      limit: '40',
+      offset: String(offset),
+    });
+    for (const [key, value] of Object.entries(filters ?? {}))
+      if (value) params.set(key, value);
+    if (seed) {
+      params.set('random', '1');
+      params.set('seed', seed);
+    }
+    return cachedRequest<QuestionPage>(`/questions?${params}`, force);
   },
 
-  favorites() {
-    return request<Question[]>('/favorites');
+  practiceCatalog(force = false) {
+    return cachedRequest<PracticeCatalogResponse>('/practice/catalog', force);
   },
 
-  wrong() {
-    return request<Question[]>('/wrong');
+  favorites(force = false) {
+    return cachedRequest<Question[]>('/favorites', force);
+  },
+
+  wrong(force = false) {
+    return cachedRequest<Question[]>('/wrong', force);
   },
 
   favorite(questionId: string, favorite: boolean) {
@@ -510,10 +650,20 @@ export const mobileApi = {
     );
   },
 
-  recordAttempt(questionId: string, selected: string[], timeMs: number, response?: string) {
+  recordAttempt(
+    questionId: string,
+    selected: string[],
+    timeMs: number,
+    response?: string,
+  ) {
     return request<AttemptResponse>('/attempts', {
       method: 'POST',
-      body: JSON.stringify({ questionId, selected, timeMs, ...(response ? { response } : {}) }),
+      body: JSON.stringify({
+        questionId,
+        selected,
+        timeMs,
+        ...(response ? { response } : {}),
+      }),
     });
   },
 
@@ -558,20 +708,42 @@ export const mobileApi = {
     count: 1 | 3 | 5 | 10,
     onProgress: (event: AiStreamProgress) => void,
   ) {
-    return streamRequest<AiTrainingResponse>('/ai/train/stream', { questionId, count }, onProgress);
+    return streamRequest<AiTrainingResponse>(
+      '/ai/train/stream',
+      { questionId, count },
+      onProgress,
+    );
   },
 
   generateQuestionDraft(
-    selection: { chapter: string; knowledgeSection?: string; knowledgePoint: string },
+    selection: {
+      chapter: string;
+      knowledgeSection?: string;
+      knowledgePoint: string;
+    },
     onProgress: (event: AiStreamProgress) => void,
   ) {
-    return streamRequest<AiQuestionDraft>('/ai/questions/draft/stream', selection, onProgress);
+    return streamRequest<AiQuestionDraft>(
+      '/ai/questions/draft/stream',
+      selection,
+      onProgress,
+    );
   },
 
-  currentQuestionDraft(selection: { chapter: string; knowledgeSection?: string; knowledgePoint: string }) {
-    const params = new URLSearchParams({ chapter: selection.chapter, knowledgePoint: selection.knowledgePoint });
-    if (selection.knowledgeSection) params.set('knowledgeSection', selection.knowledgeSection);
-    return request<{ draft: AiQuestionDraft | null }>(`/ai/questions/draft?${params.toString()}`);
+  currentQuestionDraft(selection: {
+    chapter: string;
+    knowledgeSection?: string;
+    knowledgePoint: string;
+  }) {
+    const params = new URLSearchParams({
+      chapter: selection.chapter,
+      knowledgePoint: selection.knowledgePoint,
+    });
+    if (selection.knowledgeSection)
+      params.set('knowledgeSection', selection.knowledgeSection);
+    return request<{ draft: AiQuestionDraft | null }>(
+      `/ai/questions/draft?${params.toString()}`,
+    );
   },
 
   submitQuestionDraft(id: string) {
@@ -592,10 +764,13 @@ export const mobileApi = {
     return request<LeaderboardResponse>('/community/leaderboards');
   },
 
-  communityMessages(before?: string, limit = 50) {
+  communityMessages(before?: string, limit = 50, signal?: AbortSignal) {
     const params = new URLSearchParams({ limit: String(limit) });
     if (before) params.set('before', before);
-    return request<CommunityResponse>(`/community/messages?${params.toString()}`);
+    return request<CommunityResponse>(
+      `/community/messages?${params.toString()}`,
+      { signal },
+    );
   },
 
   sendCommunityMessage(text: string, image?: CommunityImagePayload) {
@@ -650,12 +825,17 @@ export const mobileApi = {
   },
 
   async logout() {
-    try {
-      return await request<{ loggedOut: boolean }>('/auth/logout', {
-        method: 'POST',
-      });
-    } finally {
-      await clearSessionToken();
-    }
+    // Capture the old token in the request, then detach it immediately. A delayed
+    // logout must never delete credentials belonging to a subsequent login.
+    const pending = request<{ loggedOut: boolean }>('/auth/logout', {
+      method: 'POST',
+    }).catch((error) => {
+      if (!(error instanceof CacheCancelledError)) throw error;
+      return { loggedOut: true };
+    });
+    // Attach a rejection handler immediately, even if storage is slow.
+    void pending.catch(() => undefined);
+    await clearSessionToken();
+    return pending;
   },
 };

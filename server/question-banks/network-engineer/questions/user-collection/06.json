@@ -200,7 +200,7 @@
     "analysis": "STP端口状态转换：阻塞（Blocking）→监听（Listening，15秒）→学习（Learning，15秒）→转发（Forwarding），总时间30秒。注意从阻塞到转发经过监听和学习两个状态各15秒。",
     "type": "single_choice",
     "chapter": "局域网与交换技术",
-    "knowledgePoint": "端口角色与BPDU",
+    "knowledgePoint": "收敛过程与协议版本",
     "difficulty": "medium",
     "tags": [
       "STP",
@@ -231,7 +231,7 @@
     "analysis": "RSTP（802.1w，快速生成树）收敛时间通常为2-10秒，远快于STP的30-50秒。RSTP通过引入替代端口、备份端口角色，以及点对点链路的快速握手（Proposal/Agreement）机制实现快速收敛。MSTP（802.1s）支持多VLAN负载均衡。",
     "type": "single_choice",
     "chapter": "局域网与交换技术",
-    "knowledgePoint": "端口角色与BPDU",
+    "knowledgePoint": "收敛过程与协议版本",
     "difficulty": "medium",
     "tags": [
       "STP",
@@ -262,7 +262,7 @@
     "analysis": "MSTP（多生成树协议，802.1s）将多个VLAN映射到一个MST实例（MSTI），每个实例独立计算生成树，从而实现不同VLAN在不同链路上的负载均衡，提高链路利用率。RSTP只有一个生成树实例，所有VLAN共享同一棵树，冗余链路被阻塞无法利用。",
     "type": "single_choice",
     "chapter": "局域网与交换技术",
-    "knowledgePoint": "端口角色与BPDU",
+    "knowledgePoint": "收敛过程与协议版本",
     "difficulty": "medium",
     "tags": [
       "STP",
@@ -386,7 +386,7 @@
     "analysis": "VLAN间路由可以通过路由器（单臂路由或多接口）或三层交换机实现。三层交换机通过VLANIF接口（SVI）实现VLAN间路由，效率更高（硬件转发）。每个VLAN需要一个网关IP。VLAN间路由不扩大广播域。",
     "type": "single_choice",
     "chapter": "局域网与交换技术",
-    "knowledgePoint": "802.1Q与VLAN标签",
+    "knowledgePoint": "VLAN间路由与VLAN聚合",
     "difficulty": "medium",
     "tags": [
       "VLAN",
@@ -417,7 +417,7 @@
     "analysis": "三层交换机上为VLAN创建的三层逻辑接口称为VLANIF（华为）或SVI（交换虚拟接口，Cisco），为该VLAN配置IP地址作为网关。VLANIF接口在VLAN存在且至少有一个活动端口时处于Up状态。",
     "type": "single_choice",
     "chapter": "局域网与交换技术",
-    "knowledgePoint": "802.1Q与VLAN标签",
+    "knowledgePoint": "VLAN间路由与VLAN聚合",
     "difficulty": "medium",
     "tags": [
       "VLAN",
@@ -1037,7 +1037,7 @@
     "analysis": "STP（802.1D，1998）：原始生成树，收敛慢（30-50秒），单实例。RSTP（802.1w，2001）：快速生成树，收敛快（秒级），单实例。MSTP（802.1s，2002）：多生成树，将VLAN映射到不同实例，支持VLAN负载均衡。MSTP兼容RSTP和STP。",
     "type": "single_choice",
     "chapter": "局域网与交换技术",
-    "knowledgePoint": "端口角色与BPDU",
+    "knowledgePoint": "收敛过程与协议版本",
     "difficulty": "medium",
     "tags": [
       "STP",
@@ -1068,7 +1068,7 @@
     "analysis": "STP选举根网桥时，先比较网桥优先级（Bridge Priority，默认32768，越小越优先），若相同则比较MAC地址（越小越优先）。桥ID（Bridge ID）=优先级（2字节）+MAC地址（6字节），共8字节。",
     "type": "single_choice",
     "chapter": "局域网与交换技术",
-    "knowledgePoint": "端口角色与BPDU",
+    "knowledgePoint": "BID与根桥选举",
     "difficulty": "medium",
     "tags": [
       "STP",

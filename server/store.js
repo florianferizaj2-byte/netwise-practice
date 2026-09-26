@@ -320,6 +320,8 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
     }
   }
   const parse = (rows) => rows.map((r) => JSON.parse(r.data));
+  db.exec(`CREATE INDEX IF NOT EXISTS attempts_user_question_idx ON attempts(user_id, question_id);
+    CREATE INDEX IF NOT EXISTS community_messages_cursor_idx ON community_messages(created_at, id);`);
   const getQ = (id) => {
     const r = db.prepare("SELECT data FROM questions WHERE id=?").get(id);
     return r ? JSON.parse(r.data) : null;
@@ -493,7 +495,8 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       };
     },
     attemptedQuestionIds: (userId = "local") =>
-      new Set(allA(userId || "local").map((attempt) => attempt.questionId)),
+      new Set(db.prepare("SELECT DISTINCT question_id FROM attempts WHERE user_id=?")
+        .all(userId || "local").map((row) => row.question_id)),
     favoriteQuestionIds: (userId = "local") =>
       new Set(
         db
@@ -911,7 +914,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         .prepare(
           "SELECT id, user_id AS userId, shared FROM ai_groups WHERE certificate_id=?",
         )
-        .all(certificateId);
+        .all(certificateId ?? null);
       const groupMap = new Map(groups.map((group) => [group.id, group]));
       const questions = allQ().filter(
         (q) => q.source === "ai_generated" && groupMap.has(q.aiGroupId),
@@ -1318,7 +1321,8 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       return db.prepare("SELECT COUNT(*) AS count FROM community_messages").get().count;
     },
     communityMessages({ before = "", limit = 50 } = {}) {
-      const safeLimit = Math.max(1, Math.min(100, Number(limit) || 50));
+      const safeLimit = Math.max(1, Math.min(101, Number(limit) || 50));
+      const [beforeTime, beforeId] = before.split("|");
       const rows = before
         ? db
             .prepare(
@@ -1328,11 +1332,11 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
                       COALESCE(NULLIF(u.community_name, ''), u.username, '考匠用户') AS authorName
                  FROM community_messages m
                  LEFT JOIN users u ON u.id=m.user_id
-                WHERE m.created_at < ?
-                ORDER BY m.created_at DESC, m.rowid DESC
+                WHERE m.created_at < ? OR (m.created_at = ? AND m.id < ?)
+                ORDER BY m.created_at DESC, m.id DESC
                 LIMIT ?`,
             )
-            .all(before, safeLimit)
+            .all(beforeTime, beforeTime, beforeId || "", safeLimit)
         : db
             .prepare(
               `SELECT m.id, m.user_id AS userId, m.text, m.image_path AS imagePath,
@@ -1341,7 +1345,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
                       COALESCE(NULLIF(u.community_name, ''), u.username, '考匠用户') AS authorName
                  FROM community_messages m
                  LEFT JOIN users u ON u.id=m.user_id
-                ORDER BY m.created_at DESC, m.rowid DESC
+                ORDER BY m.created_at DESC, m.id DESC
                 LIMIT ?`,
             )
             .all(safeLimit);

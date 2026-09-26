@@ -138,7 +138,7 @@
     "analysis": "TCP面向连接、可靠传输，开销大、效率相对较低；UDP无连接、不可靠传输，头部仅8字节，开销小、效率高。TCP适合文件传输等可靠性要求高的场景，UDP适合实时音视频。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "端口号与多路复用",
+    "knowledgePoint": "UDP特性与应用场景",
     "difficulty": "medium",
     "tags": [
       "TCP",
@@ -541,7 +541,7 @@
     "analysis": "DNS常规查询使用UDP（53端口），因为查询报文短、要求低延迟。DNS区域传输使用TCP。HTTP（80）、FTP（21）、Telnet（23）均使用TCP。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "常用协议端口综合",
+    "knowledgePoint": "跨协议端口与传输协议辨析",
     "difficulty": "medium",
     "tags": [
       "TCP",
@@ -665,7 +665,7 @@
     "analysis": "TCP通过序号、确认号、超时重传、校验和、滑动窗口等机制提供可靠传输，但不能保证数据\"一定\"能送达（如网络完全中断、对方崩溃等极端情况）。TCP会尽力重传，超过最大重试次数后会通知应用层连接失败。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "TCP窗口、流量控制与拥塞控制",
+    "knowledgePoint": "TCP连接与可靠传输",
     "difficulty": "medium",
     "tags": [
       "TCP",
@@ -913,7 +913,7 @@
     "analysis": "UDP长度字段为16位，最大65535字节（含UDP首部8字节），即数据部分最大65527字节。但实际传输中受链路MTU限制（以太网1500字节），超过会被IP分片。UDP应用通常将数据控制在MTU以下以避免分片。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "IPv4首部、分片、组播与TTL",
+    "knowledgePoint": "UDP特性与应用场景",
     "difficulty": "medium",
     "tags": [
       "UDP",
@@ -927,7 +927,7 @@
       }
     ],
     "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
-    "knowledgeSection": "IPv4与子网"
+    "knowledgeSection": "传输层"
   },
   {
     "id": "collection-c04-q034",
@@ -975,7 +975,7 @@
     "analysis": "TCP首部至少20字节（含选项最多60字节），UDP首部仅8字节。TCP首部比UDP首部长得多，不是更短。TCP面向字节流、有拥塞控制、全双工；UDP面向报文（保留应用层消息边界）、无拥塞控制、也支持全双工。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "端口号与多路复用",
+    "knowledgePoint": "UDP特性与应用场景",
     "difficulty": "medium",
     "tags": [
       "TCP",

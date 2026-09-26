@@ -86,7 +86,7 @@
     "analysis": "chmod修改文件/目录权限（如chmod 755 file，chmod u+x file）。chown修改属主和属组，chgrp修改属组。attrib是Windows命令（修改文件属性）。",
     "type": "single_choice",
     "chapter": "服务器配置",
-    "knowledgePoint": "常用命令与系统管理",
+    "knowledgePoint": "权限、进程与文件系统",
     "difficulty": "medium",
     "tags": [
       "Linux 权限",
@@ -158,7 +158,7 @@
     "analysis": "ps（process status）显示当前进程快照（如ps aux、ps -ef）。top动态实时显示进程状态（类似任务管理器）。ls列目录内容，cd切换目录，pwd显示当前路径。",
     "type": "single_choice",
     "chapter": "服务器配置",
-    "knowledgePoint": "常用命令与系统管理",
+    "knowledgePoint": "权限、进程与文件系统",
     "difficulty": "medium",
     "tags": [
       "Linux 命令与管理",
@@ -194,7 +194,7 @@
     "analysis": "块设备（Block Device）：按块（通常512字节或4KB）随机读写，如硬盘、U盘、光盘，设备文件在/dev/sd*。字符设备（Character Device）：按字节流顺序读写，如串口、键盘、终端，设备文件在/dev/tty*。网络设备通过套接字访问，虚拟设备如/dev/null、/dev/zero。",
     "type": "single_choice",
     "chapter": "服务器配置",
-    "knowledgePoint": "常用命令与系统管理",
+    "knowledgePoint": "权限、进程与文件系统",
     "difficulty": "medium",
     "tags": [
       "Linux 命令与管理",
@@ -230,7 +230,7 @@
     "analysis": "安装Linux时必须创建根分区（/），根分区是整个文件系统的根，所有其他目录都在根分区下（除非单独挂载）。/root是root用户的家目录，/home是普通用户家目录，/bin是基本命令目录，这些都可以在根分区下，不需要单独分区。建议单独创建的分区：/boot、/home、swap（交换分区）。",
     "type": "single_choice",
     "chapter": "服务器配置",
-    "knowledgePoint": "常用命令与系统管理",
+    "knowledgePoint": "权限、进程与文件系统",
     "difficulty": "medium",
     "tags": [
       "Linux 命令与管理",
@@ -266,7 +266,7 @@
     "analysis": "/etc目录包含大量系统配置文件和管理工具，如passwd（用户信息）、shadow（密码哈希）、hosts（主机名解析）、resolv.conf（DNS配置）、network（网络配置）等。/bin保存基本命令，/dev包含设备文件，/root是超级用户家目录。",
     "type": "single_choice",
     "chapter": "服务器配置",
-    "knowledgePoint": "常用命令与系统管理",
+    "knowledgePoint": "权限、进程与文件系统",
     "difficulty": "medium",
     "tags": [
       "Linux 命令与管理",
@@ -302,7 +302,7 @@
     "analysis": "mstsc（Microsoft Terminal Services Client）打开远程桌面连接（RDP，端口3389）。telnet是远程命令行（端口23，明文），wscript是Windows脚本宿主，config不是远程桌面命令。",
     "type": "single_choice",
     "chapter": "服务器配置",
-    "knowledgePoint": "AD、账户与服务管理",
+    "knowledgePoint": "Windows服务与远程管理",
     "difficulty": "medium",
     "tags": [
       "Windows 服务器",
@@ -374,7 +374,7 @@
     "analysis": "su（switch user）切换用户身份（如su - root切换到root并加载环境变量）。sudo以超级用户权限执行单条命令（如sudo systemctl restart nginx），需要配置sudoers。cd切换目录，ls列目录，pwd显示当前路径。",
     "type": "single_choice",
     "chapter": "服务器配置",
-    "knowledgePoint": "常用命令与系统管理",
+    "knowledgePoint": "权限、进程与文件系统",
     "difficulty": "medium",
     "tags": [
       "Linux 命令与管理",
@@ -446,7 +446,7 @@
     "analysis": "Workstation服务是Windows核心网络服务，通过SMB（服务器消息块）协议创建并维护客户端与远程服务器之间的网络连接，支持文件共享、打印机共享和网络资源访问。该服务对应Windows的\"客户端\"功能，停止后无法访问网络共享。",
     "type": "single_choice",
     "chapter": "服务器配置",
-    "knowledgePoint": "AD、账户与服务管理",
+    "knowledgePoint": "Windows服务与远程管理",
     "difficulty": "medium",
     "tags": [
       "Windows 服务器",

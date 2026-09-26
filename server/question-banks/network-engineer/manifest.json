@@ -68,15 +68,22 @@
                 "name": "进制互转",
                 "order": 1,
                 "code": "01.01.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
+                "scope": "进制转换、位权和BCD编码。",
                 "questionCount": 4
               },
               {
                 "name": "原码、反码、补码与移码",
                 "order": 2,
                 "code": "01.01.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
+                "scope": "定点数原码、反码、补码、移码及溢出判断；浮点表示单列。",
                 "questionCount": 6
+              },
+              {
+                "name": "浮点数表示",
+                "order": 3,
+                "code": "01.01.03",
+                "scope": "浮点数的阶码、尾数、规格化、范围与精度。",
+                "questionCount": 1
               }
             ]
           },
@@ -88,28 +95,28 @@
                 "name": "奇偶校验",
                 "order": 1,
                 "code": "01.02.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
+                "scope": "奇偶校验位计算与检错能力。",
                 "questionCount": 4
               },
               {
                 "name": "海明校验",
                 "order": 2,
                 "code": "01.02.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 4
+                "scope": "海明码冗余位计算、纠错与SECDED能力。",
+                "questionCount": 6
               },
               {
                 "name": "CRC循环冗余校验",
                 "order": 3,
                 "code": "01.02.03",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 4
+                "scope": "CRC生成多项式、余数计算、检错能力和FCS校验。",
+                "questionCount": 6
               },
               {
                 "name": "误码率与帧错误概率",
                 "order": 4,
                 "code": "01.02.04",
-                "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
+                "scope": "位错误率与帧错误概率的换算。",
                 "questionCount": 1
               }
             ]
@@ -122,29 +129,36 @@
                 "name": "Cache与命中率",
                 "order": 1,
                 "code": "01.03.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
+                "scope": "Cache命中率、访存时间、局部性与写策略。",
                 "questionCount": 3
               },
               {
                 "name": "内存、磁盘与RAID",
                 "order": 2,
                 "code": "01.03.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 5
+                "scope": "存储容量、编址、存储芯片和RAID组织及容错。",
+                "questionCount": 15
               },
               {
                 "name": "存储介质性能比较",
                 "order": 3,
                 "code": "01.03.03",
-                "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
+                "scope": "寄存器、缓存、内存及磁盘等存储介质的性能比较；NAS/SAN组网单列。",
                 "questionCount": 1
               },
               {
-                "name": "串并联系统可靠性",
+                "name": "系统可靠性与可用性",
                 "order": 4,
                 "code": "01.03.04",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 2
+                "scope": "串并联系统可靠度、冗余可靠性及可用率计算。",
+                "questionCount": 4
+              },
+              {
+                "name": "NAS、SAN与存储网络",
+                "order": 5,
+                "code": "01.03.05",
+                "scope": "NAS、SAN、FC和IP存储的架构、访问方式与选型。",
+                "questionCount": 3
               }
             ]
           },
@@ -156,15 +170,29 @@
                 "name": "CPU流水线",
                 "order": 1,
                 "code": "01.04.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
+                "scope": "流水线吞吐、执行时间、相关冲突和旁路技术。",
+                "questionCount": 6
+              },
+              {
+                "name": "总线结构与带宽",
+                "order": 2,
+                "code": "01.04.02",
+                "scope": "总线类型、带宽、地址宽度、同步方式和仲裁。",
                 "questionCount": 5
               },
               {
-                "name": "总线分类",
-                "order": 2,
-                "code": "01.04.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 5
+                "name": "指令系统、寻址与中断",
+                "order": 3,
+                "code": "01.04.03",
+                "scope": "RISC/CISC、指令寻址和中断机制；流水线时序计算单列。",
+                "questionCount": 3
+              },
+              {
+                "name": "计算机性能指标",
+                "order": 4,
+                "code": "01.04.04",
+                "scope": "FLOPS等计算机性能指标及性能衡量。",
+                "questionCount": 1
               }
             ]
           },
@@ -176,15 +204,35 @@
                 "name": "进程、线程与死锁",
                 "order": 1,
                 "code": "01.05.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 5
+                "scope": "进程线程、调度、并发、上下文切换和死锁。",
+                "questionCount": 6
               },
               {
                 "name": "分页与分段虚拟内存",
                 "order": 2,
                 "code": "01.05.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 5
+                "scope": "分页分段、地址转换、页面置换与虚拟存储。",
+                "questionCount": 7
+              }
+            ]
+          },
+          {
+            "name": "软件工程基础",
+            "order": 6,
+            "knowledgePoints": [
+              {
+                "name": "开发模型与需求分析",
+                "order": 1,
+                "code": "01.06.01",
+                "scope": "软件开发模型、原型法和需求获取分析。",
+                "questionCount": 2
+              },
+              {
+                "name": "软件测试方法",
+                "order": 2,
+                "code": "01.06.02",
+                "scope": "边界值、等价类等软件测试设计方法。",
+                "questionCount": 1
               }
             ]
           }
@@ -202,22 +250,30 @@
                 "name": "OSI七层模型",
                 "order": 1,
                 "code": "02.01.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 2
+                "scope": "OSI七层顺序与职责、各层PDU名称、协议及设备所在层；明确考查TCP/IP模型的题归入模型映射。",
+                "questionCount": 31,
+                "aliases": [
+                  "OSI模型",
+                  "OSI参考模型"
+                ]
               },
               {
                 "name": "TCP/IP四层模型与映射",
                 "order": 2,
                 "code": "02.01.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 1
+                "scope": "TCP/IP模型的层次、各层职责与协议归属，以及与OSI模型的映射和比较；TCP报文机制归入传输层。",
+                "questionCount": 13,
+                "aliases": [
+                  "TCP/IP模型",
+                  "TCP/IP四层模型"
+                ]
               },
               {
-                "name": "协议、服务、PDU与设备所在层",
+                "name": "分层原则、协议与数据封装",
                 "order": 3,
                 "code": "02.01.03",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 32
+                "scope": "分层和标准化原则、协议与服务及接口关系、封装解封装流程和逐跳重封装；不重复收录OSI层次职责题。",
+                "questionCount": 4
               }
             ]
           },
@@ -229,36 +285,43 @@
                 "name": "编码与调制",
                 "order": 1,
                 "code": "02.02.01",
-                "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
-                "questionCount": 7
+                "scope": "线路编码、ASK/FSK/PSK/QAM的调制机制、波形与编码效率；信道容量计算单列。",
+                "questionCount": 16
               },
               {
-                "name": "同步与传输方式",
+                "name": "同步、双工与多路复用",
                 "order": 2,
                 "code": "02.02.02",
-                "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
-                "questionCount": 4
+                "scope": "同步异步、单工半双工全双工、FDM/TDM/WDM等多路复用及复用开销。",
+                "questionCount": 7
               },
               {
                 "name": "信道容量与数据速率",
                 "order": 3,
                 "code": "02.02.03",
-                "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
-                "questionCount": 23
+                "scope": "码元与比特速率换算、奈奎斯特和香农容量、有效传输速率计算；ARQ利用率单列。",
+                "questionCount": 17
               },
               {
                 "name": "信号质量与眼图",
                 "order": 4,
                 "code": "02.02.04",
-                "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
-                "questionCount": 1
+                "scope": "噪声、串扰、传输损伤及眼图判读。",
+                "questionCount": 2
               },
               {
                 "name": "采样定理与PCM",
                 "order": 5,
                 "code": "02.02.05",
-                "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
+                "scope": "采样频率、混叠、量化和PCM流程。",
                 "questionCount": 5
+              },
+              {
+                "name": "数据链路层流量控制与ARQ",
+                "order": 6,
+                "code": "02.02.06",
+                "scope": "链路层停等、GBN与选择重传ARQ、确认窗口和利用率；TCP端到端窗口控制单列。",
+                "questionCount": 2
               }
             ]
           },
@@ -270,36 +333,36 @@
                 "name": "IPv4地址类别与特殊地址",
                 "order": 1,
                 "code": "02.03.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 15
+                "scope": "IPv4地址分类、公私地址、回环、APIPA及特殊地址语义；给定掩码计算地址范围单列。",
+                "questionCount": 16
               },
               {
                 "name": "网络地址、广播地址与可用主机",
                 "order": 2,
                 "code": "02.03.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 32
+                "scope": "给定IPv4地址和掩码判断网络地址、广播地址、可用主机数及地址范围。",
+                "questionCount": 40
               },
               {
-                "name": "VLSM子网划分",
+                "name": "子网划分与VLSM",
                 "order": 3,
                 "code": "02.03.03",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 20
+                "scope": "按主机或子网需求划分地址块、选择前缀和进行定长或VLSM规划。",
+                "questionCount": 19
               },
               {
                 "name": "CIDR与路由聚合",
                 "order": 4,
                 "code": "02.03.04",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 7
+                "scope": "CIDR表示、超网和多个网络前缀的路由汇总；路由表选路不在本节点。",
+                "questionCount": 12
               },
               {
                 "name": "IPv4首部、分片、组播与TTL",
                 "order": 5,
                 "code": "02.03.05",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 11
+                "scope": "IPv4报文首部、MTU与分片、组播和TTL处理。",
+                "questionCount": 12
               }
             ]
           },
@@ -311,15 +374,22 @@
                 "name": "ARP与RARP",
                 "order": 1,
                 "code": "02.04.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 9
+                "scope": "ARP/RARP地址解析、缓存、无偿ARP和跨子网下一跳解析；ARP攻击单列。",
+                "questionCount": 10
               },
               {
                 "name": "ICMP与控制报文",
                 "order": 2,
                 "code": "02.04.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
+                "scope": "ICMP报文功能、类型代码、回显、超时与差错反馈；具体诊断命令操作归入网络管理。",
                 "questionCount": 15
+              },
+              {
+                "name": "网络层服务与分组交换",
+                "order": 3,
+                "code": "02.04.03",
+                "scope": "网络层数据报与虚电路服务、分组交换原理。",
+                "questionCount": 1
               }
             ]
           },
@@ -331,29 +401,29 @@
                 "name": "TCP连接与可靠传输",
                 "order": 1,
                 "code": "02.05.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 40
+                "scope": "TCP首部、握手挥手、状态、序号确认、重传与可靠传输；模型层次不在本节点。",
+                "questionCount": 36
               },
               {
                 "name": "TCP窗口、流量控制与拥塞控制",
                 "order": 2,
                 "code": "02.05.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 14
+                "scope": "TCP接收窗口、拥塞窗口、慢启动、拥塞避免、ECN和流量控制。",
+                "questionCount": 15
               },
               {
                 "name": "UDP特性与应用场景",
                 "order": 3,
                 "code": "02.05.03",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 8
+                "scope": "UDP首部、无连接特性、应用场景及TCP/UDP特性对比。",
+                "questionCount": 12
               },
               {
                 "name": "端口号与多路复用",
                 "order": 4,
                 "code": "02.05.04",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 9
+                "scope": "端口和套接字如何标识进程、连接及实现多路复用；具体协议的端口随该协议归类。",
+                "questionCount": 6
               }
             ]
           },
@@ -365,43 +435,43 @@
                 "name": "DNS",
                 "order": 1,
                 "code": "02.06.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 10
+                "scope": "DNS解析流程、资源记录、缓存及协议行为；Windows/BIND部署配置归入服务器配置。",
+                "questionCount": 11
               },
               {
                 "name": "DHCP",
                 "order": 2,
                 "code": "02.06.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 4
+                "scope": "DHCP消息、租约、地址池、Relay及网络设备上的DHCP配置；Windows DHCP角色配置单列。",
+                "questionCount": 13
               },
               {
                 "name": "HTTP与HTTPS",
                 "order": 3,
                 "code": "02.06.03",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 9
+                "scope": "HTTP/HTTPS请求响应、方法、状态码、端口、缓存、Cookie/Session与Web接口。",
+                "questionCount": 14
               },
               {
-                "name": "FTP与TFTP",
+                "name": "文件传输协议FTP、TFTP与SFTP",
                 "order": 4,
                 "code": "02.06.04",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 5
+                "scope": "FTP/TFTP/SFTP工作方式、传输连接、端口与协议选择；vsftpd配置文件单列。",
+                "questionCount": 7
               },
               {
                 "name": "电子邮件、LDAP与远程登录",
                 "order": 5,
                 "code": "02.06.05",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 6
+                "scope": "SMTP/POP3/IMAP、LDAP、SSH/Telnet/RDP的用途、会话与端口。",
+                "questionCount": 12
               },
               {
-                "name": "常用协议端口综合",
+                "name": "跨协议端口与传输协议辨析",
                 "order": 6,
                 "code": "02.06.06",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 15
+                "scope": "同时比较多个应用协议的端口或TCP/UDP承载关系；单一协议端口归入对应协议。",
+                "questionCount": 3
               }
             ]
           },
@@ -413,22 +483,36 @@
                 "name": "地址表示与地址类型",
                 "order": 1,
                 "code": "02.07.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 18
+                "scope": "IPv6地址表示、简写、前缀、子网与地址类型；首部和自动配置单列。",
+                "questionCount": 12
               },
               {
                 "name": "邻居发现协议NDP",
                 "order": 2,
                 "code": "02.07.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 2
+                "scope": "NDP中的邻居和路由器发现、地址解析及NS/NA等报文。",
+                "questionCount": 3
               },
               {
                 "name": "IPv6过渡技术",
                 "order": 3,
                 "code": "02.07.03",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 2
+                "scope": "IPv4/IPv6双栈、隧道和协议转换；普通IPv6首部或分片不在本节点。",
+                "questionCount": 5
+              },
+              {
+                "name": "IPv6报文与协议特性",
+                "order": 4,
+                "code": "02.07.04",
+                "scope": "IPv6基本及扩展首部、ICMPv6、源端分片和路径MTU发现。",
+                "questionCount": 10
+              },
+              {
+                "name": "IPv6地址自动配置与DHCPv6",
+                "order": 5,
+                "code": "02.07.05",
+                "scope": "SLAAC、DHCPv6和前缀委派等IPv6地址自动配置机制。",
+                "questionCount": 3
               }
             ]
           }
@@ -446,22 +530,22 @@
                 "name": "CSMA/CD与以太网帧",
                 "order": 1,
                 "code": "03.01.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 6
+                "scope": "以太网MAC和帧格式、FCS字段、CSMA/CD、退避及双工；CRC多项式计算单列。",
+                "questionCount": 17
               },
               {
                 "name": "冲突域、广播域与网络设备",
                 "order": 2,
                 "code": "03.01.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 15
+                "scope": "集线器、网桥、交换机和路由器对冲突域广播域的划分及设备能力比较。",
+                "questionCount": 8
               },
               {
                 "name": "MAC地址学习与交换转发",
                 "order": 3,
                 "code": "03.01.03",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 7
+                "scope": "MAC地址表学习老化、泛洪、过滤、转发方式和链路帧地址变化。",
+                "questionCount": 11
               }
             ]
           },
@@ -473,15 +557,22 @@
                 "name": "802.1Q与VLAN标签",
                 "order": 1,
                 "code": "03.02.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 9
+                "scope": "VLAN隔离原理、创建及802.1Q标签格式与字段。",
+                "questionCount": 8
               },
               {
                 "name": "Access、Trunk与Hybrid端口",
                 "order": 2,
                 "code": "03.02.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 9
+                "scope": "Access/Trunk/Hybrid的PVID、允许列表和标签收发行为。",
+                "questionCount": 12
+              },
+              {
+                "name": "VLAN间路由与VLAN聚合",
+                "order": 3,
+                "code": "03.02.03",
+                "scope": "VLANIF/SVI、VLAN间路由、Super VLAN等VLAN聚合机制。",
+                "questionCount": 4
               }
             ]
           },
@@ -493,22 +584,22 @@
                 "name": "BID与根桥选举",
                 "order": 1,
                 "code": "03.03.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 2
+                "scope": "BID、网桥优先级与根桥选举。",
+                "questionCount": 3
               },
               {
                 "name": "端口角色与BPDU",
                 "order": 2,
                 "code": "03.03.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 16
+                "scope": "STP端口角色、路径选举、BPDU和生成树保护机制；根桥选举单列。",
+                "questionCount": 15
               },
               {
                 "name": "收敛过程与协议版本",
                 "order": 3,
                 "code": "03.03.03",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 4
+                "scope": "STP/RSTP/MSTP差异、收敛和状态变化、MST域与VLAN实例映射。",
+                "questionCount": 10
               }
             ]
           },
@@ -520,28 +611,28 @@
                 "name": "VTP与GVRP",
                 "order": 1,
                 "code": "03.04.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
+                "scope": "VTP/GVRP的VLAN信息传播和注册。",
                 "questionCount": 2
               },
               {
                 "name": "端口安全与DHCP Snooping",
                 "order": 2,
                 "code": "03.04.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 13
+                "scope": "端口安全、802.1X、DHCP Snooping、DAI和二层接入防护配置。",
+                "questionCount": 15
               },
               {
                 "name": "链路聚合、堆叠、QinQ与PoE",
                 "order": 3,
                 "code": "03.04.03",
-                "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
-                "questionCount": 7
+                "scope": "Eth-Trunk/LACP、交换机堆叠、QinQ和PoE能力；VXLAN单列。",
+                "questionCount": 8
               },
               {
                 "name": "交换机过滤与MAC黑洞",
                 "order": 4,
                 "code": "03.04.04",
-                "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
+                "scope": "交换机MAC黑洞和静态过滤表项。",
                 "questionCount": 1
               }
             ]
@@ -554,15 +645,15 @@
                 "name": "802.11与介质访问",
                 "order": 1,
                 "code": "03.05.01",
-                "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
-                "questionCount": 8
+                "scope": "802.11帧、CSMA/CA、RTS/CTS、频段信道与介质竞争。",
+                "questionCount": 12
               },
               {
                 "name": "AP类型与WLAN架构",
                 "order": 2,
                 "code": "03.05.02",
-                "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
-                "questionCount": 6
+                "scope": "AP/AC、Fat/Fit AP、SSID/BSSID、WLAN组网、漫游和覆盖规划。",
+                "questionCount": 10
               }
             ]
           }
@@ -580,22 +671,36 @@
                 "name": "路由表、静态路由与默认路由",
                 "order": 1,
                 "code": "04.01.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 13
+                "scope": "路由表、目的地址转发、最长前缀匹配、静态默认路由和等价路径。",
+                "questionCount": 15
               },
               {
                 "name": "路由优先级、管理距离与度量值",
                 "order": 2,
                 "code": "04.01.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
+                "scope": "路由来源优先级、管理距离、度量和浮动静态路由；VRRP主备优先级单列。",
                 "questionCount": 5
               },
               {
                 "name": "路由协议类型与算法",
                 "order": 3,
                 "code": "04.01.03",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 8
+                "scope": "距离矢量、链路状态及路径矢量协议分类和通用算法比较。",
+                "questionCount": 6
+              },
+              {
+                "name": "VRRP与网关冗余",
+                "order": 4,
+                "code": "04.01.04",
+                "scope": "VRRP主备选举、虚拟地址、优先级抢占和上行链路跟踪。",
+                "questionCount": 3
+              },
+              {
+                "name": "策略路由、路由策略与重分发",
+                "order": 5,
+                "code": "04.01.05",
+                "scope": "策略路由、前缀列表、路由策略及跨协议路由重分发。",
+                "questionCount": 6
               }
             ]
           },
@@ -604,17 +709,17 @@
             "order": 2,
             "knowledgePoints": [
               {
-                "name": "距离矢量与最大跳数",
+                "name": "RIP工作原理、版本与报文",
                 "order": 1,
                 "code": "04.02.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 12
+                "scope": "RIP度量跳数、版本、更新报文、计时器、认证和基本配置。",
+                "questionCount": 20
               },
               {
                 "name": "水平分割、毒性逆转与触发更新",
                 "order": 2,
                 "code": "04.02.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
+                "scope": "RIP水平分割、毒性逆转、触发更新和更新抑制等防环或更新控制。",
                 "questionCount": 6
               }
             ]
@@ -627,22 +732,29 @@
                 "name": "区域、LSA与邻居状态",
                 "order": 1,
                 "code": "04.03.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 23
+                "scope": "OSPF区域、LSA类型及泛洪、邻居状态和协议配置；成本计算单列。",
+                "questionCount": 25
               },
               {
                 "name": "DR/BDR选举",
                 "order": 2,
                 "code": "04.03.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 8
+                "scope": "OSPF DR/BDR选举规则、资格、组播和DROther邻接关系。",
+                "questionCount": 9
               },
               {
                 "name": "Router ID与虚链路",
                 "order": 3,
                 "code": "04.03.03",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
+                "scope": "OSPF Router ID选取与虚链路配置。",
                 "questionCount": 2
+              },
+              {
+                "name": "OSPF度量与路由计算",
+                "order": 4,
+                "code": "04.03.04",
+                "scope": "OSPF Cost、SPF计算、外部路由度量及计算统计。",
+                "questionCount": 5
               }
             ]
           },
@@ -654,15 +766,15 @@
                 "name": "AS与路径矢量",
                 "order": 1,
                 "code": "04.04.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 8
+                "scope": "BGP自治系统、对等体、会话、消息、承载端口及路由反射。",
+                "questionCount": 15
               },
               {
                 "name": "BGP路由属性与选路",
                 "order": 2,
                 "code": "04.04.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 12
+                "scope": "BGP AS_PATH、LOCAL_PREF、MED、NEXT_HOP等路径属性与选路策略。",
+                "questionCount": 17
               }
             ]
           },
@@ -674,15 +786,22 @@
                 "name": "PPP、HDLC与帧中继",
                 "order": 1,
                 "code": "04.05.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 10
+                "scope": "PPP协商认证、HDLC封装与帧中继虚电路。",
+                "questionCount": 14
               },
               {
                 "name": "E1/T1与专线基础",
                 "order": 2,
                 "code": "04.05.02",
-                "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
-                "questionCount": 0
+                "scope": "E1/T1/E2等数字载波、通道和专线速率。",
+                "questionCount": 4
+              },
+              {
+                "name": "MPLS标签转发",
+                "order": 3,
+                "code": "04.05.03",
+                "scope": "MPLS标签、LER/LSR角色及PUSH/SWAP/POP转发操作。",
+                "questionCount": 1
               }
             ]
           }
@@ -700,22 +819,29 @@
                 "name": "对称加密算法",
                 "order": 1,
                 "code": "05.01.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 6
+                "scope": "对称加密算法、工作模式、IV和密钥分发；比较题按最终要求识别的算法归类。",
+                "questionCount": 9
               },
               {
-                "name": "非对称加密与Hash摘要",
+                "name": "非对称加密算法",
                 "order": 2,
                 "code": "05.01.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 8
+                "scope": "公私钥加密、密钥交换与非对称算法；Hash和HMAC单列。",
+                "questionCount": 4
               },
               {
-                "name": "密码学原则与传输加密",
+                "name": "密码学原则与加密方式",
                 "order": 3,
                 "code": "05.01.03",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
+                "scope": "密码学基本原则、链路或端到端加密方式及算法体系概述。",
                 "questionCount": 3
+              },
+              {
+                "name": "Hash、HMAC与口令存储",
+                "order": 4,
+                "code": "05.01.04",
+                "scope": "Hash摘要、HMAC、口令哈希、盐值及编码与加密的区别。",
+                "questionCount": 6
               }
             ]
           },
@@ -727,15 +853,15 @@
                 "name": "CA、数字证书与数字签名",
                 "order": 1,
                 "code": "05.02.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 8
+                "scope": "CA职责、数字证书结构、数字签名及公钥身份绑定。",
+                "questionCount": 10
               },
               {
                 "name": "证书验证与CRL吊销",
                 "order": 2,
                 "code": "05.02.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 8
+                "scope": "证书链、域名和用途验证、CRL/OCSP吊销与密钥泄漏处置。",
+                "questionCount": 10
               }
             ]
           },
@@ -747,15 +873,15 @@
                 "name": "ACL类型、规则顺序与隐式拒绝",
                 "order": 1,
                 "code": "05.03.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 6
+                "scope": "ACL类型、匹配顺序、反掩码、应用方向与默认拒绝。",
+                "questionCount": 7
               },
               {
                 "name": "静态NAT、动态NAT与PAT",
                 "order": 2,
                 "code": "05.03.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 5
+                "scope": "静态动态NAT、PAT、端口映射及地址转换容量。",
+                "questionCount": 6
               }
             ]
           },
@@ -767,22 +893,29 @@
                 "name": "防火墙与DMZ",
                 "order": 1,
                 "code": "05.04.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 13
+                "scope": "防火墙类型、状态表、安全域、DMZ、策略及综合边界防护方案。",
+                "questionCount": 23
               },
               {
                 "name": "IDS与IPS",
                 "order": 2,
                 "code": "05.04.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 5
+                "scope": "IDS/IPS检测阻断、部署方式、误报和特征检测。",
+                "questionCount": 6
               },
               {
                 "name": "堡垒机与零信任架构",
                 "order": 3,
                 "code": "05.04.03",
-                "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
-                "questionCount": 7
+                "scope": "堡垒机审计、零信任与微隔离架构；感染终端的应急处置单列。",
+                "questionCount": 5
+              },
+              {
+                "name": "身份认证与安全运维",
+                "order": 4,
+                "code": "05.04.04",
+                "scope": "身份认证因素、账号最小权限、默认口令和安全运维基线。",
+                "questionCount": 2
               }
             ]
           },
@@ -794,22 +927,36 @@
                 "name": "ARP欺骗",
                 "order": 1,
                 "code": "05.05.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
+                "scope": "ARP欺骗的攻击原理与防范；交换机DAI配置归入交换安全。",
                 "questionCount": 1
               },
               {
-                "name": "DDoS",
+                "name": "DoS与DDoS",
                 "order": 2,
                 "code": "05.05.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
+                "scope": "DoS/DDoS、SYN Flood、反射放大和地址池耗尽等可用性攻击。",
+                "questionCount": 9
+              },
+              {
+                "name": "Web攻击与漏洞防护",
+                "order": 3,
+                "code": "05.05.03",
+                "scope": "SQL注入、XSS、撞库、Web漏洞、WAF及漏洞修补。",
+                "questionCount": 6
+              },
+              {
+                "name": "恶意软件、社会工程与应急响应",
+                "order": 4,
+                "code": "05.05.04",
+                "scope": "病毒木马、勒索软件、社会工程学和安全事件隔离处置。",
                 "questionCount": 5
               },
               {
-                "name": "Web攻击与常见漏洞",
-                "order": 3,
-                "code": "05.05.03",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 10
+                "name": "DNS欺骗与DNSSEC",
+                "order": 5,
+                "code": "05.05.05",
+                "scope": "DNS缓存投毒、域名欺骗和DNSSEC来源及完整性保护。",
+                "questionCount": 3
               }
             ]
           },
@@ -821,15 +968,22 @@
                 "name": "IPsec VPN与SSL VPN",
                 "order": 1,
                 "code": "05.06.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 15
+                "scope": "IPsec/SSL VPN的模式、AH/ESP、IKE、SA和接入配置；证书验证和GRE单列。",
+                "questionCount": 24
               },
               {
                 "name": "TLS与安全传输协议",
                 "order": 2,
                 "code": "05.06.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 3
+                "scope": "TLS握手、安全传输及邮件等协议的加密封装；证书身份检查归入PKI。",
+                "questionCount": 2
+              },
+              {
+                "name": "GRE隧道",
+                "order": 3,
+                "code": "05.06.03",
+                "scope": "GRE隧道封装、能力与局限。",
+                "questionCount": 1
               }
             ]
           },
@@ -841,8 +995,8 @@
                 "name": "WEP、WPA与无线加密",
                 "order": 1,
                 "code": "05.07.01",
-                "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
-                "questionCount": 6
+                "scope": "WEP/WPA/WPA2/WPA3认证与无线加密。",
+                "questionCount": 7
               }
             ]
           }
@@ -860,29 +1014,29 @@
                 "name": "AD、账户与服务管理",
                 "order": 1,
                 "code": "06.01.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 6
+                "scope": "Active Directory、域控制器、账户、OU和组策略。",
+                "questionCount": 4
               },
               {
                 "name": "DNS与DHCP服务器",
                 "order": 2,
                 "code": "06.01.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
+                "scope": "Windows DNS/DHCP角色、作用域、保留地址和域内服务配置；协议基础单列。",
                 "questionCount": 3
               },
               {
                 "name": "IIS与NTFS权限",
                 "order": 3,
                 "code": "06.01.03",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 4
+                "scope": "IIS网站与应用池、NTFS和共享访问权限。",
+                "questionCount": 5
               },
               {
                 "name": "Windows服务与远程管理",
                 "order": 4,
                 "code": "06.01.04",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 0
+                "scope": "Windows系统服务、远程桌面及服务管理操作。",
+                "questionCount": 3
               }
             ]
           },
@@ -894,22 +1048,22 @@
                 "name": "常用命令与系统管理",
                 "order": 1,
                 "code": "06.02.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 21
+                "scope": "Linux文件查看检索、归档、系统信息及服务状态等日常管理命令。",
+                "questionCount": 15
               },
               {
                 "name": "权限、进程与文件系统",
                 "order": 2,
                 "code": "06.02.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 4
+                "scope": "Linux用户权限、sudo、进程、分区、设备文件与文件系统结构。",
+                "questionCount": 11
               },
               {
                 "name": "网络接口与服务配置",
                 "order": 3,
                 "code": "06.02.03",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 5
+                "scope": "Linux网络接口及BIND、Apache、vsftpd、Samba、SSH等服务配置。",
+                "questionCount": 10
               }
             ]
           }
@@ -927,8 +1081,8 @@
                 "name": "故障、配置、性能、安全与计费管理",
                 "order": 1,
                 "code": "07.01.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 13
+                "scope": "FCAPS五大管理功能、资产、变更、故障和性能管理目标；协议报文细节单列。",
+                "questionCount": 11
               }
             ]
           },
@@ -940,15 +1094,22 @@
                 "name": "SNMP版本、MIB与报文",
                 "order": 1,
                 "code": "07.02.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 29
+                "scope": "SNMP架构、版本、MIB/OID、操作、端口及RMON和CMIP比较。",
+                "questionCount": 35
               },
               {
                 "name": "Syslog、NetFlow与NTP",
                 "order": 2,
                 "code": "07.02.02",
-                "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
+                "scope": "Syslog日志、NetFlow流量监测及NTP时间同步。",
                 "questionCount": 9
+              },
+              {
+                "name": "NETCONF与配置自动化",
+                "order": 3,
+                "code": "07.02.03",
+                "scope": "NETCONF操作、配置数据模型与自动化管理接口。",
+                "questionCount": 1
               }
             ]
           },
@@ -960,22 +1121,22 @@
                 "name": "ping与tracert连通性检查",
                 "order": 1,
                 "code": "07.03.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 3
+                "scope": "ping/tracert/traceroute/mtr的命令参数和连通性排查；ICMP报文机制单列。",
+                "questionCount": 6
               },
               {
                 "name": "ipconfig、netstat与路由工具",
                 "order": 2,
                 "code": "07.03.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 15
+                "scope": "ipconfig/netstat/ARP/路由表/DNS查询及抓包工具的客户端诊断操作。",
+                "questionCount": 18
               },
               {
-                "name": "设备Console与维护接入",
+                "name": "设备接入与接口排障",
                 "order": 3,
                 "code": "07.03.03",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 6
+                "scope": "Console、带外和远程设备接入、接口状态及光电链路排障。",
+                "questionCount": 7
               }
             ]
           }
@@ -993,14 +1154,14 @@
                 "name": "六大子系统",
                 "order": 1,
                 "code": "08.01.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
+                "scope": "综合布线工作区、水平、干线、设备间、管理和建筑群等子系统功能。",
                 "questionCount": 7
               },
               {
                 "name": "安装规范与点位",
                 "order": 2,
                 "code": "08.01.02",
-                "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
+                "scope": "综合布线施工、标识、点位与容量预留。",
                 "questionCount": 5
               }
             ]
@@ -1013,29 +1174,29 @@
                 "name": "双绞线类别与屏蔽",
                 "order": 1,
                 "code": "08.02.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 5
+                "scope": "双绞线类别、屏蔽、线序、NEXT及铜缆测试。",
+                "questionCount": 8
               },
               {
                 "name": "单模与多模光纤",
                 "order": 2,
                 "code": "08.02.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
+                "scope": "单模多模光纤及模间色散、介质类型比较。",
                 "questionCount": 2
               },
               {
                 "name": "光功率与光链路基础",
                 "order": 3,
                 "code": "08.02.03",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 3
+                "scope": "光功率、波长、链路预算、连接损耗和光缆测试。",
+                "questionCount": 6
               },
               {
                 "name": "传输介质特性与选型",
                 "order": 4,
                 "code": "08.02.04",
-                "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
-                "questionCount": 5
+                "scope": "铜缆、光纤等传输介质的适用场景和选型比较。",
+                "questionCount": 4
               }
             ]
           },
@@ -1044,18 +1205,25 @@
             "order": 3,
             "knowledgePoints": [
               {
-                "name": "网络拓扑",
+                "name": "网络需求分析与拓扑设计",
                 "order": 1,
                 "code": "08.03.01",
-                "scope": "题库补充节点：题库已有相关题目，用户所给大纲未单列，建议审阅时决定是否保留。",
-                "questionCount": 1
+                "scope": "网络需求获取、逻辑设计、拓扑和园区层次架构。",
+                "questionCount": 5
               },
               {
                 "name": "带宽、时延、丢包率与吞吐量",
                 "order": 2,
                 "code": "08.03.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 10
+                "scope": "带宽、吞吐、有效吞吐、时延、抖动及丢包等性能指标；QoS机制单列。",
+                "questionCount": 12
+              },
+              {
+                "name": "QoS服务模型与流量管理",
+                "order": 3,
+                "code": "08.03.03",
+                "scope": "Best-Effort/IntServ/DiffServ、RSVP、资源预留、队列与流量整形。",
+                "questionCount": 6
               }
             ]
           }
@@ -1073,14 +1241,14 @@
                 "name": "关键路径CPM与甘特图",
                 "order": 1,
                 "code": "09.01.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 9
+                "scope": "关键路径、甘特图、进度依赖、资源平衡与工期压缩。",
+                "questionCount": 12
               },
               {
                 "name": "PERT三点估算",
                 "order": 2,
                 "code": "09.01.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
+                "scope": "PERT乐观、悲观与最可能工期的三点估算。",
                 "questionCount": 1
               }
             ]
@@ -1093,22 +1261,22 @@
                 "name": "风险管理",
                 "order": 1,
                 "code": "09.02.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
+                "scope": "项目风险识别、评估和应对计划。",
                 "questionCount": 4
               },
               {
                 "name": "质量管理",
                 "order": 2,
                 "code": "09.02.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
+                "scope": "项目质量保证、质量控制与验收追踪；具体软件测试方法单列。",
                 "questionCount": 2
               },
               {
                 "name": "配置管理",
                 "order": 3,
                 "code": "09.02.03",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 4
+                "scope": "项目基线、版本、变更审批与配置记录；需求分析方法单列。",
+                "questionCount": 5
               }
             ]
           },
@@ -1120,22 +1288,22 @@
                 "name": "网络安全法与数据安全法",
                 "order": 1,
                 "code": "09.03.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 5
+                "scope": "网络安全、数据安全和个人信息保护的法律要求。",
+                "questionCount": 6
               },
               {
                 "name": "著作权与专利",
                 "order": 2,
                 "code": "09.03.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 3
+                "scope": "软件著作权、专利及许可相关知识。",
+                "questionCount": 5
               },
               {
                 "name": "等保2.0",
                 "order": 3,
                 "code": "09.03.03",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 4
+                "scope": "网络安全等级保护的定级、技术及管理要求。",
+                "questionCount": 6
               }
             ]
           }
@@ -1153,22 +1321,29 @@
                 "name": "SDN软件定义网络",
                 "order": 1,
                 "code": "10.01.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 7
+                "scope": "SDN控制与转发分离、接口、OpenFlow和控制器。",
+                "questionCount": 10
               },
               {
                 "name": "NFV网络功能虚拟化",
                 "order": 2,
                 "code": "10.01.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
+                "scope": "NFV、VNF及网络功能编排和生命周期。",
                 "questionCount": 3
               },
               {
                 "name": "云计算与容器",
                 "order": 3,
                 "code": "10.01.03",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 10
+                "scope": "云服务与部署模式、虚拟化、容器和编排；VXLAN封装及隔离机制单列。",
+                "questionCount": 9
+              },
+              {
+                "name": "VXLAN与Overlay网络",
+                "order": 4,
+                "code": "10.01.04",
+                "scope": "VXLAN/VNI、Overlay及多租户网络隔离，与QinQ等技术比较。",
+                "questionCount": 3
               }
             ]
           },
@@ -1177,23 +1352,25 @@
             "order": 2,
             "knowledgePoints": [
               {
-                "name": "5G",
+                "name": "4G与5G移动通信",
                 "order": 1,
                 "code": "10.02.01",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 9
+                "scope": "4G/5G无线技术、频段、核心网、切片与业务场景。",
+                "questionCount": 13
               },
               {
-                "name": "NB-IoT",
+                "name": "物联网与NB-IoT",
                 "order": 2,
                 "code": "10.02.02",
-                "scope": "按用户所给大纲细化；题干中明确提到的相关考点归入此节点。",
-                "questionCount": 2
+                "scope": "物联网应用、NB-IoT低功耗广域网及终端省电机制。",
+                "questionCount": 3
               }
             ]
           }
         ]
       }
-    ]
+    ],
+    "revisedAt": "2026-09-26",
+    "classificationPolicy": "每题按最终设问确定一个主知识点；共用题干、选项、解析和题型标签不决定目录。OSI层次职责只归入OSI七层模型；TCP/IP层次与模型映射单列；协议、服务关系和封装流程单列。协议原理与服务器配置分开，单协议端口随协议，跨协议比较单列。"
   }
 }

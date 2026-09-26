@@ -266,8 +266,8 @@
     ],
     "analysis": "SNMP使用UDP：代理进程使用UDP 161端口接收管理站的请求（Get/Set/GetNext/GetBulk）；管理站使用UDP 162端口接收代理发送的Trap和Inform告警。SNMP不使用TCP。",
     "type": "single_choice",
-    "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "常用协议端口综合",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP版本、MIB与报文",
     "difficulty": "medium",
     "tags": [
       "SNMP 与网络监控",
@@ -286,7 +286,7 @@
       }
     ],
     "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
-    "knowledgeSection": "应用层协议与端口"
+    "knowledgeSection": "管理协议与监控"
   },
   {
     "id": "collection-c09-q010",
@@ -406,7 +406,7 @@
     "analysis": "Linux ping -c count指定发送ICMP回显请求的次数，发送完后自动停止并显示统计。不指定-c时Linux ping默认持续发送（需Ctrl+C停止），Windows ping默认发送4次。-s设置数据包大小，-t设置TTL（Linux中为-t ttl）。",
     "type": "single_choice",
     "chapter": "网络管理",
-    "knowledgePoint": "ipconfig、netstat与路由工具",
+    "knowledgePoint": "ping与tracert连通性检查",
     "difficulty": "medium",
     "tags": [
       "ICMP",
@@ -581,7 +581,7 @@
     "analysis": "SNMP（简单网络管理协议）是目前最常用的网络管理协议，基于TCP/IP，简单高效，广泛应用于各种网络设备。CMIP（公共管理信息协议）是OSI的网络管理协议，功能更强大但更复杂，实际应用较少。RMON（远程网络监控）是SNMP的MIB扩展，用于远程监控局域网和广域网。网络管理还可以使用Telnet/SSH、Syslog、NetFlow等协议/技术。",
     "type": "single_choice",
     "chapter": "网络管理",
-    "knowledgePoint": "故障、配置、性能、安全与计费管理",
+    "knowledgePoint": "SNMP版本、MIB与报文",
     "difficulty": "medium",
     "tags": [
       "网络管理",
@@ -595,7 +595,7 @@
       }
     ],
     "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
-    "knowledgeSection": "网络管理功能"
+    "knowledgeSection": "管理协议与监控"
   },
   {
     "id": "collection-c09-q021",
@@ -612,7 +612,7 @@
     "analysis": "SNMP（简单网络管理协议）是应用层协议，主要用于网络管理站（NMS）与被管设备（Agent）之间的通信，监控和管理网络设备。SNMP基于UDP传输（端口161/162），属于TCP/IP协议栈的应用层。OSI参考模型中没有专门的\"管理层\"，网络管理功能分布在各层，但SNMP协议本身工作在应用层。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "协议、服务、PDU与设备所在层",
+    "knowledgePoint": "OSI七层模型",
     "difficulty": "medium",
     "tags": [
       "OSI 与 TCP/IP 模型",
@@ -642,8 +642,8 @@
     ],
     "analysis": "SNMP代理（Agent）使用UDP端口161接收管理站（NMS）的请求（Get/Set/GetNext/GetBulk）并发送应答。SNMP管理站使用UDP端口162接收代理发送的Trap（陷阱）和Inform（通知）告警报文。注意：请求和应答使用161端口（代理端），Trap使用162端口（管理站端）。",
     "type": "single_choice",
-    "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "常用协议端口综合",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP版本、MIB与报文",
     "difficulty": "medium",
     "tags": [
       "SNMP 与网络监控",
@@ -657,7 +657,7 @@
       }
     ],
     "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
-    "knowledgeSection": "应用层协议与端口"
+    "knowledgeSection": "管理协议与监控"
   },
   {
     "id": "collection-c09-q023",
@@ -829,7 +829,7 @@
     "analysis": "SNMP（简单网络管理协议）是目前最常用的网络管理协议，基于TCP/IP，简单高效，广泛应用于各种网络设备。CMIP（公共管理信息协议，Common Management Information Protocol）是OSI的网络管理协议，功能更强大（支持更多操作和更复杂的管理模型）但更复杂（使用OSI协议栈，配置和实现复杂），实际应用较少（主要在电信网络）。RMON（远程网络监控，Remote Monitoring）是SNMP的MIB扩展（RMON1/RMON2），用于远程监控局域网和广域网的流量和性能。网络管理还可以使用Telnet/SSH（设备管理）、Syslog（日志收集）、NetFlow/sFlow（流量分析）、ICMP（ping/traceroute）等协议/技术。",
     "type": "single_choice",
     "chapter": "网络管理",
-    "knowledgePoint": "故障、配置、性能、安全与计费管理",
+    "knowledgePoint": "SNMP版本、MIB与报文",
     "difficulty": "medium",
     "tags": [
       "网络管理",
@@ -843,7 +843,7 @@
       }
     ],
     "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
-    "knowledgeSection": "网络管理功能"
+    "knowledgeSection": "管理协议与监控"
   },
   {
     "id": "collection-c09-q033",
@@ -1025,7 +1025,7 @@
     "analysis": "ping通过发送ICMP Echo Request（回显请求）并等待Echo Reply（回显应答）测试网络连通性和往返延迟。常用参数：-c count（发送次数，Linux）、-s size（数据包大小）、-i interval（发送间隔）、-W timeout（超时时间）、-t ttl（TTL值）。cd切换目录，chmod修改文件权限，grep文本搜索（这些都不是网络连通性测试命令）。注意：某些网络设备/服务器可能禁用ICMP（防火墙丢弃ICMP），此时ping不通不代表网络不通，可使用telnet/nc测试端口连通性。",
     "type": "single_choice",
     "chapter": "网络管理",
-    "knowledgePoint": "ipconfig、netstat与路由工具",
+    "knowledgePoint": "ping与tracert连通性检查",
     "difficulty": "medium",
     "tags": [
       "Linux 命令与管理",

@@ -76,7 +76,7 @@
     "analysis": "RSA属于非对称加密算法，使用公钥和私钥一对密钥，可用于加密、数字签名和密钥交换。DES、3DES、AES均属于对称加密算法（加密解密用相同密钥）。SHA-256、MD5属于哈希算法。",
     "type": "single_choice",
     "chapter": "网络安全",
-    "knowledgePoint": "对称加密算法",
+    "knowledgePoint": "非对称加密算法",
     "difficulty": "medium",
     "tags": [
       "密码与身份认证",
@@ -107,7 +107,7 @@
     "analysis": "WAF专门防护Web应用层漏洞攻击（Struts2远程代码执行、SQL注入、XSS等）。普通防火墙只做五元组访问控制，无法识别应用层攻击。漏洞扫描只能发现漏洞不能阻断。IDS只能检测告警不能阻断。IPS可阻断但对Web应用层漏洞防护不如WAF专业。",
     "type": "single_choice",
     "chapter": "网络安全",
-    "knowledgePoint": "Web攻击与常见漏洞",
+    "knowledgePoint": "Web攻击与漏洞防护",
     "difficulty": "medium",
     "tags": [
       "网络攻击与防护",
@@ -138,7 +138,7 @@
     "analysis": "SSL/TLS服务器证书由可信CA（证书颁发机构）颁发，证书包含服务器公钥和身份信息，客户端通过验证证书签名链确认服务器身份真实性，防止中间人攻击。证书还用于协商会话密钥。",
     "type": "single_choice",
     "chapter": "网络安全",
-    "knowledgePoint": "TLS与安全传输协议",
+    "knowledgePoint": "证书验证与CRL吊销",
     "difficulty": "medium",
     "tags": [
       "密码与身份认证",
@@ -152,7 +152,7 @@
       }
     ],
     "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
-    "knowledgeSection": "VPN与安全传输"
+    "knowledgeSection": "PKI与数字证书"
   },
   {
     "id": "collection-c08-q006",
@@ -231,7 +231,7 @@
     "analysis": "柯克霍夫原则（Kerckhoffs's Principle）：密码系统的安全不应依赖算法保密，而只依赖密钥的保密性，算法可以公开。即使攻击者知道加密算法，只要不知道密钥也无法破解。这是现代密码学的基本原则。",
     "type": "single_choice",
     "chapter": "网络安全",
-    "knowledgePoint": "密码学原则与传输加密",
+    "knowledgePoint": "密码学原则与加密方式",
     "difficulty": "medium",
     "tags": [
       "密码与身份认证",
@@ -293,7 +293,7 @@
     "analysis": "SM4是国密对称加密算法（分组密码，128位分组，128位密钥）。SM2是非对称加密/签名算法（基于椭圆曲线），SM3是哈希算法（256位摘要），SM9是标识密码算法，ZUC是祖冲之序列密码算法。RSA、DES、AES均为国外算法。",
     "type": "single_choice",
     "chapter": "网络安全",
-    "knowledgePoint": "非对称加密与Hash摘要",
+    "knowledgePoint": "非对称加密算法",
     "difficulty": "medium",
     "tags": [
       "密码与身份认证",
@@ -479,7 +479,7 @@
     "analysis": "震网病毒（Stuxnet）最初依靠U盘等移动介质传播，攻击伊朗核设施的工业控制系统（西门子SIMATIC WinCC/S7）。它是第一个被发现的以物理基础设施为目标的网络武器，利用了多个Windows零日漏洞。",
     "type": "single_choice",
     "chapter": "网络安全",
-    "knowledgePoint": "Web攻击与常见漏洞",
+    "knowledgePoint": "恶意软件、社会工程与应急响应",
     "difficulty": "medium",
     "tags": [
       "网络攻击与防护",
@@ -546,7 +546,7 @@
     "analysis": "哈希函数（如MD5、SHA-256、SM3）将任意长度输入映射为固定长度摘要。特点：单向性（无法反推）、确定性（相同输入相同输出）、抗碰撞性（理论上不同输入可能产生相同输出即碰撞，但好的哈希函数使碰撞在计算上不可行）。不是\"一定\"不同输出，而是\"很难\"找到碰撞。哈希函数用于数据完整性校验、数字签名、密码存储等。",
     "type": "single_choice",
     "chapter": "网络安全",
-    "knowledgePoint": "非对称加密与Hash摘要",
+    "knowledgePoint": "Hash、HMAC与口令存储",
     "difficulty": "medium",
     "tags": [
       "密码与身份认证",
@@ -608,7 +608,7 @@
     "analysis": "DDoS（分布式拒绝服务）利用大量傀儡机（僵尸网络）同时向目标发送请求，耗尽目标带宽、连接数或系统资源，导致正常用户无法访问。DDoS分为流量型（UDP/ICMP洪水，耗尽带宽）和连接型（SYN洪水，耗尽连接表）。DDoS难以通过普通防火墙完全防御，需要专业的DDoS清洗设备/服务（流量清洗、黑洞路由、CDN等）。",
     "type": "single_choice",
     "chapter": "网络安全",
-    "knowledgePoint": "DDoS",
+    "knowledgePoint": "DoS与DDoS",
     "difficulty": "medium",
     "tags": [
       "网络攻击与防护",
@@ -639,7 +639,7 @@
     "analysis": "社会工程学攻击利用人的心理弱点（信任、恐惧、好奇、贪婪等），通过欺骗、伪装、诱导等手段获取敏感信息（如密码、账号）或诱导执行危险操作。常见手段：钓鱼邮件、电话诈骗、假冒身份、尾随进入等。社会工程学攻击主要针对人，不是纯技术手段，防火墙无法防御，需要通过安全意识培训和管理措施来防范。",
     "type": "single_choice",
     "chapter": "网络安全",
-    "knowledgePoint": "Web攻击与常见漏洞",
+    "knowledgePoint": "恶意软件、社会工程与应急响应",
     "difficulty": "medium",
     "tags": [
       "网络攻击与防护",
@@ -768,7 +768,7 @@
     "analysis": "SQL注入是应用层攻击，攻击者通过在输入中插入恶意SQL代码，绕过应用程序验证，非法访问/操作数据库。IP欺骗、ARP欺骗是网络层攻击，SYN泛洪是传输层攻击（DDoS的一种）。其他应用层攻击还包括XSS跨站脚本、CSRF跨站请求伪造、文件上传漏洞、命令注入等。",
     "type": "single_choice",
     "chapter": "网络安全",
-    "knowledgePoint": "Web攻击与常见漏洞",
+    "knowledgePoint": "Web攻击与漏洞防护",
     "difficulty": "medium",
     "tags": [
       "网络攻击与防护",
@@ -830,7 +830,7 @@
     "analysis": "CA（Certificate Authority，证书颁发机构）负责颁发、管理、吊销数字证书。CA用自己的私钥签名证书，客户端用CA的公钥（根证书中）验证证书签名。客户端/浏览器预装了可信CA的根证书，才能验证证书链。CA证书不能随意伪造，因为CA的私钥严格保密，伪造的证书无法通过签名验证。",
     "type": "single_choice",
     "chapter": "网络安全",
-    "knowledgePoint": "非对称加密与Hash摘要",
+    "knowledgePoint": "CA、数字证书与数字签名",
     "difficulty": "medium",
     "tags": [
       "密码与身份认证",
@@ -849,7 +849,7 @@
       }
     ],
     "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
-    "knowledgeSection": "密码与加密"
+    "knowledgeSection": "PKI与数字证书"
   },
   {
     "id": "collection-c08-q028",
@@ -959,7 +959,7 @@
     "analysis": "DDoS（分布式拒绝服务）利用大量傀儡机（僵尸网络）同时向目标发送请求，耗尽目标带宽、连接数或系统资源。DDoS分为流量型（UDP/ICMP洪水，耗尽带宽）和连接型（SYN洪水，耗尽连接表）。DDoS难以通过普通防火墙完全防御，需要专业的DDoS清洗设备/服务（流量清洗、黑洞路由、CDN、Anycast等）。",
     "type": "single_choice",
     "chapter": "网络安全",
-    "knowledgePoint": "DDoS",
+    "knowledgePoint": "DoS与DDoS",
     "difficulty": "medium",
     "tags": [
       "网络攻击与防护",
@@ -990,7 +990,7 @@
     "analysis": "社会工程学攻击利用人的心理弱点（信任、恐惧、好奇、贪婪等），通过欺骗、伪装、诱导等手段获取敏感信息或诱导执行危险操作。常见手段：钓鱼邮件、电话诈骗（vishing）、短信诈骗（smishing）、假冒身份、尾随进入（tailgating）、垃圾桶潜水（dumpster diving）等。社会工程学攻击主要针对人，不是纯技术手段，防火墙无法防御，需要通过安全意识培训和管理措施来防范。",
     "type": "single_choice",
     "chapter": "网络安全",
-    "knowledgePoint": "Web攻击与常见漏洞",
+    "knowledgePoint": "恶意软件、社会工程与应急响应",
     "difficulty": "medium",
     "tags": [
       "网络攻击与防护",
@@ -1145,7 +1145,7 @@
     "analysis": "哈希函数（Hash Function，如MD5、SHA-1、SHA-256、SM3）将任意长度输入映射为固定长度摘要（散列值）。特点：1）单向性（抗原像攻击，无法从摘要反推原文）；2）确定性（相同输入相同输出）；3）抗碰撞性（第二原像抗性和碰撞抗性，很难找到两个不同输入产生相同摘要）。哈希函数用于数据完整性校验、数字签名（对摘要签名而非原文）、密码存储（加盐哈希）、消息认证码（HMAC）等。MD5和SHA-1已被破解，不推荐用于安全场景，推荐SHA-256/SM3。",
     "type": "single_choice",
     "chapter": "网络安全",
-    "knowledgePoint": "非对称加密与Hash摘要",
+    "knowledgePoint": "Hash、HMAC与口令存储",
     "difficulty": "medium",
     "tags": [
       "密码与身份认证",
@@ -1393,7 +1393,7 @@
     "analysis": "柯克霍夫原则（Kerckhoffs's Principle，1883年由奥古斯特·柯克霍夫提出）：密码系统的安全不应依赖算法保密，而只依赖密钥的保密性，算法可以公开。即使攻击者知道加密算法，只要不知道密钥也无法破解。这是现代密码学的基本原则（如AES、RSA、SM4等算法都是公开的，安全性依赖于密钥）。与此相对的是\"通过隐晦来保证安全\"（Security through obscurity），被认为是不可靠的。",
     "type": "single_choice",
     "chapter": "网络安全",
-    "knowledgePoint": "密码学原则与传输加密",
+    "knowledgePoint": "密码学原则与加密方式",
     "difficulty": "medium",
     "tags": [
       "网络安全",

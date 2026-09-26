@@ -14,7 +14,7 @@
     "analysis": "需要100个子网，借用7位（2^7=128≥100），剩余9位主机位（2^9-2=510≥500），掩码为255.255.254.0（/23）。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "VLSM子网划分",
+    "knowledgePoint": "子网划分与VLSM",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -45,7 +45,7 @@
     "analysis": "容纳8台主机需2^h-2≥8，h=4时2^4-2=14≥8，需要4位主机位，网络位=32-4=28位，即/28（255.255.255.240）。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "VLSM子网划分",
+    "knowledgePoint": "子网划分与VLSM",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -81,7 +81,7 @@
     "analysis": "掩码255.255.255.192=/26，块大小=256-192=64。子网：0,64,128,192。70在64-127范围内，网络地址为192.168.10.64，广播地址192.168.10.127。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "VLSM子网划分",
+    "knowledgePoint": "网络地址、广播地址与可用主机",
     "difficulty": "medium",
     "tags": [
       "子网网络地址",
@@ -117,7 +117,7 @@
     "analysis": "掩码/27，块大小32。子网：0,32,64...。33在32-63范围内，网络地址10.10.1.32，广播地址=下一个子网地址-1=64-1=63，即10.10.1.63。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "VLSM子网划分",
+    "knowledgePoint": "网络地址、广播地址与可用主机",
     "difficulty": "medium",
     "tags": [
       "子网广播地址",
@@ -153,7 +153,7 @@
     "analysis": "主机位n，2^n-2≥10000，n≥14位（2^14-2=16382≥10000）。网络位=32-14=18位，掩码255.255.128.0（/18）。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "VLSM子网划分",
+    "knowledgePoint": "子网划分与VLSM",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -225,7 +225,7 @@
     "analysis": "2^h-2≥50，h=6时2^6-2=62≥50，h=5时2^5-2=30<50。故主机位最少6位，网络位=32-6=26位（/26），可划分2^2=4个子网（借用2位）。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "VLSM子网划分",
+    "knowledgePoint": "子网划分与VLSM",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -292,7 +292,7 @@
     "analysis": "172.16.26.0/23：掩码255.255.254.0，块大小2。子网：172.16.26.0和172.16.28.0，26.0正好是网络号。A：/26块64，126在64子网（64-127），不是网络号。B：/24网络号是10.0.2.0。D：/22块4，128在124子网（124-127），不是网络号。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "IPv4地址类别与特殊地址",
+    "knowledgePoint": "网络地址、广播地址与可用主机",
     "difficulty": "medium",
     "tags": [
       "子网网络地址",
@@ -385,7 +385,7 @@
     "analysis": "240=11110000，借用4位主机位作为子网位，可划分2^4=16个子网。剩余4位主机位，可用主机数=2^4-2=14台（减去网络地址和广播地址）。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "VLSM子网划分",
+    "knowledgePoint": "子网划分与VLSM",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -416,7 +416,7 @@
     "analysis": "VLSM（可变长子网掩码）允许在同一主类网络（如一个C类地址）中根据不同子网的主机数量需求使用不同长度的子网掩码，从而更高效地利用IP地址，减少浪费。VLSM是CIDR的基础，RIPv2、OSPF、EIGRP、BGP等无类路由协议支持VLSM。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "VLSM子网划分",
+    "knowledgePoint": "子网划分与VLSM",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -447,7 +447,7 @@
     "analysis": "C类/24借3位，网络位变为27位（/27），主机位剩余5位。可用主机数=2^5-2=30台（减去网络地址和广播地址）。可划分2^3=8个子网。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "VLSM子网划分",
+    "knowledgePoint": "子网划分与VLSM",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -550,7 +550,7 @@
     "analysis": "子网划分后，每个子网都需要保留网络地址和广播地址（各1个不可用），子网数量越多，不可用地址越多，可用主机总数会减少（而非增加）。子网划分提高了地址利用率（按需分配）、隔离了广播域、便于管理。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "VLSM子网划分",
+    "knowledgePoint": "子网划分与VLSM",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -581,7 +581,7 @@
     "analysis": "需要6个子网，借用3位（2^3=8≥6），剩余5位主机位（2^5-2=30≥30），掩码为255.255.255.224（/27）。每个子网可用主机30台，共8个子网（可用6个，全0全1在早期设备中保留，现代设备均可用）。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "VLSM子网划分",
+    "knowledgePoint": "子网划分与VLSM",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -684,7 +684,7 @@
     "analysis": "/8到/24借用了16位（24-8=16），可划分2^16=65536个/24子网。每个/24子网有256个地址（254个可用主机）。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "VLSM子网划分",
+    "knowledgePoint": "子网划分与VLSM",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -818,7 +818,7 @@
     "analysis": "248=11111000，主机位3位。可用主机数=2^3-2=8-2=6台（减去网络地址和广播地址）。可划分的子网数取决于借用了多少位作为子网位。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "VLSM子网划分",
+    "knowledgePoint": "网络地址、广播地址与可用主机",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -885,7 +885,7 @@
     "analysis": "192.168.1.0-192.168.4.0，需要覆盖1-4。/22（块4）覆盖0-3或4-7，无法同时覆盖1-4。/21（块8）覆盖0-7，可以包含1-4。虽然/21包含了额外的0和5-7，但这是能同时覆盖1-4的最短掩码（最精确聚合）。实际中如果这4个网络是连续的1-4，最佳聚合是/21。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "网络地址、广播地址与可用主机",
+    "knowledgePoint": "CIDR与路由聚合",
     "difficulty": "medium",
     "tags": [
       "IP地址与子网划分",
@@ -916,7 +916,7 @@
     "analysis": "子网掩码必须由连续的1后跟连续的0组成（如11111111.11111111.11111111.10000000），不能是任意的32位二进制数（如10101010这种不连续的是无效的子网掩码）。掩码中1对应网络位，0对应主机位，用于区分网络位和主机位。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "VLSM子网划分",
+    "knowledgePoint": "网络地址、广播地址与可用主机",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -947,7 +947,7 @@
     "analysis": "/23到/27借用了4位（27-23=4），可划分2^4=16个子网。/27主机位5位，可用主机数=2^5-2=30台。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "VLSM子网划分",
+    "knowledgePoint": "子网划分与VLSM",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -1071,7 +1071,7 @@
     "analysis": "子网掩码（Subnet Mask）是32位二进制数，由连续的1后跟连续的0组成（如11111111.11111111.11111111.10000000=255.255.255.128）。掩码中1对应网络位（含子网位），0对应主机位。子网掩码与IP地址按位与运算得到网络地址。CIDR表示法中用前缀长度表示（如/24表示前24位为网络位）。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "VLSM子网划分",
+    "knowledgePoint": "网络地址、广播地址与可用主机",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",
@@ -1102,7 +1102,7 @@
     "analysis": "VLSM（可变长子网掩码）允许在同一主类网络中根据不同子网的主机数量需求使用不同长度的子网掩码，从而更高效地利用IP地址，减少浪费。VLSM需要无类路由协议（RIPv2、OSPF、EIGRP、IS-IS、BGP）支持，有类路由协议（RIPv1、IGRP）不支持VLSM（因为它们在路由更新中不发送子网掩码）。VLSM是CIDR的基础。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "VLSM子网划分",
+    "knowledgePoint": "子网划分与VLSM",
     "difficulty": "medium",
     "tags": [
       "子网划分与 CIDR",

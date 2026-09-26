@@ -324,7 +324,7 @@
     "analysis": "以太网（IEEE 802.3）使用CSMA/CD（载波监听多点接入/碰撞检测）。无线局域网使用CSMA/CA（碰撞避免）。",
     "type": "single_choice",
     "chapter": "局域网与交换技术",
-    "knowledgePoint": "冲突域、广播域与网络设备",
+    "knowledgePoint": "CSMA/CD与以太网帧",
     "difficulty": "medium",
     "tags": [
       "以太网与交换",
@@ -354,8 +354,8 @@
     ],
     "analysis": "E1（欧洲标准，中国使用）速率为2.048Mbps，由32个时隙组成，每个时隙64kbps。T1（北美标准）为1.544Mbps。",
     "type": "single_choice",
-    "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "信道容量与数据速率",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "E1/T1与专线基础",
     "difficulty": "medium",
     "tags": [
       "数据通信基础",
@@ -369,7 +369,7 @@
       }
     ],
     "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
-    "knowledgeSection": "数据通信与传输"
+    "knowledgeSection": "广域网链路"
   },
   {
     "id": "collection-c02-q013",
@@ -385,8 +385,8 @@
     ],
     "analysis": "T1由24个时隙组成，每帧加1位同步位，总位数193位，每秒8000帧，速率193×8000=1.544Mbps。",
     "type": "single_choice",
-    "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "信道容量与数据速率",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "E1/T1与专线基础",
     "difficulty": "medium",
     "tags": [
       "数据通信基础",
@@ -400,7 +400,7 @@
       }
     ],
     "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
-    "knowledgeSection": "数据通信与传输"
+    "knowledgeSection": "广域网链路"
   },
   {
     "id": "collection-c02-q014",
@@ -417,7 +417,7 @@
     "analysis": "PSK利用相位变化携带信息，对幅度噪声不敏感，抗干扰能力优于ASK和FSK。QPSK等现代通信系统广泛采用。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "信道容量与数据速率",
+    "knowledgePoint": "编码与调制",
     "difficulty": "medium",
     "tags": [
       "编码与调制",
@@ -448,7 +448,7 @@
     "analysis": "曼彻斯特编码每比特中间跳变，可提取时钟信号，且正负电平时间均衡无直流分量。NRZ连续相同比特时无跳变，时钟同步困难。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "信道容量与数据速率",
+    "knowledgePoint": "编码与调制",
     "difficulty": "medium",
     "tags": [
       "编码与调制",
@@ -571,8 +571,8 @@
     ],
     "analysis": "HDLC使用零比特填充法保证标志字段01111110的唯一性：发送端检测到连续5个1后插入一个0；接收端删除5个1后的0。",
     "type": "single_choice",
-    "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "信道容量与数据速率",
+    "chapter": "路由与广域网技术",
+    "knowledgePoint": "PPP、HDLC与帧中继",
     "difficulty": "medium",
     "tags": [
       "数据通信基础",
@@ -586,7 +586,7 @@
       }
     ],
     "sourceVerification": "用户提供汇编，未核实官方出处与考试年份",
-    "knowledgeSection": "数据通信与传输"
+    "knowledgeSection": "广域网链路"
   },
   {
     "id": "collection-c02-q020",
@@ -634,7 +634,7 @@
     "analysis": "异步传输以字符为单位，每个字符前加起始位（0），后加停止位（1），允许字符间任意间隔，无需共享时钟。缺点是效率较低。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "信道容量与数据速率",
+    "knowledgePoint": "同步、双工与多路复用",
     "difficulty": "medium",
     "tags": [
       "数据通信基础",
@@ -665,7 +665,7 @@
     "analysis": "传播延时=2km/(200m/μs)=10μs。最小帧长=2×数据速率×传播时延=2×100,000,000×0.00001=2000bit。",
     "type": "single_choice",
     "chapter": "局域网与交换技术",
-    "knowledgePoint": "冲突域、广播域与网络设备",
+    "knowledgePoint": "CSMA/CD与以太网帧",
     "difficulty": "medium",
     "tags": [
       "以太网与交换",
@@ -696,7 +696,7 @@
     "analysis": "以太网帧最小64字节（含14字节首部和4字节FCS，数据部分最小46字节），最大1518字节。MTU（最大传输单元）为1500字节。",
     "type": "single_choice",
     "chapter": "局域网与交换技术",
-    "knowledgePoint": "冲突域、广播域与网络设备",
+    "knowledgePoint": "CSMA/CD与以太网帧",
     "difficulty": "medium",
     "tags": [
       "以太网与交换",
@@ -794,7 +794,7 @@
     "analysis": "QAM通过同时改变载波的振幅和相位表示不同码元状态，如16QAM、64QAM、256QAM，广泛应用于数字电视、Wi-Fi、4G/5G。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "信道容量与数据速率",
+    "knowledgePoint": "编码与调制",
     "difficulty": "medium",
     "tags": [
       "编码与调制",
@@ -825,7 +825,7 @@
     "analysis": "眼图是将接收信号在示波器上叠加显示的图形，通过眼睛张开程度判断码间串扰（ISI）和噪声影响。眼图越张开，传输质量越好。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "信道容量与数据速率",
+    "knowledgePoint": "信号质量与眼图",
     "difficulty": "medium",
     "tags": [
       "数据通信基础",
@@ -990,7 +990,7 @@
     "analysis": "同步技术解决收发双方时间基准一致性问题，包括位同步、帧同步等。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "信道容量与数据速率",
+    "knowledgePoint": "同步、双工与多路复用",
     "difficulty": "medium",
     "tags": [
       "数据通信基础",
@@ -1124,7 +1124,7 @@
     "analysis": "Console口默认参数：波特率9600，数据位8，校验位无，停止位1，流控无。",
     "type": "single_choice",
     "chapter": "网络管理",
-    "knowledgePoint": "设备Console与维护接入",
+    "knowledgePoint": "设备接入与接口排障",
     "difficulty": "medium",
     "tags": [
       "数据通信基础",
@@ -1186,7 +1186,7 @@
     "analysis": "星型拓扑所有节点都连接到中心设备（如交换机）。环型首尾相连，总线型共享介质，网状节点间有多条路径。",
     "type": "single_choice",
     "chapter": "综合布线与网络规划",
-    "knowledgePoint": "网络拓扑",
+    "knowledgePoint": "网络需求分析与拓扑设计",
     "difficulty": "medium",
     "tags": [
       "数据通信基础",
@@ -1222,7 +1222,7 @@
     "analysis": "CSMA/CD中，两个或多个节点同时发送，或一个节点在信号传播延迟内开始发送，都会导致冲突。只有一个节点发送不会冲突。",
     "type": "single_choice",
     "chapter": "局域网与交换技术",
-    "knowledgePoint": "冲突域、广播域与网络设备",
+    "knowledgePoint": "CSMA/CD与以太网帧",
     "difficulty": "medium",
     "tags": [
       "以太网与交换",
@@ -1253,7 +1253,7 @@
     "analysis": "以太网使用CSMA/CD；拓扑可以是总线型或星型；速率有10/100/1000Mbps等多种；帧地址字段确实是MAC地址。",
     "type": "single_choice",
     "chapter": "局域网与交换技术",
-    "knowledgePoint": "冲突域、广播域与网络设备",
+    "knowledgePoint": "CSMA/CD与以太网帧",
     "difficulty": "medium",
     "tags": [
       "以太网与交换",
@@ -1289,7 +1289,7 @@
     "analysis": "BPSK每符号1bit，QPSK 2bit，16QAM 4bit，64-QAM每符号6bit，效率最高。调制效率=log2(状态数)。",
     "type": "single_choice",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "信道容量与数据速率",
+    "knowledgePoint": "编码与调制",
     "difficulty": "medium",
     "tags": [
       "编码与调制",
@@ -1413,7 +1413,7 @@
     "analysis": "CSMA/CD冲突检测最大时间等于往返时延RTT=100微秒。信号从一端到另一端需要50微秒，冲突信号返回又需要50微秒，总共100微秒。",
     "type": "single_choice",
     "chapter": "局域网与交换技术",
-    "knowledgePoint": "冲突域、广播域与网络设备",
+    "knowledgePoint": "CSMA/CD与以太网帧",
     "difficulty": "medium",
     "tags": [
       "以太网与交换",
@@ -1475,7 +1475,7 @@
     "analysis": "OFDMA（正交频分多址）把子载波分配给不同用户，允许多设备同时高速传输。网络切片是逻辑划分独立网络；大规模MIMO是多天线提升容量；波束成形是定向波束提升信号质量。",
     "type": "single_choice",
     "chapter": "新技术",
-    "knowledgePoint": "5G",
+    "knowledgePoint": "4G与5G移动通信",
     "difficulty": "medium",
     "tags": [
       "数据通信基础",

@@ -33,7 +33,7 @@ export function fixtureQuestion(
     answer: ["A"],
     analysis:
       "接口优先级为 0 表示不参与 DR/BDR 选举，但不妨碍建立邻接关系和交换 OSPF 路由。",
-    chapter: "路由协议",
+    chapter: "路由与广域网技术",
     knowledgePoint: "OSPF 选举资格",
     difficulty: spec.difficulty,
     stage: spec.stage,
@@ -75,22 +75,22 @@ export function mockAI() {
         summary: "今天重点复习 OSPF 选举、子网广播地址与 ACL 规则顺序。",
         weaknesses: [
           {
-            knowledgePoint: "OSPF DR/BDR",
+            knowledgePoint: "DR/BDR选举",
             reason: "先判断候选资格，再判断选举顺序。",
           },
         ],
         tasks: [
           {
-            knowledgePoint: "OSPF DR/BDR",
+            knowledgePoint: "DR/BDR选举",
             count: 10,
             focus: "选举资格与非抢占规则",
           },
           {
-            knowledgePoint: "子网广播地址",
+            knowledgePoint: "网络地址、广播地址与可用主机",
             count: 10,
             focus: "广播地址与主机边界",
           },
-          { knowledgePoint: "ACL 匹配顺序", count: 10, focus: "首条匹配原则" },
+          { knowledgePoint: "ACL类型、规则顺序与隐式拒绝", count: 10, focus: "首条匹配原则" },
         ],
       };
     else if (system.includes("苏格拉底式提示"))

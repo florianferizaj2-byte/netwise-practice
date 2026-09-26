@@ -36,7 +36,9 @@ test("11 source documents are reconciled without missing records or invented ans
     550,
   );
   assert.equal(new Set(bank.map(fingerprint)).size, bank.length);
-  assert.equal(new Set(bank.map((q) => q.chapter)).size, 11);
+  // Source-document chapters and the current study taxonomy are independent.
+  const moduleNames = new Set(certificates[0].taxonomy.modules.map((m) => m.name));
+  assert.ok(bank.every((q) => moduleNames.has(q.chapter)));
   const references = [
     ...bank.flatMap((q) => q.provenance),
     ...report.duplicates
@@ -71,7 +73,14 @@ test("manifest catalog discovers the certificate tracks and keeps sources explic
   );
   assert.deepEqual(
     banksForCertificate("network-engineer").map((item) => item.source),
-    ["practice", "user_collection"],
+    [
+      "practice",
+      "network_engineer_supplement",
+      "user_collection",
+      "user_simulation_collection",
+      "user_external_2026_h1",
+      "user_external_2026_h1_lastset",
+    ],
   );
   assert.deepEqual(
     banksForCertificate("hcia-datacom").map((item) => item.source),
@@ -325,6 +334,7 @@ test("执兽模拟考试固定四科各抽100题并按总分240分及格", () =>
 
 test("server initializes the bundled collection idempotently and preserves learning records", () => {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), "netwise-bank-"));
+  const bundledCount = bundledQuestions().length;
   let store;
   try {
     store = createStore(directory);
@@ -332,10 +342,10 @@ test("server initializes the bundled collection idempotently and preserves learn
     assert.equal(q.options.C, "192.168.10.64");
     assert.deepEqual(q.answer, ["C"]);
     assert.equal(store.recordAttempt(q.id, ["C"], 2000).correct, true);
-    assert.equal(store.allQ().length, 8958);
+    assert.equal(store.allQ().length, bundledCount);
     store.db.close();
     store = createStore(directory);
-    assert.equal(store.allQ().length, 8958);
+    assert.equal(store.allQ().length, bundledCount);
     assert.equal(store.allA().length, 1);
     assert.equal(store.getQ(q.id).provenance[0].questionNumber, 3);
   } finally {

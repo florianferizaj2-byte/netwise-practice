@@ -11,6 +11,8 @@ import { OpenAICompatibleProvider } from "../server/ai.js";
 import { encrypt } from "../server/security.js";
 import { fixtureQuestion, mockAI } from "./ai-fixture.js";
 
+const currentMobileVersion = JSON.parse(fs.readFileSync(new URL('../mobile/package.json', import.meta.url), 'utf8')).version;
+
 const verdict = {
   valid: true,
   relevant: true,
@@ -332,7 +334,7 @@ test("mobile clients can use a bearer session without browser cookies", async (t
     headers: {
       "Content-Type": "application/json",
       "X-Client": "mobile",
-      "X-App-Version": "0.2.5",
+      "X-App-Version": currentMobileVersion,
     },
     body: JSON.stringify({
       username: "mobile_candidate",
@@ -347,7 +349,7 @@ test("mobile clients can use a bearer session without browser cookies", async (t
     headers: {
       Authorization: `Bearer ${data.sessionToken}`,
       "X-Client": "mobile",
-      "X-App-Version": "0.2.5",
+      "X-App-Version": currentMobileVersion,
     },
   }).then((response) => response.json());
   assert.equal(me.authenticated, true);
@@ -372,7 +374,7 @@ test("mobile clients can use a bearer session without browser cookies", async (t
       headers: {
         Authorization: `Bearer ${data.sessionToken}`,
         "X-Client": "mobile",
-        "X-App-Version": "0.2.5",
+        "X-App-Version": currentMobileVersion,
       },
     }).then((response) => response.json())).authenticated,
     false,
@@ -640,7 +642,7 @@ test("server-generated AI groups are immutable, shareable by certificate, and ke
     "ai_other_certificate",
     "hcia-datacom",
   );
-  const seed = store.allQ().find((q) => q.knowledgePoint === "OSPF DR/BDR");
+  const seed = store.allQ().find((q) => q.knowledgePoint === "DR/BDR选举");
   const forged = await request(owner.cookie, "/ai/train", {
     questionId: seed.id,
     count: 1,
@@ -864,17 +866,22 @@ test("batch generation validates, caches, consumes queue and refuses invalid bat
     temperature: 0.7,
     maxTokens: 4096,
   });
-  const q = store.allQ().find((q) => q.knowledgePoint === "OSPF DR/BDR");
+  const q = store.allQ().find((q) => q.knowledgePoint === "DR/BDR选举");
   const batch = await provider.generatePracticeSet(q, 3);
   assert.equal(batch.questions.length, 3);
   assert.ok(batch.questions.every((q) => q.source === "ai_generated"));
+  assert.ok(batch.questions.every((generated) =>
+    generated.chapter === q.chapter &&
+    generated.knowledgeSection === q.knowledgeSection &&
+    generated.targetKnowledgePoint === q.knowledgePoint,
+  ));
   assert.equal(calls, 2);
   assert.equal((await provider.generatePracticeSet(q, 3)).cached, true);
   assert.equal(calls, 2);
   store.recordAttempt(batch.questions[0].id, ["A"], 1000);
-  assert.equal(store.queue("OSPF DR/BDR:adaptive").length, 2);
+  assert.equal(store.queue("DR/BDR选举:adaptive").length, 2);
   assert.equal(
-    store.mastery().find((m) => m.knowledgePoint === "OSPF DR/BDR")
+    store.mastery().find((m) => m.knowledgePoint === "DR/BDR选举")
       .correctCount,
     1,
   );
@@ -923,7 +930,7 @@ test("batch generation keeps accepted questions and regenerates only rejected sl
     temperature: 0.7,
     maxTokens: 4096,
   });
-  const q = store.allQ().find((item) => item.knowledgePoint === "OSPF DR/BDR");
+  const q = store.allQ().find((item) => item.knowledgePoint === "DR/BDR选举");
   const before = store.allQ().length;
   const batch = await provider.generatePracticeSet(q, 3);
   assert.equal(batch.questions.length, 3);
@@ -970,7 +977,7 @@ test("管理员扩题兼容中文题型和选项数组输出", async (t) => {
     temperature: 0.7,
     maxTokens: 4096,
   });
-  const seed = store.allQ().find((item) => item.knowledgePoint === "OSPF DR/BDR");
+  const seed = store.allQ().find((item) => item.knowledgePoint === "DR/BDR选举");
   const [generated] = await provider.generateBankExpansion(seed, 1, {
     certificateId: "network-engineer",
   });
@@ -1009,7 +1016,7 @@ test("AI training stream sends progress events and a final result", async (t) =>
     temperature: 0.7,
     maxTokens: 4096,
   });
-  const q = store.allQ().find((item) => item.knowledgePoint === "OSPF DR/BDR");
+  const q = store.allQ().find((item) => item.knowledgePoint === "DR/BDR选举");
   const stream = await fetch(url + "/api/ai/train/stream", {
     method: "POST",
     headers: {
@@ -1049,7 +1056,7 @@ test("numeric conflicts and hint leaks are rejected before publication", async (
     maxTokens: 4096,
   });
   const q = {
-    ...store.allQ().find((q) => q.knowledgePoint === "OSPF DR/BDR"),
+    ...store.allQ().find((q) => q.knowledgePoint === "DR/BDR选举"),
     options: question(1).options,
     answer: ["A"],
   };
@@ -1225,7 +1232,7 @@ test("daily planning caches per day and hint stages avoid exposing answers", asy
   const calls = store.usage().total.calls;
   await req("/ai/daily", {});
   assert.equal(store.usage().total.calls, calls);
-  const q = store.allQ().find((q) => q.knowledgePoint === "OSPF DR/BDR");
+  const q = store.allQ().find((q) => q.knowledgePoint === "DR/BDR选举");
   for (let i = 1; i <= 3; i++) {
     const response = await req("/ai/teacher", {
       questionId: q.id,
@@ -1313,7 +1320,7 @@ test("AI outages produce specific safe errors and numeric or semantic failures n
   };
   await assert.rejects(
     provider.generatePracticeSet(
-      store.allQ().find((q) => q.knowledgePoint === "OSPF DR/BDR"),
+      store.allQ().find((q) => q.knowledgePoint === "DR/BDR选举"),
       1,
     ),
     /独立质量审核/,
@@ -1463,6 +1470,7 @@ test("管理员面板隔离管理员 API，支持扩题、重合检测、删题�
       answer: seed.answer,
       analysis: `${seed.analysis} 管理员已复核。`,
       chapter: seed.chapter,
+      knowledgeSection: seed.knowledgeSection,
       knowledgePoint: seed.knowledgePoint,
       difficulty: seed.difficulty,
       tags: seed.tags || ["管理员修订"],
@@ -1490,13 +1498,15 @@ test("管理员面板隔离管理员 API，支持扩题、重合检测、删题�
   const targetChapter = taxonomy.data.certificates
     .find((item) => item.id === seed.certificates[0])
     .chapters.find((item) => item.name === seed.chapter);
+  const targetSection = targetChapter.sections.find((item) => item.name === seed.knowledgeSection);
   const generatedResponse = await request(
     admin.cookie,
     "/admin/questions/generate",
     {
       certificateId: seed.certificates[0],
       chapter: seed.chapter,
-      knowledgePoint: targetChapter.knowledgePoints[0],
+      knowledgeSection: targetSection.name,
+      knowledgePoint: targetSection.knowledgePoints[0],
       count: 1,
     },
   );

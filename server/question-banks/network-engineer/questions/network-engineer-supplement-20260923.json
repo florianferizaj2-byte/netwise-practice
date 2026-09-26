@@ -586,10 +586,10 @@
     ],
     "analysis": "独立串联系统必须两个部件都工作，整体可靠性为 0.9×0.8=0.72。",
     "chapter": "计算机基础知识",
-    "knowledgePoint": "串并联系统可靠性",
+    "knowledgePoint": "系统可靠性与可用性",
     "difficulty": "medium",
     "tags": [
-      "串并联系统可靠性"
+      "系统可靠性与可用性"
     ],
     "knowledgeSection": "存储器与可靠性"
   },
@@ -608,10 +608,10 @@
     ],
     "analysis": "并联系统失效概率为 0.1×0.1=0.01，故整体可靠性为 1−0.01=0.99。",
     "chapter": "计算机基础知识",
-    "knowledgePoint": "串并联系统可靠性",
+    "knowledgePoint": "系统可靠性与可用性",
     "difficulty": "medium",
     "tags": [
-      "串并联系统可靠性"
+      "系统可靠性与可用性"
     ],
     "knowledgeSection": "存储器与可靠性"
   },
@@ -784,10 +784,10 @@
     ],
     "analysis": "每次 32 位即 4 字节，100 MHz 下每秒 10^8 次，峰值为 4×10^8 B/s=400 MB/s（按十进制单位）。",
     "chapter": "计算机基础知识",
-    "knowledgePoint": "总线分类",
+    "knowledgePoint": "总线结构与带宽",
     "difficulty": "hard",
     "tags": [
-      "总线分类"
+      "总线结构与带宽"
     ],
     "knowledgeSection": "计算机组成"
   },
@@ -806,10 +806,10 @@
     ],
     "analysis": "总线仲裁决定哪个主设备取得总线控制权，避免多个主设备同时驱动共享总线。",
     "chapter": "计算机基础知识",
-    "knowledgePoint": "总线分类",
+    "knowledgePoint": "总线结构与带宽",
     "difficulty": "medium",
     "tags": [
-      "总线分类"
+      "总线结构与带宽"
     ],
     "knowledgeSection": "计算机组成"
   },
@@ -828,10 +828,10 @@
     ],
     "analysis": "同步总线依赖共同时钟界定传输时序；异步总线不要求统一时钟，可通过请求/应答握手协调不同速度设备。",
     "chapter": "计算机基础知识",
-    "knowledgePoint": "总线分类",
+    "knowledgePoint": "总线结构与带宽",
     "difficulty": "medium",
     "tags": [
-      "总线分类"
+      "总线结构与带宽"
     ],
     "knowledgeSection": "计算机组成"
   },
@@ -850,10 +850,10 @@
     ],
     "analysis": "地址总线承载要访问的存储单元或 I/O 端口地址；数据总线承载传输内容，控制信号指示读写等操作。",
     "chapter": "计算机基础知识",
-    "knowledgePoint": "总线分类",
+    "knowledgePoint": "总线结构与带宽",
     "difficulty": "easy",
     "tags": [
-      "总线分类"
+      "总线结构与带宽"
     ],
     "knowledgeSection": "计算机组成"
   },
@@ -872,10 +872,10 @@
     ],
     "analysis": "20 位地址可表示 2^20 个不同地址；按字节寻址时可寻址 2^20 字节，即 1 MiB（常称约 1 MB）。",
     "chapter": "计算机基础知识",
-    "knowledgePoint": "总线分类",
+    "knowledgePoint": "总线结构与带宽",
     "difficulty": "medium",
     "tags": [
-      "总线分类"
+      "总线结构与带宽"
     ],
     "knowledgeSection": "计算机组成"
   },
@@ -1114,10 +1114,10 @@
     ],
     "analysis": "发送方向自上而下封装：传输层形成 TCP 段，网络层封装为 IP 数据报，链路层再封装为帧。",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "协议、服务、PDU与设备所在层",
+    "knowledgePoint": "分层原则、协议与数据封装",
     "difficulty": "easy",
     "tags": [
-      "协议、服务、PDU与设备所在层"
+      "分层原则、协议与数据封装"
     ],
     "knowledgeSection": "网络模型与分层"
   },
@@ -1136,10 +1136,10 @@
     ],
     "analysis": "路由器逐跳转发，出接口会为下一链路重新封装二层帧，因此链路层 MAC 地址通常逐跳变化；普通路由不改变端到端 IP 地址。",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "协议、服务、PDU与设备所在层",
+    "knowledgePoint": "分层原则、协议与数据封装",
     "difficulty": "medium",
     "tags": [
-      "协议、服务、PDU与设备所在层"
+      "分层原则、协议与数据封装"
     ],
     "knowledgeSection": "网络模型与分层"
   },
@@ -1268,10 +1268,10 @@
     ],
     "analysis": "TCP/IP 网络接口层覆盖链路层与物理传输相关职责，包括帧发送和介质上的比特传输。",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "OSI七层模型",
+    "knowledgePoint": "TCP/IP四层模型与映射",
     "difficulty": "easy",
     "tags": [
-      "OSI七层模型"
+      "TCP/IP四层模型与映射"
     ],
     "knowledgeSection": "网络模型与分层"
   },
@@ -1290,10 +1290,10 @@
     ],
     "analysis": "分层与标准协议定义了跨层接口和对等通信规则，使不同实现能按共同协议互操作；它不能保证网络绝不丢包。",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "OSI七层模型",
+    "knowledgePoint": "分层原则、协议与数据封装",
     "difficulty": "medium",
     "tags": [
-      "OSI七层模型"
+      "分层原则、协议与数据封装"
     ],
     "knowledgeSection": "网络模型与分层"
   },
@@ -1312,10 +1312,10 @@
     ],
     "analysis": "路由器依据网络层目的地址作出转发决策，属于网际层（网络层）功能；链路层负责下一跳链路上的帧传送。",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "协议、服务、PDU与设备所在层",
+    "knowledgePoint": "TCP/IP四层模型与映射",
     "difficulty": "easy",
     "tags": [
-      "协议、服务、PDU与设备所在层"
+      "TCP/IP四层模型与映射"
     ],
     "knowledgeSection": "网络模型与分层"
   },
@@ -1422,10 +1422,10 @@
     ],
     "analysis": "半双工允许双向通信，但同一时刻只能单向传输；单工只有一个固定方向，全双工可同时双向传输。",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "同步与传输方式",
+    "knowledgePoint": "同步、双工与多路复用",
     "difficulty": "easy",
     "tags": [
-      "同步与传输方式"
+      "同步、双工与多路复用"
     ],
     "knowledgeSection": "数据通信与传输"
   },
@@ -1444,10 +1444,10 @@
     ],
     "analysis": "频分复用（FDM）把信道带宽划分为互不重叠或设保护带的频段，同时传输多个信号。",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "同步与传输方式",
+    "knowledgePoint": "同步、双工与多路复用",
     "difficulty": "easy",
     "tags": [
-      "同步与传输方式"
+      "同步、双工与多路复用"
     ],
     "knowledgeSection": "数据通信与传输"
   },
@@ -1466,10 +1466,10 @@
     ],
     "analysis": "同步时分复用按固定时隙分配资源，空闲输入仍占有时隙，可能降低利用率；统计复用可按实际需求分配。",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "同步与传输方式",
+    "knowledgePoint": "同步、双工与多路复用",
     "difficulty": "medium",
     "tags": [
-      "同步与传输方式"
+      "同步、双工与多路复用"
     ],
     "knowledgeSection": "数据通信与传输"
   },
@@ -1488,10 +1488,10 @@
     ],
     "analysis": "波分复用 WDM 在光纤中以不同波长承载多路光信号，接收端再按波长分离。",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "同步与传输方式",
+    "knowledgePoint": "同步、双工与多路复用",
     "difficulty": "easy",
     "tags": [
-      "同步与传输方式"
+      "同步、双工与多路复用"
     ],
     "knowledgeSection": "数据通信与传输"
   },
@@ -1752,10 +1752,10 @@
     ],
     "analysis": "/25 占用 10.40.0.0–10.40.0.127，下一段从 .128 开始。/26 有 62 个可用主机地址，满足 50 台且边界对齐。",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "VLSM子网划分",
+    "knowledgePoint": "子网划分与VLSM",
     "difficulty": "medium",
     "tags": [
-      "VLSM子网划分"
+      "子网划分与VLSM"
     ],
     "knowledgeSection": "IPv4与子网"
   },
@@ -2302,10 +2302,10 @@
     ],
     "analysis": "SFTP 是基于 SSH 的安全文件传输协议；FTPS 则是在 FTP 上增加 TLS 保护，两者名称相似但协议基础不同。",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "FTP与TFTP",
+    "knowledgePoint": "文件传输协议FTP、TFTP与SFTP",
     "difficulty": "medium",
     "tags": [
-      "FTP与TFTP"
+      "文件传输协议FTP、TFTP与SFTP"
     ],
     "knowledgeSection": "应用层协议与端口"
   },
@@ -2456,10 +2456,10 @@
     ],
     "analysis": "IPv6 使用 Hop Limit 限制数据包可经过的路由器跳数，对应 IPv4 的 TTL 转发限制作用。",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "地址表示与地址类型",
+    "knowledgePoint": "IPv6报文与协议特性",
     "difficulty": "easy",
     "tags": [
-      "地址表示与地址类型"
+      "IPv6报文与协议特性"
     ],
     "knowledgeSection": "IPv6"
   },
@@ -2500,10 +2500,10 @@
     ],
     "analysis": "IPv6 取消了基本首部校验和以减少逐跳更新和重新计算负担；这不代表数据无差错，链路层 FCS 和 TCP/UDP 校验等机制仍发挥作用。",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "地址表示与地址类型",
+    "knowledgePoint": "IPv6报文与协议特性",
     "difficulty": "hard",
     "tags": [
-      "地址表示与地址类型"
+      "IPv6报文与协议特性"
     ],
     "knowledgeSection": "IPv6"
   },
@@ -2522,10 +2522,10 @@
     ],
     "analysis": "Next Header 字段指明后续首部类型，可链接多个扩展首部，最终指向 TCP、UDP、ICMPv6 等上层协议。",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "地址表示与地址类型",
+    "knowledgePoint": "IPv6报文与协议特性",
     "difficulty": "medium",
     "tags": [
-      "地址表示与地址类型"
+      "IPv6报文与协议特性"
     ],
     "knowledgeSection": "IPv6"
   },
@@ -2544,10 +2544,10 @@
     ],
     "analysis": "DHCPv6 前缀委派可把一段 IPv6 前缀交给下游路由器，由其再划分子网并通告给内部链路。",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "地址表示与地址类型",
+    "knowledgePoint": "IPv6地址自动配置与DHCPv6",
     "difficulty": "hard",
     "tags": [
-      "地址表示与地址类型"
+      "IPv6地址自动配置与DHCPv6"
     ],
     "knowledgeSection": "IPv6"
   },
@@ -2632,10 +2632,10 @@
     ],
     "analysis": "IPv6 基本首部固定为 40 字节；可选扩展信息放在扩展首部中，因此基本首部长度不随选项变化。",
     "chapter": "网络体系结构与TCP/IP",
-    "knowledgePoint": "地址表示与地址类型",
+    "knowledgePoint": "IPv6报文与协议特性",
     "difficulty": "medium",
     "tags": [
-      "地址表示与地址类型"
+      "IPv6报文与协议特性"
     ],
     "knowledgeSection": "IPv6"
   },
@@ -3512,12 +3512,12 @@
     ],
     "analysis": "SVI 是 VLAN 的三层虚接口，可为设备提供管理 IP，也可参与三层转发；访问仍应配合认证、ACL 和安全管理协议。",
     "chapter": "局域网与交换技术",
-    "knowledgePoint": "冲突域、广播域与网络设备",
+    "knowledgePoint": "VLAN间路由与VLAN聚合",
     "difficulty": "medium",
     "tags": [
-      "冲突域、广播域与网络设备"
+      "VLAN间路由与VLAN聚合"
     ],
-    "knowledgeSection": "以太网基础"
+    "knowledgeSection": "VLAN"
   },
   {
     "id": "ne-20260923-161",
@@ -3930,10 +3930,10 @@
     ],
     "analysis": "普通路由主要依据目的前缀查表；策略路由可根据源地址、协议、端口等策略条件覆盖常规路径选择。",
     "chapter": "路由与广域网技术",
-    "knowledgePoint": "路由协议类型与算法",
+    "knowledgePoint": "策略路由、路由策略与重分发",
     "difficulty": "medium",
     "tags": [
-      "路由协议类型与算法"
+      "策略路由、路由策略与重分发"
     ],
     "knowledgeSection": "路由基础"
   },
@@ -3974,10 +3974,10 @@
     ],
     "analysis": "常见 RIP 定时器中，若约 180 秒未收到该路由更新，路由会被判为失效；具体定时器可以按实现配置，后续还可能经历垃圾回收阶段。",
     "chapter": "路由与广域网技术",
-    "knowledgePoint": "距离矢量与最大跳数",
+    "knowledgePoint": "RIP工作原理、版本与报文",
     "difficulty": "medium",
     "tags": [
-      "距离矢量与最大跳数"
+      "RIP工作原理、版本与报文"
     ],
     "knowledgeSection": "RIP"
   },
@@ -3996,10 +3996,10 @@
     ],
     "analysis": "RIPv2 的组播地址为 224.0.0.9；224.0.0.5 常用于 OSPF AllSPFRouters 组播。",
     "chapter": "路由与广域网技术",
-    "knowledgePoint": "距离矢量与最大跳数",
+    "knowledgePoint": "RIP工作原理、版本与报文",
     "difficulty": "medium",
     "tags": [
-      "距离矢量与最大跳数"
+      "RIP工作原理、版本与报文"
     ],
     "knowledgeSection": "RIP"
   },
@@ -4018,10 +4018,10 @@
     ],
     "analysis": "RIPv2 的 Route Tag 可携带与路由来源有关的标记，便于在自治系统边界等场景进行路由重分发策略处理；它不是加密字段。",
     "chapter": "路由与广域网技术",
-    "knowledgePoint": "距离矢量与最大跳数",
+    "knowledgePoint": "RIP工作原理、版本与报文",
     "difficulty": "medium",
     "tags": [
-      "距离矢量与最大跳数"
+      "RIP工作原理、版本与报文"
     ],
     "knowledgeSection": "RIP"
   },
@@ -4084,10 +4084,10 @@
     ],
     "analysis": "RIP Request 用于请求路由信息。邻居可按请求项返回对应信息；请求全部路由时通常返回其路由表，行为遵循 RIP 报文规则。",
     "chapter": "路由与广域网技术",
-    "knowledgePoint": "距离矢量与最大跳数",
+    "knowledgePoint": "RIP工作原理、版本与报文",
     "difficulty": "easy",
     "tags": [
-      "距离矢量与最大跳数"
+      "RIP工作原理、版本与报文"
     ],
     "knowledgeSection": "RIP"
   },
@@ -4106,10 +4106,10 @@
     ],
     "analysis": "某些实现可对等价 RIP 路由进行负载分担；路径数量及分担方式由设备配置和实现决定。",
     "chapter": "路由与广域网技术",
-    "knowledgePoint": "距离矢量与最大跳数",
+    "knowledgePoint": "RIP工作原理、版本与报文",
     "difficulty": "medium",
     "tags": [
-      "距离矢量与最大跳数"
+      "RIP工作原理、版本与报文"
     ],
     "knowledgeSection": "RIP"
   },
@@ -4128,10 +4128,10 @@
     ],
     "analysis": "RIP 更新认证可验证更新来源，降低未授权路由器注入虚假路由的风险；认证不替代链路和设备安全控制。",
     "chapter": "路由与广域网技术",
-    "knowledgePoint": "距离矢量与最大跳数",
+    "knowledgePoint": "RIP工作原理、版本与报文",
     "difficulty": "medium",
     "tags": [
-      "距离矢量与最大跳数"
+      "RIP工作原理、版本与报文"
     ],
     "knowledgeSection": "RIP"
   },
@@ -4150,10 +4150,10 @@
     ],
     "analysis": "RIP 报文受 512 字节上限约束；IPv4 路由条目为 20 字节，因此常见完整 Response 最多携带 25 个条目。认证等字段会占用报文空间。",
     "chapter": "路由与广域网技术",
-    "knowledgePoint": "距离矢量与最大跳数",
+    "knowledgePoint": "RIP工作原理、版本与报文",
     "difficulty": "medium",
     "tags": [
-      "距离矢量与最大跳数"
+      "RIP工作原理、版本与报文"
     ],
     "knowledgeSection": "RIP"
   },
@@ -4348,10 +4348,10 @@
     ],
     "analysis": "E1 路由的总成本通常包含外部度量与到 ASBR 的 OSPF 内部成本；E2 默认主要按外部度量比较，内部成本常在外部度量相同时用于进一步比较。",
     "chapter": "路由与广域网技术",
-    "knowledgePoint": "区域、LSA与邻居状态",
+    "knowledgePoint": "OSPF度量与路由计算",
     "difficulty": "hard",
     "tags": [
-      "区域、LSA与邻居状态"
+      "OSPF度量与路由计算"
     ],
     "knowledgeSection": "OSPF"
   },
@@ -4876,10 +4876,10 @@
     ],
     "analysis": "专用口令哈希/KDF 可配置计算、内存或并行成本，增加攻击者离线尝试每个候选口令的成本；实际还应配合独立随机盐和安全参数。",
     "chapter": "网络安全",
-    "knowledgePoint": "非对称加密与Hash摘要",
+    "knowledgePoint": "Hash、HMAC与口令存储",
     "difficulty": "easy",
     "tags": [
-      "非对称加密与Hash摘要"
+      "Hash、HMAC与口令存储"
     ],
     "knowledgeSection": "密码与加密"
   },
@@ -4898,10 +4898,10 @@
     ],
     "analysis": "每个密码使用独立随机盐可使相同密码产生不同存储摘要，并提高预计算攻击成本；仍应使用专门的慢哈希方案保存口令。",
     "chapter": "网络安全",
-    "knowledgePoint": "非对称加密与Hash摘要",
+    "knowledgePoint": "Hash、HMAC与口令存储",
     "difficulty": "medium",
     "tags": [
-      "非对称加密与Hash摘要"
+      "Hash、HMAC与口令存储"
     ],
     "knowledgeSection": "密码与加密"
   },
@@ -4920,10 +4920,10 @@
     ],
     "analysis": "HMAC 使用双方共享的秘密密钥和哈希函数生成消息认证码，可同时验证消息完整性及持有密钥的实体；它不提供公开可验证的数字签名。",
     "chapter": "网络安全",
-    "knowledgePoint": "非对称加密与Hash摘要",
+    "knowledgePoint": "Hash、HMAC与口令存储",
     "difficulty": "medium",
     "tags": [
-      "非对称加密与Hash摘要"
+      "Hash、HMAC与口令存储"
     ],
     "knowledgeSection": "密码与加密"
   },
@@ -4964,10 +4964,10 @@
     ],
     "analysis": "公钥加密后，只有对应私钥才能解密；混合加密中通常用此方式保护会话密钥，再由高速对称算法加密大量数据。",
     "chapter": "网络安全",
-    "knowledgePoint": "非对称加密与Hash摘要",
+    "knowledgePoint": "非对称加密算法",
     "difficulty": "easy",
     "tags": [
-      "非对称加密与Hash摘要"
+      "非对称加密算法"
     ],
     "knowledgeSection": "密码与加密"
   },
@@ -5030,10 +5030,10 @@
     ],
     "analysis": "Base64 是可逆编码格式，不提供保密性；口令应使用适当的加盐慢哈希存储，而非可逆编码。",
     "chapter": "网络安全",
-    "knowledgePoint": "密码学原则与传输加密",
+    "knowledgePoint": "Hash、HMAC与口令存储",
     "difficulty": "easy",
     "tags": [
-      "密码学原则与传输加密"
+      "Hash、HMAC与口令存储"
     ],
     "knowledgeSection": "密码与加密"
   },
@@ -5580,10 +5580,10 @@
     ],
     "analysis": "Web 应用防火墙可按 HTTP/HTTPS 应用层语义识别和拦截常见 Web 攻击；它不能替代安全编码和主机加固。",
     "chapter": "网络安全",
-    "knowledgePoint": "Web攻击与常见漏洞",
+    "knowledgePoint": "Web攻击与漏洞防护",
     "difficulty": "medium",
     "tags": [
-      "Web攻击与常见漏洞"
+      "Web攻击与漏洞防护"
     ],
     "knowledgeSection": "网络攻击"
   },
@@ -5690,10 +5690,10 @@
     ],
     "analysis": "管理面应放在受控管理网络，限制来源并使用强认证、最小权限和日志审计；默认口令和公网暴露显著扩大风险。",
     "chapter": "网络安全",
-    "knowledgePoint": "堡垒机与零信任架构",
+    "knowledgePoint": "身份认证与安全运维",
     "difficulty": "medium",
     "tags": [
-      "堡垒机与零信任架构"
+      "身份认证与安全运维"
     ],
     "knowledgeSection": "网络设备与边界防护"
   },
@@ -5734,10 +5734,10 @@
     ],
     "analysis": "凭据填充使用从其他泄露事件获得的有效用户名和口令进行批量登录尝试；多因素认证、登录速率限制和泄露口令检测可降低风险。",
     "chapter": "网络安全",
-    "knowledgePoint": "Web攻击与常见漏洞",
+    "knowledgePoint": "Web攻击与漏洞防护",
     "difficulty": "easy",
     "tags": [
-      "Web攻击与常见漏洞"
+      "Web攻击与漏洞防护"
     ],
     "knowledgeSection": "网络攻击"
   },
@@ -5756,10 +5756,10 @@
     ],
     "analysis": "反射放大攻击利用伪造源地址让第三方服务把较大的响应发给受害者；限制开放解析、部署源地址反欺骗可降低风险。",
     "chapter": "网络安全",
-    "knowledgePoint": "DDoS",
+    "knowledgePoint": "DoS与DDoS",
     "difficulty": "easy",
     "tags": [
-      "DDoS"
+      "DoS与DDoS"
     ],
     "knowledgeSection": "网络攻击"
   },
@@ -5778,10 +5778,10 @@
     ],
     "analysis": "DHCP Starvation 通过大量伪造客户端请求耗尽 DHCP 地址池；端口安全、DHCP Snooping 速率限制及认证接入可帮助缓解。",
     "chapter": "网络安全",
-    "knowledgePoint": "DDoS",
+    "knowledgePoint": "DoS与DDoS",
     "difficulty": "medium",
     "tags": [
-      "DDoS"
+      "DoS与DDoS"
     ],
     "knowledgeSection": "网络攻击"
   },
@@ -5822,10 +5822,10 @@
     ],
     "analysis": "DNS 缓存投毒通过伪造或污染解析结果，将用户引向错误地址；随机化事务参数、源端口和 DNSSEC 验证等可提供防护。",
     "chapter": "网络安全",
-    "knowledgePoint": "Web攻击与常见漏洞",
+    "knowledgePoint": "DNS欺骗与DNSSEC",
     "difficulty": "medium",
     "tags": [
-      "Web攻击与常见漏洞"
+      "DNS欺骗与DNSSEC"
     ],
     "knowledgeSection": "网络攻击"
   },
@@ -5844,10 +5844,10 @@
     ],
     "analysis": "SYN Cookies 在完成握手前尽量不为每个 SYN 保存完整连接状态，通过编码确认序列号等方式降低半连接队列耗尽风险。",
     "chapter": "网络安全",
-    "knowledgePoint": "DDoS",
+    "knowledgePoint": "DoS与DDoS",
     "difficulty": "medium",
     "tags": [
-      "DDoS"
+      "DoS与DDoS"
     ],
     "knowledgeSection": "网络攻击"
   },
@@ -5888,12 +5888,12 @@
     ],
     "analysis": "应尽快遏制传播并保留证据，随后按预案调查、清除、恢复和通知；不应删日志或继续开放共享访问。",
     "chapter": "网络安全",
-    "knowledgePoint": "堡垒机与零信任架构",
+    "knowledgePoint": "恶意软件、社会工程与应急响应",
     "difficulty": "medium",
     "tags": [
-      "堡垒机与零信任架构"
+      "恶意软件、社会工程与应急响应"
     ],
-    "knowledgeSection": "网络设备与边界防护"
+    "knowledgeSection": "网络攻击"
   },
   {
     "id": "ne-20260923-269",
@@ -5910,10 +5910,10 @@
     ],
     "analysis": "及时修补并关闭不必要服务可减少可被利用的漏洞和暴露接口，属于基础漏洞与攻击面管理。",
     "chapter": "网络安全",
-    "knowledgePoint": "Web攻击与常见漏洞",
+    "knowledgePoint": "Web攻击与漏洞防护",
     "difficulty": "easy",
     "tags": [
-      "Web攻击与常见漏洞"
+      "Web攻击与漏洞防护"
     ],
     "knowledgeSection": "网络攻击"
   },
@@ -5932,10 +5932,10 @@
     ],
     "analysis": "DNSSEC 通过数字签名验证 DNS 数据的来源和完整性，不提供查询机密性；需要保护传输隐私时还需使用其他机制。",
     "chapter": "网络安全",
-    "knowledgePoint": "Web攻击与常见漏洞",
+    "knowledgePoint": "DNS欺骗与DNSSEC",
     "difficulty": "medium",
     "tags": [
-      "Web攻击与常见漏洞"
+      "DNS欺骗与DNSSEC"
     ],
     "knowledgeSection": "网络攻击"
   },
@@ -6108,12 +6108,12 @@
     ],
     "analysis": "名称不匹配可能意味着地址错误、配置问题或中间人风险；客户端应验证证书链和主机名，不应无条件忽略。",
     "chapter": "网络安全",
-    "knowledgePoint": "TLS与安全传输协议",
+    "knowledgePoint": "证书验证与CRL吊销",
     "difficulty": "medium",
     "tags": [
-      "TLS与安全传输协议"
+      "证书验证与CRL吊销"
     ],
-    "knowledgeSection": "VPN与安全传输"
+    "knowledgeSection": "PKI与数字证书"
   },
   {
     "id": "ne-20260923-279",
@@ -6415,13 +6415,13 @@
       "A"
     ],
     "analysis": "ss -lntp 可查看监听中的 TCP 套接字并显示进程信息（进程字段通常需足够权限）；其他选项会修改文件或不是网络查看命令。",
-    "chapter": "服务器配置",
-    "knowledgePoint": "网络接口与服务配置",
+    "chapter": "网络管理",
+    "knowledgePoint": "ipconfig、netstat与路由工具",
     "difficulty": "easy",
     "tags": [
-      "网络接口与服务配置"
+      "ipconfig、netstat与路由工具"
     ],
-    "knowledgeSection": "Linux服务器"
+    "knowledgeSection": "诊断工具与设备排查"
   },
   {
     "id": "ne-20260923-293",
@@ -6504,10 +6504,10 @@
     ],
     "analysis": "客户端私钥必须保密；服务器保存允许登录的公钥，通常放在目标账户的 authorized_keys 中并限制权限。",
     "chapter": "服务器配置",
-    "knowledgePoint": "权限、进程与文件系统",
+    "knowledgePoint": "网络接口与服务配置",
     "difficulty": "medium",
     "tags": [
-      "权限、进程与文件系统"
+      "网络接口与服务配置"
     ],
     "knowledgeSection": "Linux服务器"
   },
@@ -7186,10 +7186,10 @@
     ],
     "analysis": "物理链路质量、双工/速率协商、光模块功率和接口错误计数有助定位链路层问题；链路 Up 不代表链路质量正常。",
     "chapter": "网络管理",
-    "knowledgePoint": "设备Console与维护接入",
+    "knowledgePoint": "设备接入与接口排障",
     "difficulty": "medium",
     "tags": [
-      "设备Console与维护接入"
+      "设备接入与接口排障"
     ],
     "knowledgeSection": "诊断工具与设备排查"
   },
@@ -7296,10 +7296,10 @@
     ],
     "analysis": "主机密钥变化可能源于设备重装，也可能表示 DNS/路由劫持或中间人攻击；应先通过独立可信渠道核对指纹。",
     "chapter": "网络管理",
-    "knowledgePoint": "设备Console与维护接入",
+    "knowledgePoint": "设备接入与接口排障",
     "difficulty": "easy",
     "tags": [
-      "设备Console与维护接入"
+      "设备接入与接口排障"
     ],
     "knowledgeSection": "诊断工具与设备排查"
   },
@@ -7340,10 +7340,10 @@
     ],
     "analysis": "带外管理通过独立管理网络或串口控制台访问设备，在业务网络故障时仍可进行恢复操作。",
     "chapter": "网络管理",
-    "knowledgePoint": "设备Console与维护接入",
+    "knowledgePoint": "设备接入与接口排障",
     "difficulty": "medium",
     "tags": [
-      "设备Console与维护接入"
+      "设备接入与接口排障"
     ],
     "knowledgeSection": "诊断工具与设备排查"
   },
@@ -7406,10 +7406,10 @@
     ],
     "analysis": "管理面应验证对端身份，限制来源地址、启用强认证和最小权限，并审计操作；忽略证书与共享默认账号会削弱安全性。",
     "chapter": "网络管理",
-    "knowledgePoint": "设备Console与维护接入",
+    "knowledgePoint": "设备接入与接口排障",
     "difficulty": "medium",
     "tags": [
-      "设备Console与维护接入"
+      "设备接入与接口排障"
     ],
     "knowledgeSection": "诊断工具与设备排查"
   },
@@ -7450,10 +7450,10 @@
     ],
     "analysis": "公钥认证仍需结合来源限制、账户最小权限、密钥生命周期、补丁和日志审计；私钥不能共享或公开。",
     "chapter": "网络管理",
-    "knowledgePoint": "设备Console与维护接入",
+    "knowledgePoint": "设备接入与接口排障",
     "difficulty": "medium",
     "tags": [
-      "设备Console与维护接入"
+      "设备接入与接口排障"
     ],
     "knowledgeSection": "诊断工具与设备排查"
   },
@@ -7736,10 +7736,10 @@
     ],
     "analysis": "光功率预算由发射端、接收端和链路中的光纤、连接器、熔接点等损耗共同决定，不能只按介质类型判断距离。",
     "chapter": "综合布线与网络规划",
-    "knowledgePoint": "传输介质特性与选型",
+    "knowledgePoint": "光功率与光链路基础",
     "difficulty": "medium",
     "tags": [
-      "传输介质特性与选型"
+      "光功率与光链路基础"
     ],
     "knowledgeSection": "传输介质"
   },
@@ -9232,10 +9232,10 @@
     ],
     "analysis": "Overlay 网络通过隧道在底层 IP 网络之上构建逻辑网络，可跨物理节点扩展租户网络并进行隔离。",
     "chapter": "新技术",
-    "knowledgePoint": "云计算与容器",
+    "knowledgePoint": "VXLAN与Overlay网络",
     "difficulty": "hard",
     "tags": [
-      "云计算与容器"
+      "VXLAN与Overlay网络"
     ],
     "knowledgeSection": "网络架构新技术"
   },
@@ -9254,10 +9254,10 @@
     ],
     "analysis": "gNB 是 5G 新空口无线接入网中的基站节点，负责与用户设备进行无线通信并连接 5G 核心网。",
     "chapter": "新技术",
-    "knowledgePoint": "5G",
+    "knowledgePoint": "4G与5G移动通信",
     "difficulty": "easy",
     "tags": [
-      "5G"
+      "4G与5G移动通信"
     ],
     "knowledgeSection": "移动与物联网"
   },
@@ -9276,10 +9276,10 @@
     ],
     "analysis": "NSA（非独立组网）可依托 LTE/EPC 等既有网络锚点并增加 NR；SA 则以 5G 核心网配合 NR 提供独立组网架构。",
     "chapter": "新技术",
-    "knowledgePoint": "5G",
+    "knowledgePoint": "4G与5G移动通信",
     "difficulty": "medium",
     "tags": [
-      "5G"
+      "4G与5G移动通信"
     ],
     "knowledgeSection": "移动与物联网"
   },
@@ -9298,10 +9298,10 @@
     ],
     "analysis": "SA（独立组网）使用 5G NR 接入和 5G 核心网，可提供面向 5G 的核心能力；实际部署仍取决于运营商网络和终端支持。",
     "chapter": "新技术",
-    "knowledgePoint": "5G",
+    "knowledgePoint": "4G与5G移动通信",
     "difficulty": "medium",
     "tags": [
-      "5G"
+      "4G与5G移动通信"
     ],
     "knowledgeSection": "移动与物联网"
   },
@@ -9320,10 +9320,10 @@
     ],
     "analysis": "UPF（用户面功能）处理用户流量转发、路由和策略执行等数据面任务；控制面会话管理由其他核心网功能承担。",
     "chapter": "新技术",
-    "knowledgePoint": "5G",
+    "knowledgePoint": "4G与5G移动通信",
     "difficulty": "medium",
     "tags": [
-      "5G"
+      "4G与5G移动通信"
     ],
     "knowledgeSection": "移动与物联网"
   },
@@ -9342,10 +9342,10 @@
     ],
     "analysis": "网络切片通过逻辑隔离和策略编排，为不同业务构建具有差异化资源与服务特征的端到端网络；底层仍共享物理资源。",
     "chapter": "新技术",
-    "knowledgePoint": "5G",
+    "knowledgePoint": "4G与5G移动通信",
     "difficulty": "medium",
     "tags": [
-      "5G"
+      "4G与5G移动通信"
     ],
     "knowledgeSection": "移动与物联网"
   },
@@ -9364,10 +9364,10 @@
     ],
     "analysis": "URLLC 面向超可靠低时延通信；eMBB 强调增强移动宽带，mMTC 面向海量机器类连接。",
     "chapter": "新技术",
-    "knowledgePoint": "5G",
+    "knowledgePoint": "4G与5G移动通信",
     "difficulty": "easy",
     "tags": [
-      "5G"
+      "4G与5G移动通信"
     ],
     "knowledgeSection": "移动与物联网"
   },
@@ -9386,10 +9386,10 @@
     ],
     "analysis": "NB-IoT 面向低功耗广域物联网场景，适合小数据量、长电池寿命和较强覆盖需求，不适合高吞吐实时业务。",
     "chapter": "新技术",
-    "knowledgePoint": "NB-IoT",
+    "knowledgePoint": "物联网与NB-IoT",
     "difficulty": "easy",
     "tags": [
-      "NB-IoT"
+      "物联网与NB-IoT"
     ],
     "knowledgeSection": "移动与物联网"
   },
@@ -9408,10 +9408,10 @@
     ],
     "analysis": "PSM 允许设备进入长时间深度休眠以节省电量，设备通常仍注册在网络，但休眠期间网络不能立即寻呼它。",
     "chapter": "新技术",
-    "knowledgePoint": "NB-IoT",
+    "knowledgePoint": "物联网与NB-IoT",
     "difficulty": "hard",
     "tags": [
-      "NB-IoT"
+      "物联网与NB-IoT"
     ],
     "knowledgeSection": "移动与物联网"
   },
@@ -9430,10 +9430,10 @@
     ],
     "analysis": "多接入边缘计算可把计算和内容放在靠近用户或接入网络的位置，减少回传距离与时延，适用于对响应敏感的业务。",
     "chapter": "新技术",
-    "knowledgePoint": "5G",
+    "knowledgePoint": "4G与5G移动通信",
     "difficulty": "medium",
     "tags": [
-      "5G"
+      "4G与5G移动通信"
     ],
     "knowledgeSection": "移动与物联网"
   },
@@ -9452,10 +9452,10 @@
     ],
     "analysis": "5G QoS 机制可依据业务特性分类并实施差异化处理；切片和 QoS 流共同支持不同业务服务需求。",
     "chapter": "新技术",
-    "knowledgePoint": "5G",
+    "knowledgePoint": "4G与5G移动通信",
     "difficulty": "medium",
     "tags": [
-      "5G"
+      "4G与5G移动通信"
     ],
     "knowledgeSection": "移动与物联网"
   }

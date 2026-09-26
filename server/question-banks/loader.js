@@ -4,6 +4,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { z } from "zod";
 import { questionSchema } from "../domain.js";
+import { createTaxonomyIndex, assertQuestionTaxonomy } from "./taxonomy.js";
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const json = (file) => JSON.parse(fs.readFileSync(file, "utf8"));
@@ -176,44 +177,9 @@ function validateManifest(manifest, directory) {
     if (Math.abs(totalWeight - 100) > 0.001)
       throw new Error(`考试大纲练习权重之和必须为 100：${directory}`);
   }
-  if (manifest.taxonomy) {
-    const { schemaVersion, modules } = manifest.taxonomy;
-    if (schemaVersion !== 1 || !Array.isArray(modules) || !modules.length)
-      throw new Error(`知识分类配置不合法：${directory}`);
-    const moduleNames = new Set();
-    const moduleOrders = new Set();
-    for (const module of modules) {
-      if (
-        !module.name ||
-        !Number.isInteger(module.order) ||
-        !Array.isArray(module.sections) ||
-        !module.sections.length ||
-        moduleNames.has(module.name) ||
-        moduleOrders.has(module.order)
-      )
-        throw new Error(`知识分类模块配置不合法：${directory}`);
-      moduleNames.add(module.name);
-      moduleOrders.add(module.order);
-      const sectionNames = new Set();
-      for (const section of module.sections) {
-        if (
-          !section.name ||
-          !Number.isInteger(section.order) ||
-          !Array.isArray(section.knowledgePoints) ||
-          !section.knowledgePoints.length ||
-          sectionNames.has(section.name)
-        )
-          throw new Error(`知识分类二级节点配置不合法：${directory}`);
-        sectionNames.add(section.name);
-        const pointNames = new Set();
-        for (const point of section.knowledgePoints) {
-          if (!point.name || pointNames.has(point.name))
-            throw new Error(`知识分类考点配置不合法：${directory}`);
-          pointNames.add(point.name);
-        }
-      }
-    }
-  }
+  return manifest.taxonomy
+    ? createTaxonomyIndex(manifest.taxonomy, directory)
+    : null;
 }
 
 const sharedQuestionMarker =
@@ -462,6 +428,10 @@ function decorateVeterinarySharedGroups(questions) {
   // PDF chapter labels occasionally change in the middle of a case block.
   // Keep the whole case in one syllabus module so an exam cannot split it.
   for (const group of groups.values()) {
+    // This exam-module rule belongs to veterinary cases only. Other shared
+    // stems may legitimately test different chapters in their children.
+    if (!group.every((question) => question.certificates?.includes("veterinary-practitioner")))
+      continue;
     if (group.length < 2) continue;
     const counts = new Map();
     for (const question of group)
@@ -493,7 +463,7 @@ function loadCatalog() {
     .map((entry) => {
       const directory = path.join(root, entry.name);
       const manifest = json(path.join(directory, "manifest.json"));
-      validateManifest(manifest, directory);
+      const taxonomyIndex = validateManifest(manifest, directory);
       let guide = null;
       if (manifest.guidePath) {
         const guideFile = path.resolve(directory, manifest.guidePath);
@@ -501,7 +471,7 @@ function loadCatalog() {
           throw new Error(`证书指南路径不能超出证书目录：${directory}`);
         guide = guideSchema.parse(json(guideFile));
       }
-      return { directory, ...manifest, guide };
+      return { directory, ...manifest, guide, taxonomyIndex };
     })
     .sort(
       (a, b) => (a.certificate.order || 999) - (b.certificate.order || 999),
@@ -539,6 +509,7 @@ function loadCatalog() {
           } = candidate;
           if (!id || !slug.test(id)) throw new Error(`题目 ID 不合法：${file}`);
           questionSchema.parse({ ...raw, certificates });
+          assertQuestionTaxonomy(candidate, manifest.taxonomyIndex, file);
           if (
             syllabusChapters.size &&
             !syllabusChapters.has(raw.chapter) &&
@@ -564,6 +535,14 @@ function loadCatalog() {
     }
   }
   decorateVeterinarySharedGroups([...questions.values()]);
+  // Validate the effective runtime data as well, so decorators cannot silently
+  // move a chapter while leaving its section and point behind.
+  const taxonomyByCertificate = new Map(
+    manifests.map((manifest) => [manifest.certificate.id, manifest.taxonomyIndex]),
+  );
+  for (const question of questions.values())
+    for (const certificateId of question.certificates)
+      assertQuestionTaxonomy(question, taxonomyByCertificate.get(certificateId));
   return {
     manifests,
     certificates: manifests.map((entry) => ({

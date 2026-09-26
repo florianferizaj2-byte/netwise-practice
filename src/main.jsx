@@ -971,11 +971,11 @@ function AuthScreen({ onAuth, initialError = "" }) {
           </button>
           <a
             className="auth-app-download"
-            href="/downloads/kaojiang-v0.2.7.apk"
-            download="kaojiang-v0.2.7.apk"
+            href="/downloads/kaojiang-v0.2.8.apk"
+            download="kaojiang-v0.2.8.apk"
           >
             <Download size={16} />
-            下载考匠 App · Android v0.2.7
+            下载考匠 App · Android v0.2.8
           </a>
           <p className="auth-privacy-note">
             <ShieldCheck size={14} /> 你的学习数据与 AI 配置仅属于当前账号
@@ -1006,15 +1006,15 @@ function AnnouncementModal({ onClose }) {
             </span>
             <div>
               <span className="announcement-kicker">考匠 · 更新公告</span>
-              <h2 id="announcement-title">移动端 v0.2.7 更新</h2>
-              <p>支持图片题、AI 实时出题与社区排行榜。</p>
+              <h2 id="announcement-title">移动端 v0.2.8 更新</h2>
+              <p>页面切换更顺畅，题库加载更轻快。</p>
             </div>
           </div>
           <IconButton icon={X} label="关闭网站公告" onClick={onClose} />
         </header>
         <div className="announcement-body">
           <div className="announcement-highlight">
-                <strong>考匠 App v0.2.7 已发布</strong>
+                <strong>考匠 App v0.2.8 已发布</strong>
                 <span>
                   在登录页或账号菜单点击“下载 App”即可获取最新版 Android 安装包，登录后连接现有网站后端。
                 </span>
@@ -1023,27 +1023,27 @@ function AnnouncementModal({ onClose }) {
             <li>
               <span>01</span>
               <div>
-                <strong>图片题与简答题</strong>
-                <p>App 中可查看原题配图，也能填写简答题并自评。</p>
+                <strong>页面切换保留进度</strong>
+                <p>返回已访问的模块时保留滚动位置和当前练习，隐藏页面会暂停社区轮询和循环动效。</p>
               </div>
             </li>
             <li>
               <span>02</span>
               <div>
-                <strong>AI 出题实时反馈</strong>
-                <p>按知识点生成题目，程序查重和独立审核后可选择提交或删除。</p>
+                <strong>题库缓存与断网阅读</strong>
+                <p>目录和已访问的普通题目可立即读取缓存；缓存按账号与证书隔离，断网时仍能查看已缓存内容。</p>
               </div>
             </li>
             <li>
               <span>03</span>
               <div>
-                <strong>社区排行榜</strong>
-                <p>查看刷题量、正确率、连续天数和提交题目四个榜单。</p>
+                <strong>更轻的题目请求</strong>
+                <p>练习题按批次加载，减少重复请求；服务端新增分页题目和轻量学习统计接口。</p>
               </div>
             </li>
           </ul>
           <p className="announcement-footnote">
-            App 当前提供 Android v0.2.7 安装包；正式考试信息仍请以对应认证机构和相关主管部门的最新公告为准。
+            App 当前提供 Android v0.2.8 安装包；正式考试信息仍请以对应认证机构和相关主管部门的最新公告为准。
           </p>
         </div>
         <footer className="announcement-footer">
@@ -1521,8 +1521,8 @@ function App() {
                 <a
                   className="account-menu-link"
                   role="menuitem"
-                  href="/downloads/kaojiang-v0.2.7.apk"
-                  download="kaojiang-v0.2.7.apk"
+                  href="/downloads/kaojiang-v0.2.8.apk"
+                  download="kaojiang-v0.2.8.apk"
                   onClick={() => setAccountMenuOpen(false)}
                 >
                   <Download size={17} />
