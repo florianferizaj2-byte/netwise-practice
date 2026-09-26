@@ -72,6 +72,8 @@ type ScreenProps = {
   practiceKnowledgePoint?: string;
   practiceSelectionComplete?: boolean;
   practiceQuestionId?: string;
+  practiceAiGroupId?: string;
+  aiQuestionGroupId?: string;
   preview?: boolean;
   onOpenCertificatePicker?: () => void;
   onUserUpdated?: (user: AuthResponse['user']) => void;
@@ -719,6 +721,8 @@ export function PracticeScreen({
   practiceKnowledgePoint,
   practiceSelectionComplete = false,
   practiceQuestionId,
+  practiceAiGroupId,
+  aiQuestionGroupId,
   preview = false,
 }: ScreenProps) {
   const { colors } = useTheme();
@@ -812,12 +816,14 @@ export function PracticeScreen({
       };
     }
 
-    if (practiceMode === 'ai') {
+    if (practiceMode === 'ai' && !practiceAiGroupId) {
       setLoading(false);
       return () => { mounted = false; };
     }
 
-    const loadQuestions = isDailyPractice
+    const loadQuestions = practiceAiGroupId
+      ? mobileApi.aiQuestionGroup(practiceAiGroupId).then((result) => result.questions)
+      : isDailyPractice
       ? loadDailyPracticeQuestions(
           practiceChapter,
           practiceKnowledgeSection,
@@ -873,6 +879,7 @@ export function PracticeScreen({
     practiceKnowledgePoint,
     practiceMode,
     practiceQuestionId,
+    practiceAiGroupId,
     practiceSelectionComplete,
     practiceSource,
     preview,
@@ -1283,7 +1290,9 @@ export function PracticeScreen({
   if (practiceMode === 'ai' && practiceChapter && practiceKnowledgePoint) {
     return <AiQuestionDraftScreen
       selection={{ chapter: practiceChapter, knowledgeSection: practiceKnowledgeSection, knowledgePoint: practiceKnowledgePoint }}
+      initialGroupId={aiQuestionGroupId}
       onBack={() => onNavigate('practice', { practiceMode: 'ai' })}
+      onNavigate={onNavigate}
     />;
   }
 
@@ -1295,7 +1304,7 @@ export function PracticeScreen({
           <Text style={styles.completedEmoji}>✦</Text>
           <Text style={styles.completedTitle}>很棒，节奏保持住</Text>
           <Text style={styles.completedText}>
-            本组已提交到你的账号，回到首页可以查看最新学习进度。
+            本组练习进度已保存到你的账号，回到首页可以查看最新学习进度。
           </Text>
           <PrimaryAction onPress={() => onNavigate('today')}>查看今日进度</PrimaryAction>
           <PrimaryAction

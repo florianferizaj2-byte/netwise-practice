@@ -28,9 +28,9 @@ import { studySummary } from "./study-summary.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const mobileRelease = () => {
-  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.2.8";
+  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.2.9";
   const minimumVersion =
-    process.env.MOBILE_MINIMUM_VERSION || "0.2.7";
+    process.env.MOBILE_MINIMUM_VERSION || "0.2.8";
   return {
     latestVersion,
     minimumVersion,
@@ -39,7 +39,7 @@ const mobileRelease = () => {
       `/downloads/kaojiang-v${latestVersion}.apk`,
     releaseNotes:
       process.env.MOBILE_RELEASE_NOTES ||
-      "优化页面切换与题目加载；支持按账号安全缓存题库目录和已访问题目，断网可继续阅读缓存内容。",
+      "AI 出题一次生成 10 题并在后台持续处理；每题经独立二次审核，未通过会继续补题，生成组可上传或直接练习。",
   };
 };
 async function exchangeWechatMiniProgramCode(code) {
@@ -575,6 +575,125 @@ export async function createApp(options = {}) {
       return await fn();
     } finally {
       aiBusy = false;
+    }
+  };
+  let aiQuestionJobsDraining = false;
+  const drainAiQuestionGenerationQueue = async () => {
+    if (aiBusy || aiQuestionJobsDraining) return;
+    const job = store.nextAiQuestionGenerationJob();
+    if (!job) return;
+    aiQuestionJobsDraining = true;
+    aiBusy = true;
+    const { id, userId, certificateId, selection } = job;
+    let lastProgressAt = 0;
+    let lastProgressSignature = "";
+    try {
+      store.updateAiQuestionGenerationJob(id, userId, certificateId, {
+        status: "running",
+        error: null,
+        progress: {
+          stage: "prepare",
+          message: "正在读取当前知识点并准备 10 道题",
+          completed: 0,
+          total: 10,
+        },
+      });
+      const allQuestions = store.allQ();
+      const seed = allQuestions.find((question) =>
+        hasCertificateQuestion(question, certificateId) &&
+        question.chapter === selection.chapter &&
+        (question.knowledgeSection || null) === (selection.knowledgeSection || null) &&
+        (question.targetKnowledgePoint || question.knowledgePoint) === selection.knowledgePoint &&
+        (question.source !== "ai_generated" || question.ownerUserId === userId),
+      );
+      if (!seed) throw new Error("该知识点暂无可供参考的题目，请先选择具体知识点");
+      const generated = await provider.generateBankExpansion(seed, 10, {
+        userId,
+        certificateId,
+        retryUntilAccepted: true,
+        onProgress: (event) => {
+          const progress = {
+            stage: event.stage || "generate",
+            message: event.message || "AI 正在处理题目",
+            completed: Math.min(10, Math.max(0, Number(event.completed) || 0)),
+            total: 10,
+            ...(Number.isFinite(event.round) ? { round: event.round } : {}),
+            ...(Number.isFinite(event.outputLength)
+              ? { outputLength: event.outputLength }
+              : {}),
+          };
+          const signature = `${progress.stage}:${progress.completed}:${progress.round || 0}`;
+          const now = Date.now();
+          if (signature === lastProgressSignature && now - lastProgressAt < 1200)
+            return;
+          lastProgressAt = now;
+          lastProgressSignature = signature;
+          store.updateAiQuestionGenerationJob(id, userId, certificateId, {
+            status: "running",
+            progress,
+          });
+        },
+      });
+      if (generated.length !== 10) throw new Error("AI 没有返回完整的 10 道题，请重新生成");
+      const related = allQuestions.filter((question) =>
+        question.chapter === selection.chapter &&
+        (question.knowledgeSection || null) === (selection.knowledgeSection || null) &&
+        (question.targetKnowledgePoint || question.knowledgePoint) === selection.knowledgePoint,
+      );
+      const verifiedQuestions = [];
+      for (const candidate of generated) {
+        const verified = validateQuestion(
+          candidate,
+          [...allQuestions, ...verifiedQuestions],
+          seed,
+        );
+        if ([...related, ...verifiedQuestions].some(
+          (question) => questionSimilarity(verified, question) >= 0.9,
+        )) throw new Error("生成题目与已有题目重复，请稍后重试");
+        verifiedQuestions.push({
+          ...verified,
+          id: `ai-question-${crypto.randomUUID()}`,
+          source: "ai_generated",
+          sourceLabel: "AI 生成题目",
+          certificates: [certificateId],
+          ownerUserId: userId,
+          targetKnowledgePoint: selection.knowledgePoint,
+          createdAt: new Date().toISOString(),
+        });
+      }
+      const topic = `question-generation:${selection.knowledgePoint}`;
+      const groupId = store.addAiQuestionGroup(verifiedQuestions, topic, {
+        userId,
+        certificateId,
+        jobId: id,
+        metadata: selection,
+      });
+      store.updateAiQuestionGenerationJob(id, userId, certificateId, {
+        status: "completed",
+        groupId,
+        error: null,
+        progress: {
+          stage: "done",
+          message: "10 道题已生成，可以开始刷题或上传共享题库",
+          completed: 10,
+          total: 10,
+        },
+      });
+    } catch (error) {
+      const message = redact(error instanceof Error ? error.message : "题目生成失败");
+      store.updateAiQuestionGenerationJob(id, userId, certificateId, {
+        status: "failed",
+        error: message,
+        progress: {
+          stage: "error",
+          message,
+          completed: 0,
+          total: 10,
+        },
+      });
+    } finally {
+      aiBusy = false;
+      aiQuestionJobsDraining = false;
     }
   };
   const requireQ = (id, req) => {
@@ -1695,6 +1814,22 @@ export async function createApp(options = {}) {
   route("get", "/api/ai/groups", (req) =>
     store.aiGroups(req.user?.id || "local", req.user?.certificateId),
   );
+  route("get", "/api/ai/groups/:id", (req) => {
+    const certificateId = requireCertificate(req);
+    const userId = requestUserId(req);
+    const detail = store.aiGroupDetail(req.params.id, userId, certificateId);
+    if (!detail) {
+      const error = new Error("AI 题组不存在或不属于当前账号");
+      error.status = 404;
+      throw error;
+    }
+    const { questions, ...group } = detail;
+    const state = questionState(req);
+    return {
+      group,
+      questions: questions.map((question) => publicQuestionForUser(question, state)),
+    };
+  });
   route("put", "/api/ai/groups/:id/share", (req) => {
     const shared = z
       .object({ shared: z.boolean() })
@@ -1889,6 +2024,56 @@ export async function createApp(options = {}) {
     knowledgeSection: z.string().trim().min(1).max(100).optional(),
     knowledgePoint: z.string().trim().min(1).max(100),
   }).strict();
+  const aiQuestionGenerationJobView = (job) => ({
+    id: job.id,
+    selection: job.selection,
+    status: job.status,
+    progress: job.progress,
+    groupId: job.groupId,
+    error: job.error,
+    createdAt: job.createdAt,
+    updatedAt: job.updatedAt,
+  });
+  route("post", "/api/ai/questions/generations", (req) => {
+    const selection = userQuestionDraftSchema.parse(req.body);
+    const certificateId = requireCertificate(req);
+    const userId = requestUserId(req);
+    if (!store.settings(userId).keyCipher)
+      throw new Error("请先在“我的 - AI 设置”中配置 API Key");
+    if (store.activeAiQuestionGenerationJob(userId, certificateId)) {
+      const error = new Error("已有 AI 题目正在后台生成，请完成后再创建下一组");
+      error.status = 409;
+      throw error;
+    }
+    const seed = store.allQ().find((question) =>
+      hasCertificateQuestion(question, certificateId) &&
+      question.chapter === selection.chapter &&
+      (question.knowledgeSection || null) === (selection.knowledgeSection || null) &&
+      (question.targetKnowledgePoint || question.knowledgePoint) === selection.knowledgePoint &&
+      (question.source !== "ai_generated" || question.ownerUserId === userId),
+    );
+    if (!seed) throw new Error("该知识点暂无可供参考的题目，请先选择具体知识点");
+    const job = store.createAiQuestionGenerationJob(userId, certificateId, selection);
+    return { job: aiQuestionGenerationJobView(job) };
+  });
+  route("get", "/api/ai/questions/generations", (req) => ({
+    jobs: store
+      .aiQuestionGenerationJobs(requestUserId(req), requireCertificate(req))
+      .map(aiQuestionGenerationJobView),
+  }));
+  route("get", "/api/ai/questions/generations/:id", (req) => {
+    const job = store.aiQuestionGenerationJob(
+      req.params.id,
+      requestUserId(req),
+      requireCertificate(req),
+    );
+    if (!job) {
+      const error = new Error("AI 生成任务不存在");
+      error.status = 404;
+      throw error;
+    }
+    return { job: aiQuestionGenerationJobView(job) };
+  });
   const userQuestionDraft = (req) => {
     const certificateId = requireCertificate(req);
     const userId = requestUserId(req);
@@ -2315,6 +2500,12 @@ export async function createApp(options = {}) {
       app.locals.vite = vite;
     }
   }
+  store.requeueInterruptedAiQuestionGenerationJobs();
+  const aiQuestionJobTimer = setInterval(
+    () => void drainAiQuestionGenerationQueue().catch(() => undefined),
+    1500,
+  );
+  aiQuestionJobTimer.unref();
   const dailyRetryAt = new Map();
   const timer = setInterval(() => {
     if (aiBusy) return;
@@ -2335,7 +2526,10 @@ export async function createApp(options = {}) {
   }, 60000);
   timer.unref();
   app.locals.store = store;
-  app.locals.stop = () => clearInterval(timer);
+  app.locals.stop = () => {
+    clearInterval(timer);
+    clearInterval(aiQuestionJobTimer);
+  };
   return app;
 }
 if (

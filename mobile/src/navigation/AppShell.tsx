@@ -15,6 +15,7 @@ import {
   mobileApi,
   studyCache,
   type AppVersionResponse,
+  type AiQuestionGenerationJob,
   type AuthResponse,
   type DashboardResponse,
 } from '../api/client';
@@ -89,6 +90,11 @@ export function AppShell() {
   const [practiceQuestionId, setPracticeQuestionId] = useState<
     string | undefined
   >();
+  const [practiceAiGroupId, setPracticeAiGroupId] = useState<string | undefined>();
+  const [aiQuestionGroupId, setAiQuestionGroupId] = useState<string | undefined>();
+  const [aiQuestionJobs, setAiQuestionJobs] = useState<AiQuestionGenerationJob[]>([]);
+  const [dismissedAiJobIds, setDismissedAiJobIds] = useState<string[]>([]);
+  const knownAiJobStatuses = useRef(new Map<string, AiQuestionGenerationJob['status']>());
   const [certificatePickerOpen, setCertificatePickerOpen] = useState(false);
   const [sessionRestored, setSessionRestored] = useState(false);
   const [updateRelease, setUpdateRelease] = useState<AppVersionResponse | null>(
@@ -121,6 +127,37 @@ export function AppShell() {
     if (appActive && activeTab === 'today' && session?.user.certificateId)
       void mobileApi.dashboard().catch(() => undefined);
   }, [appActive, activeTab, session?.user.id, session?.user.certificateId]);
+
+  useEffect(() => {
+    if (!session?.user.certificateId || isPreview) {
+      setAiQuestionJobs([]);
+      knownAiJobStatuses.current.clear();
+      return;
+    }
+    if (!appActive) return;
+    let mounted = true;
+    const refreshJobs = async () => {
+      try {
+        const result = await mobileApi.aiQuestionGenerationJobs();
+        if (!mounted) return;
+        for (const job of result.jobs) {
+          const previous = knownAiJobStatuses.current.get(job.id);
+          if (job.status === 'completed' && previous !== 'completed')
+            mobileApi.invalidateGeneratedQuestionData();
+          knownAiJobStatuses.current.set(job.id, job.status);
+        }
+        setAiQuestionJobs(result.jobs);
+      } catch {
+        // The task itself keeps running in the server if progress is offline.
+      }
+    };
+    void refreshJobs();
+    const timer = setInterval(() => void refreshJobs(), 2500);
+    return () => {
+      mounted = false;
+      clearInterval(timer);
+    };
+  }, [appActive, isPreview, session?.user.id, session?.user.certificateId]);
 
   useEffect(() => {
     let mounted = true;
@@ -256,6 +293,8 @@ export function AppShell() {
     setPracticeKnowledgePoint(undefined);
     setPracticeSelectionComplete(false);
     setPracticeQuestionId(undefined);
+    setPracticeAiGroupId(undefined);
+    setAiQuestionGroupId(undefined);
   }
 
   function handleOpenCertificatePicker() {
@@ -273,6 +312,8 @@ export function AppShell() {
       setPracticeKnowledgePoint(options?.practiceKnowledgePoint);
       setPracticeSelectionComplete(options?.practiceSelectionComplete ?? false);
       setPracticeQuestionId(options?.practiceQuestionId);
+      setPracticeAiGroupId(options?.practiceAiGroupId);
+      setAiQuestionGroupId(options?.aiQuestionGroupId);
       setPracticeMode(
         options?.practiceMode ??
           (nextSession === 'daily' ? 'random' : 'sequential'),
@@ -379,6 +420,8 @@ export function AppShell() {
                   practiceKnowledgePoint,
                   practiceSelectionComplete,
                   practiceQuestionId,
+                  practiceAiGroupId,
+                  aiQuestionGroupId,
                   onPracticeModeChange: setPracticeMode,
                   onOpenCertificatePicker: handleOpenCertificatePicker,
                   onUserUpdated: handleUserUpdated,
@@ -389,6 +432,31 @@ export function AppShell() {
             </View>
           ))}
         </Animated.View>
+        {(() => {
+          const job = aiQuestionJobs.find((item) =>
+            item.status === 'queued' || item.status === 'running',
+          ) ?? aiQuestionJobs.find((item) =>
+            !dismissedAiJobIds.includes(item.id),
+          );
+          if (!job || dismissedAiJobIds.includes(job.id)) return null;
+          return (
+            <AiGenerationProgressPill
+              job={job}
+              onPress={() => {
+                if (job.status === 'completed' || job.status === 'failed')
+                  setDismissedAiJobIds((current) => [...current, job.id]);
+                handleNavigate('practice', {
+                  practiceMode: 'ai',
+                  practiceChapter: job.selection.chapter,
+                  practiceKnowledgeSection: job.selection.knowledgeSection,
+                  practiceKnowledgePoint: job.selection.knowledgePoint,
+                  practiceSelectionComplete: true,
+                  aiQuestionGroupId: job.groupId || undefined,
+                });
+              }}
+            />
+          );
+        })()}
         <TabBar activeTab={activeTab} onChange={handleNavigate} />
       </View>
     </SafeAreaView>
@@ -564,6 +632,8 @@ function renderScreen(
     practiceKnowledgePoint?: string;
     practiceSelectionComplete: boolean;
     practiceQuestionId?: string;
+    practiceAiGroupId?: string;
+    aiQuestionGroupId?: string;
     onPracticeModeChange: (mode: PracticeMode) => void;
     onOpenCertificatePicker: () => void;
     onUserUpdated: (user: AuthResponse['user']) => void;
@@ -661,6 +731,53 @@ function TabBarItem({
   );
 }
 
+function AiGenerationProgressPill({
+  job,
+  onPress,
+}: {
+  job: AiQuestionGenerationJob;
+  onPress: () => void;
+}) {
+  const styles = useThemedStyles(createStyles);
+  const complete = job.status === 'completed';
+  const failed = job.status === 'failed';
+  const progress = Math.max(
+    0,
+    Math.min(100, Math.round(((job.progress.completed ?? 0) / 10) * 100)),
+  );
+  return (
+    <View pointerEvents="box-none" style={styles.aiProgressPosition}>
+      <AnimatedPressable
+        accessibilityLabel={complete ? '查看已生成的 AI 题组' : '查看 AI 出题进度'}
+        accessibilityRole="button"
+        onPress={onPress}
+        style={styles.aiProgressCard}
+      >
+        <View style={styles.aiProgressMark}><Text style={styles.aiProgressMarkText}>✦</Text></View>
+        <View style={styles.aiProgressCopy}>
+          <View style={styles.aiProgressHeading}>
+            <Text style={styles.aiProgressTitle}>
+              {complete ? '10 道新题已备好' : failed ? 'AI 出题遇到问题' : 'AI 正在后台出题'}
+            </Text>
+            <Text style={styles.aiProgressCount}>
+              {complete ? '完成' : failed ? '查看' : `${job.progress.completed ?? 0}/10`}
+            </Text>
+          </View>
+          <Text numberOfLines={1} style={styles.aiProgressMessage}>
+            {complete ? '点击打开题组，可上传或开始刷题' : job.progress.message}
+          </Text>
+          {!complete && !failed && (
+            <View style={styles.aiProgressTrack}>
+              <View style={[styles.aiProgressFill, { width: `${progress}%` }]} />
+            </View>
+          )}
+        </View>
+        <Text style={styles.aiProgressArrow}>›</Text>
+      </AnimatedPressable>
+    </View>
+  );
+}
+
 const createStyles = (colors: ThemeColors) =>
   StyleSheet.create({
     safeArea: {
@@ -673,6 +790,49 @@ const createStyles = (colors: ThemeColors) =>
     content: {
       flex: 1,
     },
+    aiProgressPosition: {
+      bottom: 76,
+      left: spacing.md,
+      position: 'absolute',
+      right: spacing.md,
+      zIndex: 20,
+    },
+    aiProgressCard: {
+      alignItems: 'center',
+      backgroundColor: colors.surface,
+      borderColor: colors.brandSoft,
+      borderRadius: radius.lg,
+      borderWidth: 1,
+      flexDirection: 'row',
+      gap: spacing.sm,
+      minHeight: 68,
+      paddingHorizontal: spacing.md,
+      paddingVertical: spacing.sm,
+      ...shadow.card,
+    },
+    aiProgressMark: {
+      alignItems: 'center',
+      backgroundColor: colors.brandSoft,
+      borderRadius: radius.md,
+      height: 38,
+      justifyContent: 'center',
+      width: 38,
+    },
+    aiProgressMarkText: { color: colors.brand, fontSize: 18, fontWeight: '800' },
+    aiProgressCopy: { flex: 1, gap: 3 },
+    aiProgressHeading: { alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between' },
+    aiProgressTitle: { color: colors.text, flex: 1, fontSize: 13, fontWeight: '800' },
+    aiProgressCount: { color: colors.brand, fontSize: 12, fontWeight: '800' },
+    aiProgressMessage: { color: colors.textMuted, fontSize: 11 },
+    aiProgressTrack: {
+      backgroundColor: colors.surfaceMuted,
+      borderRadius: radius.pill,
+      height: 4,
+      marginTop: 3,
+      overflow: 'hidden',
+    },
+    aiProgressFill: { backgroundColor: colors.brand, borderRadius: radius.pill, height: '100%' },
+    aiProgressArrow: { color: colors.brand, fontSize: 24, fontWeight: '700' },
     hiddenScreen: { display: 'none' },
     updateScreen: {
       alignItems: 'center',

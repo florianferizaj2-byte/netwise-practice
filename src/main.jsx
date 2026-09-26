@@ -971,11 +971,11 @@ function AuthScreen({ onAuth, initialError = "" }) {
           </button>
           <a
             className="auth-app-download"
-            href="/downloads/kaojiang-v0.2.8.apk"
-            download="kaojiang-v0.2.8.apk"
+            href="/downloads/kaojiang-v0.2.9.apk"
+            download="kaojiang-v0.2.9.apk"
           >
             <Download size={16} />
-            下载考匠 App · Android v0.2.8
+            下载考匠 App · Android v0.2.9
           </a>
           <p className="auth-privacy-note">
             <ShieldCheck size={14} /> 你的学习数据与 AI 配置仅属于当前账号
@@ -1521,8 +1521,8 @@ function App() {
                 <a
                   className="account-menu-link"
                   role="menuitem"
-                  href="/downloads/kaojiang-v0.2.8.apk"
-                  download="kaojiang-v0.2.8.apk"
+                  href="/downloads/kaojiang-v0.2.9.apk"
+                  download="kaojiang-v0.2.9.apk"
                   onClick={() => setAccountMenuOpen(false)}
                 >
                   <Download size={17} />

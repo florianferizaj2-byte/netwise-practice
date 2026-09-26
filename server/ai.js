@@ -415,15 +415,18 @@ export class OpenAICompatibleProvider extends AIProvider {
       difficulty:
         difficulty || ["easy", "medium", "medium", "hard"][index % 4],
     }));
+    const maxRounds = options.retryUntilAccepted
+      ? Number.POSITIVE_INFINITY
+      : options.maxRounds ?? 3;
     const accepted = new Map();
     let pending = specs.map((spec) => ({ ...spec, feedback: "" }));
     const progress = (message, extra = {}) =>
       options.onProgress?.({ message, ...extra });
-    for (let round = 0; round < 3 && pending.length; round++) {
+    for (let round = 0; round < maxRounds && pending.length; round++) {
       progress(
         round === 0
           ? `正在生成 ${pending.length} 道题`
-          : `正在修正 ${pending.length} 道未通过审核的题（第 ${round + 1}/3 轮）`,
+          : `正在补生成 ${pending.length} 道未通过审核的题（第 ${round + 1} 轮）`,
         { stage: "generate", round: round + 1, completed: accepted.size, total: specs.length },
       );
       const requested = pending.map(({ index, difficulty: level, feedback }) => ({
@@ -562,7 +565,7 @@ export class OpenAICompatibleProvider extends AIProvider {
         .map(({ index, feedback }) => `第 ${index + 1} 题：${feedback}`)
         .join("；");
       throw new Error(
-        `AI 已修正 3 轮，仍有 ${pending.length} 道题未通过质量审核${reasons ? `：${reasons}` : ""}`,
+        `AI 已修正 ${maxRounds} 轮，仍有 ${pending.length} 道题未通过质量审核${reasons ? `：${reasons}` : ""}`,
       );
     }
     return specs.map(({ index }) => accepted.get(index));

@@ -364,6 +364,41 @@ export type AiQuestionDraft = {
   checks: { rulesAndDuplicates: boolean; independentAiReview: boolean };
 };
 
+export type AiQuestionGenerationSelection = {
+  chapter: string;
+  knowledgeSection?: string;
+  knowledgePoint: string;
+};
+
+export type AiQuestionGenerationJob = {
+  id: string;
+  selection: AiQuestionGenerationSelection;
+  status: 'queued' | 'running' | 'completed' | 'failed';
+  progress: AiStreamProgress & { completed?: number; total?: number; round?: number };
+  groupId: string | null;
+  error: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type AiQuestionGroup = {
+  id: string;
+  certificateId: string;
+  topic: string;
+  harder: boolean;
+  shared: boolean;
+  groupType: 'training' | 'question_generation';
+  metadata: AiQuestionGenerationSelection;
+  createdAt: string;
+  questionCount: number;
+  completedCount: number;
+};
+
+export type AiQuestionGroupResponse = {
+  group: AiQuestionGroup;
+  questions: Question[];
+};
+
 export type LeaderboardEntry = {
   rank: number;
   userId: string;
@@ -758,6 +793,46 @@ export const mobileApi = {
       `/ai/questions/draft/${encodeURIComponent(id)}`,
       { method: 'DELETE' },
     );
+  },
+
+  createAiQuestionGeneration(selection: AiQuestionGenerationSelection) {
+    return request<{ job: AiQuestionGenerationJob }>('/ai/questions/generations', {
+      method: 'POST',
+      body: JSON.stringify(selection),
+    });
+  },
+
+  aiQuestionGenerationJobs() {
+    return request<{ jobs: AiQuestionGenerationJob[] }>(
+      '/ai/questions/generations',
+    );
+  },
+
+  aiQuestionGenerationJob(id: string) {
+    return request<{ job: AiQuestionGenerationJob }>(
+      `/ai/questions/generations/${encodeURIComponent(id)}`,
+    );
+  },
+
+  aiQuestionGroups() {
+    return request<AiQuestionGroup[]>('/ai/groups');
+  },
+
+  aiQuestionGroup(id: string) {
+    return request<AiQuestionGroupResponse>(
+      `/ai/groups/${encodeURIComponent(id)}`,
+    );
+  },
+
+  shareAiQuestionGroup(id: string, shared: boolean) {
+    return request<{ saved: boolean; shared: boolean }>(
+      `/ai/groups/${encodeURIComponent(id)}/share`,
+      { method: 'PUT', body: JSON.stringify({ shared }) },
+    );
+  },
+
+  invalidateGeneratedQuestionData() {
+    studyCache.invalidate(['/practice/catalog', '/questions?']);
   },
 
   leaderboards() {

@@ -110,6 +110,20 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
     );
     CREATE INDEX IF NOT EXISTS user_question_submissions_owner_idx
       ON user_question_submissions(user_id);
+    CREATE TABLE IF NOT EXISTS ai_question_generation_jobs (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL,
+      certificate_id TEXT NOT NULL,
+      selection TEXT NOT NULL,
+      status TEXT NOT NULL,
+      progress TEXT NOT NULL,
+      group_id TEXT,
+      error TEXT,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    );
+    CREATE INDEX IF NOT EXISTS ai_question_generation_jobs_owner_idx
+      ON ai_question_generation_jobs(user_id, certificate_id, created_at);
   `);
   for (const statement of [
     "ALTER TABLE users ADD COLUMN is_admin INTEGER NOT NULL DEFAULT 0",
@@ -170,6 +184,12 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
   );`);
   try {
     db.exec("ALTER TABLE ai_groups ADD COLUMN shared INTEGER NOT NULL DEFAULT 1");
+  } catch {}
+  try {
+    db.exec("ALTER TABLE ai_groups ADD COLUMN group_type TEXT NOT NULL DEFAULT 'training'");
+  } catch {}
+  try {
+    db.exec("ALTER TABLE ai_groups ADD COLUMN metadata TEXT NOT NULL DEFAULT '{}'");
   } catch {}
   // An intermediate local build briefly created user_settings with a foreign
   // key. Rebuild it without that constraint so the no-auth "local" profile
@@ -398,6 +418,121 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
           return { id: row.id, question };
       }
       return null;
+    },
+    createAiQuestionGenerationJob(userId, certificateId, selection) {
+      const id = crypto.randomUUID();
+      const now = new Date().toISOString();
+      const progress = {
+        stage: "queued",
+        message: "已加入后台生成队列",
+        completed: 0,
+        total: 10,
+      };
+      db.prepare(
+        "INSERT INTO ai_question_generation_jobs (id,user_id,certificate_id,selection,status,progress,created_at,updated_at) VALUES (?,?,?,?,?,?,?,?)",
+      ).run(
+        id,
+        userId,
+        certificateId,
+        JSON.stringify(selection),
+        "queued",
+        JSON.stringify(progress),
+        now,
+        now,
+      );
+      return {
+        id,
+        userId,
+        certificateId,
+        selection,
+        status: "queued",
+        progress,
+        groupId: null,
+        error: null,
+        createdAt: now,
+        updatedAt: now,
+      };
+    },
+    aiQuestionGenerationJob(id, userId, certificateId) {
+      const row = db.prepare(
+        "SELECT id,user_id AS userId,certificate_id AS certificateId,selection,status,progress,group_id AS groupId,error,created_at AS createdAt,updated_at AS updatedAt FROM ai_question_generation_jobs WHERE id=? AND user_id=? AND certificate_id=?",
+      ).get(id, userId, certificateId);
+      return row
+        ? {
+            ...row,
+            selection: JSON.parse(row.selection),
+            progress: JSON.parse(row.progress),
+          }
+        : null;
+    },
+    aiQuestionGenerationJobs(userId, certificateId, limit = 10) {
+      return db
+        .prepare(
+          "SELECT id,user_id AS userId,certificate_id AS certificateId,selection,status,progress,group_id AS groupId,error,created_at AS createdAt,updated_at AS updatedAt FROM ai_question_generation_jobs WHERE user_id=? AND certificate_id=? ORDER BY created_at DESC LIMIT ?",
+        )
+        .all(userId, certificateId, limit)
+        .map((row) => ({
+          ...row,
+          selection: JSON.parse(row.selection),
+          progress: JSON.parse(row.progress),
+        }));
+    },
+    activeAiQuestionGenerationJob(userId, certificateId) {
+      const row = db
+        .prepare(
+          "SELECT id FROM ai_question_generation_jobs WHERE user_id=? AND certificate_id=? AND status IN ('queued','running') ORDER BY created_at LIMIT 1",
+        )
+        .get(userId, certificateId);
+      return row
+        ? this.aiQuestionGenerationJob(row.id, userId, certificateId)
+        : null;
+    },
+    nextAiQuestionGenerationJob() {
+      const row = db
+        .prepare(
+          "SELECT id,user_id AS userId,certificate_id AS certificateId,selection,status,progress,group_id AS groupId,error,created_at AS createdAt,updated_at AS updatedAt FROM ai_question_generation_jobs WHERE status='queued' ORDER BY created_at LIMIT 1",
+        )
+        .get();
+      return row
+        ? {
+            ...row,
+            selection: JSON.parse(row.selection),
+            progress: JSON.parse(row.progress),
+          }
+        : null;
+    },
+    updateAiQuestionGenerationJob(id, userId, certificateId, patch) {
+      const current = this.aiQuestionGenerationJob(id, userId, certificateId);
+      if (!current) return null;
+      const next = {
+        ...current,
+        ...patch,
+        updatedAt: new Date().toISOString(),
+      };
+      db.prepare(
+        "UPDATE ai_question_generation_jobs SET status=?,progress=?,group_id=?,error=?,updated_at=? WHERE id=? AND user_id=? AND certificate_id=?",
+      ).run(
+        next.status,
+        JSON.stringify(next.progress),
+        next.groupId || null,
+        next.error || null,
+        next.updatedAt,
+        id,
+        userId,
+        certificateId,
+      );
+      return next;
+    },
+    requeueInterruptedAiQuestionGenerationJobs() {
+      const progress = JSON.stringify({
+        stage: "queued",
+        message: "服务器已恢复，正在继续后台生成",
+        completed: 0,
+        total: 10,
+      });
+      db.prepare(
+        "UPDATE ai_question_generation_jobs SET status='queued',progress=?,updated_at=? WHERE status='running'",
+      ).run(progress, new Date().toISOString());
     },
     deleteUserQuestionDraft(id, userId, certificateId) {
       return db.prepare(
@@ -803,7 +938,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
     aiGroups: (userId, certificateId) => {
       const groups = db
         .prepare(
-          "SELECT id, certificate_id AS certificateId, topic, harder, shared, created_at AS createdAt FROM ai_groups WHERE user_id=? AND (? IS NULL OR certificate_id=?) ORDER BY created_at DESC",
+          "SELECT id, certificate_id AS certificateId, topic, harder, shared, group_type AS groupType, metadata, created_at AS createdAt FROM ai_groups WHERE user_id=? AND (? IS NULL OR certificate_id=?) ORDER BY created_at DESC",
         )
         .all(userId || "local", certificateId || null, certificateId || null);
       return groups.map((group) => {
@@ -817,6 +952,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
           ...group,
           harder: !!group.harder,
           shared: !!group.shared,
+          metadata: JSON.parse(group.metadata || "{}"),
           questionCount: questions.length,
           completedCount: completed,
         };
@@ -939,10 +1075,10 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         ).length,
       };
     },
-    createAiGroup: (userId, certificateId, topic, harder = false) => {
+    createAiGroup: (userId, certificateId, topic, harder = false, options = {}) => {
       const id = crypto.randomUUID();
       db.prepare(
-        "INSERT INTO ai_groups (id,user_id,certificate_id,topic,harder,created_at,shared) VALUES (?,?,?,?,?,?,?)",
+        "INSERT INTO ai_groups (id,user_id,certificate_id,topic,harder,created_at,shared,group_type,metadata) VALUES (?,?,?,?,?,?,?,?,?)",
       ).run(
         id,
         userId,
@@ -950,9 +1086,83 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         topic,
         harder ? 1 : 0,
         new Date().toISOString(),
-        1,
+        options.shared === false ? 0 : 1,
+        options.groupType || "training",
+        JSON.stringify(options.metadata || {}),
       );
       return id;
+    },
+    addAiQuestionGroup(qs, topic, options = {}) {
+      const id = crypto.randomUUID();
+      const createdAt = new Date().toISOString();
+      db.exec("BEGIN");
+      try {
+        db.prepare(
+          "INSERT INTO ai_groups (id,user_id,certificate_id,topic,harder,created_at,shared,group_type,metadata) VALUES (?,?,?,?,?,?,?,?,?)",
+        ).run(
+          id,
+          options.userId,
+          options.certificateId,
+          topic,
+          0,
+          createdAt,
+          0,
+          "question_generation",
+          JSON.stringify(options.metadata || {}),
+        );
+        for (const sourceQuestion of qs) {
+          const question = { ...sourceQuestion, aiGroupId: id };
+          addQ(question);
+          db.prepare(
+            "INSERT INTO queue (question_id,topic,user_id,group_id) VALUES (?,?,?,?)",
+          ).run(question.id, topic, options.userId, id);
+        }
+        if (options.jobId) {
+          db.prepare(
+            "UPDATE ai_question_generation_jobs SET status='completed',progress=?,group_id=?,error=NULL,updated_at=? WHERE id=? AND user_id=? AND certificate_id=?",
+          ).run(
+            JSON.stringify({
+              stage: "done",
+              message: "10 道题已生成，可以开始刷题或上传共享题库",
+              completed: 10,
+              total: 10,
+            }),
+            id,
+            createdAt,
+            options.jobId,
+            options.userId,
+            options.certificateId,
+          );
+        }
+        db.exec("COMMIT");
+        return id;
+      } catch (error) {
+        db.exec("ROLLBACK");
+        throw error;
+      }
+    },
+    aiGroupDetail(id, userId, certificateId) {
+      const row = db
+        .prepare(
+          "SELECT id,user_id AS userId,certificate_id AS certificateId,topic,harder,created_at AS createdAt,shared,group_type AS groupType,metadata FROM ai_groups WHERE id=? AND user_id=? AND certificate_id=?",
+        )
+        .get(id, userId, certificateId);
+      if (!row) return null;
+      const questions = allQ().filter((question) => question.aiGroupId === id);
+      const completedCount = db
+        .prepare(
+          "SELECT COUNT(*) AS count FROM queue WHERE group_id=? AND user_id=? AND completed=1",
+        )
+        .get(id, userId).count;
+      return {
+        ...row,
+        harder: !!row.harder,
+        shared: !!row.shared,
+        metadata: JSON.parse(row.metadata || "{}"),
+        questionCount: questions.length,
+        completedCount,
+        questions,
+      };
     },
     addBatch: (qs, topic, options = {}) => {
       db.exec("BEGIN");

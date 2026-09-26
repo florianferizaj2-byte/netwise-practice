@@ -23,4 +23,6 @@ export type NavigationOptions = {
   practiceKnowledgePoint?: string;
   practiceSelectionComplete?: boolean;
   practiceQuestionId?: string;
+  practiceAiGroupId?: string;
+  aiQuestionGroupId?: string;
 };
