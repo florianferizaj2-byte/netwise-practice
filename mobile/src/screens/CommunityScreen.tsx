@@ -38,6 +38,7 @@ type LeaderboardTab = typeof leaderboardTabs[number]['key'];
 type CommunityScreenProps = {
   preview?: boolean;
   user?: AuthResponse['user'];
+  onClose?: () => void;
 };
 
 type PendingImage = CommunityImagePayload & { uri: string };
@@ -78,7 +79,7 @@ function imageMimeType(value?: string): PendingImage['mimeType'] {
   return 'image/jpeg';
 }
 
-export function CommunityScreen({ preview = false, user }: CommunityScreenProps) {
+export function CommunityScreen({ preview = false, user, onClose }: CommunityScreenProps) {
   const { colors } = useTheme();
   const styles = useThemedStyles(createStyles);
   const active = useScreenActive();
@@ -250,6 +251,16 @@ export function CommunityScreen({ preview = false, user }: CommunityScreenProps)
     >
       <View style={styles.screen}>
         <View style={styles.header}>
+          {onClose && (
+            <AnimatedPressable
+              accessibilityLabel="返回我的"
+              accessibilityRole="button"
+              onPress={onClose}
+              style={styles.backButton}
+            >
+              <Text style={styles.backButtonText}>‹ 我的</Text>
+            </AnimatedPressable>
+          )}
           <View>
             <Text style={styles.title}>考匠社区</Text>
           </View>
@@ -467,6 +478,14 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
     justifyContent: 'space-between',
     paddingTop: spacing.sm,
   },
+  backButton: {
+    backgroundColor: colors.surfaceMuted,
+    borderRadius: radius.pill,
+    justifyContent: 'center',
+    minHeight: 36,
+    paddingHorizontal: spacing.sm,
+  },
+  backButtonText: { color: colors.brandDark, fontSize: 13, fontWeight: '800' },
   eyebrow: {
     color: colors.brand,
     fontSize: 13,

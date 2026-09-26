@@ -2,20 +2,37 @@
   "expo": {
     "name": "考匠",
     "slug": "kaojiang",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "scheme": "kaojiang",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
     "description": "考匠移动端学习应用",
-    "plugins": ["expo-image-picker"],
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "microphonePermission": false
+        }
+      ],
+      [
+        "expo-audio",
+        {
+          "recordAudioAndroid": false,
+          "enableBackgroundPlayback": false,
+          "enableBackgroundRecording": false
+        }
+      ]
+    ],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "package": "com.kaojiang.app",
-      "versionCode": 14,
-      "permissions": ["REQUEST_INSTALL_PACKAGES"],
+      "versionCode": 15,
+      "permissions": [
+        "REQUEST_INSTALL_PACKAGES"
+      ],
       "adaptiveIcon": {
         "backgroundColor": "#C50606",
         "foregroundImage": "./assets/icon.png",

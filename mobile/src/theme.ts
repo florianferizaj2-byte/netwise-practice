@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useColorScheme } from 'react-native';
 import { createContext, createElement, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { prepareUiSounds, setUiSoundSettings, type UiSoundStyle } from './audioFeedback';
 
 export type ThemeMode = 'system' | 'light' | 'dark';
 export type AnimationSpeed = 'slow' | 'normal' | 'fast';
@@ -90,6 +91,9 @@ export const shadow = {
 
 const THEME_MODE_KEY = 'kaojiang-theme-mode';
 const ANIMATION_SPEED_KEY = 'kaojiang-animation-speed';
+const UI_SOUND_ENABLED_KEY = 'kaojiang-ui-sound-enabled';
+const UI_SOUND_VOLUME_KEY = 'kaojiang-ui-sound-volume';
+const UI_SOUND_STYLE_KEY = 'kaojiang-ui-sound-style';
 
 const animationScales: Record<AnimationSpeed, number> = {
   slow: 1.35,
@@ -103,8 +107,14 @@ type ThemeContextValue = {
   resolvedMode: 'light' | 'dark';
   animationSpeed: AnimationSpeed;
   animationScale: number;
+  soundEnabled: boolean;
+  soundVolume: number;
+  soundStyle: UiSoundStyle;
   setMode: (mode: ThemeMode) => void;
   setAnimationSpeed: (speed: AnimationSpeed) => void;
+  setSoundEnabled: (enabled: boolean) => void;
+  setSoundVolume: (volume: number) => void;
+  setSoundStyle: (style: UiSoundStyle) => void;
 };
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
@@ -113,13 +123,20 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const systemScheme = useColorScheme();
   const [mode, setModeState] = useState<ThemeMode>('system');
   const [animationSpeed, setAnimationSpeedState] = useState<AnimationSpeed>('normal');
+  const [soundEnabled, setSoundEnabledState] = useState(true);
+  const [soundVolume, setSoundVolumeState] = useState(0.32);
+  const [soundStyle, setSoundStyleState] = useState<UiSoundStyle>('soft');
 
   useEffect(() => {
     let mounted = true;
+    void prepareUiSounds();
     void Promise.all([
       AsyncStorage.getItem(THEME_MODE_KEY),
       AsyncStorage.getItem(ANIMATION_SPEED_KEY),
-    ]).then(([storedMode, storedSpeed]) => {
+      AsyncStorage.getItem(UI_SOUND_ENABLED_KEY),
+      AsyncStorage.getItem(UI_SOUND_VOLUME_KEY),
+      AsyncStorage.getItem(UI_SOUND_STYLE_KEY),
+    ]).then(([storedMode, storedSpeed, storedSoundEnabled, storedSoundVolume, storedSoundStyle]) => {
       if (!mounted) return;
       if (storedMode === 'system' || storedMode === 'light' || storedMode === 'dark') {
         setModeState(storedMode);
@@ -127,6 +144,18 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       if (storedSpeed === 'slow' || storedSpeed === 'normal' || storedSpeed === 'fast') {
         setAnimationSpeedState(storedSpeed);
       }
+      const nextSoundEnabled = storedSoundEnabled === 'false' ? false : true;
+      const parsedVolume = storedSoundVolume === null ? 0.32 : Number(storedSoundVolume);
+      const nextSoundVolume = Number.isFinite(parsedVolume)
+        ? Math.min(1, Math.max(0, parsedVolume))
+        : 0.32;
+      const nextSoundStyle = storedSoundStyle === 'crisp' || storedSoundStyle === 'warm'
+        ? storedSoundStyle
+        : 'soft';
+      setSoundEnabledState(nextSoundEnabled);
+      setSoundVolumeState(nextSoundVolume);
+      setSoundStyleState(nextSoundStyle);
+      setUiSoundSettings({ enabled: nextSoundEnabled, volume: nextSoundVolume, style: nextSoundStyle });
     }).catch(() => undefined);
 
     return () => {
@@ -144,6 +173,25 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     void AsyncStorage.setItem(ANIMATION_SPEED_KEY, nextSpeed).catch(() => undefined);
   }, []);
 
+  const setSoundEnabled = useCallback((enabled: boolean) => {
+    setSoundEnabledState(enabled);
+    setUiSoundSettings({ enabled, volume: soundVolume, style: soundStyle });
+    void AsyncStorage.setItem(UI_SOUND_ENABLED_KEY, String(enabled)).catch(() => undefined);
+  }, [soundStyle, soundVolume]);
+
+  const setSoundVolume = useCallback((volume: number) => {
+    const nextVolume = Math.min(1, Math.max(0, volume));
+    setSoundVolumeState(nextVolume);
+    setUiSoundSettings({ enabled: soundEnabled, volume: nextVolume, style: soundStyle });
+    void AsyncStorage.setItem(UI_SOUND_VOLUME_KEY, String(nextVolume)).catch(() => undefined);
+  }, [soundEnabled, soundStyle]);
+
+  const setSoundStyle = useCallback((style: UiSoundStyle) => {
+    setSoundStyleState(style);
+    setUiSoundSettings({ enabled: soundEnabled, volume: soundVolume, style });
+    void AsyncStorage.setItem(UI_SOUND_STYLE_KEY, style).catch(() => undefined);
+  }, [soundEnabled, soundVolume]);
+
   const resolvedMode = mode === 'system'
     ? (systemScheme === 'dark' ? 'dark' : 'light')
     : mode;
@@ -154,9 +202,15 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     resolvedMode,
     animationSpeed,
     animationScale: animationScales[animationSpeed],
+    soundEnabled,
+    soundVolume,
+    soundStyle,
     setMode,
     setAnimationSpeed,
-  }), [animationSpeed, mode, resolvedMode, setAnimationSpeed, setMode]);
+    setSoundEnabled,
+    setSoundVolume,
+    setSoundStyle,
+  }), [animationSpeed, mode, resolvedMode, setAnimationSpeed, setMode, setSoundEnabled, setSoundStyle, setSoundVolume, soundEnabled, soundStyle, soundVolume]);
 
   return createElement(ThemeContext.Provider, { value }, children);
 }

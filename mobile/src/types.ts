@@ -3,7 +3,7 @@ export type AppTab =
   | 'practice'
   | 'wrong'
   | 'exam'
-  | 'community'
+  | 'vip'
   | 'profile';
 
 export type AuthMode = 'login' | 'register';

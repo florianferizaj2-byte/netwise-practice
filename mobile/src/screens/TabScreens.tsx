@@ -7,8 +7,10 @@ import {
   RefreshControl,
   Linking,
   Modal,
+  SafeAreaView,
   ScrollView,
   StyleSheet,
+  Switch,
   Text,
   TextInput,
   View,
@@ -33,6 +35,8 @@ import { useActiveTimer } from '../navigation/useActiveTimer';
 import { BrandMark } from '../components/BrandMark';
 import { QuestionImages } from '../components/QuestionImages';
 import { AiQuestionDraftScreen } from './AiQuestionDraftScreen';
+import { CommunityScreen } from './CommunityScreen';
+import { previewUiSound } from '../audioFeedback';
 import {
   AnimatedPressable,
   AnimatedProgressBar,
@@ -50,6 +54,7 @@ import {
   type ThemeColors,
   type ThemeMode,
 } from '../theme';
+import type { UiSoundStyle } from '../audioFeedback';
 import type {
   AppTab,
   NavigationOptions,
@@ -113,6 +118,19 @@ const themeOptions: Array<{ id: ThemeMode; label: string; hint: string }> = [
   { id: 'system', label: '跟随系统', hint: '根据手机系统自动切换' },
   { id: 'light', label: '浅色模式', hint: '保持明亮清爽' },
   { id: 'dark', label: '深色模式', hint: '夜间使用更舒适' },
+];
+
+const soundStyleOptions: Array<{ id: UiSoundStyle; label: string; hint: string }> = [
+  { id: 'soft', label: '轻柔', hint: '清淡提示' },
+  { id: 'crisp', label: '清脆', hint: '明亮短音' },
+  { id: 'warm', label: '醇厚', hint: '柔和木音' },
+];
+
+const soundVolumeOptions = [
+  { label: '轻', value: 0.16 },
+  { label: '适中', value: 0.32 },
+  { label: '较强', value: 0.55 },
+  { label: '最大', value: 0.8 },
 ];
 
 const DAILY_PRACTICE_COUNT = 30;
@@ -1898,8 +1916,14 @@ export function ProfileScreen({
     colors,
     mode,
     resolvedMode,
+    soundEnabled,
+    soundStyle,
+    soundVolume,
     setAnimationSpeed,
     setMode,
+    setSoundEnabled,
+    setSoundStyle,
+    setSoundVolume,
   } = useTheme();
   const styles = useThemedStyles(createStyles);
   const activeCertificate = certificates.find((certificate) => certificate.id === user?.certificateId);
@@ -1910,6 +1934,7 @@ export function ProfileScreen({
   const [tutorialOpen, setTutorialOpen] = useState(false);
   const [authorApiOpen, setAuthorApiOpen] = useState(false);
   const [communityNameOpen, setCommunityNameOpen] = useState(false);
+  const [communityOpen, setCommunityOpen] = useState(false);
   const [communityName, setCommunityName] = useState('');
   const [communityNameBusy, setCommunityNameBusy] = useState(false);
   const [communityNameError, setCommunityNameError] = useState('');
@@ -2051,6 +2076,21 @@ export function ProfileScreen({
 
   return (
     <ScreenContainer profile>
+      {communityOpen && (
+        <Modal
+          animationType="slide"
+          onRequestClose={() => setCommunityOpen(false)}
+          visible={active && communityOpen}
+        >
+          <SafeAreaView style={styles.communityModalSafeArea}>
+            <CommunityScreen
+              onClose={() => setCommunityOpen(false)}
+              preview={preview}
+              user={user}
+            />
+          </SafeAreaView>
+        </Modal>
+      )}
       <EntranceView delay={60} distance={16} style={styles.profileCard}>
         <View style={styles.profileIdentity}>
           <View style={styles.avatar}><Text style={styles.avatarText}>考</Text></View>
@@ -2128,6 +2168,11 @@ export function ProfileScreen({
         </View>
         <View style={styles.settingsCard}>
           <SettingRow
+            onPress={() => setCommunityOpen(true)}
+            title="考匠社区"
+            value="学习交流 · 排行榜"
+          />
+          <SettingRow
             onPress={user ? onOpenCertificatePicker : undefined}
             title="证书与题库"
             value={activeCertificate?.name ?? (user ? '已同步' : '预览模式')}
@@ -2146,7 +2191,7 @@ export function ProfileScreen({
           <Text style={styles.profileSectionTitle}>应用设置</Text>
         </View>
         <View style={styles.settingsCard}>
-          <SettingRow onPress={() => setAppSettingsOpen(true)} title="外观与动画" value="主题、动画速度" />
+          <SettingRow onPress={() => setAppSettingsOpen(true)} title="外观、动画与音效" value="主题、动画、提示音" />
           <SettingRow title="清理学习缓存" value={cacheNotice || '自动缓存 · 可清理'} onPress={() => {
             void mobileApi.clearStudyCache().then(() => setCacheNotice('已清理'));
           }} />
@@ -2189,7 +2234,7 @@ export function ProfileScreen({
               <View style={styles.modalHeader}>
                 <View style={styles.modalHeaderCopy}>
                   <Text style={styles.modalTitle}>设置</Text>
-                  <Text style={styles.modalKicker}>动画与外观</Text>
+                  <Text style={styles.modalKicker}>外观、动画与声音</Text>
                 </View>
                 <AnimatedPressable
                   accessibilityLabel="关闭设置"
@@ -2246,6 +2291,69 @@ export function ProfileScreen({
               <Text style={styles.settingsHint}>
                 当前显示：{resolvedMode === 'dark' ? '深色' : '浅色'}模式
               </Text>
+              <View style={styles.settingsSoundHeader}>
+                <View style={styles.settingsSoundCopy}>
+                  <Text style={styles.settingsSectionTitle}>交互音效</Text>
+                  <Text style={styles.appearanceOptionHint}>点击按钮时播放轻短提示音</Text>
+                </View>
+                <Switch
+                  accessibilityLabel="开启交互音效"
+                  onValueChange={(enabled) => {
+                    previewUiSound();
+                    setSoundEnabled(enabled);
+                  }}
+                  thumbColor={soundEnabled ? colors.brand : colors.textFaint}
+                  trackColor={{ false: colors.border, true: colors.brandSoft }}
+                  value={soundEnabled}
+                />
+              </View>
+              <Text style={styles.settingsSoundLabel}>音效样式</Text>
+              <View style={styles.soundStyleOptions}>
+                {soundStyleOptions.map((option) => {
+                  const selected = soundStyle === option.id;
+                  return (
+                    <AnimatedPressable
+                      accessibilityRole="button"
+                      key={option.id}
+                      onPress={() => setSoundStyle(option.id)}
+                      style={[styles.soundStyleOption, selected && styles.appearanceOptionActive]}
+                    >
+                      <Text style={[styles.appearanceOptionText, selected && styles.appearanceOptionTextActive]}>
+                        {option.label}
+                      </Text>
+                      <Text style={styles.appearanceOptionHint}>{option.hint}</Text>
+                    </AnimatedPressable>
+                  );
+                })}
+              </View>
+              <View style={styles.settingsSoundLevelHeader}>
+                <Text style={styles.settingsSoundLabel}>音量</Text>
+                <Text style={styles.appearanceOptionHint}>{Math.round(soundVolume * 100)}%</Text>
+              </View>
+              <View style={styles.soundVolumeOptions}>
+                {soundVolumeOptions.map((option) => {
+                  const selected = soundVolume === option.value;
+                  return (
+                    <AnimatedPressable
+                      accessibilityRole="button"
+                      key={option.label}
+                      onPress={() => setSoundVolume(option.value)}
+                      style={[styles.soundVolumeOption, selected && styles.appearanceOptionActive]}
+                    >
+                      <Text style={[styles.appearanceOptionText, selected && styles.appearanceOptionTextActive]}>
+                        {option.label}
+                      </Text>
+                    </AnimatedPressable>
+                  );
+                })}
+              </View>
+              <AnimatedPressable
+                accessibilityRole="button"
+                onPress={previewUiSound}
+                style={styles.soundPreviewButton}
+              >
+                <Text style={styles.soundPreviewButtonText}>试听当前音效</Text>
+              </AnimatedPressable>
               <AnimatedPressable
                 onPress={() => setAppSettingsOpen(false)}
                 style={[styles.modalPrimaryButton, styles.appearanceDoneButton]}
@@ -3527,6 +3635,57 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
   appearanceDoneButton: {
     marginTop: spacing.xs,
   },
+  settingsSoundHeader: {
+    alignItems: 'center',
+    borderTopColor: colors.border,
+    borderTopWidth: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: spacing.sm,
+    paddingTop: spacing.md,
+  },
+  settingsSoundCopy: { flex: 1, gap: 4 },
+  settingsSoundLabel: { color: colors.textMuted, fontSize: 13, fontWeight: '700' },
+  soundStyleOptions: { flexDirection: 'row', gap: spacing.xs },
+  soundStyleOption: {
+    alignItems: 'center',
+    borderColor: colors.border,
+    borderRadius: radius.sm,
+    borderWidth: 1,
+    flex: 1,
+    gap: 4,
+    justifyContent: 'center',
+    minHeight: 58,
+    paddingHorizontal: spacing.xs,
+    paddingVertical: spacing.xs,
+  },
+  settingsSoundLevelHeader: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: spacing.xs,
+  },
+  soundVolumeOptions: { flexDirection: 'row', gap: spacing.xs },
+  soundVolumeOption: {
+    alignItems: 'center',
+    borderColor: colors.border,
+    borderRadius: radius.sm,
+    borderWidth: 1,
+    flex: 1,
+    justifyContent: 'center',
+    minHeight: 42,
+  },
+  soundPreviewButton: {
+    alignItems: 'center',
+    alignSelf: 'flex-start',
+    backgroundColor: colors.surfaceMuted,
+    borderRadius: radius.pill,
+    justifyContent: 'center',
+    minHeight: 40,
+    marginTop: spacing.xs,
+    paddingHorizontal: spacing.md,
+  },
+  soundPreviewButtonText: { color: colors.brandDark, fontSize: 13, fontWeight: '800' },
   settingsLabel: {
     color: colors.textMuted,
     fontSize: 13,
@@ -3992,6 +4151,7 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
   profileSyncDot: { backgroundColor: colors.brand, borderRadius: radius.pill, height: 7, width: 7 },
   profileSyncText: { color: colors.textMuted, fontSize: 11 },
   profileSection: { gap: spacing.sm },
+  communityModalSafeArea: { backgroundColor: colors.background, flex: 1 },
   profileSectionHeader: { alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 2 },
   profileSectionTitle: { color: colors.text, fontSize: 16, fontWeight: '900' },
   profileSectionHint: { color: colors.textFaint, fontSize: 11 },

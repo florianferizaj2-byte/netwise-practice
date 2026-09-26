@@ -28,7 +28,7 @@ import { studySummary } from "./study-summary.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const mobileRelease = () => {
-  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.3.0";
+  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.3.1";
   const minimumVersion =
     process.env.MOBILE_MINIMUM_VERSION || "0.2.8";
   return {
@@ -39,7 +39,7 @@ const mobileRelease = () => {
       `/downloads/kaojiang-v${latestVersion}.apk`,
     releaseNotes:
       process.env.MOBILE_RELEASE_NOTES ||
-      "个人页新增学习快捷入口；AI 题组支持后台生成、逐题复核和批次管理，并行复核缩短等待时间。",
+      "新增三种交互音效，可在设置中调整音量与样式；社区移入我的，新增 VIP 套餐展示入口，修复 AI 题组贡献榜统计。",
   };
 };
 async function exchangeWechatMiniProgramCode(code) {

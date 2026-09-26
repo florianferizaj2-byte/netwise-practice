@@ -27,7 +27,6 @@ import { AnimatedPressable, EntranceView } from '../components/Motion';
 import { BrandMark } from '../components/BrandMark';
 import { AuthScreen } from '../screens/AuthScreen';
 import { CertificateScreen } from '../screens/CertificateScreen';
-import { CommunityScreen } from '../screens/CommunityScreen';
 import {
   ExamScreen,
   PracticeScreen,
@@ -35,6 +34,7 @@ import {
   TodayScreen,
   WrongScreen,
 } from '../screens/TabScreens';
+import { VipScreen } from '../screens/VipScreen';
 import {
   radius,
   shadow,
@@ -58,7 +58,7 @@ const tabs: Array<{ id: AppTab; label: string; icon: string }> = [
   { id: 'practice', label: '练习', icon: '✦' },
   { id: 'wrong', label: '错题', icon: '×' },
   { id: 'exam', label: '考试', icon: '□' },
-  { id: 'community', label: '社区', icon: '◉' },
+  { id: 'vip', label: 'VIP', icon: '✧' },
   { id: 'profile', label: '我的', icon: '◎' },
 ];
 
@@ -663,8 +663,8 @@ function renderScreen(
       return <WrongScreen onNavigate={onNavigate} {...data} />;
     case 'exam':
       return <ExamScreen onNavigate={onNavigate} {...data} />;
-    case 'community':
-      return <CommunityScreen {...data} />;
+    case 'vip':
+      return <VipScreen preview={data.preview} user={data.user} />;
     case 'profile':
       return <ProfileScreen onNavigate={onNavigate} {...data} />;
     case 'today':

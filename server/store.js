@@ -590,6 +590,17 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         const entry = stats.get(row.userId);
         if (entry) entry.submitted = row.count;
       }
+      const sharedAiGroups = new Map(
+        db.prepare(
+          "SELECT id,user_id AS userId FROM ai_groups WHERE shared=1",
+        ).all().map((group) => [group.id, group.userId]),
+      );
+      for (const question of allQ()) {
+        if (question.source !== "ai_generated" || !question.aiGroupId) continue;
+        const ownerId = sharedAiGroups.get(question.aiGroupId);
+        const entry = ownerId ? stats.get(ownerId) : null;
+        if (entry) entry.submitted += 1;
+      }
       const today = new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Shanghai" });
       const previousDay = (day) => new Date(Date.parse(`${day}T00:00:00Z`) - 86400000).toISOString().slice(0, 10);
       for (const entry of stats.values()) {

@@ -7,9 +7,11 @@ import {
   type PressableProps,
   type StyleProp,
   type ViewStyle,
+  type GestureResponderEvent,
 } from 'react-native';
 import { useTheme } from '../theme';
 import { useScreenActive } from '../navigation/ScreenActivity';
+import { playUiSound } from '../audioFeedback';
 
 const MotionPressable = Animated.createAnimatedComponent(Pressable);
 
@@ -109,6 +111,7 @@ type AnimatedPressableProps = Pick<
   PressableProps,
   | 'accessibilityLabel'
   | 'accessibilityRole'
+  | 'accessibilityState'
   | 'disabled'
   | 'onLongPress'
   | 'onPress'
@@ -146,12 +149,17 @@ export function AnimatedPressable({
     }).start();
   };
 
+  const handlePress = (event: GestureResponderEvent) => {
+    if (!disabled) playUiSound();
+    onPress?.(event);
+  };
+
   return (
     <MotionPressable
       {...accessibilityProps}
       disabled={disabled}
       onLongPress={onLongPress}
-      onPress={onPress}
+      onPress={handlePress}
       onPressIn={pressIn}
       onPressOut={pressOut}
       style={[style, { transform: [{ scale }] }]}

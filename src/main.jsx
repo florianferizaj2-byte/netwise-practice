@@ -971,11 +971,11 @@ function AuthScreen({ onAuth, initialError = "" }) {
           </button>
           <a
             className="auth-app-download"
-            href="/downloads/kaojiang-v0.3.0.apk"
-            download="kaojiang-v0.3.0.apk"
+            href="/downloads/kaojiang-v0.3.1.apk"
+            download="kaojiang-v0.3.1.apk"
           >
             <Download size={16} />
-            下载考匠 App · Android v0.3.0
+            下载考匠 App · Android v0.3.1
           </a>
           <p className="auth-privacy-note">
             <ShieldCheck size={14} /> 你的学习数据与 AI 配置仅属于当前账号
@@ -1006,44 +1006,44 @@ function AnnouncementModal({ onClose }) {
             </span>
             <div>
               <span className="announcement-kicker">考匠 · 更新公告</span>
-              <h2 id="announcement-title">移动端 v0.3.0 更新</h2>
-              <p>AI 题组更易管理，个人学习入口更清楚。</p>
+              <h2 id="announcement-title">移动端 v0.3.1 更新</h2>
+              <p>新增可调节交互音效，会员与社区入口重新整理。</p>
             </div>
           </div>
           <IconButton icon={X} label="关闭网站公告" onClick={onClose} />
         </header>
         <div className="announcement-body">
           <div className="announcement-highlight">
-                <strong>考匠 App v0.3.0 已发布</strong>
+                <strong>考匠 App v0.3.1 已发布</strong>
                 <span>
-                  一次生成 10 道题并逐题复核；并行复核缩短等待，任务可在后台继续运行，题组可以上传或直接刷题。
+                  按钮操作新增短提示音，可切换三种音色并调整音量；底部新增 VIP 套餐展示入口，社区整合至“我的”。
                 </span>
           </div>
           <ul className="announcement-list">
             <li>
               <span>01</span>
               <div>
-                <strong>生成题组按批次管理</strong>
-                <p>在练习页或“我的”页面进入已生成题目，查看进度、上传题组或直接开始练习。</p>
+                <strong>交互音效随心调整</strong>
+                <p>在“我的 → 外观、动画与音效”中开启或关闭提示音，选择轻柔、清脆、醇厚音色并试听，设置自动保存。</p>
               </div>
             </li>
             <li>
               <span>02</span>
               <div>
-                <strong>答案在作答后显示</strong>
-                <p>题组预览只展示题干，进入刷题后再显示选项和答案，减少预览页面的干扰。</p>
+                <strong>会员与社区入口整理</strong>
+                <p>底部 VIP 页面展示三档套餐与权益，社区和排行榜移至“我的”。支付及实时会员额度尚未开通。</p>
               </div>
             </li>
             <li>
               <span>03</span>
               <div>
-                <strong>学习入口重新整理</strong>
-                <p>“我的”页面新增错题、收藏、已生成题目和学习进度入口，并按用途整理账户与应用设置。</p>
+                <strong>修复题目贡献统计</strong>
+                <p>修复已上传共享的 AI 题组没有计入提交题目排行榜的问题，贡献统计纳入题组中的题目。</p>
               </div>
             </li>
           </ul>
           <p className="announcement-footnote">
-            App 当前提供 Android v0.3.0 安装包；正式考试信息仍请以对应认证机构和相关主管部门的最新公告为准。
+            App 当前提供 Android v0.3.1 安装包；正式考试信息仍请以对应认证机构和相关主管部门的最新公告为准。
           </p>
         </div>
         <footer className="announcement-footer">
@@ -1521,8 +1521,8 @@ function App() {
                 <a
                   className="account-menu-link"
                   role="menuitem"
-                  href="/downloads/kaojiang-v0.3.0.apk"
-                  download="kaojiang-v0.3.0.apk"
+                  href="/downloads/kaojiang-v0.3.1.apk"
+                  download="kaojiang-v0.3.1.apk"
                   onClick={() => setAccountMenuOpen(false)}
                 >
                   <Download size={17} />
