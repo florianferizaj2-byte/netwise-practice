@@ -28,7 +28,7 @@ import { studySummary } from "./study-summary.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const mobileRelease = () => {
-  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.2.9";
+  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.3.0";
   const minimumVersion =
     process.env.MOBILE_MINIMUM_VERSION || "0.2.8";
   return {
@@ -39,7 +39,7 @@ const mobileRelease = () => {
       `/downloads/kaojiang-v${latestVersion}.apk`,
     releaseNotes:
       process.env.MOBILE_RELEASE_NOTES ||
-      "AI 出题一次生成 10 题并在后台持续处理；每题经独立二次审核，未通过会继续补题，生成组可上传或直接练习。",
+      "个人页新增学习快捷入口；AI 题组支持后台生成、逐题复核和批次管理，并行复核缩短等待时间。",
   };
 };
 async function exchangeWechatMiniProgramCode(code) {

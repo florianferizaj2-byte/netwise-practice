@@ -48,6 +48,26 @@ const reviewFailure = (verdict) => {
     .slice(0, 500);
   return `独立质量审核未通过${detail ? `：${detail}` : ""}`;
 };
+const sampleEvenly = (items, limit) => {
+  if (items.length <= limit) return items;
+  if (limit <= 1) return [items[items.length - 1]];
+  return Array.from({ length: limit }, (_, index) =>
+    items[Math.round((index * (items.length - 1)) / (limit - 1))],
+  );
+};
+const compactQuestionForReview = (question) => ({
+  chapter: question.chapter,
+  knowledgeSection: question.knowledgeSection,
+  targetKnowledgePoint: question.targetKnowledgePoint,
+  knowledgePoint: question.knowledgePoint,
+  type: question.type,
+  question: question.question,
+  options: question.options,
+  answer: question.answer,
+  ...(question.analysis
+    ? { analysis: String(question.analysis).slice(0, 600) }
+    : {}),
+});
 const explanationSchema = z
   .object({ text: z.string().min(8).max(6000) })
   .strict();
@@ -409,6 +429,10 @@ export class OpenAICompatibleProvider extends AIProvider {
       (question.targetKnowledgePoint || question.knowledgePoint) === target &&
       (question.source !== "ai_generated" || question.ownerUserId === userId),
     );
+    const generationReferences = sampleEvenly(related, 16).map((question) => ({
+      question: question.question,
+      options: question.options,
+    }));
     const difficulty = options.difficulty;
     const specs = Array.from({ length: count }, (_, index) => ({
       index,
@@ -443,9 +467,12 @@ export class OpenAICompatibleProvider extends AIProvider {
           knowledgePoint: target,
           specs: requested,
           existingQuestionCount: related.length,
-          previousQuestions: [...related, ...accepted.values()]
-            .slice(-50)
-            .map((question) => ({ question: question.question, options: question.options })),
+          previousQuestions: [
+            ...generationReferences,
+            ...[...accepted.values()]
+              .slice(-10)
+              .map((question) => ({ question: question.question, options: question.options })),
+          ],
         },
         z
           .object({ questions: z.array(z.unknown()).length(pending.length) })
@@ -501,51 +528,82 @@ export class OpenAICompatibleProvider extends AIProvider {
         }
       }
       if (candidates.length) {
-        progress(`正在审核 ${candidates.length} 道候选题`, {
+        const reviewBatches = [];
+        for (let index = 0; index < candidates.length; index += 5)
+          reviewBatches.push(candidates.slice(index, index + 5));
+        progress(`正在并行独立审核 ${candidates.length} 道候选题`, {
           stage: "review",
           round: round + 1,
           completed: accepted.size,
           total: specs.length,
         });
-        const review = await this.structured(
-          '逐题独立审核管理员题库扩充题，不信任给定答案。自行求解并检查答案唯一性、解析、知识点关联、题干完整性、与旧题重合度和选项矛盾。只要答案错误、无法唯一作答、题干不完整、知识点不符、与旧题高度重复或只是改数字，就 valid=false。返回 {"reviews":[{"index":数字,"valid":true或false,"relevant":true或false,"singleAnswerCorrect":true或false,"contradictions":[],"reason":"具体理由"}]}。',
-          {
-            items: candidates,
-            target,
-            original: seed,
-            previousQuestions: candidates.flatMap(({ question }) =>
-              related
-                .map((old) => ({ old, score: questionSimilarity(question, old) }))
-                .sort((left, right) => right.score - left.score)
-                .slice(0, 8)
-                .map(({ old, score }) => ({ ...old, similarity: score })),
-            ),
-          },
-          z
-            .object({
-              reviews: z.array(batchReviewItemSchema).length(candidates.length),
-            })
-            .strict(),
-          (result) => {
-            const indexes = result.reviews.map((item) => item.index);
-            if (
-              new Set(indexes).size !== indexes.length ||
-              indexes.some((index) => !candidates.some((item) => item.index === index))
-            )
-              throw new Error("审核结果题号不完整");
-          },
-          settings,
-          (_chunk, length) =>
-            progress("AI 正在输出审核结果…", {
-              stage: "review-streaming",
+        const runReviewBatch = (items) => {
+          const indexes = new Set(items.map((item) => item.index));
+          const previousQuestions = items.flatMap(({ index, question }) =>
+            related
+              .map((old) => ({ old, score: questionSimilarity(question, old) }))
+              .sort((left, right) => right.score - left.score)
+              .slice(0, 4)
+              .map(({ old, score }) => ({
+                candidateIndex: index,
+                similarity: Math.round(score * 1000) / 1000,
+                question: compactQuestionForReview(old),
+              })),
+          );
+          return this.structured(
+            `逐题独立审核这 ${items.length} 道候选题，不信任题目给出的答案。对每题自行求解，检查答案唯一性、解析一致性、知识点关联、题干完整性、选项矛盾和与参考题的重合度。答案错误、无法唯一作答、题干信息不足、知识点不符、高度重复或只是改数字，必须判定 valid=false。每道题单独判断，不能因其他题通过而放宽标准。严格按 index 返回本批全部审核结果。返回 {"reviews":[{"index":数字,"valid":true或false,"relevant":true或false,"singleAnswerCorrect":true或false,"contradictions":[],"reason":"具体审核理由"}]}。`,
+            {
+              items,
+              target,
+              original: compactQuestionForReview(seed),
+              previousQuestions,
+            },
+            z
+              .object({
+                reviews: z.array(batchReviewItemSchema).length(items.length),
+              })
+              .strict(),
+            (result) => {
+              const resultIndexes = result.reviews.map((item) => item.index);
+              if (
+                new Set(resultIndexes).size !== resultIndexes.length ||
+                resultIndexes.some((index) => !indexes.has(index)) ||
+                indexes.size !== resultIndexes.length
+              )
+                throw new Error("审核结果题号不完整");
+            },
+            settings,
+            (_chunk, length) =>
+              progress("AI 正在输出审核结果…", {
+                stage: "review-streaming",
+                round: round + 1,
+                completed: accepted.size,
+                total: specs.length,
+                outputLength: length,
+              }),
+            userId,
+          );
+        };
+        const parallelReviews = await Promise.allSettled(
+          reviewBatches.map((items) => runReviewBatch(items)),
+        );
+        const reviewItems = [];
+        for (let index = 0; index < parallelReviews.length; index++) {
+          const result = parallelReviews[index];
+          if (result.status === "fulfilled") {
+            reviewItems.push(...result.value.reviews);
+          } else {
+            progress("并行审核暂不可用，正在补做独立复核", {
+              stage: "review",
               round: round + 1,
               completed: accepted.size,
               total: specs.length,
-              outputLength: length,
-            }),
-          userId,
-        );
-        const verdicts = new Map(review.reviews.map((item) => [item.index, item]));
+            });
+            const retry = await runReviewBatch(reviewBatches[index]);
+            reviewItems.push(...retry.reviews);
+          }
+        }
+        const verdicts = new Map(reviewItems.map((item) => [item.index, item]));
         for (const candidate of candidates) {
           const verdict = verdicts.get(candidate.index);
           if (reviewAccepted(verdict)) accepted.set(candidate.index, candidate.question);

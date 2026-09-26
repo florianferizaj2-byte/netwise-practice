@@ -1,13 +1,15 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   Animated,
   ActivityIndicator,
   Linking,
   Modal,
+  PanResponder,
   SafeAreaView,
   StyleSheet,
   Text,
   View,
+  useWindowDimensions,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
@@ -87,6 +89,7 @@ export function AppShell() {
   >();
   const [practiceSelectionComplete, setPracticeSelectionComplete] =
     useState(false);
+  const [practiceAiLibrary, setPracticeAiLibrary] = useState(false);
   const [practiceQuestionId, setPracticeQuestionId] = useState<
     string | undefined
   >();
@@ -292,6 +295,7 @@ export function AppShell() {
     setPracticeKnowledgeSection(undefined);
     setPracticeKnowledgePoint(undefined);
     setPracticeSelectionComplete(false);
+    setPracticeAiLibrary(false);
     setPracticeQuestionId(undefined);
     setPracticeAiGroupId(undefined);
     setAiQuestionGroupId(undefined);
@@ -302,22 +306,25 @@ export function AppShell() {
   }
 
   function handleNavigate(tab: AppTab, options?: NavigationOptions) {
-    if (tab === 'practice' && options) {
-      setPracticeRouteId((value) => value + 1);
-      const nextSession = options?.practiceSession ?? 'standard';
-      setPracticeSession(nextSession);
-      setPracticeSource(options?.practiceSource ?? 'all');
-      setPracticeChapter(options?.practiceChapter);
-      setPracticeKnowledgeSection(options?.practiceKnowledgeSection);
-      setPracticeKnowledgePoint(options?.practiceKnowledgePoint);
-      setPracticeSelectionComplete(options?.practiceSelectionComplete ?? false);
-      setPracticeQuestionId(options?.practiceQuestionId);
-      setPracticeAiGroupId(options?.practiceAiGroupId);
-      setAiQuestionGroupId(options?.aiQuestionGroupId);
-      setPracticeMode(
-        options?.practiceMode ??
-          (nextSession === 'daily' ? 'random' : 'sequential'),
-      );
+    if (tab === 'practice') {
+      setPracticeAiLibrary(options?.practiceAiLibrary ?? false);
+      if (options) {
+        setPracticeRouteId((value) => value + 1);
+        const nextSession = options.practiceSession ?? 'standard';
+        setPracticeSession(nextSession);
+        setPracticeSource(options.practiceSource ?? 'all');
+        setPracticeChapter(options.practiceChapter);
+        setPracticeKnowledgeSection(options.practiceKnowledgeSection);
+        setPracticeKnowledgePoint(options.practiceKnowledgePoint);
+        setPracticeSelectionComplete(options.practiceSelectionComplete ?? false);
+        setPracticeQuestionId(options.practiceQuestionId);
+        setPracticeAiGroupId(options.practiceAiGroupId);
+        setAiQuestionGroupId(options.aiQuestionGroupId);
+        setPracticeMode(
+          options.practiceMode ??
+            (nextSession === 'daily' ? 'random' : 'sequential'),
+        );
+      }
     }
     setVisitedTabs((current) =>
       current.includes(tab) ? current : [...current, tab],
@@ -419,6 +426,7 @@ export function AppShell() {
                   practiceKnowledgeSection,
                   practiceKnowledgePoint,
                   practiceSelectionComplete,
+                  practiceAiLibrary,
                   practiceQuestionId,
                   practiceAiGroupId,
                   aiQuestionGroupId,
@@ -631,6 +639,7 @@ function renderScreen(
     practiceKnowledgeSection?: string;
     practiceKnowledgePoint?: string;
     practiceSelectionComplete: boolean;
+    practiceAiLibrary: boolean;
     practiceQuestionId?: string;
     practiceAiGroupId?: string;
     aiQuestionGroupId?: string;
@@ -739,41 +748,140 @@ function AiGenerationProgressPill({
   onPress: () => void;
 }) {
   const styles = useThemedStyles(createStyles);
+  const { width: screenWidth, height: screenHeight } = useWindowDimensions();
   const complete = job.status === 'completed';
   const failed = job.status === 'failed';
+  const expandedWidth = Math.min(328, screenWidth - 24);
+  const collapsedWidth = 54;
+  const maxX = Math.max(8, screenWidth - expandedWidth - 8);
+  const maxY = Math.max(56, screenHeight - 200);
+  const [position, setPosition] = useState(() => ({
+    x: maxX,
+    y: Math.max(72, Math.min(Math.round(screenHeight * 0.34), maxY)),
+  }));
+  const positionRef = useRef(position);
+  const dragOrigin = useRef(position);
+  const [collapsed, setCollapsed] = useState(false);
+  const [edge, setEdge] = useState<'left' | 'right'>('right');
   const progress = Math.max(
     0,
     Math.min(100, Math.round(((job.progress.completed ?? 0) / 10) * 100)),
   );
+  positionRef.current = position;
+
+  useEffect(() => {
+    setPosition((current) => ({
+      x: Math.max(8, Math.min(current.x, maxX)),
+      y: Math.max(56, Math.min(current.y, maxY)),
+    }));
+  }, [maxX, maxY]);
+
+  const dragResponder = useMemo(() => PanResponder.create({
+    onStartShouldSetPanResponder: () => true,
+    onMoveShouldSetPanResponder: () => true,
+    onPanResponderGrant: () => {
+      dragOrigin.current = positionRef.current;
+    },
+    onPanResponderMove: (_event, gesture) => {
+      const next = {
+        x: Math.max(8, Math.min(dragOrigin.current.x + gesture.dx, maxX)),
+        y: Math.max(56, Math.min(dragOrigin.current.y + gesture.dy, maxY)),
+      };
+      positionRef.current = next;
+      setPosition(next);
+    },
+    onPanResponderRelease: (_event, gesture) => {
+      const next = {
+        x: Math.max(8, Math.min(dragOrigin.current.x + gesture.dx, maxX)),
+        y: Math.max(56, Math.min(dragOrigin.current.y + gesture.dy, maxY)),
+      };
+      positionRef.current = next;
+      setPosition(next);
+      setEdge(next.x + expandedWidth / 2 < screenWidth / 2 ? 'left' : 'right');
+    },
+  }), [expandedWidth, maxX, maxY, screenWidth]);
+
+  function collapseToEdge() {
+    const nextEdge = position.x + expandedWidth / 2 < screenWidth / 2 ? 'left' : 'right';
+    setEdge(nextEdge);
+    setCollapsed(true);
+  }
+
+  function expandFromEdge() {
+    setPosition((current) => ({
+      ...current,
+      x: edge === 'left' ? 8 : maxX,
+    }));
+    setCollapsed(false);
+  }
+
   return (
-    <View pointerEvents="box-none" style={styles.aiProgressPosition}>
-      <AnimatedPressable
-        accessibilityLabel={complete ? '查看已生成的 AI 题组' : '查看 AI 出题进度'}
-        accessibilityRole="button"
-        onPress={onPress}
-        style={styles.aiProgressCard}
-      >
-        <View style={styles.aiProgressMark}><Text style={styles.aiProgressMarkText}>✦</Text></View>
-        <View style={styles.aiProgressCopy}>
-          <View style={styles.aiProgressHeading}>
-            <Text style={styles.aiProgressTitle}>
-              {complete ? '10 道新题已备好' : failed ? 'AI 出题遇到问题' : 'AI 正在后台出题'}
-            </Text>
-            <Text style={styles.aiProgressCount}>
-              {complete ? '完成' : failed ? '查看' : `${job.progress.completed ?? 0}/10`}
-            </Text>
-          </View>
-          <Text numberOfLines={1} style={styles.aiProgressMessage}>
-            {complete ? '点击打开题组，可上传或开始刷题' : job.progress.message}
+    <View
+      pointerEvents="box-none"
+      style={[
+        styles.aiProgressPosition,
+        {
+          left: collapsed ? (edge === 'left' ? 0 : screenWidth - collapsedWidth) : position.x,
+          top: position.y,
+          width: collapsed ? collapsedWidth : expandedWidth,
+        },
+      ]}
+    >
+      {collapsed ? (
+        <AnimatedPressable
+          accessibilityLabel="展开 AI 出题进度窗"
+          accessibilityRole="button"
+          onPress={expandFromEdge}
+          style={styles.aiProgressCollapsed}
+        >
+          <Text style={styles.aiProgressMarkText}>✦</Text>
+          <Text style={styles.aiProgressCollapsedCount}>
+            {complete ? '✓' : failed ? '!' : `${job.progress.completed ?? 0}/10`}
           </Text>
-          {!complete && !failed && (
-            <View style={styles.aiProgressTrack}>
-              <View style={[styles.aiProgressFill, { width: `${progress}%` }]} />
+        </AnimatedPressable>
+      ) : (
+        <View style={styles.aiProgressCard}>
+          <View style={styles.aiProgressTools}>
+            <View {...dragResponder.panHandlers} style={styles.aiProgressDragHandle}>
+              <Text style={styles.aiProgressDragText}>⠿ 拖动窗口</Text>
             </View>
-          )}
+            <AnimatedPressable
+              accessibilityLabel="把进度窗收至屏幕边缘"
+              onPress={collapseToEdge}
+              style={styles.aiProgressCollapseButton}
+            >
+              <Text style={styles.aiProgressCollapseText}>收至边缘</Text>
+            </AnimatedPressable>
+          </View>
+          <AnimatedPressable
+            accessibilityLabel={complete ? '查看已生成的 AI 题组' : '查看 AI 出题进度'}
+            accessibilityRole="button"
+            onPress={onPress}
+            style={styles.aiProgressCardBody}
+          >
+            <View style={styles.aiProgressMark}><Text style={styles.aiProgressMarkText}>✦</Text></View>
+            <View style={styles.aiProgressCopy}>
+              <View style={styles.aiProgressHeading}>
+                <Text style={styles.aiProgressTitle}>
+                  {complete ? '10 道新题已备好' : failed ? 'AI 出题遇到问题' : 'AI 正在后台出题'}
+                </Text>
+                <Text style={styles.aiProgressCount}>
+                  {complete ? '完成' : failed ? '查看' : `${job.progress.completed ?? 0}/10`}
+                </Text>
+              </View>
+              <Text numberOfLines={1} style={styles.aiProgressMessage}>
+                {complete ? '点击打开题组，可上传或开始刷题' : job.progress.message}
+              </Text>
+              {!complete && !failed && (
+                <View style={styles.aiProgressTrack}>
+                  <View style={[styles.aiProgressFill, { width: `${progress}%` }]} />
+                </View>
+              )}
+            </View>
+            <Text style={styles.aiProgressArrow}>›</Text>
+          </AnimatedPressable>
         </View>
-        <Text style={styles.aiProgressArrow}>›</Text>
-      </AnimatedPressable>
+      )}
     </View>
   );
 }
@@ -791,25 +899,57 @@ const createStyles = (colors: ThemeColors) =>
       flex: 1,
     },
     aiProgressPosition: {
-      bottom: 76,
-      left: spacing.md,
       position: 'absolute',
-      right: spacing.md,
       zIndex: 20,
     },
     aiProgressCard: {
-      alignItems: 'center',
       backgroundColor: colors.surface,
       borderColor: colors.brandSoft,
       borderRadius: radius.lg,
       borderWidth: 1,
+      overflow: 'hidden',
+      ...shadow.card,
+    },
+    aiProgressTools: {
+      alignItems: 'center',
+      borderBottomColor: colors.border,
+      borderBottomWidth: StyleSheet.hairlineWidth,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      minHeight: 30,
+      paddingHorizontal: spacing.sm,
+    },
+    aiProgressDragHandle: {
+      alignItems: 'center',
+      flex: 1,
+      flexDirection: 'row',
+      minHeight: 32,
+      paddingRight: spacing.sm,
+    },
+    aiProgressDragText: { color: colors.textMuted, fontSize: 11, fontWeight: '700' },
+    aiProgressCollapseButton: { minHeight: 30, justifyContent: 'center', paddingHorizontal: spacing.xs },
+    aiProgressCollapseText: { color: colors.brand, fontSize: 11, fontWeight: '800' },
+    aiProgressCardBody: {
+      alignItems: 'center',
       flexDirection: 'row',
       gap: spacing.sm,
       minHeight: 68,
       paddingHorizontal: spacing.md,
       paddingVertical: spacing.sm,
+    },
+    aiProgressCollapsed: {
+      alignItems: 'center',
+      backgroundColor: colors.surface,
+      borderColor: colors.brandSoft,
+      borderRadius: radius.lg,
+      borderWidth: 1,
+      gap: 4,
+      justifyContent: 'center',
+      minHeight: 76,
+      paddingHorizontal: 4,
       ...shadow.card,
     },
+    aiProgressCollapsedCount: { color: colors.brand, fontSize: 10, fontWeight: '900' },
     aiProgressMark: {
       alignItems: 'center',
       backgroundColor: colors.brandSoft,

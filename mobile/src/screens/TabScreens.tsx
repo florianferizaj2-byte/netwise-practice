@@ -73,11 +73,13 @@ type ScreenProps = {
   practiceSelectionComplete?: boolean;
   practiceQuestionId?: string;
   practiceAiGroupId?: string;
+  practiceAiLibrary?: boolean;
   aiQuestionGroupId?: string;
   preview?: boolean;
   onOpenCertificatePicker?: () => void;
   onUserUpdated?: (user: AuthResponse['user']) => void;
   user?: AuthResponse['user'];
+  certificates?: AuthResponse['certificates'];
 };
 
 const previewQuestion: Question = {
@@ -399,10 +401,14 @@ function PracticePicker({
     <ScreenContainer onRefresh={preview ? undefined : query.refresh} refreshing={query.fetching && !!catalog}>
       <EntranceView delay={50} distance={12} style={styles.pickerSummary}>
         <View>
-          <Text style={styles.pickerSummaryTitle}>{isDailyPractice ? '随机生成今日题目' : '题库练习'}</Text>
+          <Text style={styles.pickerSummaryTitle}>
+            {isDailyPractice ? '随机生成今日题目' : practiceMode === 'ai' ? 'AI 智能出题' : '题库练习'}
+          </Text>
           <Text style={styles.pickerSummaryText}>
             {isDailyPractice
               ? `从所选知识随机抽取 ${DAILY_PRACTICE_COUNT} 题，不足时自动补充其他题目`
+              : practiceMode === 'ai'
+                ? '每组 10 道，经过程序校验和独立 AI 复核'
               : catalog
                 ? `${catalog.total} 道题 · 已刷 ${catalog.attemptedCount} 道`
                 : '正在同步你的题库'}
@@ -444,30 +450,55 @@ function PracticePicker({
         </EntranceView>
       )}
       {practiceMode === 'ai' && !isDailyPractice && (
-        <Text style={styles.aiPickerHint}>请选择下方具体知识点，AI 会参考该知识点已有题目。</Text>
+        <View style={styles.aiPickerIntro}>
+          <View style={styles.aiPickerIntroMark}><Text style={styles.aiPickerIntroGlyph}>✦</Text></View>
+          <View style={styles.aiPickerIntroCopy}>
+            <Text style={styles.aiPickerIntroTitle}>选择知识点开始出题</Text>
+            <Text style={styles.aiPickerHint}>AI 会参考该知识点已有题目，并对新题逐题复核。</Text>
+          </View>
+        </View>
       )}
 
       {catalog && !isDailyPractice && (
-        <EntranceView delay={120} distance={10}>
-          <AnimatedPressable
-            accessibilityLabel="进入收藏题目"
-            disabled={!catalog.favoriteCount}
-            onPress={() =>
-              onNavigate('practice', {
-                practiceMode,
-                practiceSource: 'favorites',
-              })
-            }
-            style={styles.pickerFavoriteCard}
-          >
-            <Text style={styles.pickerFavoriteStar}>★</Text>
-            <View style={styles.pickerCardCopy}>
-              <Text style={styles.pickerFavoriteTitle}>收藏题目</Text>
-              <Text style={styles.pickerCardMeta}>{catalog.favoriteCount} 道已收藏题目</Text>
-            </View>
-            <Text style={styles.actionArrow}>›</Text>
-          </AnimatedPressable>
-        </EntranceView>
+        <View style={styles.pickerSpecialCards}>
+          <EntranceView delay={120} distance={10}>
+            <AnimatedPressable
+              accessibilityLabel="进入收藏题目"
+              disabled={!catalog.favoriteCount}
+              onPress={() =>
+                onNavigate('practice', {
+                  practiceMode,
+                  practiceSource: 'favorites',
+                })
+              }
+              style={styles.pickerFavoriteCard}
+            >
+              <Text style={styles.pickerFavoriteStar}>★</Text>
+              <View style={styles.pickerCardCopy}>
+                <Text style={styles.pickerFavoriteTitle}>收藏题目</Text>
+                <Text style={styles.pickerCardMeta}>{catalog.favoriteCount} 道已收藏题目</Text>
+              </View>
+              <Text style={styles.actionArrow}>›</Text>
+            </AnimatedPressable>
+          </EntranceView>
+          <EntranceView delay={150} distance={10}>
+            <AnimatedPressable
+              accessibilityLabel="进入已生成题目"
+              onPress={() => onNavigate('practice', {
+                practiceMode: 'ai',
+                practiceAiLibrary: true,
+              })}
+              style={[styles.pickerFavoriteCard, styles.pickerGeneratedCard]}
+            >
+              <Text style={styles.pickerGeneratedIcon}>✦</Text>
+              <View style={styles.pickerCardCopy}>
+                <Text style={styles.pickerFavoriteTitle}>已生成题目</Text>
+                <Text style={styles.pickerCardMeta}>按生成批次分组，可刷题或上传</Text>
+              </View>
+              <Text style={styles.actionArrow}>›</Text>
+            </AnimatedPressable>
+          </EntranceView>
+        </View>
       )}
 
       {loading && (
@@ -722,6 +753,7 @@ export function PracticeScreen({
   practiceSelectionComplete = false,
   practiceQuestionId,
   practiceAiGroupId,
+  practiceAiLibrary = false,
   aiQuestionGroupId,
   preview = false,
 }: ScreenProps) {
@@ -1261,6 +1293,14 @@ export function PracticeScreen({
     setResponseDraft('');
     setResult(null);
     setError(null);
+  }
+
+  if (practiceAiLibrary && !preview) {
+    return <AiQuestionDraftScreen
+      libraryMode
+      onBack={() => onNavigate('practice', { practiceMode: 'ai' })}
+      onNavigate={onNavigate}
+    />;
   }
 
   if (loading) {
@@ -1844,6 +1884,8 @@ export function ExamScreen({ onNavigate }: ScreenProps) {
 }
 
 export function ProfileScreen({
+  certificates = [],
+  onNavigate,
   onLogout,
   onOpenCertificatePicker,
   onUserUpdated,
@@ -1860,6 +1902,7 @@ export function ProfileScreen({
     setMode,
   } = useTheme();
   const styles = useThemedStyles(createStyles);
+  const activeCertificate = certificates.find((certificate) => certificate.id === user?.certificateId);
   const [sponsorOpen, setSponsorOpen] = useState(false);
   const [appSettingsOpen, setAppSettingsOpen] = useState(false);
   const [aiSettingsOpen, setAiSettingsOpen] = useState(false);
@@ -2009,54 +2052,123 @@ export function ProfileScreen({
   return (
     <ScreenContainer profile>
       <EntranceView delay={60} distance={16} style={styles.profileCard}>
-        <View style={styles.avatar}>
-          <Text style={styles.avatarText}>考</Text>
+        <View style={styles.profileIdentity}>
+          <View style={styles.avatar}><Text style={styles.avatarText}>考</Text></View>
+          <View style={styles.profileIdentityCopy}>
+            <Text style={styles.profileKicker}>考匠账号</Text>
+            <Text numberOfLines={1} style={styles.profileName}>{user?.username ?? '未登录用户'}</Text>
+            <Text numberOfLines={1} style={styles.profileMeta}>
+              {activeCertificate?.name ?? (user ? '请选择证书与题库' : '预览模式')}
+            </Text>
+          </View>
+          {user && (
+            <AnimatedPressable
+              accessibilityRole="button"
+              onPress={onOpenCertificatePicker}
+              style={styles.profileCertificateButton}
+            >
+              <Text style={styles.profileCertificateText}>切换 ›</Text>
+            </AnimatedPressable>
+          )}
         </View>
-        <View>
-          <Text style={styles.profileName}>{user?.username ?? '未登录用户'}</Text>
+        <View style={styles.profileSyncRow}>
+          <View style={styles.profileSyncDot} />
+          <Text style={styles.profileSyncText}>{user ? '学习进度已同步到当前账号' : '登录后可同步学习进度'}</Text>
         </View>
       </EntranceView>
-      <EntranceView delay={130} distance={16} style={styles.settingsCard}>
-        <SettingRow
-          onPress={() => setAppSettingsOpen(true)}
-          title="设置"
-          value="动画与外观"
-        />
-        <SettingRow
-          onPress={user ? onOpenCertificatePicker : undefined}
-          title="证书与题库"
-          value={user ? '已同步' : '预览模式'}
-        />
-        <SettingRow onPress={openAiSettings} title="AI 学习助手" value="按账号配置" />
-        <SettingRow
-          onPress={user ? openCommunityNameSettings : undefined}
-          title="社区昵称"
-          value={user?.communityName || user?.username || '登录后设置'}
-        />
-        <SettingRow title="服务器地址" value="aceexam.top" />
-        <SettingRow title="清理学习缓存" value={cacheNotice || '自动缓存 · 可清理'} onPress={() => {
-          void mobileApi.clearStudyCache().then(() => setCacheNotice('已清理'));
-        }} />
-        <SettingRow
-          onPress={() => setAboutOpen(true)}
-          title="关于考匠"
-          value={`移动端 v${APP_VERSION}`}
-        />
+
+      <EntranceView delay={100} distance={12} style={styles.profileSection}>
+        <View style={styles.profileSectionHeader}>
+          <Text style={styles.profileSectionTitle}>学习快捷入口</Text>
+          <Text style={styles.profileSectionHint}>常用功能</Text>
+        </View>
+        <View style={styles.profileShortcutGrid}>
+          <AnimatedPressable
+            accessibilityRole="button"
+            onPress={() => onNavigate('wrong')}
+            style={styles.profileShortcut}
+          >
+            <View style={[styles.profileShortcutIcon, styles.profileShortcutIconGold]}><Text style={styles.profileShortcutGlyph}>错</Text></View>
+            <Text style={styles.profileShortcutTitle}>错题复习</Text>
+            <Text style={styles.profileShortcutMeta}>巩固薄弱知识点</Text>
+          </AnimatedPressable>
+          <AnimatedPressable
+            accessibilityRole="button"
+            onPress={() => onNavigate('practice', { practiceSource: 'favorites' })}
+            style={styles.profileShortcut}
+          >
+            <View style={styles.profileShortcutIcon}><Text style={styles.profileShortcutGlyph}>★</Text></View>
+            <Text style={styles.profileShortcutTitle}>收藏题目</Text>
+            <Text style={styles.profileShortcutMeta}>回看标记的题目</Text>
+          </AnimatedPressable>
+          <AnimatedPressable
+            accessibilityRole="button"
+            onPress={() => onNavigate('practice', { practiceMode: 'ai', practiceAiLibrary: true })}
+            style={styles.profileShortcut}
+          >
+            <View style={[styles.profileShortcutIcon, styles.profileShortcutIconBlue]}><Text style={styles.profileShortcutGlyph}>AI</Text></View>
+            <Text style={styles.profileShortcutTitle}>已生成题目</Text>
+            <Text style={styles.profileShortcutMeta}>按批次刷题或上传</Text>
+          </AnimatedPressable>
+          <AnimatedPressable
+            accessibilityRole="button"
+            onPress={() => onNavigate('today')}
+            style={styles.profileShortcut}
+          >
+            <View style={[styles.profileShortcutIcon, styles.profileShortcutIconMint]}><Text style={styles.profileShortcutGlyph}>今</Text></View>
+            <Text style={styles.profileShortcutTitle}>学习进度</Text>
+            <Text style={styles.profileShortcutMeta}>查看今日练习情况</Text>
+          </AnimatedPressable>
+        </View>
       </EntranceView>
-      <EntranceView delay={200} distance={12} style={styles.aiServiceCard}>
+
+      <EntranceView delay={150} distance={12} style={styles.profileSection}>
+        <View style={styles.profileSectionHeader}>
+          <Text style={styles.profileSectionTitle}>账户与学习</Text>
+        </View>
+        <View style={styles.settingsCard}>
+          <SettingRow
+            onPress={user ? onOpenCertificatePicker : undefined}
+            title="证书与题库"
+            value={activeCertificate?.name ?? (user ? '已同步' : '预览模式')}
+          />
+          <SettingRow onPress={openAiSettings} title="AI 学习助手" value="按账号配置" />
+          <SettingRow
+            onPress={user ? openCommunityNameSettings : undefined}
+            title="社区昵称"
+            value={user?.communityName || user?.username || '登录后设置'}
+          />
+        </View>
+      </EntranceView>
+
+      <EntranceView delay={200} distance={12} style={styles.profileSection}>
+        <View style={styles.profileSectionHeader}>
+          <Text style={styles.profileSectionTitle}>应用设置</Text>
+        </View>
+        <View style={styles.settingsCard}>
+          <SettingRow onPress={() => setAppSettingsOpen(true)} title="外观与动画" value="主题、动画速度" />
+          <SettingRow title="清理学习缓存" value={cacheNotice || '自动缓存 · 可清理'} onPress={() => {
+            void mobileApi.clearStudyCache().then(() => setCacheNotice('已清理'));
+          }} />
+          <SettingRow
+            onPress={() => setAboutOpen(true)}
+            title="关于考匠"
+            value={`移动端 v${APP_VERSION}`}
+          />
+        </View>
+      </EntranceView>
+
+      <EntranceView delay={230} distance={12} style={styles.aiServiceCard}>
         <Text style={styles.aiServiceTitle}>AI 学习服务</Text>
         <Text style={styles.aiServiceText}>
           做题后可使用 AI 提示、错因解析、详细讲解和变式训练。AI Key 仍由你的账号配置，App 不保存密钥。
         </Text>
       </EntranceView>
-      <EntranceView delay={250} distance={10}>
+      <EntranceView delay={260} distance={10}>
         <PrimaryAction onPress={() => setSponsorOpen(true)}>赞助作者</PrimaryAction>
       </EntranceView>
-      <EntranceView delay={240} distance={8} style={styles.mutedNotice}>
-        <Text style={styles.mutedNoticeText}>AI Key 仍然只保存于对应用户的后端设置，不会写入 App。</Text>
-      </EntranceView>
       {onLogout && (
-        <EntranceView delay={300} distance={8}>
+        <EntranceView delay={290} distance={8}>
           <AnimatedPressable onPress={onLogout} style={styles.logoutButton}>
             <Text style={styles.logoutText}>{user ? '退出登录' : '退出预览'}</Text>
           </AnimatedPressable>
@@ -2499,9 +2611,14 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
     gap: spacing.xs,
     paddingBottom: spacing.md,
   },
-  profileContent: { paddingTop: spacing.xxl + spacing.sm },
+  profileContent: { gap: spacing.lg, paddingTop: spacing.lg },
   practiceProgressLabel: { color: colors.brand, fontSize: 13, fontWeight: '700', marginBottom: 2 },
-  aiPickerHint: { color: colors.brandDark, fontSize: 13, lineHeight: 20, paddingHorizontal: 4 },
+  aiPickerIntro: { alignItems: 'center', backgroundColor: colors.surface, borderColor: colors.border, borderRadius: radius.md, borderWidth: 1, flexDirection: 'row', gap: spacing.sm, padding: spacing.md },
+  aiPickerIntroMark: { alignItems: 'center', backgroundColor: colors.brandSoft, borderRadius: radius.sm, height: 34, justifyContent: 'center', width: 34 },
+  aiPickerIntroGlyph: { color: colors.brand, fontSize: 16, fontWeight: '900' },
+  aiPickerIntroCopy: { flex: 1, gap: 3 },
+  aiPickerIntroTitle: { color: colors.text, fontSize: 13, fontWeight: '900' },
+  aiPickerHint: { color: colors.textMuted, fontSize: 11, lineHeight: 16 },
   shortAnswerCard: { backgroundColor: colors.surface, borderRadius: radius.md, gap: spacing.sm, padding: spacing.md },
   shortAnswerLabel: { color: colors.text, fontSize: 14, fontWeight: '800' },
   shortAnswerInput: { borderColor: colors.border, borderRadius: radius.sm, borderWidth: 1, color: colors.text, fontSize: 14, minHeight: 130, padding: spacing.sm },
@@ -2786,6 +2903,17 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
     minHeight: 66,
     paddingHorizontal: spacing.md,
     ...shadow.card,
+  },
+  pickerSpecialCards: { gap: spacing.xs },
+  pickerGeneratedCard: {
+    backgroundColor: colors.surface,
+    borderColor: colors.brand,
+  },
+  pickerGeneratedIcon: {
+    color: colors.brand,
+    fontSize: 26,
+    fontWeight: '900',
+    width: 32,
   },
   pickerFavoriteStar: {
     color: colors.gold,
@@ -3817,21 +3945,24 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
     paddingVertical: 6,
   },
   profileCard: {
-    alignItems: 'center',
     backgroundColor: colors.surface,
-    borderRadius: radius.md,
-    flexDirection: 'row',
+    borderColor: colors.border,
+    borderRadius: radius.lg,
+    borderWidth: 1,
     gap: spacing.md,
     padding: spacing.lg,
     ...shadow.card,
   },
+  profileIdentity: { alignItems: 'center', flexDirection: 'row', gap: spacing.md },
+  profileIdentityCopy: { flex: 1, gap: 3 },
+  profileKicker: { color: colors.textMuted, fontSize: 11, fontWeight: '700' },
   avatar: {
     alignItems: 'center',
     backgroundColor: colors.brandSoft,
-    borderRadius: radius.pill,
-    height: 58,
+    borderRadius: radius.md,
+    height: 52,
     justifyContent: 'center',
-    width: 58,
+    width: 52,
   },
   avatarText: {
     color: colors.brand,
@@ -3840,17 +3971,55 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
   },
   profileName: {
     color: colors.text,
-    fontSize: 18,
+    fontSize: 17,
     fontWeight: '800',
   },
   profileMeta: {
     color: colors.textMuted,
-    fontSize: 13,
-    marginTop: 4,
+    fontSize: 12,
   },
+  profileCertificateButton: {
+    alignItems: 'center',
+    borderColor: colors.border,
+    borderRadius: radius.pill,
+    borderWidth: 1,
+    justifyContent: 'center',
+    minHeight: 38,
+    paddingHorizontal: spacing.sm,
+  },
+  profileCertificateText: { color: colors.brand, fontSize: 12, fontWeight: '800' },
+  profileSyncRow: { alignItems: 'center', borderTopColor: colors.border, borderTopWidth: 1, flexDirection: 'row', gap: spacing.xs, paddingTop: spacing.sm },
+  profileSyncDot: { backgroundColor: colors.brand, borderRadius: radius.pill, height: 7, width: 7 },
+  profileSyncText: { color: colors.textMuted, fontSize: 11 },
+  profileSection: { gap: spacing.sm },
+  profileSectionHeader: { alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 2 },
+  profileSectionTitle: { color: colors.text, fontSize: 16, fontWeight: '900' },
+  profileSectionHint: { color: colors.textFaint, fontSize: 11 },
+  profileShortcutGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
+  profileShortcut: {
+    alignItems: 'flex-start',
+    backgroundColor: colors.surface,
+    borderColor: colors.border,
+    borderRadius: radius.md,
+    borderWidth: 1,
+    flexBasis: '48%',
+    flexGrow: 1,
+    gap: 7,
+    minHeight: 116,
+    padding: spacing.md,
+  },
+  profileShortcutIcon: { alignItems: 'center', backgroundColor: colors.brandSoft, borderRadius: radius.sm, height: 32, justifyContent: 'center', minWidth: 32, paddingHorizontal: 5 },
+  profileShortcutIconGold: { backgroundColor: colors.goldSoft },
+  profileShortcutIconBlue: { backgroundColor: colors.surfaceMuted },
+  profileShortcutIconMint: { backgroundColor: colors.brandSoft },
+  profileShortcutGlyph: { color: colors.brand, fontSize: 12, fontWeight: '900' },
+  profileShortcutTitle: { color: colors.text, fontSize: 13, fontWeight: '800' },
+  profileShortcutMeta: { color: colors.textMuted, fontSize: 10, lineHeight: 15 },
   settingsCard: {
     backgroundColor: colors.surface,
-    borderRadius: radius.md,
+    borderColor: colors.border,
+    borderRadius: radius.lg,
+    borderWidth: 1,
     paddingHorizontal: spacing.md,
     ...shadow.card,
   },

@@ -24,5 +24,6 @@ export type NavigationOptions = {
   practiceSelectionComplete?: boolean;
   practiceQuestionId?: string;
   practiceAiGroupId?: string;
+  practiceAiLibrary?: boolean;
   aiQuestionGroupId?: string;
 };

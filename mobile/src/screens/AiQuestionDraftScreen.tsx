@@ -16,15 +16,18 @@ import { radius, shadow, spacing, useThemedStyles, useTheme, type ThemeColors } 
 
 export function AiQuestionDraftScreen({
   selection,
+  libraryMode = false,
   initialGroupId,
   onBack,
   onNavigate,
 }: {
-  selection: AiQuestionGenerationSelection;
+  selection?: AiQuestionGenerationSelection;
+  libraryMode?: boolean;
   initialGroupId?: string;
   onBack: () => void;
   onNavigate: (tab: AppTab, options?: NavigationOptions) => void;
 }) {
+  const isLibrary = libraryMode || !selection;
   const { colors } = useTheme();
   const styles = useThemedStyles(createStyles);
   const screenActive = useScreenActive();
@@ -50,15 +53,19 @@ export function AiQuestionDraftScreen({
         if (!mounted) return;
         const matchingGroups = allGroups.filter((group) =>
           group.groupType === 'question_generation' &&
-          group.metadata.chapter === selection.chapter &&
-          (group.metadata.knowledgeSection || '') === (selection.knowledgeSection || '') &&
-          group.metadata.knowledgePoint === selection.knowledgePoint,
+          (!selection || (
+            group.metadata.chapter === selection.chapter &&
+            (group.metadata.knowledgeSection || '') === (selection.knowledgeSection || '') &&
+            group.metadata.knowledgePoint === selection.knowledgePoint
+          )),
         );
         setGroups(matchingGroups);
         setJobs(jobResult.jobs.filter((job) =>
-          job.selection.chapter === selection.chapter &&
-          (job.selection.knowledgeSection || '') === (selection.knowledgeSection || '') &&
-          job.selection.knowledgePoint === selection.knowledgePoint,
+          !selection || (
+            job.selection.chapter === selection.chapter &&
+            (job.selection.knowledgeSection || '') === (selection.knowledgeSection || '') &&
+            job.selection.knowledgePoint === selection.knowledgePoint
+          ),
         ));
         if (selectedGroupId) {
           const detail = await mobileApi.aiQuestionGroup(selectedGroupId);
@@ -84,14 +91,14 @@ export function AiQuestionDraftScreen({
       mounted = false;
       clearInterval(timer);
     };
-  }, [screenActive, selectedGroupId, selection.chapter, selection.knowledgeSection, selection.knowledgePoint]);
+  }, [screenActive, selectedGroupId, selection?.chapter, selection?.knowledgeSection, selection?.knowledgePoint]);
 
   const activeJob = jobs.find((job) => job.status === 'queued' || job.status === 'running');
   const failedJob = jobs.find((job) => job.status === 'failed');
   const group = groupDetail?.group;
 
   async function startGeneration() {
-    if (busy || activeJob) return;
+    if (!selection || busy || activeJob) return;
     setBusy('generate');
     setError('');
     setNotice('');
@@ -148,11 +155,29 @@ export function AiQuestionDraftScreen({
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
+    <View style={styles.screen}>
+    <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false} style={styles.scrollView}>
       <View style={styles.header}>
-        <AnimatedPressable accessibilityLabel="返回知识点" onPress={onBack} style={styles.backButton}>
-          <Text style={styles.backText}>‹ 返回练习</Text>
+        <AnimatedPressable
+          accessibilityLabel={isLibrary && selectedGroupId ? '返回已生成题目' : '返回练习'}
+          onPress={() => {
+            if (isLibrary && selectedGroupId) {
+              setGroupDetail(null);
+              setSelectedGroupId('');
+              return;
+            }
+            onBack();
+          }}
+          style={styles.backButton}
+        >
+          <Text style={styles.backText}>{isLibrary && selectedGroupId ? '‹ 返回题组列表' : '‹ 返回练习'}</Text>
         </AnimatedPressable>
+        <View style={styles.headerTitleWrap}>
+          <Text style={styles.headerTitle}>{isLibrary ? 'AI 题库' : 'AI 出题'}</Text>
+          <Text numberOfLines={1} style={styles.headerSubtitle}>
+            {selection?.knowledgePoint ?? '按生成批次整理'}
+          </Text>
+        </View>
         <View style={styles.headerMark}><Text style={styles.headerMarkText}>✦</Text></View>
       </View>
 
@@ -186,7 +211,7 @@ export function AiQuestionDraftScreen({
                 {[group?.metadata.chapter, group?.metadata.knowledgeSection].filter(Boolean).join(' · ')}
               </Text>
             </View>
-            <Text style={styles.selectionCount}>10{ '\n' }题</Text>
+            <Text style={styles.selectionCount}>{group?.questionCount ?? 10}{ '\n' }题</Text>
           </View>
 
           <View style={styles.detailStats}>
@@ -207,12 +232,6 @@ export function AiQuestionDraftScreen({
               </View>
               <QuestionImages question={question} />
               <Text style={styles.questionText}>{question.question}</Text>
-              {Object.entries(question.options || {}).map(([letter, option]) => (
-                <View key={letter} style={styles.optionRow}>
-                  <Text style={styles.optionLetter}>{letter}</Text>
-                  <Text style={styles.optionText}>{option}</Text>
-                </View>
-              ))}
             </EntranceView>
           ))}
 
@@ -235,11 +254,13 @@ export function AiQuestionDraftScreen({
           {!!notice && <Text style={styles.notice}>{notice}</Text>}
           {!!error && <Text style={styles.error}>{error}</Text>}
           <AnimatedPressable onPress={() => { setGroupDetail(null); setSelectedGroupId(''); }} style={styles.backToGroups}>
-            <Text style={styles.backToGroupsText}>返回本知识点的题组列表</Text>
+            <Text style={styles.backToGroupsText}>{isLibrary ? '返回已生成题目列表' : '返回本知识点的题组列表'}</Text>
           </AnimatedPressable>
         </>
       ) : (
         <>
+          {selection ? (
+            <>
           <EntranceView distance={14} style={styles.hero}>
             <View style={styles.heroTop}>
               <Text style={styles.heroEyebrow}>考匠 AI · 知识点练习</Text>
@@ -259,58 +280,27 @@ export function AiQuestionDraftScreen({
             </View>
           </EntranceView>
 
-          <View style={styles.reviewSteps}>
-            <Text style={styles.sectionTitle}>题目怎样进入题组</Text>
-            <View style={styles.stepRow}>
-              <Step number="01" title="批量生成" text="一次准备 10 道题" colors={colors} />
-              <View style={styles.stepConnector} />
-              <Step number="02" title="逐题复核" text="查重并独立审查" colors={colors} />
-              <View style={styles.stepConnector} />
-              <Step number="03" title="保存题组" text="通过后才可使用" colors={colors} />
+          <View style={styles.qualityCard}>
+            <View style={styles.qualityMark}><Text style={styles.qualityMarkText}>✓</Text></View>
+            <View style={styles.qualityCopy}>
+              <Text style={styles.qualityTitle}>生成后逐题复核</Text>
+              <Text style={styles.qualityText}>检查答案、解析和重复度，未通过的题会继续生成。</Text>
             </View>
           </View>
-
-          {activeJob ? (
-            <View style={styles.activeJobCard}>
-              <View style={styles.activeJobHeader}>
-                <View style={styles.activeJobIcon}><ActivityIndicator color={colors.brand} size="small" /></View>
-                <View style={styles.activeJobCopy}>
-                  <Text style={styles.activeJobTitle}>正在后台生成并复核</Text>
-                  <Text style={styles.activeJobMeta}>
-                    已通过 {activeJob.progress.completed ?? 0}/10 道
-                    {activeJob.progress.round ? ` · 第 ${activeJob.progress.round} 轮` : ''}
-                  </Text>
-                </View>
-              </View>
-              <View style={styles.progressTrack}>
-                <View style={[styles.progressFill, { width: `${Math.min(100, ((activeJob.progress.completed ?? 0) / 10) * 100)}%` }]} />
-              </View>
-              <Text style={styles.activeJobMessage}>{activeJob.progress.message}</Text>
-              <Text style={styles.activeJobFootnote}>离开此页面或关闭 App，服务器仍会继续处理。</Text>
+          {failedJob && !activeJob && (
+            <View style={styles.failedJobCard}>
+              <Text style={styles.failedJobTitle}>上次生成没有完成</Text>
+              <Text style={styles.failedJobMessage}>{failedJob.error || failedJob.progress.message}</Text>
+              <Text style={styles.failedJobFootnote}>之前保存的题组不会受影响，可以重新发起任务。</Text>
             </View>
-          ) : (
-            <>
-              {failedJob && (
-                <View style={styles.failedJobCard}>
-                  <Text style={styles.failedJobTitle}>上次生成没有完成</Text>
-                  <Text style={styles.failedJobMessage}>{failedJob.error || failedJob.progress.message}</Text>
-                  <Text style={styles.failedJobFootnote}>之前保存的题组不会受影响，可以重新发起任务。</Text>
-                </View>
-              )}
-              <AnimatedPressable
-                accessibilityRole="button"
-                disabled={busy === 'generate'}
-                onPress={() => void startGeneration()}
-                style={[styles.generateButton, busy === 'generate' && styles.disabled]}
-              >
-                {busy === 'generate' ? <ActivityIndicator color={colors.white} size="small" /> : <Text style={styles.generateIcon}>✦</Text>}
-                <View style={styles.generateCopy}>
-                  <Text style={styles.generateTitle}>{busy === 'generate' ? '正在创建后台任务…' : '生成 10 道题'}</Text>
-                  <Text style={styles.generateSubtitle}>生成后可切换页面，任务会在服务器继续</Text>
-                </View>
-                <Text style={styles.generateArrow}>→</Text>
-              </AnimatedPressable>
+          )}
             </>
+          ) : (
+            <View style={styles.detailHeading}>
+              <Text style={styles.eyebrow}>AI 题库 · 按批次整理</Text>
+              <Text style={styles.title}>已生成题目</Text>
+              <Text style={styles.subtitle}>每组题都经过程序校验和独立 AI 复核。选一组即可继续刷题或上传。</Text>
+            </View>
           )}
 
           {!!notice && <Text style={styles.notice}>{notice}</Text>}
@@ -321,8 +311,8 @@ export function AiQuestionDraftScreen({
 
           <View style={styles.groupSectionHeader}>
             <View>
-              <Text style={styles.sectionTitle}>本知识点的生成题组</Text>
-              <Text style={styles.sectionSubtitle}>生成完成后，在这里上传或接着刷题</Text>
+              <Text style={styles.sectionTitle}>{selection ? '本知识点的生成题组' : '全部生成题组'}</Text>
+              <Text style={styles.sectionSubtitle}>{selection ? '生成完成后，在这里上传或接着刷题' : '按生成批次分组，上传或直接开始练习'}</Text>
             </View>
             <View style={styles.groupCountPill}><Text style={styles.groupCountText}>{groups.length}</Text></View>
           </View>
@@ -332,7 +322,7 @@ export function AiQuestionDraftScreen({
                 <View style={styles.groupCardTop}>
                   <View style={styles.groupSymbol}><Text style={styles.groupSymbolText}>✦</Text></View>
                   <View style={styles.groupCardCopy}>
-                    <Text style={styles.groupTitle}>{selection.knowledgePoint} · AI 题组</Text>
+                    <Text style={styles.groupTitle}>{item.metadata.knowledgePoint || selection?.knowledgePoint || 'AI 题组'} · AI 题组</Text>
                     <Text style={styles.groupMeta}>{formatDate(item.createdAt)} · {item.questionCount} 道题</Text>
                   </View>
                   <View style={[styles.statusBadge, item.shared && styles.sharedBadge]}>
@@ -365,11 +355,11 @@ export function AiQuestionDraftScreen({
               </View>
             </EntranceView>
           ))}
-          {!loading && !groups.length && !activeJob && (
+          {!loading && !groups.length && !jobs.some((job) => job.status === 'queued' || job.status === 'running') && (
             <View style={styles.emptyGroups}>
               <View style={styles.emptyIcon}><Text style={styles.emptyIconText}>✦</Text></View>
-              <Text style={styles.emptyTitle}>这个知识点还没有生成题组</Text>
-              <Text style={styles.emptyText}>生成并通过复核的题目会保存在这里，不会直接显示答案。</Text>
+              <Text style={styles.emptyTitle}>{selection ? '这个知识点还没有生成题组' : '还没有已生成题目'}</Text>
+              <Text style={styles.emptyText}>{selection ? '生成并通过复核的题目会保存在这里，不会直接显示选项或答案。' : '从练习页选择知识点并生成题目，题组会保存在这里。'}</Text>
             </View>
           )}
           <Text style={styles.footerHint}>
@@ -378,6 +368,32 @@ export function AiQuestionDraftScreen({
         </>
       )}
     </ScrollView>
+    {selection && !selectedGroupId && !groupDetail && (
+      <View style={styles.stickyFooter}>
+        <View style={styles.stickyFooterCopy}>
+          <Text style={styles.stickyFooterTitle}>
+            {activeJob ? '正在后台生成并复核' : busy === 'generate' ? '正在创建任务…' : '一次生成 10 道题'}
+          </Text>
+          <Text numberOfLines={1} style={styles.stickyFooterSubtitle}>
+            {activeJob
+              ? `已通过 ${activeJob.progress.completed ?? 0}/10 道 · ${activeJob.progress.message}`
+              : '通过程序校验和独立 AI 复核后加入题组'}
+          </Text>
+        </View>
+        <AnimatedPressable
+          accessibilityLabel={activeJob ? 'AI 正在后台生成题目' : '生成十道 AI 题目'}
+          accessibilityRole="button"
+          disabled={busy === 'generate' || !!activeJob}
+          onPress={() => void startGeneration()}
+          style={[styles.stickyGenerateButton, (busy === 'generate' || !!activeJob) && styles.disabled]}
+        >
+          {activeJob || busy === 'generate'
+            ? <ActivityIndicator color={colors.white} size="small" />
+            : <Text style={styles.stickyGenerateText}>生成 10 题</Text>}
+        </AnimatedPressable>
+      </View>
+    )}
+    </View>
   );
 }
 
@@ -398,16 +414,6 @@ function stylesStat(colors: ThemeColors) {
   });
 }
 
-function Step({ number, title, text, colors }: { number: string; title: string; text: string; colors: ThemeColors }) {
-  return (
-    <View style={{ alignItems: 'center', flex: 1, gap: 5 }}>
-      <Text style={{ color: colors.brand, fontSize: 11, fontWeight: '900' }}>{number}</Text>
-      <Text style={{ color: colors.text, fontSize: 12, fontWeight: '800' }}>{title}</Text>
-      <Text style={{ color: colors.textMuted, fontSize: 10, textAlign: 'center' }}>{text}</Text>
-    </View>
-  );
-}
-
 function difficultyName(value?: string) {
   if (value === 'easy') return '基础';
   if (value === 'hard') return '进阶';
@@ -421,10 +427,15 @@ function formatDate(value: string) {
 }
 
 const createStyles = (colors: ThemeColors) => StyleSheet.create({
-  content: { backgroundColor: colors.background, flexGrow: 1, gap: spacing.md, padding: spacing.lg, paddingBottom: spacing.xxl },
+  screen: { backgroundColor: colors.background, flex: 1 },
+  scrollView: { flex: 1 },
+  content: { backgroundColor: colors.background, flexGrow: 1, gap: spacing.md, padding: spacing.lg, paddingBottom: spacing.xl },
   header: { alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between' },
-  backButton: { justifyContent: 'center', minHeight: 38 },
+  backButton: { justifyContent: 'center', minHeight: 44, minWidth: 92 },
   backText: { color: colors.brand, fontSize: 14, fontWeight: '800' },
+  headerTitleWrap: { alignItems: 'center', flex: 1, gap: 2 },
+  headerTitle: { color: colors.text, fontSize: 16, fontWeight: '900' },
+  headerSubtitle: { color: colors.textMuted, fontSize: 10, maxWidth: '100%' },
   headerMark: { alignItems: 'center', backgroundColor: colors.brandSoft, borderRadius: radius.pill, height: 36, justifyContent: 'center', width: 36 },
   headerMarkText: { color: colors.brand, fontSize: 18, fontWeight: '900' },
   hero: { backgroundColor: colors.brand, borderRadius: radius.lg, gap: spacing.md, overflow: 'hidden', padding: spacing.lg, ...shadow.card },
@@ -440,27 +451,20 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
   heroTopicLabel: { color: colors.white, fontSize: 10, opacity: 0.72 },
   heroTopicName: { color: colors.white, fontSize: 14, fontWeight: '800' },
   heroTopicArrow: { color: colors.white, fontSize: 22, opacity: 0.82 },
-  reviewSteps: { backgroundColor: colors.surface, borderColor: colors.border, borderRadius: radius.lg, borderWidth: 1, gap: spacing.md, padding: spacing.md },
+  qualityCard: { alignItems: 'center', backgroundColor: colors.surface, borderColor: colors.border, borderRadius: radius.md, borderWidth: 1, flexDirection: 'row', gap: spacing.sm, padding: spacing.md },
+  qualityMark: { alignItems: 'center', backgroundColor: colors.brandSoft, borderRadius: radius.pill, height: 32, justifyContent: 'center', width: 32 },
+  qualityMarkText: { color: colors.brand, fontSize: 15, fontWeight: '900' },
+  qualityCopy: { flex: 1, gap: 3 },
+  qualityTitle: { color: colors.text, fontSize: 13, fontWeight: '800' },
+  qualityText: { color: colors.textMuted, fontSize: 11, lineHeight: 16 },
   sectionTitle: { color: colors.text, fontSize: 16, fontWeight: '900' },
-  stepRow: { alignItems: 'center', flexDirection: 'row', gap: 4 },
-  stepConnector: { backgroundColor: colors.border, height: 1, marginBottom: 20, width: 12 },
-  generateButton: { alignItems: 'center', backgroundColor: colors.brand, borderRadius: radius.lg, flexDirection: 'row', gap: spacing.md, minHeight: 70, paddingHorizontal: spacing.md, paddingVertical: spacing.sm, ...shadow.card },
-  generateIcon: { color: colors.white, fontSize: 21, fontWeight: '900', paddingHorizontal: 5 },
-  generateCopy: { flex: 1, gap: 4 },
-  generateTitle: { color: colors.white, fontSize: 16, fontWeight: '900' },
-  generateSubtitle: { color: colors.white, fontSize: 11, opacity: 0.78 },
-  generateArrow: { color: colors.white, fontSize: 23, fontWeight: '700' },
+  stickyFooter: { alignItems: 'center', backgroundColor: colors.surface, borderTopColor: colors.border, borderTopWidth: 1, flexDirection: 'row', gap: spacing.md, paddingHorizontal: spacing.lg, paddingTop: spacing.sm, paddingBottom: spacing.md },
+  stickyFooterCopy: { flex: 1, gap: 4 },
+  stickyFooterTitle: { color: colors.text, fontSize: 14, fontWeight: '900' },
+  stickyFooterSubtitle: { color: colors.textMuted, fontSize: 10 },
+  stickyGenerateButton: { alignItems: 'center', backgroundColor: colors.brand, borderRadius: radius.md, justifyContent: 'center', minHeight: 48, minWidth: 112, paddingHorizontal: spacing.md, ...shadow.card },
+  stickyGenerateText: { color: colors.white, fontSize: 13, fontWeight: '900' },
   disabled: { opacity: 0.65 },
-  activeJobCard: { backgroundColor: colors.surface, borderColor: colors.brandSoft, borderRadius: radius.lg, borderWidth: 1, gap: spacing.sm, padding: spacing.md, ...shadow.card },
-  activeJobHeader: { alignItems: 'center', flexDirection: 'row', gap: spacing.sm },
-  activeJobIcon: { alignItems: 'center', backgroundColor: colors.brandSoft, borderRadius: radius.md, height: 40, justifyContent: 'center', width: 40 },
-  activeJobCopy: { flex: 1, gap: 3 },
-  activeJobTitle: { color: colors.text, fontSize: 14, fontWeight: '900' },
-  activeJobMeta: { color: colors.brand, fontSize: 11, fontWeight: '700' },
-  progressTrack: { backgroundColor: colors.surfaceMuted, borderRadius: radius.pill, height: 7, overflow: 'hidden' },
-  progressFill: { backgroundColor: colors.brand, borderRadius: radius.pill, height: '100%' },
-  activeJobMessage: { color: colors.text, fontSize: 12, lineHeight: 18 },
-  activeJobFootnote: { color: colors.textMuted, fontSize: 11 },
   failedJobCard: { backgroundColor: colors.warningSoft, borderRadius: radius.md, gap: 4, padding: spacing.md },
   failedJobTitle: { color: colors.warning, fontSize: 13, fontWeight: '900' },
   failedJobMessage: { color: colors.text, fontSize: 12, lineHeight: 18 },
@@ -524,9 +528,6 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
   questionNumber: { color: colors.brand, fontSize: 12, fontWeight: '900' },
   difficulty: { backgroundColor: colors.surfaceMuted, borderRadius: radius.pill, color: colors.textMuted, fontSize: 10, fontWeight: '700', overflow: 'hidden', paddingHorizontal: 8, paddingVertical: 4 },
   questionText: { color: colors.text, fontSize: 15, fontWeight: '800', lineHeight: 23 },
-  optionRow: { alignItems: 'flex-start', borderColor: colors.border, borderRadius: radius.sm, borderWidth: 1, flexDirection: 'row', gap: spacing.sm, padding: spacing.sm },
-  optionLetter: { color: colors.brand, fontSize: 12, fontWeight: '900' },
-  optionText: { color: colors.text, flex: 1, fontSize: 12, lineHeight: 18 },
   actions: { gap: spacing.sm, marginTop: spacing.xs },
   primaryButton: { alignItems: 'center', backgroundColor: colors.brand, borderRadius: radius.md, flexDirection: 'row', justifyContent: 'center', minHeight: 52, paddingHorizontal: spacing.md },
   primaryText: { color: colors.white, fontSize: 14, fontWeight: '900' },
