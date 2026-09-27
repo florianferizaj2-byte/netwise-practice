@@ -1,0 +1,92 @@
+.exam-scope-panel {
+  background: #fff;
+  border: 1px solid #dce3df;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+.exam-scope-heading,
+.exam-scope-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.exam-scope-heading h2 {
+  margin: 0;
+  font-size: 18px;
+}
+.exam-scope-modes {
+  display: flex;
+  gap: 6px;
+}
+.exam-scope-modes button {
+  font-size: 13px;
+  padding: 8px 12px;
+}
+.exam-scope-modes .active {
+  color: #11664f;
+  background: #e5f2eb;
+  border-color: #a6cfbc;
+}
+.exam-scope-caption {
+  margin: 20px 0 12px;
+  color: #6f7e76;
+  font-size: 13px;
+}
+.exam-scope-caption button {
+  font-size: 12px;
+  padding: 6px 10px;
+}
+.exam-scope-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.exam-scope-grid label {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 14px;
+  border: 1px solid #e2e8e4;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.exam-scope-grid label.selected {
+  border-color: #7bb59b;
+  background: #f1f8f4;
+}
+.exam-scope-grid input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  accent-color: #177c63;
+  margin: 0;
+}
+.exam-scope-grid label span {
+  display: grid;
+  gap: 5px;
+}
+.exam-scope-grid strong {
+  font-size: 14px;
+  line-height: 1.6;
+}
+.exam-scope-grid small {
+  color: #6f7e76;
+  font-size: 12px;
+}
+.exam-composition {
+  padding: 24px;
+}
+.exam-composition > svg {
+  display: none;
+}
+@media (max-width: 640px) {
+  .exam-scope-panel {
+    padding: 17px;
+  }
+  .exam-scope-grid {
+    grid-template-columns: 1fr;
+  }
+}

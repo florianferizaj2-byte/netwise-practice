@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url";
 import { z } from "zod";
 import { createStore } from "./store.js";
 import { registerMembershipRoutes } from "./membership-routes.js";
+import { registerExamRoutes } from "./exams.js";
 import {
   encrypt,
   masterKey,
@@ -21,7 +22,7 @@ import {
   banksForCertificate,
   syllabusForCertificate,
 } from "./certificates.js";
-import { buildSyllabusProgress, sampleExamQuestions } from "./syllabus.js";
+import { buildSyllabusProgress } from "./syllabus.js";
 import { findSimilarQuestions, questionSimilarity } from "./question-similarity.js";
 import { questionImageSchema, validateQuestion } from "./domain.js";
 import { questionPage } from "./question-paging.js";
@@ -29,7 +30,7 @@ import { studySummary } from "./study-summary.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const mobileRelease = () => {
-  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.3.3";
+  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.3.4";
   const minimumVersion =
     process.env.MOBILE_MINIMUM_VERSION || "0.2.8";
   return {
@@ -40,7 +41,7 @@ const mobileRelease = () => {
       `/downloads/kaojiang-v${latestVersion}.apk`,
     releaseNotes:
       process.env.MOBILE_RELEASE_NOTES ||
-      "新版 VIP 页面与会员兑换码上线；在“我的 → 兑换码”开通或续期，管理员可管理会员和兑换码。原测试签名版需卸载后安装正式签名版，服务器账号和学习记录保留。",
+      "首页展示题库与知识点进度，错题页突出薄弱知识点；考试支持多选知识点组卷、暂存继续与考后复盘。每日学习独立保留进度，可正常切换普通练习和 AI 出题。",
   };
 };
 async function exchangeWechatMiniProgramCode(code) {
@@ -2490,132 +2491,7 @@ export async function createApp(options = {}) {
       req.body?.refresh === true,
     ),
   );
-  route("post", "/api/exams", (req) => {
-    const b = z
-      .object({ count: z.number().int().min(5).max(400).default(20) })
-      .parse(req.body || {});
-    const certificateId = requireCertificate(req);
-    const pool = certificateQuestions(certificateId, req.user?.id).filter(
-      (q) => q.source !== "ai_generated" && q.type !== "short_answer",
-    );
-    const syllabus = syllabusForCertificate(certificateId);
-    const examCount = syllabus?.examBlueprint?.questionCount || b.count;
-    if (!syllabus?.examBlueprint && b.count > 75)
-      throw new Error("普通模拟考试最多 75 道题");
-    const qs = sampleExamQuestions(pool, syllabus, examCount);
-    const durationMinutes = syllabus?.examBlueprint?.durationMinutes;
-    const session = {
-      id: crypto.randomUUID(),
-      certificateId,
-      syllabusVersion: syllabus?.version || null,
-      questionIds: qs.map((q) => q.id),
-      distribution: Object.fromEntries(
-        [...new Set(qs.map((q) => q.chapter))].map((chapter) => [
-          chapter,
-          qs.filter((q) => q.chapter === chapter).length,
-        ]),
-      ),
-      answers: {},
-      createdAt: new Date().toISOString(),
-      expiresAt: new Date(
-        Date.now() + (durationMinutes ? durationMinutes * 60000 : qs.length * 120000),
-      ).toISOString(),
-      submitted: false,
-    };
-    store.saveSession(session);
-    return { ...session, questions: qs.map(publicQuestion) };
-  });
-  route("get", "/api/exams/:id", (req) => {
-    const s = store.session(req.params.id);
-    if (!s) throw new Error("考试不存在");
-    return {
-      ...s,
-      questions: s.questionIds.map((id) => publicQuestion(requireQ(id))),
-    };
-  });
-  const validateExamAnswers = (s, raw) => {
-    const b = z
-      .record(z.string(), z.array(z.enum(["A", "B", "C", "D", "E"])).max(5))
-      .parse(raw);
-    if (Object.keys(b).some((id) => !s.questionIds.includes(id)))
-      throw new Error("考试答案包含未知题目");
-    for (const [id, selected] of Object.entries(b))
-      if (
-        new Set(selected).size !== selected.length ||
-        (["single_choice", "true_false"].includes(requireQ(id).type) &&
-          selected.length > 1)
-      )
-        throw new Error("考试答案格式不正确");
-    return b;
-  };
-  route("put", "/api/exams/:id/answers", (req) => {
-    const s = store.session(req.params.id);
-    if (!s || s.submitted) throw new Error("考试已结束或不存在");
-    if (Date.now() > new Date(s.expiresAt)) return { expired: true };
-    s.answers = validateExamAnswers(s, req.body.answers);
-    store.saveSession(s);
-    return { saved: true };
-  });
-  route("post", "/api/exams/:id/submit", (req) => {
-    const s = store.session(req.params.id);
-    if (!s) throw new Error("考试不存在");
-    if (s.submitted) return s.result;
-    const examBlueprint = syllabusForCertificate(s.certificateId)?.examBlueprint;
-    const durationMs = examBlueprint?.durationMinutes
-      ? examBlueprint.durationMinutes * 60000
-      : s.questionIds.length * 120000;
-    const answers =
-      Date.now() > new Date(s.expiresAt)
-        ? s.answers
-        : validateExamAnswers(s, req.body.answers);
-    const elapsed = Math.max(
-      0,
-      Math.min(
-        Date.now() - new Date(s.createdAt),
-        durationMs,
-      ),
-    );
-    store.db.exec("BEGIN");
-    try {
-      const results = s.questionIds.map((id) => ({
-        q: requireQ(id),
-        selected: answers[id] || [],
-      }));
-      s.result = {
-        results: results.map(({ q, selected }) => ({
-          ...store.recordAttempt(
-            q.id,
-            selected,
-            Math.round(elapsed / s.questionIds.length),
-            "exam",
-          ),
-          question: q.question,
-          ...(q.images ? { images: q.images } : {}),
-          ...(q.sharedGroupId ? { sharedGroupId: q.sharedGroupId } : {}),
-          ...(q.sharedKind ? { sharedKind: q.sharedKind } : {}),
-          ...(q.sharedStem ? { sharedStem: q.sharedStem } : {}),
-          ...(q.sharedOrder ? { sharedOrder: q.sharedOrder } : {}),
-        })),
-        elapsed,
-      };
-      const correctCount = s.result.results.filter((r) => r.correct).length;
-      s.result.score = examBlueprint
-        ? correctCount
-        : Math.round((correctCount / s.questionIds.length) * 100);
-      s.result.maxScore = examBlueprint ? s.questionIds.length : 100;
-      if (examBlueprint?.passingScore !== undefined) {
-        s.result.passingScore = examBlueprint.passingScore;
-        s.result.passed = s.result.score >= examBlueprint.passingScore;
-      }
-      s.submitted = true;
-      store.saveSession(s);
-      store.db.exec("COMMIT");
-      return s.result;
-    } catch (e) {
-      store.db.exec("ROLLBACK");
-      throw e;
-    }
-  });
+  registerExamRoutes({ route, store, requireCertificate, requestUserId, certificateQuestions, syllabusForCertificate, publicQuestion });
   app.get("/community/uploads/:file", (req, res, next) => {
     const file = req.params.file || "";
     if (!/^[a-f0-9-]{36}\.(jpg|png|gif|webp)$/i.test(file))

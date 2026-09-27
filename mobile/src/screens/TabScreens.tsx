@@ -1,10 +1,10 @@
+export { TodayScreen, WrongScreen } from './StudyOverviewScreens';
+export { ExamScreen } from './ExamScreen';
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import {
   ActivityIndicator,
   Alert,
-  Animated,
   Image,
-  FlatList,
   RefreshControl,
   Linking,
   Modal,
@@ -43,8 +43,6 @@ import {
   AnimatedPressable,
   AnimatedProgressBar,
   EntranceView,
-  FloatingSparkles,
-  usePulse,
 } from '../components/Motion';
 import {
   radius,
@@ -79,6 +77,7 @@ type ScreenProps = {
   practiceKnowledgePoint?: string;
   practiceSelectionComplete?: boolean;
   practiceQuestionId?: string;
+  practiceQuestionIds?: string[];
   practiceAiGroupId?: string;
   practiceAiLibrary?: boolean;
   aiQuestionGroupId?: string;
@@ -174,11 +173,6 @@ function ProgressBar({ value }: { value: number }) {
   );
 }
 
-function todayLabel(date = new Date()) {
-  const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
-  return `${weekdays[date.getDay()]}，${date.getMonth() + 1}月${date.getDate()}日`;
-}
-
 function shuffleQuestions(items: Question[]) {
   const shuffled = [...items];
   for (let index = shuffled.length - 1; index > 0; index -= 1) {
@@ -245,124 +239,6 @@ function PrimaryAction({
       <Text style={styles.primaryActionText}>{children}</Text>
       <Text style={styles.actionArrow}>›</Text>
     </AnimatedPressable>
-  );
-}
-
-export function TodayScreen({ dashboard, onNavigate, preview = false }: ScreenProps) {
-  const styles = useThemedStyles(createStyles);
-  const query = useCachedQuery('/dashboard?summary=1', mobileApi.dashboard, !preview);
-  const progressPulse = usePulse({ duration: 2100, maxScale: 1.028 });
-  const todayCount = dashboard?.todayCount ?? (preview ? 12 : 0);
-  const wrongCount = dashboard?.wrongCount ?? (preview ? 18 : 0);
-  const accuracy =
-    dashboard?.accuracy == null
-      ? preview
-        ? '82%'
-        : '—'
-      : `${Math.round(dashboard.accuracy * 100)}%`;
-  const streak = preview
-    ? '7 天'
-    : `${dashboard?.streakDays ?? 0} 天`;
-  const progress = Math.min(100, Math.round((todayCount / DAILY_PRACTICE_COUNT) * 100));
-
-  return (
-    <ScreenContainer onRefresh={preview ? undefined : query.refresh} refreshing={query.fetching && !!dashboard}>
-      {!!query.error && <Text style={styles.formError}>{dashboard ? '当前显示上次同步的进度。' : ''}{query.error.message}</Text>}
-      <ScreenHeader eyebrow={todayLabel()} title="今天学什么？" />
-
-      <EntranceView delay={60} style={styles.todayFocusCard} distance={18}>
-        <FloatingSparkles />
-        <View style={styles.todayFocusTop}>
-          <View style={styles.welcomeCopy}>
-            <Text style={styles.welcomeKicker}>今日学习</Text>
-            <Text style={styles.welcomeTitle}>
-              {todayCount >= DAILY_PRACTICE_COUNT
-                ? '今日目标完成'
-                : todayCount
-                  ? '继续保持节奏'
-                  : '从一组练习开始'}
-            </Text>
-            <Text style={styles.welcomeText}>
-              {todayCount >= DAILY_PRACTICE_COUNT
-                ? '很棒，明天继续保持。'
-                : `还差 ${Math.max(0, DAILY_PRACTICE_COUNT - todayCount)} 道题完成今日目标`}
-            </Text>
-          </View>
-          <Animated.View
-            style={[styles.progressCircle, { transform: [{ scale: progressPulse }] }]}
-          >
-            <Text style={styles.progressNumber}>{progress}%</Text>
-            <Text style={styles.progressLabel}>已完成</Text>
-          </Animated.View>
-        </View>
-        <AnimatedPressable
-          accessibilityLabel="开始今日学习"
-          accessibilityRole="button"
-          onPress={() =>
-            onNavigate('practice', {
-              practiceMode: 'random',
-              practiceSession: 'daily',
-              practiceSource: 'all',
-            })
-          }
-          style={styles.todayStartButton}
-        >
-          <Text style={styles.todayStartButtonText}>
-            {todayCount ? '继续今日学习' : '开始今日学习'}
-          </Text>
-          <Text style={styles.todayStartButtonArrow}>→</Text>
-        </AnimatedPressable>
-      </EntranceView>
-
-      <EntranceView delay={140} distance={10} style={styles.sectionHeading}>
-        <Text style={styles.sectionTitle}>今日任务</Text>
-        <Text style={styles.sectionMeta}>{todayCount} / {DAILY_PRACTICE_COUNT} 题</Text>
-      </EntranceView>
-      <EntranceView delay={170} distance={6}>
-        <ProgressBar value={progress} />
-      </EntranceView>
-
-      <View style={styles.statsRow}>
-        <EntranceView delay={230} distance={14} style={styles.statSlot}>
-          <StatCard value={streak} label="连续学习" tone="green" />
-        </EntranceView>
-        <EntranceView delay={285} distance={14} style={styles.statSlot}>
-          <StatCard value={accuracy} label="近期正确率" tone="gold" />
-        </EntranceView>
-      </View>
-
-      <EntranceView delay={340} distance={8} style={styles.sectionHeading}>
-        <Text style={styles.sectionTitle}>继续学习</Text>
-      </EntranceView>
-      <EntranceView delay={380} distance={12}>
-        <AnimatedPressable onPress={() => onNavigate('wrong')} style={styles.secondaryAction}>
-          <View>
-            <Text style={styles.secondaryActionText}>错题复习</Text>
-            <Text style={styles.secondaryActionMeta}>{wrongCount} 道待巩固</Text>
-          </View>
-          <Text style={styles.actionArrow}>›</Text>
-        </AnimatedPressable>
-      </EntranceView>
-    </ScreenContainer>
-  );
-}
-
-function StatCard({
-  label,
-  tone,
-  value,
-}: {
-  label: string;
-  tone: 'green' | 'gold';
-  value: string;
-}) {
-  const styles = useThemedStyles(createStyles);
-  return (
-    <View style={styles.statCard}>
-      <View style={[styles.statDot, tone === 'gold' && styles.goldDot]} />
-      <Text style={styles.statValue}>{value}</Text>
-      <Text style={styles.statLabel}>{label}</Text>
-    </View>
   );
 }
 
@@ -772,6 +648,7 @@ export function PracticeScreen({
   practiceKnowledgePoint,
   practiceSelectionComplete = false,
   practiceQuestionId,
+  practiceQuestionIds,
   practiceAiGroupId,
   practiceAiLibrary = false,
   aiQuestionGroupId,
@@ -894,7 +771,14 @@ export function PracticeScreen({
     loadQuestions
       .then((loaded: Question[] | QuestionPage) => {
         if (!mounted) return;
-        const items = Array.isArray(loaded) ? loaded : loaded.items;
+        const loadedItems = Array.isArray(loaded) ? loaded : loaded.items;
+        const selectedIds = practiceQuestionIds ? new Set(practiceQuestionIds) : null;
+        const items = practiceSource === 'wrong' ? loadedItems.filter((question) =>
+          (!selectedIds || selectedIds.has(question.id)) &&
+          (!practiceChapter || question.chapter === practiceChapter) &&
+          (!practiceKnowledgeSection || question.knowledgeSection === practiceKnowledgeSection) &&
+          (!practiceKnowledgePoint || question.knowledgePoint === practiceKnowledgePoint),
+        ) : loadedItems;
         setNextOffset(Array.isArray(loaded) ? null : loaded.nextOffset);
         setTotalQuestions(Array.isArray(loaded) ? items.length : loaded.total);
         const nextQuestions = !Array.isArray(loaded) || isDailyPractice
@@ -931,6 +815,7 @@ export function PracticeScreen({
     practiceKnowledgePoint,
     practiceMode,
     practiceQuestionId,
+    practiceQuestionIds,
     practiceAiGroupId,
     practiceSelectionComplete,
     practiceSource,
@@ -1369,6 +1254,7 @@ export function PracticeScreen({
           <PrimaryAction onPress={() => onNavigate('today')}>查看今日进度</PrimaryAction>
           <PrimaryAction
             onPress={() => {
+              if (isDailyPractice) { setReloadKey((current) => current + 1); return; }
               setQuestionIndex(0);
               setSelected([]);
               setResponseDraft('');
@@ -1419,8 +1305,8 @@ export function PracticeScreen({
 
   return (
     <ScreenContainer compact>
-      <AnimatedPressable accessibilityLabel="返回题库目录" onPress={() => onNavigate('practice', { practiceMode, practiceSession })}>
-        <Text style={styles.bodyText}>‹ 返回题库目录</Text>
+      <AnimatedPressable accessibilityRole="button" accessibilityLabel={isDailyPractice ? '更换今日练习范围' : '返回题库目录'} onPress={() => onNavigate('practice', { practiceMode, practiceSession })}>
+        <Text style={styles.bodyText}>‹ {isDailyPractice ? '更换今日练习范围' : '返回题库目录'}</Text>
       </AnimatedPressable>
       {!!pageError && <Text style={styles.formError}>{pageError}，点击下一题可重试。</Text>}
       {loadingMore && <Text style={styles.loadingText}>正在准备后续题目…</Text>}
@@ -1739,166 +1625,6 @@ export function PracticeScreen({
           </View>
         </View>
       </Modal>
-    </ScreenContainer>
-  );
-}
-
-export function WrongScreen({ dashboard, onNavigate, preview = false }: ScreenProps) {
-  const { colors } = useTheme();
-  const styles = useThemedStyles(createStyles);
-  const query = useCachedQuery('/wrong', mobileApi.wrong, !preview);
-  const wrongQuestions = useMemo(() => preview ? [{ ...previewQuestion, wrongCount: 3 }] : query.data ?? [], [preview, query.data]);
-  const loading = !preview && query.loading;
-  const loadError = query.error?.message ?? '';
-  const [allDistribution, setAllDistribution] = useState(false);
-  const wrongCount = query.data || preview ? wrongQuestions.length : dashboard?.wrongCount ?? 0;
-  const knowledgeDistribution = useMemo(() => [...wrongQuestions.reduce((counts, question) => {
-    const knowledgePoint = question.knowledgePoint || question.chapter || '未分类';
-    counts.set(knowledgePoint, (counts.get(knowledgePoint) ?? 0) + 1);
-    return counts;
-  }, new Map<string, number>()).entries()]
-    .map(([name, count]) => ({ name, count }))
-    .sort((left, right) => right.count - left.count || left.name.localeCompare(right.name)), [wrongQuestions]);
-
-  return (
-    <FlatList
-      data={wrongQuestions}
-      keyExtractor={(question) => question.id}
-      initialNumToRender={12}
-      maxToRenderPerBatch={10}
-      windowSize={7}
-      contentContainerStyle={styles.content}
-      onRefresh={preview ? undefined : query.refresh}
-      refreshing={query.fetching && !!query.data}
-      renderItem={({ item: question }) => (
-        <ListRow
-          onPress={() => onNavigate('practice', { practiceSource: 'wrong', practiceMode: 'sequential', practiceQuestionId: question.id })}
-          title={question.question}
-          meta={`${question.knowledgePoint ?? question.chapter ?? '综合练习'} · ${question.wrongCount ?? 1} 次错误`}
-        />
-      )}
-      ListHeaderComponent={<>
-      <ScreenHeader eyebrow="错题复习" title="把不会的变成会的" />
-      <EntranceView delay={60} distance={16} style={styles.wrongSummary}>
-        <View>
-          <Text style={styles.wrongCount}>{wrongCount}</Text>
-          <Text style={styles.wrongLabel}>待复习错题</Text>
-        </View>
-        <Text style={styles.wrongEmoji}>↗</Text>
-      </EntranceView>
-      <EntranceView delay={120} distance={8}>
-        <Text style={styles.bodyText}>按照遗忘曲线安排复习，优先处理最需要巩固的题目。</Text>
-      </EntranceView>
-      {!loading && !!loadError && <Text style={styles.formError}>{wrongQuestions.length ? '当前显示上次同步的错题。' : ''}{loadError}</Text>}
-      {!loading && wrongQuestions.length > 0 && (
-        <EntranceView delay={145} distance={10} style={styles.wrongDistributionCard}>
-          <View style={styles.wrongDistributionHeader}>
-            <Text style={styles.wrongDistributionTitle}>错题知识点分布</Text>
-            <Text style={styles.wrongDistributionMeta}>{wrongQuestions.length} 道 · {knowledgeDistribution.length} 个知识点</Text>
-          </View>
-          <View style={styles.wrongDistributionList}>
-            {(allDistribution ? knowledgeDistribution : knowledgeDistribution.slice(0, 8)).map((item) => (
-              <View key={item.name} style={styles.wrongDistributionItem}>
-                <View style={styles.wrongDistributionLabels}>
-                  <Text style={styles.wrongDistributionName}>{item.name}</Text>
-                  <Text style={styles.wrongDistributionCount}>{item.count} 题</Text>
-                </View>
-                <AnimatedProgressBar
-                  color={colors.warning}
-                  trackColor={colors.surfaceMuted}
-                  value={wrongQuestions.length ? (item.count / wrongQuestions.length) * 100 : 0}
-                />
-              </View>
-            ))}
-            {knowledgeDistribution.length > 8 && <AnimatedPressable onPress={() => setAllDistribution((value) => !value)}>
-              <Text style={styles.bodyText}>{allDistribution ? '收起分布' : `展开全部 ${knowledgeDistribution.length} 个知识点`}</Text>
-            </AnimatedPressable>}
-          </View>
-        </EntranceView>
-      )}
-      <EntranceView delay={170} distance={12}>
-        <PrimaryAction
-          onPress={() =>
-            onNavigate('practice', {
-              practiceSource: 'wrong',
-              practiceMode: 'sequential',
-            })
-          }
-        >
-          开始错题复习
-        </PrimaryAction>
-      </EntranceView>
-      {!!wrongQuestions.length && <Text style={styles.wrongListTitle}>全部错题 · {wrongQuestions.length} 道</Text>}
-      </>}
-      ListEmptyComponent={loading ? (
-          <View style={styles.listLoading}>
-            <ActivityIndicator color={colors.brand} />
-            <Text style={styles.loadingText}>正在同步错题…</Text>
-          </View>
-        ) : loadError ? (
-          <PrimaryAction onPress={query.refresh}>重新同步</PrimaryAction>
-        ) : (
-          <Text style={styles.emptyListText}>太好了，当前还没有错题。</Text>
-        )}
-    />
-  );
-}
-
-function ListRow({
-  meta,
-  onPress,
-  title,
-}: {
-  meta: string;
-  onPress: () => void;
-  title: string;
-}) {
-  const styles = useThemedStyles(createStyles);
-  return (
-    <AnimatedPressable
-      accessibilityRole="button"
-      onPress={onPress}
-      style={styles.listRow}
-    >
-      <View style={styles.wrongBullet} />
-      <View style={styles.listCopy}>
-        <Text style={styles.listTitle}>{title}</Text>
-        <Text style={styles.listMeta}>{meta}</Text>
-      </View>
-      <Text style={styles.rowArrow}>›</Text>
-    </AnimatedPressable>
-  );
-}
-
-export function ExamScreen({ onNavigate }: ScreenProps) {
-  const styles = useThemedStyles(createStyles);
-  return (
-    <ScreenContainer>
-      <ScreenHeader eyebrow="模拟考试" title="用一次完整考试检验自己" />
-      <EntranceView delay={60} distance={18} style={styles.examHero}>
-        <FloatingSparkles />
-        <Text style={styles.examTag}>考试模式</Text>
-        <Text style={styles.examTitle}>HCIA-Datacom 模拟考试</Text>
-        <Text style={styles.examText}>按正式考试节奏完成整套题目，提交后查看成绩和薄弱点。</Text>
-        <View style={styles.examMetaRow}>
-          <Text style={styles.examMeta}>60 道题</Text>
-          <Text style={styles.examMeta}>90 分钟</Text>
-          <Text style={styles.examMeta}>可自动保存</Text>
-        </View>
-        <PrimaryAction
-          onPress={() =>
-            onNavigate('practice', {
-              practiceMode: 'sequential',
-              practiceSource: 'all',
-            })
-          }
-        >
-          创建模拟考试
-        </PrimaryAction>
-      </EntranceView>
-      <EntranceView delay={160} distance={8} style={styles.mutedNotice}>
-        <Text style={styles.mutedNoticeText}>考试会话和自动保存将复用现有后端。</Text>
-      </EntranceView>
     </ScreenContainer>
   );
 }

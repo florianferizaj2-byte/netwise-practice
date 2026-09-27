@@ -66,6 +66,7 @@ import {
   Pencil,
 } from "lucide-react";
 import "./style.css";
+import "./exam-scope.css";
 
 async function api(url, body, method) {
   const res = await fetch("/api" + url, {
@@ -972,11 +973,11 @@ function AuthScreen({ onAuth, initialError = "" }) {
           </button>
           <a
             className="auth-app-download"
-            href="/downloads/kaojiang-v0.3.3.apk"
-            download="kaojiang-v0.3.3.apk"
+            href="/downloads/kaojiang-v0.3.4.apk"
+            download="kaojiang-v0.3.4.apk"
           >
             <Download size={16} />
-            下载考匠 App · Android v0.3.3
+            下载考匠 App · Android v0.3.4
           </a>
           <p className="auth-privacy-note">
             <ShieldCheck size={14} /> 你的学习数据与 AI 配置仅属于当前账号
@@ -1007,44 +1008,44 @@ function AnnouncementModal({ onClose }) {
             </span>
             <div>
               <span className="announcement-kicker">考匠 · 更新公告</span>
-              <h2 id="announcement-title">移动端 v0.3.3 更新</h2>
-              <p>更清晰的会员页面，兑换码开通与续期。</p>
+              <h2 id="announcement-title">移动端 v0.3.4 更新</h2>
+              <p>看清学习进度，围绕薄弱知识点练习与考试。</p>
             </div>
           </div>
           <IconButton icon={X} label="关闭网站公告" onClick={onClose} />
         </header>
         <div className="announcement-body">
           <div className="announcement-highlight">
-                <strong>考匠 App v0.3.3 已发布</strong>
+                <strong>考匠 App v0.3.4 已发布</strong>
                 <span>
-                  VIP 页面重新排版，套餐、额度与权益一目了然；在“我的 → 兑换码”即可开通会员。
+                  首页、错题和考试页面重新设计；每日学习保留当组进度，也能随时切换普通练习和 AI 出题。
                 </span>
           </div>
           <ul className="announcement-list">
             <li>
               <span>01</span>
               <div>
-                <strong>VIP 权益更清晰</strong>
-                <p>金色 VIP、蓝色 SVIP、紫色 SSVIP，紧凑展示当前套餐、会员到期时间与学习额度。</p>
+                <strong>刷题进度一目了然</strong>
+                <p>首页展示题库覆盖率、已刷题数与知识点进度，一键开始每日 30 题。</p>
               </div>
             </li>
             <li>
               <span>02</span>
               <div>
-                <strong>兑换即开通，同等级可续期</strong>
-                <p>在“我的 → 兑换码”输入会员码，权益随账号同步，也可查看兑换记录。每日签到奖励继续保留。</p>
+                <strong>从薄弱知识点开始巩固</strong>
+                <p>错题按知识点归集，显示反复出错和待复习情况；点击薄弱点即可筛选并开始练习。</p>
               </div>
             </li>
             <li>
               <span>03</span>
               <div>
-                <strong>会员和兑换码统一管理</strong>
-                <p>网页管理员可查看用户等级、到期时间以及兑换码状态，支持生成、复制和作废未使用的兑换码。</p>
+                <strong>多选知识点，组合专属试卷</strong>
+                <p>App 与网页均可多选大知识点组卷。App 支持计时、答题卡、暂存继续以及交卷后查看各知识点表现和解析。</p>
               </div>
             </li>
           </ul>
           <p className="announcement-footnote">
-            Android v0.3.3 使用正式签名。旧测试签名版需卸载后安装，手机本地设置会重置；服务器账号和学习记录保留。
+            Android v0.3.4 沿用现有正式签名，v0.3.3 用户可覆盖更新。旧测试签名版仍需卸载后安装。
           </p>
         </div>
         <footer className="announcement-footer">
@@ -1191,7 +1192,7 @@ function App() {
   useEffect(() => {
     if (!auth?.authenticated || !auth.user?.certificateId || !dashboard) return;
     try {
-      if (localStorage.getItem("netwise-announcement-2026-09-v8") !== "seen")
+      if (localStorage.getItem("netwise-announcement-2026-09-v9") !== "seen")
         setAnnouncementOpen(true);
     } catch {
       setAnnouncementOpen(true);
@@ -1216,7 +1217,7 @@ function App() {
   const dismissAnnouncement = () => {
     setAnnouncementOpen(false);
     try {
-      localStorage.setItem("netwise-announcement-2026-09-v8", "seen");
+      localStorage.setItem("netwise-announcement-2026-09-v9", "seen");
     } catch {
       // Private browsing may disable localStorage; closing still works for this render.
     }
@@ -1522,8 +1523,8 @@ function App() {
                 <a
                   className="account-menu-link"
                   role="menuitem"
-                  href="/downloads/kaojiang-v0.3.3.apk"
-                  download="kaojiang-v0.3.3.apk"
+                  href="/downloads/kaojiang-v0.3.4.apk"
+                  download="kaojiang-v0.3.4.apk"
                   onClick={() => setAccountMenuOpen(false)}
                 >
                   <Download size={17} />
@@ -6230,6 +6231,11 @@ function VeterinaryPractice({ session, refresh, run, busy, train, exit }) {
   );
 }
 function ExamView({ run, refresh, dashboard }) {
+  const [customScope, setCustomScope] = useState(true),
+    [selectedChapters, setSelectedChapters] = useState([]);
+  const [examCatalog, setExamCatalog] = useState(null),
+    [catalogError, setCatalogError] = useState("");
+  const [catalogRevision, setCatalogRevision] = useState(0);
   const [exam, setExam] = useState(null),
     [answers, setAnswers] = useState({}),
     [index, setIndex] = useState(0),
@@ -6237,8 +6243,34 @@ function ExamView({ run, refresh, dashboard }) {
     [count, setCount] = useState(20),
     [remaining, setRemaining] = useState(0),
     [submitting, setSubmitting] = useState(false);
-  const examBlueprint = dashboard.syllabus?.examBlueprint;
+  const examBlueprint = (exam ? !exam.custom : !customScope)
+    ? dashboard.syllabus?.examBlueprint
+    : null;
   const examModules = dashboard.syllabus?.modules || [];
+  const selectedAvailable = (examCatalog?.chapters || [])
+    .filter((chapter) => selectedChapters.includes(chapter.name))
+    .reduce((sum, chapter) => sum + chapter.questionCount, 0);
+  useEffect(() => {
+    let live = true;
+    setCatalogError("");
+    setExamCatalog(null);
+    api("/exams/catalog")
+      .then((data) => {
+        if (!live) return;
+        setExamCatalog(data);
+        setSelectedChapters((current) =>
+          current.filter((name) =>
+            data.chapters.some((chapter) => chapter.name === name),
+          ),
+        );
+      })
+      .catch((error) => {
+        if (live) setCatalogError(error.message);
+      });
+    return () => {
+      live = false;
+    };
+  }, [dashboard.certificate?.id, catalogRevision]);
   const autoSubmit = useRef(false);
   useEffect(() => {
     const saved = localStorage.getItem("netwise-exam");
@@ -6315,6 +6347,7 @@ function ExamView({ run, refresh, dashboard }) {
     run("正在创建模拟考试", async () => {
       const e = await api("/exams", {
         count: examBlueprint?.questionCount || count,
+        ...(customScope ? { chapters: selectedChapters } : {}),
       });
       setExam(e);
       setAnswers({});
@@ -6341,7 +6374,11 @@ function ExamView({ run, refresh, dashboard }) {
         />
         <div className="exam-score">
           {examBlueprint && (
-            <div className={"exam-result-status " + (result.passed ? "passed" : "failed")}>
+            <div
+              className={
+                "exam-result-status " + (result.passed ? "passed" : "failed")
+              }
+            >
               {result.passed ? "考试通过" : "暂未通过"}
             </div>
           )}
@@ -6376,7 +6413,8 @@ function ExamView({ run, refresh, dashboard }) {
               </div>
             ))}
             <small>
-              四科合计达到 {examBlueprint.passingScore} 分即可通过，单科不设最低分。
+              四科合计达到 {examBlueprint.passingScore}{" "}
+              分即可通过，单科不设最低分。
             </small>
           </div>
         )}
@@ -6406,17 +6444,107 @@ function ExamView({ run, refresh, dashboard }) {
         <Heading
           title="模拟考试"
           subtitle={
-            examBlueprint
-              ? `${dashboard.syllabus.version} · 四大科目各抽 ${examBlueprint.questionsPerModule} 题 · 总分 ${examBlueprint.passingScore} 分及格`
-              : dashboard.syllabus
-                ? `${dashboard.syllabus.version} 考点 · 按本站练习配比分层抽题 · 交卷后统一评分`
-                : "当前证书题库 · 限时作答 · 交卷后统一评分"
+            customScope && !exam
+              ? "多选大知识点组合试卷 · 限时作答 · 交卷后查看成绩与解析"
+              : examBlueprint
+                ? `${dashboard.syllabus.version} · 四大科目各抽 ${examBlueprint.questionsPerModule} 题 · 总分 ${examBlueprint.passingScore} 分及格`
+                : dashboard.syllabus
+                  ? `${dashboard.syllabus.version} 考点 · 按本站练习配比分层抽题 · 交卷后统一评分`
+                  : "当前证书题库 · 限时作答 · 交卷后统一评分"
           }
         />
-        <section className="exam-intro">
+        <section className="exam-scope-panel">
+          <div className="exam-scope-heading">
+            <h2>考试范围</h2>
+            <div className="exam-scope-modes">
+              <button
+                className={customScope ? "active" : ""}
+                onClick={() => setCustomScope(true)}
+              >
+                自选知识点
+              </button>
+              <button
+                className={!customScope ? "active" : ""}
+                onClick={() => setCustomScope(false)}
+              >
+                全范围模拟
+              </button>
+            </div>
+          </div>
+          {customScope && (
+            <>
+              <div className="exam-scope-caption">
+                <span>
+                  已选 {selectedChapters.length} 个大知识点 ·{" "}
+                  {selectedAvailable} 道可考题目
+                </span>
+                <button
+                  onClick={() =>
+                    setSelectedChapters(
+                      selectedChapters.length === examCatalog?.chapters.length
+                        ? []
+                        : (examCatalog?.chapters || []).map(
+                            (chapter) => chapter.name,
+                          ),
+                    )
+                  }
+                >
+                  {selectedChapters.length === examCatalog?.chapters.length
+                    ? "取消全选"
+                    : "全选"}
+                </button>
+              </div>
+              {catalogError ? (
+                <p className="alert error">
+                  {catalogError}{" "}
+                  <button
+                    onClick={() => setCatalogRevision((value) => value + 1)}
+                  >
+                    重新加载
+                  </button>
+                </p>
+              ) : !examCatalog ? (
+                <p>正在读取知识点…</p>
+              ) : !examCatalog.chapters.length ? (
+                <p>当前题库暂无可用于考试的客观题。</p>
+              ) : (
+                <div className="exam-scope-grid">
+                  {examCatalog.chapters.map((chapter) => (
+                    <label
+                      key={chapter.name}
+                      className={
+                        selectedChapters.includes(chapter.name)
+                          ? "selected"
+                          : ""
+                      }
+                    >
+                      <input
+                        type="checkbox"
+                        checked={selectedChapters.includes(chapter.name)}
+                        onChange={(event) => {
+                          const checked = event.target.checked;
+                          setSelectedChapters((current) =>
+                            checked
+                              ? [...new Set([...current, chapter.name])]
+                              : current.filter((name) => name !== chapter.name),
+                          );
+                        }}
+                      />
+                      <span>
+                        <strong>{chapter.name}</strong>
+                        <small>{chapter.questionCount} 道可考题目</small>
+                      </span>
+                    </label>
+                  ))}
+                </div>
+              )}
+            </>
+          )}
+        </section>
+        <section className="exam-intro exam-composition">
           <GraduationCap size={52} />
           <h2>{dashboard.certificate.shortName} 模拟测试</h2>
-          {dashboard.syllabus && (
+          {dashboard.syllabus && !customScope && (
             <p className="exam-blueprint-note">
               {examBlueprint
                 ? `基础、预防、临床、综合四科各抽 ${examBlueprint.questionsPerModule} 道题，每题 1 分，四科合计达到 ${examBlueprint.passingScore} 分即可通过。`
@@ -6439,15 +6567,20 @@ function ExamView({ run, refresh, dashboard }) {
               </div>
               <div>
                 <span>考试时间</span>
-                <strong>{Math.round(examBlueprint.durationMinutes / 60)} 小时</strong>
+                <strong>
+                  {Math.round(examBlueprint.durationMinutes / 60)} 小时
+                </strong>
               </div>
             </div>
           ) : (
             <div className="exam-settings">
               <label>
                 试题数量
-                <select value={count} onChange={(e) => setCount(+e.target.value)}>
-                  {[10, 20, 40].map((n) => (
+                <select
+                  value={count}
+                  onChange={(e) => setCount(+e.target.value)}
+                >
+                  {[10, 20, 30, 50].map((n) => (
                     <option key={n} value={n}>
                       {n} 题
                     </option>
@@ -6456,11 +6589,30 @@ function ExamView({ run, refresh, dashboard }) {
               </label>
               <div>
                 <span>考试时间</span>
-                <strong>{count * 2} 分钟</strong>
+                <strong>
+                  {(customScope ? Math.min(count, selectedAvailable) : count) *
+                    2}{" "}
+                  分钟
+                </strong>
               </div>
             </div>
           )}
-          <button className="primary" onClick={begin}>
+          {customScope && (
+            <p className="exam-blueprint-note">
+              仅从所选知识点抽题，题量不足时使用现有题目。共用材料题保留完整题组，实际题量以试卷为准。
+            </p>
+          )}
+          {customScope && count < selectedChapters.length && (
+            <p className="alert">请增加题量，覆盖所有已选知识点。</p>
+          )}
+          <button
+            className="primary"
+            disabled={
+              customScope &&
+              (!selectedAvailable || count < selectedChapters.length)
+            }
+            onClick={begin}
+          >
             开始考试
             <ArrowRight size={18} />
           </button>
@@ -6469,9 +6621,10 @@ function ExamView({ run, refresh, dashboard }) {
     );
   const q = exam.questions[index],
     selected = answers[q.id] || [];
-  const examGroups = dashboard.certificate?.id === "veterinary-practitioner"
-    ? buildVeterinaryGroups(exam.questions)
-    : [];
+  const examGroups =
+    dashboard.certificate?.id === "veterinary-practitioner"
+      ? buildVeterinaryGroups(exam.questions)
+      : [];
   const examGroup = examGroups.find((group) => group.indexes.includes(index));
   return (
     <>
@@ -6492,7 +6645,11 @@ function ExamView({ run, refresh, dashboard }) {
           {examGroup?.shared && (
             <section className={`vet-shared-card ${examGroup.kind || "stem"}`}>
               <div className="vet-shared-card-head">
-                <span>{examGroup.kind === "options" ? "共用备选答案" : "共用题干 / 病例材料"}</span>
+                <span>
+                  {examGroup.kind === "options"
+                    ? "共用备选答案"
+                    : "共用题干 / 病例材料"}
+                </span>
                 <small>本组 {examGroup.questions.length} 道题</small>
               </div>
               {examGroup.kind === "stem" && examGroup.stem ? (
@@ -6510,14 +6667,20 @@ function ExamView({ run, refresh, dashboard }) {
                     onClick={() => setIndex(questionIndex)}
                   >
                     <b>{step + 1}</b>
-                    <span>{answers[exam.questions[questionIndex].id]?.length ? "已作答" : "待作答"}</span>
+                    <span>
+                      {answers[exam.questions[questionIndex].id]?.length
+                        ? "已作答"
+                        : "待作答"}
+                    </span>
                   </button>
                 ))}
               </div>
             </section>
           )}
           <QuestionImages question={q} />
-          <h2 className="question-text">{questionTextForGroup(q, examGroup) || q.question}</h2>
+          <h2 className="question-text">
+            {questionTextForGroup(q, examGroup) || q.question}
+          </h2>
           <QuestionOrigin question={q} />
           <div className="options">
             {Object.entries(q.options).map(([k, v]) => (

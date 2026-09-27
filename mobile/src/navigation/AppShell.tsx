@@ -5,7 +5,9 @@ import {
   Linking,
   Modal,
   PanResponder,
+  Platform,
   SafeAreaView,
+  StatusBar as NativeStatusBar,
   StyleSheet,
   Text,
   View,
@@ -36,6 +38,7 @@ import {
   WrongScreen,
 } from '../screens/TabScreens';
 import { VipScreen } from '../screens/VipScreen';
+import { DailyPracticePanel } from '../screens/DailyPracticePanel';
 import {
   radius,
   shadow,
@@ -69,11 +72,13 @@ export function AppShell() {
   const [isPreview, setIsPreview] = useState(false);
   const [session, setSession] = useState<AuthResponse | null>(null);
   const [activeTab, setActiveTab] = useState<AppTab>('today');
+  const [dailyPracticeOpen, setDailyPracticeOpen] = useState(false);
+  const [dailyPracticeDay, setDailyPracticeDay] = useState<string | null>(null);
   const appActive = useAppActive();
   const { data: dashboard } = useCachedQuery(
     '/dashboard?summary=1',
     mobileApi.dashboard,
-    appActive && activeTab === 'today' && !!session?.user.certificateId,
+    appActive && activeTab === 'today' && !dailyPracticeOpen && !!session?.user.certificateId,
   );
   const [visitedTabs, setVisitedTabs] = useState<AppTab[]>(['today']);
   const [practiceMode, setPracticeMode] = useState<PracticeMode>('sequential');
@@ -94,6 +99,7 @@ export function AppShell() {
   const [practiceQuestionId, setPracticeQuestionId] = useState<
     string | undefined
   >();
+  const [practiceQuestionIds, setPracticeQuestionIds] = useState<string[] | undefined>();
   const [practiceAiGroupId, setPracticeAiGroupId] = useState<string | undefined>();
   const [aiQuestionGroupId, setAiQuestionGroupId] = useState<string | undefined>();
   const [aiQuestionJobs, setAiQuestionJobs] = useState<AiQuestionGenerationJob[]>([]);
@@ -128,6 +134,8 @@ export function AppShell() {
   useEffect(() => {
     setVisitedTabs(['today']);
     setActiveTab('today');
+    setDailyPracticeOpen(false);
+    setDailyPracticeDay(null);
   }, [session?.user.id, session?.user.certificateId, isPreview]);
 
   useEffect(() => {
@@ -161,9 +169,9 @@ export function AppShell() {
     return () => { mounted = false; };
   }, [aiJobSeenStorageKey]);
   useEffect(() => {
-    if (appActive && activeTab === 'today' && session?.user.certificateId)
+    if (appActive && activeTab === 'today' && !dailyPracticeOpen && session?.user.certificateId)
       void mobileApi.dashboard().catch(() => undefined);
-  }, [appActive, activeTab, session?.user.id, session?.user.certificateId]);
+  }, [appActive, activeTab, dailyPracticeOpen, session?.user.id, session?.user.certificateId]);
 
   useEffect(() => {
     if (!session?.user.certificateId || isPreview) {
@@ -331,6 +339,7 @@ export function AppShell() {
     setPracticeSelectionComplete(false);
     setPracticeAiLibrary(false);
     setPracticeQuestionId(undefined);
+    setPracticeQuestionIds(undefined);
     setPracticeAiGroupId(undefined);
     setAiQuestionGroupId(undefined);
   }
@@ -340,6 +349,12 @@ export function AppShell() {
   }
 
   function handleNavigate(tab: AppTab, options?: NavigationOptions) {
+    if (tab === 'practice' && options?.practiceSession === 'daily') {
+      setDailyPracticeDay(new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Shanghai' }));
+      setDailyPracticeOpen(true);
+      return;
+    }
+    setDailyPracticeOpen(false);
     if (tab === 'practice') {
       setPracticeAiLibrary(options?.practiceAiLibrary ?? false);
       if (options) {
@@ -352,6 +367,7 @@ export function AppShell() {
         setPracticeKnowledgePoint(options.practiceKnowledgePoint);
         setPracticeSelectionComplete(options.practiceSelectionComplete ?? false);
         setPracticeQuestionId(options.practiceQuestionId);
+        setPracticeQuestionIds(options.practiceQuestionIds);
         setPracticeAiGroupId(options.practiceAiGroupId);
         setAiQuestionGroupId(options.aiQuestionGroupId);
         setPracticeMode(
@@ -448,6 +464,8 @@ export function AppShell() {
       </Modal>
       <View style={styles.screen}>
         <Animated.View
+          accessibilityElementsHidden={dailyPracticeOpen}
+          importantForAccessibility={dailyPracticeOpen ? 'no-hide-descendants' : 'auto'}
           style={[
             styles.content,
             {
@@ -467,7 +485,7 @@ export function AppShell() {
             >
               <ScreenActivityProvider
                 active={
-                  appActive && tab === activeTab && !certificatePickerOpen
+                  appActive && tab === activeTab && !certificatePickerOpen && !dailyPracticeOpen
                 }
               >
                 {renderScreen(tab, handleNavigate, {
@@ -484,6 +502,7 @@ export function AppShell() {
                   practiceSelectionComplete,
                   practiceAiLibrary,
                   practiceQuestionId,
+                  practiceQuestionIds,
                   practiceAiGroupId,
                   aiQuestionGroupId,
                   onPracticeModeChange: setPracticeMode,
@@ -517,7 +536,15 @@ export function AppShell() {
             }}
           />
         )}
-        <TabBar activeTab={activeTab} onChange={handleNavigate} />
+        <TabBar activeTab={activeTab} onChange={handleNavigate} hidden={dailyPracticeOpen} />
+        {dailyPracticeDay && <DailyPracticePanel
+          key={`${session?.user.id ?? 'preview'}:${session?.user.certificateId ?? ''}:${dailyPracticeDay}`}
+          visible={dailyPracticeOpen}
+          active={appActive && !certificatePickerOpen}
+          preview={isPreview}
+          onClose={() => { setDailyPracticeOpen(false); handleNavigate('today'); }}
+          onNavigate={handleNavigate}
+        />}
       </View>
     </SafeAreaView>
   );
@@ -693,6 +720,7 @@ function renderScreen(
     practiceSelectionComplete: boolean;
     practiceAiLibrary: boolean;
     practiceQuestionId?: string;
+    practiceQuestionIds?: string[];
     practiceAiGroupId?: string;
     aiQuestionGroupId?: string;
     onPracticeModeChange: (mode: PracticeMode) => void;
@@ -728,13 +756,15 @@ function renderScreen(
 function TabBar({
   activeTab,
   onChange,
+  hidden = false,
 }: {
   activeTab: AppTab;
   onChange: (tab: AppTab) => void;
+  hidden?: boolean;
 }) {
   const styles = useThemedStyles(createStyles);
   return (
-    <View style={styles.tabBar}>
+    <View style={styles.tabBar} accessibilityElementsHidden={hidden} importantForAccessibility={hidden ? 'no-hide-descendants' : 'auto'}>
       {tabs.map((tab) => (
         <TabBarItem
           active={activeTab === tab.id}
@@ -963,6 +993,7 @@ const createStyles = (colors: ThemeColors) =>
     safeArea: {
       backgroundColor: colors.background,
       flex: 1,
+      paddingTop: Platform.OS === 'android' ? NativeStatusBar.currentHeight ?? 0 : 0,
     },
     screen: {
       flex: 1,

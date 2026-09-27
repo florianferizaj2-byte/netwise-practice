@@ -1441,6 +1441,9 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         )
         .all(Math.max(1, Math.min(200, Number(limit) || 50)))
         .map((row) => ({ ...row, data: JSON.parse(row.data) })),
+    examSessions: (userId, certificateId) => db.prepare(
+      "SELECT data FROM sessions WHERE COALESCE(json_extract(data,'$.userId'),'local')=? AND json_extract(data,'$.certificateId')=? ORDER BY json_extract(data,'$.createdAt') DESC LIMIT 20",
+    ).all(userId, certificateId).map((row) => JSON.parse(row.data)),
     session: (id) => {
       const r = db.prepare("SELECT data FROM sessions WHERE id=?").get(id);
       return r ? JSON.parse(r.data) : null;

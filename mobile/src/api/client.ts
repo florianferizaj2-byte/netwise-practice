@@ -136,7 +136,9 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
   }
   if (revision !== sessionRevision) throw new CacheCancelledError();
   if (init.method && init.method !== 'GET') {
-    if (
+    if (path.startsWith('/exams') && (path === '/exams' || path.endsWith('/submit'))) {
+      studyCache.invalidate(['/exams', '/dashboard', '/practice/catalog', '/wrong', '/questions?', '/community/leaderboards']);
+    } else if (
       path === '/attempts' ||
       path.startsWith('/wrong/') ||
       path.endsWith('/favorite')
@@ -300,6 +302,9 @@ export type Question = {
   answer?: string[];
   analysis?: string;
   wrongCount?: number;
+  lastAttempt?: { correct: boolean; createdAt: string };
+  lastWrong?: { createdAt: string };
+  review?: { dueAt?: string } | null;
   attempted?: boolean;
   favorite?: boolean;
   source?: string;
@@ -309,6 +314,34 @@ export type QuestionFilters = {
   chapter?: string;
   knowledgeSection?: string;
   knowledgePoint?: string;
+};
+
+export type ExamSummary = {
+  id: string;
+  chapters: string[];
+  count: number;
+  answeredCount: number;
+  createdAt: string;
+  expiresAt: string;
+  submitted: boolean;
+  score?: number;
+  maxScore?: number;
+};
+export type ExamResult = {
+  score: number;
+  maxScore: number;
+  elapsed: number;
+  results: Array<AttemptResponse & Question & { chapter?: string; knowledgePoint?: string }>;
+};
+export type ExamSession = {
+  id: string;
+  chapters: string[];
+  questions: Question[];
+  answers: Record<string, string[]>;
+  createdAt: string;
+  expiresAt: string;
+  submitted: boolean;
+  result?: ExamResult;
 };
 export type QuestionPage = {
   items: Question[];
@@ -688,6 +721,29 @@ export const mobileApi = {
 
   wrong(force = false) {
     return cachedRequest<Question[]>('/wrong', force);
+  },
+
+  examCatalog(force = false) {
+    return cachedRequest<{ chapters: Array<{ name: string; questionCount: number }> }>('/exams/catalog', force);
+  },
+  exams(force = false) {
+    return cachedRequest<{ sessions: ExamSummary[] }>('/exams', force);
+  },
+  createExam(chapters: string[], count: number) {
+    return request<ExamSession>('/exams', { method: 'POST', body: JSON.stringify({ chapters, count }) });
+  },
+  exam(id: string) {
+    return request<ExamSession>(`/exams/${encodeURIComponent(id)}`);
+  },
+  saveExamAnswers(id: string, answers: Record<string, string[]>) {
+    return request<{ saved: boolean; expired: boolean }>(`/exams/${encodeURIComponent(id)}/answers`, {
+      method: 'PUT', body: JSON.stringify({ answers }),
+    });
+  },
+  submitExam(id: string, answers: Record<string, string[]>) {
+    return request<ExamResult>(`/exams/${encodeURIComponent(id)}/submit`, {
+      method: 'POST', body: JSON.stringify({ answers }),
+    });
   },
 
   favorite(questionId: string, favorite: boolean) {
