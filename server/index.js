@@ -2522,6 +2522,16 @@ export async function createApp(options = {}) {
     });
   });
   if (withFrontend) {
+    const mobileWebRoot = path.join(root, 'dist', 'app');
+    app.use('/app', express.static(mobileWebRoot, {
+      setHeaders(res, file) {
+        // HTML and the worker must see new releases; only hashed bundles are immutable.
+        const relative = path.relative(mobileWebRoot, file).split(path.sep).join('/');
+        const hashed = relative.startsWith('_expo/') || relative.startsWith('assets/');
+        res.setHeader('Cache-Control', hashed ? 'public, max-age=31536000, immutable' : 'no-cache');
+      },
+    }));
+    app.use('/app', (req, res) => res.status(404).type('text').send('移动版页面暂时不可用，请稍后再试。'));
     if (production) {
       app.use(express.static(path.join(root, "dist")));
       app.get("/{*path}", (req, res) =>

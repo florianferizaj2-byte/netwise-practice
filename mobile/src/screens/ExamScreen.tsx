@@ -1,16 +1,16 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ActivityIndicator,
-  Alert,
   BackHandler,
   Modal,
-  RefreshControl,
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
   View,
 } from "react-native";
+import { AppAlert as Alert } from "../components/AppAlert";
+import { RefreshControl } from "../components/RefreshControl";
+import { SafeAreaView } from "../components/SafeArea";
 import { mobileApi, type ExamSession, type Question } from "../api/client";
 import { useCachedQuery } from "../api/useCachedQuery";
 import { useScreenActive } from "../navigation/ScreenActivity";

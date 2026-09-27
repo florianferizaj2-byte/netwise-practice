@@ -3,12 +3,9 @@ export { ExamScreen } from './ExamScreen';
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import {
   ActivityIndicator,
-  Alert,
   Image,
-  RefreshControl,
   Linking,
   Modal,
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   Switch,
@@ -16,6 +13,10 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import { AppAlert as Alert } from '../components/AppAlert';
+import { RefreshControl } from '../components/RefreshControl';
+import { SafeAreaView } from '../components/SafeArea';
+import { WebAppActions } from '../components/WebAppActions';
 
 import {
   mobileApi,
@@ -1625,6 +1626,7 @@ export function ProfileScreen({
             value={`移动端 v${APP_VERSION}`}
           />
         </View>
+        <WebAppActions showRefresh />
       </EntranceView>
 
       <EntranceView delay={230} distance={12} style={styles.aiServiceCard}>

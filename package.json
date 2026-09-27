@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "node server/index.js",
-    "build": "vite build",
+    "build": "node scripts/build.mjs",
+    "build:desktop": "vite build",
+    "build:mobile-web": "node scripts/build-mobile-web.mjs",
     "start": "node server/index.js --production",
     "test": "node --test test/*.test.js",
     "test:e2e": "node test/e2e.js",

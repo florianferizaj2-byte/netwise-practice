@@ -1,13 +1,13 @@
 import { useMemo, useState } from "react";
 import {
   ActivityIndicator,
-  Alert,
   FlatList,
   StyleSheet,
   Text,
   TextInput,
   View,
 } from "react-native";
+import { AppAlert as Alert } from "../components/AppAlert";
 import {
   mobileApi,
   type PracticeCatalogChapter,

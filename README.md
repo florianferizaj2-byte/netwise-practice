@@ -2,7 +2,15 @@
 
 考匠（AceExam，Ace + Exam）是一个面向职业认证考试的机考练习与模拟平台。用户可以用自己的 AI 配置，根据错题生成针对性变式题；通过审核的题目可以分享给同证书的其他用户，让题库在使用过程中持续增长。
 
-平台采用响应式网页：手机端适合章节练习、错题复习和 AI 变式训练，电脑端更适合限时模拟考试，可使用答题卡、统一交卷和考后逐题复盘。
+电脑端使用响应式网页；iPhone / iPad 通过 `/app/` 使用与 Android 共用源码的移动界面，可添加到主屏幕。两个移动端共用今日、练习、错题、考试、VIP、我的六个页面及账号接口。
+
+## 苹果移动版 · 2026-09-27
+
+- 苹果移动浏览器访问首页时进入 `/app/`；`/?desktop=1` 可保留电脑版。Safari 的分享菜单可将考匠添加到主屏幕。
+- 复用 `mobile/src` 的安卓界面、学习流程、会员权益和数据；补齐网页弹窗、下拉刷新、相册选择、提示音、键盘及安全区域适配。
+- `npm run build` 同时构建电脑网页和移动网页；需先安装根目录与 `mobile` 的依赖。`dist/app` 必须随完整 `dist` 一起发布。
+- 安装、更新、缓存范围和上线步骤见 [苹果移动版说明](docs/apple-web.md)。本地检查与真实 iPhone 验收、线上部署分别记录。
+- 本次由站点维护者部署。宝塔可上传已构建的更新包，或拉取源码后安装两处依赖并完整构建；具体步骤见说明中的“自行部署”。
 
 当前内置：
 
@@ -184,6 +192,7 @@ AI 题不是简单换数字，而是会改变概念辨析、计算方式、反�
 
 ```powershell
 npm install
+npm ci --prefix mobile
 node scripts/setup.js
 npm run build
 npm start
@@ -351,6 +360,7 @@ npm run bank:hcia:import-h12-811
 
 ```powershell
 npm install
+npm ci --prefix mobile
 npm run build
 npm prune --omit=dev
 npm start
@@ -371,7 +381,7 @@ npm start
 
 部署需要以下代码与持久数据：
 
-- `dist/`：前端构建产物
+- `dist/`：完整前端构建产物，包括苹果移动版 `dist/app/`
 - `server/`：服务端代码和内置题库
 - `data/` 或指定的 `DATA_DIR`：保留服务器现有 SQLite 数据库与上传文件；更新代码时不要用本地数据库覆盖
 - `.env`：保留服务器现有运行配置和 AI 主密钥，只修改本次需要更新的版本字段

@@ -2,12 +2,12 @@ import { useEffect, useMemo, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
-  RefreshControl,
   ScrollView,
   StyleSheet,
   Text,
   View,
 } from "react-native";
+import { RefreshControl } from "../components/RefreshControl";
 import {
   mobileApi,
   type AuthResponse,

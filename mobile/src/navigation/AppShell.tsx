@@ -6,13 +6,13 @@ import {
   Modal,
   PanResponder,
   Platform,
-  SafeAreaView,
   StatusBar as NativeStatusBar,
   StyleSheet,
   Text,
   View,
   useWindowDimensions,
 } from 'react-native';
+import { SafeAreaView } from '../components/SafeArea';
 import { StatusBar } from 'expo-status-bar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -577,6 +577,7 @@ function UpdateRequiredScreen({
 }) {
   const { resolvedMode } = useTheme();
   const styles = useThemedStyles(createStyles);
+  const web = Platform.OS === 'web';
   const downloadUrl = mobileApi.resolveDownloadUrl(release.downloadUrl);
   const [downloadState, setDownloadState] = useState<
     'idle' | 'downloading' | 'installing' | 'error'
@@ -605,12 +606,13 @@ function UpdateRequiredScreen({
       setDownloadError(
         error instanceof Error
           ? error.message
-          : '应用内更新失败，请改用浏览器下载。',
+          : web ? '刷新失败，请检查网络后重试。' : '应用内更新失败，请改用浏览器下载。',
       );
     }
   }
 
   const inAppButtonLabel =
+    web ? (downloadState === 'downloading' || downloadState === 'installing' ? '正在刷新…' : '刷新到最新版本') :
     downloadState === 'downloading'
       ? downloadProgress === null
         ? '正在下载新版…'
@@ -628,8 +630,7 @@ function UpdateRequiredScreen({
           <Text style={styles.updateKicker}>版本更新</Text>
           <Text style={styles.updateTitle}>请更新到最新版</Text>
           <Text style={styles.updateText}>
-            当前 App 版本已停止服务。你可以直接在 App
-            内下载并安装，也可以改用浏览器下载新版。
+            {web ? '当前版本需要更新。刷新后继续学习，已提交的学习记录会保留。' : '当前 App 版本已停止服务。你可以直接在 App 内下载并安装，也可以改用浏览器下载新版。'}
           </Text>
           <View style={styles.updateVersionRow}>
             <Text style={styles.updateVersionLabel}>当前版本</Text>
@@ -647,7 +648,7 @@ function UpdateRequiredScreen({
             </Text>
           )}
           <AnimatedPressable
-            accessibilityLabel="在应用内下载并安装最新版 App"
+            accessibilityLabel={web ? '刷新到最新版本' : '在应用内下载并安装最新版 App'}
             accessibilityRole="button"
             disabled={
               downloadState === 'downloading' || downloadState === 'installing'
@@ -676,7 +677,7 @@ function UpdateRequiredScreen({
           {downloadError && (
             <Text style={styles.updateError}>{downloadError}</Text>
           )}
-          <AnimatedPressable
+          {!web && <AnimatedPressable
             accessibilityLabel="改用浏览器下载最新版 App"
             accessibilityRole="button"
             onPress={() =>
@@ -688,14 +689,14 @@ function UpdateRequiredScreen({
               改用浏览器下载新版
             </Text>
             <Text style={styles.updateBrowserButtonArrow}>→</Text>
-          </AnimatedPressable>
+          </AnimatedPressable>}
           <AnimatedPressable
             accessibilityLabel="重新检查版本"
             accessibilityRole="button"
             onPress={onRetry}
             style={styles.updateRetryButton}
           >
-            <Text style={styles.updateRetryText}>已安装，重新检查</Text>
+            <Text style={styles.updateRetryText}>{web ? '重新检查版本' : '已安装，重新检查'}</Text>
           </AnimatedPressable>
         </EntranceView>
       </View>

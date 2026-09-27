@@ -2,6 +2,19 @@
 
 这是考匠的 Expo / React Native 移动端。Android 当前版本为 v0.3.5；当前源码继续复用现有 Node 后端，通过移动端 Bearer 会话连接生产 API。
 
+## iPhone / iPad 网页版
+
+苹果移动版直接运行本目录的 `AppShell` 和六个业务页面，与 Android 共用界面、主题、题库、答题、考试、AI、会员和社区代码。独立的 `.web.tsx` / `.web.ts` 文件只处理浏览器平台能力。
+
+- 从项目根目录运行 `npm ci --prefix mobile`、`npm run build`，移动网页输出到 `dist/app/`，由同一个 Node 服务提供。
+- iPhone / iPad 访问首页自动进入 `/app/`。Safari → 分享 → 添加到主屏幕；安装说明也在登录页和“我的”里。
+- 发布构建始终使用当前站点的 `/api`，不会携带开发机 `.env.local` 的 API 地址；Android API 配置方式保持原样。
+- 网页更新入口为“刷新到最新版本”；账号和已提交的学习记录在服务端同步。浏览器安装与原生 APK 安装使用各自的流程。
+- 登录会话沿用移动端 Bearer 机制，本机浏览器保存会话；Safari 与主屏幕 App 可能需要分别登录同一个账号。清理网站数据后需要重新登录。
+- 静态缓存仅覆盖构建时列出的公共页面、脚本、图片和音效；学习数据继续使用原有按站点、账号、证书隔离的缓存规则。离线可显示已缓存内容，交卷、AI、兑换和社区发送仍需要联网。
+
+构建后执行 `node test/mobile-web.e2e.js`（项目根目录），使用 WebKit / Chromium 和独立临时数据库检查。详细部署与真机检查清单见 [苹果移动版说明](../docs/apple-web.md)。
+
 ## 本地预览
 
 ```powershell

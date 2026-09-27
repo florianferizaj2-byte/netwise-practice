@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
-  Alert,
-  RefreshControl,
   ScrollView,
   StyleSheet,
   Text,
   View,
 } from "react-native";
+import { AppAlert as Alert } from "../components/AppAlert";
+import { RefreshControl } from "../components/RefreshControl";
 import {
   mobileApi,
   type AccountEntitlementsResponse,

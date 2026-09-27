@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+const appleMobile = Boolean(window.kaojiangAppleMobile);
 import { createRoot } from "react-dom/client";
 import { PracticeModes } from "./practice-modes.jsx";
 import { AdminMembershipCodes, MembershipBadge } from "./admin-memberships.jsx";
@@ -987,12 +988,13 @@ function AuthScreen({ onAuth, initialError = "" }) {
           </button>
           <a
             className="auth-app-download"
-            href="/downloads/kaojiang-v0.3.5.apk"
-            download="kaojiang-v0.3.5.apk"
+            href={appleMobile ? "/app/" : "/downloads/kaojiang-v0.3.5.apk"}
+            download={appleMobile ? undefined : "kaojiang-v0.3.5.apk"}
           >
             <Download size={16} />
-            下载考匠 App · Android v0.3.5
+            {appleMobile ? "打开考匠 · iPhone / iPad" : "下载考匠 App · Android v0.3.5"}
           </a>
+          {!appleMobile && <a className="auth-app-download" href="/app/">iPhone / iPad 使用入口</a>}
           <p className="auth-privacy-note">
             <ShieldCheck size={14} /> 你的学习数据与 AI 配置仅属于当前账号
           </p>
@@ -1545,12 +1547,12 @@ function App() {
                 <a
                   className="account-menu-link"
                   role="menuitem"
-                  href="/downloads/kaojiang-v0.3.5.apk"
-                  download="kaojiang-v0.3.5.apk"
+                  href={appleMobile ? "/app/" : "/downloads/kaojiang-v0.3.5.apk"}
+                  download={appleMobile ? undefined : "kaojiang-v0.3.5.apk"}
                   onClick={() => setAccountMenuOpen(false)}
                 >
                   <Download size={17} />
-                  下载 App
+                  {appleMobile ? "打开移动版" : "下载 App"}
                 </a>
                 <button role="menuitem" onClick={signOut}>
                   <UserRound size={17} />

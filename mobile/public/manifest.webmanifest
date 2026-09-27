@@ -1,0 +1,16 @@
+{
+  "id": "/app/",
+  "name": "考匠",
+  "short_name": "考匠",
+  "description": "考匠移动学习空间",
+  "lang": "zh-CN",
+  "start_url": "/app/",
+  "scope": "/app/",
+  "display": "standalone",
+  "background_color": "#F6F8F7",
+  "theme_color": "#F6F8F7",
+  "icons": [
+    { "src": "./kaojiang-logo-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./kaojiang-logo-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

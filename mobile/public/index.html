@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#F6F8F7" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="考匠" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="description" content="考匠移动学习空间：刷题、错题复习、模拟考试与 AI 辅导。使用考匠账号同步学习记录。" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
+    <title>考匠 · 移动学习空间</title>
+    <style id="expo-reset">
+      :root { --app-background: #F6F8F7; --app-height: 100dvh; --app-top: 0px; --app-bottom-inset: env(safe-area-inset-bottom, 0px); }
+      html, body { height: 100%; margin: 0; overflow: hidden; background: var(--app-background); overscroll-behavior-y: none; }
+      html { -webkit-text-size-adjust: 100%; }
+      #root { display: flex; flex: 1; position: fixed; left: 0; right: 0; }
+      #root, [aria-modal="true"] {
+        box-sizing: border-box; top: var(--app-top) !important; bottom: auto !important;
+        height: 100%; height: var(--app-height);
+        padding-top: env(safe-area-inset-top, 0px) !important; padding-right: env(safe-area-inset-right, 0px) !important;
+        padding-bottom: var(--app-bottom-inset) !important; padding-left: env(safe-area-inset-left, 0px) !important;
+      }
+      input, textarea { font-size: 16px !important; } /* Avoid Safari zooming when a field gains focus. */
+      input[type="file"] { position: absolute; }
+      @media (prefers-color-scheme: dark) { :root { --app-background: #0D1714; } }
+    </style>
+  </head>
+  <body>
+    <noscript>请开启浏览器的 JavaScript，以使用考匠。</noscript>
+    <div id="root"></div>
+  </body>
+</html>

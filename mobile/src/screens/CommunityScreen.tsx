@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import * as ImagePicker from 'expo-image-picker';
+import { prepareCommunityImage } from '../platform/communityImage';
 import {
   ActivityIndicator,
   FlatList,
@@ -169,28 +170,39 @@ export function CommunityScreen({ preview = false, user, onClose }: CommunityScr
   async function chooseImage() {
     if (sending || preview) return;
     setError('');
-    const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (!permission.granted) {
-      setError('需要允许访问相册，才能发送图片');
-      return;
+    try {
+      // Safari must open the picker directly from the user's tap.
+      if (Platform.OS !== 'web') {
+        const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (!permission.granted) {
+          setError('需要允许访问相册，才能发送图片');
+          return;
+        }
+      }
+      const result = await ImagePicker.launchImageLibraryAsync({
+        allowsEditing: false,
+        base64: true,
+        mediaTypes: ['images'],
+        quality: 0.82,
+      });
+      if (result.canceled || !result.assets[0]) return;
+      const asset = await prepareCommunityImage(result.assets[0]);
+      if (!asset.base64) {
+        setError('图片读取失败，请重新选择');
+        return;
+      }
+      if ((asset.fileSize ?? Math.ceil(asset.base64.length * 3 / 4)) > 6 * 1024 * 1024) {
+        setError('图片不能超过 6 MB，请选择较小的图片');
+        return;
+      }
+      setAttachment({
+        data: asset.base64,
+        mimeType: imageMimeType(asset.mimeType),
+        uri: asset.uri,
+      });
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : '无法读取相册，请重新选择图片');
     }
-    const result = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: false,
-      base64: true,
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      quality: 0.82,
-    });
-    if (result.canceled) return;
-    const asset = result.assets[0];
-    if (!asset?.base64) {
-      setError('图片读取失败，请重新选择');
-      return;
-    }
-    setAttachment({
-      data: asset.base64,
-      mimeType: imageMimeType(asset.mimeType),
-      uri: asset.uri,
-    });
   }
 
   function addEmoji(emoji: string) {

@@ -7,7 +7,8 @@ import { ApiError, fetchJson } from './transport';
 export { ApiError } from './transport';
 
 export const API_BASE_URL =
-  process.env.EXPO_PUBLIC_API_URL ?? 'https://aceexam.top/api';
+  process.env.EXPO_PUBLIC_API_URL ||
+  (typeof document !== 'undefined' ? `${window.location.origin}/api` : 'https://aceexam.top/api');
 
 export type AppVersionResponse = {
   currentVersion: string;
@@ -933,7 +934,8 @@ export const mobileApi = {
         method: 'POST',
         body: JSON.stringify({
           ...(text ? { text } : {}),
-          ...(image ? { image } : {}),
+          // Picker-only fields (such as the local preview URI) are not API input.
+          ...(image ? { image: { data: image.data, mimeType: image.mimeType } } : {}),
         }),
       },
     );

@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import { BrandMark } from '../components/BrandMark';
+import { WebAppActions } from '../components/WebAppActions';
 import { AnimatedPressable, EntranceView } from '../components/Motion';
 import { ApiError, mobileApi } from '../api/client';
 import { radius, shadow, spacing, useThemedStyles, useTheme, type ThemeColors } from '../theme';
@@ -135,8 +136,9 @@ export function AuthScreen({ onAuthenticated, onPreview }: AuthScreenProps) {
 
         <EntranceView delay={220} distance={8}>
           <Text style={styles.note}>
-          移动端登录已通过安全会话连接考匠后端；预览入口仅在开发环境显示。
+            使用同一个考匠账号，学习记录与会员权益随账号同步。
           </Text>
+          <WebAppActions />
         </EntranceView>
       </ScrollView>
     </KeyboardAvoidingView>

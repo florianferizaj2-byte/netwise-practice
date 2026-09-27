@@ -7,6 +7,20 @@ import {
   tick,
 } from './mobile-fixture.js';
 
+test('community image requests strip local picker and preview fields', async (t) => {
+  const load = await mobileModules(t, memoryStorage());
+  const { mobileApi } = await load('client');
+  const original = globalThis.fetch;
+  t.after(() => { globalThis.fetch = original; });
+  let sent;
+  globalThis.fetch = async (_url, init) => {
+    sent = JSON.parse(init.body);
+    return new Response(JSON.stringify({ message: { id: 'fixture' }, room: {} }));
+  };
+  await mobileApi.sendCommunityMessage('图片', { data: 'cGljdHVyZQ==', mimeType: 'image/png', uri: 'file:///private/preview.png', fileName: 'private-name.png' });
+  assert.deepEqual(sent, { text: '图片', image: { data: 'cGljdHVyZQ==', mimeType: 'image/png' } });
+});
+
 test('request timeout and cancellation release the fetch, and invalid JSON cannot masquerade as success', async (t) => {
   const load = await mobileModules(t, memoryStorage());
   const { fetchJson, ApiError } = await load('transport');
