@@ -2,13 +2,14 @@
   "expo": {
     "name": "考匠",
     "slug": "kaojiang",
-    "version": "0.3.2",
+    "version": "0.3.3",
     "scheme": "kaojiang",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
     "description": "考匠移动端学习应用",
     "plugins": [
+      "./plugins/withReleaseSigning",
       [
         "expo-image-picker",
         {
@@ -29,7 +30,7 @@
     },
     "android": {
       "package": "com.kaojiang.app",
-      "versionCode": 16,
+      "versionCode": 17,
       "permissions": [
         "REQUEST_INSTALL_PACKAGES"
       ],

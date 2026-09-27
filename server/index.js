@@ -6,6 +6,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { z } from "zod";
 import { createStore } from "./store.js";
+import { registerMembershipRoutes } from "./membership-routes.js";
 import {
   encrypt,
   masterKey,
@@ -28,7 +29,7 @@ import { studySummary } from "./study-summary.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const mobileRelease = () => {
-  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.3.2";
+  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.3.3";
   const minimumVersion =
     process.env.MOBILE_MINIMUM_VERSION || "0.2.8";
   return {
@@ -39,7 +40,7 @@ const mobileRelease = () => {
       `/downloads/kaojiang-v${latestVersion}.apk`,
     releaseNotes:
       process.env.MOBILE_RELEASE_NOTES ||
-      "新增 Free、VIP、SVIP、SSVIP 等级与每日签到额度；AI 任务小窗可关闭且不重复提醒，个人 API 配置增加解锁权限控制。",
+      "新版 VIP 页面与会员兑换码上线；在“我的 → 兑换码”开通或续期，管理员可管理会员和兑换码。原测试签名版需卸载后安装正式签名版，服务器账号和学习记录保留。",
   };
 };
 async function exchangeWechatMiniProgramCode(code) {
@@ -681,8 +682,7 @@ export async function createApp(options = {}) {
       });
     } catch (error) {
       const message = redact(error instanceof Error ? error.message : "题目生成失败");
-      if (job.creditReserved && job.creditDay)
-        store.refundDailyAiCredit(userId, job.creditDay, "generation");
+      if (job.creditReserved) refundGenerationCredit(userId, { day: job.creditDay, membershipId: job.membershipCreditId, reserved: true });
       store.updateAiQuestionGenerationJob(id, userId, certificateId, {
         status: "failed",
         error: message,
@@ -791,14 +791,31 @@ export async function createApp(options = {}) {
     };
   };
   const accountEntitlementView = (userId) => ({
-    plan: store.accountEntitlement(userId).plan,
-    expiresAt: store.accountEntitlement(userId).expiresAt,
-    apiConfigUnlocked: store.accountEntitlement(userId).apiConfigUnlocked,
+    ...store.accountEntitlement(userId),
     aiServiceAvailable: aiServiceAvailable(userId),
     checkIn: dailyAiCreditView(userId),
   });
-  const withDailyAiCredit = async (userId, kind, run, { skipCharge = false } = {}) => {
+  const reserveGenerationCredit = (userId, count = 10) => {
+    if (!authRequired || userId === "local") return { reserved: false };
+    const creditDay = day();
+    if (store.consumeDailyAiCredit(userId, creditDay, "generation")) return { reserved: true, day: creditDay };
+    const membershipId = store.reserveMembershipGeneration(userId, count);
+    if (membershipId) return { reserved: true, membershipId };
+    const member = store.accountEntitlement(userId).plan !== "free";
+    throw Object.assign(new Error(member ? "本期出题额度不足，可签到领取额外机会或等待下一周期" : "今日的 AI 出题机会已用完，请签到领取或兑换会员"), { status: 429, code: "AI_GENERATION_CREDIT_EXHAUSTED" });
+  };
+  const refundGenerationCredit = (userId, credit) => {
+    if (!credit.reserved) return;
+    if (credit.membershipId) store.refundMembershipGeneration(userId, credit.membershipId);
+    else if (credit.day) store.refundDailyAiCredit(userId, credit.day, "generation");
+  };
+  const withDailyAiCredit = async (userId, kind, run, { skipCharge = false, count = 10 } = {}) => {
     if (skipCharge) return run();
+    if (kind === "generation") {
+      const credit = reserveGenerationCredit(userId, count);
+      try { return await run(); }
+      catch (error) { refundGenerationCredit(userId, credit); throw error; }
+    }
     if (!authRequired || userId === "local" || store.accountEntitlement(userId).plan !== "free")
       return run();
     const creditDay = day();
@@ -927,6 +944,7 @@ export async function createApp(options = {}) {
       throw error;
     }
   };
+  registerMembershipRoutes({ route, store, requireAdmin, requestUserId, accountEntitlementView });
   const adminQuestion = (question, includeFeedback = false) => ({
     ...question,
     ...(includeFeedback
@@ -2124,7 +2142,7 @@ export async function createApp(options = {}) {
           undefined,
           { userId, certificateId: req.user?.certificateId },
         ),
-        { skipCharge: cacheHit },
+        { skipCharge: cacheHit, count: b.count },
       );
       return { ...batch, questions: batch.questions.map(publicQuestion) };
     }),
@@ -2163,23 +2181,12 @@ export async function createApp(options = {}) {
       (question.source !== "ai_generated" || question.ownerUserId === userId),
     );
     if (!seed) throw new Error("该知识点暂无可供参考的题目，请先选择具体知识点");
-    const creditDay = day();
-    const reserved = authRequired && userId !== "local" &&
-      store.accountEntitlement(userId).plan === "free";
-    if (reserved && !store.consumeDailyAiCredit(userId, creditDay, "generation")) {
-      const error = new Error("今日的 AI 出题机会已用完，请明天签到后继续");
-      error.status = 429;
-      error.code = "DAILY_AI_CREDIT_EXHAUSTED";
-      throw error;
-    }
+    const credit = reserveGenerationCredit(userId, 10);
     try {
-      const job = store.createAiQuestionGenerationJob(userId, certificateId, selection, {
-        day: reserved ? creditDay : null,
-        reserved,
-      });
+      const job = store.createAiQuestionGenerationJob(userId, certificateId, selection, credit);
       return { job: aiQuestionGenerationJobView(job) };
     } catch (error) {
-      if (reserved) store.refundDailyAiCredit(userId, creditDay, "generation");
+      refundGenerationCredit(userId, credit);
       throw error;
     }
   });
@@ -2251,15 +2258,7 @@ export async function createApp(options = {}) {
         (question.source !== "ai_generated" || question.ownerUserId === userId),
       );
       if (!seed) throw new Error("该知识点暂无可参考的题目，请先选择具体知识点");
-      const reservedDay = day();
-      const needsCredit = authRequired && userId !== "local" &&
-        store.accountEntitlement(userId).plan === "free";
-      if (needsCredit && !store.consumeDailyAiCredit(userId, reservedDay, "generation")) {
-        const error = new Error("今日的 AI 出题机会已用完，请明天签到后继续");
-        error.status = 429;
-        error.code = "DAILY_AI_CREDIT_EXHAUSTED";
-        throw error;
-      }
+      const credit = reserveGenerationCredit(userId, 1);
       res.status(200).set({
         "Content-Type": "text/event-stream; charset=utf-8",
         "Cache-Control": "no-cache, no-transform",
@@ -2301,8 +2300,7 @@ export async function createApp(options = {}) {
       } finally {
         clearInterval(heartbeat);
         aiBusy = false;
-        if (needsCredit && !generatedSuccessfully)
-          store.refundDailyAiCredit(userId, reservedDay, "generation");
+        if (!generatedSuccessfully) refundGenerationCredit(userId, credit);
       }
       res.end();
     } catch (error) {
@@ -2414,7 +2412,7 @@ export async function createApp(options = {}) {
           clearInterval(heartbeat);
           aiBusy = false;
         }
-      }, { skipCharge: cacheHit });
+      }, { skipCharge: cacheHit, count: b.count });
       res.end();
     } catch (error) {
       if (!res.headersSent) return next(error);

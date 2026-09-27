@@ -1,0 +1,43 @@
+def signingProperties = new Properties()
+def signingPropertiesPath = System.getenv("ACEEXAM_RELEASE_SIGNING_PROPERTIES")
+if (!signingPropertiesPath && System.getenv("LOCALAPPDATA")) {
+    signingPropertiesPath = new File(
+        System.getenv("LOCALAPPDATA"),
+        "AceExam/AndroidSigning/release-signing.properties"
+    ).absolutePath
+}
+def signingPropertiesFile = signingPropertiesPath ? new File(signingPropertiesPath) : null
+if (signingPropertiesFile?.isFile()) {
+    // Properties.load(InputStream) uses Latin-1 and corrupts Chinese Windows paths.
+    signingPropertiesFile.withReader("UTF-8") { signingProperties.load(it) }
+}
+def signingConfigured = ["storeFile", "storePassword", "keyAlias", "keyPassword"]
+    .every { signingProperties.getProperty(it) }
+
+android {
+    signingConfigs {
+        release {
+            if (signingConfigured) {
+                storeFile file(signingProperties.getProperty("storeFile"))
+                storeType signingProperties.getProperty("storeType", "JKS")
+                storePassword signingProperties.getProperty("storePassword")
+                keyAlias signingProperties.getProperty("keyAlias")
+                keyPassword signingProperties.getProperty("keyPassword")
+            }
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
+}
+
+gradle.taskGraph.whenReady { graph ->
+    if (!signingConfigured && graph.allTasks.any { it.name.toLowerCase().contains("release") }) {
+        throw new GradleException(
+            "Release signing is not configured. Set ACEEXAM_RELEASE_SIGNING_PROPERTIES " +
+            "to a private UTF-8 properties file containing storeFile, storePassword, keyAlias and keyPassword."
+        )
+    }
+}

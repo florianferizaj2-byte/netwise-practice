@@ -1,418 +1,706 @@
-import { useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
-
-import type { AccountEntitlementsResponse, AuthResponse } from '../api/client';
-import { mobileApi } from '../api/client';
-import { AnimatedPressable, EntranceView } from '../components/Motion';
-import { useScreenActive } from '../navigation/ScreenActivity';
-import { radius, shadow, spacing, useThemedStyles, useTheme, type ThemeColors } from '../theme';
-
-type VipScreenProps = {
-  preview?: boolean;
-  user?: AuthResponse['user'];
-};
+import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  ActivityIndicator,
+  Alert,
+  RefreshControl,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+import {
+  mobileApi,
+  type AccountEntitlementsResponse,
+  type AuthResponse,
+} from "../api/client";
+import { AnimatedPressable } from "../components/Motion";
+import {
+  RedeemCodeModal,
+  membershipColors,
+  membershipDate,
+  membershipLabels,
+} from "../components/RedeemCodeModal";
+import { useScreenActive } from "../navigation/ScreenActivity";
+import { useTheme, useThemedStyles, type ThemeColors } from "../theme";
 
 const plans = [
   {
-    id: 'vip',
-    name: 'VIP',
-    price: '9.9',
+    id: "vip",
+    name: "VIP",
+    price: "9.9",
     questions: 100,
-    descriptor: '适合稳定日常练习',
-    color: '#C08A2D',
-    soft: '#FFF4D9',
-    features: ['每月 100 道 AI 新题', 'AI 解析与错因分析', '题组练习与上传共享'],
+    description: "日常巩固",
   },
   {
-    id: 'svip',
-    name: 'SVIP',
-    price: '19.9',
+    id: "svip",
+    name: "SVIP",
+    price: "19.9",
     questions: 300,
-    descriptor: '适合阶段集中备考',
-    color: '#4873D8',
-    soft: '#EAF0FF',
-    recommended: true,
-    features: ['每月 300 道 AI 新题', '更充足的解析与错因机会', '题组练习与上传共享'],
+    description: "集中备考",
   },
   {
-    id: 'ssvip',
-    name: 'SSVIP',
-    price: '39.9',
+    id: "ssvip",
+    name: "SSVIP",
+    price: "39.9",
     questions: 600,
-    descriptor: '适合高频刷题与冲刺',
-    color: '#9A55C5',
-    soft: '#F5EAFE',
-    features: ['每月 600 道 AI 新题', '高频 AI 解析与错因分析', '题组练习与上传共享'],
+    description: "高频冲刺",
   },
 ] as const;
 
-const planLabels: Record<AccountEntitlementsResponse['plan'], string> = {
-  free: 'Free',
-  vip: 'VIP',
-  svip: 'SVIP',
-  ssvip: 'SSVIP',
-};
-
-function tierColor(plan: AccountEntitlementsResponse['plan']) {
-  if (plan === 'vip') return '#C08A2D';
-  if (plan === 'svip') return '#4873D8';
-  if (plan === 'ssvip') return '#9A55C5';
-  return '#708078';
-}
-
-export function VipScreen({ preview = false, user }: VipScreenProps) {
+export function VipScreen({
+  preview = false,
+  user,
+}: {
+  preview?: boolean;
+  user?: AuthResponse["user"];
+}) {
   const active = useScreenActive();
-  const { colors } = useTheme();
+  const { colors, resolvedMode } = useTheme();
   const styles = useThemedStyles(createStyles);
-  const [selectedPlanId, setSelectedPlanId] = useState('svip');
-  const [entitlements, setEntitlements] = useState<AccountEntitlementsResponse | null>(null);
+  const [selected, setSelected] =
+    useState<(typeof plans)[number]["id"]>("svip");
+  const [account, setAccount] = useState<AccountEntitlementsResponse | null>(
+    null,
+  );
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [checkingIn, setCheckingIn] = useState(false);
-  const selectedPlan = plans.find((plan) => plan.id === selectedPlanId) ?? plans[1];
-  const currentPlan = entitlements?.plan ?? 'free';
-
-  useEffect(() => {
-    if (!active || preview || !user) {
-      setEntitlements(null);
-      return;
-    }
-    let mounted = true;
+  const [redeemOpen, setRedeemOpen] = useState(false);
+  const revision = useRef(0),
+    checkInBusy = useRef(false);
+  const refresh = useCallback(async () => {
+    if (preview || !user) return;
+    const id = ++revision.current;
     setLoading(true);
-    void mobileApi.accountEntitlements()
-      .then((result) => {
-        if (mounted) setEntitlements(result);
-      })
-      .catch(() => {
-        if (mounted) setEntitlements(null);
-      })
-      .finally(() => {
-        if (mounted) setLoading(false);
-      });
-    return () => { mounted = false; };
-  }, [active, preview, user?.id]);
-
+    setError("");
+    try {
+      const data = await mobileApi.accountEntitlements();
+      if (revision.current === id) setAccount(data);
+    } catch (cause) {
+      if (revision.current === id)
+        setError(
+          cause instanceof Error ? cause.message : "权益暂未同步，请下拉重试。",
+        );
+    } finally {
+      if (revision.current === id) setLoading(false);
+    }
+  }, [preview, user?.id]);
+  useEffect(() => {
+    setAccount(null);
+  }, [user?.id, preview]);
+  useEffect(() => {
+    if (active) void refresh();
+    return () => {
+      revision.current++;
+    };
+  }, [active, refresh]);
   async function checkIn() {
+    if (checkInBusy.current) return;
     if (preview || !user) {
-      Alert.alert('登录后签到', '登录考匠账号后，签到奖励会同步到你的账号。');
+      Alert.alert("登录后签到", "登录考匠账号，即可领取每日 AI 学习机会。");
       return;
     }
+    checkInBusy.current = true;
     setCheckingIn(true);
     try {
-      const result = await mobileApi.dailyCheckIn();
-      setEntitlements(result);
+      const data = await mobileApi.dailyCheckIn();
+      revision.current++;
+      setLoading(false);
+      setAccount(data);
+      setError("");
       Alert.alert(
-        result.claimed ? '签到成功' : '今天已经签到',
-        result.claimed
-          ? '今日 AI 机会已到账，可以在做题时使用。'
-          : '今日奖励已经领取，明天再来签到吧。',
+        data.claimed ? "签到成功" : "今日已签到",
+        data.claimed
+          ? "5 次解析、1 组出题和 3 次分析机会已到账。"
+          : "明天再来领取新的学习机会。",
       );
-    } catch (error: unknown) {
-      Alert.alert('签到暂时失败', error instanceof Error ? error.message : '请稍后重试。');
+    } catch (cause) {
+      Alert.alert(
+        "签到失败",
+        cause instanceof Error ? cause.message : "请稍后重试。",
+      );
     } finally {
+      checkInBusy.current = false;
       setCheckingIn(false);
     }
   }
-
-  function showPurchaseNotice() {
-    if (preview || !user) {
-      Alert.alert('登录后查看会员权益', '登录考匠账号后，套餐与使用额度会同步到你的账号。');
-      return;
-    }
-    Alert.alert('支付通道尚未开通', '微信支付或支付宝商户通道接入后，即可购买并自动开通套餐。');
-  }
-
-  function showApiUnlockNotice() {
-    if (entitlements?.apiConfigUnlocked) {
-      Alert.alert('API 配置已解锁', '请前往「我的」→「AI 学习助手」配置自己的 API。');
-      return;
-    }
-    if (preview || !user) {
-      Alert.alert('登录后解锁', '自带 API 配置权限为一次性 ¥9.9，登录后可在支付通道开通时购买。');
-      return;
-    }
-    Alert.alert('自带 API 配置', '一次性支付 ¥9.9 解锁。支付通道开通后，即可在「我的」中配置自己的 API。');
-  }
-
-  const currentTierColor = tierColor(currentPlan);
-  const checkInState = entitlements?.checkIn;
+  const plan = plans.find((item) => item.id === selected)!;
+  const current = account?.plan || "free",
+    hasAccount = preview || !!account,
+    paid = current !== "free";
+  const currentColor = membershipColors[current],
+    selectedColor = membershipColors[selected];
+  const check = account?.checkIn;
+  const availableQuestions =
+    (account?.generation?.remaining || 0) +
+    (check?.remaining.generations || 0) * 10;
 
   return (
-    <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
-      <EntranceView distance={10} style={styles.pageHeading}>
-        <View>
-          <Text style={styles.eyebrow}>KAOJIANG MEMBERSHIP</Text>
-          <Text style={styles.pageTitle}>考匠会员</Text>
-          <Text style={styles.pageSubtitle}>把时间留给练习，让进步看得见。</Text>
-        </View>
-        <View style={styles.headingMark}><Text style={styles.headingMarkText}>✦</Text></View>
-      </EntranceView>
-
-      <EntranceView delay={45} distance={12} style={styles.heroCard}>
-        <View style={styles.heroTopline}>
-          <View style={[styles.currentPlanPill, { borderColor: `${currentTierColor}88` }]}>
-            <View style={[styles.currentPlanDot, { backgroundColor: currentTierColor }]} />
-            <Text style={[styles.currentPlanText, { color: currentTierColor }]}>
-              当前套餐 · {planLabels[currentPlan]}
-            </Text>
-          </View>
-          <Text style={styles.heroSparkle}>✧</Text>
-        </View>
-        <Text style={styles.heroTitle}>为每一段认真备考，留出更多空间</Text>
-        <Text style={styles.heroDescription}>
-          按知识点生成经过复核的题组，做题记录与会员权益跟随你的考匠账号。
-        </Text>
-        <View style={styles.heroDivider} />
-        <View style={styles.heroFootRow}>
-          <Text style={styles.heroFootItem}>10 题一组</Text>
-          <View style={styles.heroFootDot} />
-          <Text style={styles.heroFootItem}>逐题复核</Text>
-          <View style={styles.heroFootDot} />
-          <Text style={styles.heroFootItem}>跨端同步</Text>
-        </View>
-      </EntranceView>
-
-      <EntranceView delay={80} distance={10} style={styles.accountCard}>
-        <View style={styles.sectionHeading}>
+    <>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.content}
+        refreshControl={
+          <RefreshControl
+            refreshing={loading && !!account}
+            onRefresh={() => void refresh()}
+            tintColor={colors.brand}
+          />
+        }
+      >
+        <View style={styles.heading}>
           <View>
-            <Text style={styles.sectionTitle}>我的权益</Text>
-            <Text style={styles.sectionSubtitle}>
-              {loading ? '正在同步账号状态…' : entitlements?.expiresAt
-                ? `有效期至 ${new Date(entitlements.expiresAt).toLocaleDateString('zh-CN')}`
-                : currentPlan === 'free' ? 'Free 用户 · 每日签到可领取 AI 机会' : '会员权益与账号同步'}
+            <Text style={styles.eyebrow}>KAOJIANG · MEMBERSHIP</Text>
+            <Text style={styles.title}>让学习，再进一步</Text>
+          </View>
+          <AnimatedPressable
+            accessibilityRole="button"
+            onPress={() => setRedeemOpen(true)}
+            style={styles.redeemLink}
+          >
+            <Text style={styles.redeemLinkText}>兑换码 ›</Text>
+          </AnimatedPressable>
+        </View>
+        <View style={styles.accountRow}>
+          <View
+            style={[
+              styles.accountMark,
+              { backgroundColor: `${currentColor}16` },
+            ]}
+          >
+            <Text style={[styles.accountMarkText, { color: currentColor }]}>
+              ✦
             </Text>
           </View>
-          <View style={[styles.statusPill, { backgroundColor: `${currentTierColor}18` }]}>
-            <View style={[styles.statusDot, { backgroundColor: currentTierColor }]} />
-            <Text style={[styles.statusText, { color: currentTierColor }]}>{planLabels[currentPlan]}</Text>
+          <View style={styles.flex}>
+            <View style={styles.identityLine}>
+              <Text style={styles.accountLabel}>当前套餐</Text>
+              <Text style={[styles.currentTier, { color: currentColor }]}>
+                {hasAccount
+                  ? membershipLabels[current]
+                  : loading
+                    ? "同步中"
+                    : "待同步"}
+              </Text>
+            </View>
+            <Text style={styles.accountMeta}>
+              {paid && account?.expiresAt
+                ? `${membershipDate(account.expiresAt)} 到期`
+                : paid
+                  ? "会员权益已生效"
+                  : "每日签到，也能开启 AI 学习"}
+            </Text>
           </View>
+          <AnimatedPressable
+            accessibilityRole="button"
+            onPress={() => setRedeemOpen(true)}
+            style={styles.accountAction}
+          >
+            <Text style={styles.accountActionText}>
+              {paid ? "续期" : "开通"} ›
+            </Text>
+          </AnimatedPressable>
         </View>
-        <View style={styles.creditGrid}>
-          <CreditCell label="解析机会" value={checkInState?.remaining.explanations ?? 0} unit="次" />
-          <CreditCell label="AI 出题" value={checkInState?.remaining.generations ?? 0} unit="组" />
-          <CreditCell label="AI 分析" value={checkInState?.remaining.analyses ?? 0} unit="次" />
-        </View>
-      </EntranceView>
-
-      <EntranceView delay={110} distance={10} style={styles.checkInCard}>
-        <View style={styles.sectionHeading}>
-          <View style={styles.checkInHeadingCopy}>
-            <Text style={styles.sectionTitle}>每日签到</Text>
-            <Text style={styles.sectionSubtitle}>每天领取解析、出题和错因分析机会</Text>
+        {!!error && (
+          <AnimatedPressable
+            onPress={() => void refresh()}
+            accessibilityRole="button"
+          >
+            <Text style={styles.error}>{error} 点击重试</Text>
+          </AnimatedPressable>
+        )}
+        <View style={styles.usageSection}>
+          <View style={styles.sectionLine}>
+            <Text style={styles.sectionTitle}>我的学习额度</Text>
+            <Text style={styles.smallMuted}>
+              {paid ? "会员额度 + 签到奖励" : "签到奖励 · 每日更新"}
+            </Text>
           </View>
-          <Text style={styles.checkInCalendar}>日</Text>
+          <View style={styles.usageRow}>
+            <Quota
+              label="AI 新题"
+              value={hasAccount ? availableQuestions : "—"}
+              unit="道"
+            />
+            <View style={styles.rule} />
+            <Quota
+              label="详细解析"
+              value={
+                hasAccount
+                  ? paid
+                    ? "可用"
+                    : check?.remaining.explanations || 0
+                  : "—"
+              }
+              unit={paid ? "" : "次"}
+            />
+            <View style={styles.rule} />
+            <Quota
+              label="错因分析"
+              value={
+                hasAccount
+                  ? paid
+                    ? "可用"
+                    : check?.remaining.analyses || 0
+                  : "—"
+              }
+              unit={paid ? "" : "次"}
+            />
+          </View>
+          {paid && account?.generation && (
+            <Text style={styles.quotaFootnote}>
+              本期会员新题剩余 {account.generation.remaining} /{" "}
+              {account.generation.limit} 道
+              {account.generation.periodEnd
+                ? ` · ${membershipDate(account.generation.periodEnd)} 周期结束`
+                : ""}
+            </Text>
+          )}
         </View>
-        <View style={styles.rewardRow}>
-          <RewardChip label="解析" value="5 次" />
-          <RewardChip label="AI 出题" value="1 组" />
-          <RewardChip label="AI 分析" value="3 次" />
+        <View style={styles.checkInRow}>
+          <View style={styles.calendar}>
+            <Text style={styles.calendarText}>日</Text>
+          </View>
+          <View style={styles.flex}>
+            <Text style={styles.checkInTitle}>给坚持，一点奖励</Text>
+            <Text style={styles.checkInMeta}>
+              解析 5 次 · 出题 1 组 · 分析 3 次
+            </Text>
+          </View>
+          <AnimatedPressable
+            accessibilityRole="button"
+            disabled={checkingIn || !!check?.claimed}
+            onPress={() => void checkIn()}
+            style={[
+              styles.checkInButton,
+              check?.claimed && styles.checkedButton,
+            ]}
+          >
+            {checkingIn ? (
+              <ActivityIndicator color={colors.brand} size="small" />
+            ) : (
+              <Text
+                style={[
+                  styles.checkInButtonText,
+                  check?.claimed && styles.checkedText,
+                ]}
+              >
+                {check?.claimed ? "已签到" : "签到"}
+              </Text>
+            )}
+          </AnimatedPressable>
+        </View>
+        <View style={styles.plansHeading}>
+          <Text style={styles.sectionTitle}>选一个适合你的节奏</Text>
+          <Text style={styles.smallMuted}>30 天权益 · 不自动续费</Text>
+        </View>
+        <View style={styles.planRow}>
+          {plans.map((item) => {
+            const chosen = item.id === selected,
+              color = membershipColors[item.id];
+            return (
+              <AnimatedPressable
+                key={item.id}
+                accessibilityRole="button"
+                accessibilityLabel={`${item.name}，${item.price}元，每30天${item.questions}道AI新题`}
+                accessibilityState={{ selected: chosen }}
+                onPress={() => setSelected(item.id)}
+                style={[
+                  styles.plan,
+                  chosen && {
+                    borderColor: color,
+                    backgroundColor: `${color}${resolvedMode === "dark" ? "18" : "0A"}`,
+                  },
+                ]}
+              >
+                <View style={styles.planTop}>
+                  <Text style={[styles.planName, { color }]}>{item.name}</Text>
+                  <View
+                    style={[
+                      styles.selectionDot,
+                      chosen && { backgroundColor: color, borderColor: color },
+                    ]}
+                  >
+                    {chosen && <Text style={styles.selectionCheck}>✓</Text>}
+                  </View>
+                </View>
+                <Text style={styles.planDescription}>{item.description}</Text>
+                <Text style={styles.price}>
+                  <Text style={styles.currency}>¥</Text>
+                  {item.price}
+                </Text>
+                <Text style={styles.planQuantity}>
+                  {item.questions} 道 / 30 天
+                </Text>
+              </AnimatedPressable>
+            );
+          })}
+        </View>
+        <View style={styles.benefits}>
+          <View style={styles.benefitHeading}>
+            <Text style={[styles.benefitTier, { color: selectedColor }]}>
+              {plan.name}
+            </Text>
+            <Text style={styles.benefitHeadingText}>为你的备考提供</Text>
+          </View>
+          <Benefit
+            glyph="✦"
+            title={`${plan.questions} 道 AI 专属新题`}
+            detail="围绕知识点出题，10 题一组，每题独立复核"
+            color={selectedColor}
+          />
+          <Benefit
+            glyph="≡"
+            title="把每道题讲明白"
+            detail="详细步骤、核心知识点，做完再看完整讲解"
+            color={selectedColor}
+          />
+          <Benefit
+            glyph="↗"
+            title="找到出错的原因"
+            detail="分析答题思路，针对薄弱知识点继续巩固"
+            color={selectedColor}
+          />
+          <View style={styles.benefitFooter}>
+            <Text style={styles.footerCheck}>✓</Text>
+            <Text style={styles.benefitFooterText}>账号同步</Text>
+            <Text style={styles.footerCheck}>✓</Text>
+            <Text style={styles.benefitFooterText}>每日额外奖励</Text>
+            <Text style={styles.footerCheck}>✓</Text>
+            <Text style={styles.benefitFooterText}>题组随时练</Text>
+          </View>
         </View>
         <AnimatedPressable
           accessibilityRole="button"
-          disabled={checkingIn || (!!checkInState?.claimed && !preview)}
-          onPress={() => void checkIn()}
-          style={[styles.checkInButton, checkInState?.claimed && styles.checkInButtonClaimed]}
+          onPress={() => setRedeemOpen(true)}
+          style={styles.primary}
         >
-          {checkingIn ? <ActivityIndicator color={colors.white} /> : (
-            <Text style={styles.checkInButtonText}>
-              {checkInState?.claimed ? '今日已签到' : '立即签到'}
-            </Text>
-          )}
+          <Text style={styles.primaryText}>使用兑换码开通会员</Text>
+          <Text style={styles.primaryArrow}>→</Text>
         </AnimatedPressable>
-        {!entitlements?.aiServiceAvailable && !preview && user && (
-          <Text style={styles.serviceHint}>AI 服务正在准备中，签到奖励会先为你保留。</Text>
-        )}
-      </EntranceView>
-
-      <View style={styles.plansHeading}>
-        <View>
-          <Text style={styles.sectionTitle}>选择适合你的方案</Text>
-          <Text style={styles.sectionSubtitle}>月度套餐 · 一次购买 · 不自动续费</Text>
-        </View>
-        <Text style={styles.planCount}>3 个等级</Text>
-      </View>
-
-      <View style={styles.planList}>
-        {plans.map((plan) => {
-          const selected = selectedPlanId === plan.id;
-          return (
-            <AnimatedPressable
-              accessibilityRole="button"
-              accessibilityState={{ selected }}
-              key={plan.id}
-              onPress={() => setSelectedPlanId(plan.id)}
-              style={[
-                styles.planCard,
-                selected && { borderColor: plan.color, borderWidth: 1.5 },
-                'recommended' in plan && plan.recommended && styles.planCardRecommended,
-              ]}
-            >
-              <View style={styles.planTopRow}>
-                <View style={styles.planNameRow}>
-                  <View style={[styles.planTierMark, { backgroundColor: plan.soft }]}>
-                    <Text style={[styles.planTierMarkText, { color: plan.color }]}>✦</Text>
-                  </View>
-                  <View>
-                    <Text style={[styles.planName, { color: plan.color }]}>{plan.name}</Text>
-                    <Text style={styles.planDescriptor}>{plan.descriptor}</Text>
-                  </View>
-                  {'recommended' in plan && plan.recommended && (
-                    <View style={styles.recommendedPill}><Text style={styles.recommendedText}>推荐</Text></View>
-                  )}
-                </View>
-                <View style={styles.planPriceRow}>
-                  <Text style={styles.currency}>¥</Text>
-                  <Text style={styles.planPrice}>{plan.price}</Text>
-                  <Text style={styles.planPeriod}>/月</Text>
-                </View>
-              </View>
-              <View style={[styles.planQuotaRow, { backgroundColor: plan.soft }]}>
-                <View>
-                  <Text style={styles.planQuotaLabel}>AI 新题额度</Text>
-                  <Text style={[styles.planQuotaValue, { color: plan.color }]}>{plan.questions} 道 / 月</Text>
-                </View>
-                <Text style={[styles.planQuotaArrow, { color: plan.color }]}>›</Text>
-              </View>
-              {plan.features.map((feature) => (
-                <View key={feature} style={styles.planFeatureRow}>
-                  <Text style={[styles.planCheck, { color: plan.color }]}>✓</Text>
-                  <Text style={styles.planFeature}>{feature}</Text>
-                </View>
-              ))}
-            </AnimatedPressable>
-          );
-        })}
-      </View>
-
-      <View style={styles.planDisclosure}>
-        <Text style={styles.planDisclosureTitle}>方案权益</Text>
-        <Text style={styles.planDisclosureText}>
-          VIP、SVIP、SSVIP 提供不同的新题额度与 AI 学习权益。套餐开通后会显示在「我的权益」中。
+        <Text style={styles.purchaseHint}>
+          当前通过兑换码开通，具体等级以兑换码为准。
         </Text>
+        <View style={styles.apiSection}>
+          <AnimatedPressable
+            accessibilityRole="button"
+            onPress={() =>
+              Alert.alert(
+                account?.apiConfigUnlocked ? "已解锁个人 API" : "个人 API 配置",
+                account?.apiConfigUnlocked
+                  ? "可前往「我的 → AI 学习助手」配置。"
+                  : "一次性 ¥9.9 解锁配置权限。支付通道准备中，会员兑换码不包含这项独立权限。",
+              )
+            }
+            style={styles.apiEntry}
+          >
+            <Text style={styles.apiGlyph}>⌘</Text>
+            <View style={styles.flex}>
+              <Text style={styles.apiTitle}>使用自己的 API</Text>
+              <Text style={styles.apiMeta}>
+                {account?.apiConfigUnlocked
+                  ? "已解锁 · 前往我的配置"
+                  : "进阶选项 · ¥9.9 一次解锁"}
+              </Text>
+            </View>
+            <Text style={styles.apiArrow}>›</Text>
+          </AnimatedPressable>
+        </View>
+      </ScrollView>
+      <RedeemCodeModal
+        visible={active && redeemOpen}
+        preview={preview}
+        userId={user?.id}
+        onClose={() => setRedeemOpen(false)}
+        onRedeemed={(next) => {
+          revision.current++;
+          setLoading(false);
+          setAccount(next);
+          setError("");
+          if (next.plan !== "free") setSelected(next.plan);
+        }}
+      />
+    </>
+  );
+}
+function Quota({
+  label,
+  value,
+  unit,
+}: {
+  label: string;
+  value: number | string;
+  unit: string;
+}) {
+  const s = useThemedStyles(createStyles);
+  return (
+    <View style={s.quota}>
+      <Text style={s.quotaValue}>
+        {value}
+        <Text style={s.quotaUnit}> {unit}</Text>
+      </Text>
+      <Text style={s.quotaLabel}>{label}</Text>
+    </View>
+  );
+}
+function Benefit({
+  glyph,
+  title,
+  detail,
+  color,
+}: {
+  glyph: string;
+  title: string;
+  detail: string;
+  color: string;
+}) {
+  const s = useThemedStyles(createStyles);
+  return (
+    <View style={s.benefitRow}>
+      <View style={[s.benefitIcon, { backgroundColor: `${color}12` }]}>
+        <Text style={[s.benefitGlyph, { color }]}>{glyph}</Text>
       </View>
-
-      <AnimatedPressable accessibilityRole="button" onPress={showPurchaseNotice} style={styles.subscribeButton}>
-        <View>
-          <Text style={styles.subscribeTitle}>开通 {selectedPlan.name}</Text>
-          <Text style={styles.subscribeSubtitle}>¥{selectedPlan.price} / 30 天</Text>
-        </View>
-        <Text style={styles.subscribeArrow}>查看支付方式 ›</Text>
-      </AnimatedPressable>
-      <Text style={styles.paymentFootnote}>支付通道开通后即可购买，当前不会扣款。</Text>
-
-      <AnimatedPressable accessibilityRole="button" onPress={showApiUnlockNotice} style={styles.apiUnlockEntry}>
-        <View style={styles.apiUnlockIcon}><Text style={styles.apiUnlockIconText}>⌘</Text></View>
-        <View style={styles.apiUnlockCopy}>
-          <Text style={styles.apiUnlockTitle}>自带 API 配置</Text>
-          <Text style={styles.apiUnlockSubtitle}>
-            {entitlements?.apiConfigUnlocked ? '已解锁 · 前往「我的」配置' : '一次性 ¥9.9 解锁配置权限'}
-          </Text>
-        </View>
-        <Text style={styles.apiUnlockArrow}>{entitlements?.apiConfigUnlocked ? '已解锁' : '›'}</Text>
-      </AnimatedPressable>
-    </ScrollView>
-  );
-}
-
-function CreditCell({ label, value, unit }: { label: string; value: number; unit: string }) {
-  const styles = useThemedStyles(createStyles);
-  return (
-    <View style={styles.creditCell}>
-      <Text style={styles.creditValue}>{value}<Text style={styles.creditUnit}> {unit}</Text></Text>
-      <Text style={styles.creditLabel}>{label}</Text>
+      <View style={s.flex}>
+        <Text style={s.benefitTitle}>{title}</Text>
+        <Text style={s.benefitDetail}>{detail}</Text>
+      </View>
     </View>
   );
 }
-
-function RewardChip({ label, value }: { label: string; value: string }) {
-  const styles = useThemedStyles(createStyles);
-  return (
-    <View style={styles.rewardChip}>
-      <Text style={styles.rewardValue}>{value}</Text>
-      <Text style={styles.rewardLabel}>{label}</Text>
-    </View>
-  );
-}
-
-const createStyles = (colors: ThemeColors) => StyleSheet.create({
-  content: { gap: spacing.md, paddingBottom: spacing.xl, paddingHorizontal: spacing.md, paddingTop: spacing.xl },
-  pageHeading: { alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 2 },
-  eyebrow: { color: colors.brand, fontSize: 10, fontWeight: '900', letterSpacing: 1.7 },
-  pageTitle: { color: colors.text, fontSize: 27, fontWeight: '900', marginTop: 4 },
-  pageSubtitle: { color: colors.textMuted, fontSize: 12, marginTop: 3 },
-  headingMark: { alignItems: 'center', backgroundColor: colors.goldSoft, borderRadius: radius.md, height: 44, justifyContent: 'center', width: 44 },
-  headingMarkText: { color: colors.gold, fontSize: 27, fontWeight: '900' },
-  heroCard: { backgroundColor: '#12392F', borderColor: '#285847', borderRadius: radius.lg, borderWidth: 1, overflow: 'hidden', padding: spacing.lg, ...shadow.card },
-  heroTopline: { alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between' },
-  currentPlanPill: { alignItems: 'center', backgroundColor: '#203F35', borderRadius: radius.pill, borderWidth: 1, flexDirection: 'row', gap: 6, paddingHorizontal: 10, paddingVertical: 6 },
-  currentPlanDot: { borderRadius: radius.pill, height: 6, width: 6 },
-  currentPlanText: { fontSize: 10, fontWeight: '900', letterSpacing: 0.3 },
-  heroSparkle: { color: '#E8C77E', fontSize: 30, lineHeight: 32 },
-  heroTitle: { color: '#F5F7EF', fontSize: 21, fontWeight: '900', lineHeight: 29, marginTop: spacing.md },
-  heroDescription: { color: '#C3D8CC', fontSize: 12, lineHeight: 20, marginTop: 6 },
-  heroDivider: { backgroundColor: '#3A6251', height: StyleSheet.hairlineWidth, marginVertical: spacing.md },
-  heroFootRow: { alignItems: 'center', flexDirection: 'row', gap: 8 },
-  heroFootItem: { color: '#DDEBE1', fontSize: 10, fontWeight: '700' },
-  heroFootDot: { backgroundColor: '#D8B96F', borderRadius: radius.pill, height: 4, width: 4 },
-  accountCard: { backgroundColor: colors.surface, borderColor: colors.border, borderRadius: radius.lg, borderWidth: 1, gap: spacing.md, padding: spacing.md, ...shadow.card },
-  sectionHeading: { alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between' },
-  sectionTitle: { color: colors.text, fontSize: 16, fontWeight: '900' },
-  sectionSubtitle: { color: colors.textMuted, fontSize: 11, lineHeight: 16, marginTop: 3 },
-  statusPill: { alignItems: 'center', borderRadius: radius.pill, flexDirection: 'row', gap: 5, paddingHorizontal: 9, paddingVertical: 6 },
-  statusDot: { borderRadius: radius.pill, height: 6, width: 6 },
-  statusText: { fontSize: 10, fontWeight: '800' },
-  creditGrid: { backgroundColor: colors.surfaceMuted, borderRadius: radius.md, flexDirection: 'row', paddingVertical: spacing.md },
-  creditCell: { alignItems: 'center', borderRightColor: colors.border, borderRightWidth: StyleSheet.hairlineWidth, flex: 1 },
-  creditValue: { color: colors.brandDark, fontSize: 22, fontWeight: '900' },
-  creditUnit: { color: colors.textMuted, fontSize: 10, fontWeight: '700' },
-  creditLabel: { color: colors.textMuted, fontSize: 10, marginTop: 3 },
-  checkInCard: { backgroundColor: colors.surface, borderColor: colors.border, borderRadius: radius.lg, borderWidth: 1, gap: spacing.md, padding: spacing.md, ...shadow.card },
-  checkInHeadingCopy: { flex: 1 },
-  checkInCalendar: { alignItems: 'center', backgroundColor: colors.brandSoft, borderRadius: radius.sm, color: colors.brandDark, fontSize: 16, fontWeight: '900', overflow: 'hidden', paddingHorizontal: 11, paddingVertical: 7 },
-  rewardRow: { flexDirection: 'row', gap: spacing.xs },
-  rewardChip: { alignItems: 'center', backgroundColor: colors.surfaceMuted, borderRadius: radius.sm, flex: 1, paddingVertical: spacing.sm },
-  rewardValue: { color: colors.brandDark, fontSize: 13, fontWeight: '900' },
-  rewardLabel: { color: colors.textMuted, fontSize: 10, marginTop: 3 },
-  checkInButton: { alignItems: 'center', backgroundColor: colors.brand, borderRadius: radius.md, justifyContent: 'center', minHeight: 46 },
-  checkInButtonClaimed: { backgroundColor: colors.surfaceMuted },
-  checkInButtonText: { color: colors.white, fontSize: 13, fontWeight: '900' },
-  serviceHint: { color: colors.textFaint, fontSize: 10, lineHeight: 15, textAlign: 'center' },
-  plansHeading: { alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 2, paddingTop: spacing.xs },
-  planCount: { color: colors.textFaint, fontSize: 10, fontWeight: '700' },
-  planList: { gap: spacing.sm },
-  planCard: { backgroundColor: colors.surface, borderColor: colors.border, borderRadius: radius.md, borderWidth: 1, gap: spacing.sm, padding: spacing.md },
-  planCardRecommended: { ...shadow.card, elevation: 2 },
-  planTopRow: { alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between' },
-  planNameRow: { alignItems: 'center', flexDirection: 'row', flex: 1, gap: 8 },
-  planTierMark: { alignItems: 'center', borderRadius: radius.sm, height: 34, justifyContent: 'center', width: 34 },
-  planTierMarkText: { fontSize: 20, fontWeight: '900' },
-  planName: { fontSize: 15, fontWeight: '900' },
-  planDescriptor: { color: colors.textMuted, fontSize: 10, marginTop: 2 },
-  recommendedPill: { backgroundColor: colors.goldSoft, borderRadius: radius.pill, paddingHorizontal: 7, paddingVertical: 3 },
-  recommendedText: { color: colors.gold, fontSize: 9, fontWeight: '900' },
-  planPriceRow: { alignItems: 'baseline', flexDirection: 'row' },
-  currency: { color: colors.text, fontSize: 12, fontWeight: '800' },
-  planPrice: { color: colors.text, fontSize: 23, fontWeight: '900', marginLeft: 1 },
-  planPeriod: { color: colors.textMuted, fontSize: 10, marginLeft: 2 },
-  planQuotaRow: { alignItems: 'center', borderRadius: radius.sm, flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: spacing.sm, paddingVertical: 8 },
-  planQuotaLabel: { color: colors.textMuted, fontSize: 10, fontWeight: '700' },
-  planQuotaValue: { fontSize: 13, fontWeight: '900', marginTop: 2 },
-  planQuotaArrow: { fontSize: 21, fontWeight: '700' },
-  planFeatureRow: { alignItems: 'flex-start', flexDirection: 'row', gap: 7 },
-  planCheck: { fontSize: 12, fontWeight: '900', lineHeight: 17 },
-  planFeature: { color: colors.textMuted, flex: 1, fontSize: 10, lineHeight: 16 },
-  planDisclosure: { backgroundColor: colors.surfaceMuted, borderRadius: radius.md, gap: 4, padding: spacing.md },
-  planDisclosureTitle: { color: colors.text, fontSize: 11, fontWeight: '900' },
-  planDisclosureText: { color: colors.textMuted, fontSize: 10, lineHeight: 16 },
-  subscribeButton: { alignItems: 'center', backgroundColor: colors.brand, borderRadius: radius.md, flexDirection: 'row', justifyContent: 'space-between', minHeight: 58, paddingHorizontal: spacing.md, ...shadow.card },
-  subscribeTitle: { color: colors.white, fontSize: 14, fontWeight: '900' },
-  subscribeSubtitle: { color: '#D8F0E5', fontSize: 10, marginTop: 2 },
-  subscribeArrow: { color: colors.white, fontSize: 11, fontWeight: '900' },
-  paymentFootnote: { color: colors.textFaint, fontSize: 9, lineHeight: 14, marginTop: -spacing.xs, textAlign: 'center' },
-  apiUnlockEntry: { alignItems: 'center', borderTopColor: colors.border, borderTopWidth: StyleSheet.hairlineWidth, flexDirection: 'row', gap: spacing.sm, marginTop: spacing.sm, paddingHorizontal: spacing.xs, paddingTop: spacing.md },
-  apiUnlockIcon: { alignItems: 'center', backgroundColor: colors.surfaceMuted, borderRadius: radius.sm, height: 32, justifyContent: 'center', width: 32 },
-  apiUnlockIconText: { color: colors.textMuted, fontSize: 16, fontWeight: '800' },
-  apiUnlockCopy: { flex: 1 },
-  apiUnlockTitle: { color: colors.textMuted, fontSize: 11, fontWeight: '800' },
-  apiUnlockSubtitle: { color: colors.textFaint, fontSize: 9, marginTop: 2 },
-  apiUnlockArrow: { color: colors.textMuted, fontSize: 11, fontWeight: '800' },
-});
+const createStyles = (c: ThemeColors) =>
+  StyleSheet.create({
+    flex: { flex: 1 },
+    content: { paddingHorizontal: 20, paddingTop: 24, paddingBottom: 32 },
+    heading: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      gap: 6,
+      marginBottom: 22,
+    },
+    eyebrow: {
+      color: c.textMuted,
+      fontSize: 11,
+      letterSpacing: 1.4,
+      fontWeight: "700",
+      marginBottom: 8,
+    },
+    title: {
+      color: c.text,
+      fontSize: 24,
+      fontWeight: "800",
+      letterSpacing: -0.6,
+    },
+    redeemLink: { paddingVertical: 12, paddingLeft: 4 },
+    redeemLinkText: { color: c.brand, fontSize: 12, fontWeight: "600" },
+    accountRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 12,
+      paddingVertical: 16,
+      paddingHorizontal: 16,
+      backgroundColor: c.surface,
+      borderRadius: 16,
+      borderWidth: 1,
+      borderColor: c.border,
+    },
+    accountMark: {
+      width: 42,
+      height: 42,
+      borderRadius: 21,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    accountMarkText: { fontSize: 25 },
+    identityLine: { flexDirection: "row", alignItems: "center", gap: 8 },
+    accountLabel: { color: c.textMuted, fontSize: 12 },
+    currentTier: { fontSize: 17, fontWeight: "800" },
+    accountMeta: { color: c.textMuted, fontSize: 11, marginTop: 5 },
+    accountAction: { paddingVertical: 12, paddingLeft: 6 },
+    accountActionText: { color: c.brand, fontSize: 12, fontWeight: "600" },
+    error: { color: c.warning, fontSize: 12, lineHeight: 19, marginTop: 8 },
+    usageSection: { paddingTop: 23, paddingBottom: 20 },
+    sectionLine: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      gap: 5,
+    },
+    sectionTitle: { color: c.text, fontSize: 16, fontWeight: "700" },
+    smallMuted: { color: c.textMuted, fontSize: 11 },
+    usageRow: { flexDirection: "row", alignItems: "center", paddingTop: 16 },
+    quota: { flex: 1, alignItems: "center" },
+    quotaValue: {
+      color: c.text,
+      fontSize: 27,
+      fontWeight: "700",
+      fontVariant: ["tabular-nums"],
+    },
+    quotaUnit: { color: c.textMuted, fontSize: 11, fontWeight: "400" },
+    quotaLabel: { color: c.textMuted, fontSize: 11, marginTop: 5 },
+    rule: {
+      width: StyleSheet.hairlineWidth,
+      height: 28,
+      backgroundColor: c.border,
+    },
+    quotaFootnote: {
+      color: c.textFaint,
+      fontSize: 11,
+      textAlign: "center",
+      marginTop: 14,
+    },
+    checkInRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 10,
+      backgroundColor: c.surfaceMuted,
+      borderRadius: 12,
+      padding: 12,
+    },
+    calendar: {
+      width: 32,
+      height: 35,
+      borderColor: c.brandSoft,
+      borderWidth: 1,
+      borderTopWidth: 5,
+      borderRadius: 7,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    calendarText: { color: c.brandDark, fontSize: 15, fontWeight: "700" },
+    checkInTitle: { color: c.text, fontSize: 12, fontWeight: "700" },
+    checkInMeta: { color: c.textMuted, fontSize: 11, marginTop: 4 },
+    checkInButton: {
+      borderRadius: 9,
+      backgroundColor: c.brandSoft,
+      minHeight: 36,
+      minWidth: 54,
+      paddingHorizontal: 10,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    checkInButtonText: { color: c.brandDark, fontSize: 12, fontWeight: "700" },
+    checkedButton: { backgroundColor: c.background },
+    checkedText: { color: c.textMuted },
+    plansHeading: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      rowGap: 6,
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginTop: 28,
+      marginBottom: 14,
+      gap: 4,
+    },
+    planRow: { flexDirection: "row", gap: 8 },
+    plan: {
+      flex: 1,
+      borderWidth: 1.2,
+      borderColor: c.border,
+      backgroundColor: c.surface,
+      borderRadius: 13,
+      paddingHorizontal: 11,
+      paddingVertical: 15,
+    },
+    planTop: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+    },
+    planName: { fontSize: 15, fontWeight: "800" },
+    selectionDot: {
+      width: 13,
+      height: 13,
+      borderRadius: 7,
+      borderColor: c.border,
+      borderWidth: 1,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    selectionCheck: { color: c.white, fontSize: 8, fontWeight: "900" },
+    planDescription: { color: c.textMuted, fontSize: 11, marginTop: 5 },
+    price: {
+      color: c.text,
+      fontSize: 25,
+      fontWeight: "700",
+      marginTop: 14,
+      letterSpacing: -0.8,
+    },
+    currency: { fontSize: 12, fontWeight: "500" },
+    planQuantity: { color: c.textMuted, fontSize: 11, marginTop: 6 },
+    benefits: { marginTop: 21, paddingHorizontal: 2 },
+    benefitHeading: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 8,
+      paddingBottom: 8,
+    },
+    benefitTier: { fontSize: 15, fontWeight: "800" },
+    benefitHeadingText: { color: c.text, fontSize: 13, fontWeight: "600" },
+    benefitRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 12,
+      paddingVertical: 11,
+    },
+    benefitIcon: {
+      width: 34,
+      height: 34,
+      borderRadius: 10,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    benefitGlyph: { fontSize: 20, fontWeight: "600" },
+    benefitTitle: { color: c.text, fontSize: 13, fontWeight: "700" },
+    benefitDetail: {
+      color: c.textMuted,
+      fontSize: 12,
+      lineHeight: 19,
+      marginTop: 3,
+    },
+    benefitFooter: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 5,
+      borderTopColor: c.border,
+      borderTopWidth: StyleSheet.hairlineWidth,
+      paddingTop: 13,
+      marginTop: 8,
+    },
+    footerCheck: { color: c.brand, fontSize: 10 },
+    benefitFooterText: { color: c.textMuted, fontSize: 11, marginRight: 7 },
+    primary: {
+      marginTop: 23,
+      backgroundColor: c.brand,
+      borderRadius: 12,
+      minHeight: 50,
+      paddingHorizontal: 19,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+    },
+    primaryText: { color: c.white, fontSize: 14, fontWeight: "700" },
+    primaryArrow: { color: c.white, fontSize: 22 },
+    purchaseHint: {
+      textAlign: "center",
+      color: c.textFaint,
+      fontSize: 11,
+      marginTop: 10,
+    },
+    apiSection: {
+      borderTopWidth: StyleSheet.hairlineWidth,
+      borderTopColor: c.border,
+      marginTop: 25,
+      paddingTop: 16,
+    },
+    apiEntry: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 11,
+      paddingVertical: 6,
+    },
+    apiGlyph: { fontSize: 21, color: c.gold },
+    apiTitle: { color: c.textMuted, fontSize: 12, fontWeight: "600" },
+    apiMeta: { color: c.textFaint, fontSize: 11, marginTop: 4 },
+    apiArrow: { fontSize: 22, color: c.textFaint },
+  });

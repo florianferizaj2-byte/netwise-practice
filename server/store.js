@@ -4,6 +4,7 @@ import path from "node:path";
 import crypto from "node:crypto";
 import { bundledQuestions, certificates } from "./question-banks/loader.js";
 import { calculateMastery, nextReview, fingerprint } from "./domain.js";
+import { createMembershipStore } from "./memberships.js";
 
 export function createStore(dir = process.env.DATA_DIR || "data") {
   fs.mkdirSync(dir, { recursive: true });
@@ -12,7 +13,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
   const communityStorageLimit =
     Number(process.env.COMMUNITY_STORAGE_LIMIT_BYTES) || 2 * 1024 ** 3;
   const db = new DatabaseSync(path.join(dir, "netwise.sqlite"));
-  db.exec(`PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON;
+  db.exec(`PRAGMA busy_timeout=5000; PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON;
  CREATE TABLE IF NOT EXISTS settings (id INTEGER PRIMARY KEY CHECK(id=1), data TEXT NOT NULL);
  CREATE TABLE IF NOT EXISTS questions (id TEXT PRIMARY KEY, fingerprint TEXT UNIQUE NOT NULL, data TEXT NOT NULL);
  CREATE TABLE IF NOT EXISTS attempts (id TEXT PRIMARY KEY, user_id TEXT NOT NULL, question_id TEXT NOT NULL REFERENCES questions(id), data TEXT NOT NULL);
@@ -149,6 +150,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       created_at TEXT NOT NULL,
       updated_at TEXT NOT NULL,
       credit_day TEXT,
+      membership_credit_id TEXT,
       credit_reserved INTEGER NOT NULL DEFAULT 0
     );
     CREATE INDEX IF NOT EXISTS ai_question_generation_jobs_owner_idx
@@ -156,6 +158,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
   `);
   for (const statement of [
     "ALTER TABLE ai_question_generation_jobs ADD COLUMN credit_day TEXT",
+    "ALTER TABLE ai_question_generation_jobs ADD COLUMN membership_credit_id TEXT",
     "ALTER TABLE ai_question_generation_jobs ADD COLUMN credit_reserved INTEGER NOT NULL DEFAULT 0",
   ]) {
     try {
@@ -422,8 +425,10 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         );
     } else addQ(q);
   }
+  const memberships = createMembershipStore(db);
   const store = {
     db,
+    ...memberships,
     communityUploadDir,
     communityStorageLimit,
     getQ,
@@ -466,7 +471,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         total: 10,
       };
       db.prepare(
-        "INSERT INTO ai_question_generation_jobs (id,user_id,certificate_id,selection,status,progress,created_at,updated_at,credit_day,credit_reserved) VALUES (?,?,?,?,?,?,?,?,?,?)",
+        "INSERT INTO ai_question_generation_jobs (id,user_id,certificate_id,selection,status,progress,created_at,updated_at,credit_day,credit_reserved,membership_credit_id) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
       ).run(
         id,
         userId,
@@ -478,6 +483,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         now,
         credit.day || null,
         credit.reserved ? 1 : 0,
+        credit.membershipId || null,
       );
       return {
         id,
@@ -490,13 +496,14 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         error: null,
         creditDay: credit.day || null,
         creditReserved: !!credit.reserved,
+        membershipCreditId: credit.membershipId || null,
         createdAt: now,
         updatedAt: now,
       };
     },
     aiQuestionGenerationJob(id, userId, certificateId) {
       const row = db.prepare(
-        "SELECT id,user_id AS userId,certificate_id AS certificateId,selection,status,progress,group_id AS groupId,error,created_at AS createdAt,updated_at AS updatedAt,credit_day AS creditDay,credit_reserved AS creditReserved FROM ai_question_generation_jobs WHERE id=? AND user_id=? AND certificate_id=?",
+        "SELECT id,user_id AS userId,certificate_id AS certificateId,selection,status,progress,group_id AS groupId,error,created_at AS createdAt,updated_at AS updatedAt,credit_day AS creditDay,credit_reserved AS creditReserved,membership_credit_id AS membershipCreditId FROM ai_question_generation_jobs WHERE id=? AND user_id=? AND certificate_id=?",
       ).get(id, userId, certificateId);
       return row
         ? {
@@ -509,7 +516,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
     aiQuestionGenerationJobs(userId, certificateId, limit = 10) {
       return db
         .prepare(
-          "SELECT id,user_id AS userId,certificate_id AS certificateId,selection,status,progress,group_id AS groupId,error,created_at AS createdAt,updated_at AS updatedAt,credit_day AS creditDay,credit_reserved AS creditReserved FROM ai_question_generation_jobs WHERE user_id=? AND certificate_id=? ORDER BY created_at DESC LIMIT ?",
+          "SELECT id,user_id AS userId,certificate_id AS certificateId,selection,status,progress,group_id AS groupId,error,created_at AS createdAt,updated_at AS updatedAt,credit_day AS creditDay,credit_reserved AS creditReserved,membership_credit_id AS membershipCreditId FROM ai_question_generation_jobs WHERE user_id=? AND certificate_id=? ORDER BY created_at DESC LIMIT ?",
         )
         .all(userId, certificateId, limit)
         .map((row) => ({
@@ -531,7 +538,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
     nextAiQuestionGenerationJob() {
       const row = db
         .prepare(
-          "SELECT id,user_id AS userId,certificate_id AS certificateId,selection,status,progress,group_id AS groupId,error,created_at AS createdAt,updated_at AS updatedAt,credit_day AS creditDay,credit_reserved AS creditReserved FROM ai_question_generation_jobs WHERE status='queued' ORDER BY created_at LIMIT 1",
+          "SELECT id,user_id AS userId,certificate_id AS certificateId,selection,status,progress,group_id AS groupId,error,created_at AS createdAt,updated_at AS updatedAt,credit_day AS creditDay,credit_reserved AS creditReserved,membership_credit_id AS membershipCreditId FROM ai_question_generation_jobs WHERE status='queued' ORDER BY created_at LIMIT 1",
         )
         .get();
       return row
@@ -740,29 +747,10 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         .run(userId || "local", JSON.stringify(settings));
     },
     accountEntitlement(userId = "local") {
-      const row = db
-        .prepare("SELECT plan,expires_at AS expiresAt,api_config_unlocked AS apiConfigUnlocked FROM user_entitlements WHERE user_id=?")
-        .get(userId || "local");
-      const expired = row?.expiresAt && Date.parse(row.expiresAt) <= Date.now();
-      return {
-        plan: expired ? "free" : row?.plan || "free",
-        expiresAt: row?.expiresAt || null,
-        apiConfigUnlocked: !!row?.apiConfigUnlocked,
-      };
+      return memberships.accountEntitlement(userId || "local");
     },
     saveAccountEntitlement(userId, entitlement) {
-      const current = this.accountEntitlement(userId);
-      const next = { ...current, ...entitlement };
-      db.prepare(
-        "INSERT INTO user_entitlements (user_id,plan,expires_at,api_config_unlocked,updated_at) VALUES (?,?,?,?,?) ON CONFLICT(user_id) DO UPDATE SET plan=excluded.plan,expires_at=excluded.expires_at,api_config_unlocked=excluded.api_config_unlocked,updated_at=excluded.updated_at",
-      ).run(
-        userId || "local",
-        next.plan || "free",
-        next.expiresAt || null,
-        next.apiConfigUnlocked ? 1 : 0,
-        new Date().toISOString(),
-      );
-      return this.accountEntitlement(userId);
+      return memberships.saveAccountEntitlement(userId || "local", entitlement);
     },
     dailyAiCredits(userId = "local", day) {
       const row = db
@@ -1419,10 +1407,10 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       const like = `%${search.trim()}%`;
       return db
         .prepare(
-          "SELECT id, username, certificate_id AS certificateId, created_at AS createdAt, is_admin AS isAdmin, banned_at AS bannedAt, ban_reason AS banReason FROM users WHERE (?='' OR username LIKE ?) ORDER BY created_at, rowid",
+          "SELECT u.id, u.username, u.certificate_id AS certificateId, u.created_at AS createdAt, u.is_admin AS isAdmin, u.banned_at AS bannedAt, u.ban_reason AS banReason, e.plan AS membershipPlan, e.expires_at AS membershipExpiresAt FROM users u LEFT JOIN user_entitlements e ON e.user_id=u.id WHERE (?='' OR u.username LIKE ?) ORDER BY u.created_at,u.rowid",
         )
         .all(search.trim(), like)
-        .map((user) => ({ ...user, isAdmin: !!user.isAdmin }));
+        .map((user) => ({ ...user, isAdmin: !!user.isAdmin, membershipPlan: user.membershipExpiresAt && Date.parse(user.membershipExpiresAt) <= Date.now() ? "free" : user.membershipPlan || "free" }));
     },
     setUserBanned: (userId, banned, reason = "") => {
       const result = db

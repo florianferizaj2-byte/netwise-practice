@@ -34,6 +34,7 @@ import { useCachedQuery } from '../api/useCachedQuery';
 import { useScreenActive } from '../navigation/ScreenActivity';
 import { useActiveTimer } from '../navigation/useActiveTimer';
 import { BrandMark } from '../components/BrandMark';
+import { RedeemCodeModal, membershipLabels } from '../components/RedeemCodeModal';
 import { QuestionImages } from '../components/QuestionImages';
 import { AiQuestionDraftScreen } from './AiQuestionDraftScreen';
 import { CommunityScreen } from './CommunityScreen';
@@ -1936,6 +1937,9 @@ export function ProfileScreen({
   const [authorApiOpen, setAuthorApiOpen] = useState(false);
   const [communityNameOpen, setCommunityNameOpen] = useState(false);
   const [communityOpen, setCommunityOpen] = useState(false);
+  const [redeemOpen, setRedeemOpen] = useState(false);
+  const [membershipPlan, setMembershipPlan] = useState<keyof typeof membershipLabels>('free');
+  const membershipRevision = useRef(0);
   const [communityName, setCommunityName] = useState('');
   const [communityNameBusy, setCommunityNameBusy] = useState(false);
   const [communityNameError, setCommunityNameError] = useState('');
@@ -1957,16 +1961,19 @@ export function ProfileScreen({
   useEffect(() => {
     if (!user || preview) {
       setApiConfigUnlocked(false);
+      setMembershipPlan('free');
       return;
     }
-    let active = true;
+    if (!active) return;
+    const requestId = ++membershipRevision.current;
+    let mounted = true;
     void mobileApi.accountEntitlements()
       .then((result) => {
-        if (active) setApiConfigUnlocked(result.apiConfigUnlocked);
+        if (mounted && requestId === membershipRevision.current) { setApiConfigUnlocked(result.apiConfigUnlocked); setMembershipPlan(result.plan); }
       })
       .catch(() => undefined);
-    return () => { active = false; };
-  }, [preview, user?.id]);
+    return () => { mounted = false; };
+  }, [active, preview, user?.id]);
 
   function openCommunityNameSettings() {
     setCommunityName(user?.communityName || user?.username || '');
@@ -2116,6 +2123,7 @@ export function ProfileScreen({
 
   return (
     <ScreenContainer profile>
+      <RedeemCodeModal visible={active && redeemOpen} preview={preview} userId={user?.id} onClose={() => setRedeemOpen(false)} onRedeemed={(result) => { membershipRevision.current++; setMembershipPlan(result.plan); setApiConfigUnlocked(result.apiConfigUnlocked); }} />
       {communityOpen && (
         <Modal
           animationType="slide"
@@ -2212,6 +2220,8 @@ export function ProfileScreen({
             title="考匠社区"
             value="学习交流 · 排行榜"
           />
+          <SettingRow onPress={() => onNavigate('vip')} title="我的会员" value={membershipLabels[membershipPlan]} />
+          <SettingRow onPress={() => setRedeemOpen(true)} title="兑换码" value="开通 / 续期会员" />
           <SettingRow
             onPress={user ? onOpenCertificatePicker : undefined}
             title="证书与题库"
@@ -2250,7 +2260,7 @@ export function ProfileScreen({
       <EntranceView delay={230} distance={12} style={styles.aiServiceCard}>
         <Text style={styles.aiServiceTitle}>AI 学习服务</Text>
         <Text style={styles.aiServiceText}>
-          做题后可使用 AI 提示、错因解析、详细讲解和变式训练。AI Key 仍由你的账号配置，App 不保存密钥。
+          做题后可使用详细讲解、错因分析与变式训练。会员权益和签到奖励跟随你的考匠账号。
         </Text>
       </EntranceView>
       <EntranceView delay={260} distance={10}>

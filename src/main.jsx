@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { createRoot } from "react-dom/client";
 import { PracticeModes } from "./practice-modes.jsx";
+import { AdminMembershipCodes, MembershipBadge } from "./admin-memberships.jsx";
 import {
   LayoutDashboard,
   BookOpen,
@@ -971,11 +972,11 @@ function AuthScreen({ onAuth, initialError = "" }) {
           </button>
           <a
             className="auth-app-download"
-            href="/downloads/kaojiang-v0.3.2.apk"
-            download="kaojiang-v0.3.2.apk"
+            href="/downloads/kaojiang-v0.3.3.apk"
+            download="kaojiang-v0.3.3.apk"
           >
             <Download size={16} />
-            下载考匠 App · Android v0.3.2
+            下载考匠 App · Android v0.3.3
           </a>
           <p className="auth-privacy-note">
             <ShieldCheck size={14} /> 你的学习数据与 AI 配置仅属于当前账号
@@ -1006,44 +1007,44 @@ function AnnouncementModal({ onClose }) {
             </span>
             <div>
               <span className="announcement-kicker">考匠 · 更新公告</span>
-              <h2 id="announcement-title">移动端 v0.3.2 更新</h2>
-              <p>会员等级、每日签到额度和 AI 任务进度体验更新。</p>
+              <h2 id="announcement-title">移动端 v0.3.3 更新</h2>
+              <p>更清晰的会员页面，兑换码开通与续期。</p>
             </div>
           </div>
           <IconButton icon={X} label="关闭网站公告" onClick={onClose} />
         </header>
         <div className="announcement-body">
           <div className="announcement-highlight">
-                <strong>考匠 App v0.3.2 已发布</strong>
+                <strong>考匠 App v0.3.3 已发布</strong>
                 <span>
-                  VIP 页面显示会员等级与每日签到额度；后台 AI 任务提醒可关闭，个人 API 配置权限由服务端控制。
+                  VIP 页面重新排版，套餐、额度与权益一目了然；在“我的 → 兑换码”即可开通会员。
                 </span>
           </div>
           <ul className="announcement-list">
             <li>
               <span>01</span>
               <div>
-                <strong>每日签到领取 AI 机会</strong>
-                <p>Free 用户可在 VIP 页面签到，领取当日解析、AI 出题和 AI 分析机会，并查看剩余次数。</p>
+                <strong>VIP 权益更清晰</strong>
+                <p>金色 VIP、蓝色 SVIP、紫色 SSVIP，紧凑展示当前套餐、会员到期时间与学习额度。</p>
               </div>
             </li>
             <li>
               <span>02</span>
               <div>
-                <strong>会员与社区入口整理</strong>
-                <p>VIP 页面展示 Free、VIP、SVIP、SSVIP 权益。支付通道仍待商户接入，当前不收款；每日签到额度可正常领取和使用。</p>
+                <strong>兑换即开通，同等级可续期</strong>
+                <p>在“我的 → 兑换码”输入会员码，权益随账号同步，也可查看兑换记录。每日签到奖励继续保留。</p>
               </div>
             </li>
             <li>
               <span>03</span>
               <div>
-                <strong>AI 任务提醒更轻巧</strong>
-                <p>同一任务仅自动提醒一次，小窗支持关闭或收至边缘；关闭提醒后，后台生成任务仍会继续。</p>
+                <strong>会员和兑换码统一管理</strong>
+                <p>网页管理员可查看用户等级、到期时间以及兑换码状态，支持生成、复制和作废未使用的兑换码。</p>
               </div>
             </li>
           </ul>
           <p className="announcement-footnote">
-            App 当前提供 Android v0.3.2 安装包；正式考试信息仍请以对应认证机构和相关主管部门的最新公告为准。
+            Android v0.3.3 使用正式签名。旧测试签名版需卸载后安装，手机本地设置会重置；服务器账号和学习记录保留。
           </p>
         </div>
         <footer className="announcement-footer">
@@ -1190,7 +1191,7 @@ function App() {
   useEffect(() => {
     if (!auth?.authenticated || !auth.user?.certificateId || !dashboard) return;
     try {
-      if (localStorage.getItem("netwise-announcement-2026-09-v7") !== "seen")
+      if (localStorage.getItem("netwise-announcement-2026-09-v8") !== "seen")
         setAnnouncementOpen(true);
     } catch {
       setAnnouncementOpen(true);
@@ -1215,7 +1216,7 @@ function App() {
   const dismissAnnouncement = () => {
     setAnnouncementOpen(false);
     try {
-      localStorage.setItem("netwise-announcement-2026-09-v7", "seen");
+      localStorage.setItem("netwise-announcement-2026-09-v8", "seen");
     } catch {
       // Private browsing may disable localStorage; closing still works for this render.
     }
@@ -1521,8 +1522,8 @@ function App() {
                 <a
                   className="account-menu-link"
                   role="menuitem"
-                  href="/downloads/kaojiang-v0.3.2.apk"
-                  download="kaojiang-v0.3.2.apk"
+                  href="/downloads/kaojiang-v0.3.3.apk"
+                  download="kaojiang-v0.3.3.apk"
                   onClick={() => setAccountMenuOpen(false)}
                 >
                   <Download size={17} />
@@ -4320,6 +4321,9 @@ function AdminView({
     load().catch(() => {});
   }, []);
   useEffect(() => {
+    if (tab === "users") loadUsers().catch(() => {});
+  }, [tab]);
+  useEffect(() => {
     if (tab !== "questions" || !taxonomy) return;
     loadQuestions(questionPage).catch(() => {});
   }, [
@@ -4521,6 +4525,7 @@ function AdminView({
           ["feedback", "用户反馈"],
           ["quality", "重合检测"],
           ["users", "用户管理"],
+          ["membership-codes", "兑换码"],
           ["api", "管理员 API"],
           ["audit", "操作审计"],
         ].map(([id, label]) => (
@@ -5131,12 +5136,14 @@ function AdminView({
           <div className="table-scroll">
             <table className="admin-users-table">
               <thead>
-                <tr><th>账号</th><th>证书</th><th>注册时间</th><th>状态</th><th /></tr>
+                <tr><th>账号</th><th>会员等级</th><th>会员有效期</th><th>证书</th><th>注册时间</th><th>状态</th><th /></tr>
               </thead>
               <tbody>
                 {users.map((user) => (
                   <tr key={user.id}>
                     <td><strong>{user.username}</strong>{user.isAdmin && <small>管理员</small>}</td>
+                    <td><MembershipBadge plan={user.membershipPlan} /></td>
+                    <td>{user.membershipExpiresAt ? <>{new Date(user.membershipExpiresAt).toLocaleString("zh-CN")}{user.membershipPlan === "free" && <small>已到期</small>}</> : user.membershipPlan && user.membershipPlan !== "free" ? "长期有效" : "—"}</td>
                     <td>{certificates.find((item) => item.id === user.certificateId)?.shortName || "未选择"}</td>
                     <td>{new Date(user.createdAt).toLocaleString("zh-CN")}</td>
                     <td>{user.bannedAt ? <span className="badge red">已封禁</span> : <span className="badge green">正常</span>}</td>
@@ -5148,6 +5155,7 @@ function AdminView({
           </div>
         </section>
       )}
+      {tab === "membership-codes" && <AdminMembershipCodes api={api} notify={notify} />}
       {tab === "api" && settings && (
         <section className="admin-card admin-settings-card">
           <div className="section-heading">

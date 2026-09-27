@@ -1,0 +1,214 @@
+.membership-admin {
+  display: grid;
+  gap: 20px;
+}
+.member-tier {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 58px;
+  padding: 4px 10px;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.35px;
+}
+.member-tier-free {
+  color: #65756d;
+  background: #eef2ef;
+}
+.member-tier-vip {
+  color: #90631d;
+  background: #fcf2de;
+}
+.member-tier-svip {
+  color: #4064b3;
+  background: #edf2fc;
+}
+.member-tier-ssvip {
+  color: #8951a5;
+  background: #f4ecfa;
+}
+.membership-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+.membership-summary-item {
+  padding: 20px 24px;
+  background: #fff;
+  border: 1px solid #dce3df;
+  border-radius: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.membership-summary-item span {
+  font-size: 13px;
+  color: #6f7e76;
+}
+.membership-summary-item strong {
+  font-size: 27px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.membership-summary-item.available strong {
+  color: #177c63;
+}
+.membership-summary-item.redeemed strong {
+  color: #5277c9;
+}
+.membership-generate-form {
+  display: grid;
+  grid-template-columns: 1fr 0.8fr 0.8fr 1.5fr auto;
+  align-items: end;
+  gap: 14px;
+}
+.membership-generate-form label {
+  display: grid;
+  gap: 7px;
+  color: #53655c;
+  font-size: 13px;
+}
+.membership-generate-form input,
+.membership-generate-form select {
+  width: 100%;
+  min-width: 0;
+  min-height: 42px;
+}
+.membership-generate-form button {
+  min-height: 42px;
+  white-space: nowrap;
+}
+.membership-form-hint {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #7c8982;
+  margin: 16px 0 0;
+}
+.membership-notice {
+  border-left: 3px solid #177c63;
+  background: #eef7f2;
+  color: #11664f;
+  border-radius: 0 8px 8px 0;
+  margin-top: 14px;
+  padding: 12px 16px;
+  font-size: 13px;
+}
+.membership-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.membership-filters input {
+  flex: 1;
+  min-width: 170px;
+}
+.membership-filters select {
+  min-width: 118px;
+}
+.membership-code-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 980px;
+  font-size: 13px;
+}
+.membership-code-table th {
+  font-weight: 500;
+  color: #7c8982;
+  background: #f7f9f8;
+  white-space: nowrap;
+}
+.membership-code-table td,
+.membership-code-table th {
+  text-align: left;
+  padding: 14px 12px;
+  border-bottom: 1px solid #e7ece9;
+}
+.membership-code-table small {
+  display: block;
+  margin-top: 5px;
+  color: #87958d;
+  font-size: 11px;
+}
+.membership-code {
+  color: #344c3f;
+  font-size: 12px;
+  white-space: nowrap;
+  font-family: Consolas, monospace;
+  user-select: all;
+  background: transparent;
+}
+.membership-status {
+  white-space: nowrap;
+  font-size: 12px;
+}
+.membership-status.available {
+  color: #177c63;
+}
+.membership-status.redeemed {
+  color: #5277c9;
+}
+.membership-status.revoked,
+.membership-status.expired {
+  color: #a17472;
+}
+.membership-row-actions {
+  display: flex;
+  gap: 6px;
+  white-space: nowrap;
+}
+.membership-row-actions button {
+  padding: 6px 8px;
+  min-height: 32px;
+  font-size: 11px;
+}
+.membership-empty {
+  color: #7c8982;
+  padding: 32px 0;
+  text-align: center;
+}
+.membership-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 18px;
+  color: #7c8982;
+  font-size: 12px;
+}
+.membership-pagination > div {
+  display: flex;
+  gap: 8px;
+}
+@media (max-width: 900px) {
+  .membership-generate-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .membership-generate-form button {
+    grid-column: 1 / -1;
+    justify-content: center;
+  }
+  .membership-summary {
+    gap: 10px;
+  }
+  .membership-summary-item {
+    padding: 14px;
+  }
+}
+@media (max-width: 560px) {
+  .membership-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .membership-filters select {
+    flex: 1;
+  }
+  .membership-filters input {
+    flex-basis: 100%;
+  }
+  .membership-admin .section-heading {
+    align-items: flex-start;
+    gap: 12px;
+  }
+}

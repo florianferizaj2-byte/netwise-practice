@@ -465,12 +465,21 @@ export type AccountEntitlementsResponse = {
   expiresAt: string | null;
   apiConfigUnlocked: boolean;
   aiServiceAvailable: boolean;
+  generation?: { limit: number; used: number; remaining: number; periodStart: string | null; periodEnd: string | null };
   checkIn: {
     day: string;
     claimed: boolean;
     grants: { explanations: number; generations: number; analyses: number };
     remaining: { explanations: number; generations: number; analyses: number };
   };
+};
+
+export type MembershipRedemption = {
+  id: string;
+  plan: 'vip' | 'svip' | 'ssvip';
+  durationDays: number;
+  redeemedAt: string;
+  expiresAt: string;
 };
 
 export type CommunityMessage = {
@@ -891,6 +900,16 @@ export const mobileApi = {
 
   accountEntitlements() {
     return request<AccountEntitlementsResponse>('/account/entitlements');
+  },
+
+  redeemMembership(code: string) {
+    return request<{ alreadyRedeemed: boolean; redemption: { plan: 'vip' | 'svip' | 'ssvip'; durationDays: number; expiresAt: string }; entitlements: AccountEntitlementsResponse }>('/account/redeem', {
+      method: 'POST', body: JSON.stringify({ code }),
+    });
+  },
+
+  membershipRedemptions() {
+    return request<{ redemptions: MembershipRedemption[] }>('/account/redemptions');
   },
 
   dailyCheckIn() {
