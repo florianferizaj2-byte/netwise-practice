@@ -30,7 +30,7 @@ import { studySummary } from "./study-summary.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const mobileRelease = () => {
-  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.3.5";
+  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.3.6";
   const minimumVersion =
     process.env.MOBILE_MINIMUM_VERSION || "0.2.8";
   return {
@@ -41,7 +41,7 @@ const mobileRelease = () => {
       `/downloads/kaojiang-v${latestVersion}.apk`,
     releaseNotes:
       process.env.MOBILE_RELEASE_NOTES ||
-      "练习页全新布局：顺序、随机、AI 出题与收藏、已生成题组入口更清晰，知识点支持展开、搜索和查看进度；修复 AI 模式下进入收藏的流程。网页新增 VIP 中心，支持签到、兑换和额度查询。",
+      "修复普通题库混入 AI 生成题导致的旧分类和题数偏差，统一网页、App 与移动网页的目录及练习范围；保留 AI 题组、共享、收藏与错题记录。",
   };
 };
 async function exchangeWechatMiniProgramCode(code) {
@@ -1533,6 +1533,7 @@ export async function createApp(options = {}) {
             attempted.has(q.id)),
       );
   };
+  const isBankQuestion = (question) => question.source !== "ai_generated";
   const requireCertificate = (req) => {
     if (authRequired && !req.user?.certificateId) {
       const error = new Error("请先选择报考证书");
@@ -1561,11 +1562,16 @@ export async function createApp(options = {}) {
   });
   route("get", "/api/questions", (req) => {
     const state = questionState(req);
+    // Installed mobile clients used this endpoint for ordinary practice before
+    // they supplied bankOnly. Explicit AI source requests retain their scope.
+    const bankOnly = req.query.bankOnly === "1" ||
+      (isMobileClient(req) && !req.query.source && req.query.bankOnly !== "0");
     const questions = certificateQuestions(
       requireCertificate(req),
       state.userId,
     ).filter(
       (q) =>
+        (!bankOnly || isBankQuestion(q)) &&
         (!req.query.chapter || q.chapter === req.query.chapter) &&
         (!req.query.knowledgeSection ||
           q.knowledgeSection === req.query.knowledgeSection) &&
@@ -1608,7 +1614,8 @@ export async function createApp(options = {}) {
   route("get", "/api/practice/catalog", (req) => {
     const certificateId = requireCertificate(req);
     const state = questionState(req);
-    const questions = certificateQuestions(certificateId, state.userId);
+    const visibleQuestions = certificateQuestions(certificateId, state.userId);
+    const questions = visibleQuestions.filter(isBankQuestion);
     const configuredModules =
       certificates.find((certificate) => certificate.id === certificateId)
         ?.taxonomy?.modules || [];
@@ -1671,7 +1678,7 @@ export async function createApp(options = {}) {
       attemptedCount: questions.filter((question) =>
         state.attemptedIds.has(question.id),
       ).length,
-      favoriteCount: questions.filter((question) =>
+      favoriteCount: visibleQuestions.filter((question) =>
         state.favoriteIds.has(question.id),
       ).length,
       chapters: [...chapters.values()]
@@ -1962,6 +1969,7 @@ export async function createApp(options = {}) {
         userId,
         true,
       ),
+      bankQuestions = currentQuestions.filter(isBankQuestion),
       currentIds = new Set(currentQuestions.map((question) => question.id)),
       attempts = store
         .allA(userId)
@@ -1975,7 +1983,7 @@ export async function createApp(options = {}) {
     const mastery = store.mastery(currentIds, userId),
       syllabus = syllabusForCertificate(certificateId),
       syllabusProgress = buildSyllabusProgress(
-        currentQuestions,
+        bankQuestions,
         attempts,
         syllabus,
       );
@@ -2002,7 +2010,7 @@ export async function createApp(options = {}) {
       : configuredModules.length
         ? [
             ...configuredModules.map((module) => {
-              const moduleQuestions = currentQuestions.filter(
+              const moduleQuestions = bankQuestions.filter(
                 (question) => question.chapter === module.name,
               );
               const sectionNames = [
@@ -2055,19 +2063,19 @@ export async function createApp(options = {}) {
               };
             }),
             ...[...new Set(
-              currentQuestions
+              bankQuestions
                 .map((question) => question.chapter)
                 .filter((name) => !configuredModules.some((module) => module.name === name)),
             )].map((name) => ({
               name,
               ...categoryMetrics(
-                currentQuestions.filter((question) => question.chapter === name),
+                bankQuestions.filter((question) => question.chapter === name),
               ),
               sections: [],
             })),
           ]
-        : [...new Set(currentQuestions.map((q) => q.chapter))].map((name) => {
-            const chapterQuestions = currentQuestions.filter(
+        : [...new Set(bankQuestions.map((q) => q.chapter))].map((name) => {
+            const chapterQuestions = bankQuestions.filter(
               (question) => question.chapter === name,
             );
             return { name, ...categoryMetrics(chapterQuestions) };

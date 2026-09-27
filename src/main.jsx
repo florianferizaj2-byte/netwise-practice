@@ -988,11 +988,11 @@ function AuthScreen({ onAuth, initialError = "" }) {
           </button>
           <a
             className="auth-app-download"
-            href={appleMobile ? "/app/" : "/downloads/kaojiang-v0.3.5.apk"}
-            download={appleMobile ? undefined : "kaojiang-v0.3.5.apk"}
+            href={appleMobile ? "/app/" : "/downloads/kaojiang-v0.3.6.apk"}
+            download={appleMobile ? undefined : "kaojiang-v0.3.6.apk"}
           >
             <Download size={16} />
-            {appleMobile ? "打开考匠 · iPhone / iPad" : "下载考匠 App · Android v0.3.5"}
+            {appleMobile ? "打开考匠 · iPhone / iPad" : "下载考匠 App · Android v0.3.6"}
           </a>
           {!appleMobile && <a className="auth-app-download" href="/app/">iPhone / iPad 使用入口</a>}
           <p className="auth-privacy-note">
@@ -1024,44 +1024,44 @@ function AnnouncementModal({ onClose }) {
             </span>
             <div>
               <span className="announcement-kicker">考匠 · 更新公告</span>
-              <h2 id="announcement-title">移动端 v0.3.5 更新</h2>
-              <p>练习入口更清晰，知识点与会员权益一目了然。</p>
+              <h2 id="announcement-title">移动端 v0.3.6 更新</h2>
+              <p>修复知识点目录与题数差异，两端练习范围保持一致。</p>
             </div>
           </div>
           <IconButton icon={X} label="关闭网站公告" onClick={onClose} />
         </header>
         <div className="announcement-body">
           <div className="announcement-highlight">
-                <strong>考匠 App v0.3.5 已发布</strong>
+                <strong>考匠 App v0.3.6 已发布</strong>
                 <span>
-                  练习页重新排版，顺序、随机、AI 出题和收藏、已生成题组都有独立入口；网页同步上线 VIP 中心。
+                  修复 App 普通题库混入 AI 题导致的旧分类和题数偏差，网页与移动端同步更新。
                 </span>
           </div>
           <ul className="announcement-list">
             <li>
               <span>01</span>
               <div>
-                <strong>五个练习入口，随时切换</strong>
-                <p>顺序练习、随机刷题、AI 生成集中展示，收藏和已生成题组直接进入；修复 AI 模式下打开收藏的流程。</p>
+                <strong>知识点目录与题数一致</strong>
+                <p>普通题库按正式题目统计章节、知识点和已刷进度，修复网络工程师出现旧分类及题量偏多的问题。</p>
               </div>
             </li>
             <li>
               <span>02</span>
               <div>
-                <strong>展开目录，找到要练的知识点</strong>
-                <p>大知识点与子知识点支持展开、搜索和收起；各级显示已刷进度，可直接开始整章或指定知识点练习。</p>
+                <strong>练习范围与目录对应</strong>
+                <p>顺序、随机和每日练习采用相同的普通题库范围；Android 与 iPhone / iPad 移动网页同步修复。</p>
               </div>
             </li>
             <li>
               <span>03</span>
               <div>
-                <strong>网页也有 VIP 中心</strong>
-                <p>Free、VIP、SVIP、SSVIP 套餐及额度清晰展示，支持签到、会员兑换和查询兑换记录，与 App 共用账号权益。</p>
+                <strong>生成的 AI 题继续保留</strong>
+                <p>已生成题组仍可练习、上传和收藏。网页“其他用户生成的 AI 题目”只统计他人的共享题，自己的上传数量可在“共享 AI 题库 → 我的贡献”查看。</p>
               </div>
             </li>
           </ul>
           <p className="announcement-footnote">
-            Android v0.3.5 沿用现有正式签名，正式签名的 v0.3.3、v0.3.4 用户可覆盖更新。旧测试签名版仍需卸载后安装。
+            Android v0.3.6 沿用现有正式签名，正式签名的 v0.3.3 至 v0.3.5 用户可覆盖更新。旧测试签名版仍需卸载后安装。
           </p>
         </div>
         <footer className="announcement-footer">
@@ -1547,8 +1547,8 @@ function App() {
                 <a
                   className="account-menu-link"
                   role="menuitem"
-                  href={appleMobile ? "/app/" : "/downloads/kaojiang-v0.3.5.apk"}
-                  download={appleMobile ? undefined : "kaojiang-v0.3.5.apk"}
+                  href={appleMobile ? "/app/" : "/downloads/kaojiang-v0.3.6.apk"}
+                  download={appleMobile ? undefined : "kaojiang-v0.3.6.apk"}
                   onClick={() => setAccountMenuOpen(false)}
                 >
                   <Download size={17} />

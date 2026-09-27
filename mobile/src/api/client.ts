@@ -678,7 +678,7 @@ export const mobileApi = {
       knowledgePoint?: string;
     },
   ) {
-    const params = new URLSearchParams();
+    const params = new URLSearchParams({ bankOnly: '1' });
     if (limit != null) params.set('limit', String(limit));
     if (offset) params.set('offset', String(offset));
     if (random) params.set('random', '1');
@@ -702,6 +702,7 @@ export const mobileApi = {
       page: '1',
       limit: '40',
       offset: String(offset),
+      bankOnly: '1',
     });
     for (const [key, value] of Object.entries(filters ?? {}))
       if (value) params.set(key, value);
