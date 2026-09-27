@@ -158,7 +158,7 @@ export function AdminMembershipCodes({ api, notify }) {
             <h2>
               <Ticket size={20} /> 生成会员兑换码
             </h2>
-            <p>绑定会员等级与时长，用户在 App「我的 → 兑换码」开通或续期。</p>
+            <p>绑定会员等级与时长，用户可在网页「VIP 中心」或 App「我的 → 兑换码」开通、续期。</p>
           </div>
           <span className="badge green">一次兑换 · 即刻生效</span>
         </div>

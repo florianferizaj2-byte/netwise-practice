@@ -3,6 +3,12 @@ import { createRoot } from "react-dom/client";
 import { PracticeModes } from "./practice-modes.jsx";
 import { AdminMembershipCodes, MembershipBadge } from "./admin-memberships.jsx";
 import {
+  VipView,
+  useMembershipAccount,
+  MembershipSettingsEntry,
+  ApiAccessNotice,
+} from "./vip-view.jsx";
+import {
   LayoutDashboard,
   BookOpen,
   NotebookPen,
@@ -64,6 +70,8 @@ import {
   List,
   Search,
   Pencil,
+  Crown,
+  Ticket,
 } from "lucide-react";
 import "./style.css";
 import "./exam-scope.css";
@@ -318,11 +326,17 @@ const navs = [
   ["chapters", "章节练习", BookOpen],
   ["wrong", "错题本", NotebookPen],
   ["training", "AI 专项训练", Sparkles],
+  ["vip", "VIP 中心", Crown],
   ["community", "共享题库", Globe2],
   ["chat", "社区交流", MessageCircle],
   ["mastery", "知识掌握度", ChartNoAxesCombined],
   ["exam", "模拟考试", GraduationCap],
   ["admin", "管理员面板", ShieldCheck],
+];
+const navGroups = [
+  { label: "学习", pages: ["home", "chapters", "wrong", "training", "exam", "mastery"] },
+  { label: "发现与服务", pages: ["vip", "community", "chat", "guide"] },
+  { label: "管理", pages: ["admin"] },
 ];
 function IconButton({ icon: Icon, label, ...props }) {
   return (
@@ -1164,6 +1178,7 @@ function App() {
     [sponsorOpen, setSponsorOpen] = useState(false),
     [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const accountMenuRef = useRef(null);
+  const membership = useMembershipAccount(api, auth?.authenticated ? auth.user?.id : null, page);
   const refresh = async () => {
     const [d, w, q] = await Promise.all([
       api("/dashboard"),
@@ -1341,7 +1356,7 @@ function App() {
           if (event.message) setBusy(event.message);
         },
       );
-      setNotice(r.cached ? "已载入缓存训练题" : "针对训练已生成");
+      setNotice("针对训练已准备好");
       await refresh();
       start(r.questions, "AI 针对训练");
       return r;
@@ -1487,22 +1502,23 @@ function App() {
         <div className="workspace-label">
           {dashboard.certificate?.shortName} · 学习工作台
         </div>
-        <nav>
-          {navs
-            .filter(([id]) => id !== "admin" || dashboard.user?.isAdmin)
-            .map(([id, label, Icon]) => (
-            <button
-              key={id}
-              className={page === id ? "active" : ""}
-              onClick={() => go(id)}
-            >
-              <Icon size={19} />
-              <span>{label}</span>
-              {id === "wrong" && dashboard.wrongCount > 0 && (
-                <small>{dashboard.wrongCount}</small>
-              )}
-            </button>
-            ))}
+        <nav aria-label="主导航">
+          {navGroups.map((group) => {
+            const entries = group.pages.map((id) => navs.find((entry) => entry[0] === id))
+              .filter(([id]) => id !== "admin" || dashboard.user?.isAdmin);
+            if (!entries.length) return null;
+            return <div className="nav-section" key={group.label}>
+              <span className="nav-section-label">{group.label}</span>
+              {entries.map(([id, label, Icon]) => {
+                const selected = page === id || (id === "vip" && page === "redeem");
+                return <button key={id} className={`${selected ? "active" : ""} ${id === "vip" ? "nav-vip" : ""}`} aria-current={selected ? "page" : undefined} onClick={() => go(id)}>
+                  <Icon size={19} /><span>{label}</span>
+                  {id === "wrong" && dashboard.wrongCount > 0 && <small>{dashboard.wrongCount}</small>}
+                  {id === "vip" && membership.account?.plan && membership.account.plan !== "free" && <MembershipBadge plan={membership.account.plan} />}
+                </button>;
+              })}
+            </div>;
+          })}
         </nav>
         <div className="sidebar-bottom">
           <div className="account-menu-wrap" ref={accountMenuRef}>
@@ -1520,6 +1536,12 @@ function App() {
             </button>
             {accountMenuOpen && (
               <div className="account-menu" role="menu">
+                <button role="menuitem" onClick={() => { setAccountMenuOpen(false); go("vip"); }}>
+                  <Crown size={17} />我的会员
+                </button>
+                <button role="menuitem" onClick={() => { setAccountMenuOpen(false); go("redeem"); }}>
+                  <Ticket size={17} />兑换码
+                </button>
                 <a
                   className="account-menu-link"
                   role="menuitem"
@@ -1583,20 +1605,28 @@ function App() {
                   settings: "设置",
                   about: "关于考匠",
                   practice: session?.title || "练习中",
+                  redeem: "会员兑换",
                 }[
                   page
                 ] ||
                 "学习总览"}
             </strong>
           </div>
-          <span className="date">
+          <div className="topbar-actions">
+            <button type="button" className="membership-topbar-entry" onClick={() => go("vip")} aria-label={`打开 VIP 中心${membership.account ? `，当前套餐 ${membership.account.plan === "free" ? "Free" : membership.account.plan.toUpperCase()}` : ""}`}>
+              <Crown size={15} />
+              {membership.account && <MembershipBadge plan={membership.account.plan} />}
+              <span>会员中心</span><ChevronRight size={13} />
+            </button>
+            <span className="date">
             <CalendarDays size={15} />
             {new Date().toLocaleDateString("zh-CN", {
               month: "long",
               day: "numeric",
               weekday: "long",
             })}
-          </span>
+            </span>
+          </div>
         </header>
         <main>
           {error && (
@@ -2198,8 +2228,14 @@ function App() {
               </div>
             </>
           )}
+          {(page === "vip" || page === "redeem") && (
+            <VipView key={auth.user.id} api={api} user={auth.user} membership={membership} navigate={go} focusRedemption={page === "redeem"} />
+          )}
           {page === "settings" && (
             <SettingsView
+              key={auth.user.id}
+              membership={membership}
+              onOpenVip={() => go("vip")}
               run={run}
               busy={busy}
               notify={setNotice}
@@ -3655,6 +3691,8 @@ function AboutView({ onSponsor }) {
   );
 }
 function SettingsView({
+  membership,
+  onOpenVip,
   run,
   busy,
   notify,
@@ -3674,10 +3712,11 @@ function SettingsView({
     [authorDeployOpen, setAuthorDeployOpen] = useState(false),
     [authorPassword, setAuthorPassword] = useState(""),
     [authorDeployError, setAuthorDeployError] = useState(""),
-    [authorDeployBusy, setAuthorDeployBusy] = useState(false);
+    [authorDeployBusy, setAuthorDeployBusy] = useState(false),
+    [settingsLoading, setSettingsLoading] = useState(false),
+    [settingsError, setSettingsError] = useState("");
   const load = () => api("/settings").then(setS);
   useEffect(() => {
-    load();
     api("/community/profile")
       .then(({ profile }) => {
         setCommunityProfile(profile);
@@ -3686,6 +3725,35 @@ function SettingsView({
       .catch(() => {});
   }, []);
   useEffect(() => {
+    if (!membership.account?.apiConfigUnlocked) {
+      setS(null);
+      setKey("");
+      setShow(false);
+      setDirty(false);
+      setDeepSeekGuideOpen(false);
+      setAuthorDeployOpen(false);
+      setAuthorPassword("");
+      setSettingsLoading(false);
+      return;
+    }
+    let live = true;
+    setSettingsLoading(true);
+    setSettingsError("");
+    api("/settings")
+      .then((data) => {
+        if (live) setS(data);
+      })
+      .catch((cause) => {
+        if (live) setSettingsError(cause.message);
+      })
+      .finally(() => {
+        if (live) setSettingsLoading(false);
+      });
+    return () => {
+      live = false;
+    };
+  }, [membership.account?.apiConfigUnlocked]);
+  useEffect(() => {
     if (!deepSeekGuideOpen) return;
     const closeOnEscape = (event) => {
       if (event.key === "Escape") setDeepSeekGuideOpen(false);
@@ -3693,7 +3761,6 @@ function SettingsView({
     window.addEventListener("keydown", closeOnEscape);
     return () => window.removeEventListener("keydown", closeOnEscape);
   }, [deepSeekGuideOpen]);
-  if (!s) return <LoaderCircle className="spin" />;
   const change = (field, value) => {
     setS({ ...s, [field]: value });
     setDirty(true);
@@ -3772,6 +3839,7 @@ function SettingsView({
   return (
     <>
       <Heading title="设置" subtitle="报考证书、AI 服务与调用用量" />
+      <MembershipSettingsEntry membership={membership} onOpenVip={onOpenVip} />
       <section className="certificate-settings">
         <div className="section-heading">
           <div>
@@ -3822,7 +3890,10 @@ function SettingsView({
       <section className="community-profile-settings">
         <div className="section-heading">
           <div>
-            <h2><MessageCircle size={21} />社区昵称</h2>
+            <h2>
+              <MessageCircle size={21} />
+              社区昵称
+            </h2>
             <p>这个名字只会显示在考匠社区公共大群里，不影响登录账号。</p>
           </div>
           <span className="badge">同步到 App</span>
@@ -3840,375 +3911,415 @@ function SettingsView({
           </label>
           <button
             className="primary"
-            disabled={!communityProfile || !!busy || !communityName.trim() || communityName.trim() === communityProfile.name}
+            disabled={
+              !communityProfile ||
+              !!busy ||
+              !communityName.trim() ||
+              communityName.trim() === communityProfile.name
+            }
             onClick={saveCommunityName}
           >
-            <Save size={16} />保存昵称
+            <Save size={16} />
+            保存昵称
           </button>
         </div>
       </section>
-      <div className="settings-tabs">
-        <span>AI 设置</span>
-      </div>
-      <section className="settings-layout">
-        <div className="settings-form">
-          <div className="settings-form-heading">
-            <h2>
-              <PlugZap size={21} />
-              AI 服务连接
-            </h2>
-            <button
-              className="deepseek-guide-trigger"
-              onClick={() => setDeepSeekGuideOpen(true)}
-            >
-              <BookOpen size={16} />
-              DeepSeek 配置教程
-            </button>
+      {!membership.account?.apiConfigUnlocked && (
+        <ApiAccessNotice membership={membership} onOpenVip={onOpenVip} />
+      )}
+      {membership.account?.apiConfigUnlocked && settingsLoading && (
+        <div className="vip-config-loading" role="status">
+          <LoaderCircle className="spin" size={18} />
+          正在读取个人 API 设置…
+        </div>
+      )}
+      {membership.account?.apiConfigUnlocked && settingsError && (
+        <div className="vip-config-error" role="alert">
+          <span>{settingsError}</span>
+          <button
+            disabled={!!busy}
+            onClick={() =>
+              run("正在读取个人 API 设置", async () => {
+                await load();
+                setSettingsError("");
+              })
+            }
+          >
+            重新读取
+          </button>
+        </div>
+      )}
+      {membership.account?.apiConfigUnlocked && s && (
+        <>
+          <div className="settings-tabs">
+            <span>AI 设置</span>
           </div>
-          {!s.encryptionReady && (
-            <div className="alert error">
-              服务器尚未配置加密主密钥，无法保存 API Key。
+          <section className="settings-layout">
+            <div className="settings-form">
+              <div className="settings-form-heading">
+                <h2>
+                  <PlugZap size={21} />
+                  AI 服务连接
+                </h2>
+                <button
+                  className="deepseek-guide-trigger"
+                  onClick={() => setDeepSeekGuideOpen(true)}
+                >
+                  <BookOpen size={16} />
+                  DeepSeek 配置教程
+                </button>
+              </div>
+              {!s.encryptionReady && (
+                <div className="alert error">
+                  服务器尚未配置加密主密钥，无法保存 API Key。
+                </div>
+              )}
+              <label>
+                API Base URL
+                <input
+                  type="url"
+                  placeholder="https://api.example.com/v1"
+                  value={s.baseUrl}
+                  onChange={(e) => change("baseUrl", e.target.value)}
+                />
+              </label>
+              <label>
+                API Key
+                <div className="key-input">
+                  <input
+                    aria-label="API Key"
+                    type={show ? "text" : "password"}
+                    value={key}
+                    placeholder={
+                      s.hasKey ? "已保存 · 输入新 Key 可修改" : "输入 API Key"
+                    }
+                    autoComplete="off"
+                    spellCheck="false"
+                    onChange={(e) => {
+                      setKey(e.target.value);
+                      setDirty(true);
+                    }}
+                  />
+                  <IconButton
+                    icon={show ? EyeOff : Eye}
+                    label={show ? "隐藏 API Key" : "显示 API Key"}
+                    disabled={!key}
+                    onClick={() => setShow(!show)}
+                  />
+                  <IconButton
+                    icon={Trash2}
+                    label="删除已保存 API Key"
+                    disabled={!s.hasKey || !!busy}
+                    onClick={() =>
+                      run("正在删除 API Key", async () => {
+                        await api("/settings/key", null, "DELETE");
+                        setKey("");
+                        await load();
+                        await refresh();
+                        notify("API Key 已删除");
+                      })
+                    }
+                  />
+                </div>
+                <small className="field-state">
+                  {s.hasKey ? "已加密保存 · 原值不回传浏览器" : "尚未保存"}
+                </small>
+              </label>
+              <label>
+                模型名称
+                <input
+                  placeholder="输入服务商提供的模型名称"
+                  value={s.model}
+                  onChange={(e) => change("model", e.target.value)}
+                />
+              </label>
+              <div className="form-row">
+                <label>
+                  Temperature
+                  <input
+                    type="number"
+                    min="0"
+                    max="2"
+                    step="0.1"
+                    value={s.temperature}
+                    onChange={(e) => change("temperature", e.target.value)}
+                  />
+                </label>
+              </div>
+              <div className="item-actions">
+                <button
+                  className="primary"
+                  disabled={!!busy || !s.encryptionReady}
+                  onClick={save}
+                >
+                  <Save size={16} />
+                  保存配置
+                </button>
+                <button
+                  disabled={!!busy || !s.hasKey || dirty}
+                  onClick={() =>
+                    run("正在测试连接", async () => {
+                      const r = await api("/ai/test", {});
+                      notify(r.message);
+                      await load();
+                    })
+                  }
+                >
+                  <PlugZap size={16} />
+                  测试连接
+                </button>
+                {dirty && <small className="muted">有未保存的修改</small>}
+              </div>
+            </div>
+            <aside className="usage-section">
+              <h2>调用用量</h2>
+              <div className="usage-period">今日</div>
+              <div className="usage-values">
+                <div>
+                  <strong>{s.usage.today.calls}</strong>
+                  <span>调用次数</span>
+                </div>
+                <div>
+                  <strong>{s.usage.today.total_tokens.toLocaleString()}</strong>
+                  <span>Token</span>
+                </div>
+              </div>
+              <div className="usage-period">累计</div>
+              <div className="usage-values">
+                <div>
+                  <strong>{s.usage.total.calls}</strong>
+                  <span>调用次数</span>
+                </div>
+                <div>
+                  <strong>{s.usage.total.total_tokens.toLocaleString()}</strong>
+                  <span>Token</span>
+                </div>
+              </div>
+              <dl>
+                <dt>输入 Token</dt>
+                <dd>{s.usage.total.prompt_tokens.toLocaleString()}</dd>
+                <dt>输出 Token</dt>
+                <dd>{s.usage.total.completion_tokens.toLocaleString()}</dd>
+                <dt>未返回用量的调用</dt>
+                <dd>{s.usage.total.unknownUsage}</dd>
+              </dl>
+              <button
+                className="text-button"
+                onClick={() => run("正在刷新用量", load)}
+              >
+                <RefreshCw size={15} />
+                刷新统计
+              </button>
+            </aside>
+          </section>
+          {deepSeekGuideOpen && (
+            <div
+              className="guide-backdrop"
+              onMouseDown={(event) => {
+                if (event.target === event.currentTarget)
+                  setDeepSeekGuideOpen(false);
+              }}
+            >
+              <section
+                className="deepseek-guide"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="deepseek-guide-title"
+              >
+                <header>
+                  <div>
+                    <span className="guide-kicker">从零开始</span>
+                    <h2 id="deepseek-guide-title">配置 DeepSeek API</h2>
+                    <p>
+                      按下面五步操作。完成后，网站里的 AI
+                      解析和专项训练就能使用。
+                    </p>
+                  </div>
+                  <IconButton
+                    icon={X}
+                    label="关闭 DeepSeek 配置教程"
+                    onClick={() => setDeepSeekGuideOpen(false)}
+                  />
+                </header>
+
+                <ol className="guide-steps">
+                  <li>
+                    <span>1</span>
+                    <div>
+                      <strong>注册并登录 DeepSeek 开放平台</strong>
+                      <p>这里是开发者控制台，和普通聊天页面不是同一个入口。</p>
+                      <a
+                        href="https://platform.deepseek.com/"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        打开 DeepSeek 开放平台
+                        <ExternalLink size={14} />
+                      </a>
+                    </div>
+                  </li>
+                  <li>
+                    <span>2</span>
+                    <div>
+                      <strong>给 API 账户充值</strong>
+                      <p>
+                        API
+                        按实际调用量计费。聊天产品的会员或余额通常不能直接抵扣
+                        API 费用。
+                      </p>
+                      <a
+                        href="https://platform.deepseek.com/top_up"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        打开官方充值页面
+                        <ExternalLink size={14} />
+                      </a>
+                    </div>
+                  </li>
+                  <li>
+                    <span>3</span>
+                    <div>
+                      <strong>创建 API Key</strong>
+                      <p>
+                        点击“创建 API Key”，复制生成的密钥。密钥通常以 sk-
+                        开头，关闭页面后可能无法再次完整查看。
+                      </p>
+                      <a
+                        href="https://platform.deepseek.com/api_keys"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        打开官方 API Keys 页面
+                        <ExternalLink size={14} />
+                      </a>
+                    </div>
+                  </li>
+                  <li>
+                    <span>4</span>
+                    <div>
+                      <strong>填写本站设置</strong>
+                      <dl className="guide-values">
+                        <dt>API Base URL</dt>
+                        <dd>https://api.deepseek.com</dd>
+                        <dt>API Key</dt>
+                        <dd>粘贴刚才复制的 sk- 密钥</dd>
+                        <dt>模型名称</dt>
+                        <dd>deepseek-chat</dd>
+                        <dt>Temperature</dt>
+                        <dd>0.3</dd>
+                        <dt>输出长度</dt>
+                        <dd>由模型服务商自动决定</dd>
+                      </dl>
+                    </div>
+                  </li>
+                  <li>
+                    <span>5</span>
+                    <div>
+                      <strong>保存并测试</strong>
+                      <p>
+                        先点“保存配置”，再点“测试连接”。看到连接成功就配置完成了。
+                      </p>
+                    </div>
+                  </li>
+                </ol>
+
+                <div className="guide-help">
+                  <strong>测试失败时先检查</strong>
+                  <p>
+                    Key 是否完整、API 账户是否有余额、模型名是否为
+                    deepseek-chat。不要把 API Key 发给别人或放进截图。
+                  </p>
+                  <a
+                    href="https://api-docs.deepseek.com/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    查看 DeepSeek 官方 API 文档
+                    <ExternalLink size={14} />
+                  </a>
+                </div>
+
+                {authorDeployOpen && (
+                  <form
+                    className="author-api-deploy"
+                    onSubmit={(event) => {
+                      event.preventDefault();
+                      deployAuthorApi();
+                    }}
+                  >
+                    <div className="author-api-deploy-copy">
+                      <strong>使用作者 API</strong>
+                      <p>输入部署密码后，将 DeepSeek 配置保存到当前账号。</p>
+                    </div>
+                    <div className="author-api-deploy-row">
+                      <label>
+                        部署密码
+                        <input
+                          type="password"
+                          value={authorPassword}
+                          onChange={(event) => {
+                            setAuthorPassword(event.target.value);
+                            setAuthorDeployError("");
+                          }}
+                          autoComplete="current-password"
+                          placeholder="输入部署密码"
+                          autoFocus
+                          required
+                        />
+                      </label>
+                      <button
+                        className="primary"
+                        type="submit"
+                        disabled={
+                          authorDeployBusy || !!busy || !authorPassword.trim()
+                        }
+                      >
+                        {authorDeployBusy ? (
+                          <>
+                            <LoaderCircle className="spin" size={16} />{" "}
+                            部署中...
+                          </>
+                        ) : (
+                          <>
+                            <PlugZap size={16} /> 一键部署
+                          </>
+                        )}
+                      </button>
+                    </div>
+                    {authorDeployError && (
+                      <p className="author-api-deploy-error" role="alert">
+                        {authorDeployError}
+                      </p>
+                    )}
+                  </form>
+                )}
+
+                <footer>
+                  <button
+                    className="author-api-trigger"
+                    type="button"
+                    onClick={() => {
+                      setAuthorDeployOpen((open) => !open);
+                      setAuthorDeployError("");
+                    }}
+                    disabled={!!busy || authorDeployBusy}
+                  >
+                    <LockKeyhole size={15} />
+                    {authorDeployOpen ? "收起作者 API" : "使用作者 API"}
+                  </button>
+                  <button onClick={() => setDeepSeekGuideOpen(false)}>
+                    稍后配置
+                  </button>
+                  <button className="primary" onClick={useDeepSeekDefaults}>
+                    <PlugZap size={16} />
+                    一键填入推荐配置
+                  </button>
+                </footer>
+              </section>
             </div>
           )}
-          <label>
-            API Base URL
-            <input
-              type="url"
-              placeholder="https://api.example.com/v1"
-              value={s.baseUrl}
-              onChange={(e) => change("baseUrl", e.target.value)}
-            />
-          </label>
-          <label>
-            API Key
-            <div className="key-input">
-              <input
-                aria-label="API Key"
-                type={show ? "text" : "password"}
-                value={key}
-                placeholder={
-                  s.hasKey ? "已保存 · 输入新 Key 可修改" : "输入 API Key"
-                }
-                autoComplete="off"
-                spellCheck="false"
-                onChange={(e) => {
-                  setKey(e.target.value);
-                  setDirty(true);
-                }}
-              />
-              <IconButton
-                icon={show ? EyeOff : Eye}
-                label={show ? "隐藏 API Key" : "显示 API Key"}
-                disabled={!key}
-                onClick={() => setShow(!show)}
-              />
-              <IconButton
-                icon={Trash2}
-                label="删除已保存 API Key"
-                disabled={!s.hasKey || !!busy}
-                onClick={() =>
-                  run("正在删除 API Key", async () => {
-                    await api("/settings/key", null, "DELETE");
-                    setKey("");
-                    await load();
-                    await refresh();
-                    notify("API Key 已删除");
-                  })
-                }
-              />
-            </div>
-            <small className="field-state">
-              {s.hasKey ? "已加密保存 · 原值不回传浏览器" : "尚未保存"}
-            </small>
-          </label>
-          <label>
-            模型名称
-            <input
-              placeholder="输入服务商提供的模型名称"
-              value={s.model}
-              onChange={(e) => change("model", e.target.value)}
-            />
-          </label>
-          <div className="form-row">
-            <label>
-              Temperature
-              <input
-                type="number"
-                min="0"
-                max="2"
-                step="0.1"
-                value={s.temperature}
-                onChange={(e) => change("temperature", e.target.value)}
-              />
-            </label>
-          </div>
-          <div className="item-actions">
-            <button
-              className="primary"
-              disabled={!!busy || !s.encryptionReady}
-              onClick={save}
-            >
-              <Save size={16} />
-              保存配置
-            </button>
-            <button
-              disabled={!!busy || !s.hasKey || dirty}
-              onClick={() =>
-                run("正在测试连接", async () => {
-                  const r = await api("/ai/test", {});
-                  notify(r.message);
-                  await load();
-                })
-              }
-            >
-              <PlugZap size={16} />
-              测试连接
-            </button>
-            {dirty && <small className="muted">有未保存的修改</small>}
-          </div>
-        </div>
-        <aside className="usage-section">
-          <h2>调用用量</h2>
-          <div className="usage-period">今日</div>
-          <div className="usage-values">
-            <div>
-              <strong>{s.usage.today.calls}</strong>
-              <span>调用次数</span>
-            </div>
-            <div>
-              <strong>{s.usage.today.total_tokens.toLocaleString()}</strong>
-              <span>Token</span>
-            </div>
-          </div>
-          <div className="usage-period">累计</div>
-          <div className="usage-values">
-            <div>
-              <strong>{s.usage.total.calls}</strong>
-              <span>调用次数</span>
-            </div>
-            <div>
-              <strong>{s.usage.total.total_tokens.toLocaleString()}</strong>
-              <span>Token</span>
-            </div>
-          </div>
-          <dl>
-            <dt>输入 Token</dt>
-            <dd>{s.usage.total.prompt_tokens.toLocaleString()}</dd>
-            <dt>输出 Token</dt>
-            <dd>{s.usage.total.completion_tokens.toLocaleString()}</dd>
-            <dt>未返回用量的调用</dt>
-            <dd>{s.usage.total.unknownUsage}</dd>
-          </dl>
-          <button
-            className="text-button"
-            onClick={() => run("正在刷新用量", load)}
-          >
-            <RefreshCw size={15} />
-            刷新统计
-          </button>
-        </aside>
-      </section>
-      {deepSeekGuideOpen && (
-        <div
-          className="guide-backdrop"
-          onMouseDown={(event) => {
-            if (event.target === event.currentTarget)
-              setDeepSeekGuideOpen(false);
-          }}
-        >
-          <section
-            className="deepseek-guide"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="deepseek-guide-title"
-          >
-            <header>
-              <div>
-                <span className="guide-kicker">从零开始</span>
-                <h2 id="deepseek-guide-title">配置 DeepSeek API</h2>
-                <p>
-                  按下面五步操作。完成后，网站里的 AI 解析和专项训练就能使用。
-                </p>
-              </div>
-              <IconButton
-                icon={X}
-                label="关闭 DeepSeek 配置教程"
-                onClick={() => setDeepSeekGuideOpen(false)}
-              />
-            </header>
-
-            <ol className="guide-steps">
-              <li>
-                <span>1</span>
-                <div>
-                  <strong>注册并登录 DeepSeek 开放平台</strong>
-                  <p>这里是开发者控制台，和普通聊天页面不是同一个入口。</p>
-                  <a
-                    href="https://platform.deepseek.com/"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    打开 DeepSeek 开放平台
-                    <ExternalLink size={14} />
-                  </a>
-                </div>
-              </li>
-              <li>
-                <span>2</span>
-                <div>
-                  <strong>给 API 账户充值</strong>
-                  <p>
-                    API 按实际调用量计费。聊天产品的会员或余额通常不能直接抵扣
-                    API 费用。
-                  </p>
-                  <a
-                    href="https://platform.deepseek.com/top_up"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    打开官方充值页面
-                    <ExternalLink size={14} />
-                  </a>
-                </div>
-              </li>
-              <li>
-                <span>3</span>
-                <div>
-                  <strong>创建 API Key</strong>
-                  <p>
-                    点击“创建 API Key”，复制生成的密钥。密钥通常以 sk-
-                    开头，关闭页面后可能无法再次完整查看。
-                  </p>
-                  <a
-                    href="https://platform.deepseek.com/api_keys"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    打开官方 API Keys 页面
-                    <ExternalLink size={14} />
-                  </a>
-                </div>
-              </li>
-              <li>
-                <span>4</span>
-                <div>
-                  <strong>填写本站设置</strong>
-                  <dl className="guide-values">
-                    <dt>API Base URL</dt>
-                    <dd>https://api.deepseek.com</dd>
-                    <dt>API Key</dt>
-                    <dd>粘贴刚才复制的 sk- 密钥</dd>
-                    <dt>模型名称</dt>
-                    <dd>deepseek-chat</dd>
-                    <dt>Temperature</dt>
-                    <dd>0.3</dd>
-                    <dt>输出长度</dt>
-                    <dd>由模型服务商自动决定</dd>
-                  </dl>
-                </div>
-              </li>
-              <li>
-                <span>5</span>
-                <div>
-                  <strong>保存并测试</strong>
-                  <p>
-                    先点“保存配置”，再点“测试连接”。看到连接成功就配置完成了。
-                  </p>
-                </div>
-              </li>
-            </ol>
-
-            <div className="guide-help">
-              <strong>测试失败时先检查</strong>
-              <p>
-                Key 是否完整、API 账户是否有余额、模型名是否为
-                deepseek-chat。不要把 API Key 发给别人或放进截图。
-              </p>
-              <a
-                href="https://api-docs.deepseek.com/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                查看 DeepSeek 官方 API 文档
-                <ExternalLink size={14} />
-              </a>
-            </div>
-
-            {authorDeployOpen && (
-              <form
-                className="author-api-deploy"
-                onSubmit={(event) => {
-                  event.preventDefault();
-                  deployAuthorApi();
-                }}
-              >
-                <div className="author-api-deploy-copy">
-                  <strong>使用作者 API</strong>
-                  <p>输入部署密码后，将 DeepSeek 配置保存到当前账号。</p>
-                </div>
-                <div className="author-api-deploy-row">
-                  <label>
-                    部署密码
-                    <input
-                      type="password"
-                      value={authorPassword}
-                      onChange={(event) => {
-                        setAuthorPassword(event.target.value);
-                        setAuthorDeployError("");
-                      }}
-                      autoComplete="current-password"
-                      placeholder="输入部署密码"
-                      autoFocus
-                      required
-                    />
-                  </label>
-                  <button
-                    className="primary"
-                    type="submit"
-                    disabled={authorDeployBusy || !!busy || !authorPassword.trim()}
-                  >
-                    {authorDeployBusy ? (
-                      <>
-                        <LoaderCircle className="spin" size={16} /> 部署中...
-                      </>
-                    ) : (
-                      <>
-                        <PlugZap size={16} /> 一键部署
-                      </>
-                    )}
-                  </button>
-                </div>
-                {authorDeployError && (
-                  <p className="author-api-deploy-error" role="alert">
-                    {authorDeployError}
-                  </p>
-                )}
-              </form>
-            )}
-
-            <footer>
-              <button
-                className="author-api-trigger"
-                type="button"
-                onClick={() => {
-                  setAuthorDeployOpen((open) => !open);
-                  setAuthorDeployError("");
-                }}
-                disabled={!!busy || authorDeployBusy}
-              >
-                <LockKeyhole size={15} />
-                {authorDeployOpen ? "收起作者 API" : "使用作者 API"}
-              </button>
-              <button onClick={() => setDeepSeekGuideOpen(false)}>
-                稍后配置
-              </button>
-              <button className="primary" onClick={useDeepSeekDefaults}>
-                <PlugZap size={16} />
-                一键填入推荐配置
-              </button>
-            </footer>
-          </section>
-        </div>
+        </>
       )}
     </>
   );
