@@ -30,7 +30,7 @@ import { studySummary } from "./study-summary.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const mobileRelease = () => {
-  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.3.4";
+  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.3.5";
   const minimumVersion =
     process.env.MOBILE_MINIMUM_VERSION || "0.2.8";
   return {
@@ -41,7 +41,7 @@ const mobileRelease = () => {
       `/downloads/kaojiang-v${latestVersion}.apk`,
     releaseNotes:
       process.env.MOBILE_RELEASE_NOTES ||
-      "首页展示题库与知识点进度，错题页突出薄弱知识点；考试支持多选知识点组卷、暂存继续与考后复盘。每日学习独立保留进度，可正常切换普通练习和 AI 出题。",
+      "练习页全新布局：顺序、随机、AI 出题与收藏、已生成题组入口更清晰，知识点支持展开、搜索和查看进度；修复 AI 模式下进入收藏的流程。网页新增 VIP 中心，支持签到、兑换和额度查询。",
   };
 };
 async function exchangeWechatMiniProgramCode(code) {

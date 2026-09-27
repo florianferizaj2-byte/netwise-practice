@@ -987,11 +987,11 @@ function AuthScreen({ onAuth, initialError = "" }) {
           </button>
           <a
             className="auth-app-download"
-            href="/downloads/kaojiang-v0.3.4.apk"
-            download="kaojiang-v0.3.4.apk"
+            href="/downloads/kaojiang-v0.3.5.apk"
+            download="kaojiang-v0.3.5.apk"
           >
             <Download size={16} />
-            下载考匠 App · Android v0.3.4
+            下载考匠 App · Android v0.3.5
           </a>
           <p className="auth-privacy-note">
             <ShieldCheck size={14} /> 你的学习数据与 AI 配置仅属于当前账号
@@ -1022,44 +1022,44 @@ function AnnouncementModal({ onClose }) {
             </span>
             <div>
               <span className="announcement-kicker">考匠 · 更新公告</span>
-              <h2 id="announcement-title">移动端 v0.3.4 更新</h2>
-              <p>看清学习进度，围绕薄弱知识点练习与考试。</p>
+              <h2 id="announcement-title">移动端 v0.3.5 更新</h2>
+              <p>练习入口更清晰，知识点与会员权益一目了然。</p>
             </div>
           </div>
           <IconButton icon={X} label="关闭网站公告" onClick={onClose} />
         </header>
         <div className="announcement-body">
           <div className="announcement-highlight">
-                <strong>考匠 App v0.3.4 已发布</strong>
+                <strong>考匠 App v0.3.5 已发布</strong>
                 <span>
-                  首页、错题和考试页面重新设计；每日学习保留当组进度，也能随时切换普通练习和 AI 出题。
+                  练习页重新排版，顺序、随机、AI 出题和收藏、已生成题组都有独立入口；网页同步上线 VIP 中心。
                 </span>
           </div>
           <ul className="announcement-list">
             <li>
               <span>01</span>
               <div>
-                <strong>刷题进度一目了然</strong>
-                <p>首页展示题库覆盖率、已刷题数与知识点进度，一键开始每日 30 题。</p>
+                <strong>五个练习入口，随时切换</strong>
+                <p>顺序练习、随机刷题、AI 生成集中展示，收藏和已生成题组直接进入；修复 AI 模式下打开收藏的流程。</p>
               </div>
             </li>
             <li>
               <span>02</span>
               <div>
-                <strong>从薄弱知识点开始巩固</strong>
-                <p>错题按知识点归集，显示反复出错和待复习情况；点击薄弱点即可筛选并开始练习。</p>
+                <strong>展开目录，找到要练的知识点</strong>
+                <p>大知识点与子知识点支持展开、搜索和收起；各级显示已刷进度，可直接开始整章或指定知识点练习。</p>
               </div>
             </li>
             <li>
               <span>03</span>
               <div>
-                <strong>多选知识点，组合专属试卷</strong>
-                <p>App 与网页均可多选大知识点组卷。App 支持计时、答题卡、暂存继续以及交卷后查看各知识点表现和解析。</p>
+                <strong>网页也有 VIP 中心</strong>
+                <p>Free、VIP、SVIP、SSVIP 套餐及额度清晰展示，支持签到、会员兑换和查询兑换记录，与 App 共用账号权益。</p>
               </div>
             </li>
           </ul>
           <p className="announcement-footnote">
-            Android v0.3.4 沿用现有正式签名，v0.3.3 用户可覆盖更新。旧测试签名版仍需卸载后安装。
+            Android v0.3.5 沿用现有正式签名，正式签名的 v0.3.3、v0.3.4 用户可覆盖更新。旧测试签名版仍需卸载后安装。
           </p>
         </div>
         <footer className="announcement-footer">
@@ -1207,7 +1207,7 @@ function App() {
   useEffect(() => {
     if (!auth?.authenticated || !auth.user?.certificateId || !dashboard) return;
     try {
-      if (localStorage.getItem("netwise-announcement-2026-09-v9") !== "seen")
+      if (localStorage.getItem("netwise-announcement-2026-09-v10") !== "seen")
         setAnnouncementOpen(true);
     } catch {
       setAnnouncementOpen(true);
@@ -1232,7 +1232,7 @@ function App() {
   const dismissAnnouncement = () => {
     setAnnouncementOpen(false);
     try {
-      localStorage.setItem("netwise-announcement-2026-09-v9", "seen");
+      localStorage.setItem("netwise-announcement-2026-09-v10", "seen");
     } catch {
       // Private browsing may disable localStorage; closing still works for this render.
     }
@@ -1545,8 +1545,8 @@ function App() {
                 <a
                   className="account-menu-link"
                   role="menuitem"
-                  href="/downloads/kaojiang-v0.3.4.apk"
-                  download="kaojiang-v0.3.4.apk"
+                  href="/downloads/kaojiang-v0.3.5.apk"
+                  download="kaojiang-v0.3.5.apk"
                   onClick={() => setAccountMenuOpen(false)}
                 >
                   <Download size={17} />
