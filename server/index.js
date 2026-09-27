@@ -28,7 +28,7 @@ import { studySummary } from "./study-summary.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const mobileRelease = () => {
-  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.3.1";
+  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.3.2";
   const minimumVersion =
     process.env.MOBILE_MINIMUM_VERSION || "0.2.8";
   return {
@@ -39,7 +39,7 @@ const mobileRelease = () => {
       `/downloads/kaojiang-v${latestVersion}.apk`,
     releaseNotes:
       process.env.MOBILE_RELEASE_NOTES ||
-      "新增三种交互音效，可在设置中调整音量与样式；社区移入我的，新增 VIP 套餐展示入口，修复 AI 题组贡献榜统计。",
+      "新增 Free、VIP、SVIP、SSVIP 等级与每日签到额度；AI 任务小窗可关闭且不重复提醒，个人 API 配置增加解锁权限控制。",
   };
 };
 async function exchangeWechatMiniProgramCode(code) {
@@ -681,9 +681,12 @@ export async function createApp(options = {}) {
       });
     } catch (error) {
       const message = redact(error instanceof Error ? error.message : "题目生成失败");
+      if (job.creditReserved && job.creditDay)
+        store.refundDailyAiCredit(userId, job.creditDay, "generation");
       store.updateAiQuestionGenerationJob(id, userId, certificateId, {
         status: "failed",
         error: message,
+        creditReserved: false,
         progress: {
           stage: "error",
           message,
@@ -740,6 +743,89 @@ export async function createApp(options = {}) {
     if (authRequired && !req.user?.id) throw new Error("请先登录");
     return req.user?.id || "local";
   };
+  const aiQuestionRevision = (question) =>
+    crypto
+      .createHash("sha256")
+      .update(JSON.stringify({
+        type: question.type,
+        question: question.question,
+        options: question.options,
+        answer: question.answer,
+        analysis: question.analysis,
+        chapter: question.chapter,
+        knowledgePoint: question.targetKnowledgePoint || question.knowledgePoint,
+      }))
+      .digest("hex");
+  const requireApiConfigAccess = (req) => {
+    const userId = requestUserId(req);
+    if (authRequired && userId !== "local" && !store.accountEntitlement(userId).apiConfigUnlocked) {
+      const error = new Error("自带 API 配置需先在 VIP 区域一次性解锁");
+      error.status = 403;
+      error.code = "API_CONFIG_LOCKED";
+      throw error;
+    }
+    return userId;
+  };
+  const aiServiceAvailable = (userId) =>
+    !!store.settings(userId).keyCipher ||
+    !!(process.env.AI_SERVICE_API_KEY || process.env.AUTHOR_API_KEY);
+  const trainingSetIsAvailable = (question, count, harder, userId, certificateId) => {
+    const topic = `${question.targetKnowledgePoint || question.knowledgePoint}:${harder ? "hard" : "adaptive"}`;
+    return store.queue(topic, userId, certificateId).length >= count;
+  };
+  const dailyAiCreditView = (userId, date = day()) => {
+    const credit = store.dailyAiCredits(userId, date);
+    return {
+      day: date,
+      claimed: !!credit.claimedAt,
+      grants: {
+        explanations: credit.explanationsGranted,
+        generations: credit.generationsGranted,
+        analyses: credit.analysesGranted,
+      },
+      remaining: {
+        explanations: credit.explanationsRemaining,
+        generations: credit.generationsRemaining,
+        analyses: credit.analysesRemaining,
+      },
+    };
+  };
+  const accountEntitlementView = (userId) => ({
+    plan: store.accountEntitlement(userId).plan,
+    expiresAt: store.accountEntitlement(userId).expiresAt,
+    apiConfigUnlocked: store.accountEntitlement(userId).apiConfigUnlocked,
+    aiServiceAvailable: aiServiceAvailable(userId),
+    checkIn: dailyAiCreditView(userId),
+  });
+  const withDailyAiCredit = async (userId, kind, run, { skipCharge = false } = {}) => {
+    if (skipCharge) return run();
+    if (!authRequired || userId === "local" || store.accountEntitlement(userId).plan !== "free")
+      return run();
+    const creditDay = day();
+    if (!store.consumeDailyAiCredit(userId, creditDay, kind)) {
+      const error = new Error("今日的 AI 机会已用完，请明天签到后继续");
+      error.status = 429;
+      error.code = "DAILY_AI_CREDIT_EXHAUSTED";
+      throw error;
+    }
+    try {
+      return await run();
+    } catch (error) {
+      store.refundDailyAiCredit(userId, creditDay, kind);
+      throw error;
+    }
+  };
+  route("get", "/api/account/entitlements", (req) =>
+    accountEntitlementView(requestUserId(req)),
+  );
+  route("post", "/api/account/check-in", (req) => {
+    const userId = requestUserId(req);
+    const result = store.claimDailyAiCredits(userId, day());
+    return {
+      claimed: result.claimed,
+      ...accountEntitlementView(userId),
+    };
+  });
   const settingsSchema = z
     .object({
       baseUrl: z.string().max(1000),
@@ -750,7 +836,7 @@ export async function createApp(options = {}) {
     })
     .strict();
   route("get", "/api/settings", (req) => {
-    const userId = requestUserId(req);
+    const userId = requireApiConfigAccess(req);
     const { keyCipher, maxTokens: _ignoredMaxTokens, ...s } =
       store.settings(userId);
     let encryptionReady = true;
@@ -767,7 +853,7 @@ export async function createApp(options = {}) {
     };
   });
   route("put", "/api/settings", (req) => {
-    const userId = requestUserId(req);
+    const userId = requireApiConfigAccess(req);
     const s = settingsSchema.parse(req.body);
     s.baseUrl = validateBaseUrl(s.baseUrl);
     const old = store.settings(userId);
@@ -778,7 +864,7 @@ export async function createApp(options = {}) {
     return { saved: true };
   });
   route("post", "/api/settings/author-deploy", (req) => {
-    const userId = requestUserId(req);
+    const userId = requireApiConfigAccess(req);
     const { password } = z
       .object({ password: z.string().min(1).max(128) })
       .strict()
@@ -817,7 +903,7 @@ export async function createApp(options = {}) {
     };
   });
   route("delete", "/api/settings/key", (req) => {
-    const userId = requestUserId(req);
+    const userId = requireApiConfigAccess(req);
     const s = store.settings(userId);
     delete s.keyCipher;
     store.saveSettings(userId, s);
@@ -825,10 +911,11 @@ export async function createApp(options = {}) {
   });
   route("post", "/api/ai/test", (req) =>
     ai(async () => {
+      const userId = requireApiConfigAccess(req);
       await provider.call(
         [{ role: "user", content: "Reply with OK." }],
         undefined,
-        { userId: requestUserId(req) },
+        { userId },
       );
       return { message: "AI 服务连接成功" };
     }),
@@ -1970,7 +2057,7 @@ export async function createApp(options = {}) {
       ...summary,
       mastery,
       chapters,
-      aiConfigured: !!store.settings(userId).keyCipher,
+      aiConfigured: aiServiceAvailable(userId),
       aiBusy,
       plan: store.getDaily(userId, dailyKey(certificateId, today)),
       user: req.user ? userView(req.user) : null,
@@ -1981,15 +2068,29 @@ export async function createApp(options = {}) {
     };
   });
   route("post", "/api/ai/analyze", (req) =>
-    ai(() =>
-      provider.analyzeWeakness(
-        requireQ(
-          z.object({ questionId: z.string() }).parse(req.body).questionId,
-          req,
-        ),
-        req.user?.id || "local",
-      ),
-    ),
+    ai(() => {
+      const userId = req.user?.id || "local";
+      const question = requireQ(
+        z.object({ questionId: z.string() }).parse(req.body).questionId,
+        req,
+      );
+      const lastWrong = store
+        .allA(userId)
+        .filter((attempt) => attempt.questionId === question.id && !attempt.correct)
+        .at(-1);
+      const variant = `${aiQuestionRevision(question)}:${lastWrong
+        ? [...(lastWrong.selected || [])].sort().join(",") || "none"
+        : "none"}`;
+      const cacheHit = !!lastWrong && !!store.aiQuestionContent(
+        question.id,
+        "mistake-analysis",
+        variant,
+      );
+      return withDailyAiCredit(userId, "analysis", () =>
+        provider.analyzeWeakness(question, userId),
+        { skipCharge: cacheHit },
+      );
+    }),
   );
   route("post", "/api/ai/train", (req) =>
     ai(async () => {
@@ -2006,15 +2107,24 @@ export async function createApp(options = {}) {
         })
         .strict()
         .parse(req.body);
-      const batch = await provider.generatePracticeSet(
-        requireQ(b.questionId, req),
+      const userId = req.user?.id || "local";
+      const question = requireQ(b.questionId, req);
+      const cacheHit = trainingSetIsAvailable(
+        question,
         b.count,
         b.harder,
-        undefined,
-        {
-          userId: req.user?.id || "local",
-          certificateId: req.user?.certificateId,
-        },
+        userId,
+        req.user?.certificateId,
+      );
+      const batch = await withDailyAiCredit(userId, "generation", () =>
+        provider.generatePracticeSet(
+          question,
+          b.count,
+          b.harder,
+          undefined,
+          { userId, certificateId: req.user?.certificateId },
+        ),
+        { skipCharge: cacheHit },
       );
       return { ...batch, questions: batch.questions.map(publicQuestion) };
     }),
@@ -2038,8 +2148,8 @@ export async function createApp(options = {}) {
     const selection = userQuestionDraftSchema.parse(req.body);
     const certificateId = requireCertificate(req);
     const userId = requestUserId(req);
-    if (!store.settings(userId).keyCipher)
-      throw new Error("请先在“我的 - AI 设置”中配置 API Key");
+    if (!aiServiceAvailable(userId))
+      throw new Error("AI 服务暂未配置，请稍后再试");
     if (store.activeAiQuestionGenerationJob(userId, certificateId)) {
       const error = new Error("已有 AI 题目正在后台生成，请完成后再创建下一组");
       error.status = 409;
@@ -2053,8 +2163,25 @@ export async function createApp(options = {}) {
       (question.source !== "ai_generated" || question.ownerUserId === userId),
     );
     if (!seed) throw new Error("该知识点暂无可供参考的题目，请先选择具体知识点");
-    const job = store.createAiQuestionGenerationJob(userId, certificateId, selection);
-    return { job: aiQuestionGenerationJobView(job) };
+    const creditDay = day();
+    const reserved = authRequired && userId !== "local" &&
+      store.accountEntitlement(userId).plan === "free";
+    if (reserved && !store.consumeDailyAiCredit(userId, creditDay, "generation")) {
+      const error = new Error("今日的 AI 出题机会已用完，请明天签到后继续");
+      error.status = 429;
+      error.code = "DAILY_AI_CREDIT_EXHAUSTED";
+      throw error;
+    }
+    try {
+      const job = store.createAiQuestionGenerationJob(userId, certificateId, selection, {
+        day: reserved ? creditDay : null,
+        reserved,
+      });
+      return { job: aiQuestionGenerationJobView(job) };
+    } catch (error) {
+      if (reserved) store.refundDailyAiCredit(userId, creditDay, "generation");
+      throw error;
+    }
   });
   route("get", "/api/ai/questions/generations", (req) => ({
     jobs: store
@@ -2124,6 +2251,15 @@ export async function createApp(options = {}) {
         (question.source !== "ai_generated" || question.ownerUserId === userId),
       );
       if (!seed) throw new Error("该知识点暂无可参考的题目，请先选择具体知识点");
+      const reservedDay = day();
+      const needsCredit = authRequired && userId !== "local" &&
+        store.accountEntitlement(userId).plan === "free";
+      if (needsCredit && !store.consumeDailyAiCredit(userId, reservedDay, "generation")) {
+        const error = new Error("今日的 AI 出题机会已用完，请明天签到后继续");
+        error.status = 429;
+        error.code = "DAILY_AI_CREDIT_EXHAUSTED";
+        throw error;
+      }
       res.status(200).set({
         "Content-Type": "text/event-stream; charset=utf-8",
         "Cache-Control": "no-cache, no-transform",
@@ -2136,6 +2272,7 @@ export async function createApp(options = {}) {
         send({ type: "progress", stage: "heartbeat", message: "AI 正在继续处理…" }),
       12000);
       aiBusy = true;
+      let generatedSuccessfully = false;
       try {
         const [question] = await provider.generateBankExpansion(seed, 1, {
           userId,
@@ -2153,6 +2290,7 @@ export async function createApp(options = {}) {
         if (related.some((old) => questionSimilarity(verified, old) >= 0.9))
           throw new Error("新题与已有题目高度相似，请重新生成");
         const saved = store.saveUserQuestionDraft(userId, certificateId, verified);
+        generatedSuccessfully = true;
         send({
           type: "done",
           result: {
@@ -2163,6 +2301,8 @@ export async function createApp(options = {}) {
       } finally {
         clearInterval(heartbeat);
         aiBusy = false;
+        if (needsCredit && !generatedSuccessfully)
+          store.refundDailyAiCredit(userId, reservedDay, "generation");
       }
       res.end();
     } catch (error) {
@@ -2228,45 +2368,53 @@ export async function createApp(options = {}) {
         })
         .strict()
         .parse(req.body);
+      const userId = req.user?.id || "local";
+      const certificateId = req.user?.certificateId;
       const question = requireQ(b.questionId, req);
-      res.status(200);
-      res.set({
-        "Content-Type": "text/event-stream; charset=utf-8",
-        "Cache-Control": "no-cache, no-transform",
-        Connection: "keep-alive",
-        "X-Accel-Buffering": "no",
-      });
-      res.flushHeaders?.();
-      send({ type: "progress", message: `准备生成 ${b.count} 道针对题` });
-      const heartbeat = setInterval(
-        () =>
-          send({
-            type: "progress",
-            stage: "heartbeat",
-            message: "AI 仍在处理中，请稍候…",
-          }),
-        12000,
+      const cacheHit = trainingSetIsAvailable(
+        question,
+        b.count,
+        b.harder,
+        userId,
+        certificateId,
       );
-      aiBusy = true;
-      try {
-        const batch = await provider.generatePracticeSet(
-          question,
-          b.count,
-          b.harder,
-          (event) => send({ type: "progress", ...event }),
-          {
-            userId: req.user?.id || "local",
-            certificateId: req.user?.certificateId,
-          },
-        );
-        send({
-          type: "done",
-          result: { ...batch, questions: batch.questions.map(publicQuestion) },
+      await withDailyAiCredit(userId, "generation", async () => {
+        res.status(200);
+        res.set({
+          "Content-Type": "text/event-stream; charset=utf-8",
+          "Cache-Control": "no-cache, no-transform",
+          Connection: "keep-alive",
+          "X-Accel-Buffering": "no",
         });
-      } finally {
-        clearInterval(heartbeat);
-        aiBusy = false;
-      }
+        res.flushHeaders?.();
+        send({ type: "progress", message: `准备生成 ${b.count} 道针对题` });
+        const heartbeat = setInterval(
+          () =>
+            send({
+              type: "progress",
+              stage: "heartbeat",
+              message: "AI 仍在处理中，请稍候…",
+            }),
+          12000,
+        );
+        aiBusy = true;
+        try {
+          const batch = await provider.generatePracticeSet(
+            question,
+            b.count,
+            b.harder,
+            (event) => send({ type: "progress", ...event }),
+            { userId, certificateId },
+          );
+          send({
+            type: "done",
+            result: { ...batch, questions: batch.questions.map(publicQuestion) },
+          });
+        } finally {
+          clearInterval(heartbeat);
+          aiBusy = false;
+        }
+      }, { skipCharge: cacheHit });
       res.end();
     } catch (error) {
       if (!res.headersSent) return next(error);
@@ -2296,12 +2444,27 @@ export async function createApp(options = {}) {
         .parse(req.body);
       if (b.action === "给我提示" && !b.hintLevel)
         throw new Error("提示级别必须为1至3");
-      return provider.explainQuestion(
-        requireQ(b.questionId, req),
-        b.action,
-        b.selected,
-        b.action === "给我提示" ? b.hintLevel : 0,
-        req.user?.id || "local",
+      const userId = req.user?.id || "local";
+      const creditKind = b.action === "为什么我错了？" ? "analysis" : "explanation";
+      const question = requireQ(b.questionId, req);
+      const answerVariant = b.action === "为什么我错了？"
+        ? [...b.selected].sort().join(",") || "none"
+        : "standard";
+      const variant = `${aiQuestionRevision(question)}:${answerVariant}`;
+      const cacheHit = b.hintLevel === 0 && !!store.aiQuestionContent(
+        question.id,
+        `explanation:${b.action}`,
+        variant,
+      );
+      return withDailyAiCredit(userId, creditKind, () =>
+        provider.explainQuestion(
+          question,
+          b.action,
+          b.selected,
+          b.action === "给我提示" ? b.hintLevel : 0,
+          userId,
+        ),
+        { skipCharge: cacheHit },
       );
     }),
   );
@@ -2309,7 +2472,7 @@ export async function createApp(options = {}) {
     const key = dailyKey(certificateId);
     if (!force && store.getDaily(userId, key))
       return store.getDaily(userId, key);
-    return ai(async () => {
+    return ai(() => withDailyAiCredit(userId, "analysis", async () => {
       const questionIds = certificateQuestions(certificateId, userId).map(
         (question) => question.id,
       );
@@ -2320,7 +2483,7 @@ export async function createApp(options = {}) {
       };
       store.saveDaily(userId, key, plan);
       return plan;
-    });
+    }));
   }
   route("post", "/api/ai/daily", (req) =>
     generateDaily(

@@ -460,6 +460,19 @@ export type AiSettingsPayload = {
   apiKey?: string;
 };
 
+export type AccountEntitlementsResponse = {
+  plan: 'free' | 'vip' | 'svip' | 'ssvip';
+  expiresAt: string | null;
+  apiConfigUnlocked: boolean;
+  aiServiceAvailable: boolean;
+  checkIn: {
+    day: string;
+    claimed: boolean;
+    grants: { explanations: number; generations: number; analyses: number };
+    remaining: { explanations: number; generations: number; analyses: number };
+  };
+};
+
 export type CommunityMessage = {
   id: string;
   userId: string;
@@ -874,6 +887,17 @@ export const mobileApi = {
   communityImageUrl(imageUrl: string) {
     if (/^https?:\/\//i.test(imageUrl)) return imageUrl;
     return `${API_BASE_URL.replace(/\/api\/?$/, '')}${imageUrl}`;
+  },
+
+  accountEntitlements() {
+    return request<AccountEntitlementsResponse>('/account/entitlements');
+  },
+
+  dailyCheckIn() {
+    return request<AccountEntitlementsResponse & { claimed: boolean }>('/account/check-in', {
+      method: 'POST',
+      body: JSON.stringify({}),
+    });
   },
 
   settings() {

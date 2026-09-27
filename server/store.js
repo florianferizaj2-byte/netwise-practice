@@ -58,6 +58,33 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       data TEXT NOT NULL,
       PRIMARY KEY (user_id, day)
     );
+    CREATE TABLE IF NOT EXISTS user_entitlements (
+      user_id TEXT PRIMARY KEY,
+      plan TEXT NOT NULL DEFAULT 'free',
+      expires_at TEXT,
+      api_config_unlocked INTEGER NOT NULL DEFAULT 0,
+      updated_at TEXT NOT NULL
+    );
+    CREATE TABLE IF NOT EXISTS user_daily_ai_credits (
+      user_id TEXT NOT NULL,
+      day TEXT NOT NULL,
+      claimed_at TEXT NOT NULL,
+      explanations_granted INTEGER NOT NULL,
+      explanations_remaining INTEGER NOT NULL,
+      generations_granted INTEGER NOT NULL,
+      generations_remaining INTEGER NOT NULL,
+      analyses_granted INTEGER NOT NULL,
+      analyses_remaining INTEGER NOT NULL,
+      PRIMARY KEY (user_id, day)
+    );
+    CREATE TABLE IF NOT EXISTS ai_question_content (
+      cache_key TEXT PRIMARY KEY,
+      question_id TEXT NOT NULL,
+      kind TEXT NOT NULL,
+      variant TEXT NOT NULL,
+      data TEXT NOT NULL,
+      created_at TEXT NOT NULL
+    );
     CREATE TABLE IF NOT EXISTS admin_settings (
       user_id TEXT PRIMARY KEY,
       data TEXT NOT NULL
@@ -120,11 +147,21 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       group_id TEXT,
       error TEXT,
       created_at TEXT NOT NULL,
-      updated_at TEXT NOT NULL
+      updated_at TEXT NOT NULL,
+      credit_day TEXT,
+      credit_reserved INTEGER NOT NULL DEFAULT 0
     );
     CREATE INDEX IF NOT EXISTS ai_question_generation_jobs_owner_idx
       ON ai_question_generation_jobs(user_id, certificate_id, created_at);
   `);
+  for (const statement of [
+    "ALTER TABLE ai_question_generation_jobs ADD COLUMN credit_day TEXT",
+    "ALTER TABLE ai_question_generation_jobs ADD COLUMN credit_reserved INTEGER NOT NULL DEFAULT 0",
+  ]) {
+    try {
+      db.exec(statement);
+    } catch {}
+  }
   for (const statement of [
     "ALTER TABLE users ADD COLUMN is_admin INTEGER NOT NULL DEFAULT 0",
     "ALTER TABLE users ADD COLUMN banned_at TEXT",
@@ -419,7 +456,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       }
       return null;
     },
-    createAiQuestionGenerationJob(userId, certificateId, selection) {
+    createAiQuestionGenerationJob(userId, certificateId, selection, credit = {}) {
       const id = crypto.randomUUID();
       const now = new Date().toISOString();
       const progress = {
@@ -429,7 +466,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         total: 10,
       };
       db.prepare(
-        "INSERT INTO ai_question_generation_jobs (id,user_id,certificate_id,selection,status,progress,created_at,updated_at) VALUES (?,?,?,?,?,?,?,?)",
+        "INSERT INTO ai_question_generation_jobs (id,user_id,certificate_id,selection,status,progress,created_at,updated_at,credit_day,credit_reserved) VALUES (?,?,?,?,?,?,?,?,?,?)",
       ).run(
         id,
         userId,
@@ -439,6 +476,8 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         JSON.stringify(progress),
         now,
         now,
+        credit.day || null,
+        credit.reserved ? 1 : 0,
       );
       return {
         id,
@@ -449,13 +488,15 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         progress,
         groupId: null,
         error: null,
+        creditDay: credit.day || null,
+        creditReserved: !!credit.reserved,
         createdAt: now,
         updatedAt: now,
       };
     },
     aiQuestionGenerationJob(id, userId, certificateId) {
       const row = db.prepare(
-        "SELECT id,user_id AS userId,certificate_id AS certificateId,selection,status,progress,group_id AS groupId,error,created_at AS createdAt,updated_at AS updatedAt FROM ai_question_generation_jobs WHERE id=? AND user_id=? AND certificate_id=?",
+        "SELECT id,user_id AS userId,certificate_id AS certificateId,selection,status,progress,group_id AS groupId,error,created_at AS createdAt,updated_at AS updatedAt,credit_day AS creditDay,credit_reserved AS creditReserved FROM ai_question_generation_jobs WHERE id=? AND user_id=? AND certificate_id=?",
       ).get(id, userId, certificateId);
       return row
         ? {
@@ -468,7 +509,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
     aiQuestionGenerationJobs(userId, certificateId, limit = 10) {
       return db
         .prepare(
-          "SELECT id,user_id AS userId,certificate_id AS certificateId,selection,status,progress,group_id AS groupId,error,created_at AS createdAt,updated_at AS updatedAt FROM ai_question_generation_jobs WHERE user_id=? AND certificate_id=? ORDER BY created_at DESC LIMIT ?",
+          "SELECT id,user_id AS userId,certificate_id AS certificateId,selection,status,progress,group_id AS groupId,error,created_at AS createdAt,updated_at AS updatedAt,credit_day AS creditDay,credit_reserved AS creditReserved FROM ai_question_generation_jobs WHERE user_id=? AND certificate_id=? ORDER BY created_at DESC LIMIT ?",
         )
         .all(userId, certificateId, limit)
         .map((row) => ({
@@ -490,7 +531,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
     nextAiQuestionGenerationJob() {
       const row = db
         .prepare(
-          "SELECT id,user_id AS userId,certificate_id AS certificateId,selection,status,progress,group_id AS groupId,error,created_at AS createdAt,updated_at AS updatedAt FROM ai_question_generation_jobs WHERE status='queued' ORDER BY created_at LIMIT 1",
+          "SELECT id,user_id AS userId,certificate_id AS certificateId,selection,status,progress,group_id AS groupId,error,created_at AS createdAt,updated_at AS updatedAt,credit_day AS creditDay,credit_reserved AS creditReserved FROM ai_question_generation_jobs WHERE status='queued' ORDER BY created_at LIMIT 1",
         )
         .get();
       return row
@@ -510,13 +551,14 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         updatedAt: new Date().toISOString(),
       };
       db.prepare(
-        "UPDATE ai_question_generation_jobs SET status=?,progress=?,group_id=?,error=?,updated_at=? WHERE id=? AND user_id=? AND certificate_id=?",
+        "UPDATE ai_question_generation_jobs SET status=?,progress=?,group_id=?,error=?,updated_at=?,credit_reserved=? WHERE id=? AND user_id=? AND certificate_id=?",
       ).run(
         next.status,
         JSON.stringify(next.progress),
         next.groupId || null,
         next.error || null,
         next.updatedAt,
+        next.creditReserved ? 1 : 0,
         id,
         userId,
         certificateId,
@@ -696,6 +738,111 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       return db
         .prepare("INSERT OR REPLACE INTO user_settings VALUES (?,?)")
         .run(userId || "local", JSON.stringify(settings));
+    },
+    accountEntitlement(userId = "local") {
+      const row = db
+        .prepare("SELECT plan,expires_at AS expiresAt,api_config_unlocked AS apiConfigUnlocked FROM user_entitlements WHERE user_id=?")
+        .get(userId || "local");
+      const expired = row?.expiresAt && Date.parse(row.expiresAt) <= Date.now();
+      return {
+        plan: expired ? "free" : row?.plan || "free",
+        expiresAt: row?.expiresAt || null,
+        apiConfigUnlocked: !!row?.apiConfigUnlocked,
+      };
+    },
+    saveAccountEntitlement(userId, entitlement) {
+      const current = this.accountEntitlement(userId);
+      const next = { ...current, ...entitlement };
+      db.prepare(
+        "INSERT INTO user_entitlements (user_id,plan,expires_at,api_config_unlocked,updated_at) VALUES (?,?,?,?,?) ON CONFLICT(user_id) DO UPDATE SET plan=excluded.plan,expires_at=excluded.expires_at,api_config_unlocked=excluded.api_config_unlocked,updated_at=excluded.updated_at",
+      ).run(
+        userId || "local",
+        next.plan || "free",
+        next.expiresAt || null,
+        next.apiConfigUnlocked ? 1 : 0,
+        new Date().toISOString(),
+      );
+      return this.accountEntitlement(userId);
+    },
+    dailyAiCredits(userId = "local", day) {
+      const row = db
+        .prepare("SELECT day,claimed_at AS claimedAt,explanations_granted AS explanationsGranted,explanations_remaining AS explanationsRemaining,generations_granted AS generationsGranted,generations_remaining AS generationsRemaining,analyses_granted AS analysesGranted,analyses_remaining AS analysesRemaining FROM user_daily_ai_credits WHERE user_id=? AND day=?")
+        .get(userId || "local", day);
+      return row || {
+        day,
+        claimedAt: null,
+        explanationsGranted: 5,
+        explanationsRemaining: 0,
+        generationsGranted: 1,
+        generationsRemaining: 0,
+        analysesGranted: 3,
+        analysesRemaining: 0,
+      };
+    },
+    claimDailyAiCredits(userId = "local", day) {
+      db.exec("BEGIN IMMEDIATE");
+      try {
+        const result = db.prepare(
+          "INSERT OR IGNORE INTO user_daily_ai_credits (user_id,day,claimed_at,explanations_granted,explanations_remaining,generations_granted,generations_remaining,analyses_granted,analyses_remaining) VALUES (?,?,?,5,5,1,1,3,3)",
+        ).run(userId || "local", day, new Date().toISOString());
+        const credits = this.dailyAiCredits(userId, day);
+        db.exec("COMMIT");
+        return { claimed: result.changes > 0, credits };
+      } catch (error) {
+        db.exec("ROLLBACK");
+        throw error;
+      }
+    },
+    consumeDailyAiCredit(userId = "local", day, kind) {
+      const columns = {
+        explanation: "explanations_remaining",
+        generation: "generations_remaining",
+        analysis: "analyses_remaining",
+      };
+      const column = columns[kind];
+      if (!column) throw new Error("未知的 AI 额度类型");
+      return db.prepare(
+        `UPDATE user_daily_ai_credits SET ${column}=${column}-1 WHERE user_id=? AND day=? AND ${column}>0`,
+      ).run(userId || "local", day).changes > 0;
+    },
+    refundDailyAiCredit(userId = "local", day, kind) {
+      const columns = {
+        explanation: ["explanations_remaining", "explanations_granted"],
+        generation: ["generations_remaining", "generations_granted"],
+        analysis: ["analyses_remaining", "analyses_granted"],
+      };
+      const pair = columns[kind];
+      if (!pair) throw new Error("未知的 AI 额度类型");
+      return db.prepare(
+        `UPDATE user_daily_ai_credits SET ${pair[0]}=MIN(${pair[0]}+1,${pair[1]}) WHERE user_id=? AND day=?`,
+      ).run(userId || "local", day).changes > 0;
+    },
+    aiQuestionContent(questionId, kind, variant = "standard") {
+      const key = crypto
+        .createHash("sha256")
+        .update(`${questionId}\u0000${kind}\u0000${variant}`)
+        .digest("hex");
+      const row = db
+        .prepare("SELECT data FROM ai_question_content WHERE cache_key=?")
+        .get(key);
+      return row ? JSON.parse(row.data) : null;
+    },
+    saveAiQuestionContent(questionId, kind, variant = "standard", value) {
+      const key = crypto
+        .createHash("sha256")
+        .update(`${questionId}\u0000${kind}\u0000${variant}`)
+        .digest("hex");
+      db.prepare(
+        "INSERT OR IGNORE INTO ai_question_content (cache_key,question_id,kind,variant,data,created_at) VALUES (?,?,?,?,?,?)",
+      ).run(
+        key,
+        questionId,
+        kind,
+        variant,
+        JSON.stringify(value),
+        new Date().toISOString(),
+      );
+      return this.aiQuestionContent(questionId, kind, variant);
     },
     adminSettings: (userId) => {
       const r = db

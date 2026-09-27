@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import {
   ActivityIndicator,
+  Alert,
   Animated,
   Image,
   FlatList,
@@ -1939,6 +1940,7 @@ export function ProfileScreen({
   const [communityNameBusy, setCommunityNameBusy] = useState(false);
   const [communityNameError, setCommunityNameError] = useState('');
   const [settings, setSettings] = useState<AiSettingsResponse | null>(null);
+  const [apiConfigUnlocked, setApiConfigUnlocked] = useState(false);
   const [settingsBusy, setSettingsBusy] = useState(false);
   const [settingsSaveBusy, setSettingsSaveBusy] = useState(false);
   const [settingsNotice, setSettingsNotice] = useState('');
@@ -1951,6 +1953,20 @@ export function ProfileScreen({
     model: 'deepseek-chat',
     temperature: '0.3',
   });
+
+  useEffect(() => {
+    if (!user || preview) {
+      setApiConfigUnlocked(false);
+      return;
+    }
+    let active = true;
+    void mobileApi.accountEntitlements()
+      .then((result) => {
+        if (active) setApiConfigUnlocked(result.apiConfigUnlocked);
+      })
+      .catch(() => undefined);
+    return () => { active = false; };
+  }, [preview, user?.id]);
 
   function openCommunityNameSettings() {
     setCommunityName(user?.communityName || user?.username || '');
@@ -1980,15 +1996,39 @@ export function ProfileScreen({
     }
   }
 
-  function openAiSettings() {
+  async function openAiSettings() {
+    if (!user || preview) {
+      Alert.alert('需要登录', '登录考匠账号后可查看 API 配置权限。');
+      return;
+    }
+    setSettingsBusy(true);
+    try {
+      const entitlement = await mobileApi.accountEntitlements();
+      setApiConfigUnlocked(entitlement.apiConfigUnlocked);
+      if (!entitlement.apiConfigUnlocked) {
+        Alert.alert(
+          'API 配置尚未解锁',
+          '一次性支付 ¥9.9 解锁后，即可在这里填写自己的 API。',
+          [
+            { text: '稍后再说', style: 'cancel' },
+            { text: '查看解锁入口', onPress: () => onNavigate('vip') },
+          ],
+        );
+        return;
+      }
+    } catch (error: unknown) {
+      Alert.alert('暂时无法读取权限', error instanceof Error ? error.message : '请稍后重试。');
+      return;
+    } finally {
+      setSettingsBusy(false);
+    }
+
     setAiSettingsOpen(true);
     setTutorialOpen(false);
     setAuthorApiOpen(false);
     setSettingsNotice('');
     setSettingsError('');
     setApiKey('');
-    if (!user || preview) return;
-
     setSettingsBusy(true);
     void mobileApi
       .settings()
@@ -2177,7 +2217,11 @@ export function ProfileScreen({
             title="证书与题库"
             value={activeCertificate?.name ?? (user ? '已同步' : '预览模式')}
           />
-          <SettingRow onPress={openAiSettings} title="AI 学习助手" value="按账号配置" />
+          <SettingRow
+            onPress={() => void openAiSettings()}
+            title="AI 学习助手"
+            value={apiConfigUnlocked ? '自带 API 已解锁' : '¥9.9 一次解锁'}
+          />
           <SettingRow
             onPress={user ? openCommunityNameSettings : undefined}
             title="社区昵称"

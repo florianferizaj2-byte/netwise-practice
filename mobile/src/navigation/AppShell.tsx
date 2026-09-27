@@ -12,6 +12,7 @@ import {
   useWindowDimensions,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {
   mobileApi,
@@ -96,7 +97,10 @@ export function AppShell() {
   const [practiceAiGroupId, setPracticeAiGroupId] = useState<string | undefined>();
   const [aiQuestionGroupId, setAiQuestionGroupId] = useState<string | undefined>();
   const [aiQuestionJobs, setAiQuestionJobs] = useState<AiQuestionGenerationJob[]>([]);
-  const [dismissedAiJobIds, setDismissedAiJobIds] = useState<string[]>([]);
+  const [seenAiJobIds, setSeenAiJobIds] = useState<string[]>([]);
+  const [seenAiJobOwner, setSeenAiJobOwner] = useState<string | null>(null);
+  const [shownAiJobId, setShownAiJobId] = useState<string | null>(null);
+  const seenAiJobIdsRef = useRef(new Set<string>());
   const knownAiJobStatuses = useRef(new Map<string, AiQuestionGenerationJob['status']>());
   const [certificatePickerOpen, setCertificatePickerOpen] = useState(false);
   const [sessionRestored, setSessionRestored] = useState(false);
@@ -104,6 +108,9 @@ export function AppShell() {
     null,
   );
   const [versionCheckKey, setVersionCheckKey] = useState(0);
+  const aiJobSeenStorageKey = session?.user.id
+    ? `kaojiang-ai-job-notices:${session.user.id}`
+    : null;
   const screenOpacity = useRef(new Animated.Value(1)).current;
   const screenOffset = useRef(new Animated.Value(0)).current;
 
@@ -126,6 +133,33 @@ export function AppShell() {
   useEffect(() => {
     if (!appActive) void studyCache.flush();
   }, [appActive]);
+
+  useEffect(() => {
+    let mounted = true;
+    setSeenAiJobIds([]);
+    seenAiJobIdsRef.current = new Set();
+    setSeenAiJobOwner(null);
+    setShownAiJobId(null);
+    if (!aiJobSeenStorageKey) {
+      setSeenAiJobOwner('preview');
+      return () => { mounted = false; };
+    }
+    void AsyncStorage.getItem(aiJobSeenStorageKey)
+      .then((stored) => {
+        if (!mounted) return;
+        const parsed: unknown = stored ? JSON.parse(stored) : [];
+        const ids = Array.isArray(parsed)
+          ? parsed.filter((id): id is string => typeof id === 'string').slice(-200)
+          : [];
+        seenAiJobIdsRef.current = new Set(ids);
+        setSeenAiJobIds(ids);
+        setSeenAiJobOwner(aiJobSeenStorageKey);
+      })
+      .catch(() => {
+        if (mounted) setSeenAiJobOwner(aiJobSeenStorageKey);
+      });
+    return () => { mounted = false; };
+  }, [aiJobSeenStorageKey]);
   useEffect(() => {
     if (appActive && activeTab === 'today' && session?.user.certificateId)
       void mobileApi.dashboard().catch(() => undefined);
@@ -332,6 +366,28 @@ export function AppShell() {
     setActiveTab(tab);
   }
 
+  function markAiJobNoticeSeen(id: string) {
+    if (seenAiJobIdsRef.current.has(id)) return;
+    const next = [...seenAiJobIdsRef.current, id].slice(-200);
+    seenAiJobIdsRef.current = new Set(next);
+    setSeenAiJobIds(next);
+    if (aiJobSeenStorageKey)
+      void AsyncStorage.setItem(aiJobSeenStorageKey, JSON.stringify(next)).catch(() => undefined);
+  }
+
+  const seenAiJobSet = new Set(seenAiJobIds);
+  const visibleProgressJob = aiQuestionJobs.find((item) => item.id === shownAiJobId) ?? null;
+  const newestJob = aiQuestionJobs.find((item) => item.status === 'queued' || item.status === 'running')
+    ?? aiQuestionJobs[0]
+    ?? null;
+  useEffect(() => {
+    if (shownAiJobId || seenAiJobOwner !== (aiJobSeenStorageKey ?? 'preview') || !newestJob) return;
+    if (!seenAiJobSet.has(newestJob.id)) setShownAiJobId(newestJob.id);
+  }, [seenAiJobOwner, aiJobSeenStorageKey, newestJob?.id, seenAiJobIds, shownAiJobId]);
+  useEffect(() => {
+    if (visibleProgressJob) markAiJobNoticeSeen(visibleProgressJob.id);
+  }, [visibleProgressJob?.id, aiJobSeenStorageKey]);
+
   function retryVersionCheck() {
     setVersionCheckKey((current) => current + 1);
   }
@@ -440,31 +496,27 @@ export function AppShell() {
             </View>
           ))}
         </Animated.View>
-        {(() => {
-          const job = aiQuestionJobs.find((item) =>
-            item.status === 'queued' || item.status === 'running',
-          ) ?? aiQuestionJobs.find((item) =>
-            !dismissedAiJobIds.includes(item.id),
-          );
-          if (!job || dismissedAiJobIds.includes(job.id)) return null;
-          return (
-            <AiGenerationProgressPill
-              job={job}
-              onPress={() => {
-                if (job.status === 'completed' || job.status === 'failed')
-                  setDismissedAiJobIds((current) => [...current, job.id]);
-                handleNavigate('practice', {
-                  practiceMode: 'ai',
-                  practiceChapter: job.selection.chapter,
-                  practiceKnowledgeSection: job.selection.knowledgeSection,
-                  practiceKnowledgePoint: job.selection.knowledgePoint,
-                  practiceSelectionComplete: true,
-                  aiQuestionGroupId: job.groupId || undefined,
-                });
-              }}
-            />
-          );
-        })()}
+        {visibleProgressJob && (
+          <AiGenerationProgressPill
+            job={visibleProgressJob}
+            onClose={() => {
+              markAiJobNoticeSeen(visibleProgressJob.id);
+              setShownAiJobId(null);
+            }}
+            onPress={() => {
+              markAiJobNoticeSeen(visibleProgressJob.id);
+              setShownAiJobId(null);
+              handleNavigate('practice', {
+                practiceMode: 'ai',
+                practiceChapter: visibleProgressJob.selection.chapter,
+                practiceKnowledgeSection: visibleProgressJob.selection.knowledgeSection,
+                practiceKnowledgePoint: visibleProgressJob.selection.knowledgePoint,
+                practiceSelectionComplete: true,
+                aiQuestionGroupId: visibleProgressJob.groupId || undefined,
+              });
+            }}
+          />
+        )}
         <TabBar activeTab={activeTab} onChange={handleNavigate} />
       </View>
     </SafeAreaView>
@@ -743,9 +795,11 @@ function TabBarItem({
 function AiGenerationProgressPill({
   job,
   onPress,
+  onClose,
 }: {
   job: AiQuestionGenerationJob;
   onPress: () => void;
+  onClose: () => void;
 }) {
   const styles = useThemedStyles(createStyles);
   const { width: screenWidth, height: screenHeight } = useWindowDimensions();
@@ -828,17 +882,27 @@ function AiGenerationProgressPill({
       ]}
     >
       {collapsed ? (
-        <AnimatedPressable
-          accessibilityLabel="展开 AI 出题进度窗"
-          accessibilityRole="button"
-          onPress={expandFromEdge}
-          style={styles.aiProgressCollapsed}
-        >
-          <Text style={styles.aiProgressMarkText}>✦</Text>
-          <Text style={styles.aiProgressCollapsedCount}>
-            {complete ? '✓' : failed ? '!' : `${job.progress.completed ?? 0}/10`}
-          </Text>
-        </AnimatedPressable>
+        <View style={styles.aiProgressCollapsedWrap}>
+          <AnimatedPressable
+            accessibilityLabel="展开 AI 出题进度窗"
+            accessibilityRole="button"
+            onPress={expandFromEdge}
+            style={styles.aiProgressCollapsed}
+          >
+            <Text style={styles.aiProgressMarkText}>✦</Text>
+            <Text style={styles.aiProgressCollapsedCount}>
+              {complete ? '✓' : failed ? '!' : `${job.progress.completed ?? 0}/10`}
+            </Text>
+          </AnimatedPressable>
+          <AnimatedPressable
+            accessibilityLabel="关闭 AI 出题进度窗"
+            accessibilityRole="button"
+            onPress={onClose}
+            style={styles.aiProgressCollapsedClose}
+          >
+            <Text style={styles.aiProgressCollapsedCloseText}>×</Text>
+          </AnimatedPressable>
+        </View>
       ) : (
         <View style={styles.aiProgressCard}>
           <View style={styles.aiProgressTools}>
@@ -851,6 +915,14 @@ function AiGenerationProgressPill({
               style={styles.aiProgressCollapseButton}
             >
               <Text style={styles.aiProgressCollapseText}>收至边缘</Text>
+            </AnimatedPressable>
+            <AnimatedPressable
+              accessibilityLabel="关闭 AI 出题进度窗"
+              accessibilityRole="button"
+              onPress={onClose}
+              style={styles.aiProgressCloseButton}
+            >
+              <Text style={styles.aiProgressCloseText}>×</Text>
             </AnimatedPressable>
           </View>
           <AnimatedPressable
@@ -929,6 +1001,8 @@ const createStyles = (colors: ThemeColors) =>
     aiProgressDragText: { color: colors.textMuted, fontSize: 11, fontWeight: '700' },
     aiProgressCollapseButton: { minHeight: 30, justifyContent: 'center', paddingHorizontal: spacing.xs },
     aiProgressCollapseText: { color: colors.brand, fontSize: 11, fontWeight: '800' },
+    aiProgressCloseButton: { alignItems: 'center', height: 30, justifyContent: 'center', marginLeft: 2, width: 25 },
+    aiProgressCloseText: { color: colors.textMuted, fontSize: 21, fontWeight: '700', lineHeight: 23 },
     aiProgressCardBody: {
       alignItems: 'center',
       flexDirection: 'row',
@@ -949,6 +1023,22 @@ const createStyles = (colors: ThemeColors) =>
       paddingHorizontal: 4,
       ...shadow.card,
     },
+    aiProgressCollapsedWrap: { position: 'relative' },
+    aiProgressCollapsedClose: {
+      alignItems: 'center',
+      backgroundColor: colors.surface,
+      borderColor: colors.border,
+      borderRadius: radius.pill,
+      borderWidth: 1,
+      height: 22,
+      justifyContent: 'center',
+      position: 'absolute',
+      right: -2,
+      top: -7,
+      width: 22,
+      zIndex: 2,
+    },
+    aiProgressCollapsedCloseText: { color: colors.textMuted, fontSize: 17, fontWeight: '700', lineHeight: 19 },
     aiProgressCollapsedCount: { color: colors.brand, fontSize: 10, fontWeight: '900' },
     aiProgressMark: {
       alignItems: 'center',

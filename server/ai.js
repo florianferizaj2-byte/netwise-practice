@@ -68,6 +68,19 @@ const compactQuestionForReview = (question) => ({
     ? { analysis: String(question.analysis).slice(0, 600) }
     : {}),
 });
+const aiQuestionRevision = (question) =>
+  crypto
+    .createHash("sha256")
+    .update(JSON.stringify({
+      type: question.type,
+      question: question.question,
+      options: question.options,
+      answer: question.answer,
+      analysis: question.analysis,
+      chapter: question.chapter,
+      knowledgePoint: question.targetKnowledgePoint || question.knowledgePoint,
+    }))
+    .digest("hex");
 const explanationSchema = z
   .object({ text: z.string().min(8).max(6000) })
   .strict();
@@ -108,10 +121,25 @@ export class OpenAICompatibleProvider extends AIProvider {
   async call(messages, settings, options = {}) {
     const userId = options.userId || "local";
     settings ||= this.store.settings(userId);
-    if (!settings.keyCipher) throw new Error("请先在设置中配置 AI API Key");
+    const serviceKey = process.env.AI_SERVICE_API_KEY || process.env.AUTHOR_API_KEY || "";
+    if (!settings.keyCipher && serviceKey) {
+      settings = {
+        baseUrl:
+          process.env.AI_SERVICE_BASE_URL ||
+          process.env.AUTHOR_API_BASE_URL ||
+          "https://api.deepseek.com",
+        model:
+          process.env.AI_SERVICE_MODEL ||
+          process.env.AUTHOR_API_MODEL ||
+          "deepseek-chat",
+        temperature: 0.3,
+      };
+    }
+    if (!settings.keyCipher && !serviceKey)
+      throw new Error("当前 AI 服务尚未配置，请稍后再试");
     if (!settings.model) throw new Error("请先配置模型名称");
     const url = validateBaseUrl(settings.baseUrl),
-      key = decrypt(settings.keyCipher);
+      key = settings.keyCipher ? decrypt(settings.keyCipher) : serviceKey;
     let usage = {},
       success = false;
     try {
@@ -355,17 +383,35 @@ export class OpenAICompatibleProvider extends AIProvider {
       .filter((a) => a.questionId === q.id && !a.correct)
       .at(-1);
     if (!lastWrong) throw new Error("这道题暂无错误作答记录");
+    const variant = `${aiQuestionRevision(q)}:${[...(lastWrong.selected || [])].sort().join(",") || "none"}`;
+    const cached = this.store.aiQuestionContent(q.id, "mistake-analysis", variant);
+    if (cached) {
+      this.store.saveMistake(q.id, cached, userId);
+      return cached;
+    }
     const result = await this.structured(
-      '分析用户具体错误原因，区分知识缺口和推测。返回 {"mistakeType":"snake_case","weakKnowledge":"具体薄弱知识","reason":"基于选择与历史的可能原因"}。',
-      this.context(q, lastWrong.selected, userId),
+      '只根据原题与用户选择的错误选项，分析可能的知识误区；不要推测用户心理或引用不存在的个人历史。返回 {"mistakeType":"snake_case","weakKnowledge":"具体薄弱知识","reason":"该选项错在哪里及可能对应的知识误区"}。',
+      {
+        question: q,
+        selectedAnswer: lastWrong.selected || [],
+        correctAnswer: q.answer,
+        chapter: q.chapter,
+        knowledgePoint: q.targetKnowledgePoint || q.knowledgePoint,
+      },
       mistakeSchema,
       undefined,
       undefined,
       undefined,
       userId,
     );
-    this.store.saveMistake(q.id, result, userId);
-    return result;
+    const accepted = this.store.saveAiQuestionContent(
+      q.id,
+      "mistake-analysis",
+      variant,
+      result,
+    );
+    this.store.saveMistake(q.id, accepted, userId);
+    return accepted;
   }
   async generateQuestion(q, request = {}) {
     const userId = request.userId || "local";
@@ -883,7 +929,24 @@ export class OpenAICompatibleProvider extends AIProvider {
   async explainQuestion(q, action, selected, hintLevel = 0, userId) {
     userId ||= "local";
     const hints = hintLevel > 0;
-    const context = this.context(q, selected, userId);
+    const answerVariant = action === "为什么我错了？"
+      ? [...(selected || [])].sort().join(",") || "none"
+      : "standard";
+    const variant = `${aiQuestionRevision(q)}:${answerVariant}`;
+    const cacheKind = `explanation:${action}`;
+    if (!hints) {
+      const cached = this.store.aiQuestionContent(q.id, cacheKind, variant);
+      if (cached) return cached;
+    }
+    const context = hints
+      ? this.context(q, selected, userId)
+      : {
+          question: q,
+          ...(action === "为什么我错了？" ? { selectedAnswer: selected || [] } : {}),
+          correctAnswer: q.answer,
+          chapter: q.chapter,
+          knowledgePoint: q.targetKnowledgePoint || q.knowledgePoint,
+        };
     const result = await this.structured(
       hints
         ? `苏格拉底式提示第 ${hintLevel} 级：${["", "仅轻微提示，不给计算过程", "指出关键知识点，不代入具体数值", "给解题方向，不完成最后一步"][hintLevel]}。禁止透露正确选项字母、正确选项全文、数值答案或排除到只剩正确选项。返回 {"text":"提示"}。`
@@ -915,7 +978,9 @@ export class OpenAICompatibleProvider extends AIProvider {
       undefined,
       userId,
     );
-    return result;
+    return hints
+      ? result
+      : this.store.saveAiQuestionContent(q.id, cacheKind, variant, result);
   }
   async dailyPlan(questionIds, userId = "local") {
     const allowed = questionIds ? new Set(questionIds) : null,
