@@ -307,17 +307,29 @@ export function PracticeScreen({
 
   useEffect(() => {
     let mounted = true;
+    const cachedPage = !preview && !needsPracticePicker && !isDailyPractice &&
+      practiceSource === 'all' && practiceMode === 'sequential' && !practiceAiGroupId &&
+      reloadKey === 0
+      ? mobileApi.freshQuestionPage(0, {
+          chapter: practiceChapter,
+          knowledgeSection: practiceKnowledgeSection,
+          knowledgePoint: practiceKnowledgePoint,
+        })
+      : undefined;
     pageGeneration.current += 1;
     pageSeed.current = Math.random().toString(36).slice(2);
     pageFlight.current = null;
-    setNextOffset(null);
-    setTotalQuestions(0);
+    setNextOffset(cachedPage?.nextOffset ?? null);
+    setTotalQuestions(cachedPage?.total ?? 0);
     setLoadingMore(false);
     setPageError('');
-    setLoading(true);
+    setLoading(!cachedPage);
     setError(null);
-    setQuestions([]);
-    setQuestionIndex(0);
+    setQuestions(cachedPage?.items ?? []);
+    const cachedIndex = practiceQuestionId
+      ? cachedPage?.items.findIndex((question) => question.id === practiceQuestionId)
+      : -1;
+    setQuestionIndex(cachedIndex !== undefined && cachedIndex >= 0 ? cachedIndex : 0);
     setSelected([]);
     setResponseDraft('');
     setResult(null);

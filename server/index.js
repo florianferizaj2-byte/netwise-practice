@@ -30,7 +30,7 @@ import { studySummary } from "./study-summary.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const mobileRelease = () => {
-  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.3.6";
+  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.3.7";
   const minimumVersion =
     process.env.MOBILE_MINIMUM_VERSION || "0.2.8";
   return {
@@ -41,7 +41,7 @@ const mobileRelease = () => {
       `/downloads/kaojiang-v${latestVersion}.apk`,
     releaseNotes:
       process.env.MOBILE_RELEASE_NOTES ||
-      "修复普通题库混入 AI 生成题导致的旧分类和题数偏差，统一网页、App 与移动网页的目录及练习范围；保留 AI 题组、共享、收藏与错题记录。",
+      "题库常驻内存，首页结果 30 秒内复用；缩短题目列表、错题汇总和首页加载时间。",
   };
 };
 async function exchangeWechatMiniProgramCode(code) {
@@ -1519,9 +1519,10 @@ export async function createApp(options = {}) {
     certificateId,
     userId,
     includeAttemptedShared = false,
+    attemptedIds,
   ) => {
     const attempted = includeAttemptedShared
-      ? new Set(store.allA(userId).map((attempt) => attempt.questionId))
+      ? attemptedIds || new Set(store.allA(userId).map((attempt) => attempt.questionId))
       : new Set();
     return store
       .allQ()
@@ -1534,6 +1535,49 @@ export async function createApp(options = {}) {
       );
   };
   const isBankQuestion = (question) => question.source !== "ai_generated";
+  let bankQuestionRevision = -1;
+  const bankQuestionLists = new Map();
+  const bankQuestionsForCertificate = (certificateId) => {
+    const revision = store.questionRevision();
+    if (revision !== bankQuestionRevision) {
+      bankQuestionLists.clear();
+      bankQuestionRevision = revision;
+    }
+    const key = certificateId || "all";
+    if (!bankQuestionLists.has(key))
+      bankQuestionLists.set(key, store.allQ().filter((question) =>
+        isBankQuestion(question) &&
+        (!certificateId || hasCertificateQuestion(question, certificateId)),
+      ));
+    return bankQuestionLists.get(key);
+  };
+  const homeResultCache = new Map();
+  const homeNow = options.now || Date.now;
+  const homeCacheKey = (kind, userId, certificateId) =>
+    JSON.stringify([kind, userId, certificateId || "", day()]);
+  const cachedHomeResult = (key, userId) => {
+    const entry = homeResultCache.get(key);
+    const age = entry && homeNow() - entry.savedAt;
+    return entry && age >= 0 && age < 30_000 &&
+      entry.questionRevision === store.questionRevision() &&
+      entry.communityRevision === store.communityRevision() &&
+      entry.studyRevision === store.studyRevision(userId)
+      ? entry.value
+      : null;
+  };
+  const rememberHomeResult = (key, userId, value) => {
+    homeResultCache.delete(key);
+    homeResultCache.set(key, {
+      value,
+      savedAt: homeNow(),
+      questionRevision: store.questionRevision(),
+      communityRevision: store.communityRevision(),
+      studyRevision: store.studyRevision(userId),
+    });
+    if (homeResultCache.size > 256)
+      homeResultCache.delete(homeResultCache.keys().next().value);
+    return value;
+  };
   const requireCertificate = (req) => {
     if (authRequired && !req.user?.certificateId) {
       const error = new Error("请先选择报考证书");
@@ -1566,10 +1610,10 @@ export async function createApp(options = {}) {
     // they supplied bankOnly. Explicit AI source requests retain their scope.
     const bankOnly = req.query.bankOnly === "1" ||
       (isMobileClient(req) && !req.query.source && req.query.bankOnly !== "0");
-    const questions = certificateQuestions(
-      requireCertificate(req),
-      state.userId,
-    ).filter(
+    const certificateId = requireCertificate(req);
+    const questions = (bankOnly
+      ? bankQuestionsForCertificate(certificateId)
+      : certificateQuestions(certificateId, state.userId)).filter(
       (q) =>
         (!bankOnly || isBankQuestion(q)) &&
         (!req.query.chapter || q.chapter === req.query.chapter) &&
@@ -1613,12 +1657,56 @@ export async function createApp(options = {}) {
   });
   route("get", "/api/practice/catalog", (req) => {
     const certificateId = requireCertificate(req);
+    const userId = req.user?.id || "local";
+    const summaryOnly = req.query.summary === "1";
+    const cacheKey = summaryOnly
+      ? homeCacheKey("catalog-summary", userId, certificateId)
+      : null;
+    if (cacheKey) {
+      const cached = cachedHomeResult(cacheKey, userId);
+      if (cached) return cached;
+    }
     const state = questionState(req);
-    const visibleQuestions = certificateQuestions(certificateId, state.userId);
-    const questions = visibleQuestions.filter(isBankQuestion);
+    const questions = bankQuestionsForCertificate(certificateId);
     const configuredModules =
       certificates.find((certificate) => certificate.id === certificateId)
         ?.taxonomy?.modules || [];
+    if (summaryOnly) {
+      const counts = new Map();
+      let attemptedCount = 0;
+      for (const question of questions) {
+        const name = question.chapter || "综合练习";
+        let chapter = counts.get(name);
+        if (!chapter) {
+          chapter = { name, questionCount: 0, attemptedCount: 0 };
+          counts.set(name, chapter);
+        }
+        chapter.questionCount += 1;
+        if (state.attemptedIds.has(question.id)) {
+          chapter.attemptedCount += 1;
+          attemptedCount += 1;
+        }
+      }
+      const chapters = [...counts.values()]
+        .sort((left, right) => {
+          const leftOrder = configuredModules.find((module) => module.name === left.name)?.order;
+          const rightOrder = configuredModules.find((module) => module.name === right.name)?.order;
+          return leftOrder !== undefined && rightOrder !== undefined
+            ? leftOrder - rightOrder
+            : left.name.localeCompare(right.name, "zh-CN");
+        })
+        .slice(0, 4)
+        .map((chapter) => ({
+          ...chapter,
+          progress: Math.round((chapter.attemptedCount / chapter.questionCount) * 100),
+        }));
+      return rememberHomeResult(cacheKey, state.userId, {
+        total: questions.length,
+        attemptedCount,
+        chapters,
+      });
+    }
+    const visibleQuestions = certificateQuestions(certificateId, state.userId);
     const chapters = new Map();
 
     for (const question of questions) {
@@ -1964,22 +2052,26 @@ export async function createApp(options = {}) {
   route("get", "/api/dashboard", (req) => {
     const certificateId = requireCertificate(req);
     const userId = requestUserId(req);
+    const summaryOnly = req.query.summary === "1";
+    const cacheKey = homeCacheKey(summaryOnly ? "dashboard-summary" : "dashboard", userId, certificateId);
+    const cached = cachedHomeResult(cacheKey, userId);
+    if (cached) return summaryOnly ? cached : { ...cached, aiBusy };
+    const userAttempts = store.allA(userId);
     const currentQuestions = certificateQuestions(
         certificateId,
         userId,
         true,
+        new Set(userAttempts.map((attempt) => attempt.questionId)),
       ),
       bankQuestions = currentQuestions.filter(isBankQuestion),
       currentIds = new Set(currentQuestions.map((question) => question.id)),
-      attempts = store
-        .allA(userId)
-        .filter((attempt) => currentIds.has(attempt.questionId)),
+      attempts = userAttempts.filter((attempt) => currentIds.has(attempt.questionId)),
       today = day(),
       wrong = store
-        .wrongQuestions(userId)
+        .wrongQuestions(userId, userAttempts)
         .filter((question) => currentIds.has(question.id)),
       summary = studySummary(attempts, wrong);
-    if (req.query.summary === "1") return summary;
+    if (summaryOnly) return rememberHomeResult(cacheKey, userId, summary);
     const mastery = store.mastery(currentIds, userId),
       syllabus = syllabusForCertificate(certificateId),
       syllabusProgress = buildSyllabusProgress(
@@ -2080,7 +2172,7 @@ export async function createApp(options = {}) {
             );
             return { name, ...categoryMetrics(chapterQuestions) };
           });
-    return {
+    return rememberHomeResult(cacheKey, userId, {
       ...summary,
       mastery,
       chapters,
@@ -2092,7 +2184,7 @@ export async function createApp(options = {}) {
       banks: banksForCertificate(certificateId),
       community: store.communityStats(certificateId, userId),
       syllabus: syllabusProgress,
-    };
+    });
   });
   route("post", "/api/ai/analyze", (req) =>
     ai(() => {

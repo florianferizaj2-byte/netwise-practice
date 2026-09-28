@@ -135,6 +135,17 @@ export class ResourceCache {
     return (this.entries.get(key) ?? EMPTY) as QuerySnapshot<T>;
   }
 
+  peekFresh<T>(key: string): T | undefined {
+    if (!this.scope) return undefined;
+    const entry = this.snapshot<T>(key);
+    const age = this.now() - entry.updatedAt;
+    const policy = this.policy(key);
+    return entry.data !== undefined && !entry.invalidated &&
+      age >= 0 && age < Math.min(policy.freshMs, policy.retainMs)
+      ? entry.data
+      : undefined;
+  }
+
   subscribe(key: string, listener: (invalidated: boolean) => void) {
     const listeners = this.listeners.get(key) ?? new Set();
     listeners.add(listener);

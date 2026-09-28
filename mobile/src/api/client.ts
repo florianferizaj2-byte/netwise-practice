@@ -382,6 +382,13 @@ export type PracticeCatalogResponse = {
   chapters: PracticeCatalogChapter[];
 };
 
+export type PracticeCatalogSummaryResponse = {
+  total: number;
+  attemptedCount: number;
+  chapters: Array<Pick<PracticeCatalogChapter,
+    'name' | 'questionCount' | 'attemptedCount' | 'progress'>>;
+};
+
 export type AttemptResponse = {
   questionId: string;
   selected: string[];
@@ -549,6 +556,22 @@ export type CommunityImagePayload = {
   mimeType: 'image/jpeg' | 'image/png' | 'image/gif' | 'image/webp';
 };
 
+function questionPagePath(offset = 0, filters?: QuestionFilters, seed?: string) {
+  const params = new URLSearchParams({
+    page: '1',
+    limit: '40',
+    offset: String(offset),
+    bankOnly: '1',
+  });
+  for (const [key, value] of Object.entries(filters ?? {}))
+    if (value) params.set(key, value);
+  if (seed) {
+    params.set('random', '1');
+    params.set('seed', seed);
+  }
+  return `/questions?${params}`;
+}
+
 export const mobileApi = {
   onStatus(listener: (status: 'expired' | 'update') => void) {
     statusListeners.add(listener);
@@ -698,23 +721,19 @@ export const mobileApi = {
     seed?: string,
     force = false,
   ) {
-    const params = new URLSearchParams({
-      page: '1',
-      limit: '40',
-      offset: String(offset),
-      bankOnly: '1',
-    });
-    for (const [key, value] of Object.entries(filters ?? {}))
-      if (value) params.set(key, value);
-    if (seed) {
-      params.set('random', '1');
-      params.set('seed', seed);
-    }
-    return cachedRequest<QuestionPage>(`/questions?${params}`, force);
+    return cachedRequest<QuestionPage>(questionPagePath(offset, filters, seed), force);
+  },
+
+  freshQuestionPage(offset = 0, filters?: QuestionFilters) {
+    return studyCache.peekFresh<QuestionPage>(questionPagePath(offset, filters));
   },
 
   practiceCatalog(force = false) {
     return cachedRequest<PracticeCatalogResponse>('/practice/catalog', force);
+  },
+
+  practiceCatalogSummary(force = false) {
+    return cachedRequest<PracticeCatalogSummaryResponse>('/practice/catalog?summary=1', force);
   },
 
   favorites(force = false) {

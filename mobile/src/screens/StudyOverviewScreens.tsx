@@ -103,14 +103,22 @@ export function TodayScreen({
     !preview,
   );
   const catalogQuery = useCachedQuery(
-    "/practice/catalog",
-    mobileApi.practiceCatalog,
+    "/practice/catalog?summary=1",
+    mobileApi.practiceCatalogSummary,
     !preview,
   );
+  // The full catalog is already persisted for practice. Reuse it on an
+  // offline relaunch without downloading the large tree for the home screen.
+  const offlineCatalog = useCachedQuery(
+    "/practice/catalog",
+    mobileApi.practiceCatalog,
+    false,
+  );
+  const catalog = catalogQuery.data ?? offlineCatalog.data;
   const data = query.data || dashboard;
-  const chapters = preview ? demoChapters : catalogQuery.data?.chapters || [];
-  const total = preview ? 1204 : catalogQuery.data?.total;
-  const attempted = preview ? 166 : catalogQuery.data?.attemptedCount;
+  const chapters = preview ? demoChapters : catalog?.chapters || [];
+  const total = preview ? 1204 : catalog?.total;
+  const attempted = preview ? 166 : catalog?.attemptedCount;
   const coverage = total
     ? Math.min(100, Math.round(((attempted || 0) / total) * 100))
     : 0;
@@ -156,7 +164,7 @@ export function TodayScreen({
       {!!(query.error || catalogQuery.error) && (
         <Text style={s.error}>
           进度暂未同步，可下拉重试。
-          {data || catalogQuery.data ? "当前显示上次记录。" : ""}
+          {data || catalog ? "当前显示上次记录。" : ""}
         </Text>
       )}
       <View style={s.coverage}>
@@ -240,7 +248,7 @@ export function TodayScreen({
           <Text style={s.link}>全部 ›</Text>
         </AnimatedPressable>
       </View>
-      {catalogQuery.loading && !preview ? (
+      {catalogQuery.loading && !catalog && !preview ? (
         <ActivityIndicator color={colors.brand} />
       ) : (
         chapters.slice(0, 4).map((chapter) => (

@@ -382,11 +382,25 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
   const parse = (rows) => rows.map((r) => JSON.parse(r.data));
   db.exec(`CREATE INDEX IF NOT EXISTS attempts_user_question_idx ON attempts(user_id, question_id);
     CREATE INDEX IF NOT EXISTS community_messages_cursor_idx ON community_messages(created_at, id);`);
+  let cachedQuestions;
+  let questionRevision = 0;
+  let communityRevision = 0;
+  const studyRevisions = new Map();
+  const invalidateQuestions = () => {
+    cachedQuestions = undefined;
+    questionRevision += 1;
+  };
+  const invalidateStudy = (userId = "local") => {
+    const id = userId || "local";
+    studyRevisions.set(id, (studyRevisions.get(id) || 0) + 1);
+  };
   const getQ = (id) => {
     const r = db.prepare("SELECT data FROM questions WHERE id=?").get(id);
     return r ? JSON.parse(r.data) : null;
   };
-  const allQ = () => parse(db.prepare("SELECT data FROM questions").all());
+  // Question records are read-only to callers. Rebuild after every write to
+  // the questions table instead of parsing every JSON row for each request.
+  const allQ = () => cachedQuestions ??= parse(db.prepare("SELECT data FROM questions").all());
   const allA = (userId) =>
     parse(
       userId
@@ -395,8 +409,8 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
             .all(userId)
         : db.prepare("SELECT data FROM attempts ORDER BY rowid").all(),
     );
-  const visibleQuestions = (userId) => {
-    const attempted = new Set(
+  const visibleQuestions = (userId, attemptedIds) => {
+    const attempted = attemptedIds ?? new Set(
       allA(userId).map((attempt) => attempt.questionId),
     );
     return allQ().filter(
@@ -407,22 +421,27 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         attempted.has(q.id),
     );
   };
-  const addQ = (q) =>
-    db
+  const addQ = (q) => {
+    const result = db
       .prepare("INSERT INTO questions VALUES (?,?,?)")
       .run(q.id, fingerprint(q), JSON.stringify(q));
+    invalidateQuestions();
+    return result;
+  };
   const isQuestionDeleted = (id) =>
     !!db.prepare("SELECT 1 FROM question_tombstones WHERE question_id=?").get(id);
   for (const q of bundledQuestions()) {
     if (isQuestionDeleted(q.id)) continue;
     const existing = getQ(q.id);
     if (existing) {
-      if (JSON.stringify(existing) !== JSON.stringify(q))
+      if (JSON.stringify(existing) !== JSON.stringify(q)) {
         db.prepare("UPDATE questions SET fingerprint=?, data=? WHERE id=?").run(
           fingerprint(q),
           JSON.stringify(q),
           q.id,
         );
+        invalidateQuestions();
+      }
     } else addQ(q);
   }
   const memberships = createMembershipStore(db);
@@ -433,6 +452,9 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
     communityStorageLimit,
     getQ,
     allQ,
+    questionRevision: () => questionRevision,
+    communityRevision: () => communityRevision,
+    studyRevision: (userId) => studyRevisions.get(userId || "local") || 0,
     allA,
     addQ,
     saveUserQuestionDraft(userId, certificateId, question) {
@@ -710,6 +732,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
           "DELETE FROM question_favorites WHERE user_id=? AND question_id=?",
         ).run(normalizedUserId, questionId);
       }
+      invalidateStudy(normalizedUserId);
       return favorite;
     },
     favoriteQuestions: (userId = "local") => {
@@ -723,12 +746,15 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         .filter((question) => ids.has(question.id))
         .map((question) => ({ ...question, favorite: true }));
     },
-    dismissWrongQuestion: (userId, questionId) =>
-      db
+    dismissWrongQuestion: (userId, questionId) => {
+      const result = db
         .prepare(
           "INSERT OR REPLACE INTO wrong_dismissals (user_id,question_id,dismissed_at) VALUES (?,?,?)",
         )
-        .run(userId || "local", questionId, new Date().toISOString()),
+        .run(userId || "local", questionId, new Date().toISOString());
+      invalidateStudy(userId);
+      return result;
+    },
     settings: (userId = "local") => {
       const r = db
         .prepare("SELECT data FROM user_settings WHERE user_id=?")
@@ -860,38 +886,29 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
     },
     mastery: (questionIds, userId) => {
       const allowed = questionIds ? new Set(questionIds) : null;
-      const questions = visibleQuestions(userId).filter(
-          (q) => !allowed || allowed.has(q.id),
-        ),
-        attempts = allA(userId).filter(
-          (attempt) => !allowed || allowed.has(attempt.questionId),
-        );
-      return [
-        ...new Set(
-          questions.map((q) => q.targetKnowledgePoint || q.knowledgePoint),
-        ),
-      ].map((knowledgePoint) => {
-        const pointQuestions = questions.filter(
-          (question) =>
-            (question.targetKnowledgePoint || question.knowledgePoint) ===
-            knowledgePoint,
-        );
-        const pointQuestionIds = new Set(
-          pointQuestions.map((question) => question.id),
-        );
-        return {
-          userId: userId || "local",
-          knowledgePointId: knowledgePoint,
-          knowledgePoint,
-          chapter: pointQuestions[0].chapter,
-          knowledgeSection: pointQuestions[0].knowledgeSection || null,
-          ...calculateMastery(
-            attempts.filter((attempt) =>
-              pointQuestionIds.has(attempt.questionId),
-            ),
-          ),
-        };
-      });
+      const attempts = allA(userId);
+      const groups = new Map();
+      const pointByQuestion = new Map();
+      const attemptedIds = new Set(attempts.map((attempt) => attempt.questionId));
+      for (const question of visibleQuestions(userId, attemptedIds)) {
+        if (allowed && !allowed.has(question.id)) continue;
+        const point = question.targetKnowledgePoint || question.knowledgePoint;
+        if (!groups.has(point)) groups.set(point, { question, attempts: [] });
+        pointByQuestion.set(question.id, point);
+      }
+      for (const attempt of attempts) {
+        if (allowed && !allowed.has(attempt.questionId)) continue;
+        if (pointByQuestion.has(attempt.questionId))
+          groups.get(pointByQuestion.get(attempt.questionId)).attempts.push(attempt);
+      }
+      return [...groups.entries()].map(([knowledgePoint, group]) => ({
+        userId: userId || "local",
+        knowledgePointId: knowledgePoint,
+        knowledgePoint,
+        chapter: group.question.chapter,
+        knowledgeSection: group.question.knowledgeSection || null,
+        ...calculateMastery(group.attempts),
+      }));
     },
     recordAttempt(
       questionId,
@@ -954,6 +971,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         db.exec("RELEASE attempt");
         throw e;
       }
+      invalidateStudy(userId);
       return {
         ...a,
         answer: q.answer,
@@ -961,7 +979,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         analysis: q.analysis,
       };
     },
-    wrongQuestions: (userId) => {
+    wrongQuestions: (userId, attempts = allA(userId)) => {
       const normalizedUserId = userId || "local";
       const dismissed = new Set(
         db
@@ -969,31 +987,34 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
           .all(normalizedUserId)
           .map((row) => row.questionId),
       );
-      return visibleQuestions(userId)
-        .filter(
-          (q) =>
-            !dismissed.has(q.id) &&
-            allA(userId).some((a) => a.questionId === q.id && !a.correct),
-        )
+      const history = new Map();
+      for (const attempt of attempts) {
+        let item = history.get(attempt.questionId);
+        if (!item) {
+          item = { wrongCount: 0, lastAttempt: null, lastWrong: null };
+          history.set(attempt.questionId, item);
+        }
+        item.lastAttempt = attempt;
+        if (!attempt.correct) {
+          item.wrongCount += 1;
+          item.lastWrong = attempt;
+        }
+      }
+      const reviews = new Map(db.prepare(
+        "SELECT question_id AS questionId, data FROM user_reviews WHERE user_id=?",
+      ).all(normalizedUserId).map((row) => [row.questionId, JSON.parse(row.data)]));
+      const mistakes = new Map(db.prepare(
+        "SELECT question_id AS questionId, data FROM user_mistakes WHERE user_id=?",
+      ).all(normalizedUserId).map((row) => [row.questionId, JSON.parse(row.data)]));
+      return visibleQuestions(userId, new Set(history.keys()))
+        .filter((q) => !dismissed.has(q.id) && history.get(q.id)?.wrongCount)
         .map((q) => {
-          const history = allA(userId).filter((a) => a.questionId === q.id);
-          const r = db
-              .prepare(
-                "SELECT data FROM user_reviews WHERE user_id=? AND question_id=?",
-              )
-              .get(userId || "local", q.id),
-            m = db
-              .prepare(
-                "SELECT data FROM user_mistakes WHERE user_id=? AND question_id=?",
-              )
-              .get(userId || "local", q.id);
+          const item = history.get(q.id);
           return {
             ...q,
-            wrongCount: history.filter((a) => !a.correct).length,
-            lastAttempt: history.at(-1),
-            lastWrong: history.filter((a) => !a.correct).at(-1),
-            review: r ? JSON.parse(r.data) : null,
-            mistake: m ? JSON.parse(m.data) : null,
+            ...item,
+            review: reviews.get(q.id) || null,
+            mistake: mistakes.get(q.id) || null,
           };
         });
     },
@@ -1060,9 +1081,11 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         day = userId;
         userId = "local";
       }
-      return db
+      const result = db
         .prepare("INSERT OR REPLACE INTO user_daily VALUES (?,?,?)")
         .run(userId || "local", day, JSON.stringify(data));
+      invalidateStudy(userId);
+      return result;
     },
     queue: (topic, userId, certificateId) =>
       db
@@ -1104,10 +1127,13 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         };
       });
     },
-    setAiGroupShared: (id, userId, shared) =>
-      db
+    setAiGroupShared: (id, userId, shared) => {
+      const changed = db
         .prepare("UPDATE ai_groups SET shared=? WHERE id=? AND user_id=?")
-        .run(shared ? 1 : 0, id, userId || "local").changes > 0,
+        .run(shared ? 1 : 0, id, userId || "local").changes > 0;
+      if (changed) communityRevision += 1;
+      return changed;
+    },
     saveQuestionFeedback: (userId, questionId, kind, note = "") =>
       db
         .prepare(
@@ -1366,6 +1392,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         JSON.stringify(next),
         questionId,
       );
+      invalidateQuestions();
       return next;
     },
     deleteQuestion: (questionId, deletedBy, reason = "") => {
@@ -1401,6 +1428,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         db.exec("ROLLBACK");
         throw error;
       }
+      invalidateQuestions();
       return true;
     },
     adminUsers: (search = "") => {
@@ -1747,5 +1775,8 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       }
     },
   };
+  // Pay the JSON parsing cost during startup so the first learner request
+  // reads the same in-memory question set as subsequent requests.
+  allQ();
   return store;
 }

@@ -79,11 +79,11 @@ try {
     );
   }, session);
   await page.goto(base);
-  await page.getByText('今天学什么？', { exact: true }).waitFor();
+  await page.getByText('每一步，都有进度', { exact: true }).waitFor();
   await page.getByRole('button', { name: '练习导航', exact: true }).click();
   await page.getByText('题库练习', { exact: true }).waitFor();
   const chapter = page.getByRole('button', {
-    name: `直接练习大知识点 ${largeChapter.name}`,
+    name: `练习整个大知识点 ${largeChapter.name}`,
     exact: true,
   });
   await chapter.waitFor();
@@ -124,23 +124,11 @@ try {
   assert.equal((await attempt).status(), 200); // Selection survived the tab switch.
   await page.getByText('下一题', { exact: true }).waitFor();
   await page.getByRole('button', { name: '今日导航', exact: true }).click();
-  await page.getByText('1 / 30 题', { exact: true }).waitFor();
+  await page.getByText('继续今日学习', { exact: true }).waitFor();
   await page.getByRole('button', { name: '错题导航', exact: true }).click();
-  await page.getByText('全部错题 · 1 道', { exact: true }).waitFor();
+  await page.getByText('找到薄弱，逐个掌握', { exact: true }).waitFor();
   await page.getByRole('button', { name: '练习导航', exact: true }).click();
   await page.getByText('下一题', { exact: true }).waitFor();
-  await page.getByRole('button', { name: '社区导航', exact: true }).click();
-  await page.getByText('社区还很安静', { exact: true }).waitFor();
-  await page.getByRole('button', { name: '练习导航', exact: true }).click();
-  const communityRequests = requests.filter((url) =>
-    url.startsWith('/api/community/messages'),
-  ).length;
-  await page.clock.fastForward(11_000);
-  assert.equal(
-    requests.filter((url) => url.startsWith('/api/community/messages')).length,
-    communityRequests,
-    'Hidden community must stop polling',
-  );
   await page.screenshot({ path: 'test-output/mobile-practice-cache.png' });
   const dashboardRequests = requests.filter((url) =>
     url.startsWith('/api/dashboard'),
@@ -166,7 +154,7 @@ try {
   );
   await page.getByLabel('返回题库目录', { exact: true }).click();
   await page
-    .getByRole('button', { name: /^直接练习大知识点 / })
+    .getByRole('button', { name: /^练习整个大知识点 / })
     .first()
     .waitFor();
   await page.clock.fastForward(1000);
@@ -175,16 +163,17 @@ try {
   );
   await page.route('**/api/**', (route) => route.abort('internetdisconnected'));
   await page.reload();
-  await page.getByText('今天学什么？', { exact: true }).waitFor();
+  await page.getByText('每一步，都有进度', { exact: true }).waitFor();
+  await page.getByText(`已刷 40 / ${catalog.total} 题`, { exact: true }).waitFor();
   await page.getByRole('button', { name: '练习导航', exact: true }).click();
   await page
-    .getByRole('button', { name: /^直接练习大知识点 / })
+    .getByRole('button', { name: /^练习整个大知识点 / })
     .first()
     .waitFor();
   await page.screenshot({ path: 'test-output/mobile-offline-catalog.png' });
   await page
     .getByRole('button', {
-      name: `直接练习大知识点 ${largeChapter.name}`,
+      name: `练习整个大知识点 ${largeChapter.name}`,
       exact: true,
     })
     .click();
@@ -204,7 +193,6 @@ try {
       pageSize: firstPage.items.length,
       extraQuestionRequestsOnTabReturn: 0,
       extraCatalogRequestsOnTabReturn: 0,
-      hiddenCommunityPolling: false,
       hiddenDashboardRequests: 0,
       offlineCatalogAndQuestion: true,
       accountAttempts: 40,

@@ -98,6 +98,25 @@ test('mutations and scope changes cannot be overwritten by earlier responses', a
   assert.equal(cache.snapshot('/wrong').data, undefined);
 });
 
+test('practice paints fresh pages immediately and keeps invalidated pages readable offline', async (t) => {
+  const { cache, advance } = await fixture(t);
+  const key = '/questions?page=1&limit=40&offset=0&bankOnly=1';
+  const first = { items: [{ id: 'q1', attempted: false }], total: 1, nextOffset: null };
+  await cache.read(key, async () => first);
+  assert.deepEqual(cache.peekFresh(key), first);
+  advance(60_000);
+  assert.equal(cache.peekFresh(key), undefined);
+  cache.invalidate(['/questions?']);
+  const refresh = deferred();
+  const nextRead = cache.read(key, () => refresh.promise);
+  await tick();
+  assert.equal(cache.peekFresh(key), undefined);
+  assert.deepEqual(await nextRead, first);
+  refresh.resolve({ items: [{ id: 'q1', attempted: true }], total: 1, nextOffset: null });
+  await tick();
+  assert.equal(cache.snapshot(key).data.items[0].attempted, true);
+});
+
 test('only allowlisted study data survives a restart; secrets, private AI questions, chat and wrong answers never persist', async (t) => {
   const {
     cache,
