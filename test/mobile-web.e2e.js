@@ -150,9 +150,19 @@ try {
       assert.equal(store.accountEntitlement(session.user.id).plan, 'vip');
       await page.getByRole('button', { name: '完成', exact: true }).click();
       await tab('我的');
-      await text('AI 学习助手').click();
-      await text('API 配置尚未解锁').waitFor();
-      await page.getByRole('button', { name: '查看解锁入口', exact: true }).click();
+      const [aiEntitlementResponse] = await Promise.all([
+        page.waitForResponse((r) => r.url().endsWith('/api/account/entitlements') && r.request().method() === 'GET'),
+        text('AI 学习助手').click(),
+      ]);
+      const aiEntitlement = await aiEntitlementResponse.json();
+      if (aiEntitlement.canManageAiService) {
+        await text('服务配置').waitFor();
+        await page.getByRole('button', { name: '关闭 AI 配置', exact: true }).click();
+        await tab('VIP');
+      } else {
+        await page.getByText('无需填写个人 API。', { exact: false }).filter({ visible: true }).waitFor();
+        await page.getByRole('button', { name: '查看 AI 额度', exact: true }).click();
+      }
       await text('使用兑换码开通会员').waitFor();
       await shot('vip');
       console.log(`${engine}: membership, check-in and web dialog callbacks`);

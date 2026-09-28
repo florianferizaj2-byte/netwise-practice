@@ -1823,7 +1823,7 @@ function App() {
                       <p>
                         {dashboard.aiConfigured
                           ? "根据你的练习记录，安排今天的学习重点。"
-                          : "连接你的 AI 服务，开启今日学习计划。"}
+                          : "作者 AI 服务暂未就绪，请稍后再试。"}
                       </p>
                       <button
                         className="primary"
@@ -1834,12 +1834,12 @@ function App() {
                                 await api("/ai/daily", {});
                                 await refresh();
                               })
-                            : go("settings")
+                            : go("vip")
                         }
                       >
                         {dashboard.aiConfigured
                           ? "生成今日计划"
-                          : "配置 AI 服务"}
+                          : "查看 AI 额度"}
                         <ArrowRight size={16} />
                       </button>
                     </div>
@@ -2136,7 +2136,7 @@ function App() {
                 start={start}
                 busy={busy}
                 configured={dashboard.aiConfigured}
-                settings={() => go("settings")}
+                settings={() => go("vip")}
               />
             </>
           )}
@@ -3049,9 +3049,9 @@ function TrainingView({
       {!configured && (
         <div className="alert">
           <PlugZap size={18} />
-          <span>尚未连接 AI 服务</span>
+          <span>作者 AI 服务暂未就绪，无需配置个人 API，请联系站点管理员。</span>
           <button onClick={settings}>
-            前往设置
+            查看 AI 额度
             <ArrowRight size={16} />
           </button>
         </div>
@@ -3680,13 +3680,13 @@ function AboutView({ onSponsor }) {
         </div>
         <p>每一个认真学习的人，都应该拥有一条不被费用和时间挡住的路。</p>
         <p>我希望，让暂时无力承担学费的同学，也能接触到经过整理、真正精练有用的题目；让没有时间参加补课的同学，也能利用通勤、排队和睡前的碎片时间，一点点向前进步；让每个人都能体验到更现代、更贴近自己的 AI 教育。</p>
-        <p>考匠网站永久免费。唯一可能产生费用的部分，是 AI 供应商收取的 API 使用费，这笔费用不会进入作者口袋。</p>
+        <p>普通题库继续免费开放。AI 服务由作者统一提供，按账号额度使用，可通过每日签到或会员获取额度。</p>
         <p>如果考匠对你有帮助，欢迎打赏一笔小小的支持，帮助我们持续维护题库、改进体验，让考匠社区越来越好。</p>
       </section>
       <div className="about-value-grid">
         <article><BookOpen size={20} /><strong>精练题库</strong><span>围绕真实学习目标整理练习。</span></article>
         <article><Clock size={20} /><strong>碎片学习</strong><span>随时打开，利用几分钟持续进步。</span></article>
-        <article><Sparkles size={20} /><strong>AI 助学</strong><span>解析、错因和变式训练按账号独立配置。</span></article>
+        <article><Sparkles size={20} /><strong>AI 助学</strong><span>共用作者 AI 服务，额度与学习记录按账号独立计算。</span></article>
       </div>
       <div className="about-footnote"><span>愿每一次短暂练习，都能变成看得见的进步。</span><button className="primary" onClick={onSponsor}><Heart size={16} />去赞助作者</button></div>
     </>
@@ -3727,7 +3727,7 @@ function SettingsView({
       .catch(() => {});
   }, []);
   useEffect(() => {
-    if (!membership.account?.apiConfigUnlocked) {
+    if (!membership.account?.canManageAiService) {
       setS(null);
       setKey("");
       setShow(false);
@@ -3754,7 +3754,7 @@ function SettingsView({
     return () => {
       live = false;
     };
-  }, [membership.account?.apiConfigUnlocked]);
+  }, [membership.account?.canManageAiService]);
   useEffect(() => {
     if (!deepSeekGuideOpen) return;
     const closeOnEscape = (event) => {
@@ -3926,22 +3926,22 @@ function SettingsView({
           </button>
         </div>
       </section>
-      {!membership.account?.apiConfigUnlocked && (
+      {!membership.account?.canManageAiService && (
         <ApiAccessNotice membership={membership} onOpenVip={onOpenVip} />
       )}
-      {membership.account?.apiConfigUnlocked && settingsLoading && (
+      {membership.account?.canManageAiService && settingsLoading && (
         <div className="vip-config-loading" role="status">
           <LoaderCircle className="spin" size={18} />
-          正在读取个人 API 设置…
+          正在读取作者 AI 服务设置…
         </div>
       )}
-      {membership.account?.apiConfigUnlocked && settingsError && (
+      {membership.account?.canManageAiService && settingsError && (
         <div className="vip-config-error" role="alert">
           <span>{settingsError}</span>
           <button
             disabled={!!busy}
             onClick={() =>
-              run("正在读取个人 API 设置", async () => {
+              run("正在读取作者 AI 服务设置", async () => {
                 await load();
                 setSettingsError("");
               })
@@ -3951,13 +3951,14 @@ function SettingsView({
           </button>
         </div>
       )}
-      {membership.account?.apiConfigUnlocked && s && (
+      {membership.account?.canManageAiService && s && (
         <>
           <div className="settings-tabs">
             <span>AI 设置</span>
           </div>
           <section className="settings-layout">
             <div className="settings-form">
+              <p className="hint">作者管理的全站 AI 服务。所有账号共用此服务并独立扣额；服务器 AI_SERVICE_* 或 AUTHOR_API_* 环境配置优先。</p>
               <div className="settings-form-heading">
                 <h2>
                   <PlugZap size={21} />
@@ -4252,7 +4253,7 @@ function SettingsView({
                   >
                     <div className="author-api-deploy-copy">
                       <strong>使用作者 API</strong>
-                      <p>输入部署密码后，将 DeepSeek 配置保存到当前账号。</p>
+                      <p>输入服务器部署密码后，将预设服务保存为作者配置，供所有账号使用。</p>
                     </div>
                     <div className="author-api-deploy-row">
                       <label>
@@ -5277,7 +5278,7 @@ function AdminView({
               <h2>
                 <PlugZap size={20} /> 管理员 AI 服务
               </h2>
-              <p>这里只服务管理员扩充题库，与普通用户各自的 AI 配置完全隔离。</p>
+              <p>用于管理员扩充题库；主管理员的配置也可作为全站作者 AI 服务的备用配置。</p>
             </div>
             <span className={settings.hasKey ? "badge green" : "badge red"}>{settings.hasKey ? "已配置" : "未配置"}</span>
           </div>

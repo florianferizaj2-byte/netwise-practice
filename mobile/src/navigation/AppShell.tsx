@@ -998,9 +998,13 @@ const createStyles = (colors: ThemeColors) =>
     },
     screen: {
       flex: 1,
+      minHeight: 0,
+      minWidth: 0,
     },
     content: {
       flex: 1,
+      minHeight: 0,
+      minWidth: 0,
     },
     aiProgressPosition: {
       position: 'absolute',
@@ -1223,6 +1227,7 @@ const createStyles = (colors: ThemeColors) =>
     },
     tabBar: {
       backgroundColor: colors.surface,
+      flexShrink: 0,
       borderTopColor: colors.border,
       borderTopWidth: 1,
       flexDirection: 'row',
@@ -1233,6 +1238,7 @@ const createStyles = (colors: ThemeColors) =>
     tab: {
       alignItems: 'center',
       flex: 1,
+      minWidth: 0,
       gap: 2,
       minHeight: 52,
       justifyContent: 'center',

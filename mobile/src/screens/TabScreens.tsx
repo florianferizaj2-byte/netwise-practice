@@ -564,8 +564,8 @@ export function PracticeScreen({
     if (preview) {
       const previewText =
         action === '给我提示'
-          ? '预览模式只展示页面结构。登录并配置 AI 后，这里会返回不会直接泄露答案的分步提示。'
-          : '预览模式只展示页面结构。登录并配置 AI 后，这里会返回针对当前题目的详细讲解。';
+          ? '预览模式只展示页面结构。登录并领取 AI 额度后，这里会返回不会直接泄露答案的分步提示。'
+          : '预览模式只展示页面结构。登录并领取 AI 额度后，这里会返回针对当前题目的详细讲解。';
       if (action === '给我提示') setHintText(previewText);
       else setTeacherText(previewText);
       setAiBusy('');
@@ -602,7 +602,7 @@ export function PracticeScreen({
       setAiAnalysis({
         mistakeType: '预览示例',
         weakKnowledge: 'OSPF 选举资格',
-        reason: '登录并配置 AI 后，服务会结合你的错误选项和历史作答记录分析薄弱点。',
+        reason: '登录并领取 AI 额度后，服务会结合你的错误选项和历史作答记录分析薄弱点。',
       });
       setAiBusy('');
       return;
@@ -628,7 +628,7 @@ export function PracticeScreen({
     setAiError(null);
     setAiBusy('train');
     if (preview) {
-      setTrainingNotice('登录并配置 AI 后，这里会根据当前知识点生成 3 道变式题。');
+      setTrainingNotice('登录并领取 AI 额度后，这里会根据当前知识点生成 3 道变式题。');
       setAiBusy('');
       return;
     }
@@ -1327,7 +1327,7 @@ export function ProfileScreen({
   const [communityNameBusy, setCommunityNameBusy] = useState(false);
   const [communityNameError, setCommunityNameError] = useState('');
   const [settings, setSettings] = useState<AiSettingsResponse | null>(null);
-  const [apiConfigUnlocked, setApiConfigUnlocked] = useState(false);
+  const [canManageAiService, setCanManageAiService] = useState(false);
   const [settingsBusy, setSettingsBusy] = useState(false);
   const [settingsSaveBusy, setSettingsSaveBusy] = useState(false);
   const [settingsNotice, setSettingsNotice] = useState('');
@@ -1343,7 +1343,7 @@ export function ProfileScreen({
 
   useEffect(() => {
     if (!user || preview) {
-      setApiConfigUnlocked(false);
+      setCanManageAiService(false);
       setMembershipPlan('free');
       return;
     }
@@ -1352,7 +1352,7 @@ export function ProfileScreen({
     let mounted = true;
     void mobileApi.accountEntitlements()
       .then((result) => {
-        if (mounted && requestId === membershipRevision.current) { setApiConfigUnlocked(result.apiConfigUnlocked); setMembershipPlan(result.plan); }
+        if (mounted && requestId === membershipRevision.current) { setCanManageAiService(!!result.canManageAiService); setMembershipPlan(result.plan); }
       })
       .catch(() => undefined);
     return () => { mounted = false; };
@@ -1388,20 +1388,20 @@ export function ProfileScreen({
 
   async function openAiSettings() {
     if (!user || preview) {
-      Alert.alert('需要登录', '登录考匠账号后可查看 API 配置权限。');
+      Alert.alert('需要登录', '登录考匠账号后即可使用作者 AI 服务并查看剩余额度。');
       return;
     }
     setSettingsBusy(true);
     try {
       const entitlement = await mobileApi.accountEntitlements();
-      setApiConfigUnlocked(entitlement.apiConfigUnlocked);
-      if (!entitlement.apiConfigUnlocked) {
+      setCanManageAiService(!!entitlement.canManageAiService);
+      if (!entitlement.canManageAiService) {
         Alert.alert(
-          'API 配置尚未解锁',
-          '一次性支付 ¥9.9 解锁后，即可在这里填写自己的 API。',
+          entitlement.aiServiceAvailable ? '作者 AI 服务已连接' : '作者 AI 服务暂未就绪',
+          '无需填写个人 API。解析、提示和分析每次扣对应额度，出题扣签到机会或会员题数；失败自动返还。可在 VIP 页查看和领取额度。',
           [
             { text: '稍后再说', style: 'cancel' },
-            { text: '查看解锁入口', onPress: () => onNavigate('vip') },
+            { text: '查看 AI 额度', onPress: () => onNavigate('vip') },
           ],
         );
         return;
@@ -1464,7 +1464,7 @@ export function ProfileScreen({
       const result = await mobileApi.settings();
       setSettings(result);
       setApiKey('');
-      setSettingsNotice('已保存到当前账号，做题时即可使用 AI 服务。');
+      setSettingsNotice('作者 AI 配置已保存，所有账号共用服务并独立扣除额度。');
     } catch (error: unknown) {
       setSettingsError(error instanceof Error ? error.message : '保存 AI 配置失败');
     } finally {
@@ -1496,7 +1496,7 @@ export function ProfileScreen({
       });
       setAuthorPassword('');
       setAuthorApiOpen(false);
-      setSettingsNotice('作者 API 已配置到当前账号，可以开始使用 AI 服务。');
+      setSettingsNotice('作者预设配置已保存，所有账号共用服务并独立扣除额度。');
     } catch (error: unknown) {
       setSettingsError(error instanceof Error ? error.message : '作者 API 部署失败');
     } finally {
@@ -1506,7 +1506,7 @@ export function ProfileScreen({
 
   return (
     <ScreenContainer profile>
-      <RedeemCodeModal visible={active && redeemOpen} preview={preview} userId={user?.id} onClose={() => setRedeemOpen(false)} onRedeemed={(result) => { membershipRevision.current++; setMembershipPlan(result.plan); setApiConfigUnlocked(result.apiConfigUnlocked); }} />
+      <RedeemCodeModal visible={active && redeemOpen} preview={preview} userId={user?.id} onClose={() => setRedeemOpen(false)} onRedeemed={(result) => { membershipRevision.current++; setMembershipPlan(result.plan); setCanManageAiService(!!result.canManageAiService); }} />
       {communityOpen && (
         <Modal
           animationType="slide"
@@ -1613,7 +1613,7 @@ export function ProfileScreen({
           <SettingRow
             onPress={() => void openAiSettings()}
             title="AI 学习助手"
-            value={apiConfigUnlocked ? '自带 API 已解锁' : '¥9.9 一次解锁'}
+            value={canManageAiService ? '管理作者服务' : '作者服务 · 按额度使用'}
           />
           <SettingRow
             onPress={user ? openCommunityNameSettings : undefined}
@@ -1893,7 +1893,7 @@ export function ProfileScreen({
               <View style={styles.modalHeader}>
                 <View style={styles.modalHeaderCopy}>
                   <Text style={styles.modalTitle}>AI 学习助手</Text>
-                  <Text style={styles.modalKicker}>只为当前账号保存</Text>
+                  <Text style={styles.modalKicker}>全站作者服务配置</Text>
                 </View>
                 <AnimatedPressable
                   accessibilityLabel="关闭 AI 配置"
@@ -1905,20 +1905,20 @@ export function ProfileScreen({
                 </AnimatedPressable>
               </View>
               <Text style={styles.modalIntro}>
-                配置后，做题页可以使用 AI 提示、错因解析、详细讲解和变式训练。密钥只会提交到当前账号的后端设置，不会写入 App。
+                此处由站点作者管理全站 AI 服务。密钥保存在服务器，普通用户无需配置；若服务器设置了作者 API 环境变量，会优先使用环境变量。
               </Text>
 
               <View style={styles.settingsStatusCard}>
                 <View>
-                  <Text style={styles.settingsStatusLabel}>当前 AI 状态</Text>
+                  <Text style={styles.settingsStatusLabel}>作者账号保存的配置</Text>
                   <Text style={styles.settingsStatusHint}>
                     {preview
                       ? '预览模式，登录后可保存'
                       : settingsBusy
                         ? '正在读取配置…'
                         : settings?.hasKey
-                          ? '已配置，可以调用'
-                          : '尚未配置 API Key'}
+                          ? '已保存作者密钥；环境配置仍优先'
+                          : '尚未在作者账号保存密钥；可使用服务器环境配置'}
                   </Text>
                 </View>
                 <Text style={styles.settingsStatusIcon}>{settings?.hasKey ? '✓' : '✦'}</Text>
@@ -1963,14 +1963,14 @@ export function ProfileScreen({
                 autoCapitalize="none"
                 editable={!preview && !settingsSaveBusy}
                 onChangeText={setApiKey}
-                placeholder={settings?.hasKey ? '已配置，留空可保留原 Key' : '粘贴你的 API Key'}
+                placeholder={settings?.hasKey ? '已配置，留空可保留原 Key' : '输入作者 API Key'}
                 placeholderTextColor={colors.textFaint}
                 secureTextEntry
                 style={styles.settingsInput}
                 value={apiKey}
               />
               <Text style={styles.settingsHint}>
-                不填写 API Key 时，保存会保留当前账号已有的密钥；作者 API 也只会写入当前账号。
+                不填写 API Key 时，保存会保留作者账号已有的密钥。普通账号通过作者服务使用 AI，无需保存个人密钥。
               </Text>
 
               <View style={styles.settingsToolRow}>
@@ -1992,7 +1992,7 @@ export function ProfileScreen({
                 <View style={styles.authorApiCard}>
                   <Text style={styles.authorApiTitle}>使用作者 API</Text>
                   <Text style={styles.authorApiText}>
-                    输入作者提供的部署密码后，服务器会把作者 API 安全配置到你的账号。App 不保存密码。
+                    输入服务器部署密码后，将预设服务保存为作者配置，供所有账号使用。App 不保存密码。
                   </Text>
                   <TextInput
                     autoCapitalize="none"
@@ -2012,7 +2012,7 @@ export function ProfileScreen({
                     {settingsSaveBusy ? (
                       <ActivityIndicator color={colors.white} />
                     ) : (
-                      <Text style={styles.modalPrimaryText}>部署到当前账号</Text>
+                      <Text style={styles.modalPrimaryText}>保存为作者配置</Text>
                     )}
                   </AnimatedPressable>
                 </View>
@@ -2024,7 +2024,7 @@ export function ProfileScreen({
                   <GuideStep number="1" text="打开 DeepSeek 开放平台并登录账号。" />
                   <GuideStep number="2" text="在 API Keys 页面创建一个新的 Key。" />
                   <GuideStep number="3" text="回到这里，填写 API 地址、模型和 Key。" />
-                  <GuideStep number="4" text="点击底部保存，之后做题页就能调用 AI。" />
+                  <GuideStep number="4" text="点击底部保存，所有账号即可按各自额度使用 AI。" />
                   <AnimatedPressable
                     onPress={() =>
                       void Linking.openURL('https://platform.deepseek.com/api_keys').catch(
@@ -2107,7 +2107,7 @@ export function ProfileScreen({
                   我希望，让暂时无力承担学费的同学，也能接触到经过整理、真正精练有用的题目；让没有时间参加补课的同学，也能利用通勤、排队和睡前的碎片时间，一点点向前进步；让每个人都能体验到更现代、更贴近自己的 AI 教育。
                 </Text>
                 <Text style={styles.authorMessage}>
-                  考匠网站永久免费。唯一可能产生费用的部分，是 AI 供应商收取的 API 使用费，这笔费用不会进入作者口袋。
+                  普通题库继续免费开放。AI 服务由作者统一提供，按账号额度使用，可通过每日签到或会员获取额度。
                 </Text>
                 <Text style={styles.authorMessage}>
                   如果考匠对你有帮助，欢迎打赏一笔小小的支持，帮助我们持续维护题库、改进体验，让考匠社区越来越好。

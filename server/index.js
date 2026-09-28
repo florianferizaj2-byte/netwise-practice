@@ -27,10 +27,11 @@ import { findSimilarQuestions, questionSimilarity } from "./question-similarity.
 import { questionImageSchema, validateQuestion } from "./domain.js";
 import { questionPage } from "./question-paging.js";
 import { studySummary } from "./study-summary.js";
+import { authorAiAvailable, authorAiOwner } from "./ai-service.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const mobileRelease = () => {
-  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.3.7";
+  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.3.8";
   const minimumVersion =
     process.env.MOBILE_MINIMUM_VERSION || "0.2.8";
   return {
@@ -41,7 +42,7 @@ const mobileRelease = () => {
       `/downloads/kaojiang-v${latestVersion}.apk`,
     releaseNotes:
       process.env.MOBILE_RELEASE_NOTES ||
-      "题库常驻内存，首页结果 30 秒内复用；缩短题目列表、错题汇总和首页加载时间。",
+      "所有账号统一使用作者 AI 服务，按账号额度扣除解析、分析和出题次数；优化移动页面适配。",
   };
 };
 async function exchangeWechatMiniProgramCode(code) {
@@ -744,35 +745,22 @@ export async function createApp(options = {}) {
     if (authRequired && !req.user?.id) throw new Error("请先登录");
     return req.user?.id || "local";
   };
-  const aiQuestionRevision = (question) =>
-    crypto
-      .createHash("sha256")
-      .update(JSON.stringify({
-        type: question.type,
-        question: question.question,
-        options: question.options,
-        answer: question.answer,
-        analysis: question.analysis,
-        chapter: question.chapter,
-        knowledgePoint: question.targetKnowledgePoint || question.knowledgePoint,
-      }))
-      .digest("hex");
   const requireApiConfigAccess = (req) => {
     const userId = requestUserId(req);
-    if (authRequired && userId !== "local" && !store.accountEntitlement(userId).apiConfigUnlocked) {
-      const error = new Error("自带 API 配置需先在 VIP 区域一次性解锁");
+    if (authRequired && authorAiOwner(store)?.id !== userId) {
+      const error = new Error("AI 学习统一使用作者服务，无需配置个人 API；可在 VIP 页查看剩余额度");
       error.status = 403;
-      error.code = "API_CONFIG_LOCKED";
+      error.code = "AUTHOR_AI_MANAGED";
       throw error;
     }
     return userId;
   };
-  const aiServiceAvailable = (userId) =>
-    !!store.settings(userId).keyCipher ||
-    !!(process.env.AI_SERVICE_API_KEY || process.env.AUTHOR_API_KEY);
-  const trainingSetIsAvailable = (question, count, harder, userId, certificateId) => {
-    const topic = `${question.targetKnowledgePoint || question.knowledgePoint}:${harder ? "hard" : "adaptive"}`;
-    return store.queue(topic, userId, certificateId).length >= count;
+  const aiServiceAvailable = () => authorAiAvailable(store);
+  const requireAiService = () => {
+    if (!aiServiceAvailable() && !options.provider)
+      throw Object.assign(new Error("作者 AI 服务暂未就绪，请联系站点管理员；无需配置个人 API"), {
+        status: 503, code: "AUTHOR_AI_UNAVAILABLE",
+      });
   };
   const dailyAiCreditView = (userId, date = day()) => {
     const credit = store.dailyAiCredits(userId, date);
@@ -793,10 +781,13 @@ export async function createApp(options = {}) {
   };
   const accountEntitlementView = (userId) => ({
     ...store.accountEntitlement(userId),
-    aiServiceAvailable: aiServiceAvailable(userId),
+    aiServiceAvailable: aiServiceAvailable(),
+    aiServiceMode: "author",
+    canManageAiService: authorAiOwner(store)?.id === userId,
     checkIn: dailyAiCreditView(userId),
   });
   const reserveGenerationCredit = (userId, count = 10) => {
+    requireAiService();
     if (!authRequired || userId === "local") return { reserved: false };
     const creditDay = day();
     if (store.consumeDailyAiCredit(userId, creditDay, "generation")) return { reserved: true, day: creditDay };
@@ -810,18 +801,19 @@ export async function createApp(options = {}) {
     if (credit.membershipId) store.refundMembershipGeneration(userId, credit.membershipId);
     else if (credit.day) store.refundDailyAiCredit(userId, credit.day, "generation");
   };
-  const withDailyAiCredit = async (userId, kind, run, { skipCharge = false, count = 10 } = {}) => {
-    if (skipCharge) return run();
+  const withDailyAiCredit = async (userId, kind, run, { count = 10 } = {}) => {
+    requireAiService();
     if (kind === "generation") {
       const credit = reserveGenerationCredit(userId, count);
       try { return await run(); }
       catch (error) { refundGenerationCredit(userId, credit); throw error; }
     }
-    if (!authRequired || userId === "local" || store.accountEntitlement(userId).plan !== "free")
+    if (!authRequired || userId === "local")
       return run();
     const creditDay = day();
     if (!store.consumeDailyAiCredit(userId, creditDay, kind)) {
-      const error = new Error("今日的 AI 机会已用完，请明天签到后继续");
+      const label = kind === "analysis" ? "AI 分析" : "AI 解析";
+      const error = new Error(`今日${label}额度不足，请在 VIP 页签到领取或查看剩余额度`);
       error.status = 429;
       error.code = "DAILY_AI_CREDIT_EXHAUSTED";
       throw error;
@@ -906,17 +898,19 @@ export async function createApp(options = {}) {
       throw error;
     }
     const current = store.settings(userId);
+    const baseUrl = validateBaseUrl(process.env.AUTHOR_API_BASE_URL?.trim() || "https://api.deepseek.com");
+    const model = process.env.AUTHOR_API_MODEL?.trim() || "deepseek-chat";
     store.saveSettings(userId, {
       ...current,
-      baseUrl: "https://api.deepseek.com",
-      model: "deepseek-chat",
+      baseUrl,
+      model,
       temperature: 0.3,
       keyCipher: encrypt(authorApiKey),
     });
     return {
       deployed: true,
-      baseUrl: "https://api.deepseek.com",
-      model: "deepseek-chat",
+      baseUrl,
+      model,
       temperature: 0.3,
     };
   });
@@ -2176,7 +2170,7 @@ export async function createApp(options = {}) {
       ...summary,
       mastery,
       chapters,
-      aiConfigured: aiServiceAvailable(userId),
+      aiConfigured: aiServiceAvailable(),
       aiBusy,
       plan: store.getDaily(userId, dailyKey(certificateId, today)),
       user: req.user ? userView(req.user) : null,
@@ -2193,21 +2187,8 @@ export async function createApp(options = {}) {
         z.object({ questionId: z.string() }).parse(req.body).questionId,
         req,
       );
-      const lastWrong = store
-        .allA(userId)
-        .filter((attempt) => attempt.questionId === question.id && !attempt.correct)
-        .at(-1);
-      const variant = `${aiQuestionRevision(question)}:${lastWrong
-        ? [...(lastWrong.selected || [])].sort().join(",") || "none"
-        : "none"}`;
-      const cacheHit = !!lastWrong && !!store.aiQuestionContent(
-        question.id,
-        "mistake-analysis",
-        variant,
-      );
       return withDailyAiCredit(userId, "analysis", () =>
         provider.analyzeWeakness(question, userId),
-        { skipCharge: cacheHit },
       );
     }),
   );
@@ -2228,13 +2209,6 @@ export async function createApp(options = {}) {
         .parse(req.body);
       const userId = req.user?.id || "local";
       const question = requireQ(b.questionId, req);
-      const cacheHit = trainingSetIsAvailable(
-        question,
-        b.count,
-        b.harder,
-        userId,
-        req.user?.certificateId,
-      );
       const batch = await withDailyAiCredit(userId, "generation", () =>
         provider.generatePracticeSet(
           question,
@@ -2243,7 +2217,7 @@ export async function createApp(options = {}) {
           undefined,
           { userId, certificateId: req.user?.certificateId },
         ),
-        { skipCharge: cacheHit, count: b.count },
+        { count: b.count },
       );
       return { ...batch, questions: batch.questions.map(publicQuestion) };
     }),
@@ -2267,8 +2241,7 @@ export async function createApp(options = {}) {
     const selection = userQuestionDraftSchema.parse(req.body);
     const certificateId = requireCertificate(req);
     const userId = requestUserId(req);
-    if (!aiServiceAvailable(userId))
-      throw new Error("AI 服务暂未配置，请稍后再试");
+    requireAiService();
     if (store.activeAiQuestionGenerationJob(userId, certificateId)) {
       const error = new Error("已有 AI 题目正在后台生成，请完成后再创建下一组");
       error.status = 409;
@@ -2470,13 +2443,6 @@ export async function createApp(options = {}) {
       const userId = req.user?.id || "local";
       const certificateId = req.user?.certificateId;
       const question = requireQ(b.questionId, req);
-      const cacheHit = trainingSetIsAvailable(
-        question,
-        b.count,
-        b.harder,
-        userId,
-        certificateId,
-      );
       await withDailyAiCredit(userId, "generation", async () => {
         res.status(200);
         res.set({
@@ -2513,7 +2479,7 @@ export async function createApp(options = {}) {
           clearInterval(heartbeat);
           aiBusy = false;
         }
-      }, { skipCharge: cacheHit, count: b.count });
+      }, { count: b.count });
       res.end();
     } catch (error) {
       if (!res.headersSent) return next(error);
@@ -2546,15 +2512,6 @@ export async function createApp(options = {}) {
       const userId = req.user?.id || "local";
       const creditKind = b.action === "为什么我错了？" ? "analysis" : "explanation";
       const question = requireQ(b.questionId, req);
-      const answerVariant = b.action === "为什么我错了？"
-        ? [...b.selected].sort().join(",") || "none"
-        : "standard";
-      const variant = `${aiQuestionRevision(question)}:${answerVariant}`;
-      const cacheHit = b.hintLevel === 0 && !!store.aiQuestionContent(
-        question.id,
-        `explanation:${b.action}`,
-        variant,
-      );
       return withDailyAiCredit(userId, creditKind, () =>
         provider.explainQuestion(
           question,
@@ -2563,7 +2520,6 @@ export async function createApp(options = {}) {
           b.action === "给我提示" ? b.hintLevel : 0,
           userId,
         ),
-        { skipCharge: cacheHit },
       );
     }),
   );
@@ -2653,28 +2609,10 @@ export async function createApp(options = {}) {
     1500,
   );
   aiQuestionJobTimer.unref();
-  const dailyRetryAt = new Map();
-  const timer = setInterval(() => {
-    if (aiBusy) return;
-    const now = Date.now();
-    const candidates = authRequired
-      ? store.allUsers().filter((user) => user.certificateId)
-      : [{ id: "local", certificateId: undefined }];
-    const candidate = candidates.find(
-      (user) =>
-        now >= (dailyRetryAt.get(user.id) || 0) &&
-        store.settings(user.id).keyCipher &&
-        !store.getDaily(user.id, dailyKey(user.certificateId)) &&
-        store.allA(user.id).length,
-    );
-    if (!candidate) return;
-    dailyRetryAt.set(candidate.id, now + 3600000);
-    generateDaily(candidate.id, candidate.certificateId).catch(() => {});
-  }, 60000);
-  timer.unref();
+  // AI learning plans are requested by the learner. A background timer must
+  // never spend their daily credits merely because the shared service is ready.
   app.locals.store = store;
   app.locals.stop = () => {
-    clearInterval(timer);
     clearInterval(aiQuestionJobTimer);
   };
   return app;

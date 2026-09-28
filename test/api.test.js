@@ -528,7 +528,7 @@ test("secure cookie follows the actual HTTP protocol", async (t) => {
   assert.equal((await auth.json()).authenticated, true);
 });
 
-test("AI settings are isolated by account even when the old auth bypass flag is present", async (t) => {
+test("author AI settings are shared for use but manageable only by the owner", async (t) => {
   const previousMasterKey = process.env.AI_MASTER_KEY;
   const previousDisableAuth = process.env.DISABLE_AUTH;
   process.env.AI_MASTER_KEY = crypto.randomBytes(32).toString("base64");
@@ -580,7 +580,11 @@ test("AI settings are isolated by account even when the old auth bypass flag is 
   };
   assert.equal((await request(first.cookie, "/settings", configuration, "PUT")).status, 200);
   assert.equal((await request(first.cookie, "/settings")).data.hasKey, true);
-  assert.equal((await request(second.cookie, "/settings")).data.hasKey, false);
+  assert.equal((await request(second.cookie, "/settings")).status, 403);
+  assert.equal((await request(second.cookie, "/settings", configuration, "PUT")).status, 403);
+  const secondAccess = await request(second.cookie, "/account/entitlements");
+  assert.equal(secondAccess.data.aiServiceAvailable, true);
+  assert.equal(secondAccess.data.canManageAiService, false);
   assert.ok(store.settings(first.user.id).keyCipher);
   assert.equal(store.settings(second.user.id).keyCipher, undefined);
   assert.equal(store.settings("local").keyCipher, undefined);
@@ -642,6 +646,7 @@ test("server-generated AI groups are immutable, shareable by certificate, and ke
     "ai_other_certificate",
     "hcia-datacom",
   );
+  assert.equal((await request(owner.cookie, "/account/check-in", {})).status, 200);
   const seed = store.allQ().find((q) => q.knowledgePoint === "DR/BDR选举");
   const forged = await request(owner.cookie, "/ai/train", {
     questionId: seed.id,
@@ -1429,7 +1434,8 @@ test("管理员面板隔离管理员 API，支持扩题、重合检测、删题�
   };
   assert.equal((await request(admin.cookie, "/admin/settings", configuration, "PUT")).status, 200);
   assert.equal((await request(admin.cookie, "/admin/settings")).data.hasKey, true);
-  assert.equal((await request(member.cookie, "/settings")).data.hasKey, false);
+  assert.equal((await request(member.cookie, "/settings")).status, 403);
+  assert.equal((await request(member.cookie, "/account/entitlements")).data.aiServiceAvailable, true);
   assert.ok(!JSON.stringify(await request(admin.cookie, "/admin/settings")).includes("admin-only-key"));
   const taxonomy = await request(admin.cookie, "/admin/options");
   assert.equal(taxonomy.status, 200);

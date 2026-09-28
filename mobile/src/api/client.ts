@@ -506,6 +506,8 @@ export type AccountEntitlementsResponse = {
   expiresAt: string | null;
   apiConfigUnlocked: boolean;
   aiServiceAvailable: boolean;
+  aiServiceMode?: 'author';
+  canManageAiService?: boolean;
   generation?: { limit: number; used: number; remaining: number; periodStart: string | null; periodEnd: string | null };
   checkIn: {
     day: string;

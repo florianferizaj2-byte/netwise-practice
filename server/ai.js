@@ -2,6 +2,7 @@ import crypto from "node:crypto";
 import { z } from "zod";
 import { decrypt, validateBaseUrl, redact } from "./security.js";
 import { questionSimilarity } from "./question-similarity.js";
+import { authorAiSettings } from "./ai-service.js";
 import {
   validateQuestion,
   normalizeQuestionDraft,
@@ -120,26 +121,12 @@ export class OpenAICompatibleProvider extends AIProvider {
   }
   async call(messages, settings, options = {}) {
     const userId = options.userId || "local";
-    settings ||= this.store.settings(userId);
-    const serviceKey = process.env.AI_SERVICE_API_KEY || process.env.AUTHOR_API_KEY || "";
-    if (!settings.keyCipher && serviceKey) {
-      settings = {
-        baseUrl:
-          process.env.AI_SERVICE_BASE_URL ||
-          process.env.AUTHOR_API_BASE_URL ||
-          "https://api.deepseek.com",
-        model:
-          process.env.AI_SERVICE_MODEL ||
-          process.env.AUTHOR_API_MODEL ||
-          "deepseek-chat",
-        temperature: 0.3,
-      };
-    }
-    if (!settings.keyCipher && !serviceKey)
-      throw new Error("当前 AI 服务尚未配置，请稍后再试");
+    settings ||= authorAiSettings(this.store);
+    if (!settings || (!settings.keyCipher && !settings.apiKey))
+      throw new Error("作者 AI 服务暂未就绪，请联系站点管理员；无需配置个人 API");
     if (!settings.model) throw new Error("请先配置模型名称");
     const url = validateBaseUrl(settings.baseUrl),
-      key = settings.keyCipher ? decrypt(settings.keyCipher) : serviceKey;
+      key = settings.apiKey || decrypt(settings.keyCipher);
     let usage = {},
       success = false;
     try {
@@ -333,7 +320,7 @@ export class OpenAICompatibleProvider extends AIProvider {
     throw new Error(`AI 输出连续 3 次未通过验证：${last}`);
   }
   reviewSettings(userId = "local") {
-    return { ...this.store.settings(userId), temperature: 0 };
+    return { ...authorAiSettings(this.store), temperature: 0 };
   }
   context(q, selected, userId) {
     const knowledgePoint = q.targetKnowledgePoint || q.knowledgePoint;
@@ -465,7 +452,7 @@ export class OpenAICompatibleProvider extends AIProvider {
   }
   async generateBankExpansion(seed, count, options = {}) {
     const userId = options.userId || "local";
-    const settings = options.settings || this.store.settings(userId);
+    const settings = options.settings || authorAiSettings(this.store);
     const target = seed.targetKnowledgePoint || seed.knowledgePoint;
     const targetSection = seed.knowledgeSection;
     const existing = [...this.store.allQ(), ...(options.existing || [])];

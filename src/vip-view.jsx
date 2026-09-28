@@ -365,28 +365,16 @@ export function VipView({
             <Quota
               icon={BookOpen}
               label="详细解析"
-              value={
-                account
-                  ? paid
-                    ? "已开通"
-                    : check?.remaining.explanations || 0
-                  : "—"
-              }
-              unit={paid ? "" : "次"}
-              detail={paid ? "答题后查看完整讲解" : "今日剩余解析机会"}
+              value={account ? check?.remaining.explanations || 0 : "—"}
+              unit="次"
+              detail="解析或提示每次扣 1 次，失败返还"
             />
             <Quota
               icon={Target}
               label="错因分析"
-              value={
-                account
-                  ? paid
-                    ? "已开通"
-                    : check?.remaining.analyses || 0
-                  : "—"
-              }
-              unit={paid ? "" : "次"}
-              detail={paid ? "看懂错误，针对性巩固" : "今日剩余分析机会"}
+              value={account ? check?.remaining.analyses || 0 : "—"}
+              unit="次"
+              detail="错因分析或 AI 学习计划每次扣 1 次"
             />
           </div>
           <div className="vip-account-foot">
@@ -723,8 +711,7 @@ export function VipView({
           </summary>
           <p>
             VIP、SVIP、SSVIP 每 30 天分别包含 100、300、600 道 AI
-            新题，都可使用详细解析和错因分析，也能领取每日签到奖励。Free
-            用户可通过签到获得当日 AI 学习机会。
+            新题。所有等级均可签到领取每日 5 次解析、1 组出题和 3 次分析额度，每次使用扣对应额度。
           </p>
         </details>
         <details>
@@ -735,7 +722,7 @@ export function VipView({
           <p>
             AI 出题优先使用当日签到机会，再使用会员额度。会员额度按首次开通起每
             30
-            天更新，未用完的额度不结转；同等级续期延长有效期，不提前重置当期额度。生成失败会返还对应额度。
+            天更新，未用完的额度不结转；同等级续期延长有效期，不提前重置当期额度。解析、提示和分析每次扣 1 次对应额度；已有结果再次通过 AI 功能请求时也会扣额，单纯阅读当前页面不重复扣除。失败会返还对应额度。
           </p>
         </details>
         <details>
@@ -753,21 +740,19 @@ export function VipView({
       <details className="vip-api-entry">
         <summary>
           <KeyRound size={16} />
-          <span>使用自己的 API</span>
+          <span>作者 AI 服务</span>
           <small>
-            {account?.apiConfigUnlocked ? "已解锁" : "进阶选项 · ¥9.9 一次解锁"}
+            无需配置 · 按使用扣额
           </small>
           <ChevronDown size={15} />
         </summary>
         <div>
           <p>
-            {account?.apiConfigUnlocked
-              ? "个人 API 配置权限已解锁，可前往设置连接自己的 AI 服务。"
-              : "个人 API 配置为独立权益，会员兑换码不包含此权限。目前支付通道准备中，暂未开放购买。"}
+            所有账号统一使用作者提供的 AI 服务。解析、提示和分析每次扣对应额度；出题优先使用签到机会，再使用会员题数，失败自动返还。已生成题组可反复练习。
           </p>
-          {account?.apiConfigUnlocked && (
+          {account?.canManageAiService && (
             <button type="button" onClick={() => navigate("settings")}>
-              前往配置
+              管理作者服务
               <ArrowRight size={15} />
             </button>
           )}
@@ -843,13 +828,15 @@ export function ApiAccessNotice({ membership, onOpenVip }) {
     <section className="vip-access-notice">
       <KeyRound size={21} />
       <div>
-        <h2>个人 API 配置</h2>
+        <h2>作者 AI 服务</h2>
         <p>
           {membership.loading && !membership.account
-            ? "正在读取配置权限…"
+            ? "正在读取 AI 服务状态…"
             : membership.account
-              ? "独立配置权限 · ¥9.9 一次解锁，可在 VIP 中心查看。"
-              : "暂时无法读取配置权限，请在会员区域重试。"}
+              ? membership.account.aiServiceAvailable
+                ? "已接入作者服务，无需填写 API。每次使用扣对应额度，失败自动返还。"
+                : "作者服务暂未就绪，请联系站点管理员；你的额度会保留。"
+              : "暂时无法读取服务状态，请在 VIP 中心重试。"}
         </p>
       </div>
       <button type="button" onClick={onOpenVip}>

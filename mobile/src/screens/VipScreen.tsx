@@ -225,28 +225,19 @@ export function VipScreen({
             <View style={styles.rule} />
             <Quota
               label="详细解析"
-              value={
-                hasAccount
-                  ? paid
-                    ? "可用"
-                    : check?.remaining.explanations || 0
-                  : "—"
-              }
-              unit={paid ? "" : "次"}
+              value={hasAccount ? check?.remaining.explanations || 0 : "—"}
+              unit="次"
             />
             <View style={styles.rule} />
             <Quota
               label="错因分析"
-              value={
-                hasAccount
-                  ? paid
-                    ? "可用"
-                    : check?.remaining.analyses || 0
-                  : "—"
-              }
-              unit={paid ? "" : "次"}
+              value={hasAccount ? check?.remaining.analyses || 0 : "—"}
+              unit="次"
             />
           </View>
+          <Text style={styles.quotaFootnote}>
+            作者提供 AI 服务，无需个人 API。解析、提示或分析每次扣 1 次对应额度；出题扣签到机会或会员题数，失败返还。
+          </Text>
           {paid && account?.generation && (
             <Text style={styles.quotaFootnote}>
               本期会员新题剩余 {account.generation.remaining} /{" "}
@@ -352,13 +343,13 @@ export function VipScreen({
           <Benefit
             glyph="≡"
             title="把每道题讲明白"
-            detail="详细步骤、核心知识点，做完再看完整讲解"
+            detail="详细步骤与核心知识点，每次扣 1 次解析额度"
             color={selectedColor}
           />
           <Benefit
             glyph="↗"
             title="找到出错的原因"
-            detail="分析答题思路，针对薄弱知识点继续巩固"
+            detail="定位薄弱知识点，每次扣 1 次分析额度"
             color={selectedColor}
           />
           <View style={styles.benefitFooter}>
@@ -386,21 +377,17 @@ export function VipScreen({
             accessibilityRole="button"
             onPress={() =>
               Alert.alert(
-                account?.apiConfigUnlocked ? "已解锁个人 API" : "个人 API 配置",
-                account?.apiConfigUnlocked
-                  ? "可前往「我的 → AI 学习助手」配置。"
-                  : "一次性 ¥9.9 解锁配置权限。支付通道准备中，会员兑换码不包含这项独立权限。",
+                "作者 AI 服务",
+                "所有账号统一使用作者提供的 AI 服务，无需填写 API 或部署密码。每次使用扣对应额度，失败自动返还；已生成的题组可反复练习。",
               )
             }
             style={styles.apiEntry}
           >
             <Text style={styles.apiGlyph}>⌘</Text>
             <View style={styles.flex}>
-              <Text style={styles.apiTitle}>使用自己的 API</Text>
+              <Text style={styles.apiTitle}>作者 AI 服务</Text>
               <Text style={styles.apiMeta}>
-                {account?.apiConfigUnlocked
-                  ? "已解锁 · 前往我的配置"
-                  : "进阶选项 · ¥9.9 一次解锁"}
+                {account?.aiServiceAvailable === false ? "服务暂未就绪 · 额度保留" : "无需配置 · 按使用扣额"}
               </Text>
             </View>
             <Text style={styles.apiArrow}>›</Text>
