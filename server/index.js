@@ -28,6 +28,7 @@ import { questionImageSchema, validateQuestion } from "./domain.js";
 import { questionPage } from "./question-paging.js";
 import { studySummary } from "./study-summary.js";
 import { authorAiAvailable, authorAiOwner } from "./ai-service.js";
+import { registerGuestTrialRoutes } from "./guest-trial.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const mobileRelease = () => {
@@ -431,6 +432,7 @@ export async function createApp(options = {}) {
       forceUpdate: compareVersions(currentVersion, release.minimumVersion) < 0,
     };
   });
+  registerGuestTrialRoutes({ route, store, provider, runAI: (work) => ai(work), customProvider: !!options.provider });
   app.use("/api", (req, res, next) => {
     if (!authRequired) return next();
     const user = store.authUser(requestToken(req));

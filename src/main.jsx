@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 const appleMobile = Boolean(window.kaojiangAppleMobile);
 import { createRoot } from "react-dom/client";
 import { PracticeModes } from "./practice-modes.jsx";
+import { useDesktopWeb, DesktopLanding, DesktopCertificatePicker, DesktopToolbar, DesktopHome } from "./desktop-experience.jsx";
 import { AdminMembershipCodes, MembershipBadge } from "./admin-memberships.jsx";
 import {
   VipView,
@@ -76,6 +77,7 @@ import {
 } from "lucide-react";
 import "./style.css";
 import "./exam-scope.css";
+import "./desktop.css";
 
 async function api(url, body, method) {
   const res = await fetch("/api" + url, {
@@ -1158,6 +1160,7 @@ function CertificatePicker({ certificates, onSelect }) {
   );
 }
 function App() {
+  const desktop = useDesktopWeb();
   const [page, setPage] = useState(location.hash.slice(1) || "home"),
     [auth, setAuth] = useState(null),
     [bankSource, setBankSource] = useState("all"),
@@ -1181,6 +1184,13 @@ function App() {
     [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const accountMenuRef = useRef(null);
   const membership = useMembershipAccount(api, auth?.authenticated ? auth.user?.id : null, page);
+  useEffect(() => {
+    if (desktop) window.scrollTo({ top: 0, behavior: "instant" });
+    else if (page === "welcome") {
+      setPage("home");
+      location.hash = "home";
+    }
+  }, [desktop, page, auth?.authenticated]);
   const refresh = async () => {
     const [d, w, q] = await Promise.all([
       api("/dashboard"),
@@ -1423,6 +1433,8 @@ function App() {
         <p>正在检查登录状态</p>
       </div>
     );
+  if (!auth.authenticated && desktop)
+    return <DesktopLanding api={api} certificates={auth.certificates} initialError={error} navigate={go} onAuth={(result) => { setError(""); setAuth(result); }} />;
   if (!auth.authenticated)
     return (
       <AuthScreen
@@ -1433,6 +1445,11 @@ function App() {
         }}
       />
     );
+  if (!auth.user.certificateId && desktop)
+    return <DesktopCertificatePicker certificates={auth.certificates} onSignOut={signOut} onSelect={async (certificateId) => {
+      const result = await api("/auth/certificate", { certificateId }, "PUT");
+      setAuth((old) => ({ ...old, user: result.user }));
+    }} />;
   if (!auth.user.certificateId)
     return (
       <CertificatePicker
@@ -1490,8 +1507,9 @@ function App() {
     )
     .sort(() => Math.random() - 0.5)
     .slice(0, 10);
+  if (desktop && page === "welcome") return <DesktopLanding api={api} certificates={auth.certificates} authenticated navigate={go} />;
   return (
-    <div className="app-shell">
+    <div className={`app-shell${desktop ? " desk-workspace" : ""}`}>
       <aside className={"sidebar " + (mobile ? "open" : "")}>
         <a className="brand" href="#home" onClick={() => go("home")}>
           <span className="brand-icon">
@@ -1501,9 +1519,9 @@ function App() {
             考匠<span>AceExam</span>
           </strong>
         </a>
-        <div className="workspace-label">
+        {desktop ? <button className="desk-certificate-switch" onClick={() => go("settings")} title="切换备考证书"><GraduationCap size={19} /><span><strong>{dashboard.certificate?.shortName}</strong><small>切换备考证书</small></span><ChevronDown size={14} /></button> : <div className="workspace-label">
           {dashboard.certificate?.shortName} · 学习工作台
-        </div>
+        </div>}
         <nav aria-label="主导航">
           {navGroups.map((group) => {
             const entries = group.pages.map((id) => navs.find((entry) => entry[0] === id))
@@ -1544,7 +1562,7 @@ function App() {
                 <button role="menuitem" onClick={() => { setAccountMenuOpen(false); go("redeem"); }}>
                   <Ticket size={17} />兑换码
                 </button>
-                <a
+                {desktop ? <button role="menuitem" onClick={() => { setAccountMenuOpen(false); go("welcome"); }}><Download size={17} />多端学习与下载</button> : <a
                   className="account-menu-link"
                   role="menuitem"
                   href={appleMobile ? "/app/" : "/downloads/kaojiang-v0.3.6.apk"}
@@ -1553,7 +1571,7 @@ function App() {
                 >
                   <Download size={17} />
                   {appleMobile ? "打开移动版" : "下载 App"}
-                </a>
+                </a>}
                 <button role="menuitem" onClick={signOut}>
                   <UserRound size={17} />
                   切换账号
@@ -1567,6 +1585,7 @@ function App() {
           </div>
           <button
             className={page === "settings" ? "active" : ""}
+            title={desktop ? "设置" : undefined}
             onClick={() => go("settings")}
           >
             <Settings size={19} />
@@ -1575,6 +1594,7 @@ function App() {
           </button>
           <button
             className={page === "about" ? "active" : ""}
+            title={desktop ? "关于考匠" : undefined}
             onClick={() => go("about")}
           >
             <BadgeInfo size={19} />
@@ -1583,15 +1603,22 @@ function App() {
           </button>
           <button
             className="sponsor-sidebar-button"
+            title={desktop ? "赞助作者" : undefined}
             onClick={() => setSponsorOpen(true)}
           >
             <Heart size={17} />
             赞助作者
           </button>
+          {desktop && <button title="考匠品牌首页" onClick={() => go("welcome")}><Monitor size={17} />考匠品牌首页<ArrowRight size={15} /></button>}
         </div>
       </aside>
       <div className="main-wrap">
         <header className="topbar">
+          {desktop ? <DesktopToolbar
+            pageTitle={navs.find((n) => n[0] === page)?.[1] || { settings: "设置", about: "关于考匠", practice: session?.title || "练习中", redeem: "会员兑换" }[page] || "学习总览"}
+            navs={[...navs.filter(([id]) => id !== "admin" || dashboard.user?.isAdmin), ["settings", "账号设置", Settings], ["redeem", "会员兑换", Ticket], ["about", "关于考匠", BadgeInfo], ["welcome", "考匠品牌首页", Monitor]]}
+            chapters={dashboard.chapters} go={go} openChapter={openChapter} plan={membership.account?.plan} username={dashboard.user?.username}
+          /> : <>
           <div>
             <IconButton
               icon={Menu}
@@ -1629,6 +1656,7 @@ function App() {
             })}
             </span>
           </div>
+          </>}
         </header>
         <main>
           {error && (
@@ -1659,7 +1687,17 @@ function App() {
               <span>{busy}</span>
             </div>
           )}
-          {page === "home" && (
+          {page === "home" && (desktop ? <DesktopHome
+            dashboard={dashboard} go={go} openChapter={openChapter} weak={weak} busy={busy}
+            startRecommended={() => start(recommendedQuestions, "今日推荐练习")}
+            favoriteCount={favoriteQuestions.length} openFavorites={() => start(favoriteQuestions, "我的收藏")}
+            practicePoint={(point) => start(allQuestions.filter((question) => question.knowledgePoint === point || question.targetKnowledgePoint === point), point)}
+            onPlan={() => run("正在生成今日学习计划", async () => { await api("/ai/daily", { refresh: true }); await refresh(); })}
+            trainTask={(task) => {
+              const question = wrong.find((item) => item.knowledgePoint === task.knowledgePoint) || allQuestions.find((item) => item.knowledgePoint === task.knowledgePoint || item.targetKnowledgePoint === task.knowledgePoint);
+              if (question) train(question, task.count); else go("training");
+            }}
+          /> : (
             <>
               <div className="page-heading">
                 <div>
@@ -1955,7 +1993,7 @@ function App() {
                 </button>
               </div>
             </>
-          )}
+          ))}
           {page === "chapters" && (
             <>
               <Heading

@@ -28,6 +28,17 @@ const question = (i) =>
     difficulty: "easy",
   });
 async function fixture(t, fetchImpl, options = {}) {
+  const names = ["AI_MASTER_KEY", "AI_SERVICE_API_KEY", "AI_SERVICE_BASE_URL",
+    "AI_SERVICE_MODEL", "AI_SERVICE_OWNER_ID", "AUTHOR_API_KEY",
+    "AUTHOR_API_BASE_URL", "AUTHOR_API_MODEL", "ADMIN_USERNAME"];
+  const previous = Object.fromEntries(names.map((name) => [name, process.env[name]]));
+  for (const name of names) delete process.env[name];
+  t.after(() => {
+    for (const [name, value] of Object.entries(previous)) {
+      if (value === undefined) delete process.env[name];
+      else process.env[name] = value;
+    }
+  });
   process.env.AI_MASTER_KEY = crypto.randomBytes(32).toString("base64");
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "netwise-api-")),
     store = createStore(dir),

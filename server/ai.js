@@ -85,6 +85,17 @@ const aiQuestionRevision = (question) =>
 const explanationSchema = z
   .object({ text: z.string().min(8).max(6000) })
   .strict();
+// Shared by signed-in learners and anonymous trials. A wrong-answer explanation
+// is reusable only for the same selected option and the same question revision.
+export function questionExplanationCacheKey(question, action, selected = []) {
+  const answerVariant = action === "为什么我错了？"
+    ? [...selected].sort().join(",") || "none"
+    : "standard";
+  return { kind: `explanation:${action}`, variant: `${aiQuestionRevision(question)}:${answerVariant}` };
+}
+export function questionMistakeCacheKey(question, selected = []) {
+  return { kind: "mistake-analysis", variant: `${aiQuestionRevision(question)}:${[...selected].sort().join(",") || "none"}` };
+}
 const planSchema = z
   .object({
     summary: z.string().min(5).max(1500),
@@ -370,17 +381,19 @@ export class OpenAICompatibleProvider extends AIProvider {
       .filter((a) => a.questionId === q.id && !a.correct)
       .at(-1);
     if (!lastWrong) throw new Error("这道题暂无错误作答记录");
-    const variant = `${aiQuestionRevision(q)}:${[...(lastWrong.selected || [])].sort().join(",") || "none"}`;
-    const cached = this.store.aiQuestionContent(q.id, "mistake-analysis", variant);
-    if (cached) {
-      this.store.saveMistake(q.id, cached, userId);
-      return cached;
-    }
+    const accepted = await this.analyzeAnswerMistake(q, lastWrong.selected || [], userId);
+    this.store.saveMistake(q.id, accepted, userId);
+    return accepted;
+  }
+  async analyzeAnswerMistake(q, selected, userId = "guest-trial") {
+    const { kind, variant } = questionMistakeCacheKey(q, selected);
+    const cached = this.store.aiQuestionContent(q.id, kind, variant);
+    if (cached) return cached;
     const result = await this.structured(
       '只根据原题与用户选择的错误选项，分析可能的知识误区；不要推测用户心理或引用不存在的个人历史。返回 {"mistakeType":"snake_case","weakKnowledge":"具体薄弱知识","reason":"该选项错在哪里及可能对应的知识误区"}。',
       {
         question: q,
-        selectedAnswer: lastWrong.selected || [],
+        selectedAnswer: selected,
         correctAnswer: q.answer,
         chapter: q.chapter,
         knowledgePoint: q.targetKnowledgePoint || q.knowledgePoint,
@@ -393,11 +406,10 @@ export class OpenAICompatibleProvider extends AIProvider {
     );
     const accepted = this.store.saveAiQuestionContent(
       q.id,
-      "mistake-analysis",
+      kind,
       variant,
       result,
     );
-    this.store.saveMistake(q.id, accepted, userId);
     return accepted;
   }
   async generateQuestion(q, request = {}) {
@@ -916,11 +928,7 @@ export class OpenAICompatibleProvider extends AIProvider {
   async explainQuestion(q, action, selected, hintLevel = 0, userId) {
     userId ||= "local";
     const hints = hintLevel > 0;
-    const answerVariant = action === "为什么我错了？"
-      ? [...(selected || [])].sort().join(",") || "none"
-      : "standard";
-    const variant = `${aiQuestionRevision(q)}:${answerVariant}`;
-    const cacheKind = `explanation:${action}`;
+    const { kind: cacheKind, variant } = questionExplanationCacheKey(q, action, selected || []);
     if (!hints) {
       const cached = this.store.aiQuestionContent(q.id, cacheKind, variant);
       if (cached) return cached;
