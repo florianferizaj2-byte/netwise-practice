@@ -6,12 +6,10 @@ import {
   BookOpen,
   Check,
   ChevronRight,
-  Clock3,
   Crown,
   Download,
   GraduationCap,
   Layers3,
-  Lightbulb,
   MessageCircle,
   Monitor,
   NotebookPen,
@@ -19,11 +17,9 @@ import {
   ShieldCheck,
   Smartphone,
   Sparkles,
-  Star,
   Target,
   TrendingUp,
   X,
-  RotateCcw,
   Compass,
 } from "lucide-react";
 
@@ -290,24 +286,6 @@ export function DesktopLanding({
 }) {
   const [authDialog, setAuthDialog] = useState(null);
   const [certificatePreview, setCertificatePreview] = useState(null);
-  const [download, setDownload] = useState(null);
-  useEffect(() => {
-    let active = true;
-    api("/mobile/version")
-      .then((result) => {
-        const href = result.downloadUrl;
-        if (
-          active &&
-          typeof href === "string" &&
-          (/^https?:\/\//i.test(href) || /^\/(?!\/)/.test(href))
-        )
-          setDownload(href);
-      })
-      .catch(() => {});
-    return () => {
-      active = false;
-    };
-  }, [api]);
   const enter = (page = "home", mode = "login") =>
     authenticated ? navigate(page) : setAuthDialog({ page, mode });
   const scroll = (id) =>
@@ -332,7 +310,7 @@ export function DesktopLanding({
             <button onClick={() => scroll("desk-certificates")}>
               备考证书
             </button>
-            <button onClick={() => scroll("desk-devices")}>多端学习</button>
+            <button onClick={() => navigate("downloads")}>多端学习与下载</button>
           </nav>
           <div className="desk-nav-actions">
             {!authenticated && (
@@ -585,12 +563,9 @@ export function DesktopLanding({
               登录同一账号，接着你的进度往前走。
             </p>
             <div className="desk-device-actions">
-              {download && (
-                <a className="desk-button desk-primary" href={download}>
-                  <Download size={17} />
-                  下载 Android App
-                </a>
-              )}
+              <button className="desk-button desk-primary" onClick={() => navigate("downloads")}>
+                <Monitor size={17} />查看多端学习与下载<ArrowUpRight size={16} />
+              </button>
               <a className="desk-button desk-secondary" href="/app/">
                 <Smartphone size={17} />
                 打开手机网页版
@@ -786,17 +761,7 @@ export function DesktopToolbar({
           <span>搜索功能与章节</span>
           <kbd>Ctrl K</kbd>
         </button>
-        <button className="desk-member-button" onClick={() => go("vip")}>
-          <Crown size={17} />
-          {plan && plan !== "free" ? plan.toUpperCase() : "会员中心"}
-        </button>
-        <button
-          className="desk-user-avatar"
-          aria-label={`${username || "我的"}账号设置`}
-          onClick={() => go("settings")}
-        >
-          {(username || "考").slice(0, 1).toUpperCase()}
-        </button>
+        <button className="study-download-link" onClick={() => go("downloads")}><Download size={17} />多端下载</button>
       </div>
       {searchOpen && (
         <DesktopDialog
@@ -845,347 +810,4 @@ export function DesktopToolbar({
   );
 }
 
-export function DesktopHome({
-  dashboard,
-  go,
-  startRecommended,
-  openChapter,
-  favoriteCount,
-  openFavorites,
-  weak,
-  practicePoint,
-  onPlan,
-  trainTask,
-  busy,
-}) {
-  const chapters = dashboard.chapters || [];
-  const attempted = chapters.reduce(
-    (sum, item) => sum + (item.attempted || 0),
-    0,
-  );
-  const total = chapters.reduce((sum, item) => sum + (item.total || 0), 0);
-  const progress = total
-    ? Math.min(100, Math.round((attempted / total) * 100))
-    : 0;
-  const hours = new Date().getHours();
-  const greeting =
-    hours < 6
-      ? "夜深了"
-      : hours < 12
-        ? "上午好"
-        : hours < 18
-          ? "下午好"
-          : "晚上好";
-  const todayLabel = new Date().toLocaleDateString("zh-CN", {
-    month: "long",
-    day: "numeric",
-    weekday: "long",
-  });
-  return (
-    <div className="desk-home">
-      <div className="desk-home-heading">
-        <div>
-          <p>
-            {todayLabel}
-            <span>每一点进步，都算数</span>
-          </p>
-          <h1>
-            {greeting}，{dashboard.user?.username || "学习者"}。
-          </h1>
-        </div>
-        <button
-          className="desk-button desk-secondary"
-          onClick={() => go("guide")}
-        >
-          <GraduationCap size={17} />
-          {dashboard.certificate?.shortName}
-          <ChevronRight size={15} />
-        </button>
-      </div>
-      <div className="desk-home-top">
-        <section className="desk-study-hero">
-          <div>
-            <span className="desk-study-label">
-              <span />
-              今天的学习，从这里开始
-            </span>
-            <h2>
-              让知识，
-              <br />
-              成为你的确定性。
-            </h2>
-            <p>
-              {dashboard.todayCount
-                ? `今天已经完成 ${dashboard.todayCount} 次作答，继续保持自己的节奏。`
-                : "先练一组题，为今天积累一点新的底气。"}
-            </p>
-            <button className="desk-button" onClick={startRecommended}>
-              开始今日练习
-              <ArrowUpRight size={18} />
-            </button>
-          </div>
-          <div
-            className="desk-progress-orbit"
-            style={{ "--desk-progress": `${progress}%` }}
-          >
-            <div>
-              <BookOpen size={22} />
-              <strong>
-                {progress}
-                <small>%</small>
-              </strong>
-              <span>题库练习进度</span>
-              <small>
-                {attempted} / {total} 道
-              </small>
-            </div>
-          </div>
-        </section>
-        <section className="desk-review-card">
-          <div className="desk-card-heading">
-            <h2>温故，再进一步</h2>
-            <NotebookPen size={20} />
-          </div>
-          <strong>
-            {dashboard.dueCount}
-            <small>道待复习</small>
-          </strong>
-          <p>
-            {dashboard.dueCount
-              ? "把容易忘记的知识，再温习一遍。"
-              : dashboard.wrongCount
-                ? "暂时没有到期复习，也可以主动巩固错题。"
-                : "答错的题会自动收进这里，方便你回头巩固。"}
-          </p>
-          <button
-            className="desk-button desk-secondary"
-            onClick={() => go("wrong")}
-          >
-            打开错题本
-            <ArrowRight size={16} />
-          </button>
-        </section>
-      </div>
-      <section className="desk-stats-strip" aria-label="学习统计">
-        {[
-          [BookOpen, "今日作答", dashboard.todayCount, "题"],
-          [
-            Target,
-            "累计正确率",
-            dashboard.accuracy === null
-              ? "—"
-              : Math.round(dashboard.accuracy * 100),
-            dashboard.accuracy === null ? "" : "%",
-          ],
-          [Clock3, "今日专注", dashboard.minutes, "分钟"],
-          [TrendingUp, "连续学习", dashboard.streakDays || 0, "天"],
-        ].map(([Icon, label, value, unit]) => (
-          <div key={label}>
-            <span>
-              <Icon size={16} />
-              {label}
-            </span>
-            <strong>
-              {value}
-              <small>{unit}</small>
-            </strong>
-          </div>
-        ))}
-      </section>
-      <div className="desk-home-columns">
-        <div>
-          <section className="desk-home-panel desk-chapter-panel">
-            <div className="desk-card-heading">
-              <div>
-                <h2>沿着章节，稳步向前</h2>
-                <p>
-                  {dashboard.certificate?.shortName} · {chapters.length}{" "}
-                  个学习模块
-                </p>
-              </div>
-              <button className="desk-text-link" onClick={() => go("chapters")}>
-                全部章节
-                <ArrowUpRight size={15} />
-              </button>
-            </div>
-            <div className="desk-chapter-rows">
-              {chapters.slice(0, 5).map((chapter, index) => {
-                const percent = chapter.total
-                  ? Math.min(
-                      100,
-                      Math.round(
-                        ((chapter.attempted || 0) / chapter.total) * 100,
-                      ),
-                    )
-                  : 0;
-                return (
-                  <button
-                    key={chapter.name}
-                    onClick={() => openChapter(chapter.name)}
-                  >
-                    <span className="desk-chapter-number">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <div>
-                      <strong>{chapter.name}</strong>
-                      <span>
-                        {chapter.total} 道题 · 已练习 {chapter.attempted || 0}{" "}
-                        道
-                      </span>
-                    </div>
-                    <div className="desk-row-progress">
-                      <span>{percent}%</span>
-                      <i>
-                        <b style={{ width: `${percent}%` }} />
-                      </i>
-                    </div>
-                    <ChevronRight size={17} />
-                  </button>
-                );
-              })}
-            </div>
-          </section>
-          <section className="desk-home-panel desk-tools-panel">
-            <div className="desk-card-heading">
-              <h2>我的学习工具</h2>
-              <span>随时开始</span>
-            </div>
-            <div className="desk-tool-grid">
-              {features
-                .filter((feature) =>
-                  ["exam", "training", "community", "chat"].includes(
-                    feature.page,
-                  ),
-                )
-                .map(({ page, name, icon: Icon }) => (
-                  <button key={page} onClick={() => go(page)}>
-                    <Icon size={23} />
-                    <span>{name}</span>
-                    <ArrowUpRight size={15} />
-                  </button>
-                ))}
-              <button onClick={openFavorites} disabled={!favoriteCount}>
-                <Star size={23} />
-                <span>
-                  我的收藏<small>{favoriteCount}</small>
-                </span>
-                <ArrowUpRight size={15} />
-              </button>
-              <button onClick={() => go("mastery")}>
-                <TrendingUp size={23} />
-                <span>知识掌握度</span>
-                <ArrowUpRight size={15} />
-              </button>
-            </div>
-          </section>
-        </div>
-        <div>
-          <section className="desk-home-panel desk-ai-panel">
-            <div className="desk-card-heading">
-              <h2>
-                <Sparkles size={19} />
-                AI 学习计划
-              </h2>
-              <span className="desk-ai-label">为你定制</span>
-            </div>
-            {dashboard.plan?.tasks?.length ? (
-              <>
-                <p>今天的重点，已经为你整理好。</p>
-                <div className="desk-plan-tasks">
-                  {dashboard.plan.tasks.slice(0, 3).map((task, index) => (
-                    <button
-                      key={`${task.knowledgePoint}-${index}`}
-                      disabled={!!busy}
-                      onClick={() => trainTask(task)}
-                    >
-                      <span>
-                        <strong>{task.knowledgePoint}</strong>
-                        <small>
-                          {task.focus} · {task.count} 道练习
-                        </small>
-                      </span>
-                      <ArrowUpRight size={16} />
-                    </button>
-                  ))}
-                </div>
-                <button
-                  className="desk-text-link"
-                  disabled={!!busy}
-                  onClick={onPlan}
-                >
-                  更新今日计划
-                  <RotateCcw size={14} />
-                </button>
-              </>
-            ) : (
-              <>
-                <div className="desk-ai-symbol">
-                  <Sparkles size={31} />
-                </div>
-                <h3>把下一步，安排明白。</h3>
-                <p>结合练习记录与薄弱点，生成有针对性的每日学习计划。</p>
-                <button
-                  className="desk-button desk-secondary"
-                  disabled={!!busy}
-                  onClick={dashboard.aiConfigured ? onPlan : () => go("vip")}
-                >
-                  {dashboard.aiConfigured ? "生成今日计划" : "了解 AI 学习服务"}
-                  <ArrowRight size={16} />
-                </button>
-              </>
-            )}
-          </section>
-          <section className="desk-home-panel desk-weak-panel">
-            <div className="desk-card-heading">
-              <h2>值得再练一次</h2>
-              <button
-                className="desk-text-link"
-                onClick={() => go("mastery")}
-                aria-label="查看全部知识掌握度"
-              >
-                <ArrowUpRight size={16} />
-              </button>
-            </div>
-            {weak
-              .filter((point) => point.attemptCount)
-              .slice(0, 3)
-              .map((point) => (
-                <button
-                  className="desk-weak-point"
-                  key={point.knowledgePoint}
-                  onClick={() => practicePoint(point.knowledgePoint)}
-                >
-                  <span>{point.knowledgePoint}</span>
-                  <strong>
-                    {point.masteryScore}
-                    <small>/100</small>
-                  </strong>
-                  <i>
-                    <b
-                      style={{
-                        width: `${Math.max(0, Math.min(100, point.masteryScore))}%`,
-                      }}
-                    />
-                  </i>
-                </button>
-              ))}
-            {!weak.some((point) => point.attemptCount) && (
-              <div className="desk-weak-empty">
-                <Target size={27} />
-                <p>
-                  完成一些练习后，
-                  <br />
-                  这里会呈现你需要巩固的知识点。
-                </p>
-                <button className="desk-text-link" onClick={startRecommended}>
-                  从第一组题开始
-                  <ArrowRight size={15} />
-                </button>
-              </div>
-            )}
-          </section>
-        </div>
-      </div>
-    </div>
-  );
-}
+export { DesktopStudyHome as DesktopHome } from "./desktop-workspace.jsx";

@@ -3,6 +3,9 @@ const appleMobile = Boolean(window.kaojiangAppleMobile);
 import { createRoot } from "react-dom/client";
 import { PracticeModes } from "./practice-modes.jsx";
 import { useDesktopWeb, DesktopLanding, DesktopCertificatePicker, DesktopToolbar, DesktopHome } from "./desktop-experience.jsx";
+import { DownloadPage } from "./download-page.jsx";
+import { DesktopChapterBrowser, DesktopPracticeNav, usePracticeProgress } from "./desktop-workspace.jsx";
+import { practiceStorageKey, readPracticeProgress, loadPracticeProgress } from "./practice-progress.js";
 import { AdminMembershipCodes, MembershipBadge } from "./admin-memberships.jsx";
 import {
   VipView,
@@ -78,6 +81,7 @@ import {
 import "./style.css";
 import "./exam-scope.css";
 import "./desktop.css";
+import "./workspace.css";
 
 async function api(url, body, method) {
   const res = await fetch("/api" + url, {
@@ -1183,9 +1187,19 @@ function App() {
     [sponsorOpen, setSponsorOpen] = useState(false),
     [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const accountMenuRef = useRef(null);
+  const [savedPractice, setSavedPractice] = useState(null);
+  const practiceKey = practiceStorageKey(auth?.user?.id, auth?.user?.certificateId);
+  useEffect(() => {
+    try { setSavedPractice(readPracticeProgress(window.localStorage, practiceKey)); }
+    catch { setSavedPractice(null); }
+  }, [practiceKey, page]);
+  useEffect(() => {
+    // Re-entering practice (including browser Back) must read the latest checkpoint.
+    if (desktop && page !== "practice") setSession(null);
+  }, [desktop, page]);
   const membership = useMembershipAccount(api, auth?.authenticated ? auth.user?.id : null, page);
   useEffect(() => {
-    if (desktop) window.scrollTo({ top: 0, behavior: "instant" });
+    if (desktop || page === "downloads") window.scrollTo({ top: 0, behavior: "instant" });
     else if (page === "welcome") {
       setPage("home");
       location.hash = "home";
@@ -1304,10 +1318,42 @@ function App() {
       questions,
       title,
       certificateId: auth.user?.certificateId || dashboard?.certificate?.id || null,
+      storageKey: desktop ? practiceKey : null,
       key: Date.now(),
     });
     go("practice");
   };
+  const resumePractice = () => {
+    setSession(null);
+    go("practice");
+  };
+  useEffect(() => {
+    if (!desktop || page !== "practice" || session || !practiceKey || !allQuestions.length) return;
+    let active = true;
+    try {
+      const saved = readPracticeProgress(window.localStorage, practiceKey);
+      loadPracticeProgress(saved, allQuestions, () => api("/questions/shared-ai"))
+        .then((restored) => {
+          if (!active) return;
+          if (restored) setSession({ ...restored, storageKey: practiceKey, certificateId: auth.user.certificateId, key: Date.now() });
+          else if (saved) {
+            setSavedPractice(null);
+            try { localStorage.removeItem(practiceKey); } catch { /* Private mode. */ }
+          }
+        })
+        .catch(() => { if (active) setError("暂时无法恢复练习，请返回学习总览后重试。"); });
+    } catch { /* A fresh practice can still be started without browser storage. */ }
+    return () => { active = false; };
+  }, [desktop, page, session, practiceKey, allQuestions]);
+  const changeCertificate = (certificateId) => run("正在切换备考证书", async () => {
+    const result = await api("/auth/certificate", { certificateId }, "PUT");
+    try { localStorage.removeItem("netwise-exam"); } catch { /* Private mode. */ }
+    setSession(null); setDashboard(null); setAllQuestions([]); setWrong([]); setSavedPractice(null);
+    setQueue([]); setBankSource("all"); setUseSharedAi(false); setSharedAiQuestions([]);
+    setAuth((old) => ({ ...old, user: result.user }));
+    go("home");
+    setNotice(`已切换到 ${result.user.certificate.shortName}`);
+  });
   const openChapter = (name) => {
     setChapterFocus(name);
     setSectionFocus("");
@@ -1426,6 +1472,7 @@ function App() {
     }
     return () => { active = false; };
   }, [page, auth?.authenticated, auth?.user?.certificateId]);
+  if (page === "downloads") return <DownloadPage api={api} authenticated={!!auth?.authenticated} go={go} />;
   if (auth === null)
     return (
       <div className="loading-page">
@@ -1509,7 +1556,7 @@ function App() {
     .slice(0, 10);
   if (desktop && page === "welcome") return <DesktopLanding api={api} certificates={auth.certificates} authenticated navigate={go} />;
   return (
-    <div className={`app-shell${desktop ? " desk-workspace" : ""}`}>
+    <div className={`app-shell${desktop ? " desk-workspace" : ""}`} data-page={page}>
       <aside className={"sidebar " + (mobile ? "open" : "")}>
         <a className="brand" href="#home" onClick={() => go("home")}>
           <span className="brand-icon">
@@ -1519,25 +1566,27 @@ function App() {
             考匠<span>AceExam</span>
           </strong>
         </a>
-        {desktop ? <button className="desk-certificate-switch" onClick={() => go("settings")} title="切换备考证书"><GraduationCap size={19} /><span><strong>{dashboard.certificate?.shortName}</strong><small>切换备考证书</small></span><ChevronDown size={14} /></button> : <div className="workspace-label">
+        {desktop ? <label className="study-certificate-select"><span>正在备考</span><select aria-label="切换备考证书" value={auth.user.certificateId} disabled={!!busy} onChange={(event) => changeCertificate(event.target.value)}>{auth.certificates.map((certificate) => <option key={certificate.id} value={certificate.id}>{certificate.shortName || certificate.name}</option>)}</select></label> : <div className="workspace-label">
           {dashboard.certificate?.shortName} · 学习工作台
         </div>}
         <nav aria-label="主导航">
-          {navGroups.map((group) => {
+          {(desktop ? [
+            { label: "学习", pages: ["home", "chapters", "wrong", "exam"] },
+            { label: "更多学习工具", pages: ["training", "mastery", "community", "chat", "guide"], collapsible: true },
+            { label: "管理", pages: ["admin"] },
+          ] : navGroups).map((group) => {
             const entries = group.pages.map((id) => navs.find((entry) => entry[0] === id))
               .filter(([id]) => id !== "admin" || dashboard.user?.isAdmin);
             if (!entries.length) return null;
-            return <div className="nav-section" key={group.label}>
-              <span className="nav-section-label">{group.label}</span>
-              {entries.map(([id, label, Icon]) => {
+            const buttons = entries.map(([id, label, Icon]) => {
                 const selected = page === id || (id === "vip" && page === "redeem");
                 return <button key={id} className={`${selected ? "active" : ""} ${id === "vip" ? "nav-vip" : ""}`} aria-current={selected ? "page" : undefined} onClick={() => go(id)}>
                   <Icon size={19} /><span>{label}</span>
                   {id === "wrong" && dashboard.wrongCount > 0 && <small>{dashboard.wrongCount}</small>}
                   {id === "vip" && membership.account?.plan && membership.account.plan !== "free" && <MembershipBadge plan={membership.account.plan} />}
                 </button>;
-              })}
-            </div>;
+              });
+            return group.collapsible ? <details className="study-nav-more" key={group.label} open={group.pages.includes(page) || undefined}><summary>{group.label}<ChevronDown size={15} /></summary><div className="nav-section">{buttons}</div></details> : <div className="nav-section" key={group.label}><span className="nav-section-label">{group.label}</span>{buttons}</div>;
           })}
         </nav>
         <div className="sidebar-bottom">
@@ -1562,7 +1611,7 @@ function App() {
                 <button role="menuitem" onClick={() => { setAccountMenuOpen(false); go("redeem"); }}>
                   <Ticket size={17} />兑换码
                 </button>
-                {desktop ? <button role="menuitem" onClick={() => { setAccountMenuOpen(false); go("welcome"); }}><Download size={17} />多端学习与下载</button> : <a
+                {desktop ? <button role="menuitem" onClick={() => { setAccountMenuOpen(false); go("downloads"); }}><Download size={17} />多端学习与下载</button> : <a
                   className="account-menu-link"
                   role="menuitem"
                   href={appleMobile ? "/app/" : "/downloads/kaojiang-v0.3.6.apk"}
@@ -1616,7 +1665,7 @@ function App() {
         <header className="topbar">
           {desktop ? <DesktopToolbar
             pageTitle={navs.find((n) => n[0] === page)?.[1] || { settings: "设置", about: "关于考匠", practice: session?.title || "练习中", redeem: "会员兑换" }[page] || "学习总览"}
-            navs={[...navs.filter(([id]) => id !== "admin" || dashboard.user?.isAdmin), ["settings", "账号设置", Settings], ["redeem", "会员兑换", Ticket], ["about", "关于考匠", BadgeInfo], ["welcome", "考匠品牌首页", Monitor]]}
+            navs={[...navs.filter(([id]) => id !== "admin" || dashboard.user?.isAdmin), ["settings", "账号设置", Settings], ["redeem", "会员兑换", Ticket], ["about", "关于考匠", BadgeInfo], ["downloads", "多端学习与下载", Download], ["welcome", "考匠品牌首页", Monitor]]}
             chapters={dashboard.chapters} go={go} openChapter={openChapter} plan={membership.account?.plan} username={dashboard.user?.username}
           /> : <>
           <div>
@@ -1689,6 +1738,8 @@ function App() {
           )}
           {page === "home" && (desktop ? <DesktopHome
             dashboard={dashboard} go={go} openChapter={openChapter} weak={weak} busy={busy}
+            savedPractice={savedPractice} resumePractice={resumePractice}
+            reviewWrong={() => { const due = wrong.filter((question) => question.review?.dueAt <= new Date().toISOString()); start(due.length ? due : wrong, "错题复习"); }}
             startRecommended={() => start(recommendedQuestions, "今日推荐练习")}
             favoriteCount={favoriteQuestions.length} openFavorites={() => start(favoriteQuestions, "我的收藏")}
             practicePoint={(point) => start(allQuestions.filter((question) => question.knowledgePoint === point || question.targetKnowledgePoint === point), point)}
@@ -1994,7 +2045,12 @@ function App() {
               </div>
             </>
           ))}
-          {page === "chapters" && (
+          {page === "chapters" && (desktop ? <DesktopChapterBrowser
+            dashboard={dashboard} allQuestions={allQuestions} sharedAiQuestions={sharedAiQuestions}
+            bankSource={bankSource} setBankSource={setBankSource} useSharedAi={useSharedAi} sharedAiLoading={sharedAiLoading} toggleSharedAi={toggleSharedAi}
+            chapterFocus={chapterFocus} setChapterFocus={setChapterFocus} sectionFocus={sectionFocus} setSectionFocus={setSectionFocus}
+            start={start} favoriteQuestions={favoriteQuestions}
+          /> : (
             <>
               <Heading
                 title={
@@ -2129,7 +2185,7 @@ function App() {
                 </Empty>
               )}
             </>
-          )}
+          ))}
           {page === "guide" && (
             <CertificateGuideView
               certificates={auth.certificates}
@@ -2138,6 +2194,7 @@ function App() {
           )}
           {page === "wrong" && (
             <WrongView
+              desktop={desktop} onPractice={() => go("chapters")}
               wrong={wrong}
               start={start}
               train={train}
@@ -2926,7 +2983,7 @@ function CertificateGuideView({ certificates, currentCertificateId }) {
     </div>
   );
 }
-function WrongView({ wrong, start, train, busy, run, refresh }) {
+function WrongView({ wrong, start, train, busy, run, refresh, desktop, onPractice }) {
   const [filter, setFilter] = useState("all"),
     [count, setCount] = useState(5),
     [chapter, setChapter] = useState("");
@@ -2941,16 +2998,16 @@ function WrongView({ wrong, start, train, busy, run, refresh }) {
         title="错题本"
         subtitle={`${wrong.length} 道错题 · 持续追踪，定期回顾`}
       >
-        <button
+        {(!desktop || wrong.length > 0) && <button
           className="primary"
           disabled={!filtered.length}
           onClick={() => start(filtered, "错题复习")}
         >
           <RotateCcw size={17} />
           开始复习
-        </button>
+        </button>}
       </Heading>
-      <div className="toolbar">
+      {(!desktop || wrong.length > 0) && <div className="toolbar">
         <div className="segmented">
           <button
             className={filter === "all" ? "selected" : ""}
@@ -2989,10 +3046,11 @@ function WrongView({ wrong, start, train, busy, run, refresh }) {
             ))}
           </select>
         </label>
-      </div>
+      </div>}
       {!filtered.length ? (
         <Empty title={wrong.length ? "没有符合条件的错题" : "还没有错题记录"}>
-          <p>完成练习后，答错的题目会出现在这里。</p>
+          <p>{wrong.length ? "可以查看全部错题，或切换其他章节。" : "先完成一组练习，错题会自动收集，方便下次复习。"}</p>
+          {desktop && (wrong.length ? <button onClick={() => { setFilter("all"); setChapter(""); }}>查看全部错题</button> : <button className="primary" onClick={onPractice}>去章节练习<ArrowRight size={16} /></button>)}
         </Empty>
       ) : (
         <div className="wrong-list">
@@ -5355,11 +5413,10 @@ function Practice(props) {
   return <GenericPractice {...props} />;
 }
 function GenericPractice({ session, refresh, run, busy, train, configured, exit }) {
+  const desktop = useDesktopWeb();
   const [outcome, setOutcome] = useState({ serial: 0, streak: 0 });
-  const [index, setIndex] = useState(0),
-    [responses, setResponses] = useState({}),
-    [done, setDone] = useState(false),
-    [teacherOpen, setTeacherOpen] = useState(false);
+  const { index, setIndex, responses, setResponses, done, setDone } = usePracticeProgress(session);
+  const [teacherOpen, setTeacherOpen] = useState(false);
   const started = useRef(Date.now());
   const q = session.questions[index];
   const current = responses[q.id] || {};
@@ -5397,6 +5454,7 @@ function GenericPractice({ session, refresh, run, busy, train, configured, exit 
     if (busy || nextIndex < 0 || nextIndex >= session.questions.length) return;
     setIndex(nextIndex);
     setTeacherOpen(false);
+    if (desktop) window.scrollTo({ top: 0, behavior: "instant" });
     started.current = Date.now();
   };
   const submit = () =>
@@ -5525,7 +5583,7 @@ function GenericPractice({ session, refresh, run, busy, train, configured, exit 
               }}
             />
           </div>
-          <div className="practice-question-nav">
+          {!desktop && <div className="practice-question-nav">
             <div className="practice-question-nav-head">
               <strong>题目导航</strong>
               <small>可直接选择题号，已作答题目会保留状态</small>
@@ -5560,6 +5618,7 @@ function GenericPractice({ session, refresh, run, busy, train, configured, exit 
               })}
             </div>
           </div>
+          }
           <div className="question-meta">
             <span className="badge">{questionTypeName(q)}</span>
             <span>{diff[q.difficulty]}</span>
@@ -5771,6 +5830,7 @@ function GenericPractice({ session, refresh, run, busy, train, configured, exit 
           </div>
         </section>
         <aside className="teacher-panel">
+          {desktop && <DesktopPracticeNav questions={session.questions} index={index} responses={responses} busy={busy} jumpTo={jumpTo} />}
           <h2>
             <Sparkles size={21} />
             AI 老师
@@ -5825,18 +5885,17 @@ function GenericPractice({ session, refresh, run, busy, train, configured, exit 
   );
 }
 function VeterinaryPractice({ session, refresh, run, busy, train, exit }) {
+  const desktop = useDesktopWeb();
   const [outcome, setOutcome] = useState({ serial: 0, streak: 0 });
-  const [index, setIndex] = useState(0);
-  const [responses, setResponses] = useState({});
-  const [done, setDone] = useState(false);
+  const { index, setIndex, responses, setResponses, done, setDone } = usePracticeProgress(session);
   const [teacherOpen, setTeacherOpen] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
   const [navFilter, setNavFilter] = useState("all");
   const [navChapter, setNavChapter] = useState(
-    session.questions[0]?.chapter || veterinaryModules[0],
+    session.questions[session.progress?.index || 0]?.chapter || veterinaryModules[0],
   );
   const [navPage, setNavPage] = useState(0);
-  const [jumpValue, setJumpValue] = useState("1");
+  const [jumpValue, setJumpValue] = useState(String((session.progress?.index || 0) + 1));
   const started = useRef(Date.now());
   const groups = buildVeterinaryGroups(session.questions);
   const group =
@@ -5873,6 +5932,7 @@ function VeterinaryPractice({ session, refresh, run, busy, train, exit }) {
       setNavPage(0);
     }
     setTeacherOpen(false);
+    if (desktop) window.scrollTo({ top: 0, behavior: "instant" });
     started.current = Date.now();
   };
   const submitJump = () => {
@@ -6359,6 +6419,7 @@ function VeterinaryPractice({ session, refresh, run, busy, train, exit }) {
           </div>
         </section>
         <aside className="teacher-panel vet-teacher-panel">
+          {desktop && <DesktopPracticeNav questions={session.questions} index={index} responses={responses} busy={busy} jumpTo={jumpTo} />}
           <h2><Stethoscope size={21} /> 兽医考点教练</h2>
           <p className="vet-teacher-note">当前知识点：{q.knowledgePoint}</p>
           <button className="teacher-open" onClick={() => setTeacherOpen(!teacherOpen)}>
@@ -6605,6 +6666,7 @@ function ExamView({ run, refresh, dashboard }) {
                   : "当前证书题库 · 限时作答 · 交卷后统一评分"
           }
         />
+        <div className="study-exam-setup">
         <section className="exam-scope-panel">
           <div className="exam-scope-heading">
             <h2>考试范围</h2>
@@ -6695,7 +6757,8 @@ function ExamView({ run, refresh, dashboard }) {
         </section>
         <section className="exam-intro exam-composition">
           <GraduationCap size={52} />
-          <h2>{dashboard.certificate.shortName} 模拟测试</h2>
+          <h2>本次模拟考试</h2>
+          <p className="study-exam-summary">{customScope ? `已选 ${selectedChapters.length} 个知识分类` : `${dashboard.certificate.shortName} · 全范围模拟`}</p>
           {dashboard.syllabus && !customScope && (
             <p className="exam-blueprint-note">
               {examBlueprint
@@ -6769,6 +6832,7 @@ function ExamView({ run, refresh, dashboard }) {
             <ArrowRight size={18} />
           </button>
         </section>
+        </div>
       </>
     );
   const q = exam.questions[index],
@@ -6907,4 +6971,6 @@ function ExamView({ run, refresh, dashboard }) {
     </>
   );
 }
-createRoot(document.getElementById("root")).render(<App />);
+const appRoot = createRoot(document.getElementById("root"));
+appRoot.render(<App />);
+if (import.meta.hot) import.meta.hot.dispose(() => appRoot.unmount());

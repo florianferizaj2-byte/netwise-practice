@@ -4,7 +4,7 @@
     || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   window.kaojiangAppleMobile = apple;
   const query = new URLSearchParams(location.search);
-  if (apple && !query.has('desktop') && ['/', '/index.html'].includes(location.pathname)) {
+  if (apple && location.hash !== '#downloads' && !query.has('desktop') && ['/', '/index.html'].includes(location.pathname)) {
     location.replace(`/app/${location.search}${location.hash}`);
   }
 })();
