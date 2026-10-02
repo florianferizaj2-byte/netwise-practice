@@ -339,6 +339,7 @@ export type ExamSession = {
   chapters: string[];
   questions: Question[];
   answers: Record<string, string[]>;
+  answersVersion?: number;
   createdAt: string;
   expiresAt: string;
   submitted: boolean;
@@ -758,14 +759,14 @@ export const mobileApi = {
   exam(id: string) {
     return request<ExamSession>(`/exams/${encodeURIComponent(id)}`);
   },
-  saveExamAnswers(id: string, answers: Record<string, string[]>) {
-    return request<{ saved: boolean; expired: boolean }>(`/exams/${encodeURIComponent(id)}/answers`, {
-      method: 'PUT', body: JSON.stringify({ answers }),
+  saveExamAnswers(id: string, answers: Record<string, string[]>, expectedVersion?: number) {
+    return request<{ saved: boolean; expired: boolean; version: number }>(`/exams/${encodeURIComponent(id)}/answers`, {
+      method: 'PUT', body: JSON.stringify({ answers, expectedVersion }),
     });
   },
-  submitExam(id: string, answers: Record<string, string[]>) {
+  submitExam(id: string, answers: Record<string, string[]>, expectedVersion?: number) {
     return request<ExamResult>(`/exams/${encodeURIComponent(id)}/submit`, {
-      method: 'POST', body: JSON.stringify({ answers }),
+      method: 'POST', body: JSON.stringify({ answers, expectedVersion }),
     });
   },
 

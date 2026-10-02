@@ -6767,3 +6767,5 @@ td small {
     max-height: 360px;
   }
 }
+:root { --feature-message-color: #153e35; }
+.feature-message { margin: 10vh auto; padding: 24px; max-width: 600px; color: var(--feature-message-color); text-align: center; }

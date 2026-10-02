@@ -72,6 +72,17 @@ export function registerExamRoutes({
     }
     return answers;
   };
+  const checkVersion = (session, raw) => {
+    const expected = z.number().int().nonnegative().optional().parse(raw);
+    const version = session.answersVersion || 0;
+    if (expected !== undefined && expected !== version) {
+      throw Object.assign(fail("这场考试的答案已在其他页面更新，请先同步后继续", 409), {
+        code: "EXAM_ANSWERS_CONFLICT",
+        details: { answers: session.answers, version },
+      });
+    }
+    return version;
+  };
 
   route("get", "/api/exams/catalog", (req) => {
     const groups = new Map();
@@ -163,6 +174,7 @@ export function registerExamRoutes({
         ),
       ),
       answers: {},
+      answersVersion: 0,
       createdAt: new Date().toISOString(),
       expiresAt: new Date(Date.now() + durationMs).toISOString(),
       durationMs,
@@ -173,13 +185,27 @@ export function registerExamRoutes({
   });
   route("get", "/api/exams/:id", (req) => view(owned(req)));
   route("put", "/api/exams/:id/answers", (req) => {
-    const session = owned(req);
-    if (session.submitted) throw fail("考试已交卷", 409);
-    if (Date.now() >= Date.parse(session.expiresAt))
-      return { saved: false, expired: true };
-    session.answers = answersFor(session, req.body?.answers);
-    store.saveSession(session);
-    return { saved: true, expired: false };
+    store.db.exec("BEGIN IMMEDIATE");
+    try {
+      const session = owned(req);
+      if (session.submitted) throw fail("考试已交卷", 409);
+      if (Date.now() >= Date.parse(session.expiresAt)) {
+        store.db.exec("COMMIT");
+        return { saved: false, expired: true, version: session.answersVersion || 0 };
+      }
+      const version = checkVersion(session, req.body?.expectedVersion);
+      const answers = answersFor(session, req.body?.answers);
+      // Older installed clients omit expectedVersion. Preserve answers absent
+      // from their snapshot while new clients use strict optimistic locking.
+      session.answers = { ...session.answers, ...answers };
+      session.answersVersion = version + 1;
+      store.saveSession(session);
+      store.db.exec("COMMIT");
+      return { saved: true, expired: false, version: session.answersVersion };
+    } catch (error) {
+      store.db.exec("ROLLBACK");
+      throw error;
+    }
   });
   route("post", "/api/exams/:id/submit", (req) => {
     // Re-read under the write lock so retried submissions cannot record twice.
@@ -196,6 +222,8 @@ export function registerExamRoutes({
       const durationMs =
         session.durationMs ||
         Date.parse(session.expiresAt) - Date.parse(session.createdAt);
+      if (Date.now() < Date.parse(session.expiresAt))
+        checkVersion(session, req.body?.expectedVersion);
       const answers =
         Date.now() >= Date.parse(session.expiresAt)
           ? session.answers

@@ -18,13 +18,7 @@ const statuses = {
   expired: "已过期",
 };
 const date = (value) => (value ? new Date(value).toLocaleString("zh-CN") : "—");
-export function MembershipBadge({ plan = "free" }) {
-  const tier = labels[plan] ? plan : "free";
-  return (
-    <span className={`member-tier member-tier-${tier}`}>{labels[tier]}</span>
-  );
-}
-
+export { MembershipBadge } from "./components/membership-badge.jsx";
 export function AdminMembershipCodes({ api, notify }) {
   const [data, setData] = useState(null),
     [plan, setPlan] = useState(""),

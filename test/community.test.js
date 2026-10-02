@@ -19,7 +19,7 @@ test("community supports one public room, custom names, text, emoji and images",
   await new Promise((resolve) => server.once("listening", resolve));
   const base = `http://127.0.0.1:${server.address().port}`;
   t.after(async () => {
-    app.locals.stop();
+    await app.locals.stop();
     await new Promise((resolve) => server.close(resolve));
     store.db.close();
     fs.rmSync(dir, { recursive: true, force: true });

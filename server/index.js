@@ -29,10 +29,12 @@ import { questionPage } from "./question-paging.js";
 import { studySummary } from "./study-summary.js";
 import { authorAiAvailable, authorAiOwner } from "./ai-service.js";
 import { registerGuestTrialRoutes } from "./guest-trial.js";
+import { createAiScheduler, checkAiCancellation } from "./ai-tasks.js";
+import { createAuthRateLimiter } from "./auth-rate-limit.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const mobileRelease = () => {
-  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.3.8";
+  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.3.9";
   const minimumVersion =
     process.env.MOBILE_MINIMUM_VERSION || "0.2.8";
   return {
@@ -43,7 +45,7 @@ const mobileRelease = () => {
       `/downloads/kaojiang-v${latestVersion}.apk`,
     releaseNotes:
       process.env.MOBILE_RELEASE_NOTES ||
-      "所有账号统一使用作者 AI 服务，按账号额度扣除解析、分析和出题次数；优化移动页面适配。",
+      "优化考试答案保存和跨设备冲突处理，改进 AI 并发、任务超时及登录保护。",
   };
 };
 async function exchangeWechatMiniProgramCode(code) {
@@ -154,6 +156,8 @@ export async function createApp(options = {}) {
   // still opt into anonymous mode explicitly with { authRequired: false }.
   const authRequired = options.authRequired ?? true;
   const app = express();
+  const aiScheduler = createAiScheduler(options.aiTasks);
+  const ai = (userId, fn) => aiScheduler.run(userId, fn);
   const allowedHosts = new Set(
     (process.env.ALLOWED_HOSTS || "127.0.0.1,localhost,::1")
       .split(",")
@@ -252,7 +256,11 @@ export async function createApp(options = {}) {
       certificates,
     };
   });
-  route("post", "/api/auth/register", (req, res) => {
+  app.use([
+    "/api/auth/login", "/api/auth/register", "/api/auth/wechat/bind",
+    "/api/auth/wechat/register", "/api/auth/wechat/mini-login",
+  ], createAuthRateLimiter(store.db, options.authLimits));
+  route("post", "/api/auth/register", async (req, res) => {
     const body = z
       .object({
         username: z
@@ -265,12 +273,12 @@ export async function createApp(options = {}) {
       })
       .strict()
       .parse(req.body);
-    const user = store.register(body.username, body.password);
+    const user = await store.registerAsync(body.username, body.password);
     const token = store.createAuthSession(user.id);
     sessionCookie(req, res, token);
     return authResponse(req, user, token);
   });
-  route("post", "/api/auth/login", (req, res) => {
+  route("post", "/api/auth/login", async (req, res) => {
     const body = z
       .object({
         username: z.string().trim().min(3).max(40),
@@ -278,7 +286,7 @@ export async function createApp(options = {}) {
       })
       .strict()
       .parse(req.body);
-    const user = store.authenticate(body.username, body.password);
+    const user = await store.authenticateAsync(body.username, body.password);
     if (!user) {
       const error = new Error("账号或密码不正确");
       error.status = 401;
@@ -335,7 +343,7 @@ export async function createApp(options = {}) {
       bindingToken: store.createWechatLoginChallenge(identity),
     };
   });
-  route("post", "/api/auth/wechat/bind", (req, res) => {
+  route("post", "/api/auth/wechat/bind", async (req, res) => {
     const body = z
       .object({
         bindingToken: z.string().trim().min(20).max(200),
@@ -350,7 +358,7 @@ export async function createApp(options = {}) {
       error.status = 401;
       throw error;
     }
-    const user = store.authenticate(body.username, body.password);
+    const user = await store.authenticateAsync(body.username, body.password);
     if (!user) {
       const error = new Error("账号或密码不正确");
       error.status = 401;
@@ -363,13 +371,7 @@ export async function createApp(options = {}) {
       error.status = 403;
       throw error;
     }
-    store.bindWechatIdentity({
-      appid: challenge.appid,
-      openid: challenge.openid,
-      unionid: challenge.unionid,
-      userId: user.id,
-    });
-    store.consumeWechatLoginChallenge(body.bindingToken);
+    store.completeWechatLogin(body.bindingToken, () => user);
     const token = store.createAuthSession(user.id);
     sessionCookie(req, res, token);
     return {
@@ -378,7 +380,7 @@ export async function createApp(options = {}) {
       ...authResponse(req, user, token),
     };
   });
-  route("post", "/api/auth/wechat/register", (req, res) => {
+  route("post", "/api/auth/wechat/register", async (req, res) => {
     const body = z
       .object({
         bindingToken: z.string().trim().min(20).max(200),
@@ -398,14 +400,7 @@ export async function createApp(options = {}) {
       error.status = 401;
       throw error;
     }
-    const user = store.register(body.username, body.password);
-    store.bindWechatIdentity({
-      appid: challenge.appid,
-      openid: challenge.openid,
-      unionid: challenge.unionid,
-      userId: user.id,
-    });
-    store.consumeWechatLoginChallenge(body.bindingToken);
+    const user = await store.registerAsync(body.username, body.password, { wechatBindingToken: body.bindingToken });
     const token = store.createAuthSession(user.id);
     sessionCookie(req, res, token);
     return {
@@ -432,7 +427,7 @@ export async function createApp(options = {}) {
       forceUpdate: compareVersions(currentVersion, release.minimumVersion) < 0,
     };
   });
-  registerGuestTrialRoutes({ route, store, provider, runAI: (work) => ai(work), customProvider: !!options.provider });
+  registerGuestTrialRoutes({ route, store, provider, runAI: (work, key) => ai(key, work), customProvider: !!options.provider });
   app.use("/api", (req, res, next) => {
     if (!authRequired) return next();
     const user = store.authUser(requestToken(req));
@@ -568,27 +563,7 @@ export async function createApp(options = {}) {
       }),
     };
   });
-  let aiBusy = false;
-  const ai = async (fn) => {
-    if (aiBusy) {
-      const e = new Error("已有 AI 任务正在执行，请稍候");
-      e.status = 409;
-      throw e;
-    }
-    aiBusy = true;
-    try {
-      return await fn();
-    } finally {
-      aiBusy = false;
-    }
-  };
-  let aiQuestionJobsDraining = false;
-  const drainAiQuestionGenerationQueue = async () => {
-    if (aiBusy || aiQuestionJobsDraining) return;
-    const job = store.nextAiQuestionGenerationJob();
-    if (!job) return;
-    aiQuestionJobsDraining = true;
-    aiBusy = true;
+  const runAiQuestionJob = async (job) => {
     const { id, userId, certificateId, selection } = job;
     let lastProgressAt = 0;
     let lastProgressSignature = "";
@@ -640,7 +615,8 @@ export async function createApp(options = {}) {
         },
       });
       if (generated.length !== 10) throw new Error("AI 没有返回完整的 10 道题，请重新生成");
-      const related = allQuestions.filter((question) =>
+      const currentQuestions = store.allQ();
+      const related = currentQuestions.filter((question) =>
         question.chapter === selection.chapter &&
         (question.knowledgeSection || null) === (selection.knowledgeSection || null) &&
         (question.targetKnowledgePoint || question.knowledgePoint) === selection.knowledgePoint,
@@ -649,7 +625,7 @@ export async function createApp(options = {}) {
       for (const candidate of generated) {
         const verified = validateQuestion(
           candidate,
-          [...allQuestions, ...verifiedQuestions],
+          [...currentQuestions, ...verifiedQuestions],
           seed,
         );
         if ([...related, ...verifiedQuestions].some(
@@ -666,6 +642,7 @@ export async function createApp(options = {}) {
           createdAt: new Date().toISOString(),
         });
       }
+      checkAiCancellation();
       const topic = `question-generation:${selection.knowledgePoint}`;
       const groupId = store.addAiQuestionGroup(verifiedQuestions, topic, {
         userId,
@@ -698,9 +675,14 @@ export async function createApp(options = {}) {
           total: 10,
         },
       });
-    } finally {
-      aiBusy = false;
-      aiQuestionJobsDraining = false;
+    }
+  };
+  const drainAiQuestionGenerationQueue = async () => {
+    while (aiScheduler.available > 0) {
+      const job = store.nextAiQuestionGenerationJob(aiScheduler.userIds);
+      if (!job) break;
+      store.updateAiQuestionGenerationJob(job.id, job.userId, job.certificateId, { status: "running" });
+      void ai(job.userId, () => runAiQuestionJob(job)).catch(() => undefined);
     }
   };
   const requireQ = (id, req) => {
@@ -924,7 +906,7 @@ export async function createApp(options = {}) {
     return { deleted: true };
   });
   route("post", "/api/ai/test", (req) =>
-    ai(async () => {
+    ai(requestUserId(req), async () => {
       const userId = requireApiConfigAccess(req);
       await provider.call(
         [{ role: "user", content: "Reply with OK." }],
@@ -1154,7 +1136,7 @@ export async function createApp(options = {}) {
     return { deleted: true };
   });
   route("post", "/api/admin/ai/test", (req) =>
-    ai(async () => {
+    ai(requestUserId(req), async () => {
       requireAdmin(req);
       await provider.call(
         [{ role: "user", content: "Reply with OK." }],
@@ -1413,7 +1395,7 @@ export async function createApp(options = {}) {
     return { entries: store.auditRows(limit) };
   });
   route("post", "/api/admin/questions/generate", (req) =>
-    ai(async () => {
+    ai(requestUserId(req), async () => {
       requireAdmin(req);
       const body = z
         .object({
@@ -2051,7 +2033,7 @@ export async function createApp(options = {}) {
     const summaryOnly = req.query.summary === "1";
     const cacheKey = homeCacheKey(summaryOnly ? "dashboard-summary" : "dashboard", userId, certificateId);
     const cached = cachedHomeResult(cacheKey, userId);
-    if (cached) return summaryOnly ? cached : { ...cached, aiBusy };
+    if (cached) return summaryOnly ? cached : { ...cached, aiBusy: aiScheduler.busy(userId) };
     const userAttempts = store.allA(userId);
     const currentQuestions = certificateQuestions(
         certificateId,
@@ -2173,7 +2155,7 @@ export async function createApp(options = {}) {
       mastery,
       chapters,
       aiConfigured: aiServiceAvailable(),
-      aiBusy,
+      aiBusy: aiScheduler.busy(userId),
       plan: store.getDaily(userId, dailyKey(certificateId, today)),
       user: req.user ? userView(req.user) : null,
       certificate: certificates.find((c) => c.id === certificateId) || null,
@@ -2183,7 +2165,7 @@ export async function createApp(options = {}) {
     });
   });
   route("post", "/api/ai/analyze", (req) =>
-    ai(() => {
+    ai(requestUserId(req), () => {
       const userId = req.user?.id || "local";
       const question = requireQ(
         z.object({ questionId: z.string() }).parse(req.body).questionId,
@@ -2195,7 +2177,7 @@ export async function createApp(options = {}) {
     }),
   );
   route("post", "/api/ai/train", (req) =>
-    ai(async () => {
+    ai(requestUserId(req), async () => {
       const b = z
         .object({
           questionId: z.string(),
@@ -2314,7 +2296,7 @@ export async function createApp(options = {}) {
         res.write(`data: ${JSON.stringify(event)}\n\n`);
     };
     try {
-      if (aiBusy) {
+      if (aiScheduler.busy(requestUserId(req))) {
         const error = new Error("已有 AI 任务正在执行，请稍候");
         error.status = 409;
         throw error;
@@ -2322,62 +2304,95 @@ export async function createApp(options = {}) {
       const body = userQuestionDraftSchema.parse(req.body);
       const certificateId = requireCertificate(req);
       const userId = requestUserId(req);
-      if (store.latestUserQuestionDraft(
-        userId, certificateId,
-        body.chapter, body.knowledgeSection, body.knowledgePoint,
-      )) throw new Error("当前知识点已有待提交草稿，请先提交或删除");
-      const seed = store.allQ().find((question) =>
-        hasCertificateQuestion(question, certificateId) &&
-        question.chapter === body.chapter &&
-        (question.knowledgeSection || null) === (body.knowledgeSection || null) &&
-        (question.targetKnowledgePoint || question.knowledgePoint) === body.knowledgePoint &&
-        (question.source !== "ai_generated" || question.ownerUserId === userId),
-      );
-      if (!seed) throw new Error("该知识点暂无可参考的题目，请先选择具体知识点");
-      const credit = reserveGenerationCredit(userId, 1);
-      res.status(200).set({
-        "Content-Type": "text/event-stream; charset=utf-8",
-        "Cache-Control": "no-cache, no-transform",
-        Connection: "keep-alive",
-        "X-Accel-Buffering": "no",
-      });
-      res.flushHeaders?.();
-      send({ type: "progress", stage: "prepare", message: "正在读取当前知识点已有题目" });
-      const heartbeat = setInterval(() =>
-        send({ type: "progress", stage: "heartbeat", message: "AI 正在继续处理…" }),
-      12000);
-      aiBusy = true;
-      let generatedSuccessfully = false;
-      try {
-        const [question] = await provider.generateBankExpansion(seed, 1, {
+      if (
+        store.latestUserQuestionDraft(
           userId,
           certificateId,
-          onProgress: (event) => send({ type: "progress", ...event }),
-        });
-        send({ type: "progress", stage: "second-check", message: "独立审核已通过，正在再次查重" });
-        const allQuestions = store.allQ();
-        const verified = validateQuestion(question, allQuestions, seed);
-        const related = allQuestions.filter((old) =>
-          old.chapter === body.chapter &&
-          (old.knowledgeSection || null) === (body.knowledgeSection || null) &&
-          (old.targetKnowledgePoint || old.knowledgePoint) === body.knowledgePoint,
+          body.chapter,
+          body.knowledgeSection,
+          body.knowledgePoint,
+        )
+      )
+        throw new Error("当前知识点已有待提交草稿，请先提交或删除");
+      const seed = store
+        .allQ()
+        .find(
+          (question) =>
+            hasCertificateQuestion(question, certificateId) &&
+            question.chapter === body.chapter &&
+            (question.knowledgeSection || null) ===
+              (body.knowledgeSection || null) &&
+            (question.targetKnowledgePoint || question.knowledgePoint) ===
+              body.knowledgePoint &&
+            (question.source !== "ai_generated" ||
+              question.ownerUserId === userId),
         );
-        if (related.some((old) => questionSimilarity(verified, old) >= 0.9))
-          throw new Error("新题与已有题目高度相似，请重新生成");
-        const saved = store.saveUserQuestionDraft(userId, certificateId, verified);
-        generatedSuccessfully = true;
-        send({
-          type: "done",
-          result: {
-            ...saved,
-            checks: { rulesAndDuplicates: true, independentAiReview: true },
-          },
+      if (!seed) throw new Error("该知识点暂无可参考的题目，请先选择具体知识点");
+      await ai(userId, async () => {
+        const credit = reserveGenerationCredit(userId, 1);
+        res.status(200).set({
+          "Content-Type": "text/event-stream; charset=utf-8",
+          "Cache-Control": "no-cache, no-transform",
+          Connection: "keep-alive",
+          "X-Accel-Buffering": "no",
         });
-      } finally {
-        clearInterval(heartbeat);
-        aiBusy = false;
-        if (!generatedSuccessfully) refundGenerationCredit(userId, credit);
-      }
+        res.flushHeaders?.();
+        send({
+          type: "progress",
+          stage: "prepare",
+          message: "正在读取当前知识点已有题目",
+        });
+        const heartbeat = setInterval(
+          () =>
+            send({
+              type: "progress",
+              stage: "heartbeat",
+              message: "AI 正在继续处理…",
+            }),
+          12000,
+        );
+        let generatedSuccessfully = false;
+        try {
+          const [question] = await provider.generateBankExpansion(seed, 1, {
+            userId,
+            certificateId,
+            onProgress: (event) => send({ type: "progress", ...event }),
+          });
+          send({
+            type: "progress",
+            stage: "second-check",
+            message: "独立审核已通过，正在再次查重",
+          });
+          const allQuestions = store.allQ();
+          const verified = validateQuestion(question, allQuestions, seed);
+          const related = allQuestions.filter(
+            (old) =>
+              old.chapter === body.chapter &&
+              (old.knowledgeSection || null) ===
+                (body.knowledgeSection || null) &&
+              (old.targetKnowledgePoint || old.knowledgePoint) ===
+                body.knowledgePoint,
+          );
+          if (related.some((old) => questionSimilarity(verified, old) >= 0.9))
+            throw new Error("新题与已有题目高度相似，请重新生成");
+          const saved = store.saveUserQuestionDraft(
+            userId,
+            certificateId,
+            verified,
+          );
+          generatedSuccessfully = true;
+          send({
+            type: "done",
+            result: {
+              ...saved,
+              checks: { rulesAndDuplicates: true, independentAiReview: true },
+            },
+          });
+        } finally {
+          clearInterval(heartbeat);
+          if (!generatedSuccessfully) refundGenerationCredit(userId, credit);
+        }
+      });
       res.end();
     } catch (error) {
       if (!res.headersSent) return next(error);
@@ -2424,7 +2439,7 @@ export async function createApp(options = {}) {
       res.write(`data: ${JSON.stringify(event)}\n\n`);
     };
     try {
-      if (aiBusy) {
+      if (aiScheduler.busy(requestUserId(req))) {
         const error = new Error("已有 AI 任务正在执行，请稍候");
         error.status = 409;
         throw error;
@@ -2445,43 +2460,51 @@ export async function createApp(options = {}) {
       const userId = req.user?.id || "local";
       const certificateId = req.user?.certificateId;
       const question = requireQ(b.questionId, req);
-      await withDailyAiCredit(userId, "generation", async () => {
-        res.status(200);
-        res.set({
-          "Content-Type": "text/event-stream; charset=utf-8",
-          "Cache-Control": "no-cache, no-transform",
-          Connection: "keep-alive",
-          "X-Accel-Buffering": "no",
-        });
-        res.flushHeaders?.();
-        send({ type: "progress", message: `准备生成 ${b.count} 道针对题` });
-        const heartbeat = setInterval(
-          () =>
-            send({
-              type: "progress",
-              stage: "heartbeat",
-              message: "AI 仍在处理中，请稍候…",
-            }),
-          12000,
-        );
-        aiBusy = true;
-        try {
-          const batch = await provider.generatePracticeSet(
-            question,
-            b.count,
-            b.harder,
-            (event) => send({ type: "progress", ...event }),
-            { userId, certificateId },
-          );
-          send({
-            type: "done",
-            result: { ...batch, questions: batch.questions.map(publicQuestion) },
-          });
-        } finally {
-          clearInterval(heartbeat);
-          aiBusy = false;
-        }
-      }, { count: b.count });
+      await ai(userId, () =>
+        withDailyAiCredit(
+          userId,
+          "generation",
+          async () => {
+            res.status(200);
+            res.set({
+              "Content-Type": "text/event-stream; charset=utf-8",
+              "Cache-Control": "no-cache, no-transform",
+              Connection: "keep-alive",
+              "X-Accel-Buffering": "no",
+            });
+            res.flushHeaders?.();
+            send({ type: "progress", message: `准备生成 ${b.count} 道针对题` });
+            const heartbeat = setInterval(
+              () =>
+                send({
+                  type: "progress",
+                  stage: "heartbeat",
+                  message: "AI 仍在处理中，请稍候…",
+                }),
+              12000,
+            );
+            try {
+              const batch = await provider.generatePracticeSet(
+                question,
+                b.count,
+                b.harder,
+                (event) => send({ type: "progress", ...event }),
+                { userId, certificateId },
+              );
+              send({
+                type: "done",
+                result: {
+                  ...batch,
+                  questions: batch.questions.map(publicQuestion),
+                },
+              });
+            } finally {
+              clearInterval(heartbeat);
+            }
+          },
+          { count: b.count },
+        ),
+      );
       res.end();
     } catch (error) {
       if (!res.headersSent) return next(error);
@@ -2490,7 +2513,7 @@ export async function createApp(options = {}) {
     }
   });
   route("post", "/api/ai/teacher", (req) =>
-    ai(async () => {
+    ai(requestUserId(req), async () => {
       const b = z
         .object({
           questionId: z.string(),
@@ -2529,7 +2552,7 @@ export async function createApp(options = {}) {
     const key = dailyKey(certificateId);
     if (!force && store.getDaily(userId, key))
       return store.getDaily(userId, key);
-    return ai(() => withDailyAiCredit(userId, "analysis", async () => {
+    return ai(userId, () => withDailyAiCredit(userId, "analysis", async () => {
       const questionIds = certificateQuestions(certificateId, userId).map(
         (question) => question.id,
       );
@@ -2577,6 +2600,8 @@ export async function createApp(options = {}) {
           : err instanceof z.ZodError
             ? "输入参数不符合要求，请检查字段范围"
             : redact(err.message).slice(0, 500),
+      ...(typeof err.code === "string" ? { code: err.code } : {}),
+      ...(err.code === "EXAM_ANSWERS_CONFLICT" ? { details: err.details } : {}),
     });
   });
   if (withFrontend) {
@@ -2607,7 +2632,7 @@ export async function createApp(options = {}) {
   }
   store.requeueInterruptedAiQuestionGenerationJobs();
   const aiQuestionJobTimer = setInterval(
-    () => void drainAiQuestionGenerationQueue().catch(() => undefined),
+    () => void drainAiQuestionGenerationQueue().catch(error => safeLog(`AI 任务调度失败：${redact(error.message)}`)),
     1500,
   );
   aiQuestionJobTimer.unref();
@@ -2616,6 +2641,7 @@ export async function createApp(options = {}) {
   app.locals.store = store;
   app.locals.stop = () => {
     clearInterval(aiQuestionJobTimer);
+    return aiScheduler.stop();
   };
   return app;
 }

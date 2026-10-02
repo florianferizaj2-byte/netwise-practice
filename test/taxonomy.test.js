@@ -11,7 +11,7 @@ import { createApp } from "../server/index.js";
 const certificate = certificates.find((item) => item.id === "network-engineer");
 const questions = bundledQuestions().filter((q) => q.certificates.includes(certificate.id));
 const report = JSON.parse(fs.readFileSync(new URL(
-  "../server/question-banks/network-engineer/reports/taxonomy-review-20260926.json",
+  "./fixtures/taxonomy-migrations.json",
   import.meta.url,
 ), "utf8"));
 const classification = ({ chapter, knowledgeSection, knowledgePoint }) =>
@@ -86,7 +86,7 @@ test("web and mobile catalogs agree after an existing database is upgraded witho
   let app;
   let server;
   t.after(async () => {
-    app?.locals.stop();
+    await app?.locals.stop();
     if (server) await new Promise((resolve) => server.close(resolve));
     store.db.close();
     assert.equal(path.dirname(directory), path.resolve(os.tmpdir()));

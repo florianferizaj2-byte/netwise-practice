@@ -202,7 +202,7 @@ try {
   );
 } finally {
   await browser?.close();
-  app.locals.stop();
+  await app.locals.stop();
   await new Promise((resolve) => server.close(resolve));
   store.db.close();
   assert.equal(path.dirname(dir), path.resolve(os.tmpdir()));

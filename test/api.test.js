@@ -53,7 +53,7 @@ async function fixture(t, fetchImpl, options = {}) {
   await new Promise((r) => server.once("listening", r));
   const url = `http://127.0.0.1:${server.address().port}`;
   t.after(async () => {
-    app.locals.stop();
+    await app.locals.stop();
     await new Promise((r) => server.close(r));
     store.db.close();
     fs.rmSync(dir, { recursive: true, force: true });
@@ -244,7 +244,7 @@ test("accounts require login and certificate selection filters the question bank
   await new Promise((r) => server.once("listening", r));
   const base = `http://127.0.0.1:${server.address().port}`;
   t.after(async () => {
-    app.locals.stop();
+    await app.locals.stop();
     await new Promise((r) => server.close(r));
     store.db.close();
     fs.rmSync(dir, { recursive: true, force: true });
@@ -334,7 +334,7 @@ test("mobile clients can use a bearer session without browser cookies", async (t
   await new Promise((r) => server.once("listening", r));
   const base = `http://127.0.0.1:${server.address().port}`;
   t.after(async () => {
-    app.locals.stop();
+    await app.locals.stop();
     await new Promise((r) => server.close(r));
     store.db.close();
     fs.rmSync(dir, { recursive: true, force: true });
@@ -410,7 +410,7 @@ test("微信小程序首次登录绑定已有账号，后续直接复用同一�
   await new Promise((resolve) => server.once("listening", resolve));
   const base = `http://127.0.0.1:${server.address().port}`;
   t.after(async () => {
-    app.locals.stop();
+    await app.locals.stop();
     await new Promise((resolve) => server.close(resolve));
     store.db.close();
     fs.rmSync(dir, { recursive: true, force: true });
@@ -514,7 +514,7 @@ test("secure cookie follows the actual HTTP protocol", async (t) => {
   await new Promise((r) => server.once("listening", r));
   const base = `http://127.0.0.1:${server.address().port}`;
   t.after(async () => {
-    app.locals.stop();
+    await app.locals.stop();
     await new Promise((r) => server.close(r));
     store.db.close();
     fs.rmSync(dir, { recursive: true, force: true });
@@ -551,7 +551,7 @@ test("author AI settings are shared for use but manageable only by the owner", a
   await new Promise((resolve) => server.once("listening", resolve));
   const base = `http://127.0.0.1:${server.address().port}`;
   t.after(async () => {
-    app.locals.stop();
+    await app.locals.stop();
     await new Promise((resolve) => server.close(resolve));
     store.db.close();
     fs.rmSync(dir, { recursive: true, force: true });
@@ -616,7 +616,7 @@ test("server-generated AI groups are immutable, shareable by certificate, and ke
   await new Promise((resolve) => server.once("listening", resolve));
   const base = `http://127.0.0.1:${server.address().port}`;
   t.after(async () => {
-    app.locals.stop();
+    await app.locals.stop();
     await new Promise((resolve) => server.close(resolve));
     store.db.close();
     fs.rmSync(dir, { recursive: true, force: true });
@@ -1416,7 +1416,7 @@ test("管理员面板隔离管理员 API，支持扩题、重合检测、删题�
     return { status: res.status, data: await res.json() };
   };
   t.after(async () => {
-    app.locals.stop();
+    await app.locals.stop();
     await new Promise((resolve) => server.close(resolve));
     store.db.close();
     fs.rmSync(dir, { recursive: true, force: true });

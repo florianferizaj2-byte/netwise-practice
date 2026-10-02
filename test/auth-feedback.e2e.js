@@ -47,7 +47,7 @@ try {
   console.log("PASS: login from training, report persistence, visible error and expired session recovery");
 } finally {
   await browser?.close();
-  app.locals.stop();
+  await app.locals.stop();
   await new Promise(resolve => server.close(resolve));
   store.db.close();
   fs.rmSync(dir, { recursive: true, force: true });

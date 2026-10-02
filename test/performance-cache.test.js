@@ -15,7 +15,7 @@ test('question memory and user-scoped home results refresh on writes and after 3
   await new Promise((resolve) => server.once('listening', resolve));
   const origin = `http://127.0.0.1:${server.address().port}/api`;
   t.after(async () => {
-    app.locals.stop();
+    await app.locals.stop();
     await new Promise((resolve) => server.close(resolve));
     store.db.close();
     fs.rmSync(directory, { recursive: true, force: true });

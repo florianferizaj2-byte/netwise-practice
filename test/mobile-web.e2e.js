@@ -199,11 +199,25 @@ try {
       await text('继续 ›').first().click();
       const restoredExam = await (await resumed).json();
       assert.ok(Object.values(restoredExam.answers).some((answer) => answer.includes('A')));
+      const firstQuestion = restoredExam.questions[0].id;
+      const nextQuestion = restoredExam.questions.find((question) => !restoredExam.answers[question.id]?.length).id;
+      const otherDevice = await page.request.put(`${base}/api/exams/${exam.id}/answers`, {
+        headers: { Authorization: `Bearer ${session.sessionToken}` },
+        data: { answers: { [firstQuestion]: ['B'] }, expectedVersion: restoredExam.answersVersion },
+      });
+      assert.equal(otherDevice.status(), 200);
+      await page.getByRole('radio', { name: /核对选项甲/ }).click();
+      await text('答案已在其他页面更新').waitFor();
+      const merged = page.waitForResponse((r) => r.url().endsWith(`/api/exams/${exam.id}/answers`) && r.request().method() === 'PUT' && r.status() === 200);
+      await page.getByRole('button', { name: '合并本机作答', exact: true }).click();
+      await merged;
+      assert.deepEqual(store.session(exam.id).answers[firstQuestion], ['B']);
+      assert.deepEqual(store.session(exam.id).answers[nextQuestion], ['A']);
       await text('交卷').click();
       await page.getByRole('button', { name: '确认交卷', exact: true }).click();
       await text('‹ 返回考试').waitFor();
       await shot('exam');
-      console.log(`${engine}: exam autosave, reload, resume and submit`);
+      console.log(`${engine}: exam autosave, reload, resume, cross-device conflict merge and submit`);
 
       await tab('我的');
       await text('外观、动画与音效').click();
@@ -278,7 +292,7 @@ try {
   }
 } finally {
   await browser?.close();
-  backend.locals.stop();
+  await backend.locals.stop();
   await new Promise((resolve) => server.close(resolve));
   store.db.close();
   assert.equal(path.dirname(dir), path.resolve(os.tmpdir()));

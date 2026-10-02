@@ -72,7 +72,7 @@ test('mobile API pagination, summary, catalog isolation and same-timestamp commu
   await new Promise((resolve) => server.once('listening', resolve));
   const base = `http://127.0.0.1:${server.address().port}/api`;
   t.after(async () => {
-    app.locals.stop();
+    await app.locals.stop();
     await new Promise((resolve) => server.close(resolve));
     store.db.close();
     assert.equal(path.dirname(dir), path.resolve(os.tmpdir()));

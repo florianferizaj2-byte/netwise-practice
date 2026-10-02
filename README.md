@@ -30,7 +30,15 @@
 - 全国执业兽医资格考试（兽医全科类）：已导入 7,888 道可发布题目，另有 2,577 道待核对
 - 共 9,650 道内置唯一题目，题库启动时自动校验并同步到 SQLite
 
-## 最近发布 · 2026-09-28 · v0.3.8
+## 最近发布 · 2026-10-02 · v0.3.9
+
+- 模拟考试保存和交卷检查答案版本；不同设备同时作答发生冲突时，可选择使用已同步答案或合并本机尚未同步的作答。Android 与 iPhone / iPad 共用此改动。
+- 电脑网页增加考试本机恢复、联网重试和明确的保存状态；练习、考试、社区、会员和管理等页面按需加载。
+- AI 支持不同账号并发，增加排队和任务时长限制，失败按原有规则返还额度；登录注册增加频率保护，密码计算改为异步。
+- 发布检查统一为 `npm run verify`，覆盖类型、95 项单元和接口测试、两套网页构建及电脑与移动浏览器流程；GitHub 自动执行同一套检查。
+- Android v0.3.9（versionCode 23）沿用正式签名；安装包：[kaojiang-v0.3.9.apk](public/downloads/kaojiang-v0.3.9.apk)。已编译的服务器更新包与 APK 通过 [GitHub Releases](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v0.3.9) 下载，服务器部署见 [v0.3.9 发布说明](docs/release-v0.3.9.md)。
+
+## 历史更新 · 2026-09-28 · v0.3.8
 
 - 普通账号的解析、提示、错因分析、学习计划和出题统一使用作者 AI 服务；旧个人密钥不再用于学习请求，密钥只保存在服务器。
 - 解析、提示与分析按次扣当前账号额度；出题先扣签到机会，再扣会员题数。余额不足时不调用上游，失败自动返还。
@@ -202,7 +210,7 @@ AI 分析错误原因和薄弱知识点
 
 AI 题不是简单换数字，而是会改变概念辨析、计算方式、反向推理或实际应用场景。每个用户的答题记录、错题、掌握度和复习进度独立保存；共享的是题目内容，不会共享个人学习数据。
 
-8,958 道是随项目分发的内置题目数量，不是平台的最终题量。用户生成并共享的 AI 题会保存在服务端，题目总量可以随着用户使用持续增加。当前 AI 题通过“其他用户生成的 AI 题”入口使用，不会自动冒充官方题目，也不会直接混入内置题库或正式模拟考试题池。
+9,650 道是随项目分发的内置题目数量，不是平台的最终题量。用户生成并共享的 AI 题会保存在服务端，题目总量可以随着用户使用持续增加。当前 AI 题通过“其他用户生成的 AI 题”入口使用，不会自动冒充官方题目，也不会直接混入内置题库或正式模拟考试题池。
 
 ## 功能概览
 
@@ -419,29 +427,39 @@ npm start
 ## 验证
 
 ```powershell
-npm run bank:validate
-npm test
-npm run build
-npm run test:e2e
+npm ci
+npm ci --prefix mobile
+npx playwright install chromium webkit
+npm run verify
 ```
 
-当前验证结果：
+`verify` 依次执行题库结构检查、移动端类型检查、自动化测试、电脑与移动网页完整构建、电脑端浏览器流程以及移动网页的 Chromium / WebKit 流程测试；任一步失败都会返回失败状态。GitHub 在推送或提交合并请求时运行同样的检查，失败截图和页面文本会保存为构建附件。
 
-- 内置题库校验通过：8,958 道唯一题目
-- 自动化测试：27 项通过
-- 端到端测试使用临时数据库和确定性 AI 测试桩，不会修改个人学习记录或消耗真实 API 额度
+- 内置题库结构检查覆盖 9,650 道唯一题目；不代表人工核验题干和答案。
+- 浏览器测试覆盖游客体验、真实注册登录、练习进度、考试离线恢复、跨设备答案冲突、按需加载页面和窄屏下载入口。
+- 测试使用临时数据库与 AI 测试桩，不修改个人学习记录，不消耗真实 API 额度。
 
-Windows 端到端测试使用已安装的 Microsoft Edge；其他平台如缺少浏览器，可先运行：
+电脑端浏览器测试默认使用 Playwright Chromium。Windows 找不到 Chromium 时会尝试已安装的 Microsoft Edge，也可用 `TEST_BROWSER_CHANNEL` 指定电脑端浏览器。移动网页测试使用安装的 Chromium 和 WebKit。需要单独检查时可运行：
 
 ```powershell
-npx playwright install chromium
+npm test
+npm run typecheck
+npm run build
+npm run test:e2e
+npm run test:e2e:mobile
 ```
+
+此次可靠性调整、运行参数和升级步骤见[可靠性优化说明](docs/reliability-improvements.md)。
 
 ## 项目结构
 
 ```text
 src/                         React 页面和响应式样式
+src/features/                按需加载的练习、考试、社区、设置与管理页面
+src/exam-sync.js             考试答案保存、离线恢复与版本冲突处理
 server/index.js              HTTP API、认证、每日任务和前端服务
+server/ai-tasks.js           按账号隔离的 AI 并发、排队与超时控制
+server/auth-rate-limit.js    登录与注册的持久化频率限制
 server/domain.js             题目校验、IPv4 计算、掌握度和复习间隔
 server/ai.js                 OpenAI Compatible Provider、AI 训练和审核
 server/security.js           加密、地址校验和日志脱敏

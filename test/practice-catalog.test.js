@@ -15,7 +15,7 @@ test('ordinary practice stays consistent with the web bank when an account owns 
   await new Promise((resolve) => server.once('listening', resolve));
   const origin = `http://127.0.0.1:${server.address().port}`;
   t.after(async () => {
-    app.locals.stop();
+    await app.locals.stop();
     await new Promise((resolve) => server.close(resolve));
     store.db.close();
     assert.equal(path.dirname(directory), path.resolve(os.tmpdir()));

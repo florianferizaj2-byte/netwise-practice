@@ -90,3 +90,10 @@
     grid-template-columns: 1fr;
   }
 }
+.exam-sync-message { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin: 0 0 18px; padding: 12px 16px; color: #24715c; background: #eaf2ee; border-radius: 10px; font-size: 14px; line-height: 1.6; }
+.exam-sync-message.error { color: #8b352e; background: #fff0ed; }
+.exam-sync-message > span { flex: 1 1 260px; }
+.exam-sync-message button { flex-shrink: 0; }
+.exam-resume-list { margin-bottom: 22px; }
+.exam-resume-list h2 { font-size: 17px; margin-bottom: 12px; }
+.exam-resume-list > button { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; width: 100%; text-align: left; margin-bottom: 8px; }

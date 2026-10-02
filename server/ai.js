@@ -3,6 +3,7 @@ import { z } from "zod";
 import { decrypt, validateBaseUrl, redact } from "./security.js";
 import { questionSimilarity } from "./question-similarity.js";
 import { authorAiSettings } from "./ai-service.js";
+import { currentAiSignal, checkAiCancellation, positiveInteger } from "./ai-tasks.js";
 import {
   validateQuestion,
   normalizeQuestionDraft,
@@ -131,6 +132,7 @@ export class OpenAICompatibleProvider extends AIProvider {
         : 16 * 1024 * 1024;
   }
   async call(messages, settings, options = {}) {
+    checkAiCancellation();
     const userId = options.userId || "local";
     settings ||= authorAiSettings(this.store);
     if (!settings || (!settings.keyCipher && !settings.apiKey))
@@ -144,7 +146,7 @@ export class OpenAICompatibleProvider extends AIProvider {
       const response = await this.fetch(`${url}/chat/completions`, {
         method: "POST",
         redirect: "error",
-        signal: AbortSignal.timeout(this.timeout),
+        signal: AbortSignal.any([AbortSignal.timeout(this.timeout), ...[currentAiSignal()].filter(Boolean)]),
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${key}`,
@@ -276,6 +278,7 @@ export class OpenAICompatibleProvider extends AIProvider {
       success = true;
       return redact(text, [key]);
     } catch (e) {
+      checkAiCancellation();
       if (["TimeoutError", "AbortError"].includes(e.name))
         throw new Error("AI 请求超时，请稍后重试");
       if (e instanceof TypeError)
@@ -484,14 +487,14 @@ export class OpenAICompatibleProvider extends AIProvider {
       difficulty:
         difficulty || ["easy", "medium", "medium", "hard"][index % 4],
     }));
-    const maxRounds = options.retryUntilAccepted
-      ? Number.POSITIVE_INFINITY
-      : options.maxRounds ?? 3;
+    const roundLimit = positiveInteger(process.env.AI_GENERATION_MAX_ROUNDS, 5, 20);
+    const maxRounds = Math.min(positiveInteger(options.maxRounds, options.retryUntilAccepted ? roundLimit : 3, 20), roundLimit);
     const accepted = new Map();
     let pending = specs.map((spec) => ({ ...spec, feedback: "" }));
     const progress = (message, extra = {}) =>
       options.onProgress?.({ message, ...extra });
     for (let round = 0; round < maxRounds && pending.length; round++) {
+      checkAiCancellation();
       progress(
         round === 0
           ? `正在生成 ${pending.length} 道题`

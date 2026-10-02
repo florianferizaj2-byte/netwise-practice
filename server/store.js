@@ -2,9 +2,12 @@ import { DatabaseSync } from "node:sqlite";
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
+import { promisify } from "node:util";
 import { bundledQuestions, certificates } from "./question-banks/loader.js";
 import { calculateMastery, nextReview, fingerprint } from "./domain.js";
 import { createMembershipStore } from "./memberships.js";
+const scrypt = promisify(crypto.scrypt);
+const unknownAccountSalt = crypto.randomBytes(16).toString("base64");
 
 export function createStore(dir = process.env.DATA_DIR || "data") {
   fs.mkdirSync(dir, { recursive: true });
@@ -557,12 +560,12 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         ? this.aiQuestionGenerationJob(row.id, userId, certificateId)
         : null;
     },
-    nextAiQuestionGenerationJob() {
+    nextAiQuestionGenerationJob(excludedUserIds = []) {
       const row = db
         .prepare(
-          "SELECT id,user_id AS userId,certificate_id AS certificateId,selection,status,progress,group_id AS groupId,error,created_at AS createdAt,updated_at AS updatedAt,credit_day AS creditDay,credit_reserved AS creditReserved,membership_credit_id AS membershipCreditId FROM ai_question_generation_jobs WHERE status='queued' ORDER BY created_at LIMIT 1",
+          `SELECT id,user_id AS userId,certificate_id AS certificateId,selection,status,progress,group_id AS groupId,error,created_at AS createdAt,updated_at AS updatedAt,credit_day AS creditDay,credit_reserved AS creditReserved,membership_credit_id AS membershipCreditId FROM ai_question_generation_jobs WHERE status='queued' ${excludedUserIds.length ? `AND user_id NOT IN (${excludedUserIds.map(() => '?').join(',')})` : ''} ORDER BY created_at LIMIT 1`,
         )
-        .get();
+        .get(...excludedUserIds);
       return row
         ? {
             ...row,
@@ -1485,6 +1488,15 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       const passwordHash = crypto
         .scryptSync(password, salt, 64)
         .toString("base64");
+      return this.registerWithHash(username, salt, passwordHash);
+    },
+    async registerAsync(username, password, { wechatBindingToken } = {}) {
+      const salt = crypto.randomBytes(16).toString("base64");
+      const hash = await scrypt(password, salt, 64);
+      const register = () => this.registerWithHash(username, salt, hash.toString("base64"));
+      return wechatBindingToken ? this.completeWechatLogin(wechatBindingToken, register) : register();
+    },
+    registerWithHash(username, salt, passwordHash) {
       const firstUser = !db.prepare("SELECT 1 FROM users LIMIT 1").get();
       const isAdmin =
         firstUser ||
@@ -1575,6 +1587,24 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         crypto.createHash("sha256").update(token).digest("hex"),
       );
     },
+    completeWechatLogin(token, getUser) {
+      // Password hashing happens before this synchronous transaction. Recheck
+      // the challenge under the write lock, and roll back account creation if
+      // the identity was already bound by another concurrent request.
+      db.exec("BEGIN IMMEDIATE");
+      try {
+        const challenge = this.wechatLoginChallenge(token);
+        if (!challenge) throw Object.assign(new Error("微信绑定已过期，请重新点击微信登录"), { status: 401 });
+        const user = getUser();
+        this.bindWechatIdentity({ ...challenge, userId: user.id });
+        this.consumeWechatLoginChallenge(token);
+        db.exec("COMMIT");
+        return user;
+      } catch (error) {
+        db.exec("ROLLBACK");
+        throw error;
+      }
+    },
     bindWechatIdentity({ appid, openid, unionid, userId }) {
       const existing = db
         .prepare("SELECT user_id AS userId FROM wechat_identities WHERE appid=? AND openid=?")
@@ -1610,15 +1640,14 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       const actual = Buffer.from(row.password_hash, "base64");
       const expected = crypto.scryptSync(password, row.salt, 64);
       if (!crypto.timingSafeEqual(actual, expected)) return null;
-      return {
-        id: row.id,
-        username: row.username,
-        communityName: row.community_name,
-        certificateId: row.certificate_id,
-        isAdmin: !!row.is_admin,
-        bannedAt: row.banned_at,
-        banReason: row.ban_reason,
-      };
+      return this.userById(row.id);
+    },
+    async authenticateAsync(username, password) {
+      const row = db.prepare("SELECT id,password_hash,salt FROM users WHERE username=?").get(username);
+      // Unknown accounts perform the same expensive work without blocking HTTP.
+      const expected = await scrypt(password, row?.salt || unknownAccountSalt, 64);
+      if (!row || !crypto.timingSafeEqual(Buffer.from(row.password_hash, "base64"), expected)) return null;
+      return this.userById(row.id);
     },
     createAuthSession(userId) {
       const token = crypto.randomBytes(32).toString("base64url");

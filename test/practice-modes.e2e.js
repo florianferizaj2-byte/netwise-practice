@@ -87,7 +87,7 @@ try {
   console.log("Practice rewards passed: automatic celebration, streak/reset, red wrong answers, revisit, audio cleanup, fixed 50% volume, mobile layout.");
 } finally {
   await browser?.close();
-  app.locals.stop();
+  await app.locals.stop();
   await new Promise(resolve => server.close(resolve));
   store.db.close();
   fs.rmSync(dir, { recursive: true, force: true });

@@ -1,0 +1,4047 @@
+{
+  "changes": [
+    {
+      "id": "practice-1",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "practice-2",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "冲突域、广播域与网络设备"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "MAC地址学习与交换转发"
+      }
+    },
+    {
+      "id": "practice-6",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "端口号与多路复用"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "UDP特性与应用场景"
+      }
+    },
+    {
+      "id": "practice-14",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      }
+    },
+    {
+      "id": "practice-21",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "IPv4地址类别与特殊地址"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "DHCP"
+      }
+    },
+    {
+      "id": "practice-22",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "管理协议与监控",
+        "knowledgePoint": "SNMP版本、MIB与报文"
+      }
+    },
+    {
+      "id": "practice-23",
+      "before": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "常用命令与系统管理"
+      },
+      "after": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "权限、进程与文件系统"
+      }
+    },
+    {
+      "id": "ne-20260923-027",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "存储器与可靠性",
+        "knowledgePoint": "串并联系统可靠性"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "存储器与可靠性",
+        "knowledgePoint": "系统可靠性与可用性"
+      }
+    },
+    {
+      "id": "ne-20260923-028",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "存储器与可靠性",
+        "knowledgePoint": "串并联系统可靠性"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "存储器与可靠性",
+        "knowledgePoint": "系统可靠性与可用性"
+      }
+    },
+    {
+      "id": "ne-20260923-036",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "总线分类"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "总线结构与带宽"
+      }
+    },
+    {
+      "id": "ne-20260923-037",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "总线分类"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "总线结构与带宽"
+      }
+    },
+    {
+      "id": "ne-20260923-038",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "总线分类"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "总线结构与带宽"
+      }
+    },
+    {
+      "id": "ne-20260923-039",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "总线分类"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "总线结构与带宽"
+      }
+    },
+    {
+      "id": "ne-20260923-040",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "总线分类"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "总线结构与带宽"
+      }
+    },
+    {
+      "id": "ne-20260923-051",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "分层原则、协议与数据封装"
+      }
+    },
+    {
+      "id": "ne-20260923-052",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "分层原则、协议与数据封装"
+      }
+    },
+    {
+      "id": "ne-20260923-058",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "TCP/IP四层模型与映射"
+      }
+    },
+    {
+      "id": "ne-20260923-059",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "分层原则、协议与数据封装"
+      }
+    },
+    {
+      "id": "ne-20260923-060",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "TCP/IP四层模型与映射"
+      }
+    },
+    {
+      "id": "ne-20260923-065",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "同步与传输方式"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "同步、双工与多路复用"
+      }
+    },
+    {
+      "id": "ne-20260923-066",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "同步与传输方式"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "同步、双工与多路复用"
+      }
+    },
+    {
+      "id": "ne-20260923-067",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "同步与传输方式"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "同步、双工与多路复用"
+      }
+    },
+    {
+      "id": "ne-20260923-068",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "同步与传输方式"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "同步、双工与多路复用"
+      }
+    },
+    {
+      "id": "ne-20260923-080",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      }
+    },
+    {
+      "id": "ne-20260923-105",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "FTP与TFTP"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "文件传输协议FTP、TFTP与SFTP"
+      }
+    },
+    {
+      "id": "ne-20260923-112",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "地址表示与地址类型"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6报文与协议特性"
+      }
+    },
+    {
+      "id": "ne-20260923-114",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "地址表示与地址类型"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6报文与协议特性"
+      }
+    },
+    {
+      "id": "ne-20260923-115",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "地址表示与地址类型"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6报文与协议特性"
+      }
+    },
+    {
+      "id": "ne-20260923-116",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "地址表示与地址类型"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6地址自动配置与DHCPv6"
+      }
+    },
+    {
+      "id": "ne-20260923-120",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "地址表示与地址类型"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6报文与协议特性"
+      }
+    },
+    {
+      "id": "ne-20260923-160",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "冲突域、广播域与网络设备"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "VLAN",
+        "knowledgePoint": "VLAN间路由与VLAN聚合"
+      }
+    },
+    {
+      "id": "ne-20260923-179",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "路由协议类型与算法"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "策略路由、路由策略与重分发"
+      }
+    },
+    {
+      "id": "ne-20260923-181",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      }
+    },
+    {
+      "id": "ne-20260923-182",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      }
+    },
+    {
+      "id": "ne-20260923-183",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      }
+    },
+    {
+      "id": "ne-20260923-186",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      }
+    },
+    {
+      "id": "ne-20260923-187",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      }
+    },
+    {
+      "id": "ne-20260923-188",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      }
+    },
+    {
+      "id": "ne-20260923-189",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      }
+    },
+    {
+      "id": "ne-20260923-198",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "OSPF",
+        "knowledgePoint": "区域、LSA与邻居状态"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "OSPF",
+        "knowledgePoint": "OSPF度量与路由计算"
+      }
+    },
+    {
+      "id": "ne-20260923-222",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "非对称加密与Hash摘要"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "Hash、HMAC与口令存储"
+      }
+    },
+    {
+      "id": "ne-20260923-223",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "非对称加密与Hash摘要"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "Hash、HMAC与口令存储"
+      }
+    },
+    {
+      "id": "ne-20260923-224",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "非对称加密与Hash摘要"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "Hash、HMAC与口令存储"
+      }
+    },
+    {
+      "id": "ne-20260923-226",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "非对称加密与Hash摘要"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "非对称加密算法"
+      }
+    },
+    {
+      "id": "ne-20260923-229",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "密码学原则与传输加密"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "Hash、HMAC与口令存储"
+      }
+    },
+    {
+      "id": "ne-20260923-254",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与常见漏洞"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与漏洞防护"
+      }
+    },
+    {
+      "id": "ne-20260923-259",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络设备与边界防护",
+        "knowledgePoint": "堡垒机与零信任架构"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络设备与边界防护",
+        "knowledgePoint": "身份认证与安全运维"
+      }
+    },
+    {
+      "id": "ne-20260923-261",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与常见漏洞"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与漏洞防护"
+      }
+    },
+    {
+      "id": "ne-20260923-262",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DDoS"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DoS与DDoS"
+      }
+    },
+    {
+      "id": "ne-20260923-263",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DDoS"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DoS与DDoS"
+      }
+    },
+    {
+      "id": "ne-20260923-265",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与常见漏洞"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DNS欺骗与DNSSEC"
+      }
+    },
+    {
+      "id": "ne-20260923-266",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DDoS"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DoS与DDoS"
+      }
+    },
+    {
+      "id": "ne-20260923-268",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络设备与边界防护",
+        "knowledgePoint": "堡垒机与零信任架构"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "恶意软件、社会工程与应急响应"
+      }
+    },
+    {
+      "id": "ne-20260923-269",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与常见漏洞"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与漏洞防护"
+      }
+    },
+    {
+      "id": "ne-20260923-270",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与常见漏洞"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DNS欺骗与DNSSEC"
+      }
+    },
+    {
+      "id": "ne-20260923-278",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "VPN与安全传输",
+        "knowledgePoint": "TLS与安全传输协议"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "PKI与数字证书",
+        "knowledgePoint": "证书验证与CRL吊销"
+      }
+    },
+    {
+      "id": "ne-20260923-292",
+      "before": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "网络接口与服务配置"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "ipconfig、netstat与路由工具"
+      }
+    },
+    {
+      "id": "ne-20260923-296",
+      "before": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "权限、进程与文件系统"
+      },
+      "after": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "网络接口与服务配置"
+      }
+    },
+    {
+      "id": "ne-20260923-327",
+      "before": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "设备Console与维护接入"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "设备接入与接口排障"
+      }
+    },
+    {
+      "id": "ne-20260923-332",
+      "before": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "设备Console与维护接入"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "设备接入与接口排障"
+      }
+    },
+    {
+      "id": "ne-20260923-334",
+      "before": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "设备Console与维护接入"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "设备接入与接口排障"
+      }
+    },
+    {
+      "id": "ne-20260923-337",
+      "before": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "设备Console与维护接入"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "设备接入与接口排障"
+      }
+    },
+    {
+      "id": "ne-20260923-339",
+      "before": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "设备Console与维护接入"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "设备接入与接口排障"
+      }
+    },
+    {
+      "id": "ne-20260923-352",
+      "before": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "传输介质",
+        "knowledgePoint": "传输介质特性与选型"
+      },
+      "after": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "传输介质",
+        "knowledgePoint": "光功率与光链路基础"
+      }
+    },
+    {
+      "id": "ne-20260923-420",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "网络架构新技术",
+        "knowledgePoint": "云计算与容器"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "网络架构新技术",
+        "knowledgePoint": "VXLAN与Overlay网络"
+      }
+    },
+    {
+      "id": "ne-20260923-421",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "5G"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "4G与5G移动通信"
+      }
+    },
+    {
+      "id": "ne-20260923-422",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "5G"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "4G与5G移动通信"
+      }
+    },
+    {
+      "id": "ne-20260923-423",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "5G"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "4G与5G移动通信"
+      }
+    },
+    {
+      "id": "ne-20260923-424",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "5G"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "4G与5G移动通信"
+      }
+    },
+    {
+      "id": "ne-20260923-425",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "5G"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "4G与5G移动通信"
+      }
+    },
+    {
+      "id": "ne-20260923-426",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "5G"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "4G与5G移动通信"
+      }
+    },
+    {
+      "id": "ne-20260923-427",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "NB-IoT"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "物联网与NB-IoT"
+      }
+    },
+    {
+      "id": "ne-20260923-428",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "NB-IoT"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "物联网与NB-IoT"
+      }
+    },
+    {
+      "id": "ne-20260923-429",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "5G"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "4G与5G移动通信"
+      }
+    },
+    {
+      "id": "ne-20260923-430",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "5G"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "4G与5G移动通信"
+      }
+    },
+    {
+      "id": "collection-c01-q002",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "TCP连接与可靠传输"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "TCP/IP四层模型与映射"
+      }
+    },
+    {
+      "id": "collection-c01-q003",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "TCP/IP四层模型与映射"
+      }
+    },
+    {
+      "id": "collection-c01-q004",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c01-q010",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c01-q011",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c01-q012",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "TCP连接与可靠传输"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c01-q013",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "TCP连接与可靠传输"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "TCP/IP四层模型与映射"
+      }
+    },
+    {
+      "id": "collection-c01-q014",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "FTP与TFTP"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c01-q015",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c01-q016",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c01-q017",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c01-q018",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c01-q019",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c01-q020",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "TCP连接与可靠传输"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "TCP/IP四层模型与映射"
+      }
+    },
+    {
+      "id": "collection-c01-q021",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c01-q022",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "TCP连接与可靠传输"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "TCP/IP四层模型与映射"
+      }
+    },
+    {
+      "id": "collection-c01-q023",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c01-q024",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c01-q025",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c01-q026",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c01-q027",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "HTTP与HTTPS"
+      }
+    },
+    {
+      "id": "collection-c01-q028",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c01-q029",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c01-q030",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c01-q031",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c01-q032",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "TCP连接与可靠传输"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "TCP/IP四层模型与映射"
+      }
+    },
+    {
+      "id": "collection-c01-q033",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c01-q035",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c01-q036",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "TCP连接与可靠传输"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "TCP/IP四层模型与映射"
+      }
+    },
+    {
+      "id": "collection-c01-q037",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c01-q038",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c01-q039",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "TCP连接与可靠传输"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "TCP/IP四层模型与映射"
+      }
+    },
+    {
+      "id": "collection-c01-q040",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "TCP连接与可靠传输"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c01-q041",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "分层原则、协议与数据封装"
+      }
+    },
+    {
+      "id": "collection-c01-q043",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c01-q044",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "TCP/IP四层模型与映射"
+      }
+    },
+    {
+      "id": "collection-c01-q045",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c01-q046",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c01-q047",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c01-q048",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c01-q049",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "TCP连接与可靠传输"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "TCP/IP四层模型与映射"
+      }
+    },
+    {
+      "id": "collection-c02-q011",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "冲突域、广播域与网络设备"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "CSMA/CD与以太网帧"
+      }
+    },
+    {
+      "id": "collection-c02-q012",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "信道容量与数据速率"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "广域网链路",
+        "knowledgePoint": "E1/T1与专线基础"
+      }
+    },
+    {
+      "id": "collection-c02-q013",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "信道容量与数据速率"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "广域网链路",
+        "knowledgePoint": "E1/T1与专线基础"
+      }
+    },
+    {
+      "id": "collection-c02-q014",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "信道容量与数据速率"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "编码与调制"
+      }
+    },
+    {
+      "id": "collection-c02-q015",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "信道容量与数据速率"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "编码与调制"
+      }
+    },
+    {
+      "id": "collection-c02-q019",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "信道容量与数据速率"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "广域网链路",
+        "knowledgePoint": "PPP、HDLC与帧中继"
+      }
+    },
+    {
+      "id": "collection-c02-q021",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "信道容量与数据速率"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "同步、双工与多路复用"
+      }
+    },
+    {
+      "id": "collection-c02-q022",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "冲突域、广播域与网络设备"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "CSMA/CD与以太网帧"
+      }
+    },
+    {
+      "id": "collection-c02-q023",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "冲突域、广播域与网络设备"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "CSMA/CD与以太网帧"
+      }
+    },
+    {
+      "id": "collection-c02-q026",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "信道容量与数据速率"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "编码与调制"
+      }
+    },
+    {
+      "id": "collection-c02-q027",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "信道容量与数据速率"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "信号质量与眼图"
+      }
+    },
+    {
+      "id": "collection-c02-q032",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "信道容量与数据速率"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "同步、双工与多路复用"
+      }
+    },
+    {
+      "id": "collection-c02-q036",
+      "before": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "设备Console与维护接入"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "设备接入与接口排障"
+      }
+    },
+    {
+      "id": "collection-c02-q038",
+      "before": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "网络拓扑"
+      },
+      "after": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "网络需求分析与拓扑设计"
+      }
+    },
+    {
+      "id": "collection-c02-q039",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "冲突域、广播域与网络设备"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "CSMA/CD与以太网帧"
+      }
+    },
+    {
+      "id": "collection-c02-q040",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "冲突域、广播域与网络设备"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "CSMA/CD与以太网帧"
+      }
+    },
+    {
+      "id": "collection-c02-q041",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "信道容量与数据速率"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "编码与调制"
+      }
+    },
+    {
+      "id": "collection-c02-q045",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "冲突域、广播域与网络设备"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "CSMA/CD与以太网帧"
+      }
+    },
+    {
+      "id": "collection-c02-q047",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "5G"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "4G与5G移动通信"
+      }
+    },
+    {
+      "id": "collection-c03-q005",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网际层协议",
+        "knowledgePoint": "ICMP与控制报文"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "IPv4地址类别与特殊地址"
+      }
+    },
+    {
+      "id": "collection-c03-q009",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "IPv4首部、分片、组播与TTL"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网际层协议",
+        "knowledgePoint": "ICMP与控制报文"
+      }
+    },
+    {
+      "id": "collection-c03-q010",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "IPv4地址类别与特殊地址"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "IPv4首部、分片、组播与TTL"
+      }
+    },
+    {
+      "id": "collection-c03-q016",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      }
+    },
+    {
+      "id": "collection-c03-q017",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      }
+    },
+    {
+      "id": "collection-c03-q018",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "地址表示与地址类型"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6报文与协议特性"
+      }
+    },
+    {
+      "id": "collection-c03-q019",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "IPv4地址类别与特殊地址"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "网络地址、广播地址与可用主机"
+      }
+    },
+    {
+      "id": "collection-c03-q020",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网际层协议",
+        "knowledgePoint": "ICMP与控制报文"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "CIDR与路由聚合"
+      }
+    },
+    {
+      "id": "collection-c03-q032",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "DNS"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "ipconfig、netstat与路由工具"
+      }
+    },
+    {
+      "id": "collection-c03-q035",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "地址表示与地址类型"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6地址自动配置与DHCPv6"
+      }
+    },
+    {
+      "id": "collection-c03-q038",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "地址表示与地址类型"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6报文与协议特性"
+      }
+    },
+    {
+      "id": "collection-c03-q041",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网际层协议",
+        "knowledgePoint": "ICMP与控制报文"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6报文与协议特性"
+      }
+    },
+    {
+      "id": "collection-c04-q005",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "端口号与多路复用"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "UDP特性与应用场景"
+      }
+    },
+    {
+      "id": "collection-c04-q021",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "跨协议端口与传输协议辨析"
+      }
+    },
+    {
+      "id": "collection-c04-q025",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "TCP窗口、流量控制与拥塞控制"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "TCP连接与可靠传输"
+      }
+    },
+    {
+      "id": "collection-c04-q033",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "IPv4首部、分片、组播与TTL"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "UDP特性与应用场景"
+      }
+    },
+    {
+      "id": "collection-c04-q035",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "端口号与多路复用"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "UDP特性与应用场景"
+      }
+    },
+    {
+      "id": "collection-c05-q002",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      }
+    },
+    {
+      "id": "collection-c05-q010",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      }
+    },
+    {
+      "id": "collection-c05-q012",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      }
+    },
+    {
+      "id": "collection-c05-q018",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      }
+    },
+    {
+      "id": "collection-c05-q020",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "OSPF",
+        "knowledgePoint": "区域、LSA与邻居状态"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "OSPF",
+        "knowledgePoint": "OSPF度量与路由计算"
+      }
+    },
+    {
+      "id": "collection-c05-q021",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "OSPF",
+        "knowledgePoint": "区域、LSA与邻居状态"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "OSPF",
+        "knowledgePoint": "OSPF度量与路由计算"
+      }
+    },
+    {
+      "id": "collection-c05-q034",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "路由协议类型与算法"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "CIDR与路由聚合"
+      }
+    },
+    {
+      "id": "collection-c06-q007",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "STP生成树",
+        "knowledgePoint": "端口角色与BPDU"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "STP生成树",
+        "knowledgePoint": "收敛过程与协议版本"
+      }
+    },
+    {
+      "id": "collection-c06-q008",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "STP生成树",
+        "knowledgePoint": "端口角色与BPDU"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "STP生成树",
+        "knowledgePoint": "收敛过程与协议版本"
+      }
+    },
+    {
+      "id": "collection-c06-q009",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "STP生成树",
+        "knowledgePoint": "端口角色与BPDU"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "STP生成树",
+        "knowledgePoint": "收敛过程与协议版本"
+      }
+    },
+    {
+      "id": "collection-c06-q013",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "VLAN",
+        "knowledgePoint": "802.1Q与VLAN标签"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "VLAN",
+        "knowledgePoint": "VLAN间路由与VLAN聚合"
+      }
+    },
+    {
+      "id": "collection-c06-q014",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "VLAN",
+        "knowledgePoint": "802.1Q与VLAN标签"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "VLAN",
+        "knowledgePoint": "VLAN间路由与VLAN聚合"
+      }
+    },
+    {
+      "id": "collection-c06-q034",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "STP生成树",
+        "knowledgePoint": "端口角色与BPDU"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "STP生成树",
+        "knowledgePoint": "收敛过程与协议版本"
+      }
+    },
+    {
+      "id": "collection-c06-q036",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "STP生成树",
+        "knowledgePoint": "端口角色与BPDU"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "STP生成树",
+        "knowledgePoint": "BID与根桥选举"
+      }
+    },
+    {
+      "id": "collection-c07-q001",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      }
+    },
+    {
+      "id": "collection-c07-q002",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      }
+    },
+    {
+      "id": "collection-c07-q003",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "网络地址、广播地址与可用主机"
+      }
+    },
+    {
+      "id": "collection-c07-q004",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "网络地址、广播地址与可用主机"
+      }
+    },
+    {
+      "id": "collection-c07-q005",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      }
+    },
+    {
+      "id": "collection-c07-q007",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      }
+    },
+    {
+      "id": "collection-c07-q009",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "IPv4地址类别与特殊地址"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "网络地址、广播地址与可用主机"
+      }
+    },
+    {
+      "id": "collection-c07-q013",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      }
+    },
+    {
+      "id": "collection-c07-q014",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      }
+    },
+    {
+      "id": "collection-c07-q015",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      }
+    },
+    {
+      "id": "collection-c07-q018",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      }
+    },
+    {
+      "id": "collection-c07-q019",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      }
+    },
+    {
+      "id": "collection-c07-q022",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      }
+    },
+    {
+      "id": "collection-c07-q026",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "网络地址、广播地址与可用主机"
+      }
+    },
+    {
+      "id": "collection-c07-q028",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "网络地址、广播地址与可用主机"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "CIDR与路由聚合"
+      }
+    },
+    {
+      "id": "collection-c07-q029",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "网络地址、广播地址与可用主机"
+      }
+    },
+    {
+      "id": "collection-c07-q030",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      }
+    },
+    {
+      "id": "collection-c07-q038",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "网络地址、广播地址与可用主机"
+      }
+    },
+    {
+      "id": "collection-c07-q041",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      }
+    },
+    {
+      "id": "collection-c08-q003",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "对称加密算法"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "非对称加密算法"
+      }
+    },
+    {
+      "id": "collection-c08-q004",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与常见漏洞"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与漏洞防护"
+      }
+    },
+    {
+      "id": "collection-c08-q005",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "VPN与安全传输",
+        "knowledgePoint": "TLS与安全传输协议"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "PKI与数字证书",
+        "knowledgePoint": "证书验证与CRL吊销"
+      }
+    },
+    {
+      "id": "collection-c08-q008",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "密码学原则与传输加密"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "密码学原则与加密方式"
+      }
+    },
+    {
+      "id": "collection-c08-q010",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "非对称加密与Hash摘要"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "非对称加密算法"
+      }
+    },
+    {
+      "id": "collection-c08-q016",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与常见漏洞"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "恶意软件、社会工程与应急响应"
+      }
+    },
+    {
+      "id": "collection-c08-q018",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "非对称加密与Hash摘要"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "Hash、HMAC与口令存储"
+      }
+    },
+    {
+      "id": "collection-c08-q020",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DDoS"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DoS与DDoS"
+      }
+    },
+    {
+      "id": "collection-c08-q021",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与常见漏洞"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "恶意软件、社会工程与应急响应"
+      }
+    },
+    {
+      "id": "collection-c08-q025",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与常见漏洞"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与漏洞防护"
+      }
+    },
+    {
+      "id": "collection-c08-q027",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "非对称加密与Hash摘要"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "PKI与数字证书",
+        "knowledgePoint": "CA、数字证书与数字签名"
+      }
+    },
+    {
+      "id": "collection-c08-q031",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DDoS"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DoS与DDoS"
+      }
+    },
+    {
+      "id": "collection-c08-q032",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与常见漏洞"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "恶意软件、社会工程与应急响应"
+      }
+    },
+    {
+      "id": "collection-c08-q040",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "非对称加密与Hash摘要"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "Hash、HMAC与口令存储"
+      }
+    },
+    {
+      "id": "collection-c08-q050",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "密码学原则与传输加密"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "密码学原则与加密方式"
+      }
+    },
+    {
+      "id": "collection-c09-q009",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "管理协议与监控",
+        "knowledgePoint": "SNMP版本、MIB与报文"
+      }
+    },
+    {
+      "id": "collection-c09-q014",
+      "before": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "ipconfig、netstat与路由工具"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "ping与tracert连通性检查"
+      }
+    },
+    {
+      "id": "collection-c09-q020",
+      "before": {
+        "chapter": "网络管理",
+        "knowledgeSection": "网络管理功能",
+        "knowledgePoint": "故障、配置、性能、安全与计费管理"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "管理协议与监控",
+        "knowledgePoint": "SNMP版本、MIB与报文"
+      }
+    },
+    {
+      "id": "collection-c09-q021",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      }
+    },
+    {
+      "id": "collection-c09-q022",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "管理协议与监控",
+        "knowledgePoint": "SNMP版本、MIB与报文"
+      }
+    },
+    {
+      "id": "collection-c09-q032",
+      "before": {
+        "chapter": "网络管理",
+        "knowledgeSection": "网络管理功能",
+        "knowledgePoint": "故障、配置、性能、安全与计费管理"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "管理协议与监控",
+        "knowledgePoint": "SNMP版本、MIB与报文"
+      }
+    },
+    {
+      "id": "collection-c09-q045",
+      "before": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "ipconfig、netstat与路由工具"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "ping与tracert连通性检查"
+      }
+    },
+    {
+      "id": "collection-c10-q001",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "电子邮件、LDAP与远程登录"
+      }
+    },
+    {
+      "id": "collection-c10-q003",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "文件传输协议FTP、TFTP与SFTP"
+      }
+    },
+    {
+      "id": "collection-c10-q006",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "跨协议端口与传输协议辨析"
+      }
+    },
+    {
+      "id": "collection-c10-q009",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "电子邮件、LDAP与远程登录"
+      }
+    },
+    {
+      "id": "collection-c10-q012",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "FTP与TFTP"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "文件传输协议FTP、TFTP与SFTP"
+      }
+    },
+    {
+      "id": "collection-c10-q018",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "FTP与TFTP"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "文件传输协议FTP、TFTP与SFTP"
+      }
+    },
+    {
+      "id": "collection-c10-q020",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "跨协议端口与传输协议辨析"
+      }
+    },
+    {
+      "id": "collection-c10-q042",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "FTP与TFTP"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "文件传输协议FTP、TFTP与SFTP"
+      }
+    },
+    {
+      "id": "collection-c10-q044",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "电子邮件、LDAP与远程登录"
+      }
+    },
+    {
+      "id": "collection-c10-q046",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "HTTP与HTTPS"
+      }
+    },
+    {
+      "id": "collection-c10-q049",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "HTTP与HTTPS"
+      }
+    },
+    {
+      "id": "collection-c11-q003",
+      "before": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "常用命令与系统管理"
+      },
+      "after": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "权限、进程与文件系统"
+      }
+    },
+    {
+      "id": "collection-c11-q005",
+      "before": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "常用命令与系统管理"
+      },
+      "after": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "权限、进程与文件系统"
+      }
+    },
+    {
+      "id": "collection-c11-q006",
+      "before": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "常用命令与系统管理"
+      },
+      "after": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "权限、进程与文件系统"
+      }
+    },
+    {
+      "id": "collection-c11-q007",
+      "before": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "常用命令与系统管理"
+      },
+      "after": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "权限、进程与文件系统"
+      }
+    },
+    {
+      "id": "collection-c11-q008",
+      "before": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "常用命令与系统管理"
+      },
+      "after": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "权限、进程与文件系统"
+      }
+    },
+    {
+      "id": "collection-c11-q009",
+      "before": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Windows服务器",
+        "knowledgePoint": "AD、账户与服务管理"
+      },
+      "after": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Windows服务器",
+        "knowledgePoint": "Windows服务与远程管理"
+      }
+    },
+    {
+      "id": "collection-c11-q018",
+      "before": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "常用命令与系统管理"
+      },
+      "after": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "权限、进程与文件系统"
+      }
+    },
+    {
+      "id": "collection-c11-q020",
+      "before": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Windows服务器",
+        "knowledgePoint": "AD、账户与服务管理"
+      },
+      "after": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Windows服务器",
+        "knowledgePoint": "Windows服务与远程管理"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q002",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "CPU流水线"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "指令系统、寻址与中断"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q004",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "编码与调制"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "信道容量与数据速率"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q005",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "信道容量与数据速率"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "同步、双工与多路复用"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q011",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "其他交换技术",
+        "knowledgePoint": "链路聚合、堆叠、QinQ与PoE"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "网络架构新技术",
+        "knowledgePoint": "VXLAN与Overlay网络"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q012",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "VLAN",
+        "knowledgePoint": "802.1Q与VLAN标签"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "VLAN",
+        "knowledgePoint": "VLAN间路由与VLAN聚合"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q017",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "5G"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "4G与5G移动通信"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q018",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "数据链路层流量控制与ARQ"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q021-a",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q021-b",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q027",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "QoS服务模型与流量管理"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q028",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6过渡技术"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6报文与协议特性"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q029",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6过渡技术"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6报文与协议特性"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q037",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "NB-IoT"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "物联网与NB-IoT"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q040",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "存储器与可靠性",
+        "knowledgePoint": "NAS、SAN与存储网络"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q042",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DDoS"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DoS与DDoS"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q043",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DDoS"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DoS与DDoS"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q044",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网际层协议",
+        "knowledgePoint": "ARP与RARP"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "ipconfig、netstat与路由工具"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q045",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "非对称加密与Hash摘要"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "非对称加密算法"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q051",
+      "before": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "网络拓扑"
+      },
+      "after": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "网络需求分析与拓扑设计"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q052",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "路由表、静态路由与默认路由"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "策略路由、路由策略与重分发"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q053",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "VPN与安全传输",
+        "knowledgePoint": "IPsec VPN与SSL VPN"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "VPN与安全传输",
+        "knowledgePoint": "GRE隧道"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q055",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "OSPF",
+        "knowledgePoint": "区域、LSA与邻居状态"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "OSPF",
+        "knowledgePoint": "OSPF度量与路由计算"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q056",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "BGP",
+        "knowledgePoint": "AS与路径矢量"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "BGP",
+        "knowledgePoint": "BGP路由属性与选路"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q059",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "5G"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "4G与5G移动通信"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q064",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6过渡技术"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6报文与协议特性"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q065-a",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q065-b",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q065-c",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q065-d",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      }
+    },
+    {
+      "id": "intake-2026-spring-q065-e",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      }
+    },
+    {
+      "id": "sealed-morning-2026h1-q001",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "CPU流水线"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "指令系统、寻址与中断"
+      }
+    },
+    {
+      "id": "sealed-morning-2026h1-q002",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "CPU流水线"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "指令系统、寻址与中断"
+      }
+    },
+    {
+      "id": "sealed-morning-2026h1-q004",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "数制与编码",
+        "knowledgePoint": "原码、反码、补码与移码"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "数制与编码",
+        "knowledgePoint": "浮点数表示"
+      }
+    },
+    {
+      "id": "sealed-morning-2026h1-q006",
+      "before": {
+        "chapter": "项目管理与法律法规",
+        "knowledgeSection": "项目控制",
+        "knowledgePoint": "质量管理"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "软件工程基础",
+        "knowledgePoint": "软件测试方法"
+      }
+    },
+    {
+      "id": "sealed-morning-2026h1-q007",
+      "before": {
+        "chapter": "项目管理与法律法规",
+        "knowledgeSection": "项目控制",
+        "knowledgePoint": "质量管理"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "软件工程基础",
+        "knowledgePoint": "开发模型与需求分析"
+      }
+    },
+    {
+      "id": "sealed-morning-2026h1-q013",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "信道容量与数据速率"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "数据链路层流量控制与ARQ"
+      }
+    },
+    {
+      "id": "sealed-morning-2026h1-q033",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "密码学原则与传输加密"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "密码学原则与加密方式"
+      }
+    },
+    {
+      "id": "sealed-morning-2026h1-q036",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      }
+    },
+    {
+      "id": "sealed-morning-2026h1-q038",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "DHCP"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "IPv4地址类别与特殊地址"
+      }
+    },
+    {
+      "id": "sealed-morning-2026h1-q040",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "FTP与TFTP"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "文件传输协议FTP、TFTP与SFTP"
+      }
+    },
+    {
+      "id": "sealed-morning-2026h1-q041",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "FTP与TFTP"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "文件传输协议FTP、TFTP与SFTP"
+      }
+    },
+    {
+      "id": "sealed-morning-2026h1-q044",
+      "before": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "设备Console与维护接入"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "设备接入与接口排障"
+      }
+    },
+    {
+      "id": "sealed-morning-2026h1-q048",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "地址表示与地址类型"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6地址自动配置与DHCPv6"
+      }
+    },
+    {
+      "id": "sealed-morning-2026h1-q057",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与常见漏洞"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "恶意软件、社会工程与应急响应"
+      }
+    },
+    {
+      "id": "sealed-morning-2026h1-q061",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "水平分割、毒性逆转与触发更新"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      }
+    },
+    {
+      "id": "sealed-morning-2026h1-q065",
+      "before": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "带宽、时延、丢包率与吞吐量"
+      },
+      "after": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "QoS服务模型与流量管理"
+      }
+    },
+    {
+      "id": "sealed-morning-2026h1-q068",
+      "before": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "网络拓扑"
+      },
+      "after": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "网络需求分析与拓扑设计"
+      }
+    },
+    {
+      "id": "sealed-morning-2026h1-q069",
+      "before": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "网络拓扑"
+      },
+      "after": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "网络需求分析与拓扑设计"
+      }
+    },
+    {
+      "id": "sealed-morning-2026h1-q071",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网际层协议",
+        "knowledgePoint": "网络层服务与分组交换"
+      }
+    },
+    {
+      "id": "sealed-morning-2026h1-q072",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "路由表、静态路由与默认路由"
+      }
+    },
+    {
+      "id": "sealed-morning-2026h1-q074",
+      "before": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "带宽、时延、丢包率与吞吐量"
+      },
+      "after": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "QoS服务模型与流量管理"
+      }
+    },
+    {
+      "id": "sealed-morning-2026h1-q075",
+      "before": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "带宽、时延、丢包率与吞吐量"
+      },
+      "after": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "QoS服务模型与流量管理"
+      }
+    },
+    {
+      "id": "h1-case-c1-q1",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      }
+    },
+    {
+      "id": "h1-case-c1-q3",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "路由表、静态路由与默认路由"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "策略路由、路由策略与重分发"
+      }
+    },
+    {
+      "id": "h1-case-c1-q4",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "路由协议类型与算法"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "策略路由、路由策略与重分发"
+      }
+    },
+    {
+      "id": "h1-case-c2-q2",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "路由优先级、管理距离与度量值"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "VRRP与网关冗余"
+      }
+    },
+    {
+      "id": "h1-case-c2-q3",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "路由优先级、管理距离与度量值"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "VRRP与网关冗余"
+      }
+    },
+    {
+      "id": "h1-sealed-p1-q1",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "FTP与TFTP"
+      },
+      "after": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "网络接口与服务配置"
+      }
+    },
+    {
+      "id": "h1-sealed-p1-q3",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "FTP与TFTP"
+      },
+      "after": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "网络接口与服务配置"
+      }
+    },
+    {
+      "id": "h1-sealed-p3-q2",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与常见漏洞"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与漏洞防护"
+      }
+    },
+    {
+      "id": "lastset-general-2026h1-q004",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "CPU流水线"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "计算机性能指标"
+      }
+    },
+    {
+      "id": "lastset-general-2026h1-q005",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "存储器与可靠性",
+        "knowledgePoint": "串并联系统可靠性"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "存储器与可靠性",
+        "knowledgePoint": "系统可靠性与可用性"
+      }
+    },
+    {
+      "id": "lastset-general-2026h1-q017",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "路由优先级、管理距离与度量值"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "VRRP与网关冗余"
+      }
+    },
+    {
+      "id": "lastset-general-2026h1-q025",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "OSPF",
+        "knowledgePoint": "区域、LSA与邻居状态"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "OSPF",
+        "knowledgePoint": "OSPF度量与路由计算"
+      }
+    },
+    {
+      "id": "lastset-general-2026h1-q028",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      }
+    },
+    {
+      "id": "lastset-general-2026h1-q029",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "路由协议类型与算法"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "策略路由、路由策略与重分发"
+      }
+    },
+    {
+      "id": "lastset-general-2026h1-q030",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "路由协议类型与算法"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "策略路由、路由策略与重分发"
+      }
+    },
+    {
+      "id": "lastset-general-2026h1-q043",
+      "before": {
+        "chapter": "网络管理",
+        "knowledgeSection": "管理协议与监控",
+        "knowledgePoint": "SNMP版本、MIB与报文"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "管理协议与监控",
+        "knowledgePoint": "NETCONF与配置自动化"
+      }
+    },
+    {
+      "id": "lastset-general-2026h1-q048",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "5G"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "4G与5G移动通信"
+      }
+    },
+    {
+      "id": "lastset-general-2026h1-q049",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "5G"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "4G与5G移动通信"
+      }
+    },
+    {
+      "id": "lastset-general-2026h1-q053",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "密码学原则与传输加密"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络设备与边界防护",
+        "knowledgePoint": "身份认证与安全运维"
+      }
+    },
+    {
+      "id": "lastset-general-2026h1-q054",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "PKI与数字证书",
+        "knowledgePoint": "CA、数字证书与数字签名"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DNS欺骗与DNSSEC"
+      }
+    },
+    {
+      "id": "lastset-general-2026h1-q058",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DDoS"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DoS与DDoS"
+      }
+    },
+    {
+      "id": "lastset-general-2026h1-q060",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "路由协议类型与算法"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "广域网链路",
+        "knowledgePoint": "MPLS标签转发"
+      }
+    },
+    {
+      "id": "lastset-general-2026h1-q063",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "VLAN",
+        "knowledgePoint": "802.1Q与VLAN标签"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "网络架构新技术",
+        "knowledgePoint": "VXLAN与Overlay网络"
+      }
+    },
+    {
+      "id": "lastset-general-2026h1-q067",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "存储器与可靠性",
+        "knowledgePoint": "存储介质性能比较"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "存储器与可靠性",
+        "knowledgePoint": "NAS、SAN与存储网络"
+      }
+    },
+    {
+      "id": "lastset-general-2026h1-q068",
+      "before": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "网络拓扑"
+      },
+      "after": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "网络需求分析与拓扑设计"
+      }
+    },
+    {
+      "id": "lastset-general-2026h1-q069",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "存储器与可靠性",
+        "knowledgePoint": "串并联系统可靠性"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "存储器与可靠性",
+        "knowledgePoint": "系统可靠性与可用性"
+      }
+    },
+    {
+      "id": "lastset-general-2026h1-q075",
+      "before": {
+        "chapter": "项目管理与法律法规",
+        "knowledgeSection": "项目控制",
+        "knowledgePoint": "配置管理"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "软件工程基础",
+        "knowledgePoint": "开发模型与需求分析"
+      }
+    },
+    {
+      "id": "lastset-case-2026h1-c2-q03",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DDoS"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DoS与DDoS"
+      }
+    },
+    {
+      "id": "lastset-case-2026h1-c2-q04",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "存储器与可靠性",
+        "knowledgePoint": "存储介质性能比较"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "存储器与可靠性",
+        "knowledgePoint": "NAS、SAN与存储网络"
+      }
+    },
+    {
+      "id": "lastset-case-2026h1-c3-q01",
+      "before": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "带宽、时延、丢包率与吞吐量"
+      },
+      "after": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "QoS服务模型与流量管理"
+      }
+    },
+    {
+      "id": "lastset-case-2026h1-c3-q02",
+      "before": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "带宽、时延、丢包率与吞吐量"
+      },
+      "after": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "QoS服务模型与流量管理"
+      }
+    },
+    {
+      "id": "lastset-case-2026h1-c4-q01",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "STP生成树",
+        "knowledgePoint": "端口角色与BPDU"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "STP生成树",
+        "knowledgePoint": "收敛过程与协议版本"
+      }
+    },
+    {
+      "id": "lastset-case-2026h1-c4-q03",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      }
+    }
+  ]
+}

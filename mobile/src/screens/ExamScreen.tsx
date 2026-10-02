@@ -12,6 +12,7 @@ import { AppAlert as Alert } from "../components/AppAlert";
 import { RefreshControl } from "../components/RefreshControl";
 import { SafeAreaView } from "../components/SafeArea";
 import { mobileApi, type ExamSession, type Question } from "../api/client";
+import { ApiError } from "../api/transport";
 import { useCachedQuery } from "../api/useCachedQuery";
 import { useScreenActive } from "../navigation/ScreenActivity";
 import { AnimatedPressable, AnimatedProgressBar } from "../components/Motion";
@@ -80,6 +81,9 @@ export function ExamScreen({
   const revision = useRef(0),
     savedRevision = useRef(0),
     autoSubmitted = useRef<string | null>(null);
+  const serverVersion = useRef(0),
+    pendingAnswers = useRef<Record<string, string[]>>({}),
+    conflicted = useRef(false);
   useEffect(() => {
     mounted.current = true;
     return () => {
@@ -120,6 +124,9 @@ export function ExamScreen({
   }, [result]);
 
   function enter(next: ExamSession) {
+    serverVersion.current = next.answersVersion || 0;
+    pendingAnswers.current = {};
+    conflicted.current = false;
     examRef.current = next;
     setExam(next);
     answersRef.current = next.answers || {};
@@ -170,9 +177,11 @@ export function ExamScreen({
   }
   function save() {
     const current = examRef.current;
-    if (!current || current.submitted) return saveChain.current;
+    if (!current || current.submitted || conflicted.current)
+      return saveChain.current;
     const snapshot = answersRef.current,
-      version = revision.current;
+      version = revision.current,
+      pending = { ...pendingAnswers.current };
     setSaveState("saving");
     saveChain.current = saveChain.current
       .catch(() => undefined)
@@ -181,23 +190,89 @@ export function ExamScreen({
           !mounted.current ||
           examRef.current?.id !== current.id ||
           examRef.current.submitted ||
-          version < revision.current
+          version < revision.current ||
+          conflicted.current
         )
           return;
-        const response = await mobileApi.saveExamAnswers(current.id, snapshot);
+        const response = await mobileApi.saveExamAnswers(
+          current.id,
+          snapshot,
+          serverVersion.current,
+        );
         if (!mounted.current || examRef.current?.id !== current.id) return;
         if (response.expired) {
           setSaveState("expired");
           return;
         }
+        serverVersion.current = response.version;
+        for (const [id, values] of Object.entries(pending))
+          if (
+            JSON.stringify(pendingAnswers.current[id]) ===
+            JSON.stringify(values)
+          )
+            delete pendingAnswers.current[id];
         savedRevision.current = Math.max(savedRevision.current, version);
         if (version === revision.current) setSaveState("saved");
       })
-      .catch(() => {
-        if (mounted.current && examRef.current?.id === current.id)
+      .catch((cause) => {
+        if (mounted.current && examRef.current?.id === current.id) {
           setSaveState("error");
+          handleConflict(cause);
+        }
       });
     return saveChain.current;
+  }
+  function handleConflict(cause: unknown) {
+    const data =
+      cause instanceof ApiError
+        ? (cause.data as {
+            code?: string;
+            details?: { version: number; answers: Record<string, string[]> };
+          })
+        : null;
+    if (data?.code !== "EXAM_ANSWERS_CONFLICT" || !data.details) return false;
+    const details = data.details,
+      examId = examRef.current?.id;
+    if (conflicted.current) return true;
+    conflicted.current = true;
+    Alert.alert(
+      "答案已在其他页面更新",
+      "请选择使用已同步答案，或合并本机尚未同步的作答。",
+      [
+        {
+          text: "使用已同步答案",
+          onPress: () => {
+            if (!mounted.current || examRef.current?.id !== examId) return;
+            serverVersion.current = details.version;
+            pendingAnswers.current = {};
+            answersRef.current = details.answers;
+            setAnswers(details.answers);
+            savedRevision.current = revision.current;
+            conflicted.current = false;
+            setSaveState("saved");
+            setError("");
+          },
+        },
+        {
+          text: "合并本机作答",
+          onPress: () => {
+            if (!mounted.current || examRef.current?.id !== examId) return;
+            serverVersion.current = details.version;
+            answersRef.current = {
+              ...details.answers,
+              ...pendingAnswers.current,
+            };
+            setAnswers(answersRef.current);
+            revision.current++;
+            conflicted.current = false;
+            setError("");
+            void save();
+          },
+        },
+      ],
+      { cancelable: false },
+    );
+    return true;
   }
   function choose(letter: string) {
     const current = examRef.current,
@@ -205,6 +280,7 @@ export function ExamScreen({
     if (
       !current ||
       !question ||
+      conflicted.current ||
       current.submitted ||
       busyRef.current ||
       Date.now() >= Date.parse(current.expiresAt)
@@ -218,6 +294,7 @@ export function ExamScreen({
           : [...previous, letter]
         : [letter];
     answersRef.current = { ...answersRef.current, [question.id]: selected };
+    pendingAnswers.current[question.id] = selected;
     revision.current++;
     setAnswers(answersRef.current);
     void save();
@@ -231,9 +308,11 @@ export function ExamScreen({
     setError("");
     try {
       await saveChain.current;
+      if (conflicted.current) throw new Error("请先处理答案同步冲突，再交卷");
       const nextResult = await mobileApi.submitExam(
         current.id,
         answersRef.current,
+        serverVersion.current,
       );
       if (!mounted.current || examRef.current?.id !== current.id) return;
       const next = {
@@ -247,6 +326,7 @@ export function ExamScreen({
       setCardOpen(false);
       setSaveState("saved");
     } catch (cause) {
+      if (mounted.current) handleConflict(cause);
       if (mounted.current)
         setError(
           cause instanceof Error

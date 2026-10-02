@@ -350,6 +350,6 @@ export function registerGuestTrialRoutes({
           ).run(trial.id, question.id, action);
         throw error;
       }
-    });
+    }, `guest:${trial.id}`);
   });
 }
