@@ -54,6 +54,7 @@ import { useMembershipAccount } from "./use-membership-account.js";
 const VipView = lazy(() =>
   import("./vip-view.jsx").then((m) => ({ default: m.VipView })),
 );
+const SubjectiveStudy = lazy(() => import("./features/subjective-study.jsx").then((m) => ({ default: m.SubjectiveStudy })));
 import { api, streamApi } from "./api.js";
 import { pct } from "./question-utils.js";
 import { Empty, Heading, IconButton } from "./components/study-ui.jsx";
@@ -139,6 +140,7 @@ const navs = [
   ["chapters", "章节练习", BookOpen],
   ["wrong", "错题本", NotebookPen],
   ["training", "AI 专项训练", Sparkles],
+  ["study", "AI 精讲与练习", BookOpen],
   ["vip", "VIP 中心", Crown],
   ["community", "共享题库", Globe2],
   ["chat", "社区交流", MessageCircle],
@@ -150,7 +152,7 @@ const navs = [
 const navGroups = [
   {
     label: "学习",
-    pages: ["home", "chapters", "wrong", "training", "exam", "mastery"],
+    pages: ["home", "chapters", "study", "wrong", "training", "exam", "mastery"],
   },
   { label: "发现与服务", pages: ["vip", "community", "chat", "guide"] },
   { label: "管理", pages: ["admin"] },
@@ -677,7 +679,7 @@ function App() {
         <nav aria-label="主导航">
           {(desktop
             ? [
-                { label: "学习", pages: ["home", "chapters", "wrong", "exam"] },
+                { label: "学习", pages: ["home", "chapters", "study", "wrong", "exam"] },
                 {
                   label: "更多学习工具",
                   pages: ["training", "mastery", "community", "chat", "guide"],
@@ -693,7 +695,7 @@ function App() {
             if (!entries.length) return null;
             const buttons = entries.map(([id, label, Icon]) => {
               const selected =
-                page === id || (id === "vip" && page === "redeem");
+                page === id || (id === "vip" && page === "redeem") || (id === "admin" && page === "study-admin");
               return (
                 <button
                   key={id}
@@ -844,7 +846,7 @@ function App() {
           {desktop ? (
             <DesktopToolbar
               pageTitle={
-                navs.find((n) => n[0] === page)?.[1] ||
+                navs.find((n) => n[0] === (page === "study-admin" ? "admin" : page))?.[1] ||
                 {
                   settings: "设置",
                   about: "关于考匠",
@@ -881,7 +883,7 @@ function App() {
                 <span>我的学习空间</span>
                 <ChevronRight size={14} />
                 <strong>
-                  {navs.find((n) => n[0] === page)?.[1] ||
+                  {navs.find((n) => n[0] === (page === "study-admin" ? "admin" : page))?.[1] ||
                     {
                       settings: "设置",
                       about: "关于考匠",
@@ -1613,6 +1615,7 @@ function App() {
               focusRedemption={page === "redeem"}
             />
           )}
+          {page === "study" && <SubjectiveStudy key={`${auth.user.id}:${auth.user.certificateId}`} user={auth.user} navigate={go} />}
           {page === "settings" && (
             <SettingsView
               key={auth.user.id}
@@ -1642,8 +1645,10 @@ function App() {
               }}
             />
           )}
-          {page === "admin" && dashboard.user?.isAdmin && (
+          {["admin", "study-admin"].includes(page) && dashboard.user?.isAdmin && (
             <AdminView
+              initialTab={page === "study-admin" ? "study" : "overview"}
+              navigate={go}
               run={run}
               busy={busy}
               notify={setNotice}

@@ -36,6 +36,9 @@ const AdminQuestionEditor = lazy(() =>
     default: m.AdminQuestionEditor,
   })),
 );
+const SubjectiveAdmin = lazy(() =>
+  import("./subjective-admin.jsx").then((m) => ({ default: m.SubjectiveAdmin })),
+);
 
 export function AdminView({
   run,
@@ -43,8 +46,11 @@ export function AdminView({
   notify,
   certificates,
   currentCertificateId,
+  initialTab = "overview",
+  navigate,
 }) {
-  const [tab, setTab] = useState("overview");
+  const [tab, setTab] = useState(initialTab);
+  useEffect(() => { setTab(initialTab); }, [initialTab]);
   const [overview, setOverview] = useState(null);
   const [taxonomy, setTaxonomy] = useState(null);
   const [settings, setSettings] = useState(null);
@@ -362,6 +368,7 @@ export function AdminView({
         {[
           ["overview", "总览"],
           ["generate", "扩充题库"],
+          ["study", "AI 精讲与练习"],
           ["questions", "题目列表"],
           ["feedback", "用户反馈"],
           ["quality", "重合检测"],
@@ -412,6 +419,9 @@ export function AdminView({
                 <button onClick={() => setTab("questions")}>
                   <List size={16} /> 查看题目列表
                 </button>
+                <button onClick={() => setTab("study")}>
+                  <BookOpen size={16} /> 精讲与练习内容
+                </button>
                 <button onClick={() => setTab("feedback")}>
                   <Flag size={16} /> 处理用户反馈
                 </button>
@@ -451,6 +461,7 @@ export function AdminView({
           </div>
         </>
       )}
+      {tab === "study" && <SubjectiveAdmin navigate={navigate} />}
       {tab === "generate" && (
         <div className="admin-overview-grid">
           <section className="admin-card">

@@ -16,6 +16,7 @@ for (const [label, args] of [
   ["服务端与客户端回归测试", ["--test", "test/*.test.js"]],
   ["电脑与移动网页构建", ["scripts/build.mjs"]],
   ["浏览器完整流程检查", ["test/e2e.js"]],
+  ["VIP AI 精讲与练习完整流程检查", ["test/subjective-study.e2e.js"]],
   ["移动网页双浏览器流程检查", ["test/mobile-web.e2e.js"]],
 ]) {
   console.log(`\n正在进行：${label}`);

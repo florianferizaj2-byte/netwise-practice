@@ -43,6 +43,7 @@ export function useDesktopWeb() {
 }
 
 const features = [
+  { page: "study", name: "AI 精讲与练习", detail: "会员知识点精讲、填空练习和随时答疑。", icon: BookOpen },
   {
     page: "chapters",
     name: "章节练习",

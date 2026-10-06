@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { MembershipBadge } from "./components/membership-badge.jsx";
 import "./vip.css";
+import "./subjective-study.css";
 
 const plans = [
   {
@@ -224,6 +225,10 @@ export function VipView({
           AI 服务暂时不可用，账户额度已保留，请稍后再试。
         </p>
       )}
+      <section className="vip-study-entry" aria-label="会员 AI 精讲与练习">
+        <div><h2><BookOpen size={20} />AI 精讲与练习</h2><p>从章节知识点开始学，用填空练习检验理解，随时向 AI 老师提问。</p></div>
+        <button className="primary" type="button" onClick={() => navigate("study")}>进入学习与练习<ArrowRight size={17} /></button>
+      </section>
       <div className="vip-layout">
         <section
           className="vip-account vip-surface"

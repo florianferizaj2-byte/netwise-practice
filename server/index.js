@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url";
 import { z } from "zod";
 import { createStore } from "./store.js";
 import { registerMembershipRoutes } from "./membership-routes.js";
+import { registerStudyRoutes } from "./study-routes.js";
 import { registerExamRoutes } from "./exams.js";
 import {
   encrypt,
@@ -924,6 +925,8 @@ export async function createApp(options = {}) {
     }
   };
   registerMembershipRoutes({ route, store, requireAdmin, requestUserId, accountEntitlementView });
+  const study = registerStudyRoutes({ route, store, provider, requireAdmin,
+    requestUserId, ai, requireAiService, studyAI: options.studyAI, studySeeds: options.studySeeds });
   const adminQuestion = (question, includeFeedback = false) => ({
     ...question,
     ...(includeFeedback
@@ -2639,9 +2642,12 @@ export async function createApp(options = {}) {
   // AI learning plans are requested by the learner. A background timer must
   // never spend their daily credits merely because the shared service is ready.
   app.locals.store = store;
-  app.locals.stop = () => {
+  app.locals.study = study.content;
+  app.locals.stop = async () => {
     clearInterval(aiQuestionJobTimer);
-    return aiScheduler.stop();
+    study.stop();
+    await aiScheduler.stop();
+    await study.settle();
   };
   return app;
 }
