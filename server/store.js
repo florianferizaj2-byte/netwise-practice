@@ -4,6 +4,7 @@ import path from "node:path";
 import crypto from "node:crypto";
 import { promisify } from "node:util";
 import { bundledQuestions, certificates } from "./question-banks/loader.js";
+import { questionForCertificate } from "./question-banks/scopes.js";
 import { calculateMastery, nextReview, fingerprint } from "./domain.js";
 import { createMembershipStore } from "./memberships.js";
 const scrypt = promisify(crypto.scrypt);
@@ -887,13 +888,14 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         bySource,
       };
     },
-    mastery: (questionIds, userId) => {
+    mastery: (questionIds, userId, certificateId) => {
       const allowed = questionIds ? new Set(questionIds) : null;
       const attempts = allA(userId);
       const groups = new Map();
       const pointByQuestion = new Map();
       const attemptedIds = new Set(attempts.map((attempt) => attempt.questionId));
-      for (const question of visibleQuestions(userId, attemptedIds)) {
+      for (const original of visibleQuestions(userId, attemptedIds)) {
+        const question = questionForCertificate(original, certificateId);
         if (allowed && !allowed.has(question.id)) continue;
         const point = question.targetKnowledgePoint || question.knowledgePoint;
         if (!groups.has(point)) groups.set(point, { question, attempts: [] });

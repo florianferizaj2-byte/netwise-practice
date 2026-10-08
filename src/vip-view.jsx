@@ -226,8 +226,8 @@ export function VipView({
         </p>
       )}
       <section className="vip-study-entry" aria-label="会员 AI 精讲与练习">
-        <div><h2><BookOpen size={20} />AI 精讲与练习</h2><p>从章节知识点开始学，用填空练习检验理解，随时向 AI 老师提问。</p></div>
-        <button className="primary" type="button" onClick={() => navigate("study")}>进入学习与练习<ArrowRight size={17} /></button>
+        <div><h2><BookOpen size={20} />AI 精讲与练习</h2><p>VIP 专属：按知识点学习、填空练习，随时向 AI 老师提问。VIP、SVIP、SSVIP 均可使用。</p></div>
+        <button className="primary" type="button" disabled={loading && !account} onClick={() => paid ? navigate("study") : openRedemption()}>{paid ? "进入学习与练习" : "开通 VIP 后学习"}<ArrowRight size={17} /></button>
       </section>
       <div className="vip-layout">
         <section

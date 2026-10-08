@@ -3,4 +3,5 @@ export {
   hasCertificateQuestion,
   banksForCertificate,
   syllabusForCertificate,
+  questionForCertificate,
 } from "./question-banks/loader.js";

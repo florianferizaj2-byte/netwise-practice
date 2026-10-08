@@ -66,8 +66,8 @@ const blankSchema = z.object({
     ctx.addIssue({ code: "custom", message: "IP 参考答案不合法" });
   if (blank.kind !== "number" && (blank.unit || blank.tolerance))
     ctx.addIssue({ code: "custom", message: "仅数值题允许单位和容差" });
-  // Aliases belong to text rules. Numeric/IP equivalence is parsed by the
-  // server, preventing a bad alias from silently bypassing deterministic rules.
+  // Text aliases are review references, never a shortcut around literal matching.
+  // Numeric/IP review uses their own type rules instead of arbitrary aliases.
   if (["number", "ip"].includes(blank.kind) && blank.aliases.length)
     ctx.addIssue({ code: "custom", message: "数值与IP答案不设置文字别名" });
 });

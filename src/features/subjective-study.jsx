@@ -8,9 +8,14 @@ const encode = encodeURIComponent;
 const slow = { timeoutMs: 210000 };
 const uuid = () => crypto.randomUUID();
 const statusName = { graded: "已判分", pending_review: "待复核", processing: "正在判分" };
+const handleAccessFailure = (failure, onAccessDenied) => {
+  if (failure.code !== "STUDY_MEMBERSHIP_REQUIRED") return false;
+  onAccessDenied();
+  return true;
+};
 
-function Notice({ error, children }) {
-  return <div className={`ss-notice ${error ? "ss-error" : ""}`} role={error ? "alert" : "status"}>
+function Notice({ error, children, id }) {
+  return <div id={id} className={`ss-notice ${error ? "ss-error" : ""}`} role={error ? "alert" : "status"}>
     {error ? <TriangleAlert size={17} /> : <BookOpen size={17} />}<span>{children}</span>
   </div>;
 }
@@ -31,7 +36,7 @@ function AnswerContent({ answer }) {
   </div>;
 }
 
-function Teacher({ node, packageId, context }) {
+function Teacher({ node, packageId, context, onAccessDenied }) {
   const [messages, setMessages] = useState([]), [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false), [error, setError] = useState("");
   const live = useRef(true), request = useRef(null), list = useRef(null);
@@ -39,7 +44,7 @@ function Teacher({ node, packageId, context }) {
     live.current = true;
     api(`/study/teacher/history?nodeId=${encode(node.id)}`).then((data) => {
       if (live.current) setMessages((old) => old.length ? old : data.messages.map((row) => ({ question: row.question, answer: row.answer })));
-    }).catch(() => {});
+    }).catch((failure) => { if (live.current) handleAccessFailure(failure, onAccessDenied); });
     return () => { live.current = false; };
   }, [node.id, packageId]);
   useEffect(() => { list.current?.scrollTo({ top: list.current.scrollHeight, behavior: "instant" }); }, [messages, busy]);
@@ -54,7 +59,7 @@ function Teacher({ node, packageId, context }) {
       if (!live.current) return;
       setMessages((old) => [...old, { question: text.trim(), answer: result.answer }].slice(-12));
       setMessage(""); request.current = null;
-    } catch (failure) { if (live.current) setError(failure.message); }
+    } catch (failure) { if (live.current && !handleAccessFailure(failure, onAccessDenied)) setError(failure.message); }
     finally { if (live.current) setBusy(false); }
   };
   return <aside className="ss-teacher" aria-label="AI 老师">
@@ -68,10 +73,10 @@ function Teacher({ node, packageId, context }) {
       <button disabled={busy} onClick={() => void ask(context ? "hint" : "simple", context ? "给我一点提示" : "再简单一点")}>{context ? "给点提示" : "再简单一点"}</button>
       <button disabled={busy} onClick={() => void ask("example", "举个小例子")}>举个例子</button>
     </div>
-    {error && <Notice error>{error}</Notice>}
+    {error && <Notice error id="ss-teacher-error">{error}</Notice>}
     <form className="ss-question-form" onSubmit={(event) => { event.preventDefault(); void ask("ask", message); }}>
       <label htmlFor="ss-teacher-message">你的问题</label>
-      <textarea id="ss-teacher-message" rows={3} maxLength={600} value={message} onChange={(event) => setMessage(event.target.value)} placeholder="用自己的话说说哪里没理解…" />
+      <textarea id="ss-teacher-message" rows={3} maxLength={600} value={message} aria-invalid={!!error} aria-describedby={error ? "ss-teacher-error" : undefined} onChange={(event) => { setMessage(event.target.value); setError(""); }} placeholder="用自己的话说说哪里没理解…" />
       <button className="primary" disabled={busy || message.trim().length < 2}><Send size={16} />{busy ? "正在回答" : "问老师"}</button>
     </form>
   </aside>;
@@ -84,7 +89,7 @@ function Stem({ question }) {
   })}</p>;
 }
 
-function Practice({ node, userId, onLearn, onProgress, onContext }) {
+function Practice({ node, userId, onLearn, onProgress, onContext, onAccessDenied }) {
   const [session, setSession] = useState(null), [index, setIndex] = useState(0), [draft, setDraft] = useState({});
   const [busy, setBusy] = useState(false), [error, setError] = useState("");
   const [redo, setRedo] = useState({}), [feedbackOpen, setFeedbackOpen] = useState(false), [note, setNote] = useState("");
@@ -105,9 +110,9 @@ function Practice({ node, userId, onLearn, onProgress, onContext }) {
       setSession(next); setRedo({}); setFeedbackOpen(false); setNote(""); setNotice("");
       const unanswered = next.questions.findIndex((question) => !latest(next, question.id));
       setIndex(unanswered < 0 ? 0 : unanswered);
-    } catch (failure) { if (alive.current) setError(failure.message); }
+    } catch (failure) { if (alive.current && !handleAccessFailure(failure, onAccessDenied)) setError(failure.message); }
     finally { if (alive.current) setBusy(false); }
-  }, [node.id, userId]);
+  }, [node.id, userId, onAccessDenied]);
   useEffect(() => { alive.current = true; void load(); return () => { alive.current = false; onContext(null); }; }, [load]);
   const question = session?.questions[index], attempt = question && !redo[question.id] ? latest(session, question.id) : null;
   useEffect(() => {
@@ -128,7 +133,7 @@ function Practice({ node, userId, onLearn, onProgress, onContext }) {
     if (!attempt?.processing) return;
     let active = true;
     const timer = setInterval(() => {
-      api(`/study/attempts/${encode(attempt.id)}`).then((result) => { if (active) replaceAttempt(result); }).catch(() => {});
+      api(`/study/attempts/${encode(attempt.id)}`).then((result) => { if (active) replaceAttempt(result); }).catch((failure) => { if (active) handleAccessFailure(failure, onAccessDenied); });
     }, 1800);
     return () => { active = false; clearInterval(timer); };
   }, [attempt?.id, attempt?.processing]);
@@ -145,14 +150,14 @@ function Practice({ node, userId, onLearn, onProgress, onContext }) {
         questionId: question.id, answers, requestId: requestIds.current[question.id].id,
       }, "POST", slow);
       if (alive.current) replaceAttempt(result);
-    } catch (failure) { if (alive.current) setError(failure.message); }
+    } catch (failure) { if (alive.current && !handleAccessFailure(failure, onAccessDenied)) setError(failure.message); }
     finally { submitting.current = false; if (alive.current) setBusy(false); }
   };
   const retry = async () => {
     if (busy) return;
     setBusy(true); setError("");
     try { const result = await api(`/study/attempts/${attempt.id}/retry`, {}, "POST", slow); if (alive.current) replaceAttempt(result); }
-    catch (failure) { if (alive.current) setError(failure.message); }
+    catch (failure) { if (alive.current && !handleAccessFailure(failure, onAccessDenied)) setError(failure.message); }
     finally { if (alive.current) setBusy(false); }
   };
   const feedback = async (event) => {
@@ -160,7 +165,7 @@ function Practice({ node, userId, onLearn, onProgress, onContext }) {
     try {
       await api(`/study/attempts/${attempt.id}/feedback`, { note });
       if (alive.current) { setFeedbackOpen(false); setNotice("已提交复核，老师会保留你的作答记录。"); }
-    } catch (failure) { if (alive.current) setError(failure.message); }
+    } catch (failure) { if (alive.current && !handleAccessFailure(failure, onAccessDenied)) setError(failure.message); }
     finally { if (alive.current) setBusy(false); }
   };
   if (!session) return <div className="ss-state">{busy ? <><LoaderCircle className="spin" /><p>正在准备练习…</p></> : <><Notice error>{error || "请先完成本课学习。"}</Notice><button onClick={onLearn}><BookOpen size={16} />回到学习</button><button onClick={() => void load()}><RefreshCw size={16} />重试</button></>}</div>;
@@ -211,19 +216,43 @@ export function SubjectiveStudy({ user, navigate }) {
   const [error, setError] = useState(""), [lessonError, setLessonError] = useState(""), [completing, setCompleting] = useState(false);
   const [teacherOpen, setTeacherOpen] = useState(true);
   const mounted = useRef(true), reading = useRef(0);
+  const revokeAccess = useCallback(() => {
+    reading.current++;
+    setCatalog((old) => old ? { ...old, access: false, nodes: [] } : old);
+    setLesson(null); setContext(null);
+  }, []);
   const selectionKey = `aceexam-study-position:${user.id}:${user.certificateId}`;
   useEffect(() => { try { localStorage.setItem(tabKey, tab); } catch { /* Optional local tab recovery. */ } }, [tabKey, tab]);
   const reload = useCallback(async () => {
-    const data = await api("/study/catalog");
+    let data = await api("/study/catalog");
     if (!mounted.current) return;
+    if (!data.access || (data.expiresAt && Date.parse(data.expiresAt) <= Date.now())) {
+      data = { ...data, access: false, nodes: [] };
+      revokeAccess();
+    }
     setCatalog(data); setError("");
     setSelected((current) => {
       if (data.nodes.some((node) => node.id === current)) return current;
       let saved = ""; try { saved = localStorage.getItem(selectionKey); } catch { /* Optional local position. */ }
       return data.nodes.find((node) => node.id === saved)?.id || data.nodes.find((node) => node.available && !node.completed)?.id || data.nodes.find((node) => node.available)?.id || data.nodes[0]?.id || "";
     });
-  }, [selectionKey]);
+  }, [selectionKey, revokeAccess]);
   useEffect(() => { mounted.current = true; void reload().catch((failure) => { if (mounted.current) setError(failure.message); }).finally(() => { if (mounted.current) setLoading(false); }); return () => { mounted.current = false; }; }, [reload]);
+  useEffect(() => {
+    const refreshVisible = () => { if (!document.hidden) void reload().catch(() => {}); };
+    window.addEventListener("focus", refreshVisible);
+    document.addEventListener("visibilitychange", refreshVisible);
+    const timer = window.setInterval(refreshVisible, 60000);
+    const remaining = catalog?.access && catalog.expiresAt ? Date.parse(catalog.expiresAt) - Date.now() : NaN;
+    const expiry = Number.isFinite(remaining) && remaining <= 2147483647 ? window.setTimeout(() => {
+      revokeAccess(); void reload().catch(() => {});
+    }, Math.max(0, remaining)) : null;
+    return () => {
+      window.removeEventListener("focus", refreshVisible);
+      document.removeEventListener("visibilitychange", refreshVisible);
+      window.clearInterval(timer); if (expiry !== null) window.clearTimeout(expiry);
+    };
+  }, [reload, catalog?.access, catalog?.expiresAt, revokeAccess]);
   const node = catalog?.nodes.find((item) => item.id === selected) || catalog?.nodes[0];
   useEffect(() => { if (node) setChapter(node.chapter); setContext(null); try { if (selected) localStorage.setItem(selectionKey, selected); } catch { /* Optional local position. */ } }, [selected, selectionKey]);
   useEffect(() => {
@@ -232,7 +261,7 @@ export function SubjectiveStudy({ user, navigate }) {
     if (!node?.available || !catalog?.access) { setLessonLoading(false); return; }
     setLessonLoading(true);
     api(`/study/lessons/${encode(node.id)}`).then((data) => { if (mounted.current && reading.current === revision) setLesson(data); })
-      .catch((failure) => { if (mounted.current && reading.current === revision) setLessonError(failure.message); })
+      .catch((failure) => { if (mounted.current && reading.current === revision && !handleAccessFailure(failure, revokeAccess)) setLessonError(failure.message); })
       .finally(() => { if (mounted.current && reading.current === revision) setLessonLoading(false); });
   }, [selected, node?.packageId, catalog?.access]);
   const refreshProgress = useCallback(() => { void reload().catch(() => {}); }, [reload]);
@@ -241,7 +270,7 @@ export function SubjectiveStudy({ user, navigate }) {
     try {
       if (!node.completed) await api(`/study/lessons/${encode(node.id)}/complete`, { version: node.progressVersion });
       await reload(); if (mounted.current) setTab("practice");
-    } catch (failure) { if (mounted.current) { setLessonError(failure.message); void reload().catch(() => {}); } }
+    } catch (failure) { if (mounted.current && !handleAccessFailure(failure, revokeAccess)) { setLessonError(failure.message); void reload().catch(() => {}); } }
     finally { if (mounted.current) setCompleting(false); }
   };
   const chapters = [...new Set(catalog?.nodes.map((item) => item.chapter) || [])];
@@ -264,7 +293,7 @@ export function SubjectiveStudy({ user, navigate }) {
       <button disabled={loading} aria-label="刷新学习目录" onClick={() => { setLoading(true); void reload().catch((failure) => setError(failure.message)).finally(() => setLoading(false)); }}><RefreshCw size={17} /></button>
     </div></header>
     {error && <Notice error>{error}</Notice>}
-    {loading && !catalog ? <div className="ss-state"><LoaderCircle className="spin" /><p>正在加载学习目录…</p></div> : !catalog ? <button onClick={() => void reload().catch((failure) => setError(failure.message))}>重试</button> : !catalog.access ? <div className="ss-gate"><Crown size={30} /><h2>会员专属的学习与练习</h2><p>按章节理解知识点，填空检验掌握情况，还有随时答疑的 AI 老师。</p><button className="primary" onClick={() => navigate("vip")}>查看会员权益<ArrowRight size={17} /></button></div> : !catalog.supported ? <div className="ss-gate"><BookOpen size={30} /><h2>当前证书的课程正在准备</h2><p>第一期已开放网络工程师的基础章节。你可以在侧栏切换证书，或继续普通练习。</p><button onClick={() => navigate("chapters")}>返回章节练习</button></div> : <div className="ss-layout">
+    {loading && !catalog ? <div className="ss-state"><LoaderCircle className="spin" /><p>正在加载学习目录…</p></div> : !catalog ? <button onClick={() => void reload().catch((failure) => setError(failure.message))}>重试</button> : !catalog.access ? <div className="ss-gate"><Crown size={30} /><h2>VIP 专属的学习与练习</h2><p>开通或续期 VIP 后，可学习精讲、完成填空练习并向 AI 老师提问。VIP、SVIP、SSVIP 均可使用。</p><button className="primary" onClick={() => navigate("vip")}>开通或续期 VIP<ArrowRight size={17} /></button></div> : !catalog.supported ? <div className="ss-gate"><BookOpen size={30} /><h2>当前证书的课程正在准备</h2><p>已开放网络工程师全量课程。你可以在侧栏切换证书，或继续普通练习。</p><button onClick={() => navigate("chapters")}>返回章节练习</button></div> : <div className="ss-layout">
       <nav className="ss-directory" aria-label="精讲与练习目录"><label htmlFor="ss-chapter">章节</label><select id="ss-chapter" value={chapter} onChange={(event) => { const first = catalog.nodes.find((item) => item.chapter === event.target.value); if (first) changeNode(first.id); }}>{chapters.map((name) => <option key={name}>{name}</option>)}</select>
         <label className="ss-compact-node" htmlFor="ss-node-select"><span>知识点与小节</span><select id="ss-node-select" aria-label="知识点与小节" value={node.id} onChange={(event) => changeNode(event.target.value)}>{activeSections.map((section) => <optgroup key={section.name} label={section.name}>{section.topics.flatMap((topic) => topic.units.map((item) => <option key={item.id} value={item.id}>{topic.units.length > 1 ? `${topic.name} · 第${item.sublesson.order}层 ${item.sublesson.title}` : item.name}{item.available ? "" : "（准备中）"}</option>))}</optgroup>)}</select></label>
         <p className="ss-directory-progress">已学 {activeNodes.filter((item) => item.completed).length} / {activeNodes.length} 节</p>
@@ -299,10 +328,10 @@ export function SubjectiveStudy({ user, navigate }) {
         <div className={`ss-content-layout ${teacherOpen && lesson ? "with-teacher" : ""}`}>
           <div className="ss-primary-content">
             {!node.available ? <div className="ss-state"><BookOpen size={28} /><h3>这个知识点正在准备</h3><p>讲解和练习通过审核后会出现在这里。</p>{next && <button onClick={() => changeNode(next.id)}>先学下一节已发布课程</button>}</div> : lessonLoading ? <div className="ss-state"><LoaderCircle className="spin" /><p>正在打开本课…</p></div> : lessonError && !lesson ? <Notice error>{lessonError}</Notice> : lesson && <>
-              {tab === "learn" ? <div role="tabpanel" id="ss-learn-panel" aria-labelledby="ss-learn-tab"><LessonContent lesson={lesson.lesson} />{lessonError && <Notice error>{lessonError}</Notice>}<div className="ss-actions ss-lesson-actions"><button className="primary" disabled={completing} onClick={() => void complete()}>{completing ? <LoaderCircle className="spin" size={17} /> : <Check size={17} />}{node.completed ? "练几道题" : "我学完了，开始练习"}</button>{next && <button onClick={() => changeNode(next.id)}>下一知识点<ArrowRight size={16} /></button>}</div></div> : <div role="tabpanel" id="ss-practice-panel" aria-labelledby="ss-practice-tab"><Practice key={`${node.id}:${lesson.packageId}`} node={node} userId={user.id} onLearn={() => setTab("learn")} onProgress={refreshProgress} onContext={setContext} /></div>}
+              {tab === "learn" ? <div role="tabpanel" id="ss-learn-panel" aria-labelledby="ss-learn-tab"><LessonContent lesson={lesson.lesson} />{lessonError && <Notice error>{lessonError}</Notice>}<div className="ss-actions ss-lesson-actions"><button className="primary" disabled={completing} onClick={() => void complete()}>{completing ? <LoaderCircle className="spin" size={17} /> : <Check size={17} />}{node.completed ? "练几道题" : "我学完了，开始练习"}</button>{next && <button onClick={() => changeNode(next.id)}>下一知识点<ArrowRight size={16} /></button>}</div></div> : <div role="tabpanel" id="ss-practice-panel" aria-labelledby="ss-practice-tab"><Practice key={`${node.id}:${lesson.packageId}`} node={node} userId={user.id} onLearn={() => setTab("learn")} onProgress={refreshProgress} onContext={setContext} onAccessDenied={revokeAccess} /></div>}
             </>}
           </div>
-          {teacherOpen && lesson && <Teacher key={`${node.id}:${lesson.packageId}`} node={node} packageId={lesson.packageId} context={tab === "practice" ? context : null} />}
+          {teacherOpen && lesson && <Teacher key={`${node.id}:${lesson.packageId}`} node={node} packageId={lesson.packageId} context={tab === "practice" ? context : null} onAccessDenied={revokeAccess} />}
         </div>
       </div>
     </div>}

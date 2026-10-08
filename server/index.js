@@ -22,6 +22,7 @@ import {
   hasCertificateQuestion,
   banksForCertificate,
   syllabusForCertificate,
+  questionForCertificate,
 } from "./certificates.js";
 import { buildSyllabusProgress } from "./syllabus.js";
 import { findSimilarQuestions, questionSimilarity } from "./question-similarity.js";
@@ -103,11 +104,11 @@ const compareVersions = (left, right) => {
   return 0;
 };
 const publicQuestion = (q) => {
-  const { answer, analysis, expectedAnswer, ownerUserId, aiGroupId, ...rest } = q;
+  const { answer, analysis, expectedAnswer, ownerUserId, aiGroupId, certificateScopes, ...rest } = q;
   return rest;
 };
 const privateQuestion = (q) => {
-  const { ownerUserId, aiGroupId, ...rest } = q;
+  const { ownerUserId, aiGroupId, certificateScopes, ...rest } = q;
   return rest;
 };
 const communityImageTypes = new Map([
@@ -579,7 +580,7 @@ export async function createApp(options = {}) {
           total: 10,
         },
       });
-      const allQuestions = store.allQ();
+      const allQuestions = store.allQ().map((question) => questionForCertificate(question, certificateId));
       const seed = allQuestions.find((question) =>
         hasCertificateQuestion(question, certificateId) &&
         question.chapter === selection.chapter &&
@@ -720,7 +721,7 @@ export async function createApp(options = {}) {
         throw e;
       }
     }
-    return q;
+    return questionForCertificate(q, req?.user?.certificateId);
   };
   const day = () =>
     new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Shanghai" });
@@ -940,7 +941,8 @@ export async function createApp(options = {}) {
     const allQuestions = store.allQ();
     return certificates.map((certificate) => {
       const questions = allQuestions
-        .filter((question) => hasCertificateQuestion(question, certificate.id));
+        .filter((question) => hasCertificateQuestion(question, certificate.id))
+        .map((question) => questionForCertificate(question, certificate.id));
       const configuredModules = certificate.taxonomy?.modules || [];
       const chapterNames = [
         ...configuredModules.map((module) => module.name),
@@ -1064,6 +1066,7 @@ export async function createApp(options = {}) {
     const search = parsed.search?.toLocaleLowerCase("zh-CN");
     const filtered = store
       .allQ()
+      .map((question) => questionForCertificate(question, parsed.certificateId))
       .filter(
         (question) =>
           (!parsed.certificateId ||
@@ -1080,7 +1083,10 @@ export async function createApp(options = {}) {
     return {
       ...parsed,
       total: filtered.length,
-      questions: filtered.slice(parsed.offset, parsed.offset + parsed.limit),
+      questions: filtered.slice(parsed.offset, parsed.offset + parsed.limit).map((question) => ({
+        ...question,
+        ...(parsed.certificateId ? { classificationCertificateId: parsed.certificateId } : {}),
+      })),
     };
   };
   route("get", "/api/admin/options", (req) => {
@@ -1240,6 +1246,7 @@ export async function createApp(options = {}) {
     requireAdmin(req);
     const body = z
       .object({
+        certificateId: z.string().optional(),
         type: z.enum(["single_choice", "multiple_choice", "true_false"]),
         question: z.string().trim().min(10).max(2000),
         options: z
@@ -1275,8 +1282,12 @@ export async function createApp(options = {}) {
       error.status = 404;
       throw error;
     }
+    const editingCertificateId = body.certificateId || existing.certificates?.[0];
+    if (editingCertificateId && !existing.certificates?.includes(editingCertificateId))
+      throw new Error("题目不属于所选备考目标");
+    const { certificateId: ignoredCertificateId, ...editedFields } = body;
     const candidate = {
-      ...body,
+      ...editedFields,
       tags: body.tags || existing.tags || ["管理员修订"],
       ...(existing.certificates ? { certificates: existing.certificates } : {}),
       ...(existing.stage ? { stage: existing.stage } : {}),
@@ -1308,8 +1319,7 @@ export async function createApp(options = {}) {
     };
     const editedTaxonomy = certificates.find(
       (certificate) =>
-        certificate.taxonomy &&
-        existing.certificates?.includes(certificate.id),
+        certificate.id === editingCertificateId,
     )?.taxonomy;
     if (editedTaxonomy) {
       const module = editedTaxonomy.modules.find(
@@ -1331,6 +1341,20 @@ export async function createApp(options = {}) {
     );
     const saved = store.updateQuestion(existing.id, {
       ...validated,
+      ...(existing.certificateScopes?.[editingCertificateId] ? {
+        chapter: existing.chapter,
+        knowledgeSection: existing.knowledgeSection,
+        knowledgePoint: existing.knowledgePoint,
+        certificateScopes: {
+          ...existing.certificateScopes,
+          [editingCertificateId]: {
+            ...existing.certificateScopes[editingCertificateId],
+            chapter: validated.chapter,
+            knowledgeSection: validated.knowledgeSection,
+            knowledgePoint: validated.knowledgePoint,
+          },
+        },
+      } : {}),
       ...(Object.prototype.hasOwnProperty.call(existing, "targetKnowledgePoint")
         ? { targetKnowledgePoint: validated.knowledgePoint }
         : {}),
@@ -1340,7 +1364,10 @@ export async function createApp(options = {}) {
       knowledgePoint: saved.targetKnowledgePoint || saved.knowledgePoint,
       knowledgeSection: saved.knowledgeSection || null,
     });
-    return { question: adminQuestion(saved, true) };
+    return { question: {
+      ...adminQuestion(questionForCertificate(saved, editingCertificateId), true),
+      classificationCertificateId: editingCertificateId,
+    } };
   });
   route("delete", "/api/admin/feedback", (req) => {
     requireAdmin(req);
@@ -1513,7 +1540,8 @@ export async function createApp(options = {}) {
           (q.source !== "ai_generated" ||
             q.ownerUserId === (userId || "local") ||
             attempted.has(q.id)),
-      );
+      )
+      .map((question) => questionForCertificate(question, certificateId));
   };
   const isBankQuestion = (question) => question.source !== "ai_generated";
   let bankQuestionRevision = -1;
@@ -1529,7 +1557,7 @@ export async function createApp(options = {}) {
       bankQuestionLists.set(key, store.allQ().filter((question) =>
         isBankQuestion(question) &&
         (!certificateId || hasCertificateQuestion(question, certificateId)),
-      ));
+      ).map((question) => questionForCertificate(question, certificateId)));
     return bankQuestionLists.get(key);
   };
   const homeResultCache = new Map();
@@ -1571,17 +1599,18 @@ export async function createApp(options = {}) {
     const userId = req.user?.id || "local";
     return {
       userId,
+      certificateId: req.user?.certificateId,
       attemptedIds: store.attemptedQuestionIds(userId),
       favoriteIds: store.favoriteQuestionIds(userId),
     };
   };
   const publicQuestionForUser = (question, state) => ({
-    ...publicQuestion(question),
+    ...publicQuestion(questionForCertificate(question, state.certificateId)),
     attempted: state.attemptedIds.has(question.id),
     favorite: state.favoriteIds.has(question.id),
   });
   const privateQuestionForUser = (question, state) => ({
-    ...privateQuestion(question),
+    ...privateQuestion(questionForCertificate(question, state.certificateId)),
     attempted: state.attemptedIds.has(question.id),
     favorite: state.favoriteIds.has(question.id),
   });
@@ -2053,7 +2082,7 @@ export async function createApp(options = {}) {
         .filter((question) => currentIds.has(question.id)),
       summary = studySummary(attempts, wrong);
     if (summaryOnly) return rememberHomeResult(cacheKey, userId, summary);
-    const mastery = store.mastery(currentIds, userId),
+    const mastery = store.mastery(currentIds, userId, certificateId),
       syllabus = syllabusForCertificate(certificateId),
       syllabusProgress = buildSyllabusProgress(
         bankQuestions,
@@ -2234,7 +2263,7 @@ export async function createApp(options = {}) {
       error.status = 409;
       throw error;
     }
-    const seed = store.allQ().find((question) =>
+    const seed = store.allQ().map((question) => questionForCertificate(question, certificateId)).find((question) =>
       hasCertificateQuestion(question, certificateId) &&
       question.chapter === selection.chapter &&
       (question.knowledgeSection || null) === (selection.knowledgeSection || null) &&
@@ -2319,6 +2348,7 @@ export async function createApp(options = {}) {
         throw new Error("当前知识点已有待提交草稿，请先提交或删除");
       const seed = store
         .allQ()
+        .map((question) => questionForCertificate(question, certificateId))
         .find(
           (question) =>
             hasCertificateQuestion(question, certificateId) &&
@@ -2405,7 +2435,7 @@ export async function createApp(options = {}) {
   });
   route("post", "/api/ai/questions/draft/:id/submit", (req) => {
     const { draft, certificateId, userId } = userQuestionDraft(req);
-    const seed = store.allQ().find((question) =>
+    const seed = store.allQ().map((question) => questionForCertificate(question, certificateId)).find((question) =>
       hasCertificateQuestion(question, certificateId) &&
       question.chapter === draft.chapter &&
       (question.knowledgeSection || null) === (draft.knowledgeSection || null) &&
@@ -2560,7 +2590,7 @@ export async function createApp(options = {}) {
         (question) => question.id,
       );
       const plan = {
-        ...(await provider.dailyPlan(questionIds, userId)),
+        ...(await provider.dailyPlan(questionIds, userId, certificateId)),
         generatedAt: new Date().toISOString(),
         source: "ai",
       };

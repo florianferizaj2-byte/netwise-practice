@@ -8,6 +8,7 @@ import { studyNodes, studyNode, studyError, publicStudyQuestion, teacherAnswerSc
 import { gradeStudyQuestion, summarizeStudyGrade } from "./study-grading.js";
 import { checkAiCancellation, positiveInteger } from "./ai-tasks.js";
 import { redact } from "./security.js";
+import { normalizeStudyText, studyPromptAttack, unsafeStudyTeacherAnswer } from "./study-security.js";
 
 const deploymentStudySeeds = JSON.parse(
   readFileSync(new URL("./study-seeds/network-engineer.json", import.meta.url), "utf8"),
@@ -24,12 +25,13 @@ export function registerStudyRoutes({ route, store, provider, requireAdmin, requ
   const configuredDailyLimit = positiveInteger(process.env.STUDY_GENERATION_DAILY_LIMIT, 20, 200);
   let generationDailyLimit = configuredDailyLimit;
   let stopped = false;
+  const paidStudyPlans = new Set(["vip", "svip", "ssvip"]);
   const member = (req) => {
     if (!req.user) throw studyError("请先登录", 401);
     const userId = requestUserId(req), entitlement = store.accountEntitlement(userId);
-    if (!req.user.isAdmin && entitlement.plan === "free")
-      throw studyError("AI 精讲与练习是会员功能，请先开通或续期会员", 403, "STUDY_MEMBERSHIP_REQUIRED");
-    return { userId, plan: req.user.isAdmin ? "ssvip" : entitlement.plan };
+    if (!paidStudyPlans.has(entitlement.plan))
+      throw studyError("AI 精讲与练习仅限有效 VIP 会员，请先开通或续期", 403, "STUDY_MEMBERSHIP_REQUIRED");
+    return { userId, plan: entitlement.plan };
   };
   const nodeFor = (req, id) => studyNode(id, req.user?.certificateId);
   const referenceForNode = (node) => {
@@ -121,9 +123,11 @@ export function registerStudyRoutes({ route, store, provider, requireAdmin, requ
 
   route("get", "/api/study/catalog", (req) => {
     if (!req.user) throw studyError("请先登录", 401);
-    const userId = requestUserId(req), progress = content.progress(userId);
+    const userId = requestUserId(req), entitlement = store.accountEntitlement(userId);
     const nodes = studyNodes.filter((node) => node.certificateId === req.user.certificateId);
-    return { access: !!req.user.isAdmin || store.accountEntitlement(userId).plan !== "free",
+    if (!paidStudyPlans.has(entitlement.plan)) return { access: false, supported: nodes.length > 0, nodes: [] };
+    const progress = content.progress(userId);
+    return { access: true, expiresAt: entitlement.expiresAt,
       supported: nodes.length > 0,
       nodes: nodes.map((node) => {
         const item = content.published(node), row = progress.find((p) => p.node_id === node.id);
@@ -240,6 +244,11 @@ export function registerStudyRoutes({ route, store, provider, requireAdmin, requ
       action: z.enum(["ask", "simple", "example", "hint"]).default("ask"),
       sessionId: z.string().uuid().optional(), questionId: z.string().optional(),
     }).strict().parse(req.body);
+    body.message = normalizeStudyText(body.message);
+    if (body.message.length < 2) throw studyError("请填写你的知识问题");
+    if (body.message.length > 600) throw studyError("问题太长，请拆成几个短问题");
+    if (studyPromptAttack(body.message))
+      throw studyError("请提问课程知识；更改规则、索取内部信息或强行给分的要求无法处理。", 400, "STUDY_PROMPT_REJECTED");
     const node = nodeFor(req, body.nodeId), item = published(node), lesson = item.data.bundle.lesson;
     let question = null, submitted = false;
     if (body.sessionId || body.questionId) {
@@ -275,6 +284,7 @@ export function registerStudyRoutes({ route, store, provider, requireAdmin, requ
         ...(question ? { question: submitted ? question : publicStudyQuestion(question), submitted } : {}),
       }, userId));
       answer = teacherAnswerSchema.parse(answer);
+      if (unsafeStudyTeacherAnswer(answer)) throw studyError("老师的回答需要重新整理，请稍后重试。", 503, "STUDY_TEACHER_UNSAFE");
       // Conservative answer-leak guard. If a contextual reply names a blank's
       // answer, return the independently reviewed hint instead.
       if (question && !submitted) {
@@ -286,6 +296,8 @@ export function registerStudyRoutes({ route, store, provider, requireAdmin, requ
       return { answer, cached: false };
     } catch (error) {
       content.finishTeacher(reservation.row, null, redact(error.message).slice(0, 300));
+      if (error.code === "AI_OUTPUT_TRUNCATED")
+        throw studyError("老师这次没能完整回答，请再点一次“问老师”。你的问题已保留。", 503, "STUDY_TEACHER_INCOMPLETE");
       throw error;
     }
   });

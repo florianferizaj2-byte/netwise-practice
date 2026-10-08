@@ -1,41 +1,17 @@
-import { isIP } from "node:net";
-
-const normalize = (value) => String(value).normalize("NFKC").trim().replace(/\s+/g, " ");
-const ipValue = (value) => {
-  const normalized = normalize(value);
-  if (!isIP(normalized)) return null;
-  return isIP(normalized) === 6 ? new URL(`http://[${normalized}]/`).hostname : normalized;
-};
-const numberValue = (value, unit) => {
-  let normalized = normalize(value);
-  if (unit && normalized.endsWith(unit)) normalized = normalized.slice(0, -unit.length).trim();
-  if (!/^[+-]?(?:\d+(?:\.\d+)?|\.\d+)$/.test(normalized)) return null;
-  const number = Number(normalized);
-  return Number.isFinite(number) ? number : null;
-};
+import { studyPromptAttack } from "./study-security.js";
 
 export function gradeStudyQuestion(question, answers) {
   return question.blanks.map((blank) => {
-    const response = normalize(answers[blank.id] || "");
-    let correct = false, verdict = "incorrect";
-    if (response) {
-      if (blank.kind === "number") {
-        const value = numberValue(response, blank.unit);
-        const target = Number(blank.answer);
-        correct = value !== null && Math.abs(value - target) <= blank.tolerance + Number.EPSILON * Math.max(1, Math.abs(target));
-      } else if (blank.kind === "ip") {
-        const value = ipValue(response);
-        correct = value !== null && value === ipValue(blank.answer);
-      } else {
-        const key = (value) => blank.caseSensitive ? normalize(value) : normalize(value).toLowerCase();
-        correct = [blank.answer, ...blank.aliases].some((answer) => key(answer) === key(response));
-        if (!correct && blank.kind === "term") verdict = "uncertain";
-      }
-    }
-    if (correct) verdict = "correct";
-    return { blankId: blank.id, verdict, score: correct ? 1 : 0,
+    // Only literal equality bypasses AI. Preserve differences (including spaces,
+    // case, aliases and numeric formatting) for the semantic review.
+    const response = String(answers[blank.id] ?? "");
+    if (response === blank.answer) return { blankId: blank.id, verdict: "correct", score: 1,
+      response, expectedAnswer: blank.answer, reason: "与预留答案完全一致，直接得分。" };
+    if (studyPromptAttack(response)) return { blankId: blank.id, verdict: "incorrect", score: 0,
+      response, expectedAnswer: blank.answer, reason: "请填写知识答案，更改评分规则的指令不计分。" };
+    return { blankId: blank.id, verdict: "uncertain", score: 0,
       response, expectedAnswer: blank.answer,
-      reason: correct ? "符合本空的评分标准。" : verdict === "uncertain" ? "正在确认你的表达是否等价。" : response ? "与本空的参考答案不符。" : "本空未填写。",
+      reason: "与预留答案存在出入，交由 AI 按本空评分标准复核。",
     };
   });
 }

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const isMemberPage = (page) => ["vip", "redeem", "settings"].includes(page);
+const isMemberPage = (page) => ["vip", "redeem", "settings", "study"].includes(page);
 
 // Keep account data in memory, scoped to the signed-in user. A mutation invalidates
 // older reads so a delayed refresh cannot overwrite newly redeemed entitlements.

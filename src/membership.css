@@ -8,14 +8,14 @@
   justify-content: center;
   min-width: 58px;
   padding: 4px 10px;
-  border-radius: 7px;
+  border-radius: 6px;
   font-size: 12px;
   font-weight: 750;
   letter-spacing: 0.35px;
 }
 .member-tier-free {
-  color: #65756d;
-  background: #eef2ef;
+  color: #6b7872;
+  background: #edf0ee;
 }
 .member-tier-vip {
   color: #90631d;
@@ -36,16 +36,16 @@
 }
 .membership-summary-item {
   padding: 20px 24px;
-  background: #fff;
-  border: 1px solid #dce3df;
-  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #dce2df;
+  border-radius: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 .membership-summary-item span {
   font-size: 13px;
-  color: #6f7e76;
+  color: #6b7872;
 }
 .membership-summary-item strong {
   font-size: 27px;
@@ -53,7 +53,7 @@
   font-variant-numeric: tabular-nums;
 }
 .membership-summary-item.available strong {
-  color: #177c63;
+  color: #2f7d65;
 }
 .membership-summary-item.redeemed strong {
   color: #5277c9;
@@ -67,7 +67,7 @@
 .membership-generate-form label {
   display: grid;
   gap: 7px;
-  color: #53655c;
+  color: #4b5852;
   font-size: 13px;
 }
 .membership-generate-form input,
@@ -83,14 +83,14 @@
 .membership-form-hint {
   font-size: 12px;
   line-height: 1.8;
-  color: #7c8982;
+  color: #6b7872;
   margin: 16px 0 0;
 }
 .membership-notice {
-  border-left: 3px solid #177c63;
-  background: #eef7f2;
-  color: #11664f;
-  border-radius: 0 8px 8px 0;
+  border-left: 3px solid #2f7d65;
+  background: #f3f8f5;
+  color: #1f6650;
+  border-radius: 0 6px 6px 0;
   margin-top: 14px;
   padding: 12px 16px;
   font-size: 13px;
@@ -117,24 +117,24 @@
 }
 .membership-code-table th {
   font-weight: 500;
-  color: #7c8982;
-  background: #f7f9f8;
+  color: #6b7872;
+  background: #f6f8f7;
   white-space: nowrap;
 }
 .membership-code-table td,
 .membership-code-table th {
   text-align: left;
   padding: 14px 12px;
-  border-bottom: 1px solid #e7ece9;
+  border-bottom: 1px solid #edf0ee;
 }
 .membership-code-table small {
   display: block;
   margin-top: 5px;
-  color: #87958d;
+  color: #6b7872;
   font-size: 11px;
 }
 .membership-code {
-  color: #344c3f;
+  color: #4b5852;
   font-size: 12px;
   white-space: nowrap;
   font-family: Consolas, monospace;
@@ -146,7 +146,7 @@
   font-size: 12px;
 }
 .membership-status.available {
-  color: #177c63;
+  color: #2f7d65;
 }
 .membership-status.redeemed {
   color: #5277c9;
@@ -166,7 +166,7 @@
   font-size: 11px;
 }
 .membership-empty {
-  color: #7c8982;
+  color: #6b7872;
   padding: 32px 0;
   text-align: center;
 }
@@ -175,7 +175,7 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 18px;
-  color: #7c8982;
+  color: #6b7872;
   font-size: 12px;
 }
 .membership-pagination > div {

@@ -1,6 +1,7 @@
 import crypto from "node:crypto";
 import { z } from "zod";
 import { sampleExamQuestions } from "./syllabus.js";
+import { questionForCertificate } from "./question-banks/scopes.js";
 
 const fail = (message, status = 400) =>
   Object.assign(new Error(message), { status });
@@ -50,7 +51,7 @@ export function registerExamRoutes({
   const view = (session) => ({
     ...session,
     questions: session.questionIds.map((id) => {
-      const question = store.getQ(id);
+      const question = questionForCertificate(store.getQ(id), session.certificateId);
       if (!question) throw fail("试卷题目已变更，请联系管理员", 409);
       return publicQuestion(question);
     }),

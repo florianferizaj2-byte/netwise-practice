@@ -1,14 +1,14 @@
 .vip-page {
-  --vip-green: #18765e;
-  --vip-text: #253c32;
-  --vip-muted: #748179;
-  --vip-border: #e0e7e2;
+  --vip-green: #2f7d65;
+  --vip-text: #12352c;
+  --vip-muted: #6b7872;
+  --vip-border: #dce2df;
   max-width: 1180px;
   margin: 0 auto;
   color: var(--vip-text);
 }
 .vip-page button {
-  border-radius: 9px;
+  border-radius: 10px;
   font-size: 13px;
 }
 .vip-page h2 {
@@ -41,7 +41,7 @@
 .vip-heading h1 > span {
   font-size: 16px;
   font-weight: 400;
-  color: #74847a;
+  color: #6b7872;
   letter-spacing: 0;
 }
 .vip-heading p {
@@ -66,10 +66,10 @@
   gap: 24px;
 }
 .vip-surface {
-  background: #fff;
+  background: #ffffff;
   border: 1px solid var(--vip-border);
-  border-radius: 16px;
-  box-shadow: 0 3px 12px #203d2e03;
+  border-radius: 10px;
+  box-shadow: none;
 }
 .vip-account {
   grid-area: account;
@@ -109,7 +109,7 @@
 .vip-account-icon {
   flex: 0 0 44px;
   height: 44px;
-  border-radius: 13px;
+  border-radius: 10px;
   display: grid;
   place-items: center;
   color: var(--tier-color);
@@ -131,7 +131,7 @@
 .vip-quota {
   min-width: 0;
   padding: 0 15px;
-  border-left: 1px solid #edf0ed;
+  border-left: 1px solid #edf0ee;
 }
 .vip-quota:first-child {
   padding-left: 0;
@@ -145,10 +145,10 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  color: #62766a;
+  color: #6b7872;
 }
 .vip-quota > span svg {
-  color: #7e998a;
+  color: #6b7872;
 }
 .vip-quota > strong {
   display: block;
@@ -174,9 +174,9 @@
   line-height: 1.7;
 }
 .vip-account-foot {
-  border-top: 1px solid #edf0ed;
+  border-top: 1px solid #edf0ee;
   padding: 14px 0;
-  color: #718478;
+  color: #6b7872;
   font-size: 11px;
 }
 .vip-account-foot > span {
@@ -191,12 +191,12 @@
   flex-wrap: wrap;
 }
 .vip-period b {
-  color: #3b6050;
+  color: #1f6650;
 }
 .vip-meter {
   height: 4px;
   border-radius: 4px;
-  background: #edf2ee;
+  background: #edf0ee;
   margin-top: 8px;
   overflow: hidden;
 }
@@ -230,9 +230,9 @@
   place-items: center;
   width: 38px;
   height: 38px;
-  border-radius: 11px;
-  background: #edf5f0;
-  color: #50856a;
+  border-radius: 10px;
+  background: #f3f8f5;
+  color: #2f7d65;
   flex: 0 0 38px;
 }
 .vip-green {
@@ -246,13 +246,13 @@
   text-align: center;
 }
 .vip-rewards > div + div {
-  border-left: 1px solid #edf0ed;
+  border-left: 1px solid #edf0ee;
 }
 .vip-rewards strong {
   display: block;
   font-size: 24px;
   font-weight: 650;
-  color: #336c50;
+  color: #1f6650;
   line-height: 1.5;
 }
 .vip-rewards strong small {
@@ -269,14 +269,14 @@
   min-height: 41px;
 }
 .vip-checkin-button.is-claimed:disabled {
-  background: #f0f5f1;
-  color: #618170;
-  border-color: #e6ede7;
+  background: #f3f8f5;
+  color: #6b7872;
+  border-color: #edf0ee;
   opacity: 1;
 }
 .vip-small-print {
   margin-top: 10px;
-  color: #839087;
+  color: #6b7872;
   font-size: 11px;
   line-height: 1.85;
 }
@@ -315,9 +315,9 @@
   min-width: 0;
 }
 .vip-tone-free {
-  --tier-color: #6a7d70;
-  --tier-bg: #f0f4f1;
-  --tier-border: #b6c9bd;
+  --tier-color: #6b7872;
+  --tier-bg: #edf0ee;
+  --tier-border: #a3ada8;
 }
 .vip-tone-vip {
   --tier-color: #956a24;
@@ -338,9 +338,9 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  border: 1px solid #dfe5e1;
-  background: #fff;
-  border-radius: 13px;
+  border: 1px solid #dce2df;
+  background: #ffffff;
+  border-radius: 10px;
   padding: 19px 16px 17px;
   cursor: pointer;
   min-width: 0;
@@ -358,7 +358,7 @@
   background: var(--tier-bg);
 }
 .vip-plan:focus-within {
-  outline: 3px solid #95c5b5;
+  outline: 3px solid #cfe2d9;
   outline-offset: 4px;
 }
 .vip-plan > input {
@@ -383,7 +383,7 @@
   letter-spacing: 0.3px;
 }
 .vip-plan-radio {
-  border: 1px solid #d9e0dc;
+  border: 1px solid #dce2df;
   border-radius: 50%;
   width: 17px;
   height: 17px;
@@ -402,7 +402,7 @@
   gap: 4px;
   flex-wrap: wrap;
   font-size: 11px;
-  color: #7e8982;
+  color: #6b7872;
   margin-top: 5px;
   min-height: 22px;
 }
@@ -430,7 +430,7 @@
   font-weight: 500;
 }
 .vip-plan-price > span {
-  color: #8a938d;
+  color: #6b7872;
   font-size: 10px;
   font-weight: 400;
   letter-spacing: 0;
@@ -441,7 +441,7 @@
   padding-bottom: 14px;
   border-bottom: 1px solid #899e861f;
   font-size: 11px;
-  color: #64766a;
+  color: #6b7872;
 }
 .vip-plan-quantity > strong {
   font-size: 21px;
@@ -454,7 +454,7 @@
   gap: 9px;
   margin-top: 15px;
   font-size: 11px;
-  color: #6c7d71;
+  color: #6b7872;
 }
 .vip-plan-benefits > span {
   display: flex;
@@ -504,13 +504,13 @@
   flex-wrap: wrap;
   gap: 5px;
   padding: 10px 12px;
-  background: #f6f8f6;
-  border-radius: 8px;
+  background: #f6f8f7;
+  border-radius: 6px;
   margin: 18px 0;
   font-size: 11px;
 }
 .vip-redeem-account > span {
-  color: #7d8a80;
+  color: #6b7872;
 }
 .vip-redeem-account > strong {
   font-weight: 500;
@@ -529,7 +529,7 @@
   width: 100%;
   font-size: 13px;
   padding: 10px 11px;
-  border-radius: 8px;
+  border-radius: 6px;
   min-height: 44px;
   letter-spacing: 0.3px;
 }
@@ -564,9 +564,9 @@
   gap: 8px;
   margin-top: 14px;
   padding: 13px 10px;
-  background: #f0f7f1;
-  color: #337653;
-  border-radius: 9px;
+  background: #f3f8f5;
+  color: #2f7d65;
+  border-radius: 10px;
 }
 .vip-redeem-success strong {
   display: block;
@@ -584,15 +584,15 @@
   display: none;
 }
 .vip-page summary:focus-visible {
-  outline: 3px solid #64b7a4;
+  outline: 3px solid #6b7872;
   outline-offset: 4px;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 .vip-page details[open] > summary > svg:last-child {
   transform: rotate(180deg);
 }
 .vip-history {
-  border-top: 1px solid #e9eeea;
+  border-top: 1px solid #edf0ee;
   margin-top: 20px;
   padding-top: 13px;
 }
@@ -600,7 +600,7 @@
   display: flex;
   align-items: center;
   gap: 7px;
-  color: #6e8074;
+  color: #6b7872;
   font-size: 12px;
   min-height: 32px;
 }
@@ -628,7 +628,7 @@
   min-width: 53px;
   font-size: 10px;
   padding: 3px 7px;
-  border-radius: 5px;
+  border-radius: 6px;
 }
 .vip-history li p {
   display: flex;
@@ -639,7 +639,7 @@
   gap: 8px;
 }
 .vip-history li p > span {
-  color: #4c896b;
+  color: #2f7d65;
 }
 .vip-history-empty,
 .vip-history-error {
@@ -656,13 +656,13 @@
   grid-area: benefits;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  border-top: 1px solid #e0e7e2;
+  border-top: 1px solid #dce2df;
   padding-top: 22px;
   gap: 18px;
 }
 .vip-benefit-icon {
   display: inline-flex;
-  color: #5f8872;
+  color: #6b7872;
   margin-bottom: 8px;
 }
 .vip-benefits h3 {
@@ -686,13 +686,13 @@
 }
 .vip-benefits button:hover:not(:disabled) {
   background: transparent;
-  color: #14543c;
+  color: #1f6650;
 }
 .vip-faq {
   margin-top: 36px;
   display: grid;
   grid-template-columns: 180px minmax(0, 1fr);
-  border-top: 1px solid #dfe7e0;
+  border-top: 1px solid #dce2df;
   padding-top: 23px;
   gap: 0 20px;
 }
@@ -703,7 +703,7 @@
 }
 .vip-faq details {
   padding: 13px 0;
-  border-bottom: 1px solid #e4eae5;
+  border-bottom: 1px solid #edf0ee;
 }
 .vip-faq details:last-child {
   border-bottom: 0;
@@ -714,10 +714,10 @@
   justify-content: space-between;
   gap: 14px;
   font-size: 13px;
-  color: #53685a;
+  color: #4b5852;
 }
 .vip-faq summary svg {
-  color: #8e9c91;
+  color: #6b7872;
 }
 .vip-faq details p {
   font-size: 12px;
@@ -728,7 +728,7 @@
 }
 .vip-api-entry {
   margin-top: 26px;
-  border-top: 1px solid #e3e9e4;
+  border-top: 1px solid #dce2df;
   padding-top: 12px;
 }
 .vip-api-entry > summary {
@@ -736,7 +736,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 8px;
-  color: #88938b;
+  color: #6b7872;
   font-size: 12px;
   min-height: 38px;
 }
@@ -746,7 +746,7 @@
 }
 .vip-api-entry > div {
   font-size: 12px;
-  color: #7d8a81;
+  color: #6b7872;
   padding: 9px 0;
 }
 .vip-api-entry button {
@@ -786,9 +786,9 @@
   display: flex;
   align-items: center;
   gap: 15px;
-  background: #fff;
-  border: 1px solid #dfe6e0;
-  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #dce2df;
+  border-radius: 10px;
   padding: 22px;
   margin-bottom: 22px;
 }
@@ -804,7 +804,7 @@
 }
 .vip-settings-entry p,
 .vip-access-notice p {
-  color: #718278;
+  color: #6b7872;
   font-size: 12px;
   margin-top: 5px;
 }
@@ -812,12 +812,12 @@
 .vip-access-notice > button {
   font-size: 12px;
   flex-shrink: 0;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 .vip-access-notice {
   margin-top: 25px;
-  background: #f4f7f4;
-  color: #748479;
+  background: #f6f8f7;
+  color: #6b7872;
 }
 .vip-config-loading {
   display: flex;
@@ -825,7 +825,7 @@
   gap: 10px;
   padding: 22px 0;
   font-size: 13px;
-  color: #748479;
+  color: #6b7872;
 }
 .vip-config-error {
   display: flex;
@@ -862,19 +862,19 @@
 }
 .sidebar .nav-section-label {
   margin: 10px 13px 4px;
-  color: #9aa69e;
+  color: #6b7872;
   font-size: 10px;
   letter-spacing: 1px;
 }
 .sidebar .nav-section + .nav-section {
-  border-top: 1px solid #edf1ed;
+  border-top: 1px solid #edf0ee;
   padding-top: 6px;
 }
 .sidebar nav .nav-section button {
   padding-top: 9px;
   padding-bottom: 9px;
   min-height: 41px;
-  border-radius: 9px;
+  border-radius: 10px;
 }
 .sidebar .workspace-label {
   margin-bottom: 12px;
@@ -883,8 +883,8 @@
   gap: 16px;
 }
 .membership-topbar-entry {
-  border-radius: 20px;
-  border-color: #e3e9e3;
+  border-radius: 12px;
+  border-color: #dce2df;
   font-size: 12px;
   min-height: 33px;
   padding: 4px 10px;
@@ -894,7 +894,7 @@
   color: #a58548;
 }
 .membership-topbar-entry > span:not(.member-tier) {
-  color: #748579;
+  color: #6b7872;
 }
 .membership-topbar-entry .member-tier {
   padding: 2px 6px;
@@ -1073,7 +1073,7 @@
   }
   .vip-account {
     padding: 17px 16px 0;
-    border-radius: 13px;
+    border-radius: 10px;
   }
   .vip-account-icon {
     flex-basis: 36px;
@@ -1185,7 +1185,7 @@
     grid-template-areas: "tier price" "description price" "quantity benefits";
     column-gap: 18px;
     padding: 18px;
-    border-radius: 12px;
+    border-radius: 10px;
   }
   .vip-plan-top {
     grid-area: tier;
