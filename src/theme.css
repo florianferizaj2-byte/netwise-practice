@@ -1,0 +1,131 @@
+/* Design tokens for the web app. Loaded after the feature stylesheets in main.jsx.
+   Palette: tmp colour remap collapsed ~1,200 ad-hoc greens/greys to these values. */
+:root {
+  --ink-900: #12352c; /* headings, dark surfaces */
+  --green-700: #1f6650; /* brand, primary actions */
+  --green-600: #2f7d65; /* links, active marks */
+  --green-200: #cfe2d9; /* selected borders */
+  --green-100: #e8f1ec; /* selected / tint fills */
+  --green-50: #f3f8f5;
+  --text: #1d2723;
+  --text-2: #4b5852;
+  --text-3: #6b7872; /* smallest text allowed: 4.6:1 on white */
+  --line: #dce2df;
+  --line-soft: #edf0ee;
+  --canvas: #f6f8f7;
+  --paper: #ffffff;
+  --radius-s: 4px;
+  --radius-m: 6px;
+  --radius-l: 10px;
+  --shadow-pop: 0 12px 32px rgba(18, 53, 44, 0.14);
+  font-family:
+    "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei UI", "Microsoft YaHei",
+    "Noto Sans SC", system-ui, sans-serif;
+  color: var(--text);
+}
+.desktop-experience,
+.desk-workspace {
+  font-family: inherit;
+  --desk-ink: var(--ink-900);
+  --desk-green: var(--green-700);
+  --desk-muted: var(--text-3);
+  --desk-line: var(--line);
+  --desk-mist: var(--green-100);
+  --study-text: var(--text);
+  --study-muted: var(--text-3);
+  --study-border: var(--line);
+}
+h1, h2, h3 {
+  letter-spacing: 0;
+}
+
+/* Workspace shell: one hairline between sidebar and content, no tinted pill nav. */
+.desk-workspace .sidebar {
+  background: var(--paper);
+  border-right: 1px solid var(--line);
+}
+/* Was only in lazily loaded vip.css, so groups rendered inline until VIP opened. */
+.sidebar .nav-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.sidebar .nav-section-label {
+  margin: 12px 12px 4px;
+  color: var(--text-3);
+  font-size: 12px;
+  letter-spacing: 0;
+}
+.sidebar .nav-section + .nav-section {
+  border-top: 1px solid var(--line-soft);
+  padding-top: 6px;
+}
+.desk-workspace .sidebar nav button {
+  justify-content: flex-start;
+  border-radius: var(--radius-m);
+}
+.desk-workspace .sidebar nav button.active {
+  background: var(--green-100);
+  color: var(--green-700);
+  font-weight: 600;
+}
+.desk-workspace .topbar {
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+.desk-workspace .main-wrap {
+  background: var(--canvas);
+}
+
+/* Home: the next-practice block is the single emphasised surface. */
+.desk-workspace .study-next {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--green-700);
+  border-radius: var(--radius-l);
+}
+.desk-workspace .study-eyebrow {
+  color: var(--text-3);
+}
+.desk-workspace .study-next h2 {
+  font-size: 22px;
+  margin-top: 6px;
+}
+.desk-workspace .study-review,
+.desk-workspace .study-chapter-list {
+  border-color: var(--line);
+}
+.desk-workspace .study-chapter-list > button:hover:not(:disabled) {
+  background: var(--canvas);
+}
+
+/* Primary buttons: flat brand fill, darker on hover. */
+.desk-workspace button.primary,
+.desktop-experience .desk-primary,
+.desk-workspace .desk-primary {
+  background: var(--green-700);
+  border-color: var(--green-700);
+  color: #fff;
+  box-shadow: none;
+}
+.desk-workspace button.primary:hover:not(:disabled),
+.desktop-experience .desk-primary:hover:not(:disabled),
+.desk-workspace .desk-primary:hover:not(:disabled) {
+  background: var(--ink-900);
+  border-color: var(--ink-900);
+}
+
+/* Popovers keep real elevation; flat cards do not. */
+.desk-workspace .study-source-details > div,
+.account-menu,
+.desk-dialog {
+  box-shadow: var(--shadow-pop);
+}
+
+/* Landing: quieter hero after removing tag pills, check lists and captions. */
+.desk-hero-copy h1 {
+  margin-top: 0;
+}
+.desk-hero-actions {
+  margin-top: 32px;
+}

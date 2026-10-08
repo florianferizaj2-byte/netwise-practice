@@ -133,10 +133,11 @@ import "./style.css";
 import "./exam-scope.css";
 import "./desktop.css";
 import "./workspace.css";
+import "./theme.css";
 
 const navs = [
   ["home", "学习总览", LayoutDashboard],
-  ["guide", "证书指南", BadgeInfo],
+  ["guide", "考试与证书指南", BadgeInfo],
   ["chapters", "章节练习", BookOpen],
   ["wrong", "错题本", NotebookPen],
   ["training", "AI 专项训练", Sparkles],
@@ -378,7 +379,7 @@ function App() {
     };
   }, [desktop, page, session, practiceKey, allQuestions]);
   const changeCertificate = (certificateId) =>
-    run("正在切换备考证书", async () => {
+    run("正在切换备考目标", async () => {
       const result = await api("/auth/certificate", { certificateId }, "PUT");
       try {
         localStorage.removeItem("netwise-exam");
@@ -659,7 +660,7 @@ function App() {
           <label className="study-certificate-select">
             <span>正在备考</span>
             <select
-              aria-label="切换备考证书"
+              aria-label="切换备考目标"
               value={auth.user.certificateId}
               disabled={!!busy}
               onChange={(event) => changeCertificate(event.target.value)}

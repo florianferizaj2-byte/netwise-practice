@@ -30,6 +30,7 @@ export function CertificateGuideView({ certificates, currentCertificateId }) {
   const certificate =
     certificates.find((item) => item.id === selectedId) || certificates[0];
   const guide = certificate?.guide;
+  const isAcademicExam = certificate?.moduleType === "academic_exam";
   const isNetworkGuide = ["network-engineer", "hcia-datacom"].includes(
     certificate?.id,
   );
@@ -43,7 +44,7 @@ export function CertificateGuideView({ certificates, currentCertificateId }) {
   ];
   if (!guide)
     return (
-      <Empty icon={BadgeInfo} title="这张证书的指南正在整理">
+      <Empty icon={BadgeInfo} title="这个备考目标的指南正在整理">
         <p>考试规则确认后会在这里发布。</p>
       </Empty>
     );
@@ -55,7 +56,7 @@ export function CertificateGuideView({ certificates, currentCertificateId }) {
       items: guide.career.bestFor,
     },
     {
-      title: "对应岗位",
+      title: isAcademicExam ? "备考方向" : "对应岗位",
       hint: "方向",
       icon: BriefcaseBusiness,
       items: guide.career.roles,
@@ -75,7 +76,7 @@ export function CertificateGuideView({ certificates, currentCertificateId }) {
   ];
   return (
     <div className={`certificate-guide-page guide-theme-${certificate.id}`}>
-      <Heading title="证书指南" subtitle="考试规则、考点范围、成本与职业价值">
+      <Heading title="考试与证书指南" subtitle="考试规则、考点范围与备考方向">
         <span className="guide-verified">
           <CircleCheck size={15} />
           信息核对于 {guide.verifiedAt}
@@ -96,6 +97,8 @@ export function CertificateGuideView({ certificates, currentCertificateId }) {
                 <Landmark size={18} />
               ) : item.id === "ncre-ms-office" ? (
                 <FileText size={18} />
+              ) : item.moduleType === "academic_exam" ? (
+                <GraduationCap size={18} />
               ) : item.id === "veterinary-practitioner" ? (
                 <Stethoscope size={18} />
               ) : (
@@ -106,8 +109,8 @@ export function CertificateGuideView({ certificates, currentCertificateId }) {
               <strong>{item.shortName}</strong>
               <small>
                 {item.id === currentCertificateId
-                  ? "当前报考证书"
-                  : "查看证书资料"}
+                  ? "当前备考目标"
+                  : "查看考试资料"}
               </small>
             </span>
             {selectedId === item.id ? (
@@ -128,7 +131,7 @@ export function CertificateGuideView({ certificates, currentCertificateId }) {
           </div>
           <div className="guide-title-lockup">
             <span className="guide-emblem">
-              <Award size={30} strokeWidth={1.7} />
+              {isAcademicExam ? <GraduationCap size={30} strokeWidth={1.7} /> : <Award size={30} strokeWidth={1.7} />}
             </span>
             <div>
               <h1>{guide.title}</h1>
@@ -203,7 +206,7 @@ export function CertificateGuideView({ certificates, currentCertificateId }) {
                 <span className="guide-section-index">02 · EXAM</span>
                 <h2>
                   <Monitor size={20} />
-                  考试方式与通过要求
+                  {isAcademicExam ? "考试方式与练习说明" : "考试方式与通过要求"}
                 </h2>
               </div>
             </div>
@@ -269,6 +272,12 @@ export function CertificateGuideView({ certificates, currentCertificateId }) {
                   <span key={topic}>{topic}</span>
                 ))}
               </div>
+              {area.examFocus?.length > 0 && (
+                <ul>
+                  {area.examFocus.map((focus) => <li key={focus}>{focus}</li>)}
+                </ul>
+              )}
+              {area.practiceAdvice && <p>{area.practiceAdvice}</p>}
             </article>
           ))}
         </div>
@@ -280,7 +289,7 @@ export function CertificateGuideView({ certificates, currentCertificateId }) {
             <span className="guide-section-index">04 · CAREER</span>
             <h2>
               <GraduationCap size={20} />
-              职业前景与证书价值
+              {isAcademicExam ? "学习安排与升学备考" : "职业前景与证书价值"}
             </h2>
           </div>
         </div>

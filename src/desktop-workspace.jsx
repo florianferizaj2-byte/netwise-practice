@@ -220,12 +220,6 @@ export function DesktopStudyHome({
               <ArrowRight size={18} />
             </button>
           </div>
-          <BookOpen
-            className="study-next-icon"
-            size={72}
-            strokeWidth={1}
-            aria-hidden="true"
-          />
         </section>
         <section className="study-review">
           <span>

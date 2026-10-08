@@ -66,6 +66,7 @@ export function AdminQuestionEditor({ question, busy, run, onClose, onSaved }) {
       api(
         `/admin/questions/${encodeURIComponent(question.id)}`,
         {
+          ...(question.classificationCertificateId ? { certificateId: question.classificationCertificateId } : {}),
           type: draft.type,
           question: draft.question.trim(),
           options: Object.fromEntries(

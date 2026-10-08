@@ -201,7 +201,7 @@ export function AuthScreen({ onAuth, initialError = "" }) {
           <p className="auth-panel-intro">
             {isLogin
               ? "欢迎回来，接着完成今天最值得练习的一组题。"
-              : "注册后选择报考证书，马上开始一套属于你的练习路径。"}
+              : "注册后选择备考目标，马上开始一套属于你的练习路径。"}
           </p>
           <form onSubmit={submit}>
             <label>
@@ -323,9 +323,9 @@ export function CertificatePicker({ certificates, onSelect }) {
           <GraduationCap size={28} />
         </div>
         <p className="eyebrow">第一步</p>
-        <h1>选择要报考的证书</h1>
+        <h1>选择你的备考目标</h1>
         <p>
-          题库、章节和练习推荐会围绕所选证书的知识点组织，之后可在账号设置中切换。
+          题库、章节和练习推荐会围绕所选考试的知识点组织，之后可在账号设置中切换。
         </p>
         <div className="certificate-list">
           {certificates.map((certificate) => (

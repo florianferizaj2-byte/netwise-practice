@@ -8,3 +8,13 @@ test-output/
 *.log
 *.tgz
 __pycache__/
+
+# 本地工作区与构建产物：保留在磁盘上，不进入版本库
+outputs/
+tmp/
+aceexam-backups/
+.claude/
+.codex-remote-attachments/
+
+# 签名安装包：体积大且可从 Releases 获取，不入库
+mobile/*.apk

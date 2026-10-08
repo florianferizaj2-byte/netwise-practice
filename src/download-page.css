@@ -1,15 +1,15 @@
 .download-page {
   min-height: 100dvh;
   background: #f6f8f7;
-  color: #23362f;
+  color: #12352c;
 }
 .download-container {
   width: min(1240px, calc(100% - 80px));
   margin-inline: auto;
 }
 .download-header {
-  background: #fff;
-  border-bottom: 1px solid #e2e9e5;
+  background: #ffffff;
+  border-bottom: 1px solid #dce2df;
 }
 .download-header > div {
   display: flex;
@@ -26,15 +26,15 @@
 }
 .download-brand strong {
   font-size: 24px;
-  color: #153e35;
+  color: #12352c;
 }
 .download-brand span {
   font-size: 13px;
-  color: #65746d;
+  color: #6b7872;
 }
 .download-page .download-back {
   font-size: 14px;
-  color: #445c51;
+  color: #4b5852;
 }
 .download-page main.download-container {
   padding: 0;
@@ -48,7 +48,7 @@
   padding: 56px 0 38px;
 }
 .download-intro > div > p {
-  color: #506e60;
+  color: #6b7872;
   font-size: 14px;
   margin-bottom: 12px;
 }
@@ -57,7 +57,7 @@
   font-weight: 650;
   line-height: 1.35;
   letter-spacing: -1px;
-  color: #153e35;
+  color: #12352c;
 }
 .download-sync-note {
   display: flex;
@@ -66,7 +66,7 @@
   max-width: 400px;
 }
 .download-sync-note > svg {
-  color: #24715c;
+  color: #1f6650;
   margin-top: 2px;
 }
 .download-sync-note strong {
@@ -74,16 +74,16 @@
   font-weight: 600;
 }
 .download-sync-note p {
-  color: #66746d;
+  color: #6b7872;
   margin-top: 9px;
   font-size: 14px;
 }
 .download-platforms {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  background: #fff;
-  border: 1px solid #dce5df;
-  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #dce2df;
+  border-radius: 10px;
   overflow: hidden;
 }
 .download-platform {
@@ -94,13 +94,13 @@
   align-items: stretch;
 }
 .download-platform + .download-platform {
-  border-left: 1px solid #e2e9e5;
+  border-left: 1px solid #dce2df;
 }
 .download-platform-title {
   display: flex;
   align-items: center;
   gap: 11px;
-  color: #153e35;
+  color: #12352c;
 }
 .download-platform-title h2 {
   font-size: 21px;
@@ -109,7 +109,7 @@
 }
 .download-platform > p {
   font-size: 14px;
-  color: #607169;
+  color: #6b7872;
   margin-top: 12px;
   min-height: 50px;
 }
@@ -128,25 +128,25 @@
   padding-block: 16px;
 }
 .download-code-area > span {
-  color: #5b6e63;
+  color: #6b7872;
   font-size: 12px;
 }
 .download-platform-meta {
-  color: #52665b;
+  color: #4b5852;
   font-size: 12px;
   margin-top: 14px;
 }
 .download-page .download-copy {
   border: 0;
   background: transparent;
-  color: #50665a;
+  color: #4b5852;
   font-size: 13px;
   min-height: 36px;
   padding: 9px 0 0;
 }
 .download-platform > small {
   text-align: center;
-  color: #66776c;
+  color: #6b7872;
   font-size: 13px;
   padding-top: 12px;
 }
@@ -159,15 +159,15 @@
   font-size: 13px;
 }
 .download-desktop {
-  background: #f2f7f4;
+  background: #f3f8f5;
 }
 .download-screen {
   margin: 26px 0 24px;
   height: 162px;
-  background: #fff;
-  border: 1px solid #bdcfc4;
-  border-radius: 8px;
-  box-shadow: 0 10px 0 -6px #c1d1c7;
+  background: #ffffff;
+  border: 1px solid #dce2df;
+  border-radius: 6px;
+  box-shadow: 0 10px 0 -6px #dce2df;
   overflow: hidden;
 }
 .download-screen-bar {
@@ -175,7 +175,7 @@
   align-items: center;
   gap: 6px;
   font-size: 10px;
-  border-bottom: 1px solid #e1e9e4;
+  border-bottom: 1px solid #dce2df;
   padding: 9px 12px;
 }
 .download-screen-bar img {
@@ -188,7 +188,7 @@
   height: 123px;
 }
 .download-screen-body > div:first-child {
-  border-right: 1px solid #e4ebe6;
+  border-right: 1px solid #edf0ee;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -196,7 +196,7 @@
   padding: 12px 9px;
 }
 .download-screen-body > div:first-child > span:first-child {
-  color: #24715c;
+  color: #1f6650;
   font-weight: 600;
 }
 .download-screen-body > div:last-child {
@@ -211,8 +211,8 @@
   height: 5px;
   margin-top: 10px;
   width: 85%;
-  border-radius: 3px;
-  background: #e4eee8;
+  border-radius: 4px;
+  background: #e8f1ec;
 }
 .download-screen-body i + i {
   width: 60%;
@@ -228,16 +228,16 @@
 }
 .download-help h2 {
   font-size: 23px;
-  color: #263e32;
+  color: #12352c;
   font-weight: 600;
 }
 .download-help > div > p {
   margin-top: 12px;
-  color: #68786f;
+  color: #6b7872;
   font-size: 14px;
 }
 .download-help-items details {
-  border-bottom: 1px solid #dce5df;
+  border-bottom: 1px solid #dce2df;
 }
 .download-help-items summary {
   padding: 17px 0;
@@ -247,21 +247,21 @@
 }
 .download-help-items details p {
   font-size: 14px;
-  color: #5e6c64;
+  color: #6b7872;
   padding-bottom: 20px;
   line-height: 1.85;
 }
 .download-page :is(summary, button, a):focus-visible {
-  outline: 3px solid #508f7c;
+  outline: 3px solid #6b7872;
   outline-offset: 4px;
 }
 .download-footer {
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid #dce5df;
+  border-top: 1px solid #dce2df;
   padding-block: 22px;
   font-size: 13px;
-  color: #5f7166;
+  color: #6b7872;
 }
 .download-footer span {
   display: flex;
@@ -275,9 +275,9 @@
   transform: translateX(-50%);
   max-width: calc(100% - 32px);
   padding: 13px 22px;
-  color: #fff;
-  background: #153e35;
-  border-radius: 8px;
+  color: #ffffff;
+  background: #12352c;
+  border-radius: 6px;
   font-size: 14px;
   box-shadow: 0 6px 24px #153e3522;
   z-index: 60;
@@ -320,7 +320,7 @@
   }
   .download-platform + .download-platform {
     border-left: 0;
-    border-top: 1px solid #e2e9e5;
+    border-top: 1px solid #dce2df;
   }
   .download-platform > p {
     min-height: 0;

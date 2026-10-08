@@ -4,7 +4,6 @@ import {
   ArrowUpRight,
   ArrowRight,
   BookOpen,
-  Check,
   ChevronRight,
   Crown,
   Download,
@@ -88,8 +87,8 @@ const features = [
   },
   {
     page: "guide",
-    name: "证书指南",
-    detail: "了解目标证书，找到自己的学习方向。",
+    name: "考试与证书指南",
+    detail: "了解备考目标，找到自己的学习方向。",
     icon: Compass,
   },
   {
@@ -332,10 +331,6 @@ export function DesktopLanding({
       <main>
         <section className="desk-hero desk-container">
           <div className="desk-hero-copy">
-            <div className="desk-hero-tag">
-              <span className="desk-status-dot" />
-              你的职业认证学习空间
-            </div>
             <h1>
               把每一道题，
               <br />
@@ -363,57 +358,19 @@ export function DesktopLanding({
                 <ChevronRight size={17} />
               </button>
             </div>
-            <div className="desk-hero-footnote">
-              <span>
-                <Check size={14} />
-                按知识点练习
-              </span>
-              <span>
-                <Check size={14} />
-                AI 针对性训练
-              </span>
-              <span>
-                <Check size={14} />
-                学习记录同步
-              </span>
-            </div>
           </div>
           <div className="desk-hero-preview">
-            <div className="desk-preview-caption">
-              <span>先试五道，再决定怎么学。</span>
-              <span>
-                免费试用
-                <ArrowRight size={14} />
-              </span>
-            </div>
             <DesktopTrial
               api={api}
               Dialog={DesktopDialog}
               onJoin={() => enter("home", "register")}
               authenticated={authenticated}
             />
-            <div className="desk-preview-under">
-              <span>
-                <BookOpen size={15} />
-                练习
-              </span>
-              <i />
-              <span>
-                <Sparkles size={15} />
-                理解
-              </span>
-              <i />
-              <span>
-                <Target size={15} />
-                掌握
-              </span>
-            </div>
           </div>
         </section>
         <section className="desk-method" id="desk-method">
           <div className="desk-container desk-method-grid">
             <div>
-              <span className="desk-section-kicker">让努力更有章法</span>
               <h2>练过，更要真正掌握。</h2>
             </div>
             <div>
@@ -447,7 +404,6 @@ export function DesktopLanding({
         <section className="desk-container desk-features" id="desk-features">
           <div className="desk-section-heading">
             <div>
-              <span className="desk-section-kicker">完整的备考工具</span>
               <h2>你的备考，一处就绪。</h2>
             </div>
             <p>
@@ -479,19 +435,18 @@ export function DesktopLanding({
           id="desk-certificates"
         >
           <div>
-            <span className="desk-section-kicker">从你的目标开始</span>
             <h2>
               选好方向，
               <br />
               下一步交给行动。
             </h2>
             <p>
-              选择正在备考的证书，
+              选择你的备考目标，
               <br />
               进入对应题库与学习空间。
             </p>
             <button className="desk-text-link" onClick={() => enter("guide")}>
-              查看证书指南
+              查看考试与证书指南
               <ArrowRight size={16} />
             </button>
           </div>
@@ -519,13 +474,13 @@ export function DesktopLanding({
             ) : (
               <div className="desk-certificate-empty">
                 <GraduationCap size={28} />
-                <h3>找到你的目标证书</h3>
-                <p>登录后查看当前开放的证书与题库。</p>
+                <h3>找到你的备考目标</h3>
+                <p>登录后查看当前开放的考试与题库。</p>
                 <button
                   className="desk-button desk-secondary"
                   onClick={() => enter("guide")}
                 >
-                  查看证书
+                  查看备考目标
                 </button>
               </div>
             )}
@@ -552,7 +507,6 @@ export function DesktopLanding({
             </div>
           </div>
           <div>
-            <span className="desk-section-kicker">学习，不必停在电脑前</span>
             <h2>
               坐下来专注，
               <br />
@@ -621,10 +575,10 @@ export function DesktopLanding({
           <h2>{certificatePreview.name}</h2>
           <p>
             {certificatePreview.description ||
-              "围绕证书知识体系，进行章节练习、错题复习与模拟考试。"}
+              "围绕考试知识体系，进行章节练习、错题复习与模拟考试。"}
           </p>
           <div className="desk-certificate-note">
-            进入学习空间后，选择这张证书即可查看对应题库。已有学习记录会按证书保留。
+            进入学习空间后，选择这个备考目标即可查看对应题库。已有学习记录会按目标保留。
           </div>
           <button
             className="desk-button desk-primary"
@@ -633,7 +587,7 @@ export function DesktopLanding({
               enter("settings");
             }}
           >
-            {authenticated ? "前往选择证书" : "登录并选择证书"}
+            {authenticated ? "前往选择备考目标" : "登录并选择备考目标"}
             <ArrowRight size={17} />
           </button>
         </DesktopDialog>
@@ -669,8 +623,7 @@ export function DesktopCertificatePicker({
         </button>
       </div>
       <section>
-        <span className="desk-section-kicker">属于你的学习空间</span>
-        <h1>这一次，你想拿下哪张证书？</h1>
+        <h1>这一次，你想准备哪场考试？</h1>
         <p>选择目标，开启对应题库。之后也可以在设置中切换。</p>
         {error && (
           <div role="alert" className="desk-form-error">
@@ -690,7 +643,7 @@ export function DesktopCertificatePicker({
               <span>
                 {pending === certificate.id
                   ? "正在准备学习空间…"
-                  : "选择这张证书"}
+                  : "选择这个目标"}
                 <ArrowUpRight size={17} />
               </span>
             </button>

@@ -167,14 +167,14 @@ export function SettingsView({
   };
   return (
     <>
-      <Heading title="设置" subtitle="报考证书、AI 服务与调用用量" />
+      <Heading title="设置" subtitle="备考目标、AI 服务与调用用量" />
       <MembershipSettingsEntry membership={membership} onOpenVip={onOpenVip} />
       <section className="certificate-settings">
         <div className="section-heading">
           <div>
             <h2>
               <GraduationCap size={21} />
-              报考证书
+              备考目标
             </h2>
             <p>切换后，章节、推荐练习、错题本和模拟考试会使用对应题库。</p>
           </div>
@@ -210,7 +210,7 @@ export function SettingsView({
                     </small>
                   )}
                 </span>
-                <b>{selected ? "当前证书" : "切换"}</b>
+                <b>{selected ? "当前目标" : "切换"}</b>
               </button>
             );
           })}
