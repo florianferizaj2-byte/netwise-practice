@@ -1,0 +1,98 @@
+{
+  "title": "2026上半年网络工程师新增题导入复核记录",
+  "status": "imported-local",
+  "sourceFiles": [
+    {
+      "file": "押题密卷上午题.pdf",
+      "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF"
+    },
+    {
+      "file": "押题密卷上午题解析.pdf",
+      "sha256": "BFD7FB16AA122FE14E69809AAD2D243674FCD088857FD1BC916CA42C413F8187"
+    },
+    {
+      "file": "2026年上半年网络工程师案例模拟题合集.pdf",
+      "sha256": "A8D07A1BFB8E5672255608700C0BA26FD91C347FC6997BEAA27FCF093E4D8994"
+    },
+    {
+      "file": "押题密卷下午题.pdf",
+      "sha256": "1EF6373504D54576EF08E825B639B02CEA2981B0FED3185AC896B04D5367C325"
+    },
+    {
+      "file": "押题密卷下午题解析.pdf",
+      "sha256": "23D9F89468AE92E0EEDC3B7A7CD7C7592C0D7BDC5849E53EEDBBCBC46F48974A"
+    }
+  ],
+  "importedCount": 103,
+  "typeCounts": {
+    "single_choice": 74,
+    "short_answer": 29
+  },
+  "classificationReview": {
+    "status": "mapped-to-existing-taxonomy",
+    "moduleCounts": {
+      "计算机基础知识": 8,
+      "项目管理与法律法规": 7,
+      "网络体系结构与TCP/IP": 29,
+      "局域网与交换技术": 12,
+      "综合布线与网络规划": 10,
+      "路由与广域网技术": 13,
+      "服务器配置": 5,
+      "网络管理": 4,
+      "网络安全": 15
+    },
+    "method": "沿用 manifest 中已存在的模块、知识分节和知识点；后续通过题库校验检查分类名称及必填字段。"
+  },
+  "duplicateReview": {
+    "status": "exact-fingerprint-reviewed",
+    "existingQuestionCountBeforeImport": 992,
+    "candidateCount": 103,
+    "exactDuplicatesFound": 0,
+    "similarityReport": "duplicate-review.json",
+    "note": "对既有题库进行了规范化题干精确比对，并生成相似候选供人工筛查；相似度分数单独不作为重复依据，只有确认题干重复才剔除。"
+  },
+  "answerAnalysisReview": {
+    "status": "reviewed-with-source-caveat",
+    "answerSource": "各卷配套答案与解析 PDF；来源出版方、官方性及答案权威性未独立核实。",
+    "confirmedCorrections": [
+      "上午卷第63题按原题修正为询问4根不通线芯；10BASE-T仍能通信对应4、5、7、8不通。",
+      "案例二第2小题按配套答案明确R2原始VRRP状态为Backup、优先级100、抢占YES；之后将优先级调至120。",
+      "上午卷第70题依图为三项工作并行，4人需覆盖5天局域网安装，另2人可串行完成2天主机安装与3天广域网安装，最少6人。"
+    ],
+    "excludedQuestions": [
+      {
+        "id": "sealed-morning-2026h1-q049",
+        "reason": "原题有两个正确选项且配套答案错误，详见 excluded-questions.json。"
+      }
+    ]
+  },
+  "imageReview": {
+    "status": "local-files-present-and-browser-route-previously-verified",
+    "uniqueImageFileCount": 12,
+    "questionCountWithImages": 32,
+    "morningImages": 5,
+    "caseAndAfternoonImages": 7,
+    "imageManifest": [
+      "/question-images/network-engineer/2026-h1-case-papers/afternoon-campus-dhcp.png",
+      "/question-images/network-engineer/2026-h1-case-papers/afternoon-ipsec.png",
+      "/question-images/network-engineer/2026-h1-case-papers/afternoon-wlan.png",
+      "/question-images/network-engineer/2026-h1-case-papers/case1-routing.png",
+      "/question-images/network-engineer/2026-h1-case-papers/case2-vrrp.png",
+      "/question-images/network-engineer/2026-h1-case-papers/case3-campus-security.png",
+      "/question-images/network-engineer/2026-h1-case-papers/case4-6to4.png",
+      "/question-images/network-engineer/2026-h1-sealed-morning/q008.png",
+      "/question-images/network-engineer/2026-h1-sealed-morning/q009.png",
+      "/question-images/network-engineer/2026-h1-sealed-morning/q011.png",
+      "/question-images/network-engineer/2026-h1-sealed-morning/q052.png",
+      "/question-images/network-engineer/2026-h1-sealed-morning/q070.png"
+    ]
+  },
+  "validation": {
+    "bankValidate": "pass",
+    "networkEngineerQuestionCountAfterImport": 1095,
+    "allBundledQuestionCount": 9563,
+    "productionBuild": "pass; Vite 7.3.6; 1579 modules transformed",
+    "builtImageAssetsMissing": 0
+  },
+  "classic100": "未进入正式题库：OCR只生成98个带答案标记候选，存在跨页答案及一题多空导致的分段/答案错位；配套解析还存在答案或选项冲突。详见 classic100-review-report.json 与 classic100-candidates.json。"
+}

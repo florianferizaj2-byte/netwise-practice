@@ -1,0 +1,2203 @@
+{
+  "title": "2026上半年新增题库导入：重复题复核",
+  "existingQuestionCount": 992,
+  "incomingCandidateCount": 202,
+  "exactDuplicates": [
+    {
+      "incomingId": "classic-seq-069-p35-q9",
+      "source": "classic100-candidates.json",
+      "question": "UTM（统一威胁管理系统）的功能不包括（",
+      "matches": [
+        {
+          "id": "intake-2026-spring-q048",
+          "question": "UTM（统一威胁管理系统）的功能不包括（）。",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-provided-2026-spring-intake\\01.json"
+        }
+      ]
+    }
+  ],
+  "similarCandidates": [
+    {
+      "incomingId": "sealed-morning-2026h1-q002",
+      "source": "questions.json",
+      "question": "以下关于中断的说法，正确的是哪一项？",
+      "matches": [
+        {
+          "similarity": 0.667,
+          "id": "collection-c01-q042",
+          "question": "下列关于集线器的说法，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\01.json"
+        },
+        {
+          "similarity": 0.667,
+          "id": "collection-c05-q025",
+          "question": "下列关于路由表的说法，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\05.json"
+        },
+        {
+          "similarity": 0.667,
+          "id": "collection-c05-q048",
+          "question": "下列关于路由表的说法，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\05.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q004",
+      "source": "questions.json",
+      "question": "浮点数的表示范围和精度主要取决于什么？",
+      "matches": [
+        {
+          "similarity": 0.35,
+          "id": "ne-20260923-234",
+          "question": "CA 的证书吊销列表 CRL 主要用于发布什么信息？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        },
+        {
+          "similarity": 0.345,
+          "id": "practice-9",
+          "question": "STP 的主要目的是什么？",
+          "path": "server\\question-banks\\network-engineer\\questions\\original.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q006",
+      "source": "questions.json",
+      "question": "输入范围为[-1.0，1.0]，测试用例取-1.001、-1.0、1.0、1.001，这种测试设计方法是什么？",
+      "matches": [
+        {
+          "similarity": 0.429,
+          "id": "ne-20260923-007",
+          "question": "用 8 位补码计算 01100111₂ + 00101000₂，结果出现什么情况？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q012",
+      "source": "questions.json",
+      "question": "信道采用4B/5B编码，最大数据速率为2500b/s；调制前波特率为1000Baud，应采用哪种调制技术？",
+      "matches": [
+        {
+          "similarity": 0.41,
+          "id": "collection-c02-q016",
+          "question": "某通信系统采用QPSK调制，码元速率为1000 Baud，数据速率为？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\02.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q013",
+      "source": "questions.json",
+      "question": "卫星信道速率为64kb/s，帧长4000bit，使用停等ARQ，信道最大利用率约为多少？",
+      "matches": [
+        {
+          "similarity": 0.366,
+          "id": "collection-c02-q002",
+          "question": "若16进制信号的码元速率是6000 Baud，则数据速率为多少kb/s？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\02.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q015",
+      "source": "questions.json",
+      "question": "以下关于交换机的说法，正确的是哪一项？",
+      "matches": [
+        {
+          "similarity": 0.788,
+          "id": "intake-2026-spring-q009",
+          "question": "下列关于交换机堆叠的说法，正确的是（）。",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-provided-2026-spring-intake\\01.json"
+        },
+        {
+          "similarity": 0.743,
+          "id": "collection-c06-q024",
+          "question": "下列关于交换机转发方式的说法，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\06.json"
+        },
+        {
+          "similarity": 0.684,
+          "id": "collection-c06-q030",
+          "question": "下列关于多层交换机（三层交换机）的说法，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\06.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q016",
+      "source": "questions.json",
+      "question": "采用海明码纠错，信息码字为8位，若要纠正1位错误，至少需要多少位冗余位？",
+      "matches": [
+        {
+          "similarity": 0.492,
+          "id": "collection-c02-q006",
+          "question": "海明码是一种纠错码，若信息位k=4，纠正1位错误，监督位r最少应为？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\02.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q017",
+      "source": "questions.json",
+      "question": "下列哪一项不属于光缆系统的测试指标？",
+      "matches": [
+        {
+          "similarity": 0.562,
+          "id": "intake-2026-spring-q002",
+          "question": "下列哪一项不属于RISC的特征（）。",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-provided-2026-spring-intake\\01.json"
+        },
+        {
+          "similarity": 0.457,
+          "id": "collection-c08-q006",
+          "question": "下列哪项不属于信息传输安全的主要措施？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\08.json"
+        },
+        {
+          "similarity": 0.375,
+          "id": "collection-c01-q038",
+          "question": "下列协议中，不属于网络层协议的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\01.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q018",
+      "source": "questions.json",
+      "question": "关于HDLC协议，正确的是哪一项？",
+      "matches": [
+        {
+          "similarity": 0.562,
+          "id": "collection-c10-q043",
+          "question": "下列关于LDAP协议的说法，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\10.json"
+        },
+        {
+          "similarity": 0.545,
+          "id": "collection-c01-q006",
+          "question": "以下关于ICMP协议的说法中，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\01.json"
+        },
+        {
+          "similarity": 0.529,
+          "id": "collection-c08-q049",
+          "question": "下列关于SSL/TLS协议的说法，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\08.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q019",
+      "source": "questions.json",
+      "question": "E1载波中共有多少个数据通道？",
+      "matches": [
+        {
+          "similarity": 0.462,
+          "id": "collection-c02-q012",
+          "question": "E1载波的数据传输速率是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\02.json"
+        },
+        {
+          "similarity": 0.4,
+          "id": "intake-2026-spring-q006-a",
+          "question": "第1空：该内存共有多少字？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-provided-2026-spring-intake\\01.json"
+        },
+        {
+          "similarity": 0.385,
+          "id": "collection-c02-q013",
+          "question": "T1载波的数据传输速率是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\02.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q020",
+      "source": "questions.json",
+      "question": "E2载波的数据速率是多少？",
+      "matches": [
+        {
+          "similarity": 0.75,
+          "id": "collection-c02-q012",
+          "question": "E1载波的数据传输速率是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\02.json"
+        },
+        {
+          "similarity": 0.667,
+          "id": "collection-c02-q013",
+          "question": "T1载波的数据传输速率是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\02.json"
+        },
+        {
+          "similarity": 0.375,
+          "id": "collection-c02-q036",
+          "question": "路由器Console端口默认的数据速率为？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\02.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q021",
+      "source": "questions.json",
+      "question": "TCP首部中的序号字段为32位，其序号空间最多对应多少数据量后才会重复？",
+      "matches": [
+        {
+          "similarity": 0.417,
+          "id": "collection-c04-q012",
+          "question": "TCP首部中，序号字段的作用是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\04.json"
+        },
+        {
+          "similarity": 0.392,
+          "id": "collection-c04-q028",
+          "question": "TCP首部中，确认号字段的值为N表示？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\04.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q022",
+      "source": "questions.json",
+      "question": "本地主机发送FIN=1的数据段结束发送后，以下说法不正确的是哪一项？",
+      "matches": [
+        {
+          "similarity": 0.45,
+          "id": "intake-2026-spring-q054",
+          "question": "以下说法不正确的是（）。",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-provided-2026-spring-intake\\01.json"
+        },
+        {
+          "similarity": 0.392,
+          "id": "collection-c07-q021",
+          "question": "下列关于网络地址和主机地址的说法，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\07.json"
+        },
+        {
+          "similarity": 0.375,
+          "id": "collection-c06-q023",
+          "question": "下列关于QinQ技术的说法，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\06.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q024",
+      "source": "questions.json",
+      "question": "带宽为3kHz、信噪比为30dB的信道，其理论数据率约为多少？",
+      "matches": [
+        {
+          "similarity": 0.533,
+          "id": "practice-3",
+          "question": "无噪声信道带宽为 3 kHz，采用 4 种离散信号，其理论最高数据速率是多少？",
+          "path": "server\\question-banks\\network-engineer\\questions\\original.json"
+        },
+        {
+          "similarity": 0.431,
+          "id": "collection-c02-q005",
+          "question": "已知电话线路信噪比为30dB，带宽为3kHz，根据香农定理，最大数据传输速率约为？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\02.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q026",
+      "source": "questions.json",
+      "question": "IPv6地址的三级结构中，第2级表示什么？",
+      "matches": [
+        {
+          "similarity": 0.581,
+          "id": "ne-20260923-113",
+          "question": "IPv6 地址 :: 的含义是什么？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        },
+        {
+          "similarity": 0.562,
+          "id": "collection-c03-q013",
+          "question": "IPv6地址FF02::1表示？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\03.json"
+        },
+        {
+          "similarity": 0.529,
+          "id": "ne-20260923-119",
+          "question": "IPv6 单播地址 ::1 的用途是什么？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q027",
+      "source": "questions.json",
+      "question": "配置SMTP邮件服务器时，必须开放TCP哪个默认端口？",
+      "matches": [
+        {
+          "similarity": 0.356,
+          "id": "collection-c10-q001",
+          "question": "电子邮件所使用的SMTP协议的默认端口为？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\10.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q028",
+      "source": "questions.json",
+      "question": "Linux系统将Apache Web服务器端口改为8080，通常应修改哪个配置文件？",
+      "matches": [
+        {
+          "similarity": 0.367,
+          "id": "collection-c11-q008",
+          "question": "在Linux中，下列哪个目录包含系统配置文件？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\11.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q029",
+      "source": "questions.json",
+      "question": "Windows命令行中，使用哪个命令释放DHCP服务器分配的地址？",
+      "matches": [
+        {
+          "similarity": 0.444,
+          "id": "collection-c11-q009",
+          "question": "在Windows中，使用什么命令启动远程桌面连接？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\11.json"
+        },
+        {
+          "similarity": 0.373,
+          "id": "ne-20260923-285",
+          "question": "Windows DHCP 作用域中的地址保留通常根据客户端标识或 MAC 关联地址，主要效果是什么？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        },
+        {
+          "similarity": 0.373,
+          "id": "collection-c11-q020",
+          "question": "在Windows中，Workstation服务的核心功能是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\11.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q030",
+      "source": "questions.json",
+      "question": "RAID 0的磁盘利用率是多少？",
+      "matches": [
+        {
+          "similarity": 0.37,
+          "id": "collection-c04-q011",
+          "question": "UDP首部的长度是多少字节？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\04.json"
+        },
+        {
+          "similarity": 0.364,
+          "id": "collection-c05-q037",
+          "question": "OSPF协议中，区域0（Area 0）的作用是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\05.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q031",
+      "source": "questions.json",
+      "question": "使用3块500GB磁盘组成RAID 5阵列，阵列可用容量是多少？",
+      "matches": [
+        {
+          "similarity": 0.431,
+          "id": "ne-20260923-025",
+          "question": "由 5 块容量相同的磁盘组成 RAID 5，忽略文件系统开销，可用容量相当于几块磁盘？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        },
+        {
+          "similarity": 0.418,
+          "id": "ne-20260923-029",
+          "question": "四块同容量磁盘构成 RAID 10 时，忽略格式化开销，可用容量通常约为原始容量的多少？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q034",
+      "source": "questions.json",
+      "question": "下列哪种算法用于会话数据加密时效率最高？",
+      "matches": [
+        {
+          "similarity": 0.378,
+          "id": "collection-c08-q003",
+          "question": "下列加密算法中，属于非对称加密算法的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\08.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q035",
+      "source": "questions.json",
+      "question": "使用CIDR将212.224.12.0/24至212.224.15.0/24四个连续网络汇聚成一个超网，得到的地址是什么？",
+      "matches": [
+        {
+          "similarity": 0.423,
+          "id": "collection-c07-q028",
+          "question": "将192.168.1.0/24、192.168.2.0/24、192.168.3.0/24、192.168.4.0/24聚合为一条路由，最合适的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\07.json"
+        },
+        {
+          "similarity": 0.342,
+          "id": "subnet-18",
+          "question": "主机 10.18.10.154/26 所在子网的网络地址是什么？",
+          "path": "server\\question-banks\\network-engineer\\questions\\original.json"
+        },
+        {
+          "similarity": 0.341,
+          "id": "collection-c03-q020",
+          "question": "网络192.168.1.0/24、192.168.2.0/24、192.168.3.0/24可以聚合为？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\03.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q036",
+      "source": "questions.json",
+      "question": "网络199.74.128.0/17至少划分成10个子网，下列哪项不是所得16个/21子网的网络地址？",
+      "matches": [
+        {
+          "similarity": 0.412,
+          "id": "subnet-12",
+          "question": "主机 10.12.10.112/28 所在子网的网络地址是什么？",
+          "path": "server\\question-banks\\network-engineer\\questions\\original.json"
+        },
+        {
+          "similarity": 0.406,
+          "id": "subnet-15",
+          "question": "主机 172.15.10.133/27 所在子网的网络地址是什么？",
+          "path": "server\\question-banks\\network-engineer\\questions\\original.json"
+        },
+        {
+          "similarity": 0.406,
+          "id": "subnet-21",
+          "question": "主机 172.21.10.175/25 所在子网的网络地址是什么？",
+          "path": "server\\question-banks\\network-engineer\\questions\\original.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q037",
+      "source": "questions.json",
+      "question": "以下哪个地址不属于网络129.177.96.0/20的主机地址范围？",
+      "matches": [
+        {
+          "similarity": 0.372,
+          "id": "collection-c07-q009",
+          "question": "下列IP地址中，属于网络号的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\07.json"
+        },
+        {
+          "similarity": 0.364,
+          "id": "collection-c07-q024",
+          "question": "IP地址10.10.1.33/27，该子网的可用主机地址范围是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\07.json"
+        },
+        {
+          "similarity": 0.353,
+          "id": "collection-c03-q017",
+          "question": "一个C类地址192.168.1.0/24，划分6个子网，每个子网至少30台主机，子网掩码应为？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\03.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q038",
+      "source": "questions.json",
+      "question": "客户机无法找到DHCP服务器时，自动获得的临时IPv4地址最可能是哪一个？",
+      "matches": [
+        {
+          "similarity": 0.386,
+          "id": "ne-20260923-071",
+          "question": "某主机未能从 DHCP 服务器取得地址，随后自动配置为 169.254.18.9/16。该地址属于哪类 IPv4 地址？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        },
+        {
+          "similarity": 0.381,
+          "id": "practice-21",
+          "question": "DHCP 客户端首次获取 IPv4 地址时，通常首先发送哪种消息？",
+          "path": "server\\question-banks\\network-engineer\\questions\\original.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q040",
+      "source": "questions.json",
+      "question": "FTP工作时需要建立几个连接？",
+      "matches": [
+        {
+          "similarity": 0.375,
+          "id": "collection-c04-q001",
+          "question": "TCP协议中，用于建立连接的握手次数是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\04.json"
+        },
+        {
+          "similarity": 0.37,
+          "id": "collection-c04-q004",
+          "question": "TCP断开连接需要几次挥手？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\04.json"
+        },
+        {
+          "similarity": 0.353,
+          "id": "collection-c04-q036",
+          "question": "TCP协议中，用于建立连接的三次握手顺序是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\04.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q041",
+      "source": "questions.json",
+      "question": "FTP服务器工作于被动模式时，数据连接使用的端口由谁确定？",
+      "matches": [
+        {
+          "similarity": 0.36,
+          "id": "collection-c10-q018",
+          "question": "下列关于FTP主动模式和被动模式的说法，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\10.json"
+        },
+        {
+          "similarity": 0.353,
+          "id": "collection-c10-q003",
+          "question": "FTP协议使用两个端口，控制连接和数据连接分别使用？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\10.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q042",
+      "source": "questions.json",
+      "question": "浏览器收到HTTP状态码500，通常表示什么？",
+      "matches": [
+        {
+          "similarity": 0.625,
+          "id": "ne-20260923-107",
+          "question": "浏览器请求页面后，服务器返回 HTTP 状态码 401，通常表示？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        },
+        {
+          "similarity": 0.606,
+          "id": "collection-c10-q014",
+          "question": "HTTP状态码404表示？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\10.json"
+        },
+        {
+          "similarity": 0.392,
+          "id": "ne-20260923-124",
+          "question": "以太网接口的 IP MTU 配置为 1500 字节，通常表示什么长度限制？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q044",
+      "source": "questions.json",
+      "question": "华为交换机光口对接后接口不能UP，按常见排障顺序应如何检查？",
+      "matches": [
+        {
+          "similarity": 0.355,
+          "id": "ne-20260923-145",
+          "question": "交换机端口开启 BPDU Guard 后，若该端口收到 BPDU，通常应如何处理？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q045",
+      "source": "questions.json",
+      "question": "华为交换机Access端口发送报文时，会如何处理VLAN标签？",
+      "matches": [
+        {
+          "similarity": 0.557,
+          "id": "collection-c06-q026",
+          "question": "在交换机上，Access端口收到不带VLAN标签的数据帧时如何处理？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\06.json"
+        },
+        {
+          "similarity": 0.369,
+          "id": "ne-20260923-054",
+          "question": "交换机收到目的 MAC 地址未知的单播帧，且该帧不是从某端口入站时，通常如何处理？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q046",
+      "source": "questions.json",
+      "question": "Linux用户test要执行一个系统脚本文件，至少需要具备哪些权限？",
+      "matches": [
+        {
+          "similarity": 0.4,
+          "id": "practice-23",
+          "question": "Linux 文件权限 640 表示所有者拥有哪些权限？",
+          "path": "server\\question-banks\\network-engineer\\questions\\original.json"
+        },
+        {
+          "similarity": 0.392,
+          "id": "collection-c11-q003",
+          "question": "在Linux中，用于更改文件权限的命令是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\11.json"
+        },
+        {
+          "similarity": 0.377,
+          "id": "collection-c11-q008",
+          "question": "在Linux中，下列哪个目录包含系统配置文件？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\11.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q047",
+      "source": "questions.json",
+      "question": "下列哪个是IPv6可聚合全球单播地址？",
+      "matches": [
+        {
+          "similarity": 0.625,
+          "id": "collection-c03-q014",
+          "question": "IPv6全球单播地址的前缀是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\03.json"
+        },
+        {
+          "similarity": 0.486,
+          "id": "collection-c03-q027",
+          "question": "下列关于IPv6任播地址的描述，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\03.json"
+        },
+        {
+          "similarity": 0.485,
+          "id": "ne-20260923-119",
+          "question": "IPv6 单播地址 ::1 的用途是什么？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q048",
+      "source": "questions.json",
+      "question": "关于IPv6无状态地址自动配置，以下哪项说法不正确？",
+      "matches": [
+        {
+          "similarity": 0.651,
+          "id": "collection-c03-q035",
+          "question": "下列关于IPv6自动配置的说法，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\03.json"
+        },
+        {
+          "similarity": 0.488,
+          "id": "collection-c03-q025",
+          "question": "下列关于IP地址分类的说法，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\03.json"
+        },
+        {
+          "similarity": 0.465,
+          "id": "collection-c03-q027",
+          "question": "下列关于IPv6任播地址的描述，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\03.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q049",
+      "source": "questions.json",
+      "question": "关于IPv6重复地址检测（DAD），正确的是哪一项？",
+      "matches": [
+        {
+          "similarity": 0.585,
+          "id": "collection-c03-q027",
+          "question": "下列关于IPv6任播地址的描述，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\03.json"
+        },
+        {
+          "similarity": 0.513,
+          "id": "collection-c03-q025",
+          "question": "下列关于IP地址分类的说法，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\03.json"
+        },
+        {
+          "similarity": 0.5,
+          "id": "collection-c07-q032",
+          "question": "下列关于IPv6地址的描述中，错误的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\07.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q050",
+      "source": "questions.json",
+      "question": "IEEE 802.11b/g/n通常共同使用哪个无线频段？",
+      "matches": [
+        {
+          "similarity": 0.391,
+          "id": "ne-20260923-167",
+          "question": "在 802.11 网络中，BSSID 通常用于标识什么？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        },
+        {
+          "similarity": 0.385,
+          "id": "practice-7",
+          "question": "IEEE 802.1Q 帧标签中的 VLAN ID 字段长度是多少位？",
+          "path": "server\\question-banks\\network-engineer\\questions\\original.json"
+        },
+        {
+          "similarity": 0.383,
+          "id": "ne-20260923-130",
+          "question": "IEEE 802.3x PAUSE 帧主要用于哪种控制？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q051",
+      "source": "questions.json",
+      "question": "在2.4GHz Wi-Fi频段中，常用且互不重叠的三个信道组合是哪一个？",
+      "matches": [
+        {
+          "similarity": 0.405,
+          "id": "ne-20260923-170",
+          "question": "在采用 20 MHz 信道的 2.4 GHz WLAN 中，为减少相邻 AP 的同频/邻频干扰，常见的非重叠信道组合示例是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q052",
+      "source": "questions.json",
+      "question": "如图所示两台交换机采用默认配置，PC2和PC4不能通信，最可能的原因是什么？",
+      "matches": [
+        {
+          "similarity": 0.373,
+          "id": "ne-20260923-214",
+          "question": "两台设备均配置 HDLC 封装但因厂商私有扩展不兼容而无法互通，最可能的处理方法是什么？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q053",
+      "source": "questions.json",
+      "question": "针对图示中不同VLAN的主机不能跨交换机通信，最简单的解决方法是什么？",
+      "matches": [
+        {
+          "similarity": 0.348,
+          "id": "ne-20260923-135",
+          "question": "两台交换机的 Trunk 一端允许 VLAN 10、20，另一端只允许 VLAN 10。VLAN 20 的主机跨交换机通信失败，最可能的原因是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q054",
+      "source": "questions.json",
+      "question": "按照IEEE 802.3标准，以太网帧的最大传输效率约为多少？",
+      "matches": [
+        {
+          "similarity": 0.481,
+          "id": "collection-c06-q002",
+          "question": "IEEE 802.1Q标准定义的VLAN标签长度为多少字节？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\06.json"
+        },
+        {
+          "similarity": 0.4,
+          "id": "ne-20260923-132",
+          "question": "在常见 IEEE 802.1Q 标记以太网帧中，TPID 通常取什么十六进制值？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        },
+        {
+          "similarity": 0.4,
+          "id": "practice-7",
+          "question": "IEEE 802.1Q 帧标签中的 VLAN ID 字段长度是多少位？",
+          "path": "server\\question-banks\\network-engineer\\questions\\original.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q055",
+      "source": "questions.json",
+      "question": "关于OSPF中的DR，以下哪项描述错误？",
+      "matches": [
+        {
+          "similarity": 0.562,
+          "id": "collection-c06-q010",
+          "question": "下列关于STP的描述，错误的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\06.json"
+        },
+        {
+          "similarity": 0.486,
+          "id": "collection-c05-q045",
+          "question": "下列关于OSPF和RIP的比较，错误的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\05.json"
+        },
+        {
+          "similarity": 0.485,
+          "id": "collection-c03-q018",
+          "question": "下列关于IPv6的描述，错误的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\03.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q058",
+      "source": "questions.json",
+      "question": "SNMP采用UDP提供数据报服务，主要是因为哪一点？",
+      "matches": [
+        {
+          "similarity": 0.385,
+          "id": "collection-c01-q048",
+          "question": "在OSI参考模型中，提供端到端的可靠数据传输服务的是哪一层？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\01.json"
+        },
+        {
+          "similarity": 0.359,
+          "id": "collection-c04-q033",
+          "question": "UDP数据报的最大长度（含首部）是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\04.json"
+        },
+        {
+          "similarity": 0.34,
+          "id": "ne-20260923-195",
+          "question": "OSPF 中，数据库描述报文 DBD 的主要用途是什么？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q059",
+      "source": "questions.json",
+      "question": "Windows Server 2008上要让一台IIS服务器承载多个域名，最便捷的方法是什么？",
+      "matches": [
+        {
+          "similarity": 0.366,
+          "id": "collection-c11-q020",
+          "question": "在Windows中，Workstation服务的核心功能是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\11.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q060",
+      "source": "questions.json",
+      "question": "BGP协议的主要作用是什么？",
+      "matches": [
+        {
+          "similarity": 0.72,
+          "id": "ne-20260923-088",
+          "question": "ICMP 的主要作用是什么？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        },
+        {
+          "similarity": 0.583,
+          "id": "practice-9",
+          "question": "STP 的主要目的是什么？",
+          "path": "server\\question-banks\\network-engineer\\questions\\original.json"
+        },
+        {
+          "similarity": 0.581,
+          "id": "collection-c05-q046",
+          "question": "BGP协议中，AS_PATH属性的作用是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\05.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q061",
+      "source": "questions.json",
+      "question": "关于RIPv1，以下哪项说法错误？",
+      "matches": [
+        {
+          "similarity": 0.6,
+          "id": "collection-c03-q022",
+          "question": "关于ARP攻击，下列说法错误的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\03.json"
+        },
+        {
+          "similarity": 0.562,
+          "id": "collection-c03-q041",
+          "question": "下列关于ICMPv6的说法，错误的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\03.json"
+        },
+        {
+          "similarity": 0.533,
+          "id": "collection-c03-q033",
+          "question": "下列关于IP组播的说法，错误的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\03.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q062",
+      "source": "questions.json",
+      "question": "100BASE-TX采用4B/5B编码，该编码效率是多少？",
+      "matches": [
+        {
+          "similarity": 0.558,
+          "id": "collection-c02-q007",
+          "question": "以太网10BASE-T采用的编码方式是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\02.json"
+        },
+        {
+          "similarity": 0.462,
+          "id": "collection-c02-q008",
+          "question": "采用4B/5B编码的主要目的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\02.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q064",
+      "source": "questions.json",
+      "question": "要检查网线线序和近端串扰，最合适的测试方法是什么？",
+      "matches": [
+        {
+          "similarity": 0.367,
+          "id": "ne-20260923-324",
+          "question": "抓包时要确认客户端是否发出 DHCP Discover，最合适的工具或方法是什么？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q065",
+      "source": "questions.json",
+      "question": "IntServ是QoS的一种方式，其主要协议是什么？",
+      "matches": [
+        {
+          "similarity": 0.4,
+          "id": "practice-9",
+          "question": "STP 的主要目的是什么？",
+          "path": "server\\question-banks\\network-engineer\\questions\\original.json"
+        },
+        {
+          "similarity": 0.389,
+          "id": "ne-20260923-088",
+          "question": "ICMP 的主要作用是什么？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        },
+        {
+          "similarity": 0.383,
+          "id": "ne-20260923-414",
+          "question": "在 Kubernetes 中，调度器的主要工作是什么？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q072",
+      "source": "questions.json",
+      "question": "In the network layer, the main job is (72) packets from the source to the destination.",
+      "matches": [
+        {
+          "similarity": 0.373,
+          "id": "collection-c09-q015",
+          "question": "tracert（Windows）/traceroute（Linux）命令的作用是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\09.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q073",
+      "source": "questions.json",
+      "question": "Subnet congestion increases delay and (73) for packets.",
+      "matches": [
+        {
+          "similarity": 0.436,
+          "id": "intake-2026-spring-q065-a",
+          "question": "Question 1: Which word completes blank (1)?",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-provided-2026-spring-intake\\01.json"
+        },
+        {
+          "similarity": 0.436,
+          "id": "intake-2026-spring-q065-b",
+          "question": "Question 2: Which word completes blank (2)?",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-provided-2026-spring-intake\\01.json"
+        },
+        {
+          "similarity": 0.436,
+          "id": "intake-2026-spring-q065-c",
+          "question": "Question 3: Which word completes blank (3)?",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-provided-2026-spring-intake\\01.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "sealed-morning-2026h1-q074",
+      "source": "questions.json",
+      "question": "A network congestion-avoidance technique is a (74) policy.",
+      "matches": [
+        {
+          "similarity": 0.35,
+          "id": "intake-2026-spring-q065-d",
+          "question": "Question 4: Which word completes blank (4)?",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-provided-2026-spring-intake\\01.json"
+        },
+        {
+          "similarity": 0.341,
+          "id": "collection-c09-q015",
+          "question": "tracert（Windows）/traceroute（Linux）命令的作用是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\09.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "h1-case-c1-q2",
+      "source": "case-questions.json",
+      "question": "【案例一：企业 RIP/OSPF 网络】禁止 LAN2（192.168.2.0/24）中的主机访问 LAN3（192.168.3.0/24）。应在哪台路由器配置 ACL？请写出关键规则和应用方向。",
+      "matches": [
+        {
+          "similarity": 0.414,
+          "id": "collection-c03-q020",
+          "question": "网络192.168.1.0/24、192.168.2.0/24、192.168.3.0/24可以聚合为？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\03.json"
+        },
+        {
+          "similarity": 0.362,
+          "id": "collection-c07-q028",
+          "question": "将192.168.1.0/24、192.168.2.0/24、192.168.3.0/24、192.168.4.0/24聚合为一条路由，最合适的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\07.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-001-p1-q1",
+      "source": "classic100-candidates.json",
+      "question": "计算机的三大总线不包括（）。",
+      "matches": [
+        {
+          "similarity": 0.455,
+          "id": "collection-c08-q015",
+          "question": "堡垒机的主要作用不包括？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\08.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-003-p1-q3",
+      "source": "classic100-candidates.json",
+      "question": "虚拟内存的主要亻乍用是（）。",
+      "matches": [
+        {
+          "similarity": 0.435,
+          "id": "ne-20260923-088",
+          "question": "ICMP 的主要作用是什么？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        },
+        {
+          "similarity": 0.435,
+          "id": "ne-20260923-415",
+          "question": "容器镜像的主要用途是什么？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        },
+        {
+          "similarity": 0.375,
+          "id": "ne-20260923-413",
+          "question": "相较于虚拟机，容器通常更轻量的主要原因是什么？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-004-p3-q1",
+      "source": "classic100-candidates.json",
+      "question": "若16进制信号的信号速率是6000Baud,则信道的数据速率为（",
+      "matches": [
+        {
+          "similarity": 0.806,
+          "id": "collection-c02-q002",
+          "question": "若16进制信号的码元速率是6000 Baud，则数据速率为多少kb/s？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\02.json"
+        },
+        {
+          "similarity": 0.689,
+          "id": "collection-c02-q003",
+          "question": "若8进制信号的码元速率是4800 Baud，则数据速率为多少kb/s？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\02.json"
+        },
+        {
+          "similarity": 0.492,
+          "id": "collection-c02-q016",
+          "question": "某通信系统采用QPSK调制，码元速率为1000 Baud，数据速率为？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\02.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-005-p3-q2",
+      "source": "classic100-candidates.json",
+      "question": "下斤示的调制方式是（），若载波频率为2400Hz,则码元速率为（）。1",
+      "matches": [
+        {
+          "similarity": 0.429,
+          "id": "collection-c02-q017",
+          "question": "已知采用8PSK调制，数据速率为9000 bps，则码元速率为？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\02.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-006-p3-q3",
+      "source": "classic100-candidates.json",
+      "question": "若8进制信号的信号速率是4800Baud，则信道的数据速率为（A9．6B14．4C19．2D38，4",
+      "matches": [
+        {
+          "similarity": 0.667,
+          "id": "collection-c02-q003",
+          "question": "若8进制信号的码元速率是4800 Baud，则数据速率为多少kb/s？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\02.json"
+        },
+        {
+          "similarity": 0.579,
+          "id": "collection-c02-q002",
+          "question": "若16进制信号的码元速率是6000 Baud，则数据速率为多少kb/s？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\02.json"
+        },
+        {
+          "similarity": 0.373,
+          "id": "collection-c02-q016",
+          "question": "某通信系统采用QPSK调制，码元速率为1000 Baud，数据速率为？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\02.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-007-p4-q4",
+      "source": "classic100-candidates.json",
+      "question": "海明码是一种纠错码，由k位信息位和r亻立监督亻立构成码长为n的编码(n=k+r)。假设信息位k=4,若需要纠正1位错误时，则监督位r最少应为（）。C.2D.3",
+      "matches": [
+        {
+          "similarity": 0.596,
+          "id": "collection-c02-q006",
+          "question": "海明码是一种纠错码，若信息位k=4，纠正1位错误，监督位r最少应为？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\02.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-009-p5-q2",
+      "source": "classic100-candidates.json",
+      "question": "在ISO/OSI参考模型中，（）层可以完成流量控错误检测。",
+      "matches": [
+        {
+          "similarity": 0.941,
+          "id": "collection-c01-q012",
+          "question": "在ISO/OSI参考模型中，哪层可以完成流量控制和错误检测？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\01.json"
+        },
+        {
+          "similarity": 0.476,
+          "id": "collection-c01-q019",
+          "question": "在OSI参考模型中，会话层的主要功能是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\01.json"
+        },
+        {
+          "similarity": 0.476,
+          "id": "collection-c01-q031",
+          "question": "在OSI参考模型中，表示层的功能不包括？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\01.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-010-p8-q1",
+      "source": "classic100-candidates.json",
+      "question": "在CSMA/CD以太网中，数据速率为100Mb/s,网段长2km,信号速率为200m/us，则此网络的最小帧长是（）比特。A1000B2000C10000D200000",
+      "matches": [
+        {
+          "similarity": 0.707,
+          "id": "collection-c02-q022",
+          "question": "在CSMA/CD以太网中，数据速率100Mb/s，网段长2km，信号速率200m/μs，最小帧长是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\02.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-011-p8-q3",
+      "source": "classic100-candidates.json",
+      "question": "下列关于STP生成树的说氵去正确的是（）。",
+      "matches": [
+        {
+          "similarity": 0.722,
+          "id": "collection-c06-q034",
+          "question": "下列关于生成树协议版本的说法，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\06.json"
+        },
+        {
+          "similarity": 0.706,
+          "id": "collection-c10-q041",
+          "question": "下列关于NTP协议的说法，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\10.json"
+        },
+        {
+          "similarity": 0.688,
+          "id": "collection-c08-q019",
+          "question": "下列关于VPN的说法，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\08.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-012-p9-q4",
+      "source": "classic100-candidates.json",
+      "question": "在奂机上实现VLAN划分，以下哪一种属于静态的VLAN划分（",
+      "matches": [
+        {
+          "similarity": 0.361,
+          "id": "collection-c06-q044",
+          "question": "在交换机上配置VLAN时，命令vlan batch 10 20 30的作用是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\06.json"
+        },
+        {
+          "similarity": 0.341,
+          "id": "practice-17",
+          "question": "以下哪一种属于对称加密算法？",
+          "path": "server\\question-banks\\network-engineer\\questions\\original.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-013-p9-q5",
+      "source": "classic100-candidates.json",
+      "question": "VLAN帧的最小帧长是（）字节，其中衍帧优先级的字段是（）",
+      "matches": [
+        {
+          "similarity": 0.421,
+          "id": "collection-c02-q023",
+          "question": "以太网帧的最小长度是多少字节？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\02.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-017-p11-q9",
+      "source": "classic100-candidates.json",
+      "question": "以下关于无线漫游的去中，错误的是（",
+      "matches": [
+        {
+          "similarity": 0.667,
+          "id": "collection-c02-q010",
+          "question": "以下关于CRC的描述中，错误的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\02.json"
+        },
+        {
+          "similarity": 0.667,
+          "id": "collection-c06-q021",
+          "question": "下列关于无线加密的说法，错误的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\06.json"
+        },
+        {
+          "similarity": 0.6,
+          "id": "collection-c06-q048",
+          "question": "下列关于综合布线的说法，错误的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\06.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-018-p11-q10",
+      "source": "classic100-candidates.json",
+      "question": "以下关于W旧6的说法中，错误的是（）",
+      "matches": [
+        {
+          "similarity": 0.733,
+          "id": "collection-c08-q023",
+          "question": "下列关于WPA2的说法，错误的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\08.json"
+        },
+        {
+          "similarity": 0.69,
+          "id": "collection-c01-q040",
+          "question": "下列关于传输层的说法，错误的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\01.json"
+        },
+        {
+          "similarity": 0.69,
+          "id": "collection-c08-q042",
+          "question": "下列关于VPN的说法，错误的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\08.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-020-p12-q12",
+      "source": "classic100-candidates.json",
+      "question": "在5G技术中，（）特性允许多个设备同时连接到网络并获得高速数据传输。A、网络切片B、见模多输入多输出C、正交频分多址D、波束成形",
+      "matches": [
+        {
+          "similarity": 0.682,
+          "id": "collection-c02-q047",
+          "question": "在5G技术中，哪个特性允许多个设备同时连接到网络并获得高速数据传输？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\02.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-021-p13-q1",
+      "source": "classic100-candidates.json",
+      "question": "若数据链路层采用回退N帧(GBN)协议，发送窗口的大小为3乙则至少需要（）序列号空间。",
+      "matches": [
+        {
+          "similarity": 0.411,
+          "id": "intake-2026-spring-q018",
+          "question": "数据链路层采用后退N帧（GBN）协议，采用累计确认机制，发送方已发送编号为0～7的帧。当计时器超时，若发送方只收到0、2、3号帧的确认，则发送方需要重发的帧数是（）。",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-provided-2026-spring-intake\\01.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-023-p13-q3",
+      "source": "classic100-candidates.json",
+      "question": "在5G网络中采用毫米波频段的优势是（）。",
+      "matches": [
+        {
+          "similarity": 0.408,
+          "id": "intake-2026-spring-q017",
+          "question": "在5G网络架构中，网络切片（Network Slicing）的主要优势是（）。",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-provided-2026-spring-intake\\01.json"
+        },
+        {
+          "similarity": 0.4,
+          "id": "intake-2026-spring-q059",
+          "question": "4G网络中主要运用的技术有（）。",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-provided-2026-spring-intake\\01.json"
+        },
+        {
+          "similarity": 0.387,
+          "id": "ne-20260923-425",
+          "question": "5G 网络切片的主要目的是什么？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-024-p14-q4",
+      "source": "classic100-candidates.json",
+      "question": "在光网络中，OADM（光分插复用器）设备的主要功能是（）。",
+      "matches": [
+        {
+          "similarity": 0.4,
+          "id": "practice-18",
+          "question": "在以太网 IPv4 网络中，ARP 的主要作用是什么？",
+          "path": "server\\question-banks\\network-engineer\\questions\\original.json"
+        },
+        {
+          "similarity": 0.39,
+          "id": "ne-20260923-216",
+          "question": "帧中继网络中的 LMI 主要承担什么功能？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        },
+        {
+          "similarity": 0.39,
+          "id": "collection-c01-q019",
+          "question": "在OSI参考模型中，会话层的主要功能是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\01.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-026-p16-q1",
+      "source": "classic100-candidates.json",
+      "question": "在TCP三次握手中，客户端发送的第一个SYN报文中的序列号字段是（",
+      "matches": [
+        {
+          "similarity": 0.931,
+          "id": "collection-c04-q002",
+          "question": "TCP三次握手中，客户端发送的第一个SYN报文的序列号是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\04.json"
+        },
+        {
+          "similarity": 0.526,
+          "id": "collection-c10-q005",
+          "question": "DHCP协议中，客户端首次接入网络时发送的第一个报文是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\10.json"
+        },
+        {
+          "similarity": 0.473,
+          "id": "collection-c04-q003",
+          "question": "TCP三次握手中，第二次握手（服务器→客户端）的标志位是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\04.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-029-p18-q26",
+      "source": "classic100-candidates.json",
+      "question": "132．102．57．0/26汇聚成一个超网，得到的地址是",
+      "matches": [
+        {
+          "similarity": 0.49,
+          "id": "subnet-22",
+          "question": "主机 10.22.10.182/26 所在子网的广播地址是什么？",
+          "path": "server\\question-banks\\network-engineer\\questions\\original.json"
+        },
+        {
+          "similarity": 0.468,
+          "id": "subnet-6",
+          "question": "主机 10.6.10.70/26 所在子网的网络地址是什么？",
+          "path": "server\\question-banks\\network-engineer\\questions\\original.json"
+        },
+        {
+          "similarity": 0.458,
+          "id": "subnet-1",
+          "question": "主机 172.1.10.35/25 所在子网的广播地址是什么？",
+          "path": "server\\question-banks\\network-engineer\\questions\\original.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-030-p18-q5",
+      "source": "classic100-candidates.json",
+      "question": "以下地址中属于192，168，15，19/28的主忄甩也址是（",
+      "matches": [
+        {
+          "similarity": 0.52,
+          "id": "collection-c03-q019",
+          "question": "IPv4地址192.168.10.215/27的网络号是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\03.json"
+        },
+        {
+          "similarity": 0.464,
+          "id": "collection-c07-q003",
+          "question": "IP地址192.168.10.70，子网掩码255.255.255.192，该IP所在子网的网络地址是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\07.json"
+        },
+        {
+          "similarity": 0.429,
+          "id": "intake-2026-spring-q034",
+          "question": "在浏览器地址栏输入192.168.1.1进行访问时，首先执行的操作是（）。",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-provided-2026-spring-intake\\01.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-031-p19-q6",
+      "source": "classic100-candidates.json",
+      "question": "子网掩码为255，255，1280下列哪个|P地址与其它三个不属于同一网段（",
+      "matches": [
+        {
+          "similarity": 0.466,
+          "id": "collection-c07-q013",
+          "question": "子网掩码255.255.255.240可以划分多少个子网（按C类地址）？每个子网可用主机数？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\07.json"
+        },
+        {
+          "similarity": 0.438,
+          "id": "collection-c03-q016",
+          "question": "子网掩码255.255.255.224可以划分多少个子网（按C类地址）？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\03.json"
+        },
+        {
+          "similarity": 0.423,
+          "id": "collection-c07-q004",
+          "question": "子网掩码255.255.255.224，IP地址10.10.1.33所在子网的广播地址是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\07.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-032-p19-q7",
+      "source": "classic100-candidates.json",
+      "question": "下面的|P地址中，能够作为主扌甩也址的是（",
+      "matches": [
+        {
+          "similarity": 0.647,
+          "id": "collection-c03-q021",
+          "question": "下列IP地址中，不能作为源地址的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\03.json"
+        },
+        {
+          "similarity": 0.485,
+          "id": "collection-c03-q004",
+          "question": "下列IP地址中，属于私有地址的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\03.json"
+        },
+        {
+          "similarity": 0.438,
+          "id": "collection-c07-q009",
+          "question": "下列IP地址中，属于网络号的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\07.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-033-p19-q8",
+      "source": "classic100-candidates.json",
+      "question": "一个IP报文经过路由器处理后，若TTL字段值变为0，则路由器会进行的操作是（",
+      "matches": [
+        {
+          "similarity": 0.407,
+          "id": "ne-20260923-075",
+          "question": "IPv4 路由器转发数据报时，通常如何处理 TTL 字段？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        },
+        {
+          "similarity": 0.387,
+          "id": "intake-2026-spring-q029",
+          "question": "IPv6报文中的扩展首部中，需要途经的每个路由器处理的是（）。",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-provided-2026-spring-intake\\01.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-036-p20-q11",
+      "source": "classic100-candidates.json",
+      "question": "ARP是（）的协议，ARP响应是采用（",
+      "matches": [
+        {
+          "similarity": 0.364,
+          "id": "collection-c01-q005",
+          "question": "在TCP/IP网络中，ARP协议的作用是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\01.json"
+        },
+        {
+          "similarity": 0.364,
+          "id": "collection-c05-q046",
+          "question": "BGP协议中，AS_PATH属性的作用是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\05.json"
+        },
+        {
+          "similarity": 0.353,
+          "id": "collection-c03-q043",
+          "question": "在TCP/IP协议栈中，ARP协议的作用是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\03.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-037-p21-q12",
+      "source": "classic100-candidates.json",
+      "question": "使用Traceroute命令时由中间路由器返回的℃MP超时报文中Type和Code分别是（）",
+      "matches": [
+        {
+          "similarity": 0.495,
+          "id": "ne-20260923-084",
+          "question": "使用传统 traceroute 探测路径时，探测报文的 TTL 逐步耗尽后，沿途路由器通常返回哪类 ICMP 报文？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        },
+        {
+          "similarity": 0.354,
+          "id": "collection-c09-q015",
+          "question": "tracert（Windows）/traceroute（Linux）命令的作用是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\09.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-038-p21-q13",
+      "source": "classic100-candidates.json",
+      "question": "|4首部中首部长度字段(IHL)的值最小为（），为了防止IP数据报在网络中无限制转发，IPv4首部中通过（）字段加以控制。C10D15AURGBOffsetCMoreDTTL",
+      "matches": [
+        {
+          "similarity": 0.358,
+          "id": "collection-c03-q010",
+          "question": "为防止IP数据包在网络中无休止转发，IP包头中设置了什么字段？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\03.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-040-p22-q14",
+      "source": "classic100-candidates.json",
+      "question": "在TCP协议连接释放过程中，请求释放妾的一方（客户端）发送连接释放报文段，该报文段应该将（）",
+      "matches": [
+        {
+          "similarity": 0.364,
+          "id": "collection-c10-q005",
+          "question": "DHCP协议中，客户端首次接入网络时发送的第一个报文是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\10.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-042-p23-q17",
+      "source": "classic100-candidates.json",
+      "question": "以下哪个字段是UDP有，但TCP首部中没有的（",
+      "matches": [
+        {
+          "similarity": 0.513,
+          "id": "practice-6",
+          "question": "下列哪项是 UDP 相比 TCP 的典型特征？",
+          "path": "server\\question-banks\\network-engineer\\questions\\original.json"
+        },
+        {
+          "similarity": 0.4,
+          "id": "collection-c04-q010",
+          "question": "TCP首部中，窗口字段的作用是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\04.json"
+        },
+        {
+          "similarity": 0.4,
+          "id": "collection-c04-q012",
+          "question": "TCP首部中，序号字段的作用是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\04.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-044-p24-q19",
+      "source": "classic100-candidates.json",
+      "question": "浏览器向Web服务器发送了一个报文，其TCP段不可能出现的端口组合是",
+      "matches": [
+        {
+          "similarity": 0.343,
+          "id": "ne-20260923-059",
+          "question": "两个不同厂商的 Web 浏览器和 Web 服务器能够互通，分层模型最关键的作用是什么？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        },
+        {
+          "similarity": 0.343,
+          "id": "ne-20260923-242",
+          "question": "只允许办公网访问内部 Web 服务器的 TCP 443 端口，哪种 ACL 匹配粒度更合适？",
+          "path": "server\\question-banks\\network-engineer\\questions\\network-engineer-supplement-20260923.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-045-p24-q20",
+      "source": "classic100-candidates.json",
+      "question": "DNS可以采用的传输层协议是（",
+      "matches": [
+        {
+          "similarity": 0.621,
+          "id": "collection-c09-q001",
+          "question": "SNMP协议使用的传输层协议是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\09.json"
+        },
+        {
+          "similarity": 0.5,
+          "id": "collection-c05-q010",
+          "question": "RIP协议使用的传输层协议和端口号是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\05.json"
+        },
+        {
+          "similarity": 0.5,
+          "id": "collection-c05-q039",
+          "question": "BGP协议使用的传输层协议和端口号是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\05.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-046-p25-q21",
+      "source": "classic100-candidates.json",
+      "question": "在DNS服务器中的（",
+      "matches": [
+        {
+          "similarity": 0.348,
+          "id": "collection-c10-q017",
+          "question": "下列关于DNS的说法，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\10.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-049-p25-q24",
+      "source": "classic100-candidates.json",
+      "question": "在SDN体系中，OpenF|ow协议主要用于（）。希赛网一一专业的在线职业教育平台客服热线400·111·981125/50\n希真",
+      "matches": [
+        {
+          "similarity": 0.519,
+          "id": "intake-2026-spring-q036",
+          "question": "在SDN体系中，OpenFlow协议主要用于（）。",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-provided-2026-spring-intake\\01.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-051-p26-q26",
+      "source": "classic100-candidates.json",
+      "question": "下列端口号中，（）是电子邮件发送协议默认的服务端口号。A23B．25C.110D，143",
+      "matches": [
+        {
+          "similarity": 0.351,
+          "id": "collection-c10-q001",
+          "question": "电子邮件所使用的SMTP协议的默认端口为？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\10.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-053-p28-q1",
+      "source": "classic100-candidates.json",
+      "question": "在Windows系统中通过（）查看本地DNS缓存。",
+      "matches": [
+        {
+          "similarity": 0.727,
+          "id": "collection-c03-q032",
+          "question": "在Windows中，清除本地DNS缓存的命令是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\03.json"
+        },
+        {
+          "similarity": 0.578,
+          "id": "collection-c09-q044",
+          "question": "在Windows中，查看本机IP地址配置的命令是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\09.json"
+        },
+        {
+          "similarity": 0.5,
+          "id": "collection-c09-q049",
+          "question": "在Windows中，查看网络连接和端口的命令是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\09.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-057-p29-q5",
+      "source": "classic100-candidates.json",
+      "question": "缺省状态下，SNMP协议代理进程亻吏用（）端口向NMS发送告警信息。",
+      "matches": [
+        {
+          "similarity": 0.441,
+          "id": "collection-c09-q002",
+          "question": "SNMP协议中，用于代理主动向管理站发送紧急告警的报文类型是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\09.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-058-p30-q7",
+      "source": "classic100-candidates.json",
+      "question": "某企业有90TB的数据存储需求，并配置一个RAID组，假设采用丨D6，并配置1块全局热备盘，则至少需要（）块单块容量为5TB的磁盘。",
+      "matches": [
+        {
+          "similarity": 0.358,
+          "id": "intake-2026-spring-q041",
+          "question": "某存储系统规划配置25块8TB磁盘，创建2个RAID6组，配置1块热备盘，则该存储系统实际存储容量是（）。",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-provided-2026-spring-intake\\01.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-059-p30-q8",
+      "source": "classic100-candidates.json",
+      "question": "下列关于SNMP的说氵去中正确的是（）。",
+      "matches": [
+        {
+          "similarity": 0.812,
+          "id": "collection-c09-q040",
+          "question": "下列关于SNMP的描述，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\09.json"
+        },
+        {
+          "similarity": 0.8,
+          "id": "collection-c09-q009",
+          "question": "下列关于SNMP端口号的说法，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\09.json"
+        },
+        {
+          "similarity": 0.778,
+          "id": "collection-c09-q017",
+          "question": "下列关于SNMP轮询机制的说法，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\09.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-060-p31-q9",
+      "source": "classic100-candidates.json",
+      "question": "下列关于RAID的说氵去正确的是（）。",
+      "matches": [
+        {
+          "similarity": 0.733,
+          "id": "collection-c10-q017",
+          "question": "下列关于DNS的说法，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\10.json"
+        },
+        {
+          "similarity": 0.733,
+          "id": "collection-c10-q050",
+          "question": "下列关于CDN的说法，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\10.json"
+        },
+        {
+          "similarity": 0.71,
+          "id": "collection-c07-q008",
+          "question": "下列关于CIDR的描述，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\07.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-063-p32-q3",
+      "source": "classic100-candidates.json",
+      "question": "在短时间内向网络中的某台服务器发送大量无娩接请求，导致服务器无氵去提亻共正常访问服务，这内部资料，禁止传播属于非对称加密算法。希赛网一一专业的在线职业教育平台客服热线400·111·981132/50\n内部资料，禁止传播种攻击行为是破坏了（",
+      "matches": [
+        {
+          "similarity": 0.566,
+          "id": "intake-2026-spring-q043",
+          "question": "在短时间内向网络中的某台服务器发送大量无效连接请求，导致服务器无法提供正常访问服务，这种攻击行为破坏了（）。",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-provided-2026-spring-intake\\01.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-065-p33-q5",
+      "source": "classic100-candidates.json",
+      "question": "关于HTTPS的描述错误的是（）",
+      "matches": [
+        {
+          "similarity": 0.786,
+          "id": "collection-c06-q010",
+          "question": "下列关于STP的描述，错误的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\06.json"
+        },
+        {
+          "similarity": 0.69,
+          "id": "collection-c03-q018",
+          "question": "下列关于IPv6的描述，错误的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\03.json"
+        },
+        {
+          "similarity": 0.69,
+          "id": "collection-c06-q016",
+          "question": "下列关于GVRP的描述，错误的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\06.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-066-p33-q6",
+      "source": "classic100-candidates.json",
+      "question": "下列协议中与电子邮件安全无关的是（）",
+      "matches": [
+        {
+          "similarity": 0.533,
+          "id": "intake-2026-spring-q047",
+          "question": "下列（ ）协议可以加密传输电子邮件。",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-provided-2026-spring-intake\\01.json"
+        },
+        {
+          "similarity": 0.5,
+          "id": "intake-2026-spring-q057",
+          "question": "下列概念中，与操作系统并发无关的是（）。",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-provided-2026-spring-intake\\01.json"
+        },
+        {
+          "similarity": 0.483,
+          "id": "collection-c01-q024",
+          "question": "下列协议中，工作在网络层的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\01.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-070-p35-q10",
+      "source": "classic100-candidates.json",
+      "question": "以下安全性最好的是（）",
+      "matches": [
+        {
+          "similarity": 0.455,
+          "id": "collection-c02-q041",
+          "question": "以下调制中，调制效率最高的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\02.json"
+        },
+        {
+          "similarity": 0.444,
+          "id": "intake-2026-spring-q054",
+          "question": "以下说法不正确的是（）。",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-provided-2026-spring-intake\\01.json"
+        },
+        {
+          "similarity": 0.417,
+          "id": "collection-c02-q046",
+          "question": "以下存储介质中，读写速度最快的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\02.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-071-p36-q1",
+      "source": "classic100-candidates.json",
+      "question": "下面的丞中属于工作区子系统区域范围的是0",
+      "matches": [
+        {
+          "similarity": 0.389,
+          "id": "intake-2026-spring-q057",
+          "question": "下列概念中，与操作系统并发无关的是（）。",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-provided-2026-spring-intake\\01.json"
+        },
+        {
+          "similarity": 0.364,
+          "id": "collection-c01-q024",
+          "question": "下列协议中，工作在网络层的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\01.json"
+        },
+        {
+          "similarity": 0.353,
+          "id": "collection-c07-q009",
+          "question": "下列IP地址中，属于网络号的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\07.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-072-p36-q2",
+      "source": "classic100-candidates.json",
+      "question": "以下关于网络冗余设计的叙述中，错误的是（）",
+      "matches": [
+        {
+          "similarity": 0.667,
+          "id": "collection-c02-q010",
+          "question": "以下关于CRC的描述中，错误的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\02.json"
+        },
+        {
+          "similarity": 0.606,
+          "id": "collection-c01-q009",
+          "question": "以下关于UDP的叙述中，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\01.json"
+        },
+        {
+          "similarity": 0.588,
+          "id": "collection-c08-q001",
+          "question": "下列关于网络防火墙的说法，错误的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\08.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-075-p39-q1",
+      "source": "classic100-candidates.json",
+      "question": "OSPF网络可戏刂分为多个区域(area)，下面关于区域的描述中错误的是（）",
+      "matches": [
+        {
+          "similarity": 0.462,
+          "id": "collection-c05-q037",
+          "question": "OSPF协议中，区域0（Area 0）的作用是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\05.json"
+        },
+        {
+          "similarity": 0.458,
+          "id": "collection-c02-q010",
+          "question": "以下关于CRC的描述中，错误的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\02.json"
+        },
+        {
+          "similarity": 0.431,
+          "id": "collection-c02-q029",
+          "question": "下列关于曼彻斯特编码的描述中，错误的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\02.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-077-p40-q3",
+      "source": "classic100-candidates.json",
+      "question": "OSPF协议中DR的作用范围是（）",
+      "matches": [
+        {
+          "similarity": 0.706,
+          "id": "collection-c05-q037",
+          "question": "OSPF协议中，区域0（Area 0）的作用是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\05.json"
+        },
+        {
+          "similarity": 0.686,
+          "id": "collection-c05-q029",
+          "question": "OSPF协议中，Network命令的作用是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\05.json"
+        },
+        {
+          "similarity": 0.667,
+          "id": "collection-c05-q011",
+          "question": "OSPF协议中，ABR（区域边界路由器）的作用是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\05.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-079-p41-q5",
+      "source": "classic100-candidates.json",
+      "question": "某网络管理员在配置奂机时，执行了port-securityenable命令。该命令的作用是（",
+      "matches": [
+        {
+          "similarity": 0.406,
+          "id": "collection-c06-q015",
+          "question": "下列关于端口安全（Port Security）的描述，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\06.json"
+        },
+        {
+          "similarity": 0.385,
+          "id": "collection-c06-q037",
+          "question": "在交换机上执行undo mac-address blackhole命令，其作用是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\06.json"
+        },
+        {
+          "similarity": 0.342,
+          "id": "collection-c09-q019",
+          "question": "下列关于SNMPv3安全级别（Security Level）的说法，错误的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\09.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-081-p42-q7",
+      "source": "classic100-candidates.json",
+      "question": "网络工程师计划配置BGP路由聚合，将192．168℃．0/24至192．16831．0/24的路由聚合为192．168．0．0/19发布，并检测路由环路，下列命令中可实现要求的是（）。",
+      "matches": [
+        {
+          "similarity": 0.481,
+          "id": "collection-c07-q028",
+          "question": "将192.168.1.0/24、192.168.2.0/24、192.168.3.0/24、192.168.4.0/24聚合为一条路由，最合适的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\07.json"
+        },
+        {
+          "similarity": 0.425,
+          "id": "collection-c03-q020",
+          "question": "网络192.168.1.0/24、192.168.2.0/24、192.168.3.0/24可以聚合为？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\03.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-085-p43-q11",
+      "source": "classic100-candidates.json",
+      "question": "以下关于IS-IS路由协议的说法中，错误的是（",
+      "matches": [
+        {
+          "similarity": 0.7,
+          "id": "collection-c05-q031",
+          "question": "下列关于OSPF和IS-IS的说法，错误的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\05.json"
+        },
+        {
+          "similarity": 0.686,
+          "id": "collection-c07-q036",
+          "question": "下列关于默认路由的说法，错误的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\07.json"
+        },
+        {
+          "similarity": 0.684,
+          "id": "collection-c01-q006",
+          "question": "以下关于ICMP协议的说法中，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\01.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-089-p45-q15",
+      "source": "classic100-candidates.json",
+      "question": "下面哪一项不属于SATAP隧道的优点（",
+      "matches": [
+        {
+          "similarity": 0.545,
+          "id": "intake-2026-spring-q002",
+          "question": "下列哪一项不属于RISC的特征（）。",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-provided-2026-spring-intake\\01.json"
+        },
+        {
+          "similarity": 0.389,
+          "id": "collection-c08-q006",
+          "question": "下列哪项不属于信息传输安全的主要措施？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\08.json"
+        },
+        {
+          "similarity": 0.375,
+          "id": "collection-c06-q010",
+          "question": "下列关于STP的描述，错误的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\06.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-090-p45-q16",
+      "source": "classic100-candidates.json",
+      "question": "下列有关路由引入的说法错误的是（）",
+      "matches": [
+        {
+          "similarity": 0.8,
+          "id": "collection-c07-q036",
+          "question": "下列关于默认路由的说法，错误的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\07.json"
+        },
+        {
+          "similarity": 0.69,
+          "id": "collection-c01-q040",
+          "question": "下列关于传输层的说法，错误的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\01.json"
+        },
+        {
+          "similarity": 0.69,
+          "id": "collection-c05-q025",
+          "question": "下列关于路由表的说法，正确的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\05.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-092-p45-q18",
+      "source": "classic100-candidates.json",
+      "question": "运行OSPF协议的路由器每（）秒钟向它的各个接口发送Hello分组，告知邻居它的存在。",
+      "matches": [
+        {
+          "similarity": 0.421,
+          "id": "collection-c05-q043",
+          "question": "OSPF协议中，Hello报文的作用是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\05.json"
+        },
+        {
+          "similarity": 0.407,
+          "id": "collection-c05-q007",
+          "question": "OSPF协议中，Hello报文的主要作用是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\05.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-093-p46-q19",
+      "source": "classic100-candidates.json",
+      "question": "OSPF路由协议使用（）来维护邻居关系",
+      "matches": [
+        {
+          "similarity": 0.4,
+          "id": "collection-c05-q043",
+          "question": "OSPF协议中，Hello报文的作用是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\05.json"
+        },
+        {
+          "similarity": 0.4,
+          "id": "intake-2026-spring-q055",
+          "question": "OSPF协议对跳数的限制是（）。",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-provided-2026-spring-intake\\01.json"
+        },
+        {
+          "similarity": 0.389,
+          "id": "collection-c05-q037",
+          "question": "OSPF协议中，区域0（Area 0）的作用是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\05.json"
+        }
+      ]
+    },
+    {
+      "incomingId": "classic-seq-094-p46-q20",
+      "source": "classic100-candidates.json",
+      "question": "下列选项中，可防止BGP路由环路的是（）。",
+      "matches": [
+        {
+          "similarity": 0.474,
+          "id": "collection-c05-q006",
+          "question": "RIP协议中，防止路由环路的方法\"水平分割\"是指？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\05.json"
+        },
+        {
+          "similarity": 0.424,
+          "id": "collection-c05-q005",
+          "question": "下列关于BGP协议的描述，错误的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\05.json"
+        },
+        {
+          "similarity": 0.412,
+          "id": "collection-c05-q009",
+          "question": "下列路由协议中，属于链路状态协议的是？",
+          "path": "server\\question-banks\\network-engineer\\questions\\user-collection\\05.json"
+        }
+      ]
+    }
+  ],
+  "internalIncomingDuplicates": [
+    {
+      "later": "sealed-morning-2026h1-q015",
+      "earlier": "sealed-morning-2026h1-q002",
+      "similarity": 0.848
+    }
+  ]
+}

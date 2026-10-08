@@ -1,0 +1,66 @@
+{
+  "title": "2026上半年网络工程师案例模拟题与押题密卷下午卷 OCR 导入稿",
+  "status": "local-draft",
+  "sourceFiles": {
+    "case": {
+      "file": "2026年上半年网络工程师案例模拟题合集.pdf",
+      "path": "E:\\BaiduNetdiskDownload\\3.模拟练习题\\2026年上半年网络工程师案例模拟题合集.pdf",
+      "sha256": "A8D07A1BFB8E5672255608700C0BA26FD91C347FC6997BEAA27FCF093E4D8994"
+    },
+    "classic": {
+      "file": "2026年上半年网络工程师经典100题.pdf",
+      "path": "E:\\BaiduNetdiskDownload\\3.模拟练习题\\2026年上半年网络工程师经典100题.pdf",
+      "sha256": "E380D07B3DF74546033707B83CB0DF3EC87A0688F5B48260651211A00EFF53E1"
+    },
+    "afternoon": {
+      "file": "押题密卷下午题.pdf",
+      "path": "E:\\BaiduNetdiskDownload\\3.模拟练习题\\模拟题+练习题\\押题密卷下午题.pdf",
+      "sha256": "1EF6373504D54576EF08E825B639B02CEA2981B0FED3185AC896B04D5367C325"
+    },
+    "afternoon_analysis": {
+      "file": "押题密卷下午题解析.pdf",
+      "path": "E:\\BaiduNetdiskDownload\\3.模拟练习题\\模拟题+练习题\\押题密卷下午题解析.pdf",
+      "sha256": "23D9F89468AE92E0EEDC3B7A7CD7C7592C0D7BDC5849E53EEDBBCBC46F48974A"
+    }
+  },
+  "questionCount": 29,
+  "typeCounts": {
+    "short_answer": 29
+  },
+  "figureMappings": [
+    {
+      "file": "case1",
+      "url": "/question-images/network-engineer/2026-h1-case-papers/case1-routing.png"
+    },
+    {
+      "file": "case2",
+      "url": "/question-images/network-engineer/2026-h1-case-papers/case2-vrrp.png"
+    },
+    {
+      "file": "case3",
+      "url": "/question-images/network-engineer/2026-h1-case-papers/case3-campus-security.png"
+    },
+    {
+      "file": "case4",
+      "url": "/question-images/network-engineer/2026-h1-case-papers/case4-6to4.png"
+    },
+    {
+      "file": "wlan",
+      "url": "/question-images/network-engineer/2026-h1-case-papers/afternoon-wlan.png"
+    },
+    {
+      "file": "dhcp",
+      "url": "/question-images/network-engineer/2026-h1-case-papers/afternoon-campus-dhcp.png"
+    },
+    {
+      "file": "ipsec",
+      "url": "/question-images/network-engineer/2026-h1-case-papers/afternoon-ipsec.png"
+    }
+  ],
+  "notes": [
+    "按现有知识点归类；案例分问拆成可练习的简答题。",
+    "来源出版方与官方性未核实；答案按配套解析整理。",
+    "IPsec 题干截图含预共享密钥，导入稿未收录该密钥值。",
+    "仍需与现有题库做相似题复核，并校对网络设备命令及 OCR 后再加入正式题库。"
+  ]
+}

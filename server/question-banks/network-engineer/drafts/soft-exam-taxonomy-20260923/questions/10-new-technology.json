@@ -1,0 +1,632 @@
+[
+  {
+    "id": "ne-draft-20260923-401",
+    "type": "single_choice",
+    "question": "SDN 架构将控制平面与数据转发平面解耦，控制器的核心职责是什么？",
+    "options": {
+      "A": "取代所有服务器操作系统",
+      "B": "替代所有物理端口收发比特",
+      "C": "为终端显示网页",
+      "D": "集中计算或下发网络转发策略"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "SDN 控制器管理网络状态并向转发设备下发规则；设备数据平面仍负责实际转发报文。",
+    "chapter": "新技术",
+    "knowledgePoint": "SDN 与 NFV",
+    "difficulty": "easy",
+    "tags": [
+      "SDN 与 NFV"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-402",
+    "type": "single_choice",
+    "question": "在常见 SDN 架构中，控制器与网络应用之间供应用提出策略需求的接口通常称为？",
+    "options": {
+      "A": "串口控制台",
+      "B": "北向接口/API",
+      "C": "电源接口",
+      "D": "物理层接口"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "北向接口面向网络应用或编排系统提供抽象和编程能力；控制器面向交换设备的接口通常称为南向接口。",
+    "chapter": "新技术",
+    "knowledgePoint": "SDN 与 NFV",
+    "difficulty": "medium",
+    "tags": [
+      "SDN 与 NFV"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-403",
+    "type": "single_choice",
+    "question": "SDN 控制器向可编程交换机下发匹配字段和转发动作规则，交换机通常把规则存放在哪里？",
+    "options": {
+      "A": "DHCP 租约表",
+      "B": "DNS 区域文件",
+      "C": "文件系统 inode 表",
+      "D": "流表"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "SDN 数据平面设备依据流表中的匹配条件和动作处理报文；控制器可按策略新增、修改或删除流项。",
+    "chapter": "新技术",
+    "knowledgePoint": "SDN 与 NFV",
+    "difficulty": "medium",
+    "tags": [
+      "SDN 与 NFV"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-404",
+    "type": "single_choice",
+    "question": "OpenFlow 在 SDN 网络中的典型角色是什么？",
+    "options": {
+      "A": "无线终端身份认证算法",
+      "B": "控制器与支持 OpenFlow 的转发设备之间的南向控制协议之一",
+      "C": "云端对象存储协议",
+      "D": "网络安全等级保护标准"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "OpenFlow 是控制器与数据平面交换设备交互的一种南向协议；SDN 并不只限于 OpenFlow。",
+    "chapter": "新技术",
+    "knowledgePoint": "SDN 与 NFV",
+    "difficulty": "medium",
+    "tags": [
+      "SDN 与 NFV"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-405",
+    "type": "single_choice",
+    "question": "NFV 的核心思想是什么？",
+    "options": {
+      "A": "取消虚拟化和云平台",
+      "B": "把防火墙、负载均衡等网络功能软件化并运行在通用计算基础设施上",
+      "C": "把所有网络功能固化到单一专用芯片",
+      "D": "用 VLAN 替代所有路由协议"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "NFV 将传统专用网络设备功能实现为软件网络功能，可运行于通用服务器、虚拟化或容器基础设施。",
+    "chapter": "新技术",
+    "knowledgePoint": "SDN 与 NFV",
+    "difficulty": "easy",
+    "tags": [
+      "SDN 与 NFV"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-406",
+    "type": "single_choice",
+    "question": "SDN 与 NFV 的关系，哪项说法更准确？",
+    "options": {
+      "A": "二者完全同义，部署其一即可自动实现另一项",
+      "B": "NFV 只用于无线终端",
+      "C": "二者关注点不同但可协同：SDN 控制网络转发，NFV 软件化网络功能",
+      "D": "SDN 必须替代所有硬件交换机"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "SDN 主要关注控制与转发解耦及网络可编程性；NFV 主要关注网络功能的软件化，两者可结合但不是同一概念。",
+    "chapter": "新技术",
+    "knowledgePoint": "SDN 与 NFV",
+    "difficulty": "medium",
+    "tags": [
+      "SDN 与 NFV"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-407",
+    "type": "single_choice",
+    "question": "集中式 SDN 控制器成为网络关键组件后，设计时需要重点考虑什么？",
+    "options": {
+      "A": "冗余、高可用、访问控制和控制通道安全",
+      "B": "关闭所有网络日志",
+      "C": "让控制器只运行单实例且无备份",
+      "D": "公开控制器凭据"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "控制器故障或被攻陷可能影响大范围策略下发，需设计高可用、分区容错、安全认证、权限隔离和审计。",
+    "chapter": "新技术",
+    "knowledgePoint": "SDN 与 NFV",
+    "difficulty": "hard",
+    "tags": [
+      "SDN 与 NFV"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-408",
+    "type": "single_choice",
+    "question": "网络管理员希望应用通过 API 自动创建隔离网络并配置访问策略，这主要体现 SDN 的哪种能力？",
+    "options": {
+      "A": "网络可编程与自动化编排",
+      "B": "光纤折射率调整",
+      "C": "手工逐台修改所有设备",
+      "D": "物理地址厂商识别"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "SDN 北向 API 和控制器抽象可供上层系统编程配置网络资源，促进自动化和策略一致性。",
+    "chapter": "新技术",
+    "knowledgePoint": "SDN 与 NFV",
+    "difficulty": "easy",
+    "tags": [
+      "SDN 与 NFV"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-409",
+    "type": "single_choice",
+    "question": "虚拟网络功能 VNF 的生命周期管理包括实例化、扩缩容、监控和终止，通常由哪类编排能力承担？",
+    "options": {
+      "A": "NFV 编排/管理系统",
+      "B": "以太网冲突检测器",
+      "C": "DNS 递归服务器",
+      "D": "ARP 解析器"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "NFV 管理与编排负责协调网络服务、虚拟网络功能和底层计算/存储/网络资源的生命周期。",
+    "chapter": "新技术",
+    "knowledgePoint": "SDN 与 NFV",
+    "difficulty": "hard",
+    "tags": [
+      "SDN 与 NFV"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-410",
+    "type": "single_choice",
+    "question": "软件化防火墙运行在标准服务器上后，仍需评估哪项能力才能满足生产转发要求？",
+    "options": {
+      "A": "是否安装浏览器插件",
+      "B": "仅检查服务器机箱颜色",
+      "C": "服务器资源、虚拟交换、网卡加速及实际吞吐/时延能力",
+      "D": "只验证 DNS 能否解析"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "NFV 的性能受 CPU、内存、网卡、虚拟交换、加速能力和工作负载影响，需按真实流量测试吞吐、时延和可靠性。",
+    "chapter": "新技术",
+    "knowledgePoint": "SDN 与 NFV",
+    "difficulty": "hard",
+    "tags": [
+      "SDN 与 NFV"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-411",
+    "type": "single_choice",
+    "question": "云服务商提供虚拟机、虚拟网络和块存储，用户仍负责安装操作系统和应用程序，这最符合哪种服务模式？",
+    "options": {
+      "A": "PaaS",
+      "B": "SaaS",
+      "C": "DaaS",
+      "D": "IaaS"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "IaaS 提供计算、网络和存储等基础资源，用户通常管理来宾操作系统和应用；PaaS 提供应用运行平台，SaaS 直接提供应用。",
+    "chapter": "新技术",
+    "knowledgePoint": "云计算与容器",
+    "difficulty": "easy",
+    "tags": [
+      "云计算与容器"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-412",
+    "type": "single_choice",
+    "question": "某团队把自有机房私有云与公共云资源结合，按工作负载在两边部署，这种部署模型通常称为？",
+    "options": {
+      "A": "单播云",
+      "B": "混合云",
+      "C": "单体云",
+      "D": "边缘环网"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "混合云组合私有云与公共云环境，并通过治理、网络和身份策略支持工作负载协同或迁移。",
+    "chapter": "新技术",
+    "knowledgePoint": "云计算与容器",
+    "difficulty": "easy",
+    "tags": [
+      "云计算与容器"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-413",
+    "type": "single_choice",
+    "question": "相较于虚拟机，容器通常更轻量的主要原因是什么？",
+    "options": {
+      "A": "容器共享宿主机内核，隔离应用进程和资源",
+      "B": "容器无需任何操作系统内核",
+      "C": "每个容器都必须包含独立物理服务器",
+      "D": "容器一定运行在浏览器中"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "容器通常通过命名空间、控制组等机制隔离进程和资源，共享宿主机内核；虚拟机通常运行独立来宾操作系统。",
+    "chapter": "新技术",
+    "knowledgePoint": "云计算与容器",
+    "difficulty": "medium",
+    "tags": [
+      "云计算与容器"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-414",
+    "type": "single_choice",
+    "question": "在 Kubernetes 中，调度器的主要工作是什么？",
+    "options": {
+      "A": "替代集群 DNS 解析外部域名",
+      "B": "为待运行的 Pod 选择满足资源和约束条件的节点",
+      "C": "生成 Docker 镜像源代码",
+      "D": "为所有容器编写应用代码"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Kubernetes Scheduler 根据资源需求、节点状态、亲和性和策略等为未调度 Pod 选择节点。",
+    "chapter": "新技术",
+    "knowledgePoint": "云计算与容器",
+    "difficulty": "medium",
+    "tags": [
+      "云计算与容器"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-415",
+    "type": "single_choice",
+    "question": "容器镜像的主要用途是什么？",
+    "options": {
+      "A": "替代云网络路由表",
+      "B": "记录交换机的 MAC 地址表",
+      "C": "直接保存运行中容器的全部动态状态",
+      "D": "打包应用及其运行依赖，供一致地创建容器实例"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "镜像是创建容器的只读模板，包含应用和依赖；运行时状态、数据卷和配置应分别管理。",
+    "chapter": "新技术",
+    "knowledgePoint": "云计算与容器",
+    "difficulty": "easy",
+    "tags": [
+      "云计算与容器"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-416",
+    "type": "single_choice",
+    "question": "云平台中，安全组或实例防火墙主要用于什么？",
+    "options": {
+      "A": "为云主机提供物理磁盘冗余",
+      "B": "自动编写应用程序",
+      "C": "按策略控制云主机进出流量",
+      "D": "替代所有身份认证系统"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "安全组通常按实例或虚拟网卡配置有状态流量规则，控制允许的入站和出站通信；还需结合网络 ACL、主机防火墙和身份策略。",
+    "chapter": "新技术",
+    "knowledgePoint": "云计算与容器",
+    "difficulty": "medium",
+    "tags": [
+      "云计算与容器"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-417",
+    "type": "single_choice",
+    "question": "云主机 CPU 利用率持续升高时，自动扩缩容策略增加更多实例，属于哪项能力？",
+    "options": {
+      "A": "数据去重",
+      "B": "协议转换",
+      "C": "弹性伸缩",
+      "D": "静态路由汇总"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "弹性伸缩根据负载指标动态调整实例数量或规格；还需要负载均衡、健康检查和容量上限等配套设计。",
+    "chapter": "新技术",
+    "knowledgePoint": "云计算与容器",
+    "difficulty": "easy",
+    "tags": [
+      "云计算与容器"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-418",
+    "type": "single_choice",
+    "question": "容器平台把持久数据保存在外部卷中，而不是只写入容器可写层，主要目的是什么？",
+    "options": {
+      "A": "让数据在容器重建或替换后仍可保留",
+      "B": "使容器不再需要网络",
+      "C": "避免应用进行任何备份",
+      "D": "把卷内容自动公开到互联网"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "容器可写层随实例生命周期变化；持久卷把数据生命周期与容器实例解耦，但仍需权限控制、备份和恢复策略。",
+    "chapter": "新技术",
+    "knowledgePoint": "云计算与容器",
+    "difficulty": "medium",
+    "tags": [
+      "云计算与容器"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-419",
+    "type": "single_choice",
+    "question": "多个租户共享云平台基础设施时，云服务商最需要确保什么？",
+    "options": {
+      "A": "租户间计算、存储、网络和身份权限隔离",
+      "B": "不同租户必须使用相同密码",
+      "C": "关闭资源审计",
+      "D": "所有租户共用管理员账户"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "多租户云环境需通过虚拟化隔离、网络策略、身份与访问管理及审计，防止租户间越权访问。",
+    "chapter": "新技术",
+    "knowledgePoint": "云计算与容器",
+    "difficulty": "medium",
+    "tags": [
+      "云计算与容器"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-420",
+    "type": "single_choice",
+    "question": "云平台把同一二层虚拟网络扩展到多个物理机架，通常会使用哪类网络技术？",
+    "options": {
+      "A": "磁盘分区表",
+      "B": "Overlay 隧道网络",
+      "C": "串行奇偶校验",
+      "D": "DNS MX 记录"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Overlay 网络通过隧道在底层 IP 网络之上构建逻辑网络，可跨物理节点扩展租户网络并进行隔离。",
+    "chapter": "新技术",
+    "knowledgePoint": "云计算与容器",
+    "difficulty": "hard",
+    "tags": [
+      "云计算与容器"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-421",
+    "type": "single_choice",
+    "question": "5G 网络中，gNB 通常指什么设备或功能？",
+    "options": {
+      "A": "DNS 根服务器",
+      "B": "核心网数据库备份",
+      "C": "5G NR 无线接入网基站",
+      "D": "以太网光模块"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "gNB 是 5G 新空口无线接入网中的基站节点，负责与用户设备进行无线通信并连接 5G 核心网。",
+    "chapter": "新技术",
+    "knowledgePoint": "5G 与 NB-IoT",
+    "difficulty": "easy",
+    "tags": [
+      "5G 与 NB-IoT"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-422",
+    "type": "single_choice",
+    "question": "5G NSA 部署常见的架构特点是什么？",
+    "options": {
+      "A": "借助既有 LTE 核心或锚点并引入 5G NR",
+      "B": "所有核心网功能均运行在用户手机",
+      "C": "只能使用卫星链路",
+      "D": "完全不使用无线接入网"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "NSA（非独立组网）可依托 LTE/EPC 等既有网络锚点并增加 NR；SA 则以 5G 核心网配合 NR 提供独立组网架构。",
+    "chapter": "新技术",
+    "knowledgePoint": "5G 与 NB-IoT",
+    "difficulty": "medium",
+    "tags": [
+      "5G 与 NB-IoT"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-423",
+    "type": "single_choice",
+    "question": "5G SA 的典型架构特征是什么？",
+    "options": {
+      "A": "只支持 Wi-Fi 终端",
+      "B": "5G NR 接入 5G 核心网，不依赖 LTE 核心锚点",
+      "C": "必须由 2G 核心网控制所有业务",
+      "D": "不包含用户面转发功能"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "SA（独立组网）使用 5G NR 接入和 5G 核心网，可提供面向 5G 的核心能力；实际部署仍取决于运营商网络和终端支持。",
+    "chapter": "新技术",
+    "knowledgePoint": "5G 与 NB-IoT",
+    "difficulty": "medium",
+    "tags": [
+      "5G 与 NB-IoT"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-424",
+    "type": "single_choice",
+    "question": "5G 核心网中，UPF 最主要负责哪类功能？",
+    "options": {
+      "A": "域名证书签发",
+      "B": "用户面数据转发和流量锚定",
+      "C": "配置企业 VLAN ID",
+      "D": "无线终端屏幕渲染"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "UPF（用户面功能）处理用户流量转发、路由和策略执行等数据面任务；控制面会话管理由其他核心网功能承担。",
+    "chapter": "新技术",
+    "knowledgePoint": "5G 与 NB-IoT",
+    "difficulty": "medium",
+    "tags": [
+      "5G 与 NB-IoT"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-425",
+    "type": "single_choice",
+    "question": "5G 网络切片的主要目的是什么？",
+    "options": {
+      "A": "让所有业务使用相同 QoS",
+      "B": "将 IPv4 地址切成更短的前缀",
+      "C": "在共享基础设施上构建具有不同策略和服务质量特征的逻辑网络",
+      "D": "把一台基站物理切成多个机柜"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "网络切片通过逻辑隔离和策略编排，为不同业务构建具有差异化资源与服务特征的端到端网络；底层仍共享物理资源。",
+    "chapter": "新技术",
+    "knowledgePoint": "5G 与 NB-IoT",
+    "difficulty": "medium",
+    "tags": [
+      "5G 与 NB-IoT"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-426",
+    "type": "single_choice",
+    "question": "需要低时延、高可靠无线通信以支撑工业控制等场景，5G 业务能力中最相关的是？",
+    "options": {
+      "A": "URLLC",
+      "B": "eMBB",
+      "C": "mMTC",
+      "D": "SMTP"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "URLLC 面向超可靠低时延通信；eMBB 强调增强移动宽带，mMTC 面向海量机器类连接。",
+    "chapter": "新技术",
+    "knowledgePoint": "5G 与 NB-IoT",
+    "difficulty": "easy",
+    "tags": [
+      "5G 与 NB-IoT"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-427",
+    "type": "single_choice",
+    "question": "NB-IoT 最适合哪类物联网终端需求？",
+    "options": {
+      "A": "低功耗、低数据速率、广覆盖且通常不频繁传输的设备",
+      "B": "持续传送多路 8K 视频",
+      "C": "高性能数据中心互联",
+      "D": "要求极低抖动的云游戏终端"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "NB-IoT 面向低功耗广域物联网场景，适合小数据量、长电池寿命和较强覆盖需求，不适合高吞吐实时业务。",
+    "chapter": "新技术",
+    "knowledgePoint": "5G 与 NB-IoT",
+    "difficulty": "easy",
+    "tags": [
+      "5G 与 NB-IoT"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-428",
+    "type": "single_choice",
+    "question": "NB-IoT 设备启用 PSM（省电模式）后，常见效果是什么？",
+    "options": {
+      "A": "设备自动切换为 Wi-Fi",
+      "B": "核心网关闭数据认证",
+      "C": "终端始终保持最高速率接收",
+      "D": "终端在较长时间内不监听寻呼以降低功耗，但不可被立即寻呼唤醒"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "PSM 允许设备进入长时间深度休眠以节省电量，设备通常仍注册在网络，但休眠期间网络不能立即寻呼它。",
+    "chapter": "新技术",
+    "knowledgePoint": "5G 与 NB-IoT",
+    "difficulty": "hard",
+    "tags": [
+      "5G 与 NB-IoT"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-429",
+    "type": "single_choice",
+    "question": "5G 将部分计算能力部署在靠近无线接入网的边缘节点，主要希望改善什么？",
+    "options": {
+      "A": "增加远端 DNS 查询层数",
+      "B": "替代无线频谱管理",
+      "C": "让所有流量绕行中心云",
+      "D": "降低业务往返时延并就近处理数据"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "多接入边缘计算可把计算和内容放在靠近用户或接入网络的位置，减少回传距离与时延，适用于对响应敏感的业务。",
+    "chapter": "新技术",
+    "knowledgePoint": "5G 与 NB-IoT",
+    "difficulty": "medium",
+    "tags": [
+      "5G 与 NB-IoT"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-430",
+    "type": "single_choice",
+    "question": "5G 网络中将不同业务映射到不同 QoS 流和策略，主要是为了什么？",
+    "options": {
+      "A": "让每个业务共享相同 IP 地址",
+      "B": "按业务时延、可靠性和带宽需求实施差异化服务质量",
+      "C": "把无线信道变成光纤",
+      "D": "关闭用户面转发"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "5G QoS 机制可依据业务特性分类并实施差异化处理；切片和 QoS 流共同支持不同业务服务需求。",
+    "chapter": "新技术",
+    "knowledgePoint": "5G 与 NB-IoT",
+    "difficulty": "medium",
+    "tags": [
+      "5G 与 NB-IoT"
+    ]
+  }
+]

@@ -1,0 +1,422 @@
+[
+  {
+    "id": "ne-draft-20260923-281",
+    "type": "single_choice",
+    "question": "企业部署 Active Directory 域服务后，域控制器最核心的作用是什么？",
+    "options": {
+      "A": "把 TCP 转换为 UDP",
+      "B": "集中管理域身份、计算机账户和目录对象",
+      "C": "替代所有路由器转发数据",
+      "D": "为每台终端自动修复硬盘"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "AD DS 提供目录服务和集中身份管理，域控制器处理目录查询、身份验证及策略相关服务。",
+    "chapter": "服务器配置",
+    "knowledgePoint": "Windows",
+    "difficulty": "easy",
+    "tags": [
+      "Windows"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-282",
+    "type": "single_choice",
+    "question": "Windows 域客户端通过 DNS 查找可用域控制器时，常依赖哪类 DNS 记录？",
+    "options": {
+      "A": "MX",
+      "B": "TXT",
+      "C": "SRV",
+      "D": "PTR"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "AD 客户端通过 DNS SRV 记录发现提供 LDAP、Kerberos 等服务的域控制器；只有主机 A 记录通常不足以完成服务定位。",
+    "chapter": "服务器配置",
+    "knowledgePoint": "Windows",
+    "difficulty": "medium",
+    "tags": [
+      "Windows"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-283",
+    "type": "single_choice",
+    "question": "管理员把组策略对象链接到一个 OU，主要目的是？",
+    "options": {
+      "A": "为 OU 内设备自动增加磁盘容量",
+      "B": "把 OU 变成 DHCP 地址池",
+      "C": "让该 OU 成为 DNS 根服务器",
+      "D": "让该 OU 中满足筛选条件的用户或计算机应用策略"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "组策略可链接到站点、域或 OU，并结合安全筛选、WMI 筛选等决定适用对象；策略不是按 OU 名称自动授予本地管理员权限。",
+    "chapter": "服务器配置",
+    "knowledgePoint": "Windows",
+    "difficulty": "medium",
+    "tags": [
+      "Windows"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-284",
+    "type": "single_choice",
+    "question": "用户通过 SMB 共享远程读取文件时，既有共享权限也有 NTFS 权限，最终有效访问通常如何确定？",
+    "options": {
+      "A": "取网络访问路径上更严格的限制",
+      "B": "只取较宽松的共享权限",
+      "C": "共享权限会自动覆盖 NTFS 权限",
+      "D": "只看用户是否登录过域"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "网络访问同时受共享权限和 NTFS ACL 限制，通常按两者允许范围的交集确定有效权限；本地访问则不经过共享权限。",
+    "chapter": "服务器配置",
+    "knowledgePoint": "Windows",
+    "difficulty": "hard",
+    "tags": [
+      "Windows"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-285",
+    "type": "single_choice",
+    "question": "Windows DHCP 作用域中的地址保留通常根据客户端标识或 MAC 关联地址，主要效果是什么？",
+    "options": {
+      "A": "禁止该地址进行 DNS 查询",
+      "B": "把地址永久配置到客户端网卡且不再使用 DHCP",
+      "C": "让指定客户端重复获得预留地址",
+      "D": "自动为客户端创建 AD 用户"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "DHCP 保留仍通过 DHCP 分配，但把特定客户端标识关联到固定租约地址；它不同于在终端手工配置静态地址。",
+    "chapter": "服务器配置",
+    "knowledgePoint": "Windows",
+    "difficulty": "medium",
+    "tags": [
+      "Windows"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-286",
+    "type": "single_choice",
+    "question": "两台 AD 域控制器之间目录对象的新增和修改如何保持一致？",
+    "options": {
+      "A": "只能靠用户每次手动导入",
+      "B": "通过目录复制机制在域控制器间复制变更",
+      "C": "由 DHCP 广播自动复制",
+      "D": "通过交换机 MAC 表复制"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "AD DS 使用多主复制机制在域控制器之间复制目录变更；复制拓扑、站点链路和复制健康状态需要持续监控。",
+    "chapter": "服务器配置",
+    "knowledgePoint": "Windows",
+    "difficulty": "medium",
+    "tags": [
+      "Windows"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-287",
+    "type": "single_choice",
+    "question": "IIS 网站使用主机名绑定时，多个网站共用同一 IP 和 TCP 端口的关键条件是什么？",
+    "options": {
+      "A": "DNS 只能配置 MX 记录",
+      "B": "每个网站必须拥有相同目录",
+      "C": "客户端必须使用不同 MAC 地址",
+      "D": "请求中的 Host 主机名可区分网站绑定"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "IIS 可根据 IP、端口及主机名绑定选择站点；共用 IP 和端口时，Host 名称可用于区分不同站点。",
+    "chapter": "服务器配置",
+    "knowledgePoint": "Windows",
+    "difficulty": "medium",
+    "tags": [
+      "Windows"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-288",
+    "type": "single_choice",
+    "question": "IIS 应用程序池的主要管理价值是什么？",
+    "options": {
+      "A": "隔离应用进程并配置其运行身份和回收策略",
+      "B": "替代 NTFS 权限",
+      "C": "自动充当网络交换机",
+      "D": "为所有站点生成公网 IP"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "应用程序池把 Web 应用放入工作进程边界，可配置身份、资源和回收策略，降低一个应用故障对其他应用的影响。",
+    "chapter": "服务器配置",
+    "knowledgePoint": "Windows",
+    "difficulty": "medium",
+    "tags": [
+      "Windows"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-289",
+    "type": "single_choice",
+    "question": "AD 域用户登录时，Kerberos 认证成功但访问共享仍提示无权限，优先检查什么？",
+    "options": {
+      "A": "域名是否有 MX 记录",
+      "B": "共享与 NTFS ACL 是否授予该用户或其组所需权限",
+      "C": "交换机是否使用半双工",
+      "D": "用户显示器是否支持高分辨率"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "身份认证成功只证明用户身份有效，不代表已获资源授权；共享权限、NTFS ACL 和组成员关系都可能限制访问。",
+    "chapter": "服务器配置",
+    "knowledgePoint": "Windows",
+    "difficulty": "medium",
+    "tags": [
+      "Windows"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-290",
+    "type": "single_choice",
+    "question": "Windows DNS 为主机名解析到 IPv4 地址应配置哪类记录？",
+    "options": {
+      "A": "A",
+      "B": "MX",
+      "C": "SRV",
+      "D": "AAAA"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 记录把主机名映射到 IPv4 地址；AAAA 对应 IPv6，SRV 用于服务定位，MX 用于邮件交换。",
+    "chapter": "服务器配置",
+    "knowledgePoint": "Windows",
+    "difficulty": "easy",
+    "tags": [
+      "Windows"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-291",
+    "type": "single_choice",
+    "question": "Linux 文件权限显示为 750，其含义是什么？",
+    "options": {
+      "A": "所有用户均可读写执行",
+      "B": "仅属组可以读取",
+      "C": "属主可读写执行，属组可读执行，其他用户无权限",
+      "D": "属主只读，属组写入，其他用户执行"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "八进制 7=读写执行，5=读和执行，0=无权限；因此 750 对应属主 rwx、属组 r-x、其他 ---。",
+    "chapter": "服务器配置",
+    "knowledgePoint": "Linux",
+    "difficulty": "medium",
+    "tags": [
+      "Linux"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-292",
+    "type": "single_choice",
+    "question": "Linux 管理员要查看当前正在监听的 TCP 端口和进程信息，常用命令是？",
+    "options": {
+      "A": "ss -lntp",
+      "B": "mkdir -p /proc/net",
+      "C": "chmod -R 777 /",
+      "D": "tar -czf /etc"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "ss -lntp 可查看监听中的 TCP 套接字并显示进程信息（进程字段通常需足够权限）；其他选项会修改文件或不是网络查看命令。",
+    "chapter": "服务器配置",
+    "knowledgePoint": "Linux",
+    "difficulty": "easy",
+    "tags": [
+      "Linux"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-293",
+    "type": "single_choice",
+    "question": "在使用 systemd 的 Linux 服务器上，查看 sshd 服务当前状态通常使用什么命令？",
+    "options": {
+      "A": "fdisk -l sshd",
+      "B": "ip route add sshd",
+      "C": "systemctl status sshd",
+      "D": "dig status sshd"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "systemctl status 可查询 systemd 单元状态；不同发行版服务单元可能命名为 ssh 或 sshd。",
+    "chapter": "服务器配置",
+    "knowledgePoint": "Linux",
+    "difficulty": "easy",
+    "tags": [
+      "Linux"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-294",
+    "type": "single_choice",
+    "question": "管理员要列出 systemd 中当前失败的服务单元，常用命令是？",
+    "options": {
+      "A": "ip route --failed",
+      "B": "systemctl --failed",
+      "C": "chmod --failed",
+      "D": "journalctl --failed-units"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "systemctl --failed 可列出当前处于 failed 状态的单元；需要进一步看某单元日志时可再用 journalctl 按单元筛选。",
+    "chapter": "服务器配置",
+    "knowledgePoint": "Linux",
+    "difficulty": "easy",
+    "tags": [
+      "Linux"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-295",
+    "type": "single_choice",
+    "question": "Linux 管理员使用 sudo 执行单条管理命令，主要优势是什么？",
+    "options": {
+      "A": "让所有用户永久共享 root 密码",
+      "B": "自动加密所有文件",
+      "C": "跳过系统身份认证",
+      "D": "按授权策略临时提升指定命令权限并保留审计线索"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "sudo 可按策略授权用户以更高权限运行特定命令，并可记录操作；应遵循最小权限，避免无限制授权。",
+    "chapter": "服务器配置",
+    "knowledgePoint": "Linux",
+    "difficulty": "medium",
+    "tags": [
+      "Linux"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-296",
+    "type": "single_choice",
+    "question": "Linux SSH 公钥认证中，用户的私钥应该放在哪里？",
+    "options": {
+      "A": "放入所有用户的 shell 历史",
+      "B": "由用户安全保存在客户端，不上传到服务器",
+      "C": "写进 DNS TXT 记录公开",
+      "D": "放入服务器的 authorized_keys 文件"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "客户端私钥必须保密；服务器保存允许登录的公钥，通常放在目标账户的 authorized_keys 中并限制权限。",
+    "chapter": "服务器配置",
+    "knowledgePoint": "Linux",
+    "difficulty": "medium",
+    "tags": [
+      "Linux"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-297",
+    "type": "single_choice",
+    "question": "Linux 文件服务器需要向 Windows 客户端提供 SMB 共享，常见服务软件是？",
+    "options": {
+      "A": "chronyd",
+      "B": "Samba",
+      "C": "GRUB",
+      "D": "BIND"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Samba 实现 SMB/CIFS 文件和打印服务，可让 Linux 系统与 Windows 客户端共享资源。",
+    "chapter": "服务器配置",
+    "knowledgePoint": "Linux",
+    "difficulty": "easy",
+    "tags": [
+      "Linux"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-298",
+    "type": "single_choice",
+    "question": "Linux Web 服务器已启动并监听 TCP 443，但外部仍无法访问，哪项排查最直接？",
+    "options": {
+      "A": "删除 /etc/passwd",
+      "B": "把 DNS MX 改成 A",
+      "C": "关闭 TLS 证书验证",
+      "D": "检查主机防火墙、上游 ACL 和路由是否放行 TCP 443"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "服务监听只说明本机进程已绑定端口；外部连接还需经过主机防火墙、网络 ACL、路由和 NAT 等路径。",
+    "chapter": "服务器配置",
+    "knowledgePoint": "Linux",
+    "difficulty": "medium",
+    "tags": [
+      "Linux"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-299",
+    "type": "single_choice",
+    "question": "Linux 的 /tmp 目录常设置粘滞位（sticky bit），其主要作用是什么？",
+    "options": {
+      "A": "允许用户创建文件，但通常只允许文件所有者、目录所有者或特权用户删除/重命名",
+      "B": "让所有文件自动获得执行权限",
+      "C": "禁止任何用户创建文件",
+      "D": "将目录内容加密"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "共享临时目录常使用 1777 权限；粘滞位限制普通用户删除或重命名其他用户拥有的目录项，但不阻止其创建自己的文件。",
+    "chapter": "服务器配置",
+    "knowledgePoint": "Linux",
+    "difficulty": "medium",
+    "tags": [
+      "Linux"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-300",
+    "type": "single_choice",
+    "question": "Linux 上 BIND DNS 服务器被配置为某域的权威主服务器，它应主要回答什么类型的问题？",
+    "options": {
+      "A": "其所负责区域内记录的权威数据查询",
+      "B": "路由器 CPU 温度",
+      "C": "所有网络中的任意应用请求",
+      "D": "用户 Windows 登录口令"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "权威 DNS 服务器对其托管区域的资源记录给出权威答案；递归解析器则代表客户端向其他 DNS 服务器查询。",
+    "chapter": "服务器配置",
+    "knowledgePoint": "Linux",
+    "difficulty": "medium",
+    "tags": [
+      "Linux"
+    ]
+  }
+]

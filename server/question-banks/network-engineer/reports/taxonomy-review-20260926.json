@@ -1,0 +1,5002 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-09-26",
+  "certificateId": "network-engineer",
+  "summary": {
+    "questionCount": 1182,
+    "changedQuestionCount": 311,
+    "reassignedQuestionCount": 199,
+    "moduleCount": 10,
+    "sectionCount": 43,
+    "knowledgePointCount": 141
+  },
+  "policy": "每题按最终设问确定一个主知识点；共用题干、选项、解析和题型标签不决定目录。OSI层次职责只归入OSI七层模型；TCP/IP层次与模型映射单列；协议、服务关系和封装流程单列。协议原理与服务器配置分开，单协议端口随协议，跨协议比较单列。",
+  "references": [
+    {
+      "name": "ITU-T X.200 OSI Basic Reference Model",
+      "url": "https://www.itu.int/rec/T-REC-X.200-199407-I/en"
+    },
+    {
+      "name": "RFC 1122 Internet Protocol Suite",
+      "url": "https://www.rfc-editor.org/rfc/rfc1122#section-1.1.3"
+    }
+  ],
+  "changes": [
+    {
+      "id": "practice-1",
+      "file": "server/question-banks/network-engineer/questions/original.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "practice-2",
+      "file": "server/question-banks/network-engineer/questions/original.json",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "冲突域、广播域与网络设备"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "MAC地址学习与交换转发"
+      },
+      "code": "03.01.03",
+      "reason": "按MAC地址查表转发属于交换转发，不是冲突域划分。"
+    },
+    {
+      "id": "practice-6",
+      "file": "server/question-banks/network-engineer/questions/original.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "端口号与多路复用"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "UDP特性与应用场景"
+      },
+      "code": "02.05.03",
+      "reason": "考查UDP首部或与TCP的特性比较，不是端口复用或IPv4分片。"
+    },
+    {
+      "id": "practice-14",
+      "file": "server/question-banks/network-engineer/questions/original.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      },
+      "code": "04.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "practice-21",
+      "file": "server/question-banks/network-engineer/questions/original.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "IPv4地址类别与特殊地址"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "DHCP"
+      },
+      "code": "02.06.02",
+      "reason": "考查DHCP Discover消息，不是IPv4地址分类。"
+    },
+    {
+      "id": "practice-22",
+      "file": "server/question-banks/network-engineer/questions/original.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "管理协议与监控",
+        "knowledgePoint": "SNMP版本、MIB与报文"
+      },
+      "code": "07.02.01",
+      "reason": "SNMP单协议端口和管理协议比较归入SNMP，跨协议综合节点只收横向比较。"
+    },
+    {
+      "id": "practice-23",
+      "file": "server/question-banks/network-engineer/questions/original.json",
+      "before": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "常用命令与系统管理"
+      },
+      "after": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "权限、进程与文件系统"
+      },
+      "code": "06.02.02",
+      "reason": "权限、进程、设备文件与目录结构收敛到Linux权限及文件系统节点。"
+    },
+    {
+      "id": "ne-20260923-027",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "存储器与可靠性",
+        "knowledgePoint": "串并联系统可靠性"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "存储器与可靠性",
+        "knowledgePoint": "系统可靠性与可用性"
+      },
+      "code": "01.03.04",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-028",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "存储器与可靠性",
+        "knowledgePoint": "串并联系统可靠性"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "存储器与可靠性",
+        "knowledgePoint": "系统可靠性与可用性"
+      },
+      "code": "01.03.04",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-036",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "总线分类"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "总线结构与带宽"
+      },
+      "code": "01.04.02",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-037",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "总线分类"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "总线结构与带宽"
+      },
+      "code": "01.04.02",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-038",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "总线分类"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "总线结构与带宽"
+      },
+      "code": "01.04.02",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-039",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "总线分类"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "总线结构与带宽"
+      },
+      "code": "01.04.02",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-040",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "总线分类"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "总线结构与带宽"
+      },
+      "code": "01.04.02",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-051",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "分层原则、协议与数据封装"
+      },
+      "code": "02.01.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-052",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "分层原则、协议与数据封装"
+      },
+      "code": "02.01.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-058",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "TCP/IP四层模型与映射"
+      },
+      "code": "02.01.02",
+      "reason": "设问考查TCP/IP模型层次或与OSI模型的映射，不属于TCP连接机制。"
+    },
+    {
+      "id": "ne-20260923-059",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "分层原则、协议与数据封装"
+      },
+      "code": "02.01.03",
+      "reason": "设问考查标准协议与分层互操作原则，不是OSI七层名称或职责。"
+    },
+    {
+      "id": "ne-20260923-060",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "TCP/IP四层模型与映射"
+      },
+      "code": "02.01.02",
+      "reason": "设问考查TCP/IP模型层次或与OSI模型的映射，不属于TCP连接机制。"
+    },
+    {
+      "id": "ne-20260923-065",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "同步与传输方式"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "同步、双工与多路复用"
+      },
+      "code": "02.02.02",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-066",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "同步与传输方式"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "同步、双工与多路复用"
+      },
+      "code": "02.02.02",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-067",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "同步与传输方式"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "同步、双工与多路复用"
+      },
+      "code": "02.02.02",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-068",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "同步与传输方式"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "同步、双工与多路复用"
+      },
+      "code": "02.02.02",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-080",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      },
+      "code": "02.03.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-105",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "FTP与TFTP"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "文件传输协议FTP、TFTP与SFTP"
+      },
+      "code": "02.06.04",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-112",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "地址表示与地址类型"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6报文与协议特性"
+      },
+      "code": "02.07.04",
+      "reason": "IPv6首部、ICMPv6、分片和路径MTU不属于IPv4/IPv6过渡技术或地址写法。"
+    },
+    {
+      "id": "ne-20260923-114",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "地址表示与地址类型"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6报文与协议特性"
+      },
+      "code": "02.07.04",
+      "reason": "IPv6首部、ICMPv6、分片和路径MTU不属于IPv4/IPv6过渡技术或地址写法。"
+    },
+    {
+      "id": "ne-20260923-115",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "地址表示与地址类型"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6报文与协议特性"
+      },
+      "code": "02.07.04",
+      "reason": "IPv6首部、ICMPv6、分片和路径MTU不属于IPv4/IPv6过渡技术或地址写法。"
+    },
+    {
+      "id": "ne-20260923-116",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "地址表示与地址类型"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6地址自动配置与DHCPv6"
+      },
+      "code": "02.07.05",
+      "reason": "考查SLAAC或DHCPv6自动配置，不是IPv6地址表示。"
+    },
+    {
+      "id": "ne-20260923-120",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "地址表示与地址类型"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6报文与协议特性"
+      },
+      "code": "02.07.04",
+      "reason": "IPv6首部、ICMPv6、分片和路径MTU不属于IPv4/IPv6过渡技术或地址写法。"
+    },
+    {
+      "id": "ne-20260923-160",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "冲突域、广播域与网络设备"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "VLAN",
+        "knowledgePoint": "VLAN间路由与VLAN聚合"
+      },
+      "code": "03.02.03",
+      "reason": "VLANIF/SVI和VLAN聚合属于VLAN间路由，不是802.1Q帧标签。"
+    },
+    {
+      "id": "ne-20260923-179",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "路由协议类型与算法"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "策略路由、路由策略与重分发"
+      },
+      "code": "04.01.05",
+      "reason": "策略路由、前缀列表和路由重分发需要独立的路由策略节点。"
+    },
+    {
+      "id": "ne-20260923-181",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      },
+      "code": "04.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-182",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      },
+      "code": "04.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-183",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      },
+      "code": "04.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-186",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      },
+      "code": "04.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-187",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      },
+      "code": "04.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-188",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      },
+      "code": "04.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-189",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      },
+      "code": "04.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-198",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "OSPF",
+        "knowledgePoint": "区域、LSA与邻居状态"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "OSPF",
+        "knowledgePoint": "OSPF度量与路由计算"
+      },
+      "code": "04.03.04",
+      "reason": "考查OSPF成本、SPF计算或度量规则。"
+    },
+    {
+      "id": "ne-20260923-222",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "非对称加密与Hash摘要"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "Hash、HMAC与口令存储"
+      },
+      "code": "05.01.04",
+      "reason": "摘要、HMAC和口令存储独立于可解密的非对称加密算法。"
+    },
+    {
+      "id": "ne-20260923-223",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "非对称加密与Hash摘要"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "Hash、HMAC与口令存储"
+      },
+      "code": "05.01.04",
+      "reason": "摘要、HMAC和口令存储独立于可解密的非对称加密算法。"
+    },
+    {
+      "id": "ne-20260923-224",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "非对称加密与Hash摘要"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "Hash、HMAC与口令存储"
+      },
+      "code": "05.01.04",
+      "reason": "摘要、HMAC和口令存储独立于可解密的非对称加密算法。"
+    },
+    {
+      "id": "ne-20260923-226",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "非对称加密与Hash摘要"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "非对称加密算法"
+      },
+      "code": "05.01.02",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-229",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "密码学原则与传输加密"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "Hash、HMAC与口令存储"
+      },
+      "code": "05.01.04",
+      "reason": "摘要、HMAC和口令存储独立于可解密的非对称加密算法。"
+    },
+    {
+      "id": "ne-20260923-254",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与常见漏洞"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与漏洞防护"
+      },
+      "code": "05.05.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-259",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络设备与边界防护",
+        "knowledgePoint": "堡垒机与零信任架构"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络设备与边界防护",
+        "knowledgePoint": "身份认证与安全运维"
+      },
+      "code": "05.04.04",
+      "reason": "多因素认证与默认口令治理属于身份认证及安全运维。"
+    },
+    {
+      "id": "ne-20260923-261",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与常见漏洞"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与漏洞防护"
+      },
+      "code": "05.05.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-262",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DDoS"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DoS与DDoS"
+      },
+      "code": "05.05.02",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-263",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DDoS"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DoS与DDoS"
+      },
+      "code": "05.05.02",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-265",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与常见漏洞"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DNS欺骗与DNSSEC"
+      },
+      "code": "05.05.05",
+      "reason": "DNS欺骗和DNSSEC归入同一个DNS安全节点，避免散落于Web漏洞和数字证书。"
+    },
+    {
+      "id": "ne-20260923-266",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DDoS"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DoS与DDoS"
+      },
+      "code": "05.05.02",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-268",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络设备与边界防护",
+        "knowledgePoint": "堡垒机与零信任架构"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "恶意软件、社会工程与应急响应"
+      },
+      "code": "05.05.04",
+      "reason": "恶意软件、社会工程和事件处置不属于Web漏洞或零信任架构。"
+    },
+    {
+      "id": "ne-20260923-269",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与常见漏洞"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与漏洞防护"
+      },
+      "code": "05.05.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-270",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与常见漏洞"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DNS欺骗与DNSSEC"
+      },
+      "code": "05.05.05",
+      "reason": "DNS欺骗和DNSSEC归入同一个DNS安全节点，避免散落于Web漏洞和数字证书。"
+    },
+    {
+      "id": "ne-20260923-278",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "VPN与安全传输",
+        "knowledgePoint": "TLS与安全传输协议"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "PKI与数字证书",
+        "knowledgePoint": "证书验证与CRL吊销"
+      },
+      "code": "05.02.02",
+      "reason": "最终设问是证书身份验证，应归入PKI验证流程。"
+    },
+    {
+      "id": "ne-20260923-292",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "网络接口与服务配置"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "ipconfig、netstat与路由工具"
+      },
+      "code": "07.03.02",
+      "reason": "考查客户端诊断命令或监听状态查看，不是DNS/ARP协议机制或服务部署。"
+    },
+    {
+      "id": "ne-20260923-296",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "权限、进程与文件系统"
+      },
+      "after": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "网络接口与服务配置"
+      },
+      "code": "06.02.03",
+      "reason": "考查Linux的vsftpd或SSH配置，不是FTP协议基本概念或文件权限。"
+    },
+    {
+      "id": "ne-20260923-327",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "设备Console与维护接入"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "设备接入与接口排障"
+      },
+      "code": "07.03.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-332",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "设备Console与维护接入"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "设备接入与接口排障"
+      },
+      "code": "07.03.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-334",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "设备Console与维护接入"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "设备接入与接口排障"
+      },
+      "code": "07.03.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-337",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "设备Console与维护接入"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "设备接入与接口排障"
+      },
+      "code": "07.03.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-339",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "设备Console与维护接入"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "设备接入与接口排障"
+      },
+      "code": "07.03.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-352",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "传输介质",
+        "knowledgePoint": "传输介质特性与选型"
+      },
+      "after": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "传输介质",
+        "knowledgePoint": "光功率与光链路基础"
+      },
+      "code": "08.02.03",
+      "reason": "设问是光链路可达距离预算，不是铜缆与光纤的选型比较。"
+    },
+    {
+      "id": "ne-20260923-420",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "网络架构新技术",
+        "knowledgePoint": "云计算与容器"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "网络架构新技术",
+        "knowledgePoint": "VXLAN与Overlay网络"
+      },
+      "code": "10.01.04",
+      "reason": "考查VXLAN租户隔离或与QinQ比较，单列Overlay技术。"
+    },
+    {
+      "id": "ne-20260923-421",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "5G"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "4G与5G移动通信"
+      },
+      "code": "10.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-422",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "5G"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "4G与5G移动通信"
+      },
+      "code": "10.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-423",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "5G"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "4G与5G移动通信"
+      },
+      "code": "10.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-424",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "5G"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "4G与5G移动通信"
+      },
+      "code": "10.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-425",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "5G"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "4G与5G移动通信"
+      },
+      "code": "10.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-426",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "5G"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "4G与5G移动通信"
+      },
+      "code": "10.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-427",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "NB-IoT"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "物联网与NB-IoT"
+      },
+      "code": "10.02.02",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-428",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "NB-IoT"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "物联网与NB-IoT"
+      },
+      "code": "10.02.02",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-429",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "5G"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "4G与5G移动通信"
+      },
+      "code": "10.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "ne-20260923-430",
+      "file": "server/question-banks/network-engineer/questions/network-engineer-supplement-20260923.json",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "5G"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "4G与5G移动通信"
+      },
+      "code": "10.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c01-q002",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "TCP连接与可靠传输"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "TCP/IP四层模型与映射"
+      },
+      "code": "02.01.02",
+      "reason": "设问考查TCP/IP模型层次或与OSI模型的映射，不属于TCP连接机制。"
+    },
+    {
+      "id": "collection-c01-q003",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "TCP/IP四层模型与映射"
+      },
+      "code": "02.01.02",
+      "reason": "设问考查TCP/IP模型层次或与OSI模型的映射，不属于TCP连接机制。"
+    },
+    {
+      "id": "collection-c01-q004",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c01-q010",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c01-q011",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c01-q012",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "TCP连接与可靠传输"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c01-q013",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "TCP连接与可靠传输"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "TCP/IP四层模型与映射"
+      },
+      "code": "02.01.02",
+      "reason": "设问考查TCP/IP模型层次或与OSI模型的映射，不属于TCP连接机制。"
+    },
+    {
+      "id": "collection-c01-q014",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "FTP与TFTP"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c01-q015",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c01-q016",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c01-q017",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c01-q018",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c01-q019",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c01-q020",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "TCP连接与可靠传输"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "TCP/IP四层模型与映射"
+      },
+      "code": "02.01.02",
+      "reason": "设问考查TCP/IP模型层次或与OSI模型的映射，不属于TCP连接机制。"
+    },
+    {
+      "id": "collection-c01-q021",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c01-q022",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "TCP连接与可靠传输"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "TCP/IP四层模型与映射"
+      },
+      "code": "02.01.02",
+      "reason": "设问考查TCP/IP模型层次或与OSI模型的映射，不属于TCP连接机制。"
+    },
+    {
+      "id": "collection-c01-q023",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c01-q024",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c01-q025",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c01-q026",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c01-q027",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "HTTP与HTTPS"
+      },
+      "code": "02.06.03",
+      "reason": "HTTP端口、会话状态或REST接口属于HTTP协议应用。"
+    },
+    {
+      "id": "collection-c01-q028",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c01-q029",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c01-q030",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c01-q031",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c01-q032",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "TCP连接与可靠传输"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "TCP/IP四层模型与映射"
+      },
+      "code": "02.01.02",
+      "reason": "设问考查TCP/IP模型层次或与OSI模型的映射，不属于TCP连接机制。"
+    },
+    {
+      "id": "collection-c01-q033",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c01-q035",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c01-q036",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "TCP连接与可靠传输"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "TCP/IP四层模型与映射"
+      },
+      "code": "02.01.02",
+      "reason": "设问考查TCP/IP模型层次或与OSI模型的映射，不属于TCP连接机制。"
+    },
+    {
+      "id": "collection-c01-q037",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c01-q038",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c01-q039",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "TCP连接与可靠传输"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "TCP/IP四层模型与映射"
+      },
+      "code": "02.01.02",
+      "reason": "设问考查TCP/IP模型层次或与OSI模型的映射，不属于TCP连接机制。"
+    },
+    {
+      "id": "collection-c01-q040",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "TCP连接与可靠传输"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c01-q041",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "分层原则、协议与数据封装"
+      },
+      "code": "02.01.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c01-q043",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c01-q044",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "TCP/IP四层模型与映射"
+      },
+      "code": "02.01.02",
+      "reason": "设问考查TCP/IP模型层次或与OSI模型的映射，不属于TCP连接机制。"
+    },
+    {
+      "id": "collection-c01-q045",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c01-q046",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c01-q047",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c01-q048",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c01-q049",
+      "file": "server/question-banks/network-engineer/questions/user-collection/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "TCP连接与可靠传输"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "TCP/IP四层模型与映射"
+      },
+      "code": "02.01.02",
+      "reason": "设问考查TCP/IP模型层次或与OSI模型的映射，不属于TCP连接机制。"
+    },
+    {
+      "id": "collection-c02-q011",
+      "file": "server/question-banks/network-engineer/questions/user-collection/02.json",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "冲突域、广播域与网络设备"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "CSMA/CD与以太网帧"
+      },
+      "code": "03.01.01",
+      "reason": "考查CSMA/CD或以太网帧，不是网络设备隔离广播域的能力。"
+    },
+    {
+      "id": "collection-c02-q012",
+      "file": "server/question-banks/network-engineer/questions/user-collection/02.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "信道容量与数据速率"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "广域网链路",
+        "knowledgePoint": "E1/T1与专线基础"
+      },
+      "code": "04.05.02",
+      "reason": "E1/T1载波的固定速率归入专线体系。"
+    },
+    {
+      "id": "collection-c02-q013",
+      "file": "server/question-banks/network-engineer/questions/user-collection/02.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "信道容量与数据速率"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "广域网链路",
+        "knowledgePoint": "E1/T1与专线基础"
+      },
+      "code": "04.05.02",
+      "reason": "E1/T1载波的固定速率归入专线体系。"
+    },
+    {
+      "id": "collection-c02-q014",
+      "file": "server/question-banks/network-engineer/questions/user-collection/02.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "信道容量与数据速率"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "编码与调制"
+      },
+      "code": "02.02.01",
+      "reason": "考查编码或调制特征，不是信道容量计算。"
+    },
+    {
+      "id": "collection-c02-q015",
+      "file": "server/question-banks/network-engineer/questions/user-collection/02.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "信道容量与数据速率"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "编码与调制"
+      },
+      "code": "02.02.01",
+      "reason": "考查编码或调制特征，不是信道容量计算。"
+    },
+    {
+      "id": "collection-c02-q019",
+      "file": "server/question-banks/network-engineer/questions/user-collection/02.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "信道容量与数据速率"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "广域网链路",
+        "knowledgePoint": "PPP、HDLC与帧中继"
+      },
+      "code": "04.05.01",
+      "reason": "HDLC零比特填充属于链路成帧机制。"
+    },
+    {
+      "id": "collection-c02-q021",
+      "file": "server/question-banks/network-engineer/questions/user-collection/02.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "信道容量与数据速率"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "同步、双工与多路复用"
+      },
+      "code": "02.02.02",
+      "reason": "考查异步同步或统计复用机制。"
+    },
+    {
+      "id": "collection-c02-q022",
+      "file": "server/question-banks/network-engineer/questions/user-collection/02.json",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "冲突域、广播域与网络设备"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "CSMA/CD与以太网帧"
+      },
+      "code": "03.01.01",
+      "reason": "考查CSMA/CD或以太网帧，不是网络设备隔离广播域的能力。"
+    },
+    {
+      "id": "collection-c02-q023",
+      "file": "server/question-banks/network-engineer/questions/user-collection/02.json",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "冲突域、广播域与网络设备"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "CSMA/CD与以太网帧"
+      },
+      "code": "03.01.01",
+      "reason": "考查CSMA/CD或以太网帧，不是网络设备隔离广播域的能力。"
+    },
+    {
+      "id": "collection-c02-q026",
+      "file": "server/question-banks/network-engineer/questions/user-collection/02.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "信道容量与数据速率"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "编码与调制"
+      },
+      "code": "02.02.01",
+      "reason": "考查编码或调制特征，不是信道容量计算。"
+    },
+    {
+      "id": "collection-c02-q027",
+      "file": "server/question-banks/network-engineer/questions/user-collection/02.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "信道容量与数据速率"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "信号质量与眼图"
+      },
+      "code": "02.02.04",
+      "reason": "眼图用于观察信号质量，不能混入容量计算。"
+    },
+    {
+      "id": "collection-c02-q032",
+      "file": "server/question-banks/network-engineer/questions/user-collection/02.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "信道容量与数据速率"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "同步、双工与多路复用"
+      },
+      "code": "02.02.02",
+      "reason": "考查异步同步或统计复用机制。"
+    },
+    {
+      "id": "collection-c02-q036",
+      "file": "server/question-banks/network-engineer/questions/user-collection/02.json",
+      "before": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "设备Console与维护接入"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "设备接入与接口排障"
+      },
+      "code": "07.03.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c02-q038",
+      "file": "server/question-banks/network-engineer/questions/user-collection/02.json",
+      "before": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "网络拓扑"
+      },
+      "after": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "网络需求分析与拓扑设计"
+      },
+      "code": "08.03.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c02-q039",
+      "file": "server/question-banks/network-engineer/questions/user-collection/02.json",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "冲突域、广播域与网络设备"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "CSMA/CD与以太网帧"
+      },
+      "code": "03.01.01",
+      "reason": "考查CSMA/CD或以太网帧，不是网络设备隔离广播域的能力。"
+    },
+    {
+      "id": "collection-c02-q040",
+      "file": "server/question-banks/network-engineer/questions/user-collection/02.json",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "冲突域、广播域与网络设备"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "CSMA/CD与以太网帧"
+      },
+      "code": "03.01.01",
+      "reason": "考查CSMA/CD或以太网帧，不是网络设备隔离广播域的能力。"
+    },
+    {
+      "id": "collection-c02-q041",
+      "file": "server/question-banks/network-engineer/questions/user-collection/02.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "信道容量与数据速率"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "编码与调制"
+      },
+      "code": "02.02.01",
+      "reason": "考查编码或调制特征，不是信道容量计算。"
+    },
+    {
+      "id": "collection-c02-q045",
+      "file": "server/question-banks/network-engineer/questions/user-collection/02.json",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "冲突域、广播域与网络设备"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "以太网基础",
+        "knowledgePoint": "CSMA/CD与以太网帧"
+      },
+      "code": "03.01.01",
+      "reason": "考查CSMA/CD或以太网帧，不是网络设备隔离广播域的能力。"
+    },
+    {
+      "id": "collection-c02-q047",
+      "file": "server/question-banks/network-engineer/questions/user-collection/02.json",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "5G"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "4G与5G移动通信"
+      },
+      "code": "10.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c03-q005",
+      "file": "server/question-banks/network-engineer/questions/user-collection/03.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网际层协议",
+        "knowledgePoint": "ICMP与控制报文"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "IPv4地址类别与特殊地址"
+      },
+      "code": "02.03.01",
+      "reason": "考查APIPA地址范围，不是ICMP或DHCP报文流程。"
+    },
+    {
+      "id": "collection-c03-q009",
+      "file": "server/question-banks/network-engineer/questions/user-collection/03.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "IPv4首部、分片、组播与TTL"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网际层协议",
+        "knowledgePoint": "ICMP与控制报文"
+      },
+      "code": "02.04.02",
+      "reason": "考查ICMP超时报文在路径探测中的用途。"
+    },
+    {
+      "id": "collection-c03-q010",
+      "file": "server/question-banks/network-engineer/questions/user-collection/03.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "IPv4地址类别与特殊地址"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "IPv4首部、分片、组播与TTL"
+      },
+      "code": "02.03.05",
+      "reason": "TTL属于IPv4首部，不属于地址类别。"
+    },
+    {
+      "id": "collection-c03-q016",
+      "file": "server/question-banks/network-engineer/questions/user-collection/03.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      },
+      "code": "02.03.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c03-q017",
+      "file": "server/question-banks/network-engineer/questions/user-collection/03.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      },
+      "code": "02.03.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c03-q018",
+      "file": "server/question-banks/network-engineer/questions/user-collection/03.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "地址表示与地址类型"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6报文与协议特性"
+      },
+      "code": "02.07.04",
+      "reason": "IPv6首部、ICMPv6、分片和路径MTU不属于IPv4/IPv6过渡技术或地址写法。"
+    },
+    {
+      "id": "collection-c03-q019",
+      "file": "server/question-banks/network-engineer/questions/user-collection/03.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "IPv4地址类别与特殊地址"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "网络地址、广播地址与可用主机"
+      },
+      "code": "02.03.02",
+      "reason": "给定地址掩码求网络、广播或主机范围，区别于重新划分子网。"
+    },
+    {
+      "id": "collection-c03-q020",
+      "file": "server/question-banks/network-engineer/questions/user-collection/03.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网际层协议",
+        "knowledgePoint": "ICMP与控制报文"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "CIDR与路由聚合"
+      },
+      "code": "02.03.04",
+      "reason": "考查多条网络的聚合或路由汇总，统一归入CIDR。"
+    },
+    {
+      "id": "collection-c03-q032",
+      "file": "server/question-banks/network-engineer/questions/user-collection/03.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "DNS"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "ipconfig、netstat与路由工具"
+      },
+      "code": "07.03.02",
+      "reason": "考查客户端诊断命令或监听状态查看，不是DNS/ARP协议机制或服务部署。"
+    },
+    {
+      "id": "collection-c03-q035",
+      "file": "server/question-banks/network-engineer/questions/user-collection/03.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "地址表示与地址类型"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6地址自动配置与DHCPv6"
+      },
+      "code": "02.07.05",
+      "reason": "考查SLAAC或DHCPv6自动配置，不是IPv6地址表示。"
+    },
+    {
+      "id": "collection-c03-q038",
+      "file": "server/question-banks/network-engineer/questions/user-collection/03.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "地址表示与地址类型"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6报文与协议特性"
+      },
+      "code": "02.07.04",
+      "reason": "IPv6首部、ICMPv6、分片和路径MTU不属于IPv4/IPv6过渡技术或地址写法。"
+    },
+    {
+      "id": "collection-c03-q041",
+      "file": "server/question-banks/network-engineer/questions/user-collection/03.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网际层协议",
+        "knowledgePoint": "ICMP与控制报文"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6报文与协议特性"
+      },
+      "code": "02.07.04",
+      "reason": "IPv6首部、ICMPv6、分片和路径MTU不属于IPv4/IPv6过渡技术或地址写法。"
+    },
+    {
+      "id": "collection-c04-q005",
+      "file": "server/question-banks/network-engineer/questions/user-collection/04.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "端口号与多路复用"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "UDP特性与应用场景"
+      },
+      "code": "02.05.03",
+      "reason": "考查UDP首部或与TCP的特性比较，不是端口复用或IPv4分片。"
+    },
+    {
+      "id": "collection-c04-q021",
+      "file": "server/question-banks/network-engineer/questions/user-collection/04.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "跨协议端口与传输协议辨析"
+      },
+      "code": "02.06.06",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c04-q025",
+      "file": "server/question-banks/network-engineer/questions/user-collection/04.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "TCP窗口、流量控制与拥塞控制"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "TCP连接与可靠传输"
+      },
+      "code": "02.05.01",
+      "reason": "设问集中在TCP可靠传输机制，非专门的拥塞窗口算法。"
+    },
+    {
+      "id": "collection-c04-q033",
+      "file": "server/question-banks/network-engineer/questions/user-collection/04.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "IPv4首部、分片、组播与TTL"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "UDP特性与应用场景"
+      },
+      "code": "02.05.03",
+      "reason": "考查UDP首部或与TCP的特性比较，不是端口复用或IPv4分片。"
+    },
+    {
+      "id": "collection-c04-q035",
+      "file": "server/question-banks/network-engineer/questions/user-collection/04.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "端口号与多路复用"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "传输层",
+        "knowledgePoint": "UDP特性与应用场景"
+      },
+      "code": "02.05.03",
+      "reason": "考查UDP首部或与TCP的特性比较，不是端口复用或IPv4分片。"
+    },
+    {
+      "id": "collection-c05-q002",
+      "file": "server/question-banks/network-engineer/questions/user-collection/05.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      },
+      "code": "04.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c05-q010",
+      "file": "server/question-banks/network-engineer/questions/user-collection/05.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      },
+      "code": "04.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c05-q012",
+      "file": "server/question-banks/network-engineer/questions/user-collection/05.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      },
+      "code": "04.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c05-q018",
+      "file": "server/question-banks/network-engineer/questions/user-collection/05.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      },
+      "code": "04.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c05-q020",
+      "file": "server/question-banks/network-engineer/questions/user-collection/05.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "OSPF",
+        "knowledgePoint": "区域、LSA与邻居状态"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "OSPF",
+        "knowledgePoint": "OSPF度量与路由计算"
+      },
+      "code": "04.03.04",
+      "reason": "考查OSPF成本、SPF计算或度量规则。"
+    },
+    {
+      "id": "collection-c05-q021",
+      "file": "server/question-banks/network-engineer/questions/user-collection/05.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "OSPF",
+        "knowledgePoint": "区域、LSA与邻居状态"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "OSPF",
+        "knowledgePoint": "OSPF度量与路由计算"
+      },
+      "code": "04.03.04",
+      "reason": "考查OSPF成本、SPF计算或度量规则。"
+    },
+    {
+      "id": "collection-c05-q034",
+      "file": "server/question-banks/network-engineer/questions/user-collection/05.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "路由协议类型与算法"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "CIDR与路由聚合"
+      },
+      "code": "02.03.04",
+      "reason": "考查多条网络的聚合或路由汇总，统一归入CIDR。"
+    },
+    {
+      "id": "collection-c06-q007",
+      "file": "server/question-banks/network-engineer/questions/user-collection/06.json",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "STP生成树",
+        "knowledgePoint": "端口角色与BPDU"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "STP生成树",
+        "knowledgePoint": "收敛过程与协议版本"
+      },
+      "code": "03.03.03",
+      "reason": "考查STP收敛、协议版本或MST域与实例配置。"
+    },
+    {
+      "id": "collection-c06-q008",
+      "file": "server/question-banks/network-engineer/questions/user-collection/06.json",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "STP生成树",
+        "knowledgePoint": "端口角色与BPDU"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "STP生成树",
+        "knowledgePoint": "收敛过程与协议版本"
+      },
+      "code": "03.03.03",
+      "reason": "考查STP收敛、协议版本或MST域与实例配置。"
+    },
+    {
+      "id": "collection-c06-q009",
+      "file": "server/question-banks/network-engineer/questions/user-collection/06.json",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "STP生成树",
+        "knowledgePoint": "端口角色与BPDU"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "STP生成树",
+        "knowledgePoint": "收敛过程与协议版本"
+      },
+      "code": "03.03.03",
+      "reason": "考查STP收敛、协议版本或MST域与实例配置。"
+    },
+    {
+      "id": "collection-c06-q013",
+      "file": "server/question-banks/network-engineer/questions/user-collection/06.json",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "VLAN",
+        "knowledgePoint": "802.1Q与VLAN标签"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "VLAN",
+        "knowledgePoint": "VLAN间路由与VLAN聚合"
+      },
+      "code": "03.02.03",
+      "reason": "VLANIF/SVI和VLAN聚合属于VLAN间路由，不是802.1Q帧标签。"
+    },
+    {
+      "id": "collection-c06-q014",
+      "file": "server/question-banks/network-engineer/questions/user-collection/06.json",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "VLAN",
+        "knowledgePoint": "802.1Q与VLAN标签"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "VLAN",
+        "knowledgePoint": "VLAN间路由与VLAN聚合"
+      },
+      "code": "03.02.03",
+      "reason": "VLANIF/SVI和VLAN聚合属于VLAN间路由，不是802.1Q帧标签。"
+    },
+    {
+      "id": "collection-c06-q034",
+      "file": "server/question-banks/network-engineer/questions/user-collection/06.json",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "STP生成树",
+        "knowledgePoint": "端口角色与BPDU"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "STP生成树",
+        "knowledgePoint": "收敛过程与协议版本"
+      },
+      "code": "03.03.03",
+      "reason": "考查STP收敛、协议版本或MST域与实例配置。"
+    },
+    {
+      "id": "collection-c06-q036",
+      "file": "server/question-banks/network-engineer/questions/user-collection/06.json",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "STP生成树",
+        "knowledgePoint": "端口角色与BPDU"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "STP生成树",
+        "knowledgePoint": "BID与根桥选举"
+      },
+      "code": "03.03.01",
+      "reason": "BID和根桥选举应归入唯一的根桥选举节点。"
+    },
+    {
+      "id": "collection-c07-q001",
+      "file": "server/question-banks/network-engineer/questions/user-collection/07.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      },
+      "code": "02.03.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c07-q002",
+      "file": "server/question-banks/network-engineer/questions/user-collection/07.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      },
+      "code": "02.03.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c07-q003",
+      "file": "server/question-banks/network-engineer/questions/user-collection/07.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "网络地址、广播地址与可用主机"
+      },
+      "code": "02.03.02",
+      "reason": "给定地址掩码求网络、广播或主机范围，区别于重新划分子网。"
+    },
+    {
+      "id": "collection-c07-q004",
+      "file": "server/question-banks/network-engineer/questions/user-collection/07.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "网络地址、广播地址与可用主机"
+      },
+      "code": "02.03.02",
+      "reason": "给定地址掩码求网络、广播或主机范围，区别于重新划分子网。"
+    },
+    {
+      "id": "collection-c07-q005",
+      "file": "server/question-banks/network-engineer/questions/user-collection/07.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      },
+      "code": "02.03.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c07-q007",
+      "file": "server/question-banks/network-engineer/questions/user-collection/07.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      },
+      "code": "02.03.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c07-q009",
+      "file": "server/question-banks/network-engineer/questions/user-collection/07.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "IPv4地址类别与特殊地址"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "网络地址、广播地址与可用主机"
+      },
+      "code": "02.03.02",
+      "reason": "给定地址掩码求网络、广播或主机范围，区别于重新划分子网。"
+    },
+    {
+      "id": "collection-c07-q013",
+      "file": "server/question-banks/network-engineer/questions/user-collection/07.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      },
+      "code": "02.03.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c07-q014",
+      "file": "server/question-banks/network-engineer/questions/user-collection/07.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      },
+      "code": "02.03.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c07-q015",
+      "file": "server/question-banks/network-engineer/questions/user-collection/07.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      },
+      "code": "02.03.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c07-q018",
+      "file": "server/question-banks/network-engineer/questions/user-collection/07.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      },
+      "code": "02.03.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c07-q019",
+      "file": "server/question-banks/network-engineer/questions/user-collection/07.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      },
+      "code": "02.03.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c07-q022",
+      "file": "server/question-banks/network-engineer/questions/user-collection/07.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      },
+      "code": "02.03.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c07-q026",
+      "file": "server/question-banks/network-engineer/questions/user-collection/07.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "网络地址、广播地址与可用主机"
+      },
+      "code": "02.03.02",
+      "reason": "给定地址掩码求网络、广播或主机范围，区别于重新划分子网。"
+    },
+    {
+      "id": "collection-c07-q028",
+      "file": "server/question-banks/network-engineer/questions/user-collection/07.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "网络地址、广播地址与可用主机"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "CIDR与路由聚合"
+      },
+      "code": "02.03.04",
+      "reason": "考查多条网络的聚合或路由汇总，统一归入CIDR。"
+    },
+    {
+      "id": "collection-c07-q029",
+      "file": "server/question-banks/network-engineer/questions/user-collection/07.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "网络地址、广播地址与可用主机"
+      },
+      "code": "02.03.02",
+      "reason": "给定地址掩码求网络、广播或主机范围，区别于重新划分子网。"
+    },
+    {
+      "id": "collection-c07-q030",
+      "file": "server/question-banks/network-engineer/questions/user-collection/07.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      },
+      "code": "02.03.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c07-q038",
+      "file": "server/question-banks/network-engineer/questions/user-collection/07.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "网络地址、广播地址与可用主机"
+      },
+      "code": "02.03.02",
+      "reason": "给定地址掩码求网络、广播或主机范围，区别于重新划分子网。"
+    },
+    {
+      "id": "collection-c07-q041",
+      "file": "server/question-banks/network-engineer/questions/user-collection/07.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      },
+      "code": "02.03.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c08-q003",
+      "file": "server/question-banks/network-engineer/questions/user-collection/08.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "对称加密算法"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "非对称加密算法"
+      },
+      "code": "05.01.02",
+      "reason": "明确要求识别非对称算法，不能归入对称加密。"
+    },
+    {
+      "id": "collection-c08-q004",
+      "file": "server/question-banks/network-engineer/questions/user-collection/08.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与常见漏洞"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与漏洞防护"
+      },
+      "code": "05.05.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c08-q005",
+      "file": "server/question-banks/network-engineer/questions/user-collection/08.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "VPN与安全传输",
+        "knowledgePoint": "TLS与安全传输协议"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "PKI与数字证书",
+        "knowledgePoint": "证书验证与CRL吊销"
+      },
+      "code": "05.02.02",
+      "reason": "最终设问是证书身份验证，应归入PKI验证流程。"
+    },
+    {
+      "id": "collection-c08-q008",
+      "file": "server/question-banks/network-engineer/questions/user-collection/08.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "密码学原则与传输加密"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "密码学原则与加密方式"
+      },
+      "code": "05.01.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c08-q010",
+      "file": "server/question-banks/network-engineer/questions/user-collection/08.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "非对称加密与Hash摘要"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "非对称加密算法"
+      },
+      "code": "05.01.02",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c08-q016",
+      "file": "server/question-banks/network-engineer/questions/user-collection/08.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与常见漏洞"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "恶意软件、社会工程与应急响应"
+      },
+      "code": "05.05.04",
+      "reason": "恶意软件、社会工程和事件处置不属于Web漏洞或零信任架构。"
+    },
+    {
+      "id": "collection-c08-q018",
+      "file": "server/question-banks/network-engineer/questions/user-collection/08.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "非对称加密与Hash摘要"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "Hash、HMAC与口令存储"
+      },
+      "code": "05.01.04",
+      "reason": "摘要、HMAC和口令存储独立于可解密的非对称加密算法。"
+    },
+    {
+      "id": "collection-c08-q020",
+      "file": "server/question-banks/network-engineer/questions/user-collection/08.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DDoS"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DoS与DDoS"
+      },
+      "code": "05.05.02",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c08-q021",
+      "file": "server/question-banks/network-engineer/questions/user-collection/08.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与常见漏洞"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "恶意软件、社会工程与应急响应"
+      },
+      "code": "05.05.04",
+      "reason": "恶意软件、社会工程和事件处置不属于Web漏洞或零信任架构。"
+    },
+    {
+      "id": "collection-c08-q025",
+      "file": "server/question-banks/network-engineer/questions/user-collection/08.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与常见漏洞"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与漏洞防护"
+      },
+      "code": "05.05.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c08-q027",
+      "file": "server/question-banks/network-engineer/questions/user-collection/08.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "非对称加密与Hash摘要"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "PKI与数字证书",
+        "knowledgePoint": "CA、数字证书与数字签名"
+      },
+      "code": "05.02.01",
+      "reason": "CA职责属于PKI，不属于摘要算法。"
+    },
+    {
+      "id": "collection-c08-q031",
+      "file": "server/question-banks/network-engineer/questions/user-collection/08.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DDoS"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DoS与DDoS"
+      },
+      "code": "05.05.02",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c08-q032",
+      "file": "server/question-banks/network-engineer/questions/user-collection/08.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与常见漏洞"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "恶意软件、社会工程与应急响应"
+      },
+      "code": "05.05.04",
+      "reason": "恶意软件、社会工程和事件处置不属于Web漏洞或零信任架构。"
+    },
+    {
+      "id": "collection-c08-q040",
+      "file": "server/question-banks/network-engineer/questions/user-collection/08.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "非对称加密与Hash摘要"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "Hash、HMAC与口令存储"
+      },
+      "code": "05.01.04",
+      "reason": "摘要、HMAC和口令存储独立于可解密的非对称加密算法。"
+    },
+    {
+      "id": "collection-c08-q050",
+      "file": "server/question-banks/network-engineer/questions/user-collection/08.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "密码学原则与传输加密"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "密码学原则与加密方式"
+      },
+      "code": "05.01.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c09-q009",
+      "file": "server/question-banks/network-engineer/questions/user-collection/09.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "管理协议与监控",
+        "knowledgePoint": "SNMP版本、MIB与报文"
+      },
+      "code": "07.02.01",
+      "reason": "SNMP单协议端口和管理协议比较归入SNMP，跨协议综合节点只收横向比较。"
+    },
+    {
+      "id": "collection-c09-q014",
+      "file": "server/question-banks/network-engineer/questions/user-collection/09.json",
+      "before": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "ipconfig、netstat与路由工具"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "ping与tracert连通性检查"
+      },
+      "code": "07.03.01",
+      "reason": "ping参数和连通性检测收敛到ping/tracert节点。"
+    },
+    {
+      "id": "collection-c09-q020",
+      "file": "server/question-banks/network-engineer/questions/user-collection/09.json",
+      "before": {
+        "chapter": "网络管理",
+        "knowledgeSection": "网络管理功能",
+        "knowledgePoint": "故障、配置、性能、安全与计费管理"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "管理协议与监控",
+        "knowledgePoint": "SNMP版本、MIB与报文"
+      },
+      "code": "07.02.01",
+      "reason": "SNMP单协议端口和管理协议比较归入SNMP，跨协议综合节点只收横向比较。"
+    },
+    {
+      "id": "collection-c09-q021",
+      "file": "server/question-banks/network-engineer/questions/user-collection/09.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "OSI七层模型"
+      },
+      "code": "02.01.01",
+      "reason": "统一归入OSI层次、职责、PDU和协议或设备所在层，消除同一考点的分散入口。"
+    },
+    {
+      "id": "collection-c09-q022",
+      "file": "server/question-banks/network-engineer/questions/user-collection/09.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "管理协议与监控",
+        "knowledgePoint": "SNMP版本、MIB与报文"
+      },
+      "code": "07.02.01",
+      "reason": "SNMP单协议端口和管理协议比较归入SNMP，跨协议综合节点只收横向比较。"
+    },
+    {
+      "id": "collection-c09-q032",
+      "file": "server/question-banks/network-engineer/questions/user-collection/09.json",
+      "before": {
+        "chapter": "网络管理",
+        "knowledgeSection": "网络管理功能",
+        "knowledgePoint": "故障、配置、性能、安全与计费管理"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "管理协议与监控",
+        "knowledgePoint": "SNMP版本、MIB与报文"
+      },
+      "code": "07.02.01",
+      "reason": "SNMP单协议端口和管理协议比较归入SNMP，跨协议综合节点只收横向比较。"
+    },
+    {
+      "id": "collection-c09-q045",
+      "file": "server/question-banks/network-engineer/questions/user-collection/09.json",
+      "before": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "ipconfig、netstat与路由工具"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "ping与tracert连通性检查"
+      },
+      "code": "07.03.01",
+      "reason": "ping参数和连通性检测收敛到ping/tracert节点。"
+    },
+    {
+      "id": "collection-c10-q001",
+      "file": "server/question-banks/network-engineer/questions/user-collection/10.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "电子邮件、LDAP与远程登录"
+      },
+      "code": "02.06.05",
+      "reason": "邮件或远程登录单协议题归入对应协议，避免端口题再次拆散。"
+    },
+    {
+      "id": "collection-c10-q003",
+      "file": "server/question-banks/network-engineer/questions/user-collection/10.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "文件传输协议FTP、TFTP与SFTP"
+      },
+      "code": "02.06.04",
+      "reason": "只考查FTP控制和数据连接端口，应与FTP流程放在一起。"
+    },
+    {
+      "id": "collection-c10-q006",
+      "file": "server/question-banks/network-engineer/questions/user-collection/10.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "跨协议端口与传输协议辨析"
+      },
+      "code": "02.06.06",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c10-q009",
+      "file": "server/question-banks/network-engineer/questions/user-collection/10.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "电子邮件、LDAP与远程登录"
+      },
+      "code": "02.06.05",
+      "reason": "邮件或远程登录单协议题归入对应协议，避免端口题再次拆散。"
+    },
+    {
+      "id": "collection-c10-q012",
+      "file": "server/question-banks/network-engineer/questions/user-collection/10.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "FTP与TFTP"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "文件传输协议FTP、TFTP与SFTP"
+      },
+      "code": "02.06.04",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c10-q018",
+      "file": "server/question-banks/network-engineer/questions/user-collection/10.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "FTP与TFTP"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "文件传输协议FTP、TFTP与SFTP"
+      },
+      "code": "02.06.04",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c10-q020",
+      "file": "server/question-banks/network-engineer/questions/user-collection/10.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "跨协议端口与传输协议辨析"
+      },
+      "code": "02.06.06",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c10-q042",
+      "file": "server/question-banks/network-engineer/questions/user-collection/10.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "FTP与TFTP"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "文件传输协议FTP、TFTP与SFTP"
+      },
+      "code": "02.06.04",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "collection-c10-q044",
+      "file": "server/question-banks/network-engineer/questions/user-collection/10.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "电子邮件、LDAP与远程登录"
+      },
+      "code": "02.06.05",
+      "reason": "邮件或远程登录单协议题归入对应协议，避免端口题再次拆散。"
+    },
+    {
+      "id": "collection-c10-q046",
+      "file": "server/question-banks/network-engineer/questions/user-collection/10.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "HTTP与HTTPS"
+      },
+      "code": "02.06.03",
+      "reason": "HTTP端口、会话状态或REST接口属于HTTP协议应用。"
+    },
+    {
+      "id": "collection-c10-q049",
+      "file": "server/question-banks/network-engineer/questions/user-collection/10.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "常用协议端口综合"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "HTTP与HTTPS"
+      },
+      "code": "02.06.03",
+      "reason": "HTTP端口、会话状态或REST接口属于HTTP协议应用。"
+    },
+    {
+      "id": "collection-c11-q003",
+      "file": "server/question-banks/network-engineer/questions/user-collection/11.json",
+      "before": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "常用命令与系统管理"
+      },
+      "after": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "权限、进程与文件系统"
+      },
+      "code": "06.02.02",
+      "reason": "权限、进程、设备文件与目录结构收敛到Linux权限及文件系统节点。"
+    },
+    {
+      "id": "collection-c11-q005",
+      "file": "server/question-banks/network-engineer/questions/user-collection/11.json",
+      "before": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "常用命令与系统管理"
+      },
+      "after": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "权限、进程与文件系统"
+      },
+      "code": "06.02.02",
+      "reason": "权限、进程、设备文件与目录结构收敛到Linux权限及文件系统节点。"
+    },
+    {
+      "id": "collection-c11-q006",
+      "file": "server/question-banks/network-engineer/questions/user-collection/11.json",
+      "before": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "常用命令与系统管理"
+      },
+      "after": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "权限、进程与文件系统"
+      },
+      "code": "06.02.02",
+      "reason": "权限、进程、设备文件与目录结构收敛到Linux权限及文件系统节点。"
+    },
+    {
+      "id": "collection-c11-q007",
+      "file": "server/question-banks/network-engineer/questions/user-collection/11.json",
+      "before": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "常用命令与系统管理"
+      },
+      "after": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "权限、进程与文件系统"
+      },
+      "code": "06.02.02",
+      "reason": "权限、进程、设备文件与目录结构收敛到Linux权限及文件系统节点。"
+    },
+    {
+      "id": "collection-c11-q008",
+      "file": "server/question-banks/network-engineer/questions/user-collection/11.json",
+      "before": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "常用命令与系统管理"
+      },
+      "after": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "权限、进程与文件系统"
+      },
+      "code": "06.02.02",
+      "reason": "权限、进程、设备文件与目录结构收敛到Linux权限及文件系统节点。"
+    },
+    {
+      "id": "collection-c11-q009",
+      "file": "server/question-banks/network-engineer/questions/user-collection/11.json",
+      "before": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Windows服务器",
+        "knowledgePoint": "AD、账户与服务管理"
+      },
+      "after": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Windows服务器",
+        "knowledgePoint": "Windows服务与远程管理"
+      },
+      "code": "06.01.04",
+      "reason": "Windows服务及远程桌面不属于AD账户目录。"
+    },
+    {
+      "id": "collection-c11-q018",
+      "file": "server/question-banks/network-engineer/questions/user-collection/11.json",
+      "before": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "常用命令与系统管理"
+      },
+      "after": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "权限、进程与文件系统"
+      },
+      "code": "06.02.02",
+      "reason": "权限、进程、设备文件与目录结构收敛到Linux权限及文件系统节点。"
+    },
+    {
+      "id": "collection-c11-q020",
+      "file": "server/question-banks/network-engineer/questions/user-collection/11.json",
+      "before": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Windows服务器",
+        "knowledgePoint": "AD、账户与服务管理"
+      },
+      "after": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Windows服务器",
+        "knowledgePoint": "Windows服务与远程管理"
+      },
+      "code": "06.01.04",
+      "reason": "Windows服务及远程桌面不属于AD账户目录。"
+    },
+    {
+      "id": "intake-2026-spring-q002",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "CPU流水线"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "指令系统、寻址与中断"
+      },
+      "code": "01.04.03",
+      "reason": "RISC、操作数寻址和中断属于指令系统，不是流水线。"
+    },
+    {
+      "id": "intake-2026-spring-q004",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "编码与调制"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "信道容量与数据速率"
+      },
+      "code": "02.02.03",
+      "reason": "虽使用QAM，但最终设问是奈奎斯特极限数据速率。"
+    },
+    {
+      "id": "intake-2026-spring-q005",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "信道容量与数据速率"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "同步、双工与多路复用"
+      },
+      "code": "02.02.02",
+      "reason": "考查异步同步或统计复用机制。"
+    },
+    {
+      "id": "intake-2026-spring-q011",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "其他交换技术",
+        "knowledgePoint": "链路聚合、堆叠、QinQ与PoE"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "网络架构新技术",
+        "knowledgePoint": "VXLAN与Overlay网络"
+      },
+      "code": "10.01.04",
+      "reason": "考查VXLAN租户隔离或与QinQ比较，单列Overlay技术。"
+    },
+    {
+      "id": "intake-2026-spring-q012",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "VLAN",
+        "knowledgePoint": "802.1Q与VLAN标签"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "VLAN",
+        "knowledgePoint": "VLAN间路由与VLAN聚合"
+      },
+      "code": "03.02.03",
+      "reason": "VLANIF/SVI和VLAN聚合属于VLAN间路由，不是802.1Q帧标签。"
+    },
+    {
+      "id": "intake-2026-spring-q017",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "5G"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "4G与5G移动通信"
+      },
+      "code": "10.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "intake-2026-spring-q018",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "数据链路层流量控制与ARQ"
+      },
+      "code": "02.02.06",
+      "reason": "明确考查GBN或停等ARQ的重传、信道利用率。"
+    },
+    {
+      "id": "intake-2026-spring-q021-a",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      },
+      "code": "02.03.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "intake-2026-spring-q021-b",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      },
+      "code": "02.03.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "intake-2026-spring-q027",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "QoS服务模型与流量管理"
+      },
+      "code": "08.03.03",
+      "reason": "资源预留、QoS模型与流量整形属于服务质量机制，区别于带宽时延指标。"
+    },
+    {
+      "id": "intake-2026-spring-q028",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6过渡技术"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6报文与协议特性"
+      },
+      "code": "02.07.04",
+      "reason": "IPv6首部、ICMPv6、分片和路径MTU不属于IPv4/IPv6过渡技术或地址写法。"
+    },
+    {
+      "id": "intake-2026-spring-q029",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6过渡技术"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6报文与协议特性"
+      },
+      "code": "02.07.04",
+      "reason": "IPv6首部、ICMPv6、分片和路径MTU不属于IPv4/IPv6过渡技术或地址写法。"
+    },
+    {
+      "id": "intake-2026-spring-q037",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "NB-IoT"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "物联网与NB-IoT"
+      },
+      "code": "10.02.02",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "intake-2026-spring-q040",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "存储器与可靠性",
+        "knowledgePoint": "NAS、SAN与存储网络"
+      },
+      "code": "01.03.05",
+      "reason": "明确考查FC、NAS或SAN存储网络，区别于OSI分层和存储介质速度。"
+    },
+    {
+      "id": "intake-2026-spring-q042",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DDoS"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DoS与DDoS"
+      },
+      "code": "05.05.02",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "intake-2026-spring-q043",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DDoS"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DoS与DDoS"
+      },
+      "code": "05.05.02",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "intake-2026-spring-q044",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网际层协议",
+        "knowledgePoint": "ARP与RARP"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "ipconfig、netstat与路由工具"
+      },
+      "code": "07.03.02",
+      "reason": "考查客户端诊断命令或监听状态查看，不是DNS/ARP协议机制或服务部署。"
+    },
+    {
+      "id": "intake-2026-spring-q045",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "非对称加密与Hash摘要"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "非对称加密算法"
+      },
+      "code": "05.01.02",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "intake-2026-spring-q051",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "网络拓扑"
+      },
+      "after": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "网络需求分析与拓扑设计"
+      },
+      "code": "08.03.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "intake-2026-spring-q052",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "路由表、静态路由与默认路由"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "策略路由、路由策略与重分发"
+      },
+      "code": "04.01.05",
+      "reason": "策略路由、前缀列表和路由重分发需要独立的路由策略节点。"
+    },
+    {
+      "id": "intake-2026-spring-q053",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "VPN与安全传输",
+        "knowledgePoint": "IPsec VPN与SSL VPN"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "VPN与安全传输",
+        "knowledgePoint": "GRE隧道"
+      },
+      "code": "05.06.03",
+      "reason": "GRE本身是隧道封装，不能与提供加密的IPsec VPN混为一个考点。"
+    },
+    {
+      "id": "intake-2026-spring-q055",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "OSPF",
+        "knowledgePoint": "区域、LSA与邻居状态"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "OSPF",
+        "knowledgePoint": "OSPF度量与路由计算"
+      },
+      "code": "04.03.04",
+      "reason": "考查OSPF成本、SPF计算或度量规则。"
+    },
+    {
+      "id": "intake-2026-spring-q056",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "BGP",
+        "knowledgePoint": "AS与路径矢量"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "BGP",
+        "knowledgePoint": "BGP路由属性与选路"
+      },
+      "code": "04.04.02",
+      "reason": "AS_PATH属于BGP路径属性。"
+    },
+    {
+      "id": "intake-2026-spring-q059",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "5G"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "4G与5G移动通信"
+      },
+      "code": "10.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "intake-2026-spring-q064",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6过渡技术"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6报文与协议特性"
+      },
+      "code": "02.07.04",
+      "reason": "IPv6首部、ICMPv6、分片和路径MTU不属于IPv4/IPv6过渡技术或地址写法。"
+    },
+    {
+      "id": "intake-2026-spring-q065-a",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      },
+      "code": "04.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "intake-2026-spring-q065-b",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      },
+      "code": "04.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "intake-2026-spring-q065-c",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      },
+      "code": "04.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "intake-2026-spring-q065-d",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      },
+      "code": "04.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "intake-2026-spring-q065-e",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-spring-intake/01.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      },
+      "code": "04.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "sealed-morning-2026h1-q001",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "CPU流水线"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "指令系统、寻址与中断"
+      },
+      "code": "01.04.03",
+      "reason": "RISC、操作数寻址和中断属于指令系统，不是流水线。"
+    },
+    {
+      "id": "sealed-morning-2026h1-q002",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "CPU流水线"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "指令系统、寻址与中断"
+      },
+      "code": "01.04.03",
+      "reason": "RISC、操作数寻址和中断属于指令系统，不是流水线。"
+    },
+    {
+      "id": "sealed-morning-2026h1-q004",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "数制与编码",
+        "knowledgePoint": "原码、反码、补码与移码"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "数制与编码",
+        "knowledgePoint": "浮点数表示"
+      },
+      "code": "01.01.03",
+      "reason": "浮点数范围和精度属于浮点表示，不属于补码编码。"
+    },
+    {
+      "id": "sealed-morning-2026h1-q006",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "项目管理与法律法规",
+        "knowledgeSection": "项目控制",
+        "knowledgePoint": "质量管理"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "软件工程基础",
+        "knowledgePoint": "软件测试方法"
+      },
+      "code": "01.06.02",
+      "reason": "边界值测试属于软件测试方法。"
+    },
+    {
+      "id": "sealed-morning-2026h1-q007",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "项目管理与法律法规",
+        "knowledgeSection": "项目控制",
+        "knowledgePoint": "质量管理"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "软件工程基础",
+        "knowledgePoint": "开发模型与需求分析"
+      },
+      "code": "01.06.01",
+      "reason": "软件开发模型或需求分析不属于项目质量控制或配置管理。"
+    },
+    {
+      "id": "sealed-morning-2026h1-q013",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "信道容量与数据速率"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "数据通信与传输",
+        "knowledgePoint": "数据链路层流量控制与ARQ"
+      },
+      "code": "02.02.06",
+      "reason": "明确考查GBN或停等ARQ的重传、信道利用率。"
+    },
+    {
+      "id": "sealed-morning-2026h1-q033",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "密码学原则与传输加密"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "密码学原则与加密方式"
+      },
+      "code": "05.01.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "sealed-morning-2026h1-q036",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      },
+      "code": "02.03.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "sealed-morning-2026h1-q038",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "DHCP"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "IPv4地址类别与特殊地址"
+      },
+      "code": "02.03.01",
+      "reason": "考查APIPA地址范围，不是ICMP或DHCP报文流程。"
+    },
+    {
+      "id": "sealed-morning-2026h1-q040",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "FTP与TFTP"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "文件传输协议FTP、TFTP与SFTP"
+      },
+      "code": "02.06.04",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "sealed-morning-2026h1-q041",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "FTP与TFTP"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "文件传输协议FTP、TFTP与SFTP"
+      },
+      "code": "02.06.04",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "sealed-morning-2026h1-q044",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "设备Console与维护接入"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "诊断工具与设备排查",
+        "knowledgePoint": "设备接入与接口排障"
+      },
+      "code": "07.03.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "sealed-morning-2026h1-q048",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "地址表示与地址类型"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv6",
+        "knowledgePoint": "IPv6地址自动配置与DHCPv6"
+      },
+      "code": "02.07.05",
+      "reason": "考查SLAAC或DHCPv6自动配置，不是IPv6地址表示。"
+    },
+    {
+      "id": "sealed-morning-2026h1-q057",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与常见漏洞"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "恶意软件、社会工程与应急响应"
+      },
+      "code": "05.05.04",
+      "reason": "恶意软件、社会工程和事件处置不属于Web漏洞或零信任架构。"
+    },
+    {
+      "id": "sealed-morning-2026h1-q061",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "水平分割、毒性逆转与触发更新"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      },
+      "code": "04.02.01",
+      "reason": "考查RIPv1版本能力，不专门考防环机制。"
+    },
+    {
+      "id": "sealed-morning-2026h1-q065",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "带宽、时延、丢包率与吞吐量"
+      },
+      "after": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "QoS服务模型与流量管理"
+      },
+      "code": "08.03.03",
+      "reason": "资源预留、QoS模型与流量整形属于服务质量机制，区别于带宽时延指标。"
+    },
+    {
+      "id": "sealed-morning-2026h1-q068",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "网络拓扑"
+      },
+      "after": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "网络需求分析与拓扑设计"
+      },
+      "code": "08.03.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "sealed-morning-2026h1-q069",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "网络拓扑"
+      },
+      "after": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "网络需求分析与拓扑设计"
+      },
+      "code": "08.03.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "sealed-morning-2026h1-q071",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网际层协议",
+        "knowledgePoint": "网络层服务与分组交换"
+      },
+      "code": "02.04.03",
+      "reason": "设问考查虚电路和数据报服务模型，共用英语题干不决定该小题归属。"
+    },
+    {
+      "id": "sealed-morning-2026h1-q072",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "网络模型与分层",
+        "knowledgePoint": "协议、服务、PDU与设备所在层"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "路由表、静态路由与默认路由"
+      },
+      "code": "04.01.01",
+      "reason": "设问考查网络层路由转发职责，不因共用题干的QoS背景归入网络性能。"
+    },
+    {
+      "id": "sealed-morning-2026h1-q074",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "带宽、时延、丢包率与吞吐量"
+      },
+      "after": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "QoS服务模型与流量管理"
+      },
+      "code": "08.03.03",
+      "reason": "资源预留、QoS模型与流量整形属于服务质量机制，区别于带宽时延指标。"
+    },
+    {
+      "id": "sealed-morning-2026h1-q075",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "带宽、时延、丢包率与吞吐量"
+      },
+      "after": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "QoS服务模型与流量管理"
+      },
+      "code": "08.03.03",
+      "reason": "资源预留、QoS模型与流量整形属于服务质量机制，区别于带宽时延指标。"
+    },
+    {
+      "id": "h1-case-c1-q1",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      },
+      "code": "04.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "h1-case-c1-q3",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "路由表、静态路由与默认路由"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "策略路由、路由策略与重分发"
+      },
+      "code": "04.01.05",
+      "reason": "策略路由、前缀列表和路由重分发需要独立的路由策略节点。"
+    },
+    {
+      "id": "h1-case-c1-q4",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "路由协议类型与算法"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "策略路由、路由策略与重分发"
+      },
+      "code": "04.01.05",
+      "reason": "策略路由、前缀列表和路由重分发需要独立的路由策略节点。"
+    },
+    {
+      "id": "h1-case-c2-q2",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "路由优先级、管理距离与度量值"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "VRRP与网关冗余"
+      },
+      "code": "04.01.04",
+      "reason": "VRRP的Master优先级和链路跟踪不是路由优先级，独立归入网关冗余。"
+    },
+    {
+      "id": "h1-case-c2-q3",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "路由优先级、管理距离与度量值"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "VRRP与网关冗余"
+      },
+      "code": "04.01.04",
+      "reason": "VRRP的Master优先级和链路跟踪不是路由优先级，独立归入网关冗余。"
+    },
+    {
+      "id": "h1-sealed-p1-q1",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "FTP与TFTP"
+      },
+      "after": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "网络接口与服务配置"
+      },
+      "code": "06.02.03",
+      "reason": "考查Linux的vsftpd或SSH配置，不是FTP协议基本概念或文件权限。"
+    },
+    {
+      "id": "h1-sealed-p1-q3",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "应用层协议与端口",
+        "knowledgePoint": "FTP与TFTP"
+      },
+      "after": {
+        "chapter": "服务器配置",
+        "knowledgeSection": "Linux服务器",
+        "knowledgePoint": "网络接口与服务配置"
+      },
+      "code": "06.02.03",
+      "reason": "考查Linux的vsftpd或SSH配置，不是FTP协议基本概念或文件权限。"
+    },
+    {
+      "id": "h1-sealed-p3-q2",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-external/questions.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与常见漏洞"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "Web攻击与漏洞防护"
+      },
+      "code": "05.05.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "lastset-general-2026h1-q004",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-last-set/questions.json",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "CPU流水线"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "计算机组成",
+        "knowledgePoint": "计算机性能指标"
+      },
+      "code": "01.04.04",
+      "reason": "FLOPS属于性能衡量指标，不是CPU流水线。"
+    },
+    {
+      "id": "lastset-general-2026h1-q005",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-last-set/questions.json",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "存储器与可靠性",
+        "knowledgePoint": "串并联系统可靠性"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "存储器与可靠性",
+        "knowledgePoint": "系统可靠性与可用性"
+      },
+      "code": "01.03.04",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "lastset-general-2026h1-q017",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-last-set/questions.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "路由优先级、管理距离与度量值"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "VRRP与网关冗余"
+      },
+      "code": "04.01.04",
+      "reason": "VRRP的Master优先级和链路跟踪不是路由优先级，独立归入网关冗余。"
+    },
+    {
+      "id": "lastset-general-2026h1-q025",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-last-set/questions.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "OSPF",
+        "knowledgePoint": "区域、LSA与邻居状态"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "OSPF",
+        "knowledgePoint": "OSPF度量与路由计算"
+      },
+      "code": "04.03.04",
+      "reason": "考查OSPF成本、SPF计算或度量规则。"
+    },
+    {
+      "id": "lastset-general-2026h1-q028",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-last-set/questions.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "距离矢量与最大跳数"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "RIP",
+        "knowledgePoint": "RIP工作原理、版本与报文"
+      },
+      "code": "04.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "lastset-general-2026h1-q029",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-last-set/questions.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "路由协议类型与算法"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "策略路由、路由策略与重分发"
+      },
+      "code": "04.01.05",
+      "reason": "策略路由、前缀列表和路由重分发需要独立的路由策略节点。"
+    },
+    {
+      "id": "lastset-general-2026h1-q030",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-last-set/questions.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "路由协议类型与算法"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "策略路由、路由策略与重分发"
+      },
+      "code": "04.01.05",
+      "reason": "策略路由、前缀列表和路由重分发需要独立的路由策略节点。"
+    },
+    {
+      "id": "lastset-general-2026h1-q043",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-last-set/questions.json",
+      "before": {
+        "chapter": "网络管理",
+        "knowledgeSection": "管理协议与监控",
+        "knowledgePoint": "SNMP版本、MIB与报文"
+      },
+      "after": {
+        "chapter": "网络管理",
+        "knowledgeSection": "管理协议与监控",
+        "knowledgePoint": "NETCONF与配置自动化"
+      },
+      "code": "07.02.03",
+      "reason": "NETCONF采用独立的配置数据模型与操作，不是SNMP/MIB。"
+    },
+    {
+      "id": "lastset-general-2026h1-q048",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-last-set/questions.json",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "5G"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "4G与5G移动通信"
+      },
+      "code": "10.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "lastset-general-2026h1-q049",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-last-set/questions.json",
+      "before": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "5G"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "移动与物联网",
+        "knowledgePoint": "4G与5G移动通信"
+      },
+      "code": "10.02.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "lastset-general-2026h1-q053",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-last-set/questions.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "密码与加密",
+        "knowledgePoint": "密码学原则与传输加密"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络设备与边界防护",
+        "knowledgePoint": "身份认证与安全运维"
+      },
+      "code": "05.04.04",
+      "reason": "多因素认证与默认口令治理属于身份认证及安全运维。"
+    },
+    {
+      "id": "lastset-general-2026h1-q054",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-last-set/questions.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "PKI与数字证书",
+        "knowledgePoint": "CA、数字证书与数字签名"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DNS欺骗与DNSSEC"
+      },
+      "code": "05.05.05",
+      "reason": "DNS欺骗和DNSSEC归入同一个DNS安全节点，避免散落于Web漏洞和数字证书。"
+    },
+    {
+      "id": "lastset-general-2026h1-q058",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-last-set/questions.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DDoS"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DoS与DDoS"
+      },
+      "code": "05.05.02",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "lastset-general-2026h1-q060",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-last-set/questions.json",
+      "before": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "路由基础",
+        "knowledgePoint": "路由协议类型与算法"
+      },
+      "after": {
+        "chapter": "路由与广域网技术",
+        "knowledgeSection": "广域网链路",
+        "knowledgePoint": "MPLS标签转发"
+      },
+      "code": "04.05.03",
+      "reason": "考查MPLS标签压入，不属于IP动态路由算法。"
+    },
+    {
+      "id": "lastset-general-2026h1-q063",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-last-set/questions.json",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "VLAN",
+        "knowledgePoint": "802.1Q与VLAN标签"
+      },
+      "after": {
+        "chapter": "新技术",
+        "knowledgeSection": "网络架构新技术",
+        "knowledgePoint": "VXLAN与Overlay网络"
+      },
+      "code": "10.01.04",
+      "reason": "考查VXLAN租户隔离或与QinQ比较，单列Overlay技术。"
+    },
+    {
+      "id": "lastset-general-2026h1-q067",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-last-set/questions.json",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "存储器与可靠性",
+        "knowledgePoint": "存储介质性能比较"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "存储器与可靠性",
+        "knowledgePoint": "NAS、SAN与存储网络"
+      },
+      "code": "01.03.05",
+      "reason": "明确考查FC、NAS或SAN存储网络，区别于OSI分层和存储介质速度。"
+    },
+    {
+      "id": "lastset-general-2026h1-q068",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-last-set/questions.json",
+      "before": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "网络拓扑"
+      },
+      "after": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "网络需求分析与拓扑设计"
+      },
+      "code": "08.03.01",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "lastset-general-2026h1-q069",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-last-set/questions.json",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "存储器与可靠性",
+        "knowledgePoint": "串并联系统可靠性"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "存储器与可靠性",
+        "knowledgePoint": "系统可靠性与可用性"
+      },
+      "code": "01.03.04",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "lastset-general-2026h1-q075",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-last-set/questions.json",
+      "before": {
+        "chapter": "项目管理与法律法规",
+        "knowledgeSection": "项目控制",
+        "knowledgePoint": "配置管理"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "软件工程基础",
+        "knowledgePoint": "开发模型与需求分析"
+      },
+      "code": "01.06.01",
+      "reason": "软件开发模型或需求分析不属于项目质量控制或配置管理。"
+    },
+    {
+      "id": "lastset-case-2026h1-c2-q03",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-last-set/questions.json",
+      "before": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DDoS"
+      },
+      "after": {
+        "chapter": "网络安全",
+        "knowledgeSection": "网络攻击",
+        "knowledgePoint": "DoS与DDoS"
+      },
+      "code": "05.05.02",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    },
+    {
+      "id": "lastset-case-2026h1-c2-q04",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-last-set/questions.json",
+      "before": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "存储器与可靠性",
+        "knowledgePoint": "存储介质性能比较"
+      },
+      "after": {
+        "chapter": "计算机基础知识",
+        "knowledgeSection": "存储器与可靠性",
+        "knowledgePoint": "NAS、SAN与存储网络"
+      },
+      "code": "01.03.05",
+      "reason": "明确考查FC、NAS或SAN存储网络，区别于OSI分层和存储介质速度。"
+    },
+    {
+      "id": "lastset-case-2026h1-c3-q01",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-last-set/questions.json",
+      "before": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "带宽、时延、丢包率与吞吐量"
+      },
+      "after": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "QoS服务模型与流量管理"
+      },
+      "code": "08.03.03",
+      "reason": "资源预留、QoS模型与流量整形属于服务质量机制，区别于带宽时延指标。"
+    },
+    {
+      "id": "lastset-case-2026h1-c3-q02",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-last-set/questions.json",
+      "before": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "带宽、时延、丢包率与吞吐量"
+      },
+      "after": {
+        "chapter": "综合布线与网络规划",
+        "knowledgeSection": "网络规划与性能",
+        "knowledgePoint": "QoS服务模型与流量管理"
+      },
+      "code": "08.03.03",
+      "reason": "资源预留、QoS模型与流量整形属于服务质量机制，区别于带宽时延指标。"
+    },
+    {
+      "id": "lastset-case-2026h1-c4-q01",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-last-set/questions.json",
+      "before": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "STP生成树",
+        "knowledgePoint": "端口角色与BPDU"
+      },
+      "after": {
+        "chapter": "局域网与交换技术",
+        "knowledgeSection": "STP生成树",
+        "knowledgePoint": "收敛过程与协议版本"
+      },
+      "code": "03.03.03",
+      "reason": "考查STP收敛、协议版本或MST域与实例配置。"
+    },
+    {
+      "id": "lastset-case-2026h1-c4-q03",
+      "file": "server/question-banks/network-engineer/questions/user-provided-2026-h1-last-set/questions.json",
+      "before": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "VLSM子网划分"
+      },
+      "after": {
+        "chapter": "网络体系结构与TCP/IP",
+        "knowledgeSection": "IPv4与子网",
+        "knowledgePoint": "子网划分与VLSM"
+      },
+      "code": "02.03.03",
+      "reason": "统一知识点名称和边界，题目主考点保持不变。"
+    }
+  ]
+}

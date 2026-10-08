@@ -1,0 +1,1928 @@
+{
+  "importedAt": "2026-09-23",
+  "sourceTaxonomy": "server/question-banks/network-engineer/manifest.json",
+  "sourceDraftQuestions": 430,
+  "serverTaxonomyPointCount": 118,
+  "bankQuestionCount": 920,
+  "newBank": {
+    "id": "network-engineer-supplement-20260923",
+    "name": "网络工程师原创补充题（2026-09-23）",
+    "description": "按已确认服务器分类整理的原创单选练习题，答案与解析已复核；非官方真题。",
+    "source": "network_engineer_supplement",
+    "path": "questions/network-engineer-supplement-20260923.json"
+  },
+  "mappedDraftGroups": [
+    {
+      "sourceKnowledgePoint": "数制与编码",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "01.01.01",
+          "chapter": "计算机基础知识",
+          "knowledgeSection": "数制与编码",
+          "knowledgePoint": "进制互转",
+          "questionCountFromDraft": 4
+        },
+        {
+          "code": "01.01.02",
+          "chapter": "计算机基础知识",
+          "knowledgeSection": "数制与编码",
+          "knowledgePoint": "原码、反码、补码与移码",
+          "questionCountFromDraft": 6
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "校验码",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "01.02.01",
+          "chapter": "计算机基础知识",
+          "knowledgeSection": "校验码与差错控制",
+          "knowledgePoint": "奇偶校验",
+          "questionCountFromDraft": 4
+        },
+        {
+          "code": "01.02.02",
+          "chapter": "计算机基础知识",
+          "knowledgeSection": "校验码与差错控制",
+          "knowledgePoint": "海明校验",
+          "questionCountFromDraft": 3
+        },
+        {
+          "code": "01.02.03",
+          "chapter": "计算机基础知识",
+          "knowledgeSection": "校验码与差错控制",
+          "knowledgePoint": "CRC循环冗余校验",
+          "questionCountFromDraft": 3
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "存储器与可靠性",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "01.03.01",
+          "chapter": "计算机基础知识",
+          "knowledgeSection": "存储器与可靠性",
+          "knowledgePoint": "Cache与命中率",
+          "questionCountFromDraft": 3
+        },
+        {
+          "code": "01.03.02",
+          "chapter": "计算机基础知识",
+          "knowledgeSection": "存储器与可靠性",
+          "knowledgePoint": "内存、磁盘与RAID",
+          "questionCountFromDraft": 5
+        },
+        {
+          "code": "01.03.04",
+          "chapter": "计算机基础知识",
+          "knowledgeSection": "存储器与可靠性",
+          "knowledgePoint": "串并联系统可靠性",
+          "questionCountFromDraft": 2
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "计算机组成",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "01.04.01",
+          "chapter": "计算机基础知识",
+          "knowledgeSection": "计算机组成",
+          "knowledgePoint": "CPU流水线",
+          "questionCountFromDraft": 5
+        },
+        {
+          "code": "01.04.02",
+          "chapter": "计算机基础知识",
+          "knowledgeSection": "计算机组成",
+          "knowledgePoint": "总线分类",
+          "questionCountFromDraft": 5
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "操作系统",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "01.05.01",
+          "chapter": "计算机基础知识",
+          "knowledgeSection": "操作系统基础",
+          "knowledgePoint": "进程、线程与死锁",
+          "questionCountFromDraft": 5
+        },
+        {
+          "code": "01.05.02",
+          "chapter": "计算机基础知识",
+          "knowledgeSection": "操作系统基础",
+          "knowledgePoint": "分页与分段虚拟内存",
+          "questionCountFromDraft": 5
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "网络模型",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "02.01.03",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "网络模型与分层",
+          "knowledgePoint": "协议、服务、PDU与设备所在层",
+          "questionCountFromDraft": 3
+        },
+        {
+          "code": "02.05.04",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "传输层",
+          "knowledgePoint": "端口号与多路复用",
+          "questionCountFromDraft": 2
+        },
+        {
+          "code": "03.01.03",
+          "chapter": "局域网与交换技术",
+          "knowledgeSection": "以太网基础",
+          "knowledgePoint": "MAC地址学习与交换转发",
+          "questionCountFromDraft": 1
+        },
+        {
+          "code": "02.01.02",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "网络模型与分层",
+          "knowledgePoint": "TCP/IP四层模型与映射",
+          "questionCountFromDraft": 1
+        },
+        {
+          "code": "02.05.01",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "传输层",
+          "knowledgePoint": "TCP连接与可靠传输",
+          "questionCountFromDraft": 1
+        },
+        {
+          "code": "02.01.01",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "网络模型与分层",
+          "knowledgePoint": "OSI七层模型",
+          "questionCountFromDraft": 2
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "数据通信与传输",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "02.02.05",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "数据通信与传输",
+          "knowledgePoint": "采样定理与PCM",
+          "questionCountFromDraft": 1
+        },
+        {
+          "code": "02.02.03",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "数据通信与传输",
+          "knowledgePoint": "信道容量与数据速率",
+          "questionCountFromDraft": 2
+        },
+        {
+          "code": "02.02.01",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "数据通信与传输",
+          "knowledgePoint": "编码与调制",
+          "questionCountFromDraft": 2
+        },
+        {
+          "code": "02.02.02",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "数据通信与传输",
+          "knowledgePoint": "同步与传输方式",
+          "questionCountFromDraft": 4
+        },
+        {
+          "code": "02.02.04",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "数据通信与传输",
+          "knowledgePoint": "信号质量与眼图",
+          "questionCountFromDraft": 1
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "IPv4 与子网",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "02.03.01",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "IPv4与子网",
+          "knowledgePoint": "IPv4地址类别与特殊地址",
+          "questionCountFromDraft": 2
+        },
+        {
+          "code": "02.03.02",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "IPv4与子网",
+          "knowledgePoint": "网络地址、广播地址与可用主机",
+          "questionCountFromDraft": 3
+        },
+        {
+          "code": "02.03.05",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "IPv4与子网",
+          "knowledgePoint": "IPv4首部、分片、组播与TTL",
+          "questionCountFromDraft": 3
+        },
+        {
+          "code": "02.03.04",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "IPv4与子网",
+          "knowledgePoint": "CIDR与路由聚合",
+          "questionCountFromDraft": 1
+        },
+        {
+          "code": "02.03.03",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "IPv4与子网",
+          "knowledgePoint": "VLSM子网划分",
+          "questionCountFromDraft": 1
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "网际层协议",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "02.04.01",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "网际层协议",
+          "knowledgePoint": "ARP与RARP",
+          "questionCountFromDraft": 5
+        },
+        {
+          "code": "02.04.02",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "网际层协议",
+          "knowledgePoint": "ICMP与控制报文",
+          "questionCountFromDraft": 5
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "传输层",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "02.05.01",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "传输层",
+          "knowledgePoint": "TCP连接与可靠传输",
+          "questionCountFromDraft": 5
+        },
+        {
+          "code": "02.05.02",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "传输层",
+          "knowledgePoint": "TCP窗口、流量控制与拥塞控制",
+          "questionCountFromDraft": 3
+        },
+        {
+          "code": "02.05.03",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "传输层",
+          "knowledgePoint": "UDP特性与应用场景",
+          "questionCountFromDraft": 1
+        },
+        {
+          "code": "02.05.04",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "传输层",
+          "knowledgePoint": "端口号与多路复用",
+          "questionCountFromDraft": 1
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "应用层协议与端口",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "02.06.01",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "应用层协议与端口",
+          "knowledgePoint": "DNS",
+          "questionCountFromDraft": 3
+        },
+        {
+          "code": "02.06.02",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "应用层协议与端口",
+          "knowledgePoint": "DHCP",
+          "questionCountFromDraft": 2
+        },
+        {
+          "code": "02.06.04",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "应用层协议与端口",
+          "knowledgePoint": "FTP与TFTP",
+          "questionCountFromDraft": 1
+        },
+        {
+          "code": "02.06.05",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "应用层协议与端口",
+          "knowledgePoint": "电子邮件、LDAP与远程登录",
+          "questionCountFromDraft": 1
+        },
+        {
+          "code": "02.06.03",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "应用层协议与端口",
+          "knowledgePoint": "HTTP与HTTPS",
+          "questionCountFromDraft": 3
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "IPv6",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "02.07.01",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "IPv6",
+          "knowledgePoint": "地址表示与地址类型",
+          "questionCountFromDraft": 8
+        },
+        {
+          "code": "02.07.03",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "IPv6",
+          "knowledgePoint": "IPv6过渡技术",
+          "questionCountFromDraft": 2
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "以太网",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "03.01.01",
+          "chapter": "局域网与交换技术",
+          "knowledgeSection": "以太网基础",
+          "knowledgePoint": "CSMA/CD与以太网帧",
+          "questionCountFromDraft": 6
+        },
+        {
+          "code": "03.01.02",
+          "chapter": "局域网与交换技术",
+          "knowledgeSection": "以太网基础",
+          "knowledgePoint": "冲突域、广播域与网络设备",
+          "questionCountFromDraft": 1
+        },
+        {
+          "code": "03.01.03",
+          "chapter": "局域网与交换技术",
+          "knowledgeSection": "以太网基础",
+          "knowledgePoint": "MAC地址学习与交换转发",
+          "questionCountFromDraft": 3
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "VLAN",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "03.02.01",
+          "chapter": "局域网与交换技术",
+          "knowledgeSection": "VLAN",
+          "knowledgePoint": "802.1Q与VLAN标签",
+          "questionCountFromDraft": 3
+        },
+        {
+          "code": "03.02.02",
+          "chapter": "局域网与交换技术",
+          "knowledgeSection": "VLAN",
+          "knowledgePoint": "Access、Trunk与Hybrid端口",
+          "questionCountFromDraft": 6
+        },
+        {
+          "code": "03.04.02",
+          "chapter": "局域网与交换技术",
+          "knowledgeSection": "其他交换技术",
+          "knowledgePoint": "端口安全与DHCP Snooping",
+          "questionCountFromDraft": 1
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "STP",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "03.03.02",
+          "chapter": "局域网与交换技术",
+          "knowledgeSection": "STP生成树",
+          "knowledgePoint": "端口角色与BPDU",
+          "questionCountFromDraft": 6
+        },
+        {
+          "code": "03.03.03",
+          "chapter": "局域网与交换技术",
+          "knowledgeSection": "STP生成树",
+          "knowledgePoint": "收敛过程与协议版本",
+          "questionCountFromDraft": 4
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "交换安全与管理",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "03.04.02",
+          "chapter": "局域网与交换技术",
+          "knowledgeSection": "其他交换技术",
+          "knowledgePoint": "端口安全与DHCP Snooping",
+          "questionCountFromDraft": 8
+        },
+        {
+          "code": "03.04.01",
+          "chapter": "局域网与交换技术",
+          "knowledgeSection": "其他交换技术",
+          "knowledgePoint": "VTP与GVRP",
+          "questionCountFromDraft": 1
+        },
+        {
+          "code": "03.01.02",
+          "chapter": "局域网与交换技术",
+          "knowledgeSection": "以太网基础",
+          "knowledgePoint": "冲突域、广播域与网络设备",
+          "questionCountFromDraft": 1
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "无线局域网",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "03.05.01",
+          "chapter": "局域网与交换技术",
+          "knowledgeSection": "无线局域网",
+          "knowledgePoint": "802.11与介质访问",
+          "questionCountFromDraft": 5
+        },
+        {
+          "code": "03.05.02",
+          "chapter": "局域网与交换技术",
+          "knowledgeSection": "无线局域网",
+          "knowledgePoint": "AP类型与WLAN架构",
+          "questionCountFromDraft": 4
+        },
+        {
+          "code": "05.07.01",
+          "chapter": "网络安全",
+          "knowledgeSection": "无线网络安全",
+          "knowledgePoint": "WEP、WPA与无线加密",
+          "questionCountFromDraft": 1
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "路由基础",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "04.01.01",
+          "chapter": "路由与广域网技术",
+          "knowledgeSection": "路由基础",
+          "knowledgePoint": "路由表、静态路由与默认路由",
+          "questionCountFromDraft": 6
+        },
+        {
+          "code": "04.01.02",
+          "chapter": "路由与广域网技术",
+          "knowledgeSection": "路由基础",
+          "knowledgePoint": "路由优先级、管理距离与度量值",
+          "questionCountFromDraft": 3
+        },
+        {
+          "code": "04.01.03",
+          "chapter": "路由与广域网技术",
+          "knowledgeSection": "路由基础",
+          "knowledgePoint": "路由协议类型与算法",
+          "questionCountFromDraft": 1
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "RIP",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "04.02.01",
+          "chapter": "路由与广域网技术",
+          "knowledgeSection": "RIP",
+          "knowledgePoint": "距离矢量与最大跳数",
+          "questionCountFromDraft": 7
+        },
+        {
+          "code": "04.02.02",
+          "chapter": "路由与广域网技术",
+          "knowledgeSection": "RIP",
+          "knowledgePoint": "水平分割、毒性逆转与触发更新",
+          "questionCountFromDraft": 3
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "OSPF",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "04.03.01",
+          "chapter": "路由与广域网技术",
+          "knowledgeSection": "OSPF",
+          "knowledgePoint": "区域、LSA与邻居状态",
+          "questionCountFromDraft": 9
+        },
+        {
+          "code": "04.03.02",
+          "chapter": "路由与广域网技术",
+          "knowledgeSection": "OSPF",
+          "knowledgePoint": "DR/BDR选举",
+          "questionCountFromDraft": 1
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "BGP",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "04.04.02",
+          "chapter": "路由与广域网技术",
+          "knowledgeSection": "BGP",
+          "knowledgePoint": "BGP路由属性与选路",
+          "questionCountFromDraft": 7
+        },
+        {
+          "code": "04.04.01",
+          "chapter": "路由与广域网技术",
+          "knowledgeSection": "BGP",
+          "knowledgePoint": "AS与路径矢量",
+          "questionCountFromDraft": 3
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "广域网链路",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "04.05.01",
+          "chapter": "路由与广域网技术",
+          "knowledgeSection": "广域网链路",
+          "knowledgePoint": "PPP、HDLC与帧中继",
+          "questionCountFromDraft": 10
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "密码技术与摘要算法",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "05.01.01",
+          "chapter": "网络安全",
+          "knowledgeSection": "密码与加密",
+          "knowledgePoint": "对称加密算法",
+          "questionCountFromDraft": 2
+        },
+        {
+          "code": "05.01.02",
+          "chapter": "网络安全",
+          "knowledgeSection": "密码与加密",
+          "knowledgePoint": "非对称加密与Hash摘要",
+          "questionCountFromDraft": 4
+        },
+        {
+          "code": "05.02.01",
+          "chapter": "网络安全",
+          "knowledgeSection": "PKI与数字证书",
+          "knowledgePoint": "CA、数字证书与数字签名",
+          "questionCountFromDraft": 3
+        },
+        {
+          "code": "05.01.03",
+          "chapter": "网络安全",
+          "knowledgeSection": "密码与加密",
+          "knowledgePoint": "密码学原则与传输加密",
+          "questionCountFromDraft": 1
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "PKI、数字证书与吊销",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "05.02.01",
+          "chapter": "网络安全",
+          "knowledgeSection": "PKI与数字证书",
+          "knowledgePoint": "CA、数字证书与数字签名",
+          "questionCountFromDraft": 2
+        },
+        {
+          "code": "05.02.02",
+          "chapter": "网络安全",
+          "knowledgeSection": "PKI与数字证书",
+          "knowledgePoint": "证书验证与CRL吊销",
+          "questionCountFromDraft": 8
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "访问控制与地址转换",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "05.03.01",
+          "chapter": "网络安全",
+          "knowledgeSection": "访问控制与NAT",
+          "knowledgePoint": "ACL类型、规则顺序与隐式拒绝",
+          "questionCountFromDraft": 4
+        },
+        {
+          "code": "05.03.02",
+          "chapter": "网络安全",
+          "knowledgeSection": "访问控制与NAT",
+          "knowledgePoint": "静态NAT、动态NAT与PAT",
+          "questionCountFromDraft": 4
+        },
+        {
+          "code": "05.04.01",
+          "chapter": "网络安全",
+          "knowledgeSection": "网络设备与边界防护",
+          "knowledgePoint": "防火墙与DMZ",
+          "questionCountFromDraft": 1
+        },
+        {
+          "code": "05.06.01",
+          "chapter": "网络安全",
+          "knowledgeSection": "VPN与安全传输",
+          "knowledgePoint": "IPsec VPN与SSL VPN",
+          "questionCountFromDraft": 1
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "防火墙、DMZ、IDS/IPS",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "05.04.01",
+          "chapter": "网络安全",
+          "knowledgeSection": "网络设备与边界防护",
+          "knowledgePoint": "防火墙与DMZ",
+          "questionCountFromDraft": 6
+        },
+        {
+          "code": "05.04.02",
+          "chapter": "网络安全",
+          "knowledgeSection": "网络设备与边界防护",
+          "knowledgePoint": "IDS与IPS",
+          "questionCountFromDraft": 2
+        },
+        {
+          "code": "05.05.03",
+          "chapter": "网络安全",
+          "knowledgeSection": "网络攻击",
+          "knowledgePoint": "Web攻击与常见漏洞",
+          "questionCountFromDraft": 1
+        },
+        {
+          "code": "05.04.03",
+          "chapter": "网络安全",
+          "knowledgeSection": "网络设备与边界防护",
+          "knowledgePoint": "堡垒机与零信任架构",
+          "questionCountFromDraft": 1
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "网络攻击与防护",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "05.05.03",
+          "chapter": "网络安全",
+          "knowledgeSection": "网络攻击",
+          "knowledgePoint": "Web攻击与常见漏洞",
+          "questionCountFromDraft": 4
+        },
+        {
+          "code": "05.05.02",
+          "chapter": "网络安全",
+          "knowledgeSection": "网络攻击",
+          "knowledgePoint": "DDoS",
+          "questionCountFromDraft": 3
+        },
+        {
+          "code": "03.04.02",
+          "chapter": "局域网与交换技术",
+          "knowledgeSection": "其他交换技术",
+          "knowledgePoint": "端口安全与DHCP Snooping",
+          "questionCountFromDraft": 1
+        },
+        {
+          "code": "05.04.03",
+          "chapter": "网络安全",
+          "knowledgeSection": "网络设备与边界防护",
+          "knowledgePoint": "堡垒机与零信任架构",
+          "questionCountFromDraft": 2
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "VPN：IPsec、SSL VPN",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "05.06.01",
+          "chapter": "网络安全",
+          "knowledgeSection": "VPN与安全传输",
+          "knowledgePoint": "IPsec VPN与SSL VPN",
+          "questionCountFromDraft": 9
+        },
+        {
+          "code": "05.06.02",
+          "chapter": "网络安全",
+          "knowledgeSection": "VPN与安全传输",
+          "knowledgePoint": "TLS与安全传输协议",
+          "questionCountFromDraft": 1
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "Windows",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "06.01.01",
+          "chapter": "服务器配置",
+          "knowledgeSection": "Windows服务器",
+          "knowledgePoint": "AD、账户与服务管理",
+          "questionCountFromDraft": 3
+        },
+        {
+          "code": "06.01.02",
+          "chapter": "服务器配置",
+          "knowledgeSection": "Windows服务器",
+          "knowledgePoint": "DNS与DHCP服务器",
+          "questionCountFromDraft": 3
+        },
+        {
+          "code": "06.01.03",
+          "chapter": "服务器配置",
+          "knowledgeSection": "Windows服务器",
+          "knowledgePoint": "IIS与NTFS权限",
+          "questionCountFromDraft": 4
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "Linux",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "06.02.02",
+          "chapter": "服务器配置",
+          "knowledgeSection": "Linux服务器",
+          "knowledgePoint": "权限、进程与文件系统",
+          "questionCountFromDraft": 4
+        },
+        {
+          "code": "06.02.03",
+          "chapter": "服务器配置",
+          "knowledgeSection": "Linux服务器",
+          "knowledgePoint": "网络接口与服务配置",
+          "questionCountFromDraft": 4
+        },
+        {
+          "code": "06.02.01",
+          "chapter": "服务器配置",
+          "knowledgeSection": "Linux服务器",
+          "knowledgePoint": "常用命令与系统管理",
+          "questionCountFromDraft": 2
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "网络管理五大功能",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "07.01.01",
+          "chapter": "网络管理",
+          "knowledgeSection": "网络管理功能",
+          "knowledgePoint": "故障、配置、性能、安全与计费管理",
+          "questionCountFromDraft": 10
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "SNMP、MIB 与版本",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "07.02.01",
+          "chapter": "网络管理",
+          "knowledgeSection": "管理协议与监控",
+          "knowledgePoint": "SNMP版本、MIB与报文",
+          "questionCountFromDraft": 10
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "故障排查工具",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "07.03.02",
+          "chapter": "网络管理",
+          "knowledgeSection": "诊断工具与设备排查",
+          "knowledgePoint": "ipconfig、netstat与路由工具",
+          "questionCountFromDraft": 7
+        },
+        {
+          "code": "07.03.01",
+          "chapter": "网络管理",
+          "knowledgeSection": "诊断工具与设备排查",
+          "knowledgePoint": "ping与tracert连通性检查",
+          "questionCountFromDraft": 2
+        },
+        {
+          "code": "07.03.03",
+          "chapter": "网络管理",
+          "knowledgeSection": "诊断工具与设备排查",
+          "knowledgePoint": "设备Console与维护接入",
+          "questionCountFromDraft": 1
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "日志与远程管理",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "07.02.02",
+          "chapter": "网络管理",
+          "knowledgeSection": "管理协议与监控",
+          "knowledgePoint": "Syslog、NetFlow与NTP",
+          "questionCountFromDraft": 6
+        },
+        {
+          "code": "07.03.03",
+          "chapter": "网络管理",
+          "knowledgeSection": "诊断工具与设备排查",
+          "knowledgePoint": "设备Console与维护接入",
+          "questionCountFromDraft": 4
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "综合布线子系统",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "08.01.01",
+          "chapter": "综合布线与网络规划",
+          "knowledgeSection": "综合布线",
+          "knowledgePoint": "六大子系统",
+          "questionCountFromDraft": 7
+        },
+        {
+          "code": "08.01.02",
+          "chapter": "综合布线与网络规划",
+          "knowledgeSection": "综合布线",
+          "knowledgePoint": "安装规范与点位",
+          "questionCountFromDraft": 3
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "双绞线与光纤",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "08.02.01",
+          "chapter": "综合布线与网络规划",
+          "knowledgeSection": "传输介质",
+          "knowledgePoint": "双绞线类别与屏蔽",
+          "questionCountFromDraft": 4
+        },
+        {
+          "code": "08.02.04",
+          "chapter": "综合布线与网络规划",
+          "knowledgeSection": "传输介质",
+          "knowledgePoint": "传输介质特性与选型",
+          "questionCountFromDraft": 2
+        },
+        {
+          "code": "08.02.02",
+          "chapter": "综合布线与网络规划",
+          "knowledgeSection": "传输介质",
+          "knowledgePoint": "单模与多模光纤",
+          "questionCountFromDraft": 2
+        },
+        {
+          "code": "08.02.03",
+          "chapter": "综合布线与网络规划",
+          "knowledgeSection": "传输介质",
+          "knowledgePoint": "光功率与光链路基础",
+          "questionCountFromDraft": 2
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "带宽、时延、丢包率、吞吐量",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "08.03.02",
+          "chapter": "综合布线与网络规划",
+          "knowledgeSection": "网络规划与性能",
+          "knowledgePoint": "带宽、时延、丢包率与吞吐量",
+          "questionCountFromDraft": 10
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "CPM、PERT、甘特图",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "09.01.01",
+          "chapter": "项目管理与法律法规",
+          "knowledgeSection": "项目计划与估算",
+          "knowledgePoint": "关键路径CPM与甘特图",
+          "questionCountFromDraft": 9
+        },
+        {
+          "code": "09.01.02",
+          "chapter": "项目管理与法律法规",
+          "knowledgeSection": "项目计划与估算",
+          "knowledgePoint": "PERT三点估算",
+          "questionCountFromDraft": 1
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "风险、质量与配置管理",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "09.02.01",
+          "chapter": "项目管理与法律法规",
+          "knowledgeSection": "项目控制",
+          "knowledgePoint": "风险管理",
+          "questionCountFromDraft": 4
+        },
+        {
+          "code": "09.02.02",
+          "chapter": "项目管理与法律法规",
+          "knowledgeSection": "项目控制",
+          "knowledgePoint": "质量管理",
+          "questionCountFromDraft": 2
+        },
+        {
+          "code": "09.02.03",
+          "chapter": "项目管理与法律法规",
+          "knowledgeSection": "项目控制",
+          "knowledgePoint": "配置管理",
+          "questionCountFromDraft": 4
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "网络安全、数据安全、知识产权与等保",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "09.03.01",
+          "chapter": "项目管理与法律法规",
+          "knowledgeSection": "法律法规与合规",
+          "knowledgePoint": "网络安全法与数据安全法",
+          "questionCountFromDraft": 5
+        },
+        {
+          "code": "09.03.03",
+          "chapter": "项目管理与法律法规",
+          "knowledgeSection": "法律法规与合规",
+          "knowledgePoint": "等保2.0",
+          "questionCountFromDraft": 2
+        },
+        {
+          "code": "09.03.02",
+          "chapter": "项目管理与法律法规",
+          "knowledgeSection": "法律法规与合规",
+          "knowledgePoint": "著作权与专利",
+          "questionCountFromDraft": 3
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "SDN 与 NFV",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "10.01.01",
+          "chapter": "新技术",
+          "knowledgeSection": "网络架构新技术",
+          "knowledgePoint": "SDN软件定义网络",
+          "questionCountFromDraft": 7
+        },
+        {
+          "code": "10.01.02",
+          "chapter": "新技术",
+          "knowledgeSection": "网络架构新技术",
+          "knowledgePoint": "NFV网络功能虚拟化",
+          "questionCountFromDraft": 3
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "云计算与容器",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "10.01.03",
+          "chapter": "新技术",
+          "knowledgeSection": "网络架构新技术",
+          "knowledgePoint": "云计算与容器",
+          "questionCountFromDraft": 10
+        }
+      ]
+    },
+    {
+      "sourceKnowledgePoint": "5G 与 NB-IoT",
+      "questionCount": 10,
+      "targetPoints": [
+        {
+          "code": "10.02.01",
+          "chapter": "新技术",
+          "knowledgeSection": "移动与物联网",
+          "knowledgePoint": "5G",
+          "questionCountFromDraft": 8
+        },
+        {
+          "code": "10.02.02",
+          "chapter": "新技术",
+          "knowledgeSection": "移动与物联网",
+          "knowledgePoint": "NB-IoT",
+          "questionCountFromDraft": 2
+        }
+      ]
+    }
+  ],
+  "finalServerTaxonomyCounts": [
+    {
+      "module": "计算机基础知识",
+      "section": "数制与编码",
+      "code": "01.01.01",
+      "knowledgePoint": "进制互转",
+      "questionCount": 4
+    },
+    {
+      "module": "计算机基础知识",
+      "section": "数制与编码",
+      "code": "01.01.02",
+      "knowledgePoint": "原码、反码、补码与移码",
+      "questionCount": 6
+    },
+    {
+      "module": "计算机基础知识",
+      "section": "校验码与差错控制",
+      "code": "01.02.01",
+      "knowledgePoint": "奇偶校验",
+      "questionCount": 4
+    },
+    {
+      "module": "计算机基础知识",
+      "section": "校验码与差错控制",
+      "code": "01.02.02",
+      "knowledgePoint": "海明校验",
+      "questionCount": 4
+    },
+    {
+      "module": "计算机基础知识",
+      "section": "校验码与差错控制",
+      "code": "01.02.03",
+      "knowledgePoint": "CRC循环冗余校验",
+      "questionCount": 4
+    },
+    {
+      "module": "计算机基础知识",
+      "section": "校验码与差错控制",
+      "code": "01.02.04",
+      "knowledgePoint": "误码率与帧错误概率",
+      "questionCount": 1
+    },
+    {
+      "module": "计算机基础知识",
+      "section": "存储器与可靠性",
+      "code": "01.03.01",
+      "knowledgePoint": "Cache与命中率",
+      "questionCount": 3
+    },
+    {
+      "module": "计算机基础知识",
+      "section": "存储器与可靠性",
+      "code": "01.03.02",
+      "knowledgePoint": "内存、磁盘与RAID",
+      "questionCount": 5
+    },
+    {
+      "module": "计算机基础知识",
+      "section": "存储器与可靠性",
+      "code": "01.03.03",
+      "knowledgePoint": "存储介质性能比较",
+      "questionCount": 1
+    },
+    {
+      "module": "计算机基础知识",
+      "section": "存储器与可靠性",
+      "code": "01.03.04",
+      "knowledgePoint": "串并联系统可靠性",
+      "questionCount": 2
+    },
+    {
+      "module": "计算机基础知识",
+      "section": "计算机组成",
+      "code": "01.04.01",
+      "knowledgePoint": "CPU流水线",
+      "questionCount": 5
+    },
+    {
+      "module": "计算机基础知识",
+      "section": "计算机组成",
+      "code": "01.04.02",
+      "knowledgePoint": "总线分类",
+      "questionCount": 5
+    },
+    {
+      "module": "计算机基础知识",
+      "section": "操作系统基础",
+      "code": "01.05.01",
+      "knowledgePoint": "进程、线程与死锁",
+      "questionCount": 5
+    },
+    {
+      "module": "计算机基础知识",
+      "section": "操作系统基础",
+      "code": "01.05.02",
+      "knowledgePoint": "分页与分段虚拟内存",
+      "questionCount": 5
+    },
+    {
+      "module": "网络体系结构与TCP/IP",
+      "section": "网络模型与分层",
+      "code": "02.01.01",
+      "knowledgePoint": "OSI七层模型",
+      "questionCount": 2
+    },
+    {
+      "module": "网络体系结构与TCP/IP",
+      "section": "网络模型与分层",
+      "code": "02.01.02",
+      "knowledgePoint": "TCP/IP四层模型与映射",
+      "questionCount": 1
+    },
+    {
+      "module": "网络体系结构与TCP/IP",
+      "section": "网络模型与分层",
+      "code": "02.01.03",
+      "knowledgePoint": "协议、服务、PDU与设备所在层",
+      "questionCount": 32
+    },
+    {
+      "module": "网络体系结构与TCP/IP",
+      "section": "数据通信与传输",
+      "code": "02.02.01",
+      "knowledgePoint": "编码与调制",
+      "questionCount": 7
+    },
+    {
+      "module": "网络体系结构与TCP/IP",
+      "section": "数据通信与传输",
+      "code": "02.02.02",
+      "knowledgePoint": "同步与传输方式",
+      "questionCount": 4
+    },
+    {
+      "module": "网络体系结构与TCP/IP",
+      "section": "数据通信与传输",
+      "code": "02.02.03",
+      "knowledgePoint": "信道容量与数据速率",
+      "questionCount": 23
+    },
+    {
+      "module": "网络体系结构与TCP/IP",
+      "section": "数据通信与传输",
+      "code": "02.02.04",
+      "knowledgePoint": "信号质量与眼图",
+      "questionCount": 1
+    },
+    {
+      "module": "网络体系结构与TCP/IP",
+      "section": "数据通信与传输",
+      "code": "02.02.05",
+      "knowledgePoint": "采样定理与PCM",
+      "questionCount": 5
+    },
+    {
+      "module": "网络体系结构与TCP/IP",
+      "section": "IPv4与子网",
+      "code": "02.03.01",
+      "knowledgePoint": "IPv4地址类别与特殊地址",
+      "questionCount": 15
+    },
+    {
+      "module": "网络体系结构与TCP/IP",
+      "section": "IPv4与子网",
+      "code": "02.03.02",
+      "knowledgePoint": "网络地址、广播地址与可用主机",
+      "questionCount": 32
+    },
+    {
+      "module": "网络体系结构与TCP/IP",
+      "section": "IPv4与子网",
+      "code": "02.03.03",
+      "knowledgePoint": "VLSM子网划分",
+      "questionCount": 20
+    },
+    {
+      "module": "网络体系结构与TCP/IP",
+      "section": "IPv4与子网",
+      "code": "02.03.04",
+      "knowledgePoint": "CIDR与路由聚合",
+      "questionCount": 7
+    },
+    {
+      "module": "网络体系结构与TCP/IP",
+      "section": "IPv4与子网",
+      "code": "02.03.05",
+      "knowledgePoint": "IPv4首部、分片、组播与TTL",
+      "questionCount": 11
+    },
+    {
+      "module": "网络体系结构与TCP/IP",
+      "section": "网际层协议",
+      "code": "02.04.01",
+      "knowledgePoint": "ARP与RARP",
+      "questionCount": 9
+    },
+    {
+      "module": "网络体系结构与TCP/IP",
+      "section": "网际层协议",
+      "code": "02.04.02",
+      "knowledgePoint": "ICMP与控制报文",
+      "questionCount": 15
+    },
+    {
+      "module": "网络体系结构与TCP/IP",
+      "section": "传输层",
+      "code": "02.05.01",
+      "knowledgePoint": "TCP连接与可靠传输",
+      "questionCount": 40
+    },
+    {
+      "module": "网络体系结构与TCP/IP",
+      "section": "传输层",
+      "code": "02.05.02",
+      "knowledgePoint": "TCP窗口、流量控制与拥塞控制",
+      "questionCount": 14
+    },
+    {
+      "module": "网络体系结构与TCP/IP",
+      "section": "传输层",
+      "code": "02.05.03",
+      "knowledgePoint": "UDP特性与应用场景",
+      "questionCount": 8
+    },
+    {
+      "module": "网络体系结构与TCP/IP",
+      "section": "传输层",
+      "code": "02.05.04",
+      "knowledgePoint": "端口号与多路复用",
+      "questionCount": 9
+    },
+    {
+      "module": "网络体系结构与TCP/IP",
+      "section": "应用层协议与端口",
+      "code": "02.06.01",
+      "knowledgePoint": "DNS",
+      "questionCount": 10
+    },
+    {
+      "module": "网络体系结构与TCP/IP",
+      "section": "应用层协议与端口",
+      "code": "02.06.02",
+      "knowledgePoint": "DHCP",
+      "questionCount": 4
+    },
+    {
+      "module": "网络体系结构与TCP/IP",
+      "section": "应用层协议与端口",
+      "code": "02.06.03",
+      "knowledgePoint": "HTTP与HTTPS",
+      "questionCount": 9
+    },
+    {
+      "module": "网络体系结构与TCP/IP",
+      "section": "应用层协议与端口",
+      "code": "02.06.04",
+      "knowledgePoint": "FTP与TFTP",
+      "questionCount": 5
+    },
+    {
+      "module": "网络体系结构与TCP/IP",
+      "section": "应用层协议与端口",
+      "code": "02.06.05",
+      "knowledgePoint": "电子邮件、LDAP与远程登录",
+      "questionCount": 6
+    },
+    {
+      "module": "网络体系结构与TCP/IP",
+      "section": "应用层协议与端口",
+      "code": "02.06.06",
+      "knowledgePoint": "常用协议端口综合",
+      "questionCount": 15
+    },
+    {
+      "module": "网络体系结构与TCP/IP",
+      "section": "IPv6",
+      "code": "02.07.01",
+      "knowledgePoint": "地址表示与地址类型",
+      "questionCount": 18
+    },
+    {
+      "module": "网络体系结构与TCP/IP",
+      "section": "IPv6",
+      "code": "02.07.02",
+      "knowledgePoint": "邻居发现协议NDP",
+      "questionCount": 2
+    },
+    {
+      "module": "网络体系结构与TCP/IP",
+      "section": "IPv6",
+      "code": "02.07.03",
+      "knowledgePoint": "IPv6过渡技术",
+      "questionCount": 2
+    },
+    {
+      "module": "局域网与交换技术",
+      "section": "以太网基础",
+      "code": "03.01.01",
+      "knowledgePoint": "CSMA/CD与以太网帧",
+      "questionCount": 6
+    },
+    {
+      "module": "局域网与交换技术",
+      "section": "以太网基础",
+      "code": "03.01.02",
+      "knowledgePoint": "冲突域、广播域与网络设备",
+      "questionCount": 15
+    },
+    {
+      "module": "局域网与交换技术",
+      "section": "以太网基础",
+      "code": "03.01.03",
+      "knowledgePoint": "MAC地址学习与交换转发",
+      "questionCount": 7
+    },
+    {
+      "module": "局域网与交换技术",
+      "section": "VLAN",
+      "code": "03.02.01",
+      "knowledgePoint": "802.1Q与VLAN标签",
+      "questionCount": 9
+    },
+    {
+      "module": "局域网与交换技术",
+      "section": "VLAN",
+      "code": "03.02.02",
+      "knowledgePoint": "Access、Trunk与Hybrid端口",
+      "questionCount": 9
+    },
+    {
+      "module": "局域网与交换技术",
+      "section": "STP生成树",
+      "code": "03.03.01",
+      "knowledgePoint": "BID与根桥选举",
+      "questionCount": 2
+    },
+    {
+      "module": "局域网与交换技术",
+      "section": "STP生成树",
+      "code": "03.03.02",
+      "knowledgePoint": "端口角色与BPDU",
+      "questionCount": 16
+    },
+    {
+      "module": "局域网与交换技术",
+      "section": "STP生成树",
+      "code": "03.03.03",
+      "knowledgePoint": "收敛过程与协议版本",
+      "questionCount": 4
+    },
+    {
+      "module": "局域网与交换技术",
+      "section": "其他交换技术",
+      "code": "03.04.01",
+      "knowledgePoint": "VTP与GVRP",
+      "questionCount": 2
+    },
+    {
+      "module": "局域网与交换技术",
+      "section": "其他交换技术",
+      "code": "03.04.02",
+      "knowledgePoint": "端口安全与DHCP Snooping",
+      "questionCount": 13
+    },
+    {
+      "module": "局域网与交换技术",
+      "section": "其他交换技术",
+      "code": "03.04.03",
+      "knowledgePoint": "链路聚合、堆叠、QinQ与PoE",
+      "questionCount": 7
+    },
+    {
+      "module": "局域网与交换技术",
+      "section": "其他交换技术",
+      "code": "03.04.04",
+      "knowledgePoint": "交换机过滤与MAC黑洞",
+      "questionCount": 1
+    },
+    {
+      "module": "局域网与交换技术",
+      "section": "无线局域网",
+      "code": "03.05.01",
+      "knowledgePoint": "802.11与介质访问",
+      "questionCount": 8
+    },
+    {
+      "module": "局域网与交换技术",
+      "section": "无线局域网",
+      "code": "03.05.02",
+      "knowledgePoint": "AP类型与WLAN架构",
+      "questionCount": 6
+    },
+    {
+      "module": "路由与广域网技术",
+      "section": "路由基础",
+      "code": "04.01.01",
+      "knowledgePoint": "路由表、静态路由与默认路由",
+      "questionCount": 13
+    },
+    {
+      "module": "路由与广域网技术",
+      "section": "路由基础",
+      "code": "04.01.02",
+      "knowledgePoint": "路由优先级、管理距离与度量值",
+      "questionCount": 5
+    },
+    {
+      "module": "路由与广域网技术",
+      "section": "路由基础",
+      "code": "04.01.03",
+      "knowledgePoint": "路由协议类型与算法",
+      "questionCount": 8
+    },
+    {
+      "module": "路由与广域网技术",
+      "section": "RIP",
+      "code": "04.02.01",
+      "knowledgePoint": "距离矢量与最大跳数",
+      "questionCount": 12
+    },
+    {
+      "module": "路由与广域网技术",
+      "section": "RIP",
+      "code": "04.02.02",
+      "knowledgePoint": "水平分割、毒性逆转与触发更新",
+      "questionCount": 6
+    },
+    {
+      "module": "路由与广域网技术",
+      "section": "OSPF",
+      "code": "04.03.01",
+      "knowledgePoint": "区域、LSA与邻居状态",
+      "questionCount": 23
+    },
+    {
+      "module": "路由与广域网技术",
+      "section": "OSPF",
+      "code": "04.03.02",
+      "knowledgePoint": "DR/BDR选举",
+      "questionCount": 8
+    },
+    {
+      "module": "路由与广域网技术",
+      "section": "OSPF",
+      "code": "04.03.03",
+      "knowledgePoint": "Router ID与虚链路",
+      "questionCount": 2
+    },
+    {
+      "module": "路由与广域网技术",
+      "section": "BGP",
+      "code": "04.04.01",
+      "knowledgePoint": "AS与路径矢量",
+      "questionCount": 8
+    },
+    {
+      "module": "路由与广域网技术",
+      "section": "BGP",
+      "code": "04.04.02",
+      "knowledgePoint": "BGP路由属性与选路",
+      "questionCount": 12
+    },
+    {
+      "module": "路由与广域网技术",
+      "section": "广域网链路",
+      "code": "04.05.01",
+      "knowledgePoint": "PPP、HDLC与帧中继",
+      "questionCount": 10
+    },
+    {
+      "module": "路由与广域网技术",
+      "section": "广域网链路",
+      "code": "04.05.02",
+      "knowledgePoint": "E1/T1与专线基础",
+      "questionCount": 0
+    },
+    {
+      "module": "网络安全",
+      "section": "密码与加密",
+      "code": "05.01.01",
+      "knowledgePoint": "对称加密算法",
+      "questionCount": 6
+    },
+    {
+      "module": "网络安全",
+      "section": "密码与加密",
+      "code": "05.01.02",
+      "knowledgePoint": "非对称加密与Hash摘要",
+      "questionCount": 8
+    },
+    {
+      "module": "网络安全",
+      "section": "密码与加密",
+      "code": "05.01.03",
+      "knowledgePoint": "密码学原则与传输加密",
+      "questionCount": 3
+    },
+    {
+      "module": "网络安全",
+      "section": "PKI与数字证书",
+      "code": "05.02.01",
+      "knowledgePoint": "CA、数字证书与数字签名",
+      "questionCount": 8
+    },
+    {
+      "module": "网络安全",
+      "section": "PKI与数字证书",
+      "code": "05.02.02",
+      "knowledgePoint": "证书验证与CRL吊销",
+      "questionCount": 8
+    },
+    {
+      "module": "网络安全",
+      "section": "访问控制与NAT",
+      "code": "05.03.01",
+      "knowledgePoint": "ACL类型、规则顺序与隐式拒绝",
+      "questionCount": 6
+    },
+    {
+      "module": "网络安全",
+      "section": "访问控制与NAT",
+      "code": "05.03.02",
+      "knowledgePoint": "静态NAT、动态NAT与PAT",
+      "questionCount": 5
+    },
+    {
+      "module": "网络安全",
+      "section": "网络设备与边界防护",
+      "code": "05.04.01",
+      "knowledgePoint": "防火墙与DMZ",
+      "questionCount": 13
+    },
+    {
+      "module": "网络安全",
+      "section": "网络设备与边界防护",
+      "code": "05.04.02",
+      "knowledgePoint": "IDS与IPS",
+      "questionCount": 5
+    },
+    {
+      "module": "网络安全",
+      "section": "网络设备与边界防护",
+      "code": "05.04.03",
+      "knowledgePoint": "堡垒机与零信任架构",
+      "questionCount": 7
+    },
+    {
+      "module": "网络安全",
+      "section": "网络攻击",
+      "code": "05.05.01",
+      "knowledgePoint": "ARP欺骗",
+      "questionCount": 1
+    },
+    {
+      "module": "网络安全",
+      "section": "网络攻击",
+      "code": "05.05.02",
+      "knowledgePoint": "DDoS",
+      "questionCount": 5
+    },
+    {
+      "module": "网络安全",
+      "section": "网络攻击",
+      "code": "05.05.03",
+      "knowledgePoint": "Web攻击与常见漏洞",
+      "questionCount": 10
+    },
+    {
+      "module": "网络安全",
+      "section": "VPN与安全传输",
+      "code": "05.06.01",
+      "knowledgePoint": "IPsec VPN与SSL VPN",
+      "questionCount": 15
+    },
+    {
+      "module": "网络安全",
+      "section": "VPN与安全传输",
+      "code": "05.06.02",
+      "knowledgePoint": "TLS与安全传输协议",
+      "questionCount": 3
+    },
+    {
+      "module": "网络安全",
+      "section": "无线网络安全",
+      "code": "05.07.01",
+      "knowledgePoint": "WEP、WPA与无线加密",
+      "questionCount": 6
+    },
+    {
+      "module": "服务器配置",
+      "section": "Windows服务器",
+      "code": "06.01.01",
+      "knowledgePoint": "AD、账户与服务管理",
+      "questionCount": 6
+    },
+    {
+      "module": "服务器配置",
+      "section": "Windows服务器",
+      "code": "06.01.02",
+      "knowledgePoint": "DNS与DHCP服务器",
+      "questionCount": 3
+    },
+    {
+      "module": "服务器配置",
+      "section": "Windows服务器",
+      "code": "06.01.03",
+      "knowledgePoint": "IIS与NTFS权限",
+      "questionCount": 4
+    },
+    {
+      "module": "服务器配置",
+      "section": "Windows服务器",
+      "code": "06.01.04",
+      "knowledgePoint": "Windows服务与远程管理",
+      "questionCount": 0
+    },
+    {
+      "module": "服务器配置",
+      "section": "Linux服务器",
+      "code": "06.02.01",
+      "knowledgePoint": "常用命令与系统管理",
+      "questionCount": 21
+    },
+    {
+      "module": "服务器配置",
+      "section": "Linux服务器",
+      "code": "06.02.02",
+      "knowledgePoint": "权限、进程与文件系统",
+      "questionCount": 4
+    },
+    {
+      "module": "服务器配置",
+      "section": "Linux服务器",
+      "code": "06.02.03",
+      "knowledgePoint": "网络接口与服务配置",
+      "questionCount": 5
+    },
+    {
+      "module": "网络管理",
+      "section": "网络管理功能",
+      "code": "07.01.01",
+      "knowledgePoint": "故障、配置、性能、安全与计费管理",
+      "questionCount": 13
+    },
+    {
+      "module": "网络管理",
+      "section": "管理协议与监控",
+      "code": "07.02.01",
+      "knowledgePoint": "SNMP版本、MIB与报文",
+      "questionCount": 29
+    },
+    {
+      "module": "网络管理",
+      "section": "管理协议与监控",
+      "code": "07.02.02",
+      "knowledgePoint": "Syslog、NetFlow与NTP",
+      "questionCount": 9
+    },
+    {
+      "module": "网络管理",
+      "section": "诊断工具与设备排查",
+      "code": "07.03.01",
+      "knowledgePoint": "ping与tracert连通性检查",
+      "questionCount": 3
+    },
+    {
+      "module": "网络管理",
+      "section": "诊断工具与设备排查",
+      "code": "07.03.02",
+      "knowledgePoint": "ipconfig、netstat与路由工具",
+      "questionCount": 15
+    },
+    {
+      "module": "网络管理",
+      "section": "诊断工具与设备排查",
+      "code": "07.03.03",
+      "knowledgePoint": "设备Console与维护接入",
+      "questionCount": 6
+    },
+    {
+      "module": "综合布线与网络规划",
+      "section": "综合布线",
+      "code": "08.01.01",
+      "knowledgePoint": "六大子系统",
+      "questionCount": 7
+    },
+    {
+      "module": "综合布线与网络规划",
+      "section": "综合布线",
+      "code": "08.01.02",
+      "knowledgePoint": "安装规范与点位",
+      "questionCount": 5
+    },
+    {
+      "module": "综合布线与网络规划",
+      "section": "传输介质",
+      "code": "08.02.01",
+      "knowledgePoint": "双绞线类别与屏蔽",
+      "questionCount": 5
+    },
+    {
+      "module": "综合布线与网络规划",
+      "section": "传输介质",
+      "code": "08.02.02",
+      "knowledgePoint": "单模与多模光纤",
+      "questionCount": 2
+    },
+    {
+      "module": "综合布线与网络规划",
+      "section": "传输介质",
+      "code": "08.02.03",
+      "knowledgePoint": "光功率与光链路基础",
+      "questionCount": 3
+    },
+    {
+      "module": "综合布线与网络规划",
+      "section": "传输介质",
+      "code": "08.02.04",
+      "knowledgePoint": "传输介质特性与选型",
+      "questionCount": 5
+    },
+    {
+      "module": "综合布线与网络规划",
+      "section": "网络规划与性能",
+      "code": "08.03.01",
+      "knowledgePoint": "网络拓扑",
+      "questionCount": 1
+    },
+    {
+      "module": "综合布线与网络规划",
+      "section": "网络规划与性能",
+      "code": "08.03.02",
+      "knowledgePoint": "带宽、时延、丢包率与吞吐量",
+      "questionCount": 10
+    },
+    {
+      "module": "项目管理与法律法规",
+      "section": "项目计划与估算",
+      "code": "09.01.01",
+      "knowledgePoint": "关键路径CPM与甘特图",
+      "questionCount": 9
+    },
+    {
+      "module": "项目管理与法律法规",
+      "section": "项目计划与估算",
+      "code": "09.01.02",
+      "knowledgePoint": "PERT三点估算",
+      "questionCount": 1
+    },
+    {
+      "module": "项目管理与法律法规",
+      "section": "项目控制",
+      "code": "09.02.01",
+      "knowledgePoint": "风险管理",
+      "questionCount": 4
+    },
+    {
+      "module": "项目管理与法律法规",
+      "section": "项目控制",
+      "code": "09.02.02",
+      "knowledgePoint": "质量管理",
+      "questionCount": 2
+    },
+    {
+      "module": "项目管理与法律法规",
+      "section": "项目控制",
+      "code": "09.02.03",
+      "knowledgePoint": "配置管理",
+      "questionCount": 4
+    },
+    {
+      "module": "项目管理与法律法规",
+      "section": "法律法规与合规",
+      "code": "09.03.01",
+      "knowledgePoint": "网络安全法与数据安全法",
+      "questionCount": 5
+    },
+    {
+      "module": "项目管理与法律法规",
+      "section": "法律法规与合规",
+      "code": "09.03.02",
+      "knowledgePoint": "著作权与专利",
+      "questionCount": 3
+    },
+    {
+      "module": "项目管理与法律法规",
+      "section": "法律法规与合规",
+      "code": "09.03.03",
+      "knowledgePoint": "等保2.0",
+      "questionCount": 4
+    },
+    {
+      "module": "新技术",
+      "section": "网络架构新技术",
+      "code": "10.01.01",
+      "knowledgePoint": "SDN软件定义网络",
+      "questionCount": 7
+    },
+    {
+      "module": "新技术",
+      "section": "网络架构新技术",
+      "code": "10.01.02",
+      "knowledgePoint": "NFV网络功能虚拟化",
+      "questionCount": 3
+    },
+    {
+      "module": "新技术",
+      "section": "网络架构新技术",
+      "code": "10.01.03",
+      "knowledgePoint": "云计算与容器",
+      "questionCount": 10
+    },
+    {
+      "module": "新技术",
+      "section": "移动与物联网",
+      "code": "10.02.01",
+      "knowledgePoint": "5G",
+      "questionCount": 9
+    },
+    {
+      "module": "新技术",
+      "section": "移动与物联网",
+      "code": "10.02.02",
+      "knowledgePoint": "NB-IoT",
+      "questionCount": 2
+    }
+  ]
+}

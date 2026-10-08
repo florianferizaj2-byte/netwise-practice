@@ -69,6 +69,7 @@ test("manifest catalog discovers the certificate tracks and keeps sources explic
       "hcia-datacom",
       "ncre-ms-office",
       "veterinary-practitioner",
+      "sichuan-upgrading-computer",
     ],
   );
   assert.deepEqual(

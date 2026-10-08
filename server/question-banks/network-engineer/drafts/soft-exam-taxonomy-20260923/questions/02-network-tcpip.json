@@ -1,0 +1,1472 @@
+[
+  {
+    "id": "ne-draft-20260923-051",
+    "type": "single_choice",
+    "question": "主机把应用数据交给 TCP、再交给 IP 和以太网发送时，正确的封装顺序是？",
+    "options": {
+      "A": "应用数据→IP 数据报→TCP 段→以太网帧",
+      "B": "应用数据→以太网帧→TCP 段→IP 数据报",
+      "C": "以太网帧→IP 数据报→TCP 段→应用数据",
+      "D": "应用数据→TCP 段→IP 数据报→以太网帧"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "发送方向自上而下封装：传输层形成 TCP 段，网络层封装为 IP 数据报，链路层再封装为帧。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "网络模型",
+    "difficulty": "easy",
+    "tags": [
+      "网络模型"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-052",
+    "type": "single_choice",
+    "question": "路由器转发一个 IPv4 数据报时，入站和出站以太网帧的源、目的 MAC 地址通常如何变化？",
+    "options": {
+      "A": "每经过一跳会按该链路重新封装",
+      "B": "只改变目的 IP 地址",
+      "C": "保持不变，直到到达最终主机",
+      "D": "源 MAC 改变，目的 IP 必须改成路由器地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "路由器逐跳转发，出接口会为下一链路重新封装二层帧，因此链路层 MAC 地址通常逐跳变化；普通路由不改变端到端 IP 地址。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "网络模型",
+    "difficulty": "medium",
+    "tags": [
+      "网络模型"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-053",
+    "type": "single_choice",
+    "question": "在 TCP/IP 协议栈中，端口号主要用于哪项功能？",
+    "options": {
+      "A": "确定以太网交换机的出口端口",
+      "B": "选择 IPv4 子网掩码",
+      "C": "标识物理网卡厂商",
+      "D": "在一台主机上区分传输层应用端点"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "传输层端口与 IP 地址共同标识通信端点，使主机能够把收到的数据交给相应进程或套接字。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "网络模型",
+    "difficulty": "easy",
+    "tags": [
+      "网络模型"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-054",
+    "type": "single_choice",
+    "question": "交换机收到目的 MAC 地址未知的单播帧，且该帧不是从某端口入站时，通常如何处理？",
+    "options": {
+      "A": "在同一 VLAN 的其他端口泛洪",
+      "B": "只发送给默认网关",
+      "C": "根据 TCP 端口选择出口",
+      "D": "丢弃并向源主机发送 ICMP"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "二层交换机对未知单播通常在同一 VLAN 内向除入端口外的端口泛洪；它依据 MAC 地址表转发，不解析 TCP 端口来做普通二层转发。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "网络模型",
+    "difficulty": "medium",
+    "tags": [
+      "网络模型"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-055",
+    "type": "single_choice",
+    "question": "若应用进程要与远端同一服务通信，哪个地址组合最直接地标识传输层通信端点？",
+    "options": {
+      "A": "仅默认网关的 MAC 地址",
+      "B": "源与目的 IP 地址及源与目的端口号",
+      "C": "源与目的 MAC 地址",
+      "D": "仅目的端口号"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "传输层通信通常以源/目的 IP 地址和源/目的端口组成的套接字四元组区分；MAC 地址只在本地链路逐跳使用。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "网络模型",
+    "difficulty": "medium",
+    "tags": [
+      "网络模型"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-056",
+    "type": "single_choice",
+    "question": "在传统 TCP/IP 四层模型中，OSI 会话层和表示层的常见功能通常归入哪一层？",
+    "options": {
+      "A": "网络接口层",
+      "B": "传输层",
+      "C": "应用层",
+      "D": "网际层"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "TCP/IP 模型通常把 OSI 的应用、表示和会话相关功能统一放入应用层；模型分层边界并非所有实现都严格一一对应。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "网络模型",
+    "difficulty": "medium",
+    "tags": [
+      "网络模型"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-057",
+    "type": "single_choice",
+    "question": "链路层检测到帧的 FCS 错误后丢弃该帧，但没有链路层重传机制。此时端到端恢复丢失数据通常依靠什么？",
+    "options": {
+      "A": "DNS 缓存刷新",
+      "B": "物理层自动纠正任意差错",
+      "C": "TCP 等具有可靠传输机制的上层协议",
+      "D": "ARP 重复发送 MAC 地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "链路层检错不等于端到端可靠交付。若链路不重传，TCP 可通过确认、序号和重传机制恢复丢失数据。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "网络模型",
+    "difficulty": "medium",
+    "tags": [
+      "网络模型"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-058",
+    "type": "single_choice",
+    "question": "网络接口卡将帧编码成比特信号并通过介质发送，主要涉及 TCP/IP 模型的哪一层？",
+    "options": {
+      "A": "网络接口层",
+      "B": "传输层",
+      "C": "应用层",
+      "D": "网际层"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "TCP/IP 网络接口层覆盖链路层与物理传输相关职责，包括帧发送和介质上的比特传输。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "网络模型",
+    "difficulty": "easy",
+    "tags": [
+      "网络模型"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-059",
+    "type": "single_choice",
+    "question": "两个不同厂商的 Web 浏览器和 Web 服务器能够互通，分层模型最关键的作用是什么？",
+    "options": {
+      "A": "取消所有封装头部",
+      "B": "各层只依赖约定的接口和协议，隐藏内部实现差异",
+      "C": "强制所有设备使用相同芯片",
+      "D": "保证任何网络都没有丢包"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "分层与标准协议定义了跨层接口和对等通信规则，使不同实现能按共同协议互操作；它不能保证网络绝不丢包。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "网络模型",
+    "difficulty": "medium",
+    "tags": [
+      "网络模型"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-060",
+    "type": "single_choice",
+    "question": "一台路由器依据目的 IPv4 地址查找转发表并选择下一跳，该处理的核心属于哪层功能？",
+    "options": {
+      "A": "传输层",
+      "B": "网际层",
+      "C": "应用层",
+      "D": "表示层"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "路由器依据网络层目的地址作出转发决策，属于网际层（网络层）功能；链路层负责下一跳链路上的帧传送。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "网络模型",
+    "difficulty": "easy",
+    "tags": [
+      "网络模型"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-061",
+    "type": "single_choice",
+    "question": "模拟信号进入 ADC 前包含高于采样频率一半的频率成分。为避免这些成分混叠到低频，通常应先采取什么措施？",
+    "options": {
+      "A": "使用抗混叠低通滤波器限制输入带宽",
+      "B": "只增加 Ethernet MTU",
+      "C": "关闭采样时钟",
+      "D": "把所有样本设成零"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "采样前的抗混叠低通滤波器限制输入信号带宽，抑制高于奈奎斯特频率的成分，避免其折叠到采样后的低频范围。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "数据通信与传输",
+    "difficulty": "medium",
+    "tags": [
+      "数据通信与传输"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-062",
+    "type": "single_choice",
+    "question": "按香农公式估计信道容量时，若信噪比保持不变而信道带宽增加为原来的两倍，理论容量如何变化？",
+    "options": {
+      "A": "保持不变",
+      "B": "增加为原来的两倍",
+      "C": "必定增加四倍",
+      "D": "降为原来的一半"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "香农公式为 C=B log₂(1+S/N)。当信噪比固定时，容量与带宽 B 成正比，因此带宽加倍，理论容量也加倍。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "数据通信与传输",
+    "difficulty": "medium",
+    "tags": [
+      "数据通信与传输"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-063",
+    "type": "single_choice",
+    "question": "在 ASK、FSK、PSK 数字调制中，PSK 主要改变载波的哪个参数来表示数据？",
+    "options": {
+      "A": "相位",
+      "B": "传播速度",
+      "C": "频率",
+      "D": "幅度"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "PSK（相移键控）通过改变载波相位表示符号；ASK 改变幅度，FSK 改变频率。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "数据通信与传输",
+    "difficulty": "easy",
+    "tags": [
+      "数据通信与传输"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-064",
+    "type": "single_choice",
+    "question": "某数字调制每个符号有 8 种可能状态，理想情况下每个符号可携带多少比特？",
+    "options": {
+      "A": "2 bit",
+      "B": "8 bit",
+      "C": "4 bit",
+      "D": "3 bit"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "每个符号承载 log₂M 位，M=8 时为 log₂8=3 bit；实际净速率还受编码和误码约束。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "数据通信与传输",
+    "difficulty": "medium",
+    "tags": [
+      "数据通信与传输"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-065",
+    "type": "single_choice",
+    "question": "两端通过一根链路轮流发送、同一时刻只能有一端发送，这种通信方式是？",
+    "options": {
+      "A": "单工",
+      "B": "全双工",
+      "C": "半双工",
+      "D": "并行传输"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "半双工允许双向通信，但同一时刻只能单向传输；单工只有一个固定方向，全双工可同时双向传输。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "数据通信与传输",
+    "difficulty": "easy",
+    "tags": [
+      "数据通信与传输"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-066",
+    "type": "single_choice",
+    "question": "多个用户共享链路，发送端为每路信号分配不同频带，接收端按频带分离，采用的是？",
+    "options": {
+      "A": "时分复用",
+      "B": "码分复用",
+      "C": "统计复用",
+      "D": "频分复用"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "频分复用（FDM）把信道带宽划分为互不重叠或设保护带的频段，同时传输多个信号。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "数据通信与传输",
+    "difficulty": "easy",
+    "tags": [
+      "数据通信与传输"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-067",
+    "type": "single_choice",
+    "question": "同步 TDM 中，每个输入信道即使暂时没有数据也周期性获得固定时隙，可能造成什么问题？",
+    "options": {
+      "A": "信号频率自动翻倍",
+      "B": "接收端无法区分帧",
+      "C": "空闲时隙浪费复用链路容量",
+      "D": "必须使用光纤"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "同步时分复用按固定时隙分配资源，空闲输入仍占有时隙，可能降低利用率；统计复用可按实际需求分配。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "数据通信与传输",
+    "difficulty": "medium",
+    "tags": [
+      "数据通信与传输"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-068",
+    "type": "single_choice",
+    "question": "光纤通信中将多路光信号安排在不同波长同时传送，所用复用技术是？",
+    "options": {
+      "A": "WDM",
+      "B": "CSMA/CD",
+      "C": "TDM 交换",
+      "D": "奇偶复用"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "波分复用 WDM 在光纤中以不同波长承载多路光信号，接收端再按波长分离。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "数据通信与传输",
+    "difficulty": "easy",
+    "tags": [
+      "数据通信与传输"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-069",
+    "type": "single_choice",
+    "question": "铜缆旁另一对线的信号耦合进本线路并造成干扰，最贴切的传输损伤名称是？",
+    "options": {
+      "A": "衰减",
+      "B": "串扰",
+      "C": "量化误差",
+      "D": "时延抖动"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "串扰是相邻导体或线对之间的电磁耦合干扰；衰减是信号随距离减弱，二者成因不同。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "数据通信与传输",
+    "difficulty": "medium",
+    "tags": [
+      "数据通信与传输"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-070",
+    "type": "single_choice",
+    "question": "NRZ 线路编码在长时间连续发送相同电平时，接收端最容易遇到什么困难？",
+    "options": {
+      "A": "无法传输任何 0",
+      "B": "难以从数据中恢复时钟同步",
+      "C": "每个比特都必须占用两个频带",
+      "D": "自动产生纠错能力"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "长串相同电平缺少跳变边沿，接收端难以提取时钟；采用曼彻斯特等含过渡的编码可改善同步，但会增加带宽需求。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "数据通信与传输",
+    "difficulty": "medium",
+    "tags": [
+      "数据通信与传输"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-071",
+    "type": "single_choice",
+    "question": "某主机未能从 DHCP 服务器取得地址，随后自动配置为 169.254.18.9/16。该地址属于哪类 IPv4 地址？",
+    "options": {
+      "A": "组播地址",
+      "B": "私有单播地址",
+      "C": "链路本地地址",
+      "D": "环回地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "169.254.0.0/16 是 IPv4 链路本地地址范围；主机在无法获取 DHCP 地址时可能自动选用该范围的地址。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "IPv4 与子网",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4 与子网"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-072",
+    "type": "single_choice",
+    "question": "两台主机分别配置为 10.24.20.15/20 和 10.24.31.240/20。它们是否属于同一 IPv4 子网？",
+    "options": {
+      "A": "否，/20 只能用于公网地址",
+      "B": "是，二者网络地址均为 10.24.16.0",
+      "C": "是，但前提是两台主机的末位相同",
+      "D": "否，第三个八位组不同就不可能同网段"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "/20 的掩码是 255.255.240.0，第三个八位组按 16 为步长划分；20 和 31 均落在 16–31 范围内，网络地址都是 10.24.16.0。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "IPv4 与子网",
+    "difficulty": "hard",
+    "tags": [
+      "IPv4 与子网"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-073",
+    "type": "single_choice",
+    "question": "下列哪个 IPv4 子网掩码无效？",
+    "options": {
+      "A": "255.255.255.0",
+      "B": "255.255.255.192",
+      "C": "255.255.0.255",
+      "D": "255.255.240.0"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "有效子网掩码的二进制位必须先连续为 1，再连续为 0。255.255.0.255 的 1 被 0 分隔，不符合前缀掩码格式。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "IPv4 与子网",
+    "difficulty": "hard",
+    "tags": [
+      "IPv4 与子网"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-074",
+    "type": "single_choice",
+    "question": "IPv4 地址 127.0.0.1 通常用于什么用途？",
+    "options": {
+      "A": "在本机进行回环测试",
+      "B": "在 Internet 上进行组播",
+      "C": "标识链路本地自动配置地址",
+      "D": "作为默认网关广播地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "127.0.0.0/8 是 IPv4 回环地址块，数据通常在本机协议栈内部处理，不应作为普通网络上的源或目的地址转发。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "IPv4 与子网",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4 与子网"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-075",
+    "type": "single_choice",
+    "question": "IPv4 路由器转发数据报时，通常如何处理 TTL 字段？",
+    "options": {
+      "A": "每经过一台路由器减 1",
+      "B": "只在数据报分片时减 1",
+      "C": "在整个路径上保持不变",
+      "D": "每经过一台交换机减 1"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "路由器每转发一个 IPv4 数据报会将 TTL 减 1，以限制数据报在路由环路中的存活时间；二层交换不执行该网络层操作。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "IPv4 与子网",
+    "difficulty": "easy",
+    "tags": [
+      "IPv4 与子网"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-076",
+    "type": "single_choice",
+    "question": "在支持 RFC 3021 的点到点链路上使用 IPv4 /31 前缀时，通常如何解释两个地址？",
+    "options": {
+      "A": "/31 只能用于组播",
+      "B": "两个地址都可分配给链路两端",
+      "C": "一个是网络地址，另一个是广播地址",
+      "D": "只能分配一个地址，另一个必须保留"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "点到点链路采用 /31 时，RFC 3021 允许将这两个地址都作为端点地址使用，不按传统多路访问子网方式保留网络地址和广播地址。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "IPv4 与子网",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4 与子网"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-077",
+    "type": "single_choice",
+    "question": "IPv4 数据报的 DF（Don’t Fragment）标志置位后，途中路由器因 MTU 限制无法原尺寸转发时，通常应怎样处理？",
+    "options": {
+      "A": "忽略 DF 标志并强制分片",
+      "B": "丢弃数据报，并可返回“需要分片”类 ICMP 差错",
+      "C": "把 TTL 改为 255 后重发",
+      "D": "将数据报转换成 TCP 段"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "DF 表示禁止分片。若出接口 MTU 不足，路由器不能分片转发，通常丢弃并发送 ICMP Destination Unreachable（需要分片）信息，供路径 MTU 发现使用。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "IPv4 与子网",
+    "difficulty": "hard",
+    "tags": [
+      "IPv4 与子网"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-078",
+    "type": "single_choice",
+    "question": "IPv4 首部校验和覆盖哪部分内容？",
+    "options": {
+      "A": "仅 IPv4 首部",
+      "B": "TCP 或 UDP 载荷",
+      "C": "整个以太网帧",
+      "D": "仅源和目的 MAC 地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IPv4 首部校验和只校验 IPv4 首部，不覆盖载荷；由于 TTL 等首部字段逐跳变化，转发路由器需更新校验和。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "IPv4 与子网",
+    "difficulty": "hard",
+    "tags": [
+      "IPv4 与子网"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-079",
+    "type": "single_choice",
+    "question": "路由表中的 IPv4 前缀 203.0.113.9/32 通常表示什么？",
+    "options": {
+      "A": "仅匹配组播地址",
+      "B": "覆盖所有 IPv4 地址",
+      "C": "覆盖整个 203.0.113.0/24 网段",
+      "D": "匹配单个主机地址的主机路由"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "/32 的前缀长度覆盖全部 32 个地址位，因此只匹配一个 IPv4 地址，常称为主机路由。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "IPv4 与子网",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4 与子网"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-080",
+    "type": "single_choice",
+    "question": "在 10.40.0.0/24 地址块中先分配 10.40.0.0/25 后，紧接着可分配给至少 50 台主机的最小对齐子网是？",
+    "options": {
+      "A": "10.40.0.192/27",
+      "B": "10.40.0.64/26",
+      "C": "10.40.0.0/26",
+      "D": "10.40.0.128/26"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "/25 占用 10.40.0.0–10.40.0.127，下一段从 .128 开始。/26 有 62 个可用主机地址，满足 50 台且边界对齐。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "IPv4 与子网",
+    "difficulty": "medium",
+    "tags": [
+      "IPv4 与子网"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-081",
+    "type": "single_choice",
+    "question": "IPv4 主机要向同一以太网内的目标 IP 发送数据，通常用什么协议查询目标 MAC 地址？",
+    "options": {
+      "A": "OSPF",
+      "B": "ARP",
+      "C": "DNS",
+      "D": "RARP"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "ARP 在本地链路上解析已知 IPv4 地址对应的链路层地址；它不负责跨路由器查询远端主机的 MAC 地址。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "网际层协议",
+    "difficulty": "easy",
+    "tags": [
+      "网际层协议"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-082",
+    "type": "single_choice",
+    "question": "主机访问不同子网的服务器时，发送以太网帧前通常解析哪个设备的 MAC 地址？",
+    "options": {
+      "A": "交换机管理地址",
+      "B": "本地默认网关接口的 MAC 地址",
+      "C": "远端服务器的 MAC 地址",
+      "D": "DNS 服务器的 MAC 地址，不论其位置"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "目的 IP 仍是远端服务器地址，但本地链路帧要交给下一跳默认网关，因此主机解析网关接口的 MAC 地址。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "网际层协议",
+    "difficulty": "medium",
+    "tags": [
+      "网际层协议"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-083",
+    "type": "single_choice",
+    "question": "IPv4 主机发送 Gratuitous ARP（无偿 ARP）公告时，常见用途是什么？",
+    "options": {
+      "A": "通告自身 IP 与 MAC 映射并协助检测地址冲突",
+      "B": "协商 TCP 窗口大小",
+      "C": "为远端域名查询 MX 记录",
+      "D": "请求路由器分配 IPv6 前缀"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "无偿 ARP 可让同一广播域内设备更新 ARP 缓存，也常用于地址冲突检测；它不是 DNS 或 DHCP 报文。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "网际层协议",
+    "difficulty": "medium",
+    "tags": [
+      "网际层协议"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-084",
+    "type": "single_choice",
+    "question": "使用传统 traceroute 探测路径时，探测报文的 TTL 逐步耗尽后，沿途路由器通常返回哪类 ICMP 报文？",
+    "options": {
+      "A": "地址掩码应答",
+      "B": "重定向",
+      "C": "时间超过",
+      "D": "回显应答"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "TTL 减到 0 时路由器通常丢弃数据报并发送 ICMP Time Exceeded，源主机据此识别路径上的一跳。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "网际层协议",
+    "difficulty": "medium",
+    "tags": [
+      "网际层协议"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-085",
+    "type": "single_choice",
+    "question": "IPv4 主机通过 ICMP 差错报文获知路径 MTU 过小后，需要把较大数据报分段重传。该反馈常涉及哪类 ICMP 信息？",
+    "options": {
+      "A": "路由器通告",
+      "B": "目的不可达中的需要分片提示",
+      "C": "源抑制",
+      "D": "回显应答"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IPv4 路径 MTU 发现传统上依赖 ICMP Destination Unreachable、Fragmentation Needed 等反馈；源主机据此减小后续数据报。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "网际层协议",
+    "difficulty": "hard",
+    "tags": [
+      "网际层协议"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-086",
+    "type": "single_choice",
+    "question": "ICMP 回显请求和回显应答常用于连通性诊断，但成功收到回显应答能证明什么？",
+    "options": {
+      "A": "该次探测的 IP 连通性及 ICMP 回应正常",
+      "B": "端到端 TCP 一定可靠",
+      "C": "所有应用端口都可访问",
+      "D": "DNS 解析必然正确"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "ping 成功仅说明该路径上的 ICMP 探测获得响应；防火墙可能单独过滤 ICMP，且这不能证明某个应用端口或 DNS 服务正常。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "网际层协议",
+    "difficulty": "medium",
+    "tags": [
+      "网际层协议"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-087",
+    "type": "single_choice",
+    "question": "RARP 的历史用途最接近下列哪项？",
+    "options": {
+      "A": "查询下一跳路由的度量值",
+      "B": "加密 IPv4 数据报",
+      "C": "已知域名时查询服务器端口",
+      "D": "已知硬件地址时查询自身 IPv4 地址"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "RARP 曾用于仅知道自身链路层地址的设备请求 IPv4 地址；后续通常由 BOOTP、DHCP 等机制取代。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "网际层协议",
+    "difficulty": "medium",
+    "tags": [
+      "网际层协议"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-088",
+    "type": "single_choice",
+    "question": "ICMP 的主要作用是什么？",
+    "options": {
+      "A": "对所有网络层数据进行加密",
+      "B": "像 TCP 一样保证应用数据可靠交付",
+      "C": "为 IP 提供差错报告和诊断控制信息",
+      "D": "为以太网分配 MAC 地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "ICMP 为 IP 提供差错报告及诊断/控制信息，但它不使 IP 成为可靠传输协议，也不保证 ICMP 报文一定送达。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "网际层协议",
+    "difficulty": "medium",
+    "tags": [
+      "网际层协议"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-089",
+    "type": "single_choice",
+    "question": "路由器收到发往本地链路广播地址的 ARP 请求时，通常应在哪些接口传播该广播？",
+    "options": {
+      "A": "通过 TCP 连接转发",
+      "B": "跨所有路由接口转发",
+      "C": "封装进 DNS 响应",
+      "D": "只在收到请求的二层广播域内传播"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "ARP 请求是链路层广播，路由器通常不会把二层广播转发到其他接口，因此解析作用域是本地广播域。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "网际层协议",
+    "difficulty": "medium",
+    "tags": [
+      "网际层协议"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-090",
+    "type": "single_choice",
+    "question": "IPv4 路由器收到 TTL 已减至 0 的数据报时，常用哪类 ICMP 消息向源主机报告超时？",
+    "options": {
+      "A": "Time Exceeded",
+      "B": "Echo Reply",
+      "C": "Redirect",
+      "D": "Address Mask Reply"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "TTL 在转发过程中减至 0 时，路由器通常丢弃数据报并发送 ICMP Time Exceeded（时间超过）报文；Traceroute 会利用这一机制。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "网际层协议",
+    "difficulty": "hard",
+    "tags": [
+      "网际层协议"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-091",
+    "type": "single_choice",
+    "question": "TCP 选择确认（SACK）选项主要解决什么问题？",
+    "options": {
+      "A": "加密 TCP 首部",
+      "B": "告知发送方已收到的非连续数据块，便于只重传缺失部分",
+      "C": "为 UDP 报文分配端口",
+      "D": "关闭接收窗口"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "SACK 允许接收方报告已收到的非连续序号范围；发送方据此可避免重传已成功到达的段，尤其有助于多个段丢失时恢复。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "传输层",
+    "difficulty": "medium",
+    "tags": [
+      "传输层"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-092",
+    "type": "single_choice",
+    "question": "TCP 对端通告接收窗口为 0 后，发送方使用 Zero-Window Probe 的主要目的是什么？",
+    "options": {
+      "A": "将拥塞窗口永久清零",
+      "B": "重新选择 DNS 服务器",
+      "C": "发起新的三次握手",
+      "D": "确认接收端窗口何时重新开放，避免因窗口更新丢失而永久停滞"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "接收窗口为 0 表示接收端暂时无法接收更多数据；发送方周期性探测可促使对端重发窗口信息，避免窗口更新报文丢失后双方一直等待。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "传输层",
+    "difficulty": "medium",
+    "tags": [
+      "传输层"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-093",
+    "type": "single_choice",
+    "question": "TCP ECN（显式拥塞通知）被协商启用后，网络设备检测到拥塞时可以怎样提示端系统？",
+    "options": {
+      "A": "篡改 TCP 目的端口",
+      "B": "设置拥塞标记而不必先丢弃报文，接收端再通知发送端降速",
+      "C": "把数据包转成 ICMP Echo Reply",
+      "D": "清空 DNS 缓存"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "ECN 通过 IP 层拥塞标记及 TCP 端反馈通知发送端拥塞，可以在支持 ECN 的路径上减少以丢包作为唯一拥塞信号的情况。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "传输层",
+    "difficulty": "medium",
+    "tags": [
+      "传输层"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-094",
+    "type": "single_choice",
+    "question": "在未携带 TCP 选项时，TCP 首部最小长度是多少？",
+    "options": {
+      "A": "8 字节",
+      "B": "32 字节",
+      "C": "20 字节",
+      "D": "60 字节"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "TCP 固定首部最小为 20 字节；加入选项时首部长度可增加，最大为 60 字节。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "传输层",
+    "difficulty": "easy",
+    "tags": [
+      "传输层"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-095",
+    "type": "single_choice",
+    "question": "UDP 首部包含源端口、目的端口、长度和校验和，各字段长度均为 16 位，因此首部总长为？",
+    "options": {
+      "A": "8 字节",
+      "B": "20 字节",
+      "C": "16 字节",
+      "D": "4 字节"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "四个 16 位字段共 64 位，即 8 字节。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "传输层",
+    "difficulty": "easy",
+    "tags": [
+      "传输层"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-096",
+    "type": "single_choice",
+    "question": "TCP 连接的一端发送 FIN 后，最恰当的理解是什么？",
+    "options": {
+      "A": "路由器已关闭目标端口",
+      "B": "双方所有方向的数据立即同时停止",
+      "C": "连接已被异常重置",
+      "D": "该端表示自己不再发送数据，另一方向仍可能继续传输"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "TCP 支持半关闭；一端发送 FIN 关闭自己的发送方向后，仍可继续接收对端数据，直到另一方向也关闭。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "传输层",
+    "difficulty": "medium",
+    "tags": [
+      "传输层"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-097",
+    "type": "single_choice",
+    "question": "TCP 时间戳选项除帮助估算往返时间外，还常用于什么？",
+    "options": {
+      "A": "域名反向解析",
+      "B": "PAWS（防止序号回绕歧义）机制",
+      "C": "替代 IP 地址",
+      "D": "计算以太网 FCS"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "TCP 时间戳可用于往返时间测量（RTTM），也可配合 PAWS 检测旧的重复段，降低高吞吐场景下序号回绕造成的歧义。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "传输层",
+    "difficulty": "hard",
+    "tags": [
+      "传输层"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-098",
+    "type": "single_choice",
+    "question": "TCP Window Scale 选项通常在什么时候协商，其主要作用是什么？",
+    "options": {
+      "A": "替代 TCP 序号字段",
+      "B": "在每个数据段中协商，用于加密载荷",
+      "C": "在建连握手期间协商，以扩展可通告接收窗口的表示范围",
+      "D": "仅在连接关闭时协商，用于重传 FIN"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "TCP Window Scale 选项在 SYN 阶段协商窗口缩放因子，使接收窗口可超过 16 位窗口字段原有的 65,535 字节表示上限。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "传输层",
+    "difficulty": "medium",
+    "tags": [
+      "传输层"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-099",
+    "type": "single_choice",
+    "question": "一台客户端同时连接多个远端服务器时，操作系统通常如何区分这些 TCP 连接？",
+    "options": {
+      "A": "看源/目的 IP 地址与源/目的端口构成的四元组",
+      "B": "只看客户端 MAC 地址",
+      "C": "只看 TCP 窗口大小",
+      "D": "只看服务器进程名"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "TCP 连接由本地与远端 IP 地址、端口号组成的四元组区分；相同客户端端口可与不同远端端点建立不同连接。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "传输层",
+    "difficulty": "medium",
+    "tags": [
+      "传输层"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-100",
+    "type": "single_choice",
+    "question": "TCP Keepalive 探测的主要用途是什么？",
+    "options": {
+      "A": "在长时间空闲的连接上探测对端是否仍可达",
+      "B": "保证应用消息按记录边界传输",
+      "C": "为每个字节分配新的端口号",
+      "D": "替代 TCP 三次握手"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "TCP Keepalive 可用于探测长期空闲连接的对端是否仍存活；它不是所有实现或应用都必须启用的功能，也不提供应用消息边界。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "传输层",
+    "difficulty": "medium",
+    "tags": [
+      "传输层"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-101",
+    "type": "single_choice",
+    "question": "IPv4 DNS 主机地址记录的资源记录类型是什么？",
+    "options": {
+      "A": "AAAA",
+      "B": "PTR",
+      "C": "A",
+      "D": "MX"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "A 记录映射名称到 IPv4 地址；AAAA 记录映射到 IPv6 地址，MX 指邮件交换，PTR 用于反向查询。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "应用层协议与端口",
+    "difficulty": "easy",
+    "tags": [
+      "应用层协议与端口"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-102",
+    "type": "single_choice",
+    "question": "DNS 区域中，某名称已经配置 CNAME 记录时，通常还可以在同一所有者名称上同时配置什么？",
+    "options": {
+      "A": "不能再配置其他普通数据记录",
+      "B": "必须改用 TCP 端口 25",
+      "C": "再配置该名称的 A、MX 等普通数据记录",
+      "D": "只能配置 DHCP 选项"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "DNS 规范通常要求 CNAME 所在名称不能同时存在其他普通数据记录（DNSSEC 相关记录除外），否则别名解析与该名称自身数据会产生冲突。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "应用层协议与端口",
+    "difficulty": "easy",
+    "tags": [
+      "应用层协议与端口"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-103",
+    "type": "single_choice",
+    "question": "递归 DNS 解析器收到不存在域名的 NXDOMAIN 响应后，短时间内对相同名称继续返回否定结果，通常是因为？",
+    "options": {
+      "A": "该域名已经变成 CNAME",
+      "B": "DNS 只能使用 TCP",
+      "C": "客户端自动改写域名",
+      "D": "它按权威响应中的相关 TTL 对否定答案进行了缓存"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "递归解析器可以缓存否定答案；缓存有效期按权威响应中的 SOA 信息和相关 TTL 规则确定，期间重复查询可能不再访问权威服务器。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "应用层协议与端口",
+    "difficulty": "medium",
+    "tags": [
+      "应用层协议与端口"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-104",
+    "type": "single_choice",
+    "question": "DHCP 客户端首次广播发现可用服务器后，常见的 DORA 流程顺序是？",
+    "options": {
+      "A": "Discover、Offer、Request、Acknowledge",
+      "B": "Discover、Request、Offer、Acknowledge",
+      "C": "Request、Discover、Acknowledge、Offer",
+      "D": "Offer、Discover、Acknowledge、Request"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "DORA 依次为客户端发现、服务器提供地址、客户端请求、服务器确认租约。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "应用层协议与端口",
+    "difficulty": "medium",
+    "tags": [
+      "应用层协议与端口"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-105",
+    "type": "single_choice",
+    "question": "管理员需要通过 SSH 安全通道把文件传到远程主机，通常应选择哪种协议？",
+    "options": {
+      "A": "普通 FTP 的 TCP 20 端口",
+      "B": "SFTP",
+      "C": "SNMP",
+      "D": "TFTP"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "SFTP 是基于 SSH 的安全文件传输协议；FTPS 则是在 FTP 上增加 TLS 保护，两者名称相似但协议基础不同。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "应用层协议与端口",
+    "difficulty": "medium",
+    "tags": [
+      "应用层协议与端口"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-106",
+    "type": "single_choice",
+    "question": "邮件客户端向邮件服务商提交外发邮件，并希望通过 STARTTLS 升级加密连接，常见的邮件提交端口是？",
+    "options": {
+      "A": "TCP 587",
+      "B": "UDP 520",
+      "C": "TCP 179",
+      "D": "UDP 67"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "TCP 587 常用于邮件客户端向提交服务（message submission）发送外发邮件，可通过 STARTTLS 升级传输加密；服务器间 SMTP 中继常用 TCP 25。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "应用层协议与端口",
+    "difficulty": "medium",
+    "tags": [
+      "应用层协议与端口"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-107",
+    "type": "single_choice",
+    "question": "浏览器请求页面后，服务器返回 HTTP 状态码 401，通常表示？",
+    "options": {
+      "A": "请求语法完全正确且资源已删除",
+      "B": "服务器成功创建资源",
+      "C": "请求需要身份认证或认证未通过",
+      "D": "资源永久迁移"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "401 表示请求缺少有效认证凭据或认证未通过；403 通常表示服务器理解请求但拒绝授权访问。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "应用层协议与端口",
+    "difficulty": "medium",
+    "tags": [
+      "应用层协议与端口"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-108",
+    "type": "single_choice",
+    "question": "同一公网 IP 和 TCP 端口承载多个网站时，HTTP/1.1 请求中的哪个首部通常用于让服务器区分目标主机名？",
+    "options": {
+      "A": "VLAN-ID",
+      "B": "Host",
+      "C": "Route-Tag",
+      "D": "Referer-Checksum"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "HTTP Host 首部携带请求目标主机名和可选端口，可让共享 IP/端口的服务器按虚拟主机配置选择站点。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "应用层协议与端口",
+    "difficulty": "easy",
+    "tags": [
+      "应用层协议与端口"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-109",
+    "type": "single_choice",
+    "question": "DHCP 客户端所在网段没有本地 DHCP 服务器，路由器配置 DHCP Relay 的主要作用是什么？",
+    "options": {
+      "A": "替代客户端完成 TCP 三次握手",
+      "B": "把本地广播请求转发或中继到远端 DHCP 服务器",
+      "C": "为客户端加密磁盘",
+      "D": "将 DNS 记录转换为路由表"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "DHCP Relay 使客户端本地广播可以到达不同子网中的 DHCP 服务器，并在请求中携带客户端网段信息供服务器分配地址。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "应用层协议与端口",
+    "difficulty": "medium",
+    "tags": [
+      "应用层协议与端口"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-110",
+    "type": "single_choice",
+    "question": "客户端发送条件 GET，服务器发现资源的 ETag 与请求中的 If-None-Match 相同且缓存仍可复用，通常可返回什么状态码？",
+    "options": {
+      "A": "401 Unauthorized",
+      "B": "503 Service Unavailable",
+      "C": "404 Not Found",
+      "D": "304 Not Modified"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "当 If-None-Match 条件表明客户端缓存表示仍有效时，服务器可返回 304 Not Modified，不重复发送完整响应体。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "应用层协议与端口",
+    "difficulty": "medium",
+    "tags": [
+      "应用层协议与端口"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-111",
+    "type": "single_choice",
+    "question": "IPv6 唯一本地单播地址的预留地址块是？",
+    "options": {
+      "A": "FF00::/8",
+      "B": "FC00::/7",
+      "C": "2000::/3",
+      "D": "FE80::/10"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "FC00::/7 用于 IPv6 唯一本地单播地址；FE80::/10 是链路本地单播，FF00::/8 是组播，2000::/3 是全球单播地址空间。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "IPv6",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-112",
+    "type": "single_choice",
+    "question": "IPv6 基本首部中的哪个字段替代了 IPv4 首部中的 TTL 字段？",
+    "options": {
+      "A": "Hop Limit",
+      "B": "Flow Label",
+      "C": "Payload Length",
+      "D": "Next Header"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IPv6 使用 Hop Limit 限制数据包可经过的路由器跳数，对应 IPv4 的 TTL 转发限制作用。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "IPv6",
+    "difficulty": "easy",
+    "tags": [
+      "IPv6"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-113",
+    "type": "single_choice",
+    "question": "IPv6 地址 :: 的含义是什么？",
+    "options": {
+      "A": "全球单播前缀",
+      "B": "本机回环地址",
+      "C": "链路本地所有节点组播地址",
+      "D": "未指定地址"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "全零地址 :: 表示未指定地址，常用于尚未获得有效地址的场景；::1 才是回环地址。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "IPv6",
+    "difficulty": "easy",
+    "tags": [
+      "IPv6"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-114",
+    "type": "single_choice",
+    "question": "IPv6 基本首部不包含校验和字段，主要设计考虑是什么？",
+    "options": {
+      "A": "避免使用任何链路层帧校验",
+      "B": "让 TCP 无需校验和",
+      "C": "减少每跳路由器处理首部的开销，链路层与上层仍有相应差错检测",
+      "D": "表示 IPv6 报文不会发生差错"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "IPv6 取消了基本首部校验和以减少逐跳更新和重新计算负担；这不代表数据无差错，链路层 FCS 和 TCP/UDP 校验等机制仍发挥作用。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "IPv6",
+    "difficulty": "hard",
+    "tags": [
+      "IPv6"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-115",
+    "type": "single_choice",
+    "question": "IPv6 首部或扩展首部中的 Next Header 字段主要用于什么？",
+    "options": {
+      "A": "保存 IPv6 子网掩码",
+      "B": "标识紧随其后的扩展首部或上层协议",
+      "C": "标识以太网交换机端口",
+      "D": "指定 DNS 递归服务器"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Next Header 字段指明后续首部类型，可链接多个扩展首部，最终指向 TCP、UDP、ICMPv6 等上层协议。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "IPv6",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-116",
+    "type": "single_choice",
+    "question": "家庭/企业边界路由器向运营商申请一段 IPv6 前缀，再划分给内部网络使用，常见机制是 DHCPv6 的哪项功能？",
+    "options": {
+      "A": "前缀委派（Prefix Delegation）",
+      "B": "反向 DNS 更新",
+      "C": "地址冲突检测",
+      "D": "链路层地址解析"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "DHCPv6 前缀委派可把一段 IPv6 前缀交给下游路由器，由其再划分子网并通告给内部链路。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "IPv6",
+    "difficulty": "hard",
+    "tags": [
+      "IPv6"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-117",
+    "type": "single_choice",
+    "question": "IPv4 与 IPv6 主机需要在同一网络中直接运行并分别通信，最直接的过渡方式是哪种？",
+    "options": {
+      "A": "只配置 IPv4 静态路由",
+      "B": "把 IPv6 地址截断成 32 位",
+      "C": "双栈",
+      "D": "关闭所有 DNS 服务"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "双栈设备同时运行 IPv4 和 IPv6 协议栈，可分别与两类网络通信，是常见过渡方式之一。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "IPv6",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-118",
+    "type": "single_choice",
+    "question": "IPv6-only 客户端需要访问 IPv4-only 服务，网络中部署 NAT64/DNS64 的主要用途是什么？",
+    "options": {
+      "A": "帮助 IPv6 客户端发现并访问 IPv4 服务，实现地址族间转换",
+      "B": "把所有 IPv4 服务永久改为 IPv6 源码",
+      "C": "替代 TCP 校验和",
+      "D": "在以太网中创建 VLAN"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "NAT64 在网络层转换 IPv6 与 IPv4 流量，DNS64 可合成映射 IPv4 地址的 AAAA 记录，帮助 IPv6-only 客户端访问 IPv4-only 服务。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "IPv6",
+    "difficulty": "hard",
+    "tags": [
+      "IPv6"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-119",
+    "type": "single_choice",
+    "question": "IPv6 单播地址 ::1 的用途是什么？",
+    "options": {
+      "A": "未指定地址，表示默认网关",
+      "B": "回环地址，表示本机",
+      "C": "全球默认路由",
+      "D": "链路本地组播地址"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "::1 是 IPv6 回环地址，对应本机；全零地址 :: 表示未指定地址，二者不能混淆。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "IPv6",
+    "difficulty": "easy",
+    "tags": [
+      "IPv6"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-120",
+    "type": "single_choice",
+    "question": "IPv6 的固定基本首部长度是多少？",
+    "options": {
+      "A": "60 字节",
+      "B": "20 字节",
+      "C": "48 字节",
+      "D": "40 字节"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "IPv6 基本首部固定为 40 字节；可选扩展信息放在扩展首部中，因此基本首部长度不随选项变化。",
+    "chapter": "网络体系结构与 TCP/IP",
+    "knowledgePoint": "IPv6",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6"
+    ]
+  }
+]

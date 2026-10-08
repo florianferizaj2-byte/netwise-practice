@@ -18,6 +18,8 @@ for (const [label, args] of [
   ["浏览器完整流程检查", ["test/e2e.js"]],
   ["VIP AI 精讲与练习完整流程检查", ["test/subjective-study.e2e.js"]],
   ["移动网页双浏览器流程检查", ["test/mobile-web.e2e.js"]],
+  ["苹果网页布局与无障碍检查", ["test/apple-ui.e2e.js"]],
+  ["移动端 AI 精炼完整流程检查", ["test/mobile-study.e2e.js"]],
 ]) {
   console.log(`\n正在进行：${label}`);
   const result = spawnSync(process.execPath, args, {

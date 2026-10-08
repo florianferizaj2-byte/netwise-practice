@@ -1,0 +1,2421 @@
+[
+  {
+    "id": "sc-upgrading-computer-001",
+    "type": "single_choice",
+    "question": "通常所说的第一代电子计算机主要采用哪种电子器件？",
+    "options": {
+      "A": "电子管",
+      "B": "晶体管",
+      "C": "集成电路",
+      "D": "大规模集成电路"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "第一代电子计算机以电子管为主要器件；晶体管和集成电路是后续阶段的代表。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "计算机概述",
+    "knowledgePoint": "计算机发展与应用",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "计算机发展与应用"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-002",
+    "type": "single_choice",
+    "question": "利用计算机建立天气预测模型，主要属于哪类应用？",
+    "options": {
+      "A": "科学计算",
+      "B": "电子支付",
+      "C": "文件压缩",
+      "D": "文字处理"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "天气预测需要对大量观测数据进行数值运算，因此主要属于科学计算。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "计算机概述",
+    "knowledgePoint": "计算机发展与应用",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "计算机发展与应用"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-003",
+    "type": "single_choice",
+    "question": "工厂使用计算机监测温度并自动调节生产设备，属于哪类应用？",
+    "options": {
+      "A": "邮件合并",
+      "B": "信息检索",
+      "C": "过程控制",
+      "D": "图文排版"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "根据采集的数据自动调节生产设备，是计算机在过程控制中的典型应用。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "计算机概述",
+    "knowledgePoint": "计算机发展与应用",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "计算机发展与应用"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-004",
+    "type": "multiple_choice",
+    "question": "关于计算机的特点，下列哪些说法正确？",
+    "options": {
+      "A": "任何计算结果都不可能出错",
+      "B": "能高速执行运算",
+      "C": "可以存储大量数据",
+      "D": "能按程序自动运行"
+    },
+    "answer": [
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "计算机具有高速、存储能力强和自动执行程序等特点；错误程序或输入仍会产生错误结果。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "计算机概述",
+    "knowledgePoint": "计算机发展与应用",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "计算机发展与应用"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-005",
+    "type": "true_false",
+    "question": "计算机只要运行速度足够快，就一定能理解输入数据的真实含义。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "运行速度体现计算能力，不意味着机器必然理解数据的语义或现实背景。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "计算机概述",
+    "knowledgePoint": "计算机发展与应用",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "计算机发展与应用"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-006",
+    "type": "single_choice",
+    "question": "二进制数 101101 对应的十进制数是多少？",
+    "options": {
+      "A": "44",
+      "B": "45",
+      "C": "46",
+      "D": "43"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "按位权展开得到 32+8+4+1=45，二进制各位的权值是 2 的幂。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "数制与数据表示",
+    "knowledgePoint": "进制转换",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "进制转换"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-007",
+    "type": "single_choice",
+    "question": "十进制整数 26 对应的二进制数是哪个？",
+    "options": {
+      "A": "11100",
+      "B": "10010",
+      "C": "11010",
+      "D": "10110"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "26=16+8+2，因此二进制从高到低写为 11010。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "数制与数据表示",
+    "knowledgePoint": "进制转换",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "进制转换"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-008",
+    "type": "single_choice",
+    "question": "十六进制数 2F 对应的十进制数是多少？",
+    "options": {
+      "A": "47",
+      "B": "31",
+      "C": "32",
+      "D": "46"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "十六进制 F 表示 15，因此 2F=2×16+15=47。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "数制与数据表示",
+    "knowledgePoint": "进制转换",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "进制转换"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-009",
+    "type": "single_choice",
+    "question": "八进制数 17 对应的十进制数是多少？",
+    "options": {
+      "A": "17",
+      "B": "15",
+      "C": "13",
+      "D": "19"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "八进制的位权以 8 为底，17=1×8+7=15。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "数制与数据表示",
+    "knowledgePoint": "进制转换",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "进制转换"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-010",
+    "type": "single_choice",
+    "question": "二进制数 10101010 对应的十六进制数是哪个？",
+    "options": {
+      "A": "AA",
+      "B": "AB",
+      "C": "BB",
+      "D": "A0"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "从右向左每四位分组，1010 对应 A，两组 1010 得到 AA。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "数制与数据表示",
+    "knowledgePoint": "进制转换",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "进制转换"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-011",
+    "type": "single_choice",
+    "question": "一个字节通常包含多少个二进制位？",
+    "options": {
+      "A": "8",
+      "B": "16",
+      "C": "2",
+      "D": "4"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "字节是常用的数据计量单位，1 byte 通常由 8 bit 组成。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "数制与数据表示",
+    "knowledgePoint": "信息编码与计量",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "信息编码与计量"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-012",
+    "type": "single_choice",
+    "question": "按 1 KiB=1024 B 计算，4 KiB 等于多少字节？",
+    "options": {
+      "A": "1024",
+      "B": "4000",
+      "C": "4096",
+      "D": "2048"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "KiB 采用二进制倍数，4×1024=4096 字节。题干已明确采用 KiB。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "数制与数据表示",
+    "knowledgePoint": "信息编码与计量",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "信息编码与计量"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-013",
+    "type": "single_choice",
+    "question": "8 位无符号二进制整数能够表示的最大十进制数是多少？",
+    "options": {
+      "A": "127",
+      "B": "128",
+      "C": "255",
+      "D": "256"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "8 位无符号整数表示 0 至 2 的 8 次方减 1，因此最大为 255。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "数制与数据表示",
+    "knowledgePoint": "信息编码与计量",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "信息编码与计量"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-014",
+    "type": "single_choice",
+    "question": "标准 ASCII 编码使用多少位表示一个字符？",
+    "options": {
+      "A": "7",
+      "B": "16",
+      "C": "32",
+      "D": "4"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "标准 ASCII 使用 7 位编码，可表示 128 个字符；扩展编码不属于标准 ASCII。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "数制与数据表示",
+    "knowledgePoint": "信息编码与计量",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "信息编码与计量"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-015",
+    "type": "single_choice",
+    "question": "字符编码的主要作用是什么？",
+    "options": {
+      "A": "自动压缩所有图片",
+      "B": "增加 CPU 主频",
+      "C": "提高显示器亮度",
+      "D": "把字符映射为可存储的编码值"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "字符编码建立字符与编码值之间的映射，使文字能够被存储、传输和处理。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "数制与数据表示",
+    "knowledgePoint": "信息编码与计量",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "信息编码与计量"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-016",
+    "type": "single_choice",
+    "question": "冯·诺依曼体系结构的一个核心思想是什么？",
+    "options": {
+      "A": "所有程序同时执行",
+      "B": "只处理文字",
+      "C": "存储程序",
+      "D": "完全不用存储器"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "存储程序思想把程序指令放入存储器，使计算机能够按指令自动执行任务。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "硬件系统",
+    "knowledgePoint": "体系结构与硬件",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "体系结构与硬件"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-017",
+    "type": "single_choice",
+    "question": "CPU 中负责算术与逻辑运算的部件是哪个？",
+    "options": {
+      "A": "运算器",
+      "B": "显示器",
+      "C": "打印机",
+      "D": "网卡"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "运算器负责算术及逻辑运算，控制器负责协调指令执行，两者都是 CPU 的重要部分。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "硬件系统",
+    "knowledgePoint": "体系结构与硬件",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "体系结构与硬件"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-018",
+    "type": "multiple_choice",
+    "question": "以下哪些属于计算机硬件系统的基本功能部件？",
+    "options": {
+      "A": "控制器",
+      "B": "存储器",
+      "C": "输入设备",
+      "D": "运算器"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "硬件的五大功能部件包括运算器、控制器、存储器、输入设备和输出设备。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "硬件系统",
+    "knowledgePoint": "体系结构与硬件",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "体系结构与硬件"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-019",
+    "type": "single_choice",
+    "question": "下列哪种存储器通常在断电后丢失所保存的数据？",
+    "options": {
+      "A": "RAM",
+      "B": "光盘",
+      "C": "机械硬盘",
+      "D": "固态硬盘"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "RAM 一般属于易失性存储器，断电后数据不保留，硬盘等用于持久保存。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "硬件系统",
+    "knowledgePoint": "体系结构与硬件",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "体系结构与硬件"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-020",
+    "type": "single_choice",
+    "question": "在 CPU 与主存之间设置高速缓存，主要为了什么？",
+    "options": {
+      "A": "取消程序指令",
+      "B": "减少二者访问速度差异带来的等待",
+      "C": "替代显示器",
+      "D": "增加硬盘容量"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "高速缓存保存近期常用数据和指令，降低 CPU 等待较慢主存的开销。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "硬件系统",
+    "knowledgePoint": "体系结构与硬件",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "体系结构与硬件"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-021",
+    "type": "single_choice",
+    "question": "下列哪个是输出设备？",
+    "options": {
+      "A": "键盘",
+      "B": "鼠标",
+      "C": "扫描仪",
+      "D": "显示器"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "显示器把计算结果呈现给用户，属于输出设备，键盘等主要承担输入功能。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "硬件系统",
+    "knowledgePoint": "体系结构与硬件",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "体系结构与硬件"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-022",
+    "type": "single_choice",
+    "question": "下列哪个属于输入设备？",
+    "options": {
+      "A": "麦克风",
+      "B": "扬声器",
+      "C": "投影仪",
+      "D": "打印机"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "麦克风采集声音并输入计算机；打印机、扬声器和投影仪主要输出信息。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "硬件系统",
+    "knowledgePoint": "体系结构与硬件",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "体系结构与硬件"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-023",
+    "type": "single_choice",
+    "question": "下列哪个属于系统软件？",
+    "options": {
+      "A": "个人照片",
+      "B": "演示文稿",
+      "C": "操作系统",
+      "D": "电子表格文档"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "操作系统管理硬件资源并向应用程序提供基础服务，是典型的系统软件。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "软件与系统操作",
+    "knowledgePoint": "操作系统与软件分类",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "操作系统与软件分类"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-024",
+    "type": "multiple_choice",
+    "question": "操作系统通常承担哪些资源管理功能？",
+    "options": {
+      "A": "文件管理",
+      "B": "处理器管理",
+      "C": "存储器管理",
+      "D": "设备管理"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "操作系统协调处理器、内存、设备和文件等资源，为程序运行提供统一环境。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "软件与系统操作",
+    "knowledgePoint": "操作系统与软件分类",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "操作系统与软件分类"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-025",
+    "type": "single_choice",
+    "question": "Word 文字处理程序属于哪类软件？",
+    "options": {
+      "A": "应用软件",
+      "B": "计算机总线",
+      "C": "内存芯片",
+      "D": "固件接口"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Word 面向文档处理任务，属于应用软件，不属于硬件部件。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "软件与系统操作",
+    "knowledgePoint": "操作系统与软件分类",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "操作系统与软件分类"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-026",
+    "type": "true_false",
+    "question": "操作系统的任务只是美化桌面，不需要管理硬件资源。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "桌面界面只是用户接口的一部分，操作系统还要管理处理器、内存、设备和文件。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "软件与系统操作",
+    "knowledgePoint": "操作系统与软件分类",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "操作系统与软件分类"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-027",
+    "type": "single_choice",
+    "question": "在 Windows 中查看进程并结束无响应程序，通常使用哪个工具？",
+    "options": {
+      "A": "画图",
+      "B": "记事本",
+      "C": "任务管理器",
+      "D": "计算器"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "任务管理器可查看运行中的进程与资源使用情况，也可结束无响应程序。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "软件与系统操作",
+    "knowledgePoint": "Windows 文件与任务",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "Windows 文件与任务"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-028",
+    "type": "single_choice",
+    "question": "Windows 文件夹的主要用途是什么？",
+    "options": {
+      "A": "提高 CPU 运算精度",
+      "B": "分类组织文件及子文件夹",
+      "C": "只保存图片",
+      "D": "代替操作系统"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "文件夹用于按层级组织文件和子文件夹，便于管理和定位文件。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "软件与系统操作",
+    "knowledgePoint": "Windows 文件与任务",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "Windows 文件与任务"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-029",
+    "type": "single_choice",
+    "question": "Windows 资源管理器中，在同一位置选择不连续的多个文件，通常配合哪个键？",
+    "options": {
+      "A": "Ctrl",
+      "B": "Caps Lock",
+      "C": "Num Lock",
+      "D": "Esc"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "通常按住 Ctrl 再逐个单击可选择不连续项目；Shift 常用于选择连续区间。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "软件与系统操作",
+    "knowledgePoint": "Windows 文件与任务",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "Windows 文件与任务"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-030",
+    "type": "single_choice",
+    "question": "在 Windows 常见编辑操作中，Ctrl+C 和 Ctrl+V 分别用于什么？",
+    "options": {
+      "A": "复制与粘贴",
+      "B": "保存与打印",
+      "C": "撤销与重做",
+      "D": "剪切与删除"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Ctrl+C 用于复制，Ctrl+V 用于粘贴；具体软件仍可能定义特殊快捷键。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "软件与系统操作",
+    "knowledgePoint": "Windows 文件与任务",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "Windows 文件与任务"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-031",
+    "type": "true_false",
+    "question": "文件的扩展名可以帮助操作系统关联打开方式，但单纯改名不会改变文件内部格式。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "扩展名是文件名的一部分，改变扩展名不会自动重新编码文件内容。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "软件与系统操作",
+    "knowledgePoint": "Windows 文件与任务",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "Windows 文件与任务"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-032",
+    "type": "single_choice",
+    "question": "一幅 100×100 像素的 24 位 RGB 图像，不含压缩和文件头时需要多少字节？",
+    "options": {
+      "A": "80000",
+      "B": "10000",
+      "C": "24000",
+      "D": "30000"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "每像素 24 bit 即 3 B，100×100×3=30000 B；这里不计压缩与元数据。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "数字媒体",
+    "knowledgePoint": "音频与图像基础",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "音频与图像基础"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-033",
+    "type": "single_choice",
+    "question": "音频数字化过程中，采样主要完成什么工作？",
+    "options": {
+      "A": "在离散时间点记录信号值",
+      "B": "自动生成字幕",
+      "C": "改变文件名称",
+      "D": "把扬声器变成输入设备"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "采样将连续时间信号转为离散时间样本；量化和编码是后续不同步骤。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "数字媒体",
+    "knowledgePoint": "音频与图像基础",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "音频与图像基础"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-034",
+    "type": "single_choice",
+    "question": "数字音频的采样率通常表示什么？",
+    "options": {
+      "A": "显示器像素总数",
+      "B": "硬盘转速",
+      "C": "文件夹数量",
+      "D": "每秒采样次数"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "采样率以 Hz 等单位表示每秒采样的次数，它与采样位深不是同一个概念。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "数字媒体",
+    "knowledgePoint": "音频与图像基础",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "音频与图像基础"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-035",
+    "type": "true_false",
+    "question": "对图片进行有损压缩后，解码时一定能逐像素恢复原始图片。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "有损压缩会舍弃部分信息，解码后通常不能逐像素完全恢复原图。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "数字媒体",
+    "knowledgePoint": "音频与图像基础",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "音频与图像基础"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-036",
+    "type": "single_choice",
+    "question": "在 Word 中统一多个标题的格式，并便于后续批量调整，优先使用什么？",
+    "options": {
+      "A": "逐字修改颜色",
+      "B": "标题样式",
+      "C": "反复敲空格",
+      "D": "截图替换文字"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "样式集中管理一类内容的格式，修改样式即可统一调整使用该样式的标题。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Word",
+    "knowledgePoint": "文档编辑与排版",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "文档编辑与排版"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-037",
+    "type": "single_choice",
+    "question": "在 Word 中让后续正文从下一页开始，通常应插入什么？",
+    "options": {
+      "A": "分页符",
+      "B": "多个空格",
+      "C": "批注",
+      "D": "超链接"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "分页符明确指定新页起点，比连续输入空行更能保持排版稳定。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Word",
+    "knowledgePoint": "文档编辑与排版",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "文档编辑与排版"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-038",
+    "type": "single_choice",
+    "question": "希望 Word 文档不同部分使用不同页面方向，通常需要什么？",
+    "options": {
+      "A": "只修改字体",
+      "B": "全选后居中",
+      "C": "插入脚注",
+      "D": "分节符"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "页面方向等页面设置可按节配置，分节符用于划分需要不同页面设置的部分。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Word",
+    "knowledgePoint": "文档编辑与排版",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "文档编辑与排版"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-039",
+    "type": "multiple_choice",
+    "question": "下列哪些属于 Word 的段落格式设置？",
+    "options": {
+      "A": "首行缩进",
+      "B": "对齐方式",
+      "C": "段前间距",
+      "D": "行距"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "段落格式包括间距、行距、缩进与对齐等；这些设置作用于段落而不是单个字符。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Word",
+    "knowledgePoint": "文档编辑与排版",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "文档编辑与排版"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-040",
+    "type": "single_choice",
+    "question": "Word 中快速把全文的某个旧名称改为新名称，通常使用什么功能？",
+    "options": {
+      "A": "插入目录",
+      "B": "查找和替换",
+      "C": "分栏",
+      "D": "页面颜色"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "查找和替换可定位指定内容并批量更换，替换前应核对匹配范围。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Word",
+    "knowledgePoint": "文档编辑与排版",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "文档编辑与排版"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-041",
+    "type": "true_false",
+    "question": "Word 自动目录通常可以根据应用了标题样式的段落生成。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "标题样式包含结构层级信息，自动目录能够读取标题层级并生成目录条目。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Word",
+    "knowledgePoint": "文档编辑与排版",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "文档编辑与排版"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-042",
+    "type": "single_choice",
+    "question": "Word 邮件合并适合哪种任务？",
+    "options": {
+      "A": "安装操作系统",
+      "B": "检查 CPU 温度",
+      "C": "设置路由表",
+      "D": "用同一模板生成不同收件人的通知"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "邮件合并把主文档模板与数据源结合，生成字段值不同的个性化文档。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Word",
+    "knowledgePoint": "表格图文与邮件合并",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "表格图文与邮件合并"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-043",
+    "type": "single_choice",
+    "question": "希望图片周围的正文自动环绕排版，主要调整什么设置？",
+    "options": {
+      "A": "字数统计",
+      "B": "修订作者",
+      "C": "文字环绕",
+      "D": "拼写检查"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "文字环绕控制图片与正文的位置关系，可根据排版需要设置不同环绕方式。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Word",
+    "knowledgePoint": "表格图文与邮件合并",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "表格图文与邮件合并"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-044",
+    "type": "single_choice",
+    "question": "多人修改 Word 文档时，保留新增与删除痕迹以便审阅，适合开启什么？",
+    "options": {
+      "A": "格式刷",
+      "B": "修订",
+      "C": "页面缩放",
+      "D": "分栏"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "修订记录编辑变更，审阅者可逐项接受或拒绝；批注主要补充说明。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Word",
+    "knowledgePoint": "表格图文与邮件合并",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "表格图文与邮件合并"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-045",
+    "type": "single_choice",
+    "question": "Word 表格中，把相邻单元格组合成一个单元格使用什么功能？",
+    "options": {
+      "A": "合并单元格",
+      "B": "拆分单元格",
+      "C": "查找",
+      "D": "分节"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "合并单元格将选中的相邻单元格组合；拆分单元格则执行相反操作。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Word",
+    "knowledgePoint": "表格图文与邮件合并",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "表格图文与邮件合并"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-046",
+    "type": "single_choice",
+    "question": "Excel 中，$B$3 属于哪种单元格引用？",
+    "options": {
+      "A": "绝对引用",
+      "B": "整表引用",
+      "C": "循环引用",
+      "D": "相对引用"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "列标和行号前均有美元符号，复制公式时两者都不随位置改变，是绝对引用。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "单元格与地址引用",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "单元格与地址引用"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-047",
+    "type": "single_choice",
+    "question": "把 C2 的公式 =A2+$B$1 向下复制到 C3，公式变为什么？",
+    "options": {
+      "A": "=A3+$B$2",
+      "B": "=A2+$B$1",
+      "C": "=A3+$B$1",
+      "D": "=A2+$B$2"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "A2 是相对引用，向下移动一行变成 A3；$B$1 是绝对引用，保持不变。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "单元格与地址引用",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "单元格与地址引用"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-048",
+    "type": "single_choice",
+    "question": "把 D4 中的公式 =$A4 向右复制到 E4，公式变为什么？",
+    "options": {
+      "A": "=$A5",
+      "B": "=$B4",
+      "C": "=$A4",
+      "D": "=A5"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "美元符号固定列 A，横向复制时列不变；复制没有跨行，所以行号仍为 4。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "单元格与地址引用",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "单元格与地址引用"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-049",
+    "type": "single_choice",
+    "question": "Excel 中需要在滚动大量数据时持续看到表头，通常使用哪个功能？",
+    "options": {
+      "A": "冻结窗格",
+      "B": "拼写检查",
+      "C": "幻灯片母版",
+      "D": "邮件合并"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "冻结窗格保持指定行或列可见，适合在滚动数据时查看表头或标识列。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "单元格与地址引用",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "单元格与地址引用"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-050",
+    "type": "true_false",
+    "question": "Excel 的工作簿可以包含多个工作表。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "工作簿是文件级容器，可包含多个工作表，每张表拥有自己的单元格网格。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "单元格与地址引用",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "单元格与地址引用"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-051",
+    "type": "single_choice",
+    "question": "Excel 中对 A1 至 A5 求和，正确的公式是哪个？",
+    "options": {
+      "A": "=ADD(A1:A5)",
+      "B": "SUM=A1:A5",
+      "C": "=SUM(A1:A5)",
+      "D": "=SUM(A1;A5;全部)"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "SUM 函数计算指定数值之和，A1:A5 表示从 A1 到 A5 的连续区域。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "函数与数据处理",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "函数与数据处理"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-052",
+    "type": "single_choice",
+    "question": "A1、A2、A3 分别为 10、20、30，=AVERAGE(A1:A3) 的结果是多少？",
+    "options": {
+      "A": "60",
+      "B": "10",
+      "C": "20",
+      "D": "30"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "AVERAGE 求算术平均值，(10+20+30)÷3=20。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "函数与数据处理",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "函数与数据处理"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-053",
+    "type": "single_choice",
+    "question": "Excel 中统计区域内数值单元格个数的函数是哪个？",
+    "options": {
+      "A": "COUNT",
+      "B": "LEFT",
+      "C": "YEAR",
+      "D": "MAX"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "COUNT 统计包含数值的单元格；它不等同于统计所有非空单元格。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "函数与数据处理",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "函数与数据处理"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-054",
+    "type": "single_choice",
+    "question": "Excel 中统计 B2:B10 内大于等于 60 的数值个数，可使用哪个公式？",
+    "options": {
+      "A": "=COUNT(B2:B10,\">=60\")",
+      "B": "=MAX(B2:B10)",
+      "C": "=LEFT(B2:B10,60)",
+      "D": "=COUNTIF(B2:B10,\">=60\")"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "COUNTIF 按条件计数，第二个参数设置大于等于 60 的条件。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "函数与数据处理",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "函数与数据处理"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-055",
+    "type": "single_choice",
+    "question": "B2 为 58，公式 =IF(B2>=60,\"通过\",\"未通过\") 返回什么？",
+    "options": {
+      "A": "60",
+      "B": "58",
+      "C": "通过",
+      "D": "未通过"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "58 不满足大于等于 60 的条件，IF 返回条件不成立时的第三个参数。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "函数与数据处理",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "函数与数据处理"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-056",
+    "type": "single_choice",
+    "question": "在 Excel 中用 VLOOKUP 按学号精确匹配姓名，最后一个参数应设为什么？",
+    "options": {
+      "A": "当前日期",
+      "B": "FALSE 或 0",
+      "C": "TRUE 或 1",
+      "D": "学号列的标题"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "VLOOKUP 的第四参数为 FALSE 或 0 时执行精确匹配；查找值须位于区域首列。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "函数与数据处理",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "函数与数据处理"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-057",
+    "type": "single_choice",
+    "question": "使用 =LEFT(\"SICHUAN\",3) 得到什么结果？",
+    "options": {
+      "A": "SIC",
+      "B": "UAN",
+      "C": "ICH",
+      "D": "7"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "LEFT 从文本左侧提取指定数量的字符，取前三个字符得到 SIC。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "函数与数据处理",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "函数与数据处理"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-058",
+    "type": "multiple_choice",
+    "question": "下列哪些是 Excel 常见的数据分析功能？",
+    "options": {
+      "A": "筛选",
+      "B": "分类汇总",
+      "C": "图表",
+      "D": "排序"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "排序、筛选、分类汇总和图表分别支持重排、条件查看、汇总与可视化分析。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "函数与数据处理",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "函数与数据处理"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-059",
+    "type": "single_choice",
+    "question": "Excel 对数据清单进行筛选时，不符合条件的行通常如何处理？",
+    "options": {
+      "A": "自动清空",
+      "B": "移动到其他工作簿",
+      "C": "暂时隐藏",
+      "D": "永久删除"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "筛选通常隐藏不符合条件的行，取消筛选后仍能查看，并不会自动删除数据。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "函数与数据处理",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "函数与数据处理"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-060",
+    "type": "single_choice",
+    "question": "Excel 中自动突出显示低于 60 的成绩，适合使用哪个功能？",
+    "options": {
+      "A": "幻灯片切换",
+      "B": "条件格式",
+      "C": "邮件合并",
+      "D": "打印标题"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "条件格式根据数值或公式条件改变单元格显示格式，适合突出低分等特定数据。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "函数与数据处理",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "函数与数据处理"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-061",
+    "type": "single_choice",
+    "question": "PowerPoint 中统一整套幻灯片的字体与固定标识，优先使用什么？",
+    "options": {
+      "A": "幻灯片母版",
+      "B": "记事本",
+      "C": "公式编辑",
+      "D": "文件筛选"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "幻灯片母版集中管理共用格式与元素，使关联版式和幻灯片保持一致。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "PowerPoint",
+    "knowledgePoint": "幻灯片制作与放映",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "幻灯片制作与放映"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-062",
+    "type": "single_choice",
+    "question": "PowerPoint 的幻灯片切换效果主要作用于什么？",
+    "options": {
+      "A": "单元格数值计算",
+      "B": "文字拼写校验",
+      "C": "操作系统启动",
+      "D": "一张幻灯片到下一张的过渡"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "切换效果控制页面之间的过渡；对象动画控制页面内部对象的出现与变化。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "PowerPoint",
+    "knowledgePoint": "幻灯片制作与放映",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "幻灯片制作与放映"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-063",
+    "type": "single_choice",
+    "question": "给幻灯片中的图片设置飞入效果，应主要使用哪个功能？",
+    "options": {
+      "A": "邮件合并",
+      "B": "数据验证",
+      "C": "对象动画",
+      "D": "冻结窗格"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "图片飞入属于对象动画，作用于当前幻灯片内的具体对象。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "PowerPoint",
+    "knowledgePoint": "幻灯片制作与放映",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "幻灯片制作与放映"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-064",
+    "type": "single_choice",
+    "question": "PowerPoint 中，哪个视图适合整体查看并调整多张幻灯片的顺序？",
+    "options": {
+      "A": "数据库设计视图",
+      "B": "幻灯片浏览视图",
+      "C": "大纲字符统计",
+      "D": "文件夹视图"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "幻灯片浏览视图集中展示缩略图，便于比较、移动和调整各页顺序。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "PowerPoint",
+    "knowledgePoint": "幻灯片制作与放映",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "幻灯片制作与放映"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-065",
+    "type": "multiple_choice",
+    "question": "PowerPoint 主题主要用于统一哪些内容？",
+    "options": {
+      "A": "配色",
+      "B": "字体",
+      "C": "效果",
+      "D": "硬盘分区"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "主题组合配色、字体与视觉效果，帮助形成一致外观，不会修改硬盘分区。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "PowerPoint",
+    "knowledgePoint": "幻灯片制作与放映",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "幻灯片制作与放映"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-066",
+    "type": "multiple_choice",
+    "question": "在 PowerPoint 幻灯片中可以插入哪些内容？",
+    "options": {
+      "A": "图片",
+      "B": "表格",
+      "C": "视频",
+      "D": "文本"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "演示文稿支持多种内容对象，文本、图片、表格及视频都可按用途插入。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "PowerPoint",
+    "knowledgePoint": "幻灯片制作与放映",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "幻灯片制作与放映"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-067",
+    "type": "single_choice",
+    "question": "PowerPoint 中连接到指定幻灯片或网页，可以使用什么？",
+    "options": {
+      "A": "分类汇总",
+      "B": "数据筛选",
+      "C": "超链接",
+      "D": "条件格式"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "超链接可连接到当前演示文稿的指定页面或外部地址，适合交互导航。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "PowerPoint",
+    "knowledgePoint": "幻灯片制作与放映",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "幻灯片制作与放映"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-068",
+    "type": "single_choice",
+    "question": "PowerPoint 中对整套演示文稿设置统一的播放方式，通常使用什么？",
+    "options": {
+      "A": "邮件合并",
+      "B": "设置幻灯片放映",
+      "C": "字符编码转换",
+      "D": "磁盘清理"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "放映设置可配置演示范围及播放方式，属于整套演示文稿的放映控制。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "PowerPoint",
+    "knowledgePoint": "幻灯片制作与放映",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "幻灯片制作与放映"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-069",
+    "type": "single_choice",
+    "question": "幻灯片版式主要规定什么？",
+    "options": {
+      "A": "占位符的类型与布局",
+      "B": "CPU 的主频",
+      "C": "网络带宽",
+      "D": "文件压缩率"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "版式定义标题、正文和其他占位符的位置与类型，帮助快速组织页面内容。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "PowerPoint",
+    "knowledgePoint": "幻灯片制作与放映",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "幻灯片制作与放映"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-070",
+    "type": "true_false",
+    "question": "复制一张幻灯片后，修改副本中的普通文本不会自动同步修改原幻灯片的同一文本。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "复制会创建独立的幻灯片内容，副本普通文本的编辑不会自动写回原页。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "PowerPoint",
+    "knowledgePoint": "幻灯片制作与放映",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "幻灯片制作与放映"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-071",
+    "type": "single_choice",
+    "question": "连接多个不同 IP 网络并根据路由转发数据的典型设备是哪个？",
+    "options": {
+      "A": "扫描仪",
+      "B": "声卡",
+      "C": "路由器",
+      "D": "键盘"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "路由器用于连接不同网络并进行网络层转发，依据路由信息选择下一跳。",
+    "chapter": "网络与信息安全",
+    "knowledgeSection": "网络基础",
+    "knowledgePoint": "网络设备与 Internet",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "网络设备与 Internet"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-072",
+    "type": "single_choice",
+    "question": "DNS 的主要作用是什么？",
+    "options": {
+      "A": "压缩图片",
+      "B": "进行域名解析",
+      "C": "替代电源",
+      "D": "编辑文档"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "DNS 提供域名解析服务，常见任务是把域名解析为可用于连接的 IP 地址。",
+    "chapter": "网络与信息安全",
+    "knowledgeSection": "网络基础",
+    "knowledgePoint": "网络设备与 Internet",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "网络设备与 Internet"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-073",
+    "type": "single_choice",
+    "question": "IPv4 地址的长度是多少位？",
+    "options": {
+      "A": "16",
+      "B": "32",
+      "C": "64",
+      "D": "128"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IPv4 地址由 32 bit 构成，常用四段十进制数表示，每段对应 8 bit。",
+    "chapter": "网络与信息安全",
+    "knowledgeSection": "网络基础",
+    "knowledgePoint": "网络设备与 Internet",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "网络设备与 Internet"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-074",
+    "type": "multiple_choice",
+    "question": "以下哪些是 Internet 提供的常见服务？",
+    "options": {
+      "A": "电子邮件",
+      "B": "文件传输",
+      "C": "远程访问",
+      "D": "Web 浏览"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "互联网可承载 Web、电子邮件、文件传输与远程访问等多种应用服务。",
+    "chapter": "网络与信息安全",
+    "knowledgeSection": "网络基础",
+    "knowledgePoint": "网络设备与 Internet",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "网络设备与 Internet"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-075",
+    "type": "single_choice",
+    "question": "星型网络拓扑的典型特点是什么？",
+    "options": {
+      "A": "不存在中心连接点",
+      "B": "只有一个节点",
+      "C": "节点通过中心设备连接",
+      "D": "所有节点首尾连成单环"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "星型拓扑以中心设备连接各节点，中心设备故障可能影响其连接的网络。",
+    "chapter": "网络与信息安全",
+    "knowledgeSection": "网络基础",
+    "knowledgePoint": "网络设备与 Internet",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "网络设备与 Internet"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-076",
+    "type": "true_false",
+    "question": "搜索资料时使用多个具体关键词，通常比只输入一个宽泛词更有助于缩小结果范围。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "明确的关键词能更具体地描述信息需求，有助于提高检索相关性。",
+    "chapter": "网络与信息安全",
+    "knowledgeSection": "网络基础",
+    "knowledgePoint": "网络设备与 Internet",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "网络设备与 Internet"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-077",
+    "type": "single_choice",
+    "question": "收到要求输入密码的不明邮件链接，较稳妥的处理方式是什么？",
+    "options": {
+      "A": "直接输入账号密码",
+      "B": "通过可信入口独立核实",
+      "C": "立即转发所有联系人",
+      "D": "关闭安全软件后打开"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "可疑链接可能用于钓鱼，应通过已知可信地址或渠道核实，避免泄露凭据。",
+    "chapter": "网络与信息安全",
+    "knowledgeSection": "信息安全",
+    "knowledgePoint": "安全防护与信息素养",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "安全防护与信息素养"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-078",
+    "type": "multiple_choice",
+    "question": "下列哪些措施有助于保护个人账号？",
+    "options": {
+      "A": "启用可用的多因素验证",
+      "B": "及时更新软件",
+      "C": "向陌生人发送验证码",
+      "D": "使用不同的强密码"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "独立强密码、多因素验证与更新软件有助于降低风险；验证码不应提供给陌生人。",
+    "chapter": "网络与信息安全",
+    "knowledgeSection": "信息安全",
+    "knowledgePoint": "安全防护与信息素养",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "安全防护与信息素养"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-079",
+    "type": "single_choice",
+    "question": "防火墙主要通过什么方式控制通信？",
+    "options": {
+      "A": "替代所有备份",
+      "B": "自动修复所有代码缺陷",
+      "C": "按安全规则允许或阻止网络流量",
+      "D": "提高显示器分辨率"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "防火墙依据规则控制网络流量，是防护的一环，不能替代备份或修复所有缺陷。",
+    "chapter": "网络与信息安全",
+    "knowledgeSection": "信息安全",
+    "knowledgePoint": "安全防护与信息素养",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "安全防护与信息素养"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-080",
+    "type": "multiple_choice",
+    "question": "判断网络信息是否可靠，哪些做法较合理？",
+    "options": {
+      "A": "仅凭转发量判定真实性",
+      "B": "核对原始来源",
+      "C": "比较多个可信来源",
+      "D": "检查发布时间与上下文"
+    },
+    "answer": [
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "来源、交叉核实、时间和上下文都可帮助判断可靠性，传播热度不等于事实准确。",
+    "chapter": "网络与信息安全",
+    "knowledgeSection": "信息安全",
+    "knowledgePoint": "安全防护与信息素养",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "安全防护与信息素养"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-081",
+    "type": "single_choice",
+    "question": "算法的有穷性是指什么？",
+    "options": {
+      "A": "执行有限步骤后结束",
+      "B": "输入一定只能为整数",
+      "C": "必须使用图形界面",
+      "D": "运行时间无限长"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "有穷性要求算法在有限步骤内终止，并不限制算法只能处理整数。",
+    "chapter": "算法与程序设计",
+    "knowledgeSection": "算法基础",
+    "knowledgePoint": "算法特征与计算思维",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "算法特征与计算思维"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-082",
+    "type": "single_choice",
+    "question": "把一个复杂任务拆分成多个更小的子任务，体现了哪种计算思维方法？",
+    "options": {
+      "A": "随机猜测",
+      "B": "忽略输入",
+      "C": "重复存储",
+      "D": "分解"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "分解把复杂问题拆为更易处理的部分，便于分别求解并组合结果。",
+    "chapter": "算法与程序设计",
+    "knowledgeSection": "算法基础",
+    "knowledgePoint": "算法特征与计算思维",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "算法特征与计算思维"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-083",
+    "type": "single_choice",
+    "question": "算法的时间复杂度主要描述什么？",
+    "options": {
+      "A": "显示器刷新率",
+      "B": "用户输入密码长度",
+      "C": "基本操作次数随输入规模的增长关系",
+      "D": "源文件的扩展名"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "时间复杂度描述输入规模变化时基本操作数量的增长趋势，不等同于某台机器的实测秒数。",
+    "chapter": "算法与程序设计",
+    "knowledgeSection": "算法基础",
+    "knowledgePoint": "算法特征与计算思维",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "算法特征与计算思维"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-084",
+    "type": "single_choice",
+    "question": "在有序数组中使用二分查找，其每轮处理通常会怎样缩小候选范围？",
+    "options": {
+      "A": "始终不变化",
+      "B": "大约缩小一半",
+      "C": "增加一倍",
+      "D": "只减少一个固定字符"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "二分查找比较中间元素后排除一半范围，因此要求数据有序。",
+    "chapter": "算法与程序设计",
+    "knowledgeSection": "算法基础",
+    "knowledgePoint": "算法特征与计算思维",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "算法特征与计算思维"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-085",
+    "type": "multiple_choice",
+    "question": "以下哪些可以用于描述算法？",
+    "options": {
+      "A": "自然语言",
+      "B": "伪代码",
+      "C": "流程图",
+      "D": "程序代码"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "算法可用自然语言、伪代码、流程图或程序代码等方式表达处理步骤。",
+    "chapter": "算法与程序设计",
+    "knowledgeSection": "算法基础",
+    "knowledgePoint": "算法特征与计算思维",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "算法特征与计算思维"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-086",
+    "type": "single_choice",
+    "question": "先执行输入，再计算，最后输出，这种基本结构通常叫什么？",
+    "options": {
+      "A": "选择结构",
+      "B": "循环结构",
+      "C": "存储结构",
+      "D": "顺序结构"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "顺序结构按既定顺序依次执行；选择与循环分别对应分支和重复执行。",
+    "chapter": "算法与程序设计",
+    "knowledgeSection": "程序结构",
+    "knowledgePoint": "程序执行与流程图",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "程序执行与流程图"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-087",
+    "type": "single_choice",
+    "question": "根据成绩是否达到 60 分执行两种不同处理，主要使用哪种结构？",
+    "options": {
+      "A": "磁盘结构",
+      "B": "字体结构",
+      "C": "选择结构",
+      "D": "只能用顺序结构"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "根据条件真假选择不同分支执行，属于选择结构。",
+    "chapter": "算法与程序设计",
+    "knowledgeSection": "程序结构",
+    "knowledgePoint": "程序执行与流程图",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "程序执行与流程图"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-088",
+    "type": "single_choice",
+    "question": "设 s=0，依次令 i=1、2、3、4、5 并执行 s=s+i，最终 s 为多少？",
+    "options": {
+      "A": "20",
+      "B": "5",
+      "C": "10",
+      "D": "15"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "这是累加算法，最终 s=1+2+3+4+5=15。",
+    "chapter": "算法与程序设计",
+    "knowledgeSection": "程序结构",
+    "knowledgePoint": "程序执行与流程图",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "程序执行与流程图"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-089",
+    "type": "single_choice",
+    "question": "常见程序流程图中，用于表示条件判断的图形通常是哪个？",
+    "options": {
+      "A": "菱形",
+      "B": "矩形",
+      "C": "平行四边形",
+      "D": "圆角起止框"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "菱形通常表示判断节点，并按判断结果连接不同分支。",
+    "chapter": "算法与程序设计",
+    "knowledgeSection": "程序结构",
+    "knowledgePoint": "程序执行与流程图",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "程序执行与流程图"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-090",
+    "type": "single_choice",
+    "question": "冒泡排序的基本操作通常是什么？",
+    "options": {
+      "A": "只修改数组名称",
+      "B": "任意删除一半元素",
+      "C": "先把所有元素改为零",
+      "D": "比较相邻元素并按需交换"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "冒泡排序反复比较相邻元素并在次序不正确时交换，使元素逐步到达适当位置。",
+    "chapter": "算法与程序设计",
+    "knowledgeSection": "程序结构",
+    "knowledgePoint": "程序执行与流程图",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "程序执行与流程图"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-091",
+    "type": "single_choice",
+    "question": "负责管理数据库并提供数据存取控制的软件通常称为什么？",
+    "options": {
+      "A": "显示驱动器",
+      "B": "图像文件",
+      "C": "数据库管理系统",
+      "D": "演示文稿"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "数据库管理系统即 DBMS，提供数据定义、查询、更新及存取控制等功能。",
+    "chapter": "数据库技术",
+    "knowledgeSection": "数据库基础",
+    "knowledgePoint": "数据模型与数据库系统",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "数据模型与数据库系统"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-092",
+    "type": "single_choice",
+    "question": "关系数据模型通常用什么组织数据？",
+    "options": {
+      "A": "屏幕像素网格",
+      "B": "二维表",
+      "C": "只有图片的幻灯片",
+      "D": "声音波形"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "关系模型以关系组织数据，常见直观形式为二维表中的行和列。",
+    "chapter": "数据库技术",
+    "knowledgeSection": "数据库基础",
+    "knowledgePoint": "数据模型与数据库系统",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "数据模型与数据库系统"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-093",
+    "type": "single_choice",
+    "question": "从学生表中取出成绩大于等于 60 的行，主要对应哪种关系运算？",
+    "options": {
+      "A": "选择",
+      "B": "投影",
+      "C": "连接",
+      "D": "笛卡尔积"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "选择按条件筛选行；投影选取列；连接用于结合满足条件的关系。",
+    "chapter": "数据库技术",
+    "knowledgeSection": "关系应用",
+    "knowledgePoint": "关系运算与实体联系",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "关系运算与实体联系"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-094",
+    "type": "single_choice",
+    "question": "只取学生表的姓名和学号两列，主要对应哪种关系运算？",
+    "options": {
+      "A": "选择",
+      "B": "排序",
+      "C": "备份",
+      "D": "投影"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "投影按属性选取列，和根据条件选择行的选择运算不同。",
+    "chapter": "数据库技术",
+    "knowledgeSection": "关系应用",
+    "knowledgePoint": "关系运算与实体联系",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "关系运算与实体联系"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-095",
+    "type": "multiple_choice",
+    "question": "E-R 图主要描述哪些要素？",
+    "options": {
+      "A": "实体之间的联系",
+      "B": "CPU 指令时钟",
+      "C": "实体",
+      "D": "属性"
+    },
+    "answer": [
+      "A",
+      "C",
+      "D"
+    ],
+    "analysis": "实体、属性与联系是 E-R 模型的基本要素，用来描述现实对象及关系。",
+    "chapter": "数据库技术",
+    "knowledgeSection": "关系应用",
+    "knowledgePoint": "关系运算与实体联系",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "关系运算与实体联系"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-096",
+    "type": "single_choice",
+    "question": "以下哪个属于云计算常见的部署模式？",
+    "options": {
+      "A": "邮件合并",
+      "B": "混合云",
+      "C": "冒泡排序",
+      "D": "字符编码"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "常见云部署模式包括公有云、私有云和混合云，混合云结合不同云环境。",
+    "chapter": "计算机新技术",
+    "knowledgeSection": "云计算",
+    "knowledgePoint": "云服务与部署模式",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "云服务与部署模式"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-097",
+    "type": "single_choice",
+    "question": "用户通过网络直接使用供应商提供的在线办公应用，通常属于哪种服务模式？",
+    "options": {
+      "A": "SaaS",
+      "B": "只属于 IaaS",
+      "C": "只属于硬件总线",
+      "D": "只属于本地文件系统"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "SaaS 提供可直接使用的软件应用；IaaS 主要提供计算、存储及网络等基础资源。",
+    "chapter": "计算机新技术",
+    "knowledgeSection": "云计算",
+    "knowledgePoint": "云服务与部署模式",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "云服务与部署模式"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-098",
+    "type": "multiple_choice",
+    "question": "下列哪些是描述大数据的常见维度？",
+    "options": {
+      "A": "产生和处理速度快",
+      "B": "数据类型多样",
+      "C": "必然没有隐私风险",
+      "D": "数据规模大"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "规模、速度与类型多样性是常见特征；大数据使用仍可能涉及隐私和安全风险。",
+    "chapter": "计算机新技术",
+    "knowledgeSection": "大数据",
+    "knowledgePoint": "大数据特点与应用",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "大数据特点与应用"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-099",
+    "type": "single_choice",
+    "question": "物联网常见三层结构中，传感器采集环境温度主要属于哪一层？",
+    "options": {
+      "A": "数据库投影层",
+      "B": "幻灯片母版层",
+      "C": "感知层",
+      "D": "应用层"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "感知层负责识别对象与采集数据；网络层传输数据，应用层提供具体业务服务。",
+    "chapter": "计算机新技术",
+    "knowledgeSection": "物联网",
+    "knowledgePoint": "物联网三层结构",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "物联网三层结构"
+    ]
+  },
+  {
+    "id": "sc-upgrading-computer-100",
+    "type": "multiple_choice",
+    "question": "使用人工智能处理用户数据时，哪些事项需要关注？",
+    "options": {
+      "A": "认为所有生成结果都正确",
+      "B": "数据隐私",
+      "C": "结果偏差",
+      "D": "使用边界"
+    },
+    "answer": [
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "人工智能应用应关注隐私、偏差和使用边界，输出仍需结合任务核验。",
+    "chapter": "计算机新技术",
+    "knowledgeSection": "人工智能",
+    "knowledgePoint": "人工智能应用与责任",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "人工智能应用与责任"
+    ]
+  }
+]

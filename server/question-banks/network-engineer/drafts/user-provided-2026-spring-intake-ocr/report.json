@@ -1,0 +1,1036 @@
+{
+  "title": "2026年上半年网络工程师新生入学卷 OCR 整理报告",
+  "source": {
+    "file": "2026年上半年网络工程师新生入学卷.pdf",
+    "sha256": "2459C4738CE7D91648A7CF4FAF67CE862B599B3662DC72CB9A6D4E9241800A08",
+    "pageCount": 17,
+    "answerPages": [
+      15,
+      16,
+      17
+    ]
+  },
+  "extraction": {
+    "originalQuestionCount": 65,
+    "questionBankItemCount": 74,
+    "answerSource": "原卷第15至17页答案页",
+    "explanations": "74条作答记录均由本稿补写了中文推导或判断依据；对第8题标出CRC计算与选项/答案页冲突，对第21题订正答案并保留原标注；原卷没有逐题解析。",
+    "splitQuestions": [
+      {
+        "questionNumber": 6,
+        "parts": 2,
+        "reason": "两个空各有独立选项组"
+      },
+      {
+        "questionNumber": 21,
+        "parts": 2,
+        "reason": "两个空各有独立选项组"
+      },
+      {
+        "questionNumber": 33,
+        "parts": 3,
+        "reason": "三个空各有独立选项组"
+      },
+      {
+        "questionNumber": 49,
+        "parts": 2,
+        "reason": "两个空各有独立选项组，均保留原图"
+      },
+      {
+        "questionNumber": 65,
+        "parts": 5,
+        "reason": "英语完形填空的五个空各有独立选项组"
+      }
+    ],
+    "figureMappings": [
+      {
+        "questionNumber": 35,
+        "sourcePage": 8,
+        "file": "images/q035.png",
+        "description": "邮件客户端与邮件服务器间SMTP、POP3流程图"
+      },
+      {
+        "questionNumber": 49,
+        "sourcePage": 11,
+        "file": "images/q049.png",
+        "description": "甲乙两地IPSec VPN拓扑图"
+      }
+    ],
+    "answerKey": {
+      "1": [
+        "B"
+      ],
+      "2": [
+        "C"
+      ],
+      "3": [
+        "D"
+      ],
+      "4": [
+        "B"
+      ],
+      "5": [
+        "D"
+      ],
+      "6": [
+        "B",
+        "A"
+      ],
+      "7": [
+        "A"
+      ],
+      "8": [
+        "A"
+      ],
+      "9": [
+        "C"
+      ],
+      "10": [
+        "B"
+      ],
+      "11": [
+        "B"
+      ],
+      "12": [
+        "A"
+      ],
+      "13": [
+        "D"
+      ],
+      "14": [
+        "C"
+      ],
+      "15": [
+        "A"
+      ],
+      "16": [
+        "C"
+      ],
+      "17": [
+        "C"
+      ],
+      "18": [
+        "C"
+      ],
+      "19": [
+        "D"
+      ],
+      "20": [
+        "D"
+      ],
+      "21": [
+        "C",
+        "B"
+      ],
+      "22": [
+        "C"
+      ],
+      "23": [
+        "A"
+      ],
+      "24": [
+        "A",
+        "B"
+      ],
+      "25": [
+        "D"
+      ],
+      "26": [
+        "C"
+      ],
+      "27": [
+        "B"
+      ],
+      "28": [
+        "D"
+      ],
+      "29": [
+        "A"
+      ],
+      "30": [
+        "B"
+      ],
+      "31": [
+        "D"
+      ],
+      "32": [
+        "A"
+      ],
+      "33": [
+        "A",
+        "C",
+        "C"
+      ],
+      "34": [
+        "D"
+      ],
+      "35": [
+        "D"
+      ],
+      "36": [
+        "D"
+      ],
+      "37": [
+        "A"
+      ],
+      "38": [
+        "A"
+      ],
+      "39": [
+        "C"
+      ],
+      "40": [
+        "C"
+      ],
+      "41": [
+        "D"
+      ],
+      "42": [
+        "B"
+      ],
+      "43": [
+        "C"
+      ],
+      "44": [
+        "C"
+      ],
+      "45": [
+        "D"
+      ],
+      "46": [
+        "B"
+      ],
+      "47": [
+        "A"
+      ],
+      "48": [
+        "A"
+      ],
+      "49": [
+        "B",
+        "D"
+      ],
+      "50": [
+        "A"
+      ],
+      "51": [
+        "B"
+      ],
+      "52": [
+        "C"
+      ],
+      "53": [
+        "D"
+      ],
+      "54": [
+        "C"
+      ],
+      "55": [
+        "D"
+      ],
+      "56": [
+        "A"
+      ],
+      "57": [
+        "A"
+      ],
+      "58": [
+        "A"
+      ],
+      "59": [
+        "C"
+      ],
+      "60": [
+        "B"
+      ],
+      "61": [
+        "D"
+      ],
+      "62": [
+        "D"
+      ],
+      "63": [
+        "B"
+      ],
+      "64": [
+        "C"
+      ],
+      "65": [
+        "A",
+        "C",
+        "B",
+        "B",
+        "B"
+      ]
+    }
+  },
+  "reviewNotes": [
+    {
+      "questionNumber": 8,
+      "sourcePages": [
+        2,
+        15
+      ],
+      "note": "按生成多项式x^5+x^3+1及标准补零模2除法，数据1010110对应CRC余数为01101；原选项中没有该值，答案页标A（01000）也不匹配。暂保留原答案页标注，建议修正题目或选项后再使用。"
+    },
+    {
+      "questionNumber": 21,
+      "sourcePages": [
+        5,
+        16
+      ],
+      "note": "原答案页标C、B（主机位7位、掩码255.255.255.128）。/25只能从/24划出2个子网，无法满足至少3个；按现行CIDR划分规则需/26，主机位6位。本稿答案订正为D、A；原始答案仍保存在answerKey和questions.json的provenance.sourceAnswers中。"
+    },
+    {
+      "questionNumber": 31,
+      "sourcePages": [
+        7,
+        16
+      ],
+      "note": "原答案D（48ms）按拥塞避免阶段每RTT增加1个MSS计算。题干没有说明慢启动阈值或当前拥塞控制阶段，因此解析标明该假设；若处于慢启动，结果会不同。"
+    },
+    {
+      "questionNumber": 32,
+      "sourcePages": [
+        7,
+        16
+      ],
+      "note": "按常见无缓存流程，本地域名服务器向上游迭代查询后返回结果，原答案为A；如果缓存命中，则无需本次外部查询，题干“必定”略绝对。"
+    }
+  ],
+  "storage": "本资料位于 drafts 草稿目录，未加入题库 manifest，因此不会进入运行中的题库。",
+  "references": [
+    {
+      "title": "RFC 8200: Internet Protocol, Version 6 (IPv6) Specification",
+      "url": "https://www.rfc-editor.org/rfc/rfc8200.html",
+      "usedFor": "IPv6分片限制、逐跳选项首部及Packet Too Big行为"
+    },
+    {
+      "title": "RFC 8201: Path MTU Discovery for IP version 6",
+      "url": "https://www.rfc-editor.org/rfc/rfc8201.html",
+      "usedFor": "IPv6路径MTU发现"
+    },
+    {
+      "title": "RFC 4271: A Border Gateway Protocol 4 (BGP-4)",
+      "url": "https://www.rfc-editor.org/rfc/rfc4271.html",
+      "usedFor": "BGP AS_PATH及路径选择依据"
+    },
+    {
+      "title": "RFC 2453: RIP Version 2",
+      "url": "https://www.rfc-editor.org/rfc/rfc2453.html",
+      "usedFor": "RIP度量和周期更新"
+    },
+    {
+      "title": "中华人民共和国数据安全法（国家市场监督管理总局网站）",
+      "url": "https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/bgt/art/2023/art_33654085364e45e2a878c70a06934414.html",
+      "usedFor": "第九条关于国家网信部门职责的条文"
+    }
+  ],
+  "draftAnswerCorrections": [
+    {
+      "questionNumber": 21,
+      "sourceAnswers": [
+        "C",
+        "B"
+      ],
+      "draftAnswers": [
+        "D",
+        "A"
+      ],
+      "reason": "/24至少划分3个子网需借2位，得到/26，主机位剩6位。"
+    }
+  ],
+  "webImport": {
+    "bankId": "user-provided-2026-spring-intake",
+    "manifestEntry": "network-engineer manifest banks",
+    "sourceLabel": "2026上半年网络工程师练习卷（用户提供）",
+    "sourceStatus": "来源与官方性未核实；按用户提供材料收录，不标为官方真题。",
+    "sourceRecords": 74,
+    "importedDistinctRecords": 72,
+    "omittedAsDuplicates": [
+      {
+        "questionId": "intake-2026-spring-q007",
+        "existingQuestionId": "collection-c02-q007",
+        "reason": "与现有collection-c02-q007考查同一事实，题干和全部选项相同，仅措辞略有差异。"
+      },
+      {
+        "questionId": "intake-2026-spring-q039",
+        "existingQuestionId": "collection-c09-q025",
+        "reason": "与现有collection-c09-q025题干、选项和答案相同，仅标点不同。"
+      }
+    ],
+    "classification": {
+      "mappedToCurrentTaxonomy": 74,
+      "usedKnowledgePointCount": 48,
+      "countsByKnowledgePointCode": {
+        "01.02.03": 1,
+        "01.03.02": 4,
+        "01.04.01": 2,
+        "01.05.01": 1,
+        "02.01.03": 3,
+        "02.02.01": 1,
+        "02.02.03": 1,
+        "02.03.02": 1,
+        "02.03.03": 2,
+        "02.03.04": 1,
+        "02.03.05": 2,
+        "02.04.01": 2,
+        "02.04.02": 1,
+        "02.05.01": 1,
+        "02.05.02": 1,
+        "02.06.01": 1,
+        "02.06.02": 3,
+        "02.06.03": 1,
+        "02.06.05": 1,
+        "02.07.02": 1,
+        "02.07.03": 3,
+        "03.01.01": 1,
+        "03.01.02": 1,
+        "03.02.01": 1,
+        "03.03.02": 2,
+        "03.03.03": 1,
+        "03.04.03": 2,
+        "03.05.01": 1,
+        "03.05.02": 1,
+        "04.01.01": 1,
+        "04.02.01": 5,
+        "04.03.01": 1,
+        "04.04.01": 1,
+        "04.04.02": 1,
+        "04.05.01": 2,
+        "05.01.01": 1,
+        "05.01.02": 1,
+        "05.04.01": 2,
+        "05.05.02": 2,
+        "05.06.01": 3,
+        "05.06.02": 1,
+        "07.01.01": 1,
+        "08.02.03": 1,
+        "08.03.01": 1,
+        "09.03.01": 1,
+        "10.01.01": 2,
+        "10.02.01": 2,
+        "10.02.02": 1
+      },
+      "byQuestion": {
+        "intake-2026-spring-q001": {
+          "sourceTopic": "存储芯片容量",
+          "code": "01.03.02",
+          "chapter": "计算机基础知识",
+          "knowledgeSection": "存储器与可靠性",
+          "knowledgePoint": "内存、磁盘与RAID"
+        },
+        "intake-2026-spring-q002": {
+          "sourceTopic": "RISC与CISC",
+          "code": "01.04.01",
+          "chapter": "计算机基础知识",
+          "knowledgeSection": "计算机组成",
+          "knowledgePoint": "CPU流水线"
+        },
+        "intake-2026-spring-q003": {
+          "sourceTopic": "CPU流水线",
+          "code": "01.04.01",
+          "chapter": "计算机基础知识",
+          "knowledgeSection": "计算机组成",
+          "knowledgePoint": "CPU流水线"
+        },
+        "intake-2026-spring-q004": {
+          "sourceTopic": "编码与调制",
+          "code": "02.02.01",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "数据通信与传输",
+          "knowledgePoint": "编码与调制"
+        },
+        "intake-2026-spring-q005": {
+          "sourceTopic": "统计复用",
+          "code": "02.02.03",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "数据通信与传输",
+          "knowledgePoint": "信道容量与数据速率"
+        },
+        "intake-2026-spring-q006-a": {
+          "sourceTopic": "存储器容量与芯片组织",
+          "code": "01.03.02",
+          "chapter": "计算机基础知识",
+          "knowledgeSection": "存储器与可靠性",
+          "knowledgePoint": "内存、磁盘与RAID"
+        },
+        "intake-2026-spring-q006-b": {
+          "sourceTopic": "存储器容量与芯片组织",
+          "code": "01.03.02",
+          "chapter": "计算机基础知识",
+          "knowledgeSection": "存储器与可靠性",
+          "knowledgePoint": "内存、磁盘与RAID"
+        },
+        "intake-2026-spring-q007": {
+          "sourceTopic": "以太网编码",
+          "code": "03.01.01",
+          "chapter": "局域网与交换技术",
+          "knowledgeSection": "以太网基础",
+          "knowledgePoint": "CSMA/CD与以太网帧"
+        },
+        "intake-2026-spring-q008": {
+          "sourceTopic": "CRC差错控制",
+          "code": "01.02.03",
+          "chapter": "计算机基础知识",
+          "knowledgeSection": "校验码与差错控制",
+          "knowledgePoint": "CRC循环冗余校验"
+        },
+        "intake-2026-spring-q009": {
+          "sourceTopic": "交换机堆叠",
+          "code": "03.04.03",
+          "chapter": "局域网与交换技术",
+          "knowledgeSection": "其他交换技术",
+          "knowledgePoint": "链路聚合、堆叠、QinQ与PoE"
+        },
+        "intake-2026-spring-q010": {
+          "sourceTopic": "光纤通信",
+          "code": "08.02.03",
+          "chapter": "综合布线与网络规划",
+          "knowledgeSection": "传输介质",
+          "knowledgePoint": "光功率与光链路基础"
+        },
+        "intake-2026-spring-q011": {
+          "sourceTopic": "VXLAN与QinQ",
+          "code": "03.04.03",
+          "chapter": "局域网与交换技术",
+          "knowledgeSection": "其他交换技术",
+          "knowledgePoint": "链路聚合、堆叠、QinQ与PoE"
+        },
+        "intake-2026-spring-q012": {
+          "sourceTopic": "Super VLAN",
+          "code": "03.02.01",
+          "chapter": "局域网与交换技术",
+          "knowledgeSection": "VLAN",
+          "knowledgePoint": "802.1Q与VLAN标签"
+        },
+        "intake-2026-spring-q013": {
+          "sourceTopic": "MSTP",
+          "code": "03.03.03",
+          "chapter": "局域网与交换技术",
+          "knowledgeSection": "STP生成树",
+          "knowledgePoint": "收敛过程与协议版本"
+        },
+        "intake-2026-spring-q014": {
+          "sourceTopic": "RSTP边缘端口保护",
+          "code": "03.03.02",
+          "chapter": "局域网与交换技术",
+          "knowledgeSection": "STP生成树",
+          "knowledgePoint": "端口角色与BPDU"
+        },
+        "intake-2026-spring-q015": {
+          "sourceTopic": "DHCP Option",
+          "code": "03.05.02",
+          "chapter": "局域网与交换技术",
+          "knowledgeSection": "无线局域网",
+          "knowledgePoint": "AP类型与WLAN架构"
+        },
+        "intake-2026-spring-q016": {
+          "sourceTopic": "802.11 MAC帧",
+          "code": "03.05.01",
+          "chapter": "局域网与交换技术",
+          "knowledgeSection": "无线局域网",
+          "knowledgePoint": "802.11与介质访问"
+        },
+        "intake-2026-spring-q017": {
+          "sourceTopic": "5G网络切片",
+          "code": "10.02.01",
+          "chapter": "新技术",
+          "knowledgeSection": "移动与物联网",
+          "knowledgePoint": "5G"
+        },
+        "intake-2026-spring-q018": {
+          "sourceTopic": "后退N帧协议",
+          "code": "02.01.03",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "网络模型与分层",
+          "knowledgePoint": "协议、服务、PDU与设备所在层"
+        },
+        "intake-2026-spring-q019": {
+          "sourceTopic": "PPP认证",
+          "code": "04.05.01",
+          "chapter": "路由与广域网技术",
+          "knowledgeSection": "广域网链路",
+          "knowledgePoint": "PPP、HDLC与帧中继"
+        },
+        "intake-2026-spring-q020": {
+          "sourceTopic": "PPP与NCP",
+          "code": "04.05.01",
+          "chapter": "路由与广域网技术",
+          "knowledgeSection": "广域网链路",
+          "knowledgePoint": "PPP、HDLC与帧中继"
+        },
+        "intake-2026-spring-q021-a": {
+          "sourceTopic": "IPv4子网划分",
+          "code": "02.03.03",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "IPv4与子网",
+          "knowledgePoint": "VLSM子网划分"
+        },
+        "intake-2026-spring-q021-b": {
+          "sourceTopic": "IPv4子网划分",
+          "code": "02.03.03",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "IPv4与子网",
+          "knowledgePoint": "VLSM子网划分"
+        },
+        "intake-2026-spring-q022": {
+          "sourceTopic": "路由汇总",
+          "code": "02.03.04",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "IPv4与子网",
+          "knowledgePoint": "CIDR与路由聚合"
+        },
+        "intake-2026-spring-q023": {
+          "sourceTopic": "IPv4分片",
+          "code": "02.03.05",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "IPv4与子网",
+          "knowledgePoint": "IPv4首部、分片、组播与TTL"
+        },
+        "intake-2026-spring-q024": {
+          "sourceTopic": "IPv4分片与重组",
+          "code": "02.03.05",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "IPv4与子网",
+          "knowledgePoint": "IPv4首部、分片、组播与TTL"
+        },
+        "intake-2026-spring-q025": {
+          "sourceTopic": "ARP",
+          "code": "02.04.01",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "网际层协议",
+          "knowledgePoint": "ARP与RARP"
+        },
+        "intake-2026-spring-q026": {
+          "sourceTopic": "IPv6邻居发现",
+          "code": "02.07.02",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "IPv6",
+          "knowledgePoint": "邻居发现协议NDP"
+        },
+        "intake-2026-spring-q027": {
+          "sourceTopic": "RSVP资源预留",
+          "code": "02.01.03",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "网络模型与分层",
+          "knowledgePoint": "协议、服务、PDU与设备所在层"
+        },
+        "intake-2026-spring-q028": {
+          "sourceTopic": "MTU与分片",
+          "code": "02.07.03",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "IPv6",
+          "knowledgePoint": "IPv6过渡技术"
+        },
+        "intake-2026-spring-q029": {
+          "sourceTopic": "IPv6扩展首部",
+          "code": "02.07.03",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "IPv6",
+          "knowledgePoint": "IPv6过渡技术"
+        },
+        "intake-2026-spring-q030": {
+          "sourceTopic": "TCP确认机制",
+          "code": "02.05.01",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "传输层",
+          "knowledgePoint": "TCP连接与可靠传输"
+        },
+        "intake-2026-spring-q031": {
+          "sourceTopic": "TCP拥塞控制",
+          "code": "02.05.02",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "传输层",
+          "knowledgePoint": "TCP窗口、流量控制与拥塞控制"
+        },
+        "intake-2026-spring-q032": {
+          "sourceTopic": "DNS解析",
+          "code": "02.06.01",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "应用层协议与端口",
+          "knowledgePoint": "DNS"
+        },
+        "intake-2026-spring-q033-a": {
+          "sourceTopic": "DHCP地址获取",
+          "code": "02.06.02",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "应用层协议与端口",
+          "knowledgePoint": "DHCP"
+        },
+        "intake-2026-spring-q033-b": {
+          "sourceTopic": "DHCP地址获取",
+          "code": "02.06.02",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "应用层协议与端口",
+          "knowledgePoint": "DHCP"
+        },
+        "intake-2026-spring-q033-c": {
+          "sourceTopic": "DHCP地址获取",
+          "code": "02.06.02",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "应用层协议与端口",
+          "knowledgePoint": "DHCP"
+        },
+        "intake-2026-spring-q034": {
+          "sourceTopic": "浏览器访问流程",
+          "code": "02.06.03",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "应用层协议与端口",
+          "knowledgePoint": "HTTP与HTTPS"
+        },
+        "intake-2026-spring-q035": {
+          "sourceTopic": "电子邮件协议",
+          "code": "02.06.05",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "应用层协议与端口",
+          "knowledgePoint": "电子邮件、LDAP与远程登录"
+        },
+        "intake-2026-spring-q036": {
+          "sourceTopic": "OpenFlow",
+          "code": "10.01.01",
+          "chapter": "新技术",
+          "knowledgeSection": "网络架构新技术",
+          "knowledgePoint": "SDN软件定义网络"
+        },
+        "intake-2026-spring-q037": {
+          "sourceTopic": "物联网",
+          "code": "10.02.02",
+          "chapter": "新技术",
+          "knowledgeSection": "移动与物联网",
+          "knowledgePoint": "NB-IoT"
+        },
+        "intake-2026-spring-q038": {
+          "sourceTopic": "软件定义网络",
+          "code": "10.01.01",
+          "chapter": "新技术",
+          "knowledgeSection": "网络架构新技术",
+          "knowledgePoint": "SDN软件定义网络"
+        },
+        "intake-2026-spring-q039": {
+          "sourceTopic": "SNMP网络管理",
+          "code": "07.01.01",
+          "chapter": "网络管理",
+          "knowledgeSection": "网络管理功能",
+          "knowledgePoint": "故障、配置、性能、安全与计费管理"
+        },
+        "intake-2026-spring-q040": {
+          "sourceTopic": "光纤通道网络",
+          "code": "02.01.03",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "网络模型与分层",
+          "knowledgePoint": "协议、服务、PDU与设备所在层"
+        },
+        "intake-2026-spring-q041": {
+          "sourceTopic": "RAID容量计算",
+          "code": "01.03.02",
+          "chapter": "计算机基础知识",
+          "knowledgeSection": "存储器与可靠性",
+          "knowledgePoint": "内存、磁盘与RAID"
+        },
+        "intake-2026-spring-q042": {
+          "sourceTopic": "Smurf攻击",
+          "code": "05.05.02",
+          "chapter": "网络安全",
+          "knowledgeSection": "网络攻击",
+          "knowledgePoint": "DDoS"
+        },
+        "intake-2026-spring-q043": {
+          "sourceTopic": "拒绝服务与可用性",
+          "code": "05.05.02",
+          "chapter": "网络安全",
+          "knowledgeSection": "网络攻击",
+          "knowledgePoint": "DDoS"
+        },
+        "intake-2026-spring-q044": {
+          "sourceTopic": "ARP缓存",
+          "code": "02.04.01",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "网际层协议",
+          "knowledgePoint": "ARP与RARP"
+        },
+        "intake-2026-spring-q045": {
+          "sourceTopic": "后量子密码",
+          "code": "05.01.02",
+          "chapter": "网络安全",
+          "knowledgeSection": "密码与加密",
+          "knowledgePoint": "非对称加密与Hash摘要"
+        },
+        "intake-2026-spring-q046": {
+          "sourceTopic": "DES",
+          "code": "05.01.01",
+          "chapter": "网络安全",
+          "knowledgeSection": "密码与加密",
+          "knowledgePoint": "对称加密算法"
+        },
+        "intake-2026-spring-q047": {
+          "sourceTopic": "邮件传输加密",
+          "code": "05.06.02",
+          "chapter": "网络安全",
+          "knowledgeSection": "VPN与安全传输",
+          "knowledgePoint": "TLS与安全传输协议"
+        },
+        "intake-2026-spring-q048": {
+          "sourceTopic": "统一威胁管理",
+          "code": "05.04.01",
+          "chapter": "网络安全",
+          "knowledgeSection": "网络设备与边界防护",
+          "knowledgePoint": "防火墙与DMZ"
+        },
+        "intake-2026-spring-q049-a": {
+          "sourceTopic": "IPSec VPN排错",
+          "code": "05.06.01",
+          "chapter": "网络安全",
+          "knowledgeSection": "VPN与安全传输",
+          "knowledgePoint": "IPsec VPN与SSL VPN"
+        },
+        "intake-2026-spring-q049-b": {
+          "sourceTopic": "IPSec VPN排错",
+          "code": "05.06.01",
+          "chapter": "网络安全",
+          "knowledgeSection": "VPN与安全传输",
+          "knowledgePoint": "IPsec VPN与SSL VPN"
+        },
+        "intake-2026-spring-q050": {
+          "sourceTopic": "防火墙类型",
+          "code": "05.04.01",
+          "chapter": "网络安全",
+          "knowledgeSection": "网络设备与边界防护",
+          "knowledgePoint": "防火墙与DMZ"
+        },
+        "intake-2026-spring-q051": {
+          "sourceTopic": "需求获取",
+          "code": "08.03.01",
+          "chapter": "综合布线与网络规划",
+          "knowledgeSection": "网络规划与性能",
+          "knowledgePoint": "网络拓扑"
+        },
+        "intake-2026-spring-q052": {
+          "sourceTopic": "IP前缀列表",
+          "code": "04.01.01",
+          "chapter": "路由与广域网技术",
+          "knowledgeSection": "路由基础",
+          "knowledgePoint": "路由表、静态路由与默认路由"
+        },
+        "intake-2026-spring-q053": {
+          "sourceTopic": "GRE隧道",
+          "code": "05.06.01",
+          "chapter": "网络安全",
+          "knowledgeSection": "VPN与安全传输",
+          "knowledgePoint": "IPsec VPN与SSL VPN"
+        },
+        "intake-2026-spring-q054": {
+          "sourceTopic": "BGP路由选择",
+          "code": "04.04.02",
+          "chapter": "路由与广域网技术",
+          "knowledgeSection": "BGP",
+          "knowledgePoint": "BGP路由属性与选路"
+        },
+        "intake-2026-spring-q055": {
+          "sourceTopic": "OSPF",
+          "code": "04.03.01",
+          "chapter": "路由与广域网技术",
+          "knowledgeSection": "OSPF",
+          "knowledgePoint": "区域、LSA与邻居状态"
+        },
+        "intake-2026-spring-q056": {
+          "sourceTopic": "BGP AS_PATH",
+          "code": "04.04.01",
+          "chapter": "路由与广域网技术",
+          "knowledgeSection": "BGP",
+          "knowledgePoint": "AS与路径矢量"
+        },
+        "intake-2026-spring-q057": {
+          "sourceTopic": "操作系统并发",
+          "code": "01.05.01",
+          "chapter": "计算机基础知识",
+          "knowledgeSection": "操作系统基础",
+          "knowledgePoint": "进程、线程与死锁"
+        },
+        "intake-2026-spring-q058": {
+          "sourceTopic": "数据安全法",
+          "code": "09.03.01",
+          "chapter": "项目管理与法律法规",
+          "knowledgeSection": "法律法规与合规",
+          "knowledgePoint": "网络安全法与数据安全法"
+        },
+        "intake-2026-spring-q059": {
+          "sourceTopic": "4G技术",
+          "code": "10.02.01",
+          "chapter": "新技术",
+          "knowledgeSection": "移动与物联网",
+          "knowledgePoint": "5G"
+        },
+        "intake-2026-spring-q060": {
+          "sourceTopic": "STP端口角色",
+          "code": "03.03.02",
+          "chapter": "局域网与交换技术",
+          "knowledgeSection": "STP生成树",
+          "knowledgePoint": "端口角色与BPDU"
+        },
+        "intake-2026-spring-q061": {
+          "sourceTopic": "广播域与路由器",
+          "code": "03.01.02",
+          "chapter": "局域网与交换技术",
+          "knowledgeSection": "以太网基础",
+          "knowledgePoint": "冲突域、广播域与网络设备"
+        },
+        "intake-2026-spring-q062": {
+          "sourceTopic": "IPv4子网广播地址",
+          "code": "02.03.02",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "IPv4与子网",
+          "knowledgePoint": "网络地址、广播地址与可用主机"
+        },
+        "intake-2026-spring-q063": {
+          "sourceTopic": "ICMP与IP",
+          "code": "02.04.02",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "网际层协议",
+          "knowledgePoint": "ICMP与控制报文"
+        },
+        "intake-2026-spring-q064": {
+          "sourceTopic": "IPv6 Path MTU发现",
+          "code": "02.07.03",
+          "chapter": "网络体系结构与TCP/IP",
+          "knowledgeSection": "IPv6",
+          "knowledgePoint": "IPv6过渡技术"
+        },
+        "intake-2026-spring-q065-a": {
+          "sourceTopic": "RIP路由协议完形填空",
+          "code": "04.02.01",
+          "chapter": "路由与广域网技术",
+          "knowledgeSection": "RIP",
+          "knowledgePoint": "距离矢量与最大跳数"
+        },
+        "intake-2026-spring-q065-b": {
+          "sourceTopic": "RIP路由协议完形填空",
+          "code": "04.02.01",
+          "chapter": "路由与广域网技术",
+          "knowledgeSection": "RIP",
+          "knowledgePoint": "距离矢量与最大跳数"
+        },
+        "intake-2026-spring-q065-c": {
+          "sourceTopic": "RIP路由协议完形填空",
+          "code": "04.02.01",
+          "chapter": "路由与广域网技术",
+          "knowledgeSection": "RIP",
+          "knowledgePoint": "距离矢量与最大跳数"
+        },
+        "intake-2026-spring-q065-d": {
+          "sourceTopic": "RIP路由协议完形填空",
+          "code": "04.02.01",
+          "chapter": "路由与广域网技术",
+          "knowledgeSection": "RIP",
+          "knowledgePoint": "距离矢量与最大跳数"
+        },
+        "intake-2026-spring-q065-e": {
+          "sourceTopic": "RIP路由协议完形填空",
+          "code": "04.02.01",
+          "chapter": "路由与广域网技术",
+          "knowledgeSection": "RIP",
+          "knowledgePoint": "距离矢量与最大跳数"
+        }
+      },
+      "nearestAvailablePointNotes": [
+        {
+          "questionIds": [
+            "intake-2026-spring-q002"
+          ],
+          "code": "01.04.01",
+          "note": "现有体系没有单独的RISC/CISC节点，归入CPU组成的最近知识点。"
+        },
+        {
+          "questionIds": [
+            "intake-2026-spring-q018",
+            "intake-2026-spring-q027",
+            "intake-2026-spring-q040"
+          ],
+          "code": "02.01.03",
+          "note": "现有体系没有GBN、RSVP或光纤通道专属节点，按协议与所在层分类。"
+        },
+        {
+          "questionIds": [
+            "intake-2026-spring-q037"
+          ],
+          "code": "10.02.02",
+          "note": "现有体系没有通用物联网节点，暂归入移动与物联网下最近的NB-IoT节点，并保留物联网标签。"
+        },
+        {
+          "questionIds": [
+            "intake-2026-spring-q059"
+          ],
+          "code": "10.02.01",
+          "note": "现有体系没有独立4G节点，暂归入移动通信下最近的5G节点，并保留4G技术标签。"
+        },
+        {
+          "questionIds": [
+            "intake-2026-spring-q051"
+          ],
+          "code": "08.03.01",
+          "note": "现有体系没有需求获取专属节点，按网络规划类归入网络拓扑。"
+        }
+      ]
+    },
+    "duplicateReview": {
+      "existingNetworkEngineerQuestions": 920,
+      "exactDuplicates": 1,
+      "nearDuplicateConfirmed": 1,
+      "omittedIds": [
+        "intake-2026-spring-q007",
+        "intake-2026-spring-q039"
+      ],
+      "details": [
+        [
+          "intake-2026-spring-q007",
+          "与现有collection-c02-q007考查同一事实，题干和全部选项相同，仅措辞略有差异。"
+        ],
+        [
+          "intake-2026-spring-q039",
+          "与现有collection-c09-q025题干、选项和答案相同，仅标点不同。"
+        ]
+      ],
+      "nearCandidateReviewedDistinct": [
+        {
+          "incomingId": "intake-2026-spring-q009",
+          "existingId": "collection-c06-q024",
+          "reason": "新题考交换机堆叠控制/转发，旧题考转发方式，考点和答案不同。"
+        },
+        {
+          "incomingId": "intake-2026-spring-q019",
+          "existingId": "collection-c08-q034",
+          "reason": "新题考PPP PAP认证，旧题考无线WPA2，只有问句结构相似。"
+        },
+        {
+          "incomingId": "intake-2026-spring-q040",
+          "existingId": "collection-c06-q033",
+          "reason": "新题考FC SAN协议，旧题考以太网端口类型。"
+        },
+        {
+          "incomingId": "intake-2026-spring-q050",
+          "existingId": "collection-c08-q024",
+          "reason": "新题考防火墙类型及状态检测，旧题考防火墙功能，问法近似但考查内容不同。"
+        },
+        {
+          "incomingId": "intake-2026-spring-q053",
+          "existingId": "collection-c06-q016",
+          "reason": "新题考GRE隧道，旧题考GVRP；缩写相似但技术不同。"
+        }
+      ]
+    },
+    "webImages": [
+      {
+        "file": "public/question-images/network-engineer/2026-spring-intake/q035.png",
+        "url": "/question-images/network-engineer/2026-spring-intake/q035.png",
+        "sizeBytes": 74937,
+        "sha256": "a64fdb25b8593bf96aa6f52526521f152d2c4715b16897b3125ca34fba24f37f"
+      },
+      {
+        "file": "public/question-images/network-engineer/2026-spring-intake/q049.png",
+        "url": "/question-images/network-engineer/2026-spring-intake/q049.png",
+        "sizeBytes": 122706,
+        "sha256": "d4a63f128b8f7c866978617d9941ba45910c1bc84f4d642ae220fee07e24e38d"
+      }
+    ]
+  }
+}

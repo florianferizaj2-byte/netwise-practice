@@ -108,6 +108,10 @@ question-banks/
 
 题目 ID 在所有证书中全局唯一。若两个证书需要共享一道题，在两个目录中放置同 ID、同内容的题目；加载器会合并证书标签，不会重复入库。内容不同但 ID 相同会阻止服务器启动。
 
+若同一题在两个考试中使用不同知识分类，使用引用题库：在分组中设置 `format: "references"`，其 `path` 指向引用数组。每个条目包含 `questionId`、`chapter`、`knowledgeSection` 和 `knowledgePoint`。加载器保留原题内容并增加当前考试的分类，接口会按当前考试展示，数据库仍只保留一个题目 ID。普通同 ID 合并的内容一致性检查继续生效。材料题组不能只引用其中一道。
+
+四川专升本计算机模块的完整目录、考点和题库共用规则见 [模块说明](../../docs/sichuan-upgrading-computer.md)。
+
 修改后运行：
 
 ```powershell

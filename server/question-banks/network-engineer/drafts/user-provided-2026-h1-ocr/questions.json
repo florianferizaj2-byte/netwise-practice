@@ -1,0 +1,3162 @@
+[
+  {
+    "id": "sealed-morning-2026h1-q001",
+    "type": "single_choice",
+    "question": "寄存器间接寻址方式中，操作数存放在哪里？",
+    "options": {
+      "A": "通用寄存器",
+      "B": "存储单元",
+      "C": "程序计数器",
+      "D": "堆栈"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "寄存器间接寻址先把寄存器内容当作有效地址，再从该地址指向的存储单元中读取操作数。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "计算机组成",
+    "knowledgePoint": "CPU流水线",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "CPU流水线",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 1,
+        "pages": [
+          2
+        ],
+        "answerPage": 1,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q002",
+    "type": "single_choice",
+    "question": "以下关于中断的说法，正确的是哪一项？",
+    "options": {
+      "A": "中断响应时间是计算机接收到中断信号并转入中断服务程序所用的时间",
+      "B": "中断控制由专门控制器处理，CPU无需参与",
+      "C": "中断向量标记中断服务程序是否执行成功",
+      "D": "中断响应时间是CPU发出中断查询信号所用的时间"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "中断响应包括处理器响应中断、保存现场并转入服务程序的过程；中断向量用于定位服务程序，不是执行状态标记。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "计算机组成",
+    "knowledgePoint": "CPU流水线",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "CPU流水线",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 2,
+        "pages": [
+          2
+        ],
+        "answerPage": 1,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q003",
+    "type": "single_choice",
+    "question": "某计算机字长为16位、存储容量为64KB，若按字编址，其寻址范围是多少？",
+    "options": {
+      "A": "16K",
+      "B": "32K",
+      "C": "64K",
+      "D": "128K"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "一个字为16位即2字节，64KB存储空间含32K个字，因此可寻址32K个字。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "存储器与可靠性",
+    "knowledgePoint": "内存、磁盘与RAID",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "内存、磁盘与RAID",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 3,
+        "pages": [
+          2
+        ],
+        "answerPage": 1,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q004",
+    "type": "single_choice",
+    "question": "浮点数的表示范围和精度主要取决于什么？",
+    "options": {
+      "A": "阶码的位数和尾数的位数",
+      "B": "阶码采用的编码和尾数的位数",
+      "C": "阶码采用的编码和尾数采用的编码",
+      "D": "阶码的位数和尾数采用的编码"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "阶码位数决定可表示的数量级范围，尾数位数决定有效数字的精度。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "数制与编码",
+    "knowledgePoint": "原码、反码、补码与移码",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "原码、反码、补码与移码",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 4,
+        "pages": [
+          2
+        ],
+        "answerPage": 1,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q005",
+    "type": "single_choice",
+    "question": "我国著作权法中，哪一对概念指同一权利？",
+    "options": {
+      "A": "出版权与版权",
+      "B": "著作权与版权",
+      "C": "作者权与专有权",
+      "D": "发行权与版权"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "著作权也称版权，二者指同一概念。",
+    "chapter": "项目管理与法律法规",
+    "knowledgeSection": "法律法规与合规",
+    "knowledgePoint": "著作权与专利",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "著作权与专利",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 5,
+        "pages": [
+          2
+        ],
+        "answerPage": 1,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q006",
+    "type": "single_choice",
+    "question": "输入范围为[-1.0，1.0]，测试用例取-1.001、-1.0、1.0、1.001，这种测试设计方法是什么？",
+    "options": {
+      "A": "条件覆盖法",
+      "B": "等价类划分法",
+      "C": "边界值分析法",
+      "D": "错误推测法"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "测试值选在输入边界及其刚刚越界的位置，属于边界值分析。",
+    "chapter": "项目管理与法律法规",
+    "knowledgeSection": "项目控制",
+    "knowledgePoint": "质量管理",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "质量管理",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 6,
+        "pages": [
+          2
+        ],
+        "answerPage": 1,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q007",
+    "type": "single_choice",
+    "question": "用户目标尚不清楚、需求难以定义时，开发系统最好采用哪种方法？",
+    "options": {
+      "A": "原型法",
+      "B": "瀑布模型",
+      "C": "V模型",
+      "D": "螺旋模型"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "快速原型让用户先体验可运行的模型，再据此澄清和细化需求。",
+    "chapter": "项目管理与法律法规",
+    "knowledgeSection": "项目控制",
+    "knowledgePoint": "质量管理",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "质量管理",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 7,
+        "pages": [
+          2
+        ],
+        "answerPage": 1,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q008",
+    "type": "single_choice",
+    "question": "页式虚拟存储系统中，页面大小为8KB；图示页表给出逻辑地址9612对应物理块3，转换后的物理地址是多少？",
+    "options": {
+      "A": "42380",
+      "B": "25996",
+      "C": "9612",
+      "D": "8192"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "页内偏移为9612-8192=1420；物理地址为物理块号3乘8192再加1420，结果为25996。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "操作系统基础",
+    "knowledgePoint": "分页与分段虚拟内存",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "分页与分段虚拟内存",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 8,
+        "pages": [
+          2
+        ],
+        "answerPage": 1,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-sealed-morning/q008.png",
+        "alt": "第8题题图",
+        "caption": "原卷题图"
+      }
+    ]
+  },
+  {
+    "id": "sealed-morning-2026h1-q009",
+    "type": "single_choice",
+    "question": "根据图示项目计划网络图，完成项目所需的最短时间是多少天？",
+    "options": {
+      "A": "16",
+      "B": "17",
+      "C": "18",
+      "D": "19"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "最长路径为关键路径A-B-C-D-I，工期为3+2+2+7+5=19天。",
+    "chapter": "项目管理与法律法规",
+    "knowledgeSection": "项目计划与估算",
+    "knowledgePoint": "关键路径CPM与甘特图",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "关键路径CPM与甘特图",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 9,
+        "pages": [
+          2
+        ],
+        "answerPage": 1,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-sealed-morning/q009.png",
+        "alt": "第9题题图",
+        "caption": "原卷题图"
+      }
+    ],
+    "sharedGroupId": "sealed-morning-project-q09-q10",
+    "sharedKind": "stem",
+    "sharedOrder": 9,
+    "sharedStem": "某项目的计划网络图如下。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q010",
+    "type": "single_choice",
+    "question": "根据图示项目计划网络图，活动G最多可推迟多少天完工而不影响项目完工日期？",
+    "options": {
+      "A": "1",
+      "B": "2",
+      "C": "3",
+      "D": "4"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "活动G最早在第12天完成，最迟可在第14天完成而不延误关键路径，因此时差为2天。",
+    "chapter": "项目管理与法律法规",
+    "knowledgeSection": "项目计划与估算",
+    "knowledgePoint": "关键路径CPM与甘特图",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "关键路径CPM与甘特图",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 10,
+        "pages": [
+          2
+        ],
+        "answerPage": 1,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-sealed-morning/q009.png",
+        "alt": "第10题题图",
+        "caption": "原卷题图"
+      }
+    ],
+    "sharedGroupId": "sealed-morning-project-q09-q10",
+    "sharedKind": "stem",
+    "sharedOrder": 10,
+    "sharedStem": "某项目的计划网络图如下。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q011",
+    "type": "single_choice",
+    "question": "图示波形对应哪种二进制调制方式？",
+    "options": {
+      "A": "ASK",
+      "B": "FSK",
+      "C": "PSK",
+      "D": "DPSK"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "波形用相位变化区分0和1，且同一符号的波形一致，因此为PSK而非差分PSK。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "数据通信与传输",
+    "knowledgePoint": "编码与调制",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "编码与调制",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 11,
+        "pages": [
+          3
+        ],
+        "answerPage": 2,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-sealed-morning/q011.png",
+        "alt": "第11题题图",
+        "caption": "原卷题图"
+      }
+    ]
+  },
+  {
+    "id": "sealed-morning-2026h1-q012",
+    "type": "single_choice",
+    "question": "信道采用4B/5B编码，最大数据速率为2500b/s；调制前波特率为1000Baud，应采用哪种调制技术？",
+    "options": {
+      "A": "BPSK",
+      "B": "QPSK",
+      "C": "BFSK",
+      "D": "ASK"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "4B/5B有效率为4/5，有效数据率为2000b/s；每个码元承载2bit，对应4种状态，采用QPSK。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "数据通信与传输",
+    "knowledgePoint": "信道容量与数据速率",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "信道容量与数据速率",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 12,
+        "pages": [
+          3
+        ],
+        "answerPage": 2,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q013",
+    "type": "single_choice",
+    "question": "卫星信道速率为64kb/s，帧长4000bit，使用停等ARQ，信道最大利用率约为多少？",
+    "options": {
+      "A": "0.480",
+      "B": "0.125",
+      "C": "0.104",
+      "D": "0.010"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "数据帧发送需62.5ms，往返传播约540ms，忽略短确认帧后利用率约为62.5/(62.5+540)=0.104。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "数据通信与传输",
+    "knowledgePoint": "信道容量与数据速率",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "信道容量与数据速率",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 13,
+        "pages": [
+          3
+        ],
+        "answerPage": 2,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q014",
+    "type": "single_choice",
+    "question": "通信效率为80%、标称速率为125kb/s的异步链路，传送125KB文件至少需要多少秒？",
+    "options": {
+      "A": "10",
+      "B": "80",
+      "C": "100",
+      "D": "102.4"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "有效速率为125kb/s×80%=100kb/s；125KB含1024×125×8bit，传送时间为102.4秒。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "数据通信与传输",
+    "knowledgePoint": "信道容量与数据速率",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "信道容量与数据速率",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 14,
+        "pages": [
+          3
+        ],
+        "answerPage": 2,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q015",
+    "type": "single_choice",
+    "question": "以下关于交换机的说法，正确的是哪一项？",
+    "options": {
+      "A": "交换机每个端口都能隔离广播",
+      "B": "存储转发方式的效率最高",
+      "C": "直通转发会进行CRC校验以确保无错帧通过",
+      "D": "存储转发式交换机比直通式交换机转发慢"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "存储转发必须收完整帧并校验后再转发，延迟通常高于直通转发；交换机端口不能隔离同一VLAN的广播。",
+    "chapter": "局域网与交换技术",
+    "knowledgeSection": "以太网基础",
+    "knowledgePoint": "MAC地址学习与交换转发",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "MAC地址学习与交换转发",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 15,
+        "pages": [
+          3
+        ],
+        "answerPage": 2,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q016",
+    "type": "single_choice",
+    "question": "采用海明码纠错，信息码字为8位，若要纠正1位错误，至少需要多少位冗余位？",
+    "options": {
+      "A": "2",
+      "B": "3",
+      "C": "4",
+      "D": "8"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "纠正单比特错误需满足2^r≥m+r+1。m=8时r=4满足条件，r=3不满足。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "校验码与差错控制",
+    "knowledgePoint": "海明校验",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "海明校验",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 16,
+        "pages": [
+          3
+        ],
+        "answerPage": 2,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q017",
+    "type": "single_choice",
+    "question": "下列哪一项不属于光缆系统的测试指标？",
+    "options": {
+      "A": "最大衰减限值",
+      "B": "回波损耗限值",
+      "C": "近端串扰",
+      "D": "波长窗口参数"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "近端串扰是双绞线常见测试指标；光缆主要检查衰减、回波损耗和波长窗口等参数。",
+    "chapter": "综合布线与网络规划",
+    "knowledgeSection": "传输介质",
+    "knowledgePoint": "光功率与光链路基础",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "光功率与光链路基础",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 17,
+        "pages": [
+          3
+        ],
+        "answerPage": 2,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q018",
+    "type": "single_choice",
+    "question": "关于HDLC协议，正确的是哪一项？",
+    "options": {
+      "A": "它是一种面向字符的数据链路层协议",
+      "B": "8位控制字段的发送和接收序号范围均为0至15",
+      "C": "无编号帧可用于链路建立、拆除及控制",
+      "D": "HDLC使用多种转义字符保证数据透明传输"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "HDLC的U帧用于链路建立、拆除等控制功能；HDLC面向比特，并通过0比特填充实现透明传输。",
+    "chapter": "路由与广域网技术",
+    "knowledgeSection": "广域网链路",
+    "knowledgePoint": "PPP、HDLC与帧中继",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "PPP、HDLC与帧中继",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 18,
+        "pages": [
+          3
+        ],
+        "answerPage": 2,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q019",
+    "type": "single_choice",
+    "question": "E1载波中共有多少个数据通道？",
+    "options": {
+      "A": "23",
+      "B": "24",
+      "C": "30",
+      "D": "32"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "E1共有32个时隙，其中一个用于帧同步、一个用于信令，剩余30个时隙承载语音话路。",
+    "chapter": "路由与广域网技术",
+    "knowledgeSection": "广域网链路",
+    "knowledgePoint": "E1/T1与专线基础",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "E1/T1与专线基础",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 19,
+        "pages": [
+          3
+        ],
+        "answerPage": 2,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q020",
+    "type": "single_choice",
+    "question": "E2载波的数据速率是多少？",
+    "options": {
+      "A": "2.048Mb/s",
+      "B": "4.096Mb/s",
+      "C": "8.448Mb/s",
+      "D": "32.064Mb/s"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "E2是由4个E1复用构成的二次群，标准数据率为8.448Mb/s。",
+    "chapter": "路由与广域网技术",
+    "knowledgeSection": "广域网链路",
+    "knowledgePoint": "E1/T1与专线基础",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "E1/T1与专线基础",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 20,
+        "pages": [
+          3
+        ],
+        "answerPage": 2,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q021",
+    "type": "single_choice",
+    "question": "TCP首部中的序号字段为32位，其序号空间最多对应多少数据量后才会重复？",
+    "options": {
+      "A": "1024MB",
+      "B": "2048MB",
+      "C": "4096MB",
+      "D": "8192MB"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "32位序号空间共有2^32个字节位置，即约4GiB，折合4096MiB。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "传输层",
+    "knowledgePoint": "TCP连接与可靠传输",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "TCP连接与可靠传输",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 21,
+        "pages": [
+          3
+        ],
+        "answerPage": 3,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q022",
+    "type": "single_choice",
+    "question": "本地主机发送FIN=1的数据段结束发送后，以下说法不正确的是哪一项？",
+    "options": {
+      "A": "本端完成数据发送后可以发送FIN结束该方向",
+      "B": "对端收到FIN后应通知应用层对端已结束该方向的数据发送",
+      "C": "本地端进入FIN-WAIT-1并等待对方确认",
+      "D": "本地端收到对端ACK后立即进入CLOSED状态"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "收到对端对FIN的ACK后，本端进入FIN-WAIT-2等待对端也关闭连接，并不会立即进入CLOSED。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "传输层",
+    "knowledgePoint": "TCP连接与可靠传输",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "TCP连接与可靠传输",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 22,
+        "pages": [
+          3
+        ],
+        "answerPage": 3,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q023",
+    "type": "single_choice",
+    "question": "CSMA/CD总线网络中，单程传播时间为t、发送一帧的时间为T，a=t/T，信道最大利用率约为多少？",
+    "options": {
+      "A": "1/(1+a)",
+      "B": "a/(1+a)",
+      "C": "a/(1+2a)",
+      "D": "1/(1+2a)"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "CSMA/CD最大利用率近似为T/(T+2t)，代入a=t/T后得到1/(1+2a)。",
+    "chapter": "局域网与交换技术",
+    "knowledgeSection": "以太网基础",
+    "knowledgePoint": "CSMA/CD与以太网帧",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "CSMA/CD与以太网帧",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 23,
+        "pages": [
+          4
+        ],
+        "answerPage": 3,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q024",
+    "type": "single_choice",
+    "question": "带宽为3kHz、信噪比为30dB的信道，其理论数据率约为多少？",
+    "options": {
+      "A": "30kb/s",
+      "B": "60kb/s",
+      "C": "90kb/s",
+      "D": "270kb/s"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "香农公式为C=W log2(1+S/N)。30dB对应功率比1000，3kHz带宽下容量约30kb/s。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "数据通信与传输",
+    "knowledgePoint": "信道容量与数据速率",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "信道容量与数据速率",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 24,
+        "pages": [
+          4
+        ],
+        "answerPage": 3,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q025",
+    "type": "single_choice",
+    "question": "华为交换机与其他厂商交换机的互联端口均为VLAN Trunk模式时，应使用哪一组VLAN协议？",
+    "options": {
+      "A": "QinQ和IEEE 802.10",
+      "B": "802.10和802.1Q",
+      "C": "DQDB和IEEE 802.1Q",
+      "D": "IEEE 802.1Q和IEEE 802.1Q"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "跨厂商VLAN Trunk互通应使用通用的IEEE 802.1Q标签封装。",
+    "chapter": "局域网与交换技术",
+    "knowledgeSection": "VLAN",
+    "knowledgePoint": "802.1Q与VLAN标签",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "802.1Q与VLAN标签",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 25,
+        "pages": [
+          4
+        ],
+        "answerPage": 3,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q026",
+    "type": "single_choice",
+    "question": "IPv6地址的三级结构中，第2级表示什么？",
+    "options": {
+      "A": "全球公共拓扑",
+      "B": "本地网络或站点拓扑",
+      "C": "网络接口",
+      "D": "保留字段"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IPv6聚合全球单播地址可按公共拓扑、站点拓扑和接口标识理解；第2级表示机构内部的站点网络结构。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "IPv6",
+    "knowledgePoint": "地址表示与地址类型",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "地址表示与地址类型",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 26,
+        "pages": [
+          4
+        ],
+        "answerPage": 3,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q027",
+    "type": "single_choice",
+    "question": "配置SMTP邮件服务器时，必须开放TCP哪个默认端口？",
+    "options": {
+      "A": "21",
+      "B": "25",
+      "C": "53",
+      "D": "110"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "SMTP传统默认服务端口为TCP 25。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "应用层协议与端口",
+    "knowledgePoint": "电子邮件、LDAP与远程登录",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "电子邮件、LDAP与远程登录",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 27,
+        "pages": [
+          4
+        ],
+        "answerPage": 3,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q028",
+    "type": "single_choice",
+    "question": "Linux系统将Apache Web服务器端口改为8080，通常应修改哪个配置文件？",
+    "options": {
+      "A": "/etc/inetd.conf",
+      "B": "/etc/lilo.conf",
+      "C": "/etc/httpd/conf/httpd.conf",
+      "D": "/etc/httpd/conf/index.conf"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Apache HTTP Server的主配置文件通常为httpd.conf，端口配置在其中完成。",
+    "chapter": "服务器配置",
+    "knowledgeSection": "Linux服务器",
+    "knowledgePoint": "网络接口与服务配置",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "网络接口与服务配置",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 28,
+        "pages": [
+          4
+        ],
+        "answerPage": 3,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q029",
+    "type": "single_choice",
+    "question": "Windows命令行中，使用哪个命令释放DHCP服务器分配的地址？",
+    "options": {
+      "A": "ipconfig",
+      "B": "ipconfig /all",
+      "C": "ipconfig /renew",
+      "D": "ipconfig /release"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "ipconfig /release用于释放当前DHCP租约；/renew则请求续租或重新获取地址。",
+    "chapter": "网络管理",
+    "knowledgeSection": "诊断工具与设备排查",
+    "knowledgePoint": "ipconfig、netstat与路由工具",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "ipconfig、netstat与路由工具",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 29,
+        "pages": [
+          4
+        ],
+        "answerPage": 3,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q030",
+    "type": "single_choice",
+    "question": "RAID 0的磁盘利用率是多少？",
+    "options": {
+      "A": "25%",
+      "B": "50%",
+      "C": "75%",
+      "D": "100%"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "RAID 0不保存冗余校验信息，全部磁盘容量都用于数据，因此利用率为100%。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "存储器与可靠性",
+    "knowledgePoint": "内存、磁盘与RAID",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "内存、磁盘与RAID",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 30,
+        "pages": [
+          4
+        ],
+        "answerPage": 3,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q031",
+    "type": "single_choice",
+    "question": "使用3块500GB磁盘组成RAID 5阵列，阵列可用容量是多少？",
+    "options": {
+      "A": "250GB",
+      "B": "500GB",
+      "C": "1000GB",
+      "D": "1500GB"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "RAID 5相当于用一块磁盘容量保存分布式校验，其可用容量为(n-1)×单盘容量，即1000GB。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "存储器与可靠性",
+    "knowledgePoint": "内存、磁盘与RAID",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "内存、磁盘与RAID",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 31,
+        "pages": [
+          4
+        ],
+        "answerPage": 3,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q032",
+    "type": "single_choice",
+    "question": "在X.509数字证书中，要验证证书签名真伪，应使用哪一个密钥？",
+    "options": {
+      "A": "用户的公钥",
+      "B": "CA的公钥",
+      "C": "用户的私钥",
+      "D": "CA的私钥"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "证书由CA的私钥签名，验证该签名需要对应的CA公钥。",
+    "chapter": "网络安全",
+    "knowledgeSection": "PKI与数字证书",
+    "knowledgePoint": "CA、数字证书与数字签名",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "CA、数字证书与数字签名",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 32,
+        "pages": [
+          4
+        ],
+        "answerPage": 3,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q033",
+    "type": "single_choice",
+    "question": "企业要确保数据从信息源到目的地址之间始终以密文传输，最适合采用哪种加密方式？",
+    "options": {
+      "A": "链路加密",
+      "B": "节点加密",
+      "C": "端到端加密",
+      "D": "混合加密"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "端到端加密使数据在源端加密、目的端解密，能覆盖中间网络传输路径。",
+    "chapter": "网络安全",
+    "knowledgeSection": "密码与加密",
+    "knowledgePoint": "密码学原则与传输加密",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "密码学原则与传输加密",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 33,
+        "pages": [
+          4
+        ],
+        "answerPage": 3,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q034",
+    "type": "single_choice",
+    "question": "下列哪种算法用于会话数据加密时效率最高？",
+    "options": {
+      "A": "RSA",
+      "B": "AES",
+      "C": "MD5",
+      "D": "SHA-1"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "AES是高效的对称加密算法；RSA属于非对称算法，MD5和SHA-1是摘要算法。",
+    "chapter": "网络安全",
+    "knowledgeSection": "密码与加密",
+    "knowledgePoint": "对称加密算法",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "对称加密算法",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 34,
+        "pages": [
+          4
+        ],
+        "answerPage": 3,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q035",
+    "type": "single_choice",
+    "question": "使用CIDR将212.224.12.0/24至212.224.15.0/24四个连续网络汇聚成一个超网，得到的地址是什么？",
+    "options": {
+      "A": "212.224.8.0/22",
+      "B": "212.224.12.0/22",
+      "C": "212.224.8.0/21",
+      "D": "212.224.12.0/21"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "四个连续/24网络覆盖第三字节12至15，聚合后为212.224.12.0/22。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "IPv4与子网",
+    "knowledgePoint": "CIDR与路由聚合",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "CIDR与路由聚合",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 35,
+        "pages": [
+          4
+        ],
+        "answerPage": 3,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q036",
+    "type": "single_choice",
+    "question": "网络199.74.128.0/17至少划分成10个子网，下列哪项不是所得16个/21子网的网络地址？",
+    "options": {
+      "A": "199.74.136.0/21",
+      "B": "199.74.162.0/21",
+      "C": "199.74.208.0/21",
+      "D": "199.74.224.0/21"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "划分为至少10个子网需借4位，得到/21；第三字节网段边界按8递增，162不是8的倍数。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "IPv4与子网",
+    "knowledgePoint": "VLSM子网划分",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "VLSM子网划分",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 36,
+        "pages": [
+          4
+        ],
+        "answerPage": 3,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q037",
+    "type": "single_choice",
+    "question": "以下哪个地址不属于网络129.177.96.0/20的主机地址范围？",
+    "options": {
+      "A": "129.177.111.17",
+      "B": "129.177.104.16",
+      "C": "129.177.101.15",
+      "D": "129.177.112.18"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "/20的第三字节范围为96至111；129.177.112.18已超出该网段。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "IPv4与子网",
+    "knowledgePoint": "网络地址、广播地址与可用主机",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "网络地址、广播地址与可用主机",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 37,
+        "pages": [
+          4
+        ],
+        "answerPage": 4,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q038",
+    "type": "single_choice",
+    "question": "客户机无法找到DHCP服务器时，自动获得的临时IPv4地址最可能是哪一个？",
+    "options": {
+      "A": "196.254.1.1",
+      "B": "0.0.0.0",
+      "C": "169.254.1.1",
+      "D": "255.255.255.255"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "IPv4链路本地自动配置使用169.254.0.0/16地址段。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "应用层协议与端口",
+    "knowledgePoint": "DHCP",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "DHCP",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 38,
+        "pages": [
+          4
+        ],
+        "answerPage": 4,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q039",
+    "type": "single_choice",
+    "question": "Windows命令行中，要测试192.168.99.221在1500字节数据包下的连通性，应使用哪条命令？",
+    "options": {
+      "A": "ping 192.168.99.221 -t 1500",
+      "B": "ping 192.168.99.221 -l 1500",
+      "C": "ping 192.168.99.221 -r 1500",
+      "D": "ping 192.168.99.221 -j 1500"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Windows ping命令的-l参数指定发送缓冲区大小；-t持续发送，-r记录路由，-j指定松散源路由。",
+    "chapter": "网络管理",
+    "knowledgeSection": "诊断工具与设备排查",
+    "knowledgePoint": "ping与tracert连通性检查",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "ping与tracert连通性检查",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 39,
+        "pages": [
+          5
+        ],
+        "answerPage": 4,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q040",
+    "type": "single_choice",
+    "question": "FTP工作时需要建立几个连接？",
+    "options": {
+      "A": "1",
+      "B": "2",
+      "C": "3",
+      "D": "4"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "FTP分别建立控制连接和数据连接。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "应用层协议与端口",
+    "knowledgePoint": "FTP与TFTP",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "FTP与TFTP",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 40,
+        "pages": [
+          5
+        ],
+        "answerPage": 4,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q041",
+    "type": "single_choice",
+    "question": "FTP服务器工作于被动模式时，数据连接使用的端口由谁确定？",
+    "options": {
+      "A": "端口20",
+      "B": "端口21",
+      "C": "用户确定的随机端口",
+      "D": "服务器确定的高位随机端口"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "被动模式下服务器选择高位端口并通知客户端，由客户端主动连接该端口传输数据。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "应用层协议与端口",
+    "knowledgePoint": "FTP与TFTP",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "FTP与TFTP",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 41,
+        "pages": [
+          5
+        ],
+        "answerPage": 4,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q042",
+    "type": "single_choice",
+    "question": "浏览器收到HTTP状态码500，通常表示什么？",
+    "options": {
+      "A": "页面请求正常且传输成功",
+      "B": "服务器内部错误",
+      "C": "服务器不支持该HTTP版本",
+      "D": "请求资源未授权"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "HTTP 500属于服务器端内部错误；未授权通常对应401或403等状态码。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "应用层协议与端口",
+    "knowledgePoint": "HTTP与HTTPS",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "HTTP与HTTPS",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 42,
+        "pages": [
+          5
+        ],
+        "answerPage": 4,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q043",
+    "type": "single_choice",
+    "question": "路由器配置了两个全局DHCP地址池，接口G1/0/0配置为10.10.10.1/24并启用global地址池，客户端可获得哪个网段的地址？",
+    "options": {
+      "A": "10.10.10.0/24",
+      "B": "10.20.20.0/24",
+      "C": "无法获得地址",
+      "D": "可能来自两个网段中的任意一个"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "全局地址池按接口所在网段及网关匹配；接口地址为10.10.10.1/24，客户端从对应地址池获取租约。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "应用层协议与端口",
+    "knowledgePoint": "DHCP",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "DHCP",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 43,
+        "pages": [
+          5
+        ],
+        "answerPage": 4,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q044",
+    "type": "single_choice",
+    "question": "华为交换机光口对接后接口不能UP，按常见排障顺序应如何检查？",
+    "options": {
+      "A": "检查端口状态→检查两端配置→检查光模块→检查链路→更换器件",
+      "B": "检查两端配置→检查端口状态→更换器件→检查链路→检查光模块",
+      "C": "检查链路→检查光模块→检查两端配置→检查端口状态→更换器件",
+      "D": "更换器件→检查链路→检查光模块→检查两端配置→检查端口状态"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "先确认端口没有被关闭，再核对配置、光模块和链路，最后通过更换器件定位硬件故障。",
+    "chapter": "网络管理",
+    "knowledgeSection": "诊断工具与设备排查",
+    "knowledgePoint": "设备Console与维护接入",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "设备Console与维护接入",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 44,
+        "pages": [
+          5
+        ],
+        "answerPage": 4,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q045",
+    "type": "single_choice",
+    "question": "华为交换机Access端口发送报文时，会如何处理VLAN标签？",
+    "options": {
+      "A": "发送带Tag的报文",
+      "B": "剥离VLAN信息后发送",
+      "C": "添加VLAN信息后发送",
+      "D": "添加本端口PVID标签后发送"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Access端口向终端发送帧时通常剥离VLAN标签；接收无标签帧时再按PVID归属VLAN。",
+    "chapter": "局域网与交换技术",
+    "knowledgeSection": "VLAN",
+    "knowledgePoint": "Access、Trunk与Hybrid端口",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "Access、Trunk与Hybrid端口",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 45,
+        "pages": [
+          5
+        ],
+        "answerPage": 4,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q046",
+    "type": "single_choice",
+    "question": "Linux用户test要执行一个系统脚本文件，至少需要具备哪些权限？",
+    "options": {
+      "A": "读、写、执行",
+      "B": "执行",
+      "C": "只读",
+      "D": "读、执行"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "直接执行脚本至少需要读取脚本内容并具有执行权限，写权限不是必需条件。",
+    "chapter": "服务器配置",
+    "knowledgeSection": "Linux服务器",
+    "knowledgePoint": "权限、进程与文件系统",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "权限、进程与文件系统",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 46,
+        "pages": [
+          5
+        ],
+        "answerPage": 4,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q047",
+    "type": "single_choice",
+    "question": "下列哪个是IPv6可聚合全球单播地址？",
+    "options": {
+      "A": "2001::1",
+      "B": "FE80::1",
+      "C": "FEC0::1",
+      "D": "FF02::1"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "2000::/3用于全球单播；FE80::/10是链路本地，FF00::/8是组播。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "IPv6",
+    "knowledgePoint": "地址表示与地址类型",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "地址表示与地址类型",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 47,
+        "pages": [
+          5
+        ],
+        "answerPage": 4,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q048",
+    "type": "single_choice",
+    "question": "关于IPv6无状态地址自动配置，以下哪项说法不正确？",
+    "options": {
+      "A": "路由器发送前缀信息供主机配置地址",
+      "B": "接口ID可依据主机MAC地址生成",
+      "C": "除地址参数外还可获得路由器地址、跳数或MTU等信息",
+      "D": "接口地址必定由随机算法生成"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "原卷答案页将D列为错误项；SLAAC的接口标识生成方式并非必定随机，传统方式可由MAC地址构造。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "IPv6",
+    "knowledgePoint": "地址表示与地址类型",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "地址表示与地址类型",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 48,
+        "pages": [
+          5
+        ],
+        "answerPage": 4,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q049",
+    "type": "single_choice",
+    "question": "关于IPv6重复地址检测（DAD），正确的是哪一项？",
+    "options": {
+      "A": "DAD用于确保地址唯一",
+      "B": "所有类型地址都必须执行DAD",
+      "C": "地址配置前处于tentative状态且可以正常使用",
+      "D": "只有DAD未发现冲突后地址才能正常使用"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "tentative地址在DAD完成前不能用于正常通信；题库原卷判定将其描述为可用的C项错误。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "IPv6",
+    "knowledgePoint": "邻居发现协议NDP",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "邻居发现协议NDP",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 49,
+        "pages": [
+          6
+        ],
+        "answerPage": 4,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q050",
+    "type": "single_choice",
+    "question": "IEEE 802.11b/g/n通常共同使用哪个无线频段？",
+    "options": {
+      "A": "2.4GHz",
+      "B": "5GHz",
+      "C": "1.5GHz",
+      "D": "10GHz"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "802.11b/g/n均可工作在2.4GHz频段。",
+    "chapter": "局域网与交换技术",
+    "knowledgeSection": "无线局域网",
+    "knowledgePoint": "802.11与介质访问",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "802.11与介质访问",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 50,
+        "pages": [
+          6
+        ],
+        "answerPage": 5,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q051",
+    "type": "single_choice",
+    "question": "在2.4GHz Wi-Fi频段中，常用且互不重叠的三个信道组合是哪一个？",
+    "options": {
+      "A": "信道1、6、13",
+      "B": "信道1、7、11",
+      "C": "信道1、7、13",
+      "D": "信道1、6、11"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "考试常用的不重叠信道组合为1、6、11；部分地区对信道13的支持不同。",
+    "chapter": "局域网与交换技术",
+    "knowledgeSection": "无线局域网",
+    "knowledgePoint": "802.11与介质访问",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "802.11与介质访问",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 51,
+        "pages": [
+          6
+        ],
+        "answerPage": 5,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q052",
+    "type": "single_choice",
+    "question": "如图所示两台交换机采用默认配置，PC2和PC4不能通信，最可能的原因是什么？",
+    "options": {
+      "A": "PC2和PC4的IP地址被交换机禁止通过",
+      "B": "Switch1与Switch2之间的链路封装不正确",
+      "C": "PC2和PC4的MAC地址被交换机禁止通过",
+      "D": "两台交换机之间的链路断开"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "两台交换机之间的链路默认可能以Access方式工作，无法承载两个VLAN的流量；应将互联口配置为Trunk。",
+    "chapter": "局域网与交换技术",
+    "knowledgeSection": "VLAN",
+    "knowledgePoint": "Access、Trunk与Hybrid端口",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "Access、Trunk与Hybrid端口",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 52,
+        "pages": [
+          6
+        ],
+        "answerPage": 5,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-sealed-morning/q052.png",
+        "alt": "第52题题图",
+        "caption": "原卷题图"
+      }
+    ],
+    "sharedGroupId": "sealed-morning-switch-q52-q53",
+    "sharedKind": "stem",
+    "sharedOrder": 52,
+    "sharedStem": "根据图示网络拓扑，回答交换机互联和VLAN通信问题。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q053",
+    "type": "single_choice",
+    "question": "针对图示中不同VLAN的主机不能跨交换机通信，最简单的解决方法是什么？",
+    "options": {
+      "A": "将Switch1和Switch2的互联端口配置为Trunk模式",
+      "B": "将互联端口配置为Access模式",
+      "C": "将两台交换机设置为服务器模式",
+      "D": "将两台交换机设置为客户端模式"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "交换机互联链路应配置为Trunk并允许相关VLAN通过，以便承载多个VLAN的带标签帧。",
+    "chapter": "局域网与交换技术",
+    "knowledgeSection": "VLAN",
+    "knowledgePoint": "Access、Trunk与Hybrid端口",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "Access、Trunk与Hybrid端口",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 53,
+        "pages": [
+          6
+        ],
+        "answerPage": 5,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-sealed-morning/q052.png",
+        "alt": "第53题题图",
+        "caption": "原卷题图"
+      }
+    ],
+    "sharedGroupId": "sealed-morning-switch-q52-q53",
+    "sharedKind": "stem",
+    "sharedOrder": 53,
+    "sharedStem": "根据图示网络拓扑，回答交换机互联和VLAN通信问题。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q054",
+    "type": "single_choice",
+    "question": "按照IEEE 802.3标准，以太网帧的最大传输效率约为多少？",
+    "options": {
+      "A": "50%",
+      "B": "87.5%",
+      "C": "90.5%",
+      "D": "98.8%"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "最大帧的数据字段为1500字节，总帧长1518字节（不计前导码等），效率约1500/1518=98.8%。",
+    "chapter": "局域网与交换技术",
+    "knowledgeSection": "以太网基础",
+    "knowledgePoint": "CSMA/CD与以太网帧",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "CSMA/CD与以太网帧",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 54,
+        "pages": [
+          6
+        ],
+        "answerPage": 5,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q055",
+    "type": "single_choice",
+    "question": "关于OSPF中的DR，以下哪项描述错误？",
+    "options": {
+      "A": "广播网络中的路由器都会参与DR选举",
+      "B": "优先级值不同时，优先级较小者成为DR",
+      "C": "优先级值相同时，Router ID较大者优先",
+      "D": "DR与BDR之间建立邻接关系"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "DR选举通常优先选择接口优先级较高的路由器；优先级相同时再比较Router ID。",
+    "chapter": "路由与广域网技术",
+    "knowledgeSection": "OSPF",
+    "knowledgePoint": "DR/BDR选举",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "DR/BDR选举",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 55,
+        "pages": [
+          6
+        ],
+        "answerPage": 5,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q056",
+    "type": "single_choice",
+    "question": "企业员工使用的软件需要同时打开10个端口，NAT服务器只有一个公网IP，最多可同时支持多少用户？",
+    "options": {
+      "A": "约6451",
+      "B": "约3553",
+      "C": "约1638",
+      "D": "约102"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "公网端口中约64512个高位端口可用于复用；每名用户需要10个端口时，约支持6451名用户。",
+    "chapter": "网络安全",
+    "knowledgeSection": "访问控制与NAT",
+    "knowledgePoint": "静态NAT、动态NAT与PAT",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "静态NAT、动态NAT与PAT",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 56,
+        "pages": [
+          6
+        ],
+        "answerPage": 5,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q057",
+    "type": "single_choice",
+    "question": "攻击者要启动内网计算机感染的木马，常用的连接方式是什么？",
+    "options": {
+      "A": "由被控制端主动向控制端发起反向连接",
+      "B": "由第三方代理实现间接通信",
+      "C": "被控端盗用合法IP伪装成用户",
+      "D": "木马直接破坏计算机引导区"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "反向连接由内网被控端主动向外建立会话，可绕过许多入站访问限制。",
+    "chapter": "网络安全",
+    "knowledgeSection": "网络攻击",
+    "knowledgePoint": "Web攻击与常见漏洞",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "Web攻击与常见漏洞",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 57,
+        "pages": [
+          7
+        ],
+        "answerPage": 5,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q058",
+    "type": "single_choice",
+    "question": "SNMP采用UDP提供数据报服务，主要是因为哪一点？",
+    "options": {
+      "A": "UDP比TCP可靠",
+      "B": "UDP报文可以比TCP报文更大",
+      "C": "UDP是面向连接的传输方式",
+      "D": "使用UDP进行网络管理不会增加太多网络负载"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "SNMP查询和状态报告通常较短，UDP开销低，可避免管理流量对网络造成较大负担。",
+    "chapter": "网络管理",
+    "knowledgeSection": "管理协议与监控",
+    "knowledgePoint": "SNMP版本、MIB与报文",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "SNMP版本、MIB与报文",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 58,
+        "pages": [
+          7
+        ],
+        "answerPage": 5,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q059",
+    "type": "single_choice",
+    "question": "Windows Server 2008上要让一台IIS服务器承载多个域名，最便捷的方法是什么？",
+    "options": {
+      "A": "使用虚拟目录",
+      "B": "使用虚拟主机",
+      "C": "运行多个IIS进程实例",
+      "D": "为IIS安装多个网卡"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IIS可通过网站绑定中的主机名配置多个站点，使同一服务器按域名提供不同Web内容。",
+    "chapter": "服务器配置",
+    "knowledgeSection": "Windows服务器",
+    "knowledgePoint": "IIS与NTFS权限",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "IIS与NTFS权限",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 59,
+        "pages": [
+          7
+        ],
+        "answerPage": 5,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q060",
+    "type": "single_choice",
+    "question": "BGP协议的主要作用是什么？",
+    "options": {
+      "A": "在自治系统之间交换路由信息",
+      "B": "在自治系统内部交换路由信息",
+      "C": "在OSPF area 0内部交换路由信息",
+      "D": "在不同路由协议间直接交换路由信息"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "BGP是外部网关协议，主要用于不同自治系统之间交换可达路由信息。",
+    "chapter": "路由与广域网技术",
+    "knowledgeSection": "BGP",
+    "knowledgePoint": "AS与路径矢量",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "AS与路径矢量",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 60,
+        "pages": [
+          7
+        ],
+        "answerPage": 5,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q061",
+    "type": "single_choice",
+    "question": "关于RIPv1，以下哪项说法错误？",
+    "options": {
+      "A": "RIP采用距离矢量算法",
+      "B": "RIP只更新发生变化的路由信息",
+      "C": "RIP默认每30秒更新一次",
+      "D": "RIP是一种内部网关协议"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RIPv1通常按周期发送完整路由表，而不只是发送发生变化的条目。",
+    "chapter": "路由与广域网技术",
+    "knowledgeSection": "RIP",
+    "knowledgePoint": "水平分割、毒性逆转与触发更新",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "水平分割、毒性逆转与触发更新",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 61,
+        "pages": [
+          7
+        ],
+        "answerPage": 5,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q062",
+    "type": "single_choice",
+    "question": "100BASE-TX采用4B/5B编码，该编码效率是多少？",
+    "options": {
+      "A": "50%",
+      "B": "60%",
+      "C": "80%",
+      "D": "100%"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "每4位数据编码成5位码组，效率为4/5=80%。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "数据通信与传输",
+    "knowledgePoint": "编码与调制",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "编码与调制",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 62,
+        "pages": [
+          7
+        ],
+        "answerPage": 5,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q063",
+    "type": "single_choice",
+    "question": "某信息点的网线有4根线不通，但计算机仍能正常上网。这4根不通的线芯最可能是哪一组？",
+    "options": {
+      "A": "1、3、4、5",
+      "B": "5、6、7、8",
+      "C": "1、2、3、6",
+      "D": "4、5、7、8"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "10BASE-T 使用 1、2 线对发送、3、6 线对接收；若仍能通信，说明未通的4根线更可能是4、5、7、8。",
+    "chapter": "综合布线与网络规划",
+    "knowledgeSection": "传输介质",
+    "knowledgePoint": "双绞线类别与屏蔽",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "双绞线类别与屏蔽",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 63,
+        "pages": [
+          7
+        ],
+        "answerPage": 5,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q064",
+    "type": "single_choice",
+    "question": "要检查网线线序和近端串扰，最合适的测试方法是什么？",
+    "options": {
+      "A": "使用专用网络测试设备",
+      "B": "使用万用表",
+      "C": "连接一端计算机进行测试",
+      "D": "将线芯串联成一根线测试"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "线序和串扰需通过专用线缆认证或网络测试仪测量，普通万用表不能完成串扰测试。",
+    "chapter": "综合布线与网络规划",
+    "knowledgeSection": "传输介质",
+    "knowledgePoint": "双绞线类别与屏蔽",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "双绞线类别与屏蔽",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 64,
+        "pages": [
+          7
+        ],
+        "answerPage": 5,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q065",
+    "type": "single_choice",
+    "question": "IntServ是QoS的一种方式，其主要协议是什么？",
+    "options": {
+      "A": "SLAC",
+      "B": "RSVP",
+      "C": "ITS",
+      "D": "4P"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IntServ通常使用RSVP在通信开始前预留资源，以便为流量提供所需服务质量。",
+    "chapter": "综合布线与网络规划",
+    "knowledgeSection": "网络规划与性能",
+    "knowledgePoint": "带宽、时延、丢包率与吞吐量",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "带宽、时延、丢包率与吞吐量",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 65,
+        "pages": [
+          7
+        ],
+        "answerPage": 5,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q066",
+    "type": "single_choice",
+    "question": "企业内网使用私有地址并通过IPSec VPN连接分支机构，应采用哪种技术？",
+    "options": {
+      "A": "隧道技术",
+      "B": "加密技术",
+      "C": "消息鉴别技术",
+      "D": "数字签名技术"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IPSec VPN通过隧道封装在公共网络上承载私网数据，并配合加密和认证保护数据。",
+    "chapter": "网络安全",
+    "knowledgeSection": "VPN与安全传输",
+    "knowledgePoint": "IPsec VPN与SSL VPN",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "IPsec VPN与SSL VPN",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 66,
+        "pages": [
+          7
+        ],
+        "answerPage": 5,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q067",
+    "type": "single_choice",
+    "question": "使用CAT5 UTP作为通信介质直接连接两台交换机时，最大段距离是多少？",
+    "options": {
+      "A": "100m",
+      "B": "205m",
+      "C": "500m",
+      "D": "2500m"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "双绞线以太网链路的标准最大段距离通常为100米。",
+    "chapter": "综合布线与网络规划",
+    "knowledgeSection": "传输介质",
+    "knowledgePoint": "双绞线类别与屏蔽",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "双绞线类别与屏蔽",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 67,
+        "pages": [
+          7
+        ],
+        "answerPage": 6,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q068",
+    "type": "single_choice",
+    "question": "网络设计中，确定建设目的并明确所需功能和性能属于哪个阶段？",
+    "options": {
+      "A": "网络需求分析",
+      "B": "网络体系结构设计",
+      "C": "网络设备选型",
+      "D": "网络安全性设计"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "需求分析首先明确建设目标、业务功能和性能指标，为后续架构和设备选型提供依据。",
+    "chapter": "综合布线与网络规划",
+    "knowledgeSection": "网络规划与性能",
+    "knowledgePoint": "网络拓扑",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "网络拓扑",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 68,
+        "pages": [
+          7
+        ],
+        "answerPage": 6,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q069",
+    "type": "single_choice",
+    "question": "在层次化园区网设计中，哪一项属于汇聚层的功能？",
+    "options": {
+      "A": "高速数据传输",
+      "B": "VLAN路由",
+      "C": "广播域定义",
+      "D": "用户MAC地址过滤"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "汇聚层负责汇聚接入流量并提供三层转发、策略连接和VLAN间路由；高速转发主要由核心层承担。",
+    "chapter": "综合布线与网络规划",
+    "knowledgeSection": "网络规划与性能",
+    "knowledgePoint": "网络拓扑",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "网络拓扑",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 69,
+        "pages": [
+          7
+        ],
+        "answerPage": 6,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q070",
+    "type": "single_choice",
+    "question": "根据图示项目计划及人员需求，至少需要投入多少名技术人员才能完成项目？",
+    "options": {
+      "A": "2",
+      "B": "4",
+      "C": "6",
+      "D": "8"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "总工作量为主机安装4人日、局域网安装20人日、广域网安装6人日，共30人日；按图示5天工期至少需要6人，并可错峰安排并行任务。",
+    "chapter": "项目管理与法律法规",
+    "knowledgeSection": "项目计划与估算",
+    "knowledgePoint": "关键路径CPM与甘特图",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "关键路径CPM与甘特图",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 70,
+        "pages": [
+          8
+        ],
+        "answerPage": 6,
+        "sourceAnswers": [
+          "C"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-sealed-morning/q070.png",
+        "alt": "第70题题图",
+        "caption": "原卷题图"
+      }
+    ],
+    "sharedGroupId": "sealed-morning-project-q70",
+    "sharedKind": "stem",
+    "sharedOrder": 70,
+    "sharedStem": "某系统集成项目的计划图和各项任务人员需求如下。"
+  },
+  {
+    "id": "sealed-morning-2026h1-q071",
+    "type": "single_choice",
+    "question": "The network layer provides services to the transport layer. It can be based on either (71).",
+    "options": {
+      "A": "virtual circuits or datagrams",
+      "B": "TCP or UDP",
+      "C": "TCP or IP",
+      "D": "IP or ARP"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "网络层可向传输层提供虚电路或数据报两种服务模型，故选A。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "网络模型与分层",
+    "knowledgePoint": "协议、服务、PDU与设备所在层",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "协议、服务、PDU与设备所在层",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 71,
+        "pages": [
+          8
+        ],
+        "answerPage": 6,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。",
+    "sharedGroupId": "sealed-morning-en-q71-q75",
+    "sharedKind": "stem",
+    "sharedOrder": 71,
+    "sharedStem": "The network layer provides services to the transport layer. It can be based on either (71). In both cases, its main job is (72) packets from the source to the destination. In the network layer, subnets can easily become congested, increasing the delay and (73) for packets. Network designers attempt to avoid congestion by proper design. Techniques include (74) policy, caching, flow control, and more. The next step beyond just dealing with congestion is to achieve a promised quality of service. Methods include client buffering, traffic shaping, resource (75), and admission control. Quality-of-service approaches include integrated services (including RSVP), differentiated services, and MPLS."
+  },
+  {
+    "id": "sealed-morning-2026h1-q072",
+    "type": "single_choice",
+    "question": "In the network layer, the main job is (72) packets from the source to the destination.",
+    "options": {
+      "A": "dealing with",
+      "B": "routing",
+      "C": "sending",
+      "D": "receiving"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "网络层的核心职责是将分组从源端路由到目的端。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "网络模型与分层",
+    "knowledgePoint": "协议、服务、PDU与设备所在层",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "协议、服务、PDU与设备所在层",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 72,
+        "pages": [
+          8
+        ],
+        "answerPage": 6,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。",
+    "sharedGroupId": "sealed-morning-en-q71-q75",
+    "sharedKind": "stem",
+    "sharedOrder": 72
+  },
+  {
+    "id": "sealed-morning-2026h1-q073",
+    "type": "single_choice",
+    "question": "Subnet congestion increases delay and (73) for packets.",
+    "options": {
+      "A": "lowering the throughput",
+      "B": "lowering the correctness",
+      "C": "lowering the effectiveness",
+      "D": "lowering the preciseness"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "拥塞会增加分组时延并降低吞吐量，符合网络性能的基本影响。",
+    "chapter": "综合布线与网络规划",
+    "knowledgeSection": "网络规划与性能",
+    "knowledgePoint": "带宽、时延、丢包率与吞吐量",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "带宽、时延、丢包率与吞吐量",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 73,
+        "pages": [
+          8
+        ],
+        "answerPage": 6,
+        "sourceAnswers": [
+          "A"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。",
+    "sharedGroupId": "sealed-morning-en-q71-q75",
+    "sharedKind": "stem",
+    "sharedOrder": 73
+  },
+  {
+    "id": "sealed-morning-2026h1-q074",
+    "type": "single_choice",
+    "question": "A network congestion-avoidance technique is a (74) policy.",
+    "options": {
+      "A": "abandonment",
+      "B": "retransmission",
+      "C": "checksum",
+      "D": "synchronism"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "重传策略、缓存和流量控制均是网络设计中用于减轻拥塞影响的技术。",
+    "chapter": "综合布线与网络规划",
+    "knowledgeSection": "网络规划与性能",
+    "knowledgePoint": "带宽、时延、丢包率与吞吐量",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "带宽、时延、丢包率与吞吐量",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 74,
+        "pages": [
+          8
+        ],
+        "answerPage": 6,
+        "sourceAnswers": [
+          "B"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。",
+    "sharedGroupId": "sealed-morning-en-q71-q75",
+    "sharedKind": "stem",
+    "sharedOrder": 74
+  },
+  {
+    "id": "sealed-morning-2026h1-q075",
+    "type": "single_choice",
+    "question": "A QoS method reserves resources by using resource (75) and admission control.",
+    "options": {
+      "A": "distribution",
+      "B": "guarantee",
+      "C": "scheme",
+      "D": "reservation"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "资源预留与准入控制可在会话开始前为流量安排所需网络资源。",
+    "chapter": "综合布线与网络规划",
+    "knowledgeSection": "网络规划与性能",
+    "knowledgePoint": "带宽、时延、丢包率与吞吐量",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "2026上半年押题密卷上午卷",
+      "带宽、时延、丢包率与吞吐量",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "押题密卷上午题.pdf",
+        "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+        "questionNumber": 75,
+        "pages": [
+          8
+        ],
+        "answerPage": 6,
+        "sourceAnswers": [
+          "D"
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。",
+    "sharedGroupId": "sealed-morning-en-q71-q75",
+    "sharedKind": "stem",
+    "sharedOrder": 75
+  }
+]

@@ -1,0 +1,445 @@
+{
+  "schemaVersion": 1,
+  "certificate": {
+    "id": "sichuan-upgrading-computer",
+    "name": "四川省专升本 · 计算机基础",
+    "shortName": "四川专升本 · 计算机",
+    "description": "四川普通高校专升本计算机基础：计算机基础、软硬件、Office、网络安全、算法、数据库与新技术",
+    "moduleType": "academic_exam",
+    "province": "四川省",
+    "subject": "计算机基础",
+    "order": 6
+  },
+  "guidePath": "guide.json",
+  "syllabus": {
+    "version": "2024 年启用要求（2026 年沿用）",
+    "examCodeLabel": "考试科目",
+    "examCode": "计算机基础",
+    "examCodeNote": "四川普通高校专升本公共基础科目；后续考期按当年官方公告复核",
+    "verifiedAt": "2026-10-08",
+    "scopeStatus": "officially_verified",
+    "scopeNote": "范围依据四川省教育厅《计算机基础》考试要求，2026 年实施规定确认沿用。参考权重为官方公布的大约分值比例，本站将其用于客观题抽题；本站模拟不等同于完整笔试及官方评分。",
+    "weightType": "platform_practice_blueprint",
+    "sourceUrls": [
+      {
+        "name": "四川省教育考试院：2026 年专升本考试招生工作实施规定",
+        "url": "https://www.sceea.cn/Html/202512/Newsdetail_4597.html",
+        "verified": true
+      },
+      {
+        "name": "四川省教育厅《计算机基础》考试要求（高校官方转发）",
+        "url": "https://zs.gingkoc.edu.cn/ueditor/php/upload/file/20240329/1711693941663940.pdf",
+        "verified": true
+      }
+    ],
+    "modules": [
+      {
+        "id": "computer-foundations",
+        "name": "计算机基础知识",
+        "order": 1,
+        "weight": 15,
+        "targetQuestionCount": 45,
+        "knowledgePoints": [
+          "计算机概述",
+          "数制转换",
+          "数据表示与信息单位"
+        ]
+      },
+      {
+        "id": "hardware-software",
+        "name": "计算机软硬件基础",
+        "order": 2,
+        "weight": 20,
+        "targetQuestionCount": 60,
+        "knowledgePoints": [
+          "计算机系统与硬件",
+          "软件与操作系统",
+          "Windows 操作",
+          "数字媒体基础"
+        ]
+      },
+      {
+        "id": "office-automation",
+        "name": "办公自动化",
+        "order": 3,
+        "weight": 35,
+        "targetQuestionCount": 105,
+        "knowledgePoints": [
+          "Word 文档处理",
+          "Excel 电子表格",
+          "PowerPoint 演示文稿"
+        ]
+      },
+      {
+        "id": "network-security",
+        "name": "网络与信息安全",
+        "order": 4,
+        "weight": 10,
+        "targetQuestionCount": 30,
+        "knowledgePoints": [
+          "计算机网络基础",
+          "信息安全与社会责任"
+        ]
+      },
+      {
+        "id": "algorithms-programming",
+        "name": "算法与程序设计",
+        "order": 5,
+        "weight": 10,
+        "targetQuestionCount": 30,
+        "knowledgePoints": [
+          "算法与计算思维",
+          "程序结构与流程图"
+        ]
+      },
+      {
+        "id": "database-technology",
+        "name": "数据库技术",
+        "order": 6,
+        "weight": 5,
+        "targetQuestionCount": 15,
+        "knowledgePoints": [
+          "数据库与数据模型",
+          "关系运算与 E-R 图"
+        ]
+      },
+      {
+        "id": "emerging-technology",
+        "name": "计算机新技术",
+        "order": 7,
+        "weight": 5,
+        "targetQuestionCount": 15,
+        "knowledgePoints": [
+          "云计算",
+          "大数据",
+          "物联网",
+          "人工智能"
+        ]
+      }
+    ]
+  },
+  "banks": [
+    {
+      "id": "syllabus-practice",
+      "name": "四川专升本计算机基础原创练习",
+      "description": "依据已核对考试范围编写的客观题入门练习，包含单选、多选和判断题，供章节复习与计时自测使用",
+      "source": "sichuan_upgrading_practice",
+      "category": "syllabus_practice",
+      "verification": "original_from_official_scope",
+      "sourceUrl": "https://zs.gingkoc.edu.cn/ueditor/php/upload/file/20240329/1711693941663940.pdf",
+      "path": "questions/original.json",
+      "defaults": {
+        "sourceVerification": "本站原创练习：依据四川专升本计算机基础考试要求编写，非官方历年真题；客观题自测不替代填空、简答、设计和综合应用训练"
+      }
+    },
+    {
+      "id": "shared-practice",
+      "name": "现有题库共用练习",
+      "description": "按四川考点筛选的 MS Office、计算机基础、网络与云计算原创题；引用原题编号，保留原答案和解析",
+      "source": "reused_practice",
+      "category": "syllabus_practice",
+      "verification": "reviewed_scope_reuse",
+      "format": "references",
+      "path": "questions/shared.json"
+    },
+    {
+      "id": "user-provided-2011-xichang",
+      "name": "西昌学院 2011 年专升本真题（用户提供）",
+      "description": "用户提供的 2011 年西昌学院专升本《大学计算机基础》A 卷；原卷 90 题，其中 29 题在 PDF 中缺失（单选 29-50、判断 1-7），已按可读的 61 题入库",
+      "source": "user_provided_2011_xichang",
+      "category": "verified_past_exam",
+      "verification": "user_provided_parent_pdf",
+      "path": "questions/user-provided-2011-xichang.json",
+      "defaults": {
+        "sourceVerification": "用户提供的西昌学院 2011 年专升本真题；来源为原卷 PDF，题干与答案按原卷转录，原卷缺失题目未补造"
+      }
+    }
+  ],
+  "taxonomy": {
+    "schemaVersion": 1,
+    "modules": [
+      {
+        "name": "计算机基础知识",
+        "order": 1,
+        "sections": [
+          {
+            "name": "计算机概述",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "计算机发展与应用",
+                "order": 1,
+                "code": "sc-1-1-1",
+                "scope": "计算机基础知识中的计算机概述：计算机发展与应用。"
+              }
+            ]
+          },
+          {
+            "name": "数制与数据表示",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "进制转换",
+                "order": 1,
+                "code": "sc-1-2-1",
+                "scope": "计算机基础知识中的数制与数据表示：进制转换。"
+              },
+              {
+                "name": "信息编码与计量",
+                "order": 2,
+                "code": "sc-1-2-2",
+                "scope": "计算机基础知识中的数制与数据表示：信息编码与计量。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "计算机软硬件基础",
+        "order": 2,
+        "sections": [
+          {
+            "name": "硬件系统",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "体系结构与硬件",
+                "order": 1,
+                "code": "sc-2-1-1",
+                "scope": "计算机软硬件基础中的硬件系统：体系结构与硬件。"
+              }
+            ]
+          },
+          {
+            "name": "软件与系统操作",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "操作系统与软件分类",
+                "order": 1,
+                "code": "sc-2-2-1",
+                "scope": "计算机软硬件基础中的软件与系统操作：操作系统与软件分类。"
+              },
+              {
+                "name": "Windows 文件与任务",
+                "order": 2,
+                "code": "sc-2-2-2",
+                "scope": "计算机软硬件基础中的软件与系统操作：Windows 文件与任务。"
+              }
+            ]
+          },
+          {
+            "name": "数字媒体",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "音频与图像基础",
+                "order": 1,
+                "code": "sc-2-3-1",
+                "scope": "计算机软硬件基础中的数字媒体：音频与图像基础。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "办公自动化",
+        "order": 3,
+        "sections": [
+          {
+            "name": "Word",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "文档编辑与排版",
+                "order": 1,
+                "code": "sc-3-1-1",
+                "scope": "办公自动化中的Word：文档编辑与排版。"
+              },
+              {
+                "name": "表格图文与邮件合并",
+                "order": 2,
+                "code": "sc-3-1-2",
+                "scope": "办公自动化中的Word：表格图文与邮件合并。"
+              }
+            ]
+          },
+          {
+            "name": "Excel",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "单元格与地址引用",
+                "order": 1,
+                "code": "sc-3-2-1",
+                "scope": "办公自动化中的Excel：单元格与地址引用。"
+              },
+              {
+                "name": "函数与数据处理",
+                "order": 2,
+                "code": "sc-3-2-2",
+                "scope": "办公自动化中的Excel：函数与数据处理。"
+              }
+            ]
+          },
+          {
+            "name": "PowerPoint",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "幻灯片制作与放映",
+                "order": 1,
+                "code": "sc-3-3-1",
+                "scope": "办公自动化中的PowerPoint：幻灯片制作与放映。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "网络与信息安全",
+        "order": 4,
+        "sections": [
+          {
+            "name": "网络基础",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "网络设备与 Internet",
+                "order": 1,
+                "code": "sc-4-1-1",
+                "scope": "网络与信息安全中的网络基础：网络设备与 Internet。"
+              }
+            ]
+          },
+          {
+            "name": "信息安全",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "安全防护与信息素养",
+                "order": 1,
+                "code": "sc-4-2-1",
+                "scope": "网络与信息安全中的信息安全：安全防护与信息素养。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "算法与程序设计",
+        "order": 5,
+        "sections": [
+          {
+            "name": "算法基础",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "算法特征与计算思维",
+                "order": 1,
+                "code": "sc-5-1-1",
+                "scope": "算法与程序设计中的算法基础：算法特征与计算思维。"
+              }
+            ]
+          },
+          {
+            "name": "程序结构",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "程序执行与流程图",
+                "order": 1,
+                "code": "sc-5-2-1",
+                "scope": "算法与程序设计中的程序结构：程序执行与流程图。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "数据库技术",
+        "order": 6,
+        "sections": [
+          {
+            "name": "数据库基础",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "数据模型与数据库系统",
+                "order": 1,
+                "code": "sc-6-1-1",
+                "scope": "数据库技术中的数据库基础：数据模型与数据库系统。"
+              }
+            ]
+          },
+          {
+            "name": "关系应用",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "关系运算与实体联系",
+                "order": 1,
+                "code": "sc-6-2-1",
+                "scope": "数据库技术中的关系应用：关系运算与实体联系。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "计算机新技术",
+        "order": 7,
+        "sections": [
+          {
+            "name": "云计算",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "云服务与部署模式",
+                "order": 1,
+                "code": "sc-7-1-1",
+                "scope": "计算机新技术中的云计算：云服务与部署模式。"
+              }
+            ]
+          },
+          {
+            "name": "大数据",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "大数据特点与应用",
+                "order": 1,
+                "code": "sc-7-2-1",
+                "scope": "计算机新技术中的大数据：大数据特点与应用。"
+              }
+            ]
+          },
+          {
+            "name": "物联网",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "物联网三层结构",
+                "order": 1,
+                "code": "sc-7-3-1",
+                "scope": "计算机新技术中的物联网：物联网三层结构。"
+              }
+            ]
+          },
+          {
+            "name": "人工智能",
+            "order": 4,
+            "knowledgePoints": [
+              {
+                "name": "人工智能应用与责任",
+                "order": 1,
+                "code": "sc-7-4-1",
+                "scope": "计算机新技术中的人工智能：人工智能应用与责任。"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

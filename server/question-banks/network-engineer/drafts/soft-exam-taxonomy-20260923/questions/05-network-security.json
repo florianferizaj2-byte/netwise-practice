@@ -1,0 +1,1262 @@
+[
+  {
+    "id": "ne-draft-20260923-221",
+    "type": "single_choice",
+    "question": "在 AES-GCM 这类 AEAD 模式中，同一密钥下重复使用 nonce/IV 可能造成什么严重后果？",
+    "options": {
+      "A": "使 IP 地址转换失效",
+      "B": "破坏机密性并可能泄露用于伪造认证标签的信息",
+      "C": "只会让密文变长",
+      "D": "自动提高密钥强度"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "GCM 要求在同一密钥下避免 nonce 重复；重复使用会严重破坏加密与认证安全，可能泄露明文关系并使认证标签可被利用。",
+    "chapter": "网络安全",
+    "knowledgePoint": "密码技术与摘要算法",
+    "difficulty": "medium",
+    "tags": [
+      "密码技术与摘要算法"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-222",
+    "type": "single_choice",
+    "question": "针对用户口令的离线猜测，选择 Argon2、bcrypt、scrypt 等慢速口令哈希方案相较于快速通用哈希的主要优势是什么？",
+    "options": {
+      "A": "自动替代多因素认证",
+      "B": "提高每次猜测的计算成本，减慢暴力破解",
+      "C": "让口令可逆恢复",
+      "D": "使数据库无需访问控制"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "专用口令哈希/KDF 可配置计算、内存或并行成本，增加攻击者离线尝试每个候选口令的成本；实际还应配合独立随机盐和安全参数。",
+    "chapter": "网络安全",
+    "knowledgePoint": "密码技术与摘要算法",
+    "difficulty": "easy",
+    "tags": [
+      "密码技术与摘要算法"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-223",
+    "type": "single_choice",
+    "question": "登录系统为每个用户密码生成随机盐值后再计算密码哈希，主要防范什么？",
+    "options": {
+      "A": "网络中的物理窃听",
+      "B": "预计算彩虹表和相同密码对应相同哈希的风险",
+      "C": "路由环路",
+      "D": "磁盘坏道"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "每个密码使用独立随机盐可使相同密码产生不同存储摘要，并提高预计算攻击成本；仍应使用专门的慢哈希方案保存口令。",
+    "chapter": "网络安全",
+    "knowledgePoint": "密码技术与摘要算法",
+    "difficulty": "medium",
+    "tags": [
+      "密码技术与摘要算法"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-224",
+    "type": "single_choice",
+    "question": "HMAC 与普通无密钥哈希相比，增加了哪项关键条件？",
+    "options": {
+      "A": "IP 地址",
+      "B": "路由度量值",
+      "C": "共享密钥",
+      "D": "数字证书吊销列表"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "HMAC 使用双方共享的秘密密钥和哈希函数生成消息认证码，可同时验证消息完整性及持有密钥的实体；它不提供公开可验证的数字签名。",
+    "chapter": "网络安全",
+    "knowledgePoint": "密码技术与摘要算法",
+    "difficulty": "medium",
+    "tags": [
+      "密码技术与摘要算法"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-225",
+    "type": "single_choice",
+    "question": "攻击者提供了一把能通过数学验证的公钥，但接收者无法确认这把公钥属于声称的发送者。还缺少哪项验证？",
+    "options": {
+      "A": "为公钥配置 DHCP 租约",
+      "B": "重新计算以太网 FCS",
+      "C": "通过可信证书链或其他可信渠道验证公钥与身份的绑定",
+      "D": "把公钥转换成 Base64"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "签名验证只能说明签名与所用公钥相符；若公钥身份绑定未经验证，仍无法可靠归属到声称的发送者。PKI 可通过证书链等机制建立该绑定。",
+    "chapter": "网络安全",
+    "knowledgePoint": "密码技术与摘要算法",
+    "difficulty": "medium",
+    "tags": [
+      "密码技术与摘要算法"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-226",
+    "type": "single_choice",
+    "question": "用接收方公钥加密的会话密钥通常由谁解密？",
+    "options": {
+      "A": "接收方对应的私钥持有者",
+      "B": "DNS 服务器",
+      "C": "发送方的公钥",
+      "D": "任意 CA 的公钥"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "公钥加密后，只有对应私钥才能解密；混合加密中通常用此方式保护会话密钥，再由高速对称算法加密大量数据。",
+    "chapter": "网络安全",
+    "knowledgePoint": "密码技术与摘要算法",
+    "difficulty": "easy",
+    "tags": [
+      "密码技术与摘要算法"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-227",
+    "type": "single_choice",
+    "question": "数字签名通常对消息摘要进行签名，而不是直接对任意长度的大文件做公钥运算，主要原因是什么？",
+    "options": {
+      "A": "公钥只能处理图片",
+      "B": "文件摘要可以自动解密",
+      "C": "这样不需要私钥",
+      "D": "摘要长度固定，签名运算效率更高且可绑定内容完整性"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "先对消息计算固定长度摘要再签名，效率更高；验证时重新计算摘要并比较，能发现被签名内容的变化。",
+    "chapter": "网络安全",
+    "knowledgePoint": "密码技术与摘要算法",
+    "difficulty": "medium",
+    "tags": [
+      "密码技术与摘要算法"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-228",
+    "type": "single_choice",
+    "question": "分组密码在 CBC 等需要初始化向量的模式中，IV 的主要要求通常是什么？",
+    "options": {
+      "A": "按模式要求唯一或不可预测，并随密文传输而无需保密",
+      "B": "必须永久固定为全零",
+      "C": "必须等于用户密码",
+      "D": "必须由 DNS 服务器分配"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IV 用于避免相同明文在同一密钥下产生可预测的相同首块；具体模式要求不同，IV 通常无需保密，但不能随意重复或固定。",
+    "chapter": "网络安全",
+    "knowledgePoint": "密码技术与摘要算法",
+    "difficulty": "hard",
+    "tags": [
+      "密码技术与摘要算法"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-229",
+    "type": "single_choice",
+    "question": "系统把用户口令用 Base64 编码后保存，能否防止攻击者读取口令？",
+    "options": {
+      "A": "不能，Base64 可直接解码，不是加密",
+      "B": "能，只要编码后长度更长",
+      "C": "不能，因为所有编码都会损坏数据",
+      "D": "能，Base64 使用公钥加密"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Base64 是可逆编码格式，不提供保密性；口令应使用适当的加盐慢哈希存储，而非可逆编码。",
+    "chapter": "网络安全",
+    "knowledgePoint": "密码技术与摘要算法",
+    "difficulty": "easy",
+    "tags": [
+      "密码技术与摘要算法"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-230",
+    "type": "single_choice",
+    "question": "为避免签名算法中的随机数重复或可预测而导致私钥泄露，实施时最关键的是？",
+    "options": {
+      "A": "把私钥写入公开 DNS 记录",
+      "B": "改用奇偶校验",
+      "C": "重复使用固定随机数以便审计",
+      "D": "使用可靠的密码学安全随机数生成器并按算法要求生成随机量"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "部分签名算法对 nonce/随机数质量高度敏感；重复或可预测值可能泄露私钥，因此必须使用合规的安全随机数实现。",
+    "chapter": "网络安全",
+    "knowledgePoint": "密码技术与摘要算法",
+    "difficulty": "hard",
+    "tags": [
+      "密码技术与摘要算法"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-231",
+    "type": "single_choice",
+    "question": "X.509 证书中的 Basic Constraints 扩展若标记 CA:TRUE，通常表示什么？",
+    "options": {
+      "A": "该证书保存了 CA 的私钥",
+      "B": "该证书只能用于 DHCP 地址分配",
+      "C": "该证书主体可作为 CA 参与签发下级证书，仍须满足路径和用途约束",
+      "D": "证书不需要任何信任链验证"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Basic Constraints 的 CA 标志用于表明证书主体是否为证书颁发机构；它不会把私钥放进证书，也不能代替证书路径和策略验证。",
+    "chapter": "网络安全",
+    "knowledgePoint": "PKI、数字证书与吊销",
+    "difficulty": "easy",
+    "tags": [
+      "PKI、数字证书与吊销"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-232",
+    "type": "single_choice",
+    "question": "浏览器收到服务器证书后，要建立可信验证链，通常需要检查什么？",
+    "options": {
+      "A": "只比较服务器 MAC 地址",
+      "B": "证书签名链、有效期、用途、名称匹配及吊销状态等",
+      "C": "只检查服务器是否能 ping 通",
+      "D": "只检查证书文件是否存在"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "证书验证不只看文件存在，还需验证签名链到受信任根、有效期、主机名、用途和撤销状态等关键条件。",
+    "chapter": "网络安全",
+    "knowledgePoint": "PKI、数字证书与吊销",
+    "difficulty": "medium",
+    "tags": [
+      "PKI、数字证书与吊销"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-233",
+    "type": "single_choice",
+    "question": "用户访问 portal.example.com，但服务器证书的 SAN 中只包含 mail.example.com，证书链有效且未过期。浏览器应如何处理？",
+    "options": {
+      "A": "把证书中的域名写入本地 DNS",
+      "B": "判定主机名不匹配，不能仅因证书链有效就视为可信",
+      "C": "忽略 SAN 并只检查根证书",
+      "D": "自动把访问地址改成 mail.example.com"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "证书还必须与正在访问的主机名匹配；证书链有效和未过期并不能弥补名称不匹配。",
+    "chapter": "网络安全",
+    "knowledgePoint": "PKI、数字证书与吊销",
+    "difficulty": "medium",
+    "tags": [
+      "PKI、数字证书与吊销"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-234",
+    "type": "single_choice",
+    "question": "CA 的证书吊销列表 CRL 主要用于发布什么信息？",
+    "options": {
+      "A": "动态路由协议的邻居状态",
+      "B": "所有用户的私钥",
+      "C": "已被签发但在到期前被撤销的证书序列号等信息",
+      "D": "域名到 IPv4 的全部映射"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "CRL 是 CA 签名的撤销证书列表，客户端可据此检查证书是否在有效期结束前已被吊销。",
+    "chapter": "网络安全",
+    "knowledgePoint": "PKI、数字证书与吊销",
+    "difficulty": "medium",
+    "tags": [
+      "PKI、数字证书与吊销"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-235",
+    "type": "single_choice",
+    "question": "OCSP 与下载完整 CRL 相比，主要提供哪类证书状态查询方式？",
+    "options": {
+      "A": "离线生成用户私钥",
+      "B": "为证书绑定 VLAN",
+      "C": "自动续订所有证书",
+      "D": "在线按证书查询当前状态"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "OCSP 可针对证书查询有效、已撤销或未知等状态，减少下载和解析整份 CRL 的需要；仍须验证响应签名和新鲜度。",
+    "chapter": "网络安全",
+    "knowledgePoint": "PKI、数字证书与吊销",
+    "difficulty": "medium",
+    "tags": [
+      "PKI、数字证书与吊销"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-236",
+    "type": "single_choice",
+    "question": "服务器生成证书签名请求 CSR 时，私钥应如何处理？",
+    "options": {
+      "A": "留在服务器或安全密钥设备中，不随 CSR 发给 CA",
+      "B": "写入证书主题名称",
+      "C": "上传到所有客户端浏览器",
+      "D": "与 CSR 一并公开发送给 CA"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "CSR 通常包含公钥和主体信息并由对应私钥签名；私钥必须保密，不能发送给 CA 或包含在公开证书中。",
+    "chapter": "网络安全",
+    "knowledgePoint": "PKI、数字证书与吊销",
+    "difficulty": "medium",
+    "tags": [
+      "PKI、数字证书与吊销"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-237",
+    "type": "single_choice",
+    "question": "证书信任链验证最终到达的根证书通常具有哪项特点？",
+    "options": {
+      "A": "已由客户端或操作系统的信任库预先信任",
+      "B": "只适用于一个 TCP 端口",
+      "C": "包含服务器的登录密码",
+      "D": "必须由被访问的网站临时生成且从未验证"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "信任链通常逐级验证到客户端信任库中的根 CA；若根证书不受信任，链条不能建立可信身份。",
+    "chapter": "网络安全",
+    "knowledgePoint": "PKI、数字证书与吊销",
+    "difficulty": "easy",
+    "tags": [
+      "PKI、数字证书与吊销"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-238",
+    "type": "single_choice",
+    "question": "企业证书私钥疑似泄露，管理员最先应采取哪项措施？",
+    "options": {
+      "A": "将私钥公开以便用户核验",
+      "B": "立即按流程吊销或停用证书，并更换密钥与证书",
+      "C": "清空所有客户端 DNS 缓存",
+      "D": "只延长证书有效期"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "私钥泄露会破坏证书身份绑定的安全性，应尽快撤销受影响证书、生成新密钥并重新签发，同时调查和修复泄露原因。",
+    "chapter": "网络安全",
+    "knowledgePoint": "PKI、数字证书与吊销",
+    "difficulty": "medium",
+    "tags": [
+      "PKI、数字证书与吊销"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-239",
+    "type": "single_choice",
+    "question": "TLS 服务器证书声明 Key Usage 或 Extended Key Usage 时，服务器认证用途通常应允许什么？",
+    "options": {
+      "A": "TLS Web Server Authentication",
+      "B": "代码执行管理员权限",
+      "C": "磁盘扇区写入",
+      "D": "路由器转发"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "证书用途扩展限制公钥的预期使用；TLS 服务器证书应满足相应的服务器认证用途，客户端需检查用途是否适合当前场景。",
+    "chapter": "网络安全",
+    "knowledgePoint": "PKI、数字证书与吊销",
+    "difficulty": "hard",
+    "tags": [
+      "PKI、数字证书与吊销"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-240",
+    "type": "single_choice",
+    "question": "若客户端不能可靠确认服务器证书链和主机名，最安全的处理是什么？",
+    "options": {
+      "A": "自动接受任意自签名证书",
+      "B": "改用明文 HTTP 发送登录信息",
+      "C": "忽略错误后继续输入密码",
+      "D": "终止或阻止连接，并提示证书验证失败"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "证书验证失败意味着服务器身份未被可靠确认；忽略错误可能导致中间人攻击，应停止敏感通信并查明证书配置问题。",
+    "chapter": "网络安全",
+    "knowledgePoint": "PKI、数字证书与吊销",
+    "difficulty": "medium",
+    "tags": [
+      "PKI、数字证书与吊销"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-241",
+    "type": "single_choice",
+    "question": "标准 ACL 与扩展 ACL 在常见配置中的典型匹配差异是什么？",
+    "options": {
+      "A": "标准 ACL 通常按源地址匹配，扩展 ACL 还可匹配协议、目的地址和端口",
+      "B": "两者都不能匹配 IP 流量",
+      "C": "扩展 ACL 只用于 DNS 解析",
+      "D": "标准 ACL 只能匹配 TCP 端口，扩展 ACL 只能匹配 MAC 地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "标准 ACL 的典型匹配范围较窄，以源 IP 地址为主；扩展 ACL 可进一步匹配协议、源/目的地址和传输层端口。实际命令语法依厂商而异。",
+    "chapter": "网络安全",
+    "knowledgePoint": "访问控制与地址转换",
+    "difficulty": "medium",
+    "tags": [
+      "访问控制与地址转换"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-242",
+    "type": "single_choice",
+    "question": "只允许办公网访问内部 Web 服务器的 TCP 443 端口，哪种 ACL 匹配粒度更合适？",
+    "options": {
+      "A": "只匹配目的 MAC 的标准 ACL",
+      "B": "能匹配协议、源网段、目的主机和目的端口的扩展 ACL",
+      "C": "只匹配源 VLAN 名称的 DNS ACL",
+      "D": "任何地址均允许的默认路由"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "按协议和端口精确限制服务需要扩展 ACL 或等效策略；仅匹配源地址或 MAC 无法完整表达该访问需求。",
+    "chapter": "网络安全",
+    "knowledgePoint": "访问控制与地址转换",
+    "difficulty": "medium",
+    "tags": [
+      "访问控制与地址转换"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-243",
+    "type": "single_choice",
+    "question": "边界设备把多个内网主机的私有地址转换为一个公网地址，并用不同端口区分会话，这种方式是？",
+    "options": {
+      "A": "端口镜像",
+      "B": "DNS 递归",
+      "C": "静态路由",
+      "D": "PAT/NAPT"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "PAT（也称 NAPT）除转换 IP 地址外，还通过传输层端口区分多个并发映射，使多台内网主机共享公网地址。",
+    "chapter": "网络安全",
+    "knowledgePoint": "访问控制与地址转换",
+    "difficulty": "easy",
+    "tags": [
+      "访问控制与地址转换"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-244",
+    "type": "single_choice",
+    "question": "企业将公网地址 203.0.113.10 固定映射到内网 Web 服务器 10.0.0.10，最适合采用哪种 NAT 映射？",
+    "options": {
+      "A": "动态地址池轮询",
+      "B": "静态一对一 NAT",
+      "C": "无状态 DHCP",
+      "D": "仅 DNS CNAME"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "固定公网服务地址与固定内网主机的长期映射适合静态一对一 NAT；还需配合防火墙策略控制可访问端口。",
+    "chapter": "网络安全",
+    "knowledgePoint": "访问控制与地址转换",
+    "difficulty": "easy",
+    "tags": [
+      "访问控制与地址转换"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-245",
+    "type": "single_choice",
+    "question": "在使用反掩码（wildcard mask）的 ACL 中，0.0.0.255 通常表示什么匹配方式？",
+    "options": {
+      "A": "前三个八位组必须精确匹配，最后一个八位组可变化",
+      "B": "只匹配 TCP 255 端口",
+      "C": "仅匹配 IPv6 地址",
+      "D": "所有 32 位都必须变化"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "反掩码中 0 表示对应位必须匹配，1 表示可忽略；0.0.0.255 因而可匹配一个 /24 地址块中的主机地址。",
+    "chapter": "网络安全",
+    "knowledgePoint": "访问控制与地址转换",
+    "difficulty": "medium",
+    "tags": [
+      "访问控制与地址转换"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-246",
+    "type": "single_choice",
+    "question": "NAT 把内部私有地址转换为公网地址，是否等同于防火墙安全控制？",
+    "options": {
+      "A": "不等同，因为 NAT 不能转换端口",
+      "B": "等同，NAT 会自动阻止所有攻击",
+      "C": "不等同，仍应配置状态检测和访问策略",
+      "D": "等同，NAT 会加密应用数据"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "NAT 的首要功能是地址或端口转换，不自动提供完整访问控制、身份认证或加密；应单独实施防火墙和主机安全策略。",
+    "chapter": "网络安全",
+    "knowledgePoint": "访问控制与地址转换",
+    "difficulty": "medium",
+    "tags": [
+      "访问控制与地址转换"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-247",
+    "type": "single_choice",
+    "question": "有状态防火墙允许内网发起 HTTPS 会话后返回的响应流量，主要依据什么判断？",
+    "options": {
+      "A": "响应报文的源 MAC 一定可信",
+      "B": "已建立会话的状态表",
+      "C": "HTTP 页面中的域名",
+      "D": "ARP 缓存更新时间"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "有状态防火墙跟踪连接状态，依据会话表允许与已建立连接相匹配的返回流量；仍需合理配置出站和入站策略。",
+    "chapter": "网络安全",
+    "knowledgePoint": "访问控制与地址转换",
+    "difficulty": "medium",
+    "tags": [
+      "访问控制与地址转换"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-248",
+    "type": "single_choice",
+    "question": "将内部服务放入 NAT 后端口映射到公网，并希望只开放给特定来源地址，需同时配置什么？",
+    "options": {
+      "A": "NAT 映射和相应防火墙/ACL 入站许可范围",
+      "B": "仅配置用户终端的 hosts 文件",
+      "C": "关闭所有路由协议",
+      "D": "只配置 DNS MX"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "端口映射负责建立地址转换，防火墙或 ACL 决定哪些来源可访问；只做 NAT 不足以满足来源限制。",
+    "chapter": "网络安全",
+    "knowledgePoint": "访问控制与地址转换",
+    "difficulty": "medium",
+    "tags": [
+      "访问控制与地址转换"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-249",
+    "type": "single_choice",
+    "question": "NAT 与端到端 IPsec 可能产生兼容问题，主要因为地址转换可能改变什么？",
+    "options": {
+      "A": "磁盘文件名",
+      "B": "显示器像素",
+      "C": "应用程序源代码",
+      "D": "被认证或校验的 IP 首部/地址信息"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "传统 NAT 会改写 IP 地址和端口，可能与某些 IPsec 认证范围、封装和端口处理冲突；可使用 NAT-T 等机制处理特定场景。",
+    "chapter": "网络安全",
+    "knowledgePoint": "访问控制与地址转换",
+    "difficulty": "hard",
+    "tags": [
+      "访问控制与地址转换"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-250",
+    "type": "single_choice",
+    "question": "ACL 日志显示允许了报文，但连接仍失败。还需要重点检查什么？",
+    "options": {
+      "A": "把源地址改为广播地址",
+      "B": "立即关闭所有校验机制",
+      "C": "返回方向路由、服务器监听端口及状态策略",
+      "D": "只检查客户端显示器"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "单向 ACL 放行不能保证完整会话成功；还需确认返回路径、服务器服务状态、NAT 映射和有状态策略等。",
+    "chapter": "网络安全",
+    "knowledgePoint": "访问控制与地址转换",
+    "difficulty": "hard",
+    "tags": [
+      "访问控制与地址转换"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-251",
+    "type": "single_choice",
+    "question": "企业把对外 Web 服务器放在互联网与内部办公网之间的隔离区域，该区域通常称为？",
+    "options": {
+      "A": "MIB",
+      "B": "Area 0",
+      "C": "RAID",
+      "D": "DMZ"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "DMZ 用于放置需要对外提供服务的系统，并通过边界策略限制其与互联网及内部网络之间的访问。",
+    "chapter": "网络安全",
+    "knowledgePoint": "防火墙、DMZ、IDS/IPS",
+    "difficulty": "easy",
+    "tags": [
+      "防火墙、DMZ、IDS/IPS"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-252",
+    "type": "single_choice",
+    "question": "基于特征的网络入侵检测主要依赖什么发现已知攻击？",
+    "options": {
+      "A": "将流量特征与规则/签名库进行匹配",
+      "B": "随机关闭交换机端口",
+      "C": "仅检查磁盘剩余空间",
+      "D": "对所有流量进行 NAT 地址转换"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "基于特征的检测把流量或事件与已知攻击模式匹配，对已知威胁较直接；对未知变种的发现能力取决于规则更新和检测设计。",
+    "chapter": "网络安全",
+    "knowledgePoint": "防火墙、DMZ、IDS/IPS",
+    "difficulty": "medium",
+    "tags": [
+      "防火墙、DMZ、IDS/IPS"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-253",
+    "type": "single_choice",
+    "question": "串联 IPS 频繁拦截被判为攻击但实际正常的业务流量，团队首先应如何降低业务影响？",
+    "options": {
+      "A": "无评估地关闭所有网络安全设备",
+      "B": "分析误报样本并调优规则、例外和检测阈值",
+      "C": "把 IPS 改成 DHCP 服务器",
+      "D": "删除所有业务日志"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IPS 位于流量路径时误报可能中断正常业务；应基于样本调优规则和例外，并保留监控与回退措施。",
+    "chapter": "网络安全",
+    "knowledgePoint": "防火墙、DMZ、IDS/IPS",
+    "difficulty": "medium",
+    "tags": [
+      "防火墙、DMZ、IDS/IPS"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-254",
+    "type": "single_choice",
+    "question": "需要重点检测针对 Web 应用的 SQL 注入和跨站脚本请求，哪类安全设备或功能更贴近应用层防护？",
+    "options": {
+      "A": "光纤收发器",
+      "B": "WAF",
+      "C": "DHCP Relay",
+      "D": "L2 交换机"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Web 应用防火墙可按 HTTP/HTTPS 应用层语义识别和拦截常见 Web 攻击；它不能替代安全编码和主机加固。",
+    "chapter": "网络安全",
+    "knowledgePoint": "防火墙、DMZ、IDS/IPS",
+    "difficulty": "medium",
+    "tags": [
+      "防火墙、DMZ、IDS/IPS"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-255",
+    "type": "single_choice",
+    "question": "企业同时部署边界防火墙、主机防护和集中身份认证；即使其中一层控制失效，其他控制仍可降低风险。这体现了什么安全原则？",
+    "options": {
+      "A": "开放访问",
+      "B": "纵深防御",
+      "C": "单点信任",
+      "D": "明文传输"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "纵深防御通过网络、主机、身份和监测等多层控制降低单一措施失效造成的影响；各层控制应互补并持续维护。",
+    "chapter": "网络安全",
+    "knowledgePoint": "防火墙、DMZ、IDS/IPS",
+    "difficulty": "easy",
+    "tags": [
+      "防火墙、DMZ、IDS/IPS"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-256",
+    "type": "single_choice",
+    "question": "在双防火墙 DMZ 架构中，面向互联网的 Web 服务器需要访问内部数据库。较安全的策略是？",
+    "options": {
+      "A": "仅允许 Web 服务器到指定数据库地址和端口的必要连接",
+      "B": "关闭所有访问日志",
+      "C": "允许整个 DMZ 到内部网任意访问",
+      "D": "允许互联网直接访问内部数据库"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "应按最小权限仅放行 Web 服务器到数据库的业务所需连接，并记录和监测访问；不应开放整个 DMZ 到内网。",
+    "chapter": "网络安全",
+    "knowledgePoint": "防火墙、DMZ、IDS/IPS",
+    "difficulty": "hard",
+    "tags": [
+      "防火墙、DMZ、IDS/IPS"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-257",
+    "type": "single_choice",
+    "question": "边界防火墙策略只限制入站连接，内部主机遭恶意软件控制后向外部控制服务器通信。哪类策略最能补充此处防护？",
+    "options": {
+      "A": "开放所有出站端口且不记录日志",
+      "B": "只修改内部 DNS 后缀",
+      "C": "启用以太网自动协商",
+      "D": "按业务需要实施出站访问控制和异常外联监测"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "出站访问控制可限制主机只能访问必要的外部目的地址和服务，配合异常流量监测有助于发现受控主机外联。",
+    "chapter": "网络安全",
+    "knowledgePoint": "防火墙、DMZ、IDS/IPS",
+    "difficulty": "medium",
+    "tags": [
+      "防火墙、DMZ、IDS/IPS"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-258",
+    "type": "single_choice",
+    "question": "防火墙集群发生主备切换时，若希望现有连接尽量不中断，需要同步什么信息？",
+    "options": {
+      "A": "连接状态表和必要的会话/NAT 状态",
+      "B": "仅同步用户桌面壁纸",
+      "C": "只同步 DNS 根区文件",
+      "D": "只同步交换机端口描述"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "状态同步可让备用设备接管既有会话的连接跟踪和地址转换信息，降低切换时连接中断；具体能力依产品和架构。",
+    "chapter": "网络安全",
+    "knowledgePoint": "防火墙、DMZ、IDS/IPS",
+    "difficulty": "hard",
+    "tags": [
+      "防火墙、DMZ、IDS/IPS"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-259",
+    "type": "single_choice",
+    "question": "安全设备将管理接口暴露在互联网且使用默认口令，会首先违反哪类基本防护要求？",
+    "options": {
+      "A": "关闭日志和时间同步",
+      "B": "开启匿名 FTP",
+      "C": "限制管理面暴露并使用强身份认证",
+      "D": "增加 VLAN 广播范围"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "管理面应放在受控管理网络，限制来源并使用强认证、最小权限和日志审计；默认口令和公网暴露显著扩大风险。",
+    "chapter": "网络安全",
+    "knowledgePoint": "防火墙、DMZ、IDS/IPS",
+    "difficulty": "medium",
+    "tags": [
+      "防火墙、DMZ、IDS/IPS"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-260",
+    "type": "single_choice",
+    "question": "状态检测防火墙的连接状态表中没有某个外部发起的 TCP 会话，且策略未允许新建入站连接，通常会怎样处理其 SYN？",
+    "options": {
+      "A": "转发给任意内网主机",
+      "B": "变成 ICMP Echo Reply",
+      "C": "按默认/匹配策略拒绝或丢弃",
+      "D": "自动当作已建立会话放行"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "有状态防火墙会区分新建与已建立会话；未经策略允许的外部新建连接通常被拒绝或丢弃。",
+    "chapter": "网络安全",
+    "knowledgePoint": "防火墙、DMZ、IDS/IPS",
+    "difficulty": "medium",
+    "tags": [
+      "防火墙、DMZ、IDS/IPS"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-261",
+    "type": "single_choice",
+    "question": "攻击者利用此前泄露的一批用户名和口令，在多个网站自动尝试登录。这种攻击通常称为？",
+    "options": {
+      "A": "凭据填充",
+      "B": "路由重分发",
+      "C": "ARP 请求泛洪",
+      "D": "端口扫描"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "凭据填充使用从其他泄露事件获得的有效用户名和口令进行批量登录尝试；多因素认证、登录速率限制和泄露口令检测可降低风险。",
+    "chapter": "网络安全",
+    "knowledgePoint": "网络攻击与防护",
+    "difficulty": "easy",
+    "tags": [
+      "网络攻击与防护"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-262",
+    "type": "single_choice",
+    "question": "攻击者伪造受害者源 IP，向大量开放 DNS 解析器发送小查询并诱使其向受害者返回更大的响应，属于哪种攻击？",
+    "options": {
+      "A": "口令喷洒",
+      "B": "DNS 反射/放大型 DDoS",
+      "C": "ARP 欺骗",
+      "D": "VLAN 双标签攻击"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "反射放大攻击利用伪造源地址让第三方服务把较大的响应发给受害者；限制开放解析、部署源地址反欺骗可降低风险。",
+    "chapter": "网络安全",
+    "knowledgePoint": "网络攻击与防护",
+    "difficulty": "easy",
+    "tags": [
+      "网络攻击与防护"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-263",
+    "type": "single_choice",
+    "question": "攻击者持续伪造不同客户端 MAC 地址发送 DHCP Discover，耗尽地址池，使正常终端无法获得租约，这种攻击通常称为？",
+    "options": {
+      "A": "TCP Reset",
+      "B": "DHCP Starvation",
+      "C": "路由环路",
+      "D": "DNS Cache Poisoning"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "DHCP Starvation 通过大量伪造客户端请求耗尽 DHCP 地址池；端口安全、DHCP Snooping 速率限制及认证接入可帮助缓解。",
+    "chapter": "网络安全",
+    "knowledgePoint": "网络攻击与防护",
+    "difficulty": "medium",
+    "tags": [
+      "网络攻击与防护"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-264",
+    "type": "single_choice",
+    "question": "局域网中出现未经授权的 DHCP 服务器，向终端下发恶意默认网关，最直接的风险是什么？",
+    "options": {
+      "A": "交换机变为透明桥",
+      "B": "所有文件自动加密",
+      "C": "终端的 TCP 首部长度变为零",
+      "D": "终端流量可能被引向攻击者控制的路径"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "恶意 DHCP Offer 可将错误网关、DNS 等配置发给客户端，使流量被劫持或监视；DHCP Snooping 可阻止不可信端口发出服务器响应。",
+    "chapter": "网络安全",
+    "knowledgePoint": "网络攻击与防护",
+    "difficulty": "medium",
+    "tags": [
+      "网络攻击与防护"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-265",
+    "type": "single_choice",
+    "question": "攻击者伪造 DNS 响应，使解析器把合法域名缓存为恶意地址，主要属于什么攻击？",
+    "options": {
+      "A": "磁盘镜像",
+      "B": "端口聚合",
+      "C": "DNS 缓存投毒",
+      "D": "VLAN 修剪"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "DNS 缓存投毒通过伪造或污染解析结果，将用户引向错误地址；随机化事务参数、源端口和 DNSSEC 验证等可提供防护。",
+    "chapter": "网络安全",
+    "knowledgePoint": "网络攻击与防护",
+    "difficulty": "medium",
+    "tags": [
+      "网络攻击与防护"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-266",
+    "type": "single_choice",
+    "question": "TCP SYN Cookies 主要用于缓解哪类资源耗尽攻击？",
+    "options": {
+      "A": "利用 ARP 学习更新网关地址",
+      "B": "重复发送 ICMP Echo Reply",
+      "C": "通过伪造 DNS 响应污染缓存",
+      "D": "利用大量半开连接占满 SYN 队列的 SYN Flood"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "SYN Cookies 在完成握手前尽量不为每个 SYN 保存完整连接状态，通过编码确认序列号等方式降低半连接队列耗尽风险。",
+    "chapter": "网络安全",
+    "knowledgePoint": "网络攻击与防护",
+    "difficulty": "medium",
+    "tags": [
+      "网络攻击与防护"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-267",
+    "type": "single_choice",
+    "question": "内部服务器遭入侵后，攻击者试图横向访问其他业务网段。哪种架构措施最直接限制这种横向移动范围？",
+    "options": {
+      "A": "仅修改设备显示名称",
+      "B": "按业务和信任边界实施网络分段，并限制跨段访问",
+      "C": "关闭所有日志",
+      "D": "把所有服务器并入同一二层网段"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "网络分段配合最小化跨段访问策略可缩小被入侵主机可直接到达的范围，降低横向移动和故障扩散风险。",
+    "chapter": "网络安全",
+    "knowledgePoint": "网络攻击与防护",
+    "difficulty": "easy",
+    "tags": [
+      "网络攻击与防护"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-268",
+    "type": "single_choice",
+    "question": "勒索软件已在一台终端发现并疑似横向传播时，事件响应第一步优先考虑什么？",
+    "options": {
+      "A": "隔离受影响主机并保护证据，按预案升级处置",
+      "B": "立即删除所有日志",
+      "C": "继续让终端连接共享盘",
+      "D": "把恶意文件转发给全体员工"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "应尽快遏制传播并保留证据，随后按预案调查、清除、恢复和通知；不应删日志或继续开放共享访问。",
+    "chapter": "网络安全",
+    "knowledgePoint": "网络攻击与防护",
+    "difficulty": "medium",
+    "tags": [
+      "网络攻击与防护"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-269",
+    "type": "single_choice",
+    "question": "网络运营团队定期修补已知漏洞并移除未使用服务，主要降低哪类风险？",
+    "options": {
+      "A": "攻击面被已知漏洞利用",
+      "B": "数据库正常备份",
+      "C": "IP 地址数量增长",
+      "D": "电磁波传播速度变化"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "及时修补并关闭不必要服务可减少可被利用的漏洞和暴露接口，属于基础漏洞与攻击面管理。",
+    "chapter": "网络安全",
+    "knowledgePoint": "网络攻击与防护",
+    "difficulty": "easy",
+    "tags": [
+      "网络攻击与防护"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-270",
+    "type": "single_choice",
+    "question": "DNSSEC 对 DNS 数据主要提供哪类安全保障？",
+    "options": {
+      "A": "隐藏全部查询并提供机密性",
+      "B": "替代递归解析器",
+      "C": "验证数据来源和完整性，但不加密查询内容",
+      "D": "自动阻止所有 DDoS"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "DNSSEC 通过数字签名验证 DNS 数据的来源和完整性，不提供查询机密性；需要保护传输隐私时还需使用其他机制。",
+    "chapter": "网络安全",
+    "knowledgePoint": "网络攻击与防护",
+    "difficulty": "medium",
+    "tags": [
+      "网络攻击与防护"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-271",
+    "type": "single_choice",
+    "question": "传统 IPsec ESP 报文在 IPv4 中使用的 IP 协议号通常是什么？",
+    "options": {
+      "A": "17",
+      "B": "50",
+      "C": "51",
+      "D": "179"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "ESP 直接承载于 IP 中，协议号为 50；AH 为 51。IKE 通常使用 UDP 500，NAT 穿越时常使用 UDP 4500。",
+    "chapter": "网络安全",
+    "knowledgePoint": "VPN：IPsec、SSL VPN",
+    "difficulty": "medium",
+    "tags": [
+      "VPN：IPsec、SSL VPN"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-272",
+    "type": "single_choice",
+    "question": "IPsec ESP 的抗重放保护通常依赖哪组机制？",
+    "options": {
+      "A": "DNS TTL 和 MX 记录",
+      "B": "以太网 VLAN ID 和 FCS",
+      "C": "TCP SYN 与 FIN 标志",
+      "D": "序列号和接收端滑动窗口检测重复或过旧报文"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "ESP 可使用单调递增的序列号，并由接收方用滑动窗口检测重复或过旧报文；是否启用及窗口参数取决于安全关联配置。",
+    "chapter": "网络安全",
+    "knowledgePoint": "VPN：IPsec、SSL VPN",
+    "difficulty": "medium",
+    "tags": [
+      "VPN：IPsec、SSL VPN"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-273",
+    "type": "single_choice",
+    "question": "AH 对 IP 首部中的部分字段进行完整性保护，因此普通 NAT 改写地址后可能导致什么结果？",
+    "options": {
+      "A": "自动切换为 TCP",
+      "B": "把源地址加密为域名",
+      "C": "认证校验失败，AH 报文无法正常通过",
+      "D": "提高 MTU"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "AH 校验覆盖 IP 首部中不可变字段；NAT 改写地址会破坏相应完整性校验，因此 AH 通常难以穿越普通地址转换设备。",
+    "chapter": "网络安全",
+    "knowledgePoint": "VPN：IPsec、SSL VPN",
+    "difficulty": "medium",
+    "tags": [
+      "VPN：IPsec、SSL VPN"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-274",
+    "type": "single_choice",
+    "question": "配置 IPsec IKE 对等体使用预共享密钥认证时，两端通常需要满足什么条件？",
+    "options": {
+      "A": "按一致的对等体身份和安全策略配置匹配的预共享密钥",
+      "B": "关闭身份认证",
+      "C": "把预共享密钥写入公开 DNS 记录",
+      "D": "使用相同的 MAC 地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "预共享密钥方式依赖双方配置一致的密钥及可匹配的身份/策略；密钥应通过安全渠道分发和保管。",
+    "chapter": "网络安全",
+    "knowledgePoint": "VPN：IPsec、SSL VPN",
+    "difficulty": "medium",
+    "tags": [
+      "VPN：IPsec、SSL VPN"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-275",
+    "type": "single_choice",
+    "question": "远程接入 VPN 为客户端分配一个虚拟内网地址，主要有助于什么？",
+    "options": {
+      "A": "替代服务器证书验证",
+      "B": "让客户端按企业路由和访问策略访问授权的内部网段",
+      "C": "把 VPN 改成 VLAN Trunk",
+      "D": "自动消除所有恶意软件"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "虚拟地址可纳入企业路由、访问控制和审计策略，使远程用户像受控网络端点一样访问获准资源；仍需身份认证与终端安全。",
+    "chapter": "网络安全",
+    "knowledgePoint": "VPN：IPsec、SSL VPN",
+    "difficulty": "easy",
+    "tags": [
+      "VPN：IPsec、SSL VPN"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-276",
+    "type": "single_choice",
+    "question": "IPsec 安全关联 SA 通常是单向的，因此一条双向通信通常至少需要多少个方向的 SA？",
+    "options": {
+      "A": "3 个",
+      "B": "1 个",
+      "C": "4 个",
+      "D": "2 个"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "IPsec SA 按单一方向定义；双向通信一般需为两个方向分别建立 SA。",
+    "chapter": "网络安全",
+    "knowledgePoint": "VPN：IPsec、SSL VPN",
+    "difficulty": "hard",
+    "tags": [
+      "VPN：IPsec、SSL VPN"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-277",
+    "type": "single_choice",
+    "question": "IPsec NAT-T 常通过 UDP 4500 封装 ESP，主要为了解决什么问题？",
+    "options": {
+      "A": "替代证书吊销检查",
+      "B": "压缩 IPv6 首部",
+      "C": "让 ESP 流量能够穿越执行地址转换的 NAT 设备",
+      "D": "让 TCP 连接变成广播"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "传统 NAT 可能改写 IP 首部并影响 ESP；NAT Traversal 把 ESP 封装在 UDP 中，常用 UDP 4500 穿越 NAT。",
+    "chapter": "网络安全",
+    "knowledgePoint": "VPN：IPsec、SSL VPN",
+    "difficulty": "hard",
+    "tags": [
+      "VPN：IPsec、SSL VPN"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-278",
+    "type": "single_choice",
+    "question": "TLS/SSL VPN 客户端提示网关证书名称与访问域名不匹配时，最安全的处理是什么？",
+    "options": {
+      "A": "将网关私钥导入浏览器",
+      "B": "停止连接并核实证书或访问地址，不能直接忽略告警",
+      "C": "关闭客户端证书校验后继续输入口令",
+      "D": "改用任意公共 Wi-Fi"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "名称不匹配可能意味着地址错误、配置问题或中间人风险；客户端应验证证书链和主机名，不应无条件忽略。",
+    "chapter": "网络安全",
+    "knowledgePoint": "VPN：IPsec、SSL VPN",
+    "difficulty": "medium",
+    "tags": [
+      "VPN：IPsec、SSL VPN"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-279",
+    "type": "single_choice",
+    "question": "远程接入 VPN 启用 Split Tunneling 后，通常会发生什么？",
+    "options": {
+      "A": "仅匹配企业路由的流量进 VPN，其余流量可走本地互联网",
+      "B": "客户端不再需要认证",
+      "C": "所有流量必定通过企业 VPN 网关",
+      "D": "VPN 自动关闭加密"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "分离隧道只把指定企业网段流量送入 VPN，其他流量可直接走本地网络；需评估终端同时连接不可信网络带来的风险。",
+    "chapter": "网络安全",
+    "knowledgePoint": "VPN：IPsec、SSL VPN",
+    "difficulty": "medium",
+    "tags": [
+      "VPN：IPsec、SSL VPN"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-280",
+    "type": "single_choice",
+    "question": "IPsec 隧道协商显示已建立，但业务仍不通，最优先检查哪些数据面条件？",
+    "options": {
+      "A": "加密域/流量选择器、路由、策略和 NAT 豁免是否匹配",
+      "B": "DHCP 租约是否超过一年",
+      "C": "终端屏幕刷新率",
+      "D": "DNS MX 记录是否优先级为零"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "控制面 SA 建立不保证所有业务流量匹配；需检查两端流量选择器、路由、访问策略、加密域和 NAT 处理是否一致。",
+    "chapter": "网络安全",
+    "knowledgePoint": "VPN：IPsec、SSL VPN",
+    "difficulty": "hard",
+    "tags": [
+      "VPN：IPsec、SSL VPN"
+    ]
+  }
+]

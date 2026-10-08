@@ -1,0 +1,842 @@
+[
+  {
+    "id": "ne-draft-20260923-301",
+    "type": "single_choice",
+    "question": "网络管理员希望在上联接口流量接近容量上限前收到趋势告警，应优先建立哪类监测指标？",
+    "options": {
+      "A": "文件名长度",
+      "B": "DNS 邮件交换优先级",
+      "C": "带宽利用率与错误/丢弃计数的时间序列",
+      "D": "用户桌面分辨率"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "性能管理通过采集利用率、时延、丢弃和错误等指标，观察趋势并设置阈值预警；单次 ping 不能替代持续性能监控。",
+    "chapter": "网络管理",
+    "knowledgePoint": "网络管理五大功能",
+    "difficulty": "medium",
+    "tags": [
+      "网络管理五大功能"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-302",
+    "type": "single_choice",
+    "question": "网络变更后需记录设备配置版本、变更人、时间和回退点，主要属于哪类网络管理活动？",
+    "options": {
+      "A": "配置管理",
+      "B": "故障管理",
+      "C": "无线漫游",
+      "D": "计费管理"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "配置管理维护设备资产、基线、版本和变更记录，帮助重现配置并在故障时回退。",
+    "chapter": "网络管理",
+    "knowledgePoint": "网络管理五大功能",
+    "difficulty": "easy",
+    "tags": [
+      "网络管理五大功能"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-303",
+    "type": "single_choice",
+    "question": "交换机端口持续出现 CRC 错误并触发工单，团队定位并恢复链路服务，主要对应什么管理目标？",
+    "options": {
+      "A": "域名注册",
+      "B": "故障管理",
+      "C": "会计管理",
+      "D": "性能定价"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "故障管理包括发现、定位、记录和恢复故障；持续错误计数可作为故障告警与诊断线索。",
+    "chapter": "网络管理",
+    "knowledgePoint": "网络管理五大功能",
+    "difficulty": "easy",
+    "tags": [
+      "网络管理五大功能"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-304",
+    "type": "single_choice",
+    "question": "运营商按不同部门或客户统计带宽、流量和资源使用量，主要属于哪项管理功能？",
+    "options": {
+      "A": "计费/核算管理",
+      "B": "故障管理",
+      "C": "拓扑收敛",
+      "D": "配置管理"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "核算（Accounting）管理跟踪用户或业务对网络资源的使用，可用于成本分摊、额度控制或计费。",
+    "chapter": "网络管理",
+    "knowledgePoint": "网络管理五大功能",
+    "difficulty": "medium",
+    "tags": [
+      "网络管理五大功能"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-305",
+    "type": "single_choice",
+    "question": "企业检查远程管理账号权限、认证策略和操作审计，主要对应哪类管理目标？",
+    "options": {
+      "A": "性能管理",
+      "B": "安全管理",
+      "C": "地址汇总",
+      "D": "介质管理"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "安全管理关注身份认证、授权、访问控制和审计，帮助保护网络资源与管理接口。",
+    "chapter": "网络管理",
+    "knowledgePoint": "网络管理五大功能",
+    "difficulty": "easy",
+    "tags": [
+      "网络管理五大功能"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-306",
+    "type": "single_choice",
+    "question": "网络团队建立变更审批、维护窗口、影响评估和回退方案，最直接服务于哪类管理？",
+    "options": {
+      "A": "传输编码",
+      "B": "配置管理",
+      "C": "只读监控",
+      "D": "地址解析"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "变更审批、基线比较和回退计划是配置管理的重要组成部分，可减少未经授权变更造成的中断。",
+    "chapter": "网络管理",
+    "knowledgePoint": "网络管理五大功能",
+    "difficulty": "medium",
+    "tags": [
+      "网络管理五大功能"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-307",
+    "type": "single_choice",
+    "question": "管理员希望计算某链路的月度可用率，并区分计划维护和非计划中断，主要属于哪类工作？",
+    "options": {
+      "A": "口令散列",
+      "B": "DNS 区域传送",
+      "C": "性能与可用性管理",
+      "D": "VLAN 标签管理"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "可用率是网络服务质量与性能管理的重要指标；需明确统计口径、维护窗口和测量时间范围。",
+    "chapter": "网络管理",
+    "knowledgePoint": "网络管理五大功能",
+    "difficulty": "medium",
+    "tags": [
+      "网络管理五大功能"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-308",
+    "type": "single_choice",
+    "question": "网络管理平台发现设备离线后，自动创建告警并通知值班人员，这一流程的第一目标是什么？",
+    "options": {
+      "A": "替代所有人工审批",
+      "B": "用户计费",
+      "C": "自动更改域名",
+      "D": "故障发现和告警"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "监控平台检测到异常后发出告警属于故障管理流程的发现阶段，后续仍需要验证、定位和恢复。",
+    "chapter": "网络管理",
+    "knowledgePoint": "网络管理五大功能",
+    "difficulty": "easy",
+    "tags": [
+      "网络管理五大功能"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-309",
+    "type": "single_choice",
+    "question": "设备资产台账记录型号、序列号、机柜位置、软件版本和负责人，最直接支持什么？",
+    "options": {
+      "A": "信号调制",
+      "B": "拥塞控制",
+      "C": "域间路由",
+      "D": "配置与资产管理"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "资产与配置台账帮助识别设备身份、位置、版本和责任人，是变更、维护与故障定位的基础。",
+    "chapter": "网络管理",
+    "knowledgePoint": "网络管理五大功能",
+    "difficulty": "medium",
+    "tags": [
+      "网络管理五大功能"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-310",
+    "type": "single_choice",
+    "question": "工程师根据历史接口利用率预测下季度是否需要扩容，主要利用了哪类管理数据？",
+    "options": {
+      "A": "性能趋势数据",
+      "B": "物理地址厂商编号",
+      "C": "账户口令历史",
+      "D": "证书吊销数据"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "长期性能趋势可用于容量规划，识别增长、峰值和扩容时点；需结合业务增长和服务目标判断。",
+    "chapter": "网络管理",
+    "knowledgePoint": "网络管理五大功能",
+    "difficulty": "medium",
+    "tags": [
+      "网络管理五大功能"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-311",
+    "type": "single_choice",
+    "question": "SNMP 管理站查询设备某接口的入方向字节计数器，设备中的 SNMP 软件代理通常执行什么角色？",
+    "options": {
+      "A": "替代交换芯片转发帧",
+      "B": "只负责给客户端分配 DHCP 地址",
+      "C": "自动修复光纤断裂",
+      "D": "接收管理请求、访问本地管理信息并返回响应"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "SNMP Agent 运行在被管理设备上，维护或读取管理对象并响应管理站请求，也可主动发送告警。",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP、MIB 与版本",
+    "difficulty": "easy",
+    "tags": [
+      "SNMP、MIB 与版本"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-312",
+    "type": "single_choice",
+    "question": "SNMP MIB 中的 Counter32 类型通常表示什么？",
+    "options": {
+      "A": "单调递增的 32 位计数值，达到最大值后可回绕",
+      "B": "只会在 0 和 1 间切换的布尔值",
+      "C": "任意长度文本字符串",
+      "D": "设备的 IPv4 地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Counter32 表示非负单调递增计数器，最大值后可能回绕；管理站计算速率时需处理回绕，也可在高速接口使用 64 位高容量计数器。",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP、MIB 与版本",
+    "difficulty": "easy",
+    "tags": [
+      "SNMP、MIB 与版本"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-313",
+    "type": "single_choice",
+    "question": "SNMPv1/v2c 的 community string 机制最主要的安全局限是什么？",
+    "options": {
+      "A": "缺少强加密与现代用户级认证，凭据可能被监听",
+      "B": "不能读取任何 MIB 对象",
+      "C": "只能运行在 IPv6 上",
+      "D": "必须使用 TCP 179"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "SNMPv1/v2c 以 community 作为简单共享字符串，通常不提供报文加密；不应在不可信网络中裸露使用。",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP、MIB 与版本",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP、MIB 与版本"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-314",
+    "type": "single_choice",
+    "question": "SNMPv3 中，USM 和 VACM 分别主要负责什么？",
+    "options": {
+      "A": "USM 分配 IP 地址，VACM 转发以太网帧",
+      "B": "USM 加密磁盘，VACM 运行 OSPF",
+      "C": "二者都只负责 DNS 缓存",
+      "D": "USM 提供认证/隐私安全模型，VACM 控制用户可访问的 MIB 视图"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "USM（User-based Security Model）处理消息认证、完整性和隐私；VACM（View-based Access Control Model）根据安全主体和视图限制可访问的管理对象。",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP、MIB 与版本",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP、MIB 与版本"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-315",
+    "type": "single_choice",
+    "question": "SNMP Manager 使用 GETNEXT 遍历 MIB 树时，设备通常返回什么？",
+    "options": {
+      "A": "字典序/词典序上位于给定 OID 之后的下一个对象实例",
+      "B": "只返回设备管理员密码",
+      "C": "自动执行一次设备重启",
+      "D": "所有接口的配置文件"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "GETNEXT 返回 OID 排序中的下一个可访问对象实例，管理站可重复调用以遍历表；SNMPv2c/v3 还支持 GETBULK 批量读取。",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP、MIB 与版本",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP、MIB 与版本"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-316",
+    "type": "single_choice",
+    "question": "SNMP Trap 和 Inform 的一个重要区别是什么？",
+    "options": {
+      "A": "二者都是 TCP 文件传输",
+      "B": "Inform 通常要求接收方确认，Trap 通常不要求确认",
+      "C": "Trap 使用加密，Inform 一定明文",
+      "D": "Inform 只能查询，Trap 只能配置"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Trap 是非确认式通知，Inform 是确认式通知并可重传，但需要更多状态和开销。",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP、MIB 与版本",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP、MIB 与版本"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-317",
+    "type": "single_choice",
+    "question": "SNMP Set 操作应采取哪种权限设计？",
+    "options": {
+      "A": "关闭所有操作审计",
+      "B": "只授予需要写入的管理对象，优先通过受控管理网和 SNMPv3",
+      "C": "让所有网段使用相同公开 community 并可写所有对象",
+      "D": "默认开放互联网写访问"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Set 可修改设备状态，风险高于只读查询；应限制来源、启用强认证加密并按需授予写权限。",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP、MIB 与版本",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP、MIB 与版本"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-318",
+    "type": "single_choice",
+    "question": "SNMP 代理在遍历 MIB 时返回 endOfMibView 异常值，通常表示什么？",
+    "options": {
+      "A": "设备已经收到 DHCP 租约",
+      "B": "当前遍历已到达可访问的 MIB 对象范围末端",
+      "C": "管理站必须重启设备",
+      "D": "OID 已自动变成 MAC 地址"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "endOfMibView 表示在当前上下文和访问视图下没有可返回的后续对象实例，管理站可据此结束该分支的遍历。",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP、MIB 与版本",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP、MIB 与版本"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-319",
+    "type": "single_choice",
+    "question": "SNMP 轮询周期过短且管理站同时监控大量设备，可能造成什么问题？",
+    "options": {
+      "A": "设备获得更多磁盘空间",
+      "B": "所有链路自动变为全双工",
+      "C": "管理流量和设备处理负担增加",
+      "D": "MIB 对象停止更新"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "过密轮询会增加网络管理流量、CPU 负担和数据存储量；应根据指标重要性和变化速率合理设置采集周期。",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP、MIB 与版本",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP、MIB 与版本"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-320",
+    "type": "single_choice",
+    "question": "SNMP Agent 返回接口计数器时，管理站若看到计数器从接近最大值跳回较小数值，可能是什么原因？",
+    "options": {
+      "A": "一定代表网络攻击",
+      "B": "证明 DNS 解析失败",
+      "C": "计数器回绕或设备重启，需结合宽度和运行时间判断",
+      "D": "说明接口带宽变成负数"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "有限位宽计数器会回绕，设备重启也可能清零；使用高容量计数器并结合 sysUpTime、差分采样可区分。",
+    "chapter": "网络管理",
+    "knowledgePoint": "SNMP、MIB 与版本",
+    "difficulty": "hard",
+    "tags": [
+      "SNMP、MIB 与版本"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-321",
+    "type": "single_choice",
+    "question": "用户报告只能访问公网 IP、无法打开域名；排查时最先适合用什么工具确认 DNS 解析？",
+    "options": {
+      "A": "RAID 控制器管理界面",
+      "B": "chmod",
+      "C": "traceroute 到交换机电源",
+      "D": "nslookup 或 dig"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "nslookup 和 dig 可直接查询 DNS 解析结果及响应服务器，有助于把名称解析问题与 IP 连通性问题区分开。",
+    "chapter": "网络管理",
+    "knowledgePoint": "故障排查工具",
+    "difficulty": "easy",
+    "tags": [
+      "故障排查工具"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-322",
+    "type": "single_choice",
+    "question": "ping 默认网关成功，但远端服务 TCP 443 连接失败。下一步最能验证端口连通性的是？",
+    "options": {
+      "A": "再次只 ping 本机回环地址",
+      "B": "使用 TCP 端口探测工具连接目标地址的 443 端口",
+      "C": "清空所有 ARP 缓存后结束排查",
+      "D": "查看显示器刷新率"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "ping 仅测试 ICMP 可达性，不能证明 TCP 443 开放；应使用 TCP 连接测试并结合防火墙、路由和服务监听状态排查。",
+    "chapter": "网络管理",
+    "knowledgePoint": "故障排查工具",
+    "difficulty": "medium",
+    "tags": [
+      "故障排查工具"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-323",
+    "type": "single_choice",
+    "question": "traceroute 显示中间某一跳不响应，但后续跳和目标主机均有响应，最合理的判断是什么？",
+    "options": {
+      "A": "该中间设备可能限制或降低 ICMP 超时报文响应，不能据此认定转发中断",
+      "B": "DNS 一定被劫持",
+      "C": "目标主机一定没有路由",
+      "D": "链路必定在该跳完全断开"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "部分路由器会限速或过滤诊断报文；若后续跳可达，中间跳不响应本身不证明转发路径故障。",
+    "chapter": "网络管理",
+    "knowledgePoint": "故障排查工具",
+    "difficulty": "hard",
+    "tags": [
+      "故障排查工具"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-324",
+    "type": "single_choice",
+    "question": "抓包时要确认客户端是否发出 DHCP Discover，最合适的工具或方法是什么？",
+    "options": {
+      "A": "在客户端或交换机镜像口用 Wireshark/tcpdump 捕获 DHCP 报文",
+      "B": "读取 BGP AS_PATH",
+      "C": "只查看服务器磁盘空间",
+      "D": "执行文件权限变更"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "抓包可直接观察 DHCP Discover/Offer 等报文及方向，帮助区分客户端未发送、广播被阻断或服务器未响应。",
+    "chapter": "网络管理",
+    "knowledgePoint": "故障排查工具",
+    "difficulty": "medium",
+    "tags": [
+      "故障排查工具"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-325",
+    "type": "single_choice",
+    "question": "Linux 服务器要检查到目标网络的下一跳和出接口，优先查看什么信息？",
+    "options": {
+      "A": "IP 路由表",
+      "B": "DNS MX 优先级",
+      "C": "磁盘序列号",
+      "D": "用户 shell 历史"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IP 路由表决定目的地址的匹配路由、下一跳和出接口；可使用 ip route 等工具检查。",
+    "chapter": "网络管理",
+    "knowledgePoint": "故障排查工具",
+    "difficulty": "easy",
+    "tags": [
+      "故障排查工具"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-326",
+    "type": "single_choice",
+    "question": "Windows 管理员要查看本机 ARP 缓存中已学习的 IPv4 地址与 MAC 地址映射，可使用什么命令？",
+    "options": {
+      "A": "diskpart",
+      "B": "ipconfig /release",
+      "C": "net user",
+      "D": "arp -a"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Windows 的 arp -a 可显示本机 ARP 缓存条目，包括协议地址与物理地址映射；缓存只反映近期解析结果，并非完整网络设备清单。",
+    "chapter": "网络管理",
+    "knowledgePoint": "故障排查工具",
+    "difficulty": "easy",
+    "tags": [
+      "故障排查工具"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-327",
+    "type": "single_choice",
+    "question": "网卡链路显示 Up，但接口误码计数持续增长，最适合优先检查哪类工具输出？",
+    "options": {
+      "A": "域用户密码复杂度",
+      "B": "浏览器收藏夹",
+      "C": "网卡/交换机接口状态与错误计数、光功率或线缆质量",
+      "D": "DNS 区域 SOA 序列号"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "物理链路质量、双工/速率协商、光模块功率和接口错误计数有助定位链路层问题；链路 Up 不代表链路质量正常。",
+    "chapter": "网络管理",
+    "knowledgePoint": "故障排查工具",
+    "difficulty": "medium",
+    "tags": [
+      "故障排查工具"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-328",
+    "type": "single_choice",
+    "question": "Windows 主机能访问 IP 地址但域名失败，且 DNS 服务器地址看起来正确，排除服务端故障前可用哪项本机检查？",
+    "options": {
+      "A": "重装网卡驱动而不收集信息",
+      "B": "关闭全部安全更新",
+      "C": "检查本地 DNS 缓存并用 nslookup 指定 DNS 服务器查询",
+      "D": "更改文件系统格式"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "先检查本地缓存和 DNS 查询响应可区分缓存错误、解析服务器故障与应用问题；更改系统组件不是优先诊断方法。",
+    "chapter": "网络管理",
+    "knowledgePoint": "故障排查工具",
+    "difficulty": "medium",
+    "tags": [
+      "故障排查工具"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-329",
+    "type": "single_choice",
+    "question": "要验证某主机当前是否在监听 TCP 22 端口，哪种证据最直接？",
+    "options": {
+      "A": "只看主机是否能 ping 通",
+      "B": "在主机上查看监听套接字，或从受控测试端发起 TCP 连接测试",
+      "C": "查看 CPU 使用率",
+      "D": "查看 DNS 的 MX 记录"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "监听套接字和针对 TCP 22 的连接测试直接验证服务端口状态；ICMP ping 成功或失败不能单独证明端口开放状态。",
+    "chapter": "网络管理",
+    "knowledgePoint": "故障排查工具",
+    "difficulty": "medium",
+    "tags": [
+      "故障排查工具"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-330",
+    "type": "single_choice",
+    "question": "运维人员使用 mtr 持续观察目的地址路径时，可同时获得哪类信息？",
+    "options": {
+      "A": "证书私钥内容",
+      "B": "逐跳路径及持续时延/丢包统计",
+      "C": "用户文件权限和进程堆栈",
+      "D": "交换机 VLAN 数据库备份"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "mtr 将路径跟踪与周期性探测结合，可观察逐跳时延和丢包趋势；中间节点限速 ICMP 可能造成统计误判。",
+    "chapter": "网络管理",
+    "knowledgePoint": "故障排查工具",
+    "difficulty": "medium",
+    "tags": [
+      "故障排查工具"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-331",
+    "type": "single_choice",
+    "question": "NTP 层级中，直接连接到参考时钟的服务器通常称为哪个层级？",
+    "options": {
+      "A": "Stratum 0",
+      "B": "Stratum 16",
+      "C": "Stratum 1",
+      "D": "Stratum 5"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "参考时钟本身通常标为 Stratum 0；直接与参考时钟同步的 NTP 服务器为 Stratum 1，数值更高的层级从上级 NTP 服务器同步。",
+    "chapter": "网络管理",
+    "knowledgePoint": "日志与远程管理",
+    "difficulty": "easy",
+    "tags": [
+      "日志与远程管理"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-332",
+    "type": "single_choice",
+    "question": "SSH 客户端首次连接设备时提示主机密钥与已记录值不一致，管理员最稳妥的做法是什么？",
+    "options": {
+      "A": "通过可信渠道核对新指纹，排除设备更换或中间人风险后再更新记录",
+      "B": "把服务器私钥发送给用户",
+      "C": "无条件删除告警并继续",
+      "D": "切换到明文 Telnet"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "主机密钥变化可能源于设备重装，也可能表示 DNS/路由劫持或中间人攻击；应先通过独立可信渠道核对指纹。",
+    "chapter": "网络管理",
+    "knowledgePoint": "日志与远程管理",
+    "difficulty": "easy",
+    "tags": [
+      "日志与远程管理"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-333",
+    "type": "single_choice",
+    "question": "集中式日志服务器收到 syslog 消息后，若没有准确主机名、设备时间和严重级别，调查价值会下降。发送端最应保证什么？",
+    "options": {
+      "A": "只记录空白行",
+      "B": "把所有事件都标记为最高严重级别",
+      "C": "删除日志来源地址",
+      "D": "记录准确的时间、设备身份、事件级别和上下文"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "结构完整且时间一致的日志更利于关联分析；应配置主机标识、严重级别、时间同步和足够上下文，并保护日志完整性。",
+    "chapter": "网络管理",
+    "knowledgePoint": "日志与远程管理",
+    "difficulty": "medium",
+    "tags": [
+      "日志与远程管理"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-334",
+    "type": "single_choice",
+    "question": "设备仅支持控制台口、网络管理接口又不可达时，运维仍要远程接入设备，适合使用什么方案？",
+    "options": {
+      "A": "HTTP 缓存",
+      "B": "带外管理或串口控制台服务器",
+      "C": "Trunk Native VLAN",
+      "D": "公共 DNS 递归"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "带外管理通过独立管理网络或串口控制台访问设备，在业务网络故障时仍可进行恢复操作。",
+    "chapter": "网络管理",
+    "knowledgePoint": "日志与远程管理",
+    "difficulty": "medium",
+    "tags": [
+      "日志与远程管理"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-335",
+    "type": "single_choice",
+    "question": "传统 Syslog PRI 字段由 Facility 与 Severity 编码时，Severity 数值通常如何表示？",
+    "options": {
+      "A": "Severity 固定为 514",
+      "B": "数值越小，事件越严重",
+      "C": "数值越大，事件越严重",
+      "D": "数值表示 TCP 端口"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Syslog Severity 通常从 0（Emergency，最严重）到 7（Debug），数值越小优先级越高；Facility 表示事件来源类别。",
+    "chapter": "网络管理",
+    "knowledgePoint": "日志与远程管理",
+    "difficulty": "hard",
+    "tags": [
+      "日志与远程管理"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-336",
+    "type": "single_choice",
+    "question": "为防止日志磁盘写满影响设备运行，日志轮转策略主要应做什么？",
+    "options": {
+      "A": "不断复制日志但永不删除或归档",
+      "B": "把所有日志写到路由表",
+      "C": "关闭文件系统权限",
+      "D": "按大小或时间归档旧日志并限制保留总量"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "日志轮转按时间或容量切分、归档并按保留策略清理，避免日志无限增长耗尽磁盘；重要日志需先可靠集中保存。",
+    "chapter": "网络管理",
+    "knowledgePoint": "日志与远程管理",
+    "difficulty": "medium",
+    "tags": [
+      "日志与远程管理"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-337",
+    "type": "single_choice",
+    "question": "网络设备配置管理平台通过 HTTPS 管理接口访问设备时，最重要的基础保护措施之一是什么？",
+    "options": {
+      "A": "校验证书和设备身份，限制管理来源并使用最小权限账户",
+      "B": "忽略证书错误并共用默认账号",
+      "C": "停止记录管理员操作",
+      "D": "把管理端口映射到所有公网来源"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "管理面应验证对端身份，限制来源地址、启用强认证和最小权限，并审计操作；忽略证书与共享默认账号会削弱安全性。",
+    "chapter": "网络管理",
+    "knowledgePoint": "日志与远程管理",
+    "difficulty": "medium",
+    "tags": [
+      "日志与远程管理"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-338",
+    "type": "single_choice",
+    "question": "集中日志平台将相同源 IP 的防火墙拒绝记录与服务器登录失败记录关联分析，主要体现什么能力？",
+    "options": {
+      "A": "跨设备日志关联与事件分析",
+      "B": "链路聚合",
+      "C": "地址转换",
+      "D": "线路编码"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "集中采集和关联不同设备日志可将孤立事件串联，帮助识别攻击路径、时间线和影响范围。",
+    "chapter": "网络管理",
+    "knowledgePoint": "日志与远程管理",
+    "difficulty": "medium",
+    "tags": [
+      "日志与远程管理"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-339",
+    "type": "single_choice",
+    "question": "管理员启用远程 SSH 密钥认证后，仍应做什么以降低暴力尝试和凭据滥用风险？",
+    "options": {
+      "A": "公开私钥便于多人共用",
+      "B": "把 SSH 暴露给所有来源且不记录日志",
+      "C": "限制管理网段、禁用不必要的密码登录并审计访问",
+      "D": "关闭系统补丁"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "公钥认证仍需结合来源限制、账户最小权限、密钥生命周期、补丁和日志审计；私钥不能共享或公开。",
+    "chapter": "网络管理",
+    "knowledgePoint": "日志与远程管理",
+    "difficulty": "medium",
+    "tags": [
+      "日志与远程管理"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-340",
+    "type": "single_choice",
+    "question": "安全事件发生后，调查人员发现日志被管理员账户删除。为提高后续证据可信度，较好的日志架构是什么？",
+    "options": {
+      "A": "让所有管理员共用一个不可追踪账户",
+      "B": "将日志实时或定期发送到受独立权限保护的集中存储",
+      "C": "关闭所有时间戳",
+      "D": "只保留设备本地可由同一管理员删除的副本"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "集中日志存储、分离管理权限和防篡改保留可降低单台设备或单个管理员删除证据的风险；应按制度设定留存周期。",
+    "chapter": "网络管理",
+    "knowledgePoint": "日志与远程管理",
+    "difficulty": "hard",
+    "tags": [
+      "日志与远程管理"
+    ]
+  }
+]

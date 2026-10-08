@@ -1,0 +1,324 @@
+{
+  "title": "2026年上半年网络工程师押题密卷 OCR 整理报告",
+  "source": {
+    "file": "押题密卷上午题.pdf",
+    "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+    "pageCount": 8,
+    "answerFile": "押题密卷上午题解析.pdf",
+    "answerPageCount": 6
+  },
+  "extraction": {
+    "questionCount": 75,
+    "answerSource": "配套上午题解析卷",
+    "figureMappings": [
+      {
+        "questionNumber": 8,
+        "crop": "q008",
+        "description": "页式虚拟存储系统中，页面大小为8KB；图示页表给出逻辑地址9612对应物理块3，转换后的物理地址是多少？"
+      },
+      {
+        "questionNumber": 9,
+        "crop": "q009",
+        "description": "根据图示项目计划网络图，完成项目所需的最短时间是多少天？"
+      },
+      {
+        "questionNumber": 10,
+        "crop": "q009",
+        "description": "根据图示项目计划网络图，活动G最多可推迟多少天完工而不影响项目完工日期？"
+      },
+      {
+        "questionNumber": 11,
+        "crop": "q011",
+        "description": "图示波形对应哪种二进制调制方式？"
+      },
+      {
+        "questionNumber": 52,
+        "crop": "q052",
+        "description": "如图所示两台交换机采用默认配置，PC2和PC4不能通信，最可能的原因是什么？"
+      },
+      {
+        "questionNumber": 53,
+        "crop": "q052",
+        "description": "针对图示中不同VLAN的主机不能跨交换机通信，最简单的解决方法是什么？"
+      },
+      {
+        "questionNumber": 70,
+        "crop": "q070",
+        "description": "根据图示项目计划及人员需求，至少需要投入多少名技术人员才能完成项目？"
+      }
+    ],
+    "answerKey": {
+      "1": [
+        "B"
+      ],
+      "2": [
+        "A"
+      ],
+      "3": [
+        "B"
+      ],
+      "4": [
+        "A"
+      ],
+      "5": [
+        "B"
+      ],
+      "6": [
+        "C"
+      ],
+      "7": [
+        "A"
+      ],
+      "8": [
+        "B"
+      ],
+      "9": [
+        "D"
+      ],
+      "10": [
+        "B"
+      ],
+      "11": [
+        "C"
+      ],
+      "12": [
+        "B"
+      ],
+      "13": [
+        "C"
+      ],
+      "14": [
+        "D"
+      ],
+      "15": [
+        "D"
+      ],
+      "16": [
+        "C"
+      ],
+      "17": [
+        "C"
+      ],
+      "18": [
+        "C"
+      ],
+      "19": [
+        "C"
+      ],
+      "20": [
+        "C"
+      ],
+      "21": [
+        "C"
+      ],
+      "22": [
+        "D"
+      ],
+      "23": [
+        "D"
+      ],
+      "24": [
+        "A"
+      ],
+      "25": [
+        "D"
+      ],
+      "26": [
+        "B"
+      ],
+      "27": [
+        "B"
+      ],
+      "28": [
+        "C"
+      ],
+      "29": [
+        "D"
+      ],
+      "30": [
+        "D"
+      ],
+      "31": [
+        "C"
+      ],
+      "32": [
+        "B"
+      ],
+      "33": [
+        "C"
+      ],
+      "34": [
+        "B"
+      ],
+      "35": [
+        "B"
+      ],
+      "36": [
+        "B"
+      ],
+      "37": [
+        "D"
+      ],
+      "38": [
+        "C"
+      ],
+      "39": [
+        "B"
+      ],
+      "40": [
+        "B"
+      ],
+      "41": [
+        "D"
+      ],
+      "42": [
+        "B"
+      ],
+      "43": [
+        "A"
+      ],
+      "44": [
+        "A"
+      ],
+      "45": [
+        "B"
+      ],
+      "46": [
+        "D"
+      ],
+      "47": [
+        "A"
+      ],
+      "48": [
+        "D"
+      ],
+      "49": [
+        "C"
+      ],
+      "50": [
+        "A"
+      ],
+      "51": [
+        "D"
+      ],
+      "52": [
+        "B"
+      ],
+      "53": [
+        "A"
+      ],
+      "54": [
+        "D"
+      ],
+      "55": [
+        "B"
+      ],
+      "56": [
+        "A"
+      ],
+      "57": [
+        "A"
+      ],
+      "58": [
+        "D"
+      ],
+      "59": [
+        "B"
+      ],
+      "60": [
+        "A"
+      ],
+      "61": [
+        "B"
+      ],
+      "62": [
+        "C"
+      ],
+      "63": [
+        "D"
+      ],
+      "64": [
+        "A"
+      ],
+      "65": [
+        "B"
+      ],
+      "66": [
+        "A"
+      ],
+      "67": [
+        "A"
+      ],
+      "68": [
+        "A"
+      ],
+      "69": [
+        "B"
+      ],
+      "70": [
+        "C"
+      ],
+      "71": [
+        "A"
+      ],
+      "72": [
+        "B"
+      ],
+      "73": [
+        "A"
+      ],
+      "74": [
+        "B"
+      ],
+      "75": [
+        "D"
+      ]
+    },
+    "webImages": [
+      {
+        "file": "public/question-images/network-engineer/2026-h1-sealed-morning/q008.png",
+        "url": "/question-images/network-engineer/2026-h1-sealed-morning/q008.png",
+        "sizeBytes": 22263,
+        "sha256": "21227e0049c93319fc0fd3d51b9020f66df050f28f70dbbba85d1a95c06a591a"
+      },
+      {
+        "file": "public/question-images/network-engineer/2026-h1-sealed-morning/q009.png",
+        "url": "/question-images/network-engineer/2026-h1-sealed-morning/q009.png",
+        "sizeBytes": 20794,
+        "sha256": "a92e299725cdda048845a5c23a02b9ed2a6cb8c925bf791d45eb76650dcea736"
+      },
+      {
+        "file": "public/question-images/network-engineer/2026-h1-sealed-morning/q011.png",
+        "url": "/question-images/network-engineer/2026-h1-sealed-morning/q011.png",
+        "sizeBytes": 10688,
+        "sha256": "7b6c30f4b175e2466ffb07abc3e197c3bab5ad6f1b4378ea64051995a3a34ba6"
+      },
+      {
+        "file": "public/question-images/network-engineer/2026-h1-sealed-morning/q052.png",
+        "url": "/question-images/network-engineer/2026-h1-sealed-morning/q052.png",
+        "sizeBytes": 37725,
+        "sha256": "9e6da2231689859c22e8b7241485fa051fbac7cb5b9bbbcd85ee2ca61644719d"
+      },
+      {
+        "file": "public/question-images/network-engineer/2026-h1-sealed-morning/q070.png",
+        "url": "/question-images/network-engineer/2026-h1-sealed-morning/q070.png",
+        "sizeBytes": 11821,
+        "sha256": "4dcf22b79e7253171a35a126b7de206724d2f7ad53cae26f422f7d13273db5d8"
+      }
+    ]
+  },
+  "reviewNotes": [
+    {
+      "questionNumber": 48,
+      "note": "原卷答案为D；题目将IPv6接口标识与随机生成表述为必然关系，建议导入复核时再按目标教材口径确认。"
+    },
+    {
+      "questionNumber": 49,
+      "note": "题干问IPv6重复地址检测的正确说法，原卷答案C；按题图/文字，选项A与D看起来也成立，需核对原页后决定是否排除或修正。"
+    },
+    {
+      "questionNumber": 70,
+      "note": "答案卷给出C（6人）。解析以30人日/5天推得6人，需在本地复核并确认题干隐含工期。"
+    }
+  ]
+}

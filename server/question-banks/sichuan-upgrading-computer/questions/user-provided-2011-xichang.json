@@ -1,0 +1,1837 @@
+[
+  {
+    "id": "sc-2011-xichang-001",
+    "type": "single_choice",
+    "question": "世界上第一台计算机于 1946 年诞生于（ ）。",
+    "options": {
+      "A": "法国",
+      "B": "美国",
+      "C": "英国",
+      "D": "匈牙利"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "ENIAC 于 1946 年在美国宾夕法尼亚大学研制成功，通常被视为世界上第一台通用电子数字计算机，因此答案是美国。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "计算机概述",
+    "knowledgePoint": "计算机发展与应用",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "计算机发展与应用"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "一、1"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-002",
+    "type": "single_choice",
+    "question": "按使用的基本元器件划分计算机发展史，当前使用的微型计算机属于（ ）计算机。",
+    "options": {
+      "A": "电子管",
+      "B": "晶体管",
+      "C": "集成电路",
+      "D": "大、超大规模集成电路"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "计算机按元器件分为四代：电子管、晶体管、中小规模集成电路、大规模和超大规模集成电路。当前微型机属于第四代，采用大规模和超大规模集成电路。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "计算机概述",
+    "knowledgePoint": "计算机发展与应用",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "计算机发展与应用"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "一、2"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-003",
+    "type": "single_choice",
+    "question": "我国“银河”系列计算机的运行速度已经超过每秒千万次，它属于（ ）。",
+    "options": {
+      "A": "微型机",
+      "B": "中型机",
+      "C": "大型机",
+      "D": "巨型机"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "“银河”系列是我国研制的高性能巨型计算机，主要用于气象预报、石油勘探等大规模科学计算，因此属于巨型机。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "计算机概述",
+    "knowledgePoint": "计算机发展与应用",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "计算机发展与应用"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "一、3"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-004",
+    "type": "single_choice",
+    "question": "CAD 是（ ）的英文缩写。",
+    "options": {
+      "A": "计算机辅助教育",
+      "B": "计算机辅助设计",
+      "C": "计算机辅助制造",
+      "D": "计算机辅助管理"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "CAD 全称 Computer Aided Design，即计算机辅助设计；计算机辅助制造是 CAM，计算机辅助教育是 CAI，计算机辅助管理是 CAM 之外的 MIS 方向，对应关系不能混淆。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "计算机概述",
+    "knowledgePoint": "计算机发展与应用",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "计算机发展与应用"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "一、4"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-005",
+    "type": "single_choice",
+    "question": "关于“电子计算机”的特点，以下论述错误的是（ ）。",
+    "options": {
+      "A": "运行速度快",
+      "B": "计算精度高",
+      "C": "具有记忆和逻辑判断能力",
+      "D": "计算过程不能自动、连续，需要人工干预"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "电子计算机的重要特点正是存储程序并按程序自动、连续地运行，无需人工逐步干预，因此 D 的表述与事实相反，是错误论述。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "计算机概述",
+    "knowledgePoint": "计算机发展与应用",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "计算机发展与应用"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "一、5"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-006",
+    "type": "single_choice",
+    "question": "“嫦娥 2 号”在奔月过程中用计算机来实现轨道修正，这是计算机在（ ）领域中的应用。",
+    "options": {
+      "A": "科学计算",
+      "B": "数据处理",
+      "C": "过程控制",
+      "D": "人工智能"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "轨道修正是把实时测量数据反馈给计算机，由计算机自动调整飞行姿态与轨迹，属于对连续过程进行实时控制，即过程控制。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "计算机概述",
+    "knowledgePoint": "计算机发展与应用",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "计算机发展与应用"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "一、6"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-007",
+    "type": "single_choice",
+    "question": "计算机病毒是（ ）。",
+    "options": {
+      "A": "计算机运行一段时间自己产生的",
+      "B": "一种人为编制的计算机程序",
+      "C": "主机发生故障时产生的",
+      "D": "可传染疾病给人类的病毒"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "计算机病毒本质是一段人为编写的、具有破坏性和传染性的程序代码，它不会自行产生，也不会传染给人类。",
+    "chapter": "网络与信息安全",
+    "knowledgeSection": "信息安全",
+    "knowledgePoint": "安全防护与信息素养",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "安全防护与信息素养"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "一、7"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-008",
+    "type": "single_choice",
+    "question": "通常一个多媒体计算机系统应包括（ ）。",
+    "options": {
+      "A": "主机与输入、输出设备",
+      "B": "主机、显示器、声卡、音响",
+      "C": "硬件系统与软件系统",
+      "D": "计算机及其外部设备"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "完整的计算机系统由硬件系统和软件系统两部分组成，多媒体计算机同样如此。只列举主机、外设或声卡音响都只覆盖了硬件的一部分。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "数字媒体",
+    "knowledgePoint": "音频与图像基础",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "音频与图像基础"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "一、8"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-009",
+    "type": "single_choice",
+    "question": "对于 R 进制的数，其每一位需要的数字符号个数为（ ）。",
+    "options": {
+      "A": "10",
+      "B": "R-1",
+      "C": "R",
+      "D": "R+1"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "R 进制每一位可用 0 到 R-1 共 R 个数字符号，因此符号个数等于基数 R。选项 B 是最小数字以外的计数，选项 D 多算了一个。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "数制与数据表示",
+    "knowledgePoint": "进制转换",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "进制转换"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "一、9"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-010",
+    "type": "single_choice",
+    "question": "下列数据中（ ）最小。",
+    "options": {
+      "A": "11011001B",
+      "B": "75D",
+      "C": "37O",
+      "D": "2A7H"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "统一换算为十进制比较：11011001B = 217；75D = 75；37O = 3×8+7 = 31；2A7H = 2×256+10×16+7 = 679。其中 31 最小，所以选 37O。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "数制与数据表示",
+    "knowledgePoint": "进制转换",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "进制转换"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "一、10"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-011",
+    "type": "single_choice",
+    "question": "在计算机中存储数据的基本单位是（ ）。",
+    "options": {
+      "A": "字节",
+      "B": "位",
+      "C": "字",
+      "D": "吉"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "字节是计算机中存储容量的基本单位，1 字节等于 8 位；位是最小单位而不是基本单位，字长随机器不同而变化。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "数制与数据表示",
+    "knowledgePoint": "信息编码与计量",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "信息编码与计量"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "一、11"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-012",
+    "type": "single_choice",
+    "question": "断电后（ ）中所存储的数据会丢失。",
+    "options": {
+      "A": "ROM",
+      "B": "RAM",
+      "C": "硬盘",
+      "D": "光盘"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RAM 是易失性存储器，断电后所存信息全部丢失；ROM、硬盘和光盘都属于非易失性存储介质，断电后数据仍可保留。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "硬件系统",
+    "knowledgePoint": "体系结构与硬件",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "体系结构与硬件"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "一、12"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-013",
+    "type": "single_choice",
+    "question": "用某种高级语言编制的程序称为（ ）。",
+    "options": {
+      "A": "用户程序",
+      "B": "可执行程序",
+      "C": "目标程序",
+      "D": "源程序"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "用高级语言或汇编语言编写的程序称为源程序；源程序经编译或汇编后生成目标程序，再经连接才成为可执行程序。",
+    "chapter": "算法与程序设计",
+    "knowledgeSection": "程序结构",
+    "knowledgePoint": "程序执行与流程图",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "程序执行与流程图"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "一、13"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-014",
+    "type": "single_choice",
+    "question": "二进制数 1011+101 等于（ ）。",
+    "options": {
+      "A": "10000",
+      "B": "10110",
+      "C": "10001",
+      "D": "10111"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "二进制按位相加：1011₂ 为 11，101₂ 为 5，和为 16，即 10000₂。也可直接列竖式，低位逢二进一得到 10000。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "数制与数据表示",
+    "knowledgePoint": "进制转换",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "进制转换"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "一、14"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-015",
+    "type": "single_choice",
+    "question": "汉字的字模可用点阵来表示，存储点阵中的一个点占（ ）。",
+    "options": {
+      "A": "一个字节",
+      "B": "二个字节",
+      "C": "一个字",
+      "D": "二进制中一位"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "点阵字模中每个点只有“亮”与“不亮”两种状态，用一位二进制即可表示，因此一个点占一位而不是一个字节。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "数制与数据表示",
+    "knowledgePoint": "信息编码与计量",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "信息编码与计量"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "一、15"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-016",
+    "type": "single_choice",
+    "question": "英文字母“A”与“a”的 ASCII 码相比较是（ ）。",
+    "options": {
+      "A": "A 比 a 大",
+      "B": "A 比 a 小",
+      "C": "A 与 a 相等",
+      "D": "无法比较"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "ASCII 码中大写字母 A 为 65，小写字母 a 为 97，同字母的大小写相差 32，小写字母的码值更大，所以 A 比 a 小。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "数制与数据表示",
+    "knowledgePoint": "信息编码与计量",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "信息编码与计量"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "一、16"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-017",
+    "type": "single_choice",
+    "question": "在中文版 Windows 下用 Word 编辑的文字，在中文版 Linux 中同样可以显示与编辑，这是由汉字（ ）唯一性决定的。",
+    "options": {
+      "A": "外码",
+      "B": "全拼码",
+      "C": "ASCII 码",
+      "D": "内码"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "汉字在不同系统之间能够互换处理，依靠的是机内码在编码上的统一；输入码、外码和 ASCII 码都不具备这种跨平台的唯一对应关系。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "数制与数据表示",
+    "knowledgePoint": "信息编码与计量",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "信息编码与计量"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "一、17"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-018",
+    "type": "single_choice",
+    "question": "指挥、协调计算机工作的设备是（ ）。",
+    "options": {
+      "A": "输入设备",
+      "B": "输出设备",
+      "C": "存储器",
+      "D": "控制器"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "控制器负责从存储器取出指令、分析指令并向各部件发出控制信号，是指挥和协调整机工作的部件，与运算器共同构成 CPU。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "硬件系统",
+    "knowledgePoint": "体系结构与硬件",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "体系结构与硬件"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "一、18"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-019",
+    "type": "single_choice",
+    "question": "计算机内存比外存（ ）。",
+    "options": {
+      "A": "便宜",
+      "B": "存储容量大",
+      "C": "存取速度快",
+      "D": "虽贵但能存储更多的信息"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "内存直接与 CPU 交换数据，存取速度快但容量小、单位成本高；外存容量大、价格低但速度慢。因此只有“存取速度快”成立。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "硬件系统",
+    "knowledgePoint": "体系结构与硬件",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "体系结构与硬件"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "一、19"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-020",
+    "type": "single_choice",
+    "question": "下列设备中，只能作为输出设备的是（ ）。",
+    "options": {
+      "A": "硬盘驱动器",
+      "B": "显示器",
+      "C": "存储器",
+      "D": "鼠标"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "显示器只接收计算机输出的信息并加以显示，不能向计算机输入数据；硬盘和存储器既可读也可写，鼠标属于输入设备。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "硬件系统",
+    "knowledgePoint": "体系结构与硬件",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "体系结构与硬件"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "一、20"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-021",
+    "type": "single_choice",
+    "question": "源程序不能直接运行，需要翻译成（ ）程序后才能运行。",
+    "options": {
+      "A": "语言",
+      "B": "汇编语言",
+      "C": "机器语言",
+      "D": "JAVA 语言"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "CPU 只能识别和执行用机器语言编写的指令序列，所以源程序必须经编译或解释翻译成机器语言目标程序后才能运行。",
+    "chapter": "算法与程序设计",
+    "knowledgeSection": "程序结构",
+    "knowledgePoint": "程序执行与流程图",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "程序执行与流程图"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "一、21"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-022",
+    "type": "single_choice",
+    "question": "微型计算机中的 286、386、486 和 586 指的是（ ）。",
+    "options": {
+      "A": "存储容量",
+      "B": "运行速度",
+      "C": "显示器型号",
+      "D": "CPU 类型"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "286、386、486、586 是 Intel 系列微处理器的型号代号，代表不同代的 CPU 类型，与存储容量和显示器无关。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "硬件系统",
+    "knowledgePoint": "体系结构与硬件",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "体系结构与硬件"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "一、22"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-023",
+    "type": "single_choice",
+    "question": "计算机软件系统一般包括（ ）。",
+    "options": {
+      "A": "系统软件和字处理软件",
+      "B": "操作系统和程序设计语言",
+      "C": "系统软件和管理软件",
+      "D": "系统软件和应用软件"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "软件系统按功能划分为系统软件和应用软件两大类，字处理软件、管理软件都只是应用软件中的具体例子，不能与系统软件并列。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "软件与系统操作",
+    "knowledgePoint": "操作系统与软件分类",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "操作系统与软件分类"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "一、23"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-024",
+    "type": "single_choice",
+    "question": "人们根据特定的需要预先为计算机编制的指令序列称为（ ）。",
+    "options": {
+      "A": "软件",
+      "B": "文件",
+      "C": "程序",
+      "D": "文档"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "程序是为解决特定问题而编写的、能被计算机执行的指令序列；软件是程序连同数据和文档的集合，文件是信息组织单位。",
+    "chapter": "算法与程序设计",
+    "knowledgeSection": "程序结构",
+    "knowledgePoint": "程序执行与流程图",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "程序执行与流程图"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "一、24"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-025",
+    "type": "single_choice",
+    "question": "用 C 语言编制的源程序要变为目标程序，必须经过（ ）。",
+    "options": {
+      "A": "汇编",
+      "B": "解释",
+      "C": "编辑",
+      "D": "编译"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "C 语言属于编译型高级语言，源程序经编译程序翻译后生成目标程序；汇编针对汇编语言，解释不产生独立的目标程序文件。",
+    "chapter": "算法与程序设计",
+    "knowledgeSection": "程序结构",
+    "knowledgePoint": "程序执行与流程图",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "程序执行与流程图"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "一、25"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-026",
+    "type": "single_choice",
+    "question": "下列存储器中，存取速度最快的是（ ）。",
+    "options": {
+      "A": "U 盘",
+      "B": "硬盘",
+      "C": "光盘",
+      "D": "内存"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "存取速度由快到慢依次为内存、硬盘、U 盘和光盘，内存直接与 CPU 交换数据，因此速度最快。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "硬件系统",
+    "knowledgePoint": "体系结构与硬件",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "体系结构与硬件"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "一、26"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-027",
+    "type": "single_choice",
+    "question": "操作系统的作用是（ ）。",
+    "options": {
+      "A": "把源程序译成目标程序",
+      "B": "实现软硬件的连接",
+      "C": "控制和管理系统资源",
+      "D": "数据管理系统"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "操作系统是最重要的系统软件，负责管理处理器、存储器、设备和文件等系统资源，并在此基础上为用户提供操作界面。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "软件与系统操作",
+    "knowledgePoint": "操作系统与软件分类",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "操作系统与软件分类"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "一、27"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-028",
+    "type": "single_choice",
+    "question": "中文 Windows 中，为了实现中文和西文输入方式的切换，应按的键是（ ）。",
+    "options": {
+      "A": "Ctrl+Space",
+      "B": "Ctrl+Shift",
+      "C": "Shift+Space",
+      "D": "Alt+Shift"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Ctrl+Space 用于在中文输入法与英文输入状态之间切换，Ctrl+Shift 是在多个已安装输入法之间轮换，两者作用不同。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "软件与系统操作",
+    "knowledgePoint": "Windows 文件与任务",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "Windows 文件与任务"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "一、28"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-029",
+    "type": "true_false",
+    "question": "计算机指令是一组二进制代码，是计算机可执行的操作命令。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "指令由操作码和操作数组成，以二进制代码形式存放，CPU 能够直接识别并执行，因此该说法正确。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "硬件系统",
+    "knowledgePoint": "体系结构与硬件",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "体系结构与硬件"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "二、8"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-030",
+    "type": "true_false",
+    "question": "键盘上每个按键对应于唯一的一个 ASCII 码。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "同一个字母键在大写和小写状态下对应不同的 ASCII 码，功能键和组合键也不对应 ASCII 字符，因此并非每个按键都唯一对应一个 ASCII 码。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "数制与数据表示",
+    "knowledgePoint": "信息编码与计量",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "信息编码与计量"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "二、9"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-031",
+    "type": "true_false",
+    "question": "计算机的字长是指一个英文字符在计算机内部存放时所需要的二进制位数。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "字长是 CPU 一次能并行处理的二进制位数，反映运算精度和寄存器宽度；一个英文字符在机内通常占一个字节，与字长不是同一概念。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "硬件系统",
+    "knowledgePoint": "体系结构与硬件",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "体系结构与硬件"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "二、10"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-032",
+    "type": "true_false",
+    "question": "存储容量的大小可用 KB 为单位来表示，1KB 表示 1024 个二进制位。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "1KB 等于 1024 个字节，而每个字节为 8 位，所以 1KB 实际是 8192 个二进制位，该说法混淆了字节与位。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "数制与数据表示",
+    "knowledgePoint": "信息编码与计量",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "信息编码与计量"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "二、11"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-033",
+    "type": "true_false",
+    "question": "在 Windows 中，要将整个屏幕的内容存入剪贴板应按 PrintScreen 键。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "按 PrintScreen 键可把当前整个屏幕的画面复制到剪贴板，若同时按下 Alt 键则只复制当前活动窗口。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "软件与系统操作",
+    "knowledgePoint": "Windows 文件与任务",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "Windows 文件与任务"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "二、12"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-034",
+    "type": "true_false",
+    "question": "在 Windows 中允许文件名最多有 255 个字符，可以使用空格。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Windows 文件名最长可达 255 个字符，允许包含空格，但不能包含 \\ / : * ? \" < > | 等字符，该说法正确。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "软件与系统操作",
+    "knowledgePoint": "Windows 文件与任务",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "Windows 文件与任务"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "二、13"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-035",
+    "type": "true_false",
+    "question": "激光打印机既是输入设备，又是输出设备。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "激光打印机只把计算机中的信息输出到纸张上，属于纯输出设备；输入输出兼备的设备如磁盘驱动器、触摸屏，与此不同。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "硬件系统",
+    "knowledgePoint": "体系结构与硬件",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "体系结构与硬件"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "二、14"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-036",
+    "type": "true_false",
+    "question": "在 Word 字号中，中文字号越大，表示的字越大。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Word 的中文字号采用数字越小字越大的规则，例如初号大于小初、一号大于小一；而阿拉伯数字磅值则是数值越大字越大。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Word",
+    "knowledgePoint": "文档编辑与排版",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "文档编辑与排版"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "二、15"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-037",
+    "type": "true_false",
+    "question": "Word 可以将声音等其他信息插入在文本之中，使文章真正做到有“声”有“色”。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Word 支持通过“插入→对象”把声音、视频等多媒体对象嵌入文档，形成复合文档，因此该说法正确。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Word",
+    "knowledgePoint": "表格图文与邮件合并",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "表格图文与邮件合并"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "二、16"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-038",
+    "type": "true_false",
+    "question": "对于插入的图片，只能是图在上、文在下，或文在上、图在下，不能产生环绕效果。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Word 为图片提供四周型、紧密型、穿越型、上下型、衬于文字下方和浮于文字上方等多种环绕方式，并非只能上下排列。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Word",
+    "knowledgePoint": "表格图文与邮件合并",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "表格图文与邮件合并"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "二、17"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-039",
+    "type": "true_false",
+    "question": "Excel 工作表中，单元格的地址是唯一的，由单元格所在的列和行决定。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "单元格地址由列标和行号共同确定，如 B3 表示第 B 列第 3 行，任一单元格在同一工作表中的地址都是唯一的。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "单元格与地址引用",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "单元格与地址引用"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "二、18"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-040",
+    "type": "true_false",
+    "question": "局域网的地理范围一般在几公里之内，具有结构简单、组网灵活的特点。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "局域网覆盖范围通常在一个建筑物或园区内，一般不超过几公里，具有传输速率高、结构简单、组网灵活和便于管理的特点。",
+    "chapter": "网络与信息安全",
+    "knowledgeSection": "网络基础",
+    "knowledgePoint": "网络设备与 Internet",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "网络设备与 Internet"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "二、19"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-041",
+    "type": "true_false",
+    "question": "TCP/IP 协议是 Internet 网络的核心。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "TCP/IP 是 Internet 上统一使用的协议族，其中 TCP 提供可靠的传输控制，IP 负责网络互联与寻址，是整个 Internet 运行的基础。",
+    "chapter": "网络与信息安全",
+    "knowledgeSection": "网络基础",
+    "knowledgePoint": "网络设备与 Internet",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "网络设备与 Internet"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "二、20"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-042",
+    "type": "multiple_choice",
+    "question": "计算机采用二进制的主要原因是（ ）。",
+    "options": {
+      "A": "两个状态的系统容易实现，成本低",
+      "B": "运算法则简单",
+      "C": "十进制无法在计算机中实现",
+      "D": "可进行逻辑运算"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "二进制只有两个状态，物理上易于用器件的通断表示，运算规则简单，且 0 和 1 可直接对应逻辑真值与假值。十进制并非无法实现，只是实现复杂、成本高。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "数制与数据表示",
+    "knowledgePoint": "进制转换",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "进制转换"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "三、1"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-043",
+    "type": "multiple_choice",
+    "question": "计算机中字符 a 的 ASCII 码值是 (01100001)₂，那么字符 c 的 ASCII 码值是（ ）。",
+    "options": {
+      "A": "(01100010)",
+      "B": "(01100011)₂",
+      "C": "(143)₈",
+      "D": "(63)₁₆"
+    },
+    "answer": [
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "a 的码值为 97，c 比 a 大 2，即 99。99 的二进制正是 01100011，八进制为 143，十六进制为 63，三种表示等价，因此 B、C、D 都正确。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "数制与数据表示",
+    "knowledgePoint": "进制转换",
+    "difficulty": "hard",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "进制转换"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "三、2"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-044",
+    "type": "multiple_choice",
+    "question": "随机存储器 RAM 的特点是（ ）。",
+    "options": {
+      "A": "RAM 中的信息可读写",
+      "B": "RAM 的存取速度高于硬盘",
+      "C": "RAM 中的信息可长期保存",
+      "D": "RAM 是一种半导体存储器"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "RAM 可随机读写、由半导体器件构成、速度远高于硬盘，但断电后信息立即丢失，不能长期保存，所以 C 错误。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "硬件系统",
+    "knowledgePoint": "体系结构与硬件",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "体系结构与硬件"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "三、3"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-045",
+    "type": "multiple_choice",
+    "question": "实现键盘大小写转换可用（ ）。",
+    "options": {
+      "A": "Shift+字母键",
+      "B": "Alt+字母键",
+      "C": "CapsLock",
+      "D": "NumLock"
+    },
+    "answer": [
+      "A",
+      "C"
+    ],
+    "analysis": "按住 Shift 再敲字母可临时输入相反的大小写，CapsLock 则在大小写状态之间锁定切换。Alt 组合键用于菜单或快捷操作，NumLock 控制小键盘数字键。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "软件与系统操作",
+    "knowledgePoint": "Windows 文件与任务",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "Windows 文件与任务"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "三、4"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-046",
+    "type": "multiple_choice",
+    "question": "下列英文字符中，Windows 长文件名不能使用的有（ ）。",
+    "options": {
+      "A": "<",
+      "B": "?",
+      "C": ":",
+      "D": "\\"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "Windows 文件名禁止使用 \\ / : * ? \" < > | 这九个字符，它们分别有路径分隔、通配和保留用途，四个选项全部不能使用。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "软件与系统操作",
+    "knowledgePoint": "Windows 文件与任务",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "Windows 文件与任务"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "三、5"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-047",
+    "type": "multiple_choice",
+    "question": "在 Windows 中，窗口所具有的特点有（ ）。",
+    "options": {
+      "A": "窗口设有菜单栏",
+      "B": "窗口没有菜单栏",
+      "C": "窗口右上角设有最大化、最小化按钮",
+      "D": "窗口的大小可以改变"
+    },
+    "answer": [
+      "A",
+      "C",
+      "D"
+    ],
+    "analysis": "标准应用程序窗口通常包含菜单栏，右上角有最小化、最大化/还原和关闭按钮，并可通过拖动边框调整大小。B 与 A 相互矛盾且不符合一般情况。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "软件与系统操作",
+    "knowledgePoint": "Windows 文件与任务",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "Windows 文件与任务"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "三、6"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-048",
+    "type": "multiple_choice",
+    "question": "关于 Word 字编辑状态的光标，正确的是（ ）。",
+    "options": {
+      "A": "光标闪烁的位置是录入文字的位置",
+      "B": "可以用鼠标改变光标位置",
+      "C": "录入文字后，光标位置会自动后移",
+      "D": "光标位置不能改变"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "插入点光标指示当前录入位置，可用鼠标点击或键盘方向键移动，输入字符后自动右移。D 与事实相反，光标位置是可以改变的。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Word",
+    "knowledgePoint": "文档编辑与排版",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "文档编辑与排版"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "三、7"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-049",
+    "type": "multiple_choice",
+    "question": "Excel 有自动填充功能，可以自动填充（ ）。",
+    "options": {
+      "A": "公式",
+      "B": "日期",
+      "C": "数字",
+      "D": "文本"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "Excel 的填充柄可按规律自动填充公式、日期、数字和文本序列，例如日期递增、公式相对引用调整、自定义序列填充等。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "函数与数据处理",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "函数与数据处理"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "三、8"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-050",
+    "type": "multiple_choice",
+    "question": "在幻灯片窗格中，选择多个对象可以（ ）。",
+    "options": {
+      "A": "单击一个对象后，按住 Ctrl 键，再单击其他对象",
+      "B": "单击一个对象后，按住 Shift 键，再单击其他对象",
+      "C": "分别单击每一个要选择的对象",
+      "D": "选择矩形画图工具，利用鼠标在包含这些对象的区域画一个框"
+    },
+    "answer": [
+      "A",
+      "B"
+    ],
+    "analysis": "在 PowerPoint 中可用 Ctrl 或 Shift 配合单击逐个加选对象，也可用鼠标框选。普通单击只能选中一个对象，因此 C 不成立。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "PowerPoint",
+    "knowledgePoint": "幻灯片制作与放映",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "幻灯片制作与放映"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "三、9"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-051",
+    "type": "multiple_choice",
+    "question": "以下哪些是因特网的应用（ ）。",
+    "options": {
+      "A": "电子邮件（E-mail）",
+      "B": "全球万维网（WWW）",
+      "C": "文件传输（FTP）",
+      "D": "远程登录（Telnet）"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "电子邮件、万维网、文件传输和远程登录都是 Internet 上典型的应用服务，分别使用 SMTP/POP3、HTTP、FTP 和 Telnet 等协议。",
+    "chapter": "网络与信息安全",
+    "knowledgeSection": "网络基础",
+    "knowledgePoint": "网络设备与 Internet",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "网络设备与 Internet"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "三、10"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-052",
+    "type": "single_choice",
+    "question": "存储一个 32×32 点阵汉字，需要（ ）字节存储空间。原卷为填空题，已改写为单选。",
+    "options": {
+      "A": "32",
+      "B": "64",
+      "C": "128",
+      "D": "256"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "32×32 点阵共 1024 个点，每点占一位，合计 1024 位；1024÷8 等于 128 字节，因此需要 128 字节。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "数制与数据表示",
+    "knowledgePoint": "信息编码与计量",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "信息编码与计量"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "四、1",
+        "note": "原卷为填空题，答案 128；平台客观题不支持填空，已改写为单选并保留原答案。"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-053",
+    "type": "single_choice",
+    "question": "十六进制数 7B 对应的十进制数为（ ）。原卷为填空题，已改写为单选。",
+    "options": {
+      "A": "115",
+      "B": "123",
+      "C": "131",
+      "D": "139"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "按位权展开：7×16+11 = 112+11 = 123，因此 7B 的十进制值为 123。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "数制与数据表示",
+    "knowledgePoint": "进制转换",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "进制转换"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "四、2",
+        "note": "原卷为填空题，答案 123；平台客观题不支持填空，已改写为单选并保留原答案。"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-054",
+    "type": "single_choice",
+    "question": "为了区分内存中的不同存储单元，可为每个存储单元分配一个唯一的编号，称为存储（ ）。原卷为填空题，已改写为单选。",
+    "options": {
+      "A": "地址",
+      "B": "容量",
+      "C": "字长",
+      "D": "字节"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "每个存储单元的唯一编号称为存储地址，CPU 正是通过地址来访问指定单元中的数据。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "硬件系统",
+    "knowledgePoint": "体系结构与硬件",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "体系结构与硬件"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "四、3",
+        "note": "原卷为填空题，答案“地址”；平台客观题不支持填空，已改写为单选并保留原答案。"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-055",
+    "type": "single_choice",
+    "question": "在编辑状态下，欲使输入的字符直接覆盖当前位置处的字符，可使用键盘上的（ ）键切换编辑功能。原卷为填空题，已改写为单选。",
+    "options": {
+      "A": "Insert",
+      "B": "Delete",
+      "C": "Backspace",
+      "D": "CapsLock"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Insert 键用于在“插入”和“改写”两种编辑状态之间切换，改写状态下输入的字符会直接覆盖光标处的原有字符。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "软件与系统操作",
+    "knowledgePoint": "Windows 文件与任务",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "Windows 文件与任务"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "四、4",
+        "note": "原卷为填空题，答案 Insert；平台客观题不支持填空，已改写为单选并保留原答案。"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-056",
+    "type": "single_choice",
+    "question": "在删除文件时，按（ ）键可不经过回收站直接进行物理删除。原卷为填空题，已改写为单选。",
+    "options": {
+      "A": "Ctrl+Delete",
+      "B": "Shift+Delete",
+      "C": "Alt+Delete",
+      "D": "Delete"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "按住 Shift 再执行删除，文件不进入回收站而被直接物理删除，删除后无法通过回收站还原，操作时需谨慎。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "软件与系统操作",
+    "knowledgePoint": "Windows 文件与任务",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "Windows 文件与任务"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "四、5",
+        "note": "原卷为填空题，答案 Shift+Delete；平台客观题不支持填空，已改写为单选并保留原答案。"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-057",
+    "type": "single_choice",
+    "question": "在 Excel 中若 B1:B3 单元格分别为 4、5、7，则公式 SUM(B1:B3,5) 的值为（ ）。原卷为填空题，已改写为单选。",
+    "options": {
+      "A": "16",
+      "B": "21",
+      "C": "26",
+      "D": "11"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "SUM 函数对区域内数值求和后再加上参数 5，即 4+5+7+5 = 21。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "函数与数据处理",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "函数与数据处理"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "四、6",
+        "note": "原卷为填空题，答案 21；平台客观题不支持填空，已改写为单选并保留原答案。"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-058",
+    "type": "single_choice",
+    "question": "启动 Excel 后，BOOK1 默认的工作表数为（ ）。原卷为填空题，已改写为单选。",
+    "options": {
+      "A": "1 个",
+      "B": "2 个",
+      "C": "3 个",
+      "D": "4 个"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "新建工作簿时默认包含 3 张工作表，分别命名为 Sheet1、Sheet2、Sheet3，数量可在选项设置中调整。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "单元格与地址引用",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "单元格与地址引用"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "四、7",
+        "note": "原卷为填空题，答案 3 个；平台客观题不支持填空，已改写为单选并保留原答案。"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-059",
+    "type": "single_choice",
+    "question": "PPT 是 PowerPoint 文档默认的扩展名，（ ）是 Excel 文档默认扩展名。原卷为填空题，已改写为单选。",
+    "options": {
+      "A": "doc",
+      "B": "xls",
+      "C": "txt",
+      "D": "ppt"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Excel 工作簿的默认扩展名是 xls（新版为 xlsx），doc 属于 Word，txt 是纯文本，ppt 属于 PowerPoint。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "单元格与地址引用",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "单元格与地址引用"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "四、8",
+        "note": "原卷为填空题，答案 xls；平台客观题不支持填空，已改写为单选并保留原答案。"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-060",
+    "type": "single_choice",
+    "question": "要停止正在放映的幻灯片，只要按（ ）键即可。原卷为填空题，已改写为单选。",
+    "options": {
+      "A": "Esc",
+      "B": "Enter",
+      "C": "Space",
+      "D": "Tab"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "放映过程中按 Esc 键可直接结束放映并返回编辑视图；Enter、空格和 Tab 通常用于切换到下一张幻灯片。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "PowerPoint",
+    "knowledgePoint": "幻灯片制作与放映",
+    "difficulty": "easy",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "幻灯片制作与放映"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "四、9",
+        "note": "原卷为填空题，答案 Esc；平台客观题不支持填空，已改写为单选并保留原答案。"
+      }
+    ]
+  },
+  {
+    "id": "sc-2011-xichang-061",
+    "type": "single_choice",
+    "question": "在 A 类 IP 地址中，第一个字节为（ ）号，其后的字节为主机号。原卷为填空题，已改写为单选。",
+    "options": {
+      "A": "主机",
+      "B": "网络",
+      "C": "广播",
+      "D": "子网掩码"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "A 类地址用第一个字节表示网络号，且首位固定为 0，后三个字节表示主机号，因此每个 A 类网络可容纳的主机数量最多。",
+    "chapter": "网络与信息安全",
+    "knowledgeSection": "网络基础",
+    "knowledgePoint": "网络设备与 Internet",
+    "difficulty": "medium",
+    "tags": [
+      "四川专升本",
+      "计算机基础",
+      "网络设备与 Internet"
+    ],
+    "provenance": [
+      {
+        "file": "【计算机2011】西昌学院专升本真题.pdf",
+        "questionNumber": "四、10",
+        "note": "原卷为填空题，答案“网络”；平台客观题不支持填空，已改写为单选并保留原答案。"
+      }
+    ]
+  }
+]

@@ -198,7 +198,7 @@ try {
   assert.equal(store.allA(user.id).length, exam.questionIds.length + 1);
 
   for (const [route, heading] of [
-    ["guide", "证书指南"],
+    ["guide", "考试与证书指南"],
     ["community", "共享 AI 题库"],
     ["chat", "考匠社区"],
     ["settings", "设置"],
@@ -216,6 +216,23 @@ try {
   ).toBeVisible();
   await page.goto(base + "/#vip");
   await expect(page.locator(".vip-page")).toBeVisible();
+  await page.getByRole("combobox", { name: "切换备考目标", exact: true }).selectOption("sichuan-upgrading-computer");
+  await expect(page.getByRole("combobox", { name: "切换备考目标", exact: true })).toHaveValue("sichuan-upgrading-computer");
+  await page.goto(base + "/#guide");
+  await expect(page.getByRole("heading", { name: "四川专升本 · 计算机基础", exact: true })).toBeVisible();
+  await expect(page.locator(".guide-knowledge-grid article")).toHaveCount(7);
+  await expect(page.locator(".guide-knowledge-grid")).toContainText("参考分值约 35%");
+  await page.screenshot({ path: "test-output/sichuan-guide-desktop.png", fullPage: true });
+  await page.goto(base + "/#chapters");
+  await expect(page.getByRole("heading", { name: "章节练习", exact: true }).first()).toBeVisible();
+  await page.screenshot({ path: "test-output/sichuan-chapters-desktop.png", fullPage: true });
+  await page.goto(base + "/#home");
+  await page.getByRole("button", { name: "开始 10 题练习", exact: true }).click();
+  await expect(page.locator(".question-text")).toBeVisible();
+  const upgradingText = normalize(await page.locator(".question-text").textContent());
+  const upgradingQuestion = store.allQ().find((item) => normalize(item.question) === upgradingText);
+  assert.ok(upgradingQuestion?.certificates.includes("sichuan-upgrading-computer"));
+  await page.screenshot({ path: "test-output/sichuan-practice-desktop.png", fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(base + "/#downloads");
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();

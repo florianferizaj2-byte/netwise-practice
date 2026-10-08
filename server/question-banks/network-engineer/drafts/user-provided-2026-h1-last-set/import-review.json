@@ -1,0 +1,119 @@
+{
+  "title": "2026上半年网络工程师最后一套卷导入草稿与复核记录",
+  "status": "imported-locally-after-review",
+  "sourceFiles": [
+    {
+      "file": "2026年上半年网络工程师考前几页纸.pdf",
+      "sha256": "D95CB04A652FD7F47D4F770F38E461F173D471AB9EFA9FEFC418D12F8E455A34",
+      "pages": 20
+    },
+    {
+      "file": "2026年上半年网络工程师最后一套卷（案例分析）.pdf",
+      "sha256": "38FE171E8CE711D0582702F9D1179EA9A0F16B8D7E27D672E20E6A79C6B4FF5C",
+      "pages": 19
+    },
+    {
+      "file": "2026年上半年网络工程师最后一套卷（综合知识）.pdf",
+      "sha256": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0",
+      "pages": 47
+    }
+  ],
+  "candidateCounts": {
+    "single_choice": 75,
+    "short_answer": 13,
+    "total": 88
+  },
+  "answerReview": {
+    "status": "source-answers-and-explanations-reviewed",
+    "answerSource": "案例卷和综合知识卷的答案直接印在PDF中；无独立答案解析PDF。逐题整理简要解析，并对计算、协议和图题复核。",
+    "caveats": [
+      "综合知识第2题为考生回忆版。保留原卷A答案，但解析说明版权需按人类对表达的原创性贡献个案判断。",
+      "IPsec题的NAT-T边界已在解析说明，隧道模式本身不等于NAT穿越。",
+      "案例卷个别设备命令排版较淡，简答按题意及答案表归纳。"
+    ]
+  },
+  "classificationReview": {
+    "status": "mapped-to-existing-taxonomy",
+    "method": "全部按现有manifest中的模块、分节和知识点映射；需求分析总结题没有专用知识点，暂映射到项目文档管理并记录该限制。",
+    "limitations": [
+      "需求遗漏变更题与需求分析总结题在现有分类中没有专门知识点，按项目变更/基线管理最近似归入配置管理。",
+      "MFLOPS、VRRP链路跟踪、NETCONF、MPLS、VXLAN在现有细分目录中没有专门节点，分别归入计算机组成、路由优先级、管理协议、路由基础、VLAN相关节点。",
+      "案例二等保题已归入现有“等保2.0”节点。"
+    ]
+  },
+  "imageReview": {
+    "status": "cropped-and-copied-to-public-assets; paths-verified",
+    "uniqueImageFileCount": 14,
+    "images": [
+      "case-c1-vpn.png",
+      "case-c2-datacenter.png",
+      "case-c3-qos.png",
+      "case-c4-mstp.png",
+      "case-c4-vlsm.png",
+      "general-q005.png",
+      "general-q006.png",
+      "general-q012-capture.png",
+      "general-q012-topology.png",
+      "general-q018-mac.png",
+      "general-q021-stp.png",
+      "general-q022-ospf.png",
+      "general-q034-capture.png",
+      "general-q037-tcp.png"
+    ],
+    "questionImageReferences": 20,
+    "questionsWithImages": 19,
+    "publicDirectory": "public/question-images/network-engineer/2026-h1-last-set/"
+  },
+  "preexamNotes": "考前几页纸是知识点速记稿，逐页OCR保存在 drafts/user-provided-2026-h1-last-set/preexam-notes-ocr.md；不将其作为试题导入。",
+  "hashes": {
+    "preexam": "D95CB04A652FD7F47D4F770F38E461F173D471AB9EFA9FEFC418D12F8E455A34",
+    "case": "38FE171E8CE711D0582702F9D1179EA9A0F16B8D7E27D672E20E6A79C6B4FF5C",
+    "general": "0E7F3DA339A93D57C64E05FA3DC774E400CD0307881A174F653DA8722A12ECA0"
+  },
+  "importedCounts": {
+    "single_choice": 74,
+    "short_answer": 13,
+    "total": 87
+  },
+  "duplicateReview": {
+    "status": "completed-against-all-existing-network-engineer-banks",
+    "confirmedDuplicatesExcluded": [
+      {
+        "questionId": "lastset-general-2026h1-q036",
+        "questionNumber": 36,
+        "matchedExistingId": "collection-c03-q032",
+        "matchedFile": "questions/user-collection/03.json",
+        "duplicateType": "semantic-equivalent",
+        "reason": "措辞不同，但都询问清除Windows本地DNS缓存，正确操作均为 ipconfig /flushdns。"
+      }
+    ],
+    "similarButDistinctKept": [
+      {
+        "questionNumber": 19,
+        "reason": "题目问ICMP，近似命中的是ICMPv6或ICMP重定向题，协议/场景不同。"
+      },
+      {
+        "questionNumber": 55,
+        "reason": "本题识别非对称算法中的DES；现有题要求识别RSA，选项与设问方向不同。"
+      },
+      {
+        "questionNumber": 59,
+        "reason": "本题考IDS旁路检测；相似题讨论IPS串接阻断，功能侧重点不同。"
+      },
+      {
+        "questionNumber": 62,
+        "reason": "本题考状态检测防火墙；相似题讨论包过滤或一般防火墙特性。"
+      },
+      {
+        "questionNumber": 64,
+        "reason": "同为RAID 5容量公式，但盘容量条件不同，可作数值变式练习。"
+      },
+      {
+        "questionNumber": 65,
+        "reason": "考混合盘容量按最小盘计算，和现有同容量磁盘题的计算条件不同。"
+      }
+    ],
+    "newBatchInternalDuplicates": []
+  },
+  "formalBankPath": "questions/user-provided-2026-h1-last-set/questions.json"
+}

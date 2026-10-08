@@ -1,0 +1,504 @@
+[
+  {
+    "id": "lastset-case-2026h1-c1-q01",
+    "type": "short_answer",
+    "question": "【案例一：总部与分支VPN】VPN的全称是什么？按工作层次属于网络层的类型有哪些？IPsec有哪两种工作模式？局域网到局域网经公网通信常用哪种模式？AH与ESP中，哪一种同时支持加密和认证？",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "VPN：虚拟专用网；网络层VPN：IPsec VPN、GRE VPN；IPsec模式：隧道模式、传输模式；站点到站点常用隧道模式；能提供加密并可进行认证的是ESP。",
+    "analysis": "IPsec工作在网络层，GRE也可承载网络层隧道流量；隧道模式封装原始IP包，常用于网关间站点到站点连接。AH提供认证和完整性但不加密，ESP可提供加密并支持完整性认证。",
+    "chapter": "网络安全",
+    "knowledgeSection": "VPN与安全传输",
+    "knowledgePoint": "IPsec VPN与SSL VPN",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "案例题",
+      "最后一套卷·案例分析",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（案例分析）.pdf",
+        "sha256": "38FE171E8CE711D0582702F9D1179EA9A0F16B8D7E27D672E20E6A79C6B4FF5C",
+        "questionNumber": 1,
+        "subQuestionNumber": 1,
+        "pages": [
+          1
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（案例分析）》PDF；出版方、官方性及答案权威性未独立核实。参考答案按卷内试题答案整理并校对。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-last-set/case-c1-vpn.png",
+        "alt": "总部与分支机构VPN拓扑图",
+        "caption": "原卷配图"
+      }
+    ]
+  },
+  {
+    "id": "lastset-case-2026h1-c1-q02",
+    "type": "short_answer",
+    "question": "【案例一：总部与分支VPN】按题面补齐R1与R2的静态路由、保护流量ACL、IPsec提议、IKE对等体、策略映射及接口应用配置。总部网段为172.22.1.0/24，分支网段为172.22.2.0/24，对端公网地址为167.1.1.1和168.1.1.1，共享密钥为huawei。",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "（1）system-view；（2）R1配置ip route-static默认路由，下一跳168.1.1.2；（3）3000；（4）source 172.22.1.0 0.0.0.255 destination 172.22.2.0 0.0.0.255；（5）tran1；（6）sha1；（7）预共享密钥huawei；（8）167.1.1.1；（9）security；（10）peer1；（11）csaimap；（12）3des；（13）huawei；（14）168.1.1.1；（15）return。",
+    "analysis": "R1经公网网关168.1.1.2配置缺省路由，ACL 3000匹配总部到分支的私网流量；两端使用一致的ESP/3DES/SHA1提议和huawei预共享密钥，远端地址互相指向，最后把IPsec策略应用到串口。卷面将若干命令省略，填空答案按原卷答案表逐项归纳。",
+    "chapter": "网络安全",
+    "knowledgeSection": "VPN与安全传输",
+    "knowledgePoint": "IPsec VPN与SSL VPN",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "案例题",
+      "最后一套卷·案例分析",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（案例分析）.pdf",
+        "sha256": "38FE171E8CE711D0582702F9D1179EA9A0F16B8D7E27D672E20E6A79C6B4FF5C",
+        "questionNumber": 1,
+        "subQuestionNumber": 2,
+        "pages": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（案例分析）》PDF；出版方、官方性及答案权威性未独立核实。参考答案按卷内试题答案整理并校对。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-last-set/case-c1-vpn.png",
+        "alt": "总部与分支机构VPN拓扑图",
+        "caption": "原卷配图"
+      }
+    ]
+  },
+  {
+    "id": "lastset-case-2026h1-c2-q01",
+    "type": "short_answer",
+    "question": "【案例二：数据中心安全分区】根据拓扑图，为设备①②③分别选择合适的安全设备，实现Web应用防护、数据库区域访问控制和服务器漏洞扫描。",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "①部署Web应用防火墙（WAF）；②部署防火墙；③部署漏洞扫描设备。",
+    "analysis": "WAF针对HTTP/HTTPS应用层攻击；防火墙实施区域边界访问控制；漏洞扫描设备定期检查服务器等资产的已知漏洞。",
+    "chapter": "网络安全",
+    "knowledgeSection": "网络设备与边界防护",
+    "knowledgePoint": "防火墙与DMZ",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "案例题",
+      "最后一套卷·案例分析",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（案例分析）.pdf",
+        "sha256": "38FE171E8CE711D0582702F9D1179EA9A0F16B8D7E27D672E20E6A79C6B4FF5C",
+        "questionNumber": 2,
+        "subQuestionNumber": 1,
+        "pages": [
+          6,
+          7
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（案例分析）》PDF；出版方、官方性及答案权威性未独立核实。参考答案按卷内试题答案整理并校对。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-last-set/case-c2-datacenter.png",
+        "alt": "数据中心安全分区与设备拓扑图",
+        "caption": "原卷配图"
+      }
+    ]
+  },
+  {
+    "id": "lastset-case-2026h1-c2-q02",
+    "type": "short_answer",
+    "question": "【案例二：数据中心安全分区】等保管理要求中，机房位置、防雷、防火、防水防潮、静电和电磁防护属于哪个方面？人员录用、离岗、安全意识培训和外部人员访问管理属于哪个方面？",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "机房及环境要求属于安全物理环境；人员录用、离岗、培训和外部人员访问属于安全管理人员。",
+    "analysis": "等保要求把物理位置、设施防护和环境控制归为安全物理环境；人员生命周期和人员安全教育归为安全管理人员。",
+    "chapter": "项目管理与法律法规",
+    "knowledgeSection": "法律法规与合规",
+    "knowledgePoint": "等保2.0",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "案例题",
+      "最后一套卷·案例分析",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（案例分析）.pdf",
+        "sha256": "38FE171E8CE711D0582702F9D1179EA9A0F16B8D7E27D672E20E6A79C6B4FF5C",
+        "questionNumber": 2,
+        "subQuestionNumber": 2,
+        "pages": [
+          6,
+          7,
+          8
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（案例分析）》PDF；出版方、官方性及答案权威性未独立核实。参考答案按卷内试题答案整理并校对。"
+  },
+  {
+    "id": "lastset-case-2026h1-c2-q03",
+    "type": "short_answer",
+    "question": "【案例二：数据中心安全分区】DDoS主要影响信息系统的哪项安全属性？写出两种攻击特征，并至少列出三种防范方法。",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "主要影响可用性。特征可包括攻击源地址分散、服务器收到大量异常报文、带宽或连接等资源耗尽。防范方法可列：及时修补系统、关闭未用服务和端口、部署流量清洗、使用CDN、增加带宽、负载分担。",
+    "analysis": "DDoS通过大量分布式流量或请求耗尽目标带宽、连接或计算资源，使服务无法正常提供；防护通常结合源头加固、流量清洗、分散承载和容量扩展。",
+    "chapter": "网络安全",
+    "knowledgeSection": "网络攻击",
+    "knowledgePoint": "DDoS",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "案例题",
+      "最后一套卷·案例分析",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（案例分析）.pdf",
+        "sha256": "38FE171E8CE711D0582702F9D1179EA9A0F16B8D7E27D672E20E6A79C6B4FF5C",
+        "questionNumber": 2,
+        "subQuestionNumber": 3,
+        "pages": [
+          7,
+          8
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（案例分析）》PDF；出版方、官方性及答案权威性未独立核实。参考答案按卷内试题答案整理并校对。"
+  },
+  {
+    "id": "lastset-case-2026h1-c2-q04",
+    "type": "short_answer",
+    "question": "【案例二：数据中心安全分区】从图中判断当前使用的存储方案；若从经济性考虑希望节省成本，可改用哪种方案？简述原因。",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "当前为FC-SAN；可考虑IP-SAN。FC-SAN通常性能较好但需要光纤通道交换机等专用设备，IP-SAN可利用以太网设备，成本通常更低。",
+    "analysis": "图示服务器通过FC交换机连接存储，因此是FC-SAN。IP-SAN基于IP以太网传输块存储数据，设备和布线成本通常较低。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "存储器与可靠性",
+    "knowledgePoint": "存储介质性能比较",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "案例题",
+      "最后一套卷·案例分析",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（案例分析）.pdf",
+        "sha256": "38FE171E8CE711D0582702F9D1179EA9A0F16B8D7E27D672E20E6A79C6B4FF5C",
+        "questionNumber": 2,
+        "subQuestionNumber": 4,
+        "pages": [
+          8,
+          9
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（案例分析）》PDF；出版方、官方性及答案权威性未独立核实。参考答案按卷内试题答案整理并校对。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-last-set/case-c2-datacenter.png",
+        "alt": "数据中心安全分区与设备拓扑图",
+        "caption": "原卷配图"
+      }
+    ]
+  },
+  {
+    "id": "lastset-case-2026h1-c3-q01",
+    "type": "short_answer",
+    "question": "【案例三：楼层网络QoS】Best-Effort、IntServ和DiffServ三种服务模型中，Internet默认采用哪一种？需要通过RSVP进行资源预留的是哪一种？",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "Internet默认使用Best-Effort服务模型；需要使用RSVP进行资源预留的是IntServ服务模型。",
+    "analysis": "Best-Effort不预留资源，是Internet常见默认服务；IntServ按流进行资源预留，通常借助RSVP信令。",
+    "chapter": "综合布线与网络规划",
+    "knowledgeSection": "网络规划与性能",
+    "knowledgePoint": "带宽、时延、丢包率与吞吐量",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "案例题",
+      "最后一套卷·案例分析",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（案例分析）.pdf",
+        "sha256": "38FE171E8CE711D0582702F9D1179EA9A0F16B8D7E27D672E20E6A79C6B4FF5C",
+        "questionNumber": 3,
+        "subQuestionNumber": 1,
+        "pages": [
+          9,
+          10,
+          12
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（案例分析）》PDF；出版方、官方性及答案权威性未独立核实。参考答案按卷内试题答案整理并校对。"
+  },
+  {
+    "id": "lastset-case-2026h1-c3-q02",
+    "type": "short_answer",
+    "question": "【案例三：楼层网络QoS】按题图和需求补齐Switch配置：VLAN 10与20的Trunk放行；用ACL分别匹配192.168.1.0/24和192.168.2.0/24；两类流量分别整形，CIR均为6000/8000kbps、PIR均为10000kbps；最后在GE0/0/3出口应用策略。",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "答案表的关键填空依次为：port trunk allow-pass vlan 10 20；ACL 2000匹配192.168.1.0 0.0.0.255；ACL 2001匹配192.168.2.0 0.0.0.255；classifier c1/c2分别匹配ACL；c1使用CIR 6000、PIR 10000，c2使用CIR 8000、PIR 10000；建立traffic behavior b2；策略中c2关联b2；在GE0/0/3应用traffic-policy p1 outbound。",
+    "analysis": "先用VLAN和ACL区分两个用户网段，再用流分类关联流量行为与CIR/PIR参数，最后在上行接口出方向应用策略。原卷以多处空格展示命令，答案按其空格顺序归纳。",
+    "chapter": "综合布线与网络规划",
+    "knowledgeSection": "网络规划与性能",
+    "knowledgePoint": "带宽、时延、丢包率与吞吐量",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "案例题",
+      "最后一套卷·案例分析",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（案例分析）.pdf",
+        "sha256": "38FE171E8CE711D0582702F9D1179EA9A0F16B8D7E27D672E20E6A79C6B4FF5C",
+        "questionNumber": 3,
+        "subQuestionNumber": 2,
+        "pages": [
+          9,
+          10,
+          11,
+          12,
+          13
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（案例分析）》PDF；出版方、官方性及答案权威性未独立核实。参考答案按卷内试题答案整理并校对。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-last-set/case-c3-qos.png",
+        "alt": "按楼层划分VLAN的QoS网络拓扑图",
+        "caption": "原卷配图"
+      }
+    ]
+  },
+  {
+    "id": "lastset-case-2026h1-c3-q03",
+    "type": "short_answer",
+    "question": "【案例三：楼层网络QoS】拓扑中缺少哪种边界安全设备？其安全级别最高的区域是什么？除直连部署外，还可采用什么方式连接到核心交换机进行流量过滤？",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "缺少防火墙；安全级别最高的区域为Local；还可采用旁挂方式部署。",
+    "analysis": "防火墙提供区域间访问控制，Local区域代表设备自身，默认安全级别最高；旁挂部署可通过流量引导或镜像等方式实现过滤。",
+    "chapter": "网络安全",
+    "knowledgeSection": "网络设备与边界防护",
+    "knowledgePoint": "防火墙与DMZ",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "案例题",
+      "最后一套卷·案例分析",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（案例分析）.pdf",
+        "sha256": "38FE171E8CE711D0582702F9D1179EA9A0F16B8D7E27D672E20E6A79C6B4FF5C",
+        "questionNumber": 3,
+        "subQuestionNumber": 3,
+        "pages": [
+          12,
+          13
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（案例分析）》PDF；出版方、官方性及答案权威性未独立核实。参考答案按卷内试题答案整理并校对。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-last-set/case-c3-qos.png",
+        "alt": "按楼层划分VLAN的QoS网络拓扑图",
+        "caption": "原卷配图"
+      }
+    ]
+  },
+  {
+    "id": "lastset-case-2026h1-c4-q01",
+    "type": "short_answer",
+    "question": "【案例四：MSTP与地址规划】根据拓扑与配置补齐MSTP项目：设置域名和VLAN实例映射；选择路径开销标准；在相应端口启用根保护、BPDU保护及边缘端口功能。",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "①MST域名RG1；②实例1映射VLAN 2至10；③路径开销标准legacy；④在SwitchA连接下游交换机的端口启用根保护；⑤在SwitchC启用BPDU保护；⑥在SwitchD面向终端的接口配置stp edged-port。",
+    "analysis": "MST域内各交换机需要一致的域名、修订级别和VLAN映射；根保护防止下游设备争夺根角色，BPDU保护用于保护边缘端口，边缘端口用于连接终端。",
+    "chapter": "局域网与交换技术",
+    "knowledgeSection": "STP生成树",
+    "knowledgePoint": "端口角色与BPDU",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "案例题",
+      "最后一套卷·案例分析",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（案例分析）.pdf",
+        "sha256": "38FE171E8CE711D0582702F9D1179EA9A0F16B8D7E27D672E20E6A79C6B4FF5C",
+        "questionNumber": 4,
+        "subQuestionNumber": 1,
+        "pages": [
+          14,
+          15,
+          16,
+          17
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（案例分析）》PDF；出版方、官方性及答案权威性未独立核实。参考答案按卷内试题答案整理并校对。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-last-set/case-c4-mstp.png",
+        "alt": "MSTP多交换机网络拓扑图",
+        "caption": "原卷配图"
+      }
+    ]
+  },
+  {
+    "id": "lastset-case-2026h1-c4-q02",
+    "type": "short_answer",
+    "question": "【案例四：MSTP与地址规划】根据配置描述instance 1和instance 2的正常转发路径；若根桥故障，路径如何变化？",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "正常情况下，instance 1经SwitchC→SwitchA（也可继续经SwitchB到上游）；instance 2经SwitchD→SwitchB（也可继续经SwitchA到上游）。根桥故障时，instance 1可经SwitchC→SwitchD→SwitchB；instance 2可经SwitchD→SwitchC→SwitchA。",
+    "analysis": "instance 1以SwitchA为主根、SwitchB为备份根；instance 2相反。MSTP按实例分别计算无环树，主根失效后由备用根接管并改变上行路径。",
+    "chapter": "局域网与交换技术",
+    "knowledgeSection": "STP生成树",
+    "knowledgePoint": "端口角色与BPDU",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "案例题",
+      "最后一套卷·案例分析",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（案例分析）.pdf",
+        "sha256": "38FE171E8CE711D0582702F9D1179EA9A0F16B8D7E27D672E20E6A79C6B4FF5C",
+        "questionNumber": 4,
+        "subQuestionNumber": 2,
+        "pages": [
+          14,
+          17,
+          19
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（案例分析）》PDF；出版方、官方性及答案权威性未独立核实。参考答案按卷内试题答案整理并校对。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-last-set/case-c4-mstp.png",
+        "alt": "MSTP多交换机网络拓扑图",
+        "caption": "原卷配图"
+      }
+    ]
+  },
+  {
+    "id": "lastset-case-2026h1-c4-q03",
+    "type": "short_answer",
+    "question": "【案例四：MSTP与地址规划】按图中部门主机数量与已给地址，填写四个缺失项：（7）生产部地址范围终点；（8）销售部子网掩码；（9）研发部地址范围起点；（10）服务器地址范围终点。",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "（7）172.17.101.254；（8）255.255.255.128；（9）172.17.102.1；（10）172.17.103.190。",
+    "analysis": "按部门规模使用VLSM分配：生产部使用172.17.100.0/23；销售部使用/25；研发部使用172.17.102.0/25；服务器使用172.17.103.128/26，因此各空的边界地址如答案所列。",
+    "chapter": "网络体系结构与TCP/IP",
+    "knowledgeSection": "IPv4与子网",
+    "knowledgePoint": "VLSM子网划分",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "案例题",
+      "最后一套卷·案例分析",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（案例分析）.pdf",
+        "sha256": "38FE171E8CE711D0582702F9D1179EA9A0F16B8D7E27D672E20E6A79C6B4FF5C",
+        "questionNumber": 4,
+        "subQuestionNumber": 3,
+        "pages": [
+          18,
+          19
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（案例分析）》PDF；出版方、官方性及答案权威性未独立核实。参考答案按卷内试题答案整理并校对。",
+    "images": [
+      {
+        "src": "/question-images/network-engineer/2026-h1-last-set/case-c4-vlsm.png",
+        "alt": "部门主机地址分配表",
+        "caption": "原卷配图"
+      }
+    ]
+  },
+  {
+    "id": "lastset-case-2026h1-c4-q04",
+    "type": "short_answer",
+    "question": "【案例四：MSTP与地址规划】简述该网络的主要安全隐患及解决方案。",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "网络已通过MSTP、链路聚合等保障可靠性，但安全部署不足。可在网络边界部署防火墙和边界路由器；在用户接入侧部署接入认证等措施。",
+    "analysis": "冗余链路和生成树解决的是可用性问题，并不自动提供访问控制或身份鉴别；需要在边界和接入侧补充安全控制。",
+    "chapter": "网络安全",
+    "knowledgeSection": "网络设备与边界防护",
+    "knowledgePoint": "防火墙与DMZ",
+    "difficulty": "medium",
+    "tags": [
+      "网络工程师",
+      "案例题",
+      "最后一套卷·案例分析",
+      "用户提供",
+      "来源未核实"
+    ],
+    "provenance": [
+      {
+        "file": "2026年上半年网络工程师最后一套卷（案例分析）.pdf",
+        "sha256": "38FE171E8CE711D0582702F9D1179EA9A0F16B8D7E27D672E20E6A79C6B4FF5C",
+        "questionNumber": 4,
+        "subQuestionNumber": 4,
+        "pages": [
+          18,
+          19
+        ]
+      }
+    ],
+    "sourceVerification": "用户提供的《最后一套卷（案例分析）》PDF；出版方、官方性及答案权威性未独立核实。参考答案按卷内试题答案整理并校对。"
+  }
+]

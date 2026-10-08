@@ -1,0 +1,557 @@
+{
+  "reviewedAt": "2026-09-23",
+  "status": "passed",
+  "draftCount": 430,
+  "existingCount": 490,
+  "existingSources": {
+    "original": 47,
+    "userCollection": 443
+  },
+  "categoryCount": 10,
+  "knowledgePointCount": 43,
+  "perCategory": {
+    "计算机基础知识": 50,
+    "网络体系结构与 TCP/IP": 70,
+    "局域网与交换技术": 50,
+    "路由与广域网": 50,
+    "网络安全": 60,
+    "服务器配置": 20,
+    "网络管理": 40,
+    "综合布线与网络规划": 30,
+    "项目管理与法律法规": 30,
+    "新技术": 30
+  },
+  "perKnowledgePoint": [
+    {
+      "category": "计算机基础知识",
+      "knowledgePoint": "数制与编码",
+      "count": 10
+    },
+    {
+      "category": "计算机基础知识",
+      "knowledgePoint": "校验码",
+      "count": 10
+    },
+    {
+      "category": "计算机基础知识",
+      "knowledgePoint": "存储器与可靠性",
+      "count": 10
+    },
+    {
+      "category": "计算机基础知识",
+      "knowledgePoint": "计算机组成",
+      "count": 10
+    },
+    {
+      "category": "计算机基础知识",
+      "knowledgePoint": "操作系统",
+      "count": 10
+    },
+    {
+      "category": "网络体系结构与 TCP/IP",
+      "knowledgePoint": "网络模型",
+      "count": 10
+    },
+    {
+      "category": "网络体系结构与 TCP/IP",
+      "knowledgePoint": "数据通信与传输",
+      "count": 10
+    },
+    {
+      "category": "网络体系结构与 TCP/IP",
+      "knowledgePoint": "IPv4 与子网",
+      "count": 10
+    },
+    {
+      "category": "网络体系结构与 TCP/IP",
+      "knowledgePoint": "网际层协议",
+      "count": 10
+    },
+    {
+      "category": "网络体系结构与 TCP/IP",
+      "knowledgePoint": "传输层",
+      "count": 10
+    },
+    {
+      "category": "网络体系结构与 TCP/IP",
+      "knowledgePoint": "应用层协议与端口",
+      "count": 10
+    },
+    {
+      "category": "网络体系结构与 TCP/IP",
+      "knowledgePoint": "IPv6",
+      "count": 10
+    },
+    {
+      "category": "局域网与交换技术",
+      "knowledgePoint": "以太网",
+      "count": 10
+    },
+    {
+      "category": "局域网与交换技术",
+      "knowledgePoint": "VLAN",
+      "count": 10
+    },
+    {
+      "category": "局域网与交换技术",
+      "knowledgePoint": "STP",
+      "count": 10
+    },
+    {
+      "category": "局域网与交换技术",
+      "knowledgePoint": "交换安全与管理",
+      "count": 10
+    },
+    {
+      "category": "局域网与交换技术",
+      "knowledgePoint": "无线局域网",
+      "count": 10
+    },
+    {
+      "category": "路由与广域网",
+      "knowledgePoint": "路由基础",
+      "count": 10
+    },
+    {
+      "category": "路由与广域网",
+      "knowledgePoint": "RIP",
+      "count": 10
+    },
+    {
+      "category": "路由与广域网",
+      "knowledgePoint": "OSPF",
+      "count": 10
+    },
+    {
+      "category": "路由与广域网",
+      "knowledgePoint": "BGP",
+      "count": 10
+    },
+    {
+      "category": "路由与广域网",
+      "knowledgePoint": "广域网链路",
+      "count": 10
+    },
+    {
+      "category": "网络安全",
+      "knowledgePoint": "密码技术与摘要算法",
+      "count": 10
+    },
+    {
+      "category": "网络安全",
+      "knowledgePoint": "PKI、数字证书与吊销",
+      "count": 10
+    },
+    {
+      "category": "网络安全",
+      "knowledgePoint": "访问控制与地址转换",
+      "count": 10
+    },
+    {
+      "category": "网络安全",
+      "knowledgePoint": "防火墙、DMZ、IDS/IPS",
+      "count": 10
+    },
+    {
+      "category": "网络安全",
+      "knowledgePoint": "网络攻击与防护",
+      "count": 10
+    },
+    {
+      "category": "网络安全",
+      "knowledgePoint": "VPN：IPsec、SSL VPN",
+      "count": 10
+    },
+    {
+      "category": "服务器配置",
+      "knowledgePoint": "Windows",
+      "count": 10
+    },
+    {
+      "category": "服务器配置",
+      "knowledgePoint": "Linux",
+      "count": 10
+    },
+    {
+      "category": "网络管理",
+      "knowledgePoint": "网络管理五大功能",
+      "count": 10
+    },
+    {
+      "category": "网络管理",
+      "knowledgePoint": "SNMP、MIB 与版本",
+      "count": 10
+    },
+    {
+      "category": "网络管理",
+      "knowledgePoint": "故障排查工具",
+      "count": 10
+    },
+    {
+      "category": "网络管理",
+      "knowledgePoint": "日志与远程管理",
+      "count": 10
+    },
+    {
+      "category": "综合布线与网络规划",
+      "knowledgePoint": "综合布线子系统",
+      "count": 10
+    },
+    {
+      "category": "综合布线与网络规划",
+      "knowledgePoint": "双绞线与光纤",
+      "count": 10
+    },
+    {
+      "category": "综合布线与网络规划",
+      "knowledgePoint": "带宽、时延、丢包率、吞吐量",
+      "count": 10
+    },
+    {
+      "category": "项目管理与法律法规",
+      "knowledgePoint": "CPM、PERT、甘特图",
+      "count": 10
+    },
+    {
+      "category": "项目管理与法律法规",
+      "knowledgePoint": "风险、质量与配置管理",
+      "count": 10
+    },
+    {
+      "category": "项目管理与法律法规",
+      "knowledgePoint": "网络安全、数据安全、知识产权与等保",
+      "count": 10
+    },
+    {
+      "category": "新技术",
+      "knowledgePoint": "SDN 与 NFV",
+      "count": 10
+    },
+    {
+      "category": "新技术",
+      "knowledgePoint": "云计算与容器",
+      "count": 10
+    },
+    {
+      "category": "新技术",
+      "knowledgePoint": "5G 与 NB-IoT",
+      "count": 10
+    }
+  ],
+  "schemaAndCoverageErrors": [],
+  "exactDuplicateCount": 0,
+  "exactDuplicates": [],
+  "internalExactDuplicateCount": 0,
+  "internalExactDuplicates": [],
+  "nearDuplicateThreshold": 0.35,
+  "nearDuplicateCandidateCount": 7,
+  "nearDuplicates": [
+    {
+      "draftId": "ne-draft-20260923-053",
+      "similarity": 0.422,
+      "existingId": "collection-c03-q043",
+      "chapter": "网络体系结构与TCP/IP",
+      "knowledgePoint": "ARP与RARP",
+      "question": "在 TCP/IP 协议栈中，端口号主要用于哪项功能？",
+      "existingQuestion": "在TCP/IP协议栈中，ARP协议的作用是？"
+    },
+    {
+      "draftId": "ne-draft-20260923-088",
+      "similarity": 0.395,
+      "existingId": "practice-18",
+      "chapter": "网络体系结构与TCP/IP",
+      "knowledgePoint": "ARP与RARP",
+      "question": "ICMP 的主要作用是什么？",
+      "existingQuestion": "在以太网 IPv4 网络中，ARP 的主要作用是什么？"
+    },
+    {
+      "draftId": "ne-draft-20260923-107",
+      "similarity": 0.436,
+      "existingId": "collection-c10-q014",
+      "chapter": "网络体系结构与TCP/IP",
+      "knowledgePoint": "HTTP与HTTPS",
+      "question": "浏览器请求页面后，服务器返回 HTTP 状态码 401，通常表示？",
+      "existingQuestion": "HTTP状态码404表示？"
+    },
+    {
+      "draftId": "ne-draft-20260923-113",
+      "similarity": 0.365,
+      "existingId": "collection-c07-q032",
+      "chapter": "网络体系结构与TCP/IP",
+      "knowledgePoint": "地址表示与地址类型",
+      "question": "IPv6 地址 :: 的含义是什么？",
+      "existingQuestion": "下列关于IPv6地址的描述中，错误的是？"
+    },
+    {
+      "draftId": "ne-draft-20260923-133",
+      "similarity": 0.372,
+      "existingId": "practice-7",
+      "chapter": "局域网与交换技术",
+      "knowledgePoint": "802.1Q与VLAN标签",
+      "question": "一个 802.1Q 标签的 VLAN ID 字段取值为 0，通常表示什么？",
+      "existingQuestion": "IEEE 802.1Q 帧标签中的 VLAN ID 字段长度是多少位？"
+    },
+    {
+      "draftId": "ne-draft-20260923-397",
+      "similarity": 0.361,
+      "existingId": "collection-c08-q043",
+      "chapter": "项目管理与法律法规",
+      "knowledgePoint": "等保2.0",
+      "question": "数据分类分级保护与网络安全等级保护（等保）的关系，哪项表述更准确？",
+      "existingQuestion": "下列关于网络安全等级保护的说法，正确的是？"
+    },
+    {
+      "draftId": "ne-draft-20260923-425",
+      "similarity": 0.438,
+      "existingId": "practice-9",
+      "chapter": "局域网与交换技术",
+      "knowledgePoint": "端口角色与BPDU",
+      "question": "5G 网络切片的主要目的是什么？",
+      "existingQuestion": "STP 的主要目的是什么？"
+    }
+  ],
+  "manuallyReviewedNearCandidateThreshold": 0.28,
+  "manuallyReviewedNearCandidateCount": 11,
+  "reviewedNearCandidates": [
+    {
+      "draftId": "ne-draft-20260923-053",
+      "similarity": 0.422,
+      "existingId": "collection-c03-q043",
+      "chapter": "网络体系结构与TCP/IP",
+      "knowledgePoint": "ARP与RARP",
+      "question": "在 TCP/IP 协议栈中，端口号主要用于哪项功能？",
+      "existingQuestion": "在TCP/IP协议栈中，ARP协议的作用是？",
+      "reviewStatus": "reviewed_distinct",
+      "reviewNote": "与旧题仅共享 TCP/IP 协议栈背景；本题考端口号与传输层复用，旧题考 ARP 地址解析，考点与答案均不同。"
+    },
+    {
+      "draftId": "ne-draft-20260923-088",
+      "similarity": 0.395,
+      "existingId": "practice-18",
+      "chapter": "网络体系结构与TCP/IP",
+      "knowledgePoint": "ARP与RARP",
+      "question": "ICMP 的主要作用是什么？",
+      "existingQuestion": "在以太网 IPv4 网络中，ARP 的主要作用是什么？",
+      "reviewStatus": "reviewed_distinct",
+      "reviewNote": "与旧题共享“主要作用”措辞；本题问 ICMP 的网络层差错报告与诊断，旧题问 ARP 的 IPv4 地址解析，协议和考查结论不同。"
+    },
+    {
+      "draftId": "ne-draft-20260923-094",
+      "similarity": 0.319,
+      "existingId": "collection-c02-q023",
+      "chapter": "局域网与交换技术",
+      "knowledgePoint": "冲突域、广播域与网络设备",
+      "question": "在未携带 TCP 选项时，TCP 首部最小长度是多少？",
+      "existingQuestion": "以太网帧的最小长度是多少字节？",
+      "reviewStatus": "reviewed_distinct",
+      "reviewNote": "本题问 TCP 首部的最小长度；旧题问以太网帧长度下限，协议层次、单位语境和结论不同。"
+    },
+    {
+      "draftId": "ne-draft-20260923-107",
+      "similarity": 0.436,
+      "existingId": "collection-c10-q014",
+      "chapter": "网络体系结构与TCP/IP",
+      "knowledgePoint": "HTTP与HTTPS",
+      "question": "浏览器请求页面后，服务器返回 HTTP 状态码 401，通常表示？",
+      "existingQuestion": "HTTP状态码404表示？",
+      "reviewStatus": "reviewed_distinct",
+      "reviewNote": "相似处只是 HTTP 状态码问法；本题的 401 表示缺少有效认证凭据，旧题的 404 表示目标资源未找到。"
+    },
+    {
+      "draftId": "ne-draft-20260923-113",
+      "similarity": 0.365,
+      "existingId": "collection-c07-q032",
+      "chapter": "网络体系结构与TCP/IP",
+      "knowledgePoint": "地址表示与地址类型",
+      "question": "IPv6 地址 :: 的含义是什么？",
+      "existingQuestion": "下列关于IPv6地址的描述中，错误的是？",
+      "reviewStatus": "reviewed_distinct",
+      "reviewNote": "本题问 IPv6 全零地址 :: 的未指定地址含义；旧题讨论双冒号压缩地址表示语法，语义不同。"
+    },
+    {
+      "draftId": "ne-draft-20260923-123",
+      "similarity": 0.34,
+      "existingId": "collection-c06-q014",
+      "chapter": "局域网与交换技术",
+      "knowledgePoint": "802.1Q与VLAN标签",
+      "question": "在一台支持 VLAN 的二层交换机上，VLAN 10 与 VLAN 20 的广播帧默认会怎样处理？",
+      "existingQuestion": "在三层交换机上，VLAN 10的网关接口称为？",
+      "reviewStatus": "reviewed_distinct",
+      "reviewNote": "本题考 VLAN 划分广播域；旧题考 SVI 作为三层网关的用途，虽都涉及 VLAN，网络行为不同。"
+    },
+    {
+      "draftId": "ne-draft-20260923-133",
+      "similarity": 0.372,
+      "existingId": "practice-7",
+      "chapter": "局域网与交换技术",
+      "knowledgePoint": "802.1Q与VLAN标签",
+      "question": "一个 802.1Q 标签的 VLAN ID 字段取值为 0，通常表示什么？",
+      "existingQuestion": "IEEE 802.1Q 帧标签中的 VLAN ID 字段长度是多少位？",
+      "reviewStatus": "reviewed_distinct",
+      "reviewNote": "本题考 VID=0 的优先级标签语义；旧题考 VLAN ID 字段宽度，字段取值含义与字段长度是不同知识点。"
+    },
+    {
+      "draftId": "ne-draft-20260923-219",
+      "similarity": 0.34,
+      "existingId": "practice-9",
+      "chapter": "局域网与交换技术",
+      "knowledgePoint": "端口角色与BPDU",
+      "question": "PPP 多链路协议（Multilink PPP）的主要目的是什么？",
+      "existingQuestion": "STP 的主要目的是什么？",
+      "reviewStatus": "reviewed_distinct",
+      "reviewNote": "相似处是“主要目的”句式；本题考 PPP 多链路捆绑，旧题考 STP 防环，技术目标不同。"
+    },
+    {
+      "draftId": "ne-draft-20260923-313",
+      "similarity": 0.317,
+      "existingId": "collection-c09-q004",
+      "chapter": "网络管理",
+      "knowledgePoint": "SNMP版本、MIB与报文",
+      "question": "SNMPv1/v2c 的 community string 机制最主要的安全局限是什么？",
+      "existingQuestion": "SNMPv3相比SNMPv1/v2c，最主要的增强是？",
+      "reviewStatus": "reviewed_distinct",
+      "reviewNote": "本题考 SNMPv1/v2c community 明文共享口令的安全局限；旧题考 SNMPv3 安全增强，题目对象和所问结论不同。"
+    },
+    {
+      "draftId": "ne-draft-20260923-397",
+      "similarity": 0.361,
+      "existingId": "collection-c08-q043",
+      "chapter": "项目管理与法律法规",
+      "knowledgePoint": "等保2.0",
+      "question": "数据分类分级保护与网络安全等级保护（等保）的关系，哪项表述更准确？",
+      "existingQuestion": "下列关于网络安全等级保护的说法，正确的是？",
+      "reviewStatus": "reviewed_distinct",
+      "reviewNote": "两题都属于网络安全法规领域；本题区分数据分类分级保护与网络安全等级保护制度，旧题问等保制度本身，法律概念有关联但不等同。"
+    },
+    {
+      "draftId": "ne-draft-20260923-425",
+      "similarity": 0.438,
+      "existingId": "practice-9",
+      "chapter": "局域网与交换技术",
+      "knowledgePoint": "端口角色与BPDU",
+      "question": "5G 网络切片的主要目的是什么？",
+      "existingQuestion": "STP 的主要目的是什么？",
+      "reviewStatus": "reviewed_distinct",
+      "reviewNote": "相似处仅是“主要目的”问法；本题考 5G 切片提供逻辑隔离的差异化网络能力，旧题考 STP 消除二层环路。"
+    }
+  ],
+  "unresolvedNearDuplicateCount": 0,
+  "answerPositionDistribution": {
+    "total": {
+      "A": 129,
+      "B": 129,
+      "C": 86,
+      "D": 86
+    },
+    "perKnowledgePointTarget": {
+      "A": 3,
+      "B": 3,
+      "C": 2,
+      "D": 2
+    }
+  },
+  "internalNearDuplicateThreshold": 0.45,
+  "internalNearDuplicateCandidateCount": 0,
+  "internalNearDuplicates": [],
+  "contentReview": {
+    "pass": "Single correct answer, distractors, explanation logic, topic fit, key calculations and current standards/law were reviewed while drafting and in a separate pass.",
+    "sources": [
+      {
+        "name": "RFC Editor: TCP RFC 9293",
+        "url": "https://www.rfc-editor.org/rfc/rfc9293.html"
+      },
+      {
+        "name": "RFC Editor: IPv6 RFC 8200",
+        "url": "https://www.rfc-editor.org/rfc/rfc8200.html"
+      },
+      {
+        "name": "RFC Editor: IPv4 RFC 791",
+        "url": "https://www.rfc-editor.org/rfc/rfc791.html"
+      },
+      {
+        "name": "RFC Editor: ARP RFC 826",
+        "url": "https://www.rfc-editor.org/rfc/rfc826.html"
+      },
+      {
+        "name": "RFC Editor: ICMP RFC 792",
+        "url": "https://www.rfc-editor.org/rfc/rfc792.html"
+      },
+      {
+        "name": "RFC Editor: UDP RFC 768",
+        "url": "https://www.rfc-editor.org/rfc/rfc768.html"
+      },
+      {
+        "name": "RFC Editor: OSPFv2 RFC 2328",
+        "url": "https://www.rfc-editor.org/info/rfc2328/"
+      },
+      {
+        "name": "RFC Editor: OSPF NSSA RFC 1587",
+        "url": "https://www.rfc-editor.org/rfc/rfc1587.html"
+      },
+      {
+        "name": "RFC Editor: RIP v2 RFC 2453",
+        "url": "https://www.rfc-editor.org/info/rfc2453/"
+      },
+      {
+        "name": "RFC Editor: BGP-4 RFC 4271",
+        "url": "https://www.rfc-editor.org/info/rfc4271/"
+      },
+      {
+        "name": "RFC Editor: PPP RFC 1661",
+        "url": "https://www.rfc-editor.org/info/rfc1661/"
+      },
+      {
+        "name": "RFC Editor: DHCP RFC 2131",
+        "url": "https://www.rfc-editor.org/info/rfc2131/"
+      },
+      {
+        "name": "RFC Editor: IPv4 point-to-point /31 RFC 3021",
+        "url": "https://www.rfc-editor.org/info/rfc3021/"
+      },
+      {
+        "name": "RFC Editor: DHCP Relay Agent Information Option RFC 3046",
+        "url": "https://www.rfc-editor.org/info/rfc3046/"
+      },
+      {
+        "name": "RFC Editor: IP Encapsulating Security Payload RFC 4303",
+        "url": "https://www.rfc-editor.org/rfc/rfc4303.html"
+      },
+      {
+        "name": "RFC Editor: Negative DNS Caching RFC 2308",
+        "url": "https://www.rfc-editor.org/info/rfc2308/"
+      },
+      {
+        "name": "RFC Editor: Message Submission RFC 6409",
+        "url": "https://www.rfc-editor.org/info/rfc6409/"
+      },
+      {
+        "name": "RFC Editor: HTTP Semantics RFC 9110",
+        "url": "https://www.rfc-editor.org/rfc/rfc9110.html"
+      },
+      {
+        "name": "Wi-Fi Alliance: WPA3-Personal certification record including SAE",
+        "url": "https://api.cert.wi-fi.org/api/certificate/download/public?variantId=139865"
+      },
+      {
+        "name": "NPC: Cybersecurity Law amendment decision, effective 2026-01-01",
+        "url": "https://www.npc.gov.cn/npc/c1773/c1848/c21114/wlaqfxz/wlaqfxz002/202511/t20251103_449242.html"
+      },
+      {
+        "name": "NPC: Personal Information Protection Law",
+        "url": "https://www.npc.gov.cn/npc/c2/c30834/202108/t20210820_313088.html"
+      },
+      {
+        "name": "NPC: Data Security Law",
+        "url": "https://www.npc.gov.cn/npc/c2/c30834/202106/t20210610_311888.html"
+      },
+      {
+        "name": "SAMR: GB/T 22239-2019 current status",
+        "url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=BAFB47E8874764186BDB7865E8344DAF"
+      },
+      {
+        "name": "NPC: Computer Software Protection Regulation",
+        "url": "https://www.npc.gov.cn/WZWSREL3pncmR3Ly9ucGMvL2h1aXlpL2xmenQvcXF6cmZjYS8yMDA4LTEyLzIxL2NvbnRlbnRfMTQ2Mjg2NC5odG0="
+      }
+    ]
+  }
+}

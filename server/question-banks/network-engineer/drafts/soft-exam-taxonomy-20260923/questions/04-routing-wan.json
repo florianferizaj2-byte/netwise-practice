@@ -1,0 +1,1052 @@
+[
+  {
+    "id": "ne-draft-20260923-171",
+    "type": "single_choice",
+    "question": "路由器同时拥有一条 /24 静态路由和一条 /16 动态路由，目的地址匹配两条时，在没有策略路由等特殊规则的情况下优先依据什么选择？",
+    "options": {
+      "A": "最长前缀匹配",
+      "B": "路由来源字母顺序",
+      "C": "路由表中最后显示者",
+      "D": "下一跳 IP 最大者"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "转发时通常先选择匹配目的地址的最长前缀路由；管理距离和度量值主要用于比较同一目的前缀的候选路由。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "路由基础",
+    "difficulty": "medium",
+    "tags": [
+      "路由基础"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-172",
+    "type": "single_choice",
+    "question": "在配置了等价多路径转发的路由器上，常见的逐流负载分担方式依据什么选择下一跳？",
+    "options": {
+      "A": "每个报文都随机选择接口且不保留顺序",
+      "B": "对报文的地址/端口等字段计算哈希，使同一流通常走同一路径",
+      "C": "由 Ethernet FCS 的数值决定",
+      "D": "只依据 DNS 域名长度"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "逐流哈希通常使用源/目的地址及可选传输层端口，将同一流映射到同一路径，减少逐包分担引起的乱序；具体哈希字段依设备实现。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "路由基础",
+    "difficulty": "medium",
+    "tags": [
+      "路由基础"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-173",
+    "type": "single_choice",
+    "question": "同一目的前缀由同一动态路由协议学到多条路径时，协议度量值通常用来衡量什么？",
+    "options": {
+      "A": "网线长度的绝对米数",
+      "B": "路由器机箱温度",
+      "C": "协议定义的路径优劣，如跳数、成本或带宽相关代价",
+      "D": "用户账户权限"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "度量值由路由协议定义，用于比较该协议内候选路径的优劣；不同协议的度量值不能简单直接横向比较。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "路由基础",
+    "difficulty": "easy",
+    "tags": [
+      "路由基础"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-174",
+    "type": "single_choice",
+    "question": "静态路由只配置下一跳 IP 地址，而路由器还需确定该下一跳经哪个接口到达，这种查询称为？",
+    "options": {
+      "A": "DNS 反向解析",
+      "B": "NAT 端口映射",
+      "C": "递归路由查找",
+      "D": "ARP 广播抑制"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "递归查找会继续查询下一跳地址所匹配的路由，以确定最终出接口；若下一跳不可达，静态路由通常也不能安装或转发。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "路由基础",
+    "difficulty": "hard",
+    "tags": [
+      "路由基础"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-175",
+    "type": "single_choice",
+    "question": "管理员希望主链路静态路由失效时才启用备用静态路由，常见配置思路是什么？",
+    "options": {
+      "A": "关闭主链路 ARP",
+      "B": "为备用静态路由设置更低优先级（更大管理距离）",
+      "C": "为备用路由配置更短的目的前缀",
+      "D": "把备用路由设为广播地址"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "浮动静态路由通过给备用静态路由设置比主路由更差的管理距离，使主路由可用时备用路由不进入有效转发选择。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "路由基础",
+    "difficulty": "medium",
+    "tags": [
+      "路由基础"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-176",
+    "type": "single_choice",
+    "question": "IPv6 路由表中的默认路由通常使用哪个目的前缀表示？",
+    "options": {
+      "A": "fe80::/10",
+      "B": "::/0",
+      "C": "::1/128",
+      "D": "ff00::/8"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IPv6 默认路由是 ::/0，表示长度为 0 的前缀，可匹配未被更具体路由覆盖的 IPv6 目的地址。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "路由基础",
+    "difficulty": "easy",
+    "tags": [
+      "路由基础"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-177",
+    "type": "single_choice",
+    "question": "两条到同一前缀的路由具有相同优先级和度量值，设备配置为等价多路径转发时可能怎样处理？",
+    "options": {
+      "A": "必定丢弃所有报文",
+      "B": "把前缀长度缩短一位",
+      "C": "让 DNS 随机选择接口",
+      "D": "在多条等价下一跳间分担流量"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "等价多路径（ECMP）可在满足协议和设备条件的多条等价路由间进行负载分担，具体按流或逐包取决于实现。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "路由基础",
+    "difficulty": "medium",
+    "tags": [
+      "路由基础"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-178",
+    "type": "single_choice",
+    "question": "静态路由的目的前缀和下一跳均正确，但下一跳地址不在任何直连或可递归到达的网络中，通常结果是什么？",
+    "options": {
+      "A": "目的地址被改成下一跳地址",
+      "B": "路由器自动创建直连链路",
+      "C": "该路由变为默认路由",
+      "D": "路由无法形成可用转发路径"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "路由器必须能解析并到达下一跳或确定出接口；不可达的下一跳无法构成有效转发路径。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "路由基础",
+    "difficulty": "medium",
+    "tags": [
+      "路由基础"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-179",
+    "type": "single_choice",
+    "question": "策略路由与普通目的地址路由的区别，最准确的是？",
+    "options": {
+      "A": "策略路由可按源地址、入接口或其他匹配条件选择转发路径",
+      "B": "策略路由只按 MAC 地址学习",
+      "C": "普通路由必须使用 DNS",
+      "D": "策略路由仅用于交换机生成树"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "普通路由主要依据目的前缀查表；策略路由可根据源地址、协议、端口等策略条件覆盖常规路径选择。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "路由基础",
+    "difficulty": "medium",
+    "tags": [
+      "路由基础"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-180",
+    "type": "single_choice",
+    "question": "查看路由表时，某条路由显示为候选但未进入活动转发表，常见原因之一是什么？",
+    "options": {
+      "A": "存在更优的同前缀路由或下一跳不可达",
+      "B": "目的主机安装了浏览器",
+      "C": "接口使用全双工",
+      "D": "DNS 记录是 CNAME"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "候选路由可能因管理距离/度量值较差，或下一跳不可达等原因未被选为活动路由；应检查路由来源和递归解析结果。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "路由基础",
+    "difficulty": "hard",
+    "tags": [
+      "路由基础"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-181",
+    "type": "single_choice",
+    "question": "RIP 路由在一段时间内没有收到更新时，传统默认配置通常经过多久会将该路由标记为失效？",
+    "options": {
+      "A": "90 秒",
+      "B": "180 秒",
+      "C": "600 秒",
+      "D": "30 秒"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "常见 RIP 定时器中，若约 180 秒未收到该路由更新，路由会被判为失效；具体定时器可以按实现配置，后续还可能经历垃圾回收阶段。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "RIP",
+    "difficulty": "medium",
+    "tags": [
+      "RIP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-182",
+    "type": "single_choice",
+    "question": "RIPv2 路由更新在多播方式下常使用哪个 IPv4 组播地址？",
+    "options": {
+      "A": "224.0.0.9",
+      "B": "239.255.255.250",
+      "C": "224.0.0.5",
+      "D": "224.0.0.10"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "RIPv2 的组播地址为 224.0.0.9；224.0.0.5 常用于 OSPF AllSPFRouters 组播。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "RIP",
+    "difficulty": "medium",
+    "tags": [
+      "RIP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-183",
+    "type": "single_choice",
+    "question": "RIPv2 路由条目中的 Route Tag 字段通常用于什么？",
+    "options": {
+      "A": "加密整个 RIP 报文",
+      "B": "记录以太网帧的 CRC 值",
+      "C": "表示 TCP 窗口大小",
+      "D": "携带外部路由来源或策略标记，供路由重分发时识别"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "RIPv2 的 Route Tag 可携带与路由来源有关的标记，便于在自治系统边界等场景进行路由重分发策略处理；它不是加密字段。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "RIP",
+    "difficulty": "medium",
+    "tags": [
+      "RIP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-184",
+    "type": "single_choice",
+    "question": "路由发生变化时，RIP 触发更新机制的主要作用是什么？",
+    "options": {
+      "A": "将路由度量全部改为 0",
+      "B": "永久停止周期更新",
+      "C": "无需等待下一次周期更新，就尽快通告变化以加速收敛",
+      "D": "重新选举以太网根桥"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "触发更新在路由改变时尽快通告变化，缩短等待周期更新的时间；协议仍保留周期更新与抑制机制。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "RIP",
+    "difficulty": "medium",
+    "tags": [
+      "RIP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-185",
+    "type": "single_choice",
+    "question": "RIP 路由失效并开始垃圾回收后，路由器保留该不可达条目的主要目的是什么？",
+    "options": {
+      "A": "在有限时间内继续通告不可达信息，帮助邻居清除旧路由",
+      "B": "自动分配新的 IP 地址",
+      "C": "为该前缀保留带宽",
+      "D": "把失效路由改成默认路由"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "RIP 在路由失效后会将其标记为不可达并启动垃圾回收定时器，暂时保留条目可把撤销信息继续传播；计时结束后再删除。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "RIP",
+    "difficulty": "medium",
+    "tags": [
+      "RIP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-186",
+    "type": "single_choice",
+    "question": "收到 RIP Request 报文的邻居，通常应如何响应？",
+    "options": {
+      "A": "永久关闭 RIP 进程",
+      "B": "按请求范围返回相应路由信息，或按协议规则处理请求",
+      "C": "发送 ICMP Redirect",
+      "D": "立即建立 TCP 179 会话"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RIP Request 用于请求路由信息。邻居可按请求项返回对应信息；请求全部路由时通常返回其路由表，行为遵循 RIP 报文规则。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "RIP",
+    "difficulty": "easy",
+    "tags": [
+      "RIP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-187",
+    "type": "single_choice",
+    "question": "RIP 的度量值相同且收到同一前缀的多条路径时，设备可如何处理？",
+    "options": {
+      "A": "将 RIP 自动改为 BGP",
+      "B": "依据实现配置进行等价负载分担",
+      "C": "由 DNS 服务器选择路径",
+      "D": "必定把所有路由删除"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "某些实现可对等价 RIP 路由进行负载分担；路径数量及分担方式由设备配置和实现决定。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "RIP",
+    "difficulty": "medium",
+    "tags": [
+      "RIP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-188",
+    "type": "single_choice",
+    "question": "RIPv2 可对路由更新进行认证，主要希望防止什么风险？",
+    "options": {
+      "A": "未经授权的设备伪造或注入路由信息",
+      "B": "磁盘控制器故障",
+      "C": "以太网光功率过低",
+      "D": "客户端把 DNS 查询发到错误端口"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "RIP 更新认证可验证更新来源，降低未授权路由器注入虚假路由的风险；认证不替代链路和设备安全控制。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "RIP",
+    "difficulty": "medium",
+    "tags": [
+      "RIP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-189",
+    "type": "single_choice",
+    "question": "一个完整 RIP Response 报文最多可容纳多少个 IPv4 路由条目（不含认证条目等对空间的占用）？",
+    "options": {
+      "A": "64",
+      "B": "10",
+      "C": "25",
+      "D": "255"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "RIP 报文受 512 字节上限约束；IPv4 路由条目为 20 字节，因此常见完整 Response 最多携带 25 个条目。认证等字段会占用报文空间。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "RIP",
+    "difficulty": "medium",
+    "tags": [
+      "RIP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-190",
+    "type": "single_choice",
+    "question": "将某接口配置为 RIP passive-interface，常见含义是什么？",
+    "options": {
+      "A": "清空整个 RIP 路由表",
+      "B": "把接口改为 OSPF Area 0",
+      "C": "关闭该接口的 IP 转发",
+      "D": "不在该接口发送 RIP 更新，但仍可按实现接收并处理路由更新"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "被动接口通常抑制该接口发出的 RIP 更新，适合面向终端的网段；具体平台是否仍接收更新需按实现核对。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "RIP",
+    "difficulty": "easy",
+    "tags": [
+      "RIP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-191",
+    "type": "single_choice",
+    "question": "OSPFv2 中，ABR 向其他区域通告区域间网络前缀时，通常使用哪类 LSA？",
+    "options": {
+      "A": "Type 1 Router-LSA",
+      "B": "Type 3 Summary-LSA",
+      "C": "Type 5 AS-External-LSA",
+      "D": "Type 7 NSSA-LSA"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "ABR 在区域之间通告可达网络时通常生成 Type 3 Summary-LSA；Type 1 描述区域内路由器链路，Type 5 描述自治系统外部路由。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "OSPF",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-192",
+    "type": "single_choice",
+    "question": "OSPFv2 中，普通外部路由由 ASBR 引入后，通常以哪类 LSA 在允许外部 LSA 的区域中传播？",
+    "options": {
+      "A": "Type 2 Network-LSA",
+      "B": "Type 3 Summary-LSA",
+      "C": "Type 7 NSSA-LSA",
+      "D": "Type 5 AS-External-LSA"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "ASBR 通常用 Type 5 AS-External-LSA 发布外部路由；NSSA 内可先以 Type 7 形式发布，再由 NSSA ABR 按规则转换。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "OSPF",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-193",
+    "type": "single_choice",
+    "question": "OSPFv2 广播网络中的 DR 通常负责生成哪类描述该多路访问网络及其附着路由器的 LSA？",
+    "options": {
+      "A": "Type 2 Network-LSA",
+      "B": "Type 5 AS-External-LSA",
+      "C": "Type 1 Router-LSA",
+      "D": "Type 4 ASBR-Summary-LSA"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "在多路访问网络上，DR 生成 Type 2 Network-LSA，列出该网络及与其相连的路由器；普通路由器仍会生成各自的 Type 1 Router-LSA。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "OSPF",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-194",
+    "type": "single_choice",
+    "question": "OSPFv2 的 Type 4 ASBR-Summary-LSA 主要由谁生成，用于表达什么？",
+    "options": {
+      "A": "DR 生成，用于列举本网络上的终端",
+      "B": "ASBR 生成，用于通告 IPv4 默认路由",
+      "C": "ABR 生成，用于告知其他区域如何到达 ASBR",
+      "D": "普通主机生成，用于申请 DHCP 地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Type 4 LSA 由 ABR 生成，用来把 ASBR 的可达信息通告到其他区域；外部目的网络本身通常由 Type 5 LSA 描述。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "OSPF",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-195",
+    "type": "single_choice",
+    "question": "OSPF 中，数据库描述报文 DBD 的主要用途是什么？",
+    "options": {
+      "A": "概述链路状态数据库内容，帮助邻居比较并同步 LSA",
+      "B": "建立 PPP 链路认证",
+      "C": "发送应用层网页正文",
+      "D": "为终端分配 IP 地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "DBD 携带链路状态数据库摘要；邻居比较后可用链路状态请求等报文请求缺失或更新的 LSA。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "OSPF",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-196",
+    "type": "single_choice",
+    "question": "OSPFv2 中，普通路由器的 Router-LSA 通常是哪种 LSA 类型？",
+    "options": {
+      "A": "Type 2",
+      "B": "Type 5",
+      "C": "Type 1",
+      "D": "Type 3"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "OSPFv2 Type 1 是 Router-LSA，由区域内每台路由器产生；Type 2 是 Network-LSA，Type 3 是 Summary-LSA，Type 5 是 AS-External-LSA。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "OSPF",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-197",
+    "type": "single_choice",
+    "question": "在 OSPF NSSA 中，本区域内 ASBR 引入的外部路由通常先使用哪类 LSA？",
+    "options": {
+      "A": "Type 7",
+      "B": "Type 5",
+      "C": "Type 2",
+      "D": "Type 3"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "NSSA 使用 Type 7 NSSA-External-LSA 表示本区域引入的外部路由；NSSA ABR 可按规则将其转换为 Type 5 向其他区域传播。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "OSPF",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-198",
+    "type": "single_choice",
+    "question": "OSPF 外部路由的 E1 与 E2 度量比较方式有何典型区别？",
+    "options": {
+      "A": "E1 不携带前缀，E2 携带前缀",
+      "B": "E1 将外部度量与到 ASBR 的内部成本相加；E2 通常主要比较外部度量",
+      "C": "E1 只用于 IPv6，E2 只用于 IPv4",
+      "D": "二者都表示链路层帧长度"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "E1 路由的总成本通常包含外部度量与到 ASBR 的 OSPF 内部成本；E2 默认主要按外部度量比较，内部成本常在外部度量相同时用于进一步比较。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "OSPF",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-199",
+    "type": "single_choice",
+    "question": "在常见以太网广播网络上，OSPF DR 和 BDR 通常分别监听哪两个组播地址？",
+    "options": {
+      "A": "239.0.0.1 和 239.0.0.2",
+      "B": "255.255.255.255 和 0.0.0.0",
+      "C": "224.0.0.9 和 224.0.0.10",
+      "D": "224.0.0.5 和 224.0.0.6"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "224.0.0.5 是 AllSPFRouters，224.0.0.6 是 AllDRouters；RIPv2 常使用 224.0.0.9。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "OSPF",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-200",
+    "type": "single_choice",
+    "question": "OSPF 邻居长期停留在 ExStart/Exchange 阶段，排查时优先检查哪类问题？",
+    "options": {
+      "A": "HTTP Cookie 是否过期",
+      "B": "MTU 不匹配、数据库描述协商或 Router ID 等邻接参数",
+      "C": "终端屏幕分辨率",
+      "D": "RAID 校验盘数量"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "ExStart/Exchange 阶段用于协商主从并交换 DBD，MTU 不匹配等参数问题可能阻止邻接进入 Full；应结合两端状态和日志判断。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "OSPF",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-201",
+    "type": "single_choice",
+    "question": "当其他 BGP 选路条件相近时，网络管理员重复通告本 AS 号以延长 AS_PATH，通常希望对外实现什么效果？",
+    "options": {
+      "A": "让该路径看起来更长，从而降低远端选择它的倾向",
+      "B": "让路由变成直连路由",
+      "C": "提高 OSPF 接口优先级",
+      "D": "缩短 TCP 建连时间"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "AS_PATH Prepending 通过重复加入本 AS 号使路径在外部看来更长；当其他更优先属性相同或不足以改变结果时，远端可能因此选择其他路径。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "BGP",
+    "difficulty": "medium",
+    "tags": [
+      "BGP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-202",
+    "type": "single_choice",
+    "question": "通常情况下，BGP 路由器比较 LOCAL_PREF 时，优先选择哪条路由？",
+    "options": {
+      "A": "MED 数值较高者",
+      "B": "AS_PATH 字符数较多者",
+      "C": "LOCAL_PREF 数值较高者",
+      "D": "LOCAL_PREF 数值较低者"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "LOCAL_PREF 用于自治系统内部表达出口偏好，通常数值越高越优；具体选路次序还需结合厂商实现和其他属性。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "BGP",
+    "difficulty": "medium",
+    "tags": [
+      "BGP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-203",
+    "type": "single_choice",
+    "question": "若其他更优先的 BGP 选路属性相同，ORIGIN 属性通常按哪种顺序优先？",
+    "options": {
+      "A": "只比较属性的字节长度",
+      "B": "IGP 优于 EGP，EGP 优于 Incomplete",
+      "C": "ORIGIN 永远高于 LOCAL_PREF",
+      "D": "Incomplete 优于 EGP，EGP 优于 IGP"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "常见 BGP 选路顺序中，ORIGIN 类型的优先次序是 IGP（i）优于 EGP（e）优于 Incomplete（?）；更高优先级的路径属性仍先比较。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "BGP",
+    "difficulty": "medium",
+    "tags": [
+      "BGP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-204",
+    "type": "single_choice",
+    "question": "BGP 对等体检测到协议级致命错误并需要关闭会话时，通常发送哪类报文？",
+    "options": {
+      "A": "ROUTE-REFRESH",
+      "B": "OPEN",
+      "C": "NOTIFICATION",
+      "D": "KEEPALIVE"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "BGP NOTIFICATION 用于报告错误或异常状态，发送后通常关闭 BGP 会话；OPEN 建立会话参数，KEEPALIVE 维持会话。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "BGP",
+    "difficulty": "hard",
+    "tags": [
+      "BGP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-205",
+    "type": "single_choice",
+    "question": "BGP 会话已建立但一段时间没有 UPDATE 报文时，KEEPALIVE 报文的主要作用是什么？",
+    "options": {
+      "A": "为路由条目分配子网掩码",
+      "B": "代替 TCP 三次握手",
+      "C": "传输完整路由数据库文件",
+      "D": "维持邻居会话并确认对端仍可达"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "BGP KEEPALIVE 用于维持会话活性；若超过协商的 Hold Time 未收到有效消息，邻居可能判定会话失效。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "BGP",
+    "difficulty": "easy",
+    "tags": [
+      "BGP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-206",
+    "type": "single_choice",
+    "question": "BGP 路由器收到路由后通过策略设置 Community 属性，最常见的用途是什么？",
+    "options": {
+      "A": "让路由自动成为直连路由",
+      "B": "校验以太网帧 CRC",
+      "C": "替代 IP 地址和前缀",
+      "D": "为路由打上可供后续策略匹配和传播的标记"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "BGP Community 是可传递的路由标记，可用于分组路由并在导入、导出策略中执行统一动作。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "BGP",
+    "difficulty": "medium",
+    "tags": [
+      "BGP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-207",
+    "type": "single_choice",
+    "question": "BGP 邻居完成 TCP 连接后，首先交换哪类报文以协商自治系统号、Router ID 和保持时间等参数？",
+    "options": {
+      "A": "OPEN",
+      "B": "ROUTE-REFRESH",
+      "C": "NOTIFICATION",
+      "D": "UPDATE"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "TCP 会话建立后，BGP 对等体先交换 OPEN 报文协商会话参数；协商成功后使用 KEEPALIVE 确认并进入 Established。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "BGP",
+    "difficulty": "easy",
+    "tags": [
+      "BGP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-208",
+    "type": "single_choice",
+    "question": "BGP UPDATE 报文可携带可达前缀以及路径属性，其本质上交换的是什么？",
+    "options": {
+      "A": "操作系统进程状态",
+      "B": "带路径属性的网络层可达性信息",
+      "C": "应用服务器网页内容",
+      "D": "二层 MAC 地址学习表"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "BGP 是路径矢量协议，交换带有 AS_PATH、NEXT_HOP 等属性的前缀可达性信息，而非普通二层转发表。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "BGP",
+    "difficulty": "medium",
+    "tags": [
+      "BGP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-209",
+    "type": "single_choice",
+    "question": "在多宿主企业网络中，BGP 导入/导出策略最重要的作用之一是什么？",
+    "options": {
+      "A": "控制哪些前缀向哪些邻居传播及采用何种属性",
+      "B": "给内部主机分配临时端口",
+      "C": "自动修复物理光缆断裂",
+      "D": "替代边界防火墙的全部功能"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "BGP 策略可过滤路由、修改属性并控制传播范围；错误导出可能导致路由泄露，因此需明确实施前缀和邻居策略。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "BGP",
+    "difficulty": "hard",
+    "tags": [
+      "BGP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-210",
+    "type": "single_choice",
+    "question": "BGP 邻居显示 Established，但预期前缀没有进入路由表，下一步优先检查什么？",
+    "options": {
+      "A": "交换机帧间隙",
+      "B": "路由策略、前缀过滤、下一跳可达性和属性选择",
+      "C": "文件系统磁盘配额",
+      "D": "无线 AP 信道宽度"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Established 只说明 BGP 会话建立；路由可能被策略过滤、下一跳不可达或被更优路由淘汰，应检查接收路由与活动路由状态。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "BGP",
+    "difficulty": "hard",
+    "tags": [
+      "BGP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-211",
+    "type": "single_choice",
+    "question": "PPP 链路建立过程中，负责协商链路参数、检测对端和维护链路状态的协议是？",
+    "options": {
+      "A": "LCP",
+      "B": "RIP",
+      "C": "NCP",
+      "D": "ARP"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "PPP 的 LCP 负责建立、配置和测试数据链路；NCP 用于配置网络层协议参数。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "广域网链路",
+    "difficulty": "medium",
+    "tags": [
+      "广域网链路"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-212",
+    "type": "single_choice",
+    "question": "PPP 链路完成 LCP 协商后，IPv4 网络层参数通常由哪类协议配置？",
+    "options": {
+      "A": "IPCP 等 NCP",
+      "B": "BGP UPDATE",
+      "C": "STP",
+      "D": "LLDP"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "PPP 的网络控制协议 NCP 为相应网络层配置参数；IPv4 常用 IPCP，IPv6 常用 IPv6CP。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "广域网链路",
+    "difficulty": "medium",
+    "tags": [
+      "广域网链路"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-213",
+    "type": "single_choice",
+    "question": "PPP 的 CHAP 与 PAP 相比，典型安全改进是什么？",
+    "options": {
+      "A": "只认证 IP 地址",
+      "B": "采用挑战-响应方式，避免以明文方式发送口令本身",
+      "C": "把口令永久写入以太网帧",
+      "D": "不需要任何身份认证"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "CHAP 通过挑战和响应验证对端，通常不在链路上直接传送明文口令；具体安全性仍取决于算法、共享秘密和实现。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "广域网链路",
+    "difficulty": "medium",
+    "tags": [
+      "广域网链路"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-214",
+    "type": "single_choice",
+    "question": "两台设备均配置 HDLC 封装但因厂商私有扩展不兼容而无法互通，最可能的处理方法是什么？",
+    "options": {
+      "A": "删除所有 IP 地址",
+      "B": "改用双方都支持的标准封装，如 PPP",
+      "C": "把以太网 MTU 改为 9000",
+      "D": "把 OSPF 改为静态 ARP"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "传统 HDLC 存在厂商扩展差异，跨厂商链路可选双方均支持的标准 PPP 等封装，并确保两端参数一致。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "广域网链路",
+    "difficulty": "medium",
+    "tags": [
+      "广域网链路"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-215",
+    "type": "single_choice",
+    "question": "帧中继网络中的 DLCI 主要标识什么？",
+    "options": {
+      "A": "本地帧中继接口上的虚电路标识",
+      "B": "TCP 应用程序编号",
+      "C": "光纤的波长",
+      "D": "全球唯一的 IP 地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "DLCI 用于标识帧中继虚电路，通常具有本地意义，不能简单视为端到端全球唯一地址。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "广域网链路",
+    "difficulty": "medium",
+    "tags": [
+      "广域网链路"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-216",
+    "type": "single_choice",
+    "question": "帧中继网络中的 LMI 主要承担什么功能？",
+    "options": {
+      "A": "替代 BGP 传递自治系统路径",
+      "B": "在应用层加密电子邮件",
+      "C": "本地设备与帧中继交换设备之间的链路管理和虚电路状态通知",
+      "D": "为以太网终端分配 VLAN"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "LMI 提供链路管理信令，可报告 PVC 状态等信息，帮助用户设备确认虚电路是否可用。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "广域网链路",
+    "difficulty": "hard",
+    "tags": [
+      "广域网链路"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-217",
+    "type": "single_choice",
+    "question": "PPP 点到点链路不需要像多点广播以太网那样用 ARP 解析下一跳 MAC，主要因为？",
+    "options": {
+      "A": "PPP 不传输 IP 数据报",
+      "B": "链路两端关系已由点到点链路确定，不需要在共享网段选择目的 MAC",
+      "C": "PPP 使用 DNS 代替 MAC 地址",
+      "D": "所有 PPP 链路都运行在 TCP 上"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "PPP 是点到点封装，链路另一端天然是下一跳，不需要以太网式的目的 MAC 地址解析。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "广域网链路",
+    "difficulty": "medium",
+    "tags": [
+      "广域网链路"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-218",
+    "type": "single_choice",
+    "question": "帧中继中，永久虚电路 PVC 与交换虚电路 SVC 的典型区别是什么？",
+    "options": {
+      "A": "PVC 没有任何链路状态",
+      "B": "PVC 使用 TCP，SVC 使用 UDP",
+      "C": "PVC 只用于 IPv6，SVC 只用于 IPv4",
+      "D": "PVC 由服务提供方预先建立，SVC 按需建立和释放"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "PVC 通常预先配置并持续存在；SVC 则按需建立、结束后释放，具体服务支持取决于运营网络。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "广域网链路",
+    "difficulty": "medium",
+    "tags": [
+      "广域网链路"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-219",
+    "type": "single_choice",
+    "question": "PPP 多链路协议（Multilink PPP）的主要目的是什么？",
+    "options": {
+      "A": "在帧中继中分配 DLCI",
+      "B": "把多个 VLAN 自动合并成一个广播域",
+      "C": "将多条物理链路组合起来分片并重组数据流",
+      "D": "把 IPv4 DNS 记录转换为 IPv6"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Multilink PPP 可在多条物理链路上分片、发送并重组 PPP 数据，提高聚合带宽或利用多条链路。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "广域网链路",
+    "difficulty": "hard",
+    "tags": [
+      "广域网链路"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-220",
+    "type": "single_choice",
+    "question": "PPP 链路协商启用链路层回环检测时，主要用于发现什么问题？",
+    "options": {
+      "A": "DNS 记录过期",
+      "B": "操作系统发生内存泄漏",
+      "C": "OSPF 区域编号不一致",
+      "D": "对端可能把发送数据原样回送，链路未按预期连通"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "PPP 的回环检测机制可帮助识别线路或设备配置导致的自环现象，避免把环回链路误认为正常的点到点连接。",
+    "chapter": "路由与广域网",
+    "knowledgePoint": "广域网链路",
+    "difficulty": "hard",
+    "tags": [
+      "广域网链路"
+    ]
+  }
+]

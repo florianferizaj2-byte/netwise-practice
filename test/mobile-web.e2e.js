@@ -248,6 +248,33 @@ try {
       }
 
       await tab('我的');
+      await text('考试与题库').click();
+      await page.setViewportSize({ width: 375, height: 812 });
+      await page.emulateMedia({ reducedMotion: 'reduce' });
+      await text('切换备考目标').waitFor();
+      const upgradingSelection = page.getByRole('button', { name: '四川省专升本 · 计算机基础', exact: true });
+      await expect(upgradingSelection).toBeVisible();
+      await upgradingSelection.scrollIntoViewIfNeeded();
+      await shot('sichuan-picker');
+      await upgradingSelection.click();
+      await expect(upgradingSelection).toBeHidden();
+      await tab('我的');
+      await expect(page.getByRole('button', { name: '考试与题库设置', exact: true })).toContainText('四川省专升本 · 计算机基础');
+      await tab('练习');
+      await text('办公自动化').first().waitFor();
+      await shot('sichuan-practice');
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+      await page.setViewportSize({ width: 844, height: 390 });
+      await shot('sichuan-landscape');
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+      await page.setViewportSize({ width: 375, height: 812 });
+      await page.reload();
+      await text('每一步，都有进度').waitFor();
+      await tab('我的');
+      await expect(page.getByRole('button', { name: '考试与题库设置', exact: true })).toContainText('四川省专升本 · 计算机基础');
+      console.log(`${engine}: Sichuan module selection, chapters and persisted target`);
+
+      await tab('我的');
       await text('退出登录').click();
       await text('欢迎回来').waitFor();
       await page.reload();

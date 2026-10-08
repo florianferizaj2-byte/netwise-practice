@@ -12,13 +12,16 @@
     "test": "node --test test/*.test.js",
     "test:e2e": "node test/e2e.js",
     "test:e2e:mobile": "node test/mobile-web.e2e.js",
+    "test:e2e:mobile-study": "node test/mobile-study.e2e.js",
+    "test:e2e:apple-ui": "node test/apple-ui.e2e.js",
     "typecheck": "node mobile/node_modules/typescript/bin/tsc --noEmit --project mobile/tsconfig.json",
     "verify": "node scripts/verify.mjs",
     "package:release": "node scripts/package-release.mjs",
     "bank:validate": "node scripts/validate-question-banks.js",
     "bank:hcia": "node scripts/build-hcia-v2-bank.js",
     "bank:hcia:supplement": "node scripts/build-hcia-v2-supplement.js",
-    "bank:hcia:import-h12-811": "node scripts/import-hcia-h12-811-bank.js"
+    "bank:hcia:import-h12-811": "node scripts/import-hcia-h12-811-bank.js",
+    "bank:report": "node scripts/report-bank-coverage.js"
   },
   "dependencies": {
     "dotenv": "^17.2.0",

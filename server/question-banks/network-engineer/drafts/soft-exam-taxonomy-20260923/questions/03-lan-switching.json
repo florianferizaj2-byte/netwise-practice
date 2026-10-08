@@ -1,0 +1,1052 @@
+[
+  {
+    "id": "ne-draft-20260923-121",
+    "type": "single_choice",
+    "question": "以太网 MAC 地址第一个字节最低有效位为 1，通常表示什么？",
+    "options": {
+      "A": "广播地址专用标志",
+      "B": "组播/组地址",
+      "C": "该帧带有 802.1Q 标签",
+      "D": "该地址是 IPv4 地址"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "MAC 地址第一个字节最低有效位是 I/G 位，置 1 表示组地址（包括组播地址）；全 1 的 FF:FF:FF:FF:FF:FF 是广播地址。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "以太网",
+    "difficulty": "easy",
+    "tags": [
+      "以太网"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-122",
+    "type": "single_choice",
+    "question": "交换机两个端口均以全双工方式运行时，通常不使用 CSMA/CD 的主要原因是什么？",
+    "options": {
+      "A": "全双工只用于光纤",
+      "B": "交换机不处理以太网帧",
+      "C": "CSMA/CD 只适用于 IP 层",
+      "D": "全双工链路不存在共享介质上的碰撞"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "全双工点到点链路可同时收发，不存在半双工共享介质的碰撞，因此无需 CSMA/CD 碰撞检测机制。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "以太网",
+    "difficulty": "medium",
+    "tags": [
+      "以太网"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-123",
+    "type": "single_choice",
+    "question": "在一台支持 VLAN 的二层交换机上，VLAN 10 与 VLAN 20 的广播帧默认会怎样处理？",
+    "options": {
+      "A": "仅在各自 VLAN 的广播域内转发",
+      "B": "由 TCP 端口决定是否转发",
+      "C": "跨 VLAN 自动泛洪",
+      "D": "全部交给交换机 CPU 后转为单播"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "VLAN 将二层网络划分为不同广播域，广播帧通常只在所属 VLAN 内泛洪；跨 VLAN 通信需要三层转发。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "以太网",
+    "difficulty": "medium",
+    "tags": [
+      "以太网"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-124",
+    "type": "single_choice",
+    "question": "以太网接口的 IP MTU 配置为 1500 字节，通常表示什么长度限制？",
+    "options": {
+      "A": "IP 数据报最大长度，不包含以太网首部和 FCS",
+      "B": "仅 TCP 载荷长度",
+      "C": "整个以太网帧含前导码的最大长度",
+      "D": "交换机缓存区容量"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "常见以太网 IP MTU 1500 指链路可承载的最大 IP 数据报长度，不包含以太网头部、FCS 和物理层前导码。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "以太网",
+    "difficulty": "medium",
+    "tags": [
+      "以太网"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-125",
+    "type": "single_choice",
+    "question": "一端配置全双工、另一端被固定为半双工，链路虽能建立但吞吐很差并出现 FCS 错误，最可能的原因是？",
+    "options": {
+      "A": "VLAN 数量不足",
+      "B": "双工模式不匹配",
+      "C": "DNS 区域传送失败",
+      "D": "IP 地址使用了私有范围"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "双工不匹配会导致一端按全双工发送、另一端按半双工检测冲突，可能出现性能低下和错误帧。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "以太网",
+    "difficulty": "medium",
+    "tags": [
+      "以太网"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-126",
+    "type": "single_choice",
+    "question": "交换机采用存储转发方式处理帧时，转发前会先做什么？",
+    "options": {
+      "A": "解析应用层 HTTP 内容",
+      "B": "把源 IP 改成交换机地址",
+      "C": "等待 TCP 三次握手",
+      "D": "接收完整帧并检查 FCS"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "存储转发交换机接收完整帧后检查 FCS 再转发，可过滤错误帧；代价是引入更大的转发时延。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "以太网",
+    "difficulty": "medium",
+    "tags": [
+      "以太网"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-127",
+    "type": "single_choice",
+    "question": "交换机的动态 MAC 地址表通常以哪些信息共同确定一条转发表项？",
+    "options": {
+      "A": "VLAN 与 MAC 地址",
+      "B": "IP 地址与 TCP 端口",
+      "C": "帧长度与 FCS 值",
+      "D": "DNS 名称与网关"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "支持 VLAN 的交换机通常在 VLAN 上下文中维护 MAC 到端口的映射，因此同一 MAC 地址可在不同 VLAN 中对应不同的表项。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "以太网",
+    "difficulty": "easy",
+    "tags": [
+      "以太网"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-128",
+    "type": "single_choice",
+    "question": "以太网交换机转发已知单播帧时，目的 MAC 已在同一入端口对应的表项中，通常如何处理？",
+    "options": {
+      "A": "改走默认路由",
+      "B": "过滤该帧，不向其他端口转发",
+      "C": "从所有端口泛洪",
+      "D": "从入端口发回"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "若目的 MAC 的出口就是入端口，帧无需转发到其他端口，交换机通常过滤该帧。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "以太网",
+    "difficulty": "medium",
+    "tags": [
+      "以太网"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-129",
+    "type": "single_choice",
+    "question": "以太网帧尾部的 FCS 字段主要用于什么？",
+    "options": {
+      "A": "标识 VLAN 的 12 位编号",
+      "B": "确认 TCP 连接状态",
+      "C": "检测传输中的帧差错",
+      "D": "提供 IP 地址分配"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "FCS 通常保存基于帧内容计算的 CRC 校验值，接收设备据此检测差错；它本身不负责纠错或重传。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "以太网",
+    "difficulty": "hard",
+    "tags": [
+      "以太网"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-130",
+    "type": "single_choice",
+    "question": "IEEE 802.3x PAUSE 帧主要用于哪种控制？",
+    "options": {
+      "A": "触发 STP 根桥选举",
+      "B": "查询 DNS 地址",
+      "C": "请求对端暂时停止发送以缓解接收端拥塞",
+      "D": "协商 IPv4 默认网关"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "PAUSE 帧提供链路级流量控制，通知对端在指定时间内暂停发送；它不是端到端 TCP 拥塞控制。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "以太网",
+    "difficulty": "hard",
+    "tags": [
+      "以太网"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-131",
+    "type": "single_choice",
+    "question": "802.1Q 标签中的 PCP 字段主要用于表达什么信息？",
+    "options": {
+      "A": "源 MAC 地址长度",
+      "B": "帧的优先级/QoS 类别",
+      "C": "帧校验序列",
+      "D": "IPv4 子网掩码"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "802.1Q 标签包含 3 位 PCP（Priority Code Point），可用于二层优先级/QoS 标记；VLAN ID 位于标签中的另一字段。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "VLAN",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-132",
+    "type": "single_choice",
+    "question": "在常见 IEEE 802.1Q 标记以太网帧中，TPID 通常取什么十六进制值？",
+    "options": {
+      "A": "0x0806",
+      "B": "0x0800",
+      "C": "0x8100",
+      "D": "0x86DD"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "常见 802.1Q 客户 VLAN 标签的 TPID 为 0x8100；0x0800 常表示 IPv4，0x86DD 表示 IPv6，0x0806 表示 ARP。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "VLAN",
+    "difficulty": "easy",
+    "tags": [
+      "VLAN"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-133",
+    "type": "single_choice",
+    "question": "一个 802.1Q 标签的 VLAN ID 字段取值为 0，通常表示什么？",
+    "options": {
+      "A": "携带优先级信息但不指定普通 VLAN ID 的优先级标签帧",
+      "B": "该帧属于 VLAN 4095",
+      "C": "VLAN 0 是默认管理 VLAN",
+      "D": "该帧必然是未标记帧"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "VID 0 用于优先级标签场景，PCP 可携带优先级信息，但该值不表示普通的 VLAN 0 成员关系。VID 4095 保留。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "VLAN",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-134",
+    "type": "single_choice",
+    "question": "交换机收到一个未标记帧时，Trunk 端口通常依据哪项配置决定其 VLAN 归属？",
+    "options": {
+      "A": "TCP 窗口大小",
+      "B": "Native VLAN 或该平台定义的未标记帧 VLAN",
+      "C": "源主机的 DNS 名称",
+      "D": "帧的 IP TTL"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Trunk 上未标记帧通常归入 Native VLAN（具体行为依实现）；两端 Native VLAN 配置不一致可能导致流量错分。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "VLAN",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-135",
+    "type": "single_choice",
+    "question": "两台交换机的 Trunk 一端允许 VLAN 10、20，另一端只允许 VLAN 10。VLAN 20 的主机跨交换机通信失败，最可能的原因是？",
+    "options": {
+      "A": "VLAN 20 未被链路另一端允许通过",
+      "B": "生成树必须关闭",
+      "C": "TCP 端口号不是 80",
+      "D": "VLAN 10 的 MAC 地址表已满"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Trunk 两端需允许所需 VLAN 通过；若某端的允许列表排除了 VLAN 20，该 VLAN 的帧会被过滤。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "VLAN",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-136",
+    "type": "single_choice",
+    "question": "Hybrid 端口同时连接未标记终端和需要带标签的上联设备时，常见配置作用是什么？",
+    "options": {
+      "A": "可按 VLAN 对不同出站帧选择是否携带标签",
+      "B": "替代所有三层路由",
+      "C": "保证所有 VLAN 自动互通",
+      "D": "只能转发 IPv4 组播"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "部分厂商的 Hybrid 端口可按 VLAN 配置 tagged/untagged 转发，灵活承载终端和上联流量；具体术语及细节依设备实现。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "VLAN",
+    "difficulty": "hard",
+    "tags": [
+      "VLAN"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-137",
+    "type": "single_choice",
+    "question": "企业希望根据用户通过 802.1X/RADIUS 完成的身份认证结果，将其接入端口动态放入不同 VLAN。交换机需支持什么能力？",
+    "options": {
+      "A": "仅依据 DNS 记录选择 VLAN",
+      "B": "基于认证结果的动态 VLAN 分配",
+      "C": "关闭 MAC 地址学习",
+      "D": "把所有端口强制改为 Trunk"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "支持 802.1X 与 RADIUS VLAN 属性的交换机可在认证后按策略将用户端口分配到相应 VLAN，实现按身份的接入隔离。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "VLAN",
+    "difficulty": "easy",
+    "tags": [
+      "VLAN"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-138",
+    "type": "single_choice",
+    "question": "普通以太网数据帧从一个 VLAN 进入 Trunk、再从 Access 端口发给终端时，通常会发生什么？",
+    "options": {
+      "A": "帧内 IP 地址改成 VLAN ID",
+      "B": "每经过一个端口就增加一层 802.1Q 标签",
+      "C": "标签在所有 Access 端口永久保留",
+      "D": "中间 Trunk 上带 VLAN 标签，送到终端前去掉标签"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Trunk 通常用 802.1Q 标签区分 VLAN；Access 端口面向普通终端时一般发送未标记帧。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "VLAN",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-139",
+    "type": "single_choice",
+    "question": "在多个 VLAN 间共享同一物理上联时，若配置允许列表，其主要安全和运维价值是什么？",
+    "options": {
+      "A": "自动为所有 VLAN 分配公网地址",
+      "B": "使 Trunk 无需 STP",
+      "C": "只让需要的 VLAN 通过，减少误接入和无关广播范围",
+      "D": "对流量进行端到端加密"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "限制 Trunk 允许 VLAN 可缩小不必要的二层扩展范围，减少错误传播和攻击面；它本身不提供加密或地址分配。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "VLAN",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-140",
+    "type": "single_choice",
+    "question": "两端 Native VLAN 配置不一致时，最值得优先排查的现象是什么？",
+    "options": {
+      "A": "TCP 端口映射自动改变",
+      "B": "所有带标签帧的 IP 校验和必定错误",
+      "C": "光纤发射功率降低",
+      "D": "未标记流量可能在两端被归入不同 VLAN"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Native VLAN 不一致会让 Trunk 上的未标记帧在两端获得不同 VLAN 归属，造成错分流量或潜在安全问题。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "VLAN",
+    "difficulty": "hard",
+    "tags": [
+      "VLAN"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-141",
+    "type": "single_choice",
+    "question": "管理员在靠近非根交换机的一侧配置 Root Guard 后，若端口收到优于当前根桥信息的 BPDU，端口通常会怎样？",
+    "options": {
+      "A": "立即成为根端口并转发所有流量",
+      "B": "进入 root-inconsistent 等保护状态，避免该端口方向夺取根桥",
+      "C": "自动关闭整个交换机",
+      "D": "把 BPDU 改写成 DHCP 报文"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Root Guard 用于保持指定的根桥拓扑边界；收到更优 BPDU 时会阻止该端口方向成为通往新根桥的路径，恢复条件满足后可解除保护状态。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "STP",
+    "difficulty": "medium",
+    "tags": [
+      "STP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-142",
+    "type": "single_choice",
+    "question": "STP 的 Loop Guard 主要用于防范哪种故障导致的二层环路？",
+    "options": {
+      "A": "终端的 DNS 查询超时",
+      "B": "IP 地址冲突",
+      "C": "端口不再收到 BPDU，误把阻塞端口转为转发",
+      "D": "路由器收到 ICMP Redirect"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Loop Guard 在预期应收到 BPDU 的非指定端口上发现 BPDU 缺失时，可让端口保持不转发，降低单向链路或 BPDU 丢失导致的环路风险。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "STP",
+    "difficulty": "medium",
+    "tags": [
+      "STP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-143",
+    "type": "single_choice",
+    "question": "在生成树网络中，检测到端口连接了不应参与 STP 的终端设备；启用 BPDU Filter 可能带来的主要风险是什么？",
+    "options": {
+      "A": "端口会自动获得更高带宽",
+      "B": "该端口会为主机分配 DHCP 地址",
+      "C": "该端口将所有帧加密",
+      "D": "端口不再正常收发 BPDU，若实际接入交换设备可能形成环路"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "BPDU Filter 会抑制 BPDU 的发送或处理，若误用于交换机互联链路，可能使生成树无法发现拓扑并造成二层环路；边缘接入口应谨慎配置。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "STP",
+    "difficulty": "medium",
+    "tags": [
+      "STP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-144",
+    "type": "single_choice",
+    "question": "在 STP 选举中，收到的 BPDU 若根桥 ID 相同，通常继续比较哪项以确定更优路径？",
+    "options": {
+      "A": "到根桥的路径代价",
+      "B": "终端 IPv4 地址",
+      "C": "DNS 响应时间",
+      "D": "交换机机箱重量"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "STP 比较 BPDU 信息时先看根桥 ID，再考虑到根桥的路径代价，并使用发送桥 ID、端口 ID 等打破平局。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "STP",
+    "difficulty": "hard",
+    "tags": [
+      "STP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-145",
+    "type": "single_choice",
+    "question": "交换机端口开启 BPDU Guard 后，若该端口收到 BPDU，通常应如何处理？",
+    "options": {
+      "A": "自动更改 VLAN ID",
+      "B": "按保护策略将端口置为受保护/错误关闭状态",
+      "C": "立即把该端口设为根桥端口",
+      "D": "把 BPDU 转换成 DHCP Offer"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "BPDU Guard 常用于接入边缘端口；若其收到 BPDU，通常认为接入拓扑异常并禁用或保护端口，具体状态依平台实现。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "STP",
+    "difficulty": "medium",
+    "tags": [
+      "STP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-146",
+    "type": "single_choice",
+    "question": "RSTP 中，已能快速接替失效根端口、但当前未转发的备用路径端口通常称为？",
+    "options": {
+      "A": "管理端口",
+      "B": "Designated 端口",
+      "C": "Alternate 端口",
+      "D": "镜像端口"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "RSTP 的 Alternate 端口提供到根桥的备用路径，满足条件时可较快转为转发状态；Backup 端口则备份同一网段的指定端口。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "STP",
+    "difficulty": "medium",
+    "tags": [
+      "STP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-147",
+    "type": "single_choice",
+    "question": "管理员在用户接入端口启用边缘端口特性，主要期望获得什么效果？",
+    "options": {
+      "A": "为交换机选举根桥",
+      "B": "把该端口自动变为 Trunk",
+      "C": "阻止所有 DHCP 报文",
+      "D": "终端链路快速进入转发状态，避免等待传统 STP 收敛"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "边缘端口面向不参与生成树的终端，可快速转发以缩短接入等待；若误接交换机，仍应结合 BPDU Guard 等保护。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "STP",
+    "difficulty": "medium",
+    "tags": [
+      "STP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-148",
+    "type": "single_choice",
+    "question": "在经典 STP 中，拓扑变化通知（TCN）主要用于通知根桥什么情况？",
+    "options": {
+      "A": "DNS 服务器地址已改变",
+      "B": "二层拓扑发生变化，需要更新相关转发信息处理",
+      "C": "TCP 拥塞窗口已经减半",
+      "D": "路由器的 OSPF Router ID 已改变"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "STP 的 TCN 用于通知拓扑变化，促使相关桥更新拓扑变化状态并缩短 MAC 地址表项的老化时间，加快失效路径清理。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "STP",
+    "difficulty": "easy",
+    "tags": [
+      "STP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-149",
+    "type": "single_choice",
+    "question": "在 RSTP 中，边缘端口收到 BPDU 后通常应如何处理？",
+    "options": {
+      "A": "取消边缘端口属性并按生成树端口参与拓扑计算",
+      "B": "自动转换为三层路由接口",
+      "C": "忽略所有后续 BPDU 并保持边缘状态",
+      "D": "直接把端口改成根桥"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "边缘端口原本假定连接终端；收到 BPDU 表明其可能连接网桥，RSTP 应将其作为普通生成树端口处理，以免形成环路。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "STP",
+    "difficulty": "medium",
+    "tags": [
+      "STP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-150",
+    "type": "single_choice",
+    "question": "MSTP 中，两台交换机通常只有在区域名称、修订级别和 VLAN 到实例映射等配置一致时，才会被视为同一 MST 区域。若这些参数不一致，通常会怎样？",
+    "options": {
+      "A": "彼此按区域边界设备处理，并按生成树兼容机制互通",
+      "B": "停止所有以太网转发",
+      "C": "自动形成 BGP 邻居",
+      "D": "自动合并所有 VLAN 映射且无需 BPDU"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "MST 区域身份由名称、修订级别以及 VLAN 到实例映射摘要等共同确定；配置不一致的设备不会属于同一 MST 区域，通常按边界连接处理。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "STP",
+    "difficulty": "medium",
+    "tags": [
+      "STP"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-151",
+    "type": "single_choice",
+    "question": "交换机启用 DHCP Snooping 后，面向普通用户的接入端口通常应设为哪类端口？",
+    "options": {
+      "A": "Mirror",
+      "B": "Untrusted",
+      "C": "Trusted",
+      "D": "Root-only"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "用户接入端口通常标记为不可信，交换机可阻止从这些端口进入的伪造 DHCP 服务器响应；上联合法 DHCP 服务器的端口才按设计设为可信。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "交换安全与管理",
+    "difficulty": "medium",
+    "tags": [
+      "交换安全与管理"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-152",
+    "type": "single_choice",
+    "question": "DHCP Snooping 的绑定表通常记录哪组信息？",
+    "options": {
+      "A": "DNS 域名、MX 优先级和邮件正文",
+      "B": "应用程序源码和管理员密码",
+      "C": "所有路由器的 BGP AS_PATH",
+      "D": "客户端 MAC、分配的 IP、VLAN、端口和租约信息"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "DHCP Snooping 根据合法 DHCP 交互形成 IP–MAC–VLAN–端口等绑定信息，可供动态 ARP 检查等功能校验。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "交换安全与管理",
+    "difficulty": "medium",
+    "tags": [
+      "交换安全与管理"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-153",
+    "type": "single_choice",
+    "question": "动态 ARP 检查（DAI）结合 DHCP Snooping 绑定表时，主要用来防范什么？",
+    "options": {
+      "A": "伪造 ARP 映射造成的中间人或流量劫持",
+      "B": "TCP 慢启动导致的带宽变化",
+      "C": "磁盘扇区坏块",
+      "D": "DNS 区域文件损坏"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "DAI 可校验 ARP 报文中的 IP/MAC 绑定，拦截与可信绑定信息不一致的伪造 ARP 响应。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "交换安全与管理",
+    "difficulty": "medium",
+    "tags": [
+      "交换安全与管理"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-154",
+    "type": "single_choice",
+    "question": "交换机 DHCP Snooping 插入 Option 82 信息时，通常是为了向 DHCP 服务器提供什么？",
+    "options": {
+      "A": "客户端的磁盘序列号",
+      "B": "BGP 自治系统路径",
+      "C": "TLS 服务器证书私钥",
+      "D": "接入电路/端口等客户端所在网络位置线索"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Option 82（Relay Agent Information）可携带 Circuit ID、Remote ID 等接入位置信息，便于 DHCP 服务器按接入电路实施地址分配策略和审计。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "交换安全与管理",
+    "difficulty": "medium",
+    "tags": [
+      "交换安全与管理"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-155",
+    "type": "single_choice",
+    "question": "交换机端口安全中的 Sticky MAC 功能通常用于什么？",
+    "options": {
+      "A": "加密所有以太网帧",
+      "B": "把动态学习到的 MAC 固化为配置或受管理的安全地址",
+      "C": "让端口自动成为根桥",
+      "D": "动态调整 IP 子网掩码"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Sticky MAC 可把端口学习到的 MAC 地址作为安全地址保存，减少手工录入；其持久化行为依设备配置而异。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "交换安全与管理",
+    "difficulty": "medium",
+    "tags": [
+      "交换安全与管理"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-156",
+    "type": "single_choice",
+    "question": "在 VTP 等集中传播 VLAN 数据库的方案中，为降低错误 VLAN 变更扩散的风险，变更前最需要确认什么？",
+    "options": {
+      "A": "DNS TTL 是否为零",
+      "B": "域名、版本、修订号和授权/密码等同步条件",
+      "C": "服务器磁盘 RAID 级别",
+      "D": "终端显示器分辨率"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "VTP 设备是否接受并传播 VLAN 数据库与域、版本、修订号和认证等条件有关；错误的较高修订数据库可能覆盖现有 VLAN 配置。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "交换安全与管理",
+    "difficulty": "hard",
+    "tags": [
+      "交换安全与管理"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-157",
+    "type": "single_choice",
+    "question": "为阻止未授权终端通过交换机接入内部网，以下哪项最接近二层接入控制措施？",
+    "options": {
+      "A": "端口安全或 IEEE 802.1X 端口认证",
+      "B": "增加 IP 数据报 TTL",
+      "C": "关闭所有 VLAN 标签",
+      "D": "启用公网 DNS 递归"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "端口安全可限制接入 MAC，802.1X 可在允许访问前进行端口级身份认证；DNS 递归和 TTL 不能替代接入控制。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "交换安全与管理",
+    "difficulty": "medium",
+    "tags": [
+      "交换安全与管理"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-158",
+    "type": "single_choice",
+    "question": "在 DHCP Snooping 部署中，把连接合法 DHCP 服务器的交换机上联错误地设为 Untrusted，可能造成什么现象？",
+    "options": {
+      "A": "STP 根桥优先级自动提高",
+      "B": "所有 ARP 请求都变成单播",
+      "C": "合法 Offer/ACK 被丢弃，客户端无法完成地址租约",
+      "D": "TCP 端口变为动态端口"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "不可信端口收到的 DHCP 服务器方向报文可能被 DHCP Snooping 丢弃；需按拓扑将合法服务器方向端口正确设为可信。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "交换安全与管理",
+    "difficulty": "hard",
+    "tags": [
+      "交换安全与管理"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-159",
+    "type": "single_choice",
+    "question": "VLAN Hopping 攻击的一种典型防护做法是什么？",
+    "options": {
+      "A": "把所有接入端口配置成动态 Trunk",
+      "B": "在终端关闭 TCP 校验和",
+      "C": "禁用未使用端口并把用户端口固定为 Access 模式",
+      "D": "为 VLAN 使用相同网关地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "将终端口固定为 Access、限制 Trunk 协商、关闭未用端口并规划 Native VLAN，可降低常见 VLAN 跳跃攻击风险。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "交换安全与管理",
+    "difficulty": "hard",
+    "tags": [
+      "交换安全与管理"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-160",
+    "type": "single_choice",
+    "question": "多层交换机上的管理 SVI 通常用于什么？",
+    "options": {
+      "A": "为交换机提供 VLAN 内的三层管理地址和远程管理入口",
+      "B": "把交换芯片变成 DHCP 客户端",
+      "C": "自动恢复被删除的配置",
+      "D": "替代物理端口的 FCS 校验"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "SVI 是 VLAN 的三层虚接口，可为设备提供管理 IP，也可参与三层转发；访问仍应配合认证、ACL 和安全管理协议。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "交换安全与管理",
+    "difficulty": "medium",
+    "tags": [
+      "交换安全与管理"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-161",
+    "type": "single_choice",
+    "question": "802.11 单播数据帧发送后，若发送端在规定时间内没有收到确认帧，通常会怎样？",
+    "options": {
+      "A": "等待退避后按规则重传，超过重试上限再报告失败",
+      "B": "永久停止无线介质访问",
+      "C": "立即把 AP 切换为根桥",
+      "D": "把报文改成 DNS 查询"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "802.11 通常对单播帧使用链路层 ACK；未收到 ACK 时发送端会在竞争介质后重传，超过重试限制才放弃。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "无线局域网",
+    "difficulty": "easy",
+    "tags": [
+      "无线局域网"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-162",
+    "type": "single_choice",
+    "question": "无线网络中的隐藏节点问题是指什么？",
+    "options": {
+      "A": "终端无法获得 DHCP 地址",
+      "B": "无线信号被 DNS 缓存隐藏",
+      "C": "两个终端彼此听不到对方，却都能与同一 AP 通信并可能同时发送",
+      "D": "AP 无法读取无线终端的 MAC 地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "隐藏节点彼此侦听不到，但都能到达接收端，可能同时发送而产生碰撞；RTS/CTS 可在某些场景缓解。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "无线局域网",
+    "difficulty": "medium",
+    "tags": [
+      "无线局域网"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-163",
+    "type": "single_choice",
+    "question": "无线终端完成 802.11 关联后，接入点通常还需要配合网络提供什么，终端才能访问其他 IP 网络？",
+    "options": {
+      "A": "IP 地址、网关和 DNS 等配置，通常由 DHCP 提供",
+      "B": "关闭认证并删除加密",
+      "C": "只需要更改终端 MAC 地址",
+      "D": "为每个终端创建一条 BGP 邻居"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "无线关联建立链路接入关系；终端仍需获得 IP 配置并通过网关路由，常见由 DHCP 提供地址、网关及 DNS 参数。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "无线局域网",
+    "difficulty": "medium",
+    "tags": [
+      "无线局域网"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-164",
+    "type": "single_choice",
+    "question": "一个 SSID 被配置为映射到 VLAN 30，主要表示什么？",
+    "options": {
+      "A": "AP 不再需要安全认证",
+      "B": "无线客户端的 IPv4 地址必定以 30 结尾",
+      "C": "该无线网络接入的客户端流量被桥接到 VLAN 30",
+      "D": "该 SSID 使用 30 GHz 频段"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "SSID 可映射到特定 VLAN，使无线用户进入相应二层广播域；SSID 名称本身并不决定 IP 地址或射频频率。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "无线局域网",
+    "difficulty": "easy",
+    "tags": [
+      "无线局域网"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-165",
+    "type": "single_choice",
+    "question": "WPA3-Personal 相较于传统 WPA2-Personal/PSK，主要采用哪种认证机制改进口令认证？",
+    "options": {
+      "A": "WEP 的静态共享密钥",
+      "B": "SAE（Simultaneous Authentication of Equals）",
+      "C": "明文 Telnet 认证",
+      "D": "不验证任何口令"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "WPA3-Personal 使用 SAE 替代传统 PSK 认证握手，改善对离线口令猜测的抵抗能力；仍需使用强口令并按设备兼容性安全配置。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "无线局域网",
+    "difficulty": "easy",
+    "tags": [
+      "无线局域网"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-166",
+    "type": "single_choice",
+    "question": "802.11 的 DCF 使用随机退避计数器，主要是为了什么？",
+    "options": {
+      "A": "为每个终端分配公网地址",
+      "B": "让 AP 不再发送 Beacon",
+      "C": "代替无线加密算法",
+      "D": "让多个竞争终端错开发送时机，降低同时发送导致的碰撞概率"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "DCF 通过载波侦听和随机退避协调共享介质访问；随机等待降低多个站点在信道空闲后同时发送的概率。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "无线局域网",
+    "difficulty": "hard",
+    "tags": [
+      "无线局域网"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-167",
+    "type": "single_choice",
+    "question": "在 802.11 网络中，BSSID 通常用于标识什么？",
+    "options": {
+      "A": "一个基本服务集（BSS），通常对应接入点无线接口的 MAC 地址",
+      "B": "整个 Internet 的 DNS 根区",
+      "C": "用户的 IPv4 默认网关",
+      "D": "无线信道的加密口令"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "BSSID 标识具体 BSS，常由 AP 无线接口的 MAC 地址表示；SSID 是用户看到的无线网络名称，可由多个 BSS 共同提供。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "无线局域网",
+    "difficulty": "medium",
+    "tags": [
+      "无线局域网"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-168",
+    "type": "single_choice",
+    "question": "802.11 终端从一个 AP 漫游到同一扩展服务集中的另一个 AP，通常需要保持什么配置一致？",
+    "options": {
+      "A": "两个 AP 必须连接同一交换机端口",
+      "B": "SSID、安全认证策略及所属网络策略",
+      "C": "所有 AP 使用相同射频信道",
+      "D": "两个 AP 的物理 MAC 地址相同"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "同一 WLAN 中 AP 通常保持 SSID、安全和网络策略一致，便于客户端重新关联或漫游；AP 不需要相同 MAC 或同一信道。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "无线局域网",
+    "difficulty": "medium",
+    "tags": [
+      "无线局域网"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-169",
+    "type": "single_choice",
+    "question": "无线局域网使用 RTS/CTS 机制时，主要希望缓解哪类问题？",
+    "options": {
+      "A": "光纤色散",
+      "B": "隐藏节点导致的碰撞",
+      "C": "IP 地址重叠",
+      "D": "TCP 校验和错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RTS/CTS 通过发送前预约信道，使能听到 AP 的其他站点推迟发送，可缓解隐藏节点碰撞，但会增加控制开销。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "无线局域网",
+    "difficulty": "medium",
+    "tags": [
+      "无线局域网"
+    ]
+  },
+  {
+    "id": "ne-draft-20260923-170",
+    "type": "single_choice",
+    "question": "在采用 20 MHz 信道的 2.4 GHz WLAN 中，为减少相邻 AP 的同频/邻频干扰，常见的非重叠信道组合示例是？",
+    "options": {
+      "A": "7、8、9",
+      "B": "1、2、3",
+      "C": "3、4、5",
+      "D": "1、6、11"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "常见 20 MHz 信道规划可使用 1、6、11 作为互不重叠的组合示例；实际规划还应遵守当地监管域并结合现场射频勘测。",
+    "chapter": "局域网与交换技术",
+    "knowledgePoint": "无线局域网",
+    "difficulty": "medium",
+    "tags": [
+      "无线局域网"
+    ]
+  }
+]

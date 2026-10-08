@@ -1,0 +1,25 @@
+{
+  "title": "《2026年上半年网络工程师经典100题》OCR 与答案复核报告",
+  "status": "draft-not-imported",
+  "sourceFile": "2026年上半年网络工程师经典100题.pdf",
+  "pdfSha256": "E380D07B3DF74546033707B83CB0DF3EC87A0688F5B48260651211A00EFF53E1",
+  "ocrPageImages": 49,
+  "footerIndicatesPageCount": 50,
+  "expectedQuestionCount": 100,
+  "segmentedCandidateCount": 98,
+  "exactDuplicateCandidates": [
+    {
+      "candidate": "UTM 功能不包括题",
+      "existingId": "intake-2026-spring-q048"
+    }
+  ],
+  "blockingIssues": [
+    "题名指向100题，但当前分段仅得到98个候选段；题号跨页，答案会集中出现在下一页，现有切分与题数尚未核平。",
+    "部分多空题各空使用独立选项集，不能直接映射为单个多选题。",
+    "第5章 GB-N 题的题干窗口与解析中的窗口值不一致。",
+    "网络安全章 HTTPS 题配套答案与可见选项存在冲突。",
+    "路由设备配置章 OSPF DR 题的答案字母与解析文字不一致。",
+    "调制波形题含图，需单独裁切并校对选项/答案。"
+  ],
+  "nextReviewStep": "逐页核对缺失条目、拆分多空题、复核冲突答案并进行语义查重后再导入。"
+}

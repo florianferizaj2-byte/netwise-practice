@@ -5,11 +5,20 @@ import { fileURLToPath } from "node:url";
 import { z } from "zod";
 import { questionSchema } from "../domain.js";
 import { createTaxonomyIndex, assertQuestionTaxonomy } from "./taxonomy.js";
+import { questionForCertificate } from "./scopes.js";
+
+export { questionForCertificate } from "./scopes.js";
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const json = (file) => JSON.parse(fs.readFileSync(file, "utf8"));
 const slug = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const sourceId = /^[a-z0-9]+(?:[-_][a-z0-9]+)*$/;
+const referenceSchema = z.object({
+  questionId: z.string().regex(slug),
+  chapter: z.string().min(1).max(160),
+  knowledgeSection: z.string().min(1).max(160),
+  knowledgePoint: z.string().min(1).max(160),
+}).strict();
 const guideSchema = z
   .object({
     schemaVersion: z.literal(1),
@@ -67,6 +76,8 @@ const guideSchema = z
           .object({
             name: z.string().min(1).max(80),
             topics: z.array(z.string().min(1).max(80)).min(1).max(12),
+            examFocus: z.array(z.string().min(2).max(240)).min(1).max(8).optional(),
+            practiceAdvice: z.string().min(2).max(500).optional(),
           })
           .strict(),
       )
@@ -137,6 +148,8 @@ function validateManifest(manifest, directory) {
       !bank.path
     )
       throw new Error(`题库分组配置不合法：${directory}`);
+    if (bank.format !== undefined && bank.format !== "references")
+      throw new Error(`不支持的题库文件格式：${directory} / ${bank.id}`);
     if (sources.has(bank.source))
       throw new Error(`题库来源重复：${bank.source}`);
     sources.add(bank.source);
@@ -486,6 +499,7 @@ function loadCatalog() {
       manifest.syllabus?.allowUnmappedChapters,
     );
     for (const bank of manifest.banks) {
+      if (bank.format === "references") continue;
       for (const file of filesAt(path.join(manifest.directory, bank.path))) {
         const rows = json(file);
         if (!Array.isArray(rows))
@@ -535,6 +549,40 @@ function loadCatalog() {
     }
   }
   decorateVeterinarySharedGroups([...questions.values()]);
+  // Resolve after all ordinary banks have loaded; references never copy content.
+  for (const manifest of manifests) {
+    const seen = new Set();
+    const syllabusChapters = new Set(manifest.syllabus?.modules.map((module) => module.name) || []);
+    for (const bank of manifest.banks.filter((entry) => entry.format === "references")) {
+      for (const file of filesAt(path.join(manifest.directory, bank.path))) {
+        const rows = json(file);
+        if (!Array.isArray(rows)) throw new Error(`共用题目引用必须是数组：${file}`);
+        for (const row of rows) {
+          const { questionId, ...classification } = referenceSchema.parse(row);
+          const question = questions.get(questionId);
+          if (!question) throw new Error(`共用题目不存在：${questionId} / ${file}`);
+          if (seen.has(questionId) || question.certificates.includes(manifest.certificate.id))
+            throw new Error(`共用题目引用重复：${questionId} / ${file}`);
+          if (question.sharedGroupId)
+            throw new Error(`共享材料题组暂不支持单题引用：${questionId}`);
+          if (syllabusChapters.size && !syllabusChapters.has(classification.chapter))
+            throw new Error(`共用题目章节不在考试大纲中：${questionId} / ${classification.chapter}`);
+          assertQuestionTaxonomy({ id: questionId, ...classification }, manifest.taxonomyIndex, file);
+          seen.add(questionId);
+          question.certificates.push(manifest.certificate.id);
+          question.certificateScopes = {
+            ...question.certificateScopes,
+            [manifest.certificate.id]: {
+              ...classification,
+              source: bank.source,
+              sourceLabel: bank.name,
+              sourceVerification: `共用原题（原题库：${question.sourceLabel}）。${question.sourceVerification || "原题内容与答案保持一致。"}`,
+            },
+          };
+        }
+      }
+    }
+  }
   // Validate the effective runtime data as well, so decorators cannot silently
   // move a chapter while leaving its section and point behind.
   const taxonomyByCertificate = new Map(
@@ -542,7 +590,7 @@ function loadCatalog() {
   );
   for (const question of questions.values())
     for (const certificateId of question.certificates)
-      assertQuestionTaxonomy(question, taxonomyByCertificate.get(certificateId));
+      assertQuestionTaxonomy(questionForCertificate(question, certificateId), taxonomyByCertificate.get(certificateId));
   return {
     manifests,
     certificates: manifests.map((entry) => ({

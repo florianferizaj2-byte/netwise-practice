@@ -1,0 +1,47 @@
+{
+  "title": "导入前排除的问题",
+  "questions": [
+    {
+      "id": "sealed-morning-2026h1-q049",
+      "type": "single_choice",
+      "question": "关于IPv6重复地址检测（DAD），正确的是哪一项？",
+      "options": {
+        "A": "DAD用于确保地址唯一",
+        "B": "所有类型地址都必须执行DAD",
+        "C": "地址配置前处于tentative状态且可以正常使用",
+        "D": "只有DAD未发现冲突后地址才能正常使用"
+      },
+      "answer": [
+        "C"
+      ],
+      "analysis": "tentative地址在DAD完成前不能用于正常通信；题库原卷判定将其描述为可用的C项错误。",
+      "chapter": "网络体系结构与TCP/IP",
+      "knowledgeSection": "IPv6",
+      "knowledgePoint": "邻居发现协议NDP",
+      "difficulty": "medium",
+      "tags": [
+        "网络工程师",
+        "2026上半年押题密卷上午卷",
+        "邻居发现协议NDP",
+        "用户提供",
+        "来源未核实"
+      ],
+      "provenance": [
+        {
+          "file": "押题密卷上午题.pdf",
+          "sha256": "3E8E20DC1D1FCC8FE1B663F19FCEB960C04508E3E8EE1DE0E399464EFEF5C2FF",
+          "questionNumber": 49,
+          "pages": [
+            6
+          ],
+          "answerPage": 4,
+          "sourceAnswers": [
+            "C"
+          ]
+        }
+      ],
+      "sourceVerification": "用户提供的网络工程师上午练习卷；出版方、官方性及答案权威性未独立核实，答案按配套答案解析卷整理。",
+      "exclusionReason": "原题问“正确的是”，A 和 D 均符合题干；配套答案选 C（tentative 地址可以正常使用）本身错误。为避免把多答案/错答案加入练习，隔离保留供复核。"
+    }
+  ]
+}

@@ -1,4 +1,25 @@
-import { gradeStudyQuestion } from "../server/study-grading.js";
+import { isIP } from "node:net";
+
+// This is a test AI adapter, not the production shortcut. It simulates a model
+// reviewing equivalent spellings and numerical differences after literal matching.
+function fixtureSemanticGrade(question, row) {
+  const blank = question.blanks.find((item) => item.id === row.blankId);
+  const value = row.response.normalize('NFKC').trim().replace(/\s+/g, ' ');
+  let verdict = 'incorrect';
+  if (blank.kind === 'number') {
+    const raw = blank.unit && value.endsWith(blank.unit) ? value.slice(0, -blank.unit.length).trim() : value;
+    if (/^[+-]?(?:\d+(?:\.\d+)?|\.\d+)$/.test(raw) && Number.isFinite(Number(raw)))
+      verdict = Math.abs(Number(raw) - Number(blank.answer)) <= blank.tolerance ? 'correct' : 'incorrect';
+  } else if (blank.kind === 'ip') {
+    const canonical = (ip) => isIP(ip) === 6 ? new URL(`http://[${ip}]/`).hostname : ip;
+    verdict = isIP(value) && canonical(value) === canonical(blank.answer) ? 'correct' : 'incorrect';
+  } else {
+    const key = (text) => blank.caseSensitive ? text : text.toLowerCase();
+    if ([blank.answer, ...blank.aliases].some((answer) => key(answer) === key(value)) || (blank.answer === '位权' && value === '数位的权值')) verdict = 'correct';
+    else if (blank.kind === 'term' && value && !/忽略|满分|不是/.test(value)) verdict = 'uncertain';
+  }
+  return { ...row, verdict, score: verdict === 'correct' ? 1 : 0, reason: verdict === 'correct' ? 'AI 复核：与预留答案含义或数值等价。' : verdict === 'incorrect' ? 'AI 复核：不符合本空的评分标准。' : '需要进一步复核答案含义。' };
+}
 
 const blank = (id, answer, kind = "number", aliases = []) => ({ id, label: "答案", answer, aliases, kind, caseSensitive: false, unit: "", tolerance: 0 });
 export const studyReference = "参考资料：二进制各位只用0和1，基数为2。各数位的权重称为位权，从右向左分别为1、2、4、8。二进制1101对应十进制13，1110对应14，101对应5。八进制17对应十进制15。出处：测试专用人工确认样例，不用于生产教材。";
@@ -43,13 +64,13 @@ export function mockStudyAI() {
     async grade(question, results) {
       state.gradeCalls++;
       if (state.failGrade) throw new Error("测试上游暂时不可用");
-      return results.map((row) => row.verdict !== "uncertain" ? row : { ...row,
-        verdict: row.response === "数位的权值" ? "correct" : /忽略|满分|不是/.test(row.response) ? "incorrect" : "uncertain",
-        reason: row.response === "数位的权值" ? "与位权含义一致。" : "需要依据术语含义判定。" });
+      return results.map((row) => row.verdict !== "uncertain" ? row : fixtureSemanticGrade(question, row));
     },
     async teacher() {
       state.teacherCalls++;
       if (state.failTeacher) throw new Error("测试老师暂时不可用");
+      if (state.teacherError) throw state.teacherError;
+      if (state.teacherAnswer) return state.teacherAnswer;
       return { conclusion: "先从最右边的一位开始看。", points: ["每往左一位，位权就乘以基数。", "把各位数字和位权相乘后求和。"], example: "可以先用两三位的小数练习。" };
     },
   });
@@ -63,8 +84,10 @@ export function mockStudyFetch() {
     let content;
     if (instruction.includes("独立复核短课")) content = fixtureStudyReview(input.bundle);
     else if (instruction.includes("生成一节从头讲解")) content = fixtureStudyBundle();
-    else if (instruction.includes("按照固定评分标准")) content = { results: input.responses.map((row) => ({ blankId: row.blankId,
-      verdict: row.response === "数位的权值" ? "correct" : "uncertain", reason: "结合固定评分标准判定。" })) };
+    else if (Array.isArray(input.responses)) content = { results: input.responses.map((row) => {
+      const reviewed = fixtureSemanticGrade(input.question, row);
+      return { blankId: row.blankId, verdict: reviewed.verdict, reason: reviewed.reason };
+    }) };
     else content = { conclusion: "先按位权分解，再把结果相加。", points: ["从最右边开始确定每一位的权重。"], example: "先尝试只有两位的二进制数。" };
     return new Response(JSON.stringify({ choices: [{ message: { content: JSON.stringify(content) }, finish_reason: "stop" }],
       usage: { prompt_tokens: 300, completion_tokens: 200, total_tokens: 500 } }), { headers: { "Content-Type": "application/json" } });
