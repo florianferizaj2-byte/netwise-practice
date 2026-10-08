@@ -9,7 +9,7 @@
 
   <view class="settings-card card">
     <view class="setting-row" bindtap="openAppearance"><text>设置</text><text class="setting-value">动画与外观 <text class="setting-arrow">›</text></text></view>
-    <view class="setting-row" bindtap="openCertificate"><text>证书与题库</text><text class="setting-value">{{certificateName}} <text class="setting-arrow">›</text></text></view>
+    <view class="setting-row" bindtap="openCertificate"><text>考试与题库</text><text class="setting-value">{{certificateName}} <text class="setting-arrow">›</text></text></view>
     <view class="setting-row" bindtap="showAi"><text>AI 学习助手</text><text class="setting-value">按账号配置 <text class="setting-arrow">›</text></text></view>
     <view class="setting-row" bindtap="openNickname"><text>社区昵称</text><text class="setting-value">{{nickname}} <text class="setting-arrow">›</text></text></view>
     <view class="setting-row"><text>服务器地址</text><text class="setting-value">aceexam.top</text></view>

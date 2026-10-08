@@ -53,8 +53,11 @@ export function PlatformSupport() {
   useEffect(() => {
     document.documentElement.style.setProperty('--app-background', colors.background);
     document.documentElement.style.setProperty('--app-surface', colors.surface);
+    document.documentElement.style.setProperty('--ios-tint', colors.brand);
+    document.documentElement.style.setProperty('--ios-chrome', colors.chrome);
+    document.documentElement.dataset.appTheme = resolvedMode;
     document.documentElement.style.colorScheme = resolvedMode;
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', colors.background);
-  }, [colors.background, colors.surface, resolvedMode]);
+  }, [colors, resolvedMode]);
   return null;
 }

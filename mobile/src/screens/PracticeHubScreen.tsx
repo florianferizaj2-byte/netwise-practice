@@ -1,3 +1,5 @@
+import { AppIcon } from '../components/AppIcon';
+import { iosStyles } from '../iosStyles';
 import { useMemo, useState } from "react";
 import {
   ActivityIndicator,
@@ -134,7 +136,7 @@ export function PracticeHubScreen({
   practiceSession = "standard",
   preview = false,
 }: Props) {
-  const s = useThemedStyles(styles),
+  const s = useThemedStyles(styles, iosStyles.practiceHub),
     { colors } = useTheme();
   const query = useCachedQuery(
     "/practice/catalog",
@@ -331,9 +333,9 @@ export function PracticeHubScreen({
                       style={[s.mode, selected && s.modeSelected]}
                     >
                       <View style={s.modeTop}>
-                        <Text style={[s.modeGlyph, selected && s.activeText]}>
+                        <AppIcon style={[s.modeGlyph, selected && s.activeText]}>
                           {mode.icon}
-                        </Text>
+                        </AppIcon>
                         <View
                           style={[
                             s.selectionDot,
@@ -365,7 +367,7 @@ export function PracticeHubScreen({
                   style={s.library}
                 >
                   <View style={[s.libraryIcon, s.favoriteIcon]}>
-                    <Text style={s.favoriteGlyph}>★</Text>
+                    <AppIcon style={s.favoriteGlyph}>★</AppIcon>
                   </View>
                   <View style={s.grow}>
                     <Text style={s.libraryTitle}>收藏题目</Text>
@@ -375,7 +377,7 @@ export function PracticeHubScreen({
                         : "查看我的收藏"}
                     </Text>
                   </View>
-                  <Text style={s.chevron}>›</Text>
+                  <AppIcon style={s.chevron}>›</AppIcon>
                 </AnimatedPressable>
                 <AnimatedPressable
                   accessibilityRole="button"
@@ -396,20 +398,20 @@ export function PracticeHubScreen({
                   style={s.library}
                 >
                   <View style={s.libraryIcon}>
-                    <Text style={s.generatedGlyph}>✦</Text>
+                    <AppIcon style={s.generatedGlyph}>✦</AppIcon>
                   </View>
                   <View style={s.grow}>
                     <Text style={s.libraryTitle}>已生成题目</Text>
                     <Text style={s.libraryMeta}>按题组刷题 / 上传</Text>
                   </View>
-                  <Text style={s.chevron}>›</Text>
+                  <AppIcon style={s.chevron}>›</AppIcon>
                 </AnimatedPressable>
               </View>
             </>
           )}
 
           <View style={[s.modeNotice, ai && s.aiNotice]}>
-            <Text style={s.noticeMark}>{ai ? "✦" : "·"}</Text>
+            <AppIcon name="info" style={s.noticeMark}>{ai ? "✦" : "·"}</AppIcon>
             <Text style={s.noticeText}>
               {daily
                 ? "从所选范围随机抽取 30 题，不足时从全题库补充。"
@@ -483,7 +485,7 @@ export function PracticeHubScreen({
                 onPress={() => setSearch("")}
                 style={s.clearSearch}
               >
-                <Text style={s.clearText}>×</Text>
+                <AppIcon style={s.clearText}>×</AppIcon>
               </AnimatedPressable>
             )}
           </View>
@@ -542,7 +544,7 @@ export function PracticeHubScreen({
                   </Text>
                 </View>
                 {hasChildren && (
-                  <Text style={s.expandGlyph}>{open ? "⌃" : "⌄"}</Text>
+                  <AppIcon style={s.expandGlyph}>{open ? "⌃" : "⌄"}</AppIcon>
                 )}
               </AnimatedPressable>
             </View>
@@ -589,9 +591,9 @@ export function PracticeHubScreen({
                           }
                           style={s.sectionToggle}
                         >
-                          <Text style={s.sectionChevron}>
+                          <AppIcon style={s.sectionChevron}>
                             {sectionOpen ? "⌃" : "⌄"}
-                          </Text>
+                          </AppIcon>
                           <View style={s.grow}>
                             <Text style={s.sectionName}>{section.name}</Text>
                             <Text style={s.meta}>

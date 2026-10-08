@@ -1,3 +1,4 @@
+import { iosStyles } from '../iosStyles';
 import { useState } from 'react';
 import {
   KeyboardAvoidingView,
@@ -24,7 +25,7 @@ type AuthScreenProps = {
 
 export function AuthScreen({ onAuthenticated, onPreview }: AuthScreenProps) {
   const { colors } = useTheme();
-  const styles = useThemedStyles(createStyles);
+  const styles = useThemedStyles(createStyles, iosStyles.auth);
   const [mode, setMode] = useState<AuthMode>('login');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -79,6 +80,8 @@ export function AuthScreen({ onAuthenticated, onPreview }: AuthScreenProps) {
             {(['login', 'register'] as AuthMode[]).map((item) => (
               <AnimatedPressable
                 key={item}
+                accessibilityRole="button"
+                accessibilityState={{ selected: mode === item }}
                 onPress={() => setMode(item)}
                 style={[styles.segment, mode === item && styles.activeSegment]}
               >
@@ -96,6 +99,9 @@ export function AuthScreen({ onAuthenticated, onPreview }: AuthScreenProps) {
 
           <Text style={styles.label}>账号</Text>
           <TextInput
+            accessibilityLabel="账号"
+            autoComplete="username"
+            textContentType="username"
             autoCapitalize="none"
             autoCorrect={false}
             onChangeText={setUsername}
@@ -107,6 +113,11 @@ export function AuthScreen({ onAuthenticated, onPreview }: AuthScreenProps) {
 
           <Text style={styles.label}>密码</Text>
           <TextInput
+            accessibilityLabel="密码"
+            autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
+            textContentType={mode === 'login' ? 'password' : 'newPassword'}
+            returnKeyType="go"
+            onSubmitEditing={() => { if (!busy) void submit(); }}
             autoCapitalize="none"
             autoCorrect={false}
             onChangeText={setPassword}
@@ -125,7 +136,7 @@ export function AuthScreen({ onAuthenticated, onPreview }: AuthScreenProps) {
             <Text style={styles.primaryButtonText}>{busy ? `${action}中…` : action}</Text>
           </AnimatedPressable>
 
-          {!!error && <Text style={styles.errorText}>{error}</Text>}
+          {!!error && <Text accessibilityRole="alert" style={styles.errorText}>{error}</Text>}
 
           {__DEV__ && (
             <AnimatedPressable onPress={onPreview} style={styles.previewButton}>

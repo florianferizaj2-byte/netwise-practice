@@ -1,3 +1,5 @@
+import { AppIcon } from '../components/AppIcon';
+import { iosStyles } from '../iosStyles';
 export { TodayScreen, WrongScreen } from './StudyOverviewScreens';
 export { ExamScreen } from './ExamScreen';
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
@@ -8,7 +10,6 @@ import {
   Modal,
   ScrollView,
   StyleSheet,
-  Switch,
   Text,
   TextInput,
   View,
@@ -17,6 +18,7 @@ import { AppAlert as Alert } from '../components/AppAlert';
 import { RefreshControl } from '../components/RefreshControl';
 import { SafeAreaView } from '../components/SafeArea';
 import { WebAppActions } from '../components/WebAppActions';
+import { AppSwitch } from '../components/AppSwitch';
 
 import {
   mobileApi,
@@ -50,6 +52,7 @@ import {
   spacing,
   useThemedStyles,
   useTheme,
+  isAppleWeb,
   type AnimationSpeed,
   type ThemeColors,
   type ThemeMode,
@@ -137,7 +140,7 @@ const soundVolumeOptions = [
 const DAILY_PRACTICE_COUNT = 30;
 
 function ScreenContainer({ children, compact = false, profile = false, onRefresh, refreshing = false }: { children: ReactNode; compact?: boolean; profile?: boolean; onRefresh?: () => void; refreshing?: boolean }) {
-  const styles = useThemedStyles(createStyles);
+  const styles = useThemedStyles(createStyles, iosStyles.tabs);
   return (
     <ScrollView
       contentContainerStyle={[styles.content, compact && styles.compactContent, profile && styles.profileContent]}
@@ -150,7 +153,7 @@ function ScreenContainer({ children, compact = false, profile = false, onRefresh
 }
 
 function ScreenHeader({ eyebrow, title }: { eyebrow: string; title: string }) {
-  const styles = useThemedStyles(createStyles);
+  const styles = useThemedStyles(createStyles, iosStyles.tabs);
   return (
     <EntranceView style={styles.header} distance={8}>
       <View>
@@ -229,7 +232,7 @@ function PrimaryAction({
   disabled?: boolean;
   onPress?: () => void;
 }) {
-  const styles = useThemedStyles(createStyles);
+  const styles = useThemedStyles(createStyles, iosStyles.tabs);
   return (
     <AnimatedPressable
       disabled={disabled}
@@ -237,7 +240,7 @@ function PrimaryAction({
       style={[styles.primaryAction, compact && styles.compactPrimaryAction, disabled && styles.disabledAction]}
     >
       <Text style={styles.primaryActionText}>{children}</Text>
-      <Text style={styles.actionArrow}>›</Text>
+      <AppIcon style={styles.actionArrow}>›</AppIcon>
     </AnimatedPressable>
   );
 }
@@ -260,7 +263,7 @@ export function PracticeScreen({
   preview = false,
 }: ScreenProps) {
   const { colors } = useTheme();
-  const styles = useThemedStyles(createStyles);
+  const styles = useThemedStyles(createStyles, iosStyles.tabs);
   const active = useScreenActive();
   const isDailyPractice = practiceSession === 'daily';
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -862,7 +865,7 @@ export function PracticeScreen({
       <ScreenContainer>
         <ScreenHeader eyebrow="练习完成" title="这一组完成啦" />
         <EntranceView delay={70} distance={18} style={styles.completedCard}>
-          <Text style={styles.completedEmoji}>✦</Text>
+          <AppIcon name="check" style={styles.completedEmoji}>✦</AppIcon>
           <Text style={styles.completedTitle}>很棒，节奏保持住</Text>
           <Text style={styles.completedText}>
             本组练习进度已保存到你的账号，回到首页可以查看最新学习进度。
@@ -1011,14 +1014,12 @@ export function PracticeScreen({
             onPress={toggleFavorite}
             style={styles.questionIconButton}
           >
-            <Text
-              style={[
+            <AppIcon style={[
                 styles.questionStarIcon,
                 currentQuestion.favorite && styles.questionStarActive,
-              ]}
-            >
+              ]}>
               ★
-            </Text>
+            </AppIcon>
           </AnimatedPressable>
           <AnimatedPressable
             accessibilityLabel="举报题目"
@@ -1027,7 +1028,7 @@ export function PracticeScreen({
             onPress={() => setReportOpen(true)}
             style={styles.questionIconButton}
           >
-            <Text style={styles.questionReportIcon}>⚠︎</Text>
+            <AppIcon style={styles.questionReportIcon}>⚠︎</AppIcon>
           </AnimatedPressable>
         </View>
       </EntranceView>
@@ -1248,7 +1249,7 @@ export function PracticeScreen({
                   >
                     {option.label}
                   </Text>
-                  {reportKind === option.kind && <Text style={styles.reportCheck}>✓</Text>}
+                  {reportKind === option.kind && <AppIcon style={styles.reportCheck}>✓</AppIcon>}
                 </AnimatedPressable>
               ))}
             </View>
@@ -1310,7 +1311,7 @@ export function ProfileScreen({
     setSoundStyle,
     setSoundVolume,
   } = useTheme();
-  const styles = useThemedStyles(createStyles);
+  const styles = useThemedStyles(createStyles, iosStyles.tabs);
   const activeCertificate = certificates.find((certificate) => certificate.id === user?.certificateId);
   const [sponsorOpen, setSponsorOpen] = useState(false);
   const [appSettingsOpen, setAppSettingsOpen] = useState(false);
@@ -1559,7 +1560,7 @@ export function ProfileScreen({
             onPress={() => onNavigate('wrong')}
             style={styles.profileShortcut}
           >
-            <View style={[styles.profileShortcutIcon, styles.profileShortcutIconGold]}><Text style={styles.profileShortcutGlyph}>错</Text></View>
+            <View style={[styles.profileShortcutIcon, styles.profileShortcutIconGold]}><AppIcon style={styles.profileShortcutGlyph}>错</AppIcon></View>
             <Text style={styles.profileShortcutTitle}>错题复习</Text>
             <Text style={styles.profileShortcutMeta}>巩固薄弱知识点</Text>
           </AnimatedPressable>
@@ -1568,7 +1569,7 @@ export function ProfileScreen({
             onPress={() => onNavigate('practice', { practiceSource: 'favorites' })}
             style={styles.profileShortcut}
           >
-            <View style={styles.profileShortcutIcon}><Text style={styles.profileShortcutGlyph}>★</Text></View>
+            <View style={styles.profileShortcutIcon}><AppIcon style={styles.profileShortcutGlyph}>★</AppIcon></View>
             <Text style={styles.profileShortcutTitle}>收藏题目</Text>
             <Text style={styles.profileShortcutMeta}>回看标记的题目</Text>
           </AnimatedPressable>
@@ -1577,7 +1578,7 @@ export function ProfileScreen({
             onPress={() => onNavigate('practice', { practiceMode: 'ai', practiceAiLibrary: true })}
             style={styles.profileShortcut}
           >
-            <View style={[styles.profileShortcutIcon, styles.profileShortcutIconBlue]}><Text style={styles.profileShortcutGlyph}>AI</Text></View>
+            <View style={[styles.profileShortcutIcon, styles.profileShortcutIconBlue]}><AppIcon style={styles.profileShortcutGlyph}>AI</AppIcon></View>
             <Text style={styles.profileShortcutTitle}>已生成题目</Text>
             <Text style={styles.profileShortcutMeta}>按批次刷题或上传</Text>
           </AnimatedPressable>
@@ -1586,7 +1587,7 @@ export function ProfileScreen({
             onPress={() => onNavigate('today')}
             style={styles.profileShortcut}
           >
-            <View style={[styles.profileShortcutIcon, styles.profileShortcutIconMint]}><Text style={styles.profileShortcutGlyph}>今</Text></View>
+            <View style={[styles.profileShortcutIcon, styles.profileShortcutIconMint]}><AppIcon style={styles.profileShortcutGlyph}>今</AppIcon></View>
             <Text style={styles.profileShortcutTitle}>学习进度</Text>
             <Text style={styles.profileShortcutMeta}>查看今日练习情况</Text>
           </AnimatedPressable>
@@ -1607,7 +1608,7 @@ export function ProfileScreen({
           <SettingRow onPress={() => setRedeemOpen(true)} title="兑换码" value="开通 / 续期会员" />
           <SettingRow
             onPress={user ? onOpenCertificatePicker : undefined}
-            title="证书与题库"
+            title="考试与题库"
             value={activeCertificate?.name ?? (user ? '已同步' : '预览模式')}
           />
           <SettingRow
@@ -1700,7 +1701,7 @@ export function ProfileScreen({
                         </Text>
                         <Text style={styles.appearanceOptionHint}>{option.hint}</Text>
                       </View>
-                      {active && <Text style={styles.appearanceCheck}>✓</Text>}
+                      {active && <AppIcon style={styles.appearanceCheck}>✓</AppIcon>}
                     </AnimatedPressable>
                   );
                 })}
@@ -1721,7 +1722,7 @@ export function ProfileScreen({
                         </Text>
                         <Text style={styles.appearanceOptionHint}>{option.hint}</Text>
                       </View>
-                      {active && <Text style={styles.appearanceCheck}>✓</Text>}
+                      {active && <AppIcon style={styles.appearanceCheck}>✓</AppIcon>}
                     </AnimatedPressable>
                   );
                 })}
@@ -1734,14 +1735,14 @@ export function ProfileScreen({
                   <Text style={styles.settingsSectionTitle}>交互音效</Text>
                   <Text style={styles.appearanceOptionHint}>点击按钮时播放轻短提示音</Text>
                 </View>
-                <Switch
+                <AppSwitch
                   accessibilityLabel="开启交互音效"
                   onValueChange={(enabled) => {
                     previewUiSound();
                     setSoundEnabled(enabled);
                   }}
-                  thumbColor={soundEnabled ? colors.brand : colors.textFaint}
-                  trackColor={{ false: colors.border, true: colors.brandSoft }}
+                  thumbColor={isAppleWeb ? colors.white : soundEnabled ? colors.brand : colors.textFaint}
+                  trackColor={{ false: colors.border, true: isAppleWeb ? colors.success : colors.brandSoft }}
                   value={soundEnabled}
                 />
               </View>
@@ -1921,7 +1922,7 @@ export function ProfileScreen({
                           : '尚未在作者账号保存密钥；可使用服务器环境配置'}
                   </Text>
                 </View>
-                <Text style={styles.settingsStatusIcon}>{settings?.hasKey ? '✓' : '✦'}</Text>
+                <AppIcon style={styles.settingsStatusIcon}>{settings?.hasKey ? '✓' : '✦'}</AppIcon>
               </View>
 
               <Text style={styles.settingsSectionTitle}>服务配置</Text>
@@ -2134,7 +2135,7 @@ export function ProfileScreen({
 }
 
 function GuideStep({ number, text }: { number: string; text: string }) {
-  const styles = useThemedStyles(createStyles);
+  const styles = useThemedStyles(createStyles, iosStyles.tabs);
   return (
     <View style={styles.guideStep}>
       <View style={styles.guideStepNumber}>
@@ -3585,13 +3586,13 @@ function SettingRow({
   title: string;
   value: string;
 }) {
-  const styles = useThemedStyles(createStyles);
+  const styles = useThemedStyles(createStyles, iosStyles.tabs);
   const content = (
     <>
       <Text style={styles.settingTitle}>{title}</Text>
       <View style={styles.settingValueWrap}>
         <Text style={styles.settingValue}>{value}</Text>
-        {onPress && <Text style={styles.settingArrow}>›</Text>}
+        {onPress && <AppIcon style={styles.settingArrow}>›</AppIcon>}
       </View>
     </>
   );

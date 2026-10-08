@@ -9,7 +9,7 @@ import {
   type ViewStyle,
   type GestureResponderEvent,
 } from 'react-native';
-import { useTheme } from '../theme';
+import { isAppleWeb, useTheme } from '../theme';
 import { useScreenActive } from '../navigation/ScreenActivity';
 import { playUiSound } from '../audioFeedback';
 
@@ -24,12 +24,12 @@ export function useEntrance({
   delay = 0,
   distance = 16,
 }: EntranceOptions = {}) {
-  const { animationScale } = useTheme();
+  const { animationScale, reduceMotion } = useTheme();
   const translateY = useRef(new Animated.Value(Math.min(distance, 8))).current;
   const active = useScreenActive();
 
   useEffect(() => {
-    if (!active) {
+    if (!active || isAppleWeb || reduceMotion) {
       translateY.setValue(0);
       return;
     }
@@ -43,7 +43,7 @@ export function useEntrance({
 
     animation.start();
     return () => animation.stop();
-  }, [active, animationScale, delay, translateY]);
+  }, [active, animationScale, delay, reduceMotion, translateY]);
 
   return {
     transform: [{ translateY }],
@@ -59,12 +59,15 @@ export function usePulse({
   maxScale?: number;
   duration?: number;
 } = {}) {
-  const { animationScale } = useTheme();
+  const { animationScale, reduceMotion } = useTheme();
   const active = useScreenActive();
   const scale = useRef(new Animated.Value(minScale)).current;
 
   useEffect(() => {
-    if (!active) return;
+    if (!active || isAppleWeb || reduceMotion) {
+      scale.setValue(minScale);
+      return;
+    }
     const animation = Animated.loop(
       Animated.sequence([
         Animated.timing(scale, {
@@ -86,7 +89,7 @@ export function usePulse({
 
     animation.start();
     return () => animation.stop();
-  }, [active, animationScale, duration, maxScale, minScale, scale]);
+  }, [active, animationScale, duration, maxScale, minScale, reduceMotion, scale]);
 
   return scale;
 }
@@ -130,8 +133,17 @@ export function AnimatedPressable({
 }: AnimatedPressableProps) {
   const { animationScale } = useTheme();
   const scale = useRef(new Animated.Value(1)).current;
+  const opacity = useRef(new Animated.Value(1)).current;
+  const flatStyle = isAppleWeb ? StyleSheet.flatten(style) : undefined;
+  const touchStyle = isAppleWeb ? {
+    minHeight: Math.max(44, typeof flatStyle?.minHeight === 'number' ? flatStyle.minHeight : 0),
+    minWidth: Math.max(44, typeof flatStyle?.minWidth === 'number' ? flatStyle.minWidth : 0),
+    ...(typeof flatStyle?.width === 'number' ? { width: Math.max(44, flatStyle.width) } : {}),
+    ...(typeof flatStyle?.height === 'number' ? { height: Math.max(44, flatStyle.height) } : {}),
+  } : undefined;
 
   const pressIn = () => {
+    if (isAppleWeb) { opacity.setValue(0.65); return; }
     Animated.spring(scale, {
       friction: Math.max(4, Math.round(7 * animationScale)),
       tension: Math.round(260 / animationScale),
@@ -141,6 +153,7 @@ export function AnimatedPressable({
   };
 
   const pressOut = () => {
+    if (isAppleWeb) { opacity.setValue(1); return; }
     Animated.spring(scale, {
       friction: Math.max(4, Math.round(5 * animationScale)),
       tension: Math.round(230 / animationScale),
@@ -156,13 +169,20 @@ export function AnimatedPressable({
 
   return (
     <MotionPressable
+      accessibilityRole="button"
       {...accessibilityProps}
+      accessibilityState={{ ...accessibilityProps.accessibilityState, disabled: !!disabled }}
+      aria-pressed={isAppleWeb && (!accessibilityProps.accessibilityRole || accessibilityProps.accessibilityRole === 'button') ? accessibilityProps.accessibilityState?.selected : undefined}
+      aria-selected={isAppleWeb && accessibilityProps.accessibilityRole === 'tab' ? accessibilityProps.accessibilityState?.selected : undefined}
+      aria-checked={isAppleWeb ? accessibilityProps.accessibilityState?.checked : undefined}
+      aria-expanded={isAppleWeb ? accessibilityProps.accessibilityState?.expanded : undefined}
+      aria-busy={isAppleWeb ? accessibilityProps.accessibilityState?.busy : undefined}
       disabled={disabled}
       onLongPress={onLongPress}
       onPress={handlePress}
       onPressIn={pressIn}
       onPressOut={pressOut}
-      style={[style, { transform: [{ scale }] }]}
+      style={[style, touchStyle, isAppleWeb ? { opacity: disabled ? flatStyle?.opacity ?? 1 : opacity } : { transform: [{ scale }] }]}
     >
       {children}
     </MotionPressable>
@@ -178,17 +198,18 @@ export function AnimatedProgressBar({
   trackColor: string;
   value: number;
 }) {
-  const { animationScale } = useTheme();
+  const { animationScale, reduceMotion } = useTheme();
   const progress = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
+    if (reduceMotion) { progress.setValue(value); return; }
     Animated.timing(progress, {
-      duration: Math.max(1, Math.round(900 * animationScale)),
+      duration: Math.max(1, Math.round((isAppleWeb ? 240 : 900) * animationScale)),
       easing: Easing.out(Easing.cubic),
       toValue: value,
       useNativeDriver: false,
     }).start();
-  }, [animationScale, progress, value]);
+  }, [animationScale, progress, reduceMotion, value]);
 
   const width = progress.interpolate({
     inputRange: [0, 100],

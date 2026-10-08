@@ -1,0 +1,54 @@
+:root {
+  --ios-font: system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+  --ios-tint: #0066d6;
+  --ios-chrome: rgba(249, 249, 252, 0.88);
+}
+
+html, body, input, textarea, button { font-family: var(--ios-font); }
+body { -webkit-font-smoothing: antialiased; }
+#root, [aria-modal="true"] {
+  font-optical-sizing: auto;
+  font-kerning: normal;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+/* Semantic targets keep the app usable with touch, keyboard and VoiceOver. */
+[role="button"], [role="radio"], [role="checkbox"], [role="switch"] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+[aria-disabled="true"] { cursor: default; }
+[role="button"]:focus-visible, [role="radio"]:focus-visible,
+[role="checkbox"]:focus-visible, [role="switch"]:focus-visible,
+input:focus-visible, textarea:focus-visible {
+  outline: 3px solid var(--ios-tint);
+  outline-offset: -3px;
+}
+input, textarea { scroll-margin-block: 24px; caret-color: var(--ios-tint); }
+input::placeholder, textarea::placeholder { opacity: 1; }
+
+#app-tab-bar {
+  -webkit-backdrop-filter: saturate(160%) blur(20px);
+  backdrop-filter: saturate(160%) blur(20px);
+  isolation: isolate;
+}
+#app-tab-bar > [role="button"] { max-width: 124px; }
+:root[data-app-keyboard="open"] #app-tab-bar { display: none; }
+
+.ios-switch { position: relative; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 56px; width: 56px; height: 44px; cursor: pointer; }
+.ios-switch-input { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: inherit; }
+.ios-switch-track { display: block; width: 51px; height: 31px; padding: 2px; box-sizing: border-box; border-radius: 999px; transition: background-color 180ms ease; }
+.ios-switch-thumb { display: block; width: 27px; height: 27px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16); transition: transform 180ms ease; }
+.ios-switch-input:focus-visible + .ios-switch-track { outline: 3px solid var(--ios-tint); outline-offset: 3px; }
+
+@media (prefers-reduced-transparency: reduce) {
+  #app-tab-bar { background: var(--app-surface) !important; backdrop-filter: none; -webkit-backdrop-filter: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+@media (forced-colors: active) {
+  [role="button"], [role="radio"], [role="checkbox"], input, textarea { border: 1px solid ButtonText; }
+}

@@ -1,3 +1,5 @@
+import { AppIcon } from '../components/AppIcon';
+import { iosStyles } from '../iosStyles';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   Animated,
@@ -45,6 +47,7 @@ import {
   spacing,
   useThemedStyles,
   useTheme,
+  isAppleWeb,
   type ThemeColors,
 } from '../theme';
 import { APP_VERSION } from '../version';
@@ -57,18 +60,18 @@ import type {
   PracticeSource,
 } from '../types';
 
-const tabs: Array<{ id: AppTab; label: string; icon: string }> = [
-  { id: 'today', label: '今日', icon: '⌂' },
-  { id: 'practice', label: '练习', icon: '✦' },
-  { id: 'wrong', label: '错题', icon: '×' },
-  { id: 'exam', label: '考试', icon: '□' },
-  { id: 'vip', label: 'VIP', icon: '✧' },
-  { id: 'profile', label: '我的', icon: '◎' },
+const tabs: Array<{ id: AppTab; label: string; icon: string; symbol: string }> = [
+  { id: 'today', label: '今日', icon: '⌂', symbol: 'home' },
+  { id: 'practice', label: '练习', icon: '✦', symbol: 'book' },
+  { id: 'wrong', label: '错题', icon: '×', symbol: 'wrong' },
+  { id: 'exam', label: '考试', icon: '□', symbol: 'exam' },
+  { id: 'vip', label: 'VIP', icon: '✧', symbol: 'crown' },
+  { id: 'profile', label: '我的', icon: '◎', symbol: 'person' },
 ];
 
 export function AppShell() {
-  const { animationScale, resolvedMode } = useTheme();
-  const styles = useThemedStyles(createStyles);
+  const { animationScale, resolvedMode, reduceMotion } = useTheme();
+  const styles = useThemedStyles(createStyles, iosStyles.shell);
   const [isPreview, setIsPreview] = useState(false);
   const [session, setSession] = useState<AuthResponse | null>(null);
   const [activeTab, setActiveTab] = useState<AppTab>('today');
@@ -266,6 +269,11 @@ export function AppShell() {
 
   useEffect(() => {
     if (!isPreview && !session) return;
+    if (isAppleWeb || reduceMotion) {
+      screenOpacity.setValue(1);
+      screenOffset.setValue(0);
+      return;
+    }
 
     screenOpacity.setValue(0.92);
     screenOffset.setValue(4);
@@ -288,6 +296,7 @@ export function AppShell() {
   }, [
     activeTab,
     animationScale,
+    reduceMotion,
     isPreview,
     screenOffset,
     screenOpacity,
@@ -552,7 +561,7 @@ export function AppShell() {
 
 function VersionCheckingScreen() {
   const { resolvedMode } = useTheme();
-  const styles = useThemedStyles(createStyles);
+  const styles = useThemedStyles(createStyles, iosStyles.shell);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -576,7 +585,7 @@ function UpdateRequiredScreen({
   release: AppVersionResponse;
 }) {
   const { resolvedMode } = useTheme();
-  const styles = useThemedStyles(createStyles);
+  const styles = useThemedStyles(createStyles, iosStyles.shell);
   const web = Platform.OS === 'web';
   const downloadUrl = mobileApi.resolveDownloadUrl(release.downloadUrl);
   const [downloadState, setDownloadState] = useState<
@@ -637,7 +646,7 @@ function UpdateRequiredScreen({
             <Text style={styles.updateVersionValue}>
               v{release.currentVersion}
             </Text>
-            <Text style={styles.updateVersionArrow}>→</Text>
+            <AppIcon style={styles.updateVersionArrow}>→</AppIcon>
             <Text style={styles.updateVersionValue}>
               v{release.latestVersion}
             </Text>
@@ -688,7 +697,7 @@ function UpdateRequiredScreen({
             <Text style={styles.updateBrowserButtonText}>
               改用浏览器下载新版
             </Text>
-            <Text style={styles.updateBrowserButtonArrow}>→</Text>
+            <AppIcon style={styles.updateBrowserButtonArrow}>→</AppIcon>
           </AnimatedPressable>}
           <AnimatedPressable
             accessibilityLabel="重新检查版本"
@@ -745,7 +754,9 @@ function renderScreen(
     case 'exam':
       return <ExamScreen onNavigate={onNavigate} {...data} />;
     case 'vip':
-      return <VipScreen preview={data.preview} user={data.user} />;
+      return <VipScreen preview={data.preview} user={data.user}
+        certificateName={data.certificates.find((item) => item.id === data.user?.certificateId)?.name || '当前备考目标'}
+        onOpenCertificates={data.onOpenCertificatePicker} onOpenPractice={() => onNavigate('practice')} />;
     case 'profile':
       return <ProfileScreen onNavigate={onNavigate} {...data} />;
     case 'today':
@@ -763,9 +774,9 @@ function TabBar({
   onChange: (tab: AppTab) => void;
   hidden?: boolean;
 }) {
-  const styles = useThemedStyles(createStyles);
+  const styles = useThemedStyles(createStyles, iosStyles.shell);
   return (
-    <View style={styles.tabBar} accessibilityElementsHidden={hidden} importantForAccessibility={hidden ? 'no-hide-descendants' : 'auto'}>
+    <View nativeID="app-tab-bar" style={styles.tabBar} accessibilityElementsHidden={hidden} importantForAccessibility={hidden ? 'no-hide-descendants' : 'auto'}>
       {tabs.map((tab) => (
         <TabBarItem
           active={activeTab === tab.id}
@@ -788,7 +799,7 @@ function TabBarItem({
   tab: (typeof tabs)[number];
 }) {
   const { animationScale } = useTheme();
-  const styles = useThemedStyles(createStyles);
+  const styles = useThemedStyles(createStyles, iosStyles.shell);
   const iconScale = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
@@ -804,10 +815,11 @@ function TabBarItem({
     <AnimatedPressable
       accessibilityLabel={`${tab.label}导航`}
       accessibilityRole="button"
+      accessibilityState={{ selected: active }}
       onPress={onPress}
       style={styles.tab}
     >
-      <Animated.Text
+      {isAppleWeb ? <AppIcon name={tab.symbol} selected={active} style={[styles.tabIcon, active && styles.activeTabIcon]}>{tab.icon}</AppIcon> : <Animated.Text
         style={[
           styles.tabIcon,
           active && styles.activeTabIcon,
@@ -815,7 +827,7 @@ function TabBarItem({
         ]}
       >
         {tab.icon}
-      </Animated.Text>
+      </Animated.Text>}
       <Text style={[styles.tabLabel, active && styles.activeTabLabel]}>
         {tab.label}
       </Text>
@@ -832,7 +844,7 @@ function AiGenerationProgressPill({
   onPress: () => void;
   onClose: () => void;
 }) {
-  const styles = useThemedStyles(createStyles);
+  const styles = useThemedStyles(createStyles, iosStyles.shell);
   const { width: screenWidth, height: screenHeight } = useWindowDimensions();
   const complete = job.status === 'completed';
   const failed = job.status === 'failed';
@@ -920,7 +932,7 @@ function AiGenerationProgressPill({
             onPress={expandFromEdge}
             style={styles.aiProgressCollapsed}
           >
-            <Text style={styles.aiProgressMarkText}>✦</Text>
+            <AppIcon style={styles.aiProgressMarkText}>✦</AppIcon>
             <Text style={styles.aiProgressCollapsedCount}>
               {complete ? '✓' : failed ? '!' : `${job.progress.completed ?? 0}/10`}
             </Text>
@@ -931,7 +943,7 @@ function AiGenerationProgressPill({
             onPress={onClose}
             style={styles.aiProgressCollapsedClose}
           >
-            <Text style={styles.aiProgressCollapsedCloseText}>×</Text>
+            <AppIcon style={styles.aiProgressCollapsedCloseText}>×</AppIcon>
           </AnimatedPressable>
         </View>
       ) : (
@@ -953,7 +965,7 @@ function AiGenerationProgressPill({
               onPress={onClose}
               style={styles.aiProgressCloseButton}
             >
-              <Text style={styles.aiProgressCloseText}>×</Text>
+              <AppIcon style={styles.aiProgressCloseText}>×</AppIcon>
             </AnimatedPressable>
           </View>
           <AnimatedPressable
@@ -962,7 +974,7 @@ function AiGenerationProgressPill({
             onPress={onPress}
             style={styles.aiProgressCardBody}
           >
-            <View style={styles.aiProgressMark}><Text style={styles.aiProgressMarkText}>✦</Text></View>
+            <View style={styles.aiProgressMark}><AppIcon style={styles.aiProgressMarkText}>✦</AppIcon></View>
             <View style={styles.aiProgressCopy}>
               <View style={styles.aiProgressHeading}>
                 <Text style={styles.aiProgressTitle}>
@@ -981,7 +993,7 @@ function AiGenerationProgressPill({
                 </View>
               )}
             </View>
-            <Text style={styles.aiProgressArrow}>›</Text>
+            <AppIcon style={styles.aiProgressArrow}>›</AppIcon>
           </AnimatedPressable>
         </View>
       )}

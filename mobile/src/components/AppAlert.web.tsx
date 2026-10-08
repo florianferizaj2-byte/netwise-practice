@@ -1,3 +1,4 @@
+import { iosStyles } from '../iosStyles';
 import { useSyncExternalStore } from 'react';
 import { Modal, ScrollView, StyleSheet, Text, View, type AlertButton, type AlertOptions } from 'react-native';
 import { AnimatedPressable } from './Motion';
@@ -23,7 +24,7 @@ export const AppAlert = {
 
 export function AppAlertHost() {
   const notice = useSyncExternalStore(subscribe, snapshot, snapshot);
-  const s = useThemedStyles(styles);
+  const s = useThemedStyles(styles, iosStyles.alert);
   if (!notice) return null;
   function finish(button?: AlertButton) {
     notices = notices.slice(1);

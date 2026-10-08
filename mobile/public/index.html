@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#F6F8F7" />
+    <meta name="theme-color" content="#F2F2F7" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="考匠" />
@@ -11,9 +11,10 @@
     <meta name="description" content="考匠移动学习空间：刷题、错题复习、模拟考试与 AI 辅导。使用考匠账号同步学习记录。" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
+    <link rel="stylesheet" href="./apple-ui.css" />
     <title>考匠 · 移动学习空间</title>
     <style id="expo-reset">
-      :root { --app-background: #F6F8F7; --app-surface: #FFFFFF; --app-height: 100vh; --app-top: 0px; --app-bottom-inset: env(safe-area-inset-bottom, 0px); }
+      :root { --app-background: #F2F2F7; --app-surface: #FFFFFF; --app-height: 100vh; --app-top: 0px; --app-bottom-inset: env(safe-area-inset-bottom, 0px); }
       @supports (height: 100dvh) { :root { --app-height: 100dvh; } }
       /* Installed iOS apps have no browser toolbar: use the full layout height. */
       @media (display-mode: standalone), (display-mode: fullscreen) { :root { --app-height: 100vh; } }
@@ -21,7 +22,7 @@
       :root[data-app-keyboard="open"] { --app-height: var(--app-keyboard-height); }
       html, body { height: 100%; margin: 0; overflow: hidden; background: var(--app-background); overscroll-behavior-y: none; }
       html { -webkit-text-size-adjust: 100%; }
-      #root { display: flex; flex-direction: column; position: fixed; inset: 0; min-width: 0; min-height: 0; background: var(--app-surface); }
+      #root { display: flex; flex-direction: column; position: fixed; inset: 0; min-width: 0; min-height: 0; background: var(--app-background); }
       #root > div { flex: 1; min-width: 0; min-height: 0; }
       #root, [aria-modal="true"] {
         box-sizing: border-box; top: var(--app-top) !important; bottom: auto !important;
@@ -29,9 +30,9 @@
         padding-top: env(safe-area-inset-top, 0px) !important; padding-right: env(safe-area-inset-right, 0px) !important;
         padding-bottom: var(--app-bottom-inset) !important; padding-left: env(safe-area-inset-left, 0px) !important;
       }
-      input, textarea { font-size: 16px !important; } /* Avoid Safari zooming when a field gains focus. */
+      input, textarea { font-size: 17px !important; } /* iOS body size also avoids Safari's field-focus zoom. */
       input[type="file"] { position: absolute; }
-      @media (prefers-color-scheme: dark) { :root { --app-background: #0D1714; --app-surface: #15231D; } }
+      @media (prefers-color-scheme: dark) { :root { --app-background: #000000; --app-surface: #1C1C1E; } }
     </style>
   </head>
   <body>

@@ -1,3 +1,5 @@
+import { AppIcon } from '../components/AppIcon';
+import { iosStyles } from '../iosStyles';
 import { useEffect, useRef, useState } from 'react';
 import * as ImagePicker from 'expo-image-picker';
 import { prepareCommunityImage } from '../platform/communityImage';
@@ -25,7 +27,7 @@ import {
 import { AnimatedPressable, EntranceView } from '../components/Motion';
 import { useScreenActive } from '../navigation/ScreenActivity';
 import { mergeMessages } from '../api/communityMessages';
-import { radius, shadow, spacing, useThemedStyles, useTheme, type ThemeColors } from '../theme';
+import { isAppleWeb, radius, shadow, spacing, useThemedStyles, useTheme, type ThemeColors } from '../theme';
 
 const quickEmojis = ['😀', '🤝', '🎉', '💪', '❤️', '😂'];
 const leaderboardTabs = [
@@ -82,7 +84,7 @@ function imageMimeType(value?: string): PendingImage['mimeType'] {
 
 export function CommunityScreen({ preview = false, user, onClose }: CommunityScreenProps) {
   const { colors } = useTheme();
-  const styles = useThemedStyles(createStyles);
+  const styles = useThemedStyles(createStyles, iosStyles.community);
   const active = useScreenActive();
   const [messages, setMessages] = useState<CommunityMessage[]>([]);
   const [hasMore, setHasMore] = useState(false);
@@ -282,7 +284,8 @@ export function CommunityScreen({ preview = false, user, onClose }: CommunityScr
             onPress={() => void openLeaderboard()}
             style={styles.leaderboardEntry}
           >
-            <Text style={styles.leaderboardEntryText}>♛ 排行榜</Text>
+            {isAppleWeb && <AppIcon name="trophy" size={17} color={colors.brand} />}
+            <Text style={styles.leaderboardEntryText}>{isAppleWeb ? '排行榜' : '♛ 排行榜'}</Text>
           </AnimatedPressable>
         </View>
 
@@ -327,7 +330,7 @@ export function CommunityScreen({ preview = false, user, onClose }: CommunityScr
             </View>
           ) : (
             <View style={styles.emptyState}>
-              <Text style={styles.emptyEmoji}>✦</Text>
+              <AppIcon name="message" style={styles.emptyEmoji}>✦</AppIcon>
               <Text style={styles.emptyTitle}>社区还很安静</Text>
             </View>
           )}
@@ -363,8 +366,8 @@ export function CommunityScreen({ preview = false, user, onClose }: CommunityScr
           <View style={styles.attachmentPreview}>
             <Image source={{ uri: attachment.uri }} style={styles.attachmentImage} />
             <Text style={styles.attachmentText}>已选择图片，发送后会保存到社区</Text>
-            <AnimatedPressable onPress={() => setAttachment(null)} style={styles.removeAttachment}>
-              <Text style={styles.removeAttachmentText}>×</Text>
+            <AnimatedPressable accessibilityLabel="移除已选图片" onPress={() => setAttachment(null)} style={styles.removeAttachment}>
+              <AppIcon style={styles.removeAttachmentText}>×</AppIcon>
             </AnimatedPressable>
           </View>
         )}
@@ -384,7 +387,7 @@ export function CommunityScreen({ preview = false, user, onClose }: CommunityScr
             onPress={() => void chooseImage()}
             style={styles.imageButton}
           >
-            <Text style={styles.imageButtonText}>＋</Text>
+            <AppIcon style={styles.imageButtonText}>＋</AppIcon>
           </AnimatedPressable>
           <TextInput
             editable={!sending && !preview}
@@ -403,7 +406,7 @@ export function CommunityScreen({ preview = false, user, onClose }: CommunityScr
             onPress={() => void sendMessage()}
             style={[styles.sendButton, (sending || preview) && styles.disabledButton]}
           >
-            {sending ? <ActivityIndicator color={colors.white} size="small" /> : <Text style={styles.sendText}>发送</Text>}
+            {sending ? <ActivityIndicator color={colors.white} size="small" /> : <AppIcon name="send" style={styles.sendText}>发送</AppIcon>}
           </AnimatedPressable>
         </View>
         <Modal
@@ -420,7 +423,7 @@ export function CommunityScreen({ preview = false, user, onClose }: CommunityScr
                   <Text style={styles.leaderboardSubtitle}>一起记录每天的进步</Text>
                 </View>
                 <AnimatedPressable accessibilityLabel="关闭排行榜" onPress={() => setLeaderboardOpen(false)} style={styles.leaderboardClose}>
-                  <Text style={styles.leaderboardCloseText}>×</Text>
+                  <AppIcon style={styles.leaderboardCloseText}>×</AppIcon>
                 </AnimatedPressable>
               </View>
               <View style={styles.leaderboardTabs}>

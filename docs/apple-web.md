@@ -6,6 +6,20 @@ iPhone / iPad 在 Safari 访问站点首页，自动进入 `/app/`。登录页�
 
 苹果网页直接构建 `mobile/App.tsx` 与 `mobile/src/navigation/AppShell.tsx`。今日、练习、错题、考试、VIP、我的及其子页面均与 Android 共用源码；没有单独复制一份苹果业务页面。
 
+## iOS 界面与字体 · 2026-10-08
+
+苹果网页使用独立的展示样式，覆盖登录注册、证书选择、六个主页面、AI 出题与精炼课程、社区与排行榜、兑换、设置、答题卡和提示弹窗。业务流程和账号接口继续共用。
+
+- 浅色使用 iOS 分组背景、白色列表和蓝色操作；深色使用黑色背景与分层灰色表面。底部导航使用统一的矢量图标和半透明背景。
+- 字体通过 `system-ui` / `-apple-system` 调用设备系统字体。在 iOS 上由系统选择 SF Pro 和相应语言字体，简体中文保留 `PingFang SC` 回退。参考 [Apple 字体说明](https://developer.apple.com/documentation/technologyoverviews/fonts)、[Telegram 字体实现](https://github.com/TelegramMessenger/Telegram-iOS/blob/master/submodules/Display/Source/Font.swift)和 [Signal 常规 UI 字体实现](https://github.com/signalapp/Signal-iOS/blob/main/SignalUI/UIKitExtensions/UIFont%2BOWS.swift)。
+- 正文以 17px 为主，说明文字使用 13–15px，页面标题使用 30–34px。正文常规字重、功能标题半粗、页面标题粗体；计时与进度数字使用等宽数字。启用字距与光学字号处理，避免浏览器合成额外粗体。
+- 触控按钮至少 44px，保留键盘焦点、系统减少动态效果设置和原有刘海、底部手势区、软件键盘适配。iPad 内容限制在适合阅读的宽度。
+- 样式集中在 `mobile/src/iosStyles.ts`，通过主题接口仅用于移动网页；Android 保留原有配色和字体。没有打包或下载 Apple 字体文件。
+
+构建后运行 `npm run test:e2e:apple-ui`，检查 WebKit / Chromium 下 320px 小屏、393px 手机、844px 横屏和 1024px iPad 的主页面，以及深色、设置、课程入口、社区与兑换。截图保存在 `test-output/ios-ui/`。Windows 浏览器截图用于检查布局；SF Pro / 苹方的最终字形、系统文字大小和 Safari 键盘仍需在真实 iPhone / iPad 验收。
+
+本次修改需要重新构建并发布 `dist/app/` 后才会在线生效；本地构建不代表生产站点已经更新。
+
 | 能力 | 实现 |
 | --- | --- |
 | 登录、证书切换、昵称、退出 | 共用移动 API 和会话恢复逻辑 |

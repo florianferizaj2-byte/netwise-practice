@@ -1,3 +1,5 @@
+import { AppIcon } from '../components/AppIcon';
+import { iosStyles } from '../iosStyles';
 import { useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
@@ -18,7 +20,7 @@ export function CertificateScreen({
   onCancel,
   onSelected,
 }: CertificateScreenProps) {
-  const styles = useThemedStyles(createStyles);
+  const styles = useThemedStyles(createStyles, iosStyles.certificate);
   const [busyId, setBusyId] = useState<string | null>(null);
   const [error, setError] = useState('');
 
@@ -29,7 +31,7 @@ export function CertificateScreen({
       const result = await mobileApi.selectCertificate(certificateId);
       onSelected(result.user);
     } catch {
-      setError('证书选择失败，请检查服务器连接');
+      setError('备考目标选择失败，请检查服务器连接');
     } finally {
       setBusyId(null);
     }
@@ -49,7 +51,7 @@ export function CertificateScreen({
       )}
       <EntranceView distance={12} style={styles.hero}>
         <Text style={styles.kicker}>先确定学习目标</Text>
-        <Text style={styles.title}>{onCancel ? '切换学习证书' : '选择你的报考证书'}</Text>
+        <Text style={styles.title}>{onCancel ? '切换备考目标' : '选择你的备考目标'}</Text>
         <Text style={styles.subtitle}>
           {onCancel
             ? '切换后会同步对应题库、学习计划和错题记录。'
@@ -67,6 +69,9 @@ export function CertificateScreen({
               key={certificate.id}
             >
               <AnimatedPressable
+                accessibilityRole="button"
+                accessibilityLabel={certificate.name}
+                accessibilityState={{ selected, disabled: !!busyId || selected, busy: busyId === certificate.id }}
                 disabled={!!busyId || selected}
                 onPress={() => choose(certificate.id)}
                 style={[styles.certificateCard, selected && styles.selectedCertificateCard]}
@@ -76,6 +81,7 @@ export function CertificateScreen({
                 </View>
                 <View style={styles.copy}>
                   <Text style={styles.name}>{certificate.name}</Text>
+                  {!!certificate.description && <Text style={styles.meta}>{certificate.description}</Text>}
                   <Text style={styles.meta}>
                     {selected
                       ? '当前正在学习'
@@ -84,7 +90,7 @@ export function CertificateScreen({
                         : '进入对应题库和学习计划'}
                   </Text>
                 </View>
-                <Text style={styles.arrow}>{selected ? '✓' : '›'}</Text>
+                <AppIcon style={styles.arrow}>{selected ? '✓' : '›'}</AppIcon>
               </AnimatedPressable>
             </EntranceView>
           );

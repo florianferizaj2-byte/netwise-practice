@@ -1,3 +1,5 @@
+import { AppIcon } from '../components/AppIcon';
+import { iosStyles } from '../iosStyles';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
 
@@ -29,7 +31,7 @@ export function AiQuestionDraftScreen({
 }) {
   const isLibrary = libraryMode || !selection;
   const { colors } = useTheme();
-  const styles = useThemedStyles(createStyles);
+  const styles = useThemedStyles(createStyles, iosStyles.aiDraft);
   const screenActive = useScreenActive();
   const [groups, setGroups] = useState<AiQuestionGroup[]>([]);
   const [jobs, setJobs] = useState<AiQuestionGenerationJob[]>([]);
@@ -178,7 +180,7 @@ export function AiQuestionDraftScreen({
             {selection?.knowledgePoint ?? '按生成批次整理'}
           </Text>
         </View>
-        <View style={styles.headerMark}><Text style={styles.headerMarkText}>✦</Text></View>
+        <View style={styles.headerMark}><AppIcon style={styles.headerMarkText}>✦</AppIcon></View>
       </View>
 
       {selectedGroupId && !groupDetail && loading ? (
@@ -203,7 +205,7 @@ export function AiQuestionDraftScreen({
             </Text>
           </View>
           <View style={styles.selectionCard}>
-            <View style={styles.selectionIcon}><Text style={styles.selectionIconText}>知</Text></View>
+            <View style={styles.selectionIcon}><AppIcon style={styles.selectionIconText}>知</AppIcon></View>
             <View style={styles.selectionCopy}>
               <Text style={styles.selectionLabel}>本组知识点</Text>
               <Text style={styles.selectionName}>{group?.metadata.knowledgePoint}</Text>
@@ -238,7 +240,7 @@ export function AiQuestionDraftScreen({
           <View style={styles.actions}>
             <AnimatedPressable onPress={() => practiceGroup(group!)} style={styles.primaryButton}>
               <Text style={styles.primaryText}>开始刷这组题</Text>
-              <Text style={styles.primaryArrow}>→</Text>
+              <AppIcon style={styles.primaryArrow}>→</AppIcon>
             </AnimatedPressable>
             <AnimatedPressable
               disabled={busy === 'upload'}
@@ -271,17 +273,17 @@ export function AiQuestionDraftScreen({
               按当前知识点生成 10 道不同角度的题，并逐题检查答案、解析和重复度。
             </Text>
             <View style={styles.heroTopic}>
-              <Text style={styles.heroTopicIcon}>知</Text>
+              <AppIcon style={styles.heroTopicIcon}>知</AppIcon>
               <View style={styles.heroTopicCopy}>
                 <Text style={styles.heroTopicLabel}>当前知识点</Text>
                 <Text numberOfLines={2} style={styles.heroTopicName}>{selection.knowledgePoint}</Text>
               </View>
-              <Text style={styles.heroTopicArrow}>›</Text>
+              <AppIcon style={styles.heroTopicArrow}>›</AppIcon>
             </View>
           </EntranceView>
 
           <View style={styles.qualityCard}>
-            <View style={styles.qualityMark}><Text style={styles.qualityMarkText}>✓</Text></View>
+            <View style={styles.qualityMark}><AppIcon name="check" style={styles.qualityMarkText}>✓</AppIcon></View>
             <View style={styles.qualityCopy}>
               <Text style={styles.qualityTitle}>生成后逐题复核</Text>
               <Text style={styles.qualityText}>检查答案、解析和重复度，未通过的题会继续生成。</Text>
@@ -320,7 +322,7 @@ export function AiQuestionDraftScreen({
             <EntranceView key={item.id} delay={60 + index * 35} distance={10}>
               <View style={styles.groupCard}>
                 <View style={styles.groupCardTop}>
-                  <View style={styles.groupSymbol}><Text style={styles.groupSymbolText}>✦</Text></View>
+                  <View style={styles.groupSymbol}><AppIcon name="book" style={styles.groupSymbolText}>✦</AppIcon></View>
                   <View style={styles.groupCardCopy}>
                     <Text style={styles.groupTitle}>{item.metadata.knowledgePoint || selection?.knowledgePoint || 'AI 题组'} · AI 题组</Text>
                     <Text style={styles.groupMeta}>{formatDate(item.createdAt)} · {item.questionCount} 道题</Text>
@@ -357,7 +359,7 @@ export function AiQuestionDraftScreen({
           ))}
           {!loading && !groups.length && !jobs.some((job) => job.status === 'queued' || job.status === 'running') && (
             <View style={styles.emptyGroups}>
-              <View style={styles.emptyIcon}><Text style={styles.emptyIconText}>✦</Text></View>
+              <View style={styles.emptyIcon}><AppIcon style={styles.emptyIconText}>✦</AppIcon></View>
               <Text style={styles.emptyTitle}>{selection ? '这个知识点还没有生成题组' : '还没有已生成题目'}</Text>
               <Text style={styles.emptyText}>{selection ? '生成并通过复核的题目会保存在这里，不会直接显示选项或答案。' : '从练习页选择知识点并生成题目，题组会保存在这里。'}</Text>
             </View>

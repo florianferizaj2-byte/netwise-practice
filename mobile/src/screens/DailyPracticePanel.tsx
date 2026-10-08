@@ -1,3 +1,4 @@
+import { iosStyles } from '../iosStyles';
 import { useEffect, useState } from "react";
 import { BackHandler, StyleSheet, Text, View } from "react-native";
 import { PracticeScreen } from "./TabScreens";
@@ -19,7 +20,7 @@ export function DailyPracticePanel({
   onClose: () => void;
   onNavigate: (tab: AppTab, options?: NavigationOptions) => void;
 }) {
-  const s = useThemedStyles(styles);
+  const s = useThemedStyles(styles, iosStyles.daily);
   const [route, setRoute] = useState<NavigationOptions>({
     practiceSession: "daily",
     practiceMode: "random",

@@ -1,3 +1,5 @@
+import { AppIcon } from '../components/AppIcon';
+import { iosStyles } from '../iosStyles';
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ActivityIndicator,
@@ -47,7 +49,7 @@ export function ExamScreen({
   preview?: boolean;
   onNavigate: (tab: AppTab, options?: NavigationOptions) => void;
 }) {
-  const s = useThemedStyles(styles),
+  const s = useThemedStyles(styles, iosStyles.exam),
     { colors } = useTheme(),
     active = useScreenActive();
   const [exam, setExam] = useState<ExamSession | null>(null);
@@ -514,7 +516,7 @@ export function ExamScreen({
                   style={[s.chapter, checked && s.chapterSelected]}
                 >
                   <View style={[s.checkbox, checked && s.checkboxSelected]}>
-                    {checked && <Text style={s.check}>✓</Text>}
+                    {checked && <AppIcon style={s.check}>✓</AppIcon>}
                   </View>
                   <View style={s.flex}>
                     <Text style={s.rowTitle}>{chapter.name}</Text>

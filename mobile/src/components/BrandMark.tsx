@@ -1,3 +1,4 @@
+import { iosStyles } from '../iosStyles';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { radius, useThemedStyles, type ThemeColors } from '../theme';
@@ -7,7 +8,7 @@ type BrandMarkProps = {
 };
 
 export function BrandMark({ compact = false }: BrandMarkProps) {
-  const styles = useThemedStyles(createStyles);
+  const styles = useThemedStyles(createStyles, iosStyles.brand);
   return (
     <View style={styles.row}>
       <View style={[styles.seal, compact && styles.compactSeal]}>

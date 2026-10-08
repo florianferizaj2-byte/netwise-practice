@@ -1,3 +1,5 @@
+import { AppIcon } from '../components/AppIcon';
+import { iosStyles } from '../iosStyles';
 import { useEffect, useMemo, useState } from "react";
 import {
   ActivityIndicator,
@@ -16,7 +18,7 @@ import {
 } from "../api/client";
 import { useCachedQuery } from "../api/useCachedQuery";
 import { AnimatedPressable, AnimatedProgressBar } from "../components/Motion";
-import { useTheme, useThemedStyles, type ThemeColors } from "../theme";
+import { isAppleWeb, useTheme, useThemedStyles, type ThemeColors } from "../theme";
 import type { AppTab, NavigationOptions } from "../types";
 
 type Props = {
@@ -95,7 +97,7 @@ export function TodayScreen({
   user,
   certificates,
 }: Props) {
-  const s = useThemedStyles(styles),
+  const s = useThemedStyles(styles, iosStyles.overview),
     { colors } = useTheme();
   const query = useCachedQuery(
     "/dashboard?summary=1",
@@ -159,7 +161,7 @@ export function TodayScreen({
           </Text>
           <Text style={s.title}>每一步，都有进度</Text>
         </View>
-        <Text style={s.brandGlyph}>✦</Text>
+        <AppIcon style={s.brandGlyph}>✦</AppIcon>
       </View>
       {!!(query.error || catalogQuery.error) && (
         <Text style={s.error}>
@@ -203,8 +205,8 @@ export function TodayScreen({
         </View>
         <AnimatedProgressBar
           value={Math.min(100, ((today || 0) / 30) * 100)}
-          color="#BDE8D5"
-          trackColor="#FFFFFF25"
+          color={isAppleWeb ? colors.brand : "#BDE8D5"}
+          trackColor={isAppleWeb ? colors.border : "#FFFFFF25"}
         />
         <AnimatedPressable
           accessibilityRole="button"
@@ -225,7 +227,7 @@ export function TodayScreen({
                 ? "继续今日学习"
                 : "开始今日学习"}
           </Text>
-          <Text style={s.dailyArrow}>→</Text>
+          <AppIcon style={s.dailyArrow}>→</AppIcon>
         </AnimatedPressable>
       </View>
       <View style={s.metrics}>
@@ -306,7 +308,7 @@ export function TodayScreen({
 }
 
 function Metric({ value, label }: { value: string; label: string }) {
-  const s = useThemedStyles(styles);
+  const s = useThemedStyles(styles, iosStyles.overview);
   return (
     <View style={s.metric}>
       <Text style={s.metricValue}>{value}</Text>
@@ -316,7 +318,7 @@ function Metric({ value, label }: { value: string; label: string }) {
 }
 
 export function WrongScreen({ onNavigate, preview = false }: Props) {
-  const s = useThemedStyles(styles),
+  const s = useThemedStyles(styles, iosStyles.overview),
     { colors } = useTheme();
   const query = useCachedQuery("/wrong", mobileApi.wrong, !preview);
   const questions = preview ? demoWrong : query.data || [];
@@ -498,7 +500,7 @@ export function WrongScreen({ onNavigate, preview = false }: Props) {
                   {selectedGroup ? "复习所选知识点" : "开始错题复习"} ·{" "}
                   {filtered.length} 题
                 </Text>
-                <Text style={s.primaryArrow}>→</Text>
+                <AppIcon style={s.primaryArrow}>→</AppIcon>
               </AnimatedPressable>
               <View style={s.sectionHead}>
                 <Text style={s.sectionTitle}>错题清单</Text>
@@ -559,7 +561,7 @@ export function WrongScreen({ onNavigate, preview = false }: Props) {
               {item.wrongCount || 1} 次
             </Text>
           </View>
-          <Text style={s.chevron}>›</Text>
+          <AppIcon style={s.chevron}>›</AppIcon>
         </AnimatedPressable>
       )}
       ListEmptyComponent={

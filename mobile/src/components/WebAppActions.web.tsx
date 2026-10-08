@@ -4,9 +4,10 @@ import { AnimatedPressable } from './Motion';
 import { AppAlert } from './AppAlert';
 import { isAppleMobile, isStandalone, refreshWebApp } from '../platform/webApp';
 import { radius, spacing, useThemedStyles, type ThemeColors } from '../theme';
+import { iosStyles } from '../iosStyles';
 
 export function WebAppActions({ showRefresh = false }: { showRefresh?: boolean }) {
-  const s = useThemedStyles(styles);
+  const s = useThemedStyles(styles, iosStyles.install);
   const [open, setOpen] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [copied, setCopied] = useState(false);

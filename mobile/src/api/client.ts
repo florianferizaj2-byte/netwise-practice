@@ -4,6 +4,7 @@ import { fetch as streamingFetch } from 'expo/fetch';
 import { ResourceCache, CacheCancelledError } from './resourceCache';
 import { persistentStudyData, studyCachePolicy } from './cachePolicy';
 import { ApiError, fetchJson } from './transport';
+import type { StudyCatalog, StudyLesson, StudySession, StudyAttempt, StudyTeacherMessage, StudyTeacherAnswer, StudyTeacherRequest } from './studyTypes';
 export { ApiError } from './transport';
 
 export const API_BASE_URL =
@@ -125,7 +126,7 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
           ...init.headers,
         },
       },
-      path.startsWith('/ai/') ? 120000 : 30000,
+      path.startsWith('/ai/') || path.startsWith('/study/') ? 120000 : 30000,
     );
   } catch (error) {
     if (revision !== sessionRevision) throw new CacheCancelledError();
@@ -269,7 +270,7 @@ export type AuthResponse = {
     communityName?: string | null;
     certificateId?: string | null;
   };
-  certificates: Array<{ id: string; name: string }>;
+  certificates: Array<{ id: string; name: string; shortName?: string; description?: string }>;
 };
 
 export type DashboardResponse = {
@@ -981,6 +982,32 @@ export const mobileApi = {
 
   accountEntitlements() {
     return request<AccountEntitlementsResponse>('/account/entitlements');
+  },
+
+  studyCatalog() { return request<StudyCatalog>('/study/catalog'); },
+  studyLesson(nodeId: string) { return request<StudyLesson>(`/study/lessons/${encodeURIComponent(nodeId)}`); },
+  completeStudyLesson(nodeId: string, version: number) {
+    return request<{ version: number }>(`/study/lessons/${encodeURIComponent(nodeId)}/complete`, {
+      method: 'POST', body: JSON.stringify({ version }),
+    });
+  },
+  startStudyPractice(nodeId: string, resume = true) {
+    return request<StudySession>('/study/practice-sessions', { method: 'POST', body: JSON.stringify({ nodeId, resume }) });
+  },
+  studyPracticeSession(id: string) { return request<StudySession>(`/study/practice-sessions/${encodeURIComponent(id)}`); },
+  submitStudyAttempt(sessionId: string, questionId: string, answers: Record<string, string>, requestId: string) {
+    return request<StudyAttempt>(`/study/practice-sessions/${encodeURIComponent(sessionId)}/attempts`, {
+      method: 'POST', body: JSON.stringify({ questionId, answers, requestId }),
+    });
+  },
+  studyAttempt(id: string) { return request<StudyAttempt>(`/study/attempts/${encodeURIComponent(id)}`); },
+  retryStudyAttempt(id: string) { return request<StudyAttempt>(`/study/attempts/${encodeURIComponent(id)}/retry`, { method: 'POST', body: '{}' }); },
+  studyFeedback(id: string, note: string) {
+    return request<{ saved: boolean }>(`/study/attempts/${encodeURIComponent(id)}/feedback`, { method: 'POST', body: JSON.stringify({ note }) });
+  },
+  studyTeacherHistory(nodeId: string) { return request<{ messages: StudyTeacherMessage[] }>(`/study/teacher/history?nodeId=${encodeURIComponent(nodeId)}`); },
+  askStudyTeacher(body: StudyTeacherRequest) {
+    return request<{ answer: StudyTeacherAnswer; cached: boolean }>('/study/teacher', { method: 'POST', body: JSON.stringify(body) });
   },
 
   redeemMembership(code: string) {

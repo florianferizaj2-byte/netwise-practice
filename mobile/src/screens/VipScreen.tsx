@@ -1,3 +1,5 @@
+import { AppIcon } from '../components/AppIcon';
+import { iosStyles } from '../iosStyles';
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
@@ -16,12 +18,13 @@ import {
 import { AnimatedPressable } from "../components/Motion";
 import {
   RedeemCodeModal,
-  membershipColors,
+  useMembershipColors,
   membershipDate,
   membershipLabels,
 } from "../components/RedeemCodeModal";
 import { useScreenActive } from "../navigation/ScreenActivity";
-import { useTheme, useThemedStyles, type ThemeColors } from "../theme";
+import { isAppleWeb, useTheme, useThemedStyles, type ThemeColors } from "../theme";
+import { SubjectiveStudyScreen } from "./subjective-study/SubjectiveStudyScreen";
 
 const plans = [
   {
@@ -50,13 +53,20 @@ const plans = [
 export function VipScreen({
   preview = false,
   user,
+  certificateName,
+  onOpenCertificates,
+  onOpenPractice,
 }: {
   preview?: boolean;
   user?: AuthResponse["user"];
+  certificateName: string;
+  onOpenCertificates: () => void;
+  onOpenPractice: () => void;
 }) {
   const active = useScreenActive();
   const { colors, resolvedMode } = useTheme();
-  const styles = useThemedStyles(createStyles);
+  const styles = useThemedStyles(createStyles, iosStyles.vip);
+  const tierColors = useMembershipColors();
   const [selected, setSelected] =
     useState<(typeof plans)[number]["id"]>("svip");
   const [account, setAccount] = useState<AccountEntitlementsResponse | null>(
@@ -66,6 +76,8 @@ export function VipScreen({
   const [error, setError] = useState("");
   const [checkingIn, setCheckingIn] = useState(false);
   const [redeemOpen, setRedeemOpen] = useState(false);
+  const [studyOpen, setStudyOpen] = useState(false);
+  const [studyVisited, setStudyVisited] = useState(false);
   const revision = useRef(0),
     checkInBusy = useRef(false);
   const refresh = useCallback(async () => {
@@ -128,15 +140,17 @@ export function VipScreen({
   const current = account?.plan || "free",
     hasAccount = preview || !!account,
     paid = current !== "free";
-  const currentColor = membershipColors[current],
-    selectedColor = membershipColors[selected];
+  const currentColor = tierColors[current],
+    selectedColor = tierColors[selected];
   const check = account?.checkIn;
   const availableQuestions =
     (account?.generation?.remaining || 0) +
     (check?.remaining.generations || 0) * 10;
 
   return (
-    <>
+    <View style={{ flex: 1 }}>
+      <View style={[{ flex: 1 }, studyOpen && { display: 'none' }]}
+        accessibilityElementsHidden={studyOpen} importantForAccessibility={studyOpen ? 'no-hide-descendants' : 'auto'}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.content}
@@ -149,8 +163,8 @@ export function VipScreen({
         }
       >
         <View style={styles.heading}>
-          <View>
-            <Text style={styles.eyebrow}>KAOJIANG · MEMBERSHIP</Text>
+          <View style={styles.headingCopy}>
+            <Text style={styles.eyebrow}>{isAppleWeb ? '会员与学习' : 'KAOJIANG · MEMBERSHIP'}</Text>
             <Text style={styles.title}>让学习，再进一步</Text>
           </View>
           <AnimatedPressable
@@ -168,9 +182,9 @@ export function VipScreen({
               { backgroundColor: `${currentColor}16` },
             ]}
           >
-            <Text style={[styles.accountMarkText, { color: currentColor }]}>
+            <AppIcon style={[styles.accountMarkText, { color: currentColor }]}>
               ✦
-            </Text>
+            </AppIcon>
           </View>
           <View style={styles.flex}>
             <View style={styles.identityLine}>
@@ -209,6 +223,16 @@ export function VipScreen({
             <Text style={styles.error}>{error} 点击重试</Text>
           </AnimatedPressable>
         )}
+        <AnimatedPressable accessibilityRole="button" accessibilityLabel="进入 AI 精炼"
+          onPress={() => { setStudyVisited(true); setStudyOpen(true); }}
+          style={styles.studyEntry}>
+          <Text style={styles.studyTitle}>AI 精炼</Text>
+          <Text style={styles.studyIntro}>知识点精讲、填空练习、随时答疑。{"\n"}先理解，再练到会。</Text>
+          <View style={styles.studyEntryFooter}>
+            <Text style={styles.studyEntryAction}>进入 AI 精炼</Text>
+            <AppIcon style={styles.studyEntryAction} size={22}>→</AppIcon>
+          </View>
+        </AnimatedPressable>
         <View style={styles.usageSection}>
           <View style={styles.sectionLine}>
             <Text style={styles.sectionTitle}>我的学习额度</Text>
@@ -288,7 +312,7 @@ export function VipScreen({
         <View style={styles.planRow}>
           {plans.map((item) => {
             const chosen = item.id === selected,
-              color = membershipColors[item.id];
+              color = tierColors[item.id];
             return (
               <AnimatedPressable
                 key={item.id}
@@ -312,7 +336,7 @@ export function VipScreen({
                       chosen && { backgroundColor: color, borderColor: color },
                     ]}
                   >
-                    {chosen && <Text style={styles.selectionCheck}>✓</Text>}
+                    {chosen && <AppIcon style={styles.selectionCheck}>✓</AppIcon>}
                   </View>
                 </View>
                 <Text style={styles.planDescription}>{item.description}</Text>
@@ -353,11 +377,11 @@ export function VipScreen({
             color={selectedColor}
           />
           <View style={styles.benefitFooter}>
-            <Text style={styles.footerCheck}>✓</Text>
+            <AppIcon style={styles.footerCheck}>✓</AppIcon>
             <Text style={styles.benefitFooterText}>账号同步</Text>
-            <Text style={styles.footerCheck}>✓</Text>
+            <AppIcon style={styles.footerCheck}>✓</AppIcon>
             <Text style={styles.benefitFooterText}>每日额外奖励</Text>
-            <Text style={styles.footerCheck}>✓</Text>
+            <AppIcon style={styles.footerCheck}>✓</AppIcon>
             <Text style={styles.benefitFooterText}>题组随时练</Text>
           </View>
         </View>
@@ -367,7 +391,7 @@ export function VipScreen({
           style={styles.primary}
         >
           <Text style={styles.primaryText}>使用兑换码开通会员</Text>
-          <Text style={styles.primaryArrow}>→</Text>
+          <AppIcon style={styles.primaryArrow}>→</AppIcon>
         </AnimatedPressable>
         <Text style={styles.purchaseHint}>
           当前通过兑换码开通，具体等级以兑换码为准。
@@ -383,17 +407,21 @@ export function VipScreen({
             }
             style={styles.apiEntry}
           >
-            <Text style={styles.apiGlyph}>⌘</Text>
+            <AppIcon style={styles.apiGlyph}>⌘</AppIcon>
             <View style={styles.flex}>
               <Text style={styles.apiTitle}>作者 AI 服务</Text>
               <Text style={styles.apiMeta}>
                 {account?.aiServiceAvailable === false ? "服务暂未就绪 · 额度保留" : "无需配置 · 按使用扣额"}
               </Text>
             </View>
-            <Text style={styles.apiArrow}>›</Text>
+            <AppIcon style={styles.apiArrow}>›</AppIcon>
           </AnimatedPressable>
         </View>
       </ScrollView>
+      </View>
+      {studyVisited && <SubjectiveStudyScreen visible={studyOpen} preview={preview} user={user} certificateName={certificateName}
+        onClose={() => setStudyOpen(false)} onOpenMembership={() => { setStudyOpen(false); setRedeemOpen(true); }}
+        onOpenCertificates={onOpenCertificates} onOpenPractice={onOpenPractice} />}
       <RedeemCodeModal
         visible={active && redeemOpen}
         preview={preview}
@@ -407,7 +435,7 @@ export function VipScreen({
           if (next.plan !== "free") setSelected(next.plan);
         }}
       />
-    </>
+    </View>
   );
 }
 function Quota({
@@ -419,7 +447,7 @@ function Quota({
   value: number | string;
   unit: string;
 }) {
-  const s = useThemedStyles(createStyles);
+  const s = useThemedStyles(createStyles, iosStyles.vip);
   return (
     <View style={s.quota}>
       <Text style={s.quotaValue}>
@@ -441,11 +469,11 @@ function Benefit({
   detail: string;
   color: string;
 }) {
-  const s = useThemedStyles(createStyles);
+  const s = useThemedStyles(createStyles, iosStyles.vip);
   return (
     <View style={s.benefitRow}>
       <View style={[s.benefitIcon, { backgroundColor: `${color}12` }]}>
-        <Text style={[s.benefitGlyph, { color }]}>{glyph}</Text>
+        <AppIcon style={[s.benefitGlyph, { color }]}>{glyph}</AppIcon>
       </View>
       <View style={s.flex}>
         <Text style={s.benefitTitle}>{title}</Text>
@@ -457,6 +485,12 @@ function Benefit({
 const createStyles = (c: ThemeColors) =>
   StyleSheet.create({
     flex: { flex: 1 },
+    headingCopy: {},
+    studyEntry: { backgroundColor: c.surfaceMuted, borderLeftWidth: 4, borderLeftColor: c.brand, borderRadius: 14, padding: 20, gap: 10 },
+    studyTitle: { color: c.text, fontSize: 24, lineHeight: 32, fontWeight: '800' },
+    studyIntro: { color: c.text, fontSize: 16, lineHeight: 26 },
+    studyEntryFooter: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 6 },
+    studyEntryAction: { color: c.brandDark, fontSize: 15, lineHeight: 24, fontWeight: '700' },
     content: { paddingHorizontal: 20, paddingTop: 24, paddingBottom: 32 },
     heading: {
       flexDirection: "row",

@@ -1,3 +1,4 @@
+import { iosStyles } from '../iosStyles';
 import { useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
@@ -17,7 +18,7 @@ import {
   type MembershipRedemption,
 } from "../api/client";
 import { AnimatedPressable } from "./Motion";
-import { useTheme, useThemedStyles, type ThemeColors } from "../theme";
+import { isAppleWeb, useTheme, useThemedStyles, type ThemeColors } from "../theme";
 
 export const membershipLabels = {
   free: "Free",
@@ -31,6 +32,13 @@ export const membershipColors = {
   svip: "#5277C9",
   ssvip: "#9363B9",
 } as const;
+export function useMembershipColors() {
+  const { colors, resolvedMode } = useTheme();
+  if (!isAppleWeb) return membershipColors;
+  return resolvedMode === 'dark'
+    ? { free: colors.textMuted, vip: '#E9BB64', svip: '#8EB7FF', ssvip: '#CAA0FF' }
+    : { free: colors.textMuted, vip: '#8B5B10', svip: '#315FB0', ssvip: '#7841A5' };
+}
 export const membershipDate = (value: string) =>
   new Date(value).toLocaleDateString("zh-CN");
 
@@ -49,8 +57,9 @@ export function RedeemCodeModal({
   onClose,
   onRedeemed,
 }: Props) {
-  const styles = useThemedStyles(createStyles);
+  const styles = useThemedStyles(createStyles, iosStyles.redeem);
   const { colors } = useTheme();
+  const tierColors = useMembershipColors();
   const [code, setCode] = useState("");
   const [busy, setBusy] = useState(false);
   const submitting = useRef(false);
@@ -252,13 +261,13 @@ export function RedeemCodeModal({
                   <View
                     style={[
                       styles.tier,
-                      { backgroundColor: `${membershipColors[entry.plan]}15` },
+                      { backgroundColor: `${tierColors[entry.plan]}15` },
                     ]}
                   >
                     <Text
                       style={[
                         styles.tierText,
-                        { color: membershipColors[entry.plan] },
+                        { color: tierColors[entry.plan] },
                       ]}
                     >
                       {membershipLabels[entry.plan]}
