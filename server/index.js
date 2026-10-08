@@ -36,7 +36,7 @@ import { createAuthRateLimiter } from "./auth-rate-limit.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const mobileRelease = () => {
-  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.3.9";
+  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.4.0";
   const minimumVersion =
     process.env.MOBILE_MINIMUM_VERSION || "0.2.8";
   return {
@@ -47,7 +47,7 @@ const mobileRelease = () => {
       `/downloads/kaojiang-v${latestVersion}.apk`,
     releaseNotes:
       process.env.MOBILE_RELEASE_NOTES ||
-      "优化考试答案保存和跨设备冲突处理，改进 AI 并发、任务超时及登录保护。",
+      "新增 VIP AI 精讲与练习：知识点逐课讲解、填空练习、AI 老师答疑与判分复核。",
   };
 };
 async function exchangeWechatMiniProgramCode(code) {
