@@ -1,3 +1,9 @@
+def releasePackage = new groovy.json.JsonSlurper().parse(new File(rootDir, "../package.json"))
+def releaseApp = new groovy.json.JsonSlurper().parse(new File(rootDir, "../app.json")).expo
+if (releasePackage.version != releaseApp.version) {
+    throw new GradleException("Mobile package.json and app.json versions must match before building.")
+}
+
 def signingProperties = new Properties()
 def signingPropertiesPath = System.getenv("ACEEXAM_RELEASE_SIGNING_PROPERTIES")
 if (!signingPropertiesPath && System.getenv("LOCALAPPDATA")) {
@@ -15,6 +21,11 @@ def signingConfigured = ["storeFile", "storePassword", "keyAlias", "keyPassword"
     .every { signingProperties.getProperty(it) }
 
 android {
+    // Also update reused native projects without depending on a fresh prebuild.
+    defaultConfig {
+        versionName releasePackage.version
+        versionCode releaseApp.android.versionCode.toInteger()
+    }
     signingConfigs {
         release {
             if (signingConfigured) {

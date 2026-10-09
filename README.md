@@ -2,11 +2,9 @@
 
 考匠（AceExam，Ace + Exam）是一个面向职业认证与升学考试的练习与模拟平台。用户共用作者提供的 AI 服务，根据错题生成针对性变式题，并按功能消耗账号额度；通过审核的题目可以分享给同证书的其他用户，让题库在使用过程中持续增长。
 
-**Android 最新版：v0.4.1** · [下载 APK](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.1/kaojiang-v0.4.1.apk) · [SHA-256 校验文件](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.1/kaojiang-v0.4.1.apk.sha256) · [发布页](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v0.4.1)
+**Android 最新版：v0.4.2** · [下载 APK](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.2/kaojiang-v0.4.2.apk) · [SHA-256 校验文件](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.2/kaojiang-v0.4.2.apk.sha256) · [发布页](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v0.4.2)
 
 **会员兑换码购买：**[考匠兑换码商店](https://catfk.com/shop/aceexam)。购买后回到考匠的 VIP 或兑换码页面开通，权益绑定当前账号；套餐、售价和时长以购买页为准。
-
-**Android 最新版：v0.4.0** · [下载 APK](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.0/kaojiang-v0.4.0.apk) · [SHA-256 校验文件](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.0/kaojiang-v0.4.0.apk.sha256) · [发布页](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v0.4.0)
 
 电脑端使用响应式网页；iPhone / iPad 通过 `/app/` 使用与 Android 共用源码的移动界面，可添加到主屏幕。两个移动端共用今日、练习、错题、考试、VIP、我的六个页面及账号接口。
 
@@ -45,7 +43,14 @@ VIP「AI 精讲与练习」包含逐课讲解、填空练习、短答 AI 老师�
 - 四川省专升本计算机基础：206 道题（100 道原创练习 + 45 道现有题库共用题 + 61 道西昌学院 2011 年真题），包含 7 个考纲模块及知识点、考点与练习建议；见[模块说明](docs/sichuan-upgrading-computer.md)
 - 共 9,811 道内置唯一题目，共用题只入库一次，题库启动时自动校验并同步到 SQLite
 
-## 最近发布 · 2026-10-09 · v0.4.1
+## 最近发布 · 2026-10-09 · v0.4.2
+
+- 修复安装新 APK 后「关于考匠」和更新检测仍使用旧版本号的问题。显示、请求头和更新查询统一读取移动端版本配置，Android 打包使用相同版本；构建前检查配置与锁文件，防止版本遗漏。
+- 包含上一轮加载与缓存调整：保留已显示内容，按需加载课程；重复进入复用课时、目录和题组，答题或切换账号后更新相关缓存。
+- AI 精讲与练习扩大做题区，老师面板默认收起；电脑网页支持回车提交和下一题，完成题组后可进入下一知识点。移动端同步更新布局、键盘与下一知识点操作。
+- v0.4.2（versionCode 26）沿用正式签名；下载、部署和验证范围见 [v0.4.2 发布说明](docs/release-v0.4.2.md)。网页与服务器仍需维护者部署。
+
+## 历史更新 · 2026-10-09 · v0.4.1
 
 - 电脑 VIP 中心、iPhone / iPad 移动网页、Android VIP 页及兑换页加入购买兑换码入口。网页在新标签打开购买页，Android 调用浏览器；小程序在“我的”页复制购买链接，并支持输入兑换码开通或续期。
 - 新增四川专升本计算机基础 141 节精讲、846 道填空练习，按知识点拆课；管理页可按科目维护课程。课程内容需同步当前服务端并重启。

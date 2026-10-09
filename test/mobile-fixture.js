@@ -6,6 +6,8 @@ import { pathToFileURL } from 'node:url';
 
 export async function mobileModules(t, storage) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'aceexam-mobile-test-'));
+  const packageInfo = fs.readFileSync(new URL('../mobile/package.json', import.meta.url), 'utf8');
+  fs.writeFileSync(path.join(dir, 'package.json.mjs'), `export default ${packageInfo};`);
   const files = [
     'api/resourceCache',
     'api/cachePolicy',

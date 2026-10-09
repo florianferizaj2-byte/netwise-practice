@@ -3,6 +3,7 @@ import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 for (const [label, args] of [
+  ["移动端版本一致性检查", ["scripts/check-mobile-version.mjs"]],
   ["题库结构检查", ["scripts/validate-question-banks.js"]],
   [
     "移动端类型检查",

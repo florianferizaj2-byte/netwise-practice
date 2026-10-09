@@ -36,7 +36,7 @@ import { createAuthRateLimiter } from "./auth-rate-limit.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const mobileRelease = () => {
-  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.4.1";
+  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.4.2";
   const minimumVersion =
     process.env.MOBILE_MINIMUM_VERSION || "0.2.8";
   return {
@@ -47,7 +47,7 @@ const mobileRelease = () => {
       `/downloads/kaojiang-v${latestVersion}.apk`,
     releaseNotes:
       process.env.MOBILE_RELEASE_NOTES ||
-      "新增会员兑换码购买入口，购买后返回考匠兑换；支持四川专升本计算机基础精讲与练习。",
+      "修复更新后版本号仍显示旧版；优化加载与课程缓存、AI 精讲布局及连续做题。",
   };
 };
 async function exchangeWechatMiniProgramCode(code) {

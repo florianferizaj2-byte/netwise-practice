@@ -1,7 +1,9 @@
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { checkMobileVersion } from './check-mobile-version.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
+checkMobileVersion(root);
 for (const [script, ...args] of [
   ['node_modules/vite/bin/vite.js', 'build'],
   ['scripts/build-mobile-web.mjs'],

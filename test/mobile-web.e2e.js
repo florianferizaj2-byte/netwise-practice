@@ -8,6 +8,7 @@ import { createApp } from '../server/index.js';
 import { createStore } from '../server/store.js';
 import express from 'express';
 
+const mobileVersion = JSON.parse(fs.readFileSync(new URL('../mobile/package.json', import.meta.url), 'utf8')).version;
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'aceexam-apple-web-'));
 const store = createStore(dir);
 const template = store.allQ().find((q) => q.type === 'single_choice' && q.certificates?.includes('hcia-datacom'));
@@ -114,6 +115,7 @@ try {
       await text(questions.items[0].question).waitFor();
       await text('核对选项乙').click();
       await tab('我的');
+      await expect(page.getByRole('button', { name: '关于考匠设置', exact: true })).toContainText(`移动端 v${mobileVersion}`);
       await tab('练习');
       const attempt = page.waitForResponse((r) => r.url().endsWith('/api/attempts') && r.request().method() === 'POST');
       await text('确认答案').click();

@@ -1,11 +1,13 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { checkMobileVersion } from './check-mobile-version.mjs';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
+checkMobileVersion(root);
 const mobile = path.join(root, 'mobile');
 const output = path.join(root, 'dist', 'app');
 const cli = path.join(mobile, 'node_modules', 'expo', 'bin', 'cli');
