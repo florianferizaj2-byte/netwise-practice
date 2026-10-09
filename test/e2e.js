@@ -49,6 +49,13 @@ try {
   page = await context.newPage();
   page.setDefaultTimeout(15000);
   page.on("pageerror", (error) => errors.push(error.message));
+  page.on("console", (message) => {
+    if (
+      message.type() === "error" &&
+      /ReferenceError|React error/i.test(message.text())
+    )
+      errors.push(message.text());
+  });
   page.on("dialog", (dialog) => dialog.accept());
 
   await page.goto(base);
@@ -210,6 +217,30 @@ try {
       page.getByRole("heading", { name: heading, exact: true }).first(),
     ).toBeVisible();
   }
+  // The badge renders after the API returns a populated membership list.
+  await page.goto(base + "/#admin");
+  await page.getByRole("tab", { name: "兑换码", exact: true }).click();
+  const membershipRows = page.locator(".membership-admin tbody tr");
+  await expect(membershipRows).toHaveCount(30);
+  await expect(membershipRows.locator(".member-tier")).toHaveCount(30);
+  for (const plan of ["vip", "svip", "ssvip"]) {
+    const badges = membershipRows.locator(`.member-tier-${plan}`);
+    await expect(badges).toHaveCount(10);
+    await expect(badges.first()).toHaveText(plan.toUpperCase());
+  }
+  await expect(
+    page.getByRole("heading", { name: "页面暂时无法打开", exact: true }),
+  ).toHaveCount(0);
+  assert.deepEqual(
+    errors,
+    [],
+    "a populated membership table must not throw during rendering",
+  );
+  await page.screenshot({
+    path: "test-output/admin-membership-codes.png",
+    fullPage: true,
+  });
+
   await page.goto(base + "/#training");
   await expect(
     page.getByRole("heading", { name: "暂无待完成的训练", exact: true }),
@@ -248,7 +279,7 @@ try {
   });
   assert.deepEqual(errors, []);
   console.log(
-    "Browser regression passed: guest trial, real authentication, practice, offline exam recovery, cross-device conflict, lazy pages and responsive downloads.",
+    "Browser regression passed: guest trial, real authentication, practice, offline exam recovery, cross-device conflict, non-empty membership table, lazy pages and responsive downloads.",
   );
 } catch (error) {
   if (page && !page.isClosed()) {

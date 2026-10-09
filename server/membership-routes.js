@@ -1,4 +1,8 @@
 import { z } from "zod";
+import {
+  membershipCodeBatchLimit,
+  membershipCodeExportLimit,
+} from "./memberships.js";
 
 export function registerMembershipRoutes({
   route,
@@ -8,6 +12,13 @@ export function registerMembershipRoutes({
   accountEntitlementView,
 }) {
   const attempts = new Map();
+  const filters = z.object({
+    plan: z.enum(["", "vip", "svip", "ssvip"]).default(""),
+    status: z
+      .enum(["", "available", "redeemed", "revoked", "expired"])
+      .default(""),
+    search: z.string().trim().max(80).default(""),
+  });
   function checkAttempts(req, userId) {
     const now = Date.now();
     for (const [key, entry] of attempts)
@@ -44,13 +55,8 @@ export function registerMembershipRoutes({
   }));
   route("get", "/api/admin/membership-codes", (req) => {
     requireAdmin(req);
-    const query = z
-      .object({
-        plan: z.enum(["", "vip", "svip", "ssvip"]).default(""),
-        status: z
-          .enum(["", "available", "redeemed", "revoked", "expired"])
-          .default(""),
-        search: z.string().trim().max(80).default(""),
+    const query = filters
+      .extend({
         limit: z.coerce.number().int().min(1).max(100).default(30),
         offset: z.coerce.number().int().min(0).max(1000000).default(0),
       })
@@ -62,7 +68,7 @@ export function registerMembershipRoutes({
     const input = z
       .object({
         plan: z.enum(["vip", "svip", "ssvip"]),
-        quantity: z.number().int().min(1).max(100),
+        quantity: z.number().int().min(1).max(membershipCodeBatchLimit),
         durationDays: z.number().int().min(1).max(365),
         expiresAt: z.string().datetime().nullable().default(null),
         requestId: z.string().uuid(),
@@ -74,6 +80,36 @@ export function registerMembershipRoutes({
       createdBy: req.user.id,
       requestKey: `admin:${req.user.id}:${input.requestId}`,
     });
+  });
+  route("post", "/api/admin/membership-codes/export", (req) => {
+    requireAdmin(req);
+    const input = filters
+      .extend({
+        ids: z
+          .array(z.string().uuid())
+          .min(1)
+          .max(membershipCodeExportLimit)
+          .optional(),
+        batchId: z.string().uuid().optional(),
+      })
+      .strict()
+      .refine(
+        (value) => !value.ids || !value.batchId,
+        "请选择勾选导出或整批导出",
+      )
+      .parse(req.body);
+    const codes = store.exportMembershipCodes(input);
+    const stamp = new Date().toISOString().replace(/[-:]/g, "").slice(0, 15);
+    const scope = input.batchId
+      ? "batch"
+      : input.ids
+        ? "selected"
+        : input.plan || "all";
+    return {
+      filename: `kaojiang-membership-${scope}-${codes.length}-${stamp}.txt`,
+      count: codes.length,
+      text: codes.map((code) => code.code).join("\r\n") + "\r\n",
+    };
   });
   route("post", "/api/admin/membership-codes/:id/revoke", (req) => {
     requireAdmin(req);

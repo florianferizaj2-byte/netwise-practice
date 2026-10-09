@@ -15,6 +15,7 @@
     "test:e2e:mobile-study": "node test/mobile-study.e2e.js",
     "test:e2e:purchase": "node test/membership-purchase.e2e.js",
     "test:e2e:apple-ui": "node test/apple-ui.e2e.js",
+    "test:e2e:membership": "node test/membership-codes.e2e.js",
     "typecheck": "node mobile/node_modules/typescript/bin/tsc --noEmit --project mobile/tsconfig.json",
     "verify": "node scripts/verify.mjs",
     "package:release": "node scripts/package-release.mjs",

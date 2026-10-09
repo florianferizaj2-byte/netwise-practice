@@ -5,6 +5,8 @@ export const membershipPlans = {
   svip: { name: "SVIP", generationLimit: 300 },
   ssvip: { name: "SSVIP", generationLimit: 600 },
 };
+export const membershipCodeBatchLimit = 1000;
+export const membershipCodeExportLimit = 10000;
 const DAY = 86400000;
 const PERIOD = 30 * DAY;
 const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
@@ -76,6 +78,41 @@ export function createMembershipStore(db) {
     c.created_at AS createdAt,c.expires_at AS expiresAt,c.redeemed_by AS redeemedBy,
     c.redeemed_at AS redeemedAt,c.membership_expires_at AS membershipExpiresAt,c.revoked_at AS revokedAt,
     u.username AS redeemedUsername FROM membership_codes c LEFT JOIN users u ON u.id=c.redeemed_by`;
+  const stateSql =
+    "CASE WHEN c.redeemed_at IS NOT NULL THEN 'redeemed' WHEN c.revoked_at IS NOT NULL THEN 'revoked' WHEN c.expires_at IS NOT NULL AND c.expires_at<=? THEN 'expired' ELSE 'available' END";
+  const codeFilter = ({
+    plan = "",
+    status = "",
+    search = "",
+    ids,
+    batchId,
+  } = {}) => {
+    const now = iso();
+    const clauses = [
+      "(?='' OR c.plan=?)",
+      `(?='' OR (${stateSql})=?)`,
+      "(?='' OR instr(c.code,?)>0 OR instr(lower(COALESCE(u.username,'')),lower(?))>0)",
+    ];
+    const params = [
+      plan,
+      plan,
+      status,
+      now,
+      status,
+      search,
+      normalizeCode(search),
+      search,
+    ];
+    if (ids) {
+      clauses.push(`c.id IN (${ids.map(() => "?").join(",")})`);
+      params.push(...ids);
+    }
+    if (batchId) {
+      clauses.push("c.batch_id=?");
+      params.push(batchId);
+    }
+    return { where: `WHERE ${clauses.join(" AND ")}`, params, now };
+  };
   const publicRow = (row) => ({
     ...row,
     code: displayCode(row),
@@ -175,12 +212,14 @@ export function createMembershipStore(db) {
         !membershipPlans[plan] ||
         !Number.isInteger(quantity) ||
         quantity < 1 ||
-        quantity > 100 ||
+        quantity > membershipCodeBatchLimit ||
         !Number.isInteger(durationDays) ||
         durationDays < 1 ||
         durationDays > 365
       )
-        throw fail("请选择会员等级，数量为 1—100 个，会员时长为 1—365 天");
+        throw fail(
+          `请选择会员等级，数量为 1—${membershipCodeBatchLimit} 个，会员时长为 1—365 天`,
+        );
       if (
         expiresAt &&
         (!Number.isFinite(Date.parse(expiresAt)) ||
@@ -270,20 +309,7 @@ export function createMembershipStore(db) {
       limit = 30,
       offset = 0,
     } = {}) {
-      const now = iso();
-      const stateSql =
-        "CASE WHEN c.redeemed_at IS NOT NULL THEN 'redeemed' WHEN c.revoked_at IS NOT NULL THEN 'revoked' WHEN c.expires_at IS NOT NULL AND c.expires_at<=? THEN 'expired' ELSE 'available' END";
-      const where = `WHERE (?='' OR c.plan=?) AND (?='' OR (${stateSql})=?) AND (?='' OR instr(c.code,?)>0 OR instr(lower(COALESCE(u.username,'')),lower(?))>0)`;
-      const params = [
-        plan,
-        plan,
-        status,
-        now,
-        status,
-        search,
-        normalizeCode(search),
-        search,
-      ];
+      const { where, params, now } = codeFilter({ plan, status, search });
       const codes = db
         .prepare(
           `${rowSelect} ${where} ORDER BY c.created_at DESC,c.rowid DESC LIMIT ? OFFSET ?`,
@@ -303,6 +329,22 @@ export function createMembershipStore(db) {
         .all(now))
         summary[row.status] = row.count;
       return { codes, total, summary, limit, offset };
+    },
+    exportMembershipCodes(filters = {}) {
+      const { where, params } = codeFilter(filters);
+      const rows = db
+        .prepare(
+          `${rowSelect} ${where} ORDER BY c.created_at DESC,c.rowid DESC LIMIT ?`,
+        )
+        .all(...params, membershipCodeExportLimit + 1);
+      if (rows.length > membershipCodeExportLimit)
+        throw fail(
+          `单次最多导出 ${membershipCodeExportLimit} 个兑换码，请缩小筛选范围后重试`,
+        );
+      if (!rows.length) throw fail("没有符合条件的兑换码可导出");
+      if (filters.ids && rows.length !== new Set(filters.ids).size)
+        throw fail("部分勾选的兑换码已不存在，请刷新列表后重新选择", 409);
+      return rows.map(publicRow);
     },
     revokeMembershipCode(id, adminId) {
       return transaction(() => {
