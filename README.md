@@ -2,6 +2,8 @@
 
 考匠（AceExam，Ace + Exam）是一个面向职业认证考试的机考练习与模拟平台。用户共用作者提供的 AI 服务，根据错题生成针对性变式题，并按功能消耗账号额度；通过审核的题目可以分享给同证书的其他用户，让题库在使用过程中持续增长。
 
+**Android 最新版：v0.4.0** · [下载 APK](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.0/kaojiang-v0.4.0.apk) · [SHA-256 校验文件](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.0/kaojiang-v0.4.0.apk.sha256) · [发布页](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v0.4.0)
+
 电脑端使用响应式网页；iPhone / iPad 通过 `/app/` 使用与 Android 共用源码的移动界面，可添加到主屏幕。两个移动端共用今日、练习、错题、考试、VIP、我的六个页面及账号接口。
 
 ## 苹果移动版 · 2026-09-27
@@ -30,7 +32,14 @@
 - 全国执业兽医资格考试（兽医全科类）：已导入 7,888 道可发布题目，另有 2,577 道待核对
 - 共 9,650 道内置唯一题目，题库启动时自动校验并同步到 SQLite
 
-## 最近发布 · 2026-10-02 · v0.3.9
+## 最近发布 · 2026-10-09 · v0.4.0
+
+- Android 新增 VIP AI 精讲与练习：逐课讲解、填空作答、AI 老师问答及判分复核，并同步当前移动端界面与学习流程。
+- v0.4.0（versionCode 24）安装包约 70.2 MiB，沿用正式签名；相同正式签名的 v0.3.3 至 v0.3.9 可覆盖更新。APK、校验文件与说明已上传 [GitHub Releases](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v0.4.0)。
+- Android Release 构建与签名核验通过；发布检查包含 120 项单元及接口测试（0 失败）、两套网页构建、电脑与移动浏览器完整流程及 VIP AI 学习流程。
+- 配套服务器配置及验证范围见 [v0.4.0 发布说明](https://github.com/florianferizaj2-byte/netwise-practice/blob/v0.4.0/docs/release-v0.4.0.md)。生产站点部署由维护者完成。
+
+## 历史更新 · 2026-10-02 · v0.3.9
 
 - 模拟考试保存和交卷检查答案版本；不同设备同时作答发生冲突时，可选择使用已同步答案或合并本机尚未同步的作答。Android 与 iPhone / iPad 共用此改动。
 - 电脑网页增加考试本机恢复、联网重试和明确的保存状态；练习、考试、社区、会员和管理等页面按需加载。
@@ -251,9 +260,9 @@ npm run dev
 
 ## 移动端 App
 
-Android v0.2.4 已接入现有网站 API，支持登录、证书选择、今日学习概览、知识点练习、完整题库加载、收藏题目、错题复习、顺序刷题、随机刷题、题目举报、AI 学习服务和考匠社区。今日学习会从当前题库随机抽取 30 道题，独立于普通练习的顺序/随机模式。启动时会校验版本；v0.2.2 及以后版本支持应用内下载更新，并保留浏览器下载备用方式。旧版本安装包已在后续发布中清理。
+Android 当前正式版为 v0.4.0，已接入现有网站 API，支持登录、证书选择、今日学习概览、知识点练习、收藏、错题、模拟考试、AI 学习服务、VIP AI 精讲与填空练习及考匠社区。今日学习会从当前题库随机抽取 30 道题，独立于普通练习的顺序/随机模式。启动时会校验版本，支持应用内下载更新，并保留浏览器下载备用方式。
 
-移动端本地开发和 API 配置见 [`mobile/README.md`](mobile/README.md)。生产 API 默认使用 `https://aceexam.top/api`，不要把账号密码、API Key 或生产数据写入 App 源码。
+v0.4.0 的源码与配套后端见 [发布标签](https://github.com/florianferizaj2-byte/netwise-practice/tree/v0.4.0)；移动端开发和 API 配置见 [移动端 README](https://github.com/florianferizaj2-byte/netwise-practice/blob/v0.4.0/mobile/README.md)。生产 API 默认使用 `https://aceexam.top/api`，不要把账号密码、API Key 或生产数据写入 App 源码。
 
 ## 微信小程序
 
