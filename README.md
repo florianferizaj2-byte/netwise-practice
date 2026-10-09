@@ -6,6 +6,8 @@
 
 **会员兑换码购买：**[考匠兑换码商店](https://catfk.com/shop/aceexam)。购买后回到考匠的 VIP 或兑换码页面开通，权益绑定当前账号；套餐、售价和时长以购买页为准。
 
+**Android 最新版：v0.4.0** · [下载 APK](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.0/kaojiang-v0.4.0.apk) · [SHA-256 校验文件](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.0/kaojiang-v0.4.0.apk.sha256) · [发布页](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v0.4.0)
+
 电脑端使用响应式网页；iPhone / iPad 通过 `/app/` 使用与 Android 共用源码的移动界面，可添加到主屏幕。两个移动端共用今日、练习、错题、考试、VIP、我的六个页面及账号接口。
 
 苹果网页现已统一为接近 iOS 的界面：系统字体与中文苹方回退、分组列表、蓝色操作、矢量导航和深色模式。覆盖主页面及课程、社区、会员和设置等子界面；字体依据与本地验证方法见[苹果移动版说明](docs/apple-web.md#ios-界面与字体--2026-10-08)。
@@ -280,9 +282,9 @@ npm run dev
 
 ## 移动端 App
 
-Android 当前正式版为 v0.4.0，已接入现有网站 API，支持登录、证书选择、今日学习概览、知识点练习、收藏、错题、模拟考试、AI 学习服务、VIP AI 精讲与填空练习及考匠社区。今日学习会从当前题库随机抽取 30 道题，独立于普通练习的顺序/随机模式。启动时会校验版本，支持应用内下载更新，并保留浏览器下载备用方式。
+Android 当前正式版为 v0.4.1，已接入现有网站 API，支持登录、证书选择、今日学习概览、知识点练习、收藏、错题、模拟考试、AI 学习服务、VIP AI 精讲与填空练习及考匠社区。今日学习会从当前题库随机抽取 30 道题，独立于普通练习的顺序/随机模式。启动时会校验版本，支持应用内下载更新，并保留浏览器下载备用方式。
 
-移动端本地开发和 API 配置见 [`mobile/README.md`](mobile/README.md)。生产 API 默认使用 `https://aceexam.top/api`，不要把账号密码、API Key 或生产数据写入 App 源码。
+v0.4.1 的源码与配套后端见 [发布标签](https://github.com/florianferizaj2-byte/netwise-practice/tree/v0.4.1)；移动端开发和 API 配置见 [移动端 README](https://github.com/florianferizaj2-byte/netwise-practice/blob/v0.4.1/mobile/README.md)。生产 API 默认使用 `https://aceexam.top/api`，不要把账号密码、API Key 或生产数据写入 App 源码。
 
 ## 微信小程序
 
