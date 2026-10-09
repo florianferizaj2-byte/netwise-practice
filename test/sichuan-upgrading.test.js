@@ -102,8 +102,9 @@ test("Sichuan selection, filtered practice, shared progress, wrong answers and e
   assert.equal(original.attempted, true, "the same question keeps its existing learning record");
   assert.equal((await request("/practice/catalog")).total, 180);
   await request("/auth/certificate", { certificateId }, "PUT");
-  const exam = await request("/exams", { count: 64, chapters: ["办公自动化"] });
-  assert.equal(exam.questions.length, 64);
+  // Include the entire selected pool so the shared fixture is always examined.
+  const exam = await request("/exams", { count: questions.length, chapters: ["办公自动化"] });
+  assert.equal(exam.questions.length, questions.length);
   assert.ok(exam.questions.every((question) => question.chapter === "办公自动化"));
   assert.equal(exam.questions.find((question) => question.id === originalId).knowledgeSection, "Word");
   const answers = Object.fromEntries(exam.questions.map((question) => [question.id, store.getQ(question.id).answer]));
