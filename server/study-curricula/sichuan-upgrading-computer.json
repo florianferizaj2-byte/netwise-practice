@@ -1,0 +1,852 @@
+{
+  "schemaVersion": 1,
+  "certificateId": "sichuan-upgrading-computer",
+  "lessons": [
+    {
+      "parentCode": "sc-1-1-1",
+      "slug": "computer-concept",
+      "title": "计算机特点与信息处理",
+      "scope": "本课只讲计算机特点与信息处理。计算机按程序处理数据。区分输入的数据、经过处理的信息，以及自动执行、运算速度和存储能力等特点。"
+    },
+    {
+      "parentCode": "sc-1-1-1",
+      "slug": "computer-generations",
+      "title": "计算机发展与电子器件",
+      "scope": "本课只讲计算机发展与电子器件。传统计算机分代通常依据主要电子器件的发展。按电子管、晶体管、集成电路、大规模及超大规模集成电路理解演进。"
+    },
+    {
+      "parentCode": "sc-1-1-1",
+      "slug": "computer-applications",
+      "title": "计算机应用与分类",
+      "scope": "本课只讲计算机应用与分类。从任务辨认科学计算、数据处理、过程控制和辅助设计等应用。通用与专用描述用途范围，不能直接等同于性能高低。"
+    },
+    {
+      "parentCode": "sc-1-2-1",
+      "slug": "positional-system",
+      "title": "数制的基数与位权",
+      "scope": "本课只讲数制的基数与位权。位置计数制用基数限定数字，并用位权表示数字所在位置的价值。整数位由右向左依次对应基数的零次方、一次方等。"
+    },
+    {
+      "parentCode": "sc-1-2-1",
+      "slug": "binary-to-decimal",
+      "title": "二进制整数转十进制",
+      "scope": "本课只讲二进制整数转十进制。把二进制每一位乘以对应的2的幂，再相加得到十进制整数。先从最右侧标出1、2、4、8等位权。"
+    },
+    {
+      "parentCode": "sc-1-2-1",
+      "slug": "decimal-to-binary",
+      "title": "十进制整数转二进制",
+      "scope": "本课只讲十进制整数转二进制。非负十进制整数可反复除以2记录余数，再倒序读出二进制。需要固定位数时在左侧补零。"
+    },
+    {
+      "parentCode": "sc-1-2-1",
+      "slug": "octal-conversion",
+      "title": "二进制与八进制互转",
+      "scope": "本课只讲二进制与八进制互转。一个八进制数码对应3位二进制。整数从右侧每3位分组，不足3位在左侧补零；反向按每个八进制数码展开。"
+    },
+    {
+      "parentCode": "sc-1-2-1",
+      "slug": "hex-conversion",
+      "title": "二进制与十六进制互转",
+      "scope": "本课只讲二进制与十六进制互转。一个十六进制数码对应4位二进制。整数从右侧每4位分组；A到F分别代表十进制10到15。"
+    },
+    {
+      "parentCode": "sc-1-2-1",
+      "slug": "base-decimal-conversion",
+      "title": "八、十六进制与十进制互转",
+      "scope": "本课只讲八、十六进制与十进制互转。任意位置计数制转十进制，都按该进制的位权求和；十进制整数转其他进制，用除基取余并逆序读余数。"
+    },
+    {
+      "parentCode": "sc-1-2-1",
+      "slug": "binary-fractions",
+      "title": "二进制小数与表示误差",
+      "scope": "本课只讲二进制小数与表示误差。二进制小数点右侧位权为1/2、1/4、1/8等。有限二进制小数可精确求值，但有些有限十进制小数在二进制中无限循环。"
+    },
+    {
+      "parentCode": "sc-1-2-2",
+      "slug": "information-units",
+      "title": "位、字节与容量换算",
+      "scope": "本课只讲位、字节与容量换算。位是二进制信息的基本单位，一个字节通常为8位。本课计算明确采用二进制容量单位KiB、MiB，区分十进制的kB、MB。"
+    },
+    {
+      "parentCode": "sc-1-2-2",
+      "slug": "signed-integers",
+      "title": "有符号整数与补码",
+      "scope": "本课只讲有符号整数与补码。固定位数限定整数表示范围。无符号n位表示0到2ⁿ−1；常用n位二进制补码表示−2ⁿ⁻¹到2ⁿ⁻¹−1。"
+    },
+    {
+      "parentCode": "sc-1-2-2",
+      "slug": "floating-point",
+      "title": "浮点表示与近似误差",
+      "scope": "本课只讲浮点表示与近似误差。浮点表示可用符号、有效数字与指数理解，适合表达很大或很小的数。有限位数会使部分值需要近似表示。"
+    },
+    {
+      "parentCode": "sc-1-2-2",
+      "slug": "ascii",
+      "title": "ASCII 字符编码",
+      "scope": "本课只讲ASCII 字符编码。ASCII使用7位编码表示128种字符，包括英文字母、数字、标点和控制字符。字符的编码值与数字本身的数值不同。"
+    },
+    {
+      "parentCode": "sc-1-2-2",
+      "slug": "unicode-encoding",
+      "title": "Unicode 与字符存储",
+      "scope": "本课只讲Unicode 与字符存储。字符、码点和存储字节是不同概念。Unicode为字符分配码点，UTF-8等编码规则把码点转换成字节序列。"
+    },
+    {
+      "parentCode": "sc-2-1-1",
+      "slug": "stored-program",
+      "title": "存储程序与计算机五大部件",
+      "scope": "本课只讲存储程序与计算机五大部件。理解冯·诺依曼结构的存储程序思想：程序和数据先存入存储器，计算机取出指令并执行。五大部件按功能分工。"
+    },
+    {
+      "parentCode": "sc-2-1-1",
+      "slug": "cpu",
+      "title": "CPU 与指令执行",
+      "scope": "本课只讲CPU 与指令执行。CPU承担运算与控制，是执行指令的核心。通过取指、译码和执行理解工作过程，区分CPU、内存与外部存储。"
+    },
+    {
+      "parentCode": "sc-2-1-1",
+      "slug": "memory-hierarchy",
+      "title": "内存、缓存与外部存储",
+      "scope": "本课只讲内存、缓存与外部存储。根据速度、容量和持久性区分寄存器、缓存、主存与外部存储。常见RAM掉电后不保留运行数据，外部存储用于长期保存。"
+    },
+    {
+      "parentCode": "sc-2-1-1",
+      "slug": "bus-io",
+      "title": "总线与输入输出设备",
+      "scope": "本课只讲总线与输入输出设备。总线连接计算机部件并传递信息。按传递内容区分数据、地址和控制总线，再按信息流向辨认输入输出设备。"
+    },
+    {
+      "parentCode": "sc-2-1-1",
+      "slug": "performance",
+      "title": "计算机性能指标",
+      "scope": "本课只讲计算机性能指标。用主频、字长、核心数、内存容量及存储访问性能理解计算机能力。不同任务的瓶颈不同，单一指标不能代表整体速度。"
+    },
+    {
+      "parentCode": "sc-2-2-1",
+      "slug": "os-functions",
+      "title": "操作系统的资源管理",
+      "scope": "本课只讲操作系统的资源管理。操作系统管理计算机资源，并向用户和应用提供使用接口。分别理解处理器、存储、设备和文件管理。"
+    },
+    {
+      "parentCode": "sc-2-2-1",
+      "slug": "software-types",
+      "title": "系统软件与应用软件",
+      "scope": "本课只讲系统软件与应用软件。按照用途区分系统软件和应用软件。操作系统与程序翻译工具提供基础支持，办公和业务软件服务于具体用户任务。"
+    },
+    {
+      "parentCode": "sc-2-2-2",
+      "slug": "files-paths",
+      "title": "文件、扩展名与路径",
+      "scope": "本课只讲文件、扩展名与路径。文件保存内容，文件夹组织文件。路径描述文件位置，扩展名通常提示文件类型，但只修改扩展名不会转换真实内容。"
+    },
+    {
+      "parentCode": "sc-2-2-2",
+      "slug": "file-operations",
+      "title": "文件复制、移动与删除",
+      "scope": "本课只讲文件复制、移动与删除。区分复制生成另一份、移动改变位置和删除移除文件。常见Windows操作可通过资源管理器与剪贴板完成。"
+    },
+    {
+      "parentCode": "sc-2-2-2",
+      "slug": "windows-tasks",
+      "title": "Windows 窗口与任务管理",
+      "scope": "本课只讲Windows 窗口与任务管理。区分窗口最小化、关闭应用和后台运行。任务管理器用于查看进程及资源使用，并可处理无响应程序。"
+    },
+    {
+      "parentCode": "sc-2-2-2",
+      "slug": "compression",
+      "title": "文件压缩、解压与下载",
+      "scope": "本课只讲文件压缩、解压与下载。压缩将数据打包或用编码减少冗余，解压还原内容。下载把远程文件传到本地，压缩不能保证每类文件都显著变小。"
+    },
+    {
+      "parentCode": "sc-2-3-1",
+      "slug": "audio-digitization",
+      "title": "声音的采样与量化",
+      "scope": "本课只讲声音的采样与量化。声音数字化通过采样取得时刻上的数值，再用量化位数表示幅度。采样率、量化位数与声道数描述不同属性。"
+    },
+    {
+      "parentCode": "sc-2-3-1",
+      "slug": "audio-size",
+      "title": "未压缩 PCM 音频容量",
+      "scope": "本课只讲未压缩 PCM 音频容量。本课只计算未压缩PCM声音的数据量：采样率乘量化位数、声道数和时长得到bit，再除8得到字节。"
+    },
+    {
+      "parentCode": "sc-2-3-1",
+      "slug": "image-pixels",
+      "title": "位图像素与颜色位深",
+      "scope": "本课只讲位图像素与颜色位深。位图由像素组成，宽和高决定像素数量。位深表示每个像素用多少位保存颜色编码，像素数与颜色数是不同指标。"
+    },
+    {
+      "parentCode": "sc-2-3-1",
+      "slug": "image-size",
+      "title": "未压缩位图容量",
+      "scope": "本课只讲未压缩位图容量。在不考虑压缩、文件头、调色板、透明通道和行填充时，位图数据量等于宽×高×每像素位数，再除8得到字节。"
+    },
+    {
+      "parentCode": "sc-2-3-1",
+      "slug": "video-editing",
+      "title": "视频帧率与录制剪辑",
+      "scope": "本课只讲视频帧率与录制剪辑。视频由连续画面形成，帧率表示每秒画面数。录制与剪辑要区分裁剪、拼接和导出，发布前检查格式与声音图像同步。"
+    },
+    {
+      "parentCode": "sc-3-1-1",
+      "slug": "word-document",
+      "title": "Word 文档创建与保存",
+      "scope": "本课只讲Word 文档创建与保存。区分新建、打开、保存、另存为与关闭文档。保存写入当前文件，另存为可选择新名称、位置或格式。"
+    },
+    {
+      "parentCode": "sc-3-1-1",
+      "slug": "word-editing",
+      "title": "Word 文本编辑与查找替换",
+      "scope": "本课只讲Word 文本编辑与查找替换。选定内容后再复制、剪切或删除；查找定位匹配文字，替换修改匹配文字。批量替换前应检查匹配范围。"
+    },
+    {
+      "parentCode": "sc-3-1-1",
+      "slug": "word-font",
+      "title": "Word 字符格式",
+      "scope": "本课只讲Word 字符格式。字符格式控制选中文字的字体、字号、字形和颜色等表现。区分字符格式与整个段落的对齐、缩进设置。"
+    },
+    {
+      "parentCode": "sc-3-1-1",
+      "slug": "word-paragraph",
+      "title": "Word 段落对齐、缩进与间距",
+      "scope": "本课只讲Word 段落对齐、缩进与间距。段落格式管理一整段的对齐、缩进和间距。区分行距与段前段后间距，以及首行缩进和左缩进。"
+    },
+    {
+      "parentCode": "sc-3-1-1",
+      "slug": "word-page",
+      "title": "Word 页面布局与分页",
+      "scope": "本课只讲Word 页面布局与分页。页面布局确定纸张尺寸、方向和页边距。分页符强制从新页开始，和通过空行把文字推到下一页不同。"
+    },
+    {
+      "parentCode": "sc-3-1-1",
+      "slug": "word-sections",
+      "title": "Word 分节与局部页面设置",
+      "scope": "本课只讲Word 分节与局部页面设置。分节把文档划成可采用不同页面设置的区域。分节符可以支持不同方向、分栏或页眉页脚规则，分页符只负责分页。"
+    },
+    {
+      "parentCode": "sc-3-1-1",
+      "slug": "word-columns",
+      "title": "Word 分栏与范围",
+      "scope": "本课只讲Word 分栏与范围。分栏把文本排成多栏，可设置栏数、宽度和间距。需区分对整篇、当前节或选定文本应用的范围。"
+    },
+    {
+      "parentCode": "sc-3-1-1",
+      "slug": "word-styles-toc",
+      "title": "Word 标题样式与自动目录",
+      "scope": "本课只讲Word 标题样式与自动目录。用标题样式建立文档层级，自动目录可根据标题收集内容和页码。改动标题或分页之后应更新目录。"
+    },
+    {
+      "parentCode": "sc-3-1-2",
+      "slug": "word-tables",
+      "title": "Word 表格结构与编辑",
+      "scope": "本课只讲Word 表格结构与编辑。表格用行列组织文档中的数据。理解单元格、合并、拆分和行列增删，以及表头与数据区的区别。"
+    },
+    {
+      "parentCode": "sc-3-1-2",
+      "slug": "word-table-calculation",
+      "title": "Word 表格排序与计算",
+      "scope": "本课只讲Word 表格排序与计算。Word表格可按指定列排序，并用表格公式做简单计算。排序须保持整条记录对应，公式计算结果修改后可能需要更新域。"
+    },
+    {
+      "parentCode": "sc-3-1-2",
+      "slug": "word-graphics",
+      "title": "Word 图文混排与文字环绕",
+      "scope": "本课只讲Word 图文混排与文字环绕。插入图片、形状和文本框后，用文字环绕决定图与文字的位置关系。嵌入型图片像字符，浮动对象按环绕规则排布。"
+    },
+    {
+      "parentCode": "sc-3-1-2",
+      "slug": "word-mail-merge",
+      "title": "Word 邮件合并",
+      "scope": "本课只讲Word 邮件合并。邮件合并把统一主文档与多条数据记录结合，生成带个性信息的文档。区分数据源、合并字段和实际记录值。"
+    },
+    {
+      "parentCode": "sc-3-1-2",
+      "slug": "word-protection-print",
+      "title": "Word 共享、保护与打印",
+      "scope": "本课只讲Word 共享、保护与打印。共享控制其他人的访问，编辑保护限制修改，打印设置决定输出范围和方式。分享前清理不应公开的信息并检查权限。"
+    },
+    {
+      "parentCode": "sc-3-2-1",
+      "slug": "excel-workbook",
+      "title": "Excel 工作簿、工作表与单元格",
+      "scope": "本课只讲Excel 工作簿、工作表与单元格。工作簿是Excel文件，可包含多张工作表；单元格位于行列交叉处，用列字母和行号确定地址。理解隐藏与删除的区别。"
+    },
+    {
+      "parentCode": "sc-3-2-1",
+      "slug": "excel-data-format",
+      "title": "Excel 数据输入与显示格式",
+      "scope": "本课只讲Excel 数据输入与显示格式。区分文本、数值和日期等数据，以及数据本身与显示格式。需要保留编号前导零时，可按文本方式输入。"
+    },
+    {
+      "parentCode": "sc-3-2-1",
+      "slug": "excel-fill",
+      "title": "Excel 序列填充与快速填充",
+      "scope": "本课只讲Excel 序列填充与快速填充。序列填充按数字、日期或自定义序列延伸；快速填充根据已有样例推断文本转换模式。两者都应检查推断结果。"
+    },
+    {
+      "parentCode": "sc-3-2-1",
+      "slug": "excel-freeze",
+      "title": "Excel 窗口冻结与拆分",
+      "scope": "本课只讲Excel 窗口冻结与拆分。冻结窗格让标题行或关键列滚动时保持可见；拆分窗口提供同一工作表的多个查看区域。冻结不限制数据编辑。"
+    },
+    {
+      "parentCode": "sc-3-2-1",
+      "slug": "excel-relative",
+      "title": "Excel 相对引用",
+      "scope": "本课只讲Excel 相对引用。相对引用在复制公式时按公式移动的行列距离调整。A1形式没有美元符号，复制向下通常增加行号，向右增加列号。"
+    },
+    {
+      "parentCode": "sc-3-2-1",
+      "slug": "excel-absolute",
+      "title": "Excel 绝对引用",
+      "scope": "本课只讲Excel 绝对引用。绝对引用用美元符号分别锁定列和行。$A$1在复制公式时保持同一引用位置，适合税率、系数等固定参数。"
+    },
+    {
+      "parentCode": "sc-3-2-1",
+      "slug": "excel-mixed",
+      "title": "Excel 混合引用",
+      "scope": "本课只讲Excel 混合引用。混合引用只锁定行或列。$A1锁列不锁行，A$1锁行不锁列；按复制方向分别判断固定与变化部分。"
+    },
+    {
+      "parentCode": "sc-3-2-2",
+      "slug": "excel-formulas",
+      "title": "Excel 公式与运算顺序",
+      "scope": "本课只讲Excel 公式与运算顺序。公式通常以等号开始，可包含数值、单元格引用、运算符和函数。括号改变运算顺序，错误值提示计算或引用问题。"
+    },
+    {
+      "parentCode": "sc-3-2-2",
+      "slug": "excel-abs",
+      "title": "Excel ABS：绝对值",
+      "scope": "本课只讲Excel ABS：绝对值。ABS返回一个数的绝对值，即数轴上与零的距离。结果非负，正数不变，负数去掉负号。"
+    },
+    {
+      "parentCode": "sc-3-2-2",
+      "slug": "excel-sum",
+      "title": "Excel SUM：区域求和",
+      "scope": "本课只讲Excel SUM：区域求和。SUM对参数中的数值求和。使用单元格区域可汇总一组数；区域内空单元格和文本通常不参与数值相加。"
+    },
+    {
+      "parentCode": "sc-3-2-2",
+      "slug": "excel-sumif",
+      "title": "Excel SUMIF：按条件求和",
+      "scope": "本课只讲Excel SUMIF：按条件求和。SUMIF先在条件区域匹配一个条件，再汇总对应行的数值。语法是SUMIF(range,criteria,[sum_range])。"
+    },
+    {
+      "parentCode": "sc-3-2-2",
+      "slug": "excel-average",
+      "title": "Excel AVERAGE：算术平均",
+      "scope": "本课只讲Excel AVERAGE：算术平均。AVERAGE计算所引用数值的算术平均。引用区域中的空白和文本通常忽略，数值零则参与数量和总和。"
+    },
+    {
+      "parentCode": "sc-3-2-2",
+      "slug": "excel-count",
+      "title": "Excel COUNT：数值计数",
+      "scope": "本课只讲Excel COUNT：数值计数。COUNT统计数值的数量。对于引用区域，数值零和有效日期数值计入，文本及空白通常不计入。"
+    },
+    {
+      "parentCode": "sc-3-2-2",
+      "slug": "excel-countif",
+      "title": "Excel COUNTIF：按条件计数",
+      "scope": "本课只讲Excel COUNTIF：按条件计数。COUNTIF统计区域中符合一个条件的单元格个数。条件可以是文字或比较表达式，结果是数量而不是金额总和。"
+    },
+    {
+      "parentCode": "sc-3-2-2",
+      "slug": "excel-if",
+      "title": "Excel IF：条件选择",
+      "scope": "本课只讲Excel IF：条件选择。IF根据逻辑测试真假返回不同结果。语法IF(logical_test,value_if_true,value_if_false)，先确认边界条件和返回类型。"
+    },
+    {
+      "parentCode": "sc-3-2-2",
+      "slug": "excel-vlookup",
+      "title": "Excel VLOOKUP：纵向查找",
+      "scope": "本课只讲Excel VLOOKUP：纵向查找。VLOOKUP在表区域第一列查找值，再返回同一行指定列的内容。精确匹配常用FALSE或0，返回列号相对选定表区域计数。"
+    },
+    {
+      "parentCode": "sc-3-2-2",
+      "slug": "excel-max",
+      "title": "Excel MAX：最大值",
+      "scope": "本课只讲Excel MAX：最大值。MAX返回一组数值中的最大值。引用区域中的普通文本和空白通常忽略，负数比较要按数值大小判断。"
+    },
+    {
+      "parentCode": "sc-3-2-2",
+      "slug": "excel-min",
+      "title": "Excel MIN：最小值",
+      "scope": "本课只讲Excel MIN：最小值。MIN返回一组数值中的最小值。引用区域里的普通文本和空白通常忽略，数值零和负数参与比较。"
+    },
+    {
+      "parentCode": "sc-3-2-2",
+      "slug": "excel-rank",
+      "title": "Excel RANK：名次与并列",
+      "scope": "本课只讲Excel RANK：名次与并列。RANK返回数值在一组数中的名次。order为0或省略通常按降序，非零按升序；并列数值共享名次并影响后续名次。"
+    },
+    {
+      "parentCode": "sc-3-2-2",
+      "slug": "excel-year",
+      "title": "Excel YEAR：提取年份",
+      "scope": "本课只讲Excel YEAR：提取年份。YEAR从有效日期值中提取年份。本课用DATE构造明确日期，避免依赖地区不同的文本日期解析。"
+    },
+    {
+      "parentCode": "sc-3-2-2",
+      "slug": "excel-month",
+      "title": "Excel MONTH：提取月份",
+      "scope": "本课只讲Excel MONTH：提取月份。MONTH从有效日期中提取1到12的月份数值。它不是返回月份名称，也不是计算两日期之间相隔几个月。"
+    },
+    {
+      "parentCode": "sc-3-2-2",
+      "slug": "excel-day",
+      "title": "Excel DAY：提取日号",
+      "scope": "本课只讲Excel DAY：提取日号。DAY从有效日期提取所在月份中的日号。返回1到31之间的数值，不是星期几，也不是全年第几天。"
+    },
+    {
+      "parentCode": "sc-3-2-2",
+      "slug": "excel-left",
+      "title": "Excel LEFT：左侧文本提取",
+      "scope": "本课只讲Excel LEFT：左侧文本提取。LEFT从文本左端取指定数量的字符。语法LEFT(text,[num_chars])，数字外观的字符提取结果仍可为文本。"
+    },
+    {
+      "parentCode": "sc-3-2-2",
+      "slug": "excel-right",
+      "title": "Excel RIGHT：右侧文本提取",
+      "scope": "本课只讲Excel RIGHT：右侧文本提取。RIGHT从文本右端取指定数量的字符。适合规则明确的编号后缀提取，注意末尾空格也属于文本内容。"
+    },
+    {
+      "parentCode": "sc-3-2-2",
+      "slug": "excel-mid",
+      "title": "Excel MID：中间文本提取",
+      "scope": "本课只讲Excel MID：中间文本提取。MID从指定字符位置起提取指定长度。语法MID(text,start_num,num_chars)，起始位置从1计数。"
+    },
+    {
+      "parentCode": "sc-3-2-2",
+      "slug": "excel-mod",
+      "title": "Excel MOD：求余数",
+      "scope": "本课只讲Excel MOD：求余数。MOD(number,divisor)求余数。正整数时可用熟悉的整除余数理解；带负数时Excel结果的符号与除数一致。"
+    },
+    {
+      "parentCode": "sc-3-2-2",
+      "slug": "excel-sort",
+      "title": "Excel 数据排序",
+      "scope": "本课只讲Excel 数据排序。排序按一个或多个关键字重排记录。必须保持一行各字段对应，并明确表头、数据类型和升降序。"
+    },
+    {
+      "parentCode": "sc-3-2-2",
+      "slug": "excel-filter",
+      "title": "Excel 数据筛选",
+      "scope": "本课只讲Excel 数据筛选。筛选显示符合条件的记录并隐藏暂不符合的记录。它不自动删除未显示数据，可组合多个字段的条件。"
+    },
+    {
+      "parentCode": "sc-3-2-2",
+      "slug": "excel-subtotal",
+      "title": "Excel 分类汇总",
+      "scope": "本课只讲Excel 分类汇总。分类汇总按分组字段计算小计与总计。经典分类汇总通常先按分类字段排序，使相同类别连续排列。"
+    },
+    {
+      "parentCode": "sc-3-2-2",
+      "slug": "excel-charts",
+      "title": "Excel 图表选择与数据范围",
+      "scope": "本课只讲Excel 图表选择与数据范围。根据比较、趋势或组成目标选择图表。图表依赖正确的数据源、类别轴和系列，修改后检查范围及标题单位。"
+    },
+    {
+      "parentCode": "sc-3-2-2",
+      "slug": "excel-import",
+      "title": "Excel 数据导入与字段检查",
+      "scope": "本课只讲Excel 数据导入与字段检查。导入文本或其他数据前核对编码、分隔符和字段类型。日期、长编号和前导零都可能因自动类型判断而改变。"
+    },
+    {
+      "parentCode": "sc-3-2-2",
+      "slug": "excel-conditional-format",
+      "title": "Excel 条件格式",
+      "scope": "本课只讲Excel 条件格式。条件格式根据规则改变单元格显示样式。它可以突出满足条件的记录，但不会自行修改原始数据。"
+    },
+    {
+      "parentCode": "sc-3-2-2",
+      "slug": "excel-protection",
+      "title": "Excel 工作表保护",
+      "scope": "本课只讲Excel 工作表保护。工作表保护限制指定编辑动作。可配合锁定设置限制公式修改，并给允许输入的单元格保留编辑能力。"
+    },
+    {
+      "parentCode": "sc-3-2-2",
+      "slug": "excel-print",
+      "title": "Excel 打印区域与分页",
+      "scope": "本课只讲Excel 打印区域与分页。打印表格先确定输出区域，再检查方向、分页和缩放。长表可重复标题行，避免后续页缺少列名称。"
+    },
+    {
+      "parentCode": "sc-3-3-1",
+      "slug": "ppt-views",
+      "title": "PowerPoint 文件与视图",
+      "scope": "本课只讲PowerPoint 文件与视图。演示文稿由多张幻灯片组成。普通视图便于编辑，幻灯片浏览视图便于查看顺序，放映视图展示演示效果。"
+    },
+    {
+      "parentCode": "sc-3-3-1",
+      "slug": "ppt-layout",
+      "title": "PowerPoint 幻灯片版式与顺序",
+      "scope": "本课只讲PowerPoint 幻灯片版式与顺序。版式安排标题、正文和其他占位符的位置。新建、复制、移动和删除作用于幻灯片对象，应区别于编辑页内文字。"
+    },
+    {
+      "parentCode": "sc-3-3-1",
+      "slug": "ppt-media",
+      "title": "PowerPoint 图形与音视频对象",
+      "scope": "本课只讲PowerPoint 图形与音视频对象。幻灯片可插入图片、形状、表格、音频和视频。对象插入后检查尺寸、层叠和播放设置，分享前确认媒体可用。"
+    },
+    {
+      "parentCode": "sc-3-3-1",
+      "slug": "ppt-theme",
+      "title": "PowerPoint 主题与背景",
+      "scope": "本课只讲PowerPoint 主题与背景。主题提供协调的颜色、字体和效果组合，背景控制页面底部呈现。统一风格后仍要检查文字可读性和对象对比度。"
+    },
+    {
+      "parentCode": "sc-3-3-1",
+      "slug": "ppt-master",
+      "title": "PowerPoint 幻灯片母版",
+      "scope": "本课只讲PowerPoint 幻灯片母版。母版管理一组关联幻灯片的共同视觉规则。编辑母版或其版式可统一字体、背景和标识，具体效果依赖页面使用的母版及版式。"
+    },
+    {
+      "parentCode": "sc-3-3-1",
+      "slug": "ppt-animation",
+      "title": "PowerPoint 对象动画",
+      "scope": "本课只讲PowerPoint 对象动画。动画作用于幻灯片中的对象，控制进入、强调、退出或运动表现。顺序、启动方式和时间决定放映时怎样出现。"
+    },
+    {
+      "parentCode": "sc-3-3-1",
+      "slug": "ppt-transition",
+      "title": "PowerPoint 幻灯片切换",
+      "scope": "本课只讲PowerPoint 幻灯片切换。切换效果用于从一张幻灯片转到下一张。效果类型、时长和换片方式应分别检查，自动换片还涉及计时。"
+    },
+    {
+      "parentCode": "sc-3-3-1",
+      "slug": "ppt-slideshow",
+      "title": "PowerPoint 放映设置与演讲",
+      "scope": "本课只讲PowerPoint 放映设置与演讲。放映可从头或从当前页开始，并可设置自定义范围与播放方式。演讲者视图提供提示信息，观众显示内容应另行检查。"
+    },
+    {
+      "parentCode": "sc-3-3-1",
+      "slug": "ppt-delivery",
+      "title": "PowerPoint 共享、打包与打印",
+      "scope": "本课只讲PowerPoint 共享、打包与打印。交付演示文稿时考虑媒体资源、访问权限和输出形式。打印可选择幻灯片、备注页或讲义，分发前检查个人信息和可编辑性。"
+    },
+    {
+      "parentCode": "sc-4-1-1",
+      "slug": "network-types",
+      "title": "局域网、广域网与资源共享",
+      "scope": "本课只讲局域网、广域网与资源共享。网络连接设备以交换信息和共享资源。按覆盖范围理解局域网与广域网，Internet则是互联网络形成的全球系统。"
+    },
+    {
+      "parentCode": "sc-4-1-1",
+      "slug": "network-topology",
+      "title": "网络拓扑结构",
+      "scope": "本课只讲网络拓扑结构。拓扑描述网络节点与链路的连接关系。识别星形、总线形、环形等常见结构，并注意逻辑关系不必等同物理布线。"
+    },
+    {
+      "parentCode": "sc-4-1-1",
+      "slug": "network-layering",
+      "title": "网络分层、协议与封装",
+      "scope": "本课只讲网络分层、协议与封装。网络体系结构按层分工，协议规定通信规则。OSI参考模型分七层，下层为上层提供服务，发送与接收涉及封装和解封装。"
+    },
+    {
+      "parentCode": "sc-4-1-1",
+      "slug": "network-devices",
+      "title": "网络常用设备与功能",
+      "scope": "本课只讲网络常用设备与功能。按主要功能区分集线器、交换机、路由器和无线接入点。设备形态可集成多个功能，应依据题目明确的角色判断。"
+    },
+    {
+      "parentCode": "sc-4-1-1",
+      "slug": "ip-addresses",
+      "title": "IPv4 与 IPv6 地址",
+      "scope": "本课只讲IPv4 与 IPv6 地址。IP地址用于网络层逻辑寻址。IPv4有32位、常用点分十进制；IPv6有128位、常用十六进制分组表示。"
+    },
+    {
+      "parentCode": "sc-4-1-1",
+      "slug": "dns",
+      "title": "域名系统 DNS",
+      "scope": "本课只讲域名系统 DNS。域名提供便于记忆的名称，DNS可查询名称对应的地址等记录。域名、URL和IP地址是不同概念。"
+    },
+    {
+      "parentCode": "sc-4-1-1",
+      "slug": "internet-services",
+      "title": "Internet 常见服务与协议",
+      "scope": "本课只讲Internet 常见服务与协议。按任务区分网页、文件传输和远程服务。HTTP用于网页相关传输，HTTPS加入安全保护，但安全连接不自动证明内容可信。"
+    },
+    {
+      "parentCode": "sc-4-1-1",
+      "slug": "email",
+      "title": "电子邮件地址与收发",
+      "scope": "本课只讲电子邮件地址与收发。电子邮件地址一般包含本地部分、@和域名部分。邮件收发服务、附件和收件范围应分开理解，并核验可疑内容。"
+    },
+    {
+      "parentCode": "sc-4-1-1",
+      "slug": "information-retrieval",
+      "title": "网络检索与来源核验",
+      "scope": "本课只讲网络检索与来源核验。有效检索先明确问题和关键词，再筛选来源、日期和证据。搜索排名、转发数量或外观专业都不能自动保证信息可信。"
+    },
+    {
+      "parentCode": "sc-4-2-1",
+      "slug": "security-goals",
+      "title": "信息安全的三个基本目标",
+      "scope": "本课只讲信息安全的三个基本目标。保密性限制未授权读取，完整性关注数据不被不当改动，可用性关注授权用户能够在需要时使用服务。"
+    },
+    {
+      "parentCode": "sc-4-2-1",
+      "slug": "malware",
+      "title": "恶意软件与病毒防控",
+      "scope": "本课只讲恶意软件与病毒防控。恶意软件包括病毒等不同类型。病毒一般依附宿主并传播，不要把所有恶意软件都说成同一种；防护需结合更新、来源检查和备份。"
+    },
+    {
+      "parentCode": "sc-4-2-1",
+      "slug": "firewall",
+      "title": "防火墙与访问控制",
+      "scope": "本课只讲防火墙与访问控制。防火墙按规则允许或阻止网络通信。理解规则、权限与边界，不把防火墙当成可解决所有恶意软件和账号问题的工具。"
+    },
+    {
+      "parentCode": "sc-4-2-1",
+      "slug": "personal-protection",
+      "title": "个人信息与账号防护",
+      "scope": "本课只讲个人信息与账号防护。减少不必要的信息披露，核验登录来源，使用独立口令及可用的多因素验证。授权前检查数据用途和必要范围。"
+    },
+    {
+      "parentCode": "sc-4-2-1",
+      "slug": "information-ethics",
+      "title": "信息辨识、伦理与社会责任",
+      "scope": "本课只讲信息辨识、伦理与社会责任。使用和传播信息时检查事实、来源与授权，尊重个人信息和作品许可。技术能力不等于有权访问、转载或改变他人数据。"
+    },
+    {
+      "parentCode": "sc-5-1-1",
+      "slug": "computational-thinking",
+      "title": "计算思维与问题求解",
+      "scope": "本课只讲计算思维与问题求解。计算思维通过分解、抽象和步骤化解决问题。先明确输入、输出和约束，再设计并检查可执行的方法。"
+    },
+    {
+      "parentCode": "sc-5-1-1",
+      "slug": "algorithm-properties",
+      "title": "算法的基本特征",
+      "scope": "本课只讲算法的基本特征。算法是求解问题的明确步骤。教材中的基本特征包括有穷性、确定性、可行性、输入和输出。"
+    },
+    {
+      "parentCode": "sc-5-1-1",
+      "slug": "algorithm-complexity",
+      "title": "时间复杂度与空间复杂度",
+      "scope": "本课只讲时间复杂度与空间复杂度。复杂度描述资源需求随输入规模增长的趋势。时间复杂度关注操作增长，空间复杂度关注所需存储，不能直接等同某台机器的秒数。"
+    },
+    {
+      "parentCode": "sc-5-1-1",
+      "slug": "algorithm-strategies",
+      "title": "穷举、分治与贪心策略",
+      "scope": "本课只讲穷举、分治与贪心策略。策略描述怎样组织求解。穷举检查候选，分治拆分问题并合并结果，贪心每步按局部标准选择；局部最优不自动保证整体最优。"
+    },
+    {
+      "parentCode": "sc-5-2-1",
+      "slug": "program-translation",
+      "title": "源程序、编译与解释",
+      "scope": "本课只讲源程序、编译与解释。源程序是按语言编写的代码，翻译工具将它转换或执行。编译通常生成目标代码，解释通常由解释系统组织执行。"
+    },
+    {
+      "parentCode": "sc-5-2-1",
+      "slug": "sequence-assignment",
+      "title": "顺序结构与变量赋值",
+      "scope": "本课只讲顺序结构与变量赋值。顺序结构按给定次序执行。伪代码x←表达式表示将计算结果赋给x，后续语句使用变量最新值。"
+    },
+    {
+      "parentCode": "sc-5-2-1",
+      "slug": "selection",
+      "title": "选择结构与条件边界",
+      "scope": "本课只讲选择结构与条件边界。选择结构按条件真假执行不同分支。先检查比较符号和边界值，再明确哪些语句属于相应分支。"
+    },
+    {
+      "parentCode": "sc-5-2-1",
+      "slug": "loops",
+      "title": "循环结构与执行次数",
+      "scope": "本课只讲循环结构与执行次数。循环重复执行语句，需明确初始值、条件和更新。先判断条件的循环可能一次也不执行，结束条件与变化方向要一致。"
+    },
+    {
+      "parentCode": "sc-5-2-1",
+      "slug": "accumulation",
+      "title": "累加算法与初始值",
+      "scope": "本课只讲累加算法与初始值。累加变量保存逐项相加的结果。求和通常从0开始，每一步把当前项加到已有总和，再检查处理范围。"
+    },
+    {
+      "parentCode": "sc-5-2-1",
+      "slug": "product",
+      "title": "累乘算法与阶乘",
+      "scope": "本课只讲累乘算法与阶乘。累乘变量保存逐项相乘的结果，通常从1开始。阶乘n!为1到n的整数连乘，并约定0!=1。"
+    },
+    {
+      "parentCode": "sc-5-2-1",
+      "slug": "linear-search",
+      "title": "顺序查找",
+      "scope": "本课只讲顺序查找。顺序查找依次比较元素，发现目标可停止，全部检查完仍未找到则失败。无需先排序，但最坏可能检查所有元素。"
+    },
+    {
+      "parentCode": "sc-5-2-1",
+      "slug": "binary-search",
+      "title": "二分查找",
+      "scope": "本课只讲二分查找。二分查找在有序数据中比较中间元素，排除不可能的一半范围。本课使用升序数组、位置从1开始，中间位置向下取整。"
+    },
+    {
+      "parentCode": "sc-5-2-1",
+      "slug": "bubble-sort",
+      "title": "冒泡排序",
+      "scope": "本课只讲冒泡排序。冒泡排序比较相邻元素并按目标顺序交换。对升序、从左向右的一趟，较大值不断向右移动，最终最大值可到达右端。"
+    },
+    {
+      "parentCode": "sc-5-2-1",
+      "slug": "flowchart",
+      "title": "程序流程图与路径跟踪",
+      "scope": "本课只讲程序流程图与路径跟踪。流程图用不同图形和箭头描述步骤与执行路径。常见矩形为处理，菱形为判断，平行四边形为输入输出，开始结束用终端符号。"
+    },
+    {
+      "parentCode": "sc-6-1-1",
+      "slug": "database-system",
+      "title": "数据库、DBMS 与数据库系统",
+      "scope": "本课只讲数据库、DBMS 与数据库系统。数据库保存有组织的数据，数据库管理系统管理这些数据，数据库系统还包括应用、环境和人员等组成。三者不能等同。"
+    },
+    {
+      "parentCode": "sc-6-1-1",
+      "slug": "data-models",
+      "title": "层次、网状与关系模型",
+      "scope": "本课只讲层次、网状与关系模型。数据模型描述怎样组织数据及其联系。层次模型体现树状结构，网状模型允许更复杂联系，关系模型用关系表组织数据。"
+    },
+    {
+      "parentCode": "sc-6-1-1",
+      "slug": "relational-tables",
+      "title": "关系表、元组与属性",
+      "scope": "本课只讲关系表、元组与属性。关系表中一行通常表示一条记录或元组，一列表示属性。属性的允许值范围称为域；经典关系模型按集合理解记录。"
+    },
+    {
+      "parentCode": "sc-6-1-1",
+      "slug": "keys",
+      "title": "主键与记录唯一标识",
+      "scope": "本课只讲主键与记录唯一标识。键用于唯一识别记录，主键是选择用于主要识别的一组属性。主键要求唯一且非空，姓名通常不能保证唯一。"
+    },
+    {
+      "parentCode": "sc-6-2-1",
+      "slug": "er-elements",
+      "title": "E-R 图的实体、属性与联系",
+      "scope": "本课只讲E-R 图的实体、属性与联系。E-R图表达现实对象及其关系。经典画法中实体用矩形、属性用椭圆、联系用菱形，并用连接线说明所属关系。"
+    },
+    {
+      "parentCode": "sc-6-2-1",
+      "slug": "relationship-cardinality",
+      "title": "实体联系的基数",
+      "scope": "本课只讲实体联系的基数。按明确业务约束判断一对一、一对多和多对多。基数描述两类对象关联数量，不能只凭当前样例中恰有多少条记录判断。"
+    },
+    {
+      "parentCode": "sc-6-2-1",
+      "slug": "selection-operation",
+      "title": "关系运算：选择",
+      "scope": "本课只讲关系运算：选择。选择按条件挑出关系中的元组，也就是筛选行。它保留相应属性列，不是选择指定列的投影。"
+    },
+    {
+      "parentCode": "sc-6-2-1",
+      "slug": "projection-operation",
+      "title": "关系运算：投影",
+      "scope": "本课只讲关系运算：投影。投影从关系中提取指定属性列。经典关系代数按集合理解，投影后相同元组会去重；这与SQL默认是否保留重复需分开。"
+    },
+    {
+      "parentCode": "sc-6-2-1",
+      "slug": "join-operation",
+      "title": "关系运算：等值连接",
+      "scope": "本课只讲关系运算：等值连接。连接按条件把两个关系中的相关记录组合。本课只讨论匹配键值相等的内连接：没有匹配的记录不会出现在结果中。"
+    },
+    {
+      "parentCode": "sc-6-1-1",
+      "slug": "dbms-scenarios",
+      "title": "常见 DBMS 与使用场景",
+      "scope": "本课只讲常见 DBMS 与使用场景。认识Access、SQL Server、MySQL、Oracle等数据库管理系统。产品选择需结合数据规模、并发、部署和维护需求，不按名称绝对判断优劣。"
+    },
+    {
+      "parentCode": "sc-7-1-1",
+      "slug": "cloud-features",
+      "title": "云计算的资源共享与弹性",
+      "scope": "本课只讲云计算的资源共享与弹性。云计算通过网络按需提供共享计算资源，强调按需自助、广泛网络访问、资源池、快速弹性和可计量服务。"
+    },
+    {
+      "parentCode": "sc-7-1-1",
+      "slug": "cloud-iaas",
+      "title": "IaaS：基础设施服务",
+      "scope": "本课只讲IaaS：基础设施服务。IaaS提供计算、存储和网络等基础资源。用户可部署操作系统与应用，但一般不管理底层物理云设施。"
+    },
+    {
+      "parentCode": "sc-7-1-1",
+      "slug": "cloud-paas",
+      "title": "PaaS：开发与运行平台",
+      "scope": "本课只讲PaaS：开发与运行平台。PaaS提供应用开发、部署和运行环境。用户部署自己的应用，底层操作系统与云设施通常由服务商管理。"
+    },
+    {
+      "parentCode": "sc-7-1-1",
+      "slug": "cloud-saas",
+      "title": "SaaS：直接使用软件服务",
+      "scope": "本课只讲SaaS：直接使用软件服务。SaaS让用户通过网络使用服务商提供的应用。用户主要使用功能和配置个人设置，无需自行部署该应用的底层系统。"
+    },
+    {
+      "parentCode": "sc-7-1-1",
+      "slug": "cloud-deployment",
+      "title": "公有云、私有云与混合云",
+      "scope": "本课只讲公有云、私有云与混合云。部署模式关注云资源供谁使用及如何组合。公有云面向公众，私有云专供一个组织，混合云连接仍保持独立的多个云。"
+    },
+    {
+      "parentCode": "sc-7-2-1",
+      "slug": "big-data-features",
+      "title": "大数据的特点与价值",
+      "scope": "本课只讲大数据的特点与价值。大数据常以规模、速度、多样性及价值等特点理解。数据多不保证结论正确，价值来自适当处理和可靠应用。"
+    },
+    {
+      "parentCode": "sc-7-2-1",
+      "slug": "data-structure-types",
+      "title": "结构化、半结构化与非结构化数据",
+      "scope": "本课只讲结构化、半结构化与非结构化数据。按组织形式可区分结构化、半结构化与非结构化数据。固定字段表常是结构化数据，带标记记录常是半结构化数据。"
+    },
+    {
+      "parentCode": "sc-7-2-1",
+      "slug": "data-quality-privacy",
+      "title": "数据处理、质量与隐私",
+      "scope": "本课只讲数据处理、质量与隐私。数据应用通常经历采集、存储、清洗、分析和使用。应核对缺失、重复及偏差，保护个人信息并控制数据访问。"
+    },
+    {
+      "parentCode": "sc-7-3-1",
+      "slug": "iot-perception",
+      "title": "物联网感知层",
+      "scope": "本课只讲物联网感知层。物联网常按感知层、网络层、应用层理解。感知层负责采集或识别现实对象的信息，常用传感器和识别设备。"
+    },
+    {
+      "parentCode": "sc-7-3-1",
+      "slug": "iot-network",
+      "title": "物联网网络层",
+      "scope": "本课只讲物联网网络层。网络层负责将感知数据传送到处理与应用端。它使用适当通信网络连接设备，需考虑覆盖、可靠性与连接安全。"
+    },
+    {
+      "parentCode": "sc-7-3-1",
+      "slug": "iot-application",
+      "title": "物联网应用层",
+      "scope": "本课只讲物联网应用层。应用层结合业务目标使用物联网数据，提供监测、分析、报警或控制等服务。效果取决于规则、数据与具体环境。"
+    },
+    {
+      "parentCode": "sc-7-3-1",
+      "slug": "iot-integration",
+      "title": "物联网与云、大数据的协作",
+      "scope": "本课只讲物联网与云、大数据的协作。物联网获取和传送对象信息，云可提供计算与存储，大数据方法可分析大量记录。三者任务相关但概念各有侧重。"
+    },
+    {
+      "parentCode": "sc-7-4-1",
+      "slug": "ai-concept",
+      "title": "人工智能、机器学习与任务",
+      "scope": "本课只讲人工智能、机器学习与任务。人工智能研究和实现与智能有关的计算任务。机器学习是其中的重要方法，利用数据学习规律，输出仍需验证。"
+    },
+    {
+      "parentCode": "sc-7-4-1",
+      "slug": "ai-history",
+      "title": "人工智能发展与技术条件",
+      "scope": "本课只讲人工智能发展与技术条件。人工智能发展经历多种研究方法与应用阶段。1956年达特茅斯会议是常见历史标志，数据、算法与算力共同影响发展。"
+    },
+    {
+      "parentCode": "sc-7-4-1",
+      "slug": "ai-applications",
+      "title": "人工智能应用与输出核对",
+      "scope": "本课只讲人工智能应用与输出核对。人工智能可辅助识别、推荐、预测和内容生成。每类任务需选择合适评价方式，生成流畅内容不保证事实正确。"
+    },
+    {
+      "parentCode": "sc-7-4-1",
+      "slug": "ai-responsibility",
+      "title": "人工智能的偏差、隐私与责任",
+      "scope": "本课只讲人工智能的偏差、隐私与责任。人工智能使用需关注偏差、隐私、内容真实性与适当责任。模型输出可供辅助，关键判断需要合适的核验和人工监督。"
+    }
+  ]
+}

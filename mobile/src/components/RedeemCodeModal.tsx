@@ -19,6 +19,7 @@ import {
 } from "../api/client";
 import { AnimatedPressable } from "./Motion";
 import { isAppleWeb, useTheme, useThemedStyles, type ThemeColors } from "../theme";
+import { MembershipPurchaseLink } from "./MembershipPurchaseLink";
 
 export const membershipLabels = {
   free: "Free",
@@ -245,6 +246,8 @@ export function RedeemCodeModal({
                 <Text style={styles.hint}>
                   每张兑换码限用一次。会员有效期内支持同等级续期；其他等级可在到期后兑换。
                 </Text>
+                <MembershipPurchaseLink />
+                <Text style={styles.hint}>还没有兑换码？购买后回到这里兑换，权益绑定当前考匠账号。</Text>
               </View>
             )}
             <View style={styles.historyHeading}>

@@ -10,6 +10,7 @@ import { createApp } from "../server/index.js";
 import { createStore } from "../server/store.js";
 import { OpenAICompatibleProvider } from "../server/ai.js";
 import { studyNodes } from "../server/study-content.js";
+import { deploymentStudySeeds } from "../server/study-seeds/index.js";
 import { mockAI } from "./ai-fixture.js";
 import {
   mockStudyAI,
@@ -35,7 +36,7 @@ const app = await createApp({
   store,
   provider: new OpenAICompatibleProvider(store, { fetch: mockAI() }),
   studyAI: fake,
-  studySeeds: null,
+  studySeeds: deploymentStudySeeds.filter((item) => item.nodeId.startsWith("sichuan-upgrading-computer:")),
   production: true,
 });
 const lessonNode = studyNodes[0],
@@ -355,7 +356,7 @@ try {
       `mobile_study_other_${engine}`,
       "fixture-password-123",
     );
-    store.selectCertificate(other.id, "sichuan-upgrading-computer");
+    store.selectCertificate(other.id, "hcia-datacom");
     store.saveAccountEntitlement(other.id, {
       plan: "vip",
       expiresAt: new Date(Date.now() + 86400000).toISOString(),
@@ -374,10 +375,28 @@ try {
       otherPage.getByRole("dialog").getByText("切换备考目标", { exact: true }),
     ).toBeVisible();
     await otherPage.context().close();
+
+    const upgradingUser = await store.register(`mobile_sc_study_${engine}`, "fixture-password-123");
+    store.selectCertificate(upgradingUser.id, "sichuan-upgrading-computer");
+    store.saveAccountEntitlement(upgradingUser.id, { plan: "vip", expiresAt: new Date(Date.now() + 86400000).toISOString() });
+    const upgradingPage = await userPage(upgradingUser, engine === "webkit" ? "dark" : "light");
+    await upgradingPage.getByRole("button", { name: "进入 AI 精炼", exact: true }).click();
+    await upgradingPage.getByLabel("搜索知识点", { exact: true }).fill("ABS");
+    await expect(upgradingPage.getByRole("button", { name: "Excel ABS：绝对值，未读", exact: true })).toBeVisible();
+    await upgradingPage.getByRole("button", { name: "Excel ABS：绝对值，未读", exact: true }).click();
+    await expect(upgradingPage.getByRole("tab", { name: "填空练习", exact: true })).toBeDisabled();
+    await expect(upgradingPage.getByText("Excel ABS：绝对值", { exact: true }).filter({ visible: true })).toBeVisible();
+    await upgradingPage.getByRole("button", { name: "我学完了，开始练习", exact: true }).click();
+    await upgradingPage.getByLabel("第 1 空答案", { exact: true }).fill("ABS");
+    await upgradingPage.getByRole("button", { name: "提交本题", exact: true }).click();
+    await expect(upgradingPage.getByText("全部答对了", { exact: true }).filter({ visible: true })).toBeVisible();
+    await noOverflow(upgradingPage);
+    await upgradingPage.screenshot({ path: path.join(out, `${engine}-sichuan-practice.png`) });
+    await upgradingPage.context().close();
     await browser.close();
     browser = null;
     console.log(
-      `${engine}: VIP entry, lessons, teacher recovery, contextual hints, grading, feedback, draft navigation, progress restore, membership and certificate gates passed`,
+      `${engine}: VIP entry, Sichuan split lessons and practice, teacher recovery, grading, feedback, drafts, progress, membership and certificate gates passed`,
     );
   }
   assert.deepEqual(errors, []);

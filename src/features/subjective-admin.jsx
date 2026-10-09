@@ -79,6 +79,9 @@ export function SubjectiveAdmin({ navigate }) {
     lessonReview.nodeAligned === true && selected.data.bundle.questions.every((question) =>
       questionAccepted(selected.data.review.questions.find((item) => item.id === question.id)));
   const node = data?.nodes.find((item) => item.id === nodeId);
+  const course = data?.courses.find((item) => item.id === node?.certificateId);
+  const courseNodes = data?.nodes.filter((item) => item.certificateId === node?.certificateId) || [];
+  const authoredReview = selected?.data.reviewMethod === "authored-curriculum";
   const currentJob = data?.jobs.find((item) => item.node_id === nodeId && ["queued", "running"].includes(item.status));
   const pendingCount = data?.jobs.filter((item) => ["queued", "running"].includes(item.status)).length || 0;
   const queuedCount = data?.jobs.filter((item) => item.status === "queued").length || 0;
@@ -87,10 +90,10 @@ export function SubjectiveAdmin({ navigate }) {
   const bulk = async () => {
     setBulkBusy(true); setError(""); setNotice(""); setBulkResult(null);
     try {
-      const result = await api("/admin/study/generations/bulk", {}, "POST");
+      const result = await api("/admin/study/generations/bulk", { certificateId: node.certificateId }, "POST");
       if (!live.current) return;
       setBulkResult(result);
-      setNotice(`全科排队完成：新增 ${result.queued} 节，复用处理中任务 ${result.reused} 节，跳过已发布 ${result.published} 节和待审核 ${result.awaitingReview} 节。`);
+      setNotice(`${course.name}排队完成：新增 ${result.queued} 节，复用处理中任务 ${result.reused} 节，跳过已发布 ${result.published} 节和待审核 ${result.awaitingReview} 节。`);
       await reload();
     } catch (failure) { if (live.current) setError(failure.message); }
     finally { if (live.current) setBulkBusy(false); }
@@ -139,32 +142,34 @@ export function SubjectiveAdmin({ navigate }) {
     {notice && <div className="ss-notice" role="status"><CircleCheckIcon /><span>{notice}</span></div>}
     {!data ? <div className="ss-state"><LoaderCircle className="spin" /><p>正在读取审核队列…</p></div> : <>
       <section className="ss-bulk-panel" aria-label="全科课程生成">
-        <div><h3>网络工程师全科目录</h3><p>{data.chapterCount} 章 · {data.topicCount} 个知识点 · {data.nodes.length} 节课。OSI 七层模型已拆成 7 个独立小节。</p>
-          <p>每次只生成一节；AI 确认讲解正确、符合知识点且题目通过审核后自动上架。新任务每日上限 {data.configuredDailyGenerationLimit ?? data.dailyGenerationLimit} 节。当前 {queuedCount} 节排队、{pendingCount - queuedCount} 节正在生成、{reviewCount} 节待上架、{publishCount} 节已发布。</p>
-          {bulkResult && <p className="ss-bulk-source-note">本批 {bulkResult.questionBacked} 节有已复核题目可参考；{bulkResult.outlineOnly} 节仅有已审核考纲范围，审核时请重点核对。预计分 {bulkResult.batchesApproxDays} 天执行。</p>}
+        <div><h3>{course?.name || "当前课程"}全科目录</h3><p>{course?.chapterCount || 0} 章 · {course?.topicCount || 0} 个知识点 · {courseNodes.length} 节课。每个小节独立学习和练习。</p>
+          <p>每次只生成一节；AI 确认讲解正确、符合知识点且题目通过审核后自动上架。新任务每日上限 {data.configuredDailyGenerationLimit ?? data.dailyGenerationLimit} 节。全部课程当前 {queuedCount} 节排队、{pendingCount - queuedCount} 节正在生成、{reviewCount} 节待上架、{publishCount} 节已发布。</p>
+          {bulkResult && <p className="ss-bulk-source-note">本批 {bulkResult.questionBacked} 节有已复核题目、{bulkResult.curriculumBacked || 0} 节有已核对课程稿可参考；{bulkResult.outlineOnly} 节仅有考纲范围，审核时请重点核对。预计分 {bulkResult.batchesApproxDays} 天执行。</p>}
         </div>
         <div className="ss-actions">
           {queuedCount > 0 && <button disabled={runQueueBusy || bulkBusy} onClick={() => void runQueued()}>{runQueueBusy ? <LoaderCircle className="spin" size={17} /> : <Sparkles size={17} />}{runQueueBusy ? "正在启动" : `逐节处理剩余 ${queuedCount} 节`}</button>}
           {reviewCount > 0 && <button disabled={publishBusy || bulkBusy || runQueueBusy} onClick={() => void publishAccepted()}>{publishBusy ? <LoaderCircle className="spin" size={17} /> : <Check size={17} />}{publishBusy ? "逐节上架中" : `上架已通过审核的 ${reviewCount} 节`}</button>}
-          <button className="primary" disabled={bulkBusy || !data.nodes.length} onClick={() => void bulk()}>{bulkBusy ? <LoaderCircle className="spin" size={17} /> : <Sparkles size={17} />}{bulkBusy ? "正在排入队列" : "排队生成全科课程"}</button>
+          <button className="primary" disabled={bulkBusy || !courseNodes.length} onClick={() => void bulk()}>{bulkBusy ? <LoaderCircle className="spin" size={17} /> : <Sparkles size={17} />}{bulkBusy ? "正在排入队列" : "排队生成当前科目课程"}</button>
         </div>
       </section>
       <div className="ss-admin-layout">
         <form className="ss-production" onSubmit={generate}><h3><Sparkles size={19} />生成讲解与题目</h3>
-          <label htmlFor="ss-admin-node">章节、知识点与小节</label><select id="ss-admin-node" disabled={busy} value={nodeId} onChange={(event) => setNodeId(event.target.value)}>{data.nodes.map((item) => <option key={item.id} value={item.id}>{item.chapter} / {item.parentName ? `${item.parentName} · 第${item.sublesson.order}层 ${item.sublesson.title}` : item.name}</option>)}</select>
+          <label htmlFor="ss-admin-course">课程科目</label><select id="ss-admin-course" disabled={busy || bulkBusy} value={node?.certificateId || ""} onChange={(event) => { setNodeId(data.nodes.find((item) => item.certificateId === event.target.value)?.id || ""); setBulkResult(null); }}>{data.courses.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}</select>
+          <label htmlFor="ss-admin-node">章节、知识点与小节</label><select id="ss-admin-node" disabled={busy || bulkBusy} value={nodeId} onChange={(event) => setNodeId(event.target.value)}>{courseNodes.map((item) => <option key={item.id} value={item.id}>{item.chapter} / {item.parentName ? `${item.parentName} · 第${item.sublesson.order}节 ${item.sublesson.title}` : item.name}</option>)}</select>
           {node && <p className="ss-muted">本课范围：{node.scope}{node.sublesson && " 本节独立生成、审核和发布。"}</p>}
           <label htmlFor="ss-reference">已确认的参考资料</label><textarea id="ss-reference" rows={10} maxLength={6000} disabled={busy || referenceLoading} value={reference} onChange={(event) => { referenceTouched.current = true; setReference(event.target.value); }} placeholder="粘贴已确认的知识说明、教材要点或参考题解析。请注明来源和版本。" />
-          <p className="ss-muted">{referenceLoading ? "正在查找本站已复核的参考题…" : "系统会附上已审核考纲范围和匹配的本站复核题；你也可以补充教材要点。AI 会重点审核知识讲解是否正确、是否符合当前知识点，再检查题目和解析。"}</p>
+          <p className="ss-muted">{referenceLoading ? "正在读取本课参考资料…" : "系统会附上考纲范围与已核对课程稿或匹配的复核题；你也可以补充教材要点。AI 会重点审核知识讲解是否正确、是否符合当前小节，再检查题目和解析。"}</p>
           <button className="primary" disabled={busy || referenceLoading || reference.trim().length < 30}>{busy ? <LoaderCircle className="spin" size={17} /> : <Sparkles size={17} />}{busy ? "正在准备" : packages.length > 0 ? "生成新版本" : "生成讲解与填空题"}</button>
           {job && <div className="ss-job-state" role="status"><strong>{job.stage}</strong><p>离开页面后任务仍会继续。{job.status === "rejected" && "请查看审核意见，补充资料后重新生成。"}</p></div>}
         </form>
         <section className="ss-production-preview" aria-label="课程预览"><h3><Eye size={19} />预览与发布</h3>
           {packages.length > 0 && <label htmlFor="ss-package-version">内容版本<select id="ss-package-version" value={selected?.id || ""} disabled={busy} onChange={(event) => setPackageId(event.target.value)}>{packages.map((item) => <option key={item.id} value={item.id}>{date(item.created_at)} · {stateNames[item.status]}</option>)}</select></label>}
           {selected ? <><div className="ss-publication-status"><ShieldCheck size={17} /><span>{stateNames[selected.status]}</span></div><LessonContent lesson={selected.data.bundle.lesson} />
-            <section className="ss-review-summary" aria-label="知识讲解 AI 审核">
-              <h3>知识讲解 AI 审核</h3>
+            <section className="ss-review-summary" aria-label={authoredReview ? "知识讲解课程稿核对" : "知识讲解 AI 审核"}>
+              <h3>{authoredReview ? "知识讲解课程稿核对" : "知识讲解 AI 审核"}</h3>
               <dl><div><dt>知识正确性</dt><dd className={lessonReview.knowledgeCorrect === false ? "ss-error" : ""}>{reviewLabel(lessonReview.knowledgeCorrect)}</dd></div><div><dt>知识点匹配</dt><dd className={lessonReview.nodeAligned === false ? "ss-error" : ""}>{reviewLabel(lessonReview.nodeAligned)}</dd></div></dl>
               <p>{lessonReview.reason}</p>
+              {authoredReview && <p className="ss-muted">本站原创课程稿经 Codex 按考纲核对；此记录来自课程编写，不是平台上游 AI 的独立审核。</p>}
               {!reviewAccepted && <p className="ss-error">本版审核未通过或结果不完整。请按审核意见补充参考资料，生成新版本后再发布。</p>}
             </section>
             <details className="ss-review-detail"><summary>查看审核参考资料</summary><pre>{selected.data.reference}</pre></details>

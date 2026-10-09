@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   ArrowRight,
+  ArrowUpRight,
   BookOpen,
   CalendarCheck2,
   Check,
@@ -19,6 +20,7 @@ import {
   TriangleAlert,
 } from "lucide-react";
 import { MembershipBadge } from "./components/membership-badge.jsx";
+import { membershipPurchaseUrl } from "./membership-purchase.js";
 import "./vip.css";
 import "./subjective-study.css";
 
@@ -395,7 +397,7 @@ export function VipView({
               <h2 id="vip-plans-title">找到适合你的学习节奏</h2>
               <p>三档权益，按练习频率选择</p>
             </div>
-            <span>30 天权益 · 不自动续费</span>
+            <span>参考价 · 30 天权益 · 不自动续费</span>
           </div>
           <fieldset className="vip-plan-grid">
             <legend className="vip-sr-only">选择会员套餐以查看权益</legend>
@@ -453,13 +455,13 @@ export function VipView({
               </strong>
               <span>{selectedPlan.detail}</span>
             </div>
-            <button type="button" className="primary" onClick={openRedemption}>
-              使用兑换码开通
-              <ArrowRight size={16} />
-            </button>
+            <div className="vip-purchase-actions">
+              <a className="vip-purchase-link" href={membershipPurchaseUrl} target="_blank" rel="noopener noreferrer">购买会员兑换码<ArrowUpRight size={16} aria-hidden="true" /></a>
+              <button type="button" onClick={openRedemption}>已有兑换码，立即兑换<Ticket size={16} aria-hidden="true" /></button>
+            </div>
           </div>
           <p className="vip-purchase-note">
-            当前通过兑换码开通，到账等级与时长以兑换码为准。
+            请在购买页选择 {selectedPlan.name}。售价与会员时长以购买页为准，购买后回到考匠输入兑换码，权益到账后即可使用。
           </p>
         </section>
 
@@ -474,7 +476,7 @@ export function VipView({
             </span>
             <div>
               <h2 id="vip-redemption-title">兑换会员</h2>
-              <p>已有兑换码？在这里开通</p>
+              <p>购买后在这里兑换，权益绑定当前账号</p>
             </div>
           </div>
           <div className="vip-redeem-account">
@@ -524,6 +526,7 @@ export function VipView({
               每码限用一次。会员有效期内支持同等级续期；其他等级可在到期后兑换。
             </p>
           </form>
+          <a className="vip-redeem-buy-link" href={membershipPurchaseUrl} target="_blank" rel="noopener noreferrer">还没有兑换码？前往购买<ArrowUpRight size={15} aria-hidden="true" /></a>
           {result && (
             <div className="vip-redeem-success" role="status">
               <CircleCheck size={21} />

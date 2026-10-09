@@ -1,5 +1,4 @@
 import crypto from "node:crypto";
-import { readFileSync } from "node:fs";
 import { z } from "zod";
 import { createStudyStore } from "./study-store.js";
 import { createStudyAI } from "./study-ai.js";
@@ -9,15 +8,14 @@ import { gradeStudyQuestion, summarizeStudyGrade } from "./study-grading.js";
 import { checkAiCancellation, positiveInteger } from "./ai-tasks.js";
 import { redact } from "./security.js";
 import { normalizeStudyText, studyPromptAttack, unsafeStudyTeacherAnswer } from "./study-security.js";
-
-const deploymentStudySeeds = JSON.parse(
-  readFileSync(new URL("./study-seeds/network-engineer.json", import.meta.url), "utf8"),
-);
-if (deploymentStudySeeds.schemaVersion !== 1 || !Array.isArray(deploymentStudySeeds.packages))
-  throw new Error("网络工程师课程部署种子格式无效");
+import { certificates } from "./certificates.js";
+import { deploymentStudySeeds } from "./study-seeds/index.js";
+const curriculumReferences = new Map(deploymentStudySeeds
+  .filter((item) => item.nodeId.startsWith("sichuan-upgrading-computer:"))
+  .map((item) => [item.nodeId, item]));
 
 export function registerStudyRoutes({ route, store, provider, requireAdmin, requestUserId, ai, requireAiService,
-  studyAI, studySeeds = deploymentStudySeeds.packages }) {
+  studyAI, studySeeds = deploymentStudySeeds }) {
   const content = createStudyStore(store.db);
   if (studySeeds) content.installPublishedSeeds(studySeeds);
   const teacher = studyAI || createStudyAI(provider, store);
@@ -33,8 +31,11 @@ export function registerStudyRoutes({ route, store, provider, requireAdmin, requ
       throw studyError("AI 精讲与练习仅限有效 VIP 会员，请先开通或续期", 403, "STUDY_MEMBERSHIP_REQUIRED");
     return { userId, plan: entitlement.plan };
   };
-  const nodeFor = (req, id) => studyNode(id, req.user?.certificateId);
+  const nodeFor = (req, id) => studyNode(id, req.user?.certificateId || "");
   const referenceForNode = (node) => {
+    const curriculum = curriculumReferences.get(node.id);
+    if (curriculum?.curriculumVersion === node.version)
+      return { reference: curriculum.reference, count: 0, referenceMode: "authored-curriculum" };
     const target = node.parentName || node.name;
     const aliases = new Set([target, ...(node.aliases || [])].map((value) => String(value).trim()).filter(Boolean));
     const layerPatterns = {
@@ -305,7 +306,14 @@ export function registerStudyRoutes({ route, store, provider, requireAdmin, requ
   route("get", "/api/admin/study/overview", (req) => {
     requireAdmin(req);
     const topics = new Set(studyNodes.map((node) => node.parentId || node.id));
-    return { nodes: studyNodes, topicCount: topics.size, chapterCount: new Set(studyNodes.map((node) => node.chapter)).size,
+    const courses = certificates.filter((item) => studyNodes.some((node) => node.certificateId === item.id))
+      .map(({ id, name }) => {
+        const nodes = studyNodes.filter((node) => node.certificateId === id);
+        return { id, name, lessonCount: nodes.length,
+          topicCount: new Set(nodes.map((node) => node.parentId || node.id)).size,
+          chapterCount: new Set(nodes.map((node) => node.chapter)).size };
+      });
+    return { nodes: studyNodes, courses, topicCount: topics.size, chapterCount: new Set(studyNodes.map((node) => node.chapter)).size,
       packages: content.packages().map((item) => ({ ...item,
         current: content.published(studyNode(item.node_id))?.id === item.id,
       })), jobs: content.jobs(), feedback: content.feedbackList(),
@@ -334,9 +342,10 @@ export function registerStudyRoutes({ route, store, provider, requireAdmin, requ
   });
   route("post", "/api/admin/study/generations/bulk", (req) => {
     requireAdmin(req);
-    const body = z.object({ chapters: z.array(z.string().min(1).max(120)).max(10).optional() }).strict().parse(req.body || {});
+    const body = z.object({ certificateId: z.enum(["network-engineer", "sichuan-upgrading-computer"]).default("network-engineer"),
+      chapters: z.array(z.string().min(1).max(120)).max(10).optional() }).strict().parse(req.body || {});
     const chapterFilter = body.chapters?.length ? new Set(body.chapters) : null;
-    const selected = studyNodes.filter((node) => node.certificateId === "network-engineer" &&
+    const selected = studyNodes.filter((node) => node.certificateId === body.certificateId &&
       (!chapterFilter || chapterFilter.has(node.chapter)));
     const references = selected.map((node) => ({ node, ...referenceForNode(node) }));
     const packages = content.packages();
@@ -350,11 +359,13 @@ export function registerStudyRoutes({ route, store, provider, requireAdmin, requ
       if (draft) { awaitingReview++; return false; }
       return true;
     });
-    requireAiService();
+    if (entries.length) requireAiService();
     const dailyLimit = positiveInteger(process.env.STUDY_GENERATION_DAILY_LIMIT, 20, 200);
     const queued = content.queueBulk(entries, requestUserId(req), dailyLimit);
     drain();
-    return { ...queued, selected: selected.length, published, awaitingReview, outlineOnly: references.filter((item) => item.referenceMode === "outline-only").length,
+    return { ...queued, certificateId: body.certificateId, selected: selected.length, published, awaitingReview,
+      curriculumBacked: references.filter((item) => item.referenceMode === "authored-curriculum").length,
+      outlineOnly: references.filter((item) => item.referenceMode === "outline-only").length,
       questionBacked: references.filter((item) => item.referenceMode === "question-bank").length, dailyLimit,
       batchesApproxDays: Math.ceil((queued.queued + queued.reused) / dailyLimit) };
   });

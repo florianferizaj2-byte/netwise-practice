@@ -1,8 +1,10 @@
 # 考匠 AceExam
 
-考匠（AceExam，Ace + Exam）是一个面向职业认证考试的机考练习与模拟平台。用户共用作者提供的 AI 服务，根据错题生成针对性变式题，并按功能消耗账号额度；通过审核的题目可以分享给同证书的其他用户，让题库在使用过程中持续增长。
+考匠（AceExam，Ace + Exam）是一个面向职业认证与升学考试的练习与模拟平台。用户共用作者提供的 AI 服务，根据错题生成针对性变式题，并按功能消耗账号额度；通过审核的题目可以分享给同证书的其他用户，让题库在使用过程中持续增长。
 
-**Android 最新版：v0.4.0** · [下载 APK](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.0/kaojiang-v0.4.0.apk) · [SHA-256 校验文件](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.0/kaojiang-v0.4.0.apk.sha256) · [发布页](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v0.4.0)
+**Android 最新版：v0.4.1** · [下载 APK](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.1/kaojiang-v0.4.1.apk) · [SHA-256 校验文件](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.1/kaojiang-v0.4.1.apk.sha256) · [发布页](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v0.4.1)
+
+**会员兑换码购买：**[考匠兑换码商店](https://catfk.com/shop/aceexam)。购买后回到考匠的 VIP 或兑换码页面开通，权益绑定当前账号；套餐、售价和时长以购买页为准。
 
 电脑端使用响应式网页；iPhone / iPad 通过 `/app/` 使用与 Android 共用源码的移动界面，可添加到主屏幕。两个移动端共用今日、练习、错题、考试、VIP、我的六个页面及账号接口。
 
@@ -16,9 +18,11 @@
 - 安装、更新、缓存范围和上线步骤见 [苹果移动版说明](docs/apple-web.md)。本地检查与真实 iPhone 验收、线上部署分别记录。
 - 本次由站点维护者部署。宝塔可上传已构建的更新包，或拉取源码后安装两处依赖并完整构建；具体步骤见说明中的“自行部署”。
 
-## VIP AI 精讲与练习 · 2026-10-06（部署准备）
+## VIP AI 精讲与练习 · 2026-10-09（部署准备）
 
-VIP「AI 精讲与练习」包含逐课讲解、填空练习、短答 AI 老师和管理员判分复核。网络工程师 10 章、147 个课时及 882 道填空题已整理并随服务端课程种子发布；新环境启动时会自动导入，已有有效课程和学习记录会保留。运行 `npm run verify` 检查构建与流程。部署步骤见[精讲与练习说明](docs/vip-subjective-study.md)；本次 GitHub 上传不代表站点已部署上线。
+VIP「AI 精讲与练习」包含逐课讲解、填空练习、短答 AI 老师和管理员判分复核。现有网络工程师 10 章、147 节课、882 道填空题；新增四川专升本计算机基础 7 章，将 22 个知识点拆成 141 节课，配套 846 道原创填空题。每课含要点、示例和易错提醒，基础、理解、应用各两题；进制方法、Excel 三种引用和考纲列出的 18 个函数均分别讲解。详细拆解见[专升本课程说明](docs/sichuan-upgrading-computer.md#ai-精讲与练习--2026-10-09)。
+
+两科课程随服务端文件部署，启动时自动补齐，保留已有有效课程、下架决定和学习记录。管理页按科目选择课程；电脑网页和 App 共用学习接口。运行 `npm run verify` 检查构建与流程，部署步骤见[精讲与练习说明](docs/vip-subjective-study.md)。本次内容更新需同步服务端并重启，源码准备完成不代表站点已上线。
 
 ## 电脑网页更新 · 2026-09-29
 
@@ -39,7 +43,14 @@ VIP「AI 精讲与练习」包含逐课讲解、填空练习、短答 AI 老师�
 - 四川省专升本计算机基础：206 道题（100 道原创练习 + 45 道现有题库共用题 + 61 道西昌学院 2011 年真题），包含 7 个考纲模块及知识点、考点与练习建议；见[模块说明](docs/sichuan-upgrading-computer.md)
 - 共 9,811 道内置唯一题目，共用题只入库一次，题库启动时自动校验并同步到 SQLite
 
-## 最近发布 · 2026-10-09 · v0.4.0
+## 最近发布 · 2026-10-09 · v0.4.1
+
+- 电脑 VIP 中心、iPhone / iPad 移动网页、Android VIP 页及兑换页加入购买兑换码入口。网页在新标签打开购买页，Android 调用浏览器；小程序在“我的”页复制购买链接，并支持输入兑换码开通或续期。
+- 新增四川专升本计算机基础 141 节精讲、846 道填空练习，按知识点拆课；管理页可按科目维护课程。课程内容需同步当前服务端并重启。
+- v0.4.1（versionCode 25）安装包约 70.2 MiB，沿用正式签名；附件包括 APK、SHA-256 和更新说明，见 [GitHub Releases](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v0.4.1)。
+- 已核对 APK 版本、签名、生产接口和购买地址；购买链接、返回兑换、输入保留及权益刷新通过 Chromium / WebKit 检查。配套部署与验证范围见 [v0.4.1 发布说明](docs/release-v0.4.1.md)。上传 GitHub 后仍需由维护者部署网站与服务端，小程序另行发布。
+
+## 历史更新 · 2026-10-09 · v0.4.0
 
 - Android 新增 VIP AI 精讲与练习：逐课讲解、填空作答、AI 老师问答及判分复核，并同步当前移动端界面与学习流程。
 - v0.4.0（versionCode 24）安装包约 70.2 MiB，沿用正式签名；相同正式签名的 v0.3.3 至 v0.3.9 可覆盖更新。APK、校验文件与说明已上传 [GitHub Releases](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v0.4.0)。

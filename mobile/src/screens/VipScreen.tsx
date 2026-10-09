@@ -25,6 +25,7 @@ import {
 import { useScreenActive } from "../navigation/ScreenActivity";
 import { isAppleWeb, useTheme, useThemedStyles, type ThemeColors } from "../theme";
 import { SubjectiveStudyScreen } from "./subjective-study/SubjectiveStudyScreen";
+import { MembershipPurchaseLink } from "../components/MembershipPurchaseLink";
 
 const plans = [
   {
@@ -307,7 +308,7 @@ export function VipScreen({
         </View>
         <View style={styles.plansHeading}>
           <Text style={styles.sectionTitle}>选一个适合你的节奏</Text>
-          <Text style={styles.smallMuted}>30 天权益 · 不自动续费</Text>
+          <Text style={styles.smallMuted}>参考价 · 不自动续费</Text>
         </View>
         <View style={styles.planRow}>
           {plans.map((item) => {
@@ -385,16 +386,17 @@ export function VipScreen({
             <Text style={styles.benefitFooterText}>题组随时练</Text>
           </View>
         </View>
+        <MembershipPurchaseLink primary />
         <AnimatedPressable
           accessibilityRole="button"
           onPress={() => setRedeemOpen(true)}
-          style={styles.primary}
+          style={styles.redeemSecondary}
         >
-          <Text style={styles.primaryText}>使用兑换码开通会员</Text>
-          <AppIcon style={styles.primaryArrow}>→</AppIcon>
+          <Text style={styles.redeemSecondaryText}>使用兑换码开通会员</Text>
+          <AppIcon style={styles.redeemSecondaryText}>→</AppIcon>
         </AnimatedPressable>
         <Text style={styles.purchaseHint}>
-          当前通过兑换码开通，具体等级以兑换码为准。
+          请在购买页选择 {plan.name}。售价与会员时长以购买页为准，购买后回到考匠兑换。
         </Text>
         <View style={styles.apiSection}>
           <AnimatedPressable
@@ -704,10 +706,15 @@ const createStyles = (c: ThemeColors) =>
     primaryArrow: { color: c.white, fontSize: 22 },
     purchaseHint: {
       textAlign: "center",
-      color: c.textFaint,
-      fontSize: 11,
+      color: c.textMuted,
+      fontSize: 13,
+      lineHeight: 21,
       marginTop: 10,
     },
+    redeemSecondary: { minHeight: 48, marginTop: 10, paddingVertical: 13, paddingHorizontal: 18,
+      borderColor: c.border, borderWidth: 1, borderRadius: 14, flexDirection: "row",
+      justifyContent: "space-between", alignItems: "center", gap: 10 },
+    redeemSecondaryText: { color: c.brand, fontSize: 16, fontWeight: "600" },
     apiSection: {
       borderTopWidth: StyleSheet.hairlineWidth,
       borderTopColor: c.border,

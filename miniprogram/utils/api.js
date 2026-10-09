@@ -175,4 +175,6 @@ module.exports = {
   communityMessages,
   sendCommunityMessage,
   updateCommunityProfile,
+  accountEntitlements: () => request('/account/entitlements'),
+  redeemMembership: (code) => request('/account/redeem', { method: 'POST', data: { code } }),
 };

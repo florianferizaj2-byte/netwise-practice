@@ -45,6 +45,8 @@
 .ss-workspace { min-width: 0; background: var(--ss-paper); border: 1px solid var(--ss-border); border-radius: 10px; }
 .ss-sublesson-selector { padding: 16px 24px 0; }
 .ss-sublesson-selector > span { display: block; font-size: 12px; color: var(--ss-muted); margin-bottom: 8px; }
+.ss-sublesson-selector > label { margin-bottom: 8px; }
+.ss-sublesson-selector select { width: 100%; margin-bottom: 12px; }
 .ss-sublesson-selector > div { display: flex; gap: 7px; overflow-x: auto; padding: 0 0 12px; border-bottom: 1px solid var(--ss-border); }
 .ss-sublesson-selector button { flex: 0 0 auto; min-height: 36px; padding: 6px 11px; border: 1px solid var(--ss-border); border-radius: 6px; background: #ffffff; color: var(--ss-ink); font-size: 12px; }
 .ss-sublesson-selector button small { display: inline-grid; place-items: center; width: 19px; height: 19px; border-radius: 50%; background: var(--ss-tint); color: var(--ss-muted); }

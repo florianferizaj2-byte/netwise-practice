@@ -540,7 +540,7 @@ export function SubjectiveStudyScreen({
                     ? "请重新同步课程目录，进度会随账号保存。"
                     : !catalog.access
                       ? "先读懂一节短课，再用填空检验理解。卡住的地方，随时问老师。有效 VIP、SVIP、SSVIP 均可使用。"
-                      : "当前已开放网络工程师课程。你可以切换备考目标开始学习，也可以继续当前科目的题库练习。"}
+                      : "当前已开放网络工程师和四川专升本计算机基础课程。你可以切换备考目标开始学习，也可以继续当前科目的题库练习。"}
               </Text>
               {!!error && <StudyNotice>{error}</StudyNotice>}
               {!preview && !!user && !catalog && (
@@ -619,7 +619,7 @@ export function SubjectiveStudyScreen({
               accessibilityLabel="搜索知识点"
               value={search}
               onChangeText={setSearch}
-              placeholder="搜索知识点，例如 OSI、子网"
+              placeholder="搜索知识点或小节"
               placeholderTextColor={colors.textMuted}
               style={s.search}
             />

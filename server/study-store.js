@@ -89,7 +89,7 @@ export function createStudyStore(db) {
     },
     packages() { return db.prepare("SELECT * FROM study_packages ORDER BY created_at DESC LIMIT 500").all().map(unpack); },
     installPublishedSeeds(records, actor = "system:study-seed") {
-      if (!Array.isArray(records) || records.length !== studyNodes.length)
+      if (!Array.isArray(records) || !records.length)
         throw new Error("部署课程种子数量与当前课程目录不一致");
       const seen = new Set();
       const prepared = records.map((record) => {
@@ -103,9 +103,12 @@ export function createStudyStore(db) {
           throw new Error(`部署课程种子复核未通过：${node.id}`);
         if (typeof record.reference !== "string" || record.reference.length > 6000)
           throw new Error(`部署课程种子参考资料无效：${node.id}`);
-        return { node, bundle, review, reference: record.reference, contentHash: studyHash(bundle) };
+        return { node, bundle, review, reference: record.reference, contentHash: studyHash(bundle),
+          reviewMethod: record.reviewMethod === "authored-curriculum" ? record.reviewMethod : null };
       });
-      if (seen.size !== studyNodes.length)
+      const certificateIds = new Set(prepared.map((seed) => seed.node.certificateId));
+      const expectedNodes = studyNodes.filter((node) => certificateIds.has(node.certificateId));
+      if (seen.size !== expectedNodes.length || expectedNodes.some((node) => !seen.has(node.id)))
         throw new Error("部署课程种子未覆盖全部课程小节");
       return transaction(() => {
         let installed = 0, preserved = 0;
@@ -128,7 +131,8 @@ export function createStudyStore(db) {
           db.prepare(`INSERT INTO study_packages (id,node_id,certificate_id,curriculum_version,content_hash,status,data,created_by,created_at,published_at)
             VALUES (?,?,?,?,?,'published',?,?,?,?)`).run(id, seed.node.id, seed.node.certificateId,
             seed.node.version, seed.contentHash,
-            JSON.stringify({ bundle: seed.bundle, review: seed.review, reference: seed.reference }),
+            JSON.stringify({ bundle: seed.bundle, review: seed.review, reference: seed.reference,
+              ...(seed.reviewMethod ? { reviewMethod: seed.reviewMethod } : {}) }),
             actor, stamp, stamp);
           db.prepare(`INSERT INTO study_publications (node_id,curriculum_version,package_id) VALUES (?,?,?)
             ON CONFLICT(node_id,curriculum_version) DO UPDATE SET package_id=excluded.package_id`)

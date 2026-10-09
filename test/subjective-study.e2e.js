@@ -10,6 +10,8 @@ import { OpenAICompatibleProvider } from "../server/ai.js";
 import { mockAI } from "./ai-fixture.js";
 import { mockStudyAI, studyReference } from "./study-fixture.js";
 import { launchTestBrowser } from "./helpers/browser.js";
+import { deploymentStudySeeds } from "../server/study-seeds/index.js";
+const upgradingSeeds = deploymentStudySeeds.filter((item) => item.nodeId.startsWith("sichuan-upgrading-computer:"));
 
 Object.assign(process.env, { AI_MASTER_KEY: crypto.randomBytes(32).toString("base64"),
   AI_SERVICE_API_KEY: "study-browser-fixture", AI_SERVICE_BASE_URL: "https://ai.example.test/v1",
@@ -23,7 +25,7 @@ store.db.prepare("UPDATE users SET is_admin=1 WHERE id=?").run(owner.id);
 for (const user of [owner, learner, free]) store.selectCertificate(user.id, "network-engineer");
 store.saveAccountEntitlement(learner.id, { plan: "vip", expiresAt: new Date(Date.now() + 86400000).toISOString() });
 const app = await createApp({ store, provider: new OpenAICompatibleProvider(store, { fetch: mockAI() }),
-  studyAI: fake, studySeeds: null, production: true });
+  studyAI: fake, studySeeds: upgradingSeeds, production: true });
 const server = app.listen(0, "127.0.0.1"); await new Promise((resolve) => server.once("listening", resolve));
 const base = `http://127.0.0.1:${server.address().port}`;
 let browser;
@@ -128,6 +130,39 @@ try {
   await expect(admin.getByRole("heading", { name: "管理员面板", exact: true })).toBeVisible();
   await expect(admin.getByRole("tab", { name: "AI 精讲与练习", exact: true })).toHaveAttribute("aria-selected", "true");
 
+  await admin.getByLabel("课程科目", { exact: true }).selectOption("sichuan-upgrading-computer");
+  await expect(admin.locator(".ss-bulk-panel")).toContainText("7 章 · 22 个知识点 · 141 节课");
+  await expect(admin.getByRole("region", { name: "知识讲解课程稿核对", exact: true })).toBeVisible();
+  await expect(admin.getByLabel("章节、知识点与小节", { exact: true }).locator("option")).toHaveCount(141);
+  await admin.getByRole("button", { name: "排队生成当前科目课程", exact: true }).click();
+  await expect(admin.getByRole("status")).toContainText("跳过已发布 141 节");
+  assert.equal(fake.generationCalls, 2, "the published Sichuan curriculum causes no extra upstream generation");
+  await admin.screenshot({ path: "test-output/sichuan-study-admin.png", fullPage: true });
+
+  const upgradingUser = await store.register("study_browser_upgrading", "fixture-password-123");
+  store.selectCertificate(upgradingUser.id, "sichuan-upgrading-computer");
+  store.saveAccountEntitlement(upgradingUser.id, { plan: "vip", expiresAt: new Date(Date.now() + 86400000).toISOString() });
+  const upgradingPage = await userPage(upgradingUser);
+  await upgradingPage.goto(`${base}/#study`);
+  await expect(upgradingPage.locator(".ss-lesson")).toContainText("计算机特点与信息处理");
+  await upgradingPage.getByLabel("章节", { exact: true }).selectOption("办公自动化");
+  await upgradingPage.locator(".ss-topic-summary").filter({ hasText: "函数与数据处理" }).click();
+  await upgradingPage.locator(".ss-directory-units button").filter({ hasText: "Excel ABS：绝对值" }).click();
+  await expect(upgradingPage.locator(".ss-lesson")).toContainText("Excel ABS：绝对值");
+  await expect(upgradingPage.getByLabel("当前知识点的小节", { exact: true })).toBeVisible();
+  await upgradingPage.getByRole("button", { name: "我学完了，开始练习", exact: true }).click();
+  await upgradingPage.locator("#ss-answer-q1-b1").fill("ABS");
+  await upgradingPage.getByRole("button", { name: "提交答案", exact: true }).click();
+  await expect(upgradingPage.locator(".ss-result")).toContainText("全部答对了");
+  await upgradingPage.getByLabel("当前知识点的小节", { exact: true }).selectOption(upgradingSeeds.find((item) => item.nodeId.endsWith(":excel-sum")).nodeId);
+  await expect(upgradingPage.locator(".ss-lesson")).toContainText("Excel SUM：区域求和");
+  await expect(upgradingPage.getByRole("button", { name: "我学完了，开始练习", exact: true })).toBeVisible();
+  await upgradingPage.setViewportSize({ width: 375, height: 812 });
+  await expect(upgradingPage.locator(".sidebar")).not.toBeInViewport();
+  assert.ok(await upgradingPage.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1), "large split topic fits a narrow screen");
+  await upgradingPage.screenshot({ path: "test-output/sichuan-study-narrow.png", fullPage: true });
+  await upgradingPage.context().close();
+
   await page.setViewportSize({ width: 620, height: 1000 });
   await page.getByRole("tab", { name: "学习", exact: true }).click();
   await expect(page.getByLabel("知识点与小节", { exact: true })).toBeVisible();
@@ -151,7 +186,7 @@ try {
   await admin.goto(`${base}/#study`);
   await expect(admin.getByRole("heading", { name: "VIP 专属的学习与练习", exact: true })).toBeVisible();
   assert.equal(errors.length, 0, errors.join("\n"));
-  console.log("AI 精讲与练习浏览器检查通过：生成审核、发布、VIP 学习、攻击输入拦截、逐空判分、刷新恢复、到期收起内容、无会员管理员拦截和窄屏布局。");
+  console.log("AI 精讲与练习浏览器检查通过：两科目录、按科目管理、专升本独立小节学习与练习、生成审核、发布、VIP 学习、逐空判分、恢复和窄屏布局。");
 } finally {
   if (browser) await browser.close();
   await app.locals.stop(); await new Promise((resolve) => server.close(resolve)); store.db.close();

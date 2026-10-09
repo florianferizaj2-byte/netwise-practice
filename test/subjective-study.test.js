@@ -15,6 +15,7 @@ import { fixtureStudyBundle, fixtureStudyReview, studyReference, mockStudyAI, mo
 const deploymentSeeds = JSON.parse(fs.readFileSync(
   new URL("../server/study-seeds/network-engineer.json", import.meta.url), "utf8",
 ));
+const networkNodes = studyNodes.filter((node) => node.certificateId === "network-engineer");
 
 test("only literal reserved answers receive immediate credit; every differing answer needs review", () => {
   const cases = [
@@ -78,7 +79,7 @@ test("deployment seeds publish the full reviewed curriculum once and preserve it
   const second = app.locals.study.installPublishedSeeds(deploymentSeeds.packages);
   assert.deepEqual(second, { total: 147, installed: 0, preserved: 147 });
   let lessons = 0, questions = 0;
-  for (const node of studyNodes) {
+  for (const node of networkNodes) {
     const item = app.locals.study.published(node);
     assert.ok(item, `${node.id} is published`);
     const bundle = studyPackageSchema.parse(item.data.bundle);
@@ -108,7 +109,7 @@ test("fresh app startup imports deployment seeds before the study catalog is ser
   assert.equal(catalog.data.nodes.length, 147);
   assert.equal(catalog.data.nodes.filter((node) => node.available).length, 147);
   assert.equal(catalog.data.nodes.reduce((sum, node) => sum + (node.available ? 1 : 0), 0), 147);
-  assert.ok(app.locals.study.published(studyNodes.at(-1)));
+  assert.ok(app.locals.study.published(networkNodes.at(-1)));
 });
 
 async function fixture(t, studySeeds = null) {

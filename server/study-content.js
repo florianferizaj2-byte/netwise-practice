@@ -1,4 +1,5 @@
 import crypto from "node:crypto";
+import { readFileSync } from "node:fs";
 import { isIP } from "node:net";
 import { z } from "zod";
 import { certificates } from "./certificates.js";
@@ -23,7 +24,7 @@ const osiLayers = [
   ["application", "应用层", "第7层", "为应用进程提供网络服务接口，常见考点包括 HTTP、DNS、FTP、SMTP 等应用协议及其服务；这里的“应用”指网络服务层，不是用户界面的全部逻辑。"],
 ];
 
-export const studyNodes = (certificate?.taxonomy?.modules || [])
+const networkStudyNodes = (certificate?.taxonomy?.modules || [])
   .flatMap((module) => module.sections.flatMap((section) => section.knowledgePoints.flatMap((point) => {
     const parentId = `${certificate.id}:${point.code}`;
     if (point.name === "OSI七层模型") return osiLayers.map(([slug, title, orderLabel, scope], index) => {
@@ -40,8 +41,40 @@ export const studyNodes = (certificate?.taxonomy?.modules || [])
       aliases: point.aliases || [], version: studyHash(content).slice(0, 20) }];
   }))).map((node, order) => ({ ...node, order }));
 
-export function studyNode(id, certificateId = "network-engineer") {
-  const node = studyNodes.find((item) => item.id === id && item.certificateId === certificateId);
+const upgradingCertificate = certificates.find((item) => item.id === "sichuan-upgrading-computer");
+const upgradingCurriculum = z.object({
+  schemaVersion: z.literal(1), certificateId: z.literal("sichuan-upgrading-computer"),
+  lessons: z.array(z.object({ parentCode: z.string().min(1), slug: z.string().regex(/^[a-z][a-z0-9-]*$/),
+    title: z.string().min(2).max(90), scope: z.string().min(10).max(240) }).strict()).min(1),
+}).strict().parse(JSON.parse(readFileSync(new URL("./study-curricula/sichuan-upgrading-computer.json", import.meta.url), "utf8")));
+const upgradingPoints = upgradingCertificate.taxonomy.modules.flatMap((module) => module.sections
+  .flatMap((section) => section.knowledgePoints.map((point) => ({ module, section, point }))));
+const parentCodes = new Set(upgradingPoints.map(({ point }) => point.code));
+const lessonIds = new Set(upgradingCurriculum.lessons.map((item) => `${item.parentCode}:${item.slug}`));
+if (lessonIds.size !== upgradingCurriculum.lessons.length ||
+    upgradingCurriculum.lessons.some((item) => !parentCodes.has(item.parentCode)) ||
+    upgradingPoints.some(({ point }) => !upgradingCurriculum.lessons.some((item) => item.parentCode === point.code)))
+  throw new Error("四川专升本课程拆解未完整匹配当前考纲目录");
+const upgradingStudyNodes = upgradingPoints.flatMap(({ module, section, point }) => {
+  const units = upgradingCurriculum.lessons.filter((item) => item.parentCode === point.code);
+  const parentId = `${upgradingCertificate.id}:${point.code}`;
+  return units.map((unit, index) => {
+    const sublesson = { id: unit.slug, title: unit.title, order: index + 1, total: units.length };
+    const content = { chapter: module.name, section: section.name, name: point.name,
+      scope: unit.scope, aliases: point.aliases || [] };
+    return { id: `${parentId}:${unit.slug}`, parentId, parentName: point.name, sublesson,
+      certificateId: upgradingCertificate.id, code: point.code, ...content,
+      version: studyHash({ ...content, sublesson }).slice(0, 20) };
+  });
+}).map((node, order) => ({ ...node, order }));
+
+export const studyNodes = [...networkStudyNodes, ...upgradingStudyNodes];
+
+// Administrative jobs identify their course by its globally unique ID. Student
+// routes must also pass the account's certificate to enforce course isolation.
+export function studyNode(id, certificateId) {
+  const node = studyNodes.find((item) => item.id === id &&
+    (certificateId === undefined || item.certificateId === certificateId));
   if (!node) throw studyError("该知识点尚未开放或不属于当前证书", 404);
   return node;
 }

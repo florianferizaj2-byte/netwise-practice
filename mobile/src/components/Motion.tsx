@@ -113,6 +113,7 @@ export function EntranceView({
 type AnimatedPressableProps = Pick<
   PressableProps,
   | 'accessibilityLabel'
+  | 'accessibilityHint'
   | 'accessibilityRole'
   | 'accessibilityState'
   | 'disabled'

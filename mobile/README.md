@@ -1,8 +1,8 @@
 # 考匠移动端
 
-这是考匠的 Expo / React Native 移动端。Android 当前版本为 v0.4.0；当前源码继续复用现有 Node 后端，通过移动端 Bearer 会话连接生产 API。
+这是考匠的 Expo / React Native 移动端。Android 当前版本为 v0.4.1；当前源码继续复用现有 Node 后端，通过移动端 Bearer 会话连接生产 API。
 
-[下载 v0.4.0 APK](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.0/kaojiang-v0.4.0.apk) · [SHA-256 校验文件](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.0/kaojiang-v0.4.0.apk.sha256) · [发布页](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v0.4.0)
+[下载 v0.4.1 APK](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.1/kaojiang-v0.4.1.apk) · [SHA-256 校验文件](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.1/kaojiang-v0.4.1.apk.sha256) · [发布页](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v0.4.1)
 
 ## iPhone / iPad 网页版
 
@@ -31,13 +31,19 @@ npm start
 - 已安装 Android Studio 时，可以按 `a` 启动 Android 模拟器；
 - 需要连接真实后端时，复制 `.env.example` 为 `.env.local`，将 `EXPO_PUBLIC_API_URL` 改成电脑在局域网中的地址。
 
-App 保留开发期“进入预览模式”入口，用于查看动画和页面结构；真实登录通过移动端 Bearer 会话接入，证书选择后会请求首页学习数据。生产构建对应 `kaojiang-v0.4.0.apk`。启动时会后台请求 `/api/mobile/version`，低于服务端最低版本的旧 App 会强制显示最新版下载页；旧客户端调用受保护的移动端 API 也会被服务端拒绝并返回下载地址。
+App 保留开发期“进入预览模式”入口，用于查看动画和页面结构；真实登录通过移动端 Bearer 会话接入，证书选择后会请求首页学习数据。生产构建对应 `kaojiang-v0.4.1.apk`。启动时会后台请求 `/api/mobile/version`，低于服务端最低版本的旧 App 会强制显示最新版下载页；旧客户端调用受保护的移动端 API 也会被服务端拒绝并返回下载地址。
 
 版本过旧时，Android App 会优先提供应用内下载并调起系统安装器；系统仍会要求用户确认安装。页面同时保留浏览器下载入口，应用内下载失败或设备限制安装时可以使用浏览器方式。登录会话会保存在本机，正常关闭并重新打开 App 不需要重复登录；主动退出登录会清除本机会话。答题页采用紧凑布局，举报题目入口位于题干卡片右下角的三角感叹号图标。
 
 ## 正式签名
 
-Release 构建使用专用正式证书，Expo 重新生成 Android 工程后仍会应用该配置。配置位置和应用指纹见 [正式签名说明](RELEASE_SIGNING.md)。本次安装包为 `kaojiang-v0.4.0.apk`；相同正式签名的 v0.3.3 至 v0.3.9 可覆盖更新，从旧 Debug 签名版本切换时需要卸载旧 App 再安装，服务器数据库不受影响。
+Release 构建使用专用正式证书，Expo 重新生成 Android 工程后仍会应用该配置。配置位置和应用指纹见 [正式签名说明](RELEASE_SIGNING.md)。本次安装包为 `kaojiang-v0.4.1.apk`；相同正式签名的 v0.3.3 至 v0.4.0 可覆盖更新，从旧 Debug 签名版本切换时需要卸载旧 App 再安装，服务器数据库不受影响。
+
+## v0.4.1 更新
+
+- VIP 页和兑换码页新增“购买会员兑换码”，统一指向 [兑换码商店](https://catfk.com/shop/aceexam)。Android 调用浏览器，iPhone / iPad 网页在新标签打开；返回后在当前账号兑换。
+- 套餐卡标注参考价格，实际售价与时长以商店为准；打开购买链接不会自动开通权益，已有兑换码仍可直接输入。
+- 支持四川专升本计算机基础 141 节精讲、846 道填空练习，需同步服务端课程文件。Android versionCode 为 25，沿用正式签名；验证与配套部署见 [v0.4.1 发布说明](../docs/release-v0.4.1.md)。
 
 ## v0.4.0 更新
 

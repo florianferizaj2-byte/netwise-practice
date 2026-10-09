@@ -8,21 +8,32 @@
   </view>
 
   <view class="settings-card card">
+    <view class="setting-row" bindtap="openRedemption"><text>兑换码</text><text class="setting-value">开通 / 续期会员 <text class="setting-arrow">›</text></text></view>
     <view class="setting-row" bindtap="openAppearance"><text>设置</text><text class="setting-value">动画与外观 <text class="setting-arrow">›</text></text></view>
     <view class="setting-row" bindtap="openCertificate"><text>考试与题库</text><text class="setting-value">{{certificateName}} <text class="setting-arrow">›</text></text></view>
-    <view class="setting-row" bindtap="showAi"><text>AI 学习助手</text><text class="setting-value">按账号配置 <text class="setting-arrow">›</text></text></view>
+    <view class="setting-row" bindtap="showAi"><text>AI 学习助手</text><text class="setting-value">作者统一提供 <text class="setting-arrow">›</text></text></view>
     <view class="setting-row" bindtap="openNickname"><text>社区昵称</text><text class="setting-value">{{nickname}} <text class="setting-arrow">›</text></text></view>
     <view class="setting-row"><text>服务器地址</text><text class="setting-value">aceexam.top</text></view>
     <view class="setting-row"><text>关于考匠</text><text class="setting-value">微信小程序版</text></view>
   </view>
 
   <view class="ai-card card">
+    <view class="membership-heading"><text class="membership-title">会员与兑换码</text><text class="membership-tier">{{membershipLabel}}</text></view>
+    <text wx:if="{{membershipExpiresAt}}" class="membership-note">{{membershipExpiresAt}} 到期</text>
+    <text class="membership-note">购买兑换码后回到这里开通或续期，权益绑定当前考匠账号。</text>
+    <text wx:if="{{membershipError}}" class="error-text">{{membershipError}}</text>
+    <text wx:if="{{redeemNotice}}" class="membership-success">{{redeemNotice}}</text>
+    <button class="primary-button" bindtap="buyMembership">购买会员兑换码 · 复制链接</button>
+    <button class="secondary-button membership-redeem-button" bindtap="openRedemption" disabled="{{busy}}">已有兑换码，立即兑换</button>
+  </view>
+
+  <view class="ai-card card">
     <text class="ai-title">AI 学习服务</text>
-    <text class="ai-text">做题后可使用 AI 提示、错因解析、详细讲解和变式训练。AI Key 仍由你的账号配置，小程序不保存密钥。</text>
+    <text class="ai-text">做题后可使用 AI 提示、错因解析、详细讲解和变式训练。所有账号共用作者提供的 AI 服务，会员与签到额度按账号同步。</text>
   </view>
 
   <button class="primary-button sponsor-button" bindtap="openSponsor">赞助作者</button>
-  <text class="secure-note">AI Key 只保存于对应用户的后端设置，不会写入小程序。</text>
+  <text class="secure-note">会员权益按账号同步，购买后需使用兑换码开通。</text>
   <button class="logout-button" loading="{{busy}}" bindtap="logout">退出登录</button>
 
   <view wx:if="{{appearanceOpen}}" class="modal-mask" bindtap="closeAppearance">
@@ -36,7 +47,7 @@
   <view wx:if="{{aiOpen}}" class="modal-mask" bindtap="closeAi">
     <view class="modal-card" catchtap="noop">
       <text class="modal-title">AI 学习助手</text>
-      <text class="modal-text">AI 配置仍然属于当前考匠账号。小程序端会复用后端设置，不会把 API Key 写进微信端。</text>
+      <text class="modal-text">所有账号共用作者提供的 AI 服务，无需填写个人 API。会员与每日签到提供学习额度，使用时按对应功能扣除。</text>
       <button class="primary-button" bindtap="closeAi">知道了</button>
     </view>
   </view>
@@ -65,4 +76,20 @@
   </view>
 
   <tab-bar current="profile" bind:change="onTabChange" />
+
+  <view wx:if="{{redeemOpen}}" class="modal-mask" bindtap="closeRedemption">
+    <view class="modal-card" catchtap="noop">
+      <text class="modal-title">兑换会员</text>
+      <text class="modal-text">到账账号：{{user.username}}。购买后将兑换码填入下方，确认后开通或续期。</text>
+      <text class="redeem-label">会员兑换码</text>
+      <input class="modal-input" value="{{redeemCode}}" bindinput="onRedeemInput" bindconfirm="redeemMembership" maxlength="80" disabled="{{busy}}" placeholder="输入或粘贴兑换码" placeholder-class="input-placeholder" />
+      <text wx:if="{{redeemError}}" class="error-text">{{redeemError}}</text>
+      <text class="membership-note">每码限用一次；有效会员可用同等级码续期，其他等级请到期后兑换。</text>
+      <view class="modal-actions">
+        <button class="secondary-button" bindtap="closeRedemption" disabled="{{busy}}">取消</button>
+        <button class="primary-button" bindtap="redeemMembership" loading="{{busy}}" disabled="{{busy || !redeemCode}}">确认兑换</button>
+      </view>
+      <button class="membership-buy-text" bindtap="buyMembership">还没有兑换码？复制购买链接</button>
+    </view>
+  </view>
 </view>
