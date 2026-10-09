@@ -32,6 +32,10 @@ function studyNode(
 }
 
 export function studyCachePolicy(key: string): CachePolicy {
+  if (key === '/study/catalog') return { freshMs: 30_000, retainMs: 30_000, staleWhileRevalidate: false };
+  if (key.startsWith('/study/lessons/') || key.startsWith('/study/practice-sessions:resume:'))
+    return { freshMs: 300_000, retainMs: 300_000, staleWhileRevalidate: false };
+  if (key.startsWith('/study/teacher/')) return { freshMs: 30_000, retainMs: 30_000, staleWhileRevalidate: false };
   if (
     key === '/practice/catalog' ||
     (key.startsWith('/questions?') && !key.includes('random=1'))

@@ -59,7 +59,8 @@ export function useMembershipAccount(api, userId, page) {
     if (
       previous.current.userId === userId &&
       previous.current.page !== page &&
-      isMemberPage(page)
+      isMemberPage(page) &&
+      Date.now() - Math.max(refreshedAt.current, requestedAt.current) >= 60000
     )
       void reload();
     previous.current = { userId, page };

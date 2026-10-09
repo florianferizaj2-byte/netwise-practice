@@ -251,7 +251,7 @@ export function TodayScreen({
         </AnimatedPressable>
       </View>
       {catalogQuery.loading && !catalog && !preview ? (
-        <ActivityIndicator color={colors.brand} />
+        <ContentPlaceholder rows={3} />
       ) : (
         chapters.slice(0, 4).map((chapter) => (
           <AnimatedPressable
@@ -742,3 +742,4 @@ const styles = (c: ThemeColors) =>
     emptyTitle: { color: c.text, fontSize: 17, fontWeight: "600" },
     emptyLoader: { marginTop: 35 },
   });
+import { ContentPlaceholder } from '../components/ContentPlaceholder';

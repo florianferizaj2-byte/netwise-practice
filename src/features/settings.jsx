@@ -17,6 +17,7 @@ import {
   X,
 } from "lucide-react";
 import { api } from "../api.js";
+import { ContentPlaceholder } from "../components/content-placeholder.jsx";
 import { Heading, IconButton } from "../components/study-ui.jsx";
 
 export function SettingsView({
@@ -257,10 +258,7 @@ export function SettingsView({
         <ApiAccessNotice membership={membership} onOpenVip={onOpenVip} />
       )}
       {membership.account?.canManageAiService && settingsLoading && (
-        <div className="vip-config-loading" role="status">
-          <LoaderCircle className="spin" size={18} />
-          正在读取作者 AI 服务设置…
-        </div>
+        <ContentPlaceholder rows={3} />
       )}
       {membership.account?.canManageAiService && settingsError && (
         <div className="vip-config-error" role="alert">

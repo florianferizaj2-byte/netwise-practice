@@ -215,7 +215,7 @@ try {
     await expect(blank(1)).toHaveValue("1");
     requestIds.length = 0;
     loseResponse = true;
-    await button("提交本题").click();
+    await blank(1).press("Enter");
     await expect(page.getByRole("alert")).toContainText("你的填写已保留");
     await expect(blank(1)).toHaveValue("1");
     await button("提交本题").click();
@@ -233,7 +233,8 @@ try {
         .get(learner.id).count,
       1,
     );
-    await button("下一题").click();
+    await page.keyboard.press("Enter");
+    await expect(blank(1)).toBeFocused();
     await blank(1).fill("数位的权值");
     await blank(2).fill("2");
     fake.failGrade = true;

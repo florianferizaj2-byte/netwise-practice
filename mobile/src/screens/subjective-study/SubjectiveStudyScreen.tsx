@@ -12,7 +12,8 @@ import {
   TextInput,
   View,
 } from "react-native";
-import { mobileApi, type AuthResponse } from "../../api/client";
+import { mobileApi, studyCache, type AuthResponse } from "../../api/client";
+import { ContentPlaceholder } from "../../components/ContentPlaceholder";
 import {
   studyNodeTitle,
   type StudyCatalog,
@@ -92,6 +93,7 @@ export function SubjectiveStudyScreen({
   const positionKey = `kaojiang-study-position:${user?.id || "preview"}:${user?.certificateId || "none"}`;
   const selected = catalog?.nodes.find((node) => node.id === selectedId);
   const revoke = useCallback(() => {
+    studyCache.invalidate(['/study/']);
     catalogRevision.current++;
     lessonRevision.current++;
     practiceRevision.current++;
@@ -152,7 +154,7 @@ export function SubjectiveStudyScreen({
     [revoke, alive],
   );
   const refreshCatalog = useCallback(
-    async (quiet = false) => {
+    async (quiet = false, force = quiet) => {
       if (preview || !user || !activeRef.current) return null;
       const revision = ++catalogRevision.current;
       if (!quiet) {
@@ -161,7 +163,7 @@ export function SubjectiveStudyScreen({
       }
       try {
         const [data, saved] = await Promise.all([
-          mobileApi.studyCatalog(),
+          mobileApi.studyCatalog(force),
           restored.current
             ? Promise.resolve(null)
             : AsyncStorage.getItem(positionKey).catch(() => null),
@@ -234,7 +236,7 @@ export function SubjectiveStudyScreen({
   useEffect(() => {
     if (!active) return;
     void refreshCatalog();
-    const timer = setInterval(() => void refreshCatalog(true), 60000);
+    const timer = setInterval(() => void refreshCatalog(true, true), 60000);
     return () => {
       catalogRevision.current++;
       clearInterval(timer);
@@ -292,7 +294,7 @@ export function SubjectiveStudyScreen({
     setContext(null);
     setTeacherOpen(false);
     void mobileApi
-      .studyLesson(selected.id)
+      .studyLesson(selected.id, selected.packageId || undefined)
       .then((data) => {
         if (alive.current && revision === lessonRevision.current) {
           if (data.packageId !== selected.packageId) {
@@ -516,10 +518,7 @@ export function SubjectiveStudyScreen({
       {gate ? (
         <ScrollView contentContainerStyle={s.state}>
           {loading ? (
-            <>
-              <ActivityIndicator color={colors.brand} />
-              <Text style={s.body}>正在同步课程与学习进度…</Text>
-            </>
+            <ContentPlaceholder rows={5} />
           ) : (
             <>
               <Text style={s.title}>
@@ -732,10 +731,7 @@ export function SubjectiveStudyScreen({
                 </Text>
                 {!!error && <StudyNotice>{error}</StudyNotice>}
                 {lessonLoading ? (
-                  <ActivityIndicator
-                    accessibilityLabel="加载精讲"
-                    color={colors.brand}
-                  />
+                  <ContentPlaceholder rows={4} />
                 ) : lesson ? (
                   <>
                     <Text style={s.title}>{lesson.lesson.title}</Text>
@@ -788,10 +784,7 @@ export function SubjectiveStudyScreen({
           ) : !session ? (
             <View style={s.state}>
               {practiceLoading || lessonLoading ? (
-                <>
-                  <ActivityIndicator color={colors.brand} />
-                  <Text style={s.body}>正在准备本课练习…</Text>
-                </>
+                <ContentPlaceholder rows={3} practice />
               ) : (
                 <>
                   <StudyNotice>{error || "尚未打开本课练习。"}</StudyNotice>

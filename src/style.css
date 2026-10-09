@@ -1135,14 +1135,6 @@ footer > span:nth-child(2) {
     transform: rotate(360deg);
   }
 }
-.loading-page {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 15px;
-}
 .empty {
   text-align: center;
   padding: 65px 20px;

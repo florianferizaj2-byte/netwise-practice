@@ -130,6 +130,8 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
     );
   } catch (error) {
     if (revision !== sessionRevision) throw new CacheCancelledError();
+    if (init.method && init.method !== 'GET' && /^\/study\/(practice-sessions\/.+\/attempts|attempts\/)/.test(path))
+      studyCache.invalidate(['/study/catalog', '/study/practice-sessions']);
     if (error instanceof ApiError && error.status === 401 && token)
       void clearSessionToken();
     if (error instanceof ApiError && error.status === 426)
@@ -138,6 +140,13 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
   }
   if (revision !== sessionRevision) throw new CacheCancelledError();
   if (init.method && init.method !== 'GET') {
+    if (path.startsWith('/study/teacher')) {
+      studyCache.invalidate(['/study/teacher/history']);
+    } else if (path.startsWith('/study/') && !(path === '/study/practice-sessions' && JSON.parse(String(init.body || '{}')).resume === true)) {
+      studyCache.invalidate(['/study/catalog', '/study/practice-sessions']);
+    } else if (path.startsWith('/account/')) {
+      studyCache.invalidate(['/study/', '/dashboard']);
+    }
     if (path.startsWith('/exams') && (path === '/exams' || path.endsWith('/submit'))) {
       studyCache.invalidate(['/exams', '/dashboard', '/practice/catalog', '/wrong', '/questions?', '/community/leaderboards']);
     } else if (
@@ -984,14 +993,24 @@ export const mobileApi = {
     return request<AccountEntitlementsResponse>('/account/entitlements');
   },
 
-  studyCatalog() { return request<StudyCatalog>('/study/catalog'); },
-  studyLesson(nodeId: string) { return request<StudyLesson>(`/study/lessons/${encodeURIComponent(nodeId)}`); },
+  async studyCatalog(force = false) {
+    const cached = studyCache.peekFresh<StudyCatalog>('/study/catalog');
+    if (cached?.expiresAt && Date.parse(cached.expiresAt) <= Date.now()) studyCache.invalidate(['/study/']);
+    const data = await cachedRequest<StudyCatalog>('/study/catalog', force);
+    if (!data.access) studyCache.invalidate(['/study/lessons/', '/study/practice-sessions', '/study/teacher/']);
+    return data;
+  },
+  studyLesson(nodeId: string, packageId?: string) {
+    const path = `/study/lessons/${encodeURIComponent(nodeId)}`;
+    return studyCache.read<StudyLesson>(`${path}${packageId ? `:version:${packageId}` : ''}`, (signal) => request<StudyLesson>(path, { signal }));
+  },
   completeStudyLesson(nodeId: string, version: number) {
     return request<{ version: number }>(`/study/lessons/${encodeURIComponent(nodeId)}/complete`, {
       method: 'POST', body: JSON.stringify({ version }),
     });
   },
   startStudyPractice(nodeId: string, resume = true) {
+    if (resume) return studyCache.read<StudySession>(`/study/practice-sessions:resume:${nodeId}`, (signal) => request<StudySession>('/study/practice-sessions', { method: 'POST', body: JSON.stringify({ nodeId, resume }), signal }));
     return request<StudySession>('/study/practice-sessions', { method: 'POST', body: JSON.stringify({ nodeId, resume }) });
   },
   studyPracticeSession(id: string) { return request<StudySession>(`/study/practice-sessions/${encodeURIComponent(id)}`); },
@@ -1005,7 +1024,7 @@ export const mobileApi = {
   studyFeedback(id: string, note: string) {
     return request<{ saved: boolean }>(`/study/attempts/${encodeURIComponent(id)}/feedback`, { method: 'POST', body: JSON.stringify({ note }) });
   },
-  studyTeacherHistory(nodeId: string) { return request<{ messages: StudyTeacherMessage[] }>(`/study/teacher/history?nodeId=${encodeURIComponent(nodeId)}`); },
+  studyTeacherHistory(nodeId: string) { return cachedRequest<{ messages: StudyTeacherMessage[] }>(`/study/teacher/history?nodeId=${encodeURIComponent(nodeId)}`); },
   askStudyTeacher(body: StudyTeacherRequest) {
     return request<{ answer: StudyTeacherAnswer; cached: boolean }>('/study/teacher', { method: 'POST', body: JSON.stringify(body) });
   },

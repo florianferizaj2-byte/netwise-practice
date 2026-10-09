@@ -2,6 +2,7 @@ import { iosStyles } from "../../iosStyles";
 import { useEffect, useRef, useState } from "react";
 import {
   Keyboard,
+  Platform,
   Pressable,
   ScrollView,
   Text,
@@ -70,6 +71,7 @@ export function PracticePanel({
   const scroll = useRef<ScrollView>(null),
     resultOffset = useRef(0),
     showResult = useRef(false);
+  const inputRefs = useRef<Record<string, TextInput | null>>({});
   const question = session.questions[index];
   const attempt = question
     ? session.attempts.filter((item) => item.questionId === question.id).at(-1)
@@ -85,6 +87,26 @@ export function PracticePanel({
       (row) => row.questionId === item.id && row.status === "graded",
     ),
   ).length;
+  useEffect(() => {
+    if (!active || !question || attempt || busy) return;
+    const frame = requestAnimationFrame(() => inputRefs.current[question.blanks[0]?.id]?.focus());
+    return () => cancelAnimationFrame(frame);
+  }, [active, question?.id, attempt?.id, busy]);
+  useEffect(() => {
+    if (Platform.OS !== "web" || !active || !attempt || typeof document === "undefined") return;
+    const nextOnEnter = (event: KeyboardEvent) => {
+      if (event.key !== "Enter" || event.defaultPrevented || event.isComposing || event.keyCode === 229 || event.ctrlKey || event.altKey || event.metaKey || event.shiftKey) return;
+      const target = event.target as Element | null;
+      if (target?.closest?.("textarea, input:not(:disabled), button, a, [role='button'], [role='dialog'], select, [contenteditable='true']")) return;
+      event.preventDefault();
+      if (event.repeat || busy || attempt.processing) return;
+      if (complete) onNextLesson();
+      else if (index < session.questions.length - 1) setIndex((value) => value + 1);
+      else setIndex(Math.max(0, session.questions.findIndex((item) => !session.attempts.some((row) => row.questionId === item.id && row.status === "graded"))));
+    };
+    document.addEventListener("keydown", nextOnEnter);
+    return () => document.removeEventListener("keydown", nextOnEnter);
+  }, [active, attempt, busy, complete, index, session, onNextLesson]);
   const updateAttempt = (next: StudyAttempt) => {
     setSession((old) => ({
       ...old,
@@ -269,12 +291,20 @@ export function PracticePanel({
                 {blank.unit ? `（${blank.unit}）` : ""}
               </Text>
               <TextInput
+                ref={(input) => { inputRefs.current[blank.id] = input; }}
                 accessibilityLabel={`第 ${position + 1} 空答案`}
                 value={answers[blank.id] || ""}
                 maxLength={400}
                 editable={!attempt && !busy}
                 autoCorrect={false}
                 autoCapitalize="none"
+                returnKeyType={position < question.blanks.length - 1 ? "next" : "done"}
+                submitBehavior="submit"
+                onSubmitEditing={() => {
+                  const nextBlank = question.blanks[position + 1];
+                  if (nextBlank) inputRefs.current[nextBlank.id]?.focus();
+                  else if (question.blanks.every((item) => (answers[item.id] || "").trim())) void submit();
+                }}
                 keyboardType={
                   blank.kind === "number"
                     ? "numbers-and-punctuation"
@@ -412,7 +442,7 @@ export function PracticePanel({
             onPress={() => void submit()}
           />
         ) : complete ? (
-          <StudyButton label="继续下一课" onPress={onNextLesson} />
+          <StudyButton label="下一知识点" onPress={onNextLesson} />
         ) : index < session.questions.length - 1 ? (
           <StudyButton
             label="下一题"

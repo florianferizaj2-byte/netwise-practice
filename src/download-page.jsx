@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { ContentPlaceholder } from "./components/content-placeholder.jsx";
 import { QRCodeSVG } from "qrcode.react";
 import {
   ArrowLeft,
@@ -161,7 +162,7 @@ export function DownloadPage({ api, authenticated, go }) {
                   </button>
                 </div>
               ) : (
-                <p role="status">正在获取最新版本…</p>
+                <ContentPlaceholder variant="list" rows={1} />
               )}
             </div>
             <span className="download-platform-meta">

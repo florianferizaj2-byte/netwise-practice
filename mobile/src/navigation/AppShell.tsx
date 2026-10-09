@@ -1,4 +1,5 @@
 import { AppIcon } from '../components/AppIcon';
+import { ContentPlaceholder } from '../components/ContentPlaceholder';
 import { iosStyles } from '../iosStyles';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
@@ -566,12 +567,9 @@ function VersionCheckingScreen() {
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar style={resolvedMode === 'dark' ? 'light' : 'dark'} />
-      <View style={styles.updateScreen}>
-        <EntranceView distance={14} style={styles.updateCard}>
-          <BrandMark />
-          <Text style={styles.updateKicker}>考匠</Text>
-          <Text style={styles.updateLoadingText}>正在准备你的学习空间…</Text>
-        </EntranceView>
+      <View style={styles.sessionPlaceholder}>
+        <BrandMark />
+        <ContentPlaceholder rows={6} />
       </View>
     </SafeAreaView>
   );
@@ -1112,6 +1110,7 @@ const createStyles = (colors: ThemeColors) =>
     aiProgressFill: { backgroundColor: colors.brand, borderRadius: radius.pill, height: '100%' },
     aiProgressArrow: { color: colors.brand, fontSize: 24, fontWeight: '700' },
     hiddenScreen: { display: 'none' },
+    sessionPlaceholder: { flex: 1, backgroundColor: colors.background, paddingHorizontal: 24, paddingTop: 24, gap: 26 },
     updateScreen: {
       alignItems: 'center',
       backgroundColor: colors.background,

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { ContentPlaceholder } from "./components/content-placeholder.jsx";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -161,10 +162,7 @@ export function DesktopTrial({ api, Dialog, onJoin, authenticated }) {
               </button>
             </>
           ) : (
-            <>
-              <LoaderCircle className="spin" size={24} />
-              <p>正在准备你的 5 道体验题…</p>
-            </>
+            <ContentPlaceholder variant="practice" rows={3} />
           )}
         </div>
       ) : (
@@ -394,10 +392,7 @@ export function DesktopTrial({ api, Dialog, onJoin, authenticated }) {
             </p>
           </div>
           {reader.loading ? (
-            <div className="desk-trial-reading" role="status">
-              <LoaderCircle className="spin" size={21} />
-              <p>正在准备 AI 讲解，请稍候…</p>
-            </div>
+            <ContentPlaceholder rows={4} />
           ) : reader.error ? (
             <div className="desk-form-error" role="alert">
               {reader.error}

@@ -140,7 +140,7 @@ export function SubjectiveAdmin({ navigate }) {
     <header className="ss-heading"><div><h2>精讲与练习内容</h2><p>逐节生成讲解和题目；AI 复核通过后自动上架，未通过的留在待修队列。</p></div><div className="ss-actions">{navigate && <button onClick={() => navigate("study")}><ArrowLeft size={17} />查看会员学习页</button>}<button disabled={busy || publishBusy} onClick={() => void reload().catch((failure) => setError(failure.message))}><RefreshCw size={17} />刷新</button></div></header>
     {error && <div className="ss-notice ss-error" role="alert"><TriangleAlert size={17} /><span>{error}</span></div>}
     {notice && <div className="ss-notice" role="status"><CircleCheckIcon /><span>{notice}</span></div>}
-    {!data ? <div className="ss-state"><LoaderCircle className="spin" /><p>正在读取审核队列…</p></div> : <>
+    {!data ? <ContentPlaceholder variant="list" rows={5} /> : <>
       <section className="ss-bulk-panel" aria-label="全科课程生成">
         <div><h3>{course?.name || "当前课程"}全科目录</h3><p>{course?.chapterCount || 0} 章 · {course?.topicCount || 0} 个知识点 · {courseNodes.length} 节课。每个小节独立学习和练习。</p>
           <p>每次只生成一节；AI 确认讲解正确、符合知识点且题目通过审核后自动上架。新任务每日上限 {data.configuredDailyGenerationLimit ?? data.dailyGenerationLimit} 节。全部课程当前 {queuedCount} 节排队、{pendingCount - queuedCount} 节正在生成、{reviewCount} 节待上架、{publishCount} 节已发布。</p>
@@ -189,3 +189,4 @@ export function SubjectiveAdmin({ navigate }) {
 
 function CircleCheckIcon() { return <Check size={17} />; }
 function BookPlaceholder() { return <Eye size={26} />; }
+import { ContentPlaceholder } from "../components/content-placeholder.jsx";

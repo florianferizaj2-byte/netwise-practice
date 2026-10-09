@@ -34,7 +34,9 @@ import {
   UserRound,
   X,
 } from "lucide-react";
-import { lazy, useEffect, useRef, useState } from "react";
+import { startTransition, useEffect, useRef, useState } from "react";
+import { preloadableFeature } from "./components/preloadable-feature.js";
+import { AppPlaceholder, ContentPlaceholder } from "./components/content-placeholder.jsx";
 import {
   DesktopCertificatePicker,
   DesktopHome,
@@ -51,10 +53,10 @@ import {
 } from "./practice-progress.js";
 import { MembershipBadge } from "./components/membership-badge.jsx";
 import { useMembershipAccount } from "./use-membership-account.js";
-const VipView = lazy(() =>
+const VipView = preloadableFeature(() =>
   import("./vip-view.jsx").then((m) => ({ default: m.VipView })),
 );
-const SubjectiveStudy = lazy(() => import("./features/subjective-study.jsx").then((m) => ({ default: m.SubjectiveStudy })));
+const SubjectiveStudy = preloadableFeature(() => import("./features/subjective-study.jsx").then((m) => ({ default: m.SubjectiveStudy })));
 import { api, streamApi } from "./api.js";
 import { pct } from "./question-utils.js";
 import { Empty, Heading, IconButton } from "./components/study-ui.jsx";
@@ -66,69 +68,75 @@ import {
   MOBILE_APK_NAME,
   MOBILE_DOWNLOAD_URL,
 } from "./mobile-release.js";
-const AuthScreen = lazy(() =>
+const AuthScreen = preloadableFeature(() =>
   import("./features/auth.jsx").then((m) => ({ default: m.AuthScreen })),
 );
-const AnnouncementModal = lazy(() =>
+const AnnouncementModal = preloadableFeature(() =>
   import("./features/modals.jsx").then((m) => ({
     default: m.AnnouncementModal,
   })),
 );
-const SponsorModal = lazy(() =>
+const SponsorModal = preloadableFeature(() =>
   import("./features/modals.jsx").then((m) => ({ default: m.SponsorModal })),
 );
-const CertificatePicker = lazy(() =>
+const CertificatePicker = preloadableFeature(() =>
   import("./features/auth.jsx").then((m) => ({ default: m.CertificatePicker })),
 );
-const ChapterGrid = lazy(() =>
+const ChapterGrid = preloadableFeature(() =>
   import("./features/chapters.jsx").then((m) => ({ default: m.ChapterGrid })),
 );
-const KnowledgeSectionGrid = lazy(() =>
+const KnowledgeSectionGrid = preloadableFeature(() =>
   import("./features/chapters.jsx").then((m) => ({
     default: m.KnowledgeSectionGrid,
   })),
 );
-const KnowledgePointGrid = lazy(() =>
+const KnowledgePointGrid = preloadableFeature(() =>
   import("./features/chapters.jsx").then((m) => ({
     default: m.KnowledgePointGrid,
   })),
 );
-const CertificateGuideView = lazy(() =>
+const CertificateGuideView = preloadableFeature(() =>
   import("./features/guide.jsx").then((m) => ({
     default: m.CertificateGuideView,
   })),
 );
-const WrongView = lazy(() =>
+const WrongView = preloadableFeature(() =>
   import("./features/wrong.jsx").then((m) => ({ default: m.WrongView })),
 );
-const TrainingView = lazy(() =>
+const TrainingView = preloadableFeature(() =>
   import("./features/training.jsx").then((m) => ({ default: m.TrainingView })),
 );
-const CommunityView = lazy(() =>
+const CommunityView = preloadableFeature(() =>
   import("./features/shared-library.jsx").then((m) => ({
     default: m.CommunityView,
   })),
 );
-const CommunityChatView = lazy(() =>
+const CommunityChatView = preloadableFeature(() =>
   import("./features/community-chat.jsx").then((m) => ({
     default: m.CommunityChatView,
   })),
 );
-const AboutView = lazy(() =>
+const AboutView = preloadableFeature(() =>
   import("./features/about.jsx").then((m) => ({ default: m.AboutView })),
 );
-const SettingsView = lazy(() =>
+const SettingsView = preloadableFeature(() =>
   import("./features/settings.jsx").then((m) => ({ default: m.SettingsView })),
 );
-const AdminView = lazy(() =>
+const AdminView = preloadableFeature(() =>
   import("./features/admin.jsx").then((m) => ({ default: m.AdminView })),
 );
-const Practice = lazy(() =>
+const Practice = preloadableFeature(() =>
   import("./features/practice.jsx").then((m) => ({ default: m.Practice })),
 );
-const ExamView = lazy(() =>
+const ExamView = preloadableFeature(() =>
   import("./features/exam.jsx").then((m) => ({ default: m.ExamView })),
 );
+const pageFeatures = { vip: VipView, redeem: VipView, study: SubjectiveStudy, chapters: ChapterGrid,
+  guide: CertificateGuideView, wrong: WrongView, training: TrainingView, community: CommunityView,
+  chat: CommunityChatView, about: AboutView, settings: SettingsView, admin: AdminView,
+  "study-admin": AdminView, practice: Practice, exam: ExamView };
+const preloadPage = (page) => { void pageFeatures[page]?.preload().catch(() => {}); };
+const questionPages = new Set(["home", "chapters", "practice", "wrong", "training", "community", "mastery"]);
 import "./style.css";
 import "./exam-scope.css";
 import "./desktop.css";
@@ -183,6 +191,8 @@ function App() {
     [sponsorOpen, setSponsorOpen] = useState(false),
     [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const accountMenuRef = useRef(null);
+  const questionRequest = useRef(null), loadedQuestionScope = useRef(null), dashboardRead = useRef(0);
+  const [questionsLoading, setQuestionsLoading] = useState(false);
   const [savedPractice, setSavedPractice] = useState(null);
   const practiceKey = practiceStorageKey(
     auth?.user?.id,
@@ -212,15 +222,34 @@ function App() {
       location.hash = "home";
     }
   }, [desktop, page, auth?.authenticated]);
+  const loadQuestions = () => {
+    const scope = practiceKey;
+    if (questionRequest.current?.scope === scope) return questionRequest.current.promise;
+    setQuestionsLoading(true);
+    const promise = api("/questions").then((questions) => {
+      setAllQuestions(questions);
+      loadedQuestionScope.current = scope;
+      return questions;
+    }).finally(() => {
+      if (questionRequest.current?.promise === promise) {
+        questionRequest.current = null;
+        setQuestionsLoading(false);
+      }
+    });
+    questionRequest.current = { scope, promise };
+    return promise;
+  };
   const refresh = async () => {
-    const [d, w, q] = await Promise.all([
-      api("/dashboard"),
-      api("/wrong"),
-      api("/questions"),
-    ]);
-    setDashboard(d);
-    setWrong(w);
-    setAllQuestions(q);
+    const revision = ++dashboardRead.current;
+    const foundation = Promise.all([
+      api("/dashboard", undefined, undefined, { force: true }),
+      api("/wrong", undefined, undefined, { force: true }),
+    ]).then(([data, mistakes]) => {
+      if (revision !== dashboardRead.current) return;
+      setDashboard(data); setWrong(mistakes);
+    });
+    // Course, membership and administration pages do not download the full bank.
+    await Promise.all([foundation, questionPages.has(page) ? loadQuestions() : Promise.resolve()]);
   };
   useEffect(() => {
     api("/auth/me")
@@ -231,12 +260,23 @@ function App() {
       });
   }, []);
   useEffect(() => {
-    if (auth?.authenticated && auth.user?.certificateId)
-      refresh().catch((e) => setError(e.message));
-    const h = () => setPage(location.hash.slice(1) || "home");
+    if (auth?.authenticated && auth.user?.certificateId) {
+      loadedQuestionScope.current = null;
+      setAllQuestions([]);
+      refresh().catch((e) => { if (e.name !== "CacheCancelledError") setError(e.message); });
+    }
+    const h = () => {
+      const next = location.hash.slice(1) || "home";
+      preloadPage(next);
+      startTransition(() => setPage(next));
+    };
     window.addEventListener("hashchange", h);
     return () => window.removeEventListener("hashchange", h);
-  }, [auth?.authenticated, auth?.user?.certificateId]);
+  }, [auth?.authenticated, auth?.user?.id, auth?.user?.certificateId]);
+  useEffect(() => {
+    if (!dashboard || !auth?.authenticated || !questionPages.has(page) || loadedQuestionScope.current === practiceKey) return;
+    void loadQuestions().catch((failure) => { if (failure.name !== "CacheCancelledError") setError(failure.message); });
+  }, [page, dashboard?.user?.id, practiceKey, auth?.authenticated]);
   useEffect(() => {
     if (!auth?.authenticated || !auth.user?.certificateId || !dashboard) return;
     try {
@@ -271,7 +311,8 @@ function App() {
     }
   };
   const go = (p) => {
-    setPage(p);
+    preloadPage(p);
+    startTransition(() => setPage(p));
     if (p !== "chapters") setChapterFocus("");
     location.hash = p;
     setMobile(false);
@@ -284,6 +325,8 @@ function App() {
       await api("/auth/logout", {}, "POST");
       setDashboard(null);
       setSession(null);
+      setAllQuestions([]); setWrong([]); setQueue([]); setSharedAiQuestions([]); setAiGroups([]);
+      loadedQuestionScope.current = null;
       setMobile(false);
       setPage("home");
       location.hash = "home";
@@ -298,6 +341,7 @@ function App() {
     try {
       return await fn();
     } catch (e) {
+      if (e.name === "CacheCancelledError") return null;
       if (e.status === 401) {
         setDashboard(null);
         setSession(null);
@@ -532,12 +576,7 @@ function App() {
       <DownloadPage api={api} authenticated={!!auth?.authenticated} go={go} />
     );
   if (auth === null)
-    return (
-      <div className="loading-page">
-        <LoaderCircle className="spin" />
-        <p>正在检查登录状态</p>
-      </div>
-    );
+    return <AppPlaceholder desktop={desktop} />;
   if (!auth.authenticated && desktop)
     return (
       <DesktopLanding
@@ -592,20 +631,15 @@ function App() {
     );
   if (!dashboard)
     return (
-      <div className="loading-page">
+      <AppPlaceholder desktop={desktop}>
         {error ? (
-          <>
+          <div className="feature-message" role="alert">
             <TriangleAlert />
             <p>{error}</p>
             <button onClick={() => location.reload()}>重新加载</button>
-          </>
-        ) : (
-          <>
-            <LoaderCircle className="spin" />
-            <p>正在加载学习记录</p>
-          </>
-        )}
-      </div>
+          </div>
+        ) : null}
+      </AppPlaceholder>
     );
   const weak = [...dashboard.mastery].sort(
     (a, b) => a.masteryScore - b.masteryScore || b.wrongCount - a.wrongCount,
@@ -702,6 +736,8 @@ function App() {
                   key={id}
                   className={`${selected ? "active" : ""} ${id === "vip" ? "nav-vip" : ""}`}
                   aria-current={selected ? "page" : undefined}
+                  onMouseEnter={() => preloadPage(id)}
+                  onFocus={() => preloadPage(id)}
                   onClick={() => go(id)}
                 >
                   <Icon size={19} />
@@ -921,6 +957,7 @@ function App() {
           )}
         </header>
         <main>
+          <FeatureBoundary>
           {error && (
             <div className="alert error" role="alert">
               <TriangleAlert size={18} />
@@ -944,11 +981,11 @@ function App() {
             </div>
           )}
           {busy && (
-            <div className="alert working" role="status">
-              <LoaderCircle size={18} className="spin" />
-              <span>{busy}</span>
+            <div className="workspace-activity" role="status" aria-label={busy}>
+              <span className="workspace-activity-bar" aria-hidden="true" />
             </div>
           )}
+          {questionsLoading && !allQuestions.length && questionPages.has(page) && !(page === "practice" && session) ? <ContentPlaceholder rows={5} /> : <>
           {page === "home" &&
             (desktop ? (
               <DesktopHome
@@ -1680,6 +1717,8 @@ function App() {
           {page === "exam" && (
             <ExamView run={run} refresh={refresh} dashboard={dashboard} />
           )}
+          </>}
+          </FeatureBoundary>
         </main>
         <footer>
           考匠 · AceExam<span>职业认证机考练习平台</span>
@@ -1689,8 +1728,8 @@ function App() {
           </span>
         </footer>
       </div>
-      {announcementOpen && <AnnouncementModal onClose={dismissAnnouncement} />}
-      {sponsorOpen && <SponsorModal onClose={() => setSponsorOpen(false)} />}
+      {announcementOpen && <FeatureBoundary fallback={null}><AnnouncementModal onClose={dismissAnnouncement} /></FeatureBoundary>}
+      {sponsorOpen && <FeatureBoundary fallback={null}><SponsorModal onClose={() => setSponsorOpen(false)} /></FeatureBoundary>}
     </div>
   );
 }
@@ -1698,7 +1737,7 @@ function App() {
 const appRoot = createRoot(document.getElementById("root"));
 
 appRoot.render(
-  <FeatureBoundary>
+  <FeatureBoundary fallback={<AppPlaceholder />}>
     <App />
   </FeatureBoundary>,
 );

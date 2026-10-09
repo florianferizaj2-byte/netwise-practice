@@ -175,10 +175,7 @@ export function TeacherSheet({
             }
           >
             {loading && (
-              <ActivityIndicator
-                accessibilityLabel="同步答疑记录"
-                color={colors.brand}
-              />
+              <ContentPlaceholder rows={2} />
             )}
             {!messages.length && !loading && (
               <View style={s.teacherAnswer}>
@@ -275,3 +272,4 @@ export function TeacherSheet({
     </Modal>
   );
 }
+import { ContentPlaceholder } from '../../components/ContentPlaceholder';

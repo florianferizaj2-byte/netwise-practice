@@ -1,0 +1,29 @@
+.content-placeholder { width: 100%; min-width: 0; color: var(--text, #1d2723); }
+.placeholder-body { display: grid; gap: 24px; padding: 22px 0; }
+.placeholder-row { display: grid; gap: 12px; }
+.placeholder-line, .placeholder-answer { display: block; border-radius: 5px; background: #e8eeea; background: color-mix(in srgb, currentColor 7%, transparent); }
+.placeholder-line { height: 14px; width: 100%; }
+.placeholder-title { height: 24px; width: 36%; margin-bottom: 8px; }
+.placeholder-short { width: 68%; }
+.placeholder-row:nth-child(3n) .placeholder-line { width: 85%; }
+.placeholder-answer { height: 54px; border: 1px solid #dce2df; background: transparent; }
+.placeholder-practice .placeholder-title { height: 30px; width: 60%; }
+.placeholder-list .placeholder-row { padding-block: 9px; }
+.content-placeholder .placeholder-body { animation: content-breathe 1.6s ease-in-out infinite; animation-delay: 180ms; }
+.app-placeholder { min-height: 100dvh; display: flex; background: var(--background, #f6f8f7); }
+.app-placeholder > aside { width: 224px; flex: 0 0 224px; padding: 25px 22px; border-right: 1px solid #dce2df; background: var(--card, #fff); }
+.placeholder-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 38px; }
+.placeholder-brand strong { font-size: 21px; }
+.placeholder-space { flex: 1; min-width: 0; }
+.placeholder-toolbar { height: 67px; padding: 22px 32px; border-bottom: 1px solid #dce2df; }
+.placeholder-toolbar .placeholder-line { max-width: 170px; height: 18px; }
+.placeholder-space > main { max-width: 1150px; padding: 36px; margin: auto; }
+.placeholder-space > main > .content-placeholder { border-radius: 10px; background: var(--card, #fff); padding: 26px; min-height: 430px; }
+.content-arrive { animation: content-arrive 180ms ease-out; }
+.workspace-activity { position: fixed; inset: 0 0 auto; height: 3px; z-index: 100; overflow: hidden; pointer-events: none; }
+.workspace-activity-bar { display: block; width: 25%; height: 100%; background: #2f7d65; animation: workspace-progress 1.3s ease-in-out infinite; }
+@keyframes workspace-progress { from { transform: translateX(-100%); } to { transform: translateX(400%); } }
+@keyframes content-breathe { 0%, 100% { opacity: .65; } 50% { opacity: 1; } }
+@keyframes content-arrive { from { opacity: .35; } to { opacity: 1; } }
+@media (max-width: 700px) { .app-placeholder > aside { display: none; } .placeholder-space > main { padding: 18px; } }
+@media (prefers-reduced-motion: reduce) { .content-placeholder .placeholder-body, .content-arrive, .workspace-activity-bar { animation: none; } .workspace-activity-bar { width: 100%; opacity: .6; } }

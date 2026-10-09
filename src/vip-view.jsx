@@ -20,6 +20,7 @@ import {
   TriangleAlert,
 } from "lucide-react";
 import { MembershipBadge } from "./components/membership-badge.jsx";
+import { ContentPlaceholder } from "./components/content-placeholder.jsx";
 import { membershipPurchaseUrl } from "./membership-purchase.js";
 import "./vip.css";
 import "./subjective-study.css";
@@ -554,9 +555,7 @@ export function VipView({
               <ChevronDown size={15} />
             </summary>
             {historyLoading ? (
-              <p className="vip-history-empty" role="status">
-                正在读取兑换记录…
-              </p>
+              <ContentPlaceholder variant="list" rows={2} />
             ) : historyError ? (
               <div className="vip-history-error" role="alert">
                 <p>{historyError}</p>

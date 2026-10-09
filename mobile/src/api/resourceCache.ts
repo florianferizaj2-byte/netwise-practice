@@ -8,6 +8,7 @@ export type CachePolicy = {
   freshMs: number;
   retainMs: number;
   persist?: boolean;
+  staleWhileRevalidate?: boolean;
 };
 export type QuerySnapshot<T> = {
   data?: T;
@@ -242,7 +243,7 @@ export class ResourceCache {
       this.flights.set(key, { controller, promise: pending });
       this.emit(key);
     }
-    if (!force && retained) {
+    if (!force && retained && policy.staleWhileRevalidate !== false) {
       void pending.catch(() => undefined);
       return previous.data!;
     }

@@ -497,7 +497,7 @@ export function ExamScreen({
             </AnimatedPressable>
           </View>
           {catalog.loading && !preview ? (
-            <ActivityIndicator color={colors.brand} />
+            <ContentPlaceholder rows={3} />
           ) : (
             chapters.map((chapter) => {
               const checked = selection.includes(chapter.name);
@@ -1219,3 +1219,4 @@ const styles = (c: ThemeColors) =>
     answerLabel: { color: c.brandDark, fontSize: 13, lineHeight: 22 },
     explanation: { color: c.textMuted, fontSize: 13, lineHeight: 22 },
   });
+import { ContentPlaceholder } from '../components/ContentPlaceholder';

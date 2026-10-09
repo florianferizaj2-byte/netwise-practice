@@ -324,10 +324,7 @@ export function CommunityScreen({ preview = false, user, onClose }: CommunityScr
             </AnimatedPressable>
           ) : null}
           ListEmptyComponent={loading ? (
-            <View style={styles.loadingState}>
-              <ActivityIndicator color={colors.brand} />
-              <Text style={styles.loadingText}>正在进入社区…</Text>
-            </View>
+            <ContentPlaceholder rows={3} />
           ) : (
             <View style={styles.emptyState}>
               <AppIcon name="message" style={styles.emptyEmoji}>✦</AppIcon>
@@ -776,3 +773,4 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
   },
   disabledButton: { opacity: 0.5 },
 });
+import { ContentPlaceholder } from '../components/ContentPlaceholder';

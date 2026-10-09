@@ -61,11 +61,27 @@ try {
   await admin.locator(".ss-question-preview summary").first().click();
   await admin.screenshot({ path: "test-output/subjective-admin.png", fullPage: true });
   const page = await userPage(learner);
+  const lessonReads = [], practiceReads = [], bankReads = [];
+  page.on("request", (request) => {
+    const path = new URL(request.url()).pathname;
+    if (path.startsWith("/api/study/lessons/") && request.method() === "GET") lessonReads.push(path);
+    if (path === "/api/study/practice-sessions") practiceReads.push(path);
+    if (path === "/api/questions") bankReads.push(path);
+  });
   await page.goto(`${base}/#vip`);
   await page.getByRole("region", { name: "会员 AI 精讲与练习" }).getByRole("button", { name: "进入学习与练习", exact: true }).click();
   await expect(page.getByRole("heading", { name: "AI 精讲与练习", exact: true })).toBeVisible();
   await expect(page.getByRole("button", { name: "生成讲解与填空题", exact: true })).toHaveCount(0);
   await expect(page.locator(".ss-lesson")).toContainText("进制互转");
+  const lessonPath = lessonReads[0];
+  await page.evaluate(() => { location.hash = "vip"; });
+  await expect(page.locator(".vip-page")).toBeVisible();
+  await page.getByRole("region", { name: "会员 AI 精讲与练习" }).getByRole("button", { name: "进入学习与练习", exact: true }).click();
+  await expect(page.locator(".ss-lesson")).toContainText("进制互转");
+  assert.equal(lessonReads.filter((path) => path === lessonPath).length, 1, "reopening a lesson uses memory without another request");
+  assert.equal(bankReads.length, 0, "course and membership pages do not download the unrelated full question bank");
+  await expect(page.locator(".ss-teacher")).toHaveCount(0);
+  await page.locator(".ss-workspace-title button").click();
   const teacher = page.locator(".ss-teacher");
   await teacher.getByRole("button", { name: "举个例子", exact: true }).click();
   await expect(teacher.locator(".ss-teacher-example")).toContainText("8＋4＋1");
@@ -86,15 +102,29 @@ try {
   await page.getByRole("button", { name: "我学完了，开始练习", exact: true }).click();
   await expect(page.locator("#ss-answer-q1-b1")).toBeVisible();
   await page.locator("#ss-answer-q1-b1").fill("1");
-  await page.getByRole("button", { name: "提交答案", exact: true }).click();
+  await page.locator("#ss-answer-q1-b1").press("Enter");
   await expect(page.locator(".ss-result")).toContainText("全部答对了");
   assert.equal(fake.gradeCalls, 0);
-  await page.getByRole("button", { name: "下一题", exact: true }).click();
+  await page.evaluate(() => document.body.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", repeat: true, bubbles: true, cancelable: true })));
+  await expect(page.locator("#ss-answer-q1-b1")).toBeVisible();
+  await page.keyboard.press("Enter");
+  await expect(page.locator("#ss-answer-q2-b1")).toBeFocused();
   await page.locator("#ss-answer-q2-b1").fill("数位的权值");
   await page.locator("#ss-answer-q2-b2").fill("2");
   await page.getByRole("button", { name: "提交答案", exact: true }).click();
   await expect(page.locator(".ss-result")).toContainText("2 / 2 分");
   assert.equal(fake.gradeCalls, 1);
+  const practiceReadCount = practiceReads.length;
+  await page.getByRole("tab", { name: "学习", exact: true }).click();
+  await page.getByRole("tab", { name: "练习", exact: true }).click();
+  await expect(page.locator("#ss-answer-q2-b1")).toBeVisible();
+  assert.equal(practiceReads.length, practiceReadCount, "switching between learning and practice retains the group and its position");
+  await page.locator(".ss-workspace-title button").click();
+  await teacher.getByLabel("你的问题", { exact: true }).fill("老师，我想再问一下");
+  await teacher.getByLabel("你的问题", { exact: true }).press("Enter");
+  await expect(teacher.getByLabel("你的问题", { exact: true })).toHaveValue("老师，我想再问一下\n");
+  await expect(page.locator("#ss-answer-q2-b1")).toBeVisible();
+  await page.locator(".ss-workspace-title button").click();
   await page.getByRole("button", { name: "下一题", exact: true }).click();
   await page.locator("#ss-answer-q3-b1").fill("13");
   await page.reload();
@@ -102,7 +132,12 @@ try {
   await expect(page.locator("#ss-answer-q3-b1")).toHaveValue("13");
   await page.getByRole("button", { name: "提交答案", exact: true }).click();
   await expect(page.locator(".ss-result")).toContainText("全部答对了");
-  await page.screenshot({ path: "test-output/subjective-practice.png", fullPage: true });
+  await page.setViewportSize({ width: 1446, height: 900 });
+  const exercise = await page.locator(".ss-primary-content").boundingBox();
+  const nextAction = await page.locator(".ss-practice-footer").getByRole("button", { name: "下一题", exact: true }).boundingBox();
+  assert.ok(exercise.width > 800, "the exercise fills the workspace when the teacher is closed");
+  assert.ok(nextAction.y >= 0 && nextAction.y + nextAction.height <= 901, "the primary action stays visible on a laptop screen");
+  await page.screenshot({ path: "test-output/subjective-practice.png" });
   await page.getByRole("button", { name: "申请复核", exact: true }).click();
   await page.getByLabel("哪里需要复核？", { exact: true }).fill("希望再解释一下位权的计算过程。" );
   await page.getByRole("button", { name: "提交复核", exact: true }).click();
@@ -154,6 +189,25 @@ try {
   await upgradingPage.locator("#ss-answer-q1-b1").fill("ABS");
   await upgradingPage.getByRole("button", { name: "提交答案", exact: true }).click();
   await expect(upgradingPage.locator(".ss-result")).toContainText("全部答对了");
+  const absSeed = upgradingSeeds.find((item) => item.nodeId.endsWith(":excel-abs"));
+  for (let position = 1; position < 5; position++) {
+    await upgradingPage.locator(".ss-answer-card button").nth(position).click();
+    const inputId = await upgradingPage.locator(".ss-blanks input").first().getAttribute("id");
+    const questionId = inputId.match(/^ss-answer-(.+)-b\d+$/)[1];
+    const question = absSeed.bundle.questions.find((item) => item.id === questionId);
+    for (const blank of question.blanks) await upgradingPage.locator(`#ss-answer-${questionId}-${blank.id}`).fill(blank.answer);
+    await upgradingPage.keyboard.press("Enter");
+    await expect(upgradingPage.locator(".ss-result > h3")).toContainText("全部答对了");
+  }
+  await expect(upgradingPage.locator(".ss-group-summary")).toContainText("本组已全部作答");
+  await expect.poll(async () => {
+    const summary = await upgradingPage.locator(".ss-group-summary").boundingBox();
+    const footer = await upgradingPage.locator(".ss-practice-footer").boundingBox();
+    return summary.y + summary.height <= footer.y;
+  }, { message: "the completion notice remains above the sticky action bar" }).toBe(true);
+  await upgradingPage.screenshot({ path: "test-output/subjective-module-complete.png", fullPage: true });
+  await upgradingPage.getByRole("button", { name: "下一知识点", exact: true }).click();
+  await expect(upgradingPage.locator(".ss-lesson")).toContainText("Excel SUM：区域求和");
   await upgradingPage.getByLabel("当前知识点的小节", { exact: true }).selectOption(upgradingSeeds.find((item) => item.nodeId.endsWith(":excel-sum")).nodeId);
   await expect(upgradingPage.locator(".ss-lesson")).toContainText("Excel SUM：区域求和");
   await expect(upgradingPage.getByRole("button", { name: "我学完了，开始练习", exact: true })).toBeVisible();
@@ -186,7 +240,7 @@ try {
   await admin.goto(`${base}/#study`);
   await expect(admin.getByRole("heading", { name: "VIP 专属的学习与练习", exact: true })).toBeVisible();
   assert.equal(errors.length, 0, errors.join("\n"));
-  console.log("AI 精讲与练习浏览器检查通过：两科目录、按科目管理、专升本独立小节学习与练习、生成审核、发布、VIP 学习、逐空判分、恢复和窄屏布局。");
+  console.log("AI 精讲与练习浏览器检查通过：课程缓存、题组保留、回车提交与下一题、老师输入隔离、下一知识点、宽窄屏布局、VIP 到期与原有学习判分流程。");
 } finally {
   if (browser) await browser.close();
   await app.locals.stop(); await new Promise((resolve) => server.close(resolve)); store.db.close();

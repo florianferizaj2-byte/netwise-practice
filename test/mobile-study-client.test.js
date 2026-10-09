@@ -16,7 +16,7 @@ test("protected mobile lessons are never persisted and stale certificate respons
     new Response(JSON.stringify(data), {
       headers: { "Content-Type": "application/json" },
     });
-  let slow = false;
+  let slow = false, lessonReads = 0;
   globalThis.fetch = async (url, init) => {
     const path = new URL(url).pathname;
     if (path === "/api/auth/login")
@@ -30,10 +30,12 @@ test("protected mobile lessons are never persisted and stale certificate respons
         certificates: [],
       });
     assert.equal(init.headers.Authorization, "Bearer member-token");
-    if (path === "/api/study/lessons/lesson")
+    if (path === "/api/study/lessons/lesson") {
+      lessonReads++;
       return slow
         ? late.promise
         : response({ lesson: { summary: "private member lesson" } });
+    }
     if (path === "/api/auth/certificate")
       return response({
         user: {
@@ -51,6 +53,12 @@ test("protected mobile lessons are never persisted and stale certificate respons
     (await mobileApi.studyLesson("lesson")).lesson.summary,
     "private member lesson",
   );
+  assert.equal(
+    (await mobileApi.studyLesson("lesson")).lesson.summary,
+    "private member lesson",
+    "reopening the same lesson uses its scoped memory cache",
+  );
+  assert.equal(lessonReads, 1, "a fresh lesson is fetched once across repeated clicks");
   await studyCache.flush();
   assert.ok(
     [...storage.values.values()].every(
@@ -58,6 +66,7 @@ test("protected mobile lessons are never persisted and stale certificate respons
     ),
   );
   slow = true;
+  studyCache.invalidate(['/study/lessons/']);
   const oldLesson = mobileApi.studyLesson("lesson");
   const cancelled = assert.rejects(oldLesson, { name: "CacheCancelledError" });
   const changed = await mobileApi.selectCertificate(

@@ -28,6 +28,7 @@ import {
   X,
 } from "lucide-react";
 import { api } from "../api.js";
+import { ContentPlaceholder } from "../components/content-placeholder.jsx";
 import { diff, sourceName, sources } from "../question-utils.js";
 import { Empty, Heading, IconButton } from "../components/study-ui.jsx";
 import { reportReasons } from "../components/question-tools.jsx";
@@ -755,10 +756,8 @@ export function AdminView({
               </small>
             </label>
           </form>
-          {questionLoading ? (
-            <div className="admin-list-loading">
-              <LoaderCircle className="spin" size={22} /> 正在读取题目列表…
-            </div>
+          {questionLoading && !adminQuestions.length ? (
+            <ContentPlaceholder variant="list" rows={5} />
           ) : adminQuestions.length ? (
             <div className="admin-question-list">
               {adminQuestions.map((question, rowIndex) => (
@@ -910,10 +909,8 @@ export function AdminView({
                 重新读取
               </button>
             </div>
-          ) : feedbackLoading ? (
-            <div className="admin-list-loading">
-              <LoaderCircle className="spin" size={22} /> 正在读取用户反馈…
-            </div>
+          ) : feedbackLoading && !feedbackRows.length ? (
+            <ContentPlaceholder variant="list" rows={4} />
           ) : feedbackRows.length ? (
             <div className="admin-feedback-list">
               {feedbackRows.map((row) => {

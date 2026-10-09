@@ -8,6 +8,7 @@ import {
   RotateCcw,
 } from "lucide-react";
 import { api } from "../api.js";
+import { ContentPlaceholder } from "../components/content-placeholder.jsx";
 import { useExamSession } from "../use-exam-session.js";
 import {
   buildVeterinaryGroups,
@@ -185,7 +186,7 @@ export function ExamView({ run, refresh, dashboard }) {
                   : "当前证书题库 · 限时作答 · 交卷后统一评分"
           }
         />
-        {loading && <p role="status">正在读取考试记录…</p>}
+        {loading && !recent.length && <ContentPlaceholder variant="list" rows={2} />}
         {loadError && (
           <div className="exam-sync-message error" role="alert">
             <span>{loadError}</span>
@@ -261,7 +262,7 @@ export function ExamView({ run, refresh, dashboard }) {
                     </button>
                   </p>
                 ) : !examCatalog ? (
-                  <p>正在读取知识点…</p>
+                  <ContentPlaceholder variant="list" rows={3} />
                 ) : !examCatalog.chapters.length ? (
                   <p>当前题库暂无可用于考试的客观题。</p>
                 ) : (

@@ -10,6 +10,7 @@ import {
   Download,
 } from "lucide-react";
 import { MembershipBadge } from "./components/membership-badge.jsx";
+import { ContentPlaceholder } from "./components/content-placeholder.jsx";
 import "./membership.css";
 
 const labels = { free: "Free", vip: "VIP", svip: "SVIP", ssvip: "SSVIP" };
@@ -496,6 +497,7 @@ export function AdminMembershipCodes({ api, notify }) {
               </tr>
             </thead>
             <tbody>
+              {loading && !data && <tr><td colSpan={8}><ContentPlaceholder variant="list" rows={4} /></td></tr>}
               {data?.codes.map((code) => (
                 <tr
                   key={code.id}
@@ -558,11 +560,9 @@ export function AdminMembershipCodes({ api, notify }) {
               ))}
             </tbody>
           </table>
-          {!data?.codes.length && (
+          {!loading && !data?.codes.length && (
             <p className="membership-empty">
-              {loading
-                ? "正在读取兑换码…"
-                : listError
+              {listError
                   ? "兑换码暂未加载，点击刷新重试。"
                   : "没有符合条件的兑换码。"}
             </p>
@@ -570,7 +570,7 @@ export function AdminMembershipCodes({ api, notify }) {
         </div>
         <div className="membership-pagination">
           <span>
-            {loading ? "正在同步…" : `共 ${data?.total || 0} 个兑换码`} · 第{" "}
+            {data ? `共 ${data.total} 个兑换码` : "兑换码列表"} · 第{" "}
             {page + 1} 页
           </span>
           <div>

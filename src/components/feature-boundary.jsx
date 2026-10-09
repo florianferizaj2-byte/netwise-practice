@@ -1,4 +1,5 @@
 import { Component, Suspense } from "react";
+import { ContentPlaceholder } from "./content-placeholder.jsx";
 
 export class FeatureBoundary extends Component {
   state = { error: null };
@@ -18,11 +19,7 @@ export class FeatureBoundary extends Component {
       );
     return (
       <Suspense
-        fallback={
-          <div className="feature-message" role="status">
-            正在加载学习页面…
-          </div>
-        }
+        fallback={this.props.fallback === undefined ? <ContentPlaceholder /> : this.props.fallback}
       >
         {this.props.children}
       </Suspense>

@@ -12,6 +12,7 @@ import {
   X,
 } from "lucide-react";
 import { api } from "../api.js";
+import { ContentPlaceholder } from "../components/content-placeholder.jsx";
 import { Heading, IconButton } from "../components/study-ui.jsx";
 
 export const mergeCommunityMessages = (current, incoming) => {
@@ -276,10 +277,7 @@ export function CommunityChatView({ currentUserId }) {
                   : "统计累计作答次数"}
           </p>
           {leaderboardBusy && (
-            <p className="community-leaderboard-empty">
-              <LoaderCircle size={18} className="spin" />
-              正在读取榜单…
-            </p>
+            <ContentPlaceholder variant="list" rows={3} />
           )}
           {leaderboardError && (
             <p className="community-leaderboard-error" role="alert">
@@ -376,11 +374,8 @@ export function CommunityChatView({ currentUserId }) {
               {loadingMore ? "正在加载" : "加载更早消息"}
             </button>
           )}
-          {loading ? (
-            <div className="chat-empty">
-              <LoaderCircle size={24} className="spin" />
-              <span>正在进入考匠社区…</span>
-            </div>
+          {loading && !messages.length ? (
+            <ContentPlaceholder variant="list" rows={4} />
           ) : messages.length ? (
             messages.map((message) => {
               const own = message.userId === currentUserId;

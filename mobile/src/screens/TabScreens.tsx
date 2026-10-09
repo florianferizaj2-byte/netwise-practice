@@ -842,11 +842,8 @@ export function PracticeScreen({
   if (loading) {
     return (
       <ScreenContainer>
-        <ScreenHeader eyebrow="开始练习" title="正在准备题目" />
-        <View style={styles.loadingState}>
-          <ActivityIndicator color={colors.brand} size="large" />
-          <Text style={styles.loadingText}>正在从考匠题库同步…</Text>
-        </View>
+        <ScreenHeader eyebrow="开始练习" title="题目练习" />
+        <ContentPlaceholder rows={3} practice />
       </ScreenContainer>
     );
   }
@@ -3612,3 +3609,4 @@ function SettingRow({
 
   return <View style={styles.settingRow}>{content}</View>;
 }
+import { ContentPlaceholder } from '../components/ContentPlaceholder';
