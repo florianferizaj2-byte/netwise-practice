@@ -2,6 +2,8 @@
 
 考匠（AceExam，Ace + Exam）是一个面向职业认证考试的机考练习与模拟平台。用户共用作者提供的 AI 服务，根据错题生成针对性变式题，并按功能消耗账号额度；通过审核的题目可以分享给同证书的其他用户，让题库在使用过程中持续增长。
 
+**Android 最新版：v0.4.0** · [下载 APK](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.0/kaojiang-v0.4.0.apk) · [SHA-256 校验文件](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.0/kaojiang-v0.4.0.apk.sha256) · [发布页](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v0.4.0)
+
 电脑端使用响应式网页；iPhone / iPad 通过 `/app/` 使用与 Android 共用源码的移动界面，可添加到主屏幕。两个移动端共用今日、练习、错题、考试、VIP、我的六个页面及账号接口。
 
 苹果网页现已统一为接近 iOS 的界面：系统字体与中文苹方回退、分组列表、蓝色操作、矢量导航和深色模式。覆盖主页面及课程、社区、会员和设置等子界面；字体依据与本地验证方法见[苹果移动版说明](docs/apple-web.md#ios-界面与字体--2026-10-08)。
@@ -40,8 +42,9 @@ VIP「AI 精讲与练习」包含逐课讲解、填空练习、短答 AI 老师�
 ## 最近发布 · 2026-10-09 · v0.4.0
 
 - Android 新增 VIP AI 精讲与练习：逐课讲解、填空作答、AI 老师问答及判分复核，并同步当前移动端界面与学习流程。
-- v0.4.0（versionCode 24）沿用正式签名；安装包：[kaojiang-v0.4.0.apk](public/downloads/kaojiang-v0.4.0.apk)。APK、校验文件与说明可从 [GitHub Releases](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v0.4.0) 下载。
-- 配套服务器配置及验证范围见 [v0.4.0 发布说明](docs/release-v0.4.0.md)。上传 GitHub 后，站点部署仍由维护者完成。
+- v0.4.0（versionCode 24）安装包约 70.2 MiB，沿用正式签名；相同正式签名的 v0.3.3 至 v0.3.9 可覆盖更新。APK、校验文件与说明已上传 [GitHub Releases](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v0.4.0)。
+- Android Release 构建与签名核验通过；发布检查包含 120 项单元及接口测试（0 失败）、两套网页构建、电脑与移动浏览器完整流程及 VIP AI 学习流程。
+- 配套服务器配置及验证范围见 [v0.4.0 发布说明](https://github.com/florianferizaj2-byte/netwise-practice/blob/v0.4.0/docs/release-v0.4.0.md)。生产站点部署由维护者完成。
 
 ## 历史更新 · 2026-10-02 · v0.3.9
 
@@ -266,7 +269,7 @@ npm run dev
 
 ## 移动端 App
 
-Android v0.2.4 已接入现有网站 API，支持登录、证书选择、今日学习概览、知识点练习、完整题库加载、收藏题目、错题复习、顺序刷题、随机刷题、题目举报、AI 学习服务和考匠社区。今日学习会从当前题库随机抽取 30 道题，独立于普通练习的顺序/随机模式。启动时会校验版本；v0.2.2 及以后版本支持应用内下载更新，并保留浏览器下载备用方式。旧版本安装包已在后续发布中清理。
+Android 当前正式版为 v0.4.0，已接入现有网站 API，支持登录、证书选择、今日学习概览、知识点练习、收藏、错题、模拟考试、AI 学习服务、VIP AI 精讲与填空练习及考匠社区。今日学习会从当前题库随机抽取 30 道题，独立于普通练习的顺序/随机模式。启动时会校验版本，支持应用内下载更新，并保留浏览器下载备用方式。
 
 移动端本地开发和 API 配置见 [`mobile/README.md`](mobile/README.md)。生产 API 默认使用 `https://aceexam.top/api`，不要把账号密码、API Key 或生产数据写入 App 源码。
 
@@ -448,9 +451,9 @@ npx playwright install chromium webkit
 npm run verify
 ```
 
-`verify` 依次执行题库结构检查、移动端类型检查、自动化测试、电脑与移动网页完整构建、电脑端浏览器流程以及移动网页的 Chromium / WebKit 流程测试；任一步失败都会返回失败状态。GitHub 在推送或提交合并请求时运行同样的检查，失败截图和页面文本会保存为构建附件。
+`verify` 依次执行题库结构检查、移动端类型检查、自动化测试、电脑与移动网页完整构建、电脑端浏览器流程、VIP AI 精讲与练习、移动网页 Chromium / WebKit 流程、苹果网页布局与无障碍检查以及移动端 AI 精炼流程；任一步失败都会返回失败状态。GitHub 在推送或提交合并请求时运行同样的检查，失败截图和页面文本会保存为构建附件。
 
-- 内置题库结构检查覆盖 9,750 道唯一题目；不代表人工核验题干和答案。
+- 内置题库结构检查覆盖 9,811 道唯一题目；不代表人工核验题干和答案。
 - 浏览器测试覆盖游客体验、真实注册登录、练习进度、考试离线恢复、跨设备答案冲突、按需加载页面和窄屏下载入口。
 - 测试使用临时数据库与 AI 测试桩，不修改个人学习记录，不消耗真实 API 额度。
 

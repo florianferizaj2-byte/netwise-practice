@@ -2,6 +2,8 @@
 
 这是考匠的 Expo / React Native 移动端。Android 当前版本为 v0.4.0；当前源码继续复用现有 Node 后端，通过移动端 Bearer 会话连接生产 API。
 
+[下载 v0.4.0 APK](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.0/kaojiang-v0.4.0.apk) · [SHA-256 校验文件](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.0/kaojiang-v0.4.0.apk.sha256) · [发布页](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v0.4.0)
+
 ## iPhone / iPad 网页版
 
 苹果移动版直接运行本目录的 `AppShell` 和六个业务页面，与 Android 共用界面、主题、题库、答题、考试、AI、会员和社区代码。独立的 `.web.tsx` / `.web.ts` 文件只处理浏览器平台能力。
@@ -42,6 +44,7 @@ Release 构建使用专用正式证书，Expo 重新生成 Android 工程后仍�
 - 移动端新增 VIP AI 精讲与练习，支持逐课讲解、填空作答、AI 老师问答及判分复核。
 - 同步移动端界面与学习流程更新，继续共用账号、题库和学习记录。
 - Android versionCode 为 24，沿用正式签名；安装包及配套服务器版本配置见 [v0.4.0 发布说明](../docs/release-v0.4.0.md)。
+- APK 已上传，大小约 70.2 MiB；Android Release 构建、正式签名核验及全部发布检查通过（120 项单元与接口测试，0 失败）。
 
 ## v0.3.9 更新
 
