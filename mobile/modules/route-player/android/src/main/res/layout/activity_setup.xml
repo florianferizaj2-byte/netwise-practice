@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical"
+    android:background="@color/rp_surface">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:gravity="center_vertical" android:paddingLeft="12dp" android:paddingRight="12dp">
+        <com.google.android.material.button.MaterialButton android:id="@+id/setupBack"
+            style="@style/Widget.Material3.Button.TextButton" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:minHeight="48dp" android:text="@string/simple_back" />
+        <TextView android:id="@+id/setupTitle" android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:text="@string/simple_tutorial" android:textSize="20sp"
+            android:textColor="@color/rp_text" android:fontFamily="sans-serif-medium" android:padding="12dp" />
+    </LinearLayout>
+    <androidx.core.widget.NestedScrollView android:id="@+id/setupScroll" android:layout_width="match_parent"
+        android:layout_height="0dp" android:layout_weight="1" android:fillViewport="true">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:paddingLeft="24dp" android:paddingRight="24dp" android:paddingBottom="32dp">
+            <LinearLayout android:id="@+id/developerSection" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:orientation="vertical" android:paddingTop="20dp">
+                <TextView android:id="@+id/developerTitle" android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:text="@string/simple_developer_title" android:textSize="20sp" android:textColor="@color/rp_text"
+                    android:fontFamily="sans-serif-medium" />
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp"
+                    android:id="@+id/developerBody" android:text="@string/simple_developer_body" android:textSize="16sp" android:textColor="@color/rp_text" android:lineSpacingExtra="5dp" />
+                <TextView android:id="@+id/developerStatus" android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp" android:textSize="14sp" android:textColor="@color/rp_muted" android:accessibilityLiveRegion="polite" />
+                <com.google.android.material.button.MaterialButton android:id="@+id/phoneSettingsButton"
+                    style="@style/Widget.Material3.Button.OutlinedButton" android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:minHeight="48dp" android:layout_marginTop="12dp" android:text="@string/simple_phone_settings" />
+                <com.google.android.material.button.MaterialButton android:id="@+id/developerSettingsButton"
+                    style="@style/Widget.Material3.Button.OutlinedButton" android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:minHeight="48dp" android:text="@string/simple_developer_settings" />
+            </LinearLayout>
+            <LinearLayout android:id="@+id/locationSection" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:paddingTop="32dp">
+                <TextView android:id="@+id/locationTitle" android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:text="@string/simple_location_title" android:textSize="20sp" android:textColor="@color/rp_text" android:fontFamily="sans-serif-medium" />
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp"
+                    android:text="@string/simple_location_body" android:textSize="16sp" android:textColor="@color/rp_text" android:lineSpacingExtra="5dp" />
+                <TextView android:id="@+id/locationStatus" android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp" android:textSize="14sp" android:textColor="@color/rp_muted" android:accessibilityLiveRegion="polite" />
+                <com.google.android.material.button.MaterialButton android:id="@+id/locationSettingsButton"
+                    style="@style/Widget.Material3.Button.OutlinedButton" android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:minHeight="48dp" android:layout_marginTop="12dp" android:text="@string/simple_location_settings" />
+                <com.google.android.material.button.MaterialButton android:id="@+id/permissionSettingsButton"
+                    style="@style/Widget.Material3.Button.OutlinedButton" android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:minHeight="48dp" android:text="@string/simple_permission_settings" />
+            </LinearLayout>
+            <LinearLayout android:id="@+id/backgroundSection" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical" android:paddingTop="32dp">
+                <TextView android:id="@+id/backgroundTitle" android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:text="@string/simple_background_title" android:textSize="20sp" android:textColor="@color/rp_text" android:fontFamily="sans-serif-medium" />
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp"
+                    android:text="@string/simple_background_body" android:textSize="16sp" android:textColor="@color/rp_text" android:lineSpacingExtra="5dp" />
+                <TextView android:id="@+id/backgroundStatus" android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp" android:textSize="14sp" android:textColor="@color/rp_muted" android:accessibilityLiveRegion="polite" />
+                <com.google.android.material.button.MaterialButton android:id="@+id/backgroundSettingsButton"
+                    style="@style/Widget.Material3.Button.OutlinedButton" android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:minHeight="48dp" android:layout_marginTop="12dp" android:text="@string/simple_background_settings" />
+            </LinearLayout>
+            <LinearLayout android:id="@+id/floatingSection" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:orientation="vertical" android:paddingTop="32dp">
+                <TextView android:id="@+id/floatingTitle" android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:text="@string/floating_title" android:textSize="20sp" android:textColor="@color/rp_text"
+                    android:fontFamily="sans-serif-medium" />
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp"
+                    android:text="@string/floating_body" android:textSize="16sp" android:textColor="@color/rp_text" android:lineSpacingExtra="5dp" />
+                <com.google.android.material.materialswitch.MaterialSwitch android:id="@+id/floatingSwitch"
+                    android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="56dp"
+                    android:layout_marginTop="12dp" android:text="@string/floating_switch" android:textSize="16sp"
+                    android:textColor="@color/rp_text" />
+                <TextView android:id="@+id/floatingStatus" android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp" android:textSize="14sp" android:textColor="@color/rp_muted" android:accessibilityLiveRegion="polite" />
+                <com.google.android.material.button.MaterialButton android:id="@+id/floatingSettingsButton"
+                    style="@style/Widget.Material3.Button.OutlinedButton" android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:minHeight="48dp" android:layout_marginTop="12dp" android:text="@string/floating_permission_settings" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

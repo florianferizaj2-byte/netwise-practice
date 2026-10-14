@@ -5,6 +5,7 @@ import { ResourceCache, CacheCancelledError } from './resourceCache';
 import { persistentStudyData, studyCachePolicy } from './cachePolicy';
 import { ApiError, fetchJson } from './transport';
 import type { StudyCatalog, StudyLesson, StudySession, StudyAttempt, StudyTeacherMessage, StudyTeacherAnswer, StudyTeacherRequest } from './studyTypes';
+import type { Announcement } from '../announcements/client';
 export { ApiError } from './transport';
 
 export const API_BASE_URL =
@@ -278,6 +279,7 @@ export type AuthResponse = {
     username: string;
     communityName?: string | null;
     certificateId?: string | null;
+    isAdmin?: boolean;
   };
   certificates: Array<{ id: string; name: string; shortName?: string; description?: string }>;
 };
@@ -294,6 +296,15 @@ export type DashboardResponse = {
   certificate?: { id: string; name: string } | null;
   user?: AuthResponse['user'] | null;
 };
+
+export type AdminUser = {
+  id: string; username: string; communityName: string | null; certificateId: string | null;
+  createdAt: string; isAdmin: boolean; bannedAt: string | null; banReason: string | null;
+  membershipPlan: 'free' | 'vip' | 'svip' | 'ssvip'; membershipExpiresAt: string | null; revision: string;
+};
+export type AdminUserPage = { users: AdminUser[]; total: number; limit: number; offset: number; nextOffset: number | null };
+export type AdminUserEdit = Pick<AdminUser, 'revision' | 'communityName' | 'certificateId' | 'membershipPlan' | 'membershipExpiresAt'>;
+export type AdminAnnouncement = { announcement: Announcement; revision: string };
 
 export type Question = {
   id: string;
@@ -600,6 +611,23 @@ export const mobileApi = {
     return request<AppVersionResponse>(
       `/mobile/version?version=${encodeURIComponent(version)}`,
     );
+  },
+
+  adminUsers(search = '', status: 'all' | 'active' | 'banned' = 'all', offset = 0) {
+    return request<AdminUserPage>(`/admin/mobile/users?search=${encodeURIComponent(search)}&status=${status}&offset=${offset}&limit=30`);
+  },
+  adminUser(id: string) {
+    return request<{ user: AdminUser }>(`/admin/mobile/users/${encodeURIComponent(id)}`);
+  },
+  adminSaveUser(id: string, fields: AdminUserEdit) {
+    return request<{ saved: boolean; user: AdminUser }>(`/admin/mobile/users/${encodeURIComponent(id)}`, { method: 'PUT', body: JSON.stringify(fields) });
+  },
+  adminSetUserBanned(id: string, banned: boolean, reason: string) {
+    return request<{ saved: boolean }>(`/admin/users/${encodeURIComponent(id)}/ban`, { method: 'PUT', body: JSON.stringify({ banned, reason }) });
+  },
+  adminAnnouncement() { return request<AdminAnnouncement>('/admin/mobile/announcement'); },
+  adminSaveAnnouncement(fields: { revision: string; enabled: boolean; title: string; body: string }) {
+    return request<AdminAnnouncement & { saved: boolean }>('/admin/mobile/announcement', { method: 'PUT', body: JSON.stringify(fields) });
   },
 
   resolveDownloadUrl(url: string) {

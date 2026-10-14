@@ -33,23 +33,12 @@ import { authorAiAvailable, authorAiOwner } from "./ai-service.js";
 import { registerGuestTrialRoutes } from "./guest-trial.js";
 import { createAiScheduler, checkAiCancellation } from "./ai-tasks.js";
 import { createAuthRateLimiter } from "./auth-rate-limit.js";
+import { createMobileAnnouncementService, registerMobileAnnouncement } from "./mobile-announcement.js";
+import { registerMobileAdminRoutes } from "./mobile-admin.js";
+import { resolveMobileRelease } from "./mobile-release.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
-const mobileRelease = () => {
-  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.4.2";
-  const minimumVersion =
-    process.env.MOBILE_MINIMUM_VERSION || "0.2.8";
-  return {
-    latestVersion,
-    minimumVersion,
-    downloadUrl:
-      process.env.MOBILE_DOWNLOAD_URL ||
-      `/downloads/kaojiang-v${latestVersion}.apk`,
-    releaseNotes:
-      process.env.MOBILE_RELEASE_NOTES ||
-      "修复更新后版本号仍显示旧版；优化加载与课程缓存、AI 精讲布局及连续做题。",
-  };
-};
+const mobileRelease = () => resolveMobileRelease(process.env, compareVersions);
 async function exchangeWechatMiniProgramCode(code) {
   const appid = process.env.WECHAT_MINIPROGRAM_APP_ID?.trim();
   const secret = process.env.WECHAT_MINIPROGRAM_APP_SECRET?.trim();
@@ -189,6 +178,10 @@ export async function createApp(options = {}) {
       return res.status(403).json({ error: "拒绝跨站请求" });
     next();
   });
+  const mobileAnnouncements = await createMobileAnnouncementService({
+    file: options.announcementFile || process.env.MOBILE_ANNOUNCEMENT_FILE || path.join(store.dataDir, "mobile-announcement.json"),
+  });
+  registerMobileAnnouncement(app, { service: mobileAnnouncements });
   const route = (method, url, fn) =>
     app[method](url, async (req, res, next) => {
       try {
@@ -926,6 +919,7 @@ export async function createApp(options = {}) {
     }
   };
   registerMembershipRoutes({ route, store, requireAdmin, requestUserId, accountEntitlementView });
+  registerMobileAdminRoutes({ route, store, requireAdmin, certificates, announcements: mobileAnnouncements });
   const study = registerStudyRoutes({ route, store, provider, requireAdmin,
     requestUserId, ai, requireAiService, studyAI: options.studyAI, studySeeds: options.studySeeds });
   const adminQuestion = (question, includeFeedback = false) => ({
@@ -1168,7 +1162,7 @@ export async function createApp(options = {}) {
       .object({ banned: z.boolean(), reason: z.string().trim().max(200).optional() })
       .strict()
       .parse(req.body);
-    const target = store.adminUsers().find((user) => user.id === req.params.id);
+    const target = store.adminUser(req.params.id);
     if (!target) {
       const error = new Error("用户不存在");
       error.status = 404;
@@ -1187,7 +1181,7 @@ export async function createApp(options = {}) {
       username: target.username,
       reason: body.reason || "",
     });
-    return { saved: true, user: store.adminUsers().find((user) => user.id === target.id) };
+    return { saved: true, user: store.adminUser(target.id) };
   });
   route("get", "/api/admin/questions/similar", (req) => {
     requireAdmin(req);

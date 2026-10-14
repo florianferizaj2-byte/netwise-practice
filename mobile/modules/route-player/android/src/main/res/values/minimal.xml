@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="route_disclaimer_title" translatable="false">学习用途与免责协议</string>
+    <string name="route_disclaimer_body" translatable="false">本功能仅供学习使用，用于了解模拟定位原理和开展与学习有关的授权测试。\n\n严禁用于校园跑作弊，包括伪造跑步轨迹、里程或成绩、代跑及绕过学校考核；不得用于欺骗第三方平台或其他违规用途。\n\n模拟位置可能影响本机其他应用的位置结果。使用结束后请及时点击“结束”，并在开发者选项中取消模拟位置应用。\n\n请遵守学校、平台规则和相关法律法规。你需对自己的使用行为及其后果负责。开发者不支持或授权上述违规行为；本提示不免除依法应承担的责任。\n\n点击“同意并继续”，表示已阅读并同意遵守以上约定。</string>
+    <string name="route_disclaimer_accept" translatable="false">同意并继续</string>
+    <string name="route_disclaimer_decline" translatable="false">不同意，返回</string>
+    <string name="simple_start" translatable="false">开始</string>
+    <string name="simple_end" translatable="false">结束</string>
+    <string name="simple_idle" translatable="false">未开始</string>
+    <string name="simple_running" translatable="false">运行中</string>
+    <string name="simple_ended" translatable="false">已结束</string>
+    <string name="simple_starting" translatable="false">正在开始…</string>
+    <string name="simple_ending" translatable="false">正在结束…</string>
+    <string name="simple_route_caption" translatable="false">按内置路线运行</string>
+    <string name="simple_tutorial" translatable="false">使用教程</string>
+    <string name="simple_back" translatable="false">返回</string>
+    <string name="simple_start_failed" translatable="false">未能开始，请按使用教程检查手机设置</string>
+    <string name="simple_stop_failed" translatable="false">未能结束，请重试或在手机设置中停止应用</string>
+    <string name="simple_route_invalid" translatable="false">内置路线读取失败，请重新安装最新安装包</string>
+    <string name="simple_mock_required" translatable="false">请先在开发者选项中选择本应用</string>
+    <string name="simple_permission_required" translatable="false">请允许精确位置权限</string>
+    <string name="simple_location_required" translatable="false">请打开手机定位开关</string>
+    <string name="simple_settings_manual" translatable="false">请打开手机设置，按照教程手动设置</string>
+    <string name="simple_developer_title" translatable="false">开发者选项</string>
+    <string name="simple_developer_body" translatable="false">1. 打开手机设置中的“关于手机”，通常连续点击“版本号”7 次，按提示开启开发者选项。\n2. 返回设置，搜索“开发者选项”。\n3. 找到“选择模拟位置信息应用”，选择“%1$s”。\n\n不同机型的菜单名称可能不同。</string>
+    <string name="simple_developer_ready" translatable="false">已选择本应用</string>
+    <string name="simple_developer_pending" translatable="false">待设置：选择本应用作为模拟位置应用</string>
+    <string name="simple_phone_settings" translatable="false">打开关于手机</string>
+    <string name="simple_developer_settings" translatable="false">打开开发者选项</string>
+    <string name="simple_location_title" translatable="false">定位和权限</string>
+    <string name="simple_location_body" translatable="false">打开手机定位开关。\n允许本应用在使用期间访问位置，并开启“精确位置”。\n允许通知，方便查看运行状态和结束运行。</string>
+    <string name="simple_location_ready" translatable="false">定位和精确位置权限已就绪</string>
+    <string name="simple_location_settings" translatable="false">打开定位设置</string>
+    <string name="simple_permission_settings" translatable="false">设置应用权限</string>
+    <string name="simple_background_title" translatable="false">后台运行</string>
+    <string name="simple_background_body" translatable="false">在本应用的电池设置中，允许后台活动，或把电池使用设为“不受限制”。如手机另有自启动或后台保护设置，也可允许本应用；菜单名称因机型而异。\n\n在首页点“开始”后，可以切换其他应用或锁屏。保留运行通知，需要结束时点首页或通知中的“结束”。\n\n强行停止应用或系统终止进程后，回到首页重新开始。</string>
+    <string name="simple_battery_ready" translatable="false">系统电池优化已放行，厂商后台设置仍需确认</string>
+    <string name="simple_battery_pending" translatable="false">请在系统电池设置中确认后台运行设置</string>
+    <string name="simple_notification_ready" translatable="false">运行通知已允许</string>
+    <string name="simple_notification_pending" translatable="false">运行通知未允许，可在应用设置中开启</string>
+    <string name="simple_background_settings" translatable="false">打开电池优化设置</string>
+</resources>

@@ -48,16 +48,20 @@ try {
   const tracked = git("ls-files", "-z").split("\0").filter(Boolean);
   const runtimeSources = tracked.filter(
     (file) =>
-      file.startsWith("server/") ||
-      file.startsWith("public/question-images/") ||
-      [
-        "package.json",
-        "package-lock.json",
-        "README.md",
-        `docs/release-v${version}.md`,
-        "docs/reliability-improvements.md",
-        "docs/author-ai-service.md",
-      ].includes(file),
+      !file.split("/").includes("drafts") &&
+      (file.startsWith("server/") ||
+        file.startsWith("public/question-images/") ||
+        [
+          "package.json",
+          "package-lock.json",
+          "README.md",
+          `docs/release-v${version}.md`,
+          `docs/DEPLOY-v${version}.md`,
+          "docs/MOBILE-ADMIN-ANNOUNCEMENTS.md",
+          "docs/ROUTE-PLAYER-INTEGRATION.md",
+          "docs/reliability-improvements.md",
+          "docs/author-ai-service.md",
+        ].includes(file)),
   );
   const compiled = filesAt(path.join(root, "dist"))
     .map((file) => path.relative(root, file).split(path.sep).join("/"))

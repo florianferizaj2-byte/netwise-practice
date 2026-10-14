@@ -160,7 +160,7 @@ try {
         .getByRole("button", { name: "登录", exact: true })
         .last()
         .click();
-      await text("每一步，都有进度").waitFor();
+      await page.getByTestId("today-screen").waitFor();
       for (const [size, viewport] of sizes) {
         await page.setViewportSize(viewport);
         await page.waitForFunction(() => {

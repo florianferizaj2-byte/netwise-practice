@@ -40,6 +40,7 @@ import { QuestionImages } from '../components/QuestionImages';
 import { AiQuestionDraftScreen } from './AiQuestionDraftScreen';
 import { PracticeHubScreen } from './PracticeHubScreen';
 import { CommunityScreen } from './CommunityScreen';
+import { AdminScreen } from './AdminScreen';
 import { previewUiSound } from '../audioFeedback';
 import {
   AnimatedPressable,
@@ -1318,6 +1319,7 @@ export function ProfileScreen({
   const [authorApiOpen, setAuthorApiOpen] = useState(false);
   const [communityNameOpen, setCommunityNameOpen] = useState(false);
   const [communityOpen, setCommunityOpen] = useState(false);
+  const [adminOpen, setAdminOpen] = useState(false);
   const [redeemOpen, setRedeemOpen] = useState(false);
   const [membershipPlan, setMembershipPlan] = useState<keyof typeof membershipLabels>('free');
   const membershipRevision = useRef(0);
@@ -1504,6 +1506,9 @@ export function ProfileScreen({
 
   return (
     <ScreenContainer profile>
+      {user?.isAdmin && !preview && adminOpen && <Modal visible={active && adminOpen} animationType="slide" onRequestClose={() => setAdminOpen(false)}>
+        <AdminScreen user={user} certificates={certificates} onClose={() => setAdminOpen(false)} onUserUpdated={onUserUpdated} />
+      </Modal>}
       <RedeemCodeModal visible={active && redeemOpen} preview={preview} userId={user?.id} onClose={() => setRedeemOpen(false)} onRedeemed={(result) => { membershipRevision.current++; setMembershipPlan(result.plan); setCanManageAiService(!!result.canManageAiService); }} />
       {communityOpen && (
         <Modal
@@ -1603,6 +1608,7 @@ export function ProfileScreen({
           />
           <SettingRow onPress={() => onNavigate('vip')} title="我的会员" value={membershipLabels[membershipPlan]} />
           <SettingRow onPress={() => setRedeemOpen(true)} title="兑换码" value="开通 / 续期会员" />
+          {user?.isAdmin && !preview && <SettingRow onPress={() => setAdminOpen(true)} title="管理中心" value="注册账号 · 公告管理" />}
           <SettingRow
             onPress={user ? onOpenCertificatePicker : undefined}
             title="考试与题库"

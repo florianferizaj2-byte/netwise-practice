@@ -1,4 +1,5 @@
 import { AppIcon } from '../components/AppIcon';
+import { RoutePlayerChapter } from '../components/RoutePlayerChapter';
 import { iosStyles } from '../iosStyles';
 import { useMemo, useState } from "react";
 import {
@@ -672,9 +673,10 @@ export function PracticeHubScreen({
         )
       }
       ListFooterComponent={
-        !!chapters.length ? (
-          <Text style={s.footer}>进度按已练习的不同题目统计</Text>
-        ) : null
+        <>
+          {!daily && !ai && <RoutePlayerChapter search={search} />}
+          {!!chapters.length && <Text style={s.footer}>进度按已练习的不同题目统计</Text>}
+        </>
       }
     />
   );

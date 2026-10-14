@@ -449,8 +449,12 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
     } else addQ(q);
   }
   const memberships = createMembershipStore(db);
+  const adminUserSelect = "SELECT u.id, u.username, u.community_name AS communityName, u.certificate_id AS certificateId, u.created_at AS createdAt, u.is_admin AS isAdmin, u.banned_at AS bannedAt, u.ban_reason AS banReason, e.plan AS membershipPlan, e.expires_at AS membershipExpiresAt FROM users u LEFT JOIN user_entitlements e ON e.user_id=u.id";
+  const adminUserView = (user) => user ? ({ ...user, isAdmin: !!user.isAdmin,
+    membershipPlan: user.membershipExpiresAt && Date.parse(user.membershipExpiresAt) <= Date.now() ? "free" : user.membershipPlan || "free" }) : null;
   const store = {
     db,
+    dataDir: path.resolve(dir),
     ...memberships,
     communityUploadDir,
     communityStorageLimit,
@@ -1444,6 +1448,19 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         )
         .all(search.trim(), like)
         .map((user) => ({ ...user, isAdmin: !!user.isAdmin, membershipPlan: user.membershipExpiresAt && Date.parse(user.membershipExpiresAt) <= Date.now() ? "free" : user.membershipPlan || "free" }));
+    },
+    adminUser: (userId) => adminUserView(db.prepare(`${adminUserSelect} WHERE u.id=?`).get(userId)),
+    adminUsersPage: ({ search = "", status = "all", limit = 30, offset = 0 } = {}) => {
+      const pattern = `%${search.trim().replace(/[\\%_]/g, (value) => `\\${value}`)}%`;
+      const where = " WHERE (u.username LIKE ? ESCAPE '\\' OR COALESCE(u.community_name,'') LIKE ? ESCAPE '\\') AND (?='all' OR (?='banned' AND u.banned_at IS NOT NULL) OR (?='active' AND u.banned_at IS NULL))";
+      const filters = [pattern, pattern, status, status, status];
+      const total = db.prepare(`SELECT COUNT(*) AS total FROM users u${where}`).get(...filters).total;
+      const users = db.prepare(`${adminUserSelect}${where} ORDER BY u.created_at DESC,u.rowid DESC LIMIT ? OFFSET ?`)
+        .all(...filters, limit, offset).map(adminUserView);
+      return { users, total, limit, offset, nextOffset: offset + users.length < total ? offset + users.length : null };
+    },
+    saveManagedUserProfile: (userId, { communityName, certificateId }) => {
+      db.prepare("UPDATE users SET community_name=?, certificate_id=? WHERE id=?").run(communityName, certificateId, userId);
     },
     setUserBanned: (userId, banned, reason = "") => {
       const result = db

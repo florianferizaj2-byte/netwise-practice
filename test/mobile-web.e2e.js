@@ -79,13 +79,13 @@ try {
       const session = await response.json();
       const cert = session.certificates.find((item) => item.id === 'hcia-datacom');
       await text(cert.name).click();
-      await text('每一步，都有进度').waitFor();
+      await page.getByTestId('today-screen').waitFor();
       for (const label of ['今日', '练习', '错题', '考试', 'VIP', '我的']) await expect(page.getByRole('button', { name: `${label}导航`, exact: true })).toBeVisible();
       await shot('today');
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
       console.log(`${engine}: registration, certificate and six shared tabs`);
 
-      await text('每一步，都有进度').evaluate((target) => {
+      await page.getByTestId('today-screen').evaluate((target) => {
         for (const [type, y] of [['touchstart', 100], ['touchmove', 190]]) {
           const touch = { identifier: 1, target, clientX: 40, clientY: y, pageX: 40, pageY: y };
           const event = new Event(type, { bubbles: true });
@@ -96,7 +96,7 @@ try {
       await text('松开刷新').waitFor();
       const [refreshed] = await Promise.all([
         page.waitForResponse((r) => r.url().includes('/api/dashboard?summary=1')),
-        text('每一步，都有进度').evaluate((target) => {
+        page.getByTestId('today-screen').evaluate((target) => {
           const event = new Event('touchend', { bubbles: true });
           const touch = { identifier: 1, target, clientX: 40, clientY: 190, pageX: 40, pageY: 190, force: 0 };
           Object.assign(event, { touches: [], targetTouches: [], changedTouches: [touch] });
@@ -136,7 +136,7 @@ try {
       await page.getByText(/^(开始|继续)今日学习$/).filter({ visible: true }).click();
       await page.getByLabel('切换到普通练习和AI出题', { exact: true }).waitFor();
       await text('‹ 返回今日').click();
-      await text('每一步，都有进度').waitFor();
+      await page.getByTestId('today-screen').waitFor();
 
       await tab('VIP');
       await text('签到').click();
@@ -195,7 +195,7 @@ try {
       await page.getByRole('radio', { name: /核对选项甲/ }).click();
       assert.equal((await saved).status(), 200);
       await page.reload();
-      await text('每一步，都有进度').waitFor();
+      await page.getByTestId('today-screen').waitFor();
       await tab('考试');
       const resumed = page.waitForResponse((r) => new URL(r.url()).pathname === `/api/exams/${exam.id}` && r.request().method() === 'GET');
       await text('继续 ›').first().click();
@@ -228,13 +228,13 @@ try {
       await expect(page.getByRole('button', { name: '关闭设置', exact: true })).toBeHidden();
       await shot('profile-dark');
       await page.reload();
-      await text('每一步，都有进度').waitFor();
+      await page.getByTestId('today-screen').waitFor();
       await page.waitForFunction(() => document.documentElement.style.colorScheme === 'dark');
 
       if (engine === 'chromium') {
         await page.evaluate(async () => { await navigator.serviceWorker.ready; });
         await page.reload();
-        await text('每一步，都有进度').waitFor();
+        await page.getByTestId('today-screen').waitFor();
         const cachedUrls = await page.evaluate(async () => {
           const names = await caches.keys();
           const requests = await Promise.all(names.filter((name) => name.startsWith('kaojiang-shell-')).map(async (name) => (await caches.open(name)).keys()));
@@ -244,7 +244,7 @@ try {
         assert.ok(cachedUrls.every((url) => url.startsWith('/app/') && !url.includes('/api/')));
         await context.setOffline(true);
         await page.reload();
-        await text('每一步，都有进度').waitFor();
+        await page.getByTestId('today-screen').waitFor();
         await context.setOffline(false);
         console.log('chromium: offline app shell and public-file-only service worker cache');
       }
@@ -271,7 +271,7 @@ try {
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
       await page.setViewportSize({ width: 375, height: 812 });
       await page.reload();
-      await text('每一步，都有进度').waitFor();
+      await page.getByTestId('today-screen').waitFor();
       await tab('我的');
       await expect(page.getByRole('button', { name: '考试与题库设置', exact: true })).toContainText('四川省专升本 · 计算机基础');
       console.log(`${engine}: Sichuan module selection, chapters and persisted target`);
@@ -293,7 +293,7 @@ try {
       await page.getByPlaceholder('输入账号', { exact: true }).fill(`apple_fixture_${engine}`);
       await page.getByPlaceholder('至少 8 位密码', { exact: true }).fill('fixture-password-123');
       await text('登录').last().click();
-      await text('每一步，都有进度').waitFor();
+      await page.getByTestId('today-screen').waitFor();
 
       const ipad = await browser.newContext({ ...mobileContext, viewport: { width: 1024, height: 768 }, userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 Version/18.6 Safari/605.1.15' });
       await ipad.addInitScript(() => {

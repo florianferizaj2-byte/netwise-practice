@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="floatingControlButton" type="id" />
+    <string name="floating_title" translatable="false">悬浮窗</string>
+    <string name="floating_switch" translatable="false">显示悬浮按钮</string>
+    <string name="floating_body" translatable="false">开启后可切换其他应用，用一个悬浮按钮控制“开始”和“结束”，运行时显示路线进度百分比。\n\n拖动可移动位置；长按关闭悬浮窗。关闭悬浮窗不会结束正在运行的路线，可在首页或通知中结束。\n\n点击悬浮按钮“开始”前仍需同意学习用途协议。路线完成后按钮变回“开始”。首次开启需要允许“显示在其他应用上层”和精确位置权限。</string>
+    <string name="floating_permission_settings" translatable="false">设置悬浮窗权限</string>
+    <string name="floating_permission_required" translatable="false">请允许考匠显示在其他应用上层</string>
+    <string name="floating_permission_ready" translatable="false">悬浮窗权限已允许</string>
+    <string name="floating_ready" translatable="false">悬浮按钮已显示。等待定位成功后再开启虚拟定位</string>
+    <string name="floating_reminder_title" translatable="false">定位提醒</string>
+    <string name="floating_reminder_body" translatable="false">等待定位成功后再开启虚拟定位。\n\n请先在需要测试定位的页面确认定位成功，再点击悬浮按钮“开始”。关闭本提醒不会自动开始虚拟定位。\n\n仅供学习使用，严禁用于校园跑作弊。</string>
+    <string name="floating_reminder_ok" translatable="false">知道了</string>
+    <string name="floating_inactive" translatable="false">开启开关后显示悬浮按钮</string>
+    <string name="floating_failed" translatable="false">未能显示悬浮窗，请检查悬浮窗与精确位置权限</string>
+    <string name="floating_return_learning" translatable="false">请返回“虚拟定位学习”阅读协议并检查手机设置</string>
+    <string name="floating_idle_notification" translatable="false">等待定位成功后再开启虚拟定位</string>
+    <string name="floating_close" translatable="false">关闭悬浮窗</string>
+    <string name="floating_end_percent" translatable="false">结束 · %1$d%%</string>
+    <string name="floating_accessibility" translatable="false">学习定位控制：%1$s。拖动可移动，长按关闭悬浮窗</string>
+    <string name="simple_running_percent" translatable="false">运行中 · %1$d%%</string>
+    <string name="simple_ended_percent" translatable="false">已结束 · %1$d%%</string>
+</resources>

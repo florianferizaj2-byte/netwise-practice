@@ -79,7 +79,7 @@ try {
     );
   }, session);
   await page.goto(base);
-  await page.getByText('每一步，都有进度', { exact: true }).waitFor();
+  await page.getByTestId('today-screen').waitFor();
   await page.getByRole('button', { name: '练习导航', exact: true }).click();
   await page.getByText('题库练习', { exact: true }).waitFor();
   const chapter = page.getByRole('button', {
@@ -163,7 +163,7 @@ try {
   );
   await page.route('**/api/**', (route) => route.abort('internetdisconnected'));
   await page.reload();
-  await page.getByText('每一步，都有进度', { exact: true }).waitFor();
+  await page.getByTestId('today-screen').waitFor();
   await page.getByText(`已刷 40 / ${catalog.total} 题`, { exact: true }).waitFor();
   await page.getByRole('button', { name: '练习导航', exact: true }).click();
   await page

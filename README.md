@@ -2,7 +2,9 @@
 
 考匠（AceExam，Ace + Exam）是一个面向职业认证与升学考试的练习与模拟平台。用户共用作者提供的 AI 服务，根据错题生成针对性变式题，并按功能消耗账号额度；通过审核的题目可以分享给同证书的其他用户，让题库在使用过程中持续增长。
 
-**Android 最新版：v0.4.2** · [下载 APK](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.2/kaojiang-v0.4.2.apk) · [SHA-256 校验文件](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.2/kaojiang-v0.4.2.apk.sha256) · [发布页](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v0.4.2)
+**Android 最新版：v0.4.5** · [下载 APK](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.5/kaojiang-v0.4.5.apk) · [SHA-256 校验文件](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.5/kaojiang-v0.4.5.apk.sha256) · [发布页](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v0.4.5)
+
+新增手机管理中心和可热调整的首页公告，简化手机首页，并加入悬浮窗定位提醒。管理员在“我的 → 管理中心”查看或调整账号、发布/隐藏公告。服务器更新后官网提供 v0.4.5 安装包，旧版 App 必须升级；保留的旧环境配置不会降低最低版本要求。[版本说明](docs/release-v0.4.5.md) · [服务器更新步骤](docs/DEPLOY-v0.4.5.md) · [手机管理与公告](docs/MOBILE-ADMIN-ANNOUNCEMENTS.md)。本机验证通过，真机后台/悬浮显示与覆盖安装仍待验证。
 
 **会员兑换码购买：**[考匠兑换码商店](https://catfk.com/shop/aceexam)。购买后回到考匠的 VIP 或兑换码页面开通，权益绑定当前账号；套餐、售价和时长以购买页为准。
 
