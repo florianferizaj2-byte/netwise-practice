@@ -109,8 +109,14 @@ try {
     .allQ()
     .find((item) => normalize(item.question) === questionText);
   assert.ok(question, "practice renders a question from the isolated store");
-  const wrongOption = Object.keys(question.options).find(
-    (key) => !question.answer.includes(key),
+  const optionKeys = Object.keys(question.options);
+  const wrongOption =
+    optionKeys.find((key) => !question.answer.includes(key)) ?? optionKeys[0];
+  assert.ok(wrongOption, "practice question has a selectable option");
+  assert.notDeepEqual(
+    [wrongOption],
+    question.answer,
+    "a single option is an incomplete answer when every option is correct",
   );
   await page
     .locator(".option")
