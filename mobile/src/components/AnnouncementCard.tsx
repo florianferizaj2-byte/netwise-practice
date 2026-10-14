@@ -1,16 +1,16 @@
 import { useEffect, useState, useSyncExternalStore } from 'react';
-import { Modal, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import { publicAnnouncements as announcements } from '../announcements/current';
 import { useScreenActive } from '../navigation/ScreenActivity';
-import { useTheme, useThemedStyles, type ThemeColors } from '../theme';
+import { useThemedStyles, type ThemeColors } from '../theme';
 import { AnimatedPressable } from './Motion';
+import { AnnouncementDialog } from './AnnouncementDialog';
 
 export function AnnouncementCard({ refreshKey = 0 }: { refreshKey?: number }) {
   const active = useScreenActive();
   const content = useSyncExternalStore(announcements.subscribe, announcements.snapshot, announcements.snapshot);
   const [open, setOpen] = useState(false);
   const s = useThemedStyles(styles);
-  const { reduceMotion } = useTheme();
 
   useEffect(() => { void announcements.hydrate(); }, []);
   useEffect(() => {
@@ -30,22 +30,7 @@ export function AnnouncementCard({ refreshKey = 0 }: { refreshKey?: number }) {
         <Text numberOfLines={1} style={s.summary}>{content.title}</Text>
         <Text accessibilityElementsHidden importantForAccessibility="no" style={s.arrow}>›</Text>
       </AnimatedPressable>
-      <Modal visible={open && active} transparent animationType={reduceMotion ? 'none' : 'fade'} onRequestClose={() => setOpen(false)}>
-        <View style={s.backdrop}>
-          <View style={s.dialog} accessibilityViewIsModal>
-            <ScrollView contentContainerStyle={s.copy}>
-              <Text style={s.label}>考匠公告</Text>
-              <Text accessibilityRole="header" style={s.title}>{content.title}</Text>
-              <Text style={s.date}>{new Date(content.updatedAt).toLocaleDateString('zh-CN')}</Text>
-              <Text testID="announcement-body" selectable style={s.body}>{content.body}</Text>
-            </ScrollView>
-            <AnimatedPressable accessibilityRole="button" accessibilityLabel="关闭公告"
-              onPress={() => setOpen(false)} style={s.close}>
-              <Text style={s.closeText}>知道了</Text>
-            </AnimatedPressable>
-          </View>
-        </View>
-      </Modal>
+      <AnnouncementDialog content={content} visible={open && active} onClose={() => setOpen(false)} />
     </>
   );
 }
@@ -57,13 +42,4 @@ const styles = (c: ThemeColors) => StyleSheet.create({
     borderRadius: 6, fontSize: 13, fontWeight: '700' },
   summary: { flex: 1, minWidth: 0, color: c.text, fontSize: 15, lineHeight: 23 },
   arrow: { color: c.textMuted, fontSize: 22 },
-  backdrop: { flex: 1, padding: 24, alignItems: 'center', justifyContent: 'center', backgroundColor: c.overlay },
-  dialog: { width: '100%', maxWidth: 500, maxHeight: '85%', padding: 24, gap: 20, borderRadius: 24, backgroundColor: c.surface },
-  copy: { gap: 12 },
-  label: { color: c.brandDark, fontSize: 13, fontWeight: '700' },
-  title: { color: c.text, fontSize: 22, lineHeight: 32, fontWeight: '700' },
-  date: { color: c.textMuted, fontSize: 13, lineHeight: 20 },
-  body: { color: c.text, fontSize: 16, lineHeight: 27 },
-  close: { minHeight: 48, padding: 12, alignItems: 'center', justifyContent: 'center', borderRadius: 12, backgroundColor: c.brandSoft },
-  closeText: { color: c.brandDark, fontSize: 16, fontWeight: '700' },
 });

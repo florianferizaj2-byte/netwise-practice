@@ -278,6 +278,8 @@ export type AuthResponse = {
     id: string;
     username: string;
     communityName?: string | null;
+    avatarUrl?: string | null;
+    profileComplete?: boolean;
     certificateId?: string | null;
     isAdmin?: boolean;
   };
@@ -726,6 +728,13 @@ export const mobileApi = {
     );
     await activateStudyScope(response.user);
     return response;
+  },
+
+  async saveProfile(fields: { name: string; image?: { data: string; mimeType: 'image/jpeg' | 'image/png' | 'image/webp' } }) {
+    const result = await request<{ user: AuthResponse['user'] }>('/auth/profile', { method: 'PUT', body: JSON.stringify(fields) });
+    // A session refresh started before this save must not restore stale profile data.
+    sessionRevision += 1;
+    return result;
   },
 
   dashboard(force = false) {

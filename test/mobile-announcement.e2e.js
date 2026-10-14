@@ -6,6 +6,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { createApp } from '../server/index.js';
 import { createStore } from '../server/store.js';
+import { completeFixtureProfile, dismissLaunchAnnouncement } from './helpers/mobile-profile.js';
 
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'aceexam-announcement-e2e-'));
 const file = path.join(dir, 'announcement.json');
@@ -50,12 +51,14 @@ try {
         body: JSON.stringify({ username: `announcement_${engine}`, password: 'announcement-fixture-123' }) });
       assert.equal(registered.status, 200);
       const session = await registered.json();
+      completeFixtureProfile(store, session.user);
       const selected = await fetch(`${base}/api/auth/certificate`, { method: 'PUT',
         headers: { 'Content-Type': 'application/json', 'X-Client': 'mobile', 'X-App-Version': version, Authorization: `Bearer ${session.sessionToken}` },
         body: JSON.stringify({ certificateId: 'hcia-datacom' }) });
       assert.equal(selected.status, 200);
       await context.addInitScript((token) => localStorage.setItem('kaojiang-session-token', token), session.sessionToken);
       await page.goto(`${base}/app/`);
+      await dismissLaunchAnnouncement(page);
       await expect(page.getByTestId('today-screen')).toBeVisible();
       await expect(page.getByText('每一步，都有进度', { exact: true })).toHaveCount(0);
       const today = page.getByTestId('today-screen');
@@ -80,6 +83,7 @@ try {
       await page.clock.fastForward(61_000);
       await expect(banner(updated.title)).toBeVisible();
       await page.reload();
+      await dismissLaunchAnnouncement(page);
       await expect(banner(updated.title)).toBeVisible();
       assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('kaojiang-public-announcement-v1')).title), updated.title);
 

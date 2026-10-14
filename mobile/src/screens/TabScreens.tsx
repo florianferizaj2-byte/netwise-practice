@@ -41,6 +41,7 @@ import { AiQuestionDraftScreen } from './AiQuestionDraftScreen';
 import { PracticeHubScreen } from './PracticeHubScreen';
 import { CommunityScreen } from './CommunityScreen';
 import { AdminScreen } from './AdminScreen';
+import { ProfileSetupScreen } from './ProfileSetupScreen';
 import { previewUiSound } from '../audioFeedback';
 import {
   AnimatedPressable,
@@ -1317,15 +1318,12 @@ export function ProfileScreen({
   const [aboutOpen, setAboutOpen] = useState(false);
   const [tutorialOpen, setTutorialOpen] = useState(false);
   const [authorApiOpen, setAuthorApiOpen] = useState(false);
-  const [communityNameOpen, setCommunityNameOpen] = useState(false);
   const [communityOpen, setCommunityOpen] = useState(false);
   const [adminOpen, setAdminOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const [redeemOpen, setRedeemOpen] = useState(false);
   const [membershipPlan, setMembershipPlan] = useState<keyof typeof membershipLabels>('free');
   const membershipRevision = useRef(0);
-  const [communityName, setCommunityName] = useState('');
-  const [communityNameBusy, setCommunityNameBusy] = useState(false);
-  const [communityNameError, setCommunityNameError] = useState('');
   const [settings, setSettings] = useState<AiSettingsResponse | null>(null);
   const [canManageAiService, setCanManageAiService] = useState(false);
   const [settingsBusy, setSettingsBusy] = useState(false);
@@ -1357,34 +1355,6 @@ export function ProfileScreen({
       .catch(() => undefined);
     return () => { mounted = false; };
   }, [active, preview, user?.id]);
-
-  function openCommunityNameSettings() {
-    setCommunityName(user?.communityName || user?.username || '');
-    setCommunityNameError('');
-    setCommunityNameOpen(true);
-  }
-
-  async function saveCommunityName() {
-    if (!user || preview) return;
-    const name = communityName.trim();
-    if (!name) {
-      setCommunityNameError('社区昵称不能为空');
-      return;
-    }
-    setCommunityNameBusy(true);
-    setCommunityNameError('');
-    try {
-      const result = await mobileApi.updateCommunityProfile(name);
-      onUserUpdated?.(result.user);
-      setCommunityNameOpen(false);
-    } catch (cause: unknown) {
-      setCommunityNameError(
-        cause instanceof Error ? cause.message : '社区昵称保存失败',
-      );
-    } finally {
-      setCommunityNameBusy(false);
-    }
-  }
 
   async function openAiSettings() {
     if (!user || preview) {
@@ -1527,10 +1497,10 @@ export function ProfileScreen({
       )}
       <EntranceView delay={60} distance={16} style={styles.profileCard}>
         <View style={styles.profileIdentity}>
-          <View style={styles.avatar}><Text style={styles.avatarText}>考</Text></View>
+          {user?.avatarUrl ? <Image source={{ uri: mobileApi.resolveDownloadUrl(user.avatarUrl) }} style={styles.avatar} /> : <View style={styles.avatar}><Text style={styles.avatarText}>考</Text></View>}
           <View style={styles.profileIdentityCopy}>
             <Text style={styles.profileKicker}>考匠账号</Text>
-            <Text numberOfLines={1} style={styles.profileName}>{user?.username ?? '未登录用户'}</Text>
+            <Text numberOfLines={1} style={styles.profileName}>{user?.communityName || user?.username || '未登录用户'}</Text>
             <Text numberOfLines={1} style={styles.profileMeta}>
               {activeCertificate?.name ?? (user ? '请选择证书与题库' : '预览模式')}
             </Text>
@@ -1620,8 +1590,8 @@ export function ProfileScreen({
             value={canManageAiService ? '管理作者服务' : '作者服务 · 按额度使用'}
           />
           <SettingRow
-            onPress={user ? openCommunityNameSettings : undefined}
-            title="社区昵称"
+            onPress={user ? () => setProfileOpen(true) : undefined}
+            title="个人资料"
             value={user?.communityName || user?.username || '登录后设置'}
           />
         </View>
@@ -1661,6 +1631,9 @@ export function ProfileScreen({
           </AnimatedPressable>
         </EntranceView>
       )}
+      {user && profileOpen && <Modal visible={active} onRequestClose={() => setProfileOpen(false)} animationType="slide">
+        <ProfileSetupScreen user={user} onSaved={(updated) => { onUserUpdated?.(updated); setProfileOpen(false); }} onCancel={() => setProfileOpen(false)} />
+      </Modal>}
       <Modal
         animationType="slide"
         onRequestClose={() => setAppSettingsOpen(false)}
@@ -1830,55 +1803,6 @@ export function ProfileScreen({
             >
               <Text style={styles.modalPrimaryText}>暂时关闭</Text>
             </AnimatedPressable>
-          </View>
-        </View>
-      </Modal>
-      <Modal
-        animationType="fade"
-        onRequestClose={() => {
-          if (!communityNameBusy) setCommunityNameOpen(false);
-        }}
-        transparent
-        visible={active && communityNameOpen}
-      >
-        <View style={styles.modalBackdrop}>
-          <View style={styles.nameModal}>
-            <Text style={styles.modalTitle}>设置社区昵称</Text>
-            <Text style={styles.modalIntro}>
-              这是你在公共大群里显示的名字，不会改变登录账号。最多 24 个字符。
-            </Text>
-            <TextInput
-              editable={!communityNameBusy}
-              maxLength={24}
-              onChangeText={setCommunityName}
-              placeholder="输入社区昵称"
-              placeholderTextColor={colors.textFaint}
-              style={styles.settingsInput}
-              value={communityName}
-            />
-            {!!communityNameError && (
-              <Text style={styles.settingsError}>{communityNameError}</Text>
-            )}
-            <View style={styles.modalActions}>
-              <AnimatedPressable
-                disabled={communityNameBusy}
-                onPress={() => setCommunityNameOpen(false)}
-                style={styles.modalSecondaryButton}
-              >
-                <Text style={styles.modalSecondaryText}>取消</Text>
-              </AnimatedPressable>
-              <AnimatedPressable
-                disabled={communityNameBusy}
-                onPress={() => void saveCommunityName()}
-                style={styles.modalPrimaryButton}
-              >
-                {communityNameBusy ? (
-                  <ActivityIndicator color={colors.white} />
-                ) : (
-                  <Text style={styles.modalPrimaryText}>保存昵称</Text>
-                )}
-              </AnimatedPressable>
-            </View>
           </View>
         </View>
       </Modal>

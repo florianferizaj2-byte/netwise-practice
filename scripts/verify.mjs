@@ -24,6 +24,7 @@ for (const [label, args] of [
   ["移动端 AI 精炼完整流程检查", ["test/mobile-study.e2e.js"]],
   ["手机账号管理完整流程检查", ["test/mobile-admin.e2e.js"]],
   ["公告热更新完整流程检查", ["test/mobile-announcement.e2e.js"]],
+  ["启动公告、资料补全与网页用户列表检查", ["test/mobile-profile.e2e.js"]],
   ["官网安装包与强制更新检查", ["test/mobile-release-publish.e2e.js"]],
 ]) {
   console.log(`\n正在进行：${label}`);

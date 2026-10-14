@@ -12,8 +12,13 @@ import android.os.Build
 import android.os.Bundle
 import android.os.PowerManager
 import android.provider.Settings
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.ScrollView
+import androidx.appcompat.app.AlertDialog
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
@@ -36,6 +41,7 @@ class SetupActivity : MinimalActivity() {
     private var overlayLocationLaunched = false
     private var updatingSwitch = false
     private var receiverRegistered = false
+    private var authorHelpDialog: AlertDialog? = null
     private val consentToken get() = intent.getStringExtra(LearningConsent.EXTRA_TOKEN)
     private val permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
         if (overlayRequested) {
@@ -66,6 +72,7 @@ class SetupActivity : MinimalActivity() {
             ViewCompat.setAccessibilityHeading(it, true)
         }
         binding.setupBack.setOnClickListener { finish() }
+        binding.authorHelpButton.setOnClickListener { showAuthorHelp() }
         binding.phoneSettingsButton.setOnClickListener { openSettings(Intent(Settings.ACTION_DEVICE_INFO_SETTINGS)) }
         binding.developerSettingsButton.setOnClickListener { openSettings(Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS)) }
         binding.locationSettingsButton.setOnClickListener { openSettings(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)) }
@@ -101,6 +108,48 @@ class SetupActivity : MinimalActivity() {
         if (receiverRegistered) unregisterReceiver(statusReceiver)
         receiverRegistered = false
         super.onStop()
+    }
+
+    override fun onDestroy() {
+        authorHelpDialog?.dismiss()
+        authorHelpDialog = null
+        super.onDestroy()
+    }
+
+    private fun showAuthorHelp() {
+        if (authorHelpDialog?.isShowing == true || isFinishing || isDestroyed) return
+        val padding = (16 * resources.displayMetrics.density).toInt()
+        val content = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(padding, 0, padding, padding)
+            addView(ImageView(this@SetupActivity).apply {
+                id = R.id.authorFriendCode
+                setImageResource(R.drawable.author_friend_code)
+                adjustViewBounds = true
+                scaleType = ImageView.ScaleType.FIT_CENTER
+                contentDescription = getString(R.string.author_friend_code_description)
+            }, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT))
+            addView(TextView(this@SetupActivity).apply {
+                text = getString(R.string.author_help_hint)
+                textSize = 14f
+                setPadding(0, padding, 0, 0)
+            })
+        }
+        val scroll = object : ScrollView(this) {
+            override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+                val maximum = (resources.displayMetrics.heightPixels * 0.65f).toInt()
+                val available = if (View.MeasureSpec.getMode(heightMeasureSpec) == View.MeasureSpec.UNSPECIFIED) maximum
+                    else minOf(maximum, View.MeasureSpec.getSize(heightMeasureSpec))
+                super.onMeasure(widthMeasureSpec, View.MeasureSpec.makeMeasureSpec(available, View.MeasureSpec.AT_MOST))
+            }
+        }.apply {
+            addView(content)
+        }
+        authorHelpDialog = AlertDialog.Builder(this)
+            .setTitle(R.string.author_help_title)
+            .setView(scroll)
+            .setPositiveButton(R.string.author_help_close) { _, _ -> }
+            .create().also { it.show() }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

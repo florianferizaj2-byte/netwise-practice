@@ -20,15 +20,15 @@ try {
   assert.equal(file.status, 200);
   assert.match(file.headers.get('content-type'), /android|octet-stream/);
   const apk = Buffer.from(await file.arrayBuffer());
-  assert.equal(apk.length, 73742723);
+  assert.equal(apk.length, fs.statSync(path.resolve('public', '.' + policy.downloadUrl)).size);
   assert.equal(crypto.createHash('sha256').update(apk).digest('hex'), policy.apkSha256);
   const range = await fetch(base + policy.downloadUrl, { headers: { Range: 'bytes=0-1023' } });
   assert.equal(range.status, 206);
   assert.equal((await range.arrayBuffer()).byteLength, 1024);
-  const old = await fetch(`${base}/api/mobile/version?version=0.4.4`).then((response) => response.json());
+  const old = await fetch(`${base}/api/mobile/version?version=0.4.5`).then((response) => response.json());
   assert.equal(old.forceUpdate, true); assert.equal(old.minimumVersion, policy.minimumVersion);
-  assert.equal((await fetch(`${base}/api/mobile/version?version=0.4.5`).then((response) => response.json())).forceUpdate, false);
-  assert.equal((await fetch(`${base}/app/version.json`).then((response) => response.json())).version, '0.4.5');
+  assert.equal((await fetch(`${base}/api/mobile/version?version=${policy.latestVersion}`).then((response) => response.json())).forceUpdate, false);
+  assert.equal((await fetch(`${base}/app/version.json`).then((response) => response.json())).version, policy.latestVersion);
   browser = await chromium.launch({ headless: true, proxy: { server: 'http://127.0.0.1:9', bypass: '127.0.0.1,localhost' } });
   const page = await browser.newPage({ viewport: { width: 1280, height: 850 } });
   const errors = []; page.on('pageerror', (error) => errors.push(error.message));
@@ -37,7 +37,7 @@ try {
   if (await dismiss.isVisible()) await dismiss.click();
   const link = page.locator(`a[href$="${policy.downloadUrl}"]`).first();
   await expect(link).toBeVisible();
-  await expect(page.getByText('当前版本 v0.4.5 · APK 安装包', { exact: true })).toBeVisible();
+  await expect(page.getByText(`当前版本 v${policy.latestVersion} · APK 安装包`, { exact: true })).toBeVisible();
   await page.screenshot({ path: path.join(out, 'download-page.png'), fullPage: true });
   assert.deepEqual(errors, []);
   fs.writeFileSync(path.join(out, 'report.json'), JSON.stringify({ version: policy.latestVersion, minimumVersion: policy.minimumVersion,

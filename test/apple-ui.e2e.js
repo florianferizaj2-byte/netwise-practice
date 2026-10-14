@@ -8,11 +8,13 @@ import { webkit, chromium, expect } from "@playwright/test";
 import { createApp } from "../server/index.js";
 import { createStore } from "../server/store.js";
 import { mockStudyAI } from "./study-fixture.js";
+import { completeFixtureProfile, dismissLaunchAnnouncement } from './helpers/mobile-profile.js';
 
 const directory = fs.mkdtempSync(path.join(os.tmpdir(), "aceexam-ios-ui-"));
 const store = createStore(directory);
 await store.register("ios_ui_owner", "fixture-password-123");
 const learner = await store.register("ios_ui_learner", "fixture-password-123");
+completeFixtureProfile(store, learner);
 store.selectCertificate(learner.id, "network-engineer");
 store.saveAccountEntitlement(learner.id, {
   plan: "vip",
@@ -147,6 +149,7 @@ try {
     }
     try {
       await page.goto(`${base}/app/`);
+      await dismissLaunchAnnouncement(page);
       await text("欢迎回来").waitFor();
       await layout("auth", false);
       await shot("auth");

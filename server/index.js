@@ -35,6 +35,7 @@ import { createAiScheduler, checkAiCancellation } from "./ai-tasks.js";
 import { createAuthRateLimiter } from "./auth-rate-limit.js";
 import { createMobileAnnouncementService, registerMobileAnnouncement } from "./mobile-announcement.js";
 import { registerMobileAdminRoutes } from "./mobile-admin.js";
+import { createMobileProfileService, registerMobileProfile } from "./mobile-profile.js";
 import { resolveMobileRelease } from "./mobile-release.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
@@ -146,6 +147,7 @@ export async function createApp(options = {}) {
   // profile, including its encrypted AI API key. Tests/local fixtures can
   // still opt into anonymous mode explicitly with { authRequired: false }.
   const authRequired = options.authRequired ?? true;
+  const mobileProfiles = createMobileProfileService(store);
   const app = express();
   const aiScheduler = createAiScheduler(options.aiTasks);
   const ai = (userId, fn) => aiScheduler.run(userId, fn);
@@ -240,7 +242,7 @@ export async function createApp(options = {}) {
       ...(expires ? { maxAge: 30 * 86400000 } : { maxAge: 0 }),
     });
   const userView = (user) => ({
-    ...user,
+    ...mobileProfiles.view(user),
     certificate: certificates.find((c) => c.id === user.certificateId) || null,
   });
   route("get", "/api/auth/me", (req) => {
@@ -434,6 +436,7 @@ export async function createApp(options = {}) {
     req.user = user;
     next();
   });
+  registerMobileProfile({ app, route, service: mobileProfiles, userView });
   route("put", "/api/auth/certificate", (req) => {
     if (!req.user) throw new Error("请先登录");
     const certificateId = z
@@ -1154,7 +1157,7 @@ export async function createApp(options = {}) {
     const search = z
       .object({ search: z.string().max(100).optional() })
       .parse(req.query).search || "";
-    return { users: store.adminUsers(search) };
+    return { users: store.adminUsers(search).map((user) => mobileProfiles.view(user)) };
   });
   route("put", "/api/admin/users/:id/ban", (req) => {
     requireAdmin(req);

@@ -1,0 +1,5 @@
+.admin-user-identity { display: flex; align-items: center; gap: 12px; min-width: 180px; }
+.admin-user-avatar { width: 44px; height: 44px; flex: 0 0 44px; border-radius: 50%; object-fit: cover; background: #eef4f1; }
+.admin-user-avatar-fallback { display: grid; place-items: center; color: #245b47; font-weight: 700; }
+.admin-user-identity strong, .admin-user-identity small { display: block; }
+.admin-user-identity small { color: #60746a; margin-top: 4px; }

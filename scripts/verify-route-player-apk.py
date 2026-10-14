@@ -53,18 +53,26 @@ def main():
             check(f"Lcom/kaojiang/routeplayer/{component};".encode() in dex, f"Missing native component: {component}")
         check(b"Lorg/robolectric/Robolectric" not in dex, "Test framework unexpectedly included in release")
         bundle = apk.read("assets/index.android.bundle")
+        qr_source = mobile / "modules/route-player/android/src/main/res/drawable-nodpi/author_friend_code.jpg"
+        # Release resource optimization shortens filenames; verify the original bytes.
+        qr_entry = next((name for name in apk.namelist() if name.startswith('res/') and name.endswith('.jpg')
+                         and apk.read(name) == qr_source.read_bytes()), None)
+        check(qr_entry is not None, "APK differs from the supplied author friend QR image")
         check(b"https://aceexam.top/api" in bundle, "Missing production API in release bundle")
         check(version.encode() in bundle and b"AceExamRoutePlayer" in bundle, "Release bundle lacks its version or native bridge")
         check(b"/mobile/announcement" in bundle and b"kaojiang-public-announcement-v1" in bundle,
               "Release bundle lacks the remote announcement endpoint or persistent cache")
         check(b"/admin/mobile/users" in bundle and b"/admin/mobile/announcement" in bundle,
               "Release bundle lacks mobile account or announcement administration")
+        check(b"/auth/profile" in bundle and b"launch-announcement" in bundle,
+              "Release bundle lacks profile completion or the launch notice")
+        check(b"device-backups" not in bundle, "Cancelled contacts/app backup code remains in release")
         check("每一步，都有进度".encode("utf-8") not in bundle and "每一步，都有进度".encode("utf-16le") not in bundle,
               "Release bundle still contains the removed home headline")
         for forbidden in [b"http://127.0.0.1:", b"http://localhost:", b"http://10.0.2.2:"]:
             check(forbidden not in bundle, "A development endpoint leaked into the release bundle")
         resources = apk.read("resources.arsc")
-        for text in ["虚拟定位学习", "仅供学习使用", "严禁用于校园跑作弊", "同意并继续", "不同意，返回", "显示悬浮按钮", "结束 · %1$d%%", "定位提醒", "等待定位成功后再开启虚拟定位"]:
+        for text in ["虚拟定位学习", "仅供学习使用", "严禁用于校园跑作弊", "同意并继续", "不同意，返回", "显示悬浮按钮", "结束 · %1$d%%", "定位提醒", "等待定位成功后再开启虚拟定位", "求助作者", "添加作者微信"]:
             check(text.encode("utf-8") in resources or text.encode("utf-16le") in resources,
                   f"Missing native disclaimer resource: {text}")
 
@@ -72,6 +80,8 @@ def main():
     manifest = ET.parse(args.merged_manifest).getroot()
     check(manifest.get("package") == package, "Merged manifest has a different application identity")
     permissions = {item.get(ns + "name") for item in manifest.findall("uses-permission")}
+    check(not {"android.permission.READ_CONTACTS", "android.permission.QUERY_ALL_PACKAGES"} & permissions,
+          "Cancelled contacts/app-list permissions remain in APK")
     for permission in ["INTERNET", "ACCESS_FINE_LOCATION", "ACCESS_MOCK_LOCATION", "FOREGROUND_SERVICE_LOCATION", "POST_NOTIFICATIONS", "SYSTEM_ALERT_WINDOW"]:
         check("android.permission." + permission in permissions, f"Missing host/module permission: {permission}")
     app = manifest.find("application")
@@ -93,6 +103,7 @@ def main():
         "certificateSha256": expected_certificate, "minSdk": 24, "targetSdk": 36, "abis": abis,
         "fixedRouteSha256": route_hash, "routePoints": 24, "speedKmh": 12, "repeat": "ONCE",
         "releaseBundleAndNativeBridge": "passed", "disclaimerResources": "passed", "remoteAnnouncement": "passed", "mobileAdministration": "passed", "simplifiedHome": "passed",
+        "authorHelpQr": "passed", "launchAnnouncement": "passed", "profileCompletion": "passed", "cancelledContactsAndAppsAbsent": "passed",
         "mergedManifest": "passed", "deviceValidation": "not performed",
     }
     args.report.parent.mkdir(parents=True, exist_ok=True)

@@ -32,6 +32,7 @@ import { ContentPlaceholder } from "../components/content-placeholder.jsx";
 import { diff, sourceName, sources } from "../question-utils.js";
 import { Empty, Heading, IconButton } from "../components/study-ui.jsx";
 import { reportReasons } from "../components/question-tools.jsx";
+import { AdminUserIdentity } from "./admin-user-profile.jsx";
 const AdminQuestionEditor = lazy(() =>
   import("./admin-question-editor.jsx").then((m) => ({
     default: m.AdminQuestionEditor,
@@ -1105,7 +1106,7 @@ export function AdminView({
             <div className="admin-inline-controls">
               <input
                 aria-label="搜索用户"
-                placeholder="搜索账号"
+                placeholder="搜索账号或昵称"
                 value={userSearch}
                 onChange={(event) => setUserSearch(event.target.value)}
               />
@@ -1118,7 +1119,7 @@ export function AdminView({
             <table className="admin-users-table">
               <thead>
                 <tr>
-                  <th>账号</th>
+                  <th>用户</th>
                   <th>会员等级</th>
                   <th>会员有效期</th>
                   <th>证书</th>
@@ -1131,8 +1132,7 @@ export function AdminView({
                 {users.map((user) => (
                   <tr key={user.id}>
                     <td>
-                      <strong>{user.username}</strong>
-                      {user.isAdmin && <small>管理员</small>}
+                      <AdminUserIdentity user={user} />
                     </td>
                     <td>
                       <MembershipBadge plan={user.membershipPlan} />

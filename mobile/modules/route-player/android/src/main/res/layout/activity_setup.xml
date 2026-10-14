@@ -9,7 +9,11 @@
             android:layout_height="wrap_content" android:minHeight="48dp" android:text="@string/simple_back" />
         <TextView android:id="@+id/setupTitle" android:layout_width="0dp" android:layout_height="wrap_content"
             android:layout_weight="1" android:text="@string/simple_tutorial" android:textSize="20sp"
-            android:textColor="@color/rp_text" android:fontFamily="sans-serif-medium" android:padding="12dp" />
+            android:textColor="@color/rp_text" android:fontFamily="sans-serif-medium"
+            android:paddingLeft="4dp" android:paddingRight="4dp" android:paddingTop="12dp" android:paddingBottom="12dp" />
+        <com.google.android.material.button.MaterialButton android:id="@+id/authorHelpButton"
+            style="@style/Widget.Material3.Button.TextButton" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:minHeight="48dp" android:text="@string/author_help" />
     </LinearLayout>
     <androidx.core.widget.NestedScrollView android:id="@+id/setupScroll" android:layout_width="match_parent"
         android:layout_height="0dp" android:layout_weight="1" android:fillViewport="true">

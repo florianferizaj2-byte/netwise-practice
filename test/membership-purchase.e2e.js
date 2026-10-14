@@ -5,6 +5,7 @@ import path from "node:path";
 import { chromium, webkit, expect } from "@playwright/test";
 import { createApp } from "../server/index.js";
 import { createStore } from "../server/store.js";
+import { completeFixtureProfile, dismissLaunchAnnouncement } from './helpers/mobile-profile.js';
 
 process.env.ALLOWED_HOSTS = "127.0.0.1,localhost";
 process.env.COOKIE_SECURE = "0";
@@ -35,6 +36,7 @@ try {
     browser = await type.launch({ headless: true, proxy: { server: "http://127.0.0.1:9", bypass: "127.0.0.1,localhost" } });
     for (const mobile of [false, true]) {
       const user = await store.register(`purchase_${engine}_${mobile ? "mobile" : "desktop"}`, "fixture-password-123");
+      completeFixtureProfile(store, user);
       store.selectCertificate(user.id, "sichuan-upgrading-computer");
       const token = store.createAuthSession(user.id);
       const context = await browser.newContext(mobile ? { viewport: { width: 375, height: 812 }, isMobile: true, hasTouch: true,
@@ -55,6 +57,7 @@ try {
       page.setDefaultTimeout(15000);
       page.on("pageerror", (error) => errors.push(error.message));
       await page.goto(mobile ? `${base}/app/` : `${base}/#vip`);
+      if (mobile) await dismissLaunchAnnouncement(page);
       if (mobile) await page.getByRole("button", { name: "VIP导航", exact: true }).click();
       const purchase = page.getByRole("link", { name: "购买会员兑换码", exact: true }).first();
       await shop(context, page, purchase);

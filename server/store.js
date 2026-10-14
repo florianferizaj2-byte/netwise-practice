@@ -1444,9 +1444,9 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       const like = `%${search.trim()}%`;
       return db
         .prepare(
-          "SELECT u.id, u.username, u.certificate_id AS certificateId, u.created_at AS createdAt, u.is_admin AS isAdmin, u.banned_at AS bannedAt, u.ban_reason AS banReason, e.plan AS membershipPlan, e.expires_at AS membershipExpiresAt FROM users u LEFT JOIN user_entitlements e ON e.user_id=u.id WHERE (?='' OR u.username LIKE ?) ORDER BY u.created_at,u.rowid",
+          "SELECT u.id, u.username, u.community_name AS communityName, u.certificate_id AS certificateId, u.created_at AS createdAt, u.is_admin AS isAdmin, u.banned_at AS bannedAt, u.ban_reason AS banReason, e.plan AS membershipPlan, e.expires_at AS membershipExpiresAt FROM users u LEFT JOIN user_entitlements e ON e.user_id=u.id WHERE (?='' OR u.username LIKE ? OR COALESCE(u.community_name,'') LIKE ?) ORDER BY u.created_at,u.rowid",
         )
-        .all(search.trim(), like)
+        .all(search.trim(), like, like)
         .map((user) => ({ ...user, isAdmin: !!user.isAdmin, membershipPlan: user.membershipExpiresAt && Date.parse(user.membershipExpiresAt) <= Date.now() ? "free" : user.membershipPlan || "free" }));
     },
     adminUser: (userId) => adminUserView(db.prepare(`${adminUserSelect} WHERE u.id=?`).get(userId)),

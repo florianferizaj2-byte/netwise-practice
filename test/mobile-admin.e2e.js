@@ -6,11 +6,14 @@ import os from 'node:os';
 import path from 'node:path';
 import { createApp } from '../server/index.js';
 import { createStore } from '../server/store.js';
+import { completeFixtureProfile, dismissLaunchAnnouncement } from './helpers/mobile-profile.js';
 
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'aceexam-admin-e2e-'));
 const store = createStore(dir);
 const admin = store.register('mobile_admin_fixture', 'fixture-password-123');
 const learner = store.register('mobile_member_fixture', 'fixture-password-123');
+completeFixtureProfile(store, admin);
+completeFixtureProfile(store, learner);
 store.selectCertificate(admin.id, 'hcia-datacom');
 store.selectCertificate(learner.id, 'hcia-datacom');
 const app = await createApp({ store, withFrontend: true, production: true, authRequired: true });
@@ -24,7 +27,7 @@ let browser;
 try {
   for (const [engine, launcher] of [['chromium', chromium], ['webkit', webkit]]) {
     store.setUserBanned(learner.id, false);
-    store.updateCommunityName(learner.id, null);
+    store.updateCommunityName(learner.id, learner.username);
     store.saveAccountEntitlement(learner.id, { plan: 'free', expiresAt: null });
     const adminToken = store.createAuthSession(admin.id);
     const learnerToken = store.createAuthSession(learner.id);
@@ -48,12 +51,14 @@ try {
     };
     try {
       await student.goto(`${base}/app/`);
+      await dismissLaunchAnnouncement(student);
       await expect(student.getByTestId('today-screen')).toBeVisible();
       await student.getByRole('button', { name: '我的导航', exact: true }).click();
       await expect(student.getByText('管理中心', { exact: true })).toHaveCount(0);
       const blocked = await fetch(`${base}/api/admin/mobile/users`, { headers: { Authorization: `Bearer ${learnerToken}` } });
       assert.equal(blocked.status, 403);
       await page.goto(`${base}/app/`);
+      await dismissLaunchAnnouncement(page);
       await expect(page.getByTestId('today-screen')).toBeVisible();
       await page.getByRole('button', { name: '我的导航', exact: true }).click();
       await page.getByText('管理中心', { exact: true }).click();
