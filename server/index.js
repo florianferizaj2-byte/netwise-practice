@@ -12,6 +12,7 @@ import { createLearningPlans, createPlanSchema, addPlanTaskSchema, cancelPlanTas
 import {registerInteractiveTutor} from "./interactive-tutor.js";
 import { registerKnowledgeFavorites } from "./knowledge-favorites.js";
 import { registerWebPreferences } from "./web-preferences.js";
+import { registerStudyReminders } from "./study-reminders.js";
 import { registerExamRoutes } from "./exams.js";
 import {
   encrypt,
@@ -917,7 +918,8 @@ export async function createApp(options = {}) {
   registerInteractiveTutor({app,route,store,requestUserId,studyContent:study.content,resolveQuestion:requireQ,
     teacher:study.teacher,ai,requireAiService});
   registerKnowledgeFavorites({ route, store, requestUserId, studyContent: study.content });
-  registerWebPreferences({ route, store, requestUserId });
+  const webPreferences = registerWebPreferences({ route, store, requestUserId });
+  registerStudyReminders({ route, store, requestUserId, preferences: webPreferences });
   const adminQuestion = (question, includeFeedback = false) => ({
     ...question,
     ...(includeFeedback

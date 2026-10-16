@@ -5,6 +5,8 @@ import {
   preferenceTextSizes,
   preferenceCounts,
   webPreferenceDefaults,
+  validReminderTime,
+  validReminderTimeZone,
 } from "./web-preference-values.js";
 import { studyError } from "./study-content.js";
 
@@ -16,6 +18,13 @@ const valuesSchema = z
     defaultCount: z.union(preferenceCounts.map((n) => z.literal(n))),
     showAnalysis: z.boolean().optional(),
     autoNext: z.boolean().optional(),
+    reminderEnabled: z.boolean().optional(),
+    reminderTime: z.string().refine(validReminderTime).optional(),
+    reminderTimeZone: z
+      .string()
+      .max(100)
+      .refine(validReminderTimeZone)
+      .optional(),
   })
   .strict();
 const writeSchema = z
@@ -53,6 +62,11 @@ export function registerWebPreferences({ route, store, requestUserId }) {
       defaultCount: data.counts?.[certificate] || 10,
       showAnalysis: data.showAnalysis ?? webPreferenceDefaults.showAnalysis,
       autoNext: data.autoNext ?? webPreferenceDefaults.autoNext,
+      reminderEnabled:
+        data.reminderEnabled ?? webPreferenceDefaults.reminderEnabled,
+      reminderTime: data.reminderTime ?? webPreferenceDefaults.reminderTime,
+      reminderTimeZone:
+        data.reminderTimeZone ?? webPreferenceDefaults.reminderTimeZone,
     },
   });
   route("get", "/api/web-preferences", (req, res) => {
@@ -117,6 +131,18 @@ export function registerWebPreferences({ route, store, requestUserId }) {
           body.values.autoNext ??
           current.data.autoNext ??
           webPreferenceDefaults.autoNext,
+        reminderEnabled:
+          body.values.reminderEnabled ??
+          current.data.reminderEnabled ??
+          webPreferenceDefaults.reminderEnabled,
+        reminderTime:
+          body.values.reminderTime ??
+          current.data.reminderTime ??
+          webPreferenceDefaults.reminderTime,
+        reminderTimeZone:
+          body.values.reminderTimeZone ??
+          current.data.reminderTimeZone ??
+          webPreferenceDefaults.reminderTimeZone,
         counts: {
           ...current.data.counts,
           [certificate]: body.values.defaultCount,
@@ -141,4 +167,5 @@ export function registerWebPreferences({ route, store, requestUserId }) {
     }
     return view(read(user), certificate);
   });
+  return { read: (user, certificate) => view(read(user), certificate) };
 }

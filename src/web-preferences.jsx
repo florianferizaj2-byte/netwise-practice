@@ -31,7 +31,11 @@ export function useWebPreferences(user, enabled) {
       )
         throw new Error("设置范围已改变，请刷新页面重试。");
       if (epoch === generation.current)
-        setRecord({ ...data, owner: user.id, scope });
+        setRecord((previous) =>
+          previous?.scope === scope && previous.version > data.version
+            ? previous
+            : { ...data, owner: user.id, scope },
+        );
       return data;
     } catch (e) {
       if (epoch === generation.current) setError(e.message);
@@ -102,7 +106,11 @@ export function useWebPreferences(user, enabled) {
       data.certificateId !== user.certificateId
     )
       throw new Error("设置范围已改变，请刷新页面重试。");
-    setRecord({ ...data, owner: user.id, scope });
+    setRecord((previous) =>
+      previous?.scope === scope && previous.version > data.version
+        ? previous
+        : { ...data, owner: user.id, scope },
+    );
     setError("");
   }
   return {

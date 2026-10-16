@@ -9,7 +9,40 @@ export const webPreferenceDefaults = Object.freeze({
   defaultCount: 10,
   showAnalysis: true,
   autoNext: false,
+  reminderEnabled: false,
+  reminderTime: "20:00",
+  reminderTimeZone: "Asia/Shanghai",
 });
+export const validReminderTime = (value) =>
+  typeof value === "string" && /^([01]\d|2[0-3]):[0-5]\d$/.test(value);
+export function validReminderTimeZone(value) {
+  if (typeof value !== "string" || value.length > 100) return false;
+  try {
+    new Intl.DateTimeFormat("en", { timeZone: value }).format(0);
+    return true;
+  } catch {
+    return false;
+  }
+}
+export function reminderClock(timestamp, timeZone) {
+  const parts = Object.fromEntries(
+    new Intl.DateTimeFormat("en-GB", {
+      timeZone,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      hourCycle: "h23",
+    })
+      .formatToParts(timestamp)
+      .map(({ type, value }) => [type, value]),
+  );
+  return {
+    date: `${parts.year}-${parts.month}-${parts.day}`,
+    time: `${parts.hour}:${parts.minute}`,
+  };
+}
 export function validWebPreferences(value) {
   return (
     value &&
@@ -22,6 +55,12 @@ export function validWebPreferences(value) {
     preferenceCounts.includes(value.defaultCount) &&
     (value.showAnalysis === undefined ||
       typeof value.showAnalysis === "boolean") &&
-    (value.autoNext === undefined || typeof value.autoNext === "boolean")
+    (value.autoNext === undefined || typeof value.autoNext === "boolean") &&
+    (value.reminderEnabled === undefined ||
+      typeof value.reminderEnabled === "boolean") &&
+    (value.reminderTime === undefined ||
+      validReminderTime(value.reminderTime)) &&
+    (value.reminderTimeZone === undefined ||
+      validReminderTimeZone(value.reminderTimeZone))
   );
 }

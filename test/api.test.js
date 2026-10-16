@@ -608,6 +608,10 @@ test("server-generated AI groups are immutable, shareable by certificate, and ke
   process.env.AI_MASTER_KEY = crypto.randomBytes(32).toString("base64");
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "netwise-ai-owner-"));
   const store = createStore(dir);
+  // A public sign-up is not an administrator. Provision the test author through
+  // the trusted store, rather than relying on a developer's .env AI credentials.
+  const author = await store.registerAsync("fixture_author", "fixture-author-password");
+  assert.equal(author.isAdmin, true);
   const provider = new OpenAICompatibleProvider(store, { fetch: mockAI() });
   const app = await createApp({
     store,
@@ -649,7 +653,7 @@ test("server-generated AI groups are immutable, shareable by certificate, and ke
     return { cookie, user };
   };
   const owner = await createUser("ai_owner");
-  store.saveSettings(owner.user.id, {
+  store.saveSettings(author.id, {
     baseUrl: "https://example.com/v1",
     model: "test",
     keyCipher: encrypt("secret"),
@@ -672,7 +676,7 @@ test("server-generated AI groups are immutable, shareable by certificate, and ke
     questionId: seed.id,
     count: 1,
   });
-  assert.equal(generated.status, 200);
+  assert.equal(generated.status, 200, JSON.stringify(generated.data));
   const publicAi = generated.data.questions[0];
   assert.ok(!("answer" in publicAi));
   assert.ok(!("analysis" in publicAi));

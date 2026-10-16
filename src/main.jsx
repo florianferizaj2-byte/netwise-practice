@@ -55,6 +55,7 @@ import {
 } from "./practice-progress.js";
 import { MembershipBadge } from "./components/membership-badge.jsx";
 import { UserAvatar } from "./components/user-avatar.jsx";
+import { StudyReminder } from "./components/study-reminder.jsx";
 import { useMembershipAccount } from "./use-membership-account.js";
 const VipView = preloadableFeature(() =>
   import("./vip-view.jsx").then((m) => ({ default: m.VipView })),
@@ -728,6 +729,8 @@ function App() {
       className={`app-shell${desktop ? " desk-workspace" : ""}${blueWeb ? " blue-workspace" : ""}`}
       data-page={page}
     >
+      {blueWeb && <StudyReminder key={auth.user.id} state={webPreferences} page={page}
+        blocked={!!busy || announcementOpen || sponsorOpen || accountMenuOpen} navigate={go} />}
       <aside className={"sidebar " + (mobile ? "open" : "")}>
         <a className="brand" href="#home" onClick={() => go("home")}>
           <span className="brand-icon">

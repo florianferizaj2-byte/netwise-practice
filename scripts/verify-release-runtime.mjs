@@ -253,10 +253,19 @@ async function worker(stage) {
                 textSize: "large",
                 reducedMotion: true,
                 defaultCount: 20,
+                reminderEnabled: true,
+                reminderTime: "00:00",
+                reminderTimeZone: "UTC",
               },
             },
             "PUT",
           );
+          const reminder = await request("/study-reminders/check", {
+            requestId: crypto.randomUUID(),
+            version: preferences.version + 1,
+          });
+          assert(reminder.notice);
+          fixture.reminder = reminder.notice;
           const plan = await request("/learning-plan", {
             requestId: crypto.randomUUID(),
             expectedPlanId: null,
@@ -375,6 +384,22 @@ async function worker(stage) {
           assert.equal(
             (await request("/web-preferences")).values.theme,
             "dark",
+          );
+          const preferences = await request("/web-preferences");
+          assert.equal(preferences.values.reminderEnabled, true);
+          assert.equal(preferences.values.reminderTime, "00:00");
+          const duplicate = await request("/study-reminders/check", {
+            requestId: crypto.randomUUID(),
+            version: preferences.version,
+          });
+          assert.equal(duplicate.notice, null);
+          assert.equal(
+            store.db
+              .prepare(
+                "SELECT request_id FROM user_study_reminders WHERE user_id=?",
+              )
+              .get(fixture.userId).request_id,
+            fixture.reminder.id,
           );
           assert.equal(
             (await request("/learning-plan")).plan.id,

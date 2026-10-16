@@ -22,6 +22,7 @@ const checks = [
   ["网页学习偏好与显示设置", "web-preferences"],
   ["个人资料与App共用资料", "blue-settings-profile"],
   ["解析展开与自动切题", "practice-review"],
+  ["账号每日学习提醒", "study-reminders"],
   ["会员三档与真实测试码兑换", "blue-membership"],
   ["全站蓝色与深色配色", "blue-palette"],
 ];

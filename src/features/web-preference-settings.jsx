@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import {
   BookOpen,
+  Bell,
   Check,
   Monitor,
   Moon,
@@ -245,6 +246,73 @@ export function WebPreferenceSettings({ state, notify, busy }) {
                 }
               />
             </label>
+          </section>
+          <section className="web-pref-reminder">
+            <h3>
+              <Bell size={21} />
+              学习提醒
+            </h3>
+            <label className="web-pref-motion">
+              <span>
+                <strong>每日学习提醒</strong>
+                <small>
+                  网页打开且可见时提醒；关闭网页后不提醒。刷题和考试结束后再显示。
+                </small>
+              </span>
+              <input
+                type="checkbox"
+                role="switch"
+                aria-label="每日学习提醒"
+                checked={draft.reminderEnabled}
+                disabled={blocked}
+                onChange={(event) =>
+                  setDraft((d) => ({
+                    ...d,
+                    reminderEnabled: event.target.checked,
+                  }))
+                }
+              />
+            </label>
+            <fieldset
+              className="web-pref-reminder-time"
+              disabled={blocked || !draft.reminderEnabled}
+            >
+              <legend>每天提醒时间</legend>
+              <label>
+                提醒时间
+                <input
+                  type="time"
+                  aria-label="提醒时间"
+                  required
+                  value={draft.reminderTime}
+                  onChange={(event) => {
+                    if (event.target.value)
+                      setDraft((d) => ({
+                        ...d,
+                        reminderTime: event.target.value,
+                      }));
+                  }}
+                />
+              </label>
+              <div>
+                <span>时区：{draft.reminderTimeZone}</span>
+                <button
+                  type="button"
+                  onClick={() =>
+                    setDraft((d) => ({
+                      ...d,
+                      reminderTimeZone:
+                        Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    }))
+                  }
+                >
+                  使用当前设备时区
+                </button>
+              </div>
+            </fieldset>
+            <p>
+              时间和时区随账号保存。超过设定时间再打开网页，当天仍可收到一次提醒；同一账号的多个窗口共用提醒记录。
+            </p>
           </section>
         </div>
       )}

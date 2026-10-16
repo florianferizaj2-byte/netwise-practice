@@ -211,6 +211,37 @@
 .web-pref-note {
   margin-top: 12px;
 }
+.web-pref-reminder {
+  grid-column: 1 / -1;
+}
+.web-pref-reminder .web-pref-motion {
+  margin-top: 0;
+  padding-top: 0;
+  border: 0;
+}
+.web-pref-grid .web-pref-reminder-time {
+  margin: 20px 0 0;
+}
+.web-pref-reminder-time label,
+.web-pref-reminder-time > div {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.web-pref-reminder-time input {
+  width: 150px;
+  min-height: 44px;
+  color: var(--pref-ink);
+  background: var(--paper);
+  border: 1px solid var(--pref-line);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+.web-pref-reminder-time span {
+  overflow-wrap: anywhere;
+}
 .web-preference-settings :is(button, input):focus-visible {
   outline: 3px solid #99b9ff;
   outline-offset: 3px;
