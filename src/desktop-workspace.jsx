@@ -318,7 +318,7 @@ export function DesktopStudyHome({
           </span>
           <ChevronRight size={17} />
         </button>
-        <button onClick={favoriteCount ? openFavorites : () => go("chapters")}>
+        <button onClick={openFavorites}>
           <Star size={22} />
           <span>
             <strong>
@@ -364,6 +364,7 @@ export function DesktopStudyHome({
             </section>
             <section>
               <h2>AI 学习计划</h2>
+              <button onClick={() => go("plan")}>查看每日任务与学习计划</button>
               {dashboard.plan?.tasks?.slice(0, 3).map((task, index) => (
                 <button
                   className="study-weak-row"
@@ -411,6 +412,7 @@ export function DesktopChapterBrowser({
   setSectionFocus,
   start,
   favoriteQuestions,
+  openFavorites,
 }) {
   const [query, setQuery] = useState("");
   const sourceQuestions = [
@@ -474,8 +476,7 @@ export function DesktopChapterBrowser({
           <h1>章节练习</h1>
         </div>
         <button
-          onClick={() => start(favoriteQuestions, "收藏题目")}
-          disabled={!favoriteQuestions.length}
+          onClick={openFavorites}
         >
           <Star size={16} />
           我的收藏

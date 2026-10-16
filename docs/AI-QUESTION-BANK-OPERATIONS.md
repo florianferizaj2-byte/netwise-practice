@@ -30,7 +30,10 @@ git status --short
 git branch --show-current
 Get-ChildItem -LiteralPath server/question-banks -Directory
 npm run bank:validate
+npm run bank:report
 ~~~
+
+`bank:report` 是只读的覆盖缺口报表：按证书列出每个大纲模块的权重、目标题量、现有题量和缺口，并单独列出不在大纲中的章节。补题前用它确认优先级；大纲外章节会阻止服务启动，退出码为 1。
 
 先判断任务类型：
 

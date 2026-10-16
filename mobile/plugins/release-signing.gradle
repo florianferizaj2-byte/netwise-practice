@@ -4,6 +4,14 @@ if (releasePackage.version != releaseApp.version) {
     throw new GradleException("Mobile package.json and app.json versions must match before building.")
 }
 
+// React Native omits root package.json from its default JS bundle inputs.
+// Version-only changes must also rebuild the About screen and update headers.
+tasks.matching { it.name == "createBundleReleaseJsAndAssets" }.configureEach {
+    inputs.file(new File(rootDir, "../package.json"))
+    inputs.file(new File(rootDir, "../app.json"))
+    inputs.property("aceexamReleaseVersion", releasePackage.version)
+}
+
 def signingProperties = new Properties()
 def signingPropertiesPath = System.getenv("ACEEXAM_RELEASE_SIGNING_PROPERTIES")
 if (!signingPropertiesPath && System.getenv("LOCALAPPDATA")) {

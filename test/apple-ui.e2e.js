@@ -8,11 +8,15 @@ import { webkit, chromium, expect } from "@playwright/test";
 import { createApp } from "../server/index.js";
 import { createStore } from "../server/store.js";
 import { mockStudyAI } from "./study-fixture.js";
+import { OpenAICompatibleProvider } from "../server/ai.js";
+import { mockAI } from "./ai-fixture.js";
+import { completeFixtureProfile, dismissLaunchAnnouncement } from './helpers/mobile-profile.js';
 
 const directory = fs.mkdtempSync(path.join(os.tmpdir(), "aceexam-ios-ui-"));
 const store = createStore(directory);
 await store.register("ios_ui_owner", "fixture-password-123");
 const learner = await store.register("ios_ui_learner", "fixture-password-123");
+completeFixtureProfile(store, learner);
 store.selectCertificate(learner.id, "network-engineer");
 store.saveAccountEntitlement(learner.id, {
   plan: "vip",
@@ -20,6 +24,7 @@ store.saveAccountEntitlement(learner.id, {
 });
 const app = await createApp({
   store,
+  provider: new OpenAICompatibleProvider(store, { fetch: mockAI() }),
   production: true,
   withFrontend: true,
   authRequired: true,
@@ -147,6 +152,7 @@ try {
     }
     try {
       await page.goto(`${base}/app/`);
+      await dismissLaunchAnnouncement(page);
       await text("欢迎回来").waitFor();
       await layout("auth", false);
       await shot("auth");
@@ -160,7 +166,7 @@ try {
         .getByRole("button", { name: "登录", exact: true })
         .last()
         .click();
-      await text("每一步，都有进度").waitFor();
+      await page.getByTestId("today-screen").waitFor();
       for (const [size, viewport] of sizes) {
         await page.setViewportSize(viewport);
         await page.waitForFunction(() => {

@@ -1,8 +1,10 @@
 # 考匠移动端
 
-这是考匠的 Expo / React Native 移动端。Android 当前版本为 v0.4.2；当前源码继续复用现有 Node 后端，通过移动端 Bearer 会话连接生产 API。
+这是考匠的 Expo / React Native 移动端。Android 当前源码版本为 v0.4.6；继续复用现有 Node 后端，通过移动端 Bearer 会话连接生产 API。
 
-[下载 v0.4.2 APK](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.2/kaojiang-v0.4.2.apk) · [SHA-256 校验文件](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.2/kaojiang-v0.4.2.apk.sha256) · [发布页](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v0.4.2)
+[v0.4.6 APK](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.6/kaojiang-v0.4.6.apk) · [SHA-256](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.6/kaojiang-v0.4.6.apk.sha256) · [发布页](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v0.4.6) · [构建说明](../docs/release-v0.4.6.md) · [服务器更新步骤](../docs/DEPLOY-v0.4.6.md)。
+
+首页只保留公告和学习内容，移除顶部大标题/日期。管理员在“我的 → 管理中心”管理账号及公告；公告无需重装即可更新，支持离线缓存。新管理功能需要同步部署后端，详见[手机管理与公告说明](../docs/MOBILE-ADMIN-ANNOUNCEMENTS.md)。虚拟定位学习开启空闲悬浮窗时提示等待定位成功，再由用户手动开始。
 
 ## iPhone / iPad 网页版
 
@@ -31,13 +33,33 @@ npm start
 - 已安装 Android Studio 时，可以按 `a` 启动 Android 模拟器；
 - 需要连接真实后端时，复制 `.env.example` 为 `.env.local`，将 `EXPO_PUBLIC_API_URL` 改成电脑在局域网中的地址。
 
-App 保留开发期“进入预览模式”入口，用于查看动画和页面结构；真实登录通过移动端 Bearer 会话接入，证书选择后会请求首页学习数据。生产构建对应 `kaojiang-v0.4.2.apk`。启动时会后台请求 `/api/mobile/version`，低于服务端最低版本的旧 App 会强制显示最新版下载页；旧客户端调用受保护的移动端 API 也会被服务端拒绝并返回下载地址。
+App 保留开发期“进入预览模式”入口，用于查看动画和页面结构；真实登录通过移动端 Bearer 会话接入，证书选择后会请求首页学习数据。当前构建目标为 `kaojiang-v0.4.6.apk`。启动时会后台请求 `/api/mobile/version`，低于服务端最低版本的旧 App 会强制显示最新版下载页；旧客户端调用受保护的移动端 API 也会被服务端拒绝并返回下载地址。
 
 版本过旧时，Android App 会优先提供应用内下载并调起系统安装器；系统仍会要求用户确认安装。页面同时保留浏览器下载入口，应用内下载失败或设备限制安装时可以使用浏览器方式。登录会话会保存在本机，正常关闭并重新打开 App 不需要重复登录；主动退出登录会清除本机会话。答题页采用紧凑布局，举报题目入口位于题干卡片右下角的三角感叹号图标。
 
 ## 正式签名
 
-Release 构建使用专用正式证书，Expo 重新生成 Android 工程后仍会应用该配置。配置位置和应用指纹见 [正式签名说明](RELEASE_SIGNING.md)。本次安装包为 `kaojiang-v0.4.2.apk`；相同正式签名的 v0.3.3 至 v0.4.0 可覆盖更新，从旧 Debug 签名版本切换时需要卸载旧 App 再安装，服务器数据库不受影响。
+Release 构建使用专用正式证书，Expo 重新生成 Android 工程后仍会应用该配置。配置位置和应用指纹见 [正式签名说明](RELEASE_SIGNING.md)。本次构建目标为 `kaojiang-v0.4.6.apk`；同包名、同正式签名且版本代码较旧的版本可覆盖更新。本地构建不等于手机覆盖安装已经验证。
+
+## v0.4.6 本地更新
+
+- 每次启动先弹当前启用的公告，未登录与已有账号都适用；关闭后继续，首页仍可查看公告并热刷新。
+- 所有账号需补全名字和头像并保存在服务器，“我的 → 个人资料”可修改；网页管理员列表显示头像与昵称。
+- 定位教程右上角“求助作者”显示用户提供的微信好友二维码。
+- versionCode 30，54 项原生本地测试、两种浏览器的资料与公告完整流程、正式签名和 APK 内容校验通过，详见 [v0.4.6 说明](../docs/release-v0.4.6.md)。
+
+## v0.4.4 本地更新
+
+- 使用教程增加悬浮窗开关和权限设置，一个按钮在“开始”和“结束 · 进度%”之间切换；支持拖动和长按关闭。
+- 首页、悬浮按钮和通知同步显示进度，到终点自动完成为 100%；悬浮开始仍需同意学习用途协议。
+- 结束后保留悬浮按钮，空闲关闭悬浮窗会退出服务；关闭正在运行的悬浮窗可继续从首页或通知结束。
+- 修复版本变更时旧 JavaScript 内容被增量构建复用的问题。versionCode 28，验证见 [v0.4.4 说明](../docs/release-v0.4.4.md)。
+
+## v0.4.3 本地更新
+
+- 在练习章节目录底部加入“虚拟定位学习”，每次进入先弹出仅供学习、禁止校园跑作弊的协议，同意后才可操作。
+- 本地内置固定路线，只有开始、结束及设置教程；无需卡密，不调用服务器。详见 [接入说明](../docs/ROUTE-PLAYER-INTEGRATION.md)。
+- versionCode 为 27，原生构建、17 项本地测试、APK 内容及正式签名核验通过，见 [v0.4.3 版本说明](../docs/release-v0.4.3.md)。本次仅生成本地安装包，不上传或部署，尚未手机验收。
 
 ## v0.4.2 更新
 

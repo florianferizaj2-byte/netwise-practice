@@ -1,0 +1,212 @@
+.ace-chapter-art {
+  --art-size: 92px;
+  display: block;
+  width: var(--art-size);
+  height: calc(var(--art-size) * 0.84);
+  flex: none;
+  position: relative;
+}
+.ace-chapter-art.is-large {
+  --art-size: 210px;
+}
+.ace-chapter-art > span,
+.ace-chapter-art .chapter-visual,
+.ace-chapter-art .art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.ace-chapter-art svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.ace-chapter-art svg [class] {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.ace-chapter-art .ace-art-fallback {
+  width: 60%;
+  height: 60%;
+  margin: 20%;
+  color: #7298e7;
+}
+.ace-chapter-art .office-tile {
+  position: absolute;
+  display: block;
+  width: 25%;
+  height: 29%;
+  transform-origin: 50% 70%;
+}
+.ace-chapter-art .office-w {
+  left: 27%;
+  top: 27%;
+  transform: rotate(-7deg);
+  --office-color: #2964d9;
+}
+.ace-chapter-art .office-x {
+  left: 4%;
+  top: 55%;
+  transform: rotate(-13deg);
+  --office-color: #0c966d;
+}
+.ace-chapter-art .office-p {
+  left: 69%;
+  top: 13%;
+  transform: rotate(9deg);
+  --office-color: #f08031;
+}
+.ace-chapter-art .app-file {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  border: 1px solid #cce0f7;
+  border-radius: 5px;
+  box-shadow: 1px 3px 0 #bad2ef88;
+}
+.ace-chapter-art .app-file:before {
+  content: "";
+  position: absolute;
+  inset: 20% 12% 20% 22%;
+  background: repeating-linear-gradient(0deg, #d5e6f8 0 8%, transparent 8% 22%);
+}
+.ace-chapter-art .office-x .app-file {
+  border-color: #b5e3d4;
+}
+.ace-chapter-art .office-p .app-file {
+  border-color: #f8d5b7;
+}
+.ace-chapter-art .app-badge {
+  position: absolute;
+  top: 19%;
+  left: -13%;
+  width: 78%;
+  height: 72%;
+  display: grid;
+  place-items: center;
+  background: var(--office-color);
+  color: white;
+  font:
+    bold calc(var(--art-size) * 0.14)/1 Arial,
+    sans-serif;
+  border-radius: 4px;
+  box-shadow: 1px 3px 4px #214da226;
+}
+.ace-chapter-art .art-halo {
+  position: absolute;
+  inset: 14% 1% 0;
+  border-radius: 50%;
+  background: #dceaff55;
+}
+.blue-art-trigger:is(:hover, :focus-visible, :focus-within)
+  .ace-chapter-art
+  :is(
+    .cv-lift,
+    .cv-node,
+    .monitor,
+    .chip-core,
+    .code-window,
+    .database-top,
+    .cloud-core,
+    .cv-spark,
+    .cv-bars,
+    .network-node-two,
+    .technology-chip
+  ) {
+  animation: ace-art-lift 0.85s ease-in-out 2;
+}
+.blue-art-trigger:is(:hover, :focus-visible, :focus-within)
+  .ace-chapter-art
+  :is(.cv-wave, .cv-layer) {
+  animation: ace-art-wave 0.85s ease-in-out 2;
+  animation-delay: var(--cv-delay, 0ms);
+}
+.blue-art-trigger:is(:hover, :focus-visible, :focus-within)
+  .ace-chapter-art
+  :is(
+    .cv-scan,
+    .cv-led,
+    .cv-cursor,
+    .network-signal,
+    .code-line,
+    .code-cursor
+  ) {
+  animation: ace-art-glow 0.85s ease-in-out 2;
+}
+.blue-art-trigger:is(:hover, :focus-visible, :focus-within)
+  .ace-chapter-art
+  :is(.cv-orbit, .cv-spin) {
+  animation: ace-art-spin 0.85s ease-in-out 2;
+}
+.blue-art-trigger:is(:hover, :focus-visible, :focus-within)
+  .ace-chapter-art
+  .cv-packet {
+  animation: ace-art-packet 0.85s ease-in-out 2;
+}
+.blue-art-trigger:is(:hover, :focus-visible, :focus-within)
+  .ace-chapter-art
+  .office-w {
+  animation: ace-office-w 0.85s ease-in-out 2;
+}
+.blue-art-trigger:is(:hover, :focus-visible, :focus-within)
+  .ace-chapter-art
+  .office-x {
+  animation: ace-office-x 0.85s ease-in-out 2;
+}
+.blue-art-trigger:is(:hover, :focus-visible, :focus-within)
+  .ace-chapter-art
+  .office-p {
+  animation: ace-office-p 0.85s ease-in-out 2;
+}
+@keyframes ace-art-lift {
+  50% {
+    transform: translateY(-6px);
+  }
+}
+@keyframes ace-art-wave {
+  50% {
+    transform: translateY(-4px) scale(1.04);
+  }
+}
+@keyframes ace-art-glow {
+  50% {
+    opacity: 0.35;
+  }
+}
+@keyframes ace-art-spin {
+  50% {
+    transform: rotate(25deg);
+  }
+}
+@keyframes ace-art-packet {
+  50% {
+    transform: translate(60px, -22px);
+  }
+}
+@keyframes ace-office-w {
+  50% {
+    transform: translateY(-7px) rotate(-13deg);
+  }
+}
+@keyframes ace-office-x {
+  50% {
+    transform: translate(-4px, -5px) rotate(-19deg);
+  }
+}
+@keyframes ace-office-p {
+  50% {
+    transform: translate(3px, -7px) rotate(15deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ace-chapter-art * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+[data-reduced-motion="true"] .ace-chapter-art * {
+  animation: none !important;
+  transition: none !important;
+}

@@ -8,6 +8,10 @@ import { z } from "zod";
 import { createStore } from "./store.js";
 import { registerMembershipRoutes } from "./membership-routes.js";
 import { registerStudyRoutes } from "./study-routes.js";
+import { createLearningPlans, createPlanSchema, addPlanTaskSchema, cancelPlanTaskSchema } from "./learning-plan.js";
+import {registerInteractiveTutor} from "./interactive-tutor.js";
+import { registerKnowledgeFavorites } from "./knowledge-favorites.js";
+import { registerWebPreferences } from "./web-preferences.js";
 import { registerExamRoutes } from "./exams.js";
 import {
   encrypt,
@@ -33,23 +37,14 @@ import { authorAiAvailable, authorAiOwner } from "./ai-service.js";
 import { registerGuestTrialRoutes } from "./guest-trial.js";
 import { createAiScheduler, checkAiCancellation } from "./ai-tasks.js";
 import { createAuthRateLimiter } from "./auth-rate-limit.js";
+import { createAccountSecurity } from "./account-security.js";
+import { createMobileAnnouncementService, registerMobileAnnouncement } from "./mobile-announcement.js";
+import { registerMobileAdminRoutes } from "./mobile-admin.js";
+import { createMobileProfileService, registerMobileProfile } from "./mobile-profile.js";
+import { resolveMobileRelease } from "./mobile-release.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
-const mobileRelease = () => {
-  const latestVersion = process.env.MOBILE_LATEST_VERSION || "0.4.2";
-  const minimumVersion =
-    process.env.MOBILE_MINIMUM_VERSION || "0.2.8";
-  return {
-    latestVersion,
-    minimumVersion,
-    downloadUrl:
-      process.env.MOBILE_DOWNLOAD_URL ||
-      `/downloads/kaojiang-v${latestVersion}.apk`,
-    releaseNotes:
-      process.env.MOBILE_RELEASE_NOTES ||
-      "修复更新后版本号仍显示旧版；优化加载与课程缓存、AI 精讲布局及连续做题。",
-  };
-};
+const mobileRelease = () => resolveMobileRelease(process.env, compareVersions);
 async function exchangeWechatMiniProgramCode(code) {
   const appid = process.env.WECHAT_MINIPROGRAM_APP_ID?.trim();
   const secret = process.env.WECHAT_MINIPROGRAM_APP_SECRET?.trim();
@@ -157,6 +152,8 @@ export async function createApp(options = {}) {
   // profile, including its encrypted AI API key. Tests/local fixtures can
   // still opt into anonymous mode explicitly with { authRequired: false }.
   const authRequired = options.authRequired ?? true;
+  const accountSecurity = createAccountSecurity(store, options.accountSecurity);
+  const mobileProfiles = createMobileProfileService(store);
   const app = express();
   const aiScheduler = createAiScheduler(options.aiTasks);
   const ai = (userId, fn) => aiScheduler.run(userId, fn);
@@ -189,6 +186,11 @@ export async function createApp(options = {}) {
       return res.status(403).json({ error: "拒绝跨站请求" });
     next();
   });
+  // Public announcements remain available without a session or a supported app version.
+  const mobileAnnouncements = await createMobileAnnouncementService({
+    file: options.announcementFile || process.env.MOBILE_ANNOUNCEMENT_FILE || path.join(store.dataDir, "mobile-announcement.json"),
+  });
+  registerMobileAnnouncement(app, { service: mobileAnnouncements });
   const route = (method, url, fn) =>
     app[method](url, async (req, res, next) => {
       try {
@@ -247,7 +249,7 @@ export async function createApp(options = {}) {
       ...(expires ? { maxAge: 30 * 86400000 } : { maxAge: 0 }),
     });
   const userView = (user) => ({
-    ...user,
+    ...mobileProfiles.view(user),
     certificate: certificates.find((c) => c.id === user.certificateId) || null,
   });
   route("get", "/api/auth/me", (req) => {
@@ -261,21 +263,15 @@ export async function createApp(options = {}) {
   app.use([
     "/api/auth/login", "/api/auth/register", "/api/auth/wechat/bind",
     "/api/auth/wechat/register", "/api/auth/wechat/mini-login",
+    "/api/auth/email-code", "/api/auth/reset-password", "/api/auth/change-password", "/api/auth/bind-email",
   ], createAuthRateLimiter(store.db, options.authLimits));
+  route("get", "/api/auth/security-config", () => accountSecurity.config());
+  route("post", "/api/auth/email-code", req => accountSecurity.sendCode(req.body, {
+    user: store.authUser(requestToken(req)), address: req.ip || req.socket.remoteAddress,
+  }));
+  route("post", "/api/auth/reset-password", req => accountSecurity.resetPassword(req.body));
   route("post", "/api/auth/register", async (req, res) => {
-    const body = z
-      .object({
-        username: z
-          .string()
-          .trim()
-          .min(3)
-          .max(40)
-          .regex(/^[A-Za-z0-9_-]+$/, "账号只能使用字母、数字、下划线或连字符"),
-        password: z.string().min(8).max(128),
-      })
-      .strict()
-      .parse(req.body);
-    const user = await store.registerAsync(body.username, body.password);
+    const user = await accountSecurity.register(req.body);
     const token = store.createAuthSession(user.id);
     sessionCookie(req, res, token);
     return authResponse(req, user, token);
@@ -383,26 +379,7 @@ export async function createApp(options = {}) {
     };
   });
   route("post", "/api/auth/wechat/register", async (req, res) => {
-    const body = z
-      .object({
-        bindingToken: z.string().trim().min(20).max(200),
-        username: z
-          .string()
-          .trim()
-          .min(3)
-          .max(40)
-          .regex(/^[A-Za-z0-9_-]+$/, "账号只能使用字母、数字、下划线或连字符"),
-        password: z.string().min(8).max(128),
-      })
-      .strict()
-      .parse(req.body);
-    const challenge = store.wechatLoginChallenge(body.bindingToken);
-    if (!challenge) {
-      const error = new Error("微信绑定已过期，请重新点击微信登录");
-      error.status = 401;
-      throw error;
-    }
-    const user = await store.registerAsync(body.username, body.password, { wechatBindingToken: body.bindingToken });
+    const user = await accountSecurity.register(req.body, { wechat: true });
     const token = store.createAuthSession(user.id);
     sessionCookie(req, res, token);
     return {
@@ -440,6 +417,14 @@ export async function createApp(options = {}) {
       });
     req.user = user;
     next();
+  });
+  registerMobileProfile({ app, route, service: mobileProfiles, userView });
+  route("get", "/api/auth/security", req => accountSecurity.view(req.user.id));
+  route("post", "/api/auth/bind-email", req => accountSecurity.bindEmail(req.body, req.user));
+  route("post", "/api/auth/change-password", async (req, res) => {
+    const result = await accountSecurity.changePassword(req.body, req.user);
+    sessionCookie(req, res, null, false);
+    return result;
   });
   route("put", "/api/auth/certificate", (req) => {
     if (!req.user) throw new Error("请先登录");
@@ -926,8 +911,13 @@ export async function createApp(options = {}) {
     }
   };
   registerMembershipRoutes({ route, store, requireAdmin, requestUserId, accountEntitlementView });
+  registerMobileAdminRoutes({ route, store, requireAdmin, certificates, announcements: mobileAnnouncements });
   const study = registerStudyRoutes({ route, store, provider, requireAdmin,
     requestUserId, ai, requireAiService, studyAI: options.studyAI, studySeeds: options.studySeeds });
+  registerInteractiveTutor({app,route,store,requestUserId,studyContent:study.content,resolveQuestion:requireQ,
+    teacher:study.teacher,ai,requireAiService});
+  registerKnowledgeFavorites({ route, store, requestUserId, studyContent: study.content });
+  registerWebPreferences({ route, store, requestUserId });
   const adminQuestion = (question, includeFeedback = false) => ({
     ...question,
     ...(includeFeedback
@@ -1160,7 +1150,7 @@ export async function createApp(options = {}) {
     const search = z
       .object({ search: z.string().max(100).optional() })
       .parse(req.query).search || "";
-    return { users: store.adminUsers(search) };
+    return { users: store.adminUsers(search).map((user) => mobileProfiles.view(user)) };
   });
   route("put", "/api/admin/users/:id/ban", (req) => {
     requireAdmin(req);
@@ -1168,7 +1158,7 @@ export async function createApp(options = {}) {
       .object({ banned: z.boolean(), reason: z.string().trim().max(200).optional() })
       .strict()
       .parse(req.body);
-    const target = store.adminUsers().find((user) => user.id === req.params.id);
+    const target = store.adminUser(req.params.id);
     if (!target) {
       const error = new Error("用户不存在");
       error.status = 404;
@@ -1187,7 +1177,7 @@ export async function createApp(options = {}) {
       username: target.username,
       reason: body.reason || "",
     });
-    return { saved: true, user: store.adminUsers().find((user) => user.id === target.id) };
+    return { saved: true, user: store.adminUser(target.id) };
   });
   route("get", "/api/admin/questions/similar", (req) => {
     requireAdmin(req);
@@ -1614,6 +1604,31 @@ export async function createApp(options = {}) {
     attempted: state.attemptedIds.has(question.id),
     favorite: state.favoriteIds.has(question.id),
   });
+  const learningPlans = createLearningPlans(store);
+  const planContext = (req) => {
+    const certificate = requireCertificate(req);
+    if (!certificate) throw Object.assign(new Error("请先选择备考证书"), {status:409});
+    const user = requestUserId(req);
+    return {user,certificate,questions:certificateQuestions(certificate,user)};
+  };
+  app.use("/api/learning-plan", (req,res,next) => { res.setHeader("Cache-Control","no-store"); next(); });
+  route("get", "/api/learning-plan", (req) => {
+    const c=planContext(req); return learningPlans.view(c.user,c.certificate,c.questions);
+  });
+  route("post", "/api/learning-plan", (req) => {
+    const c=planContext(req); return learningPlans.create(c.user,c.certificate,c.questions,createPlanSchema.parse(req.body));
+  });
+  route("post", "/api/learning-plan/tasks", (req) => {
+    const c=planContext(req); return learningPlans.add(c.user,c.certificate,c.questions,addPlanTaskSchema.parse(req.body));
+  });
+  route("put", "/api/learning-plan/:id/tasks/:task", (req) => {
+    const c=planContext(req); return learningPlans.cancel(c.user,c.certificate,c.questions,req.params.id,req.params.task,cancelPlanTaskSchema.parse(req.body));
+  });
+  route("post", "/api/learning-plan/:id/tasks/:task/session", (req) => {
+    z.object({}).strict().parse(req.body);
+    const c=planContext(req),state=questionState(req);
+    return learningPlans.session(c.user,c.certificate,c.questions,req.params.id,req.params.task,(q)=>publicQuestionForUser(q,state));
+  });
   route("get", "/api/questions", (req) => {
     const state = questionState(req);
     // Installed mobile clients used this endpoint for ordinary practice before
@@ -1947,6 +1962,7 @@ export async function createApp(options = {}) {
           .max(5),
         response: z.string().max(5000).optional(),
         timeMs: z.number().int().min(0).max(86400000),
+        planTask: z.object({planId:z.string().uuid(),taskId:z.string().uuid()}).strict().optional(),
       })
       .strict()
       .parse(req.body);
@@ -1965,7 +1981,7 @@ export async function createApp(options = {}) {
       b.selected.length !== 1
     )
       throw new Error("单选题和判断题只能选择一项");
-    return store.recordAttempt(
+    const grade = () => store.recordAttempt(
       b.questionId,
       b.selected,
       b.timeMs,
@@ -1973,6 +1989,11 @@ export async function createApp(options = {}) {
       req.user?.id || "local",
       b.response,
     );
+    if (b.planTask) {
+      const c=planContext(req);
+      return learningPlans.submit(c.user,c.certificate,c.questions,b.planTask,b,grade);
+    }
+    return grade();
   });
   route("get", "/api/wrong", (req) => {
     const certificateId = requireCertificate(req);
@@ -2107,6 +2128,10 @@ export async function createApp(options = {}) {
       };
     };
     const configuredModules = categoryTaxonomy?.modules || [];
+    const bankIds = new Set(bankQuestions.map(question=>question.id));
+    const lastAttempt = attempts.filter(attempt=>bankIds.has(attempt.questionId) && attempt.mode!=="exam")
+      .reduce((latest,attempt)=>!latest || attempt.createdAt>=latest.createdAt ? attempt : latest,null);
+    const lastQuestion = lastAttempt && bankQuestions.find(question=>question.id===lastAttempt.questionId);
     const chapters = syllabusProgress
       ? syllabusProgress.modules
       : configuredModules.length
@@ -2186,6 +2211,7 @@ export async function createApp(options = {}) {
       ...summary,
       mastery,
       chapters,
+      lastPractice: lastQuestion ? {chapter:lastQuestion.chapter,questionId:lastQuestion.id,practicedAt:lastAttempt.createdAt} : null,
       aiConfigured: aiServiceAvailable(),
       aiBusy: aiScheduler.busy(userId),
       plan: store.getDaily(userId, dailyKey(certificateId, today)),
@@ -2626,6 +2652,7 @@ export async function createApp(options = {}) {
   );
   app.use("/api", (req, res) => res.status(404).json({ error: "接口不存在" }));
   app.use((err, req, res, next) => {
+    if (err.retryAfter) res.set("Retry-After", String(err.retryAfter));
     res.status(err.status || 400).json({
       error:
         err.type === "entity.parse.failed"
@@ -2634,10 +2661,19 @@ export async function createApp(options = {}) {
             ? "输入参数不符合要求，请检查字段范围"
             : redact(err.message).slice(0, 500),
       ...(typeof err.code === "string" ? { code: err.code } : {}),
+      ...(err.retryAfter ? { retryAfter: err.retryAfter } : {}),
       ...(err.code === "EXAM_ANSWERS_CONFLICT" ? { details: err.details } : {}),
     });
   });
   if (withFrontend) {
+    if (production) app.use((req, res, next) => {
+      let pathname;
+      try { pathname = path.posix.normalize(decodeURIComponent(req.path).replace(/\\/g, "/")).toLowerCase(); }
+      catch { return res.status(400).type("text").send("页面地址无效"); }
+      if (pathname === "/demo" || pathname.startsWith("/demo/"))
+        return res.status(404).type("text").send("页面不存在");
+      next();
+    });
     const mobileWebRoot = path.join(root, 'dist', 'app');
     app.use('/app', express.static(mobileWebRoot, {
       setHeaders(res, file) {
@@ -2675,6 +2711,7 @@ export async function createApp(options = {}) {
   app.locals.study = study.content;
   app.locals.stop = async () => {
     clearInterval(aiQuestionJobTimer);
+    accountSecurity.close();
     study.stop();
     await aiScheduler.stop();
     await study.settle();

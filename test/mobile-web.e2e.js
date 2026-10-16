@@ -6,6 +6,8 @@ import os from 'node:os';
 import path from 'node:path';
 import { createApp } from '../server/index.js';
 import { createStore } from '../server/store.js';
+import { finishProfileForm, dismissLaunchAnnouncement } from './helpers/mobile-profile.js';
+import { accountTestMailbox } from './helpers/account-mail.js';
 import express from 'express';
 
 const mobileVersion = JSON.parse(fs.readFileSync(new URL('../mobile/package.json', import.meta.url), 'utf8')).version;
@@ -13,7 +15,8 @@ const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'aceexam-apple-web-'));
 const store = createStore(dir);
 const template = store.allQ().find((q) => q.type === 'single_choice' && q.certificates?.includes('hcia-datacom'));
 for (let i = 0; i < 12; i++) store.addQ({ ...template, id: `apple-fixture-${i}`, question: `苹果端核对题目 ${i + 1}`, chapter: '苹果端核对', knowledgeSection: '基础', knowledgePoint: '同步学习', options: { A: '核对选项甲', B: '核对选项乙', C: '核对选项丙', D: '核对选项丁' }, answer: ['A'], analysis: '测试题解析', certificates: ['hcia-datacom'] });
-const backend = await createApp({ store, withFrontend: true, production: true, authRequired: true });
+const mailbox = accountTestMailbox();
+const backend = await createApp({ store, withFrontend: true, production: true, authRequired: true, accountSecurity: { enabled: true, mailer: mailbox } });
 const app = express();
 let forceUpdate = false;
 // Server fixtures also work when a service worker controls the page.
@@ -61,6 +64,7 @@ try {
     const shot = (name) => page.screenshot({ path: path.join(out, `${engine}-${name}.png`) });
     try {
       await page.goto(base);
+      await dismissLaunchAnnouncement(page);
       await page.waitForURL(`${base}/app/`);
       await text('欢迎回来').waitFor();
       await page.getByRole('button', { name: '添加考匠到主屏幕', exact: true }).click();
@@ -72,20 +76,27 @@ try {
       await text('注册').click();
       await page.getByPlaceholder('输入账号', { exact: true }).fill(`apple_fixture_${engine}`);
       await page.getByPlaceholder('至少 8 位密码', { exact: true }).fill('fixture-password-123');
+      await page.getByLabel('确认密码', { exact: true }).fill('fixture-password-123');
+      const email = `apple-${engine}@example.test`;
+      await page.getByLabel('邮箱', { exact: true }).fill(email);
+      await page.getByRole('button', { name: '获取验证码', exact: true }).click();
+      await expect(page.getByText(/验证码已发送/)).toBeVisible();
+      await page.getByLabel('邮箱验证码', { exact: true }).fill(mailbox.latest(email, 'register').code);
       const registered = page.waitForResponse((r) => r.url().endsWith('/api/auth/register') && r.request().method() === 'POST');
       await text('注册').last().click();
       const response = await registered;
       assert.equal(response.status(), 200);
       const session = await response.json();
+      await finishProfileForm(page, `苹果网页${engine}`);
       const cert = session.certificates.find((item) => item.id === 'hcia-datacom');
       await text(cert.name).click();
-      await text('每一步，都有进度').waitFor();
+      await page.getByTestId('today-screen').waitFor();
       for (const label of ['今日', '练习', '错题', '考试', 'VIP', '我的']) await expect(page.getByRole('button', { name: `${label}导航`, exact: true })).toBeVisible();
       await shot('today');
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
       console.log(`${engine}: registration, certificate and six shared tabs`);
 
-      await text('每一步，都有进度').evaluate((target) => {
+      await page.getByTestId('today-screen').evaluate((target) => {
         for (const [type, y] of [['touchstart', 100], ['touchmove', 190]]) {
           const touch = { identifier: 1, target, clientX: 40, clientY: y, pageX: 40, pageY: y };
           const event = new Event(type, { bubbles: true });
@@ -96,7 +107,7 @@ try {
       await text('松开刷新').waitFor();
       const [refreshed] = await Promise.all([
         page.waitForResponse((r) => r.url().includes('/api/dashboard?summary=1')),
-        text('每一步，都有进度').evaluate((target) => {
+        page.getByTestId('today-screen').evaluate((target) => {
           const event = new Event('touchend', { bubbles: true });
           const touch = { identifier: 1, target, clientX: 40, clientY: 190, pageX: 40, pageY: 190, force: 0 };
           Object.assign(event, { touches: [], targetTouches: [], changedTouches: [touch] });
@@ -136,7 +147,7 @@ try {
       await page.getByText(/^(开始|继续)今日学习$/).filter({ visible: true }).click();
       await page.getByLabel('切换到普通练习和AI出题', { exact: true }).waitFor();
       await text('‹ 返回今日').click();
-      await text('每一步，都有进度').waitFor();
+      await page.getByTestId('today-screen').waitFor();
 
       await tab('VIP');
       await text('签到').click();
@@ -195,7 +206,8 @@ try {
       await page.getByRole('radio', { name: /核对选项甲/ }).click();
       assert.equal((await saved).status(), 200);
       await page.reload();
-      await text('每一步，都有进度').waitFor();
+      await dismissLaunchAnnouncement(page);
+      await page.getByTestId('today-screen').waitFor();
       await tab('考试');
       const resumed = page.waitForResponse((r) => new URL(r.url()).pathname === `/api/exams/${exam.id}` && r.request().method() === 'GET');
       await text('继续 ›').first().click();
@@ -228,13 +240,15 @@ try {
       await expect(page.getByRole('button', { name: '关闭设置', exact: true })).toBeHidden();
       await shot('profile-dark');
       await page.reload();
-      await text('每一步，都有进度').waitFor();
+      await dismissLaunchAnnouncement(page);
+      await page.getByTestId('today-screen').waitFor();
       await page.waitForFunction(() => document.documentElement.style.colorScheme === 'dark');
 
       if (engine === 'chromium') {
         await page.evaluate(async () => { await navigator.serviceWorker.ready; });
         await page.reload();
-        await text('每一步，都有进度').waitFor();
+        await dismissLaunchAnnouncement(page);
+        await page.getByTestId('today-screen').waitFor();
         const cachedUrls = await page.evaluate(async () => {
           const names = await caches.keys();
           const requests = await Promise.all(names.filter((name) => name.startsWith('kaojiang-shell-')).map(async (name) => (await caches.open(name)).keys()));
@@ -244,7 +258,8 @@ try {
         assert.ok(cachedUrls.every((url) => url.startsWith('/app/') && !url.includes('/api/')));
         await context.setOffline(true);
         await page.reload();
-        await text('每一步，都有进度').waitFor();
+        await dismissLaunchAnnouncement(page);
+        await page.getByTestId('today-screen').waitFor();
         await context.setOffline(false);
         console.log('chromium: offline app shell and public-file-only service worker cache');
       }
@@ -271,7 +286,8 @@ try {
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
       await page.setViewportSize({ width: 375, height: 812 });
       await page.reload();
-      await text('每一步，都有进度').waitFor();
+      await dismissLaunchAnnouncement(page);
+      await page.getByTestId('today-screen').waitFor();
       await tab('我的');
       await expect(page.getByRole('button', { name: '考试与题库设置', exact: true })).toContainText('四川省专升本 · 计算机基础');
       console.log(`${engine}: Sichuan module selection, chapters and persisted target`);
@@ -280,20 +296,25 @@ try {
       await text('退出登录').click();
       await text('欢迎回来').waitFor();
       await page.reload();
+      await dismissLaunchAnnouncement(page);
       await text('欢迎回来').waitFor();
       assert.equal(await page.evaluate(() => localStorage.getItem('kaojiang-session-token')), null);
       forceUpdate = true;
       await page.reload();
+      await dismissLaunchAnnouncement(page);
       await text('请更新到最新版').waitFor();
       await expect(page.getByRole('button', { name: '刷新到最新版本', exact: true })).toBeVisible();
       assert.equal(await page.locator('a[href$=".apk"]').count(), 0);
       forceUpdate = false;
+      const refreshedShell = page.waitForEvent('load');
       await page.getByRole('button', { name: '刷新到最新版本', exact: true }).click();
+      await refreshedShell;
+      await dismissLaunchAnnouncement(page);
       await text('欢迎回来').waitFor();
       await page.getByPlaceholder('输入账号', { exact: true }).fill(`apple_fixture_${engine}`);
       await page.getByPlaceholder('至少 8 位密码', { exact: true }).fill('fixture-password-123');
       await text('登录').last().click();
-      await text('每一步，都有进度').waitFor();
+      await page.getByTestId('today-screen').waitFor();
 
       const ipad = await browser.newContext({ ...mobileContext, viewport: { width: 1024, height: 768 }, userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 Version/18.6 Safari/605.1.15' });
       await ipad.addInitScript(() => {
@@ -302,10 +323,12 @@ try {
       });
       const tablet = await ipad.newPage();
       await tablet.goto(base);
+      await dismissLaunchAnnouncement(tablet);
       await tablet.waitForURL(`${base}/app/`);
       await expect(tablet.getByText('欢迎回来', { exact: true })).toBeVisible();
       await ipad.addInitScript(() => Object.defineProperty(navigator, 'standalone', { get: () => true }));
       await tablet.reload();
+      await dismissLaunchAnnouncement(tablet);
       await expect(tablet.getByText('欢迎回来', { exact: true })).toBeVisible();
       assert.equal(await tablet.getByRole('button', { name: '添加考匠到主屏幕', exact: true }).count(), 0);
       await ipad.close();

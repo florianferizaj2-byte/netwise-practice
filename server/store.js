@@ -47,6 +47,10 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
    expires_at TEXT NOT NULL,
    created_at TEXT NOT NULL
  );`);
+  // Keep legacy case-colliding users intact; prohibit any new case-only duplicates atomically.
+  db.exec(`CREATE TRIGGER IF NOT EXISTS users_unique_normalized_name
+    BEFORE INSERT ON users WHEN EXISTS (SELECT 1 FROM users WHERE lower(trim(username))=lower(trim(NEW.username)))
+    BEGIN SELECT RAISE(ABORT,'UNIQUE users.username'); END;`);
   db.exec(`
     CREATE TABLE IF NOT EXISTS user_settings (
       user_id TEXT PRIMARY KEY,
@@ -328,13 +332,8 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
     db.prepare("UPDATE users SET is_admin=1 WHERE username=?").run(
       configuredAdmin,
     );
-  if (!db.prepare("SELECT 1 FROM users WHERE is_admin=1 LIMIT 1").get()) {
-    const firstUser = db
-      .prepare("SELECT id FROM users ORDER BY created_at, rowid LIMIT 1")
-      .get();
-    if (firstUser)
-      db.prepare("UPDATE users SET is_admin=1 WHERE id=?").run(firstUser.id);
-  }
+  // An administrator must be configured explicitly. A restart must never promote
+  // a public sign-up simply because no administrator exists yet.
   const existingUsers = db.prepare("SELECT id FROM users").all();
   if (existingUsers.length === 1) {
     const onlyUserId = existingUsers[0].id;
@@ -449,8 +448,12 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
     } else addQ(q);
   }
   const memberships = createMembershipStore(db);
+  const adminUserSelect = "SELECT u.id, u.username, u.community_name AS communityName, u.certificate_id AS certificateId, u.created_at AS createdAt, u.is_admin AS isAdmin, u.banned_at AS bannedAt, u.ban_reason AS banReason, e.plan AS membershipPlan, e.expires_at AS membershipExpiresAt FROM users u LEFT JOIN user_entitlements e ON e.user_id=u.id";
+  const adminUserView = (user) => user ? ({ ...user, isAdmin: !!user.isAdmin,
+    membershipPlan: user.membershipExpiresAt && Date.parse(user.membershipExpiresAt) <= Date.now() ? "free" : user.membershipPlan || "free" }) : null;
   const store = {
     db,
+    dataDir: path.resolve(dir),
     ...memberships,
     communityUploadDir,
     communityStorageLimit,
@@ -740,15 +743,10 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       return favorite;
     },
     favoriteQuestions: (userId = "local") => {
-      const ids = new Set(
-        db
-          .prepare("SELECT question_id AS questionId FROM question_favorites WHERE user_id=? ORDER BY created_at DESC")
-          .all(userId || "local")
-          .map((row) => row.questionId),
-      );
-      return visibleQuestions(userId || "local")
-        .filter((question) => ids.has(question.id))
-        .map((question) => ({ ...question, favorite: true }));
+      const rows = db.prepare("SELECT question_id AS questionId, created_at AS favoritedAt FROM question_favorites WHERE user_id=? ORDER BY created_at DESC, question_id ASC").all(userId || "local");
+      const visible = new Map(visibleQuestions(userId || "local").map(question=>[question.id,question]));
+      return rows.flatMap(row => visible.has(row.questionId)
+        ? [{ ...visible.get(row.questionId), favorite: true, favoritedAt: row.favoritedAt }] : []);
     },
     dismissWrongQuestion: (userId, questionId) => {
       const result = db
@@ -1440,10 +1438,23 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       const like = `%${search.trim()}%`;
       return db
         .prepare(
-          "SELECT u.id, u.username, u.certificate_id AS certificateId, u.created_at AS createdAt, u.is_admin AS isAdmin, u.banned_at AS bannedAt, u.ban_reason AS banReason, e.plan AS membershipPlan, e.expires_at AS membershipExpiresAt FROM users u LEFT JOIN user_entitlements e ON e.user_id=u.id WHERE (?='' OR u.username LIKE ?) ORDER BY u.created_at,u.rowid",
+          "SELECT u.id, u.username, u.community_name AS communityName, u.certificate_id AS certificateId, u.created_at AS createdAt, u.is_admin AS isAdmin, u.banned_at AS bannedAt, u.ban_reason AS banReason, e.plan AS membershipPlan, e.expires_at AS membershipExpiresAt FROM users u LEFT JOIN user_entitlements e ON e.user_id=u.id WHERE (?='' OR u.username LIKE ? OR COALESCE(u.community_name,'') LIKE ?) ORDER BY u.created_at,u.rowid",
         )
-        .all(search.trim(), like)
+        .all(search.trim(), like, like)
         .map((user) => ({ ...user, isAdmin: !!user.isAdmin, membershipPlan: user.membershipExpiresAt && Date.parse(user.membershipExpiresAt) <= Date.now() ? "free" : user.membershipPlan || "free" }));
+    },
+    adminUser: (userId) => adminUserView(db.prepare(`${adminUserSelect} WHERE u.id=?`).get(userId)),
+    adminUsersPage: ({ search = "", status = "all", limit = 30, offset = 0 } = {}) => {
+      const pattern = `%${search.trim().replace(/[\\%_]/g, (value) => `\\${value}`)}%`;
+      const where = " WHERE (u.username LIKE ? ESCAPE '\\' OR COALESCE(u.community_name,'') LIKE ? ESCAPE '\\') AND (?='all' OR (?='banned' AND u.banned_at IS NOT NULL) OR (?='active' AND u.banned_at IS NULL))";
+      const filters = [pattern, pattern, status, status, status];
+      const total = db.prepare(`SELECT COUNT(*) AS total FROM users u${where}`).get(...filters).total;
+      const users = db.prepare(`${adminUserSelect}${where} ORDER BY u.created_at DESC,u.rowid DESC LIMIT ? OFFSET ?`)
+        .all(...filters, limit, offset).map(adminUserView);
+      return { users, total, limit, offset, nextOffset: offset + users.length < total ? offset + users.length : null };
+    },
+    saveManagedUserProfile: (userId, { communityName, certificateId }) => {
+      db.prepare("UPDATE users SET community_name=?, certificate_id=? WHERE id=?").run(communityName, certificateId, userId);
     },
     setUserBanned: (userId, banned, reason = "") => {
       const result = db
@@ -1499,6 +1510,9 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       return wechatBindingToken ? this.completeWechatLogin(wechatBindingToken, register) : register();
     },
     registerWithHash(username, salt, passwordHash) {
+      username = username.trim();
+      if (db.prepare("SELECT 1 FROM users WHERE lower(username)=lower(?)").get(username))
+        throw Object.assign(new Error("账号已存在，请登录或使用其他账号名"), { status: 409, code: "USERNAME_ALREADY_EXISTS" });
       const firstUser = !db.prepare("SELECT 1 FROM users LIMIT 1").get();
       const isAdmin =
         firstUser ||
@@ -1528,7 +1542,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
           null,
         );
       } catch (e) {
-        if (String(e.message).includes("UNIQUE")) throw new Error("账号已存在");
+        if (String(e.message).includes("UNIQUE")) throw Object.assign(new Error("账号已存在"), { status: 409, code: "USERNAME_ALREADY_EXISTS" });
         throw e;
       }
       return user;
@@ -1635,9 +1649,13 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         )
         .all(),
     authenticate(username, password) {
+      username = username.trim();
       const row = db
         .prepare("SELECT * FROM users WHERE username=?")
-        .get(username);
+        .get(username) || (() => {
+          const rows = db.prepare("SELECT * FROM users WHERE lower(username)=lower(?) LIMIT 2").all(username);
+          return rows.length === 1 ? rows[0] : null;
+        })();
       if (!row) return null;
       const actual = Buffer.from(row.password_hash, "base64");
       const expected = crypto.scryptSync(password, row.salt, 64);
@@ -1645,10 +1663,15 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       return this.userById(row.id);
     },
     async authenticateAsync(username, password) {
-      const row = db.prepare("SELECT id,password_hash,salt FROM users WHERE username=?").get(username);
+      username = username.trim();
+      const row = db.prepare("SELECT id,password_hash,salt FROM users WHERE username=?").get(username) || (() => {
+        const rows = db.prepare("SELECT id,password_hash,salt FROM users WHERE lower(username)=lower(?) LIMIT 2").all(username);
+        return rows.length === 1 ? rows[0] : null;
+      })();
       // Unknown accounts perform the same expensive work without blocking HTTP.
       const expected = await scrypt(password, row?.salt || unknownAccountSalt, 64);
       if (!row || !crypto.timingSafeEqual(Buffer.from(row.password_hash, "base64"), expected)) return null;
+      if (db.prepare("SELECT password_hash FROM users WHERE id=?").get(row.id)?.password_hash !== row.password_hash) return null;
       return this.userById(row.id);
     },
     createAuthSession(userId) {

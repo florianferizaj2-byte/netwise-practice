@@ -6,7 +6,7 @@ import path from "node:path";
 import crypto from "node:crypto";
 import http from "node:http";
 import { createStore } from "../server/store.js";
-import { createApp } from "../server/index.js";
+import { createVerifiedTestApp as createApp, verifiedFetch } from "./helpers/account-mail.js";
 import { OpenAICompatibleProvider } from "../server/ai.js";
 import { encrypt } from "../server/security.js";
 import { fixtureQuestion, mockAI } from "./ai-fixture.js";
@@ -250,7 +250,7 @@ test("accounts require login and certificate selection filters the question bank
     fs.rmSync(dir, { recursive: true, force: true });
   });
   assert.equal((await fetch(base + "/api/questions")).status, 401);
-  const registration = await fetch(base + "/api/auth/register", {
+  const registration = await verifiedFetch(base + "/api/auth/register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -340,7 +340,7 @@ test("mobile clients can use a bearer session without browser cookies", async (t
     fs.rmSync(dir, { recursive: true, force: true });
   });
 
-  const registration = await fetch(base + "/api/auth/register", {
+  const registration = await verifiedFetch(base + "/api/auth/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -430,7 +430,7 @@ test("微信小程序首次登录绑定已有账号，后续直接复用同一�
   assert.equal(firstLoginData.needsBinding, true);
   assert.match(firstLoginData.bindingToken, /^[A-Za-z0-9_-]+$/);
 
-  const registration = await fetch(base + "/api/auth/register", {
+  const registration = await verifiedFetch(base + "/api/auth/register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username: "wechat_existing", password: "safe-password" }),
@@ -494,9 +494,10 @@ test("mobile version endpoint blocks outdated clients and exposes the APK link",
   const oldVersion = await req("/mobile/version?version=0.2.0");
   assert.equal(oldVersion.status, 200);
   assert.equal(oldVersion.data.forceUpdate, true);
-  assert.equal(oldVersion.data.downloadUrl, "/downloads/kaojiang-v0.2.1.apk");
+  assert.equal(oldVersion.data.downloadUrl, `/downloads/kaojiang-v${currentMobileVersion}.apk`);
+  assert.equal(oldVersion.data.minimumVersion, currentMobileVersion);
 
-  const currentVersion = await req("/mobile/version?version=0.2.1");
+  const currentVersion = await req(`/mobile/version?version=${currentMobileVersion}`);
   assert.equal(currentVersion.data.forceUpdate, false);
 });
 
@@ -521,7 +522,7 @@ test("secure cookie follows the actual HTTP protocol", async (t) => {
     if (previousCookieSecure === undefined) delete process.env.COOKIE_SECURE;
     else process.env.COOKIE_SECURE = previousCookieSecure;
   });
-  const registration = await fetch(base + "/api/auth/register", {
+  const registration = await verifiedFetch(base + "/api/auth/register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -562,7 +563,7 @@ test("author AI settings are shared for use but manageable only by the owner", a
   });
   assert.equal((await fetch(base + "/api/settings")).status, 401);
   const register = async (username) => {
-    const response = await fetch(base + "/api/auth/register", {
+    const response = await verifiedFetch(base + "/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password: "safe-password" }),
@@ -582,6 +583,8 @@ test("author AI settings are shared for use but manageable only by the owner", a
     return { status: response.status, data: await response.json() };
   };
   const first = await register("key_owner");
+  // Administrator setup is a trusted fixture action, never a consequence of public registration.
+  store.db.prepare("UPDATE users SET is_admin=1 WHERE id=?").run(first.user.id);
   const second = await register("key_stranger");
   const configuration = {
     baseUrl: "https://example.com/v1",
@@ -635,7 +638,7 @@ test("server-generated AI groups are immutable, shareable by certificate, and ke
     return { status: response.status, data: await response.json() };
   };
   const createUser = async (username, certificateId = "network-engineer") => {
-    const registration = await fetch(base + "/api/auth/register", {
+    const registration = await verifiedFetch(base + "/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password: "safe-password" }),
@@ -1121,7 +1124,7 @@ test("执兽模拟考试按四科400题计分，240分及格且不设单科门�
   const { req, store, url } = await fixture(t, undefined, {
     authRequired: true,
   });
-  const registration = await fetch(url + "/api/auth/register", {
+  const registration = await verifiedFetch(url + "/api/auth/register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -1396,7 +1399,7 @@ test("管理员面板隔离管理员 API，支持扩题、重合检测、删题�
   await new Promise((resolve) => server.once("listening", resolve));
   const base = `http://127.0.0.1:${server.address().port}`;
   const register = async (username) => {
-    const res = await fetch(base + "/api/auth/register", {
+    const res = await verifiedFetch(base + "/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password: "safe-password" }),
@@ -1426,7 +1429,9 @@ test("管理员面板隔离管理员 API，支持扩题、重合检测、删题�
   const admin = await register("admin_owner");
   const member = await register("ordinary_member");
   assert.equal(admin.status, 200);
-  assert.equal(admin.data.user.isAdmin, true);
+  assert.equal(admin.data.user.isAdmin, false);
+  store.db.prepare("UPDATE users SET is_admin=1 WHERE id=?").run(admin.data.user.id);
+  assert.equal((await request(admin.cookie, "/auth/me")).data.user.isAdmin, true);
   assert.equal(member.data.user.isAdmin, false);
   assert.equal((await request(member.cookie, "/admin/overview")).status, 403);
   const overviewStarted = performance.now();

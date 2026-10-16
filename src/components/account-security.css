@@ -1,0 +1,135 @@
+.account-email-fields,
+.account-security-fields {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+  display: grid;
+  gap: 14px;
+}
+.account-email-fields label,
+.account-security-fields label {
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+.account-code-row {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  min-width: 0;
+}
+.account-code-row input {
+  min-width: 0;
+  flex: 1;
+  width: 100%;
+}
+.account-code-row button {
+  flex: 0 0 auto;
+  font-size: 13px;
+  padding: 8px 12px;
+  white-space: nowrap;
+}
+.account-security-hint {
+  font-size: 13px !important;
+  line-height: 1.7 !important;
+  color: var(--text-2, #526983);
+  font-weight: 400;
+  margin: 0;
+}
+.account-security-settings {
+  border: 1px solid var(--line, #dce7fb);
+  border-radius: 16px;
+  background: var(--paper, #fff);
+  padding: 24px;
+  margin: 20px 0;
+  color: var(--text, #172d58);
+}
+.account-security-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line, #dce7fb);
+}
+.account-security-row p {
+  font-size: 13px;
+  margin: 5px 0 0;
+  color: var(--text-2, #526983);
+}
+.account-security-row button {
+  flex-shrink: 0;
+}
+.account-security-form {
+  max-width: 560px;
+  border-top: 1px solid var(--line, #dce7fb);
+  padding-top: 18px;
+}
+.account-security-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+.account-recovery-form {
+  display: grid;
+  gap: 18px;
+}
+.account-recovery-dialog {
+  box-sizing: border-box;
+  width: min(460px, calc(100% - 28px));
+  max-height: 90dvh;
+  overflow: auto;
+  border: 1px solid #dce7fb;
+  border-radius: 18px;
+  padding: 24px;
+  color: #172d58;
+  background: #fff;
+}
+.account-recovery-dialog::backdrop {
+  background: #10204070;
+}
+.account-recovery-dialog header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.account-recovery-dialog h2 {
+  margin: 0;
+  font-size: 23px;
+}
+.account-recovery-dialog input {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 42px;
+}
+.account-recovery-success {
+  display: grid;
+  gap: 14px;
+  line-height: 1.7;
+}
+.account-recovery-success p {
+  margin: 0;
+}
+.account-forgot-button {
+  display: block;
+  margin: 12px 0 0 auto;
+  font-size: 13px;
+}
+@media (max-width: 600px) {
+  .account-security-settings {
+    padding: 16px;
+  }
+  .account-code-row button {
+    padding: 8px;
+    font-size: 12px;
+  }
+  .account-email-fields input {
+    font-size: 16px;
+  }
+}

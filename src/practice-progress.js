@@ -3,6 +3,24 @@ export const practiceStorageKey = (userId, certificateId) =>
     ? `kaojiang-practice:${encodeURIComponent(userId)}:${encodeURIComponent(certificateId)}`
     : null;
 
+const practiceOrigins = {
+  home: "学习总览",
+  chapters: "章节练习",
+  wrong: "错题本",
+  favorites: "我的收藏",
+  training: "AI 专项训练",
+  community: "共享题库",
+  plan: "学习计划",
+};
+export const practiceReturnPage = (session) =>
+  session?.planTask
+    ? "plan"
+    : Object.hasOwn(practiceOrigins, session?.returnPage)
+      ? session.returnPage
+      : "home";
+export const practiceReturnLabel = (session) =>
+  "返回" + practiceOrigins[practiceReturnPage(session)];
+
 export function readPracticeProgress(storage, key) {
   if (!key) return null;
   try {
@@ -20,6 +38,16 @@ export function readPracticeProgress(storage, key) {
       !data.responses ||
       typeof data.responses !== "object" ||
       Array.isArray(data.responses)
+    )
+      return null;
+    if (
+      data.planTask &&
+      (!["planId", "taskId"].every((key) =>
+        /^[a-f0-9-]{36}$/.test(data.planTask[key] || ""),
+      ) ||
+        Object.keys(data.planTask).some(
+          (key) => !["planId", "taskId"].includes(key),
+        ))
     )
       return null;
     const validResponses = Object.values(data.responses).every(
@@ -73,6 +101,13 @@ export function restorePracticeProgress(saved, availableQuestions) {
   return {
     questions,
     title: saved.title,
+    returnPage: practiceReturnPage(saved),
+    ...(Number.isFinite(saved.startedAt) &&
+    saved.startedAt > 0 &&
+    saved.startedAt <= Date.now()
+      ? { startedAt: saved.startedAt }
+      : {}),
+    ...(saved.planTask ? { planTask: saved.planTask } : {}),
     progress: {
       index: found >= 0 ? found : Math.min(saved.index, questions.length - 1),
       responses,
@@ -84,8 +119,42 @@ export async function loadPracticeProgress(
   saved,
   availableQuestions,
   loadSharedQuestions,
+  loadPlanSession,
 ) {
   if (!saved) return null;
+  if (saved.planTask) {
+    if (!loadPlanSession) return null;
+    const remote = await loadPlanSession(saved.planTask);
+    const drafts =
+      restorePracticeProgress(saved, remote.questions)?.progress.responses ||
+      {};
+    const responses = { ...remote.progress.responses };
+    for (const [id, draft] of Object.entries(drafts))
+      if (!responses[id] && !draft.submitted)
+        responses[id] = {
+          ...(draft.selected ? { selected: draft.selected } : {}),
+          ...(draft.responseDraft
+            ? { responseDraft: draft.responseDraft }
+            : {}),
+        };
+    const currentId = saved.questionIds[saved.index];
+    const index = remote.questions.findIndex(
+      (q) => q.id === currentId && !responses[q.id]?.submitted,
+    );
+    return {
+      ...remote,
+      returnPage: "plan",
+      ...(Number.isFinite(saved.startedAt) &&
+      saved.startedAt > 0 &&
+      saved.startedAt <= Date.now()
+        ? { startedAt: saved.startedAt }
+        : {}),
+      progress: {
+        index: index >= 0 ? index : remote.progress.index,
+        responses,
+      },
+    };
+  }
   const availableIds = new Set(
     availableQuestions.map((question) => question.id),
   );
@@ -122,6 +191,11 @@ export function savePracticeProgress(
       JSON.stringify({
         version: 1,
         title: session.title,
+        returnPage: practiceReturnPage(session),
+        ...(Number.isFinite(session.startedAt) && session.startedAt > 0
+          ? { startedAt: session.startedAt }
+          : {}),
+        ...(session.planTask ? { planTask: session.planTask } : {}),
         questionIds: session.questions.map((question) => question.id),
         index,
         responses,

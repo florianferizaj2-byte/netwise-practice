@@ -8,6 +8,7 @@ import express from "express";
 import { chromium, webkit, expect } from "@playwright/test";
 import { createApp } from "../server/index.js";
 import { createStore } from "../server/store.js";
+import { completeFixtureProfile, dismissLaunchAnnouncement } from './helpers/mobile-profile.js';
 import { OpenAICompatibleProvider } from "../server/ai.js";
 import { studyNodes } from "../server/study-content.js";
 import { deploymentStudySeeds } from "../server/study-seeds/index.js";
@@ -82,6 +83,7 @@ const mobile = {
     "Mozilla/5.0 (iPhone; CPU iPhone OS 18_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.6 Mobile/15E148 Safari/604.1",
 };
 async function userPage(user, theme = "light") {
+  completeFixtureProfile(store, user);
   const context = await browser.newContext(mobile);
   await context.addInitScript(
     ({ token, theme }) => {
@@ -106,6 +108,7 @@ async function userPage(user, theme = "light") {
       );
   });
   await page.goto(`${base}/app/`);
+  await dismissLaunchAnnouncement(page);
   await page.getByRole("button", { name: "VIP导航", exact: true }).click();
   return page;
 }
@@ -281,6 +284,7 @@ try {
     await expect(teacher).toContainText("先把这个数分解成几个不同的二进制位权");
     await teacher.getByRole("button", { name: "收起", exact: true }).click();
     await page.reload();
+    await dismissLaunchAnnouncement(page);
     await tab("VIP");
     await button("进入 AI 精炼").click();
     await expect(

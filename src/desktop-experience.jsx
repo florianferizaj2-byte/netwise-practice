@@ -1,9 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
+import { reduceWebMotion } from "./web-preferences.jsx";
 import { DesktopTrial } from "./desktop-trial.jsx";
+import { LandingStudyArt } from "./components/landing-study-art.jsx";
+import { ChapterArt } from "./components/chapter-art.jsx";
+import { certificateChoices } from "./certificate-choices.js";
+import {
+  EmailCodeFields,
+  PasswordRecoveryForm,
+  useAccountEmailPolicy,
+} from "./components/account-security.jsx";
 import {
   ArrowUpRight,
   ArrowRight,
   BookOpen,
+  CalendarDays,
   ChevronRight,
   Crown,
   Download,
@@ -42,7 +52,12 @@ export function useDesktopWeb() {
 }
 
 const features = [
-  { page: "study", name: "AI 精讲与练习", detail: "会员知识点精讲、填空练习和随时答疑。", icon: BookOpen },
+  {
+    page: "study",
+    name: "AI 精讲与练习",
+    detail: "会员知识点精讲、填空练习和随时答疑。",
+    icon: BookOpen,
+  },
   {
     page: "chapters",
     name: "章节练习",
@@ -72,6 +87,12 @@ const features = [
     name: "知识掌握度",
     detail: "从作答记录中，看见每个知识点的进步。",
     icon: TrendingUp,
+  },
+  {
+    page: "plan",
+    name: "学习计划",
+    detail: "把复习拆成每日任务，按自己的节奏完成。",
+    icon: CalendarDays,
   },
   {
     page: "community",
@@ -156,8 +177,18 @@ function DesktopDialog({ children, label, onClose, className = "" }) {
   );
 }
 
-function DesktopAuth({ api, onAuth, initialMode, onClose, initialError }) {
+function DesktopAuth({
+  api,
+  onAuth,
+  initialMode,
+  onClose,
+  initialError,
+  embedded = false,
+}) {
   const [mode, setMode] = useState(initialMode);
+  const [username, setUsername] = useState("");
+  const [emailProof, setEmailProof] = useState({});
+  const emailPolicy = useAccountEmailPolicy(api);
   const [error, setError] = useState(initialError || "");
   const [busy, setBusy] = useState(false);
   const submit = async (event) => {
@@ -167,12 +198,23 @@ function DesktopAuth({ api, onAuth, initialMode, onClose, initialError }) {
       setError("两次输入的密码不一致。");
       return;
     }
+    if (mode === "register" && (emailPolicy.loading || emailPolicy.error))
+      return;
+    if (
+      mode === "register" &&
+      emailPolicy.required &&
+      !emailProof.challengeId
+    ) {
+      setError("请先获取邮箱验证码");
+      return;
+    }
     setBusy(true);
     setError("");
     try {
       await api(`/auth/${mode}`, {
         username: data.get("username"),
         password: data.get("password"),
+        ...(mode === "register" && emailPolicy.required ? emailProof : {}),
       });
       const result = await api("/auth/me");
       if (!result.authenticated)
@@ -184,32 +226,99 @@ function DesktopAuth({ api, onAuth, initialMode, onClose, initialError }) {
       setBusy(false);
     }
   };
-  return (
-    <DesktopDialog
-      label={mode === "login" ? "登录考匠" : "创建考匠账号"}
-      onClose={onClose}
-      className="desk-auth-dialog"
-    >
-      <img className="desk-auth-seal" src="/kaojiang-logo-192.png" alt="考匠" />
+  const wrap = (content) =>
+    embedded ? (
+      <section
+        className="desk-auth-card desk-auth-dialog"
+        aria-label="登录与注册"
+      >
+        {content}
+      </section>
+    ) : (
+      <DesktopDialog
+        label={
+          mode === "reset"
+            ? "找回密码"
+            : mode === "login"
+              ? "登录考匠"
+              : "创建考匠账号"
+        }
+        onClose={onClose}
+        className="desk-auth-dialog"
+      >
+        {content}
+      </DesktopDialog>
+    );
+  if (mode === "reset")
+    return wrap(
+      <>
+        <h2>找回密码</h2>
+        <PasswordRecoveryForm
+          api={api}
+          onBack={() => {
+            setMode("login");
+            setError("");
+          }}
+        />
+      </>,
+    );
+  return wrap(
+    <>
+      {!embedded && (
+        <img
+          className="desk-auth-seal"
+          src="/kaojiang-logo-192.png"
+          alt="考匠"
+        />
+      )}
       <h2>{mode === "login" ? "欢迎回到考匠" : "开始你的进阶之路"}</h2>
       <p>
         {mode === "login"
           ? "每一次练习，都让知识更扎实。"
           : "创建账号，选择证书，开始第一组练习。"}
       </p>
+      {embedded && (
+        <div className="desk-auth-tabs" aria-label="选择登录或注册">
+          {[
+            ["login", "登录"],
+            ["register", "注册"],
+          ].map(([value, label]) => (
+            <button
+              key={value}
+              type="button"
+              aria-label={`选择${label}`}
+              aria-pressed={mode === value}
+              disabled={busy}
+              onClick={() => {
+                setMode(value);
+                setError("");
+              }}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      )}
       <form onSubmit={submit}>
         <label>
           账号
           <input
-            autoFocus
+            autoFocus={!embedded}
             name="username"
             autoComplete="username"
             required
             minLength={3}
             maxLength={40}
-            pattern="[A-Za-z0-9_-]+"
-            title="使用 3–40 位字母、数字、下划线或短横线"
-            placeholder="字母、数字或下划线"
+            pattern={mode === "register" ? "[A-Za-z0-9_-]+" : undefined}
+            title={
+              mode === "register"
+                ? "使用 3–40 位字母、数字、下划线或短横线"
+                : undefined
+            }
+            placeholder={
+              mode === "register" ? "字母、数字或下划线" : "输入你的学习账号"
+            }
+            onChange={(event) => setUsername(event.target.value)}
           />
         </label>
         <label>
@@ -240,6 +349,24 @@ function DesktopAuth({ api, onAuth, initialMode, onClose, initialError }) {
             />
           </label>
         )}
+        {mode === "register" && emailPolicy.required && (
+          <EmailCodeFields
+            key={mode}
+            api={api}
+            purpose="register"
+            username={username}
+            onChange={setEmailProof}
+            disabled={busy}
+          />
+        )}
+        {mode === "register" && emailPolicy.error && (
+          <p role="alert" className="form-error">
+            {emailPolicy.error}{" "}
+            <button type="button" onClick={emailPolicy.reload}>
+              重新读取
+            </button>
+          </p>
+        )}
         {error && (
           <div className="desk-form-error" role="alert">
             {error}
@@ -247,17 +374,32 @@ function DesktopAuth({ api, onAuth, initialMode, onClose, initialError }) {
         )}
         <button
           className="desk-button desk-primary"
-          disabled={busy}
+          disabled={
+            busy ||
+            (mode === "register" &&
+              (emailPolicy.loading || !!emailPolicy.error))
+          }
           type="submit"
         >
           {busy
             ? "正在连接你的学习空间…"
             : mode === "login"
-              ? "进入学习空间"
+              ? embedded
+                ? "登录，开始学习"
+                : "进入学习空间"
               : "创建账号"}
           <ArrowRight size={17} />
         </button>
       </form>
+      {mode === "login" && emailPolicy.required && (
+        <button
+          className="text-button account-forgot-button"
+          disabled={busy}
+          onClick={() => setMode("reset")}
+        >
+          忘记密码？
+        </button>
+      )}
       <button
         className="desk-auth-switch"
         disabled={busy}
@@ -272,7 +414,7 @@ function DesktopAuth({ api, onAuth, initialMode, onClose, initialError }) {
         <ShieldCheck size={15} />
         学习记录跟随账号，在多端继续
       </div>
-    </DesktopDialog>
+    </>,
   );
 }
 
@@ -289,16 +431,12 @@ export function DesktopLanding({
   const enter = (page = "home", mode = "login") =>
     authenticated ? navigate(page) : setAuthDialog({ page, mode });
   const scroll = (id) =>
-    document
-      .getElementById(id)
-      ?.scrollIntoView({
-        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-          ? "instant"
-          : "smooth",
-        block: "start",
-      });
+    document.getElementById(id)?.scrollIntoView({
+      behavior: reduceWebMotion() ? "instant" : "smooth",
+      block: "start",
+    });
   return (
-    <div className="desktop-experience desk-landing">
+    <div className="desktop-experience desk-landing blue-landing">
       <header className="desk-site-header">
         <div className="desk-container desk-site-nav">
           <Wordmark
@@ -310,7 +448,9 @@ export function DesktopLanding({
             <button onClick={() => scroll("desk-certificates")}>
               备考证书
             </button>
-            <button onClick={() => navigate("downloads")}>多端学习与下载</button>
+            <button onClick={() => navigate("downloads")}>
+              多端学习与下载
+            </button>
           </nav>
           <div className="desk-nav-actions">
             {!authenticated && (
@@ -331,6 +471,7 @@ export function DesktopLanding({
       <main>
         <section className="desk-hero desk-container">
           <div className="desk-hero-copy">
+            <span className="desk-hero-tag">你的备考学习空间</span>
             <h1>
               把每一道题，
               <br />
@@ -359,14 +500,37 @@ export function DesktopLanding({
               </button>
             </div>
           </div>
-          <div className="desk-hero-preview">
-            <DesktopTrial
-              api={api}
-              Dialog={DesktopDialog}
-              onJoin={() => enter("home", "register")}
-              authenticated={authenticated}
-            />
+          <div className="desk-hero-art">
+            <LandingStudyArt />
           </div>
+          {authenticated ? (
+            <section
+              className="desk-auth-card desk-return-card"
+              aria-label="继续学习"
+            >
+              <BookOpen size={32} />
+              <h2>回到你的学习空间</h2>
+              <p>从上次的章节继续，把今天的一小步走扎实。</p>
+              <button
+                className="desk-button desk-primary"
+                onClick={() => enter()}
+              >
+                继续学习
+                <ArrowRight size={17} />
+              </button>
+            </section>
+          ) : (
+            <DesktopAuth
+              embedded
+              api={api}
+              initialMode="login"
+              initialError={initialError}
+              onAuth={(result) => {
+                navigate("home");
+                onAuth(result);
+              }}
+            />
+          )}
         </section>
         <section className="desk-method" id="desk-method">
           <div className="desk-container desk-method-grid">
@@ -401,6 +565,28 @@ export function DesktopLanding({
             </div>
           </div>
         </section>
+        <section
+          className="desk-container desk-trial-section"
+          aria-labelledby="desk-trial-heading"
+        >
+          <div className="desk-trial-copy">
+            <h2 id="desk-trial-heading">先做一题，感受考匠</h2>
+            <p>
+              免费试做 5 道题，无需注册。
+              <br />
+              选出答案，看看解析，再试着理解下一题。
+            </p>
+            <div className="desk-trial-art">
+              <LandingStudyArt compact />
+            </div>
+          </div>
+          <DesktopTrial
+            api={api}
+            Dialog={DesktopDialog}
+            onJoin={() => enter("home", "register")}
+            authenticated={authenticated}
+          />
+        </section>
         <section className="desk-container desk-features" id="desk-features">
           <div className="desk-section-heading">
             <div>
@@ -413,21 +599,60 @@ export function DesktopLanding({
             </p>
           </div>
           <div className="desk-feature-grid">
-            {features.map(({ page, name, detail, icon: Icon }) => (
-              <button
-                className="desk-feature"
-                key={page}
-                onClick={() => enter(page)}
-              >
-                <div className="desk-feature-top">
-                  <Icon size={23} />
-                  <ArrowUpRight size={17} />
-                </div>
-                <h3>{name}</h3>
-                <p>{detail}</p>
-                <span>进入{page === "vip" ? "会员中心" : name}</span>
-              </button>
-            ))}
+            {features
+              .filter(({ page }) =>
+                [
+                  "chapters",
+                  "study",
+                  "wrong",
+                  "exam",
+                  "plan",
+                  "mastery",
+                ].includes(page),
+              )
+              .map(({ page, name, detail, icon: Icon }) => (
+                <button
+                  className="desk-feature blue-art-trigger"
+                  key={page}
+                  onClick={() => enter(page)}
+                >
+                  <div className="desk-feature-top">
+                    {page === "chapters" ? (
+                      <ChapterArt
+                        certificateId="sichuan-upgrading-computer"
+                        title="computer-foundations"
+                      />
+                    ) : (
+                      <Icon size={32} />
+                    )}
+                    <ArrowUpRight size={17} />
+                  </div>
+                  <h3>{name}</h3>
+                  <p>{detail}</p>
+                  <span>进入{page === "vip" ? "会员中心" : name}</span>
+                </button>
+              ))}
+          </div>
+          <div className="desk-feature-extras" aria-label="更多学习工具">
+            {features
+              .filter(
+                ({ page }) =>
+                  ![
+                    "chapters",
+                    "study",
+                    "wrong",
+                    "exam",
+                    "plan",
+                    "mastery",
+                  ].includes(page),
+              )
+              .map(({ page, name, icon: Icon }) => (
+                <button key={page} onClick={() => enter(page)}>
+                  <Icon size={20} />
+                  <span>{name}</span>
+                  <ChevronRight size={15} />
+                </button>
+              ))}
           </div>
         </section>
         <section
@@ -452,13 +677,21 @@ export function DesktopLanding({
           </div>
           <div className="desk-certificate-list">
             {certificates.length ? (
-              certificates.map((certificate) => (
+              certificateChoices(certificates).map((certificate) => (
                 <button
                   key={certificate.id}
+                  className="blue-art-trigger"
                   onClick={() => setCertificatePreview(certificate)}
                 >
                   <span className="desk-cert-icon">
-                    <GraduationCap size={21} />
+                    {certificate.artCertificate ? (
+                      <ChapterArt
+                        certificateId={certificate.artCertificate}
+                        title={certificate.artChapter}
+                      />
+                    ) : (
+                      <GraduationCap size={28} />
+                    )}
                   </span>
                   <span>
                     <strong>{certificate.shortName || certificate.name}</strong>
@@ -518,8 +751,13 @@ export function DesktopLanding({
               登录同一账号，接着你的进度往前走。
             </p>
             <div className="desk-device-actions">
-              <button className="desk-button desk-primary" onClick={() => navigate("downloads")}>
-                <Monitor size={17} />查看多端学习与下载<ArrowUpRight size={16} />
+              <button
+                className="desk-button desk-primary"
+                onClick={() => navigate("downloads")}
+              >
+                <Monitor size={17} />
+                查看多端学习与下载
+                <ArrowUpRight size={16} />
               </button>
               <a className="desk-button desk-secondary" href="/app/">
                 <Smartphone size={17} />
@@ -547,6 +785,9 @@ export function DesktopLanding({
           onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}
         />
         <span>认真练习，从容应考。</span>
+        <a className="desk-footer-guide" href="/guide/">
+          题库与平台说明
+        </a>
         <button onClick={() => enter("about")}>
           关于考匠
           <ArrowUpRight size={14} />
@@ -662,6 +903,7 @@ export function DesktopToolbar({
   openChapter,
   plan,
   username,
+  certificateControl,
 }) {
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -697,9 +939,13 @@ export function DesktopToolbar({
   return (
     <>
       <div className="desk-breadcrumb">
-        <span>我的学习空间</span>
-        <ChevronRight size={14} />
-        <strong>{pageTitle}</strong>
+        {certificateControl || (
+          <>
+            <span>我的学习空间</span>
+            <ChevronRight size={14} />
+            <strong>{pageTitle}</strong>
+          </>
+        )}
       </div>
       <div className="desk-toolbar-actions">
         <button
@@ -715,7 +961,16 @@ export function DesktopToolbar({
           <span>搜索功能与章节</span>
           <kbd>Ctrl K</kbd>
         </button>
-        <button className="study-download-link" onClick={() => go("downloads")}><Download size={17} />多端下载</button>
+        {certificateControl && (
+          <button className="blue-plan-link" onClick={() => go("plan")}>
+            <CalendarDays size={18} />
+            学习计划
+          </button>
+        )}
+        <button className="study-download-link" onClick={() => go("downloads")}>
+          <Download size={17} />
+          多端下载
+        </button>
       </div>
       {searchOpen && (
         <DesktopDialog

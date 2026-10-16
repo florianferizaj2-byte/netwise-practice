@@ -81,7 +81,7 @@ try {
   assert.equal(lessonReads.filter((path) => path === lessonPath).length, 1, "reopening a lesson uses memory without another request");
   assert.equal(bankReads.length, 0, "course and membership pages do not download the unrelated full question bank");
   await expect(page.locator(".ss-teacher")).toHaveCount(0);
-  await page.locator(".ss-workspace-title button").click();
+  await page.getByRole("button", { name: "问老师", exact: true }).click();
   const teacher = page.locator(".ss-teacher");
   await teacher.getByRole("button", { name: "举个例子", exact: true }).click();
   await expect(teacher.locator(".ss-teacher-example")).toContainText("8＋4＋1");
@@ -119,12 +119,12 @@ try {
   await page.getByRole("tab", { name: "练习", exact: true }).click();
   await expect(page.locator("#ss-answer-q2-b1")).toBeVisible();
   assert.equal(practiceReads.length, practiceReadCount, "switching between learning and practice retains the group and its position");
-  await page.locator(".ss-workspace-title button").click();
+  await page.getByRole("button", { name: "问老师", exact: true }).click();
   await teacher.getByLabel("你的问题", { exact: true }).fill("老师，我想再问一下");
   await teacher.getByLabel("你的问题", { exact: true }).press("Enter");
   await expect(teacher.getByLabel("你的问题", { exact: true })).toHaveValue("老师，我想再问一下\n");
   await expect(page.locator("#ss-answer-q2-b1")).toBeVisible();
-  await page.locator(".ss-workspace-title button").click();
+  await page.getByRole("button", { name: "问老师", exact: true }).click();
   await page.getByRole("button", { name: "下一题", exact: true }).click();
   await page.locator("#ss-answer-q3-b1").fill("13");
   await page.reload();

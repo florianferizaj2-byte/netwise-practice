@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.RoutePlayer" parent="Theme.RoutePlayerBase">
+        <item name="android:windowLightNavigationBar">@bool/rp_light_bars</item>
+        <item name="android:navigationBarColor">@color/rp_surface</item>
+    </style>
+</resources>

@@ -2,9 +2,15 @@
 
 考匠（AceExam，Ace + Exam）是一个面向职业认证与升学考试的练习与模拟平台。用户共用作者提供的 AI 服务，根据错题生成针对性变式题，并按功能消耗账号额度；通过审核的题目可以分享给同证书的其他用户，让题库在使用过程中持续增长。
 
-**Android 最新版：v0.4.2** · [下载 APK](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.2/kaojiang-v0.4.2.apk) · [SHA-256 校验文件](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.2/kaojiang-v0.4.2.apk.sha256) · [发布页](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v0.4.2)
+**官网：**[考匠 AceExam](https://aceexam.top/) · [考试方向、题库构成与来源说明](https://aceexam.top/guide/)。考匠是独立备考工具，不代表考试主管单位；题目来源以站内标注为准。
+
+**Android 最新版：v0.4.6** · [下载 APK](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.6/kaojiang-v0.4.6.apk) · [SHA-256](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.6/kaojiang-v0.4.6.apk.sha256) · [发布页](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v0.4.6) · [版本说明](docs/release-v0.4.6.md)。
+
+进入 App 先弹出可热更新的公告；所有账号补全名字和头像后继续学习，网页管理员用户列表显示头像和昵称，定位教程右上角可求助作者。管理员在“我的 → 管理中心”查看/调整注册账号，并编辑或隐藏公告；公告保存后在线生效，离线保留缓存。[管理与公告说明](docs/MOBILE-ADMIN-ANNOUNCEMENTS.md)。源码、APK 和已构建服务器更新包已发布 GitHub；服务器按[更新步骤](docs/DEPLOY-v0.4.6.md)拉取、完整构建并重启后，官网新版下载和旧版强制升级才会生效。本机及 GitHub 版本标签检查通过，真机后台/悬浮显示和覆盖安装仍待验证。
 
 **会员兑换码购买：**[考匠兑换码商店](https://catfk.com/shop/aceexam)。购买后回到考匠的 VIP 或兑换码页面开通，权益绑定当前账号；套餐、售价和时长以购买页为准。
+
+**邮箱功能暂不启用：**Web 和 App 保留邮箱验证码注册与邮箱找回代码，`AUTH_EMAIL_VERIFICATION_ENABLED=0` 默认关闭，正常账号密码注册、登录及改密保留；[开关与老账号恢复说明](docs/account-email-verification.md)。本地改动尚未部署，也未发布新 APK。
 
 电脑端使用响应式网页；iPhone / iPad 通过 `/app/` 使用与 Android 共用源码的移动界面，可添加到主屏幕。两个移动端共用今日、练习、错题、考试、VIP、我的六个页面及账号接口。
 

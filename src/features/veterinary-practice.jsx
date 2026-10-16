@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PracticeModes } from "../practice-modes.jsx";
 import { useDesktopWeb } from "../desktop-experience.jsx";
 import {
@@ -9,6 +9,8 @@ import {
   ArrowLeft,
   ArrowRight,
   Check,
+  Clock,
+  BookOpen,
   ChevronDown,
   ChevronRight,
   Lightbulb,
@@ -33,6 +35,12 @@ import {
   QuestionReport,
 } from "../components/question-tools.jsx";
 import { Heading } from "../components/study-ui.jsx";
+import {
+  PracticeAutoNext,
+  usePracticeReview,
+} from "../components/practice-review.jsx";
+import "./blue-practice-view.css";
+import "./blue-veterinary-practice.css";
 
 export function VeterinaryPractice({
   session,
@@ -41,6 +49,9 @@ export function VeterinaryPractice({
   busy,
   train,
   exit,
+  returnLabel,
+  blue = false,
+  preferences,
 }) {
   const desktop = useDesktopWeb();
   const [outcome, setOutcome] = useState({ serial: 0, streak: 0 });
@@ -58,6 +69,20 @@ export function VeterinaryPractice({
     String((session.progress?.index || 0) + 1),
   );
   const started = useRef(Date.now());
+  const submitting = useRef(false);
+  const [roundStart] = useState(() => session.startedAt || Date.now());
+  const [elapsed, setElapsed] = useState(() =>
+    Math.max(0, Math.floor((Date.now() - roundStart) / 1000)),
+  );
+  useEffect(() => {
+    if (!blue || done) return;
+    const timer = setInterval(
+      () =>
+        setElapsed(Math.max(0, Math.floor((Date.now() - roundStart) / 1000))),
+      1000,
+    );
+    return () => clearInterval(timer);
+  }, [blue, done, roundStart]);
   const groups = buildVeterinaryGroups(session.questions);
   const group =
     groups.find((item) => item.indexes.includes(index)) || groups[0];
@@ -68,6 +93,18 @@ export function VeterinaryPractice({
   const teacher = current.teacher || "";
   const hint = current.hint || 0;
   const feedbackKind = current.feedbackKind || null;
+  const review = usePracticeReview({
+    questionId: q.id,
+    result,
+    enabled: blue,
+    autoNext: preferences?.autoNext === true,
+    showAnalysis: current.revealed || preferences?.showAnalysis,
+    busy,
+    done,
+    last: index === session.questions.length - 1,
+    next: () => jumpTo(index + 1),
+    teacherOpen,
+  });
   const history = session.questions
     .map((question) => responses[question.id])
     .filter((response) => response?.submitted)
@@ -84,7 +121,14 @@ export function VeterinaryPractice({
       [q.id]: { ...old[q.id], ...patch },
     }));
   const jumpTo = (nextIndex) => {
-    if (busy || nextIndex < 0 || nextIndex >= session.questions.length) return;
+    if (
+      busy ||
+      submitting.current ||
+      nextIndex < 0 ||
+      nextIndex >= session.questions.length
+    )
+      return;
+    review.cancel();
     setIndex(nextIndex);
     setJumpValue(String(nextIndex + 1));
     const nextChapter = session.questions[nextIndex]?.chapter;
@@ -101,7 +145,7 @@ export function VeterinaryPractice({
     if (Number.isInteger(nextIndex)) jumpTo(nextIndex);
   };
   const choose = (key) => {
-    if (result) return;
+    if (result || busy || submitting.current) return;
     updateCurrent({
       selected: isSingleSelect(q)
         ? [key]
@@ -110,20 +154,33 @@ export function VeterinaryPractice({
           : [...selected, key],
     });
   };
-  const submit = () =>
-    run("正在记录作答", async () => {
-      const answerResult = await api("/attempts", {
-        questionId: q.id,
-        selected,
-        timeMs: Math.min(86400000, Date.now() - started.current),
+  const submit = async () => {
+    if (submitting.current || busy || result || !selected.length) return;
+    submitting.current = true;
+    try {
+      await run("正在记录作答", async () => {
+        const answerResult = await api("/attempts", {
+          questionId: q.id,
+          ...(session.planTask ? { planTask: session.planTask } : {}),
+          selected,
+          timeMs: Math.min(86400000, Date.now() - started.current),
+        });
+        updateCurrent({
+          result: answerResult,
+          submitted: true,
+          revealed: false,
+        });
+        setOutcome((old) => ({
+          serial: old.serial + 1,
+          streak: answerResult.correct === true ? old.streak + 1 : 0,
+        }));
+        await refresh();
+        review.acknowledge();
       });
-      updateCurrent({ result: answerResult, submitted: true, revealed: false });
-      setOutcome((old) => ({
-        serial: old.serial + 1,
-        streak: answerResult.correct === true ? old.streak + 1 : 0,
-      }));
-      await refresh();
-    });
+    } finally {
+      submitting.current = false;
+    }
+  };
   const removeWrong = () =>
     run("正在移除错题", async () => {
       await api(`/wrong/${encodeURIComponent(q.id)}`, null, "DELETE");
@@ -159,10 +216,48 @@ export function VeterinaryPractice({
       setTeacherOpen(true);
     });
   const next = () => {
-    if (busy) return;
+    if (busy || submitting.current) return;
     if (index === session.questions.length - 1) setDone(true);
     else jumpTo(index + 1);
   };
+  useEffect(() => {
+    if (!blue || done) return;
+    const keyboard = (event) => {
+      if (
+        event.repeat ||
+        event.ctrlKey ||
+        event.metaKey ||
+        event.altKey ||
+        busy ||
+        submitting.current ||
+        document.querySelector('[role="dialog"], dialog[open]') ||
+        event.target.closest?.(
+          'input,textarea,select,button,a,[contenteditable="true"]',
+        )
+      )
+        return;
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        jumpTo(index - 1);
+      }
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        jumpTo(index + 1);
+      }
+      if (event.key === "Enter") {
+        event.preventDefault();
+        result ? next() : void submit();
+      }
+    };
+    document.addEventListener("keydown", keyboard);
+    return () => document.removeEventListener("keydown", keyboard);
+  }, [blue, done, busy, index, current, session]);
+  const accuracy = history.length
+    ? Math.round(
+        (history.filter((r) => r.correct === true).length / history.length) *
+          100,
+      )
+    : null;
   const chapterCount = (name) =>
     session.questions.filter((question) => question.chapter === name).length;
   const navGroups = groups
@@ -209,7 +304,8 @@ export function VeterinaryPractice({
       {Object.entries(q.options).map(([key, value]) => (
         <button
           key={key}
-          disabled={!!result}
+          disabled={!!result || !!busy}
+          aria-pressed={selected.includes(key)}
           className={
             "option " +
             (selected.includes(key) ? "chosen " : "") +
@@ -234,10 +330,16 @@ export function VeterinaryPractice({
   );
   if (done)
     return (
-      <div className="completion vet-completion">
+      <div
+        className={`completion vet-completion${blue ? " blue-practice-summary" : ""}`}
+      >
         <Stethoscope size={54} />
         <span className="eyebrow">执业兽医专项训练</span>
-        <h1>本轮专项练习完成</h1>
+        <h1>
+          {blue && history.length + revealedIds.size < session.questions.length
+            ? "本轮专项练习已结束"
+            : "本轮专项练习完成"}
+        </h1>
         <p>{session.title}</p>
         <div className="completion-stats">
           <strong>
@@ -249,27 +351,66 @@ export function VeterinaryPractice({
             <small>答错</small>
           </strong>
           <strong>
-            {session.questions.length - history.length}
-            <small>未完成</small>
+            {blue
+              ? revealedIds.size
+              : session.questions.length - history.length}
+            <small>{blue ? "查看答案" : "未完成"}</small>
           </strong>
+          {blue && (
+            <strong>
+              {Math.max(
+                0,
+                session.questions.length - history.length - revealedIds.size,
+              )}
+              <small>未作答</small>
+            </strong>
+          )}
         </div>
         <button className="primary" onClick={exit}>
-          返回执兽学习区
+          {returnLabel ||
+            (session.planTask ? "返回学习计划" : "返回执兽学习区")}
           <ArrowRight size={17} />
         </button>
       </div>
     );
   return (
-    <>
-      <Heading
-        title="执业兽医专项刷题"
-        subtitle="基础、预防、临床、综合四科分层训练；病例题按共用题干逐问作答"
-      >
-        <button onClick={exit}>
-          <ArrowLeft size={16} />
-          结束练习
-        </button>
-      </Heading>
+    <div className={blue ? "blue-practice blue-vet-practice" : undefined}>
+      {blue ? (
+        <header className="blue-practice-heading">
+          <div>
+            <button
+              className="blue-practice-back"
+              disabled={!!busy}
+              onClick={exit}
+            >
+              <ArrowLeft size={15} />
+              {returnLabel || "返回执兽学习区"}
+            </button>
+            <div className="blue-practice-title">
+              <Stethoscope size={36} />
+              <div>
+                <h1>{session.title}</h1>
+                <p>
+                  执业兽医 · {q.chapter} · 本轮 {session.questions.length} 题
+                </p>
+              </div>
+            </div>
+          </div>
+          <button disabled={!!busy} onClick={() => setDone(true)}>
+            结束本轮练习
+          </button>
+        </header>
+      ) : (
+        <Heading
+          title="执业兽医专项刷题"
+          subtitle="基础、预防、临床、综合四科分层训练；病例题按共用题干逐问作答"
+        >
+          <button onClick={exit}>
+            <ArrowLeft size={16} />
+            结束练习
+          </button>
+        </Heading>
+      )}
       <section className="vet-practice-banner">
         <div className="vet-practice-banner-copy">
           <span className="eyebrow">
@@ -295,6 +436,7 @@ export function VeterinaryPractice({
             <button
               key={module}
               className={active ? "active" : ""}
+              aria-pressed={active}
               disabled={first < 0 || !!busy}
               onClick={() => first >= 0 && jumpTo(first)}
             >
@@ -305,6 +447,40 @@ export function VeterinaryPractice({
         })}
       </div>
       <div className="practice-layout vet-practice-layout">
+        {blue && (
+          <div className="blue-round-progress">
+            <BookOpen size={22} />
+            <span>
+              本轮进度 <strong>{history.length}</strong> /{" "}
+              {session.questions.length} 题已答
+            </span>
+            <div
+              className="progress"
+              role="progressbar"
+              aria-label="本轮作答进度"
+              aria-valuemin={0}
+              aria-valuemax={session.questions.length}
+              aria-valuenow={history.length}
+            >
+              <i
+                style={{
+                  width: `${(history.length / session.questions.length) * 100}%`,
+                }}
+              />
+            </div>
+            <span
+              className="blue-round-clock"
+              title="从本轮开始计算，包含暂时离开页面的时间"
+            >
+              <Clock size={19} />
+              本轮用时{" "}
+              <time>
+                {String(Math.floor(elapsed / 60)).padStart(2, "0")}:
+                {String(elapsed % 60).padStart(2, "0")}
+              </time>
+            </span>
+          </div>
+        )}
         <section className="question-panel vet-question-panel">
           <PracticeModes outcome={outcome} />
           <div className="question-top">
@@ -331,13 +507,15 @@ export function VeterinaryPractice({
               </button>
             </label>
           </div>
-          <div className="progress">
-            <i
-              style={{
-                width: ((index + 1) / session.questions.length) * 100 + "%",
-              }}
-            />
-          </div>
+          {!blue && (
+            <div className="progress">
+              <i
+                style={{
+                  width: ((index + 1) / session.questions.length) * 100 + "%",
+                }}
+              />
+            </div>
+          )}
           <div className="vet-question-nav">
             <div className="practice-question-nav-head vet-nav-head">
               <div>
@@ -352,6 +530,7 @@ export function VeterinaryPractice({
                 className="vet-nav-toggle"
                 disabled={!!busy}
                 onClick={openQuestionNav}
+                aria-expanded={navOpen}
               >
                 {navOpen ? "收起题号" : "打开题号"}
                 <ChevronDown size={15} className={navOpen ? "is-open" : ""} />
@@ -508,16 +687,21 @@ export function VeterinaryPractice({
                     <button
                       key={child.id}
                       className={questionIndex === index ? "active" : ""}
+                      aria-current={
+                        questionIndex === index ? "step" : undefined
+                      }
                       disabled={!!busy}
                       onClick={() => jumpTo(questionIndex)}
                     >
                       <b>{step + 1}</b>
                       <span>
-                        {childResult
-                          ? childResult.correct
-                            ? "答对"
-                            : "需复习"
-                          : "待作答"}
+                        {responses[child.id]?.revealed
+                          ? "已查看"
+                          : childResult
+                            ? childResult.correct
+                              ? "答对"
+                              : "需复习"
+                            : "待作答"}
                       </span>
                     </button>
                   );
@@ -530,7 +714,7 @@ export function VeterinaryPractice({
             <span>{diff[q.difficulty]}</span>
             {q.knowledgeSection && <span>{q.knowledgeSection}</span>}
             <span>{q.targetKnowledgePoint || q.knowledgePoint}</span>
-            {q.sharedGroupId && <span>管理员已分组</span>}
+            {!blue && q.sharedGroupId && <span>管理员已分组</span>}
           </div>
           <QuestionImages question={q} />
           <h2 className="question-text vet-question-text">
@@ -541,6 +725,23 @@ export function VeterinaryPractice({
             <div className="vet-options-label">本题从共用备选答案中选择</div>
           )}
           {renderOptions()}
+          {blue && (
+            <div className="blue-vet-navigation">
+              <button
+                disabled={!!busy || index === 0}
+                onClick={() => jumpTo(index - 1)}
+              >
+                <ArrowLeft size={16} />
+                上一题
+              </button>
+              {!result && (
+                <button disabled={!!busy} onClick={next}>
+                  跳过此题
+                  <ArrowRight size={16} />
+                </button>
+              )}
+            </div>
+          )}
           {result && (
             <div
               className={`result-block ${result.correct === false ? "wrong" : ""}`}
@@ -553,9 +754,20 @@ export function VeterinaryPractice({
                     : "这道题还需要巩固"}
                 <span>正确答案 {result.answer.join("、")}</span>
               </h3>
-              <p>{result.analysis}</p>
+              {review.expanded ? (
+                <p>{result.analysis}</p>
+              ) : (
+                <button
+                  className="practice-analysis-reveal"
+                  type="button"
+                  onClick={review.reveal}
+                >
+                  展开答案解析
+                </button>
+              )}
             </div>
           )}
+          <PracticeAutoNext review={review} />
           {result && q.source === "ai_generated" && (
             <div className="question-feedback">
               <span>这道共享 AI 题怎么样？</span>
@@ -655,6 +867,21 @@ export function VeterinaryPractice({
           </div>
         </section>
         <aside className="teacher-panel vet-teacher-panel">
+          {blue && (
+            <div className="blue-answer-stats">
+              <div>
+                <span>已答</span>
+                <strong>
+                  {history.length}
+                  <small> / {session.questions.length}</small>
+                </strong>
+              </div>
+              <div>
+                <span>正确率</span>
+                <strong>{accuracy === null ? "—" : `${accuracy}%`}</strong>
+              </div>
+            </div>
+          )}
           {desktop && (
             <DesktopPracticeNav
               questions={session.questions}
@@ -715,6 +942,6 @@ export function VeterinaryPractice({
           )}
         </aside>
       </div>
-    </>
+    </div>
   );
 }

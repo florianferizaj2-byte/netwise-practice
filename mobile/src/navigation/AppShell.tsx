@@ -32,6 +32,7 @@ import { ScreenActivityProvider, useAppActive } from './ScreenActivity';
 import { AnimatedPressable, EntranceView } from '../components/Motion';
 import { BrandMark } from '../components/BrandMark';
 import { AuthScreen } from '../screens/AuthScreen';
+import { ProfileSetupScreen } from '../screens/ProfileSetupScreen';
 import { CertificateScreen } from '../screens/CertificateScreen';
 import {
   ExamScreen,
@@ -82,7 +83,7 @@ export function AppShell() {
   const { data: dashboard } = useCachedQuery(
     '/dashboard?summary=1',
     mobileApi.dashboard,
-    appActive && activeTab === 'today' && !dailyPracticeOpen && !!session?.user.certificateId,
+    appActive && activeTab === 'today' && !dailyPracticeOpen && !!session?.user.certificateId && session?.user.profileComplete === true,
   );
   const [visitedTabs, setVisitedTabs] = useState<AppTab[]>(['today']);
   const [practiceMode, setPracticeMode] = useState<PracticeMode>('sequential');
@@ -173,12 +174,12 @@ export function AppShell() {
     return () => { mounted = false; };
   }, [aiJobSeenStorageKey]);
   useEffect(() => {
-    if (appActive && activeTab === 'today' && !dailyPracticeOpen && session?.user.certificateId)
+    if (appActive && activeTab === 'today' && !dailyPracticeOpen && session?.user.certificateId && session.user.profileComplete)
       void mobileApi.dashboard().catch(() => undefined);
-  }, [appActive, activeTab, dailyPracticeOpen, session?.user.id, session?.user.certificateId]);
+  }, [appActive, activeTab, dailyPracticeOpen, session?.user.id, session?.user.certificateId, session?.user.profileComplete]);
 
   useEffect(() => {
-    if (!session?.user.certificateId || isPreview) {
+    if (!session?.user.certificateId || !session.user.profileComplete || isPreview) {
       setAiQuestionJobs([]);
       knownAiJobStatuses.current.clear();
       return;
@@ -206,7 +207,7 @@ export function AppShell() {
       mounted = false;
       clearInterval(timer);
     };
-  }, [appActive, isPreview, session?.user.id, session?.user.certificateId]);
+  }, [appActive, isPreview, session?.user.id, session?.user.certificateId, session?.user.profileComplete]);
 
   useEffect(() => {
     let mounted = true;
@@ -441,6 +442,10 @@ export function AppShell() {
         />
       </>
     );
+  }
+
+  if (session && session.user.profileComplete !== true) {
+    return <><StatusBar style={resolvedMode === 'dark' ? 'light' : 'dark'} /><ProfileSetupScreen user={session.user} onSaved={handleUserUpdated} onLogout={handleLogout} /></>;
   }
 
   if (session && !session.user.certificateId) {

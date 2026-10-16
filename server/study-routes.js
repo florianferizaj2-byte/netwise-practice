@@ -10,6 +10,7 @@ import { redact } from "./security.js";
 import { normalizeStudyText, studyPromptAttack, unsafeStudyTeacherAnswer } from "./study-security.js";
 import { certificates } from "./certificates.js";
 import { deploymentStudySeeds } from "./study-seeds/index.js";
+import {requireStudyMember} from "./study-access.js";
 const curriculumReferences = new Map(deploymentStudySeeds
   .filter((item) => item.nodeId.startsWith("sichuan-upgrading-computer:"))
   .map((item) => [item.nodeId, item]));
@@ -24,13 +25,7 @@ export function registerStudyRoutes({ route, store, provider, requireAdmin, requ
   let generationDailyLimit = configuredDailyLimit;
   let stopped = false;
   const paidStudyPlans = new Set(["vip", "svip", "ssvip"]);
-  const member = (req) => {
-    if (!req.user) throw studyError("请先登录", 401);
-    const userId = requestUserId(req), entitlement = store.accountEntitlement(userId);
-    if (!paidStudyPlans.has(entitlement.plan))
-      throw studyError("AI 精讲与练习仅限有效 VIP 会员，请先开通或续期", 403, "STUDY_MEMBERSHIP_REQUIRED");
-    return { userId, plan: entitlement.plan };
-  };
+  const member = req => requireStudyMember(store,req,requestUserId);
   const nodeFor = (req, id) => studyNode(id, req.user?.certificateId || "");
   const referenceForNode = (node) => {
     const curriculum = curriculumReferences.get(node.id);
@@ -433,5 +428,5 @@ export function registerStudyRoutes({ route, store, provider, requireAdmin, requ
     content.resolveFeedback(feedback.id, requestUserId(req), { ...feedback.attempt_data.result, ...summarizeStudyGrade(results) }, body.note);
     return { saved: true };
   });
-  return { content, stop: () => { stopped = true; clearInterval(timer); }, settle: () => Promise.allSettled([...active]) };
+  return { content, teacher, stop: () => { stopped = true; clearInterval(timer); }, settle: () => Promise.allSettled([...active]) };
 }

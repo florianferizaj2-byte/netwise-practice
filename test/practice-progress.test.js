@@ -6,6 +6,8 @@ import {
   restorePracticeProgress,
   loadPracticeProgress,
   savePracticeProgress,
+  practiceReturnPage,
+  practiceReturnLabel,
 } from "../src/practice-progress.js";
 
 const question = (id) => ({
@@ -26,6 +28,42 @@ const session = {
   title: "网络体系结构",
   questions: [question("a"), question("b"), question("c")],
 };
+
+test("practice resumes its real origin and round start; old or invalid origins safely return home", () => {
+  const storage = memoryStorage(),
+    startedAt = Date.now() - 5000;
+  for (const returnPage of [
+    "wrong",
+    "chapters",
+    "favorites",
+    "training",
+    "community",
+    "home",
+  ]) {
+    savePracticeProgress(
+      storage,
+      "origin",
+      { ...session, returnPage, startedAt },
+      1,
+      {},
+      false,
+    );
+    const restored = restorePracticeProgress(
+      readPracticeProgress(storage, "origin"),
+      session.questions,
+    );
+    assert.equal(practiceReturnPage(restored), returnPage);
+    assert.equal(restored.startedAt, startedAt);
+  }
+  assert.equal(practiceReturnPage({}), "home");
+  for (const returnPage of ["https://example.test", "admin", "__proto__", null])
+    assert.equal(practiceReturnPage({ returnPage }), "home");
+  assert.equal(
+    practiceReturnPage({ returnPage: "wrong", planTask: {} }),
+    "plan",
+  );
+  assert.equal(practiceReturnLabel({ returnPage: "wrong" }), "返回错题本");
+});
 
 test("practice resume restores the current question and already submitted answers", () => {
   const storage = memoryStorage();
@@ -185,5 +223,76 @@ test("shared questions are restored on demand and withdrawn questions are omitte
       throw new Error("offline");
     }),
     /offline/,
+  );
+});
+
+test("plan resume takes submitted grades only from the server and keeps safe unfinished drafts", async () => {
+  const storage = memoryStorage();
+  const planTask = {
+    planId: "8c006f26-c45f-4bb4-ac27-ae4db58bfbb1",
+    taskId: "9c006f26-c45f-4bb4-ac27-ae4db58bfbb1",
+  };
+  const grade = { questionId: "a", answer: ["B"], correct: false };
+  savePracticeProgress(
+    storage,
+    "plan",
+    { ...session, planTask },
+    1,
+    {
+      a: {
+        submitted: true,
+        selected: ["A"],
+        result: { ...grade, correct: true },
+      },
+      b: {
+        selected: ["B"],
+        result: { questionId: "b", answer: ["B"], correct: true },
+        revealed: true,
+      },
+      c: {
+        submitted: true,
+        selected: ["A"],
+        result: { questionId: "c", answer: ["A"], correct: true },
+      },
+    },
+    false,
+  );
+  const saved = readPracticeProgress(storage, "plan");
+  assert.deepEqual(saved.planTask, planTask);
+  const restored = await loadPracticeProgress(
+    saved,
+    [],
+    () => assert.fail("plan never falls back to ordinary practice"),
+    async (reference) => {
+      assert.deepEqual(reference, planTask);
+      return {
+        ...session,
+        planTask,
+        progress: {
+          index: 1,
+          responses: { a: { submitted: true, selected: ["A"], result: grade } },
+        },
+      };
+    },
+  );
+  assert.equal(restored.progress.index, 1);
+  assert.deepEqual(restored.progress.responses, {
+    a: { submitted: true, selected: ["A"], result: grade },
+    b: { selected: ["B"] },
+  });
+  assert.equal(
+    await loadPracticeProgress(saved, session.questions, async () => []),
+    null,
+  );
+  await assert.rejects(
+    loadPracticeProgress(
+      saved,
+      session.questions,
+      async () => [],
+      async () => {
+        throw new Error("plan unavailable");
+      },
+    ),
+    /plan unavailable/,
   );
 });

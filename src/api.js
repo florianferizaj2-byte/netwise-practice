@@ -64,8 +64,11 @@ function updateCacheContext(url, method, data) {
   if (url.startsWith("/admin/study")) responseCache.invalidate(["/study/"]);
   if (url.startsWith("/account/"))
     responseCache.invalidate(["/study/", "/dashboard"]);
+  if (url.startsWith("/knowledge-favorites"))
+    responseCache.invalidate(["/knowledge-favorites"]);
   if (/^\/(attempts|wrong|exams|ai|questions|admin)\b/.test(url))
     responseCache.invalidate(["/dashboard", "/wrong", "/exams", "/questions"]);
+  if (/^\/(attempts|learning-plan)\b/.test(url)) responseCache.invalidate(["/learning-plan"]);
 }
 
 export async function api(url, body, method, options = {}) {

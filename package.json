@@ -18,18 +18,21 @@
     "test:e2e:membership": "node test/membership-codes.e2e.js",
     "typecheck": "node mobile/node_modules/typescript/bin/tsc --noEmit --project mobile/tsconfig.json",
     "verify": "node scripts/verify.mjs",
+    "verify:web-blue": "node scripts/verify-web-blue.mjs",
     "package:release": "node scripts/package-release.mjs",
     "bank:validate": "node scripts/validate-question-banks.js",
     "study:sichuan": "node scripts/build-sichuan-study.mjs",
     "bank:hcia": "node scripts/build-hcia-v2-bank.js",
     "bank:hcia:supplement": "node scripts/build-hcia-v2-supplement.js",
     "bank:hcia:import-h12-811": "node scripts/import-hcia-h12-811-bank.js",
-    "bank:report": "node scripts/report-bank-coverage.js"
+    "bank:report": "node scripts/report-bank-coverage.js",
+    "auth:mail:check": "node scripts/check-account-mail.mjs"
   },
   "dependencies": {
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
     "lucide-react": "^0.468.0",
+    "nodemailer": "^10.1.1",
     "qrcode.react": "^4.2.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

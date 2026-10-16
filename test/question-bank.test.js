@@ -70,6 +70,7 @@ test("manifest catalog discovers the certificate tracks and keeps sources explic
       "ncre-ms-office",
       "veterinary-practitioner",
       "sichuan-upgrading-computer",
+      "ncre-l2-c-programming",
     ],
   );
   assert.deepEqual(
@@ -98,6 +99,10 @@ test("manifest catalog discovers the certificate tracks and keeps sources explic
   assert.deepEqual(
     banksForCertificate("veterinary-practitioner").map((item) => item.source),
     ["vet_admin_added"],
+  );
+  assert.deepEqual(
+    banksForCertificate("ncre-l2-c-programming").map((item) => item.source),
+    ["ncre_l2_c_practice"],
   );
   const practice = bundledQuestions().find((q) => q.id === "practice-1");
   assert.deepEqual(practice.certificates, ["network-engineer"]);

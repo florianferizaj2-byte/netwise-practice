@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-16",
+  "purpose": "检索起点；新批次必须实际重开来源并判断考期、版本、正文与可使用依据。此清单不包含可直接导入的题目。",
+  "entries": [
+    {
+      "id": "ncre-syllabus-index",
+      "title": "中国教育考试网：全国计算机等级考试考试大纲",
+      "url": "https://ncre.neea.edu.cn/html1/report/2412/185-1.htm",
+      "authority": "official",
+      "access": "opened",
+      "checkedAt": "2026-10-16",
+      "examVersion": "2025 年版",
+      "claims": [{"kind": "scope", "summary": "该目录列出二级 MS Office 高级应用与设计 2025 年版大纲及下载入口。", "locator": "二级大纲列表"}]
+    },
+    {
+      "id": "ncre-ms-office-outline",
+      "title": "二级 MS Office 高级应用与设计考试大纲（2025 年版）",
+      "url": "https://ncre.neea.edu.cn/res/Home/2412/007b7cbab11984a769c33fdc605b7f85.pdf",
+      "authority": "official",
+      "access": "opened",
+      "checkedAt": "2026-10-16",
+      "examVersion": "2025 年版",
+      "claims": [
+        {"kind": "scope", "summary": "范围包括 Office 基础及 Word、Excel、PowerPoint 功能应用。", "locator": "PDF 第 1–2 页，考试内容"},
+        {"kind": "format", "summary": "上机 120 分钟，满分 100 分；包含选择题和三类 Office 操作题。", "locator": "PDF 第 2 页，考试方式"},
+        {"kind": "weights", "summary": "选择题 20 分（含公共基础 10 分），Word 与 Excel 操作各 30 分，PowerPoint 操作 20 分。", "locator": "PDF 第 2 页，题型及分值"}
+      ],
+      "notes": "分值按题型/操作部分给出，不是所有知识点的抽题比例。"
+    },
+    {
+      "id": "ncre-ms-office-official-sample",
+      "title": "二级 MS Office 高级应用与设计样题及参考答案",
+      "url": "https://ncre.neea.edu.cn/res/Home/2501/d7be5a3807a06e9124639f438bcd28cc.pdf",
+      "authority": "official",
+      "access": "opened",
+      "checkedAt": "2026-10-16",
+      "examVersion": "2025 年版",
+      "claims": [{"kind": "question", "summary": "主管机构公开的样题及参考答案，包含客观样题及操作任务。", "locator": "PDF 标题与样题部分"}],
+      "notes": "是官方样题，不能改称某年度正式考试真题；导入前仍核对可使用依据。"
+    },
+    {
+      "id": "sichuan-computer-official-reprint",
+      "title": "四川省普通高校专升本考试要求：计算机基础（高校官方转发）",
+      "url": "https://zs.gingkoc.edu.cn/ueditor/php/upload/file/20240329/1711693941663940.pdf",
+      "authority": "official_mirror",
+      "access": "opened",
+      "checkedAt": "2026-10-16",
+      "examVersion": "2024 年启用要求",
+      "claims": [
+        {"kind": "scope", "summary": "列出计算机基础、软硬件、办公、网络安全、算法、数据库和新技术七模块。", "locator": "PDF 第 2–6 页，考试内容"},
+        {"kind": "format", "summary": "闭卷笔试，150 分、120 分钟；题型包含客观题和主观应用题。", "locator": "PDF 第 6–7 页，考试形式与试卷结构"},
+        {"kind": "weights", "summary": "七模块大约分值比例依次为 15%、20%、35%、10%、10%、5%、5%。", "locator": "PDF 第 7 页，试卷内容结构"}
+      ],
+      "notes": "已读附件并核对比例页；后续考期是否沿用应再读当年官方实施规定，不能自动扩展为永久有效。"
+    },
+    {
+      "id": "sichuan-2026-implementation",
+      "title": "四川省 2026 年普通高等学校专升本考试招生工作实施规定",
+      "url": "https://www.sceea.cn/Html/202512/Newsdetail_4597.html",
+      "authority": "official",
+      "access": "opened",
+      "checkedAt": "2026-10-16",
+      "examVersion": "2026 年",
+      "claims": [{"kind": "format", "summary": "省考试院发布 2026 年普通高校专升本考试招生实施规定。", "locator": "网页标题、日期与正文开头"}],
+      "notes": "已读到实施规定正文；后续定向读取超时，未据此重新确认全部考纲沿用条款。使用范围时需读到对应小节。"
+    },
+    {
+      "id": "soft-exam-official-entry",
+      "title": "中国计算机技术职业资格网",
+      "url": "https://www.ruankao.org.cn/",
+      "authority": "official",
+      "access": "unavailable",
+      "checkedAt": "2026-10-16",
+      "examVersion": "待本次核实",
+      "claims": [],
+      "notes": "本次抓取未取得可用正文。需官方公告、主管机构镜像或可核验出版资料补充，不能靠培训机构摘要认定当前大纲。"
+    },
+    {
+      "id": "hcia-v2-existing-official-lead",
+      "title": "华为人才在线：既有清单的 HCIA-Datacom V2.0 公开模拟考试线索",
+      "url": "https://talent.shixizhi.huawei.com/iexam/1365189427395223554/examInfo?examId=2005554441662554114&sxz-lang=zh_CN",
+      "authority": "official",
+      "access": "unavailable",
+      "checkedAt": "2026-10-16",
+      "examVersion": "V2.0 待重核",
+      "claims": [],
+      "notes": "HTTP 页存在但提取为空，未验证当前考试范围或占比。可用可交互浏览器读取官方正文，且不能导入未授权考试 Dump。"
+    },
+    {
+      "id": "veterinary-publisher-past-paper-lead",
+      "title": "机械工业出版社数字图书馆：执业兽医资格考试试题及解析出版目录线索",
+      "url": "https://ebooks.cmpbook.com/detail?id=29406",
+      "authority": "publisher",
+      "access": "search_only",
+      "checkedAt": "2026-10-16",
+      "examVersion": "待核实",
+      "claims": [],
+      "notes": "搜索返回出版社图书记录，定向打开超时；可继续核对书目和用户合法持有材料，不能据此声称已取得或审核全套历年题。"
+    },
+    {
+      "id": "network-engineer-recall-search-lead",
+      "title": "信管网：网络工程师历年题/回忆版检索线索",
+      "url": "https://m.cnitpm.com/zhenti/wg.html",
+      "authority": "third_party",
+      "access": "search_only",
+      "checkedAt": "2026-10-16",
+      "examVersion": "按每卷另核对",
+      "claims": [],
+      "notes": "第三方检索线索；须实际打开并区分原卷、回忆、模拟，核对题号、答案、版本和使用依据，不作主管机构证据。"
+    },
+    {
+      "id": "veterinary-official-platform",
+      "title": "全国执业兽医资格考试网上信息平台",
+      "url": "https://zysy-ksgl.cadc.net.cn/EXAMVET/public/noticeTzgg.jsp",
+      "authority": "official",
+      "access": "unavailable",
+      "checkedAt": "2026-10-16",
+      "examVersion": "2026 年待重核",
+      "claims": [],
+      "notes": "搜索可见官方平台，但正文读取超时；未以摘要确认当年大纲、分科与合格标准。"
+    }
+  ]
+}

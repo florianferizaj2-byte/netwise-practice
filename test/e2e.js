@@ -9,6 +9,7 @@ import { createStore } from "../server/store.js";
 import { OpenAICompatibleProvider } from "../server/ai.js";
 import { mockAI } from "./ai-fixture.js";
 import { launchTestBrowser } from "./helpers/browser.js";
+import { accountTestMailbox } from "./helpers/account-mail.js";
 
 // Use an isolated database and fake upstream credentials, even if .env exists.
 Object.assign(process.env, {
@@ -21,8 +22,10 @@ Object.assign(process.env, {
 });
 const directory = fs.mkdtempSync(path.join(os.tmpdir(), "aceexam-e2e-"));
 const store = createStore(directory);
+const mailbox = accountTestMailbox();
 const app = await createApp({
   store,
+  accountSecurity: { enabled: true, mailer: mailbox },
   provider: new OpenAICompatibleProvider(store, { fetch: mockAI() }),
   production: true,
 });
@@ -85,18 +88,24 @@ try {
   await registration
     .getByLabel("确认密码", { exact: true })
     .fill("fixture-password-123");
+  await registration.getByLabel("邮箱", { exact: true }).fill("e2e@example.test");
+  await registration.getByRole("button", { name: "获取验证码", exact: true }).click();
+  await expect(registration.getByRole("status")).toContainText("验证码已发送");
+  await registration.getByLabel("邮箱验证码", { exact: true }).fill(mailbox.latest("e2e@example.test", "register").code);
   await registration
     .getByRole("button", { name: "创建账号", exact: true })
     .click();
-  await page
-    .getByRole("button", { name: /网络工程师/ })
-    .first()
-    .click();
+  await page.locator(".blue-cert-card").first().waitFor();
+  const user = store.allUsers().find((item) => item.username === "e2e_learner");
+  assert.ok(user);
+  assert.equal(user.isAdmin, 0);
+  // Administration scenarios below require a trusted fixture grant, never public sign-up privileges.
+  store.db.prepare("UPDATE users SET is_admin=1 WHERE id=?").run(user.id);
+  await page.locator('.blue-cert-card').filter({ has: page.locator('input[value="network-engineer"]') }).click();
+  await page.getByRole("button", { name: "进入学习", exact: true }).click();
   await expect(
     page.getByRole("heading", { name: "从第一组练习开始", exact: true }),
   ).toBeVisible();
-  const user = store.allUsers().find((item) => item.username === "e2e_learner");
-  assert.ok(user);
 
   await page
     .getByRole("button", { name: "开始 10 题练习", exact: true })
@@ -109,8 +118,14 @@ try {
     .allQ()
     .find((item) => normalize(item.question) === questionText);
   assert.ok(question, "practice renders a question from the isolated store");
-  const wrongOption = Object.keys(question.options).find(
-    (key) => !question.answer.includes(key),
+  const optionKeys = Object.keys(question.options);
+  const wrongOption =
+    optionKeys.find((key) => !question.answer.includes(key)) ?? optionKeys[0];
+  assert.ok(wrongOption, "practice question has a selectable option");
+  assert.notDeepEqual(
+    [wrongOption],
+    question.answer,
+    "a single option is an incomplete answer when every option is correct",
   );
   await page
     .locator(".option")
