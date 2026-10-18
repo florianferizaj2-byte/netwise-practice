@@ -3,7 +3,7 @@ package com.kaojiang.routeplayer.routes
 import com.kaojiang.routeplayer.model.Coordinates
 
 enum class SelectionMode { TWO_POINTS, PATH }
-enum class RepeatMode { ONCE, CLOSED_LOOP, PING_PONG, RESTART }
+enum class RepeatMode { ONCE, CLOSED_LOOP, PING_PONG }
 enum class AddPointResult { ADDED, FULL, TOO_CLOSE }
 
 /** Keeps each mode's points separately, so switching modes never erases a route. */
@@ -47,7 +47,7 @@ data class RouteDraft(
     fun distanceMeters(): Double {
         val playback = playbackPoints()
         var distance = playback.zipWithNext().sumOf { (a, b) -> GeoMath.distanceMeters(a, b) }
-        if ((repeat == RepeatMode.CLOSED_LOOP || repeat == RepeatMode.PING_PONG) && playback.size >= 2) {
+        if (repeat != RepeatMode.ONCE && playback.size >= 2) {
             distance += GeoMath.distanceMeters(playback.last(), playback.first())
         }
         return distance
@@ -63,7 +63,6 @@ data class RouteDraft(
             },
             speedKph = speedKph,
             loop = repeat != RepeatMode.ONCE,
-            restartOnLoop = repeat == RepeatMode.RESTART,
         )
     }
 
