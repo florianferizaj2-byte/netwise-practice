@@ -22,6 +22,7 @@ import { Heading, IconButton } from "../components/study-ui.jsx";
 import { WebPreferenceSettings } from "./web-preference-settings.jsx";
 import { AccountSecuritySettings } from "../components/account-security.jsx";
 import { BlueSettingsProfile } from "./blue-settings-profile.jsx";
+import { deepSeekDefaults } from "../../server/ai-model-defaults.js";
 
 export function SettingsView({
   user,
@@ -125,9 +126,7 @@ export function SettingsView({
   const useDeepSeekDefaults = () => {
     setS({
       ...s,
-      baseUrl: "https://api.deepseek.com",
-      model: "deepseek-chat",
-      temperature: 0.3,
+      ...deepSeekDefaults,
     });
     setDirty(true);
     setDeepSeekGuideOpen(false);
@@ -555,7 +554,7 @@ export function SettingsView({
                         <dt>API Key</dt>
                         <dd>粘贴刚才复制的 sk- 密钥</dd>
                         <dt>模型名称</dt>
-                        <dd>deepseek-chat</dd>
+                        <dd>{deepSeekDefaults.model}</dd>
                         <dt>Temperature</dt>
                         <dd>0.3</dd>
                         <dt>输出长度</dt>
@@ -578,7 +577,7 @@ export function SettingsView({
                   <strong>测试失败时先检查</strong>
                   <p>
                     Key 是否完整、API 账户是否有余额、模型名是否为
-                    deepseek-chat。不要把 API Key 发给别人或放进截图。
+                    {deepSeekDefaults.model}。不要把 API Key 发给别人或放进截图。
                   </p>
                   <a
                     href="https://api-docs.deepseek.com/"

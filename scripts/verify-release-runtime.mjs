@@ -105,6 +105,8 @@ async function worker(stage) {
         otherId: other.id,
         token: store.createAuthSession(user.id),
         otherToken: store.createAuthSession(other.id),
+        bundledQuestionIds: store.allQ().map((q) => q.id).sort(),
+        certificateIds: (await request("/auth/me", undefined, undefined, store.createAuthSession(user.id))).certificates.map((c) => c.id).sort(),
       });
       const questions = store
         .allQ()
@@ -165,6 +167,11 @@ async function worker(stage) {
       assert(me.authenticated);
       assert.equal(me.user.id, fixture.userId);
       assert.equal(me.user.isAdmin, false);
+      const currentIds = new Set(store.allQ().map((q) => q.id));
+      assert(fixture.bundledQuestionIds.every((id) => currentIds.has(id)), "An existing bundled question ID disappeared");
+      assert(fixture.certificateIds.every((id) => me.certificates.some((c) => c.id === id)), "An existing certificate disappeared");
+      details.preservedBundledQuestionIds = fixture.bundledQuestionIds.length;
+      details.preservedCertificates = fixture.certificateIds.length;
       assert.equal(store.userById(fixture.ownerId).isAdmin, true);
       assert.equal(
         (await store.authenticateAsync("rehearsal-learner", fixture.password))
@@ -524,18 +531,22 @@ const git = (...args) =>
     encoding: "utf8",
     windowsHide: true,
   }).trim();
+const baselineArgs = process.argv.slice(2);
+if (baselineArgs.length > 1 || (baselineArgs.length && !/^--baseline=[a-f0-9]{40}$/.test(baselineArgs[0])))
+  throw new Error("用法：node scripts/verify-release-runtime.mjs [--baseline=完整提交SHA]");
+const baselineCommit = git("rev-parse", "--verify", `${baselineArgs[0]?.slice("--baseline=".length) || "HEAD"}^{commit}`);
 const legacy = path.join(directory, ".baseline");
 const data = path.join(directory, "state-data");
 const backup = path.join(directory, "backup-data");
 const restoreLegacy = () => {
   fs.mkdirSync(legacy);
-  const tree = git("ls-tree", "-r", "HEAD", "--", "server", "package.json");
+  const tree = git("ls-tree", "-r", baselineCommit, "--", "server", "package.json");
   if (/^(120000|160000) /m.test(tree))
     throw new Error("Baseline source contains links or submodules");
   const archive = path.join(directory, "baseline.tar");
   fs.writeFileSync(
     archive,
-    execFileSync("git", ["archive", "HEAD", "server", "package.json"], {
+    execFileSync("git", ["archive", baselineCommit, "server", "package.json"], {
       cwd: root,
       maxBuffer: 32 * 1024 * 1024,
       windowsHide: true,
@@ -638,7 +649,8 @@ try {
   await runWorker("restore", legacy, restoredData);
   const report = {
     passed: true,
-    baselineCommit: git("rev-parse", "HEAD"),
+    baselineCommit,
+    baselineRefWasExplicit: baselineArgs.length === 1,
     baselineIsOnlineVersion: false,
     candidateProvenance: provenance,
     runtimeFiles: files.length,

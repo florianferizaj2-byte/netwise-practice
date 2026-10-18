@@ -207,6 +207,7 @@ export function assertTrackedReleaseInputs(root, tracked, version) {
     ...existingFiles(root, [
       "test",
       "scripts/verify.mjs",
+      "scripts/verification-env.mjs",
       "scripts/verify-web-blue.mjs",
     ]),
   ]);

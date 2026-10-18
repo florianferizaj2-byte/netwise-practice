@@ -34,6 +34,8 @@ jobs:
             test-output/apple-web/*-failure.txt
             test-output/blue-release-*.log
             test-output/blue-release-gate-report.json
+            test-output/release-*.log
+            test-output/release-verification-report.json
             test-output/*-failure.png
             test-output/*-failure.txt
           if-no-files-found: ignore

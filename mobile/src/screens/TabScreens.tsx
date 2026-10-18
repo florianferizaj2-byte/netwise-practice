@@ -1337,7 +1337,7 @@ export function ProfileScreen({
   const [authorPassword, setAuthorPassword] = useState('');
   const [aiForm, setAiForm] = useState({
     baseUrl: 'https://api.deepseek.com',
-    model: 'deepseek-chat',
+    model: 'deepseek-flash',
     temperature: '0.3',
   });
 
@@ -1875,7 +1875,7 @@ export function ProfileScreen({
                 autoCapitalize="none"
                 editable={!preview && !settingsSaveBusy}
                 onChangeText={(model) => setAiForm((current) => ({ ...current, model }))}
-                placeholder="deepseek-chat"
+                placeholder="deepseek-flash"
                 placeholderTextColor={colors.textFaint}
                 style={styles.settingsInput}
                 value={aiForm.model}

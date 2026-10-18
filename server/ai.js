@@ -4,6 +4,7 @@ import { decrypt, validateBaseUrl, redact } from "./security.js";
 import { questionSimilarity } from "./question-similarity.js";
 import { questionForCertificate } from "./question-banks/scopes.js";
 import { authorAiSettings } from "./ai-service.js";
+import { deepSeekDefaults, officialDeepSeek } from "./ai-model-defaults.js";
 import { currentAiSignal, checkAiCancellation, positiveInteger } from "./ai-tasks.js";
 import { cachedPromptTokens, usageCost } from "./ai-usage-cost.js";
 import {
@@ -164,7 +165,7 @@ export class OpenAICompatibleProvider extends AIProvider {
           ...(Number.isSafeInteger(options.maxTokens) && options.maxTokens > 0
             ? { max_tokens: options.maxTokens } : {}),
           // Vendor-specific options must not be sent to other compatible APIs.
-          ...(options.disableThinking && new URL(url).hostname === "api.deepseek.com"
+          ...((options.disableThinking ?? (settings.model === deepSeekDefaults.model)) && officialDeepSeek(url)
             ? { thinking: { type: "disabled" } } : {}),
           ...(options.stream ? { stream: true } : {}),
         }),

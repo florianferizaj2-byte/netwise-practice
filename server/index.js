@@ -13,6 +13,7 @@ import {registerInteractiveTutor} from "./interactive-tutor.js";
 import { registerKnowledgeFavorites } from "./knowledge-favorites.js";
 import { registerWebPreferences } from "./web-preferences.js";
 import { registerStudyReminders } from "./study-reminders.js";
+import { defaultAiModel } from "./ai-model-defaults.js";
 import { registerExamRoutes } from "./exams.js";
 import {
   encrypt,
@@ -871,7 +872,7 @@ export async function createApp(options = {}) {
     }
     const current = store.settings(userId);
     const baseUrl = validateBaseUrl(process.env.AUTHOR_API_BASE_URL?.trim() || "https://api.deepseek.com");
-    const model = process.env.AUTHOR_API_MODEL?.trim() || "deepseek-chat";
+    const model = process.env.AUTHOR_API_MODEL?.trim() || defaultAiModel(baseUrl);
     store.saveSettings(userId, {
       ...current,
       baseUrl,

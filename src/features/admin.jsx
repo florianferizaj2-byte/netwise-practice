@@ -1266,7 +1266,7 @@ export function AdminView({
                 onChange={(event) =>
                   updateSettings("model", event.target.value)
                 }
-                placeholder="deepseek-chat"
+                placeholder="deepseek-flash"
               />
             </label>
             <label>
