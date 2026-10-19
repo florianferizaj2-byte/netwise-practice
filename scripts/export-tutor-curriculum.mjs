@@ -46,7 +46,7 @@ export function exportTutorCurriculum(snapshot, check = false) {
     throw new Error("重复的课程索引编号");
   const text = JSON.stringify(data, null, 2) + "\n";
   if (check) {
-    if (!fs.existsSync(filename) || fs.readFileSync(filename, "utf8") !== text)
+    if (!fs.existsSync(filename) || fs.readFileSync(filename, "utf8").replace(/\r\n/g, "\n") !== text)
       throw new Error("服务端课程索引需要重新导出");
   } else fs.writeFileSync(filename, text);
   return { lessons: data.lessons.length, answerKeysIncluded: false };

@@ -19,6 +19,8 @@
     "typecheck": "node mobile/node_modules/typescript/bin/tsc --noEmit --project mobile/tsconfig.json",
     "verify": "node scripts/verify.mjs",
     "verify:web-blue": "node scripts/verify-web-blue.mjs",
+    "verify:admin": "node scripts/verify-admin-console.mjs",
+    "preview:admin": "node scripts/preview-admin-console.mjs",
     "package:release": "node scripts/package-release.mjs",
     "bank:validate": "node scripts/validate-question-banks.js",
     "study:sichuan": "node scripts/build-sichuan-study.mjs",

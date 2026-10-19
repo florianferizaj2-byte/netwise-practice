@@ -340,11 +340,12 @@ try {
     },
   ]);
   await page.reload();
-  await navigate(page, "admin", "管理员面板");
-  const tabs = await page.getByRole("tab").allTextContents();
-  for (const text of tabs) {
-    await page.getByRole("tab", { name: text, exact: true }).click();
-    await scan(page, "admin-" + text.trim());
+  await navigate(page, "admin", "总览工作台");
+  for (const section of ["overview","questions","catalog","documents","quality","teaching","users","memberships","announcement","feedback","jobs","config","usage","audit","system"]) {
+    await page.goto(base + "/#admin/" + section);
+    await expect(page.locator(".ac-main h1")).toBeVisible();
+    await expect(page.locator('.ac-state[role="status"]')).toHaveCount(0);
+    await scan(page, "admin-" + section);
   }
   await page.screenshot({
     path: "test-output/blue-palette-admin.png",

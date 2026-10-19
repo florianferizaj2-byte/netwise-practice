@@ -1351,7 +1351,7 @@ test("AI outages produce specific safe errors and numeric or semantic failures n
   assert.equal(store.allQ().length, before);
 });
 
-test("管理员面板隔离管理员 API，支持扩题、重合检测、删题和封禁用户", async (t) => {
+test("管理员面板隔离管理员 API，生成结果待审、重合检测、下架保留原题和封禁用户", async (t) => {
   const previousMasterKey = process.env.AI_MASTER_KEY;
   process.env.AI_MASTER_KEY = crypto.randomBytes(32).toString("base64");
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "netwise-admin-"));
@@ -1537,8 +1537,18 @@ test("管理员面板隔离管理员 API，支持扩题、重合检测、删题�
     },
   );
   assert.equal(generatedResponse.status, 200);
-  assert.equal(generatedResponse.data.inserted, 1);
-  assert.equal(store.allQ().filter((question) => question.source === "admin_generated").length, 1);
+  assert.equal(generatedResponse.data.inserted, 0);
+  assert.equal(generatedResponse.data.pending, true);
+  let expansionJob;
+  for (let attempt = 0; attempt < 100; attempt++) {
+    expansionJob = (await request(admin.cookie, `/admin/console/jobs/${generatedResponse.data.job.id}`)).data.job;
+    if (!["queued", "running"].includes(expansionJob.status)) break;
+    await new Promise(resolve => setTimeout(resolve, 30));
+  }
+  assert.equal(expansionJob.status, "completed", expansionJob.error);
+  const expansionDraft = (await request(admin.cookie, `/admin/console/documents/${expansionJob.result.documentId}`)).data.document;
+  assert.equal(expansionDraft.data.questions.length, 1);
+  assert.equal(store.allQ().filter((question) => question.source === "admin_generated").length, 0, "生成结果在独立复核前不能进入运行题库");
   const duplicateBase = {
     ...seed,
     id: "admin-similar-a",
@@ -1575,7 +1585,9 @@ test("管理员面板隔离管理员 API，支持扩题、重合检测、删题�
     "DELETE",
   );
   assert.equal(deleted.status, 200);
-  assert.equal(store.getQ("admin-similar-a"), null);
+  assert.equal(deleted.data.hidden, true);
+  assert.ok(store.getQ("admin-similar-a"), "下架保留原题");
+  assert.equal(store.allQ().some(q => q.id === "admin-similar-a"), false, "下架后不再进入新练习");
   const banned = await request(
     admin.cookie,
     `/admin/users/${member.data.user.id}/ban`,

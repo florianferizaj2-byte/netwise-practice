@@ -307,9 +307,10 @@ export class OpenAICompatibleProvider extends AIProvider {
           hasUsage: !!usage.hasUsage,
           success,
           model: settings.model,
+          ...usageCost(usage, settings.model),
           ...(options.taskType ? { taskType: options.taskType } : {}),
           ...(options.tutorSessionId ? { tutorSessionId: options.tutorSessionId, tutorCourseId: options.tutorCourseId,
-            tutorRequestId: options.tutorRequestId, ...usageCost(usage, settings.model) } : {}),
+            tutorRequestId: options.tutorRequestId } : {}),
         },
         userId,
       );

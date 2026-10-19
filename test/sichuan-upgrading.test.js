@@ -124,6 +124,8 @@ test("Sichuan selection, filtered practice, shared progress, wrong answers and e
   const listed = adminList.questions.find((question) => question.id === originalId);
   assert.equal(listed.chapter, "办公自动化");
   assert.equal(listed.classificationCertificateId, certificateId);
+  const beforeRevision = structuredClone(store.getQ(originalId));
+  const beforeScoped = questionForCertificate(beforeRevision, certificateId);
   const updated = await request(`/admin/questions/${originalId}`, {
     certificateId,
     type: canonical.type,
@@ -137,11 +139,21 @@ test("Sichuan selection, filtered practice, shared progress, wrong answers and e
     difficulty: canonical.difficulty,
   }, "PUT");
   assert.equal(updated.question.chapter, "办公自动化");
+  assert.equal(updated.pendingRelease, true);
+  assert.equal(updated.question.publication, "draft");
+  assert.notEqual(updated.question.id, originalId);
+  assert.equal(updated.document.kind, "revision");
+  assert.equal(updated.document.certificateId, certificateId);
+  assert.equal(updated.document.data.replacesQuestionId, originalId);
+  assert.equal(updated.document.data.questions[0].knowledgePoint, "表格图文与邮件合并");
+  assert.ok(updated.document.data.questions[0].analysis.endsWith("两个备考目标共用此解析。"));
+  assert.equal((await request("/admin/console/documents/" + updated.document.id)).document.data.questions[0].id, updated.question.id);
+  assert.deepEqual(store.getQ(originalId), beforeRevision, "a draft must never mutate either certificate's live shared question");
   assert.equal(store.getQ(originalId).chapter, "Word 文档处理");
-  assert.equal((await request(`/questions/${originalId}`)).knowledgePoint, "表格图文与邮件合并");
+  assert.equal((await request(`/questions/${originalId}`)).knowledgePoint, beforeScoped.knowledgePoint);
   await request("/auth/certificate", { certificateId: "ncre-ms-office" }, "PUT");
   const originalAfterEdit = await request(`/questions/${originalId}`);
   assert.equal(originalAfterEdit.chapter, "Word 文档处理");
   assert.equal(originalAfterEdit.knowledgePoint, canonical.knowledgePoint);
-  assert.ok((await request(`/questions/${originalId}/reveal`, {})).analysis.endsWith("两个备考目标共用此解析。"));
+  assert.equal((await request(`/questions/${originalId}/reveal`, {})).analysis, canonical.analysis);
 });

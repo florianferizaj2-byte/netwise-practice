@@ -56,6 +56,7 @@ import {
 import { MembershipBadge } from "./components/membership-badge.jsx";
 import { UserAvatar } from "./components/user-avatar.jsx";
 import { StudyReminder } from "./components/study-reminder.jsx";
+import { WorkspaceAnnouncement } from "./components/workspace-announcement.jsx";
 import { useMembershipAccount } from "./use-membership-account.js";
 const VipView = preloadableFeature(() =>
   import("./vip-view.jsx").then((m) => ({ default: m.VipView })),
@@ -185,13 +186,18 @@ const navGroups = [
   { label: "管理", pages: ["admin"] },
 ];
 
+function pageFromHash() {
+  const hash = location.hash.slice(1) || "home";
+  return hash.startsWith("admin/") ? "admin" : hash;
+}
+
 function App() {
   const desktop = useDesktopWeb();
   const blueWeb = !appleMobile;
   const StudyHome = blueWeb ? BlueStudyHome : DesktopHome;
   const ChapterBrowser = blueWeb ? BlueChapterBrowser : DesktopChapterBrowser;
   const [preferredStudyNode,setPreferredStudyNode]=useState("");
-  const [page, setPage] = useState(location.hash.slice(1) || "home"),
+  const [page, setPage] = useState(pageFromHash),
     [auth, setAuth] = useState(null),
     [bankSource, setBankSource] = useState("all"),
     [chapterFocus, setChapterFocus] = useState(""),
@@ -295,7 +301,7 @@ function App() {
       refresh().catch((e) => { if (e.name !== "CacheCancelledError") setError(e.message); });
     }
     const h = () => {
-      const next = location.hash.slice(1) || "home";
+      const next = pageFromHash();
       preloadPage(next);
       startTransition(() => setPage(next));
     };
@@ -644,6 +650,10 @@ function App() {
         }}
       />
     );
+  if (page === "admin" || page === "study-admin") {
+    if (!auth.user?.isAdmin) return <div className="blue-workspace"><div className="ac-state" role="alert"><h1>仅管理员可访问管理中心</h1><button onClick={() => go("home")}>返回学习空间</button></div></div>;
+    return <FeatureBoundary><AdminView user={auth.user} certificates={auth.certificates} navigate={go}/></FeatureBoundary>;
+  }
   if (!auth.user.certificateId && blueWeb)
     return <div className="blue-workspace blue-cert-onboarding"><FeatureBoundary>
       <CertificateSelection certificates={auth.certificates} currentId={null} onSelect={switchUserCertificate} navigate={go} onSignOut={signOut} onboarding busy={!!busy} />
@@ -1041,6 +1051,7 @@ function App() {
             </div>
           )}
           {questionsLoading && !allQuestions.length && questionPages.has(page) && !(page === "practice" && session) ? <ContentPlaceholder rows={5} /> : questionsFailure && !allQuestions.length && questionPages.has(page) && !(page === "practice" && session) ? <section className="question-load-error" role="alert"><h2>题库暂未读取成功</h2><p>{questionsFailure}</p><button onClick={()=>run("正在读取题库",loadQuestions)} disabled={!!busy}>重新读取题库<RefreshCw size={16}/></button></section> : <>
+          <WorkspaceAnnouncement enabled={page === "home"}/>
           {page === "home" &&
             (blueWeb || desktop ? (
               <StudyHome

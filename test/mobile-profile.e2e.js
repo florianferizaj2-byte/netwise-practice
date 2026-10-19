@@ -79,14 +79,14 @@ try {
       await desk.goto(`${base}/?desktop=1#admin`);
       const dismiss = desk.getByRole('button', { name: '知道了，开始学习', exact: true });
       if (await dismiss.isVisible()) await dismiss.click();
-      await desk.getByRole('tab', { name: '用户管理', exact: true }).click();
-      const row = desk.locator('.admin-users-table tbody tr').filter({ hasText: learner.username });
+      await desk.getByRole('link', { name: '用户管理', exact: true }).click();
+      const row = desk.locator('.ac-table tbody tr').filter({ hasText: learner.username });
       await expect(row).toContainText(`更新昵称${engine}`);
-      const image = row.getByRole('img', { name: `更新昵称${engine}的头像`, exact: true });
+      const image = row.locator('.user-avatar img');
       await expect(image).toBeVisible(); await expect.poll(() => image.evaluate((element) => element.complete && element.naturalWidth > 0)).toBe(true);
       await desk.getByRole('textbox', { name: '搜索用户', exact: true }).fill(`更新昵称${engine}`);
       await desk.getByRole('button', { name: '搜索', exact: true }).click();
-      await expect(desk.locator('.admin-users-table tbody tr')).toHaveCount(1);
+      await expect(desk.locator('.ac-table tbody tr')).toHaveCount(1);
       await expect(desk.getByText('通讯录', { exact: true })).toHaveCount(0);
       await desk.screenshot({ path: path.join(output, `${engine}-web-admin.png`), fullPage: true });
       await desktop.close();

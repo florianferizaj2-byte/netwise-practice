@@ -38,4 +38,7 @@ jobs:
             test-output/release-verification-report.json
             test-output/*-failure.png
             test-output/*-failure.txt
+            test-output/admin-console/report.json
+            test-output/admin-console/failure.png
+            test-output/admin-console/failure.txt
           if-no-files-found: ignore

@@ -32,5 +32,10 @@ function excludeLocalDemo() {
 }
 export default defineConfig({
   plugins: [react(), excludeLocalDemo()],
-  build: { outDir: "dist" },
+  build: {
+    outDir: "dist",
+    rollupOptions: { output: { manualChunks(id) {
+      if (/node_modules[\\/](react|react-dom|scheduler)[\\/]/.test(id)) return "react-vendor";
+    } } },
+  },
 });

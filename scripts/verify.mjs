@@ -16,6 +16,7 @@ const root = fileURLToPath(new URL("../", import.meta.url));
 const checks = [
   ["移动端版本一致性检查", ["scripts/check-mobile-version.mjs"]],
   ["题库结构检查", ["scripts/validate-question-banks.js"]],
+  ["内容审核与发布包质量检查", ["--test", ".agents/skills/kaojiang-content-pipeline/scripts/quality.test.mjs"]],
   [
     "移动端类型检查",
     [
@@ -45,6 +46,7 @@ const checks = [
   ["启动公告、资料补全与网页用户列表检查", ["test/mobile-profile.e2e.js"]],
   ["官网安装包与强制更新检查", ["test/mobile-release-publish.e2e.js"]],
   ["蓝色Web候选版本专项验收", ["scripts/verify-web-blue.mjs"]],
+  ["管理员Web工作台完整流程检查", ["test/admin-console.e2e.js"]],
 ];
 const output = path.join(root, "test-output");
 fs.mkdirSync(output, { recursive: true });
@@ -73,7 +75,7 @@ const save = () =>
   fs.writeFileSync(reportFile, JSON.stringify(report, null, 2) + "\n");
 save();
 const isolated = verificationEnvironment(process.env, {
-  temporaryParent: output,
+  temporaryParent: path.join(root, "tmp"),
 });
 try {
   for (const [index, [label, args]] of checks.entries()) {

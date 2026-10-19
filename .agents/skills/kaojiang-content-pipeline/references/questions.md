@@ -69,6 +69,8 @@ reviews.json 每题一个记录：
 
 ## 接入与验收证据
 
+纠错批次使用新题号，`provenance.replacement` 写明 `questionId`、`certificateId`、原题 `digest` 和具体 `reason`。原题必须仅属于本证书、摘要保持一致，且有实质修改；独立复核摘要会绑定替换关系。此例外仅允许替换指定基线，其他题目的硬重复仍阻止导出。运行时保留旧题及历史并下架旧版本，不允许借此覆盖共用题或免除独立复核。网页交接包操作见 `docs/admin-console.md`。
+
 check 成功后 prepare 才导出 loader 可读题目、拟添加 bank 和 integration.json。它不改正式题库、不替你提交。导出后候选有变动时，重新审核、检查、prepare；不要复制遗留的旧 prepared 文件。
 
 复制已审题目、合并 bank、更新分类派生计数与必要的公开报告后，再运行 verify。verify 检查实际加载题与批次一致，并顺序执行 bank:validate、test、build、test:e2e 与 git diff --check。每步保存退出码与日志，第一项失败停止后续执行，未执行项不算通过。它不会验证部署、生产服务或互动课专项浏览器验收。

@@ -7,7 +7,7 @@ import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { questionSchema, verifyCalculation } from "../../../../server/domain.js";
 import { createTaxonomyIndex, assertQuestionTaxonomy } from "../../../../server/question-banks/taxonomy.js";
-import { auditBatch, allocate, calculateBlueprint, contentKey, digest, duplicates, normalize, reviewDigest } from "./quality.mjs";
+import { auditBatch, allocate, calculateBlueprint, contentKey, digest, duplicates, normalize, reviewDigest, questionPayload } from "./quality.mjs";
 
 const now = new Date("2026-10-16T10:00:00.000Z");
 function fixture() {
@@ -196,5 +196,23 @@ test("CLI check and prepare export a valid fixture without writing an active ban
     assert.equal(path.dirname(fs.realpathSync(dir)), fs.realpathSync(os.tmpdir()));
     assert.ok(path.basename(dir).startsWith("kaojiang-skill-positive-"));
     fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+
+test("a reviewed correction is bound to a single-certificate baseline and is not counted as an extra duplicate", () => {
+  const f=fixture(),q=f.data.questions[0];
+  const old={...structuredClone(q),id:"fixture-correction-original",source:"practice",certificates:[f.adapter.certificate.id]};
+  f.adapter.existing=[old];q.analysis+=" 此处增加更明确的概念区分，作为合成纠错测试。";
+  f.data.provenance[0].replacement={questionId:old.id,certificateId:f.adapter.certificate.id,digest:digest(questionPayload(old)),reason:"合成测试中的解析修订，用于验证纠错替换不会制造第二道重复题。"};
+  f.seal();assert.equal(audit(f).ok,true);assert.deepEqual(audit(f).replacements,[{questionId:q.id,replacesQuestionId:old.id}]);
+  const review=f.data.reviews[0];f.data.provenance[0].replacement.reason+=" 改动后需要重新复核。";assert.equal(audit(f).ok,false);
+  f.seal();assert.notEqual(f.data.reviews[0].digest,review.digest);assert.equal(audit(f).ok,true);
+  old.analysis+=" changed after review";assert.equal(audit(f).ok,false);
+});
+test("replacement metadata cannot publish an unchanged clone, a shared-certificate baseline or a stale answer", () => {
+  for(const mutate of [f=>{},f=>{f.data.questions[0].analysis+=" Updated explanation.";f.adapter.existing[0].certificates.push("other-exam");},f=>{f.data.questions[0].analysis+=" Updated explanation.";f.data.reviews=[];}]){
+    const f=fixture(),q=f.data.questions[0],old={...structuredClone(q),id:"fixture-old-correction",source:"practice",certificates:[f.adapter.certificate.id]};
+    f.adapter.existing=[old];f.data.provenance[0].replacement={questionId:old.id,certificateId:f.adapter.certificate.id,digest:digest(questionPayload(old)),reason:"合成测试：必须实质修订原题并保持原始内容摘要一致，不能只改题号充数。"};f.seal();mutate(f);assert.equal(audit(f).ok,false);
   }
 });

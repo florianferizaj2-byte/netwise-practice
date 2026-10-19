@@ -44,8 +44,8 @@ try {
   browser = await launchTestBrowser();
   const admin = await userPage(owner);
   await admin.goto(`${base}/#admin`);
-  await expect(admin.getByRole("heading", { name: "管理员面板", exact: true })).toBeVisible();
-  await admin.getByRole("tab", { name: "AI 精讲与练习", exact: true }).click();
+  await expect(admin.getByRole("heading", { name: /总览工作台|AI 教学管理/, exact: true })).toBeVisible();
+  await admin.getByRole("link", { name: "AI 教学管理", exact: true }).click();
   await expect(admin.getByRole("heading", { name: "精讲与练习内容", exact: true })).toBeVisible();
   const reference = admin.getByLabel("已确认的参考资料", { exact: true });
   await expect(reference).toBeEnabled(); await reference.fill(studyReference);
@@ -162,8 +162,8 @@ try {
   fake.rejectKnowledge = false;
 
   await admin.goto(`${base}/#study-admin`);
-  await expect(admin.getByRole("heading", { name: "管理员面板", exact: true })).toBeVisible();
-  await expect(admin.getByRole("tab", { name: "AI 精讲与练习", exact: true })).toHaveAttribute("aria-selected", "true");
+  await expect(admin.getByRole("heading", { name: /总览工作台|AI 教学管理/, exact: true })).toBeVisible();
+  await expect(admin.getByRole("link", { name: "AI 教学管理", exact: true })).toHaveAttribute("aria-current", "page");
 
   await admin.getByLabel("课程科目", { exact: true }).selectOption("sichuan-upgrading-computer");
   await expect(admin.locator(".ss-bulk-panel")).toContainText("7 章 · 22 个知识点 · 141 节课");
@@ -236,7 +236,7 @@ try {
   await expect(nonmember.getByRole("heading", { name: "VIP 专属的学习与练习", exact: true })).toBeVisible();
   assert.equal(nonmemberRequests.some((url) => url.startsWith("/api/study/lessons/")), false);
   await nonmember.setViewportSize({ width: 375, height: 812 });
-  assert.ok(await nonmember.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1), "VIP access notice fits small screens");
+  await expect.poll(() => nonmember.evaluate(() => document.documentElement.scrollWidth - window.innerWidth), { message: "VIP access notice fits small screens after responsive layout settles" }).toBeLessThanOrEqual(1);
   await admin.goto(`${base}/#study`);
   await expect(admin.getByRole("heading", { name: "VIP 专属的学习与练习", exact: true })).toBeVisible();
   assert.equal(errors.length, 0, errors.join("\n"));
