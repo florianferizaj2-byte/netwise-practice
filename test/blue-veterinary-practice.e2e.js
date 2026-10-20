@@ -159,26 +159,26 @@ try {
   );
   await page.getByRole("button", { name: "提交本题", exact: true }).click();
   await expect(
-    page.getByText("病例作答保存失败测试", { exact: true }),
+    page.locator(".practice-save-status").filter({ hasText: "病例作答保存失败测试" }),
   ).toBeVisible();
   assert.equal(store.allA(user.id).length, 0);
   await expect(page.locator(".option.chosen")).toHaveCount(1);
-  await expect(page.locator(".result-block")).toHaveCount(0);
+  await expect(page.locator(".result-block")).toContainText("回答正确");
   await page.unroute("**/api/attempts");
   let attempts = 0;
   page.on("request", (r) => {
     if (r.url().endsWith("/api/attempts") && r.method() === "POST") attempts++;
   });
-  await page.locator(".question-text").click();
-  await page.evaluate(() => {
-    document.dispatchEvent(
-      new KeyboardEvent("keydown", { key: "Enter", bubbles: true }),
-    );
-    document.dispatchEvent(
-      new KeyboardEvent("keydown", { key: "Enter", bubbles: true }),
-    );
-  });
+  await page.locator(".practice-save-status button").first().click();
   await expect(page.locator(".result-block")).toContainText("回答正确");
+  await expect.poll(() => store.allA(user.id).length).toBe(1);
+  await expect
+    .poll(() => page.evaluate(
+      ({ storageKey, questionId }) =>
+        JSON.parse(localStorage.getItem(storageKey)).responses[questionId]?.submitted,
+      { storageKey: key, questionId: selected[0].id },
+    ))
+    .toBe(true);
   assert.equal(attempts, 1);
   assert.equal(store.allA(user.id).length, 1);
   await page.reload();

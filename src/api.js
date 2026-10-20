@@ -57,6 +57,8 @@ function updateCacheContext(url, method, data) {
     }
   }
   if (method === "GET" || url === "/study/catalog") return;
+  // Revealing an ordinary practice answer is read-only, including prefetch.
+  if (/^\/questions\/[^/]+\/reveal$/.test(url)) return;
   if (url.startsWith("/study/teacher"))
     responseCache.invalidate(["/study/teacher/history"]);
   else if (url.startsWith("/study/"))

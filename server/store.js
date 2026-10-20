@@ -988,16 +988,32 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       mode = "practice",
       userId = "local",
       response,
+      clientAttemptId,
     ) {
       const q = getQ(questionId);
       if (!q) throw new Error("题目不存在");
+      // A retry after a lost acknowledgement must not count as a second answer.
+      // Namespace the client token by account so it cannot address another user.
+      const attemptId = clientAttemptId
+        ? crypto.createHash("sha256").update(`${userId}:practice:${clientAttemptId}`).digest("hex")
+        : crypto.randomUUID();
+      const previous = clientAttemptId
+        ? db.prepare("SELECT data FROM attempts WHERE id=? AND user_id=?").get(attemptId, userId)
+        : null;
+      if (previous) {
+        const saved = JSON.parse(previous.data);
+        if (saved.questionId !== questionId || JSON.stringify([...saved.selected].sort()) !== JSON.stringify([...selected].sort()) || saved.response !== response)
+          throw Object.assign(new Error("这次作答标识已被使用，请重新进入练习"), { status: 409 });
+        return { ...saved, answer: q.answer, analysis: q.analysis,
+          ...(q.type === "short_answer" ? { expectedAnswer: q.expectedAnswer } : {}) };
+      }
       const correct =
         q.type === "short_answer"
           ? selected[0] === "A"
           : JSON.stringify([...selected].sort()) ===
             JSON.stringify([...q.answer].sort());
       const a = {
-        id: crypto.randomUUID(),
+        id: attemptId,
         userId,
         questionId,
         selected,

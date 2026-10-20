@@ -29,6 +29,18 @@ const session = {
   questions: [question("a"), question("b"), question("c")],
 };
 
+test("memorize mode and an unacknowledged submission survive a checkpoint", () => {
+  const storage = memoryStorage();
+  const response = { selected: ["A"], saveStatus: "pending", submitted: false,
+    attemptPayload: { questionId: "b", selected: ["A"], clientAttemptId: "kept-token", timeMs: 123 } };
+  savePracticeProgress(storage, "memory", session, 1, { b: response }, false, "memorize");
+  const restored = restorePracticeProgress(readPracticeProgress(storage, "memory"), session.questions);
+  assert.equal(restored.mode, "memorize");
+  assert.equal(restored.progress.index, 1);
+  assert.deepEqual(restored.progress.responses.b.attemptPayload, response.attemptPayload);
+  assert.equal(restored.progress.responses.b.submitted, false);
+});
+
 test("practice resumes its real origin and round start; old or invalid origins safely return home", () => {
   const storage = memoryStorage(),
     startedAt = Date.now() - 5000;

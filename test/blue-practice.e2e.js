@@ -234,15 +234,14 @@ try {
   );
   await page.getByRole("button", { name: "提交答案", exact: true }).click();
   await expect(
-    page.getByText("作答暂时无法保存", { exact: true }),
+    page.locator(".practice-save-status").filter({ hasText: "作答暂时无法保存" }),
   ).toBeVisible();
   assert.equal(store.allA(user.id).length, attemptCount);
-  await expect(page.locator(".result-block")).toHaveCount(0);
-  await page.unroute("**/api/attempts");
-  await page.locator(".question-text").click();
-  await page.keyboard.press("Enter");
   await expect(page.locator(".result-block")).toContainText("回答正确");
-  assert.equal(store.allA(user.id).length, attemptCount + 1);
+  await page.unroute("**/api/attempts");
+  await page.locator(".practice-save-status button").first().click();
+  await expect.poll(() => store.allA(user.id).length).toBe(attemptCount + 1);
+  await expect(page.locator(".result-block")).toContainText("回答正确");
   await expect(
     page.getByRole("progressbar", { name: "本轮作答进度" }),
   ).toHaveAttribute("aria-valuenow", "1");

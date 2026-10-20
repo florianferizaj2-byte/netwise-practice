@@ -42,7 +42,9 @@ export function QuestionImages({ question }) {
   );
 }
 
-export function QuestionOrigin({ question }) {
+export function QuestionOrigin({ question, compact = false }) {
+  if (compact && (question.sourceVerification || question.provenance?.length))
+    return <details className="practice-source-details"><summary>题目来源与说明</summary><QuestionOrigin question={question} /></details>;
   if (question.sourceVerification)
     return (
       <p className="question-origin verified-scope">

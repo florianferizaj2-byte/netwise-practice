@@ -1839,6 +1839,7 @@ export async function createApp(options = {}) {
     const b = z
       .object({
         questionId: z.string(),
+        clientAttemptId: z.string().uuid().optional(),
         selected: z
           .array(z.enum(["A", "B", "C", "D", "E"]))
           .min(1)
@@ -1871,6 +1872,7 @@ export async function createApp(options = {}) {
       "practice",
       req.user?.id || "local",
       b.response,
+      b.clientAttemptId,
     );
     if (b.planTask) {
       const c=planContext(req);

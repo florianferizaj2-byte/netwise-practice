@@ -15,6 +15,7 @@ const checks = [
   ["知识点收藏", "knowledge-favorites"],
   ["真实学习计划", "learning-plan"],
   ["通用刷题与错题总览", "blue-practice"],
+  ["即时判分、后台保存与背题", "practice-speed"],
   ["兽医病例与配伍题", "blue-veterinary-practice"],
   ["知识点组卷、考试恢复与成绩", "blue-exam"],
   ["分步互动精讲", "interactive-tutor"],

@@ -100,6 +100,7 @@ export function restorePracticeProgress(saved, availableQuestions) {
   }
   return {
     questions,
+    mode: saved.mode === "memorize" ? "memorize" : "practice",
     title: saved.title,
     returnPage: practiceReturnPage(saved),
     ...(Number.isFinite(saved.startedAt) &&
@@ -136,6 +137,12 @@ export async function loadPracticeProgress(
           ...(draft.responseDraft
             ? { responseDraft: draft.responseDraft }
             : {}),
+          ...(draft.attemptPayload ? {
+            attemptPayload: draft.attemptPayload,
+            result: draft.result,
+            saveStatus: "error",
+            saveError: "上次保存未确认，请重试同步。",
+          } : {}),
         };
     const currentId = saved.questionIds[saved.index];
     const index = remote.questions.findIndex(
@@ -143,6 +150,7 @@ export async function loadPracticeProgress(
     );
     return {
       ...remote,
+      mode: saved.mode === "memorize" ? "memorize" : "practice",
       returnPage: "plan",
       ...(Number.isFinite(saved.startedAt) &&
       saved.startedAt > 0 &&
@@ -179,6 +187,7 @@ export function savePracticeProgress(
   index,
   responses,
   done,
+  mode = "practice",
 ) {
   if (!key) return;
   try {
@@ -190,6 +199,7 @@ export function savePracticeProgress(
       key,
       JSON.stringify({
         version: 1,
+        mode: mode === "memorize" ? "memorize" : "practice",
         title: session.title,
         returnPage: practiceReturnPage(session),
         ...(Number.isFinite(session.startedAt) && session.startedAt > 0

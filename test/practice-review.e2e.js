@@ -253,7 +253,7 @@ try {
 
   await page.getByRole("button", { name: "下一题", exact: true }).click();
   await indexIs(3);
-  // Failed writes cannot start the countdown or fabricate an answered result.
+  // Failed writes retain provisional feedback without starting the countdown.
   await page.route("**/api/attempts", (route) =>
     route.fulfill({
       status: 503,
@@ -271,14 +271,13 @@ try {
       })
       .click();
   await page.getByRole("button", { name: "提交答案", exact: true }).click();
-  await expect(page.getByRole("alert").first()).toContainText("作答保存失败");
+  await expect(page.locator(".practice-save-status")).toContainText("作答保存失败");
   await tick(4000);
   await indexIs(3);
-  await expect(page.locator(".practice-auto-next,.result-block")).toHaveCount(
-    0,
-  );
+  await expect(page.locator(".practice-auto-next")).toHaveCount(0);
+  await expect(page.locator(".result-block")).toContainText("回答正确");
   await page.unroute("**/api/attempts");
-  await page.getByRole("button", { name: "提交答案", exact: true }).click();
+  await page.getByRole("button", { name: "重试保存", exact: true }).click();
   await expect(page.locator(".practice-auto-next")).toBeVisible();
   await page.getByRole("button", { name: "展开答案解析", exact: true }).click();
   await tick(4000);

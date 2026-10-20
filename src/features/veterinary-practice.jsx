@@ -41,10 +41,17 @@ import {
 } from "../components/practice-review.jsx";
 import "./blue-practice-view.css";
 import "./blue-veterinary-practice.css";
+import {
+  usePracticeFlow,
+  PracticeModeSwitch,
+  PracticeSaveStatus,
+  MemorizeStatus,
+} from "../components/practice-flow.jsx";
 
 export function VeterinaryPractice({
   session,
   refresh,
+  onAttemptSaved,
   run,
   busy,
   train,
@@ -55,8 +62,16 @@ export function VeterinaryPractice({
 }) {
   const desktop = useDesktopWeb();
   const [outcome, setOutcome] = useState({ serial: 0, streak: 0 });
-  const { index, setIndex, responses, setResponses, done, setDone } =
-    usePracticeProgress(session);
+  const {
+    index,
+    setIndex,
+    responses,
+    setResponses,
+    done,
+    setDone,
+    mode,
+    setMode,
+  } = usePracticeProgress(session);
   const [teacherOpen, setTeacherOpen] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
   const [navFilter, setNavFilter] = useState("all");
@@ -69,7 +84,6 @@ export function VeterinaryPractice({
     String((session.progress?.index || 0) + 1),
   );
   const started = useRef(Date.now());
-  const submitting = useRef(false);
   const [roundStart] = useState(() => session.startedAt || Date.now());
   const [elapsed, setElapsed] = useState(() =>
     Math.max(0, Math.floor((Date.now() - roundStart) / 1000)),
@@ -89,7 +103,25 @@ export function VeterinaryPractice({
   const q = session.questions[index];
   const current = responses[q.id] || {};
   const selected = current.selected || [];
-  const result = current.result || null;
+  const memorizing = mode === "memorize";
+  const flow = usePracticeFlow({
+    session,
+    index,
+    mode,
+    responses,
+    setResponses,
+    done,
+    run,
+    onSaved: onAttemptSaved,
+    onConfirmed: (r) => {
+      setOutcome((old) => ({
+        serial: old.serial + 1,
+        streak: r.correct === true ? old.streak + 1 : 0,
+      }));
+      review.acknowledge();
+    },
+  });
+  const result = current.result || (memorizing ? flow.studyAnswer : null);
   const teacher = current.teacher || "";
   const hint = current.hint || 0;
   const feedbackKind = current.feedbackKind || null;
@@ -97,8 +129,8 @@ export function VeterinaryPractice({
     questionId: q.id,
     result,
     enabled: blue,
-    autoNext: preferences?.autoNext === true,
-    showAnalysis: current.revealed || preferences?.showAnalysis,
+    autoNext: !memorizing && preferences?.autoNext === true,
+    showAnalysis: memorizing || current.revealed || preferences?.showAnalysis,
     busy,
     done,
     last: index === session.questions.length - 1,
@@ -112,7 +144,12 @@ export function VeterinaryPractice({
   const answeredIds = new Set(history.map((item) => item.questionId));
   const revealedIds = new Set(
     session.questions
-      .filter((question) => responses[question.id]?.revealed)
+      .filter(
+        (question) =>
+          !responses[question.id]?.submitted &&
+          (responses[question.id]?.revealed ||
+            responses[question.id]?.memorized),
+      )
       .map((question) => question.id),
   );
   const updateCurrent = (patch) =>
@@ -121,13 +158,7 @@ export function VeterinaryPractice({
       [q.id]: { ...old[q.id], ...patch },
     }));
   const jumpTo = (nextIndex) => {
-    if (
-      busy ||
-      submitting.current ||
-      nextIndex < 0 ||
-      nextIndex >= session.questions.length
-    )
-      return;
+    if (busy || nextIndex < 0 || nextIndex >= session.questions.length) return;
     review.cancel();
     setIndex(nextIndex);
     setJumpValue(String(nextIndex + 1));
@@ -145,7 +176,7 @@ export function VeterinaryPractice({
     if (Number.isInteger(nextIndex)) jumpTo(nextIndex);
   };
   const choose = (key) => {
-    if (result || busy || submitting.current) return;
+    if (memorizing || result || busy || current.attemptPayload) return;
     updateCurrent({
       selected: isSingleSelect(q)
         ? [key]
@@ -154,32 +185,20 @@ export function VeterinaryPractice({
           : [...selected, key],
     });
   };
-  const submit = async () => {
-    if (submitting.current || busy || result || !selected.length) return;
-    submitting.current = true;
-    try {
-      await run("正在记录作答", async () => {
-        const answerResult = await api("/attempts", {
-          questionId: q.id,
-          ...(session.planTask ? { planTask: session.planTask } : {}),
-          selected,
-          timeMs: Math.min(86400000, Date.now() - started.current),
-        });
-        updateCurrent({
-          result: answerResult,
-          submitted: true,
-          revealed: false,
-        });
-        setOutcome((old) => ({
-          serial: old.serial + 1,
-          streak: answerResult.correct === true ? old.streak + 1 : 0,
-        }));
-        await refresh();
-        review.acknowledge();
-      });
-    } finally {
-      submitting.current = false;
-    }
+  const submit = () => {
+    if (
+      memorizing ||
+      current.attemptPayload ||
+      busy ||
+      result ||
+      !selected.length
+    )
+      return;
+    flow.submit(
+      selected,
+      undefined,
+      Math.min(86400000, Date.now() - started.current),
+    );
   };
   const removeWrong = () =>
     run("正在移除错题", async () => {
@@ -216,7 +235,7 @@ export function VeterinaryPractice({
       setTeacherOpen(true);
     });
   const next = () => {
-    if (busy || submitting.current) return;
+    if (busy) return;
     if (index === session.questions.length - 1) setDone(true);
     else jumpTo(index + 1);
   };
@@ -229,11 +248,15 @@ export function VeterinaryPractice({
         event.metaKey ||
         event.altKey ||
         busy ||
-        submitting.current ||
         document.querySelector('[role="dialog"], dialog[open]') ||
+        event.isComposing ||
         event.target.closest?.(
-          'input,textarea,select,button,a,[contenteditable="true"]',
-        )
+          'input,textarea,select,a,summary,[contenteditable="true"]',
+        ) ||
+        (event.target.closest?.("button") &&
+          !event.target.closest(
+            ".option,.practice-primary,.practice-mode-switch",
+          ))
       )
         return;
       if (event.key === "ArrowLeft") {
@@ -246,12 +269,12 @@ export function VeterinaryPractice({
       }
       if (event.key === "Enter") {
         event.preventDefault();
-        result ? next() : void submit();
+        memorizing || result ? next() : submit();
       }
     };
     document.addEventListener("keydown", keyboard);
     return () => document.removeEventListener("keydown", keyboard);
-  }, [blue, done, busy, index, current, session]);
+  }, [blue, done, busy, index, current, session, mode, result]);
   const accuracy = history.length
     ? Math.round(
         (history.filter((r) => r.correct === true).length / history.length) *
@@ -274,7 +297,7 @@ export function VeterinaryPractice({
         if (navFilter === "answered") return isAnswered;
         if (navFilter === "unanswered") return !isAnswered;
         if (navFilter === "wrong") return response?.result?.correct === false;
-        if (navFilter === "revealed") return !!response?.revealed;
+        if (navFilter === "revealed") return !!(response?.revealed || response?.memorized);
         return true;
       });
       return matchesFilter ? indexes : null;
@@ -304,7 +327,9 @@ export function VeterinaryPractice({
       {Object.entries(q.options).map(([key, value]) => (
         <button
           key={key}
-          disabled={!!result || !!busy}
+          disabled={
+            memorizing || !!result || !!busy || !!current.attemptPayload
+          }
           aria-pressed={selected.includes(key)}
           className={
             "option " +
@@ -341,6 +366,7 @@ export function VeterinaryPractice({
             : "本轮专项练习完成"}
         </h1>
         <p>{session.title}</p>
+        <PracticeSaveStatus flow={flow} summary />
         <div className="completion-stats">
           <strong>
             {history.filter((item) => item.correct).length}
@@ -483,6 +509,14 @@ export function VeterinaryPractice({
         )}
         <section className="question-panel vet-question-panel">
           <PracticeModes outcome={outcome} />
+          <PracticeModeSwitch
+            mode={mode}
+            setMode={(value) => {
+              review.cancel();
+              setMode(value);
+            }}
+            disabled={!!busy}
+          />
           <div className="question-top">
             <span>
               第 <b>{index + 1}</b> / {session.questions.length} 题
@@ -695,7 +729,7 @@ export function VeterinaryPractice({
                     >
                       <b>{step + 1}</b>
                       <span>
-                        {responses[child.id]?.revealed
+                        {responses[child.id]?.revealed || responses[child.id]?.memorized
                           ? "已查看"
                           : childResult
                             ? childResult.correct
@@ -720,7 +754,8 @@ export function VeterinaryPractice({
           <h2 className="question-text vet-question-text">
             {questionTextForGroup(q, group) || q.question}
           </h2>
-          <QuestionOrigin question={q} />
+          <QuestionOrigin question={q} compact={blue} />
+          <MemorizeStatus flow={flow} visible={memorizing && !current.result} />
           {group?.kind === "options" && (
             <div className="vet-options-label">本题从共用备选答案中选择</div>
           )}
@@ -768,6 +803,7 @@ export function VeterinaryPractice({
             </div>
           )}
           <PracticeAutoNext review={review} />
+          <PracticeSaveStatus current={current} flow={flow} />
           {result && q.source === "ai_generated" && (
             <div className="question-feedback">
               <span>这道共享 AI 题怎么样？</span>
@@ -797,10 +833,12 @@ export function VeterinaryPractice({
             </button>
             <button
               className="text-button"
-              disabled={!!busy || !!result}
+              disabled={
+                memorizing || !!busy || !!result || !!current.attemptPayload
+              }
               onClick={() =>
                 run("正在查看答案", async () => {
-                  const revealed = await api(`/questions/${q.id}/reveal`, {});
+                  const revealed = await flow.reveal();
                   setOutcome((old) => ({ serial: old.serial + 1, streak: 0 }));
                   updateCurrent({
                     result: revealed,
@@ -819,9 +857,9 @@ export function VeterinaryPractice({
               onChanged={refresh}
             />
             <QuestionReport question={q} busy={busy} run={run} />
-            {result ? (
+            {result || memorizing ? (
               <>
-                {result.correct === false && (
+                {result?.correct === false && (
                   <button
                     className="ai-analysis-button"
                     onClick={analyzeMistake}
@@ -830,18 +868,20 @@ export function VeterinaryPractice({
                     <MessageCircle size={17} /> AI 解析
                   </button>
                 )}
-                {result.correct === true && session.title === "错题复习" && (
-                  <button
-                    className="wrong-remove"
-                    disabled={!!busy || current.wrongRemoved}
-                    onClick={removeWrong}
-                  >
-                    <Trash2 size={16} />
-                    {current.wrongRemoved ? "已移除错题" : "移除错题"}
-                  </button>
-                )}
+                {result?.correct === true &&
+                  current.submitted &&
+                  session.title === "错题复习" && (
+                    <button
+                      className="wrong-remove"
+                      disabled={!!busy || current.wrongRemoved}
+                      onClick={removeWrong}
+                    >
+                      <Trash2 size={16} />
+                      {current.wrongRemoved ? "已移除错题" : "移除错题"}
+                    </button>
+                  )}
                 <button
-                  className="primary push-right"
+                  className="primary push-right practice-primary"
                   onClick={next}
                   disabled={!!busy}
                 >
@@ -857,11 +897,16 @@ export function VeterinaryPractice({
               </>
             ) : (
               <button
-                className="primary push-right"
-                disabled={!selected.length || !!busy}
+                className="primary push-right practice-primary"
+                disabled={
+                  !selected.length || !!busy || !!current.attemptPayload
+                }
                 onClick={submit}
               >
-                提交本题 <Check size={17} />
+                {current.saveStatus === "pending"
+                  ? "正在保存作答…"
+                  : "提交本题"}{" "}
+                <Check size={17} />
               </button>
             )}
           </div>
@@ -884,6 +929,7 @@ export function VeterinaryPractice({
           )}
           {desktop && (
             <DesktopPracticeNav
+              pageSize={blue ? 20 : 40}
               questions={session.questions}
               index={index}
               responses={responses}

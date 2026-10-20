@@ -220,6 +220,7 @@ function App() {
     [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const accountMenuRef = useRef(null);
   const questionRequest = useRef(null), loadedQuestionScope = useRef(null), dashboardRead = useRef(0);
+  const practiceDirty = useRef(new Set()), practiceContext = useRef(null);
   const [questionsLoading, setQuestionsLoading] = useState(false);
   const [questionsFailure,setQuestionsFailure] = useState("");
   const [savedPractice, setSavedPractice] = useState(null);
@@ -286,6 +287,22 @@ function App() {
     // Course, membership and administration pages do not download the full bank.
     await Promise.all([foundation, questionPages.has(page) ? loadQuestions() : Promise.resolve()]);
   };
+  practiceContext.current = { key: practiceKey, page, refresh };
+  const onPracticeSaved = (questionId) => {
+    practiceDirty.current.add(practiceKey);
+    if (practiceContext.current.key !== practiceKey) return;
+    setAllQuestions(old => old.map(q => q.id === questionId ? { ...q, attempted: true } : q));
+    if (practiceContext.current.page !== "practice") {
+      practiceDirty.current.delete(practiceKey);
+      void practiceContext.current.refresh().catch(e => { if (e.name !== "CacheCancelledError") setError(e.message); });
+    }
+  };
+  useEffect(() => {
+    // Refresh the aggregate views once when leaving practice, never on its
+    // next-question path. The mounted session already holds its question list.
+    if (page === "practice" || !practiceDirty.current.delete(practiceKey)) return;
+    void refresh().catch(e => { if (e.name !== "CacheCancelledError") setError(e.message); });
+  }, [page, practiceKey]);
   useEffect(() => {
     api("/auth/me")
       .then(setAuth)
@@ -1777,6 +1794,7 @@ function App() {
                 key={session.key}
                 session={session}
                 refresh={refresh}
+                onAttemptSaved={onPracticeSaved}
                 run={run}
                 busy={busy}
                 train={train}

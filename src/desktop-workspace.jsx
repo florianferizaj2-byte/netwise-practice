@@ -16,8 +16,12 @@ import { savePracticeProgress } from "./practice-progress.js";
 
 export function usePracticeProgress(session) {
   const [index, setIndex] = useState(session.progress?.index || 0);
-  const [responses, setResponses] = useState(session.progress?.responses || {});
+  const [responses, setResponses] = useState(() => Object.fromEntries(
+    Object.entries(session.progress?.responses || {}).map(([id, entry]) => [id,
+      entry.saveStatus === "pending" ? { ...entry, saveStatus: "error", saveError: "上次保存未确认，请重试同步。" } : entry]),
+  ));
   const [done, setDone] = useState(false);
+  const [mode, setMode] = useState(session.mode === "memorize" ? "memorize" : "practice");
   useEffect(() => {
     if (!session.storageKey) return;
     try {
@@ -27,13 +31,14 @@ export function usePracticeProgress(session) {
         session,
         index,
         responses,
-        done,
+        done && !Object.values(responses).some(r => r.saveStatus === "pending" || r.saveStatus === "error"),
+        mode,
       );
     } catch {
       /* Private mode. */
     }
-  }, [session, index, responses, done]);
-  return { index, setIndex, responses, setResponses, done, setDone };
+  }, [session, index, responses, done, mode]);
+  return { index, setIndex, responses, setResponses, done, setDone, mode, setMode };
 }
 
 export function DesktopPracticeNav({
@@ -42,8 +47,8 @@ export function DesktopPracticeNav({
   responses,
   busy,
   jumpTo,
+  pageSize = 40,
 }) {
-  const pageSize = 40;
   const [page, setPage] = useState(Math.floor(index / pageSize));
   useEffect(() => {
     setPage(Math.floor(index / pageSize));
@@ -73,7 +78,7 @@ export function DesktopPracticeNav({
               ? "答错"
               : response?.submitted
                 ? "已作答"
-                : response?.revealed
+                : response?.revealed || response?.memorized
                   ? "已查看答案"
                   : "未作答";
             return (
@@ -85,7 +90,7 @@ export function DesktopPracticeNav({
                   position === index ? "current" : "",
                   response?.submitted ? "answered" : "",
                   wrong ? "wrong" : "",
-                  response?.revealed ? "revealed" : "",
+                  response?.revealed || response?.memorized ? "revealed" : "",
                 ].join(" ")}
                 aria-label={`第 ${position + 1} 题，${state}`}
                 aria-current={position === index ? "step" : undefined}

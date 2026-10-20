@@ -3,6 +3,108 @@
   color: var(--text, #203456);
   min-width: 0;
 }
+.practice-mode-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+.practice-mode-switch {
+  display: inline-flex;
+  gap: 3px;
+  padding: 3px;
+  border-radius: 9px;
+  background: var(--web-soft, #eef3ff);
+}
+.blue-workspace .practice-mode-switch button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 5px 13px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-2);
+  font-size: 13px;
+  border-radius: 6px;
+}
+.blue-workspace .practice-mode-switch button[aria-pressed="true"] {
+  background: var(--paper, #fff);
+  color: var(--web-accent, #2454ed);
+  border-color: var(--line);
+  box-shadow: 0 1px 3px #1b3f7610;
+}
+.practice-mode-bar > span {
+  color: var(--text-2);
+  font-size: 12px;
+}
+.practice-save-status {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+  color: var(--text-2);
+  font-size: 12px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.practice-save-status button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 9px;
+  font-size: 12px;
+  min-height: 30px;
+  color: var(--web-accent, #2454ed);
+}
+.practice-save-status svg {
+  flex: none;
+}
+.blue-practice .options {
+  gap: 8px;
+}
+.blue-practice .practice-source-details {
+  font-size: 12px;
+  color: var(--text-2);
+  margin: 8px 0 12px;
+}
+.practice-source-details summary {
+  cursor: pointer;
+  width: fit-content;
+  padding-block: 4px;
+}
+.blue-practice .practice-source-details .question-origin {
+  margin: 6px 0;
+}
+.blue-practice .result-block {
+  margin-top: 12px;
+  padding: 14px 16px;
+}
+.blue-practice .result-block h3 {
+  font-size: 15px;
+}
+.blue-practice .result-block p {
+  font-size: calc(14px * var(--reading-scale, 1));
+  line-height: 1.8;
+  margin-top: 8px;
+}
+.blue-workspace main[data-page="practice"] > .alert {
+  padding: 10px 16px;
+  margin-bottom: 14px;
+}
+@media (max-width: 600px) {
+  .practice-mode-bar > span {
+    width: 100%;
+  }
+  .blue-workspace .practice-mode-switch button {
+    min-height: 40px;
+  }
+}
 .blue-workspace
   :is(.blue-practice, .blue-wrong-overview, .blue-practice-summary)
   .primary {
@@ -25,26 +127,26 @@
   justify-content: space-between;
   align-items: center;
   gap: 20px;
-  margin-bottom: 22px;
+  margin-bottom: 14px;
 }
 .blue-practice .blue-practice-title {
   display: flex;
   align-items: center;
-  gap: 18px;
-  margin-top: 16px;
+  gap: 12px;
+  margin-top: 6px;
 }
 .blue-practice-title .ace-chapter-art {
-  --art-size: 96px;
+  --art-size: 58px;
 }
 .blue-practice .blue-practice-heading h1 {
-  font-size: clamp(25px, 2.3vw, 34px);
+  font-size: clamp(21px, 1.7vw, 26px);
   line-height: 1.4;
   margin: 0;
 }
 .blue-practice .blue-practice-heading p {
   color: var(--text-2);
-  margin-top: 8px;
-  font-size: 14px;
+  margin-top: 3px;
+  font-size: 13px;
 }
 .blue-workspace .blue-practice .blue-practice-back {
   border: 0;
@@ -56,7 +158,9 @@
 }
 .blue-workspace .blue-practice .practice-layout {
   grid-template-columns: minmax(0, 1fr) 300px;
-  gap: 16px 20px;
+  grid-template-rows: min-content minmax(0, 1fr);
+  gap: 12px 18px;
+  align-items: start;
 }
 .blue-practice .blue-round-progress {
   grid-column: 1;
@@ -66,7 +170,7 @@
   gap: 14px;
   border: 1px solid var(--line);
   background: var(--paper, #fff);
-  padding: 19px 22px;
+  padding: 12px 18px;
   border-radius: 12px;
   font-size: 14px;
 }
@@ -79,7 +183,7 @@
 }
 .blue-round-progress strong {
   color: var(--web-accent, #2454ed);
-  font-size: 23px;
+  font-size: 20px;
   margin-left: 5px;
 }
 .blue-round-progress .progress {
@@ -109,7 +213,7 @@
   border-color: var(--line);
   border-radius: 12px;
   background: var(--paper, #fff);
-  padding: 24px;
+  padding: 18px 20px;
 }
 .blue-practice .blue-question-position {
   display: none;
@@ -128,15 +232,15 @@
   color: var(--text-2);
 }
 .blue-practice .question-meta {
-  margin-top: 20px;
+  margin-top: 12px;
   color: var(--text-2);
   font-size: 13px;
 }
 .blue-workspace .blue-practice .question-text {
   color: var(--text);
-  font-size: calc(20px * var(--reading-scale, 1));
-  line-height: 1.85;
-  margin-block: 19px;
+  font-size: calc(19px * var(--reading-scale, 1));
+  line-height: 1.65;
+  margin-block: 12px;
   overflow-wrap: anywhere;
 }
 .blue-practice .question-origin {
@@ -149,8 +253,8 @@
   border-radius: 10px;
   background: var(--paper, #fff);
   color: var(--text);
-  padding: 14px 18px;
-  min-height: 60px;
+  padding: 10px 14px;
+  min-height: 48px;
   font-size: calc(15px * var(--reading-scale, 1));
 }
 .blue-workspace .blue-practice .option:hover:not(:disabled) {
@@ -167,8 +271,8 @@
   border-radius: 50%;
   background: var(--web-soft);
   color: var(--text);
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   display: grid;
   place-items: center;
   flex: none;
@@ -199,12 +303,14 @@
   background: #fff4eb;
 }
 .blue-workspace .blue-practice .question-actions {
-  position: static;
+  position: sticky;
+  bottom: 8px;
+  z-index: 2;
   background: var(--paper, #fff);
   border-color: var(--line);
-  box-shadow: none;
-  margin-top: 22px;
-  padding-top: 18px;
+  box-shadow: 0 -8px 12px var(--paper, #fff);
+  margin-top: 14px;
+  padding-top: 12px;
   gap: 8px;
 }
 .blue-practice .question-actions > button {
@@ -218,7 +324,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 15px;
-  margin-top: 14px;
+  margin-top: 8px;
   font-size: 12px;
   color: var(--text-2);
 }
@@ -235,15 +341,15 @@
   background: var(--paper, #fff);
   border: 1px solid var(--line);
   border-radius: 12px;
-  padding: 20px;
+  padding: 16px;
 }
 .blue-practice .blue-answer-stats {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: 16px;
+  padding: 12px;
   border-radius: 10px;
   background: var(--web-soft);
-  margin-bottom: 18px;
+  margin-bottom: 12px;
   gap: 20px;
 }
 .blue-answer-stats > div + div {

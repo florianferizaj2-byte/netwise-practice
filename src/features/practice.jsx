@@ -1,6 +1,12 @@
 import { lazy, useEffect, useRef, useState } from "react";
 import { ChapterArt } from "../components/chapter-art.jsx";
 import "./blue-practice-view.css";
+import {
+  usePracticeFlow,
+  PracticeModeSwitch,
+  PracticeSaveStatus,
+  MemorizeStatus,
+} from "../components/practice-flow.jsx";
 import { PracticeModes } from "../practice-modes.jsx";
 import { useDesktopWeb } from "../desktop-experience.jsx";
 import {
@@ -56,6 +62,7 @@ export function Practice(props) {
 export function GenericPractice({
   session,
   refresh,
+  onAttemptSaved,
   run,
   busy,
   train,
@@ -68,11 +75,18 @@ export function GenericPractice({
 }) {
   const desktop = useDesktopWeb();
   const [outcome, setOutcome] = useState({ serial: 0, streak: 0 });
-  const { index, setIndex, responses, setResponses, done, setDone } =
-    usePracticeProgress(session);
+  const {
+    index,
+    setIndex,
+    responses,
+    setResponses,
+    done,
+    setDone,
+    mode,
+    setMode,
+  } = usePracticeProgress(session);
   const [teacherOpen, setTeacherOpen] = useState(false);
   const started = useRef(Date.now());
-  const submitting = useRef(false);
   const [roundStart] = useState(() => session.startedAt || Date.now());
   const [elapsed, setElapsed] = useState(() =>
     Math.max(0, Math.floor((Date.now() - roundStart) / 1000)),
@@ -89,7 +103,25 @@ export function GenericPractice({
   const q = session.questions[index];
   const current = responses[q.id] || {};
   const selected = current.selected || [];
-  const result = current.result || null;
+  const memorizing = mode === "memorize";
+  const flow = usePracticeFlow({
+    session,
+    index,
+    mode,
+    responses,
+    setResponses,
+    done,
+    run,
+    onSaved: onAttemptSaved,
+    onConfirmed: (r) => {
+      setOutcome((old) => ({
+        serial: old.serial + 1,
+        streak: r.correct === true ? old.streak + 1 : 0,
+      }));
+      review.acknowledge();
+    },
+  });
+  const result = current.result || (memorizing ? flow.studyAnswer : null);
   const teacher = current.teacher || "";
   const hint = current.hint || 0;
   const feedbackKind = current.feedbackKind || null;
@@ -97,8 +129,8 @@ export function GenericPractice({
     questionId: q.id,
     result,
     enabled: blue,
-    autoNext: preferences?.autoNext === true,
-    showAnalysis: current.revealed || preferences?.showAnalysis,
+    autoNext: !memorizing && preferences?.autoNext === true,
+    showAnalysis: memorizing || current.revealed || preferences?.showAnalysis,
     busy,
     done,
     last: index === session.questions.length - 1,
@@ -112,7 +144,12 @@ export function GenericPractice({
   const answeredIds = new Set(history.map((item) => item.questionId));
   const revealedIds = new Set(
     session.questions
-      .filter((question) => responses[question.id]?.revealed)
+      .filter(
+        (question) =>
+          !responses[question.id]?.submitted &&
+          (responses[question.id]?.revealed ||
+            responses[question.id]?.memorized),
+      )
       .map((question) => question.id),
   );
   const updateCurrent = (patch) =>
@@ -121,7 +158,7 @@ export function GenericPractice({
       [q.id]: { ...old[q.id], ...patch },
     }));
   const choose = (k) => {
-    if (result || busy || submitting.current) return;
+    if (memorizing || result || busy || current.attemptPayload) return;
     updateCurrent({
       selected: isSingleSelect(q)
         ? [k]
@@ -131,51 +168,28 @@ export function GenericPractice({
     });
   };
   const jumpTo = (nextIndex) => {
-    if (
-      busy ||
-      submitting.current ||
-      nextIndex < 0 ||
-      nextIndex >= session.questions.length
-    )
-      return;
+    if (busy || nextIndex < 0 || nextIndex >= session.questions.length) return;
     review.cancel();
     setIndex(nextIndex);
     setTeacherOpen(false);
     if (desktop) window.scrollTo({ top: 0, behavior: "instant" });
     started.current = Date.now();
   };
-  const submit = async () => {
+  const submit = () => {
     if (
-      submitting.current ||
+      memorizing ||
+      current.attemptPayload ||
       busy ||
       result ||
       !selected.length ||
       (q.type === "short_answer" && !current.responseDraft?.trim())
     )
       return;
-    submitting.current = true;
-    try {
-      await run("正在记录作答", async () => {
-        const r = await api("/attempts", {
-          questionId: q.id,
-          ...(session.planTask ? { planTask: session.planTask } : {}),
-          selected,
-          ...(q.type === "short_answer"
-            ? { response: current.responseDraft || "" }
-            : {}),
-          timeMs: Math.min(86400000, Date.now() - started.current),
-        });
-        updateCurrent({ result: r, submitted: true, revealed: false });
-        setOutcome((old) => ({
-          serial: old.serial + 1,
-          streak: r.correct === true ? old.streak + 1 : 0,
-        }));
-        await refresh();
-        review.acknowledge();
-      });
-    } finally {
-      submitting.current = false;
-    }
+    flow.submit(
+      selected,
+      q.type === "short_answer" ? current.responseDraft || "" : undefined,
+      Math.min(86400000, Date.now() - started.current),
+    );
   };
   const removeWrong = () =>
     run("正在移除错题", async () => {
@@ -196,7 +210,7 @@ export function GenericPractice({
       updateCurrent({ feedbackKind: kind });
     });
   const next = () => {
-    if (busy || submitting.current) return;
+    if (busy) return;
     if (index === session.questions.length - 1) {
       setDone(true);
       return;
@@ -224,9 +238,14 @@ export function GenericPractice({
         event.altKey ||
         busy ||
         document.querySelector('[role="dialog"], dialog[open]') ||
+        event.isComposing ||
         event.target.closest?.(
-          'input,textarea,select,button,a,[contenteditable="true"]',
-        )
+          'input,textarea,select,a,summary,[contenteditable="true"]',
+        ) ||
+        (event.target.closest?.("button") &&
+          !event.target.closest(
+            ".option,.practice-primary,.practice-mode-switch",
+          ))
       )
         return;
       if (event.key === "ArrowLeft") {
@@ -239,12 +258,12 @@ export function GenericPractice({
       }
       if (event.key === "Enter") {
         event.preventDefault();
-        result ? next() : void submit();
+        memorizing || result ? next() : submit();
       }
     };
     document.addEventListener("keydown", keyboard);
     return () => document.removeEventListener("keydown", keyboard);
-  }, [blue, done, busy, index, current, session]);
+  }, [blue, done, busy, index, current, session, mode, result]);
   const correctCount = history.filter((h) => h.correct === true).length;
   const accuracy = history.length
     ? Math.round((correctCount / history.length) * 100)
@@ -259,6 +278,7 @@ export function GenericPractice({
             : "本轮练习已结束"}
         </h1>
         <p>{session.title}</p>
+        <PracticeSaveStatus flow={flow} summary />
         <div className="completion-stats">
           <strong>
             {history.filter((h) => h.correct).length}
@@ -362,6 +382,14 @@ export function GenericPractice({
           </div>
         )}
         <section className="question-panel">
+          <PracticeModeSwitch
+            mode={mode}
+            setMode={(value) => {
+              review.cancel();
+              setMode(value);
+            }}
+            disabled={!!busy}
+          />
           <PracticeModes outcome={outcome} />
           <div className="question-top">
             <span>
@@ -451,53 +479,60 @@ export function GenericPractice({
           </div>
           <QuestionImages question={q} />
           <h2 className="question-text">{q.question}</h2>
-          <QuestionOrigin question={q} />
+          <QuestionOrigin question={q} compact={blue} />
+          <MemorizeStatus flow={flow} visible={memorizing && !current.result} />
           {q.type === "short_answer" ? (
-            <div className="short-answer-editor">
-              <label htmlFor={`short-answer-${q.id}`}>我的作答</label>
-              <textarea
-                id={`short-answer-${q.id}`}
-                rows={5}
-                maxLength={5000}
-                placeholder="在这里填写配置命令、计算过程或文字答案…"
-                value={result?.response ?? current.responseDraft ?? ""}
-                disabled={!!result || !!busy}
-                onChange={(event) =>
-                  updateCurrent({ responseDraft: event.target.value })
-                }
-              />
-              {!result && (
-                <div
-                  className="short-answer-self-rate"
-                  role="group"
-                  aria-label="自我评估答案"
-                >
-                  <span>对照题意完成作答后，自评：</span>
-                  <button
-                    type="button"
-                    className={selected[0] === "A" ? "selected correct" : ""}
-                    disabled={!!busy}
-                    onClick={() => updateCurrent({ selected: ["A"] })}
+            !memorizing && (
+              <div className="short-answer-editor">
+                <label htmlFor={`short-answer-${q.id}`}>我的作答</label>
+                <textarea
+                  id={`short-answer-${q.id}`}
+                  rows={5}
+                  maxLength={5000}
+                  placeholder="在这里填写配置命令、计算过程或文字答案…"
+                  value={result?.response ?? current.responseDraft ?? ""}
+                  disabled={
+                    memorizing || !!result || !!busy || !!current.attemptPayload
+                  }
+                  onChange={(event) =>
+                    updateCurrent({ responseDraft: event.target.value })
+                  }
+                />
+                {!result && !memorizing && (
+                  <div
+                    className="short-answer-self-rate"
+                    role="group"
+                    aria-label="自我评估答案"
                   >
-                    我答对了
-                  </button>
-                  <button
-                    type="button"
-                    className={selected[0] === "B" ? "selected review" : ""}
-                    disabled={!!busy}
-                    onClick={() => updateCurrent({ selected: ["B"] })}
-                  >
-                    需要复习
-                  </button>
-                </div>
-              )}
-            </div>
+                    <span>对照题意完成作答后，自评：</span>
+                    <button
+                      type="button"
+                      className={selected[0] === "A" ? "selected correct" : ""}
+                      disabled={!!busy || !!current.attemptPayload}
+                      onClick={() => updateCurrent({ selected: ["A"] })}
+                    >
+                      我答对了
+                    </button>
+                    <button
+                      type="button"
+                      className={selected[0] === "B" ? "selected review" : ""}
+                      disabled={!!busy || !!current.attemptPayload}
+                      onClick={() => updateCurrent({ selected: ["B"] })}
+                    >
+                      需要复习
+                    </button>
+                  </div>
+                )}
+              </div>
+            )
           ) : (
             <div className="options">
               {Object.entries(q.options).map(([k, v]) => (
                 <button
                   key={k}
-                  disabled={!!result || !!busy}
+                  disabled={
+                    memorizing || !!result || !!busy || !!current.attemptPayload
+                  }
                   aria-pressed={selected.includes(k)}
                   className={
                     "option " +
@@ -558,6 +593,7 @@ export function GenericPractice({
             </div>
           )}
           <PracticeAutoNext review={review} />
+          <PracticeSaveStatus current={current} flow={flow} />
           {result && q.source === "ai_generated" && (
             <div className="question-feedback">
               <span>这道共享 AI 题怎么样？</span>
@@ -614,10 +650,12 @@ export function GenericPractice({
             </button>
             <button
               className="text-button"
-              disabled={!!busy || !!result}
+              disabled={
+                memorizing || !!busy || !!result || !!current.attemptPayload
+              }
               onClick={() =>
                 run("正在查看答案", async () => {
-                  const revealed = await api(`/questions/${q.id}/reveal`, {});
+                  const revealed = await flow.reveal();
                   setOutcome((old) => ({ serial: old.serial + 1, streak: 0 }));
                   updateCurrent({
                     result: revealed,
@@ -636,9 +674,9 @@ export function GenericPractice({
               onChanged={refresh}
             />
             <QuestionReport question={q} busy={busy} run={run} />
-            {result ? (
+            {result || memorizing ? (
               <>
-                {result.correct === false && (
+                {result?.correct === false && (
                   <button
                     className="ai-analysis-button"
                     onClick={analyzeMistake}
@@ -648,18 +686,20 @@ export function GenericPractice({
                     AI 解析
                   </button>
                 )}
-                {result.correct === true && session.title === "错题复习" && (
-                  <button
-                    className="wrong-remove"
-                    disabled={!!busy || current.wrongRemoved}
-                    onClick={removeWrong}
-                  >
-                    <Trash2 size={16} />
-                    {current.wrongRemoved ? "已移除错题" : "移除错题"}
-                  </button>
-                )}
+                {result?.correct === true &&
+                  current.submitted &&
+                  session.title === "错题复习" && (
+                    <button
+                      className="wrong-remove"
+                      disabled={!!busy || current.wrongRemoved}
+                      onClick={removeWrong}
+                    >
+                      <Trash2 size={16} />
+                      {current.wrongRemoved ? "已移除错题" : "移除错题"}
+                    </button>
+                  )}
                 <button
-                  className="primary push-right"
+                  className="primary push-right practice-primary"
                   onClick={next}
                   disabled={!!busy}
                 >
@@ -671,23 +711,32 @@ export function GenericPractice({
               </>
             ) : (
               <button
-                className="primary push-right"
+                className="primary push-right practice-primary"
                 disabled={
                   !selected.length ||
                   (q.type === "short_answer" &&
                     !current.responseDraft?.trim()) ||
-                  !!busy
+                  !!busy ||
+                  !!current.attemptPayload
                 }
                 onClick={submit}
               >
-                {q.type === "short_answer" ? "提交自评" : "提交答案"}
+                {current.saveStatus === "pending"
+                  ? "正在保存作答…"
+                  : q.type === "short_answer"
+                    ? "提交自评"
+                    : "提交答案"}
                 <Check size={17} />
               </button>
             )}
           </div>
           {blue && (
             <div className="blue-practice-shortcuts">
-              <span>Enter 提交或进入下一题 · ← → 切换题目</span>
+              <span>
+                {memorizing
+                  ? "Enter 下一题 · ← → 切换题目 · 背题不计入答题成绩"
+                  : "Enter 提交或进入下一题 · ← → 切换题目"}
+              </span>
               {!result && (
                 <button
                   disabled={!!busy || index === session.questions.length - 1}
@@ -717,6 +766,7 @@ export function GenericPractice({
           )}
           {desktop && (
             <DesktopPracticeNav
+              pageSize={blue ? 20 : 40}
               questions={session.questions}
               index={index}
               responses={responses}
