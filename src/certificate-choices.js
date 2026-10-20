@@ -30,6 +30,18 @@ const metadata = {
     artCertificate: "ncre-l2-c-programming",
     artChapter: "program-structure",
   },
+  "hcip-datacom-core": {
+    category: "certification",
+    aliases: "华为 HCIP 数通 H12-821 核心 Core",
+    artCertificate: "hcip-datacom-core",
+    artChapter: "routing-basics",
+  },
+  "hcip-datacom-advanced": {
+    category: "certification",
+    aliases: "华为 HCIP 数通 H12-831 高级 路由 交换 Advanced",
+    artCertificate: "hcip-datacom-advanced",
+    artChapter: "mpls",
+  },
   "veterinary-practitioner": {
     category: "profession",
     aliases: "执业 兽医 全科",

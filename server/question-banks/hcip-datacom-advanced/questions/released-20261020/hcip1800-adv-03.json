@@ -1,0 +1,1857 @@
+[
+  {
+    "id": "hcip831-1-2-1-001",
+    "type": "single_choice",
+    "question": "在 IS-IS 广播网中，DIS 产生的伪节点 LSP 的 LSP ID 由 System ID、伪节点 ID 和分片号组成。其中伪节点 ID 字段的作用是？",
+    "options": {
+      "A": "标识产生该 LSP 的路由器所属的区域号",
+      "B": "标识该 LSP 属于同一来源的第几个分片",
+      "C": "标识产生该 LSP 的伪节点，即 DIS 在该广播网上的 LAN ID",
+      "D": "标识该 LSP 的序列号版本"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "LSP ID 共 8 字节：前 6 字节是 System ID，第 7 字节是伪节点 ID，第 8 字节是分片号。广播网上由 DIS 代表整个网段产生伪节点 LSP，第 7 字节填入非 0 的伪节点 ID（即该网段的 LAN ID）；路由器自身产生的 LSP 该字节为 0。A 错，区域号由 NET 中的 Area ID 表示，不占用 LSP ID 字段；B 错，第 8 字节才是分片号；D 错，序列号是 LSP 固定头中的独立字段，不在 LSP ID 内。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "LSP ID",
+      "伪节点"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；广播网由 DIS 代表网段产生伪节点 LSP、LSP ID 由 System ID + 伪节点 ID + 分片号组成，依据 RFC 1195 第 4.3 节（LANs, Designated Routers, and Pseudonodes）与第 5.1 节（Overview of IS-IS PDUs）；固定头字段布局按 ISO 10589 定义（RFC 1195 未重复定义固定头）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "8ad9f4938cdd13c7bebcc5c4ba9bb2b3c8440a9d95ff96d28053933869c5388b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-002",
+    "type": "single_choice",
+    "question": "同一台 IS-IS 路由器需要产生多个 LSP 分片时，各分片的 LSP 编号（LSP number）如何取值？",
+    "options": {
+      "A": "从 0 开始依次递增，与同一来源的前 7 字节共同确定唯一分片",
+      "B": "从 1 开始依次递增，0 保留给伪节点 LSP 使用",
+      "C": "随机分配，只要不与邻居的分片号冲突即可",
+      "D": "由接口索引决定，接口增减时分片号随之改变"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "RFC 1195 第 3.6 节说明同一路由器的多个 LSP 由 LSP number 区分。LSP number 从 0 开始递增，0 号分片承载必须出现在首片的字段；前 6 字节 System ID 加第 7 字节伪节点 ID 与分片号一起构成唯一的 LSP ID。B 错，0 不是保留给伪节点 LSP 的值，伪节点 LSP 同样从 0 号分片开始；C 错，分片号必须按确定规则连续分配，否则接收端无法判断分片是否齐全；D 错，分片号与接口索引无关，只与需要通告的内容量和分片顺序有关。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "LSP 分片",
+      "LSP number"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-002",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；同一路由器多个 LSP 由 LSP number 区分、LSP number 0 承载必须出现在首片的字段，依据 RFC 1195 第 3.6 节（Multiple LSPs and SNPs，PDF 第 24 页）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "ca45fb7423bcf4f6c10028e593f30fc7f859b31951fb02f539669ccc5793c506"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-003",
+    "type": "single_choice",
+    "question": "接收路由器收到两个 LSP，需要判断它们是否属于同一路由器（或同一伪节点）的不同分片，应比较什么？",
+    "options": {
+      "A": "LSP 固定头中的序列号",
+      "B": "LSP 固定头中的剩余寿命",
+      "C": "LSP 的校验和与保持时间",
+      "D": "LSP ID 中除最后 1 字节分片号外的前 7 个字节"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "LSP ID 的前 7 个字节由 6 字节 System ID 和 1 字节伪节点 ID 组成，唯一标识 LSP 的来源；最后 1 字节才是分片号。因此前 7 字节相同、分片号不同的 LSP 属于同一来源的不同分片，接收端据此重组完整信息。A 错，序列号用于比较同一 LSP 的新旧，不同分片各自拥有独立序列号；B 错，剩余寿命只反映老化程度，与分片归属无关；C 错，校验和用于检查报文完整性，保持时间用于邻居保活，都不能标识来源。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "LSP 分片",
+      "LSDB"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-003",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；判断多个 LSP 是否同一来源的不同分片需比较 LSP ID 前 7 字节（System ID 与伪节点 ID），依据 RFC 1195 第 3.6 节（Multiple LSPs and SNPs）与第 5.1 节（LSP/SNP 分类）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "c742ccc3f12bd34f87d5b64761bdd24903a7dbea7a6eb70c1eb3c70b95ab62fe"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-004",
+    "type": "single_choice",
+    "question": "IS-IS 的 LSP 固定头中，序列号（Sequence Number）字段的主要作用是？",
+    "options": {
+      "A": "标识该 LSP 是同一来源的第几个分片",
+      "B": "标识同一 LSP 的版本新旧，序列号大的被视为更新",
+      "C": "记录该 LSP 从产生到现在经过的路由器跳数",
+      "D": "表示产生该 LSP 的路由器在 DIS 选举中的优先级"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "同一来源的同一个分片在刷新或内容变化时会重新生成，序列号随之递增；路由器收到 LSP 时比较序列号，只有序列号更大的才被接受为更新版本，序列号相同则比较剩余寿命和校验和。A 错，分片序号由 LSP ID 的最后一个字节表示；C 错，LSP 固定头中没有跳数字段，只有剩余寿命；D 错，DIS 优先级携带在 Hello 报文中，与 LSP 序列号无关。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "easy",
+    "tags": [
+      "IS-IS",
+      "LSP",
+      "序列号"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-004",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；LSP 与 SNP 用于保证相邻路由器对“最新 LSP”的判断一致，依据 RFC 1195 第 5.1 节（Overview of IS-IS PDUs）；序列号字段的新旧比较语义按 ISO 10589 定义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "96b1e12de482bdb72ced49aa22b1dae96de14f22cd587b764ff29c2b498eb4e5"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-005",
+    "type": "single_choice",
+    "question": "一条保存在 LSDB 中的 IS-IS LSP，其剩余寿命（Remaining Lifetime）随驻留时间递减到 0 后，路由器如何处理？",
+    "options": {
+      "A": "把该 LSP 从 LSDB 中删除，SPF 不再使用它",
+      "B": "把剩余寿命重置为最大值并继续保留",
+      "C": "立即用相同的序列号重新生成并泛洪该 LSP",
+      "D": "只在路由表中标记为不可用，LSDB 中永久保留"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "剩余寿命表示该 LSP 还有多久有效，递减到 0 说明它已经过期，路由器将其从 LSDB 中删除，后续 SPF 计算不再使用。B 错，只有产生该 LSP 的路由器在执行刷新时才会把寿命重置为最大值；C 错，重新生成属于刷新流程，且必须使用更大的序列号，不会沿用相同序列号；D 错，过期 LSP 不能永久保留在 LSDB 中，否则会持续参与计算并产生错误路由。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "LSP",
+      "剩余寿命"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-005",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；LSP 在 LSDB 中的有效性与同步依赖 SNP 机制，依据 RFC 1195 第 5.1 节（Overview of IS-IS PDUs）；剩余寿命递减到 0 后删除的规则按 ISO 10589 定义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "8c028e743ec309a9fbc1be8b93da0f3b71c9870c0340f4affdf6d63f2aa9124b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-006",
+    "type": "single_choice",
+    "question": "路由器对自己产生的 LSP 进行周期性刷新时，下列变化正确的是？",
+    "options": {
+      "A": "序列号保持不变，只把剩余寿命恢复为最大值",
+      "B": "只有收到邻居的 PSNP 请求时才进行刷新",
+      "C": "序列号递增，剩余寿命重置为最大值，并向所有邻接泛洪",
+      "D": "由 DIS 代替路由器刷新它产生的 LSP"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "刷新是产生 LSP 的路由器维持信息有效的机制：重新生成时序列号递增、剩余寿命重置为最大值，并按可靠泛洪流程发送给所有邻接。A 错，序列号不变会被邻居判为旧 LSP 而丢弃，刷新无效；B 错，刷新由本机的 LSP 刷新定时器驱动，PSNP 请求只用于补发缺失的 LSP；D 错，DIS 只产生伪节点 LSP，不代替其他路由器刷新其自身 LSP。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "LSP 刷新",
+      "序列号"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-006",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；LSP 分片与重新生成多个 LSP 的机制依据 RFC 1195 第 3.6 节（Multiple LSPs and SNPs）与第 5.1 节；刷新时序列号递增、寿命重置及泛洪流程按 ISO 10589 定义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "c45f4573dd1fee0668341bb771769aaf5464360f1480cebcc1f06a306626e9c3"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-007",
+    "type": "single_choice",
+    "question": "IS-IS 路由器要撤销一条自己产生的 LSP 时，正确的做法是？",
+    "options": {
+      "A": "直接从本地 LSDB 删除，不向邻居通告",
+      "B": "发送 CSNP 声明该 LSP 已被删除",
+      "C": "停止刷新，等待剩余寿命自然减到 0，期间不泛洪",
+      "D": "把该 LSP 的剩余寿命置 0（Purge）并立即泛洪"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "撤销 LSP 需要让全网同步删除，标准做法是把剩余寿命置 0 后立即泛洪（Purge），邻居收到后从 LSDB 中删除该 LSP 并继续传播。A 错，只在本地删除会让邻居继续保留并使用旧信息；B 错，CSNP 只携带摘要，不能表达撤销语义；C 错，等待自然老化耗时很长，期间旧信息仍然生效，可能造成错误路由。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS",
+      "LSP 撤销",
+      "Purge"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-007",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；LSP 撤销需全网同步删除，依赖 LSP 泛洪与 SNP 确认机制，依据 RFC 1195 第 5.1 节（Overview of IS-IS PDUs）；剩余寿命置 0 的 Purge 流程按 ISO 10589 定义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "3867dabbed7a4ecf08b5e62bb88c449aa927eb8ccc5435b0bad566acc7b80c4a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-008",
+    "type": "single_choice",
+    "question": "某台 IS-IS 路由器准备升级软件，维护期间希望其他路由器不要把穿越流量调度到这台设备上，同时它的直连网段仍要可达。最合适的做法是？",
+    "options": {
+      "A": "关闭该设备所有 IS-IS 接口",
+      "B": "在该设备的 LSP 中设置过载位（Overload Bit）",
+      "C": "把该设备的 Level-2 进程改为 Level-1",
+      "D": "清空该设备的 LSDB 并重启 IS-IS 进程"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "过载位正是为维护场景设计的：置位后其他路由器在 SPF 中不把该设备当作转接节点，穿越流量绕行，而该设备仍正常产生和泛洪 LSP，直连前缀继续被通告、仍然可达。A 错，关闭接口会使直连网段不可达并拆除邻接；C 错，改变层级会破坏原有 L1/L2 拓扑，不是维护手段；D 错，清空 LSDB 并重启进程会造成大范围路由震荡。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "过载位",
+      "维护"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-008",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5120-isis-mt"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；过载位（Overload Bit）的语义与影响 SPF 转接路径的作用，依据 RFC 5120 第 1 节（Introduction）与第 4 节（MTs and Overload/Partition/Attached Bits）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "5024b5e4dc08c802221f6fc9435d28b558503498aec53e31c5f260a980d97fc2"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-009",
+    "type": "single_choice",
+    "question": "在 IS-IS 多拓扑（MT）环境中，LSP 固定头中的过载位（Overload Bit）反映的是哪个拓扑的状态？",
+    "options": {
+      "A": "仅反映默认拓扑（MT ID 0）的状态",
+      "B": "同时反映所有已启用 MT 的状态",
+      "C": "只反映 Level-2 拓扑，与 Level-1 无关",
+      "D": "由 DIS 统一设置，反映整个广播网的状态"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "RFC 5120 第 4 节规定，LSP 固定头中的过载、分区和附加位只反映默认拓扑的状态；非默认拓扑的过载状态和附加状态放在 MT TLV 中单独携带，从而实现各拓扑独立判断。B 错，固定头不能同时表达多个 MT 的状态；C 错，该规定与 Level-1、Level-2 的层级无关；D 错，过载位由路由器为自己产生的 LSP 设置，DIS 不代为设置。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS",
+      "多拓扑",
+      "过载位"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-009",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5120-isis-mt"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；LSP 固定头中的过载/分区/附加位只反映默认拓扑，非默认拓扑状态由 MT TLV 携带，依据 RFC 5120 第 4 节（MTs and Overload/Partition/Attached Bits）与第 6 节（MT SPF Computation）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "51059b5b667dd703de75243e6799bc047cc8f841facae3905ace16b89d6085d8"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-010",
+    "type": "single_choice",
+    "question": "Level-1/Level-2 路由器在自己产生的 Level-1 LSP 中设置 ATT 位（Attached Bit），其含义是？",
+    "options": {
+      "A": "该 LSP 所在的分片已经过载",
+      "B": "该路由器是本广播网的 DIS",
+      "C": "该链路的度量值达到最大值",
+      "D": "该路由器可以经由 Level-2 到达本区域以外的目的地"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "ATT 位用于向区域内的 Level-1 路由器表明本区域存在出口：该路由器与 Level-2 骨干保持连通，可以把去往区域外的流量交给它。纯 Level-1 路由器据此产生指向最近的已附加（attached）Level-2 路由器的默认路由。A 错，过载信息由过载位表示；B 错，DIS 身份由 Hello 报文选举产生，与 ATT 位无关；C 错，度量值达到最大值不代表具备区域外出口，反而常用于避免流量穿越。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "ATT 位",
+      "Level-1"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-010",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；Level-2 路由器在 Level-1 LSP 中置 attached 位表示可经 Level-2 到达区域外，依据 RFC 1195 第 1.2 节（Overview of the ISO IS-IS Protocol，PDF 第 8 页“attached”说明）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "d6fb64f6689603b36ea3480fb659fa18ab8cc00ae9c1cf3770c2b8999346ad76"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-011",
+    "type": "single_choice",
+    "question": "一台同时运行 Level-1 和 Level-2 的 IS-IS 路由器，在什么情况下应清除其 Level-1 LSP 中的 ATT 位？",
+    "options": {
+      "A": "只要配置了 Level-2 进程，ATT 位就永远不会被清除",
+      "B": "任何一条 Level-1 邻接断开时",
+      "C": "它失去了全部可用的 Level-2 邻接，无法再经 Level-2 到达区域外时",
+      "D": "收到区域内其他路由器产生的 Level-1 LSP 时"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "ATT 位必须反映真实的出口能力。当路由器与 Level-2 骨干失去全部连通时，它已无法把流量送出区域，继续置位会把区域内流量引向黑洞，因此应清除 ATT 位，让 Level-1 路由器改选其他出口。A 错，ATT 位按实际连通性动态设置和清除；B 错，Level-1 邻接断开不影响它作为区域出口的能力；D 错，收到其他路由器的 Level-1 LSP 与自身是否具备 Level-2 出口无关。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS",
+      "ATT 位",
+      "区域出口"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-011",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；Level-2 路由器失去与骨干连通时应在 Level-1 LSP 中声明“not attached”，依据 RFC 1195 第 1.2 节（Overview of the ISO IS-IS Protocol，PDF 第 8 页）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "a9f522238127c27cb9c0bd250e110f26f69dcd1fcbc703a71d2417de74d91ae2"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-012",
+    "type": "single_choice",
+    "question": "一台纯 Level-1 路由器要访问本区域以外的目的地，它依据什么把流量送往区域出口？",
+    "options": {
+      "A": "管理员手工配置的静态默认路由，IS-IS 不参与",
+      "B": "依据 Level-1 LSP 中 ATT 位选出的最近的 Level-1/Level-2 路由器，并自动产生默认路由",
+      "C": "由 DIS 在 Hello 报文中通告的默认网关地址",
+      "D": "由 Level-2 路由器把 0.0.0.0/0 的 LSP 泛洪进 Level-1 区域"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Level-1 路由器只了解本区域拓扑，去往区域外时按 RFC 1195 第 3.10 节的规定选择最近的已附加 Level-2 路由器，并据此自动产生默认路由。A 错，IS-IS 本身就提供该能力，不需要静态默认路由；C 错，Hello 报文用于邻居建立和 DIS 选举，不携带默认网关；D 错，Level-2 LSP 不会泛洪进 Level-1 区域，否则区域划分失去意义。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "默认路由",
+      "ATT 位"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-012",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；纯 Level-1 路由器把区域外流量送往最近的 attached Level-2 路由器，依据 RFC 1195 第 1.2 节（PDF 第 8 页）与第 3.10 节（Order of Preference of Routes / Dijkstra Computation，PDF 第 28-30 页）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "483676d42df7cae6b015dbf07ed8c104f6060116529027c1c8327a0c78cde450"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-013",
+    "type": "single_choice",
+    "question": "关于 IS-IS 各级别 LSP 的泛洪范围，下列描述正确的是？",
+    "options": {
+      "A": "Level-1 LSP 只在本区域内泛洪，Level-2 LSP 在整个 Level-2 域内泛洪",
+      "B": "Level-1 LSP 在整个路由域泛洪，Level-2 LSP 只在本区域泛洪",
+      "C": "两种 LSP 都只在本区域泛洪，跨区域依靠静态路由",
+      "D": "两种 LSP 都在整个路由域泛洪，只是 SPF 计算范围不同"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IS-IS 采用两级层次结构：Level-1 LSP 描述区域内的拓扑和前缀，只在本区域内泛洪；Level-2 LSP 描述区域间（骨干）拓扑，在整个 Level-2 域内泛洪。B 把两者的范围说反了；C 错，跨区域转发由 Level-2 路由完成，不依赖静态路由；D 错，如果 Level-1 LSP 全域泛洪，区域边界和层级计算就失去意义。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "easy",
+    "tags": [
+      "IS-IS",
+      "LSP 泛洪",
+      "Level-1",
+      "Level-2"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-013",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；Level-1 路由器只了解本区域拓扑、Level-2 路由器掌握骨干拓扑，依据 RFC 1195 第 1.2 节（Overview of the ISO IS-IS Protocol）与第 3.1 节（Exchange of Routing Information）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "99c0794598d9a89321c12c718a66be03aa5180b0864e0e6b3c131235184d182e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-014",
+    "type": "single_choice",
+    "question": "一台同时属于 Level-1 和 Level-2 的 IS-IS 路由器，在数据库和路由计算方面的正确描述是？",
+    "options": {
+      "A": "只维护一份 LSDB，Level-1 和 Level-2 共用",
+      "B": "只运行一次 SPF，计算结果同时用于两个层级",
+      "C": "分别维护 Level-1 和 Level-2 的 LSDB，并分别运行 SPF 计算",
+      "D": "Level-2 的 LSDB 包含本区域内全部 Level-1 LSP"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Level-1 和 Level-2 是两个独立的层次，各自拥有 LSDB 并独立运行 SPF；Level-1/Level-2 路由器同时参与两个层次，因此维护两份数据库和两次计算。A、B 错，把两个层次混为一份数据库或一次计算不符合层次化设计；D 错，Level-1 LSP 不会进入 Level-2 LSDB，该路由器只是同时保存两类 LSP。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "LSDB",
+      "SPF",
+      "Level-1/2"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-014",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；Level-1/Level-2 路由器同时参与两个层次、各自维护数据库并独立计算，依据 RFC 1195 第 1.2 节（PDF 第 5-7 页两级层次结构）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "09f9ee3f93cec1872504d3395f0db54f3b6a8b894d1feae6115339ef10b5c475"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-015",
+    "type": "single_choice",
+    "question": "华为设备在 IS-IS 广播网上选举 DIS 时，下列规则正确的是？",
+    "options": {
+      "A": "优先级低者当选，优先级相同时 System ID 小者当选，且不抢占",
+      "B": "由最先启动的路由器永久担任 DIS",
+      "C": "优先级高者当选，但只有当前 DIS 失效后其他路由器才接管",
+      "D": "优先级高者当选，优先级相同时 System ID 大者当选，且 DIS 可被立即抢占"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "华为设备的 DIS 选举规则与 ISO 10589 一致：比较接口的 DIS 优先级，优先级高者当选；优先级相同时比较 System ID，较大者当选；IS-IS 的 DIS 是抢占式的，新加入的高优先级路由器会立即成为 DIS，原 DIS 让位。A 把优先级和 System ID 的比较方向都说反了，还误称不抢占；B 没有“最先启动永久担任”的规则；C 错，DIS 不需要等待原 DIS 失效即可被抢占。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "DIS",
+      "选举"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-015",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；广播网由 DIS 代表伪节点，作用与维护方式沿用 ISO 10589，依据 RFC 1195 第 4.3 节（LANs, Designated Routers, and Pseudonodes，PDF 第 31 页）；优先级高者当选、System ID 大者当选及可抢占的选举细则按 ISO 10589 定义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "f6d0122d12923f1f10ada39c6f220ff383a90841ab5179b04be0971620b6f411"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-016",
+    "type": "single_choice",
+    "question": "IS-IS 广播网上由 DIS 产生伪节点 LSP，其主要作用是？",
+    "options": {
+      "A": "代替各路由器通告本网段上的 IP 前缀",
+      "B": "代表整个广播网段参与 SPF，描述网段上的邻接关系，减少 LSP 数量和计算复杂度",
+      "C": "用于在网段内选举新的 DIS",
+      "D": "承载 Level-1 与 Level-2 之间的路由渗透信息"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "广播网被抽象为一个伪节点，由 DIS 产生伪节点 LSP，描述该网段与各路由器的邻接关系；这样每台路由器只需通告到伪节点的一条链路，避免两两全连接带来的 LSP 数量膨胀和 SPF 复杂度上升。A 错，按 RFC 1195 第 4.3 节，伪节点 LSP 不承载 IP 可达信息，各路由器在自己的 LSP 中通告接口前缀；C 错，DIS 选举由 Hello 报文完成；D 错，路由渗透由 Level-1/Level-2 路由器通过路由策略实现，与伪节点 LSP 无关。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "伪节点 LSP",
+      "DIS"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-016",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；伪节点抽象避免广播网 n 平方链路与重复通告，依据 RFC 1195 第 1.2 节（PDF 第 8 页）；伪节点 LSP 不携带 IP 可达字段而由各路由器自行通告前缀，依据第 4.3 节（PDF 第 31 页）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "1a6d818f388de559b35c0fe092545ea4dabdb1fa1045852456331f5db2391f69"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-017",
+    "type": "single_choice",
+    "question": "两台 IS-IS 路由器通过点到点链路直连，关于该链路的描述正确的是？",
+    "options": {
+      "A": "不需要选举 DIS，也不会产生伪节点 LSP",
+      "B": "仍要选举 DIS，并由 DIS 产生伪节点 LSP",
+      "C": "需要选举 DIS，但不产生伪节点 LSP",
+      "D": "不选举 DIS，但由链路两端共同产生一个伪节点 LSP"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "伪节点机制是为广播网设计的：点到点链路上只有两个邻接，直接在各路由器的 LSP 中描述即可，因此不需要选举 DIS，也不产生伪节点 LSP。B、C 错，DIS 只在广播网（以及 NBMA 等支持伪节点的网段）上选举；D 错，伪节点 LSP 只由 DIS 产生，点到点链路没有伪节点，更不会由两端共同产生。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "easy",
+    "tags": [
+      "IS-IS",
+      "点到点",
+      "DIS"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-017",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；伪节点与 DIS 仅用于广播/支持伪节点的网段，点到点链路上直接描述邻接，依据 RFC 1195 第 4.3 节（PDF 第 31 页）与第 5.1 节（点到点 Hello 类型，PDF 第 33 页）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "0c2c4f128859e0aacd37f7eace579a0970f6a2c744d0f71beee1af2bd4521710"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-018",
+    "type": "single_choice",
+    "question": "IS-IS 广播网上，DIS 周期性发送 CSNP 报文，其内容是？",
+    "options": {
+      "A": "本网段所有路由器的完整 LSP",
+      "B": "只有 LSP ID 列表，不含序列号和剩余寿命",
+      "C": "Hello 报文的邻居列表和 DIS 优先级",
+      "D": "LSDB 中 LSP 的摘要，包括 LSP ID、序列号、剩余寿命和校验和"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "CSNP 携带 LSDB 中 LSP 的摘要信息，包括 LSP ID、序列号、剩余寿命和校验和；接收方与本地数据库比较，发现缺失或过期时再用 PSNP 请求完整 LSP。A 错，完整 LSP 由 LSP 报文承载，CSNP 只有摘要；B 错，摘要必须包含序列号、剩余寿命和校验和才能判断新旧；C 错，邻居列表和优先级属于 Hello 报文的内容。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "CSNP",
+      "LSDB 同步"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-018",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；CSNP 携带数据库中全部 LSP 的最新序列号，用于周期性或链路初起时的数据库同步，依据 RFC 1195 第 5.1 节（Overview of IS-IS PDUs，PDF 第 33 页）；摘要含 LSP ID、序列号、剩余寿命、校验和的编码按 ISO 10589 定义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "9314aaacad21cb540e5fa944308bb5d4ffb1cb0632423adf696efa2cf5354d89"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-019",
+    "type": "single_choice",
+    "question": "IS-IS 中 PSNP 报文的主要用途是？",
+    "options": {
+      "A": "由 DIS 周期性发送，用于通告整个 LSDB 的摘要",
+      "B": "确认已收到的 LSP，并在发现缺失时请求邻居重发",
+      "C": "在广播网上选举 DIS",
+      "D": "携带完整的 LSP 内容进行泛洪"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "PSNP 是部分序列号报文，作用有两个：对收到的 LSP 进行确认，以及在发现本地缺少某条 LSP 时向邻居请求补发，是可靠泛洪的重要环节。A 错，周期性发送摘要的是 CSNP；C 错，DIS 选举通过 Hello 报文完成；D 错，完整 LSP 由 LSP PDU 承载，PSNP 只携带部分摘要。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "easy",
+    "tags": [
+      "IS-IS",
+      "PSNP",
+      "可靠泛洪"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-019",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；PSNP 列出部分 LSP 的最新序列号，兼具确认与请求作用，依据 RFC 1195 第 5.1 节（Overview of IS-IS PDUs，PDF 第 33 页）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "642e1afa8a504b11b32fba6bc06b817162c75db8f587149e870ebbed5f0f9b96"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-020",
+    "type": "single_choice",
+    "question": "IS-IS 路由器向邻居发送 LSP 后，如果在重传定时器到期时仍未收到该 LSP 的确认，会发生什么？",
+    "options": {
+      "A": "立即拆除邻接关系并重新建立",
+      "B": "认为该 LSP 已被邻居丢弃，不再重发",
+      "C": "重新向该邻居发送该 LSP",
+      "D": "把该 LSP 的序列号减 1 后重发"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "IS-IS 的 LSP 泛洪是可靠的：发送后等待邻居用 PSNP 确认，若重传定时器到期仍未收到确认，就重新向该邻居发送该 LSP，直到确认或邻接失效。A 错，单条 LSP 未确认不足以拆除邻接；B 错，不重发会造成邻居 LSDB 不一致；D 错，序列号只能递增，减小序列号会被邻居当作旧 LSP 丢弃，无法完成同步。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "LSP 重传",
+      "PSNP"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-020",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；SNP 承担类似确认的作用并可在缺失时请求补发，依据 RFC 1195 第 5.1 节（PDF 第 33 页）；LSP 重传定时器到期后向未确认邻居重发的流程按 ISO 10589 定义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "72d672ecaec38514b462bf3476ecbe5225caa789c39a1e865eefc0f86a25ad0a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-021",
+    "type": "single_choice",
+    "question": "广播网上 CSNP 的发送周期通常远小于 LSP 的刷新周期，这样设计的主要目的是？",
+    "options": {
+      "A": "及时发现并同步邻居之间 LSDB 的差异，加快收敛",
+      "B": "减少 Hello 报文的发送数量",
+      "C": "替代 LSP 刷新，降低 LSP 序列号的增长速度",
+      "D": "用于在邻居之间协商接口度量值"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "CSNP 只携带摘要，开销小，可以较频繁地发送。周期越短，路由器越能及时发现与邻居 LSDB 的差异并通过 PSNP 补齐，从而加快数据库同步和收敛。B 错，CSNP 与 Hello 是相互独立的报文，减少 CSNP 周期不会减少 Hello；C 错，CSNP 不能替代 LSP 刷新，LSP 仍需按刷新周期重新生成；D 错，接口度量通过 LSP 中的可达性 TLV 通告，不由 CSNP 协商。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "CSNP",
+      "收敛"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-021",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；CSNP 可用于周期性同步或链路初起时同步相邻路由器数据库，且仅含摘要、开销小，依据 RFC 1195 第 5.1 节（PDF 第 33 页）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "958f8720acd6d1b1c66b93c14996d81c4399933ddd16abd4bbde964fa9f41ab7"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-022",
+    "type": "single_choice",
+    "question": "IS-IS 的增量 SPF（I-SPF）与全量 SPF 的主要区别是？",
+    "options": {
+      "A": "I-SPF 每次仍然重算整棵最短路径树，只是不再计算前缀",
+      "B": "I-SPF 只计算 Level-1，全量 SPF 只计算 Level-2",
+      "C": "I-SPF 由 DIS 代替区域内所有路由器计算",
+      "D": "I-SPF 只重新计算受变化节点影响的部分，未受影响的分支保留原结果"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "全量 SPF 在拓扑变化后重建整棵最短路径树；I-SPF 只对变化节点及其影响到的分支重新计算，保留未受影响的子树，从而显著降低 CPU 开销。A 错，I-SPF 的核心就是不再重算整棵树；B 错，I-SPF 与全量 SPF 都可以用于 Level-1 或 Level-2，区别在计算范围而非层级；C 错，每台路由器独立计算 SPF，DIS 不代算。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS",
+      "I-SPF",
+      "快速收敛"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-022",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；SPF（Dijkstra）计算过程依据 RFC 1195 第 3.10 节（Order of Preference of Routes / Dijkstra Computation）与附录 C.1（SPF Algorithm for IP and Dual Use）；增量 SPF 只重算受影响分支属实现优化，未改变标准计算模型。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "729d2baffc8a9b8d9a776721f9d7ae6a4db44e205136289202a534e1e7c66361"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-023",
+    "type": "single_choice",
+    "question": "IS-IS 网络中拓扑没有变化，只是某台路由器新增或删除了一个 IP 前缀，通常采用哪种计算方式？",
+    "options": {
+      "A": "全量 SPF，重新构建整棵最短路径树",
+      "B": "部分路由计算（PRC），只更新受影响的前缀路由",
+      "C": "重新选举 DIS 后再计算",
+      "D": "等待 LSP 剩余寿命到期后重新计算"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "最短路径树未变化、仅前缀增减时，不需要重跑 SPF，只需执行部分路由计算（PRC），在已有的树上更新受影响的前缀路由。A 错，拓扑未变时全量 SPF 浪费 CPU；C 错，DIS 选举与路由计算无关；D 错，等待寿命到期会长时间不更新路由，导致流量中断。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "PRC",
+      "快速收敛"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-023",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；前缀可达信息与最短路径树分开处理、拓扑不变时只需更新前缀路由，依据 RFC 1195 附录 C.1（Dijkstra Calculation and Forwarding）与第 3.10 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "b621cc3efe0f203fde465efe4a62ce103460d3898f4fc05565430f741369760a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-024",
+    "type": "single_choice",
+    "question": "下列哪种变化会触发 IS-IS 运行全量 SPF，而不仅仅是 PRC？",
+    "options": {
+      "A": "接口上新增一个 IP 地址前缀",
+      "B": "路由策略修改了前缀的开销值",
+      "C": "邻居关系建立或断开，导致拓扑中的节点和链路发生变化",
+      "D": "LSP 的剩余寿命随时间递减"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "全量 SPF 针对拓扑变化：节点增减或链路状态改变会改变最短路径树的结构，必须重新计算。A 错，新增前缀不改变拓扑，通常由 PRC 处理；B 错，前缀属性变化同样不改变拓扑结构；D 错，剩余寿命递减是正常老化过程，不触发路由计算。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "SPF",
+      "拓扑变化"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-024",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；节点或链路变化需要重建最短路径树，依据 RFC 1195 第 3.10 节（Dijkstra Computation）与附录 C.1（SPF Algorithm for IP and Dual Use）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "f5584c5fe14f7af1bd5abec7633240b0548545a06327a7369e8a250b5712d703"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-025",
+    "type": "single_choice",
+    "question": "IS-IS 的 SPF 智能定时器（SPF 调度）通常如何工作？",
+    "options": {
+      "A": "首次拓扑变化后尽快计算，短时间内连续变化则合并计算并逐步延长间隔，兼顾收敛速度与 CPU 开销",
+      "B": "每次变化都固定等待 60 秒后统一计算",
+      "C": "只在 DIS 发送 CSNP 后才允许计算",
+      "D": "由管理员手工触发 SPF 计算"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "智能定时器采用快速响应加退避的策略：第一次变化后立即或很短时间内计算，若在短时间内又发生多次变化，则把变化合并，并按指数规律延长下一次计算的间隔，既保证首次收敛速度，又避免频繁 SPF 占满 CPU。B 错，固定长等待会严重拖慢收敛；C 错，SPF 由本地 LSDB 变化触发，不依赖 CSNP；D 错，SPF 由协议自动调度，不需要人工触发。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS",
+      "SPF 调度",
+      "智能定时器"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-025",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；SPF 计算在拓扑变化后运行，依据 RFC 1195 第 3.10 节与附录 C.1；首次快速计算、连续变化合并并逐步延长间隔的智能定时器属 ISO 10589/厂商实现机制，标准未规定具体退避参数。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "fba38184fc630ef6bf063a402de4ba1ee72818fcc77915bb299ce10604312e1f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-026",
+    "type": "single_choice",
+    "question": "把 IS-IS 接口的 Hello 发送间隔调小，对网络的主要影响是？",
+    "options": {
+      "A": "不增加任何开销，只会让 LSP 泛洪更快",
+      "B": "邻居失效检测更快，但 Hello 报文占用的带宽和设备处理开销增加",
+      "C": "直接减少 SPF 的计算次数",
+      "D": "会关闭该接口的 LSP 泛洪"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Hello 间隔决定邻居保活和故障检测的速度：间隔越小，邻居越快发现对端失效，但 Hello 报文发送更频繁，占用链路带宽并增加设备处理负担，因此需要权衡。A 错，报文更频繁必然带来额外开销；C 错，SPF 计算次数由拓扑变化次数决定，与 Hello 间隔无直接关系；D 错，Hello 间隔与 LSP 泛洪机制相互独立，不会关闭泛洪。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "easy",
+    "tags": [
+      "IS-IS",
+      "Hello",
+      "故障检测"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-026",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；Hello 报文用于初始化与维护邻接，依据 RFC 1195 第 5.1 节（Overview of IS-IS PDUs）与第 4.4 节（Maintaining Router Adjacencies）；Hello 间隔与保持时间的取值关系按 ISO 10589 定义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "6c21ef594ac532e4269ffd77bc0ac164d72769b55149591a401aec067aedd7db"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-027",
+    "type": "single_choice",
+    "question": "某 IS-IS 接口的 Hello 发送间隔为 3 秒，配置的 Hello 倍数（hold multiplier）为 3。邻居持续收不到 Hello 时，大约经过多久认为该邻接失效？",
+    "options": {
+      "A": "3 秒",
+      "B": "6 秒",
+      "C": "12 秒",
+      "D": "9 秒"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "邻居保持时间等于 Hello 发送间隔乘以 Hello 倍数：3 秒 × 3 = 9 秒，即连续 9 秒收不到 Hello 才认为邻接失效。A 只取了 Hello 间隔本身；B 按 2 倍计算；C 按 4 倍计算，三者都没有使用题干给出的倍数 3，计算错误。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "easy",
+    "tags": [
+      "IS-IS",
+      "Hello",
+      "保持时间",
+      "计算"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-027",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；邻接维护依赖周期性 Hello，依据 RFC 1195 第 4.4 节（Maintaining Router Adjacencies）与第 5.1 节；保持时间等于 Hello 发送间隔乘 Hello 倍数的计算规则按 ISO 10589 定义，3 秒 × 3 = 9 秒。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "b47f2528b2a815360a3a5cde8c95e9051a3248243888e2d613ac40461b070985"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-028",
+    "type": "single_choice",
+    "question": "IS-IS 与 BFD 联动后，BFD 检测到邻居转发路径故障时，IS-IS 的处理是？",
+    "options": {
+      "A": "继续等待 Hold Time 超时后才拆除邻接",
+      "B": "由 BFD 代替 IS-IS 计算路由",
+      "C": "立即收到 BFD 会话 Down 的通知，拆除邻接并触发 SPF 重新计算",
+      "D": "只记录日志，邻接状态保持不变"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "BFD 独立于路由协议，以毫秒级间隔检测转发路径；会话 Down 时立即通知 IS-IS，后者马上拆除对应邻接并触发 SPF，无需等待 Hold Time 超时，从而大幅缩短收敛时间。A 是未启用 BFD 时的慢检测路径；B 错，BFD 只负责检测，路由计算仍由 IS-IS 完成；D 错，只记录日志无法实现快速切换，与联动目的相反。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "BFD",
+      "快速收敛"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-028",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5880-bfd"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；BFD 独立于路由协议检测转发路径并向客户端提供会话 up/down 信号，依据 RFC 5880 第 2 节（Design，服务原语）与第 6.8.4 节（Calculating the Detection Time）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "792836af551ee0e83517fecc473ec697c8aff0eb319de7bc96d15ccb739350e8"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-029",
+    "type": "single_choice",
+    "question": "IS-IS 网络中链路故障后，从故障发生到转发恢复，典型的处理顺序是？",
+    "options": {
+      "A": "检测到邻接故障 → 更新并泛洪 LSP、同步 LSDB → 运行 SPF → 更新路由表并下发转发表",
+      "B": "先下发转发表 → 再运行 SPF → 最后泛洪 LSP",
+      "C": "先选举 DIS → 再运行 SPF → 最后检测故障",
+      "D": "先刷新所有 LSP 的剩余寿命 → 再检测故障 → 最后运行 SPF"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IS-IS 收敛遵循“检测—泛洪—计算—下发”的顺序：先通过 Hello 或 BFD 检测邻接故障，再更新本机 LSP 并泛洪、同步各路由器 LSDB，然后运行 SPF 得到新拓扑，最后更新路由表并把结果下发到转发表。B 顺序颠倒，转发表必须依赖 SPF 结果；C 中 DIS 选举只发生在广播网，且不可能在故障检测之前；D 刷新寿命是周期性维护行为，不是故障收敛步骤。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "收敛",
+      "SPF"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-029",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis",
+        "rfc5880-bfd"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；故障检测可由 BFD 或 Hello 完成（RFC 5880 第 3 节 Protocol Overview），检测后先泛洪 LSP 并同步 LSDB（RFC 1195 第 5.1 节），再运行 SPF（RFC 1195 第 3.10 节与附录 C.1），最后更新路由与转发表。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "1450c5b8e8a4db7a366c6fd41f7dea0f97ad5423ae35653ef9507fee697d6225"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-030",
+    "type": "single_choice",
+    "question": "IS-IS 的 LSP 生成定时器的主要作用是？",
+    "options": {
+      "A": "决定 LSP 的剩余寿命最大值",
+      "B": "限制本机生成 LSP 的频率，把短时间内的多次变化合并，避免频繁泛洪",
+      "C": "控制 CSNP 的发送周期",
+      "D": "决定 DIS 的选举间隔"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "LSP 生成定时器控制本机把拓扑或前缀变化转换为新 LSP 的最小间隔，短时间内的多次变化会被合并成一次生成，避免 LSP 频繁泛洪和序列号快速消耗。A 错，剩余寿命最大值由 LSP 最大寿命参数决定；C 错，CSNP 周期由单独的 CSNP 定时器控制；D 错，DIS 选举由 Hello 报文触发，没有固定选举间隔。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "LSP 生成",
+      "定时器"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-030",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；变化时按需重新生成 LSP 与分片，依据 RFC 1195 第 3.6 节（Multiple LSPs and SNPs，变化时只重发受影响的分片）；生成定时器限制 LSP 生成频率的机制按 ISO 10589 定义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "814636c09e44afc70c16d75656f49d38fde5c4bb9b83359e2ed8ff1a009fff43"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-031",
+    "type": "single_choice",
+    "question": "一条 LSP 在多台路由器的 LSDB 之间逐跳泛洪时，其剩余寿命字段如何变化？",
+    "options": {
+      "A": "始终保持产生时的最大值",
+      "B": "每经过一跳就固定加 1",
+      "C": "由接收路由器重置为本地配置的最大值",
+      "D": "按 LSP 在本地的驻留时间递减，转发时携带递减后的值"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "LSP 的剩余寿命表示从产生到过期还剩多少时间，泛洪过程中每台路由器按报文在本地的驻留时间递减该值，转发时携带更新后的寿命，因此越往后的路由器看到的寿命越小。A 错，寿命不会保持不变；B 错，寿命是递减而不是递增，也没有“每跳加 1”的规则；C 错，只有产生该 LSP 的路由器刷新时才能重置寿命，中间路由器不能重置。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "LSP",
+      "剩余寿命"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-031",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；LSP 泛洪与数据库同步依据 RFC 1195 第 5.1 节（Overview of IS-IS PDUs）；剩余寿命在驻留与转发过程中递减的规则按 ISO 10589 定义（RFC 1195 未重复定义该字段）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "2bea4fb0affe61a7405f751500a5e07464ddef010872cc12c5c044b4d7144509"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-032",
+    "type": "single_choice",
+    "question": "在 Level-1/Level-2 路由器上配置 Level-2 到 Level-1 的路由渗透（Route Leaking），主要目的是？",
+    "options": {
+      "A": "让 Level-1 路由器了解区域外的具体路由，从而选择更优的出口，而不是一律走最近的已附加路由器",
+      "B": "把 Level-1 路由引入 Level-2，减少 Level-2 的路由数量",
+      "C": "阻止 Level-1 路由器产生指向区域外的默认路由",
+      "D": "用 Level-2 LSP 替换区域内所有 Level-1 LSP"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "默认情况下 Level-1 路由器只有一条指向最近已附加 Level-2 路由器的默认路由，可能不是最优出口。Level-2 到 Level-1 的路由渗透把区域外的具体路由引入 Level-1，使 Level-1 路由器可以按明细路由选择更优出口。B 方向相反，且渗透不是为了减少路由；C 错，渗透提供明细路由，并不阻止默认路由；D 错，Level-1 LSP 不会被 Level-2 LSP 替换。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS",
+      "路由渗透",
+      "Route Leaking"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-032",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；Level-1 路由器在区域内可选路由中优先选择到 attached Level-2 路由器的路径，依据 RFC 1195 第 3.10 节（Order of Preference of Routes，PDF 第 28-30 页）与第 1.2 节（attached 说明）；L2→L1 渗透的配置实现属华为设备特性。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "ced0417a6ddadb4a13ecd75d076670f60a92de12b8b5ff9fd1b6c13d1aadd79e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-033",
+    "type": "single_choice",
+    "question": "在华为设备上实现 Level-2 到 Level-1 的路由渗透，通常需要哪些配置？",
+    "options": {
+      "A": "只需把接口的 IS-IS 级别改为 Level-1",
+      "B": "只需在 Level-1 路由器上配置静态路由",
+      "C": "在 Level-1/Level-2 路由器上通过路由策略匹配需要渗透的路由，并在 Level-1 中引入 Level-2 路由",
+      "D": "关闭 ATT 位并重启所有 Level-2 进程"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "华为设备通过 import-route isis level-2 into level-1 把 Level-2 路由引入 Level-1，并配合路由策略（如 filter-policy 或 route-policy）筛选需要渗透的路由，避免把全部明细路由灌入 Level-1。A 错，修改接口级别会破坏原有邻接关系，不能实现渗透；B 错，静态路由不属于 IS-IS 路由渗透；D 错，关闭 ATT 位只会让 Level-1 失去默认路由，不能引入区域外明细路由。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS",
+      "路由渗透",
+      "配置"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-033",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 IS-IS 高级特性；路由优先顺序与到 attached Level-2 路由器的选择依据 RFC 1195 第 3.10 节；import-route isis level-2 into level-1 与路由策略筛选的命令语义属华为 VRP 实现。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "c4a46c7fc133d80f8871976b255e9ac05a98d959c1376fe1d4481703a0b5c430"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-020",
+    "type": "single_choice",
+    "question": "OSPF GR（Graceful Restart）主要解决什么问题？",
+    "options": {
+      "A": "在 OSPF 区域内消除 LSA 泛洪，改用静态路由",
+      "B": "设备控制面重启（如升级、主备倒换）期间保持邻居关系和转发路径，避免流量中断",
+      "C": "把 OSPF 路由自动转换为 BGP 路由",
+      "D": "在邻居之间压缩 Hello 报文以节省带宽"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "OSPF GR 的目标是在控制面重启期间由邻居继续按原有拓扑转发，重启完成后平滑恢复，避免邻接拆除和路由撤销造成流量中断。A 错，GR 不改变路由来源，也不消除 LSA 泛洪；C 错，GR 与协议间的路由转换无关；D 错，GR 不涉及 Hello 报文压缩，Hello 仍按原机制发送。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "GR",
+      "可靠性"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-020",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc3623-ospf-gr"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 OSPF 高级特性（OSPF 其他特性）；GR 使 OSPF 软件重启期间仍留在转发路径并平滑恢复，依据 RFC 3623 第 1 节（Overview）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "26c6d5543a62756a5f07246e42ec0359ef647e3a792552ee83185fafd89540d2"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-021",
+    "type": "single_choice",
+    "question": "OSPF GR 中，重启路由器如何通知邻居自己即将进行平滑重启？",
+    "options": {
+      "A": "向邻居发送 Hello 报文并把 Router Priority 置 0",
+      "B": "向邻居发送 Type 5 LSA，并在其中携带重启标志",
+      "C": "通过 BFD 会话发送 GR 请求",
+      "D": "为每个 OSPF 接口产生一个 Grace-LSA（链路本地范围的 Opaque-LSA）并泛洪"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "RFC 3623 规定重启路由器为每个 OSPF 接口各产生一个 Grace-LSA，它是链路本地范围的 Opaque-LSA，其中携带 grace period 和重启原因，邻居收到后据此决定是否进入 Helper 模式。A 错，Router Priority 置 0 只影响 DR 选举，不携带 GR 信令；B 错，Type 5 是自治系统外部 LSA，与 GR 通知无关；C 错，BFD 只做转发路径检测，不承载 GR 请求。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "GR",
+      "Grace-LSA"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-021",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc3623-ospf-gr"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 OSPF 高级特性；重启路由器为每个 OSPF 接口各产生一个链路本地范围 Opaque-LSA（Grace-LSA）以宣告 grace period，依据 RFC 3623 第 2.1 节（Entering Graceful Restart）与附录 A（Grace-LSA Format）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "929c0bafbd0cb6ce465c0270a89ab7f2bdf12b1563e41dcc0b65771897b0a083"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-022",
+    "type": "single_choice",
+    "question": "OSPF 邻居要进入 Helper 模式协助重启路由器，下列哪一项不是必要条件？",
+    "options": {
+      "A": "Helper 邻居自身必须支持并启用 NSR",
+      "B": "重启路由器的拓扑没有发生实质变化",
+      "C": "本地策略允许为该邻居充当 Helper",
+      "D": "Grace-LSA 中的 grace period 尚未过期"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "RFC 3623 第 3.1 节列出的进入条件包括：自重启以来没有影响拓扑的 LSA 变化、grace period 未过期、本地策略允许充当 Helper 等。NSR 是本机主备控制面倒换特性，与是否替邻居做 Helper 无关，因此 A 不是必要条件。B、C、D 分别对应拓扑稳定、本地策略和 grace period 三个真实条件。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "GR",
+      "Helper"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-022",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc3623-ospf-gr"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 OSPF 高级特性；进入 Helper 模式的五项检查（邻居 Full、LSDB 无实质变化、grace period 未过期、本地策略允许、本机不在 GR 中），依据 RFC 3623 第 3.1 节（Entering Helper Mode）；NSR 不属于该条件集合。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "7cc50a5bfc68bc0075c14031aa8b3c00b7c8b75c2a174af71907ad5b4d8eecf6"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-023",
+    "type": "single_choice",
+    "question": "OSPF Helper 邻居在下列哪种事件发生后仍可以继续处于 Helper 模式？",
+    "options": {
+      "A": "收到重启路由器撤销的 Router LSA，拓扑发生变化",
+      "B": "Grace-LSA 中的 grace period 到期",
+      "C": "收到重启路由器在另一个接口产生的新 Grace-LSA，且本地策略允许",
+      "D": "重启路由器产生的 Grace-LSA 被提前 flush"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "RFC 3623 允许 Helper 接收重启路由器后续产生的新 Grace-LSA，并按新的 grace period 更新协助状态，因此 C 不会导致退出。A 属于拓扑实质变化，Helper 必须退出并按真实状态重新通告；B grace period 到期是明确的退出条件；D Grace-LSA 被 flush 同样会使 Helper 退出。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "GR",
+      "Helper"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-023",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc3623-ospf-gr"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 OSPF 高级特性；RFC 3623 第 3.1 节（Entering Helper Mode）规定“若已在该网段协助该路由器，则接受新的 Grace-LSA 并更新 grace period”属进入条件之例外，故新 Grace-LSA 不会使 Helper 退出；退出条件见第 3.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "fbb72185d15c4fcbe6cdcfa303b140c5beeed4863b8734cebf67dba7c6c8867b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-024",
+    "type": "single_choice",
+    "question": "RFC 3623 建议 Grace-LSA 请求的 grace period 不应超过 LSRefreshTime（1800 秒）。主要原因是？",
+    "options": {
+      "A": "超过 1800 秒后 Grace-LSA 会变成 Type 5 LSA",
+      "B": "grace period 过长会使区域内其他 LSA 因老化被刷新或删除，导致 GR 期间拓扑信息不一致而提前退出",
+      "C": "超过 1800 秒后 BFD 会话会自动断开",
+      "D": "grace period 只影响 Hello 报文，与 LSA 老化无关"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Grace-LSA 只能让邻居在有限时间内继续按旧拓扑转发，而区域内其他 LSA 仍按 LSRefreshTime 老化刷新。若 grace period 超过 1800 秒，LSA 会先于 grace period 到期而刷新或删除，Helper 检测到 LSDB 变化后就会退出 GR，因此 grace period 应受 LSRefreshTime 约束。A 错，LSA 类型不会因为时间而改变；C 错，BFD 与 grace period 没有这种联动；D 错，grace period 的作用正是控制 LSA 保持有效的窗口。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "GR",
+      "grace period"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-024",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc3623-ospf-gr"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 OSPF 高级特性；RFC 3623 第 2.1 节（Entering Graceful Restart）指出为避免重启路由器的 LSA 老化失效，grace period 不应超过 LSRefreshTime（1800 秒）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "2161240e2625841de09008469492702055226123ea8a28f22a9ea463bf6dc8ce"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-025",
+    "type": "single_choice",
+    "question": "OSPF 重启路由器完成重启并重新建立邻接后，正确的收尾行为是？",
+    "options": {
+      "A": "正常泛洪自己产生的 LSA，并 flush 之前产生的 Grace-LSA，邻居退出 Helper 模式",
+      "B": "继续保留 Grace-LSA，直到 grace period 自然到期",
+      "C": "向所有邻居发送最大度量值的 Router LSA 并永久保持",
+      "D": "要求邻居清除 LSDB 后重新同步"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "重启完成后，重启路由器恢复正常 LSA 泛洪，并按 RFC 3623 的要求 flush 自己产生的 Grace-LSA，邻居收到后退出 Helper 模式，恢复到常规邻接维护。B 错，保留 Grace-LSA 会让邻居继续按旧状态协助，已无必要；C 错，最大度量用于维护场景（Stub 路由器），不是 GR 的收尾动作；D 错，清空 LSDB 会造成大范围震荡，GR 本身正是要避免这种情况。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "GR",
+      "Grace-LSA"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-025",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc3623-ospf-gr"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 OSPF 高级特性；退出 GR 时应重新产生 Router-LSA、重跑路由计算并 flush 自己产生的 Grace-LSA，依据 RFC 3623 第 2.3 节（Actions on Exiting Graceful Restart）第 6 条，以及第 3.2 节（Grace-LSA 被 flush 时 Helper 退出）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "b271157f138ec2952ab27d0762f97d32f55ecc618f55a10298353e297b3d98d2"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-026",
+    "type": "single_choice",
+    "question": "关于 OSPF GR 的能力边界，下列说法正确的是？",
+    "options": {
+      "A": "只要启用 GR，任何硬件故障都不会导致流量中断",
+      "B": "GR 可以保证拓扑变化期间转发路径完全不受影响",
+      "C": "GR 可以让邻居在 grace period 内永远不超时",
+      "D": "GR 只能应对控制面重启且拓扑未变的情况；转发面故障或拓扑实质变化时仍会中断并回退普通重启"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "GR 的前提是控制面重启期间转发面继续工作，并且网络拓扑没有发生实质变化。如果转发面或链路本身故障，或者 Helper 检测到拓扑变化，GR 无法维持旧路径，会回退到普通重启流程，流量仍可能中断。A 夸大了 GR 的保护范围；B 错，拓扑变化时 Helper 会退出；C 错，grace period 到期后 Helper 必然退出，不会永远保持。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "GR",
+      "能力边界"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-026",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc3623-ospf-gr"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 OSPF 高级特性；GR 的前提是拓扑稳定且转发面在重启期间可用，检测到拓扑变化或邻居不协作时自动回退普通重启，依据 RFC 3623 第 1 节（Overview）与第 2.2 节（When to Exit Graceful Restart）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "182e59b63c4eb42d9fb708923a744116745b338347848ef63e8227221c8e8f6d"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-027",
+    "type": "single_choice",
+    "question": "RFC 3623 指出 Helper 关系是 per network segment（按网段维护）的，这意味着什么？",
+    "options": {
+      "A": "一台路由器只能为一个邻居充当 Helper",
+      "B": "Helper 状态在整个 OSPF 区域内全局生效",
+      "C": "同一台 Helper 路由器针对不同网段上的邻接分别维护 Helper 状态，各网段独立判断进入或退出",
+      "D": "只有广播网段上的邻居才能充当 Helper"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Helper 关系按网段（每个邻接）独立维护：同一台路由器可以同时为多个邻居、多个网段充当 Helper，某个网段上的 Grace-LSA 被 flush 或拓扑变化，只影响该网段的 Helper 状态。A 错，可以同时为多个邻居做 Helper；B 错，Helper 状态不是区域级全局状态；D 错，点到点等网段同样可以有 Helper。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "GR",
+      "Helper"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-027",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc3623-ospf-gr"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 OSPF 高级特性；“The helper relationship is per network segment”见 RFC 3623 第 3 节（Operation of Helper Neighbor）首段；同一路由器可同时为多个重启邻居充当 Helper 的说明见第 3.1 节末段。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "6ad12cb4fd7b726e86b67507ab32757e5d906a38f55005fbadda8ee297cd4ae9"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-028",
+    "type": "single_choice",
+    "question": "OSPF NSR（Non-Stop Routing）的实现原理是？",
+    "options": {
+      "A": "邻居检测到主备倒换后重新建立邻接",
+      "B": "主用和备用控制面之间同步 OSPF 邻居与路由信息，倒换时由备用控制面接管，邻居无感知",
+      "C": "通过 Grace-LSA 请求邻居协助",
+      "D": "把 OSPF 进程重启时间缩短到 1 秒以内"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "NSR 在本机内部完成控制面冗余：备用控制面持续同步邻居状态、LSDB 和路由信息，主用控制面故障时由备用控制面接管，转发不中断，邻居设备完全感知不到倒换。A 错，NSR 的目的正是避免邻居重建邻接；C 错，Grace-LSA 是 GR 请求邻居协助的机制；D 错，NSR 不依赖把进程重启时间压缩到极短。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "NSR",
+      "主备倒换"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-028",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc3623-ospf-gr"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 OSPF 高级特性；NSR 属设备内部控制面冗余实现（RFC 3623 未定义），本题目以 RFC 3623 第 1 节（控制面与转发面分离）与第 3 节（GR 需邻居充当 Helper）对照说明 NSR 不依赖邻居配合。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "16d2eed515c58954ce8d4ea5d71a9210c271f41dc3a7539224a90dc2807b9c3a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-029",
+    "type": "single_choice",
+    "question": "下列哪种场景更适合使用 NSR 而不是 GR？",
+    "options": {
+      "A": "需要邻居在设备重启期间继续把本机通告为 Full 邻接",
+      "B": "需要跨设备升级软件版本并保留转发",
+      "C": "希望通过 Grace-LSA 延长邻居的保持时间",
+      "D": "主控板主备倒换，且邻居设备不支持 GR，要求倒换过程对邻居完全透明"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "NSR 不依赖邻居配合，适合邻居不支持 GR 或希望倒换对邻居完全透明的场景，例如单机主控板主备倒换。A 描述的是 GR 中 Helper 邻居的行为；B 设备升级重启通常使用 GR，由邻居临时协助；C Grace-LSA 是 GR 的信令，属于 GR 场景。D 正确。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "NSR",
+      "GR",
+      "适用场景"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-029",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc3623-ospf-gr"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 OSPF 高级特性；GR 依赖邻居进入 Helper 模式（RFC 3623 第 3.1 节），邻居不支持 GR 时按第 4 节（Backward Compatibility）回退普通重启，因此该场景应选不依赖邻居的 NSR。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "01ea0925661c753c81c1fde295b65d18fb94cf4d6b369f0fb0b6618fd6e708ec"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-030",
+    "type": "single_choice",
+    "question": "关于 OSPF NSR 的局限性，下列说法正确的是？",
+    "options": {
+      "A": "NSR 需要备用控制面并持续同步状态，但不能避免链路或转发面硬件故障造成的中断",
+      "B": "NSR 可以让所有硬件故障都不影响转发",
+      "C": "NSR 必须要求邻居支持 Grace-LSA",
+      "D": "NSR 会删除并重建所有 OSPF 邻居"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "NSR 解决的是控制面倒换问题，需要设备具备备用控制面并持续同步邻居、LSDB 和路由信息；它不保护链路故障、单板故障或转发面硬件故障，这些场景仍会中断。B 夸大了 NSR 的能力；C 错，NSR 不依赖邻居配合；D 错，NSR 的目标正是邻居不重建。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "NSR",
+      "局限性"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-030",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc3623-ospf-gr"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 OSPF 高级特性；RFC 3623 第 1 节仅保证控制面重启期间沿用既有转发表，链路或转发面故障不在保护范围；NSR 需要备用控制面同步状态、同样不覆盖转发面故障，属设备实现约束。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "e180e97a82b85b9dcb4022cac14dee2009719e55ce041abf5c1df2da0e2ef284"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-031",
+    "type": "single_choice",
+    "question": "BFD 异步模式建立会话时，状态机的典型迁移过程是？",
+    "options": {
+      "A": "Down → Up → Init → Up",
+      "B": "Init → Down → Up",
+      "C": "Down → Init → Up，双方都收到对端 Up 报文后会话才进入 Up",
+      "D": "Down → Up，无需中间状态"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "BFD 状态机采用三次握手：本端处于 Down 时收到对端报文进入 Init，收到对端 Init 或 Up 后进入 Up；只有双方都确认对方可达，会话才稳定在 Up。A 顺序错误且出现了两次 Up；B 不能从 Init 回到 Down 再直接进入 Up；D 缺少 Init 中间状态，无法完成双向确认。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "medium",
+    "tags": [
+      "BFD",
+      "状态机",
+      "三次握手"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-031",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5880-bfd"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 OSPF 高级特性；BFD 状态机与三次握手依据 RFC 5880 第 2 节（Design）与第 6.2 节（BFD State Machine）；Down→Init→Up 的具体迁移规则见第 6.8.6 节（Reception of BFD Control Packets）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "9b744e35640f2767d1b31b474a5be474c7903fb99e3153647151a7d6462699f8"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-032",
+    "type": "single_choice",
+    "question": "BFD 异步模式下，协商后的发送间隔为 300 毫秒，Detect Mult 为 3，检测时间约为多少？",
+    "options": {
+      "A": "100 毫秒",
+      "B": "900 毫秒",
+      "C": "1200 毫秒",
+      "D": "300 毫秒"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "检测时间等于协商后的发送间隔乘以 Detect Mult：300 毫秒 × 3 = 900 毫秒。A 把 300 除以 3，计算方向错误；C 相当于又额外加了一个发送间隔，多算了 300 毫秒；D 只取了发送间隔，漏乘 Detect Mult。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "easy",
+    "tags": [
+      "BFD",
+      "检测时间",
+      "计算"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-032",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5880-bfd"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 OSPF 高级特性；异步模式检测时间等于协商后的发送间隔乘 Detect Mult，依据 RFC 5880 第 6.8.4 节（Calculating the Detection Time）与第 4.1 节（Detect Mult 字段定义），300 毫秒 × 3 = 900 毫秒。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "a1e8fd07172956f50f91ded9db0c2e636c31ad9c959051486564c237dc86fc70"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-033",
+    "type": "single_choice",
+    "question": "BFD 回声（Echo）功能的特点是？",
+    "options": {
+      "A": "由对端周期发送 Echo 报文，本端只负责回应",
+      "B": "Echo 报文使用 TCP 封装，需要先建立会话连接",
+      "C": "Echo 功能只能用于多跳 BFD 会话",
+      "D": "本端发送 Echo 报文，对端按正常转发路径将其环回，本端据此判断路径是否可用"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Echo 功能中，本端周期发送 Echo 报文，对端按正常转发路径把报文环回，本端通过是否收到环回报文判断路径可用性；这种方式主要测试本端到对端的转发路径，对端无需参与 BFD 状态机。A 方向相反；B 错，BFD 使用 UDP 封装，不建立 TCP 连接；C 错，Echo 主要用于单跳直连场景。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "medium",
+    "tags": [
+      "BFD",
+      "Echo",
+      "故障检测"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-033",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5880-bfd"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 OSPF 高级特性；Echo 功能由本端发送 Echo 报文、对端经其转发路径环回，依据 RFC 5880 第 3.2 节（Operating Modes，Echo function 段）与第 6.4 节（The Echo Function and Asymmetry）；Echo 报文格式见第 5 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "80c1199f70d4889e77f0dbd5ed826afb3fc50aa921a1a9351f15f6c99f615811"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-034",
+    "type": "single_choice",
+    "question": "在华为设备上，于 OSPF 进程视图执行 bfd all-interfaces enable 后，其含义是？",
+    "options": {
+      "A": "该 OSPF 进程下所有接口默认建立 BFD 会话，仍可在个别接口下关闭",
+      "B": "只为 Loopback 接口建立 BFD 会话",
+      "C": "立即删除所有 OSPF 邻居并重新建立",
+      "D": "把 BFD 报文封装进 OSPF Hello 报文"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "该命令是进程级的 BFD 使能：进程内所有参与 OSPF 的接口默认建立 BFD 会话，若某个接口不需要，可在接口视图下单独关闭，体现“进程级默认、接口级覆盖”的配置语义。B 错，与接口类型无关，Loopback 不是 BFD 检测对象；C 错，使能 BFD 不会拆除邻居；D 错，BFD 是独立协议，报文不会封装进 Hello。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "BFD",
+      "配置"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-034",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5880-bfd"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 OSPF 高级特性；BFD 会话由应用按需请求建立（如 OSPF 发现邻居后请求），依据 RFC 5880 第 3.1 节（Addressing and Session Establishment）；进程级默认开启、接口级可覆盖的命令语义属华为 VRP 实现。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "2924220407944610dabf06dab8351a7c30490170f223958699af2decd4aba48b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-035",
+    "type": "single_choice",
+    "question": "华为设备上把 OSPF 路由器配置为 Stub 路由器（通告最大度量值）后，效果是？",
+    "options": {
+      "A": "该路由器停止产生 Router LSA",
+      "B": "该路由器的所有直连网段变为不可达",
+      "C": "其他路由器在 SPF 中不把该设备作为转接节点，但它的直连网段仍然可达",
+      "D": "该路由器被强制降为 DR/BDR 以外的角色"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Stub 路由器把 Router LSA 中链路度量通告为最大值（65535），使其他路由器计算最短路径树时不把该设备作为中转节点，从而在维护期间避免流量穿越；但该设备仍产生 Router LSA，直连网段仍被通告、仍然可达。A 错，Router LSA 仍然产生；B 错，直连网段并未撤销；D 错，该特性与 DR/BDR 选举无关。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Stub 路由器",
+      "最大度量"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-035",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 OSPF 高级特性；Router-LSA 的 Metric 为 16 位字段，依据 RFC 2328 第 12.4.1 节（Router-LSA 格式）；通告最大度量（65535）使设备退出转接路径的做法属厂商 Stub Router 实现（RFC 3137 思路），本题目仅按其行为设问。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "ff4dc70db4a29b46156bb32bc517d8dc57149c0ddd5f6ddd806f97861beebc3d"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-036",
+    "type": "single_choice",
+    "question": "OSPF Grace-LSA 中 Grace Period 与 Restart Reason 字段的作用分别是？",
+    "options": {
+      "A": "Grace Period 用于选举 DR，Restart Reason 用于计算接口开销",
+      "B": "Grace Period 告知邻居在多长时间内保持协助，Restart Reason 说明本次重启的原因",
+      "C": "Grace Period 表示 LSA 的剩余寿命，Restart Reason 表示 LSA 类型",
+      "D": "两个字段都只用于 BFD 会话协商"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Grace-LSA 是链路本地范围的 Opaque-LSA，其 TLV 中 Grace Period 告诉邻居应在多长时间内继续按旧拓扑协助转发，Restart Reason 用于说明本次重启的原因（如软件重启、升级等）。A 错，两个字段与 DR 选举和接口开销无关；C 错，剩余寿命是 LSA 固定头字段，Restart Reason 也不是 LSA 类型；D 错，BFD 不读取 Grace-LSA，二者相互独立。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "GR",
+      "Grace-LSA"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-036",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc3623-ospf-gr"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性之 OSPF 高级特性；Grace-LSA 的 TLV 定义见 RFC 3623 附录 A（Grace-LSA Format）：Grace Period TLV（Type=1）与 Graceful restart reason TLV（Type=2），重启原因取值 0 未知、1 软件重启、2 软件重载/升级、3 切换至冗余主控；LSA 类型与范围另见第 2.1 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "f60f5bbca64d08662d2dccb430e4c1ff40a0a43299b88b656faf549baec6e1b7"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  }
+]

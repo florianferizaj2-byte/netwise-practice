@@ -71,6 +71,8 @@ test("manifest catalog discovers the certificate tracks and keeps sources explic
       "veterinary-practitioner",
       "sichuan-upgrading-computer",
       "ncre-l2-c-programming",
+      "hcip-datacom-core",
+      "hcip-datacom-advanced",
     ],
   );
   assert.deepEqual(
@@ -104,8 +106,30 @@ test("manifest catalog discovers the certificate tracks and keeps sources explic
     banksForCertificate("ncre-l2-c-programming").map((item) => item.source),
     ["ncre_l2_c_practice"],
   );
+  assert.deepEqual(
+    banksForCertificate("hcip-datacom-core").map((item) => item.source),
+    ["hcip_core_practice"],
+  );
+  assert.deepEqual(
+    banksForCertificate("hcip-datacom-advanced").map((item) => item.source),
+    ["hcip_advanced_practice"],
+  );
   const practice = bundledQuestions().find((q) => q.id === "practice-1");
   assert.deepEqual(practice.certificates, ["network-engineer"]);
+  const hcipCore = bundledQuestions().filter((q) =>
+    hasCertificateQuestion(q, "hcip-datacom-core"),
+  );
+  const hcipAdvanced = bundledQuestions().filter((q) =>
+    hasCertificateQuestion(q, "hcip-datacom-advanced"),
+  );
+  assert.equal(hcipCore.length, 670);
+  assert.equal(new Set(hcipCore.map((q) => q.chapter)).size, 13);
+  assert.ok(hcipCore.every((q) => q.type === "single_choice"));
+  assert.ok(hcipCore.every((q) => q.provenance?.reviewDigest));
+  assert.equal(hcipAdvanced.length, 320);
+  assert.equal(new Set(hcipAdvanced.map((q) => q.chapter)).size, 8);
+  assert.ok(hcipAdvanced.every((q) => q.type === "single_choice"));
+  assert.ok(hcipAdvanced.every((q) => q.provenance?.reviewDigest));
   const hcia = bundledQuestions().filter((q) =>
     hasCertificateQuestion(q, "hcia-datacom"),
   );

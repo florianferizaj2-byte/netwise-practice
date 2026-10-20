@@ -599,6 +599,224 @@
           ]
         }
       ]
+    },
+    {
+      "id": "hcip-datacom-core",
+      "name": "HCIP-Datacom 核心",
+      "chapters": [
+        {
+          "id": "routing-basics",
+          "title": "路由基础",
+          "kind": "routing",
+          "topics": [
+            "网络设备框架",
+            "报文处理流程",
+            "路由表与最长匹配"
+          ]
+        },
+        {
+          "id": "ospf-core",
+          "title": "OSPF 核心知识",
+          "kind": "ospf",
+          "topics": [
+            "邻居状态机",
+            "基本配置与网络类型",
+            "区域内路由计算"
+          ]
+        },
+        {
+          "id": "isis-core",
+          "title": "IS-IS 核心知识",
+          "kind": "routing",
+          "topics": [
+            "基本概念与 NET",
+            "工作原理与分层",
+            "基本配置"
+          ]
+        },
+        {
+          "id": "bgp-core",
+          "title": "BGP 核心知识",
+          "kind": "routing",
+          "topics": [
+            "BGP 概述与邻居关系",
+            "BGP 报文与状态机",
+            "路径属性"
+          ]
+        },
+        {
+          "id": "routing-control",
+          "title": "路由和流量控制",
+          "kind": "routing",
+          "topics": [
+            "路由控制工具",
+            "路由策略应用",
+            "策略路由"
+          ]
+        },
+        {
+          "id": "switching-basics",
+          "title": "交换技术基础",
+          "kind": "switch",
+          "topics": [
+            "RSTP",
+            "MSTP",
+            "交换机堆叠与集群"
+          ]
+        },
+        {
+          "id": "multicast-basics",
+          "title": "组播基础",
+          "kind": "network",
+          "topics": [
+            "组播地址与转发",
+            "IGMP 工作原理",
+            "PIM-DM"
+          ]
+        },
+        {
+          "id": "ipv6-core",
+          "title": "IPv6 核心知识",
+          "kind": "ipv6",
+          "topics": [
+            "IPv6 地址与报文",
+            "邻居发现",
+            "地址配置方式"
+          ]
+        },
+        {
+          "id": "network-security",
+          "title": "网络安全基础",
+          "kind": "security",
+          "topics": [
+            "安全区域与策略",
+            "设备安全特性",
+            "VPN 技术概述"
+          ]
+        },
+        {
+          "id": "reliability",
+          "title": "网络可靠性",
+          "kind": "aggregation",
+          "topics": [
+            "BFD 原理与配置",
+            "VRRP 原理与配置"
+          ]
+        },
+        {
+          "id": "services-management",
+          "title": "网络服务与管理",
+          "kind": "management",
+          "topics": [
+            "DHCP 原理与配置",
+            "网络管理协议"
+          ]
+        },
+        {
+          "id": "wlan-architecture",
+          "title": "大型 WLAN 组网架构",
+          "kind": "wlan-network",
+          "topics": [
+            "组网架构与 CAPWAP",
+            "漫游与高可靠",
+            "VLAN Pool 与准入"
+          ]
+        },
+        {
+          "id": "solutions",
+          "title": "网络解决方案",
+          "kind": "design",
+          "topics": [
+            "园区网",
+            "数据中心与 VXLAN",
+            "SD-WAN"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hcip-datacom-advanced",
+      "name": "HCIP-Datacom 高级路由交换",
+      "chapters": [
+        {
+          "id": "igp-advanced",
+          "title": "IGP 高级特性",
+          "kind": "ospf",
+          "topics": [
+            "OSPF 快速收敛",
+            "OSPF 路由控制",
+            "OSPF 其他特性"
+          ]
+        },
+        {
+          "id": "bgp-advanced",
+          "title": "BGP 高级特性",
+          "kind": "routing",
+          "topics": [
+            "BGP 路由控制",
+            "BGP 特性介绍",
+            "路由反射器组网"
+          ]
+        },
+        {
+          "id": "ipv6-routing",
+          "title": "IPv6 路由",
+          "kind": "ipv6",
+          "topics": [
+            "IPv6 静态路由",
+            "OSPFv3 原理与配置",
+            "IS-IS（IPv6）原理与配置"
+          ]
+        },
+        {
+          "id": "ethernet-advanced",
+          "title": "以太网高级技术",
+          "kind": "aggregation",
+          "topics": [
+            "VLAN 聚合",
+            "MUX VLAN",
+            "QinQ"
+          ]
+        },
+        {
+          "id": "mpls",
+          "title": "MPLS 技术",
+          "kind": "layers",
+          "topics": [
+            "MPLS 基础与转发",
+            "静态 LSP",
+            "LDP 原理与配置"
+          ]
+        },
+        {
+          "id": "operations",
+          "title": "网络运维",
+          "kind": "management",
+          "topics": [
+            "日常维护",
+            "信息收集工具"
+          ]
+        },
+        {
+          "id": "troubleshooting",
+          "title": "网络故障排除",
+          "kind": "troubleshooting",
+          "topics": [
+            "结构化流程",
+            "核心思想和方法",
+            "常见网络故障排除"
+          ]
+        },
+        {
+          "id": "cutover",
+          "title": "网络割接",
+          "kind": "project",
+          "topics": [
+            "割接基本概念",
+            "割接操作流程"
+          ]
+        }
+      ]
     }
   ],
   "illustrations": {

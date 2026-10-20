@@ -58,6 +58,31 @@ const mappings = {
     "bit-operations": "c-bits",
     "file-operations": "c-file",
   },
+  "hcip-datacom-core": {
+    "routing-basics": "routing",
+    "ospf-core": "ospf",
+    "isis-core": "routing",
+    "bgp-core": "routing",
+    "routing-control": "routing",
+    "switching-basics": "switch",
+    "multicast-basics": "network",
+    "ipv6-core": "ipv6",
+    "network-security": "security",
+    reliability: "aggregation",
+    "services-management": "management",
+    "wlan-architecture": "wlan-network",
+    solutions: "design",
+  },
+  "hcip-datacom-advanced": {
+    "igp-advanced": "ospf",
+    "bgp-advanced": "routing",
+    "ipv6-routing": "ipv6",
+    "ethernet-advanced": "aggregation",
+    mpls: "layers",
+    operations: "management",
+    troubleshooting: "troubleshooting",
+    cutover: "project",
+  },
 };
 // Match titles, not array positions: reordering a syllabus must not swap artwork.
 const networkKinds = {
