@@ -35,6 +35,7 @@ export async function teacherFixture(t, frontend = false) {
       instruction: req.body.messages[0].content,
       data,
       model: req.body.model,
+      maxTokens: req.body.max_tokens,
     });
     if (control.hold) await control.hold;
     if (control.mode === "outage")

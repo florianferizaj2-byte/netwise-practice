@@ -221,7 +221,6 @@ export function registerTutorTeacher({
           {
             node,
             lesson: material,
-            reference: JSON.stringify(material).slice(0, 3000),
             message: body.message,
             history: content.teacherHistory(userId, key(state)),
             teaching: {

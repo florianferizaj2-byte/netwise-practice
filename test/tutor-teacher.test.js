@@ -14,8 +14,10 @@ test("tutor teacher uses reviewed current-step context, shared daily quota, dura
   assert.equal(r.data.cached, false);
   assert.equal(r.data.quota.used, 1);
   assert.equal(f.control.calls.length, 2);
+  assert.deepEqual(f.control.calls.map((call) => call.maxTokens), [768, 384]);
   const context = f.control.calls[0].data;
   assert.deepEqual(context.lesson, s.lesson.components);
+  assert.equal(context.reference, undefined, "the current reviewed lesson is not duplicated in the model input");
   assert.equal(context.teaching.stepId, s.stepId);
   assert.equal(context.teaching.foundation, "beginner");
   assert(!JSON.stringify(context).includes('"answer":'));
