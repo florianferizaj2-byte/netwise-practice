@@ -45,6 +45,7 @@ const checks = [
   ["公告热更新完整流程检查", ["test/mobile-announcement.e2e.js"]],
   ["启动公告、资料补全与网页用户列表检查", ["test/mobile-profile.e2e.js"]],
   ["官网安装包与强制更新检查", ["test/mobile-release-publish.e2e.js"]],
+  ["可跳过更新、再次启动与失败降级检查", ["test/mobile-update.e2e.js"]],
   ["蓝色Web候选版本专项验收", ["scripts/verify-web-blue.mjs"]],
   ["管理员Web工作台完整流程检查", ["test/admin-console.e2e.js"]],
 ];

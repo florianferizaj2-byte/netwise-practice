@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
   Linking,
   Modal,
+  ScrollView,
   PanResponder,
   Platform,
   StatusBar as NativeStatusBar,
@@ -31,6 +32,7 @@ import { useCachedQuery } from '../api/useCachedQuery';
 import { ScreenActivityProvider, useAppActive } from './ScreenActivity';
 import { AnimatedPressable, EntranceView } from '../components/Motion';
 import { BrandMark } from '../components/BrandMark';
+import { useLaunchActive, useLaunchStage } from '../launch/LaunchReadiness';
 import { AuthScreen } from '../screens/AuthScreen';
 import { ProfileSetupScreen } from '../screens/ProfileSetupScreen';
 import { CertificateScreen } from '../screens/CertificateScreen';
@@ -72,6 +74,50 @@ const tabs: Array<{ id: AppTab; label: string; icon: string; symbol: string }> =
 ];
 
 export function AppShell() {
+  const active = useAppActive();
+  const launching = useLaunchActive();
+  const { reduceMotion } = useTheme();
+  const [release, setRelease] = useState<AppVersionResponse | null>(null);
+  const [checkKey, setCheckKey] = useState(0);
+  const forceRecheck = useRef(false);
+  useEffect(() => mobileApi.onStatus((status) => {
+    if (status === 'update') {
+      forceRecheck.current = true;
+      setCheckKey((key) => key + 1);
+    }
+  }), []);
+  useEffect(() => {
+    if (!active) return;
+    let mounted = true;
+    // A pending installer/download must not be interrupted when Android resumes.
+    if (release && !forceRecheck.current) return;
+    forceRecheck.current = false;
+    void mobileApi.appVersion(APP_VERSION).then((next) => {
+      if (mounted) setRelease(next.forceUpdate || next.updateAvailable ? next : null);
+    }).catch(() => {
+      // Fail open on a connection error; keep an already-known required update.
+    });
+    return () => { mounted = false; };
+  }, [active, checkKey]);
+  function retry() {
+    forceRecheck.current = true;
+    setCheckKey((key) => key + 1);
+  }
+  function dismiss() {
+    // Deliberately session-only: the next launch / return checks again.
+    if (!release?.forceUpdate) setRelease(null);
+  }
+  return (
+    <View style={{ flex: 1 }}>
+      <AppShellContent />
+      {release && !launching && <Modal visible animationType={reduceMotion ? 'none' : 'fade'} onRequestClose={dismiss}>
+        <UpdateRequiredScreen release={release} onRetry={retry} onContinue={dismiss} />
+      </Modal>}
+    </View>
+  );
+}
+
+function AppShellContent() {
   const { animationScale, resolvedMode, reduceMotion } = useTheme();
   const styles = useThemedStyles(createStyles, iosStyles.shell);
   const [isPreview, setIsPreview] = useState(false);
@@ -115,10 +161,7 @@ export function AppShell() {
   const knownAiJobStatuses = useRef(new Map<string, AiQuestionGenerationJob['status']>());
   const [certificatePickerOpen, setCertificatePickerOpen] = useState(false);
   const [sessionRestored, setSessionRestored] = useState(false);
-  const [updateRelease, setUpdateRelease] = useState<AppVersionResponse | null>(
-    null,
-  );
-  const [versionCheckKey, setVersionCheckKey] = useState(0);
+  useLaunchStage('route', sessionRestored);
   const aiJobSeenStorageKey = session?.user.id
     ? `kaojiang-ai-job-notices:${session.user.id}`
     : null;
@@ -131,7 +174,7 @@ export function AppShell() {
         if (status === 'expired') {
           setSession(null);
           setVisitedTabs(['today']);
-        } else setVersionCheckKey((current) => current + 1);
+        }
       }),
     [],
   );
@@ -250,24 +293,6 @@ export function AppShell() {
       mounted = false;
     };
   }, []);
-
-  useEffect(() => {
-    let mounted = true;
-    void mobileApi
-      .appVersion(APP_VERSION)
-      .then((release) => {
-        if (!mounted) return;
-        setUpdateRelease(release.forceUpdate ? release : null);
-      })
-      .catch(() => {
-        // A temporary network failure should not brick the app; normal API requests
-        // will still report their own connection state after the check completes.
-      });
-
-    return () => {
-      mounted = false;
-    };
-  }, [versionCheckKey]);
 
   useEffect(() => {
     if (!isPreview && !session) return;
@@ -415,21 +440,8 @@ export function AppShell() {
     if (visibleProgressJob) markAiJobNoticeSeen(visibleProgressJob.id);
   }, [visibleProgressJob?.id, aiJobSeenStorageKey]);
 
-  function retryVersionCheck() {
-    setVersionCheckKey((current) => current + 1);
-  }
-
   if (!sessionRestored) {
     return <VersionCheckingScreen />;
-  }
-
-  if (updateRelease) {
-    return (
-      <UpdateRequiredScreen
-        release={updateRelease}
-        onRetry={retryVersionCheck}
-      />
-    );
   }
 
   if (!isPreview && !session) {
@@ -582,9 +594,11 @@ function VersionCheckingScreen() {
 
 function UpdateRequiredScreen({
   onRetry,
+  onContinue,
   release,
 }: {
   onRetry: () => void;
+  onContinue: () => void;
   release: AppVersionResponse;
 }) {
   const { resolvedMode } = useTheme();
@@ -636,13 +650,15 @@ function UpdateRequiredScreen({
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar style={resolvedMode === 'dark' ? 'light' : 'dark'} />
-      <View style={styles.updateScreen}>
+      <ScrollView contentContainerStyle={styles.updateScreen}>
         <EntranceView distance={18} style={styles.updateCard}>
           <BrandMark />
           <Text style={styles.updateKicker}>版本更新</Text>
-          <Text style={styles.updateTitle}>请更新到最新版</Text>
+          <Text style={styles.updateTitle}>{release.forceUpdate ? '请更新到最新版' : '发现新版本'}</Text>
           <Text style={styles.updateText}>
-            {web ? '当前版本需要更新。刷新后继续学习，已提交的学习记录会保留。' : '当前 App 版本已停止服务。你可以直接在 App 内下载并安装，也可以改用浏览器下载新版。'}
+            {release.forceUpdate
+              ? `当前版本低于最低支持版本 v${release.minimumVersion}，请更新后继续学习。`
+              : '可以立即更新，也可以继续使用旧版本。每次打开考匠会重新提醒，学习记录会保留。'}
           </Text>
           <View style={styles.updateVersionRow}>
             <Text style={styles.updateVersionLabel}>当前版本</Text>
@@ -659,6 +675,15 @@ function UpdateRequiredScreen({
               本次更新：{release.releaseNotes}
             </Text>
           )}
+          {!release.forceUpdate && <AnimatedPressable
+            accessibilityLabel="继续使用旧版本"
+            accessibilityRole="button"
+            onPress={onContinue}
+            style={styles.updateBrowserButton}
+          >
+            <Text style={styles.updateBrowserButtonText}>继续使用旧版本</Text>
+            <AppIcon style={styles.updateBrowserButtonArrow}>→</AppIcon>
+          </AnimatedPressable>}
           <AnimatedPressable
             accessibilityLabel={web ? '刷新到最新版本' : '在应用内下载并安装最新版 App'}
             accessibilityRole="button"
@@ -711,7 +736,7 @@ function UpdateRequiredScreen({
             <Text style={styles.updateRetryText}>{web ? '重新检查版本' : '已安装，重新检查'}</Text>
           </AnimatedPressable>
         </EntranceView>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -1119,7 +1144,7 @@ const createStyles = (colors: ThemeColors) =>
     updateScreen: {
       alignItems: 'center',
       backgroundColor: colors.background,
-      flex: 1,
+      flexGrow: 1,
       justifyContent: 'center',
       padding: spacing.lg,
     },
@@ -1134,6 +1159,7 @@ const createStyles = (colors: ThemeColors) =>
       gap: spacing.md,
       padding: spacing.xl,
       width: '100%',
+      maxWidth: 480,
       ...shadow.card,
     },
     updateKicker: {

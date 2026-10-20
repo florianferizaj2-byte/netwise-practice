@@ -1,8 +1,8 @@
 # 考匠移动端
 
-这是考匠的 Expo / React Native 移动端。Android 当前源码版本为 v0.4.6；继续复用现有 Node 后端，通过移动端 Bearer 会话连接生产 API。
+这是考匠的 Expo / React Native 移动端。Android 当前源码版本为 v0.4.8 / versionCode 33；继续复用现有 Node 后端，通过移动端 Bearer 会话连接生产 API。
 
-[v0.4.6 APK](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.6/kaojiang-v0.4.6.apk) · [SHA-256](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.6/kaojiang-v0.4.6.apk.sha256) · [发布页](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v0.4.6) · [构建说明](../docs/release-v0.4.6.md) · [服务器更新步骤](../docs/DEPLOY-v0.4.6.md)。
+[v0.4.8 APK](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.8/kaojiang-v0.4.8.apk) · [SHA-256](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.8/kaojiang-v0.4.8.apk.sha256) · [发布页](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v0.4.8) · [构建与兼容说明](../docs/release-v0.4.8.md) · [服务器更新步骤](../docs/DEPLOY-v0.4.8.md)。
 
 首页只保留公告和学习内容，移除顶部大标题/日期。管理员在“我的 → 管理中心”管理账号及公告；公告无需重装即可更新，支持离线缓存。新管理功能需要同步部署后端，详见[手机管理与公告说明](../docs/MOBILE-ADMIN-ANNOUNCEMENTS.md)。虚拟定位学习开启空闲悬浮窗时提示等待定位成功，再由用户手动开始。
 
@@ -33,13 +33,21 @@ npm start
 - 已安装 Android Studio 时，可以按 `a` 启动 Android 模拟器；
 - 需要连接真实后端时，复制 `.env.example` 为 `.env.local`，将 `EXPO_PUBLIC_API_URL` 改成电脑在局域网中的地址。
 
-App 保留开发期“进入预览模式”入口，用于查看动画和页面结构；真实登录通过移动端 Bearer 会话接入，证书选择后会请求首页学习数据。当前构建目标为 `kaojiang-v0.4.6.apk`。启动时会后台请求 `/api/mobile/version`，低于服务端最低版本的旧 App 会强制显示最新版下载页；旧客户端调用受保护的移动端 API 也会被服务端拒绝并返回下载地址。
+App 保留开发期预览入口，正式构建隐藏；真实登录通过移动端 Bearer 会话接入，证书选择后会请求首页学习数据。当前构建目标为 `kaojiang-v0.4.8.apk`。每次启动和从后台返回时请求 `/api/mobile/version`；支持范围内的旧版可选择“继续使用旧版本”，下次打开重新提醒。低于 0.4.3 的版本强制更新，受保护的移动 API 返回 426。已安装旧包的界面能力限制见 [v0.4.8 兼容说明](../docs/release-v0.4.8.md#旧客户端兼容限制)。
 
 版本过旧时，Android App 会优先提供应用内下载并调起系统安装器；系统仍会要求用户确认安装。页面同时保留浏览器下载入口，应用内下载失败或设备限制安装时可以使用浏览器方式。登录会话会保存在本机，正常关闭并重新打开 App 不需要重复登录；主动退出登录会清除本机会话。答题页采用紧凑布局，举报题目入口位于题干卡片右下角的三角感叹号图标。
 
 ## 正式签名
 
-Release 构建使用专用正式证书，Expo 重新生成 Android 工程后仍会应用该配置。配置位置和应用指纹见 [正式签名说明](RELEASE_SIGNING.md)。本次构建目标为 `kaojiang-v0.4.6.apk`；同包名、同正式签名且版本代码较旧的版本可覆盖更新。本地构建不等于手机覆盖安装已经验证。
+Release 构建使用专用正式证书，Expo 重新生成 Android 工程后仍会应用该配置。配置位置和应用指纹见 [正式签名说明](RELEASE_SIGNING.md)。本次构建目标为 `kaojiang-v0.4.8.apk`；同包名、同正式签名且版本代码较旧的版本可覆盖更新。本地构建不等于手机覆盖安装已经验证。
+
+## v0.4.8 更新
+
+- 保留用户提供的开屏测试包 code 32；发布包在其对应源码上加入更新交互，内部构建号提高为 33，同为 v0.4.8。
+- 启动动画支持深浅色与减弱动画；页面、登录会话、首页和公告并行准备，慢网不无限等待。
+- 新客户端支持可跳过的更新提醒，不保存永久忽略标记；提示层保留底下的页面状态。下载失败保留浏览器入口。
+- 最低支持 0.4.3，0.4.3–0.4.7 的移动接口放行；旧客户端能否显示可跳过提示取决于它已安装的代码，服务端无法补按钮。
+- 原生单元测试 68 项通过、Lint 0 错误；正式签名和构建检查见 [版本说明](../docs/release-v0.4.8.md)。
 
 ## v0.4.6 本地更新
 

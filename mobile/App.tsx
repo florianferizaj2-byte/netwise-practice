@@ -3,12 +3,13 @@ import { ThemeProvider } from './src/theme';
 import { AppAlertHost } from './src/components/AppAlert';
 import { PlatformSupport } from './src/components/PlatformSupport';
 import { LaunchAnnouncement } from './src/components/LaunchAnnouncement';
+import { AppLaunch } from './src/launch/AppLaunch';
 
 export default function App() {
   return (
     <ThemeProvider>
       <PlatformSupport />
-      <LaunchAnnouncement><AppShell /></LaunchAnnouncement>
+      <AppLaunch><LaunchAnnouncement><AppShell /></LaunchAnnouncement></AppLaunch>
       <AppAlertHost />
     </ThemeProvider>
   );

@@ -26,7 +26,9 @@ try {
   assert.equal(range.status, 206);
   assert.equal((await range.arrayBuffer()).byteLength, 1024);
   const old = await fetch(`${base}/api/mobile/version?version=0.4.5`).then((response) => response.json());
-  assert.equal(old.forceUpdate, true); assert.equal(old.minimumVersion, policy.minimumVersion);
+  assert.equal(old.forceUpdate, false); assert.equal(old.updateAvailable, true); assert.equal(old.minimumVersion, policy.minimumVersion);
+  const unsupported = await fetch(`${base}/api/mobile/version?version=0.4.2`).then((response) => response.json());
+  assert.equal(unsupported.forceUpdate, true);
   assert.equal((await fetch(`${base}/api/mobile/version?version=${policy.latestVersion}`).then((response) => response.json())).forceUpdate, false);
   assert.equal((await fetch(`${base}/app/version.json`).then((response) => response.json())).version, policy.latestVersion);
   browser = await chromium.launch({ headless: true, proxy: { server: 'http://127.0.0.1:9', bypass: '127.0.0.1,localhost' } });
@@ -41,7 +43,7 @@ try {
   await page.screenshot({ path: path.join(out, 'download-page.png'), fullPage: true });
   assert.deepEqual(errors, []);
   fs.writeFileSync(path.join(out, 'report.json'), JSON.stringify({ version: policy.latestVersion, minimumVersion: policy.minimumVersion,
-    apkBytes: apk.length, apkSha256: policy.apkSha256, downloadPage: 'passed', rangeDownload: 'passed', forcedUpdate: 'passed' }, null, 2));
+    apkBytes: apk.length, apkSha256: policy.apkSha256, downloadPage: 'passed', rangeDownload: 'passed', forcedUpdate: 'passed', supportedOptionalUpdate: 'passed' }, null, 2));
   console.log('Website download link, complete APK bytes/hash, range downloads and forced-update metadata passed.');
 } finally {
   await browser?.close(); await app.locals.stop(); await new Promise((resolve) => server.close(resolve)); store.db.close();

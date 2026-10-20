@@ -2,14 +2,17 @@ import fs from 'node:fs';
 
 const bundled = JSON.parse(fs.readFileSync(new URL('./mobile-release.json', import.meta.url), 'utf8'));
 
-/** A stale preserved .env must not undo the minimum version shipped in this release. */
+/** Only a newer, complete release override can replace the bundled support policy. */
 export function resolveMobileRelease(environment, compare) {
   const configuredLatest = environment.MOBILE_LATEST_VERSION?.trim();
   const configuredMinimum = environment.MOBILE_MINIMUM_VERSION?.trim();
   const newer = (configured, floor) => configured && /^\d+\.\d+\.\d+$/.test(configured) && compare(configured, floor) >= 0 ? configured : floor;
-  const minimumVersion = newer(configuredMinimum, bundled.minimumVersion);
-  const latestVersion = newer(newer(configuredLatest, bundled.latestVersion), minimumVersion);
-  const currentOverride = configuredLatest === latestVersion;
+  const currentOverride = !!configuredLatest && /^\d+\.\d+\.\d+$/.test(configuredLatest)
+    && compare(configuredLatest, bundled.latestVersion) > 0;
+  // Old .env files often pinned the previous latest as their minimum. Ignore
+  // that stale pair so shipping a broader support policy actually takes effect.
+  const minimumVersion = currentOverride ? newer(configuredMinimum, bundled.minimumVersion) : bundled.minimumVersion;
+  const latestVersion = currentOverride ? newer(configuredLatest, minimumVersion) : bundled.latestVersion;
   return {
     latestVersion, minimumVersion,
     downloadUrl: currentOverride && environment.MOBILE_DOWNLOAD_URL?.trim()

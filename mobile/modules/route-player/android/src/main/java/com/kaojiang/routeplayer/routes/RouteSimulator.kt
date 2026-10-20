@@ -42,7 +42,7 @@ class RouteSimulator(private val route: SimulationRoute) {
         }
         if (route.loop) {
             add(
-                GeoMath.distanceMeters(
+                if (route.restartOnLoop) 0.0 else GeoMath.distanceMeters(
                     route.waypoints.last().coordinates,
                     route.waypoints.first().coordinates,
                 ),
@@ -66,7 +66,7 @@ class RouteSimulator(private val route: SimulationRoute) {
         if (paused) return buildPosition()
         var remainingSeconds = deltaSeconds
         var iterations = 0
-        while (remainingSeconds > 1e-9 && !complete) {
+        while ((remainingSeconds > 1e-9 || shouldRestartLoop()) && !complete) {
             check(iterations++ < MAX_ADVANCE_ITERATIONS) { "Route contains too many zero-length steps" }
 
             if (stopRemainingSeconds > 0) {
@@ -96,18 +96,21 @@ class RouteSimulator(private val route: SimulationRoute) {
             }
 
             val travelSeconds = remainingLegDistance / speedMetersPerSecond
-            if (remainingSeconds < travelSeconds) {
+            if (remainingSeconds + 1e-9 < travelSeconds) {
                 distanceIntoLeg += remainingSeconds * speedMetersPerSecond
                 elapsedSeconds += remainingSeconds
                 remainingSeconds = 0.0
             } else {
-                remainingSeconds -= travelSeconds
+                remainingSeconds = (remainingSeconds - travelSeconds).coerceAtLeast(0.0)
                 elapsedSeconds += travelSeconds
                 arriveAt(targetWaypointIndex, legDistance)
             }
         }
         return buildPosition()
     }
+
+    private fun shouldRestartLoop() = route.loop && route.restartOnLoop &&
+        currentWaypointIndex == route.waypoints.lastIndex && stopRemainingSeconds <= 1e-9
 
     private fun arriveAt(targetWaypointIndex: Int, completedLegDistance: Double) {
         distanceCompletedInLap += completedLegDistance

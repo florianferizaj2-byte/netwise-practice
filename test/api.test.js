@@ -495,7 +495,7 @@ test("mobile version endpoint blocks outdated clients and exposes the APK link",
   assert.equal(oldVersion.status, 200);
   assert.equal(oldVersion.data.forceUpdate, true);
   assert.equal(oldVersion.data.downloadUrl, `/downloads/kaojiang-v${currentMobileVersion}.apk`);
-  assert.equal(oldVersion.data.minimumVersion, currentMobileVersion);
+  assert.equal(oldVersion.data.minimumVersion, '0.4.3');
 
   const currentVersion = await req(`/mobile/version?version=${currentMobileVersion}`);
   assert.equal(currentVersion.data.forceUpdate, false);
