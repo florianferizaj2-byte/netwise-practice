@@ -80,6 +80,16 @@ try {
   page = await context.newPage();
   page.setDefaultTimeout(15000);
   page.on("pageerror", (e) => errors.push(e.message));
+  const preparedAnswers = new Set();
+  page.on("response", async (response) => {
+    const match = new URL(response.url()).pathname.match(
+      /^\/api\/questions\/([^/]+)\/reveal$/,
+    );
+    if (match && response.status() === 200) {
+      await response.finished();
+      preparedAnswers.add(decodeURIComponent(match[1]));
+    }
+  });
   await page.route("**/api/learning-plan", (route) =>
     route.fulfill({
       status: 503,
@@ -170,6 +180,7 @@ try {
   const ids = privatePlan.tasks.find((t) => t.id === task.id).questionIds;
   assert.equal(q.id, ids[0]);
   const second = store.getQ(ids[1]);
+  await expect.poll(() => preparedAnswers.has(q.id)).toBe(true);
   let lostAttempt = false;
   await page.route("**/api/attempts", async (route) => {
     const response = await route.fetch();
@@ -180,7 +191,10 @@ try {
   });
   await answer(page, q);
   await expect.poll(() => lostAttempt).toBe(true);
-  await expect(page.locator(".result-block")).toHaveCount(0);
+  await expect(page.locator(".result-block")).toContainText("回答正确");
+  await expect(
+    page.getByRole("button", { name: "重试保存", exact: true }),
+  ).toBeVisible();
   assert.equal(store.allA(user.id).length, 1);
   assert.equal((await api("/learning-plan")).plan.tasks.at(-1).answered, 1);
   await page.unroute("**/api/attempts");
@@ -197,6 +211,9 @@ try {
       : [second.answer[0]];
   await answer(page, second, wrong);
   await expect(page.locator(".result-block")).toBeVisible();
+  await expect(page.locator(".practice-save-status")).toContainText(
+    "作答已保存",
+  );
   assert.equal(store.allA(user.id).length, 2);
   assert.equal(
     store.allA(user.id).find((a) => a.questionId === second.id).correct,
@@ -390,7 +407,9 @@ try {
     .getByRole("button", { name: "开始练习", exact: true })
     .click();
   await expect(vetPage.locator(".blue-vet-practice")).toBeVisible();
-  await expect(vetPage.locator(".blue-practice-heading")).toContainText("执业兽医");
+  await expect(vetPage.locator(".blue-practice-heading")).toContainText(
+    "执业兽医",
+  );
   const vetPrivate = JSON.parse(
     store.db
       .prepare("SELECT data FROM user_learning_plans WHERE id=?")
@@ -403,7 +422,9 @@ try {
     (await api("/learning-plan", undefined, vetToken)).plan.tasks[0].answered,
     1,
   );
-  await vetPage.getByRole("button", { name: "返回学习计划", exact: true }).click();
+  await vetPage
+    .getByRole("button", { name: "返回学习计划", exact: true })
+    .click();
   await expect(
     vetPage.locator(`[data-plan-task="${vetPlan.tasks[0].id}"]`),
   ).toContainText("已答 1 / 10 题");
