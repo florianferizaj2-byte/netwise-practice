@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { createApp } from '../server/index.js';
+import { createVerifiedTestApp as createApp, verifiedFetch } from './helpers/account-mail.js';
 import { createStore } from '../server/store.js';
 import { completeFixtureProfile, dismissLaunchAnnouncement } from './helpers/mobile-profile.js';
 
@@ -46,7 +46,7 @@ try {
     try {
       await page.clock.install();
       // Create an ordinary free account: no membership/admin gate is involved.
-      const registered = await fetch(`${base}/api/auth/register`, { method: 'POST',
+      const registered = await verifiedFetch(`${base}/api/auth/register`, { method: 'POST',
         headers: { 'Content-Type': 'application/json', 'X-Client': 'mobile', 'X-App-Version': version },
         body: JSON.stringify({ username: `announcement_${engine}`, password: 'announcement-fixture-123' }) });
       assert.equal(registered.status, 200);

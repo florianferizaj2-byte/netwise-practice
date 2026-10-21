@@ -1,5 +1,6 @@
 // These settings stay on the server. The requesting account still owns its
 // usage, credits and generated questions; only the upstream connection is shared.
+import { defaultAiModel } from "./ai-model-defaults.js";
 export function authorAiOwner(store, env = process.env) {
   const admins = store.allUsers().filter((user) => user.isAdmin && !user.bannedAt);
   if (env.AI_SERVICE_OWNER_ID?.trim())
@@ -13,10 +14,11 @@ export function authorAiSettings(store, env = process.env) {
   const serviceKey = env.AI_SERVICE_API_KEY?.trim();
   const apiKey = serviceKey || env.AUTHOR_API_KEY?.trim();
   if (apiKey) {
+    const baseUrl = (serviceKey ? env.AI_SERVICE_BASE_URL?.trim() : env.AUTHOR_API_BASE_URL?.trim()) || "https://api.deepseek.com";
     return {
       apiKey,
-      baseUrl: (serviceKey ? env.AI_SERVICE_BASE_URL?.trim() : env.AUTHOR_API_BASE_URL?.trim()) || "https://api.deepseek.com",
-      model: (serviceKey ? env.AI_SERVICE_MODEL?.trim() : env.AUTHOR_API_MODEL?.trim()) || "deepseek-chat",
+      baseUrl,
+      model: (serviceKey ? env.AI_SERVICE_MODEL?.trim() : env.AUTHOR_API_MODEL?.trim()) || defaultAiModel(baseUrl),
       temperature: 0.3,
     };
   }

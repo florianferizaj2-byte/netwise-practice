@@ -12,24 +12,29 @@ const editUser = z.object({
   membershipExpiresAt: z.string().datetime({ offset: true }).nullable(),
 }).strict();
 
-export function registerMobileAdminRoutes({ route, store, requireAdmin, certificates, announcements }) {
+export function registerMobileAdminRoutes({ route, store, requireAdmin, certificates, announcements, profiles }) {
+  const managedView = (user) => ({ ...view(user), avatarUrl: profiles?.view(user)?.avatarUrl || null });
+  const adminRoute = (method, suffix, handler) => {
+    route(method, '/api/admin/mobile' + suffix, handler);
+    route(method, '/api/admin/console' + suffix, handler);
+  };
   const targetUser = (id) => {
     const target = store.adminUser(z.string().uuid().parse(id));
     if (!target) throw fail('账号不存在', 404);
     return target;
   };
-  route('get', '/api/admin/mobile/users', (req) => {
+  adminRoute('get', '/users', (req) => {
     requireAdmin(req);
     const filters = z.object({ search: z.string().trim().max(100).default(''), status: z.enum(['all', 'active', 'banned']).default('all'),
       limit: z.coerce.number().int().min(1).max(100).default(30), offset: z.coerce.number().int().min(0).max(1_000_000).default(0) }).strict().parse(req.query);
     const page = store.adminUsersPage(filters);
-    return { ...page, users: page.users.map(view) };
+    return { ...page, users: page.users.map(managedView) };
   });
-  route('get', '/api/admin/mobile/users/:id', (req) => {
+  adminRoute('get', '/users/:id', (req) => {
     requireAdmin(req);
-    return { user: view(targetUser(req.params.id)) };
+    return { user: managedView(targetUser(req.params.id)) };
   });
-  route('put', '/api/admin/mobile/users/:id', (req) => {
+  adminRoute('put', '/users/:id', (req) => {
     requireAdmin(req);
     const fields = editUser.parse(req.body);
     if (fields.certificateId && !certificates.some((certificate) => certificate.id === fields.certificateId)) throw fail('考试题库不存在', 400);
@@ -45,16 +50,16 @@ export function registerMobileAdminRoutes({ route, store, requireAdmin, certific
         username: target.username, certificateId: fields.certificateId, membershipPlan: fields.membershipPlan,
         membershipExpiresAt: fields.membershipExpiresAt, communityName: fields.communityName,
       });
-      const user = view(store.adminUser(target.id));
+      const user = managedView(store.adminUser(target.id));
       store.db.exec('COMMIT');
       return { saved: true, user };
     } catch (error) { store.db.exec('ROLLBACK'); throw error; }
   });
-  route('get', '/api/admin/mobile/announcement', async (req) => {
+  adminRoute('get', '/announcement', async (req) => {
     requireAdmin(req);
     return announcements.view();
   });
-  route('put', '/api/admin/mobile/announcement', async (req) => {
+  adminRoute('put', '/announcement', async (req) => {
     requireAdmin(req);
     const result = await announcements.save(req.body);
     store.audit(req.user.id, 'mobile_announcement_updated', 'announcement', result.announcement.id,

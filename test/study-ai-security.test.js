@@ -31,7 +31,7 @@ test("short teacher questions recover from partial and reasoning-only truncation
   for (const partial of [null, "an unfinished JSON object"]) {
     const f = fixture((_body, count) => response(count === 1 ? partial : answer, count === 1 ? "length" : "stop"));
     assert.deepEqual(await f.teacher.teacher(context, "learner"), answer);
-    assert.deepEqual(f.requests.map((request) => request.max_tokens), [2048, 4096]);
+    assert.deepEqual(f.requests.map((request) => request.max_tokens), [768, 1024]);
     assert.deepEqual(f.usage.map((entry) => entry.success), [false, true]);
     assert.equal(JSON.parse(f.requests[1].messages[1].content).message, "为啥是六大");
     assert.equal("thinking" in f.requests[0], false, "vendor parameters must not leak to other compatible providers");
@@ -42,7 +42,7 @@ test("teacher retries stay bounded and do not repeat upstream failures", async (
   const f = fixture(() => response(null, "length"));
   await assert.rejects(f.teacher.teacher(context, "learner"), { code: "AI_OUTPUT_TRUNCATED" });
   assert.equal(f.requests.length, 2);
-  assert.equal(f.requests.at(-1).max_tokens, 4096);
+  assert.equal(f.requests.at(-1).max_tokens, 1024);
   const failed = fixture(() => new Response("", { status: 503 }));
   await assert.rejects(failed.teacher.teacher(context, "learner"), /暂时不可用/);
   assert.equal(failed.requests.length, 1);
@@ -69,6 +69,22 @@ test("teacher context isolates instructions, drops malicious history and hides p
   for (const blank of pending.question.blanks) {
     assert.equal(blank.answer, undefined); assert.equal(blank.aliases, undefined);
   }
+});
+
+test("interactive tutor avoids duplicate lesson reference while retaining follow-up context", async () => {
+  const f = fixture(() => response(answer));
+  const history = [
+    { question: "早先问题一", answer },
+    { question: "早先问题二", answer },
+    { question: "最近问题", answer },
+  ];
+  await f.teacher.teacher({ ...context, history }, "learner", {
+    taskType: "interactive-tutor-teacher",
+  });
+  const input = JSON.parse(f.requests[0].messages[1].content);
+  assert.equal(input.reference, undefined, "the approved lesson already carries these cards");
+  assert.deepEqual(input.history.map((row) => row.question), history.map((row) => row.question));
+  assert.equal(f.requests[0].max_tokens, 768);
 });
 
 test("unsafe teacher output is rejected before returning a validated short response", async () => {

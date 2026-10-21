@@ -126,7 +126,7 @@ function filesAt(target) {
     );
 }
 
-function validateManifest(manifest, directory) {
+export function validateManifest(manifest, directory) {
   if (
     manifest.schemaVersion !== 1 ||
     !slug.test(manifest.certificate?.id || "") ||
@@ -194,6 +194,8 @@ function validateManifest(manifest, directory) {
     ? createTaxonomyIndex(manifest.taxonomy, directory)
     : null;
 }
+
+export { guideSchema };
 
 const sharedQuestionMarker =
   /共享题干题\s*(?:【题干】)?|【题干】|[（(]共用题干[）)]/g;
@@ -606,6 +608,12 @@ function loadCatalog() {
 const catalog = loadCatalog();
 
 export const certificates = catalog.certificates;
+export const bankManifestForCertificate = (certificateId) => {
+  const item = catalog.manifests.find(entry => entry.certificate.id === certificateId);
+  if (!item) return null;
+  const { directory, taxonomyIndex, guide, ...manifest } = item;
+  return structuredClone(manifest);
+};
 export const bundledQuestions = () =>
   catalog.questions.map((q) => structuredClone(q));
 export const hasCertificateQuestion = (question, certificateId) =>

@@ -19,6 +19,22 @@ const version = JSON.parse(fs.readFileSync("mobile/package.json", "utf8")).versi
 fs.mkdirSync("test-output/purchase", { recursive: true });
 const errors = [];
 let browser;
+async function closeBrowser() {
+  const instance = browser;
+  browser = null;
+  if (!instance) return;
+  let timer;
+  try {
+    await Promise.race([
+      instance.close(),
+      new Promise((_, reject) => {
+        timer = setTimeout(() => reject(new Error("Purchase browser cleanup did not finish within 20 seconds")), 20000);
+      }),
+    ]);
+  } finally {
+    clearTimeout(timer);
+  }
+}
 
 async function shop(context, page, link) {
   await expect(link).toHaveAttribute("href", purchaseUrl);
@@ -80,12 +96,14 @@ try {
       await context.close();
       console.log(`${engine} ${mobile ? "mobile" : "desktop"}: purchase in new tab, no automatic entitlement, return and redeem, draft preservation passed`);
     }
-    await browser.close(); browser = null;
+    await closeBrowser();
   }
   assert.deepEqual(errors, []);
 } finally {
-  await browser?.close(); await app.locals.stop(); await new Promise((resolve) => server.close(resolve)); store.db.close();
-  assert.equal(path.dirname(directory), path.resolve(os.tmpdir()));
-  assert.ok(path.basename(directory).startsWith("aceexam-purchase-"));
-  fs.rmSync(directory, { recursive: true, force: true });
+  try { await closeBrowser(); } finally {
+    await app.locals.stop(); await new Promise((resolve) => server.close(resolve)); store.db.close();
+    assert.equal(path.dirname(directory), path.resolve(os.tmpdir()));
+    assert.ok(path.basename(directory).startsWith("aceexam-purchase-"));
+    fs.rmSync(directory, { recursive: true, force: true });
+  }
 }

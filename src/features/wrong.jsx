@@ -3,8 +3,16 @@ import { ArrowRight, MessageCircle, RotateCcw, Sparkles } from "lucide-react";
 import { api } from "../api.js";
 import { sourceName } from "../question-utils.js";
 import { Empty, Heading } from "../components/study-ui.jsx";
+import { BlueWrongOverview } from "./wrong-overview.jsx";
 
-export function WrongView({
+export function WrongView(props) {
+  return props.blue ? (
+    <BlueWrongOverview {...props} />
+  ) : (
+    <LegacyWrongView {...props} />
+  );
+}
+function LegacyWrongView({
   wrong,
   start,
   train,

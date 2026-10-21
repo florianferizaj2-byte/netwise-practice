@@ -8,11 +8,14 @@ Page({
     username: '',
     password: '',
     passwordConfirm: '',
+    email: '', emailCode: '', challengeId: '', codeSending: false, codeWait: 0, notice: '',
+    emailVerificationRequired: false, emailPolicyReady: false, emailPolicyError: '',
     busy: false,
     error: '',
   },
 
   onLoad() {
+    this.loadEmailPolicy();
     if (!getApp().globalData.sessionToken) return;
     api.restoreSession().then((response) => {
       if (response && response.user) this.finishAuth(response);
@@ -33,6 +36,15 @@ Page({
     this.setData({ error: '' });
   },
 
+  async loadEmailPolicy() {
+    this.setData({ emailPolicyReady: false, emailPolicyError: '' });
+    try {
+      const policy = await api.request('/auth/security-config');
+      if (typeof policy.emailVerificationRequired !== 'boolean') throw new Error('注册设置读取失败');
+      this.setData({ emailVerificationRequired: policy.emailVerificationRequired, emailPolicyReady: true });
+    } catch (error) { this.setData({ emailPolicyError: errorMessage(error, '注册设置读取失败') }); }
+  },
+
   chooseWechat() {
     this.setData({ phase: 'wechat', error: '' });
   },
@@ -42,7 +54,42 @@ Page({
   },
 
   handleInput(event) {
-    this.setData({ [event.currentTarget.dataset.field]: event.detail.value });
+    const field = event.currentTarget.dataset.field;
+    this.setData({ [field]: event.detail.value, ...(['username', 'email'].includes(field) ? { challengeId: '', emailCode: '' } : {}) });
+  },
+
+  onUnload() { clearInterval(this._codeTimer); },
+
+  chooseRecovery() { this.setData({ phase: 'reset', password: '', passwordConfirm: '', emailCode: '', challengeId: '', error: '', notice: '' }); },
+
+  async sendEmailCode() {
+    if (!this.data.emailVerificationRequired || this.data.codeSending || this.data.codeWait || this.data.busy) return;
+    const { email, username, phase } = this.data;
+    if (!email.trim() || !username.trim()) { this.setData({ error: '请先填写账号和邮箱' }); return; }
+    this.setData({ codeSending: true, error: '', notice: '' });
+    const scope = `${phase}:${username}:${email}`;
+    try {
+      const result = await api.request('/auth/email-code', { method: 'POST', data: { email: email.trim(), username: username.trim(), purpose: phase === 'reset' ? 'reset' : 'register' } });
+      if (scope !== `${this.data.phase}:${this.data.username}:${this.data.email}`) return;
+      this.setData({ challengeId: result.challengeId, codeWait: result.retryAfter, notice: result.message });
+      clearInterval(this._codeTimer);
+      this._codeTimer = setInterval(() => { this.setData({ codeWait: Math.max(0, this.data.codeWait - 1) }); if (!this.data.codeWait) clearInterval(this._codeTimer); }, 1000);
+    } catch (error) { this.setData({ error: errorMessage(error, '验证码发送失败') }); }
+    finally { this.setData({ codeSending: false }); }
+  },
+
+  async handleReset() {
+    if (!this.data.emailVerificationRequired) { this.setData({ error: '邮箱找回暂未启用' }); return; }
+    if (this.data.busy || this.data.codeSending) return;
+    const { username, password, passwordConfirm, email, emailCode, challengeId } = this.data;
+    if (password.length < 8 || password !== passwordConfirm) { this.setData({ error: '密码至少 8 位，两次输入须一致' }); return; }
+    if (!challengeId || !/^\d{6}$/.test(emailCode)) { this.setData({ error: '请获取并填写 6 位邮箱验证码' }); return; }
+    this.setData({ busy: true, error: '' });
+    try {
+      await api.request('/auth/reset-password', { method: 'POST', data: { username: username.trim(), password, email: email.trim(), code: emailCode, challengeId } });
+      this.setData({ phase: 'password', password: '', passwordConfirm: '', challengeId: '', emailCode: '', notice: '密码已重置，请使用新密码登录' });
+    } catch (error) { this.setData({ error: errorMessage(error, '密码重置失败') }); }
+    finally { this.setData({ busy: false }); }
   },
 
   handleWechatLogin() {
@@ -98,7 +145,8 @@ Page({
   },
 
   handleRegister() {
-    const { bindingToken, username, password, passwordConfirm } = this.data;
+    if (!this.data.emailPolicyReady) { this.setData({ error: '请先重新读取注册设置' }); return; }
+    const { bindingToken, username, password, passwordConfirm, email, emailCode, challengeId } = this.data;
     if (!username.trim() || password.length < 8) {
       this.setData({ error: '账号不能为空，密码至少 8 位' });
       return;
@@ -107,9 +155,10 @@ Page({
       this.setData({ error: '两次输入的密码不一致' });
       return;
     }
-    if (this.data.busy) return;
+    if (this.data.busy || this.data.codeSending) return;
+    if (this.data.emailVerificationRequired && (!challengeId || !/^\d{6}$/.test(emailCode))) { this.setData({ error: '请获取并填写 6 位邮箱验证码' }); return; }
     this.setData({ busy: true, error: '' });
-    api.registerWechat(bindingToken, username.trim(), password).then((response) => {
+    api.registerWechat(bindingToken, username.trim(), password, this.data.emailVerificationRequired ? { email: email.trim(), code: emailCode, challengeId } : undefined).then((response) => {
       this.setData({ busy: false });
       this.finishAuth(response);
     }).catch((error) => {
@@ -126,6 +175,6 @@ Page({
   },
 
   switchBindMode(event) {
-    this.setData({ phase: event.currentTarget.dataset.mode, error: '' });
+    this.setData({ phase: event.currentTarget.dataset.mode, error: '', challengeId: '', emailCode: '' });
   },
 });

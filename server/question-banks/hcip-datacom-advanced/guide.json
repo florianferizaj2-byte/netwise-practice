@@ -1,0 +1,242 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-10-18",
+  "badge": "华为认证",
+  "title": "HCIP-Datacom-Advanced Routing & Switching Technology（H12-831）备考指南",
+  "subtitle": "华为数通高级路由交换自选考试 · V1.0",
+  "overview": "H12-831 是 HCIP-Datacom 的自选考试之一，聚焦数据通信领域的路由交换高阶知识，包括 IGP 高级特性、BGP 高级特性、IPv6 路由、以太网高级技术、MPLS 技术、网络运维、网络故障排除和网络割接。通过 H12-821 必选考试与本考试后，可获得 HCIP-Datacom-Advanced Routing & Switching Technology 证书。本站题库依据华为公开的 V1.0 考试大纲按章节权重编写，属于原创仿真练习，不是官方真题。",
+  "facts": [
+    {
+      "label": "考试代码",
+      "value": "H12-831",
+      "note": "HCIP-Datacom-Advanced Routing & Switching Technology V1.0，自选笔试。"
+    },
+    {
+      "label": "考试时长",
+      "value": "90 分钟",
+      "note": "以华为人才在线 V1.0 考试大纲第 1 页为准。"
+    },
+    {
+      "label": "通过分数",
+      "value": "600 / 1000",
+      "note": "满分 1000 分，达到 600 分通过。"
+    },
+    {
+      "label": "考试语言",
+      "value": "中文 / 英文",
+      "note": "大纲标注 CHS/ENU。"
+    },
+    {
+      "label": "考试费用",
+      "value": "180 USD",
+      "note": "费用可能随地区调整，以当期报名页为准。"
+    },
+    {
+      "label": "大纲版本",
+      "value": "V1.0（2020-09-25）",
+      "note": "华为人才在线认证页当前展示的考试大纲版本。"
+    },
+    {
+      "label": "题型说明",
+      "value": "官方大纲未公布",
+      "note": "大纲只给出时长、分数、语言和费用；本站目前仅提供单项选择题，不代表官方题型比例。"
+    }
+  ],
+  "schedule": {
+    "title": "考试预约与版本有效期",
+    "status": "以华为人才在线当期公布为准",
+    "items": [
+      {
+        "date": "2026-10-18",
+        "title": "当前适用版本",
+        "detail": "华为人才在线认证页展示 HCIP-Datacom-Advanced Routing & Switching Technology V1.0 考试大纲与配套教材，本指南按该版本整理。"
+      },
+      {
+        "date": "以报名页为准",
+        "title": "考试时间与考位",
+        "detail": "具体考试日期、考位和费用由华为人才在线及考试服务商安排，本站不编造固定日期。"
+      }
+    ],
+    "note": "H12-831 与 H12-821 无先后顺序要求，但需在成绩有效期内同时通过才能取得对应方向证书；报名前请核对当期版本。"
+  },
+  "examDetails": [
+    {
+      "label": "考试形式",
+      "value": "笔试（机考）",
+      "detail": "华为认证笔试在考试服务商机考中心完成；官方大纲未描述实验环境。"
+    },
+    {
+      "label": "题目数量",
+      "value": "官方未公布固定题量",
+      "detail": "大纲只给出 90 分钟和 600/1000 的分数规则，未公布题数与每题分值。"
+    },
+    {
+      "label": "题型构成",
+      "value": "官方未公布",
+      "detail": "网上流传的单选、多选、判断、填空、拖拽等说法来自培训机构，不能作为官方结论；本站目前只出单选。"
+    },
+    {
+      "label": "考试范围",
+      "value": "8 个章节",
+      "detail": "IGP 高级特性、BGP 高级特性、IPv6 路由、以太网高级技术、MPLS 技术、网络运维、网络故障排除、网络割接。"
+    },
+    {
+      "label": "章节权重",
+      "value": "官方公布，合计 100%",
+      "detail": "IPv6 路由 20%、MPLS 技术 19%、IGP 高级特性 17%、BGP 高级特性 10%、以太网高级技术 10%、网络故障排除 10%、网络运维 7%、网络割接 7%。"
+    },
+    {
+      "label": "考试环境",
+      "value": "无实验环境",
+      "detail": "官方大纲未列出软件版本或操作系统要求，备考以协议原理、配置命令和排障流程理解为主。"
+    }
+  ],
+  "knowledgeAreas": [
+    {
+      "name": "IGP 高级特性",
+      "topics": [
+        "OSPF 快速收敛",
+        "OSPF 路由控制",
+        "OSPF 其他特性",
+        "IS-IS LSP 分片"
+      ],
+      "examFocus": [
+        "PRC 与完整 SPF 的适用差异",
+        "filter-policy import 不阻止 LSA 泛洪",
+        "NSR 与 GR 对邻居的依赖"
+      ],
+      "practiceAdvice": "先判断题目问的是收敛、过滤还是可靠性，再定位到具体机制。"
+    },
+    {
+      "name": "BGP 高级特性",
+      "topics": [
+        "Community",
+        "路由聚合",
+        "路由反射器",
+        "Cluster_List"
+      ],
+      "examFocus": [
+        "Community 的分组标记作用",
+        "Cluster_List 与 AS_Path 的防环区别",
+        "RR 的反射范围"
+      ],
+      "practiceAdvice": "把每个属性的作用对象写清楚，避免把防环属性与选路属性混淆。"
+    },
+    {
+      "name": "IPv6 路由",
+      "topics": [
+        "IPv6 静态路由",
+        "OSPFv3",
+        "IS-IS IPv6",
+        "BGP4+"
+      ],
+      "examFocus": [
+        "IPv6 默认路由写法",
+        "OSPFv3 基于链路运行",
+        "TLV 236 与 MP_REACH_NLRI 的承载对象"
+      ],
+      "practiceAdvice": "按路由协议分别记承载前缀的载体，再记下一跳类型。"
+    },
+    {
+      "name": "以太网高级技术",
+      "topics": [
+        "QinQ",
+        "VLAN 聚合",
+        "MUX VLAN",
+        "端口安全",
+        "DHCP Snooping",
+        "IP Source Guard"
+      ],
+      "examFocus": [
+        "QinQ 内外层标签的分工",
+        "DHCP Snooping 信任端口",
+        "端口安全与 MAC 漂移防护"
+      ],
+      "practiceAdvice": "先判断题目是封装、转发还是安全接入，再选对应特性。"
+    },
+    {
+      "name": "MPLS 技术",
+      "topics": [
+        "MPLS 转发",
+        "静态 LSP",
+        "LDP",
+        "MPLS VPN",
+        "RD/RT",
+        "双层标签"
+      ],
+      "examFocus": [
+        "push/swap/pop 的适用节点",
+        "LDP 的 UDP/TCP 646",
+        "RD 与 RT 的职责",
+        "VPN 报文的两层标签"
+      ],
+      "practiceAdvice": "画出入节点、P 节点、出节点的标签操作，比背文字更可靠。"
+    },
+    {
+      "name": "运维、排障与割接",
+      "topics": [
+        "信息收集",
+        "结构化排障",
+        "常见故障",
+        "割接流程",
+        "回退预案"
+      ],
+      "examFocus": [
+        "diagnostic-information 的用途",
+        "OSPF 卡 ExStart 的常见原因",
+        "回退预案的作用"
+      ],
+      "practiceAdvice": "把流程题按时间顺序排列，把故障题按分层定位，避免跳步。"
+    }
+  ],
+  "career": {
+    "positioning": "面向已掌握数通核心知识、希望深入路由交换高阶技术与运维排障的中级网络工程师。",
+    "bestFor": [
+      "已通过或准备参加 H12-821 的考生",
+      "需要深入 MPLS、IPv6 路由与排障的运维人员",
+      "希望取得 HCIP-Datacom-ARST 方向证书的从业者"
+    ],
+    "roles": [
+      "高级网络工程师",
+      "数通运维工程师",
+      "网络规划工程师",
+      "故障支持工程师"
+    ],
+    "value": [
+      "覆盖 MPLS VPN、IPv6 路由与高级交换等企业网络高阶技术",
+      "强化结构化排障与割接变更能力",
+      "与 H12-821 组合形成完整 HCIP-Datacom 知识体系"
+    ],
+    "limitations": [
+      "本指南不覆盖实验操作和排障实操评分",
+      "题库为原创仿真练习，不是官方真题",
+      "考试版本、费用和考位需以华为当期公布为准"
+    ]
+  },
+  "mustKnow": [
+    "PRC 只在拓扑变化但路由条目未变时更新受影响路由，不重建整棵 SPF 树。",
+    "filter-policy import 只影响本机路由表，不阻止 LSA 继续泛洪。",
+    "NSR 不依赖邻居配合，GR 需要邻居协助保持邻接。",
+    "IS-IS 用 TLV 236 承载 IPv6 前缀，BGP4+ 用 MP_REACH_NLRI 承载 IPv6 路由。",
+    "MPLS VPN 报文携带两层标签，外层公网、内层私网。",
+    "LDP 发现用 UDP 646，会话建立用 TCP 646。",
+    "OSPF 邻居长期停在 ExStart 时优先检查接口 MTU 是否一致。"
+  ],
+  "sources": [
+    {
+      "name": "华为人才在线：HCIP-Datacom-Advanced Routing & Switching Technology 认证页",
+      "url": "https://e.huawei.com/cn/talent/#/cert/product-details?certifiedProductId=351&authenticationLevel=CTYPE_CARE_HCIP&technicalField=IIC&version=1.0",
+      "scope": "H12-831 的考试代码、自选关系、V1.0 考试大纲与教材入口。"
+    },
+    {
+      "name": "RFC 4364: BGP/MPLS IP Virtual Private Networks (VPNs)",
+      "url": "https://www.rfc-editor.org/rfc/rfc4364.txt",
+      "scope": "VRF、RD、RT 与 MPLS VPN 报文转发模型。"
+    },
+    {
+      "name": "RFC 5036: LDP Specification",
+      "url": "https://www.rfc-editor.org/rfc/rfc5036.txt",
+      "scope": "LDP 发现、会话建立与标签分发。"
+    }
+  ]
+}

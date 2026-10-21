@@ -49,9 +49,14 @@ import { DesktopChapterBrowser } from "./desktop-workspace.jsx";
 import {
   loadPracticeProgress,
   practiceStorageKey,
+  practiceReturnPage,
+  practiceReturnLabel,
   readPracticeProgress,
 } from "./practice-progress.js";
 import { MembershipBadge } from "./components/membership-badge.jsx";
+import { UserAvatar } from "./components/user-avatar.jsx";
+import { StudyReminder } from "./components/study-reminder.jsx";
+import { WorkspaceAnnouncement } from "./components/workspace-announcement.jsx";
 import { useMembershipAccount } from "./use-membership-account.js";
 const VipView = preloadableFeature(() =>
   import("./vip-view.jsx").then((m) => ({ default: m.VipView })),
@@ -82,6 +87,7 @@ const SponsorModal = preloadableFeature(() =>
 const CertificatePicker = preloadableFeature(() =>
   import("./features/auth.jsx").then((m) => ({ default: m.CertificatePicker })),
 );
+const CertificateSelection = preloadableFeature(() => import("./features/certificate-selection.jsx").then(m => ({ default: m.CertificateSelection })));
 const ChapterGrid = preloadableFeature(() =>
   import("./features/chapters.jsx").then((m) => ({ default: m.ChapterGrid })),
 );
@@ -103,9 +109,16 @@ const CertificateGuideView = preloadableFeature(() =>
 const WrongView = preloadableFeature(() =>
   import("./features/wrong.jsx").then((m) => ({ default: m.WrongView })),
 );
+const FavoritesView = preloadableFeature(() =>
+  import("./features/favorites.jsx").then(m=>({default:m.FavoritesView})),
+);
 const TrainingView = preloadableFeature(() =>
   import("./features/training.jsx").then((m) => ({ default: m.TrainingView })),
 );
+const LearningPlanView = preloadableFeature(() => import("./features/learning-plan.jsx").then((m)=>({default:m.LearningPlanView})));
+const BlueStudyHome = preloadableFeature(() => import("./features/blue-workspace.jsx").then(m=>({default:m.BlueStudyHome})));
+const BlueChapterBrowser = preloadableFeature(() => import("./features/blue-workspace.jsx").then(m=>({default:m.BlueChapterBrowser})));
+const InteractiveTutor = preloadableFeature(()=>import("./features/interactive-tutor.jsx").then(m=>({default:m.InteractiveTutor})));
 const CommunityView = preloadableFeature(() =>
   import("./features/shared-library.jsx").then((m) => ({
     default: m.CommunityView,
@@ -131,8 +144,8 @@ const Practice = preloadableFeature(() =>
 const ExamView = preloadableFeature(() =>
   import("./features/exam.jsx").then((m) => ({ default: m.ExamView })),
 );
-const pageFeatures = { vip: VipView, redeem: VipView, study: SubjectiveStudy, chapters: ChapterGrid,
-  guide: CertificateGuideView, wrong: WrongView, training: TrainingView, community: CommunityView,
+const pageFeatures = { tutor:InteractiveTutor, home: BlueStudyHome, plan: LearningPlanView, favorites: FavoritesView, vip: VipView, redeem: VipView, study: SubjectiveStudy, chapters: BlueChapterBrowser,
+  certificates: CertificateSelection, guide: CertificateGuideView, wrong: WrongView, training: TrainingView, community: CommunityView,
   chat: CommunityChatView, about: AboutView, settings: SettingsView, admin: AdminView,
   "study-admin": AdminView, practice: Practice, exam: ExamView };
 const preloadPage = (page) => { void pageFeatures[page]?.preload().catch(() => {}); };
@@ -142,12 +155,18 @@ import "./exam-scope.css";
 import "./desktop.css";
 import "./workspace.css";
 import "./theme.css";
+import { useWebPreferences } from "./web-preferences.jsx";
+import { requestCertificateSwitch } from "./certificate-switch.js";
+import "./blue-shell.css";
+import "./blue-landing.css";
 
 const navs = [
   ["home", "学习总览", LayoutDashboard],
   ["guide", "考试与证书指南", BadgeInfo],
   ["chapters", "章节练习", BookOpen],
   ["wrong", "错题本", NotebookPen],
+  ["favorites", "我的收藏", Star],
+  ["plan", "学习计划", CalendarDays],
   ["training", "AI 专项训练", Sparkles],
   ["study", "AI 精讲与练习", BookOpen],
   ["vip", "VIP 中心", Crown],
@@ -161,15 +180,24 @@ const navs = [
 const navGroups = [
   {
     label: "学习",
-    pages: ["home", "chapters", "study", "wrong", "training", "exam", "mastery"],
+    pages: ["home", "chapters", "study", "wrong", "favorites", "plan", "training", "exam", "mastery"],
   },
   { label: "发现与服务", pages: ["vip", "community", "chat", "guide"] },
   { label: "管理", pages: ["admin"] },
 ];
 
+function pageFromHash() {
+  const hash = location.hash.slice(1) || "home";
+  return hash.startsWith("admin/") ? "admin" : hash;
+}
+
 function App() {
   const desktop = useDesktopWeb();
-  const [page, setPage] = useState(location.hash.slice(1) || "home"),
+  const blueWeb = !appleMobile;
+  const StudyHome = blueWeb ? BlueStudyHome : DesktopHome;
+  const ChapterBrowser = blueWeb ? BlueChapterBrowser : DesktopChapterBrowser;
+  const [preferredStudyNode,setPreferredStudyNode]=useState("");
+  const [page, setPage] = useState(pageFromHash),
     [auth, setAuth] = useState(null),
     [bankSource, setBankSource] = useState("all"),
     [chapterFocus, setChapterFocus] = useState(""),
@@ -192,12 +220,16 @@ function App() {
     [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const accountMenuRef = useRef(null);
   const questionRequest = useRef(null), loadedQuestionScope = useRef(null), dashboardRead = useRef(0);
+  const practiceDirty = useRef(new Set()), practiceContext = useRef(null);
   const [questionsLoading, setQuestionsLoading] = useState(false);
+  const [questionsFailure,setQuestionsFailure] = useState("");
   const [savedPractice, setSavedPractice] = useState(null);
+  const webPreferences = useWebPreferences(auth?.user,blueWeb&&!!auth?.authenticated);
   const practiceKey = practiceStorageKey(
     auth?.user?.id,
     auth?.user?.certificateId,
   );
+  useEffect(() => { setPreferredStudyNode(""); }, [practiceKey]);
   useEffect(() => {
     try {
       setSavedPractice(readPracticeProgress(window.localStorage, practiceKey));
@@ -207,8 +239,8 @@ function App() {
   }, [practiceKey, page]);
   useEffect(() => {
     // Re-entering practice (including browser Back) must read the latest checkpoint.
-    if (desktop && page !== "practice") setSession(null);
-  }, [desktop, page]);
+    if ((desktop || blueWeb) && page !== "practice") setSession(null);
+  }, [desktop, blueWeb, page]);
   const membership = useMembershipAccount(
     api,
     auth?.authenticated ? auth.user?.id : null,
@@ -226,10 +258,14 @@ function App() {
     const scope = practiceKey;
     if (questionRequest.current?.scope === scope) return questionRequest.current.promise;
     setQuestionsLoading(true);
+    setQuestionsFailure("");
     const promise = api("/questions").then((questions) => {
       setAllQuestions(questions);
       loadedQuestionScope.current = scope;
       return questions;
+    }).catch(failure=> {
+      if(failure.name!=="CacheCancelledError" && questionRequest.current?.promise===promise) setQuestionsFailure(failure.message);
+      throw failure;
     }).finally(() => {
       if (questionRequest.current?.promise === promise) {
         questionRequest.current = null;
@@ -251,6 +287,22 @@ function App() {
     // Course, membership and administration pages do not download the full bank.
     await Promise.all([foundation, questionPages.has(page) ? loadQuestions() : Promise.resolve()]);
   };
+  practiceContext.current = { key: practiceKey, page, refresh };
+  const onPracticeSaved = (questionId) => {
+    practiceDirty.current.add(practiceKey);
+    if (practiceContext.current.key !== practiceKey) return;
+    setAllQuestions(old => old.map(q => q.id === questionId ? { ...q, attempted: true } : q));
+    if (practiceContext.current.page !== "practice") {
+      practiceDirty.current.delete(practiceKey);
+      void practiceContext.current.refresh().catch(e => { if (e.name !== "CacheCancelledError") setError(e.message); });
+    }
+  };
+  useEffect(() => {
+    // Refresh the aggregate views once when leaving practice, never on its
+    // next-question path. The mounted session already holds its question list.
+    if (page === "practice" || !practiceDirty.current.delete(practiceKey)) return;
+    void refresh().catch(e => { if (e.name !== "CacheCancelledError") setError(e.message); });
+  }, [page, practiceKey]);
   useEffect(() => {
     api("/auth/me")
       .then(setAuth)
@@ -266,7 +318,7 @@ function App() {
       refresh().catch((e) => { if (e.name !== "CacheCancelledError") setError(e.message); });
     }
     const h = () => {
-      const next = location.hash.slice(1) || "home";
+      const next = pageFromHash();
       preloadPage(next);
       startTransition(() => setPage(next));
     };
@@ -360,7 +412,7 @@ function App() {
       setBusy("");
     }
   };
-  const start = (questions, title = "自由练习") => {
+  const start = (questions, title = "自由练习", details = {}) => {
     if (!questions.length) {
       setError("暂无可练习题目");
       return;
@@ -368,9 +420,12 @@ function App() {
     setSession({
       questions,
       title,
+      returnPage: practiceReturnPage({ ...details, returnPage: details.returnPage || (page === "practice" ? session?.returnPage : page) }),
+      startedAt: Date.now(),
       certificateId:
         auth.user?.certificateId || dashboard?.certificate?.id || null,
-      storageKey: desktop ? practiceKey : null,
+      ...(details.planTask ? {planTask:details.planTask,progress:details.progress} : {}),
+      storageKey: desktop || blueWeb || details.planTask ? practiceKey : null,
       key: Date.now(),
     });
     go("practice");
@@ -381,7 +436,6 @@ function App() {
   };
   useEffect(() => {
     if (
-      !desktop ||
       page !== "practice" ||
       session ||
       !practiceKey ||
@@ -391,14 +445,15 @@ function App() {
     let active = true;
     try {
       const saved = readPracticeProgress(window.localStorage, practiceKey);
-      loadPracticeProgress(saved, allQuestions, () =>
-        api("/questions/shared-ai"),
-      )
+      if (!desktop && !blueWeb && !saved?.planTask) return;
+      loadPracticeProgress(saved, allQuestions, () => api("/questions/shared-ai"),
+        (reference) => api(`/learning-plan/${reference.planId}/tasks/${reference.taskId}/session`,{}))
         .then((restored) => {
           if (!active) return;
           if (restored)
             setSession({
               ...restored,
+              startedAt: restored.startedAt || Date.now(),
               storageKey: practiceKey,
               certificateId: auth.user.certificateId,
               key: Date.now(),
@@ -421,10 +476,19 @@ function App() {
     return () => {
       active = false;
     };
-  }, [desktop, page, session, practiceKey, allQuestions]);
-  const changeCertificate = (certificateId) =>
-    run("正在切换备考目标", async () => {
-      const result = await api("/auth/certificate", { certificateId }, "PUT");
+  }, [desktop, blueWeb, page, session, practiceKey, allQuestions]);
+  const switchUserCertificate = async (certificateId, destination = "home") => {
+      dashboardRead.current++;
+      let user;
+      try {
+        user = await requestCertificateSwitch(api, certificateId, auth.user);
+      } catch (e) {
+        if (e.certificateStateUnknown) {
+          setDashboard(null); setSession(null); setAllQuestions([]);
+          loadedQuestionScope.current = null;
+        }
+        throw e;
+      }
       try {
         localStorage.removeItem("netwise-exam");
       } catch {
@@ -439,10 +503,13 @@ function App() {
       setBankSource("all");
       setUseSharedAi(false);
       setSharedAiQuestions([]);
-      setAuth((old) => ({ ...old, user: result.user }));
-      go("home");
-      setNotice(`已切换到 ${result.user.certificate.shortName}`);
-    });
+      setAuth((old) => ({ ...old, user }));
+      if (destination) go(destination);
+      setNotice(`已切换到 ${user.certificate?.shortName || auth.certificates.find(c => c.id === certificateId)?.shortName || "所选备考目标"}`);
+      return user;
+  };
+  const changeCertificate = (certificateId, destination = "home") =>
+    run("正在切换备考目标", () => switchUserCertificate(certificateId, destination));
   const openChapter = (name) => {
     setChapterFocus(name);
     setSectionFocus("");
@@ -600,6 +667,14 @@ function App() {
         }}
       />
     );
+  if (page === "admin" || page === "study-admin") {
+    if (!auth.user?.isAdmin) return <div className="blue-workspace"><div className="ac-state" role="alert"><h1>仅管理员可访问管理中心</h1><button onClick={() => go("home")}>返回学习空间</button></div></div>;
+    return <FeatureBoundary><AdminView user={auth.user} certificates={auth.certificates} navigate={go}/></FeatureBoundary>;
+  }
+  if (!auth.user.certificateId && blueWeb)
+    return <div className="blue-workspace blue-cert-onboarding"><FeatureBoundary>
+      <CertificateSelection certificates={auth.certificates} currentId={null} onSelect={switchUserCertificate} navigate={go} onSignOut={signOut} onboarding busy={!!busy} />
+    </FeatureBoundary></div>;
   if (!auth.user.certificateId && desktop)
     return (
       <DesktopCertificatePicker
@@ -678,9 +753,11 @@ function App() {
     );
   return (
     <div
-      className={`app-shell${desktop ? " desk-workspace" : ""}`}
+      className={`app-shell${desktop ? " desk-workspace" : ""}${blueWeb ? " blue-workspace" : ""}`}
       data-page={page}
     >
+      {blueWeb && <StudyReminder key={auth.user.id} state={webPreferences} page={page}
+        blocked={!!busy || announcementOpen || sponsorOpen || accountMenuOpen} navigate={go} />}
       <aside className={"sidebar " + (mobile ? "open" : "")}>
         <a className="brand" href="#home" onClick={() => go("home")}>
           <span className="brand-icon">
@@ -690,7 +767,7 @@ function App() {
             考匠<span>AceExam</span>
           </strong>
         </a>
-        {desktop ? (
+        {(desktop && !blueWeb) || (blueWeb && !desktop) ? (
           <label className="study-certificate-select">
             <span>正在备考</span>
             <select
@@ -706,7 +783,7 @@ function App() {
               ))}
             </select>
           </label>
-        ) : (
+        ) : blueWeb ? null : (
           <div className="workspace-label">
             {dashboard.certificate?.shortName} · 学习工作台
           </div>
@@ -714,7 +791,7 @@ function App() {
         <nav aria-label="主导航">
           {(desktop
             ? [
-                { label: "学习", pages: ["home", "chapters", "study", "wrong", "exam"] },
+                { label: "学习", pages: ["home", "chapters", "study", "wrong", "exam", "favorites", "plan"] },
                 {
                   label: "更多学习工具",
                   pages: ["training", "mastery", "community", "chat", "guide"],
@@ -730,7 +807,7 @@ function App() {
             if (!entries.length) return null;
             const buttons = entries.map(([id, label, Icon]) => {
               const selected =
-                page === id || (id === "vip" && page === "redeem") || (id === "admin" && page === "study-admin");
+                page === id || (id==="study"&&page==="tutor") || (id === "vip" && page === "redeem") || (id === "admin" && page === "study-admin");
               return (
                 <button
                   key={id}
@@ -781,10 +858,8 @@ function App() {
               aria-haspopup="menu"
               onClick={() => setAccountMenuOpen((open) => !open)}
             >
-              <span className="account-avatar" aria-hidden="true">
-                <UserRound size={18} />
-              </span>
-              <strong>{dashboard.user?.username || "学习账户"}</strong>
+              {blueWeb ? <UserAvatar url={auth.user.avatarUrl} className="account-avatar"/> : <span className="account-avatar" aria-hidden="true"><UserRound size={18}/></span>}
+              <strong>{(blueWeb ? auth.user.communityName : null) || auth.user.username || "学习账户"}</strong>
               <ChevronDown size={16} />
             </button>
             {accountMenuOpen && (
@@ -886,8 +961,10 @@ function App() {
                 navs.find((n) => n[0] === (page === "study-admin" ? "admin" : page))?.[1] ||
                 {
                   settings: "设置",
+                  certificates: "证书选择",
                   about: "关于考匠",
                   practice: session?.title || "练习中",
+                  tutor:"AI 互动精讲",
                   redeem: "会员兑换",
                 }[page] ||
                 "学习总览"
@@ -897,6 +974,7 @@ function App() {
                   ([id]) => id !== "admin" || dashboard.user?.isAdmin,
                 ),
                 ["settings", "账号设置", Settings],
+                ["certificates", "考试与证书", GraduationCap],
                 ["redeem", "会员兑换", Ticket],
                 ["about", "关于考匠", BadgeInfo],
                 ["downloads", "多端学习与下载", Download],
@@ -907,6 +985,7 @@ function App() {
               openChapter={openChapter}
               plan={membership.account?.plan}
               username={dashboard.user?.username}
+              certificateControl={blueWeb ? <div className="blue-certificate-switch"><select className="blue-certificate-control" aria-label="切换备考目标" value={auth.user.certificateId} disabled={!!busy} onChange={event=>changeCertificate(event.target.value)}>{auth.certificates.map(c=><option key={c.id} value={c.id}>{c.shortName || c.name}</option>)}</select><button type="button" disabled={!!busy} aria-label="浏览考试与证书" title="浏览考试与证书" onMouseEnter={()=>preloadPage("certificates")} onFocus={()=>preloadPage("certificates")} onClick={()=>go("certificates")}><GraduationCap size={18}/></button></div> : null}
             />
           ) : (
             <>
@@ -923,8 +1002,10 @@ function App() {
                   {navs.find((n) => n[0] === (page === "study-admin" ? "admin" : page))?.[1] ||
                     {
                       settings: "设置",
+                      certificates: "证书选择",
                       about: "关于考匠",
                       practice: session?.title || "练习中",
+                      tutor: "AI 互动精讲",
                       redeem: "会员兑换",
                     }[page] ||
                     "学习总览"}
@@ -956,8 +1037,9 @@ function App() {
             </>
           )}
         </header>
-        <main>
+        <main data-page={page}>
           <FeatureBoundary>
+          {page === "certificates" && blueWeb && <CertificateSelection key={practiceKey} certificates={auth.certificates} currentId={auth.user.certificateId} onSelect={changeCertificate} navigate={go} busy={!!busy} />}
           {error && (
             <div className="alert error" role="alert">
               <TriangleAlert size={18} />
@@ -985,10 +1067,14 @@ function App() {
               <span className="workspace-activity-bar" aria-hidden="true" />
             </div>
           )}
-          {questionsLoading && !allQuestions.length && questionPages.has(page) && !(page === "practice" && session) ? <ContentPlaceholder rows={5} /> : <>
+          {questionsLoading && !allQuestions.length && questionPages.has(page) && !(page === "practice" && session) ? <ContentPlaceholder rows={5} /> : questionsFailure && !allQuestions.length && questionPages.has(page) && !(page === "practice" && session) ? <section className="question-load-error" role="alert"><h2>题库暂未读取成功</h2><p>{questionsFailure}</p><button onClick={()=>run("正在读取题库",loadQuestions)} disabled={!!busy}>重新读取题库<RefreshCw size={16}/></button></section> : <>
+          <WorkspaceAnnouncement enabled={page === "home"}/>
           {page === "home" &&
-            (desktop ? (
-              <DesktopHome
+            (blueWeb || desktop ? (
+              <StudyHome
+                key={practiceKey}
+                allQuestions={allQuestions}
+                start={start}
                 dashboard={dashboard}
                 go={go}
                 openChapter={openChapter}
@@ -1007,7 +1093,7 @@ function App() {
                   start(recommendedQuestions, "今日推荐练习")
                 }
                 favoriteCount={favoriteQuestions.length}
-                openFavorites={() => start(favoriteQuestions, "我的收藏")}
+                openFavorites={() => go("favorites")}
                 practicePoint={(point) =>
                   start(
                     allQuestions.filter(
@@ -1339,8 +1425,14 @@ function App() {
               </>
             ))}
           {page === "chapters" &&
-            (desktop ? (
-              <DesktopChapterBrowser
+            (blueWeb || desktop ? (
+              <ChapterBrowser
+                key={practiceKey}
+                wrong={wrong}
+                defaultCount={webPreferences.values.defaultCount}
+                busy={busy}
+                savedPractice={savedPractice}
+                resumePractice={resumePractice}
                 dashboard={dashboard}
                 allQuestions={allQuestions}
                 sharedAiQuestions={sharedAiQuestions}
@@ -1355,6 +1447,7 @@ function App() {
                 setSectionFocus={setSectionFocus}
                 start={start}
                 favoriteQuestions={favoriteQuestions}
+                openFavorites={() => go("favorites")}
               />
             ) : (
               <>
@@ -1430,8 +1523,7 @@ function App() {
                 </div>
                 <button
                   className="favorite-practice-entry"
-                  disabled={!favoriteQuestions.length}
-                  onClick={() => start(favoriteQuestions, "收藏题目")}
+                  onClick={() => go("favorites")}
                 >
                   <span className="favorite-practice-icon">
                     <Star size={20} fill="currentColor" />
@@ -1505,8 +1597,16 @@ function App() {
               currentCertificateId={auth.user.certificateId}
             />
           )}
+          {page === "favorites" && (
+            <FavoritesView key={practiceKey} start={start} run={run} refresh={refresh} busy={busy} defaultCount={webPreferences.values.defaultCount} onChapters={()=>go("chapters")} onStudy={item=>{setPreferredStudyNode(item.lessonNodeId||"");go("study");}} onStudyDirectory={()=>{setPreferredStudyNode("");go("study");}} />
+          )}
+          {page === "plan" && <LearningPlanView key={practiceKey} start={start} run={run} busy={busy} certificateName={dashboard.certificate?.shortName || dashboard.certificate?.name} />}
           {page === "wrong" && (
             <WrongView
+              key={practiceKey}
+              blue={blueWeb}
+              certificateId={auth.user.certificateId}
+              defaultCount={webPreferences.values.defaultCount}
               desktop={desktop}
               onPractice={() => go("chapters")}
               wrong={wrong}
@@ -1653,12 +1753,17 @@ function App() {
               focusRedemption={page === "redeem"}
             />
           )}
-          {page === "study" && <SubjectiveStudy key={`${auth.user.id}:${auth.user.certificateId}`} user={auth.user} navigate={go} />}
+          {page === "study" && <SubjectiveStudy key={`${auth.user.id}:${auth.user.certificateId}:${preferredStudyNode}`} user={auth.user} navigate={go} initialNodeId={preferredStudyNode} onInteractive={id=>{setPreferredStudyNode(id||"");go("tutor");}} />}
+          {page === "tutor" && <InteractiveTutor key={practiceKey} user={auth.user} navigate={go} initialNodeId={preferredStudyNode} readNode={id=>{setPreferredStudyNode(id||"");go("study");}} />}
           {page === "settings" && (
             <SettingsView
               key={auth.user.id}
+              user={auth.user}
+              blue={blueWeb}
               membership={membership}
+              webPreferences={blueWeb?webPreferences:undefined}
               onOpenVip={() => go("vip")}
+              onBrowseCertificates={blueWeb ? () => go("certificates") : undefined}
               run={run}
               busy={busy}
               notify={setNotice}
@@ -1666,21 +1771,7 @@ function App() {
               certificates={auth.certificates}
               currentCertificateId={auth.user.certificateId}
               onUserUpdated={(user) => setAuth((old) => ({ ...old, user }))}
-              onCertificateChange={async (certificateId) => {
-                const result = await api(
-                  "/auth/certificate",
-                  { certificateId },
-                  "PUT",
-                );
-                localStorage.removeItem("netwise-exam");
-                setSession(null);
-                setQueue([]);
-                setBankSource("all");
-                setUseSharedAi(false);
-                setSharedAiQuestions([]);
-                setAuth((old) => ({ ...old, user: result.user }));
-                setNotice(`已切换到 ${result.user.certificate.shortName}`);
-              }}
+              onCertificateChange={(certificateId) => switchUserCertificate(certificateId, null)}
             />
           )}
           {["admin", "study-admin"].includes(page) && dashboard.user?.isAdmin && (
@@ -1697,15 +1788,20 @@ function App() {
           {page === "practice" &&
             (session ? (
               <Practice
+                blue={blueWeb}
+                preferences={blueWeb ? webPreferences.values : undefined}
+                returnLabel={practiceReturnLabel(session)}
                 key={session.key}
                 session={session}
                 refresh={refresh}
+                onAttemptSaved={onPracticeSaved}
                 run={run}
                 busy={busy}
                 train={train}
                 configured={dashboard.aiConfigured}
+                tutor={!appleMobile?q=>run("正在定位题目知识点",async()=>{const context=await api(`/tutor/v1/questions/${encodeURIComponent(q.id)}`);setPreferredStudyNode(context.nodeId);go(context.courseId?"tutor":"study");}):undefined}
                 community={dashboard.community}
-                exit={() => go("home")}
+                exit={() => go(practiceReturnPage(session))}
               />
             ) : (
               <Empty title="选择一组题目开始练习">
@@ -1715,7 +1811,7 @@ function App() {
               </Empty>
             ))}
           {page === "exam" && (
-            <ExamView run={run} refresh={refresh} dashboard={dashboard} />
+            <ExamView blue={blueWeb} run={run} refresh={refresh} dashboard={dashboard} />
           )}
           </>}
           </FeatureBoundary>

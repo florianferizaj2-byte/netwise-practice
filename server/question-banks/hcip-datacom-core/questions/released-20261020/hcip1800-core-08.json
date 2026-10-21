@@ -1,0 +1,1863 @@
+[
+  {
+    "id": "hcip821-4-3-1-009",
+    "type": "single_choice",
+    "question": "在华为设备上，管理员把两条到达同一前缀的 BGP 路由的若干属性整理成四组比较顺序。下列哪一组与华为设备的 BGP 选路顺序一致？",
+    "options": {
+      "A": "先比较 MED，再比较 ORIGIN，最后比较 AS_PATH 长度",
+      "B": "先比较 Router ID，再比较 CLUSTER_LIST 长度，最后比较 LOCAL_PREF",
+      "C": "先比较 AS_PATH 长度，再比较 LOCAL_PREF，最后比较 Preferred-value",
+      "D": "先比较 Preferred-value，再比较 LOCAL_PREF，最后比较 AS_PATH 长度"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "华为设备 BGP 选路的整体顺序为 Preferred-value、LOCAL_PREF、本地始发、AS_PATH 长度、ORIGIN、MED、EBGP 优先于 IBGP、下一跳 IGP 开销、CLUSTER_LIST 长度、对等体 Router ID、对等体 IP 地址，因此 Preferred-value 最先、LOCAL_PREF 其次、AS_PATH 长度再次，D 正确。A 错误：MED 排在 ORIGIN 之后，不可能最先比较。B 错误：Router ID 与 CLUSTER_LIST 长度都排在 LOCAL_PREF 之后，属于最后几步。C 错误：LOCAL_PREF 先于 AS_PATH，且 Preferred-value 排在 LOCAL_PREF 之前，顺序完全颠倒。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 路由优选",
+    "knowledgePoint": "优选顺序",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "路由优选",
+      "选路顺序"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-3-1-009",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP 路由优选”；选路主流程依据 RFC 4271 §9.1.2.2，Preferred-value、本地始发与 CLUSTER_LIST 长度等步骤为华为设备实现顺序（题干已注明华为设备）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "d25a5632c91d353a8e9c75c0e5539eb3ef033d09438e992c1af27c5b83b8bcad"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-3-1-010",
+    "type": "single_choice",
+    "question": "在华为设备上，两条到达 10.1.1.0/24 的 BGP 路由在 Preferred-value、LOCAL_PREF、是否本地始发、AS_PATH 长度、ORIGIN、MED 以及 EBGP/IBGP 来源上全部相同。路由 1 的下一跳在 IGP 路由表中的开销为 5，路由 2 的下一跳开销为 20。优选结果是？",
+    "options": {
+      "A": "优选路由 2，因为下一跳开销越大表示该路径越可靠",
+      "B": "优选路由 1，因为前面属性相同后比较到达下一跳的 IGP 开销，较小者优先",
+      "C": "两条路由等价，自动形成 BGP 负载分担",
+      "D": "改为比较对等体 Router ID，与下一跳开销无关"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "复算过程：两条路由在 Preferred-value、LOCAL_PREF、本地始发、AS_PATH、ORIGIN、MED、EBGP/IBGP 来源七步上均相同，选路进行到“到达下一跳的 IGP 开销”这一步；路由 1 的开销 5 小于路由 2 的 20，因此优选路由 1，B 正确。A 错误：开销越小表示到达下一跳越近，方向说反。C 错误：BGP 默认只选一条最优路由，只有额外配置多路径并满足条件才会负载分担。D 错误：对等体 Router ID 排在这一步之后，本轮不会用到。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 路由优选",
+    "knowledgePoint": "优选顺序",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "路由优选",
+      "IGP 开销"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-3-1-010",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP 路由优选”；到达下一跳的 IGP 开销比较步骤依据 RFC 4271 §9.1.2.2，题干已写明华为设备。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "f62c66c7277cbea73db185f16978bc462b11cddd47c54f4f5e8d1aa873dd93f2"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-3-1-011",
+    "type": "single_choice",
+    "question": "在华为设备的 BGP 选路顺序中，比较 CLUSTER_LIST 长度这一步位于哪两个步骤之间？",
+    "options": {
+      "A": "LOCAL_PREF 之后、AS_PATH 长度之前",
+      "B": "MED 之前、EBGP/IBGP 来源之后",
+      "C": "下一跳 IGP 开销之后、对等体 Router ID 之前",
+      "D": "对等体 IP 地址之后，作为整个选路的最后一步"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "华为设备在比较完到达下一跳的 IGP 开销后，接着比较 CLUSTER_LIST 长度，较短者优先；该步骤之后才比较对等体 Router ID，最后比较对等体 IP 地址，因此 C 正确。A 错误：CLUSTER_LIST 远排在 LOCAL_PREF 与 AS_PATH 之后，不可能夹在两者之间。B 错误：MED 在 ORIGIN 之后、EBGP/IBGP 来源之前就已完成比较。D 错误：最后一步是对等体 IP 地址，不是 CLUSTER_LIST 长度。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 路由优选",
+    "knowledgePoint": "优选顺序",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "路由优选",
+      "CLUSTER_LIST"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-3-1-011",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4",
+        "rfc4456-route-reflection"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP 路由优选”；CLUSTER_LIST 的语义与防环作用依据 RFC 4456 §7，列表较短者优先为华为设备实现步骤（题干已注明）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "fc4abbef640b4f12640f5e839fb94af9560e91214ed41dfad3c86df23b40bef7"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-3-1-012",
+    "type": "single_choice",
+    "question": "在华为设备的 BGP 选路过程中，当前面所有属性都比较完毕仍无法分出优劣时，最后一步比较的是什么？",
+    "options": {
+      "A": "对等体的 IP 地址，地址较小者对应的路由优先",
+      "B": "对等体的 Router ID，数值较大者优先",
+      "C": "路由的 MED，数值较小者优先",
+      "D": "路由的 ORIGIN，IGP 优先于 EGP"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "华为设备 BGP 选路的最后一步是比较通告该路由的对等体 IP 地址，地址较小者优先，A 正确。B 错误：对等体 Router ID 是倒数第二步，而且取值较小者优先，方向与位置都不对。C 错误：MED 早在 ORIGIN 之后就已比较过，不会放到最后。D 错误：ORIGIN 同样在 AS_PATH 之后、MED 之前就已比较。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 路由优选",
+    "knowledgePoint": "优选顺序",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "路由优选",
+      "对等体地址"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-3-1-012",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP 路由优选”；对等体 Router ID 与对等体地址的最后比较步骤依据 RFC 4271 §9.1.2.2 并按其华为设备实现顺序排列。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "d0d61ca6b9a6453beabc5e7415fc6b17eb9ec8ab2e3b00c7b4f571df8ea9f11e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-3-1-013",
+    "type": "single_choice",
+    "question": "在华为设备的 BGP 最优路由比较中，下列哪一项属性本身不参与比较？",
+    "options": {
+      "A": "MED",
+      "B": "COMMUNITY",
+      "C": "CLUSTER_LIST 长度",
+      "D": "对等体 IP 地址"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "COMMUNITY 是可选过渡的标记属性，用于配合路由策略做批量标记与过滤，本身不作为 BGP 选路的比较项，B 正确。A 错误：MED 参与比较，默认只在来自同一邻居 AS 的路由之间比较，数值小者优先。C 错误：CLUSTER_LIST 长度在下一跳 IGP 开销之后参与比较，较短者优先。D 错误：对等体 IP 地址是选路的最后一步，较小者优先。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 路由优选",
+    "knowledgePoint": "优选顺序",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "路由优选",
+      "COMMUNITY"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-3-1-013",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4",
+        "rfc1997-bgp-community"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP 路由优选”；选路步骤依据 RFC 4271 §9.1.2.2，COMMUNITY 作为可选过渡策略标记的定义依据 RFC 1997“COMMUNITIES attribute”。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "2eeca7c1c39e01f000fe64e54cae941928d51714472dd4b381bc752099d0a463"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-3-1-014",
+    "type": "single_choice",
+    "question": "在华为设备上为某个 IBGP 邻居配置 peer 10.1.1.1 preferred-value 200 后，下列描述正确的是？",
+    "options": {
+      "A": "该值会写入 UPDATE 的 LOCAL_PREF 字段并传递给其他 IBGP 邻居",
+      "B": "该值只影响本机向该邻居发布路由时的出口选择",
+      "C": "该值会覆盖从该邻居收到的所有路由的 AS_PATH 长度",
+      "D": "该值只在本机为从该邻居收到的路由赋初值，并在选路最前面参与比较，不会传递给其他路由器"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Preferred-value 是华为设备本地的选路权重，按邻居为收到的路由赋初值，在选路顺序中排在第一位，数值越大越优；它不写入 BGP UPDATE，因此不会传给其他路由器，D 正确。A 错误：会随 UPDATE 在 AS 内传递的是 LOCAL_PREF，两者不是同一个属性。B 错误：该配置作用于从该邻居收到的路由，影响的是本机选路而不是发布方向。C 错误：Preferred-value 与 AS_PATH 长度是两个独立比较项，不存在覆盖关系。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 路由优选",
+    "knowledgePoint": "优选顺序",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "路由优选",
+      "Preferred-value"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-3-1-014",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP 路由优选”；LOCAL_PREF 随 UPDATE 在 AS 内传递的规则依据 RFC 4271 §5.1.5，Preferred-value 为华为本地属性、不写入 UPDATE（题干已注明华为设备）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "bb2c84aec818d60c78038769624acd791230020134293048c51eb059ee998f8f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-3-1-015",
+    "type": "single_choice",
+    "question": "三条到达同一前缀的 BGP 路由其他属性相同，AS_PATH 分别为：路由 1 是 65001 65002；路由 2 是 65001 65002 65003；路由 3 是 65001 {65002,65003}。关于 AS_PATH 长度的比较，正确的是？",
+    "options": {
+      "A": "路由 3 最短，因为 AS_SET 中的 AS 号不计入长度",
+      "B": "路由 1 与路由 3 长度相同，均为 2，需要继续比较 ORIGIN；路由 2 长度为 3，先被淘汰",
+      "C": "三条路由长度都为 3，无法比较",
+      "D": "路由 2 最短，因为 AS 号个数最多表示路径最优"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "复算过程：AS_SEQUENCE 中每个 AS 号计 1，AS_SET 无论包含几个 AS 都整体计 1。路由 1 为 1+1=2；路由 2 为 1+1+1=3；路由 3 为 65001 计 1、集合计 1，共 2。因此路由 1 与路由 3 并列最短，需要进入 ORIGIN 比较，路由 2 因路径更长被淘汰，B 正确。A 错误：集合按 1 计而不是按 0 计，路由 3 并不比路由 1 短。C 错误：三者长度分别为 2、3、2，并非都为 3。D 错误：AS_PATH 越长越不优，方向说反。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 路由优选",
+    "knowledgePoint": "优选顺序",
+    "difficulty": "hard",
+    "tags": [
+      "BGP",
+      "路由优选",
+      "AS_PATH",
+      "AS_SET"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-3-1-015",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP 路由优选”；AS_PATH 由 AS_SEQUENCE 与 AS_SET 组成、AS_SET 计为一个 AS 的规则依据 RFC 4271 §5.1.2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "7846c1caa67f714d8a8ba2dc5c6c11a836ffdc7b9098e8492946085a04c057e7"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-3-1-016",
+    "type": "single_choice",
+    "question": "两条到达同一前缀的 BGP 路由在 Preferred-value、LOCAL_PREF、本地始发、AS_PATH 长度和 ORIGIN 上全部相同，分别从 AS 65001 和 AS 65002 两个不同的邻居 AS 学到，MED 分别为 10 和 20。在华为设备默认配置下，选路会如何进行？",
+    "options": {
+      "A": "直接比较 MED，优选 MED 为 10 的路由并结束比较",
+      "B": "直接比较 MED，优选 MED 为 20 的路由，因为数值越大越优",
+      "C": "丢弃 MED 较小的路由，只保留 MED 较大的路由",
+      "D": "默认只在来自同一邻居 AS 的路由之间比较 MED，本例不比较 MED，继续比较 EBGP/IBGP 来源等后续属性"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "华为设备默认只在来自同一邻居 AS 的多条路由之间比较 MED，本例两条路由分别来自 AS 65001 与 AS 65002，MED 不参与比较，选路继续进入 EBGP/IBGP 来源及以后的步骤，D 正确。A 错误：忽略了 MED 的比较前提，跨邻居 AS 时默认不比较。B 错误：既忽略了比较前提，也把 MED 的方向说反，MED 是数值小者优先。C 错误：MED 不是用来丢弃路由的条件，比较不成立时两条路由都保留到下一步。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 路由优选",
+    "knowledgePoint": "优选顺序",
+    "difficulty": "hard",
+    "tags": [
+      "BGP",
+      "路由优选",
+      "MED"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-3-1-016",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP 路由优选”；MED 在选路中的位置与比较方向依据 RFC 4271 §5.1.4、§9.1.2.2，默认仅在同一邻居 AS 内比较为华为设备默认行为（题干已注明）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "275b5a28e179f6b1bca564f4806a51d6f812d2bdb010362e45f6e705e953ce70"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-3-1-017",
+    "type": "single_choice",
+    "question": "两条到达同一前缀的路由在前面各属性上相同。路由 1 从 EBGP 邻居学到，其下一跳的 IGP 开销为 30；路由 2 从 IBGP 邻居学到，其下一跳的 IGP 开销为 5。按华为设备选路顺序，结果是？",
+    "options": {
+      "A": "优选路由 2，因为下一跳的 IGP 开销更小",
+      "B": "两条路由等价，按下一跳开销比例负载分担",
+      "C": "优选路由 1，因为 EBGP 来源优先于 IBGP 来源，该步骤在下一跳 IGP 开销比较之前",
+      "D": "优选 Router ID 较小的邻居通告的路由，与 EBGP/IBGP 来源无关"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "在 MED 之后先比较路由来源，EBGP 路由优先于 IBGP 路由，只有来源相同才比较下一跳 IGP 开销；因此尽管路由 1 的开销 30 大于路由 2 的 5，仍在来源这一步被优选，C 正确。A 错误：把后面的 IGP 开销步骤提前，越过了 EBGP/IBGP 来源比较。B 错误：该步骤已分出唯一最优，且默认不做负载分担。D 错误：Router ID 比较排在更后面，本例用不到。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 路由优选",
+    "knowledgePoint": "优选顺序",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "路由优选",
+      "EBGP",
+      "IBGP"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-3-1-017",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP 路由优选”；EBGP 优先于 IBGP 的步骤位于下一跳 IGP 开销之前，依据 RFC 4271 §9.1.2.2 及华为设备实现顺序（题干已注明）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "60d318d5bc0fefdf13772e74ceaafefec6b4b1636cad76478e7ecb5cde186f5e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-3-1-018",
+    "type": "single_choice",
+    "question": "两条到达同一前缀的 BGP 路由除 ORIGIN 外其他属性相同，一条的 ORIGIN 为 EGP，另一条为 Incomplete。按 BGP 选路规则，结果是？",
+    "options": {
+      "A": "优选 ORIGIN 为 EGP 的路由，因为 ORIGIN 的优先级为 IGP 高于 EGP、EGP 高于 Incomplete",
+      "B": "优选 ORIGIN 为 Incomplete 的路由，因为它表示路由经过引入、可信度更高",
+      "C": "两条路由等价，ORIGIN 只在路由撤销时使用",
+      "D": "优选 ORIGIN 为 Incomplete 的路由，因为其 ORIGIN 编码值更大"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "ORIGIN 表示路由来源的完整程度，优先级为 IGP 优于 EGP、EGP 优于 Incomplete，因此 EGP 的路由胜出，A 正确。B 错误：Incomplete 表示来源信息不完整，可信度最低，不是更高。C 错误：ORIGIN 是参与选路的公认属性，与撤销无关。D 错误：编码值大（IGP 为 0、EGP 为 1、Incomplete 为 2）恰恰意味着优先级低，方向说反。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 路由优选",
+    "knowledgePoint": "优选顺序",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "路由优选",
+      "ORIGIN"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-3-1-018",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP 路由优选”；ORIGIN 的取值与 IGP、EGP、Incomplete 的优先关系依据 RFC 4271 §5.1.1、§9.1.2.2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "ab2acca5790cab3eac0bc33de663d328a368430268328b1b6a5196119b459e9e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-1-001",
+    "type": "single_choice",
+    "question": "BGP-4 最初只能承载 IPv4 单播路由。MP-BGP 为支持多种网络层协议所做的核心扩展是？",
+    "options": {
+      "A": "把 AS_PATH 属性改成可变长度，以容纳更多 AS 号",
+      "B": "改用 TCP 179 之外的新端口来承载非 IPv4 路由",
+      "C": "为 NLRI 增加 AFI 与 SAFI 标识，并用 MP_REACH_NLRI、MP_UNREACH_NLRI 属性承载相应地址族的可达性与撤销信息",
+      "D": "取消 OPEN 报文的能力协商，改为在 Keepalive 报文中携带地址族"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "MP-BGP 通过 AFI 标识网络层协议、SAFI 标识路由用途，并把可达性与撤销信息分别放进 MP_REACH_NLRI 与 MP_UNREACH_NLRI，从而在同一会话中承载多种地址族，C 正确。A 错误：AS_PATH 的可变长度与多协议无关，AS4_PATH 是另一项 4 字节 AS 号扩展。B 错误：MP-BGP 仍使用 TCP 179，靠地址族区分协议而不是换端口。D 错误：地址族正是通过 OPEN 报文的能力参数协商的，不能取消。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "MP-BGP",
+    "difficulty": "easy",
+    "tags": [
+      "MP-BGP",
+      "地址族",
+      "AFI",
+      "SAFI"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-1-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4760-mp-bgp"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；MP-BGP 以 AFI/SAFI 扩展 NLRI、并用 MP_REACH_NLRI 与 MP_UNREACH_NLRI 承载多协议路由的依据见 RFC 4760 §1、§3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "ba2df66a2eeff22ca5bb679cb9fe45c6c965cabd3960408249c5ce1a7bf05a34"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-1-002",
+    "type": "single_choice",
+    "question": "MP-BGP 使用两个路径属性分别承载可达路由与撤销路由，它们的属性类型号是？",
+    "options": {
+      "A": "MP_REACH_NLRI 为 14，MP_UNREACH_NLRI 为 15",
+      "B": "MP_REACH_NLRI 为 15，MP_UNREACH_NLRI 为 14",
+      "C": "两者都是 16",
+      "D": "MP_REACH_NLRI 为 8，MP_UNREACH_NLRI 为 9"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "MP_REACH_NLRI 的属性类型号为 14，MP_UNREACH_NLRI 为 15，二者都是可选非过渡属性，A 正确。B 错误：把两个类型号写反。C 错误：16 是扩展团体属性 EXTENDED_COMMUNITIES 的类型号，不是多协议属性。D 错误：8 是 COMMUNITIES 团体属性，9 是 ORIGINATOR_ID，二者与多协议 NLRI 无关。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "MP-BGP",
+    "difficulty": "easy",
+    "tags": [
+      "MP-BGP",
+      "属性类型",
+      "MP_REACH_NLRI"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-1-002",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4760-mp-bgp"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；MP_REACH_NLRI 属性类型 14、MP_UNREACH_NLRI 属性类型 15 的取值依据 RFC 4760 §3、§4。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "5f84ba7a5e5b12730d1a6381b505e83d664b78fba5b753c9ab98e3fd38b87ccc"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-1-003",
+    "type": "single_choice",
+    "question": "MP_REACH_NLRI 属性的标志位是“可选、非过渡”。这意味着不支持该属性的传统 BGP-4 路由器收到它会怎样处理？",
+    "options": {
+      "A": "发送 Notification 报文并中断 BGP 会话",
+      "B": "把它转换为 IPv4 的 NEXT_HOP 属性后继续通告",
+      "C": "保留该属性并原样通告给所有邻居",
+      "D": "忽略该属性，且不会把它继续通告给其他邻居"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "“可选”表示路由器可以不识别该属性，“非过渡”表示即使识别也不会把它继续传递给邻居，因此传统 BGP-4 路由器会忽略 MP_REACH_NLRI 而不告错，D 正确。A 错误：可选属性不识别不会引发 Notification，这与公认属性的处理不同。B 错误：属性不会被改写成 IPv4 的 NEXT_HOP。C 错误：非过渡属性的定义就是不再向外传递。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "MP-BGP",
+    "difficulty": "medium",
+    "tags": [
+      "MP-BGP",
+      "属性标志",
+      "可选非过渡"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-1-003",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4760-mp-bgp"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；MP_REACH_NLRI 被定义为可选非过渡属性、不识别时忽略且不转发的依据见 RFC 4760 §3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "d32e889262496dac4224f1952efb66a2e335d9cacf0e1842a0e6ac1044e9264b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-1-004",
+    "type": "single_choice",
+    "question": "一条 MP_REACH_NLRI 属性中，紧跟在属性头之后依次包含哪些字段？",
+    "options": {
+      "A": "NLRI、AFI、SAFI、下一跳",
+      "B": "AFI、SAFI、下一跳长度、下一跳地址、保留字段、NLRI",
+      "C": "下一跳地址、AFI、SAFI、NLRI",
+      "D": "AFI、NLRI、下一跳长度、下一跳地址"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "MP_REACH_NLRI 的字段顺序为 2 字节 AFI、1 字节 SAFI、1 字节下一跳长度、下一跳地址、1 字节保留字段，最后是 NLRI 列表，B 正确。A 错误：AFI/SAFI 位于最前面，NLRI 在最后。C 错误：下一跳不可能出现在 AFI 之前。D 错误：NLRI 不是排在 AFI 之后的第二个字段，且遗漏了 SAFI 与保留字段。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "MP-BGP",
+    "difficulty": "medium",
+    "tags": [
+      "MP-BGP",
+      "报文格式",
+      "MP_REACH_NLRI"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-1-004",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4760-mp-bgp"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；MP_REACH_NLRI 中 AFI、SAFI、下一跳长度、下一跳、保留字段与 NLRI 的字段顺序依据 RFC 4760 §3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "8ce20d5bb3941a5b7219357a95a2bae32b8aa9c78c83ebfefde0a2a5d309e958"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-1-005",
+    "type": "single_choice",
+    "question": "一台 BGP 路由器收到携带 MP_UNREACH_NLRI 属性的 UPDATE，其中列出若干 IPv6 前缀。它应当执行什么操作？",
+    "options": {
+      "A": "把这些前缀作为新增路由安装，下一跳取 UPDATE 的源地址",
+      "B": "把这些前缀当作 IPv4 路由处理",
+      "C": "撤销这些前缀对应的路由，该属性不携带下一跳",
+      "D": "忽略该 UPDATE，因为 MP_UNREACH_NLRI 只用于能力协商"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "MP_UNREACH_NLRI 的属性类型为 15，字段只有 AFI、SAFI 和待撤销的 NLRI，不携带下一跳，接收方按其中的前缀撤销对应路由，C 正确。A 错误：撤销属性不能用于新增路由，也没有下一跳字段可用。B 错误：AFI 已指明是 IPv6，不能按 IPv4 解释。D 错误：能力协商在 OPEN 报文中完成，MP_UNREACH_NLRI 是 UPDATE 中的撤销属性。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "MP-BGP",
+    "difficulty": "medium",
+    "tags": [
+      "MP-BGP",
+      "MP_UNREACH_NLRI",
+      "路由撤销"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-1-005",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4760-mp-bgp"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；MP_UNREACH_NLRI 只含 AFI、SAFI 与待撤销 NLRI、不携带下一跳的规定依据 RFC 4760 §4。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "16bb0a31f5c53d8e29303ff5207ededcda3a58fce58a93d8f21d68c21b506cc2"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-1-006",
+    "type": "single_choice",
+    "question": "MP_REACH_NLRI 承载 IPv6 单播路由时，下一跳字段的长度可以是 16 字节或 32 字节。32 字节的情况表示什么？",
+    "options": {
+      "A": "同时携带一个全球 IPv6 地址和一个链路本地 IPv6 地址",
+      "B": "同时携带两个全球 IPv6 地址用于负载分担",
+      "C": "携带一个 IPv6 地址和对应的 IPv4 映射地址",
+      "D": "表示该路由的下一跳尚未确定"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IPv6 下一跳为 16 字节时只含全球地址，为 32 字节时前 16 字节是全球地址、后 16 字节是链路本地地址，供同一链路上的邻居直接使用，A 正确。B 错误：两个全球地址的用法不属于该字段定义。C 错误：字段长度是 16 的整数倍，不会混入 4 字节 IPv4 地址。D 错误：MP_REACH_NLRI 必须携带确定的下一跳，未确定的路由不会被通告。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "MP-BGP",
+    "difficulty": "medium",
+    "tags": [
+      "MP-BGP",
+      "IPv6",
+      "下一跳"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-1-006",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4760-mp-bgp"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；IPv6 下一跳为 16 或 32 字节、32 字节时含全球地址与链路本地地址的说明依据 RFC 4760 §3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "3b17118a7771046093db772aa5f382e75e4a0e7d82ab59bcca4ee58ad20f02e2"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-1-007",
+    "type": "single_choice",
+    "question": "MP-BGP 的能力和属性中都用 AFI 标识网络层协议。下列 AFI 取值与地址族的对应关系正确的是？",
+    "options": {
+      "A": "AFI 1 表示 IPv6，AFI 2 表示 IPv4",
+      "B": "AFI 1 表示 IPv4，AFI 2 表示 IPv6，AFI 25 表示 L2VPN",
+      "C": "AFI 25 表示 IPv4，AFI 1 表示 L2VPN",
+      "D": "AFI 70 表示 IPv6，AFI 128 表示 IPv4"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "AFI 1 为 IPv4、AFI 2 为 IPv6、AFI 25 为 L2VPN（EVPN 使用的地址族），B 正确。A 错误：IPv4 与 IPv6 的取值被互换。C 错误：25 不是 IPv4，1 也不是 L2VPN。D 错误：70 是 SAFI 中 EVPN 的取值、128 是 SAFI 中 VPN 的取值，二者不是 AFI。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "MP-BGP",
+    "difficulty": "medium",
+    "tags": [
+      "MP-BGP",
+      "AFI",
+      "地址族"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-1-007",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4760-mp-bgp"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；AFI/SAFI 字段定义见 RFC 4760 §1、§3，AFI 1 为 IPv4、2 为 IPv6、25 为 L2VPN 的取值依据 IANA Address Family Numbers 注册表。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "2e3635710009f3a35817ebd2ecec585e503a406907adb7bdbc2c243b12cdf790"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-1-008",
+    "type": "single_choice",
+    "question": "SAFI 用于说明同一地址族内路由的用途。EVPN 使用的 SAFI 取值是多少？",
+    "options": {
+      "A": "1",
+      "B": "4",
+      "C": "128",
+      "D": "70"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "SAFI 70 对应 EVPN，与 AFI 25（L2VPN）组合构成 BGP EVPN 地址族，D 正确。A 错误：SAFI 1 是单播。B 错误：SAFI 4 是带标签的单播（labeled unicast）。C 错误：SAFI 128 是 VPN（如 VPNv4、VPNv6），不是 EVPN。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "MP-BGP",
+    "difficulty": "medium",
+    "tags": [
+      "MP-BGP",
+      "SAFI",
+      "EVPN"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-1-008",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4760-mp-bgp"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；SAFI 字段定义见 RFC 4760 §1，SAFI 1 单播、4 带标签单播、70 EVPN、128 VPN 的取值依据 IANA Subsequent Address Family Identifiers 注册表。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "9434341359df868c08b6353c34dc3b49a3d9e93848d3a70473ee06d4c932423c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-1-009",
+    "type": "single_choice",
+    "question": "BGP EVPN 地址族由 AFI 与 SAFI 共同标识，下列组合正确的是？",
+    "options": {
+      "A": "AFI 25、SAFI 70",
+      "B": "AFI 1、SAFI 128",
+      "C": "AFI 2、SAFI 1",
+      "D": "AFI 25、SAFI 128"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "EVPN 使用 L2VPN 的 AFI 25 与 EVPN 的 SAFI 70 组合，A 正确。B 错误：AFI 1 与 SAFI 128 组合是 VPNv4。C 错误：AFI 2 与 SAFI 1 组合是 IPv6 单播。D 错误：AFI 25 与 SAFI 128 组合对应 L2VPN 的 VPN 地址族，不是 EVPN。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "MP-BGP",
+    "difficulty": "medium",
+    "tags": [
+      "MP-BGP",
+      "EVPN",
+      "地址族"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-1-009",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4760-mp-bgp"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；AFI/SAFI 组合标识地址族的机制见 RFC 4760 §1、§3，AFI 25 与 SAFI 70 的 EVPN 组合依据 IANA 地址族与 SAFI 注册表。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "bb2f7fc09d75e5165b35d189c904b979b560d20d03b20035491ce65745f2b3ac"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-1-010",
+    "type": "single_choice",
+    "question": "一条 VPNv4 路由的 NLRI 由 8 字节 Route Distinguisher 和 4 字节 IPv4 地址组成。对于掩码长度为 32 位的 VPNv4 前缀，其 NLRI 中除 1 字节前缀长度字段外的内容占多少字节？",
+    "options": {
+      "A": "8 字节",
+      "B": "10 字节",
+      "C": "12 字节",
+      "D": "16 字节"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "复算过程：VPNv4 NLRI 内容为 Route Distinguisher 8 字节加上 IPv4 地址 4 字节，8+4=12 字节；前缀长度字段单独占 1 字节，不计入这 12 字节，C 正确。A 错误：8 字节只是 RD 的长度，漏掉了 IPv4 地址。B 错误：10 字节不符合 8+4 的构成。D 错误：16 字节多算了 4 字节，VPNv6 才是 8+16。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "MP-BGP",
+    "difficulty": "medium",
+    "tags": [
+      "MP-BGP",
+      "VPNv4",
+      "NLRI",
+      "计算"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-1-010",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4760-mp-bgp",
+        "rfc4364-mpls-vpn"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；Route Distinguisher 为 8 字节、VPN-IPv4 前缀由 RD 与 IPv4 地址组成的规定见 RFC 4364 §4.1，多协议 NLRI 编码见 RFC 4760 §3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "a10c22385b0dcef1447f3d34540e342f4110164face2980e9bc99a3fe6a1eeb2"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-1-011",
+    "type": "single_choice",
+    "question": "两台路由器在 OPEN 报文中通过能力参数协商多协议扩展。承载 AFI/SAFI 列表的“多协议扩展”能力码是多少？",
+    "options": {
+      "A": "2",
+      "B": "4",
+      "C": "64",
+      "D": "1"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "多协议扩展能力的编码为 1，其能力值是一个或多个 AFI/SAFI 组合，D 正确。A 错误：能力码 2 是路由刷新（Route Refresh）。B 错误：能力码 4 是已废弃的多路由通告能力。C 错误：能力码 64 是优雅重启（Graceful Restart）。这些能力都不能用来协商地址族。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "MP-BGP",
+    "difficulty": "hard",
+    "tags": [
+      "MP-BGP",
+      "能力协商",
+      "OPEN"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-1-011",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4760-mp-bgp"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；多协议扩展能力码为 1、能力值携带 AFI/SAFI 列表的规定依据 RFC 4760 §8。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "fc6486978d90d41f41e24a8a5f46d936e128f7af7a88107b0db7c9a4b39da007"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-1-012",
+    "type": "single_choice",
+    "question": "一台路由器同时与对端交换 IPv4 单播和 IPv6 单播路由。关于 UPDATE 报文的组织方式，下列描述正确的是？",
+    "options": {
+      "A": "一条 UPDATE 只能携带一个 NLRI，因此每条路由都要单独发送",
+      "B": "一条 UPDATE 中的 MP_REACH_NLRI 只能承载同一 AFI/SAFI 的 NLRI，不同地址族的路由需要不同的 MP_REACH_NLRI 属性或不同的 UPDATE",
+      "C": "同一条 UPDATE 中可以把 IPv4 和 IPv6 前缀放进同一个 MP_REACH_NLRI",
+      "D": "IPv4 和 IPv6 路由必须使用两个不同的 BGP 会话"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "MP_REACH_NLRI 自身携带一份 AFI/SAFI，其后的 NLRI 列表都属于该地址族，因此不同地址族要分别用各自的属性承载，B 正确。A 错误：同一条 UPDATE 可以携带多条同一地址族的 NLRI，不必每条路由单独发送。C 错误：一个属性只能有一个 AFI/SAFI，混合放入会使接收方无法解析。D 错误：MP-BGP 允许在同一个会话中承载多个地址族。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "MP-BGP",
+    "difficulty": "medium",
+    "tags": [
+      "MP-BGP",
+      "UPDATE",
+      "地址族"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-1-012",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4760-mp-bgp"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；MP_REACH_NLRI 每个属性只携带一组 AFI/SAFI 及其 NLRI 列表的结构依据 RFC 4760 §3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "bb5bf45630df99ee481f65c3a0eebd6f29b302542d7a20014f6182a4a28f7dbc"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-1-013",
+    "type": "single_choice",
+    "question": "MP_REACH_NLRI 中的每个 NLRI 都以 1 字节的前缀长度开头。这样设计的主要原因是？",
+    "options": {
+      "A": "不同地址族和不同前缀的长度不同，接收方需要长度字段才能正确切分变长的 NLRI 序列",
+      "B": "用来表示该路由在选路中的优先级",
+      "C": "用来携带 SAFI 取值",
+      "D": "用来指示下一跳字段的字节数"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "NLRI 是变长编码，多个 NLRI 首尾相接放在同一属性中，必须靠前缀长度字段确定每个前缀的边界，A 正确。B 错误：BGP 选路优先级由 Preferred-value、LOCAL_PREF 等属性表达，与 NLRI 长度字段无关。C 错误：SAFI 位于属性开头的固定字段，不在每个 NLRI 内。D 错误：下一跳的字节数由专门的下一跳长度字段指示。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "MP-BGP",
+    "difficulty": "medium",
+    "tags": [
+      "MP-BGP",
+      "NLRI",
+      "编码"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-1-013",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4760-mp-bgp"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；NLRI 以 1 字节前缀长度开头、多个 NLRI 连续编码的依据见 RFC 4760 §3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "1ca8062516fe10eeed109cc2f590d6f07998014882457a0cd598dd7a50920db5"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-1-014",
+    "type": "single_choice",
+    "question": "MP-BGP 在传递路由时沿用 BGP-4 的下一跳处理规则。一台 IBGP 路由器把从 IBGP 邻居学到的 IPv6 路由再通告给本 AS 内另一个 IBGP 邻居时，MP_REACH_NLRI 中的下一跳通常是？",
+    "options": {
+      "A": "改为自己的出接口地址",
+      "B": "改为全零地址",
+      "C": "保持不变，仍是原通告者的下一跳地址",
+      "D": "改为该 IBGP 邻居的接口地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "IBGP 默认不改变下一跳，从 IBGP 邻居学到的路由再发给另一个 IBGP 邻居时，MP_REACH_NLRI 中仍是原来的下一跳地址，C 正确。A 错误：把下一跳改为自己的出接口地址是 EBGP 通告时的行为，不是 IBGP 的默认行为。B 错误：全零地址不是合法的下一跳取值。D 错误：下一跳不会改成接收该路由的邻居地址。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "MP-BGP",
+    "difficulty": "medium",
+    "tags": [
+      "MP-BGP",
+      "IBGP",
+      "下一跳"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-1-014",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4760-mp-bgp",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；IBGP 不改变 NEXT_HOP 的规则依据 RFC 4271 §5.1.3、§9.2，多协议下一跳沿用该规则的说明见 RFC 4760 §3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "692d9ed44465c62d7d961d4908474423c7098ae6d3e7ffe6b3ca85d649939bb5"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-1-015",
+    "type": "single_choice",
+    "question": "在华为设备上，两台路由器已建立 IPv4 单播 BGP 会话，管理员希望在该会话上额外交换 IPv6 单播路由。下列配置思路正确的是？",
+    "options": {
+      "A": "删除现有会话，改为只用 IPv6 链路本地地址建立新会话，否则无法承载 IPv6 路由",
+      "B": "在 BGP 视图下进入 ipv6-unicast 地址族，为同一邻居使能该地址族并配置相应策略",
+      "C": "只要在系统视图下开启 IPv6，BGP 就会自动为所有邻居交换 IPv6 路由",
+      "D": "必须把 BGP 版本从 4 改为 5 才能承载 IPv6 路由"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "MP-BGP 允许在同一会话中为邻居激活多个地址族，华为设备需在 BGP 视图下进入 ipv6-unicast 地址族并激活该邻居，两端都要完成这一配置，B 正确。A 错误：IPv4 会话本身可以作为 IPv6 路由的传输通道，不必重建会话。C 错误：开启 IPv6 只解决协议栈问题，地址族仍需显式激活。D 错误：不存在用于 IPv6 的 BGP 版本 5，IPv6 由 MP-BGP 扩展承载。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "MP-BGP",
+    "difficulty": "medium",
+    "tags": [
+      "MP-BGP",
+      "配置",
+      "地址族激活"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-1-015",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4760-mp-bgp"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；同一会话可激活多个地址族的能力协商机制见 RFC 4760 §6、§8，ipv6-unicast 地址族激活为华为设备配置行为（题干已注明）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "9ddb50b45ed2527a6acc73ebfedc0b142eaf6da453a2c2b02738001d8613b719"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-1-016",
+    "type": "single_choice",
+    "question": "关于 MP-BGP 的传输层与会话所承载地址族之间的关系，下列描述正确的是？",
+    "options": {
+      "A": "要传递 IPv6 路由，BGP 会话必须建立在 IPv6 之上",
+      "B": "一个 BGP 会话只能承载与传输层协议相同的地址族",
+      "C": "IPv6 路由只能通过静态路由引入 BGP",
+      "D": "建立在 IPv4 之上的 BGP 会话可以通过 MP-BGP 承载 IPv6 等其他地址族的路由"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "MP-BGP 把会话的传输地址与 NLRI 的地址族解耦，IPv4 会话可以承载 IPv6 单播、VPNv4、EVPN 等地址族的路由，D 正确。A 错误：IPv6 路由并不要求会话建立在 IPv6 之上。B 错误：一个会话可以激活多个地址族，与传输层协议无关。C 错误：IPv6 路由既可通过 network 命令发布，也可由邻居动态学习。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "MP-BGP",
+    "difficulty": "easy",
+    "tags": [
+      "MP-BGP",
+      "传输层",
+      "地址族"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-1-016",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4760-mp-bgp"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；MP-BGP 将传输会话与所承载地址族解耦、IPv4 会话可承载其他 AFI/SAFI 的说明见 RFC 4760 §1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "d8329457bca6d243fe4fa728863f86312cf01d288a50bf741aa4be8f9458d787"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-1-017",
+    "type": "single_choice",
+    "question": "BGP 路由器要一次性撤销同一地址族的多条路由，正确的做法是？",
+    "options": {
+      "A": "为每条路由发送一个只含 NEXT_HOP 的 UPDATE",
+      "B": "发送 End-of-RIB 标记，表示全部路由撤销",
+      "C": "在一条 UPDATE 的 MP_UNREACH_NLRI 中列出这些 NLRI",
+      "D": "发送 Notification 报文，对端会撤销该地址族全部路由"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "MP_UNREACH_NLRI 可以携带多个同一 AFI/SAFI 的 NLRI，一次撤销多条路由且不携带下一跳，C 正确。A 错误：撤销信息放在 MP_UNREACH_NLRI 中，NEXT_HOP 不用于撤销。B 错误：End-of-RIB 只表示初始路由已发送完毕，不表示撤销。D 错误：Notification 用于差错处理并会中断会话，不是正常的撤销手段。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "MP-BGP",
+    "difficulty": "medium",
+    "tags": [
+      "MP-BGP",
+      "路由撤销",
+      "UPDATE"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-1-017",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4760-mp-bgp"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；MP_UNREACH_NLRI 可一次列出多个 NLRI 完成批量撤销的结构依据 RFC 4760 §4。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "066547c3e8066fa8a0c898da86891d1ec6fb519de14d8af9a063d6df4f8bbc43"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-1-018",
+    "type": "single_choice",
+    "question": "引入 MP-BGP 后，BGP 的报文类型与邻居状态机发生了什么变化？",
+    "options": {
+      "A": "没有变化，仍使用 Open、Update、Notification、Keepalive 四种报文和原有状态机，扩展体现在 Open 的能力参数与 Update 的属性中",
+      "B": "新增了专门的多协议 Update 报文类型",
+      "C": "取消了 Keepalive，改用 MP-BGP 的 Hello 报文",
+      "D": "把邻居状态机从 6 个状态扩展为 9 个状态"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "MP-BGP 是对 BGP-4 的向后兼容扩展，报文类型和状态机保持不变，地址族能力通过 OPEN 的能力参数协商，路由信息通过 UPDATE 中的多协议属性承载，A 正确。B 错误：没有所谓多协议 UPDATE 新报文类型。C 错误：BGP 不使用 Hello 报文，Keepalive 仍然保留。D 错误：状态机仍为 Idle、Connect、Active、OpenSent、OpenConfirm、Established 六个状态。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "MP-BGP",
+    "difficulty": "medium",
+    "tags": [
+      "MP-BGP",
+      "报文类型",
+      "状态机"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-1-018",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4760-mp-bgp"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；MP-BGP 保持原有报文类型与状态机、仅增加能力与属性扩展的说明见 RFC 4760 §6、§8。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "5d0c19e2f7da94bd6b755a40cb247102457ae471d62acd29c3a0953d64443604"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-2-001",
+    "type": "single_choice",
+    "question": "EVPN 是一种基于 BGP 的以太网 VPN 技术。下列哪项最准确地描述了它的基本定位？",
+    "options": {
+      "A": "一种在城域网上替代 STP 的二层环网保护协议",
+      "B": "使用 MP-BGP 作为控制面，在 MPLS 或 VXLAN 等网络上提供二层桥接和三层路由的 VPN 技术",
+      "C": "一种只在数据中心内部使用的静态 VLAN 映射方案",
+      "D": "一种基于 OSPF 的多点 GRE 隧道技术"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "EVPN 以 MP-BGP 为控制面，在 PE 之间通告 MAC/IP 可达性，可在 MPLS、VXLAN 等网络上提供二层桥接与三层路由，B 正确。A 错误：EVPN 不承担 STP 的环网保护职责。C 错误：EVPN 是动态的控制面技术，不是静态 VLAN 映射。D 错误：EVPN 依赖 BGP 而非 OSPF，也不以 GRE 为唯一封装。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "EVPN",
+    "difficulty": "easy",
+    "tags": [
+      "EVPN",
+      "MP-BGP",
+      "基本概念"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-2-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc7432-evpn"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；EVPN 以 MP-BGP 为控制面、在 PE 间提供二层桥接与三层能力的概述依据 RFC 7432 §1、§4。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "84de86975cce00d4fd53aa92d3f78bed2147a2f5b00a35577247b0e1942713e7"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-2-002",
+    "type": "single_choice",
+    "question": "EVPN 中，PE 之间需要为 BUM 流量建立转发隧道并分配标签。完成这一功能的是哪种路由？",
+    "options": {
+      "A": "Type 1 Ethernet A-D 路由，用于多归场景的快速收敛与别名",
+      "B": "Type 2 MAC/IP Advertisement 路由，用于通告 MAC/IP 可达性",
+      "C": "Type 4 Ethernet Segment 路由，用于以太网段发现与 DF 选举",
+      "D": "Type 3 Inclusive Multicast Ethernet Tag 路由，用于通告 BUM 流量使用的隧道与标签"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Type 3 Inclusive Multicast Ethernet Tag 路由（IMET）由 PE 为每个 EVPN 实例通告，携带 VTEP 地址与标签，使其他 PE 能把 BUM 流量送到该 PE，D 正确。A 错误：Type 1 用于多归的快速收敛与别名，不负责建立 BUM 隧道。B 错误：Type 2 承载 MAC/IP 可达性与标签，面向已知单播。C 错误：Type 4 用于以太网段自动发现与指定转发者选举。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "EVPN",
+    "difficulty": "medium",
+    "tags": [
+      "EVPN",
+      "路由类型",
+      "BUM"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-2-002",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc7432-evpn"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；Inclusive Multicast Ethernet Tag 路由用于建立 BUM 隧道并携带 PMSI 标签的规定见 RFC 7432 §7.3、§11.1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "2e66d1c39f36a2ff1bbc8032f83dac48a7786f40a2f8a204381b80a118e40c3d"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-2-003",
+    "type": "single_choice",
+    "question": "在 EVPN 多归场景中，一台 CE 通过多条链路接入多个 PE。Type 1 Ethernet A-D 路由的主要作用是？",
+    "options": {
+      "A": "实现快速收敛和别名（aliasing），让远端 PE 尽早知道某以太网段的可达性并把流量分担到多条路径",
+      "B": "通告 PE 的 Router ID，用于建立 BGP 会话",
+      "C": "携带 MAC 地址与 IP 地址的绑定关系，用于 ARP 抑制",
+      "D": "选举每个以太网段上的指定转发者"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Type 1 Ethernet A-D 路由按以太网段或按 EVPN 实例通告，配合 ESI 标签实现快速收敛与别名，使远端 PE 能把流量分担到多条可达路径，A 正确。B 错误：Router ID 由 BGP 自身处理，不需要 EVPN 路由通告。C 错误：MAC/IP 绑定由 Type 2 路由承载。D 错误：指定转发者选举以 Type 4 路由为基础。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "EVPN",
+    "difficulty": "medium",
+    "tags": [
+      "EVPN",
+      "Type 1",
+      "多归"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-2-003",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc7432-evpn"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；Ethernet A-D 路由用于多归快速收敛与别名的规定见 RFC 7432 §7.1、§8.2、§8.4。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "c4a16552515c0f0753ee539c52a687c52fd415a36b2da0f466f9185d294f2a57"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-2-004",
+    "type": "single_choice",
+    "question": "EVPN 使用哪种路由完成 Ethernet Segment 的自动发现，并作为指定转发者（DF）选举的基础？",
+    "options": {
+      "A": "Type 2 MAC/IP Advertisement 路由",
+      "B": "Type 3 Inclusive Multicast Ethernet Tag 路由",
+      "C": "Type 4 Ethernet Segment 路由",
+      "D": "Type 1 Ethernet A-D 路由"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Type 4 Ethernet Segment 路由携带 ESI 与源地址，用于以太网段的自动发现和 DF 选举，C 正确。A 错误：Type 2 通告 MAC/IP 可达性。B 错误：Type 3 用于建立 BUM 转发隧道。D 错误：Type 1 用于多归快速收敛与别名，DF 选举依据的是 Type 4 路由。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "EVPN",
+    "difficulty": "medium",
+    "tags": [
+      "EVPN",
+      "Type 4",
+      "DF 选举"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-2-004",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc7432-evpn"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；Ethernet Segment 路由用于以太网段发现并支撑 DF 选举的规定见 RFC 7432 §7.4、§8.1、§8.5。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "00ac9f84dcad99a8aef7691610f20eb85a08d7739bdb0d8846894cb539512246"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-2-005",
+    "type": "single_choice",
+    "question": "EVPN 中 ESI（Ethernet Segment Identifier）字段的含义是？",
+    "options": {
+      "A": "标识一个 EVPN 实例的 VXLAN VNI",
+      "B": "标识一台 PE 的 BGP Router ID",
+      "C": "标识一条 MAC 地址表项的老化时间",
+      "D": "标识 CE 多归接入时的那一组以太网链路，使各 PE 能识别它们连接的是同一个 CE"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "ESI 是以太网段的唯一非零标识，CE 通过一组链路接入一个或多个 PE 时，这组链路构成一个以太网段，各 PE 用相同的 ESI 识别它们连接的是同一个 CE，D 正确。A 错误：VNI 标识转发域，与 ESI 不是同一概念。B 错误：Router ID 是 BGP 身份标识。C 错误：ESI 与 MAC 表项老化时间无关。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "EVPN",
+    "difficulty": "easy",
+    "tags": [
+      "EVPN",
+      "ESI",
+      "多归"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-2-005",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc7432-evpn"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；以太网段与 ESI 的定义见 RFC 7432 §3、§5。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "324239344cbf5638a62766469a5c705d6f73dc1c6ff8c9fc80baea15321ca02b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-2-006",
+    "type": "single_choice",
+    "question": "EVPN 通过 BGP 扩展团体属性控制路由的导入导出。其中 Route Target 的作用是？",
+    "options": {
+      "A": "区分不同 PE 上相同的 MAC/IP 前缀，避免 NLRI 冲突",
+      "B": "标识路由所属的 EVPN 实例，接收 PE 据此决定是否导入该路由",
+      "C": "携带 MAC 地址的老化时间",
+      "D": "指定 BUM 流量的复制方式"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Route Target 是扩展团体属性，标识路由属于哪个 EVPN 实例，接收 PE 用它做导入匹配，从而把路由放进正确的 MAC-VRF，B 正确。A 错误：区分相同前缀、保证 NLRI 唯一的是 Route Distinguisher。C 错误：MAC 老化时间由本地表项管理，不由 RT 携带。D 错误：BUM 复制方式由 Type 3 路由及其隧道属性决定。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "EVPN",
+    "difficulty": "medium",
+    "tags": [
+      "EVPN",
+      "Route Target",
+      "路由导入"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-2-006",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc7432-evpn"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；Route Target 用于标识 EVPN 实例并控制路由导入的规定见 RFC 7432 §4、§7.10。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "76fba9817da4d9f43fe08ad40e54b2306c01637ec6e26274539493d93c2cc75b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-2-007",
+    "type": "single_choice",
+    "question": "两台 PE 上分别存在相同的 MAC 地址和相同的 IPv4 地址。EVPN 用 Route Distinguisher 解决什么问题？",
+    "options": {
+      "A": "决定该路由在接收 PE 上是否被导入",
+      "B": "计算到达目的 MAC 的最短路径开销",
+      "C": "让不同 PE 通告的相同 MAC/IP 前缀在 BGP 中形成不同的 NLRI，避免相互覆盖",
+      "D": "加密 EVPN 路由中的 MAC 地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "RD 加在 MAC/IP 前缀之前，使不同 PE 通告的相同 MAC/IP 生成不同的 NLRI，BGP 才能同时保存它们，C 正确。A 错误：决定是否导入的是 Route Target。B 错误：RD 不参与路径开销计算。D 错误：RD 是标识字段，不具备加密功能。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "EVPN",
+    "difficulty": "medium",
+    "tags": [
+      "EVPN",
+      "RD",
+      "NLRI"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-2-007",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc7432-evpn"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；Route Distinguisher 按 EVI 分配、使相同 MAC/IP 形成不同 NLRI 的规定见 RFC 7432 §4、§7.9。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "29a39e61b7015a2132925a654148f88fc5f1912b2418ecdd80256fd68f0491d9"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-2-008",
+    "type": "single_choice",
+    "question": "EVPN 的 Type 2 MAC/IP Advertisement 路由中可以携带哪些信息？",
+    "options": {
+      "A": "MAC 地址、可选的 IP 地址、ESI、以太网标签以及 MPLS 标签或 VNI",
+      "B": "只携带 MAC 地址，不能携带 IP 地址",
+      "C": "只携带 IP 前缀和下一跳，不携带 MAC 地址",
+      "D": "只携带 ESI 和 DF 选举优先级"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Type 2 路由的 NLRI 包含 RD、ESI、以太网标签、MAC 地址长度、MAC 地址、IP 地址长度与可选 IP 地址、标签字段，因此可以同时通告 MAC 与 IP 绑定，A 正确。B 错误：IP 地址字段是可选的，可以携带。C 错误：Type 2 的核心是 MAC 可达性，IP 是附加信息。D 错误：ESI 与 DF 选举信息主要由 Type 4 路由承载。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "EVPN",
+    "difficulty": "medium",
+    "tags": [
+      "EVPN",
+      "Type 2",
+      "MAC/IP"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-2-008",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc7432-evpn"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；MAC/IP Advertisement 路由的 NLRI 字段构成见 RFC 7432 §7.2、§9.2.1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "624428e69c274ca512ee78f26d4122580579920a1941fbe2b5370fbcf061b077"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-2-009",
+    "type": "single_choice",
+    "question": "在采用 VXLAN 封装的 EVPN 网络中，Type 2 路由携带的标签字段通常对应什么？",
+    "options": {
+      "A": "出接口的 VLAN ID",
+      "B": "BGP 的 LOCAL_PREF 值",
+      "C": "目的 IP 地址的掩码长度",
+      "D": "该 MAC 所属广播域对应的 VXLAN VNI"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "在 EVPN 与 VXLAN 配合时，Type 2 路由中的标签字段承载该 MAC 所属广播域的 VNI，接收 VTEP 据此封装 VXLAN 报文，D 正确。A 错误：VLAN ID 只在本地接口有意义，不能跨 PE 传递。B 错误：LOCAL_PREF 是 BGP 选路属性，与隧道封装无关。C 错误：掩码长度属于 IP 前缀，不是标签字段的含义。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "EVPN",
+    "difficulty": "medium",
+    "tags": [
+      "EVPN",
+      "VXLAN",
+      "VNI"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-2-009",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc7432-evpn",
+        "rfc7348-vxlan"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；MAC/IP 路由标签字段与 VNI 的对应依据 RFC 7432 §7.2、§9.2.1，VXLAN 以 VNI 标识广播域的说明见 RFC 7348 §5。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "bcf61499c4ee1729b80eada98ea785863c52e145a62c8fb9aa3c1534013998cc"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-2-010",
+    "type": "single_choice",
+    "question": "与传统 VPLS 相比，EVPN 在处理 BUM（广播、未知单播、组播）流量时的关键改进是？",
+    "options": {
+      "A": "完全禁止 BUM 流量，只允许已知单播",
+      "B": "通过 Type 3 路由在 PE 间建立 inclusive 转发树，并按需使用选择性转发，减少不必要的泛洪",
+      "C": "使用 STP 计算无环的 BUM 转发路径",
+      "D": "把所有 BUM 流量都转为单播通过 BGP 路由转发"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "EVPN 用 Type 3 IMET 路由通告每个 PE 的 BUM 隧道与标签，形成 inclusive 转发树，并可按 ESI 与 DF 规则做选择性转发，减少泛洪，B 正确。A 错误：BUM 流量仍然存在，只是转发更有控制。C 错误：EVPN 不依赖 STP 计算转发路径。D 错误：BUM 仍然以组播或复制方式在隧道中传输，不会转成单播路由。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "EVPN",
+    "difficulty": "medium",
+    "tags": [
+      "EVPN",
+      "BUM",
+      "VPLS 对比"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-2-010",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc7432-evpn"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；以 IMET 路由建立 inclusive 转发树并处理多目的流量的机制见 RFC 7432 §11、§12。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "332a31d4588ab9cd8ed596b102b73b636b6dc6afb66e20074f85ad87989e8452"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-2-011",
+    "type": "single_choice",
+    "question": "EVPN 作为控制面与 VXLAN 数据面配合时，VXLAN 封装的特点是？",
+    "options": {
+      "A": "把原始以太网帧封装在 UDP 中，目的 UDP 端口为 4789，外层由 VTEP 的 IP 地址标识隧道端点",
+      "B": "把以太网帧直接封装在 IP 协议号 47 的 GRE 报文中",
+      "C": "使用 TCP 443 端口承载二层帧，保证可靠传输",
+      "D": "只封装 IP 报文，不能承载以太网帧"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "VXLAN 采用 MAC-in-UDP 封装，IANA 分配的目的 UDP 端口为 4789，外层 IP 由 VTEP 地址标识隧道端点，A 正确。B 错误：协议号 47 的 GRE 是另一种封装，不是 VXLAN。C 错误：VXLAN 使用 UDP 而不是 TCP，也不提供可靠传输。D 错误：VXLAN 承载的正是原始以太网帧。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "EVPN",
+    "difficulty": "medium",
+    "tags": [
+      "EVPN",
+      "VXLAN",
+      "封装"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-2-011",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc7432-evpn",
+        "rfc7348-vxlan"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；EVPN 可作为控制面配合 IP 隧道的数据面扩展见 RFC 7432 §4，VXLAN 的 MAC-in-UDP 封装与目的 UDP 端口 4789 见 RFC 7348 §5。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "56c1e518332c45496f17347b4c58018fd77829bd651b9e972c407e82c5687a9a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-2-012",
+    "type": "single_choice",
+    "question": "EVPN 的 Type 2 路由携带 IP 地址后，接收 PE 可以据此实现什么功能？",
+    "options": {
+      "A": "替代 BGP 的 AS_PATH 防环",
+      "B": "自动修改 CE 的 IP 地址",
+      "C": "ARP/ND 抑制：本地已有远端 MAC/IP 表项时直接代答 ARP 请求，减少广播",
+      "D": "为所有主机分配 DHCP 地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Type 2 路由中的 IP 地址字段把 MAC 与 IP 绑定提前通告给远端 PE，PE 收到 ARP 请求时若已有该绑定即可代答，从而抑制 ARP/ND 广播，C 正确。A 错误：防环由 AS_PATH 等机制完成，与 ARP 抑制无关。B 错误：PE 不会修改 CE 的地址。D 错误：DHCP 地址分配由 DHCP 服务完成，EVPN 路由不承担该功能。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "EVPN",
+    "difficulty": "medium",
+    "tags": [
+      "EVPN",
+      "ARP 抑制",
+      "Type 2"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-2-012",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc7432-evpn"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；MAC/IP 路由可选携带 IP 地址并用于 ARP/ND 代理与抑制的说明见 RFC 7432 §7.2、§10。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "2e000b2ad83bfb11e2d6d8674b52fb96e28128a5c21cbbb6725c609087ac114d"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-2-013",
+    "type": "single_choice",
+    "question": "每条 EVPN 路由的 NLRI 都以一个 Route Type 字段开头。该字段的长度和含义是？",
+    "options": {
+      "A": "2 字节，表示该路由的优先级",
+      "B": "1 字节，表示 EVPN 路由的类型编号，如 1、2、3、4",
+      "C": "4 字节，表示 EVPN 实例的 VNI",
+      "D": "8 字节，表示 ESI"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "EVPN NLRI 的首字段是 1 字节的 Route Type，用类型编号区分 Ethernet A-D、MAC/IP、IMET、Ethernet Segment 等路由，B 正确。A 错误：该字段不表示优先级，长度也不是 2 字节。C 错误：4 字节字段不是 Route Type，VNI 也不在 NLRI 的这个位置。D 错误：ESI 是 10 字节字段，位于具体路由类型内部。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "EVPN",
+    "difficulty": "medium",
+    "tags": [
+      "EVPN",
+      "NLRI",
+      "Route Type"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-2-013",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc7432-evpn"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；EVPN NLRI 以 1 字节 Route Type 开头并在 §7.1 至 §7.4 定义各类型的规定见 RFC 7432 §7。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "4f80b5a859f9619f4e71d2821938aefbf778a1196df6f377352f5173fbea3596"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-2-014",
+    "type": "single_choice",
+    "question": "在多归 EVPN 网络中，同一 Ethernet Segment 上会选举出指定转发者（DF）。DF 的主要作用是？",
+    "options": {
+      "A": "负责为该以太网段上的所有 CE 分配 IP 地址",
+      "B": "负责在 PE 之间传递 BGP OPEN 报文",
+      "C": "负责把 EVPN 路由转换为 OSPF 路由",
+      "D": "避免同一 BUM 流量从多条 PE-CE 链路重复转发给 CE，只由 DF 向该以太网段转发"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "多归场景下同一以太网段连接多个 PE，若都向 CE 转发 BUM 流量会造成重复，因此选举 DF，只有 DF 负责向该以太网段转发 BUM 流量，D 正确。A 错误：地址分配与 DF 职责无关。B 错误：OPEN 报文由 BGP 会话直接交互。C 错误：EVPN 与 OSPF 之间没有这种转换关系。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "EVPN",
+    "difficulty": "medium",
+    "tags": [
+      "EVPN",
+      "DF",
+      "多归"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-2-014",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc7432-evpn"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；指定转发者选举及其在 BUM 转发中的作用见 RFC 7432 §8.5、§12、§13.2.1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "c136937effe2e82b48ba3c71af58c911987e2b96fc1924fcff2f7ee5a559eeaf"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-2-015",
+    "type": "single_choice",
+    "question": "在数据中心 VXLAN Fabric 中部署 EVPN 时，下列描述正确的是？",
+    "options": {
+      "A": "VTEP 只能由独立的硬件网关承担，服务器接入交换机不能做 VTEP",
+      "B": "EVPN 只能用于园区网，不能用于数据中心",
+      "C": "交换机可同时作为 VTEP 与 BGP EVPN 的 PE，用 MP-BGP 交换 MAC/IP 路由，数据面用 VXLAN 封装",
+      "D": "部署 EVPN 后必须关闭 VXLAN，改用 MPLS over GRE"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "在数据中心 Fabric 中，接入交换机或 Leaf 可同时承担 VTEP 与 EVPN PE 的角色，控制面用 MP-BGP 通告 MAC/IP 路由，数据面用 VXLAN 封装转发，C 正确。A 错误：VTEP 可以由交换机实现，不必是独立网关。B 错误：EVPN 正是数据中心 Fabric 的常用方案。D 错误：EVPN 与 VXLAN 是控制面与数据面的配合关系，不需要关闭 VXLAN。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "EVPN",
+    "difficulty": "medium",
+    "tags": [
+      "EVPN",
+      "数据中心",
+      "VTEP"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-2-015",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc7432-evpn",
+        "rfc7348-vxlan"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；EVPN 与 IP 隧道数据面配合的扩展性见 RFC 7432 §4，VXLAN 的 VTEP 与 VNI 模型见 RFC 7348 §5。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "c73fc43a21d4c06c0814d8d025ace0aaaf3857cef59c2ba2df41d2bc32224a74"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-2-016",
+    "type": "single_choice",
+    "question": "EVPN 中每个 PE 会为每个 EVPN 实例通告一条 Type 3 路由。这条路由表达的含义是？",
+    "options": {
+      "A": "本 PE 愿意接收该 EVPN 实例的 BUM 流量，其他 PE 可把本 PE 加入 inclusive 转发树",
+      "B": "本 PE 不再接收该 EVPN 实例的任何流量",
+      "C": "本 PE 是该 EVPN 实例唯一的指定转发者",
+      "D": "本 PE 上该 EVPN 实例的所有 MAC 地址都已老化"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Type 3 IMET 路由是 inclusive 的：PE 为每个 EVPN 实例通告自己的 VTEP 地址与标签，表示愿意接收该实例的 BUM 流量，其他 PE 据此构建转发树，A 正确。B 错误：通告该路由是加入而不是退出。C 错误：指定转发者由 Type 4 路由与 DF 选举决定。D 错误：MAC 老化与 Type 3 路由无关。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "EVPN",
+    "difficulty": "medium",
+    "tags": [
+      "EVPN",
+      "Type 3",
+      "IMET"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-2-016",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc7432-evpn"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；每个 PE 为每个 EVPN 实例通告 IMET 路由、声明接收 BUM 流量的规定见 RFC 7432 §7.3、§11.1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "33934a379ba0cf3fd7d753db3e5bc10d9b941b534ef0e6fd6b14340de04e45c8"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-2-017",
+    "type": "single_choice",
+    "question": "一台虚拟机从 PE1 迁移到 PE2 后，EVPN 需要把它的 MAC 地址重新指向 PE2。EVPN 通过什么机制处理这种 MAC 迁移？",
+    "options": {
+      "A": "由 PE2 发送 Notification 报文，让全网撤销该 MAC",
+      "B": "由 PE2 通告新的 Type 2 路由，并通过 MAC Mobility 扩展团体携带序列号，让接收 PE 用更大的序列号覆盖旧表项",
+      "C": "由 PE1 继续通告原 MAC，直到表项老化为止",
+      "D": "由 CE 通过 STP 重新计算 MAC 转发路径"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "MAC 迁移时新 PE 通告 Type 2 路由，并在 MAC Mobility 扩展团体中携带递增的序列号，接收 PE 比较序列号后把表项指向新 PE，B 正确。A 错误：Notification 用于差错处理并会中断会话，不是迁移机制。C 错误：继续保留旧通告会导致流量仍发往原 PE。D 错误：EVPN 不依赖 STP 计算 MAC 转发路径。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "EVPN",
+    "difficulty": "hard",
+    "tags": [
+      "EVPN",
+      "MAC 迁移",
+      "MAC Mobility"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-2-017",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc7432-evpn"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；MAC Mobility 扩展团体以序列号处理 MAC 迁移的规定见 RFC 7432 §7.7、§15。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "609b3153ec697a438334e1ac873f1d5916689ca0c7f74361f370834e35b21726"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-4-2-018",
+    "type": "single_choice",
+    "question": "EVPN 的 Type 2 路由在 PE 之间通告时，其 MP_REACH_NLRI 中的下一跳字段的作用是？",
+    "options": {
+      "A": "指明承载该 MAC 的远端 PE（VTEP）地址，接收 PE 用它作为隧道目的地址",
+      "B": "指明 CE 的默认网关地址",
+      "C": "指明 BGP 会话的对等体地址",
+      "D": "指明组播组的地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Type 2 路由的下一跳被设置为通告该路由的 PE 地址，接收 PE 据此确定承载该 MAC 的远端 VTEP，并把它作为隧道封装的目的地址，A 正确。B 错误：默认网关地址由单独的扩展团体和路由字段表达。C 错误：下一跳是路由属性，不等于 BGP 会话对等体地址。D 错误：组播组地址与 EVPN 的下一跳字段无关。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP EVPN 基础",
+    "knowledgePoint": "EVPN",
+    "difficulty": "medium",
+    "tags": [
+      "EVPN",
+      "下一跳",
+      "VTEP"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-4-2-018",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc7432-evpn"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“BGP EVPN 基础”；MAC/IP 路由的下一跳须设为通告该路由的 PE 地址的规定见 RFC 7432 §7.2、§9.2.1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "b9a47d3e7e0d10cd7a160f7ce9a062f1e3708ca3aa2875a0bd0373b1081cb1fe"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-1-1-001",
+    "type": "single_choice",
+    "question": "在华为设备上配置 ip ip-prefix P1 index 10 permit 10.1.0.0 16 less-equal 24。下列哪条路由会被 P1 匹配？",
+    "options": {
+      "A": "10.1.0.0/8",
+      "B": "10.2.0.0/16",
+      "C": "10.1.2.0/24",
+      "D": "10.1.0.0/25"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "该 ip-prefix 要求前 16 位为 10.1，且掩码长度在 16 到 24 之间。10.1.2.0/24 的前 16 位是 10.1，掩码长度 24 落在范围内，因此被匹配，C 正确。A 错误：10.1.0.0/8 的掩码长度为 8，小于 16，不在范围内。B 错误：10.2.0.0/16 的前 16 位是 10.2，与 10.1 不符。D 错误：10.1.0.0/25 的掩码长度 25 超过 less-equal 24 的上限。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "路由策略与路由控制",
+    "knowledgePoint": "路由控制工具",
+    "difficulty": "medium",
+    "tags": [
+      "IP-Prefix",
+      "路由过滤",
+      "匹配范围"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-1-1-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“路由和流量控制”；路由前缀由地址与长度两部分构成、需按长度范围匹配的依据见 RFC 4271 §4.3，ip-prefix 的 greater-equal/less-equal 为华为设备配置语义（题干已注明）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "e19c142a636fbd98349bd2fd817a2e7234eac7bec3ae739fa4d0ecebb28ded08"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-1-1-002",
+    "type": "single_choice",
+    "question": "在华为设备上使用 AS_Path 过滤器控制路由。若要匹配“源 AS 为 65001”（即 AS_PATH 以 65001 结尾）的路由，应使用下列哪个正则表达式？",
+    "options": {
+      "A": "_65001$",
+      "B": "^65001_",
+      "C": "^65001$",
+      "D": "65001*"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "AS_Path 过滤器中下划线匹配 AS 边界，$ 匹配字符串结尾，_65001$ 表示最后一个 AS 是 65001，即路由源自 AS 65001，A 正确。B 错误：^65001_ 匹配以 65001 开头的 AS_PATH，表示路由从 AS 65001 收到，而不是源自 65001。C 错误：^65001$ 只匹配仅含 65001 一个 AS 的路径，范围过窄，漏掉经过其他 AS 后源自 65001 的路由。D 错误：该写法表示字符 6500 后跟任意个 1，不是 AS 边界匹配。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "路由策略与路由控制",
+    "knowledgePoint": "路由控制工具",
+    "difficulty": "medium",
+    "tags": [
+      "AS_Path 过滤器",
+      "正则表达式",
+      "路由过滤"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-1-1-002",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“路由和流量控制”；AS_PATH 由 AS_SEQUENCE 与 AS_SET 段构成、按段顺序匹配的依据见 RFC 4271 §5.1.2，正则边界符号为华为 AS_Path 过滤器语义（题干已注明）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "e3c8b660968025fba4f554fb3002fc5896b18e3e71fe7cd0af9d5a158c5f00e8"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-1-1-003",
+    "type": "single_choice",
+    "question": "在华为设备的 OSPF 进程中配置 filter-policy 1 import 后，下列描述正确的是？",
+    "options": {
+      "A": "只过滤 OSPF 向邻居发布的 LSA，不影响本地路由表",
+      "B": "把不匹配的路由从 LSDB 中删除，从而减少 LSA 泛洪",
+      "C": "只对引入的外部路由生效，区域内路由不受影响",
+      "D": "过滤从 OSPF 计算出的路由是否加入本地路由表，不改变 LSDB 中的 LSA，也不影响邻居的 LSDB"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "OSPF 的 filter-policy import 作用于本地路由表：SPF 计算出的路由若不匹配过滤规则则不加入本地路由表，但 LSDB 与 LSA 泛洪不受影响，邻居仍能正常计算，D 正确。A 错误：过滤发布方向的是 export，且 export 只影响发布的路由。B 错误：该命令不会删除 LSDB 中的 LSA。C 错误：import 过滤对区域内、区域间和外部路由都生效，不限于外部路由。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "路由策略与路由控制",
+    "knowledgePoint": "路由控制工具",
+    "difficulty": "medium",
+    "tags": [
+      "filter-policy",
+      "OSPF",
+      "路由表"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-1-1-003",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“路由和流量控制”；LSDB 与 LSA 泛洪、最短路径树计算并生成路由表的分层过程见 RFC 2328 §12、§16，filter-policy import 只影响本地路由表为华为设备行为（题干已注明）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "fea23f1e38921c5c9027f734d0e065b7fb6979906c709c6618818bffcddd1052"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-1-1-004",
+    "type": "single_choice",
+    "question": "在华为设备上为一条路由设置 BGP 团体属性 NO_ADVERTISE 后，本机对该路由的处理是？",
+    "options": {
+      "A": "可以通告给本 AS 内的 IBGP 邻居，但不能通告给 EBGP 邻居",
+      "B": "不向任何 BGP 邻居通告该路由",
+      "C": "只通告给联邦内的成员 AS",
+      "D": "把该路由从本地 BGP 路由表中删除"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "NO_ADVERTISE 的含义是不把携带该团体的路由通告给任何 BGP 邻居，本机仍可正常使用该路由，B 正确。A 错误：可以发给 IBGP 但不能发给 EBGP 的是 NO_EXPORT 的效果。C 错误：只发给联邦内成员、不发给外部 EBGP 邻居对应 NO_EXPORT_SUBCONFED。D 错误：团体属性只控制通告范围，不会删除本地路由。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "路由策略与路由控制",
+    "knowledgePoint": "路由控制工具",
+    "difficulty": "medium",
+    "tags": [
+      "BGP 团体",
+      "NO_ADVERTISE",
+      "路由控制"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-1-1-004",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1997-bgp-community"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“路由和流量控制”；NO_ADVERTISE、NO_EXPORT、NO_EXPORT_SUBCONFED 三种公认团体的语义见 RFC 1997“Well-known Communities”一节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项与解析，未复制任何第三方题目。",
+      "reviewDigest": "87ebee0367982589d107fb7e931ffb37a6cf0fc69b18d3053dfa053deb2ad66c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  }
+]

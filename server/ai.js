@@ -4,7 +4,9 @@ import { decrypt, validateBaseUrl, redact } from "./security.js";
 import { questionSimilarity } from "./question-similarity.js";
 import { questionForCertificate } from "./question-banks/scopes.js";
 import { authorAiSettings } from "./ai-service.js";
+import { deepSeekDefaults, officialDeepSeek } from "./ai-model-defaults.js";
 import { currentAiSignal, checkAiCancellation, positiveInteger } from "./ai-tasks.js";
+import { cachedPromptTokens, usageCost } from "./ai-usage-cost.js";
 import {
   validateQuestion,
   normalizeQuestionDraft,
@@ -163,7 +165,7 @@ export class OpenAICompatibleProvider extends AIProvider {
           ...(Number.isSafeInteger(options.maxTokens) && options.maxTokens > 0
             ? { max_tokens: options.maxTokens } : {}),
           // Vendor-specific options must not be sent to other compatible APIs.
-          ...(options.disableThinking && new URL(url).hostname === "api.deepseek.com"
+          ...((options.disableThinking ?? (settings.model === deepSeekDefaults.model)) && officialDeepSeek(url)
             ? { thinking: { type: "disabled" } } : {}),
           ...(options.stream ? { stream: true } : {}),
         }),
@@ -227,7 +229,8 @@ export class OpenAICompatibleProvider extends AIProvider {
                   Number.isSafeInteger(usageChunk[key]) && usageChunk[key] >= 0
                     ? usageChunk[key]
                     : 0;
-              usage.hasUsage = true;
+              usage.hasUsage = ["prompt_tokens", "completion_tokens", "total_tokens"].every((key) => Number.isSafeInteger(usageChunk[key]) && usageChunk[key] >= 0);
+              usage.cached_prompt_tokens = cachedPromptTokens(usageChunk);
             }
             if (event.choices?.[0]?.finish_reason === "length")
               throw truncatedOutput();
@@ -276,7 +279,8 @@ export class OpenAICompatibleProvider extends AIProvider {
       if (raw) {
         for (const k of ["prompt_tokens", "completion_tokens", "total_tokens"])
           usage[k] = Number.isSafeInteger(raw[k]) && raw[k] >= 0 ? raw[k] : 0;
-        usage.hasUsage = true;
+        usage.hasUsage = ["prompt_tokens", "completion_tokens", "total_tokens"].every((key) => Number.isSafeInteger(raw[key]) && raw[key] >= 0);
+        usage.cached_prompt_tokens = cachedPromptTokens(raw);
       }
       // Reasoning models can exhaust the budget before producing any content.
       if (body.choices?.[0]?.finish_reason === "length") throw truncatedOutput();
@@ -303,7 +307,10 @@ export class OpenAICompatibleProvider extends AIProvider {
           hasUsage: !!usage.hasUsage,
           success,
           model: settings.model,
+          ...usageCost(usage, settings.model),
           ...(options.taskType ? { taskType: options.taskType } : {}),
+          ...(options.tutorSessionId ? { tutorSessionId: options.tutorSessionId, tutorCourseId: options.tutorCourseId,
+            tutorRequestId: options.tutorRequestId } : {}),
         },
         userId,
       );

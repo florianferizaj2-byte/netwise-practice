@@ -26,12 +26,14 @@ data class SimulationRoute(
     val speedKph: Double,
     val loop: Boolean,
     val createdAt: Long = System.currentTimeMillis(),
+    val restartOnLoop: Boolean = false,
 ) {
     init {
         require(name.isNotBlank())
         require(waypoints.size >= 2)
         require(speedKph.isFinite() && speedKph in MIN_SPEED_KPH..MAX_SPEED_KPH)
         require(waypoints.map { it.coordinates }.distinct().size >= 2)
+        require(!restartOnLoop || loop)
     }
 
     companion object {

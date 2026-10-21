@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { reduceWebMotion } from "./web-preferences.jsx";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -20,10 +21,12 @@ import {
   TriangleAlert,
 } from "lucide-react";
 import { MembershipBadge } from "./components/membership-badge.jsx";
+import { MembershipTierArt } from "./components/membership-tier-art.jsx";
 import { ContentPlaceholder } from "./components/content-placeholder.jsx";
 import { membershipPurchaseUrl } from "./membership-purchase.js";
 import "./vip.css";
 import "./subjective-study.css";
+import "./blue-membership.css";
 
 const plans = [
   {
@@ -95,9 +98,7 @@ export function VipView({
   }, [account]);
   function openRedemption() {
     redemptionPanel.current?.scrollIntoView({
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        ? "auto"
-        : "smooth",
+      behavior: reduceWebMotion() ? "auto" : "smooth",
       block: "center",
     });
     codeInput.current?.focus({ preventScroll: true });
@@ -229,8 +230,25 @@ export function VipView({
         </p>
       )}
       <section className="vip-study-entry" aria-label="会员 AI 精讲与练习">
-        <div><h2><BookOpen size={20} />AI 精讲与练习</h2><p>VIP 专属：按知识点学习、填空练习，随时向 AI 老师提问。VIP、SVIP、SSVIP 均可使用。</p></div>
-        <button className="primary" type="button" disabled={loading && !account} onClick={() => paid ? navigate("study") : openRedemption()}>{paid ? "进入学习与练习" : "开通 VIP 后学习"}<ArrowRight size={17} /></button>
+        <div>
+          <h2>
+            <BookOpen size={20} />
+            AI 精讲与练习
+          </h2>
+          <p>
+            VIP 专属：按知识点学习、填空练习，随时向 AI
+            老师提问。VIP、SVIP、SSVIP 均可使用。
+          </p>
+        </div>
+        <button
+          className="primary"
+          type="button"
+          disabled={loading && !account}
+          onClick={() => (paid ? navigate("study") : openRedemption())}
+        >
+          {paid ? "进入学习与练习" : "开通 VIP 后学习"}
+          <ArrowRight size={17} />
+        </button>
       </section>
       <div className="vip-layout">
         <section
@@ -415,14 +433,17 @@ export function VipView({
                   onChange={() => setSelected(plan.id)}
                 />
                 <span className="vip-plan-top">
-                  <strong>{plan.name}</strong>
+                  <MembershipTierArt plan={plan.id} />
+                  <span className="vip-plan-title">
+                    <strong>{plan.name}</strong>
+                    <span className="vip-plan-description">
+                      {plan.description}
+                      {account?.plan === plan.id && <span>当前套餐</span>}
+                    </span>
+                  </span>
                   <span className="vip-plan-radio" aria-hidden="true">
                     {selected === plan.id && <Check size={12} />}
                   </span>
-                </span>
-                <span className="vip-plan-description">
-                  {plan.description}
-                  {account?.plan === plan.id && <span>当前套餐</span>}
                 </span>
                 <span className="vip-plan-price">
                   <small>¥</small>
@@ -450,19 +471,34 @@ export function VipView({
             ))}
           </fieldset>
           <div className={`vip-plan-choice vip-tone-${selected}`}>
-            <div>
-              <strong>
-                {selectedPlan.name} · {selectedPlan.description}
-              </strong>
-              <span>{selectedPlan.detail}</span>
+            <div className="vip-selected-plan">
+              <MembershipTierArt plan={selectedPlan.id} />
+              <span>
+                <strong>
+                  {selectedPlan.name} · {selectedPlan.description}
+                </strong>
+                <small>{selectedPlan.detail}</small>
+              </span>
             </div>
             <div className="vip-purchase-actions">
-              <a className="vip-purchase-link" href={membershipPurchaseUrl} target="_blank" rel="noopener noreferrer">购买会员兑换码<ArrowUpRight size={16} aria-hidden="true" /></a>
-              <button type="button" onClick={openRedemption}>已有兑换码，立即兑换<Ticket size={16} aria-hidden="true" /></button>
+              <a
+                className="vip-purchase-link"
+                href={membershipPurchaseUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                购买会员兑换码
+                <ArrowUpRight size={16} aria-hidden="true" />
+              </a>
+              <button type="button" onClick={openRedemption}>
+                已有兑换码，立即兑换
+                <Ticket size={16} aria-hidden="true" />
+              </button>
             </div>
           </div>
           <p className="vip-purchase-note">
-            请在购买页选择 {selectedPlan.name}。售价与会员时长以购买页为准，购买后回到考匠输入兑换码，权益到账后即可使用。
+            请在购买页选择 {selectedPlan.name}
+            。售价与会员时长以购买页为准，购买后回到考匠输入兑换码，权益到账后即可使用。
           </p>
         </section>
 
@@ -527,7 +563,15 @@ export function VipView({
               每码限用一次。会员有效期内支持同等级续期；其他等级可在到期后兑换。
             </p>
           </form>
-          <a className="vip-redeem-buy-link" href={membershipPurchaseUrl} target="_blank" rel="noopener noreferrer">还没有兑换码？前往购买<ArrowUpRight size={15} aria-hidden="true" /></a>
+          <a
+            className="vip-redeem-buy-link"
+            href={membershipPurchaseUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            还没有兑换码？前往购买
+            <ArrowUpRight size={15} aria-hidden="true" />
+          </a>
           {result && (
             <div className="vip-redeem-success" role="status">
               <CircleCheck size={21} />
@@ -629,7 +673,8 @@ export function VipView({
           </summary>
           <p>
             VIP、SVIP、SSVIP 每 30 天分别包含 100、300、600 道 AI
-            新题。所有等级均可签到领取每日 5 次解析、1 组出题和 3 次分析额度，每次使用扣对应额度。
+            新题。所有等级均可签到领取每日 5 次解析、1 组出题和 3
+            次分析额度，每次使用扣对应额度。
           </p>
         </details>
         <details>
@@ -640,7 +685,9 @@ export function VipView({
           <p>
             AI 出题优先使用当日签到机会，再使用会员额度。会员额度按首次开通起每
             30
-            天更新，未用完的额度不结转；同等级续期延长有效期，不提前重置当期额度。解析、提示和分析每次扣 1 次对应额度；已有结果再次通过 AI 功能请求时也会扣额，单纯阅读当前页面不重复扣除。失败会返还对应额度。
+            天更新，未用完的额度不结转；同等级续期延长有效期，不提前重置当期额度。解析、提示和分析每次扣
+            1 次对应额度；已有结果再次通过 AI
+            功能请求时也会扣额，单纯阅读当前页面不重复扣除。失败会返还对应额度。
           </p>
         </details>
         <details>
@@ -659,14 +706,13 @@ export function VipView({
         <summary>
           <KeyRound size={16} />
           <span>作者 AI 服务</span>
-          <small>
-            无需配置 · 按使用扣额
-          </small>
+          <small>无需配置 · 按使用扣额</small>
           <ChevronDown size={15} />
         </summary>
         <div>
           <p>
-            所有账号统一使用作者提供的 AI 服务。解析、提示和分析每次扣对应额度；出题优先使用签到机会，再使用会员题数，失败自动返还。已生成题组可反复练习。
+            所有账号统一使用作者提供的 AI
+            服务。解析、提示和分析每次扣对应额度；出题优先使用签到机会，再使用会员题数，失败自动返还。已生成题组可反复练习。
           </p>
           {account?.canManageAiService && (
             <button type="button" onClick={() => navigate("settings")}>

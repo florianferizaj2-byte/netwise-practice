@@ -8,6 +8,12 @@ import { z } from "zod";
 import { createStore } from "./store.js";
 import { registerMembershipRoutes } from "./membership-routes.js";
 import { registerStudyRoutes } from "./study-routes.js";
+import { createLearningPlans, createPlanSchema, addPlanTaskSchema, cancelPlanTaskSchema } from "./learning-plan.js";
+import {registerInteractiveTutor} from "./interactive-tutor.js";
+import { registerKnowledgeFavorites } from "./knowledge-favorites.js";
+import { registerWebPreferences } from "./web-preferences.js";
+import { registerStudyReminders } from "./study-reminders.js";
+import { defaultAiModel } from "./ai-model-defaults.js";
 import { registerExamRoutes } from "./exams.js";
 import {
   encrypt,
@@ -33,8 +39,10 @@ import { authorAiAvailable, authorAiOwner } from "./ai-service.js";
 import { registerGuestTrialRoutes } from "./guest-trial.js";
 import { createAiScheduler, checkAiCancellation } from "./ai-tasks.js";
 import { createAuthRateLimiter } from "./auth-rate-limit.js";
+import { createAccountSecurity } from "./account-security.js";
 import { createMobileAnnouncementService, registerMobileAnnouncement } from "./mobile-announcement.js";
 import { registerMobileAdminRoutes } from "./mobile-admin.js";
+import { registerAdminConsole, draftQuestion } from "./admin-console/index.js";
 import { createMobileProfileService, registerMobileProfile } from "./mobile-profile.js";
 import { resolveMobileRelease } from "./mobile-release.js";
 
@@ -147,6 +155,7 @@ export async function createApp(options = {}) {
   // profile, including its encrypted AI API key. Tests/local fixtures can
   // still opt into anonymous mode explicitly with { authRequired: false }.
   const authRequired = options.authRequired ?? true;
+  const accountSecurity = createAccountSecurity(store, options.accountSecurity);
   const mobileProfiles = createMobileProfileService(store);
   const app = express();
   const aiScheduler = createAiScheduler(options.aiTasks);
@@ -180,6 +189,7 @@ export async function createApp(options = {}) {
       return res.status(403).json({ error: "拒绝跨站请求" });
     next();
   });
+  // Public announcements remain available without a session or a supported app version.
   const mobileAnnouncements = await createMobileAnnouncementService({
     file: options.announcementFile || process.env.MOBILE_ANNOUNCEMENT_FILE || path.join(store.dataDir, "mobile-announcement.json"),
   });
@@ -256,21 +266,15 @@ export async function createApp(options = {}) {
   app.use([
     "/api/auth/login", "/api/auth/register", "/api/auth/wechat/bind",
     "/api/auth/wechat/register", "/api/auth/wechat/mini-login",
+    "/api/auth/email-code", "/api/auth/reset-password", "/api/auth/change-password", "/api/auth/bind-email",
   ], createAuthRateLimiter(store.db, options.authLimits));
+  route("get", "/api/auth/security-config", () => accountSecurity.config());
+  route("post", "/api/auth/email-code", req => accountSecurity.sendCode(req.body, {
+    user: store.authUser(requestToken(req)), address: req.ip || req.socket.remoteAddress,
+  }));
+  route("post", "/api/auth/reset-password", req => accountSecurity.resetPassword(req.body));
   route("post", "/api/auth/register", async (req, res) => {
-    const body = z
-      .object({
-        username: z
-          .string()
-          .trim()
-          .min(3)
-          .max(40)
-          .regex(/^[A-Za-z0-9_-]+$/, "账号只能使用字母、数字、下划线或连字符"),
-        password: z.string().min(8).max(128),
-      })
-      .strict()
-      .parse(req.body);
-    const user = await store.registerAsync(body.username, body.password);
+    const user = await accountSecurity.register(req.body);
     const token = store.createAuthSession(user.id);
     sessionCookie(req, res, token);
     return authResponse(req, user, token);
@@ -378,26 +382,7 @@ export async function createApp(options = {}) {
     };
   });
   route("post", "/api/auth/wechat/register", async (req, res) => {
-    const body = z
-      .object({
-        bindingToken: z.string().trim().min(20).max(200),
-        username: z
-          .string()
-          .trim()
-          .min(3)
-          .max(40)
-          .regex(/^[A-Za-z0-9_-]+$/, "账号只能使用字母、数字、下划线或连字符"),
-        password: z.string().min(8).max(128),
-      })
-      .strict()
-      .parse(req.body);
-    const challenge = store.wechatLoginChallenge(body.bindingToken);
-    if (!challenge) {
-      const error = new Error("微信绑定已过期，请重新点击微信登录");
-      error.status = 401;
-      throw error;
-    }
-    const user = await store.registerAsync(body.username, body.password, { wechatBindingToken: body.bindingToken });
+    const user = await accountSecurity.register(req.body, { wechat: true });
     const token = store.createAuthSession(user.id);
     sessionCookie(req, res, token);
     return {
@@ -437,6 +422,13 @@ export async function createApp(options = {}) {
     next();
   });
   registerMobileProfile({ app, route, service: mobileProfiles, userView });
+  route("get", "/api/auth/security", req => accountSecurity.view(req.user.id));
+  route("post", "/api/auth/bind-email", req => accountSecurity.bindEmail(req.body, req.user));
+  route("post", "/api/auth/change-password", async (req, res) => {
+    const result = await accountSecurity.changePassword(req.body, req.user);
+    sessionCookie(req, res, null, false);
+    return result;
+  });
   route("put", "/api/auth/certificate", (req) => {
     if (!req.user) throw new Error("请先登录");
     const certificateId = z
@@ -881,7 +873,7 @@ export async function createApp(options = {}) {
     }
     const current = store.settings(userId);
     const baseUrl = validateBaseUrl(process.env.AUTHOR_API_BASE_URL?.trim() || "https://api.deepseek.com");
-    const model = process.env.AUTHOR_API_MODEL?.trim() || "deepseek-chat";
+    const model = process.env.AUTHOR_API_MODEL?.trim() || defaultAiModel(baseUrl);
     store.saveSettings(userId, {
       ...current,
       baseUrl,
@@ -922,9 +914,15 @@ export async function createApp(options = {}) {
     }
   };
   registerMembershipRoutes({ route, store, requireAdmin, requestUserId, accountEntitlementView });
-  registerMobileAdminRoutes({ route, store, requireAdmin, certificates, announcements: mobileAnnouncements });
+  registerMobileAdminRoutes({ route, store, requireAdmin, certificates, announcements: mobileAnnouncements, profiles: mobileProfiles });
+  const adminConsole = registerAdminConsole({ route, store, requireAdmin, provider, ai });
   const study = registerStudyRoutes({ route, store, provider, requireAdmin,
     requestUserId, ai, requireAiService, studyAI: options.studyAI, studySeeds: options.studySeeds });
+  registerInteractiveTutor({app,route,store,requestUserId,studyContent:study.content,resolveQuestion:requireQ,
+    teacher:study.teacher,ai,requireAiService});
+  registerKnowledgeFavorites({ route, store, requestUserId, studyContent: study.content });
+  const webPreferences = registerWebPreferences({ route, store, requestUserId });
+  registerStudyReminders({ route, store, requestUserId, preferences: webPreferences });
   const adminQuestion = (question, includeFeedback = false) => ({
     ...question,
     ...(includeFeedback
@@ -1031,10 +1029,12 @@ export async function createApp(options = {}) {
     question.source,
     question.sourceLabel,
     ...(question.tags || []),
-    ...(question.provenance || []).flatMap((item) => [
+    ...(Array.isArray(question.provenance) ? question.provenance : question.provenance ? [question.provenance] : []).flatMap((item) => [
       item.file,
       item.questionNumber,
       item.sourceIndex,
+      item.locator,
+      item.sourceQuestionId,
     ]),
     ...Object.values(question.options || {}),
   ]
@@ -1062,7 +1062,8 @@ export async function createApp(options = {}) {
       .parse(query);
     const search = parsed.search?.toLocaleLowerCase("zh-CN");
     const filtered = store
-      .allQ()
+      .allQ(true)
+      .filter(question => question.source !== "ai_generated")
       .map((question) => questionForCertificate(question, parsed.certificateId))
       .filter(
         (question) =>
@@ -1196,7 +1197,8 @@ export async function createApp(options = {}) {
       })
       .parse(req.query);
     const questions = store
-      .allQ()
+      .allQ(true)
+      .filter(question => question.source !== "ai_generated")
       .filter(
         (question) =>
           !parsed.certificateId ||
@@ -1274,7 +1276,7 @@ export async function createApp(options = {}) {
       .strict()
       .parse(req.body);
     const existing = store.getQ(req.params.id);
-    if (!existing) {
+    if (!existing || existing.source === "ai_generated") {
       const error = new Error("题目不存在或已经删除");
       error.status = 404;
       throw error;
@@ -1336,35 +1338,8 @@ export async function createApp(options = {}) {
       candidate,
       store.allQ().filter((question) => question.id !== existing.id),
     );
-    const saved = store.updateQuestion(existing.id, {
-      ...validated,
-      ...(existing.certificateScopes?.[editingCertificateId] ? {
-        chapter: existing.chapter,
-        knowledgeSection: existing.knowledgeSection,
-        knowledgePoint: existing.knowledgePoint,
-        certificateScopes: {
-          ...existing.certificateScopes,
-          [editingCertificateId]: {
-            ...existing.certificateScopes[editingCertificateId],
-            chapter: validated.chapter,
-            knowledgeSection: validated.knowledgeSection,
-            knowledgePoint: validated.knowledgePoint,
-          },
-        },
-      } : {}),
-      ...(Object.prototype.hasOwnProperty.call(existing, "targetKnowledgePoint")
-        ? { targetKnowledgePoint: validated.knowledgePoint }
-        : {}),
-    });
-    store.audit(req.user.id, "question_updated", "question", existing.id, {
-      chapter: saved.chapter,
-      knowledgePoint: saved.targetKnowledgePoint || saved.knowledgePoint,
-      knowledgeSection: saved.knowledgeSection || null,
-    });
-    return { question: {
-      ...adminQuestion(questionForCertificate(saved, editingCertificateId), true),
-      classificationCertificateId: editingCertificateId,
-    } };
+    const document = adminConsole.stageRevision(req.user.id, existing, editingCertificateId, draftQuestion(validated));
+    return { question: { ...document.data.questions[0], publication: "draft" }, document, pendingRelease: true };
   });
   route("delete", "/api/admin/feedback", (req) => {
     requireAdmin(req);
@@ -1405,14 +1380,9 @@ export async function createApp(options = {}) {
       error.status = 404;
       throw error;
     }
-    store.deleteQuestion(question.id, req.user.id, body.reason);
-    store.audit(req.user.id, "question_deleted", "question", question.id, {
-      source: question.source,
-      chapter: question.chapter,
-      knowledgePoint: question.knowledgePoint,
-      reason: body.reason || "",
-    });
-    return { deleted: true, questionId: question.id };
+    store.setQuestionVisibility(question.id, true, body.reason || "管理员下架", req.user.id);
+    store.audit(req.user.id, "question_hidden", "question", question.id, { reason: body.reason || "" });
+    return { hidden: true, deleted: false, questionId: question.id };
   });
   route("get", "/api/admin/audit", (req) => {
     requireAdmin(req);
@@ -1421,105 +1391,11 @@ export async function createApp(options = {}) {
       .parse(req.query).limit;
     return { entries: store.auditRows(limit) };
   });
-  route("post", "/api/admin/questions/generate", (req) =>
-    ai(requestUserId(req), async () => {
-      requireAdmin(req);
-      const body = z
-        .object({
-          certificateId: z.string().min(1),
-          chapter: z.string().min(1).max(100),
-          knowledgeSection: z.string().min(1).max(100).optional(),
-          knowledgePoint: z.string().min(1).max(100),
-          count: z.number().int().min(1).max(20),
-          difficulty: z.enum(["easy", "medium", "hard"]).optional(),
-        })
-        .strict()
-        .parse(req.body);
-      const certificate = certificates.find((item) => item.id === body.certificateId);
-      if (!certificate) throw new Error("证书不存在");
-      const taxonomy = adminTaxonomy().find((item) => item.id === body.certificateId);
-      const chapter = taxonomy?.chapters.find((item) => item.name === body.chapter);
-      const section = chapter?.sections?.find(
-        (item) => item.name === body.knowledgeSection,
-      );
-      if (
-        (chapter?.sections?.length && !section) ||
-        !(section?.knowledgePoints || chapter?.knowledgePoints || []).includes(
-          body.knowledgePoint,
-        )
-      )
-        throw new Error("章节或知识点不属于当前证书");
-      const source = store
-        .allQ()
-        .find(
-          (question) =>
-            hasCertificateQuestion(question, body.certificateId) &&
-            question.chapter === body.chapter &&
-            (!body.knowledgeSection ||
-              question.knowledgeSection === body.knowledgeSection) &&
-            (question.targetKnowledgePoint || question.knowledgePoint) ===
-              body.knowledgePoint,
-        ) ||
-        store
-        .allQ()
-        .find(
-            (question) =>
-              hasCertificateQuestion(question, body.certificateId) &&
-              question.chapter === body.chapter &&
-              (!body.knowledgeSection ||
-                question.knowledgeSection === body.knowledgeSection),
-          );
-      if (!source) throw new Error("当前章节还没有可供 AI 参考的题目");
-      const settings = store.adminSettings(req.user.id);
-      if (!settings.keyCipher) throw new Error("请先在管理员面板配置 API Key");
-      const generated = await provider.generateBankExpansion(
-        {
-          ...source,
-          ...(body.knowledgeSection
-            ? { knowledgeSection: body.knowledgeSection }
-            : {}),
-          knowledgePoint: body.knowledgePoint,
-        },
-        body.count,
-        {
-          userId: req.user.id,
-          certificateId: body.certificateId,
-          settings,
-          difficulty: body.difficulty,
-          existing: store.allQ(),
-          onProgress: (event) => {},
-        },
-      );
-      const prepared = generated.map((question) => ({
-        ...question,
-        id: `admin-${crypto.randomUUID()}`,
-        source: "admin_generated",
-        sourceLabel: "管理员 AI 扩充题",
-        certificates: [body.certificateId],
-        ...(body.knowledgeSection
-          ? { knowledgeSection: body.knowledgeSection }
-          : {}),
-        ownerUserId: req.user.id,
-        adminGeneratedAt: new Date().toISOString(),
-        targetKnowledgePoint: body.knowledgePoint,
-      }));
-      const saved = store.addAdminQuestions(prepared);
-      store.audit(req.user.id, "questions_generated", "knowledge_point", body.knowledgePoint, {
-        certificateId: body.certificateId,
-        chapter: body.chapter,
-        knowledgeSection: body.knowledgeSection || null,
-        requested: body.count,
-        inserted: saved.inserted.length,
-        skipped: saved.skipped.length,
-      });
-      return {
-        requested: body.count,
-        inserted: saved.inserted.length,
-        skipped: saved.skipped,
-        questions: saved.inserted,
-      };
-    }),
-  );
+  route("post", "/api/admin/questions/generate", (req) => {
+    requireAdmin(req);
+    const job = adminConsole.createGeneration(req.user.id, req.body);
+    return { job, inserted: 0, pending: true, questions: [], message: "结果将保存到待审批次，不直接写入共享题库" };
+  });
   const certificateQuestions = (
     certificateId,
     userId,
@@ -1610,6 +1486,31 @@ export async function createApp(options = {}) {
     ...privateQuestion(questionForCertificate(question, state.certificateId)),
     attempted: state.attemptedIds.has(question.id),
     favorite: state.favoriteIds.has(question.id),
+  });
+  const learningPlans = createLearningPlans(store);
+  const planContext = (req) => {
+    const certificate = requireCertificate(req);
+    if (!certificate) throw Object.assign(new Error("请先选择备考证书"), {status:409});
+    const user = requestUserId(req);
+    return {user,certificate,questions:certificateQuestions(certificate,user)};
+  };
+  app.use("/api/learning-plan", (req,res,next) => { res.setHeader("Cache-Control","no-store"); next(); });
+  route("get", "/api/learning-plan", (req) => {
+    const c=planContext(req); return learningPlans.view(c.user,c.certificate,c.questions);
+  });
+  route("post", "/api/learning-plan", (req) => {
+    const c=planContext(req); return learningPlans.create(c.user,c.certificate,c.questions,createPlanSchema.parse(req.body));
+  });
+  route("post", "/api/learning-plan/tasks", (req) => {
+    const c=planContext(req); return learningPlans.add(c.user,c.certificate,c.questions,addPlanTaskSchema.parse(req.body));
+  });
+  route("put", "/api/learning-plan/:id/tasks/:task", (req) => {
+    const c=planContext(req); return learningPlans.cancel(c.user,c.certificate,c.questions,req.params.id,req.params.task,cancelPlanTaskSchema.parse(req.body));
+  });
+  route("post", "/api/learning-plan/:id/tasks/:task/session", (req) => {
+    z.object({}).strict().parse(req.body);
+    const c=planContext(req),state=questionState(req);
+    return learningPlans.session(c.user,c.certificate,c.questions,req.params.id,req.params.task,(q)=>publicQuestionForUser(q,state));
   });
   route("get", "/api/questions", (req) => {
     const state = questionState(req);
@@ -1938,12 +1839,14 @@ export async function createApp(options = {}) {
     const b = z
       .object({
         questionId: z.string(),
+        clientAttemptId: z.string().uuid().optional(),
         selected: z
           .array(z.enum(["A", "B", "C", "D", "E"]))
           .min(1)
           .max(5),
         response: z.string().max(5000).optional(),
         timeMs: z.number().int().min(0).max(86400000),
+        planTask: z.object({planId:z.string().uuid(),taskId:z.string().uuid()}).strict().optional(),
       })
       .strict()
       .parse(req.body);
@@ -1962,14 +1865,20 @@ export async function createApp(options = {}) {
       b.selected.length !== 1
     )
       throw new Error("单选题和判断题只能选择一项");
-    return store.recordAttempt(
+    const grade = () => store.recordAttempt(
       b.questionId,
       b.selected,
       b.timeMs,
       "practice",
       req.user?.id || "local",
       b.response,
+      b.clientAttemptId,
     );
+    if (b.planTask) {
+      const c=planContext(req);
+      return learningPlans.submit(c.user,c.certificate,c.questions,b.planTask,b,grade);
+    }
+    return grade();
   });
   route("get", "/api/wrong", (req) => {
     const certificateId = requireCertificate(req);
@@ -2104,6 +2013,10 @@ export async function createApp(options = {}) {
       };
     };
     const configuredModules = categoryTaxonomy?.modules || [];
+    const bankIds = new Set(bankQuestions.map(question=>question.id));
+    const lastAttempt = attempts.filter(attempt=>bankIds.has(attempt.questionId) && attempt.mode!=="exam")
+      .reduce((latest,attempt)=>!latest || attempt.createdAt>=latest.createdAt ? attempt : latest,null);
+    const lastQuestion = lastAttempt && bankQuestions.find(question=>question.id===lastAttempt.questionId);
     const chapters = syllabusProgress
       ? syllabusProgress.modules
       : configuredModules.length
@@ -2183,6 +2096,7 @@ export async function createApp(options = {}) {
       ...summary,
       mastery,
       chapters,
+      lastPractice: lastQuestion ? {chapter:lastQuestion.chapter,questionId:lastQuestion.id,practicedAt:lastAttempt.createdAt} : null,
       aiConfigured: aiServiceAvailable(),
       aiBusy: aiScheduler.busy(userId),
       plan: store.getDaily(userId, dailyKey(certificateId, today)),
@@ -2623,6 +2537,7 @@ export async function createApp(options = {}) {
   );
   app.use("/api", (req, res) => res.status(404).json({ error: "接口不存在" }));
   app.use((err, req, res, next) => {
+    if (err.retryAfter) res.set("Retry-After", String(err.retryAfter));
     res.status(err.status || 400).json({
       error:
         err.type === "entity.parse.failed"
@@ -2631,10 +2546,19 @@ export async function createApp(options = {}) {
             ? "输入参数不符合要求，请检查字段范围"
             : redact(err.message).slice(0, 500),
       ...(typeof err.code === "string" ? { code: err.code } : {}),
+      ...(err.retryAfter ? { retryAfter: err.retryAfter } : {}),
       ...(err.code === "EXAM_ANSWERS_CONFLICT" ? { details: err.details } : {}),
     });
   });
   if (withFrontend) {
+    if (production) app.use((req, res, next) => {
+      let pathname;
+      try { pathname = path.posix.normalize(decodeURIComponent(req.path).replace(/\\/g, "/")).toLowerCase(); }
+      catch { return res.status(400).type("text").send("页面地址无效"); }
+      if (pathname === "/demo" || pathname.startsWith("/demo/"))
+        return res.status(404).type("text").send("页面不存在");
+      next();
+    });
     const mobileWebRoot = path.join(root, 'dist', 'app');
     app.use('/app', express.static(mobileWebRoot, {
       setHeaders(res, file) {
@@ -2672,7 +2596,9 @@ export async function createApp(options = {}) {
   app.locals.study = study.content;
   app.locals.stop = async () => {
     clearInterval(aiQuestionJobTimer);
+    accountSecurity.close();
     study.stop();
+    await adminConsole.stop();
     await aiScheduler.stop();
     await study.settle();
   };

@@ -61,6 +61,10 @@ export function createStudyStore(db) {
       UNIQUE(user_id,request_id)
     );
     CREATE INDEX IF NOT EXISTS study_teacher_history ON study_teacher_requests(user_id,package_id,created_at);
+    CREATE INDEX IF NOT EXISTS study_teacher_quota ON study_teacher_requests(user_id,day)
+      WHERE status IN ('processing','completed');
+    CREATE INDEX IF NOT EXISTS study_teacher_leases ON study_teacher_requests(lease_until)
+      WHERE status='processing';
     CREATE TABLE IF NOT EXISTS study_feedback (
       id TEXT PRIMARY KEY, user_id TEXT NOT NULL, attempt_id TEXT NOT NULL REFERENCES study_attempts(id),
       status TEXT NOT NULL, note TEXT NOT NULL, created_at TEXT NOT NULL, resolved_at TEXT,
@@ -345,8 +349,11 @@ export function createStudyStore(db) {
         .run(error ? "failed" : "completed", JSON.stringify({ ...row.data, answer, error: error || "" }), row.id);
     },
     teacherHistory(userId, packageId) {
-      return db.prepare("SELECT * FROM study_teacher_requests WHERE user_id=? AND package_id=? AND status='completed' ORDER BY created_at DESC LIMIT 3")
-        .all(userId, packageId).map(unpack).reverse().map((row) => ({ question: row.data.context.message, answer: row.data.answer }));
+      return db.prepare("SELECT data FROM study_teacher_requests WHERE user_id=? AND package_id=? AND status='completed' ORDER BY created_at DESC LIMIT 3")
+        .all(userId, packageId).reverse().map((row) => {
+          const data = JSON.parse(row.data);
+          return { question: data.context.message, answer: data.answer };
+        });
     },
     feedback(userId, attempt, note) {
       db.prepare(`INSERT INTO study_feedback (id,user_id,attempt_id,status,note,created_at) VALUES (?,?,?,'open',?,?)

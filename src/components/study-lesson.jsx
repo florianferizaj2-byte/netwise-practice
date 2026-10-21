@@ -47,7 +47,13 @@ function AnswerContent({ answer }) {
   );
 }
 
-export function StudyTeacher({ node, packageId, context, onAccessDenied }) {
+export function StudyTeacher({
+  node,
+  packageId,
+  context,
+  onAccessDenied,
+  transport,
+}) {
   const [messages, setMessages] = useState([]),
     [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false),
@@ -56,11 +62,39 @@ export function StudyTeacher({ node, packageId, context, onAccessDenied }) {
     request = useRef(null),
     sending = useRef(false),
     list = useRef(null);
-  const historyPath = `/study/teacher/history?nodeId=${encodeURIComponent(node.id)}`;
+  const historyPath =
+    transport?.historyPath ||
+    `/study/teacher/history?nodeId=${encodeURIComponent(node.id)}`;
+  const [quota, setQuota] = useState(null);
+  const [historyRevision, setHistoryRevision] = useState(0),
+    [historyFailed, setHistoryFailed] = useState(false);
   useEffect(() => {
     live.current = true;
-    api(historyPath)
+    setHistoryFailed(false);
+    api(
+      historyPath,
+      undefined,
+      undefined,
+      transport ? { cache: false } : undefined,
+    )
       .then((data) => {
+        if (live.current && data.quota) setQuota(data.quota);
+        if (
+          live.current &&
+          transport &&
+          data.draft?.revision === transport.revision
+        ) {
+          setMessage((old) => old || data.draft.message);
+          if (!request.current)
+            request.current = {
+              key: JSON.stringify({
+                message: data.draft.message,
+                action: data.draft.action,
+                revision: data.draft.revision,
+              }),
+              requestId: data.draft.requestId,
+            };
+        }
         if (live.current)
           setMessages((old) =>
             old.length
@@ -72,12 +106,19 @@ export function StudyTeacher({ node, packageId, context, onAccessDenied }) {
           );
       })
       .catch((failure) => {
-        if (live.current) handleStudyAccessFailure(failure, onAccessDenied);
+        if (
+          live.current &&
+          !handleStudyAccessFailure(failure, onAccessDenied) &&
+          transport
+        ) {
+          setError("已保存的问答暂时无法读取，可以重试。");
+          setHistoryFailed(true);
+        }
       });
     return () => {
       live.current = false;
     };
-  }, [node.id, packageId]);
+  }, [node.id, packageId, historyPath, historyRevision]);
   useEffect(() => {
     list.current?.scrollTo({
       top: list.current.scrollHeight,
@@ -85,13 +126,20 @@ export function StudyTeacher({ node, packageId, context, onAccessDenied }) {
     });
   }, [messages, busy]);
   const ask = async (action, text) => {
-    if (sending.current || !text.trim()) return;
-    const body = {
-      nodeId: node.id,
-      message: text.trim(),
-      action,
-      ...(context || {}),
-    };
+    if (
+      sending.current ||
+      !text.trim() ||
+      (action === "ask" && transport?.blocked)
+    )
+      return;
+    const body = transport
+      ? { message: text.trim(), action, revision: transport.revision }
+      : {
+          nodeId: node.id,
+          message: text.trim(),
+          action,
+          ...(context || {}),
+        };
     const key = JSON.stringify(body);
     if (request.current?.key !== key)
       request.current = { key, requestId: crypto.randomUUID() };
@@ -100,12 +148,13 @@ export function StudyTeacher({ node, packageId, context, onAccessDenied }) {
     setError("");
     try {
       const result = await api(
-        "/study/teacher",
+        transport?.askPath || "/study/teacher",
         { ...body, requestId: request.current.requestId },
         "POST",
         { timeoutMs: 210000 },
       );
       if (!live.current) return;
+      if (result.quota) setQuota(result.quota);
       setMessages((old) => {
         const next = [
           ...old,
@@ -139,6 +188,12 @@ export function StudyTeacher({ node, packageId, context, onAccessDenied }) {
           <p>哪里不明白，随时问。</p>
         </div>
       </div>
+      {transport && (
+        <p className="ss-teacher-note">
+          {transport.blocked || "老师只结合当前步骤答疑，不代替小测判分。"}
+          {quota && ` 今日可新提问 ${quota.remaining} / ${quota.limit} 次。`}
+        </p>
+      )}
       <div
         className="ss-chat"
         ref={list}
@@ -174,15 +229,15 @@ export function StudyTeacher({ node, packageId, context, onAccessDenied }) {
           disabled={busy}
           onClick={() =>
             void ask(
-              context ? "hint" : "simple",
-              context ? "给我一点提示" : "再简单一点",
+              context || transport?.quizPending ? "hint" : "simple",
+              context || transport?.quizPending ? "给我一点提示" : "再简单一点",
             )
           }
         >
-          {context ? "给点提示" : "再简单一点"}
+          {context || transport?.quizPending ? "给点提示" : "再简单一点"}
         </button>
         <button
-          disabled={busy}
+          disabled={busy || transport?.quizPending}
           onClick={() => void ask("example", "举个小例子")}
         >
           举个例子
@@ -191,6 +246,17 @@ export function StudyTeacher({ node, packageId, context, onAccessDenied }) {
       {error && (
         <Notice error id="ss-teacher-error">
           {error}
+          {historyFailed && (
+            <button
+              type="button"
+              onClick={() => {
+                setError("");
+                setHistoryRevision((n) => n + 1);
+              }}
+            >
+              重试读取问答
+            </button>
+          )}
         </Notice>
       )}
       <form
@@ -205,6 +271,7 @@ export function StudyTeacher({ node, packageId, context, onAccessDenied }) {
           id="ss-teacher-message"
           rows={3}
           maxLength={600}
+          disabled={busy || !!transport?.blocked}
           value={message}
           aria-invalid={!!error}
           aria-describedby={error ? "ss-teacher-error" : undefined}
@@ -216,7 +283,7 @@ export function StudyTeacher({ node, packageId, context, onAccessDenied }) {
         />
         <button
           className="primary"
-          disabled={busy || message.trim().length < 2}
+          disabled={busy || message.trim().length < 2 || !!transport?.blocked}
         >
           <Send size={16} aria-hidden="true" />
           {busy ? "正在回答" : "问老师"}

@@ -22,6 +22,8 @@ import {
 } from "../components/study-content.jsx";
 import { LessonContent, StudyTeacher } from "../components/study-lesson.jsx";
 import "../subjective-study.css";
+import { KnowledgeFavoriteButton } from "../components/knowledge-favorite.jsx";
+import { reduceWebMotion } from "../web-preferences.jsx";
 
 const Practice = preloadableFeature(() =>
   import("./study-practice.jsx").then((module) => ({
@@ -63,14 +65,14 @@ function StudyPlaceholder() {
   );
 }
 
-export function SubjectiveStudy({ user, navigate }) {
+export function SubjectiveStudy({ user, navigate,initialNodeId,onInteractive }) {
   const tabKey = `aceexam-study-tab:${user.id}:${user.certificateId}`;
   const selectionKey = `aceexam-study-position:${user.id}:${user.certificateId}`;
   const [catalog, setCatalog] = useState(
     () => peekCachedApi("/study/catalog") || null,
   );
   const [selected, setSelected] = useState(() =>
-    chooseNode(peekCachedApi("/study/catalog"), selectionKey),
+    initialNodeId || chooseNode(peekCachedApi("/study/catalog"), selectionKey),
   );
   const [chapter, setChapter] = useState("");
   const [expandedTopics, setExpandedTopics] = useState([]);
@@ -287,8 +289,7 @@ export function SubjectiveStudy({ user, navigate }) {
       requestAnimationFrame(() =>
         workspace.current?.scrollIntoView({
           block: "start",
-          behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
-            .matches
+          behavior: reduceWebMotion()
             ? "auto"
             : "smooth",
         }),
@@ -364,6 +365,7 @@ export function SubjectiveStudy({ user, navigate }) {
           <h1>AI 精讲与练习</h1>
           <p>一次学透一个知识点，再用练习检验掌握。</p>
         </div>
+        {user.certificateId==="network-engineer" && <button onClick={()=>onInteractive?onInteractive(node?.id):navigate("tutor")}>分步互动精讲<ArrowRight size={16}/></button>}
         <button
           disabled={loading}
           aria-label="刷新学习目录"
@@ -517,6 +519,8 @@ export function SubjectiveStudy({ user, navigate }) {
                   </p>
                 )}
               </div>
+              <div className="ss-workspace-controls">
+              <KnowledgeFavoriteButton id={node.id} />
               <button
                 aria-expanded={teacherOpen}
                 aria-controls="ss-teacher-slot"
@@ -528,6 +532,7 @@ export function SubjectiveStudy({ user, navigate }) {
                 <MessageCircle size={16} aria-hidden="true" />
                 {teacherOpen ? "收起老师" : "问老师"}
               </button>
+              </div>
             </div>
             {siblings.length > 1 && (
               <nav

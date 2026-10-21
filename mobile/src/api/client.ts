@@ -648,10 +648,34 @@ export const mobileApi = {
     return response;
   },
 
-  async register(username: string, password: string) {
+  accountEmailPolicy() {
+    return request<{ emailVerificationRequired: boolean; emailAvailable: boolean }>('/auth/security-config');
+  },
+
+  sendAccountEmailCode(fields: { purpose: 'register' | 'reset' | 'bind'; email: string; username?: string; currentPassword?: string }) {
+    return request<{ challengeId: string; retryAfter: number; message: string }>('/auth/email-code', { method: 'POST', body: JSON.stringify(fields) });
+  },
+
+  resetPassword(fields: { username: string; password: string; email: string; code: string; challengeId: string }) {
+    return request<{ changed: boolean; message: string }>('/auth/reset-password', { method: 'POST', body: JSON.stringify(fields) });
+  },
+
+  accountSecurity() {
+    return request<{ emailBound: boolean; maskedEmail: string | null; emailAvailable: boolean; emailVerificationRequired: boolean }>('/auth/security');
+  },
+
+  bindAccountEmail(fields: { currentPassword: string; email: string; code: string; challengeId: string }) {
+    return request<{ emailBound: boolean; maskedEmail: string | null; emailAvailable: boolean; emailVerificationRequired: boolean }>('/auth/bind-email', { method: 'POST', body: JSON.stringify(fields) });
+  },
+
+  changePassword(fields: { currentPassword: string; password: string }) {
+    return request<{ changed: boolean; message: string }>('/auth/change-password', { method: 'POST', body: JSON.stringify(fields) });
+  },
+
+  async register(username: string, password: string, emailProof?: { email: string; code: string; challengeId: string }) {
     const response = await request<AuthResponse>('/auth/register', {
       method: 'POST',
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ username, password, ...emailProof }),
     });
     await setSessionToken(response.sessionToken ?? null);
     await cacheSessionProfile(response);

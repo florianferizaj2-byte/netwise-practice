@@ -6,7 +6,7 @@ import path from "node:path";
 import crypto from "node:crypto";
 import http from "node:http";
 import { createStore } from "../server/store.js";
-import { createApp } from "../server/index.js";
+import { createVerifiedTestApp as createApp, verifiedFetch } from "./helpers/account-mail.js";
 import { OpenAICompatibleProvider } from "../server/ai.js";
 import { encrypt } from "../server/security.js";
 import { fixtureQuestion, mockAI } from "./ai-fixture.js";
@@ -250,7 +250,7 @@ test("accounts require login and certificate selection filters the question bank
     fs.rmSync(dir, { recursive: true, force: true });
   });
   assert.equal((await fetch(base + "/api/questions")).status, 401);
-  const registration = await fetch(base + "/api/auth/register", {
+  const registration = await verifiedFetch(base + "/api/auth/register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -340,7 +340,7 @@ test("mobile clients can use a bearer session without browser cookies", async (t
     fs.rmSync(dir, { recursive: true, force: true });
   });
 
-  const registration = await fetch(base + "/api/auth/register", {
+  const registration = await verifiedFetch(base + "/api/auth/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -430,7 +430,7 @@ test("微信小程序首次登录绑定已有账号，后续直接复用同一�
   assert.equal(firstLoginData.needsBinding, true);
   assert.match(firstLoginData.bindingToken, /^[A-Za-z0-9_-]+$/);
 
-  const registration = await fetch(base + "/api/auth/register", {
+  const registration = await verifiedFetch(base + "/api/auth/register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username: "wechat_existing", password: "safe-password" }),
@@ -495,7 +495,7 @@ test("mobile version endpoint blocks outdated clients and exposes the APK link",
   assert.equal(oldVersion.status, 200);
   assert.equal(oldVersion.data.forceUpdate, true);
   assert.equal(oldVersion.data.downloadUrl, `/downloads/kaojiang-v${currentMobileVersion}.apk`);
-  assert.equal(oldVersion.data.minimumVersion, currentMobileVersion);
+  assert.equal(oldVersion.data.minimumVersion, '0.4.3');
 
   const currentVersion = await req(`/mobile/version?version=${currentMobileVersion}`);
   assert.equal(currentVersion.data.forceUpdate, false);
@@ -522,7 +522,7 @@ test("secure cookie follows the actual HTTP protocol", async (t) => {
     if (previousCookieSecure === undefined) delete process.env.COOKIE_SECURE;
     else process.env.COOKIE_SECURE = previousCookieSecure;
   });
-  const registration = await fetch(base + "/api/auth/register", {
+  const registration = await verifiedFetch(base + "/api/auth/register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -563,7 +563,7 @@ test("author AI settings are shared for use but manageable only by the owner", a
   });
   assert.equal((await fetch(base + "/api/settings")).status, 401);
   const register = async (username) => {
-    const response = await fetch(base + "/api/auth/register", {
+    const response = await verifiedFetch(base + "/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password: "safe-password" }),
@@ -583,6 +583,8 @@ test("author AI settings are shared for use but manageable only by the owner", a
     return { status: response.status, data: await response.json() };
   };
   const first = await register("key_owner");
+  // Administrator setup is a trusted fixture action, never a consequence of public registration.
+  store.db.prepare("UPDATE users SET is_admin=1 WHERE id=?").run(first.user.id);
   const second = await register("key_stranger");
   const configuration = {
     baseUrl: "https://example.com/v1",
@@ -606,6 +608,10 @@ test("server-generated AI groups are immutable, shareable by certificate, and ke
   process.env.AI_MASTER_KEY = crypto.randomBytes(32).toString("base64");
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "netwise-ai-owner-"));
   const store = createStore(dir);
+  // A public sign-up is not an administrator. Provision the test author through
+  // the trusted store, rather than relying on a developer's .env AI credentials.
+  const author = await store.registerAsync("fixture_author", "fixture-author-password");
+  assert.equal(author.isAdmin, true);
   const provider = new OpenAICompatibleProvider(store, { fetch: mockAI() });
   const app = await createApp({
     store,
@@ -636,7 +642,7 @@ test("server-generated AI groups are immutable, shareable by certificate, and ke
     return { status: response.status, data: await response.json() };
   };
   const createUser = async (username, certificateId = "network-engineer") => {
-    const registration = await fetch(base + "/api/auth/register", {
+    const registration = await verifiedFetch(base + "/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password: "safe-password" }),
@@ -647,7 +653,7 @@ test("server-generated AI groups are immutable, shareable by certificate, and ke
     return { cookie, user };
   };
   const owner = await createUser("ai_owner");
-  store.saveSettings(owner.user.id, {
+  store.saveSettings(author.id, {
     baseUrl: "https://example.com/v1",
     model: "test",
     keyCipher: encrypt("secret"),
@@ -670,7 +676,7 @@ test("server-generated AI groups are immutable, shareable by certificate, and ke
     questionId: seed.id,
     count: 1,
   });
-  assert.equal(generated.status, 200);
+  assert.equal(generated.status, 200, JSON.stringify(generated.data));
   const publicAi = generated.data.questions[0];
   assert.ok(!("answer" in publicAi));
   assert.ok(!("analysis" in publicAi));
@@ -1122,7 +1128,7 @@ test("执兽模拟考试按四科400题计分，240分及格且不设单科门�
   const { req, store, url } = await fixture(t, undefined, {
     authRequired: true,
   });
-  const registration = await fetch(url + "/api/auth/register", {
+  const registration = await verifiedFetch(url + "/api/auth/register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -1345,7 +1351,7 @@ test("AI outages produce specific safe errors and numeric or semantic failures n
   assert.equal(store.allQ().length, before);
 });
 
-test("管理员面板隔离管理员 API，支持扩题、重合检测、删题和封禁用户", async (t) => {
+test("管理员面板隔离管理员 API，生成结果待审、重合检测、下架保留原题和封禁用户", async (t) => {
   const previousMasterKey = process.env.AI_MASTER_KEY;
   process.env.AI_MASTER_KEY = crypto.randomBytes(32).toString("base64");
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "netwise-admin-"));
@@ -1397,7 +1403,7 @@ test("管理员面板隔离管理员 API，支持扩题、重合检测、删题�
   await new Promise((resolve) => server.once("listening", resolve));
   const base = `http://127.0.0.1:${server.address().port}`;
   const register = async (username) => {
-    const res = await fetch(base + "/api/auth/register", {
+    const res = await verifiedFetch(base + "/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password: "safe-password" }),
@@ -1427,7 +1433,9 @@ test("管理员面板隔离管理员 API，支持扩题、重合检测、删题�
   const admin = await register("admin_owner");
   const member = await register("ordinary_member");
   assert.equal(admin.status, 200);
-  assert.equal(admin.data.user.isAdmin, true);
+  assert.equal(admin.data.user.isAdmin, false);
+  store.db.prepare("UPDATE users SET is_admin=1 WHERE id=?").run(admin.data.user.id);
+  assert.equal((await request(admin.cookie, "/auth/me")).data.user.isAdmin, true);
   assert.equal(member.data.user.isAdmin, false);
   assert.equal((await request(member.cookie, "/admin/overview")).status, 403);
   const overviewStarted = performance.now();
@@ -1529,8 +1537,18 @@ test("管理员面板隔离管理员 API，支持扩题、重合检测、删题�
     },
   );
   assert.equal(generatedResponse.status, 200);
-  assert.equal(generatedResponse.data.inserted, 1);
-  assert.equal(store.allQ().filter((question) => question.source === "admin_generated").length, 1);
+  assert.equal(generatedResponse.data.inserted, 0);
+  assert.equal(generatedResponse.data.pending, true);
+  let expansionJob;
+  for (let attempt = 0; attempt < 100; attempt++) {
+    expansionJob = (await request(admin.cookie, `/admin/console/jobs/${generatedResponse.data.job.id}`)).data.job;
+    if (!["queued", "running"].includes(expansionJob.status)) break;
+    await new Promise(resolve => setTimeout(resolve, 30));
+  }
+  assert.equal(expansionJob.status, "completed", expansionJob.error);
+  const expansionDraft = (await request(admin.cookie, `/admin/console/documents/${expansionJob.result.documentId}`)).data.document;
+  assert.equal(expansionDraft.data.questions.length, 1);
+  assert.equal(store.allQ().filter((question) => question.source === "admin_generated").length, 0, "生成结果在独立复核前不能进入运行题库");
   const duplicateBase = {
     ...seed,
     id: "admin-similar-a",
@@ -1567,7 +1585,9 @@ test("管理员面板隔离管理员 API，支持扩题、重合检测、删题�
     "DELETE",
   );
   assert.equal(deleted.status, 200);
-  assert.equal(store.getQ("admin-similar-a"), null);
+  assert.equal(deleted.data.hidden, true);
+  assert.ok(store.getQ("admin-similar-a"), "下架保留原题");
+  assert.equal(store.allQ().some(q => q.id === "admin-similar-a"), false, "下架后不再进入新练习");
   const banned = await request(
     admin.cookie,
     `/admin/users/${member.data.user.id}/ban`,

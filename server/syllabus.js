@@ -37,10 +37,7 @@ function selectUnitsExactly(units, count, randomInt) {
     for (let total = count - unit.length; total >= 0; total--) {
       if (reachable[total] === null || reachable[total + unit.length] !== null)
         continue;
-      reachable[total + unit.length] = [
-        ...reachable[total],
-        unit,
-      ];
+      reachable[total + unit.length] = [...reachable[total], unit];
     }
     if (reachable[count] !== null) break;
   }
@@ -49,7 +46,10 @@ function selectUnitsExactly(units, count, randomInt) {
 }
 
 function selectWholeUnitsNear(units, count, randomInt) {
-  const target = Math.min(count, units.reduce((sum, unit) => sum + unit.length, 0));
+  const target = Math.min(
+    count,
+    units.reduce((sum, unit) => sum + unit.length, 0),
+  );
   if (!target) return [];
   const shuffled = shuffle(units, randomInt);
   const reachable = Array(target + 1).fill(null);
@@ -64,20 +64,24 @@ function selectWholeUnitsNear(units, count, randomInt) {
   }
   for (let total = target; total > 0; total--)
     if (reachable[total] !== null) return reachable[total];
-  return [shuffled.reduce((smallest, unit) =>
-    unit.length < smallest.length ? unit : smallest,
-  )];
+  return [
+    shuffled.reduce((smallest, unit) =>
+      unit.length < smallest.length ? unit : smallest,
+    ),
+  ];
 }
 
 function sampleQuestionUnits(questions, count, randomInt, strict = false) {
   const units = questionUnits(questions);
   const selected = selectUnitsExactly(units, count, randomInt);
   if (selected) return shuffle(selected, randomInt).flat();
-  if (strict)
-    throw new Error("共享题组无法完整纳入本场试卷，请稍后重新组卷");
+  if (strict) throw new Error("共享题组无法完整纳入本场试卷，请稍后重新组卷");
   // A practice set may not hit an exact subset-sum target. Keep a whole case
   // together even if that makes the set slightly shorter or longer.
-  return shuffle(selectWholeUnitsNear(units, count, randomInt), randomInt).flat();
+  return shuffle(
+    selectWholeUnitsNear(units, count, randomInt),
+    randomInt,
+  ).flat();
 }
 
 export function buildSyllabusProgress(questions, attempts, syllabus) {
@@ -135,7 +139,7 @@ export function stratifiedSample(
 ) {
   const count = Math.min(requestedCount, questions.length);
   if (!syllabus?.modules?.length)
-    return shuffle(questions, randomInt).slice(0, count);
+    return sampleQuestionUnits(questions, count, randomInt);
 
   const groups = syllabus.modules
     .map((module) => ({
@@ -170,7 +174,16 @@ export function stratifiedSample(
     );
     return questionUnits(picked);
   });
-  return shuffle(selectedUnits, randomInt).flat();
+  const selectedIds = new Set(
+    selectedUnits.flat().map((question) => question.id),
+  );
+  // A shared material may span classifications. Keep every member together.
+  return shuffle(
+    questionUnits(questions).filter((unit) =>
+      unit.some((question) => selectedIds.has(question.id)),
+    ),
+    randomInt,
+  ).flat();
 }
 
 export function sampleExamQuestions(
@@ -195,9 +208,7 @@ export function sampleExamQuestions(
 
   const groups = modules.map((module) => ({
     module,
-    questions: questions.filter(
-      (question) => question.chapter === module.name,
-    ),
+    questions: questions.filter((question) => question.chapter === module.name),
   }));
   const missing = groups.find(
     (group) => group.questions.length < blueprint.questionsPerModule,

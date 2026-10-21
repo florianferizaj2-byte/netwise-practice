@@ -8,7 +8,8 @@ import android.location.LocationManager
 import android.os.Looper
 import android.os.Process
 import androidx.appcompat.app.AlertDialog
-import com.kaojiang.routeplayer.routes.FixedRouteLoader
+import com.kaojiang.routeplayer.routes.BuiltInRoutes
+import com.kaojiang.routeplayer.routes.BuiltInRouteStore
 import com.kaojiang.routeplayer.routes.GeoMath
 import com.kaojiang.routeplayer.R
 import com.kaojiang.routeplayer.ui.LearningConsent
@@ -149,18 +150,22 @@ class MockLocationFloatingTest {
         assertEquals(percent, status.getIntExtra(MockLocationService.EXTRA_PROGRESS, -1))
     }
 
-    @Test fun naturalCompletionShows100AndLeavesStartAvailable() {
+    @Test fun originalRouteContinuesAfterTheEndpointUntilManuallyStopped() {
         startViaFloating()
-        val route = FixedRouteLoader.load(service)
+        val route = BuiltInRouteStore(service).load()
         val distance = route.waypoints.zipWithNext().sumOf { (a, b) -> GeoMath.distanceMeters(a.coordinates, b.coordinates) }
         val seconds = (distance / (route.speedKph / 3.6)).toLong() + 5
         shadowOf(Looper.getMainLooper()).idleFor(Duration.ofSeconds(seconds))
+        assertTrue(MockLocationPreferences.isActive(service))
+        assertTrue(MockLocationPreferences.progress(service) in 0..99)
+        assertTrue(service.floatingControl.button!!.text.toString().startsWith("结束"))
+        assertFalse(shadowOf(service.application).broadcastIntents.any {
+            it.getStringExtra(MockLocationService.EXTRA_STATUS) == MockLocationService.STATUS_ROUTE_COMPLETED
+        })
+        service.floatingControl.button!!.performClick()
         assertFalse(MockLocationPreferences.isActive(service))
-        assertEquals(100, MockLocationPreferences.progress(service))
         assertEquals("开始", service.floatingControl.button!!.text.toString())
         assertFalse(shadowOf(service).isStoppedBySelf)
-        val completed = shadowOf(service.application).broadcastIntents.last { it.getStringExtra(MockLocationService.EXTRA_STATUS) == MockLocationService.STATUS_ROUTE_COMPLETED }
-        assertEquals(100, completed.getIntExtra(MockLocationService.EXTRA_PROGRESS, -1))
     }
 
     @Test fun closingTheWindowDuringARunPreservesTheRun() {
@@ -193,11 +198,44 @@ class MockLocationFloatingTest {
     }
 
     @Test fun normalStartAndEndWithoutFloatingStillStopTheService() {
-        service.onStartCommand(MockLocationService.startFixedRouteIntent(service, token), 0, 1)
+        service.onStartCommand(MockLocationService.startSelectedRouteIntent(service, token), 0, 1)
         assertTrue(MockLocationPreferences.isActive(service))
         assertFalse(service.floatingControl.isVisible)
         service.onStartCommand(MockLocationService.stopIntent(service), 0, 2)
         assertFalse(MockLocationPreferences.isActive(service))
         assertTrue(shadowOf(service).isStoppedBySelf)
+    }
+
+    @Test fun floatingStartUsesTheSavedRouteAndKeepsRunningAcrossMultipleLaps() {
+        val route = BuiltInRouteStore(service).select(BuiltInRoutes.entries[1].id)
+        startViaFloating()
+        assertEquals(route.id, MockLocationPreferences.activeRouteId(service))
+        assertEquals(route.waypoints.first().coordinates, MockLocationPreferences.coordinates(service))
+        val distance = route.waypoints.zipWithNext().sumOf { (a, b) -> GeoMath.distanceMeters(a.coordinates, b.coordinates) }
+        shadowOf(Looper.getMainLooper()).idleFor(Duration.ofSeconds((3 * distance / (route.speedKph / 3.6)).toLong() + 1))
+        assertTrue(MockLocationPreferences.isActive(service))
+        assertEquals(route.id, MockLocationPreferences.activeRouteId(service))
+        assertTrue(MockLocationPreferences.progress(service) in 0..99)
+        assertFalse(shadowOf(service.application).broadcastIntents.any {
+            it.getStringExtra(MockLocationService.EXTRA_STATUS) == MockLocationService.STATUS_ROUTE_COMPLETED
+        })
+        service.floatingControl.button!!.performClick()
+        assertFalse(MockLocationPreferences.isActive(service))
+    }
+
+    @Test fun mainStartUsesTheRouteSnapshotInItsIntent() {
+        BuiltInRouteStore(service).select(BuiltInRoutes.entries[1].id)
+        val route = BuiltInRouteStore(service).load(BuiltInRoutes.entries[2].id)
+        service.onStartCommand(MockLocationService.startSelectedRouteIntent(service, token, route.id), 0, 1)
+        assertEquals(route.id, MockLocationPreferences.activeRouteId(service))
+        assertEquals(route.waypoints.first().coordinates, MockLocationPreferences.coordinates(service))
+    }
+
+    @Test fun unknownRouteFailsWithoutStartingTheDefaultRoute() {
+        service.onStartCommand(MockLocationService.startSelectedRouteIntent(service, token, "missing-route"), 0, 1)
+        assertFalse(MockLocationPreferences.isActive(service))
+        assertNull(MockLocationPreferences.activeRouteId(service))
+        val status = shadowOf(service.application).broadcastIntents.last { it.action == MockLocationService.ACTION_STATUS }
+        assertEquals(MockLocationService.STATUS_ERROR, status.getStringExtra(MockLocationService.EXTRA_STATUS))
     }
 }

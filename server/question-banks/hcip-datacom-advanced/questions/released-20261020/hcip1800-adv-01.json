@@ -1,0 +1,1872 @@
+[
+  {
+    "id": "hcip831-1-1-1-001",
+    "type": "single_choice",
+    "question": "两台华为设备之间的 OSPF 邻居启用 BFD 后，双方配置一致：期望最小发送间隔为 50 ms，检测倍数为 4。BFD 会话建立后，本端用于判断对端失效的检测时间是多少？",
+    "options": {
+      "A": "50 ms",
+      "B": "12.5 ms",
+      "C": "200 ms",
+      "D": "400 ms"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "复算过程：BFD 异步模式的检测时间等于协商后的报文发送间隔乘以检测倍数，即 50 ms × 4 = 200 ms，因此 200 ms 正确。只报出发送间隔 50 ms 的说法漏掉了检测倍数；12.5 ms 是把间隔除以倍数，算法相反；400 ms 相当于把倍数当成 8，均与 50 × 4 的复算结果不符。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "medium",
+    "tags": [
+      "BFD",
+      "检测时间",
+      "计算"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5880-bfd"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性中 OSPF 快速收敛知识点；检测时间等于协商发送间隔乘检测倍数的规则依据 RFC 5880 第 6.8.4 节（Calculating the Detection Time）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "2c1bac6f90ae54367ce43de127800a07133ca33f14aa33a91fa0802846604337"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-002",
+    "type": "single_choice",
+    "question": "OSPF 与 BFD 联动时，本端期望最小发送间隔为 100 ms，对端要求的最小接收间隔为 300 ms，双方未配置其他约束。BFD 会话协商后，本端实际使用的报文发送间隔是多少？",
+    "options": {
+      "A": "300 ms",
+      "B": "100 ms",
+      "C": "200 ms",
+      "D": "400 ms"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "BFD 定时器协商规则要求本端实际发送间隔取本端期望最小发送间隔与对端要求最小接收间隔中的较大值，即 max(100, 300) = 300 ms。100 ms 只考虑本端意愿，可能快于对端接收能力；200 ms 取平均值没有规范依据；400 ms 把两个值相加，也不符合协商规则。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "medium",
+    "tags": [
+      "BFD",
+      "定时器协商"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-002",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5880-bfd"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；BFD 发送间隔取本端期望最小发送间隔与对端要求最小接收间隔较大值的规则依据 RFC 5880 第 6.8.3 节（Negotiation）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "ca9f20b475b34e1f174efc0dd99b423922cd537006fb2a6c55e1ec7e9a49e693"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-003",
+    "type": "single_choice",
+    "question": "某 OSPF 接口的 Hello 定时器配置为 3 秒，Router Dead 定时器未单独配置，按 RFC 2328 规定的默认比例取值。邻居失效检测最长需要等待多久？",
+    "options": {
+      "A": "3 秒",
+      "B": "6 秒",
+      "C": "40 秒",
+      "D": "12 秒"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "按 RFC 2328，Router Dead Interval 的默认值为 Hello Interval 的 4 倍，因此 3 秒 × 4 = 12 秒。3 秒只是 Hello 发送周期，不能作为失效判定时间；6 秒相当于 2 倍关系；40 秒是 Hello 为 10 秒时的常见默认值，与本题 3 秒不匹配。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "Hello 定时器",
+      "Dead 定时器",
+      "计算"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-003",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；Router Dead Interval 默认为 Hello Interval 四倍的规则依据 RFC 2328 第 9.5 节（Sending Hello Packets）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "6e0c3ee645ab8ed920a1285ed57ade009bed0fa72c50740d458359360dfc5163"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-004",
+    "type": "single_choice",
+    "question": "两台路由器直连接口处于同一网段、区域号相同，但一台的 Router Dead 定时器为 40 秒，另一台为 30 秒。最可能的结果是？",
+    "options": {
+      "A": "正常建立 Full，运行时使用较小的值",
+      "B": "无法建立邻居，双方停留在 Down 或 Init",
+      "C": "建立邻居但只停留在 2-Way",
+      "D": "建立邻接但路由开销异常"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Hello 报文携带 Router Dead Interval，同一网段上的路由器必须使用一致的值；不一致时 Hello 被丢弃，双方无法进入双向通信，邻居停在 Down 或 Init。认为可正常建立 Full、只停在 2-Way 或仅表现为开销异常，都忽略了参数不一致会直接阻断邻居建立这一点。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "邻居建立",
+      "定时器"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-004",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；Hello 报文携带 RouterDeadInterval 且同网段必须一致的规则依据 RFC 2328 第 9.5 节与第 10.5 节（Receiving Hello Packets）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "e118b815e1719e1ca7e5c7ae1375dc67d4781d8fe685fc4308deeeb86b85b88c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-005",
+    "type": "single_choice",
+    "question": "两台路由器已互相收到 Hello，但在数据库描述报文交换阶段长时间停留在 ExStart，接口 MTU 分别为 1500 和 1400。最可能的原因是？",
+    "options": {
+      "A": "两台路由器的 Router ID 相同",
+      "B": "MTU 不一致导致数据库描述报文被丢弃",
+      "C": "区域号配置不同",
+      "D": "认证密钥配置错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "OSPF 的数据库描述报文不能分片，接口 MTU 不一致时，MTU 较大的一方发出的报文超过对端接口 MTU 而被丢弃，邻居会卡在 ExStart。Router ID 冲突会导致邻居建立异常，但不会表现为 MTU 相关的卡顿；区域号不同时连 Hello 都无法通过；认证错误会在一开始就丢弃 Hello，不会进入数据库描述阶段。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "MTU",
+      "ExStart",
+      "故障定位"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-005",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；MTU 不一致导致 Database Description 交换失败、邻居无法离开 ExStart 的说明依据 RFC 2328 第 10.6 节（Receiving Database Description Packets）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "264447813500ab92fdb3b481ba6c8c504f1b3995ba4bac566250250d74ecc102"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-006",
+    "type": "single_choice",
+    "question": "在华为设备上执行 display ospf peer，显示某邻居状态为 Init。下列解释正确的是？",
+    "options": {
+      "A": "本机已收到对端 Hello，但对端 Hello 的邻居列表中没有本机 Router ID",
+      "B": "双方已经交换完数据库描述报文",
+      "C": "本机从未收到过该邻居的 Hello 报文",
+      "D": "邻居已完成 LSA 请求并进入 Loading"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Init 表示本机已经收到对端 Hello，但对端 Hello 的邻居列表中没有本机 Router ID，即只完成了单向通信。交换完数据库描述报文应达到 Exchange 或 Loading，而不是 Init；从未收到 Hello 时状态为 Down；Loading 发生在数据库描述报文交换之后，与 Init 不是同一阶段。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "邻居状态",
+      "Init"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-006",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；Init 状态表示已收到 Hello 但未确认双向通信的定义依据 RFC 2328 第 10.1 节（Neighbor state machine）与第 10.5 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "918a76dc92acfb303c05d93c2b5649e191e934ab21d38f00db0a020210adc7d8"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-007",
+    "type": "single_choice",
+    "question": "在 OSPF 广播网络上，两台既不是 DR 也不是 BDR 的路由器之间长期保持 2-Way 状态。下列判断正确的是？",
+    "options": {
+      "A": "说明 Hello 定时器不匹配",
+      "B": "说明接口 MTU 不一致",
+      "C": "这是正常现象，二者无需建立 Full 邻接",
+      "D": "必须手工指定 DR 才能恢复"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "广播网络上只有 DR 和 BDR 需要与所有路由器建立 Full 邻接，两个 DROther 之间保持 2-Way 是协议规定的正常状态，不需要额外处理。把 2-Way 归因于 Hello 定时器或 MTU 不一致，是把正常状态误判为故障；手工指定 DR 也不能改变 DROther 之间不建立 Full 的规则。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "2-Way",
+      "DR/BDR"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-007",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；广播网 DROther 之间保持 2-Way 属正常行为的规则依据 RFC 2328 第 10.1 节与第 10.4 节（Electing the Designated Router）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "557b51c858b76faefdd7a70465784587a1552011a50f0b40b6e08d42223a31df"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-008",
+    "type": "single_choice",
+    "question": "OSPF 邻居从 ExStart 进入 Full 的过程中，数据库同步的正确顺序是？",
+    "options": {
+      "A": "先交换完整 LSA，再交换数据库描述报文",
+      "B": "先发送链路状态请求，再发送数据库描述报文",
+      "C": "直接进入 Full，不需要交换任何报文",
+      "D": "先交换只含 LSA 首部的数据库描述报文，再发送链路状态请求获取缺失的 LSA，对方用链路状态更新回应"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "OSPF 数据库同步先用数据库描述报文交换 LSA 首部，再针对本地缺失的部分发送链路状态请求，对方以链路状态更新返回完整 LSA，最后用 LSAck 确认。先传完整 LSA 再发描述报文、先发请求再发描述报文、或跳过报文交换直接进入 Full，都不符合邻居状态机的实际顺序。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "DD",
+      "LSR",
+      "LSU"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-008",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；Database Description 仅携带 LSA 首部、随后以 Link State Request/Update 获取完整 LSA 的流程依据 RFC 2328 第 10.8 节与第 10.9 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "ce6679946d269853ce8fbf78f511e792860086ade9ba00e71c7050a0f5d2c84c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-009",
+    "type": "single_choice",
+    "question": "OSPF 在 ExStart 阶段进行主从关系协商，决定 Master 的规则是？",
+    "options": {
+      "A": "Router ID 较大的一方",
+      "B": "接口 IP 地址较大的一方",
+      "C": "先发送 Hello 报文的一方",
+      "D": "DR 优先级较高的一方"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "RFC 2328 规定在 ExStart 阶段由 Router ID 较大的一方成为 Master，负责主导数据库描述报文的序列号。接口地址大小、谁先发送 Hello、DR 优先级都不参与主从协商；DR 优先级只影响 DR/BDR 选举。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "ExStart",
+      "Master"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-009",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；Router ID 较大者成为 Master 的规则依据 RFC 2328 第 10.8 节（Sending Database Description Packets）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "0596a560b3bbfc359fe86414a937f2d6a4c2b5cb0e5cbd7da108a5976ab33b88"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-010",
+    "type": "single_choice",
+    "question": "LSDB 中存在同一 LSA 的两个实例，序列号和校验和都相同，年龄分别为 200 秒和 1300 秒。按 RFC 2328 的新旧判断规则，较新的实例是？",
+    "options": {
+      "A": "年龄为 1300 秒的实例",
+      "B": "两者恒等，无法比较",
+      "C": "年龄为 200 秒的实例",
+      "D": "需要先比较 LS Type 才能确定"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "两个实例序列号和校验和相同，需要比较 LS age；当年龄差超过 MaxAgeDiff（900 秒）时，年龄较小者更新。本题 1300 - 200 = 1100 秒，超过 900 秒，因此 200 秒的实例较新。年龄较大者并不更新；只有年龄差不超过 900 秒时才视为同一实例；LS Type 相同，不是判断依据。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "LSA",
+      "新旧判断",
+      "计算"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-010",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；先比较序列号、再比较校验和、最后按 MaxAgeDiff 比较年龄的规则依据 RFC 2328 第 13.1 节（Determining which LSA instance is more recent）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "b8285d369fb79fc643ea64a23ab172bc57150a39febdd2a7137541b9bb3757a6"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-011",
+    "type": "single_choice",
+    "question": "某路由器要立即撤销自己先前通告的一条外部路由，而不等待 LSA 自然老化。符合 OSPF 规范的做法是？",
+    "options": {
+      "A": "从 LSDB 中直接删除该 LSA，不通知邻居",
+      "B": "把自己产生的该 LSA 的 LS age 置为 MaxAge 并重新泛洪",
+      "C": "等待 LSRefreshTime 到期后不再刷新",
+      "D": "重启 OSPF 进程使所有 LSA 失效"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "OSPF 允许始发者把自己产生的 LSA 的 LS age 置为 MaxAge 后重新泛洪，即提前老化，使其他路由器尽快删除该路由。直接从 LSDB 删除而不通知邻居，邻居仍会保留到自然老化；等待 LSRefreshTime 到期只是不再刷新，仍需较长时间；重启进程会影响全部邻居，代价远大于提前老化。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "LSA",
+      "提前老化",
+      "MaxAge"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-011",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；始发者可将 LS age 置为 MaxAge 并重新泛洪以提前老化 LSA 的机制依据 RFC 2328 第 14.1 节（Premature aging of LSAs）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "0b5d6bc1bfde2326af48d662d533c310d13e6c3ad21a578bf0dc2dc27582df31"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-012",
+    "type": "single_choice",
+    "question": "OSPF 中 LSA 的 LS age 达到多少秒时被视为 MaxAge，从而不再参与路由计算？",
+    "options": {
+      "A": "1800 秒",
+      "B": "900 秒",
+      "C": "1200 秒",
+      "D": "3600 秒"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "LSA 的 LS age 达到 3600 秒即为 MaxAge，此时该 LSA 不再参与路由计算。1800 秒是 LSRefreshTime，用于周期刷新；900 秒是 MaxAgeDiff，用于比较两个实例的新旧；1200 秒没有对应的 OSPF 年龄定义。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "LSA",
+      "MaxAge"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-012",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；LS age 最大值 3600 秒（MaxAge）及 MaxAgeDiff 900 秒的定义依据 RFC 2328 第 12.1.1 节与第 14 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "6b24a26971f5f1cb84fa459308a18a5d8294902aa6c461f1c556daacbd29619c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-013",
+    "type": "single_choice",
+    "question": "路由器收到一条 LSA，其序列号、校验和与年龄都与 LSDB 中已有实例完全相同。它的处理是？",
+    "options": {
+      "A": "向来源邻居回复 LSAck，丢弃该 LSA，不触发 SPF",
+      "B": "重新执行一次完整 SPF",
+      "C": "把该 LSA 再泛洪给所有邻居并触发 SPF",
+      "D": "删除 LSDB 中的旧实例后重新安装"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "收到与 LSDB 中实例完全相同的 LSA（序列号、校验和、年龄都一致）时，说明数据库已同步，只需回复 LSAck 并丢弃，不触发 SPF。重复执行完整 SPF、再次泛洪并触发 SPF、或先删旧再装新，都会造成不必要的计算和泛洪。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "LSA",
+      "重复报文",
+      "SPF"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-013",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；收到与 LSDB 中相同的 LSA 时确认并丢弃、不触发路由计算的规则依据 RFC 2328 第 13.1 节与第 13.3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "14597d439c82e6838e7c1970fcb307dcec7dd0d958f7e4c2838e232a7d3c8600"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-014",
+    "type": "single_choice",
+    "question": "OSPF 使用 LSAck 报文对收到的 LSA 进行确认。若确认报文丢失，最直接的后果是？",
+    "options": {
+      "A": "发送方立即删除该 LSA",
+      "B": "发送方在重传间隔到期后重传该 LSA，数据库同步被推迟",
+      "C": "接收方重新计算 SPF",
+      "D": "邻居关系立即中断"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "OSPF 对 LSA 采用可靠泛洪，接收方用 LSAck 确认；确认丢失时发送方会在重传间隔到期后重传，数据库同步因此被推迟。发送方不会因确认丢失立即删除 LSA；接收方也不会因此重算 SPF；邻居关系不会仅因一次确认丢失而中断。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "LSAck",
+      "可靠泛洪"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-014",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；未收到 LSAck 时发送方重传 LSA 的可靠泛洪机制依据 RFC 2328 第 13.7 节（Receiving Link State Acknowledgments）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "5fe5710318b991c62926e988e5f33469c25242735cd7dd192b77e683de51d42a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-015",
+    "type": "single_choice",
+    "question": "一台区域内部路由器新接入一条链路并更新了自己的 Router LSA。该 LSA 的泛洪范围是？",
+    "options": {
+      "A": "整个自治系统",
+      "B": "仅本链路",
+      "C": "仅本区域",
+      "D": "本区域和骨干区域"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Router LSA 是 Type 1 LSA，泛洪范围限于产生它的区域。整个自治系统范围是 Type 5 AS-external-LSA；仅本链路范围不符合 Router LSA 的泛洪范围；Router LSA 也不会自动进入骨干区域以外的其他区域。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "Router LSA",
+      "泛洪范围"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-015",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；Router LSA 的区域泛洪范围依据 RFC 2328 第 12.1.2 节与第 12.4.1 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "700bc4185a22421ede396f61a8193edc75d10a8ae96bde8f852571f394df2483"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-016",
+    "type": "single_choice",
+    "question": "启用 I-SPF 后，区域拓扑发生变化时，路由器通常如何计算？",
+    "options": {
+      "A": "每次都重建整棵最短路径树",
+      "B": "只重算受变化影响的节点和分支，未受影响的树结构继续沿用",
+      "C": "只删除路由表，等待邻居重新通告",
+      "D": "只重算根节点到所有节点的完整树，但跳过外部路由"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "I-SPF 是增量 SPF：拓扑变化时只重算受影响的节点和分支，未受影响的树结构继续沿用，从而减少计算量、加快收敛。每次重建整棵树是完整 SPF；删除路由等待邻居重通告不是 SPF 算法；只跳过外部路由也不是 I-SPF 的定义。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "I-SPF",
+      "增量计算"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-016",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；SPF 计算由 LSDB 变化触发的基础依据 RFC 2328 第 16 章；只重算受影响节点的 I-SPF 为设备增量实现。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "71268e497f7ecf70936114f3b23b328ac65f5072eed0f415fa62b81330faf4dd"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-017",
+    "type": "single_choice",
+    "question": "在启用 I-SPF 的 OSPF 路由器上，下列哪种变化通常仍需执行完整 SPF 计算？",
+    "options": {
+      "A": "远端路由器新增一条 Stub 网段",
+      "B": "外部路由的度量值发生变化",
+      "C": "区域间路由的开销发生变化",
+      "D": "本机 Router LSA 中自己的直连链路状态发生变化"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "当变化涉及根节点自身的直连链路时，整棵最短路径树的距离都可能改变，通常需要完整 SPF。远端路由器新增 Stub 网段只影响叶子路由，适合部分路由计算或增量计算；外部路由度量和区域间路由开销变化也不改变区域内拓扑，通常只需更新相应路由。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "I-SPF",
+      "完整 SPF"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-017",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；SPF 以本机为根、根自身链路变化影响全树的原理依据 RFC 2328 第 16.1 节；本地 Router LSA 变化触发完整计算为 I-SPF 实现语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "d5882b6fd329985f049c44b5085c64413a95599f7c32f58542cb2d32d734a929"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-018",
+    "type": "single_choice",
+    "question": "一台 ABR 连接区域 0 和区域 1。区域 1 内部发生链路故障时，该 ABR 对区域 0 的处理通常是？",
+    "options": {
+      "A": "不把区域 1 的拓扑细节引入区域 0，只按需更新区域 0 的区域间路由",
+      "B": "在区域 0 重新执行完整 SPF，并把区域 1 的拓扑细节泛洪到区域 0",
+      "C": "删除区域 0 的全部路由",
+      "D": "中断区域 0 的所有邻居"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "ABR 为每个连接的区域维护独立的 LSDB 并分别运行 SPF，区域 1 的拓扑细节不会进入区域 0；区域 0 只会看到 ABR 按需更新的区域间路由。把区域 1 拓扑泛洪到区域 0、删除区域 0 全部路由或中断邻居，都不符合 ABR 的行为。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "ABR",
+      "多区域",
+      "SPF"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-018",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；ABR 按区域维护 LSDB 并以 Summary-LSA 传递区域间路由的机制依据 RFC 2328 第 12.4.3 节与第 16.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "bf9b66d14fea42e50875932d66628ea32354ffe4c3e03c9fbf6b5a010629586b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-019",
+    "type": "single_choice",
+    "question": "OSPF 路由器完成一次路由计算时，区域内、区域间和外部路由的处理顺序是？",
+    "options": {
+      "A": "先外部，再区域间，最后区域内",
+      "B": "三者同时独立计算，互不依赖",
+      "C": "先区域内，再区域间，最后外部",
+      "D": "先区域间，再区域内，最后外部"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "OSPF 路由计算按区域内、区域间、外部的顺序进行：先算出区域内部到达各节点的最短路径，再据此计算区域间路由，最后结合到 ASBR 的可达性计算外部路由。先外部后内部、三者完全独立或先区域间后区域内，都违背了后一步依赖前一步结果的顺序。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "路由计算",
+      "顺序"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-019",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；区域内、区域间、外部路由依次计算的流程依据 RFC 2328 第 16.1 至 16.4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "d212a179a61cce14a6a623d288b813184d0981242b7941389ef397015c25692e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-020",
+    "type": "single_choice",
+    "question": "OSPF 的 SPF 调度允许在短暂延迟内合并多次拓扑变化。这样做的主要效果是？",
+    "options": {
+      "A": "完全消除收敛时间",
+      "B": "让每次变化都立即计算",
+      "C": "使 SPF 计算结果不再依赖 LSDB",
+      "D": "把延迟窗口内的多次变化合并为一次 SPF 计算，减少 CPU 消耗"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "SPF 调度把短暂延迟窗口内收到的多次拓扑变化合并为一次 SPF 计算，避免频繁计算消耗 CPU。它不能消除收敛时间，也不会让每次变化都立即计算；SPF 结果始终依赖最新 LSDB，合并计算并不会改变这一依赖关系。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "SPF 调度",
+      "批量计算"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-020",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；SPF 由 LSDB 变化触发并可延迟调度的机制依据 RFC 2328 第 16 章；合并延迟窗口内变化为设备快速收敛实现。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "3256b7e1315098bb42ffe3743da07367793c33c589a84bdba4cf356da9afce54"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-021",
+    "type": "single_choice",
+    "question": "把 SPF 计算延迟设置得过大，最可能带来的影响是？",
+    "options": {
+      "A": "拓扑变化后路由更新被推迟，收敛时间变长",
+      "B": "CPU 占用显著降低且收敛更快",
+      "C": "邻居关系无法建立",
+      "D": "LSA 不再泛洪"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "SPF 延迟过大时，拓扑变化已经发生但计算被推迟，路由更新和收敛时间随之变长。CPU 占用会降低，但收敛不会更快；邻居建立由 Hello 和参数匹配决定，与 SPF 延迟无关；LSA 泛洪也不受 SPF 延迟控制。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "SPF 延迟",
+      "收敛"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-021",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；SPF 计算调度对收敛时间的影响依据 RFC 2328 第 16 章的计算流程；延迟参数为设备调度实现。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "0cf785b1617a2fa67f5343a6545db21b2b278a9056bcb9e062aa21b159925dd7"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-022",
+    "type": "single_choice",
+    "question": "把某非骨干区域配置为 Stub 区域后，对收敛的影响是？",
+    "options": {
+      "A": "外部路由的 Type 5 LSA 仍会进入该区域，但被标记为不可用",
+      "B": "外部路由变化不再以 Type 5 LSA 进入该区域，区域内 LSDB 和计算范围减小",
+      "C": "该区域内的路由器仍需为每条外部路由执行 SPF",
+      "D": "该区域将不再需要 ABR"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Stub 区域阻止 Type 5 外部 LSA 和 Type 4 LSA 进入，外部变化不再引起区域内 SPF 计算，LSDB 和计算范围都减小，ABR 改用 Type 3 默认路由提供出口。外部 LSA 仍会进入、仍需为每条外部路由计算、或不再需要 ABR，都不符合 Stub 区域的定义。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Stub 区域",
+      "LSA"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-022",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；Stub 区域不接收 Type 5/Type 4 LSA、由 ABR 注入默认路由的规则依据 RFC 2328 第 3.6 节（Stub areas）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "aac17308166adfca5a0fd2eb9615bfef4aab4e27a42e03a9e83ab532e72de4f0"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-023",
+    "type": "single_choice",
+    "question": "ABR 对区域 1 的多个连续网段配置区域间聚合后，区域 0 中的路由器对区域 1 内部明细变化的感知如何变化？",
+    "options": {
+      "A": "明细变化仍逐条以 Type 3 LSA 泛洪到区域 0，收敛不受影响",
+      "B": "聚合后区域 1 与区域 0 不再交换任何路由",
+      "C": "聚合会导致区域 1 内所有明细路由被删除",
+      "D": "区域 0 只看到聚合路由，区域 1 内部明细的频繁变化不再逐条传播，LSDB 与计算量减小"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "ABR 聚合后，区域 0 只收到一条聚合的 Type 3 LSA，区域 1 内部明细的频繁变化不再逐条传播，区域 0 的 LSDB 规模和计算量下降。聚合不会阻止所有路由交换，也不会删除区域 1 内部的明细路由；明细变化只是不再逐条出现在区域 0。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "路由聚合",
+      "ABR",
+      "Type 3 LSA"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-023",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；ABR 以聚合的 Summary-LSA 向其他区域通告、抑制明细传播的机制依据 RFC 2328 第 12.4.3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "37157741715538bad5a44b57bcbee6aefe8c06a8d91a71dd7de77ca6c252ac0b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-024",
+    "type": "single_choice",
+    "question": "路由器刚启动、BGP 尚未收敛时，为避免其他设备把流量转发到自己而造成黑洞，可采取的措施是？",
+    "options": {
+      "A": "立即提高所有接口的 DR 优先级",
+      "B": "关闭所有 OSPF 接口",
+      "C": "在启动阶段把 Router LSA 中非 Stub 链路的开销通告为最大值，使其他路由器暂不把本机作为中转节点",
+      "D": "把 Router LSA 中的链路开销调小以吸引流量"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "启动阶段把 Router LSA 中非 Stub 链路的开销通告为最大值，可使其他路由器暂不把本机作为中转节点，等 BGP 等协议收敛后再恢复正常度量，避免流量黑洞。提高 DR 优先级、关闭 OSPF 接口或调小开销，都会加重而不是避免问题。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "最大度量",
+      "启动收敛",
+      "流量黑洞"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-024",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；Router LSA 中链路度量影响 SPF 的依据 RFC 2328 第 12.4.1 节；启动阶段通告最大度量为设备避免黑洞的快速收敛实践。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "c75ed3a0e538bd9a90dee9b8b7fb022d1521fabecff72b6f21956451a4a7e149"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-025",
+    "type": "single_choice",
+    "question": "一次 OSPF 收敛过程通常包括故障检测、LSA 泛洪、SPF 计算和路由下发。其中最后完成、直接决定报文按新路径转发的是？",
+    "options": {
+      "A": "把计算结果下发到转发表",
+      "B": "故障检测",
+      "C": "LSA 泛洪",
+      "D": "SPF 计算"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "收敛的最后一环是把 SPF 计算结果安装到路由表并下发转发表，只有转发表更新后报文才真正按新路径转发。故障检测、LSA 泛洪和 SPF 计算都是前置阶段，完成它们并不等于转发路径已经切换。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "收敛阶段",
+      "转发表"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-025",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；计算路由表并据此转发的前提依据 RFC 2328 第 16 章；转发表下发为设备实现。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "7ba03923e72bf2476d79d7b3677c32ec819b3aaeb5bf10d42cb28438a38a1697"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-026",
+    "type": "single_choice",
+    "question": "在华为设备上，希望 OSPF 进程内所有接口都启用 BFD，而不逐个接口配置。应使用下列哪种方式？",
+    "options": {
+      "A": "在全局配置 bfd enable",
+      "B": "在区域视图执行 bfd enable",
+      "C": "在 OSPF 进程视图执行 bfd all-interfaces enable",
+      "D": "在系统视图执行 ospf bfd all"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "华为 OSPF 进程视图提供 bfd all-interfaces enable，用于让进程内所有接口启用 BFD，个别接口可再单独关闭。全局 bfd enable、区域视图 bfd enable 以及系统视图下的 ospf bfd all 都不是 OSPF 的配置方式。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "BFD",
+      "配置语义",
+      "华为设备"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-026",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5880-bfd"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；BFD 独立检测转发路径故障的机制依据 RFC 5880 第 3 节；bfd all-interfaces enable 为华为 VRP 的 OSPF 进程配置语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "420d9bdb12a60bc5fe432d149a730b3de27238fa4f19dd0787ba4e293c7f9337"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-027",
+    "type": "single_choice",
+    "question": "在广播型网络上使用 DR/BDR 机制，对 OSPF 收敛的直接影响是？",
+    "options": {
+      "A": "使所有路由器之间都必须建立 Full 邻接",
+      "B": "把大量两两邻接收敛为以 DR/BDR 为中心的邻接，减少 LSA 泛洪和数据库同步开销",
+      "C": "取消 Hello 报文，改用 BFD 检测",
+      "D": "使区域间路由不再需要 ABR"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "DR/BDR 机制把广播网络上任意两台路由器之间都可能需要的邻接关系，收敛为以 DR/BDR 为中心的邻接，显著减少邻接数量和 LSA 泛洪、数据库同步开销。它并不要求所有路由器两两 Full，也不会取消 Hello 或取消 ABR。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "DR/BDR",
+      "广播网络"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-027",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；DR/BDR 选举及其减少邻接数量的作用依据 RFC 2328 第 9.4 节（Electing the Designated Router）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "02d9ec4f55bd41ff8bcdd70f475dcff942e9c731910436b113c75ac74f701138"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-028",
+    "type": "single_choice",
+    "question": "与广播型网络相比，把两台直连路由器的接口配置为点到点网络类型，在邻居建立阶段的差别是？",
+    "options": {
+      "A": "点到点网络仍需选举 DR/BDR，只是优先级固定为 0",
+      "B": "点到点网络不需要 Hello 报文",
+      "C": "点到点网络必须手工配置邻居",
+      "D": "点到点网络不进行 DR/BDR 选举，两台路由器直接建立邻接"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "点到点网络类型不进行 DR/BDR 选举，两台直连路由器直接建立邻接，省去选举和 Network LSA 相关处理。点到点网络仍使用 Hello 报文，也不需要手工配置邻居；把优先级固定为 0 或必须手工指定邻居的说法都不成立。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "点到点网络",
+      "邻居建立"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-028",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；点到点网络不选举 DR/BDR 的规则依据 RFC 2328 第 9.4 节与第 12.4.1 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "1870fe3f9ab0712b4120d7b6955fc5c3abf8dccb47240d8ec1c2fef00e821b2d"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-029",
+    "type": "single_choice",
+    "question": "华为设备上，接口地址为 10.1.1.1/24，OSPF 进程中只配置了 network 10.1.2.0 0.0.0.255。该接口的 OSPF 状态最可能是？",
+    "options": {
+      "A": "接口未匹配 network 命令，不运行 OSPF，无法建立邻居",
+      "B": "正常建立邻居并发布 10.1.1.0/24",
+      "C": "接口运行 OSPF，但不发送 Hello 报文",
+      "D": "接口自动匹配所有网段并建立邻居"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "network 命令按地址和通配符匹配接口，10.1.1.1/24 不属于 10.1.2.0/24 范围，因此该接口不会运行 OSPF，也不会发送 Hello 或建立邻居。接口不会自动匹配所有网段，更不会在未匹配时仍然建立邻居。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "network 命令",
+      "接口匹配",
+      "故障定位"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-029",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；OSPF 在匹配接口上运行并收发 Hello 的机制依据 RFC 2328 第 9.2 节；network 地址加通配符匹配为华为 VRP 配置语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "0c2c087a7c1b26a8de17d349cd397186ae31367017a4c16d00f3c28c94fa49f2"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-030",
+    "type": "single_choice",
+    "question": "区域中某台路由器的接口由 Up 变为 Down，导致拓扑变化。最先产生新 LSA 的是？",
+    "options": {
+      "A": "该区域的 DR",
+      "B": "该接口所属的路由器自己",
+      "C": "区域中 Router ID 最大的路由器",
+      "D": "该区域的 ABR"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "接口状态变化由该接口所属的路由器感知，它更新自己的 Router LSA、递增序列号并向区域内泛洪。DR 只负责广播网的 Network LSA；Router ID 大小与谁先产生 LSA 无关；ABR 负责区域间 LSA，不负责通告该拓扑变化。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "LSA 产生",
+      "拓扑变化"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-030",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；接口状态变化由所属路由器更新 Router LSA 并递增序列号的规则依据 RFC 2328 第 12.4 节（Originating LSAs）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "7a988734b9e519ffd2d614cbec011a8ce149c81acf70e85f27c1f82ecfbf80f2"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-031",
+    "type": "single_choice",
+    "question": "广播网络上原 DR 失效，BDR 在检测到 DR 不可用后接替 DR。此过程中 Network LSA 的变化是？",
+    "options": {
+      "A": "BDR 继续使用原 DR 的 Router ID 产生 Network LSA",
+      "B": "Network LSA 不再存在",
+      "C": "新 DR 产生新的 Network LSA，描述当前网段上仍保持邻接的路由器",
+      "D": "所有路由器各自产生一份相同的 Network LSA"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "DR 失效后 BDR 接替成为新的 DR，并根据当前网段上仍保持邻接的路由器重新产生 Network LSA。Network LSA 不会沿用原 DR 的 Router ID 由 BDR 代发，也不会消失，更不会由每台路由器各产生一份。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "DR/BDR",
+      "Network LSA"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-031",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；Network LSA 由 DR 产生并列出网段上邻接路由器的规则依据 RFC 2328 第 12.4.2 节与第 9.4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "9f71dce12d23c6e471d1ef2d9924c0089273aaa7caf4530acb10f24ccac95c11"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-032",
+    "type": "single_choice",
+    "question": "OSPF 中 Type 4 LSA 的作用是？",
+    "options": {
+      "A": "描述区域内的路由器链路",
+      "B": "描述外部路由的度量",
+      "C": "描述广播网段上的 DR",
+      "D": "由 ABR 产生，向其他区域描述如何到达 ASBR"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Type 4 LSA 由 ABR 产生，向其他区域描述到达 ASBR 的可达性，是计算外部路由的前提之一。描述区域内路由器链路的是 Type 1，描述外部路由度量的是 Type 5，描述广播网段 DR 的是 Type 2。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "Type 4 LSA",
+      "ASBR"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-032",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；Summary-ASB-LSA（Type 4）描述 ASBR 可达性的定义依据 RFC 2328 第 12.4.3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "2855929beafc2402025713095b43c002fc7dace1d13fffe0418494a20f82151b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-033",
+    "type": "single_choice",
+    "question": "一条 LSA 的 LS age 增长到 MaxAge 后，路由器对它的处理是？",
+    "options": {
+      "A": "继续参与 SPF，直到序列号回绕",
+      "B": "不再用于路由计算，并在泛洪确认后从 LSDB 中删除",
+      "C": "自动把年龄重置为 0",
+      "D": "把它转换为 Type 5 LSA"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "LS age 达到 MaxAge 后，该 LSA 不再参与路由计算；在泛洪并被邻居确认后，它会从 LSDB 中删除。年龄不会自动重置为 0，也不会转换成 Type 5；序列号回绕与 MaxAge 的处理是两件不同的事。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "MaxAge",
+      "LSDB"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-033",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；MaxAge LSA 不参与路由计算并在确认后删除的规则依据 RFC 2328 第 14 节与第 16 章。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "1335dc95743112ff17475f13d1d89c358056edd2f112c2f099a698811d2a716e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-034",
+    "type": "single_choice",
+    "question": "在稳定运行的 OSPF 网络中，一台路由器为什么会周期性重新泛洪自己的 LSA？",
+    "options": {
+      "A": "为了让 LS age 归零并维持 LSA 有效，刷新周期由 LSRefreshTime 决定",
+      "B": "因为邻居每次收到 LSA 都会要求重发",
+      "C": "因为 SPF 每次计算都会修改 LSA",
+      "D": "为了防止 Router ID 冲突"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "LSA 在 LSDB 中会持续老化，始发者必须在 LSRefreshTime（1800 秒）到期前重新生成并泛洪，使 age 归零、LSA 保持有效。邻居不会要求重发，SPF 计算也不修改 LSA，刷新与 Router ID 冲突无关。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "LSA 刷新",
+      "LSRefreshTime"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-034",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；LSRefreshTime 1800 秒周期刷新 LSA 的规则依据 RFC 2328 第 14 节（Aging LSAs）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "522b587ba429df76c2a5531888875fe97b18b95dac21e4ab69ede6ec62cc024c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-035",
+    "type": "single_choice",
+    "question": "关于 Type 3 LSA，下列描述正确的是？",
+    "options": {
+      "A": "由 ASBR 产生，用于描述外部路由",
+      "B": "只在自治系统内泛洪，描述 ASBR 的位置",
+      "C": "由 ABR 产生，用于向一个区域描述到达其他区域的目的网段",
+      "D": "由 DR 产生，描述广播网段上的路由器"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Type 3 LSA 由 ABR 产生，用于向一个区域描述到达其他区域的目的网段。由 ASBR 产生并描述外部路由的是 Type 5；描述 ASBR 位置的是 Type 4；由 DR 产生并描述广播网段路由器的是 Type 2。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "Type 3 LSA",
+      "ABR"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-035",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；Summary-LSA（Type 3）由 ABR 产生并描述区域间目的网段的定义依据 RFC 2328 第 12.4.3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "330939f30e7c59c22510e7584365b942388176519a7ad0ade8628ef666987ca4"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-036",
+    "type": "single_choice",
+    "question": "区域 0 的一台路由器从 Type 5 LSA 学到外部路由，但计算发现无法通过区域间路由到达产生该 LSA 的 ASBR。结果是？",
+    "options": {
+      "A": "仍然安装该外部路由，下一跳置为 0.0.0.0",
+      "B": "把 Type 5 LSA 转换为 Type 3 LSA",
+      "C": "自动把该路由的度量改为 0",
+      "D": "该外部路由不会被优选和安装，因为无法解析到 ASBR 的下一跳"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "外部路由的下一跳要经过 ASBR，若通过区域间路由无法到达产生 Type 5 LSA 的 ASBR，该外部路由无法解析出有效下一跳，不会被优选和安装。把下一跳置为 0.0.0.0、把 Type 5 转成 Type 3、或把度量改为 0，都不是 OSPF 的处理方式。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "外部路由",
+      "ASBR 可达性"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-036",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；AS 外部路由计算要求先通过区域内或区域间路由到达 ASBR 的规则依据 RFC 2328 第 16.4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "0db96a661eda05b63e60254fc8b9493ce168be05b2411ecaa9371ae1f666ef0b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-037",
+    "type": "single_choice",
+    "question": "两台路由器接口同网段、区域号相同、Hello 与 Dead 定时器一致，但一台启用了 MD5 认证，另一台未启用。邻居状态最可能停留在？",
+    "options": {
+      "A": "Down 或 Init，无法继续建立邻接",
+      "B": "Full",
+      "C": "2-Way 且属正常",
+      "D": "Exchange"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "启用认证的一方会校验 Hello 的认证字段，未启用认证的一方发送的 Hello 无法通过校验而被丢弃，双方无法完成双向通信，邻居停在 Down 或 Init。认证不一致不会进入 Full、正常的 2-Way 或 Exchange；2-Way 也需要双方 Hello 互相确认。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "认证",
+      "邻居建立",
+      "故障定位"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-037",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；认证失败时 Hello 被丢弃、邻居无法建立的机制依据 RFC 2328 附录 D（Authentication）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "04911bad27edcf6778bbf5e1ef8cc46845a212c745dd21507c9e22c08bb1300f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-038",
+    "type": "single_choice",
+    "question": "在华为设备上修改某 OSPF 接口的 cost 后，最直接的影响是？",
+    "options": {
+      "A": "只影响本机路由表，不向邻居通告",
+      "B": "需要重启 OSPF 进程才生效",
+      "C": "本机重新产生 Router LSA 并在本区域触发 SPF，区域内其他路由器按新开销重新计算路径",
+      "D": "只影响 BGP 选路"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "接口 cost 变化会改变本机的 Router LSA，触发本区域泛洪和 SPF 重算，区域内其他路由器按新开销重新选路。该变化不只影响本机路由表，也不需要重启进程，更与 BGP 选路无直接关系。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "接口 cost",
+      "SPF"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-038",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；接口开销写入 Router LSA 并参与 SPF 的规则依据 RFC 2328 第 12.4.1 节与第 16.1 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "558e56167513a2e9710e8dd5e90144d7a946eb2e30bad6b2877483f9b4c15efa"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-039",
+    "type": "single_choice",
+    "question": "为缩短 LSA 在全网扩散的时间，快速泛洪优化的典型做法是？",
+    "options": {
+      "A": "把所有 LSA 合并成一条 LSA 再发送",
+      "B": "收到更新 LSA 后立即从其他邻接接口泛洪，而不等待批量发送或重传定时器到期",
+      "C": "关闭 LSAck 以减少报文数量",
+      "D": "延长 LSA 的重传间隔"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "快速泛洪优化的核心是收到更新 LSA 后立即向其他邻接接口转发，不再等待批量发送或重传定时器到期，从而缩短 LSA 在全网扩散的时间。合并 LSA、关闭 LSAck、延长重传间隔，要么改变可靠性，要么反而拖慢同步。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "LSA 快速泛洪",
+      "收敛"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-039",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；LSA 泛洪的基本流程依据 RFC 2328 第 13 章；收到新 LSA 后立即转发为设备快速泛洪实现。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "715e82e029c72525b2de42e528547ad83a5f6979f9b93d1a8f0f79bf6301e354"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-040",
+    "type": "single_choice",
+    "question": "OSPF 邻居在 Loading 阶段发现 LSDB 中缺少某些 LSA，它会发送什么报文，对方如何响应？",
+    "options": {
+      "A": "发送链路状态请求，对方用链路状态更新携带所请求的 LSA 回应",
+      "B": "发送 LSAck，对方重传数据库描述报文",
+      "C": "发送 Hello，对方发送数据库描述报文",
+      "D": "发送数据库描述报文，对方用 LSAck 回应"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Loading 阶段，路由器对 LSDB 中缺失或过期的 LSA 发送链路状态请求，对方用链路状态更新携带所请求的 LSA 回应，接收方再以 LSAck 确认。用 LSAck 请求 LSA、用 Hello 或数据库描述报文代替请求与更新，都不符合协议交互。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Loading",
+      "LSR",
+      "LSU"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-040",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；Loading 阶段以 Link State Request 请求、以 Link State Update 回应的流程依据 RFC 2328 第 10.9 节与第 10.10 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "b5f8d2f4f3d62a492c10be64304b098bf857afac434061f3365ec78ff521dcfa"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-041",
+    "type": "single_choice",
+    "question": "按 RFC 2328 的默认值，OSPF 在发送 LSA 后未收到 LSAck 时，重传间隔是多少秒？",
+    "options": {
+      "A": "1 秒",
+      "B": "30 秒",
+      "C": "1800 秒",
+      "D": "5 秒"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "RFC 2328 中 RxmtInterval 的默认值为 5 秒，发送 LSA 后未收到 LSAck 就在该间隔后重传。1 秒、30 秒、1800 秒分别对应其他定时器或没有依据的取值，1800 秒是 LSA 刷新周期。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "RxmtInterval",
+      "重传",
+      "计算"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-041",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；RxmtInterval 默认 5 秒及未确认 LSA 重传的规则依据 RFC 2328 第 9.1 节与第 13.7 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "53654632a1de51b896006e92740c5690deb890205b7ea912020513a9da1921ad"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-042",
+    "type": "single_choice",
+    "question": "关于 OSPF 的 SPF 计算与外部路由，下列描述正确的是？",
+    "options": {
+      "A": "外部 LSA 参与最短路径树计算，形成新的树枝",
+      "B": "SPF 只计算区域内部拓扑，外部路由以 ASBR 为锚点附加在树外，按外部开销和转发地址选路",
+      "C": "SPF 会为每条外部路由单独建立一棵树",
+      "D": "外部路由的下一跳总是 Type 5 LSA 中携带的转发地址"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "SPF 只计算区域内部的拓扑，形成以本机为根的最短路径树；外部 LSA 不参与建树，而是以 ASBR 为锚点附加在树外，再结合外部开销和转发地址选路。为每条外部路由单独建树、认为外部 LSA 形成树枝、或认为下一跳总是转发地址，都不正确。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "SPF",
+      "外部路由"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-042",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；SPF 计算区域内部拓扑、外部路由在树外单独计算的流程依据 RFC 2328 第 16.1 节与第 16.4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "78d6e2e0dc9ad76a58a1897a5cf26e93e72379e05b81ff45c2c98f48058eb636"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-043",
+    "type": "single_choice",
+    "question": "每台 OSPF 路由器运行 SPF 时，最短路径树的根是？",
+    "options": {
+      "A": "区域内的 DR",
+      "B": "Router ID 最大的路由器",
+      "C": "本路由器自己",
+      "D": "本区域的 ABR"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "每台 OSPF 路由器都以自己为根运行 SPF，计算到区域内各节点的最短路径，因此不同路由器得到的树不同。DR、Router ID 最大的路由器或 ABR 都不是 SPF 树的根。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "SPF",
+      "根节点"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-043",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；以本机为根计算最短路径树的规则依据 RFC 2328 第 16.1 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "fa64489c7be6eae10b3710689572a86238454dc7abcb99dbf16693196f408c6b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-044",
+    "type": "single_choice",
+    "question": "同一目的前缀同时存在区域内路由和区域间路由，且两者都有效。OSPF 的优选结果是？",
+    "options": {
+      "A": "区域内路由优先",
+      "B": "区域间路由优先",
+      "C": "两条等价负载分担",
+      "D": "比较 Router ID 决定"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "OSPF 的区域内部路由优先于区域间路由，同一前缀同时存在两者时优选区域内路由。区域间路由不会优先，二者也不会形成等价负载分担；Router ID 比较发生在更靠后的选路步骤，不能推翻区域类型带来的优先级。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "路由优选",
+      "区域内路由"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-044",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；区域内路由优先于区域间路由的选路顺序依据 RFC 2328 第 11 节与第 16.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "8c2ae2b79a1ca3ecf561bc589689c7d8dc18dc2ae794061f2e9877507235568a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-1-045",
+    "type": "single_choice",
+    "question": "广播网络上两台 DROther 之间保持 2-Way。关于它们对拓扑数据库的贡献，正确的是？",
+    "options": {
+      "A": "二者之间的邻接会写入各自的 Router LSA",
+      "B": "二者之间的邻接会被 DR 写入 Network LSA",
+      "C": "二者无法学习到任何路由",
+      "D": "由于未达到 Full，二者之间的邻接不作为拓扑边参与 SPF，但二者仍通过 DR 与网络相连"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "只有达到 Full 的邻接才会作为拓扑边写入 Router LSA 或被 DR 写入 Network LSA；两台 DROther 之间保持 2-Way，因此它们之间没有拓扑边，但二者都通过 DR 与广播网相连，仍能正常学习路由。认为 2-Way 会写入 LSA、由 DR 写入或导致完全学不到路由，都不正确。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "2-Way",
+      "拓扑数据库",
+      "DR"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-1-045",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；Network LSA 只列出 Full 邻接路由器、Router LSA 只描述可达邻接的规则依据 RFC 2328 第 12.4.1 节与第 12.4.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "d5d2e4c5a244f6960e7b8be8af62d63abcafed92cf15ba1df8b55ceae0a79d02"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-001",
+    "type": "single_choice",
+    "question": "ASBR 引入外部路由时，import-route 命令引用的 route-policy 与 OSPF 进程下的 filter-policy export 都能影响外部路由发布。二者的区别是？",
+    "options": {
+      "A": "两者作用完全相同，只是配置位置不同",
+      "B": "filter-policy export 决定路由是否进入本机路由表，import-route 的 route-policy 决定 LSA 的泛洪范围",
+      "C": "import-route 的 route-policy 决定路由是否被引入 OSPF，被拒绝的路由不会生成外部 LSA；filter-policy export 过滤已经引入 OSPF 的路由，决定哪些能对外发布",
+      "D": "import-route 的 route-policy 只能匹配 AS_PATH，filter-policy export 只能匹配团体属性"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "import-route 的 route-policy 作用在路由引入阶段，被拒绝的路由不会进入 OSPF，也就不会产生外部 LSA；filter-policy export 作用在已经引入 OSPF 的路由向外发布阶段，决定哪些外部路由可以生成 LSA 发布。两者作用点不同，不能简单视为同一功能；filter-policy export 不影响本机路由表，也不决定 LSA 泛洪范围；route-policy 可匹配多种属性，并不限于 AS_PATH，filter-policy 也不限于团体属性。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "路由控制",
+      "import-route",
+      "filter-policy"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 路由控制知识点；ASBR 通过 Type 5 LSA 通告引入路由的机制依据 RFC 2328 第 12.4.4 节；两种过滤工具的生效阶段为华为 VRP 配置语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "842c27b6ad168368d9e751cddd9b7aeed87d9aa0e499a7ea9b7fb7ac36c35de1"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-002",
+    "type": "single_choice",
+    "question": "ABR 对区域 1 的网段配置区域间聚合后，区域 1 内部路由器看到的路由情况是？",
+    "options": {
+      "A": "区域 1 内部路由器也只能看到聚合路由，明细被删除",
+      "B": "区域 1 内部仍保留明细路由，只有 ABR 向其他区域发布的 Type 3 路由被聚合",
+      "C": "区域 0 仍会收到每条明细的 Type 3 LSA，聚合没有实际效果",
+      "D": "ABR 会把区域 1 的 Router LSA 直接泛洪到区域 0"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "区域间聚合只影响 ABR 向其他区域发布的 Type 3 聚合路由，区域 1 内部路由器仍然通过区域内的 Router LSA、Network LSA 看到明细路由。聚合不会删除本区域明细，也不会让区域 0 看到明细；它改变的是区域间发布形式，而不是本区域内的路由。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "路由控制",
+      "区域间聚合",
+      "Type 3 LSA"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-002",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 路由控制知识点；ABR 向其他区域发布聚合 Summary-LSA 而本区域明细保持不变的机制依据 RFC 2328 第 12.4.3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "2daa4e8425b3134ca8f8110b559e6652ea0e4d440c2b537588e27b0d23ea489e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-003",
+    "type": "single_choice",
+    "question": "R1 到目的网段有两条 OSPF 路径：经 R2 的总开销为 10+10=20，经 R3 的总开销为 10+30=40；设备已允许等价路由负载分担。现将 R1 连接 R2 的接口开销从 10 调整为 30，其他开销不变。此时 R1 的选择是？",
+    "options": {
+      "A": "仍然只优选经 R2 的路径，因为修改前它的开销更小",
+      "B": "只优选经 R3 的路径，因为 R3 的路径开销更小",
+      "C": "两条路径都不再可用，需要重新建立邻居",
+      "D": "两条路径总开销均为 40，成为等价路由并负载分担"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "复算过程：修改前经 R2 为 10 + 10 = 20，经 R3 为 10 + 30 = 40；把 R1 到 R2 的接口开销改为 30 后，经 R2 变为 30 + 10 = 40，与经 R3 的 40 相等，在允许等价多路径时形成负载分担。只选 R2 或只选 R3 都忽略了另一方开销已相等；两条都不可用没有依据。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "路由控制",
+      "开销",
+      "等价路由",
+      "计算"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-003",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 路由控制知识点；路径开销为沿途出接口开销之和、等价路径可负载分担的依据 RFC 2328 第 16.1 节与第 16.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "50030477a7b9a38212b69cbc2bd686cb4430d841648f4b2f35811bb15e3c5f6d"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-004",
+    "type": "single_choice",
+    "question": "同一条外部路由分别以 Type 1 和 Type 2 引入，外部开销均为 20，本机到 ASBR 的内部开销为 30。两条路由同时存在时，OSPF 的优选结果是？",
+    "options": {
+      "A": "Type 1 路由，因为 Type 1 外部路由优先于 Type 2，即使其累计开销为 50 大于 20",
+      "B": "Type 2 路由，因为其计算开销为 20，小于 Type 1 的 50",
+      "C": "两条路由开销相同，形成负载分担",
+      "D": "Type 2 路由，因为 Type 2 总是优先于 Type 1"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "复算过程：Type 1 外部路由的开销等于外部开销加本机到 ASBR 的内部开销，即 20 + 30 = 50；Type 2 只使用外部开销 20。尽管 20 小于 50，OSPF 在选路时先比较路由类型，Type 1 外部路由优先于 Type 2，因此优选 Type 1。按数值大小选 Type 2、认为两者等价、或认为 Type 2 总是优先，都忽略了类型优先级。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "路由控制",
+      "外部路由",
+      "Type 1",
+      "Type 2"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-004",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 路由控制知识点；Type 1 计算内部开销、Type 2 只计外部开销以及 Type 1 优先的规则依据 RFC 2328 第 16.4.1 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "4f6f0d7708409741950c5280290d0be3da481e27ae0f3b0c7c820f3481df32d3"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-005",
+    "type": "single_choice",
+    "question": "ASBR 上配置 filter-policy export 拒绝某个网段后，下列哪类路由不受该过滤器影响？",
+    "options": {
+      "A": "通过 import-route 引入的直连路由",
+      "B": "从 OSPF 邻居学到的区域内和区域间路由",
+      "C": "通过 import-route 引入的静态路由",
+      "D": "通过 import-route 引入的 RIP 路由"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "filter-policy export 只对通过 import-route 引入 OSPF 的外部路由生效，不作用于从 OSPF 邻居学到的区域内、区域间路由。被引入的直连、静态、RIP 路由都属于外部路由，都会被该过滤器检查；OSPF 邻居学到的路由不是本机引入的外部路由，因此不受影响。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "路由控制",
+      "filter-policy export"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-005",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 路由控制知识点；外部路由以 Type 5 LSA 发布的机制依据 RFC 2328 第 12.4.4 节；filter-policy export 仅过滤引入路由为华为 VRP 配置语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "77d88820f4ff34004e4318708faac8688716f8b107c22a53c91684428c611612"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  }
+]

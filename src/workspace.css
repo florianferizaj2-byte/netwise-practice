@@ -1,8 +1,8 @@
 /* Desktop study surfaces. Mobile app and public landing retain their own layout. */
 .desk-workspace {
-  --study-text: #1d2723;
-  --study-muted: #6b7872;
-  --study-border: #dce2df;
+  --study-text: var(--text, #1d2723);
+  --study-muted: var(--text-3, #6b7872);
+  --study-border: var(--line, #dce2df);
   color: var(--study-text);
 }
 .desk-workspace .sidebar {
@@ -27,16 +27,16 @@
 .desk-workspace .topbar .desk-breadcrumb,
 .desk-workspace .topbar .desk-breadcrumb strong {
   font-size: 13px;
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
 }
 .desk-workspace .desk-search-trigger {
   font-size: 13px;
   min-height: 36px;
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
 }
 .desk-workspace .desk-search-trigger kbd {
   font-size: 11px;
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
 }
 .desk-workspace .sidebar nav {
   gap: 20px;
@@ -45,14 +45,14 @@
   font-size: 14px;
   padding: 11px 13px;
   min-height: 43px;
-  color: #4b5852;
+  color: var(--text-2, #4b5852);
 }
 .desk-workspace .sidebar nav button.active {
-  color: #1f6650;
-  background: #e8f1ec;
+  color: var(--green-700, #1f6650);
+  background: var(--green-100, #e8f1ec);
 }
 .desk-workspace .nav-section-label {
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
   font-size: 12px;
 }
 .desk-workspace .account-trigger {
@@ -65,13 +65,13 @@
 }
 .study-certificate-select > span {
   font-size: 12px;
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
   padding-left: 8px;
 }
 .study-certificate-select select {
   font-size: 13px;
-  color: #4b5852;
-  background: #f6f8f7;
+  color: var(--text-2, #4b5852);
+  background: var(--canvas, #f6f8f7);
   width: 100%;
   min-height: 40px;
   padding: 8px;
@@ -82,7 +82,7 @@
   justify-content: space-between;
   padding: 10px 12px;
   font-size: 13px;
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
   cursor: pointer;
   list-style: none;
 }
@@ -95,19 +95,19 @@
 .desk-workspace .study-download-link {
   border: 0;
   background: transparent;
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
   font-size: 13px;
   padding: 8px 0;
 }
 .desk-workspace :is(summary, select, textarea):focus-visible {
-  outline: 3px solid #6b7872;
+  outline: 3px solid var(--text-3, #6b7872);
   outline-offset: 3px;
 }
 .desk-workspace .page-heading {
   margin-bottom: 24px;
 }
 .desk-workspace .main-wrap > main > .page-heading h1 {
-  color: #12352c;
+  color: var(--ink-900, #12352c);
   font-size: 28px;
 }
 .desk-workspace .main-wrap > main > .page-heading p {
@@ -117,7 +117,7 @@
 .desk-workspace .main-wrap > footer,
 .desk-workspace .main-wrap > footer span {
   font-size: 12px;
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
 }
 .desk-workspace .study-heading {
   display: flex;
@@ -128,18 +128,18 @@
 }
 .study-heading p {
   font-size: 13px;
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
   margin-bottom: 7px;
 }
 .study-heading h1 {
   font-size: 29px;
   font-weight: 650;
-  color: #12352c;
+  color: var(--ink-900, #12352c);
   line-height: 1.4;
 }
 .study-heading > span {
   font-size: 13px;
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
   white-space: nowrap;
   padding-bottom: 4px;
 }
@@ -157,16 +157,16 @@
   align-items: center;
   gap: 25px;
   padding: 27px 30px;
-  border: 1px solid #cfe2d9;
+  border: 1px solid var(--green-200, #cfe2d9);
   border-radius: 10px;
-  background: #e8f1ec;
+  background: var(--green-100, #e8f1ec);
 }
 .study-eyebrow {
-  color: #2f7d65;
+  color: var(--green-600, #2f7d65);
   font-size: 13px;
 }
 .study-next h2 {
-  color: #12352c;
+  color: var(--ink-900, #12352c);
   font-size: 24px;
   font-weight: 600;
   margin-top: 12px;
@@ -176,7 +176,7 @@
 }
 .study-next p {
   font-size: 14px;
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
   margin-top: 9px;
 }
 .study-next button {
@@ -186,7 +186,7 @@
   padding-inline: 22px;
 }
 .study-next-icon {
-  color: #cfe2d9;
+  color: var(--green-200, #cfe2d9);
   flex-shrink: 0;
 }
 .study-review {
@@ -202,7 +202,7 @@
   align-items: center;
   gap: 9px;
   font-size: 14px;
-  color: #4b5852;
+  color: var(--text-2, #4b5852);
 }
 .study-review > div {
   display: flex;
@@ -219,7 +219,7 @@
 .study-review > div > span,
 .study-review p {
   font-size: 13px;
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
 }
 .study-review p {
   flex: 1;
@@ -237,13 +237,13 @@
   padding: 21px 0;
   border-bottom: 1px solid var(--study-border);
   font-size: 13px;
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
   flex-wrap: wrap;
 }
 .study-stats strong {
   margin-inline: 5px;
   font-size: 17px;
-  color: #4b5852;
+  color: var(--text-2, #4b5852);
   font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
@@ -268,12 +268,12 @@
 .study-section-heading h2 {
   font-size: 18px;
   font-weight: 600;
-  color: #12352c;
+  color: var(--ink-900, #12352c);
   display: block;
 }
 .study-section-heading p {
   font-size: 13px;
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
   margin-top: 5px;
 }
 .study-section-heading .text-button {
@@ -293,7 +293,7 @@
   grid-template-columns: 20px minmax(160px, 1fr) 112px 120px 17px;
   gap: 18px;
   border: 0;
-  border-bottom: 1px solid #edf0ee;
+  border-bottom: 1px solid var(--line-soft, #edf0ee);
   border-radius: 0;
   padding: 17px 22px;
   text-align: left;
@@ -307,7 +307,7 @@
 }
 .study-chapter-list button > span {
   font-size: 12px;
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
@@ -316,7 +316,7 @@
   height: 4px;
 }
 .study-chapter-list > button > svg {
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
 }
 .study-secondary {
   display: grid;
@@ -336,7 +336,7 @@
   padding: 18px 0;
 }
 .study-secondary > button > svg:first-child {
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
 }
 .study-secondary > button > svg:last-child {
   margin-left: auto;
@@ -348,7 +348,7 @@
 .study-secondary small {
   display: block;
   font-size: 13px;
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
   margin-top: 3px;
 }
 .study-more {
@@ -361,12 +361,12 @@
   list-style: none;
   cursor: pointer;
   min-height: 42px;
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
   font-size: 14px;
 }
 .study-more > summary small {
   font-size: 12px;
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
   margin-left: auto;
 }
 .study-more-content {
@@ -381,7 +381,7 @@
 }
 .study-more-content p {
   font-size: 13px;
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
   margin-bottom: 16px;
 }
 .study-more-content button {
@@ -401,7 +401,7 @@
 .study-weak-row small {
   font-size: 12px;
   white-space: nowrap;
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
 }
 .study-catalog-filters {
   display: flex;
@@ -426,14 +426,14 @@
   min-height: auto;
   width: 16px;
   height: 16px;
-  accent-color: #1f6650;
+  accent-color: var(--green-700, #1f6650);
 }
 .study-source-details {
   position: relative;
   margin-left: auto;
 }
 .study-source-details summary {
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
   cursor: pointer;
   padding: 8px 0;
 }
@@ -445,7 +445,7 @@
   background: #ffffff;
   padding: 20px;
   z-index: 10;
-  border: 1px solid #dce2df;
+  border: 1px solid var(--line, #dce2df);
   border-radius: 6px;
   box-shadow: none;
 }
@@ -474,7 +474,7 @@
 .study-catalog-layout > nav h2 small {
   margin-left: auto;
   font-size: 12px;
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
 }
 .desk-workspace .study-catalog-layout > nav button {
   width: 100%;
@@ -489,13 +489,13 @@
   margin-bottom: 3px;
 }
 .desk-workspace .study-catalog-layout > nav button.active {
-  color: #1f6650;
-  background: #e8f1ec;
+  color: var(--green-700, #1f6650);
+  background: var(--green-100, #e8f1ec);
   font-weight: 600;
 }
 .study-catalog-layout > nav small {
   font-size: 12px;
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
   padding-top: 2px;
 }
 .study-catalog-content {
@@ -527,7 +527,7 @@
 }
 .study-point-search {
   margin-left: auto;
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
 }
 .study-point-search input {
   font-size: 13px;
@@ -539,11 +539,11 @@
   display: flex;
   align-items: center;
   gap: 15px;
-  border-top: 1px solid #edf0ee;
+  border-top: 1px solid var(--line-soft, #edf0ee);
   padding: 17px 0;
 }
 .study-point-list > div > svg {
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
 }
 .study-point-list strong {
   display: block;
@@ -554,7 +554,7 @@
   display: block;
   margin-top: 4px;
   font-size: 12px;
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
 }
 .study-point-list button {
   margin-left: auto;
@@ -569,7 +569,7 @@
   gap: 16px;
   text-align: center;
   padding: 60px 20px;
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
 }
 .study-empty p,
 .study-empty button {
@@ -589,12 +589,12 @@
 }
 .desk-workspace .wrong-item .item-actions .primary {
   background: #ffffff;
-  color: #1f6650;
-  border-color: #dce2df;
+  color: var(--green-700, #1f6650);
+  border-color: var(--line, #dce2df);
 }
 .desk-workspace .wrong-item .item-actions button:first-child {
-  background: #1f6650;
-  border-color: #1f6650;
+  background: var(--action-fill, #1f6650);
+  border-color: var(--green-700, #1f6650);
   color: #ffffff;
 }
 .desk-workspace .practice-layout {
@@ -608,7 +608,7 @@
 }
 .desk-workspace .question-text {
   font-size: 20px;
-  color: #12352c;
+  color: var(--ink-900, #12352c);
   line-height: 1.85;
   margin-block: 20px;
 }
@@ -630,7 +630,7 @@
   background: #ffffff;
   z-index: 6;
   padding: 16px 0 5px;
-  border-top: 1px solid #edf0ee;
+  border-top: 1px solid var(--line-soft, #edf0ee);
   flex-wrap: wrap;
   box-shadow: 0 -10px 18px #ffffffeb;
 }
@@ -681,7 +681,7 @@
 .study-answer-card > summary span {
   margin-left: auto;
   font-size: 12px;
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
 }
 .study-answer-card .question-number-grid {
   display: grid;
@@ -701,7 +701,7 @@
   justify-content: space-between;
   margin-top: 16px;
   font-size: 12px;
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
 }
 .study-answer-pages button {
   min-height: 29px;
@@ -711,11 +711,11 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px 12px;
-  border-top: 1px solid #edf0ee;
+  border-top: 1px solid var(--line-soft, #edf0ee);
   margin-top: 15px;
   padding-top: 13px;
   font-size: 11px;
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
 }
 .study-answer-legend span {
   display: flex;
@@ -726,14 +726,14 @@
   width: 8px;
   height: 8px;
   border-radius: 4px;
-  border: 1px solid #dce2df;
+  border: 1px solid var(--line, #dce2df);
 }
 .study-answer-legend .is-current {
-  background: #2f7d65;
-  border-color: #2f7d65;
+  background: var(--action-fill, #2f7d65);
+  border-color: var(--green-600, #2f7d65);
 }
 .study-answer-legend .is-correct {
-  background: #e8f1ec;
+  background: var(--status-soft, #e8f1ec);
 }
 .study-answer-legend .is-wrong {
   background: #fff0f0;
@@ -801,7 +801,7 @@
 }
 .desk-workspace .study-exam-summary {
   font-size: 13px;
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
   margin: 9px 0 20px;
 }
 .desk-workspace .exam-settings {
@@ -830,7 +830,7 @@
 }
 .desk-workspace .exam-blueprint-note {
   font-size: 13px;
-  color: #6b7872;
+  color: var(--text-3, #6b7872);
   margin: 15px 0;
 }
 .desk-workspace .exam-composition > .primary {

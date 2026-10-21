@@ -28,8 +28,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.location.LocationManagerCompat
 import androidx.core.app.NotificationCompat
 import com.kaojiang.routeplayer.R
-import com.kaojiang.routeplayer.routes.FixedRoute
-import com.kaojiang.routeplayer.routes.FixedRouteLoader
+import com.kaojiang.routeplayer.routes.BuiltInRouteStore
 import com.kaojiang.routeplayer.routes.RoutePlayerActivity
 import com.kaojiang.routeplayer.routes.RoutePosition
 import com.kaojiang.routeplayer.routes.RouteSimulator
@@ -118,7 +117,7 @@ class MockLocationService : Service() {
                     check(hasPreciseLocation())
                     ensureForeground(starting = true)
                     if (FloatingControlPreferences.isEnabled(this)) activateFloating(showReminder = false)
-                    startRoute()
+                    startRoute(intent.getStringExtra(EXTRA_ROUTE_ID))
                 }.onFailure { fail() }
             }
             else -> stopSelf()
@@ -153,19 +152,21 @@ class MockLocationService : Service() {
         foreground = true
     }
 
-    private fun startRoute() {
+    private fun startRoute(routeId: String? = null) {
         if (simulator != null) return
         check(hasPreciseLocation())
         check(MockLocationAccess.isEnabled(this))
         check(LocationManagerCompat.isLocationEnabled(manager))
-        simulator = RouteSimulator(FixedRouteLoader.load(this))
+        val routes = BuiltInRouteStore(this)
+        val route = routes.load(routeId ?: routes.selected().id)
+        simulator = RouteSimulator(route)
         prepareProvider(LocationManager.GPS_PROVIDER, satellite = true)
         runCatching { prepareProvider(LocationManager.NETWORK_PROVIDER, network = true) }
         acquireWakeLock()
         inject(checkNotNull(simulator).current())
         lastUpdateNanos = SystemClock.elapsedRealtimeNanos()
         lastProgress = -1
-        MockLocationPreferences.setRouteActive(this, FixedRoute.ROUTE_ID)
+        MockLocationPreferences.setRouteActive(this, route.id)
         updateProgress(checkNotNull(simulator).current())
         announce(STATUS_ROUTE_RUNNING)
         handler.removeCallbacks(tick)
@@ -367,6 +368,7 @@ class MockLocationService : Service() {
         const val EXTRA_MESSAGE = "message"
         const val EXTRA_PROGRESS = "progress"
         const val EXTRA_OVERLAY = "overlay"
+        const val EXTRA_ROUTE_ID = "route_id"
         const val STATUS_RUNNING = "running"
         const val STATUS_ROUTE_RUNNING = "route_running"
         const val STATUS_ROUTE_COMPLETED = "route_completed"
@@ -379,7 +381,9 @@ class MockLocationService : Service() {
         private const val ACTION_HIDE_OVERLAY = "com.kaojiang.routeplayer.HIDE_OVERLAY"
         private const val CHANNEL = "kaojiang_route_player"
         private const val NOTIFICATION_ID = 0x52504C
-        fun startFixedRouteIntent(context: Context, consentToken: String?) = Intent(context, MockLocationService::class.java).setAction(ACTION_START).putExtra(LearningConsent.EXTRA_TOKEN, consentToken)
+        fun startSelectedRouteIntent(context: Context, consentToken: String?, routeId: String = BuiltInRouteStore(context).selected().id) =
+            Intent(context, MockLocationService::class.java).setAction(ACTION_START)
+                .putExtra(LearningConsent.EXTRA_TOKEN, consentToken).putExtra(EXTRA_ROUTE_ID, routeId)
         internal fun showOverlayIntent(context: Context, consentToken: String?) = Intent(context, MockLocationService::class.java).setAction(ACTION_SHOW_OVERLAY).putExtra(LearningConsent.EXTRA_TOKEN, consentToken)
         fun hideOverlayIntent(context: Context) = Intent(context, MockLocationService::class.java).setAction(ACTION_HIDE_OVERLAY)
         fun stopIntent(context: Context) = Intent(context, MockLocationService::class.java).setAction(ACTION_STOP)

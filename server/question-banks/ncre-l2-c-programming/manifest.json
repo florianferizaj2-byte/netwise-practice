@@ -1,0 +1,696 @@
+{
+  "schemaVersion": 1,
+  "certificate": {
+    "id": "ncre-l2-c-programming",
+    "name": "全国计算机等级考试二级 C 语言程序设计",
+    "shortName": "NCRE 二级 C 语言",
+    "description": "C 语言程序结构、数据类型与运算、选择与循环、数组、函数、指针、结构体与文件，以及二级公共基础知识",
+    "order": 7
+  },
+  "guidePath": "guide.json",
+  "syllabus": {
+    "version": "2025 年版",
+    "examCode": "NCRE 二级 C 语言程序设计",
+    "examCodeNote": "报名科目名称和版本以中国教育考试网当期公告为准",
+    "verifiedAt": "2026-10-16",
+    "scopeStatus": "officially_verified",
+    "scopeNote": "模块依据中国教育考试网公布的《二级 C 语言程序设计考试大纲（2025 年版）》与《二级公共基础知识考试大纲（2025 年版）》整理。官方结构为单项选择题 40 分（含公共基础知识部分 10 分）与操作题 60 分；本站仅覆盖可客观化的选择题部分，操作题（程序填空、程序修改、程序设计）不在本站客观题范围内。",
+    "weightType": "platform_practice_blueprint",
+    "sourceUrls": [
+      {
+        "name": "中国教育考试网：二级 C 语言程序设计考试大纲（2025 年版）",
+        "url": "https://cet.neea.edu.cn/res/Home/2412/220876da81ad5d5657c599c68f81e8e9.pdf",
+        "verified": true
+      },
+      {
+        "name": "中国教育考试网：二级公共基础知识考试大纲（2025 年版）",
+        "url": "https://ncre.neea.edu.cn/res/Home/2412/7dad16783ce29eb4d7d097e962361321.pdf",
+        "verified": true
+      }
+    ],
+    "modules": [
+      {
+        "id": "public-foundations",
+        "name": "公共基础知识",
+        "order": 1,
+        "weight": 10,
+        "targetQuestionCount": 31,
+        "knowledgePoints": [
+          "计算机系统与操作系统",
+          "算法与算法复杂度",
+          "数据结构与线性结构",
+          "栈、队列与链表",
+          "树与二叉树",
+          "查找与排序算法",
+          "程序设计方法与风格",
+          "软件工程与软件测试",
+          "数据库与关系模型"
+        ]
+      },
+      {
+        "id": "program-structure",
+        "name": "C 语言程序结构",
+        "order": 2,
+        "weight": 3,
+        "targetQuestionCount": 9,
+        "knowledgePoints": [
+          "程序构成与函数",
+          "头文件与预处理",
+          "书写格式与注释"
+        ]
+      },
+      {
+        "id": "data-types",
+        "name": "数据类型及其运算",
+        "order": 3,
+        "weight": 11,
+        "targetQuestionCount": 34,
+        "knowledgePoints": [
+          "基本数据类型与定义",
+          "运算符与优先级",
+          "类型转换",
+          "表达式与求值规则"
+        ]
+      },
+      {
+        "id": "basic-statements",
+        "name": "基本语句",
+        "order": 4,
+        "weight": 8,
+        "targetQuestionCount": 25,
+        "knowledgePoints": [
+          "表达式语句与复合语句",
+          "输入输出函数与格式控制"
+        ]
+      },
+      {
+        "id": "control-structures",
+        "name": "选择与循环结构",
+        "order": 5,
+        "weight": 14,
+        "targetQuestionCount": 44,
+        "knowledgePoints": [
+          "if 选择结构",
+          "switch 多分支结构",
+          "for 循环结构",
+          "while 与 do-while 循环",
+          "break 与 continue",
+          "循环嵌套"
+        ]
+      },
+      {
+        "id": "arrays",
+        "name": "数组的定义和引用",
+        "order": 6,
+        "weight": 11,
+        "targetQuestionCount": 34,
+        "knowledgePoints": [
+          "一维数组",
+          "二维数组",
+          "字符数组与字符串"
+        ]
+      },
+      {
+        "id": "functions",
+        "name": "函数",
+        "order": 7,
+        "weight": 12,
+        "targetQuestionCount": 37,
+        "knowledgePoints": [
+          "库函数调用",
+          "函数定义与返回值",
+          "参数传递",
+          "嵌套与递归调用",
+          "局部变量与全局变量",
+          "变量存储类别与作用域"
+        ]
+      },
+      {
+        "id": "preprocessor",
+        "name": "编译预处理",
+        "order": 8,
+        "weight": 4,
+        "targetQuestionCount": 13,
+        "knowledgePoints": [
+          "宏定义与调用",
+          "文件包含处理"
+        ]
+      },
+      {
+        "id": "pointers",
+        "name": "指针",
+        "order": 9,
+        "weight": 14,
+        "targetQuestionCount": 43,
+        "knowledgePoints": [
+          "地址与指针变量",
+          "数组与字符串的指针",
+          "指针作函数参数",
+          "返回指针的函数",
+          "指针数组与多级指针"
+        ]
+      },
+      {
+        "id": "struct-union",
+        "name": "结构体与共同体",
+        "order": 10,
+        "weight": 7,
+        "targetQuestionCount": 22,
+        "knowledgePoints": [
+          "typedef 与类型定义",
+          "结构体与共用体成员引用",
+          "单链表操作"
+        ]
+      },
+      {
+        "id": "bit-operations",
+        "name": "位运算",
+        "order": 11,
+        "weight": 3,
+        "targetQuestionCount": 9,
+        "knowledgePoints": [
+          "位运算符含义",
+          "简单位运算应用"
+        ]
+      },
+      {
+        "id": "file-operations",
+        "name": "文件操作",
+        "order": 12,
+        "weight": 3,
+        "targetQuestionCount": 9,
+        "knowledgePoints": [
+          "文件指针与打开关闭",
+          "文件读写函数",
+          "文件定位函数"
+        ]
+      }
+    ]
+  },
+  "banks": [
+    {
+      "id": "ncre-l2-c-programming-20261016023127663",
+      "source": "ncre_l2_c_practice",
+      "name": "NCRE 二级 C 语言原创仿真练习",
+      "category": "syllabus_practice",
+      "verification": "original_from_official_scope",
+      "sourceUrl": "https://cet.neea.edu.cn/res/Home/2412/220876da81ad5d5657c599c68f81e8e9.pdf",
+      "description": "依据 2025 年版考试大纲编写的单项选择题练习，覆盖公共基础知识与 C 语言十二个内容部分",
+      "path": "questions/curated/ncre-l2-c-programming-20261016023127663.json",
+      "defaults": {
+        "sourceVerification": "本站原创仿真练习：依据中国教育考试网 2025 年版二级 C 语言程序设计与公共基础知识考试大纲编写，非官方历年真题。题型与官方客观题部分保持一致，仅含单项选择题；官方另设操作题（程序填空、程序修改、程序设计）60 分，不在本站客观题范围内。"
+      }
+    }
+  ],
+  "taxonomy": {
+    "schemaVersion": 1,
+    "modules": [
+      {
+        "name": "公共基础知识",
+        "order": 1,
+        "sections": [
+          {
+            "name": "计算机系统",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "计算机系统与操作系统",
+                "order": 1,
+                "code": "c-1-1-1",
+                "scope": "公共基础知识中的计算机系统：计算机系统结构、硬件组成、操作系统基本组成（进程管理、内存管理、文件系统、I/O 设备管理）。"
+              }
+            ]
+          },
+          {
+            "name": "数据结构与算法",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "算法与算法复杂度",
+                "order": 1,
+                "code": "c-1-2-1",
+                "scope": "公共基础知识中的数据结构与算法：算法基本概念、时间复杂度与空间复杂度的概念和意义。"
+              },
+              {
+                "name": "数据结构与线性结构",
+                "order": 2,
+                "code": "c-1-2-2",
+                "scope": "公共基础知识中的数据结构与算法：数据结构定义、逻辑结构与存储结构、线性结构与非线性结构、线性表的顺序存储及插入删除。"
+              },
+              {
+                "name": "栈、队列与链表",
+                "order": 3,
+                "code": "c-1-2-3",
+                "scope": "公共基础知识中的数据结构与算法：栈和队列的定义与顺序存储基本运算、单链表/双向链表/循环链表的结构与基本运算。"
+              },
+              {
+                "name": "树与二叉树",
+                "order": 4,
+                "code": "c-1-2-4",
+                "scope": "公共基础知识中的数据结构与算法：树的基本概念、二叉树的定义与存储结构、二叉树的前序中序后序遍历。"
+              },
+              {
+                "name": "查找与排序算法",
+                "order": 5,
+                "code": "c-1-2-5",
+                "scope": "公共基础知识中的数据结构与算法：顺序查找与二分法查找、交换类/选择类/插入类基本排序算法。"
+              }
+            ]
+          },
+          {
+            "name": "程序设计与软件工程",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "程序设计方法与风格",
+                "order": 1,
+                "code": "c-1-3-1",
+                "scope": "公共基础知识中的程序设计基础：程序设计方法与风格、结构化程序设计、面向对象程序设计中对象、方法、属性及继承与多态性。"
+              },
+              {
+                "name": "软件工程与软件测试",
+                "order": 2,
+                "code": "c-1-3-2",
+                "scope": "公共基础知识中的软件工程基础：软件生命周期、结构化分析方法与数据流图、结构化设计、白盒与黑盒测试、测试用例设计、程序调试。"
+              }
+            ]
+          },
+          {
+            "name": "数据库设计基础",
+            "order": 4,
+            "knowledgePoints": [
+              {
+                "name": "数据库与关系模型",
+                "order": 1,
+                "code": "c-1-4-1",
+                "scope": "公共基础知识中的数据库设计基础：数据库、数据库管理系统与数据库系统概念、E-R 模型、关系代数运算、数据库规范化理论与设计步骤。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "C 语言程序结构",
+        "order": 2,
+        "sections": [
+          {
+            "name": "程序组成",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "程序构成与函数",
+                "order": 1,
+                "code": "c-2-1-1",
+                "scope": "C 语言程序的结构：程序的构成、main 函数和其他函数、函数的开始和结束标志。"
+              },
+              {
+                "name": "头文件与预处理",
+                "order": 2,
+                "code": "c-2-1-2",
+                "scope": "C 语言程序的结构：头文件的作用与包含方式、数据说明、源程序的书写格式与 C 语言风格。"
+              },
+              {
+                "name": "书写格式与注释",
+                "order": 3,
+                "code": "c-2-1-3",
+                "scope": "C 语言程序的结构：源程序的书写格式、程序中的注释写法与作用。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "数据类型及其运算",
+        "order": 3,
+        "sections": [
+          {
+            "name": "数据类型",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "基本数据类型与定义",
+                "order": 1,
+                "code": "c-3-1-1",
+                "scope": "数据类型及其运算：C 的数据类型（基本类型、构造类型、指针类型、无值类型）及其定义方法。"
+              }
+            ]
+          },
+          {
+            "name": "运算符与表达式",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "运算符与优先级",
+                "order": 1,
+                "code": "c-3-2-1",
+                "scope": "数据类型及其运算：C 运算符的种类、运算优先级和结合性。"
+              },
+              {
+                "name": "类型转换",
+                "order": 2,
+                "code": "c-3-2-2",
+                "scope": "数据类型及其运算：不同类型数据间的转换与运算，包括隐式转换与强制类型转换。"
+              },
+              {
+                "name": "表达式与求值规则",
+                "order": 3,
+                "code": "c-3-2-3",
+                "scope": "数据类型及其运算：赋值表达式、算术表达式、关系表达式、逻辑表达式、条件表达式、逗号表达式的类型和求值规则。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "基本语句",
+        "order": 4,
+        "sections": [
+          {
+            "name": "语句形式",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "表达式语句与复合语句",
+                "order": 1,
+                "code": "c-4-1-1",
+                "scope": "基本语句：表达式语句、空语句、复合语句的构成与使用。"
+              }
+            ]
+          },
+          {
+            "name": "输入输出",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "输入输出函数与格式控制",
+                "order": 1,
+                "code": "c-4-2-1",
+                "scope": "基本语句：输入输出函数的调用，正确输入数据并正确设计输出格式（printf、scanf 的格式说明与常见用法）。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "选择与循环结构",
+        "order": 5,
+        "sections": [
+          {
+            "name": "选择结构",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "if 选择结构",
+                "order": 1,
+                "code": "c-5-1-1",
+                "scope": "选择结构程序设计：用 if 语句实现选择结构，包括 if、if-else、else if 链与选择结构的嵌套。"
+              },
+              {
+                "name": "switch 多分支结构",
+                "order": 2,
+                "code": "c-5-1-2",
+                "scope": "选择结构程序设计：用 switch 语句实现多分支选择结构及其与 break 的配合。"
+              }
+            ]
+          },
+          {
+            "name": "循环结构",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "for 循环结构",
+                "order": 1,
+                "code": "c-5-2-1",
+                "scope": "循环结构程序设计：for 循环结构的语法与执行过程。"
+              },
+              {
+                "name": "while 与 do-while 循环",
+                "order": 2,
+                "code": "c-5-2-2",
+                "scope": "循环结构程序设计：while 和 do-while 循环结构的语法、执行过程与二者区别。"
+              },
+              {
+                "name": "break 与 continue",
+                "order": 3,
+                "code": "c-5-2-3",
+                "scope": "循环结构程序设计：continue 语句和 break 语句在循环中的作用与区别。"
+              },
+              {
+                "name": "循环嵌套",
+                "order": 4,
+                "code": "c-5-2-4",
+                "scope": "循环结构程序设计：循环的嵌套及其执行次数分析。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "数组的定义和引用",
+        "order": 6,
+        "sections": [
+          {
+            "name": "数值数组",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "一维数组",
+                "order": 1,
+                "code": "c-6-1-1",
+                "scope": "数组的定义和引用：一维数组的定义、初始化和数组元素的引用。"
+              },
+              {
+                "name": "二维数组",
+                "order": 2,
+                "code": "c-6-1-2",
+                "scope": "数组的定义和引用：二维数组的定义、初始化和数组元素的引用。"
+              }
+            ]
+          },
+          {
+            "name": "字符串",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "字符数组与字符串",
+                "order": 1,
+                "code": "c-6-2-1",
+                "scope": "数组的定义和引用：字符串与字符数组的定义、初始化、结束标志及常用字符串库函数。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "函数",
+        "order": 7,
+        "sections": [
+          {
+            "name": "函数基础",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "库函数调用",
+                "order": 1,
+                "code": "c-7-1-1",
+                "scope": "函数：库函数的正确调用方式与常见库函数的使用要求。"
+              },
+              {
+                "name": "函数定义与返回值",
+                "order": 2,
+                "code": "c-7-1-2",
+                "scope": "函数：函数的定义方法、函数的类型和返回值。"
+              },
+              {
+                "name": "参数传递",
+                "order": 3,
+                "code": "c-7-1-3",
+                "scope": "函数：形式参数与实际参数，参数值的传递方式与影响。"
+              }
+            ]
+          },
+          {
+            "name": "变量与作用域",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "嵌套与递归调用",
+                "order": 1,
+                "code": "c-7-2-1",
+                "scope": "函数：函数的正确调用、嵌套调用与递归调用。"
+              },
+              {
+                "name": "局部变量与全局变量",
+                "order": 2,
+                "code": "c-7-2-2",
+                "scope": "函数：局部变量和全局变量的区别、作用范围与同名遮蔽。"
+              },
+              {
+                "name": "变量存储类别与作用域",
+                "order": 3,
+                "code": "c-7-2-3",
+                "scope": "函数：变量的存储类别（自动、静态、寄存器、外部），变量的作用域和生存期。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "编译预处理",
+        "order": 8,
+        "sections": [
+          {
+            "name": "预处理命令",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "宏定义与调用",
+                "order": 1,
+                "code": "c-8-1-1",
+                "scope": "编译预处理：不带参数的宏与带参数的宏的定义和调用。"
+              },
+              {
+                "name": "文件包含处理",
+                "order": 2,
+                "code": "c-8-1-2",
+                "scope": "编译预处理：文件包含处理的写法与作用。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "指针",
+        "order": 9,
+        "sections": [
+          {
+            "name": "指针基础",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "地址与指针变量",
+                "order": 1,
+                "code": "c-9-1-1",
+                "scope": "指针：地址与指针变量的概念，地址运算符与间址运算符。"
+              },
+              {
+                "name": "数组与字符串的指针",
+                "order": 2,
+                "code": "c-9-1-2",
+                "scope": "指针：一维、二维数组和字符串的地址以及指向变量、数组、字符串、函数、结构体的指针变量的定义，通过指针引用以上各类型数据。"
+              }
+            ]
+          },
+          {
+            "name": "指针应用",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "指针作函数参数",
+                "order": 1,
+                "code": "c-9-2-1",
+                "scope": "指针：用指针作函数参数。"
+              },
+              {
+                "name": "返回指针的函数",
+                "order": 2,
+                "code": "c-9-2-2",
+                "scope": "指针：返回地址值的函数。"
+              },
+              {
+                "name": "指针数组与多级指针",
+                "order": 3,
+                "code": "c-9-2-3",
+                "scope": "指针：指针数组，指向指针的指针。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "结构体与共同体",
+        "order": 10,
+        "sections": [
+          {
+            "name": "构造类型",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "typedef 与类型定义",
+                "order": 1,
+                "code": "c-10-1-1",
+                "scope": "结构体与共同体：用 typedef 说明一个新类型。"
+              },
+              {
+                "name": "结构体与共用体成员引用",
+                "order": 2,
+                "code": "c-10-1-2",
+                "scope": "结构体与共同体：结构体和共用体类型数据的定义和成员的引用。"
+              },
+              {
+                "name": "单链表操作",
+                "order": 3,
+                "code": "c-10-1-3",
+                "scope": "结构体与共同体：通过结构体构成链表，单向链表的建立，结点数据的输出、删除与插入。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "位运算",
+        "order": 11,
+        "sections": [
+          {
+            "name": "位操作",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "位运算符含义",
+                "order": 1,
+                "code": "c-11-1-1",
+                "scope": "位运算：位运算符的含义和使用。"
+              },
+              {
+                "name": "简单位运算应用",
+                "order": 2,
+                "code": "c-11-1-2",
+                "scope": "位运算：简单的位运算，包括按位与、或、异或、取反和移位。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "文件操作",
+        "order": 12,
+        "sections": [
+          {
+            "name": "缓冲文件系统",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "文件指针与打开关闭",
+                "order": 1,
+                "code": "c-12-1-1",
+                "scope": "文件操作：文件类型指针（FILE 类型指针），文件的打开与关闭（fopen、fclose）。"
+              },
+              {
+                "name": "文件读写函数",
+                "order": 2,
+                "code": "c-12-1-2",
+                "scope": "文件操作：文件的读写（fputc、fgetc、fputs、fgets、fread、fwrite、fprintf、fscanf 函数的应用）。"
+              },
+              {
+                "name": "文件定位函数",
+                "order": 3,
+                "code": "c-12-1-3",
+                "scope": "文件操作：文件的定位（rewind、fseek、ftell 函数的应用）。"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

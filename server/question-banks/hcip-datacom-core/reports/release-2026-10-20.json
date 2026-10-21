@@ -1,0 +1,319 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-20",
+  "releaseStatus": "reviewed-first-release",
+  "certificateId": "hcip-datacom-core",
+  "examCode": "H12-821",
+  "syllabusVersion": "V1.0",
+  "sourceCategory": "syllabus_practice",
+  "questionType": "single_choice",
+  "questionCount": 670,
+  "plannedPracticeTarget": 900,
+  "questionTargetBasis": "本站练习配题目标按华为公布章节权重每 1% 配 9 题；900 题不是华为公布的考试题量。",
+  "knowledgePoints": {
+    "total": 51,
+    "covered": 43
+  },
+  "modules": [
+    {
+      "id": "routing-basics",
+      "name": "路由基础",
+      "weight": 3,
+      "plannedTarget": 27,
+      "questionCount": 28,
+      "knowledgePointsTotal": 4,
+      "knowledgePointsCovered": 4,
+      "missingKnowledgePoints": []
+    },
+    {
+      "id": "ospf-core",
+      "name": "OSPF 核心知识",
+      "weight": 16,
+      "plannedTarget": 144,
+      "questionCount": 147,
+      "knowledgePointsTotal": 8,
+      "knowledgePointsCovered": 8,
+      "missingKnowledgePoints": []
+    },
+    {
+      "id": "isis-core",
+      "name": "IS-IS 核心知识",
+      "weight": 8,
+      "plannedTarget": 72,
+      "questionCount": 73,
+      "knowledgePointsTotal": 3,
+      "knowledgePointsCovered": 3,
+      "missingKnowledgePoints": []
+    },
+    {
+      "id": "bgp-core",
+      "name": "BGP 核心知识",
+      "weight": 17,
+      "plannedTarget": 153,
+      "questionCount": 156,
+      "knowledgePointsTotal": 7,
+      "knowledgePointsCovered": 7,
+      "missingKnowledgePoints": []
+    },
+    {
+      "id": "routing-control",
+      "name": "路由和流量控制",
+      "weight": 10,
+      "plannedTarget": 90,
+      "questionCount": 92,
+      "knowledgePointsTotal": 5,
+      "knowledgePointsCovered": 5,
+      "missingKnowledgePoints": []
+    },
+    {
+      "id": "switching-basics",
+      "name": "交换技术基础",
+      "weight": 7,
+      "plannedTarget": 63,
+      "questionCount": 64,
+      "knowledgePointsTotal": 3,
+      "knowledgePointsCovered": 3,
+      "missingKnowledgePoints": []
+    },
+    {
+      "id": "multicast-basics",
+      "name": "组播基础",
+      "weight": 9,
+      "plannedTarget": 81,
+      "questionCount": 83,
+      "knowledgePointsTotal": 4,
+      "knowledgePointsCovered": 4,
+      "missingKnowledgePoints": []
+    },
+    {
+      "id": "ipv6-core",
+      "name": "IPv6 核心知识",
+      "weight": 3,
+      "plannedTarget": 27,
+      "questionCount": 21,
+      "knowledgePointsTotal": 3,
+      "knowledgePointsCovered": 3,
+      "missingKnowledgePoints": []
+    },
+    {
+      "id": "network-security",
+      "name": "网络安全基础",
+      "weight": 9,
+      "plannedTarget": 81,
+      "questionCount": 2,
+      "knowledgePointsTotal": 4,
+      "knowledgePointsCovered": 2,
+      "missingKnowledgePoints": [
+        "安全区域与策略",
+        "设备安全特性"
+      ]
+    },
+    {
+      "id": "reliability",
+      "name": "网络可靠性",
+      "weight": 8,
+      "plannedTarget": 72,
+      "questionCount": 1,
+      "knowledgePointsTotal": 2,
+      "knowledgePointsCovered": 1,
+      "missingKnowledgePoints": [
+        "BFD 原理与配置"
+      ]
+    },
+    {
+      "id": "services-management",
+      "name": "网络服务与管理",
+      "weight": 2,
+      "plannedTarget": 18,
+      "questionCount": 1,
+      "knowledgePointsTotal": 2,
+      "knowledgePointsCovered": 1,
+      "missingKnowledgePoints": [
+        "网络管理协议"
+      ]
+    },
+    {
+      "id": "wlan-architecture",
+      "name": "大型 WLAN 组网架构",
+      "weight": 6,
+      "plannedTarget": 54,
+      "questionCount": 1,
+      "knowledgePointsTotal": 3,
+      "knowledgePointsCovered": 1,
+      "missingKnowledgePoints": [
+        "漫游与高可靠",
+        "VLAN Pool 与准入"
+      ]
+    },
+    {
+      "id": "solutions",
+      "name": "网络解决方案",
+      "weight": 2,
+      "plannedTarget": 18,
+      "questionCount": 1,
+      "knowledgePointsTotal": 3,
+      "knowledgePointsCovered": 1,
+      "missingKnowledgePoints": [
+        "园区网",
+        "SD-WAN"
+      ]
+    }
+  ],
+  "verifiedBatches": [
+    {
+      "id": "hcip-core-b01",
+      "questionCount": 20,
+      "qualityGate": "pipeline check",
+      "passed": true
+    },
+    {
+      "id": "hcip1800-core-01",
+      "questionCount": 50,
+      "qualityGate": "pipeline check",
+      "passed": true
+    },
+    {
+      "id": "hcip1800-core-02",
+      "questionCount": 50,
+      "qualityGate": "pipeline check",
+      "passed": true
+    },
+    {
+      "id": "hcip1800-core-03",
+      "questionCount": 50,
+      "qualityGate": "pipeline check",
+      "passed": true
+    },
+    {
+      "id": "hcip1800-core-04",
+      "questionCount": 50,
+      "qualityGate": "pipeline check",
+      "passed": true
+    },
+    {
+      "id": "hcip1800-core-05",
+      "questionCount": 50,
+      "qualityGate": "pipeline check",
+      "passed": true
+    },
+    {
+      "id": "hcip1800-core-06",
+      "questionCount": 50,
+      "qualityGate": "pipeline check",
+      "passed": true
+    },
+    {
+      "id": "hcip1800-core-07",
+      "questionCount": 50,
+      "qualityGate": "pipeline check",
+      "passed": true
+    },
+    {
+      "id": "hcip1800-core-08",
+      "questionCount": 50,
+      "qualityGate": "pipeline check",
+      "passed": true
+    },
+    {
+      "id": "hcip1800-core-09",
+      "questionCount": 50,
+      "qualityGate": "pipeline check",
+      "passed": true
+    },
+    {
+      "id": "hcip1800-core-10",
+      "questionCount": 50,
+      "qualityGate": "pipeline check",
+      "passed": true
+    },
+    {
+      "id": "hcip1800-core-11",
+      "questionCount": 50,
+      "qualityGate": "pipeline check",
+      "passed": true
+    },
+    {
+      "id": "hcip1800-core-12",
+      "questionCount": 50,
+      "qualityGate": "pipeline check",
+      "passed": true
+    },
+    {
+      "id": "hcip1800-core-13",
+      "questionCount": 50,
+      "qualityGate": "pipeline check",
+      "passed": true
+    }
+  ],
+  "verification": {
+    "bankValidate": {
+      "command": "npm run bank:validate",
+      "passed": true
+    },
+    "batchQuality": {
+      "passed": true,
+      "batches": 14
+    },
+    "examSmoke": {
+      "command": "pipeline exam-smoke --certificate hcip-datacom-core --runs 10",
+      "passed": true,
+      "runs": 10,
+      "questionsPerRun": 20
+    },
+    "browser": {
+      "command": "node test/hcip-practice.e2e.js",
+      "passed": true,
+      "scope": "两个 HCIP 方向：证书选择、答题判分、刷新恢复、20 题考试与交卷"
+    },
+    "chapterArt": {
+      "command": "node scripts/export-demo-chapter-visuals.mjs --check && node scripts/export-web-chapter-art.mjs --check",
+      "passed": true,
+      "browser": {
+        "command": "node test/hcip-practice.e2e.js",
+        "passed": true,
+        "scope": "21 个章节 SVG 无占位回退；逐卡片悬停、键盘聚焦和系统减弱动画均已验证"
+      }
+    },
+    "unitTests": {
+      "command": "npm test",
+      "passed": true,
+      "tests": 304,
+      "failures": 0,
+      "testEnvironment": "临时测试加密密钥；无生产密钥或外部付费模型调用"
+    },
+    "build": {
+      "command": "npm run build",
+      "passed": true
+    },
+    "siteBrowser": {
+      "command": "npm run test:e2e",
+      "passed": true
+    }
+  },
+  "exclusions": [
+    {
+      "batchIds": [
+        "hcip-core-b02",
+        "hcip-core-b03",
+        "hcip-core-b04",
+        "hcip-core-b05"
+      ],
+      "questionCount": 82,
+      "reason": "当前流水线判定逐题复核摘要过期；未纳入发布。"
+    }
+  ],
+  "additionalUnreleasedBatches": [
+    "hcip1800-core-14",
+    "hcip1800-core-15",
+    "hcip1800-core-16",
+    "hcip1800-core-17",
+    "hcip1800-core-18"
+  ],
+  "notes": [
+    "所有题目均为本站原创仿真练习，非官方真题。",
+    "官方大纲未公布题型构成；本批仅含单项选择题。",
+    "逐批质量检查通过才进入本发布包；被挡批次未修改审核状态或伪造审核摘要。",
+    "考试范围与权重依据华为 ICT 职业认证手册中的 H12-821/H12-831 V1.0 内容章节。"
+  ],
+  "evidenceFile": "review-evidence-2026-10-20.json"
+}

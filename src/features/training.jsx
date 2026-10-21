@@ -156,7 +156,7 @@ export function TrainingView({
             {groups.map((group) => (
               <article className="ai-group-card" key={group.id}>
                 <div>
-                  <span className="badge green">AI 生成</span>
+                <span className="badge brand">AI 生成</span>
                   <strong>{group.topic}</strong>
                   <small>
                     {group.questionCount} 题 · 已完成 {group.completedCount} 题

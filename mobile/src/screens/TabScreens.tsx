@@ -42,6 +42,7 @@ import { PracticeHubScreen } from './PracticeHubScreen';
 import { CommunityScreen } from './CommunityScreen';
 import { AdminScreen } from './AdminScreen';
 import { ProfileSetupScreen } from './ProfileSetupScreen';
+import { AccountSecurityScreen } from './AccountSecurityScreen';
 import { previewUiSound } from '../audioFeedback';
 import {
   AnimatedPressable,
@@ -1321,6 +1322,7 @@ export function ProfileScreen({
   const [communityOpen, setCommunityOpen] = useState(false);
   const [adminOpen, setAdminOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [securityOpen, setSecurityOpen] = useState(false);
   const [redeemOpen, setRedeemOpen] = useState(false);
   const [membershipPlan, setMembershipPlan] = useState<keyof typeof membershipLabels>('free');
   const membershipRevision = useRef(0);
@@ -1335,7 +1337,7 @@ export function ProfileScreen({
   const [authorPassword, setAuthorPassword] = useState('');
   const [aiForm, setAiForm] = useState({
     baseUrl: 'https://api.deepseek.com',
-    model: 'deepseek-chat',
+    model: 'deepseek-flash',
     temperature: '0.3',
   });
 
@@ -1578,6 +1580,7 @@ export function ProfileScreen({
           />
           <SettingRow onPress={() => onNavigate('vip')} title="我的会员" value={membershipLabels[membershipPlan]} />
           <SettingRow onPress={() => setRedeemOpen(true)} title="兑换码" value="开通 / 续期会员" />
+          {user && !preview && <SettingRow onPress={() => setSecurityOpen(true)} title="账号与安全" value="登录密码与账号保护" />}
           {user?.isAdmin && !preview && <SettingRow onPress={() => setAdminOpen(true)} title="管理中心" value="注册账号 · 公告管理" />}
           <SettingRow
             onPress={user ? onOpenCertificatePicker : undefined}
@@ -1631,6 +1634,9 @@ export function ProfileScreen({
           </AnimatedPressable>
         </EntranceView>
       )}
+      {user && securityOpen && <Modal visible={active} onRequestClose={() => setSecurityOpen(false)} animationType="slide">
+        <AccountSecurityScreen key={user.id} onClose={() => setSecurityOpen(false)} onLogout={() => { setSecurityOpen(false); onLogout?.(); }} />
+      </Modal>}
       {user && profileOpen && <Modal visible={active} onRequestClose={() => setProfileOpen(false)} animationType="slide">
         <ProfileSetupScreen user={user} onSaved={(updated) => { onUserUpdated?.(updated); setProfileOpen(false); }} onCancel={() => setProfileOpen(false)} />
       </Modal>}
@@ -1869,7 +1875,7 @@ export function ProfileScreen({
                 autoCapitalize="none"
                 editable={!preview && !settingsSaveBusy}
                 onChangeText={(model) => setAiForm((current) => ({ ...current, model }))}
-                placeholder="deepseek-chat"
+                placeholder="deepseek-flash"
                 placeholderTextColor={colors.textFaint}
                 style={styles.settingsInput}
                 value={aiForm.model}

@@ -1,0 +1,1877 @@
+[
+  {
+    "id": "hcip831-3-1-1-008",
+    "type": "single_choice",
+    "question": "关于 IPv6 静态路由的基本特征，下列描述正确的是？",
+    "options": {
+      "A": "由 OSPFv3 计算完成后自动写入静态路由表",
+      "B": "链路状态变化时会自动收敛到预先计算好的备份路径",
+      "C": "由管理员手工配置目的前缀和下一跳（或出接口），不随拓扑变化自动重算，需要人工维护",
+      "D": "下一跳只能使用链路本地地址，不能使用全球单播地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确：IPv6 静态路由由管理员手工指定目的前缀与下一跳或出接口，设备不会像动态协议那样感知拓扑变化并重新计算，路径变化时需要人工调整，或借助备份路由、BFD、NQA 等外部机制。A 错误：静态路由不由 OSPFv3 计算产生，OSPFv3 计算出来的是动态路由。B 错误：静态路由没有自动收敛能力，备份路径只有在主路由失效后按优先级重新参与选路。D 错误：下一跳既可以是全球单播地址，也可以是链路本地地址（后者需同时指定出接口）。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "easy",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "手工配置"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-008",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.3（IPv6 地址前缀的表示）；静态路由由管理员手工配置且不自动重算属于通用的路由语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 IPv6 地址架构标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "a0cf5c9c0e685453092d2052d8205cbc8ad9aa5e21bab729d35abcc14ef924bd"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-009",
+    "type": "single_choice",
+    "question": "IPv6 路由表中出现条目 2001:db8:10::/48，下列解释正确的是？",
+    "options": {
+      "A": "前 48 位为网络前缀，其余 80 位为主机位，目的地址前 48 位与之相同即匹配该条目",
+      "B": "前 80 位为网络前缀，只有最后 48 位参与匹配",
+      "C": "该条目代表 48 个可分配的 IPv6 地址",
+      "D": "该条目与 2001:db8:10::/64 完全等价"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确：IPv6 前缀用“地址/前缀长度”表示，/48 表示前 48 位是网络前缀，剩余 128−48=80 位为主机位，转发时只比较前 48 位。B 错误：前缀长度 48 指前 48 位，不是前 80 位。C 错误：前缀长度不是地址数量，/48 覆盖的地址空间为 2 的（128−48）次方，即 2 的 80 次方个地址。D 错误：/48 与 /64 的匹配范围不同，/48 覆盖范围更大，二者不等价。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "easy",
+    "tags": [
+      "IPv6",
+      "前缀长度",
+      "路由表"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-009",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.3（地址/前缀长度的写法与匹配含义）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲范围与 RFC 4291 的前缀表示规则独立命题，未复制第三方题目。",
+      "reviewDigest": "bd49cbaf54c01844cf65efb3d28afc83323688c83ba43fd13f45a73c076df1c8"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-010",
+    "type": "single_choice",
+    "question": "在华为设备上为 IPv6 静态路由指定链路本地地址作为下一跳时，为什么必须同时指定出接口？",
+    "options": {
+      "A": "因为链路本地地址不会出现在路由表中，必须靠出接口代替下一跳",
+      "B": "因为链路本地地址需要先转换为全球单播地址才能转发",
+      "C": "因为 IPv6 静态路由只允许指定出接口，不允许指定下一跳",
+      "D": "因为链路本地地址只在单一链路上有效，不同链路可能使用相同的链路本地地址，必须用出接口确定从哪条链路转发并解析邻接"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确：链路本地地址的作用域限于单条链路，FE80::/10 前缀在每条链路上都可以重复使用，仅凭下一跳无法判断应从哪个接口发出，因此必须同时给出出接口。A 错误：链路本地地址可以作为下一跳出现在静态路由中，只是必须配合出接口。B 错误：转发时不需要把链路本地地址换成全球单播地址，报文仍以该链路本地地址作为下一跳封装。C 错误：静态路由允许只配出接口、只配下一跳或两者同时配置。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "hard",
+    "tags": [
+      "IPv6",
+      "链路本地地址",
+      "下一跳",
+      "出接口"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-010",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.5.6（链路本地地址仅在同一链路内有效）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与 RFC 4291 的链路本地地址作用域定义独立命题，未复制第三方题目。",
+      "reviewDigest": "e27230b094c8d0c0a74a77fb40f7a3fb0115ebd54cb9fa2de414b1338d52d92d"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-011",
+    "type": "single_choice",
+    "question": "一条 IPv6 静态路由的下一跳不是本机直连网段的地址，而是需要经过其他路由才能到达的地址。设备如何处理这条静态路由？",
+    "options": {
+      "A": "配置被直接拒绝，静态路由的下一跳必须是直连地址",
+      "B": "先递归查找到达该下一跳的路由，解析出直连出接口和邻接后才把路由下发到转发表；递归不可达时该路由不生效",
+      "C": "把下一跳地址当作目的地址直接广播，等待邻居回应",
+      "D": "只在路由表中保留条目，转发时逐包广播寻找下一跳"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确：下一跳非直连时要先做递归查找，用到达下一跳的路由解析出真正的出接口和邻接信息，解析成功后静态路由才能下发；如果递归结果不可达，静态路由不会生效。A 错误：静态路由允许配置非直连下一跳，只是需要能够递归解析。C 错误：IPv6 转发不会为寻找下一跳而广播。D 错误：转发依据转发表逐包查表，不会逐包广播解析。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "路由递归"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-011",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.3（前缀与地址结构）；下一跳的递归解析与转发表下发属于通用的路由迭代实现。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与地址结构标准，结合通用路由迭代行为独立命题，未复制第三方题目。",
+      "reviewDigest": "c9317c4f3169383ba5b8f8ade3a1302875663354a37062e0b2fe5dd0ad7e1626"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-012",
+    "type": "single_choice",
+    "question": "在以太网广播型接口上只指定出接口、不指定下一跳来配置 IPv6 静态路由，会带来什么问题？",
+    "options": {
+      "A": "配置会被设备直接拒绝，广播型接口不允许只配出接口",
+      "B": "该静态路由会自动变成直连路由",
+      "C": "该配置只能用于 /128 的主机路由",
+      "D": "设备无法确定目的主机对应的链路层地址，需要对每个目的地址发起邻居请求，转发效率和准确性都无法保证"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确：广播型链路上同一接口可能连接多个邻居，只指出接口时设备只能对每个目的地址逐个做邻居发现来获得链路层地址，开销大且不可靠，因此广播型接口通常应同时指定下一跳。A 错误：这种配置通常可以下发，只是转发行为不理想，并非被拒绝。B 错误：静态路由不会因为只配出接口就变成直连路由。C 错误：前缀长度与是否只配出接口没有这种绑定关系。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "广播型接口",
+      "邻居发现"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-012",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.5.6（链路本地地址的链路范围）；广播型接口上的地址解析由 IPv6 邻居发现完成，属通用协议行为。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与地址作用域标准，结合邻居发现机制独立命题，未复制第三方题目。",
+      "reviewDigest": "679a2906054f1b955332111770c483b0176f0756fc7493c6afa3a6d2b7567c9a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-013",
+    "type": "single_choice",
+    "question": "希望一条 IPv6 静态路由在探测到目的网段不可达时自动失效，从而让备份路径接管，下列做法最合适的是？",
+    "options": {
+      "A": "把该静态路由的 Cost 调大",
+      "B": "在该接口上开启水平分割",
+      "C": "把静态路由与 NQA 测试例联动（Track），探测失败时撤销该静态路由",
+      "D": "把该静态路由的下一跳改为 NULL0"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确：静态路由本身没有探测能力，通过与 NQA 测试例联动，可以在探测结果失败时让该静态路由失效，备份路由随即接管。A 错误：Cost 只影响同一优先级下的选路比较，不能感知目的网段是否可达。B 错误：水平分割是距离矢量协议的防环机制，与静态路由失效无关。D 错误：改为 NULL0 会直接把流量丢弃，不能实现主备切换。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "NQA",
+      "Track"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-013",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.3（目的前缀语义）；静态路由本身没有连通性探测能力，NQA/Track 联动属于设备提供的检测手段。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲范围与静态路由无探测能力的通用结论独立命题，未复制第三方题目。",
+      "reviewDigest": "7b5a890434e9eec005bcfbf048da8ea3e1476e12eef2894e8d75ef195f7b153b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-014",
+    "type": "single_choice",
+    "question": "在华为设备上，同一目的前缀、相同前缀长度、相同优先级、分别指向两个不同直连下一跳的两条 IPv6 静态路由，默认会怎样？",
+    "options": {
+      "A": "只保留先配置的一条，后配置的被忽略",
+      "B": "形成等价路由，报文按负载分担算法在两个下一跳之间分配",
+      "C": "后配置的路由覆盖先配置的路由",
+      "D": "两条都不生效，必须改用策略路由"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确：目的前缀、前缀长度和优先级都相同的多条静态路由构成等价路由，设备把它们同时下发到转发表，并按负载分担算法分配流量。A、C 错误：只有在优先级或前缀长度不同时才会出现只选其一的情况，等价条件下不会互相覆盖。D 错误：等价静态路由是受支持的正常用法，不需要改用策略路由。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "等价路由",
+      "负载分担"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-014",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.3（同一前缀的匹配关系）；等价路由与负载分担属于设备转发实现。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与同前缀匹配语义，结合等价转发行为独立命题，未复制第三方题目。",
+      "reviewDigest": "7f321a7a44ebd79edc2e65d294918596cd80c40c8a1360d31344ea4d95e6b9d9"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-015",
+    "type": "single_choice",
+    "question": "某路由器 IPv6 路由表中有三条路由：2001:db8:30::/48 指向下一跳 A，2001:db8:30:1::/64 指向下一跳 B，::/0 指向下一跳 C。收到目的地址为 2001:db8:30::5 的报文时，按最长前缀匹配应选择哪一条？",
+    "options": {
+      "A": "2001:db8:30:1::/64，因为 /64 比 /48 更具体",
+      "B": "::/0，因为缺省路由优先级最高",
+      "C": "三条路由形成等价分担，轮流转发",
+      "D": "2001:db8:30::/48，因为它是与目的地址匹配且前缀最长的一条"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确：把目的地址写成完整形式 2001:0db8:0030:0000:0000:0000:0000:0005。与 2001:db8:30:1::/64 比较时，第 4 个 16 位组目的地址为 0x0000，而该路由要求为 0x0001，不匹配；与 2001:db8:30::/48 比较时前 48 位完全一致，匹配；::/0 也能匹配但前缀最短。三者中匹配且前缀最长的是 /48。A 错误：该 /64 路由的第 4 组与目的地址不同，根本不匹配。B 错误：缺省路由前缀长度为 0，只有在没有更具体匹配时才使用，不是优先级最高。C 错误：前缀长度不同不构成等价路由。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "hard",
+    "tags": [
+      "IPv6",
+      "最长前缀匹配",
+      "路由选路"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-015",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.3（前缀长度决定匹配范围，最长前缀匹配）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与 RFC 4291 前缀匹配规则自行设计地址与选项，未复制第三方题目。",
+      "reviewDigest": "fcf492b764710aea8bb53a674f7d6d39b764ff84a1ca5f4992df51d01197ec7b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-016",
+    "type": "single_choice",
+    "question": "把一条汇总前缀的 IPv6 静态路由指向 NULL0 接口，主要目的是什么？",
+    "options": {
+      "A": "丢弃匹配该汇总前缀但在明细路由中不存在的流量，避免汇总引起的环路",
+      "B": "把匹配该前缀的流量复制到所有物理接口",
+      "C": "为汇总前缀提供一个真实可达的下一跳",
+      "D": "让该汇总前缀通过 OSPFv3 自动泛洪"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确：指向 NULL0 的静态路由是丢弃路由，常与明细路由配合使用：有明细的流量按明细转发，没有明细但仍落在汇总范围内的流量被丢弃，防止汇总黑洞造成环路。B 错误：NULL0 是丢弃接口，不做流量复制。C 错误：NULL0 不是可达的下一跳，报文在此被丢弃。D 错误：路由是否被泛洪取决于是否被引入动态协议，与指向 NULL0 无关。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "NULL0",
+      "路由汇总"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-016",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.3（汇总前缀的覆盖范围）；指向 NULL0 的丢弃路由属于设备实现。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲范围与汇总前缀覆盖关系独立命题，未复制第三方题目。",
+      "reviewDigest": "48dea451e9453d2afe8da6403a391e86fc72c2fa5050111fa82dd31c36fa15d1"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-017",
+    "type": "single_choice",
+    "question": "在华为设备上，同一目的前缀同时存在一条 IPv6 静态路由和一条 OSPFv3 路由，且管理员没有修改任何优先级，路由表通常优选哪一条？",
+    "options": {
+      "A": "静态路由，因为手工配置的路径更可靠",
+      "B": "两条形成等价路由，平均分担流量",
+      "C": "OSPFv3 路由，因为华为设备上 OSPFv3 的默认优先级为 10，优于静态路由的默认优先级 60",
+      "D": "两条都不优选，需要人工指定"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确：华为设备上 OSPFv3 的默认优先级为 10，静态路由的默认优先级为 60，数值越小越优先，因此同前缀时优选 OSPFv3 路由；静态路由只有在动态路由失效后才可能生效。A 错误：优先级比较与是否手工配置无关。B 错误：优先级不同不会形成等价路由。D 错误：优先级不同时有明确的优选结果，不需要人工指定。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "OSPFv3",
+      "优先级"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-017",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5340-ospfv3"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 5340 Section 2、4（OSPFv3 的路由计算）；题干已明确华为设备，默认优先级取值按该设备的公开行为。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与 OSPFv3 标准，结合题面明确的设备默认行为独立命题，未复制第三方题目。",
+      "reviewDigest": "0768c89d583e862528087412740905347cb7e0f8da5f6b94f50d9d19d3cf8a42"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-018",
+    "type": "single_choice",
+    "question": "为一条 IPv6 静态路由绑定 BFD 会话，主要解决什么问题？",
+    "options": {
+      "A": "提高该静态路由在路由表中的优先级",
+      "B": "在下一跳转发路径故障时快速检测并撤销该静态路由，缩短切换到备份路径的时间",
+      "C": "对该静态路由承载的报文进行加密",
+      "D": "替代邻居发现完成下一跳的链路层地址解析"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确：BFD 独立于路由协议，用周期报文快速检测转发路径是否可用，绑定到静态路由后可在链路故障时及时撤销该路由，使备份路由更快接管。A 错误：BFD 不改变路由优先级。C 错误：BFD 只做连通性检测，不提供加密。D 错误：链路层地址解析仍由邻居发现完成，BFD 不负责该功能。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "BFD",
+      "快速检测"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-018",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5880-bfd"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 5880 Section 3、6.8.4（BFD 独立于路由协议、检测时间由协商间隔与 Detect Mult 决定）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与 RFC 5880 的检测机制独立命题，未复制第三方题目。",
+      "reviewDigest": "b1d51b35f11e8e8af1768a348f9e525e455b6eadb760e0c0e885af7b12795ea0"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-019",
+    "type": "single_choice",
+    "question": "下列哪一种地址不能作为 IPv6 静态路由的下一跳？",
+    "options": {
+      "A": "组播地址 ff02::1",
+      "B": "对端直连接口的全球单播地址",
+      "C": "对端接口的链路本地地址并同时指定出接口",
+      "D": "不指定下一跳、只指定出接口为 NULL0"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确：组播地址代表一组接收者，不能唯一确定转发目标，因此不能作为静态路由的下一跳。B 错误：直连的全球单播地址是典型可用的下一跳。C 错误：链路本地地址配合出接口是合法配置。D 错误：指向 NULL0 时本来就不需要下一跳，属于丢弃路由的写法。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "下一跳",
+      "组播地址"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-019",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.3、2.5.6（单播与链路本地地址的表示与作用域）；组播地址不能作为单播下一跳。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与地址类型标准独立设计下一跳合法性的判断，未复制第三方题目。",
+      "reviewDigest": "b045f6bddd16b10501dbae99b15209d3df269497201e1f8d3a3e6c40859a689b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-020",
+    "type": "single_choice",
+    "question": "在华为设备上执行 display ipv6 routing-table 后看到如下条目：Destination : 2001:db8:40::  PrefixLength : 64  NextHop : FE80::1  Interface : GigabitEthernet0/0/1  Protocol : Static  Preference : 60  Cost : 0。对该条目解释正确的是？",
+    "options": {
+      "A": "这是一条由 OSPFv3 学到的路由",
+      "B": "该路由的下一跳是一个全球单播地址",
+      "C": "该路由的度量值为 60",
+      "D": "这是一条下一跳为链路本地地址的 IPv6 静态路由，出接口为 GigabitEthernet0/0/1"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确：Protocol 显示 Static，NextHop 为 FE80::1（链路本地地址），Interface 为 GigabitEthernet0/0/1，说明这是一条带出接口的静态路由。A 错误：Protocol 为 Static 而不是 OSPFv3。B 错误：FE80::/10 属于链路本地地址，不是全球单播地址。C 错误：60 是 Preference（优先级），Cost 字段为 0。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "路由表",
+      "命令输出"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-020",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.5.6（FE80::/10 为链路本地地址）；显示输出中的字段含义按设备命令语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与地址类型标准自行编造输出样例并独立解析，未复制第三方题目。",
+      "reviewDigest": "2c5007fcd9ca2df1f628af313edd00576c6791be6a46e26fd7c21f1cca5bcae8"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-021",
+    "type": "single_choice",
+    "question": "路由表中同时存在 ::/0 和 2001:db8:50::/64 两条路由，收到目的地址为 2001:db8:50::1 的报文时如何转发？",
+    "options": {
+      "A": "使用 ::/0，因为缺省路由对所有流量都有效",
+      "B": "两条路由等价分担",
+      "C": "使用 2001:db8:50::/64，因为最长前缀匹配优先，缺省路由只用于没有更具体匹配的流量",
+      "D": "报文被丢弃，因为存在两条匹配路由"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确：两条路由都能匹配目的地址，按最长前缀匹配应选前缀长度 64 的明细路由；缺省路由前缀长度为 0，只在没有更具体路由时使用。A 错误：缺省路由不是无条件优先。B 错误：前缀长度不同不构成等价路由，不能分担。D 错误：存在更具体匹配时正常转发，不会丢弃。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "easy",
+    "tags": [
+      "IPv6",
+      "缺省路由",
+      "最长前缀匹配"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-021",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.3（前缀长度为 0 时的匹配范围与最长前缀匹配）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与最长前缀匹配规则独立命题，未复制第三方题目。",
+      "reviewDigest": "60eb260d7cee94575287737ff5897058d3d194f5993ae374452c5692bac8d15f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-022",
+    "type": "single_choice",
+    "question": "为一条 IPv6 静态路由配置 tag，主要用途是什么？",
+    "options": {
+      "A": "表示该路由经过的跳数",
+      "B": "给路由打上标记，便于路由策略按 tag 匹配，从而控制路由的引入、发布或优先级",
+      "C": "指定该路由所属的 VLAN",
+      "D": "作为路由协议的认证标识"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确：tag 是路由的附加标记，本身不影响转发，配合路由策略可以实现按标记过滤、修改优先级或在引入动态协议时做区分。A 错误：跳数由协议的度量值表示，不是 tag。C 错误：VLAN 由二层标签标识，与路由 tag 无关。D 错误：认证由协议的认证机制完成，tag 不承担认证功能。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "easy",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "tag",
+      "路由策略"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-022",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.3（目的前缀与路由条目语义）；tag 与路由策略的配合属于设备实现。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲范围与路由标记的通用用途独立命题，未复制第三方题目。",
+      "reviewDigest": "d2b462219fd936669bebe15ef5cd5ee974827e5c5a69dc06ccf3f3e4f504fb9b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-023",
+    "type": "single_choice",
+    "question": "需要让一条 IPv6 静态路由只匹配目的地址 2001:db8:60::1 这一台主机，前缀长度应配置为多少？",
+    "options": {
+      "A": "128",
+      "B": "64",
+      "C": "48",
+      "D": "0"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确：前缀长度 128 表示全部 128 位都参与匹配，只有目的地址与 2001:db8:60::1 完全相同时才命中，等价于一条主机路由。B 错误：/64 会匹配整个 2001:db8:60::/64 网段，范围远大于单台主机。C 错误：/48 覆盖范围更大。D 错误：前缀长度 0 是缺省路由，会匹配所有目的地址。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "easy",
+    "tags": [
+      "IPv6",
+      "主机路由",
+      "前缀长度"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-023",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.3（前缀长度与主机位的对应关系）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与 RFC 4291 的前缀长度定义自行计算并命题，未复制第三方题目。",
+      "reviewDigest": "b47fe654bc427b248d863db9bac7b1843257773f718f426c0f7970f469144e94"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-024",
+    "type": "single_choice",
+    "question": "在华为设备上，一条 IPv6 静态路由的下一跳因链路故障不可达时，该路由通常处于什么状态？",
+    "options": {
+      "A": "仍然活跃，并按该下一跳正常转发",
+      "B": "路由处于不活跃状态，不会被优选和下发到转发表，下一跳恢复可达后重新生效",
+      "C": "设备自动删除该静态路由的配置",
+      "D": "该静态路由自动转换为直连路由"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确：静态路由的下一跳不可达时无法解析出有效的邻接信息，路由进入不活跃状态，不会被下发到转发表；下一跳恢复后重新参与选路。A 错误：下一跳不可达时无法完成封装转发。C 错误：配置仍然保留，只是路由不活跃。D 错误：静态路由不会因为下一跳故障变成直连路由。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "下一跳不可达"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-024",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.5.6（下一跳地址的链路可达性）；路由活跃状态按题干明确的华为设备行为。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与地址可达性语义，结合题面明确的设备行为独立命题，未复制第三方题目。",
+      "reviewDigest": "bca1a905e50463c76a3794514af5817a41d15c789e2c621eec3852db3b725984"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-025",
+    "type": "single_choice",
+    "question": "与策略路由（PBR）相比，IPv6 静态路由的选路特点是什么？",
+    "options": {
+      "A": "可以按源地址、端口等条件为不同流量选择不同路径",
+      "B": "优先于路由表中的所有其他条目被查找",
+      "C": "只对本机产生的流量生效",
+      "D": "按目的前缀匹配并影响整张路由表的选择，对所有匹配该前缀的流量生效，不能按源地址等条件分流"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确：静态路由是目的前缀驱动的普通路由，进入路由表后对所有匹配该前缀的流量统一生效，无法按源地址等条件区分。A 错误：按源地址等条件分流是策略路由的能力。B 错误：静态路由与其他路由一样参与最长前缀匹配，并不优先于所有条目。C 错误：静态路由对经过设备的转发流量同样生效。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "策略路由",
+      "选路"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-025",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.3（按目的前缀匹配的路由模型）；策略路由按源地址分流属于设备功能。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与目的前缀驱动的路由模型独立命题，未复制第三方题目。",
+      "reviewDigest": "5a1bc7f6f8cd18be661dafae77ef6bfb268e55f7bd26e57cf10cebb7a446f017"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-026",
+    "type": "single_choice",
+    "question": "IPv6 静态路由与 OSPFv3 同时存在时，若希望静态路由只作为备份路径，正确的配置思路是？",
+    "options": {
+      "A": "把静态路由的优先级数值配置得比 OSPFv3 更小",
+      "B": "把静态路由的下一跳改为 NULL0",
+      "C": "把静态路由的优先级数值配置得比 OSPFv3 更大，使动态路由优先生效",
+      "D": "在接口上关闭 OSPFv3 使能"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确：优先级数值越小越优先，把静态路由的优先级数值调大，可以保证 OSPFv3 路由正常时静态路由不被优选，只有在动态路由失效后才启用。A 错误：数值更小会让静态路由抢占动态路由，与备份目的相反。B 错误：指向 NULL0 会丢弃流量，无法作为备份路径。D 错误：关闭接口的 OSPFv3 使能会破坏动态路由，而不是形成主备。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "备份路由",
+      "优先级"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-026",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5340-ospfv3"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 5340 Section 2、4（OSPFv3 参与 IPv6 选路）；优先级数值比较属设备选路语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与 OSPFv3 标准，结合优先级数值语义独立命题，未复制第三方题目。",
+      "reviewDigest": "44f8d42e191b71af7a8520bcb0a07e896c7d0507117e17a7d0a6bc0bc7563077"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-027",
+    "type": "single_choice",
+    "question": "分支机构只有一条出口链路，希望所有在路由表中找不到更具体匹配的 IPv6 流量都送往 ISP。使用 ::/0 而不是 2000::/3 作为缺省路由的原因是？",
+    "options": {
+      "A": "::/0 匹配所有目的地址，是真正的缺省路由；2000::/3 只覆盖全球单播地址空间，会漏掉其他类型的地址",
+      "B": "2000::/3 的前缀长度更长，无法作为缺省路由下发",
+      "C": "::/0 的优先级比 2000::/3 高",
+      "D": "2000::/3 只能匹配链路本地地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确：::/0 前缀长度为 0，任何目的地址都能匹配；2000::/3 只覆盖以 001 开头的全球单播地址，链路本地、ULA 等地址不在其中，用它做缺省路由会漏流量。B 错误：2000::/3 可以配置，只是覆盖范围不等于全部地址。C 错误：路由优先级与目的前缀的写法无关。D 错误：2000::/3 覆盖的是全球单播地址，链路本地地址属于 FE80::/10。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "hard",
+    "tags": [
+      "IPv6",
+      "缺省路由",
+      "全球单播地址"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-027",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.4（地址类型识别，2000::/3 为全球单播）；缺省路由前缀长度为 0。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与地址类型划分标准独立设计对比选项，未复制第三方题目。",
+      "reviewDigest": "77e66258b9a651ee1023875a45384f5e57fa62b541ae3f9b5077bc9a4095c392"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-028",
+    "type": "single_choice",
+    "question": "在华为设备上，IPv6 静态路由的优先级（Preference）取值和作用，下列说法正确的是？",
+    "options": {
+      "A": "取值范围 0-255，数值越大越优先",
+      "B": "取值范围 1-255，数值越小越优先，用于在多条同前缀路由之间选择",
+      "C": "只用于静态路由之间比较，与动态路由无关",
+      "D": "由目的前缀长度自动决定"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确：手工配置的静态路由优先级取值范围为 1-255，数值越小越优先，与动态路由的优先级在同一尺度上比较，从而决定谁进入路由表。A 错误：方向相反，且静态路由优先级不能取 0，0 保留给直连路由。C 错误：优先级是不同协议路由之间比较的统一尺度。D 错误：前缀长度决定最长前缀匹配，与优先级是两个不同维度。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "优先级"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-028",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.3（前缀长度与选路维度）；优先级取值范围按题干明确的华为设备行为。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与路由优先级语义，结合题面明确的设备取值独立命题，未复制第三方题目。",
+      "reviewDigest": "219739c8cc84c1b15669c814a5da6e669c0a03623983059d174201e114e9821c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-029",
+    "type": "single_choice",
+    "question": "一条 IPv6 静态路由的下一跳需要依靠缺省路由递归解析，当缺省路由消失时会出现什么后果？",
+    "options": {
+      "A": "该静态路由会自动改为直连路由",
+      "B": "该静态路由会自动改指向 NULL0",
+      "C": "递归解析失败，依赖该缺省路由的静态路由也随之失效，可能引起连锁的路由震荡",
+      "D": "只有 /128 的静态路由会受影响"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确：下一跳非直连时静态路由依赖递归解析，缺省路由消失会使递归结果不可达，相关静态路由随之失效；如果多条路由都依赖同一条缺省路由，就会出现连锁失效。A、B 错误：静态路由不会自动改变类型或下一跳。D 错误：递归依赖与静态路由的前缀长度无关。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "hard",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "路由递归",
+      "缺省路由"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-029",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.3（前缀为 0 的缺省路由覆盖全部目的地址）；递归依赖关系属通用路由迭代行为。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与缺省路由覆盖语义，结合路由迭代的通用行为独立命题，未复制第三方题目。",
+      "reviewDigest": "390226d9188aee54fa26b3340160668729a8d5c3dc13b86d02e32d48cd2c5f73"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-030",
+    "type": "single_choice",
+    "question": "企业双出口场景：主链路带宽大，备用链路带宽小。希望主链路正常时全部流量走主链路，主链路故障后才切换到备用链路。最合适的方案是？",
+    "options": {
+      "A": "配置两条 ::/0 静态路由，主链路的优先级数值更小，备用链路的优先级数值更大",
+      "B": "配置两条优先级相同的 ::/0 静态路由，让两条链路平均分担",
+      "C": "只配置主链路的 ::/0 路由，故障时再手工切换",
+      "D": "把备用链路配置为指向 NULL0 的丢弃路由"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确：两条缺省路由中优先级数值更小的一条被优选，另一条作为备份保留，主链路失效后备份路由自动接管，符合主备需求。B 错误：优先级相同会形成等价分担，带宽较小的备用链路会被压满。C 错误：手工切换依赖人工，故障恢复时间不可控。D 错误：指向 NULL0 会直接丢弃流量，起不到备份作用。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "双出口",
+      "主备"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-030",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.3（::/0 的匹配范围）；主备切换通过优先级数值实现，属设备选路语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与缺省路由语义，结合双出口主备的设计实践独立命题，未复制第三方题目。",
+      "reviewDigest": "8b23a82c2da970c6f2e00dd1a700c88439463d87cad90b27d9f21342ce025c12"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-031",
+    "type": "single_choice",
+    "question": "在点到点链路上只指定出接口、不指定下一跳来配置 IPv6 静态路由，通常可以正常工作的原因是？",
+    "options": {
+      "A": "点到点链路使用广播方式解析下一跳的链路层地址",
+      "B": "点到点链路上的静态路由会自动转换为直连路由",
+      "C": "点到点链路不需要链路层封装",
+      "D": "点到点链路只有一个对端，出接口即可唯一确定转发路径和邻接"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确：点到点链路两端一一对应，报文从该接口发出就只有一个可能的接收者，因此只指定出接口就能唯一确定转发路径。A 错误：点到点链路不存在广播型链路上多邻居选择的问题。B 错误：静态路由不会因链路类型变成直连路由。C 错误：点到点链路仍然需要链路层封装，只是不需要解析多个邻居。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "点到点链路",
+      "出接口"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-031",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.5.6（链路内地址与单跳邻居关系）；点到点链路只配出接口的转发依据属设备行为。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与点到点链路单邻居的转发关系独立命题，未复制第三方题目。",
+      "reviewDigest": "780e2d5c0e7e91435a92c8e443d5d180ee3f65ba731dd1606b8686bef34d9a54"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-032",
+    "type": "single_choice",
+    "question": "关于 IPv6 静态路由的工作方式，下列说法正确的是？",
+    "options": {
+      "A": "通过 Hello 报文与对端协商路径参数",
+      "B": "不发送路由协议报文、不建立邻居关系，路由条目由管理员配置后直接参与选路",
+      "C": "需要与对端建立 TCP 连接后才能下发路由",
+      "D": "依赖链路状态数据库计算最短路径树"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确：静态路由没有任何协议报文交互，也不建立邻居关系，配置完成后直接进入路由表参与选路。A 错误：Hello 报文是 OSPF 等动态协议使用的。C 错误：静态路由不建立 TCP 连接，BGP 才使用 TCP。D 错误：链路状态数据库与最短路径树计算属于 OSPF、IS-IS 等链路状态协议。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "easy",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "邻居关系"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-032",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.3（目的前缀路由模型）；不建立邻居、不交互协议报文属静态路由的通用语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与静态路由无协议交互的通用结论独立命题，未复制第三方题目。",
+      "reviewDigest": "77f5cecd2e0d19e9a9ddf53e4de230948cf03d6b333091713d16548fc0f4ea3f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-033",
+    "type": "single_choice",
+    "question": "在华为设备上把一条 IPv6 静态路由配置为丢弃路由时，出接口写为 NULL0，下一跳应如何填写？",
+    "options": {
+      "A": "必须填写下一跳 ::/0",
+      "B": "必须填写下一跳 127.0.0.1",
+      "C": "不需要填写下一跳，直接指定出接口 NULL0 即可",
+      "D": "必须填写 NULL0 接口的链路本地地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确：NULL0 是丢弃接口，报文到达该逻辑接口即被丢弃，不存在真实下一跳，因此配置时只指定出接口 NULL0。A 错误：::/0 是缺省目的前缀的写法，不是下一跳。B 错误：127.0.0.1 是 IPv4 环回地址，与 IPv6 配置无关。D 错误：NULL0 没有链路本地地址，也不需要邻接。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "NULL0",
+      "配置语义"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-033",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.3（缺省前缀与地址写法）；NULL0 丢弃路由的配置语义按题干明确的华为设备行为。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与前缀写法标准，结合题面明确的设备配置语义独立命题，未复制第三方题目。",
+      "reviewDigest": "c19a9939448dbd7772380693ef1ce8ab5f1529dfcb3e194897577971bc7bd1e5"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-034",
+    "type": "single_choice",
+    "question": "在 R1 上配置了 ipv6 route-static 2001:db8:80:: 64 2001:db8:12::2，但 R1 的 IPv6 路由表中没有出现该路由。下列哪一项最不可能是原因？",
+    "options": {
+      "A": "下一跳 2001:db8:12::2 不可达",
+      "B": "出接口的物理状态为 down",
+      "C": "目的前缀或前缀长度配置错误",
+      "D": "该静态路由需要等待 OSPFv3 邻居建立完成后才会生效"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确（最不可能）：静态路由不依赖任何动态协议的邻居关系，不需要等待 OSPFv3 邻居建立。A 是可能原因：下一跳不可达时路由不活跃，不会出现在转发表中。B 是可能原因：接口 down 时下一跳无法解析。C 是可能原因：前缀写错会导致路由与预期不符。因此四项中最不可能的是 D。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "hard",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "故障定位"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-034",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.3（目的前缀与匹配条件）；静态路由不依赖邻居关系属通用语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与静态路由不依赖邻居的通用结论设计反向设问，未复制第三方题目。",
+      "reviewDigest": "132f697a184e7b047062914281f623595782adebaba1bbbeca8b6aba29a87040"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-035",
+    "type": "single_choice",
+    "question": "一条 IPv6 静态路由的目的前缀恰好与本机某个接口所在的直连网段相同，通常情况下会怎样？",
+    "options": {
+      "A": "直连路由优先，静态路由不会被优选，无法按预期转发",
+      "B": "静态路由优先，覆盖直连路由",
+      "C": "两条路由形成等价分担",
+      "D": "设备会拒绝该静态路由的配置并报错"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确：直连路由的优先级高于静态路由，同一前缀时直连路由被优选，静态路由不会进入转发表，因此不能指望用它改变该网段的转发路径。B 错误：静态路由的优先级低于直连路由。C 错误：优先级不同不构成等价路由。D 错误：配置通常可以下发，只是不会被优选。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "直连路由",
+      "优先级"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-035",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.3（同前缀条目的匹配关系）；直连路由与静态路由的优先级比较属设备选路语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与同前缀选路关系，结合直连优先的通用规则独立命题，未复制第三方题目。",
+      "reviewDigest": "009b51cd49b22bfd775adf235441598c39976e2b11650fa6fa2ea62767480ed9"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-036",
+    "type": "single_choice",
+    "question": "IPv6 静态路由的下一跳是直连网段中的全球单播地址时，设备如何获得该下一跳的链路层地址？",
+    "options": {
+      "A": "通过 ARP 请求获取",
+      "B": "通过 DHCPv6 服务器分配",
+      "C": "通过 IPv6 邻居发现（ND）解析，解析成功后才能封装并转发",
+      "D": "必须手工配置静态 MAC 地址才能转发"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确：IPv6 使用邻居发现完成地址解析和邻接维护，静态路由的下一跳同样要通过 ND 获得链路层地址后才能封装转发。A 错误：ARP 用于 IPv4，IPv6 不使用 ARP。B 错误：DHCPv6 用于地址等参数分配，不负责邻居解析。D 错误：正常情况下由 ND 动态解析，不需要手工配置静态 MAC。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "邻居发现",
+      "下一跳"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-036",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.5.6（单播地址的链路转发）；下一跳链路层地址由 IPv6 邻居发现解析，属通用协议行为。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与 IPv6 地址转发语义，结合邻居发现的通用行为独立命题，未复制第三方题目。",
+      "reviewDigest": "e64841f33da6e50f61574aaca91e55a8c83345bdc34746cd1a47a7b9800cb228"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-037",
+    "type": "single_choice",
+    "question": "与 IPv4 静态路由相比，IPv6 静态路由在配置上的主要差异是？",
+    "options": {
+      "A": "IPv6 静态路由不需要指定下一跳或出接口",
+      "B": "IPv6 使用冒号十六进制地址加前缀长度表示目的网络，命令为 ipv6 route-static，下一跳是 IPv6 地址",
+      "C": "IPv6 静态路由仍使用点分十进制子网掩码",
+      "D": "IPv6 静态路由每条只能配置一个目的前缀，不能配置多条"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确：IPv6 地址采用冒号十六进制表示，目的网络写成“前缀/前缀长度”，配置命令为 ipv6 route-static，下一跳也是 IPv6 地址。A 错误：IPv6 静态路由同样需要下一跳或出接口。C 错误：IPv6 用前缀长度而不是点分十进制掩码。D 错误：可以配置任意多条静态路由。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "easy",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "配置命令"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-037",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.3（地址/前缀长度的写法）；配置命令形式按设备命令语法。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与 IPv6 地址表示标准独立设计配置差异题，未复制第三方题目。",
+      "reviewDigest": "2fabfe45cc29ee0b2aa75711f621b29bbc6b8593f0d4f4f8cc30232e8608fca0"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-038",
+    "type": "single_choice",
+    "question": "希望某目的前缀的流量在两条等价链路之间按 3:1 的比例分担，仅使用 IPv6 静态路由能否直接实现？",
+    "options": {
+      "A": "可以，配置两条 Cost 分别为 3 和 1 的静态路由即可",
+      "B": "可以，配置两条优先级分别为 3 和 1 的静态路由即可",
+      "C": "可以，配置三条走链路一、一条走链路二即可按 3:1 分担",
+      "D": "不能直接指定权重比例，等价静态路由按负载分担算法分配，需要借助策略路由或动态协议的度量等手段实现比例控制"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确：等价静态路由之间是等价的，设备按自身的负载分担算法分配流量，配置中没有权重参数，无法直接表达 3:1。A 错误：Cost 不同不会让两条静态路由按比例分担。B 错误：优先级不同只会优选数值小的一条，另一条成为备份。C 错误：多条等价路由只会增加等价路径数量，不能保证 3:1 的流量比例。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "hard",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "负载分担",
+      "策略路由"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-038",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.3（等价前缀的匹配关系）；等价转发的权重控制属设备实现。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与等价前缀语义，结合静态路由无权重参数的通用事实独立命题，未复制第三方题目。",
+      "reviewDigest": "b8d7d20138e28bb0436a97615c745992d7c8017449c60738c34a3b571ab1556c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-039",
+    "type": "single_choice",
+    "question": "与 OSPFv3 相比，IPv6 静态路由在路由收敛方面的主要不足是？",
+    "options": {
+      "A": "无法感知拓扑变化，链路故障后只能依靠备份路由或人工干预，收敛依赖 BFD、NQA 等外部检测机制",
+      "B": "需要泛洪链路状态报文，占用较多带宽",
+      "C": "必须与对端建立邻居关系后才能下发路由",
+      "D": "不能与动态路由协议同时存在"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确：静态路由没有拓扑感知和重算能力，链路变化不会被自动发现，需要备份路由或 BFD、NQA 等机制触发切换。B 错误：泛洪链路状态报文是 OSPF 等链路状态协议的特征。C 错误：静态路由不建立邻居关系。D 错误：静态路由可以与动态路由共存，按优先级参与选路。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "收敛",
+      "OSPFv3"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-039",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5340-ospfv3"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 5340 Section 2、4（OSPFv3 的路由计算与泛洪机制）；静态路由无拓扑感知属通用语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与 OSPFv3 标准对比静态路由的收敛能力独立命题，未复制第三方题目。",
+      "reviewDigest": "c4334dc4720f43c8cef294995a28a25597843150d26a9e935982671d6c138b5a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-040",
+    "type": "single_choice",
+    "question": "在华为设备上查看 IPv6 路由表，某条目显示 NextHop 为 ::、Interface 为 NULL0。对该条目的解释正确的是？",
+    "options": {
+      "A": "下一跳尚未解析完成，路由暂不可用",
+      "B": "这是一条指向 NULL0 的丢弃路由，匹配该前缀的报文会被丢弃",
+      "C": "该路由由路由器通告（RA）自动生成",
+      "D": "该条目是直连路由"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确：Interface 为 NULL0 表示报文被送到丢弃接口，NextHop 为 :: 说明没有真实下一跳，这正是黑洞或丢弃静态路由的显示形式。A 错误：下一跳未解析时通常表现为路由不活跃，而不是出接口为 NULL0。C 错误：RA 生成的缺省路由出接口是真实接口，不会指向 NULL0。D 错误：直连路由的出接口为物理或逻辑接口，且不显示为 NULL0。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "NULL0",
+      "命令输出"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-040",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.3（未指定地址与缺省前缀的区别）；NULL0 出接口的显示含义按设备命令语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与地址语义，结合丢弃路由的显示形式独立命题，未复制第三方题目。",
+      "reviewDigest": "253516caa3675e536ee843a900e519315701fc58a73f58873871ead192feda5b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-041",
+    "type": "single_choice",
+    "question": "一台路由器上配置了指向下一跳的 IPv6 静态路由，且该下一跳地址可以 ping 通，但业务流量仍然不通。下列分析最合理的是？",
+    "options": {
+      "A": "下一跳能 ping 通说明转发一定正常，问题必然在应用侧",
+      "B": "静态路由配置一定写错了，应删除重配",
+      "C": "下一跳可达只说明到达下一跳的路径正常，若目的前缀缺少明细路由或对端缺少回程路由，业务仍然不通",
+      "D": "必须重启设备才能让静态路由生效"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确：ping 通下一跳只验证了到下一跳的可达性，端到端业务还需要去程匹配到正确的目的前缀、对端具备回程路由，任一环节缺失都会导致业务不通。A 错误：下一跳可达不等于端到端可达。B 错误：配置未必有错，应先检查目的前缀匹配与回程路由。D 错误：静态路由配置后即可参与选路，不需要重启。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "回程路由",
+      "故障定位"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-041",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.5.6（下一跳地址的可达性仅覆盖链路范围）；端到端可达需去程与回程同时成立。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与端到端可达性分析独立命题，未复制第三方题目。",
+      "reviewDigest": "2ff12943348c1d67942c24728ff698c84489f02a58078bce366daef614dfa8b9"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-042",
+    "type": "single_choice",
+    "question": "在 IPv6 网络中，静态路由是否会自动把明细路由汇总成一条汇总路由？",
+    "options": {
+      "A": "不会，静态路由逐条配置，需要手工配置汇总前缀，并可配合指向 NULL0 的丢弃路由防止汇总黑洞",
+      "B": "会，默认按 /48 自动汇总",
+      "C": "会，但只在 OSPFv3 进程中汇总",
+      "D": "会，汇总后明细路由自动从路由表删除"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确：静态路由没有自动汇总能力，每条前缀都要单独配置；需要汇总时应手工写汇总前缀，并用 NULL0 丢弃路由处理汇总范围内的空洞。B 错误：静态路由不会自动按固定长度汇总。C 错误：汇总行为与是否运行 OSPFv3 无关。D 错误：静态路由不会因为配置了汇总而删除明细路由。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "路由汇总"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-042",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.3（汇总前缀覆盖的地址范围）；静态路由无自动汇总能力属通用语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与静态路由逐条配置的通用结论独立命题，未复制第三方题目。",
+      "reviewDigest": "2a66d7ee8d9d874bd1f8d5a40f210001261ea04d2facc0c292d1b777e1689a95"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-043",
+    "type": "single_choice",
+    "question": "在同时运行 IPv4 和 IPv6 的双栈路由器上，IPv6 静态路由与 IPv4 静态路由的关系是？",
+    "options": {
+      "A": "共用同一张路由表，按前缀长度统一比较",
+      "B": "配置 IPv4 静态路由后会自动生成对应的 IPv6 静态路由",
+      "C": "IPv6 静态路由的优先级总是高于 IPv4 静态路由",
+      "D": "两者分别进入 IPv6 和 IPv4 路由表，相互独立，IPv6 静态路由不影响 IPv4 的选路，反之亦然"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确：双栈设备维护彼此独立的 IPv4 与 IPv6 路由表和转发表，两个地址族的静态路由互不影响。A 错误：两个地址族的路由表是分开的。B 错误：IPv4 静态路由不会自动派生 IPv6 路由。C 错误：不同地址族的优先级不放在一起比较。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "双栈",
+      "静态路由",
+      "路由表"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-043",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.2（IPv4 与 IPv6 地址的独立表示）；双栈路由表的分离属设备实现。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与 IPv4/IPv6 地址体系相互独立的结论命题，未复制第三方题目。",
+      "reviewDigest": "92a0ceb402e744e8377a983ac50fecdd5750b7ea50eb47519c5dc293b42e794f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-044",
+    "type": "single_choice",
+    "question": "R1 与 R2 直连，R1 配置 ipv6 route-static 2001:db8:90:: 64 2001:db8:12::2（R2 接口地址），R1 到该前缀的流量可以到达 R2，但 R2 上没有 2001:db8:90::/64 的回程路由。业务现象是？",
+    "options": {
+      "A": "R1 上的静态路由不生效，流量在 R1 就被丢弃",
+      "B": "R1 能把报文送到 R2，但 R2 无法把回应报文送回，业务不通",
+      "C": "R2 收到报文后会自动学习回程静态路由",
+      "D": "R1 会收到 ICMPv6 重定向并自动修正路由"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确：R1 的去程静态路由有效，报文能到达 R2；但 R2 缺少回程路由，回应报文无法返回，端到端业务仍然不通，这属于典型的单向路由问题。A 错误：去程路由有效，报文不会在 R1 被丢弃。C 错误：静态路由不会因为收到报文而自动生成。D 错误：ICMPv6 重定向用于提示同链路存在更优下一跳，不能自动补齐回程路由。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "hard",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "单向路由",
+      "故障定位"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-044",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.3（目的前缀匹配）；单向可达与回程缺失的判断属故障定位实践。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与去程/回程双向可达的分析方法独立命题，未复制第三方题目。",
+      "reviewDigest": "a4734ef131861fcb5f4a92293e18306d5c5c406ebfb2dd61d023878765ecb9c2"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-1-1-045",
+    "type": "single_choice",
+    "question": "为一条 IPv6 静态路由同时指定出接口和下一跳，相比只指定其中一项的好处是？",
+    "options": {
+      "A": "可以省略目的前缀，只按出接口转发",
+      "B": "可以自动形成等价路由，提高带宽利用率",
+      "C": "同时限定出接口和下一跳，避免下一跳被递归解析到其他链路，配置意图更明确、转发更可控",
+      "D": "可以减小前缀长度，扩大匹配范围"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确：同时给出出接口和下一跳，等于明确限定报文的发出接口和邻接，下一跳不会被递归到其他链路，适合多链路或地址规划复杂的场景。A 错误：目的前缀是静态路由的必备要素。B 错误：等价路由由多条同前缀、同优先级的路由形成，与是否同时指定出接口和下一跳无关。D 错误：前缀长度决定匹配范围，与出接口、下一跳的写法无关。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "出接口",
+      "路由递归"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-1-1-045",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」，对应三级目录 hcip831-3-1-1。技术依据 RFC 4291 Section 2.5.6（链路本地地址与出接口的绑定关系）；同时指定出接口和下一跳的转发语义属设备行为。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与出接口/下一跳绑定关系独立命题，未复制第三方题目。",
+      "reviewDigest": "55321233ea6970fd42147dbcd7e934ceaff89226a31a9fdfe979d71cc57a7613"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-2-1-001",
+    "type": "single_choice",
+    "question": "OSPFv3 中新增的、用于在区域内通告 IPv6 前缀的 LSA 类型是？",
+    "options": {
+      "A": "Intra-Area-Prefix LSA（Type 9）",
+      "B": "Summary LSA（Type 3）",
+      "C": "AS-external LSA（Type 5）",
+      "D": "Network LSA（Type 2）"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确：OSPFv3 把前缀与拓扑分离，区域内前缀由新增的 Intra-Area-Prefix LSA（Type 9）承载，它关联到 Router-LSA 或 Network-LSA。B 错误：Type 3 用于区域间路由的通告。C 错误：Type 5 承载自治系统外部路由。D 错误：Type 2 描述广播网段上的 DR 与邻接关系，不承载 IPv6 前缀。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "LSA",
+      "Type 9"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5340-ospfv3"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」，对应三级目录 hcip831-3-2-1。技术依据 RFC 5340 Section 2、4（新增 Intra-Area-Prefix LSA，前缀与拓扑分离）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与 RFC 5340 的 LSA 类型定义独立命题，未复制第三方题目。",
+      "reviewDigest": "c18383b52120492612ed16b15c189bb42d6383bb7489141aae392e086a8690f4"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-2-1-002",
+    "type": "single_choice",
+    "question": "OSPFv3 在广播型链路上发送 Hello 报文时使用的目的地址是？",
+    "options": {
+      "A": "ff02::1",
+      "B": "ff02::2",
+      "C": "ff02::9",
+      "D": "ff02::5（AllSPFRouters）"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确：OSPFv3 的 Hello 报文发往 AllSPFRouters 组播地址 ff02::5，DR/BDR 另外监听 ff02::6（AllDRouters）。A 错误：ff02::1 是链路本地范围的所有节点组播地址。B 错误：ff02::2 是所有路由器组播地址。C 错误：ff02::9 是 RIPng 使用的组播地址。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "easy",
+    "tags": [
+      "OSPFv3",
+      "Hello",
+      "组播地址"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-002",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5340-ospfv3"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」，对应三级目录 hcip831-3-2-1。技术依据 RFC 5340 Section 4（OSPFv3 报文目的地址，AllSPFRouters 为 ff02::5）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与 OSPFv3 报文规范独立命题，未复制第三方题目。",
+      "reviewDigest": "f5a165becef4bbdc47aa3205b4aad253ec513de9f7ab5599beff4cf6ca53f67f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-2-1-003",
+    "type": "single_choice",
+    "question": "在华为设备上为只配置了 IPv6 地址的设备运行 OSPFv3 进程，关于 Router ID 的说法正确的是？",
+    "options": {
+      "A": "OSPFv3 使用 128 位地址作为 Router ID",
+      "B": "OSPFv3 会自动用接口的链路本地地址派生 Router ID",
+      "C": "OSPFv3 仍使用 32 位 Router ID，若既没有手工配置也没有可借用的 IPv4 地址，进程无法正常工作，需要手工指定",
+      "D": "OSPFv3 不需要 Router ID，可以省略"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确：OSPFv3 沿用 32 位 Router ID 标识路由器，纯 IPv6 环境下若没有 IPv4 地址可借用，必须手工配置，否则进程无法正常运行。A 错误：Router ID 仍是 32 位，不是 128 位。B 错误：链路本地地址不会用来自动派生 Router ID。D 错误：Router ID 是 OSPFv3 的必备参数。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "Router ID",
+      "进程"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-003",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5340-ospfv3"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」，对应三级目录 hcip831-3-2-1。技术依据 RFC 5340 Section 2、4（OSPFv3 仍使用 32 位 Router ID）；题干已明确华为设备。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与 OSPFv3 的 Router ID 定义，结合题面明确的设备行为独立命题，未复制第三方题目。",
+      "reviewDigest": "ba65100a8e283423d2d049aaea9ec200124c40aecf01e8a87e631703ab3b35c4"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-2-1-004",
+    "type": "single_choice",
+    "question": "OSPFv3 的报文认证与 OSPFv2 相比，主要区别是？",
+    "options": {
+      "A": "OSPFv3 在报文头中保留明文口令字段",
+      "B": "OSPFv3 报文头不再定义认证字段，依赖 IPv6 的 IPsec（AH/ESP）提供认证与加密",
+      "C": "OSPFv3 在报文头中保留 MD5 认证字段",
+      "D": "OSPFv3 完全不支持任何形式的认证"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确：OSPFv3 去掉了 OSPFv2 报文头中的认证字段，改由 IPv6 层的 IPsec（AH 或 ESP）提供认证和加密能力。A、C 错误：OSPFv3 报文头中没有口令或 MD5 认证字段。D 错误：OSPFv3 可以通过 IPsec 实现认证，并非不支持认证。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "hard",
+    "tags": [
+      "OSPFv3",
+      "认证",
+      "IPsec"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-004",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5340-ospfv3"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」，对应三级目录 hcip831-3-2-1。技术依据 RFC 5340 Section 2、4（OSPFv3 移除报文头认证字段，依赖 IPsec）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与 RFC 5340 的认证机制调整独立命题，未复制第三方题目。",
+      "reviewDigest": "027b218939369ea731861e72dc4715bf98b84029d925eda7ec31a0aa068b7604"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-2-1-005",
+    "type": "single_choice",
+    "question": "OSPFv3 在 Hello 报文中携带 Instance ID，其主要作用是？",
+    "options": {
+      "A": "允许同一条链路上运行多个 OSPFv3 实例，接收方按 Instance ID 区分，只与相同实例建立邻居",
+      "B": "标识该接口所属的区域号",
+      "C": "用于 DR/BDR 的选举比较",
+      "D": "表示本机的 Router ID"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确：Instance ID 用于在同一条链路上复用多个 OSPFv3 实例，只有 Instance ID 相同的报文才会被对应实例处理。B 错误：区域号由 Hello 中的 Area ID 字段标识。C 错误：DR/BDR 选举比较接口优先级和 Router ID。D 错误：Router ID 在 Hello 中有独立字段。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "Instance ID",
+      "多实例"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-005",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5340-ospfv3"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」，对应三级目录 hcip831-3-2-1。技术依据 RFC 5340 Section 4（Hello 与报文头中的 Instance ID，用于同链路多实例复用）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与 RFC 5340 的 Instance ID 字段语义独立命题，未复制第三方题目。",
+      "reviewDigest": "f0fa16e57a5f6fd48f3728ff95746b4c4c9d2b465e0d08005313bab882dcb025"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-2-1-006",
+    "type": "single_choice",
+    "question": "OSPFv3 在广播网络上选举 DR/BDR 时，比较的依据是？",
+    "options": {
+      "A": "接口 IPv6 地址最大者优先",
+      "B": "链路本地地址最小者优先",
+      "C": "Router ID 最大者一定当选，与接口优先级无关",
+      "D": "先比较接口的 DR 优先级，优先级相同再比较 Router ID，与接口的 IPv6 地址无关"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确：DR/BDR 选举先比较接口 DR 优先级（大者优先），优先级相同再比较 Router ID（大者优先），接口 IPv6 地址不参与比较。A、B 错误：接口地址不参与 DR 选举。C 错误：优先级的作用先于 Router ID，优先级为 0 的接口不参与选举。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "DR 选举",
+      "优先级"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-006",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5340-ospfv3"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」，对应三级目录 hcip831-3-2-1。技术依据 RFC 5340 Section 2、4（OSPFv3 的 DR/BDR 选举沿用优先级与 Router ID）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与 OSPFv3 的 DR 选举规则独立命题，未复制第三方题目。",
+      "reviewDigest": "a2c967f23b14bce31feff7fe6afe96b408c3ed50def7eaf212db00d8b8f084ee"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-2-1-007",
+    "type": "single_choice",
+    "question": "在华为设备上，要让接口 GigabitEthernet0/0/1 参与 OSPFv3 进程 1 的区域 0，正确的配置方式是？",
+    "options": {
+      "A": "在 OSPFv3 进程视图下执行 network 2001:db8:1:: 0.0.0.0 area 0",
+      "B": "在接口视图下执行 ospfv3 1 area 0",
+      "C": "在系统视图下执行 ospfv3 1 area 0",
+      "D": "在接口视图下执行 ipv6 ospf 1 area 0"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确：华为设备的 OSPFv3 采用接口使能方式，在接口视图下执行 ospfv3 进程号 area 区域号 即可让该接口参与对应进程和区域。A 错误：OSPFv3 不使用 OSPFv2 那样按网段宣告的 network 命令。C 错误：该命令需要在接口视图下执行，系统视图下无法绑定具体接口。D 错误：ipv6 ospf 不是华为设备使能 OSPFv3 的命令形式。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "接口使能",
+      "配置"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-007",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5340-ospfv3"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」，对应三级目录 hcip831-3-2-1。技术依据 RFC 5340 Section 2（OSPFv3 按链路/接口使能）；命令形式按题干明确的华为设备语法。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与按接口使能的 OSPFv3 模型，结合题面明确的设备命令独立命题，未复制第三方题目。",
+      "reviewDigest": "79921d05a1ef98c51045158cba6e42c93ab0dbef9d7273deb18afc142f7eb45a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-2-1-008",
+    "type": "single_choice",
+    "question": "关于 OSPFv2 与 OSPFv3 在同一台设备上共存，下列说法正确的是？",
+    "options": {
+      "A": "两者不能共存，会互相覆盖路由表",
+      "B": "可以共存，但必须使用完全相同的 Router ID 和区域号",
+      "C": "可以共存，两者是相互独立的协议进程，分别维护邻居、数据库和路由，互不影响",
+      "D": "只能运行其中一个，另一个必须关闭"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确：OSPFv2 与 OSPFv3 是两个独立协议，各自维护邻居关系、链路状态数据库和路由表项，可以在同一台设备上同时运行。A、D 错误：两者互不冲突，可以共存。B 错误：共存不要求 Router ID 或区域号相同，二者本就可以独立配置。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "easy",
+    "tags": [
+      "OSPFv3",
+      "OSPFv2",
+      "共存"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-008",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5340-ospfv3"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」，对应三级目录 hcip831-3-2-1。技术依据 RFC 5340 Section 2（OSPFv3 为独立协议，与 OSPFv2 互不干扰）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与 OSPFv2/OSPFv3 相互独立的结论独立命题，未复制第三方题目。",
+      "reviewDigest": "518e76db3c74e9f0f0046d54f1ca2d4479f7a4c9b903bacc8ec32d8a95c1e0a2"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-2-1-009",
+    "type": "single_choice",
+    "question": "在 OSPFv3 中，从其他协议引入的路由默认以哪类 LSA 在自治系统内泛洪？",
+    "options": {
+      "A": "Link-LSA（Type 8）",
+      "B": "Intra-Area-Prefix LSA（Type 9）",
+      "C": "Network-LSA（Type 2）",
+      "D": "AS-external-LSA（Type 5）"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确：OSPFv3 引入的外部路由仍由 AS-external-LSA（Type 5）承载并在自治系统内泛洪，与 OSPFv2 的外部路由机制相对应。A 错误：Type 8 用于在链路上通告链路本地地址和链路前缀。B 错误：Type 9 承载区域内前缀。C 错误：Type 2 描述广播网段的 DR 与邻接关系。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "外部路由",
+      "Type 5"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-009",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5340-ospfv3"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」，对应三级目录 hcip831-3-2-1。技术依据 RFC 5340 Section 2、4（外部路由仍由 AS-external-LSA 承载）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与 OSPFv3 外部路由的 LSA 定义独立命题，未复制第三方题目。",
+      "reviewDigest": "82b576647599b9ed5894969401f469784d87324e52aaa88517902929a4bd9afe"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-2-1-010",
+    "type": "single_choice",
+    "question": "OSPFv3 路由器收到邻居发来的 Hello 报文，并在其中的邻居列表里看到自己的 Router ID。这说明？",
+    "options": {
+      "A": "双向通信已经建立，邻居状态至少达到 2-Way",
+      "B": "双方的链路状态数据库已经同步完成",
+      "C": "双方已经建立 FULL 邻接关系",
+      "D": "对方已经被选举为 DR"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确：在邻居的 Hello 中看到自己的 Router ID，说明双方都收到了对方的 Hello，双向通信成立，邻居状态进入 2-Way。B 错误：数据库同步在 Exchange 和 Loading 阶段完成。C 错误：FULL 需要数据库完全同步，2-Way 只表示双向通信。D 错误：DR 选举结果与是否看到自己的 Router ID 没有直接关系。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "邻居状态",
+      "2-Way"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-010",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5340-ospfv3"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」，对应三级目录 hcip831-3-2-1。技术依据 RFC 5340 Section 2、4（Hello 邻居列表与邻居状态机沿用 OSPFv2 语义）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与 OSPFv3 邻居状态机语义独立命题，未复制第三方题目。",
+      "reviewDigest": "fb1fa58c0d28d0b708345e5fb06e2920d1032419a33a553a6ef6e41f04ff2346"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-2-1-011",
+    "type": "single_choice",
+    "question": "在 OSPFv3 中配置虚连接（Virtual Link）时，需要指定对端的什么信息？",
+    "options": {
+      "A": "对端接口的链路本地地址",
+      "B": "对端 ABR 的 Router ID 和虚连接穿越的传输区域",
+      "C": "对端 DR 的接口地址",
+      "D": "对端所属的区域号即可"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确：虚连接通过传输区域把骨干区域延伸到非骨干区域，配置时用对端 ABR 的 Router ID 标识对端，并指定穿越的传输区域。A 错误：虚连接不使用接口的链路本地地址标识对端。C 错误：虚连接与 DR 的接口地址无关。D 错误：只给区域号无法确定对端路由器。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "虚连接",
+      "ABR"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-011",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5340-ospfv3"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」，对应三级目录 hcip831-3-2-1。技术依据 RFC 5340 Section 2、4（虚连接使用 Router ID 与传输区域）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与 OSPFv3 虚连接定义独立命题，未复制第三方题目。",
+      "reviewDigest": "ddc00f61541dd856b27bd0fc7fa4a1d160b2f99f9b5d037a96cfd4e769342915"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-3-2-1-012",
+    "type": "single_choice",
+    "question": "两台直连的华为设备接口都配置了 IPv6 地址且可以互相 ping 通，但 OSPFv3 邻居始终无法建立。下列原因中最可能的是？",
+    "options": {
+      "A": "两台设备的 Router ID 必须配置为相同值",
+      "B": "接口必须同时配置 IPv4 地址才能建立 OSPFv3 邻居",
+      "C": "接口未使能 OSPFv3，或双方进程号、区域号、Instance ID 不一致",
+      "D": "接口 MTU 必须为 1500 才能建立邻居"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确：能互相 ping 通说明链路和地址正常，邻居建立失败最常见的原因是接口没有使能 OSPFv3，或双方区域号、Instance ID 不匹配导致报文被丢弃。A 错误：Router ID 必须唯一，配置相同反而会引起异常。B 错误：OSPFv3 运行在 IPv6 上，不要求接口配置 IPv4 地址。D 错误：MTU 不一致通常使邻居卡在 ExStart，且不要求必须为 1500。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "hard",
+    "tags": [
+      "OSPFv3",
+      "邻居建立",
+      "故障定位"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-012",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5340-ospfv3"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」，对应三级目录 hcip831-3-2-1。技术依据 RFC 5340 Section 2、4（按链路使能、Hello 中的区域与 Instance ID 匹配）；排查项按设备行为，题干已明确华为设备。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲与 OSPFv3 邻居建立的匹配条件独立命题，未复制第三方题目。",
+      "reviewDigest": "54bbce914c1bd1a160d5b2d85a88e4b3f3959c47667b95aa889eb5d792809bc8"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  }
+]

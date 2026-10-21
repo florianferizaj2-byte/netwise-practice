@@ -1,0 +1,1902 @@
+[
+  {
+    "id": "hcip821-2-1-2-006",
+    "type": "single_choice",
+    "question": "华为设备把 OSPF 接口的网络类型配置为 P2MP 后，关于该接口的邻居与邻接关系，下列描述正确的是？",
+    "options": {
+      "A": "接口仍选举 DR 和 BDR，只有 DR 与其他路由器建立 Full 邻接",
+      "B": "接口不选举 DR 和 BDR，可与每个邻居分别建立 Full 邻接",
+      "C": "接口不选举 DR 和 BDR，但同一网段最多只能与一个邻居建立邻接",
+      "D": "接口选举 DR 和 BDR，且必须手工指定 DR 优先级后才能建立邻接"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项为 B。P2MP 把不具备广播能力的网络视为由多条点到点链路组成，因此接口不选举 DR/BDR，每个邻居都可以分别建立 Full 邻接。A 错在仍按广播网络理解，P2MP 没有 DR 角色；C 错在把 P2MP 限制为只能有一个邻居，实际可连接多个邻居；D 错在 P2MP 不进行 DR 选举，也不要求手工指定 DR 优先级。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 基础",
+    "knowledgePoint": "基本配置与网络类型",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "网络类型",
+      "P2MP",
+      "邻接关系"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-1-2-006",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §1.2（Point-to-MultiPoint 定义）、§12.4.1.4（P2MP 接口描述）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "21691c6efbf002d48d9ecc16bc38fc5d96855cae0bf9a7528b213d02ddb171f8"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-1-2-007",
+    "type": "single_choice",
+    "question": "两台华为路由器通过不提供广播能力的 NBMA 网络相连，接口网络类型配置为 NBMA。若不在 OSPF 中手工指定邻居，仅靠接口自动发现，最可能的结果是？",
+    "options": {
+      "A": "两台路由器可以自动发现并建立 Full 邻接",
+      "B": "两台路由器会自动选举 DR，因此不需要手工指定邻居",
+      "C": "两台路由器可以建立 2-Way 关系，但永远不能进入 Full",
+      "D": "两台路由器无法自动发现邻居，需要手工配置邻居或改用 P2MP 网络类型"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项为 D。NBMA 网络没有广播能力，OSPF Hello 不能像广播网那样通过组播自动发现邻居；标准做法是手工配置邻居，或把网络类型改为 P2MP 让接口按点到点方式工作。A 错在忽略了 NBMA 的发现限制；C 错在连邻居都未建立，谈不上 2-Way；B 错在 DR 选举解决的是邻接关系组织问题，不能代替邻居发现。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 基础",
+    "knowledgePoint": "基本配置与网络类型",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "NBMA",
+      "邻居发现",
+      "手工邻居"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-1-2-007",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §1.2（non-broadcast networks）、§9.5.1（NBMA 上的 Hello）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "4bba7af298cb5abf33ba7acb6ffb378f29a83245b7f7def78fe05395e74e9f1a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-1-2-008",
+    "type": "single_choice",
+    "question": "华为设备 OSPF 进程中有如下配置：ospf 1 router-id 1.1.1.1；area 0；network 10.1.1.0 0.0.0.255。下列哪个接口地址会被该 network 命令匹配并加入 Area 0？",
+    "options": {
+      "A": "10.1.0.1/24",
+      "B": "10.1.2.1/24",
+      "C": "10.1.1.1/24",
+      "D": "10.2.1.1/24"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项为 C。network 命令用“网络地址 + 通配符”匹配接口地址，0.0.0.255 表示前 24 位必须与 10.1.1.0 相同，因此只有 10.1.1.1 落入匹配范围。B 的 10.1.2.1 第三段不同；A 的 10.1.0.1 第三段为 0；D 的 10.2.1.1 第二段不同，均不匹配。注意通配符不是子网掩码，匹配时看的是接口地址是否落在通配符允许的范围内。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 基础",
+    "knowledgePoint": "基本配置与网络类型",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "network 命令",
+      "通配符",
+      "区域"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-1-2-008",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §3（区域与接口归属）、§C.3（接口参数）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "681cbe4b3a097e044a41b8407e7621f5ece675849b52ffdb7b69f966e48f1434"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-1-2-009",
+    "type": "single_choice",
+    "question": "R1 使用 ospf 1，R2 使用 ospf 100，两台路由器在同一广播网段、同一区域，接口参数和认证配置一致。关于两者建立 OSPF 邻居，下列判断正确的是？",
+    "options": {
+      "A": "进程号不同，无法建立邻居",
+      "B": "进程号只在本地有意义，不参与 Hello 报文协商，可以建立 Full 邻接",
+      "C": "必须把 R2 的进程号改为 1 才能建立邻居",
+      "D": "进程号不同时只能建立 2-Way 邻接"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项为 B。OSPF 进程号用于本机区分多个 OSPF 实例，只在本地有效，不会写入 Hello 报文，也不要求两端一致；只要区域 ID、网络类型、定时器、认证等协商参数一致，就可以建立 Full 邻接。A、C 把进程号当成邻居协商参数；D 错在进程号不影响邻接状态级别。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 基础",
+    "knowledgePoint": "基本配置与网络类型",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "进程号",
+      "邻居建立",
+      "本地有效"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-1-2-009",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §1.2（Router ID 与邻居定义）、§4.3（OSPF 报文交互）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "3d78d23bf14ef1b838d548eb5da4a540b1c4a85fcb91c8fdaa4b166ab53f253a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-1-2-010",
+    "type": "single_choice",
+    "question": "在华为设备上执行 display ospf interface GigabitEthernet0/0/1，输出中包含：Type: Broadcast、State: DR、Priority: 1、Hello: 10s、Dead: 40s、Cost: 10。仅根据这些信息，下列结论正确的是？",
+    "options": {
+      "A": "该接口连接的是点到点网络",
+      "B": "该接口的 Cost 由 Router ID 大小决定",
+      "C": "该接口的 Dead 定时器是 Hello 定时器的 2 倍",
+      "D": "该接口参与 DR 选举，且本路由器在该网段已成为 DR"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项为 D。输出明确给出 Type: Broadcast 和 State: DR，说明该接口按广播网络运行 DR 选举，且本机当前是 DR。A 与 Type: Broadcast 矛盾；C 错在 40 秒是 10 秒的 4 倍，不是 2 倍；B 错在接口开销由参考带宽与接口带宽计算或由手工配置决定，与 Router ID 无关。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 基础",
+    "knowledgePoint": "基本配置与网络类型",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "验证输出",
+      "DR",
+      "接口参数"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-1-2-010",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §9（接口数据结构）、§9.4（DR 选举）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "e69629c792b209cfffbc45c31843044b6c21cb1374403f8fdbcc62aed87f12d5"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-1-2-011",
+    "type": "single_choice",
+    "question": "两台华为路由器在同一广播网段互联，接口均已 UP，但邻居状态长期停留在 Init。下列哪项最可能导致该现象？",
+    "options": {
+      "A": "本端发送的 Hello 报文被出方向 ACL 过滤，对端收不到本端信息",
+      "B": "两端 Hello 定时器不一致",
+      "C": "两端 MTU 不一致",
+      "D": "两端区域 ID 不一致"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项为 A。Init 表示本端已经收到对端 Hello，但对端 Hello 的邻居列表中没有本端 Router ID，即本端信息没有被对端收到，典型原因是单向通信，例如出方向 ACL 丢弃 Hello。B 和 D 会导致 Hello 无法正常匹配，邻居通常停留在 Down；C 在启用 MTU 检查时主要影响 DBD 交互，使邻居卡在 ExStart/Exchange，而不是 Init。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 基础",
+    "knowledgePoint": "基本配置与网络类型",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "故障定位",
+      "Init",
+      "单向通信"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-1-2-011",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §10.1（邻居状态）、§10.5（接收 Hello）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "2cfdd7d157bf413290e00c39e8bf919984052d50ba4c26f72b073b97fc40ea0c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-1-2-012",
+    "type": "single_choice",
+    "question": "关于 OSPF 的 NBMA 与 P2MP 两种网络类型，下列对比正确的是？",
+    "options": {
+      "A": "两者都选举 DR/BDR，区别只是 Hello 定时器不同",
+      "B": "NBMA 模拟广播网络并选举 DR/BDR，P2MP 把网络视为多条点到点链路且不选举 DR/BDR",
+      "C": "NBMA 不选举 DR/BDR，P2MP 选举 DR/BDR",
+      "D": "两者都不需要任何邻居配置，也都不选举 DR/BDR"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项为 B。NBMA 在无广播能力的多路访问网络上模拟广播网络，仍选举 DR/BDR；P2MP 把同一网络拆成多条点到点链路，不选举 DR/BDR。A 错在 P2MP 不选举 DR；C 把两者角色说反；D 错在 NBMA 通常还需要手工配置邻居，且 NBMA 会选举 DR/BDR。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 基础",
+    "knowledgePoint": "基本配置与网络类型",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "网络类型对比",
+      "NBMA",
+      "P2MP"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-1-2-012",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §1.2（NBMA 与 P2MP）、§9.4（DR 选举）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "1bfb12431c9550ad186a7336dd357ca4418ff86e77998ec95cf86861cbe2c955"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-1-2-013",
+    "type": "single_choice",
+    "question": "华为设备 OSPF 参考带宽为 1000 Mbit/s，接口开销按“参考带宽除以接口带宽，结果向下取整，最小为 1”计算。一条路径依次经过带宽 400 Mbit/s 和 10000 Mbit/s 的两个接口，则这两个接口的开销之和是多少？",
+    "options": {
+      "A": "3",
+      "B": "2",
+      "C": "4",
+      "D": "12"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项为 A。第一个接口：1000÷400=2.5，向下取整为 2；第二个接口：1000÷10000=0.1，小于 1，按最小值取 1；合计 2+1=3。B 只计算了第一个接口；C 把 2.5 四舍五入成 3 再加 1，违反“向下取整”规则；D 没有按参考带宽公式计算，数值无依据。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 基础",
+    "knowledgePoint": "基本配置与网络类型",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "开销计算",
+      "参考带宽",
+      "取整"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-1-2-013",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §C.3（接口开销参数）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "f07b0373319aa3a61983ebe93a8620e53ba8aac34afe377fe0fba73f471022be"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-1-2-014",
+    "type": "single_choice",
+    "question": "下列 OSPF 网络类型或逻辑链路类型中，默认会进行 DR 和 BDR 选举的是？",
+    "options": {
+      "A": "Point-to-Point",
+      "B": "NBMA",
+      "C": "Point-to-MultiPoint",
+      "D": "Virtual Link"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项为 B。NBMA 模拟广播网络，需要选举 DR/BDR 来集中描述该多路访问网段。Point-to-Point 只有两个端点，不选举 DR/BDR；Point-to-MultiPoint 按多条点到点链路处理，也不选举；Virtual Link 逻辑上按未编号点到点链路处理，同样不选举 DR/BDR。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 基础",
+    "knowledgePoint": "基本配置与网络类型",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "DR 选举",
+      "NBMA",
+      "网络类型"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-1-2-014",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §9.4（DR 选举）、§12.4.2（Network-LSA）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "2f62fd9a7a7d81b1ee859a2c5a0c7dc00b9eeec4f9dd70bb3eb8d3215a14bc79"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-1-2-015",
+    "type": "single_choice",
+    "question": "某华为设备把一条直连链路上两台路由器的接口都从 broadcast 改为 p2p，接口地址和区域配置不变。关于该链路的 OSPF 行为，下列描述正确的是？",
+    "options": {
+      "A": "不再选举 DR/BDR，该接口不再产生描述该网段的 Type 2 LSA，改由 Router LSA 的点到点链路描述邻居",
+      "B": "仍选举 DR/BDR，但只有 DR 产生 Type 2 LSA",
+      "C": "不再选举 DR/BDR，但该网段仍会产生 Type 2 LSA",
+      "D": "仍选举 DR/BDR，且 Router LSA 中不再包含该接口"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项为 A。broadcast 改为 p2p 后，接口不再进行 DR/BDR 选举，该接口也不会为这个网段产生 Type 2 Network LSA；两台路由器的邻接改由各自 Router LSA 中的点到点链路描述。B、D 错在 p2p 不选举 DR/BDR；C 错在 Type 2 LSA 只由 DR 为广播或 NBMA 网段产生，p2p 链路上没有 Type 2 LSA。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 基础",
+    "knowledgePoint": "基本配置与网络类型",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "网络类型变更",
+      "P2P",
+      "Type 2 LSA"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-1-2-015",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §12.4.1.1（点到点接口描述）、§12.4.2（Network-LSA）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "28477ce98cec6db401fd6c3476e5da6c6c9a2b32971c72ce43aba8d522a26556"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-1-2-016",
+    "type": "single_choice",
+    "question": "华为设备按“手工配置优先，其次选择最高的 Loopback 接口地址，最后选择最高的物理接口地址”的顺序确定 OSPF Router ID。某路由器配置了 router-id 1.1.1.1，Loopback0 地址为 2.2.2.2/32，GE0/0/1 地址为 3.3.3.3/24，则其 OSPF Router ID 是？",
+    "options": {
+      "A": "3.3.3.3",
+      "B": "2.2.2.2",
+      "C": "1.1.1.1",
+      "D": "4.4.4.4"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项为 C。题干已经给出选择顺序：手工配置优先。该路由器显式配置了 router-id 1.1.1.1，因此最终使用 1.1.1.1。B 是未手工配置时的 Loopback 选择结果；A 是既未手工配置、又没有 Loopback 时的物理接口选择结果；D 给出的 4.4.4.4 不是本机地址，且忽略了“手工配置优先”这一最高优先级规则。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 基础",
+    "knowledgePoint": "基本配置与网络类型",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "Router ID",
+      "手工配置",
+      "选举顺序"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-1-2-016",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §1.2（Router ID 定义）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "edf49828f90a00e341a7edcb1bb7f28c34d2543d1871751bf948e31f5289679b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-1-2-017",
+    "type": "single_choice",
+    "question": "在华为设备上把 OSPF 接口的 DR 优先级配置为 0，其含义是？",
+    "options": {
+      "A": "该接口不参与 DR/BDR 选举，不能成为 DR 或 BDR",
+      "B": "该接口优先级最高，必定成为 DR",
+      "C": "该接口可以成为 BDR，但不能成为 DR",
+      "D": "该接口不发送 Hello 报文，因此不会建立邻居"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项为 A。DR 优先级为 0 表示该接口放弃 DR/BDR 选举资格，只能作为 DRother 与 DR、BDR 建立邻接。B 把 0 误当成最高优先级；C 错在优先级 0 连 BDR 也不能当选；D 错在接口仍正常发送 Hello，仍可建立邻居并达到 Full。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 基础",
+    "knowledgePoint": "基本配置与网络类型",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "DR 优先级",
+      "DRother",
+      "选举"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-1-2-017",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §9.4（DR 选举与优先级）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "43f213d63a50da73bad320913752b1dcbf29154473efb30686bcef9b7ff604f1"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-1-2-018",
+    "type": "single_choice",
+    "question": "OSPF 的 Area ID 是 32 位标识，可用十进制或点分十进制表示。华为设备上配置 area 0.0.0.1 与配置 area 1，二者表示的区域关系是？",
+    "options": {
+      "A": "两个不同区域，前者是骨干区域",
+      "B": "同一个区域，区域号为 1",
+      "C": "同一个区域，但前者会被自动转换为 Area 0",
+      "D": "两个不同区域，点分十进制格式只能用于非骨干区域"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项为 B。Area ID 本质是 32 位整数，0.0.0.1 的十进制值就是 1，因此两种写法表示同一个区域。A 错在 0.0.0.1 不是 Area 0；C 错在不会自动转换成 0，只有 0.0.0.0 才是骨干区域；D 错在点分十进制只是书写形式，与是否骨干区域无关。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 基础",
+    "knowledgePoint": "基本配置与网络类型",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "Area ID",
+      "点分十进制",
+      "骨干区域"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-1-2-018",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §3.1（骨干区域 Area 0）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "48e01fbc81b72469d9bdb23a8528f6563d6c050817a2bb601cf032150cbf4850"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-1-001",
+    "type": "single_choice",
+    "question": "一台路由器在广播型网络上与 DR 建立了 Full 邻接。它在自己产生的 Router LSA 中，用哪种链路来描述该广播网段？",
+    "options": {
+      "A": "Type 2 传输网络链路，Link ID 为 DR 的接口 IP 地址",
+      "B": "Type 1 点到点链路，Link ID 为邻居 Router ID",
+      "C": "Type 3 末梢网络链路，Link ID 为该网段网络地址",
+      "D": "Type 4 虚拟链路，Link ID 为对端 Router ID"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项为 A。Router LSA 用 Type 2 传输网络链路描述路由器接入的广播或 NBMA 网段，Link ID 填该网段 DR 的接口 IP，Link Data 填本地接口 IP。B 是点到点链路；C 是末梢网络链路；D 是虚拟链路，均不用于描述广播网段上的 DR 邻接。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域内路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Router LSA",
+      "链路类型",
+      "传输网络"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-1-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §12.4.1.2（广播与 NBMA 接口描述）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "8d3cd54cd24a589bca00a2cc0483cf71320ef302b238c26bfde93b0d4d4eba4f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-1-002",
+    "type": "single_choice",
+    "question": "在 OSPF 广播网络中，Network LSA（Type 2 LSA）的 Link State ID 字段表示什么？",
+    "options": {
+      "A": "该网段的网络地址",
+      "B": "DR 在该网段上的接口 IP 地址",
+      "C": "BDR 的 Router ID",
+      "D": "该网段所有路由器的 Router ID 列表"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项为 B。Network LSA 由 DR 产生，Link State ID 填写 DR 在该网段上的接口 IP 地址，LSA 正文再列出接入该网段的所有路由器（包括 DR）以及网络掩码。A 是 Type 3 Summary LSA 常用的 Link State ID 形式；C 错在 BDR 不产生该 LSA；D 的 Router ID 列表位于 LSA 正文，不是 Link State ID。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域内路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Network LSA",
+      "Link State ID",
+      "DR"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-1-002",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §12.4.2（Network-LSA）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "33b15db000b49befa46f74a54214e0f2150fde80cfa81280f9bc1eef6bcb590b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-1-003",
+    "type": "single_choice",
+    "question": "某 OSPF 区域内有一条链路上：R1 到 R2 的接口开销为 10，R2 到 R3 的接口开销为 20，R3 连接网段 192.168.3.0/24 的接口开销为 5。R1 计算到 192.168.3.0/24 的区域内开销是多少？",
+    "options": {
+      "A": "20",
+      "B": "25",
+      "C": "35",
+      "D": "30"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项为 C。区域内路由的开销是最短路径上各出接口开销之和：R1→R2 为 10，R2→R3 为 20，R3→192.168.3.0/24 为 5，合计 10+20+5=35。A 只取了 R2→R3 的 20；B 只加了后两段 20+5=25；D 只加了前两段 10+20=30，均漏算了某一段开销。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域内路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "SPF",
+      "区域内路由",
+      "开销计算"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-1-003",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §16.1（区域内最短路径树计算）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "e3ae548cc8226463287b3ff48021d499e60f24153cf6748116053b831f00f21a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-1-004",
+    "type": "single_choice",
+    "question": "R1 到目的网段 10.1.1.0/24 有两条区域内路径：经 R2 的总开销为 20，经 R3 的总开销也为 20。R1 的 OSPF 最大等价路由数为 4。默认情况下 R1 会如何处理？",
+    "options": {
+      "A": "只选择 Router ID 较大的 R2 作为下一跳",
+      "B": "只选择先学到路由的 R3 作为下一跳",
+      "C": "把两条等价路径都加入路由表，形成等价多路径负载分担",
+      "D": "丢弃这两条路由，等待开销不再相等"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项为 C。两条路径开销相同，属于等价路由；最大等价路由数为 4，足以容纳 2 条路径，因此两条都会安装并形成负载分担。A、B 把 Router ID 或学习顺序当作唯一选路依据，但开销相等时 OSPF 支持等价多路径；D 错在等价路由是正常可用路由，不应丢弃。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域内路由计算",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "等价路由",
+      "ECMP",
+      "区域内路由"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-1-004",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §2.4（等价多路径）、§16.8（Equal-cost multipath）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "854612ff52da6ef2819a9721d63e925943ac27e281e3e4460bbb41878eb9c089"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-1-005",
+    "type": "single_choice",
+    "question": "在华为设备上查看某条 Router LSA，输出中有：Link Type: Transit，Link ID: 10.1.1.1，Link Data: 10.1.1.2，Metric: 10。关于该链路，下列判断正确的是？",
+    "options": {
+      "A": "10.1.1.1 是邻居路由器的 Router ID",
+      "B": "10.1.1.1 是该广播网段 DR 的接口地址，本路由器通过该 DR 描述传输网络链路",
+      "C": "10.1.1.1 是本路由器接口地址，10.1.1.2 是 DR 地址",
+      "D": "该链路表示一个末梢网络，Link Data 是子网掩码"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项为 B。Transit 链路中，Link ID 是 DR 在该网段上的接口地址，Link Data 是本路由器在该网段上的接口地址，Metric 是接口开销。A 把 Transit 的 Link ID 误认成点到点链路的邻居 Router ID；C 把 Link ID 与 Link Data 说反；D 把 Transit 与 Stub 链路混淆，Stub 链路的 Link Data 才是掩码。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域内路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "验证输出",
+      "Router LSA",
+      "Transit"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-1-005",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §12.4.1.2（Transit 链路字段）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "b7fd8651245883b913a7f2d121dcdafa81bf2c3da2d3d7fb40c3fca27209cac0"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-1-006",
+    "type": "single_choice",
+    "question": "两台华为路由器在同一个 OSPF 区域、同一网段建立邻居，双方都启用了 OSPF MTU 检查，但接口 MTU 分别为 1500 和 1400，其他参数一致。邻居状态最可能停留在哪个阶段？",
+    "options": {
+      "A": "Down",
+      "B": "Init",
+      "C": "Full",
+      "D": "ExStart/Exchange"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项为 D。双方都启用 MTU 检查时，Database Description 报文中的 MTU 不一致会导致数据库同步协商失败，邻居通常卡在 ExStart 或 Exchange。A 的 Down 通常表示没有收到 Hello；B 的 Init 表示只收到对端 Hello、对端未收到本端信息；C 的 Full 表示数据库已同步，与 MTU 不一致且启用检查的条件矛盾。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域内路由计算",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "故障定位",
+      "MTU",
+      "ExStart"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-1-006",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §10.6（接收 Database Description 报文）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "ec5b4755de89f7db5c17a926ad3ac0db7908d4b56aeeb618ec8781e21f18bf3c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-1-007",
+    "type": "single_choice",
+    "question": "关于 OSPF 的 Router LSA（Type 1）与 Network LSA（Type 2），下列描述正确的是？",
+    "options": {
+      "A": "Type 1 描述路由器的接口和邻接状态，Type 2 描述广播或 NBMA 网段及接入该网段的路由器，二者都只在单个区域内泛洪",
+      "B": "Type 1 由 DR 产生，Type 2 由所有路由器产生",
+      "C": "Type 1 在整个 AS 内泛洪，Type 2 只在骨干区域泛洪",
+      "D": "Type 2 中包含点到点链路的邻居 Router ID 和链路开销"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项为 A。Type 1 由每台路由器为每个区域产生，描述接口、邻接和链路；Type 2 由 DR 为广播或 NBMA 网段产生，描述网段及接入路由器；两者都只在所属区域内泛洪。B 把产生者说反；C 错在 Type 1 不是全 AS 泛洪，Type 2 也不限于骨干区域；D 错在点到点链路由 Type 1 描述，Type 2 不包含点到点邻居信息。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域内路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "LSA 对比",
+      "Type 1",
+      "Type 2"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-1-007",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §12.4.1（Router-LSA）、§12.4.2（Network-LSA）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "3d91c5935ed4e28b7b3d9f6fe866df1239564f170da4f569f153c581f6737fb7"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-1-008",
+    "type": "single_choice",
+    "question": "两台路由器通过 OSPF Point-to-Point 网络类型互联并达到 Full。关于该链路的 LSA 描述，下列说法正确的是？",
+    "options": {
+      "A": "一定存在一条 Type 2 LSA 描述该链路",
+      "B": "只有 DR 会为点到点链路产生 Type 2 LSA",
+      "C": "存在 Type 2 LSA，但其 Link State ID 是两端 Router ID 中较大的一个",
+      "D": "不存在描述该链路的 Type 2 LSA，链路由两端 Router LSA 中的点到点链路描述"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项为 D。点到点网络不选举 DR，也不会产生描述该网段的 Type 2 Network LSA；两端路由器分别在各自的 Router LSA 中用点到点链路描述对方。A、C、B 都假设点到点链路上存在 Type 2 LSA，实际上 Type 2 只用于广播和 NBMA 网段。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域内路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "P2P",
+      "Type 2 LSA",
+      "边界条件"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-1-008",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §12.4.1.1（点到点接口描述）、§12.4.2（Network-LSA）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "eb4d47c9ce02fcd6e711620056cd64089cb5de415e67f230c56f439fc2ee5a7d"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-1-009",
+    "type": "single_choice",
+    "question": "OSPF 路由器计算区域内路由时，Router LSA 中的末梢网络（Stub Network）链路在最短路径树中如何体现？",
+    "options": {
+      "A": "作为树中的中间节点，继续向下扩展邻居",
+      "B": "作为树的叶子节点挂接到对应路由器上，不再从该网段继续扩展",
+      "C": "不进入最短路径树，直接写入路由表",
+      "D": "只在 Type 2 LSA 中出现，不出现在最短路径树中"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项为 B。末梢网络只连接本路由器、没有其他 OSPF 邻居，因此在 SPF 树中作为叶子节点挂接到对应路由器上，其开销就是该路由器出接口的开销，不再从该网段继续扩展。A 错在末梢网络没有下游路由器；C 错在它仍参与 SPF 树构建；D 错在末梢网络由 Router LSA 的 Stub 链路描述。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域内路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "SPF 树",
+      "末梢网络",
+      "叶子节点"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-1-009",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §16.1（最短路径树中的末梢网络）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "f68e140430a59e6b5695ec59fb6282e385200764b4c858e15e3a953fb27b5d9d"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-1-010",
+    "type": "single_choice",
+    "question": "下列哪项变化不会触发 OSPF 区域内最短路径树（SPF）的重新计算？",
+    "options": {
+      "A": "区域内一条 Router LSA 的内容发生变化",
+      "B": "收到一条新的 Type 3 Summary LSA",
+      "C": "区域内某接口的 OSPF 开销被修改并重新生成 Router LSA",
+      "D": "区域内一条 Network LSA 的内容发生变化"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项为 B。区域内 SPF 依据 Type 1 Router LSA 和 Type 2 Network LSA 构建。A 的 Router LSA 变化会改变区域拓扑，触发 SPF；D 的 Network LSA 变化同样改变广播网段拓扑，触发 SPF；C 修改接口开销并重新生成 Router LSA，会改变 SPF 树上的度量，也触发 SPF。B 的 Type 3 LSA 描述区域间路由，收到后触发区域间路由计算，不会重建区域内最短路径树，因此 B 符合题意。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域内路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "SPF 触发",
+      "Type 3",
+      "反向设问"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-1-010",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §16.1（区域内 SPF）、§16.2（区域间路由计算）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "70a43af4666d19b23dcfdc94148453acf201ef9b32df6d38a5fb43ca7363f925"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-1-011",
+    "type": "single_choice",
+    "question": "某广播网段上有 R1（DR）、R2（BDR）和 R3（DRother）。R1 失效后，R2 接替成为 DR。此时该网段新的 Network LSA 最可能由谁产生？",
+    "options": {
+      "A": "R1",
+      "B": "该网段的 ABR",
+      "C": "R3",
+      "D": "R2"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项为 D。Network LSA 由当前 DR 产生。R1 失效后 R2 从 BDR 接替为 DR，因此由 R2 产生新的 Network LSA，列出该网段当前接入的路由器。A 的 R1 已失效；C 的 R3 可能被选为新的 BDR，但只有 DR 才产生 Type 2 LSA；B 的 ABR 身份与该网段 DR 角色无关。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域内路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "DR 切换",
+      "Network LSA",
+      "场景"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-1-011",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §7.3（DR 的作用）、§12.4.2（Network-LSA）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "cfe7dd8e0fb619c0975ea3424b363cd1509d762308fcac74feb3c0a0ba7900d8"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-1-012",
+    "type": "single_choice",
+    "question": "一条 OSPF Router LSA 在生成后因故没有被刷新。按照 OSPF 的 LSA 老化规则，从生成时刻算起，大约经过多长时间它会达到 MaxAge 并从 LSDB 中删除？",
+    "options": {
+      "A": "900 秒",
+      "B": "1800 秒",
+      "C": "7200 秒",
+      "D": "3600 秒"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项为 D。OSPF 的 MaxAge 为 3600 秒，LSA 年龄达到 MaxAge 后会被从 LSDB 中删除。正常情况下 LSA 每 1800 秒刷新一次，因此不会走到 MaxAge；题干明确“没有被刷新”，所以按 3600 秒计算。A 的 900 秒是 MaxAgeDiff，用于判断年龄差异；B 是正常刷新周期；C 是 MaxAge 的两倍，均不符合。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域内路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "LSA 老化",
+      "MaxAge",
+      "计时"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-1-012",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §14（LSA 老化）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "28a2a2d56c9f1c4c87fcabd54165082f97cfa05a9bbf6aa3656245046e390d80"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-1-013",
+    "type": "single_choice",
+    "question": "华为设备某接口带宽为 100 Mbit/s，OSPF 参考带宽为 1000 Mbit/s，但该接口下配置了 ospf cost 50。该接口最终使用的 OSPF 开销是多少？",
+    "options": {
+      "A": "1",
+      "B": "50",
+      "C": "10",
+      "D": "100"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项为 B。接口下的 ospf cost 是手工指定的开销，优先级高于按参考带宽和接口带宽计算出的值，因此最终使用 50。A、C 是按公式计算可能得到的值（1000÷100=10，再按规则处理），但手工配置会覆盖计算结果；D 没有公式依据，也不是手工配置值。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域内路由计算",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "接口开销",
+      "手工配置",
+      "配置语义"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-1-013",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §C.3（接口开销参数）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "82b755be6ffa8eea84ffdcfede153c376e54741b0066895783136638599bd46f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-1-014",
+    "type": "single_choice",
+    "question": "在华为设备上查看一条 Router LSA，输出中有：Age: 1200，Seq#: 0x80000003，Checksum: 0x00a1。仅根据这些信息，下列判断正确的是？",
+    "options": {
+      "A": "该 LSA 已经达到 MaxAge，应被删除",
+      "B": "Seq# 为 0x80000003 表示该 LSA 是第一次生成",
+      "C": "Checksum 越大表示该 LSA 越新",
+      "D": "在正常情况下，该 LSA 大约再过 600 秒会达到 1800 秒的刷新周期"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项为 D。LSA 年龄为 1200 秒，正常刷新周期为 1800 秒，1800-1200=600 秒，因此正常情况下约 600 秒后会刷新。A 错在 MaxAge 是 3600 秒，1200 秒远未达到；C 错在 Checksum 用于校验和辅助判断新旧，不是越大越新；B 错在初始序列号通常从 0x80000001 开始，0x80000003 表示已经更新过。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域内路由计算",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "LSA 老化",
+      "刷新周期",
+      "验证输出"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-1-014",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §12.1.1（LS age）、§14（LSA 老化与刷新）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "df86d92e052d9f92f32b1cbfd1b990b8c01ff6318e4bbbee624d086e6e49ad64"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-1-015",
+    "type": "single_choice",
+    "question": "R1 与 R2 在 Area 0 内已建立 Full 邻接，但 R1 的路由表中没有 R2 的 Loopback0 地址 2.2.2.2/32。下列哪项最可能导致该现象？",
+    "options": {
+      "A": "R2 的 Loopback0 地址没有被任何 network 命令匹配，未加入 OSPF",
+      "B": "R1 没有配置 router-id",
+      "C": "R2 接口的 DR 优先级为 0",
+      "D": "R1 与 R2 的 OSPF 进程号不同"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项为 A。R1 与 R2 已经 Full，说明区域、定时器、认证等邻居协商参数正常；此时缺少 Loopback0 路由，最常见原因是该地址没有被 network 命令匹配，因而没有作为 Stub 链路进入 Router LSA。B 不影响学习路由；C 只影响 DR/BDR 选举资格；D 的进程号本地有效，且若因此不兼容就不会达到 Full。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域内路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "故障定位",
+      "Loopback",
+      "network 命令"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-1-015",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §12.4.1（Router-LSA 产生）、§16.1（区域内路由计算）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "53c688b7eb3258d7fb29f0365da040c80c307c16133be8d3bdac0cc67364afbd"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-1-016",
+    "type": "single_choice",
+    "question": "Router LSA 中 Link Type 为 3 的链路用于描述末梢网络。该链路的 Link ID 和 Link Data 分别表示什么？",
+    "options": {
+      "A": "Link ID 为网络地址，Link Data 为子网掩码",
+      "B": "Link ID 为邻居 Router ID，Link Data 为本地接口 IP",
+      "C": "Link ID 为 DR 接口 IP，Link Data 为本地接口 IP",
+      "D": "Link ID 为 ASBR Router ID，Link Data 为外部度量"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项为 A。Type 3 是 Stub 链路，Link ID 填写末梢网络的网络地址，Link Data 填写该网络的子网掩码，Metric 为接口开销。B 描述的是点到点链路；C 描述的是传输网络链路；D 把 Stub 链路与 ASBR、外部度量混在一起，均不正确。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域内路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Router LSA",
+      "末梢网络",
+      "Link ID"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-1-016",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §12.4.1（Router-LSA 链路类型）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "db355754fd55b0f8efa3b887657c610f76e739a6b7117517a4fadf2a0bab91fd"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-1-017",
+    "type": "single_choice",
+    "question": "一台华为路由器同时连接 Area 0 和 Area 1，并作为 ABR 正常工作。关于它为这两个区域产生的 Router LSA 数量，下列描述正确的是？",
+    "options": {
+      "A": "只产生 1 条，两个区域共用",
+      "B": "产生 2 条，但都只在 Area 0 泛洪",
+      "C": "每个区域各产生 1 条，共 2 条",
+      "D": "产生 3 条，其中 1 条用于区域间路由"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项为 C。ABR 为每个所连接的区域维护独立的链路状态数据库，并分别在每个区域产生一条 Router LSA，描述该区域内的接口和邻接；因此 Area 0 和 Area 1 各一条，共 2 条，且各自只在本区域泛洪。A 错在不能跨区域共用；B 错在 Area 1 的 LSA 只在 Area 1 泛洪；D 错在区域间路由由 Type 3 LSA 描述，不由额外的 Router LSA 描述。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域内路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "ABR",
+      "Router LSA",
+      "多区域"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-1-017",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §12.4.1（每个区域独立产生 Router-LSA）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "400e6ecf624bc933f8688787ba4dc0d470271492034be3098541eb486ce025d7"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-1-018",
+    "type": "single_choice",
+    "question": "当路由器收到同一 Router LSA 的两个实例时，按照 OSPF 的新旧判断规则，首先比较的是哪个字段？",
+    "options": {
+      "A": "LS Age",
+      "B": "LS Checksum",
+      "C": "LS Sequence Number",
+      "D": "Link State ID"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项为 C。OSPF 判断同一 LSA 的新旧时，先比较 LS Sequence Number，序列号较大的更新；序列号相同再比较 LS Checksum；校验和也相同才比较 LS Age（并结合 MaxAgeDiff）。A、B 都是后续比较字段；D 的 Link State ID 用于标识 LSA，不用于判断同一 LSA 的版本新旧。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域内路由计算",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "LSA 新旧",
+      "序列号",
+      "协议顺序"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-1-018",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §13.1（判断 LSA 新旧）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "90fa530a4da89701cbb24df6cead32578b3891c6ef79aa0f940841b6590d8a4c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-2-001",
+    "type": "single_choice",
+    "question": "一条 Type 3 Summary LSA 的 Advertising Router 字段中填写的是谁的 Router ID？",
+    "options": {
+      "A": "目的网段所属区域内的任一路由器",
+      "B": "产生并通告该 Type 3 LSA 的 ABR",
+      "C": "目的网段所连接的 ASBR",
+      "D": "骨干区域中 Router ID 最大的路由器"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项为 B。Type 3 LSA 由 ABR 产生，Advertising Router 字段填写产生该 LSA 的 ABR 的 Router ID，接收方据此确定应把流量发给哪台 ABR。A 错在目的区域内的普通路由器不产生该 LSA；C 的 ASBR 产生的是 Type 5 外部 LSA；D 的 Router ID 大小不是填写依据。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域间路由计算",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "Type 3 LSA",
+      "ABR",
+      "Advertising Router"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-2-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §12.4.3（Summary-LSA 的产生）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "fc95c6007cb82c3687de570f18c819359d49a704aa9fb7b7ab7c5dcec27e5a03"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-2-002",
+    "type": "single_choice",
+    "question": "在 OSPF 多区域网络中，Type 4 Summary LSA 的作用是？",
+    "options": {
+      "A": "描述其他区域中的目的网段",
+      "B": "描述广播网段上连接了哪些路由器",
+      "C": "由 ASBR 产生，描述外部路由的度量",
+      "D": "由 ABR 产生，向区域内的路由器描述如何到达其他区域的 ASBR"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项为 D。Type 4 LSA 由 ABR 产生，用于把其他区域中 ASBR 的可达性通告给本区域路由器，使它们能够计算到 ASBR 的开销并进而使用 Type 5 外部路由。A 是 Type 3 LSA 的作用；C 是 Type 5 AS-external LSA 的作用；B 是 Type 2 Network LSA 的作用。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域间路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Type 4 LSA",
+      "ASBR",
+      "ABR"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-2-002",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §12.4.3（Summary-LSA）、§4.1（区域间路由）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "11d461f8553c0b2b201c1a1949bd4dc24a1abd964dbdb7b62e16241154c2a488"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-2-003",
+    "type": "single_choice",
+    "question": "R1 位于 Area 1，到 ABR1 的开销为 10，到 ABR2 的开销为 15。ABR1 和 ABR2 都向 Area 1 通告目的网段 10.2.2.0/24 的 Type 3 LSA，Metric 分别为 20 和 10。R1 最终选择的路径和总开销是？",
+    "options": {
+      "A": "经 ABR2，总开销 25",
+      "B": "经 ABR1，总开销 30",
+      "C": "经 ABR2，总开销 10",
+      "D": "经 ABR1，总开销 20"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项为 A。区域间路由的总开销等于本路由器到 ABR 的开销加上 Type 3 LSA 的 Metric。经 ABR1：10+20=30；经 ABR2：15+10=25。25 更小，因此选择经 ABR2。B 是另一条路径的总开销；C 只取了 Type 3 Metric，漏加到 ABR 的开销；D 只取了 Type 3 Metric 或误算，均不完整。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域间路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "区域间路由",
+      "开销计算",
+      "ABR 选择"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-2-003",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §16.2（计算区域间路由）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "28db163e33add7fa9c476a31cce93b91a3e2200885fd439fe2d7f9197dfae21b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-2-004",
+    "type": "single_choice",
+    "question": "R1 到 ABR1 的开销为 10，ABR1 通告目的网段 X 的 Type 3 Metric 为 10；R1 到 ABR2 的开销为 5，ABR2 通告同一网段的 Type 3 Metric 为 15。R1 的最大等价路由数为 4。R1 的路由表中该网段最可能有多少条下一跳？",
+    "options": {
+      "A": "1",
+      "B": "3",
+      "C": "2",
+      "D": "4"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项为 C。经 ABR1 的总开销为 10+10=20，经 ABR2 的总开销为 5+15=20，两条路径等价；最大等价路由数为 4，足以容纳 2 条，因此路由表中会有 2 条下一跳。A 错在只选一条，忽略了等价多路径；B、D 错在题干只给出两条可用路径，不会凭空产生第三、第四条。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域间路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "区域间路由",
+      "等价路径",
+      "下一跳"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-2-004",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §16.2（区域间路由）、§16.8（等价多路径）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "78db8783b89ebb108f26cded16664c8563defbd3e6392447568b347d2e85c918"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-2-005",
+    "type": "single_choice",
+    "question": "ABR 向非骨干区域发布一条 Type 3 LSA 时，该 LSA 的 Metric 字段表示什么？",
+    "options": {
+      "A": "从接收路由器到该 ABR 的开销",
+      "B": "该 ABR 的 Router ID 数值",
+      "C": "目的网段的外部度量",
+      "D": "从该 ABR 到目的网段的开销"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项为 D。Type 3 LSA 的 Metric 是产生该 LSA 的 ABR 到目的网段的开销；接收路由器计算路由时，再把它与自身到该 ABR 的开销相加。A 是接收方本地到 ABR 的开销，不在 Type 3 Metric 中；C 是 Type 5 外部 LSA 的外部度量；B 的 Router ID 是标识，不是度量。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域间路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Type 3 LSA",
+      "Metric",
+      "配置语义"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-2-005",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §12.4.3（Summary-LSA 的 Metric）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "fc83c372954564c1ff180aa8b051dabc62b68cfeb6d8c2e03c92304d7f679f00"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-2-006",
+    "type": "single_choice",
+    "question": "在华为设备上执行 display ospf lsdb summary，看到一条记录：Type: Sum-Net，Link State ID: 10.2.2.0，Adv Router: 2.2.2.2，Metric: 20。仅根据这条输出，可以确定的是？",
+    "options": {
+      "A": "目的网段 10.2.2.0 的掩码一定是 255.255.255.0",
+      "B": "本路由器到目的网段的总开销就是 20",
+      "C": "该 LSA 是由 ASBR 产生的 Type 5 LSA",
+      "D": "2.2.2.2 是产生该 Type 3 LSA 的 ABR 的 Router ID"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项为 D。Sum-Net 表示 Type 3 Summary LSA，Adv Router 字段就是产生该 LSA 的 ABR 的 Router ID。A 错在掩码位于 LSA 正文，输出中没有显示，不能断定是 /24；C 错在 Type 3 不是 Type 5，产生者是 ABR 而不是 ASBR；B 错在 20 只是 Type 3 Metric，总开销还要加上本路由器到 ABR 的开销。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域间路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "验证输出",
+      "Type 3 LSA",
+      "ABR"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-2-006",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §12.4.3（Summary-LSA）、§A.4.4（Summary-LSA 格式）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "ca749f5c1d2e2d52d8f9ea1378719c4723b42984749cf8755d08d21862ae6fd7"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-2-007",
+    "type": "single_choice",
+    "question": "一台华为路由器同时连接 Area 1 和 Area 2，但没有连接 Area 0。它把 Area 1 的路由以 Type 3 LSA 发布到 Area 2。关于该行为，下列判断正确的是？",
+    "options": {
+      "A": "这是标准 ABR 行为，Area 2 可以正常学习",
+      "B": "该路由器会产生 Type 4 LSA 来代替 Type 3 LSA",
+      "C": "只要两个区域都有接口，任何路由器都可以产生 Type 3 LSA",
+      "D": "该路由器未连接骨干区域，不是有效的 ABR，不应产生跨区域 Type 3 LSA，Area 2 可能学不到这些路由"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项为 D。OSPF 要求 ABR 至少连接骨干区域 Area 0 和一个非骨干区域；只连接两个非骨干区域的路由器未与骨干区域相连，不是有效的 ABR，不能正常产生跨区域 Type 3 LSA，Area 2 可能无法学习 Area 1 的路由。A、C 都忽略了 Area 0 这一必要条件；B 错在 Type 4 用于描述 ASBR，不能替代 Type 3 描述网段。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域间路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "故障定位",
+      "ABR 定义",
+      "骨干区域"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-2-007",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §3.3（ABR 分类）、§12.4.3（Summary-LSA 产生）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "219e151287b544479b422c6a64953d85e63d5e7ba5136344c1493b3838d84c16"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-2-008",
+    "type": "single_choice",
+    "question": "关于 OSPF 的 Type 3 与 Type 4 Summary LSA，下列对比正确的是？",
+    "options": {
+      "A": "Type 3 描述 ASBR，Type 4 描述网段，二者都由 ASBR 产生",
+      "B": "Type 3 在整个 AS 泛洪，Type 4 只在骨干区域泛洪",
+      "C": "Type 3 描述其他区域的网段，Type 4 描述其他区域的 ASBR，二者都由 ABR 产生并在区域内泛洪",
+      "D": "Type 3 由 ABR 产生，Type 4 由接收方路由器产生"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项为 C。Type 3 描述其他区域的网段，Type 4 描述其他区域 ASBR 的可达性；两者都由 ABR 产生，并且都只在相应区域内泛洪。A 把描述对象和产生者都说反；B 错在两者的泛洪范围都是单个区域，Type 5 才在全 AS 泛洪；D 错在 Type 4 也由 ABR 产生，不是接收方产生。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域间路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Type 3",
+      "Type 4",
+      "LSA 对比"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-2-008",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §12.4.3（Type 3 与 Type 4 Summary-LSA）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "996fd050205fa063d2d4fcbd17d4327106e4efda9159a449bfaabcda70c48137"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-2-009",
+    "type": "single_choice",
+    "question": "ABR 产生的一条 Type 3 Summary LSA，其泛洪范围是？",
+    "options": {
+      "A": "该 ABR 所注入的那个区域",
+      "B": "整个自治系统",
+      "C": "只限于骨干区域 Area 0",
+      "D": "不泛洪，只保存在 ABR 本地"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项为 A。Type 3 LSA 的泛洪范围是单个区域：ABR 把一条 Type 3 注入某个区域后，它只在该区域内泛洪，不会直接穿过其他区域。B 是 Type 5 外部 LSA 的泛洪范围；C 错在 Type 3 也可以注入非骨干区域，不限于 Area 0；D 错在 Type 3 必须在区域内泛洪才能被其他路由器使用。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域间路由计算",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "泛洪范围",
+      "Type 3 LSA",
+      "边界条件"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-2-009",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §12.4.3（Summary-LSA 的泛洪范围）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "2c3e9e06bb0abb697ea5a07a9354fec82a66e2610873c794d1d91a564ee68c15"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-2-010",
+    "type": "single_choice",
+    "question": "下列哪项不是 ABR 产生 Type 3 LSA 的必要条件？",
+    "options": {
+      "A": "路由器至少有一个接口连接骨干区域 Area 0",
+      "B": "路由器至少有一个接口连接非骨干区域",
+      "C": "目的网段必须是由 ASBR 引入的外部路由",
+      "D": "该 ABR 在接收该 Type 3 LSA 的区域内有接口"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项为 C。ABR 产生 Type 3 LSA 描述的是区域间可达的网段，既可以是区域内的普通网段，也可以是其他区域间路由，并不要求目的网段一定是 ASBR 引入的外部路由；外部路由由 Type 5 描述。A、B 是 ABR 连接骨干和非骨干区域的条件；D 是该 ABR 能把 Type 3 注入该区域的前提，均为必要条件。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域间路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "反向设问",
+      "Type 3 条件",
+      "ABR"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-2-010",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §12.4.3（Summary-LSA 产生条件）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "032a20a9ca7a0dc7e3a946cb84edd43426cf3d690a8f281bd8a4343fd8a1c492"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-2-011",
+    "type": "single_choice",
+    "question": "Area 1 内的 R1 通过 ABR1 和 ABR2 学习到 10.2.2.0/24 的区域间路由，两条路径总开销相同。某时刻 ABR1 不再通告该网段，ABR2 仍正常通告。R1 的路由表最可能如何变化？",
+    "options": {
+      "A": "删除经 ABR1 的下一跳，保留经 ABR2 的路径，继续转发",
+      "B": "保留经 ABR1 的路径，因为路由不会撤销",
+      "C": "立即删除该路由，直到 ABR1 恢复",
+      "D": "把该路由改为外部路由，经 ASBR 转发"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项为 A。ABR1 撤销 Type 3 LSA 后，经 ABR1 的路径失效，但 ABR2 仍在通告同一网段，因此 R1 删除失效下一跳并保留经 ABR2 的可用路径。C 错在忽略了仍有效的备用 ABR；B 错在 Type 3 LSA 会因撤销而老化删除，路径不会永久保留；D 错在该网段仍是区域间路由，不会因为一个 ABR 撤销就变成外部路由。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域间路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "场景",
+      "路由撤销",
+      "区域间路由"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-2-011",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §16.2（区域间路由计算）、§16.5（Summary-LSA 增量更新）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "a6d1bbe32d75567d8f053957ab59305fd5e53d1f6cd421e609629e0ac8036cfd"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-2-012",
+    "type": "single_choice",
+    "question": "路由器收到一条 Type 3 LSA 后，计算区域间路由时通常按什么顺序处理？",
+    "options": {
+      "A": "先比较 Type 3 Metric，再判断 Advertising Router 是否通过区域内路由可达",
+      "B": "只比较 Advertising Router 的 Router ID，不计算开销",
+      "C": "先把 Type 3 Metric 转换为外部度量，再运行完整 SPF",
+      "D": "先确认 Advertising Router 通过区域内路由可达，再把到该 ABR 的开销与 Type 3 Metric 相加，最后比较各候选路径"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项为 D。区域间路由计算先要确认通告该 Type 3 的 ABR 能通过区域内路由到达，然后把本路由器到 ABR 的开销与 Type 3 Metric 相加，得到候选总开销，再在多个候选之间比较。A 把顺序颠倒；C 错在 Type 3 不转换为外部度量，也不运行完整 SPF；B 错在 Router ID 不是选路度量。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域间路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "协议顺序",
+      "区域间路由计算",
+      "ABR 可达性"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-2-012",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §16.2（计算区域间路由）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "90404e1f8aea4dac5f069cc2704aeca63641c5028e03f8a49b4bcd9b4356a589"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-2-013",
+    "type": "single_choice",
+    "question": "关于 OSPF Virtual Link，下列描述正确的是？",
+    "options": {
+      "A": "Virtual Link 通过一个 Transit 区域连接两台 ABR，逻辑上属于骨干区域，按未编号点到点链路处理",
+      "B": "Virtual Link 配置在骨干区域内的两台普通路由器之间，用于负载分担",
+      "C": "Virtual Link 可以替代 Area 0，使非骨干区域直接成为骨干区域",
+      "D": "Virtual Link 只能在 Stub 区域内配置"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项为 A。Virtual Link 通过在 Transit 区域中建立逻辑链路，把两台 ABR 连接起来，逻辑上属于骨干区域，并按未编号点到点链路处理。B 错在两端必须是 ABR，且目的不是负载分担；C 错在 Virtual Link 是扩展骨干连通性，不能取消 Area 0；D 错在 Virtual Link 不能穿越 Stub 区域。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域间路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Virtual Link",
+      "Transit 区域",
+      "骨干区域"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-2-013",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §15（Virtual Links）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "008f740081848238bcd231157f13fb1c10351515778896bfa86e7d7779889d20"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-2-014",
+    "type": "single_choice",
+    "question": "下列哪种区域不能作为 OSPF Virtual Link 的 Transit 区域？",
+    "options": {
+      "A": "普通非骨干区域",
+      "B": "连接两台 ABR 的 Area 1",
+      "C": "Stub 区域",
+      "D": "有完整区域间路由的非骨干区域"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项为 C。OSPF 规定 Virtual Link 不能穿越 Stub 区域，因为 Stub 区域不承载 Type 5 外部 LSA，无法提供 Virtual Link 所需的完整传输能力。A、B、D 描述的都是普通非骨干区域，只要具备两台 ABR 之间的区域内连通性，就可以作为 Transit 区域。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域间路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Virtual Link",
+      "Stub 区域",
+      "边界条件"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-2-014",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §3.6（Stub 区域限制）、§15（Virtual Links）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "f58e58b24af2e64db5b90829cd4969e75b84936ec60753f3d439900b860b9d32"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-2-015",
+    "type": "single_choice",
+    "question": "某网络的 Area 2 只通过 Area 1 连接到 Area 0，Area 2 与 Area 0 之间没有直连链路。为了让 Area 2 的路由正常进入骨干区域，最合适的做法是？",
+    "options": {
+      "A": "在 Area 2 内配置 Stub 区域",
+      "B": "把 Area 2 的 Area ID 改为 0",
+      "C": "在分别连接 Area 1 与 Area 0、Area 1 与 Area 2 的两台 ABR 之间配置一条穿越 Area 1 的 Virtual Link",
+      "D": "在 Area 2 的普通路由器上配置 default-route-advertise"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项为 C。Area 2 与 Area 0 没有直连，但可以通过 Area 1 在两台 ABR 之间建立 Virtual Link，把 Area 2 的逻辑骨干连接补齐，使区域间路由正常传递。A 的 Stub 只减少 LSA，不解决骨干连通性；B 直接改 Area ID 会破坏现有区域规划；D 的默认路由不能替代 Area 2 与骨干之间的正常区域间路由。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域间路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "场景",
+      "Virtual Link",
+      "骨干连通性"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-2-015",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §3.1（骨干区域连续性）、§15（Virtual Links）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "7ea0d9e359a0f0bcfde5a75c91b8ab1bd8da65fb59b0e516a4436105e4b9b66a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-2-016",
+    "type": "single_choice",
+    "question": "R1 位于 Area 1，到 ABR 2.2.2.2 的区域内开销为 10。ABR 2.2.2.2 产生的 Type 3 LSA 中 Metric 为 20。R1 到该 Type 3 所描述网段的总开销是多少？",
+    "options": {
+      "A": "10",
+      "B": "30",
+      "C": "20",
+      "D": "40"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项为 B。R1 到该网段的总开销等于到 ABR 的区域内开销加上 Type 3 LSA 的 Metric，即 10+20=30。A 只取了到 ABR 的开销；C 只取了 Type 3 Metric；D 把两项相加后又重复计算了一次，均不正确。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域间路由计算",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "区域间路由",
+      "开销计算",
+      "Type 3"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-2-016",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §16.2（区域间路由总开销）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "f7064a363542ec15f866ac4845a52b6ae0266cb0fcee9a815e621d41a534845c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-2-017",
+    "type": "single_choice",
+    "question": "同一目的网段在 R1 上同时存在一条区域内路由和一条区域间路由，两者的开销不同。R1 在选择路由时通常优先选择？",
+    "options": {
+      "A": "区域内路由",
+      "B": "区域间路由",
+      "C": "开销较小的那条，不论区域类型",
+      "D": "Router ID 较大的下一跳"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项为 A。OSPF 的路由优先级按区域层次划分：区域内路由优先于区域间路由，区域间路由又优先于外部路由；这种优先级不受两者开销大小影响。B 把层次关系说反；C 错在不能跨类型只比开销；D 错在 Router ID 不是路由类型优先级或度量。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域间路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "路由优先级",
+      "区域内",
+      "区域间"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-2-017",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §11（路由表结构）、§16.2（区域间路由优先级）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "b725028a2a5de5059c816d34f65f31bee0c314065eda52ee5bd07e8f0ea919c6"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-2-018",
+    "type": "single_choice",
+    "question": "ABR 从 Area 1 学到一条 Type 3 LSA 后，是否会把这条 LSA 原样再发布到另一个非骨干区域 Area 2？",
+    "options": {
+      "A": "会，ABR 会在所有区域间转发 Type 3 LSA",
+      "B": "不会，非骨干区域之间的区域间路由应经骨干区域传递，ABR 不把从一个非骨干区域学到的 Type 3 直接再发布到另一个非骨干区域",
+      "C": "会，但只转发 Metric 较小的 Type 3 LSA",
+      "D": "不会，因为 Type 3 LSA 只在产生它的 ABR 本地有效"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项为 B。OSPF 采用骨干区域作为区域间路由的汇聚点，ABR 不把从一个非骨干区域学到的 Type 3 直接再发布到另一个非骨干区域，以避免区域间路由形成环路；跨非骨干区域的通信要经 Area 0 中转。A、C 都违反了这一层次化防环规则；D 错在 Type 3 会在区域内泛洪，并非只在 ABR 本地有效。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域间路由计算",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "防环",
+      "Type 3 LSA",
+      "区域层次"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-2-018",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §12.4.3（Summary-LSA 产生规则）、§3.2（区域间路由）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "aff2a61682071d7d796c75bb2f9f685b5276be79a06e62030cc7a6db40879ffa"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-3-001",
+    "type": "single_choice",
+    "question": "R1 通过两条路径学习到同一外部网段：经 ASBR1 的路径为 E1 类型，外部度量 30，R1 到 ASBR1 的内部开销为 10；经 ASBR2 的路径为 E2 类型，外部度量 20，R1 到 ASBR2 的内部开销为 5。按照 OSPF 外部路由选择规则，R1 优先选择哪条路径？",
+    "options": {
+      "A": "经 ASBR2 的 E2 路径，因为 R1 到 ASBR2 的内部开销 5 更小",
+      "B": "经 ASBR2 的 E2 路径，因为 E2 的度量 20 小于 E1 的总开销 40",
+      "C": "经 ASBR1 的 E1 路径，因为 E1 优先于 E2",
+      "D": "两条路径形成等价多路径，同时安装"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项为 C。OSPF 外部路由首先比较类型：E1 路径优先于 E2 路径，然后才在同一类型内比较度量。E1 的总开销为外部度量 30 加内部开销 10，等于 40；E2 只按外部度量 20 比较，内部开销 5 仅用于 E2 等值时的 tie-break。尽管 20 小于 40，E2 仍不能越过 E1 的优先级，因此选择经 ASBR1 的 E1。B、A 只比较数值或内部开销，忽略了 E1 优先规则；D 错在两条路径类型不同，不构成等价。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "外部路由计算",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "外部路由",
+      "E1/E2",
+      "路由选择"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-3-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识」；技术依据 RFC 2328 §16.4.1（外部路径优先级）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 OSPF 标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "175f4f6a348784e271bf7d4ca5cf2b308896f0ed5f021255ed328564020e7f0a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  }
+]
