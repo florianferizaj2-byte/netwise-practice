@@ -6,6 +6,7 @@ import path from "node:path";
 import { chromium, expect } from "@playwright/test";
 import { createStore } from "../server/store.js";
 import { createApp } from "../server/index.js";
+import { certificates } from "../server/certificates.js";
 import { practiceStorageKey } from "../src/practice-progress.js";
 
 Object.assign(process.env, {
@@ -95,7 +96,7 @@ try {
   await expect(
     np.getByRole("heading", { name: "选择备考目标", exact: true }),
   ).toBeVisible();
-  await expect(np.locator(".blue-cert-card")).toHaveCount(6);
+  await expect(np.locator(".blue-cert-card")).toHaveCount(certificates.length);
   await card(np, "ncre-ms-office").click();
   assert.equal((await me(newToken)).user.certificateId, null);
   assert.equal(writes, 0, "preview selection must not activate a certificate");
@@ -114,7 +115,7 @@ try {
   );
   await nc.close();
   checks.push(
-    "onboarding shows only six installed certificates; preview makes no mutation and a lost acknowledgement recovers the committed target",
+    "onboarding shows all installed certificates; preview makes no mutation and a lost acknowledgement recovers the committed target",
   );
 
   const c = await contextFor();
@@ -125,7 +126,9 @@ try {
     if (new URL(r.url()).pathname === "/api/questions") banks.push(r.url());
   });
   await page.goto(base + "/#certificates", { waitUntil: "networkidle" });
-  await expect(page.locator(".blue-cert-card")).toHaveCount(6);
+  await expect(page.locator(".blue-cert-card")).toHaveCount(
+    certificates.length,
+  );
   assert.deepEqual(
     banks,
     [],
@@ -153,13 +156,9 @@ try {
   await page.keyboard.press("ArrowRight");
   await expect(card(page, "hcia-datacom").locator("input")).toBeChecked();
   assert.equal((await me()).user.certificateId, "sichuan-upgrading-computer");
-  for (const id of [
-    "network-engineer",
-    "hcia-datacom",
-    "ncre-ms-office",
-    "sichuan-upgrading-computer",
-    "ncre-l2-c-programming",
-  ]) {
+  for (const { id } of certificates.filter(
+    (certificate) => certificate.id !== "veterinary-practitioner",
+  )) {
     await card(page, id).hover();
     assert(
       await card(page, id).evaluate((el) =>
@@ -173,14 +172,7 @@ try {
     "real catalogue only, aliases and Unicode search, safe empty state, region filter, keyboard preview and non-veterinary artwork motion",
   );
 
-  for (const id of [
-    "network-engineer",
-    "hcia-datacom",
-    "ncre-ms-office",
-    "veterinary-practitioner",
-    "sichuan-upgrading-computer",
-    "ncre-l2-c-programming",
-  ]) {
+  for (const { id } of certificates) {
     await change(id, "章节练习");
     assert.equal((await me()).user.certificateId, id);
     await expect(page.locator(".blue-catalog")).toBeVisible();
@@ -188,7 +180,7 @@ try {
     await browse(page);
   }
   checks.push(
-    "all six existing certificates, including veterinary and C, switch through the real service into their chapter entry",
+    "every installed certificate, including veterinary, C and both HCIP tracks, switches through the real service into its chapter entry",
   );
   await change("sichuan-upgrading-computer");
   await browse(page);

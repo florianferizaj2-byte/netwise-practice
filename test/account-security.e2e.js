@@ -5,6 +5,7 @@ import path from "node:path";
 import { expect } from "@playwright/test";
 import { createApp } from "../server/index.js";
 import { createStore } from "../server/store.js";
+import { certificates } from "../server/certificates.js";
 import { launchTestBrowser } from "./helpers/browser.js";
 import { accountTestMailbox } from "./helpers/account-mail.js";
 import {
@@ -97,7 +98,7 @@ try {
   await screenshot("register");
   await dialog.getByLabel("邮箱验证码", { exact: true }).fill(registrationCode);
   await dialog.getByRole("button", { name: "创建账号", exact: true }).click();
-  await expect(page.locator(".blue-cert-card")).toHaveCount(6);
+  await expect(page.locator(".blue-cert-card")).toHaveCount(certificates.length);
   const created = store
     .allUsers()
     .find((user) => user.username === "verified_fixture");
@@ -107,7 +108,7 @@ try {
   await page.request.post(base + "/api/auth/logout");
   await page.goto(base);
   report.checks.push(
-    "Real email registration, wrong code rejection, six certificates and no public admin grant",
+    "Real email registration, wrong code rejection, all installed certificates and no public admin grant",
   );
 
   await page.getByRole("button", { name: "登录", exact: true }).first().click();
@@ -134,7 +135,7 @@ try {
   await login(dialog, "verified_fixture", "original-password-123");
   await expect(dialog.getByRole("alert")).toContainText("账号或密码不正确");
   await login(dialog, "verified_fixture", "reset-password-123");
-  await expect(page.locator(".blue-cert-card")).toHaveCount(6);
+  await expect(page.locator(".blue-cert-card")).toHaveCount(certificates.length);
   report.checks.push(
     "Forgot password resets real hash; old password and other device rejected, new password works",
   );

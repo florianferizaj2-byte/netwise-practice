@@ -5,6 +5,7 @@ import path from "node:path";
 import { expect } from "@playwright/test";
 import { createApp } from "../server/index.js";
 import { createStore } from "../server/store.js";
+import { certificates } from "../server/certificates.js";
 import { launchTestBrowser } from "./helpers/browser.js";
 import { accountTestMailbox } from "./helpers/account-mail.js";
 import { dismissLaunchAnnouncement, finishProfileForm } from "./helpers/mobile-profile.js";
@@ -39,7 +40,7 @@ try {
   await dialog.getByLabel("确认密码", { exact: true }).fill("fixture-password-123");
   await page.screenshot({ path: "test-output/account-email-off-desktop.png" });
   await dialog.getByRole("button", { name: "创建账号", exact: true }).click();
-  await expect(page.locator(".blue-cert-card")).toHaveCount(6);
+  await expect(page.locator(".blue-cert-card")).toHaveCount(certificates.length);
   await page.locator('.blue-cert-card').filter({ has: page.locator('input[value="network-engineer"]') }).click();
   await page.getByRole("button", { name: "进入学习", exact: true }).click();
   await expect(page.locator(".blue-home")).toBeVisible();
@@ -74,7 +75,7 @@ try {
   await page.getByPlaceholder("至少 8 位字符").fill("fixture-password-123");
   await page.getByPlaceholder("再次输入密码").fill("fixture-password-123");
   await page.getByRole("button", { name: "注册并开始学习", exact: true }).click();
-  await expect(page.locator(".blue-cert-card")).toHaveCount(6); await narrow.close();
+  await expect(page.locator(".blue-cert-card")).toHaveCount(certificates.length); await narrow.close();
   report.checks.push("375px Web registration works without hidden required email fields");
 
   const mobile = await browser.newContext({ viewport: { width: 393, height: 852 }, isMobile: true, hasTouch: true });

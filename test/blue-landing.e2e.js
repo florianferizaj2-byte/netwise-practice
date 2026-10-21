@@ -5,6 +5,7 @@ import path from "node:path";
 import { expect } from "@playwright/test";
 import { createApp } from "../server/index.js";
 import { createStore } from "../server/store.js";
+import { certificates } from "../server/certificates.js";
 import { launchTestBrowser } from "./helpers/browser.js";
 import { accountTestMailbox } from "./helpers/account-mail.js";
 
@@ -80,7 +81,9 @@ try {
   await expect(auth().getByRole("button", { name: "忘记密码？" })).toHaveCount(
     0,
   );
-  await expect(page.locator(".desk-certificate-list > button")).toHaveCount(6);
+  await expect(page.locator(".desk-certificate-list > button")).toHaveCount(
+    certificates.length,
+  );
   await expect(page.locator(".desk-feature")).toHaveCount(6);
   await expect(page.locator(".desk-feature-extras button")).toHaveCount(5);
   const catalogue = (
@@ -109,7 +112,7 @@ try {
     await expect(page.getByRole("dialog")).toHaveCount(0);
   }
   report.checks.push(
-    "Only the six real catalogue certificates appear; all previews open and close; eleven existing learning tools remain reachable",
+    "Every installed catalogue certificate appears; all previews open and close; eleven existing learning tools remain reachable",
   );
   for (const width of [900, 1024, 1280, 1440, 1672]) {
     await page.setViewportSize({ width, height: 800 });
@@ -298,7 +301,9 @@ try {
     .getByLabel("确认密码", { exact: true })
     .fill("fixture-password-123");
   await auth().getByRole("button", { name: "创建账号", exact: true }).click();
-  await expect(page.locator(".blue-cert-card")).toHaveCount(6);
+  await expect(page.locator(".blue-cert-card")).toHaveCount(
+    certificates.length,
+  );
   assert.equal(
     off.store.allUsers().find((u) => u.username === "inline_signup").isAdmin,
     0,
@@ -349,7 +354,9 @@ try {
     .getByLabel("邮箱验证码", { exact: true })
     .fill(on.mailbox.latest("inline@example.test", "register").code);
   await auth().getByRole("button", { name: "创建账号", exact: true }).click();
-  await expect(page.locator(".blue-cert-card")).toHaveCount(6);
+  await expect(page.locator(".blue-cert-card")).toHaveCount(
+    certificates.length,
+  );
   await context.close();
   report.checks.push(
     "Retained opt-in email verification also works in the inline form; recovery navigation is available only when enabled",

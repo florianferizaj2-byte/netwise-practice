@@ -28,6 +28,7 @@
 ## 相关实现
 
 - `src/components/practice-flow.jsx`：答案准备、后台保存、重试、模式和状态组件。
+- `src/components/practice-viewport.jsx`：切题后定位题干与选项，处理迟到的答案、图片和视口尺寸变化；用户手动滚动后停止调整。
 - `src/features/practice.jsx`、`src/features/veterinary-practice.jsx`：普通与兽医练习。
 - `src/main.jsx`：离开练习时刷新汇总。
 - `src/desktop-workspace.jsx`、`src/practice-progress.js`：检查点与模式恢复。
@@ -36,6 +37,8 @@
 - `server/index.js`、`server/store.js`：可选提交标识与重复提交处理。
 
 ## 本地验证
+
+2026-10-21 补充：普通答题和背题不再切题后滚回页面顶部，章节介绍与进度区域滚出阅读视野。模式切换保持可达，连对提示在模式栏内显示；较短题目补足底部滚动空间，超长题保留题干开头。`test/practice-viewport.e2e.js` 已验证 28 处实际显示位置，覆盖普通提交、回车与按钮切题、直接跳转、背题恢复、延迟答案和图片、手动滚动、兽医共用材料，以及 375 / 768 / 1440 像素视口。
 
 12 项单元及接口检查通过，覆盖重复提交、账号隔离、旧客户端、计划任务、进度恢复和病例排序。
 

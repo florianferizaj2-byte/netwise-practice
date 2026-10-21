@@ -245,21 +245,41 @@ try {
     for (const width of [320, 375, 768, 900, 1280, 1672]) await fit(width);
     if (cert.id === "ncre-l2-c-programming") {
       await page.mouse.move(0, 0);
-      await page.screenshot({ path: "test-output/blue-c-chapters-1672.png", fullPage: true, animations: "disabled" });
+      await page.screenshot({
+        path: "test-output/blue-c-chapters-1672.png",
+        fullPage: true,
+        animations: "disabled",
+      });
       await fit(375);
-      await expect.poll(() => page.locator(".sidebar").evaluate((node) => node.getBoundingClientRect().right)).toBeLessThanOrEqual(1);
-      await page.screenshot({ path: "test-output/blue-c-chapters-375.png", fullPage: true, animations: "disabled" });
+      await expect
+        .poll(() =>
+          page
+            .locator(".sidebar")
+            .evaluate((node) => node.getBoundingClientRect().right),
+        )
+        .toBeLessThanOrEqual(1);
+      await page.screenshot({
+        path: "test-output/blue-c-chapters-375.png",
+        fullPage: true,
+        animations: "disabled",
+      });
       await fit(1672);
     }
   }
-  assert.equal(artChecks.length, 56);
+  assert.equal(
+    artChecks.length,
+    catalog.certificates.reduce(
+      (count, certificate) => count + certificate.chapters.length,
+      0,
+    ),
+  );
   assert.equal(
     artChecks.filter((row) => row.certificate === "ncre-l2-c-programming")
       .length,
     12,
   );
   checks.push(
-    "56 chapter cards share the correct large/small animated illustrations across five real certificates, including all 12 C chapters",
+    `${artChecks.length} chapter cards share the correct large/small animated illustrations across every non-veterinary certificate, including all 12 C chapters and both HCIP tracks`,
   );
 
   await page
