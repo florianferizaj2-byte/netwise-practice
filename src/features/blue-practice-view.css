@@ -1,3 +1,97 @@
+.practice-page {
+  padding-bottom: var(--practice-scroll-space, 0px);
+}
+.practice-page .question-panel {
+  overflow-anchor: none;
+}
+.practice-page .practice-mode-bar {
+  position: sticky;
+  top: var(--practice-viewport-top, 0px);
+  z-index: 3;
+  padding-top: 8px;
+  background: var(--paper, #fff);
+  box-shadow: 0 -8px 0 var(--paper, #fff);
+}
+.practice-mode-bar .practice-celebration {
+  position: absolute;
+  inset: auto 0 10px auto;
+  width: max-content;
+  max-width: calc(100% - 210px);
+  overflow: visible;
+}
+.practice-mode-bar:has(.practice-celebration) > span {
+  visibility: hidden;
+}
+.practice-mode-bar .celebration-message {
+  position: static;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  max-width: 100%;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--web-accent, #2454ed);
+  background: var(--paper, #fff);
+  box-shadow: none;
+  transform: none;
+  animation: practice-reward-hint 2.4s both;
+}
+.practice-mode-bar .celebration-message b,
+.practice-mode-bar .celebration-message span {
+  margin: 0;
+  font-size: 12px;
+  color: inherit;
+  letter-spacing: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.practice-mode-bar .celebration-medal {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  border: 0;
+  border-radius: 5px;
+  background: var(--web-accent, #2454ed);
+  box-shadow: none;
+  animation: none;
+}
+.practice-mode-bar .celebration-medal svg {
+  width: 17px;
+  height: 17px;
+}
+.practice-mode-bar .confetti-field {
+  display: none;
+}
+@keyframes practice-reward-hint {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  12%,
+  88% {
+    opacity: 1;
+  }
+}
+@media (max-width: 600px) {
+  .practice-mode-bar .practice-celebration {
+    max-width: 100%;
+    bottom: 10px;
+  }
+  .practice-mode-bar .celebration-message {
+    padding: 0 4px;
+    border: 0;
+    gap: 6px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .practice-mode-bar .celebration-message {
+    animation: none;
+  }
+}
 .blue-practice,
 .blue-wrong-overview {
   color: var(--text, #203456);

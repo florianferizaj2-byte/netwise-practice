@@ -1,5 +1,6 @@
 import { lazy, useEffect, useRef, useState } from "react";
 import { ChapterArt } from "../components/chapter-art.jsx";
+import { usePracticeViewport } from "../components/practice-viewport.jsx";
 import "./blue-practice-view.css";
 import {
   usePracticeFlow,
@@ -122,6 +123,12 @@ export function GenericPractice({
     },
   });
   const result = current.result || (memorizing ? flow.studyAnswer : null);
+  const questionPanelRef = usePracticeViewport({
+    questionId: q.id,
+    mode,
+    answerKey: result?.answer.join(","),
+    done,
+  });
   const teacher = current.teacher || "";
   const hint = current.hint || 0;
   const feedbackKind = current.feedbackKind || null;
@@ -172,7 +179,6 @@ export function GenericPractice({
     review.cancel();
     setIndex(nextIndex);
     setTeacherOpen(false);
-    if (desktop) window.scrollTo({ top: 0, behavior: "instant" });
     started.current = Date.now();
   };
   const submit = () => {
@@ -307,7 +313,7 @@ export function GenericPractice({
       </div>
     );
   return (
-    <div className={blue ? "blue-practice" : undefined}>
+    <div className={`practice-page${blue ? " blue-practice" : ""}`}>
       {blue ? (
         <header className="blue-practice-heading">
           <div>
@@ -381,7 +387,7 @@ export function GenericPractice({
             </span>
           </div>
         )}
-        <section className="question-panel">
+        <section className="question-panel" ref={questionPanelRef}>
           <PracticeModeSwitch
             mode={mode}
             setMode={(value) => {
@@ -389,8 +395,9 @@ export function GenericPractice({
               setMode(value);
             }}
             disabled={!!busy}
-          />
-          <PracticeModes outcome={outcome} />
+          >
+            <PracticeModes outcome={outcome} />
+          </PracticeModeSwitch>
           <div className="question-top">
             <span>
               第 <b>{index + 1}</b> / {session.questions.length} 题

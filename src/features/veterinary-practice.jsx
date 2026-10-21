@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { usePracticeViewport } from "../components/practice-viewport.jsx";
 import { PracticeModes } from "../practice-modes.jsx";
 import { useDesktopWeb } from "../desktop-experience.jsx";
 import {
@@ -122,6 +123,12 @@ export function VeterinaryPractice({
     },
   });
   const result = current.result || (memorizing ? flow.studyAnswer : null);
+  const questionPanelRef = usePracticeViewport({
+    questionId: q.id,
+    mode,
+    answerKey: result?.answer.join(","),
+    done,
+  });
   const teacher = current.teacher || "";
   const hint = current.hint || 0;
   const feedbackKind = current.feedbackKind || null;
@@ -168,7 +175,6 @@ export function VeterinaryPractice({
       setNavPage(0);
     }
     setTeacherOpen(false);
-    if (desktop) window.scrollTo({ top: 0, behavior: "instant" });
     started.current = Date.now();
   };
   const submitJump = () => {
@@ -297,7 +303,8 @@ export function VeterinaryPractice({
         if (navFilter === "answered") return isAnswered;
         if (navFilter === "unanswered") return !isAnswered;
         if (navFilter === "wrong") return response?.result?.correct === false;
-        if (navFilter === "revealed") return !!(response?.revealed || response?.memorized);
+        if (navFilter === "revealed")
+          return !!(response?.revealed || response?.memorized);
         return true;
       });
       return matchesFilter ? indexes : null;
@@ -400,7 +407,9 @@ export function VeterinaryPractice({
       </div>
     );
   return (
-    <div className={blue ? "blue-practice blue-vet-practice" : undefined}>
+    <div
+      className={`practice-page${blue ? " blue-practice blue-vet-practice" : ""}`}
+    >
       {blue ? (
         <header className="blue-practice-heading">
           <div>
@@ -507,8 +516,10 @@ export function VeterinaryPractice({
             </span>
           </div>
         )}
-        <section className="question-panel vet-question-panel">
-          <PracticeModes outcome={outcome} />
+        <section
+          className="question-panel vet-question-panel"
+          ref={questionPanelRef}
+        >
           <PracticeModeSwitch
             mode={mode}
             setMode={(value) => {
@@ -516,7 +527,9 @@ export function VeterinaryPractice({
               setMode(value);
             }}
             disabled={!!busy}
-          />
+          >
+            <PracticeModes outcome={outcome} />
+          </PracticeModeSwitch>
           <div className="question-top">
             <span>
               第 <b>{index + 1}</b> / {session.questions.length} 题
@@ -729,7 +742,8 @@ export function VeterinaryPractice({
                     >
                       <b>{step + 1}</b>
                       <span>
-                        {responses[child.id]?.revealed || responses[child.id]?.memorized
+                        {responses[child.id]?.revealed ||
+                        responses[child.id]?.memorized
                           ? "已查看"
                           : childResult
                             ? childResult.correct

@@ -228,7 +228,7 @@ export function usePracticeFlow({
   };
 }
 
-export function PracticeModeSwitch({ mode, setMode, disabled }) {
+export function PracticeModeSwitch({ mode, setMode, disabled, children }) {
   return (
     <div className="practice-mode-bar">
       <div role="group" aria-label="练习模式" className="practice-mode-switch">
@@ -255,6 +255,7 @@ export function PracticeModeSwitch({ mode, setMode, disabled }) {
           ? "直接看答案与解析 · Enter 下一题"
           : "选择答案后 Enter 提交 · 再按 Enter 下一题"}
       </span>
+      {children}
     </div>
   );
 }
