@@ -17,7 +17,7 @@ for (const [label, args] of [
       "mobile/tsconfig.json",
     ],
   ],
-  ["服务端与客户端回归测试", ["--test", "test/*.test.js"]],
+  ["服务端与客户端回归测试", ["--test", "--test-concurrency=4", "test/*.test.js"]],
   ["电脑与移动网页构建", ["scripts/build.mjs"]],
   ["浏览器完整流程检查", ["test/e2e.js"]],
   ["VIP AI 精讲与练习完整流程检查", ["test/subjective-study.e2e.js"]],

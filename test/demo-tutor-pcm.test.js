@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import { reviewedTutorSnapshot } from "./helpers/reviewed-tutor-snapshot.js";
 import { getBundle, catalogue } from "../server/demo-tutor/registry.js";
 import {
   correctHomeBlueLesson,
@@ -16,15 +17,7 @@ const find = (id) => {
   return q;
 };
 const label = (q) => q.options.find((o) => o.id === q.answer).text;
-const snapshot = JSON.parse(
-  fs.readFileSync(
-    new URL(
-      "../public/demo/home-blue/ai-content-network-engineer.json",
-      import.meta.url,
-    ),
-    "utf8",
-  ),
-);
+const snapshot = reviewedTutorSnapshot();
 test("PCM snapshot corrections are durable, idempotent and invalidate older content versions", () => {
   const n = snapshot.lessons.find((n) => n.id === pcmNodeId);
   assert.equal(n.version, pcmCorrectedVersion);
