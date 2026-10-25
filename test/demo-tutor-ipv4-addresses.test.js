@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import { reviewedTutorSnapshot } from "./helpers/reviewed-tutor-snapshot.js";
 import { getBundle, catalogue } from "../server/demo-tutor/registry.js";
 import {
   correctHomeBlueLesson,
@@ -136,14 +137,7 @@ test("special address and /31 /32 branches preserve the specified network contex
   }
 });
 test("ordinary reading is corrected durably and old versions cannot be silently reused", () => {
-  const seed = JSON.parse(
-    fs.readFileSync(
-      new URL(
-        "../public/demo/home-blue/ai-content-network-engineer.json",
-        import.meta.url,
-      ),
-    ),
-  );
+  const seed = reviewedTutorSnapshot();
   for (const b of bundles) {
     const n = seed.lessons.find((n) => n.id === b.course.nodeId);
     assert.equal(n.version, ipv4CorrectedVersions[n.id]);
