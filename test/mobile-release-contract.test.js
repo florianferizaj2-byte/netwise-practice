@@ -24,10 +24,10 @@ test('the real public version endpoint advertises only mounted v1 capabilities',
   const server = app.listen(0, '127.0.0.1'); await new Promise(resolve => server.once('listening', resolve));
   t.after(async () => { await app.locals.stop(); server.closeAllConnections(); await new Promise(resolve => server.close(resolve)); store.db.close();
     assert.equal(path.dirname(fs.realpathSync(directory)), parent); assert.ok(path.basename(directory).startsWith('v1-contract-')); fs.rmSync(directory, { recursive: true, force: true }); });
-  const response = await fetch(`http://127.0.0.1:${server.address().port}/api/mobile/version?version=1.0.0`);
+  const response = await fetch(`http://127.0.0.1:${server.address().port}/api/mobile/version?version=1.0.1`);
   assert.equal(response.status, 200); const release = await response.json();
-  assert.equal(release.latestVersion, '1.0.0'); assert.equal(release.forceUpdate, false);
-  assert.equal(release.backend.version, '1.0.0'); assert.equal(release.backend.apiRevision, 1);
+  assert.equal(release.latestVersion, '1.0.1'); assert.equal(release.forceUpdate, false);
+  assert.equal(release.backend.version, '1.0.1'); assert.equal(release.backend.apiRevision, 1);
   const { backendConnectionNotice } = await loadPure('api/backendContract.ts'); assert.equal(backendConnectionNotice(release), '');
   assert.deepEqual(release.backend.capabilities.sort(), ['account-security-v1', 'learning-gate-v1', 'points-v1']);
 });

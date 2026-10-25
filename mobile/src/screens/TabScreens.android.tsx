@@ -272,6 +272,10 @@ export function PracticeScreen({
   preview = false, user, certificates, onOpenCertificatePicker,
 }: ScreenProps) {
   const { colors, reduceMotion } = useTheme();
+  const { width: practiceWidth, fontScale: practiceFontScale } = useWindowDimensions();
+  const optionBadgeEdge = Math.ceil(36 * Math.max(1, practiceFontScale));
+  const stackAiActions = practiceWidth < 360 || practiceFontScale > 1.15;
+  const stackPracticeHeader = practiceWidth < 360 && practiceFontScale > 1.15;
   const styles = useThemedStyles(createStyles, iosStyles.tabs);
   const active = useScreenActive();
   const isDailyPractice = practiceSession === 'daily';
@@ -1022,12 +1026,13 @@ export function PracticeScreen({
   return (
     <View style={styles.nativeFocusScreen}>
       <View style={styles.nativeQuestionHeader}>
-        <View style={styles.nativeHeaderLeading}><AnimatedPressable accessibilityRole="button" accessibilityLabel={isDailyPractice?'更换今日练习范围':'返回题库目录'} disabled={practiceSaving} accessibilityHint={practiceSaving?'正在保存作答，完成后可返回':undefined} onPress={requestPracticeExit} style={[styles.nativeHeaderButton,practiceSaving&&{opacity:0.45}]}><AppIcon name="chevron-left" size={25} color={colors.text}/></AnimatedPressable></View><View pointerEvents="none" style={styles.nativeCenteredTitle}><Text accessibilityRole="header" style={styles.nativeQuestionTitle}>{practiceSource==='wrong'?'错题复习':practiceSource==='favorites'?'收藏练习':isDailyPractice?'每日刷题':'知识点练习'}</Text></View>
+        <View style={[styles.nativeHeaderLeading,stackPracticeHeader&&styles.nativeHeaderFlexible]}><AnimatedPressable accessibilityRole="button" accessibilityLabel={isDailyPractice?'更换今日练习范围':'返回题库目录'} disabled={practiceSaving} accessibilityHint={practiceSaving?'正在保存作答，完成后可返回':undefined} onPress={requestPracticeExit} style={[styles.nativeHeaderButton,practiceSaving&&{opacity:0.45}]}><AppIcon name="chevron-left" size={25} color={colors.text}/></AnimatedPressable></View>{!stackPracticeHeader&&<View pointerEvents="none" style={styles.nativeCenteredTitle}><Text accessibilityRole="header" style={styles.nativeQuestionTitle}>{practiceSource==='wrong'?'错题复习':practiceSource==='favorites'?'收藏练习':isDailyPractice?'每日刷题':'知识点练习'}</Text></View>}
         <View style={styles.nativeHeaderTools}>
           <AnimatedPressable accessibilityRole="button" accessibilityLabel={currentQuestion.favorite?'取消收藏题目':'收藏题目'} onPress={toggleFavorite} style={styles.nativeHeaderButton}><AppIcon name="star" selected={!!currentQuestion.favorite} size={23} color={currentQuestion.favorite?colors.brand:colors.text}/></AnimatedPressable>
           <AnimatedPressable accessibilityRole="button" accessibilityLabel="举报题目" disabled={reportBusy} onPress={()=>setReportOpen(true)} style={styles.nativeHeaderButton}><AppIcon name="flag" size={23} color={colors.text}/></AnimatedPressable>
         </View>
       </View>
+      {stackPracticeHeader&&<View style={styles.nativeHeaderTitleRow}><Text accessibilityRole="header" style={styles.nativeQuestionTitle}>{practiceSource==='wrong'?'错题复习':practiceSource==='favorites'?'收藏练习':isDailyPractice?'每日刷题':'知识点练习'}</Text></View>}
       <ScrollView style={styles.nativeQuestionScroll} contentContainerStyle={styles.nativeQuestionContent} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
         <AnimatedProgressBar value={((questionIndex+1)/Math.max(1,totalQuestions,questions.length))*100} color={colors.brand} trackColor={colors.border}/>
         <View style={styles.nativeQuestionProgress}><Text style={styles.nativeProgressText}>第 {questionIndex+1} / {Math.max(totalQuestions,questions.length)} 题</Text><Text style={styles.nativeProgressHint}>{result?'本题已作答':modeLabel}</Text></View>
@@ -1088,12 +1093,13 @@ export function PracticeScreen({
                 <View
                   style={[
                     styles.optionLetter,
+                    { width: optionBadgeEdge, height: optionBadgeEdge, borderRadius: optionBadgeEdge / 2 },
                     isSelected && styles.selectedOptionLetter,
                     isCorrect && styles.correctOptionLetter,
                     isWrong && styles.wrongOptionLetter,
                   ]}
                 >
-                  <Text style={[styles.optionLetterText,isSelected&&{color:colors.white},isCorrect&&{color:colors.success},isWrong&&{color:colors.warning}]}>{option}</Text>
+                  <Text style={[styles.optionLetterText,{lineHeight:optionBadgeEdge/Math.max(0.5,practiceFontScale)},isSelected&&{color:colors.white},isCorrect&&{color:colors.success},isWrong&&{color:colors.warning}]}>{option}</Text>
                 </View>
                 <Text style={styles.questionOptionText}>{currentQuestion.options[option]}</Text>
                 {isCorrect && <Text style={styles.optionStatus}>✓</Text>}
@@ -1146,31 +1152,36 @@ export function PracticeScreen({
           {result.correct === false && (
             <AnimatedPressable
               accessibilityRole="button"
+              accessibilityLabel={aiBusy === 'analysis' ? 'AI 解析中…' : 'AI 解析错因'}
               disabled={!!aiBusy}
               onPress={analyzeWithAi}
-              style={styles.aiToolButton}
+              style={[styles.aiToolButton, stackAiActions && styles.aiToolWide]}
             >
+              <AppIcon name="sparkles" size={18} color={colors.brand}/>
               <Text style={styles.aiToolButtonText}>
-                {aiBusy === 'analysis' ? 'AI 解析中…' : 'AI 解析错因'}
+                {aiBusy === 'analysis' ? '解析中…' : '错因分析'}
               </Text>
             </AnimatedPressable>
           )}
           <AnimatedPressable
             accessibilityRole="button"
+            accessibilityLabel={aiBusy === 'teacher' ? 'AI 老师思考中…' : 'AI 详细讲解'}
             disabled={!!aiBusy}
             onPress={() => askAiTeacher('详细讲解')}
-            style={styles.aiToolButton}
+            style={[styles.aiToolButton, stackAiActions && styles.aiToolWide]}
           >
+            <AppIcon name="book" size={18} color={colors.brand}/>
             <Text style={styles.aiToolButtonText}>
-              {aiBusy === 'teacher' ? 'AI 老师思考中…' : 'AI 详细讲解'}
+              {aiBusy === 'teacher' ? '思考中…' : '详细讲解'}
             </Text>
           </AnimatedPressable>
           <AnimatedPressable
             accessibilityRole="button"
             disabled={!!aiBusy}
             onPress={generateAiPractice}
-            style={styles.aiToolButton}
+            style={[styles.aiToolButton, styles.aiToolWide]}
           >
+            <AppIcon name="sparkles" size={18} color={colors.brand}/>
             <Text style={styles.aiToolButtonText}>
               {aiBusy === 'train' ? (aiProgress || '正在准备生成…') : '生成 3 道变式题'}
             </Text>
@@ -1505,13 +1516,13 @@ export function ProfileScreen({
       <AnimatedPressable accessibilityRole="button" accessibilityLabel="考试与题库，切换证书" onPress={user?onOpenCertificatePicker:undefined} style={styles.nativeCertificate}>
         <View style={styles.nativeIconTile}><AppIcon name="exam" size={23} color={colors.brand}/></View><View style={styles.profileIdentityCopy}><Text style={styles.profileMeta}>考试与题库</Text><Text style={styles.nativeCertificateTitle}>{activeCertificate?.name||(user?'请选择证书与题库':'预览模式')}</Text></View><Text style={styles.nativeLink}>切换</Text><AppIcon name="chevron-right" size={16} color={colors.textMuted}/>
       </AnimatedPressable>
-      <View style={styles.nativeMembership}>
+      <View testID="profile-membership-card" style={styles.nativeMembership}>
         <AnimatedPressable accessibilityRole="button" onPress={()=>onNavigate('vip')} style={styles.nativeMemberHeading}><AppIcon name="crown" size={25} color={androidAccent(colors,'member').ink}/><Text style={styles.nativeMemberTitle}>会员与 AI 积分</Text><Text style={styles.nativeMemberPlan}>{membershipPlan==='free'?'普通用户':membershipLabels[membershipPlan]}</Text><AppIcon name="chevron-right" size={16} color={colors.brand}/></AnimatedPressable>
-        <AndroidPointsLink userId={user?.id} compact/>
+        <AndroidPointsLink userId={user?.id} membership/>
         <View style={styles.nativeMemberActions}>
-          <AnimatedPressable accessibilityRole="button" accessibilityLabel="签到领积分，进入会员积分页" onPress={()=>onNavigate('vip')} style={styles.nativeMemberAction}><AppIcon name="calendar" size={19} color={colors.brand}/><Text style={styles.nativeMemberActionText}>签到领积分</Text></AnimatedPressable>
-          <AnimatedPressable accessibilityRole="button" onPress={()=>setRedeemOpen(true)} style={styles.nativeMemberAction}><AppIcon name="crown" size={19} color={colors.brand}/><Text style={styles.nativeMemberActionText}>兑换码</Text></AnimatedPressable>
-          <AnimatedPressable accessibilityRole="button" onPress={androidPointsFlow.showDetails} style={styles.nativeMemberAction}><AppIcon name="list" size={19} color={colors.brand}/><Text style={styles.nativeMemberActionText}>积分记录</Text></AnimatedPressable>
+          <AnimatedPressable accessibilityRole="button" accessibilityLabel="签到领积分，进入会员积分页" onPress={()=>onNavigate('vip')} style={[styles.nativeMemberAction,fontScale>1.2&&styles.nativeMemberActionLarge]}><AppIcon name="calendar" size={18} color={colors.brand}/><Text style={styles.nativeMemberActionText}>签到</Text></AnimatedPressable>
+          <AnimatedPressable accessibilityRole="button" onPress={()=>setRedeemOpen(true)} style={[styles.nativeMemberAction,fontScale>1.2&&styles.nativeMemberActionLarge]}><AppIcon name="crown" size={19} color={colors.brand}/><Text style={styles.nativeMemberActionText}>兑换码</Text></AnimatedPressable>
+          <AnimatedPressable accessibilityRole="button" accessibilityLabel="积分记录" onPress={androidPointsFlow.showDetails} style={[styles.nativeMemberAction,fontScale>1.2&&styles.nativeMemberActionLarge]}><AppIcon name="list" size={18} color={colors.brand}/><Text style={styles.nativeMemberActionText}>记录</Text></AnimatedPressable>
         </View>
       </View>
       <View style={styles.profileSection}><Text style={styles.profileSectionTitle}>学习入口</Text><View style={styles.profileShortcutGrid}>
@@ -3331,6 +3342,27 @@ settingsPage:{flex:1,backgroundColor:c.background},settingsNativeHeader:{minHeig
 
 
 const createStyles=(c:ThemeColors)=>({...legacyProfileStyles(c),...StyleSheet.create({
+  nativeHeaderFlexible:{flex:1,width:undefined},
+  nativeMemberActionLarge:{flexDirection:'column',gap:6,paddingHorizontal:4,minHeight:68},
+  nativeHeaderTitleRow:{width:'100%',paddingHorizontal:16,paddingBottom:8,alignItems:'center'},
+  optionLetter:{width:36,height:36,borderRadius:18,borderWidth:1,borderColor:c.border,backgroundColor:'transparent',alignItems:'center',justifyContent:'center',flexShrink:0},
+  optionLetterText:{color:c.text,fontSize:16,fontWeight:'500',width:'100%',height:'100%',textAlign:'center',textAlignVertical:'center',includeFontPadding:false},
+  feedbackGood:{backgroundColor:c.successSoft,borderColor:c.success,borderRadius:16,borderWidth:1,padding:18,gap:8},
+  feedbackBad:{backgroundColor:c.warningSoft,borderColor:c.warning,borderRadius:16,borderWidth:1,padding:18,gap:8},
+  feedbackTitle:{color:c.text,fontSize:16,lineHeight:25,fontWeight:'700'},
+  feedbackAnswer:{color:c.text,fontSize:14,lineHeight:24,fontWeight:'500'},
+  feedbackText:{color:c.textMuted,fontSize:14,lineHeight:25},
+  aiTools:{flexDirection:'row',flexWrap:'wrap',gap:10},
+  aiToolButton:{flexGrow:1,flexBasis:'45%',minWidth:0,minHeight:52,paddingHorizontal:12,paddingVertical:12,backgroundColor:c.brandSoft,borderRadius:12,flexDirection:'row',alignItems:'center',justifyContent:'center',gap:8},
+  aiToolWide:{flexBasis:'100%'},
+  aiToolButtonText:{color:c.brand,fontSize:14,lineHeight:23,fontWeight:'500',flexShrink:1,textAlign:'center'},
+  nativeMembership:{padding:18,borderRadius:18,backgroundColor:c.surface,borderColor:c.border,borderWidth:StyleSheet.hairlineWidth,marginBottom:16},
+  nativeMemberHeading:{flexDirection:'row',alignItems:'center',gap:9,minHeight:44},
+  nativeMemberTitle:{color:c.text,fontSize:16,fontWeight:'700',flex:1,minWidth:0},
+  nativeMemberPlan:{color:androidAccent(c,'member').ink,fontSize:12,fontWeight:'500',backgroundColor:androidAccent(c,'member').soft,paddingHorizontal:10,paddingVertical:4,borderRadius:8},
+  nativeMemberActions:{flexDirection:'row',borderTopColor:c.border,borderTopWidth:StyleSheet.hairlineWidth,paddingTop:14,gap:8},
+  nativeMemberAction:{flex:1,minWidth:0,minHeight:48,flexDirection:'row',alignItems:'center',justifyContent:'center',gap:6,paddingVertical:10,paddingHorizontal:5,borderRadius:10,backgroundColor:c.surfaceMuted},
+  nativeMemberActionText:{color:c.text,fontSize:13,fontWeight:'500',flexShrink:1},
   nativeAboutRow:{flexDirection:'row',alignItems:'stretch',backgroundColor:c.surface,borderRadius:18,borderWidth:StyleSheet.hairlineWidth,borderColor:c.border,marginBottom:14,overflow:'hidden'},
   nativeAboutStack:{flexDirection:'column'},
   nativeAboutButton:{flex:1,minWidth:0,minHeight:64,flexDirection:'row',alignItems:'center',justifyContent:'center',gap:8,paddingHorizontal:12,paddingVertical:12},

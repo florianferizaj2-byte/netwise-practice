@@ -1,9 +1,9 @@
 {
-  "latestVersion": "1.0.0",
-  "minimumVersion": "1.0.0",
-  "downloadUrl": "/downloads/kaojiang-v1.0.0.apk",
-  "releaseNotes": "v1.0：统一积分与AI扣费回执、账号安全和专项学习接口；优化中文字体、页面布局与返回操作，增加服务端版本检查和安装包完整性检查。",
-  "apkSha256": "fdc2adc3be34aaad938e469e23ef52d5ef3b59d9c2535bb10b076e1ae81b96a8",
-  "apkMd5": "3d86481566fb3943d6d615775cb64b4f",
-  "apkBytes": 99527767
+  "latestVersion": "1.0.1",
+  "minimumVersion": "1.0.1",
+  "downloadUrl": "/downloads/kaojiang-v1.0.1.apk",
+  "releaseNotes": "v1.0.1：收起AI费用长说明，修正题目选项与答案卡排版、弹窗安全区和积分卡；每日专项学习减为10题，保留已有进度。",
+  "apkSha256": "5452af13c2491172719951a4c20c3eb00cd30fe397a9811edfb875071d93d572",
+  "apkMd5": "0f1d29d0e3e004edda6c484c1b9a24a6",
+  "apkBytes": 100391308
 }

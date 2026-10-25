@@ -7,7 +7,7 @@ import {
 } from "./certificates.js";
 
 export const locationLearningPolicy = Object.freeze({
-  count: 30,
+  count: 10,
   answerMs: 1000,
   wrongReviewMs: 3000,
   pulseIntervalMs: 1000,
@@ -34,7 +34,7 @@ const matches = (a, b) =>
   JSON.stringify([...a].sort()) === JSON.stringify([...b].sort());
 
 // Reuses the application's material-group units; never splits a common stem
-// or borrows questions from another leaf to manufacture a 30-question set.
+// or borrows questions from another leaf to manufacture a fixed-size study set.
 function exactSample(questions, random = false) {
   const units = examUnits(questions);
   if (random)
@@ -42,13 +42,13 @@ function exactSample(questions, random = false) {
       const j = crypto.randomInt(i + 1);
       [units[i], units[j]] = [units[j], units[i]];
     }
-  const reachable = Array(31).fill(null);
+  const reachable = Array(locationLearningPolicy.count + 1).fill(null);
   reachable[0] = [];
   for (const unit of units)
-    for (let n = 30 - unit.length; n >= 0; n--)
+    for (let n = locationLearningPolicy.count - unit.length; n >= 0; n--)
       if (reachable[n] !== null && reachable[n + unit.length] === null)
         reachable[n + unit.length] = [...reachable[n], unit];
-  return reachable[30]?.flat() || null;
+  return reachable[locationLearningPolicy.count]?.flat() || null;
 }
 export function createLocationLearning(
   store,
@@ -79,12 +79,24 @@ export function createLocationLearning(
       "UPDATE location_learning_sessions SET state=?,data=? WHERE id=?",
     ).run(s.state, JSON.stringify(s), s.id);
   };
-  const unlocked = (user, certificate) =>
-    !!db
+  const completeSatisfiedSession = (s) => {
+    if (s?.state !== 'active' || s.index < locationLearningPolicy.count) return false;
+    // An older 30-question round keeps every answer and attempt. Only its daily
+    // qualification changes: ten already completed questions are sufficient.
+    s.state = 'completed';
+    s.completedAt = new Date(now()).toISOString();
+    s.leaseId = null; s.lastPulseAt = null; s.activeMs = 0;
+    save(s);
+    return true;
+  };
+  const unlocked = (user, certificate) => {
+    completeSatisfiedSession(active(user, certificate));
+    return !!db
       .prepare(
         "SELECT 1 FROM location_learning_sessions WHERE user_id=? AND certificate_id=? AND day=? AND state='completed'",
       )
       .get(user, certificate, dayAt(now()));
+  };
   const active = (user, certificate) =>
     unpack(
       db
@@ -166,7 +178,8 @@ export function createLocationLearning(
     );
     if (!s) fail("未找到当前账号和证书的专项学习", 404);
     if (s.day !== dayAt(now()))
-      fail("已进入新的一天，请重新完成今天的 30 道题");
+      fail(`已进入新的一天，请重新完成今天的 ${locationLearningPolicy.count} 道题`);
+    completeSatisfiedSession(s);
     if (validate && s.state === "active" && !usable(s, certificate))
       fail("题库已更新，本题已修改或下架，请重新选择知识点");
     return s;
@@ -181,10 +194,10 @@ export function createLocationLearning(
       day: s.day,
       state: s.state,
       point: s.point,
-      completedCount: s.index,
-      answeredCount: s.results.length,
-      correctCount: s.results.filter((r) => r.correct).length,
-      total: 30,
+      completedCount: Math.min(s.index, locationLearningPolicy.count),
+      answeredCount: Math.min(s.results.length, locationLearningPolicy.count),
+      correctCount: s.results.slice(0, locationLearningPolicy.count).filter((r) => r.correct).length,
+      total: locationLearningPolicy.count,
       phase: s.phase,
       challenge: s.challenge,
       question: q ? safeQuestion(q) : null,
@@ -208,6 +221,7 @@ export function createLocationLearning(
     };
   };
   const status = (user, certificate, includeCatalog = true) => {
+    const isUnlocked = unlocked(user, certificate);
     let session = active(user, certificate);
     if (session && !usable(session, certificate)) {
       session.state = "invalidated";
@@ -218,7 +232,7 @@ export function createLocationLearning(
       userId: user,
       day: dayAt(now()),
       certificateId: certificate,
-      unlocked: unlocked(user, certificate),
+      unlocked: isUnlocked,
       validUntil: new Date(midnight(now())).toISOString(),
       policy: locationLearningPolicy,
       session: view(session),
@@ -266,7 +280,7 @@ export function createLocationLearning(
         }
         const point = catalog(user, certificate).find((p) => p.id === pointId);
         if (!point?.eligible)
-          fail("该知识点不足 30 道可完整组题的客观题，请选择其他知识点", 400);
+          fail(`该知识点不足 ${locationLearningPolicy.count} 道可完整组题的客观题，请选择其他知识点`, 400);
         const questions = exactSample(
           pool(user, certificate).filter(
             (q) => examPointId(certificate, q) === pointId,
@@ -274,7 +288,7 @@ export function createLocationLearning(
           true,
         );
         if (!questions)
-          fail("该知识点当前无法完整抽取 30 道题，请选择其他知识点", 400);
+          fail(`该知识点当前无法完整抽取 ${locationLearningPolicy.count} 道题，请选择其他知识点`, 400);
         const s = {
           id: crypto.randomUUID(),
           version: 1,
@@ -429,7 +443,7 @@ export function createLocationLearning(
         s.phase = "answer";
         s.challenge = crypto.randomUUID();
         resetPresence(s);
-        if (s.index === 30) {
+        if (s.index >= locationLearningPolicy.count) {
           s.state = "completed";
           s.completedAt = new Date(now()).toISOString();
         }
@@ -440,7 +454,7 @@ export function createLocationLearning(
     permit(user, certificate) {
       return tx(() => {
         if (!unlocked(user, certificate))
-          fail("请先完成今天当前证书下的 30 道专项学习题", 403);
+          fail(`请先完成今天当前证书下的 ${locationLearningPolicy.count} 道专项学习题`, 403);
         db.prepare(
           "DELETE FROM location_learning_permits WHERE expires_at<? OR used=1",
         ).run(now());

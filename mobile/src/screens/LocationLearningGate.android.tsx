@@ -18,7 +18,8 @@ import type {
 import { studyRequestId } from "../api/studyTypes";
 import { AnimatedPressable } from "../components/Motion";
 import { QuestionImages } from "../components/QuestionImages";
-import { SafeAreaView } from "../components/SafeArea";
+import { AndroidModalSafeArea } from "../components/AndroidModalSafeArea.android";
+import { AppIcon } from '../components/AppIcon';
 import { AppAlert } from "../components/AppAlert";
 import { useAppActive, useScreenActive } from "../navigation/ScreenActivity";
 import { useThemedStyles, type ThemeColors } from "../theme";
@@ -44,6 +45,7 @@ export function LocationLearningGate({
     [retry, setRetry] = useState(0),
     [presenceError, setPresenceError] = useState(false),
     [documentActive, setDocumentActive] = useState(true);
+  const requiredCount = data?.session?.total || data?.policy?.count || 10;
   const alive = useRef(true),
     requestBusy = useRef(false);
   const scroll = useRef<ScrollView>(null),
@@ -282,7 +284,7 @@ export function LocationLearningGate({
     if (session?.state === "active")
       AppAlert.alert(
         "暂时退出专项学习？",
-        "已提交的作答和阅读进度会保留；今天完成 30 道后再进入该功能。",
+        `已提交的作答和阅读进度会保留；今天完成 ${requiredCount} 道后再进入该功能。`,
         [
           { text: "继续刷题", style: "cancel" },
           { text: "暂时退出", onPress: onClose },
@@ -294,10 +296,12 @@ export function LocationLearningGate({
     <Modal
       visible={visible && screenActive}
       animationType="slide"
+      statusBarTranslucent
+      navigationBarTranslucent
       onRequestClose={close}
     >
-      <SafeAreaView style={s.safe}>
-        <View style={s.header}>
+      <AndroidModalSafeArea style={s.safe}>
+        <View testID="location-learning-header" style={s.header}>
           <AnimatedPressable
             accessibilityRole="button"
             accessibilityLabel="退出专项学习"
@@ -305,10 +309,10 @@ export function LocationLearningGate({
             onPress={close}
             style={s.headerAction}
           >
-            <Text style={s.link}>‹ 返回练习</Text>
+            <AppIcon name="chevron-left" size={24} color={s.link.color}/>
           </AnimatedPressable>
-          <Text style={s.headerTitle}>先学习，再进入</Text>
-          <Text style={s.day}>{data?.day?.slice(5) || ""}</Text>
+          <Text accessibilityRole="header" style={s.headerTitle}>专项练习</Text>
+          <Text style={s.day}>{requiredCount} 题</Text>
         </View>
         <ScrollView
           testID="location-learning-scroll"
@@ -342,7 +346,7 @@ export function LocationLearningGate({
               <Text style={s.kicker}>今日专项学习已完成</Text>
               <Text style={s.title}>已解锁模拟定位学习</Text>
               <Text style={s.body}>
-                当前账号、当前证书今天可重复进入。次日需重新完成 30
+                当前账号、当前证书今天可重复进入。次日需重新完成 {requiredCount}
                 道；答错不影响解锁资格。
               </Text>
               <AnimatedPressable
@@ -376,7 +380,7 @@ export function LocationLearningGate({
                   {session.point.name}
                 </Text>
                 <Text style={s.title}>
-                  专项学习 {Math.min(session.completedCount + 1, 30)} / 30
+                  专项学习 {Math.min(session.completedCount + 1, requiredCount)} / {requiredCount}
                 </Text>
                 <Text style={s.body}>
                   已完成 {session.completedCount}{" "}
@@ -386,7 +390,7 @@ export function LocationLearningGate({
                   <View
                     style={[
                       s.fill,
-                      { width: `${(session.completedCount / 30) * 100}%` },
+                      { width: `${Math.min(1, session.completedCount / requiredCount) * 100}%` },
                     ]}
                   />
                 </View>
@@ -516,8 +520,8 @@ export function LocationLearningGate({
                         ]}
                       >
                         <Text style={s.primaryText}>
-                          {session.completedCount === 29
-                            ? "确认阅读，完成 30 题"
+                          {session.completedCount >= requiredCount - 1
+                            ? `确认阅读，完成 ${requiredCount} 题`
                             : "确认阅读，下一题"}
                         </Text>
                       </AnimatedPressable>
@@ -550,13 +554,13 @@ export function LocationLearningGate({
             <>
               <View style={s.card}>
                 <Text style={s.kicker}>当前证书 · 每日专项学习</Text>
-                <Text style={s.title}>选择一个知识点，抽取 30 道</Text>
+                <Text style={s.title}>选择一个知识点，抽取 {requiredCount} 道</Text>
                 <Text style={s.body}>
                   不要求答对多少题。每题先阅读至少 1 秒；答错后阅读解析至少 3
                   秒。后台停留不计时，重复提交不加进度。
                 </Text>
                 <Text style={s.hint}>
-                  只从当前证书抽取不重复、能即时判分并有解析的客观题；不足 30
+                  只从当前证书抽取不重复、能即时判分并有解析的客观题；不足 {requiredCount}
                   道的知识点暂不能选择。
                 </Text>
               </View>
@@ -577,7 +581,7 @@ export function LocationLearningGate({
                 <AnimatedPressable
                   key={point.id}
                   accessibilityRole="button"
-                  accessibilityLabel={`选择${point.name}，${point.questionCount}道题${point.eligible ? "" : "，不足30道"}`}
+                  accessibilityLabel={`选择${point.name}，${point.questionCount}道题${point.eligible ? "" : `，不足${requiredCount}道或无法完整组题`}`}
                   disabled={busy || !point.eligible}
                   onPress={() => void action("start", point.id)}
                   style={[s.card, !point.eligible && s.disabled]}
@@ -590,7 +594,7 @@ export function LocationLearningGate({
                   <Text style={s.body}>
                     {point.questionCount} 道可用客观题 ·{" "}
                     {point.eligible
-                      ? "随机抽取 30 道"
+                      ? `随机抽取 ${requiredCount} 道`
                       : "题量或完整题组不足，暂不可选"}
                   </Text>
                   <Text style={s.link}>
@@ -601,7 +605,7 @@ export function LocationLearningGate({
             </>
           ) : null}
         </ScrollView>
-      </SafeAreaView>
+      </AndroidModalSafeArea>
     </Modal>
   );
 }
@@ -618,9 +622,9 @@ const styles = (c: ThemeColors) =>
       borderColor: c.border,
       backgroundColor: c.surface,
     },
-    headerAction: { minHeight: 48, justifyContent: "center" },
-    headerTitle: { fontSize: 15, fontWeight: "700", color: c.text },
-    day: { fontSize: 12, color: c.textMuted, minWidth: 48 },
+    headerAction: { width:48, minHeight: 56, justifyContent: "center", alignItems:'flex-start' },
+    headerTitle: { flex:1,minWidth:0,textAlign:'center',fontSize: 16, fontWeight: "700", color: c.text },
+    day: { fontSize: 12, color: c.textMuted, width:48,textAlign:'right' },
     content: { padding: 18, gap: 14, paddingBottom: 40 },
     card: {
       backgroundColor: c.surface,

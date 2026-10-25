@@ -42,8 +42,13 @@ with zipfile.ZipFile(apk) as archive:
     licenses = [name for name in names if name.endswith('/OFL-NotoSansSC.txt')]
     assert licenses and archive.read(licenses[0]) == (ROOT / 'mobile/assets/fonts/OFL-NotoSansSC.txt').read_bytes(), 'Font license missing or changed'
     bundle = archive.read('assets/index.android.bundle')
-    for marker in ['https://aceexam.top/api', app['version'], 'points-v1', 'backend-connection-notice']:
+    for marker in ['https://aceexam.top/api', app['version'], 'points-v1', 'backend-connection-notice',
+                   'android-ai-confirm-sheet', 'android-modal-safe-area', 'location-learning-header', 'profile-points-value']:
         assert marker.encode() in bundle or marker.encode('utf-16-le') in bundle, f'Expected release code not found in bundle: {marker}'
+    for marker in ['__setFontScale', '__setAndroidTheme']:
+        assert marker.encode() not in bundle, f'Browser-test control leaked into the APK: {marker}'
+    safe_area_native = any(b'RNCSafeAreaProvider' in archive.read(name) for name in names if name.endswith('.dex'))
+    assert safe_area_native, 'Native safe-area provider is missing from the signed APK'
 
 digest = hashlib.sha256(apk.read_bytes()).hexdigest()
 assert (apk.with_suffix('.apk.sha256')).read_text(encoding='utf-8').split()[0].lower() == digest, 'APK checksum mismatch'
@@ -53,7 +58,7 @@ assert policy['apkSha256'].lower() == digest and policy['apkBytes'] == apk.stat(
 assert policy['apkMd5'].lower() == hashlib.md5(apk.read_bytes()).hexdigest(), 'Download integrity metadata mismatch'
 result = {'passed': True, 'version': app['version'], 'versionCode': app['android']['versionCode'], 'package': package.group(1),
           'productionCertificateMatches': True, 'certificateSha256': certificate, 'sha256': digest,
-          'bytes': apk.stat().st_size, 'abis': abis, 'bundledFonts': 3, 'fontLicense': True,
+          'bytes': apk.stat().st_size, 'abis': abis, 'bundledFonts': 3, 'fontLicense': True, 'nativeSafeAreaProvider': safe_area_native,
           'backendUrl': 'https://aceexam.top/api', 'deviceInstalled': False, 'deployed': False}
 output = ROOT / 'test-output/native-release-verification.json'
 output.parent.mkdir(exist_ok=True)

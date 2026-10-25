@@ -20,6 +20,8 @@ export async function checkDeployment({ baseUrl, sessionToken, apk, fetchImpl = 
     return response.json();
   };
   const release = await json('/mobile/version?version=' + version);
+  assert.equal(release.latestVersion, version, '线上安装包版本与本次发行版不一致');
+  assert.equal(release.backend?.version, version, '后端进程尚未切换到本次发行版，请检查重启和代理');
   assert.equal(release.forceUpdate, false, '服务器要求比当前安装包更高的版本');
   assert(release.backend?.apiRevision >= 1, '服务器尚未部署 v1.0 接口契约');
   assert(capabilities.every(name => release.backend.capabilities?.includes(name)), '配套接口未全部挂载');
@@ -44,13 +46,15 @@ export async function checkDeployment({ baseUrl, sessionToken, apk, fetchImpl = 
       ['/auth/security', data => !!data && typeof data === 'object'],
       ['/practice/catalog?summary=1', data => Number.isInteger(data.total)],
       ['/exams/catalog', data => !!data && typeof data === 'object'],
-      ['/location-learning', data => !!data && typeof data === 'object'],
+      ['/location-learning', data => data?.policy?.count === 10],
     ]) { const data = await json(route, true); assert(valid(data), `${route} 返回格式不匹配`); if(route==='/account/entitlements') aiReadiness.configured = !!data.aiServiceAvailable; if(route==='/account/points/services') aiReadiness.validPrices = !!data.available; checked.push(route); }
   }
   if (apk) assert.equal(crypto.createHash('sha256').update(fs.readFileSync(apk)).digest('hex'), release.apkSha256.toLowerCase(), '本地 APK 与已发布版本不符');
   return { ok: true, appVersion: version, backendVersion: release.backend.version, capabilities: release.backend.capabilities,
     apkRangeDownload: true, wholeApkHashChecked: !!apk, authenticatedApis: sessionToken ? 'passed' : '未执行：设置 ACEEXAM_SESSION_TOKEN 后重跑',
-    aiReadiness, authenticatedChecks: checked.length, externalModelCalls: 0, userDataChanged: false };
+    aiReadiness, authenticatedChecks: checked.length, learningQuestionCount: sessionToken ? 10 : null,
+    externalModelCalls: 0, readOnlyRequests: true, mutationRequests: 0,
+    legacyLearningStatusMayNormalize: !!sessionToken };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {

@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef, useState, useSyncExternalStore } from 'react';
 import { ActivityIndicator, Keyboard, Modal, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from './SafeArea';
+import { AndroidModalSafeArea } from './AndroidModalSafeArea.android';
+import { AppIcon } from './AppIcon';
 import { AnimatedPressable } from './Motion';
 import { AiPointsPricing } from './AiPointsPricing.android';
 import { mobileApi, mobileSessionSnapshot, registerMobileRequestHooks, type PointOperation } from '../api/client';
@@ -57,7 +58,7 @@ export function AndroidPointsInline({active=true}:{active?:boolean}){
 }
 
 function AndroidPointsDialog({userId,ownerKey}:{userId:string;ownerKey:string}) {
-  const s=useThemedStyles(styles),{colors,resolvedMode,reduceMotion}=useTheme(),state=useAndroidPoints();
+  const s=useThemedStyles(styles),{colors,reduceMotion}=useTheme(),state=useAndroidPoints();
   const belongs=state.ownerKey===ownerKey;
   const prompt=belongs?state.prompt:null,visible=belongs&&(!!prompt||state.detailsOpen);
   const [expanded,setExpanded]=useState(false);
@@ -67,15 +68,21 @@ function AndroidPointsDialog({userId,ownerKey}:{userId:string;ownerKey:string}) 
   const example=model?.services.find(service=>service.id===prompt?.priceId);
   const close=()=>{if(prompt)androidPointsFlow.cancel();else androidPointsFlow.hideDetails();};
   if(!belongs)return null;
-  return <Modal visible={visible} animationType={reduceMotion?'none':'slide'} onRequestClose={close}>
-    <SafeAreaView style={s.modal} accessibilityViewIsModal>
-      <View style={s.header}><Text accessibilityRole="header" style={[s.title,s.grow]}>{prompt?'使用 AI 前确认积分':'积分费用与记录'}</Text>
+  return <Modal visible={visible} transparent statusBarTranslucent navigationBarTranslucent animationType={reduceMotion?'none':'fade'} onRequestClose={close}>
+    <View style={s.scrim}>
+      <AndroidModalSafeArea style={s.modal}>
+      <View testID={prompt?'android-ai-confirm-sheet':'android-points-details-sheet'} accessibilityViewIsModal style={[s.sheet,!prompt&&s.detailsSheet]}>
+      <View style={s.header}><Text accessibilityRole="header" style={[s.title,s.grow]}>{prompt?prompt.name:'积分费用与记录'}</Text>
         <AnimatedPressable accessibilityRole="button" accessibilityLabel={prompt?'取消本次AI请求':'关闭积分费用与记录'} onPress={close} style={s.smallButton}><Text style={s.action}>{prompt?'取消':'关闭'}</Text></AnimatedPressable></View>
-      <ScrollView style={s.grow} contentContainerStyle={s.content} keyboardShouldPersistTaps="handled">
+      <ScrollView style={s.sheetScroll} contentContainerStyle={s.content} keyboardShouldPersistTaps="handled">
         <Text style={s.balance}>可用 {wallet?number(wallet.availableUnits):'—'} 积分 · 预扣 {wallet?number(wallet.heldUnits):'—'}</Text>
         {!!state.error&&<Text style={s.error} accessibilityRole="alert">{state.error}</Text>}
         {prompt?<>
-          <Text style={s.title}>{prompt.name}</Text>
+          <Text style={s.text}>免费结果不扣积分，新 AI 调用按实际用量结算。</Text>
+          <AnimatedPressable accessibilityRole="button" accessibilityLabel="费用说明" accessibilityState={{expanded}} onPress={()=>setExpanded(value=>!value)} style={s.disclosure}>
+            <AppIcon name="info" size={16} color={colors.textMuted}/><Text style={s.disclosureText}>费用说明</Text><AppIcon name={expanded?'chevron-up':'chevron-right'} size={14} color={colors.textMuted}/>
+          </AnimatedPressable>
+          {expanded&&<View testID="android-ai-cost-details" style={s.costDetails}>
           <Text style={s.text}>普通刷题、已有内容、缓存与确定性判分免费；只有新 AI 调用才按实际用量扣积分。</Text>
           {wallet?.availableUnits===0&&<Text style={s.note}>可用积分为 0 仍可尝试免费结果；需要新 AI 时，由服务端校验余额。</Text>}
           {!!prompt.maybeFree&&<Text style={s.note}>{prompt.maybeFree}</Text>}
@@ -84,8 +91,8 @@ function AndroidPointsDialog({userId,ownerKey}:{userId:string;ownerKey:string}) 
             <Text style={s.text}>每轮 1000 输入 Token＋该服务首轮输出额度，含标准审核，不含重试。这不是固定价格，也不是预扣或扣费上限。</Text>
           </View>:<Text style={s.note}>暂未取得本服务的有效用量示例，不能将未知费用当作 0 积分。是否需要 AI、余额是否足够，由服务端校验。</Text>}
           <Text style={s.text}>成功按实际用量结算，预扣差额释放；任务最终失败退回该任务预扣，但不会延长原积分有效期。接口可能按管理员优先级切换，实际费用以命中的模型与用量为准。</Text>
-          <AnimatedPressable accessibilityRole="button" accessibilityState={{expanded}} onPress={()=>setExpanded(value=>!value)} style={s.button}><Text style={s.action}>{expanded?'收起完整价目':'查看完整价目和免费范围'}</Text></AnimatedPressable>
-          {expanded&&<AiPointsPricing userId={userId}/>}
+          <AiPointsPricing userId={userId}/>
+          </View>}
         </>:<>
           <Text style={s.note} accessibilityLiveRegion="polite">{state.message}</Text>
           <Text style={s.text}>可用余额不包含预扣、过期或待到账积分。积分先使用先到期部分；签到赠送当日有效，会员按原周期发放，退款不延长有效期。</Text>
@@ -96,10 +103,12 @@ function AndroidPointsDialog({userId,ownerKey}:{userId:string;ownerKey:string}) 
         </>}
       </ScrollView>
       {prompt&&<View style={s.footer}>
-        <AnimatedPressable accessibilityRole="button" onPress={androidPointsFlow.cancel} style={s.button}><Text style={s.action}>取消，不发起请求</Text></AnimatedPressable>
-        <AnimatedPressable accessibilityRole="button" accessibilityLabel="继续使用AI，按实际用量结算" onPress={androidPointsFlow.accept} style={[s.button,{backgroundColor:colors.brand}]}><Text style={[s.buttonText,{color:resolvedMode==='dark'?colors.background:colors.white}]}>继续使用 AI</Text></AnimatedPressable>
+        <AnimatedPressable accessibilityRole="button" accessibilityLabel="取消，不发起请求" onPress={androidPointsFlow.cancel} style={[s.button,s.cancelButton]}><Text style={s.action}>取消</Text></AnimatedPressable>
+        <AnimatedPressable accessibilityRole="button" accessibilityLabel="继续使用AI，按实际用量结算" onPress={androidPointsFlow.accept} style={[s.button,s.continueButton,{backgroundColor:colors.action}]}><Text style={[s.buttonText,{color:colors.white}]}>继续使用 AI</Text></AnimatedPressable>
       </View>}
-    </SafeAreaView>
+      </View>
+      </AndroidModalSafeArea>
+    </View>
   </Modal>;
 }
 
@@ -139,10 +148,17 @@ const styles=(c:ThemeColors)=>StyleSheet.create({
   small:{color:c.text,fontSize:13,lineHeight:20},action:{color:c.brand,fontSize:14,lineHeight:22,fontWeight:'600'},
   grow:{flex:1},smallButton:{minHeight:48,minWidth:48,paddingHorizontal:8,justifyContent:'center',alignItems:'center'},
   inline:{paddingHorizontal:12,paddingVertical:8,flexDirection:'row',alignItems:'center',gap:8,backgroundColor:c.surface},
-  modal:{flex:1,backgroundColor:c.background},header:{padding:16,flexDirection:'row',alignItems:'center',gap:8,backgroundColor:c.surface},
+  scrim:{flex:1,backgroundColor:c.overlay},modal:{justifyContent:'flex-end'},
+  sheet:{maxHeight:'88%',backgroundColor:c.surface,borderTopLeftRadius:24,borderTopRightRadius:24,overflow:'hidden',marginHorizontal:8},
+  detailsSheet:{height:'88%'},sheetScroll:{flexGrow:0,flexShrink:1},
+  header:{paddingHorizontal:20,paddingTop:12,paddingBottom:4,flexDirection:'row',alignItems:'center',gap:8},
+  disclosure:{alignSelf:'flex-start',minHeight:48,flexDirection:'row',alignItems:'center',gap:7},
+  disclosureText:{color:c.textMuted,fontSize:13,lineHeight:20},costDetails:{gap:14,paddingTop:4},
   title:{color:c.text,fontSize:18,lineHeight:27,fontWeight:'700'},text:{color:c.text,fontSize:15,lineHeight:24},
-  content:{padding:16,gap:16,paddingBottom:32},noteBox:{padding:16,gap:8,borderRadius:12,backgroundColor:c.surface},
+  content:{paddingHorizontal:20,paddingVertical:12,gap:10},noteBox:{padding:16,gap:8,borderRadius:12,backgroundColor:c.surfaceMuted},
   note:{color:c.text,fontSize:15,lineHeight:24},error:{color:c.warning,fontSize:14,lineHeight:22},
-  footer:{padding:16,gap:12,backgroundColor:c.surface},button:{minHeight:48,alignItems:'center',justifyContent:'center',padding:12,borderRadius:12,backgroundColor:c.surface},
+  footer:{paddingHorizontal:20,paddingTop:8,paddingBottom:20,gap:12,flexDirection:'row',backgroundColor:c.surface},
+  cancelButton:{minWidth:80,backgroundColor:c.surfaceMuted},continueButton:{flex:1},
+  button:{minHeight:48,alignItems:'center',justifyContent:'center',padding:12,borderRadius:12,backgroundColor:c.surface},
   buttonText:{fontSize:16,lineHeight:24,fontWeight:'700'},ledger:{gap:12},record:{paddingVertical:12,gap:6,borderBottomWidth:1,borderColor:c.border},
 });

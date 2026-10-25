@@ -32,7 +32,7 @@ test('all older mobile clients receive a forced update and 426; the current app 
     fs.rmSync(dir, { recursive: true, force: true });
   });
   const base = `http://127.0.0.1:${server.address().port}/api`;
-  for (const version of ['0.0.1', '0.4.2', '0.4.3', '0.4.4', '0.4.5']) {
+  for (const version of ['0.0.1', '0.4.2', '0.4.3', '0.4.4', '0.4.5', '1.0.0']) {
     const info = await fetch(`${base}/mobile/version?version=${version}`).then((response) => response.json());
     assert.equal(info.forceUpdate, true); assert.equal(info.minimumVersion, current);
     const rejected = await fetch(`${base}/auth/me`, { headers: { 'X-Client': 'mobile', 'X-App-Version': version } });

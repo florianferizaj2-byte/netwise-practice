@@ -107,7 +107,7 @@ export const locationLearningApi = {
     const snapshot = mobileSessionSnapshot();
     const status = await this.locationLearningStatus();
     assertCurrent(snapshot);
-    if (!status.unlocked) throw new Error('请先完成今天当前证书下的 30 道专项学习题');
+    if (!status.unlocked) throw new Error(`请先完成今天当前证书下的 ${status.policy?.count || 10} 道专项学习题`);
     const { permit } = await request<{ permit: string }>('/permit', {});
     assertCurrent(snapshot);
     await updateRoutePlayerIdentity(`${status.userId}:${status.certificateId}`);

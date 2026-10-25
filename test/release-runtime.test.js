@@ -53,7 +53,7 @@ test('Android target keeps backend/native gates and excludes deferred mobile web
   write('release-target.json', JSON.stringify({target:'android',preserveExistingMobileWeb:true}));
   assert.equal(getReleaseTarget(root), 'android');
   const ids = checksForTarget('android').map(check => check.id);
-  for (const id of ['version','banks','types','apk','unit','build','runtime','browser','study','purchase','download','android-layout','android-flows','launch','deployment']) assert(ids.includes(id), id);
+  for (const id of ['version','banks','types','apk','unit','build','runtime','browser','study','purchase','download','android-points','android-layout','android-flows','launch','deployment']) assert(ids.includes(id), id);
   for (const id of ['mobile-web','apple','phone-study','admin','announcement','profile']) assert(!ids.includes(id), id);
   assert(!runtimeArtifacts(root, '0.0.1').some(file => file.startsWith('dist/app/')));
   fs.unlinkSync(path.join(root, 'dist/app/index.html'));

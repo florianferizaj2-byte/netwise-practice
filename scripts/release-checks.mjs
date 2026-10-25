@@ -28,6 +28,7 @@ export const allReleaseChecks = [
   ['announcement', '公告热更新', ['test/mobile-announcement.e2e.js']],
   ['profile', '启动公告与资料补全', ['test/mobile-profile.e2e.js']],
   ['download', '官网 APK 下载与强制更新', ['test/mobile-release-publish.e2e.js']],
+  ['android-points', 'Android AI 确认与积分结算', ['test/android-points-flow.e2e.js']],
   ['android-layout', 'Android 我的与会员布局', ['test/android-profile-vip-layout.e2e.js']],
   ['android-flows', 'Android 全流程与升级恢复', ['test/mobile-update.e2e.js']],
   ['launch', 'App 启动与减弱动画', ['test/app-launch.e2e.js']],

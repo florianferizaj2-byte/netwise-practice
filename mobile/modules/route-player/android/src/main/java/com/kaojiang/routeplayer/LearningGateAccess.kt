@@ -27,7 +27,7 @@ object LearningGateAccess {
 
     @Synchronized fun acceptValidated(context: Context, body: String) {
         val response = JSONObject(body)
-        check(response.optBoolean("allowed", false)) { "请先完成今天的 30 道专项学习题" }
+        check(response.optBoolean("allowed", false)) { "请先完成今天的专项学习题" }
         val authorizedScope = response.getString("scope")
         check(authorizedScope.matches(Regex("[a-f0-9]{64}")) && authorizedScope == scope) { "账号或证书已改变，请从考匠重新进入" }
         check(response.getString("day").matches(Regex("\\d{4}-\\d{2}-\\d{2}"))) { "学习资格日期无效" }

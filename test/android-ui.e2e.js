@@ -8,7 +8,8 @@ import crypto from 'node:crypto';
 import express from 'express';
 import react from '@vitejs/plugin-react';
 import { createServer } from 'vite';
-import { expect } from '@playwright/test';
+import { expect as baseExpect } from '@playwright/test';
+const expect=baseExpect.configure({timeout:15000});
 import { createApp } from '../server/index.js';
 import { createStore } from '../server/store.js';
 import { completeFixtureProfile } from './helpers/mobile-profile.js';
@@ -46,7 +47,15 @@ store.points.recordFinance({ key: 'synthetic-ui-income', kind: 'revenue', amount
 store.points.grant({ userId: user.id, sourceKey: 'synthetic-ui-grant', units: 1000000, kind: 'test', requireFunded: true });
 store.aiServices.policy = () => ({ managed: true });
 store.aiServices.channels = () => [{ id: 'ui-flash', name: '界面验收接口', baseUrl: 'https://api.deepseek.com', model: 'deepseek-flash', keyCipher: 'SYNTHETIC-UNUSED-KEY', priority: 1, enabled: true }];
-const backend = await createApp({ store, withFrontend: false, authRequired: true, accountSecurity: { enabled: false }, announcementFile: path.join(directory, 'no-announcement.json') });
+// Keep this same-day UI scenario independent of a real midnight during a long
+// release build. Elapsed dwell time remains real and monotonic; separate server
+// regressions still verify day rollover and expired permits.
+const learningStarted = performance.now();
+const learningDay = new Date(Date.now() + 8 * 3600000).toISOString().slice(0, 10);
+const learningEpoch = Date.parse(learningDay + 'T12:00:00+08:00');
+const backend = await createApp({ store, withFrontend: false, authRequired: true, accountSecurity: { enabled: false },
+  locationLearningNow: () => learningEpoch + Math.floor(performance.now() - learningStarted),
+  announcementFile: path.join(directory, 'no-announcement.json') });
 const entry = path.join(directory, 'harness'); fs.mkdirSync(entry);
 const write = (name, text) => fs.writeFileSync(path.join(entry, name), text);
 const source = file => '/@fs/' + path.join(mobile, file).replaceAll('\\', '/');
@@ -60,18 +69,23 @@ write('storage.ts', 'export default {async getItem(k){return localStorage.getIte
 write('stream.ts', 'export const fetch=(...args)=>globalThis.fetch(...args)');
 write('audio.ts', 'export async function prepareUiSounds(){} export function setUiSoundSettings(){} export function playUiSound(){} export function previewUiSound(){}');
 write('status.tsx', 'export function StatusBar(){return null}');
-write('native.ts', "export*from'react-native-web';import{Platform}from'react-native-web';Platform.OS='android';export const ToastAndroid={LONG:1,SHORT:0,show(){}};export const PermissionsAndroid={PERMISSIONS:{},RESULTS:{GRANTED:'granted'},async check(){return true},async request(){return 'granted'}};");
+write('native.ts', `export*from'react-native-web';import React from'react';import{Platform,StyleSheet,Text as BaseText,TextInput as BaseInput,useWindowDimensions as baseDimensions}from'react-native-web';Platform.OS='android';
+const Scale=React.createContext(1);export function TestFontScaleProvider({children}){const [scale,setScale]=React.useState(1);React.useLayoutEffect(()=>{window.__setFontScale=setScale},[]);return React.createElement(Scale.Provider,{value:scale},children)}
+const scaled=(style,scale)=>{const s=StyleSheet.flatten(style)||{};return[style,typeof s.fontSize==='number'?{fontSize:s.fontSize*scale}:null,typeof s.lineHeight==='number'?{lineHeight:s.lineHeight*scale}:null]};
+export const Text=React.forwardRef((props,ref)=>React.createElement(BaseText,{...props,ref,style:scaled(props.style,React.useContext(Scale))}));export const TextInput=React.forwardRef((props,ref)=>React.createElement(BaseInput,{...props,ref,style:scaled(props.style,React.useContext(Scale))}));export const useWindowDimensions=()=>({...baseDimensions(),fontScale:React.useContext(Scale)});
+export const ToastAndroid={LONG:1,SHORT:0,show(){}};export const PermissionsAndroid={PERMISSIONS:{},RESULTS:{GRANTED:'granted'},async check(){return true},async request(){return'granted'}};`);
 write('picker.ts', 'export async function launchImageLibraryAsync(){return {canceled:true,assets:[]}};export async function requestMediaLibraryPermissionsAsync(){return {granted:true}};');
 write('file-system.ts', 'export const cacheDirectory=null,documentDirectory=null;export async function getInfoAsync(){return {exists:false}};export async function deleteAsync(){};');
 write('intent.ts', 'export async function startActivityAsync(){};');
 write('native-route.ts', 'export function routePlayerAvailable(){return true} export async function updateRoutePlayerIdentity(){} export async function openRoutePlayer(){throw Error("Native entry is not part of browser acceptance")};');
-write('main.tsx', `import React from 'react';import {createRoot} from 'react-dom/client';
-import {ThemeProvider} from ${JSON.stringify(source('src/theme.android.ts'))};
+write('main.tsx', `import React from 'react';import {createRoot} from 'react-dom/client';import{TestFontScaleProvider}from'./native';
+import {ThemeProvider,useTheme} from ${JSON.stringify(source('src/theme.android.ts'))};
 import {AppShell} from ${JSON.stringify(source('src/navigation/AppShell.android.tsx'))};
 import {setSessionToken} from ${JSON.stringify(source('src/api/client.ts'))};
 import {AppAlertHost} from ${JSON.stringify(source('src/components/AppAlert.tsx'))};
 if(!localStorage.getItem('ui-initialized')){await setSessionToken(${JSON.stringify(token)});localStorage.setItem('ui-initialized','1')}
-createRoot(document.getElementById('root')).render(<ThemeProvider><AppShell/><AppAlertHost/></ThemeProvider>);`);
+function ThemeProbe(){const{setMode}=useTheme();React.useLayoutEffect(()=>{window.__setAndroidTheme=setMode},[setMode]);return null}
+createRoot(document.getElementById('root')).render(<TestFontScaleProvider><ThemeProvider><ThemeProbe/><AppShell/><AppAlertHost/></ThemeProvider></TestFontScaleProvider>);`);
 const nativeScreens = {
   name: 'android-project-siblings', enforce: 'pre',
   transform(code,id){
@@ -89,7 +103,7 @@ const nativeScreens = {
 const vite = await createServer({
   configFile: false, root: entry, plugins: [nativeScreens, react()], logLevel: 'error',
   define: { 'process.env.EXPO_PUBLIC_API_URL': '""', global: 'globalThis', __DEV__: 'false' },
-  optimizeDeps: { include: ['react-native-web'] },
+  optimizeDeps: { include: ['react-native-web','react-native-safe-area-context'], esbuildOptions: { resolveExtensions: ['.web.tsx','.web.ts','.web.jsx','.web.js','.tsx','.ts','.jsx','.js','.json'] } },
   resolve: { dedupe: ['react', 'react-dom'], extensions: ['.web.tsx', '.web.ts', '.web.jsx', '.web.js', '.tsx', '.ts', '.jsx', '.js', '.json'], alias: [
     { find: /^react-native$/, replacement: path.join(entry, 'native.ts') },
     { find: /^react-native-web$/, replacement: path.join(mobile, 'node_modules/react-native-web') },
@@ -104,7 +118,7 @@ const vite = await createServer({
     { find: 'expo-intent-launcher', replacement: path.join(entry, 'intent.ts') },
     { find: /^\.\.?\/audioFeedback$/, replacement: path.join(entry, 'audio.ts') },
     { find: /^\.\.\/\.\.\/modules\/route-player\/index\.android$/, replacement: path.join(entry, 'native-route.ts') },
-  ] }, server: { middlewareMode: true, fs: { allow: [root, directory] } },
+  ] }, server: { middlewareMode: true, hmr: false, fs: { allow: [root, directory] } },
 });
 const app = express(); app.use(express.json());
 // This browser harness runs Android source and must retain native update policy.
@@ -121,7 +135,7 @@ app.get('/api/account/points/wallet', (_req, res, next) => forceWalletExpired ? 
 app.use((req, res, next) => req.path.startsWith('/api/') ? backend(req, res, next) : next());
 app.use(vite.middlewares);
 const server = app.listen(0, '127.0.0.1'); await new Promise(resolve => server.once('listening', resolve));
-const base = `http://127.0.0.1:${server.address().port}`, checks = [], errors = [], screenshots = [];
+const base = `http://127.0.0.1:${server.address().port}`, checks = [], errors = [], screenshots = [], consoleErrors = [], failedRequests = [];
 const issuedResponse = await fetch(base + '/api/admin/membership-codes', { method: 'POST', headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' }, body: JSON.stringify({ plan: 'vip', quantity: 1, durationDays: 30, expiresAt: null, requestId: crypto.randomUUID() }) });
 assert.ok(issuedResponse.ok, 'isolated admin creates one test membership code');
 const issued = await issuedResponse.json(), redemptionCode = issued.codes?.[0]?.code;
@@ -132,7 +146,7 @@ const shot = async name => {
   await page.waitForTimeout(150);
   const file = path.join(out, name + '.jpg');
   await page.screenshot({ path: file, type: 'jpeg', quality: 78, animations: 'disabled' });
-  assert.ok(fs.statSync(file).size <= 500000); screenshots.push(file);
+  assert.ok(fs.statSync(file).size <= 500000); screenshots.push(file); console.log('Android UI snapshot: '+name);
 };
 const tab = async name => page.getByRole('button', { name: name + '导航', exact: true }).click();
 try {
@@ -140,9 +154,9 @@ try {
   const context = await browser.newContext({ viewport: { width: 393, height: 852 }, deviceScaleFactor: 1, hasTouch: true, reducedMotion: 'reduce' });
   await context.route('**/*', route => ['127.0.0.1', 'localhost'].includes(new URL(route.request().url()).hostname) ? route.continue() : route.abort());
   page = await context.newPage(); page.setDefaultTimeout(15000);
-  page.on('pageerror', e => errors.push(e.message));
-  await page.goto(base, { waitUntil: 'networkidle' });
-  await expect(page.getByTestId('today-screen')).toBeVisible();
+  page.on('pageerror', e => errors.push(e.message));page.on('console',m=>{if(m.type()==='error')consoleErrors.push(m.text().slice(0,500))});page.on('requestfailed',r=>failedRequests.push({url:r.url(),error:r.failure()?.errorText}));
+  await page.goto(base, { waitUntil: 'domcontentloaded', timeout: 60000 });
+  await expect(page.getByTestId('today-screen')).toBeVisible({timeout:15000});
   await expect(page.getByText('今天，也要稳步向前', { exact: true })).toBeVisible();
   assert.equal(await page.locator('#app-tab-bar').getByRole('button').count(), 5);
   assert.ok((await page.getByText('今天，也要稳步向前', { exact: true }).evaluate(e => getComputedStyle(e).fontFamily)).includes('KaojiangSans'));
@@ -164,13 +178,46 @@ try {
   await shot('04-practice-question-393');
   await page.getByText('64 个', { exact: true }).click();
   await page.getByText('AI 提示', { exact: true }).click();
-  await expect(page.getByRole('heading', { name: '使用 AI 前确认积分', exact: true })).toBeVisible();
+  await expect(page.getByTestId('android-ai-confirm-sheet')).toBeVisible();
+  const compactSheet=await page.getByTestId('android-ai-confirm-sheet').boundingBox();
+  assert.ok(compactSheet.height<852*0.65,'collapsed AI consent is a compact bottom sheet, not a full-page wall of text');
+  await expect(page.getByTestId('android-ai-cost-details')).toHaveCount(0);
+  await page.getByRole('button',{name:'费用说明',exact:true}).click();
+  await expect(page.getByTestId('android-ai-cost-details')).toBeVisible();
+  await page.getByRole('button',{name:'费用说明',exact:true}).click();
+  await expect(page.getByTestId('android-ai-cost-details')).toHaveCount(0);
   assert.equal(aiRequests, 0);
   await shot('05-ai-points-confirm-393');
+  await page.setViewportSize({width:320,height:852});await page.evaluate(()=>{window.__setFontScale(1.35);window.__setAndroidTheme('dark')});
+  await expect(page.getByRole('button',{name:'继续使用AI，按实际用量结算',exact:true})).toBeInViewport();
+  await expect(page.getByTestId('android-ai-cost-details')).toHaveCount(0);
+  await shot('polish-ai-confirm-dark-320-scale1.35');
+  await page.setViewportSize({width:393,height:852});await page.evaluate(()=>{window.__setFontScale(1);window.__setAndroidTheme('light')});
   await page.getByRole('button', { name: '取消本次AI请求', exact: true }).click();
   await page.getByText('确认答案', { exact: true }).click();
   await expect(page.getByText('正确答案：', { exact: false }).first()).toBeVisible();
   await shot('06-practice-analysis-393'); checks.push('catalog search, practice, wrong answer, analysis and pre-AI consent/cancel');
+  for(const [width,mode,scale]of[[393,'light',1],[393,'dark',1],[320,'dark',1.35]]){
+    await page.setViewportSize({width,height:852});
+    await page.evaluate(({mode,scale})=>{window.__setAndroidTheme(mode);window.__setFontScale(scale)},{mode,scale});
+    await page.waitForTimeout(200);
+    const headingLines=await page.getByRole('heading',{name:'知识点练习',exact:true}).evaluate(e=>({height:e.getBoundingClientRect().height,line:parseFloat(getComputedStyle(e).lineHeight)}));
+    assert.ok(headingLines.height<=headingLines.line+1,'practice title stays complete on one line even at large text');
+    const letters=await page.getByRole('radio').evaluateAll(radios=>radios.map(r=>{const circle=r.firstElementChild,text=circle.firstElementChild,a=circle.getBoundingClientRect(),b=text.getBoundingClientRect();return{letter:text.textContent,dx:Math.abs(a.x+a.width/2-b.x-b.width/2),dy:Math.abs(a.y+a.height/2-b.y-b.height/2)}}));
+    assert.equal(letters.length,4);
+    for(const letter of letters){assert.ok(letter.dx<=1&&letter.dy<=1,JSON.stringify(letter));}
+    const feedback=await page.getByText('再想一想',{exact:true}).evaluate(e=>{const p=e.parentElement,s=getComputedStyle(p);return{left:parseFloat(s.paddingLeft),top:parseFloat(s.paddingTop),overflow:p.scrollWidth>p.clientWidth+1}});
+    assert.ok(feedback.left>=16&&feedback.top>=16&&!feedback.overflow,'answer feedback keeps comfortable interior padding');
+    for(const label of ['AI 解析错因','AI 详细讲解','生成 3 道变式题']){
+      const button=page.getByRole('button',{name:label,exact:true});
+      const metrics=await button.evaluate(e=>{const label=[...e.children].at(-1),s=getComputedStyle(label),r=label.getBoundingClientRect(),b=e.getBoundingClientRect();return{labelHeight:r.height,line:parseFloat(s.lineHeight),inside:r.left>=b.left+8&&r.right<=b.right-8,height:b.height}});
+      assert.ok(metrics.labelHeight<=metrics.line+1&&metrics.inside&&metrics.height>=48,label+' stays complete on one line');
+    }
+    await page.getByRole('button',{name:'生成 3 道变式题',exact:true}).scrollIntoViewIfNeeded();
+    await shot('polish-answer-'+mode+'-'+width+'-scale'+scale);
+  }
+  await page.setViewportSize({width:393,height:852});await page.evaluate(()=>{window.__setFontScale(1);window.__setAndroidTheme('light')});
+  checks.push('option badges centered, padded answer feedback and complete AI labels in light/dark and narrow large text');
   const answerCount = () => store.db.prepare('SELECT COUNT(*) AS count FROM attempts WHERE user_id=?').get(user.id).count;
   const recorded = answerCount();
   await page.getByRole('button', { name: '下一题', exact: true }).click();
@@ -186,6 +233,24 @@ try {
   await expect(page.locator('#app-tab-bar').getByRole('button')).toHaveCount(5);
   checks.push('focused practice footer, previous-answer review and draft restoration without duplicate attempts');
   await tab('我的'); await shot('07-my-393');
+  for(const [width,mode,scale]of[[393,'light',1],[393,'dark',1],[320,'dark',1.35]]){
+    await page.setViewportSize({width,height:852});
+    await page.evaluate(({mode,scale})=>{window.__setAndroidTheme(mode);window.__setFontScale(scale)},{mode,scale});
+    await page.waitForTimeout(200);
+    const card=page.getByTestId('profile-membership-card'),balance=page.getByTestId('profile-points-value');
+    await card.scrollIntoViewIfNeeded();
+    const b=await card.boundingBox(),v=await balance.boundingBox();
+    assert.ok(v.x>=b.x+12&&v.x+v.width<=b.x+b.width-12,'balance stays inside the membership card');
+    assert.ok(await balance.evaluate(e=>parseFloat(getComputedStyle(e).fontSize))>=28,'balance has a clear numeric hierarchy');
+    for(const name of ['签到领积分，进入会员积分页','兑换码','积分记录']){
+      const button=card.getByRole('button',{name,exact:true});
+      const label=await button.evaluate(e=>{const text=e.lastElementChild;return{height:text.getBoundingClientRect().height,line:parseFloat(getComputedStyle(text).lineHeight)}});
+      assert.ok(label.height<=label.line+1,name+' remains a complete label without an orphaned last character');
+    }
+    await shot('polish-membership-'+mode+'-'+width+'-scale'+scale);
+  }
+  await page.setViewportSize({width:393,height:852});await page.evaluate(()=>{window.__setFontScale(1);window.__setAndroidTheme('light')});
+  checks.push('membership card: grouped balance/actions, light/dark and narrow large-font layout');
   await page.getByRole('button', { name: '设置', exact: true }).click();
   await expect(page.getByText('修改会立即生效', { exact: true })).toBeVisible();
   await shot('08-settings-393');
@@ -235,13 +300,13 @@ try {
   await expect(page.getByRole('button', { name: '完成', exact: true })).toBeVisible();
   await shot('11c-redemption-success-393');
   await page.getByRole('button', { name: '完成', exact: true }).click();
-  await expect(page.getByRole('button', { name: '查看可用AI积分、服务费用和积分记录', exact: true }).getByText('1,990 积分', { exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: '查看可用AI积分、服务费用和积分记录', exact: true }).getByTestId('profile-points-value')).toHaveText('1,990');
   await page.getByText('会员与 AI 积分', { exact: true }).click();
   await expect(page.getByText('选择会员套餐', { exact: true })).toBeVisible();
   await shot('12-membership-393');
   await page.getByRole('button', { name: '签到领积分', exact: true }).click();
   await expect(page.getByRole('button', { name: '已签到', exact: true })).toBeVisible();
-  await expect(page.getByText('1,995', { exact: true })).toBeVisible();
+  await expect(page.getByTestId('vip-points-balance').getByText('1,995', { exact: true })).toBeVisible();
   checks.push('real funded fixture redemption and check-in refresh balances immediately');
   await page.getByRole('button', { name: '服务价目', exact: false }).click();
   await expect(page.getByText('AI 服务积分价目', { exact: true })).toBeVisible();
@@ -303,10 +368,11 @@ try {
   await expect(page.getByRole('textbox', { name: '搜索专项学习知识点', exact: true })).toBeVisible();
   await page.getByRole('textbox', { name: '搜索专项学习知识点', exact: true }).fill(leaf);
   await page.getByRole('button', { name: `选择${leaf}，30道题`, exact: true }).click();
-  await expect(page.getByText('专项学习 1 / 30', { exact: true })).toBeVisible();
-  await shot('20-daily30-question-393');
-  for (let i = 0; i < 30; i++) {
-    await expect(page.getByText(`专项学习 ${i + 1} / 30`, { exact: true })).toBeVisible();
+  await expect(page.getByText('专项学习 1 / 10', { exact: true })).toBeVisible();
+  assert.ok(await page.getByTestId('location-learning-header').evaluate(e=>e.getBoundingClientRect().top)>=0,'learning header remains within its independent safe-area window');
+  await shot('20-daily10-question-393');
+  for (let i = 0; i < 10; i++) {
+    await expect(page.getByText(`专项学习 ${i + 1} / 10`, { exact: true })).toBeVisible();
     const answer = page.getByRole('button', { name: '提交本题', exact: true });
     await page.getByRole('radio', { name: i === 0 ? 'B 64 个' : 'A 62 个', exact: true }).click();
     await answer.scrollIntoViewIfNeeded();
@@ -314,19 +380,19 @@ try {
     await expect(answer).toBeEnabled({ timeout: 12000 });
     await answer.click();
     if (i === 0) await expect(page.getByText('本题答错了，阅读解析也算完成', { exact: true })).toBeVisible();
-    const advance = page.getByRole('button', { name: i === 29 ? '确认阅读，完成 30 题' : '确认阅读，下一题', exact: true });
+    const advance = page.getByRole('button', { name: i === 9 ? '确认阅读，完成 10 题' : '确认阅读，下一题', exact: true });
     await advance.scrollIntoViewIfNeeded();
-    if (i === 0) { await expect(advance).toBeDisabled(); await shot('21-daily30-wrong-review-393'); }
+    if (i === 0) { await expect(advance).toBeDisabled(); await shot('21-daily10-wrong-review-393'); }
     await expect(advance).toBeEnabled({ timeout: 12000 });
     await advance.click();
   }
   await expect(page.getByText('已解锁模拟定位学习', { exact: true })).toBeVisible();
-  await shot('22-daily30-unlocked-393');
+  await shot('22-daily10-unlocked-393');
   await page.getByRole('button', { name: '退出专项学习', exact: true }).click();
   await page.getByRole('button', { name: '虚拟定位学习', exact: true }).click();
   await expect(page.getByText('已解锁模拟定位学习', { exact: true })).toBeVisible();
   await page.getByRole('button', { name: '退出专项学习', exact: true }).click();
-  checks.push('daily30 real API: reading/answer/review delays, wrong answers allowed, thirty completions and same-day reopen');
+  checks.push('daily10 real API: reading/answer/review delays, wrong answers allowed, ten completions and same-day reopen');
   await tab('我的');
   await page.getByRole('button', { name: '退出登录', exact: true }).click();
   await expect(page.getByText('欢迎回来', { exact: true })).toBeVisible();
@@ -337,7 +403,7 @@ try {
   await tab('错题');
   await expect(page.getByText('这里会记录你的薄弱点', { exact: true })).toBeVisible();
   await tab('我的');
-  await expect(page.getByRole('button', { name: '查看可用AI积分、服务费用和积分记录', exact: true }).getByText('0 积分', { exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: '查看可用AI积分、服务费用和积分记录', exact: true }).getByTestId('profile-points-value')).toHaveText('0');
   await expect(page.getByText('安卓界面验收用户', { exact: true })).toHaveCount(0);
   await tab('练习');
   await page.getByRole('textbox', { name: '搜索知识点', exact: true }).fill('虚拟定位学习');
@@ -345,7 +411,7 @@ try {
   await expect(page.getByRole('textbox', { name: '搜索专项学习知识点', exact: true })).toBeVisible();
   await expect(page.getByText('已解锁模拟定位学习', { exact: true })).toHaveCount(0);
   await page.getByRole('button', { name: '退出专项学习', exact: true }).click();
-  checks.push('logout/login account isolation for profile, balance, wrong book and daily30 entitlement');
+  checks.push('logout/login account isolation for profile, balance, wrong book and daily10 entitlement');
   await tab('我的');
   await page.getByRole('button', { name: '设置', exact: true }).click();
   await page.getByText('深色模式', { exact: true }).click();
@@ -408,7 +474,7 @@ try {
     fs.writeFileSync(path.join(out, 'failure-dom.txt'), await page.locator('body').innerText().catch(() => ''));
     await shot('failure').catch(() => {});
   }
-  fs.writeFileSync(path.join(out, 'failure.json'), JSON.stringify({ error: error.stack, errors, checks }, null, 2));
+  fs.writeFileSync(path.join(out, 'failure.json'), JSON.stringify({ error: error.stack, errors, checks, consoleErrors, failedRequests }, null, 2));
   throw error;
 } finally {
   for(const [key,value] of [['MOBILE_LATEST_VERSION',previousVersionEnvironment.latest],['MOBILE_MINIMUM_VERSION',previousVersionEnvironment.minimum]]){if(value===undefined)delete process.env[key];else process.env[key]=value;}

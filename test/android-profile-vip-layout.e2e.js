@@ -8,7 +8,8 @@ import crypto from 'node:crypto';
 import express from 'express';
 import react from '@vitejs/plugin-react';
 import { createServer } from 'vite';
-import { expect } from '@playwright/test';
+import { expect as baseExpect } from '@playwright/test';
+const expect=baseExpect.configure({timeout:15000});
 import { createApp } from '../server/index.js';
 import { createStore } from '../server/store.js';
 import { completeFixtureProfile } from './helpers/mobile-profile.js';
@@ -94,7 +95,7 @@ const nativeScreens = {
 const vite = await createServer({
   configFile: false, root: entry, plugins: [nativeScreens, react()], logLevel: 'error',
   define: { 'process.env.EXPO_PUBLIC_API_URL': '""', global: 'globalThis', __DEV__: 'false' },
-  optimizeDeps: { include: ['react-native-web'] },
+  optimizeDeps: { include: ['react-native-web','react-native-safe-area-context'], esbuildOptions: { resolveExtensions: ['.web.tsx','.web.ts','.web.jsx','.web.js','.tsx','.ts','.jsx','.js','.json'] } },
   resolve: { dedupe: ['react', 'react-dom'], extensions: ['.web.tsx', '.web.ts', '.web.jsx', '.web.js', '.tsx', '.ts', '.jsx', '.js', '.json'], alias: [
     { find: /^react-native$/, replacement: path.join(entry, 'native.ts') },
     { find: /^react-native-web$/, replacement: path.join(mobile, 'node_modules/react-native-web') },
@@ -109,7 +110,7 @@ const vite = await createServer({
     { find: 'expo-intent-launcher', replacement: path.join(entry, 'intent.ts') },
     { find: /^\.\.?\/audioFeedback$/, replacement: path.join(entry, 'audio.ts') },
     { find: /^\.\.\/\.\.\/modules\/route-player\/index\.android$/, replacement: path.join(entry, 'native-route.ts') },
-  ] }, server: { middlewareMode: true, fs: { allow: [root, directory] } },
+  ] }, server: { middlewareMode: true, hmr: false, fs: { allow: [root, directory] } },
 });
 const app = express(); app.use(express.json());
 let aiRequests = 0, forceWalletExpired = false, failWallet=false,holdAnswer=false,releaseAnswer=null,holdAi=false,releaseAi=null;
@@ -144,7 +145,7 @@ async function vipAudit(name,large=false){
   const link=page.getByRole('link',{name:'购买会员兑换码',exact:true});const l=await link.boundingBox();assert.ok(l.y>=f.y&&l.y+l.height<=f.y+f.height+1,'purchase action inside footer');observations.push({name,footer:f,planCards:3});checks.push(name);await shot(name);
 }
 try{
-  browser=await launchTestBrowser();const context=await browser.newContext({viewport:{width:393,height:852},deviceScaleFactor:1,hasTouch:true,reducedMotion:'reduce'});await context.route('**/*',route=>['127.0.0.1','localhost'].includes(new URL(route.request().url()).hostname)?route.continue():route.abort());page=await context.newPage();page.setDefaultTimeout(15000);page.on('pageerror',e=>errors.push(e.message));await page.goto(base,{waitUntil:'networkidle'});await expect(page.getByTestId('today-screen')).toBeVisible();
+  browser=await launchTestBrowser();const context=await browser.newContext({viewport:{width:393,height:852},deviceScaleFactor:1,hasTouch:true,reducedMotion:'reduce'});await context.route('**/*',route=>['127.0.0.1','localhost'].includes(new URL(route.request().url()).hostname)?route.continue():route.abort());page=await context.newPage();page.setDefaultTimeout(15000);page.on('pageerror',e=>errors.push(e.message));await page.goto(base,{waitUntil:'domcontentloaded',timeout:60000});await expect(page.getByTestId('today-screen')).toBeVisible();
   await tab('我的');assert.equal(await page.getByText('管理中心',{exact:true}).count(),0);await utilityAudit('01-profile-bottom-393');
   await page.getByTestId('profile-utilities').getByRole('button',{name:'关于考匠',exact:true}).click();await expect(page.getByText('移动端 v'+currentVersion,{exact:false})).toBeVisible();await page.getByRole('button',{name:'关闭关于考匠',exact:true}).click();checks.push('about version remains available');
   await page.getByTestId('profile-utilities').getByRole('button',{name:'赞助作者',exact:true}).click();await expect(page.getByText('使用微信扫一扫',{exact:true})).toBeVisible();await page.getByRole('button',{name:'暂时关闭',exact:true}).click();checks.push('sponsor action remains functional');

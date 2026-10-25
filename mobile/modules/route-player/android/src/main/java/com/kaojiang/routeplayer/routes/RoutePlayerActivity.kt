@@ -289,7 +289,7 @@ class RoutePlayerActivity : MinimalActivity() {
     private fun requireDailyLearning(): Boolean {
         if (LearningGateAccess.isAllowed()) return true
         LearningGateAccess.revoke(this)
-        Toast.makeText(this, "请先在考匠完成今天当前证书的 30 道专项学习题", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "请先在考匠完成今天当前证书的专项学习题", Toast.LENGTH_LONG).show()
         packageManager.getLaunchIntentForPackage(packageName)?.let {
             startActivity(it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP))
         }

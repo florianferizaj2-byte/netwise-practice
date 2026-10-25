@@ -17,6 +17,7 @@ try {
     apk: path.resolve(`public/downloads/kaojiang-v${version}.apk`) });
   assert.equal(result.authenticatedApis, 'passed'); assert.equal(result.authenticatedChecks, 8);
   assert.equal(result.wholeApkHashChecked, true); assert.equal(result.externalModelCalls, 0);
+  assert.equal(result.learningQuestionCount,10); assert.equal(result.mutationRequests,0);
   fs.mkdirSync('test-output', { recursive: true }); fs.writeFileSync('test-output/deployment-check-local.json', JSON.stringify(result, null, 2) + '\n');
   console.log('Deployment self-check: version contract, complete APK checksum, range download and 8 authenticated APIs passed locally; no external model calls.');
 } finally {

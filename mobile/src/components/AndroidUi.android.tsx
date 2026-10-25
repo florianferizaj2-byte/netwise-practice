@@ -28,21 +28,24 @@ export function AndroidPageHeader({ title = '今日', action }: AndroidCertifica
   </View>;
 }
 
-export function AndroidPointsLink({ userId, compact = false }: { userId?: string; compact?: boolean }) {
+export function AndroidPointsLink({ userId, compact = false, membership = false }: { userId?: string; compact?: boolean; membership?: boolean }) {
   const s = useThemedStyles(styles), { colors } = useTheme(), state = useAndroidPoints();
+  const {fontScale} = useWindowDimensions();
   const owned = !!userId && state.ownerKey?.split(':')[0] === userId;
   const wallet = owned ? state.wallet : null, error = owned ? state.error : '';
   const balance = wallet ? `${formatPointUnits(wallet.availableUnits, wallet.scale)} 积分` : '积分与费用';
   const held = wallet ? formatPointUnits(wallet.heldUnits, wallet.scale) : '';
   const open = () => userId ? androidPointsFlow.showDetails() : AppAlert.alert('登录后查看积分', '登录后可查看当前账号的可用积分、服务费用和使用记录。');
-  return <View style={s.pointsWrap}>
+  return <View testID={membership?'profile-points-summary':undefined} style={[s.pointsWrap,membership&&s.memberPointsWrap]}>
     <View style={s.pointsRow}>
       <AnimatedPressable accessibilityRole="button" accessibilityLabel="查看可用AI积分、服务费用和积分记录"
         accessibilityValue={{text:wallet?`可用${balance}，预扣${held}积分`:'积分余额尚未同步'}} onPress={open}
-        style={[compact ? s.pointsCompact : s.points, s.pointsGrow]}>
-        <AppIcon name="sparkles" size={16} color={colors.brand}/>
-        <View style={s.pointsGrow}><Text style={s.pointsCaption}>可用积分</Text><Text style={s.pointsText}>{balance}</Text></View>
-        {!compact && <AppIcon name="chevron-right" size={14} color={colors.brand}/>}
+        style={[membership?s.memberPoints:compact ? s.pointsCompact : s.points, s.pointsGrow]}>
+        {!membership&&<AppIcon name="sparkles" size={16} color={colors.brand}/>}
+        <View style={[s.pointsGrow,membership&&s.memberBalanceContent,membership&&fontScale>1.25&&s.memberBalanceStack]}><Text style={s.pointsCaption}>{membership?'可用 AI 积分':'可用积分'}</Text>
+          {membership?<View style={s.memberBalanceRow}><Text testID="profile-points-value" style={s.memberBalance}>{wallet?formatPointUnits(wallet.availableUnits,wallet.scale):'—'}</Text><Text style={s.memberUnit}>积分</Text></View>:<Text style={s.pointsText}>{balance}</Text>}
+        </View>
+        {!compact&&!membership && <AppIcon name="chevron-right" size={14} color={colors.brand}/>}
       </AnimatedPressable>
       {!!error&&<AnimatedPressable accessibilityRole="button" accessibilityLabel="重新同步积分余额" disabled={state.refreshing}
         onPress={()=>void androidPointsFlow.refresh()} style={s.pointsRetry}>
@@ -84,6 +87,13 @@ const ringType = StyleSheet.create({
 });
 
 const styles = (c: ThemeColors) => StyleSheet.create({
+  memberPointsWrap:{paddingTop:4,paddingBottom:12,gap:6},
+  memberPoints:{minHeight:52,justifyContent:'center'},
+  memberBalanceContent:{flexDirection:'row',alignItems:'center',justifyContent:'space-between',gap:12},
+  memberBalanceStack:{flexDirection:'column',alignItems:'flex-start',gap:4},
+  memberBalanceRow:{flexDirection:'row',alignItems:'baseline',gap:7,flexShrink:1},
+  memberBalance:{fontSize:28,lineHeight:37,fontWeight:'700',color:c.text,fontVariant:['tabular-nums'],flexShrink:1},
+  memberUnit:{fontSize:13,lineHeight:22,color:c.textMuted},
   header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 12, minHeight: 56, marginBottom: 14, minWidth: 0 },
   headerIdentity: { flexDirection: 'row', alignItems: 'center', gap: 11, flex: 1, minWidth: 0 },
   headerIcon: { width: 42, height: 42, borderRadius: 14, alignItems: 'center', justifyContent: 'center' },

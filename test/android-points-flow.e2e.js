@@ -1,7 +1,8 @@
 // Android-only components + real shared request layer + real local points store.
 // Model responses are explicit synthetic fixtures; no upstream request is made.
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';import crypto from 'node:crypto';
-import express from 'express';import react from '@vitejs/plugin-react';import {createServer} from 'vite';import {expect} from '@playwright/test';
+import express from 'express';import react from '@vitejs/plugin-react';import {createServer} from 'vite';import {expect as baseExpect} from '@playwright/test';
+const expect=baseExpect.configure({timeout:15000});
 import {createStore} from '../server/store.js';import {createApp} from '../server/index.js';import {aiOutputBudget} from '../server/ai-output-policy.js';import {launchTestBrowser} from './helpers/browser.js';
 const root=process.cwd(),mobile=path.join(root,'mobile'),parent=path.resolve('tmp'),dir=fs.mkdtempSync(path.join(parent,'points-flow-browser-'));
 const out=path.resolve('tmp/android-points-ux-20261024/browser');fs.mkdirSync(out,{recursive:true});const store=createStore(path.join(dir,'data'));
@@ -24,14 +25,14 @@ write('native.ts',"export*from'react-native-web';import{Platform}from'react-nati
 const profiles=users.map(user=>({id:user.id,username:user.username,certificateId:'network-engineer'}));
 write('main.tsx',`import React,{useState}from'react';import{createRoot}from'react-dom/client';import{ThemeProvider,useTheme}from ${JSON.stringify(source('src/theme.ts'))};import{AndroidPointsBar}from ${JSON.stringify(source('src/components/AndroidPointsBar.android.tsx'))};import{TeacherSheet}from ${JSON.stringify(source('src/screens/subjective-study/TeacherSheet.android.tsx'))};import{mobileApi,setSessionToken}from ${JSON.stringify(source('src/api/client.ts'))};
 function Harness(){const[user,setUser]=useState(${JSON.stringify(profiles[0])}),[result,setResult]=useState(''),[teacher,setTeacher]=useState(false),{setMode}=useTheme();const run=async(fn)=>{try{await fn();setResult('请求已完成')}catch(e){setResult(e.message)}};return <div style={{height:'100%',display:'flex',flexDirection:'column'}}><div><button onClick={()=>setMode('dark')}>深色验收</button><button onClick={()=>setMode('light')}>浅色验收</button><button onClick={async()=>{await setSessionToken(${JSON.stringify(tokens[1])});setUser(${JSON.stringify(profiles[1])})}}>切换测试账号</button></div><AndroidPointsBar key={user.id} userId={user.id} certificateId={user.certificateId} appActive={true}/><div style={{overflow:'auto',flex:1}}><button onClick={()=>run(()=>mobileApi.teacher('fixture','详细讲解',[]))}>测试题目讲解</button><button onClick={()=>run(()=>mobileApi.trainStream('fixture',3,()=>{}))}>测试流式出题</button><button onClick={()=>run(()=>mobileApi.createAiQuestionGeneration({count:3,chapter:'合成章节',knowledgePoint:'合成知识点'}))}>测试后台出题</button><button onClick={()=>setTeacher(true)}>打开老师答疑</button><p role="status">{result}</p></div><TeacherSheet open={teacher} active={true} nodeId="synthetic-node" nodeTitle="合成验收知识点" context={null} onClose={()=>setTeacher(false)} onFailure={()=>false}/></div>};await setSessionToken(${JSON.stringify(tokens[0])});createRoot(document.getElementById('root')).render(<ThemeProvider><Harness/></ThemeProvider>);`);
-const vite=await createServer({configFile:false,root:entry,plugins:[react()],logLevel:'error',define:{'process.env.EXPO_PUBLIC_API_URL':'""',global:'globalThis'},optimizeDeps:{include:['react-native-web']},
-  resolve:{dedupe:['react','react-dom'],alias:[
+const vite=await createServer({configFile:false,root:entry,plugins:[react()],logLevel:'error',define:{'process.env.EXPO_PUBLIC_API_URL':'""',global:'globalThis'},optimizeDeps: { include: ['react-native-web','react-native-safe-area-context'], esbuildOptions: { resolveExtensions: ['.web.tsx','.web.ts','.web.jsx','.web.js','.tsx','.ts','.jsx','.js','.json'] } },
+  resolve:{extensions:['.web.tsx','.web.ts','.web.jsx','.web.js','.tsx','.ts','.jsx','.js','.json'],dedupe:['react','react-dom'],alias:[
     {find:/^react-native$/,replacement:path.join(entry,'native.ts')},{find:/^react-native-web$/,replacement:path.join(mobile,'node_modules/react-native-web')},
     {find:/^react$/,replacement:path.join(mobile,'node_modules/react')},{find:/^react-dom(\/.*)?$/,replacement:path.join(mobile,'node_modules/react-dom')+'$1'},
     {find:'@react-native-async-storage/async-storage',replacement:path.join(entry,'storage.ts')},{find:'expo/fetch',replacement:path.join(entry,'stream.ts')},
     {find:/^\.\.?\/audioFeedback$/,replacement:path.join(entry,'audio.ts')},{find:/^\.\/?subjective-study\/SubjectiveStudyScreen$/,replacement:path.join(entry,'subjective.tsx')},
     {find:/^\.\.?\/components\/AppAlert$/,replacement:path.join(entry,'alert.tsx')},
-  ]},server:{middlewareMode:true,fs:{allow:[root,dir]}}});
+  ]},server:{middlewareMode:true,hmr:false,fs:{allow:[root,dir]}}});
 const app=express();app.use(express.json());let mode='ok',paidRequests=0,streamRequests=0,pendingJob;
 const caller=req=>{const index=tokens.indexOf(String(req.headers.authorization||'').replace(/^Bearer /,''));assert.ok(index>=0);return users[index];};
 function begin(req,taskType,key){const user=caller(req),nonce=req.headers['x-ai-request-id'];assert.match(nonce,/^[a-f0-9-]{36}$/);
@@ -47,15 +48,15 @@ app.get('/api/study/teacher/history',(_req,res)=>res.json({messages:[]}));
 app.post('/api/study/teacher',(req,res)=>{const item=begin(req,'study-teacher');finish(item);res.json({answer:{conclusion:'合成老师答疑结果',points:[],example:''},cached:false});});
 app.use((req,res,next)=>req.path.startsWith('/api/')?backend(req,res,next):next());app.use(vite.middlewares);
 const server=app.listen(0,'127.0.0.1');await new Promise(resolve=>server.once('listening',resolve));const base=`http://127.0.0.1:${server.address().port}`,checks=[],errors=[];
-let browser,page;const confirm=async()=>{await expect(page.getByRole('heading',{name:'使用 AI 前确认积分',exact:true})).toBeVisible();await page.getByRole('button',{name:'继续使用AI，按实际用量结算',exact:true}).click();};
+let browser,page;const confirm=async()=>{await expect(page.getByTestId('android-ai-confirm-sheet')).toBeVisible();await page.getByRole('button',{name:'继续使用AI，按实际用量结算',exact:true}).click();};
 const message=pattern=>page.getByTestId('android-global-points').getByText(pattern);
 async function shot(name){await page.waitForTimeout(400);const file=path.join(out,name+'.png');await page.screenshot({path:file});assert.ok(fs.statSync(file).size<=500000);}
 try{
   browser=await launchTestBrowser();const context=await browser.newContext({viewport:{width:375,height:812},reducedMotion:'reduce'});
   await context.route('**/*',route=>['127.0.0.1','localhost'].includes(new URL(route.request().url()).hostname)?route.continue():route.abort());
-  page=await context.newPage();page.setDefaultTimeout(15000);page.on('pageerror',error=>errors.push(error.message));await page.goto(base,{waitUntil:'networkidle'});
+  page=await context.newPage();page.setDefaultTimeout(15000);page.on('pageerror',error=>errors.push(error.message));await page.goto(base,{waitUntil:'domcontentloaded',timeout:60000});
   await expect(page.getByText('可用积分 1,000',{exact:true})).toBeVisible();
-  await page.getByRole('button',{name:'测试题目讲解',exact:true}).click();await expect(page.getByRole('heading',{name:'使用 AI 前确认积分'})).toBeVisible();
+  await page.getByRole('button',{name:'测试题目讲解',exact:true}).click();await expect(page.getByTestId('android-ai-confirm-sheet')).toBeVisible();
   assert.equal(paidRequests,0);await shot('confirm-light-375');await page.getByRole('button',{name:'取消本次AI请求',exact:true}).click();assert.equal(paidRequests,0);
   checks.push('confirmation is visible before transport; cancel sends no model request');
   await page.getByRole('button',{name:'测试题目讲解',exact:true}).click();await confirm();await expect(message(/实扣 0.24 积分/)).toBeVisible();
@@ -77,7 +78,7 @@ try{
   await page.getByRole('button',{name:'收起',exact:true}).click();await page.getByRole('button',{name:'查看积分费用与记录',exact:true}).click();
   await expect(page.getByRole('heading',{name:'积分费用与记录',exact:true})).toBeVisible();await expect(page.getByText('积分使用记录',{exact:true})).toBeVisible();
   await shot('ledger-light-375');await page.getByRole('button',{name:'关闭积分费用与记录',exact:true}).click();
-  await page.getByRole('button',{name:'深色验收',exact:true}).click();await page.getByRole('button',{name:'测试题目讲解',exact:true}).click();await expect(page.getByRole('heading',{name:'使用 AI 前确认积分'})).toBeVisible();await shot('confirm-dark-375');
+  await page.getByRole('button',{name:'深色验收',exact:true}).click();await page.getByRole('button',{name:'测试题目讲解',exact:true}).click();await expect(page.getByTestId('android-ai-confirm-sheet')).toBeVisible();await shot('confirm-dark-375');
   await page.setViewportSize({width:812,height:375});await expect(page.getByRole('button',{name:'继续使用AI，按实际用量结算',exact:true})).toBeInViewport();
   await page.getByRole('button',{name:'取消本次AI请求',exact:true}).click();await page.setViewportSize({width:375,height:812});
   checks.push('fee and record entry is one tap away, with light/dark and landscape confirmation controls');

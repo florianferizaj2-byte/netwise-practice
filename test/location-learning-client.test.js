@@ -55,12 +55,18 @@ test('Android adapter requires a session and completed daily study before issuin
     requests.push(new URL(url).pathname);
     return response({ ...status, unlocked: false });
   };
-  await assert.rejects(api.locationLearningOpenCredentials(), /30 道/);
+  await assert.rejects(api.locationLearningOpenCredentials(), /10 道/);
   assert.deepEqual(requests, ['/api/location-learning']);
   assert.deepEqual(identities, []);
   await client.clearSessionToken();
   await assert.rejects(api.locationLearningStatus(), (error) => error.status === 401);
   assert.equal(requests.length, 1);
+});
+
+test('Android describes the server-owned question count while an older backend is still deployed', async t => {
+  const {api}=await fixture(t);
+  globalThis.fetch=async()=>response({...status,unlocked:false,policy:{count:30}});
+  await assert.rejects(api.locationLearningOpenCredentials(),/30 道/);
 });
 
 test('Android credentials carry the real bearer/version and logout immediately revokes the native identity', async (t) => {
