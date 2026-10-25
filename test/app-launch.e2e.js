@@ -3,17 +3,23 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { chromium } from "@playwright/test";
-import { createServer } from "vite";
+import { build, preview } from "vite";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const fixture = path.join(root, "test/fixtures/app-launch");
 const mock = path.join(fixture, "platform-mocks.tsx");
-const server = await createServer({
+await fs.mkdir(path.join(root, 'tmp'), { recursive: true });
+const cacheDir = await fs.mkdtemp(path.join(root, 'tmp/app-launch-vite-'));
+const outDir = path.join(cacheDir, 'dist');
+// Compile the native launch fixture once. A static preview avoids Windows
+// dependency-optimizer write races and still runs the unchanged native source.
+await build({
   configFile: false,
   root: fixture,
-  cacheDir: path.join(root, "tmp/app-launch-vite-cache"),
+  cacheDir,
   esbuild: { jsx: "automatic" },
-  server: { host: "127.0.0.1", port: 0, fs: { allow: [root] } },
+  define: { global: 'globalThis', __DEV__: 'false' },
+  build: { outDir, emptyOutDir: false, target: 'esnext', minify: false },
   resolve: {
     dedupe: ["react", "react-dom"],
     extensions: [
@@ -26,6 +32,8 @@ const server = await createServer({
       ".json",
     ],
     alias: [
+      { find: /^react$/, replacement: path.join(root, 'mobile/node_modules/react') },
+      { find: /^react-dom(\/.*)?$/, replacement: path.join(root, 'mobile/node_modules/react-dom') + '$1' },
       {
         find: /^react-native$/,
         replacement: path.join(
@@ -44,7 +52,8 @@ const server = await createServer({
     ],
   },
 });
-await server.listen();
+const server = await preview({ configFile: false, root: fixture, build: { outDir },
+  preview: { host: '127.0.0.1', port: 0 } });
 const baseUrl = `http://127.0.0.1:${server.httpServer.address().port}`;
 const browser = await chromium.launch({ headless: true });
 const results = [],
@@ -161,5 +170,6 @@ try {
   console.log(JSON.stringify({ results, errors }));
 } finally {
   await browser.close();
-  await server.close();
+  server.httpServer.closeAllConnections();
+  await new Promise(resolve => server.httpServer.close(resolve));
 }
