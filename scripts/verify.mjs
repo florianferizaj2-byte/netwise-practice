@@ -15,7 +15,10 @@ const isolated=verificationEnvironment(process.env,{temporaryParent:path.join(ro
 try{
  for(const {id,label,args}of releaseChecks){
   console.log('正在检查：'+label);const log=path.join(output,'release-'+id+'.log'),fd=fs.openSync(log,'w');const began=Date.now();let result;
-  try{const [program,...rest]=args;const test=program==='--test'||program.startsWith('test/');result=spawnSync(program==='python'?'python':process.execPath,program==='python'?rest:test?['--import','./test/helpers/local-http-only.js',...args]:args,{cwd:root,env:isolated.env,stdio:['ignore',fd,fd],windowsHide:true,timeout:600000});}finally{fs.closeSync(fd);}
+  // Full database/security regressions are CPU-heavy on Windows; keep all cases
+  // and allow a bounded 30-minute budget instead of truncating the test suite.
+  const timeoutMs=id==='unit'?1800000:600000;
+  try{const [program,...rest]=args;const test=program==='--test'||program.startsWith('test/');result=spawnSync(program==='python'?'python':process.execPath,program==='python'?rest:test?['--import','./test/helpers/local-http-only.js',...args]:args,{cwd:root,env:isolated.env,stdio:['ignore',fd,fd],windowsHide:true,timeout:timeoutMs});}finally{fs.closeSync(fd);}
   report.checks.push({id,label,exitCode:result.status,durationMs:Date.now()-began,log:'test-output/release-'+id+'.log',...(result.error?{error:result.error.message}:{})});save();
   if(result.status!==0||result.error){const lines=fs.readFileSync(log,'utf8').split(/\r?\n/);console.error(lines.slice(-16).map(line=>line.slice(0,320)).join('\n'));throw result.error||new Error(label+'未通过');}
  }

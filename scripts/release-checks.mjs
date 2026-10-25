@@ -15,7 +15,7 @@ export const allReleaseChecks = [
   ['banks', '已发布题库结构', ['scripts/validate-question-banks.js']],
   ['types', '移动端类型检查', ['mobile/node_modules/typescript/bin/tsc', '--noEmit', '--project', 'mobile/tsconfig.json']],
   ['apk', '正式 APK 签名与内容', ['python', 'scripts/verify-android-apk.py']],
-  ['unit', '服务端与客户端全量回归', ['--test', '--test-concurrency=4', 'test/*.test.js']],
+  ['unit', '服务端与客户端全量回归', ['--test', '--test-concurrency=6', 'test/*.test.js']],
   ['build', '电脑与移动网页构建', ['scripts/build.mjs']],
   ['runtime', '旧数据升级与独立运行包', ['scripts/verify-release-runtime.mjs', '--baseline=64ad007c8edaef51dc7019b3f5a4e791594f955a']],
   ['browser', '电脑网页完整流程', ['test/e2e.js']],
