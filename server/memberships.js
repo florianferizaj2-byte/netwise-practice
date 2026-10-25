@@ -1,10 +1,12 @@
 import crypto from "node:crypto";
 
 export const membershipPlans = {
-  vip: { name: "VIP", generationLimit: 100 },
-  svip: { name: "SVIP", generationLimit: 300 },
-  ssvip: { name: "SSVIP", generationLimit: 600 },
+  vip: { name: "VIP", generationLimit: 100, dailyExplanationLimit: 50 },
+  svip: { name: "SVIP", generationLimit: 300, dailyExplanationLimit: 100 },
+  ssvip: { name: "SSVIP", generationLimit: 600, dailyExplanationLimit: 200 },
 };
+export const dailyExplanationLimit = (plan) =>
+  membershipPlans[plan]?.dailyExplanationLimit || 10;
 export const membershipCodeBatchLimit = 1000;
 export const membershipCodeExportLimit = 10000;
 const DAY = 86400000;

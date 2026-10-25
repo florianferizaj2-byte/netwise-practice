@@ -3,12 +3,37 @@ import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 import { promisify } from "node:util";
-import { bundledQuestions, certificates } from "./question-banks/loader.js";
+import { bundledQuestions, bundledQuestionWithdrawals, certificates } from "./question-banks/loader.js";
 import { questionForCertificate } from "./question-banks/scopes.js";
 import { calculateMastery, nextReview, fingerprint } from "./domain.js";
-import { createMembershipStore } from "./memberships.js";
+import { createMembershipStore, dailyExplanationLimit } from "./memberships.js";
+import { createPointsStore } from "./ai-points/store.js";
+import { createAiServiceStore } from "./ai-service-store.js";
+import { digest as contentDigest, questionPayload } from "./content-quality/quality.js";
 const scrypt = promisify(crypto.scrypt);
 const unknownAccountSalt = crypto.randomBytes(16).toString("base64");
+
+// Releases carry explicit withdrawals: removing a JSON row alone must never
+// leave an unusable question available in an existing installation. Keep the
+// question, attempts, favorites and old exams for historical access.
+export function syncBundledQuestionWithdrawals(db) {
+  const get = db.prepare("SELECT data FROM questions WHERE id=?");
+  const hide = db.prepare(`INSERT INTO admin_question_visibility VALUES (?,1,?,?,?)
+    ON CONFLICT(question_id) DO UPDATE SET hidden=1, reason=excluded.reason,
+      updated_by=excluded.updated_by, updated_at=excluded.updated_at
+    WHERE hidden<>1 OR reason<>excluded.reason`);
+  let count = 0;
+  for (const entry of bundledQuestionWithdrawals()) {
+    const row = get.get(entry.questionId);
+    if (!row) continue;
+    const question = JSON.parse(row.data);
+    if (question.source === "ai_generated" || question.certificates?.length !== 1 ||
+        question.certificates[0] !== entry.certificateId) continue;
+    hide.run(entry.questionId, entry.reason, "system:content-withdrawal", new Date().toISOString());
+    count += 1;
+  }
+  return count;
+}
 
 export function createStore(dir = process.env.DATA_DIR || "data") {
   fs.mkdirSync(dir, { recursive: true });
@@ -47,6 +72,10 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
    expires_at TEXT NOT NULL,
    created_at TEXT NOT NULL
  );`);
+  // Keep legacy case-colliding users intact; prohibit any new case-only duplicates atomically.
+  db.exec(`CREATE TRIGGER IF NOT EXISTS users_unique_normalized_name
+    BEFORE INSERT ON users WHEN EXISTS (SELECT 1 FROM users WHERE lower(trim(username))=lower(trim(NEW.username)))
+    BEGIN SELECT RAISE(ABORT,'UNIQUE users.username'); END;`);
   db.exec(`
     CREATE TABLE IF NOT EXISTS user_settings (
       user_id TEXT PRIMARY KEY,
@@ -76,6 +105,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       claimed_at TEXT NOT NULL,
       explanations_granted INTEGER NOT NULL,
       explanations_remaining INTEGER NOT NULL,
+      explanations_used INTEGER NOT NULL DEFAULT 0,
       generations_granted INTEGER NOT NULL,
       generations_remaining INTEGER NOT NULL,
       analyses_granted INTEGER NOT NULL,
@@ -160,6 +190,23 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
     CREATE INDEX IF NOT EXISTS ai_question_generation_jobs_owner_idx
       ON ai_question_generation_jobs(user_id, certificate_id, created_at);
   `);
+  // Keep actual daily use independently of the current plan. A downgrade must
+  // not erase usage and then refill credits when the user upgrades again.
+  if (!db.prepare("PRAGMA table_info(user_daily_ai_credits)").all()
+    .some((column) => column.name === "explanations_used")) {
+    db.exec("BEGIN IMMEDIATE");
+    try {
+      if (!db.prepare("PRAGMA table_info(user_daily_ai_credits)").all()
+        .some((column) => column.name === "explanations_used")) {
+        db.exec(`ALTER TABLE user_daily_ai_credits ADD COLUMN explanations_used INTEGER NOT NULL DEFAULT 0;
+          UPDATE user_daily_ai_credits SET explanations_used=MAX(0,explanations_granted-explanations_remaining)`);
+      }
+      db.exec("COMMIT");
+    } catch (error) {
+      db.exec("ROLLBACK");
+      throw error;
+    }
+  }
   for (const statement of [
     "ALTER TABLE ai_question_generation_jobs ADD COLUMN credit_day TEXT",
     "ALTER TABLE ai_question_generation_jobs ADD COLUMN membership_credit_id TEXT",
@@ -328,13 +375,8 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
     db.prepare("UPDATE users SET is_admin=1 WHERE username=?").run(
       configuredAdmin,
     );
-  if (!db.prepare("SELECT 1 FROM users WHERE is_admin=1 LIMIT 1").get()) {
-    const firstUser = db
-      .prepare("SELECT id FROM users ORDER BY created_at, rowid LIMIT 1")
-      .get();
-    if (firstUser)
-      db.prepare("UPDATE users SET is_admin=1 WHERE id=?").run(firstUser.id);
-  }
+  // An administrator must be configured explicitly. A restart must never promote
+  // a public sign-up simply because no administrator exists yet.
   const existingUsers = db.prepare("SELECT id FROM users").all();
   if (existingUsers.length === 1) {
     const onlyUserId = existingUsers[0].id;
@@ -387,11 +429,13 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
   db.exec(`CREATE INDEX IF NOT EXISTS attempts_user_question_idx ON attempts(user_id, question_id);
     CREATE INDEX IF NOT EXISTS community_messages_cursor_idx ON community_messages(created_at, id);`);
   let cachedQuestions;
+  let cachedVisibleQuestions;
   let questionRevision = 0;
   let communityRevision = 0;
   const studyRevisions = new Map();
   const invalidateQuestions = () => {
     cachedQuestions = undefined;
+    cachedVisibleQuestions = undefined;
     questionRevision += 1;
   };
   const invalidateStudy = (userId = "local") => {
@@ -404,7 +448,24 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
   };
   // Question records are read-only to callers. Rebuild after every write to
   // the questions table instead of parsing every JSON row for each request.
-  const allQ = () => cachedQuestions ??= parse(db.prepare("SELECT data FROM questions").all());
+  db.exec(`CREATE TABLE IF NOT EXISTS admin_question_visibility (
+    question_id TEXT PRIMARY KEY, hidden INTEGER NOT NULL DEFAULT 0, reason TEXT NOT NULL DEFAULT '',
+    updated_by TEXT NOT NULL, updated_at TEXT NOT NULL);`);
+  const withdrawnIds = new Set(bundledQuestionWithdrawals().map((entry) => entry.questionId));
+  const isQuestionWithdrawn = (id) => withdrawnIds.has(id);
+  const isQuestionHidden = (id) => isQuestionWithdrawn(id) || !!db.prepare(
+    "SELECT 1 FROM admin_question_visibility WHERE question_id=? AND hidden=1",
+  ).get(id);
+  const allQ = (includeHidden = false) => {
+    cachedQuestions ??= parse(db.prepare("SELECT data FROM questions").all());
+    if (includeHidden) return cachedQuestions;
+    if (!cachedVisibleQuestions) {
+      const hidden = new Set([...withdrawnIds, ...db.prepare("SELECT question_id FROM admin_question_visibility WHERE hidden=1").all().map(r => r.question_id)]);
+      cachedVisibleQuestions = hidden.size
+        ? cachedQuestions.filter(q => !hidden.has(q.id)) : cachedQuestions;
+    }
+    return cachedVisibleQuestions;
+  };
   const allA = (userId) =>
     parse(
       userId
@@ -425,41 +486,111 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         attempted.has(q.id),
     );
   };
-  const addQ = (q) => {
+  const addQ = (q, storedFingerprint = fingerprint(q)) => {
     const result = db
       .prepare("INSERT INTO questions VALUES (?,?,?)")
-      .run(q.id, fingerprint(q), JSON.stringify(q));
+      .run(q.id, storedFingerprint, JSON.stringify(q));
     invalidateQuestions();
     return result;
   };
   const isQuestionDeleted = (id) =>
     !!db.prepare("SELECT 1 FROM question_tombstones WHERE question_id=?").get(id);
-  for (const q of bundledQuestions()) {
-    if (isQuestionDeleted(q.id)) continue;
-    const existing = getQ(q.id);
-    if (existing) {
-      if (JSON.stringify(existing) !== JSON.stringify(q)) {
-        db.prepare("UPDATE questions SET fingerprint=?, data=? WHERE id=?").run(
-          fingerprint(q),
-          JSON.stringify(q),
-          q.id,
-        );
-        invalidateQuestions();
-      }
-    } else addQ(q);
+  const deployedQuestions = bundledQuestions();
+  // Only provenance delivered by the trusted bundled release may supersede a
+  // previous question. Retain its row, attempts, favorites and existing exams.
+  const deployedById = new Map(deployedQuestions.map((q) => [q.id, q]));
+  const retirements = new Map();
+  for (const q of deployedQuestions) {
+    const replacement = q.provenance?.replacement;
+    if (!replacement || isQuestionDeleted(q.id) ||
+        !q.certificates?.includes(replacement.certificateId) ||
+        !/^[a-f0-9]{64}$/.test(q.provenance.reviewDigest || "") ||
+        typeof replacement.reason !== "string" || replacement.reason.trim().length < 20) continue;
+    const old = deployedById.get(replacement.questionId) || getQ(replacement.questionId);
+    if (old?.certificates?.length !== 1 || old.id === q.id ||
+        old.certificates[0] !== replacement.certificateId) continue;
+    const baseline = questionPayload(questionForCertificate(old, replacement.certificateId));
+    const { id: oldId, ...before } = baseline;
+    const { id: newId, ...after } = questionPayload(questionForCertificate(q, replacement.certificateId));
+    if (contentDigest(baseline) !== replacement.digest ||
+        contentDigest(before) === contentDigest(after)) continue;
+    if (retirements.has(old.id)) throw new Error(`Multiple replacements for question ${old.id}`);
+    retirements.set(old.id, { old, next: q, replacement });
   }
+  for (const id of retirements.keys()) {
+    const seen = new Set([id]);
+    let next = retirements.get(id).next.id;
+    while (retirements.has(next)) {
+      if (seen.has(next)) throw new Error(`Cyclic question replacement ${id}`);
+      seen.add(next);
+      next = retirements.get(next).next.id;
+    }
+  }
+  const seedFingerprint = (q) => retirements.has(q.id)
+    ? `retired:${q.id}:${fingerprint(q)}` : fingerprint(q);
+  // Archive the old fingerprint before inserting an answer/analysis-only
+  // correction. Normal questions retain the existing UNIQUE deduplication.
+  const contentTransaction = retirements.size || withdrawnIds.size;
+  if (contentTransaction) db.exec("BEGIN IMMEDIATE");
+  try {
+    for (const { old } of retirements.values())
+      db.prepare("UPDATE questions SET fingerprint=? WHERE id=?")
+        .run(seedFingerprint(old), old.id);
+    for (const q of deployedQuestions) {
+      if (isQuestionDeleted(q.id)) continue;
+      const existing = getQ(q.id);
+      if (existing) {
+        if (JSON.stringify(existing) !== JSON.stringify(q)) {
+          db.prepare("UPDATE questions SET fingerprint=?, data=? WHERE id=?").run(
+            seedFingerprint(q), JSON.stringify(q), q.id,
+          );
+          invalidateQuestions();
+        }
+      } else addQ(q, seedFingerprint(q));
+    }
+    for (const { old, next, replacement } of retirements.values())
+      db.prepare("INSERT OR IGNORE INTO admin_question_visibility VALUES (?,1,?,?,?)").run(
+        old.id, `已由 ${next.id} 替代：${replacement.reason}`,
+        "system:content-release", new Date().toISOString(),
+      );
+    syncBundledQuestionWithdrawals(db);
+    if (contentTransaction) db.exec("COMMIT");
+  } catch (error) {
+    if (contentTransaction) db.exec("ROLLBACK");
+    db.close();
+    throw error;
+  }
+  invalidateQuestions();
   const memberships = createMembershipStore(db);
+  const points = createPointsStore(db);
+  const aiServices = createAiServiceStore(db);
+  points.recoverExpired();
   const adminUserSelect = "SELECT u.id, u.username, u.community_name AS communityName, u.certificate_id AS certificateId, u.created_at AS createdAt, u.is_admin AS isAdmin, u.banned_at AS bannedAt, u.ban_reason AS banReason, e.plan AS membershipPlan, e.expires_at AS membershipExpiresAt FROM users u LEFT JOIN user_entitlements e ON e.user_id=u.id";
   const adminUserView = (user) => user ? ({ ...user, isAdmin: !!user.isAdmin,
     membershipPlan: user.membershipExpiresAt && Date.parse(user.membershipExpiresAt) <= Date.now() ? "free" : user.membershipPlan || "free" }) : null;
   const store = {
     db,
+    points,
+    aiServices,
     dataDir: path.resolve(dir),
     ...memberships,
     communityUploadDir,
     communityStorageLimit,
     getQ,
     allQ,
+    isQuestionHidden,
+    isQuestionWithdrawn,
+    setQuestionVisibility(questionId, hidden, reason, userId) {
+      if (!getQ(questionId)) return false;
+      if (!hidden && isQuestionWithdrawn(questionId))
+        throw Object.assign(new Error("该题已因内容不完整下架，请先审核修复后再上架"), { status: 409 });
+      db.prepare(`INSERT INTO admin_question_visibility VALUES (?,?,?,?,?) ON CONFLICT(question_id)
+        DO UPDATE SET hidden=excluded.hidden,reason=excluded.reason,updated_by=excluded.updated_by,updated_at=excluded.updated_at`)
+        .run(questionId, hidden ? 1 : 0, reason, userId, new Date().toISOString());
+      invalidateQuestions();
+      return true;
+    },
+    questionVisibility: () => db.prepare("SELECT question_id AS questionId,hidden,reason,updated_at AS updatedAt FROM admin_question_visibility").all(),
     questionRevision: () => questionRevision,
     communityRevision: () => communityRevision,
     studyRevision: (userId) => studyRevisions.get(userId || "local") || 0,
@@ -744,15 +875,10 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       return favorite;
     },
     favoriteQuestions: (userId = "local") => {
-      const ids = new Set(
-        db
-          .prepare("SELECT question_id AS questionId FROM question_favorites WHERE user_id=? ORDER BY created_at DESC")
-          .all(userId || "local")
-          .map((row) => row.questionId),
-      );
-      return visibleQuestions(userId || "local")
-        .filter((question) => ids.has(question.id))
-        .map((question) => ({ ...question, favorite: true }));
+      const rows = db.prepare("SELECT question_id AS questionId, created_at AS favoritedAt FROM question_favorites WHERE user_id=? ORDER BY created_at DESC, question_id ASC").all(userId || "local");
+      const visible = new Map(visibleQuestions(userId || "local").map(question=>[question.id,question]));
+      return rows.flatMap(row => visible.has(row.questionId)
+        ? [{ ...visible.get(row.questionId), favorite: true, favoritedAt: row.favoritedAt }] : []);
     },
     dismissWrongQuestion: (userId, questionId) => {
       const result = db
@@ -787,26 +913,33 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       return memberships.saveAccountEntitlement(userId || "local", entitlement);
     },
     dailyAiCredits(userId = "local", day) {
-      const row = db
+      const owner = userId || "local";
+      const limit = dailyExplanationLimit(memberships.accountEntitlement(owner).plan);
+      // Daily explanations are automatic. Check-in remains a separate reward
+      // for generation and analysis; empty claimed_at means not checked in.
+      db.prepare(`INSERT INTO user_daily_ai_credits
+        (user_id,day,claimed_at,explanations_granted,explanations_remaining,explanations_used,
+         generations_granted,generations_remaining,analyses_granted,analyses_remaining)
+        VALUES (?,?,'',?,?,0,1,0,3,0)
+        ON CONFLICT(user_id,day) DO UPDATE SET
+          explanations_granted=excluded.explanations_granted,
+          explanations_remaining=MAX(0,excluded.explanations_granted-user_daily_ai_credits.explanations_used)
+        WHERE explanations_granted<>excluded.explanations_granted
+          OR explanations_remaining<>MAX(0,excluded.explanations_granted-explanations_used)`)
+        .run(owner, day, limit, limit);
+      return db
         .prepare("SELECT day,claimed_at AS claimedAt,explanations_granted AS explanationsGranted,explanations_remaining AS explanationsRemaining,generations_granted AS generationsGranted,generations_remaining AS generationsRemaining,analyses_granted AS analysesGranted,analyses_remaining AS analysesRemaining FROM user_daily_ai_credits WHERE user_id=? AND day=?")
-        .get(userId || "local", day);
-      return row || {
-        day,
-        claimedAt: null,
-        explanationsGranted: 5,
-        explanationsRemaining: 0,
-        generationsGranted: 1,
-        generationsRemaining: 0,
-        analysesGranted: 3,
-        analysesRemaining: 0,
-      };
+        .get(owner, day);
     },
     claimDailyAiCredits(userId = "local", day) {
       db.exec("BEGIN IMMEDIATE");
       try {
+        this.dailyAiCredits(userId, day);
         const result = db.prepare(
-          "INSERT OR IGNORE INTO user_daily_ai_credits (user_id,day,claimed_at,explanations_granted,explanations_remaining,generations_granted,generations_remaining,analyses_granted,analyses_remaining) VALUES (?,?,?,5,5,1,1,3,3)",
-        ).run(userId || "local", day, new Date().toISOString());
+          `UPDATE user_daily_ai_credits SET claimed_at=?,
+            generations_remaining=generations_granted,analyses_remaining=analyses_granted
+            WHERE user_id=? AND day=? AND claimed_at=''`,
+        ).run(new Date().toISOString(), userId || "local", day);
         const credits = this.dailyAiCredits(userId, day);
         db.exec("COMMIT");
         return { claimed: result.changes > 0, credits };
@@ -823,6 +956,13 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       };
       const column = columns[kind];
       if (!column) throw new Error("未知的 AI 额度类型");
+      if (kind === "explanation") {
+        this.dailyAiCredits(userId, day);
+        return db.prepare(`UPDATE user_daily_ai_credits SET
+          explanations_remaining=explanations_remaining-1,explanations_used=explanations_used+1
+          WHERE user_id=? AND day=? AND explanations_remaining>0`)
+          .run(userId || "local", day).changes > 0;
+      }
       return db.prepare(
         `UPDATE user_daily_ai_credits SET ${column}=${column}-1 WHERE user_id=? AND day=? AND ${column}>0`,
       ).run(userId || "local", day).changes > 0;
@@ -835,6 +975,13 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       };
       const pair = columns[kind];
       if (!pair) throw new Error("未知的 AI 额度类型");
+      if (kind === "explanation") {
+        return db.prepare(`UPDATE user_daily_ai_credits SET
+          explanations_remaining=MAX(0,explanations_granted-MAX(0,explanations_used-1)),
+          explanations_used=MAX(0,explanations_used-1)
+          WHERE user_id=? AND day=? AND explanations_used>0`)
+          .run(userId || "local", day).changes > 0;
+      }
       return db.prepare(
         `UPDATE user_daily_ai_credits SET ${pair[0]}=MIN(${pair[0]}+1,${pair[1]}) WHERE user_id=? AND day=?`,
       ).run(userId || "local", day).changes > 0;
@@ -926,16 +1073,32 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       mode = "practice",
       userId = "local",
       response,
+      clientAttemptId,
     ) {
       const q = getQ(questionId);
       if (!q) throw new Error("题目不存在");
+      // A retry after a lost acknowledgement must not count as a second answer.
+      // Namespace the client token by account so it cannot address another user.
+      const attemptId = clientAttemptId
+        ? crypto.createHash("sha256").update(`${userId}:practice:${clientAttemptId}`).digest("hex")
+        : crypto.randomUUID();
+      const previous = clientAttemptId
+        ? db.prepare("SELECT data FROM attempts WHERE id=? AND user_id=?").get(attemptId, userId)
+        : null;
+      if (previous) {
+        const saved = JSON.parse(previous.data);
+        if (saved.questionId !== questionId || JSON.stringify([...saved.selected].sort()) !== JSON.stringify([...selected].sort()) || saved.response !== response)
+          throw Object.assign(new Error("这次作答标识已被使用，请重新进入练习"), { status: 409 });
+        return { ...saved, answer: q.answer, analysis: q.analysis,
+          ...(q.type === "short_answer" ? { expectedAnswer: q.expectedAnswer } : {}) };
+      }
       const correct =
         q.type === "short_answer"
           ? selected[0] === "A"
           : JSON.stringify([...selected].sort()) ===
             JSON.stringify([...q.answer].sort());
       const a = {
-        id: crypto.randomUUID(),
+        id: attemptId,
         userId,
         questionId,
         selected,
@@ -1112,7 +1275,8 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
               ? [topic, userId]
               : [topic]),
         )
-        .map((r) => getQ(r.question_id)),
+        .map((r) => getQ(r.question_id))
+        .filter((question) => question && !isQuestionHidden(question.id)),
     aiGroups: (userId, certificateId) => {
       const groups = db
         .prepare(
@@ -1315,6 +1479,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
             options.certificateId,
           );
         }
+        options.onCommit?.({ groupId: id });
         db.exec("COMMIT");
         return id;
       } catch (error) {
@@ -1516,6 +1681,9 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       return wechatBindingToken ? this.completeWechatLogin(wechatBindingToken, register) : register();
     },
     registerWithHash(username, salt, passwordHash) {
+      username = username.trim();
+      if (db.prepare("SELECT 1 FROM users WHERE lower(username)=lower(?)").get(username))
+        throw Object.assign(new Error("账号已存在，请登录或使用其他账号名"), { status: 409, code: "USERNAME_ALREADY_EXISTS" });
       const firstUser = !db.prepare("SELECT 1 FROM users LIMIT 1").get();
       const isAdmin =
         firstUser ||
@@ -1545,7 +1713,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
           null,
         );
       } catch (e) {
-        if (String(e.message).includes("UNIQUE")) throw new Error("账号已存在");
+        if (String(e.message).includes("UNIQUE")) throw Object.assign(new Error("账号已存在"), { status: 409, code: "USERNAME_ALREADY_EXISTS" });
         throw e;
       }
       return user;
@@ -1652,9 +1820,13 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         )
         .all(),
     authenticate(username, password) {
+      username = username.trim();
       const row = db
         .prepare("SELECT * FROM users WHERE username=?")
-        .get(username);
+        .get(username) || (() => {
+          const rows = db.prepare("SELECT * FROM users WHERE lower(username)=lower(?) LIMIT 2").all(username);
+          return rows.length === 1 ? rows[0] : null;
+        })();
       if (!row) return null;
       const actual = Buffer.from(row.password_hash, "base64");
       const expected = crypto.scryptSync(password, row.salt, 64);
@@ -1662,10 +1834,15 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       return this.userById(row.id);
     },
     async authenticateAsync(username, password) {
-      const row = db.prepare("SELECT id,password_hash,salt FROM users WHERE username=?").get(username);
+      username = username.trim();
+      const row = db.prepare("SELECT id,password_hash,salt FROM users WHERE username=?").get(username) || (() => {
+        const rows = db.prepare("SELECT id,password_hash,salt FROM users WHERE lower(username)=lower(?) LIMIT 2").all(username);
+        return rows.length === 1 ? rows[0] : null;
+      })();
       // Unknown accounts perform the same expensive work without blocking HTTP.
       const expected = await scrypt(password, row?.salt || unknownAccountSalt, 64);
       if (!row || !crypto.timingSafeEqual(Buffer.from(row.password_hash, "base64"), expected)) return null;
+      if (db.prepare("SELECT password_hash FROM users WHERE id=?").get(row.id)?.password_hash !== row.password_hash) return null;
       return this.userById(row.id);
     },
     createAuthSession(userId) {

@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { OpenAICompatibleProvider } from "../server/ai.js";
+import { FundedTestAIProvider as OpenAICompatibleProvider } from "./helpers/ai-points.js";
 import { createStudyAI } from "../server/study-ai.js";
 import { studyNodes } from "../server/study-content.js";
 import { studyPromptAttack } from "../server/study-security.js";

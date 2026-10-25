@@ -24,7 +24,10 @@
     "bank:hcia": "node scripts/build-hcia-v2-bank.js",
     "bank:hcia:supplement": "node scripts/build-hcia-v2-supplement.js",
     "bank:hcia:import-h12-811": "node scripts/import-hcia-h12-811-bank.js",
-    "bank:report": "node scripts/report-bank-coverage.js"
+    "bank:report": "node scripts/report-bank-coverage.js",
+    "auth:mail:check": "node scripts/check-account-mail.mjs",
+    "points:migrate": "node scripts/migrate-ai-points.mjs",
+    "verify:backend": "node scripts/verify-mobile-backend.mjs"
   },
   "dependencies": {
     "dotenv": "^17.2.0",
@@ -33,7 +36,8 @@
     "qrcode.react": "^4.2.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "zod": "^4.1.0"
+    "zod": "^4.1.0",
+    "nodemailer": "^10.1.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.55.0",

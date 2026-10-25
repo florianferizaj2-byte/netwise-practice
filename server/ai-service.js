@@ -1,5 +1,6 @@
 // These settings stay on the server. The requesting account still owns its
 // usage, credits and generated questions; only the upstream connection is shared.
+import { defaultAiModel } from "./ai-model-defaults.js";
 export function authorAiOwner(store, env = process.env) {
   const admins = store.allUsers().filter((user) => user.isAdmin && !user.bannedAt);
   if (env.AI_SERVICE_OWNER_ID?.trim())
@@ -9,14 +10,15 @@ export function authorAiOwner(store, env = process.env) {
   return admins[0];
 }
 
-export function authorAiSettings(store, env = process.env) {
+export function legacyAuthorAiSettings(store, env = process.env) {
   const serviceKey = env.AI_SERVICE_API_KEY?.trim();
   const apiKey = serviceKey || env.AUTHOR_API_KEY?.trim();
   if (apiKey) {
+    const baseUrl = (serviceKey ? env.AI_SERVICE_BASE_URL?.trim() : env.AUTHOR_API_BASE_URL?.trim()) || "https://api.deepseek.com";
     return {
       apiKey,
-      baseUrl: (serviceKey ? env.AI_SERVICE_BASE_URL?.trim() : env.AUTHOR_API_BASE_URL?.trim()) || "https://api.deepseek.com",
-      model: (serviceKey ? env.AI_SERVICE_MODEL?.trim() : env.AUTHOR_API_MODEL?.trim()) || "deepseek-chat",
+      baseUrl,
+      model: (serviceKey ? env.AI_SERVICE_MODEL?.trim() : env.AUTHOR_API_MODEL?.trim()) || defaultAiModel(baseUrl),
       temperature: 0.3,
     };
   }
@@ -31,6 +33,21 @@ export function authorAiSettings(store, env = process.env) {
   if (saved.keyCipher) return saved;
   const admin = store.adminSettings(owner.id);
   return admin.keyCipher ? admin : null;
+}
+
+export function managedAiCandidates(store) {
+  if(!store.aiServices?.policy().managed)return null;
+  return store.aiServices.channels().filter(row=>{
+    if(!row.enabled||!row.keyCipher)return false;
+    try{store.points.rateCard(row);return true;}catch(error){
+      if(error.code?.startsWith('AI_POINTS_PRICING_'))return false;
+      throw error;
+    }
+  }).map(row=>({...row,channelId:row.id,serviceName:row.name}));
+}
+export function authorAiSettings(store,env=process.env){
+  const managed=managedAiCandidates(store);
+  return managed===null?legacyAuthorAiSettings(store,env):managed[0]||null;
 }
 
 export function authorAiAvailable(store) {

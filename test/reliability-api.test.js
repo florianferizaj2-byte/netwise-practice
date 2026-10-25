@@ -3,9 +3,9 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import os from "node:os";
-import { createApp } from "../server/index.js";
+import { createVerifiedTestApp as createApp, verifiedFetch } from "./helpers/account-mail.js";
 import { createStore } from "../server/store.js";
-import { OpenAICompatibleProvider } from "../server/ai.js";
+import { FundedTestAIProvider as OpenAICompatibleProvider } from "./helpers/ai-points.js";
 import { fixtureQuestion } from "./ai-fixture.js";
 import { currentAiSignal } from "../server/ai-tasks.js";
 
@@ -31,7 +31,7 @@ async function serve(t, options = {}) {
     token,
     method = body === undefined ? "GET" : "POST",
   ) => {
-    const response = await fetch(
+    const response = await (["/auth/register", "/auth/wechat/register"].includes(url) ? verifiedFetch : fetch)(
       `http://127.0.0.1:${server.address().port}/api${url}`,
       {
         method,
@@ -74,7 +74,7 @@ test("login throttling and versioned exam saves protect a real authenticated API
   });
   const base = `http://127.0.0.1:${server.address().port}/api`;
   async function request(url, body, method = "POST", cookie = "") {
-    const response = await fetch(base + url, {
+    const response = await (url === "/auth/register" ? verifiedFetch : fetch)(base + url, {
       method,
       headers: { "Content-Type": "application/json", Cookie: cookie },
       ...(body === undefined ? {} : { body: JSON.stringify(body) }),

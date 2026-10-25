@@ -6,7 +6,7 @@ import os from "node:os";
 import path from "node:path";
 import { createStore } from "../server/store.js";
 import { createApp } from "../server/index.js";
-import { OpenAICompatibleProvider } from "../server/ai.js";
+import { FundedTestAIProvider as OpenAICompatibleProvider } from "./helpers/ai-points.js";
 import { createStudyAI } from "../server/study-ai.js";
 import { studyNodes, studyPackageSchema, studyReviewSchema, acceptedStudyReview } from "../server/study-content.js";
 import { gradeStudyQuestion, summarizeStudyGrade } from "../server/study-grading.js";

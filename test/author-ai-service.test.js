@@ -6,7 +6,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { createStore } from '../server/store.js';
 import { createApp } from '../server/index.js';
-import { OpenAICompatibleProvider } from '../server/ai.js';
+import { FundedTestAIProvider as OpenAICompatibleProvider } from "./helpers/ai-points.js";
 import { authorAiSettings } from '../server/ai-service.js';
 import { encrypt } from '../server/security.js';
 
@@ -74,7 +74,7 @@ test('ordinary users use the author key even when an old personal key is saved',
   assert.equal(authorAiSettings(store, { AI_SERVICE_OWNER_ID: 'missing-admin' }), null);
 });
 
-test('AI use consumes the requesting account credit and refunds failures', async (t) => {
+test('every AI service spends unified account points and refunds the complete failed task', async (t) => {
   const store = isolatedStore(t);
   store.register('credit_owner', 'safe-password-123');
   const learner = store.register('credit_learner', 'safe-password-123');
@@ -87,19 +87,26 @@ test('AI use consumes the requesting account credit and refunds failures', async
   let failExplanation = false;
   let failGeneration = false;
   let planCalls = 0;
+  const metered = new OpenAICompatibleProvider(store,{fetch:async()=>new Response(JSON.stringify({
+    choices:[{message:{content:'fixture response'}}],usage:{prompt_tokens:2,completion_tokens:3,total_tokens:5},
+  }),{headers:{'Content-Type':'application/json'}})});
+  const settings={baseUrl:'https://fixture.example/v1',model:'fixture',apiKey:'fixture'};
   const provider = {
-    async explainQuestion() {
+    async explainQuestion(_question,_action,_selected,_hint,userId) {
       explanationCalls += 1;
+      await metered.call([{role:'user',content:'fixture explanation'}],settings,{userId,taskType:'question-explanation'});
       if (failExplanation) throw new Error('fixture explanation failure');
       return { text: 'fixture explanation' };
     },
-    async generatePracticeSet() {
+    async generatePracticeSet(_question,_count,_harder,_progress,options) {
       generationCalls += 1;
+      await metered.call([{role:'user',content:'fixture generation'}],settings,{userId:options.userId,taskType:'question-generation'});
       if (failGeneration) throw new Error('fixture generation failure');
       return { questions: [] };
     },
-    async dailyPlan() {
+    async dailyPlan(_questions,userId) {
       planCalls += 1;
+      await metered.call([{role:'user',content:'fixture plan'}],settings,{userId,taskType:'daily-plan'});
       return { summary: 'fixture plan', tasks: [] };
     },
   };
@@ -119,35 +126,42 @@ test('AI use consumes the requesting account credit and refunds failures', async
     });
     return { status: response.status, data: await response.json() };
   };
-  const balance = async (token) => (await request('/account/entitlements', token)).data.checkIn.remaining;
+  const balance = async (token) => (await request('/account/entitlements', token)).data.points.availableUnits;
   const question = store.allQ().find((item) => item.certificates?.includes('network-engineer'));
   const explanation = { questionId: question.id, action: '详细讲解' };
-  assert.equal((await request('/ai/teacher', learnerToken, explanation)).status, 429);
-  assert.equal(explanationCalls, 0);
-  assert.equal((await request('/account/check-in', learnerToken, {})).status, 200);
+  const initial=await balance(learnerToken),peerInitial=await balance(peerToken);
   assert.equal((await request('/ai/teacher', learnerToken, explanation)).status, 200);
-  assert.equal((await balance(learnerToken)).explanations, 4);
+  assert.equal(explanationCalls, 1);
+  assert.equal(await balance(learnerToken),initial-12);
+  const gift=await request('/account/check-in',learnerToken,{});
+  assert.equal(gift.status,200);
+  const expected=initial-12+gift.data.checkIn.grants.points*1000;
+  assert.equal((await request('/ai/teacher', learnerToken, explanation)).status, 200);
+  assert.equal(await balance(learnerToken),expected-12);
   failExplanation = true;
   assert.notEqual((await request('/ai/teacher', learnerToken, explanation)).status, 200);
-  assert.equal((await balance(learnerToken)).explanations, 4);
+  assert.equal(await balance(learnerToken),expected-12);
   failExplanation = false;
   assert.equal((await request('/ai/teacher', learnerToken, explanation)).status, 200);
-  assert.equal((await balance(learnerToken)).explanations, 3);
+  assert.equal(await balance(learnerToken),expected-24);
 
   const training = { questionId: question.id, count: 1 };
   assert.equal((await request('/ai/train', learnerToken, training)).status, 200);
-  assert.equal((await balance(learnerToken)).generations, 0);
-  assert.equal((await request('/ai/train', learnerToken, training)).status, 429);
-  assert.equal(generationCalls, 1);
-  assert.equal((await request('/account/check-in', peerToken, {})).status, 200);
+  assert.equal(await balance(learnerToken),expected-36);
+  assert.equal((await request('/ai/train', learnerToken, training)).status, 200);
+  assert.equal(generationCalls, 2);
+  assert.equal(await balance(learnerToken),expected-48);
+  assert.equal(await balance(peerToken),peerInitial);
   failGeneration = true;
   assert.notEqual((await request('/ai/train', peerToken, training)).status, 200);
-  assert.equal((await balance(peerToken)).generations, 1);
-  assert.equal((await balance(learnerToken)).generations, 0);
+  assert.equal(await balance(peerToken),peerInitial);
+  assert.equal(await balance(learnerToken),expected-48);
 
   assert.equal((await request('/ai/daily', learnerToken, {})).status, 200);
-  const analysisAfterPlan = (await balance(learnerToken)).analyses;
+  const analysisAfterPlan = await balance(learnerToken);
+  assert.equal(analysisAfterPlan,expected-60);
   assert.equal((await request('/ai/daily', learnerToken, {})).status, 200);
   assert.equal(planCalls, 1);
-  assert.equal((await balance(learnerToken)).analyses, analysisAfterPlan);
+  assert.equal(await balance(learnerToken),analysisAfterPlan);
+  assert.equal(store.points.audit().passed,true);
 });

@@ -1,0 +1,33 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import {DatabaseSync} from 'node:sqlite';
+import {migrateAiPoints,tableFingerprints} from '../scripts/migrate-ai-points.mjs';
+import {createPointsStore} from '../server/ai-points/store.js';
+test('schema migration backs up every byte of original rows and preserves existing point grants on repeat',async t=>{
+  const parent=path.resolve('tmp'),directory=fs.mkdtempSync(path.join(parent,'ai-points-migration-')),file=path.join(directory,'netwise.sqlite');
+  t.after(()=>{assert.equal(path.dirname(directory),parent);assert.ok(path.basename(directory).startsWith('ai-points-migration-'));fs.rmSync(directory,{recursive:true,force:true});});
+  let db=new DatabaseSync(file);
+  db.exec("CREATE TABLE users(id TEXT PRIMARY KEY,secret BLOB);CREATE TABLE questions(id TEXT PRIMARY KEY,data TEXT);CREATE TABLE user_usage(id TEXT PRIMARY KEY,user_id TEXT,data TEXT);CREATE TABLE attempts(id TEXT PRIMARY KEY,data TEXT);");
+  db.prepare('INSERT INTO users VALUES(?,?)').run('fixture',Buffer.from([0,255,12]));
+  db.prepare('INSERT INTO questions VALUES(?,?)').run('published','{"question":"原始题干","answer":["A"]}');
+  db.prepare('INSERT INTO user_usage VALUES(?,?,?)').run('old','fixture','{"hasUsage":true,"prompt_tokens":10,"completion_tokens":20}');
+  db.prepare('INSERT INTO attempts VALUES(?,?)').run('attempt','{"unchanged":true}');
+  const names=['users','questions','user_usage','attempts'],before=tableFingerprints(db,names);db.close();
+  const result=await migrateAiPoints({dataDir:directory,backupDir:path.join(directory,'backups')});
+  assert.equal(result.ok,true);assert.equal(result.pointsTables.length,8);assert.equal(result.legacyUnknownCostCalls,1);
+  assert.equal(result.finance.revenueMicros,0);assert.equal(result.finance.outstandingPointUnits,0);
+  db=new DatabaseSync(file);assert.deepEqual(tableFingerprints(db,names),before);
+  const points=createPointsStore(db);points.recordFinance({key:'fixture',kind:'revenue',amountMicros:1000000,reference:'synthetic-migration-receipt',createdBy:'fixture'});points.grant({userId:'fixture',sourceKey:'paid',units:100000,requireFunded:true});
+  const pointBefore=tableFingerprints(db,result.pointsTables);db.close();
+  const second=await migrateAiPoints({dataDir:directory,backupDir:path.join(directory,'backups')});
+  assert.notEqual(result.backup,second.backup);
+  db=new DatabaseSync(file);assert.deepEqual(tableFingerprints(db,names),before);assert.deepEqual(tableFingerprints(db,result.pointsTables),pointBefore);db.close();
+  const backup=new DatabaseSync(result.backup,{readOnly:true});assert.deepEqual(tableFingerprints(backup,names),before);backup.close();
+});
+test('migration refuses missing targets without creating an empty database',async t=>{
+  const parent=path.resolve('tmp'),directory=fs.mkdtempSync(path.join(parent,'ai-points-missing-'));
+  t.after(()=>{assert.equal(path.dirname(directory),parent);assert.ok(path.basename(directory).startsWith('ai-points-missing-'));fs.rmSync(directory,{recursive:true,force:true});});
+  await assert.rejects(migrateAiPoints({dataDir:directory}));assert.equal(fs.existsSync(path.join(directory,'netwise.sqlite')),false);
+});

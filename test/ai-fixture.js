@@ -43,7 +43,7 @@ export function fixtureQuestion(
 export function mockAI() {
   let generated = 0;
   return async (_url, options) => {
-    const { messages } = JSON.parse(options.body),
+    const { messages, max_tokens = 200 } = JSON.parse(options.body),
       system = messages[0].content;
     const payload = messages.length > 1 ? JSON.parse(messages[1].content) : {};
     let content;
@@ -114,8 +114,8 @@ export function mockAI() {
         ],
         usage: {
           prompt_tokens: 100,
-          completion_tokens: 200,
-          total_tokens: 300,
+          completion_tokens: Math.min(200,max_tokens),
+          total_tokens: 100+Math.min(200,max_tokens),
         },
       }),
       { status: 200, headers: { "Content-Type": "application/json" } },

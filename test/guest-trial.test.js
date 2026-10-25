@@ -5,7 +5,7 @@ import os from "node:os";
 import path from "node:path";
 import { createApp } from "../server/index.js";
 import { createStore } from "../server/store.js";
-import { OpenAICompatibleProvider } from "../server/ai.js";
+import { FundedTestAIProvider as OpenAICompatibleProvider } from "./helpers/ai-points.js";
 
 async function fixture(t, { limit = 100, onCall } = {}) {
   const env = {

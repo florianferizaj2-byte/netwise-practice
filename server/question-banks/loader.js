@@ -19,6 +19,15 @@ const referenceSchema = z.object({
   knowledgeSection: z.string().min(1).max(160),
   knowledgePoint: z.string().min(1).max(160),
 }).strict();
+const withdrawalsSchema = z.object({
+  schemaVersion: z.literal(1),
+  certificateId: z.string().regex(slug),
+  reviewedAt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  questions: z.array(z.object({
+    questionId: z.string().regex(slug),
+    reason: z.string().trim().min(12).max(1000),
+  }).strict()),
+}).strict();
 const guideSchema = z
   .object({
     schemaVersion: z.literal(1),
@@ -126,7 +135,7 @@ function filesAt(target) {
     );
 }
 
-function validateManifest(manifest, directory) {
+export function validateManifest(manifest, directory) {
   if (
     manifest.schemaVersion !== 1 ||
     !slug.test(manifest.certificate?.id || "") ||
@@ -484,7 +493,22 @@ function loadCatalog() {
           throw new Error(`证书指南路径不能超出证书目录：${directory}`);
         guide = guideSchema.parse(json(guideFile));
       }
-      return { directory, ...manifest, guide, taxonomyIndex };
+      let withdrawals = [];
+      if (manifest.questionWithdrawalsPath) {
+        const file = path.resolve(directory, manifest.questionWithdrawalsPath);
+        if (!file.startsWith(path.resolve(directory) + path.sep))
+          throw new Error(`题目下架清单路径不能超出证书目录：${directory}`);
+        const policy = withdrawalsSchema.parse(json(file));
+        if (policy.certificateId !== manifest.certificate.id)
+          throw new Error(`题目下架清单证书不匹配：${file}`);
+        const ids = new Set();
+        withdrawals = policy.questions.map((entry) => {
+          if (ids.has(entry.questionId)) throw new Error(`下架题号重复：${entry.questionId}`);
+          ids.add(entry.questionId);
+          return { ...entry, certificateId: policy.certificateId };
+        });
+      }
+      return { directory, ...manifest, guide, taxonomyIndex, withdrawals };
     })
     .sort(
       (a, b) => (a.certificate.order || 999) - (b.certificate.order || 999),
@@ -591,7 +615,13 @@ function loadCatalog() {
   for (const question of questions.values())
     for (const certificateId of question.certificates)
       assertQuestionTaxonomy(questionForCertificate(question, certificateId), taxonomyByCertificate.get(certificateId));
+  const withdrawals = manifests.flatMap((manifest) => manifest.withdrawals);
+  for (const entry of withdrawals) {
+    if (questions.has(entry.questionId))
+      throw new Error(`已下架题目不能同时出现在正式题库：${entry.questionId}`);
+  }
   return {
+    withdrawals,
     manifests,
     certificates: manifests.map((entry) => ({
       ...entry.certificate,
@@ -603,11 +633,21 @@ function loadCatalog() {
   };
 }
 
+export { guideSchema };
+
 const catalog = loadCatalog();
 
 export const certificates = catalog.certificates;
+export const bankManifestForCertificate = (certificateId) => {
+  const item = catalog.manifests.find(entry => entry.certificate.id === certificateId);
+  if (!item) return null;
+  const { directory, taxonomyIndex, guide, withdrawals, ...manifest } = item;
+  return structuredClone(manifest);
+};
 export const bundledQuestions = () =>
   catalog.questions.map((q) => structuredClone(q));
+export const bundledQuestionWithdrawals = () =>
+  catalog.withdrawals.map((entry) => ({ ...entry }));
 export const hasCertificateQuestion = (question, certificateId) =>
   question.certificates?.includes(certificateId) || false;
 export const banksForCertificate = (certificateId) => {

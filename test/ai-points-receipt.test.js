@@ -1,0 +1,32 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';
+import {createStore} from '../server/store.js';import {createApp} from '../server/index.js';import {OpenAICompatibleProvider} from '../server/ai.js';
+test('task receipts bind real HTTP requests, caches and jobs to the authenticated owner without guessing a wallet delta',async t=>{
+  const parent=path.resolve('tmp'),dir=fs.mkdtempSync(path.join(parent,'points-receipts-')),store=createStore(dir);
+  const one=store.register('receipt_one','fixture-password-123'),two=store.register('receipt_two','fixture-password-123');
+  for(const user of [one,two]){store.selectCertificate(user.id,'network-engineer');store.points.recordFinance({key:'synthetic-income:'+user.id,kind:'revenue',amountMicros:1000000000,reference:'synthetic test funding:'+user.id,createdBy:user.id});store.points.grant({userId:user.id,sourceKey:'fixture-grant',units:1000000,kind:'test',requireFunded:true});}
+  const settings={baseUrl:'https://api.deepseek.com',model:'deepseek-flash',apiKey:'synthetic-never-sent',temperature:.3};
+  let calls=0;const provider=new OpenAICompatibleProvider(store,{fetch:async()=>{calls++;return new Response(JSON.stringify({choices:[{message:{content:JSON.stringify({text:'合成验收讲解，依据条件逐步判断。'})},finish_reason:'stop'}],usage:{prompt_tokens:10,completion_tokens:10,total_tokens:20}}));}});
+  const raw=provider.call.bind(provider);provider.call=(messages,config,options)=>raw(messages,{...settings,...config},options);
+  const app=await createApp({store,provider,withFrontend:false,authRequired:true,accountSecurity:{enabled:false}}),server=app.listen(0,'127.0.0.1');await new Promise(resolve=>server.once('listening',resolve));
+  t.after(async()=>{await app.locals.stop();server.closeAllConnections();await new Promise(resolve=>server.close(resolve));store.db.close();assert.equal(path.dirname(dir),parent);fs.rmSync(dir,{recursive:true,force:true});});
+  const base=`http://127.0.0.1:${server.address().port}/api`,tokens={[one.id]:store.createAuthSession(one.id),[two.id]:store.createAuthSession(two.id)};
+  const request=async(user,url,body,id)=>{const r=await fetch(base+url,{method:body?'POST':'GET',headers:{...(user?{Authorization:'Bearer '+tokens[user]}:{}),'Content-Type':'application/json',...(id?{'X-AI-Request-Id':id}:{})},...(body?{body:JSON.stringify(body)}:{})});return {status:r.status,data:await r.json()};};
+  const id=crypto.randomUUID(),body={questionId:'practice-1',action:'详细讲解',selected:[]};
+  assert.equal((await request(one.id,'/ai/teacher',body,id)).status,200);assert.equal(calls,1);
+  store.points.grant({userId:one.id,sourceKey:'intervening-gift',units:5000,kind:'test',requireFunded:true});
+  let r=await request(one.id,'/account/points/receipt?requestId='+id);assert.equal(r.status,200);assert.equal(r.data.chargedUnits,40);assert.equal(r.data.pending,false);assert.equal(r.data.calls[0].model,'deepseek-flash');assert.ok(r.data.wallet.ledgerRevision>0);assert.ok(r.data.wallet.snapshotAt>0);
+  const wallet=await request(one.id,'/account/points/wallet');assert.equal(wallet.status,200);assert.equal(wallet.data.wallet.ledgerRevision,r.data.wallet.ledgerRevision);assert.ok(wallet.data.wallet.snapshotAt>=r.data.wallet.snapshotAt);
+  const other=await request(two.id,'/account/points/receipt?requestId='+id);assert.equal(other.data.found,false);assert.deepEqual(other.data.calls,[]);assert.equal(other.data.chargedUnits,0);
+  assert.equal((await request(null,'/account/points/receipt?requestId='+id)).status,401);
+  assert.equal((await request(one.id,'/account/points/receipt?requestId='+id+'&userId='+two.id)).status,400);
+  assert.equal((await request(one.id,'/account/points/receipt?requestId=not-a-uuid')).status,400);
+  const cachedId=crypto.randomUUID();assert.equal((await request(one.id,'/ai/teacher',body,cachedId)).status,200);assert.equal(calls,1);
+  const cachedReceipt=await request(one.id,'/account/points/receipt?requestId='+cachedId);assert.equal(cachedReceipt.status,200);assert.equal(cachedReceipt.data.chargedUnits,0);assert.equal(cachedReceipt.data.pending,false);
+  const job=crypto.randomUUID(),op=store.points.begin({userId:one.id,requestKey:'question-job:'+job,signature:'fixture-job',feature:'question-generation'}).operation;
+  const call=store.points.reserveCall(op.id,{settings,inputLimit:1000,outputLimit:900,taskType:'question-generation'});
+  r=await request(one.id,'/account/points/receipt?jobId='+job);assert.equal(r.data.pending,true);assert.ok(r.data.heldUnits>0);
+  store.points.finishCall(call.id,{success:true,usage:{hasUsage:true,prompt_tokens:10,completion_tokens:10,total_tokens:20}});store.points.finish(op.id,{success:false,error:'synthetic review rejection'});
+  r=await request(one.id,'/account/points/receipt?jobId='+job);assert.equal(r.data.pending,false);assert.ok(r.data.refundedUnits>0);assert.equal(r.data.chargedUnits,0);
+  assert.equal((await request(two.id,'/account/points/receipt?jobId='+job)).data.found,false);
+  assert.equal(store.points.audit().passed,true);
+});
