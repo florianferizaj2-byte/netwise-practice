@@ -3,13 +3,13 @@ import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { verificationEnvironment } from './verification-env.mjs';
-import { releaseChecks } from './release-checks.mjs';
+import { releaseChecks, getReleaseTarget } from './release-checks.mjs';
 import { releaseVerificationInputs, assertBuildProvenance } from './release-runtime.mjs';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const output = path.join(root,'test-output'); fs.mkdirSync(output,{recursive:true});
 const reportFile=path.join(output,'release-verification-report.json');
 const version=JSON.parse(fs.readFileSync(path.join(root,'mobile/package.json'),'utf8')).version;
-const report={version,complete:false,passed:false,startedAt:new Date().toISOString(),inputs:releaseVerificationInputs(root),checks:[]};
+const report={version,target:getReleaseTarget(root),complete:false,passed:false,startedAt:new Date().toISOString(),inputs:releaseVerificationInputs(root),checks:[]};
 const save=()=>{fs.writeFileSync(reportFile+'.new',JSON.stringify(report,null,2)+'\n');fs.renameSync(reportFile+'.new',reportFile);};
 const isolated=verificationEnvironment(process.env,{temporaryParent:path.join(root,'tmp')}); save();
 try{

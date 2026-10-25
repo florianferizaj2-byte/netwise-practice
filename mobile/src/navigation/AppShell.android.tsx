@@ -219,7 +219,6 @@ export function AppShell() {
 
   useEffect(() => {
     let mounted = true;
-    if (!appActive) return;
     void mobileApi
       .restoreSession()
       .then(({ session: restoredSession, shouldValidate }) => {
@@ -262,6 +261,7 @@ export function AppShell() {
 
   useEffect(() => {
     let mounted = true;
+    if (!appActive) return;
     void mobileApi
       .appVersion(APP_VERSION)
       .then((release) => {

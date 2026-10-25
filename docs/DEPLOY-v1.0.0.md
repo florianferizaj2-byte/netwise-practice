@@ -2,8 +2,8 @@
 
 ## 更新服务器
 
-1. 备份现有项目、`.env`、整个 `DATA_DIR`，特别是 SQLite、用户头像和上传文件；保留原 `AI_MASTER_KEY`，更换会让旧 API Key 无法解密。
-2. 将本次 `kaojiang-server-v1.0.0-*.tgz` 解压覆盖到原项目。更新包含已构建网页和正式 APK，不需要在服务器重做 Android 构建。
+1. 停止原服务后备份现有项目、`.env`、整个 `DATA_DIR`，或使用 SQLite 一致性备份；特别保留数据库、用户头像和上传文件，以及原 `AI_MASTER_KEY`，更换会让旧 API Key 无法解密。
+2. 将本次 `kaojiang-server-v1.0.0-*.tgz` 解压合并覆盖到原项目。更新包含已构建电脑官网和正式 APK，不需要在服务器重做 Android 构建。手机网页暂不做，本包不包含 `dist/app/`；保留服务器现有目录，不要删除整个 `dist`，不要使用带删除目标文件选项的同步。
 3. 使用 Node.js 24 或以上，在原项目目录运行：
 
 ```sh
@@ -18,7 +18,7 @@ npm run points:migrate -- --data-dir /原来的数据目录 --backup-dir /你的
 ```
 
 4. 用原来的宝塔、PM2 或服务配置重启。使用 PM2 时对原进程执行 `pm2 restart 原进程名 --update-env`；不要另开一个进程抢同一端口。
-5. 确认反向代理将 `/api` 交给 Node，官网和 `/app/` 使用本包的 `dist`；`/downloads/kaojiang-v1.0.0.apk` 必须能完整下载并支持 Range。
+5. 确认反向代理将 `/api` 交给 Node，电脑官网使用本包的 `dist`，`/app/` 仍使用服务器原有手机网页文件；`/downloads/kaojiang-v1.0.0.apk` 必须能完整下载并支持 Range。APK 最低版本要求不会强迫浏览器安装 Android 包；手机网页专项兼容验收未执行。
 
 旧的较低 `MOBILE_LATEST_VERSION` / `MOBILE_MINIMUM_VERSION` 不会把本包降回旧版；如配置过更高版本或自定义下载地址，应先核对这几个变量。
 版本信息和 APK 必须一起更新，不能只换后端就强制用户下载一个不存在的安装包。

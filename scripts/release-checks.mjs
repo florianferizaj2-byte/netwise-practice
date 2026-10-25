@@ -1,4 +1,16 @@
-export const releaseChecks = [
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+export function getReleaseTarget(root) {
+  const file = path.join(root, 'release-target.json');
+  if (!fs.existsSync(file)) return 'unified';
+  const { target } = JSON.parse(fs.readFileSync(file, 'utf8'));
+  if (!['android', 'unified'].includes(target)) throw new Error('Unknown release target: ' + target);
+  return target;
+}
+
+export const allReleaseChecks = [
   ['version', '移动端版本一致性', ['scripts/check-mobile-version.mjs']],
   ['banks', '已发布题库结构', ['scripts/validate-question-banks.js']],
   ['types', '移动端类型检查', ['mobile/node_modules/typescript/bin/tsc', '--noEmit', '--project', 'mobile/tsconfig.json']],
@@ -18,5 +30,13 @@ export const releaseChecks = [
   ['download', '官网 APK 下载与强制更新', ['test/mobile-release-publish.e2e.js']],
   ['android-layout', 'Android 我的与会员布局', ['test/android-profile-vip-layout.e2e.js']],
   ['android-flows', 'Android 全流程与升级恢复', ['test/mobile-update.e2e.js']],
+  ['launch', 'App 启动与减弱动画', ['test/app-launch.e2e.js']],
   ['deployment', '部署自检完整链路', ['test/mobile-deployment.e2e.js']],
 ].map(([id, label, args]) => ({ id, label, args }));
+
+const mobileWebChecks = new Set(['mobile-web', 'apple', 'phone-study', 'admin', 'announcement', 'profile']);
+export function checksForTarget(target) {
+  return allReleaseChecks.filter(({ id }) => target !== 'android' || !mobileWebChecks.has(id))
+    .map(check => target === 'android' && check.id === 'build' ? { ...check, label: '电脑官网与 APK 下载构建' } : check);
+}
+export const releaseChecks = checksForTarget(getReleaseTarget(fileURLToPath(new URL('../', import.meta.url))));

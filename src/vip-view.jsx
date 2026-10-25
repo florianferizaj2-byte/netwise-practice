@@ -24,13 +24,14 @@ import { ContentPlaceholder } from "./components/content-placeholder.jsx";
 import { membershipPurchaseUrl } from "./membership-purchase.js";
 import "./vip.css";
 import "./subjective-study.css";
+import { PointsActivity, formatPoints } from "./components/points-activity.jsx";
 
 const plans = [
   {
     id: "vip",
     name: "VIP",
     price: "9.9",
-    questions: 100,
+    points: 990,
     description: "日常巩固",
     detail: "每天进步一点，稳稳打好基础。",
   },
@@ -38,7 +39,7 @@ const plans = [
     id: "svip",
     name: "SVIP",
     price: "19.9",
-    questions: 300,
+    points: 1990,
     description: "集中备考",
     detail: "围绕薄弱知识点，多练一轮。",
   },
@@ -46,7 +47,7 @@ const plans = [
     id: "ssvip",
     name: "SSVIP",
     price: "39.9",
-    questions: 600,
+    points: 3990,
     description: "高频冲刺",
     detail: "为密集练习，留足出题空间。",
   },
@@ -95,9 +96,7 @@ export function VipView({
   }, [account]);
   function openRedemption() {
     redemptionPanel.current?.scrollIntoView({
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        ? "auto"
-        : "smooth",
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? "auto" : "smooth",
       block: "center",
     });
     codeInput.current?.focus({ preventScroll: true });
@@ -133,7 +132,7 @@ export function VipView({
       replace(data);
       setCheckNotice(
         data.claimed
-          ? "签到成功，今日学习机会已到账。"
+          ? "签到成功，今日积分已到账，当日有效。"
           : "今天已经领过了，明天再来。",
       );
     } catch (cause) {
@@ -172,14 +171,11 @@ export function VipView({
     }
   }
   const paid = !!account && account.plan !== "free";
+  const availablePlans = plans.map(item=>{const value=account?.pointsPlans?.[item.id];return value && Number.isSafeInteger(value.priceCents) && value.priceCents>=0 && Number.isSafeInteger(value.monthlyPoints) && value.monthlyPoints>=0 ? {...item,price:(value.priceCents/100).toFixed(2).replace(/\.?0+$/,''),points:value.monthlyPoints}:item;});
   const check = account?.checkIn;
-  const generation = account?.generation;
-  const available =
-    (generation?.remaining || 0) + (check?.remaining.generations || 0) * 10;
-  const selectedPlan = plans.find((plan) => plan.id === selected) || plans[1];
-  const progress = generation?.limit
-    ? Math.min(100, Math.max(0, (generation.used / generation.limit) * 100))
-    : 0;
+  const points = account?.points;
+  const available = formatPoints(points?.availableUnits);
+  const selectedPlan = availablePlans.find((plan) => plan.id === selected) || availablePlans[1];
   return (
     <div className="vip-page">
       <header className="vip-heading">
@@ -229,8 +225,25 @@ export function VipView({
         </p>
       )}
       <section className="vip-study-entry" aria-label="会员 AI 精讲与练习">
-        <div><h2><BookOpen size={20} />AI 精讲与练习</h2><p>VIP 专属：按知识点学习、填空练习，随时向 AI 老师提问。VIP、SVIP、SSVIP 均可使用。</p></div>
-        <button className="primary" type="button" disabled={loading && !account} onClick={() => paid ? navigate("study") : openRedemption()}>{paid ? "进入学习与练习" : "开通 VIP 后学习"}<ArrowRight size={17} /></button>
+        <div>
+          <h2>
+            <BookOpen size={20} />
+            AI 精讲与练习
+          </h2>
+          <p>
+            VIP 专属：按知识点学习、填空练习，随时向 AI
+            老师提问。VIP、SVIP、SSVIP 均可使用。
+          </p>
+        </div>
+        <button
+          className="primary"
+          type="button"
+          disabled={loading && !account}
+          onClick={() => (paid ? navigate("study") : openRedemption())}
+        >
+          {paid ? "进入学习与练习" : "开通 VIP 后学习"}
+          <ArrowRight size={17} />
+        </button>
       </section>
       <div className="vip-layout">
         <section
@@ -272,49 +285,38 @@ export function VipView({
           <div className="vip-quota-grid">
             <Quota
               icon={Sparkles}
-              label="AI 新题"
+              label="可用积分"
               value={account ? available : "—"}
-              unit="道"
+              unit="积分"
               detail={
                 account
-                  ? `会员 ${generation?.remaining || 0} 道 · 今日奖励 ${check?.remaining.generations || 0} 组`
+                  ? "出题、解析、判分和老师答疑统一使用"
                   : "同步后显示剩余额度"
               }
             />
             <Quota
               icon={BookOpen}
-              label="详细解析"
-              value={account ? check?.remaining.explanations || 0 : "—"}
-              unit="次"
-              detail="解析或提示每次扣 1 次，失败返还"
+              label="预扣积分"
+              value={account ? formatPoints(points?.heldUnits) : "—"}
+              unit="积分"
+              detail="任务完成后按实际用量结算，失败退还"
             />
             <Quota
               icon={Target}
-              label="错因分析"
-              value={account ? check?.remaining.analyses || 0 : "—"}
-              unit="次"
-              detail="错因分析或 AI 学习计划每次扣 1 次"
+              label="每 30 天套餐"
+              value={account ? points?.monthlyPoints || 0 : "—"}
+              unit="积分"
+              detail="按模型与用量计费，不再分别限制功能次数"
             />
           </div>
           <div className="vip-account-foot">
-            {paid && generation ? (
+            {paid && points ? (
               <div className="vip-period">
                 <div>
                   <span>
-                    本期会员出题已用 <b>{generation.used}</b> /{" "}
-                    {generation.limit} 道
+                    本期积分有效期至 <b>{date(points.periodEnd)}</b>
                   </span>
-                  <span>本期至 {date(generation.periodEnd)}</span>
-                </div>
-                <div
-                  className="vip-meter"
-                  role="progressbar"
-                  aria-label="本期会员出题额度使用比例"
-                  aria-valuemin={0}
-                  aria-valuemax={100}
-                  aria-valuenow={Math.round(progress)}
-                >
-                  <i style={{ width: `${progress}%` }} />
+                  <span>{points.pendingUnits ? "本期积分待到账，请联系管理员核对发放记录" : "同一账号在网页与 App 共用积分"}</span>
                 </div>
               </div>
             ) : (
@@ -343,21 +345,21 @@ export function VipView({
           <div className="vip-rewards">
             <div>
               <strong>
-                5<small>次</small>
+                {check?.grants.points ?? 5}<small>积分</small>
               </strong>
-              <span>详细解析</span>
+              <span>签到积分 · 当日有效</span>
             </div>
             <div>
               <strong>
-                1<small>组</small>
+                AI<small>学习</small>
               </strong>
-              <span>AI 新题</span>
+              <span>各项功能通用</span>
             </div>
             <div>
               <strong>
-                3<small>次</small>
+                0<small>重复扣费</small>
               </strong>
-              <span>错因分析</span>
+              <span>缓存结果可重复查看</span>
             </div>
           </div>
           <button
@@ -377,9 +379,9 @@ export function VipView({
               ? "领取中…"
               : check?.claimed
                 ? "今日已签到"
-                : "签到领取学习机会"}
+                : "签到领取积分"}
           </button>
-          <p className="vip-small-print">1 组 = 10 道题 · 奖励当日有效</p>
+          <p className="vip-small-print">已有解析免费查看 · 新 AI 调用统一使用积分 · 签到积分当日有效</p>
           {checkNotice && (
             <p className="vip-feedback" role="status">
               {checkNotice}
@@ -402,7 +404,7 @@ export function VipView({
           </div>
           <fieldset className="vip-plan-grid">
             <legend className="vip-sr-only">选择会员套餐以查看权益</legend>
-            {plans.map((plan) => (
+            {availablePlans.map((plan) => (
               <label
                 key={plan.id}
                 className={`vip-plan vip-tone-${plan.id} ${selected === plan.id ? "is-selected" : ""}`}
@@ -415,14 +417,17 @@ export function VipView({
                   onChange={() => setSelected(plan.id)}
                 />
                 <span className="vip-plan-top">
-                  <strong>{plan.name}</strong>
+
+                  <span className="vip-plan-title">
+                    <strong>{plan.name}</strong>
+                    <span className="vip-plan-description">
+                      {plan.description}
+                      {account?.plan === plan.id && <span>当前套餐</span>}
+                    </span>
+                  </span>
                   <span className="vip-plan-radio" aria-hidden="true">
                     {selected === plan.id && <Check size={12} />}
                   </span>
-                </span>
-                <span className="vip-plan-description">
-                  {plan.description}
-                  {account?.plan === plan.id && <span>当前套餐</span>}
                 </span>
                 <span className="vip-plan-price">
                   <small>¥</small>
@@ -430,12 +435,12 @@ export function VipView({
                   <span>/ 30 天</span>
                 </span>
                 <span className="vip-plan-quantity">
-                  <strong>{plan.questions}</strong> 道 AI 新题
+                  <strong>{plan.points}</strong> 积分
                 </span>
                 <span className="vip-plan-benefits">
                   <span>
                     <Check size={14} />
-                    详细解析
+                    所有 AI 功能统一积分
                   </span>
                   <span>
                     <Check size={14} />
@@ -450,19 +455,34 @@ export function VipView({
             ))}
           </fieldset>
           <div className={`vip-plan-choice vip-tone-${selected}`}>
-            <div>
-              <strong>
-                {selectedPlan.name} · {selectedPlan.description}
-              </strong>
-              <span>{selectedPlan.detail}</span>
+            <div className="vip-selected-plan">
+
+              <span>
+                <strong>
+                  {selectedPlan.name} · {selectedPlan.description}
+                </strong>
+                <small>{selectedPlan.detail}</small>
+              </span>
             </div>
             <div className="vip-purchase-actions">
-              <a className="vip-purchase-link" href={membershipPurchaseUrl} target="_blank" rel="noopener noreferrer">购买会员兑换码<ArrowUpRight size={16} aria-hidden="true" /></a>
-              <button type="button" onClick={openRedemption}>已有兑换码，立即兑换<Ticket size={16} aria-hidden="true" /></button>
+              <a
+                className="vip-purchase-link"
+                href={membershipPurchaseUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                购买会员兑换码
+                <ArrowUpRight size={16} aria-hidden="true" />
+              </a>
+              <button type="button" onClick={openRedemption}>
+                已有兑换码，立即兑换
+                <Ticket size={16} aria-hidden="true" />
+              </button>
             </div>
           </div>
           <p className="vip-purchase-note">
-            请在购买页选择 {selectedPlan.name}。售价与会员时长以购买页为准，购买后回到考匠输入兑换码，权益到账后即可使用。
+            请在购买页选择 {selectedPlan.name}
+            。售价与会员时长以购买页为准，购买后回到考匠输入兑换码，权益到账后即可使用。
           </p>
         </section>
 
@@ -527,7 +547,15 @@ export function VipView({
               每码限用一次。会员有效期内支持同等级续期；其他等级可在到期后兑换。
             </p>
           </form>
-          <a className="vip-redeem-buy-link" href={membershipPurchaseUrl} target="_blank" rel="noopener noreferrer">还没有兑换码？前往购买<ArrowUpRight size={15} aria-hidden="true" /></a>
+          <a
+            className="vip-redeem-buy-link"
+            href={membershipPurchaseUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            还没有兑换码？前往购买
+            <ArrowUpRight size={15} aria-hidden="true" />
+          </a>
           {result && (
             <div className="vip-redeem-success" role="status">
               <CircleCheck size={21} />
@@ -620,6 +648,7 @@ export function VipView({
         </section>
       </div>
 
+      {user?.id&&<PointsActivity key={user.id} api={api} userId={user.id} />}
       <section className="vip-faq" aria-labelledby="vip-faq-title">
         <h2 id="vip-faq-title">你可能想了解</h2>
         <details>
@@ -628,8 +657,7 @@ export function VipView({
             <ChevronDown size={16} />
           </summary>
           <p>
-            VIP、SVIP、SSVIP 每 30 天分别包含 100、300、600 道 AI
-            新题。所有等级均可签到领取每日 5 次解析、1 组出题和 3 次分析额度，每次使用扣对应额度。
+            VIP、SVIP、SSVIP 每 30 天分别包含 990、1990、3990 积分。出题、解析、提示、学习计划、AI 判分和老师答疑统一使用积分，实际消耗取决于模型与用量。签到可领取当日有效的赠送积分，赠送以活动预算为准。
           </p>
         </details>
         <details>
@@ -638,9 +666,7 @@ export function VipView({
             <ChevronDown size={16} />
           </summary>
           <p>
-            AI 出题优先使用当日签到机会，再使用会员额度。会员额度按首次开通起每
-            30
-            天更新，未用完的额度不结转；同等级续期延长有效期，不提前重置当期额度。解析、提示和分析每次扣 1 次对应额度；已有结果再次通过 AI 功能请求时也会扣额，单纯阅读当前页面不重复扣除。失败会返还对应额度。
+            任务先预扣，成功后按实际用量结算，未使用的预扣退回；生成或审核失败退还该任务全部积分。优先使用先到期积分。会员每 30 天发放，按原周期续期不重复发放；缓存解析、已有课程和确定性判分不收费。
           </p>
         </details>
         <details>
@@ -651,7 +677,7 @@ export function VipView({
           <p>
             可以。在网页和 App
             登录同一个考匠账号，即可使用同一份会员权益和额度。会员到期后恢复
-            Free，可继续签到领取学习机会。
+            Free，可按活动规则领取签到积分。
           </p>
         </details>
       </section>
@@ -659,14 +685,13 @@ export function VipView({
         <summary>
           <KeyRound size={16} />
           <span>作者 AI 服务</span>
-          <small>
-            无需配置 · 按使用扣额
-          </small>
+          <small>无需配置 · 按使用扣额</small>
           <ChevronDown size={15} />
         </summary>
         <div>
           <p>
-            所有账号统一使用作者提供的 AI 服务。解析、提示和分析每次扣对应额度；出题优先使用签到机会，再使用会员题数，失败自动返还。已生成题组可反复练习。
+            所有账号统一使用作者提供的 AI
+            服务。所有实际 AI 调用统一按积分结算，失败自动退还预扣；已生成题组和缓存结果可反复查看，不重复收费。
           </p>
           {account?.canManageAiService && (
             <button type="button" onClick={() => navigate("settings")}>
@@ -715,7 +740,7 @@ export function MembershipSettingsEntry({ membership, onOpenVip }) {
               ? "正在同步账号权益…"
               : "权益暂未同步"
             : account.plan === "free"
-              ? "每日签到领 AI 机会，兑换会员开启更多练习。"
+              ? "签到领取通用积分，兑换会员开启更多学习。"
               : account.expiresAt
                 ? `会员有效期至 ${date(account.expiresAt)} · 网页与 App 同步`
                 : "会员权益已生效 · 网页与 App 同步"}
@@ -734,7 +759,7 @@ export function MembershipSettingsEntry({ membership, onOpenVip }) {
         )}
       </div>
       <button type="button" onClick={onOpenVip}>
-        会员与额度
+        会员与积分
         <ArrowRight size={16} />
       </button>
     </section>
@@ -752,7 +777,7 @@ export function ApiAccessNotice({ membership, onOpenVip }) {
             ? "正在读取 AI 服务状态…"
             : membership.account
               ? membership.account.aiServiceAvailable
-                ? "已接入作者服务，无需填写 API。每次使用扣对应额度，失败自动返还。"
+                ? "已接入作者服务，无需填写 API。所有 AI 功能统一扣积分，失败自动返还。"
                 : "作者服务暂未就绪，请联系站点管理员；你的额度会保留。"
               : "暂时无法读取服务状态，请在 VIP 中心重试。"}
         </p>

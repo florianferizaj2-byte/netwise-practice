@@ -37,7 +37,7 @@ export function TrainingView({
             作者 AI 服务暂未就绪，无需配置个人 API，请联系站点管理员。
           </span>
           <button onClick={settings}>
-            查看 AI 额度
+            查看 AI 积分
             <ArrowRight size={16} />
           </button>
         </div>

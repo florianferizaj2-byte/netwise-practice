@@ -14,7 +14,10 @@ import {
   runtimeSources,
   sourceSnapshot,
   writeBuildProvenance,
+  releaseVerificationInputs,
+  runtimeArtifacts,
 } from "../scripts/release-runtime.mjs";
+import { allReleaseChecks, checksForTarget, getReleaseTarget } from '../scripts/release-checks.mjs';
 
 function fixture(t) {
   const parent = fs.realpathSync(os.tmpdir());
@@ -44,6 +47,23 @@ function fixture(t) {
   });
   return { root, write };
 }
+
+test('Android target keeps backend/native gates and excludes deferred mobile website artifacts', t => {
+  const { root, write } = fixture(t);
+  write('release-target.json', JSON.stringify({target:'android',preserveExistingMobileWeb:true}));
+  assert.equal(getReleaseTarget(root), 'android');
+  const ids = checksForTarget('android').map(check => check.id);
+  for (const id of ['version','banks','types','apk','unit','build','runtime','browser','study','purchase','download','android-layout','android-flows','launch','deployment']) assert(ids.includes(id), id);
+  for (const id of ['mobile-web','apple','phone-study','admin','announcement','profile']) assert(!ids.includes(id), id);
+  assert(!runtimeArtifacts(root, '0.0.1').some(file => file.startsWith('dist/app/')));
+  fs.unlinkSync(path.join(root, 'dist/app/index.html'));
+  fs.unlinkSync(path.join(root, 'dist/app/version.json'));
+  writeBuildProvenance(root, sourceSnapshot(root));
+  assert.doesNotThrow(() => assertBuildProvenance(root));
+  assert(runtimeSources(root, '0.0.1').includes('release-target.json'));
+  write('release-target.json', '{"target":"typo"}');
+  assert.throws(() => getReleaseTarget(root), /Unknown release target/);
+});
 
 test("packaging refuses untracked runtime modules, question banks and Web sources without blocking unrelated drafts", (t) => {
   const { root, write } = fixture(t);
@@ -141,7 +161,7 @@ test("release rejects private artifacts, demo answers, traversal and symlink dir
 
 test("actual archive command requires committed sources and current artifacts, then carries every runtime file", (t) => {
   const { root, write } = fixture(t);
-  for (const file of ["package-release.mjs", "release-runtime.mjs"])
+  for (const file of ["package-release.mjs", "release-runtime.mjs", "release-checks.mjs"])
     write(
       `scripts/${file}`,
       fs.readFileSync(new URL(`../scripts/${file}`, import.meta.url)),
@@ -156,7 +176,12 @@ test("actual archive command requires committed sources and current artifacts, t
     write(`${prefix}/${apk}`, bytes);
     write(`${prefix}/${apk}.sha256`, `${apkHash}  ${apk}\n`);
   }
-  write(".gitignore", "dist/\noutputs/\npublic/downloads/\n");
+  write(".gitignore", "dist/\noutputs/\npublic/downloads/\ntest-output/\n");
+  const approveFixtureVerification = () => write('test-output/release-verification-report.json', JSON.stringify({
+    version:'0.0.1',target:'unified',complete:true,passed:true,inputs:releaseVerificationInputs(root),
+    checks:allReleaseChecks.map(({id})=>({id,exitCode:0})),
+    native:{passed:true,sha256:apkHash,certificateSha256:'0'.repeat(64)},
+  }));
   const git = (...args) =>
     execFileSync("git", args, { cwd: root, windowsHide: true, stdio: "pipe" });
   const commit = () => {
@@ -191,6 +216,10 @@ test("actual archive command requires committed sources and current artifacts, t
   assert.match(result.stderr, /源码与构建记录不一致/);
   writeBuildProvenance(root, sourceSnapshot(root));
   result = command();
+  assert.notEqual(result.status,0);
+  assert.match(result.stderr,/缺少完整发行验收记录/);
+  approveFixtureVerification();
+  result = command();
   assert.equal(result.status, 0, result.stderr);
   const report = JSON.parse(result.stdout);
   assert.equal(report.mobileWebBuildId, "fixture");
@@ -219,6 +248,10 @@ test("actual archive command requires committed sources and current artifacts, t
   write("dist/assets/main.js", "updated desktop output");
   commit();
   writeBuildProvenance(root, sourceSnapshot(root));
+  const staleVerification = command();
+  assert.notEqual(staleVerification.status,0);
+  assert.match(staleVerification.stderr,/发行验收未完整通过或源码已变化/);
+  approveFixtureVerification();
   const updated = command();
   assert.equal(updated.status, 0, updated.stderr);
   const newer = JSON.parse(updated.stdout);

@@ -42,4 +42,14 @@ test('all older mobile clients receive a forced update and 426; the current app 
   assert.equal(info.forceUpdate, false);
   assert.equal((await fetch(`${base}/auth/me`, { headers: { 'X-Client': 'mobile', 'X-App-Version': current } })).status, 200);
   assert.equal((await fetch(`${base}/auth/me`)).status, 200);
+  const browserHeaders = { 'X-Client':'mobile', 'X-App-Version':'0.4.5', 'User-Agent':'Mozilla/5.0 (Linux; Android)', 'Sec-Fetch-Dest':'empty' };
+  assert.equal((await fetch(`${base}/auth/me`, {headers:browserHeaders})).status, 200);
+  const browserInfo = await fetch(`${base}/mobile/version?version=0.4.5`, {headers:browserHeaders}).then(r=>r.json());
+  assert.equal(browserInfo.forceUpdate, false); assert.equal(browserInfo.updateAvailable, false);
+  // Explicit native transport in the Android browser harness keeps the APK gate.
+  const nativeHeaders = {...browserHeaders, 'X-App-Platform':'android'};
+  assert.equal((await fetch(`${base}/auth/me`, {headers:nativeHeaders})).status, 426);
+  assert.equal((await fetch(`${base}/mobile/version?version=0.4.5`, {headers:nativeHeaders}).then(r=>r.json())).forceUpdate, true);
+  assert.equal((await fetch(`${base}/account/points/wallet`, {headers:browserHeaders})).status, 401,
+    'Browser compatibility must not bypass authentication');
 });

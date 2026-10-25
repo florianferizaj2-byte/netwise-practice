@@ -225,10 +225,17 @@ export async function createApp(options = {}) {
   };
   const requestToken = (req) => bearerToken(req) || cookie(req, "netwise_session");
   const isMobileClient = (req) => req.get("x-client")?.toLowerCase() === "mobile";
+  // APK version policy is not an authorization boundary. Keep the existing,
+  // separately deployed browser app usable without telling it to install an APK.
+  const isBrowserApp = (req) => {
+    const platform = req.get('x-app-platform')?.toLowerCase();
+    return platform === 'web' || (platform !== 'android' &&
+      req.get('sec-fetch-dest') !== undefined && /^Mozilla\//i.test(req.get('user-agent') || ''));
+  };
   const isTokenClient = (req) =>
     ["mobile", "miniprogram"].includes(req.get("x-client")?.toLowerCase());
   app.use("/api", (req, res, next) => {
-    if (req.path === "/mobile/version" || !isMobileClient(req)) return next();
+    if (req.path === "/mobile/version" || !isMobileClient(req) || isBrowserApp(req)) return next();
     const release = mobileRelease();
     const currentVersion = String(req.headers["x-app-version"] || "0.0.0");
     if (compareVersions(currentVersion, release.minimumVersion) < 0) {
@@ -419,8 +426,8 @@ export async function createApp(options = {}) {
       apkBytes: release.apkBytes,
       apkMd5: release.apkMd5,
       apkSha256: release.apkSha256,
-      updateAvailable: compareVersions(currentVersion, release.latestVersion) < 0,
-      forceUpdate: compareVersions(currentVersion, release.minimumVersion) < 0,
+      updateAvailable: !isBrowserApp(req) && compareVersions(currentVersion, release.latestVersion) < 0,
+      forceUpdate: !isBrowserApp(req) && compareVersions(currentVersion, release.minimumVersion) < 0,
     };
   });
   registerGuestTrialRoutes({ route, store, provider, runAI: (work, key) => {

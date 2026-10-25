@@ -9,7 +9,9 @@ import {
   assertTrackedReleaseInputs,
   isRuntimeSource,
   assertReleaseVerification,
+  runtimeArtifacts,
 } from "./release-runtime.mjs";
+import { getReleaseTarget } from './release-checks.mjs';
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const git = (...args) =>
@@ -21,10 +23,11 @@ const git = (...args) =>
 const mobile = JSON.parse(
   fs.readFileSync(path.join(root, "mobile/package.json"), "utf8"),
 );
-const build = JSON.parse(
+const target = getReleaseTarget(root);
+const build = target === 'android' ? null : JSON.parse(
   fs.readFileSync(path.join(root, "dist/app/version.json"), "utf8"),
 );
-if (build.version !== mobile.version)
+if (build && build.version !== mobile.version)
   throw new Error("移动网页构建版本与源码不一致，请先重新构建");
 const version = mobile.version;
 const commit = git("rev-parse", "HEAD");
@@ -70,13 +73,7 @@ try {
   const runtimeSources = tracked.filter((file) =>
     isRuntimeSource(file, version),
   );
-  const compiled = filesAt(path.join(root, "dist"))
-    .map((file) => path.relative(root, file).split(path.sep).join("/"))
-    .filter(
-      (file) =>
-        !file.startsWith("dist/downloads/") ||
-        [apkName, `${apkName}.sha256`].includes(path.basename(file)),
-    );
+  const compiled = [...runtimeArtifacts(root, version), 'dist/build-provenance.json'];
   for (const file of [...runtimeSources, ...compiled]) {
     assertRuntimePath(file);
     const destination = path.resolve(staging, file);
@@ -92,7 +89,9 @@ try {
         version,
         commit,
         webBuildId,
-        mobileWebBuildId: build.buildId,
+        target,
+        preserveExistingMobileWeb: target === 'android',
+        mobileWebBuildId: build?.buildId ?? null,
         buildProvenance: provenance,
         apkSha256: apkHash,
         verifiedChecks: verification.checks.map(check => check.id),
@@ -139,7 +138,9 @@ try {
     version,
     commit,
     webBuildId,
-    mobileWebBuildId: build.buildId,
+    target,
+    preserveExistingMobileWeb: target === 'android',
+    mobileWebBuildId: build?.buildId ?? null,
     notes,
     assets: [
       path.join(output, apkName),

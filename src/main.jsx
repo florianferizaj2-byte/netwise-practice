@@ -1221,7 +1221,7 @@ function App() {
                         >
                           {dashboard.aiConfigured
                             ? "生成今日计划"
-                            : "查看 AI 额度"}
+                            : "查看 AI 积分"}
                           <ArrowRight size={16} />
                         </button>
                       </div>

@@ -1,3 +1,4 @@
+import { EmailCodeFields, PasswordRecoveryForm, useAccountEmailPolicy } from './components/account-security.jsx';
 import React, { useEffect, useRef, useState } from "react";
 import { DesktopTrial } from "./desktop-trial.jsx";
 import {
@@ -156,8 +157,18 @@ function DesktopDialog({ children, label, onClose, className = "" }) {
   );
 }
 
-function DesktopAuth({ api, onAuth, initialMode, onClose, initialError }) {
+function DesktopAuth({
+  api,
+  onAuth,
+  initialMode,
+  onClose,
+  initialError,
+  embedded = false,
+}) {
   const [mode, setMode] = useState(initialMode);
+  const [username, setUsername] = useState("");
+  const [emailProof, setEmailProof] = useState({});
+  const emailPolicy = useAccountEmailPolicy(api);
   const [error, setError] = useState(initialError || "");
   const [busy, setBusy] = useState(false);
   const submit = async (event) => {
@@ -167,12 +178,23 @@ function DesktopAuth({ api, onAuth, initialMode, onClose, initialError }) {
       setError("两次输入的密码不一致。");
       return;
     }
+    if (mode === "register" && (emailPolicy.loading || emailPolicy.error))
+      return;
+    if (
+      mode === "register" &&
+      emailPolicy.required &&
+      !emailProof.challengeId
+    ) {
+      setError("请先获取邮箱验证码");
+      return;
+    }
     setBusy(true);
     setError("");
     try {
       await api(`/auth/${mode}`, {
         username: data.get("username"),
         password: data.get("password"),
+        ...(mode === "register" && emailPolicy.required ? emailProof : {}),
       });
       const result = await api("/auth/me");
       if (!result.authenticated)
@@ -184,32 +206,99 @@ function DesktopAuth({ api, onAuth, initialMode, onClose, initialError }) {
       setBusy(false);
     }
   };
-  return (
-    <DesktopDialog
-      label={mode === "login" ? "登录考匠" : "创建考匠账号"}
-      onClose={onClose}
-      className="desk-auth-dialog"
-    >
-      <img className="desk-auth-seal" src="/kaojiang-logo-192.png" alt="考匠" />
+  const wrap = (content) =>
+    embedded ? (
+      <section
+        className="desk-auth-card desk-auth-dialog"
+        aria-label="登录与注册"
+      >
+        {content}
+      </section>
+    ) : (
+      <DesktopDialog
+        label={
+          mode === "reset"
+            ? "找回密码"
+            : mode === "login"
+              ? "登录考匠"
+              : "创建考匠账号"
+        }
+        onClose={onClose}
+        className="desk-auth-dialog"
+      >
+        {content}
+      </DesktopDialog>
+    );
+  if (mode === "reset")
+    return wrap(
+      <>
+        <h2>找回密码</h2>
+        <PasswordRecoveryForm
+          api={api}
+          onBack={() => {
+            setMode("login");
+            setError("");
+          }}
+        />
+      </>,
+    );
+  return wrap(
+    <>
+      {!embedded && (
+        <img
+          className="desk-auth-seal"
+          src="/kaojiang-logo-192.png"
+          alt="考匠"
+        />
+      )}
       <h2>{mode === "login" ? "欢迎回到考匠" : "开始你的进阶之路"}</h2>
       <p>
         {mode === "login"
           ? "每一次练习，都让知识更扎实。"
           : "创建账号，选择证书，开始第一组练习。"}
       </p>
+      {embedded && (
+        <div className="desk-auth-tabs" aria-label="选择登录或注册">
+          {[
+            ["login", "登录"],
+            ["register", "注册"],
+          ].map(([value, label]) => (
+            <button
+              key={value}
+              type="button"
+              aria-label={`选择${label}`}
+              aria-pressed={mode === value}
+              disabled={busy}
+              onClick={() => {
+                setMode(value);
+                setError("");
+              }}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      )}
       <form onSubmit={submit}>
         <label>
           账号
           <input
-            autoFocus
+            autoFocus={!embedded}
             name="username"
             autoComplete="username"
             required
             minLength={3}
             maxLength={40}
-            pattern="[A-Za-z0-9_-]+"
-            title="使用 3–40 位字母、数字、下划线或短横线"
-            placeholder="字母、数字或下划线"
+            pattern={mode === "register" ? "[A-Za-z0-9_-]+" : undefined}
+            title={
+              mode === "register"
+                ? "使用 3–40 位字母、数字、下划线或短横线"
+                : undefined
+            }
+            placeholder={
+              mode === "register" ? "字母、数字或下划线" : "输入你的学习账号"
+            }
+            onChange={(event) => setUsername(event.target.value)}
           />
         </label>
         <label>
@@ -240,6 +329,24 @@ function DesktopAuth({ api, onAuth, initialMode, onClose, initialError }) {
             />
           </label>
         )}
+        {mode === "register" && emailPolicy.required && (
+          <EmailCodeFields
+            key={mode}
+            api={api}
+            purpose="register"
+            username={username}
+            onChange={setEmailProof}
+            disabled={busy}
+          />
+        )}
+        {mode === "register" && emailPolicy.error && (
+          <p role="alert" className="form-error">
+            {emailPolicy.error}{" "}
+            <button type="button" onClick={emailPolicy.reload}>
+              重新读取
+            </button>
+          </p>
+        )}
         {error && (
           <div className="desk-form-error" role="alert">
             {error}
@@ -247,17 +354,32 @@ function DesktopAuth({ api, onAuth, initialMode, onClose, initialError }) {
         )}
         <button
           className="desk-button desk-primary"
-          disabled={busy}
+          disabled={
+            busy ||
+            (mode === "register" &&
+              (emailPolicy.loading || !!emailPolicy.error))
+          }
           type="submit"
         >
           {busy
             ? "正在连接你的学习空间…"
             : mode === "login"
-              ? "进入学习空间"
+              ? embedded
+                ? "登录，开始学习"
+                : "进入学习空间"
               : "创建账号"}
           <ArrowRight size={17} />
         </button>
       </form>
+      {mode === "login" && emailPolicy.required && (
+        <button
+          className="text-button account-forgot-button"
+          disabled={busy}
+          onClick={() => setMode("reset")}
+        >
+          忘记密码？
+        </button>
+      )}
       <button
         className="desk-auth-switch"
         disabled={busy}
@@ -272,7 +394,7 @@ function DesktopAuth({ api, onAuth, initialMode, onClose, initialError }) {
         <ShieldCheck size={15} />
         学习记录跟随账号，在多端继续
       </div>
-    </DesktopDialog>
+    </>,
   );
 }
 

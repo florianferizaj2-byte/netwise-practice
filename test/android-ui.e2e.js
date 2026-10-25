@@ -107,6 +107,8 @@ const vite = await createServer({
   ] }, server: { middlewareMode: true, fs: { allow: [root, directory] } },
 });
 const app = express(); app.use(express.json());
+// This browser harness runs Android source and must retain native update policy.
+app.use((req, _res, next) => { req.headers['x-app-platform'] = 'android'; next(); });
 let aiRequests = 0, forceWalletExpired = false, versionFault = '';
 const previousVersionEnvironment = { latest: process.env.MOBILE_LATEST_VERSION, minimum: process.env.MOBILE_MINIMUM_VERSION };
 app.use('/api/mobile/version', (_req, res, next) => {

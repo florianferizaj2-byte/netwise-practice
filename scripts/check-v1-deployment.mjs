@@ -34,6 +34,7 @@ export async function checkDeployment({ baseUrl, sessionToken, apk, fetchImpl = 
   assert.equal(bytes.length, 8); assert.deepEqual([...bytes.slice(0, 4)], [0x50, 0x4b, 0x03, 0x04], '下载内容不是 APK/ZIP');
   assert(response.headers.get('content-range')?.endsWith('/' + release.apkBytes), '下载文件大小与版本信息不符');
   const checked = [];
+  const aiReadiness = { configured: null, validPrices: null };
   if (sessionToken) {
     for (const [route, valid] of [
       ['/account/points/wallet', data => Number.isSafeInteger(data.wallet?.availableUnits) && data.wallet.scale === 1000],
@@ -44,12 +45,12 @@ export async function checkDeployment({ baseUrl, sessionToken, apk, fetchImpl = 
       ['/practice/catalog?summary=1', data => Number.isInteger(data.total)],
       ['/exams/catalog', data => !!data && typeof data === 'object'],
       ['/location-learning', data => !!data && typeof data === 'object'],
-    ]) { assert(valid(await json(route, true)), `${route} 返回格式不匹配`); checked.push(route); }
+    ]) { const data = await json(route, true); assert(valid(data), `${route} 返回格式不匹配`); if(route==='/account/entitlements') aiReadiness.configured = !!data.aiServiceAvailable; if(route==='/account/points/services') aiReadiness.validPrices = !!data.available; checked.push(route); }
   }
   if (apk) assert.equal(crypto.createHash('sha256').update(fs.readFileSync(apk)).digest('hex'), release.apkSha256.toLowerCase(), '本地 APK 与已发布版本不符');
   return { ok: true, appVersion: version, backendVersion: release.backend.version, capabilities: release.backend.capabilities,
     apkRangeDownload: true, wholeApkHashChecked: !!apk, authenticatedApis: sessionToken ? 'passed' : '未执行：设置 ACEEXAM_SESSION_TOKEN 后重跑',
-    authenticatedChecks: checked.length, externalModelCalls: 0, userDataChanged: false };
+    aiReadiness, authenticatedChecks: checked.length, externalModelCalls: 0, userDataChanged: false };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
