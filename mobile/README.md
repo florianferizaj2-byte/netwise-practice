@@ -1,6 +1,8 @@
 # 考匠移动端
 
-这是考匠的 Expo / React Native 移动端。Android 当前源码版本为 v0.4.6；继续复用现有 Node 后端，通过移动端 Bearer 会话连接生产 API。
+这是考匠的 Expo / React Native 移动端。Android 当前源码版本为 v0.4.7；继续复用现有 Node 后端，通过移动端 Bearer 会话连接生产 API。
+
+[v0.4.7 本地 APK](kaojiang-v0.4.7.apk) · [SHA-256](kaojiang-v0.4.7.apk.sha256) · [本地构建说明](../docs/release-v0.4.7.md)。新增三条路线选择，均到终点跳回起点循环；68 项原生测试、正式签名及安装包内容检查通过，真机待验证。
 
 [v0.4.6 APK](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.6/kaojiang-v0.4.6.apk) · [SHA-256](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.6/kaojiang-v0.4.6.apk.sha256) · [发布页](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v0.4.6) · [构建说明](../docs/release-v0.4.6.md) · [服务器更新步骤](../docs/DEPLOY-v0.4.6.md)。
 
@@ -39,7 +41,7 @@ App 保留开发期“进入预览模式”入口，用于查看动画和页面�
 
 ## 正式签名
 
-Release 构建使用专用正式证书，Expo 重新生成 Android 工程后仍会应用该配置。配置位置和应用指纹见 [正式签名说明](RELEASE_SIGNING.md)。本次构建目标为 `kaojiang-v0.4.6.apk`；同包名、同正式签名且版本代码较旧的版本可覆盖更新。本地构建不等于手机覆盖安装已经验证。
+Release 构建使用专用正式证书，Expo 重新生成 Android 工程后仍会应用该配置。配置位置和应用指纹见 [正式签名说明](RELEASE_SIGNING.md)。本次本地构建为 `kaojiang-v0.4.7.apk` / versionCode 31，已核验与 v0.4.6 签名一致。本地构建不等于手机覆盖安装已经验证。
 
 ## v0.4.6 本地更新
 

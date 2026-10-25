@@ -14,8 +14,14 @@
             android:layout_marginTop="40dp" android:gravity="center" android:fontFamily="sans-serif-medium"
             android:text="@string/simple_idle" android:textSize="26sp" android:textColor="@color/rp_text"
             android:accessibilityLiveRegion="polite" />
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:layout_marginTop="12dp" android:gravity="center" android:text="@string/simple_route_caption"
+        <com.google.android.material.button.MaterialButton android:id="@+id/routeSelector"
+            style="@style/Widget.Material3.Button.OutlinedButton" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:minHeight="56dp" android:layout_marginTop="24dp"
+            android:paddingTop="12dp" android:paddingBottom="12dp" android:text="@string/route_selection_title"
+            android:textSize="16sp" android:textAllCaps="false" android:gravity="start|center_vertical"
+            app:cornerRadius="12dp" app:icon="@drawable/rp_ic_expand_more" app:iconGravity="end" />
+        <TextView android:id="@+id/routeDetails" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" android:gravity="center" android:text="@string/simple_route_caption"
             android:textSize="14sp" android:textColor="@color/rp_muted" />
         <com.google.android.material.button.MaterialButton android:id="@+id/playPauseButton"
             android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="64dp"

@@ -34,6 +34,7 @@ class RoutePlayerDisclaimerTest {
     }
 
     private fun open(state: Bundle? = null): ActivityController<RoutePlayerActivity> {
+        com.kaojiang.routeplayer.allowStudyFixture()
         val controller = Robolectric.buildActivity(RoutePlayerActivity::class.java)
         controllers += controller
         controller.create(state).start().resume().visible()

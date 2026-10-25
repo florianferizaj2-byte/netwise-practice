@@ -25,11 +25,18 @@ import com.kaojiang.routeplayer.setup.SetupActivity
 import com.kaojiang.routeplayer.ui.MinimalActivity
 import com.kaojiang.routeplayer.ui.LearningConsent
 import com.kaojiang.routeplayer.ui.UsageDisclaimer
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.math.BigDecimal
 import java.util.UUID
+import android.widget.Toast
+import com.kaojiang.routeplayer.LearningGateAccess
 
 class RoutePlayerActivity : MinimalActivity() {
     private lateinit var binding: ActivityRoutePlayerBinding
     private val preferences by lazy { getSharedPreferences("kaojiang_route_player_ui", MODE_PRIVATE) }
+    private val routes by lazy { BuiltInRouteStore(this) }
+    private var displayedRouteId: String? = null
+    private var displayedRoute: SimulationRoute? = null
     private var running = false
     private var requestingStart = false
     private var startingService = false
@@ -40,6 +47,7 @@ class RoutePlayerActivity : MinimalActivity() {
     private var consentToken: String? = null
     private var progress = 0
     private var disclaimerDialog: AlertDialog? = null
+    private var routeDialog: AlertDialog? = null
     private val handler = Handler(Looper.getMainLooper())
     private val operationTimeout = Runnable {
         if (startingService || stopping) {
@@ -118,6 +126,7 @@ class RoutePlayerActivity : MinimalActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRoutePlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        if (!requireDailyLearning()) return
         applySystemInsets(binding.root)
         ViewCompat.setAccessibilityHeading(binding.playerStatus, true)
         running = MockLocationPreferences.isActive(this)
@@ -139,6 +148,7 @@ class RoutePlayerActivity : MinimalActivity() {
             }
         }
         binding.playerStopButton.setOnClickListener { endMovement() }
+        binding.routeSelector.setOnClickListener { showRouteSelection() }
         binding.tutorialLink.setOnClickListener { if (disclaimerAccepted) openTutorial() }
         renderButtons()
         if (!disclaimerAccepted) showUsageDisclaimer()
@@ -146,9 +156,11 @@ class RoutePlayerActivity : MinimalActivity() {
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
+        if (!requireDailyLearning()) return
         setIntent(intent)
         disclaimerAccepted = false
         consentToken = null
+        routeDialog?.dismiss()
         renderButtons()
         showUsageDisclaimer()
     }
@@ -161,6 +173,7 @@ class RoutePlayerActivity : MinimalActivity() {
 
     override fun onResume() {
         super.onResume()
+        if (!requireDailyLearning()) return
         running = MockLocationPreferences.isActive(this)
         progress = MockLocationPreferences.progress(this)
         if (running && !stopping) setStatus(getString(R.string.simple_running_percent, progress))
@@ -179,6 +192,8 @@ class RoutePlayerActivity : MinimalActivity() {
     override fun onDestroy() {
         disclaimerDialog?.dismiss()
         disclaimerDialog = null
+        routeDialog?.dismiss()
+        routeDialog = null
         handler.removeCallbacksAndMessages(null)
         super.onDestroy()
     }
@@ -196,6 +211,7 @@ class RoutePlayerActivity : MinimalActivity() {
     }
 
     private fun startMovement() {
+        if (!requireDailyLearning()) return
         if (!disclaimerAccepted || !requestingStart || permissionPending || startingService || stopping) return
         if (!runCatching { MockLocationAccess.isEnabled(this) }.getOrDefault(false)) {
             requestingStart = false
@@ -238,7 +254,7 @@ class RoutePlayerActivity : MinimalActivity() {
         setStatus(getString(R.string.simple_starting))
         renderButtons()
         watchOperation()
-        runCatching { ContextCompat.startForegroundService(this, MockLocationService.startFixedRouteIntent(this, consentToken)) }
+        runCatching { ContextCompat.startForegroundService(this, MockLocationService.startSelectedRouteIntent(this, consentToken)) }
             .onFailure {
                 resetPending()
                 running = false
@@ -270,14 +286,69 @@ class RoutePlayerActivity : MinimalActivity() {
         stopping = false
     }
 
+    private fun requireDailyLearning(): Boolean {
+        if (LearningGateAccess.isAllowed()) return true
+        LearningGateAccess.revoke(this)
+        Toast.makeText(this, "请先在考匠完成今天当前证书的 30 道专项学习题", Toast.LENGTH_LONG).show()
+        packageManager.getLaunchIntentForPackage(packageName)?.let {
+            startActivity(it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP))
+        }
+        finish()
+        return false
+    }
+
     private fun watchOperation() {
         handler.removeCallbacks(operationTimeout)
         handler.postDelayed(operationTimeout, 10_000L)
     }
 
     private fun renderButtons() {
-        binding.playPauseButton.isEnabled = disclaimerAccepted && !running && !requestingStart && !startingService && !stopping
+        renderRouteSelection()
+        binding.playPauseButton.isEnabled = canSelectRoute() && displayedRoute != null
         binding.playerStopButton.isEnabled = running || requestingStart || startingService
+        binding.routeSelector.isEnabled = canSelectRoute()
+        if (!canSelectRoute()) routeDialog?.dismiss()
+    }
+
+    private fun canSelectRoute() = disclaimerAccepted && !running && !requestingStart &&
+        !startingService && !stopping && !MockLocationPreferences.isActive(this)
+
+    private fun renderRouteSelection() {
+        val entry = BuiltInRoutes.find(MockLocationPreferences.activeRouteId(this)) ?: routes.selected()
+        if (displayedRouteId != entry.id) {
+            displayedRouteId = entry.id
+            displayedRoute = runCatching { routes.load(entry.id) }.getOrNull()
+        }
+        binding.routeSelector.text = getString(R.string.route_selection_current, entry.name)
+        binding.routeDetails.text = displayedRoute?.let { route ->
+            val speed = BigDecimal.valueOf(route.speedKph).stripTrailingZeros().toPlainString()
+            getString(R.string.route_selection_details, speed, getString(
+                if (route.loop) R.string.route_selection_restart else R.string.route_selection_once))
+        } ?: getString(R.string.simple_route_invalid)
+    }
+
+    private fun showRouteSelection() {
+        if (!canSelectRoute() || routeDialog?.isShowing == true) return
+        val entries = BuiltInRoutes.entries
+        routeDialog = MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.route_selection_title)
+            .setSingleChoiceItems(entries.map { it.name }.toTypedArray(), entries.indexOf(routes.selected())) { dialog, index ->
+                // A floating-window start may have arrived while this dialog was open.
+                if (canSelectRoute()) {
+                    runCatching { routes.select(entries[index].id) }.onSuccess { route ->
+                        displayedRouteId = route.id
+                        displayedRoute = route
+                        progress = 0
+                        MockLocationPreferences.saveProgress(this, 0)
+                        setStatus(getString(R.string.simple_idle))
+                    }.onFailure { setStatus(getString(R.string.simple_route_invalid)) }
+                }
+                dialog.dismiss()
+                renderButtons()
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .create()
+        routeDialog?.show()
     }
 
     private fun setStatus(text: String) {

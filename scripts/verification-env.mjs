@@ -23,6 +23,9 @@ export function verificationEnvironment(
     "PLAYWRIGHT_BROWSERS_PATH",
     "TEST_BROWSER_CHANNEL",
     "CI",
+    "JAVA_HOME",
+    "ANDROID_HOME",
+    "ANDROID_SDK_ROOT",
   ]);
   fs.mkdirSync(temporaryParent, { recursive: true });
   const parent = fs.realpathSync(temporaryParent);

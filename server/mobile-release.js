@@ -10,8 +10,11 @@ export function resolveMobileRelease(environment, compare) {
   const minimumVersion = newer(configuredMinimum, bundled.minimumVersion);
   const latestVersion = newer(newer(configuredLatest, bundled.latestVersion), minimumVersion);
   const currentOverride = configuredLatest === latestVersion;
+  const usesBundledArtifact = latestVersion === bundled.latestVersion &&
+    (!currentOverride || !environment.MOBILE_DOWNLOAD_URL?.trim() || environment.MOBILE_DOWNLOAD_URL.trim() === bundled.downloadUrl);
   return {
     latestVersion, minimumVersion,
+    ...(usesBundledArtifact ? { apkBytes: bundled.apkBytes, apkMd5: bundled.apkMd5, apkSha256: bundled.apkSha256 } : {}),
     downloadUrl: currentOverride && environment.MOBILE_DOWNLOAD_URL?.trim()
       ? environment.MOBILE_DOWNLOAD_URL.trim()
       : latestVersion === bundled.latestVersion ? bundled.downloadUrl : `/downloads/kaojiang-v${latestVersion}.apk`,

@@ -57,7 +57,7 @@ try {
   });
   page.on("dialog", (dialog) => dialog.accept());
   await page.goto(base + "/#admin");
-  await page.getByRole("tab", { name: "兑换码", exact: true }).click();
+  await page.getByRole("link", { name: "会员与兑换码", exact: true }).click();
   const adminPage = page.locator(".membership-admin");
   const rows = adminPage.locator("tbody tr");
   const checkboxes = rows.locator('input[type="checkbox"]');

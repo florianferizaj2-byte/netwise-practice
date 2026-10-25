@@ -8,6 +8,8 @@ import { webkit, chromium, expect } from "@playwright/test";
 import { createApp } from "../server/index.js";
 import { createStore } from "../server/store.js";
 import { mockStudyAI } from "./study-fixture.js";
+import { OpenAICompatibleProvider } from "../server/ai.js";
+import { mockAI } from "./ai-fixture.js";
 import { completeFixtureProfile, dismissLaunchAnnouncement } from './helpers/mobile-profile.js';
 
 const directory = fs.mkdtempSync(path.join(os.tmpdir(), "aceexam-ios-ui-"));
@@ -22,6 +24,7 @@ store.saveAccountEntitlement(learner.id, {
 });
 const app = await createApp({
   store,
+  provider: new OpenAICompatibleProvider(store, { fetch: mockAI() }),
   production: true,
   withFrontend: true,
   authRequired: true,

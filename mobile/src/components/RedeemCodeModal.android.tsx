@@ -1,0 +1,420 @@
+import { AppIcon } from './AppIcon';
+import { iosStyles } from '../iosStyles';
+import { useEffect, useRef, useState } from "react";
+import {
+  ActivityIndicator,
+  KeyboardAvoidingView,
+  Modal,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
+import { SafeAreaView } from "./SafeArea";
+import {
+  mobileApi,
+  type AccountEntitlementsResponse,
+  type MembershipRedemption,
+} from "../api/client";
+import { AnimatedPressable } from "./Motion";
+import { isAppleWeb, useTheme, useThemedStyles, type ThemeColors } from "../theme";
+import { MembershipPurchaseLink } from "./MembershipPurchaseLink";
+
+export const membershipLabels = {
+  free: "Free",
+  vip: "VIP",
+  svip: "SVIP",
+  ssvip: "SSVIP",
+} as const;
+export const membershipColors = {
+  free: "#708078",
+  vip: "#B28132",
+  svip: "#5277C9",
+  ssvip: "#9363B9",
+} as const;
+export function useMembershipColors() {
+  const { colors, resolvedMode } = useTheme();
+  if (!isAppleWeb) return membershipColors;
+  return resolvedMode === 'dark'
+    ? { free: colors.textMuted, vip: '#E9BB64', svip: '#8EB7FF', ssvip: '#CAA0FF' }
+    : { free: colors.textMuted, vip: '#8B5B10', svip: '#315FB0', ssvip: '#7841A5' };
+}
+export const membershipDate = (value: string) =>
+  new Date(value).toLocaleDateString("zh-CN");
+
+type Props = {
+  visible: boolean;
+  preview?: boolean;
+  userId?: string;
+  onClose: () => void;
+  onRedeemed?: (entitlements: AccountEntitlementsResponse) => void;
+};
+
+export function RedeemCodeModal({
+  visible,
+  preview = false,
+  userId,
+  onClose,
+  onRedeemed,
+}: Props) {
+  const styles = useThemedStyles(createStyles, iosStyles.redeem);
+  const { colors, reduceMotion } = useTheme();
+  const tierColors = useMembershipColors();
+  const [code, setCode] = useState("");
+  const [busy, setBusy] = useState(false);
+  const submitting = useRef(false);
+  const [error, setError] = useState("");
+  const [history, setHistory] = useState<MembershipRedemption[]>([]);
+  const [historyError, setHistoryError] = useState("");
+  const [historyLoading, setHistoryLoading] = useState(false);
+  const [result, setResult] = useState<{
+    alreadyRedeemed: boolean;
+    redemption: {
+      plan: "vip" | "svip" | "ssvip";
+      durationDays: number;
+      expiresAt: string;
+    };
+  } | null>(null);
+
+  useEffect(() => {
+    setCode("");
+    setError("");
+    setResult(null);
+    setHistory([]);
+    setHistoryError("");
+    if (!visible || preview || !userId) {
+      setHistoryLoading(false);
+      return;
+    }
+    let live = true;
+    setHistoryLoading(true);
+    void mobileApi
+      .membershipRedemptions()
+      .then((data) => {
+        if (live) setHistory(data.redemptions);
+      })
+      .catch(() => {
+        if (live) setHistoryError("暂时无法读取兑换记录，请重新打开后重试。");
+      })
+      .finally(() => {
+        if (live) setHistoryLoading(false);
+      });
+    return () => {
+      live = false;
+    };
+  }, [visible, preview, userId]);
+
+  async function redeem() {
+    if (submitting.current) return;
+    if (preview || !userId) {
+      setError("请登录考匠账号后使用兑换码。");
+      return;
+    }
+    if (!code.trim()) {
+      setError("请先输入兑换码。");
+      return;
+    }
+    submitting.current = true;
+    setBusy(true);
+    setError("");
+    try {
+      const data = await mobileApi.redeemMembership(code.trim());
+      setResult(data);
+      setCode("");
+      onRedeemed?.(data.entitlements);
+      void mobileApi
+        .membershipRedemptions()
+        .then((next) => {
+          setHistory(next.redemptions);
+          setHistoryError("");
+        })
+        .catch(() => setHistoryError("会员已到账，兑换记录暂未同步。"));
+    } catch (cause) {
+      setError(
+        cause instanceof Error ? cause.message : "兑换失败，请稍后重试。",
+      );
+    } finally {
+      submitting.current = false;
+      setBusy(false);
+    }
+  }
+
+  return (
+    <Modal
+      visible={visible}
+      animationType={reduceMotion?'none':'slide'}
+      onRequestClose={() => {
+        if (!busy) onClose();
+      }}
+    >
+      <SafeAreaView style={styles.safe}>
+        <View style={styles.nav}>
+          <AnimatedPressable
+            accessibilityRole="button"
+            accessibilityLabel="返回"
+            disabled={busy}
+            onPress={onClose}
+            style={styles.back}
+          >
+            <AppIcon name="chevron-left" size={23} color={styles.navTitle.color}/>
+          </AnimatedPressable>
+          <Text style={styles.navTitle}>兑换码</Text>
+          <View style={styles.navSpacer} />
+        </View>
+        <KeyboardAvoidingView
+          style={styles.flex}
+          behavior={Platform.OS === "ios" ? "padding" : undefined}
+        >
+          <ScrollView
+            keyboardShouldPersistTaps="handled"
+            contentContainerStyle={styles.content}
+          >
+            <View style={styles.heading}>
+              <View style={styles.redeemIcon}><AppIcon name="crown" size={32} color={styles.eyebrow.color}/></View>
+              <Text style={styles.title}>兑换会员权益</Text>
+              <Text style={styles.subtitle}>
+                输入会员兑换码，权益将绑定当前考匠账号。
+              </Text>
+            </View>
+            {result ? (
+              <View style={styles.success} accessibilityLiveRegion="polite">
+                <Text style={styles.successMark}>✓</Text>
+                <Text style={styles.successTitle}>
+                  {result.alreadyRedeemed
+                    ? "这张兑换码已兑换到你的账号"
+                    : `${membershipLabels[result.redemption.plan]} 兑换成功`}
+                </Text>
+                <Text style={styles.successText}>
+                  本次权益到期日 · {membershipDate(result.redemption.expiresAt)}
+                </Text>
+                <AnimatedPressable
+                  accessibilityRole="button"
+                  onPress={onClose}
+                  style={styles.button}
+                >
+                  <Text style={styles.buttonText}>完成</Text>
+                </AnimatedPressable>
+                <AnimatedPressable
+                  accessibilityRole="button"
+                  onPress={() => setResult(null)}
+                  style={styles.more}
+                >
+                  <Text style={styles.moreText}>继续兑换</Text>
+                </AnimatedPressable>
+              </View>
+            ) : (
+              <View style={styles.form}>
+                <Text style={styles.label}>会员兑换码</Text>
+                <TextInput
+                  accessibilityLabel="会员兑换码"
+                  value={code}
+                  editable={!busy}
+                  onChangeText={(value) => {
+                    setCode(value);
+                    setError("");
+                  }}
+                  autoCapitalize="characters"
+                  autoCorrect={false}
+                  maxLength={80}
+                  placeholder="输入或粘贴兑换码"
+                  placeholderTextColor={colors.textFaint}
+                  style={[styles.input, !!error && styles.invalid]}
+                  returnKeyType="done"
+                  onSubmitEditing={() => void redeem()}
+                />
+                {!!error && (
+                  <Text style={styles.error} accessibilityLiveRegion="polite">
+                    {error}
+                  </Text>
+                )}
+                <AnimatedPressable
+                  accessibilityRole="button"
+                  disabled={busy || !code.trim()}
+                  onPress={() => void redeem()}
+                  style={[
+                    styles.button,
+                    (busy || !code.trim()) && styles.disabled,
+                  ]}
+                >
+                  {busy ? (
+                    <ActivityIndicator color={colors.white} />
+                  ) : (
+                    <Text style={styles.buttonText}>确认兑换</Text>
+                  )}
+                </AnimatedPressable>
+                <Text style={styles.hint}>
+                  每张兑换码限用一次。会员有效期内支持同等级续期；其他等级可在到期后兑换。
+                </Text>
+                <MembershipPurchaseLink />
+                <Text style={styles.hint}>还没有兑换码？购买后回到这里兑换，权益绑定当前考匠账号。</Text>
+              </View>
+            )}
+            <View style={styles.historyHeading}>
+              <Text style={styles.historyTitle}>兑换记录</Text>
+              <Text style={styles.historyMeta}>当前账号</Text>
+            </View>
+            {historyLoading ? (
+              <ActivityIndicator color={colors.brand} />
+            ) : historyError ? (
+              <Text style={styles.hint}>{historyError}</Text>
+            ) : history.length ? (
+              history.map((entry) => (
+                <View key={entry.id} style={styles.historyRow}>
+                  <View
+                    style={[
+                      styles.tier,
+                      { backgroundColor: `${tierColors[entry.plan]}15` },
+                    ]}
+                  >
+                    <Text
+                      style={[
+                        styles.tierText,
+                        { color: tierColors[entry.plan] },
+                      ]}
+                    >
+                      {membershipLabels[entry.plan]}
+                    </Text>
+                  </View>
+                  <View style={styles.flex}>
+                    <Text style={styles.recordTitle}>
+                      {entry.durationDays} 天会员
+                    </Text>
+                    <Text style={styles.recordMeta}>
+                      {membershipDate(entry.redeemedAt)} 兑换
+                    </Text>
+                  </View>
+                  <Text style={styles.recordState}>已到账</Text>
+                </View>
+              ))
+            ) : (
+              <Text style={styles.empty}>
+                暂无兑换记录，兑换成功后会显示在这里。
+              </Text>
+            )}
+          </ScrollView>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
+    </Modal>
+  );
+}
+
+const baseCreateStyles = (c: ThemeColors) =>
+  StyleSheet.create({
+    safe: { flex: 1, backgroundColor: c.background },
+    flex: { flex: 1 },
+    nav: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      paddingHorizontal: 18,
+      paddingVertical: 12,
+      borderBottomColor: c.border,
+      borderBottomWidth: StyleSheet.hairlineWidth,
+    },
+    back: { minWidth: 66, minHeight: 40, justifyContent: "center" },
+    backText: { color: c.brand, fontSize: 16 },
+    navTitle: { color: c.text, fontSize: 17, fontWeight: "700" },
+    navSpacer: { width: 66 },
+    content: { padding: 22, paddingBottom: 40, gap: 20 },
+    heading: { paddingTop: 18, paddingBottom: 6, gap: 10 },
+    eyebrow: { color: c.brand, fontSize: 12, fontWeight: "700" },
+    title: { color: c.text, fontSize: 27, fontWeight: "800" },
+    subtitle: { color: c.textMuted, fontSize: 13, lineHeight: 21 },
+    form: {
+      backgroundColor: c.surface,
+      padding: 20,
+      borderRadius: 18,
+      borderColor: c.border,
+      borderWidth: 1,
+      gap: 14,
+    },
+    label: { color: c.text, fontSize: 14, fontWeight: "700" },
+    input: {
+      backgroundColor: c.background,
+      borderColor: c.border,
+      borderWidth: 1,
+      borderRadius: 12,
+      paddingHorizontal: 14,
+      minHeight: 54,
+      color: c.text,
+      fontSize: 15,
+    },
+    invalid: { borderColor: c.warning },
+    button: {
+      backgroundColor: c.brand,
+      borderRadius: 12,
+      minHeight: 50,
+      alignItems: "center",
+      justifyContent: "center",
+      alignSelf: "stretch",
+    },
+    buttonText: { color: c.white, fontSize: 15, fontWeight: "700" },
+    disabled: { opacity: 0.5 },
+    hint: { color: c.textMuted, fontSize: 12, lineHeight: 20 },
+    error: { color: c.warning, fontSize: 13, lineHeight: 21 },
+    success: {
+      backgroundColor: c.surface,
+      borderColor: c.border,
+      borderWidth: 1,
+      borderRadius: 18,
+      padding: 24,
+      alignItems: "center",
+      gap: 16,
+    },
+    successMark: {
+      color: c.brand,
+      fontSize: 30,
+      backgroundColor: c.brandSoft,
+      borderRadius: 28,
+      width: 56,
+      height: 56,
+      lineHeight: 56,
+      textAlign: "center",
+      overflow: "hidden",
+    },
+    successTitle: {
+      fontSize: 19,
+      fontWeight: "800",
+      color: c.text,
+      textAlign: "center",
+    },
+    successText: { color: c.textMuted, fontSize: 13 },
+    more: { padding: 8 },
+    moreText: { color: c.brand, fontSize: 13 },
+    historyHeading: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      paddingTop: 8,
+    },
+    historyTitle: { color: c.text, fontSize: 17, fontWeight: "700" },
+    historyMeta: { color: c.textFaint, fontSize: 12 },
+    historyRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 12,
+      paddingBottom: 15,
+      borderBottomColor: c.border,
+      borderBottomWidth: StyleSheet.hairlineWidth,
+    },
+    tier: {
+      borderRadius: 8,
+      paddingHorizontal: 9,
+      paddingVertical: 10,
+      minWidth: 60,
+      alignItems: "center",
+    },
+    tierText: { fontWeight: "800", fontSize: 12 },
+    recordTitle: { color: c.text, fontSize: 14, fontWeight: "600" },
+    recordMeta: { color: c.textMuted, fontSize: 12, marginTop: 4 },
+    recordState: { color: c.brand, fontSize: 12 },
+    empty: {
+      color: c.textMuted,
+      fontSize: 13,
+      paddingVertical: 16,
+      lineHeight: 21,
+    },
+  });
+
+const createStyles=(c:ThemeColors)=>({...baseCreateStyles(c),...StyleSheet.create({content:{padding:16,paddingBottom:28,gap:20},nav:{flexDirection:'row',alignItems:'center',justifyContent:'space-between',paddingHorizontal:16,minHeight:60},back:{width:66,minHeight:48,justifyContent:'center'},heading:{alignItems:'center',paddingVertical:12,gap:10},redeemIcon:{width:70,height:70,borderRadius:20,alignItems:'center',justifyContent:'center',backgroundColor:c.brandSoft},title:{color:c.text,fontSize:22,fontWeight:'700'},subtitle:{fontSize:13,color:c.textMuted,lineHeight:22,textAlign:'center'},form:{backgroundColor:c.surface,borderRadius:14,borderColor:c.border,borderWidth:StyleSheet.hairlineWidth,padding:18,gap:14},button:{backgroundColor:c.action,borderRadius:11,minHeight:50,justifyContent:'center',alignItems:'center'},historyRow:{backgroundColor:c.surface,borderRadius:13,borderColor:c.border,borderWidth:StyleSheet.hairlineWidth,flexDirection:'row',alignItems:'center',gap:12,padding:14},input:{backgroundColor:c.background,borderRadius:10,borderColor:c.border,borderWidth:1,minHeight:54,padding:14,color:c.text,fontSize:16},more:{minHeight:48,padding:10,alignItems:'center',justifyContent:'center'}})});

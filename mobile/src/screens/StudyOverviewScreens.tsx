@@ -1,4 +1,5 @@
 import { AppIcon } from '../components/AppIcon';
+import { useLaunchStage } from '../launch/LaunchReadiness';
 import { AnnouncementCard } from '../components/AnnouncementCard';
 import { iosStyles } from '../iosStyles';
 import { useEffect, useMemo, useState } from "react";
@@ -120,6 +121,7 @@ export function TodayScreen({
   );
   const catalog = catalogQuery.data ?? offlineCatalog.data;
   const data = query.data || dashboard;
+  useLaunchStage('home', preview || (!!data || !!query.error) && (!!catalog || !!catalogQuery.error));
   const chapters = preview ? demoChapters : catalog?.chapters || [];
   const total = preview ? 1204 : catalog?.total;
   const attempted = preview ? 166 : catalog?.attemptedCount;

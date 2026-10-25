@@ -45,6 +45,7 @@ import { registerMobileAdminRoutes } from "./mobile-admin.js";
 import { registerAdminConsole, draftQuestion } from "./admin-console/index.js";
 import { createMobileProfileService, registerMobileProfile } from "./mobile-profile.js";
 import { resolveMobileRelease } from "./mobile-release.js";
+import { mobileBackendContract } from "./mobile-contract.js";
 import { runPointsRequest, withPointsTask, currentPointsTask, commitPointsResult } from "./ai-points/runtime.js";
 import { ensureAccountPoints, pointsCheckInView, claimPointsCheckIn, pointsPlans } from "./ai-points/account.js";
 import { registerPointsRoutes } from "./ai-points/routes.js";
@@ -414,6 +415,10 @@ export async function createApp(options = {}) {
       minimumVersion: release.minimumVersion,
       downloadUrl: release.downloadUrl,
       releaseNotes: release.releaseNotes,
+      backend: mobileBackendContract(app),
+      apkBytes: release.apkBytes,
+      apkMd5: release.apkMd5,
+      apkSha256: release.apkSha256,
       updateAvailable: compareVersions(currentVersion, release.latestVersion) < 0,
       forceUpdate: compareVersions(currentVersion, release.minimumVersion) < 0,
     };

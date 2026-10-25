@@ -101,3 +101,19 @@ test('late logout and expired responses cannot clear a newly logged-in account',
   );
   assert.equal((await mobileApi.dashboard()).owner, 'Bearer account-b-token');
 });
+
+
+test('public release checks survive account restoration and never expire a switched account', async t => {
+  const load = await mobileModules(t, memoryStorage()), client = await load('client');
+  const original = globalThis.fetch; t.after(() => { globalThis.fetch = original; });
+  const pending = deferred(); let authorization;
+  globalThis.fetch = async (_url, init) => { authorization = init.headers.Authorization; return pending.promise; };
+  await client.setSessionToken('old-account');
+  const check = client.mobileApi.appVersion('1.0.0');
+  await client.setSessionToken('new-account');
+  pending.resolve(new Response(JSON.stringify({ latestVersion: '1.0.0', forceUpdate: false })));
+  assert.equal((await check).latestVersion, '1.0.0'); assert.equal(authorization, undefined);
+  globalThis.fetch = async () => new Response(JSON.stringify({error:'proxy unavailable'}), {status:401});
+  await assert.rejects(client.mobileApi.appVersion('1.0.0'));
+  assert.equal(client.mobileSessionSnapshot().token, 'new-account');
+});

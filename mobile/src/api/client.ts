@@ -5,7 +5,9 @@ import { ResourceCache, CacheCancelledError } from './resourceCache';
 import { persistentStudyData, studyCachePolicy } from './cachePolicy';
 import { ApiError, fetchJson } from './transport';
 import type { StudyCatalog, StudyLesson, StudySession, StudyAttempt, StudyTeacherMessage, StudyTeacherAnswer, StudyTeacherRequest } from './studyTypes';
+import { studyRequestId } from './studyTypes';
 import type { Announcement } from '../announcements/client';
+import type { BackendContract } from './backendContract';
 export { ApiError } from './transport';
 
 export const API_BASE_URL =
@@ -13,6 +15,10 @@ export const API_BASE_URL =
   (typeof document !== 'undefined' ? `${window.location.origin}/api` : 'https://aceexam.top/api');
 
 export type AppVersionResponse = {
+  backend?: BackendContract;
+  apkBytes?: number;
+  apkMd5?: string;
+  apkSha256?: string;
   currentVersion: string;
   latestVersion: string;
   minimumVersion: string;
@@ -35,6 +41,29 @@ export const studyCache = new ResourceCache(
   persistentStudyData,
 );
 const statusListeners = new Set<(status: 'expired' | 'update') => void>();
+
+export type MobileRequestContext = {
+  path: string; method: string; body?: BodyInit | null;
+  requestId: string | null; revision: number;
+};
+export type MobileRequestOutcome = { ok: boolean; data?: unknown; error?: unknown };
+export type MobileRequestHooks = {
+  handles: (context: MobileRequestContext) => boolean;
+  before?: (context: MobileRequestContext) => Promise<void>;
+  after: (context: MobileRequestContext, outcome: MobileRequestOutcome) => void;
+};
+let mobileRequestHooks: MobileRequestHooks | undefined;
+// Optional UI integration. Only the Android shell registers it; Web does not
+// show a new prompt, fetch a receipt or change its existing request workflow.
+export function registerMobileRequestHooks(hooks: MobileRequestHooks) {
+  mobileRequestHooks = hooks;
+  return () => { if (mobileRequestHooks === hooks) mobileRequestHooks = undefined; };
+}
+function reportMobileRequest(hooks: MobileRequestHooks | undefined, context: MobileRequestContext, outcome: MobileRequestOutcome) {
+  // A display/receipt failure must never turn a successful model result into a
+  // failed request or provoke another paid request.
+  try { hooks?.after(context, outcome); } catch { /* UI observer is non-authoritative. */ }
+}
 
 function writeSession(task: () => Promise<unknown>) {
   const pending = sessionWrites.then(task, task);
@@ -111,8 +140,17 @@ function activateStudyScope(user: AuthResponse['user']) {
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
   const revision = sessionRevision;
   const token = sessionToken;
+  const requestId = init.method && init.method !== 'GET' ? studyRequestId() : null;
+  const context: MobileRequestContext = {path,method:init.method || 'GET',body:init.body,requestId,revision};
+  const hooks = mobileRequestHooks?.handles(context) ? mobileRequestHooks : undefined;
+  let sent = false;
   let data: T;
   try {
+    if (hooks?.before) {
+      await hooks.before(context);
+      if (revision !== sessionRevision) throw new CacheCancelledError();
+    }
+    sent = true;
     data = await fetchJson<T>(
       `${API_BASE_URL}${path}`,
       {
@@ -123,6 +161,7 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
           'Content-Type': 'application/json',
           'X-Client': 'mobile',
           'X-App-Version': APP_VERSION,
+          ...(requestId ? {'X-AI-Request-Id':requestId} : {}),
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
           ...init.headers,
         },
@@ -130,6 +169,7 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
       path.startsWith('/ai/') || path.startsWith('/study/') ? 120000 : 30000,
     );
   } catch (error) {
+    if (sent) reportMobileRequest(hooks,context,{ok:false,error});
     if (revision !== sessionRevision) throw new CacheCancelledError();
     if (init.method && init.method !== 'GET' && /^\/study\/(practice-sessions\/.+\/attempts|attempts\/)/.test(path))
       studyCache.invalidate(['/study/catalog', '/study/practice-sessions']);
@@ -170,6 +210,7 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
       ]);
     }
   }
+  reportMobileRequest(hooks,context,{ok:true,data});
   return data;
 }
 
@@ -190,19 +231,31 @@ async function streamRequest<T>(
   onProgress: (event: AiStreamProgress) => void,
 ): Promise<T> {
   const revision = sessionRevision;
+  const token = sessionToken;
+  const requestId = studyRequestId();
+  const context: MobileRequestContext = {path,method:'POST',body:JSON.stringify(body),requestId,revision};
+  const hooks = mobileRequestHooks?.handles(context) ? mobileRequestHooks : undefined;
+  let sent = false;
   const controller = new AbortController();
   streamControllers.add(controller);
-  const timer = setTimeout(() => controller.abort(), 240000);
+  let timer: ReturnType<typeof setTimeout> | undefined;
   try {
+    if (hooks?.before) {
+      await hooks.before(context);
+      if (revision !== sessionRevision) throw new CacheCancelledError();
+    }
+    timer = setTimeout(() => controller.abort(), 240000);
+    sent = true;
     const response = await streamingFetch(`${API_BASE_URL}${path}`, {
       method: 'POST',
       credentials: 'omit',
       headers: {
         Accept: 'text/event-stream',
         'Content-Type': 'application/json',
+        'X-AI-Request-Id':requestId,
         'X-Client': 'mobile',
         'X-App-Version': APP_VERSION,
-        ...(sessionToken ? { Authorization: `Bearer ${sessionToken}` } : {}),
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
       },
       body: JSON.stringify(body),
       signal: controller.signal,
@@ -257,8 +310,10 @@ async function streamRequest<T>(
     }
     if (result === undefined) throw new Error('AI 任务中断，请重试');
     studyCache.invalidate(['/practice/catalog', '/questions?']);
+    reportMobileRequest(hooks,context,{ok:true,data:result});
     return result;
   } catch (error) {
+    if (sent) reportMobileRequest(hooks,context,{ok:false,error});
     if (revision !== sessionRevision) throw new CacheCancelledError();
     if (error instanceof ApiError && error.status === 401)
       void clearSessionToken();
@@ -526,17 +581,20 @@ export type AiSettingsPayload = {
 };
 
 export type AccountEntitlementsResponse = {
+  pointsPlans?: Partial<Record<'vip' | 'svip' | 'ssvip', { name: string; priceCents: number; monthlyPoints: number }>>;
   plan: 'free' | 'vip' | 'svip' | 'ssvip';
   expiresAt: string | null;
   apiConfigUnlocked: boolean;
   aiServiceAvailable: boolean;
   aiServiceMode?: 'author';
   canManageAiService?: boolean;
+  billingMode?: 'points';
+  points?: {availableUnits:number;heldUnits:number;expiredUnits:number;pendingUnits:number;scale:number;pointsPerCny:number;monthlyPoints:number;periodStart:string|null;periodEnd:string|null};
   generation?: { limit: number; used: number; remaining: number; periodStart: string | null; periodEnd: string | null };
   checkIn: {
     day: string;
     claimed: boolean;
-    grants: { explanations: number; generations: number; analyses: number };
+    grants: { points?:number; explanations: number; generations: number; analyses: number };
     remaining: { explanations: number; generations: number; analyses: number };
   };
 };
@@ -548,6 +606,7 @@ export type MembershipRedemption = {
   redeemedAt: string;
   expiresAt: string;
 };
+export type PointOperation = {id:string;feature:string;state:'pending'|'settled'|'refunded';heldUnits:number;chargedUnits:number;costMicros:number;createdAt:string;error:string|null};
 
 export type CommunityMessage = {
   id: string;
@@ -610,8 +669,12 @@ export const mobileApi = {
     return studyCache.clear();
   },
   appVersion(version: string) {
-    return request<AppVersionResponse>(
-      `/mobile/version?version=${encodeURIComponent(version)}`,
+    // Release metadata is public and must not be cancelled by restoring or
+    // switching the account. It must never expire an unrelated login token.
+    return fetchJson<AppVersionResponse>(
+      `${API_BASE_URL}/mobile/version?version=${encodeURIComponent(version)}`,
+      { credentials: 'omit', headers: { Accept: 'application/json', 'X-Client': 'mobile', 'X-App-Version': APP_VERSION } },
+      15000,
     );
   },
 
@@ -648,10 +711,34 @@ export const mobileApi = {
     return response;
   },
 
-  async register(username: string, password: string) {
+  accountEmailPolicy() {
+    return request<{ emailVerificationRequired: boolean; emailAvailable: boolean }>('/auth/security-config');
+  },
+
+  sendAccountEmailCode(fields: { purpose: 'register' | 'reset' | 'bind'; email: string; username?: string; currentPassword?: string }) {
+    return request<{ challengeId: string; retryAfter: number; message: string }>('/auth/email-code', { method: 'POST', body: JSON.stringify(fields) });
+  },
+
+  resetPassword(fields: { username: string; password: string; email: string; code: string; challengeId: string }) {
+    return request<{ changed: boolean; message: string }>('/auth/reset-password', { method: 'POST', body: JSON.stringify(fields) });
+  },
+
+  accountSecurity() {
+    return request<{ emailBound: boolean; maskedEmail: string | null; emailAvailable: boolean; emailVerificationRequired: boolean }>('/auth/security');
+  },
+
+  bindAccountEmail(fields: { currentPassword: string; email: string; code: string; challengeId: string }) {
+    return request<{ emailBound: boolean; maskedEmail: string | null; emailAvailable: boolean; emailVerificationRequired: boolean }>('/auth/bind-email', { method: 'POST', body: JSON.stringify(fields) });
+  },
+
+  changePassword(fields: { currentPassword: string; password: string }) {
+    return request<{ changed: boolean; message: string }>('/auth/change-password', { method: 'POST', body: JSON.stringify(fields) });
+  },
+
+  async register(username: string, password: string, emailProof?: { email: string; code: string; challengeId: string }) {
     const response = await request<AuthResponse>('/auth/register', {
       method: 'POST',
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ username, password, ...emailProof }),
     });
     await setSessionToken(response.sessionToken ?? null);
     await cacheSessionProfile(response);
@@ -1029,6 +1116,9 @@ export const mobileApi = {
   accountEntitlements() {
     return request<AccountEntitlementsResponse>('/account/entitlements');
   },
+  pointOperations() {
+    return request<{rows:PointOperation[]}>('/account/points/operations?limit=20');
+  },
 
   async studyCatalog(force = false) {
     const cached = studyCache.peekFresh<StudyCatalog>('/study/catalog');
@@ -1121,3 +1211,6 @@ export const mobileApi = {
     return pending;
   },
 };
+
+// Read-only context for platform-specific integrations; existing Web flows stay unchanged.
+export const mobileSessionSnapshot = () => ({ token: sessionToken, revision: sessionRevision });

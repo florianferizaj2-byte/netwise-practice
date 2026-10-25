@@ -12,6 +12,11 @@
     <string name="simple_starting" translatable="false">正在开始…</string>
     <string name="simple_ending" translatable="false">正在结束…</string>
     <string name="simple_route_caption" translatable="false">按内置路线运行</string>
+    <string name="route_selection_title" translatable="false">选择路线</string>
+    <string name="route_selection_current" translatable="false">路线：%1$s</string>
+    <string name="route_selection_details" translatable="false">%1$s km/h · %2$s</string>
+    <string name="route_selection_once" translatable="false">单次，到终点结束</string>
+    <string name="route_selection_restart" translatable="false">循环，到终点跳回起点</string>
     <string name="simple_tutorial" translatable="false">使用教程</string>
     <string name="simple_back" translatable="false">返回</string>
     <string name="simple_start_failed" translatable="false">未能开始，请按使用教程检查手机设置</string>

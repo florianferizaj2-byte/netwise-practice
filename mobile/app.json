@@ -2,13 +2,25 @@
   "expo": {
     "name": "考匠",
     "slug": "kaojiang",
-    "version": "0.4.6",
+    "version": "1.0.0",
     "scheme": "kaojiang",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
     "description": "考匠移动端学习应用",
     "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#FAF8F5",
+          "image": "./assets/kaojiang-launch.png",
+          "imageWidth": 112,
+          "dark": {
+            "backgroundColor": "#111A17",
+            "image": "./assets/kaojiang-launch.png"
+          }
+        }
+      ],
       "./plugins/withAppPermissions",
       "./plugins/withReleaseSigning",
       [
@@ -24,14 +36,41 @@
           "enableBackgroundPlayback": false,
           "enableBackgroundRecording": false
         }
-      ]
+      ],
+      [
+        "expo-font",
+        {
+          "android": {
+            "fonts": [
+              {
+                "fontFamily": "KaojiangSans",
+                "fontDefinitions": [
+                  {
+                    "path": "./assets/fonts/NotoSansSC_400Regular.ttf",
+                    "weight": 400
+                  },
+                  {
+                    "path": "./assets/fonts/NotoSansSC_500Medium.ttf",
+                    "weight": 500
+                  },
+                  {
+                    "path": "./assets/fonts/NotoSansSC_700Bold.ttf",
+                    "weight": 700
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "./plugins/withAndroidFontLicense"
     ],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "package": "com.kaojiang.app",
-      "versionCode": 30,
+      "versionCode": 33,
       "permissions": [
         "REQUEST_INSTALL_PACKAGES",
         "READ_EXTERNAL_STORAGE",

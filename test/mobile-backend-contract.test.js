@@ -1,4 +1,5 @@
 import test from 'node:test';
+const currentVersion = JSON.parse(fs.readFileSync(new URL('../mobile/package.json', import.meta.url), 'utf8')).version;
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
@@ -7,7 +8,7 @@ import path from 'node:path';
 import { createStore } from '../server/store.js';
 import { createApp } from '../server/index.js';
 
-test('Android 0.4.8 account, points and learning APIs work over authenticated HTTP without external models', async t => {
+test('current Android account, points and learning APIs work over authenticated HTTP without external models', async t => {
   const parent = fs.realpathSync(os.tmpdir());
   const directory = fs.mkdtempSync(path.join(parent, 'ace-mobile-contract-'));
   const store = createStore(directory);
@@ -32,7 +33,7 @@ test('Android 0.4.8 account, points and learning APIs work over authenticated HT
   const tokens = new Map([owner, learner].map(user => [user.id, store.createAuthSession(user.id)]));
   const request = async (url, user = owner, body) => {
     const response = await fetch(base + url, { method: body === undefined ? 'GET' : 'POST',
-      headers: { Accept: 'application/json', 'Content-Type': 'application/json', 'X-Client': 'mobile', 'X-App-Version': '0.4.8',
+      headers: { Accept: 'application/json', 'Content-Type': 'application/json', 'X-Client': 'mobile', 'X-App-Version': currentVersion,
         ...(user ? { Authorization: 'Bearer ' + tokens.get(user.id) } : {}) },
       ...(body === undefined ? {} : { body: JSON.stringify(body) }) });
     const data = await response.json(); return { status: response.status, data };

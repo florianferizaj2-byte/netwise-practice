@@ -27,7 +27,9 @@
     "bank:report": "node scripts/report-bank-coverage.js",
     "auth:mail:check": "node scripts/check-account-mail.mjs",
     "points:migrate": "node scripts/migrate-ai-points.mjs",
-    "verify:backend": "node scripts/verify-mobile-backend.mjs"
+    "verify:backend": "node scripts/verify-mobile-backend.mjs",
+    "deploy:check": "node scripts/check-v1-deployment.mjs",
+    "verify:apk": "python scripts/verify-android-apk.py"
   },
   "dependencies": {
     "dotenv": "^17.2.0",

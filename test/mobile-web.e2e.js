@@ -7,6 +7,7 @@ import path from 'node:path';
 import { createApp } from '../server/index.js';
 import { createStore } from '../server/store.js';
 import { finishProfileForm, dismissLaunchAnnouncement } from './helpers/mobile-profile.js';
+import { accountTestMailbox } from './helpers/account-mail.js';
 import express from 'express';
 
 const mobileVersion = JSON.parse(fs.readFileSync(new URL('../mobile/package.json', import.meta.url), 'utf8')).version;
@@ -14,7 +15,8 @@ const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'aceexam-apple-web-'));
 const store = createStore(dir);
 const template = store.allQ().find((q) => q.type === 'single_choice' && q.certificates?.includes('hcia-datacom'));
 for (let i = 0; i < 12; i++) store.addQ({ ...template, id: `apple-fixture-${i}`, question: `苹果端核对题目 ${i + 1}`, chapter: '苹果端核对', knowledgeSection: '基础', knowledgePoint: '同步学习', options: { A: '核对选项甲', B: '核对选项乙', C: '核对选项丙', D: '核对选项丁' }, answer: ['A'], analysis: '测试题解析', certificates: ['hcia-datacom'] });
-const backend = await createApp({ store, withFrontend: true, production: true, authRequired: true });
+const mailbox = accountTestMailbox();
+const backend = await createApp({ store, withFrontend: true, production: true, authRequired: true, accountSecurity: { enabled: true, mailer: mailbox } });
 const app = express();
 let forceUpdate = false;
 // Server fixtures also work when a service worker controls the page.
@@ -74,6 +76,12 @@ try {
       await text('注册').click();
       await page.getByPlaceholder('输入账号', { exact: true }).fill(`apple_fixture_${engine}`);
       await page.getByPlaceholder('至少 8 位密码', { exact: true }).fill('fixture-password-123');
+      await page.getByLabel('确认密码', { exact: true }).fill('fixture-password-123');
+      const email = `apple-${engine}@example.test`;
+      await page.getByLabel('邮箱', { exact: true }).fill(email);
+      await page.getByRole('button', { name: '获取验证码', exact: true }).click();
+      await expect(page.getByText(/验证码已发送/)).toBeVisible();
+      await page.getByLabel('邮箱验证码', { exact: true }).fill(mailbox.latest(email, 'register').code);
       const registered = page.waitForResponse((r) => r.url().endsWith('/api/auth/register') && r.request().method() === 'POST');
       await text('注册').last().click();
       const response = await registered;

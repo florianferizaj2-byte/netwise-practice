@@ -9,6 +9,7 @@ import { createStore } from "../server/store.js";
 import { OpenAICompatibleProvider } from "../server/ai.js";
 import { mockAI } from "./ai-fixture.js";
 import { launchTestBrowser } from "./helpers/browser.js";
+import { accountTestMailbox } from "./helpers/account-mail.js";
 
 // Use an isolated database and fake upstream credentials, even if .env exists.
 Object.assign(process.env, {
@@ -21,8 +22,10 @@ Object.assign(process.env, {
 });
 const directory = fs.mkdtempSync(path.join(os.tmpdir(), "aceexam-e2e-"));
 const store = createStore(directory);
+const mailbox = accountTestMailbox();
 const app = await createApp({
   store,
+  accountSecurity: { enabled: true, mailer: mailbox },
   provider: new OpenAICompatibleProvider(store, { fetch: mockAI() }),
   production: true,
 });
@@ -85,18 +88,24 @@ try {
   await registration
     .getByLabel("确认密码", { exact: true })
     .fill("fixture-password-123");
+  await registration.getByLabel("邮箱", { exact: true }).fill("e2e@example.test");
+  await registration.getByRole("button", { name: "获取验证码", exact: true }).click();
+  await expect(registration.getByRole("status")).toContainText("验证码已发送");
+  await registration.getByLabel("邮箱验证码", { exact: true }).fill(mailbox.latest("e2e@example.test", "register").code);
   await registration
     .getByRole("button", { name: "创建账号", exact: true })
     .click();
-  await page
-    .getByRole("button", { name: /网络工程师/ })
-    .first()
-    .click();
+  await page.locator(".blue-cert-card").first().waitFor();
+  const user = store.allUsers().find((item) => item.username === "e2e_learner");
+  assert.ok(user);
+  assert.equal(user.isAdmin, 0);
+  // Administration scenarios below require a trusted fixture grant, never public sign-up privileges.
+  store.db.prepare("UPDATE users SET is_admin=1 WHERE id=?").run(user.id);
+  await page.locator('.blue-cert-card').filter({ has: page.locator('input[value="network-engineer"]') }).click();
+  await page.getByRole("button", { name: "进入学习", exact: true }).click();
   await expect(
     page.getByRole("heading", { name: "从第一组练习开始", exact: true }),
   ).toBeVisible();
-  const user = store.allUsers().find((item) => item.username === "e2e_learner");
-  assert.ok(user);
 
   await page
     .getByRole("button", { name: "开始 10 题练习", exact: true })
@@ -215,7 +224,7 @@ try {
     ["community", "共享 AI 题库"],
     ["chat", "考匠社区"],
     ["settings", "设置"],
-    ["admin", "管理员面板"],
+    ["admin", "总览工作台"],
     ["chapters", "章节练习"],
   ]) {
     await page.goto(`${base}/#${route}`);
@@ -225,7 +234,7 @@ try {
   }
   // The badge renders after the API returns a populated membership list.
   await page.goto(base + "/#admin");
-  await page.getByRole("tab", { name: "兑换码", exact: true }).click();
+  await page.getByRole("link", { name: "会员与兑换码", exact: true }).click();
   const membershipRows = page.locator(".membership-admin tbody tr");
   await expect(membershipRows).toHaveCount(30);
   await expect(membershipRows.locator(".member-tier")).toHaveCount(30);

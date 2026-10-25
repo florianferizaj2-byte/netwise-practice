@@ -31,6 +31,7 @@ import { useCachedQuery } from '../api/useCachedQuery';
 import { ScreenActivityProvider, useAppActive } from './ScreenActivity';
 import { AnimatedPressable, EntranceView } from '../components/Motion';
 import { BrandMark } from '../components/BrandMark';
+import { useLaunchStage } from '../launch/LaunchReadiness';
 import { AuthScreen } from '../screens/AuthScreen';
 import { ProfileSetupScreen } from '../screens/ProfileSetupScreen';
 import { CertificateScreen } from '../screens/CertificateScreen';
@@ -115,6 +116,7 @@ export function AppShell() {
   const knownAiJobStatuses = useRef(new Map<string, AiQuestionGenerationJob['status']>());
   const [certificatePickerOpen, setCertificatePickerOpen] = useState(false);
   const [sessionRestored, setSessionRestored] = useState(false);
+  useLaunchStage('route', sessionRestored);
   const [updateRelease, setUpdateRelease] = useState<AppVersionResponse | null>(
     null,
   );
