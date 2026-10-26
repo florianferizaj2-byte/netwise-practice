@@ -117,6 +117,10 @@ export function buildVeterinaryGroups(questions) {
       group.indexes.push(index);
       group.kind ||= question.sharedKind || marker?.kind || "stem";
       if (!group.stem && question.sharedStem) group.stem = question.sharedStem;
+      // Legacy case groups carry their metadata on the anchor only. Random
+      // practice can put a child first, whose inferred marker says options.
+      // Explicit case material wins once the anchor arrives, in any order.
+      if (question.sharedKind === "stem" || question.sharedStem) group.kind = "stem";
       return;
     }
     const kind = marker?.kind || null;

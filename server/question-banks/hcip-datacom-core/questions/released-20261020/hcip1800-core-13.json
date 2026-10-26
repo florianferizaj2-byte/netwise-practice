@@ -1,0 +1,1860 @@
+[
+  {
+    "id": "hcip821-7-3-1-007",
+    "type": "single_choice",
+    "question": "PIM-DM 假定组播组成员在网络中分布密集。基于这一假定，下列哪项最准确地描述了 PIM-DM 建立分发树的方式？",
+    "options": {
+      "A": "组播源先把数据发送给 RP，由 RP 沿共享树只下发给已加入的接收者",
+      "B": "源开始发送后先沿 RPF 接口把流量泛洪到所有下游，再由没有成员的分支逐跳发送 Prune 剪枝",
+      "C": "只有收到 IGMP 报告的子网才建立转发表项，其余接口从一开始就不转发任何组播报文",
+      "D": "接收者先向源逐跳发送显式 Join，所有路由器只按 Join 建立最短路径树"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "PIM-DM 的典型行为是“泛洪—剪枝”：源开始发送后先假定所有下游都需要流量，沿 RPF 接口泛洪，再由无成员分支发送 Prune 剪掉，B 正确。A 描述的是 PIM-SM 的 RP 与共享树机制；C 描述的是稀疏模式按需加入的思路，PIM-DM 的初始泛洪并不等待 IGMP 报告；D 也是显式加入模型，PIM-DM 没有周期性 Join，只有按需的 Prune 与 Graft。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-DM",
+    "difficulty": "medium",
+    "tags": [
+      "PIM-DM",
+      "泛洪剪枝",
+      "组播"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-1-007",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3973-pim-dm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-DM 考点；技术依据 RFC 3973 §3 协议概述（泛洪—剪枝、无 RP、无周期性 Join）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "3a4256cb83c9a74f4a1f358717c0b259947f3e4279a4ad2e1cd203b91b988277"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-1-008",
+    "type": "single_choice",
+    "question": "在 PIM-DM 中，路由器只接受从“到源的 RPF 接口”进入的组播数据，并向下游转发。这一 RPF 检查在泛洪过程中的直接作用是？",
+    "options": {
+      "A": "确认目的组地址是否已被 RP 授权",
+      "B": "确认下游接口是否存在 IGMP 成员，没有成员就丢弃报文",
+      "C": "确认报文 TTL 是否足够大，防止报文在链路层循环",
+      "D": "保证同一源的分发路径唯一且无环，避免泛洪在路由环路中被反复放大"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "PIM-DM 依赖单播路由表确定到源的 RPF 接口，只有从该接口进入的组播数据才会被转发，从而在泛洪时形成一棵无环的分发树，D 正确。A 中 RP 是 PIM-SM 的概念，PIM-DM 没有 RP 授权；B 的成员判断由 IGMP 与下游转发状态完成，不是 RPF 检查的内容；C 的 TTL 只限制转发跳数，不能替代 RPF 防环。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-DM",
+    "difficulty": "medium",
+    "tags": [
+      "PIM-DM",
+      "RPF",
+      "防环"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-1-008",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3973-pim-dm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-DM 考点；技术依据 RFC 3973 §4.2 数据报文转发规则中的 RPF 检查。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "cf861f15bafafe5f28ec846864a772c79da9fd48d341dceffbbf752c78ab0449"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-1-009",
+    "type": "single_choice",
+    "question": "PIM-DM 中，一台路由器在某个下游接口上既没有组成员，也没有需要该 (S,G) 流量的下游 PIM 邻居。针对该接口，它会采取什么动作？",
+    "options": {
+      "A": "向上游邻居发送携带该 (S,G) 的 Prune，请求上游停止向本接口方向转发",
+      "B": "向 RP 发送 Register-Stop，请求 RP 停止向该组转发",
+      "C": "向源发送 IGMP Leave，要求源停止发送该组数据",
+      "D": "直接删除本地 (S,G) 表项且不通知上游，等上游剪枝定时器自然超时"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "PIM-DM 中下游路由器通过向上游发送 Prune(S,G) 来剪掉不需要的分支，Prune 报文中的上游邻居地址指向 RPF 邻居，A 正确。B 的 Register-Stop 是 PIM-SM 中 RP 对源 DR 的响应，PIM-DM 没有 RP 与注册过程；C 的 IGMP Leave 由主机发往本地路由器，源不会处理；D 不通知上游会导致上游继续泛洪，这正是 Prune 要解决的问题。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-DM",
+    "difficulty": "easy",
+    "tags": [
+      "PIM-DM",
+      "Prune",
+      "剪枝"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-1-009",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3973-pim-dm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-DM 考点；技术依据 RFC 3973 §4.4 下游 Prune 处理与 §4.7.6 Join/Prune 报文格式。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "ce20c78de8bca9a2de161f2c7a69c96ab0ea7ceb1336083e83c5ac1f20f43581"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-1-010",
+    "type": "single_choice",
+    "question": "PIM-DM 的剪枝状态有生存时间，到期后流量会重新沿原分支泛洪。为减少这种重复泛洪，PIM-DM 引入了 State Refresh。关于该机制，下列描述正确的是？",
+    "options": {
+      "A": "由最下游的接收者周期性发送 State Refresh，逐跳向上游刷新剪枝状态",
+      "B": "State Refresh 只在 RP 与源 DR 之间传递，与剪枝分支无关",
+      "C": "由与源直连的路由器周期性发起 State Refresh，沿分发树向下游逐跳传递，收到后刷新沿途的剪枝状态",
+      "D": "State Refresh 用于替代 Prune，上游收到后必须立即恢复向该分支转发"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "RFC 3973 规定 State Refresh 由与源直连的路由器产生，并沿分发树向下游传播，收到该报文的路由器刷新已有的剪枝状态，从而避免剪枝到期后反复泛洪，C 正确。A 的发送方向相反；B 中 PIM-DM 没有 RP，State Refresh 与 RP 无关；D 中 State Refresh 是刷新剪枝而不是取消剪枝，恢复转发要靠 Graft。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-DM",
+    "difficulty": "medium",
+    "tags": [
+      "PIM-DM",
+      "State Refresh",
+      "剪枝状态"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-1-010",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3973-pim-dm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-DM 考点；技术依据 RFC 3973 §3 与 §4.5 State Refresh 的发起与转发。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "f9249ad9d1fa371f2990d45ecb1b05ac76fd502ade692ed12a33a59714d761d9"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-1-011",
+    "type": "single_choice",
+    "question": "两台 PIM-DM 路由器连接在同一共享以太网段上，都从上游收到了同一 (S,G) 的组播流量，并同时向该网段转发，导致接收者收到重复报文。PIM-DM 通过什么机制消除重复？",
+    "options": {
+      "A": "由 RP 指定其中一台为唯一转发者，另一台停止转发",
+      "B": "在该网段上发送 Assert 报文进行竞选，失败者停止向该网段转发该 (S,G) 流量",
+      "C": "由上游路由器发送 Prune 强制其中一台停止转发",
+      "D": "两台比较 IGMP 查询器优先级，优先级低者停止转发"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "共享网段上出现重复流量时，PIM-DM 通过 Assert 选出唯一的 (S,G) 转发者，落选者把该接口从出接口列表中删除，B 正确。A 中 PIM-DM 没有 RP；C 的 Prune 是下游向上游请求停止转发，不能解决同一网段两台路由器重复转发的问题；D 的 IGMP 查询器选举只决定由谁发送查询，与组播数据转发者无关。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-DM",
+    "difficulty": "medium",
+    "tags": [
+      "PIM-DM",
+      "Assert",
+      "共享网段"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-1-011",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3973-pim-dm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-DM 考点；技术依据 RFC 3973 §4.6 PIM Assert 报文与状态机。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "a8f74fccc13eb65c57a43c6b0935730a253fbe70b1b4c3077e34f5f041080335"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-1-012",
+    "type": "single_choice",
+    "question": "PIM-DM 在共享网段上通过 Assert 选出唯一的 (S,G) 转发者。若两台路由器到源的单播路由优先级和度量完全相同，按 RFC 3973 的规则应如何决胜？",
+    "options": {
+      "A": "比较发送 Assert 的接口 IP 地址，地址较大者胜出",
+      "B": "比较两台路由器的 Router ID，较小者胜出",
+      "C": "比较接口的 DR 优先级，较大者胜出",
+      "D": "两台同时保持转发，由接收者负责去重"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "RFC 3973 的 Assert 度量依次比较到源的单播路由优先级与度量，若全部相同，则以发送 Assert 的路由器 IP 地址作为决胜条件，地址较大者获胜，A 正确。B 的 Router ID 不是 Assert 的比较对象；C 的 DR 优先级用于 PIM-SM 的 DR 选举，与 Assert 无关；D 会造成重复报文，正是 Assert 要消除的现象。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-DM",
+    "difficulty": "hard",
+    "tags": [
+      "PIM-DM",
+      "Assert",
+      "选举"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-1-012",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3973-pim-dm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-DM 考点；技术依据 RFC 3973 §4.6.1 Assert 度量与平局时按 IP 地址较大者胜出。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "fd4282ece3b79a6dade10cc70d3677e9e1d59d385469784b78fec2a4f6cc8c79"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-1-013",
+    "type": "single_choice",
+    "question": "PIM-DM 中，一台路由器向上游发送 Graft 请求恢复某个 (S,G) 的流量后，如果在重试定时器到期时仍未收到 Graft Ack，它会怎样处理？",
+    "options": {
+      "A": "认为上游不支持 Graft，改发 Prune 放弃该分支",
+      "B": "直接向源发送 IGMP 报告，由源重新发起泛洪",
+      "C": "立即删除本地 (S,G) 表项，等待下一次剪枝超时后的泛洪",
+      "D": "重新向上游单播 Graft 并重置重试定时器，直到收到 Graft Ack 或达到配置的重试次数"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Graft 采用确认机制：发送后启动 GraftRetry 定时器，未收到 Graft Ack 就重传 Graft 并重置定时器，达到重试上限后停止，D 正确。A 中 Graft 是标准机制，不会因一次未确认就放弃；B 中 IGMP 报告由主机发送，源不处理；C 中删除表项并不能恢复流量，反而会丢失状态。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-DM",
+    "difficulty": "medium",
+    "tags": [
+      "PIM-DM",
+      "Graft",
+      "Graft Ack"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-1-013",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3973-pim-dm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-DM 考点；技术依据 RFC 3973 §4.4.1 GraftRetry 定时器与 Graft Ack 重传规则。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "d5d9a9672486d0b352278203daa9431a0de651744fde66f4c462d1a93f6656ac"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-1-014",
+    "type": "single_choice",
+    "question": "PIM-DM 的 Prune 报文中同时携带 (S,G) 和上游邻居地址。这两个字段的作用分别是什么？",
+    "options": {
+      "A": "(S,G) 标识组播组，上游邻居地址指定由哪台路由器接管转发",
+      "B": "(S,G) 标识要加入的源和组，上游邻居地址指定接收者所在网段",
+      "C": "(S,G) 指定要剪枝的源和组，上游邻居地址指定该 Prune 的接收者，使报文被送到正确的上游邻居",
+      "D": "两者都只是诊断信息，实际剪枝完全由 IGMP 决定"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Prune 属于 Join/Prune 报文，组地址与源地址字段指明要剪掉的 (S,G)，Upstream Neighbor Address 字段指明这条报文发给哪个上游邻居，C 正确。A 中不存在“接管转发”的语义；B 中 Prune 是剪枝而不是加入，且该字段不是接收者网段；D 中 IGMP 只提供成员信息，剪枝状态由 PIM 报文建立。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-DM",
+    "difficulty": "medium",
+    "tags": [
+      "PIM-DM",
+      "Prune",
+      "报文格式"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-1-014",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3973-pim-dm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-DM 考点；技术依据 RFC 3973 §4.7.6 Join/Prune 报文格式中的上游邻居地址字段。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "94dac7cb4c851af870f060c5a414494e6d631dc8dbda7d3a6b9440465244b3c9"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-1-015",
+    "type": "single_choice",
+    "question": "下列哪一项不属于 PIM-DM 的运行机制？",
+    "options": {
+      "A": "源侧 DR 把组播报文封装在 Register 报文中单播给 RP",
+      "B": "收到组播报文后沿 RPF 接口向下游泛洪",
+      "C": "没有成员的分支向上游发送 Prune",
+      "D": "剪枝分支出现新成员时通过 Graft 恢复转发"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Register 与 RP 是 PIM-SM 的机制，PIM-DM 没有 RP，也不使用注册封装，因此 A 不属于 PIM-DM，为本题答案。B 是 PIM-DM 的泛洪过程；C 是泛洪后的剪枝；D 是剪枝分支恢复流量所用的 Graft，三者都是 PIM-DM 的标准机制。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-DM",
+    "difficulty": "easy",
+    "tags": [
+      "PIM-DM",
+      "PIM-SM",
+      "对比"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-1-015",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3973-pim-dm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-DM 考点；技术依据 RFC 3973 §3 与 §4.4（PIM-DM 无 Register、无 RP）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "abee3ca75f086c5ee39f7939a4d20d8f754806cd3e47c7d61e82d382aedd5253"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-1-016",
+    "type": "single_choice",
+    "question": "某园区网有 30 个子网，每个子网都部署了视频会议终端并持续接收同一组播源，链路带宽充足。管理员希望配置简单、不引入 RP。最合适的 PIM 模式是？",
+    "options": {
+      "A": "PIM-SM，并配置静态 RP",
+      "B": "PIM-DM，利用泛洪—剪枝在成员密集环境中直接建立最短路径树",
+      "C": "PIM-SM，只使用共享树并禁止 SPT 切换",
+      "D": "只配置 IGMP，不运行任何 PIM 协议"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "成员在每个子网都存在、带宽充足且不希望引入 RP，符合 PIM-DM 的密集模式假设，B 正确。A 和 C 都需要 RP，且共享树会把流量先引到 RP，与本场景的简单性要求不符；D 中 IGMP 只维护主机与本地路由器之间的成员关系，跨网段转发仍需要组播路由协议。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-DM",
+    "difficulty": "medium",
+    "tags": [
+      "PIM-DM",
+      "场景选型",
+      "密集模式"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-1-016",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3973-pim-dm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-DM 考点；技术依据 RFC 3973 §3 密集模式假设与泛洪—剪枝适用场景。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "0ed8d9a5343ed7e233141f024fd1f06f0785d89cd8abf82d67949799d0074d45"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-1-017",
+    "type": "single_choice",
+    "question": "某 PIM-DM 网络中，R2 所在分支已无接收者，R2 已向直接上游 R1 发送 Prune，但 R1 仍持续把该 (S,G) 流量转发到连接 R2 的接口。检查发现两端接口地址与单播路由均正常。下列最可能的原因是？",
+    "options": {
+      "A": "R2 没有配置静态 RP，导致 Prune 无法被解析",
+      "B": "R2 的 IGMP 版本与 R1 不一致，导致 Prune 被丢弃",
+      "C": "R1 上配置了更长的 IGMP 查询间隔，使 Prune 暂时无效",
+      "D": "R1 连接 R2 的接口没有启用 PIM，Prune 到达后无法建立剪枝状态，泛洪继续"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Prune 是 PIM 报文，只有接收接口启用了 PIM 并被识别为 PIM 邻居，R1 才能处理该报文并建立剪枝状态；接口未启用 PIM 时 Prune 不会被处理，泛洪继续，D 正确。A 中 PIM-DM 不使用 RP；B 中 IGMP 版本只影响主机成员关系，不决定 Prune 的处理；C 中 IGMP 查询间隔不改变 PIM 剪枝状态的建立。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-DM",
+    "difficulty": "hard",
+    "tags": [
+      "PIM-DM",
+      "Prune",
+      "故障定位"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-1-017",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3973-pim-dm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-DM 考点；技术依据 RFC 3973 §4.4 与 §4.7（Prune 需在启用 PIM 的接口上处理）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "9094f871a6266f27c6d9828e471420d32c6388886883c81697cfc53c038752b9"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-1-018",
+    "type": "single_choice",
+    "question": "在 PIM-DM 中，一个组播源开始发送后，下列事件发生的先后顺序正确的是？",
+    "options": {
+      "A": "源 DR 向 RP 注册，RP 建立共享树，接收者切换到 SPT，无成员分支再发 Prune",
+      "B": "接收者先向 RP 发 Join，RP 再向源发 Join，源 DR 泛洪，最后剪枝",
+      "C": "首跳路由器沿 RPF 接口泛洪，无成员分支逐跳发送 Prune，剪枝后新出现成员时发送 Graft，上游回 Graft Ack 恢复转发",
+      "D": "所有路由器先发 Assert 选出 RP，再泛洪，最后统一剪枝"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "PIM-DM 的顺序是：源开始发送后先泛洪，随后无成员分支发送 Prune，剪枝分支出现新成员时用 Graft 恢复，上游以 Graft Ack 确认，C 正确。A 与 B 描述的是 PIM-SM 的 RP、共享树和显式加入过程；D 中 Assert 只用于共享网段选转发者，不会选举 RP，PIM-DM 也没有 RP。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-DM",
+    "difficulty": "medium",
+    "tags": [
+      "PIM-DM",
+      "流程顺序",
+      "泛洪剪枝"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-1-018",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3973-pim-dm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-DM 考点；技术依据 RFC 3973 §3 协议概述与 §4.4、§4.5 的状态变化。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "7a06e7ff2f7e11f7238a5bc195b5be951f5a9d62b74e5bd30b47fae61febc382"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-2-001",
+    "type": "single_choice",
+    "question": "PIM-SM 假定组播组成员稀疏且分布广泛。基于这一假定，下列描述正确的是？",
+    "options": {
+      "A": "源开始发送后立即向全网泛洪，收到 Prune 后再收敛",
+      "B": "只有在收到显式的 (*,G) 或 (S,G) Join 后，才把组播流量转发到相应接口",
+      "C": "所有路由器都必须为每个组维护 (S,G) 表项，与是否存在接收者无关",
+      "D": "不需要任何路由器充当 RP，接收者直接向源加入即可"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "PIM-SM 采用显式加入模型，没有收到 Join 的接口不会转发该组流量，B 正确。A 是 PIM-DM 的泛洪—剪枝思路；C 中 PIM-SM 只在实际有加入或注册需求时建立相应表项；D 中 ASM 模型必须有 RP 作为共享树的根。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-SM",
+    "difficulty": "medium",
+    "tags": [
+      "PIM-SM",
+      "稀疏模式",
+      "显式加入"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-2-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4601-pim-sm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-SM 考点；技术依据 RFC 4601 §3 协议概述（稀疏模式显式加入）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "f5eba667b20f07277442a46e5347723051a75a19efae910062e9ed620a88b22a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-2-002",
+    "type": "single_choice",
+    "question": "在 PIM-SM 的 ASM 模型中，RP 的核心作用是什么？",
+    "options": {
+      "A": "为每个组播组分配组播地址，并把地址通告给所有主机",
+      "B": "作为组播源的唯一数据入口，所有源都必须把流量先送到 RP 所在的主机",
+      "C": "作为共享树的根，接收源侧注册的流量，并按 (*,G) 状态向已加入的接收者分发",
+      "D": "只在 SPT 建立后参与转发，共享树阶段不转发任何流量"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "RP 是非源特定共享树的根：接收者的 (*,G) Join 向 RP 汇聚，源侧 DR 把数据注册到 RP，RP 再沿共享树下发，C 正确。A 中组播地址由 IANA 等机构分配，不是 RP 的职责；B 中源仍使用自己的地址发送，只是由 DR 封装注册；D 中 RP 在共享树阶段就参与转发，SPT 切换后仍可能承载其他接收者。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-SM",
+    "difficulty": "easy",
+    "tags": [
+      "PIM-SM",
+      "RP",
+      "共享树"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-2-002",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4601-pim-sm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-SM 考点；技术依据 RFC 4601 §2.1 RP 定义与 §3.1 Phase One: RP Tree。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "9938ff6cd1927a0a8a5de4865dba3398f57071796629100e581e48b9482584a9"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-2-003",
+    "type": "single_choice",
+    "question": "在 PIM-SM 中，源侧 DR 会把组播数据封装在 Register 报文中单播发给 RP。这样封装的主要目的是？",
+    "options": {
+      "A": "让 RP 在还没有到源的 (S,G) 转发路径时也能收到组播数据，从而获知源的存在并触发后续加入",
+      "B": "对组播数据进行加密，防止未加入该组的主机窃听",
+      "C": "把组播地址转换成单播地址后直接转发给所有接收者",
+      "D": "替代 IGMP 查询，用于维护本地组成员关系"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Register 是单播封装，使 RP 在共享树尚未延伸到源时也能收到第一份数据，并据此向源发起 (S,G) Join，A 正确。B 中 Register 不提供加密；C 中封装只发生在 DR 到 RP 之间，RP 解封装后仍按组播转发；D 中组成员关系由 IGMP 维护，与 Register 无关。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-SM",
+    "difficulty": "medium",
+    "tags": [
+      "PIM-SM",
+      "Register",
+      "源注册"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-2-003",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4601-pim-sm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-SM 考点；技术依据 RFC 4601 §3.1 与 §4.4.1 Register 封装。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "5ff31b824185d2db5b2938a619ef17a2659a3964c4f66109d1732f7126fa950b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-2-004",
+    "type": "single_choice",
+    "question": "RP 在什么情况下会向源侧 DR 发送 Register-Stop？",
+    "options": {
+      "A": "第一次收到该组的 Register 时立即发送，以尽快降低 RP 负载",
+      "B": "只要组内暂时没有接收者就发送，与是否已建立到源的路径无关",
+      "C": "源停止发送组播数据后，由 RP 主动发送",
+      "D": "RP 已经建立到源的 (S,G) 转发路径并能收到原生组播数据，不再需要 Register 封装的数据时"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "当 RP 通过 (S,G) Join 建立到源的路径、开始收到原生组播数据后，会丢弃重复的封装副本并回 Register-Stop，D 正确。A 中 RP 需要先通过 Register 获知源，不会首包就停止；B 中即使没有接收者，RP 也可能需要维持源状态，停止注册的条件是已能收到原生数据；C 中源停止发送后 DR 自然不再注册，不需要 RP 专门发送 Register-Stop。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-SM",
+    "difficulty": "medium",
+    "tags": [
+      "PIM-SM",
+      "Register-Stop",
+      "RP"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-2-004",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4601-pim-sm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-SM 考点；技术依据 RFC 4601 §3.2 Phase Two: Register-Stop 与 §4.4.2 RP 处理 Register。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "6f069e6805d280bddf480e34ee2fe3652b713298c51776fbbad2c1d1c348176a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-2-005",
+    "type": "single_choice",
+    "question": "最后一跳路由器向 RP 逐跳发送 (*,G) Join。若路径上的中间路由器 R3 没有启用 PIM，最直接的后果是？",
+    "options": {
+      "A": "R3 会把 Join 当作组播数据转发给所有接口",
+      "B": "Join 在 R3 处无法被处理，共享树分支在该处中断，RP 收不到该 Join，接收者收不到流量",
+      "C": "PIM 会自动改走 SPT，因此没有任何影响",
+      "D": "R3 会自动成为新的 RP 并继续转发"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "(*,G) Join 需要沿途每台路由器建立 (*,G) 状态并继续向上游转发；R3 未启用 PIM 时既不会处理该报文，也不会向上游转发，共享树在 R3 处中断，B 正确。A 中 Join 是控制报文，不会被当作数据泛洪；C 中 SPT 也需要沿途 PIM 状态，不能绕过该问题；D 中 RP 由配置或发现机制确定，不会因收到 Join 自动产生。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-SM",
+    "difficulty": "hard",
+    "tags": [
+      "PIM-SM",
+      "Join",
+      "故障定位"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-2-005",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4601-pim-sm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-SM 考点；技术依据 RFC 4601 §3.1 (*,G) Join 逐跳建立共享树与 §4.5 Join/Prune 处理。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "716229eda8b9bd02c5643a6b2ee6ba479d7490e3b77d6aa7c6ba21d7ab4c7a33"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-2-006",
+    "type": "single_choice",
+    "question": "关于 PIM-SM 中共享树（RPT）与最短路径树（SPT）的比较，下列描述正确的是？",
+    "options": {
+      "A": "RPT 以源为根，SPT 以 RP 为根",
+      "B": "RPT 使用 (S,G) 表项，SPT 使用 (*,G) 表项",
+      "C": "两者都以 RP 为根，区别只是表项中的源地址是否为空",
+      "D": "RPT 以 RP 为根并使用 (*,G) 表项；SPT 以源为根并使用 (S,G) 表项，路径通常更短"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "RPT 是以 RP 为根、由 (*,G) 状态构成的共享树；SPT 是以源为根、由 (S,G) 状态构成的源特定树，通常路径更短，D 正确。A 把两者的根对调；B 把两种表项对调；C 中 SPT 的根是源而不是 RP。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-SM",
+    "difficulty": "easy",
+    "tags": [
+      "PIM-SM",
+      "共享树",
+      "最短路径树"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-2-006",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4601-pim-sm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-SM 考点；技术依据 RFC 4601 §3.1、§3.3 中 RPT 与 SPT 的根及表项区别。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "bd7deda360f3e4e4ad799464fb30c8c5e613e5393a80b176db0f0e0274459037"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-2-007",
+    "type": "single_choice",
+    "question": "在一个共享以太网段上有多台 PIM-SM 路由器，其中一台被选为 DR。关于该 DR 的职责，下列描述正确的是？",
+    "options": {
+      "A": "作为该网段在 PIM-SM 中的代表：源侧由它向 RP 发送 Register，接收者侧由它向 RP 发送 (*,G) Join",
+      "B": "由它负责向该网段内所有主机分配组播地址",
+      "C": "由它替代 RP，成为共享树的根",
+      "D": "由它决定该网段内所有组播组的 SPT 切换阈值"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "DR 代表共享网段上的主机和源参与 PIM-SM：有源时由 DR 封装 Register 发往 RP，有接收者时由 DR 向 RP 发送 (*,G) Join，A 正确。B 中组播地址分配与 DR 无关；C 中 DR 不是共享树的根，RP 才是；D 中 SPT 切换策略由各路由器按实现策略决定，不是 DR 统一规定。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-SM",
+    "difficulty": "medium",
+    "tags": [
+      "PIM-SM",
+      "DR",
+      "网段代表"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-2-007",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4601-pim-sm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-SM 考点；技术依据 RFC 4601 §2.1 DR 定义、§3.1 与 §4.4.1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "b2490cbc1ba9e22b44a36034f185291eb0c3c6cc428b153f8a328dba29b8e3aa"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-2-008",
+    "type": "single_choice",
+    "question": "在华为设备上执行 display pim routing-table，输出中同时存在 (*, 239.1.1.1) 和 (10.1.1.1, 239.1.1.1) 两个表项。下列解读正确的是？",
+    "options": {
+      "A": "(*, 239.1.1.1) 表示源为 10.1.1.1 的最短路径树，(10.1.1.1, 239.1.1.1) 表示共享树",
+      "B": "两个表项分别属于两个不同的组播组",
+      "C": "(*, 239.1.1.1) 是共享树表项，(10.1.1.1, 239.1.1.1) 是到源 10.1.1.1 的最短路径树表项，说明该组已发生或正在发生 SPT 切换",
+      "D": "出现两个表项说明配置错误，同一组只能有一个表项"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "显示格式中 (*,G) 表示共享树表项，(S,G) 表示源特定表项；两者同时存在通常说明该组在共享树之外又建立了到源的 SPT，C 正确。A 把两种表项的含义对调；B 中两个表项的组地址都是 239.1.1.1，属于同一组；D 中 PIM-SM 允许 (*,G) 与 (S,G) 同时存在，这是正常状态而非配置错误。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-SM",
+    "difficulty": "hard",
+    "tags": [
+      "PIM-SM",
+      "验证输出",
+      "SPT"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-2-008",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4601-pim-sm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-SM 考点；技术依据 RFC 4601 §4.1.3 (*,G) 状态、§4.1.4 (S,G) 状态与 §4.2 转发规则。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "b73d65c3332c46c3153e960587917a94f34f7805d5dc878359c938bc05367000"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-2-009",
+    "type": "single_choice",
+    "question": "最后一跳路由器完成 SPT 切换、开始从 (S,G) 最短路径树收到流量后，为避免继续从共享树收到同一源的重复流量，它会做什么？",
+    "options": {
+      "A": "向 RP 方向发送 (S,G,rpt) Prune，抑制共享树上来自该源的流量",
+      "B": "向源发送 Register-Stop，要求源停止发送",
+      "C": "删除 (*,G) 表项，不再维护共享树",
+      "D": "向 RP 发送 Assert，强制 RP 停止转发"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "SPT 切换后，最后一跳路由器从最短路径树收到流量，同时会向 RP 方向发送 (S,G,rpt) Prune，抑制共享树上来自该源的重复流量，A 正确。B 中 Register-Stop 由 RP 发给源侧 DR，方向和作用都不对；C 中 (*,G) 状态可能仍被其他源或接收者需要，不能直接删除；D 中 Assert 用于共享网段选唯一转发者，不是用来抑制 RP 的共享树流量。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-SM",
+    "difficulty": "hard",
+    "tags": [
+      "PIM-SM",
+      "SPT 切换",
+      "Prune"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-2-009",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4601-pim-sm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-SM 考点；技术依据 RFC 4601 §3.3 中 SPT 切换后向 RP 发送 (S,G,rpt) Prune 的说明。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "478960d6157fef878982a55e4ff9c5203d8bf88064f7090ec0958e12cfddf3d1"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-2-010",
+    "type": "single_choice",
+    "question": "PIM-SM 路由器之间通过 Hello 报文建立并维护 PIM 邻居关系。关于 Hello 报文的作用，下列描述正确的是？",
+    "options": {
+      "A": "只用于交换组播路由表，不参与邻居保持",
+      "B": "只用于选举 RP，与 DR 选举无关",
+      "C": "用于携带 Register 封装的组播数据",
+      "D": "用于发现和维护 PIM 邻居、携带 Holdtime 等参数，并参与 DR 选举"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Hello 周期发送，用于发现邻居、通过 Holdtime 维持邻居存活，并携带 DR Priority 等选项参与 DR 选举，D 正确。A 中 Hello 不承载组播路由表；B 中 RP 由静态配置或 RP 发现机制确定，Hello 主要用于邻居与 DR；C 中组播数据由 Register 承载，不是 Hello。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-SM",
+    "difficulty": "medium",
+    "tags": [
+      "PIM-SM",
+      "Hello",
+      "DR 选举"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-2-010",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4601-pim-sm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-SM 考点；技术依据 RFC 4601 §4.3 DR 与 Hello、§4.3.1 Hello 报文选项。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "7224ede085c5a5060934a33b2a1ebfe936211459ec8dbc346cc52a797bd144fc"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-2-011",
+    "type": "single_choice",
+    "question": "按 RFC 4601，PIM Hello 报文的 Holdtime 取 Hello 周期的 3.5 倍。若某接口的 Hello 周期配置为 30 秒且未单独配置 Holdtime，邻居在多久收不到 Hello 后会被判定失效？",
+    "options": {
+      "A": "30 秒",
+      "B": "105 秒",
+      "C": "90 秒",
+      "D": "120 秒"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "复算过程：Holdtime = Hello 周期 × 3.5 = 30 × 3.5 = 105 秒，因此邻居在 105 秒内收不到新的 Hello 才超时，B 正确。A 等于 Hello 周期本身，没有乘倍数；C 的 90 秒相当于 3 倍；D 的 120 秒相当于 4 倍，都不符合 3.5 倍的规则。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-SM",
+    "difficulty": "medium",
+    "tags": [
+      "PIM-SM",
+      "Hello",
+      "Holdtime",
+      "计算"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-2-011",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4601-pim-sm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-SM 考点；技术依据 RFC 4601 §4.3.1 Hello 周期与 §4.11 定时器取值（Holdtime 为 Hello 周期的 3.5 倍）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "998a0f8fd303f36a11084d80f12d91511e0968de4b685733bdd0d4831c307e93"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-2-012",
+    "type": "single_choice",
+    "question": "某 PIM-SM 网络中，接收者所在网段已通过 IGMP 加入组 G，最后一跳路由器的 (*,G) 表项也存在，但接收者收不到流量。检查发现源侧 DR 上有 (S,G) 表项，而 RP 上没有任何该组的表项。最可能的原因是？",
+    "options": {
+      "A": "最后一跳路由器没有配置静态 RP",
+      "B": "接收者的 IGMP 版本过低，无法触发 (*,G) Join",
+      "C": "源侧 DR 发出的 Register 没有到达 RP，RP 无法获知源并建立到源的路径",
+      "D": "RP 的 SPT 切换阈值被设置为 0，导致流量被丢弃"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "RP 上没有该组表项，说明它既没有收到 (*,G) Join 也没有收到 Register；结合最后一跳已有 (*,G)、源侧已有 (S,G)，问题最可能出在 Register 未到达 RP，C 正确。A 中最后一跳已能发出 (*,G)（否则不会有表项），说明它知道 RP；B 中 (*,G) 表项已存在，说明 IGMP 已触发加入；D 中阈值影响的是最后一跳是否切换 SPT，不会让 RP 完全没有表项。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-SM",
+    "difficulty": "hard",
+    "tags": [
+      "PIM-SM",
+      "Register",
+      "故障定位"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-2-012",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4601-pim-sm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-SM 考点；技术依据 RFC 4601 §4.1.4 (S,G) 状态与 §4.4.2 RP 对 Register 的处理。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "bc6dd948fbc4343315b0591438c8ad52b80f7b7e4d7198a688049940505f1f7e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-2-013",
+    "type": "single_choice",
+    "question": "下列哪种报文不是 PIM-SM 用来建立和维护组播分发树的 PIM 协议报文？",
+    "options": {
+      "A": "Join/Prune",
+      "B": "Register 与 Register-Stop",
+      "C": "Assert",
+      "D": "IGMP Membership Report"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "IGMP Membership Report 是主机向本地路由器报告组成员关系的报文，不属于 PIM 协议，因此 D 为本题答案。A 的 Join/Prune 用于建立和剪枝分发树；B 的 Register/Register-Stop 用于源侧注册；C 的 Assert 用于共享网段选出唯一转发者，三者都是 PIM-SM 的协议报文。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-SM",
+    "difficulty": "easy",
+    "tags": [
+      "PIM-SM",
+      "报文类型",
+      "IGMP"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-2-013",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4601-pim-sm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-SM 考点；技术依据 RFC 4601 §4.9.2 Hello/Register/Register-Stop/Join-Prune/Assert 的报文类型定义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "fa44d2a3e63782b3d348a8053c625d3af83031e9038c56554293531774833f40"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-2-014",
+    "type": "single_choice",
+    "question": "PIM-SM 路由器对收到的组播数据执行 RPF 检查。在共享树转发阶段、尚未切换到 SPT 时，最后一跳路由器收到来自 RP 方向的报文，其 RPF 检查依据是什么？",
+    "options": {
+      "A": "到源的组播路由：入接口必须是到源的 RPF 接口，与 RP 无关",
+      "B": "到 RP 的单播路由：报文的入接口必须与到 RP 的单播路由出接口一致",
+      "C": "报文的源 MAC 地址是否与入接口的 MAC 地址一致",
+      "D": "报文的 TTL 是否大于 1"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "共享树阶段 (S,G) 的 SPTbit 尚未置位，报文按 RPF_interface(RP) 检查，即入接口要与到 RP 的单播路由一致，B 正确。A 描述的是切换到 SPT 之后的检查；C 中 RPF 检查针对 IP 层源地址与路由，不看源 MAC；D 中 TTL 只限制转发跳数，不是 RPF 依据。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-SM",
+    "difficulty": "medium",
+    "tags": [
+      "PIM-SM",
+      "RPF",
+      "共享树"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-2-014",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4601-pim-sm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-SM 考点；技术依据 RFC 4601 §4.2 数据转发规则与 §4.2.1 最后一跳切换前的 RPF_interface(RP) 检查。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "2c1b56b0fa981ad574af7dbebea48c3aac480b251477a787e9e0390d8e914440"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-2-015",
+    "type": "single_choice",
+    "question": "某企业有 200 个组播源，但任一时刻只有少量分支接收组播流量，源和接收者分布在广域网上。为减少无关链路上的流量，最合适的方案是？",
+    "options": {
+      "A": "PIM-DM，让所有源定期泛洪以发现接收者",
+      "B": "只使用 IGMP Proxy，不运行 PIM",
+      "C": "PIM-SM，使用 RP 建立共享树，仅在有接收者加入时才把流量引到相应分支",
+      "D": "PIM-DM，并把所有接口配置为静态组播路由"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "成员稀疏、源多且分布广时，PIM-SM 的显式加入可以避免把流量推到没有接收者的分支，C 正确。A 中 PIM-DM 的泛洪会把大量无关流量推到广域网；B 中 IGMP Proxy 只代理成员关系，不能跨网段建立组播分发树；D 中静态组播路由无法适应动态成员，也不能解决泛洪问题。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-SM",
+    "difficulty": "medium",
+    "tags": [
+      "PIM-SM",
+      "场景选型",
+      "稀疏模式"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-2-015",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4601-pim-sm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-SM 考点；技术依据 RFC 4601 §3 概述与 §3.7 RP Discovery。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "d1526c7a8e2d4b82aa19f9753d4933d3c3168aeb7aef8dd6a96b7c62a94e00bb"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-2-016",
+    "type": "single_choice",
+    "question": "PIM-SM 的 ASM 模型允许接收者只知道组地址；SSM 模型要求接收者指定源。下列关于两者差异的描述正确的是？",
+    "options": {
+      "A": "ASM 不需要 RP，SSM 必须使用 RP",
+      "B": "ASM 通过 RP 和共享树为任意源提供组播，SSM 由 DR 代表接收者直接向指定源发送 (S,G) Join，不需要 RP",
+      "C": "SSM 只能使用 IGMPv2 加入组",
+      "D": "ASM 与 SSM 的区别只在于组播报文的 TTL 范围"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "ASM 依赖 RP 与共享树，接收者无需知道源；SSM 由接收者用 IGMPv3 指定源，DR 直接向源发送 (S,G) Join，不使用 RP，B 正确。A 把两者对调；C 中 SSM 依赖 IGMPv3 的源过滤能力，IGMPv2 不支持；D 中两者的区别在于服务模型与加入方式，不是 TTL。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-SM",
+    "difficulty": "medium",
+    "tags": [
+      "PIM-SM",
+      "ASM",
+      "SSM"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-2-016",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4601-pim-sm",
+        "rfc3376-igmpv3"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-SM 考点；技术依据 RFC 4601 §3.4 源特定加入、§4.8 SSM 与 RFC 3376 §1、§4.1 的 INCLUDE 源过滤。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "9e2467011cd7c30b1ef7f0399b9b840582e56aa9d03d6536aef9146e039dae9e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-2-017",
+    "type": "single_choice",
+    "question": "在 PIM-SM 中，如果最后一跳路由器不知道某组对应的 RP 地址，会发生什么？",
+    "options": {
+      "A": "无法向 RP 发送 (*,G) Join，接收者即使发送 IGMP 报告也收不到该组流量",
+      "B": "会自动把该组切换到 SSM 模型并直接向源加入",
+      "C": "会向源发送 Register，请求源把流量单播给自己",
+      "D": "会选举自己为 RP 并继续转发"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "ASM 模型中 (*,G) Join 必须朝 RP 方向发送，不知道 RP 就无法建立共享树，接收者收不到流量，A 正确。B 中 ASM 组不会因缺少 RP 自动变成 SSM；C 中 Register 由源侧 DR 发往 RP，最后一跳不发送 Register；D 中 RP 由配置或发现机制确定，不会自动选举产生。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-SM",
+    "difficulty": "medium",
+    "tags": [
+      "PIM-SM",
+      "RP 发现",
+      "共享树"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-2-017",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4601-pim-sm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-SM 考点；技术依据 RFC 4601 §3.7 RP Discovery 与 §3.1 (*,G) Join 朝 RP 发送。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "3fcfbd33336384980c5ae6a7819d0768aeb818b8b2cb93b05600d6072413389a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-2-018",
+    "type": "single_choice",
+    "question": "一台主机加入组 G，源随后开始发送。在未触发 SPT 切换的情况下，PIM-SM 的控制过程顺序是？",
+    "options": {
+      "A": "源 DR 发 Register，最后一跳发 (*,G) Join，RP 回 Register-Stop，流量沿 SPT 到达接收者",
+      "B": "最后一跳发 (S,G) Join，RP 发 Register，源 DR 回 Register-Stop，流量沿 RPT 到达接收者",
+      "C": "源 DR 发 Join，RP 发 Register-Stop，最后一跳发 Register，流量沿 SPT 到达接收者",
+      "D": "最后一跳向 RP 逐跳发 (*,G) Join 建立 RPT，源 DR 把数据封装在 Register 中单播给 RP，RP 解封装后沿 RPT 转发，并在建立到源的路径后回 Register-Stop"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "标准过程是接收者侧先建立 (*,G) 共享树，源侧 DR 再把数据注册到 RP，RP 解封装后沿共享树转发，并在能收到原生数据后回 Register-Stop，D 正确。A 把注册与 Join 的先后和最终树型说错；B 中 (S,G) Join 是 SPT 阶段的行为，且 Register 由源 DR 发往 RP；C 中源 DR 不会发送 Join，Register 也不是最后一跳发送的。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-SM",
+    "difficulty": "medium",
+    "tags": [
+      "PIM-SM",
+      "流程顺序",
+      "Register"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-2-018",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4601-pim-sm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“组播”章 PIM-SM 考点；技术依据 RFC 4601 §3.1–§3.3 的 RP Tree、Register-Stop 与 SPT 三阶段流程。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "b4444f77537dba0bdaaad97fb8526561791f9f493dbe3653b3d830cff469c959"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-8-1-1-001",
+    "type": "single_choice",
+    "question": "下列 IPv6 前缀中，目前被分配为全球单播地址（Global Unicast）格式前缀的是？",
+    "options": {
+      "A": "FE80::/10",
+      "B": "2000::/3",
+      "C": "FC00::/7",
+      "D": "FF00::/8"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RFC 4291 规定全球单播地址从 2000::/3 前缀中分配，B 正确。A 的 FE80::/10 是链路本地单播地址；C 的 FC00::/7 是唯一本地地址，不在全球单播前缀内；D 的 FF00::/8 是组播地址。",
+    "chapter": "IPv6 核心知识",
+    "knowledgeSection": "IPv6 基础",
+    "knowledgePoint": "IPv6 地址与报文",
+    "difficulty": "easy",
+    "tags": [
+      "IPv6",
+      "地址类型",
+      "全球单播"
+    ],
+    "provenance": {
+      "questionId": "hcip821-8-1-1-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“IPv6”章 IPv6 地址考点；技术依据 RFC 4291 §2.4 全球单播地址的格式前缀。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "fb7ce2c2bd228881a9c354a4da50adb8be7d35711845118473239e39b0611186"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-8-1-1-002",
+    "type": "single_choice",
+    "question": "下列 IPv6 地址写法中，符合 RFC 4291 文本表示规则的是？",
+    "options": {
+      "A": "2001:DB8::1::2",
+      "B": "2001:DB8:0:0:0:0:0:0:1",
+      "C": "2001:DB8::1",
+      "D": "2001:DB8::12345"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 用 :: 压缩了一段连续的零组，写法合法。A 中 :: 出现两次，而一个地址中最多只能出现一次；B 展开后有 9 个 16 位组，超过 128 位；D 中单个 16 位组最多 4 位十六进制数，12345 已超长。",
+    "chapter": "IPv6 核心知识",
+    "knowledgeSection": "IPv6 基础",
+    "knowledgePoint": "IPv6 地址与报文",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "地址表示",
+      ":: 压缩"
+    ],
+    "provenance": {
+      "questionId": "hcip821-8-1-1-002",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“IPv6”章 IPv6 地址考点；技术依据 RFC 4291 §2.2 地址文本表示与 :: 压缩规则。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "8085d785f84b43e7ce894d88a865daa7a56554c299bda962dade28cb04dec3c0"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-8-1-1-003",
+    "type": "single_choice",
+    "question": "IPv6 地址长度为 128 位。某运营商按 /64 为每个用户分配一个子网前缀，则该子网内接口标识的长度为多少位？",
+    "options": {
+      "A": "64 位",
+      "B": "48 位",
+      "C": "32 位",
+      "D": "128 位"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "复算过程：接口标识长度 = 地址总长 - 子网前缀长度 = 128 - 64 = 64 位，A 正确。B 的 48 位是 MAC 地址长度，不是 IPv6 接口标识长度；C 的 32 位是 IPv4 地址长度；D 的 128 位是整条 IPv6 地址的长度，不是接口标识部分。",
+    "chapter": "IPv6 核心知识",
+    "knowledgeSection": "IPv6 基础",
+    "knowledgePoint": "IPv6 地址与报文",
+    "difficulty": "easy",
+    "tags": [
+      "IPv6",
+      "接口标识",
+      "计算"
+    ],
+    "provenance": {
+      "questionId": "hcip821-8-1-1-003",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“IPv6”章 IPv6 地址考点；技术依据 RFC 4291 §2.5.1 接口标识长度与 §2.5.4 子网前缀。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "7660ab50a8bee97718db772a4bf58731ea26b41dfa187fc370d404a69aad90ec"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-8-1-1-004",
+    "type": "single_choice",
+    "question": "主机 MAC 地址为 00:1A:2B:3C:4D:5E，采用 EUI-64 规则生成 IPv6 接口标识。正确的结果是？",
+    "options": {
+      "A": "001A:2BFF:FE3C:4D5E",
+      "B": "021A:2BFF:FE3C:4D5F",
+      "C": "001A:2B3C:4D5E:FFFE",
+      "D": "021A:2BFF:FE3C:4D5E"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "复算过程：先在 OUI（00:1A:2B）与 NIC（3C:4D:5E）之间插入 FF:FE，得到 00:1A:2B:FF:FE:3C:4D:5E；再把第一个字节中的 U/L 位（0x02）翻转，00 变为 02，得到 02:1A:2B:FF:FE:3C:4D:5E，即 021A:2BFF:FE3C:4D5E，D 正确。A 没有翻转 U/L 位；B 把最后一个字节由 5E 改成了 5F；C 把 FFFE 插到了错误位置。",
+    "chapter": "IPv6 核心知识",
+    "knowledgeSection": "IPv6 基础",
+    "knowledgePoint": "IPv6 地址与报文",
+    "difficulty": "hard",
+    "tags": [
+      "IPv6",
+      "EUI-64",
+      "接口标识",
+      "计算"
+    ],
+    "provenance": {
+      "questionId": "hcip821-8-1-1-004",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“IPv6”章 IPv6 地址考点；技术依据 RFC 4291 §2.5.1 与附录 A 的 EUI-64 接口标识生成规则。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "8e9f7bc9f0bb55d4616fad982d8aca451a9385920f985eaf16548d0fd259ae73"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-8-1-1-005",
+    "type": "single_choice",
+    "question": "IPv6 地址 ::FFFF:192.168.1.1 属于下列哪一类地址？",
+    "options": {
+      "A": "链路本地单播地址",
+      "B": "唯一本地地址",
+      "C": "IPv4 映射的 IPv6 地址，低 32 位承载 IPv4 地址",
+      "D": "组播地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "::FFFF:0:0/96 是 IPv4 映射地址格式，最后 32 位写入 IPv4 地址，用于以 IPv6 形式表示 IPv4 节点，C 正确。A 的链路本地地址以 FE80::/10 开头；B 的唯一本地地址位于 FC00::/7；D 的组播地址以 FF00::/8 开头，均与本例不符。",
+    "chapter": "IPv6 核心知识",
+    "knowledgeSection": "IPv6 基础",
+    "knowledgePoint": "IPv6 地址与报文",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "IPv4 映射地址",
+      "地址类型"
+    ],
+    "provenance": {
+      "questionId": "hcip821-8-1-1-005",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“IPv6”章 IPv6 地址考点；技术依据 RFC 4291 §2.5.5.1 IPv4 映射的 IPv6 地址格式。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "3984937f9e5ea4ec6cf133ea1a90682a0b5db0aa5978cd934a818843353e7713"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-8-1-1-006",
+    "type": "single_choice",
+    "question": "IPv6 中的子网路由器任播地址（Subnet-Router anycast address）由子网前缀和什么组成？",
+    "options": {
+      "A": "全 1 的接口标识",
+      "B": "全 0 的接口标识",
+      "C": "由 EUI-64 规则生成的接口标识",
+      "D": "子网内第一台主机的接口标识"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RFC 4291 规定子网路由器任播地址由 n 位子网前缀加 128-n 位全 0 的接口标识组成，发往该地址的报文会送给该子网上的任意一台路由器，B 正确。A 的全 1 接口标识并不构成该任播地址；C 的 EUI-64 用于生成单播接口标识；D 中任播地址不绑定某一台特定主机。",
+    "chapter": "IPv6 核心知识",
+    "knowledgeSection": "IPv6 基础",
+    "knowledgePoint": "IPv6 地址与报文",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "任播",
+      "地址结构"
+    ],
+    "provenance": {
+      "questionId": "hcip821-8-1-1-006",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“IPv6”章 IPv6 地址考点；技术依据 RFC 4291 §2.6.1 子网路由器任播地址的全 0 接口标识。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "2ad317f2315899f563bd9e053e9c94eb6c06c2689cba030092e92c1479c4fed5"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-8-1-1-007",
+    "type": "single_choice",
+    "question": "IPv6 组播地址 FF02::2 表示什么？",
+    "options": {
+      "A": "链路上所有路由器",
+      "B": "链路上所有节点",
+      "C": "站点内所有路由器",
+      "D": "所有 PIM 路由器"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "FF02::2 是链路范围（FF02）内的所有路由器组播地址，A 正确。B 的链路上所有节点是 FF02::1；C 的站点内所有路由器是 FF05::2；D 的所有 PIM 路由器是 FF02::D。",
+    "chapter": "IPv6 核心知识",
+    "knowledgeSection": "IPv6 基础",
+    "knowledgePoint": "IPv6 地址与报文",
+    "difficulty": "easy",
+    "tags": [
+      "IPv6",
+      "组播地址",
+      "FF02"
+    ],
+    "provenance": {
+      "questionId": "hcip821-8-1-1-007",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“IPv6”章 IPv6 地址考点；技术依据 RFC 4291 §2.7.1 预定义组播地址 FF02::2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "6e2d1b7824fb251c16d29eb57f8ee7b6aba821d6d099d08a2528b8e75c3c6373"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-8-1-1-008",
+    "type": "single_choice",
+    "question": "关于 IPv6 组播地址的使用限制，下列描述正确的是？",
+    "options": {
+      "A": "组播地址既可作为源地址，也可作为目的地址",
+      "B": "组播地址只能作为源地址，不能作为目的地址",
+      "C": "组播地址不能作为报文的源地址，也不能出现在路由首部中",
+      "D": "组播地址只能出现在 ICMPv6 报文中"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "RFC 4291 明确规定组播地址不得作为 IPv6 报文的源地址，也不得出现在路由首部中，C 正确。A 与 B 都与该规定冲突：组播地址只能作为目的地址；D 中组播地址可用于多种上层协议和路由协议报文，不限于 ICMPv6。",
+    "chapter": "IPv6 核心知识",
+    "knowledgeSection": "IPv6 基础",
+    "knowledgePoint": "IPv6 地址与报文",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "组播地址",
+      "使用限制"
+    ],
+    "provenance": {
+      "questionId": "hcip821-8-1-1-008",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“IPv6”章 IPv6 地址考点；技术依据 RFC 4291 §2.6 组播地址不得作为源地址或出现在路由首部。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "258fce34170a832eafdf274087517946a3476545360da98854c075fef57c6dc0"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-8-1-1-009",
+    "type": "single_choice",
+    "question": "关于 IPv6 地址与接口的关系，下列描述正确的是？",
+    "options": {
+      "A": "一个接口只能配置一个 IPv6 地址",
+      "B": "一个接口只能配置一个全球单播地址，但可以配置多个链路本地地址",
+      "C": "只有路由器接口才能配置多个 IPv6 地址，主机接口只能有一个",
+      "D": "一个接口可以配置多个任意类型（单播、任播、组播）的 IPv6 地址，也可以不配置任何地址"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "RFC 4291 指出 IPv6 地址分配给接口，一个接口可以拥有多个任意类型的 IPv6 地址，也可以没有地址，D 正确。A 与 B 都错误地限制了地址数量或类型；C 中主机接口同样可以配置多个 IPv6 地址，例如链路本地地址加多个全球单播地址。",
+    "chapter": "IPv6 核心知识",
+    "knowledgeSection": "IPv6 基础",
+    "knowledgePoint": "IPv6 地址与报文",
+    "difficulty": "easy",
+    "tags": [
+      "IPv6",
+      "接口地址",
+      "地址分配"
+    ],
+    "provenance": {
+      "questionId": "hcip821-8-1-1-009",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“IPv6”章 IPv6 地址考点；技术依据 RFC 4291 §2.1 地址与接口的关系（一个接口可有多个任意类型地址）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "ddd164d6be358c97d2ff954f26e7e97860c19c28858ff64c2e245b8ec561cd5e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-8-2-1-001",
+    "type": "single_choice",
+    "question": "RFC 4861 定义的 IPv6 邻居发现（ND）协议提供多项功能。下列哪一项不属于 ND 的功能？",
+    "options": {
+      "A": "地址解析",
+      "B": "由服务器集中分配 IPv6 地址并管理租期",
+      "C": "重复地址检测",
+      "D": "重定向"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "由服务器集中分配地址并管理租期是 DHCPv6 的职责，不属于 ND，因此 B 为本题答案。A 的地址解析由 NS/NA 完成；C 的重复地址检测用 NS 探测地址是否已被占用；D 的重定向由路由器通知主机更优的下一跳，三者都是 ND 的功能。",
+    "chapter": "IPv6 核心知识",
+    "knowledgeSection": "ICMPv6 与 NDP",
+    "knowledgePoint": "邻居发现",
+    "difficulty": "easy",
+    "tags": [
+      "IPv6",
+      "ND",
+      "功能范围"
+    ],
+    "provenance": {
+      "questionId": "hcip821-8-2-1-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4861-ndp"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“IPv6”章 NDP 考点；技术依据 RFC 4861 §3 与 §4 的 ND 功能与报文类型。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "656ff53b5f323e4655adabc91c93b4651e1e4e2e29a4bb466ba2058b48f005c9"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-8-2-1-002",
+    "type": "single_choice",
+    "question": "目的地址为 2001:DB8::1 的节点，其对应的被请求节点组播地址（Solicited-Node Multicast Address）是？",
+    "options": {
+      "A": "FF02::1:FF00:1",
+      "B": "FF02::1:FF00:0",
+      "C": "FF02::1:FFFF:1",
+      "D": "FF02::2:FF00:1"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "复算过程：被请求节点组播地址取 FF02::1:FF00:0/104 前缀，再拼接目的地址的低 24 位；2001:DB8::1 的低 24 位是 00:00:01，因此结果为 FF02::1:FF00:0001，即 FF02::1:FF00:1，A 正确。B 的低 24 位全为 0，对应的是 ::0 这类地址；C 误把第 7 组写成 FFFF，改变了固定前缀；D 把固定前缀 FF02::1 写成了 FF02::2。",
+    "chapter": "IPv6 核心知识",
+    "knowledgeSection": "ICMPv6 与 NDP",
+    "knowledgePoint": "邻居发现",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "ND",
+      "被请求节点组播",
+      "计算"
+    ],
+    "provenance": {
+      "questionId": "hcip821-8-2-1-002",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4861-ndp",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“IPv6”章 NDP 考点；技术依据 RFC 4861 §4.3.1 被请求节点组播地址与 RFC 4291 §2.7.1 的 FF02::1:FF00:0/104 前缀。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "0f35f63e9b283397776ed9fa2ccab61ebc13e3c664be918d150379a2062a5b06"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-8-2-1-003",
+    "type": "single_choice",
+    "question": "一台主机用无状态方式为自己生成的全球单播地址做重复地址检测（DAD）。它会发送什么报文，收到什么后判定地址冲突？",
+    "options": {
+      "A": "发送 NA，源地址为 ::；收到 NS 后判定冲突",
+      "B": "发送 RS，源地址为 FE80::1；收到 RA 后判定冲突",
+      "C": "发送 NS，源地址为未指定地址 ::；若收到针对该地址的 NA，则判定地址已被占用",
+      "D": "发送 Echo Request；若收到 Echo Reply 则判定地址已被占用"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "DAD 的做法是把待检测地址作为 NS 的目的地址、以未指定地址 :: 为源地址发出；若收到针对该地址的 NA，说明已有节点使用该地址，C 正确。A 中 NA 是应答报文，且源地址不是 ::；B 中 RS/RA 用于路由器发现，不用于地址冲突检测；D 中 Echo 属于 ICMPv6 回显测试，不是 DAD 的机制。",
+    "chapter": "IPv6 核心知识",
+    "knowledgeSection": "ICMPv6 与 NDP",
+    "knowledgePoint": "邻居发现",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "DAD",
+      "NS/NA"
+    ],
+    "provenance": {
+      "questionId": "hcip821-8-2-1-003",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4861-ndp",
+        "rfc4862-slaac"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“IPv6”章 NDP 考点；技术依据 RFC 4861 §4.3、§4.4 的 NS/NA 与 RFC 4862 §5.4 重复地址检测。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "5d2d80496431834bace78d6c651c18a40ebb1fe953820e1c484ebeacd0a631f4"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-8-2-1-004",
+    "type": "single_choice",
+    "question": "华为设备作为 IPv6 路由器向链路发送 RA，其中 M 标志置 1、O 标志置 0。主机收到后应如何理解？",
+    "options": {
+      "A": "主机只能用 SLAAC 生成地址，且不能使用 DHCPv6 获取任何参数",
+      "B": "主机应通过 DHCPv6 获取地址，其他配置参数不通过 DHCPv6 获取",
+      "C": "M 标志表示启用组播，O 标志表示启用按需路由",
+      "D": "两个标志只影响路由器之间的路由计算，与主机配置无关"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RA 的 M 位表示“受管地址配置”，置 1 时主机应通过 DHCPv6 等受管方式获取地址；O 位表示“其他配置”，置 0 表示其他参数不通过 DHCPv6 获取，B 正确。A 与 M=1 的含义相反；C 把 M/O 误解为组播和按需路由开关；D 中这两个标志正是给主机看的配置指示。",
+    "chapter": "IPv6 核心知识",
+    "knowledgeSection": "ICMPv6 与 NDP",
+    "knowledgePoint": "邻居发现",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "RA",
+      "M/O 标志"
+    ],
+    "provenance": {
+      "questionId": "hcip821-8-2-1-004",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4861-ndp"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“IPv6”章 NDP 考点；技术依据 RFC 4861 §4.2 RA 报文格式中的 M（Managed）与 O（Other）标志。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "09841d41282b145afada25f6b3e4efb4e8f5dcb4c8fd50a3f688bdb2f7abc520"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-8-2-1-005",
+    "type": "single_choice",
+    "question": "主机启动后希望尽快获得 IPv6 前缀和默认网关，而不必等待路由器周期性发送 RA。它可以采取什么动作？",
+    "options": {
+      "A": "主动发送 NS 查询默认网关的链路层地址",
+      "B": "主动发送 DHCPv6 Solicit，由 DHCPv6 服务器下发前缀",
+      "C": "发送 Redirect 报文请求路由器响应",
+      "D": "向 FF02::2 发送 RS，链路上的路由器收到后立即回送 RA"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "RS 由主机发往所有路由器组播地址 FF02::2，路由器收到后立即回送 RA，主机无需等待周期性的 RA，D 正确。A 中 NS 用于地址解析，且此时主机通常还不知道网关地址；B 中 DHCPv6 分配的是地址和参数，前缀通告由 RA 完成；C 中 Redirect 由路由器发往主机，主机不会发送 Redirect。",
+    "chapter": "IPv6 核心知识",
+    "knowledgeSection": "ICMPv6 与 NDP",
+    "knowledgePoint": "邻居发现",
+    "difficulty": "easy",
+    "tags": [
+      "IPv6",
+      "RS/RA",
+      "路由器发现"
+    ],
+    "provenance": {
+      "questionId": "hcip821-8-2-1-005",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4861-ndp"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“IPv6”章 NDP 考点；技术依据 RFC 4861 §4.1 Router Solicitation 与 §6.3.7 主机发送 RS。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "32266245257139cc76ad6131980711179a2fc69e3b56fcfc0c12c91c0bf717eb"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-8-2-1-006",
+    "type": "single_choice",
+    "question": "IPv6 节点的邻居缓存表项在一段时间无流量后进入 STALE 状态。当它再次向该邻居发送报文时，如何确认邻居仍然可达？",
+    "options": {
+      "A": "发送 NS 进行探测，收到 NA 则确认可达，否则重试直至删除表项",
+      "B": "发送 ARP 请求确认",
+      "C": "等待邻居主动发送 RA",
+      "D": "立即删除表项并重新解析，不发送任何探测报文"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "邻居不可达检测通过发送 NS 并等待 NA 来确认可达性，探测失败会重试，最终删除表项，A 正确。B 中 IPv6 不使用 ARP，地址解析由 NS/NA 完成；C 中 RA 用于路由器发现，不用于确认某个邻居的可达性；D 中未经探测就删除表项会中断正常通信。",
+    "chapter": "IPv6 核心知识",
+    "knowledgeSection": "ICMPv6 与 NDP",
+    "knowledgePoint": "邻居发现",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "NUD",
+      "邻居缓存"
+    ],
+    "provenance": {
+      "questionId": "hcip821-8-2-1-006",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4861-ndp"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“IPv6”章 NDP 考点；技术依据 RFC 4861 §7.3.1 邻居不可达检测的 NS/NA 探测。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "235688d296b460580dc521a3360f19527a82cbdc5874e505085c2d33f22bc68d"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-8-2-1-007",
+    "type": "single_choice",
+    "question": "IPv6 路由器向主机发送 Redirect 报文，其含义是？",
+    "options": {
+      "A": "通知主机该地址已被其他节点占用，需要重新生成地址",
+      "B": "通知主机链路上出现了新的路由器，需要重新进行路由器发现",
+      "C": "通知主机对于某目的地址存在更优的下一跳，主机可改发往该下一跳",
+      "D": "通知主机减少组播接收，以节省链路带宽"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Redirect 用于告知主机：对于某个目的地址，同一链路上存在比默认网关更优的下一跳，主机可更新自己的下一跳选择，C 正确。A 描述的是 DAD 发现冲突；B 描述的是路由器发现，由 RA 完成；D 中 Redirect 与组播接收无关。",
+    "chapter": "IPv6 核心知识",
+    "knowledgeSection": "ICMPv6 与 NDP",
+    "knowledgePoint": "邻居发现",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "Redirect",
+      "下一跳"
+    ],
+    "provenance": {
+      "questionId": "hcip821-8-2-1-007",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4861-ndp"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“IPv6”章 NDP 考点；技术依据 RFC 4861 §4.5 Redirect 报文与 §8 重定向处理。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "deaa60c4fa62dab3c1d7ff6de43d7469cfe4d72bebc5008cce52af8c7a45ca64"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-8-2-1-008",
+    "type": "single_choice",
+    "question": "RA 中的前缀信息选项包含 L（On-Link）和 A（Autonomous）标志。关于这两个标志，下列描述正确的是？",
+    "options": {
+      "A": "L 表示该前缀可用于 SLAAC，A 表示该前缀在链路上可达",
+      "B": "L 表示该前缀可直接在链路上到达，A 表示该前缀可用于无状态地址自动配置",
+      "C": "两个标志必须同时置 1，否则前缀无效",
+      "D": "L 和 A 只对路由器有意义，主机忽略这两个标志"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "L 位表示该前缀是 on-link 的，即目的地址在该前缀内的节点可直接在链路上到达；A 位表示该前缀可用于 SLAAC 生成地址，B 正确。A 把两个标志的含义对调；C 中两个标志相互独立，可按需分别置位；D 中这两个标志正是供主机配置地址和判断 on-link 使用的。",
+    "chapter": "IPv6 核心知识",
+    "knowledgeSection": "ICMPv6 与 NDP",
+    "knowledgePoint": "邻居发现",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "RA",
+      "前缀信息",
+      "L/A 标志"
+    ],
+    "provenance": {
+      "questionId": "hcip821-8-2-1-008",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4861-ndp"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“IPv6”章 NDP 考点；技术依据 RFC 4861 §4.6.2 前缀信息选项中的 L（On-Link）与 A（Autonomous）标志。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "ead4b20284a2573c9bbb7b90e16699270217922a78b7d872e74c0e1fe3e39a53"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-8-2-1-009",
+    "type": "single_choice",
+    "question": "两台 IPv6 主机在同一链路，地址分别为 2001:DB8::10/64 和 2001:DB8::20/64，链路层连通正常，但主机 A ping 主机 B 失败。抓包发现 A 发出了 NS，却没有收到 NA。下列最可能的原因是？",
+    "options": {
+      "A": "A 没有配置默认网关",
+      "B": "同一链路上没有运行 OSPFv3",
+      "C": "A 与 B 的接口 MTU 不同",
+      "D": "B 未启用 IPv6，或链路上的 ACL 阻断了 NS/NA 报文"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "同一链路上的通信只需通过 NS/NA 完成地址解析，不需要默认网关和路由协议；A 已发出 NS 但收不到 NA，说明对端未响应或被阻断，D 正确。A 中同链路通信不依赖网关；B 中同链路通信不需要 OSPFv3；C 中 MTU 不同不会阻止 NS/NA 的交互。",
+    "chapter": "IPv6 核心知识",
+    "knowledgeSection": "ICMPv6 与 NDP",
+    "knowledgePoint": "邻居发现",
+    "difficulty": "hard",
+    "tags": [
+      "IPv6",
+      "ND",
+      "故障定位"
+    ],
+    "provenance": {
+      "questionId": "hcip821-8-2-1-009",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4861-ndp"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“IPv6”章 NDP 考点；技术依据 RFC 4861 §4.3 地址解析与 §7.3 邻居不可达检测。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "2ba7d245215ec00592c8ace754e9c021f68298ff2d315fbdde5276d0630aa982"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-8-3-1-001",
+    "type": "single_choice",
+    "question": "主机仅依靠 RA 进行无状态地址自动配置（SLAAC）时，生成全球单播地址的依据是什么？",
+    "options": {
+      "A": "RA 前缀信息选项提供的前缀，加上主机自己的接口标识（如 EUI-64 或随机生成）",
+      "B": "DHCPv6 服务器分配的地址租期",
+      "C": "路由器的链路本地地址加上主机 MAC 地址",
+      "D": "组播地址 FF02::1 加上主机序号"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "SLAAC 用 RA 通告的前缀与主机接口标识拼接成全球单播地址，并在使用前做 DAD，A 正确。B 中 DHCPv6 属于有状态配置，不是 SLAAC 的依据；C 中地址前缀来自 RA，而不是路由器的链路本地地址；D 中 FF02::1 是组播地址，不能作为单播地址的前缀。",
+    "chapter": "IPv6 核心知识",
+    "knowledgeSection": "IPv6 地址配置",
+    "knowledgePoint": "地址配置方式",
+    "difficulty": "easy",
+    "tags": [
+      "IPv6",
+      "SLAAC",
+      "RA"
+    ],
+    "provenance": {
+      "questionId": "hcip821-8-3-1-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4862-slaac"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“IPv6”章地址配置考点；技术依据 RFC 4862 §1 与 §4 中 SLAAC 以前缀加接口标识生成地址的说明。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "d3fa7256e3cf0b9e5812acb876de7807a3dbc00cbf59d45d48a47c53e2915090"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-8-3-1-002",
+    "type": "single_choice",
+    "question": "某企业要求所有 IPv6 主机地址由服务器集中分配并记录租期，还要统一下发 DNS 等参数，便于审计。最合适的地址配置方式是？",
+    "options": {
+      "A": "只使用 SLAAC，由主机根据 RA 前缀自行生成地址",
+      "B": "只配置链路本地地址，通过 NAT 访问外部网络",
+      "C": "使用 DHCPv6 有状态配置，由 DHCPv6 服务器分配地址并下发参数",
+      "D": "为每台主机手工配置静态地址，不使用任何自动配置"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "集中分配地址、记录租期并统一下发 DNS 等参数，正是 DHCPv6 有状态配置的用途，C 正确。A 中 SLAAC 由主机自行生成地址，服务器无法集中记录租期；B 中 IPv6 组网通常不以 NAT 作为常规方案，链路本地地址也不能跨网段通信；D 中手工静态配置难以满足规模化和审计要求。",
+    "chapter": "IPv6 核心知识",
+    "knowledgeSection": "IPv6 地址配置",
+    "knowledgePoint": "地址配置方式",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "DHCPv6",
+      "地址配置",
+      "场景"
+    ],
+    "provenance": {
+      "questionId": "hcip821-8-3-1-002",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4862-slaac"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“IPv6”章地址配置考点；技术依据 RFC 4862 §1 与 §5.5.3 关于 SLAAC 与 DHCPv6 状态化配置的取舍。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开 RFC 独立设计题干、选项和解析，未复制第三方题目。",
+      "reviewDigest": "b3058c04a64573c8c27c4fd0187722d61dfb91b2f199ec37d6b8bdf739327a9b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  }
+]

@@ -1,0 +1,1895 @@
+[
+  {
+    "id": "hcip821-2-2-3-002",
+    "type": "single_choice",
+    "question": "在 OSPFv2 中，ASBR 通过 import-route 引入一条外部路由后，描述该外部路由的 Type 5 LSA 的泛洪范围是？",
+    "options": {
+      "A": "在整个自治系统内泛洪，但不进入 Stub 区域和 NSSA",
+      "B": "仅在 ASBR 所属的区域内泛洪",
+      "C": "仅在骨干区域 Area 0 内泛洪",
+      "D": "由 ASBR 以单播方式逐跳发送给每个邻居"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确答案为 A。Type 5 LSA 是 AS-external-LSA，具有全局泛洪范围，会被泛洪到整个自治系统内所有具备外部路由能力的区域，但 Stub 区域和 NSSA 不接收 Type 5，因此被排除在外。B 把 Type 5 当成只在区域内泛洪的 LSA，Type 1、Type 2 才是区域内范围；C 误以为外部路由只与骨干区域有关，实际上非骨干的普通区域同样会收到 Type 5；D 混淆了 LSA 泛洪与逐跳单播转发，LSA 是按区域泛洪的，不是逐跳单播。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "外部路由计算",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "Type 5 LSA",
+      "ASBR",
+      "泛洪范围"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-3-002",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 外部路由计算；技术依据 RFC 2328 §12.4.4（AS-external-LSA）与 §3.6（Stub 区域不接收 AS-external-LSA）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 2328 正文独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "972a4c78fd90e1b91d9aec6286d29f3760863d899d72fa76fcb33c3c05763baa"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-3-003",
+    "type": "single_choice",
+    "question": "路由器在计算一条 Type 5 LSA 所描述的外部路由时，若该 LSA 的 Forwarding Address 为 0.0.0.0，必须先满足下列哪个条件才会安装这条外部路由？",
+    "options": {
+      "A": "该 ASBR 必须是本网段的 DR",
+      "B": "路由表中存在到达该 LSA 的 Advertising Router（ASBR）的区域内或区域间路由",
+      "C": "路由表中必须存在一条指向 0.0.0.0 的默认路由",
+      "D": "该 LSA 的外部度量必须小于 20"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确：Forwarding Address 为 0 表示报文应发往 ASBR 本身，所以计算前必须已有一条到达该 ASBR 的区域内或区域间路由，否则该 LSA 被跳过、不安装。A 错在 DR 身份与外部路由计算无关，DR 只影响 Type 2 LSA 的产生。C 错在 0.0.0.0 是发往 ASBR 的标记，不是要去查默认路由。D 错在度量大小不是安装前提，度量只在多条路径比较时使用。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "外部路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "外部路由",
+      "Forwarding Address",
+      "ASBR"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-3-003",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 外部路由计算；技术依据 RFC 2328 §16.4 第 (3) 至 (5) 步（FA 为 0 时按到 ASBR 的路由计算外部路径）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 2328 第 16.4 节独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "75ab8da62309f14a5b1cb56447ecfa7f473a36ab53f93a5f2d293afdf543e8a6"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-3-004",
+    "type": "single_choice",
+    "question": "同一目的网络有两条 E2 外部路由：路径 1 的外部度量为 50、到 ASBR1 的内部开销为 30；路径 2 的外部度量为 50、到 ASBR2 的内部开销为 10。路由器最终选择哪条路径？",
+    "options": {
+      "A": "路径 1，因为它的内部开销 30 更大，说明链路更可靠",
+      "B": "两条路径形成等价多路径，同时安装",
+      "C": "路径 2，因为外部度量相同时比较到 ASBR 的内部开销，10 小于 30",
+      "D": "路径 1，因为 E2 路由固定选择 Router ID 较小的 ASBR"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确。E2 路由先比较外部度量 Y，两者都是 50；相同时再比较到达 ASBR（或转发地址）的内部开销 X，路径 2 的 10 小于路径 1 的 30，所以选路径 2，路由表中的度量仍显示外部度量 50，X 只用于选路。A 错在把内部开销大当成优点，方向与规则相反。B 错在两条路径的 X 不同，不构成等价。D 错在 OSPF 没有 E2 固定选 Router ID 较小 ASBR 的规则，Router ID 不参与该比较。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "外部路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "E2",
+      "外部路由",
+      "选路"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-3-004",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 外部路由计算；技术依据 RFC 2328 §16.4 第 (6)(b)(d) 步（Type 2 度量相同则比较到转发地址/ASBR 的距离），数值已复算。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 外部路径比较规则独立计算并命题，未复制第三方题目。",
+      "reviewDigest": "551e2899a2d5e48b6d19f4a88aa98b4c71900c877f11121321fe9135fc701d50"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-3-005",
+    "type": "single_choice",
+    "question": "到达同一外部目的网络存在两条候选路径：一条 E1，外部度量 100、到 ASBR 的内部开销 10；一条 E2，外部度量 20、到 ASBR 的内部开销 5。按 OSPF 外部路径选择规则，路由器选择哪条？",
+    "options": {
+      "A": "两条路径等价，同时安装",
+      "B": "E2 路径，因为 20 小于 E1 的总开销 110",
+      "C": "E2 路径，因为它的内部开销 5 更小",
+      "D": "E1 路径，因为 Type 1 外部路径总是优先于 Type 2 外部路径"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确。RFC 2328 规定 Type 1 外部路径总是优先于 Type 2 外部路径，这一优先级与度量数值无关；E1 总开销 110 虽大于 E2 的 20，仍选 E1。B 和 C 都只比较数值，忽略了先比路径类型这一前置规则。A 错在路径类型不同就不等价，不能形成多路径。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "外部路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "E1",
+      "E2",
+      "路径优先级"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-3-005",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 外部路由计算；技术依据 RFC 2328 §16.4 第 (6)(b) 步（Type 1 external paths are always preferred over type 2 external paths）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 外部路径优先级规则独立命题，未复制第三方题目。",
+      "reviewDigest": "22202bf395da824810f3b5ca9175583bf41870091897d1d9ff57849ecbd481ef"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-3-006",
+    "type": "single_choice",
+    "question": "OSPFv2 的 Type 5 LSA 中，用于标识该 LSA 所描述的外部目的网络的字段是？",
+    "options": {
+      "A": "Link State ID",
+      "B": "Advertising Router",
+      "C": "Forwarding Address",
+      "D": "External Route Tag"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确。Type 5 LSA 的 Link State ID 填入外部目的网络的网络号，默认路由时填入 DefaultDestination，接收者用它加上 LSA 中的网络掩码确定目的前缀。B 的 Advertising Router 标识产生该 LSA 的 ASBR，不标识目的网络。C 的 Forwarding Address 指定报文转发的下一跳地址。D 的 External Route Tag 是 32 位策略标记，供路由策略匹配，不用于标识目的网络。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "外部路由计算",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "Type 5 LSA",
+      "Link State ID"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-3-006",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 外部路由计算；技术依据 RFC 2328 §12.4.4 与附录 §A.4.5（AS-external-LSA 的 Link State ID、Advertising Router、Forwarding Address、External Route Tag 字段）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 附录 A.4.5 字段定义独立命题，未复制第三方题目。",
+      "reviewDigest": "5f5f47858a16d120c356f0fc9b2dc4ce8af7ab2064c60988b017232ca4873c52"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-3-007",
+    "type": "single_choice",
+    "question": "某 ASBR 引入一条外部路由，其 Type 5 LSA 的 Forwarding Address 为非零地址 10.1.1.2。其他路由器计算该外部路由时，下一跳应如何处理？",
+    "options": {
+      "A": "指向 ASBR 本身，忽略 Forwarding Address",
+      "B": "指向 10.1.1.2，并且路由表中必须已有到达该地址的区域内或区域间路由",
+      "C": "指向 10.1.1.2，若该地址不可达则自动改用 ASBR 作为下一跳",
+      "D": "丢弃该 LSA，因为 Type 5 LSA 的 Forwarding Address 必须为 0.0.0.0"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确。Forwarding Address 非零表示报文应直接发往该地址，因此必须先有一条到达 10.1.1.2 的区域内或区域间路由；否则该 LSA 在外部路由计算中被跳过。A 错在 FA 非零时下一跳不是 ASBR，FA 为 0 时才发给 ASBR。C 错在规则没有回退机制：FA 不可达就直接忽略该 LSA，不会退化为经 ASBR 转发。D 错在 FA 允许非零，非零 FA 正是用来避免流量多经过一跳 ASBR。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "外部路由计算",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "Forwarding Address",
+      "外部路由",
+      "下一跳"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-3-007",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 外部路由计算；技术依据 RFC 2328 §16.4 第 (3) 步与 §12.4.4.1（转发地址非零时的下一跳解析）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 转发地址处理规则独立命题，未复制第三方题目。",
+      "reviewDigest": "ccd77df6282629c9d519651a5e6a123c9a1a80ecacc1f8ce5fa20121c2ca3f00"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-3-008",
+    "type": "single_choice",
+    "question": "同一外部目的网络有两条 E1 路由：经 ASBR-A 时外部度量为 20、本路由器到 ASBR-A 的内部开销为 15；经 ASBR-B 时外部度量为 40、到 ASBR-B 的内部开销为 5。路由器选择哪条路径？",
+    "options": {
+      "A": "经 ASBR-A，因为它的外部度量 20 更小",
+      "B": "经 ASBR-B，总开销为 45",
+      "C": "经 ASBR-A，总开销为 35",
+      "D": "两条路径形成等价多路径"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确。E1 路由的开销等于到 ASBR 的内部开销 X 加外部度量 Y：经 ASBR-A 为 15+20=35，经 ASBR-B 为 5+40=45，35 小于 45，故选经 ASBR-A 的路径，即 C 项。B 的 45 算对了经 ASBR-B 的总开销，但 45 大于 35，不是最优路径。A 只比较外部度量 20 更小而漏加到 ASBR 的内部开销，E1 必须累加 X。D 错在两条路径总开销不同，不构成等价。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "外部路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "E1",
+      "开销计算"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-3-008",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 外部路由计算；技术依据 RFC 2328 §16.4 第 (4)(5) 步（Type 1 路径开销为 X+Y），15+20=35、5+40=45 已复算。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 的 E1 开销公式独立计算并命题，未复制第三方题目。",
+      "reviewDigest": "3e4fcb2552902cc209d88ed16538daa570100d8cdc924d931d36d8c6acb9ab28"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-3-009",
+    "type": "single_choice",
+    "question": "在华为设备上执行 display ospf lsdb ase 查看一条外部路由的 Type 5 LSA，显示 Forwarding Address: 0.0.0.0、Metric: 20、E Type: 2。下列解读正确的是？",
+    "options": {
+      "A": "Metric 20 已经包含本路由器到 ASBR 的内部开销",
+      "B": "Forwarding Address 为 0.0.0.0 说明该外部路由不可用",
+      "C": "该 LSA 一定由 ABR 产生，因为只有 ABR 会通告默认下一跳",
+      "D": "该外部路由的报文发往产生该 LSA 的 ASBR，外部度量为 20，度量类型为 Type 2"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确。Forwarding Address 为 0 表示报文交给 ASBR 本身；Metric 20 是 LSA 中的外部度量 Y，E Type 为 2 表示 Type 2 外部度量，接收者计算时不再把到 ASBR 的内部开销累加进路由度量，只在外部度量相同时用它比较路径。B 错在 FA 为 0 是正常取值，不代表路由不可用。C 错在 Type 5 LSA 由 ASBR 产生，ABR 只产生 Type 3、Type 4。A 错在 LSA 里的 Y 只是外部度量，X 由接收者另行计算，不会写进 LSA。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "外部路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "display ospf lsdb",
+      "Type 5 LSA",
+      "E2"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-3-009",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 外部路由计算；技术依据 RFC 2328 附录 §A.4.5 与 §16.4 第 (5) 步（E 位表示外部度量类型，FA 为 0 表示发往 ASBR）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 的 LSA 字段语义与华为 display ospf lsdb 公开输出字段独立命题，未复制第三方题目。",
+      "reviewDigest": "ef4a3ab7765f050cfe879fef55241dd409dbf20b0943e76f6103399f0c1d4b87"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-3-010",
+    "type": "single_choice",
+    "question": "某路由器已收到描述 172.16.0.0/16 的 Type 5 LSA，但路由表中没有这条外部路由。排查发现该 LSA 的 Forwarding Address 为 10.2.2.2，而本地路由表中没有到达 10.2.2.2 的区域内或区域间路由。最可能的原因是什么？",
+    "options": {
+      "A": "转发地址不可达，该 LSA 在外部路由计算中被跳过",
+      "B": "该 LSA 的 LS Age 已到达最大值",
+      "C": "该 LSA 的外部度量过大，超过本设备的度量上限",
+      "D": "本路由器不是 ASBR，因此不能安装任何外部路由"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确。Forwarding Address 非零时必须能用区域内或区域间路由解析该地址，解析不到就跳过这条 LSA，因此外部路由不会出现在路由表中；补齐到达 10.2.2.2 的内部路由后即可安装。B 错在题干没有给出老化信息，而且 LS Age 到 MaxAge 的 LSA 会被删除并重新泛洪，不是本例现象。C 错在 OSPF 没有外部度量超上限就丢弃的规则，度量只用于比较。D 错在外部路由是所有 OSPF 路由器都可计算的，不要求本机是 ASBR。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "外部路由计算",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "故障定位",
+      "Forwarding Address"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-3-010",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 外部路由计算；技术依据 RFC 2328 §16.4 第 (3) 步（非零 FA 必须由区域内或区域间路由解析，否则忽略该 LSA）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 转发地址可达性要求独立设计故障场景，未复制第三方题目。",
+      "reviewDigest": "6c8908415ee0912b353a112ac921e1dcaad8d2f34c11a82633e1736c27b865b9"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-3-011",
+    "type": "single_choice",
+    "question": "OSPF Type 5 LSA 中的 External Route Tag 字段的作用是？",
+    "options": {
+      "A": "参与最短路径树计算，直接影响外部路由的选路结果",
+      "B": "携带一个 32 位标记，供路由策略在引入或过滤外部路由时匹配，本身不参与 OSPF 选路",
+      "C": "标识产生该 LSA 的 ASBR 的 Router ID",
+      "D": "指定该外部路由的转发地址"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确。External Route Tag 是 32 位字段，OSPF 自身不用它选路，通常由路由策略在引入时打标、在过滤时匹配，实现跨路由域的标记传递。A 错在 Tag 不参与 SPF 或外部路径比较。C 错在标识产生者的是 LSA 头部的 Advertising Router 字段。D 错在转发地址由 Forwarding Address 字段承载。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "外部路由计算",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "External Route Tag",
+      "路由策略"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-3-011",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 外部路由计算；技术依据 RFC 2328 §12.4.4 与附录 §A.4.5（External Route Tag 字段不参与 SPF 计算）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 中 External Route Tag 的字段说明独立命题，未复制第三方题目。",
+      "reviewDigest": "a4f09ab5004dfbaa56c4579532c521c59315d6ad88942e63275b904707a37eb6"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-3-012",
+    "type": "single_choice",
+    "question": "路由器收到一条 Type 5 LSA 后，按 RFC 2328 的外部路由计算过程，正确的处理顺序是？",
+    "options": {
+      "A": "先比较 LSA 的序列号，序列号最新者直接安装",
+      "B": "先比较外部度量大小，度量最小者直接安装，再检查 ASBR 是否可达",
+      "C": "先确认到 ASBR 或转发地址的路由可达，再计算路径开销，最后与已有路径比较后决定是否安装",
+      "D": "先以外部网络为根做一次 SPF 计算，再反查 ASBR"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确。计算顺序是：先找 ASBR（FA 为 0）或转发地址（FA 非零）的区域内或区域间路由，没有就跳过；再取 X 与 Y 计算 E1 的 X+Y 或 E2 的 Y；最后按区域内、区域间优先于外部，E1 优先于 E2，再比度量的规则与已有路径比较。B 把比较提前到可达性检查之前，顺序错误。A 错在序列号只用于判断 LSA 新旧，不能替代可达性检查。D 错在 SPF 只计算区域内和区域间拓扑，外部路由不参与 SPF 树计算。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "外部路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "外部路由计算",
+      "协议顺序"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-3-012",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 外部路由计算；技术依据 RFC 2328 §16.4 第 (1) 至 (6) 步（AS 外部路由计算与路径比较顺序）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 第 16.4 节计算步骤独立命题，未复制第三方题目。",
+      "reviewDigest": "356b5a4088a9ef214097e8bda5d8786df7dd379aa9dc91486fbe1dc17530bafa"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-3-013",
+    "type": "single_choice",
+    "question": "某企业有两个 ASBR 分别通过不同运营商出口。管理员希望内部路由器访问同一外部目的网络时，按到 ASBR 的内部开销加外部度量的总开销选择更小的出口。引入外部路由时应使用哪种度量类型？",
+    "options": {
+      "A": "必须使用 NSSA 的 Type 7 才能实现",
+      "B": "Type 2",
+      "C": "两种类型效果完全相同",
+      "D": "Type 1"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确。Type 1 的路由开销为到 ASBR 的内部开销加外部度量，能反映不同出口的端到端差异，适合按总开销选路。B 错在 Type 2 默认只比较外部度量，只有外部度量相同时才用到 ASBR 的内部开销，无法实现总开销更小的目标。C 错在两种类型的计算方式不同，效果不同。A 错在 Type 7 是 NSSA 内描述外部路由的 LSA 类型，与选择 E1 还是 E2 度量类型是两件事。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "外部路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "E1",
+      "场景",
+      "外部路由"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-3-013",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 外部路由计算；技术依据 RFC 2328 §16.4 第 (5) 步（E1 开销 X+Y）与第 (6)(b) 步（E2 只比较外部度量）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 的 E1/E2 开销差异独立设计场景，未复制第三方题目。",
+      "reviewDigest": "4bf731d893454c327b342a501f1f729dd503bfc1452d5cda69bfee596047e6d2"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-3-014",
+    "type": "single_choice",
+    "question": "关于 OSPF 外部路由计算，下列哪项说法是错误的？",
+    "options": {
+      "A": "只要收到 Type 5 LSA，路由器就一定会把对应外部路由安装进路由表",
+      "B": "Type 1 外部路径总是优先于 Type 2 外部路径",
+      "C": "多条 E2 路由的外部度量相同时，会比较到 ASBR 或转发地址的内部开销",
+      "D": "区域内路由和区域间路由总是优先于 AS 外部路由"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 是错误的说法，也就是本题答案。收到 Type 5 LSA 只是计算的输入，还必须能到达 ASBR 或解析转发地址，并通过路径比较后才可能安装；条件不满足时该 LSA 会被跳过。D 正确，RFC 2328 规定区域内、区域间路径优先于 AS 外部路径。B 正确，Type 1 外部路径总是优先于 Type 2。C 正确，E2 外部度量相同时按到 ASBR 或转发地址的内部开销比较。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "外部路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "外部路由",
+      "反向设问"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-3-014",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 外部路由计算；技术依据 RFC 2328 §16.4 第 (6)(a)(b) 步（区域内/区域间优先于外部路径，Type 1 优先于 Type 2）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 外部路径优先级独立设计反向设问，未复制第三方题目。",
+      "reviewDigest": "76a1b7b46275bd203fc6e24bd7a34709ac08659cf832ee5ae805359c04d28034"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-3-015",
+    "type": "single_choice",
+    "question": "在既不是 Stub 也不是 NSSA 的普通 OSPF 区域中，下列哪台设备会产生描述外部路由的 Type 5 LSA？",
+    "options": {
+      "A": "该区域内任意一台 ABR",
+      "B": "配置了 import-route 引入外部路由的 ASBR",
+      "C": "该广播网段上选举出的 DR",
+      "D": "只有骨干区域的 ABR"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确。Type 5 LSA 由 ASBR 产生，ASBR 是引入外部路由或与其他 AS 交换路由的路由器，与它位于哪个普通区域无关。A 错在 ABR 产生的是 Type 3、Type 4，用来描述区域间路由和 ASBR 可达性，不直接产生外部路由。C 错在 DR 只负责在广播网段上产生 Type 2 LSA。D 错在 Type 5 的产生者是 ASBR 而不是骨干区域的 ABR，普通区域内的 ASBR 同样可以产生。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "外部路由计算",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "ASBR",
+      "Type 5 LSA"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-3-015",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 外部路由计算；技术依据 RFC 2328 §4.2（AS external routes）与 §12.4.4（Type 5 由 ASBR 产生）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 中 ASBR 与 Type 5 的产生规则独立命题，未复制第三方题目。",
+      "reviewDigest": "1b3d7d64e2d06366073147d6b92ef02ea361e15a978d58b73e4b686888b95949"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-3-016",
+    "type": "single_choice",
+    "question": "同一外部目的网络有两条 E2 路由，外部度量均为 30，到两个 ASBR 的内部开销均为 10，按规则继续比较后两条路径仍完全相同。路由器如何处理？",
+    "options": {
+      "A": "只保留 Router ID 较大的那条路径",
+      "B": "丢弃后收到的那条路径，只保留先到的",
+      "C": "两条路径都装入路由表，形成等价多路径",
+      "D": "改为比较 External Route Tag 的大小后取较大者"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确。外部度量相同、到 ASBR 的内部开销也相同时，两条路径优先级相同，OSPF 会把它们都装入路由表并形成等价多路径，由转发层面做负载分担。A 错在 Router ID 不参与外部路径的等价判断。B 错在 OSPF 不会因为先后顺序丢弃等价路径。D 错在 Tag 不参与选路比较。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "外部路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "E2",
+      "ECMP",
+      "等价路由"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-3-016",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 外部路由计算；技术依据 RFC 2328 §16.4 第 (6) 步（等价的 AS 外部路径加入同一路由表项）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 等价路径处理规则独立命题，未复制第三方题目。",
+      "reviewDigest": "2718530077108b907afc0f1b6360b493a09b98a65b91e2690b613245ea14f4c0"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-3-017",
+    "type": "single_choice",
+    "question": "ASBR 引入外部路由时，在什么情况下 Type 5 LSA 的 Forwarding Address 通常被置为 0.0.0.0？",
+    "options": {
+      "A": "该 ASBR 同时还是 ABR 时",
+      "B": "外部度量被配置为 0 时",
+      "C": "引入的是默认路由时",
+      "D": "引入路由的下一跳无法通过 OSPF 内部路由到达时，例如下一跳所在接口未运行 OSPF"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确。Forwarding Address 的作用是让其他路由器把报文直接发给外部下一跳；只有该下一跳能被 OSPF 的区域内或区域间路由解析时才有意义，否则置 0，让报文先送到 ASBR。B 错在 FA 与外部度量取值无关。C 错在默认路由同样可以携带非零 FA，RFC 2328 的示例就是默认路由指向外部 BGP 对端。A 错在 ASBR 是否兼任 ABR 不影响 FA 的取值规则。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "外部路由计算",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "Forwarding Address",
+      "ASBR"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-3-017",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 外部路由计算；技术依据 RFC 2328 §12.4.4 与 §12.4.4.1（转发地址取值条件与 0.0.0.0 的含义）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 转发地址取值规则独立命题，未复制第三方题目。",
+      "reviewDigest": "5836bbf40a2d3c33eb837561608e2d0d1bd0b3d9b8d52e0c7f784da45729807a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-2-3-018",
+    "type": "single_choice",
+    "question": "Type 5 LSA 头部的 E 位（External Metric Bit）表示什么？",
+    "options": {
+      "A": "该外部路由的度量类型是 Type 1 还是 Type 2",
+      "B": "该 LSA 是否允许进入 Stub 区域",
+      "C": "该 LSA 是否由 ABR 产生",
+      "D": "该外部路由是否为默认路由"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确。E 位是外部度量类型位：E 为 0 表示 Type 1 度量，开销为 X+Y；E 为 1 表示 Type 2 度量，开销为 Y。B 错在区域是否具备外部路由能力由 Hello 报文 Options 字段的 E 位表示，与 LSA 头部的 E 位含义不同。C 错在产生者身份由 Advertising Router 判断。D 错在默认路由由 Link State ID 是否为 DefaultDestination 判断。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "外部路由计算",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "Type 5 LSA",
+      "E 位",
+      "度量类型"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-2-3-018",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 外部路由计算；技术依据 RFC 2328 附录 §A.4.5（E 位为外部度量类型位）与 §4.5（Hello Options 的 E 位语义）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 中两种 E 位的不同定义独立设计对比题，未复制第三方题目。",
+      "reviewDigest": "2c51a99c796eb90a5ad0f0011809e3b8ed32f3a68458b9265f37c89f9992eac1"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-1-001",
+    "type": "single_choice",
+    "question": "某 OSPF 区域被配置为 Stub 区域。该区域内的路由器要访问自治系统外部目的地，主要依靠什么？",
+    "options": {
+      "A": "ABR 注入的一条 Type 5 默认路由",
+      "B": "ABR 注入的一条 Type 3 默认路由",
+      "C": "每台内部路由器各自引入的 Type 7 默认路由",
+      "D": "不需要默认路由，逐条学习外部 Type 5 LSA"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确。Stub 区域不接收 Type 5 LSA，ABR 改用 Summary-LSA（Type 3）向区域内通告一条默认路由，区域内路由器把未知的外部目的地交给这条默认路由。A 错在 Type 5 正是被 Stub 区域阻止的 LSA，不能用它下发默认路由。C 错在 Type 7 是 NSSA 的机制，而且 Stub 区域内不允许存在 ASBR。D 错在逐条学习 Type 5 与 Stub 的设计目的相反。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "Stub 与 Totally Stub",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "Stub",
+      "Type 3",
+      "默认路由"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-1-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 2328 §3.6（Stub 区域通过 Summary-LSA 通告默认路由以访问 AS 外部目的地）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 第 3.6 节 Stub 区域机制独立命题，未复制第三方题目。",
+      "reviewDigest": "a5e495293d4996f654f469ef0cffd6a57ed51154d2cd40539ab1042710f80339"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-1-002",
+    "type": "single_choice",
+    "question": "根据 OSPF 对 Stub 区域的限制，下列哪项做法是不允许的？",
+    "options": {
+      "A": "让 Stub 区域内包含多台内部路由器",
+      "B": "在 ABR 上向 Stub 区域注入 Type 3 默认路由",
+      "C": "在 Stub 区域内部的路由器上引入外部路由，使其成为 ASBR",
+      "D": "在 Stub 区域内使用多条区域内链路"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 不允许，为本题答案。RFC 2328 明确规定 ASBR 不能位于 Stub 区域内部，因为 Stub 区域不泛洪 Type 5，ASBR 引入的外部路由无法在该区域内正常表达。B 是 Stub 区域的必要行为，ABR 必须用 Type 3 默认路由支持外部访问。A 和 D 都是正常组网方式，Stub 只限制 LSA 类型与 ASBR，不限制路由器数量或链路数量。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "Stub 与 Totally Stub",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Stub",
+      "ASBR",
+      "边界条件"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-1-002",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 2328 §3.6（ASBR 不得位于 Stub 区域内，Virtual Link 不得穿越 Stub 区域）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 第 3.6 节的 Stub 区域限制独立命题，未复制第三方题目。",
+      "reviewDigest": "ed02ce3eb38444f0c15c120257e90351da8f275d78ea9a9ba8a98835035c6230"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-1-003",
+    "type": "single_choice",
+    "question": "一台华为路由器属于 Stub 区域，它发送的 Hello 报文中 Options 字段的 E 位应如何设置？",
+    "options": {
+      "A": "与邻居协商后动态置位",
+      "B": "置 1，表示该区域支持外部路由",
+      "C": "由该网段的 DR 统一决定",
+      "D": "置 0，表示该区域不具备处理 AS-external-LSA 的能力"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确。Hello 报文 Options 字段的 E 位表示 ExternalRoutingCapability，只有区域能处理 Type 5 时才置 1；Stub 区域不处理 Type 5，所以必须置 0。B 错在置 1 会让邻居认为该区域能处理外部 LSA，与 Stub 配置矛盾。C 错在 E 位由接口所属区域的类型决定，不由 DR 决定。A 错在 E 位不是协商结果，而是各路由器按区域配置设置，并在收到 Hello 时做一致性检查。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "Stub 与 Totally Stub",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Stub",
+      "Hello",
+      "E 位"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-1-003",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 2328 §4.5 与 §10.5（Hello 报文 Options 字段 E 位表示 ExternalRoutingCapability，Stub 区域必须清零）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 第 4.5 节的 E 位语义独立命题，未复制第三方题目。",
+      "reviewDigest": "fdb37089891f04177df96807e31d14a4b74e354f6a04e4a0fbd3f173bfef2959"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-1-004",
+    "type": "single_choice",
+    "question": "两台直连的华为路由器同属一个区域，接口地址与掩码一致，但 OSPF 邻居关系始终无法建立。检查发现一台在 area 视图下配置了 stub，另一台没有配置。最可能的原因是什么？",
+    "options": {
+      "A": "两台路由器 Hello 报文中的 E 位不一致，收到的一方拒绝该 Hello 报文",
+      "B": "两台路由器的 Router ID 相同",
+      "C": "两台路由器接口的 OSPF 开销不一致",
+      "D": "两台路由器都没有配置接口认证"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确。配置 stub 的一方 E 位为 0，未配置的一方 E 位为 1，Options 字段不一致时接收方会丢弃 Hello 报文，邻居关系无法建立；把同一区域内所有路由器都配置为 stub 即可恢复。B 错在 Router ID 相同不会因 E 位检查而阻止 Hello，而且题干没有给出 Router ID 冲突。C 错在开销不一致不影响邻居建立，只影响选路。D 错在双方都未配置认证时可以正常建立邻居。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "Stub 与 Totally Stub",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "Stub",
+      "故障定位",
+      "E 位"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-1-004",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 2328 §10.5（Options 不匹配时丢弃 Hello）与 §4.5（E 位含义）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 中 Hello 选项一致性检查独立设计故障场景，未复制第三方题目。",
+      "reviewDigest": "20a7c8e9198fb15b04225b01b3baacf9d04dd3a202b54c30b4d2a2db8c807bfb"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-1-005",
+    "type": "single_choice",
+    "question": "在华为设备上把某区域配置为 Totally Stub 区域（stub no-summary）后，该区域的 ABR 向区域内注入 LSA 的情况是？",
+    "options": {
+      "A": "注入全部 Type 3 LSA，只过滤 Type 5 LSA",
+      "B": "只注入一条 Type 3 默认路由，不再注入其他 Type 3 LSA，也不注入 Type 4 和 Type 5",
+      "C": "注入一条 Type 5 默认路由",
+      "D": "注入一条 Type 7 默认路由"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确。Totally Stub 在 Stub 的基础上由 ABR 增加 no-summary：除一条 Type 3 默认路由外，其他区域的 Type 3 明细不再进入，Type 4、Type 5 本来就被 Stub 阻止。A 描述的是普通 Stub 而非 Totally Stub。C 错在 Type 5 不能进入 Stub 类区域，默认路由也不用 Type 5 下发。D 错在 Type 7 是 NSSA 的机制，Stub 区域不使用。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "Stub 与 Totally Stub",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Totally Stub",
+      "no-summary",
+      "Type 3"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-1-005",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 2328 §12.4.3.1（向 Stub 区域发起 Summary-LSA 默认路由）与 §3.6；Totally Stub 的 no-summary 过滤语义按题干注明的华为设备配置行为描述。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 的 Stub 默认路由机制与题干注明的华为 no-summary 语义独立命题，未复制第三方题目。",
+      "reviewDigest": "b1d37f1fbbd658c70099b7eebddf93d621709029abede2d13bec21bf547e63d6"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-1-006",
+    "type": "single_choice",
+    "question": "同一区域分别配置为 Stub 和 Totally Stub，两者在区域内部路由器 LSDB 上的主要差别是什么？",
+    "options": {
+      "A": "Totally Stub 使用 Type 7 LSA，Stub 使用 Type 5 LSA",
+      "B": "Totally Stub 允许 Type 5 LSA，Stub 不允许",
+      "C": "Totally Stub 不再有除默认路由外的其他 Type 3 LSA，而 Stub 仍保留其他区域的 Type 3 明细",
+      "D": "两者的 LSDB 完全相同，只是命令不同"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确。Stub 只阻止 Type 4、Type 5，其他区域的 Type 3 明细仍会进入；Totally Stub 通过 no-summary 进一步过滤除默认路由外的 Type 3，因此内部路由器 LSDB 更小。B 错在两种区域都不允许 Type 5。A 错在 Type 7 只用于 NSSA，两者都不使用。D 错在过滤范围不同，LSDB 内容必然不同。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "Stub 与 Totally Stub",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Stub",
+      "Totally Stub",
+      "对比"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-1-006",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 2328 §3.6 与 §12.4.3（Stub 区域对 Type 3/5 的处理）；Totally Stub 的 no-summary 过滤行为按题干注明的华为设备语义描述。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 的 Stub 区域行为与题干注明的华为 no-summary 语义独立设计对比题，未复制第三方题目。",
+      "reviewDigest": "1bcda140171eafc42cb572867179a46c0bb740858c4fc304b9399c60bb235c0e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-1-007",
+    "type": "single_choice",
+    "question": "要把一个已配置为 Stub 的区域进一步改为 Totally Stub，应在哪里配置什么？",
+    "options": {
+      "A": "在骨干区域的 ABR 上执行 nssa",
+      "B": "在区域内每台路由器上都执行 stub no-summary",
+      "C": "在 ASBR 上执行 import-route 引入默认路由",
+      "D": "在该区域的 ABR 上，于对应 area 视图执行 stub no-summary"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确。no-summary 是 ABR 的行为：由 ABR 决定是否把其他区域的 Type 3 明细挡在区域外，并只下发一条 Type 3 默认路由，所以配置在连接该区域的 ABR 的 area 视图。B 错在 no-summary 只在 ABR 上有意义，普通路由器配置它不会产生过滤效果。C 错在 import-route 是引入外部路由，不能实现区域间 LSA 过滤，而且 Stub 区域内不能有 ASBR。A 错在 nssa 用于 NSSA，与 Stub 是互斥的区域类型。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "Stub 与 Totally Stub",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Totally Stub",
+      "配置",
+      "ABR"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-1-007",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 2328 §12.4.3（ABR 产生 Summary-LSA）与 §3.6（Stub 默认路由由 ABR 下发）；no-summary 的配置位置按题干注明的华为设备语义描述。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 中 ABR 的 Summary-LSA 职责与题干注明的华为命令语义独立命题，未复制第三方题目。",
+      "reviewDigest": "078de50a12c9ec264cdd39d0d87ba4fd35307fb4ecade76e976cb70541414e66"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-1-008",
+    "type": "single_choice",
+    "question": "ABR 为 Stub 区域产生的 Type 3 默认路由，其泛洪范围是？",
+    "options": {
+      "A": "仅该 Stub 区域内部",
+      "B": "整个自治系统",
+      "C": "仅骨干区域",
+      "D": "所有非骨干区域"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确。ABR 为 Stub 区域注入的默认路由是每区域一份的 Summary-LSA，只在该 Stub 区域内泛洪，不会传播到区域外。B 错在 Type 3 默认路由不具备 AS 级泛洪范围，Type 5 才是 AS 级。C 错在它是发给 Stub 区域的，不是发给骨干区域的。D 错在它只属于这一个 Stub 区域，其他非骨干区域不会收到这条默认路由。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "Stub 与 Totally Stub",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "Stub",
+      "Type 3",
+      "泛洪范围"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-1-008",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 2328 §3.6（Stub 默认路由只在区域内泛洪，不再向外传播）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 第 3.6 节关于 Stub 默认路由泛洪范围的描述独立命题，未复制第三方题目。",
+      "reviewDigest": "ff9d4bf16958326304f15899cb110e7c13c967f31ffd837d98daa3039556993e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-1-009",
+    "type": "single_choice",
+    "question": "Stub 区域内路由器 R1 通过一条开销为 10 的链路连接到 ABR，ABR 产生的 Type 3 默认路由在 LSA 中的度量值为 1。R1 路由表中该默认路由的开销是多少？",
+    "options": {
+      "A": "1",
+      "B": "11",
+      "C": "10",
+      "D": "0"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确。区域间路由的开销等于到 ABR 的区域内开销加上 LSA 中的度量：10+1=11。A 只取了 LSA 中的度量 1，漏加到 ABR 的开销。C 只取了到 ABR 的开销 10，漏加 LSA 度量。D 的 0 没有计算依据，默认路由同样要累加路径开销。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "Stub 与 Totally Stub",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Stub",
+      "开销计算",
+      "Type 3"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-1-009",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 2328 §16.2（区域间路由开销为到 ABR 的区域内开销加 LSA 度量）与 §3.6，10+1=11 已复算。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 区域间路由开销计算规则独立计算并命题，未复制第三方题目。",
+      "reviewDigest": "902e81d0deeace4d5ada2b2d1b9d16170bfc7e1302ff49b40313f68c4781526b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-1-010",
+    "type": "single_choice",
+    "question": "关于 OSPF Stub 区域，下列哪项说法是错误的？",
+    "options": {
+      "A": "Stub 区域内不允许存在 ASBR",
+      "B": "Stub 区域内的路由器通过 Type 3 默认路由访问外部目的地",
+      "C": "骨干区域可以配置为 Stub 区域以减小 LSDB",
+      "D": "Stub 区域的 ABR 不会把 Type 5 LSA 泛洪进该区域"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 是错误的说法，也就是本题答案。骨干区域必须保持完整的传输能力，承担所有区域间的路由中转，不能配置为 Stub；把它改为 Stub 会破坏区域间路由。A 正确，RFC 2328 禁止 ASBR 位于 Stub 区域内。B 正确，Stub 用 Type 3 默认路由支持外部访问。D 正确，ABR 向 Stub 区域泛洪时会抑制 Type 5。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "Stub 与 Totally Stub",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Stub",
+      "骨干区域",
+      "反向设问"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-1-010",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 2328 §3.6（Stub 区域的两条限制：无 ASBR、不能穿越 Virtual Link）；骨干区域不能配置为 Stub 属 OSPF 传输区域要求。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 的 Stub 区域限制与骨干区域传输要求独立设计反向设问，未复制第三方题目。",
+      "reviewDigest": "b67021eb80d349cfa608d048b525af337c058b1e4c677e9836d77cf54ac6c689"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-1-011",
+    "type": "single_choice",
+    "question": "某网络需要通过 Virtual Link 穿越一个区域来恢复骨干区域连通性。关于该区域能否配置为 Stub 区域，下列描述正确的是？",
+    "options": {
+      "A": "可以，只要该区域内的路由器都能处理 Type 5 LSA",
+      "B": "可以，只要 Virtual Link 两端都配置 stub",
+      "C": "可以，只要 ABR 配置 no-summary",
+      "D": "不能，Virtual Link 不能穿越 Stub 区域"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确。RFC 2328 明确 Virtual Link 不能穿越 Stub 区域，因为 Stub 区域不承载 Type 5，无法为穿越的骨干连接提供完整的 LSA 转发能力。B 错在两端都配置 stub 只会让区域更严格地阻止外部 LSA，不能解除限制。C 错在 no-summary 是进一步过滤 Type 3，与 Virtual Link 的限制无关。A 自相矛盾，能处理 Type 5 的区域就不是 Stub 区域，而限制恰恰来自该区域是 Stub。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "Stub 与 Totally Stub",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "Stub",
+      "Virtual Link",
+      "边界条件"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-1-011",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 2328 §3.6（Virtual links cannot be configured through stub areas）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 第 3.6 节 Virtual Link 限制独立命题，未复制第三方题目。",
+      "reviewDigest": "204c4f55122585d527b282437660b9f1e2d3669758469f6a37855bb1c5485aea"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-1-012",
+    "type": "single_choice",
+    "question": "在华为设备上，某 Stub 区域内的路由器执行 display ospf lsdb，下列哪种 LSA 不应出现在该区域的链路状态数据库中？",
+    "options": {
+      "A": "AS-external LSA（Type 5）",
+      "B": "Network LSA（Type 2）",
+      "C": "Router LSA（Type 1）",
+      "D": "Summary LSA（Type 3）"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确，也是本题答案。Stub 区域不接收 Type 5，因此区域内 LSDB 不会出现 AS-external LSA。C 的 Type 1 描述区域内拓扑，必须有。B 的 Type 2 由广播网段的 DR 产生，必须有。D 的 Type 3 用于区域间路由和默认路由，Stub 区域需要它。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "Stub 与 Totally Stub",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "Stub",
+      "display ospf lsdb",
+      "验证输出"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-1-012",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 2328 §3.6 与 §12.4.4（Stub 区域不接收 Type 5）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 的 Stub 区域 LSA 范围独立设计命令输出解读题，未复制第三方题目。",
+      "reviewDigest": "2d8320cc4e7ed5e5259c7d5e3f55df6016a3e4089990fb970f0b8af2aa2b48e4"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-1-013",
+    "type": "single_choice",
+    "question": "某企业分支区域只有一台 ABR 与总部相连，分支内路由器不需要按不同外部目的地选择出口。为减小分支路由器的 LSDB 和内存占用，最合适的做法是？",
+    "options": {
+      "A": "把分支区域配置为 NSSA 区域",
+      "B": "把分支区域配置为 Stub 区域",
+      "C": "在分支内每台路由器上引入一条默认路由",
+      "D": "把分支区域合并进骨干区域"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确。单出口、不需要按目的地选择出口正是 Stub 的适用场景：ABR 用一条 Type 3 默认路由替代大量外部 LSA，分支路由器 LSDB 明显减小。A 错在 NSSA 用于需要在区域内引入外部路由的场景，本例没有这种需求。C 错在引入默认路由会让每台路由器成为 ASBR，而 Stub 区域内不允许 ASBR，方向相反。D 错在把分支并入骨干区域会扩大骨干范围、增加而非减少 LSDB，也不符合多区域设计。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "Stub 与 Totally Stub",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Stub",
+      "场景",
+      "LSDB"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-1-013",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 2328 §3.6（单出口、无需按目的地选择出口时适合配置 Stub，区域内不得有 ASBR）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 第 3.6 节的 Stub 适用场景独立设计情景题，未复制第三方题目。",
+      "reviewDigest": "61e2ebe13f7fc458fdbc515759b246936222cdd1d2b2eeb0056489548b7e95a9"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-1-014",
+    "type": "single_choice",
+    "question": "在 Stub 区域中，一台内部路由器要转发目的地址属于自治系统外部的报文，其正确的处理过程是？",
+    "options": {
+      "A": "向 ABR 发送 Type 7 LSA 请求外部路由",
+      "B": "查找 Type 5 LSA，计算到 ASBR 的最短路径后直接发给 ASBR",
+      "C": "查路由表匹配 ABR 注入的 Type 3 默认路由，把报文发给 ABR，由 ABR 继续转发",
+      "D": "直接丢弃报文，因为 Stub 区域不能访问外部"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确。Stub 区域没有外部明细路由，内部路由器用 ABR 下发的 Type 3 默认路由把外部流量交给 ABR，由 ABR 在具备外部路由能力的区域继续转发。B 错在 Stub 区域没有 Type 5 LSA，无法计算到 ASBR 的外部路径。A 错在 Type 7 是 NSSA 中 ASBR 通告外部路由用的 LSA，不是请求报文。D 错在 Stub 区域仍可通过默认路由访问外部，并非隔离外部。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "Stub 与 Totally Stub",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Stub",
+      "转发过程",
+      "协议顺序"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-1-014",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 2328 §3.6（Stub 默认路由用于 AS 外部目的地，区域内不出现 Type 5）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 的 Stub 区域转发过程独立设计流程题，未复制第三方题目。",
+      "reviewDigest": "8ef3d2474f710059b5d2c2607a20a240b5d705006c07ea3561d0ca0a8e6bac45"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-1-015",
+    "type": "single_choice",
+    "question": "某 ABR 同时连接一个 Stub 区域和骨干区域。关于该 ABR 对 Type 5 LSA 的处理，下列描述正确的是？",
+    "options": {
+      "A": "该 ABR 会把 Type 5 LSA 逐条转换成 Type 3 明细后送入 Stub 区域",
+      "B": "该 ABR 会从自己的 LSDB 中删除全部 Type 5 LSA",
+      "C": "该 ABR 会把 Type 5 LSA 转换成 Type 7 LSA 后送入 Stub 区域",
+      "D": "该 ABR 不向 Stub 区域泛洪 Type 5 LSA，但它在其他区域仍可正常泛洪和计算这些外部路由"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确。抑制 Type 5 是指向该 Stub 区域泛洪这一动作被禁止，ABR 自身仍需在 LSDB 中保留 Type 5，用于骨干区域和其他非 Stub 区域的泛洪与外部路由计算。B 错在删除 LSA 会破坏 ABR 在其他区域的外部路由。C 错在 Type 7 是 NSSA 的机制，Stub 区域不使用。A 错在 Stub 区域只用一条 Type 3 默认路由替代外部明细，不做逐条转换。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "Stub 与 Totally Stub",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Stub",
+      "ABR",
+      "Type 5"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-1-015",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 2328 §3.6（AS-external-LSA 不泛洪进 Stub 区域，ABR 自身仍需维护全局 LSA）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 中按区域抑制泛洪的语义独立命题，未复制第三方题目。",
+      "reviewDigest": "97fe8fdf4cf1987a9922cdd5eb342d887e1728e1e46c914332e9061e8073a8ea"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-1-016",
+    "type": "single_choice",
+    "question": "在华为设备上为某区域启用 Stub 功能时，关于配置范围，下列做法正确的是？",
+    "options": {
+      "A": "该区域内的所有路由器（包括 ABR）都必须在 area 视图下配置 stub，否则邻居关系会因 E 位不一致而失败",
+      "B": "只需该区域的 ABR 配置 stub 即可",
+      "C": "只需该区域内任意一台路由器配置 stub 即可",
+      "D": "只需在骨干区域的 ABR 上配置 stub 即可"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确。Stub 是区域级属性，区域内所有路由器必须配置一致；只有 ABR 配 stub、内部路由器不配时，双方 Hello 的 E 位不同，邻居无法建立。B 错在 ABR 单方面配置会导致 E 位不一致。C 错在部分配置同样造成不一致。D 错在 Stub 配置针对具体区域，而且骨干区域不能配置为 Stub。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "Stub 与 Totally Stub",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Stub",
+      "配置",
+      "E 位"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-1-016",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 2328 §10.5 与 §4.5（Stub 区域所有路由器的 Hello E 位必须一致，否则丢弃 Hello）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 的 Hello 选项一致性要求独立设计配置题，未复制第三方题目。",
+      "reviewDigest": "1faef3615f96bb95a4b9fa4e3a7de709f2960990bd823a03ca5aef38fd5f8caa"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-1-017",
+    "type": "single_choice",
+    "question": "某 Totally Stub 区域内共有 5 台路由器、3 个广播网段，ABR 向该区域注入了一条 Type 3 默认路由。该区域内部路由器的 LSDB 中至少会包含哪些 LSA？",
+    "options": {
+      "A": "只有 1 条 Type 3 默认路由 LSA",
+      "B": "5 条 Router LSA、3 条 Network LSA 和 1 条 Type 3 默认路由 LSA",
+      "C": "5 条 Router LSA 和 5 条 Type 5 LSA",
+      "D": "3 条 Network LSA 和 3 条 Type 5 LSA"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确。复算：每台路由器产生 1 条 Router LSA，5 台共 5 条；每个广播网段由 DR 产生 1 条 Network LSA，3 个网段共 3 条；ABR 另注入 1 条 Type 3 默认路由，合计 5+3+1=9 条，且 Totally Stub 下没有 Type 4、Type 5，其他 Type 3 也被过滤。A 错在默认路由不能替代区域内拓扑 LSA，否则区域内都无法选路。C 错在 Totally Stub 不允许 Type 5，且 Type 5 数量与路由器数无关。D 错在同样引入了不允许的 Type 5。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "Stub 与 Totally Stub",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "Totally Stub",
+      "LSDB",
+      "计算"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-1-017",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 2328 §12.4.1（每台路由器产生 Router-LSA）、§12.4.2（DR 产生 Network-LSA）与 §3.6（Stub 阻止 Type 4/5），5+3+1=9 已复算。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 的 LSA 产生规则独立计算并命题，未复制第三方题目。",
+      "reviewDigest": "64a9a5e7ff422271a427b99a535f7e92d065cbc0ab835702c42a0b8673bc23d6"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-1-018",
+    "type": "single_choice",
+    "question": "Stub 区域的 ABR 不会把 Type 4 LSA 泛洪进该区域，其根本原因是？",
+    "options": {
+      "A": "Type 4 LSA 会被 ABR 自动转换成 Type 3 LSA",
+      "B": "Type 4 LSA 只允许在骨干区域产生",
+      "C": "Stub 区域内不存在 ASBR，也不需要描述 ASBR 的可达性",
+      "D": "Stub 区域内的路由器不支持解析 Type 4 LSA"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确。Type 4 的作用是告诉区域内路由器如何到达其他区域的 ASBR，而 Stub 区域内既不允许存在 ASBR，也不接收 Type 5 外部路由，因此 Type 4 在该区域没有意义，ABR 不会注入。B 错在 ABR 可以向普通非骨干区域产生 Type 4，限制并非只能在骨干区域产生。A 错在 OSPF 没有 Type 4 转 Type 3 的机制。D 错在是否解析 Type 4 与路由器实现无关，原因在于区域类型。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "Stub 与 Totally Stub",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Stub",
+      "Type 4",
+      "边界条件"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-1-018",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 2328 §12.4.3（Type 4 描述 ASBR 可达性）与 §3.6（Stub 区域内不得有 ASBR）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 2328 中 Type 4 的作用与 Stub 区域限制独立命题，未复制第三方题目。",
+      "reviewDigest": "999d5bb9ce80d5eadac54b4982ccefabbe29cafa538162414105b8a4fc579d9b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-2-001",
+    "type": "single_choice",
+    "question": "某华为设备位于 NSSA 区域内并引入了一条外部路由。该外部路由在 NSSA 内以哪种 LSA 描述？",
+    "options": {
+      "A": "Type 3 LSA",
+      "B": "Type 5 LSA",
+      "C": "Type 4 LSA",
+      "D": "Type 7 LSA"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确。NSSA 不接收 Type 5，区域内的 ASBR 引入外部路由时改用 Type 7（NSSA-LSA）在区域内泛洪。A 的 Type 3 描述区域间路由，不描述外部路由。B 的 Type 5 被 NSSA 阻止，不能用于区域内通告。C 的 Type 4 描述 ASBR 可达性，不是外部路由本身。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "NSSA 与 Totally NSSA",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "NSSA",
+      "Type 7"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-2-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3101-nssa"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 3101 §2.3（NSSA 内 ASBR 以 Type 7 LSA 导入外部路由）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 3101 第 2.3 节 Type 7 LSA 的产生规则独立命题，未复制第三方题目。",
+      "reviewDigest": "5794f51d3f7d66047b5c8721a6d7e4078947971fd1261e690ea92aa24468a825"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-2-002",
+    "type": "single_choice",
+    "question": "NSSA 内 ASBR 产生的 Type 7 LSA 的泛洪范围是？",
+    "options": {
+      "A": "仅在产生它的 NSSA 内部",
+      "B": "整个自治系统",
+      "C": "仅骨干区域",
+      "D": "所有非骨干区域"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确。Type 7 LSA 只在产生它的 NSSA 内泛洪，泛洪规则与 Type 1、Type 2 相同；要传到其他区域，必须由 NSSA 边界路由器翻译成 Type 5。B 错在 Type 7 不具备 AS 级泛洪范围，Type 5 才是。C 和 D 都扩大了范围，Type 7 不会离开本 NSSA。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "NSSA 与 Totally NSSA",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "NSSA",
+      "Type 7",
+      "泛洪范围"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-2-002",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3101-nssa"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 3101 §2.3（Type 7 LSA 只在产生它的 NSSA 内泛洪）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 3101 第 2.3 节泛洪范围描述独立命题，未复制第三方题目。",
+      "reviewDigest": "f0cdcf09900021c49e9831c44405900b26d06dd8b31c03a96d8fd4ccd55ed7be"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-2-003",
+    "type": "single_choice",
+    "question": "NSSA 的 ABR 在执行 Type 7 到 Type 5 的翻译时，主要依据什么决定是否翻译一条 Type 7 LSA？",
+    "options": {
+      "A": "该 Type 7 LSA 的度量是否小于 20",
+      "B": "该 Type 7 LSA 的 P 位是否置 1",
+      "C": "该 Type 7 LSA 是否由 ABR 自己产生",
+      "D": "该 Type 7 LSA 的 External Route Tag 是否为 0"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确。P 位（Propagate bit）置 1 表示该外部路由需要传播到 NSSA 之外，NSSA 边界路由器据此把它翻译成 Type 5；P 位为 0 的 Type 7 不翻译。A 错在翻译与度量大小无关。C 错在翻译对象包括区域内其他 ASBR 产生的 Type 7，不限于自己产生的。D 错在 Tag 是策略标记，不决定是否翻译。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "NSSA 与 Totally NSSA",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "NSSA",
+      "P 位",
+      "Type 7 翻译"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-2-003",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3101-nssa"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 3101 §2.3 与 §2.4（P 位置 1 才翻译为 Type 5，P 位清 0 不翻译）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 3101 第 2.4 节 P 位规则独立命题，未复制第三方题目。",
+      "reviewDigest": "bbbfb946cc97fd0dc22d4cadd416636552abd948f921ddd1435ef9dad715f284"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-2-004",
+    "type": "single_choice",
+    "question": "NSSA 的 ABR 向该 NSSA 内注入一条 Type 7 默认路由。按 RFC 3101，该默认路由 LSA 的 P 位应如何设置，结果如何？",
+    "options": {
+      "A": "P 位可任意设置，不影响翻译结果",
+      "B": "P 位置 1，因此会被翻译成 Type 5",
+      "C": "P 位清零，因此不会被其他 NSSA 边界路由器翻译成 Type 5",
+      "D": "P 位清零，但仍然会被翻译成 Type 5"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确。RFC 3101 规定 NSSA 边界路由器产生的 Type 7 默认路由其 P 位必须清零，这样它只服务于本 NSSA，不会被再次翻译成 Type 5 传播出去。B 错在 P 位置 1 会导致默认路由被翻译，与规范要求相反。A 错在 P 位正是翻译的判据，不能任意设置。D 错在 P 位清零的 Type 7 不会被翻译。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "NSSA 与 Totally NSSA",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "NSSA",
+      "P 位",
+      "默认路由"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-2-004",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3101-nssa"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 3101 §2.4（NSSA 边界路由器产生的 Type 7 默认路由 P 位必须清零）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 3101 第 2.4 节关于 Type 7 默认路由 P 位的规定独立命题，未复制第三方题目。",
+      "reviewDigest": "a32790d93e21bf08a8cb50a60457f02e1cfcc0277e753375f21e8f67cb02ca9d"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-2-005",
+    "type": "single_choice",
+    "question": "在华为设备上把某 NSSA 配置为 Totally NSSA（nssa no-summary）后，ABR 向该区域注入路由的情况是？",
+    "options": {
+      "A": "不注入任何默认路由，区域内路由器只能逐条学习",
+      "B": "注入一条 Type 5 默认路由",
+      "C": "注入 Type 4 明细路由",
+      "D": "注入一条 Type 3 默认路由，并过滤除默认外的其他 Type 3 LSA"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确。no-summary 让 ABR 只向该 NSSA 下发一条 Type 3 默认路由，其他区域的 Type 3 明细被过滤；Type 5 本来就不进入 NSSA。B 错在 NSSA 不接收 Type 5，默认路由不能用 Type 5 下发。C 错在 Type 4 描述 ASBR 可达性，不是 Totally NSSA 的下发内容。A 错在恰恰相反，Totally NSSA 依赖这条默认路由访问区域外目的地。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "NSSA 与 Totally NSSA",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Totally NSSA",
+      "no-summary",
+      "Type 3"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-2-005",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3101-nssa"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 3101 §2.7（不导入汇总路由时 ABR 向 NSSA 下发 Type 3 默认 LSA）；no-summary 配置语义按题干注明的华为设备行为描述。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 3101 第 2.7 节的默认 LSA 选择规则与题干注明的华为语义独立命题，未复制第三方题目。",
+      "reviewDigest": "088c7a3142156450afaeee572d527a565a5c80dc2483c660074b7e8337cdde25"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-2-006",
+    "type": "single_choice",
+    "question": "同一区域分别配置为 NSSA 与 Totally NSSA，两者最本质的差别是？",
+    "options": {
+      "A": "Totally NSSA 还会过滤除默认路由外的 Type 3 LSA，而 NSSA 仍保留其他区域的 Type 3 明细",
+      "B": "NSSA 允许 Type 5 LSA，Totally NSSA 不允许",
+      "C": "NSSA 使用 Type 7 LSA，Totally NSSA 使用 Type 5 LSA",
+      "D": "两者没有差别，只是命令写法不同"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确。两者都阻止 Type 5、都允许 Type 7 描述区域内引入的外部路由；区别在于 Totally NSSA 通过 no-summary 进一步过滤其他区域的 Type 3 明细，只保留一条 Type 3 默认路由。B 错在两种区域都不允许 Type 5。C 错在两种区域都用 Type 7 承载区域内引入的外部路由。D 错在过滤范围不同，LSDB 内容不同。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "NSSA 与 Totally NSSA",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "NSSA",
+      "Totally NSSA",
+      "对比"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-2-006",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3101-nssa"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 3101 §2.7（是否导入汇总路由决定 Type 3 明细与默认路由的处理）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 3101 第 2.7 节汇总路由导入行为独立设计对比题，未复制第三方题目。",
+      "reviewDigest": "4806673511995c0dd9cb7b2bbcd61396e36da70bdc24d7a7a8c9a0662f9c554a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-2-007",
+    "type": "single_choice",
+    "question": "一台华为路由器属于 NSSA 区域，其 Hello 报文中 Options 字段的 E 位与 N 位应如何设置？",
+    "options": {
+      "A": "E 位为 1、N 位为 1，表示同时支持 Type 5 和 Type 7",
+      "B": "E 位为 0、N 位为 1，表示该区域不处理 Type 5 但支持 Type 7",
+      "C": "E 位为 0、N 位为 0，表示普通区域",
+      "D": "E 位为 1、N 位为 0，表示 Stub 区域"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确。NSSA 不接收 Type 5，所以 E 位必须为 0；同时通过 N 位声明 NSSA 能力，因此 N 位为 1。RFC 3101 要求 N 位置 1 时 E 位必须为 0。A 错在 E 位为 1 表示能处理 Type 5，与 NSSA 矛盾。C 错在 N 位为 0 表示不是 NSSA。D 错在 Stub 区域是 E 位为 0、N 位为 0。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "NSSA 与 Totally NSSA",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "NSSA",
+      "Hello",
+      "N 位",
+      "E 位"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-2-007",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3101-nssa"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 3101 §2.1（N 位置 1 时 E 位必须为 0，Options 不匹配则丢弃 Hello）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 3101 第 2.1 节 N 位与 E 位关系独立命题，未复制第三方题目。",
+      "reviewDigest": "1d4de118c48c9a0839b63f7796c0eeaf3ce5ab6edb6f4a2c216c1780f4b05d5c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-2-008",
+    "type": "single_choice",
+    "question": "某 NSSA 内 ASBR 引入了外部路由，NSSA 内路由器可以看到该路由，但其他区域的路由器看不到。最可能的原因是？",
+    "options": {
+      "A": "该 ASBR 没有配置 stub",
+      "B": "该 NSSA 没有配置 no-summary",
+      "C": "该 Type 7 LSA 的 P 位为 0，NSSA 的 ABR 没有把它翻译成 Type 5",
+      "D": "该 Type 7 LSA 的外部度量过大"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确。Type 7 只在 NSSA 内泛洪，其他区域要看到该路由，必须由 NSSA 的 ABR 把 P 位为 1 的 Type 7 翻译成 Type 5；P 位为 0 时不会被翻译，外部区域自然看不到。B 错在 no-summary 影响的是 Type 3 明细，与 Type 7 翻译无关。A 错在 NSSA 与 Stub 是互斥的区域类型，配置 stub 会直接破坏 NSSA。D 错在度量大小不影响是否被翻译和传播。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "NSSA 与 Totally NSSA",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "NSSA",
+      "故障定位",
+      "P 位"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-2-008",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3101-nssa"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 3101 §2.4 与 §3.2（P 位为 0 的 Type 7 不翻译，其他区域看不到该外部路由）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 3101 的 P 位翻译规则独立设计故障场景，未复制第三方题目。",
+      "reviewDigest": "9fe3be9150a3ebfbf0ae845d701e77f5c9464344a6be27db2848c361fe0a27dc"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-2-009",
+    "type": "single_choice",
+    "question": "某园区通过一台边界路由器连接一个运行 RIP 的小型网络，该边界路由器所在的 OSPF 区域不能接收 Type 5 LSA，但又需要把 RIP 路由引入 OSPF。应把该区域配置成什么？",
+    "options": {
+      "A": "普通区域",
+      "B": "Stub",
+      "C": "Totally Stub",
+      "D": "NSSA"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确。NSSA 既阻止 Type 5 进入，又允许区域内的 ASBR 用 Type 7 引入外部路由，正好满足不能收 Type 5 但要引入 RIP 路由的需求。B 错在 Stub 区域不允许 ASBR，无法引入外部路由。C 错在 Totally Stub 同样禁止 ASBR，且进一步过滤 Type 3。A 错在普通区域会直接接收 Type 5，不满足不能接收 Type 5 的前提。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "NSSA 与 Totally NSSA",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "NSSA",
+      "场景",
+      "RIP 引入"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-2-009",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3101-nssa"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 3101 §1.3 与 §2.3（NSSA 阻止 Type 5 进入，同时允许区域内 ASBR 用 Type 7 引入外部路由）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 3101 第 1.3 节的问题定义与第 2.3 节机制独立设计场景题，未复制第三方题目。",
+      "reviewDigest": "49aaa7d04a68959afadfa4b27a903ea6749e1575ad162e8209598f6c2fd3f5f6"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-2-010",
+    "type": "single_choice",
+    "question": "在 NSSA 的 ABR 上，同一外部目的网络可能同时通过来自其他区域的 Type 5 LSA 和来自本 NSSA 的 Type 7 LSA 学到。按 RFC 3101，这两种 LSA 的度量和路径类型应如何处理？",
+    "options": {
+      "A": "直接可比，按 E1、E2 的统一规则一起比较",
+      "B": "Type 5 总是优先于 Type 7",
+      "C": "Type 7 总是优先于 Type 5",
+      "D": "必须先把 Type 7 翻译成 Type 5 才能比较"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确。RFC 3101 明确 Type 5 与 Type 7 LSA 的度量和路径类型可以直接比较，ABR 在外部路由计算中把两者放在同一套 E1、E2 规则下比较。B 和 C 都错在凭空增加了 LSA 类型的优先级，规范中没有这种规定。D 错在翻译是向其他区域传播的动作，不是本地比较的前提。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "NSSA 与 Totally NSSA",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "NSSA",
+      "Type 5",
+      "Type 7",
+      "路径比较"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-2-010",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3101-nssa"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 3101 §2.5（Type 5 与 Type 7 的度量和路径类型直接可比）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 3101 第 2.5 节关于两种 LSA 度量可直接比较的规定独立命题，未复制第三方题目。",
+      "reviewDigest": "f472377bc08209a6fa3c368574fc0950df733b70391dbd2c055fd63e7fd3a163"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-2-011",
+    "type": "single_choice",
+    "question": "在 NSSA 的 ABR 上执行 display ospf lsdb 查看一条 Type 7 LSA，其 Options 字段中的 P 位为 1。下列推断正确的是？",
+    "options": {
+      "A": "该 LSA 一定不会被翻译",
+      "B": "该 LSA 会被翻译成 Type 5 发布到其他区域",
+      "C": "该 LSA 是 ABR 自己产生的默认路由",
+      "D": "该 LSA 只在骨干区域内泛洪"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确。P 位为 1 表示该外部路由需要传播到 NSSA 之外，NSSA 边界路由器会把它翻译成 Type 5 并发布到支持 Type 5 的区域。A 错在 P 位为 1 正是会被翻译的情况。C 错在 ABR 产生的 Type 7 默认路由 P 位必须为 0，与本题现象矛盾。D 错在 Type 7 只在本 NSSA 内泛洪，不会进入骨干区域。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "NSSA 与 Totally NSSA",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "NSSA",
+      "display ospf lsdb",
+      "P 位"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-2-011",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3101-nssa"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 3101 §2.3 与 §3.2（P 位置位的 Type 7 会被翻译成 Type 5 并发布到支持 Type 5 的区域）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 3101 的 Type 7 翻译规则独立设计命令输出解读题，未复制第三方题目。",
+      "reviewDigest": "6d958056c016ebe415f5e0c84a5f37ada7af2d4a749317928cf9a05df40bed4d"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-2-012",
+    "type": "single_choice",
+    "question": "NSSA 内 ASBR 引入一条外部路由，Type 7 LSA 中的外部度量为 40、度量类型为 E2。NSSA 的 ABR 将其翻译成 Type 5 LSA 后，该 Type 5 LSA 的外部度量与度量类型应是什么？",
+    "options": {
+      "A": "1、E2",
+      "B": "40 加上 ABR 到 ASBR 的内部开销、E1",
+      "C": "40、E2",
+      "D": "0、E1"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确。Type 7 翻译成 Type 5 时保留外部度量与度量类型，即 40 和 E2；ABR 到 ASBR 的内部开销不写入 LSA，而是在各路由器计算外部路由时另行处理，E2 只在外部度量相同时用于比较路径。B 错在把内部开销加进 LSA 并擅自改成 E1。A 的 1 和 D 的 0 都没有依据，翻译不会重置度量。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "NSSA 与 Totally NSSA",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "NSSA",
+      "Type 7 翻译",
+      "计算"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-2-012",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3101-nssa"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 3101 §3.2（Type 7 翻译为 Type 5 时保留外部度量与度量类型）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 3101 第 3.2 节翻译算法独立计算并命题，未复制第三方题目。",
+      "reviewDigest": "dcb78a05e0f102a93a20d739ac86c56c3f1e44aeafccd4e5eeef3573e983e685"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-2-013",
+    "type": "single_choice",
+    "question": "关于 NSSA，下列哪项说法是错误的？",
+    "options": {
+      "A": "NSSA 内不泛洪 Type 5 LSA",
+      "B": "NSSA 内 ASBR 引入的外部路由以 Type 7 LSA 形式存在",
+      "C": "NSSA 的 ABR 可以同时充当 ASBR 引入外部路由",
+      "D": "所有 Type 7 LSA 都会被 NSSA 的 ABR 翻译成 Type 5"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 是错误的说法，也就是本题答案。只有 P 位为 1 的 Type 7 才会被翻译；P 位为 0 的，例如 ABR 产生的 Type 7 默认路由，不翻译。A 正确，NSSA 阻止 Type 5 进入。B 正确，NSSA 内用 Type 7 承载引入的外部路由。C 正确，ABR 若同时连接其他 AS 并引入路由，就同时具备 ASBR 角色。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "NSSA 与 Totally NSSA",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "NSSA",
+      "反向设问",
+      "P 位"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-2-013",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3101-nssa"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 3101 §2.4（P 位为 0 的 Type 7 不被翻译，例如 ABR 产生的默认路由）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 3101 的 P 位规则独立设计反向设问，未复制第三方题目。",
+      "reviewDigest": "c43a3881c8ddb6e058da5c9ec70a239faffafaa55e9f5902909edb76424373c7"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-2-014",
+    "type": "single_choice",
+    "question": "某区域被配置为 Totally NSSA。该区域内的路由器访问其他区域以及自治系统外部时，主要依靠哪种路由？",
+    "options": {
+      "A": "ABR 注入的 Type 3 默认路由",
+      "B": "ABR 注入的 Type 5 默认路由",
+      "C": "区域内 ASBR 注入的 Type 7 默认路由",
+      "D": "没有默认路由，只能逐条学习明细"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确。Totally NSSA 通过 no-summary 过滤除默认外的 Type 3，由 ABR 下发一条 Type 3 默认路由，区域内路由器用它访问区域间和自治系统外部目的地；RFC 3101 也规定不导入汇总路由时，ABR 向 NSSA 下发的默认 LSA 应为 Type 3。B 错在 NSSA 不接收 Type 5。C 错在 Type 7 默认路由用于区域内引入外部路由的场景，不是 no-summary 产生的区域间默认路由。D 错在 Totally NSSA 依赖默认路由而非逐条明细。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "NSSA 与 Totally NSSA",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Totally NSSA",
+      "默认路由",
+      "Type 3"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-2-014",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3101-nssa"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 3101 §2.7（不导入汇总路由时，ABR 向 NSSA 下发的默认 LSA 应为 Type 3）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 3101 第 2.7 节默认 LSA 类型选择独立命题，未复制第三方题目。",
+      "reviewDigest": "e75737e7e664dc01e34fd410912bc6522839da10206efe672ffaae81b560588f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-2-015",
+    "type": "single_choice",
+    "question": "一个 NSSA 有多台 NSSA 边界路由器都作为转换器候选。按 RFC 3101 的转换器选举规则，通常情况下哪台会被选为转换器？",
+    "options": {
+      "A": "Router ID 最小的候选边界路由器",
+      "B": "Router ID 最大的候选边界路由器",
+      "C": "最先启动的那台候选边界路由器",
+      "D": "到 ASBR 度量最小的那台候选边界路由器"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确。RFC 3101 的转换器选举规则是：候选边界路由器列表中，如果存在 router-LSA 的 Nt 位置位的路由器则优先，否则 Router ID 更大的胜出；被选中的转换器持续工作，直到被 Nt 位置位或 Router ID 更大的可达边界路由器取代。A 错在方向相反。C 错在启动顺序不是选举依据。D 错在到 ASBR 的度量不参与转换器选举。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "NSSA 与 Totally NSSA",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "NSSA",
+      "转换器选举",
+      "Router ID"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-2-015",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3101-nssa"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页 OSPF 特殊区域；技术依据 RFC 3101 §3.1（转换器选举：Nt 位优先，否则 Router ID 更大者胜出）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 3101 第 3.1 节转换器选举规则独立命题，未复制第三方题目。",
+      "reviewDigest": "97cd66dd3492dd86b0c81c42ea0d5344698418e0532f6108841ff913e5ba5845"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  }
+]

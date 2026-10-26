@@ -1,0 +1,2071 @@
+{
+  "certificateId": "ncre-l2-c-programming",
+  "removedAt": "2026-10-16T05:49:34.659Z",
+  "reason": "《全国计算机等级考试（NCRE）二级 C 语言程序设计考试大纲（2025 年版）》第 3 页「考试方式」规定客观题部分为单项选择题（40 分，含公共基础知识部分 10 分），不含多项选择题与判断题。为与官方题型一致，删除全部非单选题；相关知识点将由新编写的单项选择题覆盖。",
+  "removedCount": 57,
+  "byType": {
+    "true_false": 26,
+    "multiple_choice": 31
+  },
+  "questions": [
+    {
+      "id": "ncre-c-ptr-address-004",
+      "type": "true_false",
+      "question": "在 C 语言中，不做强制类型转换时，指针变量应当存放同类型数据的地址，把一个 double 型变量的地址直接赋给 int 型指针变量会引起类型不匹配。",
+      "answer": [
+        "A"
+      ],
+      "analysis": "指针是有类型的，int * 指针应当存放 int 型对象的地址。不做强制转换就把 double 型变量的地址赋给 int * 变量属于类型不匹配，编译器通常会给出警告；即使强行使用，也会因两种类型的长度和解释方式不同而产生错误结果。若确实需要转换，必须显式写出强制类型转换。",
+      "chapter": "指针",
+      "knowledgeSection": "指针基础",
+      "knowledgePoint": "地址与指针变量",
+      "difficulty": "medium",
+      "tags": [
+        "指针",
+        "类型匹配"
+      ],
+      "options": {
+        "A": "正确",
+        "B": "错误"
+      },
+      "provenance": {
+        "questionId": "ncre-c-ptr-address-004",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲第九部分「指针」中关于地址与指针变量、数组与字符串的指针、指针作函数参数、返回地址值的函数、指针数组与指向指针的指针的规定，对应本证书三级目录「指针 / 指针基础 / 地址与指针变量」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "deeadbd566e09032b7f7a2bb946f4944d69ea7c766e49ec71c356703adb19fde"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c-ptr-array-003",
+      "type": "true_false",
+      "question": "在 C 语言中，数组名代表数组首元素的地址，且不能被重新赋值。",
+      "answer": [
+        "A"
+      ],
+      "analysis": "数组名在多数表达式中会转换为指向首元素的地址，但它不是可修改的指针变量，因此 a = p; 或 a++; 这类写法都不能通过编译。若需要可以移动的指针，应另外定义指针变量并把数组名赋给它。",
+      "chapter": "指针",
+      "knowledgeSection": "指针基础",
+      "knowledgePoint": "数组与字符串的指针",
+      "difficulty": "medium",
+      "tags": [
+        "指针",
+        "数组名",
+        "常量"
+      ],
+      "options": {
+        "A": "正确",
+        "B": "错误"
+      },
+      "provenance": {
+        "questionId": "ncre-c-ptr-array-003",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲第九部分「指针」中关于地址与指针变量、数组与字符串的指针、指针作函数参数、返回地址值的函数、指针数组与指向指针的指针的规定，对应本证书三级目录「指针 / 指针基础 / 数组与字符串的指针」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "4a31f78effd13b469ac2b2a7c5f00d923c0efcafb99cffc01c06d373cc3660d7"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c-ptr-arg-003",
+      "type": "true_false",
+      "question": "在 C 语言中，若函数形参是指针，则在函数体内修改形参指针本身的指向，会同时改变主调函数中对应实参指针的指向。",
+      "answer": [
+        "B"
+      ],
+      "analysis": "形参指针本身也是按值传递的副本。在函数内让形参指针改指向别处，只改变了这个副本，主调函数中的实参指针仍指向原来的位置。只有通过 *形参 修改它所指向单元的内容，才会影响主调函数可见的数据。",
+      "chapter": "指针",
+      "knowledgeSection": "指针应用",
+      "knowledgePoint": "指针作函数参数",
+      "difficulty": "hard",
+      "tags": [
+        "指针",
+        "形参",
+        "值传递"
+      ],
+      "options": {
+        "A": "正确",
+        "B": "错误"
+      },
+      "provenance": {
+        "questionId": "ncre-c-ptr-arg-003",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲第九部分「指针」中关于地址与指针变量、数组与字符串的指针、指针作函数参数、返回地址值的函数、指针数组与指向指针的指针的规定，对应本证书三级目录「指针 / 指针应用 / 指针作函数参数」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "6bb4761fd64cf8cd7a5871f9f7ceaf2d4d7e62a4d9e16360ec143864fb3724df"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c-type-basic-003",
+      "type": "true_false",
+      "question": "在 C 语言中，void 表示无值类型，可以用它声明不返回任何值的函数。",
+      "answer": [
+        "A"
+      ],
+      "analysis": "void 是无值类型，用在函数返回值位置表示该函数不返回任何值，例如 void f(void)。它也可以用于声明指向任意类型的通用指针 void *，但不能用来定义 void 型变量本身。",
+      "chapter": "数据类型及其运算",
+      "knowledgeSection": "数据类型",
+      "knowledgePoint": "基本数据类型与定义",
+      "difficulty": "easy",
+      "tags": [
+        "数据类型",
+        "void"
+      ],
+      "options": {
+        "A": "正确",
+        "B": "错误"
+      },
+      "provenance": {
+        "questionId": "ncre-c-type-basic-003",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲第九部分「指针」中关于地址与指针变量、数组与字符串的指针、指针作函数参数、返回地址值的函数、指针数组与指向指针的指针的规定，对应本证书三级目录「数据类型及其运算 / 数据类型 / 基本数据类型与定义」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "8ff6952de930cc8b52d29f9490ce923f25983b8d9ada7a948cbd04360596961a"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c2-algo-complexity-002",
+      "type": "multiple_choice",
+      "question": "关于算法，下列叙述中正确的有哪些？",
+      "options": {
+        "A": "算法必须在执行有穷步之后结束，不能出现永不终止的计算过程",
+        "B": "算法的每一个操作都应当有确切含义，不能存在二义性",
+        "C": "算法可以由任意多步组成，步数不受任何限制",
+        "D": "一个算法可以没有输出，但至少要有一个输入"
+      },
+      "answer": [
+        "A",
+        "B"
+      ],
+      "analysis": "有穷性和确定性都是算法必须具备的基本特性，前者保证算法在有限步内结束，后者保证每一步含义唯一无歧义，因此这两项成立。算法必须有穷，说步数可以任意多与该特性直接冲突；算法允许没有输入，但至少要有一个输出，把输入输出的要求颠倒过来，所以最后一项不成立。",
+      "chapter": "公共基础知识",
+      "knowledgeSection": "数据结构与算法",
+      "knowledgePoint": "算法与算法复杂度",
+      "difficulty": "medium",
+      "tags": [
+        "算法",
+        "算法特性",
+        "有穷性",
+        "确定性"
+      ],
+      "provenance": {
+        "questionId": "ncre-c2-algo-complexity-002",
+        "sourceIds": [
+          "ncre-l2-common-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版二级公共基础知识大纲，对应本证书三级目录「公共基础知识 / 数据结构与算法 / 算法与算法复杂度」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "2a0cc77753f928ad5c11c7dfc94328abf61319eb4b5bd8155de3cfbe008b0817"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c2-tree-002",
+      "type": "multiple_choice",
+      "question": "关于二叉树的性质以及树与二叉树之间的转换，下列叙述中正确的有哪些？",
+      "options": {
+        "A": "一棵树转换成二叉树后，所得的二叉树其根结点一定带有右子树",
+        "B": "在二叉树的第 i 层上至多有 2^(i-1) 个结点（根结点所在层为第 1 层）",
+        "C": "对任何一棵非空二叉树，若叶结点数为 n0、度为 2 的结点数为 n2，则必有 n0 = n2 + 1",
+        "D": "二叉树中每个结点都恰好有两个子结点，否则不能称为二叉树"
+      },
+      "answer": [
+        "B",
+        "C"
+      ],
+      "analysis": "二叉树第 i 层最多排满 2^(i-1) 个结点，这是按层计数的基本性质；叶结点数与度为 2 的结点数之间满足 n0 = n2 + 1，可由结点总数与分支总数的关系推出，两项都正确。树转换成二叉树采用左孩子右兄弟的规则，转换后二叉树根结点没有右子树，因此说它一定带有右子树与规则相反；二叉树的每个结点最多有两个子结点，允许只有左子结点、只有右子结点或没有子结点，若要求恰好两个子结点会把大量合法二叉树排除在外。",
+      "chapter": "公共基础知识",
+      "knowledgeSection": "数据结构与算法",
+      "knowledgePoint": "树与二叉树",
+      "difficulty": "medium",
+      "tags": [
+        "二叉树",
+        "性质",
+        "转换"
+      ],
+      "provenance": {
+        "questionId": "ncre-c2-tree-002",
+        "sourceIds": [
+          "ncre-l2-common-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版二级公共基础知识大纲，对应本证书三级目录「公共基础知识 / 数据结构与算法 / 树与二叉树」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "f9cc5b7fa3f8924412bef098ac2e6a013e94ee914c90fdc93d9c3f956003e87d"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c2-algo-complexity-003",
+      "type": "true_false",
+      "question": "时间复杂度为 O(n²) 的算法，在任何具体输入上的运行时间都一定长于时间复杂度为 O(nlogn) 的算法。",
+      "options": {
+        "A": "正确",
+        "B": "错误"
+      },
+      "answer": [
+        "B"
+      ],
+      "analysis": "复杂度记号描述的是当规模 n 充分大时运行时间的增长量级，而不是对每个具体输入的精确比较。对于较小的 n，或者对于某些特殊输入，平方级算法完全可能比 nlogn 级算法运行得更快；此外同一算法在不同输入上的实际运行时间也可能不同。因此用「任何具体输入」和「一定」来断言是不成立的。",
+      "chapter": "公共基础知识",
+      "knowledgeSection": "数据结构与算法",
+      "knowledgePoint": "算法与算法复杂度",
+      "difficulty": "medium",
+      "tags": [
+        "时间复杂度",
+        "增长量级",
+        "概念辨析"
+      ],
+      "provenance": {
+        "questionId": "ncre-c2-algo-complexity-003",
+        "sourceIds": [
+          "ncre-l2-common-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版二级公共基础知识大纲，对应本证书三级目录「公共基础知识 / 数据结构与算法 / 算法与算法复杂度」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "18010dd0e74af0858e75934b3b9526ab7c0899ef214d7bd95ac2c93a931ba4ea"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c2-linear-structure-002",
+      "type": "true_false",
+      "question": "栈和队列都是操作受限的线性结构，其中栈只能在栈顶进行插入和删除，队列只能在队尾插入元素、在队头删除元素。",
+      "options": {
+        "A": "正确",
+        "B": "错误"
+      },
+      "answer": [
+        "A"
+      ],
+      "analysis": "栈只有一个出入口即栈顶，插入和删除都发生在栈顶，因此遵循后进先出；队列有两个端口，元素从队尾进入、从队头离开，因此遵循先进先出。两种结构都是在普通线性表的基础上限制了操作位置，所以说它们都是操作受限的线性结构是正确的描述。",
+      "chapter": "公共基础知识",
+      "knowledgeSection": "数据结构与算法",
+      "knowledgePoint": "数据结构与线性结构",
+      "difficulty": "easy",
+      "tags": [
+        "栈",
+        "队列",
+        "线性结构"
+      ],
+      "provenance": {
+        "questionId": "ncre-c2-linear-structure-002",
+        "sourceIds": [
+          "ncre-l2-common-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版二级公共基础知识大纲，对应本证书三级目录「公共基础知识 / 数据结构与算法 / 数据结构与线性结构」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "b14e328883ca099535bf601a9dd4767701fc0b4627c15ec3c475eff23c29d4dd"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c2-switch-rule-001",
+      "type": "multiple_choice",
+      "question": "关于 switch 语句，下列叙述中正确的有哪些？",
+      "options": {
+        "A": "同一个 switch 语句中，各个 case 后面的常量表达式的值必须互不相同，否则会构成错误",
+        "B": "case 后面可以跟一个整型变量，只要该变量在运行时的取值与待匹配的值相等即可",
+        "C": "default 子句在 switch 语句中的位置没有硬性限制，可以写在所有 case 之前、之间或之后",
+        "D": "若某个分支执行完毕后没有 break 语句，控制流会继续向下执行后面分支中的语句"
+      },
+      "answer": [
+        "A",
+        "C",
+        "D"
+      ],
+      "analysis": "各 case 后的常量值必须互不相同，否则同一个值会对应多个入口，编译器会报错；default 子句的位置在语法上不受限制，只是习惯上写在最后；case 分支缺少 break 时会发生贯穿，继续执行后续分支的语句，这三点都成立。case 后面要求的是整型常量表达式，取值必须在编译期确定，变量和含变量的表达式都不能出现在 case 标号中。",
+      "chapter": "选择与循环结构",
+      "knowledgeSection": "选择结构",
+      "knowledgePoint": "switch 多分支结构",
+      "difficulty": "medium",
+      "tags": [
+        "switch",
+        "case",
+        "default",
+        "break"
+      ],
+      "provenance": {
+        "questionId": "ncre-c2-switch-rule-001",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「switch 多分支结构」相关的规定，对应本证书三级目录「选择与循环结构 / 选择结构 / switch 多分支结构」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "5a1254093feb89409d230be6e02a57a90c5eb78748147d0be7dde4b682fb8115"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c2-break-continue-002",
+      "type": "multiple_choice",
+      "question": "关于 break 语句与 continue 语句的区别，下列叙述中正确的有哪些？",
+      "options": {
+        "A": "continue 只能用于循环语句中，它的作用是结束本次循环，跳过循环体中位于它之后的语句",
+        "B": "break 可以用于循环语句和 switch 语句，在循环中执行后会立即结束该层循环",
+        "C": "在循环中执行 continue 之后，循环条件不再被判断，循环会直接结束，这一点与 break 相同",
+        "D": "break 与 continue 都只能出现在 switch 语句的 case 分支中，放在循环体内部会导致编译错误"
+      },
+      "answer": [
+        "A",
+        "B"
+      ],
+      "analysis": "continue 的适用场合是循环，语义是跳过本轮循环体中它之后的语句，直接进行下一轮的条件判断与自增，因此只影响本次迭代；break 适用于循环与 switch，在循环中执行后立即跳出该层循环。执行 continue 后循环并没有结束，仍要回到条件判断决定是否继续，说它与 break 一样使循环直接结束是不对的；两种语句都不限于 switch，放在循环体中使用是完全合法的，说必然导致编译错误与事实相反。",
+      "chapter": "选择与循环结构",
+      "knowledgeSection": "循环结构",
+      "knowledgePoint": "break 与 continue",
+      "difficulty": "easy",
+      "tags": [
+        "break",
+        "continue",
+        "语义区别"
+      ],
+      "provenance": {
+        "questionId": "ncre-c2-break-continue-002",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「break 与 continue」相关的规定，对应本证书三级目录「选择与循环结构 / 循环结构 / break 与 continue」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "7a8c3e3f325719b83be72c67899d8cb201aea28844e09b3f5077a099cb2facfd"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c2-switch-default-001",
+      "type": "true_false",
+      "question": "在 switch 语句中，如果没有与表达式值相匹配的 case 常量，而且也没有写 default 子句，那么该 switch 语句不执行任何分支，控制流直接转到 switch 语句之后继续执行。",
+      "options": {
+        "A": "正确",
+        "B": "错误"
+      },
+      "answer": [
+        "A"
+      ],
+      "analysis": "switch 的执行过程是把括号内表达式的值依次与各 case 常量比较，遇到相等的常量就从该 case 处开始向下执行；如果没有任何 case 与之相等，则看是否存在 default 子句，有则从 default 处进入，没有则整条 switch 语句什么也不做，控制流直接跳到 switch 语句之后的语句继续执行。default 只是可选的兜底入口，并不是必须存在的成分。",
+      "chapter": "选择与循环结构",
+      "knowledgeSection": "选择结构",
+      "knowledgePoint": "switch 多分支结构",
+      "difficulty": "easy",
+      "tags": [
+        "switch",
+        "default",
+        "控制流"
+      ],
+      "provenance": {
+        "questionId": "ncre-c2-switch-default-001",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「switch 多分支结构」相关的规定，对应本证书三级目录「选择与循环结构 / 选择结构 / switch 多分支结构」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "f280d42f739b53ad7b4bac3965447428360deb8a438113f045584e0e5c7b95d3"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c2-array-1d-init-001",
+      "type": "multiple_choice",
+      "question": "关于一维数组的定义与初始化，下列叙述中正确的有哪些？",
+      "options": {
+        "A": "int a[5]; 定义了一个含 5 个 int 元素的数组，元素下标从 0 到 4",
+        "B": "int a[] = {1, 2, 3}; 定义数组时省略长度，编译器会根据初值个数确定为 3",
+        "C": "int a[5] = {1, 2, 3}; 这种写法是非法的，因为提供的初值个数少于数组长度",
+        "D": "int a[5] = {0}; 把 a[0] 显式初始化为 0，未列出的其余元素也被初始化为 0"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ],
+      "analysis": "int a[5]; 声明 5 个 int 元素，下标从 0 到 4。int a[] = {1,2,3}; 省略长度时由初值个数决定长度为 3。int a[5] = {1,2,3}; 是合法写法，前三个元素依次取 1、2、3，未列出的元素初始化为 0，因此说它非法不成立。int a[5] = {0}; 把首个元素显式置 0，其余未列出的元素同样被初始化为 0，这一规则只要求存在初始化列表，不要求数组具有静态存储期，所以该叙述正确。",
+      "chapter": "数组的定义和引用",
+      "knowledgeSection": "数值数组",
+      "knowledgePoint": "一维数组",
+      "difficulty": "medium",
+      "tags": [
+        "一维数组",
+        "初始化",
+        "省略长度",
+        "下标"
+      ],
+      "provenance": {
+        "questionId": "ncre-c2-array-1d-init-001",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「一维数组」相关的规定，对应本证书三级目录「数组的定义和引用 / 数值数组 / 一维数组」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "f02500eb8b0e1e3074114eea224767f4975129c6afa5a0cd8bc1c2e3cb1674be"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c2-string-init-001",
+      "type": "multiple_choice",
+      "question": "关于字符数组与字符串，下列叙述中正确的有哪些？",
+      "options": {
+        "A": "char s[5] = \"abcd\"; 是合法的定义与初始化写法，数组恰好容纳 4 个字符和末尾的结束标志",
+        "B": "用字符数组存放字符串时，必须保证数组长度至少比字符串中的有效字符个数多 1，用于存放结束标志",
+        "C": "char s[] = {'a', 'b', 'c'}; 得到的字符数组可以作为字符串使用，因为编译器会自动在末尾补充结束标志",
+        "D": "把字符逐个赋给字符数组时若忘记加入字符串结束标志，则该数组不能作为字符串参与字符串函数处理"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ],
+      "analysis": "用字符串常量初始化字符数组时会把结束标志一并存入，所以长度为 5 的数组恰好容纳 4 个字符加一个结束标志；为保证结束标志有位置，数组长度至少要等于有效字符数加 1；用字符常量逐个初始化时编译器不会自动补结束标志，这样的数组缺少结束标志，不能被字符串处理函数当作字符串正确使用。用字符常量列表初始化并声称编译器会自动补充结束标志，与逐个初始化的规则相反，因此该项不成立。",
+      "chapter": "数组的定义和引用",
+      "knowledgeSection": "字符串",
+      "knowledgePoint": "字符数组与字符串",
+      "difficulty": "medium",
+      "tags": [
+        "字符数组",
+        "字符串",
+        "结束标志",
+        "初始化"
+      ],
+      "provenance": {
+        "questionId": "ncre-c2-string-init-001",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「字符数组与字符串」相关的规定，对应本证书三级目录「数组的定义和引用 / 字符串 / 字符数组与字符串」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "dbb034a9988c9c71432a8200ed6c9dca6f7345d10772c6cf3d00ac0b0eb5428a"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c2-array-2d-row-001",
+      "type": "true_false",
+      "question": "若有定义 int a[3][4]; 则该数组共有 12 个 int 型元素，使用时 a[i][j] 中的 i 取值范围是 0 到 2，j 的取值范围是 0 到 3。",
+      "options": {
+        "A": "正确",
+        "B": "错误"
+      },
+      "answer": [
+        "A"
+      ],
+      "analysis": "二维数组的行数和列数由定义中的两个长度给出，元素总数为两者之积，即 3 乘 4 等于 12 个 int 型元素。每一维的下标都从 0 开始，因此行下标 i 的合法范围是 0 到 2，列下标 j 的合法范围是 0 到 3；数组在内存中按行优先顺序连续存放，所有 12 个元素彼此相邻。",
+      "chapter": "数组的定义和引用",
+      "knowledgeSection": "数值数组",
+      "knowledgePoint": "二维数组",
+      "difficulty": "easy",
+      "tags": [
+        "二维数组",
+        "元素个数",
+        "下标范围"
+      ],
+      "provenance": {
+        "questionId": "ncre-c2-array-2d-row-001",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「二维数组」相关的规定，对应本证书三级目录「数组的定义和引用 / 数值数组 / 二维数组」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "8a234b7fed769c8e7dd599adfa9ef031364e020ab9e3f595bf5e44eed81be5c4"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c2-lib-toupper-001",
+      "type": "multiple_choice",
+      "question": "关于 C 语言的库函数，下列叙述中正确的有哪些？",
+      "options": {
+        "A": "使用标准输入输出库函数时应当包含头文件 <stdio.h>，因为库函数的原型集中声明在相应的头文件中",
+        "B": "字符处理函数 toupper、isalpha 等的原型声明在头文件 <ctype.h> 中，toupper 把一个小写字母转换成对应的大写字母",
+        "C": "字符串处理函数 strlen、strcpy、strcmp 的原型声明在头文件 <math.h> 中，调用前必须包含该头文件",
+        "D": "调用库函数时只要函数名拼写正确就不需要任何头文件，编译器会自动到标准库中查找原型"
+      },
+      "answer": [
+        "A",
+        "B"
+      ],
+      "analysis": "标准库按功能分头文件组织：输入输出函数的原型在 <stdio.h>，字符分类与转换函数的原型在 <ctype.h>，toupper 的作用正是把参数中的小写字母转换为大写字母，故前两项正确。strlen、strcpy、strcmp 属于字符串处理函数，其原型声明在 <string.h> 而不是数学头文件里，包含错头文件会导致原型不可见；库函数同样需要通过头文件引入原型，编译器不会凭函数名自动搜索标准库，缺少原型时既无法进行参数类型检查，返回值的处理也可能出错。",
+      "chapter": "函数",
+      "knowledgeSection": "函数基础",
+      "knowledgePoint": "库函数调用",
+      "difficulty": "medium",
+      "tags": [
+        "库函数",
+        "头文件",
+        "字符串函数",
+        "字符函数"
+      ],
+      "provenance": {
+        "questionId": "ncre-c2-lib-toupper-001",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「库函数调用」相关的规定，对应本证书三级目录「函数 / 函数基础 / 库函数调用」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "42947aba7521245edddae09be98e293b57a9dc43634a56425ea3baf956770e98"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c2-recursion-003",
+      "type": "multiple_choice",
+      "question": "关于函数的嵌套调用与递归调用，下列叙述中正确的有哪些？",
+      "options": {
+        "A": "在 C 语言中，一个函数可以调用另一个函数，也可以直接或间接地调用自身，后者称为递归调用",
+        "B": "递归函数必须同时具备递归出口（终止条件）与向出口收敛的递归步骤，否则会出现无限递归",
+        "C": "凡是可以用递归解决的问题，其递归解法在运行时间和存储空间上都必然优于循环解法",
+        "D": "函数之间的相互调用可以形成环，例如甲函数调用乙函数、乙函数又调用甲函数，这种间接递归是允许的"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ],
+      "analysis": "函数可以直接或间接调用自身，间接调用即相互调用成环，这在 C 语言中是允许的递归形式；递归要能正常结束，必须有终止条件并且每次递归都使问题规模向该条件收敛，否则会无限递归并耗尽栈空间，这两点都正确。递归通过不断压栈保存现场，通常比等价的循环解法占用更多栈空间和时间，只有在问题本身具有递归结构时递归写法才更简洁，因此「必然优于循环」的断言不成立。",
+      "chapter": "函数",
+      "knowledgeSection": "变量与作用域",
+      "knowledgePoint": "嵌套与递归调用",
+      "difficulty": "medium",
+      "tags": [
+        "递归",
+        "嵌套调用",
+        "间接递归",
+        "递归出口"
+      ],
+      "provenance": {
+        "questionId": "ncre-c2-recursion-003",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「嵌套与递归调用」相关的规定，对应本证书三级目录「函数 / 变量与作用域 / 嵌套与递归调用」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "16d58be95d465f28194b2d16578942bd5c70428987f8b6022bccbb41213303dd"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c2-recursion-004",
+      "type": "true_false",
+      "question": "在 C 语言中，一个函数在它的函数体内直接调用自身，这种调用方式是允许的，但必须设置能够终止递归的条件。",
+      "options": {
+        "A": "正确",
+        "B": "错误"
+      },
+      "answer": [
+        "A"
+      ],
+      "analysis": "C 语言不禁止函数在自身函数体内直接调用自己，这就是直接递归；编译器只需要在调用点已经知道该函数的原型或定义即可。递归的价值在于用同一段代码处理规模不断缩小的子问题，因此必须存在某个不再继续递归的出口，使调用链最终收敛，否则调用会一直压栈直到栈空间耗尽。",
+      "chapter": "函数",
+      "knowledgeSection": "变量与作用域",
+      "knowledgePoint": "嵌套与递归调用",
+      "difficulty": "easy",
+      "tags": [
+        "递归",
+        "函数自调用",
+        "递归出口"
+      ],
+      "provenance": {
+        "questionId": "ncre-c2-recursion-004",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「嵌套与递归调用」相关的规定，对应本证书三级目录「函数 / 变量与作用域 / 嵌套与递归调用」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "9c969d77b6f436f7872eba1e9a32c65f39b88bfe794f2c99829f0d81b2f010dd"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c2-var-scope-002",
+      "type": "multiple_choice",
+      "question": "关于局部变量与全局变量，下列叙述中正确的有哪些？",
+      "options": {
+        "A": "全局变量在它定义之后的各个函数中都可以按名字直接引用，其作用范围从定义处开始到本程序文件结束",
+        "B": "全局变量在程序开始执行时分配存储单元，在程序结束时才被释放，生存期贯穿整个程序运行过程",
+        "C": "在同一个程序的不同函数中定义同名的自动局部变量是不允许的，编译器会报重复定义错误",
+        "D": "全局变量一定存放在 CPU 的寄存器中，所以访问全局变量比访问局部变量更快"
+      },
+      "answer": [
+        "A",
+        "B"
+      ],
+      "analysis": "全局变量的作用域从定义点延伸至所在文件的末尾，同一文件内其后的各函数都可直接按名字引用；它与静态存储区中的其他数据一样在程序开始运行时获得存储并在程序结束时释放，因而作用范围与生存期都覆盖整个运行过程。不同函数中的自动局部变量各自拥有独立存储，名字相同互不影响，这是完全合法的；全局变量位于静态存储区，是否放入寄存器由编译器优化决定，并不存在必然更快的结论。",
+      "chapter": "函数",
+      "knowledgeSection": "变量与作用域",
+      "knowledgePoint": "局部变量与全局变量",
+      "difficulty": "medium",
+      "tags": [
+        "全局变量",
+        "局部变量",
+        "生存期",
+        "作用域"
+      ],
+      "provenance": {
+        "questionId": "ncre-c2-var-scope-002",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「局部变量与全局变量」相关的规定，对应本证书三级目录「函数 / 变量与作用域 / 局部变量与全局变量」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "a5c169e8f9a7ac1f8330653913187ca142921a59d049849286d590922b5075e1"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c2-param-pass-002",
+      "type": "multiple_choice",
+      "question": "关于 C 语言的参数传递机制，下列叙述中正确的有哪些？",
+      "options": {
+        "A": "实参与形参是两个不同的存储对象，调用时把实参的值复制给形参，二者占用不同的内存单元",
+        "B": "函数内部修改形参的值不会影响调用者的实参，因为修改只作用于形参自身的存储单元",
+        "C": "把数组名作为实参传递给函数时传递的是整个数组的一份完整拷贝，函数内修改元素不会影响原数组",
+        "D": "若函数需要修改调用者某个变量的值，把该变量的地址作为实参传入并在函数内通过指针间接访问是可行的办法"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ],
+      "analysis": "值传递的实现就是为形参分配独立存储单元并复制实参的值，所以形参的修改只影响形参自身，这是前两项的依据。数组名作实参时退化为首元素地址，函数收到的是地址而不是数组副本，函数内通过该地址修改元素会直接作用在原数组上，因此「完整拷贝、不影响原数组」的说法错误。要让函数改动调用者的变量，可以传递该变量的地址并在函数内用指针间址赋值，这一办法在 C 语言中成立。",
+      "chapter": "函数",
+      "knowledgeSection": "函数基础",
+      "knowledgePoint": "参数传递",
+      "difficulty": "medium",
+      "tags": [
+        "值传递",
+        "数组作参数",
+        "指针传参"
+      ],
+      "provenance": {
+        "questionId": "ncre-c2-param-pass-002",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「参数传递」相关的规定，对应本证书三级目录「函数 / 函数基础 / 参数传递」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "043cd2445d657f2131e22690a97ea935af63ff987eaa024a91363d3df1dc1ebe"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c2-param-pass-003",
+      "type": "true_false",
+      "question": "在 C 语言中，函数调用时实参的值被复制给形参，函数体内对形参的修改不会改变调用处实参变量的值。",
+      "options": {
+        "A": "正确",
+        "B": "错误"
+      },
+      "answer": [
+        "A"
+      ],
+      "analysis": "C 语言只提供单向的值传递：调用时先求出实参表达式的值，再把它赋给函数为形参分配的存储单元，形参与实参从此互不相干。函数体内对形参的任何赋值或运算都只写在形参自己的单元里，函数返回后这些单元被释放，实参变量保持原值不变。需要注意的是，若实参是地址，函数通过该地址间接改写所指对象是可以影响调用者的，但这属于通过指针修改目标对象，而不是形参本身改变了实参。",
+      "chapter": "函数",
+      "knowledgeSection": "函数基础",
+      "knowledgePoint": "参数传递",
+      "difficulty": "easy",
+      "tags": [
+        "值传递",
+        "形参",
+        "实参"
+      ],
+      "provenance": {
+        "questionId": "ncre-c2-param-pass-003",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「参数传递」相关的规定，对应本证书三级目录「函数 / 函数基础 / 参数传递」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "ea1ae33bdad3e759785975e407fb3b31369efe9609237537e4dba6d4a78e2737"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c2-tree-003",
+      "type": "true_false",
+      "question": "对任何一棵非空二叉树，若叶子结点数为 n0、度为 2 的结点数为 n2，则一定满足 n0 = n2 + 1。",
+      "options": {
+        "A": "正确",
+        "B": "错误"
+      },
+      "answer": [
+        "A"
+      ],
+      "analysis": "设结点总数为 n、分支总数为 B，则有 n = n0 + n1 + n2，同时除根结点外每个结点都由一条分支指向，故 n = B + 1；又分支数等于各结点度数之和，即 B = n1 + 2n2。代入整理得 n0 + n1 + n2 = n1 + 2n2 + 1，化简即 n0 = n2 + 1，与二叉树的具体形状无关，因此该性质对所有非空二叉树都成立。",
+      "chapter": "公共基础知识",
+      "knowledgeSection": "数据结构与算法",
+      "knowledgePoint": "树与二叉树",
+      "difficulty": "medium",
+      "tags": [
+        "二叉树",
+        "叶子结点",
+        "性质推导"
+      ],
+      "provenance": {
+        "questionId": "ncre-c2-tree-003",
+        "sourceIds": [
+          "ncre-l2-common-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版二级公共基础知识大纲，对应本证书三级目录「公共基础知识 / 数据结构与算法 / 树与二叉树」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "3840c7e786c963ac365b3b3096904c0f9606fa22673603d00853dc087f6b6a44"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c2-stack-queue-003",
+      "type": "true_false",
+      "question": "在单链表中，只要已知指向某个结点的指针，就可以在 O(1) 时间内直接访问该结点的直接前驱结点。",
+      "options": {
+        "A": "正确",
+        "B": "错误"
+      },
+      "answer": [
+        "B"
+      ],
+      "analysis": "单链表每个结点只带有指向后继的指针域，结构中不含指向前驱的链接，已知某结点指针时既不能由该指针算出前驱地址，也不能向后走一步到达前驱，只能从表头重新遍历，因此需要线性时间。只有在双向链表中才能借助指向前驱的指针在常数时间内访问前驱。",
+      "chapter": "公共基础知识",
+      "knowledgeSection": "数据结构与算法",
+      "knowledgePoint": "栈、队列与链表",
+      "difficulty": "easy",
+      "tags": [
+        "单链表",
+        "前驱",
+        "时间复杂度"
+      ],
+      "provenance": {
+        "questionId": "ncre-c2-stack-queue-003",
+        "sourceIds": [
+          "ncre-l2-common-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版二级公共基础知识大纲，对应本证书三级目录「公共基础知识 / 数据结构与算法 / 栈、队列与链表」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "60176ab1d9267bcac7e4910d0d7bcad2a08be491e56b843dc92af3f433a05c9f"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c3-prog-compose-003",
+      "type": "multiple_choice",
+      "question": "关于 C 程序的构成与执行过程，下列说法正确的有：",
+      "options": {
+        "A": "程序从 main 函数开始执行，main 函数可以调用其他函数，其他函数之间也可以互相调用",
+        "B": "同一个源文件中可以定义多个函数，这些函数的书写顺序可以调整，只要调用点之前有被调函数的声明或定义即可",
+        "C": "函数之间可以嵌套调用，即在一个函数的执行过程中调用另一个函数，但函数定义不能嵌套",
+        "D": "每个函数都必须带有参数，不带参数的函数定义是不合法的"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "analysis": "程序的控制流从 main 进入，main 与其他函数之间、其他函数相互之间都可以互相调用，这种调用关系构成了程序的结构。一个源文件里函数的排列顺序与执行顺序无关，只要求调用点之前能见到被调函数的声明或定义，因此书写顺序可以调整。嵌套调用描述的是运行期的调用关系，任何函数都可能在一个函数的执行过程中被调用，而函数定义必须彼此平行、不能互相包含。函数可以没有参数，写成 void f(void) 的定义完全合法，所以“每个函数都必须带参数”的说法错误。",
+      "chapter": "C 语言程序结构",
+      "knowledgeSection": "程序组成",
+      "knowledgePoint": "程序构成与函数",
+      "difficulty": "medium",
+      "tags": [
+        "主函数",
+        "函数调用",
+        "函数定义"
+      ],
+      "provenance": {
+        "questionId": "ncre-c3-prog-compose-003",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「程序构成与函数」相关的规定，对应本证书三级目录「C 语言程序结构 / 程序组成 / 程序构成与函数」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "f7c293b64fe0d6538729fcc8ef424f7e42b0c36c7965a057970c10b50e98bfbe"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c3-prog-compose-004",
+      "type": "true_false",
+      "question": "在 C 语言中，main 函数是程序唯一的入口，其他函数只有在被直接或间接调用时才会执行。",
+      "options": {
+        "A": "正确",
+        "B": "错误"
+      },
+      "answer": [
+        "A"
+      ],
+      "analysis": "程序启动后由运行环境准备好的启动代码调用 main 函数，所以 main 是执行的入口。其他函数的定义只是说明“怎样做”，函数体不会自行运行，必须通过调用语句被直接或间接地调用才会执行，因此该说法成立。",
+      "chapter": "C 语言程序结构",
+      "knowledgeSection": "程序组成",
+      "knowledgePoint": "程序构成与函数",
+      "difficulty": "easy",
+      "tags": [
+        "main函数",
+        "函数调用"
+      ],
+      "provenance": {
+        "questionId": "ncre-c3-prog-compose-004",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「程序构成与函数」相关的规定，对应本证书三级目录「C 语言程序结构 / 程序组成 / 程序构成与函数」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "1781637a262c97dd82e9b6cd18c435ae4b215d44ea65d027dd601e38dd478a8a"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c3-prog-header-003",
+      "type": "true_false",
+      "question": "所有的预处理命令都以 # 号开头，并且每条预处理命令都必须以分号结尾。",
+      "options": {
+        "A": "正确",
+        "B": "错误"
+      },
+      "answer": [
+        "B"
+      ],
+      "analysis": "预处理命令确实都以 # 开头，这是它们的共同标志，但预处理命令不是 C 语句，行末不加分号。若在 #define、#include 等命令后面多写一个分号，该分号会成为宏体的一部分或被当作多余的记号带入展开结果，往往引起难以发现的错误，所以“必须以分号结尾”这一说法错误。",
+      "chapter": "C 语言程序结构",
+      "knowledgeSection": "程序组成",
+      "knowledgePoint": "头文件与预处理",
+      "difficulty": "medium",
+      "tags": [
+        "预处理命令",
+        "书写格式"
+      ],
+      "provenance": {
+        "questionId": "ncre-c3-prog-header-003",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「头文件与预处理」相关的规定，对应本证书三级目录「C 语言程序结构 / 程序组成 / 头文件与预处理」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "c3b1b759736297b2a43280adddbc1a19006ab33178fabc86535bc685fa9184f0"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c3-prog-format-002",
+      "type": "multiple_choice",
+      "question": "关于 C 程序的书写格式和注释，下列说法正确的有：",
+      "options": {
+        "A": "注释在预处理阶段被替换为一个空白字符，因此 int/**/x; 与 int x; 的含义相同",
+        "B": "写在双引号括起的字符串常量中的 /* 或 // 只是普通字符，不会被当作注释的开始",
+        "C": "在用 // 引导的注释行中再出现 /* 不会新开一段注释，该行内容仍然全部是注释",
+        "D": "源程序中的空行和缩进会被编译成相应的指令，从而改变程序的执行结果"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "analysis": "注释在预处理阶段被替换为一个空格，所以把注释夹在关键字 int 与变量名之间，等价于两者之间有一个空格，声明依然合法。字符串常量内部的字符属于字符串内容，词法分析时不会把其中的 /* 或 // 识别为注释起始。// 注释一直延伸到本行末尾，行内出现的 /* 只是这段注释文字的一部分，不会扩大或缩小注释范围。空行和缩进只影响程序的可读性，编译时被忽略，既不生成指令也不改变运行结果。",
+      "chapter": "C 语言程序结构",
+      "knowledgeSection": "程序组成",
+      "knowledgePoint": "书写格式与注释",
+      "difficulty": "hard",
+      "tags": [
+        "注释",
+        "预处理替换",
+        "字符串常量"
+      ],
+      "provenance": {
+        "questionId": "ncre-c3-prog-format-002",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「书写格式与注释」相关的规定，对应本证书三级目录「C 语言程序结构 / 程序组成 / 书写格式与注释」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "aa4490583a53a3bffea61499e6e278a29428fca18bbc20c6ebe827d55e046c2f"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c3-stmt-expr-003",
+      "type": "multiple_choice",
+      "question": "关于 C 语言的语句形式，下列说法正确的有：",
+      "options": {
+        "A": "空语句仅由一个分号构成，凡是语法上要求出现语句的地方都可以使用空语句",
+        "B": "由一对花括号构成的复合语句在语法上等价于一条语句，可以放在只允许写一条语句的位置",
+        "C": "表达式语句中的表达式必须具有副作用，像 a + 5; 这样计算结果被丢弃的写法不是合法的表达式语句",
+        "D": "在 for 语句的圆括号内不允许出现分号，分号只能出现在 for 语句的最后"
+      },
+      "answer": [
+        "A",
+        "B"
+      ],
+      "analysis": "空语句就是一个分号，常用于循环体暂时不需要做事或先占位后补充的场合，凡是要求出现语句的位置都可以使用。复合语句把多条语句并成一条，因此可以放在 if、while 等只接受一条语句的位置。任何表达式后加分号都构成表达式语句，赋值表达式如此，像 a + 5 这种计算结果被丢弃的写法同样合法，编译器可能给出提醒，但语法上并不要求表达式必须有副作用。for 语句的圆括号内恰好要用两个分号来分隔初始化、条件与调整三个部分，说圆括号内不允许出现分号与 for 的语法正好相反。",
+      "chapter": "基本语句",
+      "knowledgeSection": "语句形式",
+      "knowledgePoint": "表达式语句与复合语句",
+      "difficulty": "medium",
+      "tags": [
+        "空语句",
+        "复合语句",
+        "for语句"
+      ],
+      "provenance": {
+        "questionId": "ncre-c3-stmt-expr-003",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「表达式语句与复合语句」相关的规定，对应本证书三级目录「基本语句 / 语句形式 / 表达式语句与复合语句」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "66e4cafde4c21f1438398e21fd1a5efb6da40689ce123d23897253b31602c09e"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c3-stmt-expr-004",
+      "type": "true_false",
+      "question": "在 C 语言中，单独一个分号 ; 构成空语句，它在语法上是合法的。",
+      "options": {
+        "A": "正确",
+        "B": "错误"
+      },
+      "answer": [
+        "A"
+      ],
+      "analysis": "空语句是 C 语言规定的一种语句形式，它不做任何操作，常用来充当暂不需要实现的循环体，或用来在语法要求有语句的位置占位。编译器接受单独的分号，不会报错，因此该说法成立。",
+      "chapter": "基本语句",
+      "knowledgeSection": "语句形式",
+      "knowledgePoint": "表达式语句与复合语句",
+      "difficulty": "easy",
+      "tags": [
+        "空语句",
+        "语句形式"
+      ],
+      "provenance": {
+        "questionId": "ncre-c3-stmt-expr-004",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「表达式语句与复合语句」相关的规定，对应本证书三级目录「基本语句 / 语句形式 / 表达式语句与复合语句」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "d806c0bdf002b8b230296a86a4fcf9c73843e6365f9334b157195636310461de"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c3-stmt-io-006",
+      "type": "multiple_choice",
+      "question": "关于 printf 与 scanf 的使用，下列说法正确的有：",
+      "options": {
+        "A": "scanf 的格式控制串中出现的普通字符（非格式说明符）必须在输入时原样输入",
+        "B": "printf 的格式控制串中可以包含 \\n、\\t 等转义字符，输出时产生换行、水平制表等效果",
+        "C": "用 %d 读入 double 型数据属于格式说明符与实参类型不匹配的错误用法",
+        "D": "用 %s 读入字符串时，无论输入多长都不会越界，因为 scanf 会自动为字符串分配足够的空间"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "analysis": "scanf 用格式串中的普通字符与输入流逐字匹配，输入时必须原样给出这些字符，否则匹配失败。printf 的格式串本身是普通字符串，可以包含转义字符，\\n 产生换行、\\t 产生水平制表，输出时都会生效。读入 double 型数据要用 %lf，若用 %d，scanf 会按 int 的规则把数据写到该地址，属于类型不匹配。%s 并不会自动分配存储空间，它把读到的字符依次写入调用者提供的数组，输入过长就会越界，需要通过宽度限制（例如 %9s）或限制输入长度来避免。",
+      "chapter": "基本语句",
+      "knowledgeSection": "输入输出",
+      "knowledgePoint": "输入输出函数与格式控制",
+      "difficulty": "medium",
+      "tags": [
+        "scanf",
+        "printf",
+        "转义字符",
+        "类型匹配"
+      ],
+      "provenance": {
+        "questionId": "ncre-c3-stmt-io-006",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「输入输出函数与格式控制」相关的规定，对应本证书三级目录「基本语句 / 输入输出 / 输入输出函数与格式控制」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "452ffd86f816889ecde984b1200f7188d7ecb67bdda65dbec2dd2d7aa509adbe"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c3-stmt-io-007",
+      "type": "multiple_choice",
+      "question": "已知 int a; char s[10]; 对于语句 scanf(\"%d %s\", &a, s);，下列说法正确的有：",
+      "options": {
+        "A": "若输入为 12 abc，则 a 的值为 12，s 中存放字符串 \"abc\"",
+        "B": "%s 读入时先跳过前导空白字符，然后连续读入非空白字符，遇到空白字符（空格、制表符、换行等）即结束，并把该空白字符留在输入流中",
+        "C": "%s 会在读入的字符串末尾自动补上字符串结束标志，因此 s 中除有效字符外还需要一个字节存放 '\\0'",
+        "D": "把 &a 写成 a 也可以正常读入，因为变量名本身就代表变量的地址"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "analysis": "%d 读入 12，格式串中的空格表示跳过空白字符，%s 随后读入 abc 并自动补上结束标志，两个变量都得到正确结果。%s 的读入规则是先跳过前导空白，再连续读取非空白字符，遇到空白就停止，并且不把该空白字符存入数组。由于要在末尾补上字符串结束标志，长度为 10 的数组最多只能安全存放 9 个有效字符，再加一个结束标志。变量名在表达式中代表变量的值，只有数组名才代表地址，把 &a 写成 a 传递的是变量的值，scanf 无法据此写回数据。",
+      "chapter": "基本语句",
+      "knowledgeSection": "输入输出",
+      "knowledgePoint": "输入输出函数与格式控制",
+      "difficulty": "hard",
+      "tags": [
+        "scanf",
+        "字符串输入",
+        "结束标志",
+        "数组越界"
+      ],
+      "provenance": {
+        "questionId": "ncre-c3-stmt-io-007",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「输入输出函数与格式控制」相关的规定，对应本证书三级目录「基本语句 / 输入输出 / 输入输出函数与格式控制」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "188fbe0c8f7842c32e85dfe554b6ae99234653340ee2ead8bc45203b001dea46"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c3-stmt-io-008",
+      "type": "true_false",
+      "question": "在 scanf 函数中，格式说明符 %f 既可以用于读入 float 型数据，也可以用于读入 double 型数据。",
+      "options": {
+        "A": "正确",
+        "B": "错误"
+      },
+      "answer": [
+        "B"
+      ],
+      "analysis": "scanf 是依据地址直接写入数据的，必须严格区分类型：读入 float 型数据用 %f，读入 double 型数据要用 %lf，两者混用会使写入的字节数与变量所占空间不符，从而得到错误结果。printf 的情况不同，float 实参在传递时会自动转换为 double，因此 printf 中的 %f 可以处理这两种数据，这个差异很容易混淆，所以该说法错误。",
+      "chapter": "基本语句",
+      "knowledgeSection": "输入输出",
+      "knowledgePoint": "输入输出函数与格式控制",
+      "difficulty": "easy",
+      "tags": [
+        "scanf",
+        "格式说明符",
+        "浮点类型"
+      ],
+      "provenance": {
+        "questionId": "ncre-c3-stmt-io-008",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「输入输出函数与格式控制」相关的规定，对应本证书三级目录「基本语句 / 输入输出 / 输入输出函数与格式控制」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "cf530ba89e5f2e8ac170b0047dc7083aa125428690a14aa3332273e194147863"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c3-macro-define-003",
+      "type": "multiple_choice",
+      "question": "关于带参数的宏，下列说法正确的有：",
+      "options": {
+        "A": "展开时实参按文本原样替换形参，为避免运算符优先级引起错误，应把宏体和每个形参都用圆括号括起来",
+        "B": "带参宏的实参若是表达式，展开后可能因运算符优先级而改变原有的运算次序",
+        "C": "宏定义中宏名与左圆括号之间不能有空格，写成 #define S (x) x*x 会被当作把 S 定义为 (x) x*x 的无参宏",
+        "D": "带参宏在展开时会检查实参的类型是否与形参一致，这一点与函数调用相同"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "analysis": "带参宏只做文本替换，不像函数那样先求值再传参，因此必须靠圆括号来保证结合次序，宏体和每个形参都加括号是最稳妥的写法。实参是表达式时，替换进去之后会与宏体中的运算符按优先级重新结合，可能改变原有的运算次序，这正是必须加括号的原因。宏名与左圆括号之间若出现空格，预处理程序会认为定义的是不带参数的宏，宏体从空格之后开始，于是 S 被定义为 (x) x*x，这是很常见的书写错误。预处理阶段没有类型信息，也谈不上类型检查，宏与函数在这一点上差别明显。",
+      "chapter": "编译预处理",
+      "knowledgeSection": "预处理命令",
+      "knowledgePoint": "宏定义与调用",
+      "difficulty": "medium",
+      "tags": [
+        "带参宏",
+        "括号保护",
+        "宏与函数"
+      ],
+      "provenance": {
+        "questionId": "ncre-c3-macro-define-003",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「宏定义与调用」相关的规定，对应本证书三级目录「编译预处理 / 预处理命令 / 宏定义与调用」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "cc50d1d10ab2fbaaab70ac069ce719db81727bc6d6a1d4fd850f04327a03a5f2"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c3-macro-define-004",
+      "type": "true_false",
+      "question": "用 #define 定义的宏名在预处理阶段被替换掉，替换后的程序中不再有该宏名，因此宏名本身不占用存储空间，也没有类型的概念。",
+      "options": {
+        "A": "正确",
+        "B": "错误"
+      },
+      "answer": [
+        "A"
+      ],
+      "analysis": "宏替换在编译之前完成，宏名只是预处理阶段的记号，不参与编译和运行，因此不会为它分配存储单元，也不存在数据类型。替换之后参与编译的是宏体文本，它的类型含义完全由所在上下文决定，所以该说法成立。",
+      "chapter": "编译预处理",
+      "knowledgeSection": "预处理命令",
+      "knowledgePoint": "宏定义与调用",
+      "difficulty": "easy",
+      "tags": [
+        "宏定义",
+        "预处理",
+        "类型"
+      ],
+      "provenance": {
+        "questionId": "ncre-c3-macro-define-004",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「宏定义与调用」相关的规定，对应本证书三级目录「编译预处理 / 预处理命令 / 宏定义与调用」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "d44dff4ad1989c0ccf5f9d1ee42cd9d70888db55c95bd596a5676ab4815c932a"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c3-macro-include-002",
+      "type": "multiple_choice",
+      "question": "关于用 #include 命令实现的文件包含处理，下列说法正确的有：",
+      "options": {
+        "A": "尖括号形式通常用来包含编译系统提供的标准头文件，双引号形式通常用来包含用户自己编写的头文件",
+        "B": "被包含文件的内容在预处理阶段被复制到 #include 命令所在的位置，效果相当于把该文件的内容直接写在那里",
+        "C": "预处理时如果按搜索规则找不到被包含的文件，编译过程会报错，无法生成目标程序",
+        "D": "同一个头文件在源文件中被包含两次一定会导致编译失败，所以必须绝对避免重复包含"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "analysis": "两种包含形式的典型分工是：尖括号用于系统头文件，双引号用于用户头文件，这样便于编译器确定去哪里查找。文件包含的本质是把被包含文件的内容原样复制到命令所在的位置，因而与手写该内容等效。找不到被包含文件时，预处理器会给出无法打开文件的错误信息，编译无法继续，也就不能生成目标程序。重复包含不一定失败，标准头文件通常带有防止重复包含的保护措施，用户也可以利用条件编译自己保护，所以“一定会导致编译失败”的说法过于绝对。",
+      "chapter": "编译预处理",
+      "knowledgeSection": "预处理命令",
+      "knowledgePoint": "文件包含处理",
+      "difficulty": "medium",
+      "tags": [
+        "文件包含",
+        "重复包含",
+        "预处理"
+      ],
+      "provenance": {
+        "questionId": "ncre-c3-macro-include-002",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「文件包含处理」相关的规定，对应本证书三级目录「编译预处理 / 预处理命令 / 文件包含处理」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "23187c05613dcb80cf8d5831418ae8dc49babf53b72588621cc8acdc4fa882a8"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c3-macro-include-003",
+      "type": "true_false",
+      "question": "#include <stdio.h> 与 #include \"stdio.h\" 在同一个编译环境中的查找顺序通常不同：前者一般只在系统目录中按顺序查找，后者通常先到当前源文件所在目录查找，找不到再到系统目录中查找。",
+      "options": {
+        "A": "正确",
+        "B": "错误"
+      },
+      "answer": [
+        "A"
+      ],
+      "analysis": "尖括号形式用于系统头文件，通常直接在编译系统设定的系统目录中查找；双引号形式通常先在当前源文件所在目录以及编译选项指定的用户目录中查找，找不到再按系统目录的顺序查找。正因为双引号形式会优先搜索用户目录，它才适合用来包含自己编写的头文件，所以该说法成立。",
+      "chapter": "编译预处理",
+      "knowledgeSection": "预处理命令",
+      "knowledgePoint": "文件包含处理",
+      "difficulty": "easy",
+      "tags": [
+        "文件包含",
+        "查找顺序",
+        "头文件"
+      ],
+      "provenance": {
+        "questionId": "ncre-c3-macro-include-003",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「文件包含处理」相关的规定，对应本证书三级目录「编译预处理 / 预处理命令 / 文件包含处理」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "c9cc530453fc30f69df9061f747dc57b08b723c28865f24752b76a8f15dbd4e5"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c3-struct-typedef-002",
+      "type": "true_false",
+      "question": "用 typedef 为某个已有类型定义别名以后，编译器就把这个别名当成了一个与原有类型不同的新类型。",
+      "options": {
+        "A": "正确",
+        "B": "错误"
+      },
+      "answer": [
+        "B"
+      ],
+      "analysis": "typedef 的作用仅仅是为已有类型增加一个新名字，别名与原有类型属于同一种类型，编译器不会把它们区别对待，因此无法借助 typedef 得到新的类型。若确实需要互不相同的类型，应当用结构体、共用体或枚举等构造类型来定义，所以该说法错误。",
+      "chapter": "结构体与共同体",
+      "knowledgeSection": "构造类型",
+      "knowledgePoint": "typedef 与类型定义",
+      "difficulty": "medium",
+      "tags": [
+        "typedef",
+        "类型别名",
+        "构造类型"
+      ],
+      "provenance": {
+        "questionId": "ncre-c3-struct-typedef-002",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「typedef 与类型定义」相关的规定，对应本证书三级目录「结构体与共同体 / 构造类型 / typedef 与类型定义」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "d16e4d6218a3dce41736807a4264c82a39dfe26f5bb5c3f1e0a24ff536a13642"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c3-struct-member-004",
+      "type": "multiple_choice",
+      "question": "已知定义：\nstruct date { int y, m, d; };\nstruct person { char name[8]; struct date birth; } p;\n下列说法正确的有：",
+      "options": {
+        "A": "引用 p 中出生年份成员的写法是 p.birth.y",
+        "B": "struct date 必须嵌套定义在 struct person 的内部，不能先单独定义再使用",
+        "C": "p.name 是数组名，在表达式中代表该数组首元素的地址，不能作为赋值运算符的左操作数",
+        "D": "若 q 与 p 是同一类型的结构体变量，只能把 q 的每个成员逐个赋给 p，不能用 p = q; 整体赋值"
+      },
+      "answer": [
+        "A",
+        "C"
+      ],
+      "analysis": "结构体的成员本身又可以是结构体，引用嵌套成员时从左到右逐级使用圆点运算符，所以 p.birth.y 这种写法正确。类型 struct date 完全可以在 struct person 之前单独定义，这是最常见的做法；也可以把 struct date 的定义写在 struct person 内部，但并非必须，因此“必须嵌套定义”的说法错误。数组名在表达式中被转换为首元素的地址，属于常量性质的指针，不能被赋值。同一类型的结构体变量之间可以整体赋值，各成员（包括数组成员）会被逐个复制，所以说“只能逐个成员赋值”同样错误。",
+      "chapter": "结构体与共同体",
+      "knowledgeSection": "构造类型",
+      "knowledgePoint": "结构体与共用体成员引用",
+      "difficulty": "medium",
+      "tags": [
+        "结构体",
+        "嵌套结构体",
+        "整体赋值"
+      ],
+      "provenance": {
+        "questionId": "ncre-c3-struct-member-004",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「结构体与共用体成员引用」相关的规定，对应本证书三级目录「结构体与共同体 / 构造类型 / 结构体与共用体成员引用」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "dedd4d9c7227fb00e9cfa0de666b847f6511f6a8637271d6a57f1e517ea77aa3"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c3-struct-member-005",
+      "type": "true_false",
+      "question": "在同一个源文件中先后定义两个成员名、成员类型和成员个数都完全相同的结构体类型，这两个类型的变量可以互相整体赋值。",
+      "options": {
+        "A": "正确",
+        "B": "错误"
+      },
+      "answer": [
+        "B"
+      ],
+      "analysis": "C 语言按类型名区分类型，两个分别定义的结构体即使成员表完全一样，也属于两个不同的类型，它们之间不能整体赋值，编译器会给出类型不兼容的错误。要让两者兼容，应当使用同一个类型名，例如先用 typedef 定义一个类型名再统一使用，所以该说法错误。",
+      "chapter": "结构体与共同体",
+      "knowledgeSection": "构造类型",
+      "knowledgePoint": "结构体与共用体成员引用",
+      "difficulty": "hard",
+      "tags": [
+        "结构体",
+        "类型兼容",
+        "整体赋值"
+      ],
+      "provenance": {
+        "questionId": "ncre-c3-struct-member-005",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「结构体与共用体成员引用」相关的规定，对应本证书三级目录「结构体与共同体 / 构造类型 / 结构体与共用体成员引用」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "76b6d6bd7735bec7304787b0716aea06585308ff214b77b252ab8d7307547a98"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c3-struct-list-003",
+      "type": "multiple_choice",
+      "question": "关于不带头结点的单向链表（头指针为 head），下列说法正确的有：",
+      "options": {
+        "A": "要访问第 i 个结点必须从头指针出发沿 next 指针逐个查找，不能像数组那样通过下标直接定位",
+        "B": "在结点 A 之后插入新结点 B 时，应先把 B 的 next 指向 A 原来的后继结点，再让 A 的 next 指向 B",
+        "C": "判断链表是否为空的依据是头指针 head 的值是否为 NULL",
+        "D": "在链表中查找某个数据值应当采用二分查找，以提高查找效率"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "analysis": "链表结点在内存中并不连续，只能通过前一个结点的指针域找到后一个结点，所以访问第 i 个结点必须从头开始顺序查找。插入时必须先把新结点与后继结点连接好，再改写前驱结点的指针，顺序颠倒会丢失后面整段链表。头指针为空表示链表中没有任何结点，这正是不带头结点链表为空的判断依据。二分查找要求能够按下标随机访问并且数据有序，链表不具备这种条件，只能顺序查找，所以“应当采用二分查找”的说法错误。",
+      "chapter": "结构体与共同体",
+      "knowledgeSection": "构造类型",
+      "knowledgePoint": "单链表操作",
+      "difficulty": "medium",
+      "tags": [
+        "单链表",
+        "结点插入",
+        "顺序查找"
+      ],
+      "provenance": {
+        "questionId": "ncre-c3-struct-list-003",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「单链表操作」相关的规定，对应本证书三级目录「结构体与共同体 / 构造类型 / 单链表操作」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "99fe67a26beb0bee2ef456a020e672137c49d29a72221be109b3f66af0681102"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c3-struct-list-004",
+      "type": "true_false",
+      "question": "在单向链表中，每个结点由存放数据的数据域和存放后继结点地址的指针域组成，最后一个结点的指针域通常被置为 NULL。",
+      "options": {
+        "A": "正确",
+        "B": "错误"
+      },
+      "answer": [
+        "A"
+      ],
+      "analysis": "单向链表的结点一般用结构体描述，其中包含存放数据的数据成员和指向本结构体类型的指针成员。最后一个结点没有后继结点，它的指针域被置为空指针，遍历时以空指针作为结束标志，所以该说法成立。",
+      "chapter": "结构体与共同体",
+      "knowledgeSection": "构造类型",
+      "knowledgePoint": "单链表操作",
+      "difficulty": "easy",
+      "tags": [
+        "单链表",
+        "结点结构",
+        "空指针"
+      ],
+      "provenance": {
+        "questionId": "ncre-c3-struct-list-004",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「单链表操作」相关的规定，对应本证书三级目录「结构体与共同体 / 构造类型 / 单链表操作」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "33c2cbbda8019e59059bfaf43971afb1319218751955daac46d0d1b475072bbc"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c3-bit-op-002",
+      "type": "true_false",
+      "question": "表达式 x << 2 相当于把 x 的值乘以 2，表达式 x >> 2 相当于把 x 的值除以 2。",
+      "options": {
+        "A": "正确",
+        "B": "错误"
+      },
+      "answer": [
+        "B"
+      ],
+      "analysis": "左移 n 位相当于乘以 2 的 n 次方，右移 n 位相当于对非负整数整除 2 的 n 次方，因此左移或右移 2 位对应的是乘 4 与除以 4，而不是乘 2 与除以 2。只有移位 1 位才与乘 2 和除以 2 对应，而且还要注意数据类型的宽度和溢出等限制，所以该说法错误。",
+      "chapter": "位运算",
+      "knowledgeSection": "位操作",
+      "knowledgePoint": "位运算符含义",
+      "difficulty": "medium",
+      "tags": [
+        "移位运算",
+        "左移",
+        "右移"
+      ],
+      "provenance": {
+        "questionId": "ncre-c3-bit-op-002",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「位运算符含义」相关的规定，对应本证书三级目录「位运算 / 位操作 / 位运算符含义」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "edc2985670e32494ab9c2cdd55d45aa52018c2fe769ffaa5df6a5c119567aed8"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c3-bit-app-003",
+      "type": "multiple_choice",
+      "question": "关于位运算在实际问题中的应用，下列说法正确的有：",
+      "options": {
+        "A": "对非负整数 x，表达式 x & 1 的值为 1 时说明 x 是奇数，为 0 时说明 x 是偶数",
+        "B": "对任意整数 x，表达式 x ^ x 的值都是 0",
+        "C": "表达式 ~x 会把 x 的每一个二进制位取反，即 0 变 1、1 变 0",
+        "D": "位运算只能作用于 int 型数据，char 型数据不能参与位运算"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "analysis": "整数最低位为 1 就是奇数，为 0 就是偶数，因此用 x & 1 可以判断非负整数的奇偶，这比用取余运算更直接。异或的规则是两位相同得 0、不同得 1，同一个数与自身异或时每一位都相同，结果必然是全 0。按位取反是一元运算符，把操作数的每一位翻转，结果与原数按位互补。位运算要求操作数是整数类型，char、short、unsigned 等整型都可以参与，运算前按整数提升规则转换，并不存在只能用 int 的限制。",
+      "chapter": "位运算",
+      "knowledgeSection": "位操作",
+      "knowledgePoint": "简单位运算应用",
+      "difficulty": "medium",
+      "tags": [
+        "按位与",
+        "异或",
+        "按位取反"
+      ],
+      "provenance": {
+        "questionId": "ncre-c3-bit-app-003",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「简单位运算应用」相关的规定，对应本证书三级目录「位运算 / 位操作 / 简单位运算应用」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "ff0f111fa1d1e9cd18739922fce4c05f213c9680bb8dfe377df16ff12d8cce14"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c3-file-read-001",
+      "type": "multiple_choice",
+      "question": "关于文件的字符读写函数，下列说法正确的有：",
+      "options": {
+        "A": "fputc 函数把指定字符写到指定文件中，成功时返回所写的字符，失败时返回 EOF",
+        "B": "fgetc 函数的返回值类型是 int，读入成功时返回读到的字符，遇到文件结束或出错时返回 EOF",
+        "C": "用 fgetc 读入的字符既可以用 char 型变量接收，也可以用 int 型变量接收，用 int 型接收更便于与 EOF 比较",
+        "D": "fgets 可以从文件中读入任意长度的字符串，函数会自动分配足够的内存，因此不会越界"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "analysis": "fputc 的返回值是写出字符的编码值（以 int 形式返回），失败时返回 EOF，据此可以判断写操作是否成功。fgetc 返回 int，是为了能用超出字符取值范围的 EOF 表示文件结束或出错，因此读到的字符可以存放在 int 变量中。若用 char 型变量接收，在把结果与 EOF 比较时可能因 char 的符号性而判断错误，所以用 int 接收更稳妥。fgets 需要调用者提供字符数组和数组长度，它最多读入长度减一个字符，多余部分留在输入流中，并不会自动分配内存，把数组开得足够大并用长度参数控制才是防止越界的办法。",
+      "chapter": "文件操作",
+      "knowledgeSection": "缓冲文件系统",
+      "knowledgePoint": "文件读写函数",
+      "difficulty": "hard",
+      "tags": [
+        "fgetc",
+        "fputc",
+        "fgets",
+        "EOF"
+      ],
+      "provenance": {
+        "questionId": "ncre-c3-file-read-001",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「文件读写函数」相关的规定，对应本证书三级目录「文件操作 / 缓冲文件系统 / 文件读写函数」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "d967aa070eb0720ee244e611fa7a0928ef394e155e97ae06f7ba79ffdda941ce"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c3-file-seek-001",
+      "type": "true_false",
+      "question": "用 fopen 以 \"a\" 模式打开一个文件之后，即使使用 fseek 把文件的位置指针移动到文件开头，后续的写操作也会从该位置开始并把原有的内容覆盖掉。",
+      "options": {
+        "A": "正确",
+        "B": "错误"
+      },
+      "answer": [
+        "B"
+      ],
+      "analysis": "以 \"a\" 模式打开的文件具有追加语义，每次写操作都会自动定位到文件末尾进行追加，即使先用 fseek 或 rewind 改变了位置指针，写操作仍然写到文件末尾，不会覆盖原有内容，所以该说法错误。fseek 在追加模式下主要影响读操作，写入位置由追加语义决定。此外，对文本文件使用 fseek 时，除偏移量 0 和 ftell 返回的偏移量以外，不宜使用自行指定的偏移量。",
+      "chapter": "文件操作",
+      "knowledgeSection": "缓冲文件系统",
+      "knowledgePoint": "文件定位函数",
+      "difficulty": "medium",
+      "tags": [
+        "fseek",
+        "追加模式",
+        "文件定位"
+      ],
+      "provenance": {
+        "questionId": "ncre-c3-file-seek-001",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「文件定位函数」相关的规定，对应本证书三级目录「文件操作 / 缓冲文件系统 / 文件定位函数」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "844b2c03410626ac30301ec3b54f433cfe415c95b5705d44ff3875def1d06920"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c4-op-convert-005",
+      "type": "multiple_choice",
+      "question": "关于 C 语言中数据类型转换的表述，下列正确的有（　）。",
+      "options": {
+        "A": "赋值时若右侧表达式的类型长度长于左侧变量类型，可能截断高位而丢失数据",
+        "B": "将浮点型数据赋给整型变量时，小数部分被舍弃，可能造成数值精度损失",
+        "C": "强制类型转换写成 (类型名)(表达式) 的形式，转换结果产生一个指定类型的中间值，被转换对象本身的值不变",
+        "D": "把 double 型数据赋给 int 型变量时，系统会自动四舍五入到最接近的整数"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "analysis": "赋值时若右侧类型比左侧宽，高位可能被截断，这一表述正确。把浮点型赋给整型变量时小数部分被直接舍弃，属于精度损失，这一表述也正确。强制类型转换写成 (类型名)(表达式) 的形式，它产生一个指定类型的中间值，被转换对象本身的值并不改变，这一表述正确。把 double 型数据赋给 int 型变量时执行的是截断而不是四舍五入，该舍入规则与前述小数部分被舍弃的说法自相矛盾，因此错误。",
+      "chapter": "数据类型及其运算",
+      "knowledgeSection": "运算符与表达式",
+      "knowledgePoint": "类型转换",
+      "difficulty": "medium",
+      "tags": [
+        "类型转换",
+        "赋值转换",
+        "整型提升"
+      ],
+      "provenance": {
+        "questionId": "ncre-c4-op-convert-005",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「类型转换」相关的规定，对应本证书三级目录「数据类型及其运算 / 运算符与表达式 / 类型转换」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "39669dff842986ef647c9622181056a23b355b4c16ef8c703d5971ab42e49336"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c4-op-expr-005",
+      "type": "multiple_choice",
+      "question": "关于 C 语言中除法与取余运算的规则，下列表述正确的有（　）。",
+      "options": {
+        "A": "两个整型数据相除时结果仍为整型，采用向零取整的截断方式，7/2 的值为 3",
+        "B": "取余运算要求两侧的操作数都是整型，浮点型数据不能直接参与取余运算",
+        "C": "取余运算结果的符号与被除数相同，-7%3 的值为 -1，而 7%-3 的值为 1",
+        "D": "两个整型数据相除时结果按四舍五入取整，因此 7/2 的值为 4"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "analysis": "整型相除结果仍为整型并向零截断，7/2 得 3，这一表述正确。取余运算的两侧都必须是整型，浮点型不能直接参与取余，这一表述正确。取余结果的符号随被除数，-7%3 得 -1、7%-3 得 1，这一表述正确。整型相除采用截断而非四舍五入，7/2 的值是 3 而不是 4，该表述与前一项自相矛盾，因此错误。",
+      "chapter": "数据类型及其运算",
+      "knowledgeSection": "运算符与表达式",
+      "knowledgePoint": "表达式与求值规则",
+      "difficulty": "medium",
+      "tags": [
+        "整数除法",
+        "取余运算",
+        "类型转换"
+      ],
+      "provenance": {
+        "questionId": "ncre-c4-op-expr-005",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「表达式与求值规则」相关的规定，对应本证书三级目录「数据类型及其运算 / 运算符与表达式 / 表达式与求值规则」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "c0755075c6bbc47bfda2dde4f0cbae086a8bad23382dc37eaa053e95d84d4108"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c4-op-expr-007",
+      "type": "multiple_choice",
+      "question": "关于 C 语言运算符的优先级与结合性，下列表述正确的有（　）。",
+      "options": {
+        "A": "算术运算符的优先级高于关系运算符，关系运算符的优先级高于逻辑与，逻辑与的优先级高于逻辑或",
+        "B": "条件运算符的结合方向为从右向左，多个条件运算符嵌套时应按从右向左的顺序结合",
+        "C": "赋值运算符的优先级低于算术运算符，因此表达式 a=b+3 会先计算 b+3 再赋值给 a",
+        "D": "逗号表达式的值是其中第一个子表达式的值，整个逗号表达式的求值顺序是从右向左"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "analysis": "C 语言的优先级由高到低依次为算术运算、关系运算、逻辑与、逻辑或，该表述成立。条件运算符是右结合运算符，嵌套使用时按从右向左结合，该表述成立。赋值运算符的优先级低于算术运算符，因此右侧的加法先算完再把结果赋给左侧变量，该表述成立。逗号表达式从左到右依次求值，整个表达式的值等于最右边子表达式的值，把它说成取最左边子表达式的值且从右向左求值，恰好把求值方向和取值位置都说反了。",
+      "chapter": "数据类型及其运算",
+      "knowledgeSection": "运算符与表达式",
+      "knowledgePoint": "表达式与求值规则",
+      "difficulty": "medium",
+      "tags": [
+        "运算符优先级",
+        "结合性",
+        "逗号表达式"
+      ],
+      "provenance": {
+        "questionId": "ncre-c4-op-expr-007",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「表达式与求值规则」相关的规定，对应本证书三级目录「数据类型及其运算 / 运算符与表达式 / 表达式与求值规则」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "2779e994bb20736ad7f9975b4b573249ac41e5e334d713ff70c74cd33af2032d"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c4-sel-if-003",
+      "type": "true_false",
+      "question": "在 C 语言中，if 语句的控制条件可以是任意数值类型的表达式，条件表达式的值只要不等于 0 就按“真”处理。",
+      "options": {
+        "A": "正确",
+        "B": "错误"
+      },
+      "answer": [
+        "A"
+      ],
+      "analysis": "C 语言没有专门的逻辑类型用于 if 的条件，条件位置写的是数值表达式，判定规则是非 0 为真、0 为假，所以写成 if(5)、if(x)、if(x%3) 都是允许的，该说法成立。认为只有关系表达式或逻辑表达式才能作为条件，是把其他语言的规定套用到 C 语言上，因此认为该说法错误的判断不成立。",
+      "chapter": "选择与循环结构",
+      "knowledgeSection": "选择结构",
+      "knowledgePoint": "if 选择结构",
+      "difficulty": "easy",
+      "tags": [
+        "if 语句",
+        "条件判定"
+      ],
+      "provenance": {
+        "questionId": "ncre-c4-sel-if-003",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「if 选择结构」相关的规定，对应本证书三级目录「选择与循环结构 / 选择结构 / if 选择结构」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "f34197a45bba750921897ef90581bf636cfe72ba4f9e5763a51421b0d32dee92"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c4-sel-switch-002",
+      "type": "multiple_choice",
+      "question": "关于 switch 语句的使用规则，下列表述正确的有（　）。",
+      "options": {
+        "A": "switch 后面括号内的表达式只能是整型、字符型或枚举型，不能是浮点型",
+        "B": "每个 case 后面的常量表达式必须互不相同，且不能是变量",
+        "C": "default 子句必须写在所有 case 之后，否则会产生编译错误",
+        "D": "在 switch 的某个分支里执行 break 语句可以立即跳出整个 switch 结构"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ],
+      "analysis": "switch 后的表达式只能是整型、字符型或枚举型，不能是浮点型，这一表述正确。各 case 后的常量表达式必须互不相同，且不能是变量，这一表述正确。default 子句可以出现在 switch 体内的任意位置，它的执行只取决于是否有 case 匹配成功，并不要求写在最后，因此认为它必须写在所有 case 之后的说法错误。在分支中执行 break 会立即跳出整个 switch 结构，这一表述正确。",
+      "chapter": "选择与循环结构",
+      "knowledgeSection": "选择结构",
+      "knowledgePoint": "switch 多分支结构",
+      "difficulty": "hard",
+      "tags": [
+        "switch",
+        "case 标号",
+        "default"
+      ],
+      "provenance": {
+        "questionId": "ncre-c4-sel-switch-002",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「switch 多分支结构」相关的规定，对应本证书三级目录「选择与循环结构 / 选择结构 / switch 多分支结构」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "9fdd4a592329fd54f01518ddb85b47d38a5ec551821fa5db1a7b413fb8c5e4f5"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c4-loop-brk-001",
+      "type": "multiple_choice",
+      "question": "关于 break 与 continue 在循环中的作用，下列表述正确的有（　）。",
+      "options": {
+        "A": "break 语句终止整个循环，程序流程转到循环语句之后继续执行",
+        "B": "continue 语句结束本次循环，跳过循环体中它之后的语句，转去判断是否开始下一轮循环",
+        "C": "在嵌套循环的内层循环中执行 break，会同时跳出内层循环和外层循环",
+        "D": "在 switch 结构中执行 break 只跳出 switch，不会影响包含该 switch 的循环"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ],
+      "analysis": "break 终止整个循环并把流程转到循环之后，这一表述正确。continue 结束本次循环，跳过循环体中其后的语句，转去判断是否开始下一轮，这一表述正确。break 只能终止它所在的那一层循环，内层循环中的 break 不会影响外层循环，因此认为它会同时跳出内外两层的说法错误。在 switch 中执行 break 只跳出该 switch 结构，不影响包含它的循环，这一表述正确。",
+      "chapter": "选择与循环结构",
+      "knowledgeSection": "循环结构",
+      "knowledgePoint": "break 与 continue",
+      "difficulty": "medium",
+      "tags": [
+        "break",
+        "continue",
+        "嵌套循环"
+      ],
+      "provenance": {
+        "questionId": "ncre-c4-loop-brk-001",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「break 与 continue」相关的规定，对应本证书三级目录「选择与循环结构 / 循环结构 / break 与 continue」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "1bf499cf1cf2868ec86c65a14b78dd0e6e2a5d91d01bdc476f86cda57f8ac01e"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c4-ptr-arr-001",
+      "type": "multiple_choice",
+      "question": "关于字符数组与字符指针的初始化，下列表述正确的有（　）。",
+      "options": {
+        "A": "char a[10]=\"abc\"; 中数组所占的存储空间大于字符串常量本身的长度，其余单元被补为零",
+        "B": "char *p=\"abc\"; 中指针变量 p 保存字符串常量的首地址，通过 p 改写字符是不允许的",
+        "C": "凡是字符数组，其中的字符串都一定以空字符作为结束标志，字符的个数就是字符串的长度",
+        "D": "char b[]={'a','b','c'}; 与 char c[]=\"abc\"; 两者占用的存储单元个数相同"
+      },
+      "answer": [
+        "A",
+        "B"
+      ],
+      "analysis": "用字符串常量初始化字符数组时，除字符本身外还要为结束标志留出位置，数组长度大于字符个数，剩余单元由系统补零，该表述成立。用字符串常量初始化字符指针时，指针指向常量所在的存储区，该存储区的内容不允许修改，因此通过指针改写字符是错误的，该表述成立。字符数组中以逐个字符方式初始化时通常不含结束标志，这类数组不能当作字符串使用，所以把“凡是字符数组都一定以空字符结束”和“字符个数就是字符串长度”当作普遍规律不成立。逐个字符初始化的数组长度由初值个数决定，用字符串常量初始化时还要多出一个结束标志的位置，两者占用的单元个数并不相同。",
+      "chapter": "指针",
+      "knowledgeSection": "指针基础",
+      "knowledgePoint": "数组与字符串的指针",
+      "difficulty": "medium",
+      "tags": [
+        "字符数组",
+        "字符指针",
+        "初始化"
+      ],
+      "provenance": {
+        "questionId": "ncre-c4-ptr-arr-001",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「数组与字符串的指针」相关的规定，对应本证书三级目录「指针 / 指针基础 / 数组与字符串的指针」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "5c1bed1ba98dda8f4aacd03332b36481225f05e5f134992eca0a11aff17ead5f"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c4-ptr-arrptr-001",
+      "type": "multiple_choice",
+      "question": "关于数组指针与指针数组，下列表述正确的有（　）。",
+      "options": {
+        "A": "声明 int (*p)[5]; 中 p 是一个指针，它指向含 5 个整型元素的一维数组",
+        "B": "声明 int *p[5]; 中 p 是一个含 5 个元素的数组，每个元素都是指向整型数据的指针",
+        "C": "声明 int *p[5]; 中 p 是一个指针，它指向含 5 个整型元素的一维数组",
+        "D": "声明 int *p[5]; 时，由于方括号的优先级高于星号，p 先与方括号结合成为数组"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ],
+      "analysis": "int (*p)[5]; 中括号先让星号与 p 结合，p 是指向含 5 个整型元素的一维数组的指针，这一表述正确。int *p[5]; 中 p 是含 5 个元素的数组，每个元素都是指向整型数据的指针，这一表述正确。把 int *p[5]; 中的 p 说成指向一维数组的指针，混淆了指针数组与数组指针的差别，该说法错误。方括号的优先级高于星号，因此 p 先与方括号结合成为数组，元素类型为指向整型的指针，这一表述正确。",
+      "chapter": "指针",
+      "knowledgeSection": "指针应用",
+      "knowledgePoint": "指针数组与多级指针",
+      "difficulty": "hard",
+      "tags": [
+        "数组指针",
+        "指针数组",
+        "声明辨析"
+      ],
+      "provenance": {
+        "questionId": "ncre-c4-ptr-arrptr-001",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「指针数组与多级指针」相关的规定，对应本证书三级目录「指针 / 指针应用 / 指针数组与多级指针」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "56d2f22863c8c9e7578b10f321edb633c595ede9349b2da57b3919c856d9f7f2"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c4-ptr-multi-002",
+      "type": "multiple_choice",
+      "question": "设有代码 int a[4]={10,20,30,40}; int *p=a; int **pp=&p; 下列表达式求值后结果等于 10 的有（　）。",
+      "options": {
+        "A": "a[0]",
+        "B": "**pp",
+        "C": "*p",
+        "D": "*(p + 1)"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "analysis": "数组元素 a[0] 的值是 10。p 指向 a[0]，pp 指向 p，对 pp 做两次间址 **pp 等于 *(*pp)，先取出 p 的值即 a[0] 的地址，再取出该地址的内容 10。*p 直接取出 p 所指向单元的内容，也是 10。*(p+1) 等价于 a[1]，其值是 20 而不是 10，因此不符合本题要求结果等于 10 的条件。",
+      "chapter": "指针",
+      "knowledgeSection": "指针应用",
+      "knowledgePoint": "指针数组与多级指针",
+      "difficulty": "medium",
+      "tags": [
+        "二级指针",
+        "多级间址",
+        "等价形式"
+      ],
+      "provenance": {
+        "questionId": "ncre-c4-ptr-multi-002",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「指针数组与多级指针」相关的规定，对应本证书三级目录「指针 / 指针应用 / 指针数组与多级指针」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "62c5936863d041e4c8cd6da066dbcf9fe118c3d61ee4e5263ac334e8380b1f17"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c4-fn-arg-002",
+      "type": "true_false",
+      "question": "函数调用时的参数传递是单向的值传递，形参值的改变不会影响主调函数中实参的值，数组名作实参时传递的是数组首地址，此时函数可以通过该地址改变主调函数数组元素的值。",
+      "options": {
+        "A": "正确",
+        "B": "错误"
+      },
+      "answer": [
+        "A"
+      ],
+      "analysis": "C 语言只有值传递，形参是实参的副本，对形参本身赋值不会反馈到主调函数。数组名作为实参时，传给形参的是数组首元素的地址，形参通过该地址做间址运算就能修改主调函数数组中对应元素的值，这与普通变量的值传递并不矛盾，因为改变的不是指针本身而是它所指向的存储单元，该说法成立。",
+      "chapter": "函数",
+      "knowledgeSection": "函数基础",
+      "knowledgePoint": "参数传递",
+      "difficulty": "medium",
+      "tags": [
+        "值传递",
+        "数组作参数",
+        "地址传递"
+      ],
+      "provenance": {
+        "questionId": "ncre-c4-fn-arg-002",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「参数传递」相关的规定，对应本证书三级目录「函数 / 函数基础 / 参数传递」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "ec73f684cc7e042f6bfc538952c548d1631207a32da3e9b8a1ed9372061b0675"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c4-fn-scope-003",
+      "type": "multiple_choice",
+      "question": "关于变量的作用域与存储类别，下列表述正确的有（　）。",
+      "options": {
+        "A": "全局变量的作用域从定义位置开始到本源文件结束，定义位置之前的函数若要用它需要加 extern 说明",
+        "B": "局部变量只在定义它的函数或复合语句内有效，离开该范围后不能按名字访问",
+        "C": "在同一个函数中，局部变量可以与全局变量同名，此时在该函数内局部变量会屏蔽同名的全局变量",
+        "D": "自动变量（局部变量）若在定义时不给出初值，系统会自动把它初始化为零"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "analysis": "全局变量的作用域从定义位置开始到本源文件结束，定义位置之前若要用它需加 extern 说明，这一表述正确。局部变量只在定义它的函数或复合语句内有效，离开该范围不能按名字访问，这一表述正确。局部变量可以与全局变量同名，此时局部变量屏蔽同名全局变量，这一表述正确。只有外部变量和静态变量才在未显式初始化时被置零，自动变量不赋初值时的内容是未确定的，因此该表述错误。",
+      "chapter": "函数",
+      "knowledgeSection": "变量与作用域",
+      "knowledgePoint": "变量存储类别与作用域",
+      "difficulty": "medium",
+      "tags": [
+        "作用域",
+        "全局变量",
+        "局部变量"
+      ],
+      "provenance": {
+        "questionId": "ncre-c4-fn-scope-003",
+        "sourceIds": [
+          "ncre-l2-c-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版 C 语言大纲中与「变量存储类别与作用域」相关的规定，对应本证书三级目录「函数 / 变量与作用域 / 变量存储类别与作用域」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "3cbeb62cd02e52c41cc93a5694c5f82ba9a31b2455d62b33e5284e90682aa289"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c4-common-prog-003",
+      "type": "multiple_choice",
+      "question": "关于面向对象方法中的基本概念，下列表述正确的有（　）。",
+      "options": {
+        "A": "对象是属性和方法的封装体，属性描述对象的状态，方法描述对象的行为",
+        "B": "继承使子类可以直接访问父类的全部私有成员",
+        "C": "多态性意味着同样的消息被不同的对象接收时可以产生不同的行为",
+        "D": "在面向对象方法中，对象之间通过传递消息来请求对方完成某个操作"
+      },
+      "answer": [
+        "A",
+        "C",
+        "D"
+      ],
+      "analysis": "对象是属性和方法的封装体，属性描述状态、方法描述行为，这一表述正确。继承虽然提高了可重用性，但父类的私有成员不能在子类中直接访问，因此认为子类可以直接访问父类全部私有成员的说法错误。多态性指同样的消息被不同对象接收时产生不同的行为，这一表述正确。对象之间通过传递消息请求对方完成操作，这一表述正确。",
+      "chapter": "公共基础知识",
+      "knowledgeSection": "程序设计与软件工程",
+      "knowledgePoint": "程序设计方法与风格",
+      "difficulty": "medium",
+      "tags": [
+        "面向对象",
+        "对象",
+        "继承",
+        "多态"
+      ],
+      "provenance": {
+        "questionId": "ncre-c4-common-prog-003",
+        "sourceIds": [
+          "ncre-l2-common-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版二级公共基础知识大纲，对应本证书三级目录「公共基础知识 / 程序设计与软件工程 / 程序设计方法与风格」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "c06d597f9a1abb344d2db4366f691a5a9770489e417526b8d9ce8096e26fd7ef"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    },
+    {
+      "id": "ncre-c4-common-se-003",
+      "type": "true_false",
+      "question": "软件测试的目的是证明程序中不存在错误，因此只要测试用例全部通过，就可以断定该程序没有错误。",
+      "options": {
+        "A": "正确",
+        "B": "错误"
+      },
+      "answer": [
+        "B"
+      ],
+      "analysis": "软件测试的目的是尽可能多地发现程序中的错误，而不是证明程序没有错误。程序的输入组合与执行路径在数量上极其庞大，有限的测试用例不可能覆盖所有情况，测试通过只能说明在已测试的情形下没有暴露出错误，不能据此断定程序不存在错误，因此该说法不成立。认为测试能证明程序无错的判断，是把测试的证伪性质误当成了证明性质。",
+      "chapter": "公共基础知识",
+      "knowledgeSection": "程序设计与软件工程",
+      "knowledgePoint": "软件工程与软件测试",
+      "difficulty": "easy",
+      "tags": [
+        "软件测试",
+        "测试目的",
+        "测试用例"
+      ],
+      "provenance": {
+        "questionId": "ncre-c4-common-se-003",
+        "sourceIds": [
+          "ncre-l2-common-syllabus-2025"
+        ],
+        "locator": "自编题；依据 2025 年版二级公共基础知识大纲，对应本证书三级目录「公共基础知识 / 程序设计与软件工程 / 软件工程与软件测试」。",
+        "category": "syllabus_practice",
+        "reuse": "original",
+        "reuseBasis": "根据中国教育考试网公开的 2025 年版考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+        "reviewDigest": "a8cb142a4b2ac76fe85cc2d393e0fae8e94a1b703ddf1cd4c51ef66061134438"
+      },
+      "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+    }
+  ]
+}

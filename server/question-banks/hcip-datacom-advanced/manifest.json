@@ -1,0 +1,529 @@
+{
+  "schemaVersion": 1,
+  "certificate": {
+    "id": "hcip-datacom-advanced",
+    "name": "HCIP-Datacom-Advanced Routing & Switching Technology（H12-831）",
+    "shortName": "HCIP-Datacom 高级路由交换",
+    "description": "华为 HCIP-Datacom 自选考试 H12-831 V1.0：IGP 高级特性、BGP 高级特性、IPv6 路由、以太网高级技术、MPLS 技术、网络运维、网络故障排除与网络割接",
+    "order": 9
+  },
+  "guidePath": "guide.json",
+  "syllabus": {
+    "version": "V1.0",
+    "examCode": "H12-831",
+    "examCodeNote": "考试代码与版本以华为人才在线当期公布为准",
+    "verifiedAt": "2026-10-19",
+    "scopeStatus": "officially_verified",
+    "scopeNote": "模块与占比依据华为人才在线发布的《HCIP-Datacom-Advanced Routing & Switching Technology V1.0 考试大纲》（2020-09-25，共 4 页）第 1 页“知识点占比”表，8 个章节合计 100%。官方大纲只给出时长、分数、语言与费用，未公布题型构成。本站按官方章节占比每 1% 配 9 题，8 个章节合计 900 题；为保证全部三级知识点均有足够练习，章内题量按知识点覆盖面分配，题目均为单项选择题，不代表官方题型比例。",
+    "weightType": "official_exam_weights",
+    "sourceUrls": [
+      {
+        "name": "华为人才在线：HCIP-Datacom-Advanced Routing & Switching Technology 认证页（含 H12-831 考试大纲附件）",
+        "url": "https://e.huawei.com/cn/talent/#/cert/product-details?certifiedProductId=351&authenticationLevel=CTYPE_CARE_HCIP&technicalField=IIC&version=1.0",
+        "verified": true
+      }
+    ],
+    "modules": [
+      {
+        "id": "igp-advanced",
+        "name": "IGP 高级特性",
+        "order": 1,
+        "weight": 17,
+        "targetQuestionCount": 153,
+        "knowledgePoints": [
+          "OSPF 快速收敛",
+          "OSPF 路由控制",
+          "OSPF 其他特性",
+          "IS-IS 高级特性"
+        ]
+      },
+      {
+        "id": "bgp-advanced",
+        "name": "BGP 高级特性",
+        "order": 2,
+        "weight": 10,
+        "targetQuestionCount": 90,
+        "knowledgePoints": [
+          "BGP 路由控制",
+          "BGP 特性介绍",
+          "路由反射器组网"
+        ]
+      },
+      {
+        "id": "ipv6-routing",
+        "name": "IPv6 路由",
+        "order": 3,
+        "weight": 20,
+        "targetQuestionCount": 180,
+        "knowledgePoints": [
+          "IPv6 静态路由",
+          "OSPFv3 原理与配置",
+          "IS-IS（IPv6）原理与配置",
+          "BGP4+ 原理与配置"
+        ]
+      },
+      {
+        "id": "ethernet-advanced",
+        "name": "以太网高级技术",
+        "order": 4,
+        "weight": 10,
+        "targetQuestionCount": 90,
+        "knowledgePoints": [
+          "VLAN 聚合",
+          "MUX VLAN",
+          "QinQ",
+          "端口隔离",
+          "MAC 地址表安全",
+          "端口安全",
+          "MAC 漂移防止与检测",
+          "MACsec",
+          "交换机流量控制",
+          "DHCP Snooping",
+          "IP Source Guard"
+        ]
+      },
+      {
+        "id": "mpls",
+        "name": "MPLS 技术",
+        "order": 5,
+        "weight": 19,
+        "targetQuestionCount": 171,
+        "knowledgePoints": [
+          "MPLS 基础与转发",
+          "静态 LSP",
+          "LDP 原理与配置",
+          "MPLS VPN 基本概念",
+          "MPLS VPN 路由交互",
+          "MPLS VPN 报文转发",
+          "MPLS VPN 典型应用与 OSPF VPN 拓展"
+        ]
+      },
+      {
+        "id": "operations",
+        "name": "网络运维",
+        "order": 6,
+        "weight": 7,
+        "targetQuestionCount": 63,
+        "knowledgePoints": [
+          "日常维护",
+          "信息收集工具"
+        ]
+      },
+      {
+        "id": "troubleshooting",
+        "name": "网络故障排除",
+        "order": 7,
+        "weight": 10,
+        "targetQuestionCount": 90,
+        "knowledgePoints": [
+          "结构化流程",
+          "核心思想和方法",
+          "常见网络故障排除"
+        ]
+      },
+      {
+        "id": "cutover",
+        "name": "网络割接",
+        "order": 8,
+        "weight": 7,
+        "targetQuestionCount": 63,
+        "knowledgePoints": [
+          "割接基本概念",
+          "割接操作流程"
+        ]
+      }
+    ]
+  },
+  "banks": [
+    {
+      "id": "hcip-datacom-advanced-20261018122837777",
+      "source": "hcip_advanced_practice",
+      "name": "HCIP-Datacom 高级路由交换 V1.0 原创仿真练习",
+      "category": "syllabus_practice",
+      "verification": "original_from_official_scope",
+      "sourceUrl": "https://e.huawei.com/cn/talent/#/cert/product-details?certifiedProductId=351&authenticationLevel=CTYPE_CARE_HCIP&technicalField=IIC&version=1.0",
+      "description": "依据华为官方 H12-831 V1.0 大纲编写的原创单选练习；当前发布已审核题目，题量按章节持续补齐，非官方真题。",
+      "path": "questions/released-20261020",
+      "defaults": {
+        "sourceVerification": "本站原创仿真练习：依据华为人才在线 H12-831 V1.0 考试大纲编写，非官方真题；官方大纲未公布题型构成，本库首批仅含单项选择题。"
+      }
+    }
+  ],
+  "taxonomy": {
+    "schemaVersion": 1,
+    "modules": [
+      {
+        "name": "IGP 高级特性",
+        "order": 1,
+        "sections": [
+          {
+            "name": "OSPF 高级特性",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "OSPF 快速收敛",
+                "order": 1,
+                "code": "hcip831-1-1-1",
+                "scope": "PRC、智能定时器、LSA 快速泛洪与 SPF 调度等缩短 OSPF 收敛时间的手段。"
+              },
+              {
+                "name": "OSPF 路由控制",
+                "order": 2,
+                "code": "hcip831-1-1-2",
+                "scope": "filter-policy 在 import/export 方向的作用范围，以及它与 LSA 泛洪的关系。"
+              },
+              {
+                "name": "OSPF 其他特性",
+                "order": 3,
+                "code": "hcip831-1-1-3",
+                "scope": "NSR、GR、BFD 联动等可靠性特性以及它们的适用场景。"
+              }
+            ]
+          },
+          {
+            "name": "IS-IS 高级特性",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "IS-IS 高级特性",
+                "order": 1,
+                "code": "hcip831-1-2-1",
+                "scope": "IS-IS LSP 分片、LSP ID、过载位与快速收敛相关机制。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "BGP 高级特性",
+        "order": 2,
+        "sections": [
+          {
+            "name": "BGP 路由控制",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "BGP 路由控制",
+                "order": 1,
+                "code": "hcip831-2-1-1",
+                "scope": "使用 Community、AS_Path Filter、Prefix List 等工具控制 BGP 路由的发布与接收。"
+              }
+            ]
+          },
+          {
+            "name": "BGP 特性与反射器",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "BGP 特性介绍",
+                "order": 1,
+                "code": "hcip831-2-2-1",
+                "scope": "BGP 路由聚合、对等体组、安全与稳定性相关特性。"
+              },
+              {
+                "name": "路由反射器组网",
+                "order": 2,
+                "code": "hcip831-2-2-2",
+                "scope": "RR 集群、Cluster_ID 与 Cluster_List 防环、客户端与非客户端反射规则。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "IPv6 路由",
+        "order": 3,
+        "sections": [
+          {
+            "name": "IPv6 静态路由",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "IPv6 静态路由",
+                "order": 1,
+                "code": "hcip831-3-1-1",
+                "scope": "IPv6 静态路由与默认路由的写法、下一跳类型与优先级。"
+              }
+            ]
+          },
+          {
+            "name": "OSPFv3",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "OSPFv3 原理与配置",
+                "order": 1,
+                "code": "hcip831-3-2-1",
+                "scope": "OSPFv3 基于链路运行、使用链路本地地址、LSA 类型变化与认证方式。"
+              }
+            ]
+          },
+          {
+            "name": "IS-IS IPv6",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "IS-IS（IPv6）原理与配置",
+                "order": 1,
+                "code": "hcip831-3-3-1",
+                "scope": "IS-IS 通过 IPv6 Reachability TLV 承载 IPv6 前缀、多拓扑与单拓扑的区别。"
+              }
+            ]
+          },
+          {
+            "name": "BGP4+",
+            "order": 4,
+            "knowledgePoints": [
+              {
+                "name": "BGP4+ 原理与配置",
+                "order": 1,
+                "code": "hcip831-3-4-1",
+                "scope": "BGP4+ 使用 MP_REACH_NLRI/MP_UNREACH_NLRI 承载 IPv6 前缀与下一跳。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "以太网高级技术",
+        "order": 4,
+        "sections": [
+          {
+            "name": "VLAN 高级技术",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "VLAN 聚合",
+                "order": 1,
+                "code": "hcip831-4-1-1",
+                "scope": "VLAN 聚合将多个 VLAN 绑定到一个聚合 VLAN，减少配置与 STP 实例。"
+              },
+              {
+                "name": "MUX VLAN",
+                "order": 2,
+                "code": "hcip831-4-1-2",
+                "scope": "MUX VLAN 的主 VLAN、从 VLAN（互通型/隔离型）与端口隔离关系。"
+              },
+              {
+                "name": "QinQ",
+                "order": 3,
+                "code": "hcip831-4-1-3",
+                "scope": "QinQ 双层 VLAN 标签的封装位置、外层标签作用与 TPID。"
+              }
+            ]
+          },
+          {
+            "name": "以太网交换安全",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "端口隔离",
+                "order": 1,
+                "code": "hcip831-4-2-1",
+                "scope": "端口隔离的隔离组、二三层隔离效果与上行口例外。"
+              },
+              {
+                "name": "MAC 地址表安全",
+                "order": 2,
+                "code": "hcip831-4-2-2",
+                "scope": "MAC 地址表项数量限制、静态/黑洞 MAC 与防 MAC 欺骗。"
+              },
+              {
+                "name": "端口安全",
+                "order": 3,
+                "code": "hcip831-4-2-3",
+                "scope": "端口安全的最大 MAC 数、绑定方式与违规动作。"
+              },
+              {
+                "name": "MAC 漂移防止与检测",
+                "order": 4,
+                "code": "hcip831-4-2-4",
+                "scope": "MAC 漂移的产生原因、检测与抑制手段。"
+              },
+              {
+                "name": "MACsec",
+                "order": 5,
+                "code": "hcip831-4-2-5",
+                "scope": "MACsec 在链路上的加密与完整性保护、与上层 VPN 的区别。"
+              },
+              {
+                "name": "交换机流量控制",
+                "order": 6,
+                "code": "hcip831-4-2-6",
+                "scope": "端口流量抑制、风暴控制与队列丢弃的基本机制。"
+              },
+              {
+                "name": "DHCP Snooping",
+                "order": 7,
+                "code": "hcip831-4-2-7",
+                "scope": "DHCP Snooping 的信任/非信任端口、绑定表与防伪造 DHCP Server。"
+              },
+              {
+                "name": "IP Source Guard",
+                "order": 8,
+                "code": "hcip831-4-2-8",
+                "scope": "IP Source Guard 基于绑定表校验源 IP/MAC，防止源地址伪造。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "MPLS 技术",
+        "order": 5,
+        "sections": [
+          {
+            "name": "MPLS 原理与配置",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "MPLS 基础与转发",
+                "order": 1,
+                "code": "hcip831-5-1-1",
+                "scope": "MPLS 标签结构、标签栈与 push/swap/pop 转发操作。"
+              },
+              {
+                "name": "静态 LSP",
+                "order": 2,
+                "code": "hcip831-5-1-2",
+                "scope": "静态 LSP 的入标签、出标签与下一跳配置。"
+              }
+            ]
+          },
+          {
+            "name": "MPLS LDP",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "LDP 原理与配置",
+                "order": 1,
+                "code": "hcip831-5-2-1",
+                "scope": "LDP 发现、会话建立、标签分配与 LIB/LFIB 的关系。"
+              }
+            ]
+          },
+          {
+            "name": "MPLS VPN 原理与配置",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "MPLS VPN 基本概念",
+                "order": 1,
+                "code": "hcip831-5-3-1",
+                "scope": "VRF、RD、RT、VPNv4 地址族与 PE/CE/P 角色。"
+              },
+              {
+                "name": "MPLS VPN 路由交互",
+                "order": 2,
+                "code": "hcip831-5-3-2",
+                "scope": "MP-BGP 传递 VPNv4 路由、RT 的导入导出与路由泄露控制。"
+              },
+              {
+                "name": "MPLS VPN 报文转发",
+                "order": 3,
+                "code": "hcip831-5-3-3",
+                "scope": "私网标签与公网标签的双层标签转发过程、Ingress/Egress PE 的标签操作。"
+              }
+            ]
+          },
+          {
+            "name": "MPLS VPN 部署与应用",
+            "order": 4,
+            "knowledgePoints": [
+              {
+                "name": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+                "order": 1,
+                "code": "hcip831-5-4-1",
+                "scope": "Hub-Spoke、跨域 Option 与 OSPF VPN 的域 ID/路由标记。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "网络运维",
+        "order": 6,
+        "sections": [
+          {
+            "name": "网络运维",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "日常维护",
+                "order": 1,
+                "code": "hcip831-6-1-1",
+                "scope": "设备巡检、配置备份、版本管理与日常维护流程。"
+              },
+              {
+                "name": "信息收集工具",
+                "order": 2,
+                "code": "hcip831-6-1-2",
+                "scope": "display 命令、日志、诊断信息与信息收集工具的用途。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "网络故障排除",
+        "order": 7,
+        "sections": [
+          {
+            "name": "故障排除方法",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "结构化流程",
+                "order": 1,
+                "code": "hcip831-7-1-1",
+                "scope": "定义问题、收集信息、分析原因、制定方案、实施与验证的结构化流程。"
+              },
+              {
+                "name": "核心思想和方法",
+                "order": 2,
+                "code": "hcip831-7-1-2",
+                "scope": "分层排查、对比法、替换法与缩小故障范围的核心思路。"
+              }
+            ]
+          },
+          {
+            "name": "常见网络故障",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "常见网络故障排除",
+                "order": 1,
+                "code": "hcip831-7-2-1",
+                "scope": "OSPF 邻居卡在 ExStart、路由缺失、VLAN 不通等常见故障的定位。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "网络割接",
+        "order": 8,
+        "sections": [
+          {
+            "name": "网络割接",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "割接基本概念",
+                "order": 1,
+                "code": "hcip831-8-1-1",
+                "scope": "割接的定义、风险来源与割接方案的基本要素。"
+              },
+              {
+                "name": "割接操作流程",
+                "order": 2,
+                "code": "hcip831-8-1-2",
+                "scope": "割接前准备、实施、验证与回退的完整流程。"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

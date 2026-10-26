@@ -1,0 +1,241 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-20",
+  "releaseStatus": "reviewed-first-release",
+  "certificateId": "hcip-datacom-advanced",
+  "examCode": "H12-831",
+  "syllabusVersion": "V1.0",
+  "sourceCategory": "syllabus_practice",
+  "questionType": "single_choice",
+  "questionCount": 320,
+  "plannedPracticeTarget": 900,
+  "questionTargetBasis": "本站练习配题目标按华为公布章节权重每 1% 配 9 题；900 题不是华为公布的考试题量。",
+  "knowledgePoints": {
+    "total": 36,
+    "covered": 21
+  },
+  "modules": [
+    {
+      "id": "igp-advanced",
+      "name": "IGP 高级特性",
+      "weight": 17,
+      "plannedTarget": 153,
+      "questionCount": 157,
+      "knowledgePointsTotal": 4,
+      "knowledgePointsCovered": 4,
+      "missingKnowledgePoints": []
+    },
+    {
+      "id": "bgp-advanced",
+      "name": "BGP 高级特性",
+      "weight": 10,
+      "plannedTarget": 90,
+      "questionCount": 92,
+      "knowledgePointsTotal": 3,
+      "knowledgePointsCovered": 3,
+      "missingKnowledgePoints": []
+    },
+    {
+      "id": "ipv6-routing",
+      "name": "IPv6 路由",
+      "weight": 20,
+      "plannedTarget": 180,
+      "questionCount": 61,
+      "knowledgePointsTotal": 4,
+      "knowledgePointsCovered": 4,
+      "missingKnowledgePoints": []
+    },
+    {
+      "id": "ethernet-advanced",
+      "name": "以太网高级技术",
+      "weight": 10,
+      "plannedTarget": 90,
+      "questionCount": 2,
+      "knowledgePointsTotal": 11,
+      "knowledgePointsCovered": 2,
+      "missingKnowledgePoints": [
+        "VLAN 聚合",
+        "MUX VLAN",
+        "端口隔离",
+        "MAC 地址表安全",
+        "端口安全",
+        "MAC 漂移防止与检测",
+        "MACsec",
+        "交换机流量控制",
+        "IP Source Guard"
+      ]
+    },
+    {
+      "id": "mpls",
+      "name": "MPLS 技术",
+      "weight": 19,
+      "plannedTarget": 171,
+      "questionCount": 4,
+      "knowledgePointsTotal": 7,
+      "knowledgePointsCovered": 4,
+      "missingKnowledgePoints": [
+        "静态 LSP",
+        "MPLS VPN 路由交互",
+        "MPLS VPN 典型应用与 OSPF VPN 拓展"
+      ]
+    },
+    {
+      "id": "operations",
+      "name": "网络运维",
+      "weight": 7,
+      "plannedTarget": 63,
+      "questionCount": 1,
+      "knowledgePointsTotal": 2,
+      "knowledgePointsCovered": 1,
+      "missingKnowledgePoints": [
+        "日常维护"
+      ]
+    },
+    {
+      "id": "troubleshooting",
+      "name": "网络故障排除",
+      "weight": 10,
+      "plannedTarget": 90,
+      "questionCount": 2,
+      "knowledgePointsTotal": 3,
+      "knowledgePointsCovered": 2,
+      "missingKnowledgePoints": [
+        "核心思想和方法"
+      ]
+    },
+    {
+      "id": "cutover",
+      "name": "网络割接",
+      "weight": 7,
+      "plannedTarget": 63,
+      "questionCount": 1,
+      "knowledgePointsTotal": 2,
+      "knowledgePointsCovered": 1,
+      "missingKnowledgePoints": [
+        "割接基本概念"
+      ]
+    }
+  ],
+  "verifiedBatches": [
+    {
+      "id": "hcip-adv-b01",
+      "questionCount": 20,
+      "qualityGate": "pipeline check",
+      "passed": true
+    },
+    {
+      "id": "hcip1800-adv-01",
+      "questionCount": 50,
+      "qualityGate": "pipeline check",
+      "passed": true
+    },
+    {
+      "id": "hcip1800-adv-02",
+      "questionCount": 50,
+      "qualityGate": "pipeline check",
+      "passed": true
+    },
+    {
+      "id": "hcip1800-adv-03",
+      "questionCount": 50,
+      "qualityGate": "pipeline check",
+      "passed": true
+    },
+    {
+      "id": "hcip1800-adv-04",
+      "questionCount": 50,
+      "qualityGate": "pipeline check",
+      "passed": true
+    },
+    {
+      "id": "hcip1800-adv-05",
+      "questionCount": 50,
+      "qualityGate": "pipeline check",
+      "passed": true
+    },
+    {
+      "id": "hcip1800-adv-06",
+      "questionCount": 50,
+      "qualityGate": "pipeline check",
+      "passed": true
+    }
+  ],
+  "verification": {
+    "bankValidate": {
+      "command": "npm run bank:validate",
+      "passed": true
+    },
+    "batchQuality": {
+      "passed": true,
+      "batches": 7
+    },
+    "examSmoke": {
+      "command": "pipeline exam-smoke --certificate hcip-datacom-advanced --runs 10",
+      "passed": true,
+      "runs": 10,
+      "questionsPerRun": 20
+    },
+    "browser": {
+      "command": "node test/hcip-practice.e2e.js",
+      "passed": true,
+      "scope": "两个 HCIP 方向：证书选择、答题判分、刷新恢复、20 题考试与交卷"
+    },
+    "chapterArt": {
+      "command": "node scripts/export-demo-chapter-visuals.mjs --check && node scripts/export-web-chapter-art.mjs --check",
+      "passed": true,
+      "browser": {
+        "command": "node test/hcip-practice.e2e.js",
+        "passed": true,
+        "scope": "21 个章节 SVG 无占位回退；逐卡片悬停、键盘聚焦和系统减弱动画均已验证"
+      }
+    },
+    "unitTests": {
+      "command": "npm test",
+      "passed": true,
+      "tests": 304,
+      "failures": 0,
+      "testEnvironment": "临时测试加密密钥；无生产密钥或外部付费模型调用"
+    },
+    "build": {
+      "command": "npm run build",
+      "passed": true
+    },
+    "siteBrowser": {
+      "command": "npm run test:e2e",
+      "passed": true
+    }
+  },
+  "exclusions": [
+    {
+      "batchIds": [
+        "hcip-adv-b02",
+        "hcip-adv-b03",
+        "hcip-adv-b04",
+        "hcip-adv-b05"
+      ],
+      "questionCount": 81,
+      "reason": "当前流水线判定逐题复核摘要过期；未纳入发布。"
+    }
+  ],
+  "additionalUnreleasedBatches": [
+    "hcip1800-adv-07",
+    "hcip1800-adv-08",
+    "hcip1800-adv-09",
+    "hcip1800-adv-10",
+    "hcip1800-adv-11",
+    "hcip1800-adv-12",
+    "hcip1800-adv-13",
+    "hcip1800-adv-14",
+    "hcip1800-adv-15",
+    "hcip1800-adv-16",
+    "hcip1800-adv-17",
+    "hcip1800-adv-18"
+  ],
+  "notes": [
+    "所有题目均为本站原创仿真练习，非官方真题。",
+    "官方大纲未公布题型构成；本批仅含单项选择题。",
+    "逐批质量检查通过才进入本发布包；被挡批次未修改审核状态或伪造审核摘要。",
+    "考试范围与权重依据华为 ICT 职业认证手册中的 H12-821/H12-831 V1.0 内容章节。"
+  ],
+  "evidenceFile": "review-evidence-2026-10-20.json"
+}

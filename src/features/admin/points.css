@@ -1,0 +1,12 @@
+.admin-console .ac-points-billing { display: grid; gap: 20px; min-width: 0; }
+.admin-console .ac-points-billing .ac-panel { min-width: 0; }
+.admin-console .ac-points-billing .ac-panel > p { margin-block: 10px; overflow-wrap: anywhere; }
+.admin-console .ac-points-billing form:not(.ac-toolbar) { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,240px),1fr)); gap: 14px; padding-block: 14px; align-items: end; }
+.admin-console .ac-points-billing label { display: grid; gap: 6px; min-width: 0; }
+.admin-console .ac-points-billing :is(button,input,select,summary) { min-height: 44px; }
+.admin-console .ac-points-billing summary { cursor: pointer; padding-block: 10px; }
+.admin-console .ac-points-billing details + details { border-top: 1px solid var(--ac-line); }
+.admin-console .ac-points-billing .ac-toolbar { align-items: end; flex-wrap: wrap; }
+.admin-console .ac-points-billing .ac-toolbar > label { flex: 1 1 200px; }
+.admin-console .ac-points-billing .ac-table td { overflow-wrap: anywhere; }
+.admin-console .ac-points-billing .ac-metrics { margin: 0; }

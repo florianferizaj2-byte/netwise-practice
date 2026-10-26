@@ -18,7 +18,7 @@ export const allReleaseChecks = [
   ['unit', '服务端与客户端全量回归', ['--test', '--test-concurrency=6', 'test/*.test.js']],
   ['build', '电脑与移动网页构建', ['scripts/build.mjs']],
   ['runtime', '旧数据升级与独立运行包', ['scripts/verify-release-runtime.mjs', '--baseline=64ad007c8edaef51dc7019b3f5a4e791594f955a']],
-  ['browser', '电脑网页完整流程', ['test/e2e.js']],
+  ['browser', '蓝色 Web 全流程与布局', ['scripts/verify-web-blue.mjs']],
   ['study', 'AI 精讲与练习', ['test/subjective-study.e2e.js']],
   ['purchase', '会员购买与兑换', ['test/membership-purchase.e2e.js']],
   ['mobile-web', '移动网页双浏览器', ['test/mobile-web.e2e.js']],

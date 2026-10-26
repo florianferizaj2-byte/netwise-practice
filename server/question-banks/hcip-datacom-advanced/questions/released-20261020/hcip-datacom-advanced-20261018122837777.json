@@ -1,0 +1,733 @@
+[
+  {
+    "id": "hcip831-ospf-prc-001",
+    "type": "single_choice",
+    "question": "OSPF 网络中某条链路发生变化，但接口所在网段的路由条目本身没有改变。启用 PRC 后，路由器如何处理？",
+    "options": {
+      "A": "对所有路由重新执行一次完整的 SPF 计算",
+      "B": "只更新受影响的路由条目，不重建整棵 SPF 树",
+      "C": "直接删除全部区域间路由，等待邻居重新通告",
+      "D": "等待邻居重新建立邻接关系后再计算"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "PRC 即部分路由计算，用于拓扑发生变化但叶子路由没有变化的情况，只更新受影响的路由条目，避免完整 SPF 带来的开销。对所有路由重跑完整 SPF 是不启用 PRC 时的做法。删除全部区域间路由没有依据，也会造成不必要的震荡。邻居邻接关系并未失效，不需要等待重建。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "PRC",
+      "快速收敛"
+    ],
+    "provenance": {
+      "questionId": "hcip831-ospf-prc-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页“OSPF 快速收敛”；对应「IGP 高级特性 / OSPF 高级特性 / OSPF 快速收敛」；PRC 只更新受影响路由为设备实现的稳定语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-831 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "744cf4842d110a6fd44fb0936afa176e9702b1b545ade2f63f95efe1b49925e5"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-ospf-filter-import-001",
+    "type": "single_choice",
+    "question": "在 OSPF 进程中使用 filter-policy import 过滤路由，下列描述正确的是？",
+    "options": {
+      "A": "被过滤的路由不会进入本机路由表，也不会泛洪给邻居",
+      "B": "被过滤的路由会从 LSDB 中删除，邻居无法学习",
+      "C": "被过滤的路由不进入本机路由表，但仍会通过 LSA 泛洪给邻居",
+      "D": "过滤只对 Type 5 外部路由生效"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "filter-policy import 作用在本机把 OSPF 计算结果装入路由表的过程，被过滤的路由不会出现在本机路由表，但描述它的 LSA 仍在 LSDB 中并继续泛洪，邻居仍可能计算出该路由。因此“不会泛洪”和“从 LSDB 删除”都不成立。该过滤对区域内、区域间和外部路由都可能生效，不限于 Type 5。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "filter-policy",
+      "路由过滤"
+    ],
+    "provenance": {
+      "questionId": "hcip831-ospf-filter-import-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据大纲第 2 页“OSPF 路由控制”；对应「IGP 高级特性 / OSPF 高级特性 / OSPF 路由控制」；filter-policy import 只影响本地路由表、不阻止 LSA 泛洪为稳定语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；OSPF 路由过滤的作用范围按设备命令行为核对，未复制第三方题目。",
+      "reviewDigest": "11349ef1afc0bc2ee6a9ae2ecd741106caab352d46ce4a09c102d66c3c29c3fe"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-ospf-nsr-001",
+    "type": "single_choice",
+    "question": "关于 OSPF NSR 与 GR 的区别，下列描述正确的是？",
+    "options": {
+      "A": "NSR 需要邻居设备支持 GR 能力才能生效",
+      "B": "NSR 通过重启 OSPF 进程并重建邻居来恢复",
+      "C": "GR 切换期间邻居关系一定会被删除",
+      "D": "NSR 由本机主备控制面同步，邻居关系不中断且不依赖邻居配合"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "NSR 在主控板切换时由备用控制面接管，邻居和路由信息在本机同步，邻居设备感知不到变化，因此不需要邻居支持 GR。NSR 不会重启进程或重建邻居。GR 的设计目标是让邻居在重启期间保留邻接关系，而不是删除邻居。需要邻居配合的是 GR，不是 NSR。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "NSR",
+      "GR"
+    ],
+    "provenance": {
+      "questionId": "hcip831-ospf-nsr-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据大纲第 2 页“OSPF 其他特性”；对应「IGP 高级特性 / OSPF 高级特性 / OSPF 其他特性」；NSR 与 GR 的差异为设备可靠性特性的稳定语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；NSR/GR 机制按设备特性文档语义核对，未复制第三方题目。",
+      "reviewDigest": "e5a9a5ceef22a7e736a314f2e03cee49d1b4f520cc7a8a20eea1d075218f4c0c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-isis-lsp-fragment-001",
+    "type": "single_choice",
+    "question": "一台 IS-IS 路由器需要泛洪的 LSP 内容超过单个 LSP 的承载能力时，如何处理？",
+    "options": {
+      "A": "把 LSP 分片，使用不同的 LSP ID 分片号分别泛洪",
+      "B": "丢弃超出部分，只保留第一个 LSP",
+      "C": "把多余内容封装进 Level-2 LSP 强制跨区域泛洪",
+      "D": "降低 Hello 定时器以加快泛洪速度"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IS-IS 允许把超长的 LSP 内容拆成多个分片，LSP ID 由 System ID、伪节点 ID 和分片号组成，各分片独立泛洪并在接收端重组。丢弃超出部分会丢失路由信息。把内容强行放进 Level-2 LSP 不是分片机制，也不解决单条 LSP 的长度限制。调整 Hello 定时器只影响邻居保活和发现速度，不增加承载能力。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS",
+      "LSP",
+      "分片"
+    ],
+    "provenance": {
+      "questionId": "hcip831-isis-lsp-fragment-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据大纲第 2 页“IS-IS 高级特性”；对应「IGP 高级特性 / IS-IS 高级特性 / IS-IS 高级特性」；LSP 分片与 LSP ID 依据 RFC 1195 第 7.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；LSP 分片机制按 RFC 1195 原文核对，未复制第三方题目。",
+      "reviewDigest": "29ad07f49fc4ccf6782a66c0d448fff1b82a12554408ddb873f849cc26ca0faa"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-bgp-community-001",
+    "type": "single_choice",
+    "question": "希望给从某个邻居学到的 BGP 路由打上标记，并在其他路由器上根据标记统一调整 Local_Pref，最适合使用哪种属性？",
+    "options": {
+      "A": "Next_Hop",
+      "B": "Community",
+      "C": "Origin",
+      "D": "MED"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Community 是可选传递属性，可以给一组路由打上相同标记，其他路由器用策略匹配该标记后统一修改 Local_Pref 等属性，适合批量控制。Next_Hop 用于指导转发，不承担分组标记。Origin 表示路由来源，取值有限且不能自定义分组。MED 用于影响外部 AS 的入口选择，不适合做跨路由器的分组标记。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "Community",
+      "路由策略"
+    ],
+    "provenance": {
+      "questionId": "hcip831-bgp-community-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1997-community"
+      ],
+      "locator": "自编题；范围依据大纲第 2 页“BGP 路由控制”；对应「BGP 高级特性 / BGP 路由控制 / BGP 路由控制」；Community 属性格式与传递依据 RFC 1997 第 3、4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；BGP Community 语义按 RFC 1997 原文核对，未复制第三方题目。",
+      "reviewDigest": "169c82d5b3b86d57309a54623a1163963fa3434be252149e4a36bf7c63d7b12b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-bgp-cluster-list-001",
+    "type": "single_choice",
+    "question": "BGP 路由反射器组网中，Cluster_List 属性的作用是什么？",
+    "options": {
+      "A": "记录路由经过的 AS 号，防止 AS 间环路",
+      "B": "标识路由始发的路由器",
+      "C": "记录路由经过的集群 ID，防止集群内反射环路",
+      "D": "指定路由的下一跳地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Cluster_List 由路由反射器在反射路由时写入集群 ID；RR 收到一条 Cluster_List 中已包含本集群 ID 的路由时会丢弃，从而防止路由在集群内被反复反射。记录 AS 号的是 AS_Path。标识始发路由器的是 Origin 与 Router ID。指定下一跳的是 Next_Hop。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 特性与反射器",
+    "knowledgePoint": "路由反射器组网",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "Cluster_List",
+      "路由反射"
+    ],
+    "provenance": {
+      "questionId": "hcip831-bgp-cluster-list-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4456-route-reflection"
+      ],
+      "locator": "自编题；范围依据大纲第 2 页“BGP 路由反射器组网方式”；对应「BGP 高级特性 / BGP 特性与反射器 / 路由反射器组网」；CLUSTER_LIST 防环依据 RFC 4456 第 3、7 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；Cluster_List 机制按 RFC 4456 原文核对，未复制第三方题目。",
+      "reviewDigest": "7dc1acf54ee137ce934baba331326b4678cb34036c7f1bec5455948e7c749f0f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-ipv6-default-route-001",
+    "type": "single_choice",
+    "question": "在华为设备上配置一条指向 2001:db8::1 的 IPv6 默认静态路由，正确的命令形式是？",
+    "options": {
+      "A": "ipv6 route-static :: 0 2001:db8::1",
+      "B": "ipv6 route-static 0.0.0.0 0 2001:db8::1",
+      "C": "ipv6 route-static ::/0 2001:db8::1",
+      "D": "ipv6 route-static default 2001:db8::1"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IPv6 默认路由的目的前缀是 ::，前缀长度为 0，命令中目的地址和前缀长度分两个参数书写，因此正确形式是 ipv6 route-static :: 0 加下一跳。0.0.0.0 是 IPv4 的默认地址写法，不能用于 IPv6。把 ::/0 作为一个整体参数不符合该命令的参数格式。命令中没有 default 这个关键字。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "easy",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "默认路由"
+    ],
+    "provenance": {
+      "questionId": "hcip831-ipv6-default-route-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据大纲第 2 页“IPv6 静态路由”；对应「IPv6 路由 / IPv6 静态路由 / IPv6 静态路由」；默认前缀 ::/0 与命令参数格式为稳定结论。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；IPv6 默认路由写法按设备命令语法核对，未复制第三方题目。",
+      "reviewDigest": "b4239c620012f326ec13fa34799e8b984f044fbc6d3cbf0045e63b104357225d"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-ospfv3-link-001",
+    "type": "single_choice",
+    "question": "与 OSPFv2 相比，下列关于 OSPFv3 的描述正确的是？",
+    "options": {
+      "A": "OSPFv3 仍基于网段运行，必须为接口配置全局 IPv6 地址",
+      "B": "OSPFv3 使用 Type 3 LSA 传递所有 IPv6 前缀",
+      "C": "OSPFv3 不再使用 Router ID",
+      "D": "OSPFv3 基于链路运行，使用链路本地地址作为下一跳"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "OSPFv3 改为按链路运行，邻居通过接口上的链路本地地址建立和维持，不再要求接口配置全局 IPv6 地址。IPv6 前缀由新增的 Intra-Area-Prefix LSA 等承载，不是全部塞进 Type 3 LSA。OSPFv3 仍然使用 32 位 Router ID 标识路由器。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "IPv6",
+      "链路本地地址"
+    ],
+    "provenance": {
+      "questionId": "hcip831-ospfv3-link-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5340-ospfv3"
+      ],
+      "locator": "自编题；范围依据大纲第 2 页“OSPFv3 原理与配置”；对应「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」；基于链路运行与链路本地下一跳依据 RFC 5340 第 2、4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；OSPFv3 链路特性按 RFC 5340 原文核对，未复制第三方题目。",
+      "reviewDigest": "6e44173546d0a562957a555fd5e6cfc924e716d10257ebc50e3aac11c3e9a23d"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-isis-ipv6-tlv-001",
+    "type": "single_choice",
+    "question": "IS-IS 承载 IPv6 前缀时使用哪个 TLV？",
+    "options": {
+      "A": "TLV 22（Extended IS Reachability）",
+      "B": "TLV 236（IPv6 Reachability）",
+      "C": "TLV 135（Extended IP Reachability）",
+      "D": "TLV 10（Authentication）"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IS-IS 为 IPv6 定义了 IPv6 Reachability TLV，类型号为 236，用来携带 IPv6 前缀及其度量。TLV 22 描述邻居和链路度量，不承载前缀。TLV 135 承载的是 IPv4 前缀。TLV 10 用于认证信息。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "IPv6",
+      "TLV 236"
+    ],
+    "provenance": {
+      "questionId": "hcip831-isis-ipv6-tlv-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5308-isis-ipv6"
+      ],
+      "locator": "自编题；范围依据大纲第 2 页“IS-IS（IPv6）原理与配置”；对应「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」；IPv6 Reachability TLV 236 依据 RFC 5308 第 2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；TLV 236 结论按 RFC 5308 原文核对，未复制第三方题目。",
+      "reviewDigest": "ee641b4477ee3f536b4460dee2a098e64e098063ce3553e7c1aff6a60c907390"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-bgp4plus-mp-reach-001",
+    "type": "single_choice",
+    "question": "BGP4+ 传递 IPv6 路由时，主要依靠哪个属性承载前缀和下一跳？",
+    "options": {
+      "A": "AS_PATH",
+      "B": "NEXT_HOP",
+      "C": "MP_REACH_NLRI",
+      "D": "AGGREGATOR"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "BGP4+ 通过多协议扩展传递 IPv6 路由，MP_REACH_NLRI 中携带地址族信息、下一跳和网络层可达信息，IPv6 前缀就在其中。AS_PATH 记录经过的 AS，不承载前缀。NEXT_HOP 是 IPv4 单播使用的下一跳属性。AGGREGATOR 记录路由聚合者，与地址族前缀无关。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "IPv6",
+      "MP_REACH_NLRI"
+    ],
+    "provenance": {
+      "questionId": "hcip831-bgp4plus-mp-reach-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4760-mp-bgp"
+      ],
+      "locator": "自编题；范围依据大纲第 2 页“BGP4+ 原理与配置”；对应「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」；MP_REACH_NLRI 依据 RFC 4760 第 3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；MP-BGP 地址族扩展按 RFC 4760 原文核对，未复制第三方题目。",
+      "reviewDigest": "8537ff6c8c01d5abc44e8880d52c435297a37f2986900bc90174cbafada4a0b4"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-qinq-tag-001",
+    "type": "single_choice",
+    "question": "QinQ 封装中，关于内外层 VLAN 标签的描述正确的是？",
+    "options": {
+      "A": "外层标签由用户网络分配，内层由运营商分配",
+      "B": "内外层标签的 TPID 必须都为 0x8100",
+      "C": "QinQ 会删除内层标签，只保留外层标签",
+      "D": "外层标签由运营商网络添加，用于区分不同用户的业务"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "QinQ 在用户报文原有 VLAN 标签之外再压入一层运营商标签，外层标签用于在运营商网络中区分不同用户或业务，内层标签保留用户原有的 VLAN 语义。外层由运营商添加，内层来自用户侧，因此“外层由用户分配”说反了。外层 TPID 常用 0x88A8，并不要求与内层同为 0x8100。内层标签不会被删除。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "VLAN 高级技术",
+    "knowledgePoint": "QinQ",
+    "difficulty": "medium",
+    "tags": [
+      "QinQ",
+      "VLAN",
+      "双层标签"
+    ],
+    "provenance": {
+      "questionId": "hcip831-qinq-tag-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据大纲第 2 页“VLAN 高级技术 / QinQ”；对应「以太网高级技术 / VLAN 高级技术 / QinQ」；双层标签分工与 TPID 为 IEEE 802.1ad 的稳定结论。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；QinQ 封装语义按标准定义核对，未复制第三方题目。",
+      "reviewDigest": "1d42556c62f73a9a9a84489e924cbe56104ca053d29997595faea279abba1fe7"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-dhcp-snooping-trust-001",
+    "type": "single_choice",
+    "question": "交换机启用 DHCP Snooping 后，连接合法 DHCP 服务器的端口应配置为哪种角色？",
+    "options": {
+      "A": "信任端口",
+      "B": "非信任端口",
+      "C": "镜像端口",
+      "D": "边缘端口"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "DHCP Snooping 把端口分为信任和非信任两类：信任端口允许 DHCP 服务器的 Offer、Ack 等响应报文通过，通常连接合法服务器或上行设备；非信任端口会丢弃这类报文，防止私接服务器分配地址。镜像端口用于流量复制，边缘端口用于生成树快速收敛，二者都不是 DHCP Snooping 的角色划分。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "DHCP Snooping",
+    "difficulty": "easy",
+    "tags": [
+      "DHCP Snooping",
+      "信任端口",
+      "交换安全"
+    ],
+    "provenance": {
+      "questionId": "hcip831-dhcp-snooping-trust-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据大纲第 2 页“以太网交换安全 / DHCP Snooping”；对应「以太网高级技术 / 以太网交换安全 / DHCP Snooping」；信任端口与非信任端口的行为为设备实现的稳定语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；DHCP Snooping 端口角色按设备特性语义核对，未复制第三方题目。",
+      "reviewDigest": "c9994451d4a28a4faf817d2540606e7cd202a7652a621d8383aba80cd222ba57"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-mpls-swap-001",
+    "type": "single_choice",
+    "question": "MPLS 转发中，LSR 收到带标签的报文后，把入标签替换为出标签再转发，这种操作称为什么？",
+    "options": {
+      "A": "Push",
+      "B": "Swap",
+      "C": "Pop",
+      "D": "Flood"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Swap 表示标签交换：路由器用本地分配的出标签替换报文中的入标签，再按出标签对应的下一跳转发。Push 是在标签栈顶压入新标签，通常发生在 Ingress LSR。Pop 是弹出栈顶标签，通常发生在 Egress LSR 或倒数第二跳。Flood 描述的是泛洪行为，不是标签操作。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "MPLS 基础与转发",
+    "difficulty": "medium",
+    "tags": [
+      "MPLS",
+      "标签交换",
+      "转发"
+    ],
+    "provenance": {
+      "questionId": "hcip831-mpls-swap-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc3031-mpls"
+      ],
+      "locator": "自编题；范围依据大纲第 3 页“MPLS 原理与配置 / MPLS 转发”；对应「MPLS 技术 / MPLS 原理与配置 / MPLS 基础与转发」；push/swap/pop 依据 RFC 3031 第 3、4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；MPLS 标签操作按 RFC 3031 原文核对，未复制第三方题目。",
+      "reviewDigest": "7a7df3fcf7ea4d8f2d3900589685e98259d1ce6ff5c2fa4c042e01c8fbae2a48"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-ldp-session-001",
+    "type": "single_choice",
+    "question": "LDP 会话建立使用哪个传输层协议和端口？",
+    "options": {
+      "A": "UDP 646",
+      "B": "UDP 4789",
+      "C": "TCP 646",
+      "D": "TCP 179"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "LDP 用 UDP 646 发送 Hello 报文发现邻居，发现后使用 TCP 646 建立会话并交换标签映射消息。UDP 646 只承担发现，不承载会话。UDP 4789 是 VXLAN 的目的端口。TCP 179 是 BGP 的端口。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS LDP",
+    "knowledgePoint": "LDP 原理与配置",
+    "difficulty": "easy",
+    "tags": [
+      "LDP",
+      "TCP 646",
+      "MPLS"
+    ],
+    "provenance": {
+      "questionId": "hcip831-ldp-session-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5036-ldp"
+      ],
+      "locator": "自编题；范围依据大纲第 3 页“MPLS LDP 原理与配置”；对应「MPLS 技术 / MPLS LDP / LDP 原理与配置」；UDP/TCP 646 依据 RFC 5036 第 2、3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；LDP 端口与会话过程按 RFC 5036 原文核对，未复制第三方题目。",
+      "reviewDigest": "cb534b0c456fffc38ec845af4fb343987395d720c9592571a5b0127924eb81a7"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-mpls-vpn-rd-rt-001",
+    "type": "single_choice",
+    "question": "MPLS VPN 中，RD 与 RT 的作用区别是？",
+    "options": {
+      "A": "RD 用于区分不同 VPN 的相同私网前缀，RT 控制 VPN 路由的导入导出",
+      "B": "RD 控制路由导入导出，RT 用于区分相同私网前缀",
+      "C": "两者都只用于报文转发，不参与路由",
+      "D": "RD 是 64 位，RT 是 32 位"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "RD 附加在 IPv4 前缀前形成 VPNv4 唯一前缀，使不同 VPN 中相同的私网地址可以共存。RT 是 BGP 扩展团体属性，PE 根据 RT 决定哪些 VPN 路由可以导入自己的 VRF、哪些路由可以导出。两者的职责不能互换。它们参与路由的生成与选择，不只是转发。RT 同样是 64 位。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 基本概念",
+    "difficulty": "hard",
+    "tags": [
+      "MPLS VPN",
+      "RD",
+      "RT"
+    ],
+    "provenance": {
+      "questionId": "hcip831-mpls-vpn-rd-rt-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4364-mpls-vpn"
+      ],
+      "locator": "自编题；范围依据大纲第 3 页“MPLS VPN 基本概念”；对应「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 基本概念」；RD 与 RT 的职责依据 RFC 4364 第 4.1-4.3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；RD/RT 语义按 RFC 4364 原文核对，未复制第三方题目。",
+      "reviewDigest": "7ed1cc9d0151f0595adad9325525cb8b374405044be4bfe032a724c3138e8eb5"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-mpls-vpn-labels-001",
+    "type": "single_choice",
+    "question": "MPLS VPN 报文从 Ingress PE 发往 Egress PE 时，标签栈的组成是？",
+    "options": {
+      "A": "只有公网标签",
+      "B": "只有私网标签",
+      "C": "三层标签，最外层是私网标签",
+      "D": "两层标签，外层是公网标签，内层是私网标签"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Ingress PE 在私网报文前压入两层标签：内层私网标签由 Egress PE 分配，用于在 Egress PE 上区分不同 VRF；外层公网标签用于骨干网 P 路由器把报文转发到 Egress PE。只有公网标签无法区分私网，只有私网标签无法在公网转发。三层标签且最外层为私网标签的顺序与实际封装相反。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 报文转发",
+    "difficulty": "hard",
+    "tags": [
+      "MPLS VPN",
+      "标签栈",
+      "转发"
+    ],
+    "provenance": {
+      "questionId": "hcip831-mpls-vpn-labels-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4364-mpls-vpn"
+      ],
+      "locator": "自编题；范围依据大纲第 3 页“MPLS VPN 报文转发”；对应「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 报文转发」；双层标签转发依据 RFC 4364 第 4.3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；VPN 标签栈结论按 RFC 4364 原文核对，未复制第三方题目。",
+      "reviewDigest": "667afafd9bd59a1591f229e0911ea26b889a3a388d313421fa7452d86642c99f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-diagnostic-info-001",
+    "type": "single_choice",
+    "question": "需要一次性收集设备的多项运行信息用于故障定位，最合适的命令是？",
+    "options": {
+      "A": "display version",
+      "B": "display current-configuration",
+      "C": "display diagnostic-information",
+      "D": "display interface brief"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "display diagnostic-information 会汇总版本、配置、接口状态、路由与协议运行信息等，适合一次性收集故障定位材料。display version 只显示版本和硬件概要。display current-configuration 只显示当前配置。display interface brief 只给出接口状态摘要，信息范围不足以定位复杂故障。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "easy",
+    "tags": [
+      "网络运维",
+      "信息收集",
+      "诊断"
+    ],
+    "provenance": {
+      "questionId": "hcip831-diagnostic-info-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据大纲第 3 页“网络运维 / 信息收集工具”；对应「网络运维 / 网络运维 / 信息收集工具」；命令用途为设备文档的稳定语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；信息收集命令用途按设备命令说明核对，未复制第三方题目。",
+      "reviewDigest": "43f693840f607178ac01db9c4225580478c45282ce58f0f952b77e9590702145"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-troubleshoot-flow-001",
+    "type": "single_choice",
+    "question": "结构化故障排除流程中，在完成信息收集之后通常紧接着做什么？",
+    "options": {
+      "A": "直接更换可疑硬件",
+      "B": "立即回退全部配置",
+      "C": "提交网络割接申请",
+      "D": "分析信息并确定可能的原因"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "结构化流程通常按定义问题、收集信息、分析原因、制定并实施方案、验证结果的顺序推进，收集信息之后应先分析并列出可能原因，再决定验证手段。直接更换硬件和立即回退配置都属于跳过分析的处置动作。提交割接申请与故障排除流程无关。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "easy",
+    "tags": [
+      "故障排除",
+      "流程",
+      "分析"
+    ],
+    "provenance": {
+      "questionId": "hcip831-troubleshoot-flow-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据大纲第 3 页“结构化的故障排除流程”；对应「网络故障排除 / 故障排除方法 / 结构化流程」；流程顺序为方法论稳定结论。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；结构化排障流程按公开方法论整理，未复制第三方题目。",
+      "reviewDigest": "345025288a396657712189f81c65dfa27e9b9f5a75b5bbf1efd779f1c018800e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-ospf-exstart-001",
+    "type": "single_choice",
+    "question": "两台路由器建立 OSPF 邻居后长期停留在 ExStart 状态，最可能的原因是什么？",
+    "options": {
+      "A": "两端接口 MTU 不一致",
+      "B": "两端 Router ID 相同",
+      "C": "两端区域 ID 不一致",
+      "D": "两端 Hello 定时器不一致"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "ExStart 阶段双方开始交换 DD 报文并协商主从关系，如果接口 MTU 不一致，较大的 DD 报文无法被对端接收，邻居就会卡在 ExStart。Router ID 相同会导致邻居关系无法正常建立。区域 ID 不一致的路由器不会形成邻居。Hello 定时器不一致通常导致 Hello 无法互相确认，邻居停留在 Init 或无法建立。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "常见网络故障",
+    "knowledgePoint": "常见网络故障排除",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "ExStart",
+      "MTU"
+    ],
+    "provenance": {
+      "questionId": "hcip831-ospf-exstart-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据大纲第 3 页“常见网络故障排除”；对应「网络故障排除 / 常见网络故障 / 常见网络故障排除」；ExStart 与 DD/MTU 关系依据 RFC 2328 第 10.6 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；OSPF 卡 ExStart 的原因按 RFC 2328 原文核对，未复制第三方题目。",
+      "reviewDigest": "79d6905ff2192bab12b8da240a1f3d8fc046e95ddca2d6d0c8c26f05c82091e4"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-cutover-rollback-001",
+    "type": "single_choice",
+    "question": "网络割接方案中，回退预案的主要作用是什么？",
+    "options": {
+      "A": "缩短割接窗口时间",
+      "B": "在割接失败时把网络恢复到割接前状态",
+      "C": "替代割接前的配置备份",
+      "D": "提升设备转发性能"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "回退预案规定失败判据、回退步骤和责任人，目的是在割接未达到预期时尽快恢复到割接前的可用状态。它本身不缩短割接窗口，窗口由割接步骤和验证时间决定。配置备份是回退的前提材料，回退预案不能替代备份。回退预案与设备性能无关。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "easy",
+    "tags": [
+      "网络割接",
+      "回退",
+      "变更"
+    ],
+    "provenance": {
+      "questionId": "hcip831-cutover-rollback-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据大纲第 4 页“割接操作流程”；对应「网络割接 / 网络割接 / 割接操作流程」；回退预案的作用为变更管理稳定结论。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；割接回退语义按变更管理实践整理，未复制第三方题目。",
+      "reviewDigest": "41833361be10598eef3e8e31132973f9346d4108eb4016ce0d4155e082fe94ff"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  }
+]

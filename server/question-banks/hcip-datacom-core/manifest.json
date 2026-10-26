@@ -1,0 +1,769 @@
+{
+  "schemaVersion": 1,
+  "certificate": {
+    "id": "hcip-datacom-core",
+    "name": "HCIP-Datacom-Core Technology（H12-821）",
+    "shortName": "HCIP-Datacom 核心",
+    "description": "华为 HCIP-Datacom 必选考试 H12-821 V1.0：路由基础、OSPF、IS-IS、BGP、路由与流量控制、交换技术、组播、IPv6、网络安全、网络可靠性、网络服务与管理、大型 WLAN 组网与企业解决方案",
+    "order": 8
+  },
+  "guidePath": "guide.json",
+  "syllabus": {
+    "version": "V1.0",
+    "examCode": "H12-821",
+    "examCodeNote": "考试代码与版本以华为人才在线当期公布为准",
+    "verifiedAt": "2026-10-19",
+    "scopeStatus": "officially_verified",
+    "scopeNote": "模块与占比依据华为人才在线发布的《HCIP-Datacom-Core Technology V1.0 考试大纲》（2020-09-14，共 5 页）第 1 页“知识点占比”表，13 个章节合计 100%。官方大纲只给出时长、分数、语言与费用，未公布题型构成。本站按官方章节占比每 1% 配 9 题，13 个章节合计 900 题；为保证全部三级知识点均有足够练习，章内题量按知识点覆盖面分配，题目均为单项选择题，不代表官方题型比例。",
+    "weightType": "official_exam_weights",
+    "sourceUrls": [
+      {
+        "name": "华为人才在线：HCIP-Datacom-Advanced Routing & Switching Technology 认证页（含 H12-821 考试大纲附件）",
+        "url": "https://e.huawei.com/cn/talent/#/cert/product-details?certifiedProductId=351&authenticationLevel=CTYPE_CARE_HCIP&technicalField=IIC&version=1.0",
+        "verified": true
+      }
+    ],
+    "modules": [
+      {
+        "id": "routing-basics",
+        "name": "路由基础",
+        "order": 1,
+        "weight": 3,
+        "targetQuestionCount": 27,
+        "knowledgePoints": [
+          "网络设备框架",
+          "报文处理流程",
+          "路由表与最长匹配",
+          "静态路由与动态路由"
+        ]
+      },
+      {
+        "id": "ospf-core",
+        "name": "OSPF 核心知识",
+        "order": 2,
+        "weight": 16,
+        "targetQuestionCount": 144,
+        "knowledgePoints": [
+          "邻居状态机",
+          "基本配置与网络类型",
+          "区域内路由计算",
+          "区域间路由计算",
+          "外部路由计算",
+          "Stub 与 Totally Stub",
+          "NSSA 与 Totally NSSA",
+          "路由汇总"
+        ]
+      },
+      {
+        "id": "isis-core",
+        "name": "IS-IS 核心知识",
+        "order": 3,
+        "weight": 8,
+        "targetQuestionCount": 72,
+        "knowledgePoints": [
+          "基本概念与 NET",
+          "工作原理与分层",
+          "基本配置"
+        ]
+      },
+      {
+        "id": "bgp-core",
+        "name": "BGP 核心知识",
+        "order": 4,
+        "weight": 17,
+        "targetQuestionCount": 153,
+        "knowledgePoints": [
+          "BGP 概述与邻居关系",
+          "BGP 报文与状态机",
+          "路径属性",
+          "路由反射器",
+          "优选顺序",
+          "MP-BGP",
+          "EVPN"
+        ]
+      },
+      {
+        "id": "routing-control",
+        "name": "路由和流量控制",
+        "order": 5,
+        "weight": 10,
+        "targetQuestionCount": 90,
+        "knowledgePoints": [
+          "路由控制工具",
+          "路由策略应用",
+          "策略路由",
+          "MQC",
+          "流量过滤"
+        ]
+      },
+      {
+        "id": "switching-basics",
+        "name": "交换技术基础",
+        "order": 6,
+        "weight": 7,
+        "targetQuestionCount": 63,
+        "knowledgePoints": [
+          "RSTP",
+          "MSTP",
+          "交换机堆叠与集群"
+        ]
+      },
+      {
+        "id": "multicast-basics",
+        "name": "组播基础",
+        "order": 7,
+        "weight": 9,
+        "targetQuestionCount": 81,
+        "knowledgePoints": [
+          "组播地址与转发",
+          "IGMP 工作原理",
+          "PIM-DM",
+          "PIM-SM"
+        ]
+      },
+      {
+        "id": "ipv6-core",
+        "name": "IPv6 核心知识",
+        "order": 8,
+        "weight": 3,
+        "targetQuestionCount": 27,
+        "knowledgePoints": [
+          "IPv6 地址与报文",
+          "邻居发现",
+          "地址配置方式"
+        ]
+      },
+      {
+        "id": "network-security",
+        "name": "网络安全基础",
+        "order": 9,
+        "weight": 9,
+        "targetQuestionCount": 81,
+        "knowledgePoints": [
+          "安全区域与策略",
+          "设备安全特性",
+          "VPN 技术概述",
+          "VRF"
+        ]
+      },
+      {
+        "id": "reliability",
+        "name": "网络可靠性",
+        "order": 10,
+        "weight": 8,
+        "targetQuestionCount": 72,
+        "knowledgePoints": [
+          "BFD 原理与配置",
+          "VRRP 原理与配置"
+        ]
+      },
+      {
+        "id": "services-management",
+        "name": "网络服务与管理",
+        "order": 11,
+        "weight": 2,
+        "targetQuestionCount": 18,
+        "knowledgePoints": [
+          "DHCP 原理与配置",
+          "网络管理协议"
+        ]
+      },
+      {
+        "id": "wlan-architecture",
+        "name": "大型 WLAN 组网架构",
+        "order": 12,
+        "weight": 6,
+        "targetQuestionCount": 54,
+        "knowledgePoints": [
+          "组网架构与 CAPWAP",
+          "漫游与高可靠",
+          "VLAN Pool 与准入"
+        ]
+      },
+      {
+        "id": "solutions",
+        "name": "网络解决方案",
+        "order": 13,
+        "weight": 2,
+        "targetQuestionCount": 18,
+        "knowledgePoints": [
+          "园区网",
+          "数据中心与 VXLAN",
+          "SD-WAN"
+        ]
+      }
+    ]
+  },
+  "banks": [
+    {
+      "id": "hcip-datacom-core-20261018122837781",
+      "source": "hcip_core_practice",
+      "name": "HCIP-Datacom 核心 V1.0 原创仿真练习",
+      "category": "syllabus_practice",
+      "verification": "original_from_official_scope",
+      "sourceUrl": "https://e.huawei.com/cn/talent/#/cert/product-details?certifiedProductId=351&authenticationLevel=CTYPE_CARE_HCIP&technicalField=IIC&version=1.0",
+      "description": "依据华为官方 H12-821 V1.0 大纲编写的原创单选练习；当前发布已审核题目，题量按章节持续补齐，非官方真题。",
+      "path": "questions/released-20261020",
+      "defaults": {
+        "sourceVerification": "本站原创仿真练习：依据华为人才在线 H12-821 V1.0 考试大纲编写，非官方真题；官方大纲未公布题型构成，本库首批仅含单项选择题。"
+      }
+    }
+  ],
+  "taxonomy": {
+    "schemaVersion": 1,
+    "modules": [
+      {
+        "name": "路由基础",
+        "order": 1,
+        "sections": [
+          {
+            "name": "网络设备",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "网络设备框架",
+                "order": 1,
+                "code": "hcip821-1-1-1",
+                "scope": "路由器与交换机的硬件组成、控制面与转发面分工、主控板与接口板角色。"
+              },
+              {
+                "name": "报文处理流程",
+                "order": 2,
+                "code": "hcip821-1-1-2",
+                "scope": "设备收到报文后的入接口处理、查表、排队与出接口转发过程。"
+              }
+            ]
+          },
+          {
+            "name": "IP 路由基础",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "路由表与最长匹配",
+                "order": 1,
+                "code": "hcip821-1-2-1",
+                "scope": "路由表字段、目的网段与掩码匹配、最长前缀优先以及默认路由的作用。"
+              },
+              {
+                "name": "静态路由与动态路由",
+                "order": 2,
+                "code": "hcip821-1-2-2",
+                "scope": "静态路由配置、动态路由协议分类、路由优先级与度量的作用。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "OSPF 核心知识",
+        "order": 2,
+        "sections": [
+          {
+            "name": "OSPF 基础",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "邻居状态机",
+                "order": 1,
+                "code": "hcip821-2-1-1",
+                "scope": "OSPF 邻居状态（Down、Init、2-Way、ExStart、Exchange、Loading、Full）的转换条件与广播网络 DR/BDR 选举后的邻接关系。"
+              },
+              {
+                "name": "基本配置与网络类型",
+                "order": 2,
+                "code": "hcip821-2-1-2",
+                "scope": "OSPF 进程、区域、Router ID、网络类型与开销的基本配置。"
+              }
+            ]
+          },
+          {
+            "name": "OSPF 路由计算",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "区域内路由计算",
+                "order": 1,
+                "code": "hcip821-2-2-1",
+                "scope": "Type 1/Type 2 LSA、SPF 树与区域内路由的计算过程。"
+              },
+              {
+                "name": "区域间路由计算",
+                "order": 2,
+                "code": "hcip821-2-2-2",
+                "scope": "ABR 产生 Type 3 LSA、区域间路由传递与防环规则。"
+              },
+              {
+                "name": "外部路由计算",
+                "order": 3,
+                "code": "hcip821-2-2-3",
+                "scope": "ASBR、Type 5 LSA、Type 4 LSA 与 E1/E2 外部路由的开销计算。"
+              }
+            ]
+          },
+          {
+            "name": "OSPF 特殊区域",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "Stub 与 Totally Stub",
+                "order": 1,
+                "code": "hcip821-2-3-1",
+                "scope": "Stub 区域与 Totally Stub 区域允许和阻止的 LSA 类型、ABR 下发默认路由的方式。"
+              },
+              {
+                "name": "NSSA 与 Totally NSSA",
+                "order": 2,
+                "code": "hcip821-2-3-2",
+                "scope": "NSSA 区域引入外部路由的方式、Type 7 LSA 与 Type 5 LSA 的转换。"
+              },
+              {
+                "name": "路由汇总",
+                "order": 3,
+                "code": "hcip821-2-3-3",
+                "scope": "区域间路由汇总与外部路由汇总的配置位置和效果。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "IS-IS 核心知识",
+        "order": 3,
+        "sections": [
+          {
+            "name": "IS-IS 原理",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "基本概念与 NET",
+                "order": 1,
+                "code": "hcip821-3-1-1",
+                "scope": "IS-IS 的 NET、System ID、区域地址与路由器类型的对应关系。"
+              },
+              {
+                "name": "工作原理与分层",
+                "order": 2,
+                "code": "hcip821-3-1-2",
+                "scope": "Level-1、Level-2、Level-1-2 路由器、LSP 泛洪与 ATT 位置位后的默认路由。"
+              },
+              {
+                "name": "基本配置",
+                "order": 3,
+                "code": "hcip821-3-1-3",
+                "scope": "IS-IS 进程、NET、级别与接口使能的基本配置。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "BGP 核心知识",
+        "order": 4,
+        "sections": [
+          {
+            "name": "BGP 基础",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "BGP 概述与邻居关系",
+                "order": 1,
+                "code": "hcip821-4-1-1",
+                "scope": "AS、IBGP/EBGP 邻居、BGP 的作用与路由传递特点。"
+              },
+              {
+                "name": "BGP 报文与状态机",
+                "order": 2,
+                "code": "hcip821-4-1-2",
+                "scope": "Open、Update、Notification、Keepalive 报文与 Idle 到 Established 的状态转换。"
+              }
+            ]
+          },
+          {
+            "name": "BGP 路径属性与反射器",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "路径属性",
+                "order": 1,
+                "code": "hcip821-4-2-1",
+                "scope": "Origin、AS_Path、Next_Hop、Local_Pref、MED、Community 等属性的含义与比较方向。"
+              },
+              {
+                "name": "路由反射器",
+                "order": 2,
+                "code": "hcip821-4-2-2",
+                "scope": "RR、客户端与非客户端、反射规则以及 Cluster_List 防环。"
+              }
+            ]
+          },
+          {
+            "name": "BGP 路由优选",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "优选顺序",
+                "order": 1,
+                "code": "hcip821-4-3-1",
+                "scope": "BGP 选路的主要比较顺序，包括 Local_Pref、AS_Path、Origin、MED 与 EBGP/IBGP 优先级。"
+              }
+            ]
+          },
+          {
+            "name": "BGP EVPN 基础",
+            "order": 4,
+            "knowledgePoints": [
+              {
+                "name": "MP-BGP",
+                "order": 1,
+                "code": "hcip821-4-4-1",
+                "scope": "MP-BGP 的地址族扩展与 MP_REACH_NLRI 的作用。"
+              },
+              {
+                "name": "EVPN",
+                "order": 2,
+                "code": "hcip821-4-4-2",
+                "scope": "EVPN 的基本概念、路由类型与在数据中心的应用场景。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "路由和流量控制",
+        "order": 5,
+        "sections": [
+          {
+            "name": "路由策略与路由控制",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "路由控制工具",
+                "order": 1,
+                "code": "hcip821-5-1-1",
+                "scope": "ACL、IP-Prefix、Filter-Policy、Route-Policy 的适用对象与匹配方式。"
+              },
+              {
+                "name": "路由策略应用",
+                "order": 2,
+                "code": "hcip821-5-1-2",
+                "scope": "在路由引入、发布与接收方向应用路由策略的效果差异。"
+              }
+            ]
+          },
+          {
+            "name": "流量过滤与转发路径控制",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "策略路由",
+                "order": 1,
+                "code": "hcip821-5-2-1",
+                "scope": "策略路由的匹配条件、执行优先级以及与路由表转发的关系。"
+              },
+              {
+                "name": "MQC",
+                "order": 2,
+                "code": "hcip821-5-2-2",
+                "scope": "流分类、流行为、流策略的组合方式与在接口上的应用方向。"
+              },
+              {
+                "name": "流量过滤",
+                "order": 3,
+                "code": "hcip821-5-2-3",
+                "scope": "使用 ACL 在接口上过滤数据流量的方向与匹配规则。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "交换技术基础",
+        "order": 6,
+        "sections": [
+          {
+            "name": "生成树协议",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "RSTP",
+                "order": 1,
+                "code": "hcip821-6-1-1",
+                "scope": "RSTP 的端口角色（根端口、指定端口、替代端口、备份端口、边缘端口）与快速收敛机制。"
+              },
+              {
+                "name": "MSTP",
+                "order": 2,
+                "code": "hcip821-6-1-2",
+                "scope": "MSTP 多实例、区域划分与实例到 VLAN 的映射。"
+              }
+            ]
+          },
+          {
+            "name": "堆叠与集群",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "交换机堆叠与集群",
+                "order": 1,
+                "code": "hcip821-6-2-1",
+                "scope": "堆叠与集群的组成、主备角色以及链路聚合与可靠性优势。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "组播基础",
+        "order": 7,
+        "sections": [
+          {
+            "name": "IP 组播基础",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "组播地址与转发",
+                "order": 1,
+                "code": "hcip821-7-1-1",
+                "scope": "组播地址范围、组播 MAC 映射与组播数据转发的基本概念。"
+              }
+            ]
+          },
+          {
+            "name": "IGMP",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "IGMP 工作原理",
+                "order": 1,
+                "code": "hcip821-7-2-1",
+                "scope": "IGMPv1/v2/v3 的报文类型、查询与响应机制以及离组处理。"
+              }
+            ]
+          },
+          {
+            "name": "PIM",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "PIM-DM",
+                "order": 1,
+                "code": "hcip821-7-3-1",
+                "scope": "PIM-DM 的扩散与剪枝机制、断言与状态刷新。"
+              },
+              {
+                "name": "PIM-SM",
+                "order": 2,
+                "code": "hcip821-7-3-2",
+                "scope": "PIM-SM 的 RP、共享树、源注册与 SPT 切换过程。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "IPv6 核心知识",
+        "order": 8,
+        "sections": [
+          {
+            "name": "IPv6 基础",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "IPv6 地址与报文",
+                "order": 1,
+                "code": "hcip821-8-1-1",
+                "scope": "IPv6 地址类型、地址表示与基本报文头结构。"
+              }
+            ]
+          },
+          {
+            "name": "ICMPv6 与 NDP",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "邻居发现",
+                "order": 1,
+                "code": "hcip821-8-2-1",
+                "scope": "NDP 的邻居请求/通告、路由器请求/通告与地址解析过程。"
+              }
+            ]
+          },
+          {
+            "name": "IPv6 地址配置",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "地址配置方式",
+                "order": 1,
+                "code": "hcip821-8-3-1",
+                "scope": "静态配置、无状态地址自动配置与 DHCPv6 的适用场景。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "网络安全基础",
+        "order": 9,
+        "sections": [
+          {
+            "name": "防火墙与设备安全",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "安全区域与策略",
+                "order": 1,
+                "code": "hcip821-9-1-1",
+                "scope": "安全区域划分、区域间默认动作与安全策略的匹配顺序。"
+              },
+              {
+                "name": "设备安全特性",
+                "order": 2,
+                "code": "hcip821-9-1-2",
+                "scope": "设备登录安全、AAA 与常见攻击防护特性。"
+              }
+            ]
+          },
+          {
+            "name": "VPN 与 VRF",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "VPN 技术概述",
+                "order": 1,
+                "code": "hcip821-9-2-1",
+                "scope": "VPN 的分类、IPsec 的 SPD/SAD 与 AH/ESP 基本作用。"
+              },
+              {
+                "name": "VRF",
+                "order": 2,
+                "code": "hcip821-9-2-2",
+                "scope": "VRF 的路由表与转发实例隔离作用、RD 与 RT 的区别。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "网络可靠性",
+        "order": 10,
+        "sections": [
+          {
+            "name": "BFD",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "BFD 原理与配置",
+                "order": 1,
+                "code": "hcip821-10-1-1",
+                "scope": "BFD 会话建立、检测时间与与路由协议的联动。"
+              }
+            ]
+          },
+          {
+            "name": "VRRP",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "VRRP 原理与配置",
+                "order": 1,
+                "code": "hcip821-10-2-1",
+                "scope": "VRRP 备份组、优先级、抢占与虚拟 MAC 地址。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "网络服务与管理",
+        "order": 11,
+        "sections": [
+          {
+            "name": "DHCP",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "DHCP 原理与配置",
+                "order": 1,
+                "code": "hcip821-11-1-1",
+                "scope": "DHCP 报文交互、地址池与中继的基本配置。"
+              }
+            ]
+          },
+          {
+            "name": "网络管理",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "网络管理协议",
+                "order": 1,
+                "code": "hcip821-11-2-1",
+                "scope": "SNMP 的 Manager/Agent、MIB 与 Trap 基本概念。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "大型 WLAN 组网架构",
+        "order": 12,
+        "sections": [
+          {
+            "name": "大型 WLAN 组网",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "组网架构与 CAPWAP",
+                "order": 1,
+                "code": "hcip821-12-1-1",
+                "scope": "AC/AP 组网、CAPWAP 控制通道与数据通道的分工。"
+              },
+              {
+                "name": "漫游与高可靠",
+                "order": 2,
+                "code": "hcip821-12-1-2",
+                "scope": "二层与三层漫游的差异、AC 备份与高可靠组网。"
+              },
+              {
+                "name": "VLAN Pool 与准入",
+                "order": 3,
+                "code": "hcip821-12-1-3",
+                "scope": "VLAN Pool 分配、DHCP 与网络准入控制在大型 WLAN 中的作用。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "网络解决方案",
+        "order": 13,
+        "sections": [
+          {
+            "name": "企业数通解决方案",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "园区网",
+                "order": 1,
+                "code": "hcip821-13-1-1",
+                "scope": "园区网接入、汇聚、核心分层架构与典型组网设计。"
+              },
+              {
+                "name": "数据中心与 VXLAN",
+                "order": 2,
+                "code": "hcip821-13-1-2",
+                "scope": "数据中心网络架构与 VXLAN 的基本封装与转发。"
+              },
+              {
+                "name": "SD-WAN",
+                "order": 3,
+                "code": "hcip821-13-1-3",
+                "scope": "SD-WAN 与 SDN-WAN 的基本概念、与传统 WAN 的差异。"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

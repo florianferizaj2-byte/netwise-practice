@@ -18,4 +18,10 @@ const productionPublic = {
     }
   },
 };
-export default defineConfig({ plugins: [react(), productionPublic], build: { outDir: "dist", copyPublicDir: false } });
+export default defineConfig({ plugins: [react(), productionPublic], build: {
+  outDir: "dist",
+  copyPublicDir: false,
+  rollupOptions: { output: { manualChunks(id) {
+    if (/node_modules[\\/](react|react-dom|scheduler)[\\/]/.test(id)) return "react-vendor";
+  } } },
+} });

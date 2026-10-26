@@ -10,7 +10,7 @@
     "build:mobile-web": "node scripts/build-mobile-web.mjs",
     "start": "node server/index.js --production",
     "test": "node --test test/*.test.js",
-    "test:e2e": "node test/e2e.js",
+    "test:e2e": "node scripts/verify-web-blue.mjs",
     "test:e2e:mobile": "node test/mobile-web.e2e.js",
     "test:e2e:mobile-study": "node test/mobile-study.e2e.js",
     "test:e2e:purchase": "node test/membership-purchase.e2e.js",
@@ -29,7 +29,8 @@
     "points:migrate": "node scripts/migrate-ai-points.mjs",
     "verify:backend": "node scripts/verify-mobile-backend.mjs",
     "deploy:check": "node scripts/check-v1-deployment.mjs",
-    "verify:apk": "python scripts/verify-android-apk.py"
+    "verify:apk": "python scripts/verify-android-apk.py",
+    "verify:web-blue": "node scripts/verify-web-blue.mjs"
   },
   "dependencies": {
     "dotenv": "^17.2.0",

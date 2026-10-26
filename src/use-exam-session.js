@@ -22,6 +22,7 @@ export function useExamSession({ userId, certificateId, run, refresh }) {
     [remaining, setRemaining] = useState(0);
   const [submitting, setSubmitting] = useState(false),
     [recent, setRecent] = useState([]);
+  const [history, setHistory] = useState([]);
   const [loadError, setLoadError] = useState(""),
     [loadRevision, setLoadRevision] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -36,6 +37,7 @@ export function useExamSession({ userId, certificateId, run, refresh }) {
     const current = () => live && revision === interaction.current;
     setLoading(true);
     setRecent([]);
+    setHistory([]);
     setIndex(0);
     autoSubmit.current = null;
     setLoadError("");
@@ -56,6 +58,7 @@ export function useExamSession({ userId, certificateId, run, refresh }) {
       const history = await api("/exams");
       if (!current()) return;
       setRecent(history.sessions.filter((exam) => !exam.submitted));
+      setHistory(history.sessions);
       const savedId = backup?.id || legacy?.id;
       if (savedId) {
         try {
@@ -77,6 +80,12 @@ export function useExamSession({ userId, certificateId, run, refresh }) {
                 }
               : backup;
             sync.restore(session, migrated);
+            if (
+              Number.isInteger(backup?.index) &&
+              backup.index >= 0 &&
+              backup.index < session.questions.length
+            )
+              setIndex(backup.index);
             if (legacy)
               try {
                 localStorage.removeItem("netwise-exam");
@@ -103,11 +112,15 @@ export function useExamSession({ userId, certificateId, run, refresh }) {
     if (!state.session) return;
     try {
       if (state.session.submitted) localStorage.removeItem(key);
-      else localStorage.setItem(key, JSON.stringify(sync.checkpoint()));
+      else
+        localStorage.setItem(
+          key,
+          JSON.stringify({ ...sync.checkpoint(), index }),
+        );
     } catch {
       /* Saving to the server remains available in private browsing. */
     }
-  }, [key, state, sync]);
+  }, [key, state, sync, index]);
   useEffect(() => {
     const retry = state.status === "error" && state.failures <= 4;
     if (state.status !== "pending" && !retry) return;
@@ -194,6 +207,7 @@ export function useExamSession({ userId, certificateId, run, refresh }) {
       setIndex(0);
       setLoading(false);
       setRecent([]);
+      setLoadRevision((value) => value + 1);
       try {
         localStorage.removeItem(key);
       } catch {
@@ -203,7 +217,36 @@ export function useExamSession({ userId, certificateId, run, refresh }) {
     start,
     resume,
     submit,
+    pause: async () => {
+      if (busy.current) return;
+      busy.current = true;
+      setSubmitting(true);
+      try {
+        await actions.current.run("正在保存考试进度", async () => {
+          if (!(await sync.save()) || sync.snapshot().conflict)
+            throw new Error("答案尚未同步，请先完成保存后再返回考试设置");
+          if (Date.now() >= Date.parse(sync.snapshot().session.expiresAt)) {
+            autoSubmit.current = null;
+            throw new Error("考试时间已到，请先完成交卷");
+          }
+          interaction.current++;
+          sync.reset();
+          setIndex(0);
+          autoSubmit.current = null;
+          try {
+            localStorage.removeItem(key);
+          } catch {
+            /* Server progress remains available. */
+          }
+          setLoadRevision((value) => value + 1);
+        });
+      } finally {
+        busy.current = false;
+        setSubmitting(false);
+      }
+    },
     recent,
+    history,
     loading,
     loadError,
     retryLoad: () => setLoadRevision((value) => value + 1),

@@ -5,7 +5,7 @@ import os from "node:os";
 import path from "node:path";
 import { certificates, bundledQuestions, questionForCertificate } from "../server/question-banks/loader.js";
 import { createStore } from "../server/store.js";
-import { createApp } from "../server/index.js";
+import { createVerifiedTestApp as createApp, verifiedFetch } from "./helpers/account-mail.js";
 
 const certificateId = "sichuan-upgrading-computer";
 const originalId = "ncre-office-word-001";
@@ -20,10 +20,11 @@ test("Sichuan scope reuses one canonical question with separate classifications 
   const all = bundledQuestions();
   const scoped = all.filter((question) => question.certificates.includes(certificateId));
   const shared = scoped.filter((question) => question.certificateScopes?.[certificateId]);
-  // 100 道原创练习 + 45 道共用题 + 61 道西昌学院 2011 真题（用户提供）
-  assert.equal(scoped.length, 206);
+  // 100 道原创练习 + 1020 道章节强化练习 + 45 道共用题 + 61 道西昌学院 2011 真题（用户提供）
+  assert.equal(scoped.length, 1226);
   assert.equal(shared.length, 45);
   assert.equal(scoped.filter((question) => question.id.startsWith("sc-upgrading-computer-")).length, 100);
+  assert.equal(scoped.filter((question) => question.id.startsWith("sc-upgrading-supplement-")).length, 1020);
   assert.equal(scoped.filter((question) => question.id.startsWith("sc-2011-xichang-")).length, 61);
   assert.equal(all.filter((question) => question.id === originalId).length, 1);
   assert.deepEqual([...new Set(scoped.map((question) => questionForCertificate(question, certificateId).chapter))].sort(), certificate.syllabus.modules.map((module) => module.name).sort());
@@ -59,7 +60,7 @@ test("Sichuan selection, filtered practice, shared progress, wrong answers and e
   const base = `http://127.0.0.1:${server.address().port}/api`;
   let cookie = "";
   const request = async (route, body, method) => {
-    const response = await fetch(base + route, {
+    const response = await (route === "/auth/register" ? verifiedFetch : fetch)(base + route, {
       method: method || (body ? "POST" : "GET"),
       headers: { "Content-Type": "application/json", ...(cookie ? { Cookie: cookie } : {}) },
       ...(body ? { body: JSON.stringify(body) } : {}),
@@ -73,11 +74,11 @@ test("Sichuan selection, filtered practice, shared progress, wrong answers and e
   assert.ok(registration.certificates.some((entry) => entry.id === certificateId));
   await request("/auth/certificate", { certificateId }, "PUT");
   const catalog = await request("/practice/catalog");
-  assert.equal(catalog.total, 206);
+  assert.equal(catalog.total, 1226);
   assert.equal(catalog.chapters.length, 7);
-  assert.equal(catalog.chapters.find((chapter) => chapter.name === "办公自动化").questionCount, 75);
+  assert.equal(catalog.chapters.find((chapter) => chapter.name === "办公自动化").questionCount, 508);
   const questions = await request("/questions?bankOnly=1&chapter=" + encodeURIComponent("办公自动化"));
-  assert.equal(questions.length, 75);
+  assert.equal(questions.length, 508);
   assert.ok(questions.every((question) => question.chapter === "办公自动化"));
   assert.ok(questions.some((question) => question.id === originalId));
   const current = await request(`/questions/${originalId}`);
@@ -102,11 +103,17 @@ test("Sichuan selection, filtered practice, shared progress, wrong answers and e
   assert.equal(original.attempted, true, "the same question keeps its existing learning record");
   assert.equal((await request("/practice/catalog")).total, 180);
   await request("/auth/certificate", { certificateId }, "PUT");
-  // Include the entire selected pool so the shared fixture is always examined.
-  const exam = await request("/exams", { count: questions.length, chapters: ["办公自动化"] });
-  assert.equal(exam.questions.length, questions.length);
+  // 指定章节组卷时 /api/exams 的上限为 100 道（无章节的整卷蓝图上限不同），
+  // 该章节现有题量已远超此上限，因此按上限组卷。
+  // 组卷用于验证评分与分类，不要求覆盖章节全部题目。
+  const examCount = 100;
+  assert.ok(questions.length >= examCount, "章节题量应不少于组卷上限，否则应改为按实际题量组卷");
+  const exam = await request("/exams", { count: examCount, chapters: ["办公自动化"] });
+  assert.equal(exam.questions.length, examCount);
   assert.ok(exam.questions.every((question) => question.chapter === "办公自动化"));
-  assert.equal(exam.questions.find((question) => question.id === originalId).knowledgeSection, "Word");
+  // 组卷为随机抽样，章节题量超过抽样上限时不能假定某一道共用题一定入选，
+  // 因此共用题在该证书下的分类单独按题号核对。
+  assert.equal((await request(`/questions/${originalId}`)).knowledgeSection, "Word");
   const answers = Object.fromEntries(exam.questions.map((question) => [question.id, store.getQ(question.id).answer]));
   const result = await request(`/exams/${exam.id}/submit`, { answers });
   assert.equal(result.score, 100);

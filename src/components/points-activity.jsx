@@ -14,7 +14,7 @@ export function PointsActivity({api,userId}){
   const [data,setData]=useState(null),[error,setError]=useState(''),[tick,setTick]=useState(0),[loading,setLoading]=useState(true);
   useEffect(()=>{
     const controller=new AbortController();let live=true;
-    setData(null);setLoading(true);setError('');
+    setLoading(true);setError('');
     api('/account/points/operations?limit=20',undefined,'GET',{cache:false,signal:controller.signal})
       .then(value=>{if(live)setData(value);}).catch(cause=>{if(live&&!controller.signal.aborted)setError(cause.message);})
       .finally(()=>{if(live)setLoading(false);});

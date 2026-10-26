@@ -37,7 +37,7 @@ export function TrainingView({
             作者 AI 服务暂未就绪，无需配置个人 API，请联系站点管理员。
           </span>
           <button onClick={settings}>
-            查看 AI 积分
+            查看 AI 额度
             <ArrowRight size={16} />
           </button>
         </div>
@@ -156,7 +156,7 @@ export function TrainingView({
             {groups.map((group) => (
               <article className="ai-group-card" key={group.id}>
                 <div>
-                  <span className="badge green">AI 生成</span>
+                <span className="badge brand">AI 生成</span>
                   <strong>{group.topic}</strong>
                   <small>
                     {group.questionCount} 题 · 已完成 {group.completedCount} 题

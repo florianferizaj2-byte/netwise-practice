@@ -1,0 +1,418 @@
+.ac-ai-services {
+  display: grid;
+  gap: 20px;
+  min-width: 0;
+}
+.ac-ai-services button,
+.ac-ai-editor button,
+.ac-ai-legacy > summary,
+.ac-ai-editor summary {
+  min-height: 44px;
+}
+.ac-ai-services .ac-ai-alert {
+  margin: 0;
+  padding: 14px 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+.ac-ai-active {
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+  padding: 0 22px 20px;
+  align-items: center;
+}
+.ac-ai-active-copy {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.ac-ai-eyebrow {
+  color: #3b61b8;
+  font-size: 12px;
+}
+.ac-ai-active h3 {
+  margin: 9px 0 5px;
+  font-size: 20px;
+}
+.ac-ai-active p {
+  margin: 0 0 5px;
+  font-size: 14px;
+}
+.ac-ai-active small {
+  color: #64758e;
+  font-size: 12px;
+}
+.ac-ai-mode {
+  display: grid;
+  gap: 12px;
+  flex: none;
+}
+.ac-ai-mode > strong {
+  color: #1f48a9;
+  font-size: 23px;
+}
+.ac-ai-mode small {
+  font-weight: 400;
+}
+.ac-ai-rule {
+  margin: 0;
+  padding: 15px 22px;
+  background: #f7f9fe;
+  border-top: 1px solid #e7edf8;
+  color: #52647f;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.ac-ai-presets {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  padding: 0 22px 22px;
+}
+.ac-ai-presets button {
+  justify-content: flex-start;
+  text-align: left;
+  padding: 12px;
+}
+.ac-ai-list {
+  display: grid;
+  gap: 14px;
+  padding: 0 20px 20px;
+}
+.ac-ai-channel {
+  border: 1px solid #dfe7f3;
+  border-radius: 10px;
+  padding: 18px;
+  min-width: 0;
+}
+.ac-ai-channel.is-selected {
+  border-color: #9fb9ff;
+  box-shadow: inset 3px 0 #2454ed;
+}
+.ac-ai-channel-head {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.ac-ai-priority {
+  background: #eef3fc;
+  border-radius: 8px;
+  padding: 9px;
+  min-width: 38px;
+  text-align: center;
+  color: #345eaf;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.ac-ai-identity {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.ac-ai-identity h3 {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 6px;
+  font-size: 15px;
+}
+.ac-ai-identity p {
+  margin: 0 0 4px;
+  color: #354e77;
+  font-size: 13px;
+}
+.ac-ai-identity p span,
+.ac-ai-identity small {
+  color: #687b95;
+  font-size: 12px;
+}
+.ac-ai-badge,
+.ac-ai-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 5px;
+  background: #edf3ff;
+  padding: 4px 7px;
+  color: #2856b5;
+  font-size: 11px;
+  font-weight: 500;
+}
+.ac-ai-state {
+  background: #f1f3f7;
+  color: #526379;
+  flex: none;
+}
+.ac-ai-state.is-ready {
+  background: #e9f6ef;
+  color: #267147;
+}
+.ac-ai-prices {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid #e9eef6;
+  border-radius: 7px;
+  margin: 18px 0 10px;
+  background: #fafbfe;
+}
+.ac-ai-prices > div {
+  padding: 13px;
+}
+.ac-ai-prices > div + div {
+  border-left: 1px solid #e9eef6;
+}
+.ac-ai-prices dt {
+  font-size: 12px;
+  color: #526582;
+}
+.ac-ai-prices dt small {
+  color: #75849c;
+  font-size: 10px;
+}
+.ac-ai-prices dd {
+  font-size: 19px;
+  font-weight: 650;
+  color: #263e68;
+  margin: 6px 0 0;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+.ac-ai-cost-note {
+  color: #63738d;
+  font-size: 12px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.ac-ai-cost-note p {
+  margin: 3px 0;
+}
+.ac-ai-cost-note p:last-child {
+  font-size: 11px;
+}
+.ac-ai-warning {
+  color: #8b591b;
+  background: #fff8ed;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 12px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.ac-ai-channel-foot {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.ac-ai-key-state {
+  color: #63758e;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 11px;
+}
+.ac-ai-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.ac-ai-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #315eaf;
+  font-size: 12px;
+  min-height: 32px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.ac-ai-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  border-top: 1px solid #e9eef6;
+  padding-top: 12px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.ac-ai-actions > div {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+.ac-ai-actions .ac-ai-danger {
+  color: #9b4040;
+}
+.ac-ai-legacy > summary {
+  cursor: pointer;
+  color: #526684;
+  font-size: 13px;
+  padding: 12px 4px;
+}
+.ac-ai-legacy[open] > summary {
+  margin-bottom: 14px;
+}
+.ac-ai-editor {
+  display: grid;
+  gap: 16px;
+}
+.ac-ai-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.ac-ai-editor .ac-ai-span {
+  grid-column: 1 / -1;
+}
+.ac-ai-editor input:not([type="checkbox"]),
+.ac-ai-editor select {
+  min-height: 44px;
+}
+.ac-ai-editor .ac-ai-check {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  min-height: 44px;
+  cursor: pointer;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.ac-ai-preset-note {
+  padding: 12px 16px;
+  background: #f4f7fd;
+  border-radius: 8px;
+}
+.ac-ai-preset-note p {
+  margin: 0 0 8px;
+  color: #526682;
+}
+.ac-ai-preset-note > small {
+  display: block;
+  color: #6a7e9d;
+  font-size: 11px;
+  margin-top: 6px;
+}
+.ac-ai-price-box {
+  border: 1px solid #dde6f5;
+  border-radius: 8px;
+  min-width: 0;
+  margin: 0;
+  padding: 16px;
+  display: grid;
+  gap: 14px;
+}
+.ac-ai-price-box legend {
+  color: #2c4c81;
+  font-size: 13px;
+  font-weight: 650;
+  padding-inline: 8px;
+}
+.ac-ai-price-box p {
+  margin: 0;
+}
+.ac-ai-price-fields {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.ac-ai-reference {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px dashed #c2d4f4;
+  display: grid;
+  gap: 10px;
+}
+.ac-ai-reference button {
+  justify-self: start;
+}
+.ac-ai-price-help {
+  color: #667c9c;
+}
+.ac-ai-advanced {
+  border-bottom: 1px solid #e9eef6;
+  padding-bottom: 10px;
+}
+.ac-ai-advanced summary {
+  cursor: pointer;
+  font-size: 13px;
+  color: #526784;
+  padding-block: 12px;
+}
+.ac-ai-advanced[open] summary {
+  margin-bottom: 10px;
+}
+.ac-ai-editor .ac-dialog-actions {
+  margin: 0;
+}
+.ac-dialog:has(.ac-ai-editor) header button {
+  min-width: 44px;
+  min-height: 44px;
+}
+@media (max-width: 680px) {
+  .ac-ai-active {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    padding-inline: 16px;
+  }
+  .ac-ai-mode {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .ac-ai-presets {
+    grid-template-columns: 1fr 1fr;
+    padding-inline: 14px;
+  }
+  .ac-ai-presets button {
+    font-size: 12px;
+    padding: 9px;
+  }
+  .ac-ai-list {
+    padding-inline: 12px;
+  }
+  .ac-ai-channel {
+    padding: 13px;
+  }
+  .ac-ai-channel-head {
+    flex-wrap: wrap;
+  }
+  .ac-ai-channel-head .ac-ai-state {
+    margin-left: 50px;
+  }
+  .ac-ai-prices {
+    grid-template-columns: 1fr;
+  }
+  .ac-ai-prices > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 12px;
+  }
+  .ac-ai-prices > div + div {
+    border-left: 0;
+    border-top: 1px solid #e9eef6;
+  }
+  .ac-ai-prices dd {
+    font-size: 17px;
+    margin: 0;
+  }
+  .ac-ai-form-grid,
+  .ac-ai-price-fields {
+    grid-template-columns: 1fr;
+  }
+  .ac-ai-actions > div {
+    flex: 1 1 100%;
+  }
+  .ac-ai-actions button {
+    flex: 1;
+  }
+}

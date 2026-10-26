@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { reduceWebMotion } from "./web-preferences.jsx";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -20,10 +21,12 @@ import {
   TriangleAlert,
 } from "lucide-react";
 import { MembershipBadge } from "./components/membership-badge.jsx";
+import { MembershipTierArt } from "./components/membership-tier-art.jsx";
 import { ContentPlaceholder } from "./components/content-placeholder.jsx";
 import { membershipPurchaseUrl } from "./membership-purchase.js";
 import "./vip.css";
 import "./subjective-study.css";
+import "./blue-membership.css";
 import { PointsActivity, formatPoints } from "./components/points-activity.jsx";
 
 const plans = [
@@ -96,7 +99,7 @@ export function VipView({
   }, [account]);
   function openRedemption() {
     redemptionPanel.current?.scrollIntoView({
-      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? "auto" : "smooth",
+      behavior: reduceWebMotion() ? "auto" : "smooth",
       block: "center",
     });
     codeInput.current?.focus({ preventScroll: true });
@@ -171,11 +174,10 @@ export function VipView({
     }
   }
   const paid = !!account && account.plan !== "free";
-  const availablePlans = plans.map(item=>{const value=account?.pointsPlans?.[item.id];return value && Number.isSafeInteger(value.priceCents) && value.priceCents>=0 && Number.isSafeInteger(value.monthlyPoints) && value.monthlyPoints>=0 ? {...item,price:(value.priceCents/100).toFixed(2).replace(/\.?0+$/,''),points:value.monthlyPoints}:item;});
   const check = account?.checkIn;
   const points = account?.points;
   const available = formatPoints(points?.availableUnits);
-  const selectedPlan = availablePlans.find((plan) => plan.id === selected) || availablePlans[1];
+  const selectedPlan = plans.find((plan) => plan.id === selected) || plans[1];
   return (
     <div className="vip-page">
       <header className="vip-heading">
@@ -404,7 +406,7 @@ export function VipView({
           </div>
           <fieldset className="vip-plan-grid">
             <legend className="vip-sr-only">选择会员套餐以查看权益</legend>
-            {availablePlans.map((plan) => (
+            {plans.map((plan) => (
               <label
                 key={plan.id}
                 className={`vip-plan vip-tone-${plan.id} ${selected === plan.id ? "is-selected" : ""}`}
@@ -417,7 +419,7 @@ export function VipView({
                   onChange={() => setSelected(plan.id)}
                 />
                 <span className="vip-plan-top">
-
+                  <MembershipTierArt plan={plan.id} />
                   <span className="vip-plan-title">
                     <strong>{plan.name}</strong>
                     <span className="vip-plan-description">
@@ -456,7 +458,7 @@ export function VipView({
           </fieldset>
           <div className={`vip-plan-choice vip-tone-${selected}`}>
             <div className="vip-selected-plan">
-
+              <MembershipTierArt plan={selectedPlan.id} />
               <span>
                 <strong>
                   {selectedPlan.name} · {selectedPlan.description}
