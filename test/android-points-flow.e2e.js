@@ -3,9 +3,11 @@
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';import crypto from 'node:crypto';
 import express from 'express';import react from '@vitejs/plugin-react';import {createServer} from 'vite';import {expect as baseExpect} from '@playwright/test';
 const expect=baseExpect.configure({timeout:15000});
-import {createStore} from '../server/store.js';import {createApp} from '../server/index.js';import {aiOutputBudget} from '../server/ai-output-policy.js';import {launchTestBrowser} from './helpers/browser.js';
+import {createStore} from '../server/store.js';import {createPointsStore} from '../server/ai-points/store.js';import {createApp} from '../server/index.js';import {aiOutputBudget} from '../server/ai-output-policy.js';import {launchTestBrowser} from './helpers/browser.js';
 const root=process.cwd(),mobile=path.join(root,'mobile'),parent=path.resolve('tmp'),dir=fs.mkdtempSync(path.join(parent,'points-flow-browser-'));
 const out=path.resolve('tmp/android-points-ux-20261024/browser');fs.mkdirSync(out,{recursive:true});const store=createStore(path.join(dir,'data'));
+// Freeze this UI receipt fixture at a verified peak rate; the HTTP billing tests cover time-band changes.
+store.points=createPointsStore(store.db,{now:()=>Date.parse('2026-10-26T03:00:00Z')});
 const users=[store.register('flow_browser_one','fixture-password-123'),store.register('flow_browser_two','fixture-password-123')];
 for(const user of users)store.selectCertificate(user.id,'network-engineer');
 const settings={baseUrl:'https://api.deepseek.com',model:'deepseek-flash',keyCipher:'SYNTHETIC-UNUSED-KEY'};

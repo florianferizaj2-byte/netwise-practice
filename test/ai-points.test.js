@@ -48,13 +48,17 @@ test('prices bind the exact provider and model, expire, and reject unbounded inp
   assert.throws(()=>inputTokenCeiling([{role:'user',content:[{type:'image_url'}]}]),{code:'AI_POINTS_UNBOUNDED_INPUT'});
 });
 
-test('gifts and membership labels never manufacture cash revenue; no budget means no upstream reservation',t=>{
+test('earned points allow model reservation without cash bookkeeping; gifts never manufacture revenue',t=>{
   const {db,points}=fixture();t.after(()=>db.close());
   points.grant({userId:'alice',sourceKey:'gift-1',units:990000});
   const op=operation(points);
-  assert.throws(()=>call(points,op.id),{code:'AI_POINTS_COST_BUDGET_EXHAUSTED'});
-  assert.equal(db.prepare('SELECT COUNT(*) AS n FROM ai_points_calls').get().n,0);
-  assert.equal(points.wallet('alice').heldUnits,0);
+  const held=call(points,op.id);
+  assert.equal(db.prepare('SELECT COUNT(*) AS n FROM ai_points_calls').get().n,1);
+  assert.equal(points.wallet('alice').heldUnits,4800);
+  measured(points,held.id);points.finish(op.id,{success:true});
+  assert.equal(points.wallet('alice').availableUnits,988880);
+  assert.equal(points.finance().aiSpentMicros,2800);
+  assert.equal(points.audit().passed,true);
   assert.equal(points.finance().revenueMicros,0);
 });
 
@@ -156,7 +160,7 @@ test('concurrent processes cannot reserve the same points twice or make a wallet
   assert.equal(points.audit().passed,true);
 });
 
-test('future point fulfilment and repeated refunded failures together stay inside the 30 percent cost budget',t=>{
+test('failed-call operating costs remain visible but do not create an unrequested revenue-based hard cap',t=>{
   const {db,points}=fixture();t.after(()=>db.close());
   points.recordFinance({key:'fund',kind:'revenue',amountMicros:1000000,reference:'fixture-unique-receipt-001',createdBy:'admin'});
   points.grant({userId:'alice',sourceKey:'paid',units:100000,kind:'paid',requireFunded:true});
@@ -170,8 +174,15 @@ test('future point fulfilment and repeated refunded failures together stay insid
   assert.equal(points.wallet('alice').availableUnits,100000);
   const finance=points.finance();assert.equal(finance.aiSpentMicros,40000);assert.equal(finance.pointLiabilityMicros,250000);
   assert.ok(finance.aiSpentMicros+finance.pointLiabilityMicros<=300000);
-  assert.throws(()=>call(points,operation(points,'blocked-before-upstream').id,{inputLimit:1000,outputLimit:2250}),{code:'AI_POINTS_COST_BUDGET_EXHAUSTED'});
-  assert.equal(db.prepare('SELECT COUNT(*) AS n FROM ai_points_calls').get().n,2);
+  const op=operation(points,'wallet-backed-after-reporting-budget');
+  const allowed=call(points,op.id,{inputLimit:1000,outputLimit:2250});
+  assert.equal(points.wallet('alice').heldUnits,8000);
+  points.finishCall(allowed.id,{success:false,usage:{hasUsage:true,prompt_tokens:1000,completion_tokens:2250,total_tokens:3250,cached_prompt_tokens:0}});
+  points.finish(op.id,{success:false});
+  assert.equal(points.finance().availableCostMicros,0);
+  assert.equal(points.finance().overBudgetMicros,10000);
+  assert.equal(points.wallet('alice').availableUnits,100000);
+  assert.equal(db.prepare('SELECT COUNT(*) AS n FROM ai_points_calls').get().n,3);
   assert.equal(points.audit().passed,true);
 });
 

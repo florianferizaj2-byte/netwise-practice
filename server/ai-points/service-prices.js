@@ -1,7 +1,9 @@
 import { authorAiSettings, managedAiCandidates } from '../ai-service.js';
 import { aiOutputBudget } from '../ai-output-policy.js';
-import { officialRateCards, validRateCard } from './pricing.js';
-import { chargeUnits, tokenCost, SERVICE_MARGIN_BPS, POINT_SCALE } from './money.js';
+import { officialRateCards, validRateCard, officialRateAt, pricingSource } from './pricing.js';
+import {accountPointsPlans} from './account.js';
+import {readCheckInPolicy} from './check-in-policy.js';
+import { chargeUnits, tokenCost, SERVICE_MARGIN_BPS, TARGET_MARGIN_BPS, POINT_SCALE, pointLiabilityMicros } from './money.js';
 
 // Examples, not fixed prices or reservations. Every model round uses the same
 // explicit input assumption; output allowances come from the production policy.
@@ -38,9 +40,25 @@ export function modelPointExamples(card) {
       }));
       return { id: service.id, name: service.name, steps,
         sampleUnits: units(steps.reduce((total, step) => total + cost(step.inputTokens, step.outputTokens), 0)),
+        sampleCostMicros: steps.reduce((total, step) => total + cost(step.inputTokens, step.outputTokens), 0),
       };
     }),
   };
+}
+
+export function membershipCostForecast(store) {
+  const plans=accountPointsPlans(store),checkIn=readCheckInPolicy(store),reserveBps=SERVICE_MARGIN_BPS-TARGET_MARGIN_BPS;
+  return {basis:'all-issued-points-spent',pointsPerCny:100,serviceMultiplier:10000/(10000-SERVICE_MARGIN_BPS),operatingReserveBps:reserveBps,
+    free:{dailyPoints:checkIn.dailyPoints.free,cost30DaysMicros:pointLiabilityMicros(checkIn.dailyPoints.free*30*POINT_SCALE)},
+    plans:Object.entries(plans).map(([id,plan])=>({id,name:plan.name,priceCents:plan.priceCents,dailyPoints:plan.dailyPoints,
+      scenarios:[30,31].map(claimDays=>{const revenueMicros=plan.priceCents*10000,aiCostCeilingMicros=pointLiabilityMicros(plan.dailyPoints*claimDays*POINT_SCALE),reserveMicros=Math.ceil(revenueMicros*reserveBps/10000);
+        return {claimDays,aiCostCeilingMicros,operatingReserveMicros:reserveMicros,remainingMarginBps:Math.round((revenueMicros-aiCostCeilingMicros-reserveMicros)*10000/revenueMicros)};})})),
+    notice:'情景测算，不是已实现利润；按全部签到积分用完计算。30天会员周期可能跨31个自然日，另列31次签到。服务器、手续费、税费、退款和异常失败成本以实际账单另行核对。'};
+}
+function priceMetadata(card) {
+  return {priceBand:card.priceBand||'fixed',priceBandLabel:card.priceBand==='peak'?'高峰时段':card.priceBand==='off-peak'?'空闲时段':'管理员固定费率',
+    priceSource:card.schedule==='deepseek-cn-2026'?pricingSource:'管理员确认费率',priceAppliedAt:card.appliedAt||null,
+    ...(card.schedule==='deepseek-cn-2026'?{comparison:{peak:modelPointExamples({...card,...card.peakRates}),offPeak:modelPointExamples({...card,...card.offPeakRates})}}:{})};
 }
 
 export function pointServicePrices(store, now = Date.now()) {
@@ -55,7 +73,7 @@ export function pointServicePrices(store, now = Date.now()) {
         name: setting.serviceName || setting.model, model: setting.model,
         priority: setting.priority ?? index + 1,
         verifiedAt: card.verifiedAt, expiresAt: card.expiresAt,
-        ...modelPointExamples(card) });
+        ...modelPointExamples(card),...priceMetadata(card) });
     } catch (error) {
       if (!error.code?.startsWith('AI_POINTS_PRICING_')) throw error;
     }
@@ -63,15 +81,16 @@ export function pointServicePrices(store, now = Date.now()) {
   const available = models.length > 0;
   if (!available) {
     try {
-      const reference = validRateCard(officialRateCards.find(card => card.model === 'deepseek-flash'), now);
+      const reference = officialRateAt(validRateCard(officialRateCards.find(card => card.model === 'deepseek-flash'), now),now);
       models.push({ id: 'reference-deepseek-flash', kind: 'reference', name: 'DeepSeek Flash（参考）',
         model: reference.model, priority: null, verifiedAt: reference.verifiedAt, expiresAt: reference.expiresAt,
-        ...modelPointExamples(reference) });
+        ...modelPointExamples(reference),...priceMetadata(reference) });
     } catch (error) {
       if (!error.code?.startsWith('AI_POINTS_PRICING_')) throw error;
     }
   }
   return { billingMode: 'actual-usage', scale: POINT_SCALE, pointsPerCny: 100,
+    billingPolicy:{admission:'wallet-only',dailyCostLimitMicros:null,serviceMarginBps:SERVICE_MARGIN_BPS,serviceMultiplier:10000/(10000-SERVICE_MARGIN_BPS),priceSource:pricingSource},
     available, primaryModelId: available ? models[0].id : null,
     generatedAt: new Date(now).toISOString(), models,
     assumptions: { inputTokensPerCall: sampleInputTokens, output: 'first-round-output-allowance',
@@ -81,7 +100,7 @@ export function pointServicePrices(store, now = Date.now()) {
       { id: 'bank', name: '普通题库练习、已有解析与课程', units: 0 },
       { id: 'cache', name: '读取已生成的缓存结果', units: 0 },
       { id: 'deterministic', name: '客观题 / 确定性判分', units: 0 },
-      { id: 'location-study', name: '定位学习前置的每日30题', units: 0 },
+      { id: 'location-study', name: '定位前置专项练习', units: 0 },
     ],
   };
 }

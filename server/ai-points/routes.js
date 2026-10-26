@@ -4,7 +4,7 @@ import {ensureAccountPoints,accountPointsPlans} from './account.js';
 import {readCheckInPolicy,updateCheckInPolicy} from './check-in-policy.js';
 import {pointsUsageReport,userPointOperations,userPointReceipt,pointWalletSnapshot} from './reports.js';
 import {officialRateCards} from './pricing.js';
-import {pointServicePrices} from './service-prices.js';
+import {pointServicePrices,membershipCostForecast} from './service-prices.js';
 
 const pagination={limit:z.coerce.number().int().min(1).max(100).default(30),offset:z.coerce.number().int().min(0).max(1000000).default(0)};
 const money=z.string().regex(/^(0|[1-9]\d{0,8})(\.\d{1,6})?$/);
@@ -33,7 +33,7 @@ export function registerPointsRoutes({route,store,requestUserId,requireAdmin}) {
   const audit=(req,action,id,data)=>store.audit(req.user.id,action,'ai_points',id,data);
   admin('get','/usage',req=>pointsUsageReport(store,z.object({...pagination,days:z.coerce.number().int().min(1).max(365).default(30),search:z.string().trim().max(100).default('')}).strict().parse(req.query)));
   admin('get','/users/:id',req=>userPointOperations(store,req.params.id,z.object(pagination).strict().parse(req.query)));
-  admin('get','/configuration',()=>({plans:accountPointsPlans(store),checkInPolicy:readCheckInPolicy(store),officialRateCards,customRateCards:store.db.prepare('SELECT data,paused FROM ai_points_rates ORDER BY provider,model').all().map(row=>({...JSON.parse(row.data),paused:!!row.paused})),finance:store.points.finance()}));
+  admin('get','/configuration',()=>({plans:accountPointsPlans(store),checkInPolicy:readCheckInPolicy(store),costForecast:membershipCostForecast(store),billingPolicy:{admission:'wallet-only',dailyCostLimitMicros:null},officialRateCards,customRateCards:store.db.prepare('SELECT data,paused FROM ai_points_rates ORDER BY provider,model').all().map(row=>({...JSON.parse(row.data),paused:!!row.paused})),finance:store.points.finance()}));
   admin('get','/check-in-policy',()=>({policy:readCheckInPolicy(store)}));
   admin('put','/check-in-policy',req=>store.points.transaction(()=>{
     const result=updateCheckInPolicy(store,req.body,req.user.id);

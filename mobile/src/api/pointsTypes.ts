@@ -2,6 +2,7 @@ export type PointServicePrice = {
   id: string;
   name: string;
   sampleUnits: number;
+  sampleCostMicros?: number;
   steps: { taskType: string; inputTokens: number; outputTokens: number }[];
 };
 export type PointPriceModel = {
@@ -16,9 +17,13 @@ export type PointPriceModel = {
   outputUnitsPer1000: number;
   cachedInputUnitsPer1000: number;
   services: PointServicePrice[];
+  priceBand?: 'peak' | 'off-peak' | 'fixed';
+  priceBandLabel?: string;
+  comparison?: { peak: { services: PointServicePrice[] }; offPeak: { services: PointServicePrice[] } };
 };
 export type PointServicesResponse = {
   billingMode: 'actual-usage';
+  billingPolicy?: { admission: 'wallet-only'; dailyCostLimitMicros: null; serviceMultiplier: number };
   scale: number;
   pointsPerCny: number;
   available: boolean;

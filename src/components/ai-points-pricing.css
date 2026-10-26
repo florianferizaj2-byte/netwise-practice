@@ -1,0 +1,10 @@
+.ai-points-pricing{margin-top:20px;padding:20px 24px;min-width:0;color:var(--vip-text)}
+.ai-points-pricing>summary{min-height:44px;cursor:pointer;font-size:16px;font-weight:650;line-height:1.6}
+.ai-points-pricing>summary span{display:inline-block;margin-left:16px;color:var(--vip-muted);font-size:14px;font-weight:400}
+.ai-points-pricing-content{padding-top:12px}.ai-points-pricing-content p{font-size:14px;line-height:1.7;margin:12px 0;overflow-wrap:anywhere}
+.ai-points-pricing-tools{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.ai-points-pricing :is(button,select){min-height:44px}.ai-points-pricing button{padding:8px 16px;flex-shrink:0}
+.ai-points-pricing label{display:grid;gap:8px;max-width:400px}.ai-points-pricing h3{font-size:16px;line-height:1.6}
+.ai-points-pricing dl{margin:16px 0}.ai-points-pricing dl>div{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 20px;padding:12px 0;border-top:1px solid var(--vip-border)}
+.ai-points-pricing dt,.ai-points-pricing dd{margin:0;font-size:14px;line-height:1.6}.ai-points-pricing dd{font-weight:600;font-variant-numeric:tabular-nums;color:var(--vip-green)}
+.ai-points-pricing :is(summary,button,select):focus-visible{outline:2px solid var(--vip-green);outline-offset:3px}

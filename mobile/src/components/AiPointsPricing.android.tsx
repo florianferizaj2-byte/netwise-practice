@@ -48,12 +48,14 @@ export function AiPointsPricing({ userId, preview = false }: { userId?: string; 
         <Text style={s.muted}>{m.kind === 'reference' ? '参考价 · 非当前可用接口' : `${m.id === data.primaryModelId ? '当前优先' : '备用'} · 优先级 ${m.priority}`}</Text>
       </AnimatedPressable>)}
       {model && data && <>
-        <Text style={s.text}>{model.model}：每 1000 输入 Token {format(model.inputUnitsPer1000)} 积分，输出 {format(model.outputUnitsPer1000)} 积分，缓存命中输入 {format(model.cachedInputUnitsPer1000)} 积分。</Text>
+        <Text style={s.text}>{model.model}{model.priceBandLabel ? ` · ${model.priceBandLabel}` : ''}：每 1000 输入 Token {format(model.inputUnitsPer1000)} 积分，输出 {format(model.outputUnitsPer1000)} 积分，缓存命中输入 {format(model.cachedInputUnitsPer1000)} 积分。</Text>
         <Text style={s.muted}>计价有效至 {new Date(model.expiresAt).toLocaleDateString('zh-CN')} · 套餐面值 {data.pointsPerCny} 积分 / 元</Text>
+        {data.billingPolicy && <Text style={s.muted}>按模型成本 × {data.billingPolicy.serviceMultiplier} 换算积分；只按账户积分限制调用。</Text>}
         <Text style={s.warning}>{data.assumptions.notice}</Text>
         {model.services.map(service => <View key={service.id} style={s.row}>
           <View style={s.description}><Text style={s.serviceName}>{service.name}</Text>
-            <Text style={s.muted}>{service.steps.length} 轮模型调用 · 示例总输出 {service.steps.reduce((n, step) => n + step.outputTokens, 0)} Token</Text></View>
+            <Text style={s.muted}>{service.steps.length} 轮模型调用 · 示例总输出 {service.steps.reduce((n, step) => n + step.outputTokens, 0)} Token</Text>
+            {model.comparison && <Text style={s.muted}>高峰 {format(model.comparison.peak.services.find(row => row.id === service.id)?.sampleUnits ?? service.sampleUnits)} / 空闲 {format(model.comparison.offPeak.services.find(row => row.id === service.id)?.sampleUnits ?? service.sampleUnits)} 积分</Text>}</View>
           <Text style={s.price}>{format(service.sampleUnits)} 积分 / 示例</Text>
         </View>)}
       </>}

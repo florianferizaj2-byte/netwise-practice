@@ -34,7 +34,7 @@ export function PointsBilling(){
     try{
       await api('/admin/points'+path,idempotent?{...body,requestId:id}:body);
       delete nonce.current[signature];
-      setNotice('已保存。余额、收支与成本预算已重新计算。');setTick(value=>value+1);return true;
+      setNotice('已保存。余额、收支与成本记录已重新计算。');setTick(value=>value+1);return true;
     }catch(cause){setError(cause.message);return false;}finally{setBusy(false);}
   }
   const finance=data?.finance;
@@ -46,16 +46,26 @@ export function PointsBilling(){
     {finance&&<>
       <div className="ac-metrics">{[
         ['已登记销售收入',yuan(finance.revenueMicros)],['AI 已发生成本',yuan(finance.aiSpentMicros)],
-        ['未用积分履约预留',yuan(finance.pointLiabilityMicros)],['故障与运营可用预算',yuan(finance.availableCostMicros)],
+        ['未用积分履约预留',yuan(finance.pointLiabilityMicros)],['参考预算余量（不拦截调用）',yuan(finance.availableCostMicros)],
       ].map(([label,value])=><div key={label}><span>{label}</span><strong>{value}</strong></div>)}</div>
-      <Panel title="成本保护" description="目标毛利率约 70%；付费 AI 履约成本按约 25% 换算积分，另外预留约 5% 用于失败、赠送和已登记费用。">
-        <p>预算同时包含实际 AI 成本 {yuan(finance.aiSpentMicros)}、调用中的预留 {yuan(finance.aiHeldMicros)}、未用积分未来成本 {yuan(finance.pointLiabilityMicros)} 和其他已登记支出 {yuan(finance.otherExpenseMicros)}。</p>
+      <Panel title="扣费与成本核算" description="新调用按用户可用积分准入，不依赖登记收入，也不设平台每日成本上限。模型价格与用量仍需有效且可核对。">
+        <p>参考核算包含已记录 AI 成本 {yuan(finance.aiSpentMicros)}、调用中的预留 {yuan(finance.aiHeldMicros)}、未用积分未来成本 {yuan(finance.pointLiabilityMicros)} 和其他已登记支出 {yuan(finance.otherExpenseMicros)}。</p>
         <p>会员码与赠送积分不自动当作收入。销售收入按客户实际支付、未扣手续费的金额登记；支付手续费和经营支出分别登记，未登记费用不代表零成本。</p>
         {data.history.unknownCostCalls>0&&<p role="status">历史有 {data.history.unknownCostCalls} 次调用成本未知，未计作零成本，因此历史实际毛利尚不能确认。</p>}
-        {finance.overBudgetMicros>0&&<p role="alert">已登记费用或积分承诺超出预算 {yuan(finance.overBudgetMicros)}，新 AI 调用已受成本保护限制。</p>}
+        {finance.overBudgetMicros>0&&<p role="alert">已登记费用或积分承诺超出预算 {yuan(finance.overBudgetMicros)}，这只是收支提示，不会因此阻止有足额积分的用户调用 AI。</p>}
         {!data.audit.passed&&<p role="alert">积分账本核对未通过，请先核对记录。</p>}
       </Panel>
     </>}
+    {configuration?.costForecast&&<Panel title="会员签到成本测算" description="按当前每日额度全部领取并用于 AI 计算；不是已经实现的毛利。修改签到配置后刷新测算。" actions={<button onClick={()=>setTick(value=>value+1)}>刷新测算</button>}>
+      <Table rowKey="id" rows={configuration.costForecast.plans} columns={[
+        {key:'name',label:'套餐 / 售价',render:row=>`${row.name} / ¥ ${(row.priceCents/100).toFixed(2)}`},
+        {key:'dailyPoints',label:'每日签到积分'},
+        {key:'cost30',label:'领取 30 / 31 次的 AI 成本上界',render:row=>row.scenarios.map(scenario=>yuan(scenario.aiCostCeilingMicros)).join(' / ')},
+        {key:'margin',label:'再预留 5% 后剩余比例（30 / 31 次）',render:row=>row.scenarios.map(scenario=>(scenario.remainingMarginBps/100).toFixed(2)+'%').join(' / ')},
+      ]}/>
+      <p>免费用户每日 {configuration.costForecast.free.dailyPoints} 积分，30 次签到全部用完对应 AI 成本上界 {yuan(configuration.costForecast.free.cost30DaysMicros)}。积分按成本的 {configuration.costForecast.serviceMultiplier} 倍面值结算；100 积分面值为 1 元。</p>
+      <p>{configuration.costForecast.notice}</p>
+    </Panel>}
     <CheckInPolicyPanel/>
     <Panel title="所有用户的积分与用量" description="包含普通账号、会员、管理员与访客；可展开查看每个任务的扣款、退款、模型和 Token。">
       <form className="ac-toolbar" onSubmit={event=>{event.preventDefault();setOffset(0);setTick(value=>value+1);}}>
@@ -119,7 +129,7 @@ export function PointsBilling(){
     <Panel title="模型成本价格" description="价格与服务地址、模型严格绑定；价格过期或用量待核对时暂停新调用。">
       {configuration&&<Table rowKey={row=>row.provider+row.model} rows={rateCards} columns={[
         {key:'model',label:'模型'},{key:'provider',label:'服务地址'},
-        {key:'inputMicrosPerMillion',label:'输入 / 输出 / 缓存（每百万 Token）',render:row=>`${yuan(row.inputMicrosPerMillion)} / ${yuan(row.outputMicrosPerMillion)} / ${yuan(row.cachedMicrosPerMillion)}`},
+        {key:'inputMicrosPerMillion',label:'输入 / 输出 / 缓存（每百万 Token）',render:row=>row.schedule==='deepseek-cn-2026'?<span>高峰：{yuan(row.peakRates.inputMicrosPerMillion)} / {yuan(row.peakRates.outputMicrosPerMillion)} / {yuan(row.peakRates.cachedMicrosPerMillion)}<br/>空闲：{yuan(row.offPeakRates.inputMicrosPerMillion)} / {yuan(row.offPeakRates.outputMicrosPerMillion)} / {yuan(row.offPeakRates.cachedMicrosPerMillion)}</span>:`${yuan(row.inputMicrosPerMillion)} / ${yuan(row.outputMicrosPerMillion)} / ${yuan(row.cachedMicrosPerMillion)}`},
         {key:'expiresAt',label:'价格有效期',render:row=>date(row.expiresAt)},
         {key:'paused',label:'状态',render:row=>row.paused?'待核对，已暂停':Date.parse(row.expiresAt)>Date.now()?'有效':'已过期'},
       ]}/>}

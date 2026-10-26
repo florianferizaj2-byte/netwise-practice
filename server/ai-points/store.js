@@ -218,8 +218,9 @@ export function createPointsStore(db, { now = Date.now } = {}) {
         const operation=assertPending(operationId),card=api.rateCard(settings);
         const upper=tokenCost({prompt_tokens:inputLimit,completion_tokens:outputLimit,cached_prompt_tokens:0},
           {...card,inputMicrosPerMillion:Math.max(card.inputMicrosPerMillion,card.cachedMicrosPerMillion)});
-        if(finance().availableCostMicros<upper)
-          fail('AI 服务成本预算不足，积分未扣除；请联系管理员核对收入与预算','AI_POINTS_COST_BUDGET_EXHAUSTED',503);
+        // Admission is backed by this user's real wallet, never by an operator's
+        // unrecorded sales receipts. Cash/expense figures remain reporting only;
+        // per-call token limits, rate validation and wallet holds still apply.
         const units=chargeUnits(upper,operation.margin_bps);allocate(operation,units);
         const id=uuid();
         db.prepare("INSERT INTO ai_points_calls (id,operation_id,user_id,task_type,provider,model,rate_card,state,upper_cost_micros,input_limit,output_limit,created_at) VALUES(?,?,?,?,?,?,?,'pending',?,?,?,?)")

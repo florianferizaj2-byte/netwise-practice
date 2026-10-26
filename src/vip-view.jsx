@@ -28,6 +28,7 @@ import "./vip.css";
 import "./subjective-study.css";
 import "./blue-membership.css";
 import { PointsActivity, formatPoints } from "./components/points-activity.jsx";
+import { AiPointsPricing } from "./components/ai-points-pricing.jsx";
 
 const basePlans = [
   {
@@ -652,6 +653,7 @@ export function VipView({
         </section>
       </div>
 
+      {user?.id&&<AiPointsPricing key={"prices-"+user.id} api={api} userId={user.id} />}
       {user?.id&&<PointsActivity key={user.id} api={api} userId={user.id} />}
       <section className="vip-faq" aria-labelledby="vip-faq-title">
         <h2 id="vip-faq-title">你可能想了解</h2>
