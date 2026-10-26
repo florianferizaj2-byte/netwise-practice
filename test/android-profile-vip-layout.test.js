@@ -20,7 +20,7 @@ test('profile utility cells have one centered row, not a wrapped line stranded a
 });
 test('membership page owns focused navigation and uses explicit, unbroken plan information',()=>{
   const source=read('screens/VipScreen.android.tsx');assert.match(source,/useAndroidFocusMode\(!!onBack, onBack\)/);
-  assert.match(source,/\{item.points\} 积分<\/Text><Text[^>]+>30 天<\/Text>/);assert.doesNotMatch(source,/\{item.points\} 积分 \/ 30 天/);
+  assert.match(source,/每日 \{item.points \?\? '—'\} 积分<\/Text><Text[^>]+>30 天<\/Text>/);assert.doesNotMatch(source,/\{item.points\} 积分 \/ 30 天/);
   const footer=source.slice(source.indexOf('testID="vip-purchase-footer"'),source.indexOf('{studyVisited'));
   assert.match(footer,/购买后返回兑换/);assert.doesNotMatch(footer,/价格与时长以购买页为准/);
 });
@@ -31,4 +31,4 @@ test('membership narrow and large-text layouts have intrinsic height, not vertic
   assert.equal(s.purchaseHint.minWidth,0);assert.equal(s.nativePurchaseLine.flexWrap,undefined);
 });
 
-test('membership uses backend plan values and owns hardware-back dismissal',()=>{const vip=read('screens/VipScreen.android.tsx'),focus=read('navigation/AndroidFocusMode.android.ts');assert.match(vip,/account\?\.pointsPlans/);assert.match(vip,/remote.priceCents/);assert.match(vip,/remote.monthlyPoints/);assert.match(focus,/hardwareBackPress/);assert.match(focus,/back\?\.remove\(\)/);});
+test('membership uses backend plan values and owns hardware-back dismissal',()=>{const vip=read('screens/VipScreen.android.tsx'),focus=read('navigation/AndroidFocusMode.android.ts');assert.match(vip,/account\?\.pointsPlans/);assert.match(vip,/remote.priceCents/);assert.match(vip,/remote.dailyPoints/);assert.doesNotMatch(vip,/remote.monthlyPoints/);assert.match(focus,/hardwareBackPress/);assert.match(focus,/back\?\.remove\(\)/);});

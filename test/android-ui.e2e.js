@@ -300,14 +300,14 @@ try {
   await expect(page.getByRole('button', { name: '完成', exact: true })).toBeVisible();
   await shot('11c-redemption-success-393');
   await page.getByRole('button', { name: '完成', exact: true }).click();
-  await expect(page.getByRole('button', { name: '查看可用AI积分、服务费用和积分记录', exact: true }).getByTestId('profile-points-value')).toHaveText('1,990');
+  await expect(page.getByRole('button', { name: '查看可用AI积分、服务费用和积分记录', exact: true }).getByTestId('profile-points-value')).toHaveText('0');
   await page.getByText('会员与 AI 积分', { exact: true }).click();
   await expect(page.getByText('选择会员套餐', { exact: true })).toBeVisible();
   await shot('12-membership-393');
   await page.getByRole('button', { name: '签到领积分', exact: true }).click();
   await expect(page.getByRole('button', { name: '已签到', exact: true })).toBeVisible();
-  await expect(page.getByTestId('vip-points-balance').getByText('1,995', { exact: true })).toBeVisible();
-  checks.push('real funded fixture redemption and check-in refresh balances immediately');
+  await expect(page.getByTestId('vip-points-balance').getByText('66', { exact: true })).toBeVisible();
+  checks.push('redemption issues no monthly lump sum; daily SVIP check-in credits exactly 66 points immediately');
   await page.getByRole('button', { name: '服务价目', exact: false }).click();
   await expect(page.getByText('AI 服务积分价目', { exact: true })).toBeVisible();
   checks.push('My/settings/profile save/security/redeem/membership/pricing entries');
@@ -420,7 +420,7 @@ try {
   await tab('我的');
   await page.getByText('会员与 AI 积分', { exact: true }).click();
   await shot('23b-membership-dark-393');
-  const selectedPlan = page.getByRole('button', { name: 'SVIP，19.9元，每30天1990积分', exact: true });
+  const selectedPlan = page.getByRole('button', { name: 'SVIP，19.9元，每日签到66积分，会员有效30天', exact: true });
   assert.equal(await selectedPlan.locator('svg').last().evaluate(e => getComputedStyle(e).stroke), 'rgb(16, 23, 34)');
   await page.getByRole('button', { name: '返回我的', exact: true }).click();
   await tab('练习');

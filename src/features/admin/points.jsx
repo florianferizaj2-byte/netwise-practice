@@ -3,6 +3,7 @@ import {api} from '../../api.js';
 import {Panel,Table,Pagination,date,requestId} from './shared.jsx';
 import {formatPoints,pointsTaskLabels} from '../../components/points-activity.jsx';
 import './points.css';
+import {CheckInPolicyPanel} from './check-in-policy.jsx';
 
 const yuan=micros=>'¥ '+((micros||0)/1000000).toLocaleString('zh-CN',{maximumFractionDigits:6});
 const stateName={pending:'预扣中',settled:'已结算',refunded:'已退款'};
@@ -55,6 +56,7 @@ export function PointsBilling(){
         {!data.audit.passed&&<p role="alert">积分账本核对未通过，请先核对记录。</p>}
       </Panel>
     </>}
+    <CheckInPolicyPanel/>
     <Panel title="所有用户的积分与用量" description="包含普通账号、会员、管理员与访客；可展开查看每个任务的扣款、退款、模型和 Token。">
       <form className="ac-toolbar" onSubmit={event=>{event.preventDefault();setOffset(0);setTick(value=>value+1);}}>
         <label>账号或用户编号<input value={search} onChange={event=>{setSearch(event.target.value);setOffset(0);}}/></label>

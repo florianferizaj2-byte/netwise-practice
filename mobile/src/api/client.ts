@@ -581,7 +581,7 @@ export type AiSettingsPayload = {
 };
 
 export type AccountEntitlementsResponse = {
-  pointsPlans?: Partial<Record<'vip' | 'svip' | 'ssvip', { name: string; priceCents: number; monthlyPoints: number }>>;
+  pointsPlans?: Partial<Record<'vip' | 'svip' | 'ssvip', { name: string; priceCents: number; monthlyPoints: number; dailyPoints?: number; membershipDistribution?: 'daily-check-in' }>>;
   plan: 'free' | 'vip' | 'svip' | 'ssvip';
   expiresAt: string | null;
   apiConfigUnlocked: boolean;
@@ -589,11 +589,18 @@ export type AccountEntitlementsResponse = {
   aiServiceMode?: 'author';
   canManageAiService?: boolean;
   billingMode?: 'points';
-  points?: {availableUnits:number;heldUnits:number;expiredUnits:number;pendingUnits:number;scale:number;pointsPerCny:number;monthlyPoints:number;periodStart:string|null;periodEnd:string|null};
+  points?: {availableUnits:number;heldUnits:number;expiredUnits:number;pendingUnits:number;scale:number;pointsPerCny:number;monthlyPoints:number;dailyCheckInPoints?:number;membershipDistribution?:'daily-check-in';legacyPrepaidUntil?:string|null;periodStart:string|null;periodEnd:string|null};
   generation?: { limit: number; used: number; remaining: number; periodStart: string | null; periodEnd: string | null };
   checkIn: {
     day: string;
     claimed: boolean;
+    canClaim?: boolean;
+    disabledReason?: string | null;
+    configuredPoints?: number;
+    legacyPrepaidUntil?: string | null;
+    dailyStartsAt?: string | null;
+    expiresAt?: string;
+    policy?: {revision:number;enabled:boolean;requireFunded:boolean;dailyPoints:Record<'free'|'vip'|'svip'|'ssvip',number>;membershipDistribution:'daily-check-in'};
     grants: { points?:number; explanations: number; generations: number; analyses: number };
     remaining: { explanations: number; generations: number; analyses: number };
   };

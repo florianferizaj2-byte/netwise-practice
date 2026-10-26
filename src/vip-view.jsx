@@ -29,7 +29,7 @@ import "./subjective-study.css";
 import "./blue-membership.css";
 import { PointsActivity, formatPoints } from "./components/points-activity.jsx";
 
-const plans = [
+const basePlans = [
   {
     id: "vip",
     name: "VIP",
@@ -67,6 +67,7 @@ export function VipView({
   focusRedemption = false,
 }) {
   const { account, loading, error, reload, replace } = membership;
+  const plans=basePlans.map(item=>({...item,points:account?.pointsPlans?.[item.id]?.dailyPoints ?? null}));
   const [selected, setSelected] = useState("svip");
   const [busy, setBusy] = useState("");
   const [checkError, setCheckError] = useState("");
@@ -305,10 +306,10 @@ export function VipView({
             />
             <Quota
               icon={Target}
-              label="每 30 天套餐"
-              value={account ? points?.monthlyPoints || 0 : "—"}
+              label="每日签到额度"
+              value={check?.configuredPoints ?? "—"}
               unit="积分"
-              detail="按模型与用量计费，不再分别限制功能次数"
+              detail="每天手动领取，当日有效，不自动发月积分"
             />
           </div>
           <div className="vip-account-foot">
@@ -316,9 +317,9 @@ export function VipView({
               <div className="vip-period">
                 <div>
                   <span>
-                    本期积分有效期至 <b>{date(points.periodEnd)}</b>
+                    会员有效期至 <b>{date(points.periodEnd)}</b>
                   </span>
-                  <span>{points.pendingUnits ? "本期积分待到账，请联系管理员核对发放记录" : "同一账号在网页与 App 共用积分"}</span>
+                  <span>{points.pendingUnits ? "本期积分待到账，请联系管理员核对发放记录" : "同一账号在网页与 App 共用积分，签到积分当日有效"}</span>
                 </div>
               </div>
             ) : (
@@ -347,7 +348,7 @@ export function VipView({
           <div className="vip-rewards">
             <div>
               <strong>
-                {check?.grants.points ?? 5}<small>积分</small>
+                {check?.grants.points ?? "—"}<small>积分</small>
               </strong>
               <span>签到积分 · 当日有效</span>
             </div>
@@ -367,7 +368,7 @@ export function VipView({
           <button
             type="button"
             className={`vip-checkin-button ${check?.claimed ? "is-claimed" : "primary"}`}
-            disabled={!!busy || !account || check?.claimed}
+            disabled={!!busy || !account || check?.claimed || check?.canClaim === false}
             onClick={() => void checkIn()}
           >
             {busy === "check-in" ? (
@@ -381,8 +382,9 @@ export function VipView({
               ? "领取中…"
               : check?.claimed
                 ? "今日已签到"
-                : "签到领取积分"}
+                : check?.canClaim === false ? "暂不可领取" : "签到领取积分"}
           </button>
+          {check?.disabledReason && <p className="vip-feedback" role="status">{check.disabledReason}</p>}
           <p className="vip-small-print">已有解析免费查看 · 新 AI 调用统一使用积分 · 签到积分当日有效</p>
           {checkNotice && (
             <p className="vip-feedback" role="status">
@@ -437,7 +439,7 @@ export function VipView({
                   <span>/ 30 天</span>
                 </span>
                 <span className="vip-plan-quantity">
-                  <strong>{plan.points}</strong> 积分
+                  每日签到 <strong>{plan.points ?? "—"}</strong> 积分
                 </span>
                 <span className="vip-plan-benefits">
                   <span>
@@ -659,7 +661,7 @@ export function VipView({
             <ChevronDown size={16} />
           </summary>
           <p>
-            VIP、SVIP、SSVIP 每 30 天分别包含 990、1990、3990 积分。出题、解析、提示、学习计划、AI 判分和老师答疑统一使用积分，实际消耗取决于模型与用量。签到可领取当日有效的赠送积分，赠送以活动预算为准。
+            会员积分改为每日签到领取，额度随会员等级和后台配置同步显示，不再整笔发放月积分。出题、解析、提示、学习计划、AI 判分和老师答疑统一使用积分，实际消耗取决于模型与用量。签到可领取当日有效的赠送积分，已签到账号不因当天升级或改配置而重复发放。
           </p>
         </details>
         <details>
@@ -668,7 +670,7 @@ export function VipView({
             <ChevronDown size={16} />
           </summary>
           <p>
-            任务先预扣，成功后按实际用量结算，未使用的预扣退回；生成或审核失败退还该任务全部积分。优先使用先到期积分。会员每 30 天发放，按原周期续期不重复发放；缓存解析、已有课程和确定性判分不收费。
+            任务先预扣，成功后按实际用量结算，未使用的预扣退回；生成或审核失败退还该任务全部积分。优先使用先到期积分。会员按每天签到发放；已发整期余额保留，到期后转为每日领取；缓存解析、已有课程和确定性判分不收费。
           </p>
         </details>
         <details>

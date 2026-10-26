@@ -60,9 +60,9 @@ test('current Android account, points and learning APIs work over authenticated 
   await t.test('check-in grants once, returns the wallet and never changes another account', async () => {
     const first = await request('/account/check-in', owner, {});
     assert.equal(first.status, 200); assert.equal(first.data.claimed, true); assert.equal(first.data.checkIn.claimed, true);
-    assert.equal(first.data.points.availableUnits, 25000);
+    assert.equal(first.data.points.availableUnits, 21000);
     const second = await request('/account/check-in', owner, {});
-    assert.equal(second.status, 200); assert.equal(second.data.claimed, false); assert.equal(second.data.points.availableUnits, 25000);
+    assert.equal(second.status, 200); assert.equal(second.data.claimed, false); assert.equal(second.data.points.availableUnits, 21000);
     assert.equal((await request('/account/points/wallet', learner)).data.wallet.availableUnits, 7000);
     assert.equal((await request('/account/redeem', owner, { code: 'synthetic-invalid-code' })).status, 400);
   });

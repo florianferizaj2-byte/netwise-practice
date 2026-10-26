@@ -1,4 +1,5 @@
 import crypto from 'node:crypto';
+import {initializeCheckInSchema} from './check-in-policy.js';
 import { integer, chargeUnits, costAllowance, tokenCost, pointsError, POINT_SCALE, SERVICE_MARGIN_BPS, pointLiabilityMicros } from './money.js';
 import { normalizeProvider, resolveRateCard, validRateCard } from './pricing.js';
 
@@ -53,6 +54,7 @@ export function createPointsStore(db, { now = Date.now } = {}) {
       provider TEXT NOT NULL,model TEXT NOT NULL,data TEXT NOT NULL,paused INTEGER NOT NULL DEFAULT 0,
       updated_by TEXT NOT NULL,updated_at TEXT NOT NULL,PRIMARY KEY(provider,model));
   `);
+  initializeCheckInSchema(db,now);
   const operationColumns=new Set(db.prepare('PRAGMA table_info(ai_points_operations)').all().map(row=>row.name));
   if(!operationColumns.has('logical_key')){
     db.exec('ALTER TABLE ai_points_operations ADD COLUMN logical_key TEXT');
@@ -120,7 +122,7 @@ export function createPointsStore(db, { now = Date.now } = {}) {
     }
   };
   const api={
-    wallet,finance,transaction,
+    wallet,finance,transaction,now:()=>now(),
     ensurePeriodicGrant({userId,sourceKey,targetUnits,expiresAt}) {
       integer(targetUnits,'周期积分');
       if(!targetUnits)return wallet(userId);

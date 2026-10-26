@@ -26,6 +26,7 @@ const checks = [
   ["解析展开与自动切题", "practice-review"],
   ["账号每日学习提醒", "study-reminders"],
   ["会员三档与真实测试码兑换", "blue-membership"],
+  ["会员每日签到与后台配置", "tiered-check-in"],
   ["全站蓝色与深色配色", "blue-palette"],
 ];
 const output = path.join(root, "test-output");

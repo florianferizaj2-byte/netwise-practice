@@ -70,7 +70,7 @@ function updateCacheContext(url, method, data) {
     responseCache.invalidate(["/study/catalog", "/study/practice-sessions"]);
   if (url.startsWith("/admin/study")) responseCache.invalidate(["/study/"]);
   if (url.startsWith("/account/"))
-    responseCache.invalidate(["/study/", "/dashboard"]);
+    responseCache.invalidate(["/study/", "/dashboard", "/account/entitlements", "/account/points", "/account/check-in"]);
   if (url.startsWith("/knowledge-favorites"))
     responseCache.invalidate(["/knowledge-favorites"]);
   if (/^\/(attempts|wrong|exams|ai|questions|admin)\b/.test(url))

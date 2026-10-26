@@ -1,6 +1,7 @@
 import {z} from 'zod';
 import {cnyMicros,pointUnits} from './money.js';
-import {ensureAccountPoints,pointsPlans} from './account.js';
+import {ensureAccountPoints,accountPointsPlans} from './account.js';
+import {readCheckInPolicy,updateCheckInPolicy} from './check-in-policy.js';
 import {pointsUsageReport,userPointOperations,userPointReceipt,pointWalletSnapshot} from './reports.js';
 import {officialRateCards} from './pricing.js';
 import {pointServicePrices} from './service-prices.js';
@@ -16,7 +17,7 @@ export function registerPointsRoutes({route,store,requestUserId,requireAdmin}) {
     requestUserId(req);
     return pointServicePrices(store);
   });
-  route('get','/api/account/points',req=>({wallet:ensureAccountPoints(store,requestUserId(req)),plans:pointsPlans,
+  route('get','/api/account/points',req=>({wallet:ensureAccountPoints(store,requestUserId(req)),plans:accountPointsPlans(store),
     billingMode:'points',policy:{pointScale:1000,pointsPerCny:100,refundOnFailure:true,earliestExpiryFirst:true}}));
   route('get','/api/account/points/transactions',req=>{
     const query=z.object(pagination).strict().parse(req.query);
@@ -32,7 +33,13 @@ export function registerPointsRoutes({route,store,requestUserId,requireAdmin}) {
   const audit=(req,action,id,data)=>store.audit(req.user.id,action,'ai_points',id,data);
   admin('get','/usage',req=>pointsUsageReport(store,z.object({...pagination,days:z.coerce.number().int().min(1).max(365).default(30),search:z.string().trim().max(100).default('')}).strict().parse(req.query)));
   admin('get','/users/:id',req=>userPointOperations(store,req.params.id,z.object(pagination).strict().parse(req.query)));
-  admin('get','/configuration',()=>({plans:pointsPlans,officialRateCards,customRateCards:store.db.prepare('SELECT data,paused FROM ai_points_rates ORDER BY provider,model').all().map(row=>({...JSON.parse(row.data),paused:!!row.paused})),finance:store.points.finance()}));
+  admin('get','/configuration',()=>({plans:accountPointsPlans(store),checkInPolicy:readCheckInPolicy(store),officialRateCards,customRateCards:store.db.prepare('SELECT data,paused FROM ai_points_rates ORDER BY provider,model').all().map(row=>({...JSON.parse(row.data),paused:!!row.paused})),finance:store.points.finance()}));
+  admin('get','/check-in-policy',()=>({policy:readCheckInPolicy(store)}));
+  admin('put','/check-in-policy',req=>store.points.transaction(()=>{
+    const result=updateCheckInPolicy(store,req.body,req.user.id);
+    if(!result.replayed)audit(req,'points_check_in_policy_updated',String(result.appliedRevision),{revision:result.appliedRevision,dailyPoints:result.policy.dailyPoints,enabled:result.policy.enabled,requireFunded:result.policy.requireFunded,reason:req.body.reason});
+    return result;
+  }));
   admin('post','/finance',req=>{
     const body=z.object({requestId:z.string().uuid(),kind:z.enum(['revenue','expense']),amountCny:money,
       userId:z.string().max(150).nullable().default(null),reference:z.string().trim().min(8).max(500)}).strict().parse(req.body);

@@ -25,6 +25,7 @@ test("deploying a reviewed correction preserves the original identity and histor
       "domain.js",
       "memberships.js",
       "ai-points/store.js",
+      "ai-points/check-in-policy.js",
       "ai-points/money.js",
       "ai-points/pricing.js",
       "question-banks/loader.js",

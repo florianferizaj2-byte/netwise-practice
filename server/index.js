@@ -47,7 +47,7 @@ import { createMobileProfileService, registerMobileProfile } from "./mobile-prof
 import { resolveMobileRelease } from "./mobile-release.js";
 import { mobileBackendContract } from "./mobile-contract.js";
 import { runPointsRequest, withPointsTask, currentPointsTask, commitPointsResult } from "./ai-points/runtime.js";
-import { ensureAccountPoints, pointsCheckInView, claimPointsCheckIn, pointsPlans } from "./ai-points/account.js";
+import { ensureAccountPoints, pointsCheckInView, claimPointsCheckIn, accountPointsPlans } from "./ai-points/account.js";
 import { registerPointsRoutes } from "./ai-points/routes.js";
 import { registerAiServiceRoutes } from "./ai-service-routes.js";
 import { registerLocationLearning } from "./location-learning.js";
@@ -766,7 +766,7 @@ export async function createApp(options = {}) {
     ...store.accountEntitlement(userId),
     billingMode: "points",
     points: ensureAccountPoints(store,userId),
-    pointsPlans,
+    pointsPlans:accountPointsPlans(store),
     aiServiceAvailable: aiServiceAvailable(),
     aiServiceMode: "author",
     canManageAiService: authorAiOwner(store)?.id === userId,
@@ -792,9 +792,12 @@ export async function createApp(options = {}) {
   route("get", "/api/account/entitlements", (req) =>
     accountEntitlementView(requestUserId(req)),
   );
+  route("get", "/api/account/check-in", req => accountEntitlementView(requestUserId(req)));
   route("post", "/api/account/check-in", (req) => {
+    z.object({}).strict().parse(req.body || {});
     const userId = requestUserId(req);
     const result = claimPointsCheckIn(store,userId,day());
+    if(result.claimed)req.res.set("X-AI-Points-Changed","1");
     return {
       claimed: result.claimed,
       ...accountEntitlementView(userId),

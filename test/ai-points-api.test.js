@@ -31,21 +31,26 @@ test('point billing APIs enforce ownership, complete task refunds, and observabl
     const response=await fetch(`http://127.0.0.1:${server.address().port}/api${url}`,{method:body?'POST':'GET',headers:{Authorization:'Bearer '+tokens[userId],'Content-Type':'application/json',...(requestId?{'X-AI-Request-Id':requestId}:{})},...(body?{body:JSON.stringify(body)}:{})});
     return {status:response.status,body:await response.json()};
   };
-  await t.test('membership without a cash record does not invent spendable funded points',async()=>{
+  await t.test('membership reads do not issue monthly points or invent income before check-in',async()=>{
     store.saveAccountEntitlement(learner.id,{plan:'vip',expiresAt:new Date(Date.now()+30*86400000).toISOString()});
     const result=await request(learner.id,'/account/entitlements');
     assert.equal(result.status,200);assert.equal(result.body.billingMode,'points');
-    assert.equal(result.body.points.availableUnits,0);assert.ok(result.body.points.pendingUnits>980000);
+    assert.equal(result.body.points.availableUnits,0);assert.equal(result.body.points.pendingUnits,0);assert.equal(result.body.points.dailyCheckInPoints,33);
     assert.equal(store.points.finance().revenueMicros,0);
     assert.equal((await request(learner.id,'/admin/points/usage')).status,403);
   });
-  await t.test('actual revenue is recorded once, monthly grants migrate once, and every account is visible',async()=>{
+  await t.test('actual revenue, daily claims and explicit operator grants are idempotent and visible',async()=>{
     const body={requestId:crypto.randomUUID(),kind:'revenue',amountCny:'99',reference:'fixture-cash-receipt-001'};
     assert.equal((await request(owner.id,'/admin/points/finance',body)).status,200);
     assert.equal((await request(owner.id,'/admin/points/finance',body)).status,200);
     assert.equal(store.points.finance().revenueMicros,99000000);
     const first=await request(learner.id,'/account/entitlements'),second=await request(learner.id,'/account/entitlements');
-    assert.ok(first.body.points.availableUnits>=980000);assert.equal(first.body.points.availableUnits,second.body.points.availableUnits);
+    assert.equal(first.body.points.availableUnits,0);assert.equal(second.body.points.availableUnits,0);
+    const daily=await request(learner.id,'/account/check-in',{});assert.equal(daily.status,200);assert.equal(daily.body.points.availableUnits,33000);
+    const syntheticGrant={requestId:crypto.randomUUID(),userId:learner.id,points:'990',expiresAt:null,reason:'Synthetic billing regression funding'};
+    assert.equal((await request(owner.id,'/admin/points/grants',syntheticGrant)).status,200);
+    assert.equal((await request(owner.id,'/admin/points/grants',syntheticGrant)).status,200);
+    assert.equal(store.points.wallet(learner.id).availableUnits,1023000);
     const all=await request(owner.id,'/admin/points/usage');
     assert.equal(all.status,200);assert.ok(all.body.rows.some(row=>row.userId===owner.id));assert.ok(all.body.rows.some(row=>row.userId===learner.id));
     assert.equal(all.body.audit.passed,true);

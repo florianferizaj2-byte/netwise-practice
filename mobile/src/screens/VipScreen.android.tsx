@@ -52,21 +52,21 @@ const plans = [
     id: "vip",
     name: "VIP",
     price: "9.9",
-    points: 990,
+    points: 33,
     description: "日常巩固",
   },
   {
     id: "svip",
     name: "SVIP",
     price: "19.9",
-    points: 1990,
+    points: 66,
     description: "集中备考",
   },
   {
     id: "ssvip",
     name: "SSVIP",
     price: "39.9",
-    points: 3990,
+    points: 133,
     description: "高频冲刺",
   },
 ] as const;
@@ -165,7 +165,7 @@ function AndroidVipScreen({
       Alert.alert(
         data.claimed ? "签到成功" : "今日已签到",
         data.claimed
-          ? `今日 ${data.checkIn.grants.points || 5} 积分已到账，当日有效，所有 AI 功能通用。`
+          ? `今日 ${data.checkIn.grants.points ?? 0} 积分已到账，当日有效，所有 AI 功能通用。`
           : "明天再来领取新的学习机会。",
       );
     } catch (cause) {
@@ -181,9 +181,9 @@ function AndroidVipScreen({
   }
   const availablePlans = plans.map(item => {
     const remote = account?.pointsPlans?.[item.id];
-    return remote && Number.isSafeInteger(remote.priceCents) && remote.priceCents >= 0 && Number.isSafeInteger(remote.monthlyPoints) && remote.monthlyPoints >= 0
-      ? { ...item, price: (remote.priceCents / 100).toFixed(2).replace(/\.?0+$/, ''), points: remote.monthlyPoints }
-      : item;
+    return remote && typeof remote.dailyPoints === "number" && Number.isSafeInteger(remote.priceCents) && remote.priceCents >= 0 && Number.isSafeInteger(remote.dailyPoints) && remote.dailyPoints >= 0
+      ? { ...item, price: (remote.priceCents / 100).toFixed(2).replace(/\.?0+$/, ''), points: remote.dailyPoints }
+      : { ...item, points: preview ? item.points : null };
   });
   const plan = availablePlans.find((item) => item.id === selected)!;
   const current = account?.plan || "free",
@@ -231,9 +231,9 @@ function AndroidVipScreen({
         <View style={styles.nativeAccountCard}>
           <View style={styles.sectionLine}><View style={styles.nativeAccountIcon}><AppIcon name="person" size={26} color={colors.brand}/></View><Text style={styles.nativeCurrent}>当前套餐 · {hasAccount?current==='free'?'普通用户':membershipLabels[current]:loading?'同步中':'待同步'}</Text><AnimatedPressable accessibilityRole="button" onPress={()=>setHistoryOpen(value=>!value)} style={styles.nativeRecordButton}><Text style={styles.smallMuted}>积分记录</Text><AppIcon name="chevron-right" size={15} color={colors.textMuted}/></AnimatedPressable></View>
           {paid&&!!account?.expiresAt&&<Text style={styles.accountMeta}>{membershipDate(account.expiresAt)} 到期</Text>}
-          <View style={[styles.usageRow,fontScale>1.2&&styles.usageRowStack]}><View style={[styles.balanceGroup,fontScale>1.2&&styles.balanceGroupStack]}><Quota label="可用积分" value={hasAccount?pointNumber(points?.availableUnits):'—'} unit="积分"/><View style={styles.rule}/><Quota label="预扣中" value={hasAccount?pointNumber(points?.heldUnits):'—'} unit="积分"/></View><AnimatedPressable accessibilityRole="button" accessibilityLabel={checkingIn?'签到中':check?.claimed?'已签到':'签到领积分'} disabled={checkingIn||!!check?.claimed} onPress={()=>void checkIn()} style={styles.checkInButton}><AppIcon name="calendar" size={18} color={colors.brand}/><Text style={styles.checkInButtonText}>{checkingIn?'签到中':check?.claimed?'已签到':'签到'}</Text></AnimatedPressable></View>
+          <View style={[styles.usageRow,fontScale>1.2&&styles.usageRowStack]}><View style={[styles.balanceGroup,fontScale>1.2&&styles.balanceGroupStack]}><Quota label="可用积分" value={hasAccount?pointNumber(points?.availableUnits):'—'} unit="积分"/><View style={styles.rule}/><Quota label="预扣中" value={hasAccount?pointNumber(points?.heldUnits):'—'} unit="积分"/></View><AnimatedPressable accessibilityRole="button" accessibilityLabel={checkingIn?'签到中':check?.claimed?'已签到':'签到领积分'} disabled={checkingIn||!!check?.claimed} onPress={()=>void checkIn()} style={styles.checkInButton}><AppIcon name="calendar" size={18} color={colors.brand}/><Text style={styles.checkInButtonText}>{checkingIn?'签到中':check?.claimed?'已签到':check?.canClaim===false?'暂不可领':'签到'}</Text></AnimatedPressable></View>
           {!!points?.pendingUnits&&<Text style={styles.quotaFootnote}>本期积分待到账，请联系管理员核对发放记录。</Text>}
-          <Text style={styles.quotaFootnote}>签到 {check?.grants.points||5} 积分 · 当日有效 · 以活动预算为准</Text>
+          <Text style={styles.quotaFootnote}>{check?.disabledReason || `签到 ${check?.grants.points ?? '—'} 积分 · 当日有效 · 每日手动领取`}</Text>
         </View>
         {!!error&&<AnimatedPressable accessibilityRole="button" onPress={()=>void refresh()}><Text style={styles.error}>{error} 点击重试</Text></AnimatedPressable>}
         <View style={styles.plansHeading}><Text style={styles.sectionTitle}>选择会员套餐</Text><Text style={styles.smallMuted}>不自动续费</Text></View>
@@ -245,7 +245,7 @@ function AndroidVipScreen({
               <AnimatedPressable
                 key={item.id}
                 accessibilityRole="button"
-                accessibilityLabel={`${item.name}，${item.price}元，每30天${item.points}积分`}
+                accessibilityLabel={`${item.name}，${item.price}元，每日签到${item.points ?? '—'}积分，会员有效30天`}
                 accessibilityState={{ selected: chosen }}
                 onPress={() => setSelected(item.id)}
                 style={[
@@ -269,7 +269,7 @@ function AndroidVipScreen({
                   </View>
                 </View>
                 <View style={[styles.planPriceRow,compactPlans&&styles.planPriceCompact]}><Text style={[styles.currency,vipType.currency,{color:chosen?color:colors.text}]}>¥</Text><Text style={[styles.price,vipType.price,{color:chosen?color:colors.text}]}>{item.price}</Text></View>
-                <View style={[styles.planTerms,compactPlans&&styles.planTermsCompact]}><Text style={[styles.planQuantity,vipType.points]}>{item.points} 积分</Text><Text style={[styles.planQuantity,vipType.period]}>30 天</Text></View>
+                <View style={[styles.planTerms,compactPlans&&styles.planTermsCompact]}><Text style={[styles.planQuantity,vipType.points]}>每日 {item.points ?? '—'} 积分</Text><Text style={[styles.planQuantity,vipType.period]}>30 天</Text></View>
               </AnimatedPressable>
             );
           })}
