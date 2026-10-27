@@ -1,4 +1,5 @@
 import { APP_VERSION } from '../version';
+import {normalizeReleasePolicy} from './versionPolicy';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { fetch as streamingFetch } from 'expo/fetch';
 import { ResourceCache, CacheCancelledError } from './resourceCache';
@@ -686,10 +687,10 @@ export const mobileApi = {
     // Release metadata is public and must not be cancelled by restoring or
     // switching the account. It must never expire an unrelated login token.
     return fetchJson<AppVersionResponse>(
-      `${API_BASE_URL}/mobile/version?version=${encodeURIComponent(version)}`,
-      { credentials: 'omit', headers: { Accept: 'application/json', 'X-Client': 'mobile', 'X-App-Version': APP_VERSION } },
+      `${API_BASE_URL}/mobile/version?version=${encodeURIComponent(version)}&_=${Date.now()}`,
+      { cache:'no-store', credentials: 'omit', headers: { Accept: 'application/json', 'Cache-Control':'no-cache', 'X-Client': 'mobile', 'X-App-Version': APP_VERSION } },
       15000,
-    );
+    ).then(release=>typeof document!=='undefined'?release:normalizeReleasePolicy(release,version));
   },
 
   adminUsers(search = '', status: 'all' | 'active' | 'banned' = 'all', offset = 0) {

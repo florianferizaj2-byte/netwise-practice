@@ -1,8 +1,8 @@
 // Optional voice-pack protocol: no voice asset is invented or loaded per answer.
-// The current APK retains built-in tones until a future player binds these cues.
+// Native playback uses explicitly downloaded, verified local clips; no network on answers.
 export type PracticeVoiceEvent = 'practice.enter' | 'answer.correct' | 'answer.streak';
 export type VoiceAsset = { id:string; sha256:string; url:string; bytes:number; mimeType:string; format:string; durationMs:number|null };
-export type VoicePackSummary = { id:string; name:string; revision:number; enabled:boolean; updatedAt:string };
+export type VoicePackSummary = { id:string; name:string; revision:number; enabled:boolean; updatedAt:string; bytes?:number;assetCount?:number };
 export type VoicePackManifest = VoicePackSummary & {
   schemaVersion:1;
   cues:{ 'practice.enter':string[]; 'answer.correct':string[]; 'answer.streak':Array<{count:number;clips:string[]}> };

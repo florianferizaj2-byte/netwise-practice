@@ -140,10 +140,10 @@ async function request(url, body, method, options, generation) {
   try {
     const res = await fetch("/api" + url, {
       method: method || (body ? "POST" : "GET"),
-      headers: { "Content-Type": "application/json",
+      headers: { "Content-Type": options.raw ? "application/octet-stream" : "application/json",
         ...(method!=='GET'?{'X-AI-Request-Id':options.requestId||pointRequestId()}:{}),
       },
-      ...(body ? { body: JSON.stringify(body) } : {}),
+      ...(body ? { body: options.raw ? body : JSON.stringify(body) } : {}),
       signal: controller.signal,
     });
     if(res.headers.get('X-AI-Points-Changed')==='1')pointsChanged();

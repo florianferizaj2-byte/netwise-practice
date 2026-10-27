@@ -111,7 +111,7 @@ test('public release checks survive account restoration and never expire a switc
   await client.setSessionToken('old-account');
   const check = client.mobileApi.appVersion('1.0.0');
   await client.setSessionToken('new-account');
-  pending.resolve(new Response(JSON.stringify({ latestVersion: '1.0.0', forceUpdate: false })));
+  pending.resolve(new Response(JSON.stringify({ currentVersion:'1.0.0',latestVersion: '1.0.0',minimumVersion:'1.0.0',forceUpdate:false,updateAvailable:false })));
   assert.equal((await check).latestVersion, '1.0.0'); assert.equal(authorization, undefined);
   globalThis.fetch = async () => new Response(JSON.stringify({error:'proxy unavailable'}), {status:401});
   await assert.rejects(client.mobileApi.appVersion('1.0.0'));

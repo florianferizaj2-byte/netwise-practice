@@ -22,7 +22,13 @@ test('Android shell and teacher variants preserve business logic with bounded An
   assert.match(native,/usePracticeAttemptOwner\(isPreview\?undefined:session\?\.user,appActive\)/);
   assert.match(native,/<PracticeSyncNotice\/>/);
   assert.doesNotMatch(shared,/practiceAttemptSync|PracticeSyncNotice/);
+  // Approved native-only local voice lifecycle; all other business code stays compared.
+  const voiceLifecycle="  useEffect(()=>{if(!session)void practiceVoice.setAccount(null);else if(appActive)void practiceVoice.setAccount(String(session.user.id));else practiceVoice.stop();},[session?.user.id,appActive]);\n";
+  assert.ok(native.includes(voiceLifecycle));
+  assert.doesNotMatch(shared,/practiceVoice/);
   let shell=native
+    .replace(voiceLifecycle,'')
+    .replace("import {practiceVoice} from '../practiceVoice';\n",'')
     .replace("import {PracticeSyncNotice} from '../components/PracticeSyncNotice.android';\n",'')
     .replace("import {usePracticeAttemptOwner} from '../api/practiceAttemptSync.android';\n",'')
     .replace("  usePracticeAttemptOwner(isPreview?undefined:session?.user,appActive);\n",'')

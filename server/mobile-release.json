@@ -1,9 +1,9 @@
 {
-  "latestVersion": "1.0.4",
+  "latestVersion": "1.0.5",
   "minimumVersion": "1.0.1",
-  "downloadUrl": "/downloads/kaojiang-v1.0.4.apk",
-  "releaseNotes": "v1.0.4：新增答对提示音与轻震动，独立开关、音色、音量和震动强度可调；设置重启保留，答错与回看不触发。",
-  "apkSha256": "7737a7d5c89ce2917fd34f1ce651553616095f4d6bb53e15692d10e0cebf66a4",
-  "apkMd5": "502675747b2a944e0f49ddb23b2b0001",
-  "apkBytes": 100491160
+  "downloadUrl": "/downloads/kaojiang-v1.0.5.apk",
+  "releaseNotes": "v1.0.5：语音包下载、校验和离线播放，入场/答对/连对声音；修正实际安装版本识别与同版本更新提示。",
+  "apkBytes": 100529336,
+  "apkSha256": "1c06fbd507bdd2db5a0cf084b34c35cb2e7f6dd546db61c9c291850ee22feab1",
+  "apkMd5": "a208e889b3a95b9fa09c864f1f9ad5a3"
 }

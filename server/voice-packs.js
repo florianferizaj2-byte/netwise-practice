@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import express from 'express';
 import { z } from 'zod';
+import {registerVoiceLibrary} from './voice-library.js';
 
 export const VOICE_PACK_CONTRACT = {
   schemaVersion: 1,
@@ -82,7 +83,7 @@ export function registerVoicePackRoutes({app,route,store,requestUserId,requireAd
   const assetRow=id=>db.prepare('SELECT * FROM voice_pack_assets WHERE id=?').get(id);
   const assetView=row=>({id:row.id,sha256:row.id,bytes:row.bytes,mimeType:row.mime_type,format:row.ext,durationMs:row.duration_ms,url:'/voice-packs/assets/'+row.id});
   const packRow=id=>db.prepare('SELECT * FROM voice_packs WHERE id=?').get(id);
-  const summary=row=>({id:row.id,name:row.name,revision:row.revision,enabled:!!row.enabled,updatedAt:row.updated_at});
+  const summary=row=>({id:row.id,name:row.name,revision:row.revision,enabled:!!row.enabled,updatedAt:row.updated_at,...(()=>{const rows=idsIn(JSON.parse(row.data).cues).map(assetRow);return {assetCount:rows.length,bytes:rows.reduce((sum,a)=>sum+(a?.bytes??0),0)};})()});
   const manifest=row=>{const data=JSON.parse(row.data);return {schemaVersion:1,...summary(row),...data,assets:idsIn(data.cues).map(id=>assetView(assetRow(id))),fallback:'builtin'};};
   const mutate=(req,signatureInput,fn)=>{
     const signature=crypto.createHash('sha256').update(JSON.stringify(signatureInput)).digest('hex'),requestId=signatureInput.body.requestId;
@@ -99,6 +100,30 @@ export function registerVoicePackRoutes({app,route,store,requestUserId,requireAd
       db.exec('COMMIT');return {...result,replayed:false};
     } catch(failure){db.exec('ROLLBACK');throw failure;}
   };
+  let library;
+  const applyPack=(id,body)=>{
+      const current=packRow(id);
+      if((current?.revision??0)!==body.expectedRevision)throw error('语音包已更新，请刷新后重试',409,'VOICE_REVISION_CONFLICT');
+      if(!current&&!db.prepare('SELECT 1 FROM voice_pack_drafts WHERE id=?').get(id)&&db.prepare('SELECT COUNT(*) AS n FROM (SELECT id FROM voice_packs UNION SELECT id FROM voice_pack_drafts)').get().n>=100)throw error('语音包数量已达上限',409,'VOICE_PACK_LIMIT');
+      const ids=idsIn(body.cues);
+      if(ids.length>VOICE_PACK_CONTRACT.maxAssetsPerPack)throw error('单个语音包最多 32 个音频素材',400,'VOICE_PACK_TOO_MANY_ASSETS');
+      const assets=ids.map(assetRow);
+      if(assets.some(asset=>!asset))throw error('引用的音频素材不存在',400,'VOICE_ASSET_NOT_FOUND');
+      if(body.enabled)library.requireReady(ids);
+      if(body.enabled&&!ids.length)throw error('请先添加音频素材再发布',400,'VOICE_PACK_EMPTY');
+      if(body.enabled&&assets.some(asset=>{
+        const file=path.join(directory,asset.id+'.'+asset.ext);
+        return !fs.existsSync(file)||fs.statSync(file).size!==asset.bytes||crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex')!==asset.id;
+      }))throw error('素材存储不完整，请修复后再发布',503,'VOICE_ASSET_STORAGE_INVALID');
+      if(assets.reduce((n,a)=>n+a.bytes,0)>VOICE_PACK_CONTRACT.maxPackBytes)throw error('语音包素材总量超过 20 MiB',400,'VOICE_PACK_TOO_LARGE');
+      const revision=(current?.revision??0)+1,data={cues:body.cues,playback:body.playback};
+      db.prepare('INSERT INTO voice_packs VALUES(?,?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET name=excluded.name,revision=excluded.revision,enabled=excluded.enabled,data=excluded.data,updated_at=excluded.updated_at').run(id,body.name,revision,body.enabled?1:0,JSON.stringify(data),new Date().toISOString());
+      db.prepare('DELETE FROM voice_pack_references WHERE pack_id=?').run(id);
+      for(const assetId of ids)db.prepare('INSERT INTO voice_pack_references VALUES(?,?)').run(id,assetId);
+      db.prepare('UPDATE voice_pack_configuration SET revision=revision+1,default_pack_id=CASE WHEN default_pack_id=? AND ?=0 THEN NULL ELSE default_pack_id END WHERE id=1').run(id,body.enabled?1:0);
+      return {pack:manifest(packRow(id)),configuration:configuration()};
+  };
+  library=registerVoiceLibrary({route,store,requireAdmin,configuration,mutate,assetRow,assetView,packRow,applyPack,packSchema,idsIn});
   route('get','/api/voice-packs',req=>{
     requestUserId(req);
     return {...configuration(),contract:VOICE_PACK_CONTRACT,packs:db.prepare('SELECT * FROM voice_packs WHERE enabled=1 ORDER BY id').all().map(summary)};
@@ -109,7 +134,7 @@ export function registerVoicePackRoutes({app,route,store,requestUserId,requireAd
     return manifest(row);
   });
   route('get','/api/admin/voice-packs',req=>{
-    requireAdmin(req);return {configuration:configuration(),contract:VOICE_PACK_CONTRACT,packs:db.prepare('SELECT * FROM voice_packs ORDER BY id').all().map(manifest),assets:db.prepare('SELECT * FROM voice_pack_assets ORDER BY created_at DESC').all().map(row=>({...assetView(row),name:row.name}))};
+    requireAdmin(req);return {configuration:configuration(),contract:VOICE_PACK_CONTRACT,packs:db.prepare('SELECT * FROM voice_packs ORDER BY id').all().map(manifest),assets:db.prepare('SELECT * FROM voice_pack_assets ORDER BY created_at DESC').all().map(library.adminAsset),drafts:library.drafts()};
   });
   // Register before :id so the reserved name does not shadow the default route.
   route('put','/api/admin/voice-packs/default',req=>{
@@ -124,37 +149,18 @@ export function registerVoicePackRoutes({app,route,store,requestUserId,requireAd
   route('put','/api/admin/voice-packs/:id',req=>{
     requireAdmin(req);const id=idSchema.parse(req.params.id),body=packSchema.parse(req.body);
     if(id==='default')throw error('该编号为保留编号',400,'VOICE_PACK_RESERVED');
-    return mutate(req,{action:'updated',id,body},()=>{
-      const current=packRow(id);
-      if((current?.revision??0)!==body.expectedRevision)throw error('语音包已更新，请刷新后重试',409,'VOICE_REVISION_CONFLICT');
-      if(!current&&db.prepare('SELECT COUNT(*) AS n FROM voice_packs').get().n>=100)throw error('语音包数量已达上限',409,'VOICE_PACK_LIMIT');
-      const ids=idsIn(body.cues);
-      if(ids.length>VOICE_PACK_CONTRACT.maxAssetsPerPack)throw error('单个语音包最多 32 个音频素材',400,'VOICE_PACK_TOO_MANY_ASSETS');
-      const assets=ids.map(assetRow);
-      if(assets.some(asset=>!asset))throw error('引用的音频素材不存在',400,'VOICE_ASSET_NOT_FOUND');
-      if(body.enabled&&!ids.length)throw error('请先添加音频素材再发布',400,'VOICE_PACK_EMPTY');
-      if(body.enabled&&assets.some(asset=>{
-        const file=path.join(directory,asset.id+'.'+asset.ext);
-        return !fs.existsSync(file)||fs.statSync(file).size!==asset.bytes||crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex')!==asset.id;
-      }))throw error('素材存储不完整，请修复后再发布',503,'VOICE_ASSET_STORAGE_INVALID');
-      if(assets.reduce((n,a)=>n+a.bytes,0)>VOICE_PACK_CONTRACT.maxPackBytes)throw error('语音包素材总量超过 20 MiB',400,'VOICE_PACK_TOO_LARGE');
-      const revision=(current?.revision??0)+1,data={cues:body.cues,playback:body.playback};
-      db.prepare('INSERT INTO voice_packs VALUES(?,?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET name=excluded.name,revision=excluded.revision,enabled=excluded.enabled,data=excluded.data,updated_at=excluded.updated_at').run(id,body.name,revision,body.enabled?1:0,JSON.stringify(data),new Date().toISOString());
-      db.prepare('DELETE FROM voice_pack_references WHERE pack_id=?').run(id);
-      for(const assetId of ids)db.prepare('INSERT INTO voice_pack_references VALUES(?,?)').run(id,assetId);
-      db.prepare('UPDATE voice_pack_configuration SET revision=revision+1,default_pack_id=CASE WHEN default_pack_id=? AND ?=0 THEN NULL ELSE default_pack_id END WHERE id=1').run(id,body.enabled?1:0);
-      return {pack:manifest(packRow(id)),configuration:configuration()};
-    });
+    return mutate(req,{action:'updated',id,body},()=>applyPack(id,body));
   });
   const adminUpload=(req,_res,next)=>{try{requireAdmin(req);next();}catch(failure){next(failure);}};
   app.post('/api/admin/voice-packs/assets',adminUpload,express.raw({type:()=>true,limit:VOICE_PACK_CONTRACT.maxAssetBytes}), (req,res,next)=>{
     try {
+      const uploadMetadata=library.uploadMetadata(req.query);
       const info=inspectVoiceAudio(req.body),name=z.string().trim().min(1).max(100).refine(value=>!/[\u0000-\u001f\u007f]/.test(value)).parse(req.query.name||'voice.'+info.ext);
       const id=crypto.createHash('sha256').update(req.body).digest('hex');let row=assetRow(id);
       if(row){
         const existing=path.join(directory,id+'.'+row.ext);
         if(!fs.existsSync(existing)||crypto.createHash('sha256').update(fs.readFileSync(existing)).digest('hex')!==id)throw error('素材存储需要修复，请管理员恢复原文件',503,'VOICE_ASSET_STORAGE_INVALID');
-        res.json({asset:{...assetView(row),name:row.name},created:false});return;
+        res.json({asset:library.adminAsset(row),created:false});return;
       }
       const usage=db.prepare('SELECT COUNT(*) AS count,COALESCE(SUM(bytes),0) AS bytes FROM voice_pack_assets').get();
       if(usage.count>=1000||usage.bytes+req.body.length>VOICE_PACK_CONTRACT.maxStorageBytes)throw error('语音素材存储已达上限',409,'VOICE_STORAGE_LIMIT');
@@ -163,6 +169,7 @@ export function registerVoicePackRoutes({app,route,store,requestUserId,requireAd
       try {
         fs.writeFileSync(temporary,req.body,{flag:'wx'});fs.renameSync(temporary,file);
         db.prepare('INSERT INTO voice_pack_assets VALUES(?,?,?,?,?,?,?)').run(id,info.ext,info.mimeType,req.body.length,info.durationMs,name,new Date().toISOString());
+        library.initializeAsset(id,uploadMetadata);
         store.audit(req.user.id,'voice_asset_uploaded','voice_pack_asset',id,{bytes:req.body.length,format:info.ext});db.exec('COMMIT');
       } catch(failure) {
         db.exec('ROLLBACK');
@@ -171,7 +178,7 @@ export function registerVoicePackRoutes({app,route,store,requestUserId,requireAd
         throw failure;
       } finally {if(fs.existsSync(temporary))fs.unlinkSync(temporary);}
       row=assetRow(id);
-      res.json({asset:{...assetView(row),name},created:true});
+      res.json({asset:library.adminAsset(row),created:true});
     }catch(failure){next(failure);}
   });
   const serve=(publishedOnly)=>(req,res,next)=>{

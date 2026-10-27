@@ -57,3 +57,9 @@ test('clients below the minimum receive 426; supported v1.0.1 is optional and th
   assert.equal((await fetch(`${base}/account/points/wallet`, {headers:browserHeaders})).status, 401,
     'Browser compatibility must not bypass authentication');
 });
+
+
+test('a matching latest-version override cannot silently retain an older named APK download',()=>{
+ const release=resolveMobileRelease({MOBILE_LATEST_VERSION:current,MOBILE_DOWNLOAD_URL:'/downloads/kaojiang-v1.0.3.apk',MOBILE_RELEASE_NOTES:'stale notes'},compare);
+ assert.equal(release.downloadUrl,`/downloads/kaojiang-v${current}.apk`);assert.notEqual(release.releaseNotes,'stale notes');assert.equal(release.apkSha256,bundled.apkSha256);
+});

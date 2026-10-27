@@ -9,7 +9,11 @@ export function resolveMobileRelease(environment, compare) {
   const newer = (configured, floor) => configured && /^\d+\.\d+\.\d+$/.test(configured) && compare(configured, floor) >= 0 ? configured : floor;
   const minimumVersion = newer(configuredMinimum, bundled.minimumVersion);
   const latestVersion = newer(newer(configuredLatest, bundled.latestVersion), minimumVersion);
-  const currentOverride = configuredLatest === latestVersion;
+  const configuredUrl=environment.MOBILE_DOWNLOAD_URL?.trim();
+  const namedVersion=configuredUrl?.match(/^\/downloads\/kaojiang-v(\d+\.\d+\.\d+)\.apk(?:[?#].*)?$/)?.[1];
+  // A preserved download URL must not deliver an older APK under a newer version label.
+  const staleArtifact=!!namedVersion&&namedVersion!==latestVersion;
+  const currentOverride = configuredLatest === latestVersion && !staleArtifact;
   const usesBundledArtifact = latestVersion === bundled.latestVersion &&
     (!currentOverride || !environment.MOBILE_DOWNLOAD_URL?.trim() || environment.MOBILE_DOWNLOAD_URL.trim() === bundled.downloadUrl);
   return {

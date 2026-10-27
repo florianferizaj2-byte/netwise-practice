@@ -8,7 +8,7 @@ import {LaunchLogo} from '../launch/LaunchSurface';
 import {useAndroidFocusMode} from '../navigation/AndroidFocusMode.android';
 import {useScreenActive} from '../navigation/ScreenActivity';
 import {useTheme,type ThemeColors} from '../theme';
-import {APP_VERSION} from '../version';
+import {APP_VERSION,APP_BUILD_NUMBER,BUNDLE_VERSION} from '../version';
 import {NOTO_SANS_SC_LICENSE} from '../legal/notoSansLicense';
 
 type Props={visible:boolean;onClose:()=>void;onSponsor:()=>void};
@@ -66,7 +66,7 @@ function AboutContent({onClose,onSponsor}:Omit<Props,'visible'>){
           <View style={[s.versionRow,stacked&&s.versionStack]}><Text style={s.rowTitle}>版本信息</Text><Text style={s.meta}>v{APP_VERSION}</Text></View>
           <AppIcon name={versionOpen?'chevron-up':'chevron-right'} size={18} color={colors.textMuted}/>
         </AnimatedPressable>
-        {versionOpen&&<Text testID="about-version-details" style={s.versionDetails}>考匠 Android 客户端 · 当前安装版本 v{APP_VERSION}</Text>}
+        {versionOpen&&<Text testID="about-version-details" style={s.versionDetails}>考匠 Android 客户端 · 当前安装版本 v{APP_VERSION} · 构建 {APP_BUILD_NUMBER || '预览'}{BUNDLE_VERSION!==APP_VERSION ? ` · 资源版本 ${BUNDLE_VERSION}` : ''}</Text>}
       </View>
       <View testID="about-support-card" style={[s.support,stacked&&s.supportStack]}>
         <View style={s.supportCopy}><View style={[s.iconTile,{backgroundColor:androidAccent(colors,'review').soft}]}><AppIcon name="heart" size={24} color={androidAccent(colors,'review').ink}/></View>

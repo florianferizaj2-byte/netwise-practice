@@ -1,3 +1,4 @@
+import {VoicePackDownloads} from './VoicePackDownloads.android';
 import { View, Text, StyleSheet, useWindowDimensions } from 'react-native';
 import { AppIcon } from './AppIcon';
 import { AppSwitch } from './AppSwitch';
@@ -21,8 +22,9 @@ export function AnswerFeedbackSettings() {
   return <View style={s.card} testID="answer-feedback-settings">
     <View style={s.heading}><AppIcon name="check" size={22} color={colors.brand}/><Text style={s.title}>答对反馈</Text></View>
     <Text style={s.hint}>答对时，给自己一个小小的肯定</Text>
-    <View style={s.row}><View style={s.copy}><Text style={s.label}>答对提示音</Text><Text style={s.description}>仅在本次答对时播放，与按钮音效分开</Text></View><View style={s.switch}><AppSwitch hitSlop={10} accessibilityLabel="答对提示音" disabled={!ready} value={settings.soundEnabled} onValueChange={soundEnabled=>update({soundEnabled})} trackColor={{false:colors.border,true:colors.action}} thumbColor={colors.white}/></View></View>
-    <Text style={s.label}>音色</Text>
+    <View style={s.row}><View style={s.copy}><Text style={s.label}>答对提示音</Text><Text style={s.description}>控制入场、答对与连对声音，与按钮音效分开</Text></View><View style={s.switch}><AppSwitch hitSlop={10} accessibilityLabel="答对提示音" disabled={!ready} value={settings.soundEnabled} onValueChange={soundEnabled=>update({soundEnabled})} trackColor={{false:colors.border,true:colors.action}} thumbColor={colors.white}/></View></View>
+    <VoicePackDownloads/>
+    <Text style={s.label}>内置兜底音色</Text>
     {choices('答对提示音音色',tones,settings.style,style=>update({style}))}
     <View style={s.row}><Text style={s.label}>提示音音量</Text><Text style={s.hint}>{Math.round(settings.volume*100)}%</Text></View>
     {choices('答对提示音音量',volumes,settings.volume,volume=>update({volume}))}

@@ -1,3 +1,4 @@
+import {practiceVoice,configurePracticeVoice} from './practiceVoice';
 import { AppState, Platform, Vibration } from 'react-native';
 import { createAudioPlayer, preload, type AudioPlayer } from 'expo-audio';
 import { ANSWER_HAPTIC_MS, normalizeAnswerFeedback, type AnswerFeedbackSettings, type AnswerSoundStyle } from './answerFeedbackSettings';
@@ -15,13 +16,15 @@ const active = () => AppState.currentState === 'active';
 
 export function stopAnswerFeedback() {
   playbackRevision++;
+  practiceVoice.stop();
   for (const player of Object.values(players)) {
-    try { player?.pause(); } catch { /* Optional feedback cannot block study. */ }
+    try { if (player?.playing) player.pause(); } catch { /* Optional feedback cannot block study. */ }
   }
 }
 export function configureAnswerFeedback(next: AnswerFeedbackSettings) {
   stopAnswerFeedback();
   settings = normalizeAnswerFeedback(next);
+  configurePracticeVoice(settings);
   for (const player of Object.values(players)) {
     try { if (player) player.volume = settings.volume; } catch { /* Optional audio. */ }
   }
@@ -40,12 +43,15 @@ export function prepareAnswerFeedback(): Promise<void> {
   })).then(() => undefined);
   return preparation;
 }
-export function playCorrectAnswerFeedback(correct: boolean, isCurrent: () => boolean = () => true) {
-  if (correct !== true || !settings || !active() || Platform.OS !== 'android' || !isCurrent()) return;
+export function playCorrectAnswerFeedback(correct: boolean, isCurrent: () => boolean = () => true, context?: {scope:string;attemptId:string}) {
+  if (!settings || !active() || Platform.OS !== 'android' || !isCurrent()) return;
+  stopAnswerFeedback();
+  const remote = context ? practiceVoice.answer(context.scope,context.attemptId,correct,isCurrent) : correct && practiceVoice.preview(isCurrent);
+  if (correct !== true) return;
   if (settings.hapticsEnabled) {
     try { Vibration.vibrate(ANSWER_HAPTIC_MS[settings.hapticStrength], false); } catch { /* No vibrator / disabled by OS. */ }
   }
-  if (!settings.soundEnabled || settings.volume <= 0) return;
+  if (remote || !settings.soundEnabled || settings.volume <= 0) return;
   const player = players[settings.style];
   // Never queue an old success tone to play later after a screen change.
   if (!player?.isLoaded) { void prepareAnswerFeedback(); return; }

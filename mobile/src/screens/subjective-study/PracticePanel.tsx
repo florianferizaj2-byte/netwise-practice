@@ -1,5 +1,6 @@
 import { iosStyles } from "../../iosStyles";
-import { playCorrectAnswerFeedback } from "../../answerFeedback";
+import { playCorrectAnswerFeedback,stopAnswerFeedback } from "../../answerFeedback";
+import {practiceVoice} from "../../practiceVoice";
 import { useEffect, useRef, useState } from "react";
 import {
   Keyboard,
@@ -77,6 +78,8 @@ export function PracticePanel({
   const question = session.questions[index];
   const visibleQuestion = useRef<string | null>(null);
   visibleQuestion.current = active ? question?.id ?? null : null;
+  const voiceScope=useRef("guided:"+initial.id+":"+Date.now());
+  useEffect(()=>{if(active)practiceVoice.enter(voiceScope.current,()=>visibleQuestion.current!==null);else stopAnswerFeedback();return ()=>stopAnswerFeedback();},[active]);
   const attempt = question
     ? session.attempts.filter((item) => item.questionId === question.id).at(-1)
     : undefined;
@@ -114,7 +117,7 @@ export function PracticePanel({
   const updateAttempt = (next: StudyAttempt) => {
     if (feedbackSubmission.current === next.questionId && next.status === "graded" && !next.processing) {
       feedbackSubmission.current = null;
-      if (visibleQuestion.current === next.questionId) playCorrectAnswerFeedback(next.correct, () => visibleQuestion.current === next.questionId);
+      if (visibleQuestion.current === next.questionId) playCorrectAnswerFeedback(next.correct, () => visibleQuestion.current === next.questionId,{scope:voiceScope.current,attemptId:next.id??next.questionId});
     }
     setSession((old) => ({
       ...old,

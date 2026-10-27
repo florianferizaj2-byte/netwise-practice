@@ -281,6 +281,11 @@ try {
   await page.getByRole('radio', { name: '适中', exact: true }).click();
   await page.getByRole('button', { name: '试听当前音效', exact: true }).click();
   const feedbackPanel=page.getByTestId('answer-feedback-settings');
+  await expect(feedbackPanel.getByTestId('voice-pack-downloads')).toBeVisible();
+  await feedbackPanel.getByRole('button',{name:'选择刷题语音包',exact:true}).click();
+  await feedbackPanel.getByRole('radio',{name:'仅内置音效',exact:true}).click();
+  await expect(feedbackPanel.getByRole('radio',{name:'仅内置音效',exact:true})).toBeChecked();
+  await feedbackPanel.getByRole('button',{name:'选择刷题语音包',exact:true}).click();
   await expect(feedbackPanel.getByRole('switch',{name:'答对提示音',exact:true})).toBeChecked();
   await expect(feedbackPanel.getByRole('switch',{name:'答对震动',exact:true})).toBeChecked();
   await feedbackPanel.getByRole('radio',{name:'答对提示音音色：温暖',exact:true}).click();
@@ -293,7 +298,7 @@ try {
   const priorFeedback=await page.evaluate(()=>window.__answerFeedbackEvents.length);
   await feedbackPanel.getByRole('button',{name:'体验答对反馈',exact:true}).click();
   const feedback=await page.evaluate(()=>window.__answerFeedbackEvents.at(-1));
-  assert.deepEqual({...feedback},{soundEnabled:false,hapticsEnabled:true,volume:0.16,style:'warm',hapticStrength:'strong'});
+  assert.deepEqual({...feedback},{soundEnabled:false,hapticsEnabled:true,volume:0.16,style:'warm',hapticStrength:'strong',voicePackId:'builtin'});
   assert.equal(await page.evaluate(()=>window.__answerFeedbackEvents.length),priorFeedback+1);
   await expect.poll(()=>page.evaluate(()=>JSON.parse(localStorage.getItem('kaojiang-answer-feedback-v1')||'null'))).toEqual(feedback);
   for(const [width,mode,scale] of [[320,'dark',1.35],[393,'light',1]]){
@@ -490,7 +495,7 @@ try {
   await expect(page.getByRole('heading', { name: '积分', exact: true })).toBeVisible();
   await page.getByRole('button', {name:'关闭积分费用与记录',exact:true}).click();
   versionFault = 'legacy'; await page.reload();
-  await expect.poll(()=>page.evaluate(()=>window.__answerFeedbackSettings)).toEqual({soundEnabled:false,hapticsEnabled:true,volume:0.16,style:'warm',hapticStrength:'strong'});
+  await expect.poll(()=>page.evaluate(()=>window.__answerFeedbackSettings)).toEqual({soundEnabled:false,hapticsEnabled:true,volume:0.16,style:'warm',hapticStrength:'strong',voicePackId:'builtin'});
   checks.push('answer feedback settings restore after application reload');
   await expect(page.getByTestId('backend-connection-notice')).toContainText('服务端尚未完成 v1.0 升级');
   versionFault = ''; await page.getByRole('button',{name:'重新连接',exact:true}).click();

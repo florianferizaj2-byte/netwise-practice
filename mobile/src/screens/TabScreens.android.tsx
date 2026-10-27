@@ -4,7 +4,8 @@ import { androidAccent } from '../android-design-tokens';
 import { useAndroidFocusMode } from '../navigation/AndroidFocusMode.android';
 import { CheckInScreen } from './CheckInScreen.android';
 import { AnswerFeedbackSettings } from '../components/AnswerFeedbackSettings.android';
-import { playCorrectAnswerFeedback } from '../answerFeedback';
+import { playCorrectAnswerFeedback,stopAnswerFeedback } from '../answerFeedback';
+import {practiceVoice} from '../practiceVoice';
 import { AboutScreen } from './AboutScreen.android';
 import { AndroidPageHeader, AndroidPointsLink } from '../components/AndroidUi.android';
 import { androidPointsFlow } from '../api/androidPointsRuntime.android';
@@ -287,6 +288,9 @@ export function PracticeScreen({
   const active = useScreenActive();
   const feedbackVisible = useRef(active);
   feedbackVisible.current = active;
+  const voiceRound=useRef('practice:'+Date.now()+':'+Math.random());
+  const voiceScope=[voiceRound.current,user?.id,practiceSession,practiceMode,practiceSource,practiceChapter,practiceKnowledgeSection,practiceKnowledgePoint,practiceAiGroupId].join(':');
+  useEffect(()=>{if(active)practiceVoice.enter(voiceScope,()=>feedbackVisible.current);else stopAnswerFeedback();return ()=>stopAnswerFeedback();},[active,voiceScope]);
   const isDailyPractice = practiceSession === 'daily';
   const [questions, setQuestions] = useState<Question[]>([]);
   const [nextOffset, setNextOffset] = useState<number | null>(null);
@@ -571,7 +575,7 @@ export function PracticeScreen({
   function publishSubmittedResult(next: AttemptResponse) {
     setResult(next);
     const generation = pageGeneration.current;
-    if (feedbackVisible.current) playCorrectAnswerFeedback(next.correct, () => feedbackVisible.current && pageGeneration.current === generation && feedbackQuestion.current === next.questionId);
+    if (feedbackVisible.current) playCorrectAnswerFeedback(next.correct, () => feedbackVisible.current && pageGeneration.current === generation && feedbackQuestion.current === next.questionId,{scope:voiceScope,attemptId:generation+':'+questionIndex+':'+next.questionId});
   }
 
   async function submitAnswer() {

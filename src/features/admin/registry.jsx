@@ -15,6 +15,7 @@ import {
   ChartNoAxesCombined,
   History,
   Server,
+  Music,
 } from "lucide-react";
 const feature = (file, name) =>
   lazy(() => file().then((m) => ({ default: m[name] })));
@@ -102,6 +103,14 @@ export const modules = [
     icon: Megaphone,
     description: "编辑当前公开公告，同步现有 Web 与 App 数据源。",
     component: feature(() => import("./operations.jsx"), "Announcement"),
+  },
+  {
+    id: "voice-packs",
+    label: "语音包管理",
+    group: "用户与运营",
+    icon: Music,
+    description: "批量导入语音、试听分类、编排刷题场景与发布语音包。",
+    component: feature(() => import("./voice-library.jsx"), "VoiceLibrary"),
   },
   {
     id: "feedback",

@@ -15,6 +15,7 @@ export async function mobileModules(t, storage) {
     'api/studyTypes',
     'api/communityMessages',
     'api/client',
+    'api/versionPolicy',
     'version',
   ];
   for (const file of files) {

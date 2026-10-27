@@ -73,6 +73,8 @@ test('voice packs support authenticated uploads, publishing, manifests, default 
     const bad=await adminCall('/api/admin/voice-packs/assets?name=fake.wav',{method:'POST',raw:Buffer.from('<html>not an audio track</html>'),headers:{'Content-Type':'audio/wav'}});assert.equal(bad.status,415);
     assert.equal((await adminCall('/api/admin/voice-packs/assets',{method:'POST',raw:Buffer.alloc(VOICE_PACK_CONTRACT.maxAssetBytes+1),headers:{'Content-Type':'audio/wav'}})).status,413);
     assert.equal(store.db.prepare('SELECT COUNT(*) AS n FROM voice_pack_assets').get().n,1);
+    assert.equal(uploaded.data.asset.state,'pending');
+    const reviewed=await adminCall('/api/admin/voice-packs/assets',{method:'PATCH',body:{requestId:id(),items:[{id:sha,expectedRevision:0,state:'ready'}]}});assert.equal(reviewed.status,200);assert.equal(reviewed.data.assets[0].state,'ready');
   });
   await t.test('drafts remain invisible; writes have revision checks, replay protection and one audit record',async()=>{
     const body={requestId:id(),expectedRevision:0,name:'测试语音包',enabled:false,cues:cues()};

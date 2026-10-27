@@ -23,13 +23,14 @@ function fixture({loaded=true,failPreload=false,failVibration=false,seek}={}) {
     'react-native':{AppState:state,Platform:{OS:'android'},Vibration:{vibrate:(...args)=>{if(failVibration)throw Error('unavailable');events.push(['vibrate',...args]);}}},
     'expo-audio':{async preload(){if(failPreload)throw Error('decoder unavailable');},createAudioPlayer(source){const p={isLoaded:loaded,volume:0,pause:()=>events.push(['pause']),seekTo:()=>{events.push(['seek']);return seek?seek():Promise.resolve()},play:()=>events.push(['play',p.volume])};players.push(p);return p;}},
     './answerFeedbackSettings':model,
+    './practiceVoice':{practiceVoice:{stop(){},answer(){return false;},preview(){return false;}},configurePracticeVoice(){}},
   },{Date:{now:()=>clock.time}});
   return {api,events,players,state,clock,configure:patch=>api.configureAnswerFeedback({...model.DEFAULT_ANSWER_FEEDBACK,...patch}),clear:()=>events.splice(0)};
 }
 
 test('answer feedback preferences validate corrupt values, clamp volume and retain independent switches',()=>{
   assert.deepEqual(plain(model.normalizeAnswerFeedback(null)),plain(model.DEFAULT_ANSWER_FEEDBACK));
-  assert.deepEqual(plain(model.normalizeAnswerFeedback({soundEnabled:false,hapticsEnabled:false,volume:0,style:'warm',hapticStrength:'strong',injected:true})),{soundEnabled:false,hapticsEnabled:false,volume:0,style:'warm',hapticStrength:'strong'});
+  assert.deepEqual(plain(model.normalizeAnswerFeedback({soundEnabled:false,hapticsEnabled:false,volume:0,style:'warm',hapticStrength:'strong',injected:true})),{soundEnabled:false,hapticsEnabled:false,volume:0,style:'warm',hapticStrength:'strong',voicePackId:'default'});
   assert.equal(model.normalizeAnswerFeedback({volume:NaN}).volume,0.32);
   assert.equal(model.normalizeAnswerFeedback({volume:20}).volume,1);
   assert.equal(model.normalizeAnswerFeedback({volume:-20}).volume,0);
@@ -80,7 +81,7 @@ test('guided practice only acknowledges a fresh visible submission once, not his
   const file=ts.createSourceFile('p.tsx',source,ts.ScriptTarget.Latest,true,ts.ScriptKind.TSX);let arrow;
   function visit(n){if(ts.isVariableDeclaration(n)&&n.name.getText(file)==='updateAttempt')arrow=n.initializer;ts.forEachChild(n,visit);}visit(file);assert.ok(arrow);
   const printed=ts.createPrinter().printNode(ts.EmitHint.Expression,arrow,file);
-  const events=[],ctx={module:{exports:{}},feedbackSubmission:{current:null},visibleQuestion:{current:'q'},setSession:()=>{},onProgress:()=>{},playCorrectAnswerFeedback:value=>{if(value===true)events.push(value)}};
+  const events=[],ctx={module:{exports:{}},feedbackSubmission:{current:null},voiceScope:{current:'guided'},visibleQuestion:{current:'q'},setSession:()=>{},onProgress:()=>{},playCorrectAnswerFeedback:value=>{if(value===true)events.push(value)}};
   vm.runInNewContext(ts.transpileModule('module.exports='+printed,{compilerOptions:{module:ts.ModuleKind.CommonJS}}).outputText,ctx);
   const update=ctx.module.exports,graded={questionId:'q',status:'graded',correct:true};update(graded);assert.equal(events.length,0);
   ctx.feedbackSubmission.current='q';update({...graded,status:'processing',processing:true});assert.equal(events.length,0);update(graded);update(graded);assert.equal(events.length,1);
@@ -96,7 +97,8 @@ function hookFixture(storage){
     '@react-native-async-storage/async-storage':{__esModule:true,default:storage},
     'react-native':{AppState:{addEventListener:(_,fn)=>{handlers.push(fn);return{remove(){}}}}},
     react:{useState:value=>{const i=states.length;states.push(value);return[value,next=>states[i]=next]},useRef:value=>({current:value}),useCallback:fn=>fn,useEffect:fn=>effects.push(fn)},
-    './answerFeedbackSettings':model,'./answerFeedback':{prepareAnswerFeedback:async()=>{},configureAnswerFeedback:s=>configs.push(plain(s)),stopAnswerFeedback:()=>{}},
+    './answerFeedbackSettings':model,
+    './practiceVoice':{practiceVoice:{stop(){},answer(){return false;},preview(){return false;}},configurePracticeVoice(){}},'./answerFeedback':{prepareAnswerFeedback:async()=>{},configureAnswerFeedback:s=>configs.push(plain(s)),stopAnswerFeedback:()=>{}},
   });
   const hook=api.useAnswerFeedbackSettings();effects.forEach(fn=>fn());return{hook,configs,states};
 }

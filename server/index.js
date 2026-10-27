@@ -414,7 +414,8 @@ export async function createApp(options = {}) {
     sessionCookie(req, res, null, false);
     return { loggedOut: true };
   });
-  route("get", "/api/mobile/version", (req) => {
+  route("get", "/api/mobile/version", (req,res) => {
+    res.set("Cache-Control","no-store, max-age=0");
     const release = mobileRelease();
     const currentVersion = String(req.query.version || "0.0.0");
     return {

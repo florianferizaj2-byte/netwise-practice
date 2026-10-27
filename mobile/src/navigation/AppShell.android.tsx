@@ -59,6 +59,7 @@ import {
   type ThemeColors,
 } from '../theme';
 import { APP_VERSION } from '../version';
+import {practiceVoice} from '../practiceVoice';
 import { backendConnectionNotice } from '../api/backendContract';
 import { AndroidPointsBar } from '../components/AndroidPointsBar.android';
 import { downloadAndInstallUpdate } from '../update';
@@ -88,6 +89,7 @@ export function AppShell() {
   const [dailyPracticeOpen, setDailyPracticeOpen] = useState(false);
   const [dailyPracticeDay, setDailyPracticeDay] = useState<string | null>(null);
   const appActive = useAppActive();
+  useEffect(()=>{if(!session)void practiceVoice.setAccount(null);else if(appActive)void practiceVoice.setAccount(String(session.user.id));else practiceVoice.stop();},[session?.user.id,appActive]);
   usePracticeAttemptOwner(isPreview?undefined:session?.user,appActive);
   const { data: dashboard } = useCachedQuery(
     '/dashboard?summary=1',

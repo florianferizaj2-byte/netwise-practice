@@ -2,7 +2,9 @@
 
 考匠（AceExam，Ace + Exam）是一个面向职业认证与升学考试的练习与模拟平台。用户共用作者提供的 AI 服务，根据错题生成针对性变式题，并按功能消耗账号额度；通过审核的题目可以分享给同证书的其他用户，让题库在使用过程中持续增长。
 
-**Android v1.0.3** · [下载 APK](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v1.0.3/kaojiang-v1.0.3.apk) · [GitHub 发布页](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v1.0.3) · [SHA-256](public/downloads/kaojiang-v1.0.3.apk.sha256) · [更新与部署说明](docs/release-v1.0.3.md)。正式签名，包含负积分结算与即时答题。
+**本地待发布 Android v1.0.5（构建 38）** · [APK](public/downloads/kaojiang-v1.0.5.apk) · [SHA-256](public/downloads/kaojiang-v1.0.5.apk.sha256) · [更新说明](docs/release-v1.0.5.md)。新增语音包下载与离线播放、实际安装版本识别；尚未推送或部署。
+
+**最近 GitHub Release：Android v1.0.3** · [下载 APK](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v1.0.3/kaojiang-v1.0.3.apk) · [GitHub 发布页](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v1.0.3) · [SHA-256](public/downloads/kaojiang-v1.0.3.apk.sha256) · [更新与部署说明](docs/release-v1.0.3.md)。正式签名，包含负积分结算与即时答题。
 
 进入 App 先显示可热更新的公告；所有账号需完善名字和头像，网页管理员用户列表显示头像和昵称；定位教程新增“求助作者”微信二维码。[版本说明](docs/release-v0.4.6.md) · [服务器更新步骤](docs/DEPLOY-v0.4.6.md)。本机检查通过，手机实际权限与覆盖安装仍待验收。
 
