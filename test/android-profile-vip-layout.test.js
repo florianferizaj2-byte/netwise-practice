@@ -16,7 +16,7 @@ test('profile utility cells have one centered row, not a wrapped line stranded a
   assert.equal(s.nativeAboutButton.flexWrap,undefined);assert.equal(s.nativeAboutButton.alignItems,'center');assert.equal(s.nativeAboutButton.justifyContent,'center');
   assert.equal(s.nativeAboutButton.minHeight,64);assert.equal(s.nativeAboutButtonStack.flex,0);assert.equal(s.nativeAboutStack.flexDirection,'column');
   const source=read('screens/TabScreens.android.tsx');const utilities=source.slice(source.indexOf('testID="profile-utilities"'),source.indexOf('{onLogout&&',source.indexOf('testID="profile-utilities"')));
-  assert.doesNotMatch(utilities,/APP_VERSION|nativeVersion/);assert.match(utilities,/name="heart"/);assert.match(source,/移动端 v\{APP_VERSION\}/);
+  assert.doesNotMatch(utilities,/APP_VERSION|nativeVersion/);assert.match(utilities,/name="heart"/);assert.match(source,/<AboutScreen visible=\{aboutOpen\}/);assert.match(read('screens/AboutScreen.android.tsx'),/移动端 v\{APP_VERSION\}/);
 });
 test('membership page owns focused navigation and uses explicit, unbroken plan information',()=>{
   const source=read('screens/VipScreen.android.tsx');assert.match(source,/useAndroidFocusMode\(!!onBack, onBack\)/);

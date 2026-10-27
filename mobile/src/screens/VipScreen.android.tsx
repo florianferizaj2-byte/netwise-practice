@@ -32,6 +32,8 @@ import { SubjectiveStudyScreen } from "./subjective-study/SubjectiveStudyScreen"
 import { MembershipPurchaseLink } from '../components/MembershipPurchaseLink.android';
 import { AiPointsPricing } from '../components/AiPointsPricing.android';
 import { useAndroidPoints } from '../components/AndroidPointsBar.android';
+import { androidPointsFlow } from '../api/androidPointsRuntime.android';
+import { CheckInScreen } from './CheckInScreen.android';
 import { androidPointsApi, pointUsageLabel } from '../api/points.android';
 import type { PointCall } from '../api/pointsTypes';
 import { useAndroidFocusMode } from '../navigation/AndroidFocusMode.android';
@@ -112,13 +114,12 @@ function AndroidVipScreen({
   const [historyError,setHistoryError]=useState('');
   const [historyLoading,setHistoryLoading]=useState(false);
   const historyRevision=useRef(0);
-  const [checkingIn, setCheckingIn] = useState(false);
+  const [checkInOpen,setCheckInOpen]=useState(false);
   const [redeemOpen, setRedeemOpen] = useState(false);
   const [studyOpen, setStudyOpen] = useState(false);
   const [pricesOpen,setPricesOpen]=useState(false),[historyOpen,setHistoryOpen]=useState(false);
   const [studyVisited, setStudyVisited] = useState(false);
-  const revision = useRef(0),
-    checkInBusy = useRef(false);
+  const revision = useRef(0);
   const refresh = useCallback(async () => {
     if (preview || !user) return;
     const id = ++revision.current;
@@ -146,39 +147,6 @@ function AndroidVipScreen({
       revision.current++;
     };
   }, [active, refresh, studyOpen]);
-  async function checkIn() {
-    if (checkInBusy.current) return;
-    if (preview || !user) {
-      Alert.alert("登录后签到", "登录考匠账号，即可领取每日 AI 积分。");
-      return;
-    }
-    checkInBusy.current = true;
-    const scope=++revision.current;
-    setCheckingIn(true);
-    try {
-      const data = await mobileApi.dailyCheckIn();
-      if(scope!==revision.current)return;
-      revision.current++;
-      setLoading(false);
-      setAccount(data);
-      setError("");
-      Alert.alert(
-        data.claimed ? "签到成功" : "今日已签到",
-        data.claimed
-          ? `今日 ${data.checkIn.grants.points ?? 0} 积分已到账，当日有效，所有 AI 功能通用。`
-          : "明天再来领取新的学习机会。",
-      );
-    } catch (cause) {
-      if(scope!==revision.current)return;
-      Alert.alert(
-        "签到失败",
-        cause instanceof Error ? cause.message : "请稍后重试。",
-      );
-    } finally {
-      checkInBusy.current = false;
-      setCheckingIn(false);
-    }
-  }
   const availablePlans = plans.map(item => {
     const remote = account?.pointsPlans?.[item.id];
     return remote && typeof remote.dailyPoints === "number" && Number.isSafeInteger(remote.priceCents) && remote.priceCents >= 0 && Number.isSafeInteger(remote.dailyPoints) && remote.dailyPoints >= 0
@@ -212,6 +180,7 @@ function AndroidVipScreen({
 
   return (
     <View style={{ flex: 1 }}>
+      <CheckInScreen visible={active&&!studyOpen&&checkInOpen} preview={preview} user={user} onClose={()=>setCheckInOpen(false)} onUpdated={next=>{revision.current++;setLoading(false);setAccount(next);setError('');}}/>
       <View style={[{ flex: 1 }, studyOpen && { display: 'none' }]}
         accessibilityElementsHidden={studyOpen} importantForAccessibility={studyOpen ? 'no-hide-descendants' : 'auto'}>
       <ScrollView
@@ -229,9 +198,9 @@ function AndroidVipScreen({
           <AnimatedPressable accessibilityRole="button" accessibilityLabel="返回我的" onPress={onBack} style={styles.nativeBack}><AppIcon name="chevron-left" size={23} color={colors.text}/></AnimatedPressable><Text accessibilityRole="header" style={[styles.nativeTitle,vipType.title]}>会员与 AI 积分</Text><AnimatedPressable accessibilityRole="button" onPress={()=>setRedeemOpen(true)} style={styles.nativeBack}><Text style={styles.redeemLinkText}>兑换码</Text></AnimatedPressable>
         </View>
         <View style={styles.nativeAccountCard}>
-          <View style={styles.sectionLine}><View style={styles.nativeAccountIcon}><AppIcon name="person" size={26} color={colors.brand}/></View><Text style={styles.nativeCurrent}>当前套餐 · {hasAccount?current==='free'?'普通用户':membershipLabels[current]:loading?'同步中':'待同步'}</Text><AnimatedPressable accessibilityRole="button" onPress={()=>setHistoryOpen(value=>!value)} style={styles.nativeRecordButton}><Text style={styles.smallMuted}>积分记录</Text><AppIcon name="chevron-right" size={15} color={colors.textMuted}/></AnimatedPressable></View>
+          <View style={styles.sectionLine}><View style={styles.nativeAccountIcon}><AppIcon name="person" size={26} color={colors.brand}/></View><Text style={styles.nativeCurrent}>当前套餐 · {hasAccount?current==='free'?'普通用户':membershipLabels[current]:loading?'同步中':'待同步'}</Text><AnimatedPressable accessibilityRole="button" onPress={()=>user?.id&&pointFlow.ownerKey?.startsWith(user.id+':')?androidPointsFlow.showDetails():setHistoryOpen(value=>!value)} style={styles.nativeRecordButton}><Text style={styles.smallMuted}>积分记录</Text><AppIcon name="chevron-right" size={15} color={colors.textMuted}/></AnimatedPressable></View>
           {paid&&!!account?.expiresAt&&<Text style={styles.accountMeta}>{membershipDate(account.expiresAt)} 到期</Text>}
-          <View style={[styles.usageRow,fontScale>1.2&&styles.usageRowStack]}><View style={[styles.balanceGroup,fontScale>1.2&&styles.balanceGroupStack]}><Quota label="可用积分" value={hasAccount?pointNumber(points?.availableUnits):'—'} unit="积分"/><View style={styles.rule}/><Quota label="预扣中" value={hasAccount?pointNumber(points?.heldUnits):'—'} unit="积分"/></View><AnimatedPressable accessibilityRole="button" accessibilityLabel={checkingIn?'签到中':check?.claimed?'已签到':'签到领积分'} disabled={checkingIn||!!check?.claimed} onPress={()=>void checkIn()} style={styles.checkInButton}><AppIcon name="calendar" size={18} color={colors.brand}/><Text style={styles.checkInButtonText}>{checkingIn?'签到中':check?.claimed?'已签到':check?.canClaim===false?'暂不可领':'签到'}</Text></AnimatedPressable></View>
+          <View style={[styles.usageRow,fontScale>1.2&&styles.usageRowStack]}><View style={[styles.balanceGroup,fontScale>1.2&&styles.balanceGroupStack]}><Quota label="可用积分" value={hasAccount?pointNumber(points?.availableUnits):'—'} unit="积分"/><View style={styles.rule}/><Quota label="预扣中" value={hasAccount?pointNumber(points?.heldUnits):'—'} unit="积分"/></View><AnimatedPressable accessibilityRole="button" accessibilityLabel={check?.claimed?'已签到':'签到领积分'} onPress={()=>setCheckInOpen(true)} style={styles.checkInButton}><AppIcon name="calendar" size={18} color={colors.brand}/><Text style={styles.checkInButtonText}>{check?.claimed?'已签到':check?.canClaim===false?'暂不可领':'签到'}</Text></AnimatedPressable></View>
           {!!points?.pendingUnits&&<Text style={styles.quotaFootnote}>本期积分待到账，请联系管理员核对发放记录。</Text>}
           <Text style={styles.quotaFootnote}>{check?.disabledReason || `签到 ${check?.grants.points ?? '—'} 积分 · 当日有效 · 每日手动领取`}</Text>
         </View>
@@ -285,7 +254,7 @@ function AndroidVipScreen({
         </View>
         {pricesOpen&&<AiPointsPricing userId={user?.id} preview={preview}/>}
         <AnimatedPressable accessibilityRole="button" accessibilityLabel="进入 AI 精炼" onPress={()=>{setStudyVisited(true);setStudyOpen(true)}} style={styles.nativeStudyEntry}><View style={styles.nativeAccountIcon}><AppIcon name="book" size={27} color={colors.brand}/></View><View style={styles.flex}><Text style={styles.studyTitle}>AI 精炼</Text><Text style={styles.studyIntro}>按知识点精讲与练习</Text></View><Text style={styles.smallMuted}>进入</Text><AppIcon name="chevron-right" size={18} color={colors.textMuted}/></AnimatedPressable>
-        <View style={styles.nativeRuleCard}><AppIcon name="info" size={22} color={colors.brand}/><View style={styles.flex}><Text style={styles.benefitTitle}>积分使用说明</Text><Text style={styles.quotaFootnote}>先预扣、后结算，失败退回预扣。已有课程、缓存内容和确定性判分不扣积分。会员按原周期发放，退款不延长原有效期。</Text></View></View>
+        <View style={styles.nativeRuleCard}><AppIcon name="info" size={22} color={colors.brand}/><View style={styles.flex}><Text style={styles.benefitTitle}>积分使用说明</Text><Text style={styles.quotaFootnote}>先预扣、后结算，失败退回预扣。已有课程、缓存内容和确定性判分不扣积分。会员按每日签到领取，退款不延长原有效期。</Text></View></View>
         {historyOpen&&<>        <View style={{padding:20,gap:12}}>
           <Text style={styles.sectionTitle}>积分使用记录</Text>
           <AnimatedPressable accessibilityRole="button" disabled={historyLoading||!user} onPress={()=>void loadPointHistory()} style={styles.checkInButton}>

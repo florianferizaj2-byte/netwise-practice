@@ -1,3 +1,5 @@
+import {PracticeSyncNotice} from '../components/PracticeSyncNotice.android';
+import {usePracticeAttemptOwner} from '../api/practiceAttemptSync.android';
 import { useAndroidFocusModeState } from './AndroidFocusMode.android';
 import { AppIcon } from '../components/AppIcon';
 import { Easing } from 'react-native';
@@ -86,6 +88,7 @@ export function AppShell() {
   const [dailyPracticeOpen, setDailyPracticeOpen] = useState(false);
   const [dailyPracticeDay, setDailyPracticeDay] = useState<string | null>(null);
   const appActive = useAppActive();
+  usePracticeAttemptOwner(isPreview?undefined:session?.user,appActive);
   const { data: dashboard } = useCachedQuery(
     '/dashboard?summary=1',
     mobileApi.dashboard,
@@ -498,6 +501,7 @@ export function AppShell() {
             <Text style={{ color: colors.brand, fontSize: 14, fontWeight: '500' }}>重新连接</Text>
           </AnimatedPressable>
         </View>}
+        {!isPreview&&session?.user&&<PracticeSyncNotice/>}
         {!isPreview&&session?.user&&<AndroidPointsBar headless userId={session.user.id} certificateId={session.user.certificateId} appActive={appActive}/>}
         <Animated.View
           accessibilityElementsHidden={dailyPracticeOpen}

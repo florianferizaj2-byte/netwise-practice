@@ -6,7 +6,7 @@ import { AnimatedPressable } from './Motion';
 import { useAppActive, useScreenActive } from '../navigation/ScreenActivity';
 import { useThemedStyles, type ThemeColors } from '../theme';
 
-export function AiPointsPricing({ userId, preview = false }: { userId?: string; preview?: boolean }) {
+export function AiPointsPricing({ userId, preview = false, embedded = false }: { userId?: string; preview?: boolean; embedded?: boolean }) {
   const s = useThemedStyles(styles);
   const active = useScreenActive(), appActive = useAppActive();
   const [data, setData] = useState<PointServicesResponse | null>(null);
@@ -29,7 +29,7 @@ export function AiPointsPricing({ userId, preview = false }: { userId?: string; 
   }, [userId, preview, active, appActive, retry]);
   const model = data?.models.find(m => m.id === modelId);
   const format = (units: number) => (units / (data?.scale || 1000)).toLocaleString('zh-CN', { maximumFractionDigits: 3 });
-  return <View style={s.card} testID="android-points-services">
+  return <View style={[s.card, embedded && { margin: 0 }]} testID="android-points-services">
     <Text accessibilityRole="header" style={s.title}>AI 服务积分价目</Text>
     <Text style={s.text}>不是固定按次收费。成功按实际用量结算，失败退回该任务预扣；审核与重试的模型调用也计入任务成本。</Text>
     {!userId || preview ? <Text style={s.muted}>登录后查看当前接口的费用示例。</Text> : <>

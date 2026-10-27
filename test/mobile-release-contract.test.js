@@ -1,3 +1,4 @@
+import {MOBILE_BACKEND_VERSION} from '../server/mobile-contract.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -26,8 +27,8 @@ test('the real public version endpoint advertises only mounted v1 capabilities',
     assert.equal(path.dirname(fs.realpathSync(directory)), parent); assert.ok(path.basename(directory).startsWith('v1-contract-')); fs.rmSync(directory, { recursive: true, force: true }); });
   const response = await fetch(`http://127.0.0.1:${server.address().port}/api/mobile/version?version=1.0.1`);
   assert.equal(response.status, 200); const release = await response.json();
-  assert.equal(release.latestVersion, '1.0.1'); assert.equal(release.forceUpdate, false);
-  assert.equal(release.backend.version, '1.0.1'); assert.equal(release.backend.apiRevision, 1);
+  assert.equal(release.latestVersion, JSON.parse(fs.readFileSync(new URL('../mobile/package.json',import.meta.url),'utf8')).version); assert.equal(release.forceUpdate, false);
+  assert.equal(release.backend.version, MOBILE_BACKEND_VERSION); assert.equal(release.backend.apiRevision, 1);
   const { backendConnectionNotice } = await loadPure('api/backendContract.ts'); assert.equal(backendConnectionNotice(release), '');
   assert.deepEqual(release.backend.capabilities.sort(), ['account-security-v1', 'learning-gate-v1', 'points-v1']);
 });

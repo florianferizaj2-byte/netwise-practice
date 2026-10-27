@@ -3,7 +3,7 @@ const read=file=>fs.readFileSync(new URL('../mobile/src/'+file,import.meta.url),
 test('Android shell and teacher variants preserve business logic with bounded Android-only chrome changes',()=>{
   const shared=read('navigation/AppShell.tsx');
   const native=read('navigation/AppShell.android.tsx');
-  // The approved Android redesign changes only presentation/navigation chrome.
+  // Android has approved presentation plus an account-owned practice outbox.
   // Normalize those bounded sections, then still compare all account, cache,
   // app-lifecycle, request and route-handling code byte for byte.
   const tabsBlock=source=>source.slice(source.indexOf('const tabs:'),source.indexOf('export function AppShell'));
@@ -19,7 +19,13 @@ test('Android shell and teacher variants preserve business logic with bounded An
   const notice=native.slice(noticeAt,native.indexOf('        {!isPreview&&session?.user&&<AndroidPointsBar',noticeAt));
   assert.doesNotMatch(pillBlock(native),/mobileApi\.|studyCache\./);
   assert.match(native,/backendConnectionNotice\(release\)/);
+  assert.match(native,/usePracticeAttemptOwner\(isPreview\?undefined:session\?\.user,appActive\)/);
+  assert.match(native,/<PracticeSyncNotice\/>/);
+  assert.doesNotMatch(shared,/practiceAttemptSync|PracticeSyncNotice/);
   let shell=native
+    .replace("import {PracticeSyncNotice} from '../components/PracticeSyncNotice.android';\n",'')
+    .replace("import {usePracticeAttemptOwner} from '../api/practiceAttemptSync.android';\n",'')
+    .replace("  usePracticeAttemptOwner(isPreview?undefined:session?.user,appActive);\n",'')
     .replace("import { Easing } from 'react-native';\n",'')
     .replace("import { androidMotion } from '../android-design-tokens';\n",'')
     .replace("import { backendConnectionNotice } from '../api/backendContract';\n",'')

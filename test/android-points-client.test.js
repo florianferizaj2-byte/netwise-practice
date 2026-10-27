@@ -28,9 +28,11 @@ const response = data => new Response(JSON.stringify(data));
 test('Android prices and operations send the current identity and use the authoritative service endpoints', async t => {
   const { androidPointsApi: api } = await fixture(t), requests = [];
   globalThis.fetch = async (url, init) => { requests.push({ url, init }); return response({ rows: [], models: [] }); };
-  await api.services(); await api.operations();
+  await api.services(); await api.operations(); await api.operations(undefined,40,'refunded');
   assert.ok(requests[0].url.endsWith('/account/points/services'));
-  assert.ok(requests[1].url.endsWith('/account/points/operations?limit=20'));
+  assert.ok(requests[1].url.endsWith('/account/points/operations?limit=20&state=all'));
+  assert.ok(requests[2].url.endsWith('/account/points/operations?limit=20&state=refunded&offset=40'));
+  assert.equal(requests[2].init.headers.Authorization, 'Bearer points-learner');
   assert.equal(requests[0].init.headers.Authorization, 'Bearer points-learner');
   assert.equal(requests[0].init.credentials, 'omit');
 });

@@ -29,8 +29,8 @@ async function get<T>(path: string, signal?: AbortSignal): Promise<T> {
 export const androidPointsApi = {
   wallet(signal?: AbortSignal) { return get<{wallet: PointWallet}>('/wallet', signal); },
   services(signal?: AbortSignal) { return get<PointServicesResponse>('/services', signal); },
-  operations(signal?: AbortSignal, offset = 0) {
-    return get<{ rows: PointOperation[]; calls: PointCall[]; nextOffset: number|null }>('/operations?limit=20'+(offset?'&offset='+offset:''), signal);
+  operations(signal?: AbortSignal, offset = 0, state: PointOperation['state'] | 'all' = 'all') {
+    return get<{ rows: PointOperation[]; calls: PointCall[]; nextOffset: number|null }>('/operations?limit=20&state='+state+(offset?'&offset='+offset:''), signal);
   },
   receipt(lookup: {requestId?: string; jobId?: string}, signal?: AbortSignal) {
     const query=lookup.jobId?'jobId='+encodeURIComponent(lookup.jobId):'requestId='+encodeURIComponent(lookup.requestId||'');

@@ -25,10 +25,13 @@ write('subjective.tsx','export function SubjectiveStudyScreen(){return null}');
 write('alert.tsx','export const AppAlert={alert(){}};export function AppAlertHost(){return null}');
 write('native.ts',"export*from'react-native-web';import{Platform}from'react-native-web';Platform.OS='android';export const ToastAndroid={LONG:1,SHORT:0,show(){}};");
 const profiles=users.map(user=>({id:user.id,username:user.username,certificateId:'network-engineer'}));
-write('main.tsx',`import React,{useState}from'react';import{createRoot}from'react-dom/client';import{ThemeProvider,useTheme}from ${JSON.stringify(source('src/theme.ts'))};import{AndroidPointsBar}from ${JSON.stringify(source('src/components/AndroidPointsBar.android.tsx'))};import{TeacherSheet}from ${JSON.stringify(source('src/screens/subjective-study/TeacherSheet.android.tsx'))};import{mobileApi,setSessionToken}from ${JSON.stringify(source('src/api/client.ts'))};
+write('main.tsx',`import React,{useState}from'react';import{createRoot}from'react-dom/client';import{ThemeProvider,useTheme}from ${JSON.stringify(source('src/theme.android.ts'))};import{AndroidPointsBar}from ${JSON.stringify(source('src/components/AndroidPointsBar.android.tsx'))};import{TeacherSheet}from ${JSON.stringify(source('src/screens/subjective-study/TeacherSheet.android.tsx'))};import{mobileApi,setSessionToken}from ${JSON.stringify(source('src/api/client.ts'))};
 function Harness(){const[user,setUser]=useState(${JSON.stringify(profiles[0])}),[result,setResult]=useState(''),[teacher,setTeacher]=useState(false),{setMode}=useTheme();const run=async(fn)=>{try{await fn();setResult('请求已完成')}catch(e){setResult(e.message)}};return <div style={{height:'100%',display:'flex',flexDirection:'column'}}><div><button onClick={()=>setMode('dark')}>深色验收</button><button onClick={()=>setMode('light')}>浅色验收</button><button onClick={async()=>{await setSessionToken(${JSON.stringify(tokens[1])});setUser(${JSON.stringify(profiles[1])})}}>切换测试账号</button></div><AndroidPointsBar key={user.id} userId={user.id} certificateId={user.certificateId} appActive={true}/><div style={{overflow:'auto',flex:1}}><button onClick={()=>run(()=>mobileApi.teacher('fixture','详细讲解',[]))}>测试题目讲解</button><button onClick={()=>run(()=>mobileApi.trainStream('fixture',3,()=>{}))}>测试流式出题</button><button onClick={()=>run(()=>mobileApi.createAiQuestionGeneration({count:3,chapter:'合成章节',knowledgePoint:'合成知识点'}))}>测试后台出题</button><button onClick={()=>setTeacher(true)}>打开老师答疑</button><p role="status">{result}</p></div><TeacherSheet open={teacher} active={true} nodeId="synthetic-node" nodeTitle="合成验收知识点" context={null} onClose={()=>setTeacher(false)} onFailure={()=>false}/></div>};await setSessionToken(${JSON.stringify(tokens[0])});createRoot(document.getElementById('root')).render(<ThemeProvider><Harness/></ThemeProvider>);`);
 const vite=await createServer({configFile:false,root:entry,plugins:[react()],logLevel:'error',define:{'process.env.EXPO_PUBLIC_API_URL':'""',global:'globalThis'},optimizeDeps: { include: ['react-native-web','react-native-safe-area-context'], esbuildOptions: { resolveExtensions: ['.web.tsx','.web.ts','.web.jsx','.web.js','.tsx','.ts','.jsx','.js','.json'] } },
   resolve:{extensions:['.web.tsx','.web.ts','.web.jsx','.web.js','.tsx','.ts','.jsx','.js','.json'],dedupe:['react','react-dom'],alias:[
+    {find:/^(?:\.\.?\/)+theme$/,replacement:path.join(mobile,'src/theme.android.ts')},
+    {find:/^\.\/AppIcon$/,replacement:path.join(mobile,'src/components/AppIcon.android.tsx')},
+    {find:/^react-native-svg$/,replacement:path.join(mobile,'node_modules/react-native-svg/lib/module/elements.web.js')},
     {find:/^react-native$/,replacement:path.join(entry,'native.ts')},{find:/^react-native-web$/,replacement:path.join(mobile,'node_modules/react-native-web')},
     {find:/^react$/,replacement:path.join(mobile,'node_modules/react')},{find:/^react-dom(\/.*)?$/,replacement:path.join(mobile,'node_modules/react-dom')+'$1'},
     {find:'@react-native-async-storage/async-storage',replacement:path.join(entry,'storage.ts')},{find:'expo/fetch',replacement:path.join(entry,'stream.ts')},
@@ -78,8 +81,25 @@ try{
   await expect(page.getByText('合成老师答疑结果',{exact:true})).toBeVisible();await expect(page.getByTestId('android-inline-points').getByText(/AI 老师答疑：实扣 0.24/)).toBeVisible();
   checks.push('teacher modal has its own readable points entry and exact result feedback');
   await page.getByRole('button',{name:'收起',exact:true}).click();await page.getByRole('button',{name:'查看积分费用与记录',exact:true}).click();
-  await expect(page.getByRole('heading',{name:'积分费用与记录',exact:true})).toBeVisible();await expect(page.getByText('积分使用记录',{exact:true})).toBeVisible();
-  await shot('ledger-light-375');await page.getByRole('button',{name:'关闭积分费用与记录',exact:true}).click();
+  const ledger=page.getByTestId('android-points-ledger'),sheet=page.getByTestId('android-points-details-sheet');
+  await expect(sheet.getByRole('heading',{name:'积分',exact:true})).toBeVisible();await expect(ledger.getByRole('heading',{name:'使用记录',exact:true})).toBeVisible();
+  await expect(sheet.getByTestId('android-points-services')).toHaveCount(0);
+  await sheet.getByRole('button',{name:'积分与费用说明',exact:true}).click();await expect(sheet.getByTestId('android-points-services')).toBeVisible();
+  await sheet.getByRole('button',{name:'积分与费用说明',exact:true}).click();await expect(sheet.getByTestId('android-points-services')).toHaveCount(0);
+  await ledger.getByRole('tab',{name:'已退回',exact:true}).click();await expect(ledger.getByRole('button',{name:/已退回.*查看详情/})).toHaveCount(1);
+  await ledger.getByRole('button',{name:/已退回.*查看详情/}).click();await expect(ledger.getByTestId('android-point-record-detail')).toContainText('该任务预扣已全部退回');
+  await ledger.getByRole('tab',{name:'已扣除',exact:true}).click();await expect(ledger.getByRole('button',{name:/已结算.*查看详情/}).first()).toBeVisible();
+  await expect(ledger.getByRole('button',{name:/已退回.*查看详情/})).toHaveCount(0);
+  await ledger.getByRole('tab',{name:'全部',exact:true}).click();await expect(ledger.getByRole('button',{name:/已退回.*查看详情/})).toHaveCount(1);
+  await sheet.getByTestId('android-points-balance').scrollIntoViewIfNeeded();await shot('ledger-light-375');
+  checks.push('approved points layout prioritizes balance and records; fees start collapsed, filters and per-task details read actual ledger states');
+  await page.setViewportSize({width:320,height:740});
+  const assertFits=async()=>{const result=await sheet.evaluate(el=>{const box=el.getBoundingClientRect(),bad=[...el.querySelectorAll('[dir=auto]')].filter(t=>{const r=t.getBoundingClientRect();return r.width>0&&(r.left<box.left-1||r.right>box.right+1)});return {width:box.width,viewport:innerWidth,overflow:bad.map(t=>t.textContent).slice(0,5)}});assert.ok(result.width<=result.viewport,JSON.stringify(result));assert.deepEqual(result.overflow,[]);};
+  await assertFits();await shot('ledger-light-320');
+  await page.getByRole('button',{name:'关闭积分费用与记录',exact:true}).click();await page.getByRole('button',{name:'深色验收',exact:true}).click();
+  await page.getByRole('button',{name:'查看积分费用与记录',exact:true}).click();await expect(sheet).toBeVisible();await expect(ledger.getByRole('button',{name:/查看详情/}).first()).toBeVisible();await assertFits();await shot('ledger-dark-320');
+  checks.push('full-screen records fit 320px and 375px with light/dark surfaces, safe-area header and untruncated text');
+  await page.getByRole('button',{name:'关闭积分费用与记录',exact:true}).click();await page.setViewportSize({width:375,height:812});
   await page.getByRole('button',{name:'深色验收',exact:true}).click();await page.getByRole('button',{name:'测试题目讲解',exact:true}).click();await expect(page.getByTestId('android-ai-confirm-sheet')).toBeVisible();await shot('confirm-dark-375');
   await page.setViewportSize({width:812,height:375});await expect(page.getByRole('button',{name:'继续使用AI，按实际用量结算',exact:true})).toBeInViewport();
   await page.getByRole('button',{name:'取消本次AI请求',exact:true}).click();await page.setViewportSize({width:375,height:812});

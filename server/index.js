@@ -1509,6 +1509,9 @@ export async function createApp(options = {}) {
   });
   route("get", "/api/questions", (req) => {
     const state = questionState(req);
+    const instant=req.query.feedback==='instant';
+    if(instant)requestUserId(req);
+    const project=instant?privateQuestionForUser:publicQuestionForUser;
     // Installed mobile clients used this endpoint for ordinary practice before
     // they supplied bankOnly. Explicit AI source requests retain their scope.
     const bankOnly = req.query.bankOnly === "1" ||
@@ -1538,7 +1541,7 @@ export async function createApp(options = {}) {
     if (req.query.page === "1") {
       const seed = random ? z.string().min(1).max(64).parse(req.query.seed) : undefined;
       const page = questionPage(questions, { offset, limit: limit ?? 40, seed });
-      return { ...page, items: page.items.map((question) => publicQuestionForUser(question, state)) };
+      return { ...page, items: page.items.map((question) => project(question, state)) };
     }
 
     if (random) {
@@ -1551,12 +1554,12 @@ export async function createApp(options = {}) {
       }
       return questions
         .slice(0, limit === undefined ? undefined : limit)
-        .map((question) => publicQuestionForUser(question, state));
+        .map((question) => project(question, state));
     }
 
     return questions
       .slice(offset, limit === undefined ? undefined : offset + limit)
-      .map((question) => publicQuestionForUser(question, state));
+      .map((question) => project(question, state));
   });
   route("get", "/api/practice/catalog", (req) => {
     const certificateId = requireCertificate(req);
@@ -1895,7 +1898,7 @@ export async function createApp(options = {}) {
         (question) =>
           !certificateId || hasCertificateQuestion(question, certificateId),
       )
-      .map((question) => publicQuestionForUser(question, state));
+      .map((question) => (req.query.feedback==='instant'?privateQuestionForUser:publicQuestionForUser)(question, state));
   });
   route("delete", "/api/wrong/:id", (req) => {
     const question = requireQ(req.params.id, req);

@@ -43,7 +43,7 @@ export function AndroidPointsLink({ userId, compact = false, membership = false 
         style={[membership?s.memberPoints:compact ? s.pointsCompact : s.points, s.pointsGrow]}>
         {!membership&&<AppIcon name="sparkles" size={16} color={colors.brand}/>}
         <View style={[s.pointsGrow,membership&&s.memberBalanceContent,membership&&fontScale>1.25&&s.memberBalanceStack]}><Text style={s.pointsCaption}>{membership?'可用 AI 积分':'可用积分'}</Text>
-          {membership?<View style={s.memberBalanceRow}><Text testID="profile-points-value" style={s.memberBalance}>{wallet?formatPointUnits(wallet.availableUnits,wallet.scale):'—'}</Text><Text style={s.memberUnit}>积分</Text></View>:<Text style={s.pointsText}>{balance}</Text>}
+          {membership?<View style={s.memberBalanceRow}><Text testID="profile-points-value" style={[s.memberBalance,wallet&&wallet.availableUnits<0&&{color:colors.warning}]}>{wallet?formatPointUnits(wallet.availableUnits,wallet.scale):'—'}</Text><Text style={s.memberUnit}>积分</Text></View>:<Text style={s.pointsText}>{balance}</Text>}
         </View>
         {!compact&&!membership && <AppIcon name="chevron-right" size={14} color={colors.brand}/>}
       </AnimatedPressable>
@@ -52,6 +52,7 @@ export function AndroidPointsLink({ userId, compact = false, membership = false 
         {state.refreshing?<ActivityIndicator color={colors.brand} size="small"/>:<AppIcon name="refresh" size={20} color={colors.brand}/>}
       </AnimatedPressable>}
     </View>
+    {!!wallet&&wallet.availableUnits<0&&<Text style={s.pointsError}>欠分中 · 签到积分先抵扣，正余额后恢复付费 AI</Text>}
     {!!wallet?.heldUnits&&<Text style={s.pointsStatus} accessibilityLiveRegion="polite">预扣中 {held} 积分 · 以最终结算为准</Text>}
     {!!error&&<Text style={s.pointsError} accessibilityLiveRegion="polite">积分未同步，点击重试</Text>}
   </View>;

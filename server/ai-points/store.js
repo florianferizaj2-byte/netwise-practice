@@ -31,6 +31,8 @@ export function createPointsStore(db, { now = Date.now } = {}) {
     CREATE TABLE IF NOT EXISTS ai_points_allocations (
       operation_id TEXT NOT NULL,grant_id TEXT NOT NULL,held_units INTEGER NOT NULL CHECK(held_units>=0),
       PRIMARY KEY(operation_id,grant_id));
+    CREATE TABLE IF NOT EXISTS ai_points_debts (
+      user_id TEXT PRIMARY KEY,units INTEGER NOT NULL CHECK(units>=0));
     CREATE TABLE IF NOT EXISTS ai_points_calls (
       id TEXT PRIMARY KEY,operation_id TEXT NOT NULL,user_id TEXT NOT NULL,task_type TEXT NOT NULL,
       provider TEXT NOT NULL,model TEXT NOT NULL,rate_card TEXT NOT NULL,
@@ -62,6 +64,7 @@ export function createPointsStore(db, { now = Date.now } = {}) {
   }
   if(!operationColumns.has('attempt'))db.exec('ALTER TABLE ai_points_operations ADD COLUMN attempt INTEGER NOT NULL DEFAULT 0');
   db.exec('CREATE UNIQUE INDEX IF NOT EXISTS ai_points_attempt_identity ON ai_points_operations(user_id,logical_key,attempt)');
+  if(!operationColumns.has('overdraft_authorized'))db.exec('ALTER TABLE ai_points_operations ADD COLUMN overdraft_authorized INTEGER NOT NULL DEFAULT 0');
   const callColumns=new Set(db.prepare('PRAGMA table_info(ai_points_calls)').all().map(row=>row.name));
   if(!callColumns.has('cost_verified')) {
     db.exec('ALTER TABLE ai_points_calls ADD COLUMN cost_verified INTEGER NOT NULL DEFAULT 0');
@@ -98,15 +101,16 @@ export function createPointsStore(db, { now = Date.now } = {}) {
     const calls=db.prepare("SELECT COALESCE(SUM(CASE WHEN state='finished' THEN cost_micros ELSE 0 END),0) AS spent,COALESCE(SUM(CASE WHEN state='pending' THEN upper_cost_micros ELSE 0 END),0) AS held,COALESCE(SUM(needs_review),0) AS uncertain FROM ai_points_calls").get();
     const allowance=costAllowance(revenue,margin());
     const outstanding=db.prepare('SELECT COALESCE(SUM(CASE WHEN expires_at IS NULL OR expires_at>? THEN remaining_units ELSE held_units END),0) AS units FROM ai_points_grants').get(stamp()).units;
-    const liability=pointLiabilityMicros(outstanding);
+    const liability=pointLiabilityMicros(outstanding),debt=db.prepare('SELECT COALESCE(SUM(units),0) AS n FROM ai_points_debts').get().n;
     return {revenueMicros:revenue,otherExpenseMicros:expenses,aiSpentMicros:calls.spent,aiHeldMicros:calls.held,
       allowanceMicros:allowance,availableCostMicros:Math.max(0,allowance-expenses-calls.spent-calls.held-liability),
-      outstandingPointUnits:outstanding,pointLiabilityMicros:liability,serviceMarginBps:SERVICE_MARGIN_BPS,
+      outstandingPointUnits:outstanding,outstandingDebtUnits:debt,pointLiabilityMicros:liability,serviceMarginBps:SERVICE_MARGIN_BPS,
       overBudgetMicros:Math.max(0,expenses+calls.spent+calls.held+liability-allowance),unknownCostCalls:calls.uncertain,targetMarginBps:margin()};
   };
   const wallet = userId => {
     const row=db.prepare('SELECT COALESCE(SUM(CASE WHEN expires_at IS NULL OR expires_at>? THEN remaining_units-held_units ELSE 0 END),0) AS available,COALESCE(SUM(held_units),0) AS held,COALESCE(SUM(CASE WHEN expires_at<=? THEN remaining_units-held_units ELSE 0 END),0) AS expired FROM ai_points_grants WHERE user_id=?').get(stamp(),stamp(),userId);
-    return {availableUnits:row.available,heldUnits:row.held,expiredUnits:row.expired,scale:POINT_SCALE,pointsPerCny:100};
+    const debt=db.prepare('SELECT units FROM ai_points_debts WHERE user_id=?').get(userId)?.units||0;
+    return {availableUnits:row.available-debt,heldUnits:row.held,expiredUnits:row.expired,debtUnits:debt,scale:POINT_SCALE,pointsPerCny:100};
   };
   const allocate = (operation, units) => {
     const grants=db.prepare('SELECT * FROM ai_points_grants WHERE user_id=? AND (expires_at IS NULL OR expires_at>?) AND remaining_units>held_units ORDER BY expires_at IS NULL,expires_at,created_at,id').all(operation.user_id,stamp());
@@ -120,6 +124,13 @@ export function createPointsStore(db, { now = Date.now } = {}) {
       db.prepare('INSERT INTO ai_points_allocations VALUES(?,?,?) ON CONFLICT(operation_id,grant_id) DO UPDATE SET held_units=held_units+excluded.held_units').run(operation.id,row.id,amount);
       remaining-=amount;if(!remaining)break;
     }
+  };
+  const repayDebt = userId => {
+    let debt=db.prepare('SELECT units FROM ai_points_debts WHERE user_id=?').get(userId)?.units||0;
+    if(!debt)return;
+    const grants=db.prepare('SELECT id,remaining_units-held_units AS free FROM ai_points_grants WHERE user_id=? AND (expires_at IS NULL OR expires_at>?) AND remaining_units>held_units ORDER BY expires_at IS NULL,expires_at,created_at,id').all(userId,stamp());
+    for(const grant of grants){const used=Math.min(debt,grant.free);db.prepare('UPDATE ai_points_grants SET remaining_units=remaining_units-? WHERE id=?').run(used,grant.id);debt-=used;if(!debt)break;}
+    db.prepare('UPDATE ai_points_debts SET units=? WHERE user_id=?').run(debt,userId);
   };
   const api={
     wallet,finance,transaction,now:()=>now(),
@@ -141,7 +152,7 @@ export function createPointsStore(db, { now = Date.now } = {}) {
           db.prepare('UPDATE ai_points_grants SET units=units+?,remaining_units=remaining_units+?,expires_at=? WHERE id=?').run(delta,delta,expiry,old.id);
           journal(`membership:${old.id}:${targetUnits}:${expiry}`,userId,null,'membership-renewal',delta,0,0,'同周期续期只补差额，不重置已用积分');
         }
-        return wallet(userId);
+        repayDebt(userId);return wallet(userId);
       });
     },
     grant({userId,sourceKey,units,kind='gift',expiresAt=null,requireFunded=false}) {
@@ -159,6 +170,7 @@ export function createPointsStore(db, { now = Date.now } = {}) {
           fail('积分赠送或发放预算不足，请管理员先核对实收收入','AI_POINTS_GRANT_FUNDING_REQUIRED',503);
         const id=uuid();db.prepare('INSERT INTO ai_points_grants VALUES(?,?,?,?,?,?,0,?,?)').run(id,userId,sourceKey,kind,units,units,expiresAt,stamp());
         journal('grant:'+id,userId,null,'grant',units,0,0,kind);
+        repayDebt(userId);
         return {created:true,id,...wallet(userId)};
       });
     },
@@ -221,13 +233,23 @@ export function createPointsStore(db, { now = Date.now } = {}) {
         // Admission is backed by this user's real wallet, never by an operator's
         // unrecorded sales receipts. Cash/expense figures remain reporting only;
         // per-call token limits, rate validation and wallet holds still apply.
-        const units=chargeUnits(upper,operation.margin_bps);allocate(operation,units);
+        const units=chargeUnits(upper,operation.margin_bps),available=wallet(operation.user_id).availableUnits;
+        const started=!!db.prepare('SELECT 1 FROM ai_points_calls WHERE operation_id=? LIMIT 1').get(operationId);
+        // Cached/free results never enter here. Admit a new PAID operation only
+        // from a positive wallet, not from an arbitrary worst-case hold floor.
+        if(!started&&available<=0)fail('积分余额为零或负数，签到或补充至正余额后可继续使用 AI','AI_POINTS_INSUFFICIENT',402);
+        const borrowing=operation.overdraft_authorized||units>Math.max(0,available);
+        const otherLoan=db.prepare("SELECT 1 FROM ai_points_operations WHERE user_id=? AND state='pending' AND overdraft_authorized=1 AND id<>? LIMIT 1").get(operation.user_id,operationId);
+        const otherPaid=borrowing&&db.prepare("SELECT 1 FROM ai_points_operations o WHERE o.user_id=? AND o.state='pending' AND o.id<>? AND EXISTS(SELECT 1 FROM ai_points_calls c WHERE c.operation_id=o.id) LIMIT 1").get(operation.user_id,operationId);
+        if(otherLoan||otherPaid)fail('已有 AI 任务正在结算，请完成后再发起新的付费请求','AI_POINTS_REQUEST_IN_PROGRESS',409);
+        if(borrowing)db.prepare('UPDATE ai_points_operations SET overdraft_authorized=1 WHERE id=?').run(operationId);
+        const held=Math.min(units,Math.max(0,available));allocate(operation,held);
         const id=uuid();
         db.prepare("INSERT INTO ai_points_calls (id,operation_id,user_id,task_type,provider,model,rate_card,state,upper_cost_micros,input_limit,output_limit,created_at) VALUES(?,?,?,?,?,?,?,'pending',?,?,?,?)")
           .run(id,operation.id,operation.user_id,taskType,normalizeProvider(settings.baseUrl),settings.model,JSON.stringify(card),upper,inputLimit,outputLimit,stamp());
-        db.prepare('UPDATE ai_points_operations SET held_units=held_units+?,lease_until=?,updated_at=? WHERE id=?').run(units,new Date(now()+300000).toISOString(),stamp(),operationId);
-        journal('hold:'+id,operation.user_id,operationId,'hold',0,units,0,taskType);
-        return {id,upperCostMicros:upper,heldUnits:units,rateCard:card};
+        db.prepare('UPDATE ai_points_operations SET held_units=held_units+?,lease_until=?,updated_at=? WHERE id=?').run(held,new Date(now()+300000).toISOString(),stamp(),operationId);
+        journal('hold:'+id,operation.user_id,operationId,'hold',0,held,0,taskType);
+        return {id,upperCostMicros:upper,heldUnits:held,rateCard:card};
       });
     },
     finishCall(callId,{usage={},success=false}) {
@@ -291,7 +313,7 @@ export function createPointsStore(db, { now = Date.now } = {}) {
         const cost=calls.reduce((sum,row)=>sum+row.cost_micros,0);
         const accepted=!!success&&!calls.some(row=>row.needs_review);
         const charge=accepted?chargeUnits(cost,operation.margin_bps):0;
-        if(charge>operation.held_units)fail('结算超过预扣上限，需核对账单','AI_POINTS_SETTLEMENT_OVERRUN',503);
+        if(charge>operation.held_units&&!operation.overdraft_authorized)fail('结算超过预扣上限，需核对账单','AI_POINTS_SETTLEMENT_OVERRUN',503);
         let remaining=charge;
         const allocations=db.prepare('SELECT a.*,g.expires_at,g.created_at FROM ai_points_allocations a JOIN ai_points_grants g ON g.id=a.grant_id WHERE a.operation_id=? ORDER BY g.expires_at IS NULL,g.expires_at,g.created_at,g.id').all(operationId);
         for(const row of allocations){
@@ -299,10 +321,16 @@ export function createPointsStore(db, { now = Date.now } = {}) {
           db.prepare('UPDATE ai_points_grants SET remaining_units=remaining_units-?,held_units=held_units-? WHERE id=?').run(used,row.held_units,row.grant_id);
           remaining-=used;
         }
+        if(remaining){
+          const debt=db.prepare('SELECT units FROM ai_points_debts WHERE user_id=?').get(operation.user_id)?.units||0;
+          integer(debt+remaining,'欠付积分');
+          db.prepare('INSERT INTO ai_points_debts VALUES(?,?) ON CONFLICT(user_id) DO UPDATE SET units=excluded.units').run(operation.user_id,debt+remaining);
+        }
+        repayDebt(operation.user_id);
         const state=accepted?'settled':'refunded';
         db.prepare('UPDATE ai_points_operations SET state=?,charged_units=?,cost_micros=?,result=?,error=?,updated_at=? WHERE id=?')
           .run(state,charge,cost,accepted?JSON.stringify(result):null,accepted?null:String(error||'任务失败或上游用量待核对').slice(0,500),stamp(),operationId);
-        journal('finish:'+operationId,operation.user_id,operationId,state,-charge,0,operation.held_units-charge,operation.feature);
+        journal('finish:'+operationId,operation.user_id,operationId,state,-charge,0,Math.max(0,operation.held_units-charge),operation.feature);
         return rowOperation(operationId);
       });
     },
@@ -320,7 +348,7 @@ export function createPointsStore(db, { now = Date.now } = {}) {
     audit() {
       const errors=[];
       for(const row of db.prepare('SELECT g.user_id,SUM(g.remaining_units) AS remaining,(SELECT COALESCE(SUM(delta_units),0) FROM ai_points_journal j WHERE j.user_id=g.user_id) AS journal FROM ai_points_grants g GROUP BY g.user_id').all())
-        if(row.remaining!==row.journal)errors.push({userId:row.user_id,error:'journal-balance-mismatch'});
+        if(row.remaining-(db.prepare('SELECT units FROM ai_points_debts WHERE user_id=?').get(row.user_id)?.units||0)!==row.journal)errors.push({userId:row.user_id,error:'journal-balance-mismatch'});
       const pending=db.prepare("SELECT COALESCE(SUM(held_units),0) AS units FROM ai_points_operations WHERE state='pending'").get().units;
       const held=db.prepare('SELECT COALESCE(SUM(held_units),0) AS units FROM ai_points_grants').get().units;
       if(pending!==held)errors.push({error:'reservation-balance-mismatch'});

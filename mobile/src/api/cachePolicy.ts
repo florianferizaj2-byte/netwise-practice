@@ -100,6 +100,7 @@ export function persistentStudyData(
     'favorite',
     'source',
   ];
+  if(new URLSearchParams(key.split('?')[1]).get('feedback')==='instant')fields.push('answer','analysis','expectedAnswer');
   const questions = rows.map((item) =>
     Object.fromEntries(
       fields

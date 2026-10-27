@@ -48,11 +48,11 @@ export function PointsBilling(){
         ['已登记销售收入',yuan(finance.revenueMicros)],['AI 已发生成本',yuan(finance.aiSpentMicros)],
         ['未用积分履约预留',yuan(finance.pointLiabilityMicros)],['参考预算余量（不拦截调用）',yuan(finance.availableCostMicros)],
       ].map(([label,value])=><div key={label}><span>{label}</span><strong>{value}</strong></div>)}</div>
-      <Panel title="扣费与成本核算" description="新调用按用户可用积分准入，不依赖登记收入，也不设平台每日成本上限。模型价格与用量仍需有效且可核对。">
+      <Panel title="扣费与成本核算" description="新调用按用户正余额准入，按实际用量结算后允许扣成负数；负数或零余额暂停新付费调用，不依赖登记收入，也不设平台每日成本上限。模型价格与用量仍需有效且可核对。">
         <p>参考核算包含已记录 AI 成本 {yuan(finance.aiSpentMicros)}、调用中的预留 {yuan(finance.aiHeldMicros)}、未用积分未来成本 {yuan(finance.pointLiabilityMicros)} 和其他已登记支出 {yuan(finance.otherExpenseMicros)}。</p>
         <p>会员码与赠送积分不自动当作收入。销售收入按客户实际支付、未扣手续费的金额登记；支付手续费和经营支出分别登记，未登记费用不代表零成本。</p>
         {data.history.unknownCostCalls>0&&<p role="status">历史有 {data.history.unknownCostCalls} 次调用成本未知，未计作零成本，因此历史实际毛利尚不能确认。</p>}
-        {finance.overBudgetMicros>0&&<p role="alert">已登记费用或积分承诺超出预算 {yuan(finance.overBudgetMicros)}，这只是收支提示，不会因此阻止有足额积分的用户调用 AI。</p>}
+        {finance.overBudgetMicros>0&&<p role="alert">已登记费用或积分承诺超出预算 {yuan(finance.overBudgetMicros)}，这只是收支提示，不会因此阻止有正余额的用户调用 AI。</p>}
         {!data.audit.passed&&<p role="alert">积分账本核对未通过，请先核对记录。</p>}
       </Panel>
     </>}
@@ -60,10 +60,11 @@ export function PointsBilling(){
       <Table rowKey="id" rows={configuration.costForecast.plans} columns={[
         {key:'name',label:'套餐 / 售价',render:row=>`${row.name} / ¥ ${(row.priceCents/100).toFixed(2)}`},
         {key:'dailyPoints',label:'每日签到积分'},
-        {key:'cost30',label:'领取 30 / 31 次的 AI 成本上界',render:row=>row.scenarios.map(scenario=>yuan(scenario.aiCostCeilingMicros)).join(' / ')},
+        {key:'cost30',label:'已发积分对应成本（30 / 31 次）',render:row=>row.scenarios.map(scenario=>yuan(scenario.aiCostCeilingMicros)).join(' / ')},
         {key:'margin',label:'再预留 5% 后剩余比例（30 / 31 次）',render:row=>row.scenarios.map(scenario=>(scenario.remainingMarginBps/100).toFixed(2)+'%').join(' / ')},
       ]}/>
-      <p>免费用户每日 {configuration.costForecast.free.dailyPoints} 积分，30 次签到全部用完对应 AI 成本上界 {yuan(configuration.costForecast.free.cost30DaysMicros)}。积分按成本的 {configuration.costForecast.serviceMultiplier} 倍面值结算；100 积分面值为 1 元。</p>
+      <p>允许单笔结算透支；本表不包括未收回欠分风险，不代表实际费用上限。当前待抵扣欠分 {formatPoints(configuration.costForecast.outstandingDebtUnits||0)} 积分。</p>
+      <p>免费用户每日 {configuration.costForecast.free.dailyPoints} 积分，30 次签到全部用完对应 AI 成本参考 {yuan(configuration.costForecast.free.cost30DaysMicros)}。积分按成本的 {configuration.costForecast.serviceMultiplier} 倍面值结算；100 积分面值为 1 元。</p>
       <p>{configuration.costForecast.notice}</p>
     </Panel>}
     <CheckInPolicyPanel/>

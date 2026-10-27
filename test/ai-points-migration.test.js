@@ -16,7 +16,7 @@ test('schema migration backs up every byte of original rows and preserves existi
   db.prepare('INSERT INTO attempts VALUES(?,?)').run('attempt','{"unchanged":true}');
   const names=['users','questions','user_usage','attempts'],before=tableFingerprints(db,names);db.close();
   const result=await migrateAiPoints({dataDir:directory,backupDir:path.join(directory,'backups')});
-  assert.equal(result.ok,true);assert.equal(result.pointsTables.length,11);for(const name of ['ai_points_check_in_policy','ai_points_check_ins','ai_points_check_in_policy_changes'])assert(result.pointsTables.includes(name));assert.equal(result.legacyUnknownCostCalls,1);
+  assert.equal(result.ok,true);assert.equal(result.pointsTables.length,12);for(const name of ['ai_points_check_in_policy','ai_points_check_ins','ai_points_check_in_policy_changes','ai_points_debts'])assert(result.pointsTables.includes(name));assert.equal(result.legacyUnknownCostCalls,1);
   assert.equal(result.finance.revenueMicros,0);assert.equal(result.finance.outstandingPointUnits,0);
   db=new DatabaseSync(file);assert.deepEqual(tableFingerprints(db,names),before);
   const points=createPointsStore(db);points.recordFinance({key:'fixture',kind:'revenue',amountMicros:1000000,reference:'synthetic-migration-receipt',createdBy:'fixture'});points.grant({userId:'fixture',sourceKey:'paid',units:100000,requireFunded:true});

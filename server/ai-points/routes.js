@@ -23,7 +23,7 @@ export function registerPointsRoutes({route,store,requestUserId,requireAdmin}) {
     const query=z.object(pagination).strict().parse(req.query);
     return {entries:store.points.journal(requestUserId(req),query),...query};
   });
-  route('get','/api/account/points/operations',req=>userPointOperations(store,requestUserId(req),z.object(pagination).strict().parse(req.query)));
+  route('get','/api/account/points/operations',req=>userPointOperations(store,requestUserId(req),z.object({...pagination,state:z.enum(['all','pending','settled','refunded']).optional()}).strict().parse(req.query)));
   route('get','/api/account/points/receipt',req=>{
     const query=z.object({requestId:z.string().uuid().optional(),jobId:z.string().uuid().optional()})
       .strict().refine(value=>!!value.requestId!==!!value.jobId,'提供一个请求或任务编号').parse(req.query);
@@ -33,7 +33,7 @@ export function registerPointsRoutes({route,store,requestUserId,requireAdmin}) {
   const audit=(req,action,id,data)=>store.audit(req.user.id,action,'ai_points',id,data);
   admin('get','/usage',req=>pointsUsageReport(store,z.object({...pagination,days:z.coerce.number().int().min(1).max(365).default(30),search:z.string().trim().max(100).default('')}).strict().parse(req.query)));
   admin('get','/users/:id',req=>userPointOperations(store,req.params.id,z.object(pagination).strict().parse(req.query)));
-  admin('get','/configuration',()=>({plans:accountPointsPlans(store),checkInPolicy:readCheckInPolicy(store),costForecast:membershipCostForecast(store),billingPolicy:{admission:'wallet-only',dailyCostLimitMicros:null},officialRateCards,customRateCards:store.db.prepare('SELECT data,paused FROM ai_points_rates ORDER BY provider,model').all().map(row=>({...JSON.parse(row.data),paused:!!row.paused})),finance:store.points.finance()}));
+  admin('get','/configuration',()=>({plans:accountPointsPlans(store),checkInPolicy:readCheckInPolicy(store),costForecast:membershipCostForecast(store),billingPolicy:{admission:'positive-wallet-overdraft',allowNegativeSettlement:true,dailyCostLimitMicros:null},officialRateCards,customRateCards:store.db.prepare('SELECT data,paused FROM ai_points_rates ORDER BY provider,model').all().map(row=>({...JSON.parse(row.data),paused:!!row.paused})),finance:store.points.finance()}));
   admin('get','/check-in-policy',()=>({policy:readCheckInPolicy(store)}));
   admin('put','/check-in-policy',req=>store.points.transaction(()=>{
     const result=updateCheckInPolicy(store,req.body,req.user.id);

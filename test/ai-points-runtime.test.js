@@ -134,3 +134,13 @@ test('non-stop provider finish reasons are failures, not billable successful ans
     assert.equal(f.points.finance().aiSpentMicros,100);assert.equal(f.points.finance().unknownCostCalls,0);
   }
 });
+
+
+test('real provider admits one sign-in point instead of requiring its full conservative hold and blocks the next call after debt',async t=>{
+  const f=fixture(t,{funded:false,credits:false,reply:()=>new Response(JSON.stringify({choices:[{message:{content:'按实际用量返回的合成解析'},finish_reason:'stop'}],usage:{prompt_tokens:1000,completion_tokens:500,total_tokens:1500}}),{headers:{'Content-Type':'application/json'}})});
+  f.points.grant({userId:'learner',sourceKey:'one-sign-in-point',units:1000});
+  await f.provider.call([{role:'user',content:'explain'}],settings,{userId:'learner',taskType:'question-explanation'});
+  assert.equal(f.requests.length,1);assert.equal(f.points.wallet('learner').availableUnits,-1400);assert.equal(f.points.wallet('learner').heldUnits,0);
+  await assert.rejects(f.provider.call([{role:'user',content:'again'}],settings,{userId:'learner',taskType:'question-explanation'}),{code:'AI_POINTS_INSUFFICIENT'});
+  assert.equal(f.requests.length,1);assert.equal(f.points.audit().passed,true);
+});

@@ -176,9 +176,10 @@ function Metric({ value, label, tone = 'primary' }: { value: string; label: stri
   );
 }
 
-export function WrongScreen({ onNavigate, preview = false, user, certificates, onOpenCertificatePicker }: Props) {
-  const s = useThemedStyles(styles, iosStyles.overview),
-    { colors } = useTheme();
+export function WrongScreen({ onNavigate, preview = false, user }: Props) {
+  const { colors } = useTheme(), {width,fontScale}=useWindowDimensions();
+  const s=useMemo(()=>wrongStyles(colors),[colors]);
+  const stacked=fontScale>1.2,stackKnowledge=width<350||stacked;
   const query = useCachedQuery("/wrong", mobileApi.wrong, !preview);
   const questions = preview ? demoWrong : query.data || [];
   const [selected, setSelected] = useState<string | null>(null);
@@ -258,192 +259,61 @@ export function WrongScreen({ onNavigate, preview = false, user, certificates, o
       practiceQuestionId: question?.id,
       practiceQuestionIds: filtered.map((item) => item.id),
     });
-  return (
-    <FlatList
-      data={filtered}
-      keyExtractor={(item) => item.id}
-      contentContainerStyle={s.page}
-      showsVerticalScrollIndicator={false}
-      initialNumToRender={10}
-      maxToRenderPerBatch={10}
-      windowSize={7}
-      onRefresh={preview ? undefined : query.refresh}
-      refreshing={!!(query.fetching && query.data)}
-      ListHeaderComponent={
-        <>
-          <AndroidPageHeader title="错题" user={user} certificates={certificates} onOpenCertificatePicker={onOpenCertificatePicker}/>
-          <Text style={s.subtitle}>找到薄弱点，把易错题逐个攻克</Text>
-          <View style={s.metrics}>
-            <Metric value={String(questions.length)} label="待巩固题目" />
-            <Metric value={String(questions.filter(q=>(q.wrongCount||1)>=2).length)} label="反复出错" />
-            <Metric value={String(groups.length)} label="涉及知识点" />
-          </View>
-          {!!query.error && (
-            <Text style={s.error}>
-              错题暂未同步，请下拉重试。
-              {questions.length ? "当前显示上次记录。" : ""}
-            </Text>
-          )}
-          {!!groups.length && (
-            <>
-              <View style={s.sectionHead}>
-                <Text style={s.sectionTitle}>优先巩固</Text>
-                <Text style={s.rowMeta}>点击定位错题</Text>
-              </View>
-              {(expanded ? groups : groups.slice(0, 3)).map((group, index) => (
-                <AnimatedPressable
-                  key={group.key}
-                  accessibilityRole="button"
-                  accessibilityState={{ selected: selected === group.key }}
-                  onPress={() =>
-                    setSelected(selected === group.key ? null : group.key)
-                  }
-                  style={[s.weakRow, selected === group.key && s.selectedWeak]}
-                >
-                  <View style={s.weakLine}>
-                    <Text style={s.rank}>
-                      {String(index + 1).padStart(2, "0")}
-                    </Text>
-                    <View style={s.flex}>
-                      <Text style={s.rowTitle} numberOfLines={2}>
-                        {group.name}
-                      </Text>
-                      <Text style={s.rowMeta} numberOfLines={1}>
-                        {group.chapter}
-                        {group.section ? ` · ${group.section}` : ""}
-                      </Text>
-                    </View>
-                    <Text style={s.weakCount}>{group.count} 题</Text>
-                  </View>
-                  <AnimatedProgressBar
-                    value={
-                      (group.mistakes / Math.max(1, groups[0].mistakes)) * 100
-                    }
-                    color={colors.gold}
-                    trackColor={colors.border}
-                  />
-                  <Text style={s.rowMeta}>
-                    累计错误 {group.mistakes} 次
-                    {selected === group.key ? " · 已筛选" : ""}
-                  </Text>
-                </AnimatedPressable>
-              ))}
-              {groups.length > 3 && (
-                <AnimatedPressable
-                  accessibilityRole="button"
-                  onPress={() => setExpanded(!expanded)}
-                  style={s.expand}
-                >
-                  <Text style={s.link}>
-                    {expanded
-                      ? "收起知识点"
-                      : `查看全部 ${groups.length} 个知识点`}
-                  </Text>
-                </AnimatedPressable>
-              )}
-              <Text style={s.footnote}>
-                依据错题数量和重复错误排序。到期需复习 {dueCount} 题。
-              </Text>
-              <AnimatedPressable
-                accessibilityRole="button"
-                disabled={!filtered.length}
-                onPress={() => review()}
-                style={[s.primary, !filtered.length && s.disabled]}
-              >
-                <Text style={s.primaryText}>
-                  {selectedGroup ? "复习所选知识点" : "开始错题复习"} ·{" "}
-                  {filtered.length} 题
-                </Text>
-                <AppIcon style={s.primaryArrow}>→</AppIcon>
-              </AnimatedPressable>
-              <View style={s.sectionHead}>
-                <Text style={s.sectionTitle}>错题清单</Text>
-                {selectedGroup && (
-                  <AnimatedPressable
-                    accessibilityRole="button"
-                    onPress={() => setSelected(null)}
-                  >
-                    <Text style={s.link}>清除知识点筛选 ×</Text>
-                  </AnimatedPressable>
-                )}
-              </View>
-              <View style={s.filterRow}>
-                {[
-                  { value: false, label: "全部错题" },
-                  { value: true, label: "反复出错" },
-                ].map((filter) => (
-                  <AnimatedPressable
-                    key={filter.label}
-                    accessibilityRole="button"
-                    accessibilityState={{
-                      selected: repeatedOnly === filter.value,
-                    }}
-                    onPress={() => setRepeatedOnly(filter.value)}
-                    style={[
-                      s.filter,
-                      repeatedOnly === filter.value && s.filterActive,
-                    ]}
-                  >
-                    <Text
-                      style={[
-                        s.filterText,
-                        repeatedOnly === filter.value && s.filterTextActive,
-                      ]}
-                    >
-                      {filter.label}
-                    </Text>
-                  </AnimatedPressable>
-                ))}
-              </View>
-            </>
-          )}
-        </>
-      }
-      renderItem={({ item, index }) => (
-        <AnimatedPressable
-          accessibilityRole="button"
-          onPress={() => review(item)}
-          style={s.questionRow}
-        >
-          
-          <View style={s.flex}>
-            <View style={s.questionTags}><Text style={s.typeTag}>{item.type==='multiple_choice'?'多选':item.type==='true_false'?'判断':item.type==='single_choice'?'单选':'练习题'}</Text><Text style={s.wrongTag}>错 {item.wrongCount||1} 次</Text></View>
-            <Text style={s.questionTitle} numberOfLines={2}>
-              {item.question}
-            </Text>
-            <Text style={s.rowMeta}>
-              {item.knowledgePoint || item.chapter || "综合知识"} · 错{" "}
-              {item.wrongCount || 1} 次
-            </Text>
-          </View>
-          <AppIcon style={s.chevron}>›</AppIcon>
-        </AnimatedPressable>
-      )}
-      ListEmptyComponent={
-        query.loading && !preview ? (
-          <ActivityIndicator color={colors.brand} style={s.emptyLoader} />
-        ) : (
-          <View style={s.emptyBlock}>
-            <Text style={s.emptyTitle}>
-              {query.error
-                ? "暂时无法读取错题"
-                : questions.length
-                  ? "当前筛选下没有错题"
-                  : "这里会记录你的薄弱点"}
-            </Text>
-            <Text style={s.empty}>
-              {query.error
-                ? "下拉页面重新同步。"
-                : questions.length
-                  ? "切换筛选，继续复习其他知识点。"
-                  : "完成练习后，答错的题会自动归集到这里。"}
-            </Text>
-          </View>
-        )
-      }
-    />
-  );
+  const hasData=preview||query.data!==undefined;
+  useEffect(()=>{setSelected(null);setExpanded(false);setRepeatedOnly(false);},[user?.id,user?.certificateId]);
+  return <FlatList
+    testID="android-wrong-screen"
+    data={filtered} keyExtractor={item=>item.id} contentContainerStyle={s.page}
+    showsVerticalScrollIndicator={false} initialNumToRender={10} maxToRenderPerBatch={10} windowSize={7}
+    onRefresh={preview?undefined:query.refresh} refreshing={!!(query.fetching&&query.data)}
+    ListHeaderComponent={<>
+      <View style={s.header}><View style={s.headerIcon}><AppIcon name="wrong" size={23} color={androidAccent(colors,'review').ink}/></View><View style={s.headerCopy}><Text accessibilityRole="header" style={s.title}>错题</Text><Text style={s.subtitle}>找到薄弱点，把易错题逐个攻克</Text></View></View>
+      <View testID="wrong-metrics" style={[s.metrics,stacked&&s.metricsStack]}>
+        {[{value:questions.length,label:'待巩固题目'},{value:questions.filter(q=>(q.wrongCount||1)>=2).length,label:'反复出错'},{value:groups.length,label:'涉及知识点'}].map((item,index)=><View key={item.label} style={[s.metric,index>0&&(stacked?s.metricTopBorder:s.metricLeftBorder),stacked&&s.metricStack]}><Text testID={'wrong-metric-'+index} style={s.metricValue}>{hasData?item.value:'—'}</Text><Text style={s.metricLabel}>{item.label}</Text></View>)}
+      </View>
+      {!!query.error&&<View style={s.errorBox}><Text accessibilityRole="alert" style={s.error}>错题暂未同步。{questions.length?'当前显示上次记录，可继续复习。':'请重试或下拉刷新。'}</Text><AnimatedPressable accessibilityRole="button" accessibilityLabel="重新同步错题" onPress={()=>void query.refresh()} style={s.retry}><AppIcon name="refresh" size={18} color={colors.brand}/><Text style={s.link}>重试</Text></AnimatedPressable></View>}
+      {!!groups.length&&<>
+        <View style={s.sectionHead}><Text accessibilityRole="header" style={s.sectionTitle}>优先巩固</Text>{groups.length>2?<AnimatedPressable accessibilityRole="button" accessibilityLabel={expanded?'收起知识点':`查看全部 ${groups.length} 个知识点`} accessibilityState={{expanded}} onPress={()=>setExpanded(!expanded)} style={s.expand}><Text style={s.link}>{expanded?'收起':`全部 ${groups.length} 项`}</Text><AppIcon name={expanded?'chevron-up':'chevron-down'} size={17} color={colors.brand}/></AnimatedPressable>:<Text style={s.meta}>点击定位错题</Text>}</View>
+        <View testID="wrong-knowledge-grid" style={[s.knowledgeGrid,stackKnowledge&&s.knowledgeStack]}>
+          {(expanded?groups:groups.slice(0,2)).map((group,index)=>{
+            const tone=androidAccent(colors,index===0?'review':'member'),isSelected=selected===group.key;
+            return <AnimatedPressable key={group.key} accessibilityRole="button" accessibilityLabel={`${group.name}，${group.count}题，累计错误${group.mistakes}次`} accessibilityState={{selected:isSelected}} onPress={()=>setSelected(isSelected?null:group.key)} style={[s.knowledgeCard,stackKnowledge&&s.knowledgeCardWide,isSelected&&s.selectedKnowledge]}>
+              <View style={[s.rankBadge,{backgroundColor:tone.soft}]}><Text style={[s.rank,{color:tone.ink}]}>{String(index+1).padStart(2,'0')}</Text></View>
+              <View style={s.knowledgeCopy}><Text style={s.knowledgeTitle}>{group.name}</Text><Text style={s.meta}>{group.count} 题 · 错 {group.mistakes} 次</Text></View>
+            </AnimatedPressable>;
+          })}
+        </View>
+        <View style={s.dueRow}><AppIcon name="clock" size={17} color={colors.textMuted}/><Text testID="wrong-due-count" style={s.meta}>到期需复习 {dueCount} 题</Text></View>
+        <AnimatedPressable accessibilityRole="button" disabled={!filtered.length} onPress={()=>review()} style={[s.primary,!filtered.length&&s.disabled]}><Text style={s.primaryText}>{selectedGroup?'复习所选知识点':'开始错题复习'} · {filtered.length} 题</Text><AppIcon name="chevron-right" size={19} color={colors.white}/></AnimatedPressable>
+        <View style={[s.listHeading,stacked&&s.listHeadingStack]}><Text accessibilityRole="header" style={s.sectionTitle}>错题清单</Text><View style={s.filters}>
+          {[{value:false,label:'全部错题'},{value:true,label:'反复出错'}].map(filter=><AnimatedPressable key={filter.label} accessibilityRole="button" accessibilityState={{selected:repeatedOnly===filter.value}} onPress={()=>setRepeatedOnly(filter.value)} style={[s.filter,repeatedOnly===filter.value&&s.filterActive]}><Text style={[s.filterText,repeatedOnly===filter.value&&s.filterTextActive]}>{filter.label}</Text></AnimatedPressable>)}
+        </View></View>
+        {selectedGroup&&<View style={s.selectionRow}><Text style={s.selectedLabel}>已筛选：{selectedGroup.name}</Text><AnimatedPressable accessibilityRole="button" accessibilityLabel="清除知识点筛选" onPress={()=>setSelected(null)} style={s.clearFilter}><Text style={s.link}>清除筛选</Text><AppIcon name="close" size={16} color={colors.brand}/></AnimatedPressable></View>}
+      </>}
+    </>}
+    renderItem={({item})=><AnimatedPressable accessibilityRole="button" accessibilityLabel={`${item.question}，已错${item.wrongCount||1}次，进入复习`} onPress={()=>review(item)} style={s.questionCard}>
+      <View style={s.questionTags}><Text style={s.typeTag}>{item.type==='multiple_choice'?'多选题':item.type==='true_false'?'判断题':item.type==='single_choice'?'单选题':'练习题'}</Text><Text style={[s.wrongTag,(item.wrongCount||1)<3&&s.wrongTagMild]}>已错 {item.wrongCount||1} 次</Text></View>
+      <View style={s.questionLine}><Text testID="wrong-question-stem" style={s.questionTitle}>{item.question}</Text><AppIcon name="chevron-right" size={19} color={colors.textMuted}/></View>
+      <Text style={s.meta}>{[...new Set([item.chapter,item.knowledgePoint].filter(Boolean))].join(' · ')||'综合知识'}</Text>
+    </AnimatedPressable>}
+    ListEmptyComponent={query.loading&&!preview?<ActivityIndicator color={colors.brand} style={s.loader}/>:<View style={s.emptyBlock}><View style={s.emptyIcon}><AppIcon name={query.error?'refresh':'wrong'} size={28} color={colors.brand}/></View><Text style={s.emptyTitle}>{query.error?'暂时无法读取错题':questions.length?'当前筛选下没有错题':'这里会记录你的薄弱点'}</Text><Text style={s.emptyText}>{query.error?'点击重试，或下拉页面重新同步。':questions.length?'切换筛选，继续复习其他知识点。':'完成练习后，答错的题会自动归集到这里。'}</Text></View>}
+  />;
 }
+
+// New compact screen uses explicit optical sizes; do not apply the legacy
+// font-size uplift. System font scaling remains enabled on every Text element.
+const wrongFont={fontFamily:'KaojiangSans',includeFontPadding:false};
+const wrongStyles=(c:ThemeColors)=>StyleSheet.create({
+  page:{paddingHorizontal:16,paddingTop:8,paddingBottom:24,backgroundColor:c.background},
+  header:{flexDirection:'row',alignItems:'center',gap:10,paddingVertical:8,marginBottom:8},headerIcon:{width:36,height:36,borderRadius:12,alignItems:'center',justifyContent:'center',backgroundColor:androidAccent(c,'review').soft,flexShrink:0},headerCopy:{flex:1,minWidth:0,gap:2},title:{...wrongFont,color:c.text,fontSize:22,lineHeight:30,fontWeight:'700'},subtitle:{...wrongFont,color:c.textMuted,fontSize:14,lineHeight:22},
+  metrics:{backgroundColor:c.surface,borderRadius:20,paddingVertical:12,flexDirection:'row',minHeight:76,marginBottom:14},metricsStack:{flexDirection:'column',paddingHorizontal:16,paddingVertical:4},metric:{flex:1,minWidth:0,alignItems:'center',justifyContent:'center',gap:2,paddingHorizontal:4},metricStack:{flex:0,flexDirection:'row',justifyContent:'space-between',paddingVertical:10,gap:12},metricLeftBorder:{borderLeftWidth:StyleSheet.hairlineWidth,borderLeftColor:c.border},metricTopBorder:{borderTopWidth:StyleSheet.hairlineWidth,borderTopColor:c.border},metricValue:{...wrongFont,color:c.text,fontSize:28,lineHeight:36,fontWeight:'700',fontVariant:['tabular-nums']},metricLabel:{...wrongFont,color:c.textMuted,fontSize:14,lineHeight:22,flexShrink:1},
+  sectionHead:{flexDirection:'row',alignItems:'center',justifyContent:'space-between',flexWrap:'wrap',gap:8,marginBottom:8},sectionTitle:{...wrongFont,color:c.text,fontSize:18,lineHeight:27,fontWeight:'700'},meta:{...wrongFont,color:c.textMuted,fontSize:14,lineHeight:22,flexShrink:1},
+  knowledgeGrid:{flexDirection:'row',flexWrap:'wrap',gap:10},knowledgeStack:{flexDirection:'column'},knowledgeCard:{flexGrow:1,flexBasis:'46%',minWidth:0,minHeight:82,backgroundColor:c.surface,borderRadius:18,padding:12,flexDirection:'row',alignItems:'center',gap:8,borderWidth:1,borderColor:'transparent'},knowledgeCardWide:{flexBasis:'auto'},selectedKnowledge:{borderColor:c.brand,backgroundColor:c.brandSoft},rankBadge:{width:28,minHeight:34,paddingVertical:5,borderRadius:10,alignItems:'center',justifyContent:'center',flexShrink:0},rank:{...wrongFont,fontSize:15,lineHeight:23,fontWeight:'700',fontVariant:['tabular-nums']},knowledgeCopy:{flex:1,minWidth:0,gap:3},knowledgeTitle:{...wrongFont,color:c.text,fontSize:16,lineHeight:24,fontWeight:'500'},
+  expand:{minHeight:48,flexDirection:'row',alignItems:'center',justifyContent:'center',gap:6,paddingHorizontal:8},link:{...wrongFont,color:c.brand,fontSize:14,lineHeight:22,fontWeight:'500',flexShrink:1},dueRow:{minHeight:32,flexDirection:'row',alignItems:'center',gap:7,marginTop:6,marginBottom:6},primary:{minHeight:48,borderRadius:16,backgroundColor:c.action,paddingVertical:12,paddingHorizontal:16,flexDirection:'row',alignItems:'center',gap:8},primaryText:{...wrongFont,color:c.white,fontSize:16,lineHeight:24,fontWeight:'500',flex:1,textAlign:'center'},disabled:{opacity:0.5},
+  listHeading:{flexDirection:'row',alignItems:'center',justifyContent:'space-between',gap:8,marginTop:14,marginBottom:8},listHeadingStack:{flexDirection:'column',alignItems:'stretch'},filters:{flexDirection:'row',padding:2,backgroundColor:c.surface,borderRadius:14,borderColor:c.border,borderWidth:StyleSheet.hairlineWidth},filter:{minHeight:48,justifyContent:'center',alignItems:'center',paddingHorizontal:10,paddingVertical:8,borderRadius:12},filterActive:{backgroundColor:c.brandSoft},filterText:{...wrongFont,color:c.textMuted,fontSize:14,lineHeight:22,fontWeight:'400',textAlign:'center'},filterTextActive:{color:c.brand,fontWeight:'500'},selectionRow:{flexDirection:'row',alignItems:'center',justifyContent:'space-between',gap:8,marginBottom:6},selectedLabel:{...wrongFont,color:c.textMuted,fontSize:14,lineHeight:22,flex:1},clearFilter:{minHeight:48,flexDirection:'row',alignItems:'center',gap:4,paddingHorizontal:4},
+  questionCard:{backgroundColor:c.surface,borderRadius:20,paddingHorizontal:16,paddingVertical:12,marginBottom:10,gap:8},questionTags:{flexDirection:'row',flexWrap:'wrap',gap:7,alignItems:'center'},typeTag:{...wrongFont,color:c.brand,backgroundColor:c.brandSoft,fontSize:14,lineHeight:21,fontWeight:'500',paddingHorizontal:8,paddingVertical:3,borderRadius:8},wrongTag:{...wrongFont,color:androidAccent(c,'review').ink,backgroundColor:androidAccent(c,'review').soft,fontSize:14,lineHeight:21,paddingHorizontal:8,paddingVertical:3,borderRadius:8},wrongTagMild:{color:androidAccent(c,'member').ink,backgroundColor:androidAccent(c,'member').soft},questionLine:{flexDirection:'row',alignItems:'center',gap:10},questionTitle:{...wrongFont,color:c.text,fontSize:17,lineHeight:25,fontWeight:'500',flex:1,minWidth:0},
+  errorBox:{borderRadius:16,backgroundColor:c.warningSoft,paddingHorizontal:12,paddingTop:10,marginBottom:12},error:{...wrongFont,color:c.warning,fontSize:14,lineHeight:22},retry:{minHeight:48,flexDirection:'row',gap:7,alignItems:'center'},loader:{marginTop:32},emptyBlock:{paddingVertical:28,alignItems:'center',gap:12},emptyIcon:{width:56,height:56,borderRadius:18,backgroundColor:c.brandSoft,alignItems:'center',justifyContent:'center'},emptyTitle:{...wrongFont,color:c.text,fontSize:18,lineHeight:27,fontWeight:'500',textAlign:'center'},emptyText:{...wrongFont,color:c.textMuted,fontSize:15,lineHeight:24,textAlign:'center'},
+});
 
 const baseStyles = (c: ThemeColors) =>
   StyleSheet.create({

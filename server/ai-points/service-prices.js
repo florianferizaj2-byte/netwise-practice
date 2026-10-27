@@ -48,12 +48,12 @@ export function modelPointExamples(card) {
 
 export function membershipCostForecast(store) {
   const plans=accountPointsPlans(store),checkIn=readCheckInPolicy(store),reserveBps=SERVICE_MARGIN_BPS-TARGET_MARGIN_BPS;
-  return {basis:'all-issued-points-spent',pointsPerCny:100,serviceMultiplier:10000/(10000-SERVICE_MARGIN_BPS),operatingReserveBps:reserveBps,
+  return {basis:'all-issued-points-spent',allowsOverdraft:true,excludesOverdraftRisk:true,outstandingDebtUnits:store.db.prepare('SELECT COALESCE(SUM(units),0) AS n FROM ai_points_debts').get().n,pointsPerCny:100,serviceMultiplier:10000/(10000-SERVICE_MARGIN_BPS),operatingReserveBps:reserveBps,
     free:{dailyPoints:checkIn.dailyPoints.free,cost30DaysMicros:pointLiabilityMicros(checkIn.dailyPoints.free*30*POINT_SCALE)},
     plans:Object.entries(plans).map(([id,plan])=>({id,name:plan.name,priceCents:plan.priceCents,dailyPoints:plan.dailyPoints,
       scenarios:[30,31].map(claimDays=>{const revenueMicros=plan.priceCents*10000,aiCostCeilingMicros=pointLiabilityMicros(plan.dailyPoints*claimDays*POINT_SCALE),reserveMicros=Math.ceil(revenueMicros*reserveBps/10000);
         return {claimDays,aiCostCeilingMicros,operatingReserveMicros:reserveMicros,remainingMarginBps:Math.round((revenueMicros-aiCostCeilingMicros-reserveMicros)*10000/revenueMicros)};})})),
-    notice:'情景测算，不是已实现利润；按全部签到积分用完计算。30天会员周期可能跨31个自然日，另列31次签到。服务器、手续费、税费、退款和异常失败成本以实际账单另行核对。'};
+    notice:'情景测算，不是已实现利润，也不是允许透支后的总费用上限；未收回欠分存在额外成本风险，欠分不计作现金收入。按全部签到积分用完计算。30天会员周期可能跨31个自然日，另列31次签到。服务器、手续费、税费、退款和异常失败成本以实际账单另行核对。'};
 }
 function priceMetadata(card) {
   return {priceBand:card.priceBand||'fixed',priceBandLabel:card.priceBand==='peak'?'高峰时段':card.priceBand==='off-peak'?'空闲时段':'管理员固定费率',

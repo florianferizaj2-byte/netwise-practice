@@ -201,7 +201,7 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
         '/wrong',
         '/favorites',
         '/questions?',
-      ]);
+      ],key=>path!=='/attempts'||!key.startsWith('/questions?')||new URLSearchParams(key.split('?')[1]).get('feedback')!=='instant');
     } else if (path.endsWith('/submit') || path === '/ai/train') {
       studyCache.invalidate([
         '/practice/catalog',
@@ -390,6 +390,7 @@ export type Question = {
 };
 
 export type QuestionFilters = {
+  feedback?: 'instant';
   chapter?: string;
   knowledgeSection?: string;
   knowledgePoint?: string;
@@ -839,16 +840,13 @@ export const mobileApi = {
     limit?: number,
     offset = 0,
     random = false,
-    filters?: {
-      chapter?: string;
-      knowledgeSection?: string;
-      knowledgePoint?: string;
-    },
+    filters?: QuestionFilters,
   ) {
     const params = new URLSearchParams({ bankOnly: '1' });
     if (limit != null) params.set('limit', String(limit));
     if (offset) params.set('offset', String(offset));
     if (random) params.set('random', '1');
+    if (filters?.feedback) params.set('feedback',filters.feedback);
     if (filters?.chapter) params.set('chapter', filters.chapter);
     if (filters?.knowledgeSection)
       params.set('knowledgeSection', filters.knowledgeSection);
@@ -880,8 +878,12 @@ export const mobileApi = {
     return cachedRequest<PracticeCatalogSummaryResponse>('/practice/catalog?summary=1', force);
   },
 
-  favorites(force = false) {
-    return cachedRequest<Question[]>('/favorites', force);
+  favorites(force = false,feedback = false) {
+    return cachedRequest<Question[]>('/favorites'+(feedback?'?feedback=instant':''), force);
+  },
+
+  practiceFeedback(questionId:string) {
+    return studyCache.read<Pick<Question,'answer'|'analysis'|'expectedAnswer'>>('/practice-feedback/'+encodeURIComponent(questionId),(signal)=>request(`/questions/${encodeURIComponent(questionId)}/reveal`,{method:'POST',signal}));
   },
 
   wrong(force = false) {
@@ -933,6 +935,7 @@ export const mobileApi = {
     selected: string[],
     timeMs: number,
     response?: string,
+    clientAttemptId?: string,
   ) {
     return request<AttemptResponse>('/attempts', {
       method: 'POST',
@@ -941,6 +944,7 @@ export const mobileApi = {
         selected,
         timeMs,
         ...(response ? { response } : {}),
+        ...(clientAttemptId ? {clientAttemptId} : {}),
       }),
     });
   },
@@ -1120,8 +1124,8 @@ export const mobileApi = {
     return `${API_BASE_URL.replace(/\/api\/?$/, '')}${imageUrl}`;
   },
 
-  accountEntitlements() {
-    return request<AccountEntitlementsResponse>('/account/entitlements');
+  accountEntitlements(signal?: AbortSignal) {
+    return request<AccountEntitlementsResponse>('/account/entitlements', { signal });
   },
   pointOperations() {
     return request<{rows:PointOperation[]}>('/account/points/operations?limit=20');

@@ -1,0 +1,20 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import {createStore} from '../server/store.js';
+import {createApp} from '../server/index.js';
+import {completeFixtureProfile} from './helpers/mobile-profile.js';
+test('only opted-in owned practice responses preload answers; normal questions and live exams remain unrevealed',async t=>{
+ const parent=path.resolve('tmp'),dir=fs.mkdtempSync(path.join(parent,'instant-feedback-api-')),store=createStore(dir);const user=store.register('instant_learner','fixture-password-123');completeFixtureProfile(store,user);store.selectCertificate(user.id,'network-engineer');const token=store.createAuthSession(user.id),chapter='即时判分测试专用';
+ for(let i=0;i<30;i++)store.addQ({id:'instant-'+i,type:'single_choice',question:'测试二进制题 '+i,options:{A:'2',B:'3'},answer:['A'],analysis:'按位权计算为 2。',chapter,knowledgePoint:'进制',certificates:['network-engineer']});
+ store.addQ({id:'other-certificate',type:'single_choice',question:'另一证书题',options:{A:'1',B:'2'},answer:['B'],analysis:'不属于当前证书',chapter,knowledgePoint:'隔离',certificates:['sichuan-upgrading-computer']});
+ const app=await createApp({store,withFrontend:false,authRequired:true,accountSecurity:{enabled:false},announcementFile:path.join(dir,'none.json')});const server=app.listen(0,'127.0.0.1');await new Promise(r=>server.once('listening',r));t.after(async()=>{await app.locals.stop();server.closeAllConnections();await new Promise(r=>server.close(r));store.db.close();assert.equal(path.dirname(dir),parent);assert.ok(path.basename(dir).startsWith('instant-feedback-api-'));fs.rmSync(dir,{recursive:true,force:true});});
+ const base=`http://127.0.0.1:${server.address().port}/api`,headers={Authorization:'Bearer '+token,'Content-Type':'application/json'},url='/questions?page=1&bankOnly=1&chapter='+encodeURIComponent(chapter);
+ const plain=await fetch(base+url,{headers}).then(r=>r.json());assert.equal(plain.items.length,30);assert.ok(plain.items.every(q=>q.answer===undefined&&q.analysis===undefined));
+ const instant=await fetch(base+url+'&feedback=instant',{headers}).then(r=>r.json());assert.equal(instant.items.length,30);assert.ok(instant.items.every(q=>q.answer?.[0]==='A'&&q.analysis==='按位权计算为 2。'));assert.equal(instant.items.some(q=>q.id==='other-certificate'),false);
+ const unauth=await fetch(base+url+'&feedback=instant');assert.equal(unauth.status,401);
+ const exam=await fetch(base+'/exams',{method:'POST',headers,body:JSON.stringify({chapters:[chapter],count:30})});assert.equal(exam.status,200);const session=await exam.json();assert.equal(session.questions.length,30);assert.ok(session.questions.every(q=>q.answer===undefined&&q.analysis===undefined&&q.expectedAnswer===undefined));
+ const attemptsBefore=store.allA(user.id).length;const body={questionId:'instant-0',selected:['B'],timeMs:1000,clientAttemptId:'00000000-0000-4000-8000-000000000001'};
+ const first=await fetch(base+'/attempts',{method:'POST',headers,body:JSON.stringify(body)}).then(r=>r.json());const replay=await fetch(base+'/attempts',{method:'POST',headers,body:JSON.stringify(body)}).then(r=>r.json());assert.deepEqual(first,replay);assert.equal(first.correct,false);assert.equal(store.allA(user.id).length,attemptsBefore+1);
+});

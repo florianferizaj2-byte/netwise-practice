@@ -1,0 +1,28 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import {createStore} from '../server/store.js';
+import {createApp} from '../server/index.js';
+import {createPointsStore} from '../server/ai-points/store.js';
+import {currentPointsTask} from '../server/ai-points/runtime.js';
+import {claimPointsCheckIn} from '../server/ai-points/account.js';
+import {completeFixtureProfile} from './helpers/mobile-profile.js';
+test('real check-in, paid AI, negative wallet, free cache and later claims share one durable ledger',async t=>{
+ const parent=path.resolve('tmp'),dir=fs.mkdtempSync(path.join(parent,'overdraft-api-')),store=createStore(dir);let now=Date.parse('2026-10-27T03:00:00Z');store.points=createPointsStore(store.db,{now:()=>now});
+ const user=store.register('overdraft_learner','fixture-password-123');completeFixtureProfile(store,user);store.selectCertificate(user.id,'network-engineer');const token=store.createAuthSession(user.id);
+ store.addQ({id:'overdraft-question',type:'single_choice',question:'二进制 10 的十进制值？',options:{A:'2',B:'3'},answer:['A'],analysis:'按位权计算为 2。',chapter:'测试',knowledgePoint:'进制',certificates:['network-engineer']});
+ let upstream=0,cached=false;const provider={async explainQuestion(q,action,selected,level,userId){if(cached)return {text:q.analysis,cached:true};const context=currentPointsTask(store,userId),call=store.points.reserveCall(context.operationId,{settings:{baseUrl:'https://api.deepseek.com',model:'deepseek-flash'},inputLimit:2000,outputLimit:1000});upstream++;store.points.finishCall(call.id,{success:true,usage:{hasUsage:true,prompt_tokens:1000,completion_tokens:500,total_tokens:1500,cached_prompt_tokens:0}});return {text:'合成上游解析，未调用真实模型'};}};
+ const app=await createApp({store,provider,withFrontend:false,authRequired:true,accountSecurity:{enabled:false},announcementFile:path.join(dir,'none.json')});const server=app.listen(0,'127.0.0.1');await new Promise(r=>server.once('listening',r));
+ t.after(async()=>{await app.locals.stop();server.closeAllConnections();await new Promise(r=>server.close(r));store.db.close();assert.equal(path.dirname(dir),parent);assert.ok(path.basename(dir).startsWith('overdraft-api-'));fs.rmSync(dir,{recursive:true,force:true});});
+ const base=`http://127.0.0.1:${server.address().port}/api`;const request=async(url,body)=>fetch(base+url,{method:body?'POST':'GET',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json','X-AI-Request-Id':crypto.randomUUID()},...(body?{body:JSON.stringify(body)}:{})});
+ const claim=await request('/account/check-in',{});assert.equal(claim.status,200);assert.equal((await claim.json()).points.availableUnits,1000);
+ const body={questionId:'overdraft-question',action:'详细讲解',selected:[]};const first=await request('/ai/teacher',body);assert.equal(first.status,200);assert.equal(upstream,1);
+ const wallet=await request('/account/points/wallet');assert.equal((await wallet.json()).wallet.availableUnits,-1400);
+ const blocked=await request('/ai/teacher',body);assert.equal(blocked.status,402);assert.equal(upstream,1);assert.equal(store.points.wallet(user.id).availableUnits,-1400);
+ cached=true;assert.equal((await request('/ai/teacher',body)).status,200);assert.equal(upstream,1);assert.equal(store.points.wallet(user.id).availableUnits,-1400);
+ const operations=await request('/account/points/operations?state=settled');const rows=(await operations.json()).rows;assert.ok(rows.some(r=>r.chargedUnits===2400&&r.heldUnits===1000));
+ now+=86400000;claimPointsCheckIn(store,user.id,'2026-10-28');assert.equal(store.points.wallet(user.id).availableUnits,-400);claimPointsCheckIn(store,user.id,'2026-10-28');assert.equal(store.points.wallet(user.id).availableUnits,-400);
+ now+=86400000;claimPointsCheckIn(store,user.id,'2026-10-29');assert.equal(store.points.wallet(user.id).availableUnits,600);assert.equal(store.points.wallet(user.id).debtUnits,0);assert.equal(store.points.audit().passed,true);
+});

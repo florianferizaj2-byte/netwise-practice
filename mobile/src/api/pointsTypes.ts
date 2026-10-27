@@ -34,7 +34,7 @@ export type PointServicesResponse = {
 };
 export type PointCall = { operationId: string; model: string; taskType: string };
 export type PointWallet = {
-  availableUnits: number; heldUnits: number; expiredUnits?: number;
+  availableUnits: number; heldUnits: number; expiredUnits?: number; debtUnits?:number;
   pendingUnits?: number; scale: number; pointsPerCny?: number;
   ledgerRevision?:number;
   snapshotAt?:number;

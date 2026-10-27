@@ -136,7 +136,7 @@ app.use((req, res, next) => req.path.startsWith('/api/') ? backend(req, res, nex
 app.use(vite.middlewares);
 const server = app.listen(0, '127.0.0.1'); await new Promise(resolve => server.once('listening', resolve));
 const base = `http://127.0.0.1:${server.address().port}`, checks = [], errors = [], screenshots = [], consoleErrors = [], failedRequests = [];
-const issuedResponse = await fetch(base + '/api/admin/membership-codes', { method: 'POST', headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' }, body: JSON.stringify({ plan: 'vip', quantity: 1, durationDays: 30, expiresAt: null, requestId: crypto.randomUUID() }) });
+const issuedResponse = await fetch(base + '/api/admin/membership-codes', { method: 'POST', headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' }, body: JSON.stringify({ plan: 'svip', quantity: 1, durationDays: 30, expiresAt: null, requestId: crypto.randomUUID() }) });
 assert.ok(issuedResponse.ok, 'isolated admin creates one test membership code');
 const issued = await issuedResponse.json(), redemptionCode = issued.codes?.[0]?.code;
 assert.equal(typeof redemptionCode, 'string');
@@ -242,7 +242,7 @@ try {
     const b=await card.boundingBox(),v=await balance.boundingBox();
     assert.ok(v.x>=b.x+12&&v.x+v.width<=b.x+b.width-12,'balance stays inside the membership card');
     assert.ok(await balance.evaluate(e=>parseFloat(getComputedStyle(e).fontSize))>=28,'balance has a clear numeric hierarchy');
-    for(const name of ['签到领积分，进入会员积分页','兑换码','积分记录']){
+    for(const name of ['签到领积分，进入每日签到页','兑换码','积分记录']){
       const button=card.getByRole('button',{name,exact:true});
       const label=await button.evaluate(e=>{const text=e.lastElementChild;return{height:text.getBoundingClientRect().height,line:parseFloat(getComputedStyle(text).lineHeight)}});
       assert.ok(label.height<=label.line+1,name+' remains a complete label without an orphaned last character');
@@ -295,18 +295,30 @@ try {
   await page.getByRole('button', { name: '确认兑换', exact: true }).click();
   await expect(page.getByText(/兑换码.*(?:无效|不存在|错误)/).first()).toBeVisible();
   await shot('11b-invalid-redemption-393');
+  const walletBeforeRedeem=store.points.wallet(user.id);
+  const balanceText=units=>(units/(walletBeforeRedeem.scale||1000)).toLocaleString('zh-CN',{maximumFractionDigits:3});
   await page.getByRole('textbox', { name: '会员兑换码', exact: true }).fill(redemptionCode);
   await page.getByRole('button', { name: '确认兑换', exact: true }).click();
   await expect(page.getByRole('button', { name: '完成', exact: true })).toBeVisible();
   await shot('11c-redemption-success-393');
   await page.getByRole('button', { name: '完成', exact: true }).click();
-  await expect(page.getByRole('button', { name: '查看可用AI积分、服务费用和积分记录', exact: true }).getByTestId('profile-points-value')).toHaveText('0');
+  await expect(page.getByRole('button', { name: '查看可用AI积分、服务费用和积分记录', exact: true }).getByTestId('profile-points-value')).toHaveText(balanceText(walletBeforeRedeem.availableUnits));
+  assert.equal(store.points.wallet(user.id).availableUnits,walletBeforeRedeem.availableUnits,'redemption preserves all existing points and adds no monthly lump sum');
   await page.getByText('会员与 AI 积分', { exact: true }).click();
   await expect(page.getByText('选择会员套餐', { exact: true })).toBeVisible();
   await shot('12-membership-393');
   await page.getByRole('button', { name: '签到领积分', exact: true }).click();
+  const daily=page.getByTestId('android-check-in-screen');
+  await expect(daily.getByRole('heading',{name:'每日签到',exact:true})).toBeVisible();
+  await expect(daily.getByText('当前 SVIP',{exact:true})).toBeVisible();
+  await expect(daily.getByTestId('check-in-reward')).toHaveText('+66');
+  await daily.getByRole('button',{name:'签到领取 66 积分',exact:true}).click();
+  await expect(daily.getByRole('button',{name:'今日已签到',exact:true})).toBeDisabled();
+  await expect(daily.getByTestId('check-in-balance')).toHaveText(balanceText(walletBeforeRedeem.availableUnits+66000));
+  assert.equal(store.points.wallet(user.id).availableUnits,walletBeforeRedeem.availableUnits+66000,'daily check-in adds exactly 66 points without dropping the existing balance');
+  await daily.getByRole('button',{name:'关闭每日签到',exact:true}).click();
   await expect(page.getByRole('button', { name: '已签到', exact: true })).toBeVisible();
-  await expect(page.getByTestId('vip-points-balance').getByText('66', { exact: true })).toBeVisible();
+  await expect(page.getByTestId('vip-points-balance').getByText(balanceText(walletBeforeRedeem.availableUnits+66000), { exact: true })).toBeVisible();
   checks.push('redemption issues no monthly lump sum; daily SVIP check-in credits exactly 66 points immediately');
   await page.getByRole('button', { name: '服务价目', exact: false }).click();
   await expect(page.getByText('AI 服务积分价目', { exact: true })).toBeVisible();
@@ -404,6 +416,7 @@ try {
   await expect(page.getByText('这里会记录你的薄弱点', { exact: true })).toBeVisible();
   await tab('我的');
   await expect(page.getByRole('button', { name: '查看可用AI积分、服务费用和积分记录', exact: true }).getByTestId('profile-points-value')).toHaveText('0');
+  assert.equal(store.points.wallet(other.id).availableUnits,0,'a different account cannot inherit the first account wallet');
   await expect(page.getByText('安卓界面验收用户', { exact: true })).toHaveCount(0);
   await tab('练习');
   await page.getByRole('textbox', { name: '搜索知识点', exact: true }).fill('虚拟定位学习');
@@ -439,7 +452,7 @@ try {
   checks.push('dark theme and narrow phone/tablet/landscape layout with visible bottom navigation');
   await tab('我的');
   await page.getByRole('button', { name: '查看可用AI积分、服务费用和积分记录', exact: true }).click();
-  await expect(page.getByRole('heading', { name: '积分费用与记录', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: '积分', exact: true })).toBeVisible();
   await page.getByRole('button', {name:'关闭积分费用与记录',exact:true}).click();
   versionFault = 'legacy'; await page.reload();
   await expect(page.getByTestId('backend-connection-notice')).toContainText('服务端尚未完成 v1.0 升级');
@@ -453,9 +466,9 @@ try {
   await tab('我的');
   await page.getByRole('button', { name: '查看可用AI积分、服务费用和积分记录', exact: true }).click();
   forceWalletExpired = true;
-  await page.getByRole('button', { name: '刷新可用积分', exact: true }).click();
+  await page.getByRole('button', { name: '刷新积分余额和使用记录', exact: true }).click();
   await expect(page.getByText('欢迎回来', { exact: true })).toBeVisible();
-  await expect(page.getByRole('heading', { name: '积分费用与记录', exact: true })).toHaveCount(0);
+  await expect(page.getByRole('heading', { name: '积分', exact: true })).toHaveCount(0);
   checks.push('expired-session returns to sign-in and clears account-owned points presentation');
   process.env.MOBILE_LATEST_VERSION='9.0.0'; await page.reload();
   await expect(page.getByText('欢迎回来',{exact:true})).toBeVisible();
