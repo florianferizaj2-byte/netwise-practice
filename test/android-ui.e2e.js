@@ -68,6 +68,7 @@ html,body,#root{height:100%;margin:0}#root{display:flex;flex-direction:column;ov
 write('storage.ts', 'export default {async getItem(k){return localStorage.getItem(k)},async setItem(k,v){localStorage.setItem(k,v)},async removeItem(k){localStorage.removeItem(k)},async multiRemove(ks){ks.forEach(k=>localStorage.removeItem(k))}}');
 write('stream.ts', 'export const fetch=(...args)=>globalThis.fetch(...args)');
 write('audio.ts', 'export async function prepareUiSounds(){} export function setUiSoundSettings(){} export function playUiSound(){} export function previewUiSound(){}');
+write('answer-feedback.ts', `let settings=null;export async function prepareAnswerFeedback(){} export function configureAnswerFeedback(s){settings=s;window.__answerFeedbackSettings=s} export function stopAnswerFeedback(){} export function playCorrectAnswerFeedback(correct){if(!correct||!settings)return;window.__answerFeedbackEvents??=[];window.__answerFeedbackEvents.push({...settings})}`);
 write('status.tsx', 'export function StatusBar(){return null}');
 write('native.ts', `export*from'react-native-web';import React from'react';import{Platform,StyleSheet,Text as BaseText,TextInput as BaseInput,useWindowDimensions as baseDimensions}from'react-native-web';Platform.OS='android';
 const Scale=React.createContext(1);export function TestFontScaleProvider({children}){const [scale,setScale]=React.useState(1);React.useLayoutEffect(()=>{window.__setFontScale=setScale},[]);return React.createElement(Scale.Provider,{value:scale},children)}
@@ -117,6 +118,7 @@ const vite = await createServer({
     { find: 'expo-file-system/legacy', replacement: path.join(entry, 'file-system.ts') },
     { find: 'expo-intent-launcher', replacement: path.join(entry, 'intent.ts') },
     { find: /^\.\.?\/audioFeedback$/, replacement: path.join(entry, 'audio.ts') },
+    { find: /^\.\.?\/answerFeedback$/, replacement: path.join(entry, 'answer-feedback.ts') },
     { find: /^\.\.\/\.\.\/modules\/route-player\/index\.android$/, replacement: path.join(entry, 'native-route.ts') },
   ] }, server: { middlewareMode: true, hmr: false, fs: { allow: [root, directory] } },
 });
@@ -196,6 +198,7 @@ try {
   await page.getByRole('button', { name: '取消本次AI请求', exact: true }).click();
   await page.getByText('确认答案', { exact: true }).click();
   await expect(page.getByText('正确答案：', { exact: false }).first()).toBeVisible();
+  assert.equal(await page.evaluate(()=>window.__answerFeedbackEvents?.length||0),0,'wrong answer stays quiet');
   await shot('06-practice-analysis-393'); checks.push('catalog search, practice, wrong answer, analysis and pre-AI consent/cancel');
   for(const [width,mode,scale]of[[393,'light',1],[393,'dark',1],[320,'dark',1.35]]){
     await page.setViewportSize({width,height:852});
@@ -229,6 +232,14 @@ try {
   await expect(page.getByRole('radio', { name: 'B：64 个', exact: true })).toBeChecked();
   await expect(page.getByRole('button', { name: '确认答案', exact: true })).toBeVisible();
   assert.equal(answerCount(), recorded, 'unsubmitted draft is restored without another grading request');
+  await page.getByRole('radio',{name:'A：62 个',exact:true}).click();
+  await page.getByRole('button',{name:'确认答案',exact:true}).click();
+  await expect(page.getByText('回答正确！',{exact:true})).toBeVisible();
+  assert.equal(await page.evaluate(()=>window.__answerFeedbackEvents.length),1);
+  await page.getByRole('button',{name:'上一题',exact:true}).click();
+  await page.getByRole('button',{name:'下一题',exact:true}).click();
+  assert.equal(await page.evaluate(()=>window.__answerFeedbackEvents.length),1,'review and background sync do not replay success');
+  checks.push('new correct answer emits one feedback event; wrong answers and history stay silent');
   await page.getByRole('button', { name: '返回题库目录', exact: true }).click();
   await expect(page.locator('#app-tab-bar').getByRole('button')).toHaveCount(5);
   checks.push('focused practice footer, previous-answer review and draft restoration without duplicate attempts');
@@ -269,6 +280,30 @@ try {
   await expect(page.getByRole('radio', { name: '较强', exact: true })).toBeChecked();
   await page.getByRole('radio', { name: '适中', exact: true }).click();
   await page.getByRole('button', { name: '试听当前音效', exact: true }).click();
+  const feedbackPanel=page.getByTestId('answer-feedback-settings');
+  await expect(feedbackPanel.getByRole('switch',{name:'答对提示音',exact:true})).toBeChecked();
+  await expect(feedbackPanel.getByRole('switch',{name:'答对震动',exact:true})).toBeChecked();
+  await feedbackPanel.getByRole('radio',{name:'答对提示音音色：温暖',exact:true}).click();
+  await feedbackPanel.getByRole('radio',{name:'答对提示音音量：轻声',exact:true}).click();
+  await feedbackPanel.getByRole('radio',{name:'答对震动强度：明显',exact:true}).click();
+  await feedbackPanel.getByRole('switch',{name:'答对提示音',exact:true}).click();
+  await feedbackPanel.getByRole('switch',{name:'答对震动',exact:true}).click();
+  await expect(feedbackPanel.getByRole('button',{name:'体验答对反馈',exact:true})).toBeDisabled();
+  await feedbackPanel.getByRole('switch',{name:'答对震动',exact:true}).click();
+  const priorFeedback=await page.evaluate(()=>window.__answerFeedbackEvents.length);
+  await feedbackPanel.getByRole('button',{name:'体验答对反馈',exact:true}).click();
+  const feedback=await page.evaluate(()=>window.__answerFeedbackEvents.at(-1));
+  assert.deepEqual({...feedback},{soundEnabled:false,hapticsEnabled:true,volume:0.16,style:'warm',hapticStrength:'strong'});
+  assert.equal(await page.evaluate(()=>window.__answerFeedbackEvents.length),priorFeedback+1);
+  await expect.poll(()=>page.evaluate(()=>JSON.parse(localStorage.getItem('kaojiang-answer-feedback-v1')||'null'))).toEqual(feedback);
+  for(const [width,mode,scale] of [[320,'dark',1.35],[393,'light',1]]){
+    await page.setViewportSize({width,height:852});await page.evaluate(({mode,scale})=>{window.__setAndroidTheme(mode);window.__setFontScale(scale)},{mode,scale});
+    await feedbackPanel.scrollIntoViewIfNeeded();
+    const metrics=await feedbackPanel.evaluate(e=>({width:e.clientWidth,overflow:e.scrollWidth>e.clientWidth+1,targets:[...e.querySelectorAll('[role="radio"]')].map(r=>r.getBoundingClientRect().height)}));
+    assert.ok(!metrics.overflow&&metrics.targets.every(h=>h>=48));
+    await shot('answer-feedback-settings-'+width+'-'+mode);
+  }
+  checks.push('answer feedback switches, tone, volume, vibration level and preview persist with narrow/large-text layouts');
   await page.getByRole('button', { name: '清理学习缓存', exact: true }).click();
   await expect(page.getByText('已清理', { exact: true })).toBeVisible();
   checks.push('settings animation/sound-style/volume/switch controls persist; cache cleanup preserves the signed-in account');
@@ -455,6 +490,8 @@ try {
   await expect(page.getByRole('heading', { name: '积分', exact: true })).toBeVisible();
   await page.getByRole('button', {name:'关闭积分费用与记录',exact:true}).click();
   versionFault = 'legacy'; await page.reload();
+  await expect.poll(()=>page.evaluate(()=>window.__answerFeedbackSettings)).toEqual({soundEnabled:false,hapticsEnabled:true,volume:0.16,style:'warm',hapticStrength:'strong'});
+  checks.push('answer feedback settings restore after application reload');
   await expect(page.getByTestId('backend-connection-notice')).toContainText('服务端尚未完成 v1.0 升级');
   versionFault = ''; await page.getByRole('button',{name:'重新连接',exact:true}).click();
   await expect(page.getByTestId('backend-connection-notice')).toHaveCount(0);

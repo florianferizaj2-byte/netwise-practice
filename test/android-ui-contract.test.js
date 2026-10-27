@@ -26,14 +26,15 @@ const functions = source => {
 // protection and the authoritative fallback all remain release requirements.
 function verifyInstantSubmission(body){
   function fixture(overrides={}){
-    const observed={result:null,error:null,submitting:false,ids:{},queued:[],network:[]};
+    const observed={result:null,error:null,submitting:false,ids:{},queued:[],network:[],feedback:[]};
     const q={id:'q',type:'single_choice',answer:['A'],analysis:'prefetched solution'};
-    const ctx={module:{exports:null},currentQuestion:q,result:null,submitting:false,selected:['B'],responseDraft:'',preview:false,user:{id:'learner',certificateId:'cert'},API_BASE_URL:'https://example.test/api',sync:{ready:true,owner:JSON.stringify(['https://example.test/api','learner','cert'])},feedbackById:{},submissionGuard:{current:''},fallbackIds:{current:new Map()},pageGeneration:{current:1},elapsedTime:()=>1234,studyRequestId:()=> '00000000-0000-4000-8000-000000000001',sameAnswers:(a,b)=>JSON.stringify([...a].sort())===JSON.stringify([...b].sort()),setError:x=>observed.error=x,setSubmitting:x=>observed.submitting=x,setResult:x=>observed.result=x,setSyncIds:fn=>observed.ids=fn(observed.ids),practiceAttemptSync:{enqueue:p=>{observed.queued.push(p);return 'queued-id'}},mobileApi:{async recordAttempt(...args){observed.network.push(args);return {questionId:'q',selected:args[1],correct:true,timeMs:1234,answer:['B'],analysis:'authoritative'}}},...overrides};
+    const ctx={module:{exports:null},currentQuestion:q,result:null,submitting:false,selected:['B'],responseDraft:'',preview:false,user:{id:'learner',certificateId:'cert'},API_BASE_URL:'https://example.test/api',sync:{ready:true,owner:JSON.stringify(['https://example.test/api','learner','cert'])},feedbackById:{},submissionGuard:{current:''},fallbackIds:{current:new Map()},pageGeneration:{current:1},elapsedTime:()=>1234,studyRequestId:()=> '00000000-0000-4000-8000-000000000001',sameAnswers:(a,b)=>JSON.stringify([...a].sort())===JSON.stringify([...b].sort()),setError:x=>observed.error=x,setSubmitting:x=>observed.submitting=x,setResult:x=>observed.result=x,publishSubmittedResult:x=>{observed.result=x;observed.feedback.push(x.correct)},setSyncIds:fn=>observed.ids=fn(observed.ids),practiceAttemptSync:{enqueue:p=>{observed.queued.push(p);return 'queued-id'}},mobileApi:{async recordAttempt(...args){observed.network.push(args);return {questionId:'q',selected:args[1],correct:true,timeMs:1234,answer:['B'],analysis:'authoritative'}}},...overrides};
     const js=ts.transpileModule('module.exports=async function()'+body,{compilerOptions:{module:ts.ModuleKind.CommonJS}}).outputText;vm.runInNewContext(js,ctx);return {run:ctx.module.exports,observed};
   }
   // The handler is async, but its prefetched branch must synchronously publish
   // feedback and enqueue before returning, without entering a network await.
-  const f=fixture();void f.run();assert.equal(f.observed.result.correct,false);assert.equal(f.observed.result.analysis,'prefetched solution');assert.equal(f.observed.queued.length,1);assert.equal(f.observed.network.length,0);assert.equal(f.observed.submitting,false);void f.run();assert.equal(f.observed.queued.length,1,'double tap is one submission');
+  const f=fixture();void f.run();assert.equal(f.observed.result.correct,false);assert.equal(f.observed.result.analysis,'prefetched solution');assert.equal(f.observed.queued.length,1);assert.equal(f.observed.network.length,0);assert.equal(f.observed.submitting,false);assert.deepEqual(f.observed.feedback,[false]);void f.run();assert.equal(f.observed.queued.length,1,'double tap is one submission');assert.equal(f.observed.feedback.length,1,'double tap cannot replay feedback');
+  const correct=fixture({selected:['A']});void correct.run();assert.deepEqual(correct.observed.feedback,[true]);
   const empty=fixture({selected:[]});void empty.run();assert.equal(empty.observed.queued.length,0);assert.ok(empty.observed.error);
   const short=fixture({currentQuestion:{id:'short',type:'short_answer',answer:['A']},responseDraft:''});void short.run();assert.equal(short.observed.queued.length,0);assert.ok(short.observed.error);
   const oldServer=fixture({currentQuestion:{id:'q',type:'single_choice'}});void oldServer.run();assert.equal(oldServer.observed.queued.length,0);assert.equal(oldServer.observed.network.length,1);assert.match(oldServer.observed.network[0][4],/^[0-9a-f-]{36}$/);
@@ -60,6 +61,7 @@ test('Android screen variants retain their practice and exam business handlers',
       }
       if(name==='screens/TabScreens'&&key==='submitAnswer'){
         assert.match(actual,/practiceAttemptSync\.enqueue/);assert.match(actual,/clientAttemptId/);
+        assert.match(next.get('publishSubmittedResult'),/playCorrectAnswerFeedback\(next.correct,/);
         verifyInstantSubmission(actual);compared++;continue;
       }
       assert.equal(actual, body, name + ': ' + key + ' business handler changed');

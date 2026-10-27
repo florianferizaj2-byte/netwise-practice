@@ -3,6 +3,8 @@ import {studyRequestId} from '../api/studyTypes';
 import { androidAccent } from '../android-design-tokens';
 import { useAndroidFocusMode } from '../navigation/AndroidFocusMode.android';
 import { CheckInScreen } from './CheckInScreen.android';
+import { AnswerFeedbackSettings } from '../components/AnswerFeedbackSettings.android';
+import { playCorrectAnswerFeedback } from '../answerFeedback';
 import { AboutScreen } from './AboutScreen.android';
 import { AndroidPageHeader, AndroidPointsLink } from '../components/AndroidUi.android';
 import { androidPointsFlow } from '../api/androidPointsRuntime.android';
@@ -283,6 +285,8 @@ export function PracticeScreen({
   const stackPracticeHeader = practiceWidth < 360 && practiceFontScale > 1.15;
   const styles = useThemedStyles(createStyles, iosStyles.tabs);
   const active = useScreenActive();
+  const feedbackVisible = useRef(active);
+  feedbackVisible.current = active;
   const isDailyPractice = practiceSession === 'daily';
   const [questions, setQuestions] = useState<Question[]>([]);
   const [nextOffset, setNextOffset] = useState<number | null>(null);
@@ -479,6 +483,8 @@ export function PracticeScreen({
   ]);
 
   const currentQuestion = questions[questionIndex];
+  const feedbackQuestion = useRef<string | undefined>(undefined);
+  feedbackQuestion.current = currentQuestion?.id;
   const questionIdRef = useRef(currentQuestion?.id);
   questionIdRef.current = currentQuestion?.id;
   const elapsedTime = useActiveTimer(currentQuestion?.id);
@@ -562,6 +568,12 @@ export function PracticeScreen({
     }
   }
 
+  function publishSubmittedResult(next: AttemptResponse) {
+    setResult(next);
+    const generation = pageGeneration.current;
+    if (feedbackVisible.current) playCorrectAnswerFeedback(next.correct, () => feedbackVisible.current && pageGeneration.current === generation && feedbackQuestion.current === next.questionId);
+  }
+
   async function submitAnswer() {
     if (!currentQuestion || result || submitting) return;
     if (currentQuestion.type === 'short_answer' && !responseDraft.trim()) {
@@ -580,7 +592,7 @@ export function PracticeScreen({
     const timeMs = elapsedTime();
 
     if (preview) {
-      setResult({
+      publishSubmittedResult({
         questionId: currentQuestion.id,
         selected,
         correct: sameAnswers(selected, ['A']),
@@ -598,7 +610,7 @@ export function PracticeScreen({
       try{
         const id=practiceAttemptSync.enqueue({questionId:currentQuestion.id,selected,timeMs,...(currentQuestion.type==='short_answer'?{response:responseDraft.trim()}:{})});
         setSyncIds(old=>({...old,[currentQuestion.id]:id}));
-        setResult({questionId:currentQuestion.id,selected:[...selected],timeMs,correct:currentQuestion.type==='short_answer'?selected[0]==='A':sameAnswers(selected,feedback.answer),answer:[...feedback.answer],analysis:feedback.analysis,expectedAnswer:feedback.expectedAnswer});
+        publishSubmittedResult({questionId:currentQuestion.id,selected:[...selected],timeMs,correct:currentQuestion.type==='short_answer'?selected[0]==='A':sameAnswers(selected,feedback.answer),answer:[...feedback.answer],analysis:feedback.analysis,expectedAnswer:feedback.expectedAnswer});
       }catch(cause){submissionGuard.current='';setError(cause instanceof Error?cause.message:'答题记录暂存失败，请重试');}
       finally{setSubmitting(false);}
       return;
@@ -612,7 +624,7 @@ export function PracticeScreen({
         currentQuestion.type === 'short_answer' ? responseDraft.trim() : undefined,
         clientAttemptId,
       );
-      if (generation === pageGeneration.current) setResult(response);
+      if (generation === pageGeneration.current) publishSubmittedResult(response);
     } catch (requestError) {
       if (generation !== pageGeneration.current) return;
       submissionGuard.current='';
@@ -1628,6 +1640,7 @@ export function ProfileScreen({
               </View>
               <AnimatedPressable accessibilityRole="button" onPress={previewUiSound} style={styles.settingsSample}><AppIcon name="volume" size={22} color={colors.brand}/><Text style={styles.nativeLink}>试听当前音效</Text></AnimatedPressable>
             </View>
+            <AnswerFeedbackSettings/>
             <AnimatedPressable accessibilityRole="button" accessibilityLabel="清理学习缓存" onPress={()=>{void mobileApi.clearStudyCache().then(()=>setCacheNotice('已清理')).catch(()=>setCacheNotice('清理失败，请重试'))}} style={styles.settingsCache}><AppIcon name="refresh" size={23} color={colors.text}/><View style={styles.nativeSettingCopy}><Text style={styles.settingsRowLabelText}>清理学习缓存</Text><Text style={styles.settingsSmall}>{cacheNotice||'不会清除账号中的学习记录'}</Text></View><AppIcon name="chevron-right" size={18} color={colors.textMuted}/></AnimatedPressable>
             <Text style={styles.settingsDeviceNote}>设置仅影响当前设备的使用体验</Text>
           </ScrollView>

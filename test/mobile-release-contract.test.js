@@ -30,7 +30,7 @@ test('the real public version endpoint advertises only mounted v1 capabilities',
   assert.equal(release.latestVersion, JSON.parse(fs.readFileSync(new URL('../mobile/package.json',import.meta.url),'utf8')).version); assert.equal(release.forceUpdate, false);
   assert.equal(release.backend.version, MOBILE_BACKEND_VERSION); assert.equal(release.backend.apiRevision, 1);
   const { backendConnectionNotice } = await loadPure('api/backendContract.ts'); assert.equal(backendConnectionNotice(release), '');
-  assert.deepEqual(release.backend.capabilities.sort(), ['account-security-v1', 'learning-gate-v1', 'points-v1']);
+  assert.deepEqual(release.backend.capabilities.sort(), ['account-security-v1', 'learning-gate-v1', 'points-v1', 'voice-packs-v1']);
 });
 
 test('APK install preflight rejects errors, HTML, empty/truncated files and corrupted downloads', async () => {

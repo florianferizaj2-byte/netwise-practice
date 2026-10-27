@@ -31,6 +31,8 @@ assert 'CN=Android Debug' not in signature, 'Debug signing is not a production r
 badging = run('aapt.exe' if os.name == 'nt' else 'aapt', 'dump', 'badging', apk)
 package = re.search(r"package: name='([^']+)' versionCode='([^']+)' versionName='([^']+)'", badging)
 assert package and package.groups() == (app['android']['package'], str(app['android']['versionCode']), app['version']), 'APK identity/version differs from source'
+permissions = run('aapt.exe' if os.name == 'nt' else 'aapt', 'dump', 'permissions', apk)
+assert 'android.permission.VIBRATE' in permissions, 'Correct-answer vibration permission is missing'
 
 with zipfile.ZipFile(apk) as archive:
     names = archive.namelist()
@@ -41,14 +43,18 @@ with zipfile.ZipFile(apk) as archive:
         assert hashlib.sha256((ROOT / 'mobile/assets/fonts' / name).read_bytes()).hexdigest() in font_hashes, f'Missing bundled font: {name}'
     licenses = [name for name in names if name.endswith('/OFL-NotoSansSC.txt')]
     assert licenses and archive.read(licenses[0]) == (ROOT / 'mobile/assets/fonts/OFL-NotoSansSC.txt').read_bytes(), 'Font license missing or changed'
+    sound_hashes = {hashlib.sha256(archive.read(name)).hexdigest() for name in names if name.endswith('.wav')}
+    for style in ['soft', 'crisp', 'warm']:
+        sound = ROOT / 'mobile/assets/sounds' / f'answer-correct-{style}.wav'
+        assert hashlib.sha256(sound.read_bytes()).hexdigest() in sound_hashes, f'Missing confirmation sound: {style}'
     bundle = archive.read('assets/index.android.bundle')
     for marker in ['https://aceexam.top/api', app['version'], 'points-v1', 'backend-connection-notice',
                    'android-ai-confirm-sheet', 'android-modal-safe-area', 'location-learning-header', 'profile-points-value',
                    'android-check-in-screen', 'android-about-screen', 'android-wrong-screen',
                    'wrong-knowledge-grid', 'wrong-question-stem', 'about-full-letter', 'about-font-license',
-                   'kaojiang-practice-outbox-v1', 'practice-record-sync', 'practice-sync-notice', 'points-debt-notice']:
+                   'kaojiang-practice-outbox-v1', 'practice-record-sync', 'practice-sync-notice', 'points-debt-notice', 'answer-feedback-settings', 'kaojiang-answer-feedback-v1']:
         assert marker.encode() in bundle or marker.encode('utf-16-le') in bundle, f'Expected release code not found in bundle: {marker}'
-    for marker in ['__setFontScale', '__setAndroidTheme', '__setThemeMode']:
+    for marker in ['__setFontScale', '__setAndroidTheme', '__setThemeMode', '__answerFeedbackEvents', '__answerFeedbackSettings']:
         assert marker.encode() not in bundle, f'Browser-test control leaked into the APK: {marker}'
     safe_area_native = any(b'RNCSafeAreaProvider' in archive.read(name) for name in names if name.endswith('.dex'))
     assert safe_area_native, 'Native safe-area provider is missing from the signed APK'
@@ -62,7 +68,7 @@ assert policy['apkMd5'].lower() == hashlib.md5(apk.read_bytes()).hexdigest(), 'D
 result = {'passed': True, 'version': app['version'], 'versionCode': app['android']['versionCode'], 'package': package.group(1),
           'productionCertificateMatches': True, 'certificateSha256': certificate, 'sha256': digest,
           'bytes': apk.stat().st_size, 'abis': abis, 'bundledFonts': 3, 'fontLicense': True, 'nativeSafeAreaProvider': safe_area_native,
-          'backendUrl': 'https://aceexam.top/api', 'deviceInstalled': False, 'deployed': False}
+          'backendUrl': 'https://aceexam.top/api', 'bundledAnswerSounds': 3, 'vibrationPermission': True, 'deviceInstalled': False, 'deployed': False}
 output = ROOT / 'test-output/native-release-verification.json'
 output.parent.mkdir(exist_ok=True)
 temporary = output.with_suffix('.json.new')

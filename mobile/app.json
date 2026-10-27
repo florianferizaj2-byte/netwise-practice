@@ -2,7 +2,7 @@
   "expo": {
     "name": "考匠",
     "slug": "kaojiang",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "scheme": "kaojiang",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -70,13 +70,14 @@
     },
     "android": {
       "package": "com.kaojiang.app",
-      "versionCode": 36,
+      "versionCode": 37,
       "permissions": [
         "REQUEST_INSTALL_PACKAGES",
         "READ_EXTERNAL_STORAGE",
         "READ_MEDIA_IMAGES",
         "READ_MEDIA_VIDEO",
-        "READ_MEDIA_VISUAL_USER_SELECTED"
+        "READ_MEDIA_VISUAL_USER_SELECTED",
+        "VIBRATE"
       ],
       "adaptiveIcon": {
         "backgroundColor": "#C50606",

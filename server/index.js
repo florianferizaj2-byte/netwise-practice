@@ -51,6 +51,7 @@ import { ensureAccountPoints, pointsCheckInView, claimPointsCheckIn, accountPoin
 import { registerPointsRoutes } from "./ai-points/routes.js";
 import { registerAiServiceRoutes } from "./ai-service-routes.js";
 import { registerLocationLearning } from "./location-learning.js";
+import { registerVoicePackRoutes } from "./voice-packs.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const mobileRelease = () => resolveMobileRelease(process.env, compareVersions);
@@ -908,6 +909,7 @@ export async function createApp(options = {}) {
   };
   registerMembershipRoutes({ route, store, requireAdmin, requestUserId, accountEntitlementView });
   registerPointsRoutes({ route,store,requireAdmin,requestUserId });
+  app.locals.voicePacks = registerVoicePackRoutes({ app,route,store,requireAdmin,requestUserId });
   registerAiServiceRoutes({ route,store,provider,requireAdmin,ai });
   registerMobileAdminRoutes({ route, store, requireAdmin, certificates, announcements: mobileAnnouncements, profiles: mobileProfiles });
   const adminConsole = registerAdminConsole({ route, store, requireAdmin, provider, ai });

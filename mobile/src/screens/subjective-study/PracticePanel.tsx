@@ -1,4 +1,5 @@
 import { iosStyles } from "../../iosStyles";
+import { playCorrectAnswerFeedback } from "../../answerFeedback";
 import { useEffect, useRef, useState } from "react";
 import {
   Keyboard,
@@ -72,7 +73,10 @@ export function PracticePanel({
     resultOffset = useRef(0),
     showResult = useRef(false);
   const inputRefs = useRef<Record<string, TextInput | null>>({});
+  const feedbackSubmission = useRef<string | null>(null);
   const question = session.questions[index];
+  const visibleQuestion = useRef<string | null>(null);
+  visibleQuestion.current = active ? question?.id ?? null : null;
   const attempt = question
     ? session.attempts.filter((item) => item.questionId === question.id).at(-1)
     : undefined;
@@ -108,6 +112,10 @@ export function PracticePanel({
     return () => document.removeEventListener("keydown", nextOnEnter);
   }, [active, attempt, busy, complete, index, session, onNextLesson]);
   const updateAttempt = (next: StudyAttempt) => {
+    if (feedbackSubmission.current === next.questionId && next.status === "graded" && !next.processing) {
+      feedbackSubmission.current = null;
+      if (visibleQuestion.current === next.questionId) playCorrectAnswerFeedback(next.correct, () => visibleQuestion.current === next.questionId);
+    }
     setSession((old) => ({
       ...old,
       attempts: [...old.attempts.filter((item) => item.id !== next.id), next],
@@ -121,7 +129,9 @@ export function PracticePanel({
         : null,
     );
   }, [active, session.id, question?.id, onContext]);
+  useEffect(() => { if (!active) feedbackSubmission.current = null; }, [active]);
   useEffect(() => {
+    feedbackSubmission.current = null;
     resultOffset.current = 0;
     showResult.current = false;
     scroll.current?.scrollTo({ y: 0, animated: false });
@@ -155,6 +165,7 @@ export function PracticePanel({
     setBusy(true);
     setError("");
     Keyboard.dismiss();
+    feedbackSubmission.current = question.id;
     const key = JSON.stringify([session.id, question.id, answers]);
     if (request.current?.key !== key)
       request.current = { key, id: studyRequestId() };
@@ -179,6 +190,7 @@ export function PracticePanel({
   }
   async function retryGrade() {
     if (!attempt || busyRef.current) return;
+    feedbackSubmission.current = attempt.questionId;
     busyRef.current = true;
     setBusy(true);
     setError("");

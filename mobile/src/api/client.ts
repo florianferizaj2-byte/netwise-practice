@@ -4,6 +4,7 @@ import { fetch as streamingFetch } from 'expo/fetch';
 import { ResourceCache, CacheCancelledError } from './resourceCache';
 import { persistentStudyData, studyCachePolicy } from './cachePolicy';
 import { ApiError, fetchJson } from './transport';
+import type { VoicePackCatalog, VoicePackManifest } from './voicePacks';
 import type { StudyCatalog, StudyLesson, StudySession, StudyAttempt, StudyTeacherMessage, StudyTeacherAnswer, StudyTeacherRequest } from './studyTypes';
 import { studyRequestId } from './studyTypes';
 import type { Announcement } from '../announcements/client';
@@ -666,6 +667,11 @@ function questionPagePath(offset = 0, filters?: QuestionFilters, seed?: string) 
 }
 
 export const mobileApi = {
+  voicePacks() { return request<VoicePackCatalog>("/voice-packs"); },
+  voicePackManifest(id:string) {
+    if(!/^[a-z0-9][a-z0-9-]{0,47}$/.test(id))return Promise.reject(new Error("语音包编号无效"));
+    return request<VoicePackManifest>(`/voice-packs/${encodeURIComponent(id)}/manifest`);
+  },
   onStatus(listener: (status: 'expired' | 'update') => void) {
     statusListeners.add(listener);
     return () => {
