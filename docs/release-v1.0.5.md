@@ -1,6 +1,6 @@
 # 考匠 v1.0.5
 
-Android `com.kaojiang.app`，版本 `1.0.5` / versionCode `38`。当前为本地待发布版本；GitHub 推送、线上部署与手机实机验收未执行。
+Android `com.kaojiang.app`，版本 `1.0.5` / versionCode `38`。Web 管理端、后端源码与此 APK 已推送 GitHub 现有 `codex/v1.0.1-blue-web-backend` 分支（功能提交 `903cf3e`），未另建 GitHub Release；线上部署与手机实机验收未执行。
 
 ## 本次更新
 
