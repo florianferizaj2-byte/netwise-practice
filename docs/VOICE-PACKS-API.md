@@ -13,10 +13,11 @@ Web 蓝色管理员端已提供「用户与运营 → 语音包管理」（`#adm
 | `practice.enter` | 进入一轮刷题 | 从此事件已配置的素材中选一个 |
 | `answer.correct` | 本次作答正确 | 使用普通答对素材 |
 | `answer.streak` | 本轮连续答对 | 精确匹配次数；未配置该次数时回退普通答对素材 |
+| `answer.wrong` | 本轮连续答错 | 1–5 五档；第5档含第5次及以后，未配置保持安静 |
 
 建议预留连对 `2 / 3 / 5 / 10` 次，可配置 `2–1000` 的任意整数，每包最多 20 个不同里程碑。例如 3 连对的录音不会在 4 连对时冒充“4 连对”重复使用。每个事件或里程碑最多 8 段素材，可选不同录音避免单调。
 
-App 选音器：`mobile/src/api/voicePacks.ts`。`createPracticeVoiceSession()` 用于按账号/证书/刷题轮次隔离状态；`enter(scope)` 开始新一轮，`answer(clientAttemptId, correct)` 只处理新作答、答错清零，重试同一编号不加连对。历史答案、后台同步回执和考试过程不应调用它。
+App 选音器：`mobile/src/api/voicePacks.ts`。`createPracticeVoiceSession()` 用于按账号/证书/刷题轮次隔离状态；`enter(scope)` 开始新一轮，`answer(clientAttemptId, correct)` 只处理新作答、答错清零连对并累计连错，答对清零连错；重试同一编号不重复计数。历史答案、后台同步回执和考试过程不应调用它。
 
 `selectVoiceClip(manifest, cue, random)` 返回对应素材或 null；null 表示保留内置提示音。`voiceAssetUrl()` 只接受此服务生成的内容地址，拒绝外部地址。
 
@@ -127,3 +128,28 @@ curl -X PUT -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json
 v1.0.5 在设置中主动下载整包、校验大小和 SHA-256，完成后写入本地清单并允许启用。文件按 SHA-256 去重保存在应用私有持久目录；本地总量上限 128 MiB，可删除不常用包，仍被其他已下载包引用的音频保留。下载失败/取消不会伪装成完整包；重试复用已校验文件。更新包在完整下载前不替换旧清单。
 
 选择包后，播放资源在作答路径之外解码准备。入场/答对/连对事件只查内存和本地文件，不发网络请求、不延迟判题；离线时自选的已下载包可使用，没有已下载默认包时保留内置提示音。后台默认变更不会强迫用户自动下载；用户可以跟随后台默认、固定自选包或只使用内置音效。下架无法撤回已下载的公开音频。
+
+## v1.0.6 可选扩展：连错和固定/随机
+
+保持 schemaVersion/API revision 1；旧数据缺少新字段时，连错为空、选择方式默认 random，兼容旧包、旧请求及原幂等签名。
+
+```json
+{
+  "cues": {
+    "practice.enter": ["<素材A>", "<素材B>"],
+    "answer.correct": [],
+    "answer.streak": [],
+    "answer.wrong": [
+      {"count": 1, "clips": ["<素材C>"]},
+      {"count": 5, "clips": ["<素材D>", "<素材E>"]}
+    ]
+  },
+  "playback": {
+    "maxDurationMs": 2500,
+    "minIntervalMs": 150,
+    "selectionModes": {"practice.enter": "random", "wrong:1": "fixed", "wrong:5": "random"}
+  }
+}
+```
+
+`answer.wrong` 最多5个不重复档位，count 1–5。选择键为 `practice.enter`、`answer.correct`、`streak:次数` 或 `wrong:1` 至 `wrong:5`；值为 fixed/random，最多27键。fixed 只能引用一条；random 只从该场景的 clips 中抽取，最多8条。草稿、直接配置和发布均校验，连错素材同样参与32个素材/20 MiB额度、审核、公共引用和存储完整性检查。用户在手机更新已下载包后生效；没有新文件的作答路径不发网络请求。

@@ -439,3 +439,67 @@ test('cancelling while local verification is pending never starts a later audio 
   assert.equal(await pending, false);
   assert.equal(f.requests.length, 0);
 });
+
+test('local wrong voices count fresh consecutive errors, cap at five, reset on correct and never fetch while answering', async () => {
+  const f = fixture();
+  f.pack.cues['answer.wrong'] = [1, 2, 3, 4, 5].map((count, i) => ({
+    count,
+    clips: [String((i % 3) + 1).repeat(64)],
+  }));
+  await f.api.setAccount('a');
+  await f.api.download('test');
+  f.api.select('test');
+  await f.api.refresh();
+  const before = { ...f.calls };
+  for (let i = 1; i <= 7; i++) {
+    f.time();
+    assert.equal(
+      f.api.answer('wrong-round', 'w' + i, false, () => true),
+      true,
+    );
+  }
+  assert.deepEqual(
+    f.events.map((e) => e[0]),
+    ['1', '2', '3', '1', '2', '2', '2'],
+  );
+  const count = f.events.length;
+  f.time();
+  f.api.answer('wrong-round', 'w7', false, () => true);
+  assert.equal(f.events.length, count);
+  f.time();
+  f.api.answer('wrong-round', 'correct', true, () => true);
+  f.time();
+  f.api.answer('wrong-round', 'again', false, () => true);
+  assert.equal(f.events.at(-1)[0], '1');
+  assert.deepEqual(f.calls, before);
+});
+test('native random pools never use unselected assets and fixed mode never rotates the chosen clip', async () => {
+  const f = fixture();
+  f.pack.cues['answer.streak'] = [];
+  f.pack.cues['answer.correct'] = ['1'.repeat(64), '2'.repeat(64)];
+  f.pack.playback.selectionModes = { 'answer.correct': 'random' };
+  await f.api.setAccount('a');
+  await f.api.download('test');
+  f.api.select('test');
+  await f.api.refresh();
+  for (let i = 0; i < 8; i++) {
+    f.time();
+    f.api.answer('random', 'a' + i, true, () => true);
+  }
+  assert.ok(f.events.every((e) => ['1', '2'].includes(e[0])));
+  assert.equal(new Set(f.events.map((e) => e[0])).size, 2);
+  f.pack.cues['answer.correct'] = ['3'.repeat(64)];
+  f.pack.cues['answer.streak'] = [];
+  f.pack.playback.selectionModes['answer.correct'] = 'fixed';
+  await f.api.download('test');
+  await f.api.refresh();
+  f.events.length = 0;
+  for (let i = 0; i < 5; i++) {
+    f.time();
+    f.api.answer('fixed', 'f' + i, true, () => true);
+  }
+  assert.deepEqual(
+    f.events.map((e) => e[0]),
+    ['3', '3', '3', '3', '3'],
+  );
+});

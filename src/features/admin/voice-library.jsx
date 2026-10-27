@@ -18,12 +18,16 @@ import { Panel, Modal, Pagination, requestId, useAdmin } from './shared.jsx';
 import {
   createPracticeVoiceSession,
   selectVoiceClip,
+  voiceCueScene,
+  voiceCueMode,
 } from '../../../mobile/src/api/voicePacks.ts';
 import {
   suggestedStreaks,
   stateLabels,
   formatSeconds,
   cueLabel,
+  cueMode,
+  setCueMode,
   draftSignature,
   emptyDraft,
   editDraft,
@@ -275,10 +279,15 @@ export function VoiceLibrary() {
       return;
     }
     try {
-      const next = updateCue(draft, scene, [
-        ...cueClips(draft, scene),
-        ...values,
-      ]);
+      if (cueMode(draft, scene) === 'fixed' && values.length > 1)
+        throw Error('固定播放请选择一条语音，或切换为随机播放');
+      const next = updateCue(
+        draft,
+        scene,
+        cueMode(draft, scene) === 'fixed'
+          ? values
+          : [...cueClips(draft, scene), ...values],
+      );
       const problem = draftIssues(next, assets);
       if (problem.length) throw Error(problem[0]);
       setDraft(next);
@@ -494,36 +503,42 @@ export function VoiceLibrary() {
   function simulate(kind) {
     if (!draft) return;
     let cue;
+    if (kind === 'reset') {
+      round.current = createPracticeVoiceSession();
+      stop();
+      setSimulation({ streak: 0, wrongStreak: 0, message: '本轮已重置' });
+      return;
+    }
     if (kind === 'enter') {
       round.current = createPracticeVoiceSession();
-      cue = round.current.enter('preview:' + requestId());
-      setSimulation({ streak: 0, message: '进入刷题' });
+      cue = round.current.enter('preview:' + draft.id);
+      setSimulation({ streak: 0, wrongStreak: 0, message: '进入刷题' });
     } else {
       round.current.enter('preview:' + draft.id);
-      if (kind === 'wrong') {
-        round.current.answer(requestId(), false);
-        stop();
-        setSimulation({ streak: 0, message: '答错清零，不播放声音' });
-        return;
-      }
-      cue = round.current.answer(requestId(), true);
+      const correct = kind === 'correct';
+      cue = round.current.answer(requestId(), correct);
       setSimulation({
-        streak: cue.streak,
-        message: cue.streak > 1 ? '连续答对 ' + cue.streak + ' 次' : '普通答对',
+        streak: correct ? cue.streak : 0,
+        wrongStreak: correct ? 0 : cue.streak,
+        message: correct
+          ? '连续答对 ' + cue.streak + ' 次'
+          : '连续答错 ' +
+            cue.streak +
+            ' 次' +
+            (cue.streak >= 5 ? '（第5档）' : ''),
       });
     }
     const manifest = { ...draft, enabled: true, schemaVersion: 1, assets };
     let clip = selectVoiceClip(manifest, cue, Math.random());
-    const eventScene =
-      cue.event === 'answer.streak' &&
-      draft.cues['answer.streak'].some((row) => row.count === cue.streak)
-        ? 'streak:' + cue.streak
-        : cue.event === 'practice.enter'
-          ? 'practice.enter'
-          : 'answer.correct';
+    const eventScene = voiceCueScene(manifest, cue);
     const key = draft.id + ':' + eventScene,
       choices = cueClips(draft, eventScene);
-    if (clip && choices.length > 1 && lastCue.current.get(key) === clip.id) {
+    if (
+      clip &&
+      voiceCueMode(manifest, eventScene) === 'random' &&
+      choices.length > 1 &&
+      lastCue.current.get(key) === clip.id
+    ) {
       const other = choices.filter((id) => id !== clip.id);
       clip =
         assets.find(
@@ -536,7 +551,11 @@ export function VoiceLibrary() {
       stop();
       setSimulation((old) => ({
         ...old,
-        message: old.message + ' · 未配置素材，实际 App 保留内置音效',
+        message:
+          old.message +
+          (cue.event === 'answer.wrong'
+            ? ' · 本档未配语音，保持安静'
+            : ' · 未配置素材，实际 App 保留内置音效'),
       }));
     }
   }
@@ -669,6 +688,7 @@ export function VoiceLibrary() {
     ]
       .sort((a, b) => a - b)
       .map((count) => 'streak:' + count),
+    ...[1, 2, 3, 4, 5].map((count) => 'wrong:' + count),
   ];
   return (
     <div className="ac-voice-library">
@@ -1196,7 +1216,8 @@ export function VoiceLibrary() {
                     }
                     if (
                       !scenes.includes('streak:' + count) &&
-                      scenes.length >= 22
+                      scenes.filter((key) => key.startsWith('streak:'))
+                        .length >= 20
                     ) {
                       setError('最多配置 20 个连对场景');
                       return;
@@ -1220,9 +1241,35 @@ export function VoiceLibrary() {
                 <div className="ac-voice-cue">
                   <h3>
                     {cueLabel(scene)}
-                    <span>{cueClips(draft, scene).length}/8</span>
+                    <span>{cueClips(draft, scene).length}/{cueMode(draft,scene)==='fixed'?1:8}</span>
                   </h3>
-                  <p>从素材库点「＋」加入。同场景多条素材可随机选择。</p>
+                  <label className="ac-voice-field">
+                    播放方式
+                    <select
+                      aria-label="当前场景播放方式"
+                      value={cueMode(draft, scene)}
+                      onChange={(e) => {
+                        const mode = e.target.value;
+                        if (
+                          mode === 'fixed' &&
+                          cueClips(draft, scene).length > 1 &&
+                          !window.confirm(
+                            '改为固定播放将仅保留当前第一条语音，其他素材不会被删除。继续吗？',
+                          )
+                        )
+                          return;
+                        setDraft(setCueMode(draft, scene, mode));
+                      }}
+                    >
+                      <option value="random">从所选语音中随机</option>
+                      <option value="fixed">固定播放一条</option>
+                    </select>
+                  </label>
+                  <p>
+                    {cueMode(draft, scene) === 'random'
+                      ? '下方是本场景的随机候选池，只在这些语音里抽取；多条时避免紧邻重复。'
+                      : '固定播放一条；从素材库添加新语音将替换当前选择。'}
+                  </p>
                   {cueClips(draft, scene).length ? (
                     cueClips(draft, scene).map((id) => {
                       const row = assets.find((asset) => asset.id === id);
@@ -1262,7 +1309,9 @@ export function VoiceLibrary() {
                     })
                   ) : (
                     <div className="ac-voice-cue-empty">
-                      还没有声音，实际 App 将保留内置音效
+                      {scene.startsWith('wrong:')
+                        ? '本档未配置语音，答错时保持安静'
+                        : '还没有声音，实际 App 将保留内置音效'}
                     </div>
                   )}
                 </div>
@@ -1373,6 +1422,7 @@ export function VoiceLibrary() {
           >
             <div className="ac-voice-simulator">
               <strong aria-live="polite">{simulation.streak} 连对</strong>
+              <span aria-live="polite">{simulation.wrongStreak ?? 0} 连错</span>
               <p role="status">{simulation.message}</p>
               <div className="ac-voice-actions">
                 <button disabled={!draft} onClick={() => simulate('enter')}>
@@ -1382,13 +1432,16 @@ export function VoiceLibrary() {
                   答对 · 连对＋1
                 </button>
                 <button disabled={!draft} onClick={() => simulate('wrong')}>
-                  答错清零
+                  答错 · 连错＋1
+                </button>
+                <button disabled={!draft} onClick={() => simulate('reset')}>
+                  重置本轮
                 </button>
               </div>
             </div>
             <p className="ac-voice-note">
-              这里只模拟当前配置。现有 APK
-              仍使用内置提示音，远程语音包播放需后续 App 接入。
+              连错按连续次数计数，答对清零；第5档覆盖第5次及以上。需要 v1.0.6
+              或更新 APK，并下载此语音包的最新版本。
             </p>
           </Panel>
         </div>

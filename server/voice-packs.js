@@ -7,7 +7,10 @@ import {registerVoiceLibrary} from './voice-library.js';
 
 export const VOICE_PACK_CONTRACT = {
   schemaVersion: 1,
-  events: ['practice.enter', 'answer.correct', 'answer.streak'],
+  events: ['practice.enter', 'answer.correct', 'answer.streak', 'answer.wrong'],
+  suggestedWrongStreaks: [1,2,3,4,5],
+  wrongPolicy: 'consecutive-reset-on-correct-cap-five',
+  selectionModes: ['fixed','random'],
   suggestedStreaks: [2, 3, 5, 10],
   formats: ['wav', 'mp3', 'aac', 'm4a', 'ogg', 'flac'],
   maxAssetBytes: 4 * 1024 * 1024,
@@ -26,14 +29,18 @@ const clips = z.array(assetIdSchema).max(8).refine(values => new Set(values).siz
 const cuesSchema = z.object({
   'practice.enter': clips.default([]),
   'answer.correct': clips.default([]),
+  'answer.wrong': z.array(z.object({count:z.number().int().min(1).max(5),clips:clips.min(1)}).strict()).max(5).optional(),
   'answer.streak': z.array(z.object({ count: z.number().int().min(2).max(1000), clips: clips.min(1) }).strict()).max(20).default([]),
-}).strict().refine(cues => new Set(cues['answer.streak'].map(cue => cue.count)).size === cues['answer.streak'].length, '连对次数不可重复');
+}).strict().refine(cues => new Set(cues['answer.streak'].map(cue => cue.count)).size === cues['answer.streak'].length, '连对次数不可重复').refine(cues=>new Set((cues['answer.wrong']??[]).map(c=>c.count)).size===(cues['answer.wrong']??[]).length,'连错次数不可重复');
 const packSchema = z.object({
   requestId: z.uuid(), expectedRevision: z.number().int().nonnegative(),
   name: z.string().trim().min(1).max(60), enabled: z.boolean(), cues: cuesSchema,
-  playback: z.object({ maxDurationMs: z.number().int().min(200).max(10000).default(2500), minIntervalMs: z.number().int().min(0).max(5000).default(150) }).strict().default({ maxDurationMs:2500,minIntervalMs:150 }),
+  playback: z.object({ selectionModes:z.record(z.string().refine(key=>key==='practice.enter'||key==='answer.correct'||/^wrong:[1-5]$/.test(key)||(/^streak:\d{1,4}$/.test(key)&&Number(key.split(':')[1])>=2&&Number(key.split(':')[1])<=1000)),z.enum(['fixed','random'])).refine(value=>Object.keys(value).length<=27).optional(), maxDurationMs: z.number().int().min(200).max(10000).default(2500), minIntervalMs: z.number().int().min(0).max(5000).default(150) }).strict().default({ maxDurationMs:2500,minIntervalMs:150 }),
 }).strict();
-const idsIn = cues => [...new Set([...cues['practice.enter'], ...cues['answer.correct'], ...cues['answer.streak'].flatMap(cue => cue.clips)])];
+const idsIn = cues => [...new Set([...cues['practice.enter'], ...cues['answer.correct'], ...cues['answer.streak'].flatMap(cue => cue.clips), ...(cues['answer.wrong']??[]).flatMap(cue=>cue.clips)])];
+
+const sceneClips=(cues,key)=>key==='practice.enter'||key==='answer.correct'?cues[key]:key.startsWith('wrong:')?(cues['answer.wrong']??[]).find(c=>c.count===Number(key.split(':')[1]))?.clips??[]:cues['answer.streak'].find(c=>c.count===Number(key.split(':')[1]))?.clips??[];
+const validateSelections=body=>{for(const [key,mode]of Object.entries(body.playback.selectionModes??{}))if(mode==='fixed'&&sceneClips(body.cues,key).length>1)throw error('固定播放只能选择一条语音',400,'VOICE_SELECTION_INVALID');};
 
 // Recognize the container from bytes, never a supplied suffix/MIME or remote URL.
 // This is not a full codec decoder; a real-device listening check is still needed.
@@ -102,6 +109,7 @@ export function registerVoicePackRoutes({app,route,store,requestUserId,requireAd
   };
   let library;
   const applyPack=(id,body)=>{
+      validateSelections(body);
       const current=packRow(id);
       if((current?.revision??0)!==body.expectedRevision)throw error('语音包已更新，请刷新后重试',409,'VOICE_REVISION_CONFLICT');
       if(!current&&!db.prepare('SELECT 1 FROM voice_pack_drafts WHERE id=?').get(id)&&db.prepare('SELECT COUNT(*) AS n FROM (SELECT id FROM voice_packs UNION SELECT id FROM voice_pack_drafts)').get().n>=100)throw error('语音包数量已达上限',409,'VOICE_PACK_LIMIT');
@@ -123,7 +131,7 @@ export function registerVoicePackRoutes({app,route,store,requestUserId,requireAd
       db.prepare('UPDATE voice_pack_configuration SET revision=revision+1,default_pack_id=CASE WHEN default_pack_id=? AND ?=0 THEN NULL ELSE default_pack_id END WHERE id=1').run(id,body.enabled?1:0);
       return {pack:manifest(packRow(id)),configuration:configuration()};
   };
-  library=registerVoiceLibrary({route,store,requireAdmin,configuration,mutate,assetRow,assetView,packRow,applyPack,packSchema,idsIn});
+  library=registerVoiceLibrary({route,store,requireAdmin,configuration,mutate,assetRow,assetView,packRow,applyPack,packSchema,idsIn,validateSelections});
   route('get','/api/voice-packs',req=>{
     requestUserId(req);
     return {...configuration(),contract:VOICE_PACK_CONTRACT,packs:db.prepare('SELECT * FROM voice_packs WHERE enabled=1 ORDER BY id').all().map(summary)};

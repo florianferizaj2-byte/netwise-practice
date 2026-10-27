@@ -55,4 +55,7 @@ test('release check rejects a stale native configuration or lockfile', (t) => {
   lock.packages[''].version = '0.0.0';
   fs.writeFileSync(path.join(mobile, 'package-lock.json'), JSON.stringify(lock));
   assert.throws(() => checkMobileVersion(temporary), /lock root.*不一致/);
+  lock.packages[''].version=packageInfo.version;lock.packages['node_modules/clone'].version='999.0.0';
+  fs.writeFileSync(path.join(mobile,'package-lock.json'),JSON.stringify(lock));
+  assert.throws(()=>checkMobileVersion(temporary),/锁文件依赖版本与下载地址不一致/);
 });

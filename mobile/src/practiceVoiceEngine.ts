@@ -1,6 +1,9 @@
 import {
   createPracticeVoiceSession,
   selectVoiceClip,
+  voiceCueScene,
+  voiceSceneClips,
+  voiceCueMode,
   type VoiceAsset,
   type VoicePackCatalog,
   type VoicePackManifest,
@@ -57,7 +60,10 @@ export function validateVoiceManifest(pack: VoicePackManifest) {
     !Array.isArray(pack.cues['practice.enter']) ||
     !Array.isArray(pack.cues['answer.correct']) ||
     !Array.isArray(pack.cues['answer.streak']) ||
-    pack.cues['answer.streak'].length > 20
+    pack.cues['answer.streak'].length > 20 ||
+    (pack.cues['answer.wrong'] !== undefined &&
+      (!Array.isArray(pack.cues['answer.wrong']) ||
+        pack.cues['answer.wrong'].length > 5))
   )
     throw Error('语音包清单不完整');
   if (
@@ -87,9 +93,52 @@ export function validateVoiceManifest(pack: VoicePackManifest) {
     ids.add(a.id);
     bytes += a.bytes;
   }
+  const wrong = pack.cues['answer.wrong'] ?? [];
+  if (
+    new Set(wrong.map((s) => s.count)).size !== wrong.length ||
+    new Set(pack.cues['answer.streak'].map((s) => s.count)).size !==
+      pack.cues['answer.streak'].length
+  )
+    throw Error('重复的连续答题档位');
+  for (const s of wrong)
+    if (
+      !Number.isInteger(s.count) ||
+      s.count < 1 ||
+      s.count > 5 ||
+      !Array.isArray(s.clips) ||
+      !s.clips.length
+    )
+      throw Error('连错设置无效');
+  const modes = pack.playback.selectionModes;
+  if (modes !== undefined) {
+    if (
+      !modes ||
+      Array.isArray(modes) ||
+      typeof modes !== 'object' ||
+      Object.keys(modes).length > 27
+    )
+      throw Error('语音播放方式无效');
+    for (const [key, mode] of Object.entries(modes)) {
+      if (
+        !['fixed', 'random'].includes(mode) ||
+        !(
+          key === 'practice.enter' ||
+          key === 'answer.correct' ||
+          /^wrong:[1-5]$/.test(key) ||
+          (/^streak:\d{1,4}$/.test(key) &&
+            Number(key.split(':')[1]) >= 2 &&
+            Number(key.split(':')[1]) <= 1000)
+        )
+      )
+        throw Error('语音播放方式无效');
+      if (mode === 'fixed' && voiceSceneClips(pack.cues, key).length > 1)
+        throw Error('固定播放只能选择一条语音');
+    }
+  }
   const slots = [
     pack.cues['practice.enter'],
     pack.cues['answer.correct'],
+    ...wrong.map((s) => s.clips),
     ...pack.cues['answer.streak'].map((s) => {
       if (!Number.isInteger(s.count) || s.count < 2 || s.count > 1000)
         throw Error('连对设置无效');
@@ -297,14 +346,13 @@ export function createVoiceEngine(deps: VoiceDependencies) {
     if (!settings.soundEnabled || settings.volume <= 0) return false;
     let selected = selectVoiceClip(pack, cue, deps.random());
     if (!selected) return false;
-    const slot =
-      cue.event === 'answer.streak'
-        ? (pack.cues['answer.streak'].find((s) => s.count === cue.streak)
-            ?.clips ?? pack.cues['answer.correct'])
-        : pack.cues[cue.event];
-    const key =
-      cue.event + ':' + (cue.event === 'answer.streak' ? cue.streak : 0);
-    if (slot.length > 1 && previous.get(key) === selected.id)
+    const key = voiceCueScene(pack, cue),
+      slot = voiceSceneClips(pack.cues, key);
+    if (
+      voiceCueMode(pack, key) === 'random' &&
+      slot.length > 1 &&
+      previous.get(key) === selected.id
+    )
       selected =
         pack.assets.find(
           (a) => a.id === slot[(slot.indexOf(selected!.id) + 1) % slot.length],
@@ -362,10 +410,7 @@ export function createVoiceEngine(deps: VoiceDependencies) {
     answer(s: string, id: string, correct: boolean, current: () => boolean) {
       round.enter(scope(s));
       const cue = round.answer(id, correct);
-      if (correct !== true) {
-        stop();
-        return false;
-      }
+      if (correct !== true) stop();
       return play(cue, current);
     },
     preview(current: () => boolean = () => true) {

@@ -14,6 +14,12 @@ export function checkMobileVersion(root = fileURLToPath(new URL('../', import.me
   for (const [name, value] of [['app.json', expo.version], ['app.config.js', config.version], ['package-lock.json', lock.version], ['lock root', lock.packages[''].version]]) {
     assert.equal(value, version, `${name} 版本与 mobile/package.json 不一致`);
   }
+  for (const [name, entry] of Object.entries(lock.packages)) {
+    const url=entry.resolved;
+    if(typeof url!=='string'||!url.startsWith('https://registry.npmjs.org/'))continue;
+    const versionInUrl=decodeURIComponent(url).match(/\/-\/[^/]+-(\d+\.\d+\.\d+(?:[-+][^/]+)?)\.tgz$/)?.[1];
+    if(versionInUrl)assert.equal(entry.version,versionInUrl,`锁文件依赖版本与下载地址不一致：${name}`);
+  }
   assert.ok(Number.isSafeInteger(config.android.versionCode) && config.android.versionCode > 0, 'Android versionCode 必须为正整数');
   return { version, versionCode: config.android.versionCode };
 }

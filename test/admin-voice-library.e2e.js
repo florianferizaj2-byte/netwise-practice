@@ -233,6 +233,50 @@ try {
   await page
     .getByRole('button', { name: '添加 入场你好 到 连对 2 次', exact: true })
     .click();
+
+  // Candidate pools are scoped to the scene. Fixed mode deliberately keeps one selected clip.
+  await page
+    .getByRole('button', { name: /^进入刷题/ })
+    .filter({ has: page.locator('span') })
+    .click();
+  await input.fill(second.name);
+  await page
+    .getByRole('button', {
+      name: '添加 ' + second.name + ' 到 进入刷题',
+      exact: true,
+    })
+    .click();
+  const mode = page.getByRole('combobox', {
+    name: '当前场景播放方式',
+    exact: true,
+  });
+  await expect(mode).toHaveValue('random');
+  await mode.selectOption('fixed');
+  await expect(
+    page.getByLabel('语音场景').getByRole('button', { name: /^进入刷题/ }),
+  ).toContainText('1');
+  await mode.selectOption('random');
+  await page
+    .getByRole('button', {
+      name: '添加 ' + second.name + ' 到 进入刷题',
+      exact: true,
+    })
+    .click();
+  for (let n = 1; n <= 5; n++) {
+    const label = '连错 ' + n + ' 次' + (n === 5 ? '及以上' : '');
+    await page
+      .getByLabel('语音场景')
+      .getByRole('button', { name: new RegExp('^' + label) })
+      .click();
+    const chosen = n % 2 ? '入场你好' : second.name;
+    await input.fill(chosen);
+    await page
+      .getByRole('button', {
+        name: '添加 ' + chosen + ' 到 ' + label,
+        exact: true,
+      })
+      .click();
+  }
   await expect(
     page.getByRole('button', { name: '发布语音包', exact: true }),
   ).toBeDisabled();
@@ -257,8 +301,38 @@ try {
   await input.fill('');
   await page.getByRole('button', { name: '进入刷题', exact: true }).click();
   await expect
-    .poll(() => player.evaluate((audio) => audio.currentSrc))
+    .poll(() => player.evaluate((a) => a.currentSrc))
+    .toMatch(new RegExp(sample.id + '|' + second.id));
+  const randomFirst = await player.evaluate((a) => a.currentSrc);
+  await page.getByRole('button', { name: '进入刷题', exact: true }).click();
+  await expect
+    .poll(() => player.evaluate((a) => a.currentSrc))
+    .not.toBe(randomFirst);
+  await page
+    .getByLabel('语音场景')
+    .getByRole('button', { name: /^进入刷题/ })
+    .click();
+  await page
+    .getByRole('combobox', { name: '当前场景播放方式', exact: true })
+    .selectOption('fixed');
+  await page.getByRole('button', { name: '进入刷题', exact: true }).click();
+  await expect
+    .poll(() => player.evaluate((a) => a.currentSrc))
     .toContain(sample.id);
+  await page.getByRole('button', { name: '进入刷题', exact: true }).click();
+  await expect
+    .poll(() => player.evaluate((a) => a.currentSrc))
+    .toContain(sample.id);
+  await page
+    .getByRole('combobox', { name: '当前场景播放方式', exact: true })
+    .selectOption('random');
+  await input.fill(second.name);
+  await page
+    .getByRole('button', {
+      name: '添加 ' + second.name + ' 到 进入刷题',
+      exact: true,
+    })
+    .click();
   await page
     .getByRole('button', { name: '答对 · 连对＋1', exact: true })
     .click();
@@ -273,11 +347,36 @@ try {
   await expect
     .poll(() => player.evaluate((audio) => audio.currentSrc))
     .toContain(sample.id);
-  await page.getByRole('button', { name: '答错清零', exact: true }).click();
+  for (let n = 1; n <= 6; n++) {
+    await page
+      .getByRole('button', { name: '答错 · 连错＋1', exact: true })
+      .click();
+    await expect(page.getByText(n + ' 连错', { exact: true })).toBeVisible();
+    const expectedId = Math.min(n, 5) % 2 ? sample.id : second.id;
+    await expect
+      .poll(() => player.evaluate((a) => a.currentSrc))
+      .toContain(expectedId);
+  }
   await expect(page.getByText('0 连对', { exact: true })).toBeVisible();
-  assert.equal(await player.evaluate((audio) => audio.paused), true);
+  await page
+    .getByRole('button', { name: '答对 · 连对＋1', exact: true })
+    .click();
+  await expect(page.getByText('0 连错', { exact: true })).toBeVisible();
+  await expect(page.getByText('1 连对', { exact: true })).toBeVisible();
+  await page
+    .getByRole('button', { name: '答错 · 连错＋1', exact: true })
+    .click();
+  await expect(page.getByText('1 连错', { exact: true })).toBeVisible();
+  await expect
+    .poll(() => player.evaluate((a) => a.currentSrc))
+    .toContain(sample.id);
+  const savedDraft = (await get('/admin/voice-packs')).drafts.find(
+    (p) => p.id === packId,
+  );
+  assert.equal(savedDraft.cues['answer.wrong'].length, 5);
+  assert.equal(savedDraft.playback.selectionModes['practice.enter'], 'random');
   checks.push(
-    'simulator uses distinct entry/correct/streak cues and wrong answer resets without stacking audio',
+    'simulator honors selected random pools, fixed playback, consecutive wrong 1–5/cap and reset on correct',
   );
   await page.getByRole('button', { name: '发布语音包', exact: true }).click();
   await expect
@@ -287,8 +386,12 @@ try {
   await expect
     .poll(async () => (await get('/voice-packs')).defaultPackId)
     .toBe(packId);
-  await expect(page.locator('.ac-voice-stats > div:last-child strong')).toHaveText('卢音练习包');
-  await expect(page.getByRole('button', {name:'刷新',exact:true})).toBeEnabled();
+  await expect(
+    page.locator('.ac-voice-stats > div:last-child strong'),
+  ).toHaveText('卢音练习包');
+  await expect(
+    page.getByRole('button', { name: '刷新', exact: true }),
+  ).toBeEnabled();
   await page.evaluate(() => {
     window.scrollTo(0, 0);
     document.querySelector('.ac-voice-editor').scrollTop = 0;

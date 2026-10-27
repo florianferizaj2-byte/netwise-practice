@@ -1,4 +1,4 @@
-export const MOBILE_BACKEND_VERSION = '1.0.5';
+export const MOBILE_BACKEND_VERSION = '1.0.6';
 export const MOBILE_API_REVISION = 1;
 
 // A capability means its actual protocol routes are mounted, not that an AI

@@ -19,6 +19,7 @@ export function registerVoiceLibrary({
   applyPack,
   packSchema,
   idsIn,
+  validateSelections,
 }) {
   const db = store.db;
   db.exec(`CREATE TABLE IF NOT EXISTS voice_asset_metadata (asset_id TEXT PRIMARY KEY,revision INTEGER NOT NULL,collection TEXT NOT NULL,tags TEXT NOT NULL,state TEXT NOT NULL,reported_duration_ms INTEGER);
@@ -75,6 +76,7 @@ export function registerVoiceLibrary({
     updatedAt: row.updated_at,
   });
   const validateReferences = (data) => {
+    validateSelections(data);
     const ids = idsIn(data.cues);
     if (ids.length > 32) throw failure('单个包最多使用 32 个不同素材', 400);
     const rows = ids.map(assetRow);

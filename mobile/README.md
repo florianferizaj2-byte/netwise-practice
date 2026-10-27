@@ -1,6 +1,6 @@
 # 考匠移动端
 
-这是考匠的 Expo / React Native 移动端。Android 当前源码版本为 v1.0.5（versionCode 38）；继续复用现有 Node 后端，通过移动端 Bearer 会话连接生产 API。
+这是考匠的 Expo / React Native 移动端。Android 当前源码版本为 v1.0.6（versionCode 39）；继续复用现有 Node 后端，通过移动端 Bearer 会话连接生产 API。
 
 [v1.0.4 APK](kaojiang-v1.0.4.apk) · [SHA-256](kaojiang-v1.0.4.apk.sha256) · [更新说明](../docs/release-v1.0.4.md)。新增答对提示音与轻短震动，可在设置独立开关并调整音色、音量和震动强度。本地构建已验证，不等同于 GitHub 发布、部署或手机实装。
 
@@ -208,3 +208,7 @@ node test/mobile.e2e.js
 在设置的「答对反馈 → 刷题语音包」下载后台发布的音频包，校验完成后选择使用。整包音频存入应用私有目录，作答时只播放本地资源；未下载、离线且无本地包、损坏或未就绪时不阻塞答题，保留内置提示音。选择的已下载包支持离线播放；支持显示大小、进度、更新与删除。
 
 实际 Android 版本由 `modules/app-runtime` 读取 PackageManager，不能只修改 package.json 或关于页标签冒充新 APK。详见 [v1.0.5 说明](../docs/release-v1.0.5.md)。
+
+## v1.0.6 连错与候选池
+
+支持连续答错 1–5 档（第5档覆盖之后的连续错误），答对清零。后台可逐场景设置固定单条或在所选候选池中随机，手机仅播放已下载包中的本地素材。后台发布新配置后，要在手机更新语音包；详见 [v1.0.6](../docs/release-v1.0.6.md)。

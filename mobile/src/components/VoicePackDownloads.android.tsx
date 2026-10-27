@@ -41,7 +41,7 @@ export function VoicePackDownloads() {
         </AnimatedPressable>
       </View>
       <Text style={s.hint}>
-        先下载，后播放。入场、答对和连对声音都从本地读取，不影响出题速度。
+        先下载，后播放。入场、答对、连对和连错声音都从本地读取，不影响出题速度。
       </Text>
       <AnimatedPressable
         accessibilityRole="button"

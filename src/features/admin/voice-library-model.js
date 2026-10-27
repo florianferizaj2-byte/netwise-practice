@@ -11,7 +11,27 @@ export const cueLabel = (scene) =>
     ? '进入刷题'
     : scene === 'answer.correct'
       ? '普通答对'
-      : '连对 ' + scene.split(':')[1] + ' 次';
+      : scene.startsWith('wrong:')
+        ? '连错 ' +
+          scene.split(':')[1] +
+          ' 次' +
+          (scene === 'wrong:5' ? '及以上' : '')
+        : '连对 ' + scene.split(':')[1] + ' 次';
+export const cueMode = (draft, scene) =>
+  draft.playback.selectionModes?.[scene] ?? 'random';
+export function setCueMode(draft, scene, mode) {
+  if (!['fixed', 'random'].includes(mode)) throw Error('播放方式无效');
+  const next = {
+    ...draft,
+    playback: {
+      ...draft.playback,
+      selectionModes: { ...draft.playback.selectionModes, [scene]: mode },
+    },
+  };
+  return mode === 'fixed'
+    ? updateCue(next, scene, cueClips(next, scene).slice(0, 1))
+    : next;
+}
 export const draftSignature = (draft) =>
   draft
     ? JSON.stringify({
@@ -27,7 +47,12 @@ export function emptyDraft(id, name) {
     name,
     revision: 0,
     basedOnRevision: 0,
-    cues: { 'practice.enter': [], 'answer.correct': [], 'answer.streak': [] },
+    cues: {
+      'practice.enter': [],
+      'answer.correct': [],
+      'answer.streak': [],
+      'answer.wrong': [],
+    },
     playback: { maxDurationMs: 2500, minIntervalMs: 150 },
   };
 }
@@ -35,6 +60,7 @@ export function editDraft(row, live) {
   return JSON.parse(
     JSON.stringify({
       ...row,
+      cues: { ...row.cues, 'answer.wrong': row.cues['answer.wrong'] ?? [] },
       revision: row.basedOnRevision === undefined ? 0 : row.revision,
       basedOnRevision:
         row.basedOnRevision ?? live?.revision ?? row.revision ?? 0,
@@ -42,22 +68,36 @@ export function editDraft(row, live) {
   );
 }
 export function cueClips(draft, scene) {
+  if (scene.startsWith('wrong:'))
+    return (
+      (draft.cues['answer.wrong'] ?? []).find(
+        (r) => r.count === Number(scene.split(':')[1]),
+      )?.clips ?? []
+    );
   return scene.startsWith('streak:')
     ? (draft.cues['answer.streak'].find(
-        (row) => row.count === Number(scene.split(':')[1]),
+        (r) => r.count === Number(scene.split(':')[1]),
       )?.clips ?? [])
     : (draft.cues[scene] ?? []);
 }
 export function updateCue(draft, scene, clips) {
   const values = [...new Set(clips)];
   if (values.length > 8) throw Error('每个场景最多选择 8 条素材');
+  if (cueMode(draft, scene) === 'fixed' && values.length > 1)
+    throw Error('固定播放只能选择一条语音，请切换为随机播放');
   const cues = { ...draft.cues };
-  if (scene.startsWith('streak:')) {
-    const count = Number(scene.split(':')[1]);
-    if (!Number.isInteger(count) || count < 2 || count > 1000)
-      throw Error('连对次数应为 2–1000 的整数');
-    cues['answer.streak'] = [
-      ...cues['answer.streak'].filter((row) => row.count !== count),
+  if (scene.startsWith('streak:') || scene.startsWith('wrong:')) {
+    const wrong = scene.startsWith('wrong:'),
+      count = Number(scene.split(':')[1]),
+      event = wrong ? 'answer.wrong' : 'answer.streak';
+    if (
+      !Number.isInteger(count) ||
+      count < (wrong ? 1 : 2) ||
+      count > (wrong ? 5 : 1000)
+    )
+      throw Error(wrong ? '连错次数应为 1–5' : '连对次数应为 2–1000 的整数');
+    cues[event] = [
+      ...(cues[event] ?? []).filter((r) => r.count !== count),
       ...(values.length ? [{ count, clips: values }] : []),
     ].sort((a, b) => a.count - b.count);
   } else cues[scene] = values;
@@ -70,6 +110,7 @@ export const usedAssetIds = (draft) =>
           ...draft.cues['practice.enter'],
           ...draft.cues['answer.correct'],
           ...draft.cues['answer.streak'].flatMap((row) => row.clips),
+          ...(draft.cues['answer.wrong'] ?? []).flatMap((row) => row.clips),
         ]),
       ]
     : [];

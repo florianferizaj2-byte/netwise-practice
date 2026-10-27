@@ -31,7 +31,7 @@ test('client protocol counts only fresh answers in one scope and chooses exact s
   assert.equal(round.enter('api:alice:cert:round1').event,'practice.enter');assert.equal(round.enter('api:alice:cert:round1'),null);
   const first=round.answer('one',true);assert.equal(first.event,'answer.correct');assert.equal(first.streak,1);assert.equal(round.answer('one',true),null);
   const second=round.answer('two',true);assert.equal(second.event,'answer.streak');assert.equal(second.streak,2);
-  assert.equal(round.answer('wrong',false),null);assert.equal(round.answer('three',true).streak,1);
+  assert.equal(round.answer('wrong',false).event,'answer.wrong');assert.equal(round.answer('three',true).streak,1);
   round.enter('api:bob:cert:round1');assert.equal(round.answer('one',true).streak,1);
   const base={id:'a'.repeat(64),sha256:'a'.repeat(64),url:'/voice-packs/assets/'+'a'.repeat(64)},bonus={id:'b'.repeat(64),sha256:'b'.repeat(64),url:'/voice-packs/assets/'+'b'.repeat(64)};
   const manifest={schemaVersion:1,enabled:true,cues:{'practice.enter':[base.id],'answer.correct':[base.id],'answer.streak':[{count:2,clips:[bonus.id]}]},assets:[base,bonus]};
