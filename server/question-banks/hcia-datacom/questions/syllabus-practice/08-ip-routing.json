@@ -14,13 +14,16 @@
     ],
     "analysis": "IP 转发首先遵循最长前缀匹配，前缀越长表示目的网络越具体。",
     "chapter": "IP 路由基础",
-    "knowledgePoint": "最长匹配",
+    "knowledgePoint": "最长匹配原则",
     "difficulty": "easy",
     "tags": [
       "IP 路由基础",
+      "转发与查找",
+      "最长匹配原则",
       "最长匹配"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "转发与查找"
   },
   {
     "id": "hcia-v2-08-default-route",
@@ -41,9 +44,11 @@
     "difficulty": "easy",
     "tags": [
       "IP 路由基础",
+      "静态路由配置",
       "默认路由"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "静态路由配置"
   },
   {
     "id": "hcia-v2-08-direct-route",
@@ -60,13 +65,16 @@
     ],
     "analysis": "接口协议状态正常后，设备可根据接口地址和掩码生成相应的直连网络路由。",
     "chapter": "IP 路由基础",
-    "knowledgePoint": "路由表",
+    "knowledgePoint": "路由表字段",
     "difficulty": "medium",
     "tags": [
       "IP 路由基础",
+      "路由表与选路",
+      "路由表字段",
       "路由表"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "路由表与选路"
   },
   {
     "id": "hcia-v2-08-static-next-hop",
@@ -83,12 +91,15 @@
     ],
     "analysis": "下一跳指出报文离开本设备后应交付给哪个相邻三层设备，递归查询后确定出接口。",
     "chapter": "IP 路由基础",
-    "knowledgePoint": "静态路由",
+    "knowledgePoint": "静态路由基本配置",
     "difficulty": "medium",
     "tags": [
       "IP 路由基础",
+      "静态路由配置",
+      "静态路由基本配置",
       "静态路由"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "静态路由配置"
   }
 ]

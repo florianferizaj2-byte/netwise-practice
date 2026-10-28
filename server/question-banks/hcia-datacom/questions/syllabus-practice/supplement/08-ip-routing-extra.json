@@ -14,13 +14,16 @@
     ],
     "analysis": "直连路由由接口地址和掩码自动产生，表示目标网络可从本地接口到达。 本题考查“路由表”，因此应选择“该目标网络与本设备某接口直连”。",
     "chapter": "IP 路由基础",
-    "knowledgePoint": "路由表",
+    "knowledgePoint": "路由表字段",
     "difficulty": "easy",
     "tags": [
       "IP 路由基础",
+      "路由表与选路",
+      "路由表字段",
       "路由表"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "路由表与选路"
   },
   {
     "id": "hcia-v2-extra-08-static-preference",
@@ -37,13 +40,16 @@
     ],
     "analysis": "最长前缀相同后，设备依次依据路由优先级和协议度量选择更优路由。 本题考查“静态路由”，因此应选择“路由优先级和度量值”。",
     "chapter": "IP 路由基础",
-    "knowledgePoint": "静态路由",
+    "knowledgePoint": "静态路由基本配置",
     "difficulty": "medium",
     "tags": [
       "IP 路由基础",
+      "静态路由配置",
+      "静态路由基本配置",
       "静态路由"
     ],
-    "stage": "直接计算"
+    "stage": "直接计算",
+    "knowledgeSection": "静态路由配置"
   },
   {
     "id": "hcia-v2-extra-08-recursive-lookup",
@@ -60,13 +66,16 @@
     ],
     "analysis": "下一跳递归查询用于确认到达下一跳的实际出接口，并解析相邻 MAC。 本题考查“路由表”，因此应选择“查找下一跳的出接口和二层可达性”。",
     "chapter": "IP 路由基础",
-    "knowledgePoint": "路由表",
+    "knowledgePoint": "路由表字段",
     "difficulty": "hard",
     "tags": [
       "IP 路由基础",
+      "路由表与选路",
+      "路由表字段",
       "路由表"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "路由表与选路"
   },
   {
     "id": "hcia-v2-extra-08-route-blackhole",
@@ -83,13 +92,16 @@
     ],
     "analysis": "/24 比 /16 前缀更长，匹配更具体，因此优先用于转发。 本题考查“最长匹配”，因此应选择“192.168.1.0/24”。",
     "chapter": "IP 路由基础",
-    "knowledgePoint": "最长匹配",
+    "knowledgePoint": "最长匹配原则",
     "difficulty": "medium",
     "tags": [
       "IP 路由基础",
+      "转发与查找",
+      "最长匹配原则",
       "最长匹配"
     ],
-    "stage": "反向推理"
+    "stage": "反向推理",
+    "knowledgeSection": "转发与查找"
   },
   {
     "id": "hcia-v2-extra-08-default-use",
@@ -110,9 +122,11 @@
     "difficulty": "easy",
     "tags": [
       "IP 路由基础",
+      "静态路由配置",
       "默认路由"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "静态路由配置"
   },
   {
     "id": "hcia-v2-extra-08-static-discard",
@@ -129,12 +143,15 @@
     ],
     "analysis": "丢弃路由可作为汇总场景的保护，防止错误流量被反复转发。 本题考查“静态路由”，因此应选择“防止汇总路由指向不存在的明细网络形成环路”。",
     "chapter": "IP 路由基础",
-    "knowledgePoint": "静态路由",
+    "knowledgePoint": "静态路由基本配置",
     "difficulty": "hard",
     "tags": [
       "IP 路由基础",
+      "静态路由配置",
+      "静态路由基本配置",
       "静态路由"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "静态路由配置"
   }
 ]

@@ -122,22 +122,34 @@ test("manifest catalog discovers the certificate tracks and keeps sources explic
   const hcipAdvanced = bundledQuestions().filter((q) =>
     hasCertificateQuestion(q, "hcip-datacom-advanced"),
   );
-  assert.equal(hcipCore.length, 670);
+  assert.equal(hcipCore.length, 900);
   assert.equal(new Set(hcipCore.map((q) => q.chapter)).size, 13);
-  assert.ok(hcipCore.every((q) => q.type === "single_choice"));
+  assert.ok(
+    hcipCore.every((q) =>
+      ["single_choice", "multiple_choice", "true_false"].includes(q.type),
+    ),
+  );
+  assert.ok(hcipCore.some((q) => q.type === "multiple_choice"));
+  assert.ok(hcipCore.some((q) => q.type === "true_false"));
   assert.ok(hcipCore.every((q) => q.provenance?.reviewDigest));
-  assert.equal(hcipAdvanced.length, 320);
+  assert.equal(hcipAdvanced.length, 900);
   assert.equal(new Set(hcipAdvanced.map((q) => q.chapter)).size, 8);
-  assert.ok(hcipAdvanced.every((q) => q.type === "single_choice"));
+  assert.ok(
+    hcipAdvanced.every((q) =>
+      ["single_choice", "multiple_choice", "true_false"].includes(q.type),
+    ),
+  );
+  assert.ok(hcipAdvanced.some((q) => q.type === "multiple_choice"));
+  assert.ok(hcipAdvanced.some((q) => q.type === "true_false"));
   assert.ok(hcipAdvanced.every((q) => q.provenance?.reviewDigest));
   const hcia = bundledQuestions().filter((q) =>
     hasCertificateQuestion(q, "hcia-datacom"),
   );
-  assert.equal(hcia.length, 400);
+  assert.equal(hcia.length, 1020);
   assert.equal(new Set(hcia.map((q) => q.chapter)).size, 22);
   assert.equal(
     hcia.filter((q) => q.source === "syllabus_practice").length,
-    220,
+    840,
   );
   assert.equal(
     hcia.filter((q) => q.source === "user_recall_collection").length,
@@ -323,8 +335,8 @@ test("HCIA syllabus reports coverage and creates weighted exam samples", () => {
   const progress = buildSyllabusProgress(questions, [], syllabus);
   assert.equal(progress.coveredModules, 22);
   assert.equal(progress.completeModules, 22);
-  assert.equal(progress.questionCount, 400);
-  assert.equal(progress.targetQuestionCount, 220);
+  assert.equal(progress.questionCount, 1020);
+  assert.equal(progress.targetQuestionCount, 1000);
   assert.equal(progress.coverage, 1);
   const sample = stratifiedSample(questions, syllabus, 40, () => 0);
   assert.equal(sample.length, 40);

@@ -1,0 +1,442 @@
+[
+  {
+    "id": "hcia-v3-19-001",
+    "type": "single_choice",
+    "question": "通过 Telnet 管理设备时，需要保证设备上哪类配置就绪？",
+    "options": {
+      "A": "设备已加入 Eth-Trunk",
+      "B": "设备已配置默认路由指向互联网",
+      "C": "设备已开启 STP",
+      "D": "VTY 用户界面已配置认证且管理地址可达"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Telnet 通过 VTY 接入，需配置认证方式与用户权限，同时管理终端到设备的管理地址必须三层可达。",
+    "chapter": "网络设备管理",
+    "knowledgeSection": "远程管理",
+    "knowledgePoint": "Telnet 管理",
+    "difficulty": "medium",
+    "tags": [
+      "网络设备管理",
+      "远程管理",
+      "Telnet 管理"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-19-002",
+    "type": "single_choice",
+    "question": "Telnet 管理方式最大的安全缺陷是什么？",
+    "options": {
+      "A": "只能管理同一网段的设备",
+      "B": "无法支持多个用户同时登录",
+      "C": "占用带宽过大",
+      "D": "报文以明文传输，账号口令可被抓包还原"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Telnet 不对会话加密，抓包即可看到明文口令；因此生产环境应使用 SSH，并在必要时用 ACL 限制管理源地址。",
+    "chapter": "网络设备管理",
+    "knowledgeSection": "远程管理",
+    "knowledgePoint": "Telnet 管理",
+    "difficulty": "medium",
+    "tags": [
+      "网络设备管理",
+      "远程管理",
+      "Telnet 管理"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-19-003",
+    "type": "true_false",
+    "question": "用 ACL 限制只允许管理网段访问 VTY，是降低远程登录风险的有效手段。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "在 user-interface vty 下调用 acl 可限定登录源地址，配合 SSH 与强口令构成设备管理的基本安全基线。",
+    "chapter": "网络设备管理",
+    "knowledgeSection": "远程管理",
+    "knowledgePoint": "用户界面与访问控制",
+    "difficulty": "medium",
+    "tags": [
+      "网络设备管理",
+      "远程管理",
+      "用户界面与访问控制"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-19-004",
+    "type": "single_choice",
+    "question": "开启 SSH 服务并允许 STelnet 登录，除了生成密钥对还需要什么？",
+    "options": {
+      "A": "关闭 SNMP 服务",
+      "B": "关闭所有以太网接口",
+      "C": "在 VTY 下配置 authentication-mode aaa 并指定协议为 ssh",
+      "D": "配置默认路由指向管理终端"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "STelnet 需要 stelnet server enable、密钥对、AAA 用户以及 VTY 下 protocol inbound ssh 共同配合才能登录。",
+    "chapter": "网络设备管理",
+    "knowledgeSection": "远程管理",
+    "knowledgePoint": "SSH 管理",
+    "difficulty": "hard",
+    "tags": [
+      "网络设备管理",
+      "远程管理",
+      "SSH 管理"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-19-005",
+    "type": "single_choice",
+    "question": "SSH 使用哪个端口提供远程管理服务？",
+    "options": {
+      "A": "443",
+      "B": "161",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "SSH 默认 22，Telnet 为 23，SNMP 为 161，HTTPS 为 443。端口是最基础的协议识别依据。",
+    "chapter": "网络设备管理",
+    "knowledgeSection": "远程管理",
+    "knowledgePoint": "SSH 管理",
+    "difficulty": "easy",
+    "tags": [
+      "网络设备管理",
+      "远程管理",
+      "SSH 管理"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-19-006",
+    "type": "single_choice",
+    "question": "SNMP 架构中，NMS 与 Agent 的关系是什么？",
+    "options": {
+      "A": "NMS 是管理站，Agent 运行在被管设备上响应请求",
+      "B": "Agent 是管理站，NMS 在被管设备上",
+      "C": "NMS 只负责转发报文",
+      "D": "两者是同一组件"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "NMS 发起查询与接收告警，Agent 维护本地 MIB 并响应 NMS 请求，两者通过 UDP 161 与 162 通信。",
+    "chapter": "网络设备管理",
+    "knowledgeSection": "SNMP 网络管理",
+    "knowledgePoint": "SNMP 版本与架构",
+    "difficulty": "medium",
+    "tags": [
+      "网络设备管理",
+      "SNMP 网络管理",
+      "SNMP 版本与架构"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-19-007",
+    "type": "single_choice",
+    "question": "SNMPv3 相比 SNMPv2c 的关键改进是什么？",
+    "options": {
+      "A": "不再支持 Trap",
+      "B": "取消了 MIB 结构",
+      "C": "把传输层协议改为 TCP",
+      "D": "增加了认证与加密机制"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "v1 与 v2c 使用明文团体名，v3 引入用户、认证与加密，安全性显著提升，是现网推荐版本。",
+    "chapter": "网络设备管理",
+    "knowledgeSection": "SNMP 网络管理",
+    "knowledgePoint": "SNMP 版本与架构",
+    "difficulty": "medium",
+    "tags": [
+      "网络设备管理",
+      "SNMP 网络管理",
+      "SNMP 版本与架构"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-19-008",
+    "type": "true_false",
+    "question": "SNMPv2c 使用团体名（community）作为访问凭据，团体名相当于明文口令。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "团体名在报文中明文传输，被抓包即可获取，因此默认的 public/private 必须修改或改用 SNMPv3。",
+    "chapter": "网络设备管理",
+    "knowledgeSection": "SNMP 网络管理",
+    "knowledgePoint": "SNMP 版本与架构",
+    "difficulty": "medium",
+    "tags": [
+      "网络设备管理",
+      "SNMP 网络管理",
+      "SNMP 版本与架构"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-19-009",
+    "type": "single_choice",
+    "question": "MIB 与 OID 的关系是什么？",
+    "options": {
+      "A": "两者完全等价",
+      "B": "MIB 是管理信息库，OID 是其中每个对象的唯一标识",
+      "C": "OID 是数据库，MIB 是索引",
+      "D": "MIB 只能存储日志"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "MIB 用树形结构组织被管对象，每个节点由 OID 唯一标识，NMS 通过读取 OID 获取设备状态。",
+    "chapter": "网络设备管理",
+    "knowledgeSection": "SNMP 网络管理",
+    "knowledgePoint": "MIB 与 OID",
+    "difficulty": "medium",
+    "tags": [
+      "网络设备管理",
+      "SNMP 网络管理",
+      "MIB 与 OID"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-19-010",
+    "type": "single_choice",
+    "question": "OID 1.3.6.1.2.1 对应的标准 MIB 分支通常称为什么？",
+    "options": {
+      "A": "目录服务分支",
+      "B": "私有企业分支",
+      "C": "mib-2 分支",
+      "D": "实验分支"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "1.3.6.1.2.1 为 mib-2，包含系统、接口、IP 等标准对象；1.3.6.1.4.1 才是厂商私有分支。",
+    "chapter": "网络设备管理",
+    "knowledgeSection": "SNMP 网络管理",
+    "knowledgePoint": "MIB 与 OID",
+    "difficulty": "hard",
+    "tags": [
+      "网络设备管理",
+      "SNMP 网络管理",
+      "MIB 与 OID"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-19-011",
+    "type": "true_false",
+    "question": "不同厂商的私有 MIB 对象位于各自的企业 OID 分支下，需要单独导入 MIB 文件才能解析。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "私有对象定义在 1.3.6.1.4.1.<厂商号> 下，NMS 必须加载对应 MIB 文件才能把 OID 翻译成可读名称。",
+    "chapter": "网络设备管理",
+    "knowledgeSection": "SNMP 网络管理",
+    "knowledgePoint": "MIB 与 OID",
+    "difficulty": "medium",
+    "tags": [
+      "网络设备管理",
+      "SNMP 网络管理",
+      "MIB 与 OID"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-19-012",
+    "type": "single_choice",
+    "question": "SNMP Trap 的工作方式是什么？",
+    "options": {
+      "A": "设备主动向 NMS 上报告警，无需 NMS 轮询",
+      "B": "设备等待 NMS 下发配置",
+      "C": "设备之间互相转发 Trap",
+      "D": "NMS 周期性查询设备状态"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Trap 是事件驱动的主动上报，使用 UDP 162；相比轮询能更快发现故障，但可能因链路问题丢失。",
+    "chapter": "网络设备管理",
+    "knowledgeSection": "SNMP 网络管理",
+    "knowledgePoint": "Trap 与告警",
+    "difficulty": "medium",
+    "tags": [
+      "网络设备管理",
+      "SNMP 网络管理",
+      "Trap 与告警"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-19-013",
+    "type": "single_choice",
+    "question": "Trap 报文发送到 NMS 的哪个端口？",
+    "options": {
+      "A": "514",
+      "B": "161",
+      "C": "123",
+      "D": "162"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "NMS 用 161 接收查询响应，用 162 接收 Trap。两个端口方向相反，配置防火墙时必须同时放通。",
+    "chapter": "网络设备管理",
+    "knowledgeSection": "SNMP 网络管理",
+    "knowledgePoint": "Trap 与告警",
+    "difficulty": "medium",
+    "tags": [
+      "网络设备管理",
+      "SNMP 网络管理",
+      "Trap 与告警"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-19-014",
+    "type": "true_false",
+    "question": "由于 Trap 基于 UDP，链路拥塞或丢包时告警可能丢失，因此关键指标仍需配合轮询采集。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Trap 实时但不可靠，轮询可靠但有延迟，成熟网管通常两者结合：Trap 触发、轮询兜底。",
+    "chapter": "网络设备管理",
+    "knowledgeSection": "SNMP 网络管理",
+    "knowledgePoint": "Trap 与告警",
+    "difficulty": "medium",
+    "tags": [
+      "网络设备管理",
+      "SNMP 网络管理",
+      "Trap 与告警"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-19-015",
+    "type": "single_choice",
+    "question": "华为设备日志级别中，数值越小表示什么？",
+    "options": {
+      "A": "日志保存时间越短",
+      "B": "严重程度越低",
+      "C": "严重程度越高",
+      "D": "日志条数越少"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "级别 0 为 emergency 最严重，7 为 debugging 最详细。数值越小越紧急，这一点与直觉相反，容易记错。",
+    "chapter": "网络设备管理",
+    "knowledgeSection": "日志与时间同步",
+    "knowledgePoint": "日志级别",
+    "difficulty": "medium",
+    "tags": [
+      "网络设备管理",
+      "日志与时间同步",
+      "日志级别"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-19-016",
+    "type": "single_choice",
+    "question": "把日志输出到日志服务器的默认端口是多少？",
+    "options": {
+      "A": "162",
+      "B": "161",
+      "C": "123",
+      "D": "514"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Syslog 使用 UDP 514。日志集中存储便于跨设备关联分析，是故障回溯与合规审计的基础。",
+    "chapter": "网络设备管理",
+    "knowledgeSection": "日志与时间同步",
+    "knowledgePoint": "Syslog 日志",
+    "difficulty": "medium",
+    "tags": [
+      "网络设备管理",
+      "日志与时间同步",
+      "Syslog 日志"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-19-017",
+    "type": "single_choice",
+    "question": "开启日志功能的核心命令是什么？",
+    "options": {
+      "A": "info-center enable",
+      "B": "log enable",
+      "C": "syslog start",
+      "D": "logging on"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "华为用 info-center 系列命令管理日志，info-center enable 开启信息中心，再用 info-center loghost 指定服务器。",
+    "chapter": "网络设备管理",
+    "knowledgeSection": "日志与时间同步",
+    "knowledgePoint": "Syslog 日志",
+    "difficulty": "medium",
+    "tags": [
+      "网络设备管理",
+      "日志与时间同步",
+      "Syslog 日志"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-19-018",
+    "type": "true_false",
+    "question": "日志级别设为 debugging 会显著增加设备 CPU 与存储开销，生产环境应谨慎使用。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "debugging 级别输出最详细，高频日志会占用 CPU 与缓冲区，通常只在排障期间临时开启并及时关闭。",
+    "chapter": "网络设备管理",
+    "knowledgeSection": "日志与时间同步",
+    "knowledgePoint": "日志级别",
+    "difficulty": "medium",
+    "tags": [
+      "网络设备管理",
+      "日志与时间同步",
+      "日志级别"
+    ],
+    "stage": "综合应用"
+  }
+]

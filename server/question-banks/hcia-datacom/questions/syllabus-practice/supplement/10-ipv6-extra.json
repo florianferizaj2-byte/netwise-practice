@@ -18,9 +18,11 @@
     "difficulty": "easy",
     "tags": [
       "IPv6 地址与配置",
+      "IPv6 地址格式",
       "IPv6 地址类型"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "IPv6 地址格式"
   },
   {
     "id": "hcia-v2-extra-10-loopback",
@@ -41,9 +43,11 @@
     "difficulty": "easy",
     "tags": [
       "IPv6 地址与配置",
+      "IPv6 地址格式",
       "IPv6 地址类型"
     ],
-    "stage": "直接计算"
+    "stage": "直接计算",
+    "knowledgeSection": "IPv6 地址格式"
   },
   {
     "id": "hcia-v2-extra-10-ndp",
@@ -60,13 +64,16 @@
     ],
     "analysis": "IPv6 不使用 ARP，而通过 ICMPv6 的邻居发现协议完成地址解析和路由器发现。 本题考查“邻居发现”，因此应选择“NDP”。",
     "chapter": "IPv6 地址与配置",
-    "knowledgePoint": "邻居发现",
+    "knowledgePoint": "NDP 邻居发现",
     "difficulty": "medium",
     "tags": [
       "IPv6 地址与配置",
+      "IPv6 协议机制",
+      "NDP 邻居发现",
       "邻居发现"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "IPv6 协议机制"
   },
   {
     "id": "hcia-v2-extra-10-slaac",
@@ -83,13 +90,15 @@
     ],
     "analysis": "无状态地址自动配置通过路由器通告提供前缀，使主机可自动形成地址。 本题考查“IPv6 地址与配置”，因此应选择“主机可依据路由器通告自动生成 IPv6 地址”。",
     "chapter": "IPv6 地址与配置",
-    "knowledgePoint": "IPv6 地址与配置",
+    "knowledgePoint": "无状态地址自动配置",
     "difficulty": "medium",
     "tags": [
       "IPv6 地址与配置",
-      "IPv6 地址与配置"
+      "IPv6 协议机制",
+      "无状态地址自动配置"
     ],
-    "stage": "反向推理"
+    "stage": "反向推理",
+    "knowledgeSection": "IPv6 协议机制"
   },
   {
     "id": "hcia-v2-extra-10-prefix-64",
@@ -106,13 +115,15 @@
     ],
     "analysis": "IPv6 终端网段通常使用 /64，便于地址自动配置和接口标识生成。 本题考查“IPv6 地址与配置”，因此应选择“/64”。",
     "chapter": "IPv6 地址与配置",
-    "knowledgePoint": "IPv6 地址与配置",
+    "knowledgePoint": "IPv6 地址结构与简写",
     "difficulty": "easy",
     "tags": [
       "IPv6 地址与配置",
-      "IPv6 地址与配置"
+      "IPv6 地址格式",
+      "IPv6 地址结构与简写"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "IPv6 地址格式"
   },
   {
     "id": "hcia-v2-extra-10-multicast-allnodes",
@@ -129,12 +140,15 @@
     ],
     "analysis": "FF02::1 表示本地链路所有 IPv6 节点，路由器不会转发该链路范围组播。 本题考查“邻居发现”，因此应选择“FF02::1”。",
     "chapter": "IPv6 地址与配置",
-    "knowledgePoint": "邻居发现",
+    "knowledgePoint": "NDP 邻居发现",
     "difficulty": "hard",
     "tags": [
       "IPv6 地址与配置",
+      "IPv6 协议机制",
+      "NDP 邻居发现",
       "邻居发现"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "IPv6 协议机制"
   }
 ]

@@ -1,0 +1,494 @@
+[
+  {
+    "id": "hcia-v3-18-001",
+    "type": "single_choice",
+    "question": "Fit AP 上线的基本流程，正确顺序是？",
+    "options": {
+      "A": "获取 IP → 发现 AC → 建立 CAPWAP 隧道 → 下载配置 → 提供业务",
+      "B": "发现 AC → 获取 IP → 提供业务 → 下载配置",
+      "C": "下载配置 → 获取 IP → 发现 AC → 建立隧道",
+      "D": "提供业务 → 建立隧道 → 获取 IP → 发现 AC"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "AP 先通过 DHCP 获得地址，再发现并连接 AC，建立隧道后由 AC 下发配置，最后才具备无线业务能力。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgeSection": "AP 上线流程",
+    "knowledgePoint": "AP 上线与注册",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "AP 上线流程",
+      "AP 上线与注册"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-18-002",
+    "type": "single_choice",
+    "question": "AC 对 AP 进行准入认证的常见方式是什么？",
+    "options": {
+      "A": "短信验证码认证",
+      "B": "MAC 地址认证或免认证白名单",
+      "C": "数字证书认证",
+      "D": "用户名口令认证"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "AP 是设备而非用户，AC 通过 AP 的 MAC 地址做准入控制，或配置免认证放通；这决定了非法 AP 能否接入。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgeSection": "AP 上线流程",
+    "knowledgePoint": "AP 上线与注册",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "AP 上线流程",
+      "AP 上线与注册"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-18-003",
+    "type": "true_false",
+    "question": "AP 组（AP Group）的作用是把配置相同的 AP 归为一组，统一引用 VAP 模板等参数。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "AP 组是批量配置的载体，同组 AP 共用一套模板，新增 AP 只需加入对应组即可继承全部业务配置。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgeSection": "AP 上线流程",
+    "knowledgePoint": "AP 组与模板",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "AP 上线流程",
+      "AP 组与模板"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-18-004",
+    "type": "single_choice",
+    "question": "VAP 模板中不包含下列哪项参数？",
+    "options": {
+      "A": "AP 的物理安装位置",
+      "B": "安全认证方式",
+      "C": "SSID 名称",
+      "D": "业务 VLAN"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "VAP 模板定义 SSID、VLAN、认证与加密等业务参数，物理位置属于工程信息，不在模板中配置。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgeSection": "AP 上线流程",
+    "knowledgePoint": "AP 组与模板",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "AP 上线流程",
+      "AP 组与模板"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-18-005",
+    "type": "single_choice",
+    "question": "AP 无法上线，首先应确认什么？",
+    "options": {
+      "A": "SSID 名称是否足够短",
+      "B": "无线密码是否包含特殊字符",
+      "C": "终端是否支持 5G 频段",
+      "D": "AP 是否获取到 IP 且能 ping 通 AC"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "AP 上线依赖 IP 可达与 CAPWAP 端口放通，若连 IP 都没获取到，后续发现与注册都无从谈起。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgeSection": "AP 上线流程",
+    "knowledgePoint": "AP 上线失败排查",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "AP 上线流程",
+      "AP 上线失败排查"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-18-006",
+    "type": "multiple_choice",
+    "question": "AP 无法注册到 AC，可能需要排查哪些方面？",
+    "options": {
+      "A": "AP 与 AC 之间 UDP 5246 与 5247 是否被拦截",
+      "B": "AP 版本与 AC 是否兼容",
+      "C": "AC 上是否配置了该 AP 的认证信息",
+      "D": "终端是否开启了蓝牙"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "上线失败常见于端口被 ACL 拦截、版本不匹配、认证未放通三类原因；终端蓝牙与 AP 注册无关。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgeSection": "AP 上线流程",
+    "knowledgePoint": "AP 上线失败排查",
+    "difficulty": "hard",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "AP 上线流程",
+      "AP 上线失败排查"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-18-007",
+    "type": "true_false",
+    "question": "AP 与 AC 版本差异过大时，可能出现 AP 反复重启或注册失败的现象。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "AC 会尝试给 AP 升级到匹配版本，若升级包不可达或不兼容，AP 会循环重启，是现网常见故障形态。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgeSection": "AP 上线流程",
+    "knowledgePoint": "AP 上线失败排查",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "AP 上线流程",
+      "AP 上线失败排查"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-18-008",
+    "type": "single_choice",
+    "question": "STA 接入 WLAN 时，扫描阶段的作用是什么？",
+    "options": {
+      "A": "发现周围可用的无线网络与 AP",
+      "B": "协商加密密钥",
+      "C": "获取 IP 地址",
+      "D": "向 AC 注册"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "主动扫描发送 Probe Request，被动扫描监听 Beacon 帧，两者都是为了让终端知道有哪些可用 SSID。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgeSection": "STA 接入与漫游",
+    "knowledgePoint": "STA 扫描与关联",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "STA 接入与漫游",
+      "STA 扫描与关联"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-18-009",
+    "type": "single_choice",
+    "question": "STA 与 AP 建立关联（Association）之后，下一步通常是什么？",
+    "options": {
+      "A": "向 AC 发起 CAPWAP 建链",
+      "B": "立即获取 IP 地址",
+      "C": "进行身份认证与密钥协商",
+      "D": "开始发送广播报文"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "关联只建立链路层关系，随后需完成认证（如 802.1X 或 PSK）与密钥协商，才进入 DHCP 获取地址阶段。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgeSection": "STA 接入与漫游",
+    "knowledgePoint": "认证与密钥协商",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "STA 接入与漫游",
+      "认证与密钥协商"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-18-010",
+    "type": "single_choice",
+    "question": "WPA2 使用的加密算法是什么？",
+    "options": {
+      "A": "DES",
+      "B": "WEP",
+      "C": "TKIP",
+      "D": "AES-CCMP"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "WPA 使用 TKIP 作为过渡方案，WPA2 强制使用 AES-CCMP，安全性显著提升；WEP 已不安全，应禁用。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgeSection": "WLAN 安全",
+    "knowledgePoint": "WEP 与 WPA/WPA2",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "WLAN 安全",
+      "WEP 与 WPA/WPA2"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-18-011",
+    "type": "single_choice",
+    "question": "WEP 加密为什么被认为不安全？",
+    "options": {
+      "A": "不支持任何加密算法",
+      "B": "需要额外的认证服务器",
+      "C": "密钥与初始化向量过短，易被统计破解",
+      "D": "只能用于 5G 频段"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "WEP 的 IV 仅 24 位且密钥静态，抓包积累后可还原密钥，因此现代网络必须使用 WPA2 或 WPA3。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgeSection": "WLAN 安全",
+    "knowledgePoint": "WEP 与 WPA/WPA2",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "WLAN 安全",
+      "WEP 与 WPA/WPA2"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-18-012",
+    "type": "true_false",
+    "question": "WPA2-PSK 模式下，所有接入同一 SSID 的用户使用相同的预共享密钥。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "PSK 是共享密钥模式，适合家庭与小企业；一旦密钥泄露需整体更换，企业场景应改用 802.1X 做到一人一密。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgeSection": "WLAN 安全",
+    "knowledgePoint": "PSK 与 Portal 认证",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "WLAN 安全",
+      "PSK 与 Portal 认证"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-18-013",
+    "type": "single_choice",
+    "question": "802.1X 认证中，AP 或交换机扮演的角色是什么？",
+    "options": {
+      "A": "认证服务器（Authentication Server）",
+      "B": "认证者（Authenticator），转发认证报文",
+      "C": "证书颁发机构",
+      "D": "请求者（Supplicant）"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "802.1X 三角色为请求者（终端）、认证者（AP 或交换机）、认证服务器（RADIUS），认证者只转发 EAP 报文不做判定。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgeSection": "WLAN 安全",
+    "knowledgePoint": "802.1X 认证",
+    "difficulty": "hard",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "WLAN 安全",
+      "802.1X 认证"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-18-014",
+    "type": "single_choice",
+    "question": "Portal 认证的典型应用场景是什么？",
+    "options": {
+      "A": "访客网络，通过网页推送完成认证",
+      "B": "设备之间的路由协议认证",
+      "C": "AP 与 AC 之间的隧道认证",
+      "D": "服务器机房内部互联"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Portal 认证在用户首次上网时重定向到认证页面，无需预装客户端，适合酒店、商场等访客场景。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgeSection": "WLAN 安全",
+    "knowledgePoint": "PSK 与 Portal 认证",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "WLAN 安全",
+      "PSK 与 Portal 认证"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-18-015",
+    "type": "single_choice",
+    "question": "二层漫游与三层漫游的区别是什么？",
+    "options": {
+      "A": "两者完全等价",
+      "B": "二层漫游只能在同一 AP 内发生",
+      "C": "二层漫游在同一子网内切换 AP，三层漫游跨子网切换",
+      "D": "二层漫游需要重新获取 IP，三层漫游不需要"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "二层漫游保持 IP 不变、切换快；三层漫游跨网段需 AC 协调保持地址，实现更复杂但覆盖范围更大。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgeSection": "STA 接入与漫游",
+    "knowledgePoint": "WLAN 漫游",
+    "difficulty": "hard",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "STA 接入与漫游",
+      "WLAN 漫游"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-18-016",
+    "type": "true_false",
+    "question": "漫游过程中若终端重新获取 IP 地址，正在进行的视频通话通常会中断。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IP 变化会使已有连接失效，因此需要 AC 通过隧道等方式保持地址不变，实现无缝漫游。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgeSection": "STA 接入与漫游",
+    "knowledgePoint": "WLAN 漫游",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "STA 接入与漫游",
+      "WLAN 漫游"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-18-017",
+    "type": "single_choice",
+    "question": "AP 上线后终端搜不到 SSID，最可能的原因是什么？",
+    "options": {
+      "A": "AC 的 NTP 未同步",
+      "B": "交换机未开启 STP",
+      "C": "终端的蓝牙未开启",
+      "D": "AP 未绑定 VAP 模板或未加入 AP 组"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "SSID 由 VAP 模板下发，若 AP 未关联到带 VAP 的 AP 组，则不会发射对应信号，表现为搜不到 SSID。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgeSection": "AP 上线流程",
+    "knowledgePoint": "AP 组与模板",
+    "difficulty": "hard",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "AP 上线流程",
+      "AP 组与模板"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-18-018",
+    "type": "single_choice",
+    "question": "终端关联成功但获取不到 IP 地址，最应检查什么？",
+    "options": {
+      "A": "AP 的发射功率是否过高",
+      "B": "AC 的用户级别配置",
+      "C": "SSID 名称是否包含中文",
+      "D": "业务 VLAN 与 DHCP 配置是否正确"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "关联成功说明无线侧正常，拿不到地址通常是业务 VLAN 未放通、DHCP 不可达或地址池耗尽，应沿二层路径排查。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgeSection": "STA 接入与漫游",
+    "knowledgePoint": "STA 扫描与关联",
+    "difficulty": "hard",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "STA 接入与漫游",
+      "STA 扫描与关联"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-18-019",
+    "type": "true_false",
+    "question": "802.1X 认证相比 PSK 更适合企业场景，因为它可以做到每个用户使用独立凭据。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "802.1X 由 RADIUS 逐用户校验，支持账号吊销与审计；PSK 共享密钥无法区分个体，泄露后影响全网。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgeSection": "WLAN 安全",
+    "knowledgePoint": "802.1X 认证",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "WLAN 安全",
+      "802.1X 认证"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-18-020",
+    "type": "single_choice",
+    "question": "AC 上配置 AP 免认证上线，可能带来什么风险？",
+    "options": {
+      "A": "AP 无法获取 IP 地址",
+      "B": "无线信号强度下降",
+      "C": "CAPWAP 端口自动关闭",
+      "D": "非法 AP 可接入并占用授权资源"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "免认证降低了接入门槛，任何 AP 都可能注册到 AC，因此生产环境应启用 MAC 认证并配合白名单管理。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgeSection": "AP 上线流程",
+    "knowledgePoint": "AP 上线与注册",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "AP 上线流程",
+      "AP 上线与注册"
+    ],
+    "stage": "综合应用"
+  }
+]

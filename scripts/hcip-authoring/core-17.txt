@@ -1,0 +1,35 @@
+# HCIP-Datacom-Core 网络可靠性 · VRRP 原理与配置（34 题）
+hcip821-10-2-1|s|easy|VRRP 虚拟 MAC 地址的格式是？|00-00-5E-00-01-{VRID}|00-00-0C-07-AC-{VRID}|00-00-5E-00-02-{VRID}|01-00-5E-00-00-{VRID}|A|VRRP 虚拟 MAC 固定为 00-00-5E-00-01-{VRID}，前五字节为厂商前缀，最后一字节为备份组号。01-00-5E 开头是组播 MAC 的格式。|VRRP;虚拟 MAC
+hcip821-10-2-1|s|easy|VRRP 报文使用的 IP 协议号是？|112|89|47|51|A|VRRP 直接封装在 IP 报文中，协议号 112。89 是 OSPF，47 是 GRE，51 是 AH，都不承载 VRRP。|VRRP;协议号
+hcip821-10-2-1|s|easy|VRRP 通告报文的目的组播地址是？|224.0.0.18|224.0.0.5|224.0.0.6|224.0.0.9|A|VRRP 使用 224.0.0.18 发送通告。224.0.0.5 与 224.0.0.6 是 OSPF 的组播地址，224.0.0.9 是 RIP 的组播地址。|VRRP;组播地址
+hcip821-10-2-1|s|easy|VRRP 优先级可配置的范围是？|1 到 254|0 到 255|1 到 255|0 到 254|A|优先级取值 0 到 255，其中 0 与 255 保留：0 表示主动放弃 Master，255 保留给虚拟 IP 的拥有者，因此可配置范围是 1 到 254。|VRRP;优先级
+hcip821-10-2-1|s|easy|VRRP 的缺省优先级是多少？|100|120|255|1|A|VRRP 缺省优先级为 100，数值越大越优先。120 常见于某些实验配置，255 是保留给虚拟 IP 拥有者的值。|VRRP;缺省值
+hcip821-10-2-1|s|medium|VRRP 中优先级 0 表示什么含义？|设备主动放弃 Master 角色|设备优先级达到最高|设备不参与任何选举|设备固定为 Backup|A|优先级 0 表示设备主动放弃 Master 角色，收到该通告的 Backup 会立即切换为 Master，常用于设备计划下线的场景。|VRRP;优先级 0
+hcip821-10-2-1|s|medium|VRRP 中优先级 255 保留给谁？|虚拟 IP 地址的拥有者|最先启动的设备|Router ID 最大的设备|管理员指定的设备|A|若设备的接口 IP 与虚拟 IP 相同，该设备即虚拟 IP 拥有者，优先级自动取 255 并直接成为 Master，不需要参与比较。|VRRP;优先级 255
+hcip821-10-2-1|s|easy|VRRP 通告报文的缺省发送间隔是多少？|1 秒|3 秒|5 秒|10 秒|A|VRRP 缺省每 1 秒发送一次通告报文，Master_Down_Interval 约为 3 秒。间隔可通过 vrrp vrid timer 调整。|VRRP;通告间隔
+hcip821-10-2-1|s|medium|VRRP 的 Master_Down_Interval 计算公式是？|3 倍通告间隔加 Skew_Time|2 倍通告间隔加 Skew_Time|3 倍通告间隔减 Skew_Time|通告间隔加 3 倍 Skew_Time|A|Master_Down_Interval = 3 × Advertisement_Interval + Skew_Time。三个通告周期保证偶发丢包不误判，Skew_Time 让优先级高的设备更早发起选举。|VRRP;定时器
+hcip821-10-2-1|s|medium|VRRP 的 Skew_Time 计算公式是？|(256 减优先级)除以 256|(255 减优先级)除以 255|(256 减优先级)除以 255|(255 减优先级)除以 256|A|Skew_Time = (256 − Priority) / 256，单位为秒。优先级越高，Skew_Time 越短，越早成为 Master。|VRRP;Skew_Time
+hcip821-10-2-1|s|easy|VRRP 设备有哪三种状态？|Initialize、Master、Backup|Init、Active、Standby|Down、Master、Slave|Idle、Master、Backup|A|VRRP 定义 Initialize、Master、Backup 三种状态。设备启动后进入 Initialize，参与选举后成为 Master 或 Backup。|VRRP;状态机
+hcip821-10-2-1|s|medium|VRRP 选举 Master 时，优先级相同时比较什么？|接口 IP 地址较大者|接口 MAC 地址较大者|Router ID 较大者|启动时间较早者|A|先比较优先级，数值大者胜；优先级相同时比较接口主 IP 地址，地址大者胜。MAC 地址与 Router ID 不参与 VRRP 选举。|VRRP;选举
+hcip821-10-2-1|s|medium|VRRPv3 相比 VRRPv2 的主要改进是？|同时支持 IPv4 与 IPv6|支持更多的认证方式|支持组播方式发送通告|支持抢占与延迟|A|VRRPv2 只支持 IPv4，VRRPv3 同时支持 IPv4 与 IPv6，并取消了认证功能。组播通告与抢占在 v2 中已经存在。|VRRP;版本
+hcip821-10-2-1|s|medium|关于 VRRP 的认证功能，描述正确的是？|v2 支持认证，v3 不支持认证|v2 与 v3 都支持认证|v2 不支持，v3 支持认证|两者都不支持认证|A|VRRPv2 支持简单字符与 MD5 认证，VRRPv3 取消了认证字段。安全需求应通过网络层保护或 VRRP 与 BFD 联动等方式实现。|VRRP;认证
+hcip821-10-2-1|s|medium|VRRP 抢占功能的缺省状态是？|开启，抢占延迟为 0 秒|关闭，需要手工开启|开启，抢占延迟为 10 秒|由优先级高低自动决定|A|华为设备缺省开启抢占，延迟为 0 秒。延迟为 0 时链路抖动可能引起主备频繁切换，生产环境通常配置数秒到数十秒的延迟。|VRRP;抢占
+hcip821-10-2-1|s|medium|VRRP 实现负载分担通常采用什么方式？|配置多个备份组分别承担网关|一台虚拟 IP 由多台设备同时转发|为同一备份组配置多个虚拟 MAC|开启抢占并设置相同优先级|A|VRRP 一个备份组同时只有一个 Master，负载分担需要配置多个备份组（不同 VRID、不同虚拟 IP），让不同设备分别担任各组的 Master。|VRRP;负载分担
+hcip821-10-2-1|s|easy|VRRP 报文的 TTL 值是多少？|255|64|1|128|A|VRRP 报文 TTL 固定为 255，且接收端会检查 TTL 是否为 255，用于防止报文被路由转发到其他网段。|VRRP;TTL
+hcip821-10-2-1|s|medium|Backup 收到优先级为 0 的通告报文后如何处理？|立即切换为 Master|忽略该报文|重新发起选举|保持 Backup 不变|A|优先级 0 表示原 Master 主动放弃角色，Backup 收到后不必等待 Master_Down 超时，立即切换为 Master，实现平滑下线。|VRRP;优先级 0
+hcip821-10-2-1|s|medium|VRRP 监视上行接口时，接口故障后通常如何调整优先级？|降低优先级以触发切换|提高优先级以保持 Master|把优先级直接置为 255|不做任何调整|A|Master 监视上行接口，接口故障时按配置的减少量降低优先级，低于 Backup 后触发切换，避免流量继续被送到失效出口。|VRRP;上行监视
+hcip821-10-2-1|s|medium|VRRP 双主现象最常见的原因是什么？|备份组之间无法交换通告报文|两台设备的优先级配置相同|虚拟 IP 与接口 IP 相同|未配置抢占延迟|A|双主的本质是两台设备都认为自己是 Master，通常由心跳链路中断、VRID 不一致或二层隔离导致通告报文无法互通。|VRRP;双主
+hcip821-10-2-1|m|medium|下列哪些情况可能导致 VRRP 出现双主？|心跳链路中断|两端 VRID 配置不一致|上行接口故障|优先级都配置为 100|ABC|心跳中断使双方互不感知，VRID 不一致使双方不在同一备份组，上行接口故障会触发主备倒换，三者都可能造成双主。优先级相同本身不会导致双主。|VRRP;双主;多选
+hcip821-10-2-1|m|medium|VRRPv3 具备下列哪些特点？|支持 IPv4 与 IPv6|不支持报文认证|使用组播方式发送通告|必须使用单播发送通告|ABC|VRRPv3 支持双栈、取消认证字段、仍使用组播发送通告。单播通告是可选能力，并非强制要求。|VRRP;版本;多选
+hcip821-10-2-1|m|medium|关于 VRRP 虚拟 MAC 地址，正确的有？|格式为 00-00-5E-00-01-{VRID}|同一备份组内设备使用相同虚拟 MAC|虚拟 MAC 随 VRID 变化|虚拟 MAC 等于 Master 的接口 MAC|ABC|虚拟 MAC 由备份组号决定，组内所有设备对外呈现同一个虚拟 MAC，主机 ARP 缓存因此无需随主备切换而更新。|VRRP;虚拟 MAC;多选
+hcip821-10-2-1|t|easy|VRRP 的优先级数值越大，设备越优先成为 Master。|||||A|VRRP 优先级 1 到 254，数值越大越优先；255 保留给虚拟 IP 拥有者，0 表示放弃 Master。这与 OSPF 开销"越小越优"的方向相反。|判断;优先级
+hcip821-10-2-1|t|medium|VRRPv3 支持报文认证，而 VRRPv2 不支持。|||||B|两者正好相反：VRRPv2 支持简单字符与 MD5 认证，VRRPv3 取消了认证功能。|判断;认证
+hcip821-10-2-1|s|medium|VRRP 备份组中，Master 的主要职责是？|响应虚拟 IP 的 ARP 并转发报文|只监听通告不做任何转发|定期发送 ICMP 重定向|为 Backup 分配接口地址|A|Master 负责响应针对虚拟 IP 的 ARP 请求、转发以虚拟 MAC 为目的的报文，并周期性发送通告报文维持角色。Backup 只监听通告。|VRRP;Master 职责
+hcip821-10-2-1|s|medium|虚拟 IP 地址与接口 IP 地址的关系是？|虚拟 IP 可以与拥有者的接口 IP 相同|虚拟 IP 必须与所有接口 IP 不同|虚拟 IP 必须是公网可路由地址|虚拟 IP 由 DHCP 服务器统一分配|A|当某台设备的接口 IP 与虚拟 IP 相同时，它就是虚拟 IP 拥有者，优先级取 255 并直接成为 Master。虚拟 IP 也可以使用独立的空闲地址。|VRRP;虚拟 IP
+hcip821-10-2-1|s|medium|VRRP 与 MSTP 配合部署时，通常要实现什么？|流量路径与网关角色保持一致|用 VRRP 替代生成树计算|关闭生成树以避免环路|让所有设备都成为 Master|A|若网关在左侧设备而二层流量被生成树引到右侧，流量会绕行甚至丢弃。通常通过调整 MSTP 优先级，使网关角色与根桥位置一致。|VRRP;MSTP
+hcip821-10-2-1|s|easy|VRRP 备份组的 VRID 取值范围是？|1 到 255|0 到 255|1 到 254|0 到 254|A|VRID 取值 1 到 255，与虚拟 MAC 的最后一字节对应，因此同一广播域内 VRID 必须唯一，否则会造成虚拟 MAC 冲突。|VRRP;VRID
+hcip821-10-2-1|s|medium|VRRP 通告报文的源地址是？|发送接口的主 IP 地址|虚拟 IP 地址本身|目的组播地址|受限广播地址|A|通告报文的源地址是 Master 接口的真实主 IP，目的地址是 224.0.0.18，Backup 据此得知 Master 的真实地址与优先级。|VRRP;报文
+hcip821-10-2-1|s|medium|VRRP 抢占延迟的主要作用是？|等待上行链路与路由收敛后再切换|延长 Backup 的超时时间|降低通告报文的发送频率|防止虚拟 MAC 地址冲突|A|设备刚恢复时路由尚未收敛，立即抢占会导致流量丢失。配置抢占延迟可等待上行链路与路由稳定后再切回 Master。|VRRP;抢占延迟
+hcip821-10-2-1|s|easy|VRRP 是否支持 IPv6 网络？|VRRPv3 支持 IPv6|所有版本都支持 IPv6|只有 VRRPv2 支持 IPv6|任何版本都不支持 IPv6|A|VRRPv3 同时支持 IPv4 与 IPv6，可用于 IPv6 网关冗余；VRRPv2 只支持 IPv4。|VRRP;IPv6
+hcip821-10-2-1|t|medium|VRRP 中优先级为 255 的设备一定是 Master。|||||A|优先级 255 保留给虚拟 IP 地址拥有者，该设备无需选举即成为 Master。需要注意，若管理员把普通设备优先级配成 255，配置会被拒绝或按保留值处理。|判断;优先级 255
+hcip821-10-2-1|s|hard|某备份组原 Master 优先级 120、Backup 优先级 100，原 Master 配置抢占延迟 20 秒。原 Master 故障恢复后何时切回？|20 秒延迟结束后切回|立即切回 Master|永不切回 Master|等待 Backup 通告超时后|A|原 Master 优先级更高，恢复后会发起抢占，但受 20 秒延迟约束，需等待延迟计时结束才切回。立即切回忽略了抢占延迟配置。|VRRP;抢占;计算

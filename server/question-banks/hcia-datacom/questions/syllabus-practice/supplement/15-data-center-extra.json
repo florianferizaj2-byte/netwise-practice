@@ -14,13 +14,16 @@
     ],
     "analysis": "Leaf 与所有 Spine 建立等价上联，形成低时延、多路径的 Clos 拓扑。 本题考查“Leaf-Spine”，因此应选择“所有 Spine 交换机”。",
     "chapter": "数据中心网络基础",
-    "knowledgePoint": "Leaf-Spine",
+    "knowledgePoint": "Leaf-Spine 架构",
     "difficulty": "easy",
     "tags": [
       "数据中心网络基础",
+      "数据中心架构",
+      "Leaf-Spine 架构",
       "Leaf-Spine"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "数据中心架构"
   },
   {
     "id": "hcia-v2-extra-15-ecmp",
@@ -37,13 +40,16 @@
     ],
     "analysis": "等价多路径 ECMP 可让多个下一跳共同转发不同流，利用冗余 Spine 路径。 本题考查“Leaf-Spine”，因此应选择“ECMP”。",
     "chapter": "数据中心网络基础",
-    "knowledgePoint": "Leaf-Spine",
+    "knowledgePoint": "Leaf-Spine 架构",
     "difficulty": "medium",
     "tags": [
       "数据中心网络基础",
+      "数据中心架构",
+      "Leaf-Spine 架构",
       "Leaf-Spine"
     ],
-    "stage": "直接计算"
+    "stage": "直接计算",
+    "knowledgeSection": "数据中心架构"
   },
   {
     "id": "hcia-v2-extra-15-north-south",
@@ -60,13 +66,16 @@
     ],
     "analysis": "南北向流量从数据中心边界进出，常经过防火墙、负载均衡等设备。 本题考查“东西向流量”，因此应选择“数据中心与外部用户或互联网之间的流量”。",
     "chapter": "数据中心网络基础",
-    "knowledgePoint": "东西向流量",
+    "knowledgePoint": "东西向与南北向流量",
     "difficulty": "easy",
     "tags": [
       "数据中心网络基础",
+      "数据中心架构",
+      "东西向与南北向流量",
       "东西向流量"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "数据中心架构"
   },
   {
     "id": "hcia-v2-extra-15-overlay-vtep",
@@ -87,9 +96,11 @@
     "difficulty": "hard",
     "tags": [
       "数据中心网络基础",
+      "Overlay 技术",
       "Underlay 与 Overlay"
     ],
-    "stage": "反向推理"
+    "stage": "反向推理",
+    "knowledgeSection": "Overlay 技术"
   },
   {
     "id": "hcia-v2-extra-15-underlay-requirement",
@@ -110,9 +121,11 @@
     "difficulty": "easy",
     "tags": [
       "数据中心网络基础",
+      "Overlay 技术",
       "Underlay 与 Overlay"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "Overlay 技术"
   },
   {
     "id": "hcia-v2-extra-15-dc-reliability",
@@ -129,12 +142,14 @@
     ],
     "analysis": "冗余链路和多路径可让单设备或单链路故障时业务继续通过其他路径承载。 本题考查“数据中心架构”，因此应选择“降低单点故障并提升可用性”。",
     "chapter": "数据中心网络基础",
-    "knowledgePoint": "数据中心架构",
+    "knowledgePoint": "传统三层 DC 架构",
     "difficulty": "medium",
     "tags": [
       "数据中心网络基础",
-      "数据中心架构"
+      "数据中心架构",
+      "传统三层 DC 架构"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "数据中心架构"
   }
 ]

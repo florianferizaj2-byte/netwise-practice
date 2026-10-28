@@ -14,13 +14,16 @@
     ],
     "analysis": "传输层负责端到端通信，TCP 可在这一层提供确认、重传和流量控制。",
     "chapter": "网络参考模型",
-    "knowledgePoint": "OSI 与 TCP/IP 模型",
+    "knowledgePoint": "OSI 七层模型",
     "difficulty": "easy",
     "tags": [
       "网络参考模型",
+      "协议分层与封装",
+      "OSI 七层模型",
       "OSI 与 TCP/IP 模型"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "协议分层与封装"
   },
   {
     "id": "hcia-v2-01-pdu-frame",
@@ -37,13 +40,16 @@
     ],
     "analysis": "数据链路层的协议数据单元通常称为帧，以太网帧携带源和目的 MAC 地址。",
     "chapter": "网络参考模型",
-    "knowledgePoint": "数据封装",
+    "knowledgePoint": "数据封装与解封装",
     "difficulty": "easy",
     "tags": [
       "网络参考模型",
+      "协议分层与封装",
+      "数据封装与解封装",
       "数据封装"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "协议分层与封装"
   },
   {
     "id": "hcia-v2-01-tcp-reliable",
@@ -62,13 +68,16 @@
     ],
     "analysis": "TCP 依靠序列号、确认重传和滑动窗口等机制实现可靠有序传输，广播泛洪属于二层转发行为。",
     "chapter": "网络参考模型",
-    "knowledgePoint": "TCP 与 UDP",
+    "knowledgePoint": "TCP 可靠传输机制",
     "difficulty": "medium",
     "tags": [
       "网络参考模型",
+      "传输层协议",
+      "TCP 可靠传输机制",
       "TCP 与 UDP"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "传输层协议"
   },
   {
     "id": "hcia-v2-01-encapsulation-order",
@@ -85,12 +94,15 @@
     ],
     "analysis": "发送端先添加传输层首部，再添加网络层首部，最后添加数据链路层首尾部形成以太网帧。",
     "chapter": "网络参考模型",
-    "knowledgePoint": "数据封装",
+    "knowledgePoint": "数据封装与解封装",
     "difficulty": "medium",
     "tags": [
       "网络参考模型",
+      "协议分层与封装",
+      "数据封装与解封装",
       "数据封装"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "协议分层与封装"
   }
 ]

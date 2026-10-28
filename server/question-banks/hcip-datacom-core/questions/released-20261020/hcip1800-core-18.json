@@ -1,0 +1,1747 @@
+[
+  {
+    "id": "hcip821-12-1-1-001",
+    "type": "single_choice",
+    "question": "CAPWAP 控制通道使用的目的 UDP 端口是多少？",
+    "options": {
+      "A": "5248",
+      "B": "5246",
+      "C": "5247",
+      "D": "4789"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "CAPWAP 控制通道使用 UDP 5246，承载 AP 与 AC 之间的配置、状态与管理报文；数据通道使用 UDP 5247。UDP 4789 是 VXLAN 端口。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "组网架构与 CAPWAP",
+    "difficulty": "easy",
+    "tags": [
+      "CAPWAP",
+      "端口"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-1-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 组网架构与 CAPWAP」。知识点编码 hcip821-12-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "b9bb6b7f550f53c88600b9850c0d16de1a2af68d90883c71594258e455f5cb6b"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-1-002",
+    "type": "single_choice",
+    "question": "CAPWAP 数据通道使用的目的 UDP 端口是多少？",
+    "options": {
+      "A": "5247",
+      "B": "4500",
+      "C": "5248",
+      "D": "5246"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "CAPWAP 数据通道使用 UDP 5247，仅在隧道转发模式下承载用户业务报文。控制通道固定使用 5246。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "组网架构与 CAPWAP",
+    "difficulty": "easy",
+    "tags": [
+      "CAPWAP",
+      "数据通道"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-1-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 组网架构与 CAPWAP」。知识点编码 hcip821-12-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "428ee1c8de007d55ee939c7697156921c2f04be24e9b17c15c631f31a2985084"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-1-003",
+    "type": "single_choice",
+    "question": "Fit AP 上线的正确流程是？",
+    "options": {
+      "A": "获取 IP、发现 AC、建立隧道、版本同步、配置同步",
+      "B": "发现 AC、获取 IP、配置同步、建立隧道",
+      "C": "建立隧道、获取 IP、发现 AC、版本同步",
+      "D": "配置同步、发现 AC、获取 IP、建立隧道"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "AP 先通过 DHCP 获取地址，再通过静态配置、option43、DNS 或广播发现 AC，随后建立 CAPWAP 控制隧道并完成 DTLS 与版本同步，最后下发配置并上线。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "组网架构与 CAPWAP",
+    "difficulty": "medium",
+    "tags": [
+      "AP 上线",
+      "流程"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-1-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 组网架构与 CAPWAP」。知识点编码 hcip821-12-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "70c29bfd98d42e4d35574c001036d76ff9f2a16f37155f6e4e187b4fcf50ba0c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-1-004",
+    "type": "single_choice",
+    "question": "DHCP option43 在 WLAN 组网中的作用是？",
+    "options": {
+      "A": "向 AP 下发网关地址",
+      "B": "向 AP 下发 VLAN ID",
+      "C": "向 AP 下发时钟服务器地址",
+      "D": "向 AP 下发 AC 的 IP 地址"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "option43 携带 AC 的 IP 地址列表，AP 获取地址后据此直接与 AC 建链，避免广播发现。option60 用于标识设备厂商信息。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "组网架构与 CAPWAP",
+    "difficulty": "medium",
+    "tags": [
+      "option43",
+      "AC 发现"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-1-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 组网架构与 CAPWAP」。知识点编码 hcip821-12-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e2727f391b82d95bd812c646e493f71f6a6b6a2c9963301c6a5b26bc5e986b1f"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-1-005",
+    "type": "single_choice",
+    "question": "隧道转发模式下，用户业务报文的转发路径是？",
+    "options": {
+      "A": "AP 本地直接转发至上层网络",
+      "B": "AP 经二层交换机直接转发",
+      "C": "AC 把报文送回 AP 再转发",
+      "D": "AP 封装进 CAPWAP 隧道送至 AC 转发"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "隧道转发把用户报文封装在 CAPWAP 数据隧道中送到 AC，由 AC 统一转发，便于集中管控与安全策略；代价是 AC 成为流量瓶颈。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "组网架构与 CAPWAP",
+    "difficulty": "medium",
+    "tags": [
+      "隧道转发"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-1-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 组网架构与 CAPWAP」。知识点编码 hcip821-12-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d49a792b83fe68039f3a15053fdd6bf201402b2dc2780bb3afcfd4e590846345"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-1-006",
+    "type": "single_choice",
+    "question": "直接转发模式下，用户业务报文的转发路径是？",
+    "options": {
+      "A": "必须经过 AC 两次",
+      "B": "AP 封装后送至 AC 转发",
+      "C": "AC 与 AP 各转发一半",
+      "D": "AP 本地解封装后直接送入上层网络"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "直接转发时业务报文在 AP 本地转换为 802.3 帧后直接送入上层网络，不经过 AC，只有管理流量走 CAPWAP 控制隧道，转发效率更高。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "组网架构与 CAPWAP",
+    "difficulty": "medium",
+    "tags": [
+      "直接转发"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-1-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 组网架构与 CAPWAP」。知识点编码 hcip821-12-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "7165f2ed9ffe493d4dc018c6d25a09b22686dfcc83a1b889264a3194324ff498"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-1-007",
+    "type": "single_choice",
+    "question": "Fit AP 与 Fat AP 的主要区别是？",
+    "options": {
+      "A": "Fit AP 依赖 AC 集中管理",
+      "B": "两者硬件架构完全不同",
+      "C": "Fit AP 不支持完整无线功能",
+      "D": "Fat AP 不能独立完成认证"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Fit AP 本身不含完整配置，需由 AC 下发；Fat AP 具备完整功能可独立组网。云管理 AP 属于另一种形态，不改变这一基本划分。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "组网架构与 CAPWAP",
+    "difficulty": "medium",
+    "tags": [
+      "Fit AP",
+      "Fat AP"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-1-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 组网架构与 CAPWAP」。知识点编码 hcip821-12-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "0aa9ff0b93cc857a26a7f863c15a92e7481366664b5d725ab08bb73f21e931f6"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-1-008",
+    "type": "single_choice",
+    "question": "CAPWAP 控制隧道使用 DTLS 的主要目的是？",
+    "options": {
+      "A": "提高控制报文的发送频率",
+      "B": "对控制报文做加密与完整性保护",
+      "C": "压缩控制报文以节省带宽",
+      "D": "替代 AC 与 AP 之间的认证"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "CAPWAP 控制隧道可通过 DTLS 加密，防止配置与密钥在公网传输时被窃听或篡改。数据隧道也可单独启用 DTLS。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "组网架构与 CAPWAP",
+    "difficulty": "medium",
+    "tags": [
+      "CAPWAP",
+      "DTLS"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-1-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 组网架构与 CAPWAP」。知识点编码 hcip821-12-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "ce5ea74d911c2b616de16e038800b1e452e8e651818078335efb3d9b96a37ae4"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-1-009",
+    "type": "single_choice",
+    "question": "CAPWAP 心跳报文的作用是？",
+    "options": {
+      "A": "分配 AP 的管理地址",
+      "B": "下发无线射频参数",
+      "C": "维持 AP 与 AC 的隧道存活状态",
+      "D": "同步 AP 的时钟"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "AP 与 AC 通过心跳报文确认隧道可用，超时未收到响应则重建隧道。时钟同步依靠 NTP，射频参数通过配置下发。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "组网架构与 CAPWAP",
+    "difficulty": "medium",
+    "tags": [
+      "CAPWAP",
+      "心跳"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-1-009",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 组网架构与 CAPWAP」。知识点编码 hcip821-12-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "150a4e6ac6c419b7234514910a2682bc706389a35db3b42e1d052b328151337c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-1-010",
+    "type": "single_choice",
+    "question": "三层组网中，AP 与 AC 不在同一网段时，AP 如何发现 AC？",
+    "options": {
+      "A": "通过 ARP 请求发现",
+      "B": "通过 STP 报文发现",
+      "C": "只能通过二层广播发现",
+      "D": "通过 option43、DNS 或静态配置"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "三层组网中广播无法跨越网段，AP 需依靠 DHCP option43、DNS 解析或本地静态配置获得 AC 地址。二层广播发现仅适用于同网段。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "组网架构与 CAPWAP",
+    "difficulty": "medium",
+    "tags": [
+      "三层组网",
+      "AC 发现"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-1-010",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 组网架构与 CAPWAP」。知识点编码 hcip821-12-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "845820bab92c7cf8e85d5630f44fa7a7c0aeed6eb2f20f767499273d56623174"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-1-011",
+    "type": "single_choice",
+    "question": "CAPWAP 把控制通道与数据通道分离的主要好处是？",
+    "options": {
+      "A": "提高无线信号强度",
+      "B": "简化 VLAN 规划",
+      "C": "管理报文与业务报文可分别管理和保护",
+      "D": "减少 AP 的内存占用"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "分离后控制通道可单独加密、单独限速，数据通道可按需选择隧道或直接转发，运维灵活性与安全性都更好。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "组网架构与 CAPWAP",
+    "difficulty": "medium",
+    "tags": [
+      "CAPWAP",
+      "通道分离"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-1-011",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 组网架构与 CAPWAP」。知识点编码 hcip821-12-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "2ea0b2dc73c29db43f60ce7272b5b33995e81df7930f0788e6ff27b671be6350"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-1-012",
+    "type": "multiple_choice",
+    "question": "AP 发现 AC 的常见方式包括？",
+    "options": {
+      "A": "AP 本地静态配置",
+      "B": "DNS 域名解析",
+      "C": "DHCP option43",
+      "D": "ARP 广播请求"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "AP 可通过 option43、DNS、静态配置以及同网段二层广播发现 AC。ARP 用于解析 MAC 地址，不能用于发现 AC。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "组网架构与 CAPWAP",
+    "difficulty": "medium",
+    "tags": [
+      "AC 发现",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-1-012",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 组网架构与 CAPWAP」。知识点编码 hcip821-12-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "5629e082fa2f732f396301a64fdbbb18655f82aa88a7e04c2a3b26bd92cfcf08"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-1-013",
+    "type": "multiple_choice",
+    "question": "隧道转发模式具备下列哪些特点？",
+    "options": {
+      "A": "AC 的转发压力随 AP 数量增长",
+      "B": "便于在 AC 上统一实施安全策略",
+      "C": "业务报文完全不经过 AC",
+      "D": "用户报文经 CAPWAP 数据隧道送至 AC"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "隧道转发把业务流量集中到 AC，便于统一管控，但也使 AC 成为容量瓶颈。完全不经过 AC 是直接转发的特点。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "组网架构与 CAPWAP",
+    "difficulty": "medium",
+    "tags": [
+      "隧道转发",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-1-013",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 组网架构与 CAPWAP」。知识点编码 hcip821-12-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "b9a54945a8b73ac28974dc32d4c7d7f00dd56df0cc80cdebcfc6f05432456e09"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-1-014",
+    "type": "true_false",
+    "question": "CAPWAP 的控制通道与数据通道使用相同的 UDP 端口。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "控制通道使用 UDP 5246，数据通道使用 UDP 5247，端口不同才能分别处理与分别保护。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "组网架构与 CAPWAP",
+    "difficulty": "easy",
+    "tags": [
+      "判断",
+      "CAPWAP"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-1-014",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 组网架构与 CAPWAP」。知识点编码 hcip821-12-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "7003039ac36a2d971c2e7162bc5da39d2992f5c38bac8a285e98c8160bed758d"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-1-015",
+    "type": "true_false",
+    "question": "直接转发模式下，用户业务报文仍然要经过 AC 转发。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "直接转发时业务报文由 AP 本地送入上层网络，不经过 AC；只有管理流量走 CAPWAP 控制隧道。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "组网架构与 CAPWAP",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "直接转发"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-1-015",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 组网架构与 CAPWAP」。知识点编码 hcip821-12-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "fb9b035132d74dacb8744bacefca9a7052bdcd4d02fc40a320e6ce1b9bbaa4b8"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-1-016",
+    "type": "single_choice",
+    "question": "AP 上线失败，最常见的原因是什么？",
+    "options": {
+      "A": "SSID 名称长度超出限制",
+      "B": "AP 无法获取 AC 地址或隧道建立失败",
+      "C": "终端接入数量超过上限",
+      "D": "AP 的射频功率配置过高"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "上线失败通常卡在发现 AC 或建立隧道阶段：option43 配置错误、AC 地址不可达、DTLS 或版本不匹配都会导致失败。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "组网架构与 CAPWAP",
+    "difficulty": "medium",
+    "tags": [
+      "AP 上线",
+      "排障"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-1-016",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 组网架构与 CAPWAP」。知识点编码 hcip821-12-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "f1b964662bebca580230eb1af335f74fdd4291b3c85cfca6e63d56b0c022b689"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-1-017",
+    "type": "single_choice",
+    "question": "AC 上为 AP 下发配置时，配置的作用对象是？",
+    "options": {
+      "A": "终端的 MAC 地址",
+      "B": "AP 所属的 AP 组或单个 AP",
+      "C": "DHCP 地址池",
+      "D": "核心交换机的端口"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "AC 通过 AP 组批量下发射频、SSID、VLAN 等配置，也可对单个 AP 做个性化配置。终端侧配置由认证授权模块下发。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "组网架构与 CAPWAP",
+    "difficulty": "medium",
+    "tags": [
+      "配置下发"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-1-017",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 组网架构与 CAPWAP」。知识点编码 hcip821-12-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e56f53f8a2f3256bed6a286ec85344f1d105d6690b90684b5ad89c0de45f4af8"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-2-001",
+    "type": "single_choice",
+    "question": "在 WLAN 中，二层漫游指的是哪种情况？",
+    "options": {
+      "A": "STA 跨越不同 AC 的切换",
+      "B": "STA 跨越不同 VLAN 的切换",
+      "C": "STA 从无线切换到有线",
+      "D": "STA 在同一 VLAN 内的不同 AP 间切换"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "二层漫游时 STA 的 IP 与所属 VLAN 不变，仅关联的 AP 改变，业务中断时间最短。跨 VLAN 或跨三层网段的切换属于三层漫游。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "漫游与高可靠",
+    "difficulty": "medium",
+    "tags": [
+      "漫游",
+      "二层"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-2-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 漫游与高可靠」。知识点编码 hcip821-12-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "883683e435fcb263ae4baea27188ed78aaad9ebb88b12d263029b078a9d40d95"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-2-002",
+    "type": "single_choice",
+    "question": "WLAN 三层漫游的主要特点是什么？",
+    "options": {
+      "A": "STA 跨网段漫游，IP 地址保持不变",
+      "B": "只能在同一 AP 内完成",
+      "C": "要求所有 AP 在同一 VLAN",
+      "D": "STA 必须重新获取 IP 地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "三层漫游通过 AC 间的隧道把报文送回原网段，使 STA 的 IP 保持不变，避免重认证与重新获取地址。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "漫游与高可靠",
+    "difficulty": "medium",
+    "tags": [
+      "漫游",
+      "三层"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-2-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 漫游与高可靠」。知识点编码 hcip821-12-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "65944a9d42bf557d0d76df7ea052131a394af353aa1f72d67c2fd9ed738e90b1"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-2-003",
+    "type": "single_choice",
+    "question": "WLAN 漫游组中的 Master Controller 的作用是？",
+    "options": {
+      "A": "负责无线射频调优",
+      "B": "为 STA 分配 IP 地址",
+      "C": "协调组内 AC 的漫游信息同步",
+      "D": "替代所有 AC 转发业务"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Master Controller 是漫游组内的逻辑角色，负责维护组内 AC 列表并同步漫游信息，可由任意一台成员 AC 担任。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "漫游与高可靠",
+    "difficulty": "medium",
+    "tags": [
+      "漫游组",
+      "Master Controller"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-2-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 漫游与高可靠」。知识点编码 hcip821-12-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "1af1d6aeec30d54edadacaecfb6781e4c0b4ea55da630486bebd50d17c9fd8b0"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-2-004",
+    "type": "single_choice",
+    "question": "漫游组内 AC 之间传输漫游信息使用的隧道是？",
+    "options": {
+      "A": "基于 VXLAN 的隧道",
+      "B": "基于 L2TP 的隧道",
+      "C": "基于 GRE 的隧道",
+      "D": "基于 DTLS 的扩展隧道"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "AC 之间通过 DTLS 扩展隧道封装并传输漫游相关的用户与转发信息，保证跨 AC 漫游时业务连续。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "漫游与高可靠",
+    "difficulty": "medium",
+    "tags": [
+      "漫游",
+      "DTLS"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-2-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 漫游与高可靠」。知识点编码 hcip821-12-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "f40c90ba4c1a006d78d1072de09c56b9b7fb33472d06612d07f55edcc5a23e11"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-2-005",
+    "type": "single_choice",
+    "question": "802.11r 协议的主要作用是？",
+    "options": {
+      "A": "提供无线报文加密",
+      "B": "实现快速 BSS 切换，减少漫游时延",
+      "C": "增加单 AP 的并发用户数",
+      "D": "提高无线信号覆盖范围"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "802.11r 定义快速 BSS 转换（FT），在漫游前预协商密钥，把重关联时延从数百毫秒降到数十毫秒，适合语音场景。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "漫游与高可靠",
+    "difficulty": "medium",
+    "tags": [
+      "802.11r",
+      "快速漫游"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-2-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 漫游与高可靠」。知识点编码 hcip821-12-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "a193e32127b88cb67a2e7dd58fc1d4093ca39a672fedb927c492c34c80c85122"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-2-006",
+    "type": "single_choice",
+    "question": "AC 双机热备中的 HSB 指的是？",
+    "options": {
+      "A": "主备 AC 之间只同步配置文件",
+      "B": "主备 AC 之间共享同一块硬盘",
+      "C": "主备 AC 之间实时同步用户与业务表项",
+      "D": "主备 AC 之间轮流转发流量"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "HSB 在主备 AC 之间实时备份用户表项、CAPWAP 隧道状态与业务数据，主设备故障时备设备可立即接管，业务不中断。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "漫游与高可靠",
+    "difficulty": "medium",
+    "tags": [
+      "HSB",
+      "双机热备"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-2-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 漫游与高可靠」。知识点编码 hcip821-12-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "edc1c007c4395526d43ca195b4a7b13bdb9587815335216c35216d5636dbb734"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-2-007",
+    "type": "single_choice",
+    "question": "WLAN 双链路备份与 VRRP 热备的主要区别是？",
+    "options": {
+      "A": "VRRP 热备不需要虚拟 IP",
+      "B": "VRRP 热备只能单机部署",
+      "C": "双链路备份不要求主备 AC 在同一二层网络",
+      "D": "双链路备份不需要同步任何信息"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "VRRP 热备要求主备 AC 处于同一二层网络并共享虚拟 IP；双链路备份通过 CAPWAP 主备隧道实现，可跨三层部署，灵活性更高。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "漫游与高可靠",
+    "difficulty": "medium",
+    "tags": [
+      "双链路备份",
+      "VRRP"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-2-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 漫游与高可靠」。知识点编码 hcip821-12-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e87c4f01837a5d1a215765289f042d61c52ada913bdd2ddec1a89faf58ecae7d"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-2-008",
+    "type": "single_choice",
+    "question": "华为设备配置双链路备份时，AC 优先级的规则是？",
+    "options": {
+      "A": "由 MAC 地址决定",
+      "B": "数值越小优先级越高",
+      "C": "数值越大优先级越高",
+      "D": "固定为 0"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "双链路备份中 AC 优先级数值越小，实际优先级越高，与 VRRP 的\"越大越优\"相反，配置时最容易搞反。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "漫游与高可靠",
+    "difficulty": "medium",
+    "tags": [
+      "双链路备份",
+      "优先级"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-2-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 漫游与高可靠」。知识点编码 hcip821-12-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "2260d8f2c1f7ec288769da6902edb252b8bfeba265c1fd01de07561dc8064f1c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-2-009",
+    "type": "single_choice",
+    "question": "主备 AC 切换时，为保证已接入 STA 不掉线，必须同步什么？",
+    "options": {
+      "A": "仅 AC 的配置文件",
+      "B": "仅 DHCP 地址池",
+      "C": "用户表项与 CAPWAP 隧道状态",
+      "D": "仅无线射频参数"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "只同步配置不足以维持已建立的连接，必须同步用户表项、密钥与隧道状态，备设备才能无缝接管在线用户。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "漫游与高可靠",
+    "difficulty": "medium",
+    "tags": [
+      "切换",
+      "表项同步"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-2-009",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 漫游与高可靠」。知识点编码 hcip821-12-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "81b31c78f19714e191fc06399711b967025035261176e2a8ae6a810487ec021d"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-2-010",
+    "type": "multiple_choice",
+    "question": "WLAN 高可靠方案通常包括下列哪些手段？",
+    "options": {
+      "A": "VRRP 双机热备",
+      "B": "双链路备份",
+      "C": "关闭所有 AP 的射频",
+      "D": "HSB 表项同步"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "常见方案包括 VRRP 热备、双链路备份与 HSB 实时同步，可组合使用。关闭射频会直接中断无线服务，不是高可靠手段。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "漫游与高可靠",
+    "difficulty": "medium",
+    "tags": [
+      "高可靠",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-2-010",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 漫游与高可靠」。知识点编码 hcip821-12-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "faa55b368ddaf5f61dcac93f424a18df6e6b62eb68d6b3c53a3a4e48fe802e1b"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-2-011",
+    "type": "multiple_choice",
+    "question": "影响漫游体验的因素包括？",
+    "options": {
+      "A": "有线侧交换机的端口数量",
+      "B": "漫游切换时延",
+      "C": "AC 间隧道是否可达",
+      "D": "AP 之间的信号重叠度"
+    },
+    "answer": [
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "漫游体验取决于切换时延、跨 AC 隧道连通性与信号重叠区设计。交换机端口数量与漫游时延没有直接关系。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "漫游与高可靠",
+    "difficulty": "medium",
+    "tags": [
+      "漫游",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-2-011",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 漫游与高可靠」。知识点编码 hcip821-12-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "a6e02c8c7578785c2988e767da5c8ac0d9dd59fbb5b1bdaad563d76811bb58a4"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-2-012",
+    "type": "true_false",
+    "question": "三层漫游后，STA 的 IP 地址会发生变化。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "三层漫游的设计目标正是保持 STA 的 IP 不变，通过 AC 间隧道把报文送回原网段，避免重认证与地址重新获取。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "漫游与高可靠",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "三层漫游"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-2-012",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 漫游与高可靠」。知识点编码 hcip821-12-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "1e40e54eb027a0fc0f49a7a8480e3b5060eead64369233059aae6c0754c984d8"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-2-013",
+    "type": "true_false",
+    "question": "漫游组中的 Master Controller 必须是独立于成员 AC 的专用设备。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Master Controller 是逻辑角色，可由漫游组内任意一台成员 AC 担任，不需要专用硬件。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "漫游与高可靠",
+    "difficulty": "easy",
+    "tags": [
+      "判断",
+      "Master Controller"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-2-013",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 漫游与高可靠」。知识点编码 hcip821-12-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "67a3061b632a03f42dc8524b1b3f3d43929bb096d21ec2c21d3a4bcc3475f665"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-2-014",
+    "type": "single_choice",
+    "question": "STA 在漫游过程中出现短暂丢包，最可能的原因是？",
+    "options": {
+      "A": "无线信号强度过高",
+      "B": "切换期间密钥重协商与隧道重建",
+      "C": "AP 的供电不足",
+      "D": "SSID 名称重复"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "漫游需要重新关联并协商密钥，若未启用 802.11r 等快速切换机制，切换窗口内的报文会被丢弃，表现为短暂丢包。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "漫游与高可靠",
+    "difficulty": "medium",
+    "tags": [
+      "漫游",
+      "丢包"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-2-014",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 漫游与高可靠」。知识点编码 hcip821-12-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "2d7795ff2662a4092a68d7ba64182a7aa36938d9fce20c132b956647f6bfc390"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-2-015",
+    "type": "single_choice",
+    "question": "AC 主备倒换后，新接入的 STA 无法上线，最可能的原因是？",
+    "options": {
+      "A": "无线信道处于空闲状态",
+      "B": "AP 的射频被关闭",
+      "C": "STA 的电池电量不足",
+      "D": "备 AC 未同步 CAPWAP 与用户配置"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "若备 AC 缺少 AP 组配置、license 或隧道参数，倒换后 AP 重建隧道会失败。倒换前应确认配置与 license 均已同步。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "漫游与高可靠",
+    "difficulty": "medium",
+    "tags": [
+      "倒换",
+      "排障"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-2-015",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / 漫游与高可靠」。知识点编码 hcip821-12-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "eb81e30d39c71780425eb2ff85ac28a72820b79eeed29d9eb1d5ff6a2451b0ae"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-3-001",
+    "type": "single_choice",
+    "question": "VLAN Pool 的主要作用是？",
+    "options": {
+      "A": "把多个 VLAN 组成地址池分配给不同 STA",
+      "B": "把多个 SSID 合并为一个",
+      "C": "为 AP 分配管理地址",
+      "D": "为 AC 提供冗余网关"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "VLAN Pool 把多个 VLAN 组成一个池，AC 按算法为 STA 分配其中一个 VLAN，从而扩大单 SSID 的地址容量并缩小广播域。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "VLAN Pool 与准入",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN Pool",
+      "作用"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-3-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / VLAN Pool 与准入」。知识点编码 hcip821-12-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "3c465a2e24dd2f0edd25c1ea082b602783d74a358406a860020a594e017db70c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-3-002",
+    "type": "single_choice",
+    "question": "VLAN Pool 支持的分配算法通常有哪两种？",
+    "options": {
+      "A": "广播分配与单播分配",
+      "B": "轮询分配与优先级分配",
+      "C": "静态分配与动态分配",
+      "D": "顺序分配与哈希分配"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "顺序分配按 VLAN 依次分配，简单但分布可能不均；哈希分配按 STA 的 MAC 计算，分布更均匀且同一 STA 结果稳定。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "VLAN Pool 与准入",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN Pool",
+      "算法"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-3-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / VLAN Pool 与准入」。知识点编码 hcip821-12-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "1170b674e9308aa326541c113003da17338e97f901570f59c2353277464b7597"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-3-003",
+    "type": "single_choice",
+    "question": "使用 VLAN Pool 后，接入交换机需要做什么配合？",
+    "options": {
+      "A": "只放行第一个 VLAN",
+      "B": "把 VLAN 转换为 QinQ",
+      "C": "放行池中所有 VLAN 的流量",
+      "D": "关闭所有 VLAN"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "AP 与 AC 之间、接入交换机上行链路都必须放行 VLAN Pool 中的全部 VLAN，否则被分配到未放行 VLAN 的 STA 无法通信。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "VLAN Pool 与准入",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN Pool",
+      "配置"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-3-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / VLAN Pool 与准入」。知识点编码 hcip821-12-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "f0f573231acbc66629b9d2d8f5fc91187133943f2e86a73ca66ec8fd8e5350e4"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-3-004",
+    "type": "single_choice",
+    "question": "VLAN Pool 能缓解下列哪个问题？",
+    "options": {
+      "A": "单 VLAN 内终端过多导致广播风暴",
+      "B": "无线信号覆盖存在盲区",
+      "C": "AP 的供电功率不足",
+      "D": "AC 的 license 数量不足"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "把终端分散到多个 VLAN 可缩小广播域、降低广播报文对空口与网关的压力。供电、覆盖与 license 属于其他范畴。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "VLAN Pool 与准入",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN Pool",
+      "广播域"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-3-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / VLAN Pool 与准入」。知识点编码 hcip821-12-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "704888eb53df59bf96d11466f722aae3fc77697f5bce27f66e4d90d02cf7fc93"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-3-005",
+    "type": "single_choice",
+    "question": "Portal 认证的基本流程是？",
+    "options": {
+      "A": "STA 由 AP 自动免认证",
+      "B": "STA 直接输入预共享密钥",
+      "C": "STA 必须先安装客户端软件",
+      "D": "STA 先获得地址，访问网络时被重定向到认证页面"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Portal 认证允许 STA 先获取 IP，首次访问 HTTP 时被重定向到认证页面，认证通过后由 AC 下发授权并放行流量。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "VLAN Pool 与准入",
+    "difficulty": "medium",
+    "tags": [
+      "Portal 认证",
+      "流程"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-3-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / VLAN Pool 与准入」。知识点编码 hcip821-12-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "cc3ec6ddb3dddba39d28ddb6bb18e8560533ddef47e78dc63fdafabff6cfbff6"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-3-006",
+    "type": "single_choice",
+    "question": "WLAN 中 MAC 认证的主要特点是什么？",
+    "options": {
+      "A": "必须配合 802.1X 客户端",
+      "B": "需要用户每次输入用户名密码",
+      "C": "只能用于有线接入",
+      "D": "以终端 MAC 地址作为凭证，用户无感知"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "MAC 认证把终端 MAC 作为凭证，用户无需操作，适合打印机、摄像头等哑终端；缺点是 MAC 可被伪造，安全性较弱。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "VLAN Pool 与准入",
+    "difficulty": "medium",
+    "tags": [
+      "MAC 认证"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-3-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / VLAN Pool 与准入」。知识点编码 hcip821-12-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "5002523b7d9ada971f16cccd1739058348cd31852cd98eec30d102997a6a2be8"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-3-007",
+    "type": "single_choice",
+    "question": "802.1X 认证中，AP 与 AC 分别承担什么角色？",
+    "options": {
+      "A": "AC 作为 802.1X 客户端",
+      "B": "两者都不参与认证流程",
+      "C": "AP 作为认证服务器",
+      "D": "AP 作为认证点，AC 作为代理"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "802.1X 中终端是客户端，AP 或 AC 作为认证点（Authenticator），把认证报文透传给 RADIUS 服务器完成认证与授权。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "VLAN Pool 与准入",
+    "difficulty": "medium",
+    "tags": [
+      "802.1X",
+      "角色"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-3-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / VLAN Pool 与准入」。知识点编码 hcip821-12-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "8359bb8f7c24d4e09f4cb7602f0b7b0f6ab89f8dc99dceb55046e97a30485ba5"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-3-008",
+    "type": "single_choice",
+    "question": "RADIUS 服务器在 WLAN 准入中承担的主要职责是？",
+    "options": {
+      "A": "负责无线射频调优",
+      "B": "为 AP 分配 IP 地址",
+      "C": "完成用户认证并下发授权属性",
+      "D": "转发用户业务报文"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "RADIUS 负责校验用户凭证，并通过授权属性下发 VLAN、ACL、带宽等策略。地址分配由 DHCP 完成，射频调优由 AC 完成。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "VLAN Pool 与准入",
+    "difficulty": "medium",
+    "tags": [
+      "RADIUS",
+      "准入"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-3-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / VLAN Pool 与准入」。知识点编码 hcip821-12-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "96358dcdc678fb4c428621ac0f31e5638dbf0ed468757b7907298de78cde9997"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-3-009",
+    "type": "single_choice",
+    "question": "MAC 优先认证的含义是？",
+    "options": {
+      "A": "MAC 认证后永久免认证",
+      "B": "只允许 MAC 认证",
+      "C": "MAC 认证与 Portal 同时进行",
+      "D": "优先用 MAC 认证，失败后再走 Portal"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "MAC 优先认证先尝试 MAC 认证，哑终端可直接通过；普通用户 MAC 认证失败后自动转入 Portal 页面，兼顾体验与安全。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "VLAN Pool 与准入",
+    "difficulty": "medium",
+    "tags": [
+      "MAC 优先认证"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-3-009",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / VLAN Pool 与准入」。知识点编码 hcip821-12-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4b4fffbd3133025be779f0bf657aa3451b3dce23c90973a58656089fdfb33e75"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-3-010",
+    "type": "single_choice",
+    "question": "授权 VLAN 的作用是？",
+    "options": {
+      "A": "为 AC 分配心跳 VLAN",
+      "B": "认证通过后把用户动态划分到指定 VLAN",
+      "C": "为交换机分配互联 VLAN",
+      "D": "为 AP 分配管理 VLAN"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RADIUS 或本地配置可下发授权 VLAN，用户认证通过后被动态加入该 VLAN，实现按用户或用户组划分网络权限。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "VLAN Pool 与准入",
+    "difficulty": "medium",
+    "tags": [
+      "授权 VLAN"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-3-010",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / VLAN Pool 与准入」。知识点编码 hcip821-12-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "280ea8ce529b19116104db3afac4ff8b85a2ccc4786d066bfcfd1753f38f03b8"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-3-011",
+    "type": "multiple_choice",
+    "question": "WLAN 准入控制常见的方式包括？",
+    "options": {
+      "A": "SNMP 认证",
+      "B": "802.1X 认证",
+      "C": "Portal 认证",
+      "D": "MAC 认证"
+    },
+    "answer": [
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "WLAN 准入常用 Portal、MAC、802.1X 三种方式，可组合为 MAC 优先认证。SNMP 是网络管理协议，不用于终端准入。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "VLAN Pool 与准入",
+    "difficulty": "medium",
+    "tags": [
+      "准入",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-3-011",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / VLAN Pool 与准入」。知识点编码 hcip821-12-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "8ad63e131cf1cf8d46b7737204d296fa2f3733a0b4d83926a0b564d8a06762b1"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-3-012",
+    "type": "multiple_choice",
+    "question": "VLAN Pool 部署时需要检查下列哪些配置？",
+    "options": {
+      "A": "AP 与 AC 之间链路的 VLAN 放行",
+      "B": "DHCP 地址池与 VLAN 的对应关系",
+      "C": "AP 的射频功率配置",
+      "D": "AC 上 VLAN Pool 的成员 VLAN"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "VLAN Pool 生效依赖成员 VLAN、链路放行与地址池三者一致。射频功率影响覆盖，与 VLAN 分配无关。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "VLAN Pool 与准入",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN Pool",
+      "配置检查",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-3-012",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / VLAN Pool 与准入」。知识点编码 hcip821-12-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "b5d04e5534c42307e3b6b2ef5953d73f0a4af1637289e002b94243775547c917"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-3-013",
+    "type": "true_false",
+    "question": "VLAN Pool 的哈希算法会根据 STA 的 MAC 地址计算所属 VLAN。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "哈希分配以 STA 的 MAC 为输入做散列，同一 STA 多次接入通常落在同一 VLAN，分布比顺序分配更均匀。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "VLAN Pool 与准入",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "VLAN Pool"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-3-013",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / VLAN Pool 与准入」。知识点编码 hcip821-12-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "f960f5aaa5a03b14e801393f0ae0a16a3ce46883a9e201f7e51d7235b1639099"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-3-014",
+    "type": "true_false",
+    "question": "Portal 认证要求终端在认证前不能获得 IP 地址。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Portal 认证允许终端先通过 DHCP 获得地址，再在访问网络时被重定向到认证页面。要求先认证后获地址的是 802.1X 等场景。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "VLAN Pool 与准入",
+    "difficulty": "easy",
+    "tags": [
+      "判断",
+      "Portal"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-3-014",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / VLAN Pool 与准入」。知识点编码 hcip821-12-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "f0dc5adb35b4e5647f5812a3b0d642f9c050e3eb4e73ed65641c37ea56d248a6"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-3-015",
+    "type": "single_choice",
+    "question": "某 SSID 下终端数量接近单 VLAN 的地址容量上限，最合适的解决方案是？",
+    "options": {
+      "A": "调大 AP 的发射功率",
+      "B": "关闭该 SSID 的加密",
+      "C": "为该 SSID 配置 VLAN Pool",
+      "D": "更换更高规格的天线"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "VLAN Pool 把终端分散到多个 VLAN，突破单网段的地址与广播域限制。调大功率或更换天线解决的是覆盖问题。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "VLAN Pool 与准入",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN Pool",
+      "容量"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-3-015",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / VLAN Pool 与准入」。知识点编码 hcip821-12-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "3ceae5d84aae64e64e311b9c954c1b3dd10840d0a2fb37e002c29f6bec96cb54"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-3-016",
+    "type": "single_choice",
+    "question": "VLAN Pool 中某个 VLAN 未在接入交换机上放行，会出现什么现象？",
+    "options": {
+      "A": "AC 设备无法正常启动",
+      "B": "AP 无法注册到 AC",
+      "C": "所有 STA 都无法正常上线",
+      "D": "被分配到该 VLAN 的 STA 无法通信"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "AP 与 AC 之间的隧道或本地转发路径缺少该 VLAN 时，被分配到该 VLAN 的 STA 拿不到地址或无法回程，表现为部分终端随机不通。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "VLAN Pool 与准入",
+    "difficulty": "hard",
+    "tags": [
+      "VLAN Pool",
+      "排障"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-3-016",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / VLAN Pool 与准入」。知识点编码 hcip821-12-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "83f03df41d1d9d3504fe76415bf023f8f6c31a069aca89049dd30baa74bcb11d"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-3-017",
+    "type": "single_choice",
+    "question": "Portal 认证页面由谁提供？",
+    "options": {
+      "A": "AP 本地存储的页面",
+      "B": "AC 内置页面或外部 Portal 服务器",
+      "C": "DHCP 服务器推送的页面",
+      "D": "DNS 服务器生成的页面"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Portal 页面可由 AC 内置提供，也可由外部 Portal 服务器承载；AC 负责把首次 HTTP 请求重定向到该页面。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "VLAN Pool 与准入",
+    "difficulty": "medium",
+    "tags": [
+      "Portal",
+      "页面"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-3-017",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / VLAN Pool 与准入」。知识点编码 hcip821-12-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "f3d51e0819a24809f702cf61e89b442dd94b64910b24ddb66fbb6abefb5b49ae"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-12-1-3-018",
+    "type": "single_choice",
+    "question": "用户认证通过后，AC 通常向接入设备下发什么？",
+    "options": {
+      "A": "授权信息与 ACL 策略",
+      "B": "新的射频信道",
+      "C": "新的 AP 管理地址",
+      "D": "新的 SSID"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "认证通过后 AC 把授权 VLAN、ACL、带宽等策略下发到转发设备，实现基于用户的权限控制。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "VLAN Pool 与准入",
+    "difficulty": "medium",
+    "tags": [
+      "授权",
+      "策略下发"
+    ],
+    "provenance": {
+      "questionId": "hcip821-12-1-3-018",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「大型 WLAN 组网架构 / 大型 WLAN 组网 / VLAN Pool 与准入」。知识点编码 hcip821-12-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "8060621ab15c3462ac9e702457e0cab00d226ac12b3573150c7d0f0e9b5550d8"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  }
+]

@@ -14,13 +14,16 @@
     ],
     "analysis": "汇聚层连接多个接入交换机，常承载 VLAN 网关、ACL 和上联核心的功能。 本题考查“接入/汇聚/核心”，因此应选择“汇聚接入层流量并提供策略与三层边界”。",
     "chapter": "园区网络典型组网方案",
-    "knowledgePoint": "接入/汇聚/核心",
+    "knowledgePoint": "接入层设计",
     "difficulty": "easy",
     "tags": [
       "园区网络典型组网方案",
+      "网络层次设计",
+      "接入层设计",
       "接入/汇聚/核心"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "网络层次设计"
   },
   {
     "id": "hcia-v2-extra-22-gateway-redundancy",
@@ -37,13 +40,16 @@
     ],
     "analysis": "网关冗余通过主备或负载分担等方式减少三层出口单点故障。 本题考查“网关部署”，因此应选择“单台网关故障时可维持业务转发”。",
     "chapter": "园区网络典型组网方案",
-    "knowledgePoint": "网关部署",
+    "knowledgePoint": "网关部署位置",
     "difficulty": "easy",
     "tags": [
       "园区网络典型组网方案",
+      "网关与可靠性设计",
+      "网关部署位置",
       "网关部署"
     ],
-    "stage": "直接计算"
+    "stage": "直接计算",
+    "knowledgeSection": "网关与可靠性设计"
   },
   {
     "id": "hcia-v2-extra-22-access-security",
@@ -60,13 +66,16 @@
     ],
     "analysis": "接入认证在边缘验证身份并结合策略限制未授权设备接入。 本题考查“园区安全”，因此应选择“控制哪些用户和终端可以接入网络”。",
     "chapter": "园区网络典型组网方案",
-    "knowledgePoint": "园区安全",
+    "knowledgePoint": "园区接入安全",
     "difficulty": "medium",
     "tags": [
       "园区网络典型组网方案",
+      "园区安全与运维",
+      "园区接入安全",
       "园区安全"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "园区安全与运维"
   },
   {
     "id": "hcia-v2-extra-22-guest-isolation",
@@ -83,13 +92,16 @@
     ],
     "analysis": "访客网络应通过独立 VLAN、ACL 或防火墙策略与内网隔离。 本题考查“园区安全”，因此应选择“与内部办公网隔离并仅按需放行外网访问”。",
     "chapter": "园区网络典型组网方案",
-    "knowledgePoint": "园区安全",
+    "knowledgePoint": "园区接入安全",
     "difficulty": "easy",
     "tags": [
       "园区网络典型组网方案",
+      "园区安全与运维",
+      "园区接入安全",
       "园区安全"
     ],
-    "stage": "反向推理"
+    "stage": "反向推理",
+    "knowledgeSection": "园区安全与运维"
   },
   {
     "id": "hcia-v2-extra-22-uplink-redundancy",
@@ -106,13 +118,16 @@
     ],
     "analysis": "冗余上联需有拓扑控制和故障切换机制，才能既利用冗余又避免环路。 本题考查“可靠性”，因此应选择“链路聚合或生成树等冗余控制机制”。",
     "chapter": "园区网络典型组网方案",
-    "knowledgePoint": "可靠性",
+    "knowledgePoint": "链路与设备冗余",
     "difficulty": "medium",
     "tags": [
       "园区网络典型组网方案",
+      "网关与可靠性设计",
+      "链路与设备冗余",
       "可靠性"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "网关与可靠性设计"
   },
   {
     "id": "hcia-v2-extra-22-segmentation-benefit",
@@ -129,12 +144,15 @@
     ],
     "analysis": "业务分区可缩小广播域和安全边界，使访问控制更清晰且故障影响范围更小。 本题考查“园区安全”，因此应选择“减少广播影响并限制横向访问”。",
     "chapter": "园区网络典型组网方案",
-    "knowledgePoint": "园区安全",
+    "knowledgePoint": "园区接入安全",
     "difficulty": "easy",
     "tags": [
       "园区网络典型组网方案",
+      "园区安全与运维",
+      "园区接入安全",
       "园区安全"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "园区安全与运维"
   }
 ]

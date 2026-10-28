@@ -1,0 +1,763 @@
+[
+  {
+    "id": "hcia-v3-11-001",
+    "type": "single_choice",
+    "question": "基本 ACL 的编号范围是多少？",
+    "options": {
+      "A": "3000 到 3999",
+      "B": "1000 到 1999",
+      "C": "4000 到 4999",
+      "D": "2000 到 2999"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "2000-2999 基本 ACL 只能匹配源 IP，3000-3999 高级 ACL 可匹配源目地址与协议端口，4000-4999 为二层 ACL。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "ACL 基础",
+    "knowledgePoint": "ACL 分类与编号范围",
+    "difficulty": "medium",
+    "tags": [
+      "ACL 原理与配置",
+      "ACL 基础",
+      "ACL 分类与编号范围"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-11-002",
+    "type": "single_choice",
+    "question": "需要同时匹配源 IP、目的 IP 与目的端口时，应使用哪类 ACL？",
+    "options": {
+      "A": "高级 ACL",
+      "B": "基本 ACL",
+      "C": "用户 ACL",
+      "D": "二层 ACL"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "基本 ACL 只能看源地址，无法限定目的与端口；高级 ACL 支持源目地址、协议号与端口号，功能最强。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "ACL 基础",
+    "knowledgePoint": "ACL 分类与编号范围",
+    "difficulty": "medium",
+    "tags": [
+      "ACL 原理与配置",
+      "ACL 基础",
+      "ACL 分类与编号范围"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-11-003",
+    "type": "single_choice",
+    "question": "华为设备上编号 4000 到 4999 的 ACL 属于哪一类？",
+    "options": {
+      "A": "基本 ACL，只匹配源 IP",
+      "B": "高级 ACL，匹配五元组",
+      "C": "用户 ACL，按用户组匹配",
+      "D": "二层 ACL，匹配以太网帧头字段"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "4000-4999 为二层 ACL，可匹配源目 MAC 与以太网类型；用户 ACL 使用 6000-6999 编号，按用户组区分流量。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "ACL 基础",
+    "knowledgePoint": "ACL 分类与编号范围",
+    "difficulty": "medium",
+    "tags": [
+      "ACL 原理与配置",
+      "ACL 基础",
+      "ACL 分类与编号范围"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-11-004",
+    "type": "single_choice",
+    "question": "ACL 规则的默认匹配顺序是什么？",
+    "options": {
+      "A": "按配置时间倒序匹配",
+      "B": "随机匹配直到命中",
+      "C": "按规则编号从小到大依次匹配，命中即停止",
+      "D": "同时匹配所有规则后取最优"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "ACL 是自上而下的顺序匹配，命中第一条即执行动作并停止，因此精确规则应放在前面，否则会被宽泛规则吞掉。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "ACL 基础",
+    "knowledgePoint": "规则匹配顺序",
+    "difficulty": "medium",
+    "tags": [
+      "ACL 原理与配置",
+      "ACL 基础",
+      "规则匹配顺序"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-11-005",
+    "type": "single_choice",
+    "question": "ACL 中先配置 deny 10.1.1.0 0.0.0.255 再配置 permit 10.1.1.0 0.0.0.255，最终效果是什么？",
+    "options": {
+      "A": "该网段被允许，permit 优先级更高",
+      "B": "该网段流量被负载分担",
+      "C": "两条规则冲突导致 ACL 失效",
+      "D": "该网段被拒绝，第二条规则永远不会命中"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "顺序匹配命中即停，第一条 deny 已经把该网段全部拦下，后面同样的 permit 永远无法生效。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "ACL 基础",
+    "knowledgePoint": "规则匹配顺序",
+    "difficulty": "hard",
+    "tags": [
+      "ACL 原理与配置",
+      "ACL 基础",
+      "规则匹配顺序"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-11-006",
+    "type": "true_false",
+    "question": "ACL 中规则的排列顺序不影响最终匹配结果，只要规则集合相同结果就相同。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "顺序决定命中哪条规则，同样的规则集合按不同顺序排列可能得到完全相反的过滤结果，这是 ACL 排障的核心。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "ACL 基础",
+    "knowledgePoint": "规则匹配顺序",
+    "difficulty": "medium",
+    "tags": [
+      "ACL 原理与配置",
+      "ACL 基础",
+      "规则匹配顺序"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-11-007",
+    "type": "single_choice",
+    "question": "ACL 中所有规则都未命中时，设备的默认动作是什么？",
+    "options": {
+      "A": "允许报文通过",
+      "B": "丢弃报文，默认隐含拒绝所有",
+      "C": "把报文送 CPU 处理",
+      "D": "随机选择允许或拒绝"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "ACL 末尾隐含一条 deny any，因此只配置 permit 规则时，未匹配的流量会被丢弃，必须显式放通必要流量。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "ACL 基础",
+    "knowledgePoint": "匹配动作与默认行为",
+    "difficulty": "medium",
+    "tags": [
+      "ACL 原理与配置",
+      "ACL 基础",
+      "匹配动作与默认行为"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-11-008",
+    "type": "single_choice",
+    "question": "ACL 规则中 permit 与 deny 分别表示什么？",
+    "options": {
+      "A": "允许通过与被拒绝丢弃",
+      "B": "记录日志与告警上报",
+      "C": "入方向与出方向",
+      "D": "高优先级与低优先级"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "permit 放通匹配的报文，deny 丢弃匹配的报文；方向由 traffic-filter 的 inbound 或 outbound 决定，与动作无关。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "ACL 基础",
+    "knowledgePoint": "匹配动作与默认行为",
+    "difficulty": "easy",
+    "tags": [
+      "ACL 原理与配置",
+      "ACL 基础",
+      "匹配动作与默认行为"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-11-009",
+    "type": "true_false",
+    "question": "若 ACL 中只配置了 permit 规则，未匹配的流量仍会被允许通过。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "末尾隐含 deny any，未匹配即被丢弃。因此“只配 permit 就能放通全部”是常见误解，需要额外放通其他流量。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "ACL 基础",
+    "knowledgePoint": "匹配动作与默认行为",
+    "difficulty": "medium",
+    "tags": [
+      "ACL 原理与配置",
+      "ACL 基础",
+      "匹配动作与默认行为"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-11-010",
+    "type": "single_choice",
+    "question": "ACL 通配符掩码中，某一位为 0 表示什么？",
+    "options": {
+      "A": "该位必须与规则中的地址完全匹配",
+      "B": "该位被忽略不计",
+      "C": "该位必须为 1",
+      "D": "该位可以是任意值"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "通配符 0 表示“必须匹配”，1 表示“任意”。这与子网掩码的 1 表示网络位正好相反，是最容易混淆的地方。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "通配符掩码",
+    "knowledgePoint": "通配符掩码规则",
+    "difficulty": "medium",
+    "tags": [
+      "ACL 原理与配置",
+      "通配符掩码",
+      "通配符掩码规则"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-11-011",
+    "type": "single_choice",
+    "question": "通配符掩码 0.0.0.255 匹配的含义是什么？",
+    "options": {
+      "A": "前 24 位固定，最后一段任意",
+      "B": "全部 32 位任意",
+      "C": "全部 32 位固定",
+      "D": "前 24 位任意，最后一段固定"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "0 表示必须匹配、1 表示任意，因此 0.0.0.255 等价于一个 /24 网段的全部地址，即匹配整段。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "通配符掩码",
+    "knowledgePoint": "通配符掩码规则",
+    "difficulty": "medium",
+    "tags": [
+      "ACL 原理与配置",
+      "通配符掩码",
+      "通配符掩码规则"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v3-11-012",
+    "type": "single_choice",
+    "question": "只匹配单个主机 192.168.1.1，通配符掩码应配置为？",
+    "options": {
+      "A": "0.0.0.255",
+      "B": "0.0.0.0",
+      "C": "255.255.255.0",
+      "D": "255.255.255.255"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "全 0 表示 32 位全部必须匹配，即只匹配这一个地址。也可以用关键字 host 或规则末尾省略通配符实现。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "通配符掩码",
+    "knowledgePoint": "通配符掩码规则",
+    "difficulty": "medium",
+    "tags": [
+      "ACL 原理与配置",
+      "通配符掩码",
+      "通配符掩码规则"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-11-013",
+    "type": "true_false",
+    "question": "通配符掩码 255.255.255.255 等价于匹配任意地址。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "全 1 表示 32 位全部任意，即 any。规则中可直接写 any 关键字替代 0.0.0.0 0.0.0.0 这类写法。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "通配符掩码",
+    "knowledgePoint": "通配符掩码规则",
+    "difficulty": "easy",
+    "tags": [
+      "ACL 原理与配置",
+      "通配符掩码",
+      "通配符掩码规则"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-11-014",
+    "type": "single_choice",
+    "question": "要匹配 192.168.1.0/24 网段中所有奇数主机地址，通配符掩码应为？",
+    "options": {
+      "A": "0.0.0.254",
+      "B": "0.0.0.128",
+      "C": "0.0.0.1",
+      "D": "0.0.0.255"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "奇数地址最后一位为 1，需要该位任意而其余位固定，因此最后一段通配符为 11111110 即 254，配合基地址末位为 0。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "通配符掩码",
+    "knowledgePoint": "通配符计算",
+    "difficulty": "hard",
+    "tags": [
+      "ACL 原理与配置",
+      "通配符掩码",
+      "通配符计算"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v3-11-015",
+    "type": "single_choice",
+    "question": "规则为 rule permit source 10.1.1.0 0.0.0.254，可匹配的地址数量是多少？",
+    "options": {
+      "A": "254 个",
+      "B": "64 个",
+      "C": "128 个",
+      "D": "256 个"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "通配符末位 254 表示最低位任意、其余固定，因此只匹配偶数地址，共 128 个（10.1.1.0、2、4…254）。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "通配符掩码",
+    "knowledgePoint": "通配符计算",
+    "difficulty": "hard",
+    "tags": [
+      "ACL 原理与配置",
+      "通配符掩码",
+      "通配符计算"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v3-11-016",
+    "type": "true_false",
+    "question": "通配符掩码 0.0.0.3 可以匹配连续的 4 个地址。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "最低两位任意，共 2^2 = 4 个地址，且这 4 个地址必须对齐到 4 的倍数起始位置。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "通配符掩码",
+    "knowledgePoint": "通配符计算",
+    "difficulty": "medium",
+    "tags": [
+      "ACL 原理与配置",
+      "通配符掩码",
+      "通配符计算"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v3-11-017",
+    "type": "single_choice",
+    "question": "基本 ACL 通常应用在什么位置最合适？",
+    "options": {
+      "A": "靠近源端，越早过滤越省带宽",
+      "B": "靠近目的端，因为只能匹配源地址",
+      "C": "必须应用在核心设备",
+      "D": "只能应用在路由器"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "基本 ACL 无法区分目的地址，若放在源端会误伤该源访问其他目的的流量，因此应尽量靠近目的端以减少误伤。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "ACL 应用",
+    "knowledgePoint": "基本 ACL 应用",
+    "difficulty": "hard",
+    "tags": [
+      "ACL 原理与配置",
+      "ACL 应用",
+      "基本 ACL 应用"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-11-018",
+    "type": "single_choice",
+    "question": "创建基本 ACL 2000 并拒绝主机 10.1.1.5，正确命令是？",
+    "options": {
+      "A": "acl 2000 后执行 rule deny source 10.1.1.5 0",
+      "B": "acl 2000 后执行 rule permit 10.1.1.5",
+      "C": "acl 4000 后执行 rule deny mac 10.1.1.5",
+      "D": "acl 3000 后执行 rule deny ip source 10.1.1.5"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "基本 ACL 编号 2000-2999，rule deny source 加地址与通配符即可；通配符 0 表示精确匹配该主机。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "ACL 应用",
+    "knowledgePoint": "基本 ACL 应用",
+    "difficulty": "medium",
+    "tags": [
+      "ACL 原理与配置",
+      "ACL 应用",
+      "基本 ACL 应用"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-11-019",
+    "type": "true_false",
+    "question": "基本 ACL 无法限制目的端口，因此不能实现“只允许访问某台服务器的 80 端口”。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "端口属于传输层字段，基本 ACL 只看源 IP，需改用高级 ACL 指定协议与目的端口。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "ACL 应用",
+    "knowledgePoint": "基本 ACL 应用",
+    "difficulty": "medium",
+    "tags": [
+      "ACL 原理与配置",
+      "ACL 应用",
+      "基本 ACL 应用"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-11-020",
+    "type": "single_choice",
+    "question": "只允许 192.168.1.0/24 访问服务器 10.1.1.100 的 80 端口，应使用的规则是？",
+    "options": {
+      "A": "rule permit source 192.168.1.0 0.0.0.255",
+      "B": "rule permit tcp source 192.168.1.0 0.0.0.255 destination 10.1.1.100 0 destination-port eq 80",
+      "C": "rule permit ip destination 10.1.1.100 0",
+      "D": "rule deny tcp destination-port eq 80"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "需要同时限定源网段、目的主机、协议与端口，只有高级 ACL 的完整五元组规则才能精确表达。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "ACL 应用",
+    "knowledgePoint": "高级 ACL 应用",
+    "difficulty": "hard",
+    "tags": [
+      "ACL 原理与配置",
+      "ACL 应用",
+      "高级 ACL 应用"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-11-021",
+    "type": "single_choice",
+    "question": "高级 ACL 中禁止某网段 ping 通服务器，应匹配哪种协议？",
+    "options": {
+      "A": "icmp",
+      "B": "tcp",
+      "C": "ip",
+      "D": "udp"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "ping 使用 ICMP，规则写 rule deny icmp 即可拦截；若写 deny ip 会连业务流量一并阻断。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "ACL 应用",
+    "knowledgePoint": "高级 ACL 应用",
+    "difficulty": "medium",
+    "tags": [
+      "ACL 原理与配置",
+      "ACL 应用",
+      "高级 ACL 应用"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-11-022",
+    "type": "true_false",
+    "question": "高级 ACL 可以同时匹配源 IP、目的 IP、协议号与端口号，因此比基本 ACL 更精确。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "高级 ACL 支持五元组级别的匹配能力，适合精细化策略；代价是规则更复杂，需要仔细规划顺序。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "ACL 应用",
+    "knowledgePoint": "高级 ACL 应用",
+    "difficulty": "easy",
+    "tags": [
+      "ACL 原理与配置",
+      "ACL 应用",
+      "高级 ACL 应用"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-11-023",
+    "type": "single_choice",
+    "question": "在接口上调用 ACL 过滤流量，应使用哪条命令？",
+    "options": {
+      "A": "apply acl 3000 inbound",
+      "B": "traffic-filter inbound acl 3000",
+      "C": "filter 3000 in",
+      "D": "acl 3000 inbound"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "华为在接口视图使用 traffic-filter 加方向与 ACL 编号，方向分 inbound 与 outbound 两种。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "ACL 应用",
+    "knowledgePoint": "ACL 应用方向与位置",
+    "difficulty": "medium",
+    "tags": [
+      "ACL 原理与配置",
+      "ACL 应用",
+      "ACL 应用方向与位置"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-11-024",
+    "type": "single_choice",
+    "question": "inbound 方向指的是什么？",
+    "options": {
+      "A": "报文从该接口发出的方向",
+      "B": "管理流量专用的方向",
+      "C": "设备内部转发的方向",
+      "D": "报文从外部进入该接口的方向"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "inbound 是进入设备的方向，outbound 是离开设备的方向。方向选反是 ACL 不生效的最常见原因之一。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "ACL 应用",
+    "knowledgePoint": "ACL 应用方向与位置",
+    "difficulty": "medium",
+    "tags": [
+      "ACL 原理与配置",
+      "ACL 应用",
+      "ACL 应用方向与位置"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-11-025",
+    "type": "true_false",
+    "question": "同一个接口可以同时在 inbound 与 outbound 方向各调用一个 ACL。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "每个方向可独立绑定一个 ACL，进出两个方向互不影响；同方向重复调用会覆盖前一次配置。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "ACL 应用",
+    "knowledgePoint": "ACL 应用方向与位置",
+    "difficulty": "medium",
+    "tags": [
+      "ACL 原理与配置",
+      "ACL 应用",
+      "ACL 应用方向与位置"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-11-026",
+    "type": "single_choice",
+    "question": "高级 ACL 应尽量部署在什么位置？",
+    "options": {
+      "A": "靠近源端，尽早过滤以节省带宽",
+      "B": "只能部署在核心层",
+      "C": "必须靠近目的端",
+      "D": "任意位置效果完全相同"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "高级 ACL 能精确指定目的与端口，放在源端不会误伤其他流量，同时可尽早丢弃无效报文，节省链路资源。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "ACL 应用",
+    "knowledgePoint": "ACL 应用方向与位置",
+    "difficulty": "hard",
+    "tags": [
+      "ACL 原理与配置",
+      "ACL 应用",
+      "ACL 应用方向与位置"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-11-027",
+    "type": "single_choice",
+    "question": "查看 ACL 3000 的规则内容，应使用哪条命令？",
+    "options": {
+      "A": "display acl 3000",
+      "B": "display acl list",
+      "C": "display ip routing-table",
+      "D": "display traffic-filter"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "display acl 加编号可查看规则及命中计数，命中计数为 0 往往说明规则未匹配或未正确调用。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "ACL 应用",
+    "knowledgePoint": "ACL 应用方向与位置",
+    "difficulty": "easy",
+    "tags": [
+      "ACL 原理与配置",
+      "ACL 应用",
+      "ACL 应用方向与位置"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-11-028",
+    "type": "single_choice",
+    "question": "ACL 规则中 source 10.1.1.0 0.0.0.255 与 source 10.1.1.0 24 两种写法，哪一种在华为设备上正确？",
+    "options": {
+      "A": "两者完全等价",
+      "B": "前者只能用于高级 ACL",
+      "C": "前者使用通配符，后者需写成掩码形式不合法",
+      "D": "后者更精确"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "ACL 的 source 后接通配符掩码，不能直接写掩码长度。写成 24 会被解析为通配符 0.0.0.24，含义完全不同。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "通配符掩码",
+    "knowledgePoint": "通配符掩码规则",
+    "difficulty": "hard",
+    "tags": [
+      "ACL 原理与配置",
+      "通配符掩码",
+      "通配符掩码规则"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-11-029",
+    "type": "multiple_choice",
+    "question": "ACL 配置后不生效，可能需要检查哪些方面？",
+    "options": {
+      "A": "是否在接口上正确调用并选对方向",
+      "B": "规则顺序是否被更宽泛的规则提前命中",
+      "C": "通配符是否写错导致匹配范围偏差",
+      "D": "设备是否配置了默认路由"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "默认路由与 ACL 生效无关。排查 ACL 应从调用位置、方向、规则顺序与通配符四个维度入手。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "ACL 应用",
+    "knowledgePoint": "ACL 应用方向与位置",
+    "difficulty": "hard",
+    "tags": [
+      "ACL 原理与配置",
+      "ACL 应用",
+      "ACL 应用方向与位置"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-11-030",
+    "type": "single_choice",
+    "question": "若希望只拒绝 10.1.1.0/24 访问 10.2.2.0/24，同时允许其他所有流量，规则应如何组织？",
+    "options": {
+      "A": "只配 deny 即可，其余默认允许",
+      "B": "先 deny 该源目组合，再 permit ip any any",
+      "C": "先 permit ip any any 再 deny",
+      "D": "只配 permit ip any any"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "末尾隐含 deny any，因此必须显式加 permit ip any any 放通其他流量；且精确的 deny 必须排在 permit 之前。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "ACL 基础",
+    "knowledgePoint": "匹配动作与默认行为",
+    "difficulty": "hard",
+    "tags": [
+      "ACL 原理与配置",
+      "ACL 基础",
+      "匹配动作与默认行为"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-11-031",
+    "type": "true_false",
+    "question": "ACL 不仅可以用于流量过滤，还可以被 NAT、路由策略等特性引用。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "ACL 本质是一个分类工具，除 traffic-filter 外，NAT 的 nat outbound、策略路由等都通过引用 ACL 来选择流量。",
+    "chapter": "ACL 原理与配置",
+    "knowledgeSection": "ACL 基础",
+    "knowledgePoint": "ACL 分类与编号范围",
+    "difficulty": "medium",
+    "tags": [
+      "ACL 原理与配置",
+      "ACL 基础",
+      "ACL 分类与编号范围"
+    ],
+    "stage": "基础理解"
+  }
+]

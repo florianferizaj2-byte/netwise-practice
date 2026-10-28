@@ -14,13 +14,16 @@
     ],
     "analysis": "PAT 通过不同源端口区分会话，使多台私网主机可复用一个公网地址。 本题考查“Easy IP”，因此应选择“基于端口的地址转换 PAT”。",
     "chapter": "NAT 原理与配置",
-    "knowledgePoint": "Easy IP",
+    "knowledgePoint": "NAPT 与 Easy IP",
     "difficulty": "easy",
     "tags": [
       "NAT 原理与配置",
+      "动态 NAT 与 NAPT",
+      "NAPT 与 Easy IP",
       "Easy IP"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "动态 NAT 与 NAPT"
   },
   {
     "id": "hcia-v2-extra-14-inside-outside",
@@ -37,13 +40,16 @@
     ],
     "analysis": "源 NAT 常用于内部私网访问外部网络，在出口方向把私网源地址改写为公网地址。 本题考查“NAT 原理”，因此应选择“从 inside 到 outside 的出站流量”。",
     "chapter": "NAT 原理与配置",
-    "knowledgePoint": "NAT 原理",
+    "knowledgePoint": "NAT 与私网地址",
     "difficulty": "medium",
     "tags": [
       "NAT 原理与配置",
+      "静态 NAT",
+      "NAT 与私网地址",
       "NAT 原理"
     ],
-    "stage": "直接计算"
+    "stage": "直接计算",
+    "knowledgeSection": "静态 NAT"
   },
   {
     "id": "hcia-v2-extra-14-nat-session",
@@ -60,13 +66,16 @@
     ],
     "analysis": "会话映射让返回报文能够按公网地址端口找到对应的内部主机。 本题考查“动态 NAT”，因此应选择“私网地址端口与公网地址端口的映射”。",
     "chapter": "NAT 原理与配置",
-    "knowledgePoint": "动态 NAT",
+    "knowledgePoint": "动态 NAT 地址池",
     "difficulty": "medium",
     "tags": [
       "NAT 原理与配置",
+      "动态 NAT 与 NAPT",
+      "动态 NAT 地址池",
       "动态 NAT"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "动态 NAT 与 NAPT"
   },
   {
     "id": "hcia-v2-extra-14-server-port",
@@ -87,9 +96,11 @@
     "difficulty": "easy",
     "tags": [
       "NAT 原理与配置",
+      "静态 NAT",
       "NAT Server"
     ],
-    "stage": "反向推理"
+    "stage": "反向推理",
+    "knowledgeSection": "静态 NAT"
   },
   {
     "id": "hcia-v2-extra-14-nat-limit",
@@ -106,13 +117,16 @@
     ],
     "analysis": "地址转换隐藏内网地址，外部发起连接通常需要显式 NAT Server 等规则。 本题考查“NAT 原理”，因此应选择“外部主动访问内网需额外映射或穿透机制”。",
     "chapter": "NAT 原理与配置",
-    "knowledgePoint": "NAT 原理",
+    "knowledgePoint": "NAT Server",
     "difficulty": "medium",
     "tags": [
       "NAT 原理与配置",
+      "静态 NAT",
+      "NAT Server",
       "NAT 原理"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "静态 NAT"
   },
   {
     "id": "hcia-v2-extra-14-easy-ip-interface",
@@ -129,12 +143,15 @@
     ],
     "analysis": "Easy IP 复用出口接口地址，适合只有单一或动态公网地址的出网场景。 本题考查“Easy IP”，因此应选择“出口接口只有一个可用公网地址”。",
     "chapter": "NAT 原理与配置",
-    "knowledgePoint": "Easy IP",
+    "knowledgePoint": "NAPT 与 Easy IP",
     "difficulty": "easy",
     "tags": [
       "NAT 原理与配置",
+      "动态 NAT 与 NAPT",
+      "NAPT 与 Easy IP",
       "Easy IP"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "动态 NAT 与 NAPT"
   }
 ]

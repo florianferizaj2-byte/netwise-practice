@@ -14,13 +14,16 @@
     ],
     "analysis": "典型 Leaf 连接所有 Spine，跨 Leaf 流量上行到一个 Spine 后再下行到目的 Leaf。",
     "chapter": "数据中心网络基础",
-    "knowledgePoint": "Leaf-Spine",
+    "knowledgePoint": "Leaf-Spine 架构",
     "difficulty": "easy",
     "tags": [
       "数据中心网络基础",
+      "数据中心架构",
+      "Leaf-Spine 架构",
       "Leaf-Spine"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "数据中心架构"
   },
   {
     "id": "hcia-v2-15-east-west",
@@ -37,13 +40,16 @@
     ],
     "analysis": "东西向流量描述数据中心内部服务器、虚拟机或服务之间的横向通信。",
     "chapter": "数据中心网络基础",
-    "knowledgePoint": "东西向流量",
+    "knowledgePoint": "东西向与南北向流量",
     "difficulty": "easy",
     "tags": [
       "数据中心网络基础",
+      "数据中心架构",
+      "东西向与南北向流量",
       "东西向流量"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "数据中心架构"
   },
   {
     "id": "hcia-v2-15-underlay",
@@ -64,9 +70,11 @@
     "difficulty": "medium",
     "tags": [
       "数据中心网络基础",
+      "Overlay 技术",
       "Underlay 与 Overlay"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "Overlay 技术"
   },
   {
     "id": "hcia-v2-15-overlay",
@@ -87,8 +95,10 @@
     "difficulty": "medium",
     "tags": [
       "数据中心网络基础",
+      "Overlay 技术",
       "Underlay 与 Overlay"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "Overlay 技术"
   }
 ]

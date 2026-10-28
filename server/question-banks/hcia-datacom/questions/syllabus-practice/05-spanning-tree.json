@@ -18,9 +18,11 @@
     "difficulty": "easy",
     "tags": [
       "生成树原理与配置",
+      "STP 基本原理",
       "根桥选举"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "STP 基本原理"
   },
   {
     "id": "hcia-v2-05-root-port",
@@ -37,13 +39,16 @@
     ],
     "analysis": "非根交换机选择一条到根桥路径开销最小的端口作为根端口。",
     "chapter": "生成树原理与配置",
-    "knowledgePoint": "端口角色",
+    "knowledgePoint": "RSTP 端口角色",
     "difficulty": "easy",
     "tags": [
       "生成树原理与配置",
+      "RSTP 改进机制",
+      "RSTP 端口角色",
       "端口角色"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "RSTP 改进机制"
   },
   {
     "id": "hcia-v2-05-loop-prevention",
@@ -60,13 +65,16 @@
     ],
     "analysis": "STP 保留冗余物理链路，同时阻塞部分逻辑路径，使活动拓扑保持无环。",
     "chapter": "生成树原理与配置",
-    "knowledgePoint": "二层环路",
+    "knowledgePoint": "二层环路与 STP 作用",
     "difficulty": "medium",
     "tags": [
       "生成树原理与配置",
+      "STP 基本原理",
+      "二层环路与 STP 作用",
       "二层环路"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "STP 基本原理"
   },
   {
     "id": "hcia-v2-05-rstp",
@@ -83,12 +91,15 @@
     ],
     "analysis": "RSTP 通过新的端口角色和快速迁移机制缩短拓扑变化后的收敛时间。",
     "chapter": "生成树原理与配置",
-    "knowledgePoint": "STP/RSTP",
+    "knowledgePoint": "根桥选举",
     "difficulty": "medium",
     "tags": [
       "生成树原理与配置",
+      "STP 基本原理",
+      "根桥选举",
       "STP/RSTP"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "STP 基本原理"
   }
 ]

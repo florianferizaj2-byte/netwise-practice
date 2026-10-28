@@ -1,0 +1,1761 @@
+[
+  {
+    "id": "hcip831-7-2-1-001",
+    "type": "single_choice",
+    "question": "OSPF 邻居长期停留在 ExStart，最可能的原因是？",
+    "options": {
+      "A": "两端 Hello 间隔不同",
+      "B": "两端 Router ID 相同",
+      "C": "两端区域号不同",
+      "D": "两端接口 MTU 不一致"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "ExStart 阶段双方交换 DD 报文协商主从，MTU 不一致会使较大的 DD 被丢弃，邻居卡在 ExStart。区域号不同根本建不了邻居。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "常见网络故障",
+    "knowledgePoint": "常见网络故障排除",
+    "difficulty": "medium",
+    "tags": [
+      "故障",
+      "OSPF",
+      "ExStart"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-2-1-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 常见网络故障 / 常见网络故障排除」。知识点编码 hcip831-7-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "1e263aa1d9fd9060061d129a91b058f487ee65212551a8e526eacaf56751ecff"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-2-1-002",
+    "type": "single_choice",
+    "question": "OSPF 邻居停留在 Init 状态，最可能的原因是？",
+    "options": {
+      "A": "只收到 Hello 未形成双向",
+      "B": "两端 MTU 不一致",
+      "C": "两端认证密钥不同",
+      "D": "两端 Router ID 相同"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Init 表示本端收到了对端 Hello，但对方没有收到本端的 Hello，通常是单向可达、组播被过滤或认证不一致。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "常见网络故障",
+    "knowledgePoint": "常见网络故障排除",
+    "difficulty": "medium",
+    "tags": [
+      "故障",
+      "OSPF",
+      "Init"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-2-1-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 常见网络故障 / 常见网络故障排除」。知识点编码 hcip831-7-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "bda80bd197b0ca0210bbbd4144acb28e5f64f132f124dd3b3a54b065a6f64f4d"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-2-1-003",
+    "type": "single_choice",
+    "question": "OSPF 广播网络中两台非 DR 路由器之间处于 2-Way 状态，说明什么？",
+    "options": {
+      "A": "邻居建立失败",
+      "B": "认证配置错误",
+      "C": "区域配置错误",
+      "D": "属正常现象，无需处理"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "广播网络中非 DR/BDR 的路由器之间保持 2-Way 是正常设计，它们只与 DR、BDR 建立 Full 邻接。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "常见网络故障",
+    "knowledgePoint": "常见网络故障排除",
+    "difficulty": "medium",
+    "tags": [
+      "故障",
+      "OSPF",
+      "2-Way"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-2-1-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 常见网络故障 / 常见网络故障排除」。知识点编码 hcip831-7-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "46828ac372c4e7aace7207237c223b34a5da2d9b588a8208fe718f69b50f06cc"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-2-1-004",
+    "type": "single_choice",
+    "question": "BGP 邻居停留在 Idle 状态，最不可能的原因是？",
+    "options": {
+      "A": "两端 AS 号配置正确",
+      "B": "路由不可达",
+      "C": "TCP 179 被拦截",
+      "D": "对端未配置邻居"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "AS 号配置正确不会导致 Idle。Idle 表示连接尚未发起或初始化失败，常见于不可达、端口被拦、对端未配置。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "常见网络故障",
+    "knowledgePoint": "常见网络故障排除",
+    "difficulty": "medium",
+    "tags": [
+      "故障",
+      "BGP",
+      "Idle"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-2-1-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 常见网络故障 / 常见网络故障排除」。知识点编码 hcip831-7-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "b2adae4eb859aa28be28897bed127351e4317b91ad8fd3571085bcb0ef41cd7b"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-2-1-005",
+    "type": "single_choice",
+    "question": "BGP 邻居停留在 Active 状态，说明什么？",
+    "options": {
+      "A": "BGP 已收敛",
+      "B": "TCP 已建立",
+      "C": "路由已交换",
+      "D": "正在尝试建立 TCP 连接"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Active 表示设备在持续尝试发起 TCP 连接但未成功，通常是路由不可达或对端未监听 179 端口。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "常见网络故障",
+    "knowledgePoint": "常见网络故障排除",
+    "difficulty": "medium",
+    "tags": [
+      "故障",
+      "BGP",
+      "Active"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-2-1-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 常见网络故障 / 常见网络故障排除」。知识点编码 hcip831-7-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "aa169216860f6ad9f1a6b2900be232a5abe8df8c52657075572cb0f25fc8bdfd"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-2-1-006",
+    "type": "single_choice",
+    "question": "BGP 收到路由但不优，最常见的原因是？",
+    "options": {
+      "A": "AS 号配置错误",
+      "B": "下一跳不可达",
+      "C": "端口未放行",
+      "D": "Router ID 冲突"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "BGP 路由必须下一跳可达才能参与选路。下一跳不可达时路由保留在 BGP 表中但不装入 IP 路由表。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "常见网络故障",
+    "knowledgePoint": "常见网络故障排除",
+    "difficulty": "medium",
+    "tags": [
+      "故障",
+      "BGP",
+      "下一跳"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-2-1-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 常见网络故障 / 常见网络故障排除」。知识点编码 hcip831-7-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e69c34e5e1270806e27349fae17c7b6d68faf3e0f63b918f035ac1c57a51bfb0"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-2-1-007",
+    "type": "single_choice",
+    "question": "Trunk 链路两端 VLAN 放行不一致会导致什么？",
+    "options": {
+      "A": "端口直接 Down",
+      "B": "设备重启",
+      "C": "部分 VLAN 业务不通",
+      "D": "所有业务中断"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "未在 Trunk 上放行的 VLAN 报文被丢弃，表现为部分网段不通，而放行的 VLAN 正常，是最常见的二层故障之一。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "常见网络故障",
+    "knowledgePoint": "常见网络故障排除",
+    "difficulty": "medium",
+    "tags": [
+      "故障",
+      "VLAN",
+      "Trunk"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-2-1-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 常见网络故障 / 常见网络故障排除」。知识点编码 hcip831-7-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "508e5da8289cf1d734a9055fce58a7f0c141282f1f2342f56c1ea2c9b810c17b"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-2-1-008",
+    "type": "single_choice",
+    "question": "网络时通时断并伴随 MAC 表频繁变化，最可能的原因是？",
+    "options": {
+      "A": "二层环路",
+      "B": "DNS 故障",
+      "C": "IP 地址冲突",
+      "D": "光模块老化"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "环路使同一帧从多个端口进入，MAC 表反复改写并伴随广播风暴，表现为间歇性中断与延迟剧增。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "常见网络故障",
+    "knowledgePoint": "常见网络故障排除",
+    "difficulty": "medium",
+    "tags": [
+      "故障",
+      "环路"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-2-1-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 常见网络故障 / 常见网络故障排除」。知识点编码 hcip831-7-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "f6d0709d8adb6815fde08a9509e9a14bfec9764274745706ff5197d5297fea2f"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-2-1-009",
+    "type": "single_choice",
+    "question": "接口出现大量冲突计数，最可能的原因是？",
+    "options": {
+      "A": "双工模式不匹配",
+      "B": "MTU 配置过小",
+      "C": "VLAN 未划分",
+      "D": "路由未收敛"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "一端全双工、一端半双工时会产生冲突与 CRC 错误，表现为速率下降与丢包，应统一双工模式。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "常见网络故障",
+    "knowledgePoint": "常见网络故障排除",
+    "difficulty": "medium",
+    "tags": [
+      "故障",
+      "双工"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-2-1-009",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 常见网络故障 / 常见网络故障排除」。知识点编码 hcip831-7-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "73b6a845df021e3b8c1c338b6b818802efa26b6b1aaa3b2ffeebe832da72b7eb"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-2-1-010",
+    "type": "single_choice",
+    "question": "小包通、大包不通，最可能的原因是？",
+    "options": {
+      "A": "链路 MTU 不匹配",
+      "B": "路由表缺失",
+      "C": "VLAN 未放行",
+      "D": "ACL 拒绝"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "MTU 不一致时大包被丢弃，小包正常通过。常见于隧道、MPLS 或跨厂商互联场景，需统一 MTU 或调整 MSS。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "常见网络故障",
+    "knowledgePoint": "常见网络故障排除",
+    "difficulty": "medium",
+    "tags": [
+      "故障",
+      "MTU"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-2-1-010",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 常见网络故障 / 常见网络故障排除」。知识点编码 hcip831-7-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "86d17435cdba2f8c5f5629c13d54fdf62662e5312bac4b06027e7191be3bfd44"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-2-1-011",
+    "type": "single_choice",
+    "question": "终端频繁提示 IP 地址冲突，最可能的原因是？",
+    "options": {
+      "A": "网关配置错误",
+      "B": "VLAN 划分错误",
+      "C": "地址池中存在重复分配",
+      "D": "DNS 不可用"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "手工配置的静态地址与动态池重叠、或私接 DHCP 服务器都会造成冲突，应检查地址池排除范围与私接设备。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "常见网络故障",
+    "knowledgePoint": "常见网络故障排除",
+    "difficulty": "medium",
+    "tags": [
+      "故障",
+      "IP 冲突"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-2-1-011",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 常见网络故障 / 常见网络故障排除」。知识点编码 hcip831-7-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d08799f13168364c4f3456ec411207685d25e1b689f5699abc1445bd9c1de0e5"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-2-1-012",
+    "type": "single_choice",
+    "question": "终端获取不到 IP 地址，最先应检查什么？",
+    "options": {
+      "A": "设备的 CPU 占用",
+      "B": "DHCP 中继与地址池状态",
+      "C": "光模块型号",
+      "D": "SNMP 团体名"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "先确认 DHCP 报文是否到达服务器、中继配置是否正确、地址池是否耗尽，这三项覆盖了大多数分配失败场景。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "常见网络故障",
+    "knowledgePoint": "常见网络故障排除",
+    "difficulty": "medium",
+    "tags": [
+      "故障",
+      "DHCP"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-2-1-012",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 常见网络故障 / 常见网络故障排除」。知识点编码 hcip831-7-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "8cd12b2033c424dade1ffa8653b325103e4f53f0ef5af17a5e8f6fcbf0051cf0"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-2-1-013",
+    "type": "single_choice",
+    "question": "无线终端在移动中频繁掉线，最可能的原因是？",
+    "options": {
+      "A": "信号覆盖不足或漫游配置不当",
+      "B": "AC 的 license 过多",
+      "C": "SSID 名称过长",
+      "D": "DHCP 地址池过大"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "覆盖盲区、信号重叠不足或未启用快速漫游都会导致移动中掉线，应检查覆盖与漫游参数。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "常见网络故障",
+    "knowledgePoint": "常见网络故障排除",
+    "difficulty": "medium",
+    "tags": [
+      "故障",
+      "WLAN"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-2-1-013",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 常见网络故障 / 常见网络故障排除」。知识点编码 hcip831-7-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "847a25732299352dd2931da9e060bb168dc6ac32707abc5b90081619533a717c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-2-1-014",
+    "type": "single_choice",
+    "question": "路由环路最典型的现象是？",
+    "options": {
+      "A": "TTL 超时且时延持续增大",
+      "B": "接口全部 Down",
+      "C": "MAC 表为空",
+      "D": "CPU 占用为 0"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "环路中报文被反复转发，TTL 逐跳递减至 0 后被丢弃，表现为大面积不可达与设备 CPU、带宽被占满。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "常见网络故障",
+    "knowledgePoint": "常见网络故障排除",
+    "difficulty": "medium",
+    "tags": [
+      "故障",
+      "路由环路"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-2-1-014",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 常见网络故障 / 常见网络故障排除」。知识点编码 hcip831-7-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "a0d9dde4dc67943d7eb40b76fa40daf678108b363a943a19c514388d5a7cd0ae"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-2-1-015",
+    "type": "single_choice",
+    "question": "单向丢包最可能的原因是？",
+    "options": {
+      "A": "接口速率过低",
+      "B": "设备型号不同",
+      "C": "VLAN 数量过多",
+      "D": "来回路径不一致"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "路径不对称时，去程正常回程被 ACL、黑洞路由或故障链路阻断，表现为能 ping 通但业务异常。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "常见网络故障",
+    "knowledgePoint": "常见网络故障排除",
+    "difficulty": "medium",
+    "tags": [
+      "故障",
+      "单向丢包"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-2-1-015",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 常见网络故障 / 常见网络故障排除」。知识点编码 hcip831-7-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "69945fa246d029a15e65b825c090bbc90d8db3a00eacf8682c80cb7634dec1b7"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-2-1-016",
+    "type": "single_choice",
+    "question": "策略路由未生效，最先应检查什么？",
+    "options": {
+      "A": "DNS 配置",
+      "B": "接口的光功率",
+      "C": "匹配条件与报文是否命中",
+      "D": "设备的 CPU"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "策略路由按 ACL 或流分类匹配，条件写错或报文不命中都不会生效，应先用命中计数确认是否匹配。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "常见网络故障",
+    "knowledgePoint": "常见网络故障排除",
+    "difficulty": "medium",
+    "tags": [
+      "故障",
+      "策略路由"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-2-1-016",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 常见网络故障 / 常见网络故障排除」。知识点编码 hcip831-7-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "1ab057248ecb50c0b43dfac04ab44c1f50e5ee18e7e8c305425cefd098591de5"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-2-1-017",
+    "type": "single_choice",
+    "question": "NAT 转换不生效，最常见的原因是？",
+    "options": {
+      "A": "VLAN 未划分",
+      "B": "接口未启用 MPLS",
+      "C": "路由表为空",
+      "D": "ACL 未匹配或顺序错误"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "NAT 依赖 ACL 指定感兴趣流，ACL 写错、顺序被前条命中或方向配置错误都会导致不转换。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "常见网络故障",
+    "knowledgePoint": "常见网络故障排除",
+    "difficulty": "medium",
+    "tags": [
+      "故障",
+      "NAT"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-2-1-017",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 常见网络故障 / 常见网络故障排除」。知识点编码 hcip831-7-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "58df0ecdd1166fc45a9bb4168bf210e332402abf8e35aa305557b2f5e0d544c1"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-2-1-018",
+    "type": "single_choice",
+    "question": "IPsec 隧道建立失败，最常见的原因是？",
+    "options": {
+      "A": "设备温度过高",
+      "B": "接口速率不匹配",
+      "C": "两端预共享密钥或算法不一致",
+      "D": "VLAN 数量过多"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "IKE 第一阶段就会因密钥、认证算法或 DH 组不一致而失败，应逐项核对两端提议配置。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "常见网络故障",
+    "knowledgePoint": "常见网络故障排除",
+    "difficulty": "medium",
+    "tags": [
+      "故障",
+      "IPsec"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-2-1-018",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 常见网络故障 / 常见网络故障排除」。知识点编码 hcip831-7-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "631588746d0c2abaa73cc3d5f76861e98d7c6f4550fa1b0614d125628743d4a2"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-2-1-019",
+    "type": "multiple_choice",
+    "question": "端口进入 error-down 的常见原因包括？",
+    "options": {
+      "A": "光模块收发异常",
+      "B": "检测到环路",
+      "C": "VLAN 数量过多",
+      "D": "端口安全违规"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "环路检测、端口安全与光模块异常都会触发端口保护性关闭。VLAN 数量与端口状态无关。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "常见网络故障",
+    "knowledgePoint": "常见网络故障排除",
+    "difficulty": "medium",
+    "tags": [
+      "故障",
+      "error-down",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-2-1-019",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 常见网络故障 / 常见网络故障排除」。知识点编码 hcip831-7-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "f866a3fec76615426b2de765718376d4bb01e6d5e7c4729be5c0785482a82dd3"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-2-1-020",
+    "type": "true_false",
+    "question": "OSPF 邻居卡在 ExStart 一定是认证配置错误。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "ExStart 最常见的原因是 MTU 不一致，认证错误通常导致邻居无法建立或卡在 Init，而不是 ExStart。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "常见网络故障",
+    "knowledgePoint": "常见网络故障排除",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "OSPF"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-2-1-020",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 常见网络故障 / 常见网络故障排除」。知识点编码 hcip831-7-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "6dad9e7908625999c91975060b55a5a6cad336a8074396b3adca17a39c0f379a"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-2-1-021",
+    "type": "true_false",
+    "question": "BGP 邻居状态为 Established 表示 TCP 与 BGP 会话均已建立。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Established 是 BGP 的最终状态，表示 TCP 连接与 BGP 能力协商都已完成，可以交换路由。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "常见网络故障",
+    "knowledgePoint": "常见网络故障排除",
+    "difficulty": "easy",
+    "tags": [
+      "判断",
+      "BGP"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-2-1-021",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 常见网络故障 / 常见网络故障排除」。知识点编码 hcip831-7-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "6e9a2d365108b90e431a2bbceaff016bc53c3df1264f28d06361111010d02d0d"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-1-001",
+    "type": "single_choice",
+    "question": "设备配置备份的首要原则是？",
+    "options": {
+      "A": "变更前后都要备份",
+      "B": "每年备份一次",
+      "C": "只在故障时备份",
+      "D": "从不备份"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "变更前备份用于回滚，变更后备份用于留档。缺少任一环节都会在故障时失去恢复依据。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "备份"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-1-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 日常维护」。知识点编码 hcip831-6-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "491783007b591ce6b233d9dba7f9bed8f640bc8d3665169fae6fa5b9f6da04a1"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-1-002",
+    "type": "single_choice",
+    "question": "配置备份应保存在什么位置？",
+    "options": {
+      "A": "设备日志缓冲区",
+      "B": "设备之外的独立介质",
+      "C": "设备内存",
+      "D": "设备本地 Flash"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "备份必须与设备分离，设备损坏或误格式化时本地备份会一并丢失，通常保存到 TFTP、FTP 或版本库。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "备份"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-1-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 日常维护」。知识点编码 hcip831-6-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "6b24f781957c5eb38f775cb22318149c897e6454f43971c5578704a6153bac49"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-1-003",
+    "type": "single_choice",
+    "question": "日常巡检中\"接口光功率\"主要反映什么？",
+    "options": {
+      "A": "物理链路质量",
+      "B": "CPU 负载",
+      "C": "路由收敛速度",
+      "D": "VLAN 数量"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "收发光功率偏离正常范围说明光模块老化、尾纤污染或链路衰减过大，是链路故障的早期信号。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "巡检"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-1-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 日常维护」。知识点编码 hcip831-6-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "dc76da5550d3fbecbbde9d7a3772a092d892ab62f984ddac7ae802574657c541"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-1-004",
+    "type": "single_choice",
+    "question": "设备温度过高的常见后果是？",
+    "options": {
+      "A": "降频或自动保护重启",
+      "B": "路由表自动清空",
+      "C": "VLAN 自动合并",
+      "D": "带宽自动增加"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "温度超过阈值会触发风扇提速、降频甚至保护性重启，导致业务中断，应定期检查风扇与机房空调。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "环境"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-1-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 日常维护」。知识点编码 hcip831-6-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "ecdd62798f8ec24f65de8e1af26d24578171e6a09370b6fddd5a82c8d950bfb4"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-1-005",
+    "type": "single_choice",
+    "question": "CPU 占用长期偏高的排查顺序是？",
+    "options": {
+      "A": "先看进程再判断是否异常",
+      "B": "直接重启设备",
+      "C": "清空路由表",
+      "D": "直接更换主控板"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "先用 display cpu-usage 定位占用进程，区分正常协议计算与异常攻击流量，再决定处置方式。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "CPU"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-1-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 日常维护」。知识点编码 hcip831-6-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "218c796f946a827463764d741a445ccaa8b5ff13591969fd3f382eb52e8f1f9c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-1-006",
+    "type": "single_choice",
+    "question": "内存占用持续增长且不回落，通常提示什么？",
+    "options": {
+      "A": "设备性能优秀",
+      "B": "接口速率过高",
+      "C": "路由条目过少",
+      "D": "可能存在内存泄漏"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正常业务的内存占用会随会话建立与释放波动，持续单调增长且不回落往往指向软件缺陷或表项泄漏。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "内存"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-1-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 日常维护」。知识点编码 hcip831-6-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "5594975572214ed2f1ac8c432d964c17fee702fd6d7a40de8cadf11f67af4618"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-1-007",
+    "type": "single_choice",
+    "question": "设备 license 到期会导致什么？",
+    "options": {
+      "A": "配置全部丢失",
+      "B": "部分特性或容量受限",
+      "C": "接口物理损坏",
+      "D": "设备立即关机"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "license 到期后受控特性会被禁用或降级，例如 AP 数量、VPN 实例数受限，应在到期前续订。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "license"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-1-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 日常维护」。知识点编码 hcip831-6-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "3330d3d8ab0a7e23daae2bf6c20074f15978d2a32f8bea1e6a0d64e155f9a95d"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-1-008",
+    "type": "single_choice",
+    "question": "NTP 时间同步对运维的意义是？",
+    "options": {
+      "A": "提高转发速率",
+      "B": "增加带宽",
+      "C": "保证日志时间可对齐",
+      "D": "减少 VLAN 数量"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "多设备日志时间不一致会让故障时间线无法还原，NTP 同步是日志关联分析的前提。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "NTP"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-1-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 日常维护」。知识点编码 hcip831-6-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "46c3db61633c66817c7f5731393e518266e96c73db649c242aea9101969d1402"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-1-009",
+    "type": "single_choice",
+    "question": "定期清理无用账号的目的是？",
+    "options": {
+      "A": "增加带宽",
+      "B": "减少被利用的入口",
+      "C": "提高转发性能",
+      "D": "减少 VLAN"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "离职人员账号、测试账号长期存在会形成安全盲区，应定期审计并删除不再使用的账号。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "账号"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-1-009",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 日常维护」。知识点编码 hcip831-6-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "3521cc44deb9686c6bf26b74f4db75e09a06f146469487cae57898d1f5e455ae"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-1-010",
+    "type": "single_choice",
+    "question": "版本升级前最重要的准备是？",
+    "options": {
+      "A": "直接重启设备",
+      "B": "断开所有链路",
+      "C": "确认兼容性与回滚方案",
+      "D": "清空配置"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "升级前需确认目标版本的硬件兼容性、特性差异与已知问题，并准备降级方案与备份配置。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "升级"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-1-010",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 日常维护」。知识点编码 hcip831-6-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "78e349124e2d41dce203f047f5a9e65727c8790688c03e894b456c5e2565c010"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-1-011",
+    "type": "single_choice",
+    "question": "变更记录应包含的核心信息是？",
+    "options": {
+      "A": "设备采购价格",
+      "B": "机房温度",
+      "C": "时间、内容、执行人与回滚方式",
+      "D": "人员排班"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "变更记录用于事后追溯与审计，必须能回答\"谁在什么时候改了什么、如何回滚\"。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "变更"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-1-011",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 日常维护」。知识点编码 hcip831-6-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "134f158500d23ac90bdef9fccb9fbbe73487168c4cff540f11bdd6e0206d9c16"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-1-012",
+    "type": "single_choice",
+    "question": "网络拓扑文档长期不更新的后果是？",
+    "options": {
+      "A": "带宽自动减少",
+      "B": "VLAN 自动增加",
+      "C": "排障时依据错误信息判断",
+      "D": "设备性能下降"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "拓扑与实际情况不符会误导排障方向，尤其在链路调整、设备替换后必须同步更新文档。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "文档"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-1-012",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 日常维护」。知识点编码 hcip831-6-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "60f5cab8045b27a3f1f085d4f5e901621cbcf7c9168b9a0dbffcd24c1d586e1f"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-1-013",
+    "type": "single_choice",
+    "question": "资产台账的主要作用是？",
+    "options": {
+      "A": "减少路由条目",
+      "B": "掌握设备型号、位置与维保状态",
+      "C": "增加带宽",
+      "D": "提高转发速率"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "台账记录设备序列号、位置、版本与维保到期时间，是备件管理、故障定位与续保的基础。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "资产"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-1-013",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 日常维护」。知识点编码 hcip831-6-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "c9ba895fec13874943605f4d770897d07c75ed727e54d93b4261b66c6f095634"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-1-014",
+    "type": "single_choice",
+    "question": "备份恢复演练的价值是？",
+    "options": {
+      "A": "提高带宽",
+      "B": "替代日常备份",
+      "C": "验证备份可用与流程可行",
+      "D": "减少设备数量"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "未经验证的备份可能在恢复时才发现损坏或缺少关键配置，定期演练能提前暴露问题。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "演练"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-1-014",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 日常维护」。知识点编码 hcip831-6-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "a075fef26f1abcdbbce8eb901f8d5b1a2504745dd2a5b7085852531d762ff541"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-1-015",
+    "type": "single_choice",
+    "question": "告警订阅配置不合理会导致什么？",
+    "options": {
+      "A": "设备自动重启",
+      "B": "路由自动清空",
+      "C": "重要告警被淹没",
+      "D": "带宽自动增加"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "告警过多会使值班人员产生疲劳并忽略关键告警，应按级别与业务重要性分级订阅。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "告警"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-1-015",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 日常维护」。知识点编码 hcip831-6-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e864f6745514872e4b6ad113aa79c582c5408db68ef42ef67f1d502ffc37d788"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-1-016",
+    "type": "single_choice",
+    "question": "容量趋势分析的主要目的是？",
+    "options": {
+      "A": "减少设备数量",
+      "B": "提前发现资源瓶颈",
+      "C": "提高带宽",
+      "D": "替代故障排查"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "通过观察带宽、会话数、CPU 的增长趋势，可以在达到瓶颈前完成扩容或优化，避免被动救火。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "容量"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-1-016",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 日常维护」。知识点编码 hcip831-6-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "576dcb220a2c7c1a1808d26987dd2362a94901d9e431596b13cc68e81b7e171e"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-1-017",
+    "type": "single_choice",
+    "question": "冗余链路定期检查的重点是？",
+    "options": {
+      "A": "设备的采购价格",
+      "B": "机柜的颜色",
+      "C": "人员的排班",
+      "D": "主备状态与切换可用性"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "冗余链路长期不切换可能因配置漂移而失效，应定期验证主备状态并做切换测试。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "冗余"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-1-017",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 日常维护」。知识点编码 hcip831-6-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "acf64f954c408805a9fb26d322065f73593bed50c930e2b387c0076b4ee0c122"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-1-018",
+    "type": "multiple_choice",
+    "question": "日常巡检通常包括下列哪些项目？",
+    "options": {
+      "A": "风扇与电源状态",
+      "B": "接口状态与光功率",
+      "C": "设备采购合同",
+      "D": "CPU 与内存占用"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "巡检关注运行状态类指标。采购合同属于商务文档，不进入日常巡检清单。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "巡检",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-1-018",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 日常维护」。知识点编码 hcip831-6-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "5f360ec0894f07ba166ac95803a3e3b14397cfae9786570724f648f9e1e9290d"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-1-019",
+    "type": "multiple_choice",
+    "question": "配置管理的最佳实践包括？",
+    "options": {
+      "A": "变更后复核",
+      "B": "变更前备份",
+      "C": "使用版本库管理",
+      "D": "只在故障时记录"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "配置管理强调可追溯与可回滚：变更前备份、版本化管理、变更后复核。只在故障时记录会丢失大量上下文。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "配置管理",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-1-019",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 日常维护」。知识点编码 hcip831-6-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "5bc561152b53753677d0b9e2fe60b2e7b0e67909c6f869b88a811a61129becfc"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-1-020",
+    "type": "true_false",
+    "question": "配置备份可以只保存在设备本地。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "设备本地存储在设备损坏、误格式化或重置时一并丢失，备份必须保存在设备之外的独立介质。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "备份"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-1-020",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 日常维护」。知识点编码 hcip831-6-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "77e323a386846b662b1498ed5d6168fec966ecd47f716d637b026b23d277ff34"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-1-021",
+    "type": "true_false",
+    "question": "NTP 时间同步有助于多设备日志的关联分析。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "统一时间后，各设备日志可以按时间轴对齐，便于还原故障发生顺序。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "easy",
+    "tags": [
+      "判断",
+      "NTP"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-1-021",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 日常维护」。知识点编码 hcip831-6-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "b2b8ce4a61a44836ffe18a76551b10968795835c73d4fc7ea0df2a90c7fed04e"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-1-022",
+    "type": "single_choice",
+    "question": "设备频繁重启且日志无异常，最应先检查什么？",
+    "options": {
+      "A": "电源与温度",
+      "B": "VLAN 配置",
+      "C": "SNMP 团体名",
+      "D": "路由表"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "无异常日志的重启多与供电不稳、温度过高或硬件故障相关，应优先检查电源模块与机房环境。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "重启"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-1-022",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 日常维护」。知识点编码 hcip831-6-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "89aa735bfcf2706b552e82295c9bca2a72fe7e54fe6c7b2ac88d6e4081282531"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-1-023",
+    "type": "single_choice",
+    "question": "巡检发现某接口 CRC 错误持续增长，应如何处理？",
+    "options": {
+      "A": "检查光模块与尾纤",
+      "B": "清空计数器",
+      "C": "重启设备",
+      "D": "增加 VLAN"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "CRC 错误增长说明物理层存在问题，应清洁或更换尾纤、检查光模块与端口，而不是简单清零计数器。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "CRC"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-1-023",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 日常维护」。知识点编码 hcip831-6-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "c7c91cf16c37b5208757bd04a6cd4f28e7a470032f02fc3e4408d94f161d454a"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-1-024",
+    "type": "single_choice",
+    "question": "配置规范化的主要好处是？",
+    "options": {
+      "A": "增加带宽",
+      "B": "提高链路速率",
+      "C": "减少 VLAN 数量",
+      "D": "降低误配与维护成本"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "统一的命名、注释与模板可以让不同工程师快速理解配置，减少误改与交接成本。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "规范"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-1-024",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 日常维护」。知识点编码 hcip831-6-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "7a43ca0b0a8d1f13baaf0a24cb228547da3e7397cb83c1b0695e32b8d638f63a"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-1-025",
+    "type": "single_choice",
+    "question": "设备退役前必须完成的工作是？",
+    "options": {
+      "A": "配置与数据清理及资产核销",
+      "B": "直接断电",
+      "C": "直接格式化",
+      "D": "直接搬离机房"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "退役设备需清除配置与敏感数据、解除监控与认证绑定，并完成资产核销，避免残留账号与地址造成风险。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "退役"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-1-025",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 日常维护」。知识点编码 hcip831-6-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "6737833721bce8677eb0cba14c1c34fe1e5a1a853ed9377d3bb92beaec952172"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-1-026",
+    "type": "single_choice",
+    "question": "监控系统中\"基线告警\"的作用是？",
+    "options": {
+      "A": "提高带宽",
+      "B": "替代所有告警",
+      "C": "减少设备数量",
+      "D": "发现偏离正常区间的指标"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "基于历史基线设置动态阈值，可以更早发现异常趋势，减少固定阈值带来的误报与漏报。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "监控"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-1-026",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 日常维护」。知识点编码 hcip831-6-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "f91b037328a82caa312364bdec7027f36248d3e6d65b0ead47b7f54588c0865a"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-1-027",
+    "type": "single_choice",
+    "question": "定期检查证书有效期的原因是？",
+    "options": {
+      "A": "证书过期会导致业务中断",
+      "B": "证书影响带宽",
+      "C": "证书决定 VLAN",
+      "D": "证书占用内存"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "HTTPS、IPsec、Portal 等业务依赖证书，过期后会直接认证失败，应在到期前更新。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "证书"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-1-027",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 日常维护」。知识点编码 hcip831-6-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4d5f16e3f3bcd3936df36831807fe9e4c1ce7a845be89f30ae1170050f0240c5"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-1-028",
+    "type": "multiple_choice",
+    "question": "下列哪些属于网络运维的日常工作？",
+    "options": {
+      "A": "配置备份与版本管理",
+      "B": "巡检与告警处理",
+      "C": "网络架构重构",
+      "D": "容量与性能分析"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "日常运维以维持稳定运行为主，架构重构属于项目性工作，不属于日常运维范畴。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "日常工作",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-1-028",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 日常维护」。知识点编码 hcip831-6-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "b9538426462e234a661271590ec469180c322b38373ba3169e2c1f8e6a6627a7"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-1-029",
+    "type": "true_false",
+    "question": "设备配置越复杂，越应该减少注释以保持简洁。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "复杂配置更需要注释说明意图与依赖关系，缺少注释会显著提高后续排障与交接成本。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "规范"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-1-029",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 日常维护」。知识点编码 hcip831-6-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "c2eb7e5e156700f730e079977e952097c24194790f73369dc89d895a42a65ba1"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  }
+]

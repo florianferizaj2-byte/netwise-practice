@@ -14,13 +14,16 @@
     ],
     "analysis": "Authentication 表示认证，用于验证用户名、口令或其他身份凭据。",
     "chapter": "AAA 原理与配置",
-    "knowledgePoint": "认证",
+    "knowledgePoint": "认证（Authentication）",
     "difficulty": "easy",
     "tags": [
       "AAA 原理与配置",
+      "AAA 框架",
+      "认证（Authentication）",
       "认证"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "AAA 框架"
   },
   {
     "id": "hcia-v2-12-authorization",
@@ -37,13 +40,16 @@
     ],
     "analysis": "Authorization 即授权，在身份通过认证后决定用户拥有的权限范围。",
     "chapter": "AAA 原理与配置",
-    "knowledgePoint": "授权",
+    "knowledgePoint": "授权（Authorization）",
     "difficulty": "easy",
     "tags": [
       "AAA 原理与配置",
+      "AAA 框架",
+      "授权（Authorization）",
       "授权"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "AAA 框架"
   },
   {
     "id": "hcia-v2-12-accounting",
@@ -60,13 +66,16 @@
     ],
     "analysis": "Accounting 用于记录会话和资源使用信息，可服务于审计、统计或计费。",
     "chapter": "AAA 原理与配置",
-    "knowledgePoint": "计费",
+    "knowledgePoint": "计费（Accounting）",
     "difficulty": "easy",
     "tags": [
       "AAA 原理与配置",
+      "AAA 框架",
+      "计费（Accounting）",
       "计费"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "AAA 框架"
   },
   {
     "id": "hcia-v2-12-local-user",
@@ -83,12 +92,15 @@
     ],
     "analysis": "本地认证由设备自身保存并校验用户信息，适合规模较小或作为远程认证的备用方式。",
     "chapter": "AAA 原理与配置",
-    "knowledgePoint": "本地用户",
+    "knowledgePoint": "本地认证",
     "difficulty": "medium",
     "tags": [
       "AAA 原理与配置",
+      "认证方式与服务器",
+      "本地认证",
       "本地用户"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "认证方式与服务器"
   }
 ]

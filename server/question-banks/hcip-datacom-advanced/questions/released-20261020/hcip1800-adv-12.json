@@ -1,0 +1,2354 @@
+[
+  {
+    "id": "hcip831-7-1-1-001",
+    "type": "single_choice",
+    "question": "结构化故障排除流程的正确顺序是？",
+    "options": {
+      "A": "定义问题、收集信息、分析原因、实施方案、验证结果",
+      "B": "收集信息、定义问题、验证结果、分析原因",
+      "C": "分析原因、定义问题、收集信息、实施方案",
+      "D": "实施方案、验证结果、定义问题、收集信息"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "标准流程为：先明确故障现象与影响范围，再收集证据，分析可能原因，制定并实施方案，最后验证效果并归档。顺序颠倒会导致盲目变更。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "easy",
+    "tags": [
+      "故障排除",
+      "流程"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "119534d20457501313df10b66414264df0354df5ec835519d23c8cfc19f44c8c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-002",
+    "type": "single_choice",
+    "question": "故障排除中\"定义问题\"阶段的核心任务是？",
+    "options": {
+      "A": "重启设备",
+      "B": "更换硬件",
+      "C": "立即修改配置",
+      "D": "明确现象、范围与影响"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "定义问题要回答\"什么坏了、影响谁、从什么时候开始、能否复现\"，边界清晰才能避免后续排查发散。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "定义问题"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "f7df81538c73e27079e39d5f8d234f8d35f4316e5c31104c183bde05c59699b6"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-003",
+    "type": "single_choice",
+    "question": "收集信息阶段通常不包括下列哪项？",
+    "options": {
+      "A": "查看设备日志",
+      "B": "直接修改配置尝试修复",
+      "C": "查看接口状态",
+      "D": "询问变更记录"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "收集信息阶段只做只读操作，包括日志、状态、告警、拓扑与近期变更。修改配置属于实施阶段，会破坏现场证据。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "信息收集"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "6488a9928423aee8c2c4b6991d9947b404d39b9011da9a23650668f162e47456"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-004",
+    "type": "single_choice",
+    "question": "分析原因阶段最重要的原则是？",
+    "options": {
+      "A": "等待故障自愈",
+      "B": "先列可能原因再逐一验证",
+      "C": "同时修改多个参数",
+      "D": "直接采用第一个猜测"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "应列出所有可能原因并按可能性排序，再设计验证手段逐一排除，避免\"拍脑袋\"式排查。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "原因分析"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "6fb1dca0a9028f20846f9013eb9bb948844f53691e3a6afaa30f716395fc56b0"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-005",
+    "type": "single_choice",
+    "question": "实施故障处理方案前应先做什么？",
+    "options": {
+      "A": "直接下发命令",
+      "B": "清空设备配置",
+      "C": "通知所有用户断网",
+      "D": "评估风险并准备回滚"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "任何变更都可能引入新故障，实施前应评估影响范围、准备回滚方案并在合适的时间窗口操作。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "实施"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4ab4f6c92da147819776312dc9120d172eb15d39c3256d02b7fefa00a2034b06"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-006",
+    "type": "single_choice",
+    "question": "故障处理完成后必须做的一件事是？",
+    "options": {
+      "A": "清空计数器",
+      "B": "验证业务恢复并记录归档",
+      "C": "重启所有设备",
+      "D": "立即删除日志"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "验证要覆盖原故障现象与关联业务，确认真正恢复；记录归档可为后续同类故障提供参考。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "验证"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "2ee5bc70641fce059d2ecb6ea884f952b44fbb14d1277eba69dd92ac11724f00"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-007",
+    "type": "single_choice",
+    "question": "\"分而治之\"排查法的核心是？",
+    "options": {
+      "A": "只查核心设备",
+      "B": "同时排查所有设备",
+      "C": "只查终端",
+      "D": "把网络分段定位故障域"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "通过分段测试把故障范围从全网缩小到某一段链路或某台设备，是大型网络排障最有效的手段之一。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "分而治之"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "7310a16aabf4dda5f44d33ef8ac7a5e88b92e1aa3ec91cabbf13870f50f7fd95"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-008",
+    "type": "single_choice",
+    "question": "自下而上排查法的起点是？",
+    "options": {
+      "A": "传输层",
+      "B": "应用层",
+      "C": "物理层与链路层",
+      "D": "路由层"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "自下而上从物理链路、接口状态开始逐层向上排查，适合怀疑链路故障或大范围中断的场景。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "自下而上"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "800881ec7a1da4f11392f33d450b710b7ed0dab10adc8f30335e8f5b0ec9b031"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-009",
+    "type": "single_choice",
+    "question": "自上而下排查法的起点是？",
+    "options": {
+      "A": "网络层",
+      "B": "物理层",
+      "C": "数据链路层",
+      "D": "应用层业务表现"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "自上而下从用户感知的业务现象入手，逐层向下定位，适合业务侧报障且范围明确的场景。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "自上而下"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-009",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "14b71698f0aae5eac9f10a1bd30a582a738748a42541890551af32c5ef3643f8"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-010",
+    "type": "single_choice",
+    "question": "对比法排查的关键是？",
+    "options": {
+      "A": "关闭所有冗余",
+      "B": "只查看故障设备",
+      "C": "找到正常与异常的可比对象",
+      "D": "修改全部配置"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "通过与正常设备、正常时段或正常路径对比，快速发现差异点，差异往往就是根因所在。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "对比法"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-010",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "9b8fd1da91636e77360be8a23717436d93eb9bc10d48df14042a5453d3a29186"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-011",
+    "type": "single_choice",
+    "question": "替换法排查适用于什么场景？",
+    "options": {
+      "A": "怀疑路由策略错误",
+      "B": "怀疑硬件或模块故障",
+      "C": "怀疑地址规划错误",
+      "D": "怀疑业务逻辑错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "替换法用已知正常的部件替换可疑部件，适合光模块、板卡、线缆等硬件故障的快速定位。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "替换法"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-011",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "6b1d9e79a2a0bdf99597e36160a7219d9232c61418cfb65a413c131a5a22d1ee"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-012",
+    "type": "single_choice",
+    "question": "隔离法排查的核心操作是？",
+    "options": {
+      "A": "逐步隔离可疑区域缩小范围",
+      "B": "同时更换所有设备",
+      "C": "清空路由表",
+      "D": "重启全部链路"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "通过断开或旁路部分链路、设备，观察故障是否消失，从而把故障域逐步缩小到最小范围。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "hard",
+    "tags": [
+      "故障排除",
+      "隔离法"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-012",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "09c474c73b591e96f5c47da46b2bc458c9c6fcb941ee6ae5eba8bfdb9299cb0f"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-013",
+    "type": "single_choice",
+    "question": "假设验证法要求每次只改变什么？",
+    "options": {
+      "A": "全部变量",
+      "B": "不做任何改变",
+      "C": "至少两个变量",
+      "D": "一个变量"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "每次只改变一个变量，才能确定结果变化由哪个因素引起；同时改多个变量会导致无法归因。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "假设验证"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-013",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d41fe4b6163a18254692d69fc3a016af52ce2c720eee7cc92bdb98a91ae0a7a7"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-014",
+    "type": "single_choice",
+    "question": "故障优先级通常依据什么确定？",
+    "options": {
+      "A": "影响范围与业务重要程度",
+      "B": "设备价格",
+      "C": "故障发现时间",
+      "D": "处理人员数量"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "优先处理影响面大、业务关键度高的故障；影响范围与业务等级是排定优先级的主要依据。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "优先级"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-014",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "0d058b7a6090ed43a582d7f656cc670ea8bc1eb8160ce3c3cc37a2a253e563d2"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-015",
+    "type": "single_choice",
+    "question": "重大故障处理中，沟通的作用是？",
+    "options": {
+      "A": "同步进展并管理各方预期",
+      "B": "加快设备转发",
+      "C": "替代技术排查",
+      "D": "减少日志数量"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "重大故障需要定期同步现状、影响与预计恢复时间，避免信息真空引发误判与投诉。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "沟通"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-015",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "eb82fbdf4f8600d7705a97d879907295295c24757a112d725395feea4da41ad3"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-016",
+    "type": "single_choice",
+    "question": "回滚方案应在什么时候准备？",
+    "options": {
+      "A": "变更失败之后",
+      "B": "项目验收之后",
+      "C": "故障恢复之后",
+      "D": "变更实施之前"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "回滚方案必须与变更方案同时准备并在实施前确认可执行，否则一旦失败将无法快速恢复业务。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "hard",
+    "tags": [
+      "故障排除",
+      "回滚"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-016",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "50451c32bccf77a7c5df5f057ac931b04303fe8b9df0e8e731ba56c114e12c07"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-017",
+    "type": "single_choice",
+    "question": "根因分析与故障恢复的关系是？",
+    "options": {
+      "A": "必须先完成根因分析再恢复",
+      "B": "根因分析可以省略",
+      "C": "先恢复业务，再做根因分析",
+      "D": "两者完全等同"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "生产环境以业务恢复优先，恢复后仍需做根因分析，避免同类故障重复发生。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "根因"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-017",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "cf2ca6c0c14fe73f454980d1e22a161608cd5ad4d3c439da6e5c4ae8e29cd463"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-018",
+    "type": "single_choice",
+    "question": "\"5 Why\"分析法的作用是？",
+    "options": {
+      "A": "评估带宽",
+      "B": "统计故障次数",
+      "C": "连续追问直到找到根本原因",
+      "D": "计算可用率"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "通过连续追问\"为什么\"逐层深入，从表象追到流程或设计缺陷，避免停留在直接原因。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "5 Why"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-018",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "8e1c932f0f34317c60f00cb41dbbe412293ed5e72fc164e779b81e8f29c9afb0"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-019",
+    "type": "single_choice",
+    "question": "建立故障时间线的主要目的是？",
+    "options": {
+      "A": "评估人员绩效",
+      "B": "还原事件顺序定位触发点",
+      "C": "计算设备折旧",
+      "D": "统计流量"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "把告警、变更、操作与现象按时间排序，可以快速发现\"某次变更后故障出现\"这类因果关系。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "时间线"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-019",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "f9f2359234f04dc0600c72f01e03bd9990e939216693b5f86fde6d93859235d8"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-020",
+    "type": "multiple_choice",
+    "question": "结构化故障排除流程包含下列哪些阶段？",
+    "options": {
+      "A": "定义问题",
+      "B": "直接重启设备",
+      "C": "分析原因",
+      "D": "收集信息"
+    },
+    "answer": [
+      "A",
+      "C",
+      "D"
+    ],
+    "analysis": "重启设备只是可能的处置手段之一，不属于流程阶段。流程强调先定义、再收集、后分析。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "流程",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-020",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "8fa54e3f2ec1815971da72c4750a5099ed9e97d2a211417c3676d84a3185beac"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-021",
+    "type": "multiple_choice",
+    "question": "收集信息阶段可以使用的信息来源包括？",
+    "options": {
+      "A": "近期变更记录",
+      "B": "接口与协议状态",
+      "C": "设备日志与告警",
+      "D": "未经证实的传言"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "日志、状态与变更记录是可验证的一手信息；传言需要验证后才能作为线索。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "信息",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-021",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "f5f2f84f884d732ca2057a75eefe498aaa04ce7681a2eca9a5a6a6775b6f5cd4"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-022",
+    "type": "true_false",
+    "question": "故障排除时应先修改配置尝试修复，再收集信息。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "先改配置会破坏现场，导致证据丢失甚至扩大故障。正确顺序是先收集信息再分析原因。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "easy",
+    "tags": [
+      "判断",
+      "流程"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-022",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "0daf02ccf06deca8b33945b788dbd14dcd78107d0472f00b8851d34f854617bc"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-023",
+    "type": "true_false",
+    "question": "故障恢复后不需要再做根因分析。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "恢复只是止血，根因分析才能防止复发。缺少根因分析的故障往往会以相同形式再次出现。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "根因"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-023",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "06ed6aed8d982bda070ccb66c64c58c16407a4ea413db615ce771c0bf59addc3"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-024",
+    "type": "single_choice",
+    "question": "故障处理记录中最重要的内容是？",
+    "options": {
+      "A": "参与人员的姓名",
+      "B": "机房的温度",
+      "C": "现象、根因、处置过程与预防措施",
+      "D": "设备的采购价格"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "记录的价值在于可复用：现象便于识别，根因便于理解，处置过程便于复现，预防措施避免复发。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "记录"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-024",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "f5c8d35d622bc46acc4c9c4a580f73e0b89f8c326490526e1345e40d760b112b"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-025",
+    "type": "single_choice",
+    "question": "多个故障同时出现时，应优先处理？",
+    "options": {
+      "A": "影响核心业务且范围最大的",
+      "B": "最先上报的",
+      "C": "最容易修的",
+      "D": "设备最贵的"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "按影响范围与业务重要度排序，优先恢复核心业务；先易后难会导致关键业务长时间中断。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "排序"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-025",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "225f07843f70d3d144b477d47f8ad1351c989fef446fb6467f72d052fa645cdd"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-026",
+    "type": "single_choice",
+    "question": "排查中发现某台设备 CPU 占用持续 90% 以上，下一步应做什么？",
+    "options": {
+      "A": "立即重启设备",
+      "B": "关闭所有接口",
+      "C": "确认哪些进程占用并判断是否异常",
+      "D": "直接更换板卡"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "先定位占用来源（协议报文、攻击流量、转发任务），判断是否与故障相关，再决定处置方式。直接重启会丢失现场。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "hard",
+    "tags": [
+      "故障排除",
+      "CPU"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-026",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "0245f831970eea2b6ed2ce4e3cdc0c5b2454617ea9229caa2211d0e077cf887a"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-027",
+    "type": "single_choice",
+    "question": "变更窗口通常选择在什么时间？",
+    "options": {
+      "A": "任意时间",
+      "B": "业务高峰期",
+      "C": "设备重启后",
+      "D": "业务低峰期"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "变更窗口应选在业务低峰并预留回滚时间，降低变更失败对业务的影响。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "变更窗口"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-027",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "769eca65c8c74a8f7bfeb08b18ac8c70bc1d6d227e97774d6846c51ea4477b91"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-028",
+    "type": "single_choice",
+    "question": "在故障排查中，故障复现的主要价值是什么？",
+    "options": {
+      "A": "可以提高带宽",
+      "B": "可以减少设备数量",
+      "C": "可以替代日志分析",
+      "D": "可在受控条件下验证原因"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "能稳定复现的故障更容易通过对比实验定位根因，也便于验证修复方案是否有效。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "复现"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-028",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "de3b1dad1042dd56e31b540f6397ab83c9f8858235ee902a3760af3793b859da"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-029",
+    "type": "single_choice",
+    "question": "排查跨设备故障时，最先应确认什么？",
+    "options": {
+      "A": "采购合同",
+      "B": "设备的生产厂商",
+      "C": "机柜的编号",
+      "D": "拓扑与转发路径"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "先确认实际拓扑与报文转发路径，才能判断故障可能发生在哪一段，避免在错误的方向上浪费 time。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "拓扑"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-029",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "a992ffc41a67ac3b9ba44a78ecf9884ab4fd14cc6e42718200a5e4500943f1e1"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-030",
+    "type": "multiple_choice",
+    "question": "下列哪些属于有效的排障手段？",
+    "options": {
+      "A": "分段测试",
+      "B": "对比正常与异常",
+      "C": "凭经验直接更换核心设备",
+      "D": "查看协议状态"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "分段、对比、查看状态都是可验证的手段。未经分析直接更换核心设备风险极高且难以定位根因。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "手段",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-030",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "56e3291fa2d5f1b59ae859ecc11b3647c92039275bd0d248e7d4dadee6860b81"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-031",
+    "type": "true_false",
+    "question": "同时修改多个配置项可以加快故障定位。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "同时修改多个变量会导致无法判断哪个改动起了作用，甚至引入新故障。应遵循单一变量原则。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "单一变量"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-031",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "20ed8a88560e29be1b0fe4de27ef04af34bb0d7361d7c75c737d2921a4d180eb"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-1-032",
+    "type": "single_choice",
+    "question": "故障已恢复但用户仍反馈业务异常，最可能的原因是？",
+    "options": {
+      "A": "设备已彻底损坏",
+      "B": "只恢复了链路未恢复业务配置或会话",
+      "C": "用户误报必然",
+      "D": "故障从未发生"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "链路恢复不等于业务恢复，还需检查路由收敛、会话表、认证状态与策略配置是否同步恢复。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "hard",
+    "tags": [
+      "故障排除",
+      "业务恢复"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-1-032",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 结构化流程」。知识点编码 hcip831-7-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d5cfcbb7a77cdeeeca9e8c1b07802ba0371102ec721daac24e7ef33e8d8800bf"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-001",
+    "type": "single_choice",
+    "question": "网络排障中\"分层\"思想的理论基础是？",
+    "options": {
+      "A": "IEEE 802 标准",
+      "B": "OSI 七层模型",
+      "C": "RFC 文档",
+      "D": "TCP/IP 四层模型"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "按物理层、链路层、网络层、传输层、应用层逐层排查，可以把复杂问题拆解为可验证的小问题。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "排障思想",
+      "分层"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "fbba6a9993a0f0122da6b3474448c34a61dfc90768df137fd3a587ca02247538"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-002",
+    "type": "single_choice",
+    "question": "物理层排查最先查看什么？",
+    "options": {
+      "A": "ARP 表",
+      "B": "会话表",
+      "C": "接口状态与光功率",
+      "D": "路由表"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "接口 Up/Down、光功率、误码是物理层最直接的证据，链路不通时优先检查这些指标。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "排障思想",
+      "物理层"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "1baa7d9e7e64eb266927ba8a69585bed4f81ae2c43642e734e2099adee75f601"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-003",
+    "type": "single_choice",
+    "question": "二层排查通常关注什么？",
+    "options": {
+      "A": "VLAN、MAC 表与生成树",
+      "B": "路由协议邻居",
+      "C": "BGP 属性",
+      "D": "应用日志"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "二层问题多与 VLAN 划分、MAC 学习、环路与生成树状态相关，可通过 MAC 表与 STP 状态快速判断。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "排障思想",
+      "二层"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "f6a5be5acd158d8509adb8ab956985a1796e9a72a7b314273b9792a628de2f76"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-004",
+    "type": "single_choice",
+    "question": "三层排查通常关注什么？",
+    "options": {
+      "A": "MAC 地址表",
+      "B": "VLAN 划分",
+      "C": "路由表与协议邻居状态",
+      "D": "光模块型号"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "三层问题重点看路由表是否有条目、下一跳是否可达、协议邻居是否正常，以及是否存在路由环路或黑洞。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "排障思想",
+      "三层"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "948f8c5e627c968c1f6fc7b341c7b21b4135f86042c96db3d60dc037a637b46b"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-005",
+    "type": "single_choice",
+    "question": "应用层排查通常关注什么？",
+    "options": {
+      "A": "端口监听与业务响应",
+      "B": "路由开销",
+      "C": "MAC 表",
+      "D": "光功率"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "应用层问题需确认服务是否监听、端口是否放通、响应是否超时，以及中间是否有安全设备拦截。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "排障思想",
+      "应用层"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "73a2463edb817f28eabd66bbcaef19d5709bd6628c5254078d096c2e95e443e0"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-006",
+    "type": "single_choice",
+    "question": "\"单一变量\"原则的目的是？",
+    "options": {
+      "A": "确保结果可归因",
+      "B": "提高带宽",
+      "C": "缩短配置长度",
+      "D": "减少设备数量"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "每次只改变一个因素，观察结果变化，才能确定因果关系；多变量同时变化会使结论失去意义。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "排障思想",
+      "单一变量"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "30626b52850388754f94fc3a28d4283d1522f3b7cb004a3fc9ef55c43df0c42d"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-007",
+    "type": "single_choice",
+    "question": "建立性能基线的价值是？",
+    "options": {
+      "A": "替代故障排查",
+      "B": "提高链路速率",
+      "C": "减少设备数量",
+      "D": "提供正常状态的参照"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "有基线才能判断当前指标是否异常，例如 CPU、时延、丢包、带宽利用率的正常区间。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "排障思想",
+      "基线"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "10402ec396bd9042fe0ea83314281e98c5276870bf047e19160feeea8ee82771"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-008",
+    "type": "single_choice",
+    "question": "排障时做配置对比的主要作用是什么？",
+    "options": {
+      "A": "替代日志分析",
+      "B": "发现与正常状态的差异",
+      "C": "加快设备启动",
+      "D": "减少 VLAN"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "把故障设备与正常设备、变更前后的配置做对比，差异点往往直接指向根因。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "排障思想",
+      "配置对比"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "7e3c6df90eb4279300a5cd1b9e515fc9ced474247a3ba13e8182ad564044028d"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-009",
+    "type": "single_choice",
+    "question": "抓包分析最适合解决什么问题？",
+    "options": {
+      "A": "协议交互异常与报文丢弃",
+      "B": "设备采购选型",
+      "C": "人员排班",
+      "D": "机房布线"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "抓包可以看到实际收发的报文与字段，适合定位协议协商失败、字段错误、单向丢包等问题。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "排障思想",
+      "抓包"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-009",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d92d48c859a3c481cc9610f7f8a067e33528fe2ea307e96ca1d8620a3f969486"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-010",
+    "type": "single_choice",
+    "question": "进行日志分析时，最关键的做法是什么？",
+    "options": {
+      "A": "只看错误级别",
+      "B": "只看最后一条",
+      "C": "按时间关联多条日志",
+      "D": "只看设备型号"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "单条日志往往信息不足，把告警、协议事件与操作记录按时间关联，才能还原故障发生过程。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "排障思想",
+      "日志"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-010",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "284125b8918221d656743175b049236c46572e8a9e98e27a8becc0fc4707d3ad"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-011",
+    "type": "single_choice",
+    "question": "最小化变更原则的含义是？",
+    "options": {
+      "A": "更换全部设备",
+      "B": "关闭所有冗余",
+      "C": "一次性重构网络",
+      "D": "用最小改动解决问题"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "改动越小，引入新风险的概率越低，回滚也越容易；能用一条策略解决就不要重构整个网络。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "排障思想",
+      "最小变更"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-011",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4075a458128549bded761e0e3d91a383a579a461b3f3806e9ef15293a4a8b1bd"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-012",
+    "type": "single_choice",
+    "question": "故障分类的主要目的是？",
+    "options": {
+      "A": "快速匹配已知处理方案",
+      "B": "降低采购成本",
+      "C": "提高带宽",
+      "D": "减少设备数量"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "把故障归入链路、协议、配置、性能、安全等类别，可直接套用对应的排查清单与处置经验。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "排障思想",
+      "分类"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-012",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "52647f5e86037d47bfcb64e1f62577302146588547b4abbdd0291bbe7634a309"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-013",
+    "type": "single_choice",
+    "question": "同一现象可能由多个原因导致，正确做法是？",
+    "options": {
+      "A": "选择最熟悉的原因直接处理",
+      "B": "列出候选原因并设计验证实验",
+      "C": "随机尝试",
+      "D": "等待自行恢复"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "应穷举候选原因，按可能性排序，用最小代价的实验逐一排除，而不是凭经验直接下结论。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "hard",
+    "tags": [
+      "排障思想",
+      "假设"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-013",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "8e8231ab6b50e6c4f52ae5c70401ac897c378115398594c8d256094ee9c5e4eb"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-014",
+    "type": "single_choice",
+    "question": "人为因素导致的故障占比高的原因是？",
+    "options": {
+      "A": "带宽不足",
+      "B": "变更与操作缺乏校验",
+      "C": "机房温度高",
+      "D": "设备质量差"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "大量故障源于配置错误、误拔线缆、漏改策略等操作问题，因此变更管理与复核流程尤为重要。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "排障思想",
+      "人为因素"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-014",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "89024f0eb46742c4b61f609ee403dae54c021a90fa4f9ec8f544ec653abe627a"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-015",
+    "type": "single_choice",
+    "question": "应急预案的核心内容是？",
+    "options": {
+      "A": "人员培训计划",
+      "B": "故障场景与对应处置步骤",
+      "C": "机房平面图",
+      "D": "设备采购清单"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "应急预案按\"场景、判断依据、处置步骤、回滚方式\"四段组织，使值班人员在压力下也能照着执行，不必临时判断。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "排障思想",
+      "应急预案"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-015",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "c24afe3eb0878bca79276451c009539dbe699f35c6b4656c092de950b36e0b4e"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-016",
+    "type": "single_choice",
+    "question": "定期演练应急预案的作用是？",
+    "options": {
+      "A": "提高带宽",
+      "B": "减少设备数量",
+      "C": "替代真实故障",
+      "D": "验证预案可执行并发现缺口"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "演练可以暴露联系人失效、步骤缺失、权限不足等问题，避免真实故障时才发现预案不可用。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "排障思想",
+      "演练"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-016",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "94d1a117349ae880bec26ac894dfef60bf750c462364929954a4ecd3b6aa2d43"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-017",
+    "type": "multiple_choice",
+    "question": "分层排查法的优点包括？",
+    "options": {
+      "A": "便于多人分工",
+      "B": "把复杂问题拆成小问题",
+      "C": "可以跳过底层直接结论",
+      "D": "每层都有明确验证手段"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "分层排查的价值在于结构化与可验证。跳过底层直接下结论容易误判。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "排障思想",
+      "分层",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-017",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "6137d7c5385e41715622b49154ede857f4502d9eedfb144e06cc3bcaeb8a6f7d"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-018",
+    "type": "multiple_choice",
+    "question": "下列哪些属于常见的故障模式？",
+    "options": {
+      "A": "地址冲突",
+      "B": "链路中断",
+      "C": "协议邻居震荡",
+      "D": "业务需求变更"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "链路中断、邻居震荡、地址冲突都是典型的网络故障模式；需求变更属于变更管理范畴。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "排障思想",
+      "故障模式",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-018",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "f0b17f875a8d4da6114a2d3dff1c08826aaf7ef6f6228f58d9b4d4130369ab3f"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-019",
+    "type": "true_false",
+    "question": "排障时应尽量同时调整多个参数以加快恢复。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "同时调整多个参数会导致无法归因，也可能掩盖真实原因。应遵循单一变量原则。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "单一变量"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-019",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4913aae1566a2232e9594c049312033631d11d59ec3254c968c096c9c772535d"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-020",
+    "type": "true_false",
+    "question": "建立性能基线有助于判断指标是否异常。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "没有基线就无法区分\"正常的高负载\"与\"异常的过载\"，基线是性能类故障判断的前提。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "easy",
+    "tags": [
+      "判断",
+      "基线"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-020",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "7a2297d736a4c3683d4535d38f5a12598042158b4bb946483c3f23fdd0dc3493"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-021",
+    "type": "single_choice",
+    "question": "网络中断但设备指示灯正常，下一步应优先检查？",
+    "options": {
+      "A": "人员排班",
+      "B": "机房温度",
+      "C": "接口状态与协议邻居",
+      "D": "设备采购记录"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "指示灯正常只说明供电与基本硬件工作，还需确认接口是否 Up、协议邻居是否建立、路由是否收敛。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "排障思想",
+      "排查顺序"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-021",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "85936fd71e06ce8cdda1bbb04e25b6ee0a4a9c35849f2cc1cd5cccbebb23d011"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-022",
+    "type": "single_choice",
+    "question": "故障排查中\"先恢复、后优化\"的含义是？",
+    "options": {
+      "A": "优先优化性能参数",
+      "B": "优先整理文档",
+      "C": "优先采购设备",
+      "D": "优先恢复业务可用性"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "业务中断时以恢复可用性为第一目标，性能优化与架构改进应放在业务恢复之后进行。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "排障思想",
+      "恢复优先"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-022",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "bbdc860b3167fc38e498c57f41bd2e8e712f3227f83e52847e58b299eaf3b8d6"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-023",
+    "type": "single_choice",
+    "question": "记录拓扑变更的重要性在于？",
+    "options": {
+      "A": "降低功耗",
+      "B": "减少设备数量",
+      "C": "提高带宽",
+      "D": "避免基于过时信息误判"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "拓扑变化后若文档未更新，排障时容易按旧路径判断，导致方向性错误。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "排障思想",
+      "文档"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-023",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "7a84249966e9da8052e2e2058099a49e8b078470b7f8bd7da0a39128164a9581"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-024",
+    "type": "single_choice",
+    "question": "某故障在高峰期出现、低峰期消失，最可能的方向是？",
+    "options": {
+      "A": "线缆断裂",
+      "B": "硬件彻底损坏",
+      "C": "配置完全错误",
+      "D": "性能瓶颈或资源不足"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "与负载相关的故障通常指向带宽、会话数、CPU、内存等资源瓶颈，应重点采集高峰期的性能指标。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "hard",
+    "tags": [
+      "排障思想",
+      "性能"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-024",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d3af32fa24904fb1c356f7d6616ffbaa367267abe57c50c8af297fd0d0ebe2ae"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-025",
+    "type": "single_choice",
+    "question": "排查工具中 ping 与 tracert 的主要区别是？",
+    "options": {
+      "A": "两者完全相同",
+      "B": "前者测带宽，后者测丢包",
+      "C": "前者测连通性，后者测路径",
+      "D": "前者测路由，后者测 MAC"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "ping 验证端到端可达性与时延，tracert 逐跳显示转发路径，用于定位中断发生在哪一跳。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "排障思想",
+      "工具"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-025",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "42154212c488d7ac60cab1f306c054c4ed42eb0a2a4bf27d32b358ee4d488ee8"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-026",
+    "type": "single_choice",
+    "question": "设备日志级别设置过低会导致什么？",
+    "options": {
+      "A": "设备无法启动",
+      "B": "接口速率下降",
+      "C": "大量冗余信息淹没关键告警",
+      "D": "路由无法收敛"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "日志级别过低会记录大量调试信息，既占用存储也干扰分析，应按需调整级别。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "排障思想",
+      "日志级别"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-026",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "5b0b986965e78d908282c9aecacd30b416aeaf4edcc62bd2b6db597d26a8b73e"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-027",
+    "type": "single_choice",
+    "question": "故障排查中所说的\"故障域\"指的是什么？",
+    "options": {
+      "A": "故障处理的负责人",
+      "B": "故障影响所波及的范围",
+      "C": "故障发生的具体时刻",
+      "D": "故障设备的型号"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "明确故障域可以快速划定排查边界，把有限的排查资源集中在最可能出问题的那一段，避免在全网范围内盲目搜索。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "排障思想",
+      "故障域"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-027",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "2ec10c78f6f54b61025052da5e28a08f8f226d04584957c7e935b183024ec94f"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-028",
+    "type": "multiple_choice",
+    "question": "有效的排障记录应包含？",
+    "options": {
+      "A": "处置步骤与结果",
+      "B": "参与人员的私人评价",
+      "C": "根因与验证过程",
+      "D": "故障现象与时间"
+    },
+    "answer": [
+      "A",
+      "C",
+      "D"
+    ],
+    "analysis": "记录应聚焦可复用的事实：现象、根因、处置与结果。私人评价对后续排障没有价值。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "排障思想",
+      "记录",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-028",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "14b0b08b5c901ae4a556a8bcfc759e86fa2595d7d0e730275d4b8bd4f79b2c26"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-029",
+    "type": "true_false",
+    "question": "故障域越小，排查难度通常越低。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "故障域越小，需要检查的设备与链路越少，验证手段也越容易设计，因此分段缩小故障域是核心策略。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "故障域"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-029",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "1f6ab4a7b471ccf87464701bc6d38b5c81f0a3a7ae2566bc5540e9e878590871"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-030",
+    "type": "single_choice",
+    "question": "两台设备之间时通时断，最不可能的原因是？",
+    "options": {
+      "A": "光模块老化或接触不良",
+      "B": "链路存在环路",
+      "C": "端口协商异常",
+      "D": "设备型号不同"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "时通时断多与物理层不稳定、环路震荡或协商问题有关。设备型号不同本身不会导致间歇性中断。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "排障思想",
+      "间歇故障"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-030",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "410746e7e71d3043c135a454f44807e9bb5830eb517e6c94961365d948011866"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-031",
+    "type": "single_choice",
+    "question": "某网段部分终端无法访问服务器，其他终端正常，最应先查什么？",
+    "options": {
+      "A": "核心路由器的 CPU",
+      "B": "故障终端所在接入交换机的 VLAN 与策略",
+      "C": "DNS 服务器型号",
+      "D": "出口带宽"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "部分终端异常说明问题在接入侧或策略差异，应对比正常与异常终端的 VLAN、ACL、认证状态。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "hard",
+    "tags": [
+      "排障思想",
+      "范围定位"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-031",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "471665b659bd844804570121f032fda1cd649fca21918b6a5f9d05daa5546506"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-032",
+    "type": "single_choice",
+    "question": "排障时修改配置前应做什么？",
+    "options": {
+      "A": "重启设备",
+      "B": "备份当前配置",
+      "C": "关闭所有接口",
+      "D": "清空日志"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "备份配置是回滚的前提，也是事后对比的依据。未备份就变更会大幅提高恢复难度。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "排障思想",
+      "备份"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-032",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4447d6cc5e78864bc19ebac0a33b12d3299e71e987fd02597d70f2f432938d8b"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-033",
+    "type": "single_choice",
+    "question": "\"症状\"与\"原因\"的区别是？",
+    "options": {
+      "A": "症状是表现，原因是根因",
+      "B": "症状是根因",
+      "C": "原因是表现",
+      "D": "两者完全相同"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "丢包、时延高是症状，环路、拥塞、硬件故障是原因。排障的目标是从症状追溯到原因。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "排障思想",
+      "症状"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-033",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "32c28e69ea4b75e3bffa169d304e3cde9cb0768b871eba2650578464775ecc80"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-034",
+    "type": "multiple_choice",
+    "question": "下列哪些做法有助于缩短故障恢复时间？",
+    "options": {
+      "A": "提前准备应急预案",
+      "B": "保持配置备份",
+      "C": "建立监控告警",
+      "D": "故障时临时研究设备手册"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "预案、备份与监控都能在故障发生时直接提供支持。临时研究手册会显著延长恢复时间。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "排障思想",
+      "恢复时间",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-034",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "fb4294081fd7166bdfab55f3fa1ad6d41c3a991e3496987f4e3f9b79ce2f9370"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-7-1-2-035",
+    "type": "true_false",
+    "question": "故障排查只需要关注技术因素，不需要考虑流程与沟通。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "流程与沟通直接影响处置效率与决策质量，重大故障中信息不同步往往比技术问题造成更大影响。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "easy",
+    "tags": [
+      "判断",
+      "流程"
+    ],
+    "provenance": {
+      "questionId": "hcip831-7-1-2-035",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络故障排除 / 故障排除方法 / 核心思想和方法」。知识点编码 hcip831-7-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "6a716716f3b5f4201621d04040906b14226bd9863676a4d788d23cfb972f8087"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  }
+]

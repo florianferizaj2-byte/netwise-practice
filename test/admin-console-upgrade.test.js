@@ -21,6 +21,7 @@ test("deploying a reviewed correction preserves the original identity and histor
     };
     for (const file of [
       "store.js",
+      "bank-migrations.js",
       "ai-service-store.js",
       "domain.js",
       "memberships.js",
@@ -114,7 +115,7 @@ test("deploying a reviewed correction preserves the original identity and histor
             "-e",
             `import {createStore} from ${JSON.stringify(storeURL)};const store=createStore(${JSON.stringify(dir)});try{${script}}finally{store.db.close();}`,
           ],
-          { encoding: "utf8", windowsHide: true },
+          { encoding: "utf8", windowsHide: true, env: { ...process.env, NODE_ENV: "test" } },
         ),
       );
     run(

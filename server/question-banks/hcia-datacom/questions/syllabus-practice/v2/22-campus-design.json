@@ -1,0 +1,588 @@
+[
+  {
+    "id": "hcia-v3-22-001",
+    "type": "single_choice",
+    "question": "园区网接入层的主要职责是什么？",
+    "options": {
+      "A": "连接运营商专线",
+      "B": "承担全网路由计算与出口转发",
+      "C": "为终端提供接入端口并完成二层接入与安全控制",
+      "D": "为服务器提供存储资源"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "接入层直接面向终端，负责端口密度、PoE 供电与接入安全（端口安全、DHCP Snooping 等），是策略执行的第一跳。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgeSection": "网络层次设计",
+    "knowledgePoint": "接入层设计",
+    "difficulty": "easy",
+    "tags": [
+      "园区网络典型组网方案",
+      "网络层次设计",
+      "接入层设计"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-22-002",
+    "type": "single_choice",
+    "question": "接入层交换机选型时，下列哪项通常是首要考虑因素？",
+    "options": {
+      "A": "是否支持 IPv6 过渡技术",
+      "B": "是否支持 BGP",
+      "C": "端口数量与 PoE 供电能力",
+      "D": "是否支持 MPLS"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "接入层关注端口密度、供电与成本，BGP 与 MPLS 属于核心与出口能力，不应作为接入设备的选型重点。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgeSection": "网络层次设计",
+    "knowledgePoint": "接入层设计",
+    "difficulty": "medium",
+    "tags": [
+      "园区网络典型组网方案",
+      "网络层次设计",
+      "接入层设计"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-22-003",
+    "type": "true_false",
+    "question": "接入层设备通常不需要运行复杂的动态路由协议，只需向上提供二层或简单三层互联。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "层次化设计让接入层保持简单，路由计算上移到汇聚或核心，既降低成本也减少故障面。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgeSection": "网络层次设计",
+    "knowledgePoint": "接入层设计",
+    "difficulty": "medium",
+    "tags": [
+      "园区网络典型组网方案",
+      "网络层次设计",
+      "接入层设计"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-22-004",
+    "type": "single_choice",
+    "question": "汇聚层在园区网中的核心作用是什么？",
+    "options": {
+      "A": "汇聚接入设备、终结二层并作为三层网关边界",
+      "B": "承担数据中心存储网络",
+      "C": "为终端提供 PoE 供电",
+      "D": "连接互联网出口"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "汇聚层把多台接入交换机汇聚，常在此部署 VLANIF 网关、策略与路由汇总，是二层与三层的分界点。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgeSection": "网络层次设计",
+    "knowledgePoint": "汇聚层与核心层",
+    "difficulty": "medium",
+    "tags": [
+      "园区网络典型组网方案",
+      "网络层次设计",
+      "汇聚层与核心层"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-22-005",
+    "type": "single_choice",
+    "question": "核心层设计应遵循什么原则？",
+    "options": {
+      "A": "高速转发、结构简洁，尽量不在核心层做复杂策略",
+      "B": "核心层只做二层交换",
+      "C": "核心层直接连接所有终端",
+      "D": "在核心层部署全部 ACL 与 NAT"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "核心层的价值是高带宽与高可靠，复杂策略会拖慢转发并增加故障面，应下移到汇聚或上移到出口。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgeSection": "网络层次设计",
+    "knowledgePoint": "汇聚层与核心层",
+    "difficulty": "medium",
+    "tags": [
+      "园区网络典型组网方案",
+      "网络层次设计",
+      "汇聚层与核心层"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-22-006",
+    "type": "true_false",
+    "question": "园区网采用三层到边缘（网关下沉到汇聚）可以减少二层广播域范围，提升稳定性。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "把网关放在汇聚层可限制二层域规模，减少广播与 STP 收敛影响，是现代园区网的主流设计。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgeSection": "网络层次设计",
+    "knowledgePoint": "汇聚层与核心层",
+    "difficulty": "medium",
+    "tags": [
+      "园区网络典型组网方案",
+      "网络层次设计",
+      "汇聚层与核心层"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-22-007",
+    "type": "single_choice",
+    "question": "园区出口设备通常承担哪些功能？",
+    "options": {
+      "A": "为 AP 提供 CAPWAP 隧道",
+      "B": "NAT、默认路由、安全策略与带宽管理",
+      "C": "接入终端并提供 PoE",
+      "D": "作为 VLAN 二层交换"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "出口是内外网交界，需完成地址转换、路由兜底、访问控制与流量调度，是园区安全与可用性的关键节点。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgeSection": "网络层次设计",
+    "knowledgePoint": "出口与广域网",
+    "difficulty": "medium",
+    "tags": [
+      "园区网络典型组网方案",
+      "网络层次设计",
+      "出口与广域网"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-22-008",
+    "type": "single_choice",
+    "question": "企业双出口（主备专线）设计中，最常用的实现方式是什么？",
+    "options": {
+      "A": "只配置一条默认路由",
+      "B": "依赖 STP 自动切换",
+      "C": "浮动静态路由或策略路由配合链路探测",
+      "D": "关闭所有静态路由"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "主链路故障时通过浮动静态路由或探测联动切换到备链路，STP 只处理二层，无法完成出口选路。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgeSection": "网络层次设计",
+    "knowledgePoint": "出口与广域网",
+    "difficulty": "hard",
+    "tags": [
+      "园区网络典型组网方案",
+      "网络层次设计",
+      "出口与广域网"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-22-009",
+    "type": "true_false",
+    "question": "园区网出口通常只需要一条默认路由，无需考虑回程路由与策略一致性。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "双出口或多出口时，去程与回程路径不一致会导致丢包，必须通过策略路由与 NAT 协同保证往返对称。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgeSection": "网络层次设计",
+    "knowledgePoint": "出口与广域网",
+    "difficulty": "medium",
+    "tags": [
+      "园区网络典型组网方案",
+      "网络层次设计",
+      "出口与广域网"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-22-010",
+    "type": "single_choice",
+    "question": "园区网网关部署在汇聚层相比部署在核心层，主要优势是什么？",
+    "options": {
+      "A": "可以省去所有 VLAN 配置",
+      "B": "二层域更小，广播与 STP 影响范围受限",
+      "C": "不再需要路由协议",
+      "D": "终端可以直接获取公网地址"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "网关下沉让每个汇聚区块成为独立三层边界，故障被限制在局部，同时减少大二层带来的广播与环路风险。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgeSection": "网关与可靠性设计",
+    "knowledgePoint": "网关部署位置",
+    "difficulty": "medium",
+    "tags": [
+      "园区网络典型组网方案",
+      "网关与可靠性设计",
+      "网关部署位置"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-22-011",
+    "type": "single_choice",
+    "question": "VRRP 中 Master 与 Backup 的角色如何确定？",
+    "options": {
+      "A": "比较优先级，高者为 Master，相同则比接口 IP",
+      "B": "由 MAC 地址长度决定",
+      "C": "由终端指定",
+      "D": "随机选举产生"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "VRRP 优先级默认 100，数值大者成为 Master；优先级相同则比较接口 IP，大者为 Master。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgeSection": "网关与可靠性设计",
+    "knowledgePoint": "VRRP 网关冗余",
+    "difficulty": "medium",
+    "tags": [
+      "园区网络典型组网方案",
+      "网关与可靠性设计",
+      "VRRP 网关冗余"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-22-012",
+    "type": "single_choice",
+    "question": "VRRP 虚拟路由器对外呈现的地址是什么？",
+    "options": {
+      "A": "Backup 的物理接口地址",
+      "B": "Master 的物理接口地址",
+      "C": "虚拟 IP 地址，由 Master 响应 ARP",
+      "D": "广播地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "终端把网关配置为虚拟 IP，Master 负责响应 ARP 并转发；切换后新 Master 接管虚拟 IP 与 MAC。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgeSection": "网关与可靠性设计",
+    "knowledgePoint": "VRRP 网关冗余",
+    "difficulty": "medium",
+    "tags": [
+      "园区网络典型组网方案",
+      "网关与可靠性设计",
+      "VRRP 网关冗余"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-22-013",
+    "type": "true_false",
+    "question": "VRRP 的 Master 失效后，Backup 会在一定时间内接替虚拟 IP，终端无需修改网关配置。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "这正是 VRRP 的价值：网关冗余对终端透明，切换只需秒级，业务几乎无感知。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgeSection": "网关与可靠性设计",
+    "knowledgePoint": "VRRP 网关冗余",
+    "difficulty": "easy",
+    "tags": [
+      "园区网络典型组网方案",
+      "网关与可靠性设计",
+      "VRRP 网关冗余"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-22-014",
+    "type": "single_choice",
+    "question": "VRRP 中把优先级配置为 255 意味着什么？",
+    "options": {
+      "A": "该设备立即抢占成为 Master",
+      "B": "该设备只能做 Backup",
+      "C": "优先级配置无效",
+      "D": "该设备永不参与选举"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "255 为最高优先级且隐含抢占，设备会立即成为 Master；0 为特殊值，表示主动放弃 Master 角色。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgeSection": "网关与可靠性设计",
+    "knowledgePoint": "VRRP 网关冗余",
+    "difficulty": "hard",
+    "tags": [
+      "园区网络典型组网方案",
+      "网关与可靠性设计",
+      "VRRP 网关冗余"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v3-22-015",
+    "type": "single_choice",
+    "question": "园区网链路冗余设计中最常见的做法是什么？",
+    "options": {
+      "A": "接入双上行到两台汇聚，配合链路聚合与 STP/VRRP",
+      "B": "汇聚与核心之间不互联",
+      "C": "关闭所有冗余链路以简化配置",
+      "D": "所有接入只用一条上行链路"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "双上行消除单点故障，配合聚合提升带宽、STP 防环、VRRP 保网关，是园区高可用的标准组合。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgeSection": "网关与可靠性设计",
+    "knowledgePoint": "链路与设备冗余",
+    "difficulty": "medium",
+    "tags": [
+      "园区网络典型组网方案",
+      "网关与可靠性设计",
+      "链路与设备冗余"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-22-016",
+    "type": "true_false",
+    "question": "设备级冗余与链路级冗余需要同时考虑，仅做链路冗余仍可能因单台设备故障导致业务中断。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "两条链路若都汇聚到同一台设备，该设备故障仍会全网中断，因此冗余必须覆盖设备与链路两个维度。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgeSection": "网关与可靠性设计",
+    "knowledgePoint": "链路与设备冗余",
+    "difficulty": "medium",
+    "tags": [
+      "园区网络典型组网方案",
+      "网关与可靠性设计",
+      "链路与设备冗余"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-22-017",
+    "type": "single_choice",
+    "question": "园区接入层防止非法设备接入的常见手段是什么？",
+    "options": {
+      "A": "提高接口速率",
+      "B": "端口安全、MAC 地址限制与 802.1X 认证",
+      "C": "配置默认路由",
+      "D": "关闭所有 VLAN"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "接入安全通过限制端口可学习的 MAC 数量、绑定合法终端或强制认证，阻止私接与仿冒设备。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgeSection": "园区安全与运维",
+    "knowledgePoint": "园区接入安全",
+    "difficulty": "medium",
+    "tags": [
+      "园区网络典型组网方案",
+      "园区安全与运维",
+      "园区接入安全"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-22-018",
+    "type": "single_choice",
+    "question": "DHCP Snooping 的主要作用是什么？",
+    "options": {
+      "A": "区分信任与非信任端口，阻止非法 DHCP 服务器",
+      "B": "替代 DNS 解析",
+      "C": "加速 DHCP 报文转发",
+      "D": "为终端分配静态地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "DHCP Snooping 监听 DHCP 交互并建立绑定表，非信任端口上的 DHCP Offer 会被丢弃，防止私接路由器劫持网关。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgeSection": "园区安全与运维",
+    "knowledgePoint": "园区接入安全",
+    "difficulty": "hard",
+    "tags": [
+      "园区网络典型组网方案",
+      "园区安全与运维",
+      "园区接入安全"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-22-019",
+    "type": "true_false",
+    "question": "IPSG 依赖 DHCP Snooping 的绑定表来校验报文的源 IP 与源 MAC 是否合法。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IPSG 用绑定表做源地址校验，防止终端私自修改 IP 冒用他人地址，通常与 DHCP Snooping 配套部署。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgeSection": "园区安全与运维",
+    "knowledgePoint": "园区接入安全",
+    "difficulty": "hard",
+    "tags": [
+      "园区网络典型组网方案",
+      "园区安全与运维",
+      "园区接入安全"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-22-020",
+    "type": "single_choice",
+    "question": "园区无线覆盖规划中，AP 布放位置的首要原则是什么？",
+    "options": {
+      "A": "每个房间必须放置一台 AP",
+      "B": "尽量集中安装在机房内",
+      "C": "根据覆盖区域与用户密度规划，避免信号重叠过多或出现盲区",
+      "D": "只考虑美观不考虑信号"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "AP 位置需结合覆盖半径、用户容量与干扰综合设计，过度密集会加剧同频干扰，过度稀疏则出现盲区。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgeSection": "园区安全与运维",
+    "knowledgePoint": "无线覆盖规划",
+    "difficulty": "medium",
+    "tags": [
+      "园区网络典型组网方案",
+      "园区安全与运维",
+      "无线覆盖规划"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-22-021",
+    "type": "single_choice",
+    "question": "高密场景（如会议室、报告厅）的无线规划应重点关注什么？",
+    "options": {
+      "A": "只提高单台 AP 的发射功率",
+      "B": "并发用户数与 AP 容量，适当增加 AP 密度并控制单 AP 接入数",
+      "C": "减少 AP 数量以降低干扰",
+      "D": "关闭 5G 频段"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "高密场景的瓶颈是并发而非覆盖，单纯提高功率会扩大干扰范围，正确做法是加密 AP 并做负载均衡与频段引导。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgeSection": "园区安全与运维",
+    "knowledgePoint": "无线覆盖规划",
+    "difficulty": "hard",
+    "tags": [
+      "园区网络典型组网方案",
+      "园区安全与运维",
+      "无线覆盖规划"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-22-022",
+    "type": "single_choice",
+    "question": "园区网日常运维中最基础的监控手段是什么？",
+    "options": {
+      "A": "每天手工登录每台设备查看",
+      "B": "通过 SNMP 与 Syslog 采集设备状态与告警",
+      "C": "关闭所有日志以减少开销",
+      "D": "只在故障发生后排查"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "集中监控依赖 SNMP 采集性能指标、Syslog 收集事件，实现趋势分析与告警通知，是主动运维的基础。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgeSection": "园区安全与运维",
+    "knowledgePoint": "园区运维与监控",
+    "difficulty": "medium",
+    "tags": [
+      "园区网络典型组网方案",
+      "园区安全与运维",
+      "园区运维与监控"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-22-023",
+    "type": "true_false",
+    "question": "网络巡检应包含配置备份、版本一致性检查与关键接口错误计数检查。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "定期巡检能在故障发生前发现隐患（如错误包增长、版本不一致、配置漂移），是降低现网事故率的有效手段。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgeSection": "园区安全与运维",
+    "knowledgePoint": "园区运维与监控",
+    "difficulty": "medium",
+    "tags": [
+      "园区网络典型组网方案",
+      "园区安全与运维",
+      "园区运维与监控"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-22-024",
+    "type": "single_choice",
+    "question": "园区网设计中把管理 VLAN 与业务 VLAN 分离的主要目的是什么？",
+    "options": {
+      "A": "减少 VLAN 编号使用",
+      "B": "隔离管理流量，提升安全性与故障可控性",
+      "C": "替代路由协议",
+      "D": "提升无线信号强度"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "管理流量与业务流量分离可避免业务广播与攻击影响设备管理面，同时便于用 ACL 严格限制管理源地址。",
+    "chapter": "园区网络典型组网方案",
+    "knowledgeSection": "园区安全与运维",
+    "knowledgePoint": "园区接入安全",
+    "difficulty": "medium",
+    "tags": [
+      "园区网络典型组网方案",
+      "园区安全与运维",
+      "园区接入安全"
+    ],
+    "stage": "综合应用"
+  }
+]

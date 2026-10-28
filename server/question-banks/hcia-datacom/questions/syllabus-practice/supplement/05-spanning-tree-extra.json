@@ -14,13 +14,16 @@
     ],
     "analysis": "BPDU 携带根桥、路径开销和桥 ID 等生成树选举信息。 本题考查“STP/RSTP”，因此应选择“BPDU”。",
     "chapter": "生成树原理与配置",
-    "knowledgePoint": "STP/RSTP",
+    "knowledgePoint": "根桥选举",
     "difficulty": "easy",
     "tags": [
       "生成树原理与配置",
+      "STP 基本原理",
+      "根桥选举",
       "STP/RSTP"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "STP 基本原理"
   },
   {
     "id": "hcia-v2-extra-05-path-cost",
@@ -37,13 +40,16 @@
     ],
     "analysis": "根端口是非根桥到根桥总代价最优的端口。 本题考查“端口角色”，因此应选择“到根桥的最小根路径开销”。",
     "chapter": "生成树原理与配置",
-    "knowledgePoint": "端口角色",
+    "knowledgePoint": "RSTP 端口角色",
     "difficulty": "medium",
     "tags": [
       "生成树原理与配置",
+      "RSTP 改进机制",
+      "RSTP 端口角色",
       "端口角色"
     ],
-    "stage": "直接计算"
+    "stage": "直接计算",
+    "knowledgeSection": "RSTP 改进机制"
   },
   {
     "id": "hcia-v2-extra-05-designated-port",
@@ -60,13 +66,16 @@
     ],
     "analysis": "每个网段选择一个指定端口，代表到根桥路径最优的交换机转发。 本题考查“端口角色”，因此应选择“向该网段转发到根桥方向最优的 BPDU 和数据”。",
     "chapter": "生成树原理与配置",
-    "knowledgePoint": "端口角色",
+    "knowledgePoint": "RSTP 端口角色",
     "difficulty": "hard",
     "tags": [
       "生成树原理与配置",
+      "RSTP 改进机制",
+      "RSTP 端口角色",
       "端口角色"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "RSTP 改进机制"
   },
   {
     "id": "hcia-v2-extra-05-bridge-priority",
@@ -87,9 +96,11 @@
     "difficulty": "medium",
     "tags": [
       "生成树原理与配置",
+      "STP 基本原理",
       "根桥选举"
     ],
-    "stage": "反向推理"
+    "stage": "反向推理",
+    "knowledgeSection": "STP 基本原理"
   },
   {
     "id": "hcia-v2-extra-05-edge-port",
@@ -106,13 +117,16 @@
     ],
     "analysis": "边缘端口面向终端，可跳过常规收敛等待快速转发，但不应连接交换机。 本题考查“STP/RSTP”，因此应选择“可快速进入转发状态”。",
     "chapter": "生成树原理与配置",
-    "knowledgePoint": "STP/RSTP",
+    "knowledgePoint": "根端口与指定端口选举",
     "difficulty": "medium",
     "tags": [
       "生成树原理与配置",
+      "STP 基本原理",
+      "根端口与指定端口选举",
       "STP/RSTP"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "STP 基本原理"
   },
   {
     "id": "hcia-v2-extra-05-loop-symptom",
@@ -129,12 +143,15 @@
     ],
     "analysis": "环路会让广播和未知单播反复循环，并导致源 MAC 在端口间来回学习。 本题考查“二层环路”，因此应选择“广播风暴和 MAC 地址表震荡”。",
     "chapter": "生成树原理与配置",
-    "knowledgePoint": "二层环路",
+    "knowledgePoint": "二层环路与 STP 作用",
     "difficulty": "easy",
     "tags": [
       "生成树原理与配置",
+      "STP 基本原理",
+      "二层环路与 STP 作用",
       "二层环路"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "STP 基本原理"
   }
 ]

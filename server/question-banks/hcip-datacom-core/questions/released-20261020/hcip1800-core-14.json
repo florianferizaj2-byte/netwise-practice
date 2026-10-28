@@ -1,0 +1,1337 @@
+[
+  {
+    "id": "hcip821-9-1-1-001",
+    "type": "single_choice",
+    "question": "华为 USG 系列防火墙中，Trust 区域与 DMZ 区域的缺省安全级别分别是多少？",
+    "options": {
+      "A": "85 和 5",
+      "B": "85 和 50",
+      "C": "100 和 50",
+      "D": "50 和 85"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "华为防火墙缺省安全级别为 Local 100、Trust 85、DMZ 50、Untrust 5，因此 Trust 与 DMZ 分别是 85 和 50。A 把 DMZ 当成 Untrust，D 颠倒两者顺序，C 的 100 属于 Local 区域。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "安全区域与策略",
+    "difficulty": "easy",
+    "tags": [
+      "安全区域",
+      "安全级别",
+      "防火墙"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-1-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 安全区域与策略」。知识点编码 hcip821-9-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "8fab50f2a2fdab6650ca418d4e67f3d7bb160c5eb3177bd144bee9da0d297e11"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-1-002",
+    "type": "single_choice",
+    "question": "防火墙自身的 Local 区域，缺省安全级别是多少？",
+    "options": {
+      "A": "50",
+      "B": "5",
+      "C": "85",
+      "D": "100"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Local 区域代表防火墙设备本身，缺省安全级别最高，为 100；Trust 为 85、DMZ 为 50、Untrust 为 5。设备自身发起的报文与发往设备自身的报文都归属 Local 区域。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "安全区域与策略",
+    "difficulty": "easy",
+    "tags": [
+      "Local 区域",
+      "安全级别"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-1-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 安全区域与策略」。知识点编码 hcip821-9-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "599735455e014f54353229fd74b3c3cfc9ad74b7e30aa3bb8cd0bbf57b503753"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-1-003",
+    "type": "single_choice",
+    "question": "防火墙处理域间流量时，安全策略的匹配顺序是？",
+    "options": {
+      "A": "按优先级数值从小到大，数值大者优先",
+      "B": "随机匹配后取动作最严格的那一条",
+      "C": "按策略创建时间倒序逐条匹配生效",
+      "D": "按配置顺序自上而下，命中第一条生效"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "华为防火墙安全策略按配置顺序自上而下匹配，命中第一条即执行其动作并停止。策略顺序本身就是优先级，条件宽泛的策略放在前面会遮蔽后面的精确策略。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "安全区域与策略",
+    "difficulty": "easy",
+    "tags": [
+      "安全策略",
+      "匹配顺序"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-1-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 安全区域与策略」。知识点编码 hcip821-9-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "f4f052d86d9e830d495c7fcdab2e85b22cbebaf76255a6c9d6995fc96088b634"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-1-004",
+    "type": "single_choice",
+    "question": "华为防火墙在未配置任何安全策略时，域间流量的缺省动作是？",
+    "options": {
+      "A": "只允许 ICMP",
+      "B": "拒绝通过",
+      "C": "只允许已建立会话",
+      "D": "允许通过"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "华为防火墙缺省安全策略为 deny，未明确放行的域间流量一律丢弃。这与\"高安全级别到低安全级别缺省放行\"的旧式包过滤模型不同，必须显式配置 permit 策略。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "安全区域与策略",
+    "difficulty": "easy",
+    "tags": [
+      "缺省策略",
+      "拒绝"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-1-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 安全区域与策略」。知识点编码 hcip821-9-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "00f4aa925d4d5d2178272da9200e3420b61b4903980e2a9de1890f7f386a4b79"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-1-005",
+    "type": "single_choice",
+    "question": "状态检测防火墙建立会话表时，通常不包含以下哪一项？",
+    "options": {
+      "A": "报文的 TTL 值",
+      "B": "源端口与目的端口",
+      "C": "源 IP 与目的 IP",
+      "D": "协议号与连接状态"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "会话表记录五元组及连接状态，用于后续报文快速匹配；TTL 随转发逐跳递减，不参与会话标识，因此不在会话表中。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "安全区域与策略",
+    "difficulty": "medium",
+    "tags": [
+      "会话表",
+      "五元组"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-1-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 安全区域与策略」。知识点编码 hcip821-9-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4f499270a81866aa6ac6df696a07755380b472782ea893fba567469510d4ee49"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-1-006",
+    "type": "single_choice",
+    "question": "开启状态检测后，一条已建立会话的后续报文到达防火墙时如何处理？",
+    "options": {
+      "A": "直接匹配会话表转发，不再逐包匹配策略",
+      "B": "只允许反向报文通过，正向丢弃",
+      "C": "每个报文都重新匹配一次完整的安全策略",
+      "D": "一律丢弃，等待客户端重新协商"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "首包匹配安全策略并建立会话后，后续报文直接匹配会话表转发，不再逐包匹配策略，这是状态检测相对包过滤的性能优势。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "安全区域与策略",
+    "difficulty": "medium",
+    "tags": [
+      "状态检测",
+      "后续报文"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-1-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 安全区域与策略」。知识点编码 hcip821-9-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "1e58822d840d8a0c75619c710bfda901edcfc7881108c6f327b3d84c9f1e9415"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-1-007",
+    "type": "single_choice",
+    "question": "状态检测防火墙收到某条流量的首包时，正确的处理顺序是？",
+    "options": {
+      "A": "只查路由表，不匹配任何安全策略",
+      "B": "先匹配安全策略，再查会话表并建表",
+      "C": "先查会话表，未命中再匹配安全策略",
+      "D": "直接丢弃首包，等待客户端重传"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "首包先在会话表中查找，未命中才进入安全策略匹配；策略允许则创建会话表项并转发，拒绝则丢弃。会话表优先保证了已建立连接的处理效率。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "安全区域与策略",
+    "difficulty": "medium",
+    "tags": [
+      "首包",
+      "会话建立"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-1-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 安全区域与策略」。知识点编码 hcip821-9-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d75098b0f8577f8afb98e7ab86dba9e5d2958de96951eddc27341fbbfa88d909"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-1-008",
+    "type": "single_choice",
+    "question": "关于防火墙接口与安全区域的关系，描述正确的是？",
+    "options": {
+      "A": "一个接口可同时加入多个安全区域",
+      "B": "一个接口只能加入一个安全区域",
+      "C": "接口不加入区域也能正常转发",
+      "D": "一个安全区域最多只能有一个接口"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "接口必须加入且只能加入一个安全区域，一个区域可以包含多个接口。未加入区域的接口无法参与域间策略匹配。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "安全区域与策略",
+    "difficulty": "easy",
+    "tags": [
+      "接口",
+      "安全区域"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-1-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 安全区域与策略」。知识点编码 hcip821-9-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "732f1f8cbfe8219d49f9ad971eecd7669b071c843b2b6cc6d81b71209fa8f86c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-1-009",
+    "type": "single_choice",
+    "question": "同一安全区域内部两个接口之间的流量，缺省情况下防火墙如何处理？",
+    "options": {
+      "A": "不经安全策略检查，直接转发",
+      "B": "一律丢弃并记录日志",
+      "C": "必须逐包匹配安全策略",
+      "D": "只允许单向通过"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "安全策略作用于域间流量，同一区域内接口之间的流量不做域间策略检查，直接按二层或三层转发。若需管控，应把接口划分到不同区域。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "安全区域与策略",
+    "difficulty": "easy",
+    "tags": [
+      "域内流量",
+      "安全策略"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-1-009",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 安全区域与策略」。知识点编码 hcip821-9-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d038d64bc589c4034c08a58cae8c0c352bb41c643f3c55faea6110c9b6c75315"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-1-010",
+    "type": "single_choice",
+    "question": "华为防火墙的安全策略中，不能作为匹配条件的是？",
+    "options": {
+      "A": "应用与应用组",
+      "B": "接口的 MTU 值",
+      "C": "源地址与目的地址",
+      "D": "源安全区域与目的安全区域"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "安全策略可匹配区域、地址、服务、应用、用户、时间段等维度；接口 MTU 属于接口参数，不参与策略匹配。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "安全区域与策略",
+    "difficulty": "medium",
+    "tags": [
+      "安全策略",
+      "匹配条件"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-1-010",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 安全区域与策略」。知识点编码 hcip821-9-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "758c97231facc0c23b948dc1b242d269b81aa78e9831056cd1384f1c8d5237f5"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-1-011",
+    "type": "single_choice",
+    "question": "配置域间安全策略时，\"源区域\"指的是？",
+    "options": {
+      "A": "路由表中出接口所属的区域",
+      "B": "报文进入防火墙时所处的安全区域",
+      "C": "报文离开防火墙时所处的安全区域",
+      "D": "设备管理口所属的区域"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "源区域是报文进入防火墙的入接口所属区域，目的区域是出接口所属区域。策略方向由报文的实际流向决定，而不是由配置者主观指定。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "安全区域与策略",
+    "difficulty": "easy",
+    "tags": [
+      "源区域",
+      "策略方向"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-1-011",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 安全区域与策略」。知识点编码 hcip821-9-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "faa7f479c99dae4313ca7524ff63a97f35c44a4302073b3c03e826bba5959417"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-1-012",
+    "type": "multiple_choice",
+    "question": "华为防火墙的安全策略可以基于下列哪些条件进行匹配？",
+    "options": {
+      "A": "源安全区域与目的安全区域",
+      "B": "源地址与目的地址",
+      "C": "应用与应用组",
+      "D": "报文经过的跳数"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "安全策略支持区域、地址、服务、应用、用户、时间段等匹配维度。报文跳数由 TTL 推算，属于转发路径属性，不能作为策略匹配条件。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "安全区域与策略",
+    "difficulty": "medium",
+    "tags": [
+      "安全策略",
+      "匹配条件",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-1-012",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 安全区域与策略」。知识点编码 hcip821-9-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "2c9a2f171db64bb09110de61d3cb38f4dcc98b8557130cd66b37b0f3c41032a4"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-1-013",
+    "type": "multiple_choice",
+    "question": "状态检测防火墙的会话表通常记录下列哪些信息？",
+    "options": {
+      "A": "源地址与目的地址",
+      "B": "传输层协议号",
+      "C": "源端口与目的端口",
+      "D": "报文的优先级字段"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "会话表以五元组（源/目的地址、源/目的端口、协议号）标识一条连接，并记录连接状态与老化时间。报文优先级字段属于 QoS 范畴，不用于会话标识。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "安全区域与策略",
+    "difficulty": "medium",
+    "tags": [
+      "会话表",
+      "五元组",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-1-013",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 安全区域与策略」。知识点编码 hcip821-9-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "75c5776e8bf83c367b9eef2b6d670ec0abae0f982cbd9e69743fba6989d75efb"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-1-014",
+    "type": "true_false",
+    "question": "在华为防火墙的缺省安全级别中，DMZ 区域高于 Untrust 区域。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "DMZ 缺省为 50，Untrust 缺省为 5，DMZ 确实高于 Untrust。但安全级别高低本身不决定是否放行，域间流量仍需安全策略明确允许。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "安全区域与策略",
+    "difficulty": "easy",
+    "tags": [
+      "判断",
+      "安全级别"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-1-014",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 安全区域与策略」。知识点编码 hcip821-9-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "1f56afb4551f84bbaf5f90b53fb879a7f84c156b5b67ee0c1bccb9a5092a7e84"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-1-015",
+    "type": "true_false",
+    "question": "开启状态检测后，同一条会话的每个报文都必须重新完整匹配一次安全策略。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "首包匹配策略并建立会话后，后续报文直接匹配会话表转发，不再逐包匹配策略。若每个报文都重新匹配，状态检测就退化成包过滤，失去性能优势。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "安全区域与策略",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "状态检测"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-1-015",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 安全区域与策略」。知识点编码 hcip821-9-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "6334572aa9c44ca33558172e22adf8650bbe5ba7f51f5d5ec8788832562b380c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-1-016",
+    "type": "single_choice",
+    "question": "ASPF 的主要作用是？",
+    "options": {
+      "A": "对通过防火墙的报文做加密与完整性保护",
+      "B": "对接入用户做身份认证与权限授权",
+      "C": "对接口流量做限速与流量整形",
+      "D": "对应用层协议做状态检测，动态放行协商端口"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "ASPF 针对 FTP、SIP 等多通道应用，解析应用层协商信息，动态生成临时放行表项，避免为协商端口额外开放固定策略。加密由 IPsec 等协议完成。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "安全区域与策略",
+    "difficulty": "medium",
+    "tags": [
+      "ASPF",
+      "应用层检测"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-1-016",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 安全区域与策略」。知识点编码 hcip821-9-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "3df101d4a02d120cc0ad67dc9ae5fce8cf02dd85d646f3da850542086e1195c1"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-1-017",
+    "type": "single_choice",
+    "question": "关于防火墙会话表的老化，描述正确的是？",
+    "options": {
+      "A": "会话永不老化，只能由管理员手工删除",
+      "B": "会话长时间无报文匹配后按老化时间删除",
+      "C": "会话在设备重启后仍然完整保留",
+      "D": "所有协议的老化时间固定为 60 秒"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "会话表项有老化时间，长时间无报文匹配即被删除以释放资源；TCP 与 UDP、不同应用的缺省老化时间并不相同。设备重启后会话表不保留。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "安全区域与策略",
+    "difficulty": "medium",
+    "tags": [
+      "会话老化",
+      "资源回收"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-1-017",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 安全区域与策略」。知识点编码 hcip821-9-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "fe0f4e5684fa5e7d416a68d3a2b4d7db308b9973d590ee4523e2c0e67d1bf65b"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-1-018",
+    "type": "single_choice",
+    "question": "管理员要确认某条安全策略是否被流量命中，最直接的方法是？",
+    "options": {
+      "A": "查看 ARP 表项的数量",
+      "B": "查看该策略的命中次数统计",
+      "C": "查看接口的错包计数",
+      "D": "查看路由表的条目数量"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "安全策略提供命中计数，可据此判断策略是否生效、是否存在被前序策略遮蔽的情况。接口错包计数、路由条目数、ARP 表项数都与策略命中无关。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "安全区域与策略",
+    "difficulty": "easy",
+    "tags": [
+      "策略命中",
+      "排障"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-1-018",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 安全区域与策略」。知识点编码 hcip821-9-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "92cdd496c8498256da9f8f8b9161240a3455b97f12b90226cc02e1a86ba4a408"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-1-019",
+    "type": "single_choice",
+    "question": "防火墙双机热备时，为保证主备切换后业务不中断，通常需要同步什么？",
+    "options": {
+      "A": "仅 ARP 表",
+      "B": "仅路由表",
+      "C": "仅接口统计计数",
+      "D": "会话表与配置命令"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "双机热备需要同步配置命令、会话表与部分状态信息。只同步路由表或 ARP 表时，切换后已建立的连接因缺少会话表项而被丢弃，业务会中断。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "安全区域与策略",
+    "difficulty": "medium",
+    "tags": [
+      "双机热备",
+      "会话同步"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-1-019",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 安全区域与策略」。知识点编码 hcip821-9-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "2cb44e08f231ff96c48f33d8e6916833d2d9c892730a4fc985b1b6aabd2b70f0"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-2-001",
+    "type": "single_choice",
+    "question": "华为 VRP 系统中，本地用户的权限级别取值范围是多少？",
+    "options": {
+      "A": "1 到 10",
+      "B": "0 到 255",
+      "C": "0 到 15",
+      "D": "0 到 3"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "VRP 本地用户级别为 0 到 15，数值越大权限越高，15 为最高。命令本身分 0 到 3 级，用户级别与命令级别按对应关系匹配。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "设备安全特性",
+    "difficulty": "easy",
+    "tags": [
+      "用户级别",
+      "权限"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-2-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 设备安全特性」。知识点编码 hcip821-9-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "286ecdf063805e8ff4272cdf2d5d64454695e4d1303f20721d36f292ba5671ef"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-2-002",
+    "type": "single_choice",
+    "question": "Telnet 与 SSH 使用的缺省端口分别是？",
+    "options": {
+      "A": "23 和 22",
+      "B": "80 和 22",
+      "C": "23 和 443",
+      "D": "22 和 23"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Telnet 缺省使用 TCP 23，SSH 缺省使用 TCP 22。Telnet 明文传输口令，SSH 提供加密与完整性保护，管理设备应优先使用 SSH。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "设备安全特性",
+    "difficulty": "easy",
+    "tags": [
+      "Telnet",
+      "SSH",
+      "端口"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-2-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 设备安全特性」。知识点编码 hcip821-9-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "ccbe6478da455fe46540c894a80bda5f4c2c43117460e43a3e8c23c7457fd055"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-2-003",
+    "type": "single_choice",
+    "question": "AAA 框架中的三个组成部分是？",
+    "options": {
+      "A": "认证、审计、隔离",
+      "B": "认证、授权、计费",
+      "C": "认证、加密、审计",
+      "D": "授权、加密、计费"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "AAA 指 Authentication（认证）、Authorization（授权）、Accounting（计费）。认证解决\"你是谁\"，授权解决\"你能做什么\"，计费解决\"你用了多少\"。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "设备安全特性",
+    "difficulty": "easy",
+    "tags": [
+      "AAA",
+      "认证授权计费"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-2-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 设备安全特性」。知识点编码 hcip821-9-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "65dccda94b47026af60ed07417053dcf6d1c56350891c121cf08bdfd558fb3ee"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-2-004",
+    "type": "single_choice",
+    "question": "RADIUS 服务器的认证授权端口与计费端口分别是？",
+    "options": {
+      "A": "1813 和 1812",
+      "B": "49 和 1813",
+      "C": "1812 和 49",
+      "D": "1812 和 1813"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "RADIUS 认证授权使用 UDP 1812，计费使用 UDP 1813。TCP 49 是 HWTACACS 的端口，不要与 RADIUS 混淆。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "设备安全特性",
+    "difficulty": "easy",
+    "tags": [
+      "RADIUS",
+      "端口"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-2-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 设备安全特性」。知识点编码 hcip821-9-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "32f1a9d27f2ef44d8ce353eb5d63ec6bd6475b66d85b546872ac9bc7880148d8"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-2-005",
+    "type": "single_choice",
+    "question": "HWTACACS 协议使用的传输层协议与端口是？",
+    "options": {
+      "A": "UDP 1813",
+      "B": "TCP 49",
+      "C": "UDP 49",
+      "D": "TCP 1812"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "HWTACACS 基于 TCP 49，提供认证、授权、计费三部分且授权与认证分离；RADIUS 基于 UDP，认证与授权合并。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "设备安全特性",
+    "difficulty": "medium",
+    "tags": [
+      "HWTACACS",
+      "端口"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-2-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 设备安全特性」。知识点编码 hcip821-9-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "a7779892591183e23934d28664e37c4bc107f0fc823f6d7be828e77d436ca9d7"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-2-006",
+    "type": "single_choice",
+    "question": "用户级别为 1 的本地用户，在 VRP 中通常可以执行哪类操作？",
+    "options": {
+      "A": "所有配置命令，包括删除文件",
+      "B": "只能登录，不能执行任何命令",
+      "C": "监控类命令，不能修改配置",
+      "D": "可以修改配置但不能保存"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "VRP 用户级别与命令级别对应：级别 1 对应监控级命令，可查看状态但不能改配置；配置级需要级别 2，管理级需要级别 3 及以上。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "设备安全特性",
+    "difficulty": "medium",
+    "tags": [
+      "用户级别",
+      "命令级别"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-2-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 设备安全特性」。知识点编码 hcip821-9-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "01445af1132754a98b70dd12c60bfacf065c856fd47d5998bb35a88dc27f11d4"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-2-007",
+    "type": "single_choice",
+    "question": "在接口上配置 traffic-filter inbound 的主要作用是？",
+    "options": {
+      "A": "对接口的带宽做限速",
+      "B": "对离开接口的报文按 ACL 过滤",
+      "C": "对路由表中的路由做过滤",
+      "D": "对进入接口的报文按 ACL 过滤"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "traffic-filter 作用于数据报文，inbound 表示在报文进入接口时按 ACL 放行或丢弃；过滤路由用的是 filter-policy，限速用的是 QoS 策略。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "设备安全特性",
+    "difficulty": "medium",
+    "tags": [
+      "traffic-filter",
+      "ACL"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-2-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 设备安全特性」。知识点编码 hcip821-9-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "a5ecf93d681be2998d22b392840b10dc0b733311471f98c220e70cd5bbba0828"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-2-008",
+    "type": "single_choice",
+    "question": "设备遭受 SYN Flood 攻击时，最直接的防护手段是？",
+    "options": {
+      "A": "启用 SYN Flood 防范并限制连接速率",
+      "B": "增加静态 ARP 表项绑定",
+      "C": "关闭所有接口的 TCP 服务",
+      "D": "把接口 MTU 调大到最大值"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "SYN Flood 通过大量半开连接耗尽会话资源，应启用 SYN Flood 攻击防范、配置连接速率限制或启用 SYN Cookie。关闭 TCP 服务会同时中断正常业务。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "设备安全特性",
+    "difficulty": "medium",
+    "tags": [
+      "SYN Flood",
+      "防攻击"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-2-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 设备安全特性」。知识点编码 hcip821-9-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "0a3ef792b05e8338929c58fc6efe9c412ffde697588fe7823745e2f53fe9ca4b"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-2-009",
+    "type": "single_choice",
+    "question": "设备上的 CPCAR 机制，其主要作用是什么？",
+    "options": {
+      "A": "对路由表做快速收敛优化",
+      "B": "对接口做光模块功率调节",
+      "C": "对转发面的流量做队列调度",
+      "D": "对上送 CPU 的报文做限速，保护控制平面"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "CPCAR 针对上送 CPU 的报文按协议分类限速，防止协议报文或攻击流量打满 CPU，从而保护控制平面。转发面队列调度由 QoS 完成。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "设备安全特性",
+    "difficulty": "medium",
+    "tags": [
+      "CPCAR",
+      "控制平面"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-2-009",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 设备安全特性」。知识点编码 hcip821-9-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "959e029991641300a1960bcee0f7fe6536cfe9b33bbe687e04125a505359cdf4"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-2-010",
+    "type": "single_choice",
+    "question": "设备安全加固中，管理平面、控制平面、数据平面分别对应？",
+    "options": {
+      "A": "管理协议、业务转发、路由协议",
+      "B": "管理协议、路由协议、业务转发",
+      "C": "路由协议、业务转发、管理协议",
+      "D": "业务转发、管理协议、路由协议"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "管理平面承载 SSH、SNMP 等管理协议；控制平面运行路由与信令协议；数据平面负责业务报文转发。三平面分离是设备安全设计的基础。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "设备安全特性",
+    "difficulty": "easy",
+    "tags": [
+      "三平面",
+      "安全架构"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-2-010",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 设备安全特性」。知识点编码 hcip821-9-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "9fd730a028d4d74cf1d05fba3b57fabc9f86c26a04f341c132792c2d30a98f3b"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-2-011",
+    "type": "multiple_choice",
+    "question": "下列哪些属于设备安全加固的常见措施？",
+    "options": {
+      "A": "限制管理源地址范围",
+      "B": "关闭所有日志功能",
+      "C": "使用 SSH 替代 Telnet 管理",
+      "D": "关闭未使用的服务与端口"
+    },
+    "answer": [
+      "A",
+      "C",
+      "D"
+    ],
+    "analysis": "加固措施包括关闭无用服务、改用加密管理协议、用 ACL 限制管理源地址、强口令与分级授权等。关闭日志会失去审计能力，反而削弱安全。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "设备安全特性",
+    "difficulty": "medium",
+    "tags": [
+      "安全加固",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-2-011",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 设备安全特性」。知识点编码 hcip821-9-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e38489ec8406f94cbb615bbcbe084b18631fad35be3f72c23ac94b3cd509d881"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-2-012",
+    "type": "single_choice",
+    "question": "SNMPv3 相比 SNMPv2c 的主要改进是？",
+    "options": {
+      "A": "支持更大的团体名",
+      "B": "支持认证与加密",
+      "C": "支持 UDP 传输",
+      "D": "支持更多 MIB 节点"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "SNMPv3 引入 USM 用户安全模型，支持认证与加密，解决了 v2c 团体名明文传输的问题。MIB 节点与传输方式不是 v3 的核心差异。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "设备安全特性",
+    "difficulty": "medium",
+    "tags": [
+      "SNMPv3",
+      "安全"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-2-012",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 设备安全特性」。知识点编码 hcip821-9-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "ff5f52a052605e8bebe5debd756d07fa7c3b30a780e3876d174e0f60c17c3f17"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-2-013",
+    "type": "single_choice",
+    "question": "登录失败锁定功能的作用是？",
+    "options": {
+      "A": "限制用户可执行的命令",
+      "B": "连续认证失败达到阈值后锁定账号",
+      "C": "限制同时在线用户数量",
+      "D": "锁定长期未登录的账号"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "登录失败锁定在连续认证失败达到阈值后暂时锁定账号或源地址，用于抵御口令暴力破解。限制在线人数与命令权限属于其他机制。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "设备安全特性",
+    "difficulty": "medium",
+    "tags": [
+      "登录锁定",
+      "暴力破解"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-2-013",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 设备安全特性」。知识点编码 hcip821-9-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "329f4e3b90d741307a9a67bc5ec11b39805fec815ab061bd3d8bfa8f06596152"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-2-014",
+    "type": "multiple_choice",
+    "question": "设备密码复杂度策略通常要求密码满足哪些条件？",
+    "options": {
+      "A": "包含数字与特殊字符",
+      "B": "达到最小长度要求",
+      "C": "包含大小写字母",
+      "D": "与用户名完全相同"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "复杂度策略要求长度下限、字符种类混合、不得与用户名相同、不得使用弱口令字典中的口令。与用户名相同恰恰是应被拒绝的情况。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "设备安全特性",
+    "difficulty": "medium",
+    "tags": [
+      "密码复杂度",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-2-014",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 设备安全特性」。知识点编码 hcip821-9-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "7f5913576a5fe4ec2a888a9880a53a2cb0a8e6316006864d44ccdacd84b5b6f1"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-2-015",
+    "type": "true_false",
+    "question": "Telnet 以明文传输用户名和口令，管理设备时应优先使用 SSH。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Telnet 的所有报文（含口令）都以明文传输，可被中间人直接截获；SSH 提供加密与完整性校验，是设备远程管理的推荐方式。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "设备安全特性",
+    "difficulty": "easy",
+    "tags": [
+      "判断",
+      "Telnet"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-2-015",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 设备安全特性」。知识点编码 hcip821-9-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "8f32d27dcb8b731f340cccaa10db9610cf2a9b1316d1967d34ac5b64900dfaf3"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-2-016",
+    "type": "true_false",
+    "question": "华为 VRP 中用户级别 15 的权限低于用户级别 3。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "VRP 用户级别 0 到 15，数值越大权限越高，15 为最高级别。级别 3 属于管理级起点，权限低于 15。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "设备安全特性",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "用户级别"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-2-016",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 设备安全特性」。知识点编码 hcip821-9-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "0acc527d79bd04968107c3a049ee0e097235218a2134451b613386763c47cbc4"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-2-017",
+    "type": "single_choice",
+    "question": "与带内管理相比，带外管理的主要优势是什么？",
+    "options": {
+      "A": "管理流量可以获得更大的带宽",
+      "B": "可以替代所有安全策略",
+      "C": "管理流量与业务流量分离，业务故障时仍可登录",
+      "D": "不需要为设备配置 IP 地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "带外管理通过独立的管理口或管理网络接入设备，与业务转发路径分离，业务链路故障或拥塞时仍可登录排障。它仍需要配置地址并受安全策略约束。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "设备安全特性",
+    "difficulty": "medium",
+    "tags": [
+      "带外管理",
+      "运维"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-2-017",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 设备安全特性」。知识点编码 hcip821-9-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "da05eb307ce841d545e8d50958b3c91d272a7abf75d0c2ac7bff3acd52045931"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-2-018",
+    "type": "single_choice",
+    "question": "SSH 公钥认证相比口令认证的主要优势是？",
+    "options": {
+      "A": "支持明文传输",
+      "B": "不需要配置用户名",
+      "C": "认证速度更快",
+      "D": "无需在网络中传输口令"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "公钥认证由客户端持有私钥、设备保存公钥，认证过程不传输口令，可抵御口令猜测与重放。SSH 全程加密，不存在明文传输。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "设备安全特性",
+    "difficulty": "medium",
+    "tags": [
+      "SSH",
+      "公钥认证"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-2-018",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 设备安全特性」。知识点编码 hcip821-9-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "890a073fdacfeddd1fbdc1fa7ac0ff397653b7709182265064b25724fb107c5b"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-1-2-019",
+    "type": "single_choice",
+    "question": "设备的防攻击策略与 ACL 的主要区别是？",
+    "options": {
+      "A": "ACL 只能应用在出方向",
+      "B": "防攻击针对上送 CPU 的报文做限速与丢弃",
+      "C": "防攻击只能匹配源 IP 地址",
+      "D": "防攻击会修改报文的目的地址"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "防攻击策略针对上送 CPU 的协议报文，按协议类型做限速、丢弃与告警，保护控制平面；ACL 面向转发报文做五元组过滤，两者作用点不同。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "设备安全特性",
+    "difficulty": "hard",
+    "tags": [
+      "防攻击",
+      "ACL",
+      "区别"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-1-2-019",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / 防火墙与设备安全 / 设备安全特性」。知识点编码 hcip821-9-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "b3c405323662b904283c63cb5cdfc3decf860f42d7c584b1b5f98757af76f90c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  }
+]

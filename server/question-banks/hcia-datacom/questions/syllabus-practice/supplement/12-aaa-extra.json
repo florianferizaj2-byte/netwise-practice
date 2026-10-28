@@ -14,13 +14,16 @@
     ],
     "analysis": "RADIUS 是常见 AAA 协议，可由网络接入设备向认证服务器请求用户认证。 本题考查“认证”，因此应选择“集中式用户认证、授权和计费”。",
     "chapter": "AAA 原理与配置",
-    "knowledgePoint": "认证",
+    "knowledgePoint": "认证（Authentication）",
     "difficulty": "medium",
     "tags": [
       "AAA 原理与配置",
+      "AAA 框架",
+      "认证（Authentication）",
       "认证"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "AAA 框架"
   },
   {
     "id": "hcia-v2-extra-12-tacacs",
@@ -37,13 +40,16 @@
     ],
     "analysis": "TACACS+ 常用于网络设备管理，可对用户执行的命令实施授权和审计。 本题考查“授权”，因此应选择“支持细粒度命令授权”。",
     "chapter": "AAA 原理与配置",
-    "knowledgePoint": "授权",
+    "knowledgePoint": "授权（Authorization）",
     "difficulty": "hard",
     "tags": [
       "AAA 原理与配置",
+      "AAA 框架",
+      "授权（Authorization）",
       "授权"
     ],
-    "stage": "直接计算"
+    "stage": "直接计算",
+    "knowledgeSection": "AAA 框架"
   },
   {
     "id": "hcia-v2-extra-12-auth-order",
@@ -60,13 +66,16 @@
     ],
     "analysis": "合理的备用认证可在远程 AAA 故障时保证受控的运维访问。 本题考查“认证”，因此应选择“远程服务器不可达时仍保留管理入口”。",
     "chapter": "AAA 原理与配置",
-    "knowledgePoint": "认证",
+    "knowledgePoint": "认证（Authentication）",
     "difficulty": "medium",
     "tags": [
       "AAA 原理与配置",
+      "AAA 框架",
+      "认证（Authentication）",
       "认证"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "AAA 框架"
   },
   {
     "id": "hcia-v2-extra-12-least-privilege",
@@ -83,13 +92,16 @@
     ],
     "analysis": "按职责授予最少必要权限可降低误操作和账号滥用风险。 本题考查“授权”，因此应选择“最小权限”。",
     "chapter": "AAA 原理与配置",
-    "knowledgePoint": "授权",
+    "knowledgePoint": "授权（Authorization）",
     "difficulty": "easy",
     "tags": [
       "AAA 原理与配置",
+      "AAA 框架",
+      "授权（Authorization）",
       "授权"
     ],
-    "stage": "反向推理"
+    "stage": "反向推理",
+    "knowledgeSection": "AAA 框架"
   },
   {
     "id": "hcia-v2-extra-12-accounting-log",
@@ -106,13 +118,16 @@
     ],
     "analysis": "Accounting 可保存会话和操作记录，支持安全审计和问题追溯。 本题考查“计费”，因此应选择“追溯用户登录、登出和操作审计”。",
     "chapter": "AAA 原理与配置",
-    "knowledgePoint": "计费",
+    "knowledgePoint": "计费（Accounting）",
     "difficulty": "easy",
     "tags": [
       "AAA 原理与配置",
+      "AAA 框架",
+      "计费（Accounting）",
       "计费"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "AAA 框架"
   },
   {
     "id": "hcia-v2-extra-12-credential-policy",
@@ -129,12 +144,15 @@
     ],
     "analysis": "强口令和账号生命周期管理是本地 AAA 的基本安全实践。 本题考查“本地用户”，因此应选择“使用唯一强口令并定期管理账号”。",
     "chapter": "AAA 原理与配置",
-    "knowledgePoint": "本地用户",
+    "knowledgePoint": "本地认证",
     "difficulty": "easy",
     "tags": [
       "AAA 原理与配置",
+      "认证方式与服务器",
+      "本地认证",
       "本地用户"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "认证方式与服务器"
   }
 ]

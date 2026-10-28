@@ -1,0 +1,1196 @@
+[
+  {
+    "id": "hcip821-10-2-1-001",
+    "type": "single_choice",
+    "question": "VRRP 虚拟 MAC 地址的格式是？",
+    "options": {
+      "A": "00-00-0C-07-AC-{VRID}",
+      "B": "00-00-5E-00-02-{VRID}",
+      "C": "01-00-5E-00-00-{VRID}",
+      "D": "00-00-5E-00-01-{VRID}"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "VRRP 虚拟 MAC 固定为 00-00-5E-00-01-{VRID}，前五字节为厂商前缀，最后一字节为备份组号。01-00-5E 开头是组播 MAC 的格式。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "easy",
+    "tags": [
+      "VRRP",
+      "虚拟 MAC"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "c5a8c5f851e32c382fbebe734226cd06f9aee4a06d1b26b93f4d7a0572c22b95"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-002",
+    "type": "single_choice",
+    "question": "VRRP 报文使用的 IP 协议号是？",
+    "options": {
+      "A": "89",
+      "B": "112",
+      "C": "47",
+      "D": "51"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "VRRP 直接封装在 IP 报文中，协议号 112。89 是 OSPF，47 是 GRE，51 是 AH，都不承载 VRRP。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "easy",
+    "tags": [
+      "VRRP",
+      "协议号"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "0603a7af7eb5b4ffe919de2428ab2b4a62652acad97445b20d2932d64a0e90a5"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-003",
+    "type": "single_choice",
+    "question": "VRRP 通告报文的目的组播地址是？",
+    "options": {
+      "A": "224.0.0.18",
+      "B": "224.0.0.6",
+      "C": "224.0.0.9",
+      "D": "224.0.0.5"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "VRRP 使用 224.0.0.18 发送通告。224.0.0.5 与 224.0.0.6 是 OSPF 的组播地址，224.0.0.9 是 RIP 的组播地址。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "easy",
+    "tags": [
+      "VRRP",
+      "组播地址"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "57260e5f3fd506a16e986c028e424ef62a77cdc0d50b2f22f8a59ad0fa633baf"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-004",
+    "type": "single_choice",
+    "question": "VRRP 优先级可配置的范围是？",
+    "options": {
+      "A": "1 到 255",
+      "B": "0 到 254",
+      "C": "1 到 254",
+      "D": "0 到 255"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "优先级取值 0 到 255，其中 0 与 255 保留：0 表示主动放弃 Master，255 保留给虚拟 IP 的拥有者，因此可配置范围是 1 到 254。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "easy",
+    "tags": [
+      "VRRP",
+      "优先级"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "eee00302cdcc6f987b2e43d9c6f26e5c1afefde7a9c0aa06488c5a966fef3bbf"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-005",
+    "type": "single_choice",
+    "question": "VRRP 的缺省优先级是多少？",
+    "options": {
+      "A": "255",
+      "B": "100",
+      "C": "1",
+      "D": "120"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "VRRP 缺省优先级为 100，数值越大越优先。120 常见于某些实验配置，255 是保留给虚拟 IP 拥有者的值。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "easy",
+    "tags": [
+      "VRRP",
+      "缺省值"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "325ef056fa6e47a504351acd8c701c05cbccbe5c83bca9901e088c1c82487b3b"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-006",
+    "type": "single_choice",
+    "question": "VRRP 中优先级 0 表示什么含义？",
+    "options": {
+      "A": "设备不参与任何选举",
+      "B": "设备优先级达到最高",
+      "C": "设备固定为 Backup",
+      "D": "设备主动放弃 Master 角色"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "优先级 0 表示设备主动放弃 Master 角色，收到该通告的 Backup 会立即切换为 Master，常用于设备计划下线的场景。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "VRRP",
+      "优先级 0"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "04fc1bcbe360d4a6bbe34533a8d7994639111e7ee7a7f45a5874f31868e16e88"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-007",
+    "type": "single_choice",
+    "question": "VRRP 中优先级 255 保留给谁？",
+    "options": {
+      "A": "虚拟 IP 地址的拥有者",
+      "B": "Router ID 最大的设备",
+      "C": "管理员指定的设备",
+      "D": "最先启动的设备"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "若设备的接口 IP 与虚拟 IP 相同，该设备即虚拟 IP 拥有者，优先级自动取 255 并直接成为 Master，不需要参与比较。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "VRRP",
+      "优先级 255"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "2ee21ec5f33a4acd604f0cea67d0b95354ecb7466a392e931dabf7642245b9e4"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-008",
+    "type": "single_choice",
+    "question": "VRRP 通告报文的缺省发送间隔是多少？",
+    "options": {
+      "A": "3 秒",
+      "B": "1 秒",
+      "C": "10 秒",
+      "D": "5 秒"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "VRRP 缺省每 1 秒发送一次通告报文，Master_Down_Interval 约为 3 秒。间隔可通过 vrrp vrid timer 调整。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "easy",
+    "tags": [
+      "VRRP",
+      "通告间隔"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d126e87e377c2f65e9b17f87937ce92cbebf60032790439c022155303c7cbb4c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-009",
+    "type": "single_choice",
+    "question": "VRRP 的 Master_Down_Interval 计算公式是？",
+    "options": {
+      "A": "3 倍通告间隔减 Skew_Time",
+      "B": "3 倍通告间隔加 Skew_Time",
+      "C": "2 倍通告间隔加 Skew_Time",
+      "D": "通告间隔加 3 倍 Skew_Time"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Master_Down_Interval = 3 × Advertisement_Interval + Skew_Time。三个通告周期保证偶发丢包不误判，Skew_Time 让优先级高的设备更早发起选举。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "VRRP",
+      "定时器"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-009",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "bfc4c08538613e7725d9b58fd3f3f17ceb8a17acdce78796612504331ec7db3a"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-010",
+    "type": "single_choice",
+    "question": "VRRP 的 Skew_Time 计算公式是？",
+    "options": {
+      "A": "(255 减优先级)除以 256",
+      "B": "(255 减优先级)除以 255",
+      "C": "(256 减优先级)除以 256",
+      "D": "(256 减优先级)除以 255"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Skew_Time = (256 − Priority) / 256，单位为秒。优先级越高，Skew_Time 越短，越早成为 Master。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "VRRP",
+      "Skew_Time"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-010",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "5a39d08c9a0f95adb4065d5a16371c84c5b8378debd158920d685061a2bca31e"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-011",
+    "type": "single_choice",
+    "question": "VRRP 设备有哪三种状态？",
+    "options": {
+      "A": "Idle、Master、Backup",
+      "B": "Init、Active、Standby",
+      "C": "Initialize、Master、Backup",
+      "D": "Down、Master、Slave"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "VRRP 定义 Initialize、Master、Backup 三种状态。设备启动后进入 Initialize，参与选举后成为 Master 或 Backup。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "easy",
+    "tags": [
+      "VRRP",
+      "状态机"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-011",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4280d36aff2b5ea87776c49f3b8e31ba8c1f9a1c65e055c7e770fce10bb41adb"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-012",
+    "type": "single_choice",
+    "question": "VRRP 选举 Master 时，优先级相同时比较什么？",
+    "options": {
+      "A": "接口 MAC 地址较大者",
+      "B": "Router ID 较大者",
+      "C": "接口 IP 地址较大者",
+      "D": "启动时间较早者"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "先比较优先级，数值大者胜；优先级相同时比较接口主 IP 地址，地址大者胜。MAC 地址与 Router ID 不参与 VRRP 选举。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "VRRP",
+      "选举"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-012",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "81d9ed81bccf1f162449dead95cba6a39e97d94ffac1a958d1a03a00d5b88409"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-013",
+    "type": "single_choice",
+    "question": "VRRPv3 相比 VRRPv2 的主要改进是？",
+    "options": {
+      "A": "支持抢占与延迟",
+      "B": "支持组播方式发送通告",
+      "C": "同时支持 IPv4 与 IPv6",
+      "D": "支持更多的认证方式"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "VRRPv2 只支持 IPv4，VRRPv3 同时支持 IPv4 与 IPv6，并取消了认证功能。组播通告与抢占在 v2 中已经存在。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "VRRP",
+      "版本"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-013",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "730911625ff375e57cbcb77b175128b78ae002fe0d411dd77acbc249c04a1149"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-014",
+    "type": "single_choice",
+    "question": "关于 VRRP 的认证功能，描述正确的是？",
+    "options": {
+      "A": "v2 与 v3 都支持认证",
+      "B": "v2 支持认证，v3 不支持认证",
+      "C": "两者都不支持认证",
+      "D": "v2 不支持，v3 支持认证"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "VRRPv2 支持简单字符与 MD5 认证，VRRPv3 取消了认证字段。安全需求应通过网络层保护或 VRRP 与 BFD 联动等方式实现。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "VRRP",
+      "认证"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-014",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "c88634e62b0b540e5aaddfb4006e480b5bd8c71dece40bc76a3d4355516a70ea"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-015",
+    "type": "single_choice",
+    "question": "VRRP 抢占功能的缺省状态是？",
+    "options": {
+      "A": "开启，抢占延迟为 10 秒",
+      "B": "由优先级高低自动决定",
+      "C": "开启，抢占延迟为 0 秒",
+      "D": "关闭，需要手工开启"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "华为设备缺省开启抢占，延迟为 0 秒。延迟为 0 时链路抖动可能引起主备频繁切换，生产环境通常配置数秒到数十秒的延迟。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "VRRP",
+      "抢占"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-015",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "fb3416e3e41d6cf38355cb4cf9843ee16b2b2f3be568cc7719e5b6475de9dfda"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-016",
+    "type": "single_choice",
+    "question": "VRRP 实现负载分担通常采用什么方式？",
+    "options": {
+      "A": "开启抢占并设置相同优先级",
+      "B": "一台虚拟 IP 由多台设备同时转发",
+      "C": "配置多个备份组分别承担网关",
+      "D": "为同一备份组配置多个虚拟 MAC"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "VRRP 一个备份组同时只有一个 Master，负载分担需要配置多个备份组（不同 VRID、不同虚拟 IP），让不同设备分别担任各组的 Master。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "VRRP",
+      "负载分担"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-016",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "bd5090760a3f5692bf67dee5a9265480631d9560d56c682bf6f87a2233527138"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-017",
+    "type": "single_choice",
+    "question": "VRRP 报文的 TTL 值是多少？",
+    "options": {
+      "A": "128",
+      "B": "64",
+      "C": "1",
+      "D": "255"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "VRRP 报文 TTL 固定为 255，且接收端会检查 TTL 是否为 255，用于防止报文被路由转发到其他网段。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "easy",
+    "tags": [
+      "VRRP",
+      "TTL"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-017",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "92b5cc4e42172f0621be0bc5d505a89db55820bcf8e5070cf62603b4075175a7"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-018",
+    "type": "single_choice",
+    "question": "Backup 收到优先级为 0 的通告报文后如何处理？",
+    "options": {
+      "A": "立即切换为 Master",
+      "B": "重新发起选举",
+      "C": "保持 Backup 不变",
+      "D": "忽略该报文"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "优先级 0 表示原 Master 主动放弃角色，Backup 收到后不必等待 Master_Down 超时，立即切换为 Master，实现平滑下线。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "VRRP",
+      "优先级 0"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-018",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "62dab1d2601c043f56e272fe502dad9deb6a559ec60bbad9fdf077709a18ef25"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-019",
+    "type": "single_choice",
+    "question": "VRRP 监视上行接口时，接口故障后通常如何调整优先级？",
+    "options": {
+      "A": "不做任何调整",
+      "B": "提高优先级以保持 Master",
+      "C": "把优先级直接置为 255",
+      "D": "降低优先级以触发切换"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Master 监视上行接口，接口故障时按配置的减少量降低优先级，低于 Backup 后触发切换，避免流量继续被送到失效出口。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "VRRP",
+      "上行监视"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-019",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "8e827d77e9b5a10d937ab1ff8e2f64cebd4a7272277c236a47f2ec58e555ed80"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-020",
+    "type": "single_choice",
+    "question": "VRRP 双主现象最常见的原因是什么？",
+    "options": {
+      "A": "两台设备的优先级配置相同",
+      "B": "备份组之间无法交换通告报文",
+      "C": "虚拟 IP 与接口 IP 相同",
+      "D": "未配置抢占延迟"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "双主的本质是两台设备都认为自己是 Master，通常由心跳链路中断、VRID 不一致或二层隔离导致通告报文无法互通。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "VRRP",
+      "双主"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-020",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "8dc65ab01d77e4644906a6c9747b7806bfcec391ce34332551b6ff4039ef6e9c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-021",
+    "type": "multiple_choice",
+    "question": "下列哪些情况可能导致 VRRP 出现双主？",
+    "options": {
+      "A": "上行接口故障",
+      "B": "心跳链路中断",
+      "C": "优先级都配置为 100",
+      "D": "两端 VRID 配置不一致"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "心跳中断使双方互不感知，VRID 不一致使双方不在同一备份组，上行接口故障会触发主备倒换，三者都可能造成双主。优先级相同本身不会导致双主。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "VRRP",
+      "双主",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-021",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "00a989825ffd64934893e6fc5cf631cf1de69a276f8c3454ddbdd7087723a27d"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-022",
+    "type": "multiple_choice",
+    "question": "VRRPv3 具备下列哪些特点？",
+    "options": {
+      "A": "不支持报文认证",
+      "B": "支持 IPv4 与 IPv6",
+      "C": "必须使用单播发送通告",
+      "D": "使用组播方式发送通告"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "VRRPv3 支持双栈、取消认证字段、仍使用组播发送通告。单播通告是可选能力，并非强制要求。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "VRRP",
+      "版本",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-022",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4151b6db336371200685a7fb500361d14dc6d94087425a21b1a3e9398c67c48b"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-023",
+    "type": "multiple_choice",
+    "question": "关于 VRRP 虚拟 MAC 地址，正确的有？",
+    "options": {
+      "A": "虚拟 MAC 随 VRID 变化",
+      "B": "格式为 00-00-5E-00-01-{VRID}",
+      "C": "同一备份组内设备使用相同虚拟 MAC",
+      "D": "虚拟 MAC 等于 Master 的接口 MAC"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "虚拟 MAC 由备份组号决定，组内所有设备对外呈现同一个虚拟 MAC，主机 ARP 缓存因此无需随主备切换而更新。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "VRRP",
+      "虚拟 MAC",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-023",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "06f468b171abf093ff733e381bdf428e971ab43c7d3ac5167986a99e53072e20"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-024",
+    "type": "true_false",
+    "question": "VRRP 的优先级数值越大，设备越优先成为 Master。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "VRRP 优先级 1 到 254，数值越大越优先；255 保留给虚拟 IP 拥有者，0 表示放弃 Master。这与 OSPF 开销\"越小越优\"的方向相反。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "easy",
+    "tags": [
+      "判断",
+      "优先级"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-024",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "9e54861933b60b65db3cf6607e03eeac9db542078db8082355a46e11809ae695"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-025",
+    "type": "true_false",
+    "question": "VRRPv3 支持报文认证，而 VRRPv2 不支持。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "两者正好相反：VRRPv2 支持简单字符与 MD5 认证，VRRPv3 取消了认证功能。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "认证"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-025",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d69ca0103a20d1abfa2623affa7b5963abf1e635ed955fc30bf8821a491cc083"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-026",
+    "type": "single_choice",
+    "question": "VRRP 备份组中，Master 的主要职责是？",
+    "options": {
+      "A": "响应虚拟 IP 的 ARP 并转发报文",
+      "B": "定期发送 ICMP 重定向",
+      "C": "只监听通告不做任何转发",
+      "D": "为 Backup 分配接口地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Master 负责响应针对虚拟 IP 的 ARP 请求、转发以虚拟 MAC 为目的的报文，并周期性发送通告报文维持角色。Backup 只监听通告。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "VRRP",
+      "Master 职责"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-026",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "8ccc50286af5ecbf2f4f042066f4cc4e6720127f9560a990848d3ee709c96919"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-027",
+    "type": "single_choice",
+    "question": "虚拟 IP 地址与接口 IP 地址的关系是？",
+    "options": {
+      "A": "虚拟 IP 必须是公网可路由地址",
+      "B": "虚拟 IP 可以与拥有者的接口 IP 相同",
+      "C": "虚拟 IP 由 DHCP 服务器统一分配",
+      "D": "虚拟 IP 必须与所有接口 IP 不同"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "当某台设备的接口 IP 与虚拟 IP 相同时，它就是虚拟 IP 拥有者，优先级取 255 并直接成为 Master。虚拟 IP 也可以使用独立的空闲地址。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "VRRP",
+      "虚拟 IP"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-027",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "069aacd6db8d2a4a9e7cf0f51512cd3526d574da2612295fbdabd2c3ae75cdbe"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-028",
+    "type": "single_choice",
+    "question": "VRRP 与 MSTP 配合部署时，通常要实现什么？",
+    "options": {
+      "A": "关闭生成树以避免环路",
+      "B": "用 VRRP 替代生成树计算",
+      "C": "流量路径与网关角色保持一致",
+      "D": "让所有设备都成为 Master"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "若网关在左侧设备而二层流量被生成树引到右侧，流量会绕行甚至丢弃。通常通过调整 MSTP 优先级，使网关角色与根桥位置一致。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "VRRP",
+      "MSTP"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-028",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "47031e900d8817e7d0029600c7278d54ce2d09bb1e0863aa63cc26adee2931ad"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-029",
+    "type": "single_choice",
+    "question": "VRRP 备份组的 VRID 取值范围是？",
+    "options": {
+      "A": "1 到 255",
+      "B": "0 到 254",
+      "C": "0 到 255",
+      "D": "1 到 254"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "VRID 取值 1 到 255，与虚拟 MAC 的最后一字节对应，因此同一广播域内 VRID 必须唯一，否则会造成虚拟 MAC 冲突。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "easy",
+    "tags": [
+      "VRRP",
+      "VRID"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-029",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "819059de4e9eda5633c033b5b4541aefa5673cff6855987bf73b8577136ea2ae"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-030",
+    "type": "single_choice",
+    "question": "VRRP 通告报文的源地址是？",
+    "options": {
+      "A": "受限广播地址",
+      "B": "发送接口的主 IP 地址",
+      "C": "虚拟 IP 地址本身",
+      "D": "目的组播地址"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "通告报文的源地址是 Master 接口的真实主 IP，目的地址是 224.0.0.18，Backup 据此得知 Master 的真实地址与优先级。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "VRRP",
+      "报文"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-030",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "2e7db075c15861fedd48437a6c3e724d848f81e0c41b924d823835d3c0752ee9"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-031",
+    "type": "single_choice",
+    "question": "VRRP 抢占延迟的主要作用是？",
+    "options": {
+      "A": "等待上行链路与路由收敛后再切换",
+      "B": "延长 Backup 的超时时间",
+      "C": "降低通告报文的发送频率",
+      "D": "防止虚拟 MAC 地址冲突"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "设备刚恢复时路由尚未收敛，立即抢占会导致流量丢失。配置抢占延迟可等待上行链路与路由稳定后再切回 Master。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "VRRP",
+      "抢占延迟"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-031",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "096aa10f8461f8e749b20b0618a2b633d02341a9554f051013b95001cde69f1a"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-032",
+    "type": "single_choice",
+    "question": "VRRP 是否支持 IPv6 网络？",
+    "options": {
+      "A": "VRRPv3 支持 IPv6",
+      "B": "任何版本都不支持 IPv6",
+      "C": "所有版本都支持 IPv6",
+      "D": "只有 VRRPv2 支持 IPv6"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "VRRPv3 同时支持 IPv4 与 IPv6，可用于 IPv6 网关冗余；VRRPv2 只支持 IPv4。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "easy",
+    "tags": [
+      "VRRP",
+      "IPv6"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-032",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "9c310854694b459155728dc9e163e4054c6a399f9e837c9b587d9d08ce34b621"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-033",
+    "type": "true_false",
+    "question": "VRRP 中优先级为 255 的设备一定是 Master。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "优先级 255 保留给虚拟 IP 地址拥有者，该设备无需选举即成为 Master。需要注意，若管理员把普通设备优先级配成 255，配置会被拒绝或按保留值处理。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "优先级 255"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-033",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "bd5f47159574567e05833d6a3d1d2a96556887de02a2d7d1383ef8a716c25878"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-10-2-1-034",
+    "type": "single_choice",
+    "question": "某备份组原 Master 优先级 120、Backup 优先级 100，原 Master 配置抢占延迟 20 秒。原 Master 故障恢复后何时切回？",
+    "options": {
+      "A": "永不切回 Master",
+      "B": "等待 Backup 通告超时后",
+      "C": "20 秒延迟结束后切回",
+      "D": "立即切回 Master"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原 Master 优先级更高，恢复后会发起抢占，但受 20 秒延迟约束，需等待延迟计时结束才切回。立即切回忽略了抢占延迟配置。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "hard",
+    "tags": [
+      "VRRP",
+      "抢占",
+      "计算"
+    ],
+    "provenance": {
+      "questionId": "hcip821-10-2-1-034",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络可靠性 / VRRP / VRRP 原理与配置」。知识点编码 hcip821-10-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "13c087853d4ef315c05b35a65c9ff09600605fcbe2afe1cd8360b783c6761305"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  }
+]

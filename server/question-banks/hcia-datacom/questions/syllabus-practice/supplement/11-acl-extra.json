@@ -14,13 +14,16 @@
     ],
     "analysis": "大多数 ACL 末尾存在隐式 deny，因此需要显式放行合法流量。 本题考查“规则顺序”，因此应选择“末尾可能存在隐式拒绝”。",
     "chapter": "ACL 原理与配置",
-    "knowledgePoint": "规则顺序",
+    "knowledgePoint": "规则匹配顺序",
     "difficulty": "easy",
     "tags": [
       "ACL 原理与配置",
+      "ACL 基础",
+      "规则匹配顺序",
       "规则顺序"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "ACL 基础"
   },
   {
     "id": "hcia-v2-extra-11-acl-direction",
@@ -37,13 +40,16 @@
     ],
     "analysis": "入方向 ACL 尽早过滤流量，可在路由查找前丢弃不允许的报文。 本题考查“高级 ACL”，因此应选择“报文进入接口后、路由查找前”。",
     "chapter": "ACL 原理与配置",
-    "knowledgePoint": "高级 ACL",
+    "knowledgePoint": "高级 ACL 应用",
     "difficulty": "medium",
     "tags": [
       "ACL 原理与配置",
+      "ACL 应用",
+      "高级 ACL 应用",
       "高级 ACL"
     ],
-    "stage": "直接计算"
+    "stage": "直接计算",
+    "knowledgeSection": "ACL 应用"
   },
   {
     "id": "hcia-v2-extra-11-wildcard-255",
@@ -60,13 +66,15 @@
     ],
     "analysis": "通配符中 1 表示忽略该位，0 表示该位需与地址精确匹配。 本题考查“通配符掩码”，因此应选择“该位不参与精确匹配”。",
     "chapter": "ACL 原理与配置",
-    "knowledgePoint": "通配符掩码",
+    "knowledgePoint": "通配符掩码规则",
     "difficulty": "easy",
     "tags": [
       "ACL 原理与配置",
-      "通配符掩码"
+      "通配符掩码",
+      "通配符掩码规则"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "通配符掩码"
   },
   {
     "id": "hcia-v2-extra-11-source-first",
@@ -83,13 +91,16 @@
     ],
     "analysis": "首条命中原则决定了宽泛规则放在前面会遮蔽后面的具体规则。 本题考查“规则顺序”，因此应选择“ACL 通常首条命中即停止匹配”。",
     "chapter": "ACL 原理与配置",
-    "knowledgePoint": "规则顺序",
+    "knowledgePoint": "规则匹配顺序",
     "difficulty": "easy",
     "tags": [
       "ACL 原理与配置",
+      "ACL 基础",
+      "规则匹配顺序",
       "规则顺序"
     ],
-    "stage": "反向推理"
+    "stage": "反向推理",
+    "knowledgeSection": "ACL 基础"
   },
   {
     "id": "hcia-v2-extra-11-protocol-port",
@@ -106,13 +117,16 @@
     ],
     "analysis": "HTTP 常用 TCP 80，高级 ACL 可匹配 IP 协议类型和四层端口。 本题考查“高级 ACL”，因此应选择“TCP 协议与目的端口 80”。",
     "chapter": "ACL 原理与配置",
-    "knowledgePoint": "高级 ACL",
+    "knowledgePoint": "高级 ACL 应用",
     "difficulty": "medium",
     "tags": [
       "ACL 原理与配置",
+      "ACL 应用",
+      "高级 ACL 应用",
       "高级 ACL"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "ACL 应用"
   },
   {
     "id": "hcia-v2-extra-11-acl-test",
@@ -129,12 +143,15 @@
     ],
     "analysis": "ACL 可能影响关键业务，需规划方向、顺序和验证方法后再变更。 本题考查“ACL 原理”，因此应选择“先明确流量方向并在维护窗口验证命中结果”。",
     "chapter": "ACL 原理与配置",
-    "knowledgePoint": "ACL 原理",
+    "knowledgePoint": "ACL 分类与编号范围",
     "difficulty": "hard",
     "tags": [
       "ACL 原理与配置",
+      "ACL 基础",
+      "ACL 分类与编号范围",
       "ACL 原理"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "ACL 基础"
   }
 ]

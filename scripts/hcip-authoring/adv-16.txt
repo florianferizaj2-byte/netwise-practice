@@ -1,0 +1,42 @@
+# HCIP-Datacom-Advanced IPv6 路由 · IS-IS（IPv6）原理与配置（43 题）
+hcip831-3-3-1|s|medium|IS-IS 承载 IPv6 路由主要依靠什么机制？|新增 TLV 携带 IPv6 信息|新增一种报文类型|新增一个路由进程|新增一种 NET 格式|A|IS-IS 通过扩展 TLV 支持 IPv6，包括接口地址 TLV 与 IPv6 可达性 TLV，报文类型与邻居建立机制保持不变。|IS-IS IPv6;TLV
+hcip831-3-3-1|s|medium|IS-IS 中用于通告 IPv6 前缀的 TLV 是？|IPv6 Reachability TLV|IPv6 Interface Address TLV|Multi-Topology TLV|Router Capability TLV|A|IPv6 Reachability TLV（236）携带可达的 IPv6 前缀与度量；Interface Address TLV（232）携带接口链路本地地址。|IS-IS IPv6;可达性 TLV
+hcip831-3-3-1|s|medium|IS-IS 中用于通告接口链路本地地址的 TLV 是？|IPv6 Interface Address TLV|IPv6 Reachability TLV|Multi-Topology TLV|Protocols Supported TLV|A|IPv6 Interface Address TLV（232）在 Hello 与 LSP 中携带接口的 IPv6 地址，供邻居计算下一跳。|IS-IS IPv6;地址 TLV
+hcip831-3-3-1|s|hard|IS-IS 多拓扑（MT）的作用是？|为 IPv6 建立独立于 IPv4 的拓扑|合并 IPv4 与 IPv6 拓扑|减少 LSP 数量|加快邻居建立|A|MT 通过 Multi-Topology TLV 为不同地址族维护独立拓扑，允许 IPv4 与 IPv6 的路径不一致，避免单拓扑的限制。|IS-IS IPv6;多拓扑
+hcip831-3-3-1|s|hard|IS-IS 单拓扑模式对 IPv4 与 IPv6 的要求是？|两者必须使用相同的拓扑|两者必须使用不同的拓扑|IPv6 必须走独立链路|IPv4 不支持单拓扑|A|单拓扑下 IPv4 与 IPv6 共用同一 SPF 结果，因此要求两种协议的拓扑一致，否则会出现次优路径或不可达。|IS-IS IPv6;单拓扑
+hcip831-3-3-1|s|medium|IS-IS 支持 IPv6 时，NLPID 的取值是？|142|129|134|137|A|IPv6 的 NLPID 为 142，IS-IS 通过 Protocols Supported TLV 通告该值，表示支持 IPv6。129 是 IPv4 的 NLPID。|IS-IS IPv6;NLPID
+hcip831-3-3-1|s|medium|IS-IS 的 NET 在 IPv6 环境中是否需要重新规划？|不需要，与 IPv4 共用同一 NET|需要，必须使用 IPv6 地址|需要，必须使用 128 位|需要，必须配置两个 NET|A|NET 属于 OSI 地址体系，与 IPv4/IPv6 无关，同一台设备运行双栈时仍使用同一个 NET。|IS-IS IPv6;NET
+hcip831-3-3-1|s|medium|IS-IS 双栈部署时，IPv6 邻居的建立方式与 IPv4 相比？|完全相同，仍通过 IIH 建立|必须使用 IPv6 组播|必须配置 BGP|必须使用静态路由|A|IS-IS 邻居建立与地址族无关，仍通过 IIH 报文与 Level 机制建立邻接，双栈共用同一邻居关系。|IS-IS IPv6;邻居
+hcip831-3-3-1|s|hard|IS-IS 单拓扑模式下，若某链路只启用 IPv6 未启用 IPv4，会出现什么问题？|该链路无法进入 SPF 拓扑|IPv4 路由自动切换|IPv6 路由被丢弃|邻居无法建立|A|单拓扑要求两种协议拓扑一致，只启用 IPv6 的链路不会被 IPv4 的 SPF 使用，导致 IPv6 流量无法经过该链路。|IS-IS IPv6;单拓扑
+hcip831-3-3-1|s|medium|IS-IS IPv6 的配置中，使能多拓扑的命令通常是？|ipv6 enable topology ipv6|ipv6 enable topology standard|ipv6 router isis|isis ipv6 enable|A|ipv6 enable topology ipv6 表示 IPv6 使用独立拓扑；standard 表示单拓扑，与 IPv4 共用。|IS-IS IPv6;配置
+hcip831-3-3-1|s|medium|IS-IS IPv6 路由的下一跳通常是？|邻居接口的链路本地地址|邻居的全局地址|自己的环回地址|组播地址|A|IPv6 可达性 TLV 携带的下一跳为邻居的链路本地地址，转发时不依赖全局地址的可达性。|IS-IS IPv6;下一跳
+hcip831-3-3-1|m|medium|IS-IS 支持 IPv6 需要新增或扩展下列哪些内容？|IPv6 Interface Address TLV|IPv6 Reachability TLV|Multi-Topology TLV|新的 Hello 报文类型|ABC|IS-IS 通过新增 TLV 承载 IPv6 信息，Hello 等报文类型保持不变，只是携带新的 TLV。|IS-IS IPv6;扩展;多选
+hcip831-3-3-1|m|medium|IS-IS 双栈部署时需要注意？|拓扑模式选择单拓扑还是多拓扑|接口同时使能 IPv4 与 IPv6|NET 保持唯一|为 IPv6 单独规划一套 NET|ABC|NET 与地址族无关，不需要为 IPv6 单独规划。拓扑模式、接口使能与 NET 唯一性是关键点。|IS-IS IPv6;部署;多选
+hcip831-3-3-1|t|medium|IS-IS 支持 IPv6 需要定义新的报文类型。|||||B|IS-IS 通过 TLV 扩展支持 IPv6，报文类型不变，这是 IS-IS 可扩展性的体现。|判断;IS-IS IPv6
+hcip831-3-3-1|t|easy|IS-IS 的 NET 与 IPv4、IPv6 地址无关。|||||A|NET 是 OSI 地址，由区域地址、System ID 与 SEL 组成，与 IP 地址族无关，双栈共用同一个 NET。|判断;NET
+hcip831-3-3-1|s|medium|IS-IS IPv6 邻居建立失败，最不可能的原因是？|接口未使能 IPv6|链路本地地址不可达|Level 不匹配|NET 使用 IPv4 格式|A|NET 使用 OSI 格式，与 IPv4 无关，本身不会导致 IPv6 邻居失败。接口未使能、链路不通、Level 不匹配都会。|IS-IS IPv6;排障
+hcip831-3-3-1|s|medium|IS-IS 多拓扑模式下，IPv4 与 IPv6 的路由计算关系是？|各自独立计算|完全共用一次计算|由 IPv4 结果推导 IPv6|由 IPv6 结果推导 IPv4|A|MT 模式下每个拓扑独立运行 SPF，IPv4 与 IPv6 可以有不同的最优路径，互不影响。|IS-IS IPv6;SPF
+hcip831-3-3-1|s|hard|单拓扑与多拓扑的选择依据是？|两种协议的拓扑是否一致|设备的 CPU 性能|链路带宽|NET 的数量|A|若 IPv4 与 IPv6 拓扑完全一致，单拓扑更简单；若存在只支持一种协议的链路或需要差异化路径，应使用多拓扑。|IS-IS IPv6;选型
+hcip831-3-3-1|s|medium|IS-IS IPv6 的路由优先级缺省值是多少？|15|10|60|255|A|IS-IS 缺省优先级为 15，低于 OSPF 的 10、高于静态路由的 60，与 IPv4 环境一致。|IS-IS IPv6;优先级
+hcip831-3-3-1|s|medium|IS-IS IPv6 是否支持路由汇总？|支持，在 Level-1-2 上汇总|不支持|只支持主机路由|只支持外部路由|A|IS-IS 支持在 Level-1-2 路由器上对 Level-1 路由做汇总后发布到 Level-2，IPv4 与 IPv6 均支持。|IS-IS IPv6;汇总
+hcip831-3-3-1|s|medium|IS-IS IPv6 的度量类型与 IPv4 相比？|相同，支持窄度量与宽度量|只支持窄度量|只支持宽度量|不使用度量|A|IS-IS 的窄度量与宽度量机制与地址族无关，IPv6 沿用同一套度量体系。|IS-IS IPv6;度量
+hcip831-3-3-1|s|hard|某链路 IPv4 正常但 IPv6 不通，最可能的原因是？|单拓扑下该链路未被 IPv6 SPF 使用|NET 配置错误|Level 配置错误|IIH 间隔不一致|A|单拓扑要求拓扑一致，若该链路在 IPv4 拓扑中可用但 IPv6 前缀未正确通告，IPv6 流量不会经过它。|IS-IS IPv6;排障
+hcip831-3-3-1|s|medium|IS-IS IPv6 中，接口使能 IS-IS 的命令通常是？|isis ipv6 enable|ipv6 router isis|ipv6 enable isis|isis enable ipv6|A|华为设备在接口视图下用 isis ipv6 enable 使能 IPv6 的 IS-IS 处理，再配合 ipv6 enable topology 指定拓扑模式。|IS-IS IPv6;命令
+hcip831-3-3-1|s|medium|IS-IS 与 OSPFv3 在 IPv6 支持方式上的主要区别是？|前者扩展 TLV，后者设计新协议|两者完全相同|前者不支持 IPv6|后者使用 TLV|A|IS-IS 通过 TLV 扩展原生支持多地址族；OSPFv3 是为 IPv6 重新设计的协议，两者思路不同。|IS-IS IPv6;对比
+hcip831-3-3-1|m|medium|IS-IS IPv6 排障时通常检查？|接口是否使能 IPv6|拓扑模式是否匹配|IPv6 前缀是否通告|IPv4 地址是否配置|ABC|前三项直接决定 IPv6 能否计算路由。接口无需 IPv4 地址，IPv4 是否配置与 IPv6 转发无关。|IS-IS IPv6;排障;多选
+hcip831-3-3-1|t|medium|IS-IS 单拓扑模式下 IPv4 与 IPv6 必须使用相同的拓扑。|||||A|单拓扑共用一次 SPF，因此两种协议的拓扑必须一致，否则会出现次优路径或不可达。|判断;单拓扑
+hcip831-3-3-1|t|easy|IS-IS 支持 IPv6 时仍需保证 NET 在域内唯一。|||||A|NET 的唯一性是 IS-IS 的基础要求，与地址族无关，双栈环境下同样必须唯一。|判断;NET
+hcip831-3-3-1|s|medium|IS-IS IPv6 的 LSP 中，IPv6 前缀由哪个 TLV 携带？|IPv6 Reachability TLV|IPv6 Interface Address TLV|Extended IS Reachability TLV|Protocols Supported TLV|A|IPv6 Reachability TLV（236）携带前缀、度量与下一跳信息，是 IPv6 路由计算的核心 TLV。|IS-IS IPv6;LSP
+hcip831-3-3-1|s|medium|IS-IS 双栈环境中，IPv4 与 IPv6 的邻居状态是？|共用同一邻居关系|各自独立维护邻居|必须分别建立进程|必须使用不同 NET|A|IS-IS 的邻居关系与地址族无关，双栈共用同一邻接，TLV 中分别携带两种协议的地址与前缀。|IS-IS IPv6;双栈
+hcip831-3-3-1|s|hard|多拓扑模式下，某拓扑的 SPF 计算失败会影响另一个拓扑吗？|不会，各拓扑独立计算|会，全部中断|会导致邻居重建|会导致 NET 冲突|A|MT 的核心价值就是拓扑隔离，一个拓扑的链路变化或计算异常不会影响另一个拓扑的转发。|IS-IS IPv6;隔离
+hcip831-3-3-1|s|medium|IS-IS IPv6 是否支持与 IPv4 相同的 Level 分层？|支持，Level-1 与 Level-2 均适用|不支持分层|只支持 Level-1|只支持 Level-2|A|Level 分层属于 IS-IS 的拓扑机制，与地址族无关，IPv6 同样分为 Level-1、Level-2 与 Level-1-2。|IS-IS IPv6;分层
+hcip831-3-3-1|s|medium|IS-IS IPv6 中 DIS 的作用与 IPv4 相比？|相同，负责广播网伪节点|不同，IPv6 不选举 DIS|不同，由 NET 决定|不同，由 Router ID 决定|A|DIS 选举机制与地址族无关，广播网络上仍由 DIS 生成伪节点并负责 LSP 泛洪。|IS-IS IPv6;DIS
+hcip831-3-3-1|m|medium|下列哪些属于 IS-IS 支持 IPv6 的必要条件？|接口使能 IPv6|接口使能 IS-IS IPv6|NET 配置正确|配置 IPv6 默认路由|ABC|前三项是协议运行的基础。默认路由属于路由策略，不是协议运行的必要条件。|IS-IS IPv6;条件;多选
+hcip831-3-3-1|t|medium|IS-IS 多拓扑模式下，IPv4 与 IPv6 可以有不同的最优路径。|||||A|每个拓扑独立运行 SPF，因此两种协议的最优路径可以不同，这正是多拓扑的价值所在。|判断;多拓扑
+hcip831-3-3-1|s|medium|IS-IS IPv6 路由未出现在路由表，最先检查什么？|IPv6 可达性 TLV 是否收到|设备的 CPU|光模块型号|SNMP 配置|A|先用 display isis lsdb verbose 确认 LSP 中是否携带 IPv6 可达性 TLV，再检查路由优选与引入配置。|IS-IS IPv6;排障
+hcip831-3-3-1|s|medium|IS-IS IPv6 与 BGP4+ 配合时，通常由谁引入路由？|ASBR 上互相引入|任意路由器|只有 DIS|只有 Level-1|A|ASBR 负责在 IS-IS 与 BGP4+ 之间重发布路由，把域内前缀通告给 BGP，或把 BGP 路由引入 IS-IS。|IS-IS IPv6;重发布
+hcip831-3-3-1|s|medium|IS-IS IPv6 的 Hello 报文中携带 IPv6 地址的作用是？|供邻居计算下一跳|用于选举 DIS|用于计算度量|用于认证|A|Hello 中的 IPv6 Interface Address TLV 让邻居获知本接口的链路本地地址，从而把该地址作为下一跳。|IS-IS IPv6;Hello
+hcip831-3-3-1|s|hard|某设备同时运行 IS-IS IPv4 与 IPv6，但 IPv6 邻居一直 Init，最可能的原因是？|接口未使能 IPv6 或地址未生效|NET 配置错误|Level 不匹配|度量类型不一致|A|Init 表示只收到对端 Hello，本端地址未生效或被过滤会导致对端收不到本端 Hello，应检查接口 IPv6 状态。|IS-IS IPv6;排障
+hcip831-3-3-1|s|medium|IS-IS IPv6 的宽度量取值范围是？|1 到 16777214|1 到 63|1 到 255|1 到 65535|A|宽度量使用 24 位，取值 1 到 16777214；窄度量只有 6 位，最大 63，无法满足大型网络需求。|IS-IS IPv6;度量
+hcip831-3-3-1|m|medium|IS-IS IPv6 相比 OSPFv3 的优势包括？|通过 TLV 平滑扩展|天然支持多拓扑|报文类型无需新增|支持更多区域类型|ABC|IS-IS 的 TLV 扩展机制与多拓扑支持是其优势。区域类型丰富是 OSPF 的特点，IS-IS 只有 Level 分层。|IS-IS IPv6;对比;多选
+hcip831-3-3-1|t|easy|IS-IS IPv6 需要为 IPv6 单独配置一套 NET。|||||B|NET 与地址族无关，双栈共用同一个 NET，单独配置会导致邻居关系混乱。|判断;NET

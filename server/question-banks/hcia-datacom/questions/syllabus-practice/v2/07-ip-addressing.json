@@ -1,0 +1,1096 @@
+[
+  {
+    "id": "hcia-v3-07-001",
+    "type": "single_choice",
+    "question": "IPv4 地址 200.1.1.1 属于哪一类地址？",
+    "options": {
+      "A": "D 类",
+      "B": "C 类",
+      "C": "B 类",
+      "D": "A 类"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "首字节 1-126 为 A 类、128-191 为 B 类、192-223 为 C 类、224-239 为 D 类组播、240-255 为 E 类保留。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "IPv4 地址体系",
+    "knowledgePoint": "IPv4 地址分类",
+    "difficulty": "easy",
+    "tags": [
+      "IP 地址与配置",
+      "IPv4 地址体系",
+      "IPv4 地址分类"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-07-002",
+    "type": "single_choice",
+    "question": "B 类地址的默认子网掩码是多少？",
+    "options": {
+      "A": "255.255.0.0",
+      "B": "255.255.255.0",
+      "C": "255.255.240.0",
+      "D": "255.0.0.0"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 类默认 /8、B 类默认 /16、C 类默认 /24。B 类前 16 位为网络位，后 16 位为主机位。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "IPv4 地址体系",
+    "knowledgePoint": "IPv4 地址分类",
+    "difficulty": "easy",
+    "tags": [
+      "IP 地址与配置",
+      "IPv4 地址体系",
+      "IPv4 地址分类"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-07-003",
+    "type": "single_choice",
+    "question": "224.0.0.9 这个地址属于下列哪一类？",
+    "options": {
+      "A": "B 类私有地址",
+      "B": "C 类单播地址",
+      "C": "D 类组播地址",
+      "D": "E 类保留地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "224.0.0.0/4 为 D 类组播地址空间，224.0.0.9 是 RIPv2 使用的组播地址。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "IPv4 地址体系",
+    "knowledgePoint": "IPv4 地址分类",
+    "difficulty": "medium",
+    "tags": [
+      "IP 地址与配置",
+      "IPv4 地址体系",
+      "IPv4 地址分类"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-07-004",
+    "type": "true_false",
+    "question": "A 类地址的首字节取值范围是 1 到 126，127 被保留用于回环。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "127.0.0.0/8 整段保留给回环接口，因此 A 类可用首字节到 126 为止，0 也表示本网络。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "IPv4 地址体系",
+    "knowledgePoint": "IPv4 地址分类",
+    "difficulty": "medium",
+    "tags": [
+      "IP 地址与配置",
+      "IPv4 地址体系",
+      "IPv4 地址分类"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-07-005",
+    "type": "single_choice",
+    "question": "下列哪个地址属于 RFC1918 定义的私有地址？",
+    "options": {
+      "A": "11.0.0.1",
+      "B": "172.20.1.1",
+      "C": "172.32.1.1",
+      "D": "192.169.1.1"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "私有地址为 10.0.0.0/8、172.16.0.0/12（172.16-172.31）、192.168.0.0/16。172.32 已超出 /12 范围。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "IPv4 地址体系",
+    "knowledgePoint": "私有地址与特殊地址",
+    "difficulty": "medium",
+    "tags": [
+      "IP 地址与配置",
+      "IPv4 地址体系",
+      "私有地址与特殊地址"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-07-006",
+    "type": "single_choice",
+    "question": "172.16.0.0/12 覆盖的地址范围是？",
+    "options": {
+      "A": "172.16.0.0 到 172.31.255.255",
+      "B": "172.16.0.0 到 172.32.255.255",
+      "C": "172.16.0.0 到 172.16.255.255",
+      "D": "172.0.0.0 到 172.255.255.255"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "/12 固定前 12 位，第二字节高 4 位为 0001，因此第二字节范围 16-31，共 16 个 B 类网段。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "IPv4 地址体系",
+    "knowledgePoint": "私有地址与特殊地址",
+    "difficulty": "hard",
+    "tags": [
+      "IP 地址与配置",
+      "IPv4 地址体系",
+      "私有地址与特殊地址"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v3-07-007",
+    "type": "multiple_choice",
+    "question": "下列哪些地址不能作为主机的单播地址使用？",
+    "options": {
+      "A": "127.0.0.1",
+      "B": "0.0.0.0",
+      "C": "255.255.255.255",
+      "D": "192.168.1.10"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "127 段为回环、0.0.0.0 表示本机或任意、255.255.255.255 为受限广播；192.168.1.10 是正常私有单播地址。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "IPv4 地址体系",
+    "knowledgePoint": "私有地址与特殊地址",
+    "difficulty": "medium",
+    "tags": [
+      "IP 地址与配置",
+      "IPv4 地址体系",
+      "私有地址与特殊地址"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-07-008",
+    "type": "single_choice",
+    "question": "主机自动获取到 169.254.x.x 地址，通常说明什么？",
+    "options": {
+      "A": "DHCP 获取失败，启用了链路本地地址",
+      "B": "主机已成功连接互联网",
+      "C": "DNS 解析成功",
+      "D": "网关配置为 169.254.0.1"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "169.254.0.0/16 是 Windows 等系统的自动专用地址，出现在 DHCP 无响应时，是典型的“网络不通”信号。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "IPv4 地址体系",
+    "knowledgePoint": "私有地址与特殊地址",
+    "difficulty": "medium",
+    "tags": [
+      "IP 地址与配置",
+      "IPv4 地址体系",
+      "私有地址与特殊地址"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-07-009",
+    "type": "single_choice",
+    "question": "网段 192.168.1.0/25 的广播地址是什么？",
+    "options": {
+      "A": "192.168.1.126",
+      "B": "192.168.1.128",
+      "C": "192.168.1.127",
+      "D": "192.168.1.255"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "/25 把 C 类网段一分为二，前一段为 .0-.127，广播地址 .127；后一段为 .128-.255，广播地址 .255。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "IPv4 地址体系",
+    "knowledgePoint": "网络地址与广播地址",
+    "difficulty": "medium",
+    "tags": [
+      "IP 地址与配置",
+      "IPv4 地址体系",
+      "网络地址与广播地址"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v3-07-010",
+    "type": "single_choice",
+    "question": "网段 10.1.1.0/24 中可用主机地址的数量是多少？",
+    "options": {
+      "A": "253 个",
+      "B": "255 个",
+      "C": "254 个",
+      "D": "256 个"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "可用主机数 = 2^主机位数 - 2，/24 有 8 位主机位，256-2 = 254，需扣除网络地址与广播地址。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "IPv4 地址体系",
+    "knowledgePoint": "网络地址与广播地址",
+    "difficulty": "easy",
+    "tags": [
+      "IP 地址与配置",
+      "IPv4 地址体系",
+      "网络地址与广播地址"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-07-011",
+    "type": "true_false",
+    "question": "网段 192.168.1.0/25 与 192.168.1.128/25 属于同一个广播域。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "两者网络号不同，属于两个独立子网，必须经过三层设备才能互通，因此广播域也是分开的。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "IPv4 地址体系",
+    "knowledgePoint": "网络地址与广播地址",
+    "difficulty": "medium",
+    "tags": [
+      "IP 地址与配置",
+      "IPv4 地址体系",
+      "网络地址与广播地址"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-07-012",
+    "type": "single_choice",
+    "question": "子网掩码 255.255.255.192 对应的前缀长度是多少？",
+    "options": {
+      "A": "/25",
+      "B": "/24",
+      "C": "/26",
+      "D": "/27"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "192 的二进制为 11000000，占 2 位，24+2 = 26。/26 每子网 64 个地址、62 个可用主机。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "子网划分与掩码",
+    "knowledgePoint": "子网掩码与掩码长度",
+    "difficulty": "medium",
+    "tags": [
+      "IP 地址与配置",
+      "子网划分与掩码",
+      "子网掩码与掩码长度"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-07-013",
+    "type": "single_choice",
+    "question": "前缀长度 /28 对应的子网掩码是什么？",
+    "options": {
+      "A": "255.255.255.248",
+      "B": "255.255.255.240",
+      "C": "255.255.255.224",
+      "D": "255.255.255.252"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "第四个字节前 4 位为 1，即 11110000 = 240。/28 每子网 16 个地址、14 个可用主机。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "子网划分与掩码",
+    "knowledgePoint": "子网掩码与掩码长度",
+    "difficulty": "medium",
+    "tags": [
+      "IP 地址与配置",
+      "子网划分与掩码",
+      "子网掩码与掩码长度"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-07-014",
+    "type": "multiple_choice",
+    "question": "关于子网掩码，下列说法正确的有哪些？",
+    "options": {
+      "A": "掩码中 1 表示网络位，0 表示主机位",
+      "B": "掩码中 1 必须连续",
+      "C": "同一网段内所有主机的掩码应一致",
+      "D": "掩码可以出现 1 与 0 交替的情况"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "掩码要求 1 连续，出现交替（如 255.0.255.0）属于非法掩码，设备会拒绝配置。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "子网划分与掩码",
+    "knowledgePoint": "子网掩码与掩码长度",
+    "difficulty": "medium",
+    "tags": [
+      "IP 地址与配置",
+      "子网划分与掩码",
+      "子网掩码与掩码长度"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-07-015",
+    "type": "single_choice",
+    "question": "把 192.168.10.0/24 划分为 /26 的子网，可以得到多少个子网？",
+    "options": {
+      "A": "2 个",
+      "B": "16 个",
+      "C": "4 个",
+      "D": "8 个"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "从 /24 借 2 位到 /26，子网数 = 2^2 = 4，每子网 64 个地址、62 个可用主机。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "子网划分与掩码",
+    "knowledgePoint": "子网划分计算",
+    "difficulty": "medium",
+    "tags": [
+      "IP 地址与配置",
+      "子网划分与掩码",
+      "子网划分计算"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v3-07-016",
+    "type": "single_choice",
+    "question": "某部门需要 60 台主机，从 192.168.1.0/24 划分，最节省地址的子网掩码是？",
+    "options": {
+      "A": "255.255.255.192",
+      "B": "255.255.255.128",
+      "C": "255.255.255.224",
+      "D": "255.255.255.240"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "/26 提供 62 个可用地址，刚好满足 60 台；/27 只有 30 个不够，/25 则会浪费一倍地址。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "子网划分与掩码",
+    "knowledgePoint": "子网划分计算",
+    "difficulty": "hard",
+    "tags": [
+      "IP 地址与配置",
+      "子网划分与掩码",
+      "子网划分计算"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-07-017",
+    "type": "single_choice",
+    "question": "网段 150.25.0.0 的掩码为 255.255.224.0，下列哪个是该网段内的有效主机地址？",
+    "options": {
+      "A": "150.25.224.5",
+      "B": "150.25.32.5",
+      "C": "150.25.64.5",
+      "D": "150.25.10.5"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "掩码 224 表示第三个字节按 32 分块，网段为 150.25.0.0-150.25.31.255，只有 10.5 落在其中。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "子网划分与掩码",
+    "knowledgePoint": "子网划分计算",
+    "difficulty": "hard",
+    "tags": [
+      "IP 地址与配置",
+      "子网划分与掩码",
+      "子网划分计算"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v3-07-018",
+    "type": "single_choice",
+    "question": "主机地址 172.16.5.130/26 所在的网络地址是什么？",
+    "options": {
+      "A": "172.16.5.64",
+      "B": "172.16.5.192",
+      "C": "172.16.5.128",
+      "D": "172.16.5.0"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "/26 每 64 个地址一段，130 落在 128-191 区间，因此网络地址为 172.16.5.128，广播为 .191。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "子网划分与掩码",
+    "knowledgePoint": "子网划分计算",
+    "difficulty": "hard",
+    "tags": [
+      "IP 地址与配置",
+      "子网划分与掩码",
+      "子网划分计算"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v3-07-019",
+    "type": "true_false",
+    "question": "把 /24 网段划分为 /27 后，每个子网的可用主机数为 30。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "/27 主机位 5 位，2^5 - 2 = 30，共可划分 8 个子网。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "子网划分与掩码",
+    "knowledgePoint": "子网划分计算",
+    "difficulty": "medium",
+    "tags": [
+      "IP 地址与配置",
+      "子网划分与掩码",
+      "子网划分计算"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-07-020",
+    "type": "single_choice",
+    "question": "VLSM 技术解决的核心问题是什么？",
+    "options": {
+      "A": "把多个网段合并为超网",
+      "B": "自动分配 VLAN 编号",
+      "C": "按各子网实际需求分配不同长度的掩码，减少地址浪费",
+      "D": "为所有子网统一使用最长掩码"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "VLSM 允许不同子网使用不同掩码，大网段给长掩码、小网段给短掩码，是地址规划的基础手段。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "子网划分与掩码",
+    "knowledgePoint": "VLSM 与地址规划",
+    "difficulty": "medium",
+    "tags": [
+      "IP 地址与配置",
+      "子网划分与掩码",
+      "VLSM 与地址规划"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-07-021",
+    "type": "single_choice",
+    "question": "路由汇总的前提条件是什么？",
+    "options": {
+      "A": "所有网段必须属于同一 VLAN",
+      "B": "被汇总网段具有相同的连续前缀",
+      "C": "必须开启 NAT",
+      "D": "所有网段必须使用 /24 掩码"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "只有前缀连续且能用一个更短掩码覆盖时才可汇总；不连续的前缀强行汇总会把无关流量引入网络。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "子网划分与掩码",
+    "knowledgePoint": "VLSM 与地址规划",
+    "difficulty": "hard",
+    "tags": [
+      "IP 地址与配置",
+      "子网划分与掩码",
+      "VLSM 与地址规划"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-07-022",
+    "type": "true_false",
+    "question": "192.168.0.0/24 到 192.168.3.0/24 这四个网段可以汇总为 192.168.0.0/22。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "四个连续 /24 网段正好覆盖 0-3 的第三字节，合并后前缀缩短 2 位得到 /22，是标准的汇总计算。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "子网划分与掩码",
+    "knowledgePoint": "VLSM 与地址规划",
+    "difficulty": "hard",
+    "tags": [
+      "IP 地址与配置",
+      "子网划分与掩码",
+      "VLSM 与地址规划"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v3-07-023",
+    "type": "single_choice",
+    "question": "ARP 协议的作用是什么？",
+    "options": {
+      "A": "把域名解析为 IP 地址",
+      "B": "把 IP 地址解析为对应的 MAC 地址",
+      "C": "把 MAC 地址解析为对应的 IP 地址",
+      "D": "把端口号解析为进程"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "已知目的 IP 但不知道其 MAC 时，主机发送 ARP 请求广播，目标主机以单播 ARP 应答返回自己的 MAC。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "地址解析与诊断",
+    "knowledgePoint": "ARP 工作原理",
+    "difficulty": "easy",
+    "tags": [
+      "IP 地址与配置",
+      "地址解析与诊断",
+      "ARP 工作原理"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-07-024",
+    "type": "single_choice",
+    "question": "ARP 请求报文发送时使用的目的 MAC 地址是什么？",
+    "options": {
+      "A": "广播地址 FF-FF-FF-FF-FF-FF",
+      "B": "网关的 MAC 地址",
+      "C": "目标主机的 MAC 地址",
+      "D": "本机的 MAC 地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "因为此时还不知道目标 MAC，只能广播询问；应答时已知请求方 MAC，因此用单播回复。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "地址解析与诊断",
+    "knowledgePoint": "ARP 工作原理",
+    "difficulty": "medium",
+    "tags": [
+      "IP 地址与配置",
+      "地址解析与诊断",
+      "ARP 工作原理"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-07-025",
+    "type": "single_choice",
+    "question": "免费 ARP（Gratuitous ARP）的典型用途是什么？",
+    "options": {
+      "A": "跨网段查询目的主机",
+      "B": "替代 DNS 完成域名解析",
+      "C": "解析网关的 MAC 地址",
+      "D": "检测 IP 地址冲突并通告本机 MAC"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "免费 ARP 的源目 IP 相同，主动广播自己的映射关系；设备开机或 VRRP 切换时用它检测冲突、刷新对端缓存。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "地址解析与诊断",
+    "knowledgePoint": "ARP 工作原理",
+    "difficulty": "hard",
+    "tags": [
+      "IP 地址与配置",
+      "地址解析与诊断",
+      "ARP 工作原理"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-07-026",
+    "type": "multiple_choice",
+    "question": "关于 ARP 缓存，下列说法正确的有哪些？",
+    "options": {
+      "A": "动态表项会随时间老化",
+      "B": "静态表项需手工配置且不会老化",
+      "C": "ARP 欺骗可通过伪造应答污染缓存",
+      "D": "ARP 缓存表项可以跨网段自动同步"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "ARP 是本地广播协议，不能跨网段同步；正因为缺乏认证，才需要 DAI 等机制防御 ARP 欺骗。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "地址解析与诊断",
+    "knowledgePoint": "ARP 工作原理",
+    "difficulty": "medium",
+    "tags": [
+      "IP 地址与配置",
+      "地址解析与诊断",
+      "ARP 工作原理"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-07-027",
+    "type": "single_choice",
+    "question": "ping 命令底层使用的协议是什么？",
+    "options": {
+      "A": "TCP",
+      "B": "ICMP",
+      "C": "ARP",
+      "D": "UDP"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "ping 发送 ICMP Echo Request，接收 Echo Reply，因此它验证的是 IP 层连通性，与具体端口无关。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "地址解析与诊断",
+    "knowledgePoint": "ICMP 与 ping",
+    "difficulty": "easy",
+    "tags": [
+      "IP 地址与配置",
+      "地址解析与诊断",
+      "ICMP 与 ping"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-07-028",
+    "type": "single_choice",
+    "question": "ping 不通但可以 tracert 到目标，最可能说明什么？",
+    "options": {
+      "A": "ARP 表为空",
+      "B": "本机没有配置 IP 地址",
+      "C": "物理链路完全断开",
+      "D": "中间设备或目标主机限制了 ICMP 响应"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "部分设备为安全考虑禁 ping，但转发正常，因此 ping 失败不能直接判定网络故障，需结合业务端口测试。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "地址解析与诊断",
+    "knowledgePoint": "ICMP 与 ping",
+    "difficulty": "hard",
+    "tags": [
+      "IP 地址与配置",
+      "地址解析与诊断",
+      "ICMP 与 ping"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-07-029",
+    "type": "single_choice",
+    "question": "ping 结果中出现“请求超时”，通常表示什么？",
+    "options": {
+      "A": "本地网卡未启用",
+      "B": "在超时时间内未收到对应的 ICMP 应答",
+      "C": "目的主机明确拒绝连接",
+      "D": "域名解析失败"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "请求超时可能是链路中断、路由缺失或对端禁 ping；“目标不可达”才是收到 ICMP 差错报文的明确反馈。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "地址解析与诊断",
+    "knowledgePoint": "ICMP 与 ping",
+    "difficulty": "medium",
+    "tags": [
+      "IP 地址与配置",
+      "地址解析与诊断",
+      "ICMP 与 ping"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-07-030",
+    "type": "true_false",
+    "question": "ICMP 差错报文中的“超时”类型，是 tracert 实现路径发现的基础。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "tracert 逐跳增大 TTL，路由器把 TTL 减到 0 时回送 ICMP 超时报文，源端据此得知每一跳的地址。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "地址解析与诊断",
+    "knowledgePoint": "tracert 与路径诊断",
+    "difficulty": "medium",
+    "tags": [
+      "IP 地址与配置",
+      "地址解析与诊断",
+      "tracert 与路径诊断"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-07-031",
+    "type": "single_choice",
+    "question": "tracert 从收到的 ICMP 超时报文中提取的地址是什么？",
+    "options": {
+      "A": "源主机的网关地址",
+      "B": "发出该超时报文的路由器接口地址",
+      "C": "DNS 服务器地址",
+      "D": "最终目的主机的地址"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "超时报文的源 IP 就是当前跳路由器处理该报文的出接口地址，因此 tracert 能逐跳显示路径。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "地址解析与诊断",
+    "knowledgePoint": "tracert 与路径诊断",
+    "difficulty": "medium",
+    "tags": [
+      "IP 地址与配置",
+      "地址解析与诊断",
+      "tracert 与路径诊断"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-07-032",
+    "type": "single_choice",
+    "question": "tracert 结果中某一跳之后全部显示超时，最可能的问题是什么？",
+    "options": {
+      "A": "DNS 配置错误",
+      "B": "源主机网卡故障",
+      "C": "本机 ARP 缓存已满",
+      "D": "该跳之后的路由缺失或存在策略拦截"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "前几跳可达说明本地链路正常，后续全超时通常意味着该设备之后没有回程路由或被 ACL 过滤。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "地址解析与诊断",
+    "knowledgePoint": "tracert 与路径诊断",
+    "difficulty": "hard",
+    "tags": [
+      "IP 地址与配置",
+      "地址解析与诊断",
+      "tracert 与路径诊断"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-07-033",
+    "type": "true_false",
+    "question": "tracert 默认最多追踪 30 跳，超过后停止探测。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Windows 的 tracert 默认最大跳数 30，可通过 -h 参数调整；Linux 的 traceroute 默认 30 跳。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "地址解析与诊断",
+    "knowledgePoint": "tracert 与路径诊断",
+    "difficulty": "medium",
+    "tags": [
+      "IP 地址与配置",
+      "地址解析与诊断",
+      "tracert 与路径诊断"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-07-034",
+    "type": "single_choice",
+    "question": "主机 A 与主机 B 同网段，A ping B 失败但 A 能 ping 通网关，最可能的原因是什么？",
+    "options": {
+      "A": "A 的子网掩码为 /24",
+      "B": "A 的默认网关配置错误",
+      "C": "交换机未配置 VLAN",
+      "D": "B 的防火墙或主机策略拦截了 ICMP"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "能通网关说明二层与网关正常，同网段不通多因终端侧策略或 IP 冲突，应检查 B 主机状态与安全软件。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "地址解析与诊断",
+    "knowledgePoint": "ICMP 与 ping",
+    "difficulty": "hard",
+    "tags": [
+      "IP 地址与配置",
+      "地址解析与诊断",
+      "ICMP 与 ping"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-07-035",
+    "type": "single_choice",
+    "question": "一个 C 类网段 192.168.5.0/24 需要划分出 6 个子网，至少需要借几位主机位？",
+    "options": {
+      "A": "2 位",
+      "B": "6 位",
+      "C": "3 位",
+      "D": "4 位"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "2^2 = 4 不足 6 个，2^3 = 8 满足需求，因此借 3 位得到 /27，每子网 30 个可用主机。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "子网划分与掩码",
+    "knowledgePoint": "子网划分计算",
+    "difficulty": "hard",
+    "tags": [
+      "IP 地址与配置",
+      "子网划分与掩码",
+      "子网划分计算"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v3-07-036",
+    "type": "single_choice",
+    "question": "下列哪个地址与 10.1.1.100/24 处于同一网段？",
+    "options": {
+      "A": "10.2.1.100",
+      "B": "10.1.0.100",
+      "C": "10.1.1.200",
+      "D": "10.1.2.100"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "/24 网络位为前三段 10.1.1，只有 10.1.1.200 的前三段相同，其余均属于不同网段。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "IPv4 地址体系",
+    "knowledgePoint": "网络地址与广播地址",
+    "difficulty": "easy",
+    "tags": [
+      "IP 地址与配置",
+      "IPv4 地址体系",
+      "网络地址与广播地址"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-07-037",
+    "type": "single_choice",
+    "question": "若两台主机 IP 相同但掩码不同（/24 与 /25），可能出现什么现象？",
+    "options": {
+      "A": "互相认为对方不在同网段，通信异常",
+      "B": "ARP 无法工作但 IP 可通",
+      "C": "自动协商统一为 /24",
+      "D": "掩码不影响通信"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "主机用自身掩码判断目的地址是否同网段，掩码不一致会导致一方走网关、一方直接 ARP，形成单向可达的怪异故障。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "子网划分与掩码",
+    "knowledgePoint": "子网掩码与掩码长度",
+    "difficulty": "hard",
+    "tags": [
+      "IP 地址与配置",
+      "子网划分与掩码",
+      "子网掩码与掩码长度"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-07-038",
+    "type": "multiple_choice",
+    "question": "下列哪些属于私有地址范围？",
+    "options": {
+      "A": "10.10.10.0/24",
+      "B": "172.20.1.0/24",
+      "C": "192.168.100.0/24",
+      "D": "11.0.0.0/8"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "11.0.0.0/8 属于公网 A 类地址空间，不在 RFC1918 私有地址之列，因此不能在私网中随意使用。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "IPv4 地址体系",
+    "knowledgePoint": "私有地址与特殊地址",
+    "difficulty": "easy",
+    "tags": [
+      "IP 地址与配置",
+      "IPv4 地址体系",
+      "私有地址与特殊地址"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-07-039",
+    "type": "single_choice",
+    "question": "代理 ARP（Proxy ARP）的作用是什么？",
+    "options": {
+      "A": "防止 ARP 欺骗",
+      "B": "由路由器代替其他网段主机应答 ARP 请求",
+      "C": "把 MAC 地址转换为 IPv6 地址",
+      "D": "加速本网段内的 ARP 学习"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "代理 ARP 让路由器用自己的 MAC 应答跨网段请求，使主机误以为目标在同网段，从而把流量交给路由器转发。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "地址解析与诊断",
+    "knowledgePoint": "ARP 工作原理",
+    "difficulty": "hard",
+    "tags": [
+      "IP 地址与配置",
+      "地址解析与诊断",
+      "ARP 工作原理"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-07-040",
+    "type": "single_choice",
+    "question": "查看本机 ARP 缓存的命令是？",
+    "options": {
+      "A": "ipconfig /all",
+      "B": "netstat -rn",
+      "C": "arp -a",
+      "D": "arp -d"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "arp -a 显示当前缓存，arp -d 清除缓存。清除后重新访问可验证是否为 ARP 缓存污染导致的故障。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "地址解析与诊断",
+    "knowledgePoint": "ARP 工作原理",
+    "difficulty": "easy",
+    "tags": [
+      "IP 地址与配置",
+      "地址解析与诊断",
+      "ARP 工作原理"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-07-041",
+    "type": "true_false",
+    "question": "同一个 IP 地址可以配置在多台主机的不同网卡上，只要它们不在同一广播域内就不会冲突。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IP 冲突的判定范围是同一广播域或同一路由域，跨隔离网段复用地址在技术上可行，但会带来管理与路由歧义，应避免。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "IPv4 地址体系",
+    "knowledgePoint": "私有地址与特殊地址",
+    "difficulty": "hard",
+    "tags": [
+      "IP 地址与配置",
+      "IPv4 地址体系",
+      "私有地址与特殊地址"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-07-042",
+    "type": "single_choice",
+    "question": "网段 192.168.1.64/26 的可用主机地址范围是？",
+    "options": {
+      "A": "192.168.1.64 到 192.168.1.127",
+      "B": "192.168.1.64 到 192.168.1.126",
+      "C": "192.168.1.65 到 192.168.1.127",
+      "D": "192.168.1.65 到 192.168.1.126"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "网络地址 .64 与广播地址 .127 不可用，可用范围为 .65-.126，共 62 个地址。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "子网划分与掩码",
+    "knowledgePoint": "子网划分计算",
+    "difficulty": "hard",
+    "tags": [
+      "IP 地址与配置",
+      "子网划分与掩码",
+      "子网划分计算"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v3-07-043",
+    "type": "single_choice",
+    "question": "CIDR 表示法 10.0.0.0/30 每个子网可用主机数是多少？",
+    "options": {
+      "A": "6 个",
+      "B": "1 个",
+      "C": "4 个",
+      "D": "2 个"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "/30 主机位 2 位，4-2 = 2，常用于点对点互联链路，可节省地址。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "子网划分与掩码",
+    "knowledgePoint": "子网划分计算",
+    "difficulty": "medium",
+    "tags": [
+      "IP 地址与配置",
+      "子网划分与掩码",
+      "子网划分计算"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-07-044",
+    "type": "single_choice",
+    "question": "主机配置了 IP 和掩码但未配置网关，可能出现什么结果？",
+    "options": {
+      "A": "所有通信均正常",
+      "B": "同网段与跨网段都无法通信",
+      "C": "同网段可通信，跨网段不可通信",
+      "D": "只能访问 DNS 服务器"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "同网段依靠 ARP 直接通信，不需要网关；跨网段必须把报文交给网关，缺失网关时表现为“内网通、外网不通”。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "IPv4 地址体系",
+    "knowledgePoint": "私有地址与特殊地址",
+    "difficulty": "medium",
+    "tags": [
+      "IP 地址与配置",
+      "IPv4 地址体系",
+      "私有地址与特殊地址"
+    ],
+    "stage": "综合应用"
+  }
+]

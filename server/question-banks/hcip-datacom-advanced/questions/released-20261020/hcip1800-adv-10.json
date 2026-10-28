@@ -1,0 +1,1967 @@
+[
+  {
+    "id": "hcip831-5-4-1-001",
+    "type": "single_choice",
+    "question": "OSPF sham-link 部署在什么设备之间？",
+    "options": {
+      "A": "两端 PE 之间",
+      "B": "PE 与 CE 之间",
+      "C": "两台 CE 之间",
+      "D": "两台 P 设备之间"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Sham-link 是两端 PE 之间的虚拟 OSPF 链路，属于同一个 OSPF 区域，使跨 VPN 的 OSPF 路由按真实开销选路。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "medium",
+    "tags": [
+      "sham-link",
+      "部署"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "dd4c5b1fa656459659ef6d88366660e10238962ff26ffa60411add641a7695d8"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-4-1-002",
+    "type": "single_choice",
+    "question": "sham-link 解决的核心问题是？",
+    "options": {
+      "A": "避免跨 VPN 的 OSPF 流量绕行远端 PE",
+      "B": "加快 OSPF 邻居建立",
+      "C": "减少 LSA 数量",
+      "D": "加密 OSPF 报文"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "没有 sham-link 时，跨 VPN 的 OSPF 路由会被当作外部路由，流量绕行远端 PE。sham-link 让该路由恢复为区域内路由并按真实开销选路。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "hard",
+    "tags": [
+      "sham-link",
+      "作用"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "872d76954e5407bc9ecf88b86c3bc3263ae676f2801673330ec66af03d2bd4b4"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-4-1-003",
+    "type": "single_choice",
+    "question": "sham-link 的两端地址通常使用什么？",
+    "options": {
+      "A": "CE 的接口地址",
+      "B": "两端 PE 上 VPN 实例内的 Loopback 地址",
+      "C": "公网 Loopback 地址",
+      "D": "P 设备的接口地址"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "sham-link 的源与目的必须是两端 PE 在 VPN 实例内的地址，通常使用专为该 VPN 配置的 Loopback，并通告进 OSPF。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "medium",
+    "tags": [
+      "sham-link",
+      "地址"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "07c6a1a031277f1a6eabe77a15813d7ab14e46a4fb3277ab0cba3963a3568a0d"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-4-1-004",
+    "type": "single_choice",
+    "question": "OSPF 在 MPLS VPN 中的 domain-id 缺省取值来自？",
+    "options": {
+      "A": "RT 的值",
+      "B": "RD 的值",
+      "C": "PE 上该 OSPF 进程的 Router ID",
+      "D": "CE 的 Router ID"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "未显式配置时，domain-id 缺省取 PE 上该 OSPF 进程的 Router ID。两端不一致会导致路由以 Type 5 形式引入，影响选路。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "medium",
+    "tags": [
+      "domain-id",
+      "缺省值"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d1ee4fe5a43abeafc21f57780d7d436a72719f04c319c222ba7a941e12c8d404"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-4-1-005",
+    "type": "single_choice",
+    "question": "OSPF 在 MPLS VPN 中，DN 位的作用是什么？",
+    "options": {
+      "A": "标识路由的来源 AS",
+      "B": "标识接口的开销",
+      "C": "标识 LSA 的老化时间",
+      "D": "防止 LSA 在 VPN 与 OSPF 域之间反复重发布"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "PE 把 BGP 路由重发布进 OSPF 时置位 DN 位，其他 PE 收到带 DN 位的 LSA 不再重发布回 BGP，从而阻断环路。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "hard",
+    "tags": [
+      "DN 位",
+      "防环"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "91d94c43336f96702efd3c9fcbdeafeab67a4ebda1382c3d25e9b097d961418c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-4-1-006",
+    "type": "single_choice",
+    "question": "Hub-Spoke 组网中，Spoke 之间的流量必须经过哪里？",
+    "options": {
+      "A": "P 设备直连",
+      "B": "Internet 出口",
+      "C": "Hub 站点",
+      "D": "任意 Spoke 站点"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "通过 RT 控制使 Spoke 只与 Hub 交换路由，Spoke 之间没有直达路由，流量只能经 Hub 中转，便于集中审计与策略实施。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "medium",
+    "tags": [
+      "Hub-Spoke",
+      "流量"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "de1c809de0a1cbb0fc98a2f16420d79a82ca52595cf769ed81a1ee8235e02120"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-4-1-007",
+    "type": "single_choice",
+    "question": "Extranet VPN 的实现主要依靠什么？",
+    "options": {
+      "A": "关闭 RT 匹配",
+      "B": "修改 RD",
+      "C": "使用静态路由",
+      "D": "精细配置 import 与 export RT"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Extranet 通过为不同企业配置交叉的 RT，使双方只能导入对方指定的路由，实现受控的跨企业互访。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "medium",
+    "tags": [
+      "Extranet",
+      "RT"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "0b0a5750fb21061accd88826719677aac5518286b2dd045df5a517a2a7cd72f1"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-4-1-008",
+    "type": "single_choice",
+    "question": "CE 双归属到两台 PE 的主要好处是？",
+    "options": {
+      "A": "减少 RT 配置",
+      "B": "简化路由协议",
+      "C": "提高单链路带宽",
+      "D": "提高站点接入的可靠性"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "双归属让站点通过两条链路接入两台 PE，任一条链路或一台 PE 故障时仍可通信，是 MPLS VPN 常见的可靠性设计。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "medium",
+    "tags": [
+      "CE 双归属",
+      "可靠性"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "a8cf815a0d1b9e2c64e451dcb98759dcbabf96340e78fed4f2b7c7003d45290a"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-4-1-009",
+    "type": "single_choice",
+    "question": "CE 双归属时防止路由回送的关键配置是？",
+    "options": {
+      "A": "在 CE 上配置 MED",
+      "B": "在 P 上配置 RT",
+      "C": "在 CE 上配置 RD",
+      "D": "在 PE 上配置 SoO"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "SoO 标识路由来源站点，PE 拒绝接收携带本站点 SoO 的路由，避免路由在两条链路之间来回传递形成环路。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "hard",
+    "tags": [
+      "SoO",
+      "双归属"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-009",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "5de4402745ffe4b75c964b06be32a2a04f20f6904269497798441984f3ffc85a"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-4-1-010",
+    "type": "single_choice",
+    "question": "MPLS VPN 中实现组播通常采用什么方案？",
+    "options": {
+      "A": "VPLS",
+      "B": "VPWS",
+      "C": "MVPN",
+      "D": "LDP"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "MVPN 在 MPLS VPN 中承载组播流量，通过 PIM 邻居与组播隧道在 PE 之间复制组播报文，常见方案包括 PIM-SM 与 Rosen 模型。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "medium",
+    "tags": [
+      "MVPN",
+      "组播"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-010",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d7958fc4c803def82ea7cd734a5c743bcbf5d490f0a1e33ff3a2608080668f02"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-4-1-011",
+    "type": "single_choice",
+    "question": "VPLS 提供的服务类型是？",
+    "options": {
+      "A": "七层应用加速",
+      "B": "四层负载均衡",
+      "C": "二层多点虚拟专用网络",
+      "D": "三层虚拟专用网络"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "VPLS 在 MPLS 网络上提供二层多点以太网服务，CE 侧看到的是一个二层交换域；三层 VPN 由 MPLS VPN（L3VPN）提供。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "medium",
+    "tags": [
+      "VPLS",
+      "二层 VPN"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-011",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e580530e132b46d6f14bcb08ca1befb47b711a9d581c611706a56885d2d8f811"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-4-1-012",
+    "type": "single_choice",
+    "question": "VPWS 与 VPLS 的主要区别是？",
+    "options": {
+      "A": "VPWS 是三层，VPLS 是二层",
+      "B": "VPWS 不需要标签",
+      "C": "VPWS 是点到点，VPLS 是多点",
+      "D": "VPLS 只能用于 IPv6"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "VPWS 提供点到点的二层专线仿真，VPLS 提供多点之间的二层交换，后者需要 MAC 地址学习与泛洪。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "medium",
+    "tags": [
+      "VPWS",
+      "VPLS"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-012",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "b9f7f82284f26df683faf667ab60888f463bab86f348d2d2a9c40d7e7bdeef34"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-4-1-013",
+    "type": "multiple_choice",
+    "question": "MPLS VPN 的典型应用场景包括？",
+    "options": {
+      "A": "Hub-Spoke 集中上网",
+      "B": "企业多站点互联",
+      "C": "无线终端准入",
+      "D": "跨企业 Extranet 互访"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "MPLS VPN 主要用于企业站点互联、集中出口与跨企业互访。无线终端准入由 WLAN 与认证系统负责。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "medium",
+    "tags": [
+      "应用场景",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-013",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "db951bb635fde0f02b6052bcc05cbb390c0defb704ffaac0655bf36fd44eb7b6"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-4-1-014",
+    "type": "multiple_choice",
+    "question": "OSPF 在 MPLS VPN 中需要关注的特性包括？",
+    "options": {
+      "A": "DN 位",
+      "B": "domain-id",
+      "C": "sham-link",
+      "D": "MED 属性"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "domain-id、sham-link 与 DN 位都是 OSPF 在 MPLS VPN 环境下的扩展特性。MED 属于 BGP 属性。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "特性",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-014",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "67c93724bb2ff8dff6a28afdee98d5fb58c55fcdb5b81458c2b95f670ee2196c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-4-1-015",
+    "type": "true_false",
+    "question": "sham-link 建立在 PE 与 CE 之间。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "sham-link 建立在两端 PE 之间，属于同一个 OSPF 区域，用于修正跨 VPN 的 OSPF 路由开销。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "sham-link"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-015",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "455093acf2f6f8cc038cb2a064dadda388bdb51356e3562b5d282367c799b487"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-4-1-016",
+    "type": "true_false",
+    "question": "Hub-Spoke 组网中 Spoke 站点之间可以直接互通。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Spoke 只与 Hub 交换路由，站点之间没有直达路径，流量必须经 Hub 中转。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "easy",
+    "tags": [
+      "判断",
+      "Hub-Spoke"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-016",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4f49d5b736f9a90ba9198505ee11dfe745dc136298e584935807a11926ed4f4f"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-4-1-017",
+    "type": "single_choice",
+    "question": "部署 sham-link 后，OSPF 邻居无法建立，最可能的原因是？",
+    "options": {
+      "A": "RD 配置错误",
+      "B": "RT 配置错误",
+      "C": "LDP 会话中断",
+      "D": "sham-link 源地址未通告进 OSPF"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "sham-link 依赖两端地址在 OSPF 中可达，若源地址未通过 network 通告，邻居无法建立，sham-link 也就无法生效。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "hard",
+    "tags": [
+      "sham-link",
+      "排障"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-017",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "1823742bf1df8a7b410dc40f456b5c5ae7a21a9ca94dc3a9e9429a148faf5638"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-4-1-018",
+    "type": "single_choice",
+    "question": "MPLS VPN 与 Internet 互通时，通常把 Internet 路由放在哪个实例？",
+    "options": {
+      "A": "独立的公网或共享 VRF",
+      "B": "CE 的全局路由表",
+      "C": "任意业务 VRF",
+      "D": "P 设备的实例"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "通常为 Internet 出口建立独立实例，再通过路由泄漏把缺省路由引入业务实例，避免公网路由污染业务 VPN。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "medium",
+    "tags": [
+      "Internet",
+      "实例"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-018",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "feed32be3cc5efcb8023704b6d80be9d5d228085e87a76d03093156d8871535f"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-4-1-019",
+    "type": "single_choice",
+    "question": "跨域 Option A 的主要缺点是？",
+    "options": {
+      "A": "ASBR 需为每个 VPN 配置子接口",
+      "B": "不支持标签转发",
+      "C": "无法传递 RT",
+      "D": "不能跨 AS"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Option A 逐 VPN 建立子接口与 VRF，VPN 数量增长时配置量与资源消耗线性上升，扩展性最差。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "medium",
+    "tags": [
+      "Option A",
+      "缺点"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-019",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "3eae5411e9605cda574dd46737c16245b5b33ab74b63a91824ed3e8ece80a135"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-4-1-020",
+    "type": "single_choice",
+    "question": "跨域 Option B 对 ASBR 的要求是？",
+    "options": {
+      "A": "不需要标签",
+      "B": "需保存并转发 VPNv4 路由",
+      "C": "只转发 IPv4 路由",
+      "D": "不需要运行 BGP"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Option B 的 ASBR 之间建立 MP-EBGP 并交换 VPNv4 路由，因此 ASBR 必须支持 VPNv4 并保存相应路由。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "medium",
+    "tags": [
+      "Option B",
+      "要求"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-020",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "efe792335c137cb7edb00b4dc8d5c068f851f12b0f0dab109662b4f672828725"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-4-1-021",
+    "type": "single_choice",
+    "question": "跨域 Option C 中，VPNv4 路由如何传递？",
+    "options": {
+      "A": "经 ASBR 逐跳传递",
+      "B": "由 P 设备反射",
+      "C": "PE 之间通过多跳 MP-EBGP 直接传递",
+      "D": "由 LDP 传递"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Option C 中 ASBR 只交换带标签的 IPv4 路由，PE 之间建立多跳 MP-EBGP 直接传递 VPNv4 路由，扩展性最好。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "hard",
+    "tags": [
+      "Option C",
+      "路由传递"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-021",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "00d0211b6ffac7939b08998e03d6ac2f2ef6361f23b9576a23e26c4a20b8b17d"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-4-1-022",
+    "type": "single_choice",
+    "question": "VPN 内需要限制某站点只能访问部分网段，最合适的做法是？",
+    "options": {
+      "A": "关闭 LDP",
+      "B": "在 PE 上用 RT 或路由策略过滤",
+      "C": "调整 MTU",
+      "D": "修改 RD"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "通过控制 export/import RT 或使用路由策略过滤前缀，可以精确控制站点可见的路由范围，实现访问隔离。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "medium",
+    "tags": [
+      "访问控制",
+      "RT"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-022",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "433101596b3b9800c833b223c5d2c9845ed693862c2590e1a44497dcd44e71b7"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-4-1-023",
+    "type": "multiple_choice",
+    "question": "部署 MPLS VPN 时，PE 上通常需要配置下列哪些内容？",
+    "options": {
+      "A": "VPN 实例",
+      "B": "绑定实例的接口",
+      "C": "组播地址池",
+      "D": "MP-BGP 对等体"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "PE 需要 VPN 实例、接口绑定与 MP-BGP 对等体，才能完成路由引入、通告与转发。组播地址池与单播 VPN 无关。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "medium",
+    "tags": [
+      "部署",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-023",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "230377063d4821538d07e8972cac5a3f2567965a6f3771d603798e27d65d46d3"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-4-1-024",
+    "type": "true_false",
+    "question": "VPLS 提供的是三层 VPN 服务。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "VPLS 提供二层多点以太网服务，CE 侧构成一个二层交换域。三层 VPN 由 MPLS L3VPN 提供。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "VPLS"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-024",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "1018799806e1b7b21c94a46a9c82787c8703f857a7991f10a9b0ac6841cd4d11"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-1-1-001",
+    "type": "single_choice",
+    "question": "VLAN 聚合（Super VLAN）的核心思想是？",
+    "options": {
+      "A": "把 VLAN 转换为 MPLS 标签",
+      "B": "多个 VLAN 合并为一个广播域",
+      "C": "多个 Sub VLAN 共用一个 Super VLAN 的三层接口",
+      "D": "用 QinQ 扩展 VLAN 数量"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Super VLAN 让多个 Sub VLAN 共享一个 VLANIF 接口与网段，Sub VLAN 之间二层隔离，从而节省 IP 地址并抑制广播。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "VLAN 高级技术",
+    "knowledgePoint": "VLAN 聚合",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 聚合",
+      "原理"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-1-1-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / VLAN 高级技术 / VLAN 聚合」。知识点编码 hcip831-4-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "bdb6fbd1660e14673855b4dc7d0f495a627085a6ecf4ea970b44a79386722fc8"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-1-1-002",
+    "type": "single_choice",
+    "question": "Super VLAN 中，VLANIF 接口应配置在哪个 VLAN 上？",
+    "options": {
+      "A": "Super VLAN",
+      "B": "任意 Sub VLAN",
+      "C": "不需要配置",
+      "D": "所有 Sub VLAN"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "三层接口只配置在 Super VLAN 上，Sub VLAN 只承载二层流量且不能配置 VLANIF，否则会产生地址冲突。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "VLAN 高级技术",
+    "knowledgePoint": "VLAN 聚合",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 聚合",
+      "VLANIF"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-1-1-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / VLAN 高级技术 / VLAN 聚合」。知识点编码 hcip831-4-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "095b63f70300df839810c6e91c4ea53672f39604509be8130f87f2201ac675d7"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-1-1-003",
+    "type": "single_choice",
+    "question": "不同 Sub VLAN 的用户之间能否二层互通？",
+    "options": {
+      "A": "只能单向互通",
+      "B": "能，完全互通",
+      "C": "不能，二层隔离",
+      "D": "由 ACL 决定"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Sub VLAN 之间在二层相互隔离，只能通过 Super VLAN 的三层接口转发，因此可实现同网段内的访问控制。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "VLAN 高级技术",
+    "knowledgePoint": "VLAN 聚合",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 聚合",
+      "隔离"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-1-1-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / VLAN 高级技术 / VLAN 聚合」。知识点编码 hcip831-4-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "bf0cf78d1c959565decfc76e889b4f44c005607c13a18a8cb4f601e3d39a2f2c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-1-1-004",
+    "type": "single_choice",
+    "question": "VLAN 聚合的主要优点是？",
+    "options": {
+      "A": "提高链路带宽",
+      "B": "替代生成树",
+      "C": "简化 MAC 学习",
+      "D": "节省 IP 地址并缩小广播域"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "多个 Sub VLAN 共用一个网段，避免每个 VLAN 占用一个子网，同时把广播限制在各自的 Sub VLAN 内。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "VLAN 高级技术",
+    "knowledgePoint": "VLAN 聚合",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 聚合",
+      "优点"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-1-1-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / VLAN 高级技术 / VLAN 聚合」。知识点编码 hcip831-4-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d7dd0699b82cf194c508f993b7e452c93d32c001cf2c3d86247f48e4f503794d"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-1-1-005",
+    "type": "single_choice",
+    "question": "Sub VLAN 能否配置 VLANIF 接口？",
+    "options": {
+      "A": "不能",
+      "B": "只能配置 IPv6 地址",
+      "C": "能，必须配置",
+      "D": "能，可选配置"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Sub VLAN 是纯二层 VLAN，配置 VLANIF 会与 Super VLAN 的接口产生地址与路由冲突，因此不允许配置。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "VLAN 高级技术",
+    "knowledgePoint": "VLAN 聚合",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 聚合",
+      "限制"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-1-1-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / VLAN 高级技术 / VLAN 聚合」。知识点编码 hcip831-4-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "530cd1c459cffc381f6645557aa9a55cf6d6e6f2691b89cca88eb85091a696ab"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-1-1-006",
+    "type": "single_choice",
+    "question": "VLAN 聚合与 MUX VLAN 的主要区别是？",
+    "options": {
+      "A": "前者共用三层网关，后者做二层主从隔离",
+      "B": "后者需要 MPLS 支持",
+      "C": "前者只能用于 IPv6",
+      "D": "两者完全相同"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "VLAN 聚合解决地址与网关复用问题，MUX VLAN 解决同一网段内主从端口的二层隔离问题，设计目标不同。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "VLAN 高级技术",
+    "knowledgePoint": "VLAN 聚合",
+    "difficulty": "hard",
+    "tags": [
+      "VLAN 聚合",
+      "MUX VLAN"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-1-1-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / VLAN 高级技术 / VLAN 聚合」。知识点编码 hcip831-4-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "40d3de215905fdfa806eb3ed4f78a29a7636594ecc63a9b86e36cd524f8af3c6"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-1-1-007",
+    "type": "multiple_choice",
+    "question": "VLAN 聚合部署时需要注意？",
+    "options": {
+      "A": "Super VLAN 与 Sub VLAN 的对应关系",
+      "B": "Super VLAN 需配置三层接口",
+      "C": "Sub VLAN 不能配置 VLANIF",
+      "D": "每个 Sub VLAN 都要配置独立网段"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "Sub VLAN 共享 Super VLAN 的网段，不需要各自配置网段；为每个 Sub VLAN 配独立网段就退化成普通 VLAN 划分。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "VLAN 高级技术",
+    "knowledgePoint": "VLAN 聚合",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 聚合",
+      "配置",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-1-1-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / VLAN 高级技术 / VLAN 聚合」。知识点编码 hcip831-4-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4b61067575cf57d82a7b27e9b484ea2b31fba8fd7bb91d110a6b001f69f76bfe"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-1-1-008",
+    "type": "true_false",
+    "question": "VLAN 聚合中，所有 Sub VLAN 共享同一个 IP 网段。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "这正是 VLAN 聚合节省地址的关键：多个 Sub VLAN 共用一个 Super VLAN 的三层接口与网段，二层仍相互隔离。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "VLAN 高级技术",
+    "knowledgePoint": "VLAN 聚合",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "VLAN 聚合"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-1-1-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / VLAN 高级技术 / VLAN 聚合」。知识点编码 hcip831-4-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "ef599903af300970dc917d46bc1b1d17ed36735b7d1077a015bf96161e624c6e"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-1-2-001",
+    "type": "single_choice",
+    "question": "MUX VLAN 中的 Principal VLAN 的作用是？",
+    "options": {
+      "A": "与所有端口互通的主 VLAN",
+      "B": "仅承载组播",
+      "C": "仅用于管理",
+      "D": "只与 Separate VLAN 互通"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Principal VLAN 内的端口可以与 MUX VLAN 内所有端口通信，通常用于连接网关或服务器。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "VLAN 高级技术",
+    "knowledgePoint": "MUX VLAN",
+    "difficulty": "medium",
+    "tags": [
+      "MUX VLAN",
+      "Principal"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-1-2-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / VLAN 高级技术 / MUX VLAN」。知识点编码 hcip831-4-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "8add0642aaf90c955a058e59720bb807466548c1b57d8b892f07a7551156dc1e"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-1-2-002",
+    "type": "single_choice",
+    "question": "MUX VLAN 中 Separate VLAN 的特点是？",
+    "options": {
+      "A": "组内可以互通",
+      "B": "与 Principal 互通",
+      "C": "可以访问外网",
+      "D": "与所有 VLAN 都隔离"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Separate VLAN 内的端口与 Principal 及其他 Subordinate VLAN 都隔离，只能与自己的上行口通信，隔离级别最高。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "VLAN 高级技术",
+    "knowledgePoint": "MUX VLAN",
+    "difficulty": "medium",
+    "tags": [
+      "MUX VLAN",
+      "Separate"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-1-2-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / VLAN 高级技术 / MUX VLAN」。知识点编码 hcip831-4-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "2972fd0b7d941fe4d2490eaf475afe5d514217333d631b10ac40dba7382f98f3"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-1-2-003",
+    "type": "single_choice",
+    "question": "MUX VLAN 中 Group VLAN 的特点是？",
+    "options": {
+      "A": "组内端口可以互通",
+      "B": "不能访问 Principal",
+      "C": "只能与 Separate 互通",
+      "D": "与所有端口隔离"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Group VLAN 内的端口之间可以二层互通，但不能访问其他 Group VLAN 或 Separate VLAN，可与 Principal 通信。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "VLAN 高级技术",
+    "knowledgePoint": "MUX VLAN",
+    "difficulty": "medium",
+    "tags": [
+      "MUX VLAN",
+      "Group"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-1-2-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / VLAN 高级技术 / MUX VLAN」。知识点编码 hcip831-4-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4ca0642c804219a4105284a4561cbe2078158c873f8303ed32786f405671bced"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-1-2-004",
+    "type": "single_choice",
+    "question": "MUX VLAN 的典型应用场景是？",
+    "options": {
+      "A": "同一网段内按权限隔离用户",
+      "B": "广域网互联",
+      "C": "无线漫游",
+      "D": "跨网段路由"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "MUX VLAN 常用于酒店、公寓等场景：所有用户在同一网段，但彼此隔离，只能访问网关，无需为每人划分独立 VLAN。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "VLAN 高级技术",
+    "knowledgePoint": "MUX VLAN",
+    "difficulty": "medium",
+    "tags": [
+      "MUX VLAN",
+      "场景"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-1-2-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / VLAN 高级技术 / MUX VLAN」。知识点编码 hcip831-4-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "200e8efb1ad1884b5d22411cab35432d7aa1eda57efdadc8666c453ecb0459a9"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-1-2-005",
+    "type": "single_choice",
+    "question": "MUX VLAN 中的 Subordinate VLAN 包括哪两类？",
+    "options": {
+      "A": "Separate VLAN 与 Group VLAN",
+      "B": "Ingress 与 Egress",
+      "C": "Access 与 Trunk",
+      "D": "Primary 与 Secondary"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Subordinate VLAN 分为 Separate VLAN（完全隔离）与 Group VLAN（组内互通），二者都由 Principal VLAN 统一管理。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "VLAN 高级技术",
+    "knowledgePoint": "MUX VLAN",
+    "difficulty": "medium",
+    "tags": [
+      "MUX VLAN",
+      "分类"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-1-2-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / VLAN 高级技术 / MUX VLAN」。知识点编码 hcip831-4-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "b06b7698ea0d5887731158c5189ae3ffce2b62dc90c1f7c95981ca78d623904e"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-1-2-006",
+    "type": "single_choice",
+    "question": "MUX VLAN 与端口隔离的主要区别是？",
+    "options": {
+      "A": "MUX VLAN 只能隔离三层",
+      "B": "MUX VLAN 按 VLAN 划分权限，端口隔离按端口隔离",
+      "C": "两者功能完全相同",
+      "D": "端口隔离支持组内互通"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "MUX VLAN 通过 VLAN 归属实现隔离并支持组内互通，端口隔离在同一个 VLAN 内按端口隔离，粒度更细但不支持组。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "VLAN 高级技术",
+    "knowledgePoint": "MUX VLAN",
+    "difficulty": "hard",
+    "tags": [
+      "MUX VLAN",
+      "端口隔离"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-1-2-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / VLAN 高级技术 / MUX VLAN」。知识点编码 hcip831-4-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e9bceba17b9c2c36ce55838e851254ea473a0871db282dcc7bbf0f4822bd1cb6"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-1-2-007",
+    "type": "multiple_choice",
+    "question": "MUX VLAN 可以实现下列哪些隔离效果？",
+    "options": {
+      "A": "Group 内端口互通",
+      "B": "不同 Group 之间隔离",
+      "C": "Principal 与所有端口隔离",
+      "D": "Separate 端口之间隔离"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "Principal 与所有端口互通，Separate 之间及不同 Group 之间隔离，同一 Group 内互通，这三条共同构成 MUX VLAN 的权限模型。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "VLAN 高级技术",
+    "knowledgePoint": "MUX VLAN",
+    "difficulty": "medium",
+    "tags": [
+      "MUX VLAN",
+      "隔离",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-1-2-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / VLAN 高级技术 / MUX VLAN」。知识点编码 hcip831-4-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4f246b56c3b890899984d74298e8c3a71206414bfc556ed09ea6e3b64d82c891"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-1-2-008",
+    "type": "true_false",
+    "question": "MUX VLAN 中 Separate VLAN 的端口可以与 Principal VLAN 的端口通信。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Separate 端口与同层其他 Subordinate VLAN 隔离，但可以与 Principal VLAN 的端口通信，Principal 通常连接网关。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "VLAN 高级技术",
+    "knowledgePoint": "MUX VLAN",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "MUX VLAN"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-1-2-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / VLAN 高级技术 / MUX VLAN」。知识点编码 hcip831-4-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "6169b54bb205af5c47071b4c3865865656c4058cc1979243d2ee4e500b548dcf"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-1-3-001",
+    "type": "single_choice",
+    "question": "QinQ 报文中外层 VLAN 标签通常由谁添加？",
+    "options": {
+      "A": "DHCP 服务器",
+      "B": "DNS 服务器",
+      "C": "运营商网络侧设备",
+      "D": "用户终端"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "QinQ 在用户原有标签外再压一层运营商标签，外层由运营商设备添加，用于在公网中区分不同用户或业务。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "VLAN 高级技术",
+    "knowledgePoint": "QinQ",
+    "difficulty": "easy",
+    "tags": [
+      "QinQ",
+      "外层标签"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-1-3-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / VLAN 高级技术 / QinQ」。知识点编码 hcip831-4-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "0eac49291424ca31d12cd446846c83414810f60da52c589c43cb7a0da470cf34"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-1-3-002",
+    "type": "single_choice",
+    "question": "QinQ 外层标签常用的 TPID 值是？",
+    "options": {
+      "A": "0x86DD",
+      "B": "0x88A8",
+      "C": "0x0800",
+      "D": "0x8847"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "外层标签常用 TPID 0x88A8 以区别于内层的 0x8100，设备据此识别双层标签。0x0800 是 IPv4 的以太类型。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "VLAN 高级技术",
+    "knowledgePoint": "QinQ",
+    "difficulty": "medium",
+    "tags": [
+      "QinQ",
+      "TPID"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-1-3-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / VLAN 高级技术 / QinQ」。知识点编码 hcip831-4-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "298463d3309e9dafc079d04d6372d787687ac71838d22652d20b993843595343"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-1-3-003",
+    "type": "single_choice",
+    "question": "基本 QinQ 与灵活 QinQ 的主要区别是？",
+    "options": {
+      "A": "前者必须使用 0x88A8",
+      "B": "前者支持更多标签层",
+      "C": "后者可按流分类指定外层 VLAN",
+      "D": "后者不支持内层标签"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "基本 QinQ 由接口统一指定外层 VLAN；灵活 QinQ 通过流分类按报文特征匹配不同的外层 VLAN，灵活性更高。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "VLAN 高级技术",
+    "knowledgePoint": "QinQ",
+    "difficulty": "medium",
+    "tags": [
+      "QinQ",
+      "类型"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-1-3-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / VLAN 高级技术 / QinQ」。知识点编码 hcip831-4-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4f0b09ad4277b5d43d160071d5a66787bd2adfa7f7d6d016fb48118c9fc22433"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-1-3-004",
+    "type": "single_choice",
+    "question": "QinQ 能突破 VLAN 数量限制的原因是？",
+    "options": {
+      "A": "使用了更长的 MAC 地址",
+      "B": "内外层标签组合扩展了标识空间",
+      "C": "使用了 IPv6 地址",
+      "D": "取消了 VLAN 概念"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "内层 12 位与外层 12 位组合可提供约 4094×4094 的标识空间，远大于单层 VLAN 的 4094 个。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "VLAN 高级技术",
+    "knowledgePoint": "QinQ",
+    "difficulty": "medium",
+    "tags": [
+      "QinQ",
+      "VLAN 扩展"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-1-3-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / VLAN 高级技术 / QinQ」。知识点编码 hcip831-4-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "213c06bbee3b8d578b8466720e9f9c3367ce525da0cd139e6e5e0d8a6e86f7e9"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-1-3-005",
+    "type": "single_choice",
+    "question": "QinQ 是否会修改用户的内层 VLAN 标签？",
+    "options": {
+      "A": "修改为外层值",
+      "B": "替换为 0",
+      "C": "删除内层标签",
+      "D": "不修改，原样保留"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "内层标签保留用户的 VLAN 语义，运营商只在外层增加标签，因此用户侧网络规划不受影响。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "VLAN 高级技术",
+    "knowledgePoint": "QinQ",
+    "difficulty": "medium",
+    "tags": [
+      "QinQ",
+      "内层标签"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-1-3-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / VLAN 高级技术 / QinQ」。知识点编码 hcip831-4-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "94ddfe7926bd49a9de8ad47bd4f5d438ee99ee27c5df54da574aa76357535791"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-1-3-006",
+    "type": "single_choice",
+    "question": "QinQ 部署后用户报文被丢弃，最可能的原因是？",
+    "options": {
+      "A": "ACL 未配置",
+      "B": "生成树未启用",
+      "C": "链路 MTU 不足或 TPID 不匹配",
+      "D": "DHCP 地址池过小"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "增加一层标签使报文变大，MTU 不足会被丢弃；TPID 不匹配会导致设备无法正确识别外层标签。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "VLAN 高级技术",
+    "knowledgePoint": "QinQ",
+    "difficulty": "hard",
+    "tags": [
+      "QinQ",
+      "排障"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-1-3-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / VLAN 高级技术 / QinQ」。知识点编码 hcip831-4-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "564ab3342a7504a7b7c025a73e9d05e6ab1744e787d0e8515ef3d0f3f6c1e5fa"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-1-3-007",
+    "type": "multiple_choice",
+    "question": "QinQ 的典型应用包括？",
+    "options": {
+      "A": "扩展 VLAN 数量",
+      "B": "运营商为多个用户透传私网 VLAN",
+      "C": "替代 MPLS 标签",
+      "D": "数据中心租户隔离"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "QinQ 常用于运营商接入、数据中心租户隔离与 VLAN 扩展。MPLS 标签承担的是转发与 VPN 语义，QinQ 不能替代。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "VLAN 高级技术",
+    "knowledgePoint": "QinQ",
+    "difficulty": "medium",
+    "tags": [
+      "QinQ",
+      "应用",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-1-3-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / VLAN 高级技术 / QinQ」。知识点编码 hcip831-4-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "fc64d8e544444f0f0a68880c5af93a5877ac616c93939a887367a347b83e9cd0"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-1-3-008",
+    "type": "true_false",
+    "question": "QinQ 会在用户报文外层再增加一层 VLAN 标签。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "QinQ 即 802.1Q-in-802.1Q，在原有标签外再压一层运营商标签，实现用户标识与 VLAN 扩展。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "VLAN 高级技术",
+    "knowledgePoint": "QinQ",
+    "difficulty": "easy",
+    "tags": [
+      "判断",
+      "QinQ"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-1-3-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / VLAN 高级技术 / QinQ」。知识点编码 hcip831-4-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "22e4746a9e47433942c50e36f2a3fc65023f153ef85cb3fbcdf0fd8ca17f8899"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-1-001",
+    "type": "single_choice",
+    "question": "交换机上端口隔离的主要作用是什么？",
+    "options": {
+      "A": "不同 VLAN 之间不能互通",
+      "B": "禁止端口加入 VLAN",
+      "C": "同一 VLAN 内端口之间不能二层互通",
+      "D": "禁止端口转发组播"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "端口隔离在同一 VLAN 内按端口划分隔离组，组内端口不能二层互通，但都可以与上行口通信，常用于接入层用户隔离。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "端口隔离",
+    "difficulty": "medium",
+    "tags": [
+      "端口隔离",
+      "作用"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-1-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / 端口隔离」。知识点编码 hcip831-4-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4d4cd0fd61bc199c7368e615ad667c155d85f6b26ac6c844f6101af9cd86bcfd"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-1-002",
+    "type": "single_choice",
+    "question": "端口隔离组内的端口能否与上行端口通信？",
+    "options": {
+      "A": "能，上行口通常不加入隔离组",
+      "B": "由 MAC 地址决定",
+      "C": "只能单向通信",
+      "D": "不能，完全隔离"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "上行口一般配置为不加入隔离组或使用独立的隔离模式，从而保证隔离用户仍可访问网关与外网。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "端口隔离",
+    "difficulty": "medium",
+    "tags": [
+      "端口隔离",
+      "上行"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-1-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / 端口隔离」。知识点编码 hcip831-4-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "dcff8b31516d04e704ecbbfd943169c888406392f6edd20ddead37a242088343"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-1-003",
+    "type": "single_choice",
+    "question": "端口隔离的隔离模式通常包括？",
+    "options": {
+      "A": "仅组播隔离",
+      "B": "二层隔离、三层隔离与全部隔离",
+      "C": "仅三层隔离",
+      "D": "仅二层隔离"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "华为设备支持二层隔离、三层隔离与全部隔离三种模式，可按需选择隔离的协议层次。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "端口隔离",
+    "difficulty": "medium",
+    "tags": [
+      "端口隔离",
+      "模式"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-1-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / 端口隔离」。知识点编码 hcip831-4-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "8bb3be22672c886ef4b78366729513344290c788e3ca73f751321ca86b788013"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-1-004",
+    "type": "single_choice",
+    "question": "端口隔离与 VLAN 划分的主要区别是？",
+    "options": {
+      "A": "端口隔离不支持三层",
+      "B": "VLAN 划分不能隔离广播",
+      "C": "端口隔离在同一 VLAN 内生效，粒度更细",
+      "D": "端口隔离需要更多 VLAN"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "VLAN 隔离需要为每组用户分配独立 VLAN 与网段，端口隔离在同一 VLAN 内按端口隔离，节省地址与配置。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "端口隔离",
+    "difficulty": "medium",
+    "tags": [
+      "端口隔离",
+      "VLAN"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-1-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / 端口隔离」。知识点编码 hcip831-4-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "165d3f604b6df1c886a3ca7d59919880d2b6f9f560082876d04459f5372963cf"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-1-005",
+    "type": "single_choice",
+    "question": "端口隔离与 MUX VLAN 的主要区别是？",
+    "options": {
+      "A": "端口隔离需要 MPLS",
+      "B": "两者完全相同",
+      "C": "端口隔离不支持组内互通，MUX VLAN 的 Group 支持",
+      "D": "MUX VLAN 只能隔离三层"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "端口隔离是\"全隔离\"，同组端口互不相通；MUX VLAN 的 Group VLAN 允许组内互通，表达能力更强。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "端口隔离",
+    "difficulty": "hard",
+    "tags": [
+      "端口隔离",
+      "MUX VLAN"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-1-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / 端口隔离」。知识点编码 hcip831-4-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4e4d400049a7f04a26e8042a3f3d50f496eac8148229cac795a2abc64642bc14"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-1-006",
+    "type": "single_choice",
+    "question": "端口隔离的典型应用场景是？",
+    "options": {
+      "A": "小区或宿舍接入用户之间互访隔离",
+      "B": "无线漫游",
+      "C": "广域网互联",
+      "D": "核心层高速转发"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "接入层用户通常只需要访问网关，不需要互相访问，端口隔离可在不增加 VLAN 的情况下阻止横向访问，提升安全。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "端口隔离",
+    "difficulty": "medium",
+    "tags": [
+      "端口隔离",
+      "场景"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-1-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / 端口隔离」。知识点编码 hcip831-4-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "349d7b4ee27b40320d3d112dd186b3e187cf67be85503b6bc7189d740c055683"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-1-007",
+    "type": "multiple_choice",
+    "question": "端口隔离部署时需要注意？",
+    "options": {
+      "A": "隔离组内的端口配置一致",
+      "B": "上行口不加入隔离组",
+      "C": "隔离模式选择合适",
+      "D": "必须为每个端口分配独立 VLAN"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "端口隔离不需要独立 VLAN，这正是它的优势；若为每个端口分配独立 VLAN，就退化为 VLAN 隔离方案。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "端口隔离",
+    "difficulty": "medium",
+    "tags": [
+      "端口隔离",
+      "配置",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-1-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / 端口隔离」。知识点编码 hcip831-4-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "598e0ad904200ead256cfddccdcf9729b895709344dec0945882939e16428a23"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-1-008",
+    "type": "true_false",
+    "question": "端口隔离只能在不同的 VLAN 之间生效。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "端口隔离恰恰是在同一个 VLAN 内按端口生效，用于解决同一网段内用户互访的问题。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "端口隔离",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "端口隔离"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-1-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / 端口隔离」。知识点编码 hcip831-4-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "025703bf7365508c7e3561870b70d4007d69ee6f501dd4f2f3684e91837d0176"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  }
+]

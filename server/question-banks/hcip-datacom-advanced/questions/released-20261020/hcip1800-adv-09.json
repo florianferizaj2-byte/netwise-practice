@@ -1,0 +1,1653 @@
+[
+  {
+    "id": "hcip831-5-3-2-001",
+    "type": "single_choice",
+    "question": "PE 与 CE 之间运行 OSPF 时，PE 上必须配置什么？",
+    "options": {
+      "A": "全局 OSPF 进程",
+      "B": "静态路由",
+      "C": "BGP 对等体",
+      "D": "绑定 VPN 实例的 OSPF 进程"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "PE 上要为每个 VPN 实例运行独立的 OSPF 进程并与 CE 建立邻居，再把学到的路由引入 MP-BGP，避免不同 VPN 的 OSPF 相互泄漏。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 路由交互",
+    "difficulty": "medium",
+    "tags": [
+      "VPN 路由",
+      "OSPF"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-2-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 路由交互」。知识点编码 hcip831-5-3-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "95eb9c4f28bab65b07de889d2cd263e0d57b7c77858c7b86faf92b9cc6ea4a6c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-2-002",
+    "type": "single_choice",
+    "question": "PE 把 CE 的路由通告给其他 PE，需要经过哪一步？",
+    "options": {
+      "A": "引入 VPN 实例并由 MP-BGP 通告",
+      "B": "由 LDP 通告",
+      "C": "由 P 设备中转",
+      "D": "直接由 OSPF 泛洪"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "PE 先把 CE 路由引入本地 VPN 实例，附加 RT 与私网标签，再通过 MP-BGP 以 VPNv4 形式通告给对端 PE。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 路由交互",
+    "difficulty": "medium",
+    "tags": [
+      "VPN 路由",
+      "引入"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-2-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 路由交互」。知识点编码 hcip831-5-3-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "77f664bb26ebb5d4821659758c64e4f745e95b185d2bc5c230b9bd89e30e766f"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-2-003",
+    "type": "single_choice",
+    "question": "PE 之间建立 MP-BGP 会话时，必须使能哪个地址族？",
+    "options": {
+      "A": "组播",
+      "B": "VPNv4",
+      "C": "L2VPN",
+      "D": "IPv4 单播"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "传递 VPN 路由必须使能 VPNv4 地址族（IPv4 场景），否则对等体之间只交换普通 IPv4 路由，VPN 路由无法传递。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 路由交互",
+    "difficulty": "medium",
+    "tags": [
+      "MP-BGP",
+      "地址族"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-2-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 路由交互」。知识点编码 hcip831-5-3-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "100e2012dfe8d951d7c9797bf6c673135bd838c479e453a3ef97751c62c1e15a"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-2-004",
+    "type": "single_choice",
+    "question": "VPNv4 路由的下一跳通常是？",
+    "options": {
+      "A": "CE 的接口地址",
+      "B": "对端 PE 的 Loopback 地址",
+      "C": "P 设备的接口地址",
+      "D": "虚拟 IP 地址"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "MP-BGP 通告 VPNv4 路由时把下一跳改为自身 Loopback，保证 P 设备可经公网 LSP 到达，且链路变化时下一跳稳定。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 路由交互",
+    "difficulty": "medium",
+    "tags": [
+      "VPNv4",
+      "下一跳"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-2-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 路由交互」。知识点编码 hcip831-5-3-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "60e3bfcc9daaf34e5cf285d26070dcb60f41cea629b198eea04f3952963b2bfa"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-2-005",
+    "type": "single_choice",
+    "question": "AS 内 PE 数量较多时，为避免 IBGP 全互联通常部署什么？",
+    "options": {
+      "A": "DHCP 中继",
+      "B": "PIM",
+      "C": "路由反射器",
+      "D": "LDP"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "路由反射器可以在不建立全互联的情况下反射 VPNv4 路由，大幅减少 IBGP 会话数量，是大型 MPLS VPN 的常规做法。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 路由交互",
+    "difficulty": "medium",
+    "tags": [
+      "MP-BGP",
+      "RR"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-2-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 路由交互」。知识点编码 hcip831-5-3-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "5f3ff23f377aa1d81beddf35e83dd9ea23ac3cd01875b90d19dc78eb7d7987dc"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-2-006",
+    "type": "single_choice",
+    "question": "PE 从 CE 学到路由后，export RT 的作用是？",
+    "options": {
+      "A": "决定路由的下一跳",
+      "B": "决定路由的优先级",
+      "C": "标识该路由属于哪个 VPN",
+      "D": "决定标签的分配"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "export RT 随 VPNv4 路由发布，接收端 PE 用本地 VRF 的 import RT 与之匹配，匹配成功才把路由导入对应实例。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 路由交互",
+    "difficulty": "hard",
+    "tags": [
+      "RT",
+      "导出"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-2-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 路由交互」。知识点编码 hcip831-5-3-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "c93f16f07c255bcc01d1499a0bec870aba32d90bcbaec44958cf681c849b8e40"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-2-007",
+    "type": "single_choice",
+    "question": "两个 PE 之间只配置了 IPv4 对等体，VPN 路由能否传递？",
+    "options": {
+      "A": "能，但只传递公网路由",
+      "B": "不能，必须使能 VPNv4 地址族",
+      "C": "能，IPv4 对等体自动携带 VPN 信息",
+      "D": "能，需要额外配置 LDP"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "普通 IPv4 对等体只交换 IPv4 单播路由，VPNv4 路由必须在对等体上使能对应地址族后才能传递。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 路由交互",
+    "difficulty": "medium",
+    "tags": [
+      "MP-BGP",
+      "地址族"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-2-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 路由交互」。知识点编码 hcip831-5-3-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "56e626eb8742100b6f1684314c8790654dd4645ae032cbe620cca7dc1a5cbda4"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-2-008",
+    "type": "single_choice",
+    "question": "PE 上把静态路由引入 VPN 实例使用什么命令？",
+    "options": {
+      "A": "peer static",
+      "B": "network static",
+      "C": "import-route static",
+      "D": "redistribute"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "在 BGP 的 VPN 实例视图下使用 import-route static 把静态路由引入，并附加 RT 与私网标签后通告。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 路由交互",
+    "difficulty": "medium",
+    "tags": [
+      "VPN 路由",
+      "引入"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-2-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 路由交互」。知识点编码 hcip831-5-3-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "f7536981fabc3213deb1d6338e3b766681bdb06a1fc6ac5e9ab62cacc81f3bde"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-2-009",
+    "type": "single_choice",
+    "question": "CE 双归属到两台 PE 时，为避免路由回送形成环路通常配置什么？",
+    "options": {
+      "A": "Origin 属性",
+      "B": "SoO 属性",
+      "C": "Local_Pref 属性",
+      "D": "MED 属性"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "SoO（Site of Origin）标识路由来源站点，PE 收到携带本站点 SoO 的路由时拒绝接收，防止路由在站点与 PE 之间来回传递。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 路由交互",
+    "difficulty": "medium",
+    "tags": [
+      "VPN 路由",
+      "SoO"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-2-009",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 路由交互」。知识点编码 hcip831-5-3-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d1004311649b0d32f17dce9575b80d77a7991a77a1ca460d3f0e5ff861dfe2be"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-2-010",
+    "type": "single_choice",
+    "question": "OSPF 在 MPLS VPN 中产生 3 类 LSA 环路风险时，依靠什么机制阻断？",
+    "options": {
+      "A": "RD",
+      "B": "DN 位",
+      "C": "MED",
+      "D": "RT"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "PE 把从 MP-BGP 学到的路由重发布进 OSPF 时置位 DN 位，其他 PE 收到带 DN 位的 LSA 不再重发布回 BGP，从而阻断环路。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 路由交互",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "DN 位"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-2-010",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 路由交互」。知识点编码 hcip831-5-3-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "9b6136be4edbd9aa6714b259af537fc57488b2dfaf1133a31517a4851897e10a"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-2-011",
+    "type": "single_choice",
+    "question": "OSPF sham-link 的作用是？",
+    "options": {
+      "A": "加快 OSPF 邻居建立",
+      "B": "为跨 VPN 的 OSPF 区域提供正确的最短路径",
+      "C": "替代 BGP 传递路由",
+      "D": "加密 OSPF 报文"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Sham-link 在两端 PE 之间建立一条虚拟 OSPF 链路，使区域内的 OSPF 路由按真实开销选路，避免流量绕行远端 PE。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 路由交互",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "sham-link"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-2-011",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 路由交互」。知识点编码 hcip831-5-3-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e57d54b15daf812c2e155593477359db121ea166519eeddd5b1347f81531d4b5"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-2-012",
+    "type": "single_choice",
+    "question": "OSPF domain-id 的作用是？",
+    "options": {
+      "A": "标识 PE 的 Router ID",
+      "B": "标识 VPN 实例",
+      "C": "标识接口的区域号",
+      "D": "标识 OSPF 域，用于路由引入时的匹配"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Domain-id 标识 OSPF 域，PE 在引入路由时据此判断是否属于同一域，不同域的路由以 Type 5 外部路由形式引入。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 路由交互",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "domain-id"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-2-012",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 路由交互」。知识点编码 hcip831-5-3-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "3caa192f6ccfe0488ce42f70a6fbfce6c01a9cb27a8809f4f478b70379e4c35b"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-2-013",
+    "type": "single_choice",
+    "question": "PE 上为 VPN 实例配置 RD 的目的是？",
+    "options": {
+      "A": "决定下一跳地址",
+      "B": "让相同前缀在不同 VPN 中唯一",
+      "C": "控制路由导入导出",
+      "D": "决定标签分配方式"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RD 只负责把 IPv4 前缀扩展为唯一的 VPNv4 地址，使不同 VPN 的相同网段可以同时存在于 MP-BGP 路由表中。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 路由交互",
+    "difficulty": "medium",
+    "tags": [
+      "RD"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-2-013",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 路由交互」。知识点编码 hcip831-5-3-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4e28066e95487fc835d0f9e0ba221d1f1a20d4cd67c747988cc6ada5a05f8e63"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-2-014",
+    "type": "single_choice",
+    "question": "VPNv4 路由中包含下列哪一项？",
+    "options": {
+      "A": "VLAN ID",
+      "B": "MAC 地址",
+      "C": "接口名称",
+      "D": "RD 与 IPv4 前缀"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "VPNv4 地址由 8 字节 RD 与 4 字节 IPv4 前缀组成，路由属性中再携带 RT 与私网标签。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 路由交互",
+    "difficulty": "medium",
+    "tags": [
+      "VPNv4",
+      "结构"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-2-014",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 路由交互」。知识点编码 hcip831-5-3-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "151d6076c75ceded31aafd21234e434ec8e9b3c6f87599da1fe5b65455e2bd14"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-2-015",
+    "type": "multiple_choice",
+    "question": "PE 与 CE 之间可以运行下列哪些路由协议？",
+    "options": {
+      "A": "静态路由",
+      "B": "OSPF",
+      "C": "BGP",
+      "D": "IGMP"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "PE-CE 之间支持静态路由、OSPF、IS-IS、BGP 等单播路由协议。IGMP 是组播成员管理协议，不用于单播路由交互。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 路由交互",
+    "difficulty": "medium",
+    "tags": [
+      "VPN 路由",
+      "CE-PE",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-2-015",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 路由交互」。知识点编码 hcip831-5-3-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "6dabbc288b72d0835b4a79e57cb3da2446863c63a7d6a3025f283987aa451284"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-2-016",
+    "type": "multiple_choice",
+    "question": "VPNv4 路由携带下列哪些信息？",
+    "options": {
+      "A": "RD",
+      "B": "VLAN ID",
+      "C": "私网标签",
+      "D": "RT"
+    },
+    "answer": [
+      "A",
+      "C",
+      "D"
+    ],
+    "analysis": "VPNv4 路由携带 RD、RT 与私网标签，三者分别解决前缀唯一性、导入导出控制与转发标识。VLAN ID 与 MPLS VPN 无关。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 路由交互",
+    "difficulty": "medium",
+    "tags": [
+      "VPNv4",
+      "属性",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-2-016",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 路由交互」。知识点编码 hcip831-5-3-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "f045facb20ad6e7ed5d75ce222ec0b365c269387840dca42d425daf78d57d3b0"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-2-017",
+    "type": "true_false",
+    "question": "PE 之间的 MP-BGP 会话建立后，VPN 路由即可自动传递，无需使能地址族。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "必须在对等体上使能 VPNv4 地址族并激活，否则会话虽然 Up，但不会交换任何 VPNv4 路由。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 路由交互",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "MP-BGP"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-2-017",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 路由交互」。知识点编码 hcip831-5-3-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "fd33b79cc097aa48ae8e01f7b6ff8a149458d0944ceaf0f89d380bf09af75199"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-2-018",
+    "type": "true_false",
+    "question": "CE 需要运行 MP-BGP 才能接入 MPLS VPN。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "CE 只需与 PE 运行常规路由协议或静态路由，MP-BGP 与标签处理全部由 PE 完成。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 路由交互",
+    "difficulty": "easy",
+    "tags": [
+      "判断",
+      "CE"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-2-018",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 路由交互」。知识点编码 hcip831-5-3-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "1b92f04c2cd0da13cc54d4c83c8c395a7e36a2d79ff101d91a5bba986f72c119"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-2-019",
+    "type": "single_choice",
+    "question": "某 VPN 站点之间不通，PE 上能看到 VPNv4 路由但未进入 VRF，最可能的原因是？",
+    "options": {
+      "A": "RD 不匹配",
+      "B": "LDP 会话中断",
+      "C": "RT 不匹配",
+      "D": "接口未配置 IP"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "路由已到达但未导入 VRF，说明 import RT 与对端 export RT 没有交集。RD 不匹配不影响导入判断。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 路由交互",
+    "difficulty": "hard",
+    "tags": [
+      "VPN 路由",
+      "排障"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-2-019",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 路由交互」。知识点编码 hcip831-5-3-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "598fd2bb201c7d3ea4d6fc3cd4617be711f11675b0fcec22f4318c3c5e1d8b56"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-2-020",
+    "type": "single_choice",
+    "question": "跨域 MPLS VPN 的 Option A 方案的特点是？",
+    "options": {
+      "A": "使用静态路由",
+      "B": "ASBR 之间为每个 VPN 建立子接口",
+      "C": "ASBR 之间传递 VPNv4 路由",
+      "D": "使用多跳 MP-EBGP"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Option A 在 ASBR 之间为每个 VPN 建立独立的子接口与 VRF，逐 VPN 交换 IPv4 路由，配置量大但实现简单。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 路由交互",
+    "difficulty": "medium",
+    "tags": [
+      "跨域",
+      "Option A"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-2-020",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 路由交互」。知识点编码 hcip831-5-3-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "f8ce251c75088e0a2341608ce126715384e45fdf92323077c598762f86b64736"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-2-021",
+    "type": "single_choice",
+    "question": "跨域 MPLS VPN 的 Option B 方案的特点是？",
+    "options": {
+      "A": "逐 VPN 建立子接口",
+      "B": "只支持静态路由",
+      "C": "不使用 BGP",
+      "D": "ASBR 之间交换 VPNv4 路由"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Option B 让 ASBR 之间建立 MP-EBGP 并交换 VPNv4 路由，ASBR 需要保存 VPN 路由，扩展性优于 Option A。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 路由交互",
+    "difficulty": "medium",
+    "tags": [
+      "跨域",
+      "Option B"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-2-021",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 路由交互」。知识点编码 hcip831-5-3-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "8f2de920d0d7e29cb4822d05ce2d1f784134fce2aa3fcad50f10ddae7aab1a29"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-2-022",
+    "type": "single_choice",
+    "question": "跨域 MPLS VPN 的 Option C 方案的特点是？",
+    "options": {
+      "A": "不使用路由反射器",
+      "B": "ASBR 之间只传带标签的 IPv4 路由",
+      "C": "逐 VPN 建立子接口",
+      "D": "不支持标签转发"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Option C 中 ASBR 之间只交换带标签的 IPv4 路由，VPNv4 路由通过多跳 MP-EBGP 在 PE 之间直接传递，扩展性最好。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 路由交互",
+    "difficulty": "hard",
+    "tags": [
+      "跨域",
+      "Option C"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-2-022",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 路由交互」。知识点编码 hcip831-5-3-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "b96374e225fd16a0fa7e238349caf9145e28c50b0e4633bb5d0efad88ad286ad"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-2-023",
+    "type": "single_choice",
+    "question": "PE 上配置 VPN 实例后，连接 CE 的接口需要做什么？",
+    "options": {
+      "A": "配置为 Trunk",
+      "B": "绑定到该 VPN 实例",
+      "C": "启用 LDP",
+      "D": "加入全局路由表"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "接口必须绑定 VPN 实例，报文进入后才会查该实例的路由表。未绑定的接口仍按全局路由表转发。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 路由交互",
+    "difficulty": "medium",
+    "tags": [
+      "VPN 路由",
+      "接口绑定"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-2-023",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 路由交互」。知识点编码 hcip831-5-3-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "b48f15d545963f7eec0babb4f87e85161a5a66277144d6f4083b9a049dc17c1f"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-2-024",
+    "type": "single_choice",
+    "question": "PE 从 MP-BGP 学到 VPNv4 路由后，向 CE 通告时执行什么操作？",
+    "options": {
+      "A": "保留 RT 一起通告",
+      "B": "保留私网标签",
+      "C": "转换为 VPNv4 路由",
+      "D": "转换为普通 IPv4 路由并去掉 RT"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "CE 不识别 VPN 属性，PE 把 VPNv4 路由还原为普通 IPv4 路由注入对应实例，RT 与私网标签在 PE 内部使用。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 路由交互",
+    "difficulty": "medium",
+    "tags": [
+      "VPN 路由",
+      "通告"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-2-024",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 路由交互」。知识点编码 hcip831-5-3-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "2417a25516cb1efa878d17c2220b9d9f8ce55f446e6f33223efd6cca61fe9cb0"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-3-001",
+    "type": "single_choice",
+    "question": "ingress PE 转发 VPN 报文时压入几层标签？",
+    "options": {
+      "A": "三层",
+      "B": "一层",
+      "C": "两层",
+      "D": "零层"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "ingress PE 先压私网标签标识 VPN 与出接口，再压公网标签用于 P 设备转发，共两层。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 报文转发",
+    "difficulty": "easy",
+    "tags": [
+      "报文转发",
+      "标签栈"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-3-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 报文转发」。知识点编码 hcip831-5-3-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4d2eee72764a6a2d94c3656583841f438be1b2f49d6a99f689a7e2ad60b2248e"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-3-002",
+    "type": "single_choice",
+    "question": "公网标签由哪类协议分配？",
+    "options": {
+      "A": "OSPF",
+      "B": "IGMP",
+      "C": "MP-BGP",
+      "D": "LDP 或 RSVP-TE"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "公网标签由 LDP 或 RSVP-TE 分配，用于在 P 网络内转发；私网标签由 MP-BGP 分配。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 报文转发",
+    "difficulty": "easy",
+    "tags": [
+      "报文转发",
+      "公网标签"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-3-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 报文转发」。知识点编码 hcip831-5-3-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "0ec31cd2ffaca28e1db937e9af25e32367b6ce28f3be1316715c36158ab27416"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-3-003",
+    "type": "single_choice",
+    "question": "P 设备转发 VPN 报文时执行什么操作？",
+    "options": {
+      "A": "交换内层私网标签",
+      "B": "弹出两层标签",
+      "C": "压入私网标签",
+      "D": "交换外层公网标签"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "P 设备只看外层公网标签，做 Swap 后转发，完全不感知内层私网标签与 VPN 信息。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 报文转发",
+    "difficulty": "medium",
+    "tags": [
+      "报文转发",
+      "P 设备"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-3-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 报文转发」。知识点编码 hcip831-5-3-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "6aa3a34456fb44a1171b326d7d0358efb467e4c8201d67a726a92874944c9108"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-3-004",
+    "type": "single_choice",
+    "question": "egress PE 收到 VPN 报文后的处理顺序是？",
+    "options": {
+      "A": "先弹私网标签，再弹公网标签",
+      "B": "先弹公网标签，再按私网标签找实例",
+      "C": "只弹公网标签",
+      "D": "只弹私网标签"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "egress PE 先弹出外层公网标签，露出私网标签后用其索引 VPN 实例与出接口，再弹出私网标签把报文送到 CE。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 报文转发",
+    "difficulty": "medium",
+    "tags": [
+      "报文转发",
+      "egress"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-3-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 报文转发」。知识点编码 hcip831-5-3-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e6f45b3070392e09bae10ab0321f572b76a60482c8ae629a9c35f544111adca9"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-3-005",
+    "type": "single_choice",
+    "question": "PE 与 CE 之间传递的报文是什么格式？",
+    "options": {
+      "A": "带一层标签的报文",
+      "B": "VXLAN 封装报文",
+      "C": "普通 IP 报文",
+      "D": "带两层标签的报文"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "PE 与 CE 之间是纯 IP 转发，标签在 PE 入口压入、出口弹出，CE 完全不感知 MPLS。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 报文转发",
+    "difficulty": "medium",
+    "tags": [
+      "报文转发",
+      "CE"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-3-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 报文转发」。知识点编码 hcip831-5-3-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "255ec25e0b7ccce40cf75e1be597566575218de4a6aaa2dec894cd4d5bdb7647"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-3-006",
+    "type": "single_choice",
+    "question": "私网标签的作用范围是？",
+    "options": {
+      "A": "全网唯一有效",
+      "B": "仅在 CE 有效",
+      "C": "本地 PE 有效",
+      "D": "仅在 P 设备有效"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "私网标签由 egress PE 本地分配，只在\"ingress PE 到 egress PE\"这条路径上有意义，不同 PE 可以使用相同的标签值。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 报文转发",
+    "difficulty": "medium",
+    "tags": [
+      "报文转发",
+      "私网标签"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-3-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 报文转发」。知识点编码 hcip831-5-3-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "761cd849c316e1e834518f27ed10aabfd45a7bc846675eedb225e2498bd35d53"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-3-007",
+    "type": "single_choice",
+    "question": "VPN 报文在 MPLS 域中的 TTL 如何处理？",
+    "options": {
+      "A": "只在入口递减",
+      "B": "只在出口递减",
+      "C": "保持不变",
+      "D": "复制到标签 TTL 并逐跳递减"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "入 PE 把 IP TTL 复制到标签 TTL，P 设备逐跳递减，出 PE 再写回 IP 头，用于防止转发环路。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 报文转发",
+    "difficulty": "medium",
+    "tags": [
+      "报文转发",
+      "TTL"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-3-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 报文转发」。知识点编码 hcip831-5-3-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "65cdfbd70a4b12aad6dad415d0f71e18495e4fc68823ec9ed734dca16dfed976"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-3-008",
+    "type": "single_choice",
+    "question": "MPLS VPN 中 PHP 发生在什么位置？",
+    "options": {
+      "A": "CE 侧",
+      "B": "egress PE，弹出私网标签",
+      "C": "ingress PE，弹出私网标签",
+      "D": "倒数第二跳，弹出公网标签"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "P 网络中的倒数第二跳执行 PHP 弹出公网标签，egress PE 收到的是只带私网标签的报文，减少一次标签处理。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 报文转发",
+    "difficulty": "hard",
+    "tags": [
+      "报文转发",
+      "PHP"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-3-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 报文转发」。知识点编码 hcip831-5-3-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "7069d9edc03136d00c6f97c2c49899d2a4cd44e28aa7c370c8f9be8d1a5394e7"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-3-009",
+    "type": "single_choice",
+    "question": "ingress PE 如何确定私网标签？",
+    "options": {
+      "A": "由 LDP 分配",
+      "B": "由 P 设备分配",
+      "C": "查 VRF 路由表得到下一跳与标签",
+      "D": "由 CE 告知"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "ingress PE 在绑定接口的 VRF 中查表，得到目的前缀对应的私网标签与下一跳 PE，再压公网标签送往该 PE。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 报文转发",
+    "difficulty": "medium",
+    "tags": [
+      "报文转发",
+      "查表"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-3-009",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 报文转发」。知识点编码 hcip831-5-3-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "7c40f2e8672857454524cd061cbb570ee6543d8f38f47cb4aee0935857b703f4"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-3-010",
+    "type": "single_choice",
+    "question": "VPN 报文在 P 设备上丢弃，最可能的原因是？",
+    "options": {
+      "A": "RT 配置错误",
+      "B": "外层标签无法匹配 ILM",
+      "C": "内层标签无法匹配",
+      "D": "CE 未配置路由"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "P 设备只处理外层标签，若外层标签未匹配任何 ILM 表项，报文会被直接丢弃，与内层标签和 RT 无关。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 报文转发",
+    "difficulty": "medium",
+    "tags": [
+      "报文转发",
+      "排障"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-3-010",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 报文转发」。知识点编码 hcip831-5-3-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e378f31e8f2067284a61619f6c4edf779250f0fafccd3a53ba90922f16438dde"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-3-011",
+    "type": "multiple_choice",
+    "question": "VPN 报文转发过程中涉及的标签操作包括？",
+    "options": {
+      "A": "CE 弹出私网标签",
+      "B": "ingress PE 压入私网标签",
+      "C": "ingress PE 压入公网标签",
+      "D": "P 设备交换公网标签"
+    },
+    "answer": [
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "标签的压入与交换发生在 PE 与 P 上，弹出由 egress PE 完成，CE 不参与任何标签操作。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 报文转发",
+    "difficulty": "medium",
+    "tags": [
+      "报文转发",
+      "操作",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-3-011",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 报文转发」。知识点编码 hcip831-5-3-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "ec1c060d936a4f5ac90d2d0c1ff447361834b36cb78eda345876114b821ac7ed"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-3-012",
+    "type": "multiple_choice",
+    "question": "关于私网标签，正确的有？",
+    "options": {
+      "A": "随 VPNv4 路由通告",
+      "B": "只在本地 PE 有意义",
+      "C": "必须全网唯一",
+      "D": "由 egress PE 分配"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "私网标签由 egress PE 分配并通过 MP-BGP 通告，仅在对应路径上有意义，因此不同 PE 可以使用相同值。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 报文转发",
+    "difficulty": "medium",
+    "tags": [
+      "报文转发",
+      "私网标签",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-3-012",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 报文转发」。知识点编码 hcip831-5-3-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "58e3250c32d4e4319c4f8bd722c5d71c58d4ab9239b7f843458e8ffebd5ce75f"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-3-013",
+    "type": "true_false",
+    "question": "P 设备需要保存 VPN 实例才能转发 VPN 报文。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "P 设备只按外层公网标签转发，不需要 VPN 实例。这正是 MPLS VPN 能够承载大量 VPN 而不增加核心设备负担的原因。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 报文转发",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "P 设备"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-3-013",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 报文转发」。知识点编码 hcip831-5-3-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e83e69f098e2e1efb6629689ba619218f8cdc678c8eb0e39a889638a1034710e"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-3-014",
+    "type": "true_false",
+    "question": "VPN 报文在 MPLS 域中携带两层标签。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "外层公网标签用于 P 网络转发，内层私网标签用于 PE 区分 VPN 与出接口，因此通常是两层标签。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 报文转发",
+    "difficulty": "easy",
+    "tags": [
+      "判断",
+      "标签栈"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-3-014",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 报文转发」。知识点编码 hcip831-5-3-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "ea83431138a0c93d527f8e0dd8764dc2ad342e1f0fb8f179fe25a29ac3c165b6"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-3-015",
+    "type": "single_choice",
+    "question": "两台 PE 之间的公网 LSP 中断，VPN 业务会怎样？",
+    "options": {
+      "A": "业务不受影响",
+      "B": "自动切换到 IP 转发",
+      "C": "业务中断，直到 LSP 重建",
+      "D": "自动改用静态路由"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "VPN 报文依赖公网 LSP 承载，LSP 中断后报文在 P 设备被丢弃，需等待 LDP 或 IGP 收敛重建 LSP 才能恢复。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 报文转发",
+    "difficulty": "medium",
+    "tags": [
+      "报文转发",
+      "故障"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-3-015",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 报文转发」。知识点编码 hcip831-5-3-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "9aaea4b869461c042da59340fe8c67365cec04ea2f6e3df9875d391ab5a5cb2b"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-3-016",
+    "type": "single_choice",
+    "question": "VPN 报文的出接口由什么决定？",
+    "options": {
+      "A": "egress PE 上的私网标签与 VRF 表项",
+      "B": "ingress PE 的公网标签",
+      "C": "CE 的 ARP 表",
+      "D": "P 设备的公网标签"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "egress PE 用私网标签定位 VPN 实例与出接口，再通过 ARP 解析 CE 的 MAC 地址完成二层封装。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 报文转发",
+    "difficulty": "medium",
+    "tags": [
+      "报文转发",
+      "出接口"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-3-016",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 报文转发」。知识点编码 hcip831-5-3-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4e78dc420d018d496b6337a80e015c5d10f973cd4cba137c87d0ffa9fcd440f7"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-3-017",
+    "type": "single_choice",
+    "question": "MPLS VPN 是否支持报文在 PE 之间的负载分担？",
+    "options": {
+      "A": "支持，多条等价 LSP 可分担",
+      "B": "只支持组播分担",
+      "C": "不支持，只能单路径",
+      "D": "只支持静态分担"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "当存在多条等价的公网 LSP 时，可以按标签或五元组做负载分担，与普通 MPLS 转发的等价路径处理方式一致。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 报文转发",
+    "difficulty": "hard",
+    "tags": [
+      "报文转发",
+      "负载分担"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-3-017",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 报文转发」。知识点编码 hcip831-5-3-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "9819cfb86f0cb4213dbc04812ba3bfed3f693509201a51b71ed6ea63c0aaad62"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-3-018",
+    "type": "single_choice",
+    "question": "VPN 报文的封装层次自上而下是？",
+    "options": {
+      "A": "二层头、私网标签、公网标签、IP 头",
+      "B": "IP 头、公网标签、私网标签",
+      "C": "二层头、公网标签、私网标签、IP 头",
+      "D": "二层头、IP 头、两层标签"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "外层是链路层帧头，其内依次是公网标签、私网标签与原始 IP 报文。标签顺序颠倒会导致转发错误。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 报文转发",
+    "difficulty": "medium",
+    "tags": [
+      "报文转发",
+      "封装"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-3-018",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 报文转发」。知识点编码 hcip831-5-3-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "8378473b0ceb2752e8dbbc9ca513134f4bb5bfbf54daf1aea2bf1e6967217054"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-3-019",
+    "type": "single_choice",
+    "question": "ingress PE 上私网标签的分配者是？",
+    "options": {
+      "A": "CE",
+      "B": "目的端 egress PE",
+      "C": "ingress PE 自己",
+      "D": "P 设备"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "私网标签由 egress PE 按本地 VPN 实例分配，随 VPNv4 路由通告给 ingress PE 使用，保证出口能正确识别实例。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 报文转发",
+    "difficulty": "medium",
+    "tags": [
+      "报文转发",
+      "分配"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-3-019",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 报文转发」。知识点编码 hcip831-5-3-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d78d60526269afdf49e61b4e11373be2e5d08444a0d3a095ba720e762e5c01ac"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-3-020",
+    "type": "single_choice",
+    "question": "MPLS MTU 不足时 VPN 报文如何处理？",
+    "options": {
+      "A": "可能被丢弃或分片，需调整 MTU",
+      "B": "自动降低标签层数",
+      "C": "自动压缩报文",
+      "D": "自动改用 IP 转发"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "压入两层标签后报文变大，若超过链路 MTU 且不允许分片就会被丢弃。通常需要调大接口 MTU 或调整 TCP MSS。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 报文转发",
+    "difficulty": "medium",
+    "tags": [
+      "报文转发",
+      "MTU"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-3-020",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 报文转发」。知识点编码 hcip831-5-3-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "86e041c2b2636b00e829fe4da25c57570b44630921e6a7117a9b7133590ff244"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-3-021",
+    "type": "single_choice",
+    "question": "VPN 报文经过 P 设备时，内层私网标签是否被修改？",
+    "options": {
+      "A": "不修改，原样透传",
+      "B": "被压入新值",
+      "C": "被交换为新值",
+      "D": "被弹出"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "P 设备不感知私网标签，原样透传；只有 egress PE 才会弹出私网标签。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 报文转发",
+    "difficulty": "medium",
+    "tags": [
+      "报文转发",
+      "透传"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-3-021",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 报文转发」。知识点编码 hcip831-5-3-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "75cd54ea0d2b1e46a9926d3f34e9063d756d721dee8c928398b9079be87cad08"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-3-022",
+    "type": "multiple_choice",
+    "question": "下列哪些情况会导致 VPN 报文被丢弃？",
+    "options": {
+      "A": "MTU 不足且禁止分片",
+      "B": "egress PE 无对应 VPN 实例",
+      "C": "CE 未启用 LDP",
+      "D": "外层标签无法匹配"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "外层标签不匹配、MTU 溢出、出口缺少实例都会导致丢弃。CE 不运行 LDP，未启用不影响转发。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 报文转发",
+    "difficulty": "medium",
+    "tags": [
+      "报文转发",
+      "丢包",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-3-022",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 报文转发」。知识点编码 hcip831-5-3-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d41146cd6a7f567bdf991d285009a5d224dc9437861f35f0b9d816f18863b0e6"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-3-3-023",
+    "type": "single_choice",
+    "question": "VPN 报文的转发路径可以概括为？",
+    "options": {
+      "A": "CE 到 PE 弹标签，P 交换",
+      "B": "CE 到 PE 压标签，P 交换，PE 弹标签到 CE",
+      "C": "全程只压一层标签",
+      "D": "全程无标签"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "完整路径为 CE 发普通 IP 报文，ingress PE 压两层标签，P 交换外层标签，egress PE 弹标签后送 CE。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 报文转发",
+    "difficulty": "medium",
+    "tags": [
+      "报文转发",
+      "路径"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-3-3-023",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 报文转发」。知识点编码 hcip831-5-3-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "59589fdd233845e87ca7b36a57967d5fe549b1e90aa5ae0c55d1a0a20aa9d01c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  }
+]

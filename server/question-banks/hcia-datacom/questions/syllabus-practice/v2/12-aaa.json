@@ -1,0 +1,465 @@
+[
+  {
+    "id": "hcia-v3-12-001",
+    "type": "single_choice",
+    "question": "AAA 中的第一个 A 指的是什么？",
+    "options": {
+      "A": "认证，验证用户身份是否合法",
+      "B": "授权，决定用户可执行的操作",
+      "C": "计费，记录用户使用资源的情况",
+      "D": "审计，检查配置变更记录"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "AAA 为 Authentication、Authorization、Accounting。认证解决“你是谁”，授权解决“你能做什么”，计费解决“你用了多少”。",
+    "chapter": "AAA 原理与配置",
+    "knowledgeSection": "AAA 框架",
+    "knowledgePoint": "认证（Authentication）",
+    "difficulty": "easy",
+    "tags": [
+      "AAA 原理与配置",
+      "AAA 框架",
+      "认证（Authentication）"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-12-002",
+    "type": "single_choice",
+    "question": "用户通过认证后，系统判断其可以执行哪些命令，这属于 AAA 的哪个环节？",
+    "options": {
+      "A": "授权",
+      "B": "加密",
+      "C": "认证",
+      "D": "计费"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "授权在认证之后进行，依据用户属性下发权限级别或命令集合，决定用户能做哪些操作。",
+    "chapter": "AAA 原理与配置",
+    "knowledgeSection": "AAA 框架",
+    "knowledgePoint": "授权（Authorization）",
+    "difficulty": "medium",
+    "tags": [
+      "AAA 原理与配置",
+      "AAA 框架",
+      "授权（Authorization）"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-12-003",
+    "type": "single_choice",
+    "question": "AAA 中计费功能的主要作用是什么？",
+    "options": {
+      "A": "决定用户可用的命令级别",
+      "B": "验证用户口令是否正确",
+      "C": "记录用户上线时间、流量等使用信息",
+      "D": "为报文提供加密通道"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "计费用于记录与统计，是运营与审计的基础；它不参与身份验证，也不决定权限。",
+    "chapter": "AAA 原理与配置",
+    "knowledgeSection": "AAA 框架",
+    "knowledgePoint": "计费（Accounting）",
+    "difficulty": "medium",
+    "tags": [
+      "AAA 原理与配置",
+      "AAA 框架",
+      "计费（Accounting）"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-12-004",
+    "type": "true_false",
+    "question": "AAA 的三个环节必须全部启用，否则用户无法登录设备。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "三个环节可独立启用，常见配置只做认证与授权而不做计费。是否启用取决于管理需求。",
+    "chapter": "AAA 原理与配置",
+    "knowledgeSection": "AAA 框架",
+    "knowledgePoint": "认证（Authentication）",
+    "difficulty": "medium",
+    "tags": [
+      "AAA 原理与配置",
+      "AAA 框架",
+      "认证（Authentication）"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-12-005",
+    "type": "single_choice",
+    "question": "在设备本地创建用户名为 admin、密码为 Huawei@123 的账户，正确命令是？",
+    "options": {
+      "A": "username admin Huawei@123",
+      "B": "user admin password Huawei@123",
+      "C": "local-user admin password irreversible-cipher Huawei@123",
+      "D": "aaa user admin Huawei@123"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "华为在 AAA 视图下用 local-user 创建本地用户，密码推荐使用 irreversible-cipher 加密存储，避免明文泄露。",
+    "chapter": "AAA 原理与配置",
+    "knowledgeSection": "认证方式与服务器",
+    "knowledgePoint": "本地认证",
+    "difficulty": "medium",
+    "tags": [
+      "AAA 原理与配置",
+      "认证方式与服务器",
+      "本地认证"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-12-006",
+    "type": "single_choice",
+    "question": "本地认证相比服务器认证的主要局限是什么？",
+    "options": {
+      "A": "本地认证只能用于 Console 登录",
+      "B": "本地认证不支持任何加密",
+      "C": "用户信息分散在各设备，难以集中管理与统一策略",
+      "D": "本地认证无法设置密码"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "本地认证部署简单、无外部依赖，但每台设备都要单独维护账户，用户量大时运维成本高，适合小型网络或应急登录。",
+    "chapter": "AAA 原理与配置",
+    "knowledgeSection": "认证方式与服务器",
+    "knowledgePoint": "本地认证",
+    "difficulty": "medium",
+    "tags": [
+      "AAA 原理与配置",
+      "认证方式与服务器",
+      "本地认证"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-12-007",
+    "type": "true_false",
+    "question": "本地用户的密码可以使用 irreversible-cipher 方式存储，使配置文件中不出现明文口令。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "不可逆加密存储可防止通过查看配置直接获取口令，是设备安全基线的基本要求。",
+    "chapter": "AAA 原理与配置",
+    "knowledgeSection": "认证方式与服务器",
+    "knowledgePoint": "本地认证",
+    "difficulty": "easy",
+    "tags": [
+      "AAA 原理与配置",
+      "认证方式与服务器",
+      "本地认证"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-12-008",
+    "type": "single_choice",
+    "question": "RADIUS 协议使用的默认认证与计费端口分别是？",
+    "options": {
+      "A": "1645 与 1646",
+      "B": "1812 与 1813",
+      "C": "49 与 50",
+      "D": "1812 与 1814"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RADIUS 认证 1812、计费 1813，基于 UDP；早期私有实现使用 1645 与 1646，49 是 TACACS 的端口。",
+    "chapter": "AAA 原理与配置",
+    "knowledgeSection": "认证方式与服务器",
+    "knowledgePoint": "RADIUS 协议",
+    "difficulty": "medium",
+    "tags": [
+      "AAA 原理与配置",
+      "认证方式与服务器",
+      "RADIUS 协议"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-12-009",
+    "type": "single_choice",
+    "question": "RADIUS 使用什么作为与客户端之间的安全凭据？",
+    "options": {
+      "A": "共享密钥（shared key）",
+      "B": "MAC 地址白名单",
+      "C": "数字证书",
+      "D": "设备序列号"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "客户端与服务器必须配置相同的共享密钥，用于校验报文完整性与加密口令字段，密钥不一致会导致认证失败。",
+    "chapter": "AAA 原理与配置",
+    "knowledgeSection": "认证方式与服务器",
+    "knowledgePoint": "RADIUS 协议",
+    "difficulty": "medium",
+    "tags": [
+      "AAA 原理与配置",
+      "认证方式与服务器",
+      "RADIUS 协议"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-12-010",
+    "type": "true_false",
+    "question": "RADIUS 协议基于 UDP，因此需要应用层自身的重传机制保证可靠性。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "RADIUS 在超时后重发请求，若多次无响应则尝试备用服务器，这是配置主备认证服务器时的判断依据。",
+    "chapter": "AAA 原理与配置",
+    "knowledgeSection": "认证方式与服务器",
+    "knowledgePoint": "RADIUS 协议",
+    "difficulty": "medium",
+    "tags": [
+      "AAA 原理与配置",
+      "认证方式与服务器",
+      "RADIUS 协议"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-12-011",
+    "type": "single_choice",
+    "question": "HWTACACS 相比 RADIUS 的主要优势是什么？",
+    "options": {
+      "A": "不需要共享密钥",
+      "B": "支持命令级别的精细授权",
+      "C": "只支持无线接入认证",
+      "D": "报文更小传输更快"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "HWTACACS 基于 TCP，支持对每条命令做授权控制，适合设备管理场景；RADIUS 更偏向网络接入认证。",
+    "chapter": "AAA 原理与配置",
+    "knowledgeSection": "认证方式与服务器",
+    "knowledgePoint": "HWTACACS 协议",
+    "difficulty": "hard",
+    "tags": [
+      "AAA 原理与配置",
+      "认证方式与服务器",
+      "HWTACACS 协议"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-12-012",
+    "type": "true_false",
+    "question": "HWTACACS 使用 TCP 传输，端口号为 49。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "HWTACACS 基于 TCP 49，可靠性由传输层保证；RADIUS 基于 UDP 1812 与 1813，两者传输层选择不同。",
+    "chapter": "AAA 原理与配置",
+    "knowledgeSection": "认证方式与服务器",
+    "knowledgePoint": "HWTACACS 协议",
+    "difficulty": "medium",
+    "tags": [
+      "AAA 原理与配置",
+      "认证方式与服务器",
+      "HWTACACS 协议"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-12-013",
+    "type": "single_choice",
+    "question": "在 VTY 用户界面下配置 authentication-mode aaa，含义是什么？",
+    "options": {
+      "A": "登录时使用 AAA 方案进行认证",
+      "B": "只使用口令认证不校验用户名",
+      "C": "登录时不需要任何认证",
+      "D": "仅允许 Console 登录"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "authentication-mode 可设为 aaa、password 或 none。选 aaa 时由 AAA 方案决定使用本地用户还是服务器认证。",
+    "chapter": "AAA 原理与配置",
+    "knowledgeSection": "AAA 配置与域管理",
+    "knowledgePoint": "认证模式配置",
+    "difficulty": "medium",
+    "tags": [
+      "AAA 原理与配置",
+      "AAA 配置与域管理",
+      "认证模式配置"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-12-014",
+    "type": "single_choice",
+    "question": "authentication-mode password 与 authentication-mode aaa 的区别是什么？",
+    "options": {
+      "A": "前者需要服务器，后者使用本地用户",
+      "B": "两者完全等价",
+      "C": "前者只校验口令，后者校验用户名与口令",
+      "D": "前者只能用于 Console"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "password 模式只要求输入一个公共口令，不区分用户身份；aaa 模式需要用户名，便于审计与差异化授权。",
+    "chapter": "AAA 原理与配置",
+    "knowledgeSection": "AAA 配置与域管理",
+    "knowledgePoint": "认证模式配置",
+    "difficulty": "medium",
+    "tags": [
+      "AAA 原理与配置",
+      "AAA 配置与域管理",
+      "认证模式配置"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-12-015",
+    "type": "true_false",
+    "question": "authentication-mode none 表示登录设备不需要任何认证，属于高风险配置。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "none 模式允许无凭据直接登录，任何能接触网络的人都可以操作设备，安全基线检查中通常判定为高危项。",
+    "chapter": "AAA 原理与配置",
+    "knowledgeSection": "AAA 配置与域管理",
+    "knowledgePoint": "认证模式配置",
+    "difficulty": "easy",
+    "tags": [
+      "AAA 原理与配置",
+      "AAA 配置与域管理",
+      "认证模式配置"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-12-016",
+    "type": "single_choice",
+    "question": "AAA 中“域”的主要作用是什么？",
+    "options": {
+      "A": "指定设备的 IP 地址段",
+      "B": "限制接口的物理速率",
+      "C": "划分 VLAN 广播域",
+      "D": "对不同来源或类型的用户应用不同的认证与授权策略"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "域把用户分组并绑定各自的认证方案与服务器，例如管理员域走本地认证、员工域走 RADIUS，实现策略隔离。",
+    "chapter": "AAA 原理与配置",
+    "knowledgeSection": "AAA 配置与域管理",
+    "knowledgePoint": "域与用户级别",
+    "difficulty": "medium",
+    "tags": [
+      "AAA 原理与配置",
+      "AAA 配置与域管理",
+      "域与用户级别"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-12-017",
+    "type": "single_choice",
+    "question": "为本地用户 admin 指定权限级别 15，应使用哪条命令？",
+    "options": {
+      "A": "aaa admin level 15",
+      "B": "local-user admin level 15",
+      "C": "user admin privilege 15",
+      "D": "local-user admin privilege level 15"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "local-user 视图下用 privilege level 指定级别，15 为最高权限；同时还需配置 service-type 才能用于远程登录。",
+    "chapter": "AAA 原理与配置",
+    "knowledgeSection": "AAA 配置与域管理",
+    "knowledgePoint": "域与用户级别",
+    "difficulty": "medium",
+    "tags": [
+      "AAA 原理与配置",
+      "AAA 配置与域管理",
+      "域与用户级别"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-12-018",
+    "type": "single_choice",
+    "question": "本地用户配置了密码与级别，但无法通过 Telnet 登录，最可能缺少哪项配置？",
+    "options": {
+      "A": "未开启 STP",
+      "B": "未配置 NTP",
+      "C": "未配置默认路由",
+      "D": "未配置 service-type telnet"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "local-user 必须指定允许的服务类型（telnet、ssh、http 等），未指定则该用户不能用于对应登录方式。",
+    "chapter": "AAA 原理与配置",
+    "knowledgeSection": "AAA 配置与域管理",
+    "knowledgePoint": "授权与计费配置",
+    "difficulty": "hard",
+    "tags": [
+      "AAA 原理与配置",
+      "AAA 配置与域管理",
+      "授权与计费配置"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-12-019",
+    "type": "true_false",
+    "question": "启用计费后，设备会向计费服务器上报用户的上线与下线记录。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "计费通过 Start、Interim、Stop 等报文记录会话，是上网行为审计与运营计费的数据来源。",
+    "chapter": "AAA 原理与配置",
+    "knowledgeSection": "AAA 配置与域管理",
+    "knowledgePoint": "授权与计费配置",
+    "difficulty": "medium",
+    "tags": [
+      "AAA 原理与配置",
+      "AAA 配置与域管理",
+      "授权与计费配置"
+    ],
+    "stage": "基础理解"
+  }
+]

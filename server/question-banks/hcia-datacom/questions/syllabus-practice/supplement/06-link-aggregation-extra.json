@@ -14,13 +14,16 @@
     ],
     "analysis": "手工模式依赖两端人工保持一致，不通过 LACP 协议协商成员状态。 本题考查“Eth-Trunk”，因此应选择“协议自动协商和成员链路选择”。",
     "chapter": "以太网链路聚合",
-    "knowledgePoint": "Eth-Trunk",
+    "knowledgePoint": "Eth-Trunk 配置",
     "difficulty": "medium",
     "tags": [
       "以太网链路聚合",
+      "聚合配置与负载分担",
+      "Eth-Trunk 配置",
       "Eth-Trunk"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "聚合配置与负载分担"
   },
   {
     "id": "hcia-v2-extra-06-member-failure",
@@ -37,13 +40,16 @@
     ],
     "analysis": "链路聚合提供成员级冗余，故障链路退出后剩余成员继续承载流量。 本题考查“成员接口”，因此应选择“转移到剩余可用成员链路”。",
     "chapter": "以太网链路聚合",
-    "knowledgePoint": "成员接口",
+    "knowledgePoint": "成员接口约束",
     "difficulty": "easy",
     "tags": [
       "以太网链路聚合",
+      "聚合配置与负载分担",
+      "成员接口约束",
       "成员接口"
     ],
-    "stage": "直接计算"
+    "stage": "直接计算",
+    "knowledgeSection": "聚合配置与负载分担"
   },
   {
     "id": "hcia-v2-extra-06-logical-config",
@@ -60,13 +66,16 @@
     ],
     "analysis": "业务属性通常统一配置在 Eth-Trunk 逻辑接口，由成员共同承载。 本题考查“Eth-Trunk”，因此应选择“Eth-Trunk 逻辑接口”。",
     "chapter": "以太网链路聚合",
-    "knowledgePoint": "Eth-Trunk",
+    "knowledgePoint": "Eth-Trunk 配置",
     "difficulty": "easy",
     "tags": [
       "以太网链路聚合",
+      "聚合配置与负载分担",
+      "Eth-Trunk 配置",
       "Eth-Trunk"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "聚合配置与负载分担"
   },
   {
     "id": "hcia-v2-extra-06-lacp-active",
@@ -83,13 +92,16 @@
     ],
     "analysis": "LACP 结合链路状态及优先级选择活动成员并维护聚合关系。 本题考查“LACP”，因此应选择“链路状态和系统、端口优先级”。",
     "chapter": "以太网链路聚合",
-    "knowledgePoint": "LACP",
+    "knowledgePoint": "LACP 协议",
     "difficulty": "hard",
     "tags": [
       "以太网链路聚合",
+      "链路聚合原理",
+      "LACP 协议",
       "LACP"
     ],
-    "stage": "反向推理"
+    "stage": "反向推理",
+    "knowledgeSection": "链路聚合原理"
   },
   {
     "id": "hcia-v2-extra-06-bandwidth-limit",
@@ -106,13 +118,16 @@
     ],
     "analysis": "按流哈希通常让同一流固定在一条成员链路，因此单流不会同时拆到所有成员。 本题考查“负载分担”，因此应选择“被选中的单条成员链路速率”。",
     "chapter": "以太网链路聚合",
-    "knowledgePoint": "负载分担",
+    "knowledgePoint": "负载分担方式",
     "difficulty": "hard",
     "tags": [
       "以太网链路聚合",
+      "聚合配置与负载分担",
+      "负载分担方式",
       "负载分担"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "聚合配置与负载分担"
   },
   {
     "id": "hcia-v2-extra-06-peer-consistency",
@@ -129,12 +144,15 @@
     ],
     "analysis": "聚合两端需保持模式和关键参数一致，否则成员选择及流量转发可能异常。 本题考查“成员接口”，因此应选择“部分链路不能正常加入聚合或转发异常”。",
     "chapter": "以太网链路聚合",
-    "knowledgePoint": "成员接口",
+    "knowledgePoint": "成员接口约束",
     "difficulty": "medium",
     "tags": [
       "以太网链路聚合",
+      "聚合配置与负载分担",
+      "成员接口约束",
       "成员接口"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "聚合配置与负载分担"
   }
 ]

@@ -14,13 +14,16 @@
     ],
     "analysis": "AP 先发现 AC、建立控制隧道并完成注册，随后 AC 才能下发射频和业务配置。",
     "chapter": "WLAN 工作原理与配置",
-    "knowledgePoint": "AP 上线",
+    "knowledgePoint": "AP 上线与注册",
     "difficulty": "medium",
     "tags": [
       "WLAN 工作原理与配置",
+      "AP 上线流程",
+      "AP 上线与注册",
       "AP 上线"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "AP 上线流程"
   },
   {
     "id": "hcia-v2-18-sta-access",
@@ -37,13 +40,16 @@
     ],
     "analysis": "终端发现目标网络后需与 AP 完成认证和关联，随后才能建立正常的数据通信。",
     "chapter": "WLAN 工作原理与配置",
-    "knowledgePoint": "STA 接入",
+    "knowledgePoint": "STA 扫描与关联",
     "difficulty": "easy",
     "tags": [
       "WLAN 工作原理与配置",
+      "STA 接入与漫游",
+      "STA 扫描与关联",
       "STA 接入"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "STA 接入与漫游"
   },
   {
     "id": "hcia-v2-18-roaming",
@@ -60,13 +66,16 @@
     ],
     "analysis": "漫游允许终端在同一业务网络的覆盖区域移动并切换 AP，以尽量减少业务中断。",
     "chapter": "WLAN 工作原理与配置",
-    "knowledgePoint": "漫游",
+    "knowledgePoint": "WLAN 漫游",
     "difficulty": "easy",
     "tags": [
       "WLAN 工作原理与配置",
+      "STA 接入与漫游",
+      "WLAN 漫游",
       "漫游"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "STA 接入与漫游"
   },
   {
     "id": "hcia-v2-18-wpa-security",
@@ -85,12 +94,14 @@
     ],
     "analysis": "安全无线接入需要可靠加密、身份认证和最小权限控制，开放无加密接入会增加窃听与冒用风险。",
     "chapter": "WLAN 工作原理与配置",
-    "knowledgePoint": "WLAN 安全",
+    "knowledgePoint": "WEP 与 WPA/WPA2",
     "difficulty": "medium",
     "tags": [
       "WLAN 工作原理与配置",
-      "WLAN 安全"
+      "WLAN 安全",
+      "WEP 与 WPA/WPA2"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "WLAN 安全"
   }
 ]

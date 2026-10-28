@@ -14,13 +14,15 @@
     ],
     "analysis": "静态 NAT 预先建立一个私网地址与一个公网地址的固定对应关系。",
     "chapter": "NAT 原理与配置",
-    "knowledgePoint": "静态 NAT",
+    "knowledgePoint": "静态 NAT 一对一映射",
     "difficulty": "easy",
     "tags": [
       "NAT 原理与配置",
-      "静态 NAT"
+      "静态 NAT",
+      "静态 NAT 一对一映射"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "静态 NAT"
   },
   {
     "id": "hcia-v2-14-dynamic-nat",
@@ -37,13 +39,16 @@
     ],
     "analysis": "动态 NAT 从配置的公网地址池中临时选择地址，与发起通信的内部地址建立映射。",
     "chapter": "NAT 原理与配置",
-    "knowledgePoint": "动态 NAT",
+    "knowledgePoint": "动态 NAT 地址池",
     "difficulty": "medium",
     "tags": [
       "NAT 原理与配置",
+      "动态 NAT 与 NAPT",
+      "动态 NAT 地址池",
       "动态 NAT"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "动态 NAT 与 NAPT"
   },
   {
     "id": "hcia-v2-14-easy-ip",
@@ -60,13 +65,16 @@
     ],
     "analysis": "Easy IP 直接复用出接口地址并结合端口转换，适合出口公网地址动态变化的场景。",
     "chapter": "NAT 原理与配置",
-    "knowledgePoint": "Easy IP",
+    "knowledgePoint": "NAPT 与 Easy IP",
     "difficulty": "medium",
     "tags": [
       "NAT 原理与配置",
+      "动态 NAT 与 NAPT",
+      "NAPT 与 Easy IP",
       "Easy IP"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "动态 NAT 与 NAPT"
   },
   {
     "id": "hcia-v2-14-nat-server",
@@ -87,8 +95,10 @@
     "difficulty": "medium",
     "tags": [
       "NAT 原理与配置",
+      "静态 NAT",
       "NAT Server"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "静态 NAT"
   }
 ]

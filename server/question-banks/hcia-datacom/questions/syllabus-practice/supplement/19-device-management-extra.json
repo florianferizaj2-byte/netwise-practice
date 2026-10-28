@@ -14,13 +14,16 @@
     ],
     "analysis": "SNMPv3 可提供用户认证与报文加密，适合更安全的网管场景。 本题考查“SNMP”，因此应选择“支持认证和加密”。",
     "chapter": "网络设备管理",
-    "knowledgePoint": "SNMP",
+    "knowledgePoint": "SNMP 版本与架构",
     "difficulty": "medium",
     "tags": [
       "网络设备管理",
+      "SNMP 网络管理",
+      "SNMP 版本与架构",
       "SNMP"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "SNMP 网络管理"
   },
   {
     "id": "hcia-v2-extra-19-trap",
@@ -37,13 +40,16 @@
     ],
     "analysis": "Trap 由 Agent 主动上报，可用于告警等需要及时通知的事件。 本题考查“SNMP”，因此应选择“设备主动向管理站发送异常通知”。",
     "chapter": "网络设备管理",
-    "knowledgePoint": "SNMP",
+    "knowledgePoint": "SNMP 版本与架构",
     "difficulty": "easy",
     "tags": [
       "网络设备管理",
+      "SNMP 网络管理",
+      "SNMP 版本与架构",
       "SNMP"
     ],
-    "stage": "直接计算"
+    "stage": "直接计算",
+    "knowledgeSection": "SNMP 网络管理"
   },
   {
     "id": "hcia-v2-extra-19-log-level",
@@ -60,13 +66,16 @@
     ],
     "analysis": "日志级别有助于运维人员优先处理严重告警并控制输出量。 本题考查“日志”，因此应选择“区分事件严重程度和筛选范围”。",
     "chapter": "网络设备管理",
-    "knowledgePoint": "日志",
+    "knowledgePoint": "Syslog 日志",
     "difficulty": "easy",
     "tags": [
       "网络设备管理",
+      "日志与时间同步",
+      "Syslog 日志",
       "日志"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "日志与时间同步"
   },
   {
     "id": "hcia-v2-extra-19-config-backup",
@@ -83,13 +92,15 @@
     ],
     "analysis": "版本化配置备份便于恢复、审计与排查变更引入的问题。 本题考查“网络设备管理”，因此应选择“故障或误变更后可快速恢复与比对”。",
     "chapter": "网络设备管理",
-    "knowledgePoint": "网络设备管理",
+    "knowledgePoint": "SSH 管理",
     "difficulty": "easy",
     "tags": [
       "网络设备管理",
-      "网络设备管理"
+      "远程管理",
+      "SSH 管理"
     ],
-    "stage": "反向推理"
+    "stage": "反向推理",
+    "knowledgeSection": "远程管理"
   },
   {
     "id": "hcia-v2-extra-19-mgmt-plane",
@@ -106,13 +117,15 @@
     ],
     "analysis": "独立管理网或管理 VLAN 可限制管理入口并降低业务网络故障对运维的影响。 本题考查“远程管理”，因此应选择“降低管理面暴露并便于实施访问控制”。",
     "chapter": "网络设备管理",
-    "knowledgePoint": "远程管理",
+    "knowledgePoint": "用户界面与访问控制",
     "difficulty": "medium",
     "tags": [
       "网络设备管理",
-      "远程管理"
+      "远程管理",
+      "用户界面与访问控制"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "远程管理"
   },
   {
     "id": "hcia-v2-extra-19-syslog-time",
@@ -129,12 +142,15 @@
     ],
     "analysis": "统一时间戳让跨设备日志的先后关系可信，是排障和审计的基础。 本题考查“日志”，因此应选择“不同设备事件可按统一时间线关联”。",
     "chapter": "网络设备管理",
-    "knowledgePoint": "日志",
+    "knowledgePoint": "Syslog 日志",
     "difficulty": "easy",
     "tags": [
       "网络设备管理",
+      "日志与时间同步",
+      "Syslog 日志",
       "日志"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "日志与时间同步"
   }
 ]

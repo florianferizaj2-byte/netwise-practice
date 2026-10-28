@@ -14,13 +14,16 @@
     ],
     "analysis": "终端需要完成认证和关联等控制过程，之后才能进行正常业务通信。 本题考查“STA 接入”，因此应选择“先完成认证流程，再与 AP 关联”。",
     "chapter": "WLAN 工作原理与配置",
-    "knowledgePoint": "STA 接入",
+    "knowledgePoint": "STA 扫描与关联",
     "difficulty": "medium",
     "tags": [
       "WLAN 工作原理与配置",
+      "STA 接入与漫游",
+      "STA 扫描与关联",
       "STA 接入"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "STA 接入与漫游"
   },
   {
     "id": "hcia-v2-extra-18-ssid-vlan",
@@ -37,13 +40,16 @@
     ],
     "analysis": "SSID 与 VLAN 映射可把不同无线业务划入不同网段并实施不同访问策略。 本题考查“WLAN 工作原理”，因此应选择“按员工、访客等业务隔离流量”。",
     "chapter": "WLAN 工作原理与配置",
-    "knowledgePoint": "WLAN 工作原理",
+    "knowledgePoint": "WLAN 漫游",
     "difficulty": "easy",
     "tags": [
       "WLAN 工作原理与配置",
+      "STA 接入与漫游",
+      "WLAN 漫游",
       "WLAN 工作原理"
     ],
-    "stage": "直接计算"
+    "stage": "直接计算",
+    "knowledgeSection": "STA 接入与漫游"
   },
   {
     "id": "hcia-v2-extra-18-roam-rssi",
@@ -60,13 +66,16 @@
     ],
     "analysis": "AP 和 AC 可提供辅助信息，但是否切换通常由 STA 的漫游算法和阈值决定。 本题考查“漫游”，因此应选择“主要由无线终端根据自身策略和信号条件决定”。",
     "chapter": "WLAN 工作原理与配置",
-    "knowledgePoint": "漫游",
+    "knowledgePoint": "WLAN 漫游",
     "difficulty": "hard",
     "tags": [
       "WLAN 工作原理与配置",
+      "STA 接入与漫游",
+      "WLAN 漫游",
       "漫游"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "STA 接入与漫游"
   },
   {
     "id": "hcia-v2-extra-18-wlan-security-psk",
@@ -83,13 +92,15 @@
     ],
     "analysis": "PSK 是 Pre-Shared Key，所有授权用户使用配置好的共享口令进行接入认证。 本题考查“WLAN 安全”，因此应选择“预共享密钥”。",
     "chapter": "WLAN 工作原理与配置",
-    "knowledgePoint": "WLAN 安全",
+    "knowledgePoint": "WEP 与 WPA/WPA2",
     "difficulty": "easy",
     "tags": [
       "WLAN 工作原理与配置",
-      "WLAN 安全"
+      "WLAN 安全",
+      "WEP 与 WPA/WPA2"
     ],
-    "stage": "反向推理"
+    "stage": "反向推理",
+    "knowledgeSection": "WLAN 安全"
   },
   {
     "id": "hcia-v2-extra-18-enterprise-auth",
@@ -106,13 +117,15 @@
     ],
     "analysis": "802.1X 通常配合 RADIUS 实现按用户身份认证和授权，适合企业场景。 本题考查“WLAN 安全”，因此应选择“可基于每个用户进行集中身份认证”。",
     "chapter": "WLAN 工作原理与配置",
-    "knowledgePoint": "WLAN 安全",
+    "knowledgePoint": "802.1X 认证",
     "difficulty": "medium",
     "tags": [
       "WLAN 工作原理与配置",
-      "WLAN 安全"
+      "WLAN 安全",
+      "802.1X 认证"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "WLAN 安全"
   },
   {
     "id": "hcia-v2-extra-18-ap-radio",
@@ -129,12 +142,15 @@
     ],
     "analysis": "SSID 广播依赖 AP 射频、WLAN 配置和业务模板等多项配置正确生效。 本题考查“AP 上线”，因此应选择“该 AP 的射频和 WLAN 业务配置是否已下发启用”。",
     "chapter": "WLAN 工作原理与配置",
-    "knowledgePoint": "AP 上线",
+    "knowledgePoint": "AP 上线与注册",
     "difficulty": "medium",
     "tags": [
       "WLAN 工作原理与配置",
+      "AP 上线流程",
+      "AP 上线与注册",
       "AP 上线"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "AP 上线流程"
   }
 ]

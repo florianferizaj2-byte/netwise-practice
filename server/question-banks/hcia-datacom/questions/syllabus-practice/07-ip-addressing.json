@@ -14,13 +14,16 @@
     ],
     "analysis": "/24 子网共有 256 个地址，传统主机子网扣除网络地址和广播地址后剩 254 个。",
     "chapter": "IP 地址与配置",
-    "knowledgePoint": "子网划分",
+    "knowledgePoint": "子网划分计算",
     "difficulty": "easy",
     "tags": [
       "IP 地址与配置",
+      "子网划分与掩码",
+      "子网划分计算",
       "子网划分"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "子网划分与掩码"
   },
   {
     "id": "hcia-v2-07-arp-purpose",
@@ -37,13 +40,16 @@
     ],
     "analysis": "ARP 根据同一链路上的 IPv4 地址获取对应 MAC 地址，跨网段时通常解析网关的 MAC 地址。",
     "chapter": "IP 地址与配置",
-    "knowledgePoint": "ARP",
+    "knowledgePoint": "ARP 工作原理",
     "difficulty": "easy",
     "tags": [
       "IP 地址与配置",
+      "地址解析与诊断",
+      "ARP 工作原理",
       "ARP"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "地址解析与诊断"
   },
   {
     "id": "hcia-v2-07-ping-icmp",
@@ -60,13 +66,16 @@
     ],
     "analysis": "ping 通常发送 ICMP Echo Request 并等待 Echo Reply，以测试可达性和往返时延。",
     "chapter": "IP 地址与配置",
-    "knowledgePoint": "ICMP",
+    "knowledgePoint": "ICMP 与 ping",
     "difficulty": "easy",
     "tags": [
       "IP 地址与配置",
+      "地址解析与诊断",
+      "ICMP 与 ping",
       "ICMP"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "地址解析与诊断"
   },
   {
     "id": "hcia-v2-07-same-subnet",
@@ -83,12 +92,15 @@
     ],
     "analysis": "主机分别用子网掩码与本机地址、目的地址按位与，比较所得网络地址是否相同。",
     "chapter": "IP 地址与配置",
-    "knowledgePoint": "IPv4 地址",
+    "knowledgePoint": "IPv4 地址分类",
     "difficulty": "medium",
     "tags": [
       "IP 地址与配置",
+      "IPv4 地址体系",
+      "IPv4 地址分类",
       "IPv4 地址"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "IPv4 地址体系"
   }
 ]

@@ -1,0 +1,1307 @@
+[
+  {
+    "id": "hcip821-9-2-1-001",
+    "type": "single_choice",
+    "question": "IPsec 中 AH 与 ESP 的主要区别是？",
+    "options": {
+      "A": "两者都只做认证，不做任何加密",
+      "B": "AH 只加密不认证，ESP 只做认证",
+      "C": "两者都只做加密，不做完整性认证",
+      "D": "AH 只认证不加密，ESP 可认证并加密"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "AH 提供数据完整性与源认证，但不加密；ESP 同时提供加密与可选的认证。因此需要保密性时必须使用 ESP，只做完整性校验时可用 AH。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VPN 技术概述",
+    "difficulty": "medium",
+    "tags": [
+      "IPsec",
+      "AH",
+      "ESP"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-1-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VPN 技术概述」。知识点编码 hcip821-9-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "5d3b5e14b42a05140e39bf629e0ec83fab541caba535cd82b47d8a032b5e2c14"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-1-002",
+    "type": "single_choice",
+    "question": "IPsec 传输模式与隧道模式的主要区别是？",
+    "options": {
+      "A": "传输模式只用于网关之间，隧道模式只用于主机",
+      "B": "传输模式不加密，隧道模式必须加密",
+      "C": "传输模式封装新 IP 头，隧道模式保护原载荷",
+      "D": "传输模式保护原 IP 载荷，隧道模式封装新 IP 头"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "传输模式保留原 IP 头，只对上层载荷做保护，适合主机到主机；隧道模式把整个原报文封装进新 IP 报文，适合网关到网关。两者都可以使用 ESP 加密。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VPN 技术概述",
+    "difficulty": "medium",
+    "tags": [
+      "IPsec",
+      "传输模式",
+      "隧道模式"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-1-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VPN 技术概述」。知识点编码 hcip821-9-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "f9acd367fd04df31021e7f61e0403ebcae2c7f4237fa00693e65ed461618eb08"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-1-003",
+    "type": "single_choice",
+    "question": "IKE 第一阶段的主要作用是？",
+    "options": {
+      "A": "协商并建立 IKE SA，为后续协商提供保护",
+      "B": "为远程接入用户分配虚拟 IP 地址",
+      "C": "完成用户身份认证与访问权限授权",
+      "D": "直接建立 IPsec SA 并传输业务数据"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IKE 第一阶段完成算法协商、密钥生成与身份认证，建立 IKE SA；第二阶段在 IKE SA 保护下协商 IPsec SA。业务数据由 IPsec SA 承载。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VPN 技术概述",
+    "difficulty": "medium",
+    "tags": [
+      "IKE",
+      "第一阶段"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-1-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VPN 技术概述」。知识点编码 hcip821-9-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "bf652928f96adad06829c446f74d3701a4fd049e6cb688ab4a2c18d87108a067"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-1-004",
+    "type": "single_choice",
+    "question": "IKEv1 主模式完成第一阶段协商需要交互多少条报文？",
+    "options": {
+      "A": "3 条",
+      "B": "9 条",
+      "C": "6 条",
+      "D": "4 条"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "IKEv1 主模式使用 6 条报文完成 SA 协商与身份认证，身份信息在加密后传输；野蛮模式只用 3 条报文，但身份信息以明文传输。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VPN 技术概述",
+    "difficulty": "easy",
+    "tags": [
+      "IKEv1",
+      "主模式"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-1-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VPN 技术概述」。知识点编码 hcip821-9-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "5477f00fca3f46964750155082c753b0fc8f2070f59179d6197af70e74056a82"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-1-005",
+    "type": "single_choice",
+    "question": "IKEv1 野蛮模式的主要特点是？",
+    "options": {
+      "A": "不能协商 IKE SA，只能协商 IPsec SA",
+      "B": "不使用预共享密钥，只支持证书认证",
+      "C": "6 条报文完成，支持基于地址的身份认证",
+      "D": "3 条报文完成，支持基于名称的身份认证"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "野蛮模式用 3 条报文完成第一阶段，速度快且支持基于名称的身份标识，适合动态地址场景；代价是身份信息不以加密方式保护。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VPN 技术概述",
+    "difficulty": "medium",
+    "tags": [
+      "IKEv1",
+      "野蛮模式"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-1-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VPN 技术概述」。知识点编码 hcip821-9-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "664a4cf23006bea6dc8441e5e692a1e26e6a613f58f7a25522891c539d35825b"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-1-006",
+    "type": "single_choice",
+    "question": "SPD 与 SAD 的关系是？",
+    "options": {
+      "A": "SAD 决定是否保护，SPD 存放已协商的 SA 参数",
+      "B": "两者都是路由表的组成部分",
+      "C": "SPD 决定是否保护，SAD 存放已协商的 SA 参数",
+      "D": "两者都由 IKE 直接删除，不参与转发"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "SPD（安全策略数据库）按策略决定报文丢弃、绕过还是保护；SAD（安全联盟数据库）保存已协商的 SPI、算法与密钥。先查 SPD，再查 SAD。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VPN 技术概述",
+    "difficulty": "medium",
+    "tags": [
+      "SPD",
+      "SAD"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-1-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VPN 技术概述」。知识点编码 hcip821-9-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "30ffcaeeb38399a65a32b418bcc35cf23c709629c607c493eafaf68114adec1f"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-1-007",
+    "type": "single_choice",
+    "question": "IPsec SA 的方向性是？",
+    "options": {
+      "A": "与方向无关，只与安全协议有关",
+      "B": "单向，每个方向各需一条 SA",
+      "C": "由 IKE 决定，可能单向也可能双向",
+      "D": "双向，一条 SA 同时保护两个方向"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IPsec SA 是单向的，通信双方各维护入方向和出方向两条 SA。因此一条隧道的建立需要协商出至少两条 SA。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VPN 技术概述",
+    "difficulty": "medium",
+    "tags": [
+      "IPsec SA",
+      "单向"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-1-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VPN 技术概述」。知识点编码 hcip821-9-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "77fb51cf180eeb5adffc0354c83db346e7ba9d84643716abc65b319baf805f96"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-1-008",
+    "type": "single_choice",
+    "question": "NAT 穿越场景中，ESP 报文通常封装在哪个 UDP 端口？",
+    "options": {
+      "A": "UDP 500",
+      "B": "UDP 3784",
+      "C": "UDP 4500",
+      "D": "TCP 4500"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "检测到 NAT 后，IKE 与 ESP 改用 UDP 4500 封装，以穿越地址转换设备。UDP 500 用于未检测到 NAT 时的 IKE 协商，UDP 3784 是 BFD 端口。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VPN 技术概述",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 穿越",
+      "UDP 4500"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-1-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VPN 技术概述」。知识点编码 hcip821-9-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "ae8587fe5d3ee3692d86a9f3722a6a6ee5a48d5819b914c0033189766be5a4ce"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-1-009",
+    "type": "single_choice",
+    "question": "GRE over IPsec 相比纯 IPsec 的主要优势是？",
+    "options": {
+      "A": "不需要配置感兴趣流",
+      "B": "可承载组播与多种三层协议",
+      "C": "不需要协商安全联盟",
+      "D": "加密强度更高"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "纯 IPsec 只能保护单播 IP 报文；GRE 先把组播、非 IP 协议封装进 GRE，再由 IPsec 保护，因此可承载路由协议等组播流量。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VPN 技术概述",
+    "difficulty": "medium",
+    "tags": [
+      "GRE",
+      "IPsec"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-1-009",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VPN 技术概述」。知识点编码 hcip821-9-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "051f698305b7ced58628d18863ffbbe9dc6c0c885fb5999b3a96d08bd408ff38"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-1-010",
+    "type": "single_choice",
+    "question": "DSVPN 依赖的关键技术组合是？",
+    "options": {
+      "A": "GRE 与 BFD",
+      "B": "mGRE 与 NHRP",
+      "C": "L2TP 与 PPP",
+      "D": "VXLAN 与 EVPN"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "DSVPN 用 mGRE 建立点到多点隧道，用 NHRP 动态解析分支公网地址，实现分支间直接通信，避免流量全部绕行总部。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VPN 技术概述",
+    "difficulty": "medium",
+    "tags": [
+      "DSVPN",
+      "mGRE",
+      "NHRP"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-1-010",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VPN 技术概述」。知识点编码 hcip821-9-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "b8b29064d01cfbf94ce59a37fc3fb271d75f5ffd10d37c6b5d4854e252a18024"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-1-011",
+    "type": "single_choice",
+    "question": "SSL VPN 相比 IPsec VPN 的主要优势是？",
+    "options": {
+      "A": "加密强度高于 IPsec",
+      "B": "只支持站点到站点组网",
+      "C": "不需要对用户做身份认证",
+      "D": "客户端无需预装，通过浏览器即可接入"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "SSL VPN 基于 HTTPS，用户通过浏览器即可接入，适合出差与合作伙伴等无法预装客户端的场景；IPsec 更适合站点到站点固定组网。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VPN 技术概述",
+    "difficulty": "medium",
+    "tags": [
+      "SSL VPN",
+      "远程接入"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-1-011",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VPN 技术概述」。知识点编码 hcip821-9-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "6b3fc912e2d62a20a1ecc2b8e71c88890b90424c26bbd510ce5bdfafca624882"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-1-012",
+    "type": "multiple_choice",
+    "question": "IPsec 体系由下列哪些协议组成？",
+    "options": {
+      "A": "ESP",
+      "B": "AH",
+      "C": "LDP",
+      "D": "IKE"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "IPsec 由 AH、ESP 两个安全协议与 IKE 密钥协商协议组成。LDP 是 MPLS 的标签分发协议，与 IPsec 无关。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VPN 技术概述",
+    "difficulty": "medium",
+    "tags": [
+      "IPsec",
+      "协议组成",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-1-012",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VPN 技术概述」。知识点编码 hcip821-9-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "123c41e078d6a99aae5f1e4a8fae54ca4f7f04acc44576231f96cebe523957cd"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-1-013",
+    "type": "multiple_choice",
+    "question": "IKE 第二阶段可以协商下列哪些内容？",
+    "options": {
+      "A": "路由协议邻居关系",
+      "B": "安全协议（AH 或 ESP）",
+      "C": "加密与认证算法",
+      "D": "需要保护的数据流"
+    },
+    "answer": [
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "第二阶段协商 IPsec SA，内容包括安全协议、加密与认证算法、封装模式、SA 生命周期以及由感兴趣流描述的保护范围。路由邻居关系不属于 IKE 协商内容。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VPN 技术概述",
+    "difficulty": "medium",
+    "tags": [
+      "IKE",
+      "第二阶段",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-1-013",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VPN 技术概述」。知识点编码 hcip821-9-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4b69bf689c7adb6150770d77e2a17d9eefb09ffcaff1410c969f8c409499fb9a"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-1-014",
+    "type": "true_false",
+    "question": "IPsec 的 AH 协议既提供数据加密，也提供完整性校验。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "AH 只提供完整性校验与源认证，不提供加密。需要保密性必须使用 ESP，ESP 才具备加密能力。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VPN 技术概述",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "AH"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-1-014",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VPN 技术概述」。知识点编码 hcip821-9-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "cad36dfc601d4cae9c3663925b608c24a953112e815259b8270cf0dea6fb6c3e"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-1-015",
+    "type": "single_choice",
+    "question": "配置 IPsec 时，\"感兴趣流\"的作用是？",
+    "options": {
+      "A": "用 ACL 指定哪些流量需要被 IPsec 保护",
+      "B": "指定 IPsec 隧道的物理出口",
+      "C": "指定 IKE 协商使用的端口",
+      "D": "指定 SA 的老化时间"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "感兴趣流由 ACL 定义，匹配的报文才进入 IPsec 处理；不匹配的报文按普通路由转发。它决定了哪些流量走隧道。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VPN 技术概述",
+    "difficulty": "medium",
+    "tags": [
+      "感兴趣流",
+      "ACL"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-1-015",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VPN 技术概述」。知识点编码 hcip821-9-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d86ac88b4171c78f4589c9c5f4233985a72e58d1b0dc061084bb89bf1937234b"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-1-016",
+    "type": "single_choice",
+    "question": "PFS（完美前向保密）的作用是？",
+    "options": {
+      "A": "自动延长 SA 的生命周期",
+      "B": "提高加密算法的运算速度",
+      "C": "允许 IKE 跳过身份认证",
+      "D": "每条 SA 独立生成密钥，主密钥泄露不影响历史会话"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "启用 PFS 后，每次第二阶段协商都通过一次新的 DH 交换生成密钥，与之前的 SA 无派生关系，因此长期密钥泄露也无法解密历史流量。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VPN 技术概述",
+    "difficulty": "hard",
+    "tags": [
+      "PFS",
+      "前向保密"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-1-016",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VPN 技术概述」。知识点编码 hcip821-9-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "994f7dcafb6bd1800e681ff33d3c4835e64edcc945291353483fa79802444ae6"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-1-017",
+    "type": "single_choice",
+    "question": "IPsec 的抗重放依赖什么机制？",
+    "options": {
+      "A": "ESP 头中的序列号与滑动窗口",
+      "B": "IKE 的 Cookie 机制",
+      "C": "路由表的偏好值",
+      "D": "ACL 的规则序号"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "ESP 头携带序列号，接收端维护滑动窗口，对重复或过期的序列号直接丢弃，从而抵御重放攻击。Cookie 用于抗 IKE 报文洪泛。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VPN 技术概述",
+    "difficulty": "medium",
+    "tags": [
+      "抗重放",
+      "序列号"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-1-017",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VPN 技术概述」。知识点编码 hcip821-9-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "177c873cc8aea4dcd172d266306eeacff235c6110e744c2aa9f4bc129844a762"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-1-018",
+    "type": "single_choice",
+    "question": "站点到站点 VPN 与远程接入 VPN 的主要区别是？",
+    "options": {
+      "A": "前者不需要加密，后者必须加密",
+      "B": "前者必须使用 SSL，后者必须使用 IPsec",
+      "C": "前者只支持 IPv6，后者只支持 IPv4",
+      "D": "前者连接两个固定网络，后者为移动用户提供接入"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "站点到站点 VPN 连接两个固定站点，网关之间建立隧道；远程接入 VPN 为单个用户提供接入，常见形式为 SSL VPN 与 L2TP over IPsec。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VPN 技术概述",
+    "difficulty": "easy",
+    "tags": [
+      "VPN 分类",
+      "组网"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-1-018",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VPN 技术概述」。知识点编码 hcip821-9-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e7ee81ae26f1e150d106f2487bc283e68207e4c117a61fb6a1a32b1fe9b1242e"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-1-019",
+    "type": "single_choice",
+    "question": "L2TP over IPsec 中，IPsec 承担的作用是？",
+    "options": {
+      "A": "替代 L2TP 完成隧道建立",
+      "B": "为 L2TP 隧道提供加密与完整性保护",
+      "C": "为 PPP 协商分配 IP 地址",
+      "D": "提供用户身份认证"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "L2TP 本身不加密，只负责建立隧道；IPsec 以传输模式保护 L2TP 报文，提供加密与完整性。用户认证由 PPP 的 CHAP/PAP 完成。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VPN 技术概述",
+    "difficulty": "medium",
+    "tags": [
+      "L2TP",
+      "IPsec"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-1-019",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VPN 技术概述」。知识点编码 hcip821-9-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "365ad86c2b7c57fb362f414a1b0931b11e07f67277c386d646d34de2d65b482f"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-2-001",
+    "type": "single_choice",
+    "question": "在 MPLS VPN 中，VRF 的主要作用是什么？",
+    "options": {
+      "A": "在同一台设备上隔离不同 VPN 的路由表与转发实例",
+      "B": "为报文压入 MPLS 标签",
+      "C": "在设备之间建立加密隧道",
+      "D": "对 VPN 报文进行加密与认证"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "VRF 为每个 VPN 维护独立的路由表与转发实例，使相同私网地址可在不同 VPN 中重复使用而互不干扰。加密由 IPsec 完成，压标签由 MPLS 完成。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VRF",
+    "difficulty": "easy",
+    "tags": [
+      "VRF",
+      "路由隔离"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-2-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VRF」。知识点编码 hcip821-9-2-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "ccfa5767928468e25165a5134477051353b645500cc7be115fd57d74bcd752cd"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-2-002",
+    "type": "single_choice",
+    "question": "RD 在 MPLS VPN 中的作用是？",
+    "options": {
+      "A": "区分不同 VPN 中相同的 IPv4 前缀",
+      "B": "决定报文转发的下一跳",
+      "C": "标识 PE 与 CE 之间的链路",
+      "D": "控制路由的导入与导出"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "不同 VPN 可能使用相同私网地址，RD 与 IPv4 前缀组合成唯一的 VPNv4 路由，从而在 MP-BGP 中区分。控制导入导出的是 RT。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VRF",
+    "difficulty": "medium",
+    "tags": [
+      "RD",
+      "VPNv4"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-2-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VRF」。知识点编码 hcip821-9-2-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "8499ae78d84cc8ebb30fed84f06afb1a9ba7c60e04925c22462503303c23b056"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-2-003",
+    "type": "single_choice",
+    "question": "BGP 扩展团体属性 RT 的主要作用是什么？",
+    "options": {
+      "A": "区分不同 VPN 中相同的前缀",
+      "B": "标识隧道的出接口",
+      "C": "控制 VPN 路由的导入与导出",
+      "D": "决定标签的分配方式"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "RT 是 BGP 扩展团体属性，PE 在发布路由时附加 export RT，接收方用 import RT 匹配，匹配成功才导入对应 VRF。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VRF",
+    "difficulty": "medium",
+    "tags": [
+      "RT",
+      "路由导入导出"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-2-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VRF」。知识点编码 hcip821-9-2-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "c9e1a376d029f6853a37153aa35bfedbddfa068922eda84451d5959d0bf46070"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-2-004",
+    "type": "single_choice",
+    "question": "RD 字段的常见格式是哪一种？",
+    "options": {
+      "A": "AS 号:自定义数字",
+      "B": "IP 地址:掩码长度",
+      "C": "区域号:路由器号",
+      "D": "VLAN ID:端口号"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "RD 常见格式为 AS 号:自定义数字，或 IP 地址:自定义数字，总长 8 字节。掩码长度、VLAN ID、区域号都不是 RD 的组成部分。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VRF",
+    "difficulty": "easy",
+    "tags": [
+      "RD",
+      "格式"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-2-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VRF」。知识点编码 hcip821-9-2-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d8cc612e1c4c430b27989842f0adbd08cefee84d94620aa2608add72eb361767"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-2-005",
+    "type": "single_choice",
+    "question": "一个物理接口可以绑定几个 VRF？",
+    "options": {
+      "A": "一个",
+      "B": "不限",
+      "C": "两个",
+      "D": "四个"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "一个接口只能绑定一个 VPN 实例，绑定后该接口收到的报文只查该 VRF 的路由表。需要多实例时应使用子接口分别绑定。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VRF",
+    "difficulty": "easy",
+    "tags": [
+      "接口绑定",
+      "VRF"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-2-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VRF」。知识点编码 hcip821-9-2-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "3dfe0e04d65b991eaa457b9ca7e9dfb855411bffc343885084ad0eb8ee5c5ae6"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-2-006",
+    "type": "single_choice",
+    "question": "在 VRF 中执行 ping 测试时，需要额外指定什么参数？",
+    "options": {
+      "A": "报文长度与分片标志",
+      "B": "报文数量与超时时间",
+      "C": "源地址与出接口参数",
+      "D": "vpn-instance 与 VRF 名称"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "ping 缺省查全局路由表，测试 VRF 内的连通性必须用 -vpn-instance 指定实例，否则会因查表错误而失败。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VRF",
+    "difficulty": "medium",
+    "tags": [
+      "ping",
+      "vpn-instance"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-2-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VRF」。知识点编码 hcip821-9-2-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "f45460c0b0265780383301f8396a1c87113a610f914a696ecf202e883f2b5940"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-2-007",
+    "type": "single_choice",
+    "question": "VRF-lite 与 MPLS VPN 的主要区别是？",
+    "options": {
+      "A": "VRF-lite 不依赖 MPLS 标签转发",
+      "B": "VRF-lite 不支持路由隔离",
+      "C": "VRF-lite 必须使用 BGP 传递路由",
+      "D": "VRF-lite 只能用于 IPv6 网络"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "VRF-lite 只在设备本地做实例隔离，跨设备靠子接口或静态路由传递，不依赖 MPLS；MPLS VPN 依靠标签转发与 MP-BGP 跨域传递 VPNv4 路由。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VRF",
+    "difficulty": "medium",
+    "tags": [
+      "VRF-lite",
+      "MPLS VPN"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-2-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VRF」。知识点编码 hcip821-9-2-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "1508e0823c677ee1e3724188f37ad5901ff18150923515eb67ff0bbf6999c0fb"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-2-008",
+    "type": "single_choice",
+    "question": "路由泄漏（route leaking）指的是？",
+    "options": {
+      "A": "把公网路由误注入私网",
+      "B": "路由表项被意外删除",
+      "C": "路由被错误泛洪到所有接口",
+      "D": "把一个 VRF 的路由引入到另一个 VRF"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "路由泄漏用于受控地共享部分路由，例如把公网 VRF 的缺省路由引入业务 VRF，或把共享服务 VRF 的路由引入多个业务 VRF。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VRF",
+    "difficulty": "medium",
+    "tags": [
+      "路由泄漏",
+      "VRF"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-2-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VRF」。知识点编码 hcip821-9-2-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "2cdfaafaf0ebdd47bcdb0eefd54c66e12e7c31f9682bfba451603db277cf1451"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-2-009",
+    "type": "single_choice",
+    "question": "VPNv4 路由由哪两部分唯一标识？",
+    "options": {
+      "A": "RT 与下一跳地址",
+      "B": "RD 与 IPv4 前缀",
+      "C": "标签与出接口",
+      "D": "AS 号与 Router ID"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "VPNv4 地址由 8 字节 RD 加 4 字节 IPv4 前缀组成，共 12 字节。RT 是扩展团体属性，用于控制导入导出，不参与路由标识。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VRF",
+    "difficulty": "medium",
+    "tags": [
+      "VPNv4",
+      "RD"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-2-009",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VRF」。知识点编码 hcip821-9-2-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "1422870a954843d2258bbf3d538c4f0dd81f559cbc0ea3d15c1db1c023c19794"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-2-010",
+    "type": "single_choice",
+    "question": "PE 之间进行 RT 匹配时，遵循的规则是什么？",
+    "options": {
+      "A": "两端 RT 必须完全一致且顺序相同",
+      "B": "只比较 RT 的 AS 号部分",
+      "C": "对端 export RT 与本端 import RT 有交集即可导入",
+      "D": "RT 不参与导入导出，只用于选路"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "PE 发布路由时携带 export RT，接收方 PE 用本地 VRF 的 import RT 与之比对，只要存在交集就把路由导入该 VRF。因此 RT 可以配置多个。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VRF",
+    "difficulty": "hard",
+    "tags": [
+      "RT",
+      "匹配规则"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-2-010",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VRF」。知识点编码 hcip821-9-2-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "549f55c93f719be0012c88ae388f1a04c6c66c9f16fc91dfd50d291d18b9e774"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-2-011",
+    "type": "multiple_choice",
+    "question": "VRF 可以隔离下列哪些资源？",
+    "options": {
+      "A": "物理接口的速率",
+      "B": "转发表",
+      "C": "部分协议实例",
+      "D": "路由表"
+    },
+    "answer": [
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "VRF 隔离路由表、转发表以及绑定到该实例的协议进程，使不同 VPN 的控制面与转发面互不干扰。接口速率是物理属性，不能被 VRF 隔离。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VRF",
+    "difficulty": "medium",
+    "tags": [
+      "VRF",
+      "资源隔离",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-2-011",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VRF」。知识点编码 hcip821-9-2-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "b80e65eff8a119556c29c1136a40ba6cb076822c4c80d5b12a2429be8ec493f9"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-2-012",
+    "type": "multiple_choice",
+    "question": "关于 RD 与 RT 的区别，正确的有？",
+    "options": {
+      "A": "RT 用于控制路由的导入导出",
+      "B": "RD 用于区分相同前缀，不控制导入导出",
+      "C": "RD 会参与 BGP 最优路由的选择",
+      "D": "一个 VRF 可以配置多个 RT"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "RD 只负责把相同前缀变成唯一的 VPNv4 路由，不参与选路；RT 是扩展团体属性，用于控制导入导出，且可配置多个。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VRF",
+    "difficulty": "medium",
+    "tags": [
+      "RD",
+      "RT",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-2-012",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VRF」。知识点编码 hcip821-9-2-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "52dc738b72819bae7f648f4e04cd4c2969a34ae3ba52b9f5d32464e7c44e0fcb"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-2-013",
+    "type": "true_false",
+    "question": "RD 参与 BGP 最优路由的选择。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RD 仅用于构造唯一的 VPNv4 前缀，BGP 选路比较的是 AS_Path、Local_Pref、MED 等属性，RD 不参与比较。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VRF",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "RD"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-2-013",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VRF」。知识点编码 hcip821-9-2-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "45fb4fc26913440f2ca1fa888d07e38975d584dd62df6fa0f22539f445f2f923"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-2-014",
+    "type": "true_false",
+    "question": "同一台设备上的不同 VRF 可以使用相同的 IP 地址段。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "VRF 的核心价值就是地址空间复用：不同 VRF 拥有独立路由表，相同私网地址段可以同时存在而互不冲突。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VRF",
+    "difficulty": "easy",
+    "tags": [
+      "判断",
+      "VRF",
+      "地址复用"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-2-014",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VRF」。知识点编码 hcip821-9-2-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "5c2c51c6172b7c6fc7d3fd131c071a4a31c63f63145264fb6137775773616497"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-2-015",
+    "type": "single_choice",
+    "question": "在 PE 上为 CE 配置静态路由时，需要额外指定什么？",
+    "options": {
+      "A": "该静态路由的 RD 值",
+      "B": "该静态路由所属的 VPN 实例",
+      "C": "该静态路由的 MPLS 标签",
+      "D": "该静态路由的 RT 值"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "PE 上为 CE 配置静态路由必须用 vpn-instance 参数指明所属实例，否则路由会进入全局路由表，无法与 CE 的私网互通。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VRF",
+    "difficulty": "medium",
+    "tags": [
+      "静态路由",
+      "VPN 实例"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-2-015",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VRF」。知识点编码 hcip821-9-2-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "32e355c0385c5805cd1505765a73bc5ad39d11acf4e4f48b08b3b582c15a9c24"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-2-016",
+    "type": "single_choice",
+    "question": "VRF 路由表与全局路由表的关系是？",
+    "options": {
+      "A": "VRF 路由表是全局路由表的子集",
+      "B": "VRF 路由表会自动同步到全局路由表",
+      "C": "全局路由表优先于 VRF 路由表",
+      "D": "VRF 路由表独立于全局路由表，互不可见"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "VRF 路由表是独立的路由空间，与全局路由表互不可见。需要互通时必须显式配置路由泄漏或使用公网路由。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VRF",
+    "difficulty": "easy",
+    "tags": [
+      "VRF",
+      "路由表"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-2-016",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VRF」。知识点编码 hcip821-9-2-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "f1a9f5695086cbed83898eb16f3ed822458ea84fa7311325fcfdb558e395f16f"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-2-017",
+    "type": "single_choice",
+    "question": "多实例 OSPF 指的是？",
+    "options": {
+      "A": "在同一台设备上为不同 VRF 运行独立的 OSPF 进程",
+      "B": "一个 OSPF 进程内配置多个区域",
+      "C": "一台设备同时运行多种路由协议",
+      "D": "一个接口同时加入多个 OSPF 进程"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "多实例 OSPF 让每个 VRF 拥有独立的 OSPF 进程与 LSDB，彼此不交换 LSA，从而在 PE 上隔离不同 VPN 的 OSPF 域。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VRF",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "多实例"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-2-017",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VRF」。知识点编码 hcip821-9-2-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "136ebdde9fde0d470b264b96ccb29d36feb5ad4ea4e1225cf366802a44220451"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-9-2-2-018",
+    "type": "single_choice",
+    "question": "接口加入 VRF 后，该接口收到的报文查表时使用？",
+    "options": {
+      "A": "默认 VRF 的路由表",
+      "B": "该 VRF 的路由表",
+      "C": "全局路由表",
+      "D": "管理口的路由表"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "接口绑定 VRF 后，入方向报文只在该实例的路由表中查找转发表项，不会回落到全局路由表，这是实例隔离的转发面体现。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VRF",
+    "difficulty": "medium",
+    "tags": [
+      "转发",
+      "VRF"
+    ],
+    "provenance": {
+      "questionId": "hcip821-9-2-2-018",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络安全基础 / VPN 与 VRF / VRF」。知识点编码 hcip821-9-2-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "947a44e48446735535c4fabfc91330864cb7c4b4668075c8c2e0696285a35b03"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  }
+]

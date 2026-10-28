@@ -10,6 +10,7 @@ import { createMembershipStore, dailyExplanationLimit } from "./memberships.js";
 import { createPointsStore } from "./ai-points/store.js";
 import { createAiServiceStore } from "./ai-service-store.js";
 import { digest as contentDigest, questionPayload } from "./content-quality/quality.js";
+import { applyBankMigrations } from "./bank-migrations.js";
 const scrypt = promisify(crypto.scrypt);
 const unknownAccountSalt = crypto.randomBytes(16).toString("base64");
 
@@ -561,6 +562,11 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
     throw error;
   }
   invalidateQuestions();
+  // 题库重建后同步历史记录里的分类标签与知识点 ID。
+  // 必须在题目同步完成之后、对外服务之前执行，保证不会有新记录在迁移期间写入。
+  applyBankMigrations(db, (message) => {
+    if (process.env.NODE_ENV !== "test") console.log(message);
+  });
   const memberships = createMembershipStore(db);
   const points = createPointsStore(db);
   const aiServices = createAiServiceStore(db);

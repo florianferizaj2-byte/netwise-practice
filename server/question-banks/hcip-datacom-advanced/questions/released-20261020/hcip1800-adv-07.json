@@ -1,0 +1,1581 @@
+[
+  {
+    "id": "hcip831-5-1-1-001",
+    "type": "single_choice",
+    "question": "MPLS 标签字段的长度是多少位？",
+    "options": {
+      "A": "24 位",
+      "B": "12 位",
+      "C": "20 位",
+      "D": "32 位"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "MPLS 标签共 32 位，其中标签值 20 位、EXP 3 位、栈底标志 S 1 位、TTL 8 位。20 位标签值决定了单台设备约百万级的标签空间。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "MPLS 基础与转发",
+    "difficulty": "easy",
+    "tags": [
+      "MPLS",
+      "标签结构"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-1-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / MPLS 基础与转发」。知识点编码 hcip831-5-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "c05996aa9654639c5868ecb0721311a48f9cfb52295be513ed7c2884cecfaa96"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-1-002",
+    "type": "single_choice",
+    "question": "MPLS 标签中的 S 位表示什么？",
+    "options": {
+      "A": "是否支持组播",
+      "B": "是否为栈底标签",
+      "C": "是否启用 QoS",
+      "D": "是否为保留标签"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "S 位为 1 表示该标签是标签栈的栈底，紧接其后就是 IP 报文；为 0 表示下面还有标签。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "MPLS 基础与转发",
+    "difficulty": "medium",
+    "tags": [
+      "MPLS",
+      "S 位"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-1-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / MPLS 基础与转发」。知识点编码 hcip831-5-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "c18137a7c9c1b34e36898d11b9e251ae480273976d218df9d65fc8df8a9c0549"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-1-003",
+    "type": "single_choice",
+    "question": "LER 指的是哪类设备？",
+    "options": {
+      "A": "只运行 IP 转发的路由器",
+      "B": "只负责标签分发的服务器",
+      "C": "位于 MPLS 域边缘的标签边缘路由器",
+      "D": "域内只做标签交换的路由器"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "LER 位于 MPLS 域边缘，负责压入或弹出标签；域内只做标签交换的设备称为 LSR。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "MPLS 基础与转发",
+    "difficulty": "easy",
+    "tags": [
+      "MPLS",
+      "LER"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-1-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / MPLS 基础与转发」。知识点编码 hcip831-5-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "7ae06546e6d4a4b1a59b7c4c373c7836e821d1aa561d361b1bac797ab73709d5"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-1-004",
+    "type": "single_choice",
+    "question": "LSR 的主要功能是？",
+    "options": {
+      "A": "按入标签查表并交换出标签",
+      "B": "建立 BGP 邻居",
+      "C": "为报文分配 IP 地址",
+      "D": "提供无线接入"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "LSR 收到带标签报文后，用入标签查 ILM 找到对应的 NHLFE，替换为出标签并从指定下一跳转发。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "MPLS 基础与转发",
+    "difficulty": "easy",
+    "tags": [
+      "MPLS",
+      "LSR"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-1-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / MPLS 基础与转发」。知识点编码 hcip831-5-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "91d0a5122c831f425491855de600869d2c0e436af3f573a50581901e16725fb1"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-1-005",
+    "type": "single_choice",
+    "question": "Ingress LER 对报文执行的主要标签操作是？",
+    "options": {
+      "A": "Flood",
+      "B": "Pop",
+      "C": "Push",
+      "D": "Swap"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Ingress LER 位于隧道入口，为进入 MPLS 域的报文压入标签（Push）；域内 LSR 做 Swap，Egress LER 做 Pop。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "MPLS 基础与转发",
+    "difficulty": "easy",
+    "tags": [
+      "MPLS",
+      "Push"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-1-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / MPLS 基础与转发」。知识点编码 hcip831-5-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e4c195278e290b3be9bc0d605e75c6d6b6455d5b13b5d44142f0d6f7c5f58ff3"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-1-006",
+    "type": "single_choice",
+    "question": "Transit LSR 对报文执行的主要标签操作是？",
+    "options": {
+      "A": "Flood",
+      "B": "Push",
+      "C": "Pop",
+      "D": "Swap"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Transit LSR 用出标签替换入标签再转发，即 Swap。Push 发生在入口，Pop 发生在出口或倒数第二跳。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "MPLS 基础与转发",
+    "difficulty": "easy",
+    "tags": [
+      "MPLS",
+      "Swap"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-1-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / MPLS 基础与转发」。知识点编码 hcip831-5-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4f93c7e752099826f9c7fdf8b49ebe18f1197295d1e328037e0bff544b12d5a5"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-1-007",
+    "type": "single_choice",
+    "question": "PHP（倒数第二跳弹出）的作用是？",
+    "options": {
+      "A": "增加标签栈深度",
+      "B": "减少出口设备的标签处理开销",
+      "C": "为报文做加密",
+      "D": "替代 LDP 分配标签"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "倒数第二跳提前弹出标签，出口设备直接按 IP 转发，省去一次标签查表。出口通过通告隐式空标签 3 来请求上游执行 PHP。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "MPLS 基础与转发",
+    "difficulty": "medium",
+    "tags": [
+      "MPLS",
+      "PHP"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-1-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / MPLS 基础与转发」。知识点编码 hcip831-5-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "75df9451048b500d2b059ceec5455e8b3e3c4a83cbf9a8a0cac6a5e29c3a445d"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-1-008",
+    "type": "single_choice",
+    "question": "在 MPLS 中，FEC 的含义是什么？",
+    "options": {
+      "A": "前向纠错编码",
+      "B": "流分类标记",
+      "C": "快速以太网通道",
+      "D": "转发等价类"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "FEC 指在转发过程中被以相同方式处理的一组报文。MPLS 把 FEC 映射到标签，用标签代替逐跳的 IP 前缀查找。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "MPLS 基础与转发",
+    "difficulty": "medium",
+    "tags": [
+      "MPLS",
+      "FEC"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-1-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / MPLS 基础与转发」。知识点编码 hcip831-5-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "1a22b8a5472277860f792e35bd0c1fdcedfac8869f9e466474ee0f42106b967c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-1-009",
+    "type": "single_choice",
+    "question": "下列哪个协议可以为 MPLS 分配标签？",
+    "options": {
+      "A": "LDP",
+      "B": "DHCP",
+      "C": "IGMP",
+      "D": "OSPF"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "LDP 是最常用的标签分发协议，RSVP-TE 与 MP-BGP 也能分发标签。OSPF 只负责 IP 路由计算，不分发标签。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "MPLS 基础与转发",
+    "difficulty": "medium",
+    "tags": [
+      "MPLS",
+      "标签分发"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-1-009",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / MPLS 基础与转发」。知识点编码 hcip831-5-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "bc8e61f5c5cbde0a9877f4aec33b1e8408f9963efe2ab7f94f1c3dd828ae1745"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-1-010",
+    "type": "single_choice",
+    "question": "MPLS 标签值中 0 到 15 的用途是？",
+    "options": {
+      "A": "分配给组播树",
+      "B": "分配给 VPN 实例",
+      "C": "保留给特殊语义",
+      "D": "分配给普通 LSP"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "0 到 15 为保留标签，例如 0 为 IPv4 显式空标签、3 为隐式空标签、14 为 OAM 告警标签。普通 LSP 使用 16 以上的值。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "MPLS 基础与转发",
+    "difficulty": "medium",
+    "tags": [
+      "MPLS",
+      "保留标签"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-1-010",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / MPLS 基础与转发」。知识点编码 hcip831-5-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "5c1f498a15ac946cac6194345c108787ec547b423ea32d1c9e9ee05a67697550"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-1-011",
+    "type": "single_choice",
+    "question": "标签 3 的语义是什么？",
+    "options": {
+      "A": "IPv4 显式空标签",
+      "B": "隐式空标签，表示执行 PHP",
+      "C": "OAM 告警标签",
+      "D": "路由器告警标签"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "标签 3 为隐式空标签，出口设备通告该标签即要求上游执行倒数第二跳弹出。标签 0 才是 IPv4 显式空标签。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "MPLS 基础与转发",
+    "difficulty": "hard",
+    "tags": [
+      "MPLS",
+      "隐式空标签"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-1-011",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / MPLS 基础与转发」。知识点编码 hcip831-5-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "60754448b3e59ff3a52ccd3dd731d6e1cde572a4324f28418938cf7c3f22718e"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-1-012",
+    "type": "single_choice",
+    "question": "ILM 表项的作用是？",
+    "options": {
+      "A": "按目的 IP 索引出接口",
+      "B": "按入标签索引本地转发动作",
+      "C": "按 VLAN 索引广播域",
+      "D": "按 MAC 地址索引端口"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "ILM（入标签映射）以入标签为索引，指向对应的 NHLFE，从而确定出标签、出接口与下一跳。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "MPLS 基础与转发",
+    "difficulty": "medium",
+    "tags": [
+      "MPLS",
+      "ILM"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-1-012",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / MPLS 基础与转发」。知识点编码 hcip831-5-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "2bc2fb7b06e373f1a82cddbd8d2fcc266b33d76d6556e00ace23e741af4adaf8"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-1-013",
+    "type": "single_choice",
+    "question": "NHLFE 中记录的内容是？",
+    "options": {
+      "A": "目的 IP 与掩码",
+      "B": "入标签与入接口",
+      "C": "VLAN 与优先级",
+      "D": "出标签、出接口与下一跳"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "NHLFE（下一跳标签转发项）描述转发动作：压入或替换为什么标签、从哪个接口发出、下一跳是谁。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "MPLS 基础与转发",
+    "difficulty": "medium",
+    "tags": [
+      "MPLS",
+      "NHLFE"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-1-013",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / MPLS 基础与转发」。知识点编码 hcip831-5-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "ccaf41a97cf7fb14c8a95530d072c8ee1834ec5325a695d4cd0eb14586588e86"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-1-014",
+    "type": "single_choice",
+    "question": "MPLS 标签分发的基本方向是？",
+    "options": {
+      "A": "由网管系统统一分配",
+      "B": "下游分配标签，上游使用",
+      "C": "上游分配标签，下游使用",
+      "D": "两端各自独立分配"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "下游 LSR 为 FEC 分配标签并通告给上游，上游把该标签作为出标签使用。这种\"下游分配、上游使用\"的模式保证转发路径与路由一致。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "MPLS 基础与转发",
+    "difficulty": "hard",
+    "tags": [
+      "MPLS",
+      "标签分发方向"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-1-014",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / MPLS 基础与转发」。知识点编码 hcip831-5-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "a9a4e8ce0b3179f8c3798691d4670ca3a01948e9e6e26e63498fc7af6a242b82"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-1-015",
+    "type": "single_choice",
+    "question": "MPLS 转发与纯 IP 转发的主要区别是？",
+    "options": {
+      "A": "用短标签索引代替最长前缀匹配",
+      "B": "不支持负载分担",
+      "C": "不做 TTL 递减",
+      "D": "不需要查任何转发表"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "MPLS 用固定长度的标签做精确匹配，替代了 IP 的最长前缀匹配，转发效率更高，且标签栈可承载 VPN 等多层语义。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "MPLS 基础与转发",
+    "difficulty": "medium",
+    "tags": [
+      "MPLS",
+      "转发原理"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-1-015",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / MPLS 基础与转发」。知识点编码 hcip831-5-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "dbd1b27b7b036bc4d808b595624c2a67aa656e3d2ef1ed309129134fc8f492a7"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-1-016",
+    "type": "single_choice",
+    "question": "MPLS 报文的 TTL 如何处理？",
+    "options": {
+      "A": "TTL 在各跳保持不变",
+      "B": "只在出口处递减一次",
+      "C": "标签中没有定义 TTL 字段",
+      "D": "复制 IP TTL 到标签 TTL 并逐跳递减"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "标签中有 8 位 TTL，入标签时从 IP TTL 复制，逐跳递减，出口弹出标签时再写回 IP 头，用于防止环路。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "MPLS 基础与转发",
+    "difficulty": "medium",
+    "tags": [
+      "MPLS",
+      "TTL"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-1-016",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / MPLS 基础与转发」。知识点编码 hcip831-5-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "aeeb006649f1a675e34b3cc78bf6544f767aa208fe6f034819d8badd872cb81e"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-1-017",
+    "type": "multiple_choice",
+    "question": "MPLS 标签栈可以用于下列哪些场景？",
+    "options": {
+      "A": "承载流量工程路径",
+      "B": "替代 IP 地址分配",
+      "C": "承载 VPN 私网标签",
+      "D": "承载组播复制点信息"
+    },
+    "answer": [
+      "A",
+      "C",
+      "D"
+    ],
+    "analysis": "标签栈支持多层标签：外层用于公网转发或 TE 路径，内层用于区分 VPN 或标识组播树。IP 地址分配由 DHCP 等协议完成。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "MPLS 基础与转发",
+    "difficulty": "medium",
+    "tags": [
+      "MPLS",
+      "标签栈",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-1-017",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / MPLS 基础与转发」。知识点编码 hcip831-5-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "7ea6dcb2a49b44a43b0cb3e19dbc6f9cf5d91890761d2030874565cd1cd61809"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-1-018",
+    "type": "multiple_choice",
+    "question": "关于 Ingress LER 的处理，正确的有？",
+    "options": {
+      "A": "为报文压入标签",
+      "B": "确定报文所属的 FEC",
+      "C": "按 NHLFE 指定出接口转发",
+      "D": "必须弹出所有标签"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "Ingress LER 根据目的地址确定 FEC，压入对应标签并按 NHLFE 转发。弹出全部标签是 Egress LER 的动作。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "MPLS 基础与转发",
+    "difficulty": "medium",
+    "tags": [
+      "MPLS",
+      "Ingress",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-1-018",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / MPLS 基础与转发」。知识点编码 hcip831-5-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "bcb43b15aa98ce8b26c4bb71945bf604083d9e309eebbabfaebeb4fa3864085c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-1-019",
+    "type": "true_false",
+    "question": "MPLS 标签总长度为 32 位。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "标签共 32 位：20 位标签值、3 位 EXP、1 位 S、8 位 TTL。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "MPLS 基础与转发",
+    "difficulty": "easy",
+    "tags": [
+      "判断",
+      "标签结构"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-1-019",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / MPLS 基础与转发」。知识点编码 hcip831-5-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e52e0551f6cde0d04c9cadd4fd7ea39acb6e35c87be1c69f9d437389e40e0119"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-1-020",
+    "type": "true_false",
+    "question": "MPLS 域内每台 LSR 都必须运行 BGP。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "LSR 只需运行 IGP 与标签分发协议即可完成标签转发。BGP 用于承载 VPNv4 等路由，并非 MPLS 转发的必要条件。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "MPLS 基础与转发",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "LSR"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-1-020",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / MPLS 基础与转发」。知识点编码 hcip831-5-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "a5dd2d304a9157ffe2f1992a552c653e7135a0d479c5553b81ff3c6f3f66eb0f"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-1-021",
+    "type": "single_choice",
+    "question": "MPLS 网络中，标签交换路径 LSP 的方向是？",
+    "options": {
+      "A": "与路由的计算方向无关",
+      "B": "单向，从 Ingress 到 Egress",
+      "C": "双向，一条 LSP 承载两个方向",
+      "D": "由组播树决定转发方向"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "LSP 是单向路径，两个方向需要各自建立 LSP。因此双向业务需要配置两条方向相反的 LSP。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "MPLS 基础与转发",
+    "difficulty": "medium",
+    "tags": [
+      "MPLS",
+      "LSP"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-1-021",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / MPLS 基础与转发」。知识点编码 hcip831-5-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "8fe3669b972a55cf08f9ea2adcec84f2d68e948a2d77f04b8991f767347bfde0"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-1-022",
+    "type": "single_choice",
+    "question": "出口设备通告隐式空标签的目的是？",
+    "options": {
+      "A": "要求上游重新计算路由",
+      "B": "要求上游压入新标签",
+      "C": "要求上游丢弃报文",
+      "D": "要求上游执行倒数第二跳弹出"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "出口通告标签 3 后，上游在倒数第二跳弹出标签，出口直接按 IP 转发，减少一次标签处理并降低出口负担。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "MPLS 基础与转发",
+    "difficulty": "hard",
+    "tags": [
+      "MPLS",
+      "隐式空标签"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-1-022",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / MPLS 基础与转发」。知识点编码 hcip831-5-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "61b85b875c7d70ce369fa5bc361a943465ea7472aedf682014a9d9f4acf4e54e"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-2-001",
+    "type": "single_choice",
+    "question": "配置静态 LSP 的入节点时，必须指定的参数是？",
+    "options": {
+      "A": "仅需指定下一跳地址",
+      "B": "仅需指定出标签值",
+      "C": "目的地址、掩码长度、下一跳与出标签",
+      "D": "仅需指定目的地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "入节点需要明确哪些流量进入 LSP（目的地址与掩码长度）、从哪发出（下一跳）以及压入什么标签（出标签）。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "静态 LSP",
+    "difficulty": "medium",
+    "tags": [
+      "静态 LSP",
+      "入节点"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-2-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / 静态 LSP」。知识点编码 hcip831-5-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "0cb6c94d5c6775c02b97e5c7c27d0984b27eb9d9e92eb61063089f688b43e254"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-2-002",
+    "type": "single_choice",
+    "question": "静态 LSP 的中间节点需要配置什么？",
+    "options": {
+      "A": "目的地址与掩码",
+      "B": "仅入标签",
+      "C": "入标签与出标签及下一跳",
+      "D": "仅出标签"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "中间节点按入标签匹配，替换为出标签并从下一跳发出，因此入标签、出标签与下一跳三者缺一不可。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "静态 LSP",
+    "difficulty": "medium",
+    "tags": [
+      "静态 LSP",
+      "中间节点"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-2-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / 静态 LSP」。知识点编码 hcip831-5-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "89adb7c3c17d179c18d1a9b78955c39ba7967203da1c86dd93e67836c43a28cc"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-2-003",
+    "type": "single_choice",
+    "question": "静态 LSP 的出节点需要配置什么？",
+    "options": {
+      "A": "下一跳地址",
+      "B": "出标签",
+      "C": "目的地址与掩码",
+      "D": "入标签"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "出节点只需指定入标签，收到该标签的报文后弹出标签并按 IP 转发，不需要再分配出标签。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "静态 LSP",
+    "difficulty": "medium",
+    "tags": [
+      "静态 LSP",
+      "出节点"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-2-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / 静态 LSP」。知识点编码 hcip831-5-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "43a8a61b97c82502431b5c5b8fb3436ec2aefb5dd4bdc53aecc85e8064f3fbf9"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-2-004",
+    "type": "single_choice",
+    "question": "静态 LSP 相比 LDP 动态 LSP 的主要缺点是？",
+    "options": {
+      "A": "不支持标签转发",
+      "B": "占用带宽更大",
+      "C": "不能承载 VPN",
+      "D": "拓扑变化时需手工调整"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "静态 LSP 不随拓扑自动收敛，链路或路由变化后必须手工修改配置，维护成本高，适合结构稳定的小型网络。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "静态 LSP",
+    "difficulty": "medium",
+    "tags": [
+      "静态 LSP",
+      "缺点"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-2-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / 静态 LSP」。知识点编码 hcip831-5-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "ec2d3582ed6850a36c4a54b50bd2a904930d161338ba55b33aae1ec614fab51b"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-2-005",
+    "type": "single_choice",
+    "question": "静态 LSP 是否依赖 IGP 计算路径？",
+    "options": {
+      "A": "不依赖，路径由配置显式指定",
+      "B": "依赖，必须运行 OSPF",
+      "C": "依赖，必须运行 BGP",
+      "D": "依赖，必须运行 IS-IS"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "静态 LSP 的每一跳都由管理员指定，不需要 IGP 参与路径计算。但只要下一跳不可达，LSP 仍然无法转发。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "静态 LSP",
+    "difficulty": "medium",
+    "tags": [
+      "静态 LSP",
+      "IGP"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-2-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / 静态 LSP」。知识点编码 hcip831-5-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "52ce5c8c34e110bb4881482f35e977eab46d9b9655020d99ab157f7c5be5d37f"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-2-006",
+    "type": "single_choice",
+    "question": "配置静态 LSP 时出标签的取值范围通常是？",
+    "options": {
+      "A": "1 到 255",
+      "B": "0 到 15",
+      "C": "1024 到 2047",
+      "D": "16 到 1048575"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "0 到 15 为保留标签，普通 LSP 使用 16 到 1048575 之间的值。配置保留值会被设备拒绝。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "静态 LSP",
+    "difficulty": "medium",
+    "tags": [
+      "静态 LSP",
+      "标签范围"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-2-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / 静态 LSP」。知识点编码 hcip831-5-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d36642841e9c5534ec4d6755c4c81f36011dd989fae6e0c57833606e3edcc202"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-2-007",
+    "type": "single_choice",
+    "question": "静态 LSP 中间节点的入标签与上游出标签必须满足什么关系？",
+    "options": {
+      "A": "入标签必须是 3",
+      "B": "出标签必须是 0",
+      "C": "两者必须不同",
+      "D": "两者数值相同"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "上游节点压入的出标签，就是下游节点识别的入标签，两者必须一致，否则报文到达后无法匹配 ILM 而被丢弃。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "静态 LSP",
+    "difficulty": "hard",
+    "tags": [
+      "静态 LSP",
+      "标签一致性"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-2-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / 静态 LSP」。知识点编码 hcip831-5-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "1a77071cede98b605c2b5e823aaabbad9abdee1cb1ff1b44ed90b8cefb1a4cd1"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-2-008",
+    "type": "single_choice",
+    "question": "静态 LSP 能否承载 MPLS VPN 业务？",
+    "options": {
+      "A": "不能，静态 LSP 只能转发 IPv6",
+      "B": "可以，作为公网隧道承载 VPN 标签",
+      "C": "不能，静态 LSP 不支持标签栈",
+      "D": "只能承载组播业务"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "静态 LSP 建立的是公网隧道，VPN 报文在其上再压一层私网标签即可，因此可以作为 VPN 的公网承载。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "静态 LSP",
+    "difficulty": "medium",
+    "tags": [
+      "静态 LSP",
+      "VPN"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-2-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / 静态 LSP」。知识点编码 hcip831-5-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e2c23569f12999e8403401278aa006b37b2b252a32d2f26e33038066fae4c522"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-2-009",
+    "type": "multiple_choice",
+    "question": "配置静态 LSP 时需要保证下列哪些一致性？",
+    "options": {
+      "A": "下一跳地址可达",
+      "B": "上游出标签等于下游入标签",
+      "C": "各节点路径方向一致",
+      "D": "各节点的 Router ID 相同"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "静态 LSP 依赖标签值衔接、下一跳可达与路径方向一致。Router ID 不需要相同，各设备本就可以不同。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "静态 LSP",
+    "difficulty": "medium",
+    "tags": [
+      "静态 LSP",
+      "配置",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-2-009",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / 静态 LSP」。知识点编码 hcip831-5-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "34af26cfb2dc6a68ad3553157b334ce26a587b56238a8c98b59839a280b2d51d"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-2-010",
+    "type": "multiple_choice",
+    "question": "静态 LSP 的适用场景包括？",
+    "options": {
+      "A": "对配置自动化要求高的网络",
+      "B": "实验与教学环境",
+      "C": "需要快速自动收敛的大型网络",
+      "D": "拓扑稳定的小型网络"
+    },
+    "answer": [
+      "B",
+      "D"
+    ],
+    "analysis": "静态 LSP 适合拓扑稳定、规模较小的场景。大型网络或要求自动收敛的环境应使用 LDP 或 RSVP-TE。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "静态 LSP",
+    "difficulty": "medium",
+    "tags": [
+      "静态 LSP",
+      "场景",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-2-010",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / 静态 LSP」。知识点编码 hcip831-5-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "542ebc8d94ec86bdf5ee67a35668d554ded35cd9de445c35ea1636c28a6c2475"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-2-011",
+    "type": "true_false",
+    "question": "一条静态 LSP 可以同时承载两个方向的流量。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "LSP 是单向路径，双向通信需要分别配置两条方向相反的 LSP。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "静态 LSP",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "静态 LSP"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-2-011",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / 静态 LSP」。知识点编码 hcip831-5-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "b09f6a9ee93a066b8ca748b9e355aa1b02c931668c3ffe83d7434d8fdf603050"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-2-012",
+    "type": "true_false",
+    "question": "静态 LSP 的路径由管理员逐跳指定，不依赖 IGP 计算。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "静态 LSP 的每一跳都由配置显式给出，IGP 只影响下一跳是否可达，不参与路径计算。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "静态 LSP",
+    "difficulty": "easy",
+    "tags": [
+      "判断",
+      "静态 LSP"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-2-012",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / 静态 LSP」。知识点编码 hcip831-5-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e34ec0ee4f40cb92ab02a213b9f6aac64a4183c883342165a7a2224a00293be1"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-2-013",
+    "type": "single_choice",
+    "question": "静态 LSP 配置完成后业务不通，最先应检查什么？",
+    "options": {
+      "A": "设备的 CPU 占用率",
+      "B": "接口的光模块型号",
+      "C": "各跳标签值是否首尾衔接",
+      "D": "SNMP 团体名"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "静态 LSP 最常见的故障是标签值不衔接或下一跳不可达，导致中间节点匹配不到 ILM 而丢弃报文。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "静态 LSP",
+    "difficulty": "medium",
+    "tags": [
+      "静态 LSP",
+      "排障"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-2-013",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / 静态 LSP」。知识点编码 hcip831-5-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "dac16fd67527858d53ccdc4f165b231258a88f2f53f548733eaecf6066f21523"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-2-014",
+    "type": "single_choice",
+    "question": "静态 LSP 的入节点在转发时执行什么动作？",
+    "options": {
+      "A": "替换为入标签",
+      "B": "弹出标签",
+      "C": "不做任何标签操作",
+      "D": "压入配置的出标签"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "入节点把匹配目的地址的报文压入出标签，之后由中间节点逐跳交换，出节点弹出标签。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "静态 LSP",
+    "difficulty": "medium",
+    "tags": [
+      "静态 LSP",
+      "入节点转发"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-2-014",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / 静态 LSP」。知识点编码 hcip831-5-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "65be4859d478cb3fb509ba90449bd977cb9f2b672cba197626fb2fdc9d030b7e"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-2-015",
+    "type": "single_choice",
+    "question": "静态 LSP 与 LDP LSP 在标签分配上的本质区别是？",
+    "options": {
+      "A": "前者不支持 PHP，后者支持",
+      "B": "前者手工指定，后者由协议动态分配",
+      "C": "前者只能用于 IPv6",
+      "D": "前者使用 20 位标签，后者使用 32 位"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "静态 LSP 的标签值与路径都由管理员指定；LDP 依据路由自动分配标签并随拓扑变化更新，支持 PHP 等特性。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "静态 LSP",
+    "difficulty": "hard",
+    "tags": [
+      "静态 LSP",
+      "LDP"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-2-015",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / 静态 LSP」。知识点编码 hcip831-5-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "bdbe3b05b4839f77aff65547cdb79c4a120406e2ae1ebb905d910fe82f3d42c4"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-2-016",
+    "type": "single_choice",
+    "question": "静态 LSP 中间节点收到未匹配任何 ILM 的标签报文时如何处理？",
+    "options": {
+      "A": "压入新标签后转发",
+      "B": "丢弃报文",
+      "C": "按 IP 路由转发",
+      "D": "广播到所有接口"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "MPLS 设备对无法匹配 ILM 的标签报文直接丢弃，不会回退到 IP 转发。这也是标签配置错误时业务完全不通的原因。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "静态 LSP",
+    "difficulty": "medium",
+    "tags": [
+      "静态 LSP",
+      "转发"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-2-016",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / 静态 LSP」。知识点编码 hcip831-5-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "83b81c7decac28f964a9fc8fd2299512bca30c251ea58e5673ef8296c25551ed"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-2-017",
+    "type": "single_choice",
+    "question": "静态 LSP 配置中 masklen 参数的作用是？",
+    "options": {
+      "A": "指定接口的掩码",
+      "B": "指定标签的位宽",
+      "C": "指定 TTL 的初始值",
+      "D": "指定目的地址的前缀长度"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "masklen 与目的地址共同确定进入 LSP 的流量范围，例如 32 位表示只匹配该主机地址。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "静态 LSP",
+    "difficulty": "medium",
+    "tags": [
+      "静态 LSP",
+      "masklen"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-2-017",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / 静态 LSP」。知识点编码 hcip831-5-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e58b7c7cf3e05d28a586da4d13bf9b54d072e624d755a6e7dd3cb4ea94d13fec"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-2-018",
+    "type": "single_choice",
+    "question": "静态 LSP 在设备重启后是否需要重新建立？",
+    "options": {
+      "A": "需要重新计算路由",
+      "B": "需要重新手工配置",
+      "C": "配置保存在配置文件中，重启后自动生效",
+      "D": "需要重新协商标签"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "静态 LSP 属于配置数据，写入配置文件后重启自动加载。动态 LSP 则需要协议重新协商。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "静态 LSP",
+    "difficulty": "medium",
+    "tags": [
+      "静态 LSP",
+      "持久化"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-2-018",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / 静态 LSP」。知识点编码 hcip831-5-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d1f8c71576598c89afedbde049436d9b1dabf918a5314188fa9e932c6062bbba"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-2-019",
+    "type": "single_choice",
+    "question": "两台设备之间的静态 LSP 双向不通，只配置了一条 LSP，原因是什么？",
+    "options": {
+      "A": "路由表为空",
+      "B": "接口未启用 MPLS",
+      "C": "LSP 单向，反方向缺少路径",
+      "D": "标签值配置错误"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "一条 LSP 只承载一个方向，反方向流量没有对应标签路径，会在入节点按 IP 转发或直接被丢弃。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "静态 LSP",
+    "difficulty": "hard",
+    "tags": [
+      "静态 LSP",
+      "双向"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-2-019",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / 静态 LSP」。知识点编码 hcip831-5-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "2a6733c98f2d5ea66ac2ca236043ae8b8707103ff2c124d0eeceb2d94ed5c2a1"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-2-020",
+    "type": "multiple_choice",
+    "question": "下列哪些属于静态 LSP 的特点？",
+    "options": {
+      "A": "配置量随网络规模线性增长",
+      "B": "支持自动故障倒换",
+      "C": "拓扑变化需人工干预",
+      "D": "不占用协议报文带宽"
+    },
+    "answer": [
+      "A",
+      "C",
+      "D"
+    ],
+    "analysis": "静态 LSP 无协议报文开销，但配置量大且不自动收敛，也不具备自动故障倒换能力。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "静态 LSP",
+    "difficulty": "medium",
+    "tags": [
+      "静态 LSP",
+      "特点",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-2-020",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / 静态 LSP」。知识点编码 hcip831-5-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "c796487ca70393f2d2bede4fbfc8e609f3fecef70920c8e97aa9b3f86e2c5e1c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-2-021",
+    "type": "single_choice",
+    "question": "静态 LSP 的下一跳地址必须满足什么条件？",
+    "options": {
+      "A": "必须是公网地址",
+      "B": "在路由表中可达",
+      "C": "必须是 Loopback 地址",
+      "D": "必须是直连地址"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "下一跳只需路由可达即可，不必直连。若下一跳不可达，即使标签配置正确，报文也无法送出。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "静态 LSP",
+    "difficulty": "medium",
+    "tags": [
+      "静态 LSP",
+      "下一跳"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-2-021",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / 静态 LSP」。知识点编码 hcip831-5-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d6fc35eaeda1f40ef98d2b9d160b1de1bd9b395d3786f888286494667fc3ec66"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-2-022",
+    "type": "single_choice",
+    "question": "静态 LSP 的出节点收到标签报文后执行什么动作？",
+    "options": {
+      "A": "交换为另一标签",
+      "B": "压入新标签",
+      "C": "丢弃报文",
+      "D": "弹出标签并按 IP 转发"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "出节点是 LSP 的终点，弹出标签后按 IP 路由把报文送往目的地，完成 MPLS 到 IP 的转换。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "静态 LSP",
+    "difficulty": "medium",
+    "tags": [
+      "静态 LSP",
+      "出节点"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-2-022",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / 静态 LSP」。知识点编码 hcip831-5-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "a97e4418ee03037fe2bf447e9f6b6cff145c501c3a0e379732a5ad61d95330bc"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-1-2-023",
+    "type": "true_false",
+    "question": "静态 LSP 的中间节点必须同时配置入标签和出标签。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "中间节点按入标签匹配、按出标签转发，两者缺一不可；只配其一会导致报文无法匹配或被丢弃。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "静态 LSP",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "静态 LSP"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-1-2-023",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS 原理与配置 / 静态 LSP」。知识点编码 hcip831-5-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "3017dfc47847d28e3654843de562f1ebc622380b432d1c2e541ae14de6036ff1"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  }
+]

@@ -1,0 +1,2177 @@
+[
+  {
+    "id": "hcip831-6-1-2-001",
+    "type": "single_choice",
+    "question": "需要一次性收集设备多项运行信息用于故障定位，最合适的命令是？",
+    "options": {
+      "A": "display version",
+      "B": "display users",
+      "C": "display diagnostic-information",
+      "D": "display clock"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "display diagnostic-information 汇总版本、配置、接口、路由与协议状态，适合一次性导出完整现场。其余命令只覆盖单项信息。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "easy",
+    "tags": [
+      "运维",
+      "信息收集"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "8a3e6c76cd06ff7194a97d42c498b9919ebed8effe71171de368e20e8e1104fd"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-2-002",
+    "type": "single_choice",
+    "question": "查看设备软件版本与硬件概要应使用哪条命令？",
+    "options": {
+      "A": "display clock",
+      "B": "display arp",
+      "C": "display users",
+      "D": "display version"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "display version 显示 VRP 版本、补丁、设备型号、内存与运行时长，是确认版本与硬件配置的首选命令。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "easy",
+    "tags": [
+      "运维",
+      "版本"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "7283dc7101f86653a0a9871e67e594aef7c03e02a0e1f81b685c3c331ad88a2e"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-2-003",
+    "type": "single_choice",
+    "question": "查看当前生效的完整配置应使用哪条命令？",
+    "options": {
+      "A": "display current-configuration",
+      "B": "display startup",
+      "C": "display version",
+      "D": "display saved-configuration"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "current-configuration 显示当前运行配置；saved-configuration 显示下次启动加载的配置，两者可能不一致。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "easy",
+    "tags": [
+      "运维",
+      "配置"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "699c32a8b707ecce8a634d75ac69030c6a132a846ba0748e37e9379c380f67eb"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-2-004",
+    "type": "single_choice",
+    "question": "查看接口简要状态与收发速率应使用哪条命令？",
+    "options": {
+      "A": "display interface brief",
+      "B": "display mac-address",
+      "C": "display ip routing-table",
+      "D": "display arp"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "interface brief 以列表形式显示各接口的物理状态、协议状态、带宽利用率与错包统计，适合快速巡检。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "接口"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "90192bf50935a7e7806c919d895b0122f7e583c920d3f2107acbbde704826564"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-2-005",
+    "type": "single_choice",
+    "question": "排查路由缺失时应优先查看哪张表？",
+    "options": {
+      "A": "display ip routing-table",
+      "B": "display mac-address",
+      "C": "display arp",
+      "D": "display session"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "路由表反映当前生效的路由，若目的网段不在表中，需进一步检查协议邻居与路由引入配置。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "路由表"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "3b7d693a36796b43133897a8df267a5109b06602263d7b069af7218030838ef1"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-2-006",
+    "type": "single_choice",
+    "question": "查看 OSPF 邻居状态与区域信息应使用哪条命令？",
+    "options": {
+      "A": "display isis peer",
+      "B": "display ospf peer",
+      "C": "display ospf interface",
+      "D": "display bgp peer"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "ospf peer 显示邻居的 Router ID、状态、区域与接口；ospf interface 显示接口参数；isis peer 用于 IS-IS。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "OSPF"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "39f7bc5ab8e4235ea7da21c505e68d4f07a9d88fbd46da6f9e032c63a3bf084c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-2-007",
+    "type": "single_choice",
+    "question": "查看 BGP 邻居状态应使用哪条命令？",
+    "options": {
+      "A": "display ospf peer",
+      "B": "display isis peer",
+      "C": "display ldp session",
+      "D": "display bgp peer"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "bgp peer 显示邻居地址、AS 号、状态与收发路由数；状态为 Established 才表示会话正常。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "BGP"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "5bcec17b471fe193a76f7711b8cffa3732521ac1eda581e8ea6c337cf57cec35"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-2-008",
+    "type": "single_choice",
+    "question": "查看 MAC 地址表应使用哪条命令？",
+    "options": {
+      "A": "display arp",
+      "B": "display mac-address",
+      "C": "display fib",
+      "D": "display ip routing-table"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "mac-address 显示 MAC、VLAN、端口与表项类型，用于定位终端接入位置与 MAC 漂移问题。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "MAC 表"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "77ce2cde948c5e701af86e48d69b62c631ade51116a4e8ad8ad1a3419dc4d567"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-2-009",
+    "type": "single_choice",
+    "question": "查看 ARP 表项应使用哪条命令？",
+    "options": {
+      "A": "display session",
+      "B": "display fib",
+      "C": "display mac-address",
+      "D": "display arp"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "arp 显示 IP 与 MAC 的映射及老化时间，用于排查地址冲突、网关不可达与二层解析失败。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "ARP"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-009",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "70c876bed0906761f334c4ed2e082740198f4ff12379f30892dac025b3f673be"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-2-010",
+    "type": "single_choice",
+    "question": "查看设备日志缓冲区应使用哪条命令？",
+    "options": {
+      "A": "display clock",
+      "B": "display alarm",
+      "C": "display trapbuffer",
+      "D": "display logbuffer"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "logbuffer 保存系统日志，trapbuffer 保存告警，alarm 显示当前活动告警，三者用途不同。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "日志"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-010",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "6e1ffe63a129a2717716e0461f4ccf07b2287ab8cd10770718c3cd67a13148dd"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-2-011",
+    "type": "single_choice",
+    "question": "查看 CPU 占用率应使用哪条命令？",
+    "options": {
+      "A": "display memory-usage",
+      "B": "display cpu-usage",
+      "C": "display fan",
+      "D": "display device"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "cpu-usage 显示整体与各任务的 CPU 占用，可据此判断是否存在协议震荡或攻击流量。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "CPU"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-011",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "7a27b34f3e4b09d2b020a35d72cfbe4640dcd1abc73497b8d1d253e77483bf9d"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-2-012",
+    "type": "single_choice",
+    "question": "查看内存占用应使用哪条命令？",
+    "options": {
+      "A": "display elabel",
+      "B": "display cpu-usage",
+      "C": "display memory-usage",
+      "D": "display power"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "memory-usage 显示总内存、已用与剩余，持续增长不回落时需怀疑内存泄漏。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "内存"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-012",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "9cd4ec6d5aae136d0536e80b9b7be5a4e5baa94e9678c61c6e55be05293cecfa"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-2-013",
+    "type": "single_choice",
+    "question": "查看单板与模块的在位状态应使用哪条命令？",
+    "options": {
+      "A": "display alarm",
+      "B": "display elabel",
+      "C": "display device",
+      "D": "display version"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "device 显示各槽位单板类型、状态与数量，用于确认硬件是否被正确识别。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "硬件"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-013",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "0374f5cea5020b53e262506723eeaa0853d526abe8623479f6192ed7f9e1b84c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-2-014",
+    "type": "single_choice",
+    "question": "查看电源模块状态应使用哪条命令？",
+    "options": {
+      "A": "display temperature",
+      "B": "display fan",
+      "C": "display device",
+      "D": "display power"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "power 显示电源的在位、工作模式与输出电压；fan 与 temperature 分别对应风扇与温度。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "电源"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-014",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "1196e4a174fe82683a93a63bedcf8254591fee3997cd3c93a511a53d035a2d61"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-2-015",
+    "type": "single_choice",
+    "question": "查看光模块收发功率应使用哪条命令？",
+    "options": {
+      "A": "display device",
+      "B": "display transceiver",
+      "C": "display interface",
+      "D": "display elabel"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "transceiver 显示光模块型号、波长、收发光功率与告警阈值，是判断链路质量的关键命令。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "光模块"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-015",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "047a7099138dbd7fec03cb561f3cb1098b63d7fdf06695e7c7a7a4b8f4f41994"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-2-016",
+    "type": "single_choice",
+    "question": "查看设备电子标签应使用哪条命令？",
+    "options": {
+      "A": "display version",
+      "B": "display alarm",
+      "C": "display device",
+      "D": "display elabel"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "elabel 显示设备与单板的序列号、生产日期与厂商信息，常用于资产核对与保修查询。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "资产"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-016",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "6d73ba1d458330378b36ccfb973f3c1fe9e5350168e69a0c37d9f458a8aa941b"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-2-017",
+    "type": "single_choice",
+    "question": "查看当前活动告警应使用哪条命令？",
+    "options": {
+      "A": "display alarm active",
+      "B": "display clock",
+      "C": "display trapbuffer",
+      "D": "display logbuffer"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "alarm active 列出尚未恢复的告警及其级别，便于快速掌握设备当前异常。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "告警"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-017",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "ae8c412f07ecc33535912ff0a9e869a46207946377ef65129c0d5bf6c7e2e8a8"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-2-018",
+    "type": "single_choice",
+    "question": "逐跳定位转发中断应使用什么工具？",
+    "options": {
+      "A": "telnet",
+      "B": "ftp",
+      "C": "ping",
+      "D": "tracert"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "tracert 逐跳显示路径与时延，可定位中断发生在哪一跳；ping 只能判断端到端是否可达。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "tracert"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-018",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "df8b98d4c2a8382b9ee2f3cf7b0a46176c52e09c683ac057ed1d373cbf6f2663"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-2-019",
+    "type": "single_choice",
+    "question": "需要抓取指定接口的报文时使用什么功能？",
+    "options": {
+      "A": "端口镜像或报文捕获",
+      "B": "display version",
+      "C": "display arp",
+      "D": "display mac-address"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "通过端口镜像把流量复制到分析端口，或使用设备内置的报文捕获功能，再用 Wireshark 分析协议交互。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "抓包"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-019",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "7b082e8fb6c60b6b4221cff5c3377ad4671fe3ab9988d8a6dbb07e5f4e0638da"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-2-020",
+    "type": "single_choice",
+    "question": "查看会话表应使用哪条命令？",
+    "options": {
+      "A": "display session table",
+      "B": "display mac-address",
+      "C": "display arp",
+      "D": "display fib"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "会话表显示五元组、状态与老化时间，用于确认防火墙是否放行、会话是否建立。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "会话"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-020",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "f21b4ae2a19e327d88f8201d33fdaa2b8a0ffaaca425dcc5577e2b7c685e32fa"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-2-021",
+    "type": "single_choice",
+    "question": "查看设备健康度检查结果应使用哪条命令？",
+    "options": {
+      "A": "display clock",
+      "B": "display users",
+      "C": "display version",
+      "D": "display health"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "health 命令汇总 CPU、内存、温度、风扇、电源等关键指标并给出健康状态，适合快速体检。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "健康检查"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-021",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "fbaeea58a7ece1a0ef69b2d2b6b2a5e120d13412e6880c39df558abb43f32449"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-2-022",
+    "type": "single_choice",
+    "question": "查看已安装补丁应使用哪条命令？",
+    "options": {
+      "A": "display patch-information",
+      "B": "display elabel",
+      "C": "display version",
+      "D": "display device"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "patch-information 显示已加载的补丁包与状态，确认漏洞修复情况时必须核对。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "补丁"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-022",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "04695176e04022885e928d17bd465dab4b00b04313d2b620c94a1640f923d5cf"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-2-023",
+    "type": "single_choice",
+    "question": "查看下次启动加载的配置文件应使用哪条命令？",
+    "options": {
+      "A": "display current-configuration",
+      "B": "display version",
+      "C": "display saved-configuration",
+      "D": "display startup"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "startup 显示下次启动使用的配置与系统文件，saved-configuration 显示已保存的配置内容，两者配合可判断配置是否丢失。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "启动配置"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-023",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "5c0c017fb78f5137f1d786ecce956c1220355a49b75e499df07de385e8a47433"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-2-024",
+    "type": "multiple_choice",
+    "question": "下列哪些命令可以用于收集接口层信息？",
+    "options": {
+      "A": "display interface brief",
+      "B": "display transceiver",
+      "C": "display interface",
+      "D": "display bgp peer"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "前三条命令分别提供接口概览、详细统计与光模块信息。bgp peer 属于路由协议信息。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "接口",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-024",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "24b893112c23dab830703d98573c3d2dc5b227e0dd098b73b06f2e2018f3cfbd"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-2-025",
+    "type": "multiple_choice",
+    "question": "故障现场应优先保存哪些信息？",
+    "options": {
+      "A": "配置与日志",
+      "B": "CPU 与内存占用",
+      "C": "设备采购发票",
+      "D": "接口与协议状态"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "现场信息用于还原故障，配置、状态与资源占用是核心。采购发票与故障定位无关。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "现场",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-025",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "00b7d1f4ae7a56ea4b3240c1a481ad5b15e312304366c2c024d810a80c6ff237"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-2-026",
+    "type": "true_false",
+    "question": "display current-configuration 与 display saved-configuration 显示的内容总是相同。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "当前配置是内存中运行的配置，已保存配置是下次启动加载的配置。修改后未保存时两者不一致，这正是配置丢失类故障的根源。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "easy",
+    "tags": [
+      "判断",
+      "配置"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-026",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "5f8fd8929e45ff3b091edde68f5361dfd97ec3bc6b248cd2fce2fc950281f8fd"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-2-027",
+    "type": "true_false",
+    "question": "display diagnostic-information 会一次性收集多项运行信息。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "该命令汇总版本、配置、接口、路由、协议与日志等多项信息，适合故障时一次性导出完整现场。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "信息收集"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-027",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4a2828979e5fbc17bf0ff89cffd36793a7953c4c57422a05690753a4f8ba0d32"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-2-028",
+    "type": "single_choice",
+    "question": "设备重启后配置丢失，最可能的原因是？",
+    "options": {
+      "A": "修改后未执行保存",
+      "B": "VLAN 未划分",
+      "C": "设备没有 license",
+      "D": "接口未启用"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "配置修改后只在内存中生效，未执行 save 时重启会加载旧的已保存配置，表现为配置\"回退\"。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "配置丢失"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-028",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "502c2a6b6d15b096243664d7e15eeb29084b154d4cebbda4dd341caf6c600530"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-2-029",
+    "type": "single_choice",
+    "question": "排查时发现接口 Up 但协议 Down，最应查看哪类信息？",
+    "options": {
+      "A": "设备的采购记录",
+      "B": "人员排班",
+      "C": "接口详细统计与协议配置",
+      "D": "机房的温度"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "物理 Up 而协议 Down 说明链路层协商或协议配置有问题，应查看接口详细状态、双工协商与协议参数。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "hard",
+    "tags": [
+      "运维",
+      "接口"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-029",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "27269cb252e58484d681f198a8e5d4740373ca7a0f6495bf576f73c47e48d57d"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-6-1-2-030",
+    "type": "single_choice",
+    "question": "收集信息时同时保存时间戳的意义是？",
+    "options": {
+      "A": "减少存储空间",
+      "B": "提高采集速度",
+      "C": "便于与其他设备日志对齐",
+      "D": "增加信息量"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "多设备信息需要按时间对齐才能还原事件顺序，缺少时间戳的现场数据价值大幅降低。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "medium",
+    "tags": [
+      "运维",
+      "时间戳"
+    ],
+    "provenance": {
+      "questionId": "hcip831-6-1-2-030",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络运维 / 网络运维 / 信息收集工具」。知识点编码 hcip831-6-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "fe0e4ea1a769f58c032d3e9ad77c50431479238c7bb3aa96e7d2639d9a721a7f"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-001",
+    "type": "single_choice",
+    "question": "网络运维中，网络割接的定义是什么？",
+    "options": {
+      "A": "对设备进行日常巡检",
+      "B": "对在线网络的设备或业务进行有计划变更",
+      "C": "对故障进行紧急修复",
+      "D": "对配置进行备份"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "割接是在保证或尽量减小业务影响的前提下，对在线网络的设备、链路或业务进行的有计划变更。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "easy",
+    "tags": [
+      "割接",
+      "定义"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "3e74867dee8393a7c506f41b0a00b24d85eff5fa4c23c6a3c2ab1f86fc6c791a"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-002",
+    "type": "single_choice",
+    "question": "割接方案中\"回退预案\"的作用是？",
+    "options": {
+      "A": "割接失败时恢复原状态",
+      "B": "提升设备性能",
+      "C": "替代配置备份",
+      "D": "缩短割接时间"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "回退预案明确失败判据、回退步骤与责任人，使割接未达预期时能尽快恢复到变更前的可用状态。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "回退"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "2b6adeb75bc04a0bff54588b0b0fc0bc6ec96c422f0d901d1ba267778a061ada"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-003",
+    "type": "single_choice",
+    "question": "割接窗口通常选择在什么时间？",
+    "options": {
+      "A": "设备保修期内",
+      "B": "业务高峰期",
+      "C": "业务低峰期",
+      "D": "任意时间"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "低峰期业务量小，即使出现问题影响面也最小，同时便于安排足够的人力与时间。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "窗口"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "cee7c5e338b3246d95e2cee51f99e0c5593823423b6074af6e3042db0b98ee28"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-004",
+    "type": "single_choice",
+    "question": "割接前必须完成的关键动作是？",
+    "options": {
+      "A": "重启全部设备",
+      "B": "直接下发新配置",
+      "C": "备份配置并确认回退可行",
+      "D": "断开所有链路"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "备份配置是回退的前提，同时要确认回退步骤可执行、回退时间可接受，否则不应开始割接。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "准备"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "a9cb324dc66994d61e44a43ba9bcc9859113fe1c1de7bc38ac1af7b9849905db"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-005",
+    "type": "single_choice",
+    "question": "割接影响范围评估的核心是？",
+    "options": {
+      "A": "人员的数量",
+      "B": "受影响的业务与用户范围",
+      "C": "设备的采购价格",
+      "D": "机柜的尺寸"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "影响范围决定通知对象、割接窗口与回退策略，评估不清会导致业务方毫无准备地遭遇中断。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "影响评估"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e8163c6dc521a6c13a01e7038c7fc54c1e8f3b955790ac88a2cfbcd4e22cff72"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-006",
+    "type": "single_choice",
+    "question": "割接失败判据应在什么时候确定？",
+    "options": {
+      "A": "割接开始之前",
+      "B": "割接失败之后",
+      "C": "割接完成之后",
+      "D": "项目验收之后"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "失败判据必须在割接前与业务方共同确认，例如业务验证项不通过、时延超过阈值，否则现场容易争论是否该回退。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "失败判据"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "eda6838f9033b44caf4212e7a6cf29c6085357770a30ccf9926655e14466daa3"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-007",
+    "type": "single_choice",
+    "question": "割接通知应包含的核心内容是？",
+    "options": {
+      "A": "设备型号",
+      "B": "机柜位置",
+      "C": "时间、影响范围与联系人",
+      "D": "采购渠道"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "通知要让业务方明确\"什么时候、影响什么、出问题找谁\"，缺少任一项都会造成沟通混乱。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "通知"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "caa5c9da2ef6b4ae6f50d1eed9dd1ec2815bec84ce1c3200a733804fa1117993"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-008",
+    "type": "single_choice",
+    "question": "分批割接的主要好处是？",
+    "options": {
+      "A": "缩小单次失败的影响面",
+      "B": "缩短总工期",
+      "C": "提高带宽",
+      "D": "减少设备数量"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "把大批量变更拆成多批，单批失败只影响部分业务，便于定位与回退，是降低风险的有效手段。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "分批"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "db6ba012346973b530c30154ca1d8b7bd585c03c99e086732f1019b2431f665e"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-009",
+    "type": "single_choice",
+    "question": "割接与日常变更的关系是？",
+    "options": {
+      "A": "两者完全相同",
+      "B": "变更不需要方案",
+      "C": "割接是影响较大的计划性变更",
+      "D": "割接不需要审批"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "割接属于影响范围大、风险高的计划性变更，通常需要更严格的方案评审、审批与回退准备。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "变更"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-009",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "ac680137ac0e5f76bc36d98aa051960f8ebc74c0dd80dc8bdb65fe43a363ea34"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-010",
+    "type": "single_choice",
+    "question": "割接前的演练主要验证什么？",
+    "options": {
+      "A": "人员排班",
+      "B": "机房温度",
+      "C": "设备采购流程",
+      "D": "步骤可行性与耗时"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "在测试环境按方案完整走一遍，可以发现命令错误、依赖缺失与耗时估算偏差，避免在生产环境踩坑。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "演练"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-010",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "6f824ce4c29e28ce06f9cbe41a7f2af249800ca28eb0ea5ef087a4d31b667de6"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-011",
+    "type": "single_choice",
+    "question": "割接后验证应重点确认什么？",
+    "options": {
+      "A": "机柜的颜色",
+      "B": "业务连通性与关键指标",
+      "C": "人员的考勤",
+      "D": "设备的采购价格"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "验证要覆盖原业务路径、关键时延与丢包指标，以及冗余切换是否正常，确认无隐性退化。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "验证"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-011",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "7f5ef41119ab1aac96d8d0852d185a5556807c1012f0ece31003a0c043300a6a"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-012",
+    "type": "single_choice",
+    "question": "割接方案中明确责任人的作用是？",
+    "options": {
+      "A": "避免操作与决策无人负责",
+      "B": "提高设备性能",
+      "C": "增加带宽",
+      "D": "减少 VLAN"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "每步操作、验证与回退决策都应有明确责任人，避免现场推诿或多人同时操作造成冲突。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "责任"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-012",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "5e1f8f6292e3815c9625744ede330e23f3cbcad6a5f140c25425b5af09aa6473"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-013",
+    "type": "single_choice",
+    "question": "割接 checklist 的主要价值是？",
+    "options": {
+      "A": "提高带宽",
+      "B": "替代方案文档",
+      "C": "防止步骤遗漏",
+      "D": "减少设备数量"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "把步骤、验证项与回退点列成清单逐项打勾，可以显著降低高压环境下的遗漏风险。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "checklist"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-013",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d42faa6da857ac17b4693d68874a55600b117266da7009484ade10d2b4b705ea"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-014",
+    "type": "single_choice",
+    "question": "业务割接与设备割接的主要区别是？",
+    "options": {
+      "A": "两者完全相同",
+      "B": "后者不需要回退",
+      "C": "前者不需要窗口",
+      "D": "前者调整业务路径，后者更换或升级设备"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "业务割接侧重业务迁移与路径调整，设备割接侧重硬件替换或软件升级，两者的风险点与验证项不同。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "分类"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-014",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "6aefe5c8041b16474d33a6d9acc951bb423f203f0a2f5543b158aad62874bb74"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-015",
+    "type": "single_choice",
+    "question": "割接过程中发现业务异常，正确做法是？",
+    "options": {
+      "A": "按预案判断是否回退",
+      "B": "忽略异常继续观察",
+      "C": "继续执行剩余步骤",
+      "D": "立即删除全部配置"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "应先按失败判据判断异常是否属于可接受范围，超出则立即执行回退，避免影响扩大。继续执行会放大风险。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "hard",
+    "tags": [
+      "割接",
+      "处置"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-015",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "0b40d409c7f3533f2c1da32cc8a7923b4957effa56f88edd63501df80089757a"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-016",
+    "type": "single_choice",
+    "question": "割接方案评审的主要目的是？",
+    "options": {
+      "A": "提高设备性能",
+      "B": "发现方案缺陷与遗漏",
+      "C": "增加带宽",
+      "D": "减少设备数量"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "由未参与编写的同事评审，容易发现步骤缺失、依赖未考虑、回退不可行等问题。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "评审"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-016",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "9cfa0afcef2db74ad1b681c6929f563659cb6c2ab2f29ff246335c6ba92e2fd7"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-017",
+    "type": "single_choice",
+    "question": "割接记录应包含的关键内容是？",
+    "options": {
+      "A": "实际步骤、耗时与异常",
+      "B": "人员排班",
+      "C": "设备采购价格",
+      "D": "机柜尺寸"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "记录实际执行与计划的差异、遇到的问题与处理方式，可作为下次同类割接的参考。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "记录"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-017",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "811f08a60212591faff17fda2d19d38ca69b5fbf4604991face8898edfb603c4"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-018",
+    "type": "multiple_choice",
+    "question": "割接方案通常包含下列哪些内容？",
+    "options": {
+      "A": "回退预案与失败判据",
+      "B": "详细步骤与时间点",
+      "C": "设备采购合同",
+      "D": "割接目标与范围"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "割接方案聚焦目标、步骤、验证与回退。采购合同属于商务文档，不属于技术方案。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "方案",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-018",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "b53a23e259d816a91780256baccb37fc8391fbe8908e7fea41c47b2fa3e272cd"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-019",
+    "type": "multiple_choice",
+    "question": "降低割接风险的手段包括？",
+    "options": {
+      "A": "分批实施",
+      "B": "准备回退预案",
+      "C": "提前演练",
+      "D": "取消业务验证"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "分批、演练与回退预案都能降低风险。取消业务验证会使问题无法及时发现。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "风险",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-019",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "884034cd350f9b88f3b042a432bfc404b73d80f703d19436fbf0e3771efda93a"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-020",
+    "type": "true_false",
+    "question": "割接可以在业务高峰期进行，只要方案足够详细。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "高峰期业务量大，一旦异常影响面最大且回退时间受限，割接窗口应选在业务低峰期。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "窗口"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-020",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "45cf738bb920c2eecff8d680b836a8e0ec0c66eb155bf857c38515230895a3b0"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-021",
+    "type": "true_false",
+    "question": "回退预案应在割接开始前准备好。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "回退预案必须与割接方案同时准备并在开始前确认可执行，否则失败时无法快速恢复。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "easy",
+    "tags": [
+      "判断",
+      "回退"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-021",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "fb89e1f8be8e06d1fffb2a3e5d67f89b6dd88bf9a7ce2f84cc742dbbf578b386"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-022",
+    "type": "single_choice",
+    "question": "割接前通知业务方的主要目的是？",
+    "options": {
+      "A": "减少设备数量",
+      "B": "提高设备性能",
+      "C": "增加带宽",
+      "D": "让其提前安排并配合验证"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "业务方需要提前安排人员配合验证与应急，缺少配合会导致验证不充分、问题发现滞后。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "沟通"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-022",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "8468b24b40a926348393c81fa8021e6508f493b4ab1257fd84d21174e7e50ff3"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-023",
+    "type": "single_choice",
+    "question": "割接窗口时间估算应包含什么？",
+    "options": {
+      "A": "仅操作时间",
+      "B": "操作时间与验证、回退余量",
+      "C": "仅回退时间",
+      "D": "仅验证时间"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "窗口必须覆盖操作、验证与可能的回退，只估算操作时间会导致超时后被迫在压力下决策。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "时间估算"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-023",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "debbd7766e17b2fe2df5d2633e388310c8774e74a7e3a85564dd0c6ecb825239"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-024",
+    "type": "single_choice",
+    "question": "割接后出现性能下降但业务可用，应如何处理？",
+    "options": {
+      "A": "立即回退",
+      "B": "记录并安排后续优化",
+      "C": "重启设备",
+      "D": "忽略不管"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "业务可用且未触发失败判据时不必回退，但需记录指标变化并在后续窗口优化，避免问题累积。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "优化"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-024",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "a8679feb1feaf2d0dcb83dbf6ffd9c52ca7af0afdb8a8ec87e55d7e838f9bf96"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-025",
+    "type": "single_choice",
+    "question": "割接文档中\"依赖关系\"指的是？",
+    "options": {
+      "A": "设备的采购渠道",
+      "B": "前置条件与关联系统",
+      "C": "人员的学历",
+      "D": "机柜的尺寸"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "例如割接依赖上游电路开通、DNS 记录变更或防火墙策略调整，遗漏依赖会导致割接中途卡住。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "依赖"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-025",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4a7c6a27ef1b43fd00a171e7d2d8aec5b74f57a1e9ad379d9cf0a1f7f5e76231"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-026",
+    "type": "single_choice",
+    "question": "割接后配置未保存会导致什么？",
+    "options": {
+      "A": "设备立即重启",
+      "B": "路由自动清空",
+      "C": "下次重启回到旧配置",
+      "D": "接口自动关闭"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "割接后的配置若未保存，设备重启会加载旧配置，业务会回退到割接前状态，属于常见的人为失误。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "保存"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-026",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "dfc7c4e5178e18b1e9d679a8ee6402493c5c0501b18cf401018e174783441cf1"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-027",
+    "type": "single_choice",
+    "question": "割接中需要临时中断业务时，最合适的做法是？",
+    "options": {
+      "A": "随时中断不通知",
+      "B": "在窗口内按步骤短时中断并快速验证",
+      "C": "中断并等待用户报障",
+      "D": "中断后不再验证"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "计划性中断应在约定窗口内执行，控制中断时长并立即验证，避免长时间不可用。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "hard",
+    "tags": [
+      "割接",
+      "中断"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-027",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "bc290e48e8ef3b30a3ce5dc64ae42f40e6bb6eebeb30784f771a31b0ace7b643"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-028",
+    "type": "single_choice",
+    "question": "割接完成后应更新哪些文档？",
+    "options": {
+      "A": "仅采购合同",
+      "B": "仅人员名单",
+      "C": "仅机房平面图",
+      "D": "拓扑、配置基线与资产台账"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "割接改变了网络状态，拓扑、配置基线与台账必须同步更新，否则后续排障会依据错误信息。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "文档更新"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-028",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "00d23f606c06f097122aca43a03904e6e802fd35c5c8e8dede137d7e314acb3b"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-029",
+    "type": "multiple_choice",
+    "question": "割接前的准备工作包括？",
+    "options": {
+      "A": "直接在生产环境试错",
+      "B": "配置备份",
+      "C": "影响范围通知",
+      "D": "方案编写与评审"
+    },
+    "answer": [
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "方案、备份与通知都是必要准备。在生产环境直接试错风险极高，应在测试环境验证。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "准备",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-029",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "bad0cfa457e6bb4f4b095607a8b74ef366f518d294945232abd2f72ed89926af"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-030",
+    "type": "true_false",
+    "question": "割接失败判据可以等割接完成后再与业务方商量。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "失败判据必须在割接前确认，否则现场容易因标准不一致而延误回退时机，扩大业务影响。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "失败判据"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-030",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "1c8ce6cad72e25e2cd82325e354ca671f634bbab8f36833935e5519c7c686fbc"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-031",
+    "type": "single_choice",
+    "question": "割接方案中时间点的作用是？",
+    "options": {
+      "A": "提高设备性能",
+      "B": "减少设备数量",
+      "C": "增加带宽",
+      "D": "明确各步骤的开始与截止时间"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "明确时间点可以控制整体节奏，及时发现某步骤超时并决定是否回退，避免窗口被耗尽。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "时间点"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-031",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "2f0c431047efe30e952279580b05ad00961c82db6481db44509f4e6ef4dea854"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-1-032",
+    "type": "single_choice",
+    "question": "割接涉及多厂商设备时，最需要提前确认什么？",
+    "options": {
+      "A": "人员的学历",
+      "B": "机柜的高度",
+      "C": "接口与协议兼容性",
+      "D": "设备的颜色"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "多厂商互通容易出现协议实现差异，应提前在测试环境验证互联、认证与特性兼容性。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "兼容性"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-1-032",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接基本概念」。知识点编码 hcip831-8-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "fa2ddd5f80a7115082ba718c87ff3e909b7279aff49cb4235fd6de2c9f7efa7b"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  }
+]

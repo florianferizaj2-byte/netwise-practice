@@ -14,13 +14,16 @@
     ],
     "analysis": "SSID 是无线局域网的服务集标识，通常作为用户看到并选择的无线网络名称。",
     "chapter": "WLAN 技术基础",
-    "knowledgePoint": "SSID/BSSID",
+    "knowledgePoint": "SSID 与 BSSID",
     "difficulty": "easy",
     "tags": [
       "WLAN 技术基础",
+      "WLAN 基本概念",
+      "SSID 与 BSSID",
       "SSID/BSSID"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "WLAN 基本概念"
   },
   {
     "id": "hcia-v2-16-bssid",
@@ -37,13 +40,16 @@
     ],
     "analysis": "BSSID 用于唯一标识基本服务集，通常与 AP 无线接口或虚拟无线服务的 MAC 地址相关。",
     "chapter": "WLAN 技术基础",
-    "knowledgePoint": "SSID/BSSID",
+    "knowledgePoint": "SSID 与 BSSID",
     "difficulty": "medium",
     "tags": [
       "WLAN 技术基础",
+      "WLAN 基本概念",
+      "SSID 与 BSSID",
       "SSID/BSSID"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "WLAN 基本概念"
   },
   {
     "id": "hcia-v2-16-24g-channels",
@@ -60,13 +66,16 @@
     ],
     "analysis": "1、6、11 在常见监管域下通常作为三个互不重叠的 20 MHz 信道，可减少同频干扰。",
     "chapter": "WLAN 技术基础",
-    "knowledgePoint": "信道",
+    "knowledgePoint": "频段与信道",
     "difficulty": "medium",
     "tags": [
       "WLAN 技术基础",
+      "802.11 标准与频段",
+      "频段与信道",
       "信道"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "802.11 标准与频段"
   },
   {
     "id": "hcia-v2-16-csma-ca",
@@ -83,12 +92,15 @@
     ],
     "analysis": "无线终端难以边发送边检测冲突，因此 802.11 主要采用带冲突避免的 CSMA/CA。",
     "chapter": "WLAN 技术基础",
-    "knowledgePoint": "802.11",
+    "knowledgePoint": "802.11 系列标准",
     "difficulty": "medium",
     "tags": [
       "WLAN 技术基础",
+      "802.11 标准与频段",
+      "802.11 系列标准",
       "802.11"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "802.11 标准与频段"
   }
 ]

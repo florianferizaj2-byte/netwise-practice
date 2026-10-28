@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
   "reviewedAt": "2026-10-20",
-  "releaseStatus": "reviewed-first-release",
+  "releaseStatus": "reviewed-and-supplemented",
   "certificateId": "hcip-datacom-advanced",
   "examCode": "H12-831",
   "syllabusVersion": "V1.0",
   "sourceCategory": "syllabus_practice",
   "questionType": "single_choice",
-  "questionCount": 320,
+  "questionCount": 900,
   "plannedPracticeTarget": 900,
   "questionTargetBasis": "本站练习配题目标按华为公布章节权重每 1% 配 9 题；900 题不是华为公布的考试题量。",
   "knowledgePoints": {
     "total": 36,
-    "covered": 21
+    "covered": 36
   },
   "modules": [
     {
@@ -23,7 +23,8 @@
       "questionCount": 157,
       "knowledgePointsTotal": 4,
       "knowledgePointsCovered": 4,
-      "missingKnowledgePoints": []
+      "missingKnowledgePoints": [],
+      "coverageVsTarget": 1
     },
     {
       "id": "bgp-advanced",
@@ -33,87 +34,74 @@
       "questionCount": 92,
       "knowledgePointsTotal": 3,
       "knowledgePointsCovered": 3,
-      "missingKnowledgePoints": []
+      "missingKnowledgePoints": [],
+      "coverageVsTarget": 1
     },
     {
       "id": "ipv6-routing",
       "name": "IPv6 路由",
       "weight": 20,
       "plannedTarget": 180,
-      "questionCount": 61,
+      "questionCount": 176,
       "knowledgePointsTotal": 4,
       "knowledgePointsCovered": 4,
-      "missingKnowledgePoints": []
+      "missingKnowledgePoints": [],
+      "coverageVsTarget": 0.978
     },
     {
       "id": "ethernet-advanced",
       "name": "以太网高级技术",
       "weight": 10,
       "plannedTarget": 90,
-      "questionCount": 2,
+      "questionCount": 90,
       "knowledgePointsTotal": 11,
-      "knowledgePointsCovered": 2,
-      "missingKnowledgePoints": [
-        "VLAN 聚合",
-        "MUX VLAN",
-        "端口隔离",
-        "MAC 地址表安全",
-        "端口安全",
-        "MAC 漂移防止与检测",
-        "MACsec",
-        "交换机流量控制",
-        "IP Source Guard"
-      ]
+      "knowledgePointsCovered": 11,
+      "missingKnowledgePoints": [],
+      "coverageVsTarget": 1
     },
     {
       "id": "mpls",
       "name": "MPLS 技术",
       "weight": 19,
       "plannedTarget": 171,
-      "questionCount": 4,
+      "questionCount": 171,
       "knowledgePointsTotal": 7,
-      "knowledgePointsCovered": 4,
-      "missingKnowledgePoints": [
-        "静态 LSP",
-        "MPLS VPN 路由交互",
-        "MPLS VPN 典型应用与 OSPF VPN 拓展"
-      ]
+      "knowledgePointsCovered": 7,
+      "missingKnowledgePoints": [],
+      "coverageVsTarget": 1
     },
     {
       "id": "operations",
       "name": "网络运维",
       "weight": 7,
       "plannedTarget": 63,
-      "questionCount": 1,
+      "questionCount": 60,
       "knowledgePointsTotal": 2,
-      "knowledgePointsCovered": 1,
-      "missingKnowledgePoints": [
-        "日常维护"
-      ]
+      "knowledgePointsCovered": 2,
+      "missingKnowledgePoints": [],
+      "coverageVsTarget": 0.952
     },
     {
       "id": "troubleshooting",
       "name": "网络故障排除",
       "weight": 10,
       "plannedTarget": 90,
-      "questionCount": 2,
+      "questionCount": 90,
       "knowledgePointsTotal": 3,
-      "knowledgePointsCovered": 2,
-      "missingKnowledgePoints": [
-        "核心思想和方法"
-      ]
+      "knowledgePointsCovered": 3,
+      "missingKnowledgePoints": [],
+      "coverageVsTarget": 1
     },
     {
       "id": "cutover",
       "name": "网络割接",
       "weight": 7,
       "plannedTarget": 63,
-      "questionCount": 1,
+      "questionCount": 64,
       "knowledgePointsTotal": 2,
-      "knowledgePointsCovered": 1,
-      "missingKnowledgePoints": [
-        "割接基本概念"
-      ]
+      "knowledgePointsCovered": 2,
+      "missingKnowledgePoints": [],
+      "coverageVsTarget": 1
     }
   ],
   "verifiedBatches": [
@@ -237,5 +225,17 @@
     "逐批质量检查通过才进入本发布包；被挡批次未修改审核状态或伪造审核摘要。",
     "考试范围与权重依据华为 ICT 职业认证手册中的 H12-821/H12-831 V1.0 内容章节。"
   ],
-  "evidenceFile": "review-evidence-2026-10-20.json"
+  "evidenceFile": "review-evidence-2026-10-20.json",
+  "questionTypes": {
+    "single_choice": 776,
+    "multiple_choice": 62,
+    "true_false": 62
+  },
+  "difficulty": {
+    "medium": 668,
+    "hard": 129,
+    "easy": 103
+  },
+  "releasedAt": "2026-10-28",
+  "supplementNote": "2026-10-28 补充 230 题（core）/ 580 题（advanced），两库均达到 900 题并覆盖全部三级知识点；同时新增多选与判断题。新增题目字段与原库完全一致，未引入新字段，管理端与导入导出逻辑无需改动；新增题仅做结构自检，尚未走独立复核流程。"
 }
