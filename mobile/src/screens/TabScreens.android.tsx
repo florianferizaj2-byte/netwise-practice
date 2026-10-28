@@ -286,11 +286,10 @@ export function PracticeScreen({
   const stackPracticeHeader = practiceWidth < 360 && practiceFontScale > 1.15;
   const styles = useThemedStyles(createStyles, iosStyles.tabs);
   const active = useScreenActive();
-  const feedbackVisible = useRef(active);
-  feedbackVisible.current = active;
+  const feedbackVisible = useRef(false);
   const voiceRound=useRef('practice:'+Date.now()+':'+Math.random());
   const voiceScope=[voiceRound.current,user?.id,practiceSession,practiceMode,practiceSource,practiceChapter,practiceKnowledgeSection,practiceKnowledgePoint,practiceAiGroupId].join(':');
-  useEffect(()=>{if(active)practiceVoice.enter(voiceScope,()=>feedbackVisible.current);else stopAnswerFeedback();return ()=>stopAnswerFeedback();},[active,voiceScope]);
+
   const isDailyPractice = practiceSession === 'daily';
   const [questions, setQuestions] = useState<Question[]>([]);
   const [nextOffset, setNextOffset] = useState<number | null>(null);
@@ -487,6 +486,15 @@ export function PracticeScreen({
   ]);
 
   const currentQuestion = questions[questionIndex];
+  // A practice tab/catalog or loading screen is not the question-taking screen.
+  const practiceVoiceVisible=active&&focusedPractice&&!loading&&!!currentQuestion;
+  feedbackVisible.current=practiceVoiceVisible;
+  useEffect(()=>{
+    if(practiceVoiceVisible)practiceVoice.enter(voiceScope,()=>feedbackVisible.current);
+    else stopAnswerFeedback();
+    return ()=>stopAnswerFeedback();
+  },[practiceVoiceVisible,voiceScope]);
+
   const feedbackQuestion = useRef<string | undefined>(undefined);
   feedbackQuestion.current = currentQuestion?.id;
   const questionIdRef = useRef(currentQuestion?.id);

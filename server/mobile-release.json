@@ -1,9 +1,9 @@
 {
-  "latestVersion": "1.0.6",
+  "latestVersion": "1.0.7",
   "minimumVersion": "1.0.1",
-  "downloadUrl": "/downloads/kaojiang-v1.0.6.apk",
-  "releaseNotes": "v1.0.6：新增连续答错1–5档语音；后台逐场景选择固定播放或所选候选池随机，下载后离线播放。",
-  "apkBytes": 100531692,
-  "apkSha256": "6249eeedb847581bac16153bd62f41c9e7ed831b3baa4045c7b639f4ae9b4c40",
-  "apkMd5": "1e54307eabc2682c1dc0700ff2c6ff5d"
+  "downloadUrl": "/downloads/kaojiang-v1.0.7.apk",
+  "releaseNotes": "v1.0.7：修复音频重复播放、答错后再答对无声；进入练习目录不播报，题目加载完成后才播放入场语音。",
+  "apkBytes": 100532200,
+  "apkSha256": "c48748118aac6b38008a6f30211103087c3f7d4c15a750f6486992e9edc4fe3b",
+  "apkMd5": "d146d3914b2292bbb709f51be111ed65"
 }

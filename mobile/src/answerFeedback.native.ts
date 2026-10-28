@@ -1,7 +1,13 @@
-import {practiceVoice,configurePracticeVoice} from './practiceVoice';
+import { canReplayAudio } from './audioPlaybackState';
+import { practiceVoice, configurePracticeVoice } from './practiceVoice';
 import { AppState, Platform, Vibration } from 'react-native';
 import { createAudioPlayer, preload, type AudioPlayer } from 'expo-audio';
-import { ANSWER_HAPTIC_MS, normalizeAnswerFeedback, type AnswerFeedbackSettings, type AnswerSoundStyle } from './answerFeedbackSettings';
+import {
+  ANSWER_HAPTIC_MS,
+  normalizeAnswerFeedback,
+  type AnswerFeedbackSettings,
+  type AnswerSoundStyle,
+} from './answerFeedbackSettings';
 
 const sources: Record<AnswerSoundStyle, number> = {
   soft: require('../assets/sounds/answer-correct-soft.wav'),
@@ -18,7 +24,11 @@ export function stopAnswerFeedback() {
   playbackRevision++;
   practiceVoice.stop();
   for (const player of Object.values(players)) {
-    try { if (player?.playing) player.pause(); } catch { /* Optional feedback cannot block study. */ }
+    try {
+      if (player?.playing) player.pause();
+    } catch {
+      /* Optional feedback cannot block study. */
+    }
   }
 }
 export function configureAnswerFeedback(next: AnswerFeedbackSettings) {
@@ -26,41 +36,84 @@ export function configureAnswerFeedback(next: AnswerFeedbackSettings) {
   settings = normalizeAnswerFeedback(next);
   configurePracticeVoice(settings);
   for (const player of Object.values(players)) {
-    try { if (player) player.volume = settings.volume; } catch { /* Optional audio. */ }
+    try {
+      if (player) player.volume = settings.volume;
+    } catch {
+      /* Optional audio. */
+    }
   }
 }
 export function prepareAnswerFeedback(): Promise<void> {
   if (preparation) return preparation;
   // Use the existing app audio mode. No recording, audio-focus takeover or
   // background playback session is requested for a 240 ms confirmation.
-  preparation = Promise.all((Object.keys(sources) as AnswerSoundStyle[]).map(async style => {
-    try {
-      await preload(sources[style]);
-      const player = createAudioPlayer(sources[style], { updateInterval: 1000 });
-      player.volume = settings?.volume ?? 0.32;
-      players[style] = player;
-    } catch { /* A missing audio device must never prevent answering. */ }
-  })).then(() => undefined);
+  preparation = Promise.all(
+    (Object.keys(sources) as AnswerSoundStyle[]).map(async (style) => {
+      try {
+        await preload(sources[style]);
+        const player = createAudioPlayer(sources[style], {
+          updateInterval: 1000,
+        });
+        player.volume = settings?.volume ?? 0.32;
+        players[style] = player;
+      } catch {
+        /* A missing audio device must never prevent answering. */
+      }
+    }),
+  ).then(() => undefined);
   return preparation;
 }
-export function playCorrectAnswerFeedback(correct: boolean, isCurrent: () => boolean = () => true, context?: {scope:string;attemptId:string}) {
-  if (!settings || !active() || Platform.OS !== 'android' || !isCurrent()) return;
+export function playCorrectAnswerFeedback(
+  correct: boolean,
+  isCurrent: () => boolean = () => true,
+  context?: { scope: string; attemptId: string },
+) {
+  if (!settings || !active() || Platform.OS !== 'android' || !isCurrent())
+    return;
   stopAnswerFeedback();
-  const remote = context ? practiceVoice.answer(context.scope,context.attemptId,correct,isCurrent) : correct && practiceVoice.preview(isCurrent);
+  const remote = context
+    ? practiceVoice.answer(context.scope, context.attemptId, correct, isCurrent)
+    : correct && practiceVoice.preview(isCurrent);
   if (correct !== true) return;
   if (settings.hapticsEnabled) {
-    try { Vibration.vibrate(ANSWER_HAPTIC_MS[settings.hapticStrength], false); } catch { /* No vibrator / disabled by OS. */ }
+    try {
+      Vibration.vibrate(ANSWER_HAPTIC_MS[settings.hapticStrength], false);
+    } catch {
+      /* No vibrator / disabled by OS. */
+    }
   }
   if (remote || !settings.soundEnabled || settings.volume <= 0) return;
   const player = players[settings.style];
   // Never queue an old success tone to play later after a screen change.
-  if (!player?.isLoaded) { void prepareAnswerFeedback(); return; }
-  const revision = ++playbackRevision, started = Date.now();
+  if (!player || !canReplayAudio(player)) {
+    void prepareAnswerFeedback();
+    return;
+  }
+  const revision = ++playbackRevision,
+    started = Date.now();
   const volume = settings.volume;
   try {
-    void player.seekTo(0).then(() => {
-      if (revision !== playbackRevision || !active() || !isCurrent() || !settings?.soundEnabled || settings.volume <= 0 || Date.now() - started > 250) return;
-      try { player.volume = volume; player.play(); } catch { /* Optional audio. */ }
-    }).catch(() => undefined);
-  } catch { /* Synchronous native errors are optional too. */ }
+    void player
+      .seekTo(0)
+      .then(() => {
+        if (
+          revision !== playbackRevision ||
+          !active() ||
+          !isCurrent() ||
+          !settings?.soundEnabled ||
+          settings.volume <= 0 ||
+          Date.now() - started > 250
+        )
+          return;
+        try {
+          player.volume = volume;
+          player.play();
+        } catch {
+          /* Optional audio. */
+        }
+      })
+      .catch(() => undefined);
+  } catch {
+    /* Synchronous native errors are optional too. */
+  }
 }

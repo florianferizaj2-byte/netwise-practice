@@ -10,6 +10,7 @@ import {currentPointsTask} from '../server/ai-points/runtime.js';
 import {claimPointsCheckIn} from '../server/ai-points/account.js';
 import {completeFixtureProfile} from './helpers/mobile-profile.js';
 test('real check-in, paid AI, negative wallet, free cache and later claims share one durable ledger',async t=>{
+ t.mock.timers.enable({apis:['Date'],now:Date.parse('2026-10-27T03:00:00Z')});
  const parent=path.resolve('tmp'),dir=fs.mkdtempSync(path.join(parent,'overdraft-api-')),store=createStore(dir);let now=Date.parse('2026-10-27T03:00:00Z');store.points=createPointsStore(store.db,{now:()=>now});
  const user=store.register('overdraft_learner','fixture-password-123');completeFixtureProfile(store,user);store.selectCertificate(user.id,'network-engineer');const token=store.createAuthSession(user.id);
  store.addQ({id:'overdraft-question',type:'single_choice',question:'二进制 10 的十进制值？',options:{A:'2',B:'3'},answer:['A'],analysis:'按位权计算为 2。',chapter:'测试',knowledgePoint:'进制',certificates:['network-engineer']});
@@ -23,6 +24,6 @@ test('real check-in, paid AI, negative wallet, free cache and later claims share
  const blocked=await request('/ai/teacher',body);assert.equal(blocked.status,402);assert.equal(upstream,1);assert.equal(store.points.wallet(user.id).availableUnits,-1400);
  cached=true;assert.equal((await request('/ai/teacher',body)).status,200);assert.equal(upstream,1);assert.equal(store.points.wallet(user.id).availableUnits,-1400);
  const operations=await request('/account/points/operations?state=settled');const rows=(await operations.json()).rows;assert.ok(rows.some(r=>r.chargedUnits===2400&&r.heldUnits===1000));
- now+=86400000;claimPointsCheckIn(store,user.id,'2026-10-28');assert.equal(store.points.wallet(user.id).availableUnits,-400);claimPointsCheckIn(store,user.id,'2026-10-28');assert.equal(store.points.wallet(user.id).availableUnits,-400);
- now+=86400000;claimPointsCheckIn(store,user.id,'2026-10-29');assert.equal(store.points.wallet(user.id).availableUnits,600);assert.equal(store.points.wallet(user.id).debtUnits,0);assert.equal(store.points.audit().passed,true);
+ now+=86400000;t.mock.timers.setTime(now);claimPointsCheckIn(store,user.id,'2026-10-28');assert.equal(store.points.wallet(user.id).availableUnits,-400);claimPointsCheckIn(store,user.id,'2026-10-28');assert.equal(store.points.wallet(user.id).availableUnits,-400);
+ now+=86400000;t.mock.timers.setTime(now);claimPointsCheckIn(store,user.id,'2026-10-29');assert.equal(store.points.wallet(user.id).availableUnits,600);assert.equal(store.points.wallet(user.id).debtUnits,0);assert.equal(store.points.audit().passed,true);
 });

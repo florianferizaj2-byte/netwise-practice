@@ -2,7 +2,7 @@
   "expo": {
     "name": "考匠",
     "slug": "kaojiang",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "scheme": "kaojiang",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -70,7 +70,7 @@
     },
     "android": {
       "package": "com.kaojiang.app",
-      "versionCode": 39,
+      "versionCode": 40,
       "permissions": [
         "REQUEST_INSTALL_PACKAGES",
         "READ_EXTERNAL_STORAGE",

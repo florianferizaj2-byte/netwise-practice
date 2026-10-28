@@ -69,6 +69,7 @@ write('storage.ts', 'export default {async getItem(k){return localStorage.getIte
 write('stream.ts', 'export const fetch=(...args)=>globalThis.fetch(...args)');
 write('audio.ts', 'export async function prepareUiSounds(){} export function setUiSoundSettings(){} export function playUiSound(){} export function previewUiSound(){}');
 write('answer-feedback.ts', `let settings=null;export async function prepareAnswerFeedback(){} export function configureAnswerFeedback(s){settings=s;window.__answerFeedbackSettings=s} export function stopAnswerFeedback(){} export function playCorrectAnswerFeedback(correct){if(!correct||!settings)return;window.__answerFeedbackEvents??=[];window.__answerFeedbackEvents.push({...settings})}`);
+write('practice-voice.ts', `import {practiceVoice as base} from '${source('src/practiceVoice.ts')}';export {configurePracticeVoice} from '${source('src/practiceVoice.ts')}';export const practiceVoice={...base,enter(scope,current){if(current&&!current())return false;window.__practiceVoiceEntries??=[];window.__practiceVoiceEntries.push(scope);return false;}}`);
 write('status.tsx', 'export function StatusBar(){return null}');
 write('native.ts', `export*from'react-native-web';import React from'react';import{Platform,StyleSheet,Text as BaseText,TextInput as BaseInput,useWindowDimensions as baseDimensions}from'react-native-web';Platform.OS='android';
 const Scale=React.createContext(1);export function TestFontScaleProvider({children}){const [scale,setScale]=React.useState(1);React.useLayoutEffect(()=>{window.__setFontScale=setScale},[]);return React.createElement(Scale.Provider,{value:scale},children)}
@@ -119,6 +120,7 @@ const vite = await createServer({
     { find: 'expo-intent-launcher', replacement: path.join(entry, 'intent.ts') },
     { find: /^\.\.?\/audioFeedback$/, replacement: path.join(entry, 'audio.ts') },
     { find: /^\.\.?\/answerFeedback$/, replacement: path.join(entry, 'answer-feedback.ts') },
+    { find: /^\.\.?\/practiceVoice$/, replacement: path.join(entry,'practice-voice.ts') },
     { find: /^\.\.\/\.\.\/modules\/route-player\/index\.android$/, replacement: path.join(entry, 'native-route.ts') },
   ] }, server: { middlewareMode: true, hmr: false, fs: { allow: [root, directory] } },
 });
@@ -169,11 +171,13 @@ try {
   await page.getByRole('button', { name: `展开 ${chapter} 的子知识点`, exact: true }).click();
   await page.getByRole('button', { name: '展开 网络基础 的考点', exact: true }).click();
   await shot('02b-expanded-directory-393');
+  assert.equal(await page.evaluate(()=>window.__practiceVoiceEntries?.length||0),0,'opening the practice catalog stays silent');
   await page.getByRole('textbox', { name: '搜索知识点', exact: true }).fill(leaf);
   await expect(page.getByText(leaf, { exact: true })).toBeVisible();
   await shot('03-knowledge-search-393');
   await page.getByRole('button', { name: new RegExp('练习.*' + leaf) }).click();
   await expect(page.getByText('确认答案', { exact: true })).toBeVisible();
+  await expect.poll(()=>page.evaluate(()=>window.__practiceVoiceEntries?.length||0)).toBe(1);
   await expect(page.locator('#app-tab-bar')).toHaveCount(0);
   await expect(page.getByRole('button', { name: '上一题', exact: true })).toBeDisabled();
   assert.equal(await page.getByRole('button', { name: '确认答案', exact: true }).evaluate(e => getComputedStyle(e).backgroundColor), 'rgb(40, 101, 238)');
@@ -239,7 +243,9 @@ try {
   await page.getByRole('button',{name:'上一题',exact:true}).click();
   await page.getByRole('button',{name:'下一题',exact:true}).click();
   assert.equal(await page.evaluate(()=>window.__answerFeedbackEvents.length),1,'review and background sync do not replay success');
+  assert.equal(await page.evaluate(()=>window.__practiceVoiceEntries.length),1,'answering, next/previous and rerenders do not replay the entry sound');
   checks.push('new correct answer emits one feedback event; wrong answers and history stay silent');
+  checks.push('practice directory stays silent; entry sound starts once when the actual question is visible');
   await page.getByRole('button', { name: '返回题库目录', exact: true }).click();
   await expect(page.locator('#app-tab-bar').getByRole('button')).toHaveCount(5);
   checks.push('focused practice footer, previous-answer review and draft restoration without duplicate attempts');

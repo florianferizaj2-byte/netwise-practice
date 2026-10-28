@@ -1,4 +1,5 @@
 import { AppState } from 'react-native';
+import {canReplayAudio} from './audioPlaybackState';
 import * as FS from 'expo-file-system/legacy';
 import { createAudioPlayer } from 'expo-audio';
 import { appRuntime } from '../modules/app-runtime';
@@ -194,11 +195,11 @@ async function prepare(
     throw e;
   }
   return {
-    ready: () => !removed && player.isLoaded,
+    ready: () => !removed && canReplayAudio(player),
     stop,
     release,
     play(volume, maxMs, current) {
-      if (removed || !player.isLoaded || !current()) return false;
+      if (removed || !canReplayAudio(player) || !current()) return false;
       stop();
       const n = revision,
         started = Date.now();

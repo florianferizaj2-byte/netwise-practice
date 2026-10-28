@@ -359,7 +359,9 @@ export function createVoiceEngine(deps: VoiceDependencies) {
         ) ?? selected;
     const handle = prepared.get(selected.id);
     if (!handle?.ready()) return false;
-    if (deps.now() - lastAt < pack.playback.minIntervalMs) return true;
+    // Each fresh answer already has replay-safe identity. Never throttle a real verdict.
+    if (!cue.attemptId && deps.now() - lastAt < pack.playback.minIntervalMs)
+      return true;
     stop();
     previous.set(key, selected.id);
     lastAt = deps.now();

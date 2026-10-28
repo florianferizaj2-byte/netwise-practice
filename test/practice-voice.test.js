@@ -345,6 +345,7 @@ function nativeFixture({
           seekTo: async () => {},
           play() {
             p.playing = true;
+            p.plays = (p.plays ?? 0) + 1;
           },
           pause() {
             p.playing = false;
@@ -376,6 +377,7 @@ function nativeFixture({
     },
     './api/voicePacks': protocol,
     './practiceVoiceEngine': model,
+    './audioPlaybackState': load('mobile/src/audioPlaybackState.ts'),
     './answerFeedbackSettings': load('mobile/src/answerFeedbackSettings.ts'),
   };
   const native = load('mobile/src/practiceVoice.native.ts', deps);
@@ -501,5 +503,62 @@ test('native random pools never use unselected assets and fixed mode never rotat
   assert.deepEqual(
     f.events.map((e) => e[0]),
     ['3', '3', '3', '3', '3'],
+  );
+});
+
+test('completed downloaded audio replays after a wrong answer and on repeated correct answers', async () => {
+  const f = nativeFixture();
+  await f.native.practiceVoice.setAccount('a');
+  await f.native.practiceVoice.download('test');
+  f.native.configurePracticeVoice({
+    ...load('mobile/src/answerFeedbackSettings.ts').DEFAULT_ANSWER_FEEDBACK,
+    voicePackId: 'test',
+  });
+  await f.native.practiceVoice.refresh();
+  const p = f.players.filter((p) => !p.removed).at(-1);
+  assert.ok(p);
+  assert.equal(
+    f.native.practiceVoice.answer('repeat', 'first', true, () => true),
+    true,
+  );
+  await new Promise((r) => setImmediate(r));
+  assert.equal(p.plays, 1);
+  for (let i = 2; i <= 4; i++) {
+    p.isLoaded = false;
+    p.playing = false;
+    p.currentStatus = { isLoaded: true, playbackState: 'ended', error: null };
+    f.native.practiceVoice.answer('repeat', 'wrong' + i, false, () => true);
+    await new Promise((r) => setTimeout(r, 160));
+    assert.equal(
+      f.native.practiceVoice.answer('repeat', 'right' + i, true, () => true),
+      true,
+    );
+    await new Promise((r) => setImmediate(r));
+    assert.equal(p.plays, i);
+  }
+  await f.native.practiceVoice.setAccount(null);
+});
+
+test('fresh correct-wrong-correct answers are not swallowed by the configured minimum interval', async () => {
+  const f = fixture();
+  f.pack.playback.minIntervalMs = 5000;
+  f.pack.cues['answer.wrong'] = [{ count: 1, clips: ['3'.repeat(64)] }];
+  await f.api.setAccount('a');
+  await f.api.download('test');
+  f.api.select('test');
+  await f.api.refresh();
+  f.api.answer('fresh', 'one', true, () => true);
+  f.api.answer('fresh', 'two', false, () => true);
+  f.api.answer('fresh', 'three', true, () => true);
+  assert.deepEqual(
+    f.events.map((e) => e[0]),
+    ['2', '3', '2'],
+  );
+  const before = f.events.length;
+  f.api.answer('fresh', 'three', true, () => true);
+  assert.equal(
+    f.events.length,
+    before,
+    'the same receipt is still deduplicated',
   );
 });
