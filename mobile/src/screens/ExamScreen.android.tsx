@@ -1,3 +1,4 @@
+import { ExamQuestionCard, ExamAnswerGrid } from '../components/ExamQuestionCard.android';
 import { useAndroidFocusMode } from '../navigation/AndroidFocusMode.android';
 import { AndroidPageHeader, DailyGoalRing, type AndroidCertificateProps } from '../components/AndroidUi.android';
 import { AppIcon } from '../components/AppIcon';
@@ -727,36 +728,7 @@ export function ExamScreen({
         showsVerticalScrollIndicator={false}
       >
         <View style={s.examQuestionContext}><Text style={s.meta}>第 {index+1} 题 · {typeName(question)}</Text><Text style={[s.meta,s.examKnowledge]}>{question.knowledgePoint||question.chapter}</Text></View>
-        <View style={s.examCombinedQuestionCard}>
-        {!!question.sharedStem && (
-          <Text style={s.sharedStem}>{question.sharedStem}</Text>
-        )}
-        <Text style={s.examQuestion}>
-          {index + 1}. {question.question}
-        </Text>
-        <QuestionImages question={question} />
-        {Object.entries(question.options).map(([letter, text]) => (
-          <AnimatedPressable
-            key={letter}
-            accessibilityRole={
-              question.type === "multiple_choice" ? "checkbox" : "radio"
-            }
-            accessibilityState={{ checked: selected.includes(letter) }}
-            disabled={busy || remaining === 0}
-            onPress={() => choose(letter)}
-            style={[s.option, selected.includes(letter) && s.optionSelected]}
-          >
-            <Text
-              style={[
-                s.optionLetter,
-                selected.includes(letter) && s.examSelectedLetter,
-              ]}
-            >
-              {letter}
-            </Text>
-            <Text style={s.optionText}>{text}</Text>
-          </AnimatedPressable>
-        ))}
+        <ExamQuestionCard question={question} index={index} selected={selected} disabled={busy || remaining === 0} onChoose={choose}>
         <Text style={s.saveLabel}>
           {saveState === "saving"
             ? "正在保存答案…"
@@ -784,7 +756,7 @@ export function ExamScreen({
             <Text style={s.primaryText}>重新提交试卷</Text>
           </AnimatedPressable>
         )}
-        </View>
+        </ExamQuestionCard>
       </ScrollView>
       <View style={s.examFooter}>
         <AnimatedPressable
@@ -823,7 +795,7 @@ export function ExamScreen({
           <View style={s.sheetMetrics}><View style={s.sheetMetric}><Text style={s.sheetNumber}>{completed}</Text><Text style={s.meta}>已答题</Text></View><View style={s.sheetMetric}><Text style={[s.sheetNumber,{color:colors.warning}]}>{exam.questions.length-completed}</Text><Text style={s.meta}>未答题</Text></View><View style={s.sheetMetric}><Text style={s.sheetNumber}>{clock(remaining)}</Text><Text style={s.meta}>剩余时间</Text></View></View>
           <View style={s.sectionHead}><Text style={s.sectionTitle}>答题卡</Text><Text style={s.meta}>点击题号返回检查</Text></View>
           <ScrollView style={s.flex} contentContainerStyle={s.grid}>
-            {exam.questions.map((item,i)=><AnimatedPressable key={item.id} accessibilityRole="button" accessibilityLabel={'第'+(i+1)+'题，'+(answers[item.id]?.length?'已答':'未答')} onPress={()=>{setIndex(i);setCardOpen(false);setConfirmOpen(false)}} style={[s.gridCell,!!answers[item.id]?.length&&s.gridAnswered,index===i&&s.gridCurrent]}><Text style={[s.gridText,!!answers[item.id]?.length&&s.gridAnsweredText]}>{i+1}</Text></AnimatedPressable>)}
+            <ExamAnswerGrid items={exam.questions.map((item, i) => ({id:item.id, answered:!!answers[item.id]?.length, current:index===i}))} onChoose={i=>{setIndex(i);setCardOpen(false);setConfirmOpen(false)}}/>
           </ScrollView>
           <View style={s.legend}><View style={[s.legendDot,{backgroundColor:colors.action}]}/><Text style={s.meta}>已答</Text><View style={[s.legendDot,{backgroundColor:colors.surfaceMuted}]}/><Text style={s.meta}>未答</Text><Text style={s.meta}>当前题号以边框标记</Text></View>
           {confirmOpen&&<View style={s.confirmNote}><Text style={s.confirmText}>{completed===exam.questions.length?'所有题目已作答，交卷后查看成绩与解析。':'还有 '+(exam.questions.length-completed)+' 道题未作答，未答题将按错误计分。'}</Text></View>}

@@ -11,9 +11,13 @@ export function createPracticeAttemptQueue(deps:Dependencies){
   const emit=()=>{state={...state,entries:[...state.entries]};listeners.forEach(run=>run());};
   const key=(owner:string)=>'kaojiang-practice-outbox-v1:'+encodeURIComponent(owner);
   const owned=(version=epoch)=>version===epoch&&!!state.owner&&!!deps.session().token&&revision===deps.session().revision;
+  const persisted=new Map<string,{body:string;job:Promise<unknown>}>();
   const persist=(owner:string,entries:PracticeSyncEntry[])=>{
     const body=JSON.stringify(entries.filter(e=>e.status!=='saved').map(e=>({id:e.id,payload:e.payload,status:'queued',attempts:0,error:''})));
-    const job=writes.then(()=>deps.storage.setItem(key(owner),body));writes=job.catch(()=>{});return job;
+    const previous=persisted.get(owner);if(previous?.body===body)return previous.job;
+    const job=writes.then(()=>deps.storage.setItem(key(owner),body));
+    persisted.set(owner,{body,job});
+    writes=job.catch(()=>{if(persisted.get(owner)?.job===job)persisted.delete(owner);});return job;
   };
   const replace=(id:string,patch:Partial<PracticeSyncEntry>)=>{state.entries=state.entries.map(e=>e.id===id?{...e,...patch}:e);emit();};
   const stopTimer=()=>{if(timer){cancel(timer);timer=undefined;}};
@@ -45,7 +49,7 @@ export function createPracticeAttemptQueue(deps:Dependencies){
     getSnapshot:()=>state,subscribe:(run:()=>void)=>{listeners.add(run);return()=>{listeners.delete(run);};},
     activate(owner:string|null):void{
       const nextRevision=deps.session().revision;if(state.owner===owner&&revision===nextRevision)return;
-      epoch++;stopTimer();revision=nextRevision;state={owner,ready:!owner,entries:[]};emit();if(!owner)return;
+      persisted.clear();epoch++;stopTimer();revision=nextRevision;state={owner,ready:!owner,entries:[]};emit();if(!owner)return;
       const version=epoch;
       void deps.storage.getItem(key(owner)).then(raw=>{
         if(!owned(version))return;

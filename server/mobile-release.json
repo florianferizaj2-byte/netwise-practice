@@ -1,9 +1,9 @@
 {
-  "latestVersion": "1.0.8",
+  "latestVersion": "1.0.10",
   "minimumVersion": "1.0.1",
-  "downloadUrl": "/downloads/kaojiang-v1.0.8.apk",
-  "releaseNotes": "v1.0.8：公告同内容关闭后不再弹，更新后再提示；新增独立语音包设置，支持离线试听、音量拖动、固定/随机候选、连错分档及下载管理。",
-  "apkBytes": 100557048,
-  "apkSha256": "8ced25157159bd652ca55da7dbb522093d8fc684bb0517446d94bca00332c486",
-  "apkMd5": "919e5a25f3b86ade2472ce81273fa6dc"
+  "downloadUrl": "/downloads/kaojiang-v1.0.10.apk",
+  "releaseNotes": "v1.0.10：修复今日学习和顺序刷题从头开始；按账号、证书和范围保存断点，自动跳过已答对题；新增独立的已答题复习入口。",
+  "apkBytes": 100603304,
+  "apkSha256": "b6ec2b57a8fda62fe1c980bebc3e9bf031f15ff47d361dca1c2d7a28a2570422",
+  "apkMd5": "c69a776ce88d9d4a27a5975a097ba624"
 }

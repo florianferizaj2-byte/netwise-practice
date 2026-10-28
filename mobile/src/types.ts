@@ -10,7 +10,7 @@ export type AuthMode = 'login' | 'register';
 
 export type PracticeMode = 'sequential' | 'random' | 'ai';
 
-export type PracticeSource = 'all' | 'wrong' | 'favorites';
+export type PracticeSource = 'all' | 'wrong' | 'favorites' | 'answered';
 
 export type PracticeSession = 'standard' | 'daily';
 

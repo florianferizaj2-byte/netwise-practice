@@ -12,9 +12,10 @@ async function fixture(t) {
   const storage = memoryStorage();
   const load = await mobileModules(t, storage);
   const client = await load('client');
-  const identities = [];
+  const identities = [], records=[];
   const modules = {
     './client': client,
+    './practiceCheckpoint.android': {practiceCheckpoint:{async record(owner,result){records.push({owner,result})}}},
     './transport': await load('transport'),
     './resourceCache': await load('resourceCache'),
     './studyTypes': await load('studyTypes'),
@@ -45,7 +46,7 @@ async function fixture(t) {
   });
   const { locationLearningApi: api } = await import(moduleUrl(source));
   await client.setSessionToken('learner-token');
-  return { api, client, identities, storage };
+  return { api, client, identities, storage, records };
 }
 
 test('Android adapter requires a session and completed daily study before issuing native credentials', async (t) => {
@@ -161,4 +162,18 @@ test('Web/shared entrypoints do not import the Android gate or adapter and the W
   const web = await import(`data:text/javascript;base64,${Buffer.from(source).toString('base64')}`);
   assert.equal(web.routePlayerAvailable(), false);
   await assert.rejects(web.openRoutePlayer(), /安卓版/);
+});
+
+test('single-leaf selections remain compatible with older servers while combined chapters use the new array contract',async t=>{
+ const {api}=await fixture(t),bodies=[];
+ globalThis.fetch=async(_url,init)=>{bodies.push(JSON.parse(init.body));return response(status)};
+ await api.startLocationLearning(['point-one']);await api.startLocationLearning(['point-one','point-two']);
+ assert.deepEqual(bodies,[{pointId:'point-one'},{pointIds:['point-one','point-two']}]);
+});
+
+test('location learning confirmed answers enter the same account/certificate mastered history',async t=>{
+ const {api,client,records}=await fixture(t);
+ globalThis.fetch=async()=>response({...status,session:{feedback:{correct:true}}});
+ await api.locationLearningAction('fixture-session','answer',{questionId:'fixture-question'});
+ assert.equal(records.length,1);assert.deepEqual(JSON.parse(records[0].owner),[client.API_BASE_URL,'learner','network-engineer']);assert.equal(records[0].result.questionId,'fixture-question');assert.equal(records[0].result.confirmed,true);
 });

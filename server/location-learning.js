@@ -89,7 +89,7 @@ export function createLocationLearning(
     save(s);
     return true;
   };
-  const unlocked = (user, certificate) => {
+  const completedToday = (user, certificate) => {
     completeSatisfiedSession(active(user, certificate));
     return !!db
       .prepare(
@@ -105,10 +105,12 @@ export function createLocationLearning(
         )
         .get(user, certificate, dayAt(now())),
     );
+  const unlocked = (user, certificate) => completedToday(user, certificate) || (!active(user, certificate) && pool(user, certificate).length < locationLearningPolicy.count);
   function pool(user, certificate) {
     const all = questionsForCertificate(certificate, user).filter(
       (q) => q.source !== "ai_generated",
     );
+    const attempted = store.attemptedQuestionIds(user);
     const valid = new Set(
       all
         .filter(
@@ -126,7 +128,7 @@ export function createLocationLearning(
     return examUnits(all)
       .filter(
         (unit) =>
-          unit.every((q) => valid.has(q.id)) &&
+          unit.every((q) => valid.has(q.id) && !attempted.has(q.id)) &&
           new Set(unit.map((q) => examPointId(certificate, q))).size === 1,
       )
       .flat();
@@ -148,7 +150,7 @@ export function createLocationLearning(
     return [...points.values()].map(({ questions, ...row }) => ({
       ...row,
       questionCount: questions.length,
-      eligible: !!exactSample(questions),
+      eligible: questions.length > 0,
     }));
   }
   function usable(s, certificate) {
@@ -184,7 +186,7 @@ export function createLocationLearning(
       fail("题库已更新，本题已修改或下架，请重新选择知识点");
     return s;
   }
-  const view = (s) => {
+  const view = (s, includeQuestions = true) => {
     if (!s) return null;
     const q = s.state === "active" ? s.questions[s.index] : null,
       feedback = s.phase === "review" ? s.results[s.index] : null;
@@ -194,6 +196,8 @@ export function createLocationLearning(
       day: s.day,
       state: s.state,
       point: s.point,
+      pointIds: s.pointIds || [s.point.id],
+      ...(includeQuestions ? { questions: s.questions.slice(0, locationLearningPolicy.count).map(safeQuestion), reviews: s.results.slice(0, locationLearningPolicy.count).map(({answerChallenge, advanceChallenge, ...r}) => r) } : {}),
       completedCount: Math.min(s.index, locationLearningPolicy.count),
       answeredCount: Math.min(s.results.length, locationLearningPolicy.count),
       correctCount: s.results.slice(0, locationLearningPolicy.count).filter((r) => r.correct).length,
@@ -221,7 +225,9 @@ export function createLocationLearning(
     };
   };
   const status = (user, certificate, includeCatalog = true) => {
-    const isUnlocked = unlocked(user, certificate);
+    const remainingQuestions = pool(user, certificate);
+    const exempt = !active(user, certificate) && remainingQuestions.length < locationLearningPolicy.count;
+    const isUnlocked = exempt || completedToday(user, certificate);
     let session = active(user, certificate);
     if (session && !usable(session, certificate)) {
       session.state = "invalidated";
@@ -233,20 +239,22 @@ export function createLocationLearning(
       day: dayAt(now()),
       certificateId: certificate,
       unlocked: isUnlocked,
+      exemption: exempt ? "insufficient_unseen_questions" : null,
+      remainingCount: remainingQuestions.length,
       validUntil: new Date(midnight(now())).toISOString(),
       policy: locationLearningPolicy,
       session: view(session),
       ...(includeCatalog ? { points: catalog(user, certificate) } : {}),
     };
   };
-  const result = (user, certificate, s) => ({
+  const result = (user, certificate, s, includeQuestions = true) => ({
     userId: user,
     day: dayAt(now()),
     certificateId: certificate,
-    unlocked: s.state === "completed" || unlocked(user, certificate),
+    unlocked: s.state === "completed" || completedToday(user, certificate),
     validUntil: new Date(midnight(now())).toISOString(),
     policy: locationLearningPolicy,
-    session: view(s),
+    session: view(s, includeQuestions),
   });
   function current(s, body) {
     if (
@@ -265,12 +273,12 @@ export function createLocationLearning(
   };
   return {
     status,
-    start(user, certificate, pointId) {
+    start(user, certificate, selection) {
       return tx(() => {
-        if (unlocked(user, certificate)) return status(user, certificate);
+        const pointIds = [...new Set(Array.isArray(selection) ? selection : [selection])];
         const previous = active(user, certificate);
         if (previous) {
-          if (previous.point.id !== pointId)
+          if (!matches(previous.pointIds || [previous.point.id], pointIds))
             fail("本轮尚未完成；如需换知识点，请先结束本轮");
           return result(
             user,
@@ -278,23 +286,19 @@ export function createLocationLearning(
             owned(user, certificate, previous.id),
           );
         }
-        const point = catalog(user, certificate).find((p) => p.id === pointId);
-        if (!point?.eligible)
-          fail(`该知识点不足 ${locationLearningPolicy.count} 道可完整组题的客观题，请选择其他知识点`, 400);
-        const questions = exactSample(
-          pool(user, certificate).filter(
-            (q) => examPointId(certificate, q) === pointId,
-          ),
-          true,
-        );
-        if (!questions)
-          fail(`该知识点当前无法完整抽取 ${locationLearningPolicy.count} 道题，请选择其他知识点`, 400);
+        if (unlocked(user, certificate)) return status(user, certificate);
+        const chosen = catalog(user, certificate).filter(p => pointIds.includes(p.id));
+        if (!chosen.length || chosen.length !== pointIds.length) fail("请选择当前证书中仍有未刷题目的章节", 400);
+        const questions = exactSample(pool(user, certificate).filter(q => pointIds.includes(examPointId(certificate, q))), true);
+        if (!questions) fail(`已选章节不足 ${locationLearningPolicy.count} 道可完整组题的未刷题，请继续多选章节`, 400);
+        const point = chosen.length === 1 ? chosen[0] : { id: "combined", name: "多章节组合", chapter: [...new Set(chosen.map(p=>p.chapter))].join("、"), section: "", questionCount: chosen.reduce((n,p)=>n+p.questionCount,0), eligible: true };
         const s = {
           id: crypto.randomUUID(),
           version: 1,
           day: dayAt(now()),
           state: "active",
           point,
+          pointIds,
           questions,
           index: 0,
           phase: "answer",
@@ -332,7 +336,7 @@ export function createLocationLearning(
           s.lastPulseAt = now();
           save(s);
         }
-        return result(user, certificate, s);
+        return result(user, certificate, s, false);
       });
     },
     pulse(user, certificate, id, body) {
@@ -345,7 +349,7 @@ export function createLocationLearning(
             409,
             "LOCATION_LEARNING_LEASE_CHANGED",
           );
-        if (body.sequence <= s.sequence) return result(user, certificate, s);
+        if (body.sequence <= s.sequence) return result(user, certificate, s, false);
         if (body.sequence !== s.sequence + 1)
           fail("计时记录顺序已改变，请重新读取进度");
         const time = now(),
@@ -354,7 +358,7 @@ export function createLocationLearning(
         s.lastPulseAt = time;
         s.sequence = body.sequence;
         save(s);
-        return result(user, certificate, s);
+        return result(user, certificate, s, false);
       });
     },
     pause(user, certificate, id, leaseId) {
@@ -365,7 +369,7 @@ export function createLocationLearning(
           s.lastPulseAt = null;
           save(s);
         }
-        return result(user, certificate, s);
+        return result(user, certificate, s, false);
       });
     },
     answer(user, certificate, id, body) {
@@ -514,10 +518,9 @@ export function registerLocationLearning({
   route("get", base, (req) => service.status(...context(req)));
   route("post", base + "/start", (req) => {
     const b = z
-      .object({ pointId: z.string().min(1).max(120) })
-      .strict()
+      .object({ pointId: z.string().min(1).max(120).optional(), pointIds: z.array(z.string().min(1).max(120)).min(1).max(500).optional() }).strict().refine(b => !!b.pointId !== !!b.pointIds, "请选择知识点或多个章节")
       .parse(req.body);
-    return service.start(...context(req), b.pointId);
+    return service.start(...context(req), b.pointIds || b.pointId);
   });
   for (const name of [
     "present",

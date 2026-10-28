@@ -387,11 +387,17 @@ export type Question = {
   lastWrong?: { createdAt: string };
   review?: { dueAt?: string } | null;
   attempted?: boolean;
+  answered?: boolean;
+  mastered?: boolean;
   favorite?: boolean;
   source?: string;
 };
 
 export type QuestionFilters = {
+  excludeCorrect?: '1';
+  review?: 'answered';
+  before?: string;
+  anchor?: string;
   feedback?: 'instant';
   chapter?: string;
   knowledgeSection?: string;
@@ -427,6 +433,8 @@ export type ExamSession = {
   result?: ExamResult;
 };
 export type QuestionPage = {
+  practiceStateVersion?: number;
+  offset?: number;
   items: Question[];
   total: number;
   nextOffset: number | null;
@@ -852,7 +860,7 @@ export const mobileApi = {
     const params = new URLSearchParams({ bankOnly: '1' });
     if (limit != null) params.set('limit', String(limit));
     if (offset) params.set('offset', String(offset));
-    if (random) params.set('random', '1');
+    if (random) { params.set('random', '1'); params.set('excludeCorrect', '1'); }
     if (filters?.feedback) params.set('feedback',filters.feedback);
     if (filters?.chapter) params.set('chapter', filters.chapter);
     if (filters?.knowledgeSection)
@@ -889,6 +897,9 @@ export const mobileApi = {
     return cachedRequest<Question[]>('/favorites'+(feedback?'?feedback=instant':''), force);
   },
 
+  practiceQuestion(questionId:string) {
+    return cachedRequest<Question>('/questions/'+encodeURIComponent(questionId));
+  },
   practiceFeedback(questionId:string) {
     return studyCache.read<Pick<Question,'answer'|'analysis'|'expectedAnswer'>>('/practice-feedback/'+encodeURIComponent(questionId),(signal)=>request(`/questions/${encodeURIComponent(questionId)}/reveal`,{method:'POST',signal}));
   },

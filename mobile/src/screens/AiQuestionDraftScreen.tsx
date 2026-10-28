@@ -1,18 +1,13 @@
 import { AppIcon } from '../components/AppIcon';
 import { iosStyles } from '../iosStyles';
-import { useEffect, useState } from 'react';
 import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import {
-  mobileApi,
-  type AiQuestionGenerationJob,
-  type AiQuestionGroup,
-  type AiQuestionGroupResponse,
   type AiQuestionGenerationSelection,
 } from '../api/client';
 import { AnimatedPressable, EntranceView } from '../components/Motion';
 import { QuestionImages } from '../components/QuestionImages';
-import { useScreenActive } from '../navigation/ScreenActivity';
+import { useAiQuestionDraft } from './useAiQuestionDraft';
 import type { AppTab, NavigationOptions } from '../types';
 import { radius, shadow, spacing, useThemedStyles, useTheme, type ThemeColors } from '../theme';
 
@@ -32,130 +27,8 @@ export function AiQuestionDraftScreen({
   const isLibrary = libraryMode || !selection;
   const { colors } = useTheme();
   const styles = useThemedStyles(createStyles, iosStyles.aiDraft);
-  const screenActive = useScreenActive();
-  const [groups, setGroups] = useState<AiQuestionGroup[]>([]);
-  const [jobs, setJobs] = useState<AiQuestionGenerationJob[]>([]);
-  const [selectedGroupId, setSelectedGroupId] = useState(initialGroupId || '');
-  const [groupDetail, setGroupDetail] = useState<AiQuestionGroupResponse | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [busy, setBusy] = useState<'generate' | 'upload' | ''>('');
-  const [notice, setNotice] = useState('');
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    if (!screenActive) return;
-    let mounted = true;
-    let firstLoad = true;
-    const refresh = async () => {
-      try {
-        const [allGroups, jobResult] = await Promise.all([
-          mobileApi.aiQuestionGroups(),
-          mobileApi.aiQuestionGenerationJobs(),
-        ]);
-        if (!mounted) return;
-        const matchingGroups = allGroups.filter((group) =>
-          group.groupType === 'question_generation' &&
-          (!selection || (
-            group.metadata.chapter === selection.chapter &&
-            (group.metadata.knowledgeSection || '') === (selection.knowledgeSection || '') &&
-            group.metadata.knowledgePoint === selection.knowledgePoint
-          )),
-        );
-        setGroups(matchingGroups);
-        setJobs(jobResult.jobs.filter((job) =>
-          !selection || (
-            job.selection.chapter === selection.chapter &&
-            (job.selection.knowledgeSection || '') === (selection.knowledgeSection || '') &&
-            job.selection.knowledgePoint === selection.knowledgePoint
-          ),
-        ));
-        if (selectedGroupId) {
-          const detail = await mobileApi.aiQuestionGroup(selectedGroupId);
-          if (mounted) setGroupDetail(detail);
-        } else {
-          setGroupDetail(null);
-        }
-        if (mounted) setError('');
-      } catch (cause: unknown) {
-        if (mounted && firstLoad)
-          setError(cause instanceof Error ? cause.message : '题组加载失败，请稍后重试');
-      } finally {
-        if (mounted && firstLoad) {
-          firstLoad = false;
-          setLoading(false);
-        }
-      }
-    };
-    setLoading(true);
-    void refresh();
-    const timer = setInterval(() => void refresh(), 3500);
-    return () => {
-      mounted = false;
-      clearInterval(timer);
-    };
-  }, [screenActive, selectedGroupId, selection?.chapter, selection?.knowledgeSection, selection?.knowledgePoint]);
-
-  const activeJob = jobs.find((job) => job.status === 'queued' || job.status === 'running');
-  const failedJob = jobs.find((job) => job.status === 'failed');
-  const group = groupDetail?.group;
-
-  async function startGeneration() {
-    if (!selection || busy || activeJob) return;
-    setBusy('generate');
-    setError('');
-    setNotice('');
-    try {
-      const result = await mobileApi.createAiQuestionGeneration(selection);
-      setJobs((current) => [result.job, ...current.filter((job) => job.id !== result.job.id)]);
-      setNotice('任务已交给服务器后台运行。你可以切换到其他页面继续刷题。');
-    } catch (cause: unknown) {
-      setError(cause instanceof Error ? cause.message : '任务创建失败，请稍后重试');
-    } finally {
-      setBusy('');
-    }
-  }
-
-  async function setGroupSharing(target: AiQuestionGroup, shared: boolean) {
-    if (busy) return;
-    setBusy('upload');
-    setError('');
-    setNotice('');
-    try {
-      const result = await mobileApi.shareAiQuestionGroup(target.id, shared);
-      setGroupDetail((current) => current
-        ? { ...current, group: { ...current.group, shared: result.shared } }
-        : current,
-      );
-      setGroups((current) => current.map((item) =>
-        item.id === target.id ? { ...item, shared: result.shared } : item,
-      ));
-      setNotice(result.shared
-        ? '题组已上传到共享 AI 题组。'
-        : '题组已取消共享，仍可在你的账号中刷题。');
-    } catch (cause: unknown) {
-      setError(cause instanceof Error ? cause.message : '题组上传失败，请稍后重试');
-    } finally {
-      setBusy('');
-    }
-  }
-
-  async function uploadGroup() {
-    if (!group) return;
-    await setGroupSharing(group, !group.shared);
-  }
-
-  function practiceGroup(target: AiQuestionGroup) {
-    onNavigate('practice', {
-      practiceMode: 'sequential',
-      practiceSource: 'all',
-      practiceChapter: target.metadata.chapter,
-      practiceKnowledgeSection: target.metadata.knowledgeSection,
-      practiceKnowledgePoint: target.metadata.knowledgePoint,
-      practiceSelectionComplete: true,
-      practiceAiGroupId: target.id,
-    });
-  }
-
+  const {groups,jobs,selectedGroupId,groupDetail,loading,busy,notice,error,activeJob,failedJob,group,
+    startGeneration,setGroupSharing,uploadGroup,practiceGroup,setGroupDetail,setSelectedGroupId}=useAiQuestionDraft({selection,initialGroupId,onNavigate});
   return (
     <View style={styles.screen}>
     <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false} style={styles.scrollView}>

@@ -1,4 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { ExamQuestionCard, ExamAnswerGrid } from '../components/ExamQuestionCard.android';
+import { practiceVoice } from '../practiceVoice';
+import { playCorrectAnswerFeedback, stopAnswerFeedback } from '../answerFeedback';
+import { mobileApi as practiceApi } from '../api/client';
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Modal,
@@ -17,7 +21,6 @@ import type {
 } from "../api/locationLearningTypes";
 import { studyRequestId } from "../api/studyTypes";
 import { AnimatedPressable } from "../components/Motion";
-import { QuestionImages } from "../components/QuestionImages";
 import { AndroidModalSafeArea } from "../components/AndroidModalSafeArea.android";
 import { AppIcon } from '../components/AppIcon';
 import { AppAlert } from "../components/AppAlert";
@@ -45,6 +48,13 @@ export function LocationLearningGate({
     [retry, setRetry] = useState(0),
     [presenceError, setPresenceError] = useState(false),
     [documentActive, setDocumentActive] = useState(true);
+  const [chapters, setChapters] = useState<string[]>([]);
+  const [legacyPoint, setLegacyPoint] = useState<string | null>(null);
+  const [cardOpen, setCardOpen] = useState(false);
+  const [reviewIndex, setReviewIndex] = useState<number | null>(null);
+  const [instantFeedback, setInstantFeedback] = useState<LocationLearningSession['feedback']>(null);
+  const feedbackCache = useRef(new Map<string, Awaited<ReturnType<typeof practiceApi.practiceFeedback>>>());
+  const voiceVisible = useRef(false), voiceQuestion = useRef(''), sounded = useRef(new Set<string>());
   const requiredCount = data?.session?.total || data?.policy?.count || 10;
   const alive = useRef(true),
     requestBusy = useRef(false);
@@ -64,9 +74,39 @@ export function LocationLearningGate({
       previous.session.id === next.session.id &&
       previous.session.version > next.session.version
         ? previous
-        : { ...next, points: next.points ?? previous?.points },
+        : { ...next, points: next.points ?? previous?.points,
+          session: next.session && previous?.session?.id === next.session.id ? {
+            ...next.session,
+            feedback: next.session.phase===previous.session.phase && next.session.question?.id===previous.session.question?.id ? previous.session.feedback : next.session.feedback,
+            questions: next.session.questions ?? previous.session.questions,
+            reviews: next.session.reviews ?? previous.session.reviews,
+            question: next.session.question?.id === previous.session.question?.id ? previous.session.question : next.session.question,
+          } : next.session },
     );
   };
+  const voiceScope = 'location:' + data?.userId + ':' + data?.certificateId + ':' + session?.id;
+  voiceVisible.current = !cardOpen && reviewIndex===null && visible && appActive && screenActive && session?.state === 'active' && !!currentQuestion;
+  voiceQuestion.current = currentQuestion?.id || '';
+  useEffect(() => {
+    if (voiceVisible.current) practiceVoice.enter(voiceScope, () => voiceVisible.current);
+    else stopAnswerFeedback();
+    return () => stopAnswerFeedback();
+  }, [visible, appActive, screenActive, cardOpen, reviewIndex, session?.state, !!currentQuestion, voiceScope]);
+  useEffect(() => {
+    setInstantFeedback(null); setReviewIndex(null);
+    if (!visible || !currentQuestion || session?.phase !== 'answer') return;
+    let current = true;
+    void practiceApi.practiceFeedback(currentQuestion.id).then(feedback => {
+      if (current) feedbackCache.current.set(currentQuestion.id, feedback);
+    }).catch(() => {});
+    return () => { current = false; };
+  }, [visible, session?.id, currentQuestion?.id, session?.phase]);
+  function soundAnswer(correct: boolean, questionId: string, challenge: string) {
+    const id = voiceScope + ':' + questionId + ':' + challenge;
+    if (sounded.current.has(id)) return;
+    sounded.current.add(id);
+    playCorrectAnswerFeedback(correct, () => voiceVisible.current && voiceQuestion.current === questionId, { scope: voiceScope, attemptId: id });
+  }
   useEffect(() => {
     alive.current = true;
     return () => {
@@ -145,6 +185,7 @@ export function LocationLearningGate({
   useEffect(() => {
     if (
       !visible ||
+      cardOpen || reviewIndex!==null ||
       !appActive ||
       !screenActive ||
       !documentActive ||
@@ -219,6 +260,7 @@ export function LocationLearningGate({
     appActive,
     screenActive,
     documentActive,
+    cardOpen, reviewIndex,
     readingVisible,
     session?.id,
     currentQuestion?.id,
@@ -229,7 +271,7 @@ export function LocationLearningGate({
 
   async function action(
     name: "start" | "answer" | "advance" | "cancel",
-    pointId?: string,
+    pointId?: string | string[],
   ) {
     if (requestBusy.current) return;
     requestBusy.current = true;
@@ -237,6 +279,13 @@ export function LocationLearningGate({
     setError("");
     try {
       const current = session;
+      if (name === 'answer' && current?.question) {
+        const cached = feedbackCache.current.get(current.question.id);
+        if (cached?.answer?.length) {
+          const correct = JSON.stringify([...selected].sort()) === JSON.stringify([...cached.answer].sort());
+          setInstantFeedback({ selected: [...selected], answer: cached.answer, analysis: cached.analysis || '', correct });
+        }
+      }
       const next =
         name === "start"
           ? await mobileApi.startLocationLearning(pointId!)
@@ -252,7 +301,9 @@ export function LocationLearningGate({
                   },
             );
       apply(next);
+      if (name === 'answer' && current?.question && next.session?.feedback) soundAnswer(next.session.feedback.correct, current.question.id, current.challenge);
     } catch (cause) {
+      setInstantFeedback(null);
       setError((cause as Error).message);
     } finally {
       requestBusy.current = false;
@@ -262,14 +313,7 @@ export function LocationLearningGate({
   const remaining = session
     ? Math.max(0, Math.ceil((session.requiredMs - session.activeMs) / 1000))
     : 0;
-  const points = (data?.points || []).filter(
-    (point) =>
-      !search.trim() ||
-      [point.name, point.chapter, point.section].some((value) =>
-        value.toLowerCase().includes(search.trim().toLowerCase()),
-      ),
-  );
-  function choose(key: string) {
+  const choose = useCallback((key: string) => {
     if (session?.phase !== "answer" || busy) return;
     setSelected((previous) =>
       currentQuestion?.type === "multiple_choice"
@@ -278,7 +322,7 @@ export function LocationLearningGate({
           : [...previous, key]
         : [key],
     );
-  }
+  }, [session?.phase, currentQuestion?.type, busy]);
   function close() {
     if (busy) return;
     if (session?.state === "active")
@@ -292,326 +336,70 @@ export function LocationLearningGate({
       );
     else onClose();
   }
-  return (
-    <Modal
-      visible={visible && screenActive}
-      animationType="slide"
-      statusBarTranslucent
-      navigationBarTranslucent
-      onRequestClose={close}
-    >
-      <AndroidModalSafeArea style={s.safe}>
-        <View testID="location-learning-header" style={s.header}>
-          <AnimatedPressable
-            accessibilityRole="button"
-            accessibilityLabel="退出专项学习"
-            disabled={busy}
-            onPress={close}
-            style={s.headerAction}
-          >
-            <AppIcon name="chevron-left" size={24} color={s.link.color}/>
-          </AnimatedPressable>
-          <Text accessibilityRole="header" style={s.headerTitle}>专项练习</Text>
-          <Text style={s.day}>{requiredCount} 题</Text>
-        </View>
-        <ScrollView
-          testID="location-learning-scroll"
-          ref={scroll}
-          onScroll={(event) => {
-            scrollOffset.current = event.nativeEvent.contentOffset.y;
-          }}
-          scrollEventThrottle={80}
-          contentContainerStyle={s.content}
-          keyboardShouldPersistTaps="handled"
-        >
-          {!!error && (
-            <View accessibilityRole="alert" style={s.error}>
-              <Text style={s.errorText}>{error}</Text>
-              <AnimatedPressable
-                accessibilityRole="button"
-                onPress={() => {
-                  setPresenceError(false);
-                  setRetry((value) => value + 1);
-                }}
-                style={s.secondary}
-              >
-                <Text style={s.link}>重新读取进度</Text>
-              </AnimatedPressable>
-            </View>
-          )}
-          {loading && !data ? (
-            <ActivityIndicator accessibilityLabel="正在读取专项学习" />
-          ) : data?.unlocked ? (
-            <View style={s.card}>
-              <Text style={s.kicker}>今日专项学习已完成</Text>
-              <Text style={s.title}>已解锁模拟定位学习</Text>
-              <Text style={s.body}>
-                当前账号、当前证书今天可重复进入。次日需重新完成 {requiredCount}
-                道；答错不影响解锁资格。
-              </Text>
-              <AnimatedPressable
-                accessibilityRole="button"
-                disabled={busy}
-                style={s.primary}
-                onPress={() => {
-                  if (requestBusy.current) return;
-                  requestBusy.current = true;
-                  setBusy(true);
-                  setError("");
-                  void onEnter()
-                    .then(onClose)
-                    .catch((cause) => setError(cause.message))
-                    .finally(() => {
-                      requestBusy.current = false;
-                      if (alive.current) setBusy(false);
-                    });
-                }}
-              >
-                <Text style={s.primaryText}>
-                  {busy ? "正在核验资格…" : "进入模拟定位学习"}
-                </Text>
-              </AnimatedPressable>
-            </View>
-          ) : session?.state === "active" && currentQuestion ? (
-            <>
-              <View style={s.card}>
-                <Text style={s.kicker}>
-                  {session.point.chapter} · {session.point.section} ·{" "}
-                  {session.point.name}
-                </Text>
-                <Text style={s.title}>
-                  专项学习 {Math.min(session.completedCount + 1, requiredCount)} / {requiredCount}
-                </Text>
-                <Text style={s.body}>
-                  已完成 {session.completedCount}{" "}
-                  题；答错也可以完成，不设正确率门槛。
-                </Text>
-                <View style={s.track}>
-                  <View
-                    style={[
-                      s.fill,
-                      { width: `${Math.min(1, session.completedCount / requiredCount) * 100}%` },
-                    ]}
-                  />
-                </View>
-              </View>
-              <View style={s.card}>
-                <Text style={s.kicker}>
-                  {currentQuestion.type === "multiple_choice"
-                    ? "多选题"
-                    : currentQuestion.type === "true_false"
-                      ? "判断题"
-                      : "单选题"}
-                </Text>
-                {!!currentQuestion.sharedStem && (
-                  <View style={s.material}>
-                    <Text style={s.body}>{currentQuestion.sharedStem}</Text>
-                  </View>
-                )}
-                <View
-                  ref={questionReading}
-                  collapsable={false}
-                  style={s.reading}
-                >
-                  <QuestionImages question={currentQuestion} />
-                  <Text style={s.question}>{currentQuestion.question}</Text>
-                  {Object.entries(currentQuestion.options).map(
-                    ([key, text]) => {
-                      const checked =
-                          session.phase === "review"
-                            ? session.feedback?.selected.includes(key)
-                            : selected.includes(key),
-                        correct =
-                          session.phase === "review" &&
-                          session.feedback?.answer.includes(key);
-                      return (
-                        <AnimatedPressable
-                          key={key}
-                          accessibilityRole={
-                            currentQuestion.type === "multiple_choice"
-                              ? "checkbox"
-                              : "radio"
-                          }
-                          accessibilityState={{
-                            checked: !!checked,
-                            disabled: session.phase === "review",
-                          }}
-                          accessibilityLabel={key + " " + text}
-                          disabled={busy || session.phase === "review"}
-                          onPress={() => choose(key)}
-                          style={[
-                            s.option,
-                            checked && s.optionSelected,
-                            correct && s.optionCorrect,
-                          ]}
-                        >
-                          <Text
-                            style={[s.optionKey, checked && s.selectedText]}
-                          >
-                            {key}
-                          </Text>
-                          <Text style={s.optionText}>{text}</Text>
-                        </AnimatedPressable>
-                      );
-                    },
-                  )}
-                </View>
-                {session.phase === "answer" ? (
-                  <>
-                    <Text style={s.hint}>
-                      {!appActive || !documentActive
-                        ? "切回前台后继续计时"
-                        : remaining
-                          ? `请先阅读题目，还需前台有效停留 ${remaining} 秒`
-                          : "可以提交作答；答错后阅读解析也计入完成"}
-                    </Text>
-                    <AnimatedPressable
-                      accessibilityRole="button"
-                      disabled={
-                        busy ||
-                        remaining > 0 ||
-                        !selected.length ||
-                        presenceError
-                      }
-                      onPress={() => void action("answer")}
-                      style={[
-                        s.primary,
-                        (busy ||
-                          remaining > 0 ||
-                          !selected.length ||
-                          presenceError) &&
-                          s.disabled,
-                      ]}
-                    >
-                      <Text style={s.primaryText}>
-                        {busy ? "正在提交…" : "提交本题"}
-                      </Text>
-                    </AnimatedPressable>
-                  </>
-                ) : (
-                  session.feedback && (
-                    <View style={s.feedback}>
-                      <Text style={s.feedbackTitle}>
-                        {session.feedback.correct
-                          ? "本题答对了"
-                          : "本题答错了，阅读解析也算完成"}
-                      </Text>
-                      <Text style={s.body}>
-                        正确答案：{session.feedback.answer.join("、")}
-                      </Text>
-                      <View ref={analysisReading} collapsable={false}>
-                        <Text selectable style={s.analysis}>
-                          {session.feedback.analysis}
-                        </Text>
-                      </View>
-                      <Text style={s.hint}>
-                        {remaining
-                          ? `请对照答案阅读解析，还需前台有效停留 ${remaining} 秒`
-                          : "无需重答或达到正确率，确认阅读后即可继续"}
-                      </Text>
-                      <AnimatedPressable
-                        accessibilityRole="button"
-                        disabled={busy || remaining > 0 || presenceError}
-                        onPress={() => void action("advance")}
-                        style={[
-                          s.primary,
-                          (busy || remaining > 0 || presenceError) &&
-                            s.disabled,
-                        ]}
-                      >
-                        <Text style={s.primaryText}>
-                          {session.completedCount >= requiredCount - 1
-                            ? `确认阅读，完成 ${requiredCount} 题`
-                            : "确认阅读，下一题"}
-                        </Text>
-                      </AnimatedPressable>
-                    </View>
-                  )
-                )}
-              </View>
-              <AnimatedPressable
-                accessibilityRole="button"
-                disabled={busy}
-                style={s.secondary}
-                onPress={() =>
-                  AppAlert.alert(
-                    "重新选择知识点？",
-                    "本轮进度将从 0 开始，已保存的普通学习记录仍保留。",
-                    [
-                      { text: "继续本轮", style: "cancel" },
-                      {
-                        text: "重新选择",
-                        onPress: () => void action("cancel"),
-                      },
-                    ],
-                  )
-                }
-              >
-                <Text style={s.link}>重新选择知识点</Text>
-              </AnimatedPressable>
-            </>
-          ) : data ? (
-            <>
-              <View style={s.card}>
-                <Text style={s.kicker}>当前证书 · 每日专项学习</Text>
-                <Text style={s.title}>选择一个知识点，抽取 {requiredCount} 道</Text>
-                <Text style={s.body}>
-                  不要求答对多少题。每题先阅读至少 1 秒；答错后阅读解析至少 3
-                  秒。后台停留不计时，重复提交不加进度。
-                </Text>
-                <Text style={s.hint}>
-                  只从当前证书抽取不重复、能即时判分并有解析的客观题；不足 {requiredCount}
-                  道的知识点暂不能选择。
-                </Text>
-              </View>
-              <TextInput
-                accessibilityLabel="搜索专项学习知识点"
-                placeholder="搜索知识点、章节或分类"
-                value={search}
-                onChangeText={setSearch}
-                style={s.search}
-                placeholderTextColor={s.placeholder.color}
-              />
-              {!points.length && (
-                <Text style={s.body}>
-                  没有符合条件的知识点，请换一个搜索词或切换证书。
-                </Text>
-              )}
-              {points.map((point) => (
-                <AnimatedPressable
-                  key={point.id}
-                  accessibilityRole="button"
-                  accessibilityLabel={`选择${point.name}，${point.questionCount}道题${point.eligible ? "" : `，不足${requiredCount}道或无法完整组题`}`}
-                  disabled={busy || !point.eligible}
-                  onPress={() => void action("start", point.id)}
-                  style={[s.card, !point.eligible && s.disabled]}
-                >
-                  <Text style={s.kicker}>
-                    {point.chapter}
-                    {point.section ? " · " + point.section : ""}
-                  </Text>
-                  <Text style={s.pointName}>{point.name}</Text>
-                  <Text style={s.body}>
-                    {point.questionCount} 道可用客观题 ·{" "}
-                    {point.eligible
-                      ? `随机抽取 ${requiredCount} 道`
-                      : "题量或完整题组不足，暂不可选"}
-                  </Text>
-                  <Text style={s.link}>
-                    {point.eligible ? "选择并开始 ›" : "请选其他知识点"}
-                  </Text>
-                </AnimatedPressable>
-              ))}
-            </>
-          ) : null}
-        </ScrollView>
-      </AndroidModalSafeArea>
-    </Modal>
-  );
+  const chapterRows = [...new Set((data?.points || []).map(p => p.chapter))].map(name => ({ name, points: (data?.points || []).filter(p => p.chapter === name) }));
+  const supportsChapters=typeof data?.remainingCount==='number';
+  const chosenPoints = (data?.points || []).filter(p => supportsChapters?chapters.includes(p.chapter):p.id===legacyPoint);
+  const chosenCount = chosenPoints.reduce((n,p) => n + p.questionCount, 0);
+  const viewedQuestion = reviewIndex === null ? currentQuestion : session?.questions?.[reviewIndex];
+  const reviewed = reviewIndex === null ? null : session?.reviews?.find(r => r.questionId === viewedQuestion?.id);
+  const feedback = reviewed || session?.feedback || instantFeedback;
+  const examActive = session?.state === 'active' && !!viewedQuestion && !data?.unlocked;
+  return <Modal visible={visible && screenActive} animationType="slide" statusBarTranslucent navigationBarTranslucent onRequestClose={close}>
+    <AndroidModalSafeArea style={s.safe}>
+      <View testID="location-learning-header" style={s.header}>
+        <AnimatedPressable accessibilityRole="button" accessibilityLabel="退出专项学习" disabled={busy} onPress={close} style={s.headerAction}><AppIcon name="chevron-left" size={24} color={s.link.color}/></AnimatedPressable>
+        <Text accessibilityRole="header" style={s.headerTitle}>{examActive ? '学习测验' : '模拟定位学习'}</Text>
+        {examActive ? <AnimatedPressable accessibilityRole="button" accessibilityLabel="答题卡" onPress={()=>setCardOpen(true)} style={s.headerAction}><AppIcon name="list" size={22} color={s.link.color}/></AnimatedPressable> : <Text style={s.day}>{requiredCount} 题</Text>}
+      </View>
+      {examActive && <View style={s.examStatus}><Text style={s.body}>已完成 {session!.completedCount} / {requiredCount}</Text><Text style={s.hint}>{session!.point.name} · 不限正确率</Text><View style={s.track}><View style={[s.fill,{width:`${session!.completedCount / requiredCount * 100}%`}]}/></View></View>}
+      <ScrollView testID="location-learning-scroll" ref={scroll} onScroll={event=>{scrollOffset.current=event.nativeEvent.contentOffset.y}} scrollEventThrottle={80} contentContainerStyle={s.content} keyboardShouldPersistTaps="handled">
+        {!!error && <View accessibilityRole="alert" style={s.error}><Text style={s.errorText}>{error}</Text><AnimatedPressable accessibilityRole="button" onPress={()=>{setPresenceError(false);setRetry(v=>v+1)}} style={s.secondary}><Text style={s.link}>重新读取进度</Text></AnimatedPressable></View>}
+        {loading && !data ? <ActivityIndicator accessibilityLabel="正在读取专项学习"/> : data?.unlocked ? <View style={s.card}>
+          <Text style={s.title}>{data.exemption ? '剩余题量不足，直接进入' : '今日学习已完成'}</Text>
+          <Text style={s.body}>{data.exemption ? `当前题库剩余 ${data.remainingCount ?? 0} 道可用未刷题，无法完整组成 ${requiredCount} 题，本次免除学习前置要求。` : '学习记录已保存，今天可以再次进入。'}</Text>
+          <AnimatedPressable accessibilityRole="button" disabled={busy} style={s.primary} onPress={()=>{if(requestBusy.current)return;requestBusy.current=true;setBusy(true);void onEnter().then(onClose).catch(cause=>setError(cause.message)).finally(()=>{requestBusy.current=false;if(alive.current)setBusy(false)})}}><Text style={s.primaryText}>{busy?'正在核验资格…':'进入模拟定位学习'}</Text></AnimatedPressable>
+        </View> : examActive && viewedQuestion ? <>
+          <Text style={s.kicker}>第 {(reviewIndex ?? session!.completedCount) + 1} 题 · {viewedQuestion.type==='multiple_choice'?'多选题':viewedQuestion.type==='true_false'?'判断题':'单选题'}</Text>
+          <View ref={questionReading} collapsable={false}>
+            <ExamQuestionCard question={viewedQuestion} index={reviewIndex ?? session!.completedCount} selected={reviewed?.selected || session!.feedback?.selected || selected} disabled={busy || session!.phase==='review' || reviewIndex!==null} onChoose={choose}/>
+          </View>
+          {!!feedback && <View ref={reviewIndex===null?analysisReading:undefined} collapsable={false} style={s.feedback}>
+            <Text style={s.feedbackTitle}>{feedback.correct?'本题答对了':'本题答错了，阅读解析也算完成'}</Text>
+            <Text style={s.body}>正确答案：{feedback.answer.join('、')}</Text><Text selectable style={s.analysis}>{feedback.analysis}</Text>
+            {busy && <Text style={s.hint}>结果已显示，正在保存作答…</Text>}
+          </View>}
+          <Text style={s.hint}>{reviewIndex!==null?'这是已保存的作答，仅供回顾，不会重复记分或播放语音。':session!.phase==='answer'?'作答自动计入刷题记录，答错也可以完成。':remaining?`阅读解析，还需 ${remaining} 秒`:'确认阅读后继续。'}</Text>
+          <AnimatedPressable accessibilityRole="button" disabled={busy} style={s.secondary} onPress={()=>AppAlert.alert('重新选择章节？','已完成作答会保留在学习记录，未刷题可以重新组题。',[{text:'继续本轮',style:'cancel'},{text:'重新选择',onPress:()=>void action('cancel')}])}><Text style={s.link}>重新选择章节</Text></AnimatedPressable>
+        </> : data ? <>
+          <View style={s.card}><Text style={s.title}>{supportsChapters?`选择章节，组合 ${requiredCount} 道题`:`选择知识点，练习 ${requiredCount} 道题`}</Text><Text style={s.body}>可多选章节，只抽取尚未刷过的题；答错后阅读解析即可完成。作答与普通刷题共用学习记录。</Text><Text style={s.hint}>当前剩余 {data.remainingCount ?? (data.points || []).reduce((n,p)=>n+p.questionCount,0)} 题 · 已选 {chosenCount} 题</Text></View>
+          <TextInput accessibilityLabel="搜索专项学习知识点" placeholder="搜索章节或知识点" value={search} onChangeText={setSearch} style={s.search} placeholderTextColor={s.placeholder.color}/>
+          {!supportsChapters && <Text style={s.hint}>当前服务器支持单知识点学习；多章节组合和免刷规则需要部署新版后端。</Text>}
+          {!supportsChapters && (data?.points || []).filter(p=>p.eligible && (!search.trim()||[p.chapter,p.name].some(v=>v.includes(search.trim())))).map(p=><AnimatedPressable key={p.id} accessibilityRole="radio" accessibilityLabel={p.name} accessibilityState={{checked:legacyPoint===p.id}} onPress={()=>setLegacyPoint(p.id)} style={[s.card,legacyPoint===p.id&&s.selectedChapter]}><Text style={s.pointName}>{p.name}</Text><Text style={s.body}>{p.chapter} · {p.questionCount} 道题</Text></AnimatedPressable>)}
+          {supportsChapters && chapterRows.filter(row=>!search.trim() || [row.name,...row.points.map(p=>p.name)].some(v=>v.includes(search.trim()))).map(row=><AnimatedPressable key={row.name} accessibilityRole="checkbox" accessibilityLabel={row.name} accessibilityState={{checked:chapters.includes(row.name)}} disabled={busy} onPress={()=>setChapters(old=>old.includes(row.name)?old.filter(n=>n!==row.name):[...old,row.name])} style={[s.card, chapters.includes(row.name)&&s.selectedChapter]}><Text style={s.pointName}>{chapters.includes(row.name)?'✓  ':''}{row.name}</Text><Text style={s.body}>{row.points.reduce((n,p)=>n+p.questionCount,0)} 道未刷题</Text></AnimatedPressable>)}
+          {!chapterRows.length && <Text style={s.body}>没有可选章节，请重新读取题库。</Text>}
+        </> : null}
+      </ScrollView>
+      {data && !data.unlocked && <View style={s.examFooter}>
+        <AnimatedPressable accessibilityRole="button" disabled={busy || (reviewIndex===null && (remaining>0 || presenceError || (session?.state==='active' && session.phase==='answer' && !selected.length))) || (!examActive && chosenCount<requiredCount)} onPress={()=>reviewIndex!==null?setReviewIndex(null):examActive?void action(session!.phase==='answer'?'answer':'advance'):void action('start',chosenPoints.map(p=>p.id))} style={[s.primary,s.footerPrimary,(busy || (reviewIndex===null && (remaining>0 || presenceError)) || (!examActive && chosenCount<requiredCount))&&s.disabled]}>
+          <Text style={s.primaryText}>{busy?'正在保存…':reviewIndex!==null?'回到当前题':!examActive?`开始学习 · ${requiredCount} 题`:session!.phase==='answer'?'提交本题':session!.completedCount>=requiredCount-1?`确认阅读，完成 ${requiredCount} 题`:'确认阅读，下一题'}</Text>
+        </AnimatedPressable>
+      </View>}
+      <Modal visible={cardOpen && visible} statusBarTranslucent navigationBarTranslucent animationType="slide" onRequestClose={()=>setCardOpen(false)}>
+        <AndroidModalSafeArea style={s.safe}><View style={s.header}><Text style={s.headerTitle}>答题卡</Text><AnimatedPressable accessibilityRole="button" accessibilityLabel="关闭答题卡" onPress={()=>setCardOpen(false)} style={s.headerAction}><AppIcon name="close" size={22} color={s.link.color}/></AnimatedPressable></View>
+          <ScrollView contentContainerStyle={s.content}><Text style={s.body}>点击已答题回顾，未答题按顺序继续。</Text><ExamAnswerGrid items={(session?.questions || []).map((q,i)=>({id:q.id,answered:!!session?.reviews?.some(r=>r.questionId===q.id),current:i===(reviewIndex ?? session?.completedCount),disabled:i>(session?.completedCount || 0)}))} onChoose={i=>{setReviewIndex(i===session?.completedCount?null:i);setCardOpen(false)}}/></ScrollView>
+        </AndroidModalSafeArea>
+      </Modal>
+    </AndroidModalSafeArea>
+  </Modal>;
 }
+
 const styles = (c: ThemeColors) =>
   StyleSheet.create({
     reading: { gap: 12 },
+    examStatus: { paddingHorizontal:16, paddingVertical:12, gap:8 },
+    selectedChapter: { borderColor:c.brand, backgroundColor:c.brandSoft },
+    examFooter: { backgroundColor:c.surface, padding:16, borderTopWidth:StyleSheet.hairlineWidth, borderColor:c.border },
+    footerPrimary: { width:'100%' },
     safe: { flex: 1, backgroundColor: c.background },
     header: {
       flexDirection: "row",

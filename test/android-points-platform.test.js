@@ -26,7 +26,12 @@ test('Android shell and teacher variants preserve business logic with bounded An
   const voiceLifecycle="  useEffect(()=>{if(!session)void practiceVoice.setAccount(null);else if(appActive)void practiceVoice.setAccount(String(session.user.id));else practiceVoice.stop();},[session?.user.id,appActive]);\n";
   assert.ok(native.includes(voiceLifecycle));
   assert.doesNotMatch(shared,/practiceVoice/);
+  assert.match(native,/visibleProgressJob && !inlineAiProgress/);
+  assert.match(native,/const inlineAiProgress=inlineAiGenerationPage/);
   let shell=native
+    .replace("import { inlineAiGenerationPage } from '../aiGenerationPresentation';\n",'')
+    .replace("  const inlineAiProgress=inlineAiGenerationPage({tab:activeTab,mode:practiceMode,chapter:practiceChapter,point:practiceKnowledgePoint,library:practiceAiLibrary,daily:dailyPracticeOpen});\n",'')
+    .replace('visibleProgressJob && !inlineAiProgress && (','visibleProgressJob && (')
     .replace(voiceLifecycle,'')
     .replace("import {practiceVoice} from '../practiceVoice';\n",'')
     .replace("import {PracticeSyncNotice} from '../components/PracticeSyncNotice.android';\n",'')

@@ -8,6 +8,16 @@ const tick=()=>new Promise(r=>setImmediate(r));
 async function until(check){for(let i=0;i<200;i++){if(check())return;await tick();}assert.ok(check(),'expected asynchronous queue state');}
 function fixture(send){const data=new Map(),timers=[];let revision=1,token='alice',sequence=0;const context=()=>({token,revision});const deps={storage:{async getItem(k){return data.get(k)||null},async setItem(k,v){data.set(k,v)}},session:context,id:()=>`00000000-0000-4000-8000-${String(++sequence).padStart(12,'0')}`,send,schedule:fn=>{timers.push(fn);return timers.length},cancel:()=>{}};return {data,timers,deps,queue:createPracticeAttemptQueue(deps),switch:(next)=>{token=next;revision++},context};}
 const payload=n=>({questionId:'q'+n,selected:['B'],timeMs:1000});const result=p=>({questionId:p.questionId,selected:p.selected,correct:false,timeMs:p.timeMs,answer:['A'],analysis:'server grade'});
+
+test('enqueue and send share one durable write for the same payload without weakening write-before-send',async()=>{
+ let writes=0,resolve;
+ const f=fixture(async p=>{assert.equal(writes,1);await new Promise(r=>resolve=r);return result(p)});
+ const original=f.deps.storage.setItem;f.deps.storage.setItem=async(k,v)=>{writes++;return original(k,v)};
+ f.queue.activate('alice:cert');await until(()=>f.queue.getSnapshot().ready);
+ f.queue.enqueue(payload(1));await until(()=>!!resolve);assert.equal(writes,1);
+ resolve();await until(()=>f.queue.getSnapshot().entries[0].status==='saved');
+ await until(()=>writes===2);f.queue.activate(null);
+});
 test('multiple rapid answers are durable before transport and do not wait for a slow previous acknowledgement',async()=>{
  let resolve;const sends=[];const f=fixture(async p=>{sends.push(p);if(sends.length===1)await new Promise(r=>resolve=r);return result(p)});f.queue.activate('alice:cert');await until(()=>f.queue.getSnapshot().ready);
  const first=f.queue.enqueue(payload(1)),second=f.queue.enqueue(payload(2));await until(()=>sends.length===1&&[...f.data.values()].some(raw=>JSON.parse(raw).length===2));

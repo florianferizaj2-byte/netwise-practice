@@ -1,3 +1,4 @@
+import { inlineAiGenerationPage } from '../aiGenerationPresentation';
 import {PracticeSyncNotice} from '../components/PracticeSyncNotice.android';
 import {usePracticeAttemptOwner} from '../api/practiceAttemptSync.android';
 import { useAndroidFocusModeState } from './AndroidFocusMode.android';
@@ -422,6 +423,7 @@ export function AppShell() {
   }
 
   const seenAiJobSet = new Set(seenAiJobIds);
+  const inlineAiProgress=inlineAiGenerationPage({tab:activeTab,mode:practiceMode,chapter:practiceChapter,point:practiceKnowledgePoint,library:practiceAiLibrary,daily:dailyPracticeOpen});
   const visibleProgressJob = aiQuestionJobs.find((item) => item.id === shownAiJobId) ?? null;
   const newestJob = aiQuestionJobs.find((item) => item.status === 'queued' || item.status === 'running')
     ?? aiQuestionJobs[0]
@@ -557,7 +559,7 @@ export function AppShell() {
             </View>
           ))}
         </Animated.View>
-        {visibleProgressJob && (
+        {visibleProgressJob && !inlineAiProgress && (
           <AiGenerationProgressPill
             job={visibleProgressJob}
             onClose={() => {
@@ -581,6 +583,7 @@ export function AppShell() {
         {!focusMode&&<TabBar activeTab={activeTab} onChange={handleNavigate} hidden={dailyPracticeOpen} />}
         {dailyPracticeDay && <DailyPracticePanel
           key={`${session?.user.id ?? 'preview'}:${session?.user.certificateId ?? ''}:${dailyPracticeDay}`}
+          user={session?.user} certificates={session?.certificates} onOpenCertificatePicker={handleOpenCertificatePicker}
           visible={dailyPracticeOpen}
           active={appActive && !certificatePickerOpen}
           preview={isPreview}
@@ -1040,7 +1043,6 @@ const createStyles = (colors: ThemeColors) =>
     safeArea: {
       backgroundColor: colors.background,
       flex: 1,
-      paddingTop: Platform.OS === 'android' ? NativeStatusBar.currentHeight ?? 0 : 0,
     },
     screen: {
       flex: 1,

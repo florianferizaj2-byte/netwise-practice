@@ -1472,17 +1472,23 @@ export async function createApp(options = {}) {
       userId,
       certificateId: req.user?.certificateId,
       attemptedIds: store.attemptedQuestionIds(userId),
+      correctIds: store.correctQuestionIds(userId),
+      answeredIds: new Set(store.allA(userId).filter(a=>a.selected?.length).map(a=>a.questionId)),
       favoriteIds: store.favoriteQuestionIds(userId),
     };
   };
   const publicQuestionForUser = (question, state) => ({
     ...publicQuestion(questionForCertificate(question, state.certificateId)),
     attempted: state.attemptedIds.has(question.id),
+    answered: state.answeredIds.has(question.id),
+    mastered: state.correctIds.has(question.id),
     favorite: state.favoriteIds.has(question.id),
   });
   const privateQuestionForUser = (question, state) => ({
     ...privateQuestion(questionForCertificate(question, state.certificateId)),
     attempted: state.attemptedIds.has(question.id),
+    answered: state.answeredIds.has(question.id),
+    mastered: state.correctIds.has(question.id),
     favorite: state.favoriteIds.has(question.id),
   });
   const learningPlans = createLearningPlans(store);
@@ -1520,7 +1526,7 @@ export async function createApp(options = {}) {
     const bankOnly = req.query.bankOnly === "1" ||
       (isMobileClient(req) && !req.query.source && req.query.bankOnly !== "0");
     const certificateId = requireCertificate(req);
-    const questions = (bankOnly
+    let questions = (bankOnly
       ? bankQuestionsForCertificate(certificateId)
       : certificateQuestions(certificateId, state.userId)).filter(
       (q) =>
@@ -1541,10 +1547,17 @@ export async function createApp(options = {}) {
     const offset = Number.isInteger(parsedOffset) ? Math.max(0, parsedOffset) : 0;
     const random = req.query.random === "1" || req.query.random === "true";
 
+    if (req.query.excludeCorrect === "1") {
+      const userId = requestUserId(req);
+      const before = req.query.before ? z.iso.datetime().parse(req.query.before) : undefined;
+      const mastered = store.correctQuestionIds(userId, before);
+      questions = questions.filter(q => !mastered.has(q.id));
+    }
+    if (req.query.review === "answered") { requestUserId(req); questions=questions.filter(q=>state.answeredIds.has(q.id)); }
     if (req.query.page === "1") {
       const seed = random ? z.string().min(1).max(64).parse(req.query.seed) : undefined;
-      const page = questionPage(questions, { offset, limit: limit ?? 40, seed });
-      return { ...page, items: page.items.map((question) => project(question, state)) };
+      const page = questionPage(questions, { offset, limit: limit ?? 40, seed, anchor: typeof req.query.anchor === "string" ? req.query.anchor : undefined });
+      return { ...page, practiceStateVersion: 1, items: page.items.map((question) => project(question, state)) };
     }
 
     if (random) {

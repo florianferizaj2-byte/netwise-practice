@@ -1,3 +1,6 @@
+import { useScreenActive } from '../navigation/ScreenActivity';
+import { practiceCheckpoint } from '../api/practiceCheckpoint.android';
+import { practiceOwner } from '../api/ownedPractice.android';
 import { AndroidPageHeader, AndroidPointsLink, DailyGoalRing } from '../components/AndroidUi.android';
 import { AppIcon } from '../components/AppIcon';
 import { androidAccent, type AndroidAccent } from '../android-design-tokens';
@@ -119,6 +122,16 @@ export function TodayScreen({dashboard,onNavigate,preview=false,user,certificate
   const today=preview?12:data?.todayCount;
   const accuracy=preview?'86%':data?.accuracy==null?'—':Math.round(data.accuracy*100)+'%';
   const refresh=()=>{setAnnouncementRefreshKey(k=>k+1);void query.refresh();void catalogQuery.refresh();};
+  const active=useScreenActive(), dailyOwner=user?practiceOwner(user):'';
+  const [dailyResume,setDailyResume]=useState({owner:'',exists:false});
+  useEffect(()=>{
+    if(!active)return;let live=true;
+    if(!user||preview){setDailyResume({owner:dailyOwner,exists:false});return;}
+    void practiceCheckpoint.read(dailyOwner,'daily').then(row=>{if(live)setDailyResume({owner:dailyOwner,exists:!!row&&!row.completed});}).catch(()=>{if(live)setDailyResume({owner:dailyOwner,exists:false});});
+    return()=>{live=false};
+  },[active,dailyOwner,preview]);
+  const hasDailyResume=dailyResume.owner===dailyOwner&&dailyResume.exists;
+  const dailyResumeReady=preview||!user||dailyResume.owner===dailyOwner;
   const daily=()=>onNavigate('practice',{practiceSession:'daily',practiceMode:'random',practiceSource:'all'});
   return <ScrollView testID="today-screen" contentContainerStyle={s.page} showsVerticalScrollIndicator={false}
     refreshControl={preview?undefined:<RefreshControl refreshing={!!(query.fetching&&data)} onRefresh={refresh}/>}>
@@ -131,9 +144,10 @@ export function TodayScreen({dashboard,onNavigate,preview=false,user,certificate
         <Text style={[s.dailyTitle,homeType.goal]}>{(today||0)>=30?'今日目标已完成':'每天 30 题'}</Text>
         <Text style={[s.heroSubtitle,homeType.detail]}>{today===undefined?'正在同步今日进度':(today||0)>=30?'再接再厉，继续巩固所学':'再完成 '+(30-(today||0))+' 题，达成今日目标'}</Text>
       </View><DailyGoalRing count={today}/></View>
-      <AnimatedPressable accessibilityRole="button" accessibilityLabel="开始今日学习" onPress={daily} style={s.dailyButton}>
-        <Text style={[s.dailyButtonText,homeType.action]}>{today?'继续今日学习':'开始今日学习'}</Text><AppIcon name="arrow" size={21} color="#2865EE"/>
+      <AnimatedPressable accessibilityRole="button" accessibilityLabel={hasDailyResume?'继续今日学习':'开始今日学习'} disabled={!dailyResumeReady} onPress={daily} style={s.dailyButton}>
+        <Text style={[s.dailyButtonText,homeType.action]}>{!dailyResumeReady?'正在读取进度…':hasDailyResume?'继续今日学习':'开始今日学习'}</Text><AppIcon name="arrow" size={21} color="#2865EE"/>
       </AnimatedPressable>
+      <AnimatedPressable accessibilityRole="button" accessibilityLabel="复习已答题" onPress={()=>onNavigate('practice',{practiceSource:'answered',practiceMode:'sequential'})} style={{minHeight:48,flexDirection:'row',gap:6,alignItems:'center',justifyContent:'center'}}><AppIcon name="book" size={17} color={colors.brand}/><Text style={[s.link,homeType.detail]}>复习已答题</Text></AnimatedPressable>
     </View>
     <View style={s.metrics}>
       <Metric value={String(preview?7:data?.streakDays??'—')} label="连续学习 / 天"/>

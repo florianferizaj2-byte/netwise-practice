@@ -1,3 +1,4 @@
+import { practiceCheckpoint } from './practiceCheckpoint.android';
 // Android-only integration. Never import this adapter from shared/Web screens.
 import {
   API_BASE_URL,
@@ -84,8 +85,8 @@ export const locationLearningApi = {
   locationLearningStatus() {
     return request<LocationLearningStatus>('');
   },
-  startLocationLearning(pointId: string) {
-    return request<LocationLearningStatus>('/start', { pointId });
+  startLocationLearning(pointId: string | string[]) {
+    return request<LocationLearningStatus>('/start', Array.isArray(pointId) ? (pointId.length===1?{pointId:pointId[0]}:{ pointIds: pointId }) : { pointId });
   },
   async locationLearningAction(
     id: string,
@@ -95,7 +96,9 @@ export const locationLearningApi = {
   ) {
     const snapshot = mobileSessionSnapshot();
     try {
-      return await request<LocationLearningStatus>(`/${encodeURIComponent(id)}/${action}`, body, signal);
+      const result=await request<LocationLearningStatus>(`/${encodeURIComponent(id)}/${action}`, body, signal);
+      if(action==='answer' && result.session?.feedback && current(snapshot))await practiceCheckpoint.record(JSON.stringify([API_BASE_URL,result.userId,result.certificateId]),{questionId:(body as {questionId:string}).questionId,correct:result.session.feedback.correct,confirmed:true});
+      return result;
     } finally {
       // A lost answer response can still have committed the normal study attempt.
       if (action === 'answer' && current(snapshot)) studyCache.invalidate([

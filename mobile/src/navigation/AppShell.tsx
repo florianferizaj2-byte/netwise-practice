@@ -556,6 +556,7 @@ export function AppShell() {
         <TabBar activeTab={activeTab} onChange={handleNavigate} hidden={dailyPracticeOpen} />
         {dailyPracticeDay && <DailyPracticePanel
           key={`${session?.user.id ?? 'preview'}:${session?.user.certificateId ?? ''}:${dailyPracticeDay}`}
+          user={session?.user} certificates={session?.certificates} onOpenCertificatePicker={handleOpenCertificatePicker}
           visible={dailyPracticeOpen}
           active={appActive && !certificatePickerOpen}
           preview={isPreview}

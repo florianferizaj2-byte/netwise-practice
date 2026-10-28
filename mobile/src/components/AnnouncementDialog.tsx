@@ -2,13 +2,14 @@ import { Modal, ScrollView, StyleSheet, Text, View } from 'react-native';
 import type { Announcement } from '../announcements/client';
 import { useTheme, useThemedStyles, type ThemeColors } from '../theme';
 import { AnimatedPressable } from './Motion';
+import { SafeAreaView } from './SafeArea';
 
 export function AnnouncementDialog({ content, visible, onClose, launch = false }: {
   content: Announcement; visible: boolean; onClose: () => void; launch?: boolean;
 }) {
   const s = useThemedStyles(styles); const { reduceMotion } = useTheme();
   return <Modal visible={visible} transparent animationType={reduceMotion ? 'none' : 'fade'} onRequestClose={onClose}>
-    <View style={s.backdrop} testID={launch ? 'launch-announcement' : undefined}>
+    <SafeAreaView style={s.backdrop} testID={launch ? 'launch-announcement' : undefined}>
       <View style={s.dialog} accessibilityViewIsModal>
         <ScrollView contentContainerStyle={s.copy}>
           <Text style={s.label}>考匠公告</Text>
@@ -20,7 +21,7 @@ export function AnnouncementDialog({ content, visible, onClose, launch = false }
           <Text style={s.closeText}>知道了</Text>
         </AnimatedPressable>
       </View>
-    </View>
+    </SafeAreaView>
   </Modal>;
 }
 const styles = (c: ThemeColors) => StyleSheet.create({

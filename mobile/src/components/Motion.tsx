@@ -118,6 +118,7 @@ type AnimatedPressableProps = Pick<
   | 'accessibilityState'
   | 'disabled'
   | 'onLongPress'
+  | 'testID'
   | 'onPress'
 > & {
   children: ReactNode;

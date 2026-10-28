@@ -11,7 +11,7 @@ import { createApp } from "../server/index.js";
 function fixture(t, { count = 35, groups = false } = {}) {
   const db = new DatabaseSync(":memory:");
   db.exec(
-    "CREATE TABLE fixture_attempts(id TEXT PRIMARY KEY,question TEXT,correct INTEGER)",
+    "CREATE TABLE fixture_attempts(id TEXT PRIMARY KEY,question TEXT,correct INTEGER,user TEXT)",
   );
   t.after(() => db.close());
   let time = Date.parse("2026-10-24T01:00:00Z");
@@ -38,13 +38,15 @@ function fixture(t, { count = 35, groups = false } = {}) {
     db,
     getQ: (id) => questions.find((q) => q.id === id),
     isQuestionHidden: (id) => hidden.has(id),
-    recordAttempt(id, selected) {
+    attemptedQuestionIds(user) { return new Set(db.prepare("SELECT question FROM fixture_attempts WHERE user=?").all(user).map(r=>r.question)); },
+    recordAttempt(id, selected, _ms, _mode, user = "learner") {
       const q = this.getQ(id),
         correct = JSON.stringify(selected) === JSON.stringify(q.answer);
-      db.prepare("INSERT INTO fixture_attempts VALUES(?,?,?)").run(
+      db.prepare("INSERT INTO fixture_attempts VALUES(?,?,?,?)").run(
         crypto.randomUUID(),
         id,
         correct ? 1 : 0,
+        user,
       );
       return { correct, answer: q.answer, analysis: q.analysis };
     },
@@ -121,12 +123,14 @@ test("location learning uses one exact current-certificate leaf and hides answer
     internal.questions.every((q) => q.knowledgePoint === "Fixture leaf"),
   );
 });
-test("fewer than 10 questions or indivisible common-stem sizes cannot manufacture a gate quiz", (t) => {
-  for (const config of [{ count: 9 }, { count: 32, groups: true }]) {
-    const f = fixture(t, config);
-    assert.equal(f.service.status(...f.context).points[0].eligible, false);
-    assert.throws(() => f.start(), /10/);
-  }
+test("fewer than ten unseen questions exempts the gate, but indivisible groups do not falsely satisfy ten", t => {
+  const small=fixture(t,{count:9}), state=small.service.status(...small.context);
+  assert.equal(state.remainingCount,9);assert.equal(state.unlocked,true);
+  assert.equal(state.exemption,'insufficient_unseen_questions');
+  assert.ok(small.service.permit(...small.context).permit);
+  const grouped=fixture(t,{count:32,groups:true});
+  assert.equal(grouped.service.status(...grouped.context).unlocked,false);
+  assert.throws(()=>grouped.start(),/10/);
 });
 
 test('ten-question policy still selects whole material groups', t => {
@@ -497,4 +501,24 @@ test("location learning API authenticates, validates strict timing payloads and 
   assert.equal((await req("/consume", { permit })).status, 200);
   assert.equal((await req("/consume", { permit })).status, 403);
   assert.equal(store.points.finance().aiSpentMicros, 0);
+});
+
+test('multiple short chapters compose ten unique unseen questions and attempts are shared across practice modes',t=>{
+ const f=fixture(t,{count:18});
+ f.questions.forEach((q,i)=>{q.chapter='Chapter '+Math.floor(i/6);q.knowledgePoint='Point '+Math.floor(i/6)});
+ const first=f.questions[0];f.store.recordAttempt(first.id,['B'],0,'practice',f.context[0]);
+ let state=f.service.status(...f.context);
+ assert.equal(state.remainingCount,17);assert.equal(state.points[0].questionCount,5);
+ assert.throws(()=>f.service.start(...f.context,[state.points[0].id]),/10/);
+ state=f.service.start(...f.context,state.points.slice(0,2).map(p=>p.id));
+ assert.equal(state.session.questions.length,10);
+ assert.ok(!state.session.questions.some(q=>q.id===first.id));
+ assert.equal(new Set(state.session.questions.map(q=>q.id)).size,10);
+ assert.ok(!state.session.questions.some(q=>q.answer));
+ const answered=f.answer(f.dwell(state,1000),['A']);
+ assert.equal(f.store.attemptedQuestionIds(f.context[0]).size,2);
+ assert.equal(f.service.status(...f.context).remainingCount,16);
+ assert.equal(answered.session.reviews.length,1);
+ assert.equal(f.service.status('other',f.context[1]).remainingCount,18);
+ const pulse=f.dwell(answered,0);assert.equal(pulse.session.questions,undefined,'heartbeat does not resend all question bodies');
 });

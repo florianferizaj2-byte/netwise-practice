@@ -853,6 +853,10 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
     attemptedQuestionIds: (userId = "local") =>
       new Set(db.prepare("SELECT DISTINCT question_id FROM attempts WHERE user_id=?")
         .all(userId || "local").map((row) => row.question_id)),
+    correctQuestionIds: (userId = "local", before) => new Set(db.prepare(
+      "SELECT DISTINCT question_id FROM attempts WHERE user_id=? AND json_extract(data,'$.correct')=1" +
+      (before ? " AND json_extract(data,'$.createdAt')<=?" : "")
+    ).all(...(before ? [userId || "local", before] : [userId || "local"])).map(row => row.question_id)),
     favoriteQuestionIds: (userId = "local") =>
       new Set(
         db

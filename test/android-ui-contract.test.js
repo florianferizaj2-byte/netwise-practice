@@ -54,10 +54,26 @@ test('Android screen variants retain their practice and exam business handlers',
         actual=actual.replace(", feedback: 'instant' as const",'').replace('true, filters)','true, hasSelection ? filters : undefined)').replace(", { feedback: 'instant' })",')');
       }
       if(name==='screens/TabScreens'&&key==='loadMoreQuestions'){
-        assert.match(actual,/feedback: 'instant'/);actual=actual.replace("feedback: 'instant', ",'');
+        assert.match(actual,/ownedPracticePage/);
+        actual=actual.replace("(managedPractice && user ? ownedPracticePage(practiceOwner(user), ownedSelection.current, nextOffset, pageSeed.current, randomBefore.current) : ",'').replace('undefined)).then','undefined).then');
+        assert.match(actual,/feedback: 'instant'/);
+        assert.match(actual,/excludeCorrect: '1' as const, before: randomBefore.current/);
+        // HTTP continuity tests cover the new owned random filter; the rest of
+        // paging, cancellation, deduplication and error handling stays compared.
+        actual=actual.replace("feedback: 'instant', ",'').replace("...(practiceMode === 'random' ? { excludeCorrect: '1' as const, before: randomBefore.current } : {}), ",'');
       }
       if(name==='screens/TabScreens'&&['askAiTeacher','analyzeWithAi','generateAiPractice'].includes(key)){
         assert.match(actual,/recordSyncPending/);actual=actual.replace(' || recordSyncPending','');
+      }
+      if(name==='screens/TabScreens'&&key==='removeCurrentWrong'){
+        // User-approved explicit delete+advance is exercised with the real
+        // compiled handler in practice-actions.test.js, including failures.
+        assert.match(actual,/wrongDeleteLock.current/);assert.match(actual,/recordSyncPending/);
+        assert.match(actual,/mobileApi.removeWrong/);assert.match(actual,/setTotalQuestions/);compared++;continue;
+      }
+      if(name==='screens/TabScreens'&&['previousPracticeQuestion','continuePracticeQuestion'].includes(key))actual=actual.replace(' || wrongDeleteBusy','');
+      if(name==='screens/TabScreens'&&key==='requestPracticeExit'){
+        assert.match(actual,/saveLatest.current\(\).then/);assert.match(actual,/续刷进度未保存/);compared++;continue;
       }
       if(name==='screens/TabScreens'&&key==='submitAnswer'){
         assert.match(actual,/practiceAttemptSync\.enqueue/);assert.match(actual,/clientAttemptId/);
