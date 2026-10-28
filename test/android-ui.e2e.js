@@ -68,8 +68,15 @@ html,body,#root{height:100%;margin:0}#root{display:flex;flex-direction:column;ov
 write('storage.ts', 'export default {async getItem(k){return localStorage.getItem(k)},async setItem(k,v){localStorage.setItem(k,v)},async removeItem(k){localStorage.removeItem(k)},async multiRemove(ks){ks.forEach(k=>localStorage.removeItem(k))}}');
 write('stream.ts', 'export const fetch=(...args)=>globalThis.fetch(...args)');
 write('audio.ts', 'export async function prepareUiSounds(){} export function setUiSoundSettings(){} export function playUiSound(){} export function previewUiSound(){}');
-write('answer-feedback.ts', `let settings=null;export async function prepareAnswerFeedback(){} export function configureAnswerFeedback(s){settings=s;window.__answerFeedbackSettings=s} export function stopAnswerFeedback(){} export function playCorrectAnswerFeedback(correct){if(!correct||!settings)return;window.__answerFeedbackEvents??=[];window.__answerFeedbackEvents.push({...settings})}`);
-write('practice-voice.ts', `import {practiceVoice as base} from '${source('src/practiceVoice.ts')}';export {configurePracticeVoice} from '${source('src/practiceVoice.ts')}';export const practiceVoice={...base,enter(scope,current){if(current&&!current())return false;window.__practiceVoiceEntries??=[];window.__practiceVoiceEntries.push(scope);return false;}}`);
+write('answer-feedback.ts', `import{configurePracticeVoice}from'./practice-voice';let settings=null;export async function prepareAnswerFeedback(){} export function configureAnswerFeedback(s){settings=s;window.__answerFeedbackSettings=s;configurePracticeVoice(s)} export function stopAnswerFeedback(){} export function previewAnswerSound(current){if(!current||current())window.__builtinAuditions=(window.__builtinAuditions||0)+1} export function playCorrectAnswerFeedback(correct){if(!correct||!settings)return;window.__answerFeedbackEvents??=[];window.__answerFeedbackEvents.push({...settings})}`);
+// Only device storage/player APIs are fixtures. Catalog, manifests and complete asset
+// bytes are fetched from the real local backend and verified before being usable.
+write('practice-voice.ts', `import{createVoiceEngine}from'${source('src/practiceVoiceEngine.ts')}';import{mobileApi,API_BASE_URL}from'${source('src/api/client.ts')}';import{DEFAULT_ANSWER_FEEDBACK}from'${source('src/answerFeedbackSettings.ts')}';let settings=DEFAULT_ANSWER_FEEDBACK;
+const prefix='voice-ui-pack:',assets='voice-ui-asset:';const read=async id=>JSON.parse(localStorage.getItem(prefix+id)||'null');
+const engine=createVoiceEngine({catalog:()=>mobileApi.voicePacks(),manifest:id=>mobileApi.voicePackManifest(id),read,save:async pack=>{localStorage.setItem(prefix+pack.id,JSON.stringify(pack))},list:async()=>{const rows=[];for(let i=0;i<localStorage.length;i++){const key=localStorage.key(i);if(key?.startsWith(prefix)){const p=JSON.parse(localStorage.getItem(key));rows.push({id:p.id,name:p.name,revision:p.revision,bytes:p.assets.reduce((s,a)=>s+a.bytes,0)})}}return rows},remove:async id=>localStorage.removeItem(prefix+id),prepare:async(a,download,signal)=>{
+ if(download){window.__voiceAssetRequests=(window.__voiceAssetRequests||0)+1;const response=await fetch(new URL(a.url,API_BASE_URL),{signal});if(!response.ok)throw Error('audio download failed');const data=new Uint8Array(await response.arrayBuffer());const hash=[...new Uint8Array(await crypto.subtle.digest('SHA-256',data))].map(b=>b.toString(16).padStart(2,'0')).join('');if(hash!==a.sha256||data.length!==a.bytes)throw Error('audio integrity failed');localStorage.setItem(assets+a.id,hash)}
+ if(localStorage.getItem(assets+a.id)!==a.sha256)throw Error('local audio missing');let released=false;return{ready:()=>!released,play:(volume,max,current)=>{if(released||!current())return false;window.__voicePlayback??=[];window.__voicePlayback.push({id:a.id,volume});return true},stop(){},release(){released=true}}},settings:()=>settings,active:()=>true,now:Date.now,random:()=>0});
+export const practiceVoice={...engine,enter(scope,current){if(current&&!current())return false;window.__practiceVoiceEntries??=[];window.__practiceVoiceEntries.push(scope);return engine.enter(scope,current)}};export function configurePracticeVoice(next){settings=next;engine.select(next.voicePackId)}`);
 write('status.tsx', 'export function StatusBar(){return null}');
 write('native.ts', `export*from'react-native-web';import React from'react';import{Platform,StyleSheet,Text as BaseText,TextInput as BaseInput,useWindowDimensions as baseDimensions}from'react-native-web';Platform.OS='android';
 const Scale=React.createContext(1);export function TestFontScaleProvider({children}){const [scale,setScale]=React.useState(1);React.useLayoutEffect(()=>{window.__setFontScale=setScale},[]);return React.createElement(Scale.Provider,{value:scale},children)}
@@ -136,7 +143,7 @@ app.use('/api/mobile/version', (_req, res, next) => {
 });
 app.use('/api/ai', (req, res, next) => { if(req.method==='GET')return next(); aiRequests++; res.status(503).json({ error: 'Synthetic UI test: no model call' }); });
 app.get('/api/account/points/wallet', (_req, res, next) => forceWalletExpired ? res.status(401).json({ error: 'Synthetic session expiry' }) : next());
-app.use((req, res, next) => req.path.startsWith('/api/') ? backend(req, res, next) : next());
+app.use((req, res, next) => (req.path.startsWith('/api/')||req.path.startsWith('/voice-packs/assets/')) ? backend(req, res, next) : next());
 app.use(vite.middlewares);
 const server = app.listen(0, '127.0.0.1'); await new Promise(resolve => server.once('listening', resolve));
 const base = `http://127.0.0.1:${server.address().port}`, checks = [], errors = [], screenshots = [], consoleErrors = [], failedRequests = [];
@@ -144,6 +151,14 @@ const issuedResponse = await fetch(base + '/api/admin/membership-codes', { metho
 assert.ok(issuedResponse.ok, 'isolated admin creates one test membership code');
 const issued = await issuedResponse.json(), redemptionCode = issued.codes?.[0]?.code;
 assert.equal(typeof redemptionCode, 'string');
+// Publish two complete packs through the real administrator routes in this disposable store.
+async function voiceAdmin(url,method,body,raw){const response=await fetch(base+url,{method,headers:{Authorization:'Bearer '+token,'Content-Type':raw?'application/octet-stream':'application/json'},body:raw??JSON.stringify(body)});const data=await response.json();assert.ok(response.ok,JSON.stringify(data));return data}
+const voiceIds=[];
+for(const style of ['soft','crisp','warm']){const data=await voiceAdmin('/api/admin/voice-packs/assets?name='+encodeURIComponent(style+'.wav'),'POST',null,fs.readFileSync(path.join(mobile,'assets/sounds/answer-correct-'+style+'.wav')));voiceIds.push(data.asset.id)}
+await voiceAdmin('/api/admin/voice-packs/assets','PATCH',{requestId:crypto.randomUUID(),items:voiceIds.map(id=>({id,expectedRevision:0,state:'ready'}))});
+let voiceConfig;
+for(const [id,name]of[['gazi-voice','嘎子语音包'],['luyinbox','卢音盒音效']]){const published=await voiceAdmin('/api/admin/voice-packs/'+id,'PUT',{requestId:crypto.randomUUID(),expectedRevision:0,name,enabled:true,cues:{'practice.enter':voiceIds,'answer.correct':voiceIds,'answer.streak':[{count:2,clips:voiceIds}], 'answer.wrong':[1,2,3,4,5].map(count=>({count,clips:voiceIds}))}});voiceConfig=published.configuration}
+await voiceAdmin('/api/admin/voice-packs/default','PUT',{requestId:crypto.randomUUID(),expectedRevision:voiceConfig.revision,packId:'gazi-voice'});
 let browser, page;
 const shot = async name => {
   await page.evaluate(() => document.fonts.ready);
@@ -288,10 +303,12 @@ try {
   await page.getByRole('button', { name: '试听当前音效', exact: true }).click();
   const feedbackPanel=page.getByTestId('answer-feedback-settings');
   await expect(feedbackPanel.getByTestId('voice-pack-downloads')).toBeVisible();
-  await feedbackPanel.getByRole('button',{name:'选择刷题语音包',exact:true}).click();
-  await feedbackPanel.getByRole('radio',{name:'仅内置音效',exact:true}).click();
-  await expect(feedbackPanel.getByRole('radio',{name:'仅内置音效',exact:true})).toBeChecked();
-  await feedbackPanel.getByRole('button',{name:'选择刷题语音包',exact:true}).click();
+  await feedbackPanel.getByRole('button',{name:'打开语音包设置',exact:true}).click();
+  await page.getByRole('button',{name:'管理语音包',exact:true}).click();
+  await page.getByRole('radio',{name:'仅内置音效',exact:true}).click();
+  await expect(page.getByRole('radio',{name:'仅内置音效',exact:true})).toBeChecked();
+  await page.getByRole('button',{name:'返回语音包',exact:true}).click();
+  await page.getByRole('button',{name:'返回设置',exact:true}).click();
   await expect(feedbackPanel.getByRole('switch',{name:'答对提示音',exact:true})).toBeChecked();
   await expect(feedbackPanel.getByRole('switch',{name:'答对震动',exact:true})).toBeChecked();
   await feedbackPanel.getByRole('radio',{name:'答对提示音音色：温暖',exact:true}).click();
@@ -315,6 +332,63 @@ try {
     await shot('answer-feedback-settings-'+width+'-'+mode);
   }
   checks.push('answer feedback switches, tone, volume, vibration level and preview persist with narrow/large-text layouts');
+  // Approved standalone voice settings: real backend bytes + actual selection engine.
+  await feedbackPanel.getByRole('button',{name:'打开语音包设置',exact:true}).click();
+  const voiceScreen=page.getByTestId('voice-pack-settings');
+  await expect(page.getByRole('heading',{name:'语音包',exact:true})).toBeVisible();
+  await voiceScreen.getByRole('switch',{name:'刷题语音',exact:true}).click();
+  await voiceScreen.getByRole('button',{name:'提高语音音量',exact:true}).click();
+  await expect(page.getByTestId('voice-volume-value')).toHaveText('21%');
+  const slider=voiceScreen.getByTestId('voice-volume-slider');await slider.scrollIntoViewIfNeeded();const sliderBox=await slider.boundingBox();
+  await page.mouse.move(sliderBox.x+sliderBox.width*0.5,sliderBox.y+sliderBox.height/2);await page.mouse.down();
+  await page.mouse.move(sliderBox.x+sliderBox.width*0.32,sliderBox.y+sliderBox.height/2,{steps:8});await page.mouse.up();
+  await expect.poll(()=>page.evaluate(()=>JSON.parse(localStorage.getItem('kaojiang-answer-feedback-v1')).volume)).toBeCloseTo(0.32,1);
+  const chosenVoiceVolume=await page.evaluate(()=>JSON.parse(localStorage.getItem('kaojiang-answer-feedback-v1')).volume);assert.ok(chosenVoiceVolume<=0.33,'drag ends at approximately 32 percent and persists');
+
+  await voiceScreen.getByRole('button',{name:'下载语音包 嘎子语音包',exact:true}).click();
+  await expect(voiceScreen.getByRole('radio',{name:'使用语音包 嘎子语音包',exact:true})).toBeChecked();
+  const audioFetches=await page.evaluate(()=>window.__voiceAssetRequests||0);
+  assert.equal(audioFetches,3,'all three real audio assets were fetched and hash checked');
+  await voiceScreen.getByRole('button',{name:'试听当前语音包',exact:true}).click();
+  await voiceScreen.getByRole('button',{name:'试听当前语音包',exact:true}).click();
+  assert.equal(await page.evaluate(()=>window.__voicePlayback.length),2,'explicit preview repeats without synthesizing attempts');
+  assert.equal(await page.evaluate(()=>window.__voiceAssetRequests),audioFetches,'preview is local-only');
+  await voiceScreen.getByRole('button',{name:'配置开始刷题语音',exact:true}).click();
+  await voiceScreen.getByRole('radio',{name:'进入题目：随机',exact:true}).click();
+  await voiceScreen.getByRole('checkbox',{name:'进入题目 语音 3',exact:true}).click();
+  await voiceScreen.getByRole('button',{name:'试听进入题目语音 1',exact:true}).click();
+  await expect.poll(()=>page.evaluate(()=>JSON.parse(localStorage.getItem('kaojiang-answer-feedback-v1')).voiceScenes?.['gazi-voice']?.['practice.enter']?.clips.length)).toBe(2);
+  await shot('voice-scene-selection-393');
+  await page.getByRole('button',{name:'返回语音包',exact:true}).click();
+  await expect(voiceScreen.getByRole('button',{name:'配置开始刷题语音',exact:true})).toContainText('随机 · 2 条');
+  await voiceScreen.getByRole('button',{name:'配置答错与连错语音',exact:true}).click();
+  await voiceScreen.getByRole('radio',{name:'连续答错 5 次及以上：关闭',exact:true}).click();
+  await expect.poll(()=>page.evaluate(()=>JSON.parse(localStorage.getItem('kaojiang-answer-feedback-v1')).voiceScenes?.['gazi-voice']?.['wrong:5']?.mode)).toBe('off');
+  await page.getByRole('button',{name:'返回语音包',exact:true}).click();
+  for(const [width,mode,scale] of [[393,'light',1],[393,'dark',1],[320,'dark',1.35]]){
+    await page.setViewportSize({width,height:1000});await page.evaluate(({mode,scale})=>{window.__setAndroidTheme(mode);window.__setFontScale(scale)},{mode,scale});
+    await voiceScreen.evaluate(e=>{e.scrollTop=0});await page.waitForTimeout(150);
+    assert.equal(await voiceScreen.evaluate(e=>e.scrollWidth>e.clientWidth+1),false,'voice settings never overflow horizontally');
+    for(const label of ['配置开始刷题语音','配置答对与连对语音','配置答错与连错语音'])assert.ok((await voiceScreen.getByRole('button',{name:label,exact:true}).boundingBox()).height>=48);
+    if(width===320){for(const text of ['开始刷题','答对与连对','答错与连错','嘎子语音包'])for(const node of await voiceScreen.getByText(text,{exact:true}).all())assert.ok(await node.evaluate(e=>e.getBoundingClientRect().height<=parseFloat(getComputedStyle(e).lineHeight)+1),text+' stays on one line with large text');}
+    await shot('voice-settings-'+width+'-'+mode+'-scale'+scale);
+  }
+  await page.setViewportSize({width:393,height:852});await page.evaluate(()=>{window.__setFontScale(1);window.__setAndroidTheme('light')});
+  await page.getByRole('button',{name:'返回设置',exact:true}).click();await page.getByRole('button',{name:'关闭设置',exact:true}).click();
+  await page.reload();await tab('我的');await page.getByRole('button',{name:'设置',exact:true}).click();
+  await page.getByRole('button',{name:'打开语音包设置',exact:true}).click();
+  await expect(voiceScreen.getByRole('radio',{name:'使用语音包 嘎子语音包',exact:true})).toBeChecked();
+  await expect(voiceScreen.getByRole('button',{name:'配置开始刷题语音',exact:true})).toContainText('随机 · 2 条');
+  await page.getByRole('button',{name:'管理语音包',exact:true}).click();
+  await voiceScreen.getByRole('button',{name:'删除语音包 嘎子语音包',exact:true}).click();
+  await voiceScreen.getByRole('button',{name:'确认删除语音包 嘎子语音包',exact:true}).click();
+  await expect(voiceScreen.getByRole('button',{name:'删除语音包 嘎子语音包',exact:true})).toHaveCount(0);
+  await expect(voiceScreen.getByRole('radio',{name:'仅内置音效',exact:true})).toBeChecked();
+  await page.getByRole('button',{name:'返回语音包',exact:true}).click();
+  await page.getByRole('button',{name:'返回设置',exact:true}).click();
+  const feedbackAfterVoiceSettings={...feedback,soundEnabled:true,volume:chosenVoiceVolume,voiceScenes:{'gazi-voice':{'practice.enter':{mode:'random',clips:voiceIds.slice(0,2)},'wrong:5':{mode:'off',clips:[]}}}};
+  await expect.poll(()=>page.evaluate(()=>JSON.parse(localStorage.getItem('kaojiang-answer-feedback-v1')))).toEqual(feedbackAfterVoiceSettings);
+  checks.push('voice settings: real download/hash, repeated local preview, volume, candidate subset, wrong tier, restart persistence, delete and narrow/dark layouts');
   await page.getByRole('button', { name: '清理学习缓存', exact: true }).click();
   await expect(page.getByText('已清理', { exact: true })).toBeVisible();
   checks.push('settings animation/sound-style/volume/switch controls persist; cache cleanup preserves the signed-in account');
@@ -501,7 +575,7 @@ try {
   await expect(page.getByRole('heading', { name: '积分', exact: true })).toBeVisible();
   await page.getByRole('button', {name:'关闭积分费用与记录',exact:true}).click();
   versionFault = 'legacy'; await page.reload();
-  await expect.poll(()=>page.evaluate(()=>window.__answerFeedbackSettings)).toEqual({soundEnabled:false,hapticsEnabled:true,volume:0.16,style:'warm',hapticStrength:'strong',voicePackId:'builtin'});
+  await expect.poll(()=>page.evaluate(()=>window.__answerFeedbackSettings)).toEqual(feedbackAfterVoiceSettings);
   checks.push('answer feedback settings restore after application reload');
   await expect(page.getByTestId('backend-connection-notice')).toContainText('服务端尚未完成 v1.0 升级');
   versionFault = ''; await page.getByRole('button',{name:'重新连接',exact:true}).click();

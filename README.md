@@ -2,7 +2,7 @@
 
 考匠（AceExam，Ace + Exam）是一个面向职业认证与升学考试的练习与模拟平台。用户共用作者提供的 AI 服务，根据错题生成针对性变式题，并按功能消耗账号额度；通过审核的题目可以分享给同证书的其他用户，让题库在使用过程中持续增长。
 
-**分支预发行 Android v1.0.7（构建 40）** · [APK](public/downloads/kaojiang-v1.0.7.apk) · [SHA-256](public/downloads/kaojiang-v1.0.7.apk.sha256) · [更新说明](docs/release-v1.0.7.md)。修复播放完成后不再触发、答错后再次答对无声，进入练习目录不播报，实际题目可见后才播入场语音；保留固定/随机与离线播放；按发布分支交付，线上部署与手机实机验收分别进行。
+**分支预发行 Android v1.0.8（构建 41）** · [APK](public/downloads/kaojiang-v1.0.8.apk) · [SHA-256](public/downloads/kaojiang-v1.0.8.apk.sha256) · [更新说明](docs/release-v1.0.8.md)。公告按正文与标题记住已读；语音包独立设置页支持离线试听、音量、场景固定/随机候选与下载管理。沿用正式签名，安装、GitHub 推送与线上部署分别验证。
 
 **最近 GitHub Release：Android v1.0.3** · [下载 APK](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v1.0.3/kaojiang-v1.0.3.apk) · [GitHub 发布页](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v1.0.3) · [SHA-256](public/downloads/kaojiang-v1.0.3.apk.sha256) · [更新与部署说明](docs/release-v1.0.3.md)。正式签名，包含负积分结算与即时答题。
 

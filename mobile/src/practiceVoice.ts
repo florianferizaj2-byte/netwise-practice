@@ -13,6 +13,8 @@ const state: VoiceStatus = {
 };
 export const practiceVoice = {
   getStatus: () => state,
+  getManifest: (): import('./api/voicePacks').VoicePackManifest | null => null,
+  previewClip(_id: string, _current?: () => boolean) { return false; },
   subscribe: (_f: () => void) => () => {},
   async setAccount(_id: string | null) {},
   async refresh() {},

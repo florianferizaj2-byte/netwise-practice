@@ -1,9 +1,10 @@
+import type { VoicePackPreferences } from './answerFeedbackSettings';
 import {
   createPracticeVoiceSession,
   selectVoiceClip,
   voiceCueScene,
   voiceSceneClips,
-  voiceCueMode,
+  voiceScenePlayback,
   type VoiceAsset,
   type VoicePackCatalog,
   type VoicePackManifest,
@@ -44,7 +45,7 @@ export type VoiceDependencies = {
     download: boolean,
     signal: AbortSignal,
   ): Promise<PreparedVoice>;
-  settings(): { soundEnabled: boolean; volume: number };
+  settings(): { soundEnabled: boolean; volume: number; voiceScenes?: VoicePackPreferences };
   active(): boolean;
   now(): number;
   random(): number;
@@ -275,7 +276,13 @@ export function createVoiceEngine(deps: VoiceDependencies) {
         downloads: await deps.list().catch(() => []),
       });
     }
-    if (scope === epoch) await activate();
+    if (scope === epoch) {
+      const desired = selection === 'default' ? catalog?.defaultPackId : selection;
+      const readyLocal = pack && pack.id === desired && status.state === 'ready' &&
+        status.downloads.some(local => local.id === pack!.id && local.revision === pack!.revision) &&
+        prepared.size === pack.assets.length && [...prepared.values()].every(handle => handle.ready());
+      if (!readyLocal) await activate();
+    }
   }
   async function setAccount(id: string | null) {
     if (id === account) {
@@ -328,7 +335,10 @@ export function createVoiceEngine(deps: VoiceDependencies) {
         progress: 100,
         message: '下载完成，可离线使用',
       });
-      return true;
+      // Updating an already-selected id must switch revisions without reselecting it.
+      const desired = selection === 'default' ? catalog?.defaultPackId : selection;
+      if (scope === epoch && desired === id) await activate();
+      return scope === epoch;
     } catch (e) {
       if (scope === epoch)
         emit({
@@ -344,12 +354,14 @@ export function createVoiceEngine(deps: VoiceDependencies) {
     if (!cue || !pack || !deps.active() || !current()) return false;
     const settings = deps.settings();
     if (!settings.soundEnabled || settings.volume <= 0) return false;
-    let selected = selectVoiceClip(pack, cue, deps.random());
-    if (!selected) return false;
     const key = voiceCueScene(pack, cue),
-      slot = voiceSceneClips(pack.cues, key);
+      scene = voiceScenePlayback(pack, key, settings.voiceScenes?.[pack.id]?.[key]);
+    if (scene.muted) return true; // Explicit silence must not trigger a builtin fallback.
+    let selected = selectVoiceClip(pack, cue, deps.random(), settings.voiceScenes);
+    if (!selected) return false;
+    const slot = scene.clips;
     if (
-      voiceCueMode(pack, key) === 'random' &&
+      scene.mode === 'random' &&
       slot.length > 1 &&
       previous.get(key) === selected.id
     )
@@ -372,9 +384,17 @@ export function createVoiceEngine(deps: VoiceDependencies) {
       () => guardEpoch === epoch && deps.active() && current(),
     );
   }
+  function previewClip(id: string, current: () => boolean = () => true) {
+    const settings = deps.settings(), handle = prepared.get(id), guardEpoch = epoch;
+    if (!pack?.assets.some(a => a.id === id) || !handle?.ready() || !deps.active() || !current() || !settings.soundEnabled || settings.volume <= 0) return false;
+    stop();
+    return handle.play(settings.volume, pack.playback.maxDurationMs, () => guardEpoch === epoch && deps.active() && current());
+  }
   const scope = (s: string) => account + ':' + s;
   return {
     getStatus: () => status,
+    getManifest: () => pack,
+    previewClip,
     subscribe(f: () => void) {
       listeners.add(f);
       return () => {
@@ -416,10 +436,8 @@ export function createVoiceEngine(deps: VoiceDependencies) {
       return play(cue, current);
     },
     preview(current: () => boolean = () => true) {
-      return play(
-        { event: 'answer.correct', streak: 1, scope: 'preview' },
-        current,
-      );
+      const selected = pack && (selectVoiceClip(pack, { event: 'answer.correct', streak: 1, scope: 'preview' }, deps.random(), deps.settings().voiceScenes) ?? pack.assets[0]);
+      return selected ? previewClip(selected.id, current) : false;
     },
   };
 }

@@ -9,7 +9,7 @@ import { useTheme, useThemedStyles, type ThemeColors } from '../theme';
 const volumes = [{label:'静音',value:0},{label:'轻声',value:0.16},{label:'适中',value:0.32},{label:'清晰',value:0.56}];
 const tones = [{label:'轻柔',value:'soft'},{label:'清脆',value:'crisp'},{label:'温暖',value:'warm'}] as const;
 const strengths = [{label:'轻',value:'light'},{label:'中',value:'normal'},{label:'明显',value:'strong'}] as const;
-export function AnswerFeedbackSettings() {
+export function AnswerFeedbackSettings({onOpenVoicePacks}:{onOpenVoicePacks:()=>void}) {
   const {colors,answerFeedbackSettings:settings,answerFeedbackReady:ready,setAnswerFeedbackSettings:update} = useTheme();
   const s = useThemedStyles(styles);
   const {width,fontScale} = useWindowDimensions();
@@ -23,7 +23,7 @@ export function AnswerFeedbackSettings() {
     <View style={s.heading}><AppIcon name="check" size={22} color={colors.brand}/><Text style={s.title}>答对反馈</Text></View>
     <Text style={s.hint}>答对时，给自己一个小小的肯定</Text>
     <View style={s.row}><View style={s.copy}><Text style={s.label}>答对提示音</Text><Text style={s.description}>控制入场、答对、连对与连错声音，与按钮音效分开</Text></View><View style={s.switch}><AppSwitch hitSlop={10} accessibilityLabel="答对提示音" disabled={!ready} value={settings.soundEnabled} onValueChange={soundEnabled=>update({soundEnabled})} trackColor={{false:colors.border,true:colors.action}} thumbColor={colors.white}/></View></View>
-    <VoicePackDownloads/>
+    <VoicePackDownloads onOpen={onOpenVoicePacks}/>
     <Text style={s.label}>内置兜底音色</Text>
     {choices('答对提示音音色',tones,settings.style,style=>update({style}))}
     <View style={s.row}><Text style={s.label}>提示音音量</Text><Text style={s.hint}>{Math.round(settings.volume*100)}%</Text></View>

@@ -562,3 +562,43 @@ test('fresh correct-wrong-correct answers are not swallowed by the configured mi
     'the same receipt is still deduplicated',
   );
 });
+
+
+test('device scene preferences select only the published candidate pool and isolate each pack', async () => {
+ const f=fixture(); f.pack.cues['practice.enter']=['1'.repeat(64),'2'.repeat(64),'3'.repeat(64)];
+ f.settings.voiceScenes={test:{'practice.enter':{mode:'random',clips:['2'.repeat(64),'3'.repeat(64)]}},other:{'practice.enter':{mode:'fixed',clips:['1'.repeat(64)]}}};
+ f.local.set('test',f.pack);await f.api.setAccount('a');const before={...f.calls};
+ f.time();assert.equal(f.api.enter('one'),true);f.time();assert.equal(f.api.enter('two'),true);
+ assert.deepEqual(f.events.map(e=>e[0]),['2','3']);assert.deepEqual(f.calls,before);
+ assert.deepEqual(f.pack.cues['practice.enter'],['1'.repeat(64),'2'.repeat(64),'3'.repeat(64)],'downloaded manifest stays unchanged');
+});
+test('explicit scene silence suppresses builtin fallback while keeping answer identities and streaks',async()=>{
+ const f=fixture();f.settings.voiceScenes={test:{'answer.correct':{mode:'off',clips:[]}}};f.local.set('test',f.pack);await f.api.setAccount('a');
+ f.time();f.api.enter('round');const n=f.events.length;assert.equal(f.api.answer('round','a',true,()=>true),true);assert.equal(f.events.length,n);
+ f.time();assert.equal(f.api.answer('round','b',true,()=>true),true);assert.equal(f.events.at(-1)[0],'3');
+ assert.equal(f.api.answer('round','b',true,()=>true),false);
+});
+test('a removed candidate after pack update falls back to valid published audio',async()=>{
+ const f=fixture();f.settings.voiceScenes={test:{'practice.enter':{mode:'fixed',clips:['f'.repeat(64)]}}};f.local.set('test',f.pack);await f.api.setAccount('a');f.time();assert.equal(f.api.enter('round'),true);assert.equal(f.events.at(-1)[0],'1');
+});
+test('local clip audition neither changes streaks nor fetches audio and respects guard, mute and volume',async()=>{
+ const f=fixture();f.local.set('test',f.pack);await f.api.setAccount('a');const calls={...f.calls};f.time();f.api.enter('round');
+ assert.equal(f.api.previewClip('3'.repeat(64),()=>true),true);assert.equal(f.api.getManifest().id,'test');
+ f.time();f.api.answer('round','a',true,()=>true);assert.equal(f.events.at(-1)[0],'2');f.time();f.api.answer('round','b',true,()=>true);assert.equal(f.events.at(-1)[0],'3');
+ const n=f.events.length;assert.equal(f.api.previewClip('f'.repeat(64)),false);assert.equal(f.api.previewClip('1'.repeat(64),()=>false),false);
+ f.settings.soundEnabled=false;assert.equal(f.api.previewClip('1'.repeat(64)),false);f.settings.soundEnabled=true;f.settings.volume=0;assert.equal(f.api.previewClip('1'.repeat(64)),false);
+ assert.equal(f.events.length,n);assert.deepEqual(f.calls,calls);
+});
+test('current-pack audition works for entry/wrong-only packs without synthesizing answer events',async()=>{
+ const f=fixture();f.pack.cues['answer.correct']=[];f.pack.cues['answer.streak']=[];f.local.set('test',f.pack);await f.api.setAccount('a');assert.equal(f.api.preview(()=>true),true);assert.equal(f.events.at(-1)[0],'1');
+});
+
+test('updating the same selected voice pack immediately activates the new local revision',async()=>{
+ const f=fixture();f.local.set('test',f.pack);await f.api.setAccount('a');assert.equal(f.api.getManifest().revision,1);
+ const updated={...f.pack,revision:2,name:'Updated Test'};f.deps.manifest=async()=>updated;
+ assert.equal(await f.api.download('test'),true);assert.equal(f.api.getManifest().revision,2);assert.equal(f.api.getStatus().currentName,'Updated Test');
+});
+test('an unchanged catalog refresh reuses prepared local players instead of interrupting them',async()=>{
+ const f=fixture();let prepares=0;const prepare=f.deps.prepare;f.deps.prepare=async(...args)=>{prepares++;return prepare(...args)};
+ f.local.set('test',f.pack);await f.api.setAccount('a');const loaded=prepares;await f.api.refresh();assert.equal(prepares,loaded);assert.equal(f.api.getStatus().state,'ready');
+});

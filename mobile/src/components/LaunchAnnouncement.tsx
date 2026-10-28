@@ -6,7 +6,7 @@ import { useTheme } from '../theme';
 import { BrandMark } from './BrandMark';
 import { AnnouncementDialog } from './AnnouncementDialog';
 
-/** One notice per App launch, shared by guests and signed-in users. */
+/** Show each content revision once on this installation, including guest launches. */
 export function LaunchAnnouncement({ children }: { children: ReactNode }) {
   const { colors } = useTheme();
   const [ready, setReady] = useState(false);
@@ -18,7 +18,7 @@ export function LaunchAnnouncement({ children }: { children: ReactNode }) {
       if (!active || settled) return;
       settled = true; if (timer) clearTimeout(timer);
       const current = publicAnnouncements.snapshot();
-      setNotice(current.enabled ? current : null); setReady(true);
+      setNotice(publicAnnouncements.needsDisplay(current) ? current : null); setReady(true);
     };
     void publicAnnouncements.hydrate().then(() => {
       if (!active) return;
@@ -32,7 +32,7 @@ export function LaunchAnnouncement({ children }: { children: ReactNode }) {
   return <View style={s.root} testID="announcement-ready">
     {notice ? <>
       <View style={[s.loading, { backgroundColor: colors.background }]}><BrandMark /></View>
-      <AnnouncementDialog content={notice} visible launch onClose={() => setNotice(null)} />
+      <AnnouncementDialog content={notice} visible launch onClose={() => { if (notice) void publicAnnouncements.markRead(notice); setNotice(null); }} />
     </> : children}
   </View>;
 }

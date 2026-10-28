@@ -1,3 +1,4 @@
+import type { VoiceScenePreference, VoicePackPreferences } from '../answerFeedbackSettings';
 // Additive v1 protocol. Native sounds use explicitly downloaded, verified files.
 export type PracticeVoiceEvent =
   'practice.enter' | 'answer.correct' | 'answer.streak' | 'answer.wrong';
@@ -152,10 +153,21 @@ export function voiceCueMode(
     ? 'fixed'
     : 'random';
 }
+/** Device choices are constrained to the published scene; never mutate the downloaded manifest. */
+export function voiceScenePlayback(manifest: VoicePackManifest, scene: string, preference?: VoiceScenePreference) {
+  const published = voiceSceneClips(manifest.cues, scene);
+  if (preference?.mode === 'off') return { clips: [] as string[], mode: 'fixed' as VoiceSelectionMode, muted: true };
+  const chosen = preference?.clips.filter(id => published.includes(id)) ?? [];
+  // A pack update can remove assets. Stale choices fall back to its published policy.
+  return chosen.length
+    ? { clips: preference!.mode === 'fixed' ? chosen.slice(0, 1) : chosen, mode: preference!.mode as VoiceSelectionMode, muted: false }
+    : { clips: published, mode: voiceCueMode(manifest, scene), muted: false };
+}
 export function selectVoiceClip(
   manifest: VoicePackManifest | null,
   cue: PracticeVoiceCue,
   random = 0,
+  preferences?: VoicePackPreferences,
 ): VoiceAsset | null {
   if (
     !manifest?.enabled ||
@@ -165,10 +177,10 @@ export function selectVoiceClip(
   )
     return null;
   const scene = voiceCueScene(manifest, cue),
-    clips = voiceSceneClips(manifest.cues, scene);
+    {clips, mode} = voiceScenePlayback(manifest, scene, preferences?.[manifest.id]?.[scene]);
   if (!clips.length) return null;
   const index =
-    voiceCueMode(manifest, scene) === 'fixed'
+    mode === 'fixed'
       ? 0
       : Math.floor(
           Math.max(

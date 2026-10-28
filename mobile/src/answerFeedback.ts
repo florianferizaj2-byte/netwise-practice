@@ -4,3 +4,5 @@ export function configureAnswerFeedback(_settings: AnswerFeedbackSettings) {}
 export async function prepareAnswerFeedback() {}
 export function stopAnswerFeedback() {}
 export function playCorrectAnswerFeedback(_correct: boolean, _isCurrent?: () => boolean, _context?: {scope:string;attemptId:string}) {}
+
+export function previewAnswerSound(_isCurrent?: () => boolean) {}

@@ -474,3 +474,16 @@ test('a completed Android tone replays for every fresh correct answer, including
     );
   }
 });
+
+
+test('per-pack scene preferences are bounded, migrated without changing legacy defaults and reject malformed choices',()=>{
+ const a='a'.repeat(64),b='b'.repeat(64);
+ const value=model.normalizeAnswerFeedback({voiceScenes:{test:{'practice.enter':{mode:'fixed',clips:[a,b]},'answer.correct':{mode:'random',clips:[a,a,b,'bad']},'wrong:5':{mode:'off',clips:[a]},'wrong:6':{mode:'off',clips:[]},'streak:1':{mode:'off',clips:[]},arbitrary:{mode:'random',clips:[a]}}}});
+ assert.deepEqual(plain(value.voiceScenes),{test:{'practice.enter':{mode:'fixed',clips:[a]},'answer.correct':{mode:'random',clips:[a,b]},'wrong:5':{mode:'off',clips:[]}}});
+ assert.equal(model.normalizeAnswerFeedback({voiceScenes:[]}).voiceScenes,undefined);
+ assert.equal(model.normalizeAnswerFeedback({voiceScenes:{test:{'practice.enter':{mode:'fixed',clips:[]}}}}).voiceScenes,undefined);
+});
+test('sound-only builtin audition never vibrates or changes practice voice events',async()=>{
+ const f=fixture();await f.api.prepareAnswerFeedback();f.api.configureAnswerFeedback({...model.DEFAULT_ANSWER_FEEDBACK,hapticsEnabled:true});f.api.previewAnswerSound(()=>true);await tick();
+ assert.equal(f.events.filter(e=>e[0]==='play').length,1);assert.equal(f.events.filter(e=>e[0]==='vibrate').length,0);
+});

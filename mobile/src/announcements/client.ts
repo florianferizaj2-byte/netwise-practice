@@ -9,6 +9,9 @@ export type Announcement = Readonly<{
 
 const fields = ['schemaVersion', 'id', 'enabled', 'title', 'body', 'updatedAt'];
 export const ANNOUNCEMENT_CACHE_KEY = 'kaojiang-public-announcement-v1';
+export const ANNOUNCEMENT_READ_KEY = 'kaojiang-read-announcement-content-v1';
+// Content, not a generated id/timestamp: a no-op administrator save is not news.
+const readIdentity = (content: Announcement) => JSON.stringify([content.title, content.body]);
 export const DEFAULT_ANNOUNCEMENT: Announcement = Object.freeze({
   schemaVersion: 1,
   id: 'welcome-20261014',
@@ -48,6 +51,9 @@ export class AnnouncementClient {
   private hydration: Promise<void> | null = null;
   private pending: Promise<void> | null = null;
   private lastAttempt: number | null = null;
+  private readContent: string | null = null;
+  private readRevision = 0;
+  private readWrite: Promise<void> = Promise.resolve();
 
   constructor(private storage: Storage, private request: () => Promise<unknown>, private now = Date.now) {}
 
@@ -64,13 +70,39 @@ export class AnnouncementClient {
   }
 
   hydrate = (): Promise<void> => {
-    if (!this.hydration) this.hydration = (async () => {
-      try {
-        const cached = await this.storage.getItem(ANNOUNCEMENT_CACHE_KEY);
-        if (cached) this.replace(parseAnnouncement(JSON.parse(cached)));
-      } catch { /* A damaged/unavailable cache must not block the home screen. */ }
-    })();
+    if (!this.hydration) {
+      const revision = this.readRevision;
+      this.hydration = Promise.all([
+        (async () => {
+          try {
+            const cached = await this.storage.getItem(ANNOUNCEMENT_CACHE_KEY);
+            if (cached) this.replace(parseAnnouncement(JSON.parse(cached)));
+          } catch { /* A damaged/unavailable cache must not block the home screen. */ }
+        })(),
+        (async () => {
+          try {
+            const receipt = await this.storage.getItem(ANNOUNCEMENT_READ_KEY);
+            if (revision === this.readRevision) this.readContent = receipt;
+          } catch { /* Read-state storage is optional, never a launch blocker. */ }
+        })(),
+      ]).then(() => undefined);
+    }
     return this.hydration;
+  };
+
+  needsDisplay = (content: Announcement = this.current): boolean =>
+    content.enabled && this.readContent !== readIdentity(content);
+
+  markRead = (content: Announcement = this.current): Promise<void> => {
+    const identity = readIdentity(content);
+    this.readContent = identity;
+    this.readRevision++;
+    // Serialize dismissals; the receipt is for the visible notice, not a later fetch.
+    this.readWrite = this.readWrite.then(async () => {
+      try { await this.storage.setItem(ANNOUNCEMENT_READ_KEY, identity); }
+      catch { /* Keep the in-memory receipt when device storage is full. */ }
+    });
+    return this.readWrite;
   };
 
   refresh = (force = false): Promise<void> => {

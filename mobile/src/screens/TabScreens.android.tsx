@@ -1,3 +1,4 @@
+import { VoicePackSettings, type VoicePackSettingsHandle } from '../components/VoicePackSettings.android';
 import {practiceAttemptSync,usePracticeAttemptSync} from '../api/practiceAttemptSync.android';
 import {studyRequestId} from '../api/studyTypes';
 import { androidAccent } from '../android-design-tokens';
@@ -1394,6 +1395,8 @@ export function ProfileScreen({
   const activeCertificate = certificates.find((certificate) => certificate.id === user?.certificateId);
   const [sponsorOpen, setSponsorOpen] = useState(false);
   const [appSettingsOpen, setAppSettingsOpen] = useState(false);
+  const [voiceSettingsOpen, setVoiceSettingsOpen] = useState(false);
+  const voiceSettingsRef = useRef<VoicePackSettingsHandle>(null);
   const [aiSettingsOpen, setAiSettingsOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [tutorialOpen, setTutorialOpen] = useState(false);
@@ -1578,7 +1581,7 @@ export function ProfileScreen({
           </SafeAreaView>
         </Modal>
       )}
-      <AndroidPageHeader title="我的" action={{label:'设置',onPress:()=>setAppSettingsOpen(true)}}/>
+      <AndroidPageHeader title="我的" action={{label:'设置',onPress:()=>{setVoiceSettingsOpen(false);setAppSettingsOpen(true)}}}/>
       <View style={styles.nativeIdentity}>
         {user?.avatarUrl?<Image source={{uri:mobileApi.resolveDownloadUrl(user.avatarUrl)}} style={styles.avatar}/>:<View style={styles.avatar}><AppIcon name="person" size={32} color={colors.brand}/></View>}
         <View style={styles.profileIdentityCopy}><Text style={styles.profileName}>{user?.communityName||user?.username||'未登录用户'}</Text><Text style={styles.profileMeta}>{user?'考匠，陪你认真备考每一天':'登录后同步学习记录'}</Text></View>
@@ -1622,7 +1625,8 @@ export function ProfileScreen({
       {user && profileOpen && <Modal visible={active} onRequestClose={() => setProfileOpen(false)} animationType={reduceMotion?'none':'slide'}>
         <ProfileSetupScreen user={user} onSaved={(updated) => { onUserUpdated?.(updated); setProfileOpen(false); }} onCancel={() => setProfileOpen(false)} />
       </Modal>}
-      <Modal animationType={reduceMotion?'none':'slide'} onRequestClose={()=>setAppSettingsOpen(false)} visible={active&&appSettingsOpen}>
+      <Modal animationType={reduceMotion?'none':'slide'} onRequestClose={()=>voiceSettingsOpen?voiceSettingsRef.current?.goBack():setAppSettingsOpen(false)} visible={active&&appSettingsOpen}>
+        {voiceSettingsOpen?<VoicePackSettings ref={voiceSettingsRef} onClose={()=>setVoiceSettingsOpen(false)}/>:
         <SafeAreaView style={styles.settingsPage}>
           <View style={styles.settingsNativeHeader}><AnimatedPressable accessibilityRole="button" accessibilityLabel="关闭设置" onPress={()=>setAppSettingsOpen(false)} style={styles.nativeHeaderButton}><AppIcon name="chevron-left" size={25} color={colors.text}/></AnimatedPressable><Text accessibilityRole="header" style={styles.settingsNativeTitle}>设置</Text></View>
           <ScrollView contentContainerStyle={styles.settingsPageContent} showsVerticalScrollIndicator={false}>
@@ -1652,11 +1656,11 @@ export function ProfileScreen({
               </View>
               <AnimatedPressable accessibilityRole="button" onPress={previewUiSound} style={styles.settingsSample}><AppIcon name="volume" size={22} color={colors.brand}/><Text style={styles.nativeLink}>试听当前音效</Text></AnimatedPressable>
             </View>
-            <AnswerFeedbackSettings/>
+            <AnswerFeedbackSettings onOpenVoicePacks={()=>setVoiceSettingsOpen(true)}/>
             <AnimatedPressable accessibilityRole="button" accessibilityLabel="清理学习缓存" onPress={()=>{void mobileApi.clearStudyCache().then(()=>setCacheNotice('已清理')).catch(()=>setCacheNotice('清理失败，请重试'))}} style={styles.settingsCache}><AppIcon name="refresh" size={23} color={colors.text}/><View style={styles.nativeSettingCopy}><Text style={styles.settingsRowLabelText}>清理学习缓存</Text><Text style={styles.settingsSmall}>{cacheNotice||'不会清除账号中的学习记录'}</Text></View><AppIcon name="chevron-right" size={18} color={colors.textMuted}/></AnimatedPressable>
             <Text style={styles.settingsDeviceNote}>设置仅影响当前设备的使用体验</Text>
           </ScrollView>
-        </SafeAreaView>
+        </SafeAreaView>}
       </Modal>
       <Modal
         animationType={reduceMotion?'none':'fade'}

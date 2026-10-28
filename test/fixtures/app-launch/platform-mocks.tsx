@@ -1,4 +1,5 @@
 import React from "react";
+import { AnnouncementClient } from "../../../mobile/src/announcements/client";
 
 // Native launch orchestration is rendered through RN Web; platform APIs are inert.
 export default function Svg({ accessible, children, ...props }: any) {
@@ -29,23 +30,21 @@ export function useTheme() {
 const params = new URLSearchParams(location.search);
 const notice = {
   schemaVersion: 1 as const,
-  id: "test",
+  id: params.get("id") ?? "test",
   enabled: true,
   title: "启动公告",
-  body: "测试公告",
+  body: params.get("body") ?? "测试公告",
   updatedAt: "2026-10-20T00:00:00+08:00",
 };
-export const publicAnnouncements = {
-  snapshot: () => notice,
-  hydrate: () =>
-    params.get("notice") === "hang"
-      ? new Promise<void>(() => {})
-      : Promise.resolve(),
-  refresh: () =>
-    new Promise<void>((resolve) =>
-      setTimeout(resolve, Number(params.get("notice") ?? 100)),
-    ),
-};
+export const publicAnnouncements = new AnnouncementClient({
+  getItem: (key) => params.get("notice") === "hang"
+    ? new Promise<string | null>(() => {})
+    : Promise.resolve(localStorage.getItem(key)),
+  setItem: async (key, value) => { localStorage.setItem(key, value); },
+}, async () => {
+  await new Promise(resolve => setTimeout(resolve, Number(params.get("notice") ?? 100)));
+  return notice;
+});
 export function AnnouncementDialog({ visible, onClose }: any) {
   return visible ? (
     <div data-testid="launch-announcement">

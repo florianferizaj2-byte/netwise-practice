@@ -67,15 +67,16 @@ export function playCorrectAnswerFeedback(
   correct: boolean,
   isCurrent: () => boolean = () => true,
   context?: { scope: string; attemptId: string },
+  previewOnly = false,
 ) {
   if (!settings || !active() || Platform.OS !== 'android' || !isCurrent())
     return;
   stopAnswerFeedback();
-  const remote = context
+  const remote = !previewOnly && (context
     ? practiceVoice.answer(context.scope, context.attemptId, correct, isCurrent)
-    : correct && practiceVoice.preview(isCurrent);
+    : correct && practiceVoice.preview(isCurrent));
   if (correct !== true) return;
-  if (settings.hapticsEnabled) {
+  if (settings.hapticsEnabled && !previewOnly) {
     try {
       Vibration.vibrate(ANSWER_HAPTIC_MS[settings.hapticStrength], false);
     } catch {
@@ -116,4 +117,9 @@ export function playCorrectAnswerFeedback(
   } catch {
     /* Synchronous native errors are optional too. */
   }
+}
+
+// Explicit tone audition never emits haptics, voice events or learning attempts.
+export function previewAnswerSound(isCurrent: () => boolean = () => true) {
+  playCorrectAnswerFeedback(true, isCurrent, undefined, true);
 }

@@ -52,9 +52,9 @@ with zipfile.ZipFile(apk) as archive:
                    'android-ai-confirm-sheet', 'android-modal-safe-area', 'location-learning-header', 'profile-points-value',
                    'android-check-in-screen', 'android-about-screen', 'android-wrong-screen',
                    'wrong-knowledge-grid', 'wrong-question-stem', 'about-full-letter', 'about-font-license',
-                   'kaojiang-practice-outbox-v1', 'practice-record-sync', 'practice-sync-notice', 'points-debt-notice', 'answer-feedback-settings', 'kaojiang-answer-feedback-v1']:
+                   'kaojiang-practice-outbox-v1', 'practice-record-sync', 'practice-sync-notice', 'points-debt-notice', 'answer-feedback-settings', 'kaojiang-answer-feedback-v1', 'voice-pack-settings', 'voice-volume-slider', 'kaojiang-read-announcement-content-v1']:
         assert marker.encode() in bundle or marker.encode('utf-16-le') in bundle, f'Expected release code not found in bundle: {marker}'
-    for marker in ['__setFontScale', '__setAndroidTheme', '__setThemeMode', '__answerFeedbackEvents', '__answerFeedbackSettings']:
+    for marker in ['__setFontScale', '__setAndroidTheme', '__setThemeMode', '__answerFeedbackEvents', '__answerFeedbackSettings', '__voicePlayback', '__voiceAssetRequests', '__practiceVoiceEntries']:
         assert marker.encode() not in bundle, f'Browser-test control leaked into the APK: {marker}'
     safe_area_native = any(b'RNCSafeAreaProvider' in archive.read(name) for name in names if name.endswith('.dex'))
     assert safe_area_native, 'Native safe-area provider is missing from the signed APK'

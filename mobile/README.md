@@ -1,6 +1,8 @@
 # 考匠移动端
 
-这是考匠的 Expo / React Native 移动端。Android 当前源码版本为 v1.0.7（versionCode 40）；继续复用现有 Node 后端，通过移动端 Bearer 会话连接生产 API。
+这是考匠的 Expo / React Native 移动端。Android 当前源码版本为 v1.0.8（versionCode 41）；继续复用现有 Node 后端，通过移动端 Bearer 会话连接生产 API。
+
+[v1.0.8 APK](kaojiang-v1.0.8.apk) · [SHA-256](kaojiang-v1.0.8.apk.sha256) · [更新说明](../docs/release-v1.0.8.md)。公告关闭后按实际内容去重；语音包设置页支持本地下载、试听、音量与场景候选。客户端设置保存在本机，不修改全局后台配置。
 
 [v1.0.4 APK](kaojiang-v1.0.4.apk) · [SHA-256](kaojiang-v1.0.4.apk.sha256) · [更新说明](../docs/release-v1.0.4.md)。新增答对提示音与轻短震动，可在设置独立开关并调整音色、音量和震动强度。本地构建已验证，不等同于 GitHub 发布、部署或手机实装。
 

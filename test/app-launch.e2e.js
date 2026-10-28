@@ -160,6 +160,37 @@ try {
       await page.getByTestId("launch-announcement").waitFor();
     },
   );
+  await scenario(
+    "acknowledged content stays silent after reload and id-only resave",
+    "reduced=1",
+    async (page) => {
+      await page.getByTestId("launch-announcement").waitFor();
+      await page.getByRole("button", { name: "关闭公告" }).click();
+      await page.reload();
+      await page.getByTestId("announcement-ready").waitFor();
+      await page.getByTestId("launch-splash").waitFor({ state: "detached" });
+      assert.equal(await page.getByTestId("launch-announcement").count(), 0);
+      await page.goto(`${baseUrl}/?reduced=1&id=new-save-id`);
+      await page.getByTestId("announcement-ready").waitFor();
+      await page.getByTestId("launch-splash").waitFor({ state: "detached" });
+      assert.equal(await page.getByTestId("launch-announcement").count(), 0);
+    },
+  );
+  await scenario(
+    "changed body reappears with unchanged id, then stays read on another reload",
+    "reduced=1",
+    async (page) => {
+      await page.getByTestId("launch-announcement").waitFor();
+      await page.getByRole("button", { name: "关闭公告" }).click();
+      await page.goto(`${baseUrl}/?reduced=1&body=${encodeURIComponent("公告正文已更新")}`);
+      await page.getByTestId("launch-announcement").waitFor();
+      await page.getByRole("button", { name: "关闭公告" }).click();
+      await page.reload();
+      await page.getByTestId("announcement-ready").waitFor();
+      await page.getByTestId("launch-splash").waitFor({ state: "detached" });
+      assert.equal(await page.getByTestId("launch-announcement").count(), 0);
+    },
+  );
   assert.deepEqual(errors, []);
   const output = path.join(root, "test-output/app-launch");
   await fs.mkdir(output, { recursive: true });

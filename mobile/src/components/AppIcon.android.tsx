@@ -2,6 +2,10 @@ import { View, StyleSheet, type TextStyle } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import type { AppIconProps } from './AppIcon.tsx';
 const paths: Record<string, string[]> = {
+  waveform: ['M4 10v4M8 6v12M12 3v18M16 7v10M20 10v4'],
+  circle: ['M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0'],
+  'check-circle': ['M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0','m7 12 3 3 7-7'],
+  'play-circle': ['M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0','m10 8 6 4-6 4Z'],
   pen: ['m15 4 5 5M4 20l5-1L21 7a2.1 2.1 0 0 0-4-4L5 15Z'],
   document: ['M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z','M14 3v6h6M8 13h8M8 17h6'],
   diamond: ['M6 3h12l4 7-10 11L2 10Z','M2 10h20M6 3l6 18 6-18M6 3l-1 7m13-7 1 7'],
