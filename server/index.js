@@ -52,6 +52,7 @@ import { registerPointsRoutes } from "./ai-points/routes.js";
 import { registerAiServiceRoutes } from "./ai-service-routes.js";
 import { registerLocationLearning } from "./location-learning.js";
 import { registerVoicePackRoutes } from "./voice-packs.js";
+import { createAiLearning } from "./ai-learning.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const mobileRelease = () => resolveMobileRelease(process.env, compareVersions);
@@ -1887,6 +1888,7 @@ export async function createApp(options = {}) {
       req.user?.id || "local",
       b.response,
       b.clientAttemptId,
+      requireCertificate(req),
     );
     if (b.planTask) {
       const c=planContext(req);
@@ -2537,6 +2539,20 @@ export async function createApp(options = {}) {
       req.body?.refresh === true,
     ),
   );
+  const aiLearning = createAiLearning({
+    store, provider, ai, scheduler: aiScheduler,
+    questions: (certificateId, userId) => certificateQuestions(certificateId, userId)
+      .filter(q => q.source !== "ai_generated" || q.ownerUserId === userId),
+    ensureReady: userId => {
+      requireAiService();
+      if (ensureAccountPoints(store, userId).availableUnits <= 0)
+        throw Object.assign(new Error("积分不足，请先领取签到积分或补充余额"), {status:402,code:"AI_POINTS_INSUFFICIENT"});
+    },
+    ...options.aiLearning,
+  });
+  aiLearning.register({ app, route, requestUserId, requireCertificate,
+    sessionUser: req => authRequired ? store.authUser(requestToken(req)) : {id:requestUserId(req),certificateId:requireCertificate(req)} });
+  app.locals.aiLearning = aiLearning;
   registerExamRoutes({ route, store, requireCertificate, requestUserId, certificateQuestions, syllabusForCertificate, publicQuestion });
   app.locals.locationLearning = registerLocationLearning({ route,store,certificateQuestions,now:options.locationLearningNow });
   app.get("/community/uploads/:file", (req, res, next) => {
@@ -2625,9 +2641,11 @@ export async function createApp(options = {}) {
     clearInterval(aiQuestionJobTimer);
     clearInterval(pointsRecoveryTimer);
     accountSecurity.close();
+    aiLearning.stop();
     study.stop();
     await adminConsole.stop();
     await aiScheduler.stop();
+    await aiLearning.settle();
     await study.settle();
   };
   return app;

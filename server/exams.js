@@ -354,6 +354,9 @@ export function registerExamRoutes({
             Math.round(elapsed / session.questionIds.length),
             "exam",
             requestUserId(req),
+            undefined,
+            undefined,
+            session.certificateId,
           ),
           chapter: questionForCertificate(question, session.certificateId)
             .chapter,

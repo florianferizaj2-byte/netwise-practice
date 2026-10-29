@@ -1,5 +1,6 @@
 import { APP_VERSION } from '../version';
 import {normalizeReleasePolicy} from './versionPolicy';
+import type { AiLearningProfile, AiLearningSetup, AiLearningQuote, AiLearningJob, AiLearningSummary, AiLearningEvent } from './aiLearningTypes';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { fetch as streamingFetch } from 'expo/fetch';
 import { ResourceCache, CacheCancelledError } from './resourceCache';
@@ -204,6 +205,8 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
         '/favorites',
         '/questions?',
       ],key=>path!=='/attempts'||!key.startsWith('/questions?')||new URLSearchParams(key.split('?')[1]).get('feedback')!=='instant');
+    } else if (path.startsWith('/ai-learning/') && path.endsWith('/submit')) {
+      studyCache.invalidate(['/dashboard','/practice/catalog','/questions?','/wrong','/exams','/community/leaderboards']);
     } else if (path.endsWith('/submit') || path === '/ai/train') {
       studyCache.invalidate([
         '/practice/catalog',
@@ -913,6 +916,65 @@ export const mobileApi = {
   },
   exams(force = false) {
     return cachedRequest<{ sessions: ExamSummary[] }>('/exams', force);
+  },
+  aiLearningProfile() {
+    return request<AiLearningProfile>('/ai-learning/profile');
+  },
+  aiLearningQuote(setup: AiLearningSetup) {
+    return request<AiLearningQuote>('/ai-learning/preview', {method:'POST',body:JSON.stringify(setup)});
+  },
+  aiLearningJobs() {
+    return request<{jobs:AiLearningSummary[]}>('/ai-learning/jobs');
+  },
+  aiLearningJob(id:string) {
+    return request<AiLearningJob>('/ai-learning/jobs/'+encodeURIComponent(id));
+  },
+  createAiLearningJob(setup:AiLearningSetup, requestId:string, profileRevision:string) {
+    return request<AiLearningJob>('/ai-learning/jobs',{method:'POST',body:JSON.stringify({...setup,requestId,profileRevision,acceptedPricing:true})});
+  },
+  aiLearningAction(id:string, action:'start'|'answers'|'submit'|'cancel'|'retry', body:Record<string,unknown>={}) {
+    return request<AiLearningJob>('/ai-learning/jobs/'+encodeURIComponent(id)+'/'+action,{method:'POST',body:JSON.stringify(body)});
+  },
+  async subscribeAiLearning(id:string, after:number, onEvent:(event:AiLearningEvent)=>void, signal:AbortSignal, onConnected?:()=>void) {
+    const revision=sessionRevision,controller=new AbortController(),token=sessionToken;
+    const abort=()=>controller.abort();
+    signal.addEventListener('abort',abort,{once:true});
+    if(signal.aborted)controller.abort();
+    streamControllers.add(controller);
+    let reader:ReadableStreamDefaultReader<Uint8Array>|undefined;
+    let lastByte=Date.now();
+    const watchdog=setInterval(()=>{if(Date.now()-lastByte>45000)controller.abort();},5000);
+    try {
+      const response=await streamingFetch(API_BASE_URL+'/ai-learning/jobs/'+encodeURIComponent(id)+'/events?after='+after,{
+        headers:{Accept:'text/event-stream','X-Client':'mobile','X-App-Version':APP_VERSION,...(token?{Authorization:'Bearer '+token}:{})},
+        credentials:'omit',signal:controller.signal,
+      });
+      if(!response.ok)throw new ApiError('实时进度暂不可用',response.status,await response.text());
+      if(!response.body)throw new Error('实时进度暂不可用');
+      if(revision!==sessionRevision)throw new CacheCancelledError();
+      onConnected?.();
+      reader=response.body.getReader();
+      const decoder=new TextDecoder();let buffer='';
+      while(!controller.signal.aborted){
+        const part=await reader.read();
+        if(revision!==sessionRevision)throw new CacheCancelledError();
+        if(part.done)break;
+        lastByte=Date.now();buffer+=decoder.decode(part.value,{stream:true}).replace(/\r\n/g,'\n');
+        if(buffer.length>524288)throw new Error('实时事件超出长度限制');
+        let boundary:number;
+        while((boundary=buffer.indexOf('\n\n'))>=0){
+          const record=buffer.slice(0,boundary);buffer=buffer.slice(boundary+2);
+          const data=record.split('\n').filter(line=>line.startsWith('data:')).map(line=>line.slice(5).trim()).join('\n');
+          if(!data)continue;
+          const event=JSON.parse(data) as AiLearningEvent;
+          if(Number.isSafeInteger(event.id)&&event.id>after){onEvent(event);after=event.id;}
+        }
+      }
+    } finally {
+      clearInterval(watchdog);signal.removeEventListener('abort',abort);
+      controller.abort();streamControllers.delete(controller);
+      await reader?.cancel().catch(()=>{});reader?.releaseLock();
+    }
   },
   createExam(chapters: string[], count: number) {
     return request<ExamSession>('/exams', { method: 'POST', body: JSON.stringify({ chapters, count }) });

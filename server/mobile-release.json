@@ -1,9 +1,9 @@
 {
-  "latestVersion": "1.0.10",
+  "latestVersion": "1.0.11",
   "minimumVersion": "1.0.1",
-  "downloadUrl": "/downloads/kaojiang-v1.0.10.apk",
-  "releaseNotes": "v1.0.10：修复今日学习和顺序刷题从头开始；按账号、证书和范围保存断点，自动跳过已答对题；新增独立的已答题复习入口。",
-  "apkBytes": 100603304,
-  "apkSha256": "b6ec2b57a8fda62fe1c980bebc3e9bf031f15ff47d361dca1c2d7a28a2570422",
-  "apkMd5": "c69a776ce88d9d4a27a5975a097ba624"
+  "downloadUrl": "/downloads/kaojiang-v1.0.11.apk",
+  "releaseNotes": "v1.0.11：全新 AI 学习中心与个性化考试；错题和答对记录分析、四种训练目标、逐题审核后流式交付、断线暂存与续接、等待缺题暂停计时。需配套后端。",
+  "apkBytes": 100693384,
+  "apkSha256": "7a267acfe9f1f8871abc74337119af961d2b636607790217cf1e17c508cbe871",
+  "apkMd5": "a64df29fa7f2101961da292dd64181b8"
 }

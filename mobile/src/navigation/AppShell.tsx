@@ -1,3 +1,4 @@
+import { AiIcon } from '../screens/ai-learning/AiElements';
 import { AppIcon } from '../components/AppIcon';
 import { ContentPlaceholder } from '../components/ContentPlaceholder';
 import { iosStyles } from '../iosStyles';
@@ -54,6 +55,9 @@ import {
   type ThemeColors,
 } from '../theme';
 import { APP_VERSION } from '../version';
+import { AiLearningScreen } from '../screens/AiLearningScreen';
+import { ExamWorkspaceScreen } from '../screens/ExamWorkspaceScreen';
+import { AiLearningTaskNotice } from '../components/AiLearningTaskNotice';
 import { downloadAndInstallUpdate } from '../update';
 import type {
   AppTab,
@@ -66,7 +70,7 @@ import type {
 const tabs: Array<{ id: AppTab; label: string; icon: string; symbol: string }> = [
   { id: 'today', label: '今日', icon: '⌂', symbol: 'home' },
   { id: 'practice', label: '练习', icon: '✦', symbol: 'book' },
-  { id: 'wrong', label: '错题', icon: '×', symbol: 'wrong' },
+  { id: 'ai', label: 'AI 生成', icon: '✦', symbol: 'sparkles' },
   { id: 'exam', label: '考试', icon: '□', symbol: 'exam' },
   { id: 'vip', label: 'VIP', icon: '✧', symbol: 'crown' },
   { id: 'profile', label: '我的', icon: '◎', symbol: 'person' },
@@ -79,6 +83,7 @@ export function AppShell() {
   const [session, setSession] = useState<AuthResponse | null>(null);
   const [activeTab, setActiveTab] = useState<AppTab>('today');
   const [dailyPracticeOpen, setDailyPracticeOpen] = useState(false);
+  const [aiExamEntryKey, setAiExamEntryKey] = useState(0);
   const [dailyPracticeDay, setDailyPracticeDay] = useState<string | null>(null);
   const appActive = useAppActive();
   const { data: dashboard } = useCachedQuery(
@@ -362,6 +367,7 @@ export function AppShell() {
   }
 
   function handleNavigate(tab: AppTab, options?: NavigationOptions) {
+    if (tab === 'exam' && options?.openAiExam) setAiExamEntryKey(key => key + 1);
     if (tab === 'practice' && options?.practiceSession === 'daily') {
       setDailyPracticeDay(new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Shanghai' }));
       setDailyPracticeOpen(true);
@@ -522,6 +528,7 @@ export function AppShell() {
                   practiceQuestionIds,
                   practiceAiGroupId,
                   aiQuestionGroupId,
+                  aiExamEntryKey,
                   onPracticeModeChange: setPracticeMode,
                   onOpenCertificatePicker: handleOpenCertificatePicker,
                   onUserUpdated: handleUserUpdated,
@@ -553,6 +560,9 @@ export function AppShell() {
             }}
           />
         )}
+        <AiLearningTaskNotice enabled={appActive && !!session && activeTab !== 'ai' && activeTab !== 'exam' && !dailyPracticeOpen}
+          scope={String(session?.user.id) + ':' + session?.user.certificateId}
+          onOpen={kind => handleNavigate(kind === 'exam' ? 'exam' : 'ai', {openAiExam: kind === 'exam'})} />
         <TabBar activeTab={activeTab} onChange={handleNavigate} hidden={dailyPracticeOpen} />
         {dailyPracticeDay && <DailyPracticePanel
           key={`${session?.user.id ?? 'preview'}:${session?.user.certificateId ?? ''}:${dailyPracticeDay}`}
@@ -739,6 +749,7 @@ function renderScreen(
     practiceQuestionIds?: string[];
     practiceAiGroupId?: string;
     aiQuestionGroupId?: string;
+    aiExamEntryKey?: number;
     onPracticeModeChange: (mode: PracticeMode) => void;
     onOpenCertificatePicker: () => void;
     onUserUpdated: (user: AuthResponse['user']) => void;
@@ -757,8 +768,13 @@ function renderScreen(
       );
     case 'wrong':
       return <WrongScreen onNavigate={onNavigate} {...data} />;
+    case 'ai':
+      return <AiLearningScreen key={data.user?.id + ':' + data.user?.certificateId} user={data.user} preview={data.preview}
+        certificateName={data.certificates.find(item => item.id === data.user?.certificateId)?.name || '当前证书'} onNavigate={onNavigate} />;
     case 'exam':
-      return <ExamScreen onNavigate={onNavigate} {...data} />;
+      return <ExamWorkspaceScreen key={data.user?.id + ':' + data.user?.certificateId} normal={<ExamScreen onNavigate={onNavigate} {...data} />}
+        user={data.user} preview={data.preview} openAiKey={data.aiExamEntryKey}
+        certificateName={data.certificates.find(item => item.id === data.user?.certificateId)?.name || '当前证书'} onNavigate={onNavigate} />;
     case 'vip':
       return <VipScreen preview={data.preview} user={data.user}
         certificateName={data.certificates.find((item) => item.id === data.user?.certificateId)?.name || '当前备考目标'}
@@ -825,7 +841,7 @@ function TabBarItem({
       onPress={onPress}
       style={styles.tab}
     >
-      {isAppleWeb ? <AppIcon name={tab.symbol} selected={active} style={[styles.tabIcon, active && styles.activeTabIcon]}>{tab.icon}</AppIcon> : <Animated.Text
+      {tab.id === "ai" ? <View style={{width:34,height:34,borderRadius:10,backgroundColor:"#2962F4",alignItems:"center",justifyContent:"center"}}><AiIcon name="sparkle" color="#FFF" size={23}/></View> : isAppleWeb ? <AppIcon name={tab.symbol} selected={active} style={[styles.tabIcon, active && styles.activeTabIcon]}>{tab.icon}</AppIcon> : <Animated.Text
         style={[
           styles.tabIcon,
           active && styles.activeTabIcon,

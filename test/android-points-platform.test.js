@@ -28,7 +28,9 @@ test('Android shell and teacher variants preserve business logic with bounded An
   assert.doesNotMatch(shared,/practiceVoice/);
   assert.match(native,/visibleProgressJob && !inlineAiProgress/);
   assert.match(native,/const inlineAiProgress=inlineAiGenerationPage/);
+  assert.match(native,/<AiLearningTaskNotice enabled=\{appActive && !!session && !focusMode && activeTab !== 'ai' && activeTab !== 'exam'/);
   let shell=native
+    .replace(" && !focusMode && activeTab", " && activeTab")
     .replace("import { inlineAiGenerationPage } from '../aiGenerationPresentation';\n",'')
     .replace("  const inlineAiProgress=inlineAiGenerationPage({tab:activeTab,mode:practiceMode,chapter:practiceChapter,point:practiceKnowledgePoint,library:practiceAiLibrary,daily:dailyPracticeOpen});\n",'')
     .replace('visibleProgressJob && !inlineAiProgress && (','visibleProgressJob && (')

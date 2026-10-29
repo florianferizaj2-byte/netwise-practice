@@ -2,6 +2,7 @@ export type AppTab =
   | 'today'
   | 'practice'
   | 'wrong'
+  | 'ai'
   | 'exam'
   | 'vip'
   | 'profile';
@@ -15,6 +16,7 @@ export type PracticeSource = 'all' | 'wrong' | 'favorites' | 'answered';
 export type PracticeSession = 'standard' | 'daily';
 
 export type NavigationOptions = {
+  openAiExam?: boolean;
   practiceMode?: PracticeMode;
   practiceSession?: PracticeSession;
   practiceSource?: PracticeSource;

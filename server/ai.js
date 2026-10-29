@@ -608,13 +608,14 @@ export class OpenAICompatibleProvider extends AIProvider {
         ...(feedback ? { correction: feedback } : {}),
       }));
       const batch = await this.structured(
-        `一次生成 ${pending.length} 道题。所有题目必须围绕知识点“${target}”，章节必须严格为“${seed.chapter}”${targetSection ? `，二级分类必须严格为“${targetSection}”` : ""}，题目之间要改变设问角度、情境或推理路径，不能只改数字或替换同义词。每题严格遵守对应 difficulty。返回 {"questions":[题目对象]}，不要返回 Markdown 或其他字段。题目对象的 type 只能是英文枚举 "single_choice"、"multiple_choice" 或 "true_false"；options 必须是 JSON 对象而不是数组，格式为 {"A":"...","B":"...","C":"...","D":"..."}；answer 必须是字母数组，例如单选 ["A"]、多选 ["A","C"]。如果 specs 中有 correction，必须优先修正该问题。`,
+        `一次生成 ${pending.length} 道题。所有题目必须围绕知识点“${target}”，章节必须严格为“${seed.chapter}”${targetSection ? `，二级分类必须严格为“${targetSection}”` : ""}，题目之间要改变设问角度、情境或推理路径，不能只改数字或替换同义词。每题严格遵守对应 difficulty。若提供 learningGoal，按其 stage 设计概念理解、情境变式或综合迁移，不得偏离目标知识点或超纲。返回 {"questions":[题目对象]}，不要返回 Markdown 或其他字段。题目对象的 type 只能是英文枚举 "single_choice"、"multiple_choice" 或 "true_false"；options 必须是 JSON 对象而不是数组，格式为 {"A":"...","B":"...","C":"...","D":"..."}；answer 必须是字母数组，例如单选 ["A"]、多选 ["A","C"]。如果 specs 中有 correction，必须优先修正该问题。`,
         {
           certificateId: options.certificateId,
           chapter: seed.chapter,
           ...(targetSection ? { knowledgeSection: targetSection } : {}),
           knowledgePoint: target,
           specs: requested,
+          ...(options.learningGoal ? { learningGoal: options.learningGoal } : {}),
           existingQuestionCount: related.length,
           previousQuestions: [
             ...generationReferences,

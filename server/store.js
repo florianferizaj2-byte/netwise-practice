@@ -1084,6 +1084,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       userId = "local",
       response,
       clientAttemptId,
+      certificateId,
     ) {
       const q = getQ(questionId);
       if (!q) throw new Error("题目不存在");
@@ -1097,7 +1098,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         : null;
       if (previous) {
         const saved = JSON.parse(previous.data);
-        if (saved.questionId !== questionId || JSON.stringify([...saved.selected].sort()) !== JSON.stringify([...selected].sort()) || saved.response !== response)
+        if ((certificateId && saved.certificateId && certificateId !== saved.certificateId) || saved.questionId !== questionId || JSON.stringify([...saved.selected].sort()) !== JSON.stringify([...selected].sort()) || saved.response !== response)
           throw Object.assign(new Error("这次作答标识已被使用，请重新进入练习"), { status: 409 });
         return { ...saved, answer: q.answer, analysis: q.analysis,
           ...(q.type === "short_answer" ? { expectedAnswer: q.expectedAnswer } : {}) };
@@ -1119,6 +1120,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         chapter: q.chapter,
         knowledgePoint: q.targetKnowledgePoint || q.knowledgePoint,
         practicedKnowledgePoint: q.knowledgePoint,
+        ...((certificateId || (q.certificates?.length === 1 ? q.certificates[0] : null)) ? { certificateId: certificateId || q.certificates[0] } : {}),
         createdAt: new Date().toISOString(),
       };
       db.exec("SAVEPOINT attempt");
