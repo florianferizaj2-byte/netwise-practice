@@ -12,7 +12,7 @@
     "test": "node --test test/*.test.js",
     "test:e2e": "node scripts/verify-web-blue.mjs",
     "test:e2e:voice-library": "node scripts/verify-voice-library.mjs",
-    "test:ai-learning": "node --test test/ai-learning.test.js test/ai-learning-api.test.js",
+    "test:ai-learning": "node --test test/ai-learning.test.js test/ai-learning-api.test.js test/ai-learning-recovery.test.js",
     "test:e2e:ai-learning": "node test/ai-learning.e2e.js",
     "test:e2e:mobile": "node test/mobile-web.e2e.js",
     "test:e2e:mobile-study": "node test/mobile-study.e2e.js",

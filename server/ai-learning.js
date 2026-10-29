@@ -2,6 +2,7 @@ import crypto from "node:crypto";
 import { z } from "zod";
 import { learningProfile, learningBlueprint } from "./ai-personalization.js";
 import { validateQuestion } from "./domain.js";
+import { AI_QUESTION_GENERATOR_REVISION, learningErrorPresentation } from "./ai-question-contract.js";
 import { questionSimilarity } from "./question-similarity.js";
 import { checkAiCancellation } from "./ai-tasks.js";
 import { commitPointsResult } from "./ai-points/runtime.js";
@@ -61,6 +62,9 @@ export function createAiLearning({ store, provider, ai, scheduler, questions, en
   const saveData = (job, data) => db.prepare("UPDATE ai_learning_jobs SET data=?,updated_at=? WHERE id=?")
     .run(JSON.stringify(data),stamp(),job.id);
   const slots = id => db.prepare("SELECT * FROM ai_learning_slots WHERE job_id=? ORDER BY position").all(id);
+  const attemptLimit = (job, slot) => 3 + (job.data.recovery && slot && job.data.recovery.position === slot.position ? Number(job.data.recovery.attemptBase)||0 : 0);
+  const protocolRecovery = (job, slot) => !!slot && job.data.generatorRevision !== AI_QUESTION_GENERATOR_REVISION &&
+    !["AI_LEARNING_SEED_UNAVAILABLE","AI_LEARNING_QUESTION_WITHDRAWN"].includes(job.data.errorCode);
   const publicQ = q => {
     const { answer, analysis, expectedAnswer, ownerUserId, aiGroupId, certificateScopes, ...rest } = q;
     return rest;
@@ -99,7 +103,7 @@ export function createAiLearning({ store, provider, ai, scheduler, questions, en
     const id = uuid(), time = stamp();
     const groupId = store.createAiGroup(user,certificate,"个性化" + (setup.kind === "exam" ? "考试" : "练习"),setup.strategy === "challenge",
       {shared:false,groupType:"question_generation",metadata:{personalized:true,jobId:id,strategy:setup.strategy}});
-    const data = { setup, pricing:preview.pricing, error:null, answers:{}, answersVersion:0,
+    const data = { generatorRevision:AI_QUESTION_GENERATOR_REVISION, setup, pricing:preview.pricing, error:null, answers:{}, answersVersion:0,
       startedAt:null, durationMs:setup.durationMinutes * 60000, spentMs:0, runningSince:null, waiting:false, submitted:false, result:null };
     db.prepare(`INSERT INTO ai_learning_jobs(id,user_id,certificate_id,request_id,signature,kind,status,blueprint,data,group_id,created_at,updated_at)
       VALUES(?,?,?,?,?,?,'queued',?,?,?,?,?)`).run(id,user,certificate,requestId,signature,setup.kind,JSON.stringify(preview.blueprint),JSON.stringify(data),groupId,time,time);
@@ -114,16 +118,19 @@ export function createAiLearning({ store, provider, ai, scheduler, questions, en
       throw fail("任务已由其他工作进程恢复，请重新读取进度",409,"AI_LEARNING_LEASE_LOST");
     return job;
   };
-  // A wait is eligible only when the server has confirmed answers for every
-  // released question and the paper still needs questions. Disconnect is not pause.
+  // Normal buffering pauses only when all released questions are answered.
+  // A blocked generator also pauses from its recorded failure time.
   const syncClock = (job, list = slots(job.id)) => {
     if (job.kind !== "exam" || !job.data.startedAt || job.data.submitted) return job;
     const d = {...job.data};
     const ready = list.filter(s => s.question_id);
-    const shouldWait = ready.length < job.blueprint.targetCount &&
+    const generationBlocked = job.status === "blocked" && ready.length < job.blueprint.targetCount;
+    const shouldWait = generationBlocked || ready.length < job.blueprint.targetCount &&
       ready.every(s => d.answers[s.question_id]?.length > 0);
     if (shouldWait && d.runningSince !== null) {
-      d.spentMs += Math.max(0,now() - d.runningSince); d.runningSince = null;
+      const blocked = generationBlocked ? db.prepare("SELECT created_at FROM ai_learning_events WHERE job_id=? AND event_type='blocked' ORDER BY seq DESC LIMIT 1").get(job.id) : null;
+      const pausedAt = blocked && Number.isFinite(Date.parse(blocked.created_at)) ? Math.min(now(),Date.parse(blocked.created_at)) : now();
+      d.spentMs += Math.max(0,pausedAt - d.runningSince); d.runningSince = null;
     } else if (!shouldWait && d.runningSince === null) d.runningSince = now();
     if (d.waiting !== shouldWait || d.runningSince !== job.data.runningSince) {
       d.waiting = shouldWait; saveData(job,d); job = {...job,data:d};
@@ -136,6 +143,7 @@ export function createAiLearning({ store, provider, ai, scheduler, questions, en
     job = syncClock(job,list);
     const elapsedMs = job.data.spentMs + (job.data.runningSince === null ? 0 : Math.max(0,now() - job.data.runningSince));
     const released = list.filter(s => s.question_id);
+    const pending = list.find(s => !s.question_id), errorView = learningErrorPresentation(job.data.error,job.data.errorCode);
     // Never serialise the durable job JSON wholesale: it includes private results.
     return {
       id:job.id,kind:job.kind,status:job.status,strategy:job.blueprint.strategy,targetCount:job.blueprint.targetCount,
@@ -151,13 +159,14 @@ export function createAiLearning({ store, provider, ai, scheduler, questions, en
       waiting:job.data.waiting,submitted:job.data.submitted,result:job.data.submitted ? job.data.result : null,
       pricing:job.data.pricing,
       progress:job.data.progress||{stage:job.status==="completed"?"done":"queued",position:released.length+1},
-      retryable:job.status==="blocked"&&!job.data.submitted&&(list.find(s=>!s.question_id)?.attempts||0)<3,
-      errorCode:job.data.errorCode||null,
+      retryable:job.status==="blocked"&&!job.data.submitted&&!!pending&&(pending.attempts<attemptLimit(job,pending)||protocolRecovery(job,pending)),
+      recoveryAvailable:job.status==="blocked"&&!job.data.submitted&&protocolRecovery(job,pending),
+      errorCode:errorView.code,
       billing:{
         chargedUnits:Number(db.prepare("SELECT COALESCE(SUM(charged_units),0) AS n FROM ai_points_operations WHERE user_id=? AND logical_key LIKE ?").get(user,"ai-learning:"+job.id+":%").n),
         heldUnits:Number(db.prepare("SELECT COALESCE(SUM(held_units),0) AS n FROM ai_points_operations WHERE user_id=? AND logical_key LIKE ? AND state='pending'").get(user,"ai-learning:"+job.id+":%").n),
         scale:job.data.pricing.scale,
-      },error:job.data.error,createdAt:job.created_at,updatedAt:job.updated_at,
+      },error:errorView.message,createdAt:job.created_at,updatedAt:job.updated_at,
       eventId:Number(db.prepare("SELECT COALESCE(MAX(seq),0) AS n FROM ai_learning_events WHERE job_id=?").get(id).n),
     };
   };
@@ -244,15 +253,21 @@ export function createAiLearning({ store, provider, ai, scheduler, questions, en
     return view(id,user,certificate);
   });
   const retry = (id,user,certificate) => transaction(()=>{
-    const job=owned(id,user,certificate);
+    const job=syncClock(owned(id,user,certificate));
     if(job.status!=="blocked"||job.data.submitted)throw fail("当前任务不需要恢复",409);
     const next=slots(id).find(s=>!s.question_id);
-    if(next?.attempts>=3)throw fail("该题已达到审核重试上限，可保留现有题目部分交卷，或重新选择方案",409,"AI_LEARNING_RETRY_LIMIT");
+    if(!next)throw fail("本组题目已交付",409);
+    const outdated=protocolRecovery(job,next);
+    if(next.attempts>=attemptLimit(job,next)&&!outdated)throw fail("已达到本轮重试上限，已交付题目与作答保留；请核对服务或调整方案后再生成",409,"AI_LEARNING_RETRY_LIMIT");
     ensureReady(user);
     if(db.prepare("SELECT 1 FROM ai_learning_jobs WHERE user_id=? AND id<>? AND status IN ('queued','running')").get(user,id))
       throw fail("账号已有其他生成任务",409);
     db.prepare("UPDATE ai_learning_jobs SET status='queued',lease_token=NULL,lease_until=0,next_at=0,updated_at=? WHERE id=?").run(stamp(),id);
-    saveData(job,{...job.data,error:null});event(id,"resumed");
+    // Keep monotonically increasing attempts: old refunded billing keys must never be reused.
+    const recovery=outdated&&next.attempts>=attemptLimit(job,next)?{position:next.position,attemptBase:next.attempts,revision:AI_QUESTION_GENERATOR_REVISION}:job.data.recovery;
+    saveData(job,{...job.data,error:null,errorCode:null,generatorRevision:AI_QUESTION_GENERATOR_REVISION,
+      ...(recovery?{recovery}:{}),progress:{position:next.position,stage:"queued"}});
+    event(id,"resumed",{generatorRevision:AI_QUESTION_GENERATOR_REVISION,position:next.position});
     return view(id,user,certificate);
   });
   let stopping=false, pumping=false;
@@ -283,7 +298,7 @@ export function createAiLearning({ store, provider, ai, scheduler, questions, en
       const job=leaseOwned(claimed.id,token);
       const slot=slots(job.id).find(s=>!s.question_id);
       if(!slot)throw fail("生成任务没有待处理题目",409);
-      if(slot.attempts>=3)throw fail("已达到该题的质量重试上限",409,"AI_LEARNING_RETRY_LIMIT");
+      if(slot.attempts>=attemptLimit(job,slot))throw fail("已达到该题本轮重试上限",409,"AI_LEARNING_RETRY_LIMIT");
       attemptNumber=slot.attempts+1;
       db.prepare("UPDATE ai_learning_slots SET attempts=? WHERE job_id=? AND position=? AND question_id IS NULL")
         .run(attemptNumber,job.id,slot.position);
@@ -342,13 +357,16 @@ export function createAiLearning({ store, provider, ai, scheduler, questions, en
       transaction(()=>{
         const current=row(claimed.id);
         if(!current||current.lease_token!==token)return;
-        const message=redact(error instanceof Error?error.message:"题目生成失败").slice(0,400);
-        const blocked=!stopping&&(attemptNumber>=3||String(error.code||"").startsWith("AI_POINTS_")||
+        const detail=redact(error instanceof Error?error.message:"题目生成失败").slice(0,1000);
+        const presentation=learningErrorPresentation(detail,error.code,error.issues),message=presentation.message;
+        const currentSlot=slots(current.id).find(s=>!s.question_id);
+        const blocked=!stopping&&(attemptNumber>=attemptLimit(current,currentSlot)||String(error.code||"").startsWith("AI_POINTS_")||
           ["AI_LEARNING_RETRY_LIMIT","AI_LEARNING_SEED_UNAVAILABLE"].includes(error.code));
         db.prepare("UPDATE ai_learning_jobs SET status=?,lease_token=NULL,lease_until=0,next_at=?,updated_at=? WHERE id=? AND lease_token=?")
           .run(blocked?"blocked":"queued",now()+(stopping?0:Math.min(30000,1000*2**attemptNumber)),stamp(),claimed.id,token);
-        saveData(current,{...current.data,error:stopping?null:message,errorCode:stopping?null:String(error.code||"AI_LEARNING_GENERATION_FAILED"),progress:{...current.data.progress,stage:blocked?"blocked":"retrying"}});
+        saveData(current,{...current.data,error:stopping?null:message,errorDetail:detail,errorCode:stopping?null:presentation.code,progress:{...current.data.progress,stage:blocked?"blocked":"retrying"}});
         event(claimed.id,blocked?"blocked":"retrying",{message:stopping?"任务将从已保存题目恢复":message});
+        if(blocked)syncClock(row(current.id));
       });
     }finally{clearInterval(heartbeat);}
   };
