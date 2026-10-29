@@ -23,11 +23,23 @@ def run(tool, *args):
     result = subprocess.run(command, check=True, capture_output=True, text=True, encoding='utf-8', errors='replace')
     return result.stdout + result.stderr
 
-signature = run('apksigner.bat' if os.name == 'nt' else 'apksigner', 'verify', '--print-certs', apk)
+signature = run('apksigner.bat' if os.name == 'nt' else 'apksigner', 'verify', '--verbose', '--print-certs', apk)
 certificate = re.search(r'Signer #1 certificate SHA-256 digest:\s*([a-fA-F0-9]+)', signature).group(1).lower()
 expected = re.search(r'SHA-256[：:]\s*`?([a-fA-F0-9]{64})', (ROOT / 'mobile/RELEASE_SIGNING.md').read_text(encoding='utf-8')).group(1).lower()
 assert certificate == expected, 'Release certificate differs from the published production identity'
 assert 'CN=Android Debug' not in signature, 'Debug signing is not a production release'
+# The normal minSdk=24 verifier selects v2/v3, so it does not report v1 as used.
+# Exercise the JAR verifier separately rather than mistaking an unused scheme for a missing signature.
+for scheme in ('v2', 'v3'):
+    assert re.search(r'Verified using ' + scheme + r' scheme[^\n]*:\s*true', signature), f'Missing {scheme} APK signature'
+v1_signature = run('apksigner.bat' if os.name == 'nt' else 'apksigner', 'verify', '--verbose', '--print-certs',
+                   '--min-sdk-version', '23', '--max-sdk-version', '23', apk)
+assert re.search(r'Verified using v1 scheme[^\n]*:\s*true', v1_signature), 'Invalid v1 JAR signature'
+v1_certificate = re.search(r'Signer #1 certificate SHA-256 digest:\s*([a-fA-F0-9]+)', v1_signature).group(1).lower()
+assert v1_certificate == certificate, 'Legacy and modern APK signing identities differ'
+run('zipalign.exe' if os.name == 'nt' else 'zipalign', '-c', '-P', '16', '4', apk)
+manifest_tree = run('aapt.exe' if os.name == 'nt' else 'aapt', 'dump', 'xmltree', apk, 'AndroidManifest.xml')
+assert re.search(r'android:extractNativeLibs[^\n]*(?:0xffffffff|\btrue\b)', manifest_tree), 'Native library extraction must be enabled'
 badging = run('aapt.exe' if os.name == 'nt' else 'aapt', 'dump', 'badging', apk)
 package = re.search(r"package: name='([^']+)' versionCode='([^']+)' versionName='([^']+)'", badging)
 assert package and package.groups() == (app['android']['package'], str(app['android']['versionCode']), app['version']), 'APK identity/version differs from source'
@@ -36,6 +48,9 @@ assert 'android.permission.VIBRATE' in permissions, 'Correct-answer vibration pe
 
 with zipfile.ZipFile(apk) as archive:
     names = archive.namelist()
+    assert archive.testzip() is None, 'Corrupt ZIP entry in APK'
+    native_entries = [info for info in archive.infolist() if info.filename.startswith('lib/') and info.filename.endswith('.so')]
+    assert native_entries and all(info.compress_type == zipfile.ZIP_DEFLATED for info in native_entries), 'Native libraries must use compatible compressed packaging'
     abis = sorted({name.split('/')[1] for name in names if name.startswith('lib/') and name.endswith('.so')})
     assert abis == sorted(['armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64']), 'Missing supported native ABI'
     font_hashes = {hashlib.sha256(archive.read(name)).hexdigest() for name in names if name.endswith('.ttf')}
@@ -68,7 +83,7 @@ assert policy['apkMd5'].lower() == hashlib.md5(apk.read_bytes()).hexdigest(), 'D
 result = {'passed': True, 'version': app['version'], 'versionCode': app['android']['versionCode'], 'package': package.group(1),
           'productionCertificateMatches': True, 'certificateSha256': certificate, 'sha256': digest,
           'bytes': apk.stat().st_size, 'abis': abis, 'bundledFonts': 3, 'fontLicense': True, 'nativeSafeAreaProvider': safe_area_native,
-          'backendUrl': 'https://aceexam.top/api', 'bundledAnswerSounds': 3, 'vibrationPermission': True, 'deviceInstalled': False, 'deployed': False}
+          'backendUrl': 'https://aceexam.top/api', 'bundledAnswerSounds': 3, 'vibrationPermission': True, 'deviceInstalled': False, 'deployed': False, 'signatureSchemes': ['v1', 'v2', 'v3'], 'nativeLibrariesCompressed': True, 'zipCrcVerified': True, 'zipAlignmentVerified': True, 'nativeExtractionEnabled': True}
 output = ROOT / 'test-output/native-release-verification.json'
 output.parent.mkdir(exist_ok=True)
 temporary = output.with_suffix('.json.new')

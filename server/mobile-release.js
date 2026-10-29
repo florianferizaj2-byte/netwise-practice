@@ -10,12 +10,16 @@ export function resolveMobileRelease(environment, compare) {
   const minimumVersion = newer(configuredMinimum, bundled.minimumVersion);
   const latestVersion = newer(newer(configuredLatest, bundled.latestVersion), minimumVersion);
   const configuredUrl=environment.MOBILE_DOWNLOAD_URL?.trim();
-  const namedVersion=configuredUrl?.match(/^\/downloads\/kaojiang-v(\d+\.\d+\.\d+)\.apk(?:[?#].*)?$/)?.[1];
+  let namedVersion;
+  if(configuredUrl)try{
+    const pathname=decodeURIComponent(new URL(configuredUrl,'https://kaojiang.invalid').pathname);
+    namedVersion=pathname.match(/(?:^|\/)kaojiang-v(\d+\.\d+\.\d+)\.apk$/i)?.[1];
+  }catch{ /* An unparseable URL is never treated as a versioned artifact. */ }
   // A preserved download URL must not deliver an older APK under a newer version label.
   const staleArtifact=!!namedVersion&&namedVersion!==latestVersion;
   const currentOverride = configuredLatest === latestVersion && !staleArtifact;
-  const usesBundledArtifact = latestVersion === bundled.latestVersion &&
-    (!currentOverride || !environment.MOBILE_DOWNLOAD_URL?.trim() || environment.MOBILE_DOWNLOAD_URL.trim() === bundled.downloadUrl);
+  // A mirror for the same release must serve the exact published artifact too.
+  const usesBundledArtifact = latestVersion === bundled.latestVersion;
   return {
     latestVersion, minimumVersion,
     ...(usesBundledArtifact ? { apkBytes: bundled.apkBytes, apkMd5: bundled.apkMd5, apkSha256: bundled.apkSha256 } : {}),

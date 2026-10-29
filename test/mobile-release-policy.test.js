@@ -63,3 +63,22 @@ test('a matching latest-version override cannot silently retain an older named A
  const release=resolveMobileRelease({MOBILE_LATEST_VERSION:current,MOBILE_DOWNLOAD_URL:'/downloads/kaojiang-v1.0.3.apk',MOBILE_RELEASE_NOTES:'stale notes'},compare);
  assert.equal(release.downloadUrl,`/downloads/kaojiang-v${current}.apk`);assert.notEqual(release.releaseNotes,'stale notes');assert.equal(release.apkSha256,bundled.apkSha256);
 });
+
+test('absolute, mirrored and percent-encoded stale APK URLs cannot deliver an older package under the current label',()=>{
+ for(const url of [
+  'https://raw.githubusercontent.com/example/project/old/public/downloads/kaojiang-v1.0.10.apk',
+  'https://cdn.example/downloads/kaojiang-v1.0.10.apk?token=temporary#download',
+  'https://cdn.example/downloads/kaojiang-v1%2E0%2E10.apk',
+ ]){
+  const release=resolveMobileRelease({MOBILE_LATEST_VERSION:current,MOBILE_DOWNLOAD_URL:url,MOBILE_RELEASE_NOTES:'stale notes'},compare);
+  assert.equal(release.downloadUrl,bundled.downloadUrl);assert.equal(release.apkSha256,bundled.apkSha256);
+  assert.notEqual(release.releaseNotes,'stale notes');
+ }
+});
+test('mirrors and unversioned URLs for the bundled release retain exact APK integrity requirements',()=>{
+ for(const url of ['https://cdn.example/downloads/kaojiang-v'+current+'.apk','https://cdn.example/download.apk']){
+  const release=resolveMobileRelease({MOBILE_LATEST_VERSION:current,MOBILE_DOWNLOAD_URL:url},compare);
+  assert.equal(release.downloadUrl,url);assert.equal(release.apkBytes,bundled.apkBytes);
+  assert.equal(release.apkMd5,bundled.apkMd5);assert.equal(release.apkSha256,bundled.apkSha256);
+ }
+});
