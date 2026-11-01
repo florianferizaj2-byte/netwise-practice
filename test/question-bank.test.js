@@ -96,7 +96,12 @@ test("manifest catalog discovers the certificate tracks and keeps sources explic
   );
   assert.deepEqual(
     banksForCertificate("ncre-ms-office").map((item) => item.source),
-    ["syllabus_practice", "user_docx_collection"],
+    [
+      "syllabus_practice",
+      "user_docx_collection",
+      "ncre_office_syllabus_expansion",
+      "ncre_office_operation_practice",
+    ],
   );
   assert.deepEqual(
     banksForCertificate("veterinary-practitioner").map((item) => item.source),
@@ -211,7 +216,7 @@ test("manifest catalog discovers the certificate tracks and keeps sources explic
   );
   assert.equal(
     bundledQuestions().filter((q) => hasCertificateQuestion(q, "ncre-ms-office")).length,
-    180,
+    519,
   );
   const veterinaryQuestions = bundledQuestions().filter((q) =>
     hasCertificateQuestion(q, "veterinary-practitioner"),

@@ -1,0 +1,1888 @@
+[
+  {
+    "id": "ncre-office-pub-algo-basic-01",
+    "type": "single_choice",
+    "question": "关于算法的输入和输出，下列说法正确的是（ ）。",
+    "options": {
+      "A": "算法可以没有输入，但至少有一个输出",
+      "B": "算法可以没有输出",
+      "C": "算法的输入和输出都必须多于一个",
+      "D": "算法必须同时有输入和输出"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "算法可以有零个或多个输入，但必须有一个或多个输出，否则算法就失去了意义。没有输出的计算过程不能称为算法。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据结构与算法",
+    "knowledgePoint": "算法基本概念",
+    "difficulty": "easy",
+    "tags": [
+      "算法",
+      "输入输出"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-algo-basic-02",
+    "type": "single_choice",
+    "question": "用图形符号描述算法的执行流程、能直观表示顺序、选择和循环三种控制结构的工具是（ ）。",
+    "options": {
+      "A": "流程图",
+      "B": "结构图",
+      "C": "E-R图",
+      "D": "数据字典"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "流程图用特定图形符号表示操作、判断和流程线，能直观表达三种基本控制结构；数据字典描述数据，结构图描述模块层次，E-R图描述实体联系。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据结构与算法",
+    "knowledgePoint": "算法基本概念",
+    "difficulty": "easy",
+    "tags": [
+      "算法",
+      "流程图"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-algo-basic-03",
+    "type": "single_choice",
+    "question": "算法与程序的关系是（ ）。",
+    "options": {
+      "A": "程序是算法的组成部分",
+      "B": "算法是解决问题的步骤描述，程序是算法在某种语言中的实现",
+      "C": "算法就是程序，二者没有区别",
+      "D": "算法必须用高级语言书写才能称为算法"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "算法是对解题步骤的抽象描述，与具体语言无关；程序是算法用某种程序设计语言实现后的产物，还要考虑语法、数据类型和运行环境。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据结构与算法",
+    "knowledgePoint": "算法基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "算法",
+      "程序"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-algo-basic-04",
+    "type": "single_choice",
+    "question": "算法的确定性要求是指（ ）。",
+    "options": {
+      "A": "算法的每一步都有确切的定义，不允许存在二义性",
+      "B": "算法必须能处理所有输入",
+      "C": "算法必须在有限时间内结束",
+      "D": "算法的执行结果必须唯一且与输入无关"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "确定性强调每一步操作的含义唯一、无歧义；有穷性强调执行步骤有限，可行性强调每步都能用基本运算实现，这是三个不同的特征。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据结构与算法",
+    "knowledgePoint": "算法基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "算法",
+      "确定性"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-algo-basic-05",
+    "type": "single_choice",
+    "question": "同一问题的两个算法 A 和 B，A 的语句条数是 B 的 3 倍，但 A 的时间复杂度为 O(n)，B 为 O(n²)。下列说法正确的是（ ）。",
+    "options": {
+      "A": "B 在任何规模下都比 A 快",
+      "B": "A 在任何规模下都比 B 运行得快",
+      "C": "当问题规模 n 足够大时，A 的运算量增长慢于 B",
+      "D": "语句条数决定了算法的时间复杂度"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "时间复杂度刻画的是运算量随规模增长的趋势，常数因子在规模足够大时被量级掩盖。n 较小时语句条数多的 A 可能更慢，但 n 增大后 O(n) 必然优于 O(n²)。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据结构与算法",
+    "knowledgePoint": "算法基本概念",
+    "difficulty": "hard",
+    "tags": [
+      "算法",
+      "复杂度比较"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-algo-complexity-01",
+    "type": "single_choice",
+    "question": "算法的时间复杂度是指（ ）。",
+    "options": {
+      "A": "算法程序的长度",
+      "B": "算法执行过程中所需要的基本运算次数与问题规模的关系",
+      "C": "算法程序中的指令条数",
+      "D": "算法所处理的数据元素的个数"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "时间复杂度从算法执行所需基本运算次数的数量级角度衡量效率，与程序长度、指令条数没有必然对应关系，也不是数据量本身。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据结构与算法",
+    "knowledgePoint": "算法复杂度",
+    "difficulty": "easy",
+    "tags": [
+      "时间复杂度",
+      "基本运算"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-algo-complexity-02",
+    "type": "single_choice",
+    "question": "下列时间复杂度量级中，最小的是（ ）。",
+    "options": {
+      "A": "O(log₂n)",
+      "B": "O(n²)",
+      "C": "O(nlog₂n)",
+      "D": "O(n)"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "常见量级由小到大依次为 O(1)、O(log₂n)、O(n)、O(nlog₂n)、O(n²)、O(n³)、O(2ⁿ)。对数级增长最慢。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据结构与算法",
+    "knowledgePoint": "算法复杂度",
+    "difficulty": "easy",
+    "tags": [
+      "时间复杂度",
+      "量级比较"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-algo-complexity-03",
+    "type": "single_choice",
+    "question": "某算法的时间复杂度为 O(n²)，当问题规模 n 增大为原来的 2 倍时，其运算工作量大约变为原来的（ ）。",
+    "options": {
+      "A": "8 倍",
+      "B": "4 倍",
+      "C": "2 倍",
+      "D": "保持不变"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "O(n²) 表示运算量与 n² 成正比，n 变为 2n 时运算量变为 (2n)² = 4n²，即约 4 倍。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据结构与算法",
+    "knowledgePoint": "算法复杂度",
+    "difficulty": "medium",
+    "tags": [
+      "时间复杂度",
+      "规模增长"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-algo-complexity-04",
+    "type": "single_choice",
+    "question": "若一个算法的空间复杂度为 O(1)，说明该算法（ ）。",
+    "options": {
+      "A": "不需要任何存储空间",
+      "B": "只能处理规模为 1 的问题",
+      "C": "所需的辅助存储空间不随问题规模增大而增加",
+      "D": "所需存储空间与问题规模成正比"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "O(1) 指辅助空间是常数级，即不随问题规模变化，而不是完全不占用空间。算法本身仍要存储输入数据和少量变量。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据结构与算法",
+    "knowledgePoint": "算法复杂度",
+    "difficulty": "medium",
+    "tags": [
+      "空间复杂度",
+      "辅助空间"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-algo-complexity-05",
+    "type": "single_choice",
+    "question": "两个算法的时间复杂度分别为 O(n) 和 O(nlog₂n)，当 n = 1024 时，后者的运算量约为前者的（ ）倍。",
+    "options": {
+      "A": "2",
+      "B": "1024",
+      "C": "10",
+      "D": "32"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "log₂1024 = 10，因此 nlog₂n 在 n = 1024 时约为 1024 × 10，是 n 的 10 倍。量级差异在小规模时并不明显，这是比较复杂度时要看增长趋势的原因。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据结构与算法",
+    "knowledgePoint": "算法复杂度",
+    "difficulty": "hard",
+    "tags": [
+      "时间复杂度",
+      "数值估算"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-ds-basic-01",
+    "type": "single_choice",
+    "question": "数据的逻辑结构可以分为（ ）。",
+    "options": {
+      "A": "线性结构和非线性结构",
+      "B": "顺序结构和链式结构",
+      "C": "静态结构和动态结构",
+      "D": "内部结构和外部结构"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "逻辑结构按元素间关系分为线性结构（一对一）和非线性结构（一对多、多对多）；顺序与链式属于存储结构，是另一个维度的划分。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据结构与算法",
+    "knowledgePoint": "数据结构基本概念",
+    "difficulty": "easy",
+    "tags": [
+      "数据结构",
+      "逻辑结构"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-ds-basic-02",
+    "type": "single_choice",
+    "question": "顺序存储结构与链式存储结构的主要区别在于（ ）。",
+    "options": {
+      "A": "逻辑结构一定是线性的",
+      "B": "逻辑关系在存储器中的表示方式不同",
+      "C": "所能存储的数据元素类型不同",
+      "D": "二者的时间复杂度完全相同"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "顺序存储用相邻的存储单元隐含表示逻辑关系，链式存储用指针显式表示逻辑关系。二者都可以表示线性或非线性结构，区别在于物理实现方式。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据结构与算法",
+    "knowledgePoint": "数据结构基本概念",
+    "difficulty": "easy",
+    "tags": [
+      "数据结构",
+      "存储结构"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-ds-basic-03",
+    "type": "single_choice",
+    "question": "数据元素之间的逻辑关系称为数据的（ ）。",
+    "options": {
+      "A": "逻辑结构",
+      "B": "存储结构",
+      "C": "数据类型",
+      "D": "物理结构"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "逻辑结构描述数据元素之间的抽象关系，与计算机无关；存储结构（物理结构）描述数据在存储器中的表示；数据类型是值的集合及运算的统称。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据结构与算法",
+    "knowledgePoint": "数据结构基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "数据结构",
+      "逻辑结构"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-ds-basic-04",
+    "type": "single_choice",
+    "question": "既存储数据元素本身、又存储元素之间逻辑关系的存储结构是（ ）。",
+    "options": {
+      "A": "索引存储结构",
+      "B": "链式存储结构",
+      "C": "顺序存储结构",
+      "D": "散列存储结构"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "链式存储的每个结点除数据域外还有指针域，显式存放后继（或前驱）位置；顺序存储依靠相邻地址隐含关系，不额外存储关系信息。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据结构与算法",
+    "knowledgePoint": "数据结构基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "数据结构",
+      "链式存储"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-ds-basic-05",
+    "type": "single_choice",
+    "question": "下列关于数据结构的叙述中，正确的是（ ）。",
+    "options": {
+      "A": "数据的逻辑结构与存储结构必须一一对应",
+      "B": "存储结构只能分为线性和非线性两类",
+      "C": "树形结构属于线性结构",
+      "D": "线性结构中的元素之间存在一对一的先后关系"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "线性结构的特征是除首尾元素外每个元素有且仅有一个前驱和一个后继。同一逻辑结构可以有多种存储实现；树形结构是一对多的非线性结构；线性/非线性是逻辑结构的划分。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据结构与算法",
+    "knowledgePoint": "数据结构基本概念",
+    "difficulty": "hard",
+    "tags": [
+      "数据结构",
+      "线性结构"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-linear-list-01",
+    "type": "single_choice",
+    "question": "线性表的顺序存储结构是一种（ ）的存储结构。",
+    "options": {
+      "A": "散列存取",
+      "B": "顺序存取",
+      "C": "索引存取",
+      "D": "随机存取"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "顺序表用连续单元存放元素，可由首地址和下标直接计算出任一元素的地址，因此支持随机存取；链表只能顺序存取。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据结构与算法",
+    "knowledgePoint": "线性表",
+    "difficulty": "easy",
+    "tags": [
+      "线性表",
+      "随机存取"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-linear-list-02",
+    "type": "single_choice",
+    "question": "在长度为 n 的顺序表中，于第 i 个位置（1 ≤ i ≤ n+1）插入一个元素，需要向后移动的元素个数为（ ）。",
+    "options": {
+      "A": "n - i + 1",
+      "B": "n - i",
+      "C": "n",
+      "D": "i"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "第 i 个位置及其后的 n - i + 1 个元素都要后移一位。若插在表尾（i = n+1），移动 0 个；插在表头（i = 1），移动 n 个。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据结构与算法",
+    "knowledgePoint": "线性表",
+    "difficulty": "easy",
+    "tags": [
+      "线性表",
+      "插入移动"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-linear-list-03",
+    "type": "single_choice",
+    "question": "在长度为 n 的顺序表中删除第 i 个元素（1 ≤ i ≤ n），需要向前移动的元素个数为（ ）。",
+    "options": {
+      "A": "i - 1",
+      "B": "n",
+      "C": "n - i",
+      "D": "n - i + 1"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "删除第 i 个元素后，其后的 n - i 个元素依次前移一位。删除表尾元素时移动 0 个，删除表头元素时移动 n - 1 个。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据结构与算法",
+    "knowledgePoint": "线性表",
+    "difficulty": "medium",
+    "tags": [
+      "线性表",
+      "删除移动"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-linear-list-04",
+    "type": "single_choice",
+    "question": "下列关于线性链表的叙述中，正确的是（ ）。",
+    "options": {
+      "A": "链表可以随机访问任一元素",
+      "B": "链表的结点在内存中必须连续存放",
+      "C": "链表中访问第 i 个元素需要从头结点开始依次查找",
+      "D": "链表插入元素时一定需要移动其他元素"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "链表结点靠指针链接，物理位置可以分散；只能顺序访问，访问第 i 个元素需从头走 i 步；插入删除只改指针，不需要移动元素，这正是链式存储的优势。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据结构与算法",
+    "knowledgePoint": "线性表",
+    "difficulty": "hard",
+    "tags": [
+      "线性表",
+      "链表特性"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-search-01",
+    "type": "single_choice",
+    "question": "对长度为 n 的有序线性表进行二分查找，最坏情况下的比较次数约为（ ）。",
+    "options": {
+      "A": "n²",
+      "B": "n",
+      "C": "log₂n",
+      "D": "n/2"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "二分查找每比较一次把查找区间缩小一半，最坏比较次数约为 ⌊log₂n⌋ + 1，属于对数级。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据结构与算法",
+    "knowledgePoint": "查找技术",
+    "difficulty": "easy",
+    "tags": [
+      "二分查找",
+      "比较次数"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-search-02",
+    "type": "single_choice",
+    "question": "二分查找要求线性表必须（ ）。",
+    "options": {
+      "A": "采用链式存储且元素无序",
+      "B": "采用顺序存储但元素可以无序",
+      "C": "采用顺序存储且元素按关键字有序排列",
+      "D": "采用链式存储且元素有序"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "二分查找需要按下标随机定位中间元素，因此必须是顺序存储；同时元素必须有序，否则无法判断舍弃哪一半。链表无法随机定位，不能直接二分。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据结构与算法",
+    "knowledgePoint": "查找技术",
+    "difficulty": "easy",
+    "tags": [
+      "二分查找",
+      "适用条件"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-search-03",
+    "type": "single_choice",
+    "question": "对长度为 n 的线性表进行顺序查找，查找成功时的平均查找长度为（ ）。",
+    "options": {
+      "A": "log₂n",
+      "B": "n",
+      "C": "n/2",
+      "D": "(n+1)/2"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "在等概率假设下，查找第 1 到第 n 个元素分别需要 1 到 n 次比较，平均为 (1+2+…+n)/n = (n+1)/2。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据结构与算法",
+    "knowledgePoint": "查找技术",
+    "difficulty": "medium",
+    "tags": [
+      "顺序查找",
+      "平均查找长度"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-search-04",
+    "type": "single_choice",
+    "question": "对长度为 1000 的有序表进行二分查找，最多需要比较（ ）次。",
+    "options": {
+      "A": "500",
+      "B": "11",
+      "C": "9",
+      "D": "10"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "2⁹ = 512 < 1000 ≤ 1024 = 2¹⁰，因此最多比较 10 次。可用 ⌈log₂(n+1)⌉ 估算。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据结构与算法",
+    "knowledgePoint": "查找技术",
+    "difficulty": "medium",
+    "tags": [
+      "二分查找",
+      "数值计算"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-search-05",
+    "type": "single_choice",
+    "question": "对长度为 16 的有序表进行二分查找，查找失败时最多需要比较（ ）次。",
+    "options": {
+      "A": "4",
+      "B": "16",
+      "C": "8",
+      "D": "5"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "二分查找的判定树高度为 ⌊log₂n⌋ + 1，n = 16 时高度为 5，查找失败也走到底层外部结点，最坏比较 5 次。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据结构与算法",
+    "knowledgePoint": "查找技术",
+    "difficulty": "hard",
+    "tags": [
+      "二分查找",
+      "查找失败"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-search-06",
+    "type": "single_choice",
+    "question": "在长度为 n 的有序单链表中查找某个元素，效率最高的方法是（ ）。",
+    "options": {
+      "A": "二分查找",
+      "B": "分块查找",
+      "C": "散列查找",
+      "D": "顺序查找"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "二分查找依赖下标随机访问中间元素，单链表只能从头逐个访问，无法直接定位中点，因此只能用顺序查找，时间复杂度 O(n)。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据结构与算法",
+    "knowledgePoint": "查找技术",
+    "difficulty": "hard",
+    "tags": [
+      "查找技术",
+      "链表限制"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-sort-01",
+    "type": "single_choice",
+    "question": "下列排序方法中，属于稳定排序的是（ ）。",
+    "options": {
+      "A": "简单选择排序",
+      "B": "快速排序",
+      "C": "希尔排序",
+      "D": "冒泡排序"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "冒泡排序只在相邻逆序时交换，相等元素不会跨越，因此稳定；快速排序、希尔排序、简单选择排序都可能改变相等元素的相对次序。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据结构与算法",
+    "knowledgePoint": "排序技术",
+    "difficulty": "easy",
+    "tags": [
+      "排序",
+      "稳定性"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-sort-02",
+    "type": "single_choice",
+    "question": "冒泡排序在最坏情况下的时间复杂度为（ ）。",
+    "options": {
+      "A": "O(n)",
+      "B": "O(n²)",
+      "C": "O(nlog₂n)",
+      "D": "O(log₂n)"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "最坏情况是初始序列完全逆序，需要 n-1 趟、每趟比较次数递减，总比较次数约为 n(n-1)/2，属于 O(n²)。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据结构与算法",
+    "knowledgePoint": "排序技术",
+    "difficulty": "easy",
+    "tags": [
+      "冒泡排序",
+      "时间复杂度"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-sort-03",
+    "type": "single_choice",
+    "question": "快速排序在平均情况下的时间复杂度为（ ）。",
+    "options": {
+      "A": "O(n)",
+      "B": "O(nlog₂n)",
+      "C": "O(log₂n)",
+      "D": "O(n²)"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "快速排序平均每趟把序列划分为两个规模相近的子序列，递归深度约 log₂n，每层划分代价 O(n)，平均为 O(nlog₂n)；最坏退化为 O(n²)。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据结构与算法",
+    "knowledgePoint": "排序技术",
+    "difficulty": "medium",
+    "tags": [
+      "快速排序",
+      "平均复杂度"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-sort-04",
+    "type": "single_choice",
+    "question": "对长度为 n 的线性表进行快速排序，最坏情况下的比较次数为（ ）。",
+    "options": {
+      "A": "nlog₂n",
+      "B": "n(n-1)/2",
+      "C": "n",
+      "D": "n²"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "当每次划分都把序列分成 1 个和 n-1 个两部分时（如初始已有序且取首元素为基准），递归深度为 n，总比较次数为 n(n-1)/2，退化为冒泡排序的水平。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据结构与算法",
+    "knowledgePoint": "排序技术",
+    "difficulty": "medium",
+    "tags": [
+      "快速排序",
+      "最坏情况"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-prog-style-01",
+    "type": "single_choice",
+    "question": "源程序文档化要求（ ）。",
+    "options": {
+      "A": "把所有语句写在同一行",
+      "B": "取消所有注释以减小文件体积",
+      "C": "标识符按含义命名并加上必要的注释",
+      "D": "尽量使用单字母变量名以缩短程序"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "文档化包括符号名有意义、加注释、按层次书写。单字母变量名和取消注释都会降低可读性，与文档化要求相反。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "程序设计基础",
+    "knowledgePoint": "程序设计方法与风格",
+    "difficulty": "easy",
+    "tags": [
+      "程序设计风格",
+      "文档化"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-prog-style-02",
+    "type": "single_choice",
+    "question": "在程序设计风格中，符号名的命名应（ ）。",
+    "options": {
+      "A": "符合语法规则并具有一定实际含义",
+      "B": "与关键字完全相同",
+      "C": "越短越好",
+      "D": "统一使用数字编号"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "好的命名要见名知义，同时不能与保留字冲突。过短或纯编号的名字会丧失自解释能力。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "程序设计基础",
+    "knowledgePoint": "程序设计方法与风格",
+    "difficulty": "easy",
+    "tags": [
+      "程序设计风格",
+      "命名"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-prog-style-03",
+    "type": "single_choice",
+    "question": "从提高可读性出发，下列语句结构中最不提倡的是（ ）。",
+    "options": {
+      "A": "一行只写一条语句",
+      "B": "用括号明确表达式的运算顺序",
+      "C": "避免使用无条件转移语句",
+      "D": "大量使用多层嵌套的条件语句"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "多层嵌套会使逻辑层次难以跟踪，通常应通过提前返回、拆分函数或改用卫语句来降低嵌套深度。其余三项都是提倡的做法。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "程序设计基础",
+    "knowledgePoint": "程序设计方法与风格",
+    "difficulty": "medium",
+    "tags": [
+      "程序设计风格",
+      "语句结构"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-prog-style-04",
+    "type": "single_choice",
+    "question": "程序中的注释通常分为（ ）。",
+    "options": {
+      "A": "中文注释和英文注释",
+      "B": "序言性注释和功能性注释",
+      "C": "行内注释和块注释",
+      "D": "编译注释和运行注释"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "按用途分为序言性注释（说明模块功能、接口、作者等）和功能性注释（解释某段代码的处理意图），这是程序设计风格中的标准划分。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "程序设计基础",
+    "knowledgePoint": "程序设计方法与风格",
+    "difficulty": "medium",
+    "tags": [
+      "程序设计风格",
+      "注释"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-prog-style-05",
+    "type": "single_choice",
+    "question": "为了提高程序的易读性，数据说明应当（ ）。",
+    "options": {
+      "A": "集中写在程序最末尾",
+      "B": "全部使用默认类型",
+      "C": "按一定次序排列并加以注释",
+      "D": "与语句混在一起随意放置"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "数据说明应规范化：按类型或使用顺序排列、同类说明集中、复杂结构加注释，便于阅读者快速建立数据视图。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "程序设计基础",
+    "knowledgePoint": "程序设计方法与风格",
+    "difficulty": "medium",
+    "tags": [
+      "程序设计风格",
+      "数据说明"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-prog-style-06",
+    "type": "single_choice",
+    "question": "下列做法中，最不利于提高程序可维护性的是（ ）。",
+    "options": {
+      "A": "为追求效率在模块中大量使用无条件转移语句",
+      "B": "使用有明确含义的变量名",
+      "C": "保持每个模块功能单一",
+      "D": "为每个模块编写功能注释"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "无条件转移语句破坏程序的结构化控制流，使阅读和修改时难以追踪执行路径，是结构化程序设计明确限制的写法。其余三项都提升可维护性。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "程序设计基础",
+    "knowledgePoint": "程序设计方法与风格",
+    "difficulty": "hard",
+    "tags": [
+      "程序设计风格",
+      "可维护性"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-prog-style-07",
+    "type": "single_choice",
+    "question": "关于输入输出的设计风格，下列做法正确的是（ ）。",
+    "options": {
+      "A": "默认值不在界面上显示",
+      "B": "不向用户提示输入格式",
+      "C": "对所有输入数据都进行合法性检查",
+      "D": "把输入输出语句分散放在程序各处"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "输入应校验合法性并给出明确提示，输出应有格式说明；输入输出语句宜集中组织，默认值应可见，这些都属于良好的输入输出风格。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "程序设计基础",
+    "knowledgePoint": "程序设计方法与风格",
+    "difficulty": "hard",
+    "tags": [
+      "程序设计风格",
+      "输入输出"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-structured-01",
+    "type": "single_choice",
+    "question": "结构化程序设计限制使用无条件转移语句，主要原因是（ ）。",
+    "options": {
+      "A": "它会破坏程序的单入口单出口结构，降低可读性",
+      "B": "它的执行速度比其他语句慢",
+      "C": "它不能被编译程序识别",
+      "D": "它只能用于循环结构"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "无条件转移语句使控制流可以任意跳转，破坏单入口单出口的结构化约束，使程序难以阅读、验证和维护，因此结构化方法主张用顺序、选择、循环三种结构表达逻辑。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "程序设计基础",
+    "knowledgePoint": "结构化程序设计",
+    "difficulty": "easy",
+    "tags": [
+      "结构化",
+      "基本结构"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-structured-02",
+    "type": "single_choice",
+    "question": "结构化程序设计强调（ ）。",
+    "options": {
+      "A": "程序的易读性和可维护性",
+      "B": "程序代码行数最少",
+      "C": "程序运行速度绝对最优",
+      "D": "尽量使用无条件转移语句"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "结构化方法牺牲部分运行效率换取清晰的控制结构，目标是让程序易读、易验证、易维护，而不是单纯追求速度或代码短。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "程序设计基础",
+    "knowledgePoint": "结构化程序设计",
+    "difficulty": "easy",
+    "tags": [
+      "结构化",
+      "设计目标"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-structured-03",
+    "type": "single_choice",
+    "question": "结构化程序设计采用的设计方法是（ ）。",
+    "options": {
+      "A": "自顶向下、逐步求精",
+      "B": "自底向上、一次成型",
+      "C": "面向对象、继承复用",
+      "D": "面向数据流、逐层分解"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "自顶向下、逐步求精是结构化设计的核心方法：先把问题分解为子问题，再逐层细化，直到可以直接编码。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "程序设计基础",
+    "knowledgePoint": "结构化程序设计",
+    "difficulty": "medium",
+    "tags": [
+      "结构化",
+      "逐步求精"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-structured-04",
+    "type": "single_choice",
+    "question": "关于模块化设计，下列说法正确的是（ ）。",
+    "options": {
+      "A": "模块划分越细越好",
+      "B": "模块的独立性越强越好",
+      "C": "模块的内聚越低越好",
+      "D": "模块之间的耦合越紧越好"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "模块化的目标是高内聚、低耦合，即模块内部联系紧密、模块之间联系松散，从而获得较强的独立性。划分过细会增加接口复杂度，并非越细越好。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "程序设计基础",
+    "knowledgePoint": "结构化程序设计",
+    "difficulty": "hard",
+    "tags": [
+      "结构化",
+      "模块化"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-oop-01",
+    "type": "single_choice",
+    "question": "在面向对象方法中，类的实例称为（ ）。",
+    "options": {
+      "A": "属性",
+      "B": "对象",
+      "C": "方法",
+      "D": "消息"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "类是对具有相同属性和操作的一组对象的抽象描述，对象是类的具体实例。属性是对象的状态，方法是对象的行为。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "程序设计基础",
+    "knowledgePoint": "面向对象的程序设计",
+    "difficulty": "easy",
+    "tags": [
+      "面向对象",
+      "对象"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-oop-02",
+    "type": "single_choice",
+    "question": "面向对象方法中，实现信息隐藏主要依靠（ ）。",
+    "options": {
+      "A": "继承",
+      "B": "重载",
+      "C": "封装",
+      "D": "多态"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "封装把对象的属性和操作捆绑在一起，并通过访问控制隐藏内部实现细节，只暴露必要接口，从而实现信息隐藏。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "程序设计基础",
+    "knowledgePoint": "面向对象的程序设计",
+    "difficulty": "easy",
+    "tags": [
+      "面向对象",
+      "封装"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-oop-03",
+    "type": "single_choice",
+    "question": "在面向对象方法中，一个对象请求另一个对象为其服务的方式是（ ）。",
+    "options": {
+      "A": "共享全局变量",
+      "B": "直接读写对方的内存",
+      "C": "调用函数库",
+      "D": "发送消息"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "对象之间通过消息传递协作：消息包含接收者、操作名和必要参数。这是面向对象系统的基本交互机制。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "程序设计基础",
+    "knowledgePoint": "面向对象的程序设计",
+    "difficulty": "medium",
+    "tags": [
+      "面向对象",
+      "消息"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-oop-04",
+    "type": "single_choice",
+    "question": "面向对象方法中，子类自动拥有父类属性和操作的特性称为（ ）。",
+    "options": {
+      "A": "封装",
+      "B": "继承",
+      "C": "抽象",
+      "D": "多态"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "继承使子类复用父类的定义并可扩展新特性，形成类的层次结构。多态是同一消息被不同对象响应时产生不同行为。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "程序设计基础",
+    "knowledgePoint": "面向对象的程序设计",
+    "difficulty": "medium",
+    "tags": [
+      "面向对象",
+      "继承"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-se-basic-01",
+    "type": "single_choice",
+    "question": "软件生命周期中，人力物力花费最多的阶段通常是（ ）。",
+    "options": {
+      "A": "设计阶段",
+      "B": "编码阶段",
+      "C": "需求分析阶段",
+      "D": "维护阶段"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "软件投入使用后的维护阶段持续时间最长，修改、适配、完善的工作量通常占整个生命周期成本的一半以上。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "软件工程基础",
+    "knowledgePoint": "软件工程基本概念",
+    "difficulty": "easy",
+    "tags": [
+      "软件生命周期",
+      "成本分布"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-se-basic-02",
+    "type": "single_choice",
+    "question": "软件工程的三要素是（ ）。",
+    "options": {
+      "A": "程序、数据、文档",
+      "B": "方法、工具、过程",
+      "C": "需求、设计、编码",
+      "D": "分析、测试、维护"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "软件工程将系统化的方法、支撑工具和规范化过程结合起来，以工程化方式开发和维护软件。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "软件工程基础",
+    "knowledgePoint": "软件工程基本概念",
+    "difficulty": "easy",
+    "tags": [
+      "软件工程",
+      "三要素"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-se-basic-03",
+    "type": "single_choice",
+    "question": "下列各项中，不属于软件危机主要表现的是（ ）。",
+    "options": {
+      "A": "软件开发生产率提高缓慢",
+      "B": "硬件价格持续下降",
+      "C": "软件成本不断上升",
+      "D": "软件质量难以保证"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "软件危机指软件开发中出现的成本失控、进度延误、质量不稳、难以维护等问题。硬件价格下降属于硬件领域现象，与软件危机无关。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "软件工程基础",
+    "knowledgePoint": "软件工程基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "软件工程",
+      "软件危机"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-se-basic-04",
+    "type": "single_choice",
+    "question": "软件生命周期中，主要解决“做什么”问题的阶段是（ ）。",
+    "options": {
+      "A": "编码阶段",
+      "B": "概要设计阶段",
+      "C": "详细设计阶段",
+      "D": "需求分析阶段"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "需求分析确定系统要完成的功能和性能约束，回答“做什么”；设计与编码回答“怎么做”。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "软件工程基础",
+    "knowledgePoint": "软件工程基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "软件生命周期",
+      "阶段任务"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-se-basic-05",
+    "type": "single_choice",
+    "question": "关于软件生命周期各阶段的任务，下列说法正确的是（ ）。",
+    "options": {
+      "A": "需求分析在概要设计之后进行",
+      "B": "编码阶段产生需求规格说明书",
+      "C": "维护阶段不属于软件生命周期",
+      "D": "概要设计主要解决“怎么做”的问题"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "概要设计确定系统的总体结构、模块划分和接口，属于“怎么做”的层次；需求分析在最前；维护是生命周期的最后阶段；需求规格说明书产生于需求分析阶段。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "软件工程基础",
+    "knowledgePoint": "软件工程基本概念",
+    "difficulty": "hard",
+    "tags": [
+      "软件生命周期",
+      "阶段顺序"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-se-analysis-01",
+    "type": "single_choice",
+    "question": "结构化分析方法中最常用的建模工具是（ ）。",
+    "options": {
+      "A": "结构图",
+      "B": "甘特图",
+      "C": "程序流程图",
+      "D": "数据流图"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "结构化分析用数据流图描述数据在系统中的流动与加工，配合数据字典、判定表和判定树描述处理逻辑。结构图属于设计阶段工具。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "软件工程基础",
+    "knowledgePoint": "结构化分析方法",
+    "difficulty": "easy",
+    "tags": [
+      "需求分析",
+      "数据流图"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-se-analysis-02",
+    "type": "single_choice",
+    "question": "数据流图中，用于表示数据流动方向的是（ ）。",
+    "options": {
+      "A": "圆形框",
+      "B": "双横线",
+      "C": "矩形框",
+      "D": "带箭头的线"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "数据流图中箭头表示数据流及其方向，矩形表示外部实体，圆形（或圆角矩形）表示加工，双横线或开口矩形表示数据存储。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "软件工程基础",
+    "knowledgePoint": "结构化分析方法",
+    "difficulty": "easy",
+    "tags": [
+      "数据流图",
+      "图元"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-se-analysis-03",
+    "type": "single_choice",
+    "question": "数据字典是在（ ）阶段形成的。",
+    "options": {
+      "A": "概要设计",
+      "B": "软件测试",
+      "C": "详细设计",
+      "D": "需求分析"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "数据字典对数据流图中的数据流、数据项、数据存储和加工进行严格定义，是需求分析阶段的重要文档。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "软件工程基础",
+    "knowledgePoint": "结构化分析方法",
+    "difficulty": "medium",
+    "tags": [
+      "需求分析",
+      "数据字典"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-se-analysis-04",
+    "type": "single_choice",
+    "question": "在数据流图中，表示“加工”的图元是（ ）。",
+    "options": {
+      "A": "圆形或圆角矩形",
+      "B": "带箭头的线",
+      "C": "矩形",
+      "D": "双横线"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "加工（变换）用圆形或圆角矩形表示，描述对数据进行的处理；矩形表示外部实体，双横线表示数据存储，箭头表示数据流。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "软件工程基础",
+    "knowledgePoint": "结构化分析方法",
+    "difficulty": "hard",
+    "tags": [
+      "数据流图",
+      "加工"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-se-design-01",
+    "type": "single_choice",
+    "question": "软件设计通常分为（ ）。",
+    "options": {
+      "A": "概要设计和详细设计",
+      "B": "编码和测试",
+      "C": "总体规划和可行性研究",
+      "D": "需求分析和概要设计"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "概要设计确定软件总体结构、模块划分和接口；详细设计确定每个模块的内部算法和数据结构。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "软件工程基础",
+    "knowledgePoint": "结构化设计方法",
+    "difficulty": "easy",
+    "tags": [
+      "软件设计",
+      "设计阶段"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-se-design-02",
+    "type": "single_choice",
+    "question": "模块的内聚性越高，说明模块的独立性（ ）。",
+    "options": {
+      "A": "不变",
+      "B": "越弱",
+      "C": "越强",
+      "D": "与内聚性无关"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "内聚衡量模块内部各成分结合的紧密程度，内聚越高说明模块职责越集中，独立性越强，越易于理解和维护。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "软件工程基础",
+    "knowledgePoint": "结构化设计方法",
+    "difficulty": "easy",
+    "tags": [
+      "软件设计",
+      "内聚"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-se-design-03",
+    "type": "single_choice",
+    "question": "模块之间的耦合程度越低，说明模块的独立性（ ）。",
+    "options": {
+      "A": "取决于模块的数量",
+      "B": "越弱",
+      "C": "越强",
+      "D": "与耦合无关"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "耦合衡量模块之间联系的紧密程度，耦合越低说明模块间依赖越少，修改一个模块时波及范围越小，独立性越强。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "软件工程基础",
+    "knowledgePoint": "结构化设计方法",
+    "difficulty": "medium",
+    "tags": [
+      "软件设计",
+      "耦合"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-se-design-04",
+    "type": "single_choice",
+    "question": "下列工具中，不属于详细设计表示工具的是（ ）。",
+    "options": {
+      "A": "程序流程图",
+      "B": "PAD 图",
+      "C": "N-S 图",
+      "D": "结构图"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "结构图描述模块层次和调用关系，属于概要设计工具；PAD 图、N-S 图、程序流程图都用于描述模块内部的处理过程，属于详细设计工具。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "软件工程基础",
+    "knowledgePoint": "结构化设计方法",
+    "difficulty": "medium",
+    "tags": [
+      "软件设计",
+      "设计工具"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-se-test-01",
+    "type": "single_choice",
+    "question": "白盒测试的主要依据是（ ）。",
+    "options": {
+      "A": "用户的使用习惯",
+      "B": "数据库的表结构",
+      "C": "程序的功能说明",
+      "D": "程序的内部逻辑结构"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "白盒测试（结构测试）依据程序的内部逻辑，检查每条路径、每个判定是否按预期工作；黑盒测试依据功能说明，不关心内部实现。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "软件工程基础",
+    "knowledgePoint": "软件测试",
+    "difficulty": "easy",
+    "tags": [
+      "软件测试",
+      "白盒测试"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-se-test-02",
+    "type": "single_choice",
+    "question": "黑盒测试又称为（ ）。",
+    "options": {
+      "A": "路径测试",
+      "B": "功能测试",
+      "C": "单元测试",
+      "D": "结构测试"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "黑盒测试把程序看作不透明的盒子，只依据输入与输出的对应关系验证功能是否符合需求，因此也称功能测试。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "软件工程基础",
+    "knowledgePoint": "软件测试",
+    "difficulty": "easy",
+    "tags": [
+      "软件测试",
+      "黑盒测试"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-se-test-03",
+    "type": "single_choice",
+    "question": "一个完整的测试用例通常由（ ）组成。",
+    "options": {
+      "A": "程序代码和注释",
+      "B": "测试人员和测试时间",
+      "C": "输入数据和预期的输出结果",
+      "D": "模块名称和版本号"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "测试用例必须同时给出输入（含执行条件）和预期输出，否则无法判定测试结果是成功还是失败。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "软件工程基础",
+    "knowledgePoint": "软件测试",
+    "difficulty": "medium",
+    "tags": [
+      "软件测试",
+      "测试用例"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-se-test-04",
+    "type": "single_choice",
+    "question": "下列测试方法中，属于白盒测试的是（ ）。",
+    "options": {
+      "A": "错误推测",
+      "B": "等价类划分",
+      "C": "边界值分析",
+      "D": "逻辑覆盖"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "逻辑覆盖依据程序内部逻辑设计用例，属于白盒方法；等价类划分、边界值分析、错误推测都只依据需求和经验，属于黑盒方法。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "软件工程基础",
+    "knowledgePoint": "软件测试",
+    "difficulty": "hard",
+    "tags": [
+      "软件测试",
+      "方法归类"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-se-debug-01",
+    "type": "single_choice",
+    "question": "程序调试的主要任务是（ ）。",
+    "options": {
+      "A": "评估程序的运行效率",
+      "B": "编写用户操作手册",
+      "C": "定位并改正程序中的错误",
+      "D": "证明程序中没有错误"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "调试是在测试发现错误之后，通过分析错误现象确定错误位置并加以改正的过程，目标是消除已发现的错误。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "软件工程基础",
+    "knowledgePoint": "程序的调试",
+    "difficulty": "easy",
+    "tags": [
+      "程序调试",
+      "任务"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-se-debug-02",
+    "type": "single_choice",
+    "question": "下列活动中，不属于程序调试步骤的是（ ）。",
+    "options": {
+      "A": "确定错误的位置",
+      "B": "编写需求规格说明书",
+      "C": "分析错误的原因",
+      "D": "改正错误并重新验证"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "调试一般包括确定错误位置、分析错误原因、改正错误、重新测试验证。编写需求规格说明书属于需求分析阶段的工作。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "软件工程基础",
+    "knowledgePoint": "程序的调试",
+    "difficulty": "easy",
+    "tags": [
+      "程序调试",
+      "步骤"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-se-debug-03",
+    "type": "single_choice",
+    "question": "软件测试与程序调试的关系是（ ）。",
+    "options": {
+      "A": "二者目的完全相同，可以互相替代",
+      "B": "调试在测试之前进行",
+      "C": "调试是测试的一个子类",
+      "D": "调试在测试发现错误之后进行，用于定位和改正错误"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "测试的目的是发现错误，调试的目的是定位并改正错误。测试由测试人员侧重从需求出发验证，调试通常由程序员结合内部逻辑完成。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "软件工程基础",
+    "knowledgePoint": "程序的调试",
+    "difficulty": "medium",
+    "tags": [
+      "程序调试",
+      "测试对比"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-se-debug-04",
+    "type": "single_choice",
+    "question": "程序调试中确定错误位置时，常用的思路是（ ）。",
+    "options": {
+      "A": "直接重写整个程序",
+      "B": "随机修改语句直到错误消失",
+      "C": "分析错误现象，逐步缩小可疑范围",
+      "D": "跳过错误继续运行"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "调试需要依据错误现象提出假设，再通过插入输出、设置断点、单步跟踪等手段验证假设，逐步把范围缩小到具体语句。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "软件工程基础",
+    "knowledgePoint": "程序的调试",
+    "difficulty": "medium",
+    "tags": [
+      "程序调试",
+      "定位方法"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-se-debug-05",
+    "type": "single_choice",
+    "question": "通过在程序关键位置插入输出语句来观察变量取值、从而定位错误的调试方法称为（ ）。",
+    "options": {
+      "A": "输出语句法（打印法）",
+      "B": "回溯法",
+      "C": "归纳法",
+      "D": "演绎法"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "输出语句法在可疑处打印中间结果，依据输出判断执行路径和变量状态；回溯法是从错误现象出发沿代码反向排查，适用于规模较小的程序。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "软件工程基础",
+    "knowledgePoint": "程序的调试",
+    "difficulty": "medium",
+    "tags": [
+      "程序调试",
+      "调试方法"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-se-debug-06",
+    "type": "single_choice",
+    "question": "关于软件测试与调试，下列说法正确的是（ ）。",
+    "options": {
+      "A": "测试通常由测试人员依据需求完成，调试通常由程序员结合内部逻辑完成",
+      "B": "测试可以证明程序完全没有错误",
+      "C": "二者的目的都是发现错误",
+      "D": "调试应在测试之前完成"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "测试以发现错误为目的、从需求出发、可由独立测试人员执行；调试以定位和改正错误为目的、需要了解内部实现。测试只能证明错误存在，不能证明错误不存在。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "软件工程基础",
+    "knowledgePoint": "程序的调试",
+    "difficulty": "hard",
+    "tags": [
+      "程序调试",
+      "职责划分"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-se-debug-07",
+    "type": "single_choice",
+    "question": "回溯法作为调试方法，最适合的情形是（ ）。",
+    "options": {
+      "A": "程序由多个团队协作开发且规模很大",
+      "B": "程序没有任何输出信息",
+      "C": "程序规模较小、错误现象与代码位置距离较近",
+      "D": "错误只在特定硬件环境下出现"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "回溯法从发现错误的位置沿控制流反向逐段排查，一旦程序规模很大、调用层次很深，回溯路径会迅速膨胀，因此只适合较小程序。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "软件工程基础",
+    "knowledgePoint": "程序的调试",
+    "difficulty": "hard",
+    "tags": [
+      "程序调试",
+      "回溯法"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-db-basic-01",
+    "type": "single_choice",
+    "question": "数据库系统的核心是（ ）。",
+    "options": {
+      "A": "应用程序",
+      "B": "数据库",
+      "C": "数据库管理系统",
+      "D": "数据库管理员"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "数据库管理系统（DBMS）负责数据的定义、操纵、控制和维护，是数据库系统的核心软件；数据库是数据本身，应用程序是使用者。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据库设计基础",
+    "knowledgePoint": "数据库系统的基本概念",
+    "difficulty": "easy",
+    "tags": [
+      "数据库系统",
+      "DBMS"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-db-basic-02",
+    "type": "single_choice",
+    "question": "数据库系统的两级映像保证了数据的（ ）。",
+    "options": {
+      "A": "独立性",
+      "B": "并发性",
+      "C": "安全性",
+      "D": "完整性"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "外模式/模式映像保证逻辑独立性，模式/内模式映像保证物理独立性，两级映像使数据的逻辑结构和物理存储改变时不影响上层。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据库设计基础",
+    "knowledgePoint": "数据库系统的基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "数据库系统",
+      "两级映像"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-db-model-01",
+    "type": "single_choice",
+    "question": "目前应用最广泛的数据模型是（ ）。",
+    "options": {
+      "A": "网状模型",
+      "B": "关系模型",
+      "C": "层次模型",
+      "D": "面向对象模型"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "关系模型用二维表表示实体及联系，概念简单、有严格的数学基础，是当前主流数据库系统普遍采用的数据模型。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据库设计基础",
+    "knowledgePoint": "数据模型",
+    "difficulty": "easy",
+    "tags": [
+      "数据模型",
+      "关系模型"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-db-model-02",
+    "type": "single_choice",
+    "question": "在 E-R 图中，用矩形表示（ ）。",
+    "options": {
+      "A": "联系",
+      "B": "属性",
+      "C": "实体",
+      "D": "主键"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "E-R 图中矩形表示实体，椭圆表示属性，菱形表示联系，连线表示实体与属性、实体与联系之间的连接。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据库设计基础",
+    "knowledgePoint": "数据模型",
+    "difficulty": "medium",
+    "tags": [
+      "E-R模型",
+      "图元"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-db-model-03",
+    "type": "single_choice",
+    "question": "在 E-R 图中，用菱形表示（ ）。",
+    "options": {
+      "A": "联系",
+      "B": "实体",
+      "C": "属性",
+      "D": "元组"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "菱形表示实体之间的联系，联系的类型有一对一、一对多和多对多，分别记作 1:1、1:n 和 m:n。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据库设计基础",
+    "knowledgePoint": "数据模型",
+    "difficulty": "medium",
+    "tags": [
+      "E-R模型",
+      "联系"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-db-algebra-01",
+    "type": "single_choice",
+    "question": "关系代数中，从关系中选出满足给定条件的元组的运算称为（ ）。",
+    "options": {
+      "A": "投影",
+      "B": "连接",
+      "C": "并",
+      "D": "选择"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "选择按行筛选，从关系中挑出满足条件的元组；投影按列筛选，从关系中取出若干属性列组成新关系。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据库设计基础",
+    "knowledgePoint": "关系代数",
+    "difficulty": "easy",
+    "tags": [
+      "关系代数",
+      "选择"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-db-algebra-02",
+    "type": "single_choice",
+    "question": "关系代数中，从关系中取出若干属性列组成新关系的运算称为（ ）。",
+    "options": {
+      "A": "投影",
+      "B": "选择",
+      "C": "差",
+      "D": "笛卡儿积"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "投影对关系做垂直分解，只保留指定属性列并去掉重复元组；选择是水平分解，按条件保留元组。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据库设计基础",
+    "knowledgePoint": "关系代数",
+    "difficulty": "easy",
+    "tags": [
+      "关系代数",
+      "投影"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-db-algebra-03",
+    "type": "single_choice",
+    "question": "设关系 R 有 m 个元组，关系 S 有 n 个元组，则 R 与 S 的笛卡儿积的元组个数为（ ）。",
+    "options": {
+      "A": "m - n",
+      "B": "max(m, n)",
+      "C": "m × n",
+      "D": "m + n"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "笛卡儿积把 R 的每个元组与 S 的每个元组拼接，因此结果元组数为 m × n，属性列数为 R 与 S 的属性数之和。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据库设计基础",
+    "knowledgePoint": "关系代数",
+    "difficulty": "medium",
+    "tags": [
+      "关系代数",
+      "笛卡儿积"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-db-algebra-04",
+    "type": "single_choice",
+    "question": "设关系 R 有 m 个元组，关系 S 有 n 个元组，则 R 与 S 的并运算结果的元组个数最多为（ ）。",
+    "options": {
+      "A": "m",
+      "B": "m × n",
+      "C": "n",
+      "D": "m + n"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "并运算要求两个关系结构相同，结果包含属于 R 或属于 S 的全部元组并去掉重复元组，因此最多为 m + n 个。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据库设计基础",
+    "knowledgePoint": "关系代数",
+    "difficulty": "medium",
+    "tags": [
+      "关系代数",
+      "并运算"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-db-algebra-05",
+    "type": "single_choice",
+    "question": "下列关系代数运算中，不属于传统集合运算的是（ ）。",
+    "options": {
+      "A": "差",
+      "B": "交",
+      "C": "投影",
+      "D": "并"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "并、差、交、笛卡儿积是传统集合运算；选择、投影、连接、除是专门的关系运算。投影虽然作用于关系，但属于专门的关系运算。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据库设计基础",
+    "knowledgePoint": "关系代数",
+    "difficulty": "hard",
+    "tags": [
+      "关系代数",
+      "运算分类"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-db-design-01",
+    "type": "single_choice",
+    "question": "数据库设计的第一个阶段是（ ）。",
+    "options": {
+      "A": "物理结构设计",
+      "B": "需求分析",
+      "C": "概念结构设计",
+      "D": "逻辑结构设计"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "数据库设计一般分为需求分析、概念结构设计、逻辑结构设计、物理结构设计、实施与运行维护等阶段，需求分析是起点。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据库设计基础",
+    "knowledgePoint": "数据库设计与管理",
+    "difficulty": "easy",
+    "tags": [
+      "数据库设计",
+      "设计阶段"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-db-design-02",
+    "type": "single_choice",
+    "question": "若关系模式中每个属性都是不可再分的数据项，则该关系模式至少属于（ ）。",
+    "options": {
+      "A": "3NF",
+      "B": "2NF",
+      "C": "BCNF",
+      "D": "1NF"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "第一范式要求属性不可再分（原子性）。在此基础上消除非主属性对候选键的部分函数依赖得到 2NF，再消除传递函数依赖得到 3NF。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据库设计基础",
+    "knowledgePoint": "数据库设计与管理",
+    "difficulty": "medium",
+    "tags": [
+      "数据库规范化",
+      "第一范式"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-db-design-03",
+    "type": "single_choice",
+    "question": "若关系模式中不存在非主属性对候选键的传递函数依赖，则该关系模式至少属于（ ）。",
+    "options": {
+      "A": "1NF",
+      "B": "2NF",
+      "C": "3NF",
+      "D": "BCNF"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "3NF 的要求是非主属性既不部分依赖于候选键，也不传递依赖于候选键。题设已排除传递依赖，因此在满足 1NF 的前提下至少达到 3NF；BCNF 还要求所有决定因素都包含候选键，条件更强。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "数据库设计基础",
+    "knowledgePoint": "数据库设计与管理",
+    "difficulty": "medium",
+    "tags": [
+      "数据库规范化",
+      "第三范式"
+    ]
+  },
+  {
+    "id": "ncre-office-pub-se-analysis-05",
+    "type": "single_choice",
+    "question": "结构化分析方法中，分层数据流图的父子图必须保持“平衡”，这里的平衡是指（ ）。",
+    "options": {
+      "A": "父图中某个加工的输入输出数据流，与它对应的子图的输入输出数据流一致",
+      "B": "父图与子图的加工个数相同",
+      "C": "每一层的数据存储个数相同",
+      "D": "父图与子图使用的图元种类相同"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "父子图平衡要求子图不擅自增加或减少与父图加工相连的外部数据流，否则说明分解过程中丢失或凭空产生了数据。加工个数、数据存储个数在分解后都会变化，不能作为平衡的判据。",
+    "chapter": "公共基础知识",
+    "knowledgeSection": "软件工程基础",
+    "knowledgePoint": "结构化分析方法",
+    "difficulty": "hard",
+    "tags": [
+      "数据流图",
+      "父子图平衡"
+    ]
+  }
+]

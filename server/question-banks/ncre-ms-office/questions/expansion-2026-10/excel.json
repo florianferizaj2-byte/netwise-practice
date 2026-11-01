@@ -1,0 +1,1957 @@
+[
+  {
+    "id": "ncre-office-excel-sheet-01",
+    "type": "single_choice",
+    "question": "要让工作表的第 1 行在向下滚动时始终可见，应使用（ ）。",
+    "options": {
+      "A": "视图→冻结窗格→冻结首行",
+      "B": "页面布局→打印标题",
+      "C": "视图→拆分",
+      "D": "开始→冻结"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "冻结首行把首行固定在窗口顶部，滚动时保持可见；冻结窗格还可按当前单元格冻结其上方的行和左侧的列。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "工作表基础",
+    "knowledgePoint": "工作表基本操作、视图与打印",
+    "difficulty": "easy",
+    "tags": [
+      "冻结窗格",
+      "视图"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-sheet-02",
+    "type": "single_choice",
+    "question": "在 Excel 中插入新工作表，新工作表默认出现在（ ）。",
+    "options": {
+      "A": "随机位置",
+      "B": "当前工作表之前",
+      "C": "所有工作表之后",
+      "D": "工作簿的最前面"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "插入的工作表位于当前活动工作表左侧，可通过拖动标签调整顺序，也可在“插入”对话框中指定模板。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "工作表基础",
+    "knowledgePoint": "工作表基本操作、视图与打印",
+    "difficulty": "easy",
+    "tags": [
+      "工作表管理",
+      "插入"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-sheet-03",
+    "type": "single_choice",
+    "question": "Excel 中“拆分”窗口的作用是（ ）。",
+    "options": {
+      "A": "把一个工作簿拆成多个文件",
+      "B": "把当前工作表分成可独立滚动的窗格",
+      "C": "把单元格内容拆成多列",
+      "D": "把工作表拆分为多个工作表"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "拆分在同一工作表内生成可独立滚动的窗格，便于同时查看相距较远的数据区域，与冻结窗格的区别在于窗格可以自由滚动。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "工作表基础",
+    "knowledgePoint": "工作表基本操作、视图与打印",
+    "difficulty": "medium",
+    "tags": [
+      "拆分窗口",
+      "视图"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-sheet-04",
+    "type": "single_choice",
+    "question": "打印 Excel 表格时，要让表格在纸张上水平居中，应设置（ ）。",
+    "options": {
+      "A": "页面布局→对齐方式",
+      "B": "开始→居中",
+      "C": "页面布局→页边距→自定义页边距→水平居中",
+      "D": "视图→显示比例"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "“水平居中”属于页面设置中的打印选项，控制表格在纸张上的位置；“开始→居中”改变的是单元格内文字的对齐方式。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "工作表基础",
+    "knowledgePoint": "工作表基本操作、视图与打印",
+    "difficulty": "medium",
+    "tags": [
+      "打印",
+      "页面设置"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-sheet-05",
+    "type": "single_choice",
+    "question": "关于 Excel 的“打印区域”，下列说法正确的是（ ）。",
+    "options": {
+      "A": "只能设置一个连续区域",
+      "B": "设置后不能再取消",
+      "C": "打印区域与分页符互不影响",
+      "D": "可以设置多个不连续区域，各区域分别分页打印"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "按住 Ctrl 可选取多个不连续区域设为打印区域，每个区域单独成页；通过“页面布局→打印区域→取消打印区域”可清除。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "工作表基础",
+    "knowledgePoint": "工作表基本操作、视图与打印",
+    "difficulty": "hard",
+    "tags": [
+      "打印区域",
+      "分页"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-input-01",
+    "type": "single_choice",
+    "question": "在 Excel 单元格中直接输入 1/2 并回车，默认会被识别为（ ）。",
+    "options": {
+      "A": "公式",
+      "B": "分数二分之一",
+      "C": "日期 1 月 2 日",
+      "D": "文本 1/2"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Excel 把形如 a/b 的输入优先识别为日期。若要输入分数，应先输入 0 和一个空格再输入 1/2，或把单元格设为分数格式。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "工作表基础",
+    "knowledgePoint": "数据输入与编辑",
+    "difficulty": "easy",
+    "tags": [
+      "数据输入",
+      "日期识别"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-input-02",
+    "type": "single_choice",
+    "question": "要在单元格中输入保留前导零的编号“001”，正确做法是（ ）。",
+    "options": {
+      "A": "先输入双引号再输入 001",
+      "B": "先输入英文单引号再输入 001",
+      "C": "把单元格设为常规格式后输入 001",
+      "D": "直接输入 001"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "前置英文单引号把内容强制按文本处理；也可先把单元格格式设为“文本”再输入，或用自定义格式 000。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "工作表基础",
+    "knowledgePoint": "数据输入与编辑",
+    "difficulty": "easy",
+    "tags": [
+      "数据输入",
+      "文本格式"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-input-03",
+    "type": "single_choice",
+    "question": "在 Excel 中选中多个单元格后按 Ctrl+Enter，作用是（ ）。",
+    "options": {
+      "A": "向下填充序列",
+      "B": "只填充第一个单元格",
+      "C": "插入回车换行",
+      "D": "在选中的全部单元格中同时填入当前输入的内容"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Ctrl+Enter 把编辑框中的内容一次性写入所有选中单元格，适合批量填充相同值，包括不连续的区域。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "工作表基础",
+    "knowledgePoint": "数据输入与编辑",
+    "difficulty": "medium",
+    "tags": [
+      "批量输入",
+      "快捷键"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-input-04",
+    "type": "single_choice",
+    "question": "拖动填充柄时按住 Ctrl 键，效果通常是（ ）。",
+    "options": {
+      "A": "在复制填充与序列填充之间切换",
+      "B": "打开填充选项菜单",
+      "C": "取消填充操作",
+      "D": "只填充格式"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "对日期、数字等可序列化数据，默认拖动为序列填充，按住 Ctrl 变为复制；对文本默认复制，按住 Ctrl 变为序列。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "工作表基础",
+    "knowledgePoint": "数据输入与编辑",
+    "difficulty": "medium",
+    "tags": [
+      "填充柄",
+      "序列"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-input-05",
+    "type": "single_choice",
+    "question": "自定义序列“甲、乙、丙、丁”后，在单元格输入“甲”并向下拖动填充柄，结果是（ ）。",
+    "options": {
+      "A": "填充为甲1、甲2、甲3",
+      "B": "全部填充为“甲”",
+      "C": "按甲、乙、丙、丁循环填充",
+      "D": "提示无法填充"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "自定义序列保存在 Excel 选项中，填充时按序列顺序循环取值，适合部门、季度、等级等固定枚举值。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "工作表基础",
+    "knowledgePoint": "数据输入与编辑",
+    "difficulty": "hard",
+    "tags": [
+      "自定义序列",
+      "填充"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-format-01",
+    "type": "single_choice",
+    "question": "要让数字显示为“¥1,234.00”的形式，应设置（ ）。",
+    "options": {
+      "A": "字体加粗",
+      "B": "数字格式为“货币”",
+      "C": "数字格式为“常规”",
+      "D": "单元格底纹"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "货币格式提供货币符号、千位分隔符和小数位数设置，只改变显示方式，单元格中存储的仍是原始数值。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "工作表基础",
+    "knowledgePoint": "单元格格式化",
+    "difficulty": "easy",
+    "tags": [
+      "数字格式",
+      "货币"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-format-02",
+    "type": "single_choice",
+    "question": "把 A1 单元格的格式快速复制到其他单元格，应使用（ ）。",
+    "options": {
+      "A": "复制后粘贴",
+      "B": "Ctrl+Z",
+      "C": "条件格式",
+      "D": "开始选项卡中的格式刷"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "格式刷只复制格式不复制内容，单击可刷一次，双击可连续刷多个区域，按 Esc 退出。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "工作表基础",
+    "knowledgePoint": "单元格格式化",
+    "difficulty": "easy",
+    "tags": [
+      "格式刷",
+      "格式复制"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-format-03",
+    "type": "single_choice",
+    "question": "自定义数字格式 0.00;[红色]-0.00 中，分号分隔的两部分分别表示（ ）。",
+    "options": {
+      "A": "整数部分和小数部分",
+      "B": "条件格式和普通格式",
+      "C": "正数的显示格式和负数的显示格式",
+      "D": "文本格式和数值格式"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "自定义格式最多四段，依次为正数、负数、零、文本，用分号分隔；方括号中可指定颜色或条件。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "工作表基础",
+    "knowledgePoint": "单元格格式化",
+    "difficulty": "medium",
+    "tags": [
+      "自定义格式",
+      "数字格式"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-format-04",
+    "type": "single_choice",
+    "question": "条件格式中的“数据条”作用是（ ）。",
+    "options": {
+      "A": "把数值转换为文本",
+      "B": "生成独立图表",
+      "C": "用条形长度直观表示数值的相对大小",
+      "D": "对数据进行排序"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "数据条在单元格内绘制长度与数值成比例的色条，可在不占用额外列的情况下呈现数据分布，属于单元格内可视化。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "工作表基础",
+    "knowledgePoint": "单元格格式化",
+    "difficulty": "medium",
+    "tags": [
+      "条件格式",
+      "数据条"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-format-05",
+    "type": "single_choice",
+    "question": "要让整行数据在 D 列数值大于 100 时整行变色，条件格式的公式应（ ）。",
+    "options": {
+      "A": "使用绝对引用，如 =$D$2>100",
+      "B": "使用锁定列的混合引用，如 =$D2>100",
+      "C": "直接写 =D>100",
+      "D": "使用相对引用，如 =D2>100"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "应用区域为整行时，公式需锁定列、放开行（$D2），使同一行的各单元格都依据该行 D 列判断；$D$2 会让所有行都参照 D2。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "工作表基础",
+    "knowledgePoint": "单元格格式化",
+    "difficulty": "hard",
+    "tags": [
+      "条件格式",
+      "混合引用"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-protect-01",
+    "type": "single_choice",
+    "question": "对工作表执行“保护工作表”后，默认允许用户（ ）。",
+    "options": {
+      "A": "选择单元格但不能修改其内容",
+      "B": "删除工作表",
+      "C": "任意修改单元格内容",
+      "D": "修改工作表名称"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "保护工作表后默认只允许选择和查看，编辑、插入、删除等操作被禁止，可在“允许此工作表的所有用户进行”中逐项放开。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "工作表基础",
+    "knowledgePoint": "工作表保护与版本比较",
+    "difficulty": "easy",
+    "tags": [
+      "保护工作表",
+      "默认权限"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-protect-02",
+    "type": "single_choice",
+    "question": "要防止他人插入、删除或重命名工作表，应（ ）。",
+    "options": {
+      "A": "隐藏工作表标签",
+      "B": "保护工作簿结构",
+      "C": "保护工作表",
+      "D": "设置单元格锁定"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "保护工作簿的“结构”可禁止增删、重命名、移动和隐藏工作表；保护工作表限制的是单元格层面的编辑。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "工作表基础",
+    "knowledgePoint": "工作表保护与版本比较",
+    "difficulty": "easy",
+    "tags": [
+      "保护工作簿",
+      "结构"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-protect-03",
+    "type": "single_choice",
+    "question": "保护工作表时，“允许此工作表的所有用户进行”列表中不会出现（ ）。",
+    "options": {
+      "A": "插入行",
+      "B": "设置列格式",
+      "C": "排序",
+      "D": "删除工作表"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "该列表针对本工作表内的操作，如插入行、设置行列格式、排序、使用自动筛选等；删除工作表属于工作簿级操作。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "工作表基础",
+    "knowledgePoint": "工作表保护与版本比较",
+    "difficulty": "medium",
+    "tags": [
+      "保护工作表",
+      "允许操作"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-protect-04",
+    "type": "single_choice",
+    "question": "设置“允许编辑区域”并保护工作表后，其他区域（ ）。",
+    "options": {
+      "A": "只能查看，不能编辑",
+      "B": "会被自动删除",
+      "C": "会被隐藏",
+      "D": "仍可正常编辑"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "允许编辑区域指定保护状态下仍可输入的范围，可分别设置密码，常用于模板中只开放填写单元格。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "工作表基础",
+    "knowledgePoint": "工作表保护与版本比较",
+    "difficulty": "medium",
+    "tags": [
+      "允许编辑区域",
+      "模板"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-protect-05",
+    "type": "single_choice",
+    "question": "要为工作簿设置打开时需要输入的密码，应使用（ ）。",
+    "options": {
+      "A": "文件→信息→保护工作簿→用密码进行加密",
+      "B": "文件→另存为→工具→常规选项中的只读密码",
+      "C": "审阅→保护工作表",
+      "D": "开发工具→宏安全性"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "“用密码进行加密”设置打开密码，未输入正确密码无法打开文件；另存为中的“修改密码”则只限制编辑。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "工作表基础",
+    "knowledgePoint": "工作表保护与版本比较",
+    "difficulty": "medium",
+    "tags": [
+      "加密",
+      "打开密码"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-protect-06",
+    "type": "single_choice",
+    "question": "“保护工作簿”中“保护结构和窗口”的密码，主要防止（ ）。",
+    "options": {
+      "A": "打印工作表",
+      "B": "插入批注",
+      "C": "修改单元格中的公式",
+      "D": "增删工作表以及改变窗口的大小和位置"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "保护结构限制工作簿内工作表的增删移动，保护窗口限制工作簿窗口的缩放与移动，二者都不涉及单元格内容。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "工作表基础",
+    "knowledgePoint": "工作表保护与版本比较",
+    "difficulty": "medium",
+    "tags": [
+      "保护工作簿",
+      "窗口"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-protect-07",
+    "type": "single_choice",
+    "question": "关于“标记为最终状态”与“保护工作表”，下列说法正确的是（ ）。",
+    "options": {
+      "A": "前者只是提示性只读，后者可以限制具体操作并可设密码",
+      "B": "前者可以设置密码，后者不能",
+      "C": "二者完全等价",
+      "D": "二者都能防止他人修改单元格内容且不可解除"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "标记为最终状态仅让文档以只读方式打开并显示提示，接收者可选择“仍要编辑”；保护工作表则真正禁止指定操作，可配合密码。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "工作表基础",
+    "knowledgePoint": "工作表保护与版本比较",
+    "difficulty": "hard",
+    "tags": [
+      "最终状态",
+      "保护对比"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-protect-08",
+    "type": "single_choice",
+    "question": "Excel 的“共享工作簿”功能主要用于（ ）。",
+    "options": {
+      "A": "允许多人同时编辑同一工作簿并保留修订记录",
+      "B": "把工作簿拆分给多个人分别保存",
+      "C": "限制工作簿只能被一个人打开",
+      "D": "自动备份工作簿到云端"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "共享工作簿是早期协作机制，可记录各人的修订并按需合并；新版 Office 更推荐通过 OneDrive 或 SharePoint 共同创作。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "工作表基础",
+    "knowledgePoint": "工作表保护与版本比较",
+    "difficulty": "hard",
+    "tags": [
+      "共享工作簿",
+      "协作"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-reference-01",
+    "type": "single_choice",
+    "question": "公式中的 $A1 属于（ ）。",
+    "options": {
+      "A": "混合引用，列绝对、行相对",
+      "B": "绝对引用",
+      "C": "混合引用，行绝对、列相对",
+      "D": "相对引用"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "$ 在列标前锁定列、行号前无 $ 表示行可变，因此复制公式时列不变、行随位置变化。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "公式与函数",
+    "knowledgePoint": "单元格引用",
+    "difficulty": "easy",
+    "tags": [
+      "混合引用",
+      "引用类型"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-reference-02",
+    "type": "single_choice",
+    "question": "在编辑栏中选中引用地址后按 F4 键，作用是（ ）。",
+    "options": {
+      "A": "在相对引用、绝对引用和两种混合引用之间循环切换",
+      "B": "删除该引用",
+      "C": "插入函数",
+      "D": "刷新公式结果"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "F4 依次在 A1、$A$1、A$1、$A1 之间循环，是快速切换引用类型最常用的快捷键。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "公式与函数",
+    "knowledgePoint": "单元格引用",
+    "difficulty": "easy",
+    "tags": [
+      "F4",
+      "引用切换"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-reference-03",
+    "type": "single_choice",
+    "question": "要引用 Sheet1 到 Sheet3 三张工作表中 A1 单元格的和，正确的写法是（ ）。",
+    "options": {
+      "A": "=SUM(Sheet1!A1:Sheet3!A1)",
+      "B": "=SUM(Sheet1-A3!A1)",
+      "C": "=SUM(Sheet1:Sheet3!A1)",
+      "D": "=SUM(Sheet1;Sheet3!A1)"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "三维引用用冒号连接起止工作表名，再跟感叹号和单元格地址，表示这组工作表中同一位置的区域。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "公式与函数",
+    "knowledgePoint": "单元格引用",
+    "difficulty": "medium",
+    "tags": [
+      "三维引用",
+      "多表求和"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-reference-04",
+    "type": "single_choice",
+    "question": "为单元格区域定义名称后，名称可以（ ）。",
+    "options": {
+      "A": "替代工作表名称",
+      "B": "在公式中代替单元格地址使用",
+      "C": "自动生成图表",
+      "D": "改变单元格中数据的类型"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "名称是给区域起的别名，在公式中引用名称比引用地址更易读，也可用于数据验证来源和打印区域。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "公式与函数",
+    "knowledgePoint": "单元格引用",
+    "difficulty": "medium",
+    "tags": [
+      "名称",
+      "可读性"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-reference-05",
+    "type": "single_choice",
+    "question": "B2 单元格中的公式为 =A2*$C$1，把它复制到 C3 单元格后，公式变为（ ）。",
+    "options": {
+      "A": "=B3*$C$1",
+      "B": "=A2*$C$1",
+      "C": "=B2*$C$1",
+      "D": "=A3*$C$1"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "复制时相对引用按偏移量平移：从 B2 到 C3 列加 1、行加 1，A2 变为 B3；绝对引用 $C$1 保持不变。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "公式与函数",
+    "knowledgePoint": "单元格引用",
+    "difficulty": "hard",
+    "tags": [
+      "公式复制",
+      "引用偏移"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-link-01",
+    "type": "single_choice",
+    "question": "在 Sheet2 中引用 Sheet1 的 B2 单元格，正确的写法是（ ）。",
+    "options": {
+      "A": "=Sheet1.B2",
+      "B": "=Sheet1!B2",
+      "C": "=B2@Sheet1",
+      "D": "=Sheet1-B2"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "跨表引用格式为“工作表名!单元格地址”，感叹号用于分隔表名与地址。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "公式与函数",
+    "knowledgePoint": "多工作表联动",
+    "difficulty": "easy",
+    "tags": [
+      "跨表引用",
+      "语法"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-link-02",
+    "type": "single_choice",
+    "question": "当工作表名称中含有空格时，引用其单元格应写成（ ）。",
+    "options": {
+      "A": "='一月 数据'!A1",
+      "B": "=一月_数据!A1",
+      "C": "=一月 数据!A1",
+      "D": "=Sheet1!A1"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "表名含空格或特殊字符时须用单引号包裹，否则 Excel 无法确定表名的边界而报错。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "公式与函数",
+    "knowledgePoint": "多工作表联动",
+    "difficulty": "easy",
+    "tags": [
+      "跨表引用",
+      "表名"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-link-03",
+    "type": "single_choice",
+    "question": "同时选中多张工作表形成工作组后，在其中一个工作表输入数据会（ ）。",
+    "options": {
+      "A": "自动新建一张汇总表",
+      "B": "同时写入所有被选中的工作表",
+      "C": "只写入当前工作表",
+      "D": "提示无法输入"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "工作组把多张表当作一个整体编辑，适合批量设置格式或输入相同表头；右键标签“取消组合工作表”可退出。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "公式与函数",
+    "knowledgePoint": "多工作表联动",
+    "difficulty": "medium",
+    "tags": [
+      "工作组",
+      "批量编辑"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-link-04",
+    "type": "single_choice",
+    "question": "在汇总表中汇总多张结构相同的工作表，最简便的做法是（ ）。",
+    "options": {
+      "A": "使用三维引用，如 =SUM(一月:十二月!B2)",
+      "B": "把每张表复制到汇总表",
+      "C": "使用数据验证",
+      "D": "逐张表手工相加"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "三维引用把起止工作表之间的同名区域作为一个整体参与运算，新增工作表只要位于区间内就会自动纳入。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "公式与函数",
+    "knowledgePoint": "多工作表联动",
+    "difficulty": "medium",
+    "tags": [
+      "三维引用",
+      "汇总"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-link-05",
+    "type": "single_choice",
+    "question": "“合并计算”功能汇总多个区域时，可以按（ ）方式合并。",
+    "options": {
+      "A": "只能按位置",
+      "B": "只能按分类",
+      "C": "按位置或按分类",
+      "D": "按颜色"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "按位置要求各区域布局一致；按分类依据行列表头匹配，布局不同也能正确汇总，更灵活但要求标题规范。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "公式与函数",
+    "knowledgePoint": "多工作表联动",
+    "difficulty": "medium",
+    "tags": [
+      "合并计算",
+      "汇总方式"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-link-06",
+    "type": "single_choice",
+    "question": "跨工作簿引用时，如果源工作簿被关闭，公式中会（ ）。",
+    "options": {
+      "A": "把引用转换为数值",
+      "B": "删除该公式",
+      "C": "自动断开引用并显示错误",
+      "D": "自动补上源文件的完整路径"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "源工作簿关闭后，Excel 在引用前加上方括号路径以定位数据；再次打开源文件后可恢复为简短引用。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "公式与函数",
+    "knowledgePoint": "多工作表联动",
+    "difficulty": "medium",
+    "tags": [
+      "跨工作簿",
+      "外部引用"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-link-07",
+    "type": "single_choice",
+    "question": "移动或复制工作表时勾选“建立副本”，结果是（ ）。",
+    "options": {
+      "A": "在原位置保留原表，同时在目标位置生成一个副本",
+      "B": "删除原表",
+      "C": "把原表移动到目标位置",
+      "D": "新建一个空白工作表"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "不勾选“建立副本”是移动，勾选后是复制，原表保留。副本中的公式仍按相对关系调整，跨表引用会指向新表。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "公式与函数",
+    "knowledgePoint": "多工作表联动",
+    "difficulty": "hard",
+    "tags": [
+      "工作表复制",
+      "副本"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-link-08",
+    "type": "single_choice",
+    "question": "关于 INDIRECT 函数，下列说法正确的是（ ）。",
+    "options": {
+      "A": "它不能跨工作表引用",
+      "B": "它把文本字符串转换为单元格引用，可实现动态表名或动态区域引用",
+      "C": "它只能返回数值",
+      "D": "它用于把数值转换为文本"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "INDIRECT(\"Sheet\"&A1&\"!B2\") 可按变量拼接引用地址，实现随选择变化的动态取数，是构建动态报表的常用手段。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "公式与函数",
+    "knowledgePoint": "多工作表联动",
+    "difficulty": "hard",
+    "tags": [
+      "INDIRECT",
+      "动态引用"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-chart-01",
+    "type": "single_choice",
+    "question": "要直观比较各类产品销量占总量的比例，最适合的图表类型是（ ）。",
+    "options": {
+      "A": "折线图",
+      "B": "雷达图",
+      "C": "散点图",
+      "D": "饼图"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "饼图表现部分与整体的构成比例，适合类别不多且需要看占比的场景；折线图适合趋势，散点图适合相关性。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "图表与可视化",
+    "knowledgePoint": "迷你图与图表",
+    "difficulty": "easy",
+    "tags": [
+      "图表类型",
+      "饼图"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-chart-02",
+    "type": "single_choice",
+    "question": "为图表中的数据系列添加一条反映总体变化方向的线，应使用（ ）。",
+    "options": {
+      "A": "数据标签",
+      "B": "趋势线",
+      "C": "误差线",
+      "D": "网格线"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "趋势线用回归方法拟合数据走向，可显示公式和 R² 值，用于判断增长或下降趋势；误差线表示数据的不确定范围。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "图表与可视化",
+    "knowledgePoint": "迷你图与图表",
+    "difficulty": "easy",
+    "tags": [
+      "趋势线",
+      "图表分析"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-chart-03",
+    "type": "single_choice",
+    "question": "两个数据系列的数量级相差很大时，要让二者在同一图表中都清晰可读，应（ ）。",
+    "options": {
+      "A": "为其中一个系列设置次坐标轴",
+      "B": "关闭图例",
+      "C": "删除数值较小的系列",
+      "D": "把图表类型改为饼图"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "次坐标轴为数量级不同的系列提供独立的纵轴刻度，使两条曲线都能充分展开，常用于“金额与增长率”同图展示。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "图表与可视化",
+    "knowledgePoint": "迷你图与图表",
+    "difficulty": "medium",
+    "tags": [
+      "次坐标轴",
+      "图表"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-chart-04",
+    "type": "single_choice",
+    "question": "迷你图与普通图表的主要区别是（ ）。",
+    "options": {
+      "A": "迷你图只能是饼图",
+      "B": "迷你图不能随数据更新",
+      "C": "迷你图放在单个单元格内，只呈现趋势而不显示坐标轴",
+      "D": "迷你图不能引用其他工作表的数据"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "迷你图是单元格背景中的微型图表，有折线、柱形、盈亏三种类型，适合在表格中成列展示趋势，随源数据自动更新。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "图表与可视化",
+    "knowledgePoint": "迷你图与图表",
+    "difficulty": "medium",
+    "tags": [
+      "迷你图",
+      "单元格图表"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-chart-05",
+    "type": "single_choice",
+    "question": "图表的数据源与工作表数据建立链接后，修改工作表中的数据时（ ）。",
+    "options": {
+      "A": "图表会被删除",
+      "B": "图表保持不变，需要重新创建",
+      "C": "需要手动输入新数值",
+      "D": "图表会自动更新"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "图表与数据区域保持链接，数据变化后图形立即重绘；若数据区域扩大，可通过“选择数据”调整引用范围。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "图表与可视化",
+    "knowledgePoint": "迷你图与图表",
+    "difficulty": "medium",
+    "tags": [
+      "图表数据源",
+      "联动"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-chart-06",
+    "type": "single_choice",
+    "question": "把图表复制到另一个工作表后，图表默认（ ）。",
+    "options": {
+      "A": "与数据源断开并变为图片",
+      "B": "仍引用原工作表的数据区域",
+      "C": "改为引用目标工作表的同名区域",
+      "D": "自动删除"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "图表复制后仍绑定原数据源，因此在目标表中看到的是原表数据；若要改绑，可在“选择数据”中重新指定区域。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "图表与可视化",
+    "knowledgePoint": "迷你图与图表",
+    "difficulty": "hard",
+    "tags": [
+      "图表复制",
+      "数据源"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-sort-01",
+    "type": "single_choice",
+    "question": "要把成绩表按总分从高到低排列，应使用（ ）。",
+    "options": {
+      "A": "数据→筛选",
+      "B": "公式→排序函数",
+      "C": "开始→降序按钮对整表生效",
+      "D": "数据→排序，主要关键字选总分并设降序"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "排序对话框可指定主要关键字、次序和是否包含标题；直接点“降序”只对当前列排序，容易造成整行数据错位。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "数据管理",
+    "knowledgePoint": "排序筛选分类汇总",
+    "difficulty": "easy",
+    "tags": [
+      "排序",
+      "降序"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-sort-02",
+    "type": "single_choice",
+    "question": "只显示满足条件的记录、把其余记录暂时隐藏，应使用（ ）。",
+    "options": {
+      "A": "筛选",
+      "B": "排序",
+      "C": "条件格式",
+      "D": "分类汇总"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "筛选按条件隐藏不符合的行而不删除数据，可对多列叠加条件，取消筛选后全部记录恢复显示。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "数据管理",
+    "knowledgePoint": "排序筛选分类汇总",
+    "difficulty": "easy",
+    "tags": [
+      "筛选",
+      "数据管理"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-sort-03",
+    "type": "single_choice",
+    "question": "要按“班级”升序、同班级内按“总分”降序排列，应在排序对话框中（ ）。",
+    "options": {
+      "A": "添加条件行，把总分设为次要关键字",
+      "B": "使用筛选",
+      "C": "使用分类汇总",
+      "D": "分两次分别排序"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "排序对话框支持多关键字，按从上到下的优先级依次比较；先排次要关键字再排主要关键字会破坏前一次结果。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "数据管理",
+    "knowledgePoint": "排序筛选分类汇总",
+    "difficulty": "medium",
+    "tags": [
+      "多关键字排序",
+      "次序"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-sort-04",
+    "type": "single_choice",
+    "question": "高级筛选中，条件区域同一行的多个条件表示（ ）。",
+    "options": {
+      "A": "按顺序依次判断",
+      "B": "逻辑或，满足其一即可",
+      "C": "逻辑非",
+      "D": "逻辑与，需同时满足"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "同一行内的条件之间是“与”关系，不同行之间是“或”关系，这是构造复杂筛选条件的核心规则。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "数据管理",
+    "knowledgePoint": "排序筛选分类汇总",
+    "difficulty": "medium",
+    "tags": [
+      "高级筛选",
+      "条件区域"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-sort-05",
+    "type": "single_choice",
+    "question": "使用分类汇总功能前，必须先（ ）。",
+    "options": {
+      "A": "删除重复项",
+      "B": "按分类字段排序",
+      "C": "创建数据透视表",
+      "D": "设置条件格式"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "分类汇总按相邻的相同值分组统计，若数据未按分类字段排序，相同类别会被拆成多段，汇总结果就会重复且错误。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "数据管理",
+    "knowledgePoint": "排序筛选分类汇总",
+    "difficulty": "medium",
+    "tags": [
+      "分类汇总",
+      "排序前提"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-sort-06",
+    "type": "single_choice",
+    "question": "分类汇总后只想看各级汇总结果、隐藏明细数据，应使用（ ）。",
+    "options": {
+      "A": "筛选",
+      "B": "冻结窗格",
+      "C": "隐藏行命令逐行隐藏",
+      "D": "分级显示左侧的级别按钮"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "分级显示在表格左侧生成 1、2、3 级按钮，点击级别可折叠明细只留汇总行，也可用“显示明细数据/隐藏明细数据”逐个控制。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "数据管理",
+    "knowledgePoint": "排序筛选分类汇总",
+    "difficulty": "hard",
+    "tags": [
+      "分级显示",
+      "明细"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-tools-01",
+    "type": "single_choice",
+    "question": "限制某列只能输入 1 到 100 之间的整数，应使用（ ）。",
+    "options": {
+      "A": "开始→条件格式",
+      "B": "审阅→保护工作表",
+      "C": "数据→数据验证",
+      "D": "公式→定义名称"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "数据验证可限定允许的数据类型与范围，并设置输入提示和出错警告，是保证录入规范最直接的工具。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "数据管理",
+    "knowledgePoint": "数据验证、分列与合并计算",
+    "difficulty": "easy",
+    "tags": [
+      "数据验证",
+      "输入限制"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-tools-02",
+    "type": "single_choice",
+    "question": "把一列“姓名-电话”合并内容拆成两列，应使用（ ）。",
+    "options": {
+      "A": "数据→分列",
+      "B": "数据→删除重复项",
+      "C": "开始→合并后居中",
+      "D": "公式→分列函数"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "分列按分隔符号或固定宽度把一列文本拆成多列，适合处理从系统导出的拼接字段。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "数据管理",
+    "knowledgePoint": "数据验证、分列与合并计算",
+    "difficulty": "easy",
+    "tags": [
+      "分列",
+      "数据整理"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-tools-03",
+    "type": "single_choice",
+    "question": "数据验证中设置“输入信息”的作用是（ ）。",
+    "options": {
+      "A": "选中该单元格时显示提示文字，说明应输入什么",
+      "B": "自动填充默认值",
+      "C": "出错时阻止输入",
+      "D": "限制输入值的范围"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "“输入信息”是操作引导，“出错警告”才是违规时的拦截；二者配合可在录入时既提示又校验。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "数据管理",
+    "knowledgePoint": "数据验证、分列与合并计算",
+    "difficulty": "medium",
+    "tags": [
+      "数据验证",
+      "输入信息"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-tools-04",
+    "type": "single_choice",
+    "question": "数据验证中“序列”的来源可以是（ ）。",
+    "options": {
+      "A": "只能是一个单元格",
+      "B": "只能是另一个工作簿",
+      "C": "单元格区域，或直接键入以逗号分隔的列表",
+      "D": "只能是公式结果"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "序列来源既可引用区域（便于统一维护选项），也可直接键入“男,女”这样的固定列表，还支持跨表引用。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "数据管理",
+    "knowledgePoint": "数据验证、分列与合并计算",
+    "difficulty": "medium",
+    "tags": [
+      "数据验证",
+      "序列"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-tools-05",
+    "type": "single_choice",
+    "question": "“删除重复项”功能的效果是（ ）。",
+    "options": {
+      "A": "删除所有含有重复值的单元格",
+      "B": "把重复值标记为红色",
+      "C": "删除所选列组合完全相同的行，保留首次出现的记录",
+      "D": "只保留重复的行"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "删除重复项按所选列的组合判断重复，保留第一条，其余整行删除；执行前应确认列选择范围，避免误删。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "数据管理",
+    "knowledgePoint": "数据验证、分列与合并计算",
+    "difficulty": "medium",
+    "tags": [
+      "删除重复项",
+      "数据清理"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-tools-06",
+    "type": "single_choice",
+    "question": "“合并计算”中按分类合并要求（ ）。",
+    "options": {
+      "A": "各区域的行列标题一致",
+      "B": "各区域的单元格数量必须相等",
+      "C": "各区域必须在同一工作表",
+      "D": "各区域的数据必须完全相同"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "按分类合并依据行标签和列标签匹配数据，因此标题必须规范一致；标题不一致的数据会被当作新类别单独列出。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "数据管理",
+    "knowledgePoint": "数据验证、分列与合并计算",
+    "difficulty": "medium",
+    "tags": [
+      "合并计算",
+      "按分类"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-tools-07",
+    "type": "single_choice",
+    "question": "分列时选择“固定宽度”，适用于（ ）。",
+    "options": {
+      "A": "每列字符位置固定的文本",
+      "B": "以制表符分隔的文本",
+      "C": "以逗号分隔的文本",
+      "D": "长度不固定的文本"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "固定宽度按字符位置切分，适合编码规则固定（如身份证前 6 位地区码）的数据；有分隔符时应选“分隔符号”。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "数据管理",
+    "knowledgePoint": "数据验证、分列与合并计算",
+    "difficulty": "hard",
+    "tags": [
+      "分列",
+      "固定宽度"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-pivot-01",
+    "type": "single_choice",
+    "question": "数据透视表的值区域放入数值字段后，默认的汇总方式是（ ）。",
+    "options": {
+      "A": "计数",
+      "B": "求和",
+      "C": "最大值",
+      "D": "平均值"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "数值字段默认求和，文本字段默认计数。可在“值字段设置”中改为计数、平均值、最大值等计算类型。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "数据管理",
+    "knowledgePoint": "数据透视表与数据透视图",
+    "difficulty": "easy",
+    "tags": [
+      "数据透视表",
+      "汇总方式"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-pivot-02",
+    "type": "single_choice",
+    "question": "要在数据透视表顶部按某个字段筛选数据，应把该字段拖到（ ）。",
+    "options": {
+      "A": "行区域",
+      "B": "值区域",
+      "C": "筛选区域",
+      "D": "列区域"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "透视表有筛选、行、列、值四个区域，筛选区域在表格上方生成下拉筛选器，用于整体过滤数据范围。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "数据管理",
+    "knowledgePoint": "数据透视表与数据透视图",
+    "difficulty": "easy",
+    "tags": [
+      "数据透视表",
+      "区域"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-pivot-03",
+    "type": "single_choice",
+    "question": "要把透视表中某数值字段的汇总方式从求和改为计数，应（ ）。",
+    "options": {
+      "A": "重新插入透视表",
+      "B": "修改源数据",
+      "C": "在行区域添加字段",
+      "D": "在值字段设置中选择计算类型为计数"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "值字段设置提供“汇总方式”和“值显示方式”两类选项，前者改变计算类型，后者改变呈现为占比、累计等。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "数据管理",
+    "knowledgePoint": "数据透视表与数据透视图",
+    "difficulty": "medium",
+    "tags": [
+      "值字段设置",
+      "计算类型"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-pivot-04",
+    "type": "single_choice",
+    "question": "源数据修改后，数据透视表（ ）。",
+    "options": {
+      "A": "会自动重建为新表",
+      "B": "会提示重新插入",
+      "C": "会自动实时更新",
+      "D": "需要手动刷新才会更新"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "透视表保存的是生成时的汇总结果，源数据变化后需右键“刷新”或使用“全部刷新”；也可设置打开文件时自动刷新。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "数据管理",
+    "knowledgePoint": "数据透视表与数据透视图",
+    "difficulty": "medium",
+    "tags": [
+      "刷新",
+      "数据透视表"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-pivot-05",
+    "type": "single_choice",
+    "question": "切片器在数据透视表中的作用是（ ）。",
+    "options": {
+      "A": "提供按钮式筛选，并可与多个透视表联动",
+      "B": "自动排序数据",
+      "C": "美化表格边框",
+      "D": "生成计算字段"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "切片器把筛选条件做成可视化按钮，通过“报表连接”可同时控制多张透视表，是制作交互式看板的常用组件。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "数据管理",
+    "knowledgePoint": "数据透视表与数据透视图",
+    "difficulty": "medium",
+    "tags": [
+      "切片器",
+      "交互筛选"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-pivot-06",
+    "type": "single_choice",
+    "question": "数据透视图与数据透视表的关系是（ ）。",
+    "options": {
+      "A": "透视图只能使用饼图",
+      "B": "二者共享同一数据源与筛选状态",
+      "C": "透视图与透视表完全无关",
+      "D": "透视图不能筛选"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "数据透视图由透视表生成，字段布局和筛选联动，在图上筛选时透视表同步变化，二者是一套分析结果的两个视图。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "数据管理",
+    "knowledgePoint": "数据透视表与数据透视图",
+    "difficulty": "medium",
+    "tags": [
+      "数据透视图",
+      "联动"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-pivot-07",
+    "type": "single_choice",
+    "question": "在不修改源数据的前提下，要在数据透视表中新增“单价×数量”的计算结果，应使用（ ）。",
+    "options": {
+      "A": "在值区域放两个字段",
+      "B": "使用条件格式",
+      "C": "在源数据中新增一列",
+      "D": "数据透视表分析→字段、项目和集→计算字段"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "计算字段在透视表内部按公式组合已有字段，无需改动源数据，刷新后随源数据自动重算。若在源数据中新增列再刷新也能得到结果，但那属于修改源表，不符合题干“不修改源数据”的限制。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "数据管理",
+    "knowledgePoint": "数据透视表与数据透视图",
+    "difficulty": "hard",
+    "tags": [
+      "计算字段",
+      "数据透视表"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-whatif-01",
+    "type": "single_choice",
+    "question": "已知公式的结果，要反推使结果达到目标的输入值，应使用（ ）。",
+    "options": {
+      "A": "模拟运算表",
+      "B": "数据透视表",
+      "C": "方案管理器",
+      "D": "单变量求解"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "单变量求解通过迭代调整一个可变单元格，使目标单元格达到指定值，常用于反推保本销量、目标成本等。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "高级分析",
+    "knowledgePoint": "模拟分析与预测",
+    "difficulty": "easy",
+    "tags": [
+      "单变量求解",
+      "逆算"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-whatif-02",
+    "type": "single_choice",
+    "question": "要观察一个输入变量取不同值时公式结果的变化，应使用（ ）。",
+    "options": {
+      "A": "数据验证",
+      "B": "模拟运算表",
+      "C": "单变量求解",
+      "D": "分类汇总"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "模拟运算表把一组输入值批量代入公式，生成对应的结果表，适合制作利率、单价等敏感性分析。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "高级分析",
+    "knowledgePoint": "模拟分析与预测",
+    "difficulty": "easy",
+    "tags": [
+      "模拟运算表",
+      "敏感性分析"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-whatif-03",
+    "type": "single_choice",
+    "question": "Excel 的模拟运算表最多可以处理（ ）个变量。",
+    "options": {
+      "A": "2 个",
+      "B": "3 个",
+      "C": "1 个",
+      "D": "不限个数"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "模拟运算表分单变量和双变量两种，双变量用行标题和列标题分别代表两个可变单元格的取值，超过两个变量需借助方案管理器。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "高级分析",
+    "knowledgePoint": "模拟分析与预测",
+    "difficulty": "medium",
+    "tags": [
+      "模拟运算表",
+      "变量个数"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-whatif-04",
+    "type": "single_choice",
+    "question": "方案管理器的主要作用是（ ）。",
+    "options": {
+      "A": "按条件筛选数据",
+      "B": "生成数据透视表",
+      "C": "保存多组输入值，并可切换查看各方案的计算结果",
+      "D": "自动求解最优输入值"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "方案管理器为同一模型保存“乐观”“保守”等多组假设值，切换方案即可查看对应结果，并可生成方案摘要报告。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "高级分析",
+    "knowledgePoint": "模拟分析与预测",
+    "difficulty": "medium",
+    "tags": [
+      "方案管理器",
+      "多方案"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-whatif-05",
+    "type": "single_choice",
+    "question": "使用单变量求解时必须指定的三个要素是（ ）。",
+    "options": {
+      "A": "目标单元格、目标值、可变单元格",
+      "B": "行字段、列字段、值字段",
+      "C": "数据区域、条件区域、复制到",
+      "D": "源数据、图表类型、坐标轴"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "目标单元格是含公式的单元格，目标值是希望达到的结果，可变单元格是允许调整的输入单元格，三者缺一不可。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "高级分析",
+    "knowledgePoint": "模拟分析与预测",
+    "difficulty": "medium",
+    "tags": [
+      "单变量求解",
+      "三要素"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-whatif-06",
+    "type": "single_choice",
+    "question": "“预测工作表”功能基于历史数据生成（ ）。",
+    "options": {
+      "A": "随机数表",
+      "B": "数据透视表",
+      "C": "条件格式规则",
+      "D": "带置信区间的未来趋势预测及对应图表"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "预测工作表使用指数平滑等时间序列方法，输出预测值、上下置信界限和折线图，适合有规律的时间序列数据。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "高级分析",
+    "knowledgePoint": "模拟分析与预测",
+    "difficulty": "medium",
+    "tags": [
+      "预测工作表",
+      "时间序列"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-whatif-07",
+    "type": "single_choice",
+    "question": "模拟运算表生成的结果区域（ ）。",
+    "options": {
+      "A": "与公式完全无关",
+      "B": "只能查看不能复制",
+      "C": "可以逐格自由编辑",
+      "D": "是一个数组，不能单独修改其中某个单元格"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "模拟运算表的结果以数组公式形式存在，整块区域是一个整体，删除或修改须整体操作，否则会提示无法更改数组的某一部分。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "高级分析",
+    "knowledgePoint": "模拟分析与预测",
+    "difficulty": "hard",
+    "tags": [
+      "模拟运算表",
+      "数组"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-whatif-08",
+    "type": "single_choice",
+    "question": "双变量模拟运算表的行标题和列标题分别对应（ ）。",
+    "options": {
+      "A": "两个工作表名称",
+      "B": "两个图表系列",
+      "C": "两个可变单元格的不同取值",
+      "D": "两个结果值"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "双变量模拟运算表在行方向和列方向各放一组输入值，交叉单元格显示两个变量组合下的公式结果，形成二维敏感性矩阵。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "高级分析",
+    "knowledgePoint": "模拟分析与预测",
+    "difficulty": "hard",
+    "tags": [
+      "双变量",
+      "模拟运算表"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-external-01",
+    "type": "single_choice",
+    "question": "把网页中的表格数据导入 Excel，应使用（ ）。",
+    "options": {
+      "A": "审阅→比较",
+      "B": "数据→获取数据→自网站",
+      "C": "公式→定义名称",
+      "D": "插入→超链接"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "“自网站”可识别页面中的表格并导入为可刷新的查询，源页面更新后刷新即可同步，比手工复制更可靠。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "高级分析",
+    "knowledgePoint": "外部数据与 Power Pivot",
+    "difficulty": "easy",
+    "tags": [
+      "外部数据",
+      "网页导入"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-external-02",
+    "type": "single_choice",
+    "question": "从文本文件导入数据时，通常需要指定（ ）。",
+    "options": {
+      "A": "工作表保护密码",
+      "B": "字体和字号",
+      "C": "图表类型",
+      "D": "分隔符号或固定宽度"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "文本文件没有列结构信息，必须由用户说明各列如何划分，Excel 才能正确拆分为多列。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "高级分析",
+    "knowledgePoint": "外部数据与 Power Pivot",
+    "difficulty": "easy",
+    "tags": [
+      "文本导入",
+      "分隔符"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-external-03",
+    "type": "single_choice",
+    "question": "Power Query 的主要作用是（ ）。",
+    "options": {
+      "A": "获取、转换和加载来自多种数据源的数据",
+      "B": "绘制图表",
+      "C": "设置单元格格式",
+      "D": "编写 VBA 宏"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Power Query 提供可视化的数据清洗流程，可合并、拆分、逆透视、追加查询，处理步骤被记录并可重复刷新。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "高级分析",
+    "knowledgePoint": "外部数据与 Power Pivot",
+    "difficulty": "medium",
+    "tags": [
+      "Power Query",
+      "数据转换"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-external-04",
+    "type": "single_choice",
+    "question": "在 Power Pivot 中建立表间关系的作用是（ ）。",
+    "options": {
+      "A": "自动生成数据透视表",
+      "B": "让多张表像一张宽表一样关联分析",
+      "C": "把多张表合并成一个工作表",
+      "D": "压缩工作簿体积"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "关系基于共同字段把事实表与维度表连接，透视时可直接跨表取字段，避免用 VLOOKUP 反复拼接宽表。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "高级分析",
+    "knowledgePoint": "外部数据与 Power Pivot",
+    "difficulty": "medium",
+    "tags": [
+      "Power Pivot",
+      "关系"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-external-05",
+    "type": "single_choice",
+    "question": "导入的外部数据源发生更新后，Excel 中可通过（ ）同步最新数据。",
+    "options": {
+      "A": "重新打开工作簿",
+      "B": "执行“删除重复项”",
+      "C": "重新插入一次查询",
+      "D": "“数据”选项卡中的“全部刷新”"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "查询与外部源保持连接，刷新时重新执行查询步骤并更新结果区域，无需重新建立连接。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "高级分析",
+    "knowledgePoint": "外部数据与 Power Pivot",
+    "difficulty": "medium",
+    "tags": [
+      "刷新",
+      "外部数据"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-external-06",
+    "type": "single_choice",
+    "question": "Power Query 中的“逆透视列”作用是（ ）。",
+    "options": {
+      "A": "把多列宽表转换为“属性-值”两列的长表",
+      "B": "删除重复列",
+      "C": "把两列长表转换为多列宽表",
+      "D": "按列排序"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "逆透视把列标题转为数据值，得到适合透视分析的一维表结构，是整理交叉表、月度宽表的常用步骤。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "高级分析",
+    "knowledgePoint": "外部数据与 Power Pivot",
+    "difficulty": "medium",
+    "tags": [
+      "逆透视",
+      "Power Query"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-external-07",
+    "type": "single_choice",
+    "question": "Power Pivot 中度量值使用的公式语言是（ ）。",
+    "options": {
+      "A": "DAX",
+      "B": "VBA",
+      "C": "SQL",
+      "D": "M 语言"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "DAX 面向列式数据模型，提供 CALCULATE、FILTER、时间智能等函数；M 语言用于 Power Query 的查询步骤。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "高级分析",
+    "knowledgePoint": "外部数据与 Power Pivot",
+    "difficulty": "hard",
+    "tags": [
+      "DAX",
+      "度量值"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-macro-01",
+    "type": "single_choice",
+    "question": "在 Excel 中录制宏后，宏以（ ）形式保存。",
+    "options": {
+      "A": "图片",
+      "B": "VBA 代码",
+      "C": "独立的可执行文件",
+      "D": "纯文本说明"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "录制过程被翻译为 VBA 过程存放在模块中，可在 VBA 编辑器中查看、修改和调试，也可绑定到按钮或快捷键。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "高级分析",
+    "knowledgePoint": "控件宏与素材分析",
+    "difficulty": "easy",
+    "tags": [
+      "宏",
+      "VBA"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-macro-02",
+    "type": "single_choice",
+    "question": "要在功能区显示“开发工具”选项卡，应（ ）。",
+    "options": {
+      "A": "视图→宏",
+      "B": "插入→加载项",
+      "C": "文件→选项→自定义功能区→勾选“开发工具”",
+      "D": "审阅→保护工作簿"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "“开发工具”默认隐藏，需在自定义功能区中勾选；它集中提供宏、控件、加载项和 XML 等高级功能。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "高级分析",
+    "knowledgePoint": "控件宏与素材分析",
+    "difficulty": "easy",
+    "tags": [
+      "开发工具",
+      "功能区"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-macro-03",
+    "type": "single_choice",
+    "question": "窗体控件中的“组合框”适合用于（ ）。",
+    "options": {
+      "A": "显示滚动条数值",
+      "B": "从下拉列表中选择一项",
+      "C": "输入任意长文本",
+      "D": "插入图片"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "组合框（下拉框）把可选值列成列表供选择，配合单元格链接可返回所选序号，常用于制作交互式报表的筛选入口。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "高级分析",
+    "knowledgePoint": "控件宏与素材分析",
+    "difficulty": "medium",
+    "tags": [
+      "表单控件",
+      "组合框"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-macro-04",
+    "type": "single_choice",
+    "question": "要把已录制的宏指定给工作表中的按钮，应（ ）。",
+    "options": {
+      "A": "右键单击按钮→指定宏",
+      "B": "双击按钮进入编辑",
+      "C": "在名称框中输入宏名",
+      "D": "把宏代码复制到单元格"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "插入形状或表单按钮后右键“指定宏”，单击按钮即执行对应过程；也可通过“开发工具→插入→按钮”直接创建并绑定。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "高级分析",
+    "knowledgePoint": "控件宏与素材分析",
+    "difficulty": "medium",
+    "tags": [
+      "按钮",
+      "指定宏"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-macro-05",
+    "type": "single_choice",
+    "question": "Excel 宏安全性设为“禁用所有宏，并发出通知”时，打开含宏的工作簿会（ ）。",
+    "options": {
+      "A": "自动删除宏",
+      "B": "直接运行所有宏",
+      "C": "显示安全警告栏，由用户决定是否启用内容",
+      "D": "拒绝打开工作簿"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "该级别阻止宏自动执行但保留启用入口，是默认推荐设置；启用后本次会话内宏可正常运行。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "高级分析",
+    "knowledgePoint": "控件宏与素材分析",
+    "difficulty": "medium",
+    "tags": [
+      "宏安全性",
+      "启用内容"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-macro-06",
+    "type": "single_choice",
+    "question": "包含 VBA 宏的 Excel 工作簿应保存为（ ）格式。",
+    "options": {
+      "A": ".xlsm",
+      "B": ".csv",
+      "C": ".xlsx",
+      "D": ".xls"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": ".xlsm 是启用宏的工作簿格式；.xlsx 保存时会提示并剥离宏代码，导致下次打开宏丢失。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "高级分析",
+    "knowledgePoint": "控件宏与素材分析",
+    "difficulty": "medium",
+    "tags": [
+      "xlsm",
+      "宏保存"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-macro-07",
+    "type": "single_choice",
+    "question": "关于 Excel 的“个人宏工作簿”，下列说法正确的是（ ）。",
+    "options": {
+      "A": "它不能存放 VBA 代码",
+      "B": "它只能在一个工作簿中使用",
+      "C": "它必须保存为 .xlsx",
+      "D": "它保存为 PERSONAL.XLSB，其中的宏对所有打开的工作簿可用"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "个人宏工作簿在 Excel 启动时自动以隐藏方式打开，适合存放跨工作簿复用的通用宏；录制时可选择保存到该工作簿。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "高级分析",
+    "knowledgePoint": "控件宏与素材分析",
+    "difficulty": "hard",
+    "tags": [
+      "个人宏工作簿",
+      "PERSONAL.XLSB"
+    ]
+  },
+  {
+    "id": "ncre-office-excel-macro-08",
+    "type": "single_choice",
+    "question": "仅用宏录制器无法完成的操作是（ ）。",
+    "options": {
+      "A": "需要条件判断和循环的复杂逻辑",
+      "B": "插入工作表",
+      "C": "设置单元格字体颜色",
+      "D": "复制粘贴数据"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "录制器只能忠实记录已执行的动作，无法表达“如果…就…”“重复直到…”等逻辑，这类需求必须在 VBA 编辑器中手工编写代码。",
+    "chapter": "Excel 数据处理",
+    "knowledgeSection": "高级分析",
+    "knowledgePoint": "控件宏与素材分析",
+    "difficulty": "hard",
+    "tags": [
+      "宏录制",
+      "局限性"
+    ]
+  }
+]

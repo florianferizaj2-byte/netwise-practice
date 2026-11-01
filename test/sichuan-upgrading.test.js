@@ -20,11 +20,12 @@ test("Sichuan scope reuses one canonical question with separate classifications 
   const all = bundledQuestions();
   const scoped = all.filter((question) => question.certificates.includes(certificateId));
   const shared = scoped.filter((question) => question.certificateScopes?.[certificateId]);
-  // 100 道原创练习 + 1020 道章节强化练习 + 45 道共用题 + 61 道西昌学院 2011 真题（用户提供）
-  assert.equal(scoped.length, 1226);
+  // 100 道原创练习 + 1020 道章节强化练习 + 138 道考点补强 + 45 道共用题 + 61 道西昌学院 2011 真题（用户提供）
+  assert.equal(scoped.length, 1364);
   assert.equal(shared.length, 45);
   assert.equal(scoped.filter((question) => question.id.startsWith("sc-upgrading-computer-")).length, 100);
   assert.equal(scoped.filter((question) => question.id.startsWith("sc-upgrading-supplement-")).length, 1020);
+  assert.equal(scoped.filter((question) => question.id.startsWith("sc-2610-")).length, 138);
   assert.equal(scoped.filter((question) => question.id.startsWith("sc-2011-xichang-")).length, 61);
   assert.equal(all.filter((question) => question.id === originalId).length, 1);
   assert.deepEqual([...new Set(scoped.map((question) => questionForCertificate(question, certificateId).chapter))].sort(), certificate.syllabus.modules.map((module) => module.name).sort());
@@ -74,11 +75,11 @@ test("Sichuan selection, filtered practice, shared progress, wrong answers and e
   assert.ok(registration.certificates.some((entry) => entry.id === certificateId));
   await request("/auth/certificate", { certificateId }, "PUT");
   const catalog = await request("/practice/catalog");
-  assert.equal(catalog.total, 1226);
+  assert.equal(catalog.total, 1364);
   assert.equal(catalog.chapters.length, 7);
-  assert.equal(catalog.chapters.find((chapter) => chapter.name === "办公自动化").questionCount, 508);
+  assert.equal(catalog.chapters.find((chapter) => chapter.name === "办公自动化").questionCount, 558);
   const questions = await request("/questions?bankOnly=1&chapter=" + encodeURIComponent("办公自动化"));
-  assert.equal(questions.length, 508);
+  assert.equal(questions.length, 558);
   assert.ok(questions.every((question) => question.chapter === "办公自动化"));
   assert.ok(questions.some((question) => question.id === originalId));
   const current = await request(`/questions/${originalId}`);
@@ -101,7 +102,7 @@ test("Sichuan selection, filtered practice, shared progress, wrong answers and e
   assert.equal(original.chapter, "Word 文档处理");
   assert.equal(original.source, "syllabus_practice");
   assert.equal(original.attempted, true, "the same question keeps its existing learning record");
-  assert.equal((await request("/practice/catalog")).total, 180);
+  assert.equal((await request("/practice/catalog")).total, 519);
   await request("/auth/certificate", { certificateId }, "PUT");
   // 指定章节组卷时 /api/exams 的上限为 100 道（无章节的整卷蓝图上限不同），
   // 该章节现有题量已远超此上限，因此按上限组卷。

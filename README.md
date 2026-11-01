@@ -2,7 +2,7 @@
 
 考匠（AceExam，Ace + Exam）是一个面向职业认证与升学考试的练习与模拟平台。用户共用作者提供的 AI 服务，根据错题生成针对性变式题，并按功能消耗账号额度；通过审核的题目可以分享给同证书的其他用户，让题库在使用过程中持续增长。
 
-**分支预发行 Android v1.0.10（构建 43）** · [APK](public/downloads/kaojiang-v1.0.10.apk) · [SHA-256](public/downloads/kaojiang-v1.0.10.apk.sha256) · [更新说明](docs/release-v1.0.10.md)。错题可选择删除或保留；普通刷题右滑跳过、语音包快捷配置与续刷。沿用正式签名，安装、推送和部署分别验证。
+**分支预发行 Android v1.0.12（构建 45）** · [APK](public/downloads/kaojiang-v1.0.12.apk) · [SHA-256](public/downloads/kaojiang-v1.0.12.apk.sha256) · [更新说明](docs/release-v1.0.12.md)。安装兼容重打包，沿用正式证书；保留 v1.0.11 的 AI 学习中心与逐题组卷。安装、推送和部署分别验证。
 
 **最近 GitHub Release：Android v1.0.3** · [下载 APK](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v1.0.3/kaojiang-v1.0.3.apk) · [GitHub 发布页](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v1.0.3) · [SHA-256](public/downloads/kaojiang-v1.0.3.apk.sha256) · [更新与部署说明](docs/release-v1.0.3.md)。正式签名，包含负积分结算与即时答题。
 
@@ -41,11 +41,14 @@ VIP「AI 精讲与练习」包含逐课讲解、填空练习、短答 AI 老师�
 当前内置：
 
 - 软考中级网络工程师：1,182 道题
-- HCIA-Datacom V2.0：400 道题
-- 全国计算机等级考试二级 MS Office：180 道题（33 道大纲练习 + 147 道用户提供未核验汇编）
+- HCIA-Datacom V2.0：1,020 道题
+- HCIP-Datacom-Core Technology（H12-821）：900 道题
+- HCIP-Datacom-Advanced Routing & Switching Technology（H12-831）：900 道题
+- 全国计算机等级考试二级 MS Office：519 道题（496 道客观题 + 23 道操作题）
+- 全国计算机等级考试二级 C 语言程序设计：560 道题
 - 全国执业兽医资格考试（兽医全科类）：已导入 7,888 道可发布题目，另有 2,577 道待核对
-- 四川省专升本计算机基础：206 道题（100 道原创练习 + 45 道现有题库共用题 + 61 道西昌学院 2011 年真题），包含 7 个考纲模块及知识点、考点与练习建议；见[模块说明](docs/sichuan-upgrading-computer.md)
-- 共 9,811 道内置唯一题目，共用题只入库一次，题库启动时自动校验并同步到 SQLite
+- 四川省专升本计算机基础：1,364 道题（100 道原创练习 + 1,020 道章节强化练习 + 138 道考点补强 + 45 道现有题库共用题 + 61 道西昌学院 2011 年真题），包含 7 个考纲模块及知识点、考点与练习建议；见[模块说明](docs/sichuan-upgrading-computer.md)
+- 共 14,288 道内置唯一题目，共用题只入库一次，题库启动时自动校验并同步到 SQLite
 
 ## 最近发布 · 2026-10-09 · v0.4.2
 

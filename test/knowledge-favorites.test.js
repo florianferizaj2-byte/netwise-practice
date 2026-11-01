@@ -152,7 +152,6 @@ test("free learners can save public knowledge identities without reading paid an
   assert.equal((await f.req("/knowledge-favorites")).data[0].id, item.id);
   for (const certificate of [
     "hcia-datacom",
-    "ncre-ms-office",
     "veterinary-practitioner",
   ]) {
     f.store.selectCertificate(f.users[0].id, certificate);
@@ -164,6 +163,15 @@ test("free learners can save public knowledge identities without reading paid an
     );
     assert.deepEqual(c.nodes, []);
   }
+  // MS Office 已建立三级知识目录，知识点可收藏；节点数等于目录叶节点数。
+  f.store.selectCertificate(f.users[0].id, "ncre-ms-office");
+  const officeCatalog = (await f.req("/knowledge-favorites/catalog")).data;
+  assert.equal(officeCatalog.supported, true);
+  assert.equal(officeCatalog.nodes.length, 60);
+  assert.ok(officeCatalog.nodes.every((node) => node.kind === "point"));
+  assert.ok(
+    officeCatalog.nodes.some((node) => node.title === "邮件合并"),
+  );
   assert.deepEqual(
     f.store.db.prepare("SELECT * FROM user_usage").all(),
     beforeUsage,
