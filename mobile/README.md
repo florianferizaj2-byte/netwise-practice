@@ -37,7 +37,9 @@ npm start
 
 - Android 真机安装 Expo Go，扫描终端二维码；
 - 已安装 Android Studio 时，可以按 `a` 启动 Android 模拟器；
-- 需要连接真实后端时，复制 `.env.example` 为 `.env.local`，将 `EXPO_PUBLIC_API_URL` 改成电脑在局域网中的地址。
+- 需要连接真实后端时，复制 `.env.example` 为 `.env.local`，将 `EXPO_PUBLIC_API_URL` 改成电脑在局域网中的地址；`EXPO_PUBLIC_API_FALLBACK_URL` 可留空。
+
+正式包默认首选 IPv6 直连 `https://direct.aceexam.top:8443/api`（该域名只有 AAAA 记录），首个请求前会用 `/api/mobile/version` 探测一次，连不上则整场会话自动回落到 `https://aceexam.top/api`；网页端始终使用当前站点同源地址，不参与回落。
 
 App 保留开发期“进入预览模式”入口，用于查看动画和页面结构；真实登录通过移动端 Bearer 会话接入，证书选择后会请求首页学习数据。当前构建目标为 `kaojiang-v1.0.3.apk`。启动时会后台请求 `/api/mobile/version`，低于服务端最低版本的旧 App 会强制显示最新版下载页；旧客户端调用受保护的移动端 API 也会被服务端拒绝并返回下载地址。
 

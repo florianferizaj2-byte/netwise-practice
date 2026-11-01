@@ -4,6 +4,7 @@ import * as FS from 'expo-file-system/legacy';
 import { createAudioPlayer } from 'expo-audio';
 import { appRuntime } from '../modules/app-runtime';
 import { API_BASE_URL, mobileApi } from './api/client';
+import { resolveApiUrl } from './api/endpoint';
 import {
   voiceAssetUrl,
   type VoicePackManifest,
@@ -95,7 +96,7 @@ async function prepare(
       throw Error('本地语音空间已满，请先删除不常用语音包');
     const temp = file + '.' + Date.now() + '.part',
       request = FS.createDownloadResumable(
-        voiceAssetUrl(API_BASE_URL, asset),
+        voiceAssetUrl(resolveApiUrl(API_BASE_URL), asset),
         temp,
         {},
       );

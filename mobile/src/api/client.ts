@@ -6,16 +6,14 @@ import { fetch as streamingFetch } from 'expo/fetch';
 import { ResourceCache, CacheCancelledError } from './resourceCache';
 import { persistentStudyData, studyCachePolicy } from './cachePolicy';
 import { ApiError, fetchJson } from './transport';
+import { API_BASE_URL, apiAssetOrigin, resolveApiUrl } from './endpoint';
 import type { VoicePackCatalog, VoicePackManifest } from './voicePacks';
 import type { StudyCatalog, StudyLesson, StudySession, StudyAttempt, StudyTeacherMessage, StudyTeacherAnswer, StudyTeacherRequest } from './studyTypes';
 import { studyRequestId } from './studyTypes';
 import type { Announcement } from '../announcements/client';
 import type { BackendContract } from './backendContract';
 export { ApiError } from './transport';
-
-export const API_BASE_URL =
-  process.env.EXPO_PUBLIC_API_URL ||
-  (typeof document !== 'undefined' ? `${window.location.origin}/api` : 'https://aceexam.top/api');
+export { API_BASE_URL, API_BASES, API_FALLBACK_URL } from './endpoint';
 
 export type AppVersionResponse = {
   backend?: BackendContract;
@@ -251,7 +249,7 @@ async function streamRequest<T>(
     }
     timer = setTimeout(() => controller.abort(), 240000);
     sent = true;
-    const response = await streamingFetch(`${API_BASE_URL}${path}`, {
+    const response = await streamingFetch(resolveApiUrl(`${API_BASE_URL}${path}`), {
       method: 'POST',
       credentials: 'omit',
       headers: {
@@ -723,7 +721,7 @@ export const mobileApi = {
 
   resolveDownloadUrl(url: string) {
     if (/^https?:\/\//i.test(url)) return url;
-    const origin = API_BASE_URL.replace(/\/api\/?$/, '');
+    const origin = apiAssetOrigin();
     return `${origin}${url.startsWith('/') ? url : `/${url}`}`;
   },
 
@@ -945,7 +943,7 @@ export const mobileApi = {
     let lastByte=Date.now();
     const watchdog=setInterval(()=>{if(Date.now()-lastByte>45000)controller.abort();},5000);
     try {
-      const response=await streamingFetch(API_BASE_URL+'/ai-learning/jobs/'+encodeURIComponent(id)+'/events?after='+after,{
+      const response=await streamingFetch(resolveApiUrl(API_BASE_URL+'/ai-learning/jobs/'+encodeURIComponent(id)+'/events?after='+after),{
         headers:{Accept:'text/event-stream','X-Client':'mobile','X-App-Version':APP_VERSION,...(token?{Authorization:'Bearer '+token}:{})},
         credentials:'omit',signal:controller.signal,
       });
@@ -1201,7 +1199,7 @@ export const mobileApi = {
 
   communityImageUrl(imageUrl: string) {
     if (/^https?:\/\//i.test(imageUrl)) return imageUrl;
-    return `${API_BASE_URL.replace(/\/api\/?$/, '')}${imageUrl}`;
+    return `${apiAssetOrigin()}${imageUrl}`;
   },
 
   accountEntitlements(signal?: AbortSignal) {
