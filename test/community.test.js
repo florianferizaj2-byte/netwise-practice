@@ -4,7 +4,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { createStore } from "../server/store.js";
-import { createApp } from "../server/index.js";
+import { createVerifiedTestApp as createApp, verifiedFetch } from "./helpers/account-mail.js";
 
 const currentMobileVersion = JSON.parse(fs.readFileSync(new URL('../mobile/package.json', import.meta.url), 'utf8')).version;
 
@@ -26,7 +26,7 @@ test("community supports one public room, custom names, text, emoji and images",
   });
 
   const register = async (username) => {
-    const response = await fetch(`${base}/api/auth/register`, {
+    const response = await verifiedFetch(`${base}/api/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

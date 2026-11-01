@@ -16,8 +16,12 @@ import { savePracticeProgress } from "./practice-progress.js";
 
 export function usePracticeProgress(session) {
   const [index, setIndex] = useState(session.progress?.index || 0);
-  const [responses, setResponses] = useState(session.progress?.responses || {});
+  const [responses, setResponses] = useState(() => Object.fromEntries(
+    Object.entries(session.progress?.responses || {}).map(([id, entry]) => [id,
+      entry.saveStatus === "pending" ? { ...entry, saveStatus: "error", saveError: "上次保存未确认，请重试同步。" } : entry]),
+  ));
   const [done, setDone] = useState(false);
+  const [mode, setMode] = useState(session.mode === "memorize" ? "memorize" : "practice");
   useEffect(() => {
     if (!session.storageKey) return;
     try {
@@ -27,13 +31,14 @@ export function usePracticeProgress(session) {
         session,
         index,
         responses,
-        done,
+        done && !Object.values(responses).some(r => r.saveStatus === "pending" || r.saveStatus === "error"),
+        mode,
       );
     } catch {
       /* Private mode. */
     }
-  }, [session, index, responses, done]);
-  return { index, setIndex, responses, setResponses, done, setDone };
+  }, [session, index, responses, done, mode]);
+  return { index, setIndex, responses, setResponses, done, setDone, mode, setMode };
 }
 
 export function DesktopPracticeNav({
@@ -42,8 +47,8 @@ export function DesktopPracticeNav({
   responses,
   busy,
   jumpTo,
+  pageSize = 40,
 }) {
-  const pageSize = 40;
   const [page, setPage] = useState(Math.floor(index / pageSize));
   useEffect(() => {
     setPage(Math.floor(index / pageSize));
@@ -73,7 +78,7 @@ export function DesktopPracticeNav({
               ? "答错"
               : response?.submitted
                 ? "已作答"
-                : response?.revealed
+                : response?.revealed || response?.memorized
                   ? "已查看答案"
                   : "未作答";
             return (
@@ -85,7 +90,7 @@ export function DesktopPracticeNav({
                   position === index ? "current" : "",
                   response?.submitted ? "answered" : "",
                   wrong ? "wrong" : "",
-                  response?.revealed ? "revealed" : "",
+                  response?.revealed || response?.memorized ? "revealed" : "",
                 ].join(" ")}
                 aria-label={`第 ${position + 1} 题，${state}`}
                 aria-current={position === index ? "step" : undefined}
@@ -318,7 +323,7 @@ export function DesktopStudyHome({
           </span>
           <ChevronRight size={17} />
         </button>
-        <button onClick={favoriteCount ? openFavorites : () => go("chapters")}>
+        <button onClick={openFavorites}>
           <Star size={22} />
           <span>
             <strong>
@@ -364,6 +369,7 @@ export function DesktopStudyHome({
             </section>
             <section>
               <h2>AI 学习计划</h2>
+              <button onClick={() => go("plan")}>查看每日任务与学习计划</button>
               {dashboard.plan?.tasks?.slice(0, 3).map((task, index) => (
                 <button
                   className="study-weak-row"
@@ -411,6 +417,7 @@ export function DesktopChapterBrowser({
   setSectionFocus,
   start,
   favoriteQuestions,
+  openFavorites,
 }) {
   const [query, setQuery] = useState("");
   const sourceQuestions = [
@@ -474,8 +481,7 @@ export function DesktopChapterBrowser({
           <h1>章节练习</h1>
         </div>
         <button
-          onClick={() => start(favoriteQuestions, "收藏题目")}
-          disabled={!favoriteQuestions.length}
+          onClick={openFavorites}
         >
           <Star size={16} />
           我的收藏

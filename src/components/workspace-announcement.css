@@ -1,0 +1,67 @@
+.workspace-managed-announcement {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 16px;
+  margin-bottom: 18px;
+  border: 1px solid #dce7fa;
+  border-radius: 9px;
+  background: #f0f5ff;
+  color: #31579c;
+  text-align: left;
+  font-size: 12px;
+}
+.workspace-managed-announcement strong {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+}
+.workspace-managed-announcement > span {
+  white-space: nowrap;
+  font-size: 11px;
+}
+.workspace-announcement-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: #122c5055;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+.workspace-announcement-dialog {
+  width: min(560px, 100%);
+  max-height: 85vh;
+  overflow: auto;
+  background: #fff;
+  border: 1px solid #dce7fa;
+  border-radius: 12px;
+  padding: 24px;
+  color: #203456;
+}
+.workspace-announcement-dialog header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.workspace-announcement-dialog h2 {
+  font-size: 20px;
+  margin: 0;
+}
+.workspace-announcement-dialog p {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+  line-height: 1.9;
+  margin: 20px 0;
+}
+.workspace-announcement-dialog header button {
+  border: 0;
+  background: none;
+  min-width: 34px;
+  min-height: 34px;
+}

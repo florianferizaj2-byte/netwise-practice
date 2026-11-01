@@ -1,6 +1,11 @@
 import { CacheCancelledError, RequestCache } from "./request-cache.js";
 
 const responseCache = new RequestCache();
+const pointRequestId=()=>{
+  const bytes=crypto.getRandomValues(new Uint8Array(16));
+  return [...bytes].map(value=>value.toString(16).padStart(2,'0')).join('');
+};
+const pointsChanged=()=>window.dispatchEvent(new Event('kaojiang-points-changed'));
 let studyExpiry = Infinity;
 const keyFor = (url, body, method) =>
   (method || (body ? "POST" : "GET")) === "GET"
@@ -57,6 +62,8 @@ function updateCacheContext(url, method, data) {
     }
   }
   if (method === "GET" || url === "/study/catalog") return;
+  // Revealing an ordinary practice answer is read-only, including prefetch.
+  if (/^\/questions\/[^/]+\/reveal$/.test(url)) return;
   if (url.startsWith("/study/teacher"))
     responseCache.invalidate(["/study/teacher/history"]);
   else if (url.startsWith("/study/"))
@@ -64,8 +71,11 @@ function updateCacheContext(url, method, data) {
   if (url.startsWith("/admin/study")) responseCache.invalidate(["/study/"]);
   if (url.startsWith("/account/"))
     responseCache.invalidate(["/study/", "/dashboard"]);
+  if (url.startsWith("/knowledge-favorites"))
+    responseCache.invalidate(["/knowledge-favorites"]);
   if (/^\/(attempts|wrong|exams|ai|questions|admin)\b/.test(url))
     responseCache.invalidate(["/dashboard", "/wrong", "/exams", "/questions"]);
+  if (/^\/(attempts|learning-plan)\b/.test(url)) responseCache.invalidate(["/learning-plan"]);
 }
 
 export async function api(url, body, method, options = {}) {
@@ -130,10 +140,13 @@ async function request(url, body, method, options, generation) {
   try {
     const res = await fetch("/api" + url, {
       method: method || (body ? "POST" : "GET"),
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json",
+        ...(method!=='GET'?{'X-AI-Request-Id':options.requestId||pointRequestId()}:{}),
+      },
       ...(body ? { body: JSON.stringify(body) } : {}),
       signal: controller.signal,
     });
+    if(res.headers.get('X-AI-Points-Changed')==='1')pointsChanged();
     const data = await res.json().catch(() => {
       throw new Error("服务器返回了无法识别的数据，请稍后重试");
     });
@@ -169,6 +182,7 @@ export async function streamApi(url, body, onEvent) {
     headers: {
       "Content-Type": "application/json",
       Accept: "text/event-stream",
+      'X-AI-Request-Id':pointRequestId(),
     },
     body: JSON.stringify(body),
   });
@@ -209,7 +223,7 @@ export async function streamApi(url, body, onEvent) {
         throw new Error(event.message || "AI 生成失败");
     }
   };
-  while (true) {
+  try { while (true) {
     const { done, value } = await reader.read();
     if (done) break;
     consume(decoder.decode(value, { stream: true }));
@@ -218,4 +232,5 @@ export async function streamApi(url, body, onEvent) {
   if (!result) throw new Error("AI 流式响应提前结束");
   updateCacheContext(url, "POST", result);
   return result;
+  } finally { pointsChanged(); }
 }

@@ -1,0 +1,1038 @@
+{
+  "schemaVersion": 1,
+  "course": {
+    "id": "network-engineer",
+    "title": "软考 · 网络工程师"
+  },
+  "lessons": [
+    {
+      "id": "network-engineer:01.01.01",
+      "name": "进制互转",
+      "chapter": "计算机基础知识",
+      "section": "数制与编码",
+      "version": "4539a929554e459023e3"
+    },
+    {
+      "id": "network-engineer:01.01.02",
+      "name": "原码、反码、补码与移码",
+      "chapter": "计算机基础知识",
+      "section": "数制与编码",
+      "version": "a392357d4f09acbe314f"
+    },
+    {
+      "id": "network-engineer:01.01.03",
+      "name": "浮点数表示",
+      "chapter": "计算机基础知识",
+      "section": "数制与编码",
+      "version": "c140cf274e90b4f97312"
+    },
+    {
+      "id": "network-engineer:01.02.01",
+      "name": "奇偶校验",
+      "chapter": "计算机基础知识",
+      "section": "校验码与差错控制",
+      "version": "44ad0919471545a2afa4"
+    },
+    {
+      "id": "network-engineer:01.02.02",
+      "name": "海明校验",
+      "chapter": "计算机基础知识",
+      "section": "校验码与差错控制",
+      "version": "45fd1ec7f47a1231d9c6"
+    },
+    {
+      "id": "network-engineer:01.02.03",
+      "name": "CRC循环冗余校验",
+      "chapter": "计算机基础知识",
+      "section": "校验码与差错控制",
+      "version": "f00e8578a5f4097ebef7"
+    },
+    {
+      "id": "network-engineer:01.02.04",
+      "name": "误码率与帧错误概率",
+      "chapter": "计算机基础知识",
+      "section": "校验码与差错控制",
+      "version": "e7efa9ed2e7d4f195430"
+    },
+    {
+      "id": "network-engineer:01.03.01",
+      "name": "Cache与命中率",
+      "chapter": "计算机基础知识",
+      "section": "存储器与可靠性",
+      "version": "733ff0ec5ffdfb2887b7"
+    },
+    {
+      "id": "network-engineer:01.03.02",
+      "name": "内存、磁盘与RAID",
+      "chapter": "计算机基础知识",
+      "section": "存储器与可靠性",
+      "version": "219ae083c82ad9b28b4c"
+    },
+    {
+      "id": "network-engineer:01.03.03",
+      "name": "存储介质性能比较",
+      "chapter": "计算机基础知识",
+      "section": "存储器与可靠性",
+      "version": "ff76910287947d101608"
+    },
+    {
+      "id": "network-engineer:01.03.04",
+      "name": "系统可靠性与可用性",
+      "chapter": "计算机基础知识",
+      "section": "存储器与可靠性",
+      "version": "b1acd8403fc6a1df3cb8"
+    },
+    {
+      "id": "network-engineer:01.03.05",
+      "name": "NAS、SAN与存储网络",
+      "chapter": "计算机基础知识",
+      "section": "存储器与可靠性",
+      "version": "100d7b2973713f1c0db4"
+    },
+    {
+      "id": "network-engineer:01.04.01",
+      "name": "CPU流水线",
+      "chapter": "计算机基础知识",
+      "section": "计算机组成",
+      "version": "7dce8db46806bea78862"
+    },
+    {
+      "id": "network-engineer:01.04.02",
+      "name": "总线结构与带宽",
+      "chapter": "计算机基础知识",
+      "section": "计算机组成",
+      "version": "c48e7a64ba7d08b62c9b"
+    },
+    {
+      "id": "network-engineer:01.04.03",
+      "name": "指令系统、寻址与中断",
+      "chapter": "计算机基础知识",
+      "section": "计算机组成",
+      "version": "f94236b81ba1d0a26d2b"
+    },
+    {
+      "id": "network-engineer:01.04.04",
+      "name": "计算机性能指标",
+      "chapter": "计算机基础知识",
+      "section": "计算机组成",
+      "version": "977c380a5cfab6d83dd0"
+    },
+    {
+      "id": "network-engineer:01.05.01",
+      "name": "进程、线程与死锁",
+      "chapter": "计算机基础知识",
+      "section": "操作系统基础",
+      "version": "26a787546fca3d135877"
+    },
+    {
+      "id": "network-engineer:01.05.02",
+      "name": "分页与分段虚拟内存",
+      "chapter": "计算机基础知识",
+      "section": "操作系统基础",
+      "version": "c41331a613c4af23977d"
+    },
+    {
+      "id": "network-engineer:01.06.01",
+      "name": "开发模型与需求分析",
+      "chapter": "计算机基础知识",
+      "section": "软件工程基础",
+      "version": "382a80a83b3458293983"
+    },
+    {
+      "id": "network-engineer:01.06.02",
+      "name": "软件测试方法",
+      "chapter": "计算机基础知识",
+      "section": "软件工程基础",
+      "version": "87c6c4fae93653ec58e7"
+    },
+    {
+      "id": "network-engineer:02.01.01:physical",
+      "name": "物理层",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "网络模型与分层",
+      "version": "80f1d7de46a38387dc13"
+    },
+    {
+      "id": "network-engineer:02.01.01:data-link",
+      "name": "数据链路层",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "网络模型与分层",
+      "version": "64dddb9e304562d22260"
+    },
+    {
+      "id": "network-engineer:02.01.01:network",
+      "name": "网络层",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "网络模型与分层",
+      "version": "60e6f60e33512b512c35"
+    },
+    {
+      "id": "network-engineer:02.01.01:transport",
+      "name": "传输层",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "网络模型与分层",
+      "version": "d30e25521545da702de1"
+    },
+    {
+      "id": "network-engineer:02.01.01:session",
+      "name": "会话层",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "网络模型与分层",
+      "version": "8bc5704f36b600f1e134"
+    },
+    {
+      "id": "network-engineer:02.01.01:presentation",
+      "name": "表示层",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "网络模型与分层",
+      "version": "88c66489e17a8ec9bae3"
+    },
+    {
+      "id": "network-engineer:02.01.01:application",
+      "name": "应用层",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "网络模型与分层",
+      "version": "3c1cd12b192c3b7d954e"
+    },
+    {
+      "id": "network-engineer:02.01.02",
+      "name": "TCP/IP四层模型与映射",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "网络模型与分层",
+      "version": "1edc824c5cf83deabec2"
+    },
+    {
+      "id": "network-engineer:02.01.03",
+      "name": "分层原则、协议与数据封装",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "网络模型与分层",
+      "version": "b856eff12329d08d205b"
+    },
+    {
+      "id": "network-engineer:02.02.01",
+      "name": "编码与调制",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "数据通信与传输",
+      "version": "7bba03e6babea87ec5ac"
+    },
+    {
+      "id": "network-engineer:02.02.02",
+      "name": "同步、双工与多路复用",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "数据通信与传输",
+      "version": "cf1d620f314e971e858f"
+    },
+    {
+      "id": "network-engineer:02.02.03",
+      "name": "信道容量与数据速率",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "数据通信与传输",
+      "version": "ad15b478be6250dc9938"
+    },
+    {
+      "id": "network-engineer:02.02.04",
+      "name": "信号质量与眼图",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "数据通信与传输",
+      "version": "6e0f7c20f88f2ab0b789"
+    },
+    {
+      "id": "network-engineer:02.02.05",
+      "name": "采样定理与PCM",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "数据通信与传输",
+      "version": "f6da3eae529751850ab3-demo-pcm-r1"
+    },
+    {
+      "id": "network-engineer:02.02.06",
+      "name": "数据链路层流量控制与ARQ",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "数据通信与传输",
+      "version": "09e72e6f8ab741535f7f"
+    },
+    {
+      "id": "network-engineer:02.03.01",
+      "name": "IPv4地址类别与特殊地址",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "IPv4与子网",
+      "version": "be16e6cdbe1b64981099-demo-ipv4-r1"
+    },
+    {
+      "id": "network-engineer:02.03.02",
+      "name": "网络地址、广播地址与可用主机",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "IPv4与子网",
+      "version": "bd9425374e6729eb3350-demo-ipv4-r1"
+    },
+    {
+      "id": "network-engineer:02.03.03",
+      "name": "子网划分与VLSM",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "IPv4与子网",
+      "version": "3fd21c407a8f41168902-demo-subnet-r1"
+    },
+    {
+      "id": "network-engineer:02.03.04",
+      "name": "CIDR与路由聚合",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "IPv4与子网",
+      "version": "229a57c6b2178b8df359-demo-subnet-r1"
+    },
+    {
+      "id": "network-engineer:02.03.05",
+      "name": "IPv4首部、分片、组播与TTL",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "IPv4与子网",
+      "version": "edd9f54e1cd5b198b49c"
+    },
+    {
+      "id": "network-engineer:02.04.01",
+      "name": "ARP与RARP",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "网际层协议",
+      "version": "ff4017c5b617fe8433d9"
+    },
+    {
+      "id": "network-engineer:02.04.02",
+      "name": "ICMP与控制报文",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "网际层协议",
+      "version": "236a30bd40f010c98933"
+    },
+    {
+      "id": "network-engineer:02.04.03",
+      "name": "网络层服务与分组交换",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "网际层协议",
+      "version": "7610dd547e3888510d2c"
+    },
+    {
+      "id": "network-engineer:02.05.01",
+      "name": "TCP连接与可靠传输",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "传输层",
+      "version": "6b2dc7dc3d2ff8435504"
+    },
+    {
+      "id": "network-engineer:02.05.02",
+      "name": "TCP窗口、流量控制与拥塞控制",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "传输层",
+      "version": "f19ea8279681520ac341"
+    },
+    {
+      "id": "network-engineer:02.05.03",
+      "name": "UDP特性与应用场景",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "传输层",
+      "version": "ab84c6e9e43a7a9ab866"
+    },
+    {
+      "id": "network-engineer:02.05.04",
+      "name": "端口号与多路复用",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "传输层",
+      "version": "63308355a3aa31d7bad9"
+    },
+    {
+      "id": "network-engineer:02.06.01",
+      "name": "DNS",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "应用层协议与端口",
+      "version": "fa9260d07c2cc0079f17"
+    },
+    {
+      "id": "network-engineer:02.06.02",
+      "name": "DHCP",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "应用层协议与端口",
+      "version": "b5bce55a120b65837679"
+    },
+    {
+      "id": "network-engineer:02.06.03",
+      "name": "HTTP与HTTPS",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "应用层协议与端口",
+      "version": "bd6ff9b2b560909e8830"
+    },
+    {
+      "id": "network-engineer:02.06.04",
+      "name": "文件传输协议FTP、TFTP与SFTP",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "应用层协议与端口",
+      "version": "beec08c4f7a1750b36a2"
+    },
+    {
+      "id": "network-engineer:02.06.05",
+      "name": "电子邮件、LDAP与远程登录",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "应用层协议与端口",
+      "version": "e7d228ae2db1fe59d5f7"
+    },
+    {
+      "id": "network-engineer:02.06.06",
+      "name": "跨协议端口与传输协议辨析",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "应用层协议与端口",
+      "version": "744b340d799e92b9cfe7"
+    },
+    {
+      "id": "network-engineer:02.07.01",
+      "name": "地址表示与地址类型",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "IPv6",
+      "version": "261b97106fd5e5596dd2"
+    },
+    {
+      "id": "network-engineer:02.07.02",
+      "name": "邻居发现协议NDP",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "IPv6",
+      "version": "c85339990f15bbf16300"
+    },
+    {
+      "id": "network-engineer:02.07.03",
+      "name": "IPv6过渡技术",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "IPv6",
+      "version": "7f203e6c0ed9155d07bd"
+    },
+    {
+      "id": "network-engineer:02.07.04",
+      "name": "IPv6报文与协议特性",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "IPv6",
+      "version": "3b239bd22595810dc012"
+    },
+    {
+      "id": "network-engineer:02.07.05",
+      "name": "IPv6地址自动配置与DHCPv6",
+      "chapter": "网络体系结构与TCP/IP",
+      "section": "IPv6",
+      "version": "d098020992a46ec46320"
+    },
+    {
+      "id": "network-engineer:03.01.01",
+      "name": "CSMA/CD与以太网帧",
+      "chapter": "局域网与交换技术",
+      "section": "以太网基础",
+      "version": "73f0777ef7c815737245"
+    },
+    {
+      "id": "network-engineer:03.01.02",
+      "name": "冲突域、广播域与网络设备",
+      "chapter": "局域网与交换技术",
+      "section": "以太网基础",
+      "version": "9fb32a15dda5c670cb0e"
+    },
+    {
+      "id": "network-engineer:03.01.03",
+      "name": "MAC地址学习与交换转发",
+      "chapter": "局域网与交换技术",
+      "section": "以太网基础",
+      "version": "1742441a80b1b71f9cbd"
+    },
+    {
+      "id": "network-engineer:03.02.01",
+      "name": "802.1Q与VLAN标签",
+      "chapter": "局域网与交换技术",
+      "section": "VLAN",
+      "version": "f248a0c8d2fd747cf397"
+    },
+    {
+      "id": "network-engineer:03.02.02",
+      "name": "Access、Trunk与Hybrid端口",
+      "chapter": "局域网与交换技术",
+      "section": "VLAN",
+      "version": "be689436fe70a2688643"
+    },
+    {
+      "id": "network-engineer:03.02.03",
+      "name": "VLAN间路由与VLAN聚合",
+      "chapter": "局域网与交换技术",
+      "section": "VLAN",
+      "version": "ef383a6471e43827e7fd"
+    },
+    {
+      "id": "network-engineer:03.03.01",
+      "name": "BID与根桥选举",
+      "chapter": "局域网与交换技术",
+      "section": "STP生成树",
+      "version": "2e759efdba84f595ed3b"
+    },
+    {
+      "id": "network-engineer:03.03.02",
+      "name": "端口角色与BPDU",
+      "chapter": "局域网与交换技术",
+      "section": "STP生成树",
+      "version": "e707d43edb5aec473ab6"
+    },
+    {
+      "id": "network-engineer:03.03.03",
+      "name": "收敛过程与协议版本",
+      "chapter": "局域网与交换技术",
+      "section": "STP生成树",
+      "version": "da542d2202566ac05c90"
+    },
+    {
+      "id": "network-engineer:03.04.01",
+      "name": "VTP与GVRP",
+      "chapter": "局域网与交换技术",
+      "section": "其他交换技术",
+      "version": "9fd5de06b2cbae444ef6"
+    },
+    {
+      "id": "network-engineer:03.04.02",
+      "name": "端口安全与DHCP Snooping",
+      "chapter": "局域网与交换技术",
+      "section": "其他交换技术",
+      "version": "e6f4207b037412d9957a"
+    },
+    {
+      "id": "network-engineer:03.04.03",
+      "name": "链路聚合、堆叠、QinQ与PoE",
+      "chapter": "局域网与交换技术",
+      "section": "其他交换技术",
+      "version": "8953bcf8382bc96f7992"
+    },
+    {
+      "id": "network-engineer:03.04.04",
+      "name": "交换机过滤与MAC黑洞",
+      "chapter": "局域网与交换技术",
+      "section": "其他交换技术",
+      "version": "19131a93c5f0dc688f39"
+    },
+    {
+      "id": "network-engineer:03.05.01",
+      "name": "802.11与介质访问",
+      "chapter": "局域网与交换技术",
+      "section": "无线局域网",
+      "version": "9134b0d6cdceae1cb63c"
+    },
+    {
+      "id": "network-engineer:03.05.02",
+      "name": "AP类型与WLAN架构",
+      "chapter": "局域网与交换技术",
+      "section": "无线局域网",
+      "version": "bd0beca28e724caf62ff"
+    },
+    {
+      "id": "network-engineer:04.01.01",
+      "name": "路由表、静态路由与默认路由",
+      "chapter": "路由与广域网技术",
+      "section": "路由基础",
+      "version": "6a75c484470114e3050c"
+    },
+    {
+      "id": "network-engineer:04.01.02",
+      "name": "路由优先级、管理距离与度量值",
+      "chapter": "路由与广域网技术",
+      "section": "路由基础",
+      "version": "091b306b9cfdc7fd5e93"
+    },
+    {
+      "id": "network-engineer:04.01.03",
+      "name": "路由协议类型与算法",
+      "chapter": "路由与广域网技术",
+      "section": "路由基础",
+      "version": "4abe6cd2e8a5224275cf"
+    },
+    {
+      "id": "network-engineer:04.01.04",
+      "name": "VRRP与网关冗余",
+      "chapter": "路由与广域网技术",
+      "section": "路由基础",
+      "version": "00798d571f5ec426b276"
+    },
+    {
+      "id": "network-engineer:04.01.05",
+      "name": "策略路由、路由策略与重分发",
+      "chapter": "路由与广域网技术",
+      "section": "路由基础",
+      "version": "df182c2a0d8a4e743762"
+    },
+    {
+      "id": "network-engineer:04.02.01",
+      "name": "RIP工作原理、版本与报文",
+      "chapter": "路由与广域网技术",
+      "section": "RIP",
+      "version": "232784b4eedf55ab2083"
+    },
+    {
+      "id": "network-engineer:04.02.02",
+      "name": "水平分割、毒性逆转与触发更新",
+      "chapter": "路由与广域网技术",
+      "section": "RIP",
+      "version": "d0cb4478bef773c8a1e3"
+    },
+    {
+      "id": "network-engineer:04.03.01",
+      "name": "区域、LSA与邻居状态",
+      "chapter": "路由与广域网技术",
+      "section": "OSPF",
+      "version": "ee1425c2796804564b27"
+    },
+    {
+      "id": "network-engineer:04.03.02",
+      "name": "DR/BDR选举",
+      "chapter": "路由与广域网技术",
+      "section": "OSPF",
+      "version": "b68d22b50a289dcc398a"
+    },
+    {
+      "id": "network-engineer:04.03.03",
+      "name": "Router ID与虚链路",
+      "chapter": "路由与广域网技术",
+      "section": "OSPF",
+      "version": "d7395c4cf2104b912063"
+    },
+    {
+      "id": "network-engineer:04.03.04",
+      "name": "OSPF度量与路由计算",
+      "chapter": "路由与广域网技术",
+      "section": "OSPF",
+      "version": "5a8daaa21884cd531a27"
+    },
+    {
+      "id": "network-engineer:04.04.01",
+      "name": "AS与路径矢量",
+      "chapter": "路由与广域网技术",
+      "section": "BGP",
+      "version": "4b8cac961c2d0295f0e2"
+    },
+    {
+      "id": "network-engineer:04.04.02",
+      "name": "BGP路由属性与选路",
+      "chapter": "路由与广域网技术",
+      "section": "BGP",
+      "version": "8efc8ef7d238b8e513ce"
+    },
+    {
+      "id": "network-engineer:04.05.01",
+      "name": "PPP、HDLC与帧中继",
+      "chapter": "路由与广域网技术",
+      "section": "广域网链路",
+      "version": "1d2019f98f909af9c3f7"
+    },
+    {
+      "id": "network-engineer:04.05.02",
+      "name": "E1/T1与专线基础",
+      "chapter": "路由与广域网技术",
+      "section": "广域网链路",
+      "version": "e1a6eff0cfc7a842ab19"
+    },
+    {
+      "id": "network-engineer:04.05.03",
+      "name": "MPLS标签转发",
+      "chapter": "路由与广域网技术",
+      "section": "广域网链路",
+      "version": "95161cd941a5953fd8d4"
+    },
+    {
+      "id": "network-engineer:05.01.01",
+      "name": "对称加密算法",
+      "chapter": "网络安全",
+      "section": "密码与加密",
+      "version": "03b540fc7c33e427de34"
+    },
+    {
+      "id": "network-engineer:05.01.02",
+      "name": "非对称加密算法",
+      "chapter": "网络安全",
+      "section": "密码与加密",
+      "version": "72b08d735c889b962ca5"
+    },
+    {
+      "id": "network-engineer:05.01.03",
+      "name": "密码学原则与加密方式",
+      "chapter": "网络安全",
+      "section": "密码与加密",
+      "version": "4c75b11a4a2ae95457c7"
+    },
+    {
+      "id": "network-engineer:05.01.04",
+      "name": "Hash、HMAC与口令存储",
+      "chapter": "网络安全",
+      "section": "密码与加密",
+      "version": "fe54e64abebe7725ada6"
+    },
+    {
+      "id": "network-engineer:05.02.01",
+      "name": "CA、数字证书与数字签名",
+      "chapter": "网络安全",
+      "section": "PKI与数字证书",
+      "version": "f7cfd502e644b9c5545f"
+    },
+    {
+      "id": "network-engineer:05.02.02",
+      "name": "证书验证与CRL吊销",
+      "chapter": "网络安全",
+      "section": "PKI与数字证书",
+      "version": "e2fb8c555fb993a27c18"
+    },
+    {
+      "id": "network-engineer:05.03.01",
+      "name": "ACL类型、规则顺序与隐式拒绝",
+      "chapter": "网络安全",
+      "section": "访问控制与NAT",
+      "version": "18a72cc1ba1ab7253e79"
+    },
+    {
+      "id": "network-engineer:05.03.02",
+      "name": "静态NAT、动态NAT与PAT",
+      "chapter": "网络安全",
+      "section": "访问控制与NAT",
+      "version": "6845b6b193fa7064896b"
+    },
+    {
+      "id": "network-engineer:05.04.01",
+      "name": "防火墙与DMZ",
+      "chapter": "网络安全",
+      "section": "网络设备与边界防护",
+      "version": "e237eca9fb94b7adb0d3"
+    },
+    {
+      "id": "network-engineer:05.04.02",
+      "name": "IDS与IPS",
+      "chapter": "网络安全",
+      "section": "网络设备与边界防护",
+      "version": "8a48a1c5e254085237d7"
+    },
+    {
+      "id": "network-engineer:05.04.03",
+      "name": "堡垒机与零信任架构",
+      "chapter": "网络安全",
+      "section": "网络设备与边界防护",
+      "version": "5111528e9bc72addc008"
+    },
+    {
+      "id": "network-engineer:05.04.04",
+      "name": "身份认证与安全运维",
+      "chapter": "网络安全",
+      "section": "网络设备与边界防护",
+      "version": "4fb27a8285ef423675cc"
+    },
+    {
+      "id": "network-engineer:05.05.01",
+      "name": "ARP欺骗",
+      "chapter": "网络安全",
+      "section": "网络攻击",
+      "version": "f1f429158740ff5a4c65"
+    },
+    {
+      "id": "network-engineer:05.05.02",
+      "name": "DoS与DDoS",
+      "chapter": "网络安全",
+      "section": "网络攻击",
+      "version": "bf48f932092622df9fc2"
+    },
+    {
+      "id": "network-engineer:05.05.03",
+      "name": "Web攻击与漏洞防护",
+      "chapter": "网络安全",
+      "section": "网络攻击",
+      "version": "6bf830e203283b257449"
+    },
+    {
+      "id": "network-engineer:05.05.04",
+      "name": "恶意软件、社会工程与应急响应",
+      "chapter": "网络安全",
+      "section": "网络攻击",
+      "version": "965c54fcab39e7953e7b"
+    },
+    {
+      "id": "network-engineer:05.05.05",
+      "name": "DNS欺骗与DNSSEC",
+      "chapter": "网络安全",
+      "section": "网络攻击",
+      "version": "7ea65eb871db09ce8151"
+    },
+    {
+      "id": "network-engineer:05.06.01",
+      "name": "IPsec VPN与SSL VPN",
+      "chapter": "网络安全",
+      "section": "VPN与安全传输",
+      "version": "a7c09db1396d1ab6e7a1"
+    },
+    {
+      "id": "network-engineer:05.06.02",
+      "name": "TLS与安全传输协议",
+      "chapter": "网络安全",
+      "section": "VPN与安全传输",
+      "version": "dbbaf7305ffec3c87da1"
+    },
+    {
+      "id": "network-engineer:05.06.03",
+      "name": "GRE隧道",
+      "chapter": "网络安全",
+      "section": "VPN与安全传输",
+      "version": "036bf14a9d59459097bc"
+    },
+    {
+      "id": "network-engineer:05.07.01",
+      "name": "WEP、WPA与无线加密",
+      "chapter": "网络安全",
+      "section": "无线网络安全",
+      "version": "4769e570b1d622f6c257"
+    },
+    {
+      "id": "network-engineer:06.01.01",
+      "name": "AD、账户与服务管理",
+      "chapter": "服务器配置",
+      "section": "Windows服务器",
+      "version": "20755c74dbed999272a5"
+    },
+    {
+      "id": "network-engineer:06.01.02",
+      "name": "DNS与DHCP服务器",
+      "chapter": "服务器配置",
+      "section": "Windows服务器",
+      "version": "81010443482242d5d50a"
+    },
+    {
+      "id": "network-engineer:06.01.03",
+      "name": "IIS与NTFS权限",
+      "chapter": "服务器配置",
+      "section": "Windows服务器",
+      "version": "e801cb1d3a28893256b8"
+    },
+    {
+      "id": "network-engineer:06.01.04",
+      "name": "Windows服务与远程管理",
+      "chapter": "服务器配置",
+      "section": "Windows服务器",
+      "version": "2dd3489519cceb572404"
+    },
+    {
+      "id": "network-engineer:06.02.01",
+      "name": "常用命令与系统管理",
+      "chapter": "服务器配置",
+      "section": "Linux服务器",
+      "version": "1463ff6499a3f2048044"
+    },
+    {
+      "id": "network-engineer:06.02.02",
+      "name": "权限、进程与文件系统",
+      "chapter": "服务器配置",
+      "section": "Linux服务器",
+      "version": "9b919972a280dffaa6c2"
+    },
+    {
+      "id": "network-engineer:06.02.03",
+      "name": "网络接口与服务配置",
+      "chapter": "服务器配置",
+      "section": "Linux服务器",
+      "version": "387ccf6e5209292ff4bc"
+    },
+    {
+      "id": "network-engineer:07.01.01",
+      "name": "故障、配置、性能、安全与计费管理",
+      "chapter": "网络管理",
+      "section": "网络管理功能",
+      "version": "bf6c3b5e13402e135438"
+    },
+    {
+      "id": "network-engineer:07.02.01",
+      "name": "SNMP版本、MIB与报文",
+      "chapter": "网络管理",
+      "section": "管理协议与监控",
+      "version": "7d7798de8a4cecaf508a"
+    },
+    {
+      "id": "network-engineer:07.02.02",
+      "name": "Syslog、NetFlow与NTP",
+      "chapter": "网络管理",
+      "section": "管理协议与监控",
+      "version": "7d5244a81f8d08f2ec25"
+    },
+    {
+      "id": "network-engineer:07.02.03",
+      "name": "NETCONF与配置自动化",
+      "chapter": "网络管理",
+      "section": "管理协议与监控",
+      "version": "fc76423d43c49bf1ba15"
+    },
+    {
+      "id": "network-engineer:07.03.01",
+      "name": "ping与tracert连通性检查",
+      "chapter": "网络管理",
+      "section": "诊断工具与设备排查",
+      "version": "4ff992b4fe86344ba9b9"
+    },
+    {
+      "id": "network-engineer:07.03.02",
+      "name": "ipconfig、netstat与路由工具",
+      "chapter": "网络管理",
+      "section": "诊断工具与设备排查",
+      "version": "e7c4e27dae01f18fdfab"
+    },
+    {
+      "id": "network-engineer:07.03.03",
+      "name": "设备接入与接口排障",
+      "chapter": "网络管理",
+      "section": "诊断工具与设备排查",
+      "version": "469dc51b626bea446289"
+    },
+    {
+      "id": "network-engineer:08.01.01",
+      "name": "六大子系统",
+      "chapter": "综合布线与网络规划",
+      "section": "综合布线",
+      "version": "e365a7876f7b66071d9f"
+    },
+    {
+      "id": "network-engineer:08.01.02",
+      "name": "安装规范与点位",
+      "chapter": "综合布线与网络规划",
+      "section": "综合布线",
+      "version": "ce4e53e4ba638b9fc8f9"
+    },
+    {
+      "id": "network-engineer:08.02.01",
+      "name": "双绞线类别与屏蔽",
+      "chapter": "综合布线与网络规划",
+      "section": "传输介质",
+      "version": "07cf4c406755eedaaaa1"
+    },
+    {
+      "id": "network-engineer:08.02.02",
+      "name": "单模与多模光纤",
+      "chapter": "综合布线与网络规划",
+      "section": "传输介质",
+      "version": "5e3104616299b6d09b6c"
+    },
+    {
+      "id": "network-engineer:08.02.03",
+      "name": "光功率与光链路基础",
+      "chapter": "综合布线与网络规划",
+      "section": "传输介质",
+      "version": "09989df650b1b344513e"
+    },
+    {
+      "id": "network-engineer:08.02.04",
+      "name": "传输介质特性与选型",
+      "chapter": "综合布线与网络规划",
+      "section": "传输介质",
+      "version": "a8a05110663305b936f0"
+    },
+    {
+      "id": "network-engineer:08.03.01",
+      "name": "网络需求分析与拓扑设计",
+      "chapter": "综合布线与网络规划",
+      "section": "网络规划与性能",
+      "version": "5f3b3a7700661e02909c"
+    },
+    {
+      "id": "network-engineer:08.03.02",
+      "name": "带宽、时延、丢包率与吞吐量",
+      "chapter": "综合布线与网络规划",
+      "section": "网络规划与性能",
+      "version": "efbbfb50877fb0afd21e"
+    },
+    {
+      "id": "network-engineer:08.03.03",
+      "name": "QoS服务模型与流量管理",
+      "chapter": "综合布线与网络规划",
+      "section": "网络规划与性能",
+      "version": "c6bec062d194419f87b2"
+    },
+    {
+      "id": "network-engineer:09.01.01",
+      "name": "关键路径CPM与甘特图",
+      "chapter": "项目管理与法律法规",
+      "section": "项目计划与估算",
+      "version": "19a2384ef15106a7501f"
+    },
+    {
+      "id": "network-engineer:09.01.02",
+      "name": "PERT三点估算",
+      "chapter": "项目管理与法律法规",
+      "section": "项目计划与估算",
+      "version": "4191700d466840537346"
+    },
+    {
+      "id": "network-engineer:09.02.01",
+      "name": "风险管理",
+      "chapter": "项目管理与法律法规",
+      "section": "项目控制",
+      "version": "a1b3ae3106f7588eb9f9"
+    },
+    {
+      "id": "network-engineer:09.02.02",
+      "name": "质量管理",
+      "chapter": "项目管理与法律法规",
+      "section": "项目控制",
+      "version": "4355966035b730c92d07"
+    },
+    {
+      "id": "network-engineer:09.02.03",
+      "name": "配置管理",
+      "chapter": "项目管理与法律法规",
+      "section": "项目控制",
+      "version": "5348847908d738db3948"
+    },
+    {
+      "id": "network-engineer:09.03.01",
+      "name": "网络安全法与数据安全法",
+      "chapter": "项目管理与法律法规",
+      "section": "法律法规与合规",
+      "version": "534547550f093c24d8b8"
+    },
+    {
+      "id": "network-engineer:09.03.02",
+      "name": "著作权与专利",
+      "chapter": "项目管理与法律法规",
+      "section": "法律法规与合规",
+      "version": "d7f52a2690c91f8e8546"
+    },
+    {
+      "id": "network-engineer:09.03.03",
+      "name": "等保2.0",
+      "chapter": "项目管理与法律法规",
+      "section": "法律法规与合规",
+      "version": "470452d813e4ce648795"
+    },
+    {
+      "id": "network-engineer:10.01.01",
+      "name": "SDN软件定义网络",
+      "chapter": "新技术",
+      "section": "网络架构新技术",
+      "version": "87e9c2187ffd9185f7ed"
+    },
+    {
+      "id": "network-engineer:10.01.02",
+      "name": "NFV网络功能虚拟化",
+      "chapter": "新技术",
+      "section": "网络架构新技术",
+      "version": "820e3ee21c635859ee0e"
+    },
+    {
+      "id": "network-engineer:10.01.03",
+      "name": "云计算与容器",
+      "chapter": "新技术",
+      "section": "网络架构新技术",
+      "version": "057d8ebd9fcb3886479d"
+    },
+    {
+      "id": "network-engineer:10.01.04",
+      "name": "VXLAN与Overlay网络",
+      "chapter": "新技术",
+      "section": "网络架构新技术",
+      "version": "ce9cde47d61774da8615"
+    },
+    {
+      "id": "network-engineer:10.02.01",
+      "name": "4G与5G移动通信",
+      "chapter": "新技术",
+      "section": "移动与物联网",
+      "version": "d2eaa770a43a79bfd7d3"
+    },
+    {
+      "id": "network-engineer:10.02.02",
+      "name": "物联网与NB-IoT",
+      "chapter": "新技术",
+      "section": "移动与物联网",
+      "version": "32616d72d8f7d562a4e4"
+    }
+  ]
+}

@@ -6,7 +6,7 @@ import path from "node:path";
 import { bundledQuestions, certificates } from "../server/question-banks/loader.js";
 import { createTaxonomyIndex, assertQuestionTaxonomy } from "../server/question-banks/taxonomy.js";
 import { createStore } from "../server/store.js";
-import { createApp } from "../server/index.js";
+import { createVerifiedTestApp as createApp, verifiedFetch } from "./helpers/account-mail.js";
 
 const certificate = certificates.find((item) => item.id === "network-engineer");
 const questions = bundledQuestions().filter((q) => q.certificates.includes(certificate.id));
@@ -121,7 +121,7 @@ test("web and mobile catalogs agree after an existing database is upgraded witho
   const base = `http://127.0.0.1:${server.address().port}/api`;
   // Authenticate/select a certificate so both catalog implementations use the
   // actual three-level network taxonomy rather than the all-certificate mode.
-  const registered = await fetch(base + "/auth/register", {
+  const registered = await verifiedFetch(base + "/auth/register", {
     method: "POST", headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username: "taxonomy_catalog", password: "taxonomy-test-123" }),
   });

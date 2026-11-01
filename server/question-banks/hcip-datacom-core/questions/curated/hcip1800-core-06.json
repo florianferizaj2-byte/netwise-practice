@@ -1,0 +1,1852 @@
+[
+  {
+    "id": "hcip821-4-1-1-008",
+    "type": "single_choice",
+    "question": "关于 BGP 在 TCP/IP 路由体系中的定位与作用，下列描述正确的是？",
+    "options": {
+      "A": "BGP 只比较到达目的网段的跳数，跳数最少的路由一定被优选",
+      "B": "BGP 负责在自治系统内部计算拓扑，OSPF 等 IGP 只用于自治系统之间",
+      "C": "BGP 是运行于自治系统之间的外部网关协议，通过 AS_PATH 等属性传递可达性并支持基于策略的选路",
+      "D": "BGP 是链路状态协议，通过泛洪链路状态信息计算自治系统内部的最短路径树"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "BGP 是自治系统之间的路径矢量协议，通过 AS_PATH 记录途经的 AS，并借助丰富的路径属性实现策略选路，故 C 正确。D 把 BGP 说成链路状态协议，链路状态泛洪与 SPF 计算是 OSPF、IS-IS 等 IGP 的特征。A 错误，BGP 并不以跳数作为唯一或首要的选路依据，而是按 Local_Pref、AS_PATH 长度、Origin、MED 等顺序比较。B 把 BGP 与 IGP 的分工颠倒，AS 内部拓扑由 IGP 负责，BGP 负责 AS 之间的可达性。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 概述与邻居关系",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "AS",
+      "路径矢量"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-1-008",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页 BGP 知识点清单中的「BGP 概述与邻居关系」（三级目录 hcip821-4-1-1）；技术依据 RFC 4271 §1、§3.1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开的 BGP-4 标准独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "bc578e27bb632ff13bc728b854ad4ce206a355d2bb7a7d7445e1496a8118fcd3"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-1-009",
+    "type": "single_choice",
+    "question": "BGP 使用 TCP 作为传输协议。关于这一设计带来的直接效果，下列描述正确的是？",
+    "options": {
+      "A": "BGP 会话建立前必须先交换 UPDATE 报文，以确认路由可达",
+      "B": "BGP 无需自行实现报文的重传、确认与排序，只需关注路由信息的正确性",
+      "C": "BGP 因此可以使用广播或组播自动发现邻居，无需手工指定对端地址",
+      "D": "BGP 报文不再需要长度字段，因为 TCP 会划分每条报文的边界"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RFC 4271 指出 BGP 使用 TCP 传输，从而省去显式的报文分片、重传、确认与排序实现，这些工作由 TCP 完成，BGP 因此监听 TCP 179 端口。C 错误，TCP 是面向连接的单播协议，BGP 不会通过广播或组播自动发现邻居，邻居必须显式配置。D 错误，TCP 是字节流，不保留报文边界，BGP 正是依靠报文头中的 Length 字段定位下一条报文。A 错误，会话建立后先交换 OPEN 报文，UPDATE 只在邻居关系建立之后才发送。 综上，本题答案为 B。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 概述与邻居关系",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "TCP",
+      "传输"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-1-009",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 概述与邻居关系」；技术依据 RFC 4271 §1（BGP 使用 TCP、监听 179 端口）与 §4.1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开标准对 BGP 传输层设计的描述独立命题，未复制任何第三方题目。",
+      "reviewDigest": "5164c64887967621e01d31f73c836011313ec061c71b13aeabfa9ed3a96aa62d"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-1-010",
+    "type": "single_choice",
+    "question": "在华为设备上，BGP 进程没有通过 router-id 命令显式配置路由器 ID 时，其选取规则是？",
+    "options": {
+      "A": "随机生成一个非零值，并在每次会话重建时重新生成",
+      "B": "优先选择最大的 Loopback 接口地址，没有 Loopback 接口时选择最大的物理接口地址",
+      "C": "优先选择最小的物理接口地址，没有物理接口时选择最小的 Loopback 接口地址",
+      "D": "由对端在 OPEN 报文中指定，本端不能自行决定"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "华为设备在未显式配置 router-id 时，BGP 路由器 ID 按“最大 Loopback 接口地址优先、其次最大物理接口地址”的规则选取，并可通过 router-id 命令覆盖。C 把大小顺序说反，选举取最大值而不是最小值。D 错误，BGP Identifier 由本端在启动时确定，通过 OPEN 报文通告给对端，而不是由对端指定。A 错误，路由器 ID 在启动时确定并对所有邻居保持一致，不会随机生成或每次重建都变化。 综上，本题答案为 B。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 概述与邻居关系",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "Router ID",
+      "华为设备"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-1-010",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 概述与邻居关系」；技术依据 RFC 4271 §4.2（BGP Identifier 在启动时确定），设备默认选举顺序按华为设备公开行为在题干中限定。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲、RFC 与华为设备公开的 router-id 选举行为独立命题，未复制第三方题目。",
+      "reviewDigest": "1961bd7224526851138c9b1774c624bd3e91788eb0029d3489d0321263522ad1"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-1-011",
+    "type": "single_choice",
+    "question": "一台 BGP 路由器把从 EBGP 邻居学到的路由通告给 IBGP 邻居时，默认对 NEXT_HOP 属性做什么处理？",
+    "options": {
+      "A": "保持该路由原有的 NEXT_HOP 不变",
+      "B": "改为本地与 IBGP 邻居相连的接口地址",
+      "C": "改为 0.0.0.0，由接收方自行解析",
+      "D": "删除 NEXT_HOP，只保留 AS_PATH"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "RFC 4271 规定，向内部邻居发送且路由不是本地产生时，BGP 发言者默认不应修改 NEXT_HOP，因此 IBGP 邻居看到的下一跳仍是外部 AS 中那个地址。B 描述的是向 EBGP 邻居通告时的常见处理，与本问方向相反。C 错误，0.0.0.0 不是合法的 NEXT_HOP 取值，接收方不会据此转发。D 错误，NEXT_HOP 是公认必遵属性，携带 NLRI 的 UPDATE 必须包含它，不能删除。 综上，本题答案为 A。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 概述与邻居关系",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "Next_Hop",
+      "IBGP"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-1-011",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 概述与邻居关系」；技术依据 RFC 4271 §5.1.3 NEXT_HOP 的计算规则。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 RFC 4271 的 NEXT_HOP 规则独立设计对比型题目，未复制第三方题目。",
+      "reviewDigest": "c97821c75507900733611f1f3a01af42acfacc2c2f4e75e76605aba0a75e5f13"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-1-012",
+    "type": "single_choice",
+    "question": "同一个 AS 内有 6 台路由器运行 BGP，若采用 IBGP 全互联方式，需要建立多少条 IBGP 会话？",
+    "options": {
+      "A": "9",
+      "B": "12",
+      "C": "15",
+      "D": "30"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "IBGP 全互联要求任意两台路由器之间都有一条会话，会话数按组合数计算：n×(n−1)÷2。代入 n=6 得 6×5÷2=30÷2=15，故 C 正确。A 的 9 与任何合理的组合计算都不符；B 的 12 少算了 3 条；D 的 30 是 6×5 的结果，把每一对会话按两个方向重复计数了一次，实际一对路由器只需一条 TCP 会话。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 概述与邻居关系",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "IBGP",
+      "全互联"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-1-012",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 概述与邻居关系」；技术依据 RFC 4271 §9.2（从内部邻居学到的路由不再转发给其他内部邻居，由此需要全互联或反射器）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 IBGP 全互联要求自行设计会话数计算题，未复制第三方题目。",
+      "reviewDigest": "3b5cbefe8d93f00832082050170ebd216d04aca3f986711e3876949266699cce"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-1-013",
+    "type": "single_choice",
+    "question": "BGP OPEN 报文中的 My Autonomous System 字段为 2 个字节。仅按该字段的位宽计算，它能够表示的最大 AS 号是多少？",
+    "options": {
+      "A": "65535",
+      "B": "65536",
+      "C": "4294967295",
+      "D": "32767"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "2 字节等于 16 位，最大无符号数为 2^16−1=65536−1=65535，故选 A。B 的 65536 是 2^16，比可表示的最大值多 1，属于常见的“个数当最大值”错误。C 的 4294967295 是 2^32−1，对应 4 字节字段的上限。D 的 32767 是 2^15−1，只用了 15 位，与 2 字节位宽不符。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 概述与邻居关系",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "AS 号",
+      "OPEN"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-1-013",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 概述与邻居关系」；技术依据 RFC 4271 §4.2（OPEN 报文 My Autonomous System 为 2 个字节）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据字段位宽自行计算并设计选项，未复制第三方题目。",
+      "reviewDigest": "04ff321aaa66596d1d40fa2c1198b3f9a822dc7a2c43d8a4ab6470f7498a7fa8"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-1-014",
+    "type": "single_choice",
+    "question": "BGP 向 EBGP 邻居通告路由时，若 AS_PATH 的首个路径段为 AS_SEQUENCE 且已经包含 255 个 AS 号，按 RFC 4271 应如何处理？",
+    "options": {
+      "A": "新增一个 AS_SEQUENCE 段，把本地 AS 号放入新段的最前面",
+      "B": "丢弃该路由，因为 AS_PATH 已无法再追加 AS 号",
+      "C": "用本地 AS 号覆盖原段中的一个 AS 号，使总长度保持 255",
+      "D": "把 AS_SEQUENCE 改为 AS_SET 后再追加本地 AS 号"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "RFC 4271 规定，向外部邻居通告时把本地 AS 号前插到首个 AS_SEQUENCE 段；若前插会使该段超过 255 个 AS，则应当新增一个 AS_SEQUENCE 段，并把本地 AS 号放入新段。B 错误，段满并不导致路由不可通告，协议给出了新开段的办法。C 会篡改路径上已有 AS 的记录，破坏 AS_PATH 的防环与计长语义。D 错误，AS_SET 表示无序的 AS 集合，用于聚合场景，把序列改成集合会改变路径含义，也不是段满时的规定动作。 综上，本题答案为 A。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 概述与邻居关系",
+    "difficulty": "hard",
+    "tags": [
+      "BGP",
+      "AS_PATH",
+      "AS_SEQUENCE"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-1-014",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 概述与邻居关系」；技术依据 RFC 4271 §5.1.2（AS_SEQUENCE 满 255 个 AS 时新增段并前插本地 AS）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开标准中 AS_PATH 前插的边界规则独立命题，未复制第三方题目。",
+      "reviewDigest": "865792e3ddb1cb708aca0867e979f8eafdc268f5d3ba9e8e4585d6d2d7086992"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-1-015",
+    "type": "single_choice",
+    "question": "下列哪一项不是两台路由器成功建立 BGP 邻居关系的必要条件？",
+    "options": {
+      "A": "两端都配置了指向对方的 peer（邻居）关系",
+      "B": "本端到对端邻居地址存在可达路由，且 TCP 179 端口可以建立连接",
+      "C": "两端配置的 Hold Time 数值完全相同",
+      "D": "两端能够就 BGP 版本等 OPEN 参数达成一致"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Hold Time 不需要两端相同，双方在 OPEN 报文中各自提出数值，取较小值作为最终生效值，因此 C 不是必要条件，为本题答案。A 是必要条件，BGP 不会自动发现邻居，必须显式配置对端。B 也是必要条件，BGP 依赖 TCP 179 连接，且对端地址必须可达。D 同样是必要条件，版本、AS 号等 OPEN 参数不能达成一致时会话无法进入 Established。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 概述与邻居关系",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "邻居建立",
+      "Hold Time"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-1-015",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 概述与邻居关系」；技术依据 RFC 4271 §4.2（Hold Time 取较小值）与 §1（TCP 传输）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "以反向设问方式考查邻居建立条件，依据公开标准自行设计，未复制第三方题目。",
+      "reviewDigest": "9bf937fdab428690e4aa919f1256b529b8a017f88a0af09e868635cc9af31614"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-1-016",
+    "type": "single_choice",
+    "question": "两台路由器之间运行 OSPF，并在直连物理接口地址上建立 IBGP 会话。某天直连链路故障，但两台路由器之间仍存在经其他路由器的备份路径。关于该 IBGP 会话，下列判断正确的是？",
+    "options": {
+      "A": "会话不会中断，因为 OSPF 会为 BGP 自动切换 TCP 源地址",
+      "B": "会话不会中断，因为 BGP 使用无连接的 UDP 传输",
+      "C": "会话会中断，因为 IBGP 邻居必须配置为全互联",
+      "D": "会话会中断，因为 TCP 连接绑定在故障接口的地址上，接口不可用后连接随之断开"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "用物理接口地址建立邻居时，BGP 的 TCP 连接固定使用该接口地址作为源和目的，接口 down 后地址失效，连接无法继续，即使存在备份路径也需要重新建立会话，故 D 正确。A 错误，TCP 连接一旦建立不会因路由变化而自动更换源地址。B 错误，BGP 基于 TCP 而非 UDP。C 错误，会话中断的原因是接口地址失效，与是否全互联无关，全互联描述的是 IBGP 会话的组织方式。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 概述与邻居关系",
+    "difficulty": "hard",
+    "tags": [
+      "BGP",
+      "IBGP",
+      "故障分析"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-1-016",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 概述与邻居关系」；技术依据 RFC 4271 §1（BGP 依赖 TCP 连接）与 §4.2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "结合 TCP 连接与接口地址的关系自行设计故障场景题，未复制第三方题目。",
+      "reviewDigest": "e9dbc6bc700c925e0319cb9521abe7cd204377d8b8f785b63bb3bf787dab3c9e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-1-017",
+    "type": "single_choice",
+    "question": "两台路由器使用 Loopback 接口地址建立 IBGP 邻居。为了让 TCP 连接能够建立，除了保证双方 Loopback 地址之间路由可达外，还必须满足什么条件？",
+    "options": {
+      "A": "两端必须配置相同的 router-id",
+      "B": "本端发起连接时使用的源地址必须与对端 peer 命令中指定的邻居地址一致",
+      "C": "两端必须使用相同的物理接口作为出接口",
+      "D": "两端 Loopback 接口的掩码长度必须完全相同"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "BGP 建邻时对端会检查收到的 TCP 连接源地址是否与自己配置的邻居地址一致，因此本端必须把发起连接的源地址指定为自己的 Loopback 地址，否则对端会认为连接来自未知邻居而拒绝。C 错误，两端可以经不同物理接口和不同路径到达对方 Loopback。D 错误，Loopback 掩码长度不要求相同，只需双方地址互相可达。A 错误，两端 router-id 不同才是正常情况，相同反而可能引发冲突。 综上，本题答案为 B。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 概述与邻居关系",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "更新源",
+      "Loopback"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-1-017",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 概述与邻居关系」；技术依据 RFC 4271 §1（TCP 179 建连）与 §4.2（邻居参数由双方确认）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 TCP 源地址与邻居地址匹配的建邻要求独立命题，未复制第三方题目。",
+      "reviewDigest": "145f62bff9b9bb6edb4b7ea1741fa1f1e7e05602f5cb2c75b0e2a338004d3dde"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-1-018",
+    "type": "single_choice",
+    "question": "在华为设备上执行 display bgp peer 命令，某邻居的输出中包含 State 为 Established、Up/Down 为 1d02h。下列解读正确的是？",
+    "options": {
+      "A": "该邻居刚刚建立 2 小时，仍处于等待 OPEN 报文的阶段",
+      "B": "该邻居的 TCP 连接尚未建立，1 天 2 小时后将重试",
+      "C": "该邻居已建立 1 天 2 小时，但期间没有收到任何路由",
+      "D": "该 BGP 会话已建立并稳定保持了 1 天 2 小时，可以正常交换路由"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Established 表示邻居关系已建立完成，Up/Down 表示当前状态已持续的时长，1d02h 即 1 天 2 小时，说明会话稳定，故 D 正确。A 错误，等待 OPEN 对应 OpenSent，而不是 Established，且时长解读也不对。B 错误，TCP 未建立时会话不会显示 Established。C 错误，该字段只表示状态持续时长，不能据此判断是否收到路由，路由数量需看 PrefRcv 等计数。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 概述与邻居关系",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "display bgp peer",
+      "验证"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-1-018",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 概述与邻居关系」；技术依据 RFC 4271 §8.2.2（Established 状态的含义）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 Established 状态的公开定义设计验证输出解读题，未复制第三方题目。",
+      "reviewDigest": "b4a9ff8448ce6a80a8ddf10fdf41c7381e5f34598d7204968917d534a1de2d85"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-1-019",
+    "type": "single_choice",
+    "question": "两台路由器之间的 BGP 邻居配置已完成，但邻居状态长时间停留在 Active。最可能的原因是？",
+    "options": {
+      "A": "对端发送的 UPDATE 报文中缺少 ORIGIN 属性",
+      "B": "TCP 179 连接未能建立，例如对端地址不可达、对端未配置该邻居或被 ACL 阻断",
+      "C": "双方已经交换完 OPEN 报文，正在等待 Keepalive",
+      "D": "路由已经优选完成，但尚未下发到转发表"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "邻居卡在 Active 说明 TCP 连接始终没有建立成功，常见原因是对端地址不可达、对端没有配置对应邻居、端口被 ACL 过滤或路由缺失，故 B 正确。C 描述的是 OpenConfirm 阶段，此时 TCP 已经建立。D 描述的是路由下发环节，与邻居状态机无关。A 属于 UPDATE 报文错误，会在会话建立后触发 UPDATE Message Error，而不是停留在 Active。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 概述与邻居关系",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "邻居状态",
+      "故障定位"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-1-019",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 概述与邻居关系」；技术依据 RFC 4271 §8.2.2（Active 状态仍在等待/接受 TCP 连接）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据状态机对 Active 的描述设计故障定位题，未复制第三方题目。",
+      "reviewDigest": "4868a1df0d5ace010b749aaf5e8f233b73def53bdcd8de018e18bd04c1c19e1a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-1-020",
+    "type": "single_choice",
+    "question": "某 BGP 会话建立失败，设备日志中出现 Notification 错误码 2、子码 2（Bad Peer AS）。最可能的原因是？",
+    "options": {
+      "A": "两端 BGP 版本号不一致",
+      "B": "对端发送的 UPDATE 报文中 AS_PATH 格式错误",
+      "C": "本端 Hold Time 定时器超时",
+      "D": "本端 peer 命令中配置的对端 AS 号与对端实际使用的 AS 号不一致"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "错误码 2 表示 OPEN Message Error，子码 2 为 Bad Peer AS，即本端在对端 OPEN 报文中读到的 My AS 与自己为该邻居配置的 AS 号不一致，故 D 正确。A 对应 OPEN 错误中的 Unsupported Version Number（子码 1）。B 属于错误码 3（UPDATE Message Error）的范畴。C 对应错误码 4（Hold Timer Expired），与会话参数不匹配无关。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 概述与邻居关系",
+    "difficulty": "hard",
+    "tags": [
+      "BGP",
+      "Notification",
+      "Bad Peer AS"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-1-020",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 概述与邻居关系」；技术依据 RFC 4271 §4.5（错误码列表）与 §6.2（Bad Peer AS 子码 2）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开标准的错误码与子码定义设计日志定位题，未复制第三方题目。",
+      "reviewDigest": "f4b3f9c59b363bb2f459f524ca4011ec676a5d483795cf23df81be38afff8b4c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-1-021",
+    "type": "single_choice",
+    "question": "两台 BGP 路由器同时向对方发起 TCP 连接，形成了两条并行的 BGP 连接。按 RFC 4271 的冲突处理规则，应保留哪一条？",
+    "options": {
+      "A": "由 AS 号较小的一方决定保留哪一条",
+      "B": "保留 BGP Identifier 数值较大的发言者所发起的那条连接",
+      "C": "保留 BGP Identifier 数值较小的发言者所发起的那条连接",
+      "D": "两条都保留，分别承载不同地址族的路由"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RFC 4271 的连接冲突检测规定：比较双方 BGP Identifier，只保留 BGP Identifier 较大的发言者发起的那条连接，另一条以 Cease 通知关闭，故 B 正确。C 把比较方向说反。D 错误，同一对邻居之间只会保留一条 BGP 连接。A 错误，冲突判定依据是 BGP Identifier，而不是 AS 号大小。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 概述与邻居关系",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "TCP 冲突",
+      "BGP Identifier"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-1-021",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 概述与邻居关系」；技术依据 RFC 4271 §6.8（连接冲突时保留 BGP Identifier 较大者发起的连接）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据连接冲突检测规则独立命题，未复制第三方题目。",
+      "reviewDigest": "7b5e41fe2aa304790f3f3d5f241693e1ee436cd9c4460ec6ed6003f2ad346256"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-1-022",
+    "type": "single_choice",
+    "question": "一台 BGP 路由器从 IBGP 邻居学到一条路由，其 NEXT_HOP 为对端的 Loopback 地址，但本地路由表中没有到达该地址的路由。关于这条 BGP 路由，下列判断正确的是？",
+    "options": {
+      "A": "该路由会被安装，转发时再通过 ARP 解析 NEXT_HOP",
+      "B": "该路由会被安装，但 AS_PATH 会被清空",
+      "C": "该路由会被安装，并自动把 NEXT_HOP 改为本地地址",
+      "D": "该路由不可解析，不会被优选并安装到本地路由表"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "BGP 路由只有在其 NEXT_HOP 能被本地路由表解析时才可能进入 Loc-RIB，下一跳不可达的路由被视为不可解析而排除，故 D 正确。A 错误，NEXT_HOP 通常不是直连地址，不能直接靠 ARP 解析，必须先有到达该地址的路由。B 错误，路由是否安装与 AS_PATH 是否清空无关，且 AS_PATH 不应被随意清空。C 错误，BGP 不会因为下一跳不可达就自动改写 NEXT_HOP。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 概述与邻居关系",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "下一跳",
+      "路由解析"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-1-022",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 概述与邻居关系」；技术依据 RFC 4271 §3.2（Loc-RIB 下一跳必须可解析）与 §9.1.2.1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据下一跳可解析条件设计场景判断题，未复制第三方题目。",
+      "reviewDigest": "f1fff0b21a8d527e76f2b5a193a2506bab4ff6d66cad9da01362d9b00e2addeb"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-1-023",
+    "type": "single_choice",
+    "question": "在未启用额外路由通告能力（如 Add-Path）的情况下，一台 BGP 路由器向邻居通告某目的网段的路由时，默认会通告什么？",
+    "options": {
+      "A": "把从所有邻居收到的该网段路由全部通告出去",
+      "B": "只通告 AS_PATH 最短的那条，即使它不是本地选中的最优路由",
+      "C": "随机选择一条，以实现邻居之间的负载分担",
+      "D": "只通告经过决策过程选出的最优路由"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "BGP 讲话者只把自己使用的最优路由放入 Adj-RIBs-Out 并通告给邻居，这是默认行为，故 D 正确。A 描述的是把 Adj-RIBs-In 中的全部候选都扩散出去，实际只通告优选结果。B 错误，AS_PATH 最短只是选路过程中的一个比较项，最终通告的是完整决策后的最优路由。C 错误，BGP 默认不做随机选择，负载分担需要额外配置且不作为通告依据。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 概述与邻居关系",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "最优路由",
+      "通告"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-1-023",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 概述与邻居关系」；技术依据 RFC 4271 §1（只通告自己使用的路由）与 §9.1.3（Adj-RIBs-Out）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 BGP 默认只通告最优路由的公开规则独立命题，未复制第三方题目。",
+      "reviewDigest": "a92d17453224162cbc4b7c1aff90c3275934d985d984df45f7e7e595100ae573"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-1-024",
+    "type": "single_choice",
+    "question": "某企业 AS 有两台边界路由器 R1、R2，分别与不同 ISP 建立 EBGP 邻居，且二者之间建立 IBGP 邻居。这样做的直接作用是？",
+    "options": {
+      "A": "让 R1 与 R2 之间通过 IBGP 交换链路状态信息，计算 AS 内最短路径",
+      "B": "使 R1 能把从 R2 的 IBGP 邻居学到的路由再通告给 R2 的其他 IBGP 邻居",
+      "C": "让两台边界路由器自动合并为同一个 BGP 路由器 ID",
+      "D": "R1 从 EBGP 学到的外部路由可以通过 IBGP 通告给 R2，使 AS 内两台边界路由器都掌握外部可达性"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "IBGP 用于在同一 AS 内部传递 BGP 路由，R1 从 EBGP 学到的路由属于外部路由，可以正常通告给 IBGP 邻居 R2，从而让两台边界路由器都具备外部可达性，故 D 正确。A 错误，BGP 不交换链路状态信息，AS 内拓扑由 IGP 计算。B 错误，从 IBGP 邻居学到的路由默认不再通告给其他 IBGP 邻居，这正是需要全互联或路由反射器的原因。C 错误，两台路由器的 router-id 相互独立，不会合并。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 概述与邻居关系",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "IBGP",
+      "双出口"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-1-024",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 概述与邻居关系」；技术依据 RFC 4271 §9.2（IBGP 路由传播限制）与 §1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 IBGP 在双出口场景中的作用自行设计场景题，未复制第三方题目。",
+      "reviewDigest": "533b67d0c4a1dc3423d8b6f766cf9f8ed0d485cbfcd82f4c006e713e739f3f32"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-1-025",
+    "type": "single_choice",
+    "question": "关于 IBGP 邻居关系，下列描述错误的是？",
+    "options": {
+      "A": "从 IBGP 邻居学到的路由默认不再通告给其他 IBGP 邻居",
+      "B": "IBGP 邻居必须直连，否则无法建立会话",
+      "C": "IBGP 邻居之间通过 TCP 179 端口建立连接",
+      "D": "IBGP 邻居通常使用 Loopback 接口地址作为更新源"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IBGP 邻居位于同一 AS 内，只要求双方地址经 IGP 可达并能建立 TCP 连接，并不要求直连，因此 B 的说法错误，为本题答案。C 正确，BGP 统一使用 TCP 179 端口。D 正确，使用 Loopback 地址可以提高会话在链路故障时的稳定性。A 正确，该规则用于避免 AS 内路由环路，也是 IBGP 需要全互联或路由反射器的原因。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 概述与邻居关系",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "IBGP",
+      "反向判断"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-1-025",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 概述与邻居关系」；技术依据 RFC 4271 §1（TCP 179）与 §9.2（IBGP 路由不再转发规则）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "以反向设问方式考查 IBGP 邻居的建立条件，未复制第三方题目。",
+      "reviewDigest": "c2669ea885edf216f3681b3c06e4e1c5558f8bf19136fddddf0deb510975c3cc"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-1-026",
+    "type": "single_choice",
+    "question": "按 RFC 4271，BGP Identifier 的取值必须满足什么要求？",
+    "options": {
+      "A": "必须等于该设备最大的 Loopback 接口地址，否则邻居无法建立",
+      "B": "可以取 0.0.0.0，由对端根据 TCP 源地址自动填充",
+      "C": "必须是 4 字节的随机数，每次会话重建时重新生成",
+      "D": "取值为分配给该 BGP 发言者的非零 IP 地址，在启动时确定并对所有邻居保持一致"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "RFC 4271 规定 BGP Identifier 是 4 字节无符号整数，取值为分配给该发言者的 IP 地址，在启动时确定并对所有本地接口和邻居保持一致，故 D 正确。A 描述的是华为等设备未显式配置时的选举习惯，并非协议强制要求，管理员可以显式指定其他地址。B 错误，全 0 不是合法取值，对端不会代为填充。C 错误，该值不是随机数，也不会在每次重建时重新生成。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 概述与邻居关系",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "BGP Identifier",
+      "OPEN"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-1-026",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 概述与邻居关系」；技术依据 RFC 4271 §4.2（BGP Identifier 的取值与启动时确定）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 BGP Identifier 的协议要求独立命题，未复制第三方题目。",
+      "reviewDigest": "d21a1306a3a3de01dbcf729dd74c6bd7f10b018c06f934473afb38ad22156610"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-1-027",
+    "type": "single_choice",
+    "question": "关于 BGP 邻居的发现方式，下列描述正确的是？",
+    "options": {
+      "A": "BGP 通过继承 IGP 的邻居表自动建立邻居关系",
+      "B": "BGP 通过广播 ARP 请求发现邻居后直接建立会话",
+      "C": "BGP 不会自动发现邻居，必须显式配置对端地址与 AS 号后才尝试建立 TCP 连接",
+      "D": "BGP 通过组播 Hello 报文自动发现同一网段的邻居"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "BGP 没有邻居发现机制，必须手工指定对端地址并配置其 AS 号，之后才发起或接受 TCP 179 连接，故 C 正确。D 错误，组播 Hello 是 OSPF、IS-IS 等 IGP 的邻居发现方式，BGP 不使用。A 错误，IGP 邻居表与 BGP 邻居相互独立，BGP 不会自动继承。B 错误，ARP 只用于解析同一链路上的 IP 到 MAC 映射，不能替代 BGP 的显式邻居配置。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 概述与邻居关系",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "邻居发现",
+      "配置"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-1-027",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 概述与邻居关系」；技术依据 RFC 4271 §1、§4.2（BGP 依赖显式邻居配置与 TCP 建连）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 BGP 无邻居发现机制的公开事实独立命题，未复制第三方题目。",
+      "reviewDigest": "b768c845484c7be2a0d718d651906c22d3221d8422d70a7071fc8d7d10c01192"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-2-001",
+    "type": "single_choice",
+    "question": "BGP 的四种基本报文类型中，用于向邻居通告可达路由以及撤销不可达路由的是哪一种？",
+    "options": {
+      "A": "OPEN 报文",
+      "B": "UPDATE 报文",
+      "C": "KEEPALIVE 报文",
+      "D": "NOTIFICATION 报文"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "UPDATE 报文携带路径属性与 NLRI，用来通告新的可达路由，也可以在 Withdrawn Routes 字段中撤销路由，故 B 正确。A 的 OPEN 用于在 TCP 连接建立后协商版本、AS 号、Hold Time 等参数。C 的 KEEPALIVE 只用于保活和确认 OPEN。D 的 NOTIFICATION 用于报告错误并关闭连接。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 报文与状态机",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "UPDATE",
+      "报文类型"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-2-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 报文与状态机」（三级目录 hcip821-4-1-2）；技术依据 RFC 4271 §4.3（UPDATE 报文用途）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据四种报文类型的公开定义独立命题，未复制第三方题目。",
+      "reviewDigest": "c9b3b900393635b20da8983f65d228bb796350866b45d93ef4f6201c3c65ca89"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-2-002",
+    "type": "single_choice",
+    "question": "两台 BGP 路由器完成 TCP 三次握手后，在交换任何路由信息之前必须完成的动作是？",
+    "options": {
+      "A": "双方先进行 ARP 解析，确认接口 MAC 地址",
+      "B": "双方先协商 OSPF 区域号，再传递路由",
+      "C": "双方交换 OPEN 报文并确认版本、AS 号、Hold Time 等参数",
+      "D": "双方先互发 UPDATE 报文同步全部路由"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "TCP 连接建立后，双方首先发送 OPEN 报文，就版本、AS 号、Hold Time、BGP Identifier 及可选能力进行确认，确认通过后才进入后续状态并交换路由，故 C 正确。D 错误，UPDATE 必须在邻居关系建立之后发送。A 错误，ARP 是链路层地址解析，与 BGP 会话参数协商无关。B 错误，BGP 不协商 OSPF 区域号，二者是相互独立的路由协议。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 报文与状态机",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "OPEN",
+      "会话建立"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-2-002",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 报文与状态机」；技术依据 RFC 4271 §4.2（TCP 建立后首先发送 OPEN）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据会话建立顺序独立命题，未复制第三方题目。",
+      "reviewDigest": "f518b270f79af37094f6b8c724e374549d7deb542e936b069a4bf14ce814683a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-2-003",
+    "type": "single_choice",
+    "question": "BGP 报文头由哪些字段组成，总长度是多少字节？",
+    "options": {
+      "A": "4 字节 Version、2 字节 Length、1 字节 Type，共 7 字节",
+      "B": "16 字节 Marker、2 字节 Length、1 字节 Type，共 19 字节",
+      "C": "8 字节 Marker、2 字节 Length、1 字节 Type，共 11 字节",
+      "D": "16 字节 Marker、4 字节 Length、2 字节 Type，共 22 字节"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "BGP 报文头固定为 16 字节 Marker、2 字节 Length 和 1 字节 Type，三者相加为 19 字节，故 B 正确。C 把 Marker 误算为 8 字节，长度随之错误。D 把 Length 误算为 4 字节、Type 误算为 2 字节。A 把 Version 当成报文头字段，Version 实际位于 OPEN 报文的数据部分而不是公共报文头。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 报文与状态机",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "报文头",
+      "Marker"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-2-003",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 报文与状态机」；技术依据 RFC 4271 §4.1（Marker 16 字节、Length 2 字节、Type 1 字节）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据报文头字段位宽自行计算并设计选项，未复制第三方题目。",
+      "reviewDigest": "f3d7155e26ed02b174d7504907878743fd7192e3dd7f48a60d77ddcef6100ae1"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-2-004",
+    "type": "single_choice",
+    "question": "按 RFC 4271，BGP 报文的最大长度为 4096 字节，其中报文头固定为 19 字节。仅考虑这一限制，一条 BGP 报文的数据部分最多可以有多少字节？",
+    "options": {
+      "A": "4058",
+      "B": "4096",
+      "C": "4077",
+      "D": "4076"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "报文总长包含报文头，数据部分上限等于总长减去头部：4096−19=4077，故 C 正确。A 的 4058 相当于再减去了一个 19 字节，属于重复扣除。B 的 4096 是含报文头的总长度，不是数据部分长度。D 的 4076 比正确值少 1，属于减法计算错误。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 报文与状态机",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "报文长度",
+      "计算"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-2-004",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 报文与状态机」；技术依据 RFC 4271 §4（最大报文 4096 字节、最小 19 字节）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据报文长度上限自行做减法并设计选项，未复制第三方题目。",
+      "reviewDigest": "2706247a9cb7c1e2c78277100398e2d27bd03bd3628a906fdfeee58d2639bfb5"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-2-005",
+    "type": "single_choice",
+    "question": "BGP 报文头中的 Length 字段表示包含报文头在内的总长度。关于该字段的合法取值及越界处理，下列描述正确的是？",
+    "options": {
+      "A": "合法范围为 19 到 65535；越界时报文被缓存，等待重传",
+      "B": "合法范围由 Type 字段决定，Length 本身没有下限",
+      "C": "合法范围为 19 到 4096；越界时接收方发送 Message Header Error（Bad Message Length）的 Notification 并关闭连接",
+      "D": "合法范围为 0 到 4096；越界时报文被静默丢弃，会话保持"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Length 字段为 2 字节，但协议规定其取值至少为 19（仅有报文头的长度）且不超过 4096，越界属于报文头错误，应发送 Bad Message Length 子码的 Notification 并关闭连接，故 C 正确。D 错误，0 不是合法长度，且报文头错误不会被静默忽略。A 错误，上限是 4096 而不是 65535，越界报文不会被缓存重传。B 错误，Length 有明确的上下限要求，与 Type 无关。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 报文与状态机",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "Length",
+      "报文头错误"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-2-005",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 报文与状态机」；技术依据 RFC 4271 §4.1（Length 取值 19-4096）与 §6.1（Bad Message Length 子码）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 Length 合法范围与越界处理独立命题，未复制第三方题目。",
+      "reviewDigest": "e1e8a4d48263d4d426302158a24f2f0be00547ee6095890a2db6bc0632fe0c2b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-2-006",
+    "type": "single_choice",
+    "question": "抓包发现对端发来的 OPEN 报文中 Optional Parameters Length 大于 0，且其中包含 Capability 参数。这说明什么？",
+    "options": {
+      "A": "对端在 OPEN 报文中通告自身支持的能力（如多协议地址族、Route Refresh 等），供双方协商",
+      "B": "对端发送了错误报文，OPEN 报文不允许携带任何可选参数",
+      "C": "对端要求本端立即发送 UPDATE 报文，否则会话中断",
+      "D": "对端已经进入 Established 状态，正在发送 KEEPALIVE"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "OPEN 报文的可选参数字段用于携带能力参数，对端通过它声明自己支持的多协议地址族、Route Refresh 等能力，双方取交集后决定可以交换哪些路由，故 A 正确。B 错误，可选参数是 OPEN 报文的标准组成部分，并不违法。C 错误，能力参数不构成立即发送 UPDATE 的要求。D 错误，该报文类型是 OPEN，且 Established 是状态名，不是报文类型。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 报文与状态机",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "OPEN",
+      "能力协商"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-2-006",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 报文与状态机」；技术依据 RFC 4271 §4.2（Optional Parameters 与 Capability）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 OPEN 可选参数与能力协商设计抓包解读题，未复制第三方题目。",
+      "reviewDigest": "3362075e8fc8afe4d0596e1c6758a59eb92e719674378d00ca6624289aead3b9"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-2-007",
+    "type": "single_choice",
+    "question": "按 RFC 4271，OPEN 报文中 Hold Time 字段的取值必须满足什么条件？",
+    "options": {
+      "A": "必须为 0，或者至少为 3 秒",
+      "B": "必须大于 0 且小于 180 秒",
+      "C": "必须为 30 的整数倍",
+      "D": "可以为任意 16 位整数，没有额外限制"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "协议规定 Hold Time 要么为 0，要么至少为 3 秒，故 A 正确。B 错误，协议没有 180 秒的上限要求，180 秒只是常见实现默认值。C 错误，Hold Time 不要求是 30 的整数倍，30 秒来自 Keepalive 间隔通常取 Hold Time 三分之一的建议。D 错误，该字段虽是 2 字节整数，但取值受“0 或至少 3 秒”的约束，例如 1 秒、2 秒都是不合法的。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 报文与状态机",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "Hold Time",
+      "OPEN"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-2-007",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 报文与状态机」；技术依据 RFC 4271 §4.2（Hold Time 必须为 0 或至少 3 秒）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 Hold Time 的取值约束独立命题，未复制第三方题目。",
+      "reviewDigest": "aeb8bb3a4ddb6e8baaed1e1812c0dee9f94b107c45f4848c4de1901a284121a2"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-2-008",
+    "type": "single_choice",
+    "question": "在华为设备上为某个邻居配置了 peer 10.1.1.2 timer hold 60，而对端在 OPEN 报文中通告的 Hold Time 为 180 秒。双方协商后生效的 Hold Time 是多少？",
+    "options": {
+      "A": "240 秒",
+      "B": "60 秒",
+      "C": "90 秒",
+      "D": "180 秒"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "BGP 双方以各自配置值与对端 OPEN 报文中的 Hold Time 取较小值作为生效值，即 min(60,180)=60 秒，故 B 正确。C 的 90 秒既不是两端数值之一，也不是二者的运算结果。D 的 180 秒取了较大值，与协商规则相反。A 的 240 秒是把两个数值相加，协议中没有这种处理方式。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 报文与状态机",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "Hold Time",
+      "协商"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-2-008",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 报文与状态机」；技术依据 RFC 4271 §4.2（取本端配置与对端 OPEN 中 Hold Time 的较小值）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 Hold Time 协商规则自行取值计算，未复制第三方题目。",
+      "reviewDigest": "7a90b2dbe5f4c9a0bfbac521c6ec847abd90d703d6e43fc833bb253796ec2cfd"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-2-009",
+    "type": "single_choice",
+    "question": "BGP 状态机处于 Connect 状态时，TCP 连接建立成功。接下来本端会执行什么动作？",
+    "options": {
+      "A": "发送 OPEN 报文，并进入 OpenSent 状态",
+      "B": "直接进入 Established 状态并开始发送路由",
+      "C": "发送 NOTIFICATION 报文并回到 Idle 状态",
+      "D": "停留在 Connect 状态，等待对端先发送 OPEN"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Connect 状态下 TCP 连接建立成功后，本端完成 BGP 初始化、发送 OPEN 报文并转入 OpenSent，等待对端 OPEN，故 A 正确。B 错误，Established 需要经过 OPEN 与 KEEPALIVE 的完整交互，不能跳过。C 错误，TCP 建连成功是正常进展，不应发送错误通知。D 错误，进入 OpenSent 后本端会主动发送 OPEN，不会停留在 Connect。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 报文与状态机",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "状态机",
+      "Connect"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-2-009",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 报文与状态机」；技术依据 RFC 4271 §8.2.2（Connect 状态 TCP 建连成功后发送 OPEN 并进入 OpenSent）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据状态机在 Connect 状态的动作独立命题，未复制第三方题目。",
+      "reviewDigest": "bc95cbea9370c3070d71963b7959ab8e1a793fd500dbf43eca3e07001789d0e8"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-2-010",
+    "type": "single_choice",
+    "question": "BGP 状态机处于 OpenSent 状态时，收到了对端发来的 OPEN 报文且参数检查通过。接下来会进入哪个状态？",
+    "options": {
+      "A": "OpenConfirm",
+      "B": "Established",
+      "C": "Active",
+      "D": "Idle"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "OpenSent 表示本端已发出 OPEN、正在等待对端 OPEN；收到合法 OPEN 后，本端发送 KEEPALIVE 并进入 OpenConfirm，继续等待对端的 KEEPALIVE，故 A 正确。B 错误，Established 还要再收到对端 KEEPALIVE 才能进入。C 错误，Active 是 TCP 连接尚未建立时的状态，不会由 OpenSent 直接转入。D 错误，参数检查通过属于正常流程，不会回到 Idle。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 报文与状态机",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "OpenSent",
+      "OpenConfirm"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-2-010",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 报文与状态机」；技术依据 RFC 4271 §8.2.2（OpenSent 收到合法 OPEN 后进入 OpenConfirm）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 OpenSent 状态的转换条件独立命题，未复制第三方题目。",
+      "reviewDigest": "e33f8055b39d049dae376414aff8cd502b7a9850f00591bff36d51882a81644a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-2-011",
+    "type": "single_choice",
+    "question": "BGP 状态机处于 OpenConfirm 状态时，收到了对端发来的 KEEPALIVE 报文，随后进入哪个状态？",
+    "options": {
+      "A": "Connect",
+      "B": "Idle",
+      "C": "Established",
+      "D": "OpenSent"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "OpenConfirm 表示本端已发送 KEEPALIVE、正在等待对端 KEEPALIVE；收到后邻居关系建立完成，进入 Established，可以开始交换 UPDATE 报文，故 C 正确。D 错误，OpenSent 是更早的阶段，状态机不会回退。A 错误，Connect 是 TCP 建连阶段，此时连接早已建立。B 错误，收到合法 KEEPALIVE 属于正常流程，不会回到 Idle。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 报文与状态机",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "OpenConfirm",
+      "Established"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-2-011",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 报文与状态机」；技术依据 RFC 4271 §8.2.2（OpenConfirm 收到 KEEPALIVE 后进入 Established）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据状态机进入 Established 的条件独立命题，未复制第三方题目。",
+      "reviewDigest": "9e2cf5e0fb9d7b96122ad1827c72bd61e98e9490f4b2c88c6edb8e30fe2779fd"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-2-012",
+    "type": "single_choice",
+    "question": "收到一条 UPDATE 报文，其中携带 NLRI 但缺少公认必遵的 ORIGIN 属性。按 RFC 4271，本端应如何处理？",
+    "options": {
+      "A": "自动补上 ORIGIN 值为 IGP，继续使用该路由",
+      "B": "只丢弃该条路由，会话继续保持 Established",
+      "C": "把该路由的 ORIGIN 视为 Incomplete 后安装",
+      "D": "发送 UPDATE Message Error（Missing Well-known Attribute）的 Notification，并关闭连接"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "携带 NLRI 的 UPDATE 必须包含 ORIGIN、AS_PATH、NEXT_HOP 三个公认必遵属性，缺少时属于 UPDATE 报文错误，应发送相应子码的 Notification 并关闭连接，故 D 正确。A 错误，接收方不会替发送方补造属性值。B 错误，缺少必遵属性被视为 UPDATE 错误，处理结果是断开会话而不是仅丢弃一条路由。C 错误，协议没有“缺失即视为 Incomplete”的规定，Incomplete 是发送方显式填写的取值。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 报文与状态机",
+    "difficulty": "hard",
+    "tags": [
+      "BGP",
+      "UPDATE",
+      "必遵属性"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-2-012",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 报文与状态机」；技术依据 RFC 4271 §5（公认必遵属性）与 §6.3（Missing Well-known Attribute 子码）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据缺少必遵属性的处理规则独立命题，未复制第三方题目。",
+      "reviewDigest": "271ce459817df5e63565a08452114795e2db6c669e07c8e658021c5b36633942"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-2-013",
+    "type": "single_choice",
+    "question": "BGP NOTIFICATION 报文中的 Error Code 与 Error Subcode 之间是什么关系？",
+    "options": {
+      "A": "Error Subcode 表示错误大类，Error Code 表示具体原因",
+      "B": "Error Subcode 只在会话建立前使用，Established 之后必须填 0",
+      "C": "Error Code 表示错误大类，Error Subcode 给出该大类下的具体原因，没有合适子码时填 0",
+      "D": "Error Code 与 Error Subcode 含义相同，填其中一个即可"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "NOTIFICATION 由 Error Code 和 Error Subcode 两级构成：前者区分报文头错误、OPEN 错误、UPDATE 错误、Hold 超时、状态机错误、Cease 等大类，后者在该大类内进一步指明原因，无合适子码时使用 0（Unspecific），故 C 正确。D 错误，二者是两级而不是同义字段。A 把两级关系颠倒。B 错误，子码的使用与邻居处于哪个状态无关，会话建立后同样可以携带非零子码。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 报文与状态机",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "NOTIFICATION",
+      "错误码"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-2-013",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 报文与状态机」；技术依据 RFC 4271 §4.5（Error Code 与 Error Subcode 的定义）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据通知报文的两级错误字段结构独立命题，未复制第三方题目。",
+      "reviewDigest": "f942d9065aca9960cab053a974b26b030ef1c63ca19a4e801e880d9bf7a2a8fe"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-2-014",
+    "type": "single_choice",
+    "question": "BGP 发送 NOTIFICATION 报文后，对 BGP 连接的处理方式是什么？",
+    "options": {
+      "A": "立即关闭该 BGP 连接，不等待对端确认",
+      "B": "等待对端回复 NOTIFICATION 后再关闭",
+      "C": "保持连接，仅记录日志",
+      "D": "重新发送 OPEN 报文尝试重建会话"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "NOTIFICATION 用于报告错误，协议规定发送后立即关闭对应的 BGP 连接，随后由状态机按需重新尝试建立，故 A 正确。B 错误，通知不需要对端确认，也不存在等待回复再关闭的流程。C 错误，NOTIFICATION 正是终止会话的手段，不会保持连接。D 错误，重建会话要等连接关闭后由状态机重新发起，不是在原连接上直接重发 OPEN。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 报文与状态机",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "NOTIFICATION",
+      "连接关闭"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-2-014",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 报文与状态机」；技术依据 RFC 4271 §4.5（发送 NOTIFICATION 后立即关闭连接）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据通知报文的连接处理规则独立命题，未复制第三方题目。",
+      "reviewDigest": "910db685c0dbd581d2fc1847f643348d85261910f65267aa8e7935d95b23c3d7"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-2-015",
+    "type": "single_choice",
+    "question": "管理员在设备上主动关闭一个已建立的 BGP 邻居，正常情况下对端会收到错误码为 6 的 NOTIFICATION。该错误码的名称是？",
+    "options": {
+      "A": "Message Header Error",
+      "B": "Cease",
+      "C": "Hold Timer Expired",
+      "D": "Finite State Machine Error"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "错误码 6 为 Cease，表示管理性关闭或连接冲突处理等正常终止原因，故 B 正确。C 的 Hold Timer Expired 是错误码 4，表示在 Hold Time 内没有收到保活或更新报文。D 的 Finite State Machine Error 是错误码 5。A 的 Message Header Error 是错误码 1，对应长度、类型等报文头问题。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 报文与状态机",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "Cease",
+      "错误码"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-2-015",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 报文与状态机」；技术依据 RFC 4271 §4.5（错误码 6 为 Cease）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据错误码名称对照独立命题，未复制第三方题目。",
+      "reviewDigest": "06cd90449e9dcee2ebda7e9ae04f9ee7600d6fb7dcf16747575174020a274edc"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-2-016",
+    "type": "single_choice",
+    "question": "BGP UPDATE 报文中，用于列出需要撤销的目的网段前缀的字段是？",
+    "options": {
+      "A": "Withdrawn Routes",
+      "B": "Path Attributes",
+      "C": "Network Layer Reachability Information",
+      "D": "Optional Parameters"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "UPDATE 报文用 Withdrawn Routes 字段列出要撤销的前缀，用 Path Attributes 与 NLRI 字段通告新的可达路由，故 A 正确。B 的 Path Attributes 描述的是可达路由的属性，不用于撤销。C 的 NLRI 存放的是新通告的可达前缀，方向与撤销相反。D 的 Optional Parameters 属于 OPEN 报文，不出现在 UPDATE 报文中。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 报文与状态机",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "UPDATE",
+      "撤销路由"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-2-016",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 报文与状态机」；技术依据 RFC 4271 §4.3（UPDATE 报文字段结构）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 UPDATE 字段用途独立命题，未复制第三方题目。",
+      "reviewDigest": "a444d8487dc5dbb0e9ed6db0b21e1749ab1a5caeea4dfd3231ae4bce08be443f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-2-017",
+    "type": "single_choice",
+    "question": "关于一条 UPDATE 报文承载多条路由，下列描述正确的是？",
+    "options": {
+      "A": "一条 UPDATE 可以承载任意多条路由，即使它们的路径属性完全不同",
+      "B": "多条路由只能通过 Withdrawn Routes 字段一起通告",
+      "C": "多条具有相同路径属性的路由可以放在同一条 UPDATE 的 NLRI 字段中一起通告",
+      "D": "一条 UPDATE 只能承载一条路由，多条路由必须分多条报文发送"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "RFC 4271 规定，具有相同路径属性的多条路由可以放在同一条 UPDATE 的 NLRI 字段中一起通告，从而减少报文数量，故 C 正确。D 错误，一条 UPDATE 可以携带多个前缀。A 错误，属性不同的路由必须拆到不同 UPDATE 中分别携带各自的属性。B 错误，Withdrawn Routes 用于撤销路由，不能用来通告新的可达路由。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 报文与状态机",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "UPDATE",
+      "NLRI"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-2-017",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 报文与状态机」；技术依据 RFC 4271 §3.1 与 §4.3（相同属性的多条路由可在一条 UPDATE 中通告）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 UPDATE 承载多条路由的规则独立命题，未复制第三方题目。",
+      "reviewDigest": "43548e05009e4b6ceeeec7a90f5136b8049d6fc6634adf21d560b0f874e6f472"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-2-018",
+    "type": "single_choice",
+    "question": "收到一条 UPDATE 报文，其 Withdrawn Routes 字段非空，而 Path Attributes 与 NLRI 字段均为空。这条报文的含义是？",
+    "options": {
+      "A": "请求对端重新发送全部路由",
+      "B": "报文格式错误，应立即发送 Notification",
+      "C": "仅撤销 Withdrawn Routes 中列出的路由，不新增或更新任何路由",
+      "D": "通告 Withdrawn Routes 中列出的路由可达"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "只携带 Withdrawn Routes 的 UPDATE 是合法的纯撤销报文，表示列出的前缀不再可达，不携带路径属性与 NLRI 也正是协议允许的形式，故 C 正确。D 错误，撤销字段的语义是路由失效，不是宣告可达。A 错误，BGP 没有通过该形式请求全量路由的机制。B 错误，这种报文格式合法，无需发送 Notification。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 报文与状态机",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "UPDATE",
+      "验证输出"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-2-018",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 报文与状态机」；技术依据 RFC 4271 §4.3（仅携带 Withdrawn Routes 的纯撤销报文）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据纯撤销 UPDATE 的合法结构设计报文解读题，未复制第三方题目。",
+      "reviewDigest": "6339683810588c6b6a98e3dc71463448178d85ff848e9724d006162bbf84ca86"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-2-019",
+    "type": "single_choice",
+    "question": "关于 KEEPALIVE 报文的作用，下列描述正确的是？",
+    "options": {
+      "A": "在 OpenConfirm 状态用于确认已收到对端 OPEN，在 Established 状态周期性发送以重置 Hold 定时器",
+      "B": "用于在邻居之间传递路由属性，替代 UPDATE 报文",
+      "C": "用于在会话建立前协商 BGP 版本与 AS 号",
+      "D": "用于在检测到错误时通知对端并关闭连接"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "KEEPALIVE 在 OpenConfirm 阶段作为对 OPEN 的确认，进入 Established 后按协商 Hold Time 的三分之一周期发送，用于重置 Hold 定时器、维持邻居可达，故 A 正确。B 错误，路由属性由 UPDATE 携带，KEEPALIVE 不含路由信息。C 错误，版本与 AS 号协商由 OPEN 完成。D 错误，报告错误并关闭连接是 NOTIFICATION 的职责。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 报文与状态机",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "KEEPALIVE",
+      "保活"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-2-019",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 报文与状态机」；技术依据 RFC 4271 §4.4（KEEPALIVE 的作用与三分之一 Hold Time 的周期）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 KEEPALIVE 在会话各阶段的作用独立命题，未复制第三方题目。",
+      "reviewDigest": "1ace614604872ab390a18739c2e18e6b1ad2363bb716300fa2dd4cf4be0e0165"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-2-020",
+    "type": "single_choice",
+    "question": "一台路由器收到对端 OPEN 报文，其中 Version 字段为 3，而本端只支持 BGP-4。按 RFC 4271，本端应如何处理？",
+    "options": {
+      "A": "忽略版本字段，按 BGP-4 继续建立会话",
+      "B": "把本端版本降为 3 后重新发送 OPEN",
+      "C": "发送 KEEPALIVE 报文，表示接受该版本",
+      "D": "发送 OPEN Message Error、子码 Unsupported Version Number 的 NOTIFICATION，并关闭连接"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "版本号不可接受属于 OPEN 报文错误，应发送子码为 Unsupported Version Number 的 NOTIFICATION 并关闭连接，从而允许双方重新尝试其他共同版本，故 D 正确。A 错误，版本不匹配不能直接忽略，双方报文格式可能并不兼容。B 错误，本端不能把自己降为不支持的版本。C 错误，KEEPALIVE 表示接受 OPEN，与版本错误的处理相反。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 报文与状态机",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "版本协商",
+      "OPEN"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-2-020",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 报文与状态机」；技术依据 RFC 4271 §6.2（Unsupported Version Number 子码）与 §7（版本协商）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据版本不可接受时的处理规则独立命题，未复制第三方题目。",
+      "reviewDigest": "b0b50e467342e9b814941f9a728c8d2c9afcc865cf4d443f2de1e4c7c4e686cd"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-2-021",
+    "type": "single_choice",
+    "question": "一条 OPEN 报文由 19 字节报文头和 OPEN 固定字段组成，固定字段包括 1 字节 Version、2 字节 My AS、2 字节 Hold Time、4 字节 BGP Identifier 和 1 字节 Optional Parameters Length。该报文的最小长度是多少字节？",
+    "options": {
+      "A": "28",
+      "B": "29",
+      "C": "19",
+      "D": "31"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "OPEN 固定字段长度为 1+2+2+4+1=10 字节，加上 19 字节报文头，最小长度为 19+10=29 字节，故 B 正确。C 的 19 只是报文头长度，漏算了固定字段。D 的 31 比正确值多 2。A 的 28 比正确值少 1，属于逐项相加时的计算错误。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 报文与状态机",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "OPEN",
+      "长度计算"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-2-021",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 报文与状态机」；技术依据 RFC 4271 §4.2（OPEN 最小长度 29 字节）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 OPEN 固定字段位宽自行累加并设计选项，未复制第三方题目。",
+      "reviewDigest": "86e3c4a97a627b58a51bbd6da08cd415e2d3728f7ed94af4762b8832168e6be3"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-2-022",
+    "type": "single_choice",
+    "question": "BGP 报文头中的 Marker 字段长度与取值要求是什么？",
+    "options": {
+      "A": "可变长度，由 Length 字段决定",
+      "B": "16 字节，必须全部置为 1",
+      "C": "8 字节，填写本端 router-id",
+      "D": "16 字节，填写对端 AS 号"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Marker 为 16 字节，出于兼容性考虑必须全部置为 1，接收方可据此校验报文边界，故 B 正确。C 把长度误为 8 字节，且该字段不承载 router-id。D 错误，Marker 不携带 AS 号，AS 号出现在 OPEN 报文的 My AS 字段中。A 错误，Marker 是固定长度字段，Length 字段描述的是整条报文的总长度。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 报文与状态机",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "Marker",
+      "报文头"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-2-022",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 报文与状态机」；技术依据 RFC 4271 §4.1（Marker 为 16 字节且置全 1）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 Marker 字段的公开定义独立命题，未复制第三方题目。",
+      "reviewDigest": "8ed49440690b06c8304c9af017f6ce8b6387832b30306c3441ea68c0a69f4af8"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-2-023",
+    "type": "single_choice",
+    "question": "抓包统计显示，某 BGP 邻居每 60 秒收到一个长度为 19 字节、Type 字段为 4 的报文。下列判断正确的是？",
+    "options": {
+      "A": "这是 KEEPALIVE 报文，说明该会话的保活机制正常工作",
+      "B": "这是 UPDATE 报文，说明邻居正在周期性同步路由",
+      "C": "这是 OPEN 报文，说明会话尚未建立完成",
+      "D": "这是 NOTIFICATION 报文，说明邻居正在报告错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "BGP 报文类型 4 为 KEEPALIVE，且该报文只有 19 字节报文头、没有数据部分，按 Hold Time 三分之一（180 秒对应 60 秒）周期发送，说明保活正常，故 A 正确。B 错误，UPDATE 的类型码是 2 且必然携带数据部分。C 错误，OPEN 的类型码是 1，最短为 29 字节。D 错误，NOTIFICATION 的类型码是 3，最短为 21 字节。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 报文与状态机",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "KEEPALIVE",
+      "抓包分析"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-2-023",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 报文与状态机」；技术依据 RFC 4271 §4.1（类型码 4 为 KEEPALIVE）与 §4.4（仅含报文头）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据报文类型码与长度特征设计抓包判断题，未复制第三方题目。",
+      "reviewDigest": "7fb9d04056754bfc2b443961c00759e85f9ca95928a8243392ddb10a60e421cd"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-2-024",
+    "type": "single_choice",
+    "question": "某 BGP 会话已经稳定运行数月，某时刻突然中断，日志显示 Hold Timer Expired。最可能的原因是？",
+    "options": {
+      "A": "对端发送的 UPDATE 报文中 AS_PATH 属性格式错误",
+      "B": "本端与对端的 BGP 版本号不一致",
+      "C": "本端在协商的 Hold Time 内没有收到对端的 KEEPALIVE 或 UPDATE 报文，例如对端进程异常或链路出现单向故障",
+      "D": "本端配置的 router-id 与对端冲突"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Hold 定时器在每次收到 KEEPALIVE 或 UPDATE 时被重置，超时意味着协商时间内没有收到对端任何保活或更新报文，常见原因是对端进程异常、CPU 繁忙或链路单向故障，故 C 正确。D 错误，router-id 冲突不会导致 Hold 超时，通常表现为连接冲突或会话震荡。A 错误，AS_PATH 格式错误应触发 UPDATE Message Error（错误码 3）。B 错误，版本不一致在 OPEN 阶段就会失败，不会稳定运行数月后才报 Hold 超时。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 报文与状态机",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "Hold Timer",
+      "故障定位"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-2-024",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 报文与状态机」；技术依据 RFC 4271 §6.5（Hold Timer 超时的处理）与 §4.4。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 Hold 定时器超时机制设计故障定位题，未复制第三方题目。",
+      "reviewDigest": "037a1b18fa2cae170c8463e6d6c503965f6e038f8bc2343b1b97b61e1e9be500"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-2-025",
+    "type": "single_choice",
+    "question": "关于 BGP 状态机，下列描述错误的是？",
+    "options": {
+      "A": "OpenSent 表示本端已发出 OPEN 报文，正在等待对端 OPEN",
+      "B": "Established 表示邻居关系建立完成，可以交换 UPDATE 报文",
+      "C": "Idle 状态下 BGP 会主动向对端发送 OPEN 报文，尝试建立会话",
+      "D": "Idle 是 BGP 邻居的初始状态，此时不为该邻居分配资源"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Idle 是初始状态，此时拒绝该邻居的所有入连接、不分配资源，收到启动事件后才去建立 TCP 连接，OPEN 要等到 TCP 建立并进入 OpenSent 时才发送，因此 C 的说法错误，为本题答案。D 正确，符合 Idle 状态的定义。A 正确，OpenSent 就是等待对端 OPEN 的阶段。B 正确，Established 是邻居建立完成、可交换路由的状态。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 报文与状态机",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "状态机",
+      "反向判断"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-2-025",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 报文与状态机」；技术依据 RFC 4271 §8.2.2（Idle 状态拒绝连接且不分配资源）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "以反向设问方式考查各状态的含义，未复制第三方题目。",
+      "reviewDigest": "e8ea5638e552dbd6afb75ec64636e9b5454ca135bea31597c3058ddf4dceeec6"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-2-026",
+    "type": "single_choice",
+    "question": "两台 BGP 路由器从 TCP 建连成功到可以交换路由，报文的正常出现顺序是？",
+    "options": {
+      "A": "KEEPALIVE → OPEN → UPDATE",
+      "B": "UPDATE → OPEN → KEEPALIVE",
+      "C": "OPEN → UPDATE → KEEPALIVE",
+      "D": "OPEN → KEEPALIVE → UPDATE"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "TCP 建连后双方先交换 OPEN 协商参数，参数通过后互发 KEEPALIVE 确认，邻居进入 Established 后才开始用 UPDATE 通告路由，故 D 正确。A 把 KEEPALIVE 放到 OPEN 之前，此时双方尚未协商参数。B 把 UPDATE 放到最前，路由不能在邻居建立之前发送。C 把 UPDATE 插在 KEEPALIVE 之前，缺少 KEEPALIVE 确认就无法进入 Established。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 报文与状态机",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "报文顺序",
+      "会话建立"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-2-026",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 报文与状态机」；技术依据 RFC 4271 §4.2 与 §8.2.2（OPEN—KEEPALIVE—UPDATE 的交互顺序）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据会话建立各阶段的报文顺序独立命题，未复制第三方题目。",
+      "reviewDigest": "fdb131d00cb4ce606626f58b26bf3521b99c56959edb9e9426f684bc97105bf5"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-2-027",
+    "type": "single_choice",
+    "question": "BGP 状态机中的 ConnectRetry 定时器的作用是什么？",
+    "options": {
+      "A": "控制 KEEPALIVE 报文的发送周期",
+      "B": "控制路由撤销后等待删除的时间",
+      "C": "控制 OPEN 报文的版本协商次数",
+      "D": "在 TCP 连接建立失败后控制重试的时间间隔，超时后重新发起 TCP 连接"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "ConnectRetry 定时器用于 TCP 建连失败后的重试节奏：超时后重新发起 TCP 连接并回到 Connect 状态，故 D 正确。A 错误，KEEPALIVE 的发送周期由 Keepalive 定时器控制，通常取 Hold Time 的三分之一。B 错误，路由撤销通过 UPDATE 报文完成，不存在该定时器控制的删除等待。C 错误，版本协商通过多次 OPEN 尝试完成，与 ConnectRetry 定时器无关。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 报文与状态机",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "ConnectRetry",
+      "定时器"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-2-027",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「BGP 报文与状态机」；技术依据 RFC 4271 §8.1.3 与 §8.2.2（ConnectRetry 定时器触发重连）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 ConnectRetry 定时器的协议作用独立命题，未复制第三方题目。",
+      "reviewDigest": "88f29ffbaf5af3a0395c0ce2d92adb3a6009e408364701d5a265590382c89f20"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-2-1-001",
+    "type": "single_choice",
+    "question": "关于 BGP 的 LOCAL_PREF 属性，下列描述正确的是？",
+    "options": {
+      "A": "它只在同一 AS 内部的 IBGP 邻居之间传递，不应发送给 EBGP 邻居；从 EBGP 邻居收到时应忽略",
+      "B": "它会随路由一起发送给所有 EBGP 邻居，用于影响外部 AS 的选路",
+      "C": "它是可选非过渡属性，只能在 EBGP 邻居之间传递",
+      "D": "它的数值越小表示优先级越高，且必须随路由传播到其他 AS"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "LOCAL_PREF 是公认自由决定属性，用于在 AS 内部表达本端对路由的偏好，必须随发往内部邻居的 UPDATE 携带，但不得发送给外部邻居；若从外部邻居收到则应忽略，故 A 正确。B 与协议规定相反，向外部邻居发送 LOCAL_PREF 是不允许的。C 错误，LOCAL_PREF 是公认属性而不是可选非过渡属性，也不用于 EBGP 之间。D 错误，LOCAL_PREF 数值越大越优，且不会传播到其他 AS。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 路径属性与反射器",
+    "knowledgePoint": "路径属性",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "Local_Pref",
+      "路径属性"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-2-1-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「路径属性」（三级目录 hcip821-4-2-1）；技术依据 RFC 4271 §5.1.5（LOCAL_PREF 不发送给外部邻居，收到外部该属性应忽略）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 LOCAL_PREF 的作用域规则独立命题，未复制第三方题目。",
+      "reviewDigest": "84340cc460f76adec70ad42dd1a6fb485e5265d414ee31b083b4009ba2794c0f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-2-1-002",
+    "type": "single_choice",
+    "question": "下列哪一组属性全部属于 BGP 的公认必遵（well-known mandatory）属性？",
+    "options": {
+      "A": "LOCAL_PREF、MED、COMMUNITY",
+      "B": "ORIGIN、LOCAL_PREF、ATOMIC_AGGREGATE",
+      "C": "AS_PATH、MED、AGGREGATOR",
+      "D": "ORIGIN、AS_PATH、NEXT_HOP"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "携带 NLRI 的 UPDATE 必须包含 ORIGIN、AS_PATH、NEXT_HOP 三个公认必遵属性，故 D 正确。A 中 LOCAL_PREF 是公认自由决定属性、MED 是可选非过渡属性、COMMUNITY 是可选过渡属性，均非公认必遵。B 中 LOCAL_PREF 与 ATOMIC_AGGREGATE 都属于公认自由决定属性，只有 ORIGIN 是必遵。C 中 MED 是可选非过渡属性、AGGREGATOR 是可选过渡属性，只有 AS_PATH 是必遵。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 路径属性与反射器",
+    "knowledgePoint": "路径属性",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "路径属性",
+      "公认必遵"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-2-1-002",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「路径属性」；技术依据 RFC 4271 §5（属性分类与必遵属性表）及 §5.1.1-§5.1.3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据属性分类表独立组合选项，未复制第三方题目。",
+      "reviewDigest": "069d894875f039d2e0eac10df118c93c7767c1086291446856721ed05fab3bf7"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-2-1-003",
+    "type": "single_choice",
+    "question": "一台 BGP 路由器把从 EBGP 邻居学到的路由分别通告给 IBGP 邻居和另一个 EBGP 邻居。关于 AS_PATH 的处理，下列描述正确的是？",
+    "options": {
+      "A": "两种情况下都清空 AS_PATH，由接收方重新计算路径",
+      "B": "通告给 IBGP 邻居时不修改 AS_PATH；通告给 EBGP 邻居时把自己的 AS 号追加到 AS_PATH 最前面",
+      "C": "通告给 IBGP 邻居时追加本地 AS 号；通告给 EBGP 邻居时不修改 AS_PATH",
+      "D": "两种情况下都追加本地 AS 号，因此 AS_PATH 会随跳数增加而变长"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RFC 4271 规定，向内部邻居通告路由时不得修改 AS_PATH；向外部邻居通告时则把本地 AS 号前插到 AS_PATH 中，用于记录途经的 AS 并防环，故 B 正确。C 把两种方向的处理完全对调。D 错误，IBGP 之间不追加 AS 号，否则同一 AS 内部的路由会被误判为经过了新 AS。A 错误，AS_PATH 是公认必遵属性，不能随意清空。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 路径属性与反射器",
+    "knowledgePoint": "路径属性",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "AS_PATH",
+      "IBGP"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-2-1-003",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「路径属性」；技术依据 RFC 4271 §5.1.2（向内部邻居不修改 AS_PATH，向外部邻居前插本地 AS）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据 AS_PATH 的修改方向独立设计对比题，未复制第三方题目。",
+      "reviewDigest": "5eab20d74988049a1e1ca41ea5297e2715e8ef5ad5896b7568846d7215740ff2"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  }
+]

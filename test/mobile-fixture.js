@@ -12,6 +12,7 @@ export async function mobileModules(t, storage) {
     'api/resourceCache',
     'api/cachePolicy',
     'api/transport',
+    'api/studyTypes',
     'api/communityMessages',
     'api/client',
     'version',

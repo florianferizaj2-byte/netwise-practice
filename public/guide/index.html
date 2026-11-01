@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#174c3c" />
+    <meta
+      name="description"
+      content="考匠 AceExam 是面向职业资格考试与升学考试的练习平台。了解软考网络工程师、HCIA-Datacom、计算机等级考试、执业兽医和四川专升本计算机基础题库及来源说明。"
+    />
+    <link rel="canonical" href="https://aceexam.top/guide/" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:site_name" content="考匠 AceExam" />
+    <meta property="og:title" content="考匠 AceExam｜证书考试题库与刷题说明" />
+    <meta
+      property="og:description"
+      content="考匠是什么、适合哪些考试、题库如何标注来源，以及怎样开始练习。"
+    />
+    <meta property="og:url" content="https://aceexam.top/guide/" />
+    <meta property="og:image" content="https://aceexam.top/kaojiang-logo-512.png" />
+    <title>考匠 AceExam｜证书考试题库、刷题方式与来源说明</title>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "考匠 AceExam",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Web, Android, iOS browser",
+        "url": "https://aceexam.top/",
+        "description": "面向职业资格考试与升学考试的练习平台，提供章节和知识点练习、错题复习、模拟考试及 AI 辅助学习。",
+        "inLanguage": "zh-CN"
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "考匠 AceExam 是什么？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "考匠 AceExam 是面向职业资格考试与升学考试的独立练习平台，提供按章节和知识点练习、错题复习、模拟考试及 AI 辅助学习。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "考匠目前有哪些题库方向？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "目前包括软考中级网络工程师、HCIA-Datacom V2.0、全国计算机等级考试二级 MS Office、全国执业兽医资格考试兽医全科类，以及四川省专升本计算机基础。题量和来源说明以站内题库标注为准。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "考匠是考试官方平台吗？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "不是。考匠是独立备考工具，与考试主管单位及证书官方机构无隶属或合作关系；平台不承诺通过考试，也不会将练习题一概称为官方真题。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "可以免费体验考匠吗？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "电脑网页可免注册试做 5 道软考网络工程师体验题。其他功能及 AI 使用额度以网站当前页面和账号权益为准。"
+            }
+          }
+        ]
+      }
+    </script>
+    <style>
+      :root {
+        color-scheme: light;
+        --forest: #174c3c;
+        --deep: #10372e;
+        --leaf: #b7d3c3;
+        --paper: #f4f8f5;
+        --white: #fff;
+        --ink: #19362e;
+        --muted: #60746b;
+        --line: #d8e4dc;
+        --gold: #d4a148;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font: 16px/1.75 system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+      }
+      a { color: inherit; }
+      a:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
+      .wrap { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+      .site-head { height: 74px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+      .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--forest); text-decoration: none; font-weight: 760; letter-spacing: .02em; }
+      .brand img { width: 34px; height: 34px; }
+      .head-link { color: var(--forest); font-size: 14px; font-weight: 650; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+      .hero { background: var(--forest); color: #f6fbf7; overflow: hidden; }
+      .hero-inner { min-height: 440px; padding-block: 58px 62px; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(280px, .8fr); align-items: center; gap: 70px; }
+      .hero-copy { max-width: 620px; }
+      .hero-kicker { margin: 0 0 18px; color: #d0e3d8; font-size: 13px; }
+      h1 { max-width: 610px; margin: 0; font-size: clamp(38px, 5vw, 60px); line-height: 1.22; letter-spacing: -.045em; font-weight: 730; }
+      .hero-copy > p:not(.hero-kicker) { max-width: 590px; margin: 22px 0 0; color: #e0eee5; font-size: 17px; line-height: 1.9; }
+      .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 29px; }
+      .button { min-height: 46px; padding: 10px 18px; border: 1px solid transparent; border-radius: 3px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; text-decoration: none; }
+      .button-primary { background: #f4f8f5; color: var(--forest); }
+      .button-secondary { border-color: #80a594; color: #f4f8f5; }
+      .index-note { padding: 22px 24px 20px; background: #f4f8f5; color: var(--ink); border-left: 4px solid var(--gold); }
+      .index-note h2 { margin: 0 0 11px; color: var(--forest); font-size: 14px; font-weight: 740; }
+      .index-note ul { list-style: none; margin: 0; padding: 0; }
+      .index-note li { padding: 8px 0; border-top: 1px solid var(--line); font-size: 14px; }
+      .index-note small { display: block; color: var(--muted); font-size: 12px; }
+      .scope-note { padding: 17px 0 19px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+      main { padding-bottom: 46px; }
+      .section { padding-block: 55px; border-bottom: 1px solid var(--line); }
+      .section-head { max-width: 690px; margin-bottom: 26px; }
+      .section-head h2 { margin: 0; color: var(--forest); font-size: clamp(25px, 3vw, 34px); line-height: 1.35; letter-spacing: -.025em; }
+      .section-head p { margin: 10px 0 0; color: var(--muted); }
+      .practice-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+      .practice-step { padding: 20px 22px 20px 0; }
+      .practice-step + .practice-step { padding-left: 22px; border-left: 1px solid var(--line); }
+      .practice-step h3 { margin: 0 0 7px; font-size: 17px; color: var(--ink); }
+      .practice-step p { margin: 0; font-size: 14px; line-height: 1.8; color: var(--muted); }
+      .table-scroll { overflow-x: auto; }
+      table { width: 100%; min-width: 720px; border-collapse: collapse; background: var(--white); }
+      th, td { padding: 15px 17px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+      th { background: #e8f1eb; color: var(--forest); font-size: 13px; font-weight: 720; }
+      td { font-size: 14px; }
+      tbody tr:last-child td { border-bottom: 0; }
+      .exam-name { min-width: 200px; font-weight: 700; }
+      .exam-count { min-width: 120px; white-space: nowrap; color: var(--forest); font-weight: 700; }
+      .muted { color: var(--muted); }
+      .table-note { margin: 13px 0 0; color: var(--muted); font-size: 12px; }
+      .trust-row { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: start; }
+      .trust-row h3 { margin: 0 0 9px; color: var(--forest); font-size: 19px; }
+      .trust-row p { margin: 0; color: var(--muted); font-size: 14px; }
+      .faq { padding-block: 48px 34px; }
+      .faq h2 { margin: 0 0 18px; color: var(--forest); font-size: 29px; }
+      details { padding: 15px 0; border-bottom: 1px solid var(--line); }
+      summary { cursor: pointer; color: var(--ink); font-weight: 700; }
+      details p { max-width: 850px; margin: 9px 0 0; color: var(--muted); font-size: 14px; }
+      .closing { padding: 30px 0 40px; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+      .closing p { margin: 0; color: var(--muted); font-size: 14px; }
+      .closing .button { background: var(--forest); color: var(--white); }
+      footer { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 20px 0 30px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+      footer a { color: var(--forest); }
+      @media (max-width: 760px) {
+        .wrap { width: min(100% - 30px, 620px); }
+        .site-head { height: 64px; }
+        .hero-inner { min-height: 0; padding-block: 45px 42px; grid-template-columns: 1fr; gap: 32px; }
+        .hero-copy > p:not(.hero-kicker) { font-size: 15px; }
+        .index-note { max-width: 520px; }
+        .section { padding-block: 40px; }
+        .practice-grid { grid-template-columns: 1fr 1fr; }
+        .practice-step { padding: 16px 15px 16px 0; }
+        .practice-step + .practice-step { padding-left: 15px; }
+        .practice-step:nth-child(3) { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
+        .practice-step:nth-child(4) { border-top: 1px solid var(--line); }
+        .trust-row { grid-template-columns: 1fr; gap: 22px; }
+        .closing { align-items: flex-start; flex-direction: column; }
+        footer { align-items: flex-start; flex-direction: column; gap: 8px; }
+      }
+      @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    </style>
+  </head>
+  <body>
+    <header class="wrap site-head">
+      <a class="brand" href="/" aria-label="考匠首页">
+        <img src="/kaojiang-logo-48.png" width="34" height="34" alt="" />
+        <span>考匠 AceExam</span>
+      </a>
+      <a class="head-link" href="/#downloads">查看多端学习方式</a>
+    </header>
+
+    <div class="hero">
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <p class="hero-kicker">职业资格考试与升学考试练习平台</p>
+          <h1>备考刷题，先知道自己卡在哪。</h1>
+          <p>
+            考匠 AceExam 把章节练习、错题复习和模拟考试放在同一个学习空间。
+            按知识点练习，查看解析与学习进度，再用整套考试检查掌握情况。
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="/?desktop=1">打开考匠</a>
+            <a class="button button-secondary" href="#exam-banks">查看题库方向</a>
+          </div>
+        </div>
+        <aside class="index-note" aria-label="当前备考方向">
+          <h2>当前开放的备考方向</h2>
+          <ul>
+            <li>软考中级网络工程师<small>章节练习与模拟考试</small></li>
+            <li>HCIA-Datacom V2.0<small>大纲仿真练习</small></li>
+            <li>全国计算机等级考试二级 MS Office<small>题库来源分级说明</small></li>
+            <li>执业兽医资格与四川专升本计算机基础<small>具体题量和组成见下方</small></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+
+    <div class="wrap scope-note">
+      考匠是独立备考工具，与考试主管单位及证书官方机构无隶属或合作关系。
+      练习题的性质和来源以题库中的具体标注为准。
+    </div>
+
+    <main class="wrap">
+      <section class="section" aria-labelledby="practice-title">
+        <div class="section-head">
+          <h2 id="practice-title">让刷题形成一个能复盘的过程</h2>
+          <p>先看知识点，再练题；把错题留给下一轮复习，最后用计时考试检查节奏。</p>
+        </div>
+        <div class="practice-grid">
+          <div class="practice-step">
+            <h3>按章节练习</h3>
+            <p>围绕当前证书的知识体系进入章节与考点，不必每次从整套题里盲目抽题。</p>
+          </div>
+          <div class="practice-step">
+            <h3>回看错题</h3>
+            <p>把做错的内容集中复习，结合解析和知识点定位原因，再进行针对性巩固。</p>
+          </div>
+          <div class="practice-step">
+            <h3>模拟考试</h3>
+            <p>在计时作答中检查知识覆盖和时间安排，考后查看成绩与题目解析。</p>
+          </div>
+          <div class="practice-step">
+            <h3>多端继续</h3>
+            <p>电脑网页、Android App 和 iPhone / iPad 手机网页可使用同一考匠账号学习。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="exam-banks" aria-labelledby="banks-title">
+        <div class="section-head">
+          <h2 id="banks-title">考匠目前覆盖哪些考试？</h2>
+          <p>以下题量与来源根据 2026 年 10 月 9 日的项目题库说明整理，题库会继续更新；请以考匠内题目来源标注为准。</p>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr><th scope="col">备考方向</th><th scope="col">题量</th><th scope="col">题库说明</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="exam-name">软考中级网络工程师</td>
+                <td class="exam-count">1,182 道</td>
+                <td>按章节与知识点组织；题目来源按站内标注查看，不应将整套题库都视为官方历年真题。</td>
+              </tr>
+              <tr>
+                <td class="exam-name">HCIA-Datacom V2.0</td>
+                <td class="exam-count">400 道</td>
+                <td>当前收录为依据 V2.0 范围编写的大纲仿真题，不是华为官方历年真题。</td>
+              </tr>
+              <tr>
+                <td class="exam-name">全国计算机等级考试二级 MS Office</td>
+                <td class="exam-count">180 道</td>
+                <td>包含 33 道大纲练习与 147 道用户提供、尚未核验的汇编题；使用时请留意题目来源说明。</td>
+              </tr>
+              <tr>
+                <td class="exam-name">全国执业兽医资格考试（兽医全科类）</td>
+                <td class="exam-count">7,888 道可发布题目</td>
+                <td>另有 2,577 道待核对内容，暂不计入可发布题目。复习时仍应对照当年考试大纲。</td>
+              </tr>
+              <tr>
+                <td class="exam-name">四川省专升本计算机基础</td>
+                <td class="exam-count">206 道</td>
+                <td>包含 100 道原创练习、45 道现有题库共用题和 61 道西昌学院 2011 年真题；不代表全省完整历年真题集。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">AI 提示、解析、错因分析、精讲和生成练习等功能按当前页面、账号权益及可用额度提供；AI 生成内容应结合考试大纲与可靠资料复核。</p>
+      </section>
+
+      <section class="section trust-row" aria-label="使用说明">
+        <div>
+          <h3>怎么开始？</h3>
+          <p>电脑网页可免注册试做 5 道软考网络工程师体验题。体验后注册账号并选择备考方向，即可进入对应题库；手机可使用 Android App 或 iPhone / iPad 网页版。</p>
+        </div>
+        <div>
+          <h3>题库和考试结果怎么理解？</h3>
+          <p>考匠是独立学习工具，不代表考试主管单位，也不承诺通过考试。平台练习题、用户提供题目和公开真题会按各自来源标注；备考安排请以最新官方考纲和考试通知为准。</p>
+        </div>
+      </section>
+
+      <section class="faq" aria-labelledby="faq-title">
+        <h2 id="faq-title">常见问题</h2>
+        <details>
+          <summary>考匠 AceExam 是什么？</summary>
+          <p>考匠 AceExam 是面向职业资格考试与升学考试的独立练习平台，提供章节和知识点练习、错题复习、模拟考试及 AI 辅助学习。</p>
+        </details>
+        <details>
+          <summary>考匠是考试官方平台吗？</summary>
+          <p>不是。考匠与考试主管单位及证书官方机构无隶属或合作关系；不承诺通过考试，也不会将练习题一概称为官方真题。</p>
+        </details>
+        <details>
+          <summary>可以免费体验考匠吗？</summary>
+          <p>电脑网页可免注册试做 5 道软考网络工程师体验题。其他功能和 AI 使用额度以网站当前页面及账号权益为准。</p>
+        </details>
+        <details>
+          <summary>考匠支持手机刷题吗？</summary>
+          <p>支持。可以使用 Android App，也可以在 iPhone 或 iPad 的 Safari 中访问手机网页版；使用同一考匠账号继续学习。</p>
+        </details>
+      </section>
+
+      <section class="closing">
+        <p>先选好考试方向，再从一个知识点开始。</p>
+        <a class="button" href="/?desktop=1">进入考匠刷题</a>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>© 2026 考匠 AceExam</span>
+      <a href="/">返回考匠首页</a>
+    </footer>
+  </body>
+</html>

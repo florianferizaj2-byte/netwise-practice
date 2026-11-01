@@ -33,7 +33,7 @@ export function AboutView({ onSponsor }) {
         </p>
         <p>
           普通题库继续免费开放。AI
-          服务由作者统一提供，按账号额度使用，可通过每日签到或会员获取额度。
+          服务由作者统一提供，按账号积分使用，可通过每日签到或会员获取积分。
         </p>
         <p>
           如果考匠对你有帮助，欢迎打赏一笔小小的支持，帮助我们持续维护题库、改进体验，让考匠社区越来越好。
@@ -53,7 +53,7 @@ export function AboutView({ onSponsor }) {
         <article>
           <Sparkles size={20} />
           <strong>AI 助学</strong>
-          <span>共用作者 AI 服务，额度与学习记录按账号独立计算。</span>
+          <span>共用作者 AI 服务，积分与学习记录按账号独立计算。</span>
         </article>
       </div>
       <div className="about-footnote">

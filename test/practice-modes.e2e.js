@@ -8,6 +8,7 @@ import { createStore } from "../server/store.js";
 
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), "aceexam-modes-"));
 const store = createStore(dir);
+store.register("mode_tester", "test-mode-password");
 const app = await createApp({ store, production: true });
 const server = app.listen(0, "127.0.0.1");
 await new Promise(resolve => server.once("listening", resolve));
@@ -27,7 +28,7 @@ try {
     };
   });
   const base = `http://127.0.0.1:${server.address().port}`;
-  assert.equal((await page.request.post(base + "/api/auth/register", { data: { username: "mode_tester", password: "test-mode-password" } })).status(), 200);
+  assert.equal((await page.request.post(base + "/api/auth/login", { data: { username: "mode_tester", password: "test-mode-password" } })).status(), 200);
   assert.equal((await page.request.put(base + "/api/auth/certificate", { data: { certificateId: "network-engineer" } })).status(), 200);
   await page.goto(base);
   await page.getByRole("button", { name: "知道了，开始学习" }).click();

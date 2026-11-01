@@ -31,7 +31,9 @@ import { useCachedQuery } from '../api/useCachedQuery';
 import { ScreenActivityProvider, useAppActive } from './ScreenActivity';
 import { AnimatedPressable, EntranceView } from '../components/Motion';
 import { BrandMark } from '../components/BrandMark';
+import { useLaunchStage } from '../launch/LaunchReadiness';
 import { AuthScreen } from '../screens/AuthScreen';
+import { ProfileSetupScreen } from '../screens/ProfileSetupScreen';
 import { CertificateScreen } from '../screens/CertificateScreen';
 import {
   ExamScreen,
@@ -52,6 +54,9 @@ import {
   type ThemeColors,
 } from '../theme';
 import { APP_VERSION } from '../version';
+import { AiLearningScreen } from '../screens/AiLearningScreen';
+import { ExamWorkspaceScreen } from '../screens/ExamWorkspaceScreen';
+import { AiLearningTaskNotice } from '../components/AiLearningTaskNotice';
 import { downloadAndInstallUpdate } from '../update';
 import type {
   AppTab,
@@ -64,7 +69,7 @@ import type {
 const tabs: Array<{ id: AppTab; label: string; icon: string; symbol: string }> = [
   { id: 'today', label: '今日', icon: '⌂', symbol: 'home' },
   { id: 'practice', label: '练习', icon: '✦', symbol: 'book' },
-  { id: 'wrong', label: '错题', icon: '×', symbol: 'wrong' },
+  { id: 'ai', label: 'AI 生成', icon: '✦', symbol: 'sparkles' },
   { id: 'exam', label: '考试', icon: '□', symbol: 'exam' },
   { id: 'vip', label: 'VIP', icon: '✧', symbol: 'crown' },
   { id: 'profile', label: '我的', icon: '◎', symbol: 'person' },
@@ -77,12 +82,13 @@ export function AppShell() {
   const [session, setSession] = useState<AuthResponse | null>(null);
   const [activeTab, setActiveTab] = useState<AppTab>('today');
   const [dailyPracticeOpen, setDailyPracticeOpen] = useState(false);
+  const [aiExamEntryKey, setAiExamEntryKey] = useState(0);
   const [dailyPracticeDay, setDailyPracticeDay] = useState<string | null>(null);
   const appActive = useAppActive();
   const { data: dashboard } = useCachedQuery(
     '/dashboard?summary=1',
     mobileApi.dashboard,
-    appActive && activeTab === 'today' && !dailyPracticeOpen && !!session?.user.certificateId,
+    appActive && activeTab === 'today' && !dailyPracticeOpen && !!session?.user.certificateId && session?.user.profileComplete === true,
   );
   const [visitedTabs, setVisitedTabs] = useState<AppTab[]>(['today']);
   const [practiceMode, setPracticeMode] = useState<PracticeMode>('sequential');
@@ -114,6 +120,7 @@ export function AppShell() {
   const knownAiJobStatuses = useRef(new Map<string, AiQuestionGenerationJob['status']>());
   const [certificatePickerOpen, setCertificatePickerOpen] = useState(false);
   const [sessionRestored, setSessionRestored] = useState(false);
+  useLaunchStage('route', sessionRestored);
   const [updateRelease, setUpdateRelease] = useState<AppVersionResponse | null>(
     null,
   );
@@ -173,12 +180,12 @@ export function AppShell() {
     return () => { mounted = false; };
   }, [aiJobSeenStorageKey]);
   useEffect(() => {
-    if (appActive && activeTab === 'today' && !dailyPracticeOpen && session?.user.certificateId)
+    if (appActive && activeTab === 'today' && !dailyPracticeOpen && session?.user.certificateId && session.user.profileComplete)
       void mobileApi.dashboard().catch(() => undefined);
-  }, [appActive, activeTab, dailyPracticeOpen, session?.user.id, session?.user.certificateId]);
+  }, [appActive, activeTab, dailyPracticeOpen, session?.user.id, session?.user.certificateId, session?.user.profileComplete]);
 
   useEffect(() => {
-    if (!session?.user.certificateId || isPreview) {
+    if (!session?.user.certificateId || !session.user.profileComplete || isPreview) {
       setAiQuestionJobs([]);
       knownAiJobStatuses.current.clear();
       return;
@@ -206,7 +213,7 @@ export function AppShell() {
       mounted = false;
       clearInterval(timer);
     };
-  }, [appActive, isPreview, session?.user.id, session?.user.certificateId]);
+  }, [appActive, isPreview, session?.user.id, session?.user.certificateId, session?.user.profileComplete]);
 
   useEffect(() => {
     let mounted = true;
@@ -359,6 +366,7 @@ export function AppShell() {
   }
 
   function handleNavigate(tab: AppTab, options?: NavigationOptions) {
+    if (tab === 'exam' && options?.openAiExam) setAiExamEntryKey(key => key + 1);
     if (tab === 'practice' && options?.practiceSession === 'daily') {
       setDailyPracticeDay(new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Shanghai' }));
       setDailyPracticeOpen(true);
@@ -443,6 +451,10 @@ export function AppShell() {
     );
   }
 
+  if (session && session.user.profileComplete !== true) {
+    return <><StatusBar style={resolvedMode === 'dark' ? 'light' : 'dark'} /><ProfileSetupScreen user={session.user} onSaved={handleUserUpdated} onLogout={handleLogout} /></>;
+  }
+
   if (session && !session.user.certificateId) {
     return (
       <>
@@ -515,6 +527,7 @@ export function AppShell() {
                   practiceQuestionIds,
                   practiceAiGroupId,
                   aiQuestionGroupId,
+                  aiExamEntryKey,
                   onPracticeModeChange: setPracticeMode,
                   onOpenCertificatePicker: handleOpenCertificatePicker,
                   onUserUpdated: handleUserUpdated,
@@ -546,6 +559,9 @@ export function AppShell() {
             }}
           />
         )}
+        <AiLearningTaskNotice enabled={appActive && !!session && activeTab !== 'ai' && activeTab !== 'exam' && !dailyPracticeOpen}
+          scope={String(session?.user.id) + ':' + session?.user.certificateId}
+          onOpen={kind => handleNavigate(kind === 'exam' ? 'exam' : 'ai', {openAiExam: kind === 'exam'})} />
         <TabBar activeTab={activeTab} onChange={handleNavigate} hidden={dailyPracticeOpen} />
         {dailyPracticeDay && <DailyPracticePanel
           key={`${session?.user.id ?? 'preview'}:${session?.user.certificateId ?? ''}:${dailyPracticeDay}`}
@@ -731,6 +747,7 @@ function renderScreen(
     practiceQuestionIds?: string[];
     practiceAiGroupId?: string;
     aiQuestionGroupId?: string;
+    aiExamEntryKey?: number;
     onPracticeModeChange: (mode: PracticeMode) => void;
     onOpenCertificatePicker: () => void;
     onUserUpdated: (user: AuthResponse['user']) => void;
@@ -749,8 +766,13 @@ function renderScreen(
       );
     case 'wrong':
       return <WrongScreen onNavigate={onNavigate} {...data} />;
+    case 'ai':
+      return <AiLearningScreen key={data.user?.id + ':' + data.user?.certificateId} user={data.user} preview={data.preview}
+        certificateName={data.certificates.find(item => item.id === data.user?.certificateId)?.name || '当前证书'} onNavigate={onNavigate} />;
     case 'exam':
-      return <ExamScreen onNavigate={onNavigate} {...data} />;
+      return <ExamWorkspaceScreen key={data.user?.id + ':' + data.user?.certificateId} normal={<ExamScreen onNavigate={onNavigate} {...data} />}
+        user={data.user} preview={data.preview} openAiKey={data.aiExamEntryKey}
+        certificateName={data.certificates.find(item => item.id === data.user?.certificateId)?.name || '当前证书'} onNavigate={onNavigate} />;
     case 'vip':
       return <VipScreen preview={data.preview} user={data.user}
         certificateName={data.certificates.find((item) => item.id === data.user?.certificateId)?.name || '当前备考目标'}

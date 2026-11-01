@@ -1,0 +1,6 @@
+interface:
+  display_name: "考匠内容生产与验收"
+  short_description: "检索考纲真题，建立知识目录与配比，完成查重审核、互动精讲及模拟考试验收"
+  default_prompt: "使用 $kaojiang-content-pipeline 盘点考匠当前内容缺口，按可靠考纲选择并完成一个经过查重、独立审核和实际验收的内容批次。"
+policy:
+  allow_implicit_invocation: true

@@ -5,6 +5,7 @@ import path from "node:path";
 import { chromium, webkit, expect } from "@playwright/test";
 import { createApp } from "../server/index.js";
 import { createStore } from "../server/store.js";
+import { completeFixtureProfile, dismissLaunchAnnouncement } from './helpers/mobile-profile.js';
 
 process.env.ALLOWED_HOSTS = "127.0.0.1,localhost";
 process.env.COOKIE_SECURE = "0";
@@ -18,6 +19,22 @@ const version = JSON.parse(fs.readFileSync("mobile/package.json", "utf8")).versi
 fs.mkdirSync("test-output/purchase", { recursive: true });
 const errors = [];
 let browser;
+async function closeBrowser() {
+  const instance = browser;
+  browser = null;
+  if (!instance) return;
+  let timer;
+  try {
+    await Promise.race([
+      instance.close(),
+      new Promise((_, reject) => {
+        timer = setTimeout(() => reject(new Error("Purchase browser cleanup did not finish within 20 seconds")), 20000);
+      }),
+    ]);
+  } finally {
+    clearTimeout(timer);
+  }
+}
 
 async function shop(context, page, link) {
   await expect(link).toHaveAttribute("href", purchaseUrl);
@@ -35,6 +52,7 @@ try {
     browser = await type.launch({ headless: true, proxy: { server: "http://127.0.0.1:9", bypass: "127.0.0.1,localhost" } });
     for (const mobile of [false, true]) {
       const user = await store.register(`purchase_${engine}_${mobile ? "mobile" : "desktop"}`, "fixture-password-123");
+      completeFixtureProfile(store, user);
       store.selectCertificate(user.id, "sichuan-upgrading-computer");
       const token = store.createAuthSession(user.id);
       const context = await browser.newContext(mobile ? { viewport: { width: 375, height: 812 }, isMobile: true, hasTouch: true,
@@ -55,6 +73,7 @@ try {
       page.setDefaultTimeout(15000);
       page.on("pageerror", (error) => errors.push(error.message));
       await page.goto(mobile ? `${base}/app/` : `${base}/#vip`);
+      if (mobile) await dismissLaunchAnnouncement(page);
       if (mobile) await page.getByRole("button", { name: "VIP导航", exact: true }).click();
       const purchase = page.getByRole("link", { name: "购买会员兑换码", exact: true }).first();
       await shop(context, page, purchase);
@@ -77,12 +96,14 @@ try {
       await context.close();
       console.log(`${engine} ${mobile ? "mobile" : "desktop"}: purchase in new tab, no automatic entitlement, return and redeem, draft preservation passed`);
     }
-    await browser.close(); browser = null;
+    await closeBrowser();
   }
   assert.deepEqual(errors, []);
 } finally {
-  await browser?.close(); await app.locals.stop(); await new Promise((resolve) => server.close(resolve)); store.db.close();
-  assert.equal(path.dirname(directory), path.resolve(os.tmpdir()));
-  assert.ok(path.basename(directory).startsWith("aceexam-purchase-"));
-  fs.rmSync(directory, { recursive: true, force: true });
+  try { await closeBrowser(); } finally {
+    await app.locals.stop(); await new Promise((resolve) => server.close(resolve)); store.db.close();
+    assert.equal(path.dirname(directory), path.resolve(os.tmpdir()));
+    assert.ok(path.basename(directory).startsWith("aceexam-purchase-"));
+    fs.rmSync(directory, { recursive: true, force: true });
+  }
 }

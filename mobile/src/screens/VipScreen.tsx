@@ -14,6 +14,7 @@ import {
   mobileApi,
   type AccountEntitlementsResponse,
   type AuthResponse,
+  type PointOperation,
 } from "../api/client";
 import { AnimatedPressable } from "../components/Motion";
 import {
@@ -32,21 +33,21 @@ const plans = [
     id: "vip",
     name: "VIP",
     price: "9.9",
-    questions: 100,
+    points: 990,
     description: "日常巩固",
   },
   {
     id: "svip",
     name: "SVIP",
     price: "19.9",
-    questions: 300,
+    points: 1990,
     description: "集中备考",
   },
   {
     id: "ssvip",
     name: "SSVIP",
     price: "39.9",
-    questions: 600,
+    points: 3990,
     description: "高频冲刺",
   },
 ] as const;
@@ -75,6 +76,10 @@ export function VipScreen({
   );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [pointHistory,setPointHistory]=useState<PointOperation[]>([]);
+  const [historyError,setHistoryError]=useState('');
+  const [historyLoading,setHistoryLoading]=useState(false);
+  const historyRevision=useRef(0);
   const [checkingIn, setCheckingIn] = useState(false);
   const [redeemOpen, setRedeemOpen] = useState(false);
   const [studyOpen, setStudyOpen] = useState(false);
@@ -100,13 +105,14 @@ export function VipScreen({
   }, [preview, user?.id]);
   useEffect(() => {
     setAccount(null);
+    historyRevision.current++;setPointHistory([]);setHistoryError('');setHistoryLoading(false);
   }, [user?.id, preview]);
   useEffect(() => {
-    if (active) void refresh();
+    if (active && !studyOpen) void refresh();
     return () => {
       revision.current++;
     };
-  }, [active, refresh]);
+  }, [active, refresh, studyOpen]);
   async function checkIn() {
     if (checkInBusy.current) return;
     if (preview || !user) {
@@ -114,9 +120,11 @@ export function VipScreen({
       return;
     }
     checkInBusy.current = true;
+    const scope=++revision.current;
     setCheckingIn(true);
     try {
       const data = await mobileApi.dailyCheckIn();
+      if(scope!==revision.current)return;
       revision.current++;
       setLoading(false);
       setAccount(data);
@@ -124,10 +132,11 @@ export function VipScreen({
       Alert.alert(
         data.claimed ? "签到成功" : "今日已签到",
         data.claimed
-          ? "5 次解析、1 组出题和 3 次分析机会已到账。"
+          ? `今日 ${data.checkIn.grants.points || 5} 积分已到账，当日有效，所有 AI 功能通用。`
           : "明天再来领取新的学习机会。",
       );
     } catch (cause) {
+      if(scope!==revision.current)return;
       Alert.alert(
         "签到失败",
         cause instanceof Error ? cause.message : "请稍后重试。",
@@ -144,9 +153,16 @@ export function VipScreen({
   const currentColor = tierColors[current],
     selectedColor = tierColors[selected];
   const check = account?.checkIn;
-  const availableQuestions =
-    (account?.generation?.remaining || 0) +
-    (check?.remaining.generations || 0) * 10;
+  const points=account?.points;
+  const pointNumber=(units:number|undefined)=>((units||0)/1000).toLocaleString('zh-CN',{maximumFractionDigits:3});
+  async function loadPointHistory(){
+    const request=++historyRevision.current;
+    setHistoryLoading(true);
+    setHistoryError('');
+    try{const data=await mobileApi.pointOperations();if(request===historyRevision.current)setPointHistory(data.rows);}
+    catch(cause){if(request===historyRevision.current)setHistoryError(cause instanceof Error?cause.message:'积分记录读取失败');}
+    finally{if(request===historyRevision.current)setHistoryLoading(false);}
+  }
 
   return (
     <View style={{ flex: 1 }}>
@@ -236,42 +252,52 @@ export function VipScreen({
         </AnimatedPressable>
         <View style={styles.usageSection}>
           <View style={styles.sectionLine}>
-            <Text style={styles.sectionTitle}>我的学习额度</Text>
+            <Text style={styles.sectionTitle}>我的 AI 积分</Text>
             <Text style={styles.smallMuted}>
-              {paid ? "会员额度 + 签到奖励" : "签到奖励 · 每日更新"}
+              所有 AI 功能通用
             </Text>
           </View>
           <View style={styles.usageRow}>
             <Quota
-              label="AI 新题"
-              value={hasAccount ? availableQuestions : "—"}
-              unit="道"
+              label="可用积分"
+              value={hasAccount ? pointNumber(points?.availableUnits) : "—"}
+              unit="积分"
             />
             <View style={styles.rule} />
             <Quota
-              label="详细解析"
-              value={hasAccount ? check?.remaining.explanations || 0 : "—"}
-              unit="次"
+              label="预扣中"
+              value={hasAccount ? pointNumber(points?.heldUnits) : "—"}
+              unit="积分"
             />
             <View style={styles.rule} />
             <Quota
-              label="错因分析"
-              value={hasAccount ? check?.remaining.analyses || 0 : "—"}
-              unit="次"
+              label="每 30 天套餐"
+              value={hasAccount ? points?.monthlyPoints || 0 : "—"}
+              unit="积分"
             />
           </View>
           <Text style={styles.quotaFootnote}>
-            作者提供 AI 服务，无需个人 API。解析、提示或分析每次扣 1 次对应额度；出题扣签到机会或会员题数，失败返还。
+            按模型和实际用量统一结算。先预扣、后结算，失败全额退还预扣；已有课程、缓存和确定性判分不扣积分。
           </Text>
-          {paid && account?.generation && (
+          {paid && points && (
             <Text style={styles.quotaFootnote}>
-              本期会员新题剩余 {account.generation.remaining} /{" "}
-              {account.generation.limit} 道
-              {account.generation.periodEnd
-                ? ` · ${membershipDate(account.generation.periodEnd)} 周期结束`
+              {points.pendingUnits ? '本期积分待到账，请联系管理员核对发放记录。' : '积分按原周期发放，续期不重置已用积分。'}
+              {points.periodEnd
+                ? ` · ${membershipDate(points.periodEnd)} 周期结束`
                 : ""}
             </Text>
           )}
+        </View>
+        <View style={{padding:20,gap:12}}>
+          <Text style={styles.sectionTitle}>积分使用记录</Text>
+          <AnimatedPressable accessibilityRole="button" disabled={historyLoading||!user} onPress={()=>void loadPointHistory()} style={styles.checkInButton}>
+            <Text style={styles.checkInButtonText}>{historyLoading?'正在读取…':'查看 / 刷新积分记录'}</Text>
+          </AnimatedPressable>
+          {!!historyError&&<Text accessibilityRole="alert" style={styles.quotaFootnote}>{historyError}</Text>}
+          {pointHistory.map(row=><View key={row.id} style={{gap:5,paddingVertical:10}}>
+            <Text style={styles.sectionTitle}>{row.state==='pending'?`预扣 ${pointNumber(row.heldUnits)}`:row.state==='refunded'?`退回 ${pointNumber(row.heldUnits)}`:`扣除 ${pointNumber(row.chargedUnits)}`} 积分</Text>
+            <Text style={styles.quotaFootnote}>{new Date(row.createdAt).toLocaleString('zh-CN')} · {row.state==='pending'?'任务处理中':row.state==='refunded'?'失败，预扣已退还':'已结算'}</Text>
+          </View>)}
         </View>
         <View style={styles.checkInRow}>
           <View style={styles.calendar}>
@@ -280,7 +306,7 @@ export function VipScreen({
           <View style={styles.flex}>
             <Text style={styles.checkInTitle}>给坚持，一点奖励</Text>
             <Text style={styles.checkInMeta}>
-              解析 5 次 · 出题 1 组 · 分析 3 次
+              签到领取 {check?.grants.points || 5} 积分 · 当日有效 · 以活动预算为准
             </Text>
           </View>
           <AnimatedPressable
@@ -318,7 +344,7 @@ export function VipScreen({
               <AnimatedPressable
                 key={item.id}
                 accessibilityRole="button"
-                accessibilityLabel={`${item.name}，${item.price}元，每30天${item.questions}道AI新题`}
+                accessibilityLabel={`${item.name}，${item.price}元，每30天${item.points}积分`}
                 accessibilityState={{ selected: chosen }}
                 onPress={() => setSelected(item.id)}
                 style={[
@@ -346,7 +372,7 @@ export function VipScreen({
                   {item.price}
                 </Text>
                 <Text style={styles.planQuantity}>
-                  {item.questions} 道 / 30 天
+                  {item.points} 积分 / 30 天 · AI 功能通用
                 </Text>
               </AnimatedPressable>
             );
@@ -361,20 +387,20 @@ export function VipScreen({
           </View>
           <Benefit
             glyph="✦"
-            title={`${plan.questions} 道 AI 专属新题`}
+            title={`${plan.points} 积分通用额度`}
             detail="围绕知识点出题，10 题一组，每题独立复核"
             color={selectedColor}
           />
           <Benefit
             glyph="≡"
             title="把每道题讲明白"
-            detail="详细步骤与核心知识点，每次扣 1 次解析额度"
+            detail="详细步骤与核心知识点，按实际 AI 用量扣积分"
             color={selectedColor}
           />
           <Benefit
             glyph="↗"
             title="找到出错的原因"
-            detail="定位薄弱知识点，每次扣 1 次分析额度"
+            detail="定位薄弱知识点，与其他 AI 功能共用积分"
             color={selectedColor}
           />
           <View style={styles.benefitFooter}>
@@ -404,7 +430,7 @@ export function VipScreen({
             onPress={() =>
               Alert.alert(
                 "作者 AI 服务",
-                "所有账号统一使用作者提供的 AI 服务，无需填写 API 或部署密码。每次使用扣对应额度，失败自动返还；已生成的题组可反复练习。",
+                "所有账号统一使用作者提供的 AI 服务。AI 出题、解析、计划、判分与答疑共用积分，失败自动退回预扣；已生成题组和缓存结果可反复使用。",
               )
             }
             style={styles.apiEntry}
@@ -413,7 +439,7 @@ export function VipScreen({
             <View style={styles.flex}>
               <Text style={styles.apiTitle}>作者 AI 服务</Text>
               <Text style={styles.apiMeta}>
-                {account?.aiServiceAvailable === false ? "服务暂未就绪 · 额度保留" : "无需配置 · 按使用扣额"}
+                {account?.aiServiceAvailable === false ? "服务暂未就绪 · 积分保留" : "无需配置 · 按积分使用"}
               </Text>
             </View>
             <AppIcon style={styles.apiArrow}>›</AppIcon>
@@ -451,11 +477,11 @@ function Quota({
 }) {
   const s = useThemedStyles(createStyles, iosStyles.vip);
   return (
-    <View style={s.quota}>
-      <Text style={s.quotaValue}>
+      <View style={s.quota} testID={label === '可用积分' ? 'vip-points-balance' : label === '预扣中' ? 'vip-points-held' : label === '每 30 天套餐' ? 'vip-points-monthly' : undefined}>
+        <Text numberOfLines={1} adjustsFontSizeToFit style={[s.quotaValue,String(value).length>6&&{fontSize:String(value).length>9?13:19}]}>
         {value}
-        <Text style={s.quotaUnit}> {unit}</Text>
       </Text>
+        <Text style={s.quotaUnit}>{unit}</Text>
       <Text style={s.quotaLabel}>{label}</Text>
     </View>
   );

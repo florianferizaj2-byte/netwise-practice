@@ -1,0 +1,249 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-10-18",
+  "badge": "华为认证",
+  "title": "HCIP-Datacom-Core Technology（H12-821）备考指南",
+  "subtitle": "华为数通高级工程师必选考试 · V1.0",
+  "overview": "H12-821 是 HCIP-Datacom 的必选考试，覆盖数据通信领域各场景通用的核心知识，包括路由基础、OSPF、IS-IS、BGP、路由与流量控制、交换技术、组播、IPv6、网络安全、网络可靠性、网络服务与管理、大型 WLAN 组网和企业解决方案。通过本考试后再通过任意一门自选考试，可获得对应方向的 HCIP-Datacom 证书。本站题库依据华为公开的 V1.0 考试大纲按章节权重编写，属于原创仿真练习，不是官方真题。",
+  "facts": [
+    {
+      "label": "考试代码",
+      "value": "H12-821",
+      "note": "HCIP-Datacom-Core Technology V1.0，华为认证必选笔试。"
+    },
+    {
+      "label": "考试时长",
+      "value": "90 分钟",
+      "note": "以华为人才在线 V1.0 考试大纲第 1 页为准。"
+    },
+    {
+      "label": "通过分数",
+      "value": "600 / 1000",
+      "note": "满分 1000 分，达到 600 分通过。"
+    },
+    {
+      "label": "考试语言",
+      "value": "中文 / 英文",
+      "note": "大纲标注 CHS/ENU。"
+    },
+    {
+      "label": "考试费用",
+      "value": "300 USD",
+      "note": "费用可能随地区调整，以当期报名页为准。"
+    },
+    {
+      "label": "大纲版本",
+      "value": "V1.0（2020-09-14）",
+      "note": "华为人才在线认证页当前展示的考试大纲版本。"
+    },
+    {
+      "label": "题型说明",
+      "value": "官方大纲未公布",
+      "note": "大纲只给出时长、分数、语言和费用；本站目前仅提供单项选择题，不代表官方题型比例。"
+    }
+  ],
+  "schedule": {
+    "title": "考试预约与版本有效期",
+    "status": "以华为人才在线当期公布为准",
+    "items": [
+      {
+        "date": "2026-10-18",
+        "title": "当前适用版本",
+        "detail": "华为人才在线认证页展示 HCIP-Datacom-Core Technology V1.0 考试大纲与配套教材，本指南按该版本整理。"
+      },
+      {
+        "date": "以报名页为准",
+        "title": "考试时间与考位",
+        "detail": "具体考试日期、考位和费用由华为人才在线及考试服务商安排，本站不编造固定日期。"
+      }
+    ],
+    "note": "华为认证版本可能调整，报名前请重新核对认证页的考试代码、版本和考试大纲，避免按旧版本备考。"
+  },
+  "examDetails": [
+    {
+      "label": "考试形式",
+      "value": "笔试（机考）",
+      "detail": "华为认证笔试在考试服务商机考中心完成；官方大纲未描述实验环境。"
+    },
+    {
+      "label": "题目数量",
+      "value": "官方未公布固定题量",
+      "detail": "大纲只给出 90 分钟和 600/1000 的分数规则，未公布题数与每题分值。"
+    },
+    {
+      "label": "题型构成",
+      "value": "官方未公布",
+      "detail": "网上流传的单选、多选、判断、填空、拖拽等说法来自培训机构，不能作为官方结论；本站目前只出单选。"
+    },
+    {
+      "label": "考试范围",
+      "value": "13 个章节",
+      "detail": "路由基础、OSPF、IS-IS、BGP、路由和流量控制、交换技术基础、组播基础、IPv6、网络安全、网络可靠性、网络服务与管理、大型 WLAN 组网架构、网络解决方案。"
+    },
+    {
+      "label": "章节权重",
+      "value": "官方公布，合计 100%",
+      "detail": "BGP 17%、OSPF 16%、路由和流量控制 10%、组播 9%、网络安全 9%、IS-IS 8%、网络可靠性 8%、交换 7%、WLAN 6%、路由基础 3%、IPv6 3%、网络服务 2%、解决方案 2%。"
+    },
+    {
+      "label": "考试环境",
+      "value": "无实验环境",
+      "detail": "官方大纲未列出软件版本或操作系统要求，备考以协议原理和配置命令理解为主。"
+    }
+  ],
+  "knowledgeAreas": [
+    {
+      "name": "路由基础与 OSPF",
+      "topics": [
+        "网络设备框架",
+        "报文处理流程",
+        "最长匹配",
+        "OSPF 邻居状态",
+        "区域内/区域间/外部路由",
+        "Stub 与 NSSA"
+      ],
+      "examFocus": [
+        "邻居状态转换与 DR/BDR 邻接关系",
+        "Type 3/Type 5 LSA 的作用范围",
+        "特殊区域允许的 LSA 类型"
+      ],
+      "practiceAdvice": "先画清区域边界和 ABR/ASBR 角色，再判断 LSA 类型与路由来源，避免只背结论。"
+    },
+    {
+      "name": "IS-IS 与 BGP",
+      "topics": [
+        "NET 与 System ID",
+        "Level-1/Level-2",
+        "Attached 位",
+        "BGP 邻居与报文",
+        "路径属性",
+        "路由反射器",
+        "选路顺序"
+      ],
+      "examFocus": [
+        "Level-1 出区域的默认路由来源",
+        "Local_Pref 与 MED 的比较顺序",
+        "RR 对客户端和非客户端的反射差异"
+      ],
+      "practiceAdvice": "把 BGP 选路顺序写成固定清单，遇到属性比较题按顺序逐项排除。"
+    },
+    {
+      "name": "路由与流量控制",
+      "topics": [
+        "ACL 与前缀列表",
+        "Filter-Policy",
+        "Route-Policy",
+        "策略路由",
+        "MQC",
+        "流量过滤"
+      ],
+      "examFocus": [
+        "import 与 export 的作用方向",
+        "策略路由优先于路由表",
+        "路由过滤与数据过滤的区别"
+      ],
+      "practiceAdvice": "先判断题目控制的是路由还是数据，再判断方向，能排除大部分干扰项。"
+    },
+    {
+      "name": "交换、组播与 IPv6",
+      "topics": [
+        "RSTP 端口角色",
+        "MSTP 实例",
+        "IGMP",
+        "PIM-SM",
+        "NDP",
+        "IPv6 地址配置"
+      ],
+      "examFocus": [
+        "替代端口与备份端口的区别",
+        "IGMPv2 离组后的特定组查询",
+        "共享树到 SPT 的切换条件"
+      ],
+      "practiceAdvice": "组播题先确定接收者、RP 和最后一跳路由器的角色，再判断报文方向。"
+    },
+    {
+      "name": "安全、可靠性与服务",
+      "topics": [
+        "VRF",
+        "IPsec",
+        "BFD",
+        "VRRP",
+        "DHCP",
+        "SNMP"
+      ],
+      "examFocus": [
+        "VRF 的隔离对象",
+        "IPsec SPD 的处理动作",
+        "VRRP 优先级与抢占延迟"
+      ],
+      "practiceAdvice": "把每种技术解决的故障域写清楚，避免把加密、隔离、隧道混为一谈。"
+    },
+    {
+      "name": "WLAN 与解决方案",
+      "topics": [
+        "CAPWAP 通道",
+        "二层/三层漫游",
+        "VLAN Pool",
+        "园区网分层",
+        "VXLAN",
+        "SD-WAN"
+      ],
+      "examFocus": [
+        "控制通道与数据通道的分工",
+        "三层漫游的业务地址保持",
+        "VXLAN 的封装与 VNI"
+      ],
+      "practiceAdvice": "先判断题目问的是接入、承载还是上层方案，再定位到对应技术。"
+    }
+  ],
+  "career": {
+    "positioning": "面向具备 HCIA-Datacom 基础、希望系统掌握企业数通核心协议与组网设计的中级网络工程师。",
+    "bestFor": [
+      "准备参加 H12-821 笔试的考生",
+      "需要系统梳理 OSPF、IS-IS、BGP 的运维人员",
+      "希望向 HCIP-Datacom 方向发展的网络从业者"
+    ],
+    "roles": [
+      "网络工程师",
+      "数通实施工程师",
+      "网络运维工程师",
+      "售前技术支持"
+    ],
+    "value": [
+      "覆盖企业网络常见的路由、交换、组播、IPv6 与可靠性技术",
+      "为后续自选方向考试打基础",
+      "帮助建立协议之间的比较与排障思路"
+    ],
+    "limitations": [
+      "本指南不覆盖实验操作和排障实操评分",
+      "题库为原创仿真练习，不是官方真题",
+      "考试版本、费用和考位需以华为当期公布为准"
+    ]
+  },
+  "mustKnow": [
+    "OSPF 广播网中 DROther 之间停留在 2-Way，只有与 DR/BDR 才达到 Full。",
+    "Stub 区域阻止 Type 4/5 LSA，由 ABR 下发 Type 3 默认路由。",
+    "IS-IS Level-1 路由器通过 Level-1-2 的 Attached 位获得出区域默认路由。",
+    "BGP 选路中 Local_Pref 先于 AS_Path、Origin 和 MED 比较。",
+    "策略路由优先于路由表，filter-policy export 控制的是路由发布。",
+    "VRF 隔离路由表与转发实例，加密和隧道由其他技术完成。",
+    "官方大纲未公布题型构成，备考时不要按培训机构的题型比例倒推。"
+  ],
+  "sources": [
+    {
+      "name": "华为人才在线：HCIP-Datacom-Advanced Routing & Switching Technology 认证页",
+      "url": "https://e.huawei.com/cn/talent/#/cert/product-details?certifiedProductId=351&authenticationLevel=CTYPE_CARE_HCIP&technicalField=IIC&version=1.0",
+      "scope": "H12-821 的考试代码、必选/自选关系、V1.0 考试大纲与教材入口。"
+    },
+    {
+      "name": "RFC 2328: OSPF Version 2",
+      "url": "https://www.rfc-editor.org/rfc/rfc2328.txt",
+      "scope": "OSPFv2 邻居状态机、LSA 类型与 SPF 计算。"
+    },
+    {
+      "name": "RFC 4271: A Border Gateway Protocol 4 (BGP-4)",
+      "url": "https://www.rfc-editor.org/rfc/rfc4271.txt",
+      "scope": "BGP-4 路径属性与路由选择过程。"
+    }
+  ]
+}

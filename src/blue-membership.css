@@ -1,0 +1,263 @@
+.blue-workspace .vip-page {
+  --vip-green: #2454ed;
+  --vip-text: #172d58;
+  --vip-muted: #526a90;
+  --vip-border: #dce7fb;
+  max-width: 1288px;
+}
+.blue-workspace .vip-eyebrow {
+  display: none;
+}
+.blue-workspace .vip-heading {
+  margin-bottom: 22px;
+}
+.blue-workspace .vip-heading h1 {
+  margin: 0;
+}
+.blue-workspace .vip-heading h1 > span {
+  color: var(--vip-muted);
+}
+.blue-workspace .vip-layout {
+  gap: 20px;
+  grid-template-columns: minmax(0, 1fr) 310px;
+  grid-template-areas: "account checkin" "plans redeem" "benefits redeem";
+}
+.blue-workspace .vip-surface {
+  border-radius: 12px;
+}
+.blue-workspace .vip-page button.primary {
+  background: #2454ed;
+  border-color: #2454ed;
+  color: white;
+}
+.blue-workspace .vip-page button.primary:hover:not(:disabled) {
+  background: #1743d3;
+  border-color: #1743d3;
+}
+.blue-workspace .vip-small-icon {
+  background: #eaf2ff;
+  color: #2454ed;
+}
+.blue-workspace :is(.vip-rewards strong, .vip-period b) {
+  color: var(--vip-green);
+}
+.blue-workspace .vip-meter {
+  background: #dce7fb;
+}
+.blue-workspace .member-tier-vip {
+  color: #2454dd;
+  background: #edf4ff;
+  border-color: #c4d9fc;
+}
+.blue-workspace .member-tier-svip {
+  color: #793bcc;
+  background: #f5efff;
+  border-color: #d9c4f6;
+}
+.blue-workspace .member-tier-ssvip {
+  color: #946016;
+  background: #fff8eb;
+  border-color: #eed3a5;
+}
+.blue-workspace .vip-study-entry {
+  background: linear-gradient(110deg, #e6f0ff, #edf5ff);
+  border-color: var(--vip-border);
+  border-radius: 12px;
+  margin-bottom: 20px;
+  padding: 24px;
+}
+.blue-workspace .vip-study-entry p {
+  color: var(--vip-muted);
+}
+.blue-workspace .vip-tone-vip {
+  --tier-color: #2454dd;
+  --tier-bg: #edf4ff;
+  --tier-border: #8eb3f7;
+}
+.blue-workspace .vip-tone-svip {
+  --tier-color: #793bcc;
+  --tier-bg: #f5efff;
+  --tier-border: #b28ce9;
+}
+.blue-workspace .vip-tone-ssvip {
+  --tier-color: #946016;
+  --tier-bg: #fff8eb;
+  --tier-border: #e2ba77;
+}
+.blue-workspace .vip-plan {
+  background: var(--tier-bg);
+  border-color: var(--tier-border);
+  border-radius: 12px;
+  padding: 18px 16px 20px;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.blue-workspace .vip-plan:is(:hover, :focus-within) {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px #244b9014;
+}
+.blue-workspace .vip-plan.is-selected {
+  box-shadow: 0 0 0 1px var(--tier-color);
+  border-color: var(--tier-color);
+}
+.blue-workspace .vip-plan:focus-within {
+  outline-color: var(--tier-border);
+}
+.blue-workspace .vip-plan-top {
+  position: relative;
+  justify-content: start;
+  gap: 10px;
+}
+.blue-workspace .vip-plan-top .membership-tier-art {
+  width: 62px;
+  height: 62px;
+}
+.blue-workspace .vip-plan-title {
+  display: grid;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+}
+.blue-workspace .vip-plan-title > strong {
+  font-size: 18px;
+  color: var(--vip-text);
+}
+.blue-workspace .vip-plan-description {
+  color: var(--vip-muted);
+  margin-top: 0;
+  line-height: 1.6;
+}
+.blue-workspace .vip-plan-radio {
+  position: absolute;
+  top: -6px;
+  right: -5px;
+  width: 19px;
+  height: 19px;
+  border-color: var(--tier-border);
+}
+.blue-workspace .vip-plan-price {
+  color: var(--tier-color);
+  margin: 20px 0 12px;
+}
+.blue-workspace .vip-plan-price > span {
+  color: var(--vip-muted);
+  font-size: 12px;
+}
+.blue-workspace :is(.vip-plan-quantity, .vip-plan-benefits) {
+  color: var(--vip-muted);
+}
+.blue-workspace .vip-plan-quantity {
+  border-color: var(--tier-border);
+}
+.blue-workspace .vip-plan-quantity strong {
+  font-size: 25px;
+}
+.blue-workspace .vip-plan-benefits {
+  font-size: 13px;
+  gap: 10px;
+}
+.blue-workspace .vip-plan-choice {
+  padding: 14px 16px;
+  border: 1px solid var(--tier-border);
+  border-radius: 10px;
+  background: var(--tier-bg);
+}
+.blue-workspace .vip-plan-choice > .vip-selected-plan {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.blue-workspace .vip-selected-plan .membership-tier-art {
+  width: 46px;
+  height: 46px;
+}
+.blue-workspace .vip-selected-plan > span {
+  display: grid;
+  gap: 4px;
+}
+.blue-workspace .vip-selected-plan small {
+  color: var(--vip-muted);
+  font-size: 12px;
+}
+.blue-workspace :is(.vip-account-foot, .vip-quota > span, .vip-small-print) {
+  color: var(--vip-muted);
+}
+@media (max-width: 1250px) and (min-width: 901px) {
+  .blue-workspace .vip-layout {
+    grid-template-columns: minmax(0, 1fr) 282px;
+  }
+  .blue-workspace .vip-plan-grid {
+    gap: 9px;
+  }
+  .blue-workspace .vip-plan {
+    padding-inline: 12px;
+  }
+  .blue-workspace .vip-plan-top {
+    flex-wrap: wrap;
+  }
+  .blue-workspace .vip-plan-title {
+    flex-basis: 100%;
+  }
+}
+@media (max-width: 1180px) {
+  .blue-workspace .vip-layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "account" "checkin" "plans" "benefits" "redeem";
+  }
+  .blue-workspace .vip-plan-top {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 600px) {
+  .blue-workspace .vip-plan-top {
+    flex-wrap: nowrap;
+  }
+  .blue-workspace .vip-plan-choice {
+    padding: 14px;
+    gap: 12px;
+  }
+  .blue-workspace .vip-plan-choice > .vip-selected-plan {
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+  .blue-workspace .vip-selected-plan > span {
+    display: grid;
+  }
+  .blue-workspace .vip-study-entry {
+    padding: 20px;
+  }
+}
+@media (max-width: 480px) {
+  .blue-workspace .vip-plan {
+    grid-template-areas: "tier price" "quantity benefits";
+    column-gap: 12px;
+  }
+  .blue-workspace .vip-plan-top {
+    gap: 6px;
+    min-width: 0;
+  }
+  .blue-workspace .vip-plan-top .membership-tier-art {
+    width: 38px;
+    height: 38px;
+  }
+  .blue-workspace .vip-plan-title > strong {
+    font-size: 16px;
+  }
+  .blue-workspace .vip-plan-description {
+    font-size: 11px;
+    min-height: 0;
+    margin: 0;
+  }
+  .blue-workspace .vip-plan-description > span {
+    font-size: 9px;
+    padding: 0 3px;
+  }
+  .blue-workspace .vip-plan-price {
+    margin: 0;
+  }
+}
+:root[data-web-theme="dark"] .blue-workspace .vip-study-entry {
+  background: linear-gradient(110deg, #192f50, #233d60);
+  border-color: var(--line);
+}

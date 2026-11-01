@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { BlueExamSetup } from "./blue-exam-setup.jsx";
+import "./blue-exam.css";
 import {
   ArrowLeft,
   ArrowRight,
@@ -24,7 +26,12 @@ import {
 } from "../components/question-tools.jsx";
 import { Heading, IconButton } from "../components/study-ui.jsx";
 
-export function ExamView({ run, refresh, dashboard }) {
+export function ExamView({ run, refresh, dashboard, blue = false }) {
+  const [creating, setCreating] = useState(false),
+    [resultFilter, setResultFilter] = useState("all"),
+    [reviewPage, setReviewPage] = useState(0);
+  const creation = useRef(null),
+    creationBusy = useRef(false);
   const [customScope, setCustomScope] = useState(true),
     [selectedChapters, setSelectedChapters] = useState([]);
   const [examCatalog, setExamCatalog] = useState(null),
@@ -41,8 +48,10 @@ export function ExamView({ run, refresh, dashboard }) {
     submitting,
     start,
     submit,
+    pause,
     reset,
     recent,
+    history,
     resume,
     loading,
     loadError,
@@ -57,6 +66,10 @@ export function ExamView({ run, refresh, dashboard }) {
     run,
     refresh,
   });
+  useEffect(() => {
+    setResultFilter("all");
+    setReviewPage(0);
+  }, [exam?.id]);
   const examBlueprint = (exam ? !exam.custom : !customScope)
     ? dashboard.syllabus?.examBlueprint
     : null;
@@ -94,6 +107,29 @@ export function ExamView({ run, refresh, dashboard }) {
         }),
       );
     });
+  const create = async (settings) => {
+    if (creationBusy.current) return;
+    creationBusy.current = true;
+    setCreating(true);
+    const signature = JSON.stringify(settings);
+    if (creation.current?.signature !== signature)
+      creation.current = { signature, requestId: crypto.randomUUID() };
+    try {
+      const created = await run("正在创建模拟考试", async () => {
+        start(
+          await api("/exams", {
+            ...settings,
+            requestId: creation.current.requestId,
+          }),
+        );
+        return true;
+      });
+      if (created) creation.current = null;
+    } finally {
+      creationBusy.current = false;
+      setCreating(false);
+    }
+  };
   const chapterScores = examBlueprint
     ? examModules.map((module) => ({
         ...module,
@@ -106,7 +142,7 @@ export function ExamView({ run, refresh, dashboard }) {
     : [];
   if (result)
     return (
-      <>
+      <div className={blue ? "blue-exam blue-exam-result" : undefined}>
         <Heading
           title="考试结果"
           subtitle={`用时 ${Math.round(result.elapsed / 60000)} 分钟`}
@@ -152,15 +188,63 @@ export function ExamView({ run, refresh, dashboard }) {
           </div>
         )}
         <div className="wrong-list">
-          {result.results.map((r, i) => (
+          {blue && (
+            <div className="blue-exam-review-toolbar">
+              <div className="segmented">
+                {[
+                  ["all", "全部题目"],
+                  ["wrong", "错题与未答"],
+                ].map(([value, label]) => (
+                  <button
+                    key={value}
+                    aria-pressed={resultFilter === value}
+                    className={resultFilter === value ? "selected" : ""}
+                    onClick={() => {
+                      setResultFilter(value);
+                      setReviewPage(0);
+                    }}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+              <span>已交卷，答案与解析已开放</span>
+            </div>
+          )}
+          {(blue
+            ? result.results
+                .filter((r) => resultFilter === "all" || !r.correct)
+                .slice(reviewPage * 10, (reviewPage + 1) * 10)
+            : result.results
+          ).map((r, i) => (
             <article className="wrong-item" key={r.questionId}>
               <span className={"badge " + (r.correct ? "green" : "red")}>
                 {r.correct ? "正确" : "错误"}
               </span>
               <h3>
-                {i + 1}. {r.question}
+                {result.results.findIndex(
+                  (row) => row.questionId === r.questionId,
+                ) + 1}
+                . {r.question}
               </h3>
               <QuestionImages question={r} />
+              {r.sharedStem && (
+                <p className="blue-exam-shared-stem">{r.sharedStem}</p>
+              )}
+              {blue && (
+                <ul className="blue-exam-review-options">
+                  {Object.entries(r.options || {}).map(([key, text]) => (
+                    <li
+                      key={key}
+                      className={r.answer.includes(key) ? "correct" : ""}
+                    >
+                      {key}　{text}
+                      {r.answer.includes(key) && <small>正确选项</small>}
+                      {r.selected.includes(key) && <small>我的选择</small>}
+                    </li>
+                  ))}
+                </ul>
+              )}
               <p>
                 我的答案：{r.selected.join("、") || "未作答"} · 正确答案：
                 {r.answer.join("、")}
@@ -169,7 +253,58 @@ export function ExamView({ run, refresh, dashboard }) {
             </article>
           ))}
         </div>
-      </>
+        {blue && (
+          <nav className="blue-exam-review-pages" aria-label="试卷解析分页">
+            <button
+              disabled={!reviewPage}
+              onClick={() => setReviewPage((value) => value - 1)}
+            >
+              上一页解析
+            </button>
+            <span>
+              第 {reviewPage + 1} /{" "}
+              {Math.max(
+                1,
+                Math.ceil(
+                  result.results.filter(
+                    (r) => resultFilter === "all" || !r.correct,
+                  ).length / 10,
+                ),
+              )}{" "}
+              页
+            </span>
+            <button
+              disabled={
+                (reviewPage + 1) * 10 >=
+                result.results.filter(
+                  (r) => resultFilter === "all" || !r.correct,
+                ).length
+              }
+              onClick={() => setReviewPage((value) => value + 1)}
+            >
+              下一页解析
+            </button>
+          </nav>
+        )}
+      </div>
+    );
+  if (!exam && blue)
+    return (
+      <BlueExamSetup
+        key={dashboard.certificate.id}
+        dashboard={dashboard}
+        catalog={examCatalog}
+        catalogError={catalogError}
+        reload={() => setCatalogRevision((value) => value + 1)}
+        loading={loading}
+        loadError={loadError}
+        retryLoad={retryLoad}
+        recent={recent}
+        history={history}
+        resume={resume}
+        create={create}
+        creating={creating}
+      />
     );
   if (!exam)
     return (
@@ -186,7 +321,9 @@ export function ExamView({ run, refresh, dashboard }) {
                   : "当前证书题库 · 限时作答 · 交卷后统一评分"
           }
         />
-        {loading && !recent.length && <ContentPlaceholder variant="list" rows={2} />}
+        {loading && !recent.length && (
+          <ContentPlaceholder variant="list" rows={2} />
+        )}
         {loadError && (
           <div className="exam-sync-message error" role="alert">
             <span>{loadError}</span>
@@ -389,20 +526,26 @@ export function ExamView({ run, refresh, dashboard }) {
     );
   const q = exam.questions[index],
     selected = answers[q.id] || [];
-  const examGroups =
-    dashboard.certificate?.id === "veterinary-practitioner"
-      ? buildVeterinaryGroups(exam.questions)
-      : [];
+  const examGroups = buildVeterinaryGroups(exam.questions);
   const examGroup = examGroups.find((group) => group.indexes.includes(index));
   return (
-    <>
+    <div className={blue ? "blue-exam blue-exam-active" : undefined}>
       <Heading
         title="模拟考试"
-        subtitle={`已答 ${Object.values(answers).filter((a) => a.length).length} / ${exam.questions.length} 题`}
+        subtitle={`${exam.name || "模拟考试"} · 已答 ${Object.values(answers).filter((a) => a.length).length} / ${exam.questions.length} 题`}
       >
-        <div className="exam-timer">
-          <Clock size={19} />
-          {Math.floor(remaining / 60)}:{String(remaining % 60).padStart(2, "0")}
+        <div className="blue-exam-active-actions">
+          {blue && (
+            <button disabled={submitting} onClick={pause}>
+              <ArrowLeft size={16} />
+              保存并返回设置
+            </button>
+          )}
+          <div className="exam-timer">
+            <Clock size={19} />
+            {Math.floor(remaining / 60)}:
+            {String(remaining % 60).padStart(2, "0")}
+          </div>
         </div>
       </Heading>
       <div
@@ -447,7 +590,9 @@ export function ExamView({ run, refresh, dashboard }) {
                 <span>
                   {examGroup.kind === "options"
                     ? "共用备选答案"
-                    : "共用题干 / 病例材料"}
+                    : dashboard.certificate?.id === "veterinary-practitioner"
+                      ? "共用题干 / 病例材料"
+                      : "共用题干 / 材料"}
                 </span>
                 <small>本组 {examGroup.questions.length} 道题</small>
               </div>
@@ -484,6 +629,7 @@ export function ExamView({ run, refresh, dashboard }) {
           <div className="options">
             {Object.entries(q.options).map(([k, v]) => (
               <button
+                aria-pressed={selected.includes(k)}
                 disabled={remaining === 0 || submitting}
                 className={"option " + (selected.includes(k) ? "chosen" : "")}
                 key={k}
@@ -539,6 +685,8 @@ export function ExamView({ run, refresh, dashboard }) {
             {exam.questions.map((q, i) => (
               <button
                 key={q.id}
+                aria-label={`第 ${i + 1} 题，${answers[q.id]?.length ? "已作答" : "未作答"}`}
+                aria-current={index === i ? "step" : undefined}
                 className={
                   (answers[q.id]?.length ? "answered " : "") +
                   (index === i ? "current" : "")
@@ -551,6 +699,6 @@ export function ExamView({ run, refresh, dashboard }) {
           </div>
         </aside>
       </div>
-    </>
+    </div>
   );
 }

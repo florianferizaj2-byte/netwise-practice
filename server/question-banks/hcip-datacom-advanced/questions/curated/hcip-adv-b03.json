@@ -1,0 +1,747 @@
+[
+  {
+    "id": "hcip831-ipv6-static-null0-001",
+    "type": "single_choice",
+    "question": "在华为设备上需要把去往 2001:db8:dead::/48 的 IPv6 报文直接丢弃，同时不影响其他 IPv6 流量，最合适的配置是？",
+    "options": {
+      "A": "ipv6 route-static 2001:db8:dead:: 48 0.0.0.0",
+      "B": "ipv6 route-static 2001:db8:dead:: 48 NULL0",
+      "C": "ipv6 route-static 2001:db8:dead::/48 reject",
+      "D": "配置 ACL 拒绝所有 IPv6 报文"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "指向 NULL0 的静态路由会把匹配该前缀的报文丢弃，形成黑洞路由，只影响该目的前缀，常用于丢弃攻击流量或防止路由环路。A 中的 0.0.0.0 是 IPv4 地址，不能作为 IPv6 静态路由的下一跳；C 的命令格式不符合 VRP 语法，IPv6 静态路由的目的地址和前缀长度要分开书写，且没有 reject 关键字；D 会拒绝全部 IPv6 流量，范围过大，不符合只丢弃特定前缀的要求。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "NULL0",
+      "黑洞路由"
+    ],
+    "provenance": {
+      "questionId": "hcip831-ipv6-static-null0-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IPv6 静态路由知识点；IPv6 地址前缀的 地址/前缀长度 表示依据 RFC 4291 第 2.3 节；下一跳指向 NULL0 形成黑洞路由为华为 VRP 命令语义（工程实践）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 4291 原文独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "484b4bfe00479e2967a009dd9592a57713418b889be4578828b81a731e34e00a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-ospfv3-routerid-001",
+    "type": "single_choice",
+    "question": "一台设备只配置了 IPv6 地址、没有可用的 IPv4 地址。启用 OSPFv3 前必须完成下列哪项配置，否则 OSPFv3 可能无法正常运行？",
+    "options": {
+      "A": "手工配置 32 位 Router ID",
+      "B": "为每个 OSPFv3 接口配置 IPv4 地址",
+      "C": "把 OSPFv3 进程号改为 1",
+      "D": "启用 IPv6 分片扩展"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "OSPFv3 虽然只承载 IPv6 路由，但 Router ID 仍然是 32 位。设备通常从 IPv4 地址中选取 Router ID；当设备没有 IPv4 地址时必须手工配置 router-id，否则 OSPFv3 进程可能无法正常运行。B 错误，OSPFv3 基于链路运行，不要求接口配置 IPv4 地址；C 错误，进程号只在本地有效，与 Router ID 的选取无关；D 错误，分片扩展用于处理超过接口 MTU 的 OSPFv3 报文，与 Router ID 无关。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "Router ID",
+      "IPv6"
+    ],
+    "provenance": {
+      "questionId": "hcip831-ospfv3-routerid-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5340-ospfv3"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IPv6 路由中 OSPFv3 原理与配置知识点；Router ID 仍为 32 位、不能再赋值为 IPv6 地址的依据为 RFC 5340 第 2.2 节；无 IPv4 地址时需手工配置 router-id 为设备实现要求。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 5340 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "0f5214a525c390758774a2cb772a04f2ec199e586432634fd11c40f302bec0e1"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-ospfv3-lsa-types-001",
+    "type": "single_choice",
+    "question": "与 OSPFv2 相比，OSPFv3 的 LSA 类型发生了变化。下列对应关系正确的是？",
+    "options": {
+      "A": "OSPFv3 取消了 Type 5 LSA，所有外部路由改由 Type 3 承载",
+      "B": "Type 3 改为 AS-External LSA，Type 5 改为 Link LSA",
+      "C": "Type 3 改为 Inter-Area-Prefix LSA，Type 4 改为 Inter-Area-Router LSA，并新增 Link LSA 和 Intra-Area-Prefix LSA",
+      "D": "OSPFv3 只使用 Type 1 和 Type 2 两种 LSA"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "OSPFv3 保留 Router LSA（Type 1）、Network LSA（Type 2）、AS-External LSA（Type 5）和 NSSA LSA（Type 7），把 OSPFv2 的 Summary LSA 拆分为 Inter-Area-Prefix LSA（Type 3）和 Inter-Area-Router LSA（Type 4），并新增了 Link LSA（Type 8）和 Intra-Area-Prefix LSA（Type 9）。B 的对应关系错误；A 错误，OSPFv3 仍然使用 AS-External LSA 承载外部路由；D 错误，OSPFv3 的 LSA 类型不止两种。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "LSA",
+      "IPv6"
+    ],
+    "provenance": {
+      "questionId": "hcip831-ospfv3-lsa-types-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5340-ospfv3"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPFv3 原理与配置知识点；LSA 类型调整与新增 Link LSA、Intra-Area-Prefix LSA 的依据为 RFC 5340 第 2.8 节（LSA Format Changes）与第 4.4.3 节（各类 LSA 的用途与 LS type）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 5340 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "7c1394bef2df753a150400dea8a40bcfc49dc9e53602e948fbc967179f4bddf4"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-isis-ipv6-ifaddr-001",
+    "type": "single_choice",
+    "question": "IS-IS 承载 IPv6 接口地址时使用哪个 TLV？",
+    "options": {
+      "A": "TLV 129（Protocols Supported）",
+      "B": "TLV 236（IPv6 Reachability）",
+      "C": "TLV 135（Extended IP Reachability）",
+      "D": "TLV 232（IPv6 Interface Address）"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "IS-IS 为 IPv6 定义了 IPv6 Interface Address TLV 232：在 Hello 报文中携带接口的链路本地地址，在 LSP 中携带非链路本地的 IPv6 接口地址。TLV 236 承载 IPv6 前缀可达性；TLV 135 承载 IPv4 扩展可达性；TLV 129 用于通告路由器支持的协议（NLPID），都不用于承载 IPv6 接口地址。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "IPv6",
+      "TLV 232"
+    ],
+    "provenance": {
+      "questionId": "hcip831-isis-ipv6-ifaddr-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5308-isis-ipv6"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IS-IS（IPv6）原理与配置知识点；IPv6 Interface Address TLV 232 的定义与 Hello/LSP 中的地址语义依据 RFC 5308 第 3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 5308 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "a5c8158f680845d2c36b59883173fe50c3629bf4d48646d09e26378a7aa3a863"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-isis-ipv6-nlpid-001",
+    "type": "single_choice",
+    "question": "IS-IS 路由器要表明自己支持 IPv6 路由，应如何通告？",
+    "options": {
+      "A": "在 TLV 236 中携带 IPv6 前缀即可，无需其他通告",
+      "B": "在 TLV 129（Protocols Supported）中携带 IPv6 NLPID，值为 142（0x8E）",
+      "C": "在 TLV 232 中携带链路本地地址即可",
+      "D": "在 TLV 22 中增加 IPv6 子 TLV"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IPv6 的 NLPID 值为 142（0x8E），支持 IPv6 的 IS-IS 路由器必须在 Protocols Supported TLV 129 中通告该值，邻居据此判断其具备 IPv6 路由能力。A 的 TLV 236 只承载 IPv6 可达前缀，C 的 TLV 232 只承载接口地址，两者都不能替代能力通告；D 的 TLV 22 是扩展 IS 可达性 TLV，用于描述邻居和链路度量，与协议能力通告无关。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "IPv6",
+      "NLPID"
+    ],
+    "provenance": {
+      "questionId": "hcip831-isis-ipv6-nlpid-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5308-isis-ipv6"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IS-IS（IPv6）原理与配置知识点；IPv6 NLPID 值为 142（0x8E）且需在 NLPID/Protocols Supported TLV 中通告的依据为 RFC 5308 第 4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 5308 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "21fa2b1972c0e9d3fb235618be02a61264b46d3a00dd3d2458b25bb4009bc03e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-isis-ipv6-mt-tlv-001",
+    "type": "single_choice",
+    "question": "在 IS-IS 多拓扑（MT）环境中，IPv6 前缀由哪个 TLV 承载？",
+    "options": {
+      "A": "TLV 235（MT IPv4 Reachability）",
+      "B": "TLV 236（IPv6 Reachability）",
+      "C": "TLV 237（MT IPv6 Reachability）",
+      "D": "TLV 229（MT Membership）"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "RFC 5120 为多拓扑定义了 MT IPv6 Reachability TLV 237，它在 IPv6 Reachability TLV 236 的格式前增加 2 字节的 MT ID 成员标识，用于在非默认拓扑中通告 IPv6 前缀。TLV 236 用于单拓扑下的 IPv6 前缀；TLV 235 承载 MT IPv4 前缀；TLV 229 只通告路由器参与了哪些 MT，不承载前缀。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS",
+      "IPv6",
+      "多拓扑",
+      "TLV 237"
+    ],
+    "provenance": {
+      "questionId": "hcip831-isis-ipv6-mt-tlv-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5120-isis-mt"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IS-IS（IPv6）原理与配置知识点；MT IPv6 Reachability TLV 237 的定义与 MT ID 前缀结构依据 RFC 5120 第 7.4 节；TLV 236/235/229 的用途依据 RFC 5120 第 7.2-7.4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 5120 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "9be95ea355132ab1a030458573a3afab9bbee82f92440f98893b54b3d0aa0442"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-bgp4plus-family-001",
+    "type": "single_choice",
+    "question": "在华为设备上让已建立的 BGP4+ 邻居交换 IPv6 单播路由，必须完成的配置是？",
+    "options": {
+      "A": "在 BGP 的 IPv6 地址族视图下激活该对等体（peer enable）",
+      "B": "只需配置 peer as-number，无需任何地址族配置",
+      "C": "必须为 BGP 对等体配置 IPv4 地址",
+      "D": "必须把 BGP 的 TCP 端口从 179 改为其他端口"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "BGP4+ 的路由交换按地址族管理。即使 TCP 会话已经建立，也必须在 BGP 的 IPv6 单播地址族视图下对相应邻居执行 peer enable，才会交换 IPv6 单播路由；仅配置 peer as-number 只建立会话，并不会激活 IPv6 地址族。C 错误，对等体使用 IPv6 地址即可；D 错误，BGP 仍使用 TCP 179 端口。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "IPv6",
+      "地址族"
+    ],
+    "provenance": {
+      "questionId": "hcip831-bgp4plus-family-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4760-mp-bgp"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 BGP4+ 原理与配置知识点；BGP4+ 通过多协议扩展按地址族承载 IPv6 路由的依据为 RFC 4760 第 1、3 节；华为设备在 IPv6 地址族视图下 peer enable 为设备命令语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 4760 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "66e1440dcd5dbfd88359f067698759845d69b17e3376ff872380cd16730ca0cb"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-bgp4plus-withdraw-001",
+    "type": "single_choice",
+    "question": "BGP4+ 撤销一条 IPv6 路由时，使用哪个路径属性承载要撤销的前缀？",
+    "options": {
+      "A": "NEXT_HOP",
+      "B": "MP_REACH_NLRI",
+      "C": "AS_PATH",
+      "D": "MP_UNREACH_NLRI"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "多协议 BGP 使用 MP_REACH_NLRI 通告可达的 IPv6 前缀及其下一跳，使用 MP_UNREACH_NLRI 撤销不再可达的前缀。AS_PATH 记录路由经过的 AS，NEXT_HOP 是 IPv4 单播使用的下一跳属性，二者都不承载需要撤销的 IPv6 前缀。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "IPv6",
+      "MP_UNREACH_NLRI"
+    ],
+    "provenance": {
+      "questionId": "hcip831-bgp4plus-withdraw-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4760-mp-bgp"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 BGP4+ 原理与配置知识点；MP_REACH_NLRI 通告可达前缀、MP_UNREACH_NLRI 撤销前缀的依据为 RFC 4760 第 3 节（Multiprotocol Reachable NLRI）与第 4 节（Multiprotocol Unreachable NLRI）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 4760 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "1f8a3e678f9110950df7e99f9898b60026afc3adf1cca47657ee95f948fa3b9e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-bgp4plus-reachable-001",
+    "type": "single_choice",
+    "question": "两台路由器之间建立 BGP4+ 邻居，下列前提条件描述正确的是？",
+    "options": {
+      "A": "BGP 会自动发现 IPv6 邻居，不要求底层路由可达",
+      "B": "两端必须配置完全相同的 Router ID 才能建立邻居",
+      "C": "两端必须能够通过 IPv6 地址建立 TCP 179 连接，BGP 本身不负责邻居发现",
+      "D": "BGP4+ 邻居只能使用链路本地地址建立"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "BGP 邻居需要手工指定对等体地址，并依赖底层 IPv6 路由使 TCP 179 连接可达，BGP 本身没有邻居发现机制。A 错误；B 错误，Router ID 相同并不是建立邻居的条件，反而可能引发冲突；D 错误，BGP4+ 邻居可以使用全局单播地址，也可以使用链路本地地址并配合更新源接口。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "easy",
+    "tags": [
+      "BGP4+",
+      "IPv6",
+      "TCP 179"
+    ],
+    "provenance": {
+      "questionId": "hcip831-bgp4plus-reachable-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 BGP4+ 原理与配置知识点；BGP 使用 TCP 并监听 179 端口的依据为 RFC 4271 第 3 节；BGP 邻居需手工配置且 Next_Hop 必须可解析，依据 RFC 4271 第 3.1、3.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 4271 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "bb4f6199ebefe01577e3a66964941d642a7f45549c97ea3c7c36cefc635b0e08"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-mpls-label-format-001",
+    "type": "single_choice",
+    "question": "MPLS 标签栈中每个标签项占 4 字节，其中标签值（Label）字段占多少位，理论取值范围是多少？",
+    "options": {
+      "A": "20 位，0~1048575",
+      "B": "24 位，0~16777215",
+      "C": "16 位，0~65535",
+      "D": "32 位，0~4294967295"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "MPLS 标签栈项共 32 位，由 20 位标签值、3 位 Exp、1 位栈底标志 S 和 8 位 TTL 组成，因此标签值理论上有 2 的 20 次方即 1048576 个取值，范围为 0~1048575，其中 0~15 为特殊用途或保留值。B、C、D 给出的位数或取值范围都与 20 位标签字段不符。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "MPLS 基础与转发",
+    "difficulty": "medium",
+    "tags": [
+      "MPLS",
+      "标签结构",
+      "转发"
+    ],
+    "provenance": {
+      "questionId": "hcip831-mpls-label-format-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc3032-mpls-label"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 3 页 MPLS 原理与配置中 MPLS 基础与转发知识点；标签栈项 20 位标签值、3 位 Exp、1 位 S、8 位 TTL 及 0-15 特殊用途或保留值依据 RFC 3032 第 2.1 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 3032 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "453eaa570dd9ea10173341f2065c45864b5026186ea22037e2623fc21f63a354"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-mpls-php-001",
+    "type": "single_choice",
+    "question": "MPLS 网络中，倒数第二跳路由器执行 PHP（次末跳弹出）的主要目的是什么？",
+    "options": {
+      "A": "用于对 MPLS 报文进行分片",
+      "B": "让 Ingress 路由器提前压入私网标签",
+      "C": "用于在 P 路由器上区分不同 VPN",
+      "D": "让 Egress 路由器收到的报文不再携带外层标签，减少最后一跳的标签处理开销"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "PHP 由倒数第二跳路由器弹出栈顶标签，使 Egress 路由器收到的是不带该层标签的报文，可以直接按 IP 或下一层标签转发，减少 Egress 的标签表查询和报文处理开销。B 的压入标签动作发生在 Ingress；C 中 P 路由器只处理外层公网标签，不区分 VPN；A 报文分片与 PHP 无关。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "MPLS 基础与转发",
+    "difficulty": "medium",
+    "tags": [
+      "MPLS",
+      "PHP",
+      "标签转发"
+    ],
+    "provenance": {
+      "questionId": "hcip831-mpls-php-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc3031-mpls"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 3 页 MPLS 基础与转发知识点；标签交换与 push/swap/pop 操作依据 RFC 3031 第 3、4 节；隐式空标签 3 的定义见 RFC 3032 第 2.1 节；PHP 为设备实现优化（工程实践）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲、RFC 3031 与 RFC 3032 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "32942470e7f2795cbe41080c19ffc3cf10cc4a6a767072c85d58123877a9cfc6"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-static-lsp-001",
+    "type": "single_choice",
+    "question": "关于静态 LSP，下列描述正确的是？",
+    "options": {
+      "A": "由 LDP 动态分配标签建立，能够自动适应拓扑变化",
+      "B": "由管理员在各节点手工配置入标签、出标签和下一跳，不依赖标签分发协议，拓扑变化时不会自动收敛",
+      "C": "只需要在 Ingress 节点配置一次，中间节点会自动生成转发表",
+      "D": "静态 LSP 只能用于承载 IPv6 报文"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "静态 LSP 通过在各转发节点手工配置入标签、出标签和下一跳来建立，不需要 LDP 等标签分发协议，因此不会自动感知拓扑变化，拓扑变化后需要人工调整。A 描述的是 LDP 动态 LSP；C 错误，静态 LSP 的每一跳都需要配置；D 错误，静态 LSP 与所承载报文的协议类型无关。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "静态 LSP",
+    "difficulty": "easy",
+    "tags": [
+      "MPLS",
+      "静态 LSP",
+      "标签"
+    ],
+    "provenance": {
+      "questionId": "hcip831-static-lsp-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc3031-mpls"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 3 页 MPLS 原理与配置中静态 LSP 知识点；MPLS 标签交换架构与 LSP 概念依据 RFC 3031 第 3、4 节；静态 LSP 需逐跳手工配置为设备实现语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 3031 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "cca4d63790925aab652304195edaae114f498a603c2ba56fefd6167c8ebcfd0d"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-static-lsp-label-001",
+    "type": "single_choice",
+    "question": "配置静态 LSP 时，本节点的出标签（out-label）应如何设置？",
+    "options": {
+      "A": "与本节点的入标签相同",
+      "B": "必须固定为 3（隐式空标签）",
+      "C": "与下游节点的入标签相同",
+      "D": "由 LDP 会话协商决定"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "标签在本地有效，上游节点发出的报文到达下游节点后，下游节点要用自己的入标签查找转发表，因此本节点的出标签必须与下游节点的入标签一致。A 只保证本节点内部一致，却无法与下游匹配；B 中隐式空标签 3 可以在特定场景使用，但不是静态 LSP 的固定要求；D 错误，静态 LSP 不依赖 LDP 会话协商。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "静态 LSP",
+    "difficulty": "medium",
+    "tags": [
+      "MPLS",
+      "静态 LSP",
+      "入标签",
+      "出标签"
+    ],
+    "provenance": {
+      "questionId": "hcip831-static-lsp-label-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc3031-mpls"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 3 页静态 LSP 知识点；标签在本地有效、入标签/出标签按下一跳交换的依据为 RFC 3031 第 3、4 节；静态 LSP 出标签需等于下游入标签为设备配置规则。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 3031 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "9144a6288d934bbca6c9e1d68f6af2ec689305c6058c5ce4ee6ccc3aa2e271a4"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-ldp-mode-001",
+    "type": "single_choice",
+    "question": "LDP 默认的标签分配与通告方式通常是什么？",
+    "options": {
+      "A": "下游主动（DU）分配，路由器为路由分配标签并主动向邻居通告",
+      "B": "下游按需（DoD）分配，只有收到上游请求才分配标签",
+      "C": "只由 Ingress 路由器分配标签",
+      "D": "由 BGP 负责分配标签"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "LDP 默认采用下游主动（Downstream Unsolicited，DU）方式：路由器为本地路由表中的前缀分配标签，并主动向 LDP 邻居通告标签映射，上游收到后即可建立 LSP。B 描述的是下游按需（DoD）方式，需要上游显式请求；C 错误，标签由各下游节点分配；D 错误，标签分配由 LDP 完成，BGP 负责传递 VPN 路由。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS LDP",
+    "knowledgePoint": "LDP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "LDP",
+      "标签分配",
+      "DU"
+    ],
+    "provenance": {
+      "questionId": "hcip831-ldp-mode-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5036-ldp"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 3 页 MPLS LDP 中 LDP 原理与配置知识点；LDP 标签分配与分发模式（DU/DoD）的依据为 RFC 5036 第 2 节；华为设备默认采用下游主动（DU）方式为设备默认配置（工程实践）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 5036 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "5712702ccc38fd16818384cec76b991e0372d21830ea216d501123816098ee3e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-ldp-lib-lfib-001",
+    "type": "single_choice",
+    "question": "LDP 中 LIB 与 LFIB 的关系，下列描述正确的是？",
+    "options": {
+      "A": "LIB 直接用于转发，LFIB 只保存日志",
+      "B": "LIB 保存标签映射关系，LFIB 结合路由表生成用于转发的入标签、出标签和下一跳表项",
+      "C": "两者完全等价，只是名称不同",
+      "D": "LIB 由 BGP 生成，LFIB 由 IGP 生成"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "LIB（标签信息库）保存从邻居学习到以及本地分配的标签映射关系；LFIB（标签转发信息库）结合 LIB 与路由表选择最优表项，形成入标签到出标签、下一跳和出接口的转发条目，实际指导标签报文转发。A 把两者职责说反；C 错误，二者用途不同；D 错误，LIB 来自 LDP 等标签分发协议，LFIB 是转发平面根据 LIB 和路由计算生成的。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS LDP",
+    "knowledgePoint": "LDP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "LDP",
+      "LIB",
+      "LFIB"
+    ],
+    "provenance": {
+      "questionId": "hcip831-ldp-lib-lfib-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5036-ldp"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 3 页 LDP 原理与配置知识点；LDP 会话、标签映射与 LIB 的依据为 RFC 5036 第 2、3 节；LFIB 由 LIB 和路由表生成用于转发为设备转发平面实现。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 5036 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "cddc1b53e2515b02136f5aaed8ece6326f1005f8b33f795acda7f2caea40aa16"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-mpls-vpn-vrf-001",
+    "type": "single_choice",
+    "question": "PE 路由器上 VRF 的主要作用是？",
+    "options": {
+      "A": "用于替代 MP-BGP 传递 VPN 路由",
+      "B": "为所有 VPN 维护同一张全局路由表，只隔离接口",
+      "C": "用于在 P 路由器上区分公网标签",
+      "D": "为每个 VPN 维护独立的路由表和转发表，并绑定相应接口，实现不同 VPN 的路由隔离"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "VRF（虚拟路由转发实例）为每个 VPN 维护独立的路由表、转发表和接口集合，使不同 VPN 可以使用重叠的私网地址而互不干扰，PE 通过 VRF 把 CE 侧接口与对应 VPN 关联。B 错误，VRF 恰恰实现了路由表隔离；C 错误，P 路由器通常不维护 VRF；A 错误，VRF 不能替代 MP-BGP，VPN 路由仍由 MP-BGP 在 PE 之间传递。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 基本概念",
+    "difficulty": "easy",
+    "tags": [
+      "MPLS VPN",
+      "VRF",
+      "路由隔离"
+    ],
+    "provenance": {
+      "questionId": "hcip831-mpls-vpn-vrf-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4364-mpls-vpn"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 3 页 MPLS VPN 原理与配置中 MPLS VPN 基本概念知识点；每个 VPN 使用独立 VRF 路由表、PE 通过 VRF 绑定站点接口的依据为 RFC 4364 第 4.1-4.4 节的 VPN 路由模型。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 4364 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "80ed3ece7fa35d2e434e2f962b68d68b409c54188c422568499823054d2f9946"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-mpls-vpn-p-role-001",
+    "type": "single_choice",
+    "question": "MPLS VPN 中 P 路由器（Provider 核心路由器）的主要职责是？",
+    "options": {
+      "A": "只根据外层公网标签转发报文，通常不维护 VPN 私网路由",
+      "B": "维护所有 VPN 的 VRF 和私网路由",
+      "C": "与 CE 建立 BGP 邻居并分配私网标签",
+      "D": "负责为 VPN 站点分配 IP 地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "P 路由器位于运营商骨干网内部，只根据外层公网标签进行标签交换，把报文转发到 Egress PE，通常不维护 VPN 的 VRF 和私网路由，因此不需要了解 VPN 细节。B 是 PE 的职责；C 中与 CE 建立邻居、分配私网标签由 PE 完成；D 地址分配由客户网络或 DHCP 等机制完成，不是 P 路由器的职责。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "MPLS VPN",
+      "P 路由器",
+      "PE",
+      "CE"
+    ],
+    "provenance": {
+      "questionId": "hcip831-mpls-vpn-p-role-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4364-mpls-vpn"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 3 页 MPLS VPN 基本概念知识点；PE 之间通过 MP-BGP 交换 VPN 路由、P 路由器只按外层标签转发的模型依据 RFC 4364 第 4.1-4.4 节与第 3 节报文转发模型。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 4364 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "c43228c252f4a3004ee81c4f211fc66c2bc2e7b96ffe7f7a0f750c0179bfa434"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-mpls-vpn-nexthop-001",
+    "type": "single_choice",
+    "question": "PE 之间通过 MP-BGP 传递 VPNv4 路由时，BGP Next_Hop 通常是什么地址，其作用是什么？",
+    "options": {
+      "A": "CE 的私网地址，用于直接转发到 CE",
+      "B": "固定为 0.0.0.0，表示下一跳由 P 路由器决定",
+      "C": "对端 PE 的公网可达地址（通常是 Loopback 地址），用于把私网报文迭代到公网 LSP 上",
+      "D": "本端 CE 的接口地址，用于路由过滤"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "VPNv4 路由的 BGP Next_Hop 是对端（Egress）PE 的公网地址，通常是 Loopback 地址。Ingress PE 收到 VPNv4 路由后，用该下一跳迭代或递归到公网 LSP，从而获得外层公网标签并转发报文。A 错误，CE 私网地址不用于骨干网下一跳；B 错误，Next_Hop 不会是 0.0.0.0；D 错误，CE 接口地址不参与 VPNv4 下一跳。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 路由交互",
+    "difficulty": "hard",
+    "tags": [
+      "MPLS VPN",
+      "MP-BGP",
+      "Next_Hop"
+    ],
+    "provenance": {
+      "questionId": "hcip831-mpls-vpn-nexthop-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4364-mpls-vpn"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 3 页 MPLS VPN 路由交互知识点；VPNv4 路由的 BGP Next_Hop 为对端 PE 地址并用于迭代公网隧道标签的依据为 RFC 4364 第 4.1-4.4 节；Next_Hop 通常取 Loopback 为部署实践。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 4364 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "ca8a8d31c40ee2dcb343f90920e8aa5096c490b31839298252d39b3f0d7d3ee3"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-mpls-vpn-egress-001",
+    "type": "single_choice",
+    "question": "Egress PE 收到带私网标签的 VPN 报文后的处理过程是？",
+    "options": {
+      "A": "直接根据外层公网标签把报文转发给 CE",
+      "B": "用私网标签找到对应 VRF，弹出私网标签后按 VRF 路由表把报文转发给 CE",
+      "C": "弹出所有标签后按全局公网路由表转发",
+      "D": "把私网标签换成新的公网标签后继续在骨干网转发"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "报文到达 Egress PE 时，外层公网标签已由骨干网处理（通常经 PHP 弹出）；Egress PE 根据内层私网标签（VPN 标签）确定所属 VRF，弹出私网标签后按该 VRF 的路由表查找目的地址并转发给 CE。A 错误，外层公网标签并不指向 CE；C 错误，Egress 需要按 VRF 而不是全局公网路由表转发私网报文；D 错误，继续在骨干网转发不是 Egress PE 的行为。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 报文转发",
+    "difficulty": "hard",
+    "tags": [
+      "MPLS VPN",
+      "私网标签",
+      "VRF",
+      "报文转发"
+    ],
+    "provenance": {
+      "questionId": "hcip831-mpls-vpn-egress-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4364-mpls-vpn"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 3 页 MPLS VPN 报文转发知识点；公网标签与私网标签的双层标签转发、Egress PE 弹私网标签后按 VRF 转发的模型依据 RFC 4364 第 4.1-4.4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 4364 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "e7570b43946a5ce046201a4af3adb529dc01d2d9f314494cf1a6f1210b75d89c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-mpls-vpn-shamlink-001",
+    "type": "single_choice",
+    "question": "MPLS VPN 中，两个站点属于同一 OSPF 域且同处一个区域，希望它们之间的流量优选 VPN 骨干而不是同区域的后门链路。此时应使用什么机制？",
+    "options": {
+      "A": "取消全部 OSPF 区域划分",
+      "B": "把两个站点都配置为 Stub 区域",
+      "C": "配置一条指向 NULL0 的静态路由",
+      "D": "配置 Sham Link，使 PE 之间的 VPN 路径在站点看来是区域内的 Type 1 链路"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Sham Link 是在两个 PE 的 VRF 之间建立的一条逻辑链路，OSPF 把它当作区域内的 Type 1 链路来通告，使经过 VPN 骨干的路由表现为区域内路由，从而可以优于后门链路（区域内路由优先于区域间路由）。B 的 Stub 区域不能把 VPN 路径变成区域内路径；C 会直接丢弃流量；A 取消区域划分不能解决路径优选问题，还会破坏原有网络结构。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "hard",
+    "tags": [
+      "MPLS VPN",
+      "OSPF VPN",
+      "Sham Link"
+    ],
+    "provenance": {
+      "questionId": "hcip831-mpls-vpn-shamlink-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4577-ospf-vpn"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 3 页 MPLS VPN 典型应用与 OSPF VPN 拓展知识点；Sham Link 使 VPN 骨干路径表现为区域内 Type 1 链路、区域内路由优先于区域间路由的依据为 RFC 4577 第 4.1.3 节与第 4.2.7 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 4577 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "393c0bf4305138fd82dd93e8309ac68e7fe4a48f8125e71ee0b0089e3f87ec4f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  }
+]

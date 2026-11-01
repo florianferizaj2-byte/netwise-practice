@@ -1,4 +1,6 @@
 import { AppIcon } from '../components/AppIcon';
+import { useLaunchStage } from '../launch/LaunchReadiness';
+import { AnnouncementCard } from '../components/AnnouncementCard';
 import { iosStyles } from '../iosStyles';
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -99,6 +101,7 @@ export function TodayScreen({
 }: Props) {
   const s = useThemedStyles(styles, iosStyles.overview),
     { colors } = useTheme();
+  const [announcementRefreshKey, setAnnouncementRefreshKey] = useState(0);
   const query = useCachedQuery(
     "/dashboard?summary=1",
     mobileApi.dashboard,
@@ -118,6 +121,7 @@ export function TodayScreen({
   );
   const catalog = catalogQuery.data ?? offlineCatalog.data;
   const data = query.data || dashboard;
+  useLaunchStage('home', preview || (!!data || !!query.error) && (!!catalog || !!catalogQuery.error));
   const chapters = preview ? demoChapters : catalog?.chapters || [];
   const total = preview ? 1204 : catalog?.total;
   const attempted = preview ? 166 : catalog?.attemptedCount;
@@ -134,11 +138,13 @@ export function TodayScreen({
     certificates?.find((item) => item.id === user?.certificateId)?.name ||
     "当前题库";
   const refresh = () => {
+    setAnnouncementRefreshKey((key) => key + 1);
     void query.refresh();
     void catalogQuery.refresh();
   };
   return (
     <ScrollView
+      testID="today-screen"
       contentContainerStyle={s.page}
       showsVerticalScrollIndicator={false}
       refreshControl={
@@ -150,19 +156,7 @@ export function TodayScreen({
         )
       }
     >
-      <View style={s.headingRow}>
-        <View>
-          <Text style={s.kicker}>
-            {new Date().toLocaleDateString("zh-CN", {
-              month: "long",
-              day: "numeric",
-              weekday: "long",
-            })}
-          </Text>
-          <Text style={s.title}>每一步，都有进度</Text>
-        </View>
-        <AppIcon style={s.brandGlyph}>✦</AppIcon>
-      </View>
+      <AnnouncementCard refreshKey={announcementRefreshKey} />
       {!!(query.error || catalogQuery.error) && (
         <Text style={s.error}>
           进度暂未同步，可下拉重试。

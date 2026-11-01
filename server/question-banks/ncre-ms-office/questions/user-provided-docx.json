@@ -30,7 +30,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q002",
@@ -63,12 +64,13 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q003",
     "type": "single_choice",
-    "question": "下列叙述中正确的是（ ）。",
+    "question": "关于算法的时间复杂度，下列说法正确的是（ ）。",
     "options": {
       "A": "算法的时间复杂度与算法程序中的语句条数成正比",
       "B": "算法的时间复杂度与计算机的运行速度有关",
@@ -96,12 +98,13 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q004",
     "type": "single_choice",
-    "question": "下列叙述中正确的是（ ）。",
+    "question": "关于程序执行效率与数据结构的关系，下列说法正确的是（ ）。",
     "options": {
       "A": "程序执行的效率与数据的存储结构密切相关",
       "B": "程序执行的效率只取决于程序的控制结构",
@@ -129,7 +132,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q005",
@@ -162,7 +166,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q006",
@@ -195,7 +200,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q007",
@@ -212,7 +218,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（栈按“先进后出”组织数据）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "栈与队列",
+    "knowledgePoint": "栈和队列",
     "difficulty": "medium",
     "tags": [
       "栈与队列",
@@ -228,7 +234,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q008",
@@ -245,7 +252,7 @@
     ],
     "analysis": "原资料标注参考答案为 C（队列是先进先出的线性表）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "栈与队列",
+    "knowledgePoint": "栈和队列",
     "difficulty": "medium",
     "tags": [
       "栈与队列",
@@ -261,7 +268,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q009",
@@ -278,7 +286,7 @@
     ],
     "analysis": "原资料标注参考答案为 C（只允许在端点处插入和删除元素）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "栈与队列",
+    "knowledgePoint": "栈和队列",
     "difficulty": "medium",
     "tags": [
       "栈与队列",
@@ -294,12 +302,13 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q010",
     "type": "single_choice",
-    "question": "下列叙述中正确的是（ ）。",
+    "question": "关于循环队列，下列说法正确的是（ ）。",
     "options": {
       "A": "循环队列有队头和队尾两个指针，因此循环队列是非线性结构",
       "B": "在循环队列中，只需要队头指针就能反映队列中元素的动态变化情况",
@@ -311,7 +320,7 @@
     ],
     "analysis": "原资料标注参考答案为 D（循环队列中元素的个数是由队头指针和队尾指针共同决定）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "栈与队列",
+    "knowledgePoint": "栈和队列",
     "difficulty": "medium",
     "tags": [
       "栈与队列",
@@ -327,7 +336,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q011",
@@ -344,7 +354,7 @@
     ],
     "analysis": "原资料标注参考答案为 D（0或35）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "栈与队列",
+    "knowledgePoint": "栈和队列",
     "difficulty": "medium",
     "tags": [
       "栈与队列",
@@ -360,7 +370,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q012",
@@ -377,7 +388,7 @@
     ],
     "analysis": "原资料标注参考答案为 C（20）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "栈与队列",
+    "knowledgePoint": "栈和队列",
     "difficulty": "medium",
     "tags": [
       "栈与队列",
@@ -393,7 +404,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q013",
@@ -410,7 +422,7 @@
     ],
     "analysis": "原资料标注参考答案为 D（DCBEA）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "栈与队列",
+    "knowledgePoint": "栈和队列",
     "difficulty": "medium",
     "tags": [
       "栈与队列",
@@ -426,7 +438,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q014",
@@ -443,7 +456,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（e2，e4，e3，e1）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "栈与队列",
+    "knowledgePoint": "栈和队列",
     "difficulty": "medium",
     "tags": [
       "栈与队列",
@@ -459,7 +472,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q015",
@@ -476,7 +490,7 @@
     ],
     "analysis": "原资料标注参考答案为 D（FEDZYXCBA）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "栈与队列",
+    "knowledgePoint": "栈和队列",
     "difficulty": "medium",
     "tags": [
       "栈与队列",
@@ -492,7 +506,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q016",
@@ -509,7 +524,7 @@
     ],
     "analysis": "原资料标注参考答案为 C（二叉树）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "树与二叉树",
+    "knowledgePoint": "树和二叉树",
     "difficulty": "medium",
     "tags": [
       "树与二叉树",
@@ -525,7 +540,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q017",
@@ -542,7 +558,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（叶子结点总是比度为2的结点多一个）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "树与二叉树",
+    "knowledgePoint": "树和二叉树",
     "difficulty": "medium",
     "tags": [
       "树与二叉树",
@@ -558,7 +574,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q018",
@@ -575,7 +592,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（229）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "树与二叉树",
+    "knowledgePoint": "树和二叉树",
     "difficulty": "medium",
     "tags": [
       "树与二叉树",
@@ -591,7 +608,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q019",
@@ -608,7 +626,7 @@
     ],
     "analysis": "原资料标注参考答案为 C（不可能有这样的二叉树）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "树与二叉树",
+    "knowledgePoint": "树和二叉树",
     "difficulty": "medium",
     "tags": [
       "树与二叉树",
@@ -624,7 +642,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q020",
@@ -641,7 +660,7 @@
     ],
     "analysis": "原资料标注参考答案为 C（16）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "树与二叉树",
+    "knowledgePoint": "树和二叉树",
     "difficulty": "medium",
     "tags": [
       "树与二叉树",
@@ -657,7 +676,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q021",
@@ -674,7 +694,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（350）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "树与二叉树",
+    "knowledgePoint": "树和二叉树",
     "difficulty": "medium",
     "tags": [
       "树与二叉树",
@@ -690,7 +710,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q022",
@@ -707,7 +728,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（16）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "树与二叉树",
+    "knowledgePoint": "树和二叉树",
     "difficulty": "medium",
     "tags": [
       "树与二叉树",
@@ -723,7 +744,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q023",
@@ -740,7 +762,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（8）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "树与二叉树",
+    "knowledgePoint": "树和二叉树",
     "difficulty": "medium",
     "tags": [
       "树与二叉树",
@@ -756,7 +778,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q024",
@@ -773,7 +796,7 @@
     ],
     "analysis": "原资料标注参考答案为 D（不可能有这样的树）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "树与二叉树",
+    "knowledgePoint": "树和二叉树",
     "difficulty": "medium",
     "tags": [
       "树与二叉树",
@@ -789,7 +812,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q025",
@@ -806,7 +830,7 @@
     ],
     "analysis": "原资料标注参考答案为 D（gdbehfca）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "树与二叉树",
+    "knowledgePoint": "树和二叉树",
     "difficulty": "medium",
     "tags": [
       "树与二叉树",
@@ -822,7 +846,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q026",
@@ -839,7 +864,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（便于插入和删除操作）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "线性链表",
+    "knowledgePoint": "线性表",
     "difficulty": "medium",
     "tags": [
       "线性链表",
@@ -855,7 +880,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q027",
@@ -872,7 +898,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（方便运算的实现）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "线性链表",
+    "knowledgePoint": "线性表",
     "difficulty": "medium",
     "tags": [
       "线性链表",
@@ -888,7 +914,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q028",
@@ -905,7 +932,7 @@
     ],
     "analysis": "原资料标注参考答案为 C（p->next=head）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "线性链表",
+    "knowledgePoint": "线性表",
     "difficulty": "medium",
     "tags": [
       "线性链表",
@@ -921,7 +948,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q029",
@@ -954,7 +982,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q030",
@@ -987,7 +1016,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q031",
@@ -1020,7 +1050,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q032",
@@ -1053,7 +1084,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q033",
@@ -1086,7 +1118,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q034",
@@ -1103,7 +1136,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（n-1）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "线性表操作",
+    "knowledgePoint": "线性表",
     "difficulty": "medium",
     "tags": [
       "线性表操作",
@@ -1119,7 +1152,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q035",
@@ -1152,7 +1186,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q036",
@@ -1185,7 +1220,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "程序设计基础"
   },
   {
     "id": "ncre-office-user-docx-q037",
@@ -1218,7 +1254,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "程序设计基础"
   },
   {
     "id": "ncre-office-user-docx-q038",
@@ -1251,7 +1288,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "程序设计基础"
   },
   {
     "id": "ncre-office-user-docx-q039",
@@ -1284,7 +1322,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q040",
@@ -1317,7 +1356,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q041",
@@ -1350,7 +1390,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据结构与算法"
   },
   {
     "id": "ncre-office-user-docx-q042",
@@ -1367,7 +1408,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（程序应简单、清晰、可读性好）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "程序设计风格",
+    "knowledgePoint": "程序设计方法与风格",
     "difficulty": "medium",
     "tags": [
       "程序设计风格",
@@ -1383,7 +1424,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "程序设计基础"
   },
   {
     "id": "ncre-office-user-docx-q043",
@@ -1400,7 +1442,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（继承）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "面向对象基本概念",
+    "knowledgePoint": "面向对象的程序设计",
     "difficulty": "medium",
     "tags": [
       "面向对象基本概念",
@@ -1416,7 +1458,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "程序设计基础"
   },
   {
     "id": "ncre-office-user-docx-q044",
@@ -1433,7 +1476,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（任何对象都必须有继承性）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "面向对象基本概念",
+    "knowledgePoint": "面向对象的程序设计",
     "difficulty": "medium",
     "tags": [
       "面向对象基本概念",
@@ -1449,7 +1492,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "程序设计基础"
   },
   {
     "id": "ncre-office-user-docx-q045",
@@ -1466,7 +1510,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（229）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "类与对象",
+    "knowledgePoint": "面向对象的程序设计",
     "difficulty": "medium",
     "tags": [
       "类与对象",
@@ -1482,7 +1526,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "程序设计基础"
   },
   {
     "id": "ncre-office-user-docx-q046",
@@ -1499,7 +1544,7 @@
     ],
     "analysis": "原资料标注参考答案为 C（对象是属性和操作的封装体）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "类与对象",
+    "knowledgePoint": "面向对象的程序设计",
     "difficulty": "medium",
     "tags": [
       "类与对象",
@@ -1515,7 +1560,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "程序设计基础"
   },
   {
     "id": "ncre-office-user-docx-q047",
@@ -1548,7 +1594,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "程序设计基础"
   },
   {
     "id": "ncre-office-user-docx-q048",
@@ -1581,7 +1628,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "软件工程基础"
   },
   {
     "id": "ncre-office-user-docx-q049",
@@ -1614,7 +1662,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "软件工程基础"
   },
   {
     "id": "ncre-office-user-docx-q050",
@@ -1647,7 +1696,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "软件工程基础"
   },
   {
     "id": "ncre-office-user-docx-q051",
@@ -1680,7 +1730,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "软件工程基础"
   },
   {
     "id": "ncre-office-user-docx-q052",
@@ -1697,7 +1748,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（DFD图）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "需求分析",
+    "knowledgePoint": "结构化分析方法",
     "difficulty": "medium",
     "tags": [
       "需求分析",
@@ -1713,7 +1764,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "软件工程基础"
   },
   {
     "id": "ncre-office-user-docx-q053",
@@ -1730,7 +1782,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（需求规格说明书）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "需求分析",
+    "knowledgePoint": "结构化分析方法",
     "difficulty": "medium",
     "tags": [
       "需求分析",
@@ -1746,40 +1798,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
-  },
-  {
-    "id": "ncre-office-user-docx-q054",
-    "type": "single_choice",
-    "question": "在软件开发中，需求分析阶段产生的主要文档是（ ）。",
-    "options": {
-      "A": "可行性分析报告",
-      "B": "软件需求规格说明书",
-      "C": "概要设计说明书",
-      "D": "集成测试计划"
-    },
-    "answer": [
-      "B"
-    ],
-    "analysis": "原资料标注参考答案为 B（软件需求规格说明书）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
-    "chapter": "公共基础知识",
-    "knowledgePoint": "需求分析",
-    "difficulty": "medium",
-    "tags": [
-      "需求分析",
-      "用户提供DOCX",
-      "原文标注：真题"
-    ],
-    "provenance": [
-      {
-        "file": "计算机二级MSOffice选择题题库.docx",
-        "questionNumber": 54,
-        "chapter": "第三章 软件工程基础",
-        "sourceType": "真题",
-        "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
-      }
-    ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "软件工程基础"
   },
   {
     "id": "ncre-office-user-docx-q055",
@@ -1796,7 +1816,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（需求配置）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "需求分析",
+    "knowledgePoint": "结构化分析方法",
     "difficulty": "medium",
     "tags": [
       "需求分析",
@@ -1812,7 +1832,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "软件工程基础"
   },
   {
     "id": "ncre-office-user-docx-q056",
@@ -1829,7 +1850,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（高内聚低耦合）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "软件设计",
+    "knowledgePoint": "结构化设计方法",
     "difficulty": "medium",
     "tags": [
       "软件设计",
@@ -1845,7 +1866,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "软件工程基础"
   },
   {
     "id": "ncre-office-user-docx-q057",
@@ -1862,7 +1884,7 @@
     ],
     "analysis": "原资料标注参考答案为 C（制定软件确认测试计划）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "软件设计",
+    "knowledgePoint": "结构化设计方法",
     "difficulty": "medium",
     "tags": [
       "软件设计",
@@ -1878,7 +1900,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "软件工程基础"
   },
   {
     "id": "ncre-office-user-docx-q058",
@@ -1895,7 +1918,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（系统总体结构图支持软件系统的详细设计）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "软件设计",
+    "knowledgePoint": "结构化设计方法",
     "difficulty": "medium",
     "tags": [
       "软件设计",
@@ -1911,7 +1934,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "软件工程基础"
   },
   {
     "id": "ncre-office-user-docx-q059",
@@ -1928,7 +1952,7 @@
     ],
     "analysis": "原资料标注参考答案为 C（控制流）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "软件设计工具",
+    "knowledgePoint": "结构化设计方法",
     "difficulty": "medium",
     "tags": [
       "软件设计工具",
@@ -1944,7 +1968,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "软件工程基础"
   },
   {
     "id": "ncre-office-user-docx-q060",
@@ -1961,7 +1986,7 @@
     ],
     "analysis": "原资料标注参考答案为 C（可行性研究）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "软件生命周期",
+    "knowledgePoint": "软件工程基本概念",
     "difficulty": "medium",
     "tags": [
       "软件生命周期",
@@ -1977,7 +2002,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "软件工程基础"
   },
   {
     "id": "ncre-office-user-docx-q061",
@@ -2010,7 +2036,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "软件工程基础"
   },
   {
     "id": "ncre-office-user-docx-q062",
@@ -2027,7 +2054,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（市场调研）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "软件生命周期",
+    "knowledgePoint": "软件工程基本概念",
     "difficulty": "medium",
     "tags": [
       "软件生命周期",
@@ -2043,7 +2070,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "软件工程基础"
   },
   {
     "id": "ncre-office-user-docx-q063",
@@ -2060,7 +2088,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（程序调试的任务是诊断和改正程序中的错误）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "程序调试",
+    "knowledgePoint": "程序的调试",
     "difficulty": "medium",
     "tags": [
       "程序调试",
@@ -2076,7 +2104,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "软件工程基础"
   },
   {
     "id": "ncre-office-user-docx-q064",
@@ -2093,7 +2122,7 @@
     ],
     "analysis": "原资料标注参考答案为 C（关系）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "E-R模型",
+    "knowledgePoint": "数据模型",
     "difficulty": "medium",
     "tags": [
       "E-R模型",
@@ -2109,7 +2138,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据库设计基础"
   },
   {
     "id": "ncre-office-user-docx-q065",
@@ -2126,7 +2156,7 @@
     ],
     "analysis": "原资料标注参考答案为 C（逻辑设计阶段）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "数据库设计",
+    "knowledgePoint": "数据库设计与管理",
     "difficulty": "medium",
     "tags": [
       "数据库设计",
@@ -2142,7 +2172,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据库设计基础"
   },
   {
     "id": "ncre-office-user-docx-q066",
@@ -2175,7 +2206,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据库设计基础"
   },
   {
     "id": "ncre-office-user-docx-q067",
@@ -2208,7 +2240,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据库设计基础"
   },
   {
     "id": "ncre-office-user-docx-q068",
@@ -2241,7 +2274,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据库设计基础"
   },
   {
     "id": "ncre-office-user-docx-q069",
@@ -2258,7 +2292,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（系统软件）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "数据库系统基本概念",
+    "knowledgePoint": "数据库系统的基本概念",
     "difficulty": "medium",
     "tags": [
       "数据库系统基本概念",
@@ -2274,7 +2308,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据库设计基础"
   },
   {
     "id": "ncre-office-user-docx-q070",
@@ -2291,7 +2326,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（数据库设计）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "数据库设计",
+    "knowledgePoint": "数据库设计与管理",
     "difficulty": "medium",
     "tags": [
       "数据库设计",
@@ -2307,7 +2342,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据库设计基础"
   },
   {
     "id": "ncre-office-user-docx-q071",
@@ -2324,7 +2360,7 @@
     ],
     "analysis": "原资料标注参考答案为 D（算法设计）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "数据库设计",
+    "knowledgePoint": "数据库设计与管理",
     "difficulty": "medium",
     "tags": [
       "数据库设计",
@@ -2340,7 +2376,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据库设计基础"
   },
   {
     "id": "ncre-office-user-docx-q072",
@@ -2357,7 +2394,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（外模式(用户模式)）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "数据库系统结构",
+    "knowledgePoint": "数据库系统的基本概念",
     "difficulty": "medium",
     "tags": [
       "数据库系统结构",
@@ -2373,7 +2410,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据库设计基础"
   },
   {
     "id": "ncre-office-user-docx-q073",
@@ -2390,7 +2428,7 @@
     ],
     "analysis": "原资料标注参考答案为 D（数据模式）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "数据库系统结构",
+    "knowledgePoint": "数据库系统的基本概念",
     "difficulty": "medium",
     "tags": [
       "数据库系统结构",
@@ -2406,7 +2444,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据库设计基础"
   },
   {
     "id": "ncre-office-user-docx-q074",
@@ -2423,7 +2462,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（数据定义语言）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "数据库系统结构",
+    "knowledgePoint": "数据库系统的基本概念",
     "difficulty": "medium",
     "tags": [
       "数据库系统结构",
@@ -2439,7 +2478,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据库设计基础"
   },
   {
     "id": "ncre-office-user-docx-q075",
@@ -2472,7 +2512,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据库设计基础"
   },
   {
     "id": "ncre-office-user-docx-q076",
@@ -2505,7 +2546,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据库设计基础"
   },
   {
     "id": "ncre-office-user-docx-q077",
@@ -2538,7 +2580,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据库设计基础"
   },
   {
     "id": "ncre-office-user-docx-q078",
@@ -2555,7 +2598,7 @@
     ],
     "analysis": "原资料标注参考答案为 D（外键）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "关系模型",
+    "knowledgePoint": "数据模型",
     "difficulty": "medium",
     "tags": [
       "关系模型",
@@ -2571,7 +2614,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据库设计基础"
   },
   {
     "id": "ncre-office-user-docx-q079",
@@ -2588,7 +2632,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（非主属性对键的部分函数依赖）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "数据库规范化",
+    "knowledgePoint": "数据库设计与管理",
     "difficulty": "medium",
     "tags": [
       "数据库规范化",
@@ -2604,12 +2648,13 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据库设计基础"
   },
   {
     "id": "ncre-office-user-docx-q080",
     "type": "single_choice",
-    "question": "下列叙述中正确的是（ ）。",
+    "question": "关于数据库系统与文件系统的比较，下列说法正确的是（ ）。",
     "options": {
       "A": "数据库系统减少了数据冗余",
       "B": "经规范化后的数据库系统避免了一切冗余",
@@ -2621,7 +2666,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（数据库系统减少了数据冗余）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "数据库系统基本概念",
+    "knowledgePoint": "数据库系统的基本概念",
     "difficulty": "medium",
     "tags": [
       "数据库系统基本概念",
@@ -2637,7 +2682,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据库设计基础"
   },
   {
     "id": "ncre-office-user-docx-q081",
@@ -2654,7 +2700,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（数据库系统）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "数据库系统基本概念",
+    "knowledgePoint": "数据库系统的基本概念",
     "difficulty": "medium",
     "tags": [
       "数据库系统基本概念",
@@ -2670,7 +2716,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据库设计基础"
   },
   {
     "id": "ncre-office-user-docx-q082",
@@ -2687,7 +2734,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（第三范式）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "公共基础知识",
-    "knowledgePoint": "数据库规范化",
+    "knowledgePoint": "数据库设计与管理",
     "difficulty": "medium",
     "tags": [
       "数据库规范化",
@@ -2703,7 +2750,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据库设计基础"
   },
   {
     "id": "ncre-office-user-docx-q083",
@@ -2720,7 +2768,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（利用“重复标题行”功能）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Word 文档处理",
-    "knowledgePoint": "表格处理",
+    "knowledgePoint": "表格与图表",
     "difficulty": "medium",
     "tags": [
       "表格处理",
@@ -2736,7 +2784,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "表格、图形与对象"
   },
   {
     "id": "ncre-office-user-docx-q084",
@@ -2753,7 +2802,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（使用Ctrl+Shift+F9组合键）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Word 文档处理",
-    "knowledgePoint": "目录与域",
+    "knowledgePoint": "页眉页脚与引用",
     "difficulty": "medium",
     "tags": [
       "目录与域",
@@ -2769,7 +2818,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "页面与引用"
   },
   {
     "id": "ncre-office-user-docx-q085",
@@ -2786,7 +2836,7 @@
     ],
     "analysis": "原资料标注参考答案为 C（将文档的各级标题设置为内置标题样式，然后基于内置标题样式自动插入目录）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Word 文档处理",
-    "knowledgePoint": "目录与样式",
+    "knowledgePoint": "样式与主题",
     "difficulty": "medium",
     "tags": [
       "目录与样式",
@@ -2802,7 +2852,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "文字与段落"
   },
   {
     "id": "ncre-office-user-docx-q086",
@@ -2835,7 +2886,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "批量处理与自动化"
   },
   {
     "id": "ncre-office-user-docx-q087",
@@ -2868,7 +2920,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "批量处理与自动化"
   },
   {
     "id": "ncre-office-user-docx-q088",
@@ -2885,7 +2938,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（放映视图）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Word 文档处理",
-    "knowledgePoint": "视图",
+    "knowledgePoint": "多窗口多文档与视图",
     "difficulty": "medium",
     "tags": [
       "视图",
@@ -2901,7 +2954,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "文档基础"
   },
   {
     "id": "ncre-office-user-docx-q089",
@@ -2918,7 +2972,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（录制屏幕操作视频）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Word 文档处理",
-    "knowledgePoint": "文档编辑",
+    "knowledgePoint": "文档创建编辑保存打印保护",
     "difficulty": "medium",
     "tags": [
       "文档编辑",
@@ -2934,7 +2988,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "文档基础"
   },
   {
     "id": "ncre-office-user-docx-q090",
@@ -2951,7 +3006,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（DOCX）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Word 文档处理",
-    "knowledgePoint": "文件格式",
+    "knowledgePoint": "文档创建编辑保存打印保护",
     "difficulty": "medium",
     "tags": [
       "文件格式",
@@ -2967,7 +3022,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "文档基础"
   },
   {
     "id": "ncre-office-user-docx-q091",
@@ -2984,7 +3040,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（在两栏内容之上插入一个分节符，然后设置论文标题位置）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Word 文档处理",
-    "knowledgePoint": "分栏与分节",
+    "knowledgePoint": "页面布局与分栏分页分节",
     "difficulty": "medium",
     "tags": [
       "分栏与分节",
@@ -3000,7 +3056,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "页面与引用"
   },
   {
     "id": "ncre-office-user-docx-q092",
@@ -3017,7 +3074,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（开始、插入、设计、布局、引用、邮件、审阅等）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Word 文档处理",
-    "knowledgePoint": "Word界面",
+    "knowledgePoint": "文档创建编辑保存打印保护",
     "difficulty": "medium",
     "tags": [
       "Word界面",
@@ -3033,7 +3090,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "文档基础"
   },
   {
     "id": "ncre-office-user-docx-q093",
@@ -3050,7 +3108,7 @@
     ],
     "analysis": "原资料标注参考答案为 D（将指针移动到该段落的开始位置，按Ctrl+Shift+End组合键）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Word 文档处理",
-    "knowledgePoint": "文档编辑",
+    "knowledgePoint": "文档创建编辑保存打印保护",
     "difficulty": "medium",
     "tags": [
       "文档编辑",
@@ -3066,7 +3124,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "文档基础"
   },
   {
     "id": "ncre-office-user-docx-q094",
@@ -3083,7 +3142,7 @@
     ],
     "analysis": "原资料标注参考答案为 D（将第一章中的“章、节、小节”格式保存为标题样式，并将其应用到其他章节对应段落）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Word 文档处理",
-    "knowledgePoint": "样式与模板",
+    "knowledgePoint": "样式与主题",
     "difficulty": "medium",
     "tags": [
       "样式与模板",
@@ -3099,7 +3158,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "文字与段落"
   },
   {
     "id": "ncre-office-user-docx-q095",
@@ -3116,7 +3176,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（利用Word插入“屏幕截图”功能，直接将所需窗口画面插入到Word文档指定位置）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Word 文档处理",
-    "knowledgePoint": "图文混排",
+    "knowledgePoint": "图形图片 SmartArt 与文本框",
     "difficulty": "medium",
     "tags": [
       "图文混排",
@@ -3132,7 +3192,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "表格、图形与对象"
   },
   {
     "id": "ncre-office-user-docx-q096",
@@ -3149,7 +3210,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（利用Word“查找和替换”功能搜索文本“张晓?”，并将其全部替换为“张晓民”）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Word 文档处理",
-    "knowledgePoint": "查找与替换",
+    "knowledgePoint": "文档创建编辑保存打印保护",
     "difficulty": "medium",
     "tags": [
       "查找与替换",
@@ -3165,7 +3226,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "文档基础"
   },
   {
     "id": "ncre-office-user-docx-q097",
@@ -3182,7 +3244,7 @@
     ],
     "analysis": "原资料标注参考答案为 D（利用Word中“管理源”和“插入书目”功能，在论文结尾处插入参考文献或书目列表）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Word 文档处理",
-    "knowledgePoint": "引用与参考文献",
+    "knowledgePoint": "页眉页脚与引用",
     "difficulty": "medium",
     "tags": [
       "引用与参考文献",
@@ -3198,7 +3260,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "页面与引用"
   },
   {
     "id": "ncre-office-user-docx-q098",
@@ -3215,7 +3278,7 @@
     ],
     "analysis": "原资料标注参考答案为 D（利用Word中“稿纸设置”功能即可）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Word 文档处理",
-    "knowledgePoint": "页面设置",
+    "knowledgePoint": "页面布局与分栏分页分节",
     "difficulty": "medium",
     "tags": [
       "页面设置",
@@ -3231,7 +3294,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "页面与引用"
   },
   {
     "id": "ncre-office-user-docx-q099",
@@ -3248,7 +3312,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（修改“标题1”样式，将其段落格式设置为“段前、段后各12磅，单倍行距”）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Word 文档处理",
-    "knowledgePoint": "样式与模板",
+    "knowledgePoint": "样式与主题",
     "difficulty": "medium",
     "tags": [
       "样式与模板",
@@ -3264,7 +3328,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "文字与段落"
   },
   {
     "id": "ncre-office-user-docx-q100",
@@ -3281,7 +3346,7 @@
     ],
     "analysis": "原资料标注参考答案为 D（利用页面填充效果功能，将图片设置为页面背景）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Word 文档处理",
-    "knowledgePoint": "页面设置",
+    "knowledgePoint": "页面布局与分栏分页分节",
     "difficulty": "medium",
     "tags": [
       "页面设置",
@@ -3297,7 +3362,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "页面与引用"
   },
   {
     "id": "ncre-office-user-docx-q101",
@@ -3314,7 +3380,7 @@
     ],
     "analysis": "原资料标注参考答案为 D（##）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Word 文档处理",
-    "knowledgePoint": "表格处理",
+    "knowledgePoint": "表格与图表",
     "difficulty": "medium",
     "tags": [
       "表格处理",
@@ -3330,7 +3396,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "表格、图形与对象"
   },
   {
     "id": "ncre-office-user-docx-q102",
@@ -3347,7 +3414,7 @@
     ],
     "analysis": "原资料标注参考答案为 D（执行“开始”选项卡“字体”组中的“更改大小写”命令）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Word 文档处理",
-    "knowledgePoint": "格式设置",
+    "knowledgePoint": "字体与段落",
     "difficulty": "medium",
     "tags": [
       "格式设置",
@@ -3363,7 +3430,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "文字与段落"
   },
   {
     "id": "ncre-office-user-docx-q103",
@@ -3380,7 +3448,7 @@
     ],
     "analysis": "原资料标注参考答案为 D（使用“插入交叉引用”功能）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Word 文档处理",
-    "knowledgePoint": "图文混排",
+    "knowledgePoint": "图形图片 SmartArt 与文本框",
     "difficulty": "medium",
     "tags": [
       "图文混排",
@@ -3396,7 +3464,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "表格、图形与对象"
   },
   {
     "id": "ncre-office-user-docx-q104",
@@ -3413,7 +3482,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（光标所在段落按1.5倍行距调整格式）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Word 文档处理",
-    "knowledgePoint": "段落格式",
+    "knowledgePoint": "字体与段落",
     "difficulty": "medium",
     "tags": [
       "段落格式",
@@ -3429,7 +3498,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "文字与段落"
   },
   {
     "id": "ncre-office-user-docx-q105",
@@ -3446,7 +3516,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（将每一章标题指定为标题样式，并将样式的段落格式修改为“段前分页”）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Word 文档处理",
-    "knowledgePoint": "长文档处理",
+    "knowledgePoint": "页眉页脚与引用",
     "difficulty": "medium",
     "tags": [
       "长文档处理",
@@ -3462,7 +3532,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "页面与引用"
   },
   {
     "id": "ncre-office-user-docx-q106",
@@ -3479,7 +3550,7 @@
     ],
     "analysis": "原资料标注参考答案为 C（打印时先设置“手动双面打印”，等Word提示打印第二面时将纸张翻过来继续打印）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Word 文档处理",
-    "knowledgePoint": "打印输出",
+    "knowledgePoint": "文档创建编辑保存打印保护",
     "difficulty": "medium",
     "tags": [
       "打印输出",
@@ -3495,7 +3566,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "文档基础"
   },
   {
     "id": "ncre-office-user-docx-q107",
@@ -3512,7 +3584,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（尾注可以插入到页脚中）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Word 文档处理",
-    "knowledgePoint": "脚注与尾注",
+    "knowledgePoint": "页眉页脚与引用",
     "difficulty": "medium",
     "tags": [
       "脚注与尾注",
@@ -3528,7 +3600,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "页面与引用"
   },
   {
     "id": "ncre-office-user-docx-q108",
@@ -3545,7 +3618,7 @@
     ],
     "analysis": "原资料标注参考答案为 C（默认的自动保存时间间隔为10分钟）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Word 文档处理",
-    "knowledgePoint": "文档保存",
+    "knowledgePoint": "文档创建编辑保存打印保护",
     "difficulty": "medium",
     "tags": [
       "文档保存",
@@ -3561,7 +3634,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "文档基础"
   },
   {
     "id": "ncre-office-user-docx-q109",
@@ -3578,7 +3652,7 @@
     ],
     "analysis": "原资料标注参考答案为 D（使用“拆分”功能，将文档窗口拆分为两个部分，并对照查看不同部分内容）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Word 文档处理",
-    "knowledgePoint": "长文档处理",
+    "knowledgePoint": "页眉页脚与引用",
     "difficulty": "medium",
     "tags": [
       "长文档处理",
@@ -3594,7 +3668,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "页面与引用"
   },
   {
     "id": "ncre-office-user-docx-q110",
@@ -3611,7 +3686,7 @@
     ],
     "analysis": "原资料标注参考答案为 C（利用Word比较功能，将两位老师的修订合并到一个文档中）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Word 文档处理",
-    "knowledgePoint": "修订与审阅",
+    "knowledgePoint": "审阅与修订",
     "difficulty": "medium",
     "tags": [
       "修订与审阅",
@@ -3627,7 +3702,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "页面与引用"
   },
   {
     "id": "ncre-office-user-docx-q111",
@@ -3644,7 +3720,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（利用“审阅”选项卡的修订功能，选择带“显示标记”的文档修订查看方式后按下“修订”按钮，然后在文档中直接修改内容）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Word 文档处理",
-    "knowledgePoint": "修订与审阅",
+    "knowledgePoint": "审阅与修订",
     "difficulty": "medium",
     "tags": [
       "修订与审阅",
@@ -3660,7 +3736,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "页面与引用"
   },
   {
     "id": "ncre-office-user-docx-q112",
@@ -3693,7 +3770,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "公式与函数"
   },
   {
     "id": "ncre-office-user-docx-q113",
@@ -3726,7 +3804,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "公式与函数"
   },
   {
     "id": "ncre-office-user-docx-q114",
@@ -3743,7 +3822,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（SUM(C4)）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Excel 数据处理",
-    "knowledgePoint": "公式与函数",
+    "knowledgePoint": "公式函数与数组",
     "difficulty": "medium",
     "tags": [
       "公式与函数",
@@ -3759,7 +3838,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "公式与函数"
   },
   {
     "id": "ncre-office-user-docx-q115",
@@ -3792,7 +3872,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "公式与函数"
   },
   {
     "id": "ncre-office-user-docx-q116",
@@ -3809,7 +3890,7 @@
     ],
     "analysis": "原资料标注参考答案为 C（双击B列列标的右边框）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Excel 数据处理",
-    "knowledgePoint": "工作表编辑",
+    "knowledgePoint": "数据输入与编辑",
     "difficulty": "medium",
     "tags": [
       "工作表编辑",
@@ -3825,7 +3906,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "工作表基础"
   },
   {
     "id": "ncre-office-user-docx-q117",
@@ -3842,7 +3924,7 @@
     ],
     "analysis": "原资料标注参考答案为 D（一组格式集合）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Excel 数据处理",
-    "knowledgePoint": "工作表格式化",
+    "knowledgePoint": "单元格格式化",
     "difficulty": "medium",
     "tags": [
       "工作表格式化",
@@ -3858,7 +3940,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "工作表基础"
   },
   {
     "id": "ncre-office-user-docx-q118",
@@ -3875,7 +3958,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（在第一个单元格中输入“2011-1-31”，拖动填充柄，然后使用智能标记自动填充其余35个单元格）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Excel 数据处理",
-    "knowledgePoint": "数据填充",
+    "knowledgePoint": "数据输入与编辑",
     "difficulty": "medium",
     "tags": [
       "数据填充",
@@ -3891,7 +3974,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "工作表基础"
   },
   {
     "id": "ncre-office-user-docx-q119",
@@ -3908,7 +3992,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（通过自定义单元格格式，设置数据的显示方式）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Excel 数据处理",
-    "knowledgePoint": "单元格格式",
+    "knowledgePoint": "单元格格式化",
     "difficulty": "medium",
     "tags": [
       "单元格格式",
@@ -3924,7 +4008,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "工作表基础"
   },
   {
     "id": "ncre-office-user-docx-q120",
@@ -3941,7 +4026,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（高级筛选通常需要在工作表中设置条件区域）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Excel 数据处理",
-    "knowledgePoint": "排序与筛选",
+    "knowledgePoint": "排序筛选分类汇总",
     "difficulty": "medium",
     "tags": [
       "排序与筛选",
@@ -3957,7 +4042,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据管理"
   },
   {
     "id": "ncre-office-user-docx-q121",
@@ -3974,7 +4060,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（=SUM(B3:3E)*F3）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Excel 数据处理",
-    "knowledgePoint": "公式与函数",
+    "knowledgePoint": "公式函数与数组",
     "difficulty": "medium",
     "tags": [
       "公式与函数",
@@ -3990,7 +4076,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "公式与函数"
   },
   {
     "id": "ncre-office-user-docx-q122",
@@ -4007,7 +4094,7 @@
     ],
     "analysis": "原资料标注参考答案为 D（同时选中所有不相邻单元格，在活动单元格中输入数据，然后按Ctrl+Enter键）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Excel 数据处理",
-    "knowledgePoint": "数据输入",
+    "knowledgePoint": "数据输入与编辑",
     "difficulty": "medium",
     "tags": [
       "数据输入",
@@ -4023,7 +4110,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "工作表基础"
   },
   {
     "id": "ncre-office-user-docx-q123",
@@ -4040,7 +4128,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（=REPLACE(B2,8,4,“****”)）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Excel 数据处理",
-    "knowledgePoint": "公式与函数",
+    "knowledgePoint": "公式函数与数组",
     "difficulty": "medium",
     "tags": [
       "公式与函数",
@@ -4056,7 +4144,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "公式与函数"
   },
   {
     "id": "ncre-office-user-docx-q124",
@@ -4073,7 +4162,7 @@
     ],
     "analysis": "原资料标注参考答案为 D（在编码与分类列右侧插入一个空列，然后利用Excel的分列功能将其分开）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Excel 数据处理",
-    "knowledgePoint": "数据分列",
+    "knowledgePoint": "数据验证、分列与合并计算",
     "difficulty": "medium",
     "tags": [
       "数据分列",
@@ -4089,7 +4178,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "数据管理"
   },
   {
     "id": "ncre-office-user-docx-q125",
@@ -4106,7 +4196,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（将文档另存为Excel 97-2003文档格式）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Excel 数据处理",
-    "knowledgePoint": "文件格式",
+    "knowledgePoint": "工作表基本操作、视图与打印",
     "difficulty": "medium",
     "tags": [
       "文件格式",
@@ -4122,7 +4212,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "工作表基础"
   },
   {
     "id": "ncre-office-user-docx-q126",
@@ -4139,7 +4230,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（通过移动或复制工作表功能，将各班成绩单整合到一个工作簿中）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Excel 数据处理",
-    "knowledgePoint": "工作表操作",
+    "knowledgePoint": "工作表基本操作、视图与打印",
     "difficulty": "medium",
     "tags": [
       "工作表操作",
@@ -4155,7 +4246,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "工作表基础"
   },
   {
     "id": "ncre-office-user-docx-q127",
@@ -4172,7 +4264,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（=AVERAGEIFS(D2:D301,A2:A301,“第一中学”,B2:B301,“3班”)）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Excel 数据处理",
-    "knowledgePoint": "公式与函数",
+    "knowledgePoint": "公式函数与数组",
     "difficulty": "medium",
     "tags": [
       "公式与函数",
@@ -4188,7 +4280,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "公式与函数"
   },
   {
     "id": "ncre-office-user-docx-q128",
@@ -4205,7 +4298,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（=REPLACE(D2,9,4,“****”)）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Excel 数据处理",
-    "knowledgePoint": "公式与函数",
+    "knowledgePoint": "公式函数与数组",
     "difficulty": "medium",
     "tags": [
       "公式与函数",
@@ -4221,7 +4314,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "公式与函数"
   },
   {
     "id": "ncre-office-user-docx-q129",
@@ -4238,7 +4332,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（通过Excel中的“自网站获取外部数据”功能，直接将网页上的表格导入到Excel工作表中）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Excel 数据处理",
-    "knowledgePoint": "外部数据导入",
+    "knowledgePoint": "外部数据与 Power Pivot",
     "difficulty": "medium",
     "tags": [
       "外部数据导入",
@@ -4254,7 +4348,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "高级分析"
   },
   {
     "id": "ncre-office-user-docx-q130",
@@ -4271,7 +4366,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（将单价308定义名称为“单价”，然后在计算销售额的公式中引用该名称）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Excel 数据处理",
-    "knowledgePoint": "公式与函数",
+    "knowledgePoint": "公式函数与数组",
     "difficulty": "medium",
     "tags": [
       "公式与函数",
@@ -4287,7 +4382,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "公式与函数"
   },
   {
     "id": "ncre-office-user-docx-q131",
@@ -4304,7 +4400,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（通过设置条件格式，分别标出每类商品的销量冠军）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Excel 数据处理",
-    "knowledgePoint": "条件格式",
+    "knowledgePoint": "单元格格式化",
     "difficulty": "medium",
     "tags": [
       "条件格式",
@@ -4320,7 +4416,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "工作表基础"
   },
   {
     "id": "ncre-office-user-docx-q132",
@@ -4337,7 +4434,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（算术运算符、关系运算符、逻辑运算符）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Excel 数据处理",
-    "knowledgePoint": "公式与函数",
+    "knowledgePoint": "公式函数与数组",
     "difficulty": "medium",
     "tags": [
       "公式与函数",
@@ -4353,7 +4450,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "公式与函数"
   },
   {
     "id": "ncre-office-user-docx-q133",
@@ -4370,7 +4468,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（绝对）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "Excel 数据处理",
-    "knowledgePoint": "图表",
+    "knowledgePoint": "迷你图与图表",
     "difficulty": "medium",
     "tags": [
       "图表",
@@ -4386,7 +4484,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "图表与可视化"
   },
   {
     "id": "ncre-office-user-docx-q134",
@@ -4403,7 +4502,7 @@
     ],
     "analysis": "原资料标注参考答案为 C（拖动图片上方旋转控制点）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "PowerPoint 演示文稿",
-    "knowledgePoint": "图片编辑",
+    "knowledgePoint": "文本、图形、图片、表格与图表",
     "difficulty": "medium",
     "tags": [
       "图片编辑",
@@ -4419,7 +4518,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "对象编辑"
   },
   {
     "id": "ncre-office-user-docx-q135",
@@ -4436,7 +4536,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（单击节名称即可）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "PowerPoint 演示文稿",
-    "knowledgePoint": "幻灯片组织",
+    "knowledgePoint": "幻灯片组织与管理",
     "difficulty": "medium",
     "tags": [
       "幻灯片组织",
@@ -4452,7 +4552,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "基础与视图"
   },
   {
     "id": "ncre-office-user-docx-q136",
@@ -4469,7 +4570,7 @@
     ],
     "analysis": "原资料标注参考答案为 C（制作一份包含适合所有人群的全部内容的演示文稿，然后利用自定义幻灯片放映功能创建不同的演示方案）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "PowerPoint 演示文稿",
-    "knowledgePoint": "演示文稿放映",
+    "knowledgePoint": "放映设置与打包输出",
     "difficulty": "medium",
     "tags": [
       "演示文稿放映",
@@ -4485,7 +4586,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "放映与输出"
   },
   {
     "id": "ncre-office-user-docx-q137",
@@ -4518,7 +4620,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "主题与母版"
   },
   {
     "id": "ncre-office-user-docx-q138",
@@ -4535,7 +4638,7 @@
     ],
     "analysis": "原资料标注参考答案为 A（创建一个PowerPoint相册文件）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "PowerPoint 演示文稿",
-    "knowledgePoint": "相册与图文",
+    "knowledgePoint": "文本、图形、图片、表格与图表",
     "difficulty": "medium",
     "tags": [
       "相册与图文",
@@ -4551,7 +4654,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "对象编辑"
   },
   {
     "id": "ncre-office-user-docx-q139",
@@ -4568,7 +4672,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（在Word中直接将教案大纲发送到PowerPoint）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "PowerPoint 演示文稿",
-    "knowledgePoint": "Word与PPT协同",
+    "knowledgePoint": "素材分析与引用",
     "difficulty": "medium",
     "tags": [
       "Word与PPT协同",
@@ -4584,7 +4688,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "放映与输出"
   },
   {
     "id": "ncre-office-user-docx-q140",
@@ -4601,7 +4706,7 @@
     ],
     "analysis": "原资料标注参考答案为 C（字体、颜色和效果）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "PowerPoint 演示文稿",
-    "knowledgePoint": "主题与版式",
+    "knowledgePoint": "主题与背景",
     "difficulty": "medium",
     "tags": [
       "主题与版式",
@@ -4617,7 +4722,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "主题与母版"
   },
   {
     "id": "ncre-office-user-docx-q141",
@@ -4634,7 +4740,7 @@
     ],
     "analysis": "原资料标注参考答案为 D（书签）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "PowerPoint 演示文稿",
-    "knowledgePoint": "对象插入",
+    "knowledgePoint": "文本、图形、图片、表格与图表",
     "difficulty": "medium",
     "tags": [
       "对象插入",
@@ -4650,7 +4756,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "对象编辑"
   },
   {
     "id": "ncre-office-user-docx-q142",
@@ -4667,7 +4774,7 @@
     ],
     "analysis": "原资料标注参考答案为 D（在幻灯片母版中插入徽标图片，并为其设置动画）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "PowerPoint 演示文稿",
-    "knowledgePoint": "母版与动画",
+    "knowledgePoint": "幻灯片母版",
     "difficulty": "medium",
     "tags": [
       "母版与动画",
@@ -4683,7 +4790,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "主题与母版"
   },
   {
     "id": "ncre-office-user-docx-q143",
@@ -4700,7 +4808,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（在练习过程中，利用“排练计时”功能记录适合的幻灯片切换时间，然后播放即可）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "PowerPoint 演示文稿",
-    "knowledgePoint": "排练计时与放映",
+    "knowledgePoint": "放映设置与打包输出",
     "difficulty": "medium",
     "tags": [
       "排练计时与放映",
@@ -4716,7 +4824,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "放映与输出"
   },
   {
     "id": "ncre-office-user-docx-q144",
@@ -4733,7 +4842,7 @@
     ],
     "analysis": "原资料标注参考答案为 D（按回车键Enter后，再按Tab键）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "PowerPoint 演示文稿",
-    "knowledgePoint": "大纲视图",
+    "knowledgePoint": "基本操作与视图模式",
     "difficulty": "medium",
     "tags": [
       "大纲视图",
@@ -4749,7 +4858,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "基础与视图"
   },
   {
     "id": "ncre-office-user-docx-q145",
@@ -4766,7 +4876,7 @@
     ],
     "analysis": "原资料标注参考答案为 C（超链接或动作设置）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "PowerPoint 演示文稿",
-    "knowledgePoint": "超链接与动作",
+    "knowledgePoint": "超链接与交互",
     "difficulty": "medium",
     "tags": [
       "超链接与动作",
@@ -4782,7 +4892,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "动画与交互"
   },
   {
     "id": "ncre-office-user-docx-q146",
@@ -4799,7 +4910,7 @@
     ],
     "analysis": "原资料标注参考答案为 B（可以在幻灯片浏览视图中通过复制幻灯片新建）。本题按用户提供 DOCX 原文导入；文档未附独立解析，正式复习前请结合教材或官方范围复核。",
     "chapter": "PowerPoint 演示文稿",
-    "knowledgePoint": "幻灯片版式",
+    "knowledgePoint": "幻灯片母版",
     "difficulty": "medium",
     "tags": [
       "幻灯片版式",
@@ -4815,7 +4926,8 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "主题与母版"
   },
   {
     "id": "ncre-office-user-docx-q147",
@@ -4848,6 +4960,7 @@
         "sha256": "1da759f7c42efd6bdd3085183919afe90b1e201d55b0685fa2707f1b8a332e57"
       }
     ],
-    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
+    "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编",
+    "knowledgeSection": "主题与母版"
   }
 ]

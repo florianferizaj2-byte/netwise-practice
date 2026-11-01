@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { createApp } from '../server/index.js';
+import { createVerifiedTestApp as createApp, verifiedFetch } from './helpers/account-mail.js';
 import { createStore } from '../server/store.js';
 import { mobileModules, memoryStorage } from './mobile-fixture.js';
 
@@ -24,7 +24,7 @@ test('ordinary practice stays consistent with the web bank when an account owns 
   });
   const nativeHeaders = { 'X-Client': 'mobile', 'X-App-Version': '99.0.0' };
   const request = async (route, { token, native = false, method = 'GET', body } = {}) => {
-    const response = await fetch(`${origin}/api${route}`, {
+    const response = await (route === '/auth/register' ? verifiedFetch : fetch)(`${origin}/api${route}`, {
       method,
       headers: {
         'Content-Type': 'application/json',

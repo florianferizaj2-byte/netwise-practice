@@ -44,8 +44,8 @@ try {
   browser = await launchTestBrowser();
   const admin = await userPage(owner);
   await admin.goto(`${base}/#admin`);
-  await expect(admin.getByRole("heading", { name: "管理员面板", exact: true })).toBeVisible();
-  await admin.getByRole("tab", { name: "AI 精讲与练习", exact: true }).click();
+  await expect(admin.getByRole("heading", { name: /总览工作台|AI 教学管理/, exact: true })).toBeVisible();
+  await admin.getByRole("link", { name: "AI 教学管理", exact: true }).click();
   await expect(admin.getByRole("heading", { name: "精讲与练习内容", exact: true })).toBeVisible();
   const reference = admin.getByLabel("已确认的参考资料", { exact: true });
   await expect(reference).toBeEnabled(); await reference.fill(studyReference);
@@ -81,7 +81,7 @@ try {
   assert.equal(lessonReads.filter((path) => path === lessonPath).length, 1, "reopening a lesson uses memory without another request");
   assert.equal(bankReads.length, 0, "course and membership pages do not download the unrelated full question bank");
   await expect(page.locator(".ss-teacher")).toHaveCount(0);
-  await page.locator(".ss-workspace-title button").click();
+  await page.getByRole("button", { name: "问老师", exact: true }).click();
   const teacher = page.locator(".ss-teacher");
   await teacher.getByRole("button", { name: "举个例子", exact: true }).click();
   await expect(teacher.locator(".ss-teacher-example")).toContainText("8＋4＋1");
@@ -119,12 +119,12 @@ try {
   await page.getByRole("tab", { name: "练习", exact: true }).click();
   await expect(page.locator("#ss-answer-q2-b1")).toBeVisible();
   assert.equal(practiceReads.length, practiceReadCount, "switching between learning and practice retains the group and its position");
-  await page.locator(".ss-workspace-title button").click();
+  await page.getByRole("button", { name: "问老师", exact: true }).click();
   await teacher.getByLabel("你的问题", { exact: true }).fill("老师，我想再问一下");
   await teacher.getByLabel("你的问题", { exact: true }).press("Enter");
   await expect(teacher.getByLabel("你的问题", { exact: true })).toHaveValue("老师，我想再问一下\n");
   await expect(page.locator("#ss-answer-q2-b1")).toBeVisible();
-  await page.locator(".ss-workspace-title button").click();
+  await page.getByRole("button", { name: "问老师", exact: true }).click();
   await page.getByRole("button", { name: "下一题", exact: true }).click();
   await page.locator("#ss-answer-q3-b1").fill("13");
   await page.reload();
@@ -162,8 +162,8 @@ try {
   fake.rejectKnowledge = false;
 
   await admin.goto(`${base}/#study-admin`);
-  await expect(admin.getByRole("heading", { name: "管理员面板", exact: true })).toBeVisible();
-  await expect(admin.getByRole("tab", { name: "AI 精讲与练习", exact: true })).toHaveAttribute("aria-selected", "true");
+  await expect(admin.getByRole("heading", { name: /总览工作台|AI 教学管理/, exact: true })).toBeVisible();
+  await expect(admin.getByRole("link", { name: "AI 教学管理", exact: true })).toHaveAttribute("aria-current", "page");
 
   await admin.getByLabel("课程科目", { exact: true }).selectOption("sichuan-upgrading-computer");
   await expect(admin.locator(".ss-bulk-panel")).toContainText("7 章 · 22 个知识点 · 141 节课");
@@ -236,7 +236,7 @@ try {
   await expect(nonmember.getByRole("heading", { name: "VIP 专属的学习与练习", exact: true })).toBeVisible();
   assert.equal(nonmemberRequests.some((url) => url.startsWith("/api/study/lessons/")), false);
   await nonmember.setViewportSize({ width: 375, height: 812 });
-  assert.ok(await nonmember.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1), "VIP access notice fits small screens");
+  await expect.poll(() => nonmember.evaluate(() => document.documentElement.scrollWidth - window.innerWidth), { message: "VIP access notice fits small screens after responsive layout settles" }).toBeLessThanOrEqual(1);
   await admin.goto(`${base}/#study`);
   await expect(admin.getByRole("heading", { name: "VIP 专属的学习与练习", exact: true })).toBeVisible();
   assert.equal(errors.length, 0, errors.join("\n"));

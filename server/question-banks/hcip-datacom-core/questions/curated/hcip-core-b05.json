@@ -1,0 +1,770 @@
+[
+  {
+    "id": "hcip821-isis-net-001",
+    "type": "single_choice",
+    "question": "一台 IS-IS 路由器的 NET 配置为 49.0001.0010.0100.1001.00，其中 System ID 是下列哪一部分？",
+    "options": {
+      "A": "49.0001",
+      "B": "0010.0100.1001",
+      "C": "00",
+      "D": "0010.0100.1001.00"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "NET 由区域地址（Area Address）、6 字节 System ID 和 1 字节 SEL 组成；本例区域地址为 49.0001，System ID 为 0010.0100.1001，最后的 00 是 SEL（路由器通常为 00）。A 是区域地址；C 是 SEL；D 把 System ID 和 SEL 连在一起，均不符合 NET 的字段划分。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "NET",
+      "System ID"
+    ],
+    "provenance": {
+      "questionId": "hcip821-isis-net-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页“IS-IS 原理 / 基本概念与 NET”，对应三级目录「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」；NET 由区域地址、6 字节 System ID、1 字节 SEL 组成的字段划分为 IS-IS 基础工程定义，按该知识点边界独立命题并逐段拆分地址。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "af789263b506d7e448c9a3b495aeb51bd2bc9d191f17b1cd5317e354e9e5d6a2"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-isis-l1-adjacency-001",
+    "type": "single_choice",
+    "question": "两台 IS-IS 路由器要建立 Level-1 邻接关系，对区域地址和 System ID 的要求是？",
+    "options": {
+      "A": "区域地址必须相同，System ID 必须不同",
+      "B": "区域地址必须不同，System ID 必须相同",
+      "C": "区域地址与 System ID 都必须相同",
+      "D": "只要 System ID 不同，区域地址可以任意不同"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Level-1 邻接要求两端处于同一区域，区域地址必须一致；System ID 用来唯一标识路由器，同一区域内不能重复，否则会被当成同一台路由器而产生标识冲突。B 把两个条件说反；C 中 System ID 相同会导致路由器标识冲突；D 忽略了 Level-1 的同区域要求。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS",
+      "Level-1",
+      "邻接"
+    ],
+    "provenance": {
+      "questionId": "hcip821-isis-l1-adjacency-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页“IS-IS 原理 / 基本概念与 NET”，对应三级目录「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」；Level-1 同区域邻接与 System ID 唯一性依据 RFC 1195 第 7.2 节的 Level-1/Level-2 路由划分。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲独立命题；IS-IS 分层邻接结论按 RFC 1195 原文核对，未复制第三方题目。",
+      "reviewDigest": "2adcda4e085ef20df0a4c6db95836e7813234067a58e3f846ffb83b1f5d96ef7"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-isis-default-level-001",
+    "type": "single_choice",
+    "question": "在华为设备上创建 IS-IS 进程后，如果没有显式配置路由器级别，默认的路由器类型是什么？",
+    "options": {
+      "A": "Level-1",
+      "B": "Level-2",
+      "C": "Level-1-2",
+      "D": "Level-0"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "华为设备 IS-IS 进程的默认路由器级别为 Level-1-2，即同时维护 Level-1 和 Level-2 链路状态数据库，可分别与同区域 Level-1 路由器和 Level-2 骨干路由器建立邻接。Level-1 或 Level-2 需要显式配置；Level-0 不是 IS-IS 的路由器级别。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "路由器级别",
+      "默认配置"
+    ],
+    "provenance": {
+      "questionId": "hcip821-isis-default-level-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页“IS-IS 原理 / 基本概念与 NET”，对应三级目录「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」；华为设备创建 IS-IS 进程后默认路由器级别为 Level-1-2，属设备公开默认配置语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲独立命题；IS-IS 默认级别按设备公开配置语义核对，未复制第三方题目。",
+      "reviewDigest": "6a45ff0aa43278ed5f49ff96825fad8fda3ab6f4aa1601990a8ae845d08c09dc"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-isis-dis-001",
+    "type": "single_choice",
+    "question": "在 IS-IS 广播网络中，关于指定中间系统（DIS）的描述正确的是？",
+    "options": {
+      "A": "DIS 使用 Router ID 选举，与接口优先级无关",
+      "B": "DIS 一旦选出就不能被抢占，只有重启才能更换",
+      "C": "DIS 有备份 DIS，主 DIS 故障时由备份立即接管",
+      "D": "DIS 按接口优先级选举，优先级相同时比较 MAC 地址，且新的更高优先级路由器可以抢占 DIS 角色"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "广播网络上由接口优先级（默认 64）选举 DIS，优先级相同则比较 MAC（SNPA）地址，值大者当选；IS-IS 的 DIS 可以被更高优先级的新路由器抢占，且没有备份 DIS。B 否定了可抢占性；C 把 OSPF 的 DR/BDR 模型套到 IS-IS；A 错误，DIS 选举不使用 Router ID，接口优先级才是第一比较项。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS",
+      "DIS",
+      "广播网络"
+    ],
+    "provenance": {
+      "questionId": "hcip821-isis-dis-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页“IS-IS 原理 / 工作原理与分层”，对应三级目录「IS-IS 核心知识 / IS-IS 原理 / 工作原理与分层」；广播网 DIS 按接口优先级与 MAC 选举、可被抢占且无备份 DIS，为 IS-IS 公开工程语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲独立命题；DIS 选举与抢占行为按 IS-IS 公开协议语义核对，未复制第三方题目。",
+      "reviewDigest": "5cf30ad9ed5a91a23fc4d2b1e49d5c17bcb8ed42ce23202f768f47f0f2d93406"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-isis-lsp-scope-001",
+    "type": "single_choice",
+    "question": "关于 IS-IS 中 Level-1 LSP 与 Level-2 LSP 的泛洪范围，下列描述正确的是？",
+    "options": {
+      "A": "Level-1 LSP 与 Level-2 LSP 的泛洪范围完全相同",
+      "B": "Level-1 LSP 在整个自治系统内泛洪，Level-2 LSP 只在本区域内泛洪",
+      "C": "Level-1 LSP 只在本区域内泛洪，Level-2 LSP 在 Level-2 骨干区域内泛洪",
+      "D": "Level-2 LSP 只在单个广播网段内泛洪，不经过任何路由器转发"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "IS-IS 分层把区域内拓扑和骨干拓扑分开：Level-1 LSP 描述本区域内的路由器和网段，只在本区域泛洪；Level-2 LSP 描述 Level-2 骨干拓扑，在 Level-2 区域内泛洪。B 把两者范围对调；A 忽略了分层边界；D 把 Level-2 LSP 的泛洪范围缩小到单个网段，实际它会沿 Level-2 邻接逐跳泛洪。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "LSP",
+      "泛洪"
+    ],
+    "provenance": {
+      "questionId": "hcip821-isis-lsp-scope-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页“IS-IS 原理 / 工作原理与分层”，对应三级目录「IS-IS 核心知识 / IS-IS 原理 / 工作原理与分层」；Level-1/Level-2 的区域内与骨干泛洪划分依据 RFC 1195 第 7.2 节的 IS-IS 分层路由模型。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲独立命题；LSP 泛洪范围按 RFC 1195 分层模型核对，未复制第三方题目。",
+      "reviewDigest": "a976ca266b94a8c7556ad731e0f9c703a75416fcb88b300a8a464852ae848abc"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-isis-enable-001",
+    "type": "single_choice",
+    "question": "在华为设备上完成 IS-IS 基本配置时，要让某个接口参与 IS-IS 并建立邻接，必须执行的操作是？",
+    "options": {
+      "A": "在 IS-IS 进程视图下用 network 命令宣告该接口所在网段",
+      "B": "进入该接口视图，使能 IS-IS 并指定所属进程",
+      "C": "只要接口配置了 IP 地址，IS-IS 就会自动在所有接口使能",
+      "D": "只需要配置 NET，接口无需任何 IS-IS 配置"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "华为设备的 IS-IS 采用接口使能方式：需要在接口视图下执行 isis enable 并关联 IS-IS 进程，接口才会发送 Hello、建立邻接并参与 LSP 泛洪。A 是 OSPF 的 network 宣告方式，不适用于 IS-IS；C 错误，接口配置 IP 地址并不会自动加入 IS-IS；D 错误，NET 只标识路由器，接口仍需单独使能。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "接口使能",
+      "基本配置"
+    ],
+    "provenance": {
+      "questionId": "hcip821-isis-enable-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页“IS-IS 原理 / 基本配置”，对应三级目录「IS-IS 核心知识 / IS-IS 原理 / 基本配置」；华为设备需在接口视图执行 isis enable 关联进程，接口才参与 IS-IS，属设备公开配置语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲独立命题；IS-IS 接口使能方式按设备公开配置语义核对，未复制第三方题目。",
+      "reviewDigest": "8b316c5f5d869fed50840092f6410025f2249bfb48defc023ee9cd6062240065"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-isis-net-uniqueness-001",
+    "type": "single_choice",
+    "question": "关于 IS-IS 的 NET 配置，下列做法正确的是？",
+    "options": {
+      "A": "NET 的最后 1 字节 SEL 必须配置为 01",
+      "B": "同一区域内所有路由器必须配置完全相同的 NET",
+      "C": "一台路由器最多只能配置一个 NET，无法配置多个",
+      "D": "同一 Level-1 区域内各路由器应使用相同的区域地址，System ID 在区域内必须唯一"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "同一 Level-1 区域内的路由器需要共享相同的区域地址才能建立 Level-1 邻接，而 System ID 标识具体路由器，必须唯一；NET 允许一台路由器配置多个（用于区域迁移等场景），SEL 在路由器上通常为 00。B 把“区域地址相同”扩大成“整个 NET 相同”，System ID 相同会冲突；C 与设备支持多 NET 的事实不符；A 把 SEL 误写成 01。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本配置",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS",
+      "NET",
+      "区域地址"
+    ],
+    "provenance": {
+      "questionId": "hcip821-isis-net-uniqueness-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页“IS-IS 原理 / 基本配置”，对应三级目录「IS-IS 核心知识 / IS-IS 原理 / 基本配置」；区域地址一致、System ID 唯一、支持多 NET 与 SEL 通常为 00，为设备公开配置语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲独立命题；NET 配置约束按设备公开配置语义核对，未复制第三方题目。",
+      "reviewDigest": "eb50ea11fa17aba338113a257572a76d8bef1774d660bbf951f651fdc40864e8"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-mcast-mac-mapping-001",
+    "type": "single_choice",
+    "question": "IPv4 组播地址 239.255.1.1 映射到的组播 MAC 地址是下列哪一个？",
+    "options": {
+      "A": "01-00-5E-01-01-01",
+      "B": "01-00-5E-7F-01-01",
+      "C": "01-00-5E-FF-01-01",
+      "D": "01-00-5E-01-01-FF"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IPv4 组播地址映射到以太网组播 MAC 时，取 IP 地址低 23 位放入 01-00-5E-00-00-00 的低 23 位。239.255.1.1 的十六进制为 EF FF 01 01，低 23 位为 7F 01 01，因此得到 01-00-5E-7F-01-01。A 没有映射第二字节的低 7 位；C 未屏蔽 IP 地址中不参与映射的位；D 把低 23 位的字节位置放错。由于 IPv4 组播地址有 28 位有效位，多个组播地址可能映射到同一个 MAC，这是正常现象。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "hard",
+    "tags": [
+      "组播",
+      "MAC 映射",
+      "地址"
+    ],
+    "provenance": {
+      "questionId": "hcip821-mcast-mac-mapping-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1112-multicast"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“IP 组播基础 / 组播地址与转发”，对应三级目录「组播基础 / IP 组播基础 / 组播地址与转发」；IPv4 组播地址取低 23 位映射到 01-00-5E-00-00-00，依据 RFC 1112 第 6.4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲独立命题；组播 MAC 映射按 RFC 1112 原文核对并独立复算，未复制第三方题目。",
+      "reviewDigest": "a9d4a739fc7359a06d64c89b7c9a6ecff7d10d448f4e0b50eb5062a1d5504707"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-mcast-rpf-001",
+    "type": "single_choice",
+    "question": "组播路由器收到组播数据报文后执行 RPF 检查，检查的依据是什么？",
+    "options": {
+      "A": "报文的 TTL 是否等于 1",
+      "B": "报文的目的组播地址是否存在于组播路由表中",
+      "C": "报文的源地址在单播路由表中对应的出接口，是否就是该报文的入接口",
+      "D": "报文的源 MAC 地址是否与入接口 MAC 地址相同"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "RPF 检查用单播路由表（或组播 RIB）确定“到源”的出接口，若报文正是从该接口进入则通过，否则丢弃，从而在泛洪时避免环路。B 是组播转发表项存在性问题，不是 RPF 依据；A 中 TTL 用于限制传播范围，不是 RPF 判据；D 组播报文的源 MAC 与 RPF 无关。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "medium",
+    "tags": [
+      "组播",
+      "RPF",
+      "转发"
+    ],
+    "provenance": {
+      "questionId": "hcip821-mcast-rpf-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3973-pim-dm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“IP 组播基础 / 组播地址与转发”，对应三级目录「组播基础 / IP 组播基础 / 组播地址与转发」；RPF“只有从到源的单播出接口进入才接受转发”依据 RFC 3973 第 2.1 节 Definitions 与第 4.2 节 Data Packet Forwarding Rules。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲独立命题；RPF 判据按 RFC 3973 原文核对，未复制第三方题目。",
+      "reviewDigest": "23927a9ae2b06f5d4919481da3affd40c033a31095c7e9e55d9427ad66d40c85"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-mcast-ssm-range-001",
+    "type": "single_choice",
+    "question": "根据 IANA 的 IPv4 组播地址分配，下列哪个地址属于源特定组播（SSM）地址块？",
+    "options": {
+      "A": "224.0.1.1",
+      "B": "232.1.1.1",
+      "C": "239.1.1.1",
+      "D": "233.1.1.1"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IANA 把 232.0.0.0/8 分配给 SSM（Source-Specific Multicast），主机通过 INCLUDE 源列表只接收指定源的流量。224.0.1.1 属于 Internetwork Control Block；239.1.1.1 属于 Administratively Scoped Block（239.0.0.0/8）；233.1.1.1 属于 GLOP 块（233.0.0.0/8）。因此只有 232.1.1.1 落在 SSM 块内。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "medium",
+    "tags": [
+      "组播",
+      "SSM",
+      "地址分配"
+    ],
+    "provenance": {
+      "questionId": "hcip821-mcast-ssm-range-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc5771-multicast-ipv4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“IP 组播基础 / 组播地址与转发”，对应三级目录「组播基础 / IP 组播基础 / 组播地址与转发」；SSM 232/8、GLOP 233/8、管理范围 239/8、Internetwork Control 224.0.1/24 的划分依据 RFC 5771 第 3、4、8、9、10 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲独立命题；IPv4 组播地址块按 RFC 5771 原文核对，未复制第三方题目。",
+      "reviewDigest": "67e432c6545c19d45178e1665c5caf3644d026d8c02e746f12c4ea980b650e7b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-igmpv3-filter-001",
+    "type": "single_choice",
+    "question": "与 IGMPv2 相比，IGMPv3 增加的关键能力是什么？",
+    "options": {
+      "A": "支持源过滤，主机可以只接收指定源的流量，或排除指定源",
+      "B": "使用 TCP 传输查询报文，提高可靠性",
+      "C": "取消了查询报文，改由路由器主动推送",
+      "D": "只支持 IPv6 网络，不能用于 IPv4"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IGMPv3 引入 INCLUDE/EXCLUDE 两种过滤模式和源列表，主机可表达“只接收源 A、B”或“接收除源 C 之外的所有源”，这是 SSM 的基础。B 错误，IGMP 仍封装在 IP 报文中，不使用 TCP；C 错误，IGMPv3 仍由查询与报告维护成员关系；D 错误，IGMPv3 用于 IPv4，IPv6 对应的是 MLDv2。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IGMP",
+    "knowledgePoint": "IGMP 工作原理",
+    "difficulty": "medium",
+    "tags": [
+      "IGMPv3",
+      "源过滤",
+      "组播"
+    ],
+    "provenance": {
+      "questionId": "hcip821-igmpv3-filter-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3376-igmpv3"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“IGMP / IGMP 工作原理”，对应三级目录「组播基础 / IGMP / IGMP 工作原理」；IGMPv3 的 INCLUDE/EXCLUDE 源过滤能力依据 RFC 3376 第 1 节与第 2 节的服务接口。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲独立命题；IGMPv3 源过滤能力按 RFC 3376 原文核对，未复制第三方题目。",
+      "reviewDigest": "2623dc3c8b975e6a1ed81932b30501c33961f5b509898af0c3a6f9a35abdfd5c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-pim-dm-flood-prune-001",
+    "type": "single_choice",
+    "question": "PIM-DM 默认采用什么方式建立组播分发树？",
+    "options": {
+      "A": "只使用静态组播路由表，不发送任何 PIM 报文",
+      "B": "先由接收者向 RP 发送 Join，建立共享树",
+      "C": "由 RP 统一向源发送 Join，建立最短路径树",
+      "D": "先假定所有下游都需要流量，沿 RPF 接口泛洪，再由没有成员的分支发送 Prune 剪枝"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "PIM-DM 是“泛洪—剪枝”模型：源开始发送后，组播流量沿 RPF 接口向所有下游泛洪，没有成员的分支通过 Prune 报文剪掉，剪枝状态有生命周期，之后可被 Graft 恢复。B、C 描述的是 PIM-SM 的共享树/RP 机制；A 错误，PIM-DM 通过 Hello、Join/Prune、Graft、Assert 等报文维护状态。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-DM",
+    "difficulty": "medium",
+    "tags": [
+      "PIM-DM",
+      "泛洪",
+      "剪枝"
+    ],
+    "provenance": {
+      "questionId": "hcip821-pim-dm-flood-prune-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3973-pim-dm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“PIM / PIM-DM”，对应三级目录「组播基础 / PIM / PIM-DM」；PIM-DM 先泛洪后剪枝、剪枝状态有生命周期，依据 RFC 3973 第 3 节 Protocol Overview。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲独立命题；PIM-DM 泛洪—剪枝机制按 RFC 3973 原文核对，未复制第三方题目。",
+      "reviewDigest": "51f66d8f31f5137a5535b6ade9c2d34a3b59124de01ec31a8cc75cd665aad1ce"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-pim-dm-graft-001",
+    "type": "single_choice",
+    "question": "PIM-DM 中，某剪枝分支上新出现组播成员，路由器如何恢复该分支的组播流量？",
+    "options": {
+      "A": "向 RP 发送 Register 报文，由 RP 转发流量",
+      "B": "只能等待剪枝定时器超时后重新泛洪，无法主动恢复",
+      "C": "向上游发送 Graft 报文请求恢复转发，上游收到后回复 Graft Ack",
+      "D": "发送 IGMP Leave 报文通知上游"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "PIM-DM 的 Prune 状态有生命周期，新成员出现时下游路由器主动向上游发送 Graft 报文，把剪枝分支恢复为转发分支，上游用 Graft Ack 确认。B 错在忽略 Graft 的主动恢复能力；A 的 Register/RP 属于 PIM-SM 机制；D 中 IGMP Leave 是主机离组报文，方向和作用都不对。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-DM",
+    "difficulty": "hard",
+    "tags": [
+      "PIM-DM",
+      "Graft",
+      "剪枝"
+    ],
+    "provenance": {
+      "questionId": "hcip821-pim-dm-graft-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3973-pim-dm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“PIM / PIM-DM”，对应三级目录「组播基础 / PIM / PIM-DM」；新成员出现时用 Graft/Graft Ack 恢复剪枝分支，依据 RFC 3973 第 3 节与第 4.4 节 Join、Prune、Graft 规则。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲独立命题；PIM-DM Graft 机制按 RFC 3973 原文核对，未复制第三方题目。",
+      "reviewDigest": "3a991ca143cb3211520e975abe75ddf409a6d92665e2359fe2c9199b21300bd1"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-pim-sm-rpt-001",
+    "type": "single_choice",
+    "question": "在 PIM-SM 中，共享树（RPT）以什么为根？接收者加入组播组时，最后一跳路由器首先向哪个方向发送 Join？",
+    "options": {
+      "A": "以 RP 为根，最后一跳路由器向 RP 方向发送 (*,G) Join",
+      "B": "以源为根，最后一跳路由器直接向源发送 (S,G) Join",
+      "C": "以接收者为根，向所有源发送 Join",
+      "D": "以 BSR 为根，向 BSR 发送 Join"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "PIM-SM 先建立以 RP 为根的共享树：最后一跳路由器收到成员加入后，沿单播路由向 RP 逐跳发送 (*,G) Join，形成 RPT；源侧通过 Register 把流量送到 RP。B 的 (S,G) Join 用于后续 SPT 切换或源直连场景；C、D 中接收者和 BSR 都不是共享树的根，Join 也不会发给 BSR。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-SM",
+    "difficulty": "hard",
+    "tags": [
+      "PIM-SM",
+      "共享树",
+      "RP"
+    ],
+    "provenance": {
+      "questionId": "hcip821-pim-sm-rpt-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4601-pim-sm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“PIM / PIM-SM”，对应三级目录「组播基础 / PIM / PIM-SM」；以 RP 为根的共享树与 (*,G) Join 依据 RFC 4601 第 3.2 节 Shared Tree 与第 3.3 节 SPT 切换机制。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲独立命题；PIM-SM 共享树机制按 RFC 4601 原文核对，未复制第三方题目。",
+      "reviewDigest": "c2f0a7a099b5c604e31a35e28ac2722105d0aa06a2106937638579030d1c9f0e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-vrrp-election-001",
+    "type": "single_choice",
+    "question": "同一 VRRP 备份组中，两台路由器的优先级都为 100，且都不是虚拟 IP 地址拥有者。默认情况下，Master 如何确定？",
+    "options": {
+      "A": "两台路由器同时成为 Master，按流量分担",
+      "B": "比较接口 MAC 地址，数值较小者成为 Master",
+      "C": "随机选举，每次结果可能不同",
+      "D": "比较接口主 IP 地址，数值较大者成为 Master"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "VRRP 先比较优先级，优先级相同时比较接口主 IP 地址，数值较大者当选 Master；优先级 255 的地址拥有者则直接成为 Master。B 的比较对象不对；C 与 VRRP 的确定性选举相矛盾；A 错误，同一备份组正常只有一个 Master，避免虚拟 MAC 冲突。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "VRRP",
+      "Master 选举",
+      "优先级"
+    ],
+    "provenance": {
+      "questionId": "hcip821-vrrp-election-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc5798-vrrp"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“VRRP / VRRP 原理与配置”，对应三级目录「网络可靠性 / VRRP / VRRP 原理与配置」；优先级相同时比较主 IP 地址、255 的地址拥有者直接成为 Master，依据 RFC 5798 第 6.4.2 节 Backup 状态与第 8.3.2 节优先级建议。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲独立命题；VRRP Master 选举规则按 RFC 5798 原文核对，未复制第三方题目。",
+      "reviewDigest": "a05d663622765bb6194272a1b2e96bb68d4329e0406ec62811ae8c02a6f74360"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-vrrp-timer-001",
+    "type": "single_choice",
+    "question": "某 VRRPv3 备份组中，Master 的通告间隔为 1 秒，Backup 的优先级为 100。按协议公式计算，Skew_Time 与 Master_Down_Interval 分别约为多少？",
+    "options": {
+      "A": "Skew_Time 约 1 秒，Master_Down_Interval 约 3 秒",
+      "B": "Skew_Time 约 0.61 秒，Master_Down_Interval 约 3.61 秒",
+      "C": "Skew_Time 约 0.39 秒，Master_Down_Interval 约 3.39 秒",
+      "D": "Skew_Time 为 0，Master_Down_Interval 为 1 秒"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "VRRP 以厘秒计算：Master_Adver_Interval=100，Skew_Time=((256-100)×100)/256≈60.9 厘秒≈0.61 秒；Master_Down_Interval=3×100+60.9≈360.9 厘秒≈3.61 秒。A 忽略了 Skew_Time；C 误用优先级 100 直接除以 256 得到 0.39 秒；D 把检测时间等同于通告间隔，均不成立。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "hard",
+    "tags": [
+      "VRRP",
+      "Master_Down_Interval",
+      "定时器"
+    ],
+    "provenance": {
+      "questionId": "hcip821-vrrp-timer-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc5798-vrrp"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“VRRP / VRRP 原理与配置”，对应三级目录「网络可靠性 / VRRP / VRRP 原理与配置」；Skew_Time=((256-优先级)×Master_Adver_Interval)/256、Master_Down_Interval=3×Master_Adver_Interval+Skew_Time，依据 RFC 5798 第 6.2 节 Timers 的参数定义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲独立命题；VRRP 定时器公式按 RFC 5798 原文核对并独立复算，未复制第三方题目。",
+      "reviewDigest": "f1164b7b6f3e9dcad529f8a35987b11ec9e14bd9855d3f1f664084cbb4e5e7e9"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-capwap-forwarding-001",
+    "type": "single_choice",
+    "question": "在 AC 与 AP 的 CAPWAP 组网中，关于用户数据的转发方式，下列描述正确的是？",
+    "options": {
+      "A": "CAPWAP 控制通道负责承载用户数据报文",
+      "B": "直接转发时用户数据也必须经过 AC 的 CAPWAP 数据隧道",
+      "C": "隧道转发时用户数据封装在 CAPWAP 数据隧道中送往 AC，由 AC 统一转发",
+      "D": "隧道转发时 AC 完全不参与用户数据的转发"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "CAPWAP 建立控制通道和数据通道，用户数据走数据通道；隧道转发模式下数据封装后送到 AC，由 AC 解封装并转发，便于集中策略和漫游；直接转发模式下数据在 AP 本地转为有线报文，不再经过 AC 的数据隧道。B 把两种模式说反；A 混淆控制通道与数据通道；D 与隧道转发的定义矛盾。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "组网架构与 CAPWAP",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN",
+      "CAPWAP",
+      "数据转发"
+    ],
+    "provenance": {
+      "questionId": "hcip821-capwap-forwarding-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc5415-capwap"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 5 页“大型 WLAN 组网概述 / 基本概念”，对应三级目录「大型 WLAN 组网架构 / 大型 WLAN 组网 / 组网架构与 CAPWAP」；CAPWAP 控制通道与数据通道分离依据 RFC 5415 第 1.3 节，隧道转发/直接转发为华为 WLAN 公开工程实现。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲独立命题；CAPWAP 通道模型按 RFC 5415 原文核对，数据转发模式按设备公开配置语义表述，未复制第三方题目。",
+      "reviewDigest": "1a8ab0c67abcf1c591269573ab8525f676553a0cf3fe0efce22ad8e55e7471a0"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-wlan-roaming-001",
+    "type": "single_choice",
+    "question": "关于 WLAN 二层漫游与三层漫游的差异，下列描述正确的是？",
+    "options": {
+      "A": "漫游只与 AP 的 MAC 地址有关，与 AC 和 VLAN 规划无关",
+      "B": "三层漫游时终端必须重新获取 IP 地址，否则无法继续通信",
+      "C": "二层漫游一定跨越三层网络，因此需要 DHCP 重新分配地址",
+      "D": "二层漫游前后 AP 处于同一 VLAN/子网，终端 IP 不变；三层漫游跨子网，通常需要 AC 等机制保持终端 IP 和业务连续"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "二层漫游发生在同一子网内，AP 属于同一 VLAN，终端 IP 无需变化；三层漫游跨越不同子网，若无 AC 的隧道或家乡代理等机制，终端地址和业务会中断，因此大型 WLAN 通常由 AC 配合保持连续性。B 忽略 AC 三层漫游可保持 IP 的方案；C 把二层漫游与跨三层混为一谈；A 漫游与 VLAN、AC 转发规划密切相关。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "漫游与高可靠",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN",
+      "漫游",
+      "AC"
+    ],
+    "provenance": {
+      "questionId": "hcip821-wlan-roaming-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 5 页“大型 WLAN 组网概述 / 漫游”，对应三级目录「大型 WLAN 组网架构 / 大型 WLAN 组网 / 漫游与高可靠」；二层漫游同子网、三层漫游跨子网并由 AC 机制保持业务连续，为大型 WLAN 公开工程实践。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲独立命题；二层/三层漫游差异按大型 WLAN 公开工程语义核对，未复制第三方题目。",
+      "reviewDigest": "887910f64a719c093ae00ea8bafbbc18191638196de9fe3ef3b8370f35382c49"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-wlan-ac-backup-001",
+    "type": "single_choice",
+    "question": "大型 WLAN 组网中采用双 AC 主备备份，下列描述正确的是？",
+    "options": {
+      "A": "通过 VRRP 提供冗余的 AC 网关地址，并通过 HSB 等机制同步 AP 会话与用户表项，主 AC 故障时备 AC 接管",
+      "B": "备 AC 必须配置与主 AC 完全相同的物理 IP 地址，造成地址冲突",
+      "C": "AP 必须同时与主备 AC 建立数据隧道并同时转发用户流量",
+      "D": "AC 备份只能通过交换机堆叠实现，不能使用 VRRP"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "双 AC 主备通常用 VRRP 提供统一的虚拟网关地址，AP 连接到虚拟地址；主备之间通过 HSB 等机制同步 AP 会话、用户表项和密钥，主 AC 故障时备 AC 快速接管。B 会造成地址冲突，实际用 VRRP 虚拟地址与物理地址区分；C 不是主备备份的常态，主备模式下由主 AC 转发；D 错误，VRRP/HSB 正是常见方案，堆叠并非唯一手段。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "漫游与高可靠",
+    "difficulty": "hard",
+    "tags": [
+      "WLAN",
+      "AC 备份",
+      "HSB"
+    ],
+    "provenance": {
+      "questionId": "hcip821-wlan-ac-backup-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 5 页“大型 WLAN 组网概述 / 高可靠性”，对应三级目录「大型 WLAN 组网架构 / 大型 WLAN 组网 / 漫游与高可靠」；VRRP 提供冗余网关地址、HSB 同步会话与用户表项，属双 AC 主备的公开工程方案。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲独立命题；双 AC 主备方案按大型 WLAN 公开工程实践表述，未复制第三方题目。",
+      "reviewDigest": "0ebd7b3fd6179efef6e6f69060b0703770b89e8c079918039f685a276ca23656"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-wlan-vlanpool-001",
+    "type": "single_choice",
+    "question": "大型 WLAN 中引入 VLAN Pool 的主要作用是什么？",
+    "options": {
+      "A": "为 AP 提供 PoE 供电，替代 PoE 交换机",
+      "B": "把多个 VLAN 组成地址池，由 AC 按算法为 AP 或用户分配 VLAN，避免单一 VLAN 内广播域过大和地址不足",
+      "C": "对无线用户报文进行加密，替代 WPA2",
+      "D": "替代 CAPWAP 控制通道，承载 AP 管理报文"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "VLAN Pool 把多个 VLAN 组织在一起，AC 根据算法为 AP 或接入用户分配 VLAN，从而把用户分散到不同广播域、缓解单 VLAN 地址耗尽和广播泛洪问题。A 是 PoE 的职责；C 加密由 WPA2/WPA3 等安全机制完成；D 管理报文仍由 CAPWAP 控制通道承载。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "VLAN Pool 与准入",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN",
+      "VLAN Pool",
+      "广播域"
+    ],
+    "provenance": {
+      "questionId": "hcip821-wlan-vlanpool-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 5 页“大型 WLAN 组网概述 / 准入控制”，对应三级目录「大型 WLAN 组网架构 / 大型 WLAN 组网 / VLAN Pool 与准入」；VLAN Pool 由 AC 按算法为用户/AP 分配多个 VLAN 中的作用，为大型 WLAN 公开工程实践。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲独立命题；VLAN Pool 作用按大型 WLAN 公开工程语义核对，未复制第三方题目。",
+      "reviewDigest": "f26d70ffce4ed583862e70f9c2a1355376207c9840142ca1fcd7a07cd39e37ec"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-wlan-admission-001",
+    "type": "single_choice",
+    "question": "关于大型 WLAN 中的准入控制，下列描述正确的是？",
+    "options": {
+      "A": "可通过 802.1X、Portal 或 MAC 认证等方式，在 AC 与认证服务器配合下完成身份认证，通过后才允许终端访问受控网络资源",
+      "B": "准入控制必须部署在 AP 上，AC 不能参与认证过程",
+      "C": "启用 WPA2 加密后已经等同于准入控制，不需要再认证终端身份",
+      "D": "准入控制只对有线接入用户有效，无线用户无需认证"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "大型 WLAN 的准入控制用于确认“谁可以接入”，常见方式包括 802.1X、Portal、MAC 认证等，通常由 AC 作为接入设备与 RADIUS 等认证服务器配合完成，认证通过后才放行受控资源。B 错误，AC 可作为认证接入设备；C 错误，WPA2 解决空口加密与部分接入认证，但不等于完整的身份准入与授权；D 错误，无线用户同样需要准入控制。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "VLAN Pool 与准入",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN",
+      "准入控制",
+      "802.1X"
+    ],
+    "provenance": {
+      "questionId": "hcip821-wlan-admission-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 5 页“大型 WLAN 组网概述 / 准入控制”，对应三级目录「大型 WLAN 组网架构 / 大型 WLAN 组网 / VLAN Pool 与准入」；802.1X、Portal、MAC 认证与 AC/RADIUS 配合的准入模型，为大型 WLAN 公开工程实践。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲独立命题；WLAN 准入控制方式按公开工程语义核对，未复制第三方题目。",
+      "reviewDigest": "421b5d22995b69c631f7e2526090ff22ff43b270e6f22531b186e35f500308d0"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  }
+]

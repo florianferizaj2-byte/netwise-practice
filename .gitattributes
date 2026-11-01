@@ -1,0 +1,3 @@
+*.apk -text
+mobile/modules/route-player/android/src/main/assets/* -text whitespace=cr-at-eol
+mobile/modules/route-player/LICENSE -text whitespace=cr-at-eol

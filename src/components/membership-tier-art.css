@@ -1,0 +1,51 @@
+.membership-tier-art {
+  width: 68px;
+  height: 68px;
+  display: block;
+  flex: none;
+}
+.membership-tier-art svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.membership-tier-art :is(.tier-art-core, .tier-art-glint) {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.vip-plan:is(:hover, :focus-within) .tier-art-core,
+.vip-selected-plan:hover .tier-art-core {
+  animation: member-art-lift 0.8s ease-in-out 2;
+}
+.vip-plan:is(:hover, :focus-within) .tier-art-glint,
+.vip-selected-plan:hover .tier-art-glint {
+  animation: member-art-glint 0.8s ease-in-out 2;
+}
+.vip-plan:is(:hover, :focus-within) .tier-art-dot {
+  animation-delay: 0.12s;
+}
+@keyframes member-art-lift {
+  50% {
+    transform: translateY(-4px) rotate(-4deg);
+  }
+}
+@keyframes member-art-glint {
+  50% {
+    opacity: 0.35;
+    transform: scale(0.7) rotate(15deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .membership-tier-art * {
+    animation: none !important;
+  }
+  .blue-workspace .vip-plan {
+    transform: none !important;
+  }
+}
+:root[data-web-reduced-motion="true"] .membership-tier-art * {
+  animation: none !important;
+}
+:root[data-web-reduced-motion="true"] .blue-workspace .vip-plan {
+  transform: none !important;
+}

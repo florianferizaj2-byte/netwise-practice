@@ -1,10 +1,13 @@
 import { APP_VERSION } from '../version';
+import type { AiLearningProfile, AiLearningSetup, AiLearningQuote, AiLearningJob, AiLearningSummary, AiLearningEvent } from './aiLearningTypes';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { fetch as streamingFetch } from 'expo/fetch';
 import { ResourceCache, CacheCancelledError } from './resourceCache';
 import { persistentStudyData, studyCachePolicy } from './cachePolicy';
 import { ApiError, fetchJson } from './transport';
 import type { StudyCatalog, StudyLesson, StudySession, StudyAttempt, StudyTeacherMessage, StudyTeacherAnswer, StudyTeacherRequest } from './studyTypes';
+import { studyRequestId } from './studyTypes';
+import type { Announcement } from '../announcements/client';
 export { ApiError } from './transport';
 
 export const API_BASE_URL =
@@ -34,6 +37,29 @@ export const studyCache = new ResourceCache(
   persistentStudyData,
 );
 const statusListeners = new Set<(status: 'expired' | 'update') => void>();
+
+export type MobileRequestContext = {
+  path: string; method: string; body?: BodyInit | null;
+  requestId: string | null; revision: number;
+};
+export type MobileRequestOutcome = { ok: boolean; data?: unknown; error?: unknown };
+export type MobileRequestHooks = {
+  handles: (context: MobileRequestContext) => boolean;
+  before?: (context: MobileRequestContext) => Promise<void>;
+  after: (context: MobileRequestContext, outcome: MobileRequestOutcome) => void;
+};
+let mobileRequestHooks: MobileRequestHooks | undefined;
+// Optional UI integration. Only the Android shell registers it; Web does not
+// show a new prompt, fetch a receipt or change its existing request workflow.
+export function registerMobileRequestHooks(hooks: MobileRequestHooks) {
+  mobileRequestHooks = hooks;
+  return () => { if (mobileRequestHooks === hooks) mobileRequestHooks = undefined; };
+}
+function reportMobileRequest(hooks: MobileRequestHooks | undefined, context: MobileRequestContext, outcome: MobileRequestOutcome) {
+  // A display/receipt failure must never turn a successful model result into a
+  // failed request or provoke another paid request.
+  try { hooks?.after(context, outcome); } catch { /* UI observer is non-authoritative. */ }
+}
 
 function writeSession(task: () => Promise<unknown>) {
   const pending = sessionWrites.then(task, task);
@@ -110,8 +136,17 @@ function activateStudyScope(user: AuthResponse['user']) {
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
   const revision = sessionRevision;
   const token = sessionToken;
+  const requestId = init.method && init.method !== 'GET' ? studyRequestId() : null;
+  const context: MobileRequestContext = {path,method:init.method || 'GET',body:init.body,requestId,revision};
+  const hooks = mobileRequestHooks?.handles(context) ? mobileRequestHooks : undefined;
+  let sent = false;
   let data: T;
   try {
+    if (hooks?.before) {
+      await hooks.before(context);
+      if (revision !== sessionRevision) throw new CacheCancelledError();
+    }
+    sent = true;
     data = await fetchJson<T>(
       `${API_BASE_URL}${path}`,
       {
@@ -122,6 +157,7 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
           'Content-Type': 'application/json',
           'X-Client': 'mobile',
           'X-App-Version': APP_VERSION,
+          ...(requestId ? {'X-AI-Request-Id':requestId} : {}),
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
           ...init.headers,
         },
@@ -129,6 +165,7 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
       path.startsWith('/ai/') || path.startsWith('/study/') ? 120000 : 30000,
     );
   } catch (error) {
+    if (sent) reportMobileRequest(hooks,context,{ok:false,error});
     if (revision !== sessionRevision) throw new CacheCancelledError();
     if (init.method && init.method !== 'GET' && /^\/study\/(practice-sessions\/.+\/attempts|attempts\/)/.test(path))
       studyCache.invalidate(['/study/catalog', '/study/practice-sessions']);
@@ -161,6 +198,8 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
         '/favorites',
         '/questions?',
       ]);
+    } else if (path.startsWith('/ai-learning/') && path.endsWith('/submit')) {
+      studyCache.invalidate(['/dashboard','/practice/catalog','/questions?','/wrong','/exams','/community/leaderboards']);
     } else if (path.endsWith('/submit') || path === '/ai/train') {
       studyCache.invalidate([
         '/practice/catalog',
@@ -169,6 +208,7 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
       ]);
     }
   }
+  reportMobileRequest(hooks,context,{ok:true,data});
   return data;
 }
 
@@ -189,19 +229,31 @@ async function streamRequest<T>(
   onProgress: (event: AiStreamProgress) => void,
 ): Promise<T> {
   const revision = sessionRevision;
+  const token = sessionToken;
+  const requestId = studyRequestId();
+  const context: MobileRequestContext = {path,method:'POST',body:JSON.stringify(body),requestId,revision};
+  const hooks = mobileRequestHooks?.handles(context) ? mobileRequestHooks : undefined;
+  let sent = false;
   const controller = new AbortController();
   streamControllers.add(controller);
-  const timer = setTimeout(() => controller.abort(), 240000);
+  let timer: ReturnType<typeof setTimeout> | undefined;
   try {
+    if (hooks?.before) {
+      await hooks.before(context);
+      if (revision !== sessionRevision) throw new CacheCancelledError();
+    }
+    timer = setTimeout(() => controller.abort(), 240000);
+    sent = true;
     const response = await streamingFetch(`${API_BASE_URL}${path}`, {
       method: 'POST',
       credentials: 'omit',
       headers: {
         Accept: 'text/event-stream',
         'Content-Type': 'application/json',
+        'X-AI-Request-Id':requestId,
         'X-Client': 'mobile',
         'X-App-Version': APP_VERSION,
-        ...(sessionToken ? { Authorization: `Bearer ${sessionToken}` } : {}),
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
       },
       body: JSON.stringify(body),
       signal: controller.signal,
@@ -256,8 +308,10 @@ async function streamRequest<T>(
     }
     if (result === undefined) throw new Error('AI 任务中断，请重试');
     studyCache.invalidate(['/practice/catalog', '/questions?']);
+    reportMobileRequest(hooks,context,{ok:true,data:result});
     return result;
   } catch (error) {
+    if (sent) reportMobileRequest(hooks,context,{ok:false,error});
     if (revision !== sessionRevision) throw new CacheCancelledError();
     if (error instanceof ApiError && error.status === 401)
       void clearSessionToken();
@@ -277,7 +331,10 @@ export type AuthResponse = {
     id: string;
     username: string;
     communityName?: string | null;
+    avatarUrl?: string | null;
+    profileComplete?: boolean;
     certificateId?: string | null;
+    isAdmin?: boolean;
   };
   certificates: Array<{ id: string; name: string; shortName?: string; description?: string }>;
 };
@@ -294,6 +351,15 @@ export type DashboardResponse = {
   certificate?: { id: string; name: string } | null;
   user?: AuthResponse['user'] | null;
 };
+
+export type AdminUser = {
+  id: string; username: string; communityName: string | null; certificateId: string | null;
+  createdAt: string; isAdmin: boolean; bannedAt: string | null; banReason: string | null;
+  membershipPlan: 'free' | 'vip' | 'svip' | 'ssvip'; membershipExpiresAt: string | null; revision: string;
+};
+export type AdminUserPage = { users: AdminUser[]; total: number; limit: number; offset: number; nextOffset: number | null };
+export type AdminUserEdit = Pick<AdminUser, 'revision' | 'communityName' | 'certificateId' | 'membershipPlan' | 'membershipExpiresAt'>;
+export type AdminAnnouncement = { announcement: Announcement; revision: string };
 
 export type Question = {
   id: string;
@@ -519,11 +585,13 @@ export type AccountEntitlementsResponse = {
   aiServiceAvailable: boolean;
   aiServiceMode?: 'author';
   canManageAiService?: boolean;
+  billingMode?: 'points';
+  points?: {availableUnits:number;heldUnits:number;expiredUnits:number;pendingUnits:number;scale:number;pointsPerCny:number;monthlyPoints:number;periodStart:string|null;periodEnd:string|null};
   generation?: { limit: number; used: number; remaining: number; periodStart: string | null; periodEnd: string | null };
   checkIn: {
     day: string;
     claimed: boolean;
-    grants: { explanations: number; generations: number; analyses: number };
+    grants: { points?:number; explanations: number; generations: number; analyses: number };
     remaining: { explanations: number; generations: number; analyses: number };
   };
 };
@@ -535,6 +603,7 @@ export type MembershipRedemption = {
   redeemedAt: string;
   expiresAt: string;
 };
+export type PointOperation = {id:string;feature:string;state:'pending'|'settled'|'refunded';heldUnits:number;chargedUnits:number;costMicros:number;createdAt:string;error:string|null};
 
 export type CommunityMessage = {
   id: string;
@@ -602,6 +671,23 @@ export const mobileApi = {
     );
   },
 
+  adminUsers(search = '', status: 'all' | 'active' | 'banned' = 'all', offset = 0) {
+    return request<AdminUserPage>(`/admin/mobile/users?search=${encodeURIComponent(search)}&status=${status}&offset=${offset}&limit=30`);
+  },
+  adminUser(id: string) {
+    return request<{ user: AdminUser }>(`/admin/mobile/users/${encodeURIComponent(id)}`);
+  },
+  adminSaveUser(id: string, fields: AdminUserEdit) {
+    return request<{ saved: boolean; user: AdminUser }>(`/admin/mobile/users/${encodeURIComponent(id)}`, { method: 'PUT', body: JSON.stringify(fields) });
+  },
+  adminSetUserBanned(id: string, banned: boolean, reason: string) {
+    return request<{ saved: boolean }>(`/admin/users/${encodeURIComponent(id)}/ban`, { method: 'PUT', body: JSON.stringify({ banned, reason }) });
+  },
+  adminAnnouncement() { return request<AdminAnnouncement>('/admin/mobile/announcement'); },
+  adminSaveAnnouncement(fields: { revision: string; enabled: boolean; title: string; body: string }) {
+    return request<AdminAnnouncement & { saved: boolean }>('/admin/mobile/announcement', { method: 'PUT', body: JSON.stringify(fields) });
+  },
+
   resolveDownloadUrl(url: string) {
     if (/^https?:\/\//i.test(url)) return url;
     const origin = API_BASE_URL.replace(/\/api\/?$/, '');
@@ -618,10 +704,34 @@ export const mobileApi = {
     return response;
   },
 
-  async register(username: string, password: string) {
+  accountEmailPolicy() {
+    return request<{ emailVerificationRequired: boolean; emailAvailable: boolean }>('/auth/security-config');
+  },
+
+  sendAccountEmailCode(fields: { purpose: 'register' | 'reset' | 'bind'; email: string; username?: string; currentPassword?: string }) {
+    return request<{ challengeId: string; retryAfter: number; message: string }>('/auth/email-code', { method: 'POST', body: JSON.stringify(fields) });
+  },
+
+  resetPassword(fields: { username: string; password: string; email: string; code: string; challengeId: string }) {
+    return request<{ changed: boolean; message: string }>('/auth/reset-password', { method: 'POST', body: JSON.stringify(fields) });
+  },
+
+  accountSecurity() {
+    return request<{ emailBound: boolean; maskedEmail: string | null; emailAvailable: boolean; emailVerificationRequired: boolean }>('/auth/security');
+  },
+
+  bindAccountEmail(fields: { currentPassword: string; email: string; code: string; challengeId: string }) {
+    return request<{ emailBound: boolean; maskedEmail: string | null; emailAvailable: boolean; emailVerificationRequired: boolean }>('/auth/bind-email', { method: 'POST', body: JSON.stringify(fields) });
+  },
+
+  changePassword(fields: { currentPassword: string; password: string }) {
+    return request<{ changed: boolean; message: string }>('/auth/change-password', { method: 'POST', body: JSON.stringify(fields) });
+  },
+
+  async register(username: string, password: string, emailProof?: { email: string; code: string; challengeId: string }) {
     const response = await request<AuthResponse>('/auth/register', {
       method: 'POST',
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ username, password, ...emailProof }),
     });
     await setSessionToken(response.sessionToken ?? null);
     await cacheSessionProfile(response);
@@ -700,6 +810,13 @@ export const mobileApi = {
     return response;
   },
 
+  async saveProfile(fields: { name: string; image?: { data: string; mimeType: 'image/jpeg' | 'image/png' | 'image/webp' } }) {
+    const result = await request<{ user: AuthResponse['user'] }>('/auth/profile', { method: 'PUT', body: JSON.stringify(fields) });
+    // A session refresh started before this save must not restore stale profile data.
+    sessionRevision += 1;
+    return result;
+  },
+
   dashboard(force = false) {
     return cachedRequest<DashboardResponse>('/dashboard?summary=1', force);
   },
@@ -762,6 +879,65 @@ export const mobileApi = {
   },
   exams(force = false) {
     return cachedRequest<{ sessions: ExamSummary[] }>('/exams', force);
+  },
+  aiLearningProfile() {
+    return request<AiLearningProfile>('/ai-learning/profile');
+  },
+  aiLearningQuote(setup: AiLearningSetup) {
+    return request<AiLearningQuote>('/ai-learning/preview', {method:'POST',body:JSON.stringify(setup)});
+  },
+  aiLearningJobs() {
+    return request<{jobs:AiLearningSummary[]}>('/ai-learning/jobs');
+  },
+  aiLearningJob(id:string) {
+    return request<AiLearningJob>('/ai-learning/jobs/'+encodeURIComponent(id));
+  },
+  createAiLearningJob(setup:AiLearningSetup, requestId:string, profileRevision:string) {
+    return request<AiLearningJob>('/ai-learning/jobs',{method:'POST',body:JSON.stringify({...setup,requestId,profileRevision,acceptedPricing:true})});
+  },
+  aiLearningAction(id:string, action:'start'|'answers'|'submit'|'cancel'|'retry', body:Record<string,unknown>={}) {
+    return request<AiLearningJob>('/ai-learning/jobs/'+encodeURIComponent(id)+'/'+action,{method:'POST',body:JSON.stringify(body)});
+  },
+  async subscribeAiLearning(id:string, after:number, onEvent:(event:AiLearningEvent)=>void, signal:AbortSignal, onConnected?:()=>void) {
+    const revision=sessionRevision,controller=new AbortController(),token=sessionToken;
+    const abort=()=>controller.abort();
+    signal.addEventListener('abort',abort,{once:true});
+    if(signal.aborted)controller.abort();
+    streamControllers.add(controller);
+    let reader:ReadableStreamDefaultReader<Uint8Array>|undefined;
+    let lastByte=Date.now();
+    const watchdog=setInterval(()=>{if(Date.now()-lastByte>45000)controller.abort();},5000);
+    try {
+      const response=await streamingFetch(API_BASE_URL+'/ai-learning/jobs/'+encodeURIComponent(id)+'/events?after='+after,{
+        headers:{Accept:'text/event-stream','X-Client':'mobile','X-App-Version':APP_VERSION,...(token?{Authorization:'Bearer '+token}:{})},
+        credentials:'omit',signal:controller.signal,
+      });
+      if(!response.ok)throw new ApiError('实时进度暂不可用',response.status,await response.text());
+      if(!response.body)throw new Error('实时进度暂不可用');
+      if(revision!==sessionRevision)throw new CacheCancelledError();
+      onConnected?.();
+      reader=response.body.getReader();
+      const decoder=new TextDecoder();let buffer='';
+      while(!controller.signal.aborted){
+        const part=await reader.read();
+        if(revision!==sessionRevision)throw new CacheCancelledError();
+        if(part.done)break;
+        lastByte=Date.now();buffer+=decoder.decode(part.value,{stream:true}).replace(/\r\n/g,'\n');
+        if(buffer.length>524288)throw new Error('实时事件超出长度限制');
+        let boundary:number;
+        while((boundary=buffer.indexOf('\n\n'))>=0){
+          const record=buffer.slice(0,boundary);buffer=buffer.slice(boundary+2);
+          const data=record.split('\n').filter(line=>line.startsWith('data:')).map(line=>line.slice(5).trim()).join('\n');
+          if(!data)continue;
+          const event=JSON.parse(data) as AiLearningEvent;
+          if(Number.isSafeInteger(event.id)&&event.id>after){onEvent(event);after=event.id;}
+        }
+      }
+    } finally {
+      clearInterval(watchdog);signal.removeEventListener('abort',abort);
+      controller.abort();streamControllers.delete(controller);
+      await reader?.cancel().catch(()=>{});reader?.releaseLock();
+    }
   },
   createExam(chapters: string[], count: number) {
     return request<ExamSession>('/exams', { method: 'POST', body: JSON.stringify({ chapters, count }) });
@@ -992,6 +1168,9 @@ export const mobileApi = {
   accountEntitlements() {
     return request<AccountEntitlementsResponse>('/account/entitlements');
   },
+  pointOperations() {
+    return request<{rows:PointOperation[]}>('/account/points/operations?limit=20');
+  },
 
   async studyCatalog(force = false) {
     const cached = studyCache.peekFresh<StudyCatalog>('/study/catalog');
@@ -1084,3 +1263,6 @@ export const mobileApi = {
     return pending;
   },
 };
+
+// Read-only context for platform-specific integrations; existing Web flows stay unchanged.
+export const mobileSessionSnapshot = () => ({ token: sessionToken, revision: sessionRevision });

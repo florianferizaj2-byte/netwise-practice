@@ -1,0 +1,112 @@
+{
+  "voice": "zh-CN-YunxiNeural",
+  "rate": "+25%",
+  "pitch": "+6Hz",
+  "lines": [
+    {
+      "i": 0,
+      "start": 0,
+      "dur": 41,
+      "text": "刷题刷到怀疑人生？",
+      "file": "vo/trendy-00.wav"
+    },
+    {
+      "i": 1,
+      "start": 42,
+      "dur": 18,
+      "text": "考匠来了！",
+      "file": "vo/trendy-01.wav"
+    },
+    {
+      "i": 2,
+      "start": 62,
+      "dur": 24,
+      "text": "同一题错三遍，",
+      "file": "vo/trendy-02.wav"
+    },
+    {
+      "i": 3,
+      "start": 92,
+      "dur": 14,
+      "text": "答案看不懂，",
+      "file": "vo/trendy-03.wav"
+    },
+    {
+      "i": 4,
+      "start": 122,
+      "dur": 22,
+      "text": "到底错在哪？",
+      "file": "vo/trendy-04.wav"
+    },
+    {
+      "i": 5,
+      "start": 182,
+      "dur": 19,
+      "text": "答错了别慌，",
+      "file": "vo/trendy-05.wav"
+    },
+    {
+      "i": 6,
+      "start": 228,
+      "dur": 48,
+      "text": "点一下 AI 分析错题，",
+      "file": "vo/trendy-06.wav"
+    },
+    {
+      "i": 7,
+      "start": 302,
+      "dur": 23,
+      "text": "错因一针见血，",
+      "file": "vo/trendy-07.wav"
+    },
+    {
+      "i": 8,
+      "start": 345,
+      "dur": 69,
+      "text": "原来是把网络层和传输层搞混了！",
+      "file": "vo/trendy-08.wav"
+    },
+    {
+      "i": 9,
+      "start": 422,
+      "dur": 57,
+      "text": "练、错、考、看进度，",
+      "file": "vo/trendy-09.wav"
+    },
+    {
+      "i": 10,
+      "start": 488,
+      "dur": 24,
+      "text": "一站全搞定！",
+      "file": "vo/trendy-10.wav"
+    },
+    {
+      "i": 11,
+      "start": 542,
+      "dur": 25,
+      "text": "五大证书题库，",
+      "file": "vo/trendy-11.wav"
+    },
+    {
+      "i": 12,
+      "start": 590,
+      "dur": 27,
+      "text": "电脑手机都能刷！",
+      "file": "vo/trendy-12.wav"
+    },
+    {
+      "i": 13,
+      "start": 662,
+      "dur": 26,
+      "text": "考匠 AceExam，",
+      "file": "vo/trendy-13.wav"
+    },
+    {
+      "i": 14,
+      "start": 700,
+      "dur": 28,
+      "text": "免费试做五道题！",
+      "file": "vo/trendy-14.wav"
+    }
+  ]
+}

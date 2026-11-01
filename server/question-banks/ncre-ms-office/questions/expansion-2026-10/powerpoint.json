@@ -1,0 +1,1635 @@
+[
+  {
+    "id": "ncre-office-ppt-basic-01",
+    "type": "single_choice",
+    "question": "PowerPoint 2016 中，用于快速浏览全部幻灯片并调整顺序的视图是（ ）。",
+    "options": {
+      "A": "幻灯片浏览视图",
+      "B": "阅读视图",
+      "C": "普通视图",
+      "D": "备注页视图"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "幻灯片浏览视图以缩略图网格显示所有幻灯片，便于整体调整顺序、增删和分节，但不能直接编辑幻灯片内容。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "基础与视图",
+    "knowledgePoint": "基本操作与视图模式",
+    "difficulty": "easy",
+    "tags": [
+      "视图",
+      "幻灯片浏览"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-basic-02",
+    "type": "single_choice",
+    "question": "在 PowerPoint 中为当前幻灯片添加演讲者提示文字，应在（ ）中输入。",
+    "options": {
+      "A": "普通视图下方的备注窗格",
+      "B": "幻灯片的标题占位符",
+      "C": "批注窗格",
+      "D": "页脚区域"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "备注窗格中的内容不会显示在放映画面上，只出现在演讲者视图和备注页中，用于提示讲解要点。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "基础与视图",
+    "knowledgePoint": "基本操作与视图模式",
+    "difficulty": "easy",
+    "tags": [
+      "备注",
+      "演讲者视图"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-basic-03",
+    "type": "single_choice",
+    "question": "PowerPoint 的“阅读视图”主要特点是（ ）。",
+    "options": {
+      "A": "在窗口中放映，可随时切换回编辑状态",
+      "B": "全屏放映且不能退出",
+      "C": "自动把演示文稿导出为视频",
+      "D": "只能查看大纲"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "阅读视图以窗口方式呈现放映效果，适合个人快速检查，按 Esc 即可回到普通视图，不像全屏放映那样独占屏幕。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "基础与视图",
+    "knowledgePoint": "基本操作与视图模式",
+    "difficulty": "medium",
+    "tags": [
+      "阅读视图",
+      "视图模式"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-basic-04",
+    "type": "single_choice",
+    "question": "PowerPoint 中调整“显示比例”的结果是（ ）。",
+    "options": {
+      "A": "同时改变幻灯片的实际尺寸",
+      "B": "只改变编辑时的显示大小，不影响放映效果和字号",
+      "C": "改变所有文字的字号",
+      "D": "改变放映时的投影比例"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "显示比例是编辑界面的缩放，幻灯片本身的尺寸由页面设置决定，放映时按屏幕自适应，与编辑缩放无关。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "基础与视图",
+    "knowledgePoint": "基本操作与视图模式",
+    "difficulty": "medium",
+    "tags": [
+      "显示比例",
+      "缩放"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-basic-05",
+    "type": "single_choice",
+    "question": "把演示文稿保存为 .ppsx 格式后，双击该文件会（ ）。",
+    "options": {
+      "A": "直接进入放映状态",
+      "B": "打开编辑界面",
+      "C": "以只读方式打开编辑界面",
+      "D": "提示文件损坏"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": ".ppsx 是 PowerPoint 放映格式，双击即全屏放映，适合交付给不需要修改的观众；需要编辑时可先打开 PowerPoint 再打开该文件。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "基础与视图",
+    "knowledgePoint": "基本操作与视图模式",
+    "difficulty": "medium",
+    "tags": [
+      "ppsx",
+      "放映格式"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-basic-06",
+    "type": "single_choice",
+    "question": "在普通视图下，左侧缩略图窗格的主要作用是（ ）。",
+    "options": {
+      "A": "编辑幻灯片的详细文字",
+      "B": "浏览幻灯片缩略图并调整其顺序",
+      "C": "显示演讲者备注全文",
+      "D": "设置动画路径"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "缩略图窗格提供全局导航，可拖动调整顺序、右键增删和分节；切换到大纲选项卡则显示文字层次结构。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "基础与视图",
+    "knowledgePoint": "基本操作与视图模式",
+    "difficulty": "hard",
+    "tags": [
+      "缩略图窗格",
+      "导航"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-basic-07",
+    "type": "single_choice",
+    "question": "在 PowerPoint 中同时打开多个演示文稿窗口并整齐排列，应使用（ ）。",
+    "options": {
+      "A": "窗口→新建窗口",
+      "B": "视图→阅读视图",
+      "C": "开始→排列",
+      "D": "视图→全部重排"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "“全部重排”把当前打开的所有演示文稿窗口平铺排列，便于在不同文稿之间复制幻灯片或比较内容。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "基础与视图",
+    "knowledgePoint": "基本操作与视图模式",
+    "difficulty": "hard",
+    "tags": [
+      "多窗口",
+      "全部重排"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-organize-01",
+    "type": "single_choice",
+    "question": "在 PowerPoint 中新建幻灯片，新幻灯片默认插入在（ ）。",
+    "options": {
+      "A": "当前节的开头",
+      "B": "当前幻灯片之后",
+      "C": "演示文稿末尾",
+      "D": "第一张之前"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "新建幻灯片插入在当前选中幻灯片之后，并沿用当前幻灯片的版式，可在“版式”中另行更换。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "基础与视图",
+    "knowledgePoint": "幻灯片组织与管理",
+    "difficulty": "easy",
+    "tags": [
+      "新建幻灯片",
+      "位置"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-organize-02",
+    "type": "single_choice",
+    "question": "要让某张幻灯片在放映时跳过不显示，应（ ）。",
+    "options": {
+      "A": "右键该幻灯片→隐藏幻灯片",
+      "B": "设置该页动画为无",
+      "C": "把它移到最后一页",
+      "D": "删除该幻灯片"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "隐藏幻灯片保留内容但在放映时跳过，缩略图上会显示带斜线的编号标记，再次点击“隐藏幻灯片”可取消。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "基础与视图",
+    "knowledgePoint": "幻灯片组织与管理",
+    "difficulty": "easy",
+    "tags": [
+      "隐藏幻灯片",
+      "放映"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-organize-03",
+    "type": "single_choice",
+    "question": "幻灯片的“版式”决定的是（ ）。",
+    "options": {
+      "A": "占位符的种类、数量和位置",
+      "B": "演示文稿的文件格式",
+      "C": "幻灯片的配色方案",
+      "D": "放映时的切换效果"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "版式是母版下的具体页面模板，规定标题、内容、图片等占位符的布局；配色由主题决定，切换效果单独设置。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "基础与视图",
+    "knowledgePoint": "幻灯片组织与管理",
+    "difficulty": "medium",
+    "tags": [
+      "版式",
+      "占位符"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-organize-04",
+    "type": "single_choice",
+    "question": "在幻灯片浏览视图中按住 Ctrl 键拖动某张幻灯片，结果是（ ）。",
+    "options": {
+      "A": "删除该幻灯片",
+      "B": "隐藏该幻灯片",
+      "C": "复制该幻灯片",
+      "D": "移动该幻灯片"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "直接拖动是移动，按住 Ctrl 拖动是复制，复制出的幻灯片插入到释放位置，适合快速制作结构相似的页面。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "基础与视图",
+    "knowledgePoint": "幻灯片组织与管理",
+    "difficulty": "medium",
+    "tags": [
+      "复制幻灯片",
+      "浏览视图"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-organize-05",
+    "type": "single_choice",
+    "question": "要一次选中连续的多张幻灯片，应（ ）。",
+    "options": {
+      "A": "单击首张后按住 Shift 单击末张",
+      "B": "按住 Ctrl 逐个单击",
+      "C": "按 Ctrl+A",
+      "D": "在普通视图中拖动选择"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Shift 用于选择连续区间，Ctrl 用于选择不连续的多个对象；在缩略图窗格和大纲窗格中规则相同。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "基础与视图",
+    "knowledgePoint": "幻灯片组织与管理",
+    "difficulty": "medium",
+    "tags": [
+      "选择幻灯片",
+      "快捷键"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-organize-06",
+    "type": "single_choice",
+    "question": "PowerPoint 中“重用幻灯片”功能的作用是（ ）。",
+    "options": {
+      "A": "把当前幻灯片导出为图片",
+      "B": "恢复被删除的幻灯片",
+      "C": "重新应用主题",
+      "D": "把其他演示文稿中的幻灯片导入当前文稿"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "“重用幻灯片”可浏览另一个演示文稿并逐张插入，还能选择“保留源格式”，适合从既有素材库中挑选页面。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "基础与视图",
+    "knowledgePoint": "幻灯片组织与管理",
+    "difficulty": "hard",
+    "tags": [
+      "重用幻灯片",
+      "导入"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-organize-07",
+    "type": "single_choice",
+    "question": "在 PowerPoint 中删除某个“节”后（ ）。",
+    "options": {
+      "A": "节中的所有幻灯片一并删除",
+      "B": "节中的幻灯片仍然保留，只删除节标记",
+      "C": "节中的幻灯片被移动到最后一节",
+      "D": "整个演示文稿被清空"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "节只是组织标记，删除节只取消分组，幻灯片本身保留；若要删除幻灯片需另行选中删除。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "基础与视图",
+    "knowledgePoint": "幻灯片组织与管理",
+    "difficulty": "hard",
+    "tags": [
+      "节",
+      "组织"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-theme-01",
+    "type": "single_choice",
+    "question": "更改演示文稿的主题，会同时改变（ ）。",
+    "options": {
+      "A": "只改变切换效果",
+      "B": "只改变背景图片",
+      "C": "整体配色、字体和形状效果",
+      "D": "只改变幻灯片尺寸"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "主题是一套设计方案的集合，包含颜色、字体和效果三大要素，更换主题会统一影响所有使用该主题的幻灯片。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "主题与母版",
+    "knowledgePoint": "主题与背景",
+    "difficulty": "easy",
+    "tags": [
+      "主题",
+      "配色"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-theme-02",
+    "type": "single_choice",
+    "question": "要为单张幻灯片设置纯色背景，应使用（ ）。",
+    "options": {
+      "A": "插入→背景",
+      "B": "开始→形状填充",
+      "C": "设计→设置背景格式",
+      "D": "视图→幻灯片母版"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "“设置背景格式”提供纯色、渐变、图片或纹理填充，并可选择是否应用到全部幻灯片。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "主题与母版",
+    "knowledgePoint": "主题与背景",
+    "difficulty": "easy",
+    "tags": [
+      "背景",
+      "填充"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-theme-03",
+    "type": "single_choice",
+    "question": "主题下的“变体”主要改变（ ）。",
+    "options": {
+      "A": "幻灯片的页数",
+      "B": "同一主题内的配色方案组合",
+      "C": "动画的播放速度",
+      "D": "演示文稿的文件格式"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "变体是主题的配色变体，提供同风格下明暗、冷暖不同的颜色组合，切换后母版与版式的配色同步调整。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "主题与母版",
+    "knowledgePoint": "主题与背景",
+    "difficulty": "medium",
+    "tags": [
+      "主题变体",
+      "配色"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-theme-04",
+    "type": "single_choice",
+    "question": "为幻灯片设置背景图片后勾选“隐藏背景图形”，作用是（ ）。",
+    "options": {
+      "A": "隐藏母版中的背景图形，只显示自定义背景",
+      "B": "把背景图片设为半透明",
+      "C": "删除所有图片",
+      "D": "禁止修改背景"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "该选项屏蔽母版带来的装饰图形，避免与自定义背景叠加冲突，常用于替换整页视觉风格。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "主题与母版",
+    "knowledgePoint": "主题与背景",
+    "difficulty": "medium",
+    "tags": [
+      "背景",
+      "母版图形"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-theme-05",
+    "type": "single_choice",
+    "question": "设置好背景格式后，若只想应用到当前幻灯片，应（ ）。",
+    "options": {
+      "A": "重新应用主题",
+      "B": "把背景复制到其他页",
+      "C": "点击“全部应用”",
+      "D": "在“设置背景格式”中直接关闭对话框，不点“全部应用”"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "“全部应用”会把当前背景推送到所有幻灯片；只关闭对话框则仅作用于当前页，这是单页特殊背景的常用做法。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "主题与母版",
+    "knowledgePoint": "主题与背景",
+    "difficulty": "medium",
+    "tags": [
+      "背景",
+      "应用范围"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-theme-06",
+    "type": "single_choice",
+    "question": "关于主题与模板的关系，下列说法正确的是（ ）。",
+    "options": {
+      "A": "模板不能包含主题",
+      "B": "二者完全相同",
+      "C": "模板包含主题，还包含版式、母版和示例内容",
+      "D": "主题包含模板"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "模板（.potx）是完整的设计方案，主题只是其中的配色、字体与效果部分；套用模板会同时带来母版、版式和示例页面。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "主题与母版",
+    "knowledgePoint": "主题与背景",
+    "difficulty": "hard",
+    "tags": [
+      "模板",
+      "主题"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-master-01",
+    "type": "single_choice",
+    "question": "要统一修改演示文稿中所有幻灯片标题的字体，最合适的位置是（ ）。",
+    "options": {
+      "A": "幻灯片浏览视图",
+      "B": "逐张选中标题修改",
+      "C": "备注页视图",
+      "D": "幻灯片母版中的标题占位符"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "母版中的标题占位符控制所有使用该母版的标题格式，改一处即全局生效，比逐页修改高效且不易遗漏。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "主题与母版",
+    "knowledgePoint": "幻灯片母版",
+    "difficulty": "easy",
+    "tags": [
+      "母版",
+      "全局格式"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-master-02",
+    "type": "single_choice",
+    "question": "在幻灯片母版视图中修改某个版式，影响范围是（ ）。",
+    "options": {
+      "A": "仅新建的幻灯片",
+      "B": "仅当前幻灯片",
+      "C": "所有使用该版式的幻灯片",
+      "D": "所有幻灯片"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "母版影响其下所有版式，版式只影响使用该版式的幻灯片。要只改一页，应在普通视图中直接修改该页。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "主题与母版",
+    "knowledgePoint": "幻灯片母版",
+    "difficulty": "medium",
+    "tags": [
+      "母版",
+      "版式"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-master-03",
+    "type": "single_choice",
+    "question": "要在每张幻灯片底部显示编号，应使用（ ）。",
+    "options": {
+      "A": "插入→文本框",
+      "B": "在每页手工输入数字",
+      "C": "设计→主题",
+      "D": "插入→页眉和页脚→勾选“幻灯片编号”"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "页眉和页脚对话框可统一设置日期、幻灯片编号和页脚文字，并可选择“标题幻灯片中不显示”。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "主题与母版",
+    "knowledgePoint": "幻灯片母版",
+    "difficulty": "medium",
+    "tags": [
+      "幻灯片编号",
+      "页脚"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-master-04",
+    "type": "single_choice",
+    "question": "关于母版与版式的层级关系，下列说法正确的是（ ）。",
+    "options": {
+      "A": "版式在上层，母版继承版式",
+      "B": "一个演示文稿只能有一个版式",
+      "C": "二者互不影响",
+      "D": "母版在上层，其设置被下属版式继承，版式可覆盖母版"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "母版定义整体风格，版式在其基础上调整占位符布局与局部格式；下层设置优先，因此在版式上的修改会覆盖母版同名设置。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "主题与母版",
+    "knowledgePoint": "幻灯片母版",
+    "difficulty": "hard",
+    "tags": [
+      "母版",
+      "继承"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-object-01",
+    "type": "single_choice",
+    "question": "在幻灯片中插入 SmartArt 的主要目的是（ ）。",
+    "options": {
+      "A": "播放背景音乐",
+      "B": "设置切换效果",
+      "C": "插入高清照片",
+      "D": "用图形化方式表达层次、流程或相互关系"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "SmartArt 提供列表、流程、循环、层次结构、关系等图形模板，输入文字即可自动生成结构化图示，适合表达逻辑关系。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "对象编辑",
+    "knowledgePoint": "文本、图形、图片、表格与图表",
+    "difficulty": "easy",
+    "tags": [
+      "SmartArt",
+      "图示"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-object-02",
+    "type": "single_choice",
+    "question": "要在幻灯片中插入一个 3 行 4 列的表格，应使用（ ）。",
+    "options": {
+      "A": "插入→SmartArt",
+      "B": "开始→段落",
+      "C": "插入→图表",
+      "D": "插入→表格"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "“插入→表格”可直接拖动选择行列数，也可插入 Excel 工作表或手工绘制表格，插入后通过表格工具调整样式。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "对象编辑",
+    "knowledgePoint": "文本、图形、图片、表格与图表",
+    "difficulty": "easy",
+    "tags": [
+      "表格",
+      "插入对象"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-object-03",
+    "type": "single_choice",
+    "question": "在 PowerPoint 中把矩形图片裁剪为圆形，应使用（ ）。",
+    "options": {
+      "A": "图片工具→裁剪→裁剪为形状",
+      "B": "图片工具→艺术效果",
+      "C": "图片工具→压缩图片",
+      "D": "图片工具→删除背景"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "“裁剪为形状”把图片裁成指定几何形状，配合“填充”可调整图片在形状内的缩放与位置。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "对象编辑",
+    "knowledgePoint": "文本、图形、图片、表格与图表",
+    "difficulty": "medium",
+    "tags": [
+      "裁剪",
+      "图片处理"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-object-04",
+    "type": "single_choice",
+    "question": "关于幻灯片中的占位符，下列说法正确的是（ ）。",
+    "options": {
+      "A": "占位符中文字的格式受母版和版式控制",
+      "B": "占位符只能放文字",
+      "C": "占位符的格式与母版无关",
+      "D": "占位符不能被删除"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "占位符是版式中预留的内容区域，其字体、颜色、项目符号等继承自母版和版式，也可在页面上局部覆盖。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "对象编辑",
+    "knowledgePoint": "文本、图形、图片、表格与图表",
+    "difficulty": "medium",
+    "tags": [
+      "占位符",
+      "继承"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-object-05",
+    "type": "single_choice",
+    "question": "把 Excel 图表粘贴到 PowerPoint 时选择“保留源格式并链接数据”，则（ ）。",
+    "options": {
+      "A": "图表会被转换为 SmartArt",
+      "B": "图表会嵌入一份完整工作簿副本且与源文件无关",
+      "C": "图表变为静态图片，无法更新",
+      "D": "源数据变化后可在 PowerPoint 中更新图表"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "链接方式保留与源工作簿的关联，右键“更新链接”即可同步最新数据；若选“使用目标主题并嵌入工作簿”则与源文件脱离。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "对象编辑",
+    "knowledgePoint": "文本、图形、图片、表格与图表",
+    "difficulty": "hard",
+    "tags": [
+      "粘贴链接",
+      "图表"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-media-01",
+    "type": "single_choice",
+    "question": "要在幻灯片中插入本地背景音乐，应使用（ ）。",
+    "options": {
+      "A": "插入→音频→PC 上的音频",
+      "B": "切换→声音",
+      "C": "插入→对象",
+      "D": "插入→视频"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "“PC 上的音频”把音频文件插入幻灯片并显示扬声器图标，可在音频工具的“播放”选项卡中设置开始方式和音量。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "对象编辑",
+    "knowledgePoint": "音视频与艺术字",
+    "difficulty": "easy",
+    "tags": [
+      "音频",
+      "插入"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-media-02",
+    "type": "single_choice",
+    "question": "要让插入的音频在放映到该页时自动播放，应把播放设置中的“开始”设为（ ）。",
+    "options": {
+      "A": "循环播放",
+      "B": "单击时",
+      "C": "自动",
+      "D": "跨幻灯片播放"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "“开始”控制触发方式：自动在进入该页时播放，单击时需点击图标；跨幻灯片播放解决的是持续范围，不是触发方式。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "对象编辑",
+    "knowledgePoint": "音视频与艺术字",
+    "difficulty": "easy",
+    "tags": [
+      "音频",
+      "自动播放"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-media-03",
+    "type": "single_choice",
+    "question": "要让音频在放映多张幻灯片的过程中持续播放，应设置（ ）。",
+    "options": {
+      "A": "播放→自动",
+      "B": "播放→跨幻灯片播放",
+      "C": "播放→淡入",
+      "D": "播放→循环播放"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "“跨幻灯片播放”让音频在切换到后续幻灯片时继续播放，可配合“循环播放，直到停止”实现整场背景音乐。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "对象编辑",
+    "knowledgePoint": "音视频与艺术字",
+    "difficulty": "medium",
+    "tags": [
+      "音频",
+      "跨幻灯片"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-media-04",
+    "type": "single_choice",
+    "question": "“剪裁音频”功能的作用是（ ）。",
+    "options": {
+      "A": "只保留音频文件的某一段，去掉首尾多余部分",
+      "B": "压缩音频文件体积",
+      "C": "把音频转换为视频",
+      "D": "改变音频的采样率"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "剪裁音频通过拖动绿色和红色标记设定起止时间，只改变播放区间，不修改原始音频文件本身。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "对象编辑",
+    "knowledgePoint": "音视频与艺术字",
+    "difficulty": "medium",
+    "tags": [
+      "剪裁音频",
+      "媒体编辑"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-media-05",
+    "type": "single_choice",
+    "question": "要让视频在单击时才播放，应把视频播放设置中的“开始”设为（ ）。",
+    "options": {
+      "A": "循环播放",
+      "B": "自动",
+      "C": "单击时",
+      "D": "上一动画之后"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "视频的“开始”有“自动”和“单击时”两种，前者进入页面即播放，后者由演讲者控制节奏，避免打断讲解。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "对象编辑",
+    "knowledgePoint": "音视频与艺术字",
+    "difficulty": "medium",
+    "tags": [
+      "视频",
+      "播放设置"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-media-06",
+    "type": "single_choice",
+    "question": "艺术字与普通文本的主要区别是（ ）。",
+    "options": {
+      "A": "艺术字只能用于标题页",
+      "B": "艺术字不能修改文字内容",
+      "C": "艺术字不支持中文字符",
+      "D": "艺术字带有预设的填充、轮廓和文本效果样式"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "艺术字本质仍是可编辑文本，只是套用了预设的填充、轮廓、阴影、映像等效果，可通过“文本效果”进一步自定义。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "对象编辑",
+    "knowledgePoint": "音视频与艺术字",
+    "difficulty": "medium",
+    "tags": [
+      "艺术字",
+      "文本效果"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-media-07",
+    "type": "single_choice",
+    "question": "音频播放设置中的“淡入”和“淡出”指的是（ ）。",
+    "options": {
+      "A": "音频的播放速度",
+      "B": "音频开始和结束时的音量渐变时长",
+      "C": "音频的音量上限",
+      "D": "音频的循环次数"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "淡入淡出以毫秒或秒为单位设置音量渐变时间，可避免背景音乐突然响起或戛然而止，属于听觉体验优化。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "对象编辑",
+    "knowledgePoint": "音视频与艺术字",
+    "difficulty": "hard",
+    "tags": [
+      "音频",
+      "淡入淡出"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-media-08",
+    "type": "single_choice",
+    "question": "插入视频时若采用“链接”方式而不是嵌入，可能出现的问题是（ ）。",
+    "options": {
+      "A": "演示文稿移动到其他计算机后视频无法播放",
+      "B": "视频会被转换为图片",
+      "C": "视频画质必然下降",
+      "D": "视频不能设置自动播放"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "链接方式只保存指向视频文件的路径，文件位置变化或目标机器缺少该文件时播放失败；嵌入方式把视频存入演示文稿，体积更大但更可靠。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "对象编辑",
+    "knowledgePoint": "音视频与艺术字",
+    "difficulty": "hard",
+    "tags": [
+      "视频",
+      "链接与嵌入"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-animation-01",
+    "type": "single_choice",
+    "question": "PowerPoint 的动画效果分为（ ）四类。",
+    "options": {
+      "A": "进入、退出、切换、放映",
+      "B": "进入、强调、退出、动作路径",
+      "C": "单击、自动、同时、之后",
+      "D": "文字、图形、图片、视频"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "进入让对象出现，强调改变已有对象的视觉状态，退出让对象消失，动作路径让对象沿指定轨迹移动。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "动画与交互",
+    "knowledgePoint": "动画与切换效果",
+    "difficulty": "easy",
+    "tags": [
+      "动画",
+      "分类"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-animation-02",
+    "type": "single_choice",
+    "question": "要让多个对象的动画同时开始，应把开始方式设为（ ）。",
+    "options": {
+      "A": "单击时",
+      "B": "上一动画之后",
+      "C": "延迟",
+      "D": "与上一动画同时"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "“与上一动画同时”使多个动画并行播放，适合让标题和图形一起出现；“上一动画之后”则是串行衔接。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "动画与交互",
+    "knowledgePoint": "动画与切换效果",
+    "difficulty": "easy",
+    "tags": [
+      "动画",
+      "开始方式"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-animation-03",
+    "type": "single_choice",
+    "question": "“动画窗格”的主要作用是（ ）。",
+    "options": {
+      "A": "设置主题颜色",
+      "B": "查看并调整动画的顺序、开始方式和计时",
+      "C": "选择幻灯片版式",
+      "D": "插入音频"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "动画窗格以列表形式呈现当前页所有动画，可拖动排序、右键设置效果选项、修改持续时间与延迟。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "动画与交互",
+    "knowledgePoint": "动画与切换效果",
+    "difficulty": "medium",
+    "tags": [
+      "动画窗格",
+      "计时"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-animation-04",
+    "type": "single_choice",
+    "question": "“动画刷”的作用是（ ）。",
+    "options": {
+      "A": "清除所有动画",
+      "B": "把已有动画效果复制到其他对象",
+      "C": "把动画转换为视频",
+      "D": "预览动画效果"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "动画刷单击可刷一次、双击可连续刷，复制的是动画类型和计时设置，不复制对象本身的内容。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "动画与交互",
+    "knowledgePoint": "动画与切换效果",
+    "difficulty": "medium",
+    "tags": [
+      "动画刷",
+      "复制效果"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-animation-05",
+    "type": "single_choice",
+    "question": "动画设置中的“延迟”指的是（ ）。",
+    "options": {
+      "A": "动画的总播放时长",
+      "B": "在触发后等待指定时间再开始播放该动画",
+      "C": "动画循环的次数",
+      "D": "两个幻灯片之间的间隔"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "“持续时间”控制动画本身播放多久，“延迟”控制触发后等待多久才开始，二者配合可做出错落有致的节奏。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "动画与交互",
+    "knowledgePoint": "动画与切换效果",
+    "difficulty": "medium",
+    "tags": [
+      "动画",
+      "延迟"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-animation-06",
+    "type": "single_choice",
+    "question": "要让某动画在上一个动画播放完毕后自动接着播放，应把开始方式设为（ ）。",
+    "options": {
+      "A": "单击时",
+      "B": "手动",
+      "C": "与上一动画同时",
+      "D": "上一动画之后"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "“上一动画之后”形成自动串行序列，适合逐步展开流程图的各个步骤，演讲者无需反复点击。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "动画与交互",
+    "knowledgePoint": "动画与切换效果",
+    "difficulty": "hard",
+    "tags": [
+      "动画",
+      "衔接"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-animation-07",
+    "type": "single_choice",
+    "question": "关于 PowerPoint 的“平滑”切换效果，下列说法正确的是（ ）。",
+    "options": {
+      "A": "它通过匹配前后幻灯片中相似的对象实现连续过渡",
+      "B": "它与动画效果完全等价",
+      "C": "它必须手动设置每一帧",
+      "D": "它只能应用于文字"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "平滑切换自动识别前后页中位置、形状相近的对象并插值过渡，是制作“放大镜”“无缝移动”效果的关键，需要对象在两页中同时存在。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "动画与交互",
+    "knowledgePoint": "动画与切换效果",
+    "difficulty": "hard",
+    "tags": [
+      "平滑切换",
+      "过渡"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-interaction-01",
+    "type": "single_choice",
+    "question": "在 PowerPoint 中为文字设置超链接，可以链接到（ ）。",
+    "options": {
+      "A": "本文档中的位置、现有文件或网页、电子邮件地址",
+      "B": "只能是网页",
+      "C": "只能是其他演示文稿",
+      "D": "只能是图片"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "超链接对话框提供四类目标：现有文件或网页、本文档中的位置、新建文档、电子邮件地址，覆盖常见导航需求。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "动画与交互",
+    "knowledgePoint": "超链接与交互",
+    "difficulty": "easy",
+    "tags": [
+      "超链接",
+      "目标类型"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-interaction-02",
+    "type": "single_choice",
+    "question": "动作按钮通常用于（ ）。",
+    "options": {
+      "A": "实现上一张、下一张、返回首页等导航",
+      "B": "插入背景音乐",
+      "C": "设置幻灯片切换",
+      "D": "导出演示文稿"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "动作按钮是带预设图形的形状，插入时可直接绑定“上一张”“下一张”“第一张”“结束放映”等动作，适合制作交互式目录页。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "动画与交互",
+    "knowledgePoint": "超链接与交互",
+    "difficulty": "easy",
+    "tags": [
+      "动作按钮",
+      "导航"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-interaction-03",
+    "type": "single_choice",
+    "question": "设置超链接“链接到本文档中的位置”时，目标可以是（ ）。",
+    "options": {
+      "A": "只能是节名称",
+      "B": "只能是最后一页",
+      "C": "只能是第一张幻灯片",
+      "D": "某张幻灯片、自定义放映或某张幻灯片的标题"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "该选项列出所有幻灯片、节标题和自定义放映，选择后放映时点击即跳转，是制作分支讲解的常用手段。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "动画与交互",
+    "knowledgePoint": "超链接与交互",
+    "difficulty": "medium",
+    "tags": [
+      "超链接",
+      "文档内跳转"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-interaction-04",
+    "type": "single_choice",
+    "question": "“动作设置”中的“单击鼠标”与“鼠标移过”的区别是（ ）。",
+    "options": {
+      "A": "后者在放映时无效",
+      "B": "二者完全等价",
+      "C": "触发方式不同，前者需点击，后者只需指针经过",
+      "D": "前者只能跳转，后者只能播放声音"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "鼠标移过适合做悬停提示或自动跳转，单击则更可控，避免演讲时误触；两种方式可分别设置不同动作。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "动画与交互",
+    "knowledgePoint": "超链接与交互",
+    "difficulty": "medium",
+    "tags": [
+      "动作设置",
+      "触发方式"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-interaction-05",
+    "type": "single_choice",
+    "question": "要让超链接文字不显示下划线，可行的做法是（ ）。",
+    "options": {
+      "A": "关闭放映",
+      "B": "修改主题中的超链接配色并取消下划线格式",
+      "C": "把文字改为图片",
+      "D": "删除超链接"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "超链接的下划线来自主题的超链接样式，可在母版或主题颜色中调整；也可对选中文字单独取消下划线，但重新应用主题后可能恢复。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "动画与交互",
+    "knowledgePoint": "超链接与交互",
+    "difficulty": "medium",
+    "tags": [
+      "超链接",
+      "样式"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-interaction-06",
+    "type": "single_choice",
+    "question": "关于“返回”动作按钮，下列说法正确的是（ ）。",
+    "options": {
+      "A": "它用于结束放映",
+      "B": "它总是返回第一张幻灯片",
+      "C": "它默认返回上一个查看过的幻灯片",
+      "D": "它总是返回目录页"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "“返回”动作记录浏览路径，适合从目录跳到内容页后原路返回；若要固定回到目录页，应使用“第一张幻灯片”或超链接到指定页。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "动画与交互",
+    "knowledgePoint": "超链接与交互",
+    "difficulty": "hard",
+    "tags": [
+      "动作按钮",
+      "返回"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-interaction-07",
+    "type": "single_choice",
+    "question": "放映时要点击某张图片跳转到指定“节”的第一页，应（ ）。",
+    "options": {
+      "A": "为该图片设置超链接，目标选择该节的第一张幻灯片",
+      "B": "把图片放在该节中",
+      "C": "使用自定义放映",
+      "D": "设置图片的进入动画"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "超链接的目标是具体幻灯片，节本身不是跳转目标，因此需定位到该节的首张幻灯片，实现“按章节导航”的效果。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "动画与交互",
+    "knowledgePoint": "超链接与交互",
+    "difficulty": "hard",
+    "tags": [
+      "超链接",
+      "节"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-show-01",
+    "type": "single_choice",
+    "question": "要从当前幻灯片开始放映，应按（ ）。",
+    "options": {
+      "A": "Ctrl+F5",
+      "B": "F5",
+      "C": "Alt+F5",
+      "D": "Shift+F5"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "F5 从头开始放映，Shift+F5 从当前幻灯片开始放映，这是排练时最常用的两个快捷键。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "放映与输出",
+    "knowledgePoint": "放映设置与打包输出",
+    "difficulty": "easy",
+    "tags": [
+      "放映",
+      "快捷键"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-show-02",
+    "type": "single_choice",
+    "question": "“排练计时”的作用是（ ）。",
+    "options": {
+      "A": "记录每张幻灯片的停留时间，供自动放映使用",
+      "B": "压缩演示文稿体积",
+      "C": "设置幻灯片的切换效果",
+      "D": "统计演示文稿的字数"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "排练计时在放映中记录每页用时并保存，之后可设置为“如果存在排练时间，则使用它”，实现无人值守的自动播放。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "放映与输出",
+    "knowledgePoint": "放映设置与打包输出",
+    "difficulty": "easy",
+    "tags": [
+      "排练计时",
+      "自动放映"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-show-03",
+    "type": "single_choice",
+    "question": "要让演示文稿循环播放直到按 Esc 键，应设置（ ）。",
+    "options": {
+      "A": "导出为视频",
+      "B": "使用排练计时",
+      "C": "设置所有动画为循环",
+      "D": "设置幻灯片放映→勾选“循环放映，按 Esc 键停止”"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "循环放映常用于展会、展厅等无人值守场景，配合自动换片时间和排练计时可长时间连续播放。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "放映与输出",
+    "knowledgePoint": "放映设置与打包输出",
+    "difficulty": "medium",
+    "tags": [
+      "循环放映",
+      "放映设置"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-show-04",
+    "type": "single_choice",
+    "question": "“自定义放映”的作用是（ ）。",
+    "options": {
+      "A": "在同一演示文稿中组合不同的幻灯片子集",
+      "B": "自定义幻灯片尺寸",
+      "C": "自定义动画路径",
+      "D": "自定义主题颜色"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "自定义放映可为不同听众定义不同的播放序列（如完整版、精简版），放映时选择对应方案即可，无需复制多份文件。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "放映与输出",
+    "knowledgePoint": "放映设置与打包输出",
+    "difficulty": "medium",
+    "tags": [
+      "自定义放映",
+      "子集"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-show-05",
+    "type": "single_choice",
+    "question": "“将演示文稿打包成 CD”的主要目的是（ ）。",
+    "options": {
+      "A": "把演示文稿转换为 PDF",
+      "B": "把演示文稿刻录成音乐 CD",
+      "C": "把演示文稿及其链接的字体、媒体一起打包，便于在其他计算机播放",
+      "D": "压缩演示文稿为 ZIP 文件"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "打包功能收集演示文稿、链接文件和嵌入字体，生成可在无 PowerPoint 环境播放的包，解决换机后字体缺失、媒体丢失的问题。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "放映与输出",
+    "knowledgePoint": "放映设置与打包输出",
+    "difficulty": "hard",
+    "tags": [
+      "打包",
+      "移植"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-review-01",
+    "type": "single_choice",
+    "question": "在 PowerPoint 中添加批注，应使用（ ）选项卡。",
+    "options": {
+      "A": "设计",
+      "B": "切换",
+      "C": "审阅",
+      "D": "插入"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "“审阅→新建批注”针对当前选中的幻灯片或对象添加意见，批注显示在右侧批注窗格，不进入放映画面。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "放映与输出",
+    "knowledgePoint": "审阅与比较",
+    "difficulty": "easy",
+    "tags": [
+      "批注",
+      "审阅"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-review-02",
+    "type": "single_choice",
+    "question": "PowerPoint 中的批注在编辑界面显示在（ ）。",
+    "options": {
+      "A": "幻灯片右侧的批注窗格",
+      "B": "幻灯片底部的页脚",
+      "C": "状态栏",
+      "D": "标题占位符中"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "批注以窗格形式列在编辑区右侧，每条显示作者、时间和内容，点击可定位到对应幻灯片。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "放映与输出",
+    "knowledgePoint": "审阅与比较",
+    "difficulty": "easy",
+    "tags": [
+      "批注",
+      "窗格"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-review-03",
+    "type": "single_choice",
+    "question": "使用“比较”功能比较两个演示文稿后，PowerPoint 会（ ）。",
+    "options": {
+      "A": "把两份文稿合并为一个空白文稿",
+      "B": "直接覆盖原文稿",
+      "C": "生成第三份文稿，在其中列出两者的差异",
+      "D": "只比较文件大小"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "比较结果是一份新文稿，修订窗格中逐条列出幻灯片增删和内容修改，可逐项接受或拒绝。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "放映与输出",
+    "knowledgePoint": "审阅与比较",
+    "difficulty": "medium",
+    "tags": [
+      "比较",
+      "差异"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-review-04",
+    "type": "single_choice",
+    "question": "删除某条批注后（ ）。",
+    "options": {
+      "A": "批注被转移到备注中",
+      "B": "批注被隐藏但仍可通过显示标记查看",
+      "C": "批注自动转换为修订",
+      "D": "批注内容被删除，只能通过撤销操作恢复"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "删除批注是真实删除，与“隐藏标记”不同；若需保留内容只是不想显示，应使用显示/隐藏标记而不是删除。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "放映与输出",
+    "knowledgePoint": "审阅与比较",
+    "difficulty": "medium",
+    "tags": [
+      "批注",
+      "删除"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-review-05",
+    "type": "single_choice",
+    "question": "审阅中的“显示批注”选项作用是（ ）。",
+    "options": {
+      "A": "控制是否在编辑界面显示批注标记",
+      "B": "控制是否允许他人添加批注",
+      "C": "控制放映时是否显示批注",
+      "D": "控制批注的字号"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "显示批注只影响编辑界面的呈现，批注内容始终保留；放映时批注本来就不会显示，因此该选项与放映无关。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "放映与输出",
+    "knowledgePoint": "审阅与比较",
+    "difficulty": "medium",
+    "tags": [
+      "显示标记",
+      "批注"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-review-06",
+    "type": "single_choice",
+    "question": "要在编辑时隐藏批注但保留其内容，应（ ）。",
+    "options": {
+      "A": "逐条删除批注",
+      "B": "把批注复制到备注后删除",
+      "C": "取消勾选“显示批注”",
+      "D": "关闭审阅选项卡"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "取消显示批注后批注不再出现在编辑区，内容仍保存在文件中，需要时可重新勾选查看。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "放映与输出",
+    "knowledgePoint": "审阅与比较",
+    "difficulty": "medium",
+    "tags": [
+      "批注",
+      "显示"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-review-07",
+    "type": "single_choice",
+    "question": "关于“比较”与“合并”演示文稿，下列说法正确的是（ ）。",
+    "options": {
+      "A": "二者功能完全相同",
+      "B": "合并只能处理两份文稿",
+      "C": "比较生成差异文稿，合并把多人的修订并入当前文稿",
+      "D": "比较会修改原文稿，合并不会"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "比较用于找出两份文稿的差异并生成新文稿；合并用于把多位审阅者的修改集中到一份文稿中逐条处理，是多轮评审的标准流程。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "放映与输出",
+    "knowledgePoint": "审阅与比较",
+    "difficulty": "hard",
+    "tags": [
+      "比较",
+      "合并"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-review-08",
+    "type": "single_choice",
+    "question": "批注与备注的主要区别是（ ）。",
+    "options": {
+      "A": "批注只能由作者本人添加",
+      "B": "备注不能被删除",
+      "C": "批注会显示在放映画面，备注不会",
+      "D": "批注供审阅者之间交流意见，备注供演讲者自己查看提示"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "批注是协作沟通工具，出现在批注窗格；备注是演讲辅助信息，出现在备注页和演讲者视图，二者用途和呈现位置都不同。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "放映与输出",
+    "knowledgePoint": "审阅与比较",
+    "difficulty": "hard",
+    "tags": [
+      "批注",
+      "备注"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-material-01",
+    "type": "single_choice",
+    "question": "要根据已有的 Word 文档快速生成幻灯片，应使用（ ）。",
+    "options": {
+      "A": "插入→对象",
+      "B": "开始→新建幻灯片→幻灯片（从大纲）",
+      "C": "视图→大纲视图",
+      "D": "设计→主题"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "“幻灯片（从大纲）”读取 Word 文档中应用了标题样式的段落，按级别生成幻灯片和正文，是长文档转课件的标准做法。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "放映与输出",
+    "knowledgePoint": "素材分析与引用",
+    "difficulty": "easy",
+    "tags": [
+      "从大纲",
+      "Word协同"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-material-02",
+    "type": "single_choice",
+    "question": "从网页复制文字到幻灯片后要清除原有格式，粘贴时应选择（ ）。",
+    "options": {
+      "A": "保留源格式",
+      "B": "嵌入对象",
+      "C": "只保留文本",
+      "D": "图片"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "“只保留文本”丢弃网页的字体、颜色和段落格式，粘贴后自动套用当前占位符样式，避免版式混乱。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "放映与输出",
+    "knowledgePoint": "素材分析与引用",
+    "difficulty": "easy",
+    "tags": [
+      "粘贴",
+      "清除格式"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-material-03",
+    "type": "single_choice",
+    "question": "把一份长报告转换为演示文稿时，首先应（ ）。",
+    "options": {
+      "A": "提炼要点，把长句压缩为适合投影的短句",
+      "B": "把全文逐段粘贴到幻灯片",
+      "C": "把字号调小以容纳更多文字",
+      "D": "把文档转为图片后逐页插入"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "演示文稿面向口头讲解，页面应突出关键词和结构；整段文字堆叠会降低可读性，也不利于观众跟随讲解节奏。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "放映与输出",
+    "knowledgePoint": "素材分析与引用",
+    "difficulty": "medium",
+    "tags": [
+      "素材分析",
+      "信息提炼"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-material-04",
+    "type": "single_choice",
+    "question": "要在幻灯片中引用 Excel 数据并保持同步更新，应使用（ ）。",
+    "options": {
+      "A": "直接粘贴为图片",
+      "B": "插入→超链接",
+      "C": "选择性粘贴→粘贴链接",
+      "D": "手工输入数值"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "粘贴链接保留与源工作簿的关联，源数据变化后可更新；粘贴为图片或手工输入都会失去同步能力。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "放映与输出",
+    "knowledgePoint": "素材分析与引用",
+    "difficulty": "medium",
+    "tags": [
+      "粘贴链接",
+      "数据引用"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-material-05",
+    "type": "single_choice",
+    "question": "PowerPoint 的“屏幕截图”功能可以（ ）。",
+    "options": {
+      "A": "扫描纸质文档",
+      "B": "截取当前打开的窗口或屏幕区域并插入幻灯片",
+      "C": "把幻灯片导出为图片",
+      "D": "录制屏幕操作视频"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "“插入→屏幕截图”可插入某个已打开窗口的缩略图，或用“屏幕剪辑”框选区域，适合快速引用软件界面。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "放映与输出",
+    "knowledgePoint": "素材分析与引用",
+    "difficulty": "medium",
+    "tags": [
+      "屏幕截图",
+      "素材"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-material-06",
+    "type": "single_choice",
+    "question": "把 Word 大纲导入 PowerPoint 时，幻灯片的层次由（ ）决定。",
+    "options": {
+      "A": "文档的页数",
+      "B": "段落所应用的标题样式级别",
+      "C": "文档中图片的数量",
+      "D": "段落的字符数"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "标题 1 生成幻灯片标题，标题 2 及以下生成各级正文；未应用标题样式的正文段落可能被忽略，因此导入前应先规范样式。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "放映与输出",
+    "knowledgePoint": "素材分析与引用",
+    "difficulty": "hard",
+    "tags": [
+      "从大纲",
+      "标题样式"
+    ]
+  },
+  {
+    "id": "ncre-office-ppt-material-07",
+    "type": "single_choice",
+    "question": "在演示文稿中使用网络图片时，符合规范的做法是（ ）。",
+    "options": {
+      "A": "只要不用于商业用途就可以随意使用",
+      "B": "删除图片的元数据即可规避版权",
+      "C": "把图片改色后即可视为原创",
+      "D": "确认图片的授权范围并在需要时标注来源"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "使用他人作品应遵守授权协议，注明出处与许可方式；修改颜色或删除元数据不改变作品的著作权归属。",
+    "chapter": "PowerPoint 演示文稿",
+    "knowledgeSection": "放映与输出",
+    "knowledgePoint": "素材分析与引用",
+    "difficulty": "hard",
+    "tags": [
+      "素材",
+      "版权"
+    ]
+  }
+]

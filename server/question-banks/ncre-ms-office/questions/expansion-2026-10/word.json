@@ -1,0 +1,1451 @@
+[
+  {
+    "id": "ncre-office-word-basic-01",
+    "type": "single_choice",
+    "question": "Word 的“限制编辑”中，不属于可选择的保护方式是（ ）。",
+    "options": {
+      "A": "仅允许批注",
+      "B": "仅允许打印",
+      "C": "只读",
+      "D": "仅允许填写窗体"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "限制编辑提供只读、仅允许批注、仅允许填写窗体、仅允许修订等类型，打印权限不由该功能控制。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "文档基础",
+    "knowledgePoint": "文档创建编辑保存打印保护",
+    "difficulty": "hard",
+    "tags": [
+      "限制编辑",
+      "文档保护"
+    ]
+  },
+  {
+    "id": "ncre-office-word-view-01",
+    "type": "single_choice",
+    "question": "Word 2016 中，显示文档打印效果、所见即所得的视图是（ ）。",
+    "options": {
+      "A": "大纲视图",
+      "B": "阅读视图",
+      "C": "页面视图",
+      "D": "草稿视图"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "页面视图按纸张版式显示页边距、页眉页脚和图形对象，是最接近打印效果的编辑视图。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "文档基础",
+    "knowledgePoint": "多窗口多文档与视图",
+    "difficulty": "easy",
+    "tags": [
+      "视图",
+      "页面视图"
+    ]
+  },
+  {
+    "id": "ncre-office-word-view-02",
+    "type": "single_choice",
+    "question": "在 Word 中同时查看同一文档相距很远的两部分内容，最合适的操作是（ ）。",
+    "options": {
+      "A": "把文档复制成两份",
+      "B": "切换到草稿视图",
+      "C": "使用“视图”选项卡中的“拆分”",
+      "D": "打开两个 Word 窗口分别滚动"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "拆分窗口把编辑区分成两个窗格，各自独立滚动但编辑的是同一份文档，修改会同步反映。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "文档基础",
+    "knowledgePoint": "多窗口多文档与视图",
+    "difficulty": "easy",
+    "tags": [
+      "拆分窗口",
+      "多窗口"
+    ]
+  },
+  {
+    "id": "ncre-office-word-view-03",
+    "type": "single_choice",
+    "question": "Word 的“阅读视图”主要特点是（ ）。",
+    "options": {
+      "A": "自动把文档转换为 PDF",
+      "B": "只能查看页眉页脚",
+      "C": "只能显示文档大纲",
+      "D": "隐藏功能区，按屏幕宽度自适应分栏显示，便于阅读"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "阅读视图面向阅读场景，隐藏大部分编辑界面，按列自适应排版，可按屏幕宽度调整每屏显示的内容。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "文档基础",
+    "knowledgePoint": "多窗口多文档与视图",
+    "difficulty": "medium",
+    "tags": [
+      "阅读视图",
+      "视图模式"
+    ]
+  },
+  {
+    "id": "ncre-office-word-view-04",
+    "type": "single_choice",
+    "question": "希望两个文档窗口同步滚动、便于逐段对照，应使用（ ）。",
+    "options": {
+      "A": "“视图”选项卡中的“宏”",
+      "B": "“插入”选项卡中的“对象”",
+      "C": "“视图”选项卡中的“并排查看”并启用“同步滚动”",
+      "D": "“审阅”选项卡中的“比较”"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "并排查看把两个窗口左右排列，勾选同步滚动后滚动其中一个，另一个会跟着滚动，适合对照修改。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "文档基础",
+    "knowledgePoint": "多窗口多文档与视图",
+    "difficulty": "medium",
+    "tags": [
+      "并排查看",
+      "同步滚动"
+    ]
+  },
+  {
+    "id": "ncre-office-word-view-05",
+    "type": "single_choice",
+    "question": "Word 导航窗格的主要作用是（ ）。",
+    "options": {
+      "A": "设置文档的打印份数",
+      "B": "管理文档的批注作者",
+      "C": "显示文档的字数统计",
+      "D": "按标题、页面或搜索结果快速定位文档位置"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "导航窗格提供标题、页面、搜索结果三个维度，点击条目即可跳转到对应位置，长文档编辑时尤为高效。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "文档基础",
+    "knowledgePoint": "多窗口多文档与视图",
+    "difficulty": "medium",
+    "tags": [
+      "导航窗格",
+      "定位"
+    ]
+  },
+  {
+    "id": "ncre-office-word-view-06",
+    "type": "single_choice",
+    "question": "在 Word 中按住 Ctrl 键并滚动鼠标滚轮，效果是（ ）。",
+    "options": {
+      "A": "在文档中快速翻页",
+      "B": "切换文档视图",
+      "C": "选中整段文字",
+      "D": "缩放文档的显示比例"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Ctrl + 滚轮用于缩放显示比例，只改变屏幕呈现，不影响字号和排版。缩放比例可在状态栏右下角查看和调整。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "文档基础",
+    "knowledgePoint": "多窗口多文档与视图",
+    "difficulty": "hard",
+    "tags": [
+      "显示比例",
+      "缩放"
+    ]
+  },
+  {
+    "id": "ncre-office-word-view-07",
+    "type": "single_choice",
+    "question": "关于 Word 的大纲视图，下列说法正确的是（ ）。",
+    "options": {
+      "A": "与页面视图的显示效果完全相同",
+      "B": "只能查看，不能编辑文字",
+      "C": "可以提升或降低段落级别、折叠显示，但不显示页眉页脚等页面元素",
+      "D": "可以完整显示页眉页脚和页面边框"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "大纲视图专注于文档的层次结构，可设置标题级别、升降级、折叠展开和移动整段，但不呈现页面装饰元素。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "文档基础",
+    "knowledgePoint": "多窗口多文档与视图",
+    "difficulty": "hard",
+    "tags": [
+      "大纲视图",
+      "层次结构"
+    ]
+  },
+  {
+    "id": "ncre-office-word-font-01",
+    "type": "single_choice",
+    "question": "要把选中段落的首行缩进 2 字符，应在“段落”对话框中设置（ ）。",
+    "options": {
+      "A": "缩进→特殊格式→首行缩进，度量值 2 字符",
+      "B": "换行和分页→孤行控制",
+      "C": "间距→段前 2 行",
+      "D": "缩进→左侧 2 字符"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "首行缩进只作用于段落第一行；左侧缩进会让整段左移；段前间距控制的是段落上方的空白。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "文字与段落",
+    "knowledgePoint": "字体与段落",
+    "difficulty": "easy",
+    "tags": [
+      "首行缩进",
+      "段落格式"
+    ]
+  },
+  {
+    "id": "ncre-office-word-font-02",
+    "type": "single_choice",
+    "question": "要让段落第一个字放大并占据多行高度、其余文字环绕其右侧，应使用（ ）。",
+    "options": {
+      "A": "插入→文本框",
+      "B": "开始→增大字号",
+      "C": "开始→带圈字符",
+      "D": "插入→首字下沉"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "首字下沉提供“下沉”和“悬挂”两种方式，可设置下沉行数和距正文距离，常用于报刊式排版。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "文字与段落",
+    "knowledgePoint": "字体与段落",
+    "difficulty": "easy",
+    "tags": [
+      "首字下沉",
+      "中文版式"
+    ]
+  },
+  {
+    "id": "ncre-office-word-font-03",
+    "type": "single_choice",
+    "question": "段落设置中勾选“与下段同页”，其作用是（ ）。",
+    "options": {
+      "A": "让该段固定在页面顶部",
+      "B": "禁止该段跨页显示",
+      "C": "让该段与上一段合并",
+      "D": "防止该段与下一段之间被分页"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "“与下段同页”常用于标题，避免标题留在页尾而正文跑到下一页；“段中不分页”才是禁止本段跨页。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "文字与段落",
+    "knowledgePoint": "字体与段落",
+    "difficulty": "medium",
+    "tags": [
+      "段落格式",
+      "分页控制"
+    ]
+  },
+  {
+    "id": "ncre-office-word-font-04",
+    "type": "single_choice",
+    "question": "为汉字添加拼音标注，应使用“开始”选项卡中的（ ）。",
+    "options": {
+      "A": "拼音指南",
+      "B": "字符边框",
+      "C": "文字效果",
+      "D": "带圈字符"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "拼音指南可为选中汉字自动或手工添加拼音，并可设置对齐方式、偏移量和字号，属于中文版式功能。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "文字与段落",
+    "knowledgePoint": "字体与段落",
+    "difficulty": "medium",
+    "tags": [
+      "拼音指南",
+      "中文版式"
+    ]
+  },
+  {
+    "id": "ncre-office-word-font-05",
+    "type": "single_choice",
+    "question": "关于制表位的使用，下列说法正确的是（ ）。",
+    "options": {
+      "A": "小数点制表位可使一列数字按小数点上下对齐",
+      "B": "制表位与段落缩进是同一功能",
+      "C": "制表位设置后不能删除",
+      "D": "制表位只能左对齐"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "制表位有左对齐、居中、右对齐、小数点对齐和竖线对齐五种，小数点制表位常用于金额、成绩等数字列对齐。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "文字与段落",
+    "knowledgePoint": "字体与段落",
+    "difficulty": "medium",
+    "tags": [
+      "制表位",
+      "对齐"
+    ]
+  },
+  {
+    "id": "ncre-office-word-font-06",
+    "type": "single_choice",
+    "question": "段落设置中勾选“孤行控制”，其作用是（ ）。",
+    "options": {
+      "A": "防止段落的最后一行单独出现在下一页页首，或首行单独留在页尾",
+      "B": "让段落独占一页",
+      "C": "禁止段落中出现空行",
+      "D": "防止段落跨页"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "孤行控制针对段落的单行孤立现象，属于排版美观性设置；若要整段不跨页，应使用“段中不分页”。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "文字与段落",
+    "knowledgePoint": "字体与段落",
+    "difficulty": "hard",
+    "tags": [
+      "孤行控制",
+      "排版"
+    ]
+  },
+  {
+    "id": "ncre-office-word-style-01",
+    "type": "single_choice",
+    "question": "修改某个样式（如“正文”）的定义后，文档中应用该样式的段落将（ ）。",
+    "options": {
+      "A": "保持不变，需要逐段重设",
+      "B": "全部随之改变",
+      "C": "只有当前段落改变",
+      "D": "全部被清除格式"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "样式是格式的集合，修改样式定义会一次性更新所有应用该样式的段落，这正是使用样式而非直接格式的最大价值。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "文字与段落",
+    "knowledgePoint": "样式与主题",
+    "difficulty": "easy",
+    "tags": [
+      "样式",
+      "批量更新"
+    ]
+  },
+  {
+    "id": "ncre-office-word-style-02",
+    "type": "single_choice",
+    "question": "Word 中“样式集”的作用是（ ）。",
+    "options": {
+      "A": "把文档保存为模板",
+      "B": "删除文档中的所有样式",
+      "C": "一次性改变文档中多种样式的组合外观",
+      "D": "只改变当前段落的字体"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "样式集是整套样式定义的预设组合，位于“设计”选项卡，切换样式集会同时改变标题、正文等的字体、字号和间距。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "文字与段落",
+    "knowledgePoint": "样式与主题",
+    "difficulty": "medium",
+    "tags": [
+      "样式集",
+      "主题"
+    ]
+  },
+  {
+    "id": "ncre-office-word-style-03",
+    "type": "single_choice",
+    "question": "关于样式的“基准样式”和“后续段落样式”，下列说法正确的是（ ）。",
+    "options": {
+      "A": "修改基准样式会连带影响以它为基准的其他样式",
+      "B": "基准样式只能设为“正文”且不能修改",
+      "C": "后续段落样式决定上一段的格式",
+      "D": "二者都只对当前段落生效"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "基准样式形成继承链，修改上层样式会传播到下层；后续段落样式决定在该段末尾回车后新段落采用的样式，常用于标题后自动接正文。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "文字与段落",
+    "knowledgePoint": "样式与主题",
+    "difficulty": "hard",
+    "tags": [
+      "样式",
+      "样式继承"
+    ]
+  },
+  {
+    "id": "ncre-office-word-page-01",
+    "type": "single_choice",
+    "question": "下列不属于 Word 分节符类型的是（ ）。",
+    "options": {
+      "A": "连续",
+      "B": "分栏符",
+      "C": "下一页",
+      "D": "奇数页"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "分节符有下一页、连续、偶数页、奇数页四种；分栏符属于分页符的一种，用于强制文字进入下一栏，不产生新节。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "页面与引用",
+    "knowledgePoint": "页面布局与分栏分页分节",
+    "difficulty": "easy",
+    "tags": [
+      "分节符",
+      "分页符"
+    ]
+  },
+  {
+    "id": "ncre-office-word-page-02",
+    "type": "single_choice",
+    "question": "为整篇文档添加“内部资料”字样的背景文字，应使用（ ）。",
+    "options": {
+      "A": "页面布局→页面边框",
+      "B": "开始→底纹",
+      "C": "设计→水印",
+      "D": "插入→文本框"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "水印是页面背景中的淡化文字或图片，会出现在每一页且不影响正文排版；用文本框手工添加则需逐页复制。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "页面与引用",
+    "knowledgePoint": "页面布局与分栏分页分节",
+    "difficulty": "easy",
+    "tags": [
+      "水印",
+      "页面背景"
+    ]
+  },
+  {
+    "id": "ncre-office-word-page-03",
+    "type": "single_choice",
+    "question": "Word 中“页面边框”的应用范围可以是（ ）。",
+    "options": {
+      "A": "只能是首页",
+      "B": "整篇文档或本节",
+      "C": "只能是当前页",
+      "D": "只能是当前段落"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "页面边框在“设计→页面边框”中设置，应用范围可选整篇文档或本节，还可指定上下左右各边的线型。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "页面与引用",
+    "knowledgePoint": "页面布局与分栏分页分节",
+    "difficulty": "medium",
+    "tags": [
+      "页面边框",
+      "节"
+    ]
+  },
+  {
+    "id": "ncre-office-word-page-04",
+    "type": "single_choice",
+    "question": "关于 Word 的分栏功能，下列说法正确的是（ ）。",
+    "options": {
+      "A": "分栏只能应用于整篇文档",
+      "B": "分栏数最多为 2",
+      "C": "分栏在节内生效，不同节可以设置不同的栏数",
+      "D": "分栏后不能再插入表格"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "分栏是节级属性，通过插入分节符可以为不同部分设置不同栏数；栏数最多可设 12 栏，还可设置栏宽和分隔线。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "页面与引用",
+    "knowledgePoint": "页面布局与分栏分页分节",
+    "difficulty": "medium",
+    "tags": [
+      "分栏",
+      "节"
+    ]
+  },
+  {
+    "id": "ncre-office-word-page-05",
+    "type": "single_choice",
+    "question": "在文档中插入“连续”分节符后，新的一节将（ ）。",
+    "options": {
+      "A": "从下一个偶数页开始",
+      "B": "从下一页开始",
+      "C": "从当前位置开始，与上一节处于同一页",
+      "D": "从下一个奇数页开始"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "“连续”分节符只创建新的节而不强制换页，常用于同一页内不同栏数或不同页面方向的局部排版。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "页面与引用",
+    "knowledgePoint": "页面布局与分栏分页分节",
+    "difficulty": "hard",
+    "tags": [
+      "分节符",
+      "连续分节"
+    ]
+  },
+  {
+    "id": "ncre-office-word-header-01",
+    "type": "single_choice",
+    "question": "要让文档首页的页眉页脚与其他页不同，应在页眉页脚工具中勾选（ ）。",
+    "options": {
+      "A": "链接到前一条页眉",
+      "B": "显示文档文字",
+      "C": "首页不同",
+      "D": "奇偶页不同"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "“首页不同”使第一节首页使用独立的页眉页脚，常用于封面不显示页码；“奇偶页不同”则让奇偶页分别设置。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "页面与引用",
+    "knowledgePoint": "页眉页脚与引用",
+    "difficulty": "medium",
+    "tags": [
+      "页眉页脚",
+      "首页不同"
+    ]
+  },
+  {
+    "id": "ncre-office-word-header-02",
+    "type": "single_choice",
+    "question": "要在页脚显示“第 X 页 共 Y 页”，需要插入的域是（ ）。",
+    "options": {
+      "A": "STYLEREF 和 TOC",
+      "B": "PAGE 和 DATE",
+      "C": "SECTIONPAGES 和 DATE",
+      "D": "PAGE 和 NUMPAGES"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "PAGE 给出当前页码，NUMPAGES 给出文档总页数；SECTIONPAGES 是本节总页数，STYLEREF 引用标题文字。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "页面与引用",
+    "knowledgePoint": "页眉页脚与引用",
+    "difficulty": "hard",
+    "tags": [
+      "域",
+      "页码"
+    ]
+  },
+  {
+    "id": "ncre-office-word-review-01",
+    "type": "single_choice",
+    "question": "Word 的“修订”功能主要用于（ ）。",
+    "options": {
+      "A": "比较两个文档的字数",
+      "B": "记录对文档的插入、删除和格式更改",
+      "C": "自动纠正拼写错误",
+      "D": "把文档转换为 PDF"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "开启修订后，所有编辑都以标记形式留痕，作者信息与时间被记录，便于他人逐条接受或拒绝。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "页面与引用",
+    "knowledgePoint": "审阅与修订",
+    "difficulty": "easy",
+    "tags": [
+      "修订",
+      "留痕"
+    ]
+  },
+  {
+    "id": "ncre-office-word-review-02",
+    "type": "single_choice",
+    "question": "为文档某段添加批注后，批注内容默认显示在（ ）。",
+    "options": {
+      "A": "页面右侧的标记区",
+      "B": "文档末尾的参考文献处",
+      "C": "状态栏",
+      "D": "页眉中"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "批注显示在页面右侧标记区（或批注框），通过连线指向被批注的文字，不改变正文内容。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "页面与引用",
+    "knowledgePoint": "审阅与修订",
+    "difficulty": "easy",
+    "tags": [
+      "批注",
+      "标记区"
+    ]
+  },
+  {
+    "id": "ncre-office-word-review-03",
+    "type": "single_choice",
+    "question": "在修订选项中设置“以批注形式显示格式更改”，其效果是（ ）。",
+    "options": {
+      "A": "把批注转换为正文",
+      "B": "禁止一切格式修改",
+      "C": "格式变化不在正文中标记，而在批注框中说明",
+      "D": "把所有格式修改自动接受"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "该选项把格式修订从正文的行内标记移入批注框，使正文更清爽，同时仍保留格式变化的记录。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "页面与引用",
+    "knowledgePoint": "审阅与修订",
+    "difficulty": "medium",
+    "tags": [
+      "修订选项",
+      "格式修订"
+    ]
+  },
+  {
+    "id": "ncre-office-word-review-04",
+    "type": "single_choice",
+    "question": "使用“审阅→比较”比较两个文档后，Word 会（ ）。",
+    "options": {
+      "A": "生成一份显示两者差异的第三份文档",
+      "B": "直接覆盖原文档",
+      "C": "只统计字数差异",
+      "D": "把两个文档合并为一个空白文档"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "比较功能生成新文档，用修订标记呈现两者的增删改差异，原文档保持不变；“合并”则把多位审阅者的修订汇总到一份文档。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "页面与引用",
+    "knowledgePoint": "审阅与修订",
+    "difficulty": "medium",
+    "tags": [
+      "比较文档",
+      "差异"
+    ]
+  },
+  {
+    "id": "ncre-office-word-review-05",
+    "type": "single_choice",
+    "question": "Word“限制编辑”中“仅允许在文档中进行此类型的编辑”，可选的类型不包括（ ）。",
+    "options": {
+      "A": "修订",
+      "B": "插入图片",
+      "C": "填写窗体",
+      "D": "批注"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "可选类型为修订、批注、填写窗体和无（只读）。插入图片属于具体编辑动作，不能作为限制类型。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "页面与引用",
+    "knowledgePoint": "审阅与修订",
+    "difficulty": "medium",
+    "tags": [
+      "限制编辑",
+      "保护类型"
+    ]
+  },
+  {
+    "id": "ncre-office-word-review-06",
+    "type": "single_choice",
+    "question": "关于“修订”与“批注”的区别，下列说法正确的是（ ）。",
+    "options": {
+      "A": "批注会直接改动正文，修订不会",
+      "B": "修订只能记录删除操作",
+      "C": "修订直接改动正文并留下痕迹，批注只在标记区附加意见",
+      "D": "二者都会直接改动正文"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "修订是对正文的实际修改并留痕，需要接受或拒绝；批注是审阅意见，不改变正文内容，可单独回复或删除。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "页面与引用",
+    "knowledgePoint": "审阅与修订",
+    "difficulty": "hard",
+    "tags": [
+      "修订",
+      "批注"
+    ]
+  },
+  {
+    "id": "ncre-office-word-table-01",
+    "type": "single_choice",
+    "question": "在 Word 表格中把光标定位到某行，按 Ctrl+Shift+Enter 的作用是（ ）。",
+    "options": {
+      "A": "合并该行与下一行",
+      "B": "删除该行",
+      "C": "在该行后插入新行",
+      "D": "在该行之前把表格拆分为两个表格"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Ctrl+Shift+Enter 用于拆分表格，光标所在行及其后内容成为第二个表格；合并表格则需删除两者之间的段落标记。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "表格、图形与对象",
+    "knowledgePoint": "表格与图表",
+    "difficulty": "easy",
+    "tags": [
+      "表格拆分",
+      "快捷键"
+    ]
+  },
+  {
+    "id": "ncre-office-word-table-02",
+    "type": "single_choice",
+    "question": "在 Word 表格中要计算光标上方各单元格数据之和，可使用的公式是（ ）。",
+    "options": {
+      "A": "=SUM(LEFT)",
+      "B": "=AVERAGE(RIGHT)",
+      "C": "=SUM(ABOVE)",
+      "D": "=COUNT(BELOW)"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Word 表格公式用 ABOVE、BELOW、LEFT、RIGHT 指代相对方向的单元格区域，=SUM(ABOVE) 表示对上方同列数据求和。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "表格、图形与对象",
+    "knowledgePoint": "表格与图表",
+    "difficulty": "easy",
+    "tags": [
+      "表格公式",
+      "SUM"
+    ]
+  },
+  {
+    "id": "ncre-office-word-table-03",
+    "type": "single_choice",
+    "question": "Word 表格中“平均分布各行”的作用是（ ）。",
+    "options": {
+      "A": "把表格平均拆分为多个表格",
+      "B": "使各行的文字居中",
+      "C": "平均分配各列的宽度",
+      "D": "使选中的多行具有相同的高度"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "“平均分布各行/各列”用于统一行高或列宽，使表格外观整齐；分配列宽的对应命令是“平均分布各列”。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "表格、图形与对象",
+    "knowledgePoint": "表格与图表",
+    "difficulty": "medium",
+    "tags": [
+      "表格布局",
+      "行高"
+    ]
+  },
+  {
+    "id": "ncre-office-word-table-04",
+    "type": "single_choice",
+    "question": "Word 表格跨页时，要避免某一行被拆到两页显示，应（ ）。",
+    "options": {
+      "A": "取消该行所在表格的“允许跨页断行”",
+      "B": "勾选“重复标题行”",
+      "C": "把表格转换为文本",
+      "D": "设置段落“与下段同页”"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "在“表格属性→行”中取消“允许跨页断行”，可使该行整体移到下一页；“重复标题行”解决的是表头在每页重现。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "表格、图形与对象",
+    "knowledgePoint": "表格与图表",
+    "difficulty": "medium",
+    "tags": [
+      "表格属性",
+      "跨页"
+    ]
+  },
+  {
+    "id": "ncre-office-word-table-05",
+    "type": "single_choice",
+    "question": "为 Word 表格套用内置“表格样式”后，仍然可以（ ）。",
+    "options": {
+      "A": "不能再插入新行",
+      "B": "不能再修改任何格式",
+      "C": "只能整体删除表格",
+      "D": "单独修改某个单元格的底纹和边框"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "表格样式提供整体外观，单元格级格式仍可叠加覆盖，通过“底纹”“边框”命令即可局部调整。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "表格、图形与对象",
+    "knowledgePoint": "表格与图表",
+    "difficulty": "medium",
+    "tags": [
+      "表格样式",
+      "局部格式"
+    ]
+  },
+  {
+    "id": "ncre-office-word-table-06",
+    "type": "single_choice",
+    "question": "把 Excel 图表以“链接”方式插入 Word 文档后，源工作簿数据发生变化时（ ）。",
+    "options": {
+      "A": "可在 Word 中更新链接，使图表同步为最新数据",
+      "B": "Word 中的图表会自动删除",
+      "C": "必须重新插入一次图表",
+      "D": "Word 中的图表永久保持插入时的样子且无法更新"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "链接方式保存的是指向源文件的引用，右键“更新链接”或打开时更新即可同步；若用“粘贴”方式嵌入，则与源文件脱离。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "表格、图形与对象",
+    "knowledgePoint": "表格与图表",
+    "difficulty": "hard",
+    "tags": [
+      "链接对象",
+      "图表更新"
+    ]
+  },
+  {
+    "id": "ncre-office-word-graphic-01",
+    "type": "single_choice",
+    "question": "Word 图片的环绕方式中，使图片像字符一样随文字移动的是（ ）。",
+    "options": {
+      "A": "四周型",
+      "B": "衬于文字下方",
+      "C": "嵌入型",
+      "D": "浮于文字上方"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "嵌入型把图片当作一个大字符插入文本流，随段落移动；其余环绕方式使图片浮动，需要设置锚点位置。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "表格、图形与对象",
+    "knowledgePoint": "图形图片 SmartArt 与文本框",
+    "difficulty": "easy",
+    "tags": [
+      "环绕方式",
+      "嵌入型"
+    ]
+  },
+  {
+    "id": "ncre-office-word-graphic-02",
+    "type": "single_choice",
+    "question": "要只保留图片的局部区域、去掉多余部分，应使用（ ）。",
+    "options": {
+      "A": "图片工具中的“裁剪”",
+      "B": "图片工具中的“压缩图片”",
+      "C": "图片工具中的“艺术效果”",
+      "D": "图片工具中的“删除背景”"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "裁剪通过拖动裁剪柄或设置裁剪尺寸保留指定区域，被裁掉的部分仍保存在文件中，可用“重设图片”恢复。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "表格、图形与对象",
+    "knowledgePoint": "图形图片 SmartArt 与文本框",
+    "difficulty": "easy",
+    "tags": [
+      "裁剪",
+      "图片处理"
+    ]
+  },
+  {
+    "id": "ncre-office-word-graphic-03",
+    "type": "single_choice",
+    "question": "关于图片“压缩”，下列说法正确的是（ ）。",
+    "options": {
+      "A": "压缩只能对 JPG 格式生效",
+      "B": "压缩会删除图片的色彩信息且不可恢复",
+      "C": "压缩后图片会被转换为矢量图",
+      "D": "可按屏幕、打印等用途降低分辨率以减小文件体积"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "压缩图片通过降低分辨率或丢弃裁剪区域来减小体积，适用于控制文档大小；压缩会降低画质，需在清晰度与体积间权衡。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "表格、图形与对象",
+    "knowledgePoint": "图形图片 SmartArt 与文本框",
+    "difficulty": "medium",
+    "tags": [
+      "压缩图片",
+      "文档体积"
+    ]
+  },
+  {
+    "id": "ncre-office-word-graphic-04",
+    "type": "single_choice",
+    "question": "多个文本框建立链接后，前一个文本框放不下的文字会（ ）。",
+    "options": {
+      "A": "转换为图片",
+      "B": "自动流入下一个已链接的文本框",
+      "C": "被直接删除",
+      "D": "缩小字号强行塞入"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "文本框链接形成文字流，前一框排满后自动续排到下一框，适合制作跨页或分栏的连续文本版式。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "表格、图形与对象",
+    "knowledgePoint": "图形图片 SmartArt 与文本框",
+    "difficulty": "medium",
+    "tags": [
+      "文本框链接",
+      "文字流"
+    ]
+  },
+  {
+    "id": "ncre-office-word-graphic-05",
+    "type": "single_choice",
+    "question": "把多个图形“组合”为一个整体后，可以（ ）。",
+    "options": {
+      "A": "组合内的图形不能再单独编辑且无法取消",
+      "B": "只能整体删除，不能取消组合",
+      "C": "组合后自动转换为图片",
+      "D": "统一设置格式并整体移动、缩放"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "组合便于整体排版，仍可右键“取消组合”恢复为独立对象，也可进入组合内部单独选中某个图形修改。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "表格、图形与对象",
+    "knowledgePoint": "图形图片 SmartArt 与文本框",
+    "difficulty": "medium",
+    "tags": [
+      "组合",
+      "图形"
+    ]
+  },
+  {
+    "id": "ncre-office-word-graphic-06",
+    "type": "single_choice",
+    "question": "要让图片衬于文字下方、并可在页面上任意拖动位置，应设置（ ）。",
+    "options": {
+      "A": "环绕方式为“衬于文字下方”",
+      "B": "环绕方式为“嵌入型”",
+      "C": "环绕方式为“上下型”",
+      "D": "把图片放进页眉"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "“衬于文字下方”使图片浮动在文字层之下，可用作背景；嵌入型随文字移动，上下型会挤开文字而不能与文字重叠。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "表格、图形与对象",
+    "knowledgePoint": "图形图片 SmartArt 与文本框",
+    "difficulty": "hard",
+    "tags": [
+      "环绕方式",
+      "浮动"
+    ]
+  },
+  {
+    "id": "ncre-office-word-symbol-01",
+    "type": "single_choice",
+    "question": "在 Word 中插入“©”“®”“™”等特殊符号，应使用（ ）。",
+    "options": {
+      "A": "插入→图表",
+      "B": "插入→符号",
+      "C": "引用→插入题注",
+      "D": "开始→字体颜色"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "“插入→符号”提供按字体分类的符号表，也可通过“其他符号”按字符代码查找；常用符号还可设置自动更正。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "表格、图形与对象",
+    "knowledgePoint": "符号与数学公式",
+    "difficulty": "easy",
+    "tags": [
+      "符号",
+      "特殊字符"
+    ]
+  },
+  {
+    "id": "ncre-office-word-symbol-02",
+    "type": "single_choice",
+    "question": "在 Word 中插入分式、根式、积分等数学结构，应使用（ ）。",
+    "options": {
+      "A": "插入→SmartArt",
+      "B": "插入→公式",
+      "C": "插入→形状",
+      "D": "插入→艺术字"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "“插入→公式”提供公式工具选项卡和结构库，可直接选择分式、上下标、根式、积分、矩阵等结构并填写内容。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "表格、图形与对象",
+    "knowledgePoint": "符号与数学公式",
+    "difficulty": "easy",
+    "tags": [
+      "公式",
+      "数学结构"
+    ]
+  },
+  {
+    "id": "ncre-office-word-symbol-03",
+    "type": "single_choice",
+    "question": "在 Word 公式中输入 x 的平方，可使用（ ）。",
+    "options": {
+      "A": "公式工具中的“上下标”结构",
+      "B": "开始→加粗",
+      "C": "开始→字符底纹",
+      "D": "插入→书签"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "上下标结构提供上标、下标和同时上下标三种形式，选中结构后在虚线框中输入底数与指数即可。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "表格、图形与对象",
+    "knowledgePoint": "符号与数学公式",
+    "difficulty": "medium",
+    "tags": [
+      "公式",
+      "上下标"
+    ]
+  },
+  {
+    "id": "ncre-office-word-symbol-04",
+    "type": "single_choice",
+    "question": "要让公式居中、编号右对齐，最常用的做法是（ ）。",
+    "options": {
+      "A": "用空格手工对齐编号",
+      "B": "把编号写在公式上方一行",
+      "C": "把公式和编号放在同一个文本框内",
+      "D": "在公式所在段落设置居中制表位和右对齐制表位，用 Tab 分隔公式与编号"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "通过制表位把段落划分为“居中位置放公式、右边界放编号”两段，按 Tab 跳转，既对齐稳定又不影响后续编辑。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "表格、图形与对象",
+    "knowledgePoint": "符号与数学公式",
+    "difficulty": "medium",
+    "tags": [
+      "公式编号",
+      "制表位"
+    ]
+  },
+  {
+    "id": "ncre-office-word-symbol-05",
+    "type": "single_choice",
+    "question": "在 Word 中插入的公式默认（ ）。",
+    "options": {
+      "A": "以图片形式插入且不可编辑",
+      "B": "以链接方式引用外部文件",
+      "C": "作为可编辑的公式对象嵌入文档",
+      "D": "只能以纯文本显示"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Word 公式是原生对象，可随时双击修改结构和符号；若以图片插入则失去可编辑性，不利于后续调整。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "表格、图形与对象",
+    "knowledgePoint": "符号与数学公式",
+    "difficulty": "medium",
+    "tags": [
+      "公式",
+      "可编辑"
+    ]
+  },
+  {
+    "id": "ncre-office-word-symbol-06",
+    "type": "single_choice",
+    "question": "在 Word 中插入不间断连字符（防止单词在行末断开），应使用（ ）。",
+    "options": {
+      "A": "Ctrl+Shift+连字符",
+      "B": "Ctrl+连字符",
+      "C": "Shift+连字符",
+      "D": "Alt+连字符"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Ctrl+Shift+连字符插入不间断连字符，Word 不会在此处断行；Ctrl+连字符插入的是可选连字符，只在需要断行时才显示。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "表格、图形与对象",
+    "knowledgePoint": "符号与数学公式",
+    "difficulty": "medium",
+    "tags": [
+      "特殊字符",
+      "快捷键"
+    ]
+  },
+  {
+    "id": "ncre-office-word-symbol-07",
+    "type": "single_choice",
+    "question": "Word“符号”对话框中“字体”下拉框的作用是（ ）。",
+    "options": {
+      "A": "把符号转换为图片",
+      "B": "决定符号的颜色",
+      "C": "切换符号所属的字体集，以显示该字体包含的不同符号",
+      "D": "改变已插入符号的字号"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "不同字体包含不同的符号集合，例如“普通文本”提供标点与常用符号，Wingdings 提供图形符号，切换字体才能找到对应字符。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "表格、图形与对象",
+    "knowledgePoint": "符号与数学公式",
+    "difficulty": "hard",
+    "tags": [
+      "符号",
+      "字体集"
+    ]
+  },
+  {
+    "id": "ncre-office-word-symbol-08",
+    "type": "single_choice",
+    "question": "关于 Word 公式的“专业型”和“线性”两种显示格式，下列说法正确的是（ ）。",
+    "options": {
+      "A": "线性格式用单行文本表示公式，便于嵌入正文或复制到其他程序",
+      "B": "线性格式无法转换为专业型",
+      "C": "两种格式的打印效果完全相同",
+      "D": "专业型格式只能显示不能编辑"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "专业型按二维排版显示分式与根式，线性格式用 ^、/ 等符号写成一行，二者可互相转换，线性格式更适合纯文本环境。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "表格、图形与对象",
+    "knowledgePoint": "符号与数学公式",
+    "difficulty": "hard",
+    "tags": [
+      "公式",
+      "显示格式"
+    ]
+  },
+  {
+    "id": "ncre-office-word-mailmerge-01",
+    "type": "single_choice",
+    "question": "邮件合并的三个基本要素是（ ）。",
+    "options": {
+      "A": "模板、样式、主题",
+      "B": "表格、图表、图片",
+      "C": "页眉、正文、页脚",
+      "D": "主文档、数据源、合并域"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "主文档包含固定内容和合并域，数据源提供每条记录的字段值，合并时把域替换为具体数据生成多份文档。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "批量处理与自动化",
+    "knowledgePoint": "邮件合并",
+    "difficulty": "easy",
+    "tags": [
+      "邮件合并",
+      "基本要素"
+    ]
+  },
+  {
+    "id": "ncre-office-word-mailmerge-02",
+    "type": "single_choice",
+    "question": "邮件合并中，用于标记每条记录不同内容的占位符称为（ ）。",
+    "options": {
+      "A": "书签",
+      "B": "合并域",
+      "C": "题注",
+      "D": "交叉引用"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "合并域形如《姓名》，插入后在主文档中显示为占位符，合并时被数据源中对应字段的值替换。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "批量处理与自动化",
+    "knowledgePoint": "邮件合并",
+    "difficulty": "easy",
+    "tags": [
+      "合并域",
+      "占位符"
+    ]
+  },
+  {
+    "id": "ncre-office-word-mailmerge-03",
+    "type": "single_choice",
+    "question": "在邮件合并中要根据性别显示“先生”或“女士”，应使用（ ）。",
+    "options": {
+      "A": "“完成并合并”中的打印",
+      "B": "“插入合并域”中的“地址块”",
+      "C": "“编辑收件人列表”中的排序",
+      "D": "“规则”中的“如果…则…否则…”"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "如果…则…否则…规则按条件判断输出不同文本，还可嵌套使用，是实现个性化称呼的常用手段。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "批量处理与自动化",
+    "knowledgePoint": "邮件合并",
+    "difficulty": "medium",
+    "tags": [
+      "邮件合并",
+      "规则"
+    ]
+  },
+  {
+    "id": "ncre-office-word-mailmerge-04",
+    "type": "single_choice",
+    "question": "邮件合并可使用的数据源不包括（ ）。",
+    "options": {
+      "A": "纯图片文件",
+      "B": "Excel 工作表",
+      "C": "Access 数据库",
+      "D": "Outlook 联系人"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "数据源必须能提供结构化的字段记录，如 Excel 表、Access 表、Outlook 联系人、Word 表格或文本文件；图片不含字段结构。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "批量处理与自动化",
+    "knowledgePoint": "邮件合并",
+    "difficulty": "medium",
+    "tags": [
+      "邮件合并",
+      "数据源"
+    ]
+  },
+  {
+    "id": "ncre-office-word-mailmerge-05",
+    "type": "single_choice",
+    "question": "完成邮件合并后，若要把合并结果保存为可继续编辑的文档（每条记录独立成页），应选择（ ）。",
+    "options": {
+      "A": "“开始邮件合并→信函”",
+      "B": "“完成并合并→编辑单个文档”",
+      "C": "“完成并合并→发送电子邮件”",
+      "D": "“完成并合并→打印文档”"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "“编辑单个文档”会生成一份新文档，其中包含全部合并结果并按记录分页排列，可继续逐份修改后另存；打印和发送电子邮件则直接输出，不产生可编辑的汇总文档。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "批量处理与自动化",
+    "knowledgePoint": "邮件合并",
+    "difficulty": "hard",
+    "tags": [
+      "邮件合并",
+      "输出方式"
+    ]
+  },
+  {
+    "id": "ncre-office-word-macro-01",
+    "type": "single_choice",
+    "question": "在 Word 中录制宏时，宏会记录（ ）。",
+    "options": {
+      "A": "用户执行的一系列键盘和鼠标命令",
+      "B": "系统的硬件配置",
+      "C": "屏幕上的所有画面",
+      "D": "文档的全部文字内容"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "录制宏把操作序列翻译为 VBA 代码保存，回放时按顺序重现这些命令，因此适合重复性的格式与排版操作。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "批量处理与自动化",
+    "knowledgePoint": "控件宏与图文素材分析提取",
+    "difficulty": "easy",
+    "tags": [
+      "宏",
+      "录制"
+    ]
+  },
+  {
+    "id": "ncre-office-word-macro-02",
+    "type": "single_choice",
+    "question": "默认情况下，Word 把录制的宏保存在（ ）。",
+    "options": {
+      "A": "Normal.dotm 全局模板",
+      "B": "当前文档的页眉中",
+      "C": "系统的注册表",
+      "D": "文档的批注中"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "宏可保存在当前文档、当前文档模板或 Normal.dotm 中。保存在 Normal.dotm 的宏对所有新建文档可用。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "批量处理与自动化",
+    "knowledgePoint": "控件宏与图文素材分析提取",
+    "difficulty": "easy",
+    "tags": [
+      "宏",
+      "Normal.dotm"
+    ]
+  },
+  {
+    "id": "ncre-office-word-macro-03",
+    "type": "single_choice",
+    "question": "Word 中“内容控件”的主要用途是（ ）。",
+    "options": {
+      "A": "限制输入格式，并提供下拉列表、日期选择等结构化输入方式",
+      "B": "自动生成目录",
+      "C": "加密文档内容",
+      "D": "压缩文档中的图片"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "内容控件把可编辑区域限定为纯文本、富文本、图片、下拉列表、日期选择器等类型，常用于制作表单模板。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "批量处理与自动化",
+    "knowledgePoint": "控件宏与图文素材分析提取",
+    "difficulty": "medium",
+    "tags": [
+      "内容控件",
+      "表单"
+    ]
+  },
+  {
+    "id": "ncre-office-word-macro-04",
+    "type": "single_choice",
+    "question": "宏安全性设置为“禁用所有宏，并发出通知”时，打开含宏的文档会（ ）。",
+    "options": {
+      "A": "拒绝打开文档",
+      "B": "显示安全警告栏，由用户决定是否启用宏",
+      "C": "自动删除宏代码",
+      "D": "直接执行所有宏"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "该设置阻止宏自动运行，但保留用户主动启用的入口，是兼顾安全与可用性的常用配置。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "批量处理与自动化",
+    "knowledgePoint": "控件宏与图文素材分析提取",
+    "difficulty": "medium",
+    "tags": [
+      "宏安全性",
+      "安全警告"
+    ]
+  },
+  {
+    "id": "ncre-office-word-macro-05",
+    "type": "single_choice",
+    "question": "要修改已录制的宏的逻辑，应使用（ ）。",
+    "options": {
+      "A": "使用“查找和替换”",
+      "B": "开发工具→宏→选中宏→编辑，在 VBA 编辑器中修改代码",
+      "C": "重新录制一遍并覆盖",
+      "D": "把文档另存为 .docx"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "VBA 编辑器可查看和修改宏代码，实现录制无法完成的条件判断、循环和对话框交互。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "批量处理与自动化",
+    "knowledgePoint": "控件宏与图文素材分析提取",
+    "difficulty": "medium",
+    "tags": [
+      "宏",
+      "VBA"
+    ]
+  },
+  {
+    "id": "ncre-office-word-macro-06",
+    "type": "single_choice",
+    "question": "为宏指定快捷键时，下列说法正确的是（ ）。",
+    "options": {
+      "A": "不能与 Word 已有的快捷键冲突，否则原有功能会被覆盖",
+      "B": "宏不能指定快捷键",
+      "C": "可以任意指定，不会影响已有功能",
+      "D": "只能使用功能键 F1~F12"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "指定快捷键时若与现有命令重复，Word 会提示该组合已用于其他命令，继续设置将覆盖原功能，应选择未被占用的组合。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "批量处理与自动化",
+    "knowledgePoint": "控件宏与图文素材分析提取",
+    "difficulty": "medium",
+    "tags": [
+      "宏",
+      "快捷键"
+    ]
+  },
+  {
+    "id": "ncre-office-word-macro-07",
+    "type": "single_choice",
+    "question": "把常用的一段固定文字保存为“自动图文集”条目后，快速插入的方式是（ ）。",
+    "options": {
+      "A": "输入条目名称后按 F5",
+      "B": "按 Ctrl+Alt+Delete",
+      "C": "输入条目名称后按 F3",
+      "D": "按 Alt+F4"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "自动图文集（构建基块）保存后可输入名称按 F3 展开，也可从“插入→文档部件”中选择，适合复用标准条款与格式块。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "批量处理与自动化",
+    "knowledgePoint": "控件宏与图文素材分析提取",
+    "difficulty": "hard",
+    "tags": [
+      "自动图文集",
+      "构建基块"
+    ]
+  },
+  {
+    "id": "ncre-office-word-macro-08",
+    "type": "single_choice",
+    "question": "关于 Word 的“文档检查器”，下列说法正确的是（ ）。",
+    "options": {
+      "A": "它可以检查文档的拼写错误",
+      "B": "它可以压缩文档中的图片",
+      "C": "它可以修复损坏的文档结构",
+      "D": "它可以查找并删除批注、修订、隐藏文字和个人信息"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "文档检查器在“文件→信息→检查问题”中，用于对外发布前清理不宜外泄的元数据与协作痕迹，删除前可选择是否保留副本。",
+    "chapter": "Word 文档处理",
+    "knowledgeSection": "批量处理与自动化",
+    "knowledgePoint": "控件宏与图文素材分析提取",
+    "difficulty": "hard",
+    "tags": [
+      "文档检查器",
+      "元数据"
+    ]
+  }
+]

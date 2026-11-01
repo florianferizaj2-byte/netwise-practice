@@ -1,0 +1,729 @@
+[
+  {
+    "id": "hcip821-routing-tool-ipprefix-001",
+    "type": "single_choice",
+    "question": "在华为设备上使用路由过滤工具时，关于 IP-Prefix List 与基本 ACL 的能力差异，下列描述正确的是？",
+    "options": {
+      "A": "IP-Prefix List 可按掩码长度及 greater-equal/less-equal 匹配一段掩码范围；基本 ACL 依靠通配符匹配地址位，不能直接表达路由前缀的长度范围",
+      "B": "基本 ACL 通过通配符掩码可以精确区分 10.1.1.0/24 与 10.1.2.0/24 这两条前缀的掩码长度",
+      "C": "IP-Prefix List 只能匹配某一个固定掩码长度的前缀，无法表达掩码范围",
+      "D": "IP-Prefix List 用于过滤接口转发的数据报文，基本 ACL 只能用于过滤路由"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IP-Prefix List 由序号、IP 地址和掩码长度构成，并可配合 greater-equal/less-equal 限定掩码范围，因此能精确表达“本网段以及更具体或更宽泛的前缀”；基本 ACL 的规则由地址加通配符组成，通配符只决定哪些比特必须匹配，不携带“前缀长度”语义，无法直接区分两条长度不同的前缀。B 把 ACL 的能力说反了；C 否定了 greater-equal/less-equal 的作用；D 把两类工具的对象说反，IP-Prefix List 正是常用的路由过滤工具，而 ACL 既可过滤报文也可被路由策略引用。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "路由策略与路由控制",
+    "knowledgePoint": "路由控制工具",
+    "difficulty": "medium",
+    "tags": [
+      "IP-Prefix List",
+      "ACL",
+      "路由过滤"
+    ],
+    "provenance": {
+      "questionId": "hcip821-routing-tool-ipprefix-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“路由策略与路由控制 / 路由控制工具”，对应三级目录「路由和流量控制 / 路由策略与路由控制 / 路由控制工具」；IP-Prefix List 的掩码长度与 greater-equal/less-equal 语义、ACL 通配符不含前缀长度语义为设备公开配置行为，按该知识点边界独立命题。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "45a1784779d9cb79091bfc819c92e7aabf0d3e233a6f74a1a25a8798802d2bae"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-routing-tool-routepolicy-001",
+    "type": "single_choice",
+    "question": "某 Route-Policy 的节点 10 中同时配置了 if-match ip-prefix P1 和 if-match community-filter C1 两条不同类型的条件；节点 20 为 permit 且没有任何 if-match 子句。某条路由只匹配 P1、不匹配 C1。下列描述正确的是？",
+    "options": {
+      "A": "该路由进入节点 10 并执行节点 10 的 apply，因为同一节点内不同条件之间是“或”关系",
+      "B": "该路由不能进入节点 10，会继续匹配节点 20；节点 20 没有 if-match，默认匹配所有路由",
+      "C": "该路由直接进入节点 20，因为节点 10 只要有一个条件不满足就会停止整个 Route-Policy 的匹配",
+      "D": "该路由不匹配任何节点，最终被 Route-Policy 拒绝"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "同一节点的 if-match 子句中，不同类型条件之间是“与”关系，P1 与 C1 必须同时满足才会进入节点 10；只匹配 P1 时节点 10 不成立，随后继续按顺序匹配节点 20；节点 20 没有 if-match，视为匹配所有路由。A 把不同类别的条件说成“或”；C 错在“停止整个匹配”，单个节点不匹配只是继续向下；D 忽略了节点 20 的无条件匹配，只有所有节点都不匹配时才执行末尾隐含的拒绝动作。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "路由策略与路由控制",
+    "knowledgePoint": "路由控制工具",
+    "difficulty": "hard",
+    "tags": [
+      "Route-Policy",
+      "if-match",
+      "节点匹配"
+    ],
+    "provenance": {
+      "questionId": "hcip821-routing-tool-routepolicy-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“路由策略与路由控制 / 路由控制工具”，对应三级目录「路由和流量控制 / 路由策略与路由控制 / 路由控制工具」；同一节点内不同类型 if-match 为“与”、同类型为“或”，以及无 if-match 节点匹配所有路由，均为 Route-Policy 的公开配置语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "8538bbb4ec9db91671f948df0c165aeb026b5dff933ed94b7f5f2018c1fa6bee"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-routepolicy-import-001",
+    "type": "single_choice",
+    "question": "在 OSPF 进程中使用 import-route 引入外部路由，并调用了一个只包含两个 permit 节点（节点 10 匹配前缀 P1，节点 20 匹配前缀 P2）的 Route-Policy。对于既不匹配 P1 也不匹配 P2 的外部路由，默认结果是什么？",
+    "options": {
+      "A": "按 import-route 的默认参数全部引入",
+      "B": "随机选择其中一个节点引入",
+      "C": "被拒绝，不会引入 OSPF",
+      "D": "以 Type 7 LSA 引入到普通区域"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Route-Policy 的所有节点都不匹配时，末尾隐含的默认动作是拒绝，因此这些路由不会通过该 Route-Policy 被 import-route 引入；只有命中 permit 节点并经过 apply 处理的路由才会进入 OSPF。A 忽略了 Route-Policy 的过滤作用；B 不符合确定性的匹配过程；D 把“未匹配的路由”与 NSSA 的 Type 7 LSA 混为一谈，LSA 类型由区域类型和引入方式决定，与 Route-Policy 是否匹配无关。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "路由策略与路由控制",
+    "knowledgePoint": "路由策略应用",
+    "difficulty": "medium",
+    "tags": [
+      "Route-Policy",
+      "路由引入",
+      "OSPF"
+    ],
+    "provenance": {
+      "questionId": "hcip821-routepolicy-import-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“路由策略与路由控制 / 路由策略应用”，对应三级目录「路由和流量控制 / 路由策略与路由控制 / 路由策略应用」；Route-Policy 末尾隐含默认拒绝、import-route 仅在命中 permit 节点时引入，属于路由引入方向的公开配置行为。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "ca7164fea220ef4f4aef3c674670f9cee067e6330e910b440f6b89cb86969644"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-pbr-local-001",
+    "type": "single_choice",
+    "question": "关于华为设备上本地策略路由（Local PBR）与接口策略路由的区别，下列描述正确的是？",
+    "options": {
+      "A": "本地策略路由会自动应用到所有接口，优先级低于接口策略路由",
+      "B": "本地策略路由只对穿过设备转发的报文生效，接口策略路由只对设备自身产生的报文生效",
+      "C": "两者都只能匹配报文的目的地址，不能匹配源地址或协议",
+      "D": "本地策略路由只对设备自身产生的报文生效，接口策略路由对从指定接口进入的报文生效"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "本地策略路由在设备本地转发流程中生效，匹配对象是设备自身产生的报文；接口策略路由在接口入方向应用，匹配从该接口进入设备的报文。B 把两者的作用对象对调；C 错误，策略路由可基于 ACL 匹配源地址、目的地址、协议、端口等；A 错误，本地策略路由需要显式配置，并不会自动应用到所有接口，由于两者作用对象不同，也不存在“优先级低于接口策略路由”的固定关系。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "策略路由",
+    "difficulty": "medium",
+    "tags": [
+      "策略路由",
+      "Local PBR",
+      "转发"
+    ],
+    "provenance": {
+      "questionId": "hcip821-pbr-local-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“流量过滤与转发路径控制 / 策略路由”，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / 策略路由」；本地策略路由作用于本机产生报文、接口策略路由作用于接口入方向报文，为设备公开转发流程语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "5f5ff9c8c747d7dd824b8f3d1233179bbef6146e5224bd3fb06a5977fcd47fdd"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-mqc-compose-001",
+    "type": "single_choice",
+    "question": "在 MQC 中，流分类（traffic classifier）、流行为（traffic behavior）与流策略（traffic policy）的关系，下列描述正确的是？",
+    "options": {
+      "A": "一个流策略只能绑定一个流分类，一个流分类也只能包含一个流行为",
+      "B": "流行为必须先应用到接口，然后才能被流策略引用",
+      "C": "流策略把流分类与流行为绑定，再被应用到接口的某个方向",
+      "D": "流分类直接定义丢弃、重标记等动作，流行为只负责匹配报文"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "MQC 采用三段式：流分类用 if-match 定义“匹配什么”，流行为用动作定义“做什么”，流策略把若干“流分类＋流行为”绑定成整体并应用到接口方向。B 顺序颠倒，流策略才是最终被应用的对象；A 错误，一个流策略可以绑定多个流分类，同一流行为中也可组织多个动作；D 把匹配与动作的职责说反，动作定义在流行为中。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "MQC",
+    "difficulty": "medium",
+    "tags": [
+      "MQC",
+      "流分类",
+      "流策略"
+    ],
+    "provenance": {
+      "questionId": "hcip821-mqc-compose-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“流量过滤与转发路径控制 / MQC”，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / MQC」；流分类、流行为、流策略的三段式组合关系为 MQC 的公开配置模型。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "a49279f25551d73644e4ddbe9a6a407571065eca5d0ca81ebac686a91d7f35a1"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-mqc-direction-001",
+    "type": "single_choice",
+    "question": "管理员在路由器接口 GE0/0/1 上应用流策略，希望限制该接口向外部网络发送的流量速率。流策略应应用在哪个方向？",
+    "options": {
+      "A": "inbound 方向，因为要匹配进入接口的流量",
+      "B": "outbound 方向，因为要处理从该接口发出的流量",
+      "C": "inbound 和 outbound 必须同时配置，否则策略不生效",
+      "D": "流策略只能应用在全局视图，不能应用到接口"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "接口上的 inbound 处理从该接口进入设备的报文，outbound 处理从该接口发出的报文；要限制“从该接口发往外部”的流量，应在 outbound 方向应用流策略。A 方向相反；C 错误，流策略只需在需要控制的方向应用；D 错误，MQC 流策略可以应用到接口，部分场景还可应用到全局或 VLAN 等，但不是“只能全局”。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "MQC",
+    "difficulty": "medium",
+    "tags": [
+      "MQC",
+      "接口方向",
+      "流量监管"
+    ],
+    "provenance": {
+      "questionId": "hcip821-mqc-direction-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“流量过滤与转发路径控制 / MQC”，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / MQC」；接口 inbound/outbound 方向与流策略应用方向的对应关系为设备公开配置语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "71ec9888a0df29f317bb144bf07d3baafe086a582ccd6c4ee0031918ade2137e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-traffic-filter-direction-001",
+    "type": "single_choice",
+    "question": "在路由器接口 GE0/0/2 上配置 traffic-filter inbound，下列描述正确的是？",
+    "options": {
+      "A": "只过滤设备自身产生的报文，不影响转发报文",
+      "B": "对从 GE0/0/2 发出的报文按 ACL 规则过滤",
+      "C": "对路由表中的路由进行过滤，不影响数据报文转发",
+      "D": "对从 GE0/0/2 进入设备的报文按 ACL 规则过滤，命中 deny 的报文被丢弃"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "traffic-filter 是接口上的报文过滤，inbound 表示只处理从该接口进入设备的报文，匹配 ACL 中 deny 的报文被丢弃；outbound 才处理从该接口发出的报文。C 描述的是 filter-policy 等路由过滤工具的作用；A 错误，接口入方向的报文过滤针对进入接口的流量，设备自身产生的报文不会从该接口“进入”。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "流量过滤",
+    "difficulty": "easy",
+    "tags": [
+      "traffic-filter",
+      "ACL",
+      "接口过滤"
+    ],
+    "provenance": {
+      "questionId": "hcip821-traffic-filter-direction-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“流量过滤与转发路径控制 / 流量过滤”，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / 流量过滤」；接口 traffic-filter 的 inbound/outbound 方向与数据报文过滤语义为设备公开配置行为。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "c86281c4445a7ba5016f302a831639414f266bc568ae52921a5e5ff362b6a2ca"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-traffic-filter-order-001",
+    "type": "single_choice",
+    "question": "接口上配置 traffic-filter inbound，ACL 中依次有 rule 5 permit ip source 10.1.0.0 0.0.255.255 和 rule 10 deny ip。一个源地址为 10.1.2.3、目的地址为 172.16.1.1 的报文从该接口进入，结果是什么？",
+    "options": {
+      "A": "被 rule 10 拒绝，因为 deny 规则优先级更高",
+      "B": "被 rule 5 允许，因为 ACL 按规则编号从小到大匹配，命中后即停止",
+      "C": "两条规则都执行，最终以拒绝为准",
+      "D": "随机匹配其中一条规则"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "ACL 规则按编号从小到大依次匹配，报文源地址 10.1.2.3 落在 10.1.0.0 0.0.255.255（即 10.1.0.0/16）范围内，命中 rule 5 permit 后即停止，不再检查 rule 10。A 错在把 deny 当成优先；C 错在 ACL 不是“全部规则累计执行”；D 错在 ACL 匹配是确定性的。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "流量过滤",
+    "difficulty": "hard",
+    "tags": [
+      "ACL",
+      "规则顺序",
+      "通配符"
+    ],
+    "provenance": {
+      "questionId": "hcip821-traffic-filter-order-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页“流量过滤与转发路径控制 / 流量过滤”，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / 流量过滤」；ACL 按规则编号从小到大匹配、命中即停止，以及通配符 0.0.255.255 表示 /16，为设备公开配置语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "b76feac907030df2ca9d010f4aa52e577b05040b6e9df8f35a64e82af25f8750"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-fw-policy-order-001",
+    "type": "single_choice",
+    "question": "在华为防火墙上配置了多条安全策略，关于安全策略的匹配顺序，下列描述正确的是？",
+    "options": {
+      "A": "所有匹配的策略都会执行，最终动作由最后一条决定",
+      "B": "按策略名称的字典序匹配，最后一个匹配的策略生效",
+      "C": "按配置顺序从上到下匹配，命中第一条匹配的策略后按其动作处理，不再继续匹配",
+      "D": "策略之间相互独立，匹配哪一条是随机的"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "华为防火墙的安全策略按配置顺序从上到下匹配，报文命中第一条匹配的策略后即执行该策略的动作并停止匹配，因此策略顺序会直接影响结果。B、D 描述的匹配依据并不存在；A 错误，安全策略不是多条叠加执行，只有未命中任何策略时才执行默认动作。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "安全区域与策略",
+    "difficulty": "medium",
+    "tags": [
+      "防火墙",
+      "安全策略",
+      "匹配顺序"
+    ],
+    "provenance": {
+      "questionId": "hcip821-fw-policy-order-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“防火墙与设备安全 / 安全区域与策略”，对应三级目录「网络安全基础 / 防火墙与设备安全 / 安全区域与策略」；安全策略按配置顺序从上到下匹配、命中即停止，为华为防火墙公开配置语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "252ebac78c19069a2a490212f181b3bb56f11ad2901835432f72f3f56f491986"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-fw-default-deny-001",
+    "type": "single_choice",
+    "question": "某企业防火墙把内网接口加入 Trust 区域、外网接口加入 Untrust 区域。管理员没有配置任何安全策略，内网主机主动访问 Internet 的报文会怎样处理？",
+    "options": {
+      "A": "默认允许，因为 Trust 区域的优先级高于 Untrust 区域",
+      "B": "默认拒绝，因为区域间报文未命中任何安全策略时执行默认拒绝动作",
+      "C": "只允许 TCP 报文，拒绝 UDP 报文",
+      "D": "只允许 ICMP 回显请求，拒绝其他报文"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "华为防火墙对区域间流量按安全策略匹配处理，未命中任何安全策略时执行默认动作（拒绝），不会因为源区域优先级高就自动放行。A 把区域优先级当成放行依据；C、D 描述的按协议选择性放行需要显式策略，默认动作不会区分 TCP/UDP 或 ICMP。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "安全区域与策略",
+    "difficulty": "medium",
+    "tags": [
+      "防火墙",
+      "安全区域",
+      "默认动作"
+    ],
+    "provenance": {
+      "questionId": "hcip821-fw-default-deny-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“防火墙与设备安全 / 安全区域与策略”，对应三级目录「网络安全基础 / 防火墙与设备安全 / 安全区域与策略」；区域间报文未命中安全策略时执行默认拒绝动作，为华为防火墙公开配置语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "024bf7a8a74aa4e42f717f277a6688b6fa3c6a30c714162cde84bde8fd60a7e4"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-fw-local-zone-001",
+    "type": "single_choice",
+    "question": "管理员需要允许外部管理员通过 SSH 登录防火墙本身。在安全策略中，源安全区域和目的安全区域应如何设置？",
+    "options": {
+      "A": "源区域为 Untrust，目的区域为 Local",
+      "B": "源区域为 Local，目的区域为 Untrust",
+      "C": "源区域为 Trust，目的区域为 DMZ",
+      "D": "源区域为 Untrust，目的区域为 Trust"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "访问防火墙自身的管理流量，其目的区域是 Local 区域；外部管理员从 Untrust 侧发起 SSH，因此源区域为 Untrust、目的区域为 Local。B 方向相反，描述的是防火墙主动访问外部；C、D 的目的区域不是 Local，无法匹配“登录防火墙本身”的流量。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "安全区域与策略",
+    "difficulty": "medium",
+    "tags": [
+      "防火墙",
+      "Local 区域",
+      "SSH"
+    ],
+    "provenance": {
+      "questionId": "hcip821-fw-local-zone-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“防火墙与设备安全 / 安全区域与策略”，对应三级目录「网络安全基础 / 防火墙与设备安全 / 安全区域与策略」；访问防火墙自身的管理流量目的区域为 Local，为华为防火墙公开区域模型。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "53e3fa509644561800faeb946c5ad4fc8c7f91b82ae006eeac7e42ea971fd14f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-aaa-roles-001",
+    "type": "single_choice",
+    "question": "在 AAA 框架中，认证（Authentication）、授权（Authorization）与计费（Accounting）的职责，下列描述正确的是？",
+    "options": {
+      "A": "认证只用于路由协议邻居，授权只用于 VPN 隧道",
+      "B": "认证决定用户权限，授权验证用户身份，计费用于同步设备时钟",
+      "C": "认证与授权完全等价，计费只统计登录失败次数",
+      "D": "认证验证用户身份，授权决定用户可以执行的操作和访问的资源，计费记录资源使用情况"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "AAA 把访问控制拆成三部分：认证解决“是谁”，授权解决“能做什么”，计费记录“用了什么、用了多少”。B 把认证与授权的职责对调，计费也不是时钟同步；C 错在认为两者等价、计费只统计失败；A 把 AAA 的适用范围缩小到路由协议和 VPN，实际它广泛用于管理登录、网络接入等场景。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "设备安全特性",
+    "difficulty": "easy",
+    "tags": [
+      "AAA",
+      "认证",
+      "授权"
+    ],
+    "provenance": {
+      "questionId": "hcip821-aaa-roles-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“防火墙与设备安全 / 设备安全特性”，对应三级目录「网络安全基础 / 防火墙与设备安全 / 设备安全特性」；AAA 中认证、授权、计费的职责划分为通用访问控制模型。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "6cd5025c631734812331eede405a0ad9239e80119a91b6487b5e44b80185e19f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-device-login-defense-001",
+    "type": "single_choice",
+    "question": "为降低设备管理面被暴力破解的风险，下列措施中最有效的是哪一项？",
+    "options": {
+      "A": "使用 SNMPv1 只读团体名代替账号认证",
+      "B": "限制管理报文的源地址，配置登录失败次数限制与账号锁定，并优先使用 SSH 等加密管理协议",
+      "C": "对所有管理地址开放 Telnet，方便管理员随时登录",
+      "D": "关闭设备日志以减小攻击面"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "管理面防护应同时收紧“谁能连”和“能试多少次”：用 ACL 限制管理源地址、设置登录失败次数与账号锁定、使用 SSH 等加密协议，可显著降低暴力破解和口令窃听风险。C 扩大暴露面且 Telnet 明文传输；A 中 SNMPv1 团体名以明文传递，不能替代账号认证；D 关闭日志只会削弱审计和溯源，并不能阻止破解。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "防火墙与设备安全",
+    "knowledgePoint": "设备安全特性",
+    "difficulty": "medium",
+    "tags": [
+      "设备安全",
+      "登录防护",
+      "SSH"
+    ],
+    "provenance": {
+      "questionId": "hcip821-device-login-defense-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“防火墙与设备安全 / 设备安全特性”，对应三级目录「网络安全基础 / 防火墙与设备安全 / 设备安全特性」；管理源限制、登录失败锁定与加密管理协议属于设备登录安全的公开工程实践。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "cb7934063e73df891fd363fdb4acfe3611298ebba67df5e0d3a6e735761ea5b7"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-ipsec-ah-esp-001",
+    "type": "single_choice",
+    "question": "关于 IPsec 中 AH 与 ESP 的作用，下列描述正确的是？",
+    "options": {
+      "A": "AH 提供数据完整性和数据源认证但不加密报文，ESP 可以提供加密，并可选择性地提供完整性认证",
+      "B": "AH 提供报文加密，ESP 只提供路由选择",
+      "C": "AH 与 ESP 都只提供加密，不提供任何完整性保护",
+      "D": "AH 用于 NAT 穿越，ESP 用于建立 BGP 邻居"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "AH 对 IP 报文（含部分 IP 头字段）提供完整性和数据源认证，不提供机密性；ESP 可以对载荷加密，并可选择认证，因此实际 VPN 更常用 ESP。B 把加密能力错给 AH；C 否定两者都具备的完整性保护；D 中 NAT 穿越由 NAT-T 封装等机制处理，ESP 也不是 BGP 邻居建立协议。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VPN 技术概述",
+    "difficulty": "medium",
+    "tags": [
+      "IPsec",
+      "AH",
+      "ESP"
+    ],
+    "provenance": {
+      "questionId": "hcip821-ipsec-ah-esp-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4301-ipsec"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“VPN 与 VRF / VPN 技术概述”，对应三级目录「网络安全基础 / VPN 与 VRF / VPN 技术概述」；AH 与 ESP 的安全服务分工依据 RFC 4301 第 4.1、4.4 节的 IPsec 体系结构与安全关联处理。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲独立命题；AH/ESP 安全服务结论按 RFC 4301 原文核对，未复制第三方题目。",
+      "reviewDigest": "f3a08494c404289b6eea1153cb551c7c6f559723a6e447603116373cfc67885f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-vrf-rd-rt-001",
+    "type": "single_choice",
+    "question": "在 BGP/MPLS IP VPN 中，关于路由标识符（RD）与路由目标（RT）的区别，下列描述正确的是？",
+    "options": {
+      "A": "RD 用于加密 VPN 数据，RT 用于压缩 MPLS 标签",
+      "B": "RD 控制路由的导入导出，RT 用于区分相同地址前缀",
+      "C": "RD 与 RT 长度和作用完全相同，只是配置位置不同",
+      "D": "RD 用于把相同私网地址前缀转换成唯一的 VPN-IPv4 前缀，RT 作为扩展团体属性控制 VPN 路由的发布与接收"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "RD 加在 IPv4 前缀前形成 VPN-IPv4 前缀，使不同 VPN 中相同的私网地址在 MP-BGP 中不再冲突；RT 是 BGP 扩展团体属性，通过 import/export target 决定哪些 VPN 实例接收或发布哪些路由。B 把两者作用对调；C 错在作用不同；A 与加密、标签压缩无关。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VRF",
+    "difficulty": "hard",
+    "tags": [
+      "VRF",
+      "RD",
+      "RT",
+      "MP-BGP"
+    ],
+    "provenance": {
+      "questionId": "hcip821-vrf-rd-rt-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4364-mpls-vpn"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“VPN 与 VRF / VRF”，对应三级目录「网络安全基础 / VPN 与 VRF / VRF」；RD 形成 VPN-IPv4 前缀、RT 控制 VPN 路由导入导出，依据 RFC 4364 第 4.1-4.3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲独立命题；RD/RT 作用按 RFC 4364 原文核对，未复制第三方题目。",
+      "reviewDigest": "0929508e5eb6838b33fe63e5f35730a0a4fa197c69580c8625b80c1c91580b26"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-bfd-detect-time-001",
+    "type": "single_choice",
+    "question": "两台路由器建立 BFD 会话，协商后的报文发送间隔为 300 ms，本地检测倍数（Detect Mult）为 3。在异步模式下，本地检测时间约为多少？",
+    "options": {
+      "A": "100 ms",
+      "B": "300 ms",
+      "C": "900 ms",
+      "D": "1200 ms"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "异步模式下检测时间由“协商后的发送间隔 × Detect Mult”决定，300 ms × 3 = 900 ms；检测时间还受抖动和实现影响，题目取 900 ms 这一理论值。100 ms 是 300 除以 3 的错误算法；300 ms 只算了单个发送间隔，没有乘检测倍数；1200 ms 相当于按 4 倍计算，与 Detect Mult=3 不符。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "BFD",
+    "knowledgePoint": "BFD 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BFD",
+      "检测时间",
+      "Detect Mult"
+    ],
+    "provenance": {
+      "questionId": "hcip821-bfd-detect-time-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc5880-bfd"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“网络可靠性 / BFD”，对应三级目录「网络可靠性 / BFD / BFD 原理与配置」；异步模式检测时间=协商发送间隔×Detect Mult，依据 RFC 5880 第 6.8.4 节“Calculating the Detection Time”。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲独立命题；检测时间计算按 RFC 5880 原文核对并独立复算，未复制第三方题目。",
+      "reviewDigest": "edb33f6744000b9988d9bc7fb5503e7fd6f5ada6f3e14316ada75f653e3f49fb"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-bfd-echo-001",
+    "type": "single_choice",
+    "question": "关于 BFD 的 Echo 功能，下列描述正确的是？",
+    "options": {
+      "A": "本端发送 Echo 报文，由对端在转发路径上环回，从而检测对端转发面；启用 Echo 后可降低控制报文的发送频率",
+      "B": "Echo 功能要求对端必须运行 BGP，否则无法环回",
+      "C": "Echo 报文由对端主动发起，本端只负责环回",
+      "D": "启用 Echo 后必须关闭异步模式，改为纯按需模式"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Echo 功能把 Echo 报文发到对端，由对端沿转发路径环回，本端据此判断转发面是否正常；由于 Echo 承担了检测任务，异步模式下可降低控制报文频率，按需模式下甚至可以取消周期控制报文。B 错误，BFD 与具体路由协议解耦；C 方向说反；D 错误，Echo 是异步或按需模式的附加功能，不必关闭异步模式。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "BFD",
+    "knowledgePoint": "BFD 原理与配置",
+    "difficulty": "hard",
+    "tags": [
+      "BFD",
+      "Echo",
+      "转发面检测"
+    ],
+    "provenance": {
+      "questionId": "hcip821-bfd-echo-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc5880-bfd"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“网络可靠性 / BFD”，对应三级目录「网络可靠性 / BFD / BFD 原理与配置」；Echo 报文环回检测转发面、启用后可降低控制报文频率，依据 RFC 5880 第 3.2 节“Operating Modes”与第 6.4 节“The Echo Function and Asymmetry”。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲独立命题；BFD Echo 机制按 RFC 5880 原文核对，未复制第三方题目。",
+      "reviewDigest": "abc32f5a5e1f6edad869c544de00394f8d73b6e73a79c27ae8f239d071b3900d"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-bfd-handshake-001",
+    "type": "single_choice",
+    "question": "BFD 在会话建立和拆除时采用三次握手，其主要目的是什么？",
+    "options": {
+      "A": "在会话建立前完成路由表同步",
+      "B": "减少 BFD 报文数量，节省带宽",
+      "C": "替代路由协议的 Hello 报文完成邻居发现",
+      "D": "确保双方都感知到会话状态的变化，避免一方误判"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "BFD 的状态机在建立和拆除会话时都执行三次握手，使两端对状态迁移达成一致，避免一端认为 Up、另一端认为 Down 的不一致。B 错误，三次握手不是为了省带宽；C 错误，BFD 没有邻居发现机制，会话由应用（如 OSPF）触发；A 错误，BFD 只做转发路径检测，不交换路由表。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "BFD",
+    "knowledgePoint": "BFD 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BFD",
+      "状态机",
+      "三次握手"
+    ],
+    "provenance": {
+      "questionId": "hcip821-bfd-handshake-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc5880-bfd"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“网络可靠性 / BFD”，对应三级目录「网络可靠性 / BFD / BFD 原理与配置」；会话建立和拆除采用三次握手以确保双方状态一致，依据 RFC 5880 第 2 节“Design”。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲独立命题；BFD 状态机握手目的按 RFC 5880 原文核对，未复制第三方题目。",
+      "reviewDigest": "f6e8eb771eff4913bc4dc9c8b929690ca3ba59aec479cd4549c16a50eae3fa80"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-bfd-static-route-001",
+    "type": "single_choice",
+    "question": "静态路由联动 BFD 后，如果 BFD 会话检测到下一跳不可达，静态路由的默认表现是什么？",
+    "options": {
+      "A": "静态路由被自动转换成 OSPF 外部路由",
+      "B": "静态路由的出接口被自动改为 Loopback0",
+      "C": "该静态路由失效并从路由表中撤销，流量改走其他可用路由",
+      "D": "静态路由的下一跳被自动改为对端的管理地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "静态路由联动 BFD 的作用是用 BFD 快速感知下一跳可达性；会话 Down 时，关联的静态路由被置为无效并撤销，从而让备份路由或动态路由接管，缩短黑洞时间。B、D 属于自动改写路由属性，设备不会这样做；A 错误，静态路由不会因为 BFD Down 自动变成 OSPF 外部路由。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "BFD",
+    "knowledgePoint": "BFD 原理与配置",
+    "difficulty": "hard",
+    "tags": [
+      "BFD",
+      "静态路由",
+      "联动"
+    ],
+    "provenance": {
+      "questionId": "hcip821-bfd-static-route-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“网络可靠性 / BFD”，对应三级目录「网络可靠性 / BFD / BFD 原理与配置」；静态路由联动 BFD 后会话 Down 即撤销关联静态路由，属于设备可靠性配置的公开工程实践，题干与解析按该行为边界设计。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲独立命题；静态路由与 BFD 联动行为按设备公开配置语义核对，未复制第三方题目。",
+      "reviewDigest": "d8915b8c8c5f2ea3d4f98625cb335b4cdbd41dd7810e6388c8ccef56bf092a3e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-vrrp-virtual-mac-001",
+    "type": "single_choice",
+    "question": "在 VRRP for IPv4 中，VRID 为 10 的备份组使用的虚拟 MAC 地址是下列哪一个？",
+    "options": {
+      "A": "00-00-5E-00-01-0A",
+      "B": "00-00-5E-00-02-0A",
+      "C": "00-00-5E-7F-00-0A",
+      "D": "对端路由器接口的真实 MAC 地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "VRRP for IPv4 的虚拟 MAC 地址格式为 00-00-5E-00-01-{VRID}，VRID 10 的十六进制是 0A，因此是 00-00-5E-00-01-0A；主机使用该虚拟 MAC 作为网关对应的链路层地址，Master 切换后无需主机改配置。B 使用了 IPv6 VRRP 的 00-00-5E-00-02 段；C 不符合 VRRP 的固定格式；D 会让主机在 Master 切换后继续把流量发往原设备，失去冗余意义。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "easy",
+    "tags": [
+      "VRRP",
+      "虚拟 MAC",
+      "VRID"
+    ],
+    "provenance": {
+      "questionId": "hcip821-vrrp-virtual-mac-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc5798-vrrp"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页“网络可靠性 / VRRP”，对应三级目录「网络可靠性 / VRRP / VRRP 原理与配置」；VRRP for IPv4 虚拟 MAC 格式 00-00-5E-00-01-{VRID} 依据 RFC 5798 第 7.3 节“Virtual Router MAC Address”。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲独立命题；VRRP 虚拟 MAC 映射按 RFC 5798 原文核对，未复制第三方题目。",
+      "reviewDigest": "02a9b099141d3955f27be53f0ab8682c033b36037d7d63d6fe806a75d9c69f7a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  }
+]

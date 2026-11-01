@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="author_help" translatable="false">求助作者</string>
+    <string name="author_help_title" translatable="false">添加作者微信</string>
+    <string name="author_friend_code_description" translatable="false">作者微信好友二维码</string>
+    <string name="author_help_hint" translatable="false">可截图后，在微信“扫一扫”中从相册识别二维码。</string>
+    <string name="author_help_close" translatable="false">关闭</string>
+</resources>

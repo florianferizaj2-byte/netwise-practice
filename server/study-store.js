@@ -153,7 +153,7 @@ export function createStudyStore(db) {
       audit(actor, "study_generated", id, { nodeId: node.id, accepted: generated.accepted });
       return api.package(id);
     },
-    publish(id, actor, node) {
+    publish(id, actor, node, onCommit) {
       return transaction(() => {
         const item = api.package(id);
         if (!item || !["awaiting_review", "published"].includes(item.status)) throw studyError("内容未通过复核，不能发布");
@@ -162,6 +162,7 @@ export function createStudyStore(db) {
         db.prepare(`INSERT INTO study_publications (node_id,curriculum_version,package_id) VALUES (?,?,?)
           ON CONFLICT(node_id,curriculum_version) DO UPDATE SET package_id=excluded.package_id`).run(node.id, node.version, id);
         audit(actor, "study_published", id, { nodeId: node.id, contentHash: item.content_hash });
+        onCommit?.(api.package(id));
         return api.package(id);
       });
     },

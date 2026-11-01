@@ -1,0 +1,783 @@
+[
+  {
+    "id": "hcip831-mpls-static-lsp-001",
+    "type": "single_choice",
+    "question": "两台设备之间通过静态 LSP 承载业务。关于静态 LSP 的配置，下列描述正确的是？",
+    "options": {
+      "B": "静态 LSP 是单向的，需要为两个方向分别配置入标签、出标签和下一跳",
+      "C": "静态 LSP 是双向的，只需在 Ingress 设备上配置一条 LSP 即可",
+      "D": "静态 LSP 依赖 LDP 协商标签，必须先建立 LDP 会话",
+      "A": "静态 LSP 只需在 Egress 设备上配置出标签，沿途设备会自动分配标签"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "静态 LSP 由管理员在沿途各 LSR 上逐跳手工指定入标签、出标签和下一跳，没有标签分发信令参与；一条 LSP 只负责一个转发方向，因此双向业务需要在两个方向分别配置，B 正确。C 错误：静态 LSP 不是双向的，Ingress 单端配置无法让反向流量获得标签。D 错误：静态 LSP 正是为不运行 LDP 的场景提供标签转发，不依赖 LDP 会话。A 错误：沿途设备不会自动分配标签，必须逐跳手工配置。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS 原理与配置",
+    "knowledgePoint": "静态 LSP",
+    "difficulty": "medium",
+    "tags": [
+      "MPLS",
+      "静态 LSP",
+      "标签转发",
+      "单向"
+    ],
+    "provenance": {
+      "questionId": "hcip831-mpls-static-lsp-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc3031-mpls",
+        "rfc3032-mpls-label"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 3 页“MPLS 原理与配置 / 静态 LSP”；对应「MPLS 技术 / MPLS 原理与配置 / 静态 LSP」；入标签/出标签与下一跳的标签交换转发依据 RFC 3031 第 3、4 节，标签栈项与标签操作依据 RFC 3032 第 2.1 节；静态 LSP 的单向性与逐跳手工配置属设备工程实践。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开大纲与公开 RFC 3031/3032 独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "957d508db94a81a6a9cad8b0a0be40987544ad25b3c57eb70da93151630e52fa"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-mpls-vpn-rt-001",
+    "type": "single_choice",
+    "question": "PE 上为某个 VRF 配置了 export-extcommunity 与 import-extcommunity。关于 RT 在 MPLS VPN 路由交互中的作用，下列描述正确的是？",
+    "options": {
+      "A": "本端 VRF 导出的 VPNv4 路由携带 export RT；对端 PE 用自身 VRF 的 import RT 与之匹配，匹配成功才把该路由导入对应 VRF",
+      "B": "export RT 决定哪些 VPNv4 路由可以导入本端 VRF",
+      "C": "import RT 会随 VPNv4 路由通告给对端，由对端用它决定是否导出",
+      "D": "RT 匹配的是 VPNv4 前缀中的 RD，与 RT 属性本身无关"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "RT 是 BGP 扩展团体属性：本端把 VRF 路由导出为 VPNv4 路由时附加 export RT，对端收到后，只有路由携带的 RT 与本端 VRF 的某个 import RT 相同时，该路由才“有资格”被导入这个 VRF，因此 A 正确。B 错误：export RT 决定本端导出路由携带什么标记，import RT 才决定本端 VRF 接收哪些路由。C 错误：随路由通告的是 export RT，import RT 是本地接收策略，不会作为路由属性发出去。D 错误：RT 是独立的扩展团体属性，与 RD 的字段和用途都不同。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 路由交互",
+    "difficulty": "medium",
+    "tags": [
+      "MPLS VPN",
+      "RT",
+      "import",
+      "export",
+      "VRF"
+    ],
+    "provenance": {
+      "questionId": "hcip831-mpls-vpn-rt-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4364-mpls-vpn",
+        "rfc4577-ospf-vpn",
+        "rfc4360-extended-community"
+      ],
+      "locator": "自编题；范围依据大纲第 3 页“MPLS VPN 原理与配置 / MPLS VPN 路由交互”；对应「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 路由交互」；RT 作为 BGP 扩展团体属性依据 RFC 4360 第 2、4 节，RT 导入导出控制 VRF 路由的依据为 RFC 4364 第 4.1-4.3 节与 RFC 4577 第 4.1.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开大纲与公开 RFC 4360/4364/4577 独立命题，RT 导入导出语义按 RFC 原文核对，未复制第三方题目。",
+      "reviewDigest": "77031166be75b36d36de4895a00a422c24d07f1abe20bdb15de6cc101bc5e9aa"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-mpls-vpn-vpnv4-001",
+    "type": "single_choice",
+    "question": "MP-BGP 在 PE 之间传递 VPNv4 路由。关于 VPNv4 路由中的 RD 与随路由分配的私网标签，下列描述正确的是？",
+    "options": {
+      "C": "RD 加在私网 IPv4 前缀前，用于区分不同 VPN 中相同的私网前缀；私网标签由 Egress PE 分配，用于把报文转发到正确的 VRF",
+      "D": "RD 用于在公网中转发报文，私网标签用于区分不同 VPN",
+      "A": "RD 和私网标签都只在 PE 本地有效，不会随路由通告",
+      "B": "VPNv4 路由不携带标签，私网标签由 LDP 单独分发"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "VPNv4 路由由 RD 加私网 IPv4 前缀构成，RD 使不同 VPN 中相同的私网地址可以共存并被唯一区分；Egress PE 为导入 VRF 的路由分配私网标签，并通过 MP-BGP 通告，Ingress PE 用该标签让报文在 Egress PE 上进入正确 VRF，因此 C 正确。D 错误：RD 用于区分前缀，不承担公网转发；公网转发依赖外层公网标签。A 错误：RD 和私网标签都会随 VPNv4 路由通告。B 错误：VPNv4 路由确实携带私网标签，不是由 LDP 分发。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 原理与配置",
+    "knowledgePoint": "MPLS VPN 路由交互",
+    "difficulty": "hard",
+    "tags": [
+      "MPLS VPN",
+      "VPNv4",
+      "RD",
+      "私网标签"
+    ],
+    "provenance": {
+      "questionId": "hcip831-mpls-vpn-vpnv4-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4364-mpls-vpn"
+      ],
+      "locator": "自编题；范围依据大纲第 3 页“MPLS VPN 路由交互”；对应「MPLS 技术 / MPLS VPN 原理与配置 / MPLS VPN 路由交互」；VPNv4 路由由 RD 加 IPv4 前缀构成、RD 用于区分相同私网前缀、私网标签由 Egress PE 分配并随路由通告，依据 RFC 4364 第 4.1-4.3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开大纲与公开 RFC 4364 独立命题，VPNv4 与私网标签语义按 RFC 原文核对，未复制第三方题目。",
+      "reviewDigest": "e67f59c24817605baf58e82c3138ad70485e879a854f45dcb23833649ffb0c10"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-mpls-vpn-ospf-loop-001",
+    "type": "single_choice",
+    "question": "MPLS VPN 中 PE 与 CE 之间运行 OSPF。为防止从 VPN 学到的 Type 3 LSA 再被注入其他站点而形成环路，PE 通常采用什么机制？",
+    "options": {
+      "B": "PE 向 CE 发送 LSA 时设置 DN 位（或使用 OSPF 路由标记），并忽略从 CE 收到的已带该标记的 LSA",
+      "C": "把 Type 3 LSA 的 Age 字段置为最大值",
+      "D": "把 Type 3 LSA 转换为 Type 7 LSA 后再发送",
+      "A": "关闭 PE 与 CE 之间的 OSPF 认证"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "OSPF VPN 通过防环标记避免路由在 VPN 站点之间被反复注入：PE 向 CE 发送 LSA 时设置 DN 位（较早实现使用 OSPF 路由标记），PE 收到 CE 送来的、已带该标记的 LSA 时予以忽略，因此 B 正确。C 错误：修改 Age 字段会触发 LSA 老化，不能实现防环。D 错误：把 Type 3 转换为 Type 7 会改变路由性质，不是防环机制。A 错误：关闭认证会削弱安全，与防环无关。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "hard",
+    "tags": [
+      "MPLS VPN",
+      "OSPF VPN",
+      "DN 位",
+      "防环"
+    ],
+    "provenance": {
+      "questionId": "hcip831-mpls-vpn-ospf-loop-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4577-ospf-vpn"
+      ],
+      "locator": "自编题；范围依据大纲第 3 页“MPLS VPN 典型应用与 OSPF VPN 拓展”；对应「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」；PE 通过 DN 位或 OSPF 路由标记防止 LSA 回注形成环路的机制依据 RFC 4577 第 4.1.5、4.2.5.1、4.2.5.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开大纲与公开 RFC 4577 独立命题，OSPF VPN 防环机制按 RFC 原文核对，未复制第三方题目。",
+      "reviewDigest": "933c36c23ebec3db6b4318d561babe6afacc8566722de74a134ab21b0d16094c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-maintenance-inspection-001",
+    "type": "single_choice",
+    "question": "设备日常巡检中，下列做法最有助于提前发现潜在故障的是？",
+    "options": {
+      "D": "定期检查 CPU/内存利用率、接口错包与光功率、温度及日志告警，并记录基线趋势",
+      "A": "只在业务中断后再检查接口状态",
+      "B": "每天定时重启设备以释放资源",
+      "C": "只核对配置文件是否被修改"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "日常巡检的价值在于通过周期性采集资源利用率、接口错包、光功率、温度、告警等指标并与基线对比，发现异常趋势，在故障发生前处理，因此 D 正确。A 错误：业务中断后才检查属于被动响应，不能提前发现隐患。B 错误：定时重启会中断业务且掩盖问题根因，不是维护手段。C 错误：只检查配置变化会漏掉硬件劣化、资源耗尽等运行状态问题。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "easy",
+    "tags": [
+      "日常维护",
+      "巡检",
+      "基线",
+      "告警"
+    ],
+    "provenance": {
+      "questionId": "hcip831-maintenance-inspection-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据大纲第 3 页“网络运维 / 日常维护”；对应「网络运维 / 网络运维 / 日常维护」；资源利用率、接口错包、光功率、温度与告警的周期性巡检属运维工程实践，未引用未核验的厂商文档。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲范围并结合设备运维巡检的通用实践独立命题，未复制第三方题目。",
+      "reviewDigest": "035ad8dd62766ccfd3c7a1645c1efdf42e50fbb09eb207935218dc4b6d5b0e23"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-maintenance-log-time-001",
+    "type": "single_choice",
+    "question": "多台设备把日志集中发送到日志服务器后，为了让不同设备的日志能够按时间正确排序和关联分析，通常还应完成哪项配置？",
+    "options": {
+      "A": "统一部署 NTP，使各设备的系统时间保持同步",
+      "B": "把所有设备的日志级别都调整为 debugging",
+      "C": "关闭设备本地日志，只保留服务器上的日志",
+      "D": "为每台设备配置不同的日志服务器端口"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "日志服务器按时间戳排序和关联的前提是各设备时钟一致，因此需要统一部署 NTP 同步系统时间，A 正确。B 错误：调整日志级别只改变日志详略，不能解决时间不一致。C 错误：关闭本地日志会降低故障现场保留能力，且与时间同步无关。D 错误：使用不同端口不会统一时间，反而增加管理复杂度。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "日常维护",
+    "difficulty": "easy",
+    "tags": [
+      "日常维护",
+      "NTP",
+      "日志",
+      "时间同步"
+    ],
+    "provenance": {
+      "questionId": "hcip831-maintenance-log-time-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5905-ntp",
+        "rfc5424-syslog"
+      ],
+      "locator": "自编题；范围依据大纲第 3 页“网络运维 / 日常维护”；对应「网络运维 / 网络运维 / 日常维护」；NTP 同步设备时钟的作用依据 RFC 5905 第 2、3 节，syslog 消息时间戳字段依据 RFC 5424 第 6.2.3 节；集中日志需统一时间属运维工程实践。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开大纲与公开 RFC 5905/5424 独立命题，时间同步与日志时间戳语义按 RFC 原文核对，未复制第三方题目。",
+      "reviewDigest": "ff5868a4d9aad64404aeec7721b0d3e0cb77016b59b1a3dc3b5e1cc5c0a5b811"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-info-collect-buffer-001",
+    "type": "single_choice",
+    "question": "需要分别查看设备最近产生的告警信息和日志信息，应使用下列哪组功能？",
+    "options": {
+      "C": "display trapbuffer 查看告警缓冲区，display logbuffer 查看日志缓冲区",
+      "D": "display version 查看告警，display clock 查看日志",
+      "A": "display interface 查看告警，display ip routing-table 查看日志",
+      "B": "display current-configuration 可以同时替代告警和日志"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "华为设备用 trapbuffer 保存告警（Trap）信息，用 logbuffer 保存日志信息，分别通过 display trapbuffer 和 display logbuffer 查看，因此 C 正确。D 错误：display version 显示版本与硬件信息，display clock 显示系统时间，二者都不是告警或日志查询命令。A 错误：display interface 显示接口状态，display ip routing-table 显示路由表，均不是告警/日志缓冲区。B 错误：display current-configuration 显示当前配置，不能代替告警和日志记录。",
+    "chapter": "网络运维",
+    "knowledgeSection": "网络运维",
+    "knowledgePoint": "信息收集工具",
+    "difficulty": "easy",
+    "tags": [
+      "信息收集",
+      "trapbuffer",
+      "logbuffer",
+      "告警"
+    ],
+    "provenance": {
+      "questionId": "hcip831-info-collect-buffer-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据大纲第 3 页“网络运维 / 信息收集工具”；对应「网络运维 / 网络运维 / 信息收集工具」；trapbuffer 保存告警、logbuffer 保存日志及对应 display 命令属设备工程实践，未引用未核验的厂商文档。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲范围并结合设备信息收集命令的常见语义独立命题，未复制第三方题目。",
+      "reviewDigest": "18d3cea772cfe3bcbd153ca95604bfbc73acb0da5d02ac6e5be08e0d2bc1e720"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-troubleshoot-define-001",
+    "type": "single_choice",
+    "question": "结构化故障排除流程中，“定义问题”阶段最重要的输出是什么？",
+    "options": {
+      "B": "明确故障现象、影响范围、发生时间和可复现条件，形成可验证的问题描述",
+      "C": "立即更换最可疑的硬件",
+      "D": "直接提交网络割接申请",
+      "A": "关闭所有相关接口以隔离故障"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "定义问题是结构化排障的起点：只有把现象、影响范围、发生时间、可复现条件描述清楚，后续收集信息和验证才有明确目标，因此 B 正确。C 错误：更换硬件属于处置动作，发生在定位之后。D 错误：故障排除不是割接变更流程。A 错误：关闭全部接口会扩大故障影响，不是定义问题的输出。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "easy",
+    "tags": [
+      "故障排除",
+      "结构化流程",
+      "定义问题"
+    ],
+    "provenance": {
+      "questionId": "hcip831-troubleshoot-define-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据大纲第 3 页“故障排除方法 / 结构化流程”；对应「网络故障排除 / 故障排除方法 / 结构化流程」；定义问题阶段应形成可验证问题描述属排障方法论工程实践。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲范围并结合结构化排障方法论独立命题，未复制第三方题目。",
+      "reviewDigest": "be42623f789953c05663b810b2566a80f31cda55bc097369d2a001f238146256"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-troubleshoot-baseline-001",
+    "type": "single_choice",
+    "question": "结构化故障排除流程中，收集信息阶段应重点收集哪些内容？",
+    "options": {
+      "D": "网络拓扑与配置基线、接口和协议运行状态、日志与告警、性能指标以及近期变更记录",
+      "A": "只收集用户的口头描述，不查看设备运行数据",
+      "B": "只保存当前时刻的一张网络拓扑图",
+      "C": "只收集设备的硬件序列号和厂商信息"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "信息收集要覆盖配置、运行状态、日志告警、性能指标和变更记录等多个维度，才能为后续原因分析提供足够证据，因此 D 正确。A 错误：只凭用户描述缺乏客观数据，难以定位问题。B 错误：单张拓扑图不能反映协议状态、日志和性能等信息。C 错误：硬件序列号只在特定硬件问题中才需要，不能作为信息收集的主要内容。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "信息收集",
+      "结构化流程"
+    ],
+    "provenance": {
+      "questionId": "hcip831-troubleshoot-baseline-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据大纲第 3 页“故障排除方法 / 结构化流程”；对应「网络故障排除 / 故障排除方法 / 结构化流程」；信息收集阶段应覆盖配置基线、运行状态、日志告警、性能指标与变更记录属排障方法论工程实践。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲范围并结合结构化排障方法论独立命题，未复制第三方题目。",
+      "reviewDigest": "06cceba7db57f3336ca7f9b85e7564adeb2f570b62d7c1883a497a2d20a9f737"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-troubleshoot-verify-001",
+    "type": "single_choice",
+    "question": "按方案完成修复后，结构化故障排除流程的最后一步应当做什么？",
+    "options": {
+      "A": "验证业务和协议状态已恢复，记录根因与处理过程，必要时更新维护文档和监控",
+      "B": "只要设备不再产生告警就直接结束，无需验证业务",
+      "C": "立即清空全部日志以释放存储空间",
+      "D": "直接关闭工单，不必记录根因"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "修复后的验证是闭环的关键：要确认业务可用、协议状态正常，并记录根因、处理过程和后续改进，避免同类问题重复发生，因此 A 正确。B 错误：告警消失不等于业务恢复，必须验证业务。C 错误：清空日志会破坏证据，应保留必要记录。D 错误：不记录根因会导致问题无法复盘。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "结构化流程",
+    "difficulty": "easy",
+    "tags": [
+      "故障排除",
+      "验证",
+      "闭环",
+      "根因"
+    ],
+    "provenance": {
+      "questionId": "hcip831-troubleshoot-verify-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据大纲第 3 页“故障排除方法 / 结构化流程”；对应「网络故障排除 / 故障排除方法 / 结构化流程」；修复后验证业务与协议状态并记录根因属排障闭环的工程实践。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲范围并结合结构化排障方法论独立命题，未复制第三方题目。",
+      "reviewDigest": "77193c81a842cedd6b5551ffb6aeef3524ec348dedd05e9fbedb3bd960c0d831"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-troubleshoot-layer-001",
+    "type": "single_choice",
+    "question": "用户反映无法访问某台服务器。按分层排查思路，通常应首先确认什么？",
+    "options": {
+      "C": "物理层和链路层状态，例如接口是否 up、光模块与线缆是否正常、VLAN 和链路是否连通",
+      "D": "应用服务器的数据库索引是否合理",
+      "A": "直接检查应用层日志并逐层向下排查",
+      "B": "同时更换所有网络设备以排除硬件问题"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "分层排查通常从底层向上逐层确认：先排除物理层和链路层问题（接口状态、光模块、线缆、VLAN 连通性），再检查 IP 路由、传输层和上层应用，因此 C 正确。D 错误：数据库索引属于应用层细节，不应作为第一检查点。A 错误：应从底层向上，而不是从应用层向下。B 错误：同时更换所有设备代价过大且会扩大影响。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "分层排查",
+      "物理层",
+      "链路层"
+    ],
+    "provenance": {
+      "questionId": "hcip831-troubleshoot-layer-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据大纲第 3 页“故障排除方法 / 核心思想和方法”；对应「网络故障排除 / 故障排除方法 / 核心思想和方法」；自下而上的分层排查属排障方法论工程实践。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲范围并结合分层排查方法论独立命题，未复制第三方题目。",
+      "reviewDigest": "1fcaaa2e433c9fe1c4df4f26bc082b70d60fe04968420ee047097300287c4d0a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-troubleshoot-compare-001",
+    "type": "single_choice",
+    "question": "使用对比法排查网络故障，典型做法是？",
+    "options": {
+      "B": "把故障设备或链路的配置、运行状态与正常设备或链路逐项对比，找出差异项",
+      "C": "把所有设备恢复出厂配置后重新配置",
+      "D": "只查看故障设备的日志，不参考正常设备",
+      "A": "用 ping 命令代替所有其他检查"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "对比法利用“正常”和“故障”两个样本的差异来定位问题：逐项对比配置、接口状态、路由和日志，差异项往往就是故障原因，因此 B 正确。C 错误：恢复出厂配置属于高风险操作，不是对比法。D 错误：不参考正常设备就失去了对比基准。A 错误：ping 只是连通性测试的一种手段，不能替代分层检查与状态对比。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "对比法",
+      "差异分析"
+    ],
+    "provenance": {
+      "questionId": "hcip831-troubleshoot-compare-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据大纲第 3 页“故障排除方法 / 核心思想和方法”；对应「网络故障排除 / 故障排除方法 / 核心思想和方法」；与正常设备/链路对比找差异属排障方法论工程实践。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲范围并结合对比法排障实践独立命题，未复制第三方题目。",
+      "reviewDigest": "50422d45d5436352220efca50cbc7cf2a40ab83a304d53515ef9ed2531ba844c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-troubleshoot-replace-001",
+    "type": "single_choice",
+    "question": "怀疑某段链路存在硬件故障时，使用替换法缩小故障范围最合适的做法是？",
+    "options": {
+      "D": "用已知正常的端口、线缆或光模块替换可疑部件，观察故障是否随部件转移",
+      "A": "直接更换整台核心交换机",
+      "B": "同时替换链路两端的所有部件以节省时间",
+      "C": "修改路由优先级绕过该链路后不再排查"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "替换法的要点是一次只替换一个可疑部件并观察故障是否转移，从而确定故障部件，因此 D 正确。A 错误：直接更换整台设备成本高且不能定位到具体部件。B 错误：同时替换多个部件会使结果无法归因。C 错误：绕过链路只是临时规避，未定位根因，问题可能再次出现。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "故障排除方法",
+    "knowledgePoint": "核心思想和方法",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "替换法",
+      "硬件故障"
+    ],
+    "provenance": {
+      "questionId": "hcip831-troubleshoot-replace-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据大纲第 3 页“故障排除方法 / 核心思想和方法”；对应「网络故障排除 / 故障排除方法 / 核心思想和方法」；单变量替换并观察故障是否转移属排障方法论工程实践。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲范围并结合替换法排障实践独立命题，未复制第三方题目。",
+      "reviewDigest": "89399e29b67ea804d5a4d70a421fedca9d6f970641c2ae89c7d85fe09d616bf6"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-fault-vlan-001",
+    "type": "single_choice",
+    "question": "两台交换机通过 Trunk 链路互联，同一 VLAN 内的主机无法互通。下列哪项是最可能的配置原因？",
+    "options": {
+      "A": "Trunk 接口允许通过的 VLAN 列表未包含该 VLAN，或两端该 VLAN 的创建与端口配置不一致",
+      "B": "两台交换机的 Router ID 相同",
+      "C": "交换机未配置默认网关",
+      "D": "主机网卡速率不一致"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Trunk 链路只转发允许列表内的 VLAN：若该 VLAN 未被允许通过，或两端 VLAN 创建、端口加入情况不一致，同 VLAN 主机就无法跨交换机二层互通，因此 A 正确。B 错误：Router ID 相同影响路由协议，不影响二层同 VLAN 转发。C 错误：同 VLAN 内通信不需要默认网关。D 错误：速率不一致可能影响链路协商，但不会造成同 VLAN 完全不通的典型配置现象。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "常见网络故障",
+    "knowledgePoint": "常见网络故障排除",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "VLAN",
+      "Trunk",
+      "二层互通"
+    ],
+    "provenance": {
+      "questionId": "hcip831-fault-vlan-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据大纲第 3 页“常见网络故障 / 常见网络故障排除”；对应「网络故障排除 / 常见网络故障 / 常见网络故障排除」；Trunk 允许 VLAN 列表与两端 VLAN 配置不一致导致同 VLAN 不通属二层交换工程实践。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲范围并结合二层 VLAN 故障定位经验独立命题，未复制第三方题目。",
+      "reviewDigest": "0dc27aed8a15d3a56373a62deded940f6ca775dc9230673bb989e665572f68fc"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-fault-bgp-idle-001",
+    "type": "single_choice",
+    "question": "两台路由器之间的 BGP 邻居关系建立失败，邻居状态在 Idle 与 Active 之间反复切换，始终无法进入 Established。下列哪项是最常见的原因？",
+    "options": {
+      "C": "到邻居的 IP 路由不可达，或 TCP 179 端口被 ACL/防火墙阻断，导致连接无法建立",
+      "D": "对端发送的 Update 报文过大",
+      "A": "两端接口 MTU 不一致",
+      "B": "路由反射器未配置 Cluster_ID"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "邻居状态在 Idle 与 Active 之间反复切换，说明本端多次尝试发起 TCP 连接但连接始终失败；最常见的原因是邻居地址不可达、TCP 179 被安全策略阻断，或邻居地址/AS 号配置错误，因此 C 正确。D 错误：Update 报文问题通常出现在会话已经建立之后，可能导致会话断开或路由被丢弃，不是连接建立失败的首要原因。A 错误：MTU 不一致会影响报文收发，但连接建立阶段首先取决于 TCP 可达性。B 错误：Cluster_ID 属于路由反射器防环配置，与邻居能否建立 TCP 连接无关。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "常见网络故障",
+    "knowledgePoint": "常见网络故障排除",
+    "difficulty": "medium",
+    "tags": [
+      "故障排除",
+      "BGP",
+      "Idle",
+      "TCP 179"
+    ],
+    "provenance": {
+      "questionId": "hcip831-fault-bgp-idle-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据大纲第 3 页“常见网络故障 / 常见网络故障排除”；对应「网络故障排除 / 常见网络故障 / 常见网络故障排除」；BGP 邻居状态机中 Idle 的含义与 TCP 连接建立的先后关系依据 RFC 4271 第 8 节，TCP 179 被阻断属工程实践。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开大纲与公开 RFC 4271 独立命题，BGP 状态机语义按 RFC 原文核对，未复制第三方题目。",
+      "reviewDigest": "cf6bb61f0d8344257107e44da76dfa54b0044afe13982d1b6d0358075d7a5a29"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-cutover-concept-001",
+    "type": "single_choice",
+    "question": "关于网络割接的含义，下列描述正确的是？",
+    "options": {
+      "B": "对现网实施有计划、可回退的变更，通常涉及业务迁移、设备替换或链路调整",
+      "C": "设备故障后的紧急抢修",
+      "D": "日常配置文件的定期备份",
+      "A": "网络性能的长期优化规划"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "网络割接是对现网实施的有计划变更，强调方案、窗口、验证和回退，典型场景包括业务迁移、设备替换和链路调整，因此 B 正确。C 错误：故障抢修是被动应急，不属于计划性割接。D 错误：配置备份是维护手段，不是割接本身。A 错误：性能优化规划属于网络规划范畴，不等于割接实施。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "easy",
+    "tags": [
+      "网络割接",
+      "变更",
+      "回退"
+    ],
+    "provenance": {
+      "questionId": "hcip831-cutover-concept-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据大纲第 4 页“网络割接 / 割接基本概念”；对应「网络割接 / 网络割接 / 割接基本概念」；割接为有计划、可回退的现网变更属网络变更管理工程实践。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲范围并结合网络变更管理实践独立命题，未复制第三方题目。",
+      "reviewDigest": "35c1fac66539ccc8624314aa605279b1e72c3fd550ccb6eb11abad8f0d02bdca"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-cutover-risk-001",
+    "type": "single_choice",
+    "question": "下列哪项是网络割接最主要的风险来源？",
+    "options": {
+      "D": "变更前未充分评估业务依赖和影响范围，方案或回退预案不完整",
+      "A": "把割接窗口安排在业务低峰期",
+      "B": "割接前完成配置备份和方案评审",
+      "C": "割接过程中安排双人复核"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "割接风险主要来自评估不足和预案缺失：不了解业务依赖可能误伤关键业务，回退预案不完整则可能在失败时无法及时恢复，因此 D 正确。A 错误：选择业务低峰期恰恰是降低风险的措施。B 错误：配置备份和方案评审是风险控制手段。C 错误：双人复核用于减少操作失误，是降低风险的做法。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "easy",
+    "tags": [
+      "网络割接",
+      "风险",
+      "影响评估",
+      "回退"
+    ],
+    "provenance": {
+      "questionId": "hcip831-cutover-risk-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据大纲第 4 页“网络割接 / 割接基本概念”；对应「网络割接 / 网络割接 / 割接基本概念」；评估不足与回退预案缺失是割接主要风险来源，属网络变更管理工程实践。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲范围并结合网络变更风险管理实践独立命题，未复制第三方题目。",
+      "reviewDigest": "00fa3e498206a88a7a8efa2c41402fa2bc5683d64ecc23ada695407f084b29d1"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-cutover-plan-001",
+    "type": "single_choice",
+    "question": "一份完整的网络割接方案通常必须包含哪些内容？",
+    "options": {
+      "A": "割接目标与范围、实施步骤与时间窗口、验证方法、回退预案和责任人",
+      "B": "只需列出需要变更的设备清单",
+      "C": "只需给出割接后的网络拓扑图",
+      "D": "只需准备割接中要执行的命令"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "完整割接方案要回答“做什么、怎么做、何时做、如何验证、失败怎么办、谁负责”，因此应包含目标与范围、步骤与窗口、验证方法、回退预案和责任人，A 正确。B、C、D 都只覆盖了方案的一小部分：设备清单、拓扑图或命令清单不能替代实施步骤、验证和回退安排。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "easy",
+    "tags": [
+      "网络割接",
+      "割接方案",
+      "回退预案"
+    ],
+    "provenance": {
+      "questionId": "hcip831-cutover-plan-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据大纲第 4 页“网络割接 / 割接基本概念”；对应「网络割接 / 网络割接 / 割接基本概念」；割接方案应包含目标范围、步骤窗口、验证、回退与责任人，属网络变更管理工程实践。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲范围并结合割接方案编制实践独立命题，未复制第三方题目。",
+      "reviewDigest": "43141f94097f7e351ac54909cd4ed546ba4ddeb25b80e982100e4ff33e8e7486"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-cutover-window-001",
+    "type": "single_choice",
+    "question": "关于网络割接的时间窗口与审批，下列做法正确的是？",
+    "options": {
+      "C": "选择业务低峰期并完成变更审批，窗口时长应覆盖实施、验证和必要的回退时间",
+      "D": "割接可以在任意时间进行，不需要审批",
+      "A": "窗口越长越好，不必考虑业务影响",
+      "B": "方案评审通过后，实施前不必再通知业务方"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "割接窗口应在业务低峰期并经过变更审批，且时长要覆盖实施、验证与可能回退，避免窗口结束却无法收尾，因此 C 正确。D 错误：割接属于受控变更，必须审批并选择合适时间。A 错误：窗口应按工作量科学估算，过长会扩大业务影响。B 错误：实施前通知业务方是减少影响和协调应急的必要环节。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接基本概念",
+    "difficulty": "medium",
+    "tags": [
+      "网络割接",
+      "割接窗口",
+      "变更审批"
+    ],
+    "provenance": {
+      "questionId": "hcip831-cutover-window-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据大纲第 4 页“网络割接 / 割接基本概念”；对应「网络割接 / 网络割接 / 割接基本概念」；低峰窗口、变更审批与窗口时长覆盖实施/验证/回退属网络变更管理工程实践。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲范围并结合变更窗口与审批实践独立命题，未复制第三方题目。",
+      "reviewDigest": "c3ee247313068c520569803f1c95074c7954c4544e086f17d37e00ab7e9ae413"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-cutover-flow-order-001",
+    "type": "single_choice",
+    "question": "网络割接的规范操作流程顺序是？",
+    "options": {
+      "D": "需求与影响评估 → 方案和回退预案评审 → 割接前准备与备份 → 按窗口实施 → 验证与观察 → 收尾与文档更新",
+      "A": "直接实施 → 验证 → 补写方案 → 通知业务方",
+      "B": "方案评审 → 实施 → 不做验证直接收尾",
+      "C": "备份 → 实施 → 删除备份 → 结束"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "割接流程应先评估需求和影响，再评审方案与回退预案，完成准备和备份后在窗口内实施，随后验证观察并收尾更新文档，因此 D 正确。A 错误：先实施再补方案颠倒了顺序，风险不可控。B 错误：验证是割接的必要环节，不能省略。C 错误：删除备份会使回退能力丧失，也不能替代验证和收尾。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "网络割接",
+      "操作流程",
+      "验证",
+      "收尾"
+    ],
+    "provenance": {
+      "questionId": "hcip831-cutover-flow-order-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据大纲第 4 页“网络割接 / 割接操作流程”；对应「网络割接 / 网络割接 / 割接操作流程」；评估→评审→准备备份→实施→验证→收尾的流程顺序属网络变更管理工程实践。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲范围并结合割接操作流程实践独立命题，未复制第三方题目。",
+      "reviewDigest": "7cf0b24b43c118e304337113be4e43b60ed46ceb892ee0df90576f697a1df815"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-cutover-rollback-trigger-001",
+    "type": "single_choice",
+    "question": "割接实施过程中，出现下列哪种情况时应按预案启动回退？",
+    "options": {
+      "B": "出现方案中预先定义的失败判据，例如关键业务中断超过阈值或关键验证项不通过，且在窗口内无法解决",
+      "C": "只要出现一条非关键告警就必须回退",
+      "D": "无论结果如何，窗口结束时都必须回退",
+      "A": "由实施人员临时凭主观判断决定，无需预设判据"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "回退应由预先定义的失败判据触发，例如关键业务中断超过约定阈值、关键验证项不通过且无法在窗口内解决，这样回退决策客观、及时，因此 B 正确。C 错误：非关键告警不一定影响业务，贸然回退会浪费窗口。D 错误：割接成功时无需回退，回退不是固定动作。A 错误：缺少预设判据会导致决策随意、延误时机。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "网络割接",
+      "回退",
+      "失败判据",
+      "验证"
+    ],
+    "provenance": {
+      "questionId": "hcip831-cutover-rollback-trigger-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据大纲第 4 页“网络割接 / 割接操作流程”；对应「网络割接 / 网络割接 / 割接操作流程」；按预设失败判据触发回退属网络变更管理工程实践，未引用未能打开的厂商文档。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开大纲范围并结合割接回退触发条件实践独立命题，未复制第三方题目。",
+      "reviewDigest": "aaa8d92e37fad9d3e4f2ef0680259dbac8180bb2c847ae94a851e47c70aeea7b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  }
+]

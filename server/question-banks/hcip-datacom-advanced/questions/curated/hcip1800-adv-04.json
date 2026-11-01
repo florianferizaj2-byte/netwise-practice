@@ -1,0 +1,1906 @@
+[
+  {
+    "id": "hcip831-1-2-1-034",
+    "type": "single_choice",
+    "question": "在一个 IS-IS 区域内，Level-1 路由器需要把去往其他区域的报文交给本区域内连接 Level-2 骨干的路由器。Level-1 路由器主要依据下列哪项信息选择这个出口？",
+    "options": {
+      "A": "Level-2 路由器在 Level-2 LSP 中通告的骨干区域地址列表",
+      "B": "Level-1 路由器本机配置的静态默认路由，与 IS-IS 的 LSP 内容无关",
+      "C": "Level-2 路由器在 Level-1 LSP 中把 ATT（Attached）位置 1，表示自己已连接到 Level-2 骨干",
+      "D": "Level-2 路由器在 Level-1 LSP 中通告的完整 Level-2 链路状态数据库"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确：RFC 1195 规定，连接 Level-2 骨干的 Level-2 路由器会在自己产生的 Level-1 LSP 中把 Attached 位置 1；Level-1 路由器据此把区域外流量交给最近的已附着 Level-2 路由器，并可用默认路由表示该出口。A 错误：Level-2 LSP 不会泛洪进 Level-1 区域，Level-1 路由器看不到其中的骨干地址列表。B 错误：IS-IS Level-1 的出口选择来自 ATT 位和 SPF 结果，不依赖静态默认路由。D 错误：Level-1 与 Level-2 维护不同的链路状态数据库，Level-1 路由器不会收到完整的 Level-2 LSDB。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "ATT 位",
+      "Level-1",
+      "默认路由"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-034",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IGP 高级特性 / IS-IS 高级特性」；Attached 位与 Level-1 路由器经已附着 Level-2 路由器出区域的规则依据 RFC 1195 第 1.2 节概述与第 3.10.1 节（Level-1 路由优选顺序）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "d02a29202e4dce899ccd961bd5becaaed843622b11f642a43037bd3a03f65569"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-035",
+    "type": "single_choice",
+    "question": "同一台 IS-IS 路由器产生的多条 LSP，主要依靠下列哪项来相互区分？",
+    "options": {
+      "A": "在相同的 LSP ID 下使用不同的 LSP Number（分片号）",
+      "B": "使用不同的 System ID，而 LSP ID 的其余部分保持不变",
+      "C": "使用不同的 Pseudonode ID，且这些 LSP 只能由 DIS 产生",
+      "D": "使用不同的 Sequence Number，而 LSP ID 的其余部分保持不变"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确：RFC 1195 第 3.6 节说明，当一个路由器的 LSP 过大时需要拆成多个报文，这些 LSP 具有相同的 LSP ID，但 LSP Number 不同，接收端按分片号分别处理和重组。B 错误：System ID 标识路由器本身，不会因为分片而改变。C 错误：Pseudonode ID 用于标识广播网上的伪节点，与同一路由器的 LSP 分片不是一回事。D 错误：Sequence Number 表示同一 LSP 的新旧版本，新版本会替换旧版本，不能用来并行区分多个分片。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "LSP",
+      "分片",
+      "LSP ID"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-035",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IGP 高级特性 / IS-IS 高级特性」；同一路由器多条 LSP 共享 LSP ID、以 LSP Number 区分的规则依据 RFC 1195 第 3.6 节（Multiple LSPs and SNPs）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "ef131296fff2c320122c24d5bbcf3db69f8e9c4d708b67c01b839afd7d60b457"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-2-1-036",
+    "type": "single_choice",
+    "question": "RFC 1195 定义的窄度量（narrow metric）中，Level-2 路由器把 Level-1 路由放进 Level-2 LSP 时，如果累加后的度量值超过 63，应如何处理？",
+    "options": {
+      "A": "丢弃该路由，不再向 Level-2 通告",
+      "B": "把度量值按 64 取模后通告",
+      "C": "改用外部度量（external metric）继续通告原始数值",
+      "D": "把度量值取为 63 后通告"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确：RFC 1195 第 3.2 节规定 Level-2 LSP 中可表示的窄度量最大值为 63；当 Level-1 度量加上到 Level-1 路由器的距离超过 63 时，必须使用 63 通告，避免溢出。A 错误：路由仍应通告，只是度量被截断为上限。B 错误：协议要求饱和处理，没有按 64 取模的规则。C 错误：改用外部度量并不能绕过窄度量字段的取值上限，而且会改变路由性质。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS",
+      "窄度量",
+      "Level-2",
+      "RFC 1195"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-2-1-036",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「IGP 高级特性 / IS-IS 高级特性」；Level-2 LSP 窄度量上限为 63、累加超过 63 时按 63 通告的规则依据 RFC 1195 第 3.2 节（层次化 IP 可达信息压缩）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "e08b382bc626501a98146c6e7bf1d4848f20f6b4e3f3fa3de3c93ae3f9182971"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-001",
+    "type": "single_choice",
+    "question": "华为设备上，路由器收到去往同一目的网络的两条 BGP 路由：路由 1 的 Local_Preference 为 200、AS_PATH 长度为 6；路由 2 的 Local_Preference 为 100、AS_PATH 长度为 2。两条路由的 Preferred-Value 相同，且没有其他策略干预。该路由器优选哪条路由？",
+    "options": {
+      "A": "路由 2，因为 AS_PATH 更短",
+      "B": "路由 1，因为 Local_Preference 数值更大，其比较顺序在 AS_PATH 之前",
+      "C": "两条路由形成等价路由，默认同时加入转发表",
+      "D": "路由 2，因为 AS_PATH 短的路由一定优先于 Local_Preference"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确：华为 BGP 选路顺序中，Preferred-Value 之后比较 Local_Preference，数值越大越优先，然后才比较 AS_PATH 长度；因此 Local_Preference 为 200 的路由 1 胜出。A 和 D 错误：AS_PATH 长度是在 Local_Preference 之后才比较的属性，不能反过来压过 Local_Preference。C 错误：默认只选择一条最优路由加入转发表，只有属性等价并配置负载分担时才可能形成等价转发。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "Local_Preference",
+      "AS_PATH",
+      "选路"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；Local_Preference 在 AS_PATH 长度之前比较且数值大者优先的华为选路步骤以 RFC 4271 第 9.1.1 节与第 9.1.2 节决策过程为技术参照。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "cfda5016e00fc441a24aeb2430c954d5e96b3ab78b3acce082f9648fab939391"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-002",
+    "type": "single_choice",
+    "question": "华为设备上的 BGP Preferred-Value（首选值）具有下列哪项特点？",
+    "options": {
+      "A": "只在本机有效，数值越大越优先，不会通过 Update 报文传给任何 BGP 邻居",
+      "B": "通过 Update 报文在 iBGP 内传递，数值越小越优先",
+      "C": "通过 Update 报文在 eBGP 间传递，是一种公认必遵属性",
+      "D": "只对从 eBGP 学到的路由生效，对本地引入的路由无效"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确：Preferred-Value 是华为设备本地有效的选路参数，不写入 BGP 路径属性，也不会随 Update 传给邻居；数值越大越优先。B 错误：它不通过 iBGP 传递，且不是数值越小越优先。C 错误：它不是 RFC 4271 定义的公认必遵属性，也不会在 eBGP 之间传递。D 错误：该参数可用于对不同来源的 BGP 路由设置本地优先级，并非只对 eBGP 路由生效。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "Preferred-Value",
+      "选路",
+      "本地有效"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-002",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；Preferred-Value 为华为本地有效参数、不写入路径属性，其本地偏好定位以 RFC 4271 第 9.1.1 节（Phase 1 本地偏好计算）为技术参照。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "12f3726a77e8fec276747c018ca0cb8344448bdf6623700b6ad3b18fe01411e6"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-003",
+    "type": "single_choice",
+    "question": "BGP 的 ORIGIN 属性取值分别为 IGP、EGP、INCOMPLETE。在其他属性相同的情况下，RFC 4271 规定的优选顺序是？",
+    "options": {
+      "A": "INCOMPLETE 优于 EGP，EGP 优于 IGP",
+      "B": "EGP 优于 IGP，IGP 优于 INCOMPLETE",
+      "C": "三者优先级相同，只能继续比较 Router ID",
+      "D": "IGP 优于 EGP，EGP 优于 INCOMPLETE"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确：RFC 4271 为 ORIGIN 定义 IGP=0、EGP=1、INCOMPLETE=2，数值越小越优先，所以顺序是 IGP 优于 EGP、EGP 优于 INCOMPLETE。A 和 B 错误：把三者的优先次序说反或打乱。C 错误：ORIGIN 是平局比较中的有效步骤，只有它相同才会继续比较 MED、eBGP/iBGP 来源等后续属性。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "ORIGIN",
+      "选路",
+      "RFC 4271"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-003",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；ORIGIN 取值 IGP/EGP/INCOMPLETE 及 IGP 优先的比较顺序依据 RFC 4271 第 5.1.1 节与第 9.1.2.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "b5c22309d33bc0a2aa0bcbb82e594c598c51710259edfea14de737e33f2d5d04"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-004",
+    "type": "single_choice",
+    "question": "某路由器比较两条去往同一目的网络的 BGP 路由：路由甲 AS_PATH 为 65001 65002 65003（三个 AS_SEQUENCE）；路由乙 AS_PATH 为 {65010,65011,65012,65013}（一个 AS_SET）。其他属性相同。按 RFC 4271 的 AS_PATH 长度比较规则，结果是？",
+    "options": {
+      "A": "甲长度为 3，乙长度为 4，因此甲优先",
+      "B": "甲长度为 3，乙长度为 4，因此乙优先",
+      "C": "甲长度为 3，乙长度为 1，因此乙优先",
+      "D": "两者长度都为 3，需要继续比较 ORIGIN"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确：RFC 4271 第 9.1.2.2 节规定，计算 AS_PATH 长度时 AS_SET 无论包含多少个 AS 都按 1 个计数；因此甲的长度为 3，乙的长度为 1，乙更短而优先。A 和 B 错误：都把 AS_SET 中的四个 AS 逐个计数，得到长度 4。D 错误：AS_SET 并不是不参与计数，两条路由的长度也不相等，轮不到比较 ORIGIN。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "hard",
+    "tags": [
+      "BGP",
+      "AS_PATH",
+      "AS_SET",
+      "选路"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-004",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；计算 AS_PATH 长度时 AS_SET 按 1 个计数的规则依据 RFC 4271 第 9.1.2.2 节（Breaking Ties）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "a6809a3f673b9fcce4cdf9d80c86e81155256fa445e9a96ca1784e75d8b250c8"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-005",
+    "type": "single_choice",
+    "question": "两条去往同一目的网络的 BGP 路由分别从邻居 AS 65001 和 AS 65002 学到，其他属性相同，MED 分别为 50 和 100。路由器未配置 always-compare-med 等改变 MED 比较范围的命令。按 RFC 4271 的默认规则，下列判断正确的是？",
+    "options": {
+      "A": "MED 为 50 的路由优先，因为 MED 数值越小越优先",
+      "B": "两条路由的 MED 来自不同邻居 AS，默认不直接比较 MED，应继续比较后续属性",
+      "C": "MED 为 100 的路由优先，因为 MED 数值越大越优先",
+      "D": "两条路由一定形成负载分担，MED 不参与任何比较"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确：RFC 4271 规定 MED 只在来自同一邻居 AS 的路由之间比较；本例两条路由来自不同邻居 AS，默认不能直接用 MED 决出优劣，应继续比较 eBGP/iBGP 来源、IGP 开销、BGP Identifier 等后续属性。A 和 C 错误：都忽略 MED 的可比范围，直接按数值大小下结论。D 错误：MED 不是完全不参与比较，而且形成负载分担还需要属性等价及相应配置。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "hard",
+    "tags": [
+      "BGP",
+      "MED",
+      "选路",
+      "邻居 AS"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-005",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；MED 仅在来自同一邻居 AS 的路由之间比较的规则依据 RFC 4271 第 9.1.2.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "6d86220a098adaf726f8cb71b901fade8e0df1d2aa1ac18b3c7a5693d516d101"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-006",
+    "type": "single_choice",
+    "question": "同一目的网络分别通过 eBGP 和 iBGP 学到，两者的 Local_Preference、AS_PATH 长度、ORIGIN、MED 均相同，且下一跳均可达。按 RFC 4271 的平局比较规则，优选结果是？",
+    "options": {
+      "A": "eBGP 路由优先于 iBGP 路由",
+      "B": "iBGP 路由优先于 eBGP 路由",
+      "C": "两条路由一定同时加入转发表",
+      "D": "只需比较 MED 即可决定，无需查看 eBGP/iBGP 来源"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确：RFC 4271 第 9.1.2.2 节规定，当前面属性都相同时，只要存在至少一条 eBGP 路由，就淘汰 iBGP 路由，因此 eBGP 路由优先。B 错误：方向说反。C 错误：默认只选择一条最优路由，负载分担需要额外配置和属性等价。D 错误：题目已说明 MED 相同，MED 步骤已经过去，下一步正是比较 eBGP/iBGP 来源。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "eBGP",
+      "iBGP",
+      "选路"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-006",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；其余属性相同时 eBGP 路由优于 iBGP 路由的规则依据 RFC 4271 第 9.1.2.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "51f74b9c0e2216619655cae25ea3ee3b274f06cf7b420fa8e9a83956815c227d"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-007",
+    "type": "single_choice",
+    "question": "按 RFC 4271 的 Phase 2 平局比较顺序，两条路由的 AS_PATH 长度、ORIGIN、MED 以及 eBGP/iBGP 来源都相同，且到达 NEXT_HOP 的 IGP 开销也相同。下一步应比较什么？",
+    "options": {
+      "A": "对等体的 MED 是否携带",
+      "B": "路由的 Cluster_List 长度",
+      "C": "通告该路由的 BGP Speaker 的 BGP Identifier，数值较小者优先",
+      "D": "路由的 Local_Preference，数值较大者优先"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确：RFC 4271 的平局比较在 IGP 开销之后，比较通告路由的 BGP Identifier，数值较小者优先；若仍相同，再比较对端地址。A 错误：MED 已在前面比较过且题目说明相同。B 错误：Cluster_List 用于路由反射器防环，不是该阶段的比较项。D 错误：Local_Preference 属于更早的偏好计算阶段，不是 Phase 2 平局比较的下一步。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "hard",
+    "tags": [
+      "BGP",
+      "BGP Identifier",
+      "选路",
+      "平局比较"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-007",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；IGP 开销之后比较 BGP Identifier、数值较小者优先的平局规则依据 RFC 4271 第 9.1.2.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "3ac9d432f795f6850f64a4bbbeee352fabb24ad7d6c2af0e8e370a60dcb3334b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-008",
+    "type": "single_choice",
+    "question": "一台 BGP 路由器从多个邻居学到同一目的网络的多条路由，并已选出最优路由。在未启用 Add-Path 等扩展的情况下，它向一个普通 BGP 邻居发送 Update 时，默认会怎样处理这些路由？",
+    "options": {
+      "A": "把所有有效路由都通告给该邻居",
+      "B": "随机选择一条有效路由通告",
+      "C": "只通告 AS_PATH 最短的那条，而不一定是本机最优路由",
+      "D": "只通告本机选出的最优路由"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确：BGP 默认把每个目的网络的最优路由放入 Loc-RIB，并据此生成发往邻居的 Adj-RIB-Out，因此普通会话只通告最优路由，其他有效路由不默认通告。A 错误：那是 Add-Path 等扩展才能实现的多路径通告。B 错误：BGP 的选择是确定性的，不会随机挑选。C 错误：是否通告取决于本机最优选择结果，而不是单独取 AS_PATH 最短的一条。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "最优路由",
+      "Update",
+      "路由通告"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-008",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；最优路由进入 Loc-RIB 并据此生成 Adj-RIB-Out、默认只通告最优路由的依据 RFC 4271 第 3.2 节与第 9.1.3 节（Phase 3 路由发布）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "b78d2f81f2493d4c7d14eda5a2ae6b73ed140063f387d41ef78c6267067bc261"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-009",
+    "type": "single_choice",
+    "question": "一台路由器从 iBGP 邻居学到一条路由，下一跳可达且该路由为最优。它要把这条路由再发给另一个普通 iBGP 邻居（未部署路由反射器，也未配置联盟）。默认行为是？",
+    "options": {
+      "A": "正常通告，因为 iBGP 邻居之间可以任意转发路由",
+      "B": "不通告，iBGP 的水平分割规则要求从 iBGP 学到的路由不能再传给其他 iBGP 邻居",
+      "C": "通告，但必须把 NEXT_HOP 改为本地地址",
+      "D": "通告，但必须把 Local_Preference 清零"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确：iBGP 水平分割要求从 iBGP 学到的路由不能直接再通告给其他 iBGP 邻居，否则需要在 AS 内建立全互联、部署路由反射器或联盟。A 错误：iBGP 邻居之间并非可以任意转发。C 错误：next-hop-local 只改变下一跳，不能绕过水平分割。D 错误：Local_Preference 与是否允许向 iBGP 邻居通告无关。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "iBGP",
+      "水平分割",
+      "路由通告"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-009",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；内部对等体收到的路由不再转发给其他内部对等体的水平分割规则依据 RFC 4271 第 9.2 节（Update-Send Process）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "2e0533e4fcbe4e6243550db5ace4d435132b138679eb9ea47f59ce6a49f82063"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-010",
+    "type": "single_choice",
+    "question": "华为设备上，一台 AS 边界路由器通过 eBGP 把一条路由发给外部邻居。默认情况下，该路由 NEXT_HOP 属性中的地址是？",
+    "options": {
+      "A": "上一跳路由器的 Loopback0 地址，始终不变",
+      "B": "本端从该路由学到的原始 NEXT_HOP，不做修改",
+      "C": "0.0.0.0，由对端重新解析",
+      "D": "本端与该 eBGP 邻居建立会话所用接口的地址"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确：向 eBGP 邻居通告路由时，BGP 默认把 NEXT_HOP 改为本端与该邻居建立会话所用接口的地址，使对端能够按直连下一跳转发。A 错误：Loopback0 地址只有在额外配置 next-hop-local 或对等体策略时才可能被使用，不是默认值。B 错误：保持原始下一跳是 iBGP 的默认行为。C 错误：0.0.0.0 不是 BGP 路由的正常下一跳取值。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "NEXT_HOP",
+      "eBGP",
+      "路由通告"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-010",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；向 eBGP 邻居默认使用本端会话接口地址作为 NEXT_HOP 的规则依据 RFC 4271 第 5.1.3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "b9082f46110bedcadeceecde25e5f838962949b591a2a7d1743683ea0d3d98c4"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-011",
+    "type": "single_choice",
+    "question": "一台路由器把从 eBGP 学到的路由通告给 iBGP 邻居。未配置 next-hop-local 等策略时，NEXT_HOP 属性默认如何变化？",
+    "options": {
+      "A": "保持不变，仍为原来 eBGP 路由的下一跳地址",
+      "B": "自动改为本端与 iBGP 邻居建立会话的接口地址",
+      "C": "自动改为 0.0.0.0",
+      "D": "自动改为对端 iBGP 邻居的接口地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确：BGP 向 iBGP 邻居通告路由时默认不修改 NEXT_HOP，仍保留从 eBGP 学到的下一跳，AS 内路由器需要能通过 IGP 到达该地址。B 错误：改为本地地址是配置 next-hop-local 后的效果，不是默认行为。C 错误：0.0.0.0 不是有效的 BGP 下一跳。D 错误：下一跳不会自动指向接收该路由的 iBGP 邻居。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "NEXT_HOP",
+      "iBGP",
+      "路由通告"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-011",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；向 iBGP 邻居通告时默认不修改 NEXT_HOP 的规则依据 RFC 4271 第 5.1.3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "2d400bc0d61a3cf2fdb1ae4c0f56be93346c015fe923e8912ea4e76b34b749b9"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-012",
+    "type": "single_choice",
+    "question": "某 AS 内两台 PE 通过 iBGP 相连。PE1 从 eBGP 学到一条路由后发给 PE2，PE2 发现该路由的 NEXT_HOP 是外部地址且自己无法到达，因此路由未生效。管理员希望在 PE1 上解决该问题，最直接的做法是？",
+    "options": {
+      "A": "在 PE2 上配置 peer next-hop-local",
+      "B": "在 PE1 对 PE2 的邻居配置 peer next-hop-local，使通告给 PE2 的路由下一跳改为 PE1 的地址",
+      "C": "在 PE1 上删除该路由的 AS_PATH",
+      "D": "在 PE1 上把该路由的 MED 改为 0"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确：问题出在 PE1 向 iBGP 邻居 PE2 通告时保留了 PE2 不可达的外部下一跳；在 PE1 的该邻居上配置 next-hop-local，可把下一跳改为 PE1 的地址，PE2 便能通过 IGP 解析。A 错误：next-hop-local 应配置在通告路由的一方，配置在接收方 PE2 不能改变 PE1 发来的下一跳。C 错误：删除 AS_PATH 会破坏 BGP 防环，且不解决下一跳可达性。D 错误：MED 与下一跳可达性无关。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "hard",
+    "tags": [
+      "BGP",
+      "next-hop-local",
+      "iBGP",
+      "故障处理"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-012",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；next-hop-local 对应 RFC 4271 第 5.1.3 节允许显式配置以本端地址作为下一跳的规则，用于修复 iBGP 下一跳不可达。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "da522316337ca3c6014ea0829095baba4ac7de069299d3b1350ae84456f73994"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-013",
+    "type": "single_choice",
+    "question": "华为设备上的 route-policy 由多个节点组成。一条路由依次匹配各节点时，下列行为描述正确的是？",
+    "options": {
+      "A": "所有节点都会被执行，最后执行的节点决定结果",
+      "B": "从编号最大的节点开始匹配，第一个匹配的节点生效",
+      "C": "按节点编号从小到大匹配，第一个匹配的节点生效；若所有节点都未匹配，则默认拒绝",
+      "D": "若所有节点都未匹配，则默认允许"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确：route-policy 按节点编号升序匹配，命中第一个节点后即按该节点的 permit 或 deny 动作处理，不再继续；若所有节点都未命中，则隐含最后一条 deny，路由被拒绝。A 错误：不是所有节点都执行，命中即停止。B 错误：匹配顺序是从小到大，不是从大到小。D 错误：未匹配的默认动作是拒绝而不是允许。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "route-policy",
+      "节点",
+      "匹配顺序"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-013",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；节点按编号升序匹配、命中即停止及末尾隐含 deny 属华为实现，策略在路由发布前生效的技术位置参照 RFC 4271 第 9.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "d0ac7f6429a6b5058070f87d66e13699806c56bd8287ecb1d232e229a791f600"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-014",
+    "type": "single_choice",
+    "question": "华为设备上，一个 route-policy 节点中同时配置了 if-match ip-prefix 与 if-match community-filter 两个不同类型的条件。该节点的匹配语义是？",
+    "options": {
+      "A": "两个条件必须同时满足，节点才算匹配",
+      "B": "只要满足其中任意一个条件，节点就算匹配",
+      "C": "只检查第一个 if-match，后面的被忽略",
+      "D": "两个条件互斥，配置后节点永远不匹配"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确：同一节点中不同类型的 if-match 条件之间是逻辑与关系，必须全部满足；同一类型配置多个值时才是逻辑或关系。B 错误：任意满足一个是同一类型多值时的语义，不适用于不同类型条件。C 错误：节点会检查所有已配置的 if-match 条件，不会只取第一个。D 错误：两类条件可以同时成立，不存在互斥。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "route-policy",
+      "if-match",
+      "匹配语义"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-014",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4",
+        "rfc1997-community"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；同节点不同 if-match 类型为逻辑与属华为实现，community-filter 匹配 COMMUNITY 属性的依据 RFC 1997 第 3、4 节，策略应用位置参照 RFC 4271 第 9.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "79d1fce66ecef540e080d34587dab4b2704c14b1d5b16ca348dfe2e9eadcb2e8"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-015",
+    "type": "single_choice",
+    "question": "某企业希望通过 BGP 影响外部 AS 选择进入本 AS 的路径。管理员在向外通告某条路由时，对它的 AS_PATH 追加了多个本 AS 号。这样做的主要作用是？",
+    "options": {
+      "A": "缩短本端到目的地的 AS_PATH，使本端出流量优选该路径",
+      "B": "把该路由标记为不可达，防止对端使用",
+      "C": "清除对端 AS_PATH 中的私有 AS 号",
+      "D": "增加对端看到的 AS_PATH 长度，使对端在等价条件下少选或不选这条路径，从而影响入方向流量"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确：AS_PATH 追加（prepend）会让接收方看到的路径变长；在其它属性等价时，对端会优先选择更短的路径，因此可用来影响对端进入本 AS 的入方向流量。A 错误：prepend 增加而不是缩短路径长度，且影响的是对端的选择，不是本端出方向。B 错误：追加 AS 号不会使路由不可达。C 错误：该操作不负责清除私有 AS 号，通常由专门的私有 AS 处理机制完成。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "AS_PATH",
+      "prepend",
+      "入方向流量"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-015",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；AS_PATH 追加使路径变长、在属性等价时影响对端选路的依据 RFC 4271 第 5.1.2 节与第 9.1.2.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "2ae0f552d004429211cfa6031acff696b634e6b1a4cc0571a40333023f47ad18"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-016",
+    "type": "single_choice",
+    "question": "华为设备上配置 ip ip-prefix p index 10 permit 10.1.0.0 16，未配置 greater-equal 或 less-equal。该过滤器默认匹配下列哪个前缀？",
+    "options": {
+      "A": "10.1.0.0/16 以及其所有更具体的前缀",
+      "B": "仅 10.1.0.0/16",
+      "C": "10.1.0.0/16 以及其所有更不具体的前缀",
+      "D": "10.0.0.0/8 到 10.1.255.255/32 的所有前缀"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确：ip-prefix 未配置 greater-equal 和 less-equal 时，只匹配掩码长度恰好等于指定长度的前缀，因此只匹配 10.1.0.0/16。A 错误：要匹配更具体的子网必须显式配置 greater-equal 或 less-equal 范围。C 错误：默认不会向上匹配更短掩码。D 错误：该写法不会扩展到整个 10.0.0.0/8 范围，也不会匹配任意掩码。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "ip-prefix",
+      "前缀匹配",
+      "路由过滤"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-016",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；ip-prefix 未配 ge/le 时按前缀长度精确匹配的语义以 RFC 4271 第 4.3 节 NLRI 的前缀长度编码为技术参照。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "53642950794e128201f9a0968e3f64efc3a14abae578fe94e7ad5ad5746fccab"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-017",
+    "type": "single_choice",
+    "question": "华为设备上配置 ip ip-prefix p index 10 permit 10.0.0.0 8 greater-equal 20 less-equal 24。下列哪个前缀会被该过滤器匹配？",
+    "options": {
+      "A": "10.1.0.0/16",
+      "B": "10.0.0.0/8",
+      "C": "10.1.2.0/24",
+      "D": "10.1.2.128/25"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确：该过滤器要求前缀长度在 20 到 24 之间（含 20 和 24），且前 8 位与 10.0.0.0/8 一致；10.1.2.0/24 的掩码长度为 24，落在范围内且属于 10.0.0.0/8，因此匹配。A 错误：/16 小于 greater-equal 20。B 错误：/8 也小于 20。D 错误：/25 大于 less-equal 24。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "ip-prefix",
+      "greater-equal",
+      "less-equal"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-017",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；按 greater-equal/less-equal 限定掩码长度范围进行前缀匹配的语义以 RFC 4271 第 4.3 节 NLRI 长度字段为技术参照。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "9caf6f3e20826a6850accff101cb37628abd9bc884adb4fccc547c64e971b0e8"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-018",
+    "type": "single_choice",
+    "question": "华为设备上配置 ip ip-prefix p index 10 permit 172.16.0.0 12 greater-equal 20，未配置 less-equal。下列哪个前缀会被匹配？",
+    "options": {
+      "A": "172.16.1.0/20",
+      "B": "172.16.0.0/16",
+      "C": "172.15.0.0/24",
+      "D": "172.16.0.0/12"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确：只配置 greater-equal 20 时，less-equal 默认取 32，因此匹配掩码长度 20 到 32 且属于 172.16.0.0/12 的前缀；172.16.1.0/20 的掩码为 20，符合范围。B 错误：/16 小于 greater-equal 20。C 错误：172.15.0.0 不在 172.16.0.0/12 的地址范围内。D 错误：/12 也小于 20。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "hard",
+    "tags": [
+      "BGP",
+      "ip-prefix",
+      "greater-equal",
+      "默认范围"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-018",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；仅配 greater-equal 时 less-equal 取 32 的默认范围属华为实现，其掩码长度匹配语义以 RFC 4271 第 4.3 节 NLRI 长度字段为参照。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "1853a1550cd538a492d12a14a1677a4aef79445c6b53e5a2578d37270b0db2a8"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-019",
+    "type": "single_choice",
+    "question": "华为设备上，ACL 规则 rule permit source 10.1.0.0 0.0.255.255 与 ip-prefix 10.1.0.0 16（无 ge/le）在匹配 BGP 路由时的区别是？",
+    "options": {
+      "A": "两者都只匹配掩码长度为 16 的路由",
+      "B": "两者都匹配 10.1.0.0/16 及其所有子网",
+      "C": "ACL 可匹配 10.1.0.0/16 网段内任意掩码长度的路由，而该 ip-prefix 只匹配 /16",
+      "D": "ACL 只能匹配 /32 主机路由，ip-prefix 可匹配任意掩码"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确：ACL 使用通配符匹配地址范围，只要路由的目的地址落在 10.1.0.0/16 内，掩码长度可以不同；而 ip-prefix 未配置 ge/le 时按精确掩码长度匹配，只命中 /16。A 错误：ACL 并不限制掩码长度。B 错误：ip-prefix 不会自动匹配子网。D 错误：ACL 不是只能匹配主机路由。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "hard",
+    "tags": [
+      "BGP",
+      "ACL",
+      "ip-prefix",
+      "路由过滤"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-019",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；ACL 按地址范围、ip-prefix 按前缀长度匹配的差异，以 RFC 4271 第 4.3 节 NLRI 前缀长度编码为技术参照。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "586de55d8a32d73fd817a3cc0b749cd561694c0864bd72e038e45f2419621165"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-020",
+    "type": "single_choice",
+    "question": "在华为设备 BGP 视图下配置 filter-policy export 并过滤掉某条路由后，下列描述正确的是？",
+    "options": {
+      "A": "该路由会从本机 BGP 路由表中删除",
+      "B": "该路由会从本机 IP 路由表中删除",
+      "C": "该路由仍会发给所有邻居，只是不计入路由表",
+      "D": "该路由仍保留在本机 BGP 路由表中，只是不向邻居发布"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确：filter-policy export 作用在路由发布方向，只决定哪些路由可以放进发往邻居的 Update，本机 BGP 路由表和 IP 路由表不受影响。A 错误：导出过滤不删除本地 BGP 表项。B 错误：也不会删除本地 IP 路由。C 错误：被过滤的路由不会发给邻居，而不是照常发送。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "filter-policy",
+      "export",
+      "路由发布"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-020",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；filter-policy export 只影响发布方向、不删除本机 BGP 路由表的依据 RFC 4271 第 9.2 节与第 9.1.3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "a40661e070c6810219e0a28669da0b0108ecc0844245981e2f13a97140dc996a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-021",
+    "type": "single_choice",
+    "question": "在华为设备 BGP 视图下配置 filter-policy import 并拒绝某条从邻居收到的路由，下列描述正确的是？",
+    "options": {
+      "A": "该路由不会进入本机 BGP 路由表，也不会被选路和继续通告",
+      "B": "该路由会进入 BGP 路由表，只是不加入 IP 路由表",
+      "C": "该路由会进入 BGP 路由表，并继续通告给其他邻居",
+      "D": "该路由会被加入 IP 路由表，但不进入 BGP 路由表"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确：filter-policy import 在接收方向生效，被拒绝的路由不会装入本机 BGP 路由表，因而不会参与最优选择，也不会再通告给其他邻居。B 和 C 错误：都假设路由仍进入 BGP 路由表。D 错误：BGP 路由未进入 BGP 表时，不能通过 BGP 选路装入 IP 路由表。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "filter-policy",
+      "import",
+      "路由接收"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-021",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；接收方向拒绝的路由不进入 Loc-RIB、不参与选路也不再通告的依据 RFC 4271 第 9.1 节与第 9.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "b732c9cf6fb9b0789898c2688008bf285de146eff446386381cc337c5f913d5b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-022",
+    "type": "single_choice",
+    "question": "关于华为设备上的 filter-policy 与 route-policy，下列描述正确的是？",
+    "options": {
+      "A": "两者都只能过滤路由，不能修改任何属性",
+      "B": "filter-policy 主要用于过滤，不能修改路由属性；route-policy 既可用于过滤，也可通过 apply 修改属性",
+      "C": "route-policy 只能修改属性，不能过滤路由",
+      "D": "filter-policy 可以修改 AS_PATH，route-policy 不能"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确：filter-policy 的核心用途是按过滤规则允许或拒绝路由，不能通过它设置属性；route-policy 由 if-match 和 apply 组成，既能过滤也能修改属性。A 错误：route-policy 可以修改属性。C 错误：route-policy 的 permit/deny 节点同样可以过滤路由。D 错误：filter-policy 不能修改 AS_PATH，route-policy 可以通过 apply 修改。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "filter-policy",
+      "route-policy",
+      "属性修改"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-022",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4",
+        "rfc1997-community"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；filter-policy 仅过滤、route-policy 可用 apply 修改属性（含 COMMUNITY）的差异，以 RFC 4271 第 9.2 节与 RFC 1997 第 3 节为参照。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "1032c4c0463bf21622fe0968bf20ed908d94eb94a5902478f937583616842673"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-023",
+    "type": "single_choice",
+    "question": "华为设备上使用 AS_Path Filter，正则表达式 ^$ 匹配的是？",
+    "options": {
+      "A": "任意非空 AS_PATH",
+      "B": "以 0 开头的 AS_PATH",
+      "C": "AS_PATH 中不含本 AS 号的路由",
+      "D": "AS_PATH 为空的路由，通常是本机通过 network 或 import-route 产生的路由"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确：^ 表示行首、$ 表示行尾，^$ 之间没有任何内容，因此只匹配空 AS_PATH，即本机始发、尚未经过任何 AS 的路由。A 错误：非空 AS_PATH 不匹配 ^$。B 错误：^$ 不表示以 0 开头。C 错误：该表达式不检查本 AS 号，只检查路径是否为空。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "AS_Path Filter",
+      "正则表达式",
+      "空 AS_PATH"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-023",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；空 AS_PATH 对应本机始发、尚未经过任何 AS 的路由，依据 RFC 4271 第 5.1.2 节 AS_PATH 语义与第 9.4 节路由始发。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "40e25d5b2ffc430a96a590b5a176d51acf9a8d901ddd2efaebef08a106a6bf23"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-024",
+    "type": "single_choice",
+    "question": "AS_Path Filter 的正则表达式 _100_ 匹配下列哪种 AS_PATH？",
+    "options": {
+      "A": "仅 AS_PATH 恰好等于 100 的路由",
+      "B": "仅 AS_PATH 以 100 开头且以 100 结尾的路由",
+      "C": "AS_PATH 中任意位置出现 AS 号 100 的路由",
+      "D": "AS_PATH 中不出现 AS 号 100 的路由"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确：下划线在华为 AS_Path 正则中表示 AS 号的边界，_100_ 要求 100 前后都是边界，因此只要 AS_PATH 的任意位置出现完整的 AS 号 100 就匹配。A 错误：该表达式不要求整个路径只有 100。B 错误：不要求首尾都是 100。D 错误：含义正好相反，它匹配包含 100 而不是排除 100。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "AS_Path Filter",
+      "正则表达式",
+      "AS 号边界"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-024",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；AS_PATH 由 AS_SEQUENCE/AS_SET 段构成、AS 号存在边界，正则边界匹配的依据 RFC 4271 第 5.1.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "e9f981d0962d61643c151e8217ee0b2dad0bcb023a0b0ef96938f907da4a975f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-025",
+    "type": "single_choice",
+    "question": "管理员只希望匹配由 AS 65000 始发（AS_PATH 最后一个 AS 号为 65000）的 BGP 路由。下列 AS_Path Filter 正则表达式最合适的是？",
+    "options": {
+      "A": "_65000$",
+      "B": "^65000$",
+      "C": "^65000_",
+      "D": "65000"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确：_65000$ 要求 65000 前面是 AS 边界、后面是路径结尾，正好表示路径中最后一个 AS 号为 65000，即由 AS 65000 始发。B 错误：^65000$ 只匹配整个 AS_PATH 恰好为 65000 的路由，会漏掉前面还有其它 AS 的始发路由。C 错误：^65000_ 匹配的是以 65000 开头，即邻居 AS 为 65000，而不是始发 AS。D 错误：缺少边界锚点，可能匹配 165000、650001 等包含该数字串的 AS 号，范围不精确。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "hard",
+    "tags": [
+      "BGP",
+      "AS_Path Filter",
+      "始发 AS",
+      "正则表达式"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-025",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；路径末尾 AS 号表示始发 AS 的依据 RFC 4271 第 5.1.2 节与第 9.1.2.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "55bb385a616bdea2cf46736084194281db8da8eb4c3d08d76e66f4eb2ee445a3"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-026",
+    "type": "single_choice",
+    "question": "华为设备上执行 aggregate 10.0.0.0 255.255.0.0 生成聚合路由，未配置 detail-suppressed。默认情况下，该路由器向 BGP 邻居通告的内容是？",
+    "options": {
+      "A": "只通告聚合路由，所有明细路由自动抑制",
+      "B": "同时通告聚合路由和参与聚合的明细路由",
+      "C": "只通告明细路由，聚合路由仅在本机生效",
+      "D": "聚合路由和明细路由都不会被通告"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确：华为设备生成聚合路由后，默认既向邻居通告聚合路由，也继续通告参与聚合的明细路由，除非配置 detail-suppressed 或 suppress-policy。A 错误：抑制全部明细是 detail-suppressed 的效果。C 错误：聚合路由默认会通告。D 错误：默认并非全部不通告。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "路由聚合",
+      "aggregate",
+      "明细路由"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-026",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；聚合路由与明细路由默认同时通告的行为以 RFC 4271 第 9.2.2.2 节（Aggregating Routing Information）为技术参照。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "d896d83ca4f8614dd84b747e8a3729018557199fd6969cccee340de38e8579d1"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-027",
+    "type": "single_choice",
+    "question": "在华为设备上对聚合路由配置 detail-suppressed 后，效果是？",
+    "options": {
+      "A": "只抑制聚合路由，明细路由照常通告",
+      "B": "抑制所有明细路由，同时也不通告聚合路由",
+      "C": "只抑制与聚合路由完全相同的明细路由",
+      "D": "抑制所有参与聚合的明细路由，只向邻居通告聚合路由"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确：detail-suppressed 会抑制所有参与该聚合的明细路由，只把聚合路由通告给邻居，从而减小路由表规模。A 错误：抑制对象说反了。B 错误：聚合路由本身仍会通告。C 错误：它不是只抑制与聚合路由完全相同的那一条，而是抑制全部明细。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "路由聚合",
+      "detail-suppressed",
+      "路由抑制"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-027",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；抑制全部明细、只通告聚合路由对应 RFC 4271 第 9.2.2.1 节（Information Reduction）与第 9.2.2.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "157f7fa71023d7ac7cd6a4667f8d8bd690ccc527d59c1177e422f69c6120a2ba"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-028",
+    "type": "single_choice",
+    "question": "华为设备上使用 suppress-policy 对 BGP 聚合进行控制，其主要作用是？",
+    "options": {
+      "A": "抑制聚合路由本身，使聚合路由不再产生",
+      "B": "抑制所有明细路由，等同于 detail-suppressed",
+      "C": "按策略只抑制部分符合条件的明细路由，其余明细路由仍可通告",
+      "D": "修改聚合路由的 AS_PATH，而不影响明细路由"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确：suppress-policy 引用一条策略，只有匹配该策略的明细路由才被抑制，未匹配的明细路由仍可正常通告，因此比 detail-suppressed 更精细。A 错误：它抑制的是明细路由，不是聚合路由本身。B 错误：它不会抑制全部明细，只有匹配策略的部分被抑制。D 错误：修改聚合路由属性应使用 attribute-policy。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "路由聚合",
+      "suppress-policy",
+      "选择性抑制"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-028",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；按策略只抑制匹配明细、其余明细照常通告的行为以 RFC 4271 第 9.2.2.2 节聚合与信息缩减机制为参照。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "cc7965f2f320bb10707f5d658037cd6e8845f8a01c7c32d4cdfbff0246f7156c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-029",
+    "type": "single_choice",
+    "question": "华为设备上执行 aggregate 时携带 as-set 参数，其主要目的是？",
+    "options": {
+      "A": "让聚合路由的 AS_PATH 只保留最后一个 AS 号",
+      "B": "把参与聚合的明细路由的 AS 号以 AS_SET 形式加入聚合路由的 AS_PATH，帮助下游 AS 检测环路",
+      "C": "把聚合路由的 ORIGIN 改为 INCOMPLETE",
+      "D": "自动抑制所有明细路由"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确：聚合会丢失明细路由的 AS_PATH 信息，as-set 把相关 AS 号汇总成 AS_SET 放入聚合路由的 AS_PATH，使下游 AS 仍能识别路径中是否包含自己的 AS 号，从而防止环路。A 错误：as-set 是增加而非删除 AS 信息。C 错误：该参数不改变 ORIGIN。D 错误：抑制明细路由应使用 detail-suppressed 或 suppress-policy。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "hard",
+    "tags": [
+      "BGP",
+      "路由聚合",
+      "as-set",
+      "AS_PATH"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-029",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；聚合携带 as-set 时以 AS_SET 保留明细 AS 信息以防环的依据 RFC 4271 第 5.1.2 节与第 9.2.2.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "99b2b789f3f59b9339cbd1bdcfedf5823951de58240da05db98ab4a7bdd7875b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-030",
+    "type": "single_choice",
+    "question": "华为设备上配置了 BGP 聚合命令，但当前 BGP 路由表中没有任何一条属于该聚合范围的明细路由。结果是？",
+    "options": {
+      "A": "不会生成该聚合路由，因为没有可聚合的明细路由",
+      "B": "仍会生成聚合路由，但下一跳为 0.0.0.0",
+      "C": "仍会生成聚合路由，且自动指向 Null0 用于丢弃流量",
+      "D": "会生成聚合路由，但只通告给 iBGP 邻居"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确：BGP 聚合需要至少一条属于聚合范围的明细路由作为触发条件；没有任何明细路由时不会凭空生成聚合路由。B 错误：下一跳为 0.0.0.0 不是 BGP 正常行为，也不是该场景的结果。C 错误：聚合路由不会仅凭聚合命令自动生成并指向 Null0。D 错误：没有明细路由时聚合路由根本不会产生，更谈不上只发给 iBGP。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "路由聚合",
+      "触发条件",
+      "明细路由"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-030",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；聚合需有属于聚合范围的明细路由才生成聚合路由的行为以 RFC 4271 第 9.2.2.2 节为技术参照。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "e666ad23a525413ac588f6d7e55554c1468e7710258ed8833f3d02b66f6a2ec0"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-031",
+    "type": "single_choice",
+    "question": "华为设备上对聚合路由配置 attribute-policy，其作用是？",
+    "options": {
+      "A": "过滤掉不符合策略的明细路由",
+      "B": "决定聚合路由是否发布给某个邻居",
+      "C": "修改聚合路由的属性，例如 Community 或 Local_Preference",
+      "D": "修改明细路由的 NEXT_HOP"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确：attribute-policy 在生成聚合路由时对其路径属性进行设置，例如 Community、Local_Preference 等，使聚合路由带有预期的策略标记。A 错误：过滤明细路由应使用 suppress-policy。B 错误：是否向某邻居发布由邻居的过滤策略决定，不是 attribute-policy 的作用。D 错误：它作用于聚合路由的属性，不修改明细路由的 NEXT_HOP。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "路由聚合",
+      "attribute-policy",
+      "路径属性"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-031",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；attribute-policy 在生成聚合路由时设置其路径属性，以 RFC 4271 第 5 节路径属性与第 9.2.2.2 节聚合机制为参照。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "1ffe9c28e8debf0d17d4a93f13a439c3ef055d247e3ce77c9b27d29dddaa5f5e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-032",
+    "type": "single_choice",
+    "question": "一台 BGP 路由器从邻居收到一条路由，其 NEXT_HOP 在 IGP 路由表中不可达。按 BGP 的处理规则，该路由通常会？",
+    "options": {
+      "A": "仍被选为最优并加入 IP 路由表，但流量被丢弃",
+      "B": "被自动改为邻居的接口地址后加入路由表",
+      "C": "被当作默认路由使用",
+      "D": "不满足下一跳可达性条件，不能成为最优路由，也不会加入 IP 路由表"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确：BGP 在选路前要求下一跳可解析；NEXT_HOP 在 IGP 路由表中不可达时，路由不满足可解析条件，不会被选为最优，也不会装入 IP 路由表。A 错误：不可达的下一跳不会进入转发表。B 错误：BGP 不会自动把下一跳改成邻居接口地址。C 错误：不可达路由不会被当作默认路由。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "NEXT_HOP",
+      "下一跳可达",
+      "路由有效性"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-032",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；NEXT_HOP 必须在 IGP 中可解析（Route Resolvability Condition）才能参与选路的依据 RFC 4271 第 9.1.2.1 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "801ea2918f7050efe835f8abe54e6ebd913fd15175b6409556bda65e64480ba7"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-033",
+    "type": "single_choice",
+    "question": "华为设备上配置 maximum load-balancing 后，同一目的网络存在多条属性等价的 BGP 路由。下列描述正确的是？",
+    "options": {
+      "A": "BGP 会把这些路由全部通告给邻居，实现邻居侧负载分担",
+      "B": "BGP 仍选出一条最优路由用于通告，但可以把多条等价路由加入转发表实现本地负载分担",
+      "C": "BGP 会随机选择一条加入转发表，其他路由被删除",
+      "D": "该命令只对 iBGP 路由生效，对 eBGP 路由无效"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确：maximum load-balancing 允许把多条属性等价的 BGP 路由同时装入转发表进行本地负载分担，但 BGP 仍只选一条最优路由向邻居通告。A 错误：默认不会把多条路由都通告出去。C 错误：不是随机选一条并删除其他路由，而是保留等价路由用于转发。D 错误：该功能可分别针对 eBGP 和 iBGP 配置，并非只对 iBGP 生效。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "负载分担",
+      "maximum load-balancing",
+      "等价路由"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-033",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；等价路由仅用于本地负载分担、对外仍只通告最优路由的依据 RFC 4271 第 9.1.2 节与第 9.1.3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "7f97bacc4e4525d94550727bf85d255693bf47e427b2724700525423e09bd2a0"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-034",
+    "type": "single_choice",
+    "question": "BGP 路由器收到一条 Update，发现其中某条路由的 AS_PATH 包含本机所在的 AS 号。按 BGP 的防环机制，它应如何处理该路由？",
+    "options": {
+      "A": "拒绝该路由，不将其用于选路",
+      "B": "接受该路由，但把本 AS 号从 AS_PATH 中删除",
+      "C": "接受该路由，并把它通告回原邻居",
+      "D": "接受该路由，但把 Local_Preference 置 0"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确：AS_PATH 中出现的 AS 号表示路由已经过该 AS；如果包含本机 AS 号，说明按该路径转发会形成环路，BGP 应拒绝该路由。B 错误：BGP 不会通过删除本 AS 号来接受可能成环的路由。C 错误：把路由通告回原邻居既不能消除环路风险，也违反正常的通告规则。D 错误：修改 Local_Preference 不能替代 AS_PATH 防环检查。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "AS_PATH",
+      "防环",
+      "路由接收"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-034",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；AS_PATH 含本机 AS 号即判定环路并拒绝该路由的依据 RFC 4271 第 9.1.2 节与第 5.1.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "9e67220addb1891d30af35b803825187980b65b91458a8dd47bc48d2c422709f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-035",
+    "type": "single_choice",
+    "question": "华为设备上，network 命令与 import-route 命令产生的 BGP 路由，其 ORIGIN 属性通常分别是？",
+    "options": {
+      "A": "两者都是 IGP",
+      "B": "两者都是 INCOMPLETE",
+      "C": "network 产生 IGP，import-route 产生 INCOMPLETE",
+      "D": "network 产生 INCOMPLETE，import-route 产生 IGP"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确：通过 network 命令把本机路由表中已有的精确路由引入 BGP 时，ORIGIN 为 IGP；通过 import-route 从其他协议引入路由时，ORIGIN 为 INCOMPLETE。A 错误：import-route 引入的路由不是 IGP。B 错误：network 产生的路由不是 INCOMPLETE。D 错误：把两者的 ORIGIN 说反了。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "ORIGIN",
+      "network",
+      "import-route"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-035",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；network 产生 IGP、import-route 引入为 INCOMPLETE 的 ORIGIN 取值依据 RFC 4271 第 5.1.1 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "76834e577b66e88bb2967a160749f0d0ab05c846fad660eae467c79d5760ba8f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-1-1-036",
+    "type": "single_choice",
+    "question": "华为设备上对某个 BGP 邻居配置 peer route-policy import，其作用阶段是？",
+    "options": {
+      "A": "在本机向该邻居发送路由时过滤并修改属性",
+      "B": "在接收该邻居发来的路由时过滤并修改属性，之后才参与 BGP 选路",
+      "C": "只修改本机全局路由表，不影响 BGP 路由表",
+      "D": "只对该邻居的 OPEN 报文进行认证"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确：import 方向表示从该邻居接收路由时应用 route-policy，先按策略过滤或修改属性，处理后的路由才进入 BGP 路由表并参与选路。A 错误：向邻居发送方向对应 export。C 错误：import 策略作用于 BGP 接收过程，不直接修改全局路由表。D 错误：route-policy 不是 BGP 报文认证机制。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 路由控制",
+    "knowledgePoint": "BGP 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "route-policy",
+      "import",
+      "邻居策略"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-1-1-036",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 路由控制」；peer route-policy import 在从邻居接收路由阶段生效的依据 RFC 4271 第 9.1 节与第 9.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "7277f7542f73201d3f17e41569c3656cc3ca9e4449cf1bd63c502cae92d325b0"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-2-1-001",
+    "type": "single_choice",
+    "question": "两台 BGP 路由器建立会话时，本端配置的 Hold Time 为 180 秒，对端在 OPEN 报文中提出的 Hold Time 为 90 秒。按 RFC 4271 的协商规则，最终使用的 Hold Time 以及通常的 KEEPALIVE 发送间隔是？",
+    "options": {
+      "A": "180 秒；60 秒",
+      "B": "90 秒；90 秒",
+      "C": "180 秒；30 秒",
+      "D": "90 秒；30 秒"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确：RFC 4271 规定双方使用本端配置值与对端 OPEN 中 Hold Time 的较小值，因此协商结果为 90 秒；KEEPALIVE 的常见发送间隔为 Hold Time 的三分之一，即 30 秒。A 错误：Hold Time 取了较大值，KEEPALIVE 也不是 60 秒。B 错误：Hold Time 正确，但 KEEPALIVE 间隔不应等于 Hold Time。C 错误：Hold Time 取值错误。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 特性与反射器",
+    "knowledgePoint": "BGP 特性介绍",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "Hold Time",
+      "KEEPALIVE",
+      "OPEN"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-2-1-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 特性介绍」；Hold Time 取本端配置与对端 OPEN 中较小值、KEEPALIVE 间隔约为其 1/3 的依据 RFC 4271 第 4.2 节与第 4.4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "c8c567e0367bd21b8db824f1669cd63467b179ee8ddaf24bf57c75c40a7aa401"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-2-1-002",
+    "type": "single_choice",
+    "question": "BGP 状态机中，路由器收到对端 OPEN 报文并发送 KEEPALIVE 后，在收到对端 KEEPALIVE 之前处于哪个状态？",
+    "options": {
+      "A": "Idle",
+      "B": "OpenSent",
+      "C": "OpenConfirm",
+      "D": "Established"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确：RFC 4271 的 OpenConfirm 状态下，本端已收到并接受对端 OPEN、已发送 KEEPALIVE，正在等待对端的 KEEPALIVE 或 NOTIFICATION；收到 KEEPALIVE 后才进入 Established。A 错误：Idle 是会话初始状态。B 错误：OpenSent 是已发送 OPEN、等待对端 OPEN 的状态。D 错误：Established 是双方确认后的最终状态。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 特性与反射器",
+    "knowledgePoint": "BGP 特性介绍",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "状态机",
+      "OpenConfirm",
+      "OPEN"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-2-1-002",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 特性介绍」；已发送 KEEPALIVE、等待对端 KEEPALIVE 的 OpenConfirm 状态定义依据 RFC 4271 第 8.2.2 节有限状态机。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "e8d9df4b0f9b12cf5c93cce074276adf508dd8147d40a1724efd4e9d58216e5c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-2-1-003",
+    "type": "single_choice",
+    "question": "BGP 路由器检测到无法恢复的报文错误时，通常会采取什么动作？",
+    "options": {
+      "A": "发送 NOTIFICATION 报文说明错误，并关闭该 BGP 连接",
+      "B": "发送 KEEPALIVE 报文请求重传",
+      "C": "仅丢弃该报文，连接保持不变",
+      "D": "发送 OPEN 报文重新协商能力"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确：RFC 4271 规定，遇到无法恢复的错误时，BGP 发送携带错误码和错误子码的 NOTIFICATION 报文，然后关闭连接并回到相应状态。B 错误：KEEPALIVE 只用于维持会话，不具备请求重传的功能。C 错误：严重错误不能只丢弃报文而保持连接。D 错误：OPEN 用于会话建立和能力协商，不是错误通知机制。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 特性与反射器",
+    "knowledgePoint": "BGP 特性介绍",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "NOTIFICATION",
+      "错误处理",
+      "会话关闭"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-2-1-003",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 特性介绍」；遇不可恢复错误发送 NOTIFICATION 并关闭连接的依据 RFC 4271 第 4.5 节与第 6 节错误处理。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "88226ec69ea4fa7c8857bc965328cc90a269bcb9164327a2fa1841e5ee0e6625"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-2-1-004",
+    "type": "single_choice",
+    "question": "下列哪一组 BGP 属性都是“可选非过渡（optional non-transitive）”属性？",
+    "options": {
+      "A": "ORIGIN、AS_PATH",
+      "B": "MED、ORIGINATOR_ID",
+      "C": "COMMUNITY、AS_PATH",
+      "D": "NEXT_HOP、LOCAL_PREF"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确：MED 是可选非过渡属性，只影响相邻 AS 的入方向选路，不再向后续 AS 传递；ORIGINATOR_ID 也是可选非过渡属性，由路由反射器在反射时加入，只在集群内部使用。A 错误：ORIGIN 与 AS_PATH 都是公认必遵属性。C 错误：COMMUNITY 是可选过渡属性，AS_PATH 是公认必遵属性。D 错误：NEXT_HOP 是公认必遵属性，LOCAL_PREF 是公认酌情（well-known discretionary）属性。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 特性与反射器",
+    "knowledgePoint": "BGP 特性介绍",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "路径属性",
+      "可选非过渡",
+      "MED",
+      "ORIGINATOR_ID"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-2-1-004",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4",
+        "rfc4456-route-reflection"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 特性与反射器 / BGP 特性介绍」，对应三级目录 hcip831-2-2-1；MED 的可选非过渡定义依据 RFC 4271 §5.1.4，ORIGINATOR_ID 的可选非过渡定义依据 RFC 4456 §8。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 4271/4456 属性分类独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "910a5388bc96ef1ec5a51c0af0755ae650551c89df13570ec6714a246a634d8c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-2-1-005",
+    "type": "single_choice",
+    "question": "一条携带 COMMUNITY 属性的 BGP 路由从 eBGP 邻居传入后，在未配置任何删除或修改策略的情况下，该属性通常如何传播？",
+    "options": {
+      "A": "只在本地有效，不会被通告给任何 BGP 邻居",
+      "B": "作为可选传递属性继续向其他 BGP 邻居通告",
+      "C": "在进入 iBGP 时被自动删除",
+      "D": "只能传递给 iBGP 邻居，不能传递给 eBGP 邻居"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确：COMMUNITY 是可选传递属性，BGP Speaker 收到后应继续向其他邻居传播，除非本地策略显式删除或修改它。A 错误：它并非只在本地有效。C 错误：进入 iBGP 不会自动删除 COMMUNITY。D 错误：传递范围不限于 iBGP，也可以传给 eBGP 邻居。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 特性与反射器",
+    "knowledgePoint": "BGP 特性介绍",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "COMMUNITY",
+      "可选传递",
+      "属性传播"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-2-1-005",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1997-community"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 特性介绍」；COMMUNITY 为可选传递属性、默认继续向其他邻居传播的依据 RFC 1997 第 3、4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "9629d648409d244694f39ccb54e576d2b1d2609ac18dde4876c6fd5abf553903"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-2-1-006",
+    "type": "single_choice",
+    "question": "BGP 的 AGGREGATOR 属性用于记录什么信息？",
+    "options": {
+      "A": "执行路由聚合的 AS 号以及聚合路由器的 IP 地址",
+      "B": "聚合路由的 MED 值",
+      "C": "聚合路由的下一跳地址",
+      "D": "聚合路由的 Local_Preference"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确：RFC 4271 第 5.1.7 节规定 AGGREGATOR 是可选传递属性，包含执行聚合的 AS 号和该路由器的 IP 地址，便于追踪聚合来源。B 错误：MED 有独立的 MULTI_EXIT_DISC 属性。C 错误：下一跳由 NEXT_HOP 属性表示。D 错误：Local_Preference 是单独的属性，不由 AGGREGATOR 记录。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 特性与反射器",
+    "knowledgePoint": "BGP 特性介绍",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "AGGREGATOR",
+      "路由聚合",
+      "路径属性"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-2-1-006",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 特性介绍」；AGGREGATOR 为可选传递属性、记录执行聚合的 AS 号与路由器地址的依据 RFC 4271 第 5.1.7 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "b8de7eb3f286bb46142f75a38d1866bb6f51d1230a93771e06c7a7ca41ba608a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-2-1-007",
+    "type": "single_choice",
+    "question": "BGP 使用哪种传输层协议和端口建立对等体会话？",
+    "options": {
+      "A": "UDP 179",
+      "B": "TCP 89",
+      "C": "TCP 179",
+      "D": "UDP 646"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确：RFC 4271 规定 BGP 使用 TCP 作为传输层协议，服务端口为 179，通过可靠的 TCP 连接交换 OPEN、UPDATE、KEEPALIVE 和 NOTIFICATION 报文。A 错误：BGP 不使用 UDP。B 错误：89 是 OSPF 的协议号，不是 BGP 端口。D 错误：646 是 LDP 使用的端口，且 LDP 使用 UDP/TCP 组合，与 BGP 无关。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 特性与反射器",
+    "knowledgePoint": "BGP 特性介绍",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "TCP 179",
+      "传输层",
+      "对等体"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-2-1-007",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 特性介绍」；BGP 使用 TCP 179 端口建立对等体会话的依据 RFC 4271 第 3 节与第 4.1 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "2cc55c82e511f17dcc9a8f11039bef179f9ff232a04b6161dac80a8b1a8a123f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-2-1-008",
+    "type": "single_choice",
+    "question": "BGP 的 KEEPALIVE 报文的主要作用是？",
+    "options": {
+      "A": "携带新增的 NLRI 前缀",
+      "B": "携带撤销的路由",
+      "C": "协商多协议地址族能力",
+      "D": "在对等体之间维持会话，防止 Hold Timer 超时"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "D 正确：KEEPALIVE 报文只包含 BGP 报头，不携带路由信息，其作用是周期性地向对端证明会话仍然存活，使 Hold Timer 不超时。A 和 B 错误：新增和撤销前缀都由 UPDATE 报文承载。C 错误：多协议能力通过 OPEN 报文的 Capability 参数协商。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 特性与反射器",
+    "knowledgePoint": "BGP 特性介绍",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "KEEPALIVE",
+      "Hold Timer",
+      "会话维持"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-2-1-008",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 特性介绍」；KEEPALIVE 仅含 19 字节报头、用于避免 Hold Timer 超时的依据 RFC 4271 第 4.4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "47c782277711f557b5dabf18d7ab22f787255ea6ab44cc7d721eced3fd29a120"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-2-1-009",
+    "type": "single_choice",
+    "question": "一条 BGP UPDATE 报文可以同时包含哪些内容？",
+    "options": {
+      "A": "只能包含新增的 NLRI，不能包含撤销信息",
+      "B": "可以同时包含 Withdrawn Routes 字段中的撤销前缀和 NLRI 字段中的新增前缀",
+      "C": "只能包含撤销信息，不能包含新增 NLRI",
+      "D": "只能包含路径属性，不能包含任何前缀"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "B 正确：RFC 4271 的 UPDATE 报文同时具有 Withdrawn Routes 和 NLRI 字段，一条报文可以既撤销部分前缀又通告新的前缀，并携带相应的路径属性。A 和 C 错误：都把 UPDATE 的能力限制为单一方向。D 错误：UPDATE 的核心作用就是携带 NLRI 及其路径属性，不可能不包含前缀。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 特性与反射器",
+    "knowledgePoint": "BGP 特性介绍",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "UPDATE",
+      "撤销路由",
+      "NLRI"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-2-1-009",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 特性介绍」；UPDATE 同时具有 Withdrawn Routes 与 NLRI 字段、可同时撤销和通告前缀的依据 RFC 4271 第 4.3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "b9253ce7d0d98a4df917477d9c39be0ddd5e71e01298c29a015a7d9292e3118b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-2-1-010",
+    "type": "single_choice",
+    "question": "两台路由器要通过 BGP 交换 IPv6 单播路由，需要让 BGP 会话支持相应的地址族。该能力通常如何协商？",
+    "options": {
+      "A": "在 UPDATE 报文中临时携带地址族参数",
+      "B": "通过 KEEPALIVE 报文的长度字段隐式协商",
+      "C": "在 OPEN 报文的 Optional Parameters 中通过 Capability 字段协商多协议扩展能力",
+      "D": "必须通过静态配置，BGP 协议本身不承载能力协商"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "C 正确：RFC 4760 通过 BGP Capability Advertisement 机制扩展 BGP，多协议能力放在 OPEN 报文的 Optional Parameters 中，Capability Code 为 1，双方据此确认共同支持的地址族。A 错误：地址族能力不在 UPDATE 中临时协商。B 错误：KEEPALIVE 不承载能力协商。D 错误：BGP 协议本身具备能力协商机制，不需要仅靠静态配置。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 特性与反射器",
+    "knowledgePoint": "BGP 特性介绍",
+    "difficulty": "hard",
+    "tags": [
+      "BGP",
+      "MP-BGP",
+      "Capability",
+      "OPEN"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-2-1-010",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4760-mp-bgp"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 特性介绍」；多协议能力通过 OPEN 的 Capability（Capability Code 1）协商的依据 RFC 4760 第 8 节，MP_REACH_NLRI 地址族承载见第 3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "b43d54082da9b44ea5ee5101b10ec056b646fa2f825ff4955d8c60b08813d15a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-2-2-1-011",
+    "type": "single_choice",
+    "question": "RFC 4271 规定 BGP 报文的最大长度是多少？",
+    "options": {
+      "A": "4096 字节",
+      "B": "1024 字节",
+      "C": "1500 字节",
+      "D": "65535 字节"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "A 正确：RFC 4271 第 4 节规定 BGP 报文最大长度为 4096 字节，所有实现都必须支持该上限；最小报文是仅含 19 字节报头的报文。B 错误：1024 字节不是 BGP 规定的上限。C 错误：1500 字节是常见以太网 MTU，不是 BGP 报文长度上限。D 错误：65535 字节是更大的通用上限，BGP 明确限制为 4096 字节。",
+    "chapter": "BGP 高级特性",
+    "knowledgeSection": "BGP 特性与反射器",
+    "knowledgePoint": "BGP 特性介绍",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "报文长度",
+      "RFC 4271",
+      "4096"
+    ],
+    "provenance": {
+      "questionId": "hcip831-2-2-1-011",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页「BGP 高级特性 / BGP 特性介绍」；BGP 报文最大长度 4096 字节、报头最小 19 字节的依据 RFC 4271 第 4.1 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "9f98f0ca819fec63856b9255e8f8460de4a2d4b179abebd98767172a50f1669e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  }
+]

@@ -20,6 +20,7 @@ import {
   MOBILE_VERSION,
 } from "../mobile-release.js";
 import { api } from "../api.js";
+import { AccountRecoveryDialog, EmailCodeFields, useAccountEmailPolicy } from "../components/account-security.jsx";
 
 export const AUTH_LOOP_STEPS = [
   {
@@ -53,6 +54,9 @@ export function AuthScreen({ onAuth, initialError = "" }) {
     [error, setError] = useState(initialError),
     [busy, setBusy] = useState(false);
   const [loopIndex, setLoopIndex] = useState(0);
+  const [recoveryOpen, setRecoveryOpen] = useState(false);
+  const [emailProof, setEmailProof] = useState({});
+  const emailPolicy = useAccountEmailPolicy();
   const isLogin = mode === "login";
   useEffect(() => {
     if (window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches)
@@ -70,12 +74,15 @@ export function AuthScreen({ onAuth, initialError = "" }) {
       setError("两次输入的密码不一致");
       return;
     }
+    if (!isLogin && (emailPolicy.loading || emailPolicy.error)) return;
+    if (!isLogin && emailPolicy.required && !emailProof.challengeId) { setError("请先获取邮箱验证码"); return; }
     setBusy(true);
     setError("");
     try {
       await api(`/auth/${mode === "login" ? "login" : "register"}`, {
         username,
         password,
+        ...(!isLogin && emailPolicy.required ? emailProof : {}),
       });
       const session = await api("/auth/me");
       if (!session.authenticated)
@@ -259,12 +266,14 @@ export function AuthScreen({ onAuth, initialError = "" }) {
                 </span>
               </label>
             )}
+            {!isLogin && emailPolicy.required && <EmailCodeFields key={mode} purpose="register" username={username} onChange={setEmailProof} disabled={busy} />}
+            {!isLogin && emailPolicy.error && <p role="alert" className="form-error">{emailPolicy.error} <button type="button" onClick={emailPolicy.reload}>重新读取</button></p>}
             {error && (
               <p className="form-error" role="alert">
                 {error}
               </p>
             )}
-            <button className="primary auth-submit" disabled={busy}>
+            <button className="primary auth-submit" disabled={busy || (!isLogin && (emailPolicy.loading || !!emailPolicy.error))}>
               {busy ? (
                 <>
                   <LoaderCircle className="auth-spinner" size={17} /> 处理中...
@@ -277,6 +286,7 @@ export function AuthScreen({ onAuth, initialError = "" }) {
               )}
             </button>
           </form>
+          {isLogin && emailPolicy.required && <button type="button" className="text-button account-forgot-button" disabled={busy} onClick={() => setRecoveryOpen(true)}>忘记密码？</button>}
           <div className="auth-panel-divider">
             <span>或</span>
           </div>
@@ -310,6 +320,7 @@ export function AuthScreen({ onAuth, initialError = "" }) {
           </p>
         </section>
       </section>
+      {recoveryOpen && <AccountRecoveryDialog onClose={() => setRecoveryOpen(false)} />}
     </main>
   );
 }

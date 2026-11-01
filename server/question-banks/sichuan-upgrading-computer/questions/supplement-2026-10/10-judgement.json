@@ -1,0 +1,82 @@
+[
+  {
+    "id": "sc-2610-122",
+    "type": "true_false",
+    "question": "标准 ASCII 码用 7 位二进制表示一个字符，因此标准 ASCII 字符集共可表示 128 个字符。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": ["A"],
+    "analysis": "7 位二进制共有 2⁷ = 128 种组合，对应 128 个编码，因此标准 ASCII 字符集可表示 128 个字符，该说法正确。实际存储时占用 1 个字节，最高位通常置 0 或用作奇偶校验位。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "数制与数据表示",
+    "knowledgePoint": "信息编码与计量",
+    "difficulty": "easy",
+    "tags": ["四川专升本", "计算机基础", "信息编码与计量"]
+  },
+  {
+    "id": "sc-2610-123",
+    "type": "true_false",
+    "question": "JPEG 是一种无损压缩图像格式，压缩后不会丢失任何图像细节。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": ["B"],
+    "analysis": "JPEG 采用有损压缩，通过舍弃人眼不敏感的高频信息来大幅减小文件体积，压缩比越高细节损失越明显。无损压缩格式的典型代表是 PNG、BMP（未压缩）和 GIF（调色板无损），因此该说法错误。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "数字媒体",
+    "knowledgePoint": "音频与图像基础",
+    "difficulty": "easy",
+    "tags": ["四川专升本", "计算机基础", "音频与图像基础"]
+  },
+  {
+    "id": "sc-2610-124",
+    "type": "true_false",
+    "question": "在 Excel 中，若公式引用的单元格地址为相对地址，把公式复制到其他单元格后，引用会随之改变。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": ["A"],
+    "analysis": "相对地址记录的是与公式所在单元格的相对位置，复制到新位置后按相同的偏移量重新定位，因此引用会改变。这正是相对地址便于批量填充的原因；若希望引用固定不变，应改用绝对地址 $A$1。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "函数与数据处理",
+    "difficulty": "easy",
+    "tags": ["四川专升本", "计算机基础", "函数与数据处理"]
+  },
+  {
+    "id": "sc-2610-125",
+    "type": "true_false",
+    "question": "IP 地址 192.168.0.1 可以直接在 Internet 上作为公网地址使用。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": ["B"],
+    "analysis": "192.168.0.0/16 属于私有地址段，只能在内部网络中使用，不能直接在 Internet 上路由。若要让内部主机访问外网，需要通过 NAT 转换为公网地址，因此该说法错误。",
+    "chapter": "网络与信息安全",
+    "knowledgeSection": "网络基础",
+    "knowledgePoint": "网络设备与 Internet",
+    "difficulty": "easy",
+    "tags": ["四川专升本", "计算机基础", "网络设备与 Internet"]
+  },
+  {
+    "id": "sc-2610-126",
+    "type": "true_false",
+    "question": "一个算法可以没有输入，但必须有一个或多个输出。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": ["A"],
+    "analysis": "算法的基本特征包括有穷性、确定性、可行性、输入和输出。输入可以有零个或多个，例如直接输出固定常量的算法没有输入；但输出必须至少有一个，否则算法执行的结果无法被使用，因此该说法正确。",
+    "chapter": "算法与程序设计",
+    "knowledgeSection": "算法基础",
+    "knowledgePoint": "算法特征与计算思维",
+    "difficulty": "medium",
+    "tags": ["四川专升本", "计算机基础", "算法特征与计算思维"]
+  }
+]

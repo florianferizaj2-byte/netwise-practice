@@ -1,0 +1,29 @@
+{
+  "name": "aceexam-promo-video",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AceExam promo videos (Remotion, based on EveryInc/product-launch-video scaffold, MIT)",
+  "scripts": {
+    "studio": "remotion studio",
+    "capture": "node scripts/capture.mjs",
+    "still": "remotion still",
+    "render:premium": "remotion render Premium out/aceexam-premium.mp4 --codec=h264 --crf=18",
+    "render:cyberpunk": "remotion render Cyberpunk out/aceexam-cyberpunk.mp4 --codec=h264 --crf=18",
+    "render:trendy": "remotion render Trendy out/aceexam-trendy.mp4 --codec=h264 --crf=18",
+    "render:premium-v": "remotion render PremiumV out/aceexam-premium-vertical.mp4 --codec=h264 --crf=18",
+    "render:trendy-v": "remotion render TrendyV out/aceexam-trendy-vertical.mp4 --codec=h264 --crf=18",
+    "render:trendy-v-clean": "remotion render TrendyVClean out/aceexam-trendy-vertical-clean.mp4 --codec=h264 --crf=18"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.290",
+    "lucide-react": "0.468.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.290"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.12",
+    "playwright": "1.63.0",
+    "typescript": "5.6.3"
+  }
+}

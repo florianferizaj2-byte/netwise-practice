@@ -1,0 +1,7368 @@
+[
+  {
+    "id": "vet-2026-recall-basic-00048",
+    "type": "single_choice",
+    "question": "血液中既能运输氧气,又能运输二氧化碳的物质是",
+    "options": {
+      "A": "补体蛋白",
+      "B": "纤维蛋白",
+      "C": "血红蛋白",
+      "D": "球蛋白",
+      "E": "白蛋白"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "血红蛋白是一种含铁的特殊蛋白质,既能与氧结合,形成氧合血红蛋白 (HbO2 )又易于将它释放,形成脱氧血红蛋白(或还原血红蛋白,HHb)。此 外,二氧化碳也可与 Hb 结合,以氨基甲酸血红蛋白形式经血液运输。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 61,
+        "sourceIndex": 61,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00006",
+    "type": "single_choice",
+    "question": "肠道产生的胺类被吸收后,需要肝脏解毒的反应",
+    "options": {
+      "A": "氧化反应",
+      "B": "结合反应",
+      "C": "还原反应",
+      "D": "聚合反应",
+      "E": "水解反应"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "肠内腐败产生的有毒胺类被吸收后,进入肝脏,大部分在肝脏中经胺氧化 酶的催化,先被氧化成醛及氨,醛再氧化成酸,最后氧化成二氧化碳和水,氨则 大部分在肝脏合成尿素,从而使胺类物质丧失活性。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 8,
+        "sourceIndex": 8,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00008",
+    "type": "single_choice",
+    "question": "交感-肾上腺髓质系统兴奋时分泌的激素是",
+    "options": {
+      "A": "胰岛素",
+      "B": "生长激素",
+      "C": "儿茶酚胺",
+      "D": "糖皮质激素",
+      "E": "胰高血糖素"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "交感神经兴奋可同步激活肾上腺髓质,使其大量分泌肾上腺素与去甲肾上 腺素,二者均属于儿茶酚胺类物质,是交感-肾上腺髓质系统兴奋时的核心效应 激素,可引发心率加快、血管收缩、血糖升高等一系列应激反应。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 10,
+        "sourceIndex": 10,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00001",
+    "type": "single_choice",
+    "question": "与瘤胃内微生物活动无关的是",
+    "options": {
+      "A": "皱胃容积",
+      "B": "瘤胃的厌氧环境",
+      "C": "瘤胃的营养环境",
+      "D": "瘤胃温度",
+      "E": "瘤胃 PH 值"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "瘤胃内具有微生物所需的营养物质,渗透压与血浆渗透压相近,温 度通常为 38~41°C,pH 维持在 6~7。此外,瘤胃背囊的气体多为二氧化碳、 甲烷及少量氮、氢等气体,随饲料进入的少量氧很快会被微生物利用,从 而形成厌氧环境。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 1,
+        "sourceIndex": 1,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00036",
+    "type": "single_choice",
+    "question": "糖尿病肾病的病理变化是",
+    "options": {
+      "A": "肾小管淀粉样病变",
+      "B": "肾小球硬化",
+      "C": "肾小球软化",
+      "D": "肾小球萎缩",
+      "E": "肾小管尿酸盐沉积"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "糖尿病对肾的影响可波及肾小球、肾小管、肾血管和肾间质。糖尿病导致 的肾小球病变具有一定的病理学特点,即形成糖尿病肾小球硬化症。糖尿病肾病 的超微结构变化特点是肾小球毛细血管基底膜弥漫性增厚,上皮细胞与足突融合。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 45,
+        "sourceIndex": 45,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00021",
+    "type": "single_choice",
+    "question": "抑制乳汁分泌的卵巢的激素是?",
+    "options": {
+      "A": "醛固酮",
+      "B": "皮质素",
+      "C": "孕酮",
+      "D": "雌二醇",
+      "E": "催产素"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "卵巢主要分泌雌激素、孕激素、抑制素和松弛素等。其中雌激素(雌二醇) 可通过负反馈作用抑制催乳素的分泌,从而抑制乳汁生成;孕激素(孕酮)与雌 激素协同抑制泌乳,但单独作用较弱。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 86,
+        "sourceIndex": 86,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00056",
+    "type": "single_choice",
+    "question": "磷酸戊糖途径中可汇入糖酵解的代谢产物是",
+    "options": {
+      "A": "肾上腺素",
+      "B": "利多卡因",
+      "C": "阿托品",
+      "D": "酚妥拉明",
+      "E": "毛果芸香碱"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "磷酸戊糖途径的反应在胞液中进行。其途径可分为两个阶段:第一阶段是 氧化反应,包括葡萄糖-6-磷酸 2 次脱氢、1 次脱羧,形成五碳糖(核酮糖-5-磷酸), 生成 CO2和 NADPH+H+;第二阶段是非氧化反应,包括核酮糖-5-磷酸异构化为 核糖-5-磷酸,核酮糖-5-磷酸还通过差向异构形成木酮糖-5-磷酸,再通过转酮基 反应和转醛基反应,将磷酸戊糖途径与糖无氧分解途径联系起来。 (共用选项)",
+    "chapter": "基础科目",
+    "knowledgePoint": "基础综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 73,
+        "sourceIndex": 73,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00041",
+    "type": "single_choice",
+    "question": "病死动物尸体焚烧后,焚烧炉出口烟气含氧量(干气)标准为",
+    "options": {
+      "A": "2%",
+      "B": "3%",
+      "C": "4%",
+      "D": "5%",
+      "E": "6%"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "直接焚烧法:燃烧室温度应≥850°C。燃烧所产生的烟气从最后的助燃空 气喷射口或燃烧器出口到换热面或烟道冷风引射口之间的停留时间应≥2s。焚烧 炉出口烟气中氧含量应为 6%~10%(干气)。",
+    "chapter": "基础科目",
+    "knowledgePoint": "基础综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 51,
+        "sourceIndex": 51,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00046",
+    "type": "single_choice",
+    "question": "心包的壁层和脏层的液体是",
+    "options": {
+      "A": "组织液",
+      "B": "血液",
+      "C": "心包液",
+      "D": "渗出液",
+      "E": "淋巴液"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "心包为包在心脏外面的圆锥形纤维浆膜囊,分纤维层和浆膜层。纤维层为 心包的外层,浆膜层为心包的内层,分壁层和脏层,壁层紧贴于纤维层内面,脏 层紧贴于心脏外面,构成心外膜。壁层和脏层之间的腔隙称为心包腔,内含心包 液,起润滑作用,可减少心搏动时的摩擦。",
+    "chapter": "基础科目",
+    "knowledgePoint": "基础综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 58,
+        "sourceIndex": 58,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00022",
+    "type": "single_choice",
+    "question": "急性失血时,对机体产生明显影响的失血量是机体的",
+    "options": {
+      "A": "1%",
+      "B": "5%",
+      "C": "10%",
+      "D": "15%",
+      "E": "20%"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "一次失血若不超过血量的 10%,一般不会影响健康。一次急性失血若达到 血量的 20%时,生命活动将受到明显影响。一次急性失血超过血量的 30%时,则 会危及生命。",
+    "chapter": "基础科目",
+    "knowledgePoint": "基础综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 87,
+        "sourceIndex": 87,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00003",
+    "type": "single_choice",
+    "question": "未按规定处置病死畜禽,罚款区间",
+    "options": {
+      "A": "3000~30000",
+      "B": "1000~3000",
+      "C": "500~2000",
+      "D": "5 万~10 万",
+      "E": "3 万~10 万"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "未按照规定处理病死畜禽和病害畜禽产品的,由县级以上地方人民政府农 业农村主管部门责令改正,处三千元以上三万元以下罚款;情节严重的,责令停 业整顿,并处三万元以上十万元以下罚款。",
+    "chapter": "基础科目",
+    "knowledgePoint": "基础综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 4,
+        "sourceIndex": 4,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00027",
+    "type": "single_choice",
+    "question": "可阻断电子由细胞色素 c 传递至细胞色素 aa3 的是",
+    "options": {
+      "A": "抗霉素 A",
+      "B": "氰化物",
+      "C": "鱼藤酮",
+      "D": "萎锈灵",
+      "E": "杀粉蝶菌素"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "氰化物抑制细胞色素 aa3 (细胞色素 c 氧化酶),阻断电子从细胞色素 c 传递给 O2",
+    "chapter": "基础科目",
+    "knowledgePoint": "基础综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 36,
+        "sourceIndex": 36,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00040",
+    "type": "single_choice",
+    "question": "家畜卵子受精的部位是输卵管",
+    "options": {
+      "A": "漏斗部",
+      "B": "峡部",
+      "C": "伞部",
+      "D": "子宫部",
+      "E": "壶腹部"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "输卵管是输送卵子到子宫的细而弯曲的肌性管道,也是受精的场所。输卵 管分为漏斗、壶腹、峡和子宫部。输卵管壶腹:为输卵管漏斗后方管腔较粗的部 分,是精子和卵子结合受精的部位。",
+    "chapter": "基础科目",
+    "knowledgePoint": "基础综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 50,
+        "sourceIndex": 50,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00005",
+    "type": "single_choice",
+    "question": "家禽进行气体交换的肺部结构是什么",
+    "options": {
+      "A": "初级支气管",
+      "B": "次级支气管",
+      "C": "三级支气管",
+      "D": "肺毛细管",
+      "E": "小支气管"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "家禽的肺由三级支气管(初级支气管、次级支气管和三级支气管)和肺房、 漏斗和肺毛细管组成,肺毛细管相当于哺乳动物的肺泡,是进行气体交换的地方。",
+    "chapter": "基础科目",
+    "knowledgePoint": "基础综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 9,
+        "sourceIndex": 9,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00008",
+    "type": "single_choice",
+    "question": "中动脉内膜与中膜的分界线",
+    "options": {
+      "A": "内皮下层",
+      "B": "微丝",
+      "C": "中弹性膜",
+      "D": "内弹性膜",
+      "E": "外弹性膜"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "中动脉分为内膜,中膜和外膜。内膜由内皮、内皮下层和内弹性膜构成, 内弹性膜由弹性,有利于血管的收缩,呈波浪状,折光性强,一般以此膜作为内 膜和中膜的分界线。",
+    "chapter": "基础科目",
+    "knowledgePoint": "基础综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 17,
+        "sourceIndex": 17,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00039",
+    "type": "single_choice",
+    "question": "重大动物疫情应急工作的指导方针不包括的是",
+    "options": {
+      "A": "饲养管理",
+      "B": "加强领导",
+      "C": "依靠科学",
+      "D": "依法防治",
+      "E": "果断处理"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "重大动物疫情应急工作应当坚持加强领导、密切配合,依靠科学、依法防 治,群防群控、果断处置的 24 字方针。",
+    "chapter": "基础科目",
+    "knowledgePoint": "基础综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 49,
+        "sourceIndex": 49,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00020",
+    "type": "single_choice",
+    "question": "肉鸡群 20 日龄,厌食,行动迟缓,腿和翅关节肿大,跛行,腹泻,剖 检见肾肿大,肾和关节有大量尿酸盐沉着,引起该鸡群发病的原因可能",
+    "options": {
+      "A": "嘧啶代谢异常",
+      "B": "三酰甘油代谢异常",
+      "C": "葡萄糖代谢异常",
+      "D": "α酮酸代谢异常",
+      "E": "嘌呤代谢异常"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "鸟类(包含家禽)嘌呤代谢的产物是尿酸,嘌呤代谢异常时产生过 多的尿酸,会以尿酸盐的形式沉积于肾脏、肝脏等器官及关节,造成器官 肿大变硬、关节型痛风、营养代谢紊乱、免疫功能下降。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物解剖学、组织学与胚胎学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 79,
+        "sourceIndex": 79,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00019",
+    "type": "single_choice",
+    "question": "最常发生细胞内玻璃样变的器官是",
+    "options": {
+      "A": "心",
+      "B": "肝",
+      "C": "肾",
+      "D": "脾",
+      "E": "肺"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "细胞内玻璃样变性:也称为细胞内透明滴样变,是指在变性的细胞内(胞 浆中)出现大小不一、均质红染的玻璃样圆形小滴。常见于肾小球肾炎时,或其 他疾病面伴有明显的蛋白尿时,肾小管上皮细胞内可出现多个大小不等的透明红 染的圆形小滴。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物解剖学、组织学与胚胎学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 28,
+        "sourceIndex": 28,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00055",
+    "type": "single_choice",
+    "question": "犬,起于锁骨,分别至于颈部中线、颞骨的乳突和肱骨前缘内侧的肌肉是",
+    "options": {
+      "A": "斜方肌",
+      "B": "背阔肌",
+      "C": "臂三头肌",
+      "D": "肩胛横突肌",
+      "E": "臂头肌"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "臂头肌起点为锁骨,分三支止点:颈部中线、颞骨乳突、肱骨前缘内侧, 主要功能牵引头颈、伸展前肢。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物解剖学、组织学与胚胎学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 69,
+        "sourceIndex": 69,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00006",
+    "type": "single_choice",
+    "question": "鼻腔呼吸区的黏膜上皮是",
+    "options": {
+      "A": "单层柱状上皮",
+      "B": "假复层纤毛柱状上皮",
+      "C": "变移上皮",
+      "D": "单层立方上皮",
+      "E": "复层柱状上皮"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "鼻腔分为呼吸区和嗅区,嗅区的黏膜属于被覆嗅上皮。呼吸区被覆假复层 柱状纤毛上皮。 固有鼻腔、咽、喉、气管、支气管:假复层柱状纤毛上皮 细支气管、终末细支气管:单层柱状纤毛柱状上皮。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物解剖学、组织学与胚胎学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 10,
+        "sourceIndex": 10,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00020",
+    "type": "single_choice",
+    "question": "胎儿的代谢产物通过什么血管传送到母体体内",
+    "options": {
+      "A": "脐静脉",
+      "B": "脐动脉",
+      "C": "卵圆孔",
+      "D": "动脉导管",
+      "E": "静脉导管"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "脐静脉输送氧气、营养物质给胎儿。脐动脉携带胎儿产生的代谢废物,从 胎儿流向胎盘,再由母体排出。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物解剖学、组织学与胚胎学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 29,
+        "sourceIndex": 29,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00064",
+    "type": "single_choice",
+    "question": "可用于降低脑膜炎患畜颅内压的药物是",
+    "options": {
+      "A": "生理盐水",
+      "B": "二硫丙醇",
+      "C": "亚甲蓝",
+      "D": "甘露醇",
+      "E": "阿托品"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "甘露醇是一种高渗性脱水剂,静脉注射后能通过渗透作用将脑组织内的水 分吸入血液中,从而有效减轻脑水肿,降低颅内压。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物解剖学、组织学与胚胎学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 92,
+        "sourceIndex": 92,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00030",
+    "type": "single_choice",
+    "question": "维生素 A 缺乏可引起鸡的食管腺发生",
+    "options": {
+      "A": "再生",
+      "B": "萎缩",
+      "C": "增生",
+      "D": "肥大",
+      "E": "化生"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "维生素 A 是维持上皮组织正常分化与结构完整的必需物质,当其缺乏时, 鸡食道腺的单层柱状上皮会失去正常的分化状态,转变为耐受力更强的复层鳞状 上皮,该过程属于鳞状化生,是化生的典型类型之一。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物病理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 39,
+        "sourceIndex": 39,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00015",
+    "type": "single_choice",
+    "question": "皮肤冻伤属于以下哪个",
+    "options": {
+      "A": "湿性坏疽",
+      "B": "凝固性坏死",
+      "C": "干性坏疽",
+      "D": "液化性坏死",
+      "E": "气性坏疽"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "皮肤冻伤形成的皮肤坏死属于干性坏疽,坏死灶干燥、皱缩,质硬、呈灰 黑色,腐败菌感染较轻,坏疽区与周围健康组织有一条较明显的炎性反应带分隔, 边界清楚。最终坏疽部分可完全从正常组织分离脱落。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物病理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 20,
+        "sourceIndex": 20,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00061",
+    "type": "single_choice",
+    "question": "催化纤维蛋白原变成纤维蛋白的是",
+    "options": {
+      "A": "心性水肿",
+      "B": "肝性水肿",
+      "C": "肾性水肿",
+      "D": "炎性水肿",
+      "E": "营养不良性水肿"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "凝血酶是凝血过程的关键终末酶,其核心作用是将可溶性纤维蛋白原水解 为不溶性纤维蛋白单体,后者自发聚合形成纤维蛋白多聚体,构成血凝块的网状 支架。 (共用选项)",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物病理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 86,
+        "sourceIndex": 86,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00058",
+    "type": "single_choice",
+    "question": "牧羊犬,三岁,遇车祸,大量出血,首选的急救药物是 C",
+    "options": {
+      "A": "睾丸",
+      "B": "阴茎沟",
+      "C": "阴茎体",
+      "D": "输精管乳头",
+      "E": "附睾"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "酚磺乙胺为止血药,增强血小板聚集、缩短凝血时间,外伤大出血急救止 血首选。 (共用选项)",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物病理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 77,
+        "sourceIndex": 77,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00010",
+    "type": "single_choice",
+    "question": "实验室中常用的病理组织固定液是:",
+    "options": {
+      "A": "10%甲醛",
+      "B": "10%福尔马林",
+      "C": "95%酒精",
+      "D": "75%酒精",
+      "E": "1%盐酸乙醇"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "病理组织固定液为 10%的甲醛溶液。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物病理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 22,
+        "sourceIndex": 22,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00002",
+    "type": "single_choice",
+    "question": "斑状出血灶的出血范围",
+    "options": {
+      "A": "0.3~0.6mm",
+      "B": ">10mm",
+      "C": "1~3mm",
+      "D": "0.6~0.8",
+      "E": "1~10mm"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "斑状出血为瘀斑,直径>10mm",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物病理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 3,
+        "sourceIndex": 3,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00021",
+    "type": "single_choice",
+    "question": "下列哪个不属于抗生素单只注射剂包装说明书应注明的内容的是",
+    "options": {
+      "A": "性状",
+      "B": "生产日期/兽用标识",
+      "C": "应用范围",
+      "D": "半衰期",
+      "E": "生产企业信息"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "兽用化学药品、抗生素产品的单方、复方及中西复方制剂的说明书必须注 明以下内容:兽用标识、兽药名称、主要成分、性状、药理作用、适应证(或功 能与主治)、用法与用量、不良反应、注意事项、停药期、外用杀虫药及其他对 人体或环境有毒有害的废弃包装的处理措施、有效期、含量/包装规格、贮藏、 批准文号、生产企业信息等。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医药理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 30,
+        "sourceIndex": 30,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00034",
+    "type": "single_choice",
+    "question": "具有增加肠内容积、软化粪便、加速粪便排泄的药物是",
+    "options": {
+      "A": "稀盐酸",
+      "B": "鞣酸蛋白",
+      "C": "鱼石脂",
+      "D": "铋制剂",
+      "E": "硫酸钠"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "硫酸钠内服后在肠内可解离出 Na+和 SO32−,提高肠内渗透压,在肠管中 保持大量水分,扩大肠管容积,软化粪便,并刺激肠壁增强其蠕动,从而产生泻 下作用。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医药理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 43,
+        "sourceIndex": 43,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00007",
+    "type": "single_choice",
+    "question": "在胃内降低泡沫表面张力而产生消沫作用药物的是",
+    "options": {
+      "A": "乳酸",
+      "B": "大蒜",
+      "C": "甲醛",
+      "D": "二甲硅油",
+      "E": "鱼石脂"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "二甲硅油表面张力低,内服后能迅速降低瘤胃内泡沫液膜的表面张力,使 小气泡破裂,融合成大气泡,随嗳气排出,产生消除泡沫的作用。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医药理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 9,
+        "sourceIndex": 9,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00012",
+    "type": "single_choice",
+    "question": "能增强心肌收缩力,并使心率减慢的药物是洋地黄毒苷",
+    "options": {
+      "A": "肾上腺素",
+      "B": "洋地黄毒苷",
+      "C": "苷去甲肾上腺素",
+      "D": "阿托品",
+      "E": "氨茶碱"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "洋地黄毒苷的属于强心苷类药物,主要作用时增强心肌收缩力,降低心肌 耗氧量,减慢心率",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医药理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 41,
+        "sourceIndex": 41,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00023",
+    "type": "single_choice",
+    "question": "内服难吸收但用于治疗猪肠道细菌感染的药物",
+    "options": {
+      "A": "磺胺嘧啶",
+      "B": "恩诺沙星",
+      "C": "氟苯尼考",
+      "D": "甲氧苄啶",
+      "E": "新霉素"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "新霉素氨基糖苷类,内服肠道吸收极差,主要停留于肠道,专门治疗肠道 细菌感染;全身感染不能口服新霉素。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医药理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 32,
+        "sourceIndex": 32,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00057",
+    "type": "single_choice",
+    "question": "母犬绝育,局部麻醉,使用的药物是",
+    "options": {
+      "A": "肾上腺素",
+      "B": "利多卡因",
+      "C": "酚磺乙胺",
+      "D": "丁卡因",
+      "E": "东菪莨碱"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "利多卡因是临床最常用局部浸润麻醉药,起效快、毒性低,适合手术局部 麻醉。 (共用选项)",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医药理学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 75,
+        "sourceIndex": 75,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00032",
+    "type": "single_choice",
+    "question": "治疗犊牛大肠杆菌性腹泻,之前用了抑制 DNA 回旋酶的药,为了避免耐药性 的产生,后续应选择的治疗药物是",
+    "options": {
+      "A": "环丙沙星",
+      "B": "磺胺脒",
+      "C": "红霉素",
+      "D": "替米考星",
+      "E": "青霉素"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "磺胺脒属于磺胺类药物。其作用机制是抑制细菌的二氢叶酸合成酶,干扰 叶酸的合成。这与抑制 DNA 回旋酶的机制完全不同,且对肠道革兰氏阴性菌(如 大肠杆菌)有效,因此是合理的换药选择。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生物化学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 41,
+        "sourceIndex": 41,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00005",
+    "type": "single_choice",
+    "question": "犬传染性肝炎(犬病毒性肝炎二型),生化检测哪个酶异常升高",
+    "options": {
+      "A": "淀粉酶",
+      "B": "脂肪酶",
+      "C": "胃蛋白酶",
+      "D": "丙氨酸氨基转移酶",
+      "E": "肌酸激酶"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "犬传染性肝炎损伤肝细胞,肝细胞内丙氨酸氨基转移酶(ALT)大量释放 入血,指标显著升高。淀粉酶、脂肪酶多用于胰腺疾病,肌酸激酶对应肌肉损伤。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生物化学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 7,
+        "sourceIndex": 7,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00017",
+    "type": "single_choice",
+    "question": "必需脂肪酸的烃链通常是",
+    "options": {
+      "A": "单不饱和的",
+      "B": "多不饱和的",
+      "C": "短链的",
+      "D": "饱和的",
+      "E": "含硫的"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "必需脂肪酸指的动物维持正常生理机能必需但是自身不能合成,必需从食 物中摄取的脂肪酸,包括亚油酸、α-亚麻酸和花生四烯酸,他们分别是十八碳 二烯酸、十八碳三烯酸和二十碳四烯酸,所以都是多不饱和脂肪酸",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生物化学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 76,
+        "sourceIndex": 76,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-basic-00024",
+    "type": "single_choice",
+    "question": "尿中含有直接胆红素的是什么黄疸",
+    "options": {
+      "A": "溶血性",
+      "B": "肝性黄疸",
+      "C": "阻塞性黄疸",
+      "D": "退行性黄疸",
+      "E": "实质性黄疸"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "阻塞性黄疸时,胆道阻塞导致结合胆红素(直接胆红素)无法排入肠道,逆 流入血,经肾脏排出,使尿中出现直接胆红素;溶血性黄疸尿中无直接胆红素, 肝性黄疸尿中可有少量直接胆红素。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生物化学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试基础真题及答案.pdf",
+        "questionNumber": 96,
+        "sourceIndex": 96,
+        "sha256": "ae8e5b8dbf958f579a8bf23ed36f754f7115dedfe7e942dbb3d9aa2a3d2e2e2e"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00025",
+    "type": "single_choice",
+    "question": "三羧酸循环中草酰乙酸氨基化形成的是",
+    "options": {
+      "A": "谷氨酸",
+      "B": "甘氨酸",
+      "C": "天冬氨酸",
+      "D": "丙氨酸",
+      "E": "苏氨酸"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "三羧酸循环是糖、脂肪、氨基酸及其他有机物质代谢的联系枢纽。糖有氧 分解过程中产生的丙酮酸、α-酮戊二酸、草酰乙酸可以氨基化转变为丙氨酸、 谷氨酸、天冬氨酸。",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生物化学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 34,
+        "sourceIndex": 34,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00060",
+    "type": "single_choice",
+    "question": "小脑皮质中细胞分布量最少的一层是",
+    "options": {
+      "A": "凝血酶原",
+      "B": "纤溶酶原",
+      "C": "纤溶酶",
+      "D": "凝血酶",
+      "E": "蛋白质 C"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "小脑的浅层为灰质,称小脑皮质,其结构由外向内分为 3 层:分子层细胞 稀少;浦肯野细胞层的细胞体积最大,整齐排列为一层;颗粒层细胞数量最多。 (共用选项)",
+    "chapter": "基础科目",
+    "knowledgePoint": "动物生物化学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 83,
+        "sourceIndex": 83,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00037",
+    "type": "single_choice",
+    "question": "《兽药管理条例》规定动物产品兽药残留超标,养殖场对结果有异议,申请 复检的时限是收到检验结果后",
+    "options": {
+      "A": "5 个工作日",
+      "B": "7 个工作日",
+      "C": "10 个工作日",
+      "D": "15 个工作日",
+      "E": "30 个工作日"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": ".兽药检验工作由国务院兽医行政管理部门和省、自治区、直辖市人民政 府兽医行政管理部门设立的兽药检验机构承担。当事人对兽药检验结果有异议的, 可以自收到检验结果之日起 7 个工作日内向实施检验的机构或者上级兽医行政 管理部门设立的检验机构申请复检。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 47,
+        "sourceIndex": 47,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00014",
+    "type": "single_choice",
+    "question": "《兽药经营质量管理规范》规定,不同区域、不同类型的兽药应当具有明显 的识别标识。其中退货兽药的识别标识字体颜色为",
+    "options": {
+      "A": "绿色",
+      "B": "黄色",
+      "C": "红色",
+      "D": "黑色",
+      "E": "蓝色"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "《兽药经营质量管理规范》规定,不同区域、不同类型的兽药应当具有明 显的识别标识。标识应当放置准确、字迹清楚。不合格兽药以红色字体标识;待 验和退货兽药以黄色字体标识;合格兽药以绿色字体标识。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 19,
+        "sourceIndex": 19,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00022",
+    "type": "single_choice",
+    "question": "根据《动物检疫管理办法》,对出售或运输的动物实施检疫时,不符合《动 物检疫合格证明》出具条件的是",
+    "options": {
+      "A": "临床检查健康的",
+      "B": "畜禽标识符合规定",
+      "C": "申报材料符合检疫规程规定",
+      "D": "来自非封锁区和未发生动物疫情的饲养场(户)",
+      "E": "饲养场(户)须有一定规模"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "出具动物检疫合格证明的条件不要求饲养场(户)具备一定规模,散户养 殖只要满足疫区、免疫、标识、临床健康等要求即可开具证明,不包括 E 选项。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 31,
+        "sourceIndex": 31,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00013",
+    "type": "single_choice",
+    "question": "根据《中华人民共和国动物防疫法》,不属于地方农业农村兽医主管部门监 管的是",
+    "options": {
+      "A": "动物产品储存",
+      "B": "动物产品加工",
+      "C": "动物产品进口",
+      "D": "动物产品经营",
+      "E": "动物产品生产"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "县级以上地方人民政府农业农村主管部门依照本法规定,对动物饲养、屠 宰、经营、隔离、运输以及动物产品生产、经营、加工、贮藏、运输等活动中的 动物防疫实施监督管理。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 16,
+        "sourceIndex": 16,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00018",
+    "type": "single_choice",
+    "question": "根据《中华人民共和国动物防疫法》,动物卫生监督机构负责的是",
+    "options": {
+      "A": "动物防疫监督管理",
+      "B": "动物疫病流行病学调查",
+      "C": "动物、动物产品检疫",
+      "D": "动物疫病诊断",
+      "E": "动物疫病监测"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "动物卫生监督机构依照《中华人民共和国动物防疫法》和国务院农业农村 主管部门的规定对动物、动物产品实施检疫。动物卫生监督机构的官方兽医具体 实施动物、动物产品检疫。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 24,
+        "sourceIndex": 24,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-basic-00004",
+    "type": "single_choice",
+    "question": "根据《动物诊疗病历管理规范》规定,门诊病历负责盖章的人员是",
+    "options": {
+      "A": "防治员",
+      "B": "B 超操作人员",
+      "C": "诊疗机构负责人",
+      "D": "主管执业兽医",
+      "E": "化验员"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "病历记录包括就诊时间、主诉、现病史、既往史、检查结果、诊断及治疗 意见、医嘱等。门(急)诊病历记录应当由接诊执业兽医师在动物就诊时完成并 签名(盖章)确认。",
+    "chapter": "基础科目",
+    "knowledgePoint": "兽医法律法规和职业道德",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "基础科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽基础科目回忆版真题.pdf",
+        "questionNumber": 5,
+        "sourceIndex": 5,
+        "sha256": "2f875bbbba3194d01f3b5803dde824320270d4c3cfc53f56644ac9c2ee007904"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00001",
+    "type": "single_choice",
+    "question": "育肥猪,体温 40°C,眼结膜黄染,头颈部水肿,尿呈茶色或血尿; 巴结肿大。 剖检见全身浆膜和黏膜黄染,肝脏肿大呈棕黄色,间质性肾炎,肠系膜淋 该病最可能的诊断是",
+    "options": {
+      "A": "圆环病毒病",
+      "B": "大肠杆菌病",
+      "C": "肝片吸虫病",
+      "D": "猪副伤寒病",
+      "E": "钩端螺旋体病"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "钩端螺旋体病是由钩端螺旋体引起的一种人畜共患病,猪感染后常表现 为体温升高、眼结膜黄染、头颈部水肿,尿液呈茶色或血尿等症状。剖检可见全 身浆膜和黏膜黄染,肝脏肿大呈棕黄色,间质牲肾炎,肠系膜淋巴结肿大等病变, 与题干中育肥猪的症状和剖检特征高度吻合。",
+    "chapter": "综合科目",
+    "knowledgePoint": "猪病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 1,
+        "sourceIndex": 1,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00002",
+    "type": "single_choice",
+    "question": "育肥猪,体温 40°C,眼结膜黄染,头颈部水肿,尿呈茶色或血尿; 巴结肿大。 剖检见全身浆膜和黏膜黄染,肝脏肿大呈棕黄色,间质性肾炎,肠系膜淋 对该病描述不正确的是",
+    "options": {
+      "A": "可通过皮肤黏膜感染",
+      "B": "鼠是本病的自然防源地主体",
+      "C": "妊娠母猪感染会导致流产",
+      "D": "不感染人",
+      "E": "水源性自然疫源性传染病"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "该病为钩端螺旋体,可通过皮肤黏膜(尤其破损处)感染,鼠类是主要 储存宿主和自然疫源地主体,妊娠母猪感染后,病原体可通过胎盘导致流产,钩 端螺旋体病是人畜共患病,可感染人(如接触病畜尿液污染的水或土壤)。病原",
+    "chapter": "综合科目",
+    "knowledgePoint": "猪病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 2,
+        "sourceIndex": 2,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00003",
+    "type": "single_choice",
+    "question": "育肥猪,体温 40°C,眼结膜黄染,头颈部水肿,尿呈茶色或血尿; 巴结肿大。 剖检见全身浆膜和黏膜黄染,肝脏肿大呈棕黄色,间质性肾炎,肠系膜淋 病原分离检查的采样和处置要求是",
+    "options": {
+      "A": "死后 1 小时内检查",
+      "B": "样品低温冷藏保存 24 小时",
+      "C": "慢性病例采血",
+      "D": "样品低温冰冻保存 24 小时",
+      "E": "死后 3~5 小时检查"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "钩端螺旋体在外界环境中抵抗力较弱,尤其对温度敏感,易因死亡后机 体组织自溶、温度升高而迅速失活。因此,病原分离检查需在病畜死后 1 小时 内采集样品并进行检查,以提高分离成功率。",
+    "chapter": "综合科目",
+    "knowledgePoint": "猪病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 3,
+        "sourceIndex": 3,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00004",
+    "type": "single_choice",
+    "question": "肉鸡群,80 日龄,食欲下降,消瘦贫血,粪便稀薄,内含大量尿酸 肾肿大,内脏器官表面有白色物质沉积。 盐;部分鸡关节痛、行动困难,跛行,翅、脊椎形成结节性肿胀;剖检见 该病最可能的诊断是",
+    "options": {
+      "A": "传染性法氏囊病",
+      "B": "锰缺乏症",
+      "C": "钙缺乏症",
+      "D": "痛风",
+      "E": "传染性支气管炎"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "痛风是由于体内尿酸代谢障碍,尿酸盐在体内沉积引起的疾病。肉鸡群 表现出食欲下降、消瘦贫血、粪便稀薄且含大量尿酸盐,部分鸡关节痛、行动困 难、跛行及结节性肿胀,剖检见肾肿大、内脏器官表面白色物质沉积,这些症状 与痛风的临床表现和病理变化高度吻合。根据临床症状和病理变化即可诊断为 禽痛风。",
+    "chapter": "综合科目",
+    "knowledgePoint": "禽病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 4,
+        "sourceIndex": 4,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00005",
+    "type": "single_choice",
+    "question": "肉鸡群,80 日龄,食欲下降,消瘦贫血,粪便稀薄,内含大量尿酸 肾肿大,内脏器官表面有白色物质沉积。 盐;部分鸡关节痛、行动困难,跛行,翅、脊椎形成结节性肿胀;剖检见 对该病的有效预防措施不包括",
+    "options": {
+      "A": "添加维生素 A",
+      "B": "控制蛋白含量",
+      "C": "调整钙磷比例",
+      "D": "改善通风",
+      "E": "磺胺嘧啶拌料"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "痛风的预防核心是减少尿酸生成和促进尿酸排泄,具体措施包括: 添加维生素 A 可维护黏膜健康,促进尿酸代谢;控制蛋白含量可减少嘌呤 摄入,降低尿酸生成;调整钙磷比例可避免矿物质代谢紊乱加重肾脏负担; 改善通风可减少环境应激对代谢的影响。而磺胺嘧啶属于磺胺类药物,其 代谢产物会增加肾脏负担,抑制尿酸排泄,反而可能诱发或加重痛风,因 此不属于有效预防措施。",
+    "chapter": "综合科目",
+    "knowledgePoint": "禽病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 5,
+        "sourceIndex": 5,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00006",
+    "type": "single_choice",
+    "question": "马,4 岁,过食精料后发病,证见食欲大减,四肢攒于腹下,弓腰 低头,泻粪酸臭,舌红苔黄,脉象洪数。 该证适宜的治法是",
+    "options": {
+      "A": "活血化瘀",
+      "B": "滋阴养血",
+      "C": "补中益气",
+      "D": "清热解毒",
+      "E": "温肾壮阳"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "根据症状,马过食后发病表现为泻粪酸臭,舌红苔黄,脉象洪数, 这些均是热症的表现(过食积滞化热),治疗需以清热解毒为主。",
+    "chapter": "综合科目",
+    "knowledgePoint": "其他动物病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 7,
+        "sourceIndex": 7,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00007",
+    "type": "single_choice",
+    "question": "马,4 岁,过食精料后发病,证见食欲大减,四肢攒于腹下,弓腰 低头,泻粪酸臭,舌红苔黄,脉象洪数。 治疗该证适宜的方剂是",
+    "options": {
+      "A": "茵陈散",
+      "B": "红花散",
+      "C": "四神丸",
+      "D": "白虎汤",
+      "E": "山楂丸"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "山楂丸具有消食化积、清热的功效,适用于食积不化、内热积聚引起的 食欲减退、泻粪酸臭等症状,与本病病机相符。",
+    "chapter": "综合科目",
+    "knowledgePoint": "其他动物病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 8,
+        "sourceIndex": 8,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00008",
+    "type": "single_choice",
+    "question": "马,4 岁,过食精料后发病,证见食欲大减,四肢攒于腹下,弓腰 低头,泻粪酸臭,舌红苔黄,脉象洪数。 针刺治疗首选的穴位是",
+    "options": {
+      "A": "眼脉",
+      "B": "太阳",
+      "C": "分水",
+      "D": "耳尖",
+      "E": "蹄头"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "分水穴位于脐上,具有调理胃肠、消积导滞、利水止泻的作用,适用于 胃肠积滞、泄泻等病证,与本病过食精料导致的食积内热、泻粪酸臭等症状针对 性最强。",
+    "chapter": "综合科目",
+    "knowledgePoint": "其他动物病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 9,
+        "sourceIndex": 9,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00009",
+    "type": "single_choice",
+    "question": "成年比熊犬,3 岁,雌性,体重 10kg,1 天前主人饲喂烤肉后突 粘稠状粪便;实验室检查淀粉酶活性升高,血尿素氮增加。 然发病,频繁呕吐,厌食,精神沉郁,嗜睡,常有祈祷姿势,排出深褐色 该病最可能的诊断是",
+    "options": {
+      "A": "肠炎",
+      "B": "肠套叠",
+      "C": "急性胰腺炎",
+      "D": "胃内异物",
+      "E": "胃炎"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "肠炎主要以腹泻为主,呕吐不常见;肠套叠多表现为剧烈腹痛;胃 内异物有异物摄入史,表现为顽固性呕吐,胃炎呕吐常见,腹痛不明显, 都无淀粉酶显著升高。急性胰腺炎高脂肪食物是诱因,典型症状呕吐、腹 痛,淀粉酶指标升高,血尿素氮增加,最可能符合。",
+    "chapter": "综合科目",
+    "knowledgePoint": "犬猫病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 10,
+        "sourceIndex": 10,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00010",
+    "type": "single_choice",
+    "question": "成年比熊犬,3 岁,雌性,体重 10kg,1 天前主人饲喂烤肉后突 粘稠状粪便;实验室检查淀粉酶活性升高,血尿素氮增加。 然发病,频繁呕吐,厌食,精神沉郁,嗜睡,常有祈祷姿势,排出深褐色 实验室检查具有诊断意义的指标是",
+    "options": {
+      "A": "脂肪酶",
+      "B": "丙氨酸氨基转移酶",
+      "C": "肌酸激酶",
+      "D": "谷氨酸氨基转移酶",
+      "E": "总胆红素"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "脂肪酶是胰腺特异性酶,对胰腺炎诊断有重要意义。",
+    "chapter": "综合科目",
+    "knowledgePoint": "犬猫病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 11,
+        "sourceIndex": 11,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00011",
+    "type": "single_choice",
+    "question": "成年比熊犬,3 岁,雌性,体重 10kg,1 天前主人饲喂烤肉后突 粘稠状粪便;实验室检查淀粉酶活性升高,血尿素氮增加。 然发病,频繁呕吐,厌食,精神沉郁,嗜睡,常有祈祷姿势,排出深褐色 该犬恢复期营养要求是",
+    "options": {
+      "A": "高能量",
+      "B": "高脂",
+      "C": "低能量多粗纤维",
+      "D": "高蛋白",
+      "E": "低脂易消化"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "急性胰腺炎恢复期,胰腺功能尚未完全恢复,需要避免刺激胰腺分 泌,减少胰腺负担。应选择饲喂低脂易消化的食物。",
+    "chapter": "综合科目",
+    "knowledgePoint": "犬猫病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 12,
+        "sourceIndex": 12,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00012",
+    "type": "single_choice",
+    "question": "雏鸡群,3 周龄,厌食,衰弱、消瘦,可视黏膜苍白,皮下肌肉、 翅尖出血,血液稀薄;鸡群发病率为 40%,病死率为 10%。 该病最可能的诊断是",
+    "options": {
+      "A": "传染性法氏囊病",
+      "B": "鸡传染性贫血",
+      "C": "网状内皮组织增生症",
+      "D": "马立克氏病",
+      "E": "禽白血病"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "根据临床症状可视黏膜苍白,皮下肌肉、翅尖出血,血液稀薄;可 判定为鸡传染性贫血。",
+    "chapter": "综合科目",
+    "knowledgePoint": "禽病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 13,
+        "sourceIndex": 13,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00013",
+    "type": "single_choice",
+    "question": "雏鸡群,3 周龄,厌食,衰弱、消瘦,可视黏膜苍白,皮下肌肉、 翅尖出血,血液稀薄;鸡群发病率为 40%,病死率为 10%。 诊断该病时用于病毒分离的首选组织是",
+    "options": {
+      "A": "肺",
+      "B": "心",
+      "C": "脾",
+      "D": "气管",
+      "E": "肝"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "病毒分离:肝脏是分离鸡传染性贫血病毒的最好材料。",
+    "chapter": "综合科目",
+    "knowledgePoint": "禽病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 14,
+        "sourceIndex": 14,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00014",
+    "type": "single_choice",
+    "question": "雏鸡群,3 周龄,厌食,衰弱、消瘦,可视黏膜苍白,皮下肌肉、 翅尖出血,血液稀薄;鸡群发病率为 40%,病死率为 10%。 对该病最有效的防控措施",
+    "options": {
+      "A": "消毒",
+      "B": "疫苗免疫",
+      "C": "注射卵黄抗体",
+      "D": "免疫增强剂添加",
+      "E": "抗生素预防"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "对鸡传染性贫血最有效的防控措施是疫苗免疫。",
+    "chapter": "综合科目",
+    "knowledgePoint": "禽病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 15,
+        "sourceIndex": 15,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00015",
+    "type": "single_choice",
+    "question": "夏季,舍外温度 37°C,30 日龄地面平养白羽肉鸡突然发病,病 脱落的肠黏膜组织,病死率达 50%;肠黏膜充血、坏死,其上常附有黄色伪 膜。 鸡羽毛蓬乱,精神沉郁,腹泻,粪便呈红色至黑色煤焦油样,粪便中可见 该病最可能的诊断是",
+    "options": {
+      "A": "肉鸡猝死综合征",
+      "B": "热应激综合征",
+      "C": "溃疡性肠炎",
+      "D": "球虫病",
+      "E": "坏死性肠炎"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "根据粪便呈红色至黑色煤焦油样,粪便中可见脱落的肠黏膜组织, 肠黏膜充血、坏死,其上常附有黄色伪膜。判断为禽坏死性肠炎。",
+    "chapter": "综合科目",
+    "knowledgePoint": "禽病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 16,
+        "sourceIndex": 16,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00016",
+    "type": "single_choice",
+    "question": "夏季,舍外温度 37°C,30 日龄地面平养白羽肉鸡突然发病,病 脱落的肠黏膜组织,病死率达 50%;肠黏膜充血、坏死,其上常附有黄色伪 膜。 鸡羽毛蓬乱,精神沉郁,腹泻,粪便呈红色至黑色煤焦油样,粪便中可见 对该病的特征性描述不正确的是",
+    "options": {
+      "A": "病原培养可见卫星现象",
+      "B": "病原为厌氧菌",
+      "C": "饲料和垫料污染是其传播的主要媒介",
+      "D": "特征性肉眼病变主要局限于小肠,尤其是空肠和回肠",
+      "E": "检查肠内容物毒素具有重要意义"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "坏死性肠炎病原培养为双层溶血环菌落,卫星菌落属于传染性鼻炎 的菌落形态。",
+    "chapter": "综合科目",
+    "knowledgePoint": "禽病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 17,
+        "sourceIndex": 17,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00017",
+    "type": "single_choice",
+    "question": "夏季,舍外温度 37°C,30 日龄地面平养白羽肉鸡突然发病,病 脱落的肠黏膜组织,病死率达 50%;肠黏膜充血、坏死,其上常附有黄色伪 膜。 鸡羽毛蓬乱,精神沉郁,腹泻,粪便呈红色至黑色煤焦油样,粪便中可见 对该病的防控措施不正确的是",
+    "options": {
+      "A": "日粮中添加益生茵",
+      "B": "饲喂全价饲料",
+      "C": "做好地面清洁和环境消毒",
+      "D": "饲料中添加高蛋白物质",
+      "E": "防止球虫感染"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "坏死性肠炎的防控需减少肠道菌群紊乱和梭菌增殖,合理措施包括: 日粮添加益生菌可调节肠道菌群平衡,抑制致病菌;饲喂全价饲料可保证 营养均衡,减少肠道负担;清洁地面和消毒可降低环境中病原菌载量;防 止球虫感染可避免肠道黏膜损伤(球虫感染常为坏死性肠炎的诱因)。而 饲料中添加高蛋白物质会增加肠道内蛋白质分解产物,为产气荚膜梭菌提 供营养,促进其繁殖和毒素产生,反而加重病情,故该措施不正确。",
+    "chapter": "综合科目",
+    "knowledgePoint": "禽病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 18,
+        "sourceIndex": 18,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00018",
+    "type": "single_choice",
+    "question": "初产母猪,无预兆流产,流产率达 45%,流产数日后排出恶露, 关节炎,关节肿大,内有大量黄色液体。 流产胎儿头颈四肢背部皮肤有出血斑;部分存活仔猪表现结膜炎和多发性 对该病原的描述不正确的是",
+    "options": {
+      "A": "含有 DNA 和 RNA 两种核酸",
+      "B": "不耐高温",
+      "C": "有细胞壁",
+      "D": "专性细胞内寄生",
+      "E": "可形成大的芽孢"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "衣原体不具备产生芽孢的能力,其生存依赖于宿主细胞内的繁殖周 期。",
+    "chapter": "综合科目",
+    "knowledgePoint": "猪病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 20,
+        "sourceIndex": 20,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00019",
+    "type": "single_choice",
+    "question": "初产母猪,无预兆流产,流产率达 45%,流产数日后排出恶露, 关节炎,关节肿大,内有大量黄色液体。 流产胎儿头颈四肢背部皮肤有出血斑;部分存活仔猪表现结膜炎和多发性 不适用该病诊断的方法是",
+    "options": {
+      "A": "PCR",
+      "B": "ELISA",
+      "C": "血清中和试验",
+      "D": "血清平板培养",
+      "E": "5~7 日龄鸡胚培养"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "衣原体是严格的细胞内寄生菌,病原的分离培养必须用细胞或活体。",
+    "chapter": "综合科目",
+    "knowledgePoint": "猪病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 21,
+        "sourceIndex": 21,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00020",
+    "type": "single_choice",
+    "question": "比能犬,5 岁雄性,已绝育,行走时总是小心谨慎,检查发现视力严 重丧失,两眼瞳孔呈白色,眼压正常,未见羞明流泪。 该病可能诊断为",
+    "options": {
+      "A": "角膜溃疡",
+      "B": "眼睑内翻",
+      "C": "白内障",
+      "D": "前色素层炎",
+      "E": "青光眼"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "白内障的典型症状为瞳孔呈白色、视力下降,眼压通常正常,与题干中病 犬的症状相符。",
+    "chapter": "综合科目",
+    "knowledgePoint": "犬猫病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 22,
+        "sourceIndex": 22,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00021",
+    "type": "single_choice",
+    "question": "比能犬,5 岁雄性,已绝育,行走时总是小心谨慎,检查发现视力严 重丧失,两眼瞳孔呈白色,眼压正常,未见羞明流泪。 病犬眼压可能数值",
+    "options": {
+      "A": "10-20mmHg",
+      "B": "31-40mmHg",
+      "C": "21-30mmHg",
+      "D": "41-50mmHg",
+      "E": "1~5mmHg"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正常犬眼压范围一般在 10-20mmHg,题干中说明病犬眼压正常,故该数值 符合。",
+    "chapter": "综合科目",
+    "knowledgePoint": "犬猫病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 23,
+        "sourceIndex": 23,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00022",
+    "type": "single_choice",
+    "question": "比能犬,5 岁雄性,已绝育,行走时总是小心谨慎,检查发现视力严 重丧失,两眼瞳孔呈白色,眼压正常,未见羞明流泪。 病犬瞳孔白色的原因",
+    "options": {
+      "A": "晶状体变性",
+      "B": "角膜变性",
+      "C": "睫状体变性",
+      "D": "瞬膜变性",
+      "E": "虹膜变性"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "白内障主要是由于晶状体发生变性、混浊,导致瞳孔呈现白色,影响视力。",
+    "chapter": "综合科目",
+    "knowledgePoint": "犬猫病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 24,
+        "sourceIndex": 24,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00023",
+    "type": "single_choice",
+    "question": "牛,5 岁,咳嗽,气喘,日渐消瘦、贫血,体表淋巴结肿大;剖 胸腹腔浆膜上见密集的粟粒样至豌豆大的半透明或不透明的灰白色坚硬结 节。 检见肺及其他器官有很多突起的白色或黄色结节,切开后有干酪样坏死灶, 该病最可能的诊断是",
+    "options": {
+      "A": "葡萄球菌病",
+      "B": "支原体病",
+      "C": "坏死杆菌病",
+      "D": "结核病",
+      "E": "棘球蚴病"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "从题干描述可知牛患有结核病。",
+    "chapter": "综合科目",
+    "knowledgePoint": "牛羊病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 25,
+        "sourceIndex": 25,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00024",
+    "type": "single_choice",
+    "question": "牛,5 岁,咳嗽,气喘,日渐消瘦、贫血,体表淋巴结肿大;剖 胸腹腔浆膜上见密集的粟粒样至豌豆大的半透明或不透明的灰白色坚硬结 节。 检见肺及其他器官有很多突起的白色或黄色结节,切开后有干酪样坏死灶, 该病被称为“珍珠病”,依据的病变部位是",
+    "options": {
+      "A": "肺",
+      "B": "浆膜",
+      "C": "皮肤",
+      "D": "淋巴结",
+      "E": "黏膜"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "浆膜(胸膜和腹膜)发生密集的结核结节,形成似珍珠状,故称“珍 珠病”。",
+    "chapter": "综合科目",
+    "knowledgePoint": "牛羊病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 26,
+        "sourceIndex": 26,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00025",
+    "type": "single_choice",
+    "question": "牛,5 岁,咳嗽,气喘,日渐消瘦、贫血,体表淋巴结肿大;剖 胸腹腔浆膜上见密集的粟粒样至豌豆大的半透明或不透明的灰白色坚硬结 节。 检见肺及其他器官有很多突起的白色或黄色结节,切开后有干酪样坏死灶, PPD 试验判定阳性的皮肤肿胀厚度差是不小于",
+    "options": {
+      "A": "6mm",
+      "B": "8mm",
+      "C": "2mm",
+      "D": "4mm",
+      "E": "10mm"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "PPD 试验(结核菌素试验)判定阳性的皮肤肿胀厚度差是不小于 4mm",
+    "chapter": "综合科目",
+    "knowledgePoint": "牛羊病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 27,
+        "sourceIndex": 27,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00026",
+    "type": "single_choice",
+    "question": "奶牛,3 岁,9 月发病,体温 41.2°C,稽留热型,食欲下降,体 ×10^12/L。 重减轻,产奶量下降,眼结膜苍白,尿淡红色,为血红蛋白性红尿:RBC 3.0 对该牛首选的进一步检查是",
+    "options": {
+      "A": "膀胱 B 超检查",
+      "B": "尿沉渣检查",
+      "C": "血液生化检查",
+      "D": "血液细菌学检查",
+      "E": "血液涂片镜检"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "从题干描述可怀疑牛患有巴贝斯虫病,确诊的方法是采血做血涂片 镜检。",
+    "chapter": "综合科目",
+    "knowledgePoint": "牛羊病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 28,
+        "sourceIndex": 28,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00027",
+    "type": "single_choice",
+    "question": "奶牛,3 岁,9 月发病,体温 41.2°C,稽留热型,食欲下降,体 ×10^12/L。 重减轻,产奶量下降,眼结膜苍白,尿淡红色,为血红蛋白性红尿:RBC 3.0 该病最可能的诊断是",
+    "options": {
+      "A": "片形吸虫病",
+      "B": "伊氏锥虫病",
+      "C": "血吸虫病",
+      "D": "巴贝斯虫病",
+      "E": "隐孢子虫病"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "从题干描述可怀疑牛患有巴贝斯虫病",
+    "chapter": "综合科目",
+    "knowledgePoint": "牛羊病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 29,
+        "sourceIndex": 29,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00028",
+    "type": "single_choice",
+    "question": "奶牛,3 岁,9 月发病,体温 41.2°C,稽留热型,食欲下降,体 ×10^12/L。 重减轻,产奶量下降,眼结膜苍白,尿淡红色,为血红蛋白性红尿:RBC 3.0 治疗该病的适宜药物是",
+    "options": {
+      "A": "磺胺嘧啶",
+      "B": "吡喹酮",
+      "C": "阿苯达唑",
+      "D": "马度米星",
+      "E": "咪多卡"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "咪多卡(双咪苯脲)是治疗巴贝斯虫病的有效药物。",
+    "chapter": "综合科目",
+    "knowledgePoint": "牛羊病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 30,
+        "sourceIndex": 30,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00029",
+    "type": "single_choice",
+    "question": "后备母猪,持续强烈地出现发情行为,屡配不孕,体重减轻,该病的病因可 能是",
+    "options": {
+      "A": "持久黄体",
+      "B": "排卵延迟",
+      "C": "子宫内膜炎",
+      "D": "卵巢机能减退",
+      "E": "卵巢囊肿"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "卵巢囊肿分为黄体囊肿和卵泡囊肿,卵泡囊肿表现为频繁不规律的持续的 发情行为,甚至慕雄狂。",
+    "chapter": "综合科目",
+    "knowledgePoint": "猪病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 33,
+        "sourceIndex": 33,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00030",
+    "type": "single_choice",
+    "question": "牛,证见精神沉郁,食欲减少,口渴多饮。便黏腻腥臭,尿短赤,轻微腹痛, 口色红,苔黄厚,脉象沉数。该病证可辨证为",
+    "options": {
+      "A": "热泻",
+      "B": "寒泻",
+      "C": "肾虚泻",
+      "D": "脾虚泻",
+      "E": "伤食泻"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "热泻:主证,精神沉郁,食欲减少或废绝,口渴多饮,有时轻微腹痛,蜷 腰卧地,泻粪稀薄腥臭黏腻,发热,尿赤短,口色赤红,舌苔黄厚,口臭,脉象 沉数。治法,清肠泄热解毒(清热燥湿,止泻利水)。",
+    "chapter": "综合科目",
+    "knowledgePoint": "牛羊病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 38,
+        "sourceIndex": 38,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00031",
+    "type": "single_choice",
+    "question": "母羊,3 岁,妊娠后期流产,羊水浑浊,流产胎儿真胃中有淡黄色或 白色黏液絮状物;同群公羊出现睾丸炎。 与该病防控相关描述错误的是",
+    "options": {
+      "A": "该病病原对消毒剂抵抗力不强",
+      "B": "采用检疫、免疫、淘汰患病动物",
+      "C": "对患病动物一般不予治疗",
+      "D": "疫苗接种是控制该病有效的措施",
+      "E": "该病病原不感染人"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "人的感染以羊布氏杆菌最为多见。",
+    "chapter": "综合科目",
+    "knowledgePoint": "牛羊病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 42,
+        "sourceIndex": 42,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00032",
+    "type": "single_choice",
+    "question": "金毛幼犬,4 月龄,细小病毒感染后经过治疗症状已经明显好转,突然 量带血黏液:检查发现该犬红细胞压积升高,腹部触诊可触及香肠状硬物。 出现持续性呕吐,呕出黄绿色黏液,频繁有排便姿势,但未见粪便排出,仅有少 该病最可能的诊断是",
+    "options": {
+      "A": "胃炎",
+      "B": "腹膜炎",
+      "C": "胃内异物",
+      "D": "肠炎",
+      "E": "肠套叠"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "根据“细小病毒感染后经治疗症状明显好转,突然持续性呕吐,腹部触诊 可触及香肠状硬物”,可判定为肠套叠。肠套叠为各种急性肠炎的一种并发症, 由于肠蠕动功能失调引起。一段肠管套入其邻接的肠管内,使肠腔发生闭塞、肠 壁血液循环发生障碍的疾病。",
+    "chapter": "综合科目",
+    "knowledgePoint": "犬猫病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 46,
+        "sourceIndex": 46,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00033",
+    "type": "single_choice",
+    "question": "金毛幼犬,4 月龄,细小病毒感染后经过治疗症状已经明显好转,突然 量带血黏液:检查发现该犬红细胞压积升高,腹部触诊可触及香肠状硬物。 出现持续性呕吐,呕出黄绿色黏液,频繁有排便姿势,但未见粪便排出,仅有少 临床诊断该病常采用的方法是",
+    "options": {
+      "A": "X 线",
+      "B": "MRI",
+      "C": "内窥镜",
+      "D": "呕吐物镜检",
+      "E": "粪便检查"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "肠套叠临床上常采用 X 光造影检查或者 B 超检查。",
+    "chapter": "综合科目",
+    "knowledgePoint": "犬猫病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 47,
+        "sourceIndex": 47,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00034",
+    "type": "single_choice",
+    "question": "夏季,麻黄鸡群,5 周龄,:地面平养。精神萎顿,食欲减少,双翅下垂, 粪便稀薄,呈绿色或白色,或粪便带血:病死率 15%。 该病最可能的诊断是",
+    "options": {
+      "A": "球虫病",
+      "B": "新城疫",
+      "C": "大肠杆菌病",
+      "D": "鸡蛔虫病",
+      "E": "组织滴虫病"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": ";根据题目描述的症状与球虫病的典型表现非常吻合。多见于 15-50 日龄的 鸡,表现为精神沉郁、食欲减退、粪便稀薄且常带有血液,严重时可导致高死亡 率。",
+    "chapter": "综合科目",
+    "knowledgePoint": "禽病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 49,
+        "sourceIndex": 49,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00035",
+    "type": "single_choice",
+    "question": "夏季,麻黄鸡群,5 周龄,:地面平养。精神萎顿,食欲减少,双翅下垂, 粪便稀薄,呈绿色或白色,或粪便带血:病死率 15%。 该病的治疗药物应选用",
+    "options": {
+      "A": "阿卡普林",
+      "B": "贝尼尔",
+      "C": "托曲珠利",
+      "D": "伊维菌素",
+      "E": "左旋咪唑"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "托曲珠利通过作用于球虫的各个发育阶段,抑制其增殖,从而达到治疗球 虫病的效果,是临床常用的抗球虫药物之一。",
+    "chapter": "综合科目",
+    "knowledgePoint": "禽病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 50,
+        "sourceIndex": 50,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00036",
+    "type": "single_choice",
+    "question": "夏季,麻黄鸡群,5 周龄,:地面平养。精神萎顿,食欲减少,双翅下垂, 粪便稀薄,呈绿色或白色,或粪便带血:病死率 15%。 【假设信息】如肝脏表面见黄色或黄绿色、圆形下陷的坏死灶,盲肠肿胀, 则该病最可能的诊断是",
+    "options": {
+      "A": "鸡蛔虫病",
+      "B": "禽大肠杆菌病",
+      "C": "组织滴虫病",
+      "D": "前殖吸虫病",
+      "E": "新城疫"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "题干进一步描述肝脏表面见黄或黄绿色圆形下陷坏死灶,盲肠肿大。这些 症状和病变特征与组织滴虫病的典型表现相符。组织滴虫病是由火鸡组织滴虫寄 生于禽类的盲肠和肝脏引起的疾病,又称盲肠肝炎或黑头病。多发于火鸡和雏鸡, 成年鸡也能感染。以肝脏坏死和盲肠溃疡为疾病特征。病理变化:主要发生在盲 肠和肝脏,引起盲肠炎和肝炎,一侧或两侧盲肠肿胀,形成干酪状的盲肠肠芯; 肝脏肿大,出现圆形或不规则形状、淡黄色或淡绿色的坏死病灶。",
+    "chapter": "综合科目",
+    "knowledgePoint": "禽病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 51,
+        "sourceIndex": 51,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00037",
+    "type": "single_choice",
+    "question": ".雏鸡群,30 日龄,全群突然发病,死亡率 15%;呼吸困难,“咕噜”音; 支气管内有浆液性、卡他性分泌物,病鸡肾苍白肿大,大量尿酸盐沉积,花斑肾。 临床中该病最常用的确诊方法是",
+    "options": {
+      "A": "涂片镜检",
+      "B": "RT-PCR",
+      "C": "动物试验",
+      "D": "琼脂扩散试验",
+      "E": "病理切片"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "传染性支气管炎病毒为冠状病毒科,基因组为单分子线状正链单股 RNA, 确诊该病可选用 RT-PCR.",
+    "chapter": "综合科目",
+    "knowledgePoint": "禽病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 53,
+        "sourceIndex": 53,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00038",
+    "type": "single_choice",
+    "question": "猪群,3 月龄,食欲减退,体温 41°C,呼吸困难,咳嗽;个别出现神经症 状,急性死亡;剖检见扁桃体、肝、脾有白色坏死灶:同群母猪流产,死胎。 该病病原的血清型有",
+    "options": {
+      "A": "2 个",
+      "B": "3 个",
+      "C": "1 个",
+      "D": "5 个",
+      "E": "4 个"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "伪狂犬病毒只有一个血清型。",
+    "chapter": "综合科目",
+    "knowledgePoint": "猪病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 56,
+        "sourceIndex": 56,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00039",
+    "type": "single_choice",
+    "question": "母猪群,流产、产死胎和木乃伊胎;存活仔猪便秘和轻微腹泻交替出现; 剖检见回盲口有“纽扣状”溃疡。 该病最可能的诊断是",
+    "options": {
+      "A": "猪伪狂犬",
+      "B": "猪乙型脑炎",
+      "C": "非洲猪瘟",
+      "D": "猪瘟",
+      "E": "猪细小病毒病"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "猪瘟临床症状表现:高热、皮下针尖状出血、结膜炎,便秘与腹泻交替进 行、流产、繁殖障碍等。猪瘟主要的病理变化:全身黏膜、浆膜,内脏不同程度 出血。淋巴结肿大出血。脾脏表面边缘出血性梗死是最具特征诊断意义。肾脏表 面有密集散在大小不一出血点或瘀斑(麻雀肾);盲肠、回盲瓣口出现大小不一 的纽扣状溃疡。",
+    "chapter": "综合科目",
+    "knowledgePoint": "猪病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 62,
+        "sourceIndex": 62,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00040",
+    "type": "single_choice",
+    "question": "繁殖猫舍,环境卫生差,10 月龄幼猫发病。脊柱两侧皮肤脱毛,患处形 wood's 灯检查阳性。 成圆形斑秃,外缘出血、中央隆起、界限明显。患处毛发脆,易断,全身皮屑多, 该病最可能的诊断是",
+    "options": {
+      "A": "脓皮症",
+      "B": "疥螨病",
+      "C": "痒螨病",
+      "D": "库兴氏综合征",
+      "E": "藓菌病"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "圆形脱毛,伍氏灯阳性为真菌,又称金钱癣。",
+    "chapter": "综合科目",
+    "knowledgePoint": "犬猫病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 65,
+        "sourceIndex": 65,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00041",
+    "type": "single_choice",
+    "question": "犬,1 岁。腹泻不止,并见脱肛,食欲不振,体瘦毛焦,倦怠肯卧,口 色淡白,脉虚。 该病可辨证为",
+    "options": {
+      "A": "肾阳虚",
+      "B": "脾阳虚",
+      "C": "脾虚不运",
+      "D": "肾气虚",
+      "E": "脾气下陷"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "久泄久痢,脏器垂脱可辩证为脾气下陷(中气下陷)。治疗首选补中益气汤。",
+    "chapter": "综合科目",
+    "knowledgePoint": "犬猫病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 71,
+        "sourceIndex": 71,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00042",
+    "type": "single_choice",
+    "question": "犬,1 岁。腹泻不止,并见脱肛,食欲不振,体瘦毛焦,倦怠肯卧,口 色淡白,脉虚。 【假设信息】如患病日久,又见口色苍白,脉细无力,方中可增加",
+    "options": {
+      "A": "熟地、山药",
+      "B": "乌梅、诃子",
+      "C": "肉苁蓉、淫羊藿",
+      "D": "党参、黄芪",
+      "E": "神曲、山楂"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "口色苍白,脉细无力,说明虚。",
+    "chapter": "综合科目",
+    "knowledgePoint": "犬猫病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 73,
+        "sourceIndex": 73,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00043",
+    "type": "single_choice",
+    "question": "冬季,母猪群突然大批发病,体温 40~41°C 蹄冠、蹄叉、鼻端等部位出 流产,哺乳期仔猪腹泻、急性死亡;哺乳仔猪病死率达 100%。周边牛场也有类似 疾病流行。 现米粒至黄豆大小水泡,水泡破溃后表面出血、糜烂。猪只卧地不起,部分母猪 该病最可能的诊断是",
+    "options": {
+      "A": "猪传染性胃肠炎",
+      "B": "水疱病",
+      "C": "口蹄疫",
+      "D": "猪瘟",
+      "E": "猪水疱性口炎"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "口蹄疫症状及病理变化:病理变化主要是患病动物的口腔,蹄部、乳房、 咽喉、气管、支气管和胃黏膜可见到水疱、烂斑和溃疡,上面覆盖有黑棕色的痂 块:真胃和大小肠黏膜可见出血性炎症;幼龄动物心包膜有弥漫性及点状出血, 心肌有灰白色或淡黄色的斑点或条纹,称为“虎斑心",
+    "chapter": "综合科目",
+    "knowledgePoint": "猪病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 74,
+        "sourceIndex": 74,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00044",
+    "type": "single_choice",
+    "question": "新生幼犬群,2 月,突然发病,呕吐,呕吐黄色粘液,不食,饮水量 血常规检查可见红细胞压积升高,白细胞总数下降。 增加,发病 3~4 天,呕吐物呈现咖色,排腥臭番茄酱样血便,个别病犬急性死亡。 该病可能诊断为",
+    "options": {
+      "A": "犬传染性肝炎",
+      "B": "犬球虫病",
+      "C": "犬大肠杆菌病",
+      "D": "犬滴虫病",
+      "E": "犬细小病毒"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "犬细小病毒病是幼犬常见的高度接触性传染病,典型症状为剧烈呕吐、 腹泻,后期出现带腥臭味的番茄酱样血便,发病后因脱水导致红细胞压积升高, 白细胞总数下降,与题干中幼犬的症状和检查结果完全吻合。其他选项中,犬传 染性肝炎以肝脏损伤、黄疸为主要特征;犬球虫病和滴虫病虽有腹泻,但血便少 见且无如此剧烈的呕吐和高死亡率;犬大肠杆菌病多为幼犬黄白痢,无血便表现。",
+    "chapter": "综合科目",
+    "knowledgePoint": "犬猫病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 77,
+        "sourceIndex": 77,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00045",
+    "type": "single_choice",
+    "question": "新生幼犬群,2 月,突然发病,呕吐,呕吐黄色粘液,不食,饮水量 血常规检查可见红细胞压积升高,白细胞总数下降。 增加,发病 3~4 天,呕吐物呈现咖色,排腥臭番茄酱样血便,个别病犬急性死亡。 临床诊断该病方法",
+    "options": {
+      "A": "细菌分离",
+      "B": "病毒分离",
+      "C": "粪便检查",
+      "D": "胶体金试纸条检测",
+      "E": "呕吐物检查"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "胶体金试纸条检测操作简便、快速,是临床诊断犬细小病毒病常用的方法, 可快速检测出病毒抗原。",
+    "chapter": "综合科目",
+    "knowledgePoint": "犬猫病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 78,
+        "sourceIndex": 78,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00046",
+    "type": "single_choice",
+    "question": "新生幼犬群,2 月,突然发病,呕吐,呕吐黄色粘液,不食,饮水量 血常规检查可见红细胞压积升高,白细胞总数下降。 增加,发病 3~4 天,呕吐物呈现咖色,排腥臭番茄酱样血便,个别病犬急性死亡。 预防该病的方法",
+    "options": {
+      "A": "口服益生菌",
+      "B": "口服抗生素",
+      "C": "口服止吐药",
+      "D": "注射止血药",
+      "E": "接种疫苗"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "接种犬细小病毒疫苗是预防该病最有效的方法,可使幼犬获得免疫 力,降低发病风险。",
+    "chapter": "综合科目",
+    "knowledgePoint": "犬猫病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 79,
+        "sourceIndex": 79,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00047",
+    "type": "single_choice",
+    "question": "肉鸡群,20 日龄,突然发病,呼吸困难,出现神经症状,头颈后仰、扭 死率 70%。 曲,腹泻,肌胃腺胃出血,十二指肠出血灶呈“枣核样”:全群发病率 100%,病 该病最可能的诊断是",
+    "options": {
+      "A": "鸡传染性支气管炎",
+      "B": "传染性法氏囊病",
+      "C": "鸡呼吸肠孤病毒感染",
+      "D": "鸡传染性喉气管炎",
+      "E": "新城疫"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "题目描述的肉鸡群这些症状和病变特征与新城疫的典型表现相符。鸡新城 疫是由新城疫病毒引起鸡的急性高度接触性传染病,呈败血症经过。主要特征是 呼吸困难、下痢、神经机能紊乱以及浆膜和黏膜显著出血。患鸡头颈向后一侧扭 转,翅膀麻痹,跛行或站立不稳,动作失调,常伏地旋转,反复发作,瘫痪或半 瘫痪,一般经 10~20d 死亡。病变特征:全身黏膜和浆膜出血,腺胃和肌胃黏膜 有坏死和出血,肠外观可见紫红色枣核样肿大的淋巴结滤泡,小肠黏膜出血。",
+    "chapter": "综合科目",
+    "knowledgePoint": "禽病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 80,
+        "sourceIndex": 80,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00048",
+    "type": "single_choice",
+    "question": "蚕群,四龄,体发育不齐,胸部半透明呈“空头”状,体躯瘦小软化, 为褐色。 其蚕体色转青缓慢,或排念珠状蚕粪,解剖见中肠空虚,食下桑叶极少,肠液多 该病最可能的诊断是",
+    "options": {
+      "A": "白僵病",
+      "B": "绿僵病",
+      "C": "家蚕脓核病",
+      "D": "家蚕微粒子病",
+      "E": "家蚕血液型脓病"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "血清平板接种主要用于细菌等微生物的培养和鉴定,而该病是由病毒引起 的,故该方法不适用于该病的诊断。",
+    "chapter": "综合科目",
+    "knowledgePoint": "综合病例题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 89,
+        "sourceIndex": 89,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00049",
+    "type": "single_choice",
+    "question": "牛,3 岁,偷吃饲料,听诊瘤胃蠕动音小时腹部膨胀:触诊瘤胃内容物坚 实,心率加快并伴有呼吸困难。 该病最可能的诊断是",
+    "options": {
+      "A": "瘤胃积食",
+      "B": "前胃弛缓",
+      "C": "创伤性网胃心包炎",
+      "D": "消化不良",
+      "E": "急性瘤胃臌气"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "根据题意腹部膨胀触诊瘤胃内容物坚实可判定为瘤胃积食,故答案选瘤胃 积食。",
+    "chapter": "综合科目",
+    "knowledgePoint": "牛羊病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 91,
+        "sourceIndex": 91,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00050",
+    "type": "single_choice",
+    "question": "牛,3 岁,偷吃饲料,听诊瘤胃蠕动音小时腹部膨胀:触诊瘤胃内容物坚 实,心率加快并伴有呼吸困难。 该病可能继发",
+    "options": {
+      "A": "肠炎",
+      "B": "肾炎",
+      "C": "肺炎",
+      "D": "前胃迟缓",
+      "E": "腹膜炎"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "一次性采食过多饲料会导致瘤胃运动机能紊乱、运送机能障碍、使瘤胃内 容物逐渐积聚而引起瘤胃积食。该病可引起前胃功能障碍,继发前胃弛缓。",
+    "chapter": "综合科目",
+    "knowledgePoint": "牛羊病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 92,
+        "sourceIndex": 92,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00051",
+    "type": "single_choice",
+    "question": "松狮犬,8 岁,雌性已绝育,8 月份,主人中午误将其单独放在密闭汽车 内半小时,随后该犬精神沉郁,不能站立,卧地喘息,最后陷于昏迷。 该病最可能的诊断是",
+    "options": {
+      "A": "脑肿瘤",
+      "B": "脊髓炎",
+      "C": "脑膜炎",
+      "D": "癫痫",
+      "E": "热射病"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "动物所处的外界环境气温高、湿度大、动物产热多、散热少,体内积热而 引起的严重中枢神经系统机能紊乱称为热射病。题目描述的松狮犬,8 岁,雌性 已绝育,在 8 月份被主人误放在密闭汽。车内半小时后,出现精神沉郁、不能站 立、卧地喘息,随后陷入昏迷。这些症状和体征与热射病的典型表现相符。",
+    "chapter": "综合科目",
+    "knowledgePoint": "犬猫病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 93,
+        "sourceIndex": 93,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00052",
+    "type": "single_choice",
+    "question": "松狮犬,8 岁,雌性已绝育,8 月份,主人中午误将其单独放在密闭汽车 内半小时,随后该犬精神沉郁,不能站立,卧地喘息,最后陷于昏迷。 下列对该病例进行紧急处置,不适宜的是",
+    "options": {
+      "A": "冷水灌肠",
+      "B": "输血",
+      "C": "冰块包毛巾冷敷头部",
+      "D": "酒精擦拭体表",
+      "E": "冷水冲洗身体"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "热射病需要迅速降低体温,输血并不是适当的处理方法。",
+    "chapter": "综合科目",
+    "knowledgePoint": "犬猫病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 94,
+        "sourceIndex": 94,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00053",
+    "type": "single_choice",
+    "question": "松狮犬,8 岁,雌性已绝育,8 月份,主人中午误将其单独放在密闭汽车 内半小时,随后该犬精神沉郁,不能站立,卧地喘息,最后陷于昏迷。 如果该犬继发心力衰竭,应选用的治疗药物是",
+    "options": {
+      "A": "高渗葡萄糖",
+      "B": "溴化钾",
+      "C": "尼可刹米",
+      "D": "肾上腺素",
+      "E": "地塞米松"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "肾上腺素是一种强心剂,可以增强心脏收缩能力,提高血压,改善心脏功 能。在心力衰竭的情况下,肾上腺素可以作为急救药物使用。",
+    "chapter": "综合科目",
+    "knowledgePoint": "犬猫病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 95,
+        "sourceIndex": 95,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00054",
+    "type": "single_choice",
+    "question": "流浪幼猫,被救助后发现呼吸困难,有脓性鼻液来就诊;检查发现患 色污秽鼻液,X 线检查发现肺部是弥散性颗粒状高度阴影。 猫体温 39.5°C,有上颚裂现象,呼出气体有腐败臭味,腹式呼吸,鼻孔流出灰绿 该病可能诊断为",
+    "options": {
+      "A": "肺气肿",
+      "B": "大叶性肺炎",
+      "C": "小叶性肺炎",
+      "D": "间质性肺炎",
+      "E": "吸入性肺炎"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "幼猫有上颚裂,易导致异物吸入肺部,引起吸入性肺炎,出现呼吸困难、 脓性鼻液、肺部弥散性颗粒状阴影等症状,与题干描述一致。",
+    "chapter": "综合科目",
+    "knowledgePoint": "犬猫病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 96,
+        "sourceIndex": 96,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00055",
+    "type": "single_choice",
+    "question": "流浪幼猫,被救助后发现呼吸困难,有脓性鼻液来就诊;检查发现患 色污秽鼻液,X 线检查发现肺部是弥散性颗粒状高度阴影。 猫体温 39.5°C,有上颚裂现象,呼出气体有腐败臭味,腹式呼吸,鼻孔流出灰绿 血常规检查中显著升高的指标是",
+    "options": {
+      "A": "红细胞",
+      "B": "嗜酸性粒细胞",
+      "C": "嗜碱性粒细胞",
+      "D": "淋巴细胞",
+      "E": "中性粒细胞"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "吸入性肺炎多由细菌感染引起,炎症反应会导致中性粒细胞显著升高,对 抗感染。",
+    "chapter": "综合科目",
+    "knowledgePoint": "犬猫病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 97,
+        "sourceIndex": 97,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-comprehensive-00056",
+    "type": "single_choice",
+    "question": "流浪幼猫,被救助后发现呼吸困难,有脓性鼻液来就诊;检查发现患 色污秽鼻液,X 线检查发现肺部是弥散性颗粒状高度阴影。 猫体温 39.5°C,有上颚裂现象,呼出气体有腐败臭味,腹式呼吸,鼻孔流出灰绿 发生该病的原因",
+    "options": {
+      "A": "吞咽障碍",
+      "B": "病毒感染",
+      "C": "吸入食物",
+      "D": "给药不当",
+      "E": "细菌感染"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "患猫有上颚裂,容易在进食时将食物吸入肺部,从而引发吸入性肺炎。",
+    "chapter": "综合科目",
+    "knowledgePoint": "犬猫病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试综合真题及答案.pdf",
+        "questionNumber": 98,
+        "sourceIndex": 98,
+        "sha256": "b35047acaed7904dd60db8b0229040f4d622dcf13444319530f73fac15d7381c"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-comprehensive-00001",
+    "type": "single_choice",
+    "question": "该山羊最可能的疾病是",
+    "options": {
+      "A": "山羊关节炎脑炎",
+      "B": "羊快疫",
+      "C": "蓝舌病",
+      "D": "羊链球菌病",
+      "E": "李氏杆菌病"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "山羊关节炎脑炎是由山羊关节炎脑炎病毒引起的成年羊的一种慢性进行性 传染病,其主要特征是成年山羊表现为进行性消瘦、关节和黏液囊长期肿胀、间 质性乳腺炎或肺炎,羔羊表现脑脊髓炎。",
+    "chapter": "综合科目",
+    "knowledgePoint": "牛羊病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽综合科目回忆版真题.pdf",
+        "questionNumber": 1,
+        "sourceIndex": 1,
+        "sha256": "da4aa5deb3d44dfc9d5bd9bcfc9cd9ec90ef2c6b9f41def0eac83fdc5b949b65"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-comprehensive-00003",
+    "type": "single_choice",
+    "question": "7日龄仔猪,排黄色稀粪,内含凝乳小片,剖检十二指肠急性卡他性炎症,肠系 膜淋巴结小点状出血。用麦康凯培养基培养菌落呈什么颜色",
+    "options": {
+      "A": "金黄色",
+      "B": "无色",
+      "C": "黑色带金属光泽",
+      "D": "红色",
+      "E": "紫色"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "仔猪黄痢的病原体为致病性大肠杆菌。大肠杆菌具有分解乳糖的能力,在 麦康凯培养基上生长时,其发酵乳糖产酸,使培养基中的中性红指示剂变红,从 而形成特征性的红色菌落。 (共用题干) 牛,瘤胃蠕动减弱,使用健胃药后腹痛加剧,患牛呈现前高后低姿势,不愿走下 坡路。",
+    "chapter": "综合科目",
+    "knowledgePoint": "综合病例题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽综合科目回忆版真题.pdf",
+        "questionNumber": 5,
+        "sourceIndex": 6,
+        "sha256": "da4aa5deb3d44dfc9d5bd9bcfc9cd9ec90ef2c6b9f41def0eac83fdc5b949b65"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "sharedStem": "7日龄仔猪,排黄色稀粪,内含凝乳小片,剖检十二指肠急性卡他性炎症,肠系 膜淋巴结小点状出血",
+    "sharedKind": "stem",
+    "sharedGroupId": "vet-shared-stem-e7d946bc6a0c2824",
+    "sharedOrder": 1
+  },
+  {
+    "id": "vet-2026-recall-comprehensive-00006",
+    "type": "single_choice",
+    "question": "若患牛出现颈静脉怒张、颌下水肿,应采取的治疗原则是",
+    "options": {
+      "A": "强心利尿",
+      "B": "强心补液",
+      "C": "抗炎止痛",
+      "D": "理气消胀",
+      "E": "消食健胃"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "颈静脉怒张、颌下水肿提示心衰淤血水肿,治疗以强心、利尿消肿为主。 (共用题干) 育肥猪,体温 40°C到 41.5°C,咳嗽,打喷嚏,流水样喷嚏,呼吸困难,眼鼻有 黏液样分泌物,发病率百分之百,病死率不到百分之一,患病猪多在两周自行康 复。",
+    "chapter": "综合科目",
+    "knowledgePoint": "牛羊病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽综合科目回忆版真题.pdf",
+        "questionNumber": 8,
+        "sourceIndex": 9,
+        "sha256": "da4aa5deb3d44dfc9d5bd9bcfc9cd9ec90ef2c6b9f41def0eac83fdc5b949b65"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-comprehensive-00011",
+    "type": "single_choice",
+    "question": "秋季,产蛋鸡群放养于果园林地,产蛋虽下降,消瘦、贫血,羽毛松乱,排带黏 液或血液的稀粪,少数极度衰竭死亡。需首先排除的寄生虫病是",
+    "options": {
+      "A": "赖利绦虫病",
+      "B": "鸡蛔虫病",
+      "C": "鸡住白细胞虫病",
+      "D": "曼氏迭宫绦虫病",
+      "E": "异刺线虫病"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "鸡住白细胞虫病传播媒介是库蠓,果园、草地放牧环境库蠓多发,患病鸡 常伴随拉稀、排绿色粪便等消化道症状,放牧鸡群需优先排除。",
+    "chapter": "综合科目",
+    "knowledgePoint": "综合病例题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽综合科目回忆版真题.pdf",
+        "questionNumber": 30,
+        "sourceIndex": 32,
+        "sha256": "da4aa5deb3d44dfc9d5bd9bcfc9cd9ec90ef2c6b9f41def0eac83fdc5b949b65"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "sharedStem": "秋季,产蛋鸡群放养于果园林地,产蛋虽下降,消瘦、贫血,羽毛松乱,排带黏 液或血液的稀粪,少数极度衰竭死亡。",
+    "sharedKind": "stem",
+    "sharedGroupId": "vet-shared-stem-515591fd8861d318",
+    "sharedOrder": 1
+  },
+  {
+    "id": "vet-2026-recall-comprehensive-00012",
+    "type": "single_choice",
+    "question": "秋季,产蛋鸡群放养于果园林地,产蛋虽下降,消瘦、贫血,羽毛松乱,排带黏 液或血液的稀粪,少数极度衰竭死亡。假设信息:若粪检见多个呈卵圆形,卵壳厚,内含单个胚细胞的虫卵,以及 呈亚球形、内含一个六钩蚴的虫卵。该鸡群应用的驱虫药物是",
+    "options": {
+      "A": "伊维菌素",
+      "B": "阿苯达唑",
+      "C": "左旋咪唑",
+      "D": "吡喹酮",
+      "E": "氯硝柳胺"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "卵圆形、卵壳厚、单个胚细胞,球虫虫卵;亚球形、内含六钩蚴,绦虫虫 卵。患病鸡同时感染球虫、绦虫,首选阿苯达唑。",
+    "chapter": "综合科目",
+    "knowledgePoint": "禽病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽综合科目回忆版真题.pdf",
+        "questionNumber": 31,
+        "sourceIndex": 33,
+        "sha256": "da4aa5deb3d44dfc9d5bd9bcfc9cd9ec90ef2c6b9f41def0eac83fdc5b949b65"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "sharedStem": "秋季,产蛋鸡群放养于果园林地,产蛋虽下降,消瘦、贫血,羽毛松乱,排带黏 液或血液的稀粪,少数极度衰竭死亡。",
+    "sharedKind": "stem",
+    "sharedGroupId": "vet-shared-stem-515591fd8861d318",
+    "sharedOrder": 2
+  },
+  {
+    "id": "vet-2026-recall-comprehensive-00015",
+    "type": "single_choice",
+    "question": "剖检病死猪,最可能的变化是",
+    "options": {
+      "A": "肾肿胀",
+      "B": "膀胱出血",
+      "C": "肺充血",
+      "D": "肠扩张,肠壁透明",
+      "E": "肝肿大"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "流行性腹泻病毒侵害小肠绒毛,绒毛萎缩脱落,小肠内充满黄色液体,肠 管膨大、肠壁变薄半透明;肾、膀胱、肺、肝无特征性病变。",
+    "chapter": "综合科目",
+    "knowledgePoint": "猪病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽综合科目回忆版真题.pdf",
+        "questionNumber": 42,
+        "sourceIndex": 45,
+        "sha256": "da4aa5deb3d44dfc9d5bd9bcfc9cd9ec90ef2c6b9f41def0eac83fdc5b949b65"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-comprehensive-00018",
+    "type": "single_choice",
+    "question": "牛,左下腹部突然肿胀,无明显边界,触诊局温偏高,较为坚硬,痛感明显,体 温偏高;边界逐渐清晰有局限性,随着病情发展,肿胀中心变柔软,波动感明显。为确诊病因,进一步检查为",
+    "options": {
+      "A": "超声检查",
+      "B": "穿刺手术",
+      "C": "血液生化检查",
+      "D": "电疗",
+      "E": "血气检查"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "穿刺抽取内容物可直接确诊脓肿(抽出脓汁)。",
+    "chapter": "综合科目",
+    "knowledgePoint": "综合病例题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽综合科目回忆版真题.pdf",
+        "questionNumber": 51,
+        "sourceIndex": 54,
+        "sha256": "da4aa5deb3d44dfc9d5bd9bcfc9cd9ec90ef2c6b9f41def0eac83fdc5b949b65"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "sharedStem": "牛,左下腹部突然肿胀,无明显边界,触诊局温偏高,较为坚硬,痛感明显,体 温偏高;边界逐渐清晰有局限性,随着病情发展,肿胀中心变柔软,波动感明显。",
+    "sharedKind": "stem",
+    "sharedGroupId": "vet-shared-stem-5fea1de47845982e",
+    "sharedOrder": 1
+  },
+  {
+    "id": "vet-2026-recall-comprehensive-00023",
+    "type": "single_choice",
+    "question": "犬,因呕吐、腹泻前来就诊。经初步对症治疗后,临床症状暂时好转,但进食后加重,X 线检查发现右侧上腹部存在一边界不清晰的团块状阴影,生化检查血清淀粉酶升高。还有可能升高的指标是",
+    "options": {
+      "A": "碱性磷酸酶",
+      "B": "脂肪酶",
+      "C": "肌酸激酶",
+      "D": "酸性磷酸酶",
+      "E": "乳酸脱氢酶"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "在犬胰腺炎时,血清脂肪酶常与淀粉酶同步升高。 (共用题干) 羊,3 岁,怀孕 140 天,食欲废绝,反刍停止,运动失调,随后卧地不起,肌肉 震颤,呼出气体有烂苹果味儿。",
+    "chapter": "综合科目",
+    "knowledgePoint": "综合病例题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽综合科目回忆版真题.pdf",
+        "questionNumber": 64,
+        "sourceIndex": 67,
+        "sha256": "da4aa5deb3d44dfc9d5bd9bcfc9cd9ec90ef2c6b9f41def0eac83fdc5b949b65"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "sharedStem": "犬,因呕吐、腹泻前来就诊。经初步对症治疗后,临床症状暂时好转,但进食后加重,X 线检查发现右侧上腹部存在一边界不清晰的团块状阴影,生化检查血清淀粉酶升高",
+    "sharedKind": "stem",
+    "sharedGroupId": "vet-shared-stem-5fbb6a246202cc6f",
+    "sharedOrder": 2
+  },
+  {
+    "id": "vet-2026-recall-comprehensive-00024",
+    "type": "single_choice",
+    "question": "鸡出现呼吸道症状,面部肿胀,眼部分泌物增多,鼻腔/鼻窦内有干酪样坏死 物,呼吸困难。该病最可能的诊断是",
+    "options": {
+      "A": "鸡传染性支气管炎",
+      "B": "鸡传染性喉气管炎",
+      "C": "鸡传染性鼻炎",
+      "D": "新城疫",
+      "E": "禽流感"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "鸡传染性鼻炎是由副鸡禽杆菌引起鸡的一种急性呼吸道传染病,以患鸡鼻 腔和鼻窦炎症,颜面肿胀,打喷嚏,流鼻液,结膜炎,流泪为主要特征。 (共用题干) 北京犬,8 岁,稍运动后即出现喘息,听诊心音出现三联律,心电图上 QRS 波群 提前出现,波形宽大、粗顿,时限延长,P 波消失。",
+    "chapter": "综合科目",
+    "knowledgePoint": "禽病",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽综合科目回忆版真题.pdf",
+        "questionNumber": 70,
+        "sourceIndex": 73,
+        "sha256": "da4aa5deb3d44dfc9d5bd9bcfc9cd9ec90ef2c6b9f41def0eac83fdc5b949b65"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-comprehensive-00025",
+    "type": "single_choice",
+    "question": "北京犬,8 岁,稍运动后即出现喘息,听诊心音出现三联律,心电图上 QRS 波群 提前出现,波形宽大、粗顿,时限延长,P 波消失。利多卡因治疗最佳给药途径",
+    "options": {
+      "A": "皮下给药",
+      "B": "皮内给药",
+      "C": "腹腔给药",
+      "D": "静脉注射",
+      "E": "肌肉注射"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "利多卡因是治疗室性心律失常的首选药物之一。当出现需要紧急干预的频 发性室早时,必须静脉注射。 (共用题干) 某养殖场 4 月龄猪部分发病,采食减少、消瘦,可视黏膜黄染,皮肤表面紫斑, 体温 38.5-39.5°C。",
+    "chapter": "综合科目",
+    "knowledgePoint": "综合病例题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "综合科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽综合科目回忆版真题.pdf",
+        "questionNumber": 73,
+        "sourceIndex": 76,
+        "sha256": "da4aa5deb3d44dfc9d5bd9bcfc9cd9ec90ef2c6b9f41def0eac83fdc5b949b65"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "sharedStem": "北京犬,8 岁,稍运动后即出现喘息,听诊心音出现三联律,心电图上 QRS 波群 提前出现,波形宽大、粗顿,时限延长,P 波消失。",
+    "sharedKind": "stem",
+    "sharedGroupId": "vet-shared-stem-f4bdfeeec2368162",
+    "sharedOrder": 1
+  },
+  {
+    "id": "vet-2025-preventive-00014",
+    "type": "single_choice",
+    "question": "幼犬,5 月龄,初期体温升高呈双相热,鼻端干燥,呼吸加快,偶有 咳嗽,随后出现呕吐、腹泻症状,粪便混有血液,后期有神经症状。 该病最有可能是",
+    "options": {
+      "A": "双相热",
+      "B": "犬传染性肝炎",
+      "C": "犬瘟热",
+      "D": "犬副流感病毒感染",
+      "E": "狂犬病"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "根据题干,体温升高呈双向热,鼻端干燥,后期出现神经症状,结 合选项可判断为犬瘟热",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医传染病学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试预防真题及答案.pdf",
+        "questionNumber": 22,
+        "sourceIndex": 23,
+        "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-preventive-00048",
+    "type": "single_choice",
+    "question": "典型马腺疫感染临床诊断的重要指标之一是",
+    "options": {
+      "A": "严重腹泻",
+      "B": "失明",
+      "C": "血尿",
+      "D": "跛行",
+      "E": "颌下淋巴结肿大"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "颌下淋巴结肿大:是典型马腺疫感染的重要临床特征之一。马腺疫是由马 链球菌马亚种引起的一种急性、热性、高度接触性传染病。其主要临床症状包括 发热、呼吸道黏膜发炎和颌下淋巴结肿胀化脓。颌下淋巴结肿大且初期较硬,触 之有热痛感,随后化脓变软,破溃后流出大量黄白色黏稠脓汁。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医传染病学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试预防真题及答案.pdf",
+        "questionNumber": 83,
+        "sourceIndex": 85,
+        "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-preventive-00021",
+    "type": "single_choice",
+    "question": "动物传染病临床综合诊断常用的方法是",
+    "options": {
+      "A": "免疫学诊断",
+      "B": "微生物学诊断",
+      "C": "病理解剖学诊断",
+      "D": "分子生物学诊断",
+      "E": "组织病理学诊断"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "动物传染病的诊断体系分为临床综合诊断与实验室诊断两大类别。其中病 理解剖学诊断是临床综合诊断中最常用的核心方法,通过现场尸体剖检观察特征 性肉眼病理变化,结合流行病学特点与临床症状,即可快速做出初步诊断,无需 依赖实验室设备,适用于临床现场的综合诊断。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医传染病学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽预防科目回忆版真题.pdf",
+        "questionNumber": 30,
+        "sourceIndex": 30,
+        "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-preventive-00044",
+    "type": "single_choice",
+    "question": "能使接种的实验动物在一定时限内引致一半动物感染发病的微生物量称 为",
+    "options": {
+      "A": "ID50",
+      "B": "TCID50",
+      "C": "EID50",
+      "D": "LD50",
+      "E": "MLD"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "能使接种的实验动物在一定时限内引致一半动物感染发病的微生物 量称为半数感染量(ID50)。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医传染病学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试预防真题及答案.pdf",
+        "questionNumber": 77,
+        "sourceIndex": 79,
+        "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-preventive-00050",
+    "type": "single_choice",
+    "question": "诊断猪乙型脑炎时,应注意与之区别的传染病主要是",
+    "options": {
+      "A": "猪丹毒",
+      "B": "猪传染性胃肠炎",
+      "C": "猪繁殖与呼吸综合征",
+      "D": "猪肺疫",
+      "E": "猪支原体肺炎"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "猪乙脑与蓝耳病(猪繁殖与呼吸综合征)均会造成母猪流产、死胎、公猪 睾丸炎,临床繁殖症状高度相似,其余选项无繁殖障碍典型症状。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医传染病学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽预防科目回忆版真题.pdf",
+        "questionNumber": 69,
+        "sourceIndex": 69,
+        "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-preventive-00012",
+    "type": "single_choice",
+    "question": "小反刍兽疫病例糜烂灶常见于",
+    "options": {
+      "A": "瘤胃",
+      "B": "网胃",
+      "C": "瓣胃",
+      "D": "皱胃",
+      "E": "食道"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "小反刍兽疫尸体病变可见结膜炎、坏死性口炎,严重病例可蔓延到硬腭及 咽喉部。皱胃则常出现糜烂病灶,肠道有糜烂或出血变化,特别在结肠和直肠的 结合处常见到特征性的线状出血或斑马样条纹。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医传染病学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽预防科目回忆版真题.pdf",
+        "questionNumber": 19,
+        "sourceIndex": 19,
+        "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-preventive-00045",
+    "type": "single_choice",
+    "question": "动物感染寄生虫后,发生过敏反应型变态反应主要见于",
+    "options": {
+      "A": "锥虫感染",
+      "B": "巴贝斯虫感染",
+      "C": "球虫感染",
+      "D": "疟原虫感染",
+      "E": "螨虫感染"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "过敏反应型变态反应属于I型变态反应,过敏反应型变态反应主要 见于蠕形螨,血吸虫毛蚴和棘球囊。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医传染病学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试预防真题及答案.pdf",
+        "questionNumber": 78,
+        "sourceIndex": 80,
+        "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-preventive-00029",
+    "type": "single_choice",
+    "question": "哺乳期的母猪发生口蹄疫时,会传染给仔猪的疾病为",
+    "options": {
+      "A": "急性心肌炎",
+      "B": "急性肾炎",
+      "C": "急性肺炎",
+      "D": "急性肝炎",
+      "E": "急性脑膜炎"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "口蹄疫成年动物的口腔黏膜、蹄部和乳房等处皮肤发生水疱和溃烂,幼龄 动物多因心肌炎使其死亡。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医传染病学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽预防科目回忆版真题.pdf",
+        "questionNumber": 39,
+        "sourceIndex": 39,
+        "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-preventive-00034",
+    "type": "single_choice",
+    "question": "臭稀便,脱水,多于 1-3 日内死亡;剖检见急性胃肠炎病变;细菌培养在 麦康凯琼脂上长出红色菌落。 犊牛群,7-14 日龄,精神沉郁,发热,排黄色或灰白色、带血和气泡的恶 防控该病的正确做法是",
+    "options": {
+      "A": "犊牛饲喂充足初乳",
+      "B": "给犊牛预防注射丙硫咪唑",
+      "C": "给犊牛预防性使用氨丙啉",
+      "D": "给母牛预防性使用新霉素",
+      "E": "扑杀发病牛"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "初乳含免疫球蛋白,能增强犊牛抵抗力,防控大肠杆菌病等疾病;丙硫咪 唑是抗蠕虫药,氨丙啉常用于球虫病,新霉素预防性使用易产生耐药性,扑杀发 病牛不是常规防控首要做法,主要应通过增强犊牛自身抵抗力等预防,所以选 A 。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医微生物学与免疫学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试预防真题及答案.pdf",
+        "questionNumber": 62,
+        "sourceIndex": 64,
+        "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-preventive-00033",
+    "type": "single_choice",
+    "question": "臭稀便,脱水,多于 1-3 日内死亡;剖检见急性胃肠炎病变;细菌培养在 麦康凯琼脂上长出红色菌落。 犊牛群,7-14 日龄,精神沉郁,发热,排黄色或灰白色、带血和气泡的恶 该病例的临床分型应为",
+    "options": {
+      "A": "呼吸型",
+      "B": "败血症型",
+      "C": "肠型",
+      "D": "神经型",
+      "E": "关节炎型"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "病例中犊牛主要呈现排带血、气泡等特征的稀便,有急性胃肠炎病变,符 合大肠杆菌病肠型的临床特点,呼吸型主要表现呼吸道症状,败血症型以全身败 血症表现为主,神经型侧重神经症状,关节炎型主要是关节病变,均不符合。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医微生物学与免疫学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试预防真题及答案.pdf",
+        "questionNumber": 61,
+        "sourceIndex": 63,
+        "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-preventive-00032",
+    "type": "single_choice",
+    "question": "臭稀便,脱水,多于 1-3 日内死亡;剖检见急性胃肠炎病变;细菌培养在 麦康凯琼脂上长出红色菌落。 犊牛群,7-14 日龄,精神沉郁,发热,排黄色或灰白色、带血和气泡的恶 该病最可能的诊断是",
+    "options": {
+      "A": "李氏杆菌病",
+      "B": "大肠杆菌病",
+      "C": "梭菌性肠炎",
+      "D": "弯曲菌病",
+      "E": "副伤寒"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "细菌在麦康凯琼脂上培养长出红色菌落,结合题干描述,该牛最可 能感染的是大肠杆菌病。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医微生物学与免疫学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试预防真题及答案.pdf",
+        "questionNumber": 60,
+        "sourceIndex": 62,
+        "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-preventive-00030",
+    "type": "single_choice",
+    "question": "鸡群,2 月龄,冠髯发绀、出血,排绿色稀粪;剖检见腺胃乳头出血, 病料接种鸡胚,2 天后取尿囊液进行实验室检查,应用的方法是",
+    "options": {
+      "A": "琼脂扩散试验",
+      "B": "血凝和血凝抑制试验",
+      "C": "免疫转印试验",
+      "D": "玻片凝集试验",
+      "E": "淋巴细胞转化试验"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "根据题干信息,2 月龄鸡群出现冠髯发绀、出血,排绿色稀粪,剖 检见腺胃乳头出血,是鸡新城疫的典型症状。病料接种鸡胚后,病毒在鸡 胚内增殖,尿囊液中含有大量病毒。对鸡新城疫病毒的实验室检查,最常 用的方法是血凝和血凝抑制试验。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医微生物学与免疫学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试预防真题及答案.pdf",
+        "questionNumber": 58,
+        "sourceIndex": 60,
+        "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-preventive-00029",
+    "type": "single_choice",
+    "question": "鸡群,2 周龄,排白色稀粪;剖检见肝脏肿大有坏死点,肠黏膜坏死; 病料接种麦康凯琼脂长出无色菌落;取单菌落纯培养物进行血清型鉴定, 应用的方法是",
+    "options": {
+      "A": "琼脂扩散试验",
+      "B": "血凝和血凝抑制试验",
+      "C": "免疫转印试验",
+      "D": "玻片凝集试验",
+      "E": "淋巴细胞转化试验"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "根据题干信息,2 周龄鸡群排白色稀粪,肝脏肿大有坏死点,肠粘 膜坏死,病料接种麦康凯琼脂长出无色菌落,可初步判断病原体为鸡白痢 沙门氏菌。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医微生物学与免疫学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试预防真题及答案.pdf",
+        "questionNumber": 57,
+        "sourceIndex": 59,
+        "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-preventive-00037",
+    "type": "single_choice",
+    "question": "竞争 ELISA 的显色反应深浅与样本中",
+    "options": {
+      "A": "抗体含量成反比",
+      "B": "抗原含量成反比",
+      "C": "抗原含量成正比",
+      "D": "抗原抗体含量无关",
+      "E": "抗体含量成正比"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "用于测定小分子抗原及半抗原。其基本程序是:用特异性抗体包被固相载 体,然后加入含待测抗原的溶液和一定量的酶标抗原共同孵育,设置仅加酶标抗 原的对照。如果样本中的抗原含量高,会竞争性地结合固相载体上的特异性抗体, 导致酶标抗原结合的机会减少,从而显色反应减弱。因此,显色反应的深浅与样 本中的抗原含量成反比。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医微生物学与免疫学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试预防真题及答案.pdf",
+        "questionNumber": 68,
+        "sourceIndex": 70,
+        "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-preventive-00043",
+    "type": "single_choice",
+    "question": "家兔,皮下多次注射马源抗血清进行免疫治疗,出现红斑和水肿的炎症反应, 该超敏反应类型为",
+    "options": {
+      "A": "中和反应型",
+      "B": "免疫复合反应型",
+      "C": "细胞毒型",
+      "D": "迟发型",
+      "E": "过敏反应型"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "多次注射异种血清,体内产生抗体,抗原抗体结合形成免疫复合物沉积, 引发III型超敏反应(免疫复合物型)。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医微生物学与免疫学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽预防科目回忆版真题.pdf",
+        "questionNumber": 62,
+        "sourceIndex": 62,
+        "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-preventive-00044",
+    "type": "single_choice",
+    "question": "山羊,口腔溃疡,腹泻,粪便带血,死亡。剖检见消化道糜烂,出血,粪便 上清镜检带囊膜病毒。",
+    "options": {
+      "A": "口蹄疫病毒",
+      "B": "小反刍兽疫",
+      "C": "蓝舌病",
+      "D": "伪狂犬",
+      "E": "朊病毒"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "小反刍兽疫典型症状:口腔糜烂溃疡、腹泻便血,消化道黏膜出血糜烂, 病原为有囊膜副黏病毒。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医微生物学与免疫学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽预防科目回忆版真题.pdf",
+        "questionNumber": 63,
+        "sourceIndex": 63,
+        "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-preventive-00047",
+    "type": "single_choice",
+    "question": "产生抗体的主要外周淋巴器官是",
+    "options": {
+      "A": "胸腺",
+      "B": "心脏",
+      "C": "肝脏",
+      "D": "肾脏",
+      "E": "脾脏"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "脾脏:是动物体内最大的淋巴器官,也是产生抗体的主要外周淋巴器官。 脾脏内定居着大量淋巴细胞和其他免疫细胞,抗原一旦进入脾脏即可发生 T 细胞 和 B 细胞的活化和增殖,产生致敏 T 细胞和浆细胞。脾脏是体内产生抗体的主要 器官。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医微生物学与免疫学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试预防真题及答案.pdf",
+        "questionNumber": 82,
+        "sourceIndex": 84,
+        "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-preventive-00022",
+    "type": "single_choice",
+    "question": "从多种病毒混合感染的病料中分离出单一病毒的常用方法是",
+    "options": {
+      "A": "PCR",
+      "B": "平板划线",
+      "C": "凝集试验",
+      "D": "血凝试验",
+      "E": "空斑试验"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "空斑试验可通过稀释分离得到单个病毒空斑,实现混合病毒中分纯单一病 毒;PCR 仅核酸检测,平板划线用于细菌分离;凝集、血凝为血清学鉴定,无法 分离纯化病毒。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医微生物学与免疫学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽预防科目回忆版真题.pdf",
+        "questionNumber": 31,
+        "sourceIndex": 31,
+        "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-preventive-00002",
+    "type": "single_choice",
+    "question": "1 岁患犬,感染流感病毒 2 周后,血清检查中流感病毒抗体最高,该犬获得免 疫的方式是",
+    "options": {
+      "A": "天然主动免疫",
+      "B": "天然被动免疫",
+      "C": "人工主动免疫",
+      "D": "人工被动免疫",
+      "E": "先天固有免疫"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "天然感染自然界中的抗原为天然主动免疫。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医微生物学与免疫学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽预防科目回忆版真题.pdf",
+        "questionNumber": 4,
+        "sourceIndex": 4,
+        "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-preventive-00043",
+    "type": "single_choice",
+    "question": "对鸡毒支原体最易感鸡群的日龄是",
+    "options": {
+      "A": "1 日龄",
+      "B": "产蛋高峰期",
+      "C": "1-2 周龄",
+      "D": "产蛋前后",
+      "E": "4-8 周龄"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "又称鸡毒支原体或鸡慢性呼吸道病,由鸡败血支原体引起的慢性呼 吸道传染病。主要表现为气管炎和气囊炎,以咳嗽、气喘、流鼻液和呼吸 啰音为特征。4-8 周龄鸡易感,可垂直传播(经卵)和水平传播。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医微生物学与免疫学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试预防真题及答案.pdf",
+        "questionNumber": 75,
+        "sourceIndex": 77,
+        "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-preventive-00023",
+    "type": "single_choice",
+    "question": "无菌采集的病变组织细菌分离鉴定首先处理的方法是",
+    "options": {
+      "A": "直接划线",
+      "B": "离心集菌",
+      "C": "抑制杂菌",
+      "D": "过滤集菌",
+      "E": "易感动物接种除去杂菌"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "对无菌采集的病变组织第一步直接划线接种培养基分离目标细菌;离心集 菌、过滤集菌多用于液体样本;抑制杂菌、动物去杂适用于污染严重病料。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医微生物学与免疫学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽预防科目回忆版真题.pdf",
+        "questionNumber": 33,
+        "sourceIndex": 33,
+        "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-preventive-00039",
+    "type": "single_choice",
+    "question": "平时有计划进行的免疫接种称为",
+    "options": {
+      "A": "临时接种",
+      "B": "预防接种",
+      "C": "紧急接种",
+      "D": "随时接种",
+      "E": "补充接种"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "预防接种在经常发生某些传染病的地区,或有某些传染病潜在的地 区,或经常受到邻近地区某些传染病或威胁的地区,为了防患于未然,在 平时有计划地给健康畜群进行的疫苗免疫接种,称为预防接种。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医微生物学与免疫学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试预防真题及答案.pdf",
+        "questionNumber": 70,
+        "sourceIndex": 72,
+        "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-preventive-00024",
+    "type": "single_choice",
+    "question": "猫免疫缺陷病的特征是",
+    "options": {
+      "A": "消瘦贫血",
+      "B": "高热稽留",
+      "C": "跛行",
+      "D": "天然孔出血",
+      "E": "便血"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "猫免疫缺陷病又叫猫艾滋病,是由猫免疫缺陷病毒(FIV)感染引起的一种 慢性病毒性传染病。主要特征是:消瘦,由于慢性疾病和食欲不振,病猫会出现 体重下降,贫血是由于免疫系统受损,病猫可能会出现贫血症状。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医微生物学与免疫学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试预防真题及答案.pdf",
+        "questionNumber": 48,
+        "sourceIndex": 50,
+        "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-preventive-00002",
+    "type": "single_choice",
+    "question": "下列抗体在血清中含量较高的是",
+    "options": {
+      "A": "IgA",
+      "B": "lgG",
+      "C": "IgM",
+      "D": "lgE",
+      "E": "IgD"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "lgG 是动物体抗感染免疫的主力,同时也是血清学诊断和疫苗免疫后监测 的主要抗体。在动物体内 lgG 不仅含量高,而且持续时间长,可发挥抗菌、中和 病毒和毒素等免疫学活性。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医微生物学与免疫学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试预防真题及答案.pdf",
+        "questionNumber": 4,
+        "sourceIndex": 4,
+        "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-preventive-00027",
+    "type": "single_choice",
+    "question": "造成兔子“狮子头”外观的是",
+    "options": {
+      "A": "黏液瘤病毒",
+      "B": "兔病毒性出血症病毒",
+      "C": "蓝舌病病毒",
+      "D": "口疮病毒",
+      "E": "脑心肌炎病毒"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "黏液瘤病毒,为兔痘病毒属成员,野兔、家兔均易感。病毒可通过呼吸道 传播。兔感染后 48h 出现临床症状,首先是眼结膜炎,接着头部广泛肿胀,呈特 征性的“狮子头”。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医微生物学与免疫学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽预防科目回忆版真题.pdf",
+        "questionNumber": 37,
+        "sourceIndex": 37,
+        "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-preventive-00016",
+    "type": "single_choice",
+    "question": "幼犬,5 月龄,初期体温升高呈双相热,鼻端干燥,呼吸加快,偶有 咳嗽,随后出现呕吐、腹泻症状,粪便混有血液,后期有神经症状。 该病的临床症状还可见",
+    "options": {
+      "A": "腹部皮肤丘疹",
+      "B": "眼角膜呈蓝白色",
+      "C": "望空扑咬",
+      "D": "口腔黏膜水疱",
+      "E": "恐水症"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "根据幼犬双相热、呼吸道及消化道症状、后期神经症状,可判断为犬瘟 犬病,“眼角膜蓝白色”多与犬传染性肝炎相关,“口腔黏膜水疱”常见于口炎 等,“恐水症”是狂犬病典型表现,均不符合本题病症。",
+    "chapter": "预防科目",
+    "knowledgePoint": "预防综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试预防真题及答案.pdf",
+        "questionNumber": 24,
+        "sourceIndex": 25,
+        "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-preventive-00015",
+    "type": "single_choice",
+    "question": "幼犬,5 月龄,初期体温升高呈双相热,鼻端干燥,呼吸加快,偶有 咳嗽,随后出现呕吐、腹泻症状,粪便混有血液,后期有神经症状。 诊断该病的动物回归试验常用的试验动物是",
+    "options": {
+      "A": "雪貂",
+      "B": "果子狸",
+      "C": "大鼠",
+      "D": "豚鼠",
+      "E": "小鼠"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": ";犬是犬瘟热最易感的动物,水貂、雪貂、浣熊等也易感",
+    "chapter": "预防科目",
+    "knowledgePoint": "预防综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试预防真题及答案.pdf",
+        "questionNumber": 23,
+        "sourceIndex": 24,
+        "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-preventive-00022",
+    "type": "single_choice",
+    "question": "母羊,3 岁,妊娠后期流产,羊水浑浊,流产胎儿真胃中有淡黄色或白色黏 液絮状物,同群公羊出现睾丸炎。该病可能诊断为",
+    "options": {
+      "A": "伪狂犬",
+      "B": "沙门氏菌病",
+      "C": "衣原体病",
+      "D": "布鲁氏菌病",
+      "E": "弓形虫病"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "布鲁氏菌病可导致母羊妊娠后期流产,羊水浑浊,胎儿真胃有黏液絮状物, 公羊出现睾丸炎,与题干症状相符。",
+    "chapter": "预防科目",
+    "knowledgePoint": "预防综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试预防真题及答案.pdf",
+        "questionNumber": 46,
+        "sourceIndex": 48,
+        "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-preventive-00051",
+    "type": "single_choice",
+    "question": "某 10 日龄鸭群,突然发病,五日后达到死亡高峰期,病鸭表现为精神食欲下 降,共济失调,死后呈角弓反张状态。该病可能确诊为",
+    "options": {
+      "A": "鸭瘟",
+      "B": "禽流感",
+      "C": "鸭病毒性肝炎",
+      "D": "鸭大肠杆菌病",
+      "E": "鸭沙门氏菌病"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "10 日龄雏鸭、急性死亡、角弓反张神经症状,为鸭病毒性肝炎典型特征。",
+    "chapter": "预防科目",
+    "knowledgePoint": "预防综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽预防科目回忆版真题.pdf",
+        "questionNumber": 74,
+        "sourceIndex": 74,
+        "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-preventive-00028",
+    "type": "single_choice",
+    "question": "鸡群,5 月龄,蹲伏地上,单侧翅下垂;剖检见心、肝、肾上有肿瘤样 结节;取羽毛囊进行实验室检查,应用的方法是",
+    "options": {
+      "A": "琼脂扩散试验",
+      "B": "血凝和血凝抑制试验",
+      "C": "免疫转印试验",
+      "D": "玻片凝集试验",
+      "E": "淋巴细胞转化试验"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "根据症状及病理变化描述,诊断为马立克氏病。诊断方法为琼脂扩 散试验。",
+    "chapter": "预防科目",
+    "knowledgePoint": "预防综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试预防真题及答案.pdf",
+        "questionNumber": 56,
+        "sourceIndex": 58,
+        "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-preventive-00046",
+    "type": "single_choice",
+    "question": "绵羊,10 月龄,营养状态良好,突然发病,腹胀,有疝痛症状,排黑色软粪, 死亡。可能是什么病",
+    "options": {
+      "A": "小反刍兽疫",
+      "B": "羊快疫",
+      "C": "绵羊痘",
+      "D": "蓝舌病",
+      "E": "口蹄疫"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "羊快疫多是较为肥胖的羊只发病,特征是真胃出血性坏死性炎症。",
+    "chapter": "预防科目",
+    "knowledgePoint": "预防综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽预防科目回忆版真题.pdf",
+        "questionNumber": 65,
+        "sourceIndex": 65,
+        "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-preventive-00009",
+    "type": "single_choice",
+    "question": "生物体内有毒物质在食物链上毒性逐渐增加的作用是",
+    "options": {
+      "A": "生物浓缩",
+      "B": "生物积累",
+      "C": "生物放大",
+      "D": "协同作用",
+      "E": "相加作用"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "生物放大:是指有毒化学物质在食物链各个环节中的毒性渐进现象,即在 生态系统中同一条食物链上,高营养级生物通过摄食低营养级生物,某种元素或 难分解化合物在生物机体内的浓度逐级升高的现象。",
+    "chapter": "预防科目",
+    "knowledgePoint": "预防综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽预防科目回忆版真题.pdf",
+        "questionNumber": 15,
+        "sourceIndex": 15,
+        "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-preventive-00030",
+    "type": "single_choice",
+    "question": "属于虫媒性人畜共患病的是",
+    "options": {
+      "A": "大肠杆菌病",
+      "B": "结核病",
+      "C": "猪乙型脑炎",
+      "D": "狂犬病",
+      "E": "沙门氏菌病"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "猪乙型脑炎由蚊虫叮咬传播,属于典型虫媒性人畜共患病。",
+    "chapter": "预防科目",
+    "knowledgePoint": "预防综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽预防科目回忆版真题.pdf",
+        "questionNumber": 40,
+        "sourceIndex": 40,
+        "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-preventive-00010",
+    "type": "single_choice",
+    "question": "兔出血症血凝与血凝抑制试验时,红细胞的来源为",
+    "options": {
+      "A": "人",
+      "B": "猪",
+      "C": "兔",
+      "D": "马",
+      "E": "羊"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "兔瘟病毒可凝集绵羊、鸡、鹅、豚鼠和人的红细胞,但是在用血凝和血凝 抑制试验进行诊断的时候多选用人 O 型红细胞",
+    "chapter": "预防科目",
+    "knowledgePoint": "预防综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试预防真题及答案.pdf",
+        "questionNumber": 15,
+        "sourceIndex": 16,
+        "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-preventive-00031",
+    "type": "single_choice",
+    "question": "钩虫对犬猫最直接的危害是",
+    "options": {
+      "A": "损伤肝脏",
+      "B": "损伤心脏",
+      "C": "损伤肺脏",
+      "D": "损伤肾脏",
+      "E": "吸血"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "成虫主要寄生在犬猫小肠黏膜上吸血,而且虫体会分泌抗凝素,延 长凝血时间,并且虫体会不断变换吸血部位,造成动物大量失血,且常伴 有血性或黏液性腹泻,粪便呈柏油状。",
+    "chapter": "预防科目",
+    "knowledgePoint": "预防综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试预防真题及答案.pdf",
+        "questionNumber": 59,
+        "sourceIndex": 61,
+        "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-preventive-00020",
+    "type": "single_choice",
+    "question": "可致饲料和动物产品污染的霉菌毒素是",
+    "options": {
+      "A": "伏马菌素",
+      "B": "肉毒毒素",
+      "C": "秋水仙素",
+      "D": "肠毒素",
+      "E": "龙葵素"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "伏马菌素是镰刀菌产生的霉菌毒素,污染玉米等饲料;肉毒毒素、肠毒素 属于细菌毒素;秋水仙素、龙葵素为植物毒素,均不属于霉菌毒素。",
+    "chapter": "预防科目",
+    "knowledgePoint": "预防综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽预防科目回忆版真题.pdf",
+        "questionNumber": 29,
+        "sourceIndex": 29,
+        "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-preventive-00004",
+    "type": "single_choice",
+    "question": "为达到牛奶防腐目的,不法商贩常添加的物质是",
+    "options": {
+      "A": "水",
+      "B": "食盐",
+      "C": "水杨酸",
+      "D": "尿素",
+      "E": "豆浆"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "防止乳的酸败:乳中加入甲醛、过氧化氢、苯甲酸、硼酸及其盐类、水杨 酸等,起抑菌、防腐作用。",
+    "chapter": "预防科目",
+    "knowledgePoint": "预防综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试预防真题及答案.pdf",
+        "questionNumber": 6,
+        "sourceIndex": 6,
+        "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-preventive-00058",
+    "type": "single_choice",
+    "question": "毒素食物链的积累的是什么",
+    "options": {
+      "A": "脂溶性毒素",
+      "B": "水溶性毒素",
+      "C": "细菌内毒素",
+      "D": "细菌外毒素",
+      "E": "醇类消毒剂"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "脂溶性物质不易溶于水,难以通过动物尿液、胆汁排出体外,会持续蓄积 在脂肪组织,随着食物链逐级传递、浓度不断升高,也就是生物放大。",
+    "chapter": "预防科目",
+    "knowledgePoint": "预防综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽预防科目回忆版真题.pdf",
+        "questionNumber": 83,
+        "sourceIndex": 84,
+        "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-preventive-00025",
+    "type": "single_choice",
+    "question": "预防羊囊尾蚴病的措施是防止",
+    "options": {
+      "A": "人粪污染牧场",
+      "B": "犬粪污染牧场",
+      "C": "羊粪污染牧场",
+      "D": "食入椎实螺",
+      "E": "食入蚂蚁"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "羊囊尾蚴病其成虫寄生于犬科动物的小肠内,孕节或虫卵随粪便排出,被 羊吞食后感染,防控核心是避免犬粪污染放牧场地。",
+    "chapter": "预防科目",
+    "knowledgePoint": "预防综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽预防科目回忆版真题.pdf",
+        "questionNumber": 35,
+        "sourceIndex": 35,
+        "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-preventive-00013",
+    "type": "single_choice",
+    "question": "羊狂蝇侵入机体是由于成蝇",
+    "options": {
+      "A": "在羊口产卵",
+      "B": "在羊鼻产成蛆",
+      "C": "在地面产卵",
+      "D": "在羊被毛产卵",
+      "E": "在羊被毛产蛆"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "羊狂蝇的成蝇:羊狂蝇的雌蝇在产幼虫时,会飞向羊群,并突然冲向羊的 鼻孔,直接将幼虫产在羊的鼻孔内或鼻孔周围。",
+    "chapter": "预防科目",
+    "knowledgePoint": "预防综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试预防真题及答案.pdf",
+        "questionNumber": 19,
+        "sourceIndex": 20,
+        "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-preventive-00042",
+    "type": "single_choice",
+    "question": "经过好氧处理后的屠宰污水上层清液,在排放前常采取的处理方法是",
+    "options": {
+      "A": "氯化消毒",
+      "B": "碱消毒",
+      "C": "酸消毒",
+      "D": "过氧化消毒",
+      "E": "表面活性剂消毒"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "屠宰污水好氧处理后上层清液排放前常用氯化消毒,杀灭水中病原微生物, 达标排放。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医公共卫生学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽预防科目回忆版真题.pdf",
+        "questionNumber": 61,
+        "sourceIndex": 61,
+        "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-preventive-00006",
+    "type": "single_choice",
+    "question": "屠宰加工车间发现炭疽后,最佳的化学消毒剂是",
+    "options": {
+      "A": "0.1%次氯酸钠溶液",
+      "B": "0.3%过氧乙酸溶液",
+      "C": "10%食盐溶液",
+      "D": "0.1%新洁尔灭溶液",
+      "E": "10%氢氧化钠溶液"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "10%氢氧化钠溶液属于强碱类消毒剂,对炭疽杆菌及其芽孢有强大的杀灭 作用,是屠宰加工车间等场所处理炭疽污染的首选消毒剂之一。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医公共卫生学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试预防真题及答案.pdf",
+        "questionNumber": 9,
+        "sourceIndex": 9,
+        "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-preventive-00031",
+    "type": "single_choice",
+    "question": "夏秋季节,犬精神倦怠,运动能力下降,伴有咳嗽和呼吸困难,在末梢血液 涂片中观察到丝状幼虫。该病可能的诊断是",
+    "options": {
+      "A": "犬恶丝虫病",
+      "B": "毛尾线虫病",
+      "C": "贾第虫病",
+      "D": "并殖吸虫病",
+      "E": "犬钩虫病"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "犬心丝虫病是由恶丝虫属的犬恶丝虫寄生于犬的右心室和肺动脉所引起, 犬的主要症状为咳嗽,其他症状有心悸、心内有杂音,呼吸困难,体温升高,腹 围增大等。外周血液内发现微丝蚴,即可确诊。 (共用题干) 某养殖绵羊群,可视黏膜黄染,食欲下降,腹泻,消瘦。草场有蚂蚁滋生。粪便 检查如图所示虫卵。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医寄生虫学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽预防科目回忆版真题.pdf",
+        "questionNumber": 41,
+        "sourceIndex": 41,
+        "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-preventive-00020",
+    "type": "single_choice",
+    "question": "绵羊 3 岁,食欲下降,腹泻,体型瘦弱,出现出血性肠炎症状,粪便 集卵法处理后镜检见大量棕黄色,腰鼓型,厚卵壳,两端有塞的虫卵。 该病可能诊断为",
+    "options": {
+      "A": "食道口线虫",
+      "B": "捻转血矛线虫",
+      "C": "仰口线虫",
+      "D": "毛尾线虫病",
+      "E": "马歇尔线虫"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "毛尾线虫的虫卵呈棕黄色、腰鼓型、厚卵壳,两端有塞,感染后会导致绵 羊出现出血性肠炎等症状,与题干描述相符。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医寄生虫学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试预防真题及答案.pdf",
+        "questionNumber": 44,
+        "sourceIndex": 46,
+        "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-preventive-00021",
+    "type": "single_choice",
+    "question": "绵羊 3 岁,食欲下降,腹泻,体型瘦弱,出现出血性肠炎症状,粪便 集卵法处理后镜检见大量棕黄色,腰鼓型,厚卵壳,两端有塞的虫卵。 该病原在体内寄生部位",
+    "options": {
+      "A": "盲肠",
+      "B": "空肠",
+      "C": "十二指肠",
+      "D": "皱胃",
+      "E": "结肠"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "毛尾线虫主要寄生在绵羊的盲肠内,可引起盲肠炎症等病变。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医寄生虫学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试预防真题及答案.pdf",
+        "questionNumber": 45,
+        "sourceIndex": 47,
+        "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-preventive-00017",
+    "type": "single_choice",
+    "question": "肝片吸虫成虫寄生的主要部位是",
+    "options": {
+      "A": "胆管",
+      "B": "肾脏",
+      "C": "脾脏",
+      "D": "心脏",
+      "E": "肺脏"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "肝片吸虫:成虫主要寄生于宿主的胆管内。肝片吸虫通过中间宿主淡水螺 进入终末宿主体内,移行至肝脏并在胆管内发育为成虫。成虫在胆管内产卵,卵 随胆汁进入肠道并随粪便排出体外。 (26--28)鹅群,2 周龄,精神萎顿,食欲减退或废绝,严重下痢,麻痹或抽搐; 小肠膨大增粗,形似香肠,肠腔内有凝固性栓子。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医寄生虫学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试预防真题及答案.pdf",
+        "questionNumber": 25,
+        "sourceIndex": 26,
+        "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-preventive-00035",
+    "type": "single_choice",
+    "question": "寄生于免疫盲点的寄生虫是",
+    "options": {
+      "A": "华支睾吸虫",
+      "B": "伊式锥虫",
+      "C": "猪带绦虫",
+      "D": "牛吸吮线虫",
+      "E": "鸡球虫"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "牛吸吮线虫病俗称牛眼虫病。虫体寄生于牛的结膜囊、第三眼睑和泪管, 免疫细胞难以浸润,虫体可长期存活。 (共用题干) 某病牛表现稽留高热、贫血、黄疸等急性热性症状。取末梢血液镜检可见如图所 示虫体。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医寄生虫学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽预防科目回忆版真题.pdf",
+        "questionNumber": 51,
+        "sourceIndex": 51,
+        "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-preventive-00032",
+    "type": "single_choice",
+    "question": "某养殖绵羊群,可视黏膜黄染,食欲下降,腹泻,消瘦。草场有蚂蚁滋生。粪便 检查如图所示虫卵。该病可能的诊断是",
+    "options": {
+      "A": "莫尼茨绦虫病",
+      "B": "网尾线虫病",
+      "C": "歧腔吸虫病",
+      "D": "捻转血矛线虫病",
+      "E": "毛首线虫病"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "歧腔吸虫虫卵似卵圆形,黄褐色,具卵盖。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医寄生虫学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽预防科目回忆版真题.pdf",
+        "questionNumber": 42,
+        "sourceIndex": 42,
+        "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "sharedStem": "某养殖绵羊群,可视黏膜黄染,食欲下降,腹泻,消瘦。草场有蚂蚁滋生。粪便 检查如图所示虫卵。",
+    "sharedKind": "stem",
+    "sharedGroupId": "vet-shared-stem-98eb988a7a2a12c0",
+    "sharedOrder": 1
+  },
+  {
+    "id": "vet-2026-recall-preventive-00007",
+    "type": "single_choice",
+    "question": "猪急性感染弓形虫时,组织细胞内弓形虫的主要发育阶段是",
+    "options": {
+      "A": "包囊",
+      "B": "滋养体",
+      "C": "裂殖体",
+      "D": "缓殖子",
+      "E": "配子体"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "急性弓形虫感染阶段,组织细胞内大量存在速殖子(滋养体)。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医寄生虫学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽预防科目回忆版真题.pdf",
+        "questionNumber": 12,
+        "sourceIndex": 12,
+        "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-preventive-00023",
+    "type": "single_choice",
+    "question": "皮屑可检测出寄生虫的是",
+    "options": {
+      "A": "有轮赖利绦虫",
+      "B": "透明前殖吸虫",
+      "C": "鸡球虫",
+      "D": "鸡蛔虫",
+      "E": "羊痒螨"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "羊痒螨是一种常见的体外寄生虫,寄生于羊的皮肤表面,引起强烈的瘙痒 和皮肤炎。通过刮取患部皮屑在显微镜下检查,可以发现羊痒螨及卵。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医寄生虫学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试预防真题及答案.pdf",
+        "questionNumber": 47,
+        "sourceIndex": 49,
+        "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-preventive-00028",
+    "type": "single_choice",
+    "question": "预防矛形剑带绦虫的药物是",
+    "options": {
+      "A": "伊维菌素",
+      "B": "氯硝柳胺",
+      "C": "磺胺嘧啶",
+      "D": "左旋咪唑",
+      "E": "马杜霉素"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "矛形剑带绦虫治疗或预防驱虫可用氯硝硫胺。伊维菌素、左旋咪唑主要驱 线虫;磺胺嘧啶、马杜霉素抗球虫药,对绦虫无效。",
+    "chapter": "预防科目",
+    "knowledgePoint": "兽医寄生虫学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "预防科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽预防科目回忆版真题.pdf",
+        "questionNumber": 38,
+        "sourceIndex": 38,
+        "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00001",
+    "type": "single_choice",
+    "question": "患犬,8 岁,证见干咳无痰,触诊咽喉疼痛,气喘,舌红少苔,脉象细数,经 诊疗选用药剂是",
+    "options": {
+      "A": "六味地黄丸",
+      "B": "香薷散",
+      "C": "麻黄汤",
+      "D": "补中益气汤",
+      "E": "百合固金汤"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "患犬干咳无痰、咽喉疼痛、气喘、舌红少苔、脉象细数,属肺阴亏虚之证。 百合固金汤具有养阴润肺、止咳化痰的功效,适用于肺阴不足所致的干咳、咽喉 疼痛等症。六味地黄丸滋阴补肾,用于肾阴虚;香薷散解表祛暑,用于暑湿感冒; 麻黄汤发汗解表,用于风寒感冒;补中益气汤益气升阳,用于气虚证,均不适合 该病症。",
+    "chapter": "临床科目",
+    "knowledgePoint": "中兽医学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 1,
+        "sourceIndex": 1,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-clinical-00038",
+    "type": "single_choice",
+    "question": "猪,证见发热,泻痢,里急后重,口渴贪饮,尿液短赤,口色红黄,舌苔黄 腻,脉弦数,适用于该病证的方剂为",
+    "options": {
+      "A": "四君子汤",
+      "B": "白头翁汤",
+      "C": "香薷散汤",
+      "D": "小承气汤",
+      "E": "大承气汤"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "病猪发热泻痢、里急后重、口色红黄苔黄腻脉弦数,辨证为大肠湿热血痢; 白头翁汤功效清热解毒、凉血止痢,专治湿热泻痢。 (共用题干) 犬,3 岁,食用鸡骨后,食道触诊敏感,频繁做逆呕动作,呕吐物混有血液和黄 色粘液。",
+    "chapter": "临床科目",
+    "knowledgePoint": "中兽医学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽临床科目回忆版真题.pdf",
+        "questionNumber": 44,
+        "sourceIndex": 45,
+        "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00040",
+    "type": "single_choice",
+    "question": "清热消肿止痛的中药是",
+    "options": {
+      "A": "生地",
+      "B": "黄芩",
+      "C": "穿心莲",
+      "D": "苦参",
+      "E": "龙胆草"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "生地:主要功效为清热凉血、养阴生津,无明显消肿止痛作用。黄芩:善 于清热燥湿、泻火解毒、止血、安胎,消肿止痛并非其突出功效。穿心莲:具有 清热解毒、凉血、消肿、燥湿的功效,可清热消肿止痛,符合题意。苦参:功效 为清热燥湿、杀虫、利尿,不侧重消肿止痛。龙胆草:主要是清热燥湿、泻肝胆 火,无显著消肿止痛效果。",
+    "chapter": "临床科目",
+    "knowledgePoint": "中兽医学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 56,
+        "sourceIndex": 56,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00039",
+    "type": "single_choice",
+    "question": "牛一息五至以上的脉象是",
+    "options": {
+      "A": "数脉",
+      "B": "迟脉",
+      "C": "浮脉",
+      "D": "虚脉",
+      "E": "沉脉"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "数脉:一息五至以上(牛的正常脉象一息三至四至),主热证,因热迫血 行,脉搏次数增多。迟脉:一息不足四至,主寒证,寒邪凝滞,气血运行缓慢。 浮脉:轻按即得,重按稍弱,主表证,病邪在表,气血趋于体表。虚脉:三部脉 举按皆无力,主虚证,为气血不足之象。沉脉:轻按不应,重按始得,主里证, 病邪在里。",
+    "chapter": "临床科目",
+    "knowledgePoint": "中兽医学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 54,
+        "sourceIndex": 54,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00058",
+    "type": "single_choice",
+    "question": "插入柳枝治疗牛瘤胃鼓气的穴位是",
+    "options": {
+      "A": "通关",
+      "B": "山根",
+      "C": "顺气",
+      "D": "承浆",
+      "E": "锁口"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "牛瘤胃鼓气时,常通过穿刺放气或插入器具导气缓解症状,其中顺气穴是 治疗该病的特定穴位。顺气穴位于牛的左侧倒数第 6~7 肋间,肩关节水平线下 方,是瘤胃穿刺放气的常用部位,插入柳枝可直接排出瘤胃内的气体,缓解鼓气 症状",
+    "chapter": "临床科目",
+    "knowledgePoint": "中兽医学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 92,
+        "sourceIndex": 92,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-clinical-00036",
+    "type": "single_choice",
+    "question": "药物对机体内脏经络的选择性称为",
+    "options": {
+      "A": "药物归经",
+      "B": "升降浮沉",
+      "C": "升降出入",
+      "D": "阴阳消长",
+      "E": "寒凉温热"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "归经是指中药对机体某部分的选择作用,即药物作用部位。一种药物主要 对某一经(脏腑及其经络)或某几经发生明显作用,而对其他经则作用较小。",
+    "chapter": "临床科目",
+    "knowledgePoint": "中兽医学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽临床科目回忆版真题.pdf",
+        "questionNumber": 42,
+        "sourceIndex": 43,
+        "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00006",
+    "type": "single_choice",
+    "question": "奶牛,8 岁,妊娠末期,阴道下壁突出阴门外,卧地时形成拳头大粉红 湿润有光泽的囊状物堵在阴门,站立后脱出物可自行缩回。 该奶牛最可能发生",
+    "options": {
+      "A": "重度阴道脱出",
+      "B": "胎儿胎囊脱出",
+      "C": "阴道肿瘤",
+      "D": "中度阴道脱出",
+      "E": "轻度阴道脱出"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "阴道脱出根据程度可分为轻度、中度和重度。阴道脱出根据程度可分为轻 度、中度和重度。轻度阴道脱出站立时无明显脱出,卧地时少量突出,站立后立 即缩回;中度阴道脱出卧地时脱出明显突出,站立后可自行缩回;重度阴道脱出 站立时脱出物也不能缩回。题干中卧地时脱出物呈拳头大,站立后可自行缩回, 符合中度阴道脱出的特征。 胎儿胎囊脱出:属于流产或早产的表现,脱出物为 含胎儿的胎膜,与阴道下壁突出不符合。阴道肿瘤一般不会随着体位变化自行缩 回。",
+    "chapter": "临床科目",
+    "knowledgePoint": "兽医产科学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 6,
+        "sourceIndex": 6,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00008",
+    "type": "single_choice",
+    "question": "奶牛,8 岁,妊娠末期,阴道下壁突出阴门外,卧地时形成拳头大粉红 湿润有光泽的囊状物堵在阴门,站立后脱出物可自行缩回。 若预防流产可注射",
+    "options": {
+      "A": "孕酮",
+      "B": "抗生素",
+      "C": "雌激素",
+      "D": "可的松",
+      "E": "马绒毛囊促性腺激素"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "孕酮具有维持妊娠、抑制子宫收缩的作用,可用于预防流产。抗生素用于 治疗感染;雌激素可能诱发流产;可的松属于糖皮质激素,大剂量可能影响妊娠; 马绒毛囊促性腺激素主要用于促进卵泡发育,均不适合用于预防流产。",
+    "chapter": "临床科目",
+    "knowledgePoint": "兽医产科学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 8,
+        "sourceIndex": 8,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00007",
+    "type": "single_choice",
+    "question": "奶牛,8 岁,妊娠末期,阴道下壁突出阴门外,卧地时形成拳头大粉红 湿润有光泽的囊状物堵在阴门,站立后脱出物可自行缩回。 与该病发生无直接关系的因素是",
+    "options": {
+      "A": "胎盘分泌雌激素增多",
+      "B": "骨盆韧带及阴道组织松弛",
+      "C": "阴道腔扩张,壁松软",
+      "D": "腔内压增高",
+      "E": "子宫炎症"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "阴道脱出主要与胎盘分泌雌激素增多导致骨盆韧带及阴道组织松弛阴道腔 扩张、腹内压增高等因素有关。子宫炎症与阴道脱出无直接关系,主要影响子宫 的功能。",
+    "chapter": "临床科目",
+    "knowledgePoint": "兽医产科学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 7,
+        "sourceIndex": 7,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00002",
+    "type": "single_choice",
+    "question": "泌乳期奶牛,4 岁,乳房外观正常,乳汁隐性,乳房炎检测阴性,酒精试验呈 阳性,治疗可选用",
+    "options": {
+      "A": "青霉素钾静注",
+      "B": "促乳素肌注",
+      "C": "柠檬酸钠内服",
+      "D": "醋酸泼尼松静注",
+      "E": "硫酸链霉素静注"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "酒精试验阳性提示乳汁中含有较多的钙盐等物质,易发生凝固。柠檬酸钠 可与钙离子结合,防止乳汁凝固,适合用于该情况。青霉素钾、硫酸链霉素用于 治疗细菌感染性乳房炎,而该奶牛乳房炎检测阴性,无需使用抗生素;促乳素会 促进乳汁分泌,不利于症状缓解;醋酸泼尼松为糖皮质激素,可能影响乳汁质量, 不宜用于泌乳期奶牛。",
+    "chapter": "临床科目",
+    "knowledgePoint": "兽医产科学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 2,
+        "sourceIndex": 2,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00013",
+    "type": "single_choice",
+    "question": "犬剖腹产手术过程中发现子宫弛缓,子宫缝合前子宫内膜严重出血,可使用 药物是",
+    "options": {
+      "A": "催产素",
+      "B": "黄体酮",
+      "C": "前裂炳酮",
+      "D": "新斯的明",
+      "E": "阿托品"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "催产素能促进子宫平滑肌收缩,减少子宫出血,常用于剖腹产手术中子宫 弛缓和出血的情况。黄体酮抑制子宫收缩;新斯的明主要作用于骨骼肌;阿托品 抑制腺体分泌和平滑肌收缩;前裂炳酮并非常用药物,故选用催产素。",
+    "chapter": "临床科目",
+    "knowledgePoint": "兽医产科学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 14,
+        "sourceIndex": 14,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00031",
+    "type": "single_choice",
+    "question": "奶牛,8 岁,持续强烈努责数小时,不见胎儿娩出,检查仅见胎 儿两前肢和口鼻部进入子宫颈。 引起该难产最常见的原因是",
+    "options": {
+      "A": "催产素分泌过多",
+      "B": "孕酮分泌不足",
+      "C": "雌激素分泌过多",
+      "D": "雌激素和松弛素分泌不足",
+      "E": "催产素分泌不足"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "子宫颈扩张不全是因为阵缩出现,此时雌激素及松弛素分泌不足, 子宫颈未见充分软化。",
+    "chapter": "临床科目",
+    "knowledgePoint": "兽医产科学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 45,
+        "sourceIndex": 45,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00005",
+    "type": "single_choice",
+    "question": "贵宾犬,6 月龄,消瘦,X 线摄片见左心房、左心室扩张,肺部阴影增加; 可视粘膜发绀。 主诉该犬出生一个月后,逐渐出现呼吸困难,常呈犬坐姿势,气喘,运动时加重, 最可能的诊断是",
+    "options": {
+      "A": "限制性心肌病",
+      "B": "扩张性心肌病",
+      "C": "动脉导管未闭",
+      "D": "肥厚性心肌病",
+      "E": "主动脉瓣狭窄"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "动脉导管未闭是犬常见的先天性心脏病,出生后动脉导管未闭合,导致血 液分流,引起左心房、左心室扩张,肺部防於血,出现呼吸困难、气喘、可视粘 膜发绀等症状,与该犬的表现相符。扩张性心肌病多发生于成年犬;肥厚性心肌 病以心肌肥厚为特征;限制性心肌病较少见;主动脉瓣狭窄主要影响左心室射血, 与该犬症状不完全一致。",
+    "chapter": "临床科目",
+    "knowledgePoint": "兽医临床诊断学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 5,
+        "sourceIndex": 5,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00004",
+    "type": "single_choice",
+    "question": "贵宾犬,6 月龄,消瘦,X 线摄片见左心房、左心室扩张,肺部阴影增加; 可视粘膜发绀。 主诉该犬出生一个月后,逐渐出现呼吸困难,常呈犬坐姿势,气喘,运动时加重, 心脏听诊时最可能听到",
+    "options": {
+      "A": "连续性心杂音",
+      "B": "奔马律",
+      "C": "心音分裂",
+      "D": "心音浑浊",
+      "E": "捻发音"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "根据该犬的症状(呼吸困难、犬坐姿势、气喘、运动后加重、可视粘膜发 绀)和 X 线检查(左心房、左心室扩张,肺部阴影增加),推测可能患有动脉导管未 闭。动脉导管未闭时,由于主动脉压力高于肺动脉,血液持续从主动脉流入肺动 脉,心脏听诊可闻及连续性心杂音。",
+    "chapter": "临床科目",
+    "knowledgePoint": "兽医临床诊断学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 4,
+        "sourceIndex": 4,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00033",
+    "type": "single_choice",
+    "question": "母犬,3 岁,清晨散步后,突然发病,呻吟,流涎,不安,步态 快出现共济失调,痉挛抽搐,体温低;死亡后剖检见胃、小肠、盲肠黏膜 出血、坏死、糜烂,产生假膜。 蹒跚,腹泻,粪便恶臭带血;检查口腔齿龈呈黑褐色,有蒜臭样气味,很 该病最可能的诊断是",
+    "options": {
+      "A": "砷中毒",
+      "B": "敌鼠钠中毒",
+      "C": "低钙血症",
+      "D": "氢氰酸中毒",
+      "E": "低镁血症"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "齿龈呈黑褐色,有蒜臭样砷化氢气味,是典型的砷化物中毒",
+    "chapter": "临床科目",
+    "knowledgePoint": "兽医临床诊断学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 47,
+        "sourceIndex": 47,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00044",
+    "type": "single_choice",
+    "question": "奶牛群,1-2 岁,7-10 月间,近 1/3 的牛在面部,颊部,肩部,眼周 褐色,质地坚实。 围的皮肤上出现在表面凹凸不平的结节样突起,蚕豆大至鸡蛋大,呈灰白色或黑 该病最可能的诊断是",
+    "options": {
+      "A": "湿疹",
+      "B": "淋巴肉瘤",
+      "C": "乳头状瘤",
+      "D": "结节样皮炎",
+      "E": "鳞状细胞瘤"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "结节样皮炎多见于牛,表现为皮肤出现坚实的结节样突起,与该牛群症状 (面部、肩部等部位结节,质地坚实)相符。湿疹多为红斑、丘疹;淋巴肉瘤结节 柔软;乳头状瘤呈乳头状;鳞状细胞瘤破溃明显,故该病最可能是结节样皮炎。",
+    "chapter": "临床科目",
+    "knowledgePoint": "兽医临床诊断学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 64,
+        "sourceIndex": 64,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00026",
+    "type": "single_choice",
+    "question": "牛,3 岁,精神沉郁,食欲减退,反刍停止,呻吟,磨牙,鼻镜 起,强力抬举剑状软骨处表现痛苦、反抗。 龟裂;站立时肘头外展,拒绝左转弯,卧地时后肢先卧地,起立时前肢先 【假设信息】如该病继续发展,听诊心区有拍水音,此时可能会出现",
+    "options": {
+      "A": "贫血",
+      "B": "水肿",
+      "C": "腹泻",
+      "D": "红尿",
+      "E": "频尿"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "继续发展为心区拍水音,即创伤性网胃心包炎,可引起间接性心功 能障碍,颈静脉怒张和水肿。",
+    "chapter": "临床科目",
+    "knowledgePoint": "兽医临床诊断学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 38,
+        "sourceIndex": 38,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00019",
+    "type": "single_choice",
+    "question": "色,爪部湿而红;瘙痒无明显的季节性。 松狮犬,7 岁,一周前更换食物后出现舔爪子和挠耳朵的现象,患部被毛着 诊断时应首先检查的项目是",
+    "options": {
+      "A": "心肌功能检査",
+      "B": "肝功能",
+      "C": "肾功能",
+      "D": "血清 IgE 含量",
+      "E": "粪便镜检"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "根据题干描述,松狮犬在更换食物后出现舔爪子、挠耳朵等瘙痒症 状,患部被毛着色,爪部湿红,且瘙痒无明显季节性。这些症状高度提示 可能是食物过敏引发的过敏性皮炎。 过敏性疾病常与体内免疫球蛋白 E(IgE)水平升高相关,IgE 在I型超敏 反应中起关键作用,会介导肥大细胞释放组胺等炎症介质,导致瘙痒、红 斑等症状。因此,诊断时首先应检查血清 IgE 含量。",
+    "chapter": "临床科目",
+    "knowledgePoint": "兽医临床诊断学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 29,
+        "sourceIndex": 29,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-clinical-00022",
+    "type": "single_choice",
+    "question": "北京犬,有明确的车撞外伤史。就诊时发现其右下腹部出现一囊状突出物, 触诊无热、无痛、质地柔软。该突出物在犬站立时明显隆起,而在仰卧躺下后隆 起显著减轻或消失。根据以上临床表现,最可能的诊断是",
+    "options": {
+      "A": "血肿",
+      "B": "阴囊疝",
+      "C": "腹壁疝",
+      "D": "淋巴外渗",
+      "E": "脓肿"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "根据题干有外伤史、腹侧囊状柔软凸起,仰卧可还纳缩小,是腹壁疝典型 特征;腹壁肌肉受撞击破裂,腹腔脏器脱出形成疝。",
+    "chapter": "临床科目",
+    "knowledgePoint": "兽医临床诊断学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽临床科目回忆版真题.pdf",
+        "questionNumber": 27,
+        "sourceIndex": 28,
+        "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00054",
+    "type": "single_choice",
+    "question": "羊,2 岁,采食大量再生高梁幼苗后发生,表现腹痛,兴奋不安,呼 吸加快,可视黏膜鲜红,流出白色泡沫状唾液,呼出气体有苦杏仁味。 该病最有可能的诊断是",
+    "options": {
+      "A": "有机磷中毒",
+      "B": "亚硝酸盐中毒",
+      "C": "氢氰酸中毒",
+      "D": "青草搐搦",
+      "E": "瘤胃酸中毒"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "根据题干中羊采食大量再生高粱幼苗(高粱幼苗含氰苷,可分解产生氢氰 酸),以及典型症状 ——可视黏膜鲜红(与缺氧导致的发绀不同,因氢氰酸抑 制细胞呼吸链,氧无法被利用,血液含氧量高)、呼出气体有苦杏仁味,可确诊 为氢氰酸中毒。",
+    "chapter": "临床科目",
+    "knowledgePoint": "兽医临床诊断学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 85,
+        "sourceIndex": 85,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00011",
+    "type": "single_choice",
+    "question": "小型犬,8 岁,雌性,未见排尿,肛门右侧旁出现一肿胀物,疼痛不 明显,触诊稍柔软,可还纳,穿刺液为淡黄色。 穿刺液是",
+    "options": {
+      "A": "腹水",
+      "B": "乳糜液",
+      "C": "淋巴液",
+      "D": "血液",
+      "E": "尿液"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "腹水多在腹腔,与题干肛门旁肿物不符,乳糜液呈乳白色;淋巴液量少多 为无色透明;血液提示出血淡红色或粉色,与该病例表现不符。结合上一题诊断 会阴疝,题干中穿刺液常为淡黄色,会阴疝时,膀胱易通过疝孔进入会阴部, 导致尿液排出受阻(尿闭),疝囊内积聚的液体即为潴留的尿液,颜色多 为淡黄色。",
+    "chapter": "临床科目",
+    "knowledgePoint": "兽医临床诊断学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 12,
+        "sourceIndex": 12,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00010",
+    "type": "single_choice",
+    "question": "小型犬,8 岁,雌性,未见排尿,肛门右侧旁出现一肿胀物,疼痛不 明显,触诊稍柔软,可还纳,穿刺液为淡黄色。 该病可能是。",
+    "options": {
+      "A": "膀胱爆裂",
+      "B": "前列腺炎",
+      "C": "阴道肿瘤",
+      "D": "肠便秘",
+      "E": "会阴疝"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "会阴疝是指腹腔或盆腔内的器官通过会阴部的薄弱区域突出形成的疝,多 见于老龄犬,表现为肛门旁肿胀,触诊柔软,可还纳,常伴有排尿困难。膀胱爆 裂会有剧烈疼痛和腹腔积液;前列腺炎多见于公犬;阴道肿瘤质地较硬,不可还 纳;肠便秘一般不会出现肛门旁肿胀,故该病最可能是会阴疝。",
+    "chapter": "临床科目",
+    "knowledgePoint": "兽医临床诊断学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 11,
+        "sourceIndex": 11,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-clinical-00062",
+    "type": "single_choice",
+    "question": "犬,近期出现皮肤瘙痒、发红症状,皮肤表面有油性分泌物,散发难闻气味, 病程较长,患处皮肤逐渐出现苔藓化和色素沉着。该犬可能感染的病原是",
+    "options": {
+      "A": "石膏样小孢子菌",
+      "B": "须毛藓菌",
+      "C": "中间型金葡萄球菌",
+      "D": "马拉色菌",
+      "E": "犬小孢子菌"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "马拉色菌是犬皮肤表面的正常菌群,当皮肤屏障受损、环境潮湿或机体免 疫力下降时,会大量繁殖引发感染,临床特征为皮肤瘙痒、发红,分泌油性分泌 物,伴有明显异味,长期感染可导致皮肤苔藓化和色素沉着。",
+    "chapter": "临床科目",
+    "knowledgePoint": "兽医临床诊断学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽临床科目回忆版真题.pdf",
+        "questionNumber": 87,
+        "sourceIndex": 89,
+        "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00046",
+    "type": "single_choice",
+    "question": "奶牛群,1-2 岁,7-10 月间,近 1/3 的牛在面部,颊部,肩部,眼周 褐色,质地坚实。 围的皮肤上出现在表面凹凸不平的结节样突起,蚕豆大至鸡蛋大,呈灰白色或黑 防治该病的有效措施是",
+    "options": {
+      "A": "用替硝唑与酮康唑药治",
+      "B": "应用多拉菌素与呲虫啉",
+      "C": "注射长春新碱与阿莫西林",
+      "D": "注射环磷酰胺与干扰素",
+      "E": "疫苗注射,去除突起物"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "该病预防可通过疫苗注射,发病后需去除突起物防止扩散。其他选项中, 替硝唑、酮康唑抗真菌;多拉菌素、吡虫啉驱虫;长春新碱、环磷酰胺为化疗药; 阿莫西林抗菌,均不针对该病的防治。",
+    "chapter": "临床科目",
+    "knowledgePoint": "临床综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 66,
+        "sourceIndex": 66,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00056",
+    "type": "single_choice",
+    "question": "羊,2 岁,采食大量再生高梁幼苗后发生,表现腹痛,兴奋不安,呼 吸加快,可视黏膜鲜红,流出白色泡沫状唾液,呼出气体有苦杏仁味。 治疗该病,常与亚硝酸钠配合应用的药物是",
+    "options": {
+      "A": "乙酰胺",
+      "B": "阿托品",
+      "C": "硫代硫酸钠",
+      "D": "二巯丙磺酸钠",
+      "E": "马来醋氯苯那"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "氢氰酸中毒的治疗原则是尽快恢复细胞色素氧化酶活性。亚硝酸钠可使血 红蛋白转化为高铁血红蛋白,与氢氰酸结合形成无毒的氰化高铁血红蛋白;随后 需用硫代硫酸钠,其作为供硫体,使氰离子转化为无毒的硫氰酸盐排出体外,二 者联用可增强解毒效果。",
+    "chapter": "临床科目",
+    "knowledgePoint": "临床综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 87,
+        "sourceIndex": 87,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00045",
+    "type": "single_choice",
+    "question": "奶牛群,1-2 岁,7-10 月间,近 1/3 的牛在面部,颊部,肩部,眼周 褐色,质地坚实。 围的皮肤上出现在表面凹凸不平的结节样突起,蚕豆大至鸡蛋大,呈灰白色或黑 治疗该病的方法不包括:",
+    "options": {
+      "A": "手术切除",
+      "B": "电刀烧烙",
+      "C": "紧急免疫",
+      "D": "激光疗法",
+      "E": "冷冻去除"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "结节样皮炎的治疗以物理去除结节为主,如手术切除、电刀烧烙、激光、 冷冻等。紧急免疫用于传染性疾病的预防,对已形成的结节无治疗作用,故不包 括紧急免疫。",
+    "chapter": "临床科目",
+    "knowledgePoint": "临床综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 65,
+        "sourceIndex": 65,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00025",
+    "type": "single_choice",
+    "question": "牛,3 岁,精神沉郁,食欲减退,反刍停止,呻吟,磨牙,鼻镜 起,强力抬举剑状软骨处表现痛苦、反抗。 龟裂;站立时肘头外展,拒绝左转弯,卧地时后肢先卧地,起立时前肢先 确诊该病宜选用的检查方式是",
+    "options": {
+      "A": "X 线检查",
+      "B": "粪常规检查",
+      "C": "B 超检查",
+      "D": "尿常规检查",
+      "E": "胃管探查"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "食欲减退,反刍停止,行为异常,网胃区触诊敏感疼痛,可诊断为 创伤性网胃炎,用 X 线或金属探测器检查。",
+    "chapter": "临床科目",
+    "knowledgePoint": "临床综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 37,
+        "sourceIndex": 37,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00027",
+    "type": "single_choice",
+    "question": "牛,3 岁,精神沉郁,食欲减退,反刍停止,呻吟,磨牙,鼻镜 起,强力抬举剑状软骨处表现痛苦、反抗。 龟裂;站立时肘头外展,拒绝左转弯,卧地时后肢先卧地,起立时前肢先 治疗该病应使用的药物是",
+    "options": {
+      "A": "速尿",
+      "B": "毛果芸香碱",
+      "C": "尼可刹米",
+      "D": "酵母片",
+      "E": "青霉素"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "创伤性网胃心包炎后期会发展为心力衰竭,所以要心脏减压,可通 过静脉放血和利尿的方式进行。",
+    "chapter": "临床科目",
+    "knowledgePoint": "临床综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 39,
+        "sourceIndex": 39,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00020",
+    "type": "single_choice",
+    "question": "色,爪部湿而红;瘙痒无明显的季节性。 松狮犬,7 岁,一周前更换食物后出现舔爪子和挠耳朵的现象,患部被毛着 全身用药对症治疗时选用的药物是",
+    "options": {
+      "A": "大环内酯类药物",
+      "B": "喹诺酮类药物",
+      "C": "糖皮质激素类药物",
+      "D": "头孢类药物",
+      "E": "氨基糖苷类药物"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "该病例为过敏引起的瘙痒和炎症反应,全身对症治疗的关键是抑制 过度的免疫反应和炎症。糖皮质激素类药物具有强大的抗炎、抗过敏作用, 能有效减轻过敏反应导致的瘙痒、红斑和肿胀等症状,是治疗过敏性疾病 的常用全身用药。",
+    "chapter": "临床科目",
+    "knowledgePoint": "临床综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 30,
+        "sourceIndex": 30,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00055",
+    "type": "single_choice",
+    "question": "羊,2 岁,采食大量再生高梁幼苗后发生,表现腹痛,兴奋不安,呼 吸加快,可视黏膜鲜红,流出白色泡沫状唾液,呼出气体有苦杏仁味。 该病的发生机理是",
+    "options": {
+      "A": "循环性缺氧",
+      "B": "低张性缺氧",
+      "C": "神经毒作用",
+      "D": "血液性缺氧",
+      "E": "组织性缺氧"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "氢氰酸的毒性在于其与细胞色素氧化酶结合,抑制细胞呼吸链,导致组织 细胞无法利用血液中的氧气(即 “内窒息”),属于组织性缺氧。此时血液中 氧含量正常(故可视黏膜鲜红),但氧不能被组织利用。",
+    "chapter": "临床科目",
+    "knowledgePoint": "临床综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 86,
+        "sourceIndex": 86,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-clinical-00052",
+    "type": "single_choice",
+    "question": "犬,4 岁,雄性,肛周外伤形成溃疡,其肉芽组织血管可见细微苍白,平滑无 颗粒,无上皮组织,过早形成致密的纤维性瘢痕组织,该溃疡是",
+    "options": {
+      "A": "蕈状溃疡",
+      "B": "褥疮性溃疡",
+      "C": "坏疽性溃疡",
+      "D": "水肿性溃疡",
+      "E": "胼胝性溃疡"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "胼胝性溃疡核心特征:肉芽生长不良,苍白平滑无颗粒,上皮再生迟缓, 纤维组织过度增生,提早形成坚硬致密瘢痕组织,与题干描述完全吻合。 (共用题干) 临清狮子猫,6 岁,近期出现大量流涎,食欲不振,口腔检查发现牙龈红肿,牙 周袋内蓄积脓液。",
+    "chapter": "临床科目",
+    "knowledgePoint": "临床综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽临床科目回忆版真题.pdf",
+        "questionNumber": 72,
+        "sourceIndex": 74,
+        "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-clinical-00063",
+    "type": "single_choice",
+    "question": "犬,运动不耐受,嗜睡,肌肉无力,两侧对称性脱毛,有色素沉着。ACTH 实 验呈现低反应性,该病可能伴有的变化是",
+    "options": {
+      "A": "高钾血症",
+      "B": "低钾血症",
+      "C": "低钠血症",
+      "D": "低磷血症",
+      "E": "氮质血症"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "题干中 ACTH 刺激试验呈低反应性,结合对称性脱毛、色素沉着、肌无力 等典型表现,最可能是犬肾上腺皮质功能减退症。该病导致肾上腺皮质分泌的醛 固酮严重缺乏。醛固酮的主要生理作用是保钠排钾,因此伴随的变化是高钾血症。",
+    "chapter": "临床科目",
+    "knowledgePoint": "临床综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽临床科目回忆版真题.pdf",
+        "questionNumber": 88,
+        "sourceIndex": 90,
+        "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00021",
+    "type": "single_choice",
+    "question": "松狮犬,1 岁,双眼持续流泪,结膜潮红,下眼睑睫毛朝向角膜。 该犬流泪的原因最可能是",
+    "options": {
+      "A": "鼻泪管堵塞",
+      "B": "眼睫毛过长",
+      "C": "眼睫毛刺激",
+      "D": "眼裂小",
+      "E": "泪腺增生"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "根据题干描述,该松狮犬双眼持续流泪、结膜潮红,且下眼睑睫毛 朝向角膜。眼睑内翻,下眼睑睫毛异常朝向角膜(倒睫)会直接刺激角膜 和结膜,引发炎症反应,导致结膜潮红和反射性流泪,这是该病例流泪的 最可能原因。",
+    "chapter": "临床科目",
+    "knowledgePoint": "临床综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 31,
+        "sourceIndex": 31,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-clinical-00028",
+    "type": "single_choice",
+    "question": "犬,2 岁,近期频繁努责,肛门处可见红色香肠样组织脱出,脱出组织无缝隙, 质地柔软。该脱出组织是",
+    "options": {
+      "A": "直肠",
+      "B": "盲肠",
+      "C": "小肠",
+      "D": "大肠",
+      "E": "子宫"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "直肠脱垂是指直肠黏膜或直肠壁全层脱出于肛门之外。其典型的临床表现 为肛门处突出一个类似“香肠”状的圆柱形肿块,脱出的黏膜因充血水肿呈鲜红 色或暗红色。",
+    "chapter": "临床科目",
+    "knowledgePoint": "临床综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽临床科目回忆版真题.pdf",
+        "questionNumber": 33,
+        "sourceIndex": 34,
+        "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00023",
+    "type": "single_choice",
+    "question": "松狮犬,1 岁,双眼持续流泪,结膜潮红,下眼睑睫毛朝向角膜。 该病的流行病学特点是",
+    "options": {
+      "A": "与肥胖有关",
+      "B": "多为后天性的,无遗传性",
+      "C": "与性别有关",
+      "D": "与体型有关",
+      "E": "多为先天性的,有遗传性"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "该病例的倒睫多由眼睑内翻引起,而犬的眼睑内翻在很多品种(如 藏獒、松狮犬、沙皮犬等)中属于先天性疾病,且具有明显的遗传性,常 与品种特异性的眼睑结构异常相关。",
+    "chapter": "临床科目",
+    "knowledgePoint": "临床综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 33,
+        "sourceIndex": 33,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-clinical-00060",
+    "type": "single_choice",
+    "question": "家畜呼吸高度困难引起的肛门抽动的原因是",
+    "options": {
+      "A": "喉头水肿",
+      "B": "咽喉炎",
+      "C": "猪传染性萎缩性鼻炎",
+      "D": "鼻腔狭窄",
+      "E": "细支气管炎"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "细支气管炎是细支气管黏膜的炎症,会导致细支气管痉挛、狭窄,引发通 气障碍,出现高度呼吸困难,由于呼吸肌剧烈收缩,腹压反复波动,进而诱发肛 门抽动;喉头水肿、咽喉炎、猪传染性萎缩性鼻炎、鼻腔狭窄主要引发上呼吸道 狭窄,以吸气性呼吸困难为主,呼吸困难程度相对较轻,一般不会引发肛门抽动。",
+    "chapter": "临床科目",
+    "knowledgePoint": "临床综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽临床科目回忆版真题.pdf",
+        "questionNumber": 85,
+        "sourceIndex": 87,
+        "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00015",
+    "type": "single_choice",
+    "question": "急性肾衰的多尿期表现为",
+    "options": {
+      "A": "低血钾",
+      "B": "高血钾",
+      "C": "低血钙",
+      "D": "高血钙",
+      "E": "低血磷"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "急性肾衰竭的多尿期是肾功能开始恢复的阶段,此时肾小球滤过功能逐渐 好转,但肾小管重吸收功能尚未完全恢复,导致大量水分和电解质随尿液排出。 在多尿期,由于肾小管对钾离子的重吸收能力下降,同时大量尿液排出会带走大 量钾离子,导致血钾水平降低,即低血钾。低血钾可能引起肌肉无力、心律失常 等症状,是多尿期需要重点监测和纠正的电解质紊乱",
+    "chapter": "临床科目",
+    "knowledgePoint": "临床综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 18,
+        "sourceIndex": 18,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-clinical-00003",
+    "type": "single_choice",
+    "question": "防治蛋鸡疲劳综合征,日粮中适宜的钙磷比例是",
+    "options": {
+      "A": "1:1",
+      "B": "1:2",
+      "C": "2:1",
+      "D": "1:5",
+      "E": "5:1"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "笼养蛋鸡疲劳综合征又称骨质疏松症,是集约化笼养蛋鸡生产中常见的一 种营养代谢性疾病,主要表现无力站立,移动困难,骨质疏松,骨骼变形、变脆 以及蛋壳质量变差。产蛋高峰期蛋鸡对钙的需求量极大,为预防笼养蛋鸡疲劳症, 日粮中的钙磷比例应严格控制在 5:1 至 6:1 之间。",
+    "chapter": "临床科目",
+    "knowledgePoint": "临床综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽临床科目回忆版真题.pdf",
+        "questionNumber": 3,
+        "sourceIndex": 3,
+        "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-clinical-00013",
+    "type": "single_choice",
+    "question": "患畜表现为紧张步样,站立和迈步时拘谨、疼痛,该病最可能是",
+    "options": {
+      "A": "蹄叶炎",
+      "B": "破伤风",
+      "C": "肘头粘液囊炎",
+      "D": "髋关节脱位",
+      "E": "髌骨脱位"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "蹄叶炎患畜因蹄真皮层发生弥漫性非化脓性炎症,产生剧烈疼痛,站立时 为了减轻蹄部负重,常表现出典型的紧张步样。 (共用题干) 金毛犬,6 月龄,脐部出现一局限性球形肿物,质地柔软,按压肿胀物其内容物 可还纳回腹腔。",
+    "chapter": "临床科目",
+    "knowledgePoint": "临床综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽临床科目回忆版真题.pdf",
+        "questionNumber": 16,
+        "sourceIndex": 16,
+        "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00041",
+    "type": "single_choice",
+    "question": "疏松结缔组织发生的急性弥漫性化脓性感染称",
+    "options": {
+      "A": "疖",
+      "B": "痈",
+      "C": "蜂窝织炎",
+      "D": "败血症",
+      "E": "脓肿"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "疖是单个毛囊及其所属皮脂腺的急性化脓性感染。痈是多个疖融合而成的 急性化脓性感染。脓肿是局限性化脓性感染,形成充满脓液的腔隙。败血症是细 菌进入血液并大量繁殖引起的全身性感染。蜂窝织炎是指疏松结缔组织的急性弥 漫性化脓性感染,与周围组织无明显界限。",
+    "chapter": "临床科目",
+    "knowledgePoint": "临床综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 57,
+        "sourceIndex": 57,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00049",
+    "type": "single_choice",
+    "question": "治疗轻度瓣胃阻塞的药物宜选用",
+    "options": {
+      "A": "硫酸铜",
+      "B": "硫酸钠",
+      "C": "硝酸钠",
+      "D": "硫酸铁",
+      "E": "钼酸钠"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "瓣胃阻塞是由于瓣胃内容物干燥、积聚,导致胃壁收缩无力,食物排出受 阻。治疗的核心是软化内容物、促进瓣胃蠕动。硫酸钠(芒硝)是常用的渗透性 泻药,口服后在瓣胃内形成高渗环境,可吸收水分,软化干燥的食糜,同时刺激 瓣胃黏膜,增强其蠕动功能,促进内容物排出,对轻度瓣胃阻塞效果显著。",
+    "chapter": "临床科目",
+    "knowledgePoint": "临床综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 77,
+        "sourceIndex": 77,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-clinical-00064",
+    "type": "single_choice",
+    "question": "治疗细菌性唾液腺炎的有效药物是",
+    "options": {
+      "A": "呋塞米",
+      "B": "氨苄西林钠",
+      "C": "阿苯达唑",
+      "D": "新斯的明",
+      "E": "地塞米松"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "细菌性唾液腺炎是由致病菌侵入腺体引起的化脓性感染。核心治疗措施是 选用对致病菌敏感的抗菌药物(抗生素),控制局部及全身感染。氨苄西林钠属 于β-内酰胺类广谱抗生素。呋塞米为利尿药,阿苯达唑为驱虫药,新斯的明为 拟胆碱药,地塞米松为糖皮质激素。",
+    "chapter": "临床科目",
+    "knowledgePoint": "临床综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽临床科目回忆版真题.pdf",
+        "questionNumber": 89,
+        "sourceIndex": 91,
+        "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-clinical-00051",
+    "type": "single_choice",
+    "question": "4月龄仔猪,采食霉变玉米后发病,精神沉郁,食欲减退,生长缓慢、消瘦,可 视黏膜黄染,全身皮肤散在出血紫斑;病猪腹泻,粪便带血。剖检可见肝脏硬化, 肠道黏膜弥漫出血。对病猪进行血液生化检测,特征性变化是",
+    "options": {
+      "A": "总胆红素升高",
+      "B": "白蛋白升高",
+      "C": "谷丙转氨酶下降",
+      "D": "总蛋白升高",
+      "E": "碱性磷酸酶下降"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "肝细胞损伤后胆红素代谢受阻,血液总胆红素含量显著升高。肝脏合成白 蛋白能力下降;肝细胞破裂释放大量谷丙转氨酶,指标上升;肝脏蛋白合成不足, 总蛋白降低;肝损伤伴随胆管淤积时碱性磷酸酶升高,其余选项均不符合本病生 化特点。",
+    "chapter": "临床科目",
+    "knowledgePoint": "临床综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽临床科目回忆版真题.pdf",
+        "questionNumber": 71,
+        "sourceIndex": 73,
+        "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "sharedStem": "4月龄仔猪,采食霉变玉米后发病,精神沉郁,食欲减退,生长缓慢、消瘦,可 视黏膜黄染,全身皮肤散在出血紫斑;病猪腹泻,粪便带血。剖检可见肝脏硬化, 肠道黏膜弥漫出血。",
+    "sharedKind": "stem",
+    "sharedGroupId": "vet-shared-stem-6fbfdd9e7f256978",
+    "sharedOrder": 1
+  },
+  {
+    "id": "vet-2025-clinical-00052",
+    "type": "single_choice",
+    "question": "缝针穿透的组织层是胃壁的",
+    "options": {
+      "A": "全层",
+      "B": "肌层",
+      "C": "浆膜层",
+      "D": "浆膜层、肌层",
+      "E": "粘膜层"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "在胃壁手术(如胃切开术、胃肠吻合术等)中,为确保缝合后胃壁的密封 性和愈合效果,缝针通常需要穿透胃壁的全层(从黏膜层、黏膜下层、肌层到浆 膜层)。全层缝合可有效闭合胃壁创口,防止胃内容物漏出(如胃液、食糜等), 避免腹腔污染或腹膜炎的发生。",
+    "chapter": "临床科目",
+    "knowledgePoint": "临床综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 82,
+        "sourceIndex": 82,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00009",
+    "type": "single_choice",
+    "question": "预防笼养蛋鸡疲劳综合征,饲料添加微量元素为",
+    "options": {
+      "A": "钾",
+      "B": "钴",
+      "C": "铁",
+      "D": "锰",
+      "E": "钙"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "笼养蛋鸡疲劳综合征主要是由于钙摄入不足或吸收不良,导致骨骼缺钙引 起的。在饲料中添加钙可有效预防该病。钾、钴、铁、锰虽为必需微量元素,但 与该病的发生无直接关系。",
+    "chapter": "临床科目",
+    "knowledgePoint": "临床综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 9,
+        "sourceIndex": 9,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-clinical-00018",
+    "type": "single_choice",
+    "question": "气管插管后进行输氧,二氧化碳应在氧气里的浓度是",
+    "options": {
+      "A": "2~5%",
+      "B": "30~40%",
+      "C": "10~20%",
+      "D": "20~30%",
+      "E": "1~2%"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "小动物麻醉输氧配套二氧化碳浓度维持 2%~5%,少量 CO2 刺激呼吸中 枢,防止呼吸抑制;浓度过高会酸中毒、呼吸窘迫,过低会呼吸暂停。",
+    "chapter": "临床科目",
+    "knowledgePoint": "临床综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽临床科目回忆版真题.pdf",
+        "questionNumber": 23,
+        "sourceIndex": 24,
+        "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-clinical-00012",
+    "type": "single_choice",
+    "question": "马蹄白线表层角质受损,未波及深层组织,该病变属于",
+    "options": {
+      "A": "蹄叶炎",
+      "B": "腐蹄病",
+      "C": "蹄白线浅表炎",
+      "D": "蹄白线深层炎",
+      "E": "蹄叉腐烂"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "根据病变深度,白线处的炎症可分为浅表与深层。仅累及白线表层角质的 受损和感染,称为蹄白线浅表炎;若深入蹄真皮层则为深层炎。",
+    "chapter": "临床科目",
+    "knowledgePoint": "临床综合题",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽临床科目回忆版真题.pdf",
+        "questionNumber": 15,
+        "sourceIndex": 15,
+        "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00022",
+    "type": "single_choice",
+    "question": "松狮犬,1 岁,双眼持续流泪,结膜潮红,下眼睑睫毛朝向角膜。 治疗该病的手术方法是",
+    "options": {
+      "A": "在距眼睑缘 3mm 处做眼睑皮瓣切除术",
+      "B": "泪腺切除术",
+      "C": "在内眼角处做眼睑切开术",
+      "D": "在距眼睑缘 3cm 处做眼睑皮瓣切除术",
+      "E": "在外眼角处做眼睑切开术"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "该病为眼睑内翻(眼睑内翻导致睫毛刺激角膜),治疗的关键是纠 正眼睑内翻,使睫毛远离角膜。临床中,针对眼睑内翻的手术治疗常采用 “距眼睑缘 3mm 处做眼睑皮瓣切除术”,通过切除部分眼睑皮肤和皮下组 织,矫正眼睑内翻的状态,使睫毛恢复正常方向,避免对角膜的刺激。",
+    "chapter": "临床科目",
+    "knowledgePoint": "兽医外科与手术学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 32,
+        "sourceIndex": 32,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00024",
+    "type": "single_choice",
+    "question": "应用于腰旁神经传导麻醉的药物是",
+    "options": {
+      "A": "赛拉嗪",
+      "B": "硫酸妥钠",
+      "C": "盐酸利多卡因",
+      "D": "替来他明",
+      "E": "氯胺酮"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "盐酸利多卡因是常用的局部麻醉药,具有起效快、作用时间适中、毒性小 等特点,适用于腰旁神经传导麻醉。赛拉嗪是镇静镇痛药;硫酸妥钠是巴比妥类 镇静催眠药;替来他明、氯胺酮是全身麻醉药,均不适合用于神经传导麻醉。",
+    "chapter": "临床科目",
+    "knowledgePoint": "兽医外科与手术学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 34,
+        "sourceIndex": 34,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-clinical-00053",
+    "type": "single_choice",
+    "question": "临清狮子猫,6 岁,近期出现大量流涎,食欲不振,口腔检查发现牙龈红肿,牙周袋内蓄积脓液。治疗该疾病,需选择的麻醉方式是",
+    "options": {
+      "A": "局部麻醉",
+      "B": "硬膜外麻醉",
+      "C": "肋间血管穿刺麻醉",
+      "D": "荐髓间麻醉",
+      "E": "吸入式麻醉"
+    },
+    "answer": [
+      "E"
+    ],
+    "analysis": "猫牙周炎需清理牙周袋、拔牙等口腔深部操作,操作时间较长,动物易剧 烈挣扎;局部麻醉镇痛不全,硬膜外、荐髓间、肋间穿刺麻醉均不适用口腔手术, 临床标准采用吸入式全身麻醉。",
+    "chapter": "临床科目",
+    "knowledgePoint": "兽医外科与手术学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽临床科目回忆版真题.pdf",
+        "questionNumber": 74,
+        "sourceIndex": 76,
+        "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "sharedStem": "临清狮子猫,6 岁,近期出现大量流涎,食欲不振,口腔检查发现牙龈红肿,牙周袋内蓄积脓液",
+    "sharedKind": "stem",
+    "sharedGroupId": "vet-shared-stem-81f510841cf48cec",
+    "sharedOrder": 1
+  },
+  {
+    "id": "vet-2026-recall-clinical-00059",
+    "type": "single_choice",
+    "question": "三岁公猫频繁做排尿动作,无尿液排出,触诊膀胱充盈,膀胱造影未见结石。如果进行手术,宜切除附着阴茎的是",
+    "options": {
+      "A": "海绵体",
+      "B": "尿道缩肌",
+      "C": "尿道黏膜",
+      "D": "阴茎头",
+      "E": "坐骨海绵体肌"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "在进行公猫尿道造口术时,为了使尿道口能够稳定地外翻并缝合在皮肤上, 防止术后阴茎回缩导致造口狭窄或闭锁,必须将附着在阴茎上的尿道缩肌进行分 离并切除。",
+    "chapter": "临床科目",
+    "knowledgePoint": "兽医外科与手术学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽临床科目回忆版真题.pdf",
+        "questionNumber": 84,
+        "sourceIndex": 86,
+        "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "sharedStem": "三岁公猫频繁做排尿动作,无尿液排出,触诊膀胱充盈,膀胱造影未见结石",
+    "sharedKind": "stem",
+    "sharedGroupId": "vet-shared-stem-0f0a1730a8b062a0",
+    "sharedOrder": 2
+  },
+  {
+    "id": "vet-2026-recall-clinical-00005",
+    "type": "single_choice",
+    "question": "在局部外科感染中,属于局部特异性感染的是",
+    "options": {
+      "A": "疖",
+      "B": "痈",
+      "C": "脓肿",
+      "D": "破伤风",
+      "E": "蜂窝织炎"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "疖、蜂窝织炎、痈、脓肿多由葡萄球菌、链球菌等化脓性细菌引起,属于 非特异性感染,破伤风由破伤风梭菌引起,属于特异性感染。",
+    "chapter": "临床科目",
+    "knowledgePoint": "兽医外科与手术学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽临床科目回忆版真题.pdf",
+        "questionNumber": 5,
+        "sourceIndex": 5,
+        "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00062",
+    "type": "single_choice",
+    "question": "牛左肷部隆起,叩诊浊音,进行手术消毒的是",
+    "options": {
+      "A": "60%酒精",
+      "B": "3%碘酊",
+      "C": "1%硼酸",
+      "D": "0.01%新洁尔灭",
+      "E": "0.1 聚乙烯酮碘"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "3%碘酊为强效皮肤消毒剂,对细菌、芽孢等杀灭作用强,是动物手术区域 皮肤消毒的常用消毒药物,消毒后用 75%酒精脱碘。",
+    "chapter": "临床科目",
+    "knowledgePoint": "兽医外科与手术学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 96,
+        "sourceIndex": 96,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00032",
+    "type": "single_choice",
+    "question": "母犬,3 岁,清晨散步后,突然发病,呻吟,流涎,不安,步态 快出现共济失调,痉挛抽搐,体温低;死亡后剖检见胃、小肠、盲肠黏膜 出血、坏死、糜烂,产生假膜。 蹒跚,腹泻,粪便恶臭带血;检查口腔齿龈呈黑褐色,有蒜臭样气味,很 调查病史时应特别注意询问",
+    "options": {
+      "A": "免疫情况",
+      "B": "是否有毒物接触史",
+      "C": "近期是否生过病",
+      "D": "是否有癫痫病史",
+      "E": "是否怀孕"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "清晨散步后,流涎、腹泻,共济失调,明显的中毒反应。",
+    "chapter": "临床科目",
+    "knowledgePoint": "兽医内科学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 46,
+        "sourceIndex": 46,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00034",
+    "type": "single_choice",
+    "question": "母犬,3 岁,清晨散步后,突然发病,呻吟,流涎,不安,步态 快出现共济失调,痉挛抽搐,体温低;死亡后剖检见胃、小肠、盲肠黏膜 出血、坏死、糜烂,产生假膜。 蹒跚,腹泻,粪便恶臭带血;检查口腔齿龈呈黑褐色,有蒜臭样气味,很 该病治疗的首选药物是",
+    "options": {
+      "A": "二巯基丙醇",
+      "B": "依地酸二钠",
+      "C": "葡萄糖酸钙",
+      "D": "硫酸镁",
+      "E": "亚砷酸钠"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "重金属中毒的首选解毒药物为巯基络合剂",
+    "chapter": "临床科目",
+    "knowledgePoint": "兽医内科学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 48,
+        "sourceIndex": 48,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-clinical-00061",
+    "type": "single_choice",
+    "question": "剖检见胃粘膜肿胀、呈弥漫性、点状或斑块状出血,黏膜表面被覆盖多量红 褐色黏液。镜检,黏膜上皮变性、坏死和脱落,黏膜固有层和黏膜下层发生水肿 和出血。此病为",
+    "options": {
+      "A": "出血性胃炎",
+      "B": "坏死性胃炎",
+      "C": "急性卡他性胃炎",
+      "D": "纤维素性胃炎",
+      "E": "化脓性胃炎"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "出血性胃炎特征:胃黏膜弥漫肿胀,大量点状、斑块出血,表面覆红褐色 血性黏液;镜检黏膜水肿、广泛出血,上皮变性坏死脱落,和题干病变完全吻合。",
+    "chapter": "临床科目",
+    "knowledgePoint": "兽医内科学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽临床科目回忆版真题.pdf",
+        "questionNumber": 86,
+        "sourceIndex": 88,
+        "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00048",
+    "type": "single_choice",
+    "question": "尿液中出现大量白细胞和肾上皮细胞,最有可能的疾病是",
+    "options": {
+      "A": "膀胱炎",
+      "B": "尿道炎",
+      "C": "肾炎",
+      "D": "尿道结石",
+      "E": "膀胱麻痹"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "尿液中白细胞增多提示泌尿系统存在炎症(感染或非感染性炎症),而肾 上皮细胞来自肾脏实质(如肾小管上皮细胞),其大量出现提示肾脏本身存在病 变。肾炎(如肾小球肾炎、肾盂肾炎)时,肾脏实质受损,肾小管上皮细胞脱落 增加,同时炎症刺激导致白细胞(中性粒细胞等)浸润并进入尿液,因此尿液中 会同时出现大量白细胞和肾上皮细胞,符合题干描述。",
+    "chapter": "临床科目",
+    "knowledgePoint": "兽医内科学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 75,
+        "sourceIndex": 75,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2026-recall-clinical-00047",
+    "type": "single_choice",
+    "question": "结肠炎的主要临床症状是",
+    "options": {
+      "A": "多尿",
+      "B": "呕吐",
+      "C": "腹泻",
+      "D": "碱中毒",
+      "E": "皮下水肿"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "结肠的主要功能是吸收水分和形成粪便。当结肠发生炎症时,其吸收功能 受损,肠道分泌增加,蠕动加快,临床上最典型和主要的症状即为腹泻。",
+    "chapter": "临床科目",
+    "knowledgePoint": "兽医内科学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2026 回忆版真题"
+    ],
+    "provenance": [
+      {
+        "file": "2026执兽临床科目回忆版真题.pdf",
+        "questionNumber": 65,
+        "sourceIndex": 66,
+        "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  },
+  {
+    "id": "vet-2025-clinical-00050",
+    "type": "single_choice",
+    "question": "葡萄球菌腹泻最易发生的动物是",
+    "options": {
+      "A": "仔猪",
+      "B": "仔兔",
+      "C": "羔羊",
+      "D": "家禽",
+      "E": "犊牛"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "葡萄球菌感染引起的腹泻在仔兔中最为常见,主要与仔兔的生理特点和饲 养环境相关。",
+    "chapter": "临床科目",
+    "knowledgePoint": "兽医内科学",
+    "difficulty": "medium",
+    "tags": [
+      "执业兽医",
+      "临床科目",
+      "2025 真题"
+    ],
+    "provenance": [
+      {
+        "file": "2025年执兽考试临床真题及答案.pdf",
+        "questionNumber": 78,
+        "sourceIndex": 78,
+        "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
+      }
+    ],
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+  }
+]

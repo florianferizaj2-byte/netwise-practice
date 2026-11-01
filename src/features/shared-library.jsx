@@ -103,7 +103,7 @@ export function CommunityView({ questions, loading, stats, reload, start }) {
           {filtered.map((q) => (
             <article className="community-card" key={q.id}>
               <div className="question-meta">
-                <span className="badge green">AI 生成</span>
+                <span className="badge brand">AI 生成</span>
                 <span className="badge">{q.chapter}</span>
                 <span>{diff[q.difficulty] || "练习"}</span>
                 <span className="push-right feedback-count">

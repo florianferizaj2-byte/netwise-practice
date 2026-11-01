@@ -1,0 +1,61 @@
+.study-reminder {
+  position: fixed;
+  top: max(88px, env(safe-area-inset-top));
+  right: 24px;
+  z-index: 75;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: min(420px, calc(100vw - 32px));
+  padding: 20px 16px;
+  background: var(--paper);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--web-accent);
+  border-radius: 12px;
+  box-shadow: 0 12px 40px #132d5a26;
+}
+.study-reminder > svg {
+  color: var(--web-accent);
+  flex-shrink: 0;
+}
+.study-reminder > div {
+  min-width: 0;
+}
+.study-reminder strong {
+  font-size: 16px;
+}
+.study-reminder p {
+  color: var(--text-2);
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 8px 0;
+  overflow-wrap: anywhere;
+}
+.study-reminder button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--web-accent);
+  min-height: 44px;
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+.study-reminder .study-reminder-close {
+  border: 0;
+  padding: 8px;
+  min-width: 36px;
+  margin-top: -6px;
+}
+.study-reminder button:focus-visible {
+  outline: 3px solid #99b9ff;
+  outline-offset: 2px;
+}
+@media (max-width: 600px) {
+  .study-reminder {
+    right: 16px;
+    padding: 16px 12px;
+  }
+}

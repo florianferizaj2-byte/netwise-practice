@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="route_player_name" translatable="false">虚拟定位学习</string>
+    <color name="rp_surface">#FFFFFF</color>
+    <color name="rp_background">#FFFFFF</color>
+    <color name="rp_text">#142847</color>
+    <color name="rp_muted">#526681</color>
+    <color name="rp_primary">#2368ED</color>
+    <color name="rp_on_primary">#FFFFFF</color>
+    <color name="rp_primary_container">#E7EEFF</color>
+    <bool name="rp_light_bars">true</bool>
+    <style name="Theme.RoutePlayerBase" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/rp_primary</item>
+        <item name="colorOnPrimary">@color/rp_on_primary</item>
+        <item name="colorSurface">@color/rp_surface</item>
+        <item name="colorOnSurface">@color/rp_text</item>
+        <item name="colorPrimaryContainer">@color/rp_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/rp_text</item>
+        <item name="colorSecondary">@color/rp_primary</item>
+        <item name="colorOutline">@color/rp_muted</item>
+        <item name="android:colorBackground">@color/rp_background</item>
+        <item name="android:fontFamily">sans</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@color/rp_surface</item>
+        <item name="android:navigationBarColor">#142847</item>
+    </style>
+    <style name="Theme.RoutePlayer" parent="Theme.RoutePlayerBase" />
+</resources>

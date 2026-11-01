@@ -1,0 +1,747 @@
+[
+  {
+    "id": "hcip831-ospf-spf-timer-001",
+    "type": "single_choice",
+    "question": "OSPF 为抑制拓扑频繁震荡引起的反复计算，启用了 SPF 智能定时器。当网络在短时间内连续发生多次拓扑变化时，该定时器的典型行为是？",
+    "options": {
+      "A": "首次按初始间隔调度；若在间隔内再次发生变化，计算间隔按倍数递增，达到最大间隔后不再增大；拓扑稳定后恢复初始间隔",
+      "B": "每次都按固定的初始间隔计算，计算间隔不随变化次数调整",
+      "C": "一旦达到最大间隔就永久保持，拓扑稳定后也必须重启 OSPF 进程才能恢复",
+      "D": "智能定时器只控制 Hello 报文的发送间隔，与 SPF 计算调度无关"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "SPF 智能定时器为 SPF 计算设置自适应延迟：首次采用较小的初始间隔，短时间内再次收到触发 SPF 的变化时，计算间隔按倍数递增，直至达到配置的最大间隔；当网络稳定、超过保持时间没有新的变化后，间隔回退到初始值，使后续收敛重新变快。因此 B 的固定间隔无法抑制连续震荡；C 忽略了稳定后的回退机制，也不需要重启进程；D 把 SPF 调度与 Hello 发送混为一谈，Hello 定时器负责邻居发现和保活，并不决定 SPF 计算间隔。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "SPF",
+      "智能定时器",
+      "快速收敛"
+    ],
+    "provenance": {
+      "questionId": "hcip831-ospf-spf-timer-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性中 OSPF 快速收敛知识点；SPF 计算由 LSDB 变化触发的机制依据 RFC 2328 第 16 章；智能定时器的初始间隔、倍数递增、最大间隔与稳定后回退为设备实现语义（工程实践）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "77a6171f3af082187355fa055b862bd1b549e5edadede730f01f4c91d35db9f2"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-ospf-prc-trigger-001",
+    "type": "single_choice",
+    "question": "某 OSPF 路由器已启用 I-SPF 与 PRC（部分路由计算）。下列哪种变化通常只需要触发 PRC，而不需要重新计算最短路径树？",
+    "options": {
+      "A": "区域内一台路由器的 Router LSA 中新增了一条链路",
+      "B": "仅外部路由的 AS-external-LSA（Type 5）度量值发生变化，拓扑未变",
+      "C": "某接口从 Down 变为 Up，区域内拓扑发生变化",
+      "D": "区域间路由的下一跳路由器失效，需要重新计算到 ABR 的路径"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "I-SPF 只重算受拓扑变化影响的节点，PRC 则在最短路径树不变、仅叶子路由变化时只更新受影响的路由条目。仅 Type 5 外部路由的度量变化不改变区域内节点和链路，因此只需 PRC。A 新增链路、C 接口状态变化都会改变拓扑，需要 I-SPF 或完整 SPF；D 下一跳路由器失效意味着节点可达性发生变化，属于拓扑变化，同样不能只做 PRC。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "PRC",
+      "I-SPF",
+      "快速收敛"
+    ],
+    "provenance": {
+      "questionId": "hcip831-ospf-prc-trigger-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；叶子路由变化与拓扑变化的区分依据 RFC 2328 第 16.5、16.6 节对 Summary-LSA 与 AS-external-LSA 的增量更新；I-SPF 与 PRC 为设备快速收敛实现。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 2328 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "85b50175e72e2e8ffbbd97178e0b84cfea9dd041340e94351fbff2608b1ca2f3"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-ospf-converge-tool-001",
+    "type": "single_choice",
+    "question": "以下哪项措施通常不会缩短 OSPF 的收敛时间，反而可能延长故障发现时间？",
+    "options": {
+      "A": "启用 PRC 与 I-SPF，减少不必要的完整 SPF 计算",
+      "B": "配置 BFD 与 OSPF 联动，快速检测邻居故障",
+      "C": "使能 LSA 快速泛洪并合理配置 SPF 智能定时器",
+      "D": "增大接口的 Hello 定时器和 Router Dead 定时器"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Hello 定时器决定邻居发现和保活频率，Router Dead 定时器决定多久收不到 Hello 才判定邻居失效。增大这两个定时器会使故障发现变慢，整体收敛时间变长，不属于快速收敛措施。PRC 与 I-SPF 减少不必要的计算，BFD 提供毫秒级故障检测，LSA 快速泛洪和合理的 SPF 智能定时器分别加快数据库同步和计算调度，三者都是缩短收敛时间的常见手段。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "快速收敛",
+      "定时器"
+    ],
+    "provenance": {
+      "questionId": "hcip831-ospf-converge-tool-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；Hello/Router Dead 定时器的含义依据 RFC 2328 第 9.5 节与附录 C.3；PRC、I-SPF、快速泛洪与 BFD 联动为设备快速收敛手段。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立命题，未复制第三方题目。",
+      "reviewDigest": "e4e3b6443c0eef94683fffbec33c5ae8ce9a31e7e9c996cda8adfb771086643a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-ospf-lsa-flood-001",
+    "type": "single_choice",
+    "question": "OSPF 路由器收到一条比本地 LSDB 中更新的 Router LSA 后，通常的处理顺序是？",
+    "options": {
+      "A": "先执行 SPF 计算，再把新 LSA 写入 LSDB，最后泛洪给邻居",
+      "B": "只把新 LSA 转发给邻居，本机 LSDB 不需要保存",
+      "C": "先把新 LSA 安装到 LSDB 并向其他邻接接口可靠泛洪，再触发 SPF 计算调度，计算完成后更新路由表",
+      "D": "立即删除所有旧路由并等待邻居重新通告，然后再计算"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "OSPF 收到 Link State Update 后先校验并安装到链路状态数据库，再按泛洪流程向其他邻接接口可靠泛洪；SPF 计算由变化触发但会被调度延迟执行，计算完成后才更新路由表。A 把顺序颠倒，SPF 依赖的是更新后的 LSDB；B 错误，每台路由器都维护本区域完整的 LSDB；D 没有这种机制，删除路由和等待邻居重通告都不是 OSPF 的收敛方式。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 快速收敛",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "LSA",
+      "泛洪",
+      "LSDB"
+    ],
+    "provenance": {
+      "questionId": "hcip831-ospf-lsa-flood-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 快速收敛知识点；LSA 安装、泛洪与路由计算顺序依据 RFC 2328 第 13 章（泛洪过程）与第 16 章（路由表计算）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 2328 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "646c75d02e1417afee77f80eae73bb2af83311391b5370bc60e7826483ece608"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-ospf-filter-export-001",
+    "type": "single_choice",
+    "question": "ASBR 上需要阻止某条引入的外部路由以 Type 5 LSA 发布到 OSPF 域内，同时保留该路由在本机路由表中的可用性。应使用下列哪种方式？",
+    "options": {
+      "A": "在 ASBR 的 OSPF 进程配置 filter-policy export",
+      "B": "在本机 OSPF 进程配置 filter-policy import",
+      "C": "在域内所有路由器上分别配置 filter-policy import",
+      "D": "把该外部路由所在区域配置为 Stub 区域"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "filter-policy export 作用在 ASBR 向外发布引入路由的过程：被过滤的外部路由不会生成 Type 5（NSSA 中为 Type 7）LSA，但本机路由表不受影响，仍可正常使用该路由。B 的 import 只影响本机把 OSPF 计算结果装入路由表，不能阻止本机对外发布；C 即使每台都配置 import 也无法阻止 ASBR 产生和泛洪 LSA；D 的 Stub 区域只能阻止 Type 5 LSA 进入该区域，既不能阻止 ASBR 向其他区域发布，而且 ASBR 本身也不能位于 Stub 区域内。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "filter-policy",
+      "路由过滤"
+    ],
+    "provenance": {
+      "questionId": "hcip831-ospf-filter-export-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 路由控制知识点；外部路由以 Type 5 LSA 发布依据 RFC 2328 第 12.4.4 节；filter-policy import/export 的作用方向为设备命令语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立命题，未复制第三方题目。",
+      "reviewDigest": "9d400d1807ba07d4fc8310a6390119047375716463da2f68882248435ab5baa6"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-ospf-default-adv-001",
+    "type": "single_choice",
+    "question": "ASBR 配置了 default-route-advertise 但没有携带 always 参数，且本机路由表中不存在默认路由。此时该 ASBR 的行为是？",
+    "options": {
+      "A": "仍然生成 Type 5 默认路由并泛洪到整个 AS",
+      "B": "生成 Type 3 默认路由，但只在本区域内泛洪",
+      "C": "不生成默认路由的 Type 5 LSA，只有本机存在默认路由时才会发布",
+      "D": "先从邻居学习默认路由，再自动发布"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "default-route-advertise 默认是条件发布：本机路由表中必须存在默认路由，否则不会生成默认路由的 Type 5 LSA；只有配置 always 参数才会无条件发布。A 忽略了该条件；B 中 Type 3 默认路由通常是 ABR 在 Stub 或 Totally Stub 等场景下向区域内发布的，ASBR 引入的默认路由使用 Type 5（NSSA 内为 Type 7）；D 错误，OSPF 不会自动产生默认路由再发布，必须本地已存在默认路由或使用 always。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "默认路由",
+      "ASBR"
+    ],
+    "provenance": {
+      "questionId": "hcip831-ospf-default-adv-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 路由控制知识点；ASBR 通过 Type 5 LSA 通告外部路由与默认路由依据 RFC 2328 第 12.4.4 节；default-route-advertise 的条件发布语义为设备命令行为。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准文档独立命题，未复制第三方题目。",
+      "reviewDigest": "46c2cfdd431a57e57212b30dbe94dc0c39184699d1401f636acafcf940c78c63"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-ospf-abr-summary-001",
+    "type": "single_choice",
+    "question": "ABR 把区域 1 内三条明细路由聚合为一条区域间路由发布到其他区域，三条明细路由的开销分别为 10、30、50。该聚合路由的 Type 3 LSA 开销通常是多少？",
+    "options": {
+      "A": "10",
+      "B": "50",
+      "C": "30",
+      "D": "90"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "OSPF 的区域地址范围聚合规则规定：聚合路由的开销取被聚合的明细路由中最大的开销，因此三条明细路由开销为 10、30、50 时，聚合路由开销取 50。A 和 C 分别取了最小值或中间值，不符合最大值规则；D 把三条明细开销相加得到 90，OSPF 聚合并不做开销求和。聚合后其他区域通过这一条 Type 3 LSA 学习到汇总前缀，可减小 LSDB 和路由表规模。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "路由聚合",
+      "ABR",
+      "Type 3 LSA"
+    ],
+    "provenance": {
+      "questionId": "hcip831-ospf-abr-summary-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 路由控制知识点；区域地址范围聚合后聚合路由开销取被聚合明细路由最大值的规则依据 RFC 2328 第 3.5 节，区域间 Summary-LSA 依据 RFC 2328 第 12.4.3 节；华为 abr-summary 遵循该最大值规则（设备命令语义）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 2328 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "605e4525ad2eae57b429d5d5aacc48fbec846e0556f5fe6b34956d6bf98f6a93"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-ospf-gr-helper-001",
+    "type": "single_choice",
+    "question": "OSPF GR 过程中，重启路由器（GR Restarter）的邻居扮演什么角色，主要行为是什么？",
+    "options": {
+      "A": "把重启路由器通告为 Stub 路由器，并停止向它转发流量",
+      "B": "立即删除与重启路由器的邻接关系，等待其重新建立",
+      "C": "必须同时重启自己的 OSPF 进程，才能协助完成 GR",
+      "D": "进入 Helper 模式，在拓扑保持不变时继续在 LSA 中把重启路由器通告为 Full 邻接"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "OSPF GR 需要邻居配合：邻居收到 Grace-LSA 后进入 Helper 模式，在 grace period 内、且链路状态数据库没有实质变化时，继续在 Router LSA 和 Network LSA 中把重启路由器通告为 Full 邻接，使其他路由器继续按原有拓扑转发。B 立即删邻接会让流量绕开重启设备，正是 GR 要避免的；C Helper 不需要重启自身 OSPF 进程；A 没有把邻居通告为 Stub 路由器的机制。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "GR",
+      "Helper"
+    ],
+    "provenance": {
+      "questionId": "hcip831-ospf-gr-helper-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc3623-ospf-gr"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 其他特性知识点；Helper 模式的行为依据 RFC 3623 第 1 节（Grace-LSA 与邻居配合）和第 3、3.1 节（Helper Neighbor 与进入 Helper 模式）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 3623 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "c3294b7f35d630b4b29c7797efa228c9d84384ef217d8fb8b776c6c799c24a22"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-ospf-gr-topology-001",
+    "type": "single_choice",
+    "question": "OSPF GR 过程中，Helper 邻居检测到链路状态数据库内容发生了实质性变化（例如其他路由器撤销了链路），GR 的处理是？",
+    "options": {
+      "A": "Helper 退出 Helper 模式并重新通告真实邻接状态，重启路由器检测到 LSA 不一致后回退到正常 OSPF 重启流程",
+      "B": "继续维持 GR，直到 grace period 正常结束",
+      "C": "重启路由器立即重启整台设备",
+      "D": "所有路由器同时清空 LSDB 并重建全部邻居"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "GR 的目的是在拓扑稳定期间保留转发路径。一旦 Helper 检测到 LSA 内容发生实质变化，继续把重启路由器按 Full 邻接通告可能造成路由环路或黑洞，因此 Helper 会退出 Helper 模式并按真实状态重新通告，重启路由器检测到 LSA 不一致后自动回退到普通 OSPF 重启流程。B 与 GR 的安全回退机制相反；C 没有依据，GR 退出不等于整机重启；D 清空 LSDB 和重建全部邻居会引发更大范围震荡，不是 OSPF 的处理方式。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "GR",
+      "拓扑变化"
+    ],
+    "provenance": {
+      "questionId": "hcip831-ospf-gr-topology-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc3623-ospf-gr"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 其他特性知识点；拓扑变化导致提前退出 GR 并回退普通重启的依据为 RFC 3623 第 1 节概述、第 2.2 节（退出 GR 的条件）与第 3.2 节（退出 Helper 模式）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 3623 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "c8c1139807120bde8764f6247f84aae7476c50098dcb9459a6df253267f66449"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-ospf-bfd-001",
+    "type": "single_choice",
+    "question": "OSPF 与 BFD 联动后，BFD 检测到邻居转发路径故障时，OSPF 的处理是？",
+    "options": {
+      "A": "继续等待 Router Dead Interval 超时后才断开邻居",
+      "B": "由 BFD 代替 OSPF 计算路由并下发转发表",
+      "C": "只把 BFD 状态写入日志，不影响 OSPF 邻居关系",
+      "D": "立即收到 BFD 会话 Down 的通知，快速断开邻居关系并触发路由重新计算"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "BFD 独立于路由协议，在转发路径上以毫秒级间隔发送检测报文，一旦会话 Down 就通知 OSPF 客户端。OSPF 随即拆除对应邻居关系并触发 SPF 重新计算，无需等待 Hello 保活和 Router Dead Interval 超时，从而显著缩短收敛时间。A 是未启用 BFD 时的慢检测路径；C 与联动目的相反；B 错误，BFD 只负责故障检测，路由计算和转发表下发仍由 OSPF 完成。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "BFD",
+      "快速检测"
+    ],
+    "provenance": {
+      "questionId": "hcip831-ospf-bfd-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5880-bfd"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPF 其他特性知识点；BFD 的独立检测机制与 Detect Mult 计算检测时间的机制依据 RFC 5880 第 3 节与第 6.8.4 节；OSPF 与 BFD 联动后的邻居拆除为设备实现行为。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 5880 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "3e59c71852ae2fcd5b71d7cb5893ee5eccbab451e3297fd875d9f8efe7d20cc3"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-isis-lspid-001",
+    "type": "single_choice",
+    "question": "IS-IS 的 LSP ID 由哪几部分组成？",
+    "options": {
+      "A": "4 字节 Router ID、2 字节 Area ID、2 字节分片号",
+      "B": "6 字节 System ID、1 字节伪节点 ID、1 字节 LSP 分片号",
+      "C": "8 字节 System ID 和 1 字节分片号",
+      "D": "2 字节 Area ID 和 6 字节 System ID"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IS-IS 的 LSP ID 共 8 字节：前 6 字节是 System ID，用于标识产生 LSP 的路由器；第 7 字节是伪节点 ID，广播网中由 DIS 产生的伪节点 LSP 使用非 0 值，普通路由器产生的 LSP 该字节为 0；最后 1 字节是 LSP 分片号，用于区分同一路由器或伪节点产生的多个 LSP 分片。A 混入了 OSPF 的 Router ID 和 Area ID 长度；C 和 D 的字段划分与总长度都不正确。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "LSP ID",
+      "LSP"
+    ],
+    "provenance": {
+      "questionId": "hcip831-isis-lspid-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IS-IS 高级特性知识点；同一路由器的多个 LSP 由 LSP number 区分依据 RFC 1195 第 3.6 节（Multiple LSPs and SNPs）；LSP ID 的 8 字节字段划分（System ID、伪节点 ID、分片号）为 ISO 10589 定义的稳定结构。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲、RFC 1195 原文与 ISO 10589 的公开结构定义独立命题，未复制第三方题目。",
+      "reviewDigest": "79cf807eb3d4132ace6a7ec62125251f0ef925f83e0a49eb3ee90b7807f83423"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-isis-overload-001",
+    "type": "single_choice",
+    "question": "IS-IS 路由器把 LSP 中的过载位（Overload Bit）置 1 后，其他路由器通常如何处理经过它的流量？",
+    "options": {
+      "A": "完全丢弃该路由器产生的所有 LSP",
+      "B": "把该路由器强制当作 Level-1 路由器处理",
+      "C": "在 SPF 计算中不把该路由器作为转接节点，但它的直连前缀仍然可达",
+      "D": "强制该路由器重新建立全部邻接关系"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "过载位用于表示设备资源不足、正在升级或维护。置位后，其他路由器在 SPF 计算中不会把该设备作为中转节点，避免流量穿越；但该设备仍会正常产生和泛洪 LSP，其直连前缀依然被通告并可达。A 错误，过载位不影响 LSP 的泛洪和有效性；B 过载位与 Level-1/Level-2 角色无关；D 置位不会导致邻接重建。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS",
+      "过载位",
+      "LSP"
+    ],
+    "provenance": {
+      "questionId": "hcip831-isis-overload-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5120-isis-mt"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IS-IS 高级特性知识点；过载位定义见 ISO 10589 的 LSP 头，RFC 5120 第 4 节说明 LSP 头中的过载位仅反映默认拓扑；不用于转接但直连前缀仍可达为 IS-IS 的稳定语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲、RFC 5120 原文与 ISO 10589 的公开定义独立命题，未复制第三方题目。",
+      "reviewDigest": "386da5d918a4679de1d56f5f853119bf7a4e23a59b5a7a8400477e0ab39ea43c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-isis-fastflood-001",
+    "type": "single_choice",
+    "question": "IS-IS 快速收敛优化中，LSP 快速泛洪（fast-flood）机制的主要作用是？",
+    "options": {
+      "A": "收到新 LSP 后立即向其他接口泛洪，而不必等待 LSP 重传或批量发送定时器到期",
+      "B": "把多个 LSP 合并成一个 LSP，减少网络中 LSP 的数量",
+      "C": "降低 Hello 定时器，加快邻居建立速度",
+      "D": "把 Level-1 LSP 自动转换成 Level-2 LSP"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "LSP 快速泛洪在设备收到发生变化的新 LSP 后立即向其他接口转发，而不等待重传定时器或批量发送定时器到期，从而缩短 LSP 在全网扩散和 LSDB 同步的时间。B 描述的是 LSP 聚合或分片相关机制，与快速泛洪不同；C 中调整 Hello 定时器只影响邻居发现和保活，不直接加快 LSP 泛洪；D 错误，Level-1 和 Level-2 LSP 属于不同层级，不会自动互相转换。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "IS-IS 高级特性",
+    "knowledgePoint": "IS-IS 高级特性",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "快速收敛",
+      "LSP 泛洪"
+    ],
+    "provenance": {
+      "questionId": "hcip831-isis-fastflood-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IS-IS 高级特性中快速收敛相关机制；LSP 泛洪与多 LSP/序列号同步的基础依据 RFC 1195 第 3.6 节；LSP 快速泛洪（fast-flood）为华为 IS-IS 快速收敛的工程实现语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 1195 原文独立命题，设备特性按工程实践描述，未复制第三方题目。",
+      "reviewDigest": "22f838cfab5d3ddc6e44814476012a708f176f5aa1129cb76de83668e78d13ca"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-ipv6-static-linklocal-001",
+    "type": "single_choice",
+    "question": "在华为设备上配置 IPv6 静态路由，下一跳为链路本地地址 fe80::1 时，正确的做法是？",
+    "options": {
+      "A": "只需指定下一跳 fe80::1，设备会自动确定出接口",
+      "B": "必须把下一跳改为 IPv6 全局单播地址，链路本地地址不能用于静态路由",
+      "C": "必须同时指定出接口，例如 ipv6 route-static 2001:db8:2:: 64 GigabitEthernet0/0/1 fe80::1",
+      "D": "必须写成 ipv6 route-static 2001:db8:2::/64 fe80::1/128"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "IPv6 链路本地地址只在本地链路范围内有效，不同接口上可以出现相同的 fe80:: 地址，仅凭下一跳无法确定从哪个接口发出报文，因此必须同时指定出接口。A 无法完成下一跳解析；B 错误，链路本地地址可以配合出接口用于静态路由；D 的命令格式不对，目的地址与前缀长度应作为两个参数，下一跳也不能写成带前缀长度的形式。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "链路本地地址"
+    ],
+    "provenance": {
+      "questionId": "hcip831-ipv6-static-linklocal-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IPv6 静态路由知识点；链路本地地址仅用于单一链路、路由器不得转发链路本地源/目的报文的语义依据 RFC 4291 第 2.5.6 节；下一跳为链路本地地址时需指定出接口为设备命令语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 4291 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "9bddcdb268a8754460e40bb8fa9ad5432f4198596933cb504a0b779e3908b657"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-ipv6-floating-001",
+    "type": "single_choice",
+    "question": "两条 IPv6 静态路由去往同一目的前缀：主路由使用默认优先级，备用路由配置了更高的 preference 值。当主路由的下一跳不可达时，备用路由的状态是？",
+    "options": {
+      "A": "两条路由始终同时活跃，流量自动均分",
+      "B": "主路由失效后备用路由仍然不生效，因为它的优先级数值更大",
+      "C": "备用路由会被设备自动删除，需要重新配置",
+      "D": "备用路由平时不被优选，主路由失效后成为优选路由"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "静态路由的 preference 数值越大表示优先级越低。高 preference 的备用路由平时不会出现在优选路由中，属于浮动静态路由；当主路由的下一跳不可达、主路由失效后，备用路由成为最优并被加入路由表。A 只有优先级相同的等价路由才可能负载分担；C 配置不会自动删除，只是暂时不优选；B 优先级数值大只说明平时优先级低，主路由消失后仍会被优选。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "浮动路由",
+      "优先级"
+    ],
+    "provenance": {
+      "questionId": "hcip831-ipv6-floating-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4291-ipv6-addressing"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IPv6 静态路由与优先级知识点；IPv6 目的前缀表示依据 RFC 4291 第 2.3 节；浮动静态路由的 preference 数值越大优先级越低为华为 VRP 设备实现语义（工程实践）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 4291 原文独立命题，设备优先级语义按工程实践描述，未复制第三方题目。",
+      "reviewDigest": "d59823929467d3e3e3f8a1e75dae77fe4c02b174f8160ff54badf824c9594a08"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-ipv6-static-pref-001",
+    "type": "single_choice",
+    "question": "在华为 VRP 中，IPv6 静态路由的默认优先级（preference）是多少？",
+    "options": {
+      "A": "10",
+      "B": "60",
+      "C": "100",
+      "D": "150"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "华为 VRP 中 IPv6 静态路由的默认优先级为 60，与 IPv4 静态路由的默认值一致。直连路由的默认优先级通常为 0，OSPF 等动态路由协议的默认优先级数值更小，因此在同时存在动态路由和静态路由时，默认情况下动态路由会被优选。10 通常是 OSPF 的默认优先级，100 通常是 RIP 的默认优先级，150 通常是 OSPF ASE 的默认优先级，都不是 IPv6 静态路由的默认值。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IPv6 静态路由",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "easy",
+    "tags": [
+      "IPv6",
+      "静态路由",
+      "优先级"
+    ],
+    "provenance": {
+      "questionId": "hcip831-ipv6-static-pref-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IPv6 静态路由知识点；IPv6 静态路由默认优先级 60 为华为 VRP 设备命令语义（工程实践），同题涉及与直连、动态路由优先级的比较，属于设备实现而非 RFC 规定值。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲独立命题，默认优先级按设备命令语义描述，未复制第三方题目。",
+      "reviewDigest": "6f88fce6636ef262a31499ef81ff052201788052e32e6738459be92be3b3f4a0"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-ospfv3-linklsa-001",
+    "type": "single_choice",
+    "question": "OSPFv3 中，Link LSA（Type 8）的主要作用是？",
+    "options": {
+      "A": "向链路上的其他路由器通告本路由器的链路本地地址以及链路上关联的 IPv6 前缀",
+      "B": "在整个 AS 内通告外部路由",
+      "C": "描述区域间的 IPv6 前缀",
+      "D": "用于选举 DR/BDR"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "OSPFv3 的 Link LSA 具有链路本地泛洪范围，仅在本链路内泛洪，用于向链路上的其他路由器通告本路由器的链路本地地址、链路上配置的 IPv6 前缀，并携带供 Network LSA 使用的 Options 信息。B 描述的是 AS-External LSA（Type 5），C 描述的是 Inter-Area-Prefix LSA（Type 3），D 的 DR/BDR 选举由 Hello 报文和接口优先级完成，与 Link LSA 无关。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "LSA",
+      "Link LSA"
+    ],
+    "provenance": {
+      "questionId": "hcip831-ospfv3-linklsa-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5340-ospfv3"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPFv3 原理与配置知识点；Link LSA 的链路本地泛洪范围、通告链路本地地址与链路前缀、携带 Options 的三个用途依据 RFC 5340 第 4.4.3.8 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 5340 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "0f96781b16c6879951e799168568ed76a2526664216df3e04938e2e21478f6d8"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-ospfv3-auth-001",
+    "type": "single_choice",
+    "question": "关于 OSPFv3 的报文认证，下列描述正确的是？",
+    "options": {
+      "A": "OSPFv3 在报文头部保留 AuType 字段，使用 MD5 认证",
+      "B": "OSPFv3 只能使用明文口令认证",
+      "C": "OSPFv3 移除了协议自身的认证字段，依赖 IPsec（AH/ESP）保护协议报文",
+      "D": "OSPFv3 不需要认证，因为 IPv6 本身已提供加密"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "OSPFv3 删除了 OSPF 报文头中的 AuType 和 Authentication 字段，也删除了区域和接口数据结构中的认证相关字段，协议自身不再提供认证，而是依赖 IPv6 的 IP 认证头（AH）和封装安全载荷（ESP）提供完整性、认证和机密性。A 和 B 描述的 MD5、明文口令属于 OSPFv2 的认证方式；D 错误，IPv6 本身并不会自动加密上层协议报文，仍需 IPsec 等机制保护。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "IPsec",
+      "认证"
+    ],
+    "provenance": {
+      "questionId": "hcip831-ospfv3-auth-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5340-ospfv3"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 OSPFv3 原理与配置中认证方式知识点；移除 OSPF 自身认证字段、依赖 IP AH/ESP 的依据为 RFC 5340 第 2.6 节（Authentication Changes）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 5340 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "f88b590f432db9e84ca04ca85701859d1755c2909a26400136fd234942f16799"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-isis-ipv6-mt-001",
+    "type": "single_choice",
+    "question": "IS-IS 同时承载 IPv4 与 IPv6 时，默认的单拓扑（Single Topology）方式意味着什么？",
+    "options": {
+      "A": "只有 IPv6 前缀会被泛洪，IPv4 前缀不再通告",
+      "B": "IPv6 使用独立的 SPF 拓扑，与 IPv4 完全隔离",
+      "C": "IPv4 与 IPv6 必须运行在两个不同的 IS-IS 进程中",
+      "D": "IPv4 与 IPv6 共用同一套 SPF 拓扑，链路的连通性和度量对两者相同，无法为 IPv6 单独规划路径"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "单拓扑方式下，IPv4 和 IPv6 共享同一套 IS-IS 拓扑和链路度量，SPF 计算得到的是同一棵树，因此无法针对 IPv6 单独设计路径或使用不同的链路开销；若需要为 IPv6 建立独立拓扑，应使用多拓扑（MT）扩展。B 描述的正是多拓扑方式，而非默认单拓扑；C 错误，同一个 IS-IS 进程可以同时承载 IPv4 和 IPv6；A 错误，单拓扑下两种前缀都会正常通告。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS",
+      "IPv6",
+      "多拓扑"
+    ],
+    "provenance": {
+      "questionId": "hcip831-isis-ipv6-mt-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc5120-isis-mt",
+        "rfc5308-isis-ipv6"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IS-IS（IPv6）原理与配置知识点；多拓扑（MT）机制依据 RFC 5120 第 1 节（MT 定义）与第 6 节（每个 MT 独立运行决策过程），单拓扑下 IPv6 与 IPv4 共用拓扑的依据为 RFC 5308 的 IPv6 Reachability TLV 方案。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲、RFC 5120 与 RFC 5308 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "2f0de48dc3ca17d17ca3e04609a7607bf13f7d765086f90d7a5664cf28e2142d"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-bgp4plus-routerid-001",
+    "type": "single_choice",
+    "question": "建立 BGP4+ 邻居（IPv6 单播地址族）时，关于 BGP Router ID 的描述正确的是？",
+    "options": {
+      "A": "必须配置为 IPv6 地址，否则无法建立邻居",
+      "B": "仍然是 32 位标识，通常使用 IPv4 地址或手工配置，与对等体使用 IPv6 地址无关",
+      "C": "BGP4+ 不需要 Router ID",
+      "D": "Router ID 自动取对等体的 IPv6 链路本地地址"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "BGP4+ 通过多协议扩展承载 IPv6 路由，但 BGP 的 BGP Identifier（Router ID）仍然是 32 位，通常取设备上的 IPv4 地址或通过 router-id 手工配置，对等体使用 IPv6 地址并不改变 Router ID 的格式和取值方式。A 把 IPv6 地址与 32 位 Router ID 混为一谈；C 错误，BGP 仍需 Router ID 标识路由器并参与选路和防环；D 错误，Router ID 不会自动取对等体的链路本地地址。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "IPv6",
+      "Router ID"
+    ],
+    "provenance": {
+      "questionId": "hcip831-bgp4plus-routerid-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 BGP4+ 原理与配置知识点；BGP Identifier（Router ID）为 4 字节无符号整数、在 OPEN 报文中携带的依据为 RFC 4271 第 1.1 节与第 4.2 节；BGP4+ 仅通过多协议扩展承载 IPv6 路由，不改变 Router ID 格式。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与 RFC 4271 原文独立命题，未复制第三方题目。",
+      "reviewDigest": "97960ad8bf4d6d0038db4741f445f05d5fbb8a263587c67a6fda61b64052d3bd"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  }
+]

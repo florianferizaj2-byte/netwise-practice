@@ -1,0 +1,363 @@
+[
+  {
+    "id": "sc-2610-021",
+    "type": "single_choice",
+    "question": "在 B2 单元格输入公式 =$A$1+1，将其复制到 D5 单元格，公式变为（ ）。",
+    "options": {
+      "A": "=$A$1+1",
+      "B": "=$C$4+1",
+      "C": "=$A$4+1",
+      "D": "=$C$1+1"
+    },
+    "answer": ["A"],
+    "analysis": "$A$1 的行和列都用美元符号锁定，属于绝对地址，复制到任何位置都不改变。从 B2 到 D5 列号加 2、行号加 3，若未锁定就会变成 $C$4；只锁定行或只锁定列则得到 $A$4 或 $C$1，这三种情况都不适用于完全锁定的写法。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "单元格与地址引用",
+    "difficulty": "medium",
+    "tags": ["四川专升本", "计算机基础", "单元格与地址引用"]
+  },
+  {
+    "id": "sc-2610-022",
+    "type": "single_choice",
+    "question": "在 B2 单元格输入公式 =A$1，将其复制到 B6 单元格，公式中的引用变为（ ）。",
+    "options": {
+      "A": "A$5",
+      "B": "A$1",
+      "C": "E$1",
+      "D": "E$5"
+    },
+    "answer": ["B"],
+    "analysis": "A$1 只锁定了行号 1，列 A 是相对的。从 B2 复制到 B6 只增加了 4 行、列没有变化，而被锁定的行号不变，因此仍是 A$1。A$5 是把行锁当成相对处理的结果，E$1 与 E$5 则是误以为列也发生了变化。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "单元格与地址引用",
+    "difficulty": "medium",
+    "tags": ["四川专升本", "计算机基础", "单元格与地址引用"]
+  },
+  {
+    "id": "sc-2610-023",
+    "type": "single_choice",
+    "question": "在 B2 单元格输入公式 =$A1，将其复制到 D3 单元格，公式中的引用变为（ ）。",
+    "options": {
+      "A": "$C3",
+      "B": "$A3",
+      "C": "$A2",
+      "D": "$C2"
+    },
+    "answer": ["C"],
+    "analysis": "$A1 锁定了列 A，行号 1 是相对的。从 B2 到 D3 列向右移动 2 列、行向下移动 1 行：列被锁定所以仍是 A，行号相对变化为 2，结果为 $A2。$C3 把两处都当成相对地址，$A3 只考虑了列方向，$C2 只考虑了行方向。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "单元格与地址引用",
+    "difficulty": "hard",
+    "tags": ["四川专升本", "计算机基础", "单元格与地址引用"]
+  },
+  {
+    "id": "sc-2610-024",
+    "type": "single_choice",
+    "question": "在当前工作表中引用 Sheet2 工作表 A1 单元格的正确写法是（ ）。",
+    "options": {
+      "A": "=Sheet2.A1",
+      "B": "=[Sheet2]A1",
+      "C": "=Sheet2!A1",
+      "D": "=Sheet2:A1"
+    },
+    "answer": ["C"],
+    "analysis": "Excel 用感叹号连接工作表名与单元格地址，跨表引用写作 =Sheet2!A1。点号是某些编程语言中访问成员的写法，方括号用于引用外部工作簿，冒号表示区域，三者都不是工作表与单元格的分隔符。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "单元格与地址引用",
+    "difficulty": "easy",
+    "tags": ["四川专升本", "计算机基础", "单元格与地址引用"]
+  },
+  {
+    "id": "sc-2610-025",
+    "type": "single_choice",
+    "question": "公式 =SUM(Sheet1:Sheet3!B2) 的含义是（ ）。",
+    "options": {
+      "A": "对 Sheet1 的 B2 到 Sheet3 的 B2 之间的连续区域求和",
+      "B": "对 Sheet1、Sheet2、Sheet3 三张工作表中 B2 单元格求和",
+      "C": "对当前工作表中的 B2 单元格连续求和三次",
+      "D": "该写法错误，Excel 不支持跨工作表求和"
+    },
+    "answer": ["B"],
+    "analysis": "这是三维引用，Sheet1:Sheet3 表示从 Sheet1 到 Sheet3 连续排列的三张工作表，!B2 表示每张表的 B2 单元格，因此结果是三张表 B2 之和。它不是同一张表内的连续区域，也不是对单个单元格重复求和；Excel 完全支持这种写法。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "单元格与地址引用",
+    "difficulty": "hard",
+    "tags": ["四川专升本", "计算机基础", "单元格与地址引用"]
+  },
+  {
+    "id": "sc-2610-026",
+    "type": "multiple_choice",
+    "question": "关于单元格地址引用，下列说法正确的有（ ）。",
+    "options": {
+      "A": "绝对地址在公式复制到其他单元格时保持不变",
+      "B": "相对地址会随公式所在位置的改变而相应变化",
+      "C": "混合地址中只有被锁定的部分在复制时保持不变",
+      "D": "按 F4 键可以在相对、绝对和混合引用之间切换",
+      "E": "绝对地址只能用于引用同一工作表中的单元格"
+    },
+    "answer": ["A", "B", "C", "D"],
+    "analysis": "绝对地址（$A$1）行列均锁定、复制不变；相对地址（A1）随位置变化；混合地址（$A1 或 A$1）只锁定行或列；编辑公式时按 F4 可循环切换四种引用形式，四项均正确。E 项错误：绝对地址同样可以用于跨工作表引用，如 =Sheet2!$A$1。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "单元格与地址引用",
+    "difficulty": "medium",
+    "tags": ["四川专升本", "计算机基础", "单元格与地址引用"]
+  },
+  {
+    "id": "sc-2610-027",
+    "type": "single_choice",
+    "question": "公式 =ABS(-3)+MIN(4,2,8) 的计算结果是（ ）。",
+    "options": {
+      "A": "2",
+      "B": "5",
+      "C": "8",
+      "D": "11"
+    },
+    "answer": ["B"],
+    "analysis": "ABS(-3) 返回绝对值 3，MIN(4,2,8) 返回最小值 2，两者相加得 5。选 2 是只算了 MIN 的结果，选 8 是把 MIN 误当成 MAX，选 11 则是把 ABS(-3) 当成了 3 又把 MIN 误取成 8。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "函数与数据处理",
+    "difficulty": "medium",
+    "tags": ["四川专升本", "计算机基础", "函数与数据处理"]
+  },
+  {
+    "id": "sc-2610-028",
+    "type": "single_choice",
+    "question": "若 A1 单元格中的内容为日期 2026-03-15，则公式 =MONTH(A1) 的结果是（ ）。",
+    "options": {
+      "A": "3",
+      "B": "15",
+      "C": "2026",
+      "D": "20260315"
+    },
+    "answer": ["A"],
+    "analysis": "MONTH 函数从日期中提取月份，2026-03-15 的月份是 3。15 是该日的日号（应使用 DAY），2026 是年份（应使用 YEAR），20260315 是把日期整体当成数字处理，都不是 MONTH 的返回值。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "函数与数据处理",
+    "difficulty": "medium",
+    "tags": ["四川专升本", "计算机基础", "函数与数据处理"]
+  },
+  {
+    "id": "sc-2610-029",
+    "type": "single_choice",
+    "question": "若 A1 单元格内容为 2026-10-18，则公式 =DAY(A1) 的结果是（ ）。",
+    "options": {
+      "A": "2026",
+      "B": "20261018",
+      "C": "18",
+      "D": "10"
+    },
+    "answer": ["C"],
+    "analysis": "DAY 函数返回日期中的“日”，2026-10-18 的日号是 18。10 是月份（应使用 MONTH），2026 是年份（应使用 YEAR），20261018 是把日期整体当成数字。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "函数与数据处理",
+    "difficulty": "easy",
+    "tags": ["四川专升本", "计算机基础", "函数与数据处理"]
+  },
+  {
+    "id": "sc-2610-030",
+    "type": "single_choice",
+    "question": "区域 A1:A4 中的数值依次为 70、85、90、60，公式 =RANK(85,A1:A4) 的结果是（ ）。",
+    "options": {
+      "A": "3",
+      "B": "4",
+      "C": "1",
+      "D": "2"
+    },
+    "answer": ["D"],
+    "analysis": "RANK 返回某数值在区域中的降序排名：90 最大排第 1，85 次之排第 2，因此结果是 2。选 1 是误把 85 当成最大值，选 3 是按升序排名，选 4 则是把 60 的排名当成了 85 的排名。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "函数与数据处理",
+    "difficulty": "medium",
+    "tags": ["四川专升本", "计算机基础", "函数与数据处理"]
+  },
+  {
+    "id": "sc-2610-031",
+    "type": "single_choice",
+    "question": "公式 =MOD(17,5) 的计算结果是（ ）。",
+    "options": {
+      "A": "3",
+      "B": "3.4",
+      "C": "12",
+      "D": "2"
+    },
+    "answer": ["D"],
+    "analysis": "MOD 返回两数相除的余数，17 除以 5 商 3 余 2，结果为 2。3 是商（取整后的结果），3.4 是除法结果，12 是把 MOD 误当成减法。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "函数与数据处理",
+    "difficulty": "easy",
+    "tags": ["四川专升本", "计算机基础", "函数与数据处理"]
+  },
+  {
+    "id": "sc-2610-032",
+    "type": "single_choice",
+    "question": "要统计 A1:A20 区域中所有以“张”开头的内容个数，正确的公式是（ ）。",
+    "options": {
+      "A": "=COUNTIF(A1:A20,\"张*\")",
+      "B": "=COUNTIF(A1:A20,\"*张\")",
+      "C": "=COUNT(A1:A20,\"张\")",
+      "D": "=SUMIF(A1:A20,\"张*\")"
+    },
+    "answer": ["A"],
+    "analysis": "COUNTIF 按条件统计个数，条件 \"张*\" 中的星号代表任意多个字符，表示以“张”开头。\"*张\" 表示以“张”结尾，方向相反；COUNT 只统计数值单元格且不接受这种条件参数；SUMIF 是对满足条件的单元格求和，不是计数。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "函数与数据处理",
+    "difficulty": "medium",
+    "tags": ["四川专升本", "计算机基础", "函数与数据处理"]
+  },
+  {
+    "id": "sc-2610-033",
+    "type": "single_choice",
+    "question": "在 Excel 中对数据清单进行分类汇总之前，必须先完成的操作是（ ）。",
+    "options": {
+      "A": "对分类字段进行排序",
+      "B": "为数据区域设置条件格式",
+      "C": "把数据区域转换为图表",
+      "D": "冻结首行"
+    },
+    "answer": ["A"],
+    "analysis": "分类汇总按分类字段把相同记录归为一组再统计，若数据未按该字段排序，相同值会分散在不同位置，汇总结果就会分裂成多组。条件格式、图表和冻结窗格都不影响汇总的正确性，因此不是前提条件。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "函数与数据处理",
+    "difficulty": "medium",
+    "tags": ["四川专升本", "计算机基础", "函数与数据处理"]
+  },
+  {
+    "id": "sc-2610-034",
+    "type": "single_choice",
+    "question": "要直观地表示各部分数值占总体数值的比例关系，最合适的图表类型是（ ）。",
+    "options": {
+      "A": "折线图",
+      "B": "散点图",
+      "C": "饼图",
+      "D": "条形图"
+    },
+    "answer": ["C"],
+    "analysis": "饼图用扇形面积表示各部分占整体的比例，最适合表现构成关系。折线图用于表现随时间变化的趋势，散点图用于观察两个变量之间的相关关系，条形图用于比较各类别数值的大小，都不以“占比”为主要表达目标。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "函数与数据处理",
+    "difficulty": "easy",
+    "tags": ["四川专升本", "计算机基础", "函数与数据处理"]
+  },
+  {
+    "id": "sc-2610-035",
+    "type": "single_choice",
+    "question": "在 Word 中要把全文中所有“计算机”替换为红色加粗的“计算机”，应（ ）。",
+    "options": {
+      "A": "只能逐个手动修改",
+      "B": "使用“格式刷”逐段刷格式",
+      "C": "先全选文档再统一设置字体颜色",
+      "D": "在“查找和替换”对话框的“替换为”中设置格式后再全部替换"
+    },
+    "answer": ["D"],
+    "analysis": "“查找和替换”支持在“替换为”框中通过“格式”按钮指定字体颜色和加粗，从而在替换文字的同时应用格式，并可一次性全部替换。逐个手改效率极低；格式刷会把已有格式复制到别处，不能按内容定位；全选后统一设色会改动全文而不只是目标词。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Word",
+    "knowledgePoint": "文档编辑与排版",
+    "difficulty": "medium",
+    "tags": ["四川专升本", "计算机基础", "文档编辑与排版"]
+  },
+  {
+    "id": "sc-2610-036",
+    "type": "single_choice",
+    "question": "在 Word 中为文档页面设置背景颜色，应使用（ ）。",
+    "options": {
+      "A": "“开始”选项卡中的“突出显示”",
+      "B": "“插入”选项卡中的“形状”",
+      "C": "“设计”选项卡中的“页面颜色”",
+      "D": "“视图”选项卡中的“阅读模式”"
+    },
+    "answer": ["C"],
+    "analysis": "页面背景通过“设计”选项卡中的“页面颜色”设置，作用于整页底色。文字突出显示只给选中的文字加底色；插入形状是绘制图形对象；阅读模式只改变显示方式，都不改变页面背景。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Word",
+    "knowledgePoint": "文档编辑与排版",
+    "difficulty": "medium",
+    "tags": ["四川专升本", "计算机基础", "文档编辑与排版"]
+  },
+  {
+    "id": "sc-2610-037",
+    "type": "single_choice",
+    "question": "一份文档要求前两页双栏排版、后面各页保持单栏，最规范的做法是（ ）。",
+    "options": {
+      "A": "在第 2 页末尾插入分页符后设置分栏",
+      "B": "直接对整个文档设置分栏",
+      "C": "把前两页内容剪切到另一个文档中",
+      "D": "在第 2 页末尾插入分节符（下一页）后，只对第 1 节设置分栏"
+    },
+    "answer": ["D"],
+    "analysis": "分栏属于节级格式，只有分节符才能让不同部分拥有不同的栏数。插入“分节符（下一页）”后，前两页成为第 1 节、其余成为第 2 节，再对第 1 节设置双栏即可。分页符只换页不换节，设置分栏仍会影响全篇；整篇分栏会让后文也变双栏；拆成两个文档则破坏了文档的完整性。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Word",
+    "knowledgePoint": "文档编辑与排版",
+    "difficulty": "hard",
+    "tags": ["四川专升本", "计算机基础", "文档编辑与排版"]
+  },
+  {
+    "id": "sc-2610-038",
+    "type": "single_choice",
+    "question": "在 Word 表格中要对上方一列数值求和，可在单元格中输入的公式是（ ）。",
+    "options": {
+      "A": "=SUM(LEFT)",
+      "B": "=SUM(RIGHT)",
+      "C": "=SUM(ABOVE)",
+      "D": "=SUM(BELOW)"
+    },
+    "answer": ["C"],
+    "analysis": "Word 表格公式用方向参数指代相对位置，ABOVE 表示当前单元格上方的数据，因此对上方一列求和应写 =SUM(ABOVE)。LEFT 是左侧一行，RIGHT 是右侧，BELOW 是下方，方向都不符合题目要求。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Word",
+    "knowledgePoint": "表格图文与邮件合并",
+    "difficulty": "medium",
+    "tags": ["四川专升本", "计算机基础", "表格图文与邮件合并"]
+  },
+  {
+    "id": "sc-2610-039",
+    "type": "single_choice",
+    "question": "在 Word 中插入图片后，希望文字自动环绕在图片四周，应把图片的环绕方式设置为（ ）。",
+    "options": {
+      "A": "嵌入型",
+      "B": "衬于文字下方",
+      "C": "浮于文字上方",
+      "D": "四周型"
+    },
+    "answer": ["D"],
+    "analysis": "四周型环绕让文字沿图片矩形边界排列，实现图文混排。嵌入型把图片当作一个字符占据整行，文字无法环绕；衬于文字下方和浮于文字上方都让图片与文字叠放，不产生环绕效果。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Word",
+    "knowledgePoint": "表格图文与邮件合并",
+    "difficulty": "easy",
+    "tags": ["四川专升本", "计算机基础", "表格图文与邮件合并"]
+  },
+  {
+    "id": "sc-2610-040",
+    "type": "single_choice",
+    "question": "在 Word 中自动生成目录的前提是（ ）。",
+    "options": {
+      "A": "为各级标题应用了内置标题样式或设置了大纲级别",
+      "B": "文档中插入了分页符",
+      "C": "全文使用了统一的字体",
+      "D": "文档已经打印过一次"
+    },
+    "answer": ["A"],
+    "analysis": "自动目录依据段落的样式或大纲级别收集条目，只有标题应用了“标题 1/2/3”等内置样式或设置了大纲级别，才会被识别进目录。分页符、统一字体和是否打印过都与目录提取无关。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Word",
+    "knowledgePoint": "表格图文与邮件合并",
+    "difficulty": "medium",
+    "tags": ["四川专升本", "计算机基础", "表格图文与邮件合并"]
+  }
+]

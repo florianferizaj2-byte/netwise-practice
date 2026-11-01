@@ -1,0 +1,399 @@
+.formal-tutor {
+  color: #172b53;
+  min-width: 0;
+}
+.formal-tutor-teacher {
+  margin: 0 24px 20px;
+  padding: 18px 20px;
+  background: var(--web-soft, #f0f6ff);
+  border: 1px solid var(--line, #dce7fb);
+  border-radius: 12px;
+  color: var(--text, #172b53);
+  overflow-wrap: anywhere;
+}
+.formal-tutor-teacher .ss-teacher-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.formal-tutor-teacher h2 {
+  font-size: 17px;
+  margin: 0;
+}
+.formal-tutor-teacher p {
+  margin: 6px 0;
+  line-height: 1.7;
+}
+.formal-tutor-teacher .ss-teacher-note {
+  color: var(--text-2, #59729b);
+  font-size: 12px;
+}
+.formal-tutor-teacher .ss-chat {
+  max-height: 340px;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.formal-tutor-teacher .ss-chat-turn {
+  margin: 12px 0;
+  padding: 12px;
+  background: var(--paper, white);
+  border: 1px solid var(--line, #dce7fb);
+  border-radius: 8px;
+}
+.formal-tutor-teacher .ss-student-message {
+  font-weight: 700;
+}
+.formal-tutor-teacher .ss-teacher-answer ul {
+  padding-left: 20px;
+  line-height: 1.75;
+}
+.formal-tutor-teacher .ss-quick-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 12px 0;
+}
+.formal-tutor-teacher .ss-question-form {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+.formal-tutor-teacher textarea {
+  width: 100%;
+  min-width: 0;
+  resize: vertical;
+  border: 1px solid var(--line, #dce7fb);
+  border-radius: 8px;
+  padding: 10px;
+  color: var(--text, #172b53);
+  background: var(--paper, white);
+}
+.blue-workspace .formal-tutor-teacher .primary {
+  background: #2454ed;
+  color: white;
+  border-color: #2454ed;
+}
+@media (min-width: 1500px) {
+  .formal-tutor-workspace:has(.formal-tutor-teacher) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 0 18px;
+    align-items: start;
+  }
+  .formal-tutor-workspace:has(.formal-tutor-teacher)
+    > .formal-tutor-lesson-heading {
+    grid-column: 1 / -1;
+  }
+  .formal-tutor-workspace > .formal-tutor-teacher {
+    grid-column: 2;
+    grid-row: 2;
+    margin: 0;
+    padding: 14px;
+  }
+  .formal-tutor-workspace:has(.formal-tutor-teacher) > .tutor-shell {
+    grid-column: 1;
+    grid-row: 2;
+    min-width: 0;
+  }
+}
+.formal-tutor-teacher .ss-question-form button {
+  justify-self: start;
+}
+.formal-tutor-teacher .ss-thinking {
+  color: var(--text-2, #59729b);
+}
+.formal-tutor-teacher .ss-thinking::after {
+  content: "老师正在核对当前讲解…";
+}
+@media (max-width: 600px) {
+  .formal-tutor-teacher {
+    margin: 0 12px 16px;
+    padding: 14px;
+  }
+}
+.formal-tutor button {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #dce7fb;
+  color: #2454ed;
+  background: white;
+  padding: 9px 13px;
+  border-radius: 8px;
+  min-height: 40px;
+}
+.formal-tutor button:disabled {
+  opacity: 0.5;
+}
+.formal-tutor :is(button, input, select):focus-visible {
+  outline: 3px solid #9ab8ff;
+  outline-offset: 2px;
+}
+.formal-tutor-heading {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 23px;
+}
+.formal-tutor-heading h1 {
+  font-size: 30px;
+  margin: 0 0 7px;
+}
+.formal-tutor-heading p {
+  color: #607396;
+  font-size: 14px;
+}
+.formal-tutor-layout {
+  display: grid;
+  grid-template-columns: 290px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+.formal-tutor-directory {
+  border: 1px solid #dce7fb;
+  background: white;
+  border-radius: 12px;
+  padding: 18px;
+  max-height: calc(100vh - 170px);
+  overflow: auto;
+  position: sticky;
+  top: 18px;
+}
+.formal-tutor-directory h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+.formal-tutor-directory > select {
+  width: 100%;
+  margin-bottom: 12px;
+  border-color: #dce7fb;
+}
+.formal-tutor-directory > label {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  border: 1px solid #dce7fb;
+  border-radius: 8px;
+  padding-left: 9px;
+  margin-bottom: 15px;
+}
+.formal-tutor-directory input {
+  width: 100%;
+  border: 0;
+  min-width: 0;
+}
+.formal-tutor-directory > button {
+  display: block;
+  text-align: left;
+  width: 100%;
+  border: 0;
+  padding: 12px;
+  margin-bottom: 4px;
+}
+.formal-tutor-directory > button strong {
+  display: block;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.formal-tutor-directory > button small {
+  display: block;
+  font-size: 11px;
+  color: #607396;
+  line-height: 1.7;
+  margin-top: 3px;
+}
+.formal-tutor-directory > button.selected {
+  background: #eaf2ff;
+  color: #2454ed;
+}
+.formal-tutor-directory > p {
+  font-size: 11px;
+  color: #607396;
+  margin-top: 12px;
+}
+.formal-tutor-workspace {
+  border: 1px solid #dce7fb;
+  background: white;
+  border-radius: 12px;
+  padding: 22px;
+  min-width: 0;
+}
+.formal-tutor-lesson-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e9f0fc;
+}
+.formal-tutor-lesson-heading .ace-chapter-art {
+  --art-size: 76px;
+}
+.formal-tutor-lesson-heading h2 {
+  font-size: 24px;
+  line-height: 1.5;
+  margin-top: 5px;
+}
+.formal-tutor-lesson-heading small {
+  font-size: 13px;
+  color: #607396;
+}
+.formal-tutor-start h3 {
+  font-size: 21px;
+  margin: 12px 0;
+}
+.formal-tutor-start > div {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 15px 0;
+}
+.formal-tutor-start button[aria-pressed="true"] {
+  border-color: #2454ed;
+  background: #eaf2ff;
+}
+.formal-tutor-start p {
+  color: #607396;
+  font-size: 14px;
+  margin: 15px 0;
+}
+.formal-tutor-error {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  background: #fff7ec;
+  border: 1px solid #f2d6b2;
+  border-radius: 9px;
+  padding: 12px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+.formal-tutor-error span {
+  color: #965200;
+  font-size: 13px;
+}
+.formal-tutor-phase {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.formal-tutor-phase > span {
+  padding: 4px 9px;
+  background: #eaf2ff;
+  border-radius: 5px;
+  color: #2454ed;
+}
+.formal-tutor-phase > small {
+  font-size: 12px;
+  color: #607396;
+}
+.formal-tutor-actions {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  border-top: 1px solid #e9f0fc;
+  padding-top: 16px;
+}
+.formal-tutor .formal-tutor-primary {
+  background: #2454ed;
+  border-color: #2454ed;
+  color: white;
+}
+.formal-tutor-save-note {
+  color: #607396;
+  font-size: 12px;
+  margin-top: 12px;
+}
+.formal-tutor-gate {
+  padding: 26px;
+  background: white;
+  border: 1px solid #dce7fb;
+  border-radius: 12px;
+}
+.formal-tutor-gate p {
+  color: #607396;
+  font-size: 14px;
+  margin: 12px 0;
+}
+.formal-tutor .tutor-option:has(input:checked) {
+  background: #eaf2ff;
+  border-color: #2454ed;
+}
+.formal-tutor .tutor-shell .tutor-quiz-footer .ai-primary {
+  background: #2454ed;
+  color: white;
+}
+@media (max-width: 1200px) {
+  .formal-tutor-layout {
+    grid-template-columns: 245px minmax(0, 1fr);
+  }
+  .formal-tutor-workspace {
+    padding: 18px;
+  }
+  .formal-tutor-lesson-heading h2 {
+    font-size: 22px;
+  }
+}
+@media (max-width: 1000px) {
+  .formal-tutor-layout {
+    grid-template-columns: 1fr;
+  }
+  .formal-tutor-directory {
+    position: static;
+    max-height: 320px;
+  }
+  .formal-tutor-directory > button {
+    display: inline-block;
+    width: calc(50% - 4px);
+    vertical-align: top;
+  }
+  .formal-tutor-directory > button strong {
+    overflow-wrap: anywhere;
+  }
+}
+@media (max-width: 600px) {
+  .formal-tutor .tutor-progress ol {
+    grid-template-columns: repeat(auto-fit, minmax(76px, 1fr));
+    gap: 8px;
+  }
+  .formal-tutor-heading h1 {
+    font-size: 25px;
+  }
+  .formal-tutor-workspace {
+    padding: 14px;
+  }
+  .formal-tutor-directory {
+    padding: 14px;
+  }
+  .formal-tutor-lesson-heading h2 {
+    font-size: 20px;
+  }
+  .formal-tutor-lesson-heading .ace-chapter-art {
+    --art-size: 58px;
+  }
+  .formal-tutor-lesson-heading small {
+    font-size: 11px;
+  }
+  .formal-tutor-actions button {
+    flex: 1;
+    font-size: 12px;
+  }
+  .formal-tutor-start button {
+    flex: 1;
+  }
+  .formal-tutor-error button {
+    font-size: 12px;
+  }
+}

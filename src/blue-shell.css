@@ -1,0 +1,134 @@
+/* Legacy components consume the same semantic palette as the new Web shell.
+   Keep their token names compatible; override values only on blue Web surfaces. */
+:is(.blue-workspace, .blue-landing, .download-page) {
+  --ink-900: #101f4b;
+  --green-700: #2454ed;
+  --green-600: #2c63da;
+  --green-200: #cbdcff;
+  --green-100: #eaf2ff;
+  --green-50: #f1f6ff;
+  --text: #203456;
+  --text-2: #4c6286;
+  --text-3: #607396;
+  --line: #dce7fa;
+  --line-soft: #eaf1fc;
+  --canvas: #f5f9ff;
+  --brand-deep: #101f4b;
+  --brand-shadow-rgb: 20 43 96;
+  --action-fill: #2454ed;
+  --status-ink: #087b65;
+  --status-soft: #e8f8f1;
+  --status-line: #b6e5d4;
+  --shadow-pop: 0 12px 32px rgb(20 43 96 / 15%);
+  accent-color: #2454ed;
+}
+:is(.blue-workspace, .blue-landing, .download-page) dialog::backdrop {
+  --brand-shadow-rgb: 20 43 96;
+}
+.blue-workspace {
+  color: var(--text);
+  --ink-900: #101f4b;
+  --text: #203456;
+  --text-2: #4c6286;
+  --text-3: #607396;
+  --line: #dce7fa;
+  --line-soft: #eaf1fc;
+  --canvas: #f5f9ff;
+  --study-text: #203456;
+  --study-muted: #607396;
+  --study-border: #dce7fa;
+  background: var(--canvas);
+}
+.blue-workspace .main-wrap {
+  background: var(--canvas);
+}
+.blue-workspace .sidebar nav button.active {
+  background: #e8f0ff;
+  color: #2454ed;
+}
+.blue-workspace .sidebar :is(button, summary) {
+  color: #30466b;
+}
+.blue-workspace .sidebar nav {
+  margin-top: 30px;
+}
+.blue-workspace .primary {
+  background: #2454ed;
+  border-color: #2454ed;
+  color: white;
+}
+.blue-workspace .primary:hover:not(:disabled) {
+  background: #1743d3;
+  border-color: #1743d3;
+}
+.blue-workspace .badge.brand {
+  color: var(--green-700);
+  background: var(--green-100);
+}
+.blue-workspace .progress > i {
+  background: #477bff;
+}
+.blue-workspace .topbar {
+  background: white;
+  border-color: #dce7fa;
+}
+.blue-workspace .topbar .desk-toolbar-actions {
+  flex: 1;
+  min-width: 0;
+  gap: 20px;
+}
+.blue-workspace .desk-breadcrumb {
+  flex: none;
+}
+.blue-workspace .blue-certificate-control {
+  width: 220px;
+  color: #172d58;
+  border-color: #dce7fa;
+  font-weight: 600;
+}
+.blue-workspace .desk-search-trigger {
+  flex: 1 1 240px;
+  min-width: 0;
+  max-width: 500px;
+  width: min(500px, 45vw);
+  margin-right: auto;
+  border: 1px solid #dce7fa;
+  background: #f1f6ff;
+  border-radius: 24px;
+  justify-content: start;
+}
+.blue-workspace .desk-search-trigger kbd {
+  margin-left: auto;
+}
+.blue-workspace .blue-plan-link {
+  border: 0;
+  background: none;
+  white-space: nowrap;
+  color: #243c70;
+}
+.blue-certificate-switch {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.blue-certificate-switch > button {
+  width: 36px;
+  padding: 7px;
+  min-height: 36px;
+  color: #2454ed;
+  border-color: #dce7fb;
+}
+@media (min-width: 900px) {
+  .blue-workspace .topbar {
+    height: 76px;
+    min-height: 76px;
+  }
+}
+@media (min-width: 900px) and (max-width: 1300px) {
+  .blue-workspace .topbar .desk-toolbar-actions {
+    gap: 10px;
+  }
+  .blue-workspace .blue-certificate-control {
+    width: 190px;
+  }
+}

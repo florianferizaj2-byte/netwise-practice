@@ -34,48 +34,60 @@
         "name": "公共基础知识",
         "order": 1,
         "weight": 10,
-        "targetQuestionCount": 20,
+        "targetQuestionCount": 160,
         "knowledgePoints": [
-          "数据结构与算法：栈、队列、链表、二叉树",
-          "数据结构与算法：查找与排序",
+          "算法基本概念",
           "算法复杂度",
-          "程序设计风格",
+          "数据结构基本概念",
+          "线性表",
+          "栈和队列",
+          "树和二叉树",
+          "查找技术",
+          "排序技术",
+          "程序设计方法与风格",
           "结构化程序设计",
-          "面向对象程序设计",
-          "软件生命周期",
-          "结构化分析与设计",
+          "面向对象的程序设计",
+          "软件工程基本概念",
+          "结构化分析方法",
+          "结构化设计方法",
           "软件测试",
-          "数据模型与关系模型",
-          "关系代数与 SQL",
-          "数据库设计"
+          "程序的调试",
+          "数据库系统的基本概念",
+          "数据模型",
+          "关系代数",
+          "数据库设计与管理"
         ]
       },
       {
         "id": "office-basics",
         "name": "Office 应用基础",
         "order": 2,
-        "weight": 5,
-        "targetQuestionCount": 20,
-        "knowledgePoints": ["界面使用与功能设置", "各模块之间信息共享"]
+        "weight": 10,
+        "targetQuestionCount": 36,
+        "knowledgePoints": [
+          "界面使用与功能设置",
+          "文件格式与兼容性",
+          "各模块之间信息共享"
+        ]
       },
       {
         "id": "word",
         "name": "Word 文档处理",
         "order": 3,
         "weight": 30,
-        "targetQuestionCount": 20,
+        "targetQuestionCount": 96,
         "knowledgePoints": [
           "文档创建编辑保存打印保护",
+          "多窗口多文档与视图",
           "字体与段落",
           "样式与主题",
           "页面布局与分栏分页分节",
+          "页眉页脚与引用",
+          "审阅与修订",
           "表格与图表",
           "图形图片 SmartArt 与文本框",
           "符号与数学公式",
-          "页眉页脚与引用",
-          "审阅与修订",
           "邮件合并",
-          "多窗口多文档与视图",
           "控件宏与图文素材分析提取"
         ]
       },
@@ -83,10 +95,10 @@
         "id": "excel",
         "name": "Excel 数据处理",
         "order": 4,
-        "weight": 35,
-        "targetQuestionCount": 20,
+        "weight": 30,
+        "targetQuestionCount": 112,
         "knowledgePoints": [
-          "工作表基本操作与视图",
+          "工作表基本操作、视图与打印",
           "数据输入与编辑",
           "单元格格式化",
           "工作表保护与版本比较",
@@ -97,7 +109,9 @@
           "排序筛选分类汇总",
           "数据验证、分列与合并计算",
           "数据透视表与数据透视图",
-          "模拟分析与预测、控件宏、外部数据、Power Pivot 与素材分析"
+          "模拟分析与预测",
+          "外部数据与 Power Pivot",
+          "控件宏与素材分析"
         ]
       },
       {
@@ -105,9 +119,10 @@
         "name": "PowerPoint 演示文稿",
         "order": 5,
         "weight": 20,
-        "targetQuestionCount": 20,
+        "targetQuestionCount": 88,
         "knowledgePoints": [
           "基本操作与视图模式",
+          "幻灯片组织与管理",
           "主题与背景",
           "幻灯片母版",
           "文本、图形、图片、表格与图表",
@@ -146,6 +161,782 @@
       "defaults": {
         "sourceVerification": "用户提供 DOCX：原文包含真题/模拟题标记，但出处与答案未独立核验；本平台统一标为未核验汇编"
       }
+    },
+    {
+      "id": "syllabus-expansion",
+      "name": "二级 MS Office 知识点补齐练习",
+      "description": "按 2025 年版大纲三级知识目录补齐的原创练习，每个知识点至少 8 道种子题",
+      "source": "ncre_office_syllabus_expansion",
+      "category": "syllabus_practice",
+      "verification": "original_from_official_scope",
+      "sourceUrl": "https://ncre.neea.edu.cn/res/Home/2412/007b7cbab11984a769c33fdc605b7f85.pdf?download=%E4%BA%8C%E7%BA%A7MS_Office%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8%E4%B8%8E%E8%AE%BE%E8%AE%A1%E8%80%83%E8%AF%95%E5%A4%A7%E7%BA%B2%EF%BC%882025%E5%B9%B4%E7%89%88%EF%BC%89.pdf",
+      "path": "questions/expansion-2026-10",
+      "defaults": {
+        "sourceVerification": "本站原创练习题：依据中国教育考试网 2025 年版大纲的三级知识点编写，不属于官方历年真题"
+      }
+    },
+    {
+      "id": "operation-practice",
+      "name": "Word / Excel / PowerPoint 操作题",
+      "description": "对齐机考 80 分操作题的原创任务，给出材料、要求、参考步骤与评分点，供自评与变式练习",
+      "source": "ncre_office_operation_practice",
+      "category": "syllabus_practice",
+      "verification": "original_from_official_scope",
+      "sourceUrl": "https://ncre.neea.edu.cn/res/Home/2412/007b7cbab11984a769c33fdc605b7f85.pdf?download=%E4%BA%8C%E7%BA%A7MS_Office%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8%E4%B8%8E%E8%AE%BE%E8%AE%A1%E8%80%83%E8%AF%95%E5%A4%A7%E7%BA%B2%EF%BC%882025%E5%B9%B4%E7%89%88%EF%BC%89.pdf",
+      "path": "questions/operation-practice",
+      "defaults": {
+        "sourceVerification": "本站原创操作任务：依据 2025 年版大纲的操作要求设计，参考步骤按 Microsoft Office 2016 界面描述"
+      }
     }
-  ]
+  ],
+  "taxonomy": {
+    "schemaVersion": 1,
+    "modules": [
+      {
+        "name": "公共基础知识",
+        "order": 1,
+        "sections": [
+          {
+            "name": "数据结构与算法",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "算法基本概念",
+                "order": 1,
+                "code": "pub-algo-basic",
+                "scope": "算法的定义、特征与基本要素；算法与程序的区别；算法的描述方法",
+                "aliases": [
+                  "算法"
+                ]
+              },
+              {
+                "name": "算法复杂度",
+                "order": 2,
+                "code": "pub-algo-complexity",
+                "scope": "时间复杂度与空间复杂度的含义、量级表示与常见复杂度大小比较",
+                "aliases": [
+                  "时间复杂度",
+                  "空间复杂度"
+                ]
+              },
+              {
+                "name": "数据结构基本概念",
+                "order": 3,
+                "code": "pub-ds-basic",
+                "scope": "数据、数据元素与数据项；逻辑结构与存储结构；线性结构与非线性结构",
+                "aliases": [
+                  "数据结构"
+                ]
+              },
+              {
+                "name": "线性表",
+                "order": 4,
+                "code": "pub-linear-list",
+                "scope": "顺序存储与链式存储的差异、插入删除的元素移动、单链表与双向链表、循环链表",
+                "aliases": [
+                  "线性链表",
+                  "顺序表"
+                ]
+              },
+              {
+                "name": "栈和队列",
+                "order": 5,
+                "code": "pub-stack-queue",
+                "scope": "栈与队列的定义与特点、顺序与链式存储、循环队列的队满队空判断",
+                "aliases": [
+                  "栈",
+                  "队列"
+                ]
+              },
+              {
+                "name": "树和二叉树",
+                "order": 6,
+                "code": "pub-tree",
+                "scope": "树的基本术语、二叉树性质与遍历、满二叉树与完全二叉树、结点数计算",
+                "aliases": [
+                  "二叉树",
+                  "遍历"
+                ]
+              },
+              {
+                "name": "查找技术",
+                "order": 7,
+                "code": "pub-search",
+                "scope": "顺序查找与二分查找的过程、适用条件与平均查找长度比较",
+                "aliases": [
+                  "二分查找"
+                ]
+              },
+              {
+                "name": "排序技术",
+                "order": 8,
+                "code": "pub-sort",
+                "scope": "冒泡、快速、简单插入、希尔、选择、堆排序的过程、稳定性与时间复杂度",
+                "aliases": [
+                  "排序"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "程序设计基础",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "程序设计方法与风格",
+                "order": 1,
+                "code": "pub-prog-style",
+                "scope": "程序设计风格、源程序文档化、数据说明与语句结构规范",
+                "aliases": [
+                  "程序设计风格"
+                ]
+              },
+              {
+                "name": "结构化程序设计",
+                "order": 2,
+                "code": "pub-structured",
+                "scope": "结构化程序设计的三种基本结构、自顶向下逐步求精、模块化原则",
+                "aliases": [
+                  "结构化"
+                ]
+              },
+              {
+                "name": "面向对象的程序设计",
+                "order": 3,
+                "code": "pub-oop",
+                "scope": "对象与类的概念、封装、继承、多态、消息传递",
+                "aliases": [
+                  "面向对象",
+                  "类与对象"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "软件工程基础",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "软件工程基本概念",
+                "order": 1,
+                "code": "pub-se-basic",
+                "scope": "软件危机、软件工程的目标与原则、软件生命周期各阶段",
+                "aliases": [
+                  "软件生命周期"
+                ]
+              },
+              {
+                "name": "结构化分析方法",
+                "order": 2,
+                "code": "pub-se-analysis",
+                "scope": "需求分析的任务、数据流图、数据字典、结构化分析步骤",
+                "aliases": [
+                  "需求分析",
+                  "数据流图"
+                ]
+              },
+              {
+                "name": "结构化设计方法",
+                "order": 3,
+                "code": "pub-se-design",
+                "scope": "概要设计与详细设计、模块独立性、内聚与耦合、结构图、PAD 与 N-S 图",
+                "aliases": [
+                  "软件设计",
+                  "软件设计工具"
+                ]
+              },
+              {
+                "name": "软件测试",
+                "order": 4,
+                "code": "pub-se-test",
+                "scope": "测试的目的与原则、白盒测试与黑盒测试方法、测试用例设计",
+                "aliases": [
+                  "白盒测试",
+                  "黑盒测试"
+                ]
+              },
+              {
+                "name": "程序的调试",
+                "order": 5,
+                "code": "pub-se-debug",
+                "scope": "调试与测试的区别、调试的步骤与常用方法",
+                "aliases": [
+                  "程序调试"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "数据库设计基础",
+            "order": 4,
+            "knowledgePoints": [
+              {
+                "name": "数据库系统的基本概念",
+                "order": 1,
+                "code": "pub-db-basic",
+                "scope": "数据库、数据库管理系统、数据库系统、三级模式与两级映像、数据独立性",
+                "aliases": [
+                  "数据库系统",
+                  "DBMS"
+                ]
+              },
+              {
+                "name": "数据模型",
+                "order": 2,
+                "code": "pub-db-model",
+                "scope": "层次模型、网状模型、关系模型、E-R 模型与 E-R 图转换",
+                "aliases": [
+                  "E-R模型",
+                  "关系模型"
+                ]
+              },
+              {
+                "name": "关系代数",
+                "order": 3,
+                "code": "pub-db-algebra",
+                "scope": "关系的并、交、差、笛卡儿积、选择、投影、连接运算",
+                "aliases": [
+                  "关系运算"
+                ]
+              },
+              {
+                "name": "数据库设计与管理",
+                "order": 4,
+                "code": "pub-db-design",
+                "scope": "数据库设计的四个阶段、函数依赖与 1NF/2NF/3NF、索引与视图",
+                "aliases": [
+                  "数据库规范化",
+                  "范式"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Office 应用基础",
+        "order": 2,
+        "sections": [
+          {
+            "name": "界面与功能设置",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "界面使用与功能设置",
+                "order": 1,
+                "code": "office-ui",
+                "scope": "功能区与选项卡、快速访问工具栏、后台视图、Office 选项与自定义",
+                "aliases": [
+                  "功能区",
+                  "快速访问工具栏"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "文件与信息共享",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "文件格式与兼容性",
+                "order": 1,
+                "code": "office-format",
+                "scope": "docx/xlsx/pptx 与旧版格式、PDF 与 XPS 输出、兼容模式检查",
+                "aliases": [
+                  "文件格式",
+                  "兼容模式"
+                ]
+              },
+              {
+                "name": "各模块之间信息共享",
+                "order": 2,
+                "code": "office-share",
+                "scope": "选择性粘贴、对象链接与嵌入、跨应用引用与数据更新",
+                "aliases": [
+                  "选择性粘贴",
+                  "对象链接与嵌入"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Word 文档处理",
+        "order": 3,
+        "sections": [
+          {
+            "name": "文档基础",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "文档创建编辑保存打印保护",
+                "order": 1,
+                "code": "word-basic",
+                "scope": "新建打开与保存另存、录入与编辑、查找替换、打印设置、文档保护",
+                "aliases": [
+                  "文档保护",
+                  "打印"
+                ]
+              },
+              {
+                "name": "多窗口多文档与视图",
+                "order": 2,
+                "code": "word-view",
+                "scope": "页面/阅读/大纲/草稿视图、拆分与并排比较、导航窗格、显示比例",
+                "aliases": [
+                  "导航窗格"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "文字与段落",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "字体与段落",
+                "order": 1,
+                "code": "word-font",
+                "scope": "字体与字符间距、段落对齐缩进、行距段间距、制表位、项目符号与编号",
+                "aliases": [
+                  "段落格式",
+                  "制表位"
+                ]
+              },
+              {
+                "name": "样式与主题",
+                "order": 2,
+                "code": "word-style",
+                "scope": "内置与自定义样式、样式修改与自动更新、主题颜色字体、模板与文档部件",
+                "aliases": [
+                  "样式",
+                  "模板"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "页面与引用",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "页面布局与分栏分页分节",
+                "order": 1,
+                "code": "word-page",
+                "scope": "纸张与页边距、分栏、分页符与分节符、页面边框与水印",
+                "aliases": [
+                  "分节符",
+                  "分栏"
+                ]
+              },
+              {
+                "name": "页眉页脚与引用",
+                "order": 2,
+                "code": "word-header",
+                "scope": "页眉页脚与首页不同、页码与域、目录、脚注尾注、题注与交叉引用、索引",
+                "aliases": [
+                  "页眉页脚",
+                  "目录",
+                  "域"
+                ]
+              },
+              {
+                "name": "审阅与修订",
+                "order": 3,
+                "code": "word-review",
+                "scope": "批注、修订标记、接受与拒绝修订、比较与合并文档、限制编辑",
+                "aliases": [
+                  "修订",
+                  "批注"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "表格、图形与对象",
+            "order": 4,
+            "knowledgePoints": [
+              {
+                "name": "表格与图表",
+                "order": 1,
+                "code": "word-table",
+                "scope": "表格创建与编辑、合并拆分单元格、重复标题行、表格样式、表格公式与图表",
+                "aliases": [
+                  "表格",
+                  "重复标题行"
+                ]
+              },
+              {
+                "name": "图形图片 SmartArt 与文本框",
+                "order": 2,
+                "code": "word-graphic",
+                "scope": "图片环绕方式、裁剪与压缩、形状与 SmartArt、文本框与链接、组合与对齐",
+                "aliases": [
+                  "图文混排",
+                  "环绕方式"
+                ]
+              },
+              {
+                "name": "符号与数学公式",
+                "order": 3,
+                "code": "word-symbol",
+                "scope": "插入符号与特殊字符、公式编辑器、公式编号与对齐",
+                "aliases": [
+                  "公式编辑器",
+                  "特殊字符"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "批量处理与自动化",
+            "order": 5,
+            "knowledgePoints": [
+              {
+                "name": "邮件合并",
+                "order": 1,
+                "code": "word-mailmerge",
+                "scope": "主文档与数据源、合并域、规则、预览与合并输出",
+                "aliases": [
+                  "合并域",
+                  "数据源"
+                ]
+              },
+              {
+                "name": "控件宏与图文素材分析提取",
+                "order": 2,
+                "code": "word-macro",
+                "scope": "内容控件、录制与运行宏、宏安全性、素材信息提取与引用",
+                "aliases": [
+                  "内容控件",
+                  "录制宏"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Excel 数据处理",
+        "order": 4,
+        "sections": [
+          {
+            "name": "工作表基础",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "工作表基本操作、视图与打印",
+                "order": 1,
+                "code": "excel-sheet",
+                "scope": "工作簿与工作表管理、冻结窗格与拆分、页面布局与打印标题、文件格式",
+                "aliases": [
+                  "冻结窗格",
+                  "打印标题"
+                ]
+              },
+              {
+                "name": "数据输入与编辑",
+                "order": 2,
+                "code": "excel-input",
+                "scope": "数据类型与录入技巧、填充与序列、查找替换、批注与批注编辑",
+                "aliases": [
+                  "数据填充",
+                  "序列"
+                ]
+              },
+              {
+                "name": "单元格格式化",
+                "order": 3,
+                "code": "excel-format",
+                "scope": "数字格式与自定义格式、对齐边框底纹、条件格式、单元格样式与格式刷",
+                "aliases": [
+                  "条件格式",
+                  "数字格式"
+                ]
+              },
+              {
+                "name": "工作表保护与版本比较",
+                "order": 4,
+                "code": "excel-protect",
+                "scope": "保护工作表与工作簿、允许编辑区域、版本比较与共享工作簿",
+                "aliases": [
+                  "保护工作表",
+                  "允许编辑区域"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "公式与函数",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "单元格引用",
+                "order": 1,
+                "code": "excel-reference",
+                "scope": "相对引用、绝对引用、混合引用、三维引用、名称与跨表引用",
+                "aliases": [
+                  "绝对引用",
+                  "混合引用"
+                ]
+              },
+              {
+                "name": "公式函数与数组",
+                "order": 2,
+                "code": "excel-formula",
+                "scope": "运算符与优先级、常用函数与嵌套、数组公式、错误值识别",
+                "aliases": [
+                  "函数",
+                  "数组公式"
+                ]
+              },
+              {
+                "name": "多工作表联动",
+                "order": 3,
+                "code": "excel-link",
+                "scope": "跨表引用与汇总、合并计算、工作组编辑",
+                "aliases": [
+                  "多表联动",
+                  "工作组"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "图表与可视化",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "迷你图与图表",
+                "order": 1,
+                "code": "excel-chart",
+                "scope": "图表类型选择、图表元素与布局、次坐标轴、迷你图、趋势线",
+                "aliases": [
+                  "迷你图",
+                  "趋势线"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "数据管理",
+            "order": 4,
+            "knowledgePoints": [
+              {
+                "name": "排序筛选分类汇总",
+                "order": 1,
+                "code": "excel-sort",
+                "scope": "多关键字排序与自定义序列、自动筛选与高级筛选、分类汇总与分级显示",
+                "aliases": [
+                  "高级筛选",
+                  "分类汇总"
+                ]
+              },
+              {
+                "name": "数据验证、分列与合并计算",
+                "order": 2,
+                "code": "excel-tools",
+                "scope": "数据验证规则与提示、分列、合并计算、删除重复项",
+                "aliases": [
+                  "数据验证",
+                  "分列"
+                ]
+              },
+              {
+                "name": "数据透视表与数据透视图",
+                "order": 3,
+                "code": "excel-pivot",
+                "scope": "数据透视表布局、值汇总方式、切片器、数据透视图、刷新",
+                "aliases": [
+                  "切片器",
+                  "数据透视图"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "高级分析",
+            "order": 5,
+            "knowledgePoints": [
+              {
+                "name": "模拟分析与预测",
+                "order": 1,
+                "code": "excel-whatif",
+                "scope": "单变量求解、模拟运算表、方案管理器、预测工作表",
+                "aliases": [
+                  "单变量求解",
+                  "模拟运算表"
+                ]
+              },
+              {
+                "name": "外部数据与 Power Pivot",
+                "order": 2,
+                "code": "excel-external",
+                "scope": "导入文本与网页数据、获取和转换、数据模型与关系、度量值",
+                "aliases": [
+                  "外部数据",
+                  "Power Query"
+                ]
+              },
+              {
+                "name": "控件宏与素材分析",
+                "order": 3,
+                "code": "excel-macro",
+                "scope": "表单控件与 ActiveX 控件、录制宏、宏安全性、素材数据提取",
+                "aliases": [
+                  "表单控件",
+                  "素材提取"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "PowerPoint 演示文稿",
+        "order": 5,
+        "sections": [
+          {
+            "name": "基础与视图",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "基本操作与视图模式",
+                "order": 1,
+                "code": "ppt-basic",
+                "scope": "新建与保存、普通/幻灯片浏览/备注/阅读/大纲视图、显示比例与窗口操作",
+                "aliases": [
+                  "大纲视图"
+                ]
+              },
+              {
+                "name": "幻灯片组织与管理",
+                "order": 2,
+                "code": "ppt-organize",
+                "scope": "新建幻灯片与版式选择、节、复制移动删除、隐藏幻灯片",
+                "aliases": [
+                  "版式",
+                  "隐藏幻灯片"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "主题与母版",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "主题与背景",
+                "order": 1,
+                "code": "ppt-theme",
+                "scope": "主题颜色字体效果、背景填充与样式、设计变体",
+                "aliases": [
+                  "主题",
+                  "背景"
+                ]
+              },
+              {
+                "name": "幻灯片母版",
+                "order": 2,
+                "code": "ppt-master",
+                "scope": "母版与版式的层级关系、占位符、母版修改的影响范围、页脚与编号",
+                "aliases": [
+                  "母版",
+                  "占位符"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "对象编辑",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "文本、图形、图片、表格与图表",
+                "order": 1,
+                "code": "ppt-object",
+                "scope": "文本框与占位符、形状与 SmartArt、图片处理、表格与图表插入",
+                "aliases": [
+                  "SmartArt",
+                  "图片处理"
+                ]
+              },
+              {
+                "name": "音视频与艺术字",
+                "order": 2,
+                "code": "ppt-media",
+                "scope": "插入音频视频、播放与剪裁设置、艺术字样式",
+                "aliases": [
+                  "音频",
+                  "视频"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "动画与交互",
+            "order": 4,
+            "knowledgePoints": [
+              {
+                "name": "动画与切换效果",
+                "order": 1,
+                "code": "ppt-animation",
+                "scope": "进入强调退出与动作路径、动画窗格、开始方式与计时、动画刷",
+                "aliases": [
+                  "动画窗格",
+                  "切换效果"
+                ]
+              },
+              {
+                "name": "超链接与交互",
+                "order": 2,
+                "code": "ppt-interaction",
+                "scope": "超链接目标类型、动作按钮、动作设置、交互跳转",
+                "aliases": [
+                  "动作按钮",
+                  "动作设置"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "放映与输出",
+            "order": 5,
+            "knowledgePoints": [
+              {
+                "name": "放映设置与打包输出",
+                "order": 1,
+                "code": "ppt-show",
+                "scope": "放映方式与自定义放映、排练计时、打包与导出视频",
+                "aliases": [
+                  "排练计时",
+                  "打包"
+                ]
+              },
+              {
+                "name": "审阅与比较",
+                "order": 2,
+                "code": "ppt-review",
+                "scope": "批注、比较演示文稿、合并修订",
+                "aliases": [
+                  "比较演示文稿"
+                ]
+              },
+              {
+                "name": "素材分析与引用",
+                "order": 3,
+                "code": "ppt-material",
+                "scope": "从图文素材中提取信息、引用到演示文稿、跨应用协同",
+                "aliases": [
+                  "素材分析",
+                  "跨应用协同"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

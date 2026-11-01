@@ -1,0 +1,98 @@
+import { officialRateCards } from "./ai-points/pricing.js";
+// Public setup hints, not automatically confirmed production billing rates.
+const day = "2026-10-24";
+export const aiServiceCatalog = [
+  {
+    id: "deepseek",
+    name: "DeepSeek",
+    baseUrl: "https://api.deepseek.com",
+    models: ["deepseek-flash", "deepseek-v4-pro"],
+    streamUsage: "include",
+    requestMode: "standard",
+    references: officialRateCards
+      .filter((row) =>
+        ["deepseek-flash", "deepseek-v4-pro"].includes(row.model),
+      )
+      .map((row) => ({
+        model: row.model,
+        input: String(row.inputMicrosPerMillion / 1000000),
+        output: String(row.outputMicrosPerMillion / 1000000),
+        cached: String(row.cachedMicrosPerMillion / 1000000),
+      })),
+    docs: "https://api-docs.deepseek.com/zh-cn/",
+    pricingUrl: "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+    note: "保留原有连接。只对精确模型与地址使用已确认价目；其他旧模型需单独核价。",
+  },
+  {
+    id: "qwen",
+    name: "阿里云百炼 · 通义千问",
+    baseUrl: "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    models: ["qwen3.7-plus", "qwen3.8-flash", "qwen3.8-max"],
+    streamUsage: "include",
+    requestMode: "qwen-no-thinking",
+    docs: "https://help.aliyun.com/zh/model-studio/models",
+    pricingUrl: "https://help.aliyun.com/zh/model-studio/model-pricing",
+    note: "请从百炼控制台复制本区域地址；新工作空间可能使用专属 maas 地址。地域、上下文、思考模式可能影响价格，不能套用其他区域的单价。",
+  },
+  {
+    id: "glm",
+    name: "智谱 · GLM",
+    baseUrl: "https://open.bigmodel.cn/api/paas/v4",
+    models: ["glm-5.3", "glm-5.3-flash", "glm-5.3-flashx"],
+    streamUsage: "native",
+    requestMode: "standard",
+    docs: "https://docs.bigmodel.cn/cn/api/introduction",
+    pricingUrl: "https://docs.bigmodel.cn/cn/guide/start/pricing",
+    references: [
+      { model: "glm-5.3", input: "8", output: "28", cached: "2" },
+      { model: "glm-5.3-flash", input: "0.8", output: "2.8", cached: "0.23" },
+      { model: "glm-5.3-flashx", input: "2", output: "7", cached: "0.57" },
+    ],
+    note: "参考人民币按量价；缓存存储当前限时免费，需核实自己的账单。Coding 套餐与按量接口不可混用。",
+  },
+  {
+    id: "doubao",
+    name: "火山方舟 · 豆包",
+    baseUrl: "https://ark.cn-beijing.volces.com/api/v3",
+    models: [],
+    streamUsage: "include",
+    requestMode: "standard",
+    docs: "https://console.volcengine.com/ark/region%3Acn-beijing/docs/base-url-and-authentication",
+    pricingUrl:
+      "https://console.volcengine.com/ark/region:ark+cn-beijing/pricing",
+    note: "填写控制台可用于 Chat Completions 的模型 ID 或推理接入点 ID，不使用 Coding Plan 地址。按长上下文等档位的最高适用费率确认。",
+  },
+  {
+    id: "kimi",
+    name: "月之暗面 · Kimi",
+    baseUrl: "https://api.moonshot.cn/v1",
+    models: ["kimi-k2.6"],
+    streamUsage: "include",
+    requestMode: "thinking-disabled",
+    docs: "https://platform.kimi.com/docs/guide/kimi-k2-6-quickstart",
+    pricingUrl: "https://platform.kimi.com/docs/pricing/chat",
+    note: "以控制台可用模型为准。K2.6 省略温度，由服务商按思考模式使用固定值。K3 的额外缓存写入/存储费用尚未接入，本入口暂不支持。",
+  },
+  {
+    id: "siliconflow",
+    name: "硅基流动",
+    baseUrl: "https://api.siliconflow.cn/v1",
+    models: ["deepseek-ai/DeepSeek-V4-Flash", "Pro/zai-org/GLM-5.1"],
+    streamUsage: "native",
+    requestMode: "standard",
+    docs: "https://docs.siliconflow.cn/docs/userguide/quickstart",
+    pricingUrl: "https://cloud.siliconflow.cn/models",
+    note: "模型名需包含完整组织前缀；Pro 与普通版本分别计价，不套用原厂同名模型价格。",
+  },
+  {
+    id: "custom",
+    name: "其他兼容接口",
+    baseUrl: "",
+    models: [],
+    streamUsage: "non-stream",
+    requestMode: "standard",
+    docs: null,
+    pricingUrl: null,
+    note: "使用 Chat Completions 文本接口，手动确认人民币输入/输出/缓存三项成本。额外工具、缓存写入/存储或非 Token 收费尚未接入。",
+  },
+].map((row) => ({ ...row, checkedOn: day, priceUnit: "CNY per 1M tokens" }));

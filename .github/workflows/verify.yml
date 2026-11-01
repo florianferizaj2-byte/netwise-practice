@@ -19,6 +19,7 @@ jobs:
             package-lock.json
             mobile/package-lock.json
       - run: npm ci
+      - run: node --test .agents/skills/kaojiang-content-pipeline/scripts/quality.test.mjs
       - run: npm ci --prefix mobile
       - run: npx playwright install --with-deps chromium webkit
       - run: npm run verify
@@ -31,4 +32,13 @@ jobs:
             test-output/e2e-failure.txt
             test-output/apple-web/*-failure.png
             test-output/apple-web/*-failure.txt
+            test-output/blue-release-*.log
+            test-output/blue-release-gate-report.json
+            test-output/release-*.log
+            test-output/release-verification-report.json
+            test-output/*-failure.png
+            test-output/*-failure.txt
+            test-output/admin-console/report.json
+            test-output/admin-console/failure.png
+            test-output/admin-console/failure.txt
           if-no-files-found: ignore

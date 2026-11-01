@@ -10,6 +10,8 @@ import { redact } from "./security.js";
 import { normalizeStudyText, studyPromptAttack, unsafeStudyTeacherAnswer } from "./study-security.js";
 import { certificates } from "./certificates.js";
 import { deploymentStudySeeds } from "./study-seeds/index.js";
+import {requireStudyMember} from "./study-access.js";
+import { commitPointsResult } from "./ai-points/runtime.js";
 const curriculumReferences = new Map(deploymentStudySeeds
   .filter((item) => item.nodeId.startsWith("sichuan-upgrading-computer:"))
   .map((item) => [item.nodeId, item]));
@@ -24,13 +26,7 @@ export function registerStudyRoutes({ route, store, provider, requireAdmin, requ
   let generationDailyLimit = configuredDailyLimit;
   let stopped = false;
   const paidStudyPlans = new Set(["vip", "svip", "ssvip"]);
-  const member = (req) => {
-    if (!req.user) throw studyError("请先登录", 401);
-    const userId = requestUserId(req), entitlement = store.accountEntitlement(userId);
-    if (!paidStudyPlans.has(entitlement.plan))
-      throw studyError("AI 精讲与练习仅限有效 VIP 会员，请先开通或续期", 403, "STUDY_MEMBERSHIP_REQUIRED");
-    return { userId, plan: entitlement.plan };
-  };
+  const member = req => requireStudyMember(store,req,requestUserId);
   const nodeFor = (req, id) => studyNode(id, req.user?.certificateId || "");
   const referenceForNode = (node) => {
     const curriculum = curriculumReferences.get(node.id);
@@ -100,7 +96,7 @@ export function registerStudyRoutes({ route, store, provider, requireAdmin, requ
       const job = content.claimJob(worker,
         generationDailyLimit);
       if (!job) break;
-      const operation = ai(`study-content:${job.id}`, async () => {
+      const operation = ai(job.created_by, async () => {
         requireAiService();
         const node = studyNode(job.node_id);
         if (node.version !== job.data.node.version) throw studyError("课程范围已改变，请重新生成", 409);
@@ -112,9 +108,14 @@ export function registerStudyRoutes({ route, store, provider, requireAdmin, requ
         if (current.status !== "running" || current.worker !== worker) return;
         const accepted = acceptedStudyReview(bundle, review);
         const item = content.savePackage(node, { bundle, review, accepted }, job.data.reference, job.created_by);
-        const completed = accepted ? content.publish(item.id, job.created_by, node) : item;
-        content.finishJob(job.id, worker, completed);
-      }).catch((error) => content.finishJob(job.id, worker, null, redact(error.message).slice(0, 300) || "生成未完成，请重试"))
+        if(!accepted){
+          content.finishJob(job.id,worker,item);
+          throw studyError("AI 独立复核未通过，积分已退还",503,"STUDY_CONTENT_REJECTED");
+        }
+        content.publish(item.id, job.created_by, node,completed=>
+          commitPointsResult(store,job.created_by,{packageId:completed.id},()=>content.finishJob(job.id,worker,completed)));
+      },{forceNew:true,requestKey:`study-job:${job.id}`,signature:store.points.signature(job.data),feature:"study-generation",certificateId:job.data.node.certificateId})
+        .catch((error) => content.finishJob(job.id, worker, null, redact(error.message).slice(0, 300) || "生成未完成，请重试"))
         .finally(() => { active.delete(operation); });
       active.add(operation);
     }
@@ -176,10 +177,13 @@ export function registerStudyRoutes({ route, store, provider, requireAdmin, requ
   });
   const grade = async (attempt, item, question) => {
     let results = gradeStudyQuestion(question, attempt.data.answers), error = "";
+    const finish=(rows,note="")=>attemptView(content.finishAttempt(attempt,
+      {...summarizeStudyGrade(rows),explanation:question.explanation,hint:question.hint},note));
     if (results.some((row) => row.verdict === "uncertain")) {
       try {
         requireAiService();
-        results = await ai(attempt.user_id, () => teacher.grade(question, results, item.data.reference, attempt.user_id));
+        return await ai(attempt.user_id, async () => {
+        results = await teacher.grade(question, results, item.data.reference, attempt.user_id);
         // A test adapter or upstream result must not alter already-decided
         // blanks, manufacture points, or return a missing/duplicate blank.
         const deterministic = gradeStudyQuestion(question, attempt.data.answers);
@@ -192,13 +196,19 @@ export function registerStudyRoutes({ route, store, provider, requireAdmin, requ
           return { ...original, verdict: candidate.verdict, score: candidate.verdict === "correct" ? 1 : 0,
             reason: String(candidate.reason).slice(0, 120) };
         });
+        if(results.some(row=>row.verdict==='uncertain'))
+          throw studyError('AI 暂未能确认判分，积分已退还，可稍后重试。',503,'STUDY_GRADING_UNCERTAIN');
+        return store.points.transaction(()=>{
+          const view=finish(results);
+          return commitPointsResult(store,attempt.user_id,view,()=>{});
+        });
+        });
       } catch (failure) {
         error = redact(failure.message).slice(0, 300);
         results = gradeStudyQuestion(question, attempt.data.answers);
       }
     }
-    const result = { ...summarizeStudyGrade(results), explanation: question.explanation, hint: question.hint };
-    return attemptView(content.finishAttempt(attempt, result, error));
+    return finish(results,error);
   };
   route("post", "/api/study/practice-sessions/:id/attempts", async (req) => {
     const { session, item, userId } = ownedSession(req, req.params.id);
@@ -271,7 +281,7 @@ export function registerStudyRoutes({ route, store, provider, requireAdmin, requ
       return { answer: { conclusion: "看这个例子。", points: [], example: lesson.example }, cached: true };
     const context = { nodeId: node.id, packageId: item.id, message: body.message,
       action: body.action, sessionId: body.sessionId || null, questionId: body.questionId || null };
-    const limit = positiveInteger(process.env.STUDY_TEACHER_DAILY_LIMIT, { vip: 20, svip: 40, ssvip: 80 }[plan], 1000);
+    const limit = positiveInteger(process.env.STUDY_TEACHER_DAILY_LIMIT, 1000, 1000);
     const reservation = content.reserveTeacher(userId, node, item.id, body.requestId, context, limit);
     if (!reservation.created) {
       if (reservation.row.status === "processing") throw studyError("这个问题正在回答，请稍后再试", 409);
@@ -279,21 +289,23 @@ export function registerStudyRoutes({ route, store, provider, requireAdmin, requ
     }
     try {
       requireAiService();
-      let answer = await ai(userId, () => teacher.teacher({ node, lesson,
+      const answer = await ai(userId, async () => {
+        let answer = await teacher.teacher({ node, lesson,
         reference: item.data.reference, message: body.message,
         history: content.teacherHistory(userId, item.id),
         ...(question ? { question: submitted ? question : publicStudyQuestion(question), submitted } : {}),
-      }, userId));
+        }, userId);
       answer = teacherAnswerSchema.parse(answer);
       if (unsafeStudyTeacherAnswer(answer)) throw studyError("老师的回答需要重新整理，请稍后重试。", 503, "STUDY_TEACHER_UNSAFE");
-      // Conservative answer-leak guard. If a contextual reply names a blank's
-      // answer, return the independently reviewed hint instead.
+      // A discarded answer is not a fulfilled paid task. Keep reviewed hints
+      // on the free shortcut path and refund this rejected model response.
       if (question && !submitted) {
         const response = [answer.conclusion, ...answer.points, answer.example].join(" ").normalize("NFKC").toLowerCase();
         if (question.blanks.some((blank) => [blank.answer, ...blank.aliases].some((value) => response.includes(value.normalize("NFKC").toLowerCase()))))
-          answer = { conclusion: question.hint, points: [], example: "" };
+          throw studyError("老师的回答透露了未提交题目的答案，积分已退还；可先查看题目提示。",503,"STUDY_TEACHER_UNSAFE");
       }
-      content.finishTeacher(reservation.row, answer);
+        return commitPointsResult(store,userId,answer,()=>content.finishTeacher(reservation.row, answer));
+      });
       return { answer, cached: false };
     } catch (error) {
       content.finishTeacher(reservation.row, null, redact(error.message).slice(0, 300));
@@ -433,5 +445,5 @@ export function registerStudyRoutes({ route, store, provider, requireAdmin, requ
     content.resolveFeedback(feedback.id, requestUserId(req), { ...feedback.attempt_data.result, ...summarizeStudyGrade(results) }, body.note);
     return { saved: true };
   });
-  return { content, stop: () => { stopped = true; clearInterval(timer); }, settle: () => Promise.allSettled([...active]) };
+  return { content, teacher, stop: () => { stopped = true; clearInterval(timer); }, settle: () => Promise.allSettled([...active]) };
 }

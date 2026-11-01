@@ -33,42 +33,40 @@ export function AnnouncementModal({ onClose }) {
           <div className="announcement-highlight">
             <strong>考匠 App v{MOBILE_VERSION} 已发布</strong>
             <span>
-              手机与网页同时作答时，可以处理答案冲突；网页补齐断网恢复与保存重试。
+              启动时先阅读公告，个人资料随账号保存，定位教程新增求助作者。
             </span>
           </div>
           <ul className="announcement-list">
             <li>
               <span>01</span>
               <div>
-                <strong>考试答案同步与冲突处理</strong>
+                <strong>进入 App 先看公告</strong>
                 <p>
-                  保存与交卷前检查答案版本。其他设备更新同一场考试时，可选择使用已同步答案或合并本机作答。
+                  未登录与已有账号都先显示当前启用的公告，关闭后继续。管理员可随时调整公告，无需重新安装。
                 </p>
               </div>
             </li>
             <li>
               <span>02</span>
               <div>
-                <strong>多人使用 AI 更顺畅</strong>
+                <strong>完善名字和头像</strong>
                 <p>
-                  不同账号可以同时执行 AI
-                  任务，任务超时或生成失败会按原有规则返还额度。
+                  所有 App 账号都需完善个人资料，资料随账号保存到服务器。网页管理员用户列表显示头像与昵称。
                 </p>
               </div>
             </li>
             <li>
               <span>03</span>
               <div>
-                <strong>登录保护与网页加载优化</strong>
+                <strong>教程内可求助作者</strong>
                 <p>
-                  登录注册增加频率保护，电脑网页按需加载各个学习页面，并提供加载状态与失败重试提示。
+                  虚拟定位使用教程右上角“求助作者”显示微信好友二维码，截图后可在微信扫一扫中从相册识别。
                 </p>
               </div>
             </li>
           </ul>
           <p className="announcement-footnote">
-            Android v{MOBILE_VERSION} 沿用现有正式签名，正式签名的 v0.3.3 至
-            v0.3.8 用户可覆盖更新。旧测试签名版仍需卸载后安装。
+            Android v{MOBILE_VERSION} 沿用现有正式签名，现有正式版本可覆盖更新。旧测试签名版仍需卸载后安装。
           </p>
         </div>
         <footer className="announcement-footer">

@@ -53,16 +53,17 @@ export function createAuthRateLimiter(db, options = {}) {
       lastCleanup = timestamp;
     }
     const registering = /\/register\/?$/i.test(req.originalUrl.split("?")[0]);
+    const action = registering ? "register" : req.originalUrl.split("?")[0].match(/\/(email-code|reset-password|change-password|bind-email)\/?$/i)?.[1].toLowerCase() || "login";
     const address = req.ip || req.socket.remoteAddress || "unknown";
     let retryAfter = consume(
-      `${registering ? "register" : "login"}:ip:${address}`,
+      `${action}:ip:${address}`,
       registering ? registerLimit : ipLimit,
       timestamp,
     );
     if (!registering && typeof req.body?.username === "string") {
       const username = req.body.username.trim().slice(0, 40).toLowerCase();
       retryAfter ||= consume(
-        `login:account:${username}`,
+        `${action}:account:${username}`,
         accountLimit,
         timestamp,
       );

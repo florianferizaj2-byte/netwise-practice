@@ -66,6 +66,12 @@ export function useMembershipAccount(api, userId, page) {
     previous.current = { userId, page };
   }, [page, userId, reload]);
   useEffect(() => {
+    if(!userId)return;
+    const refresh=()=>void reload();
+    window.addEventListener('kaojiang-points-changed',refresh);
+    return()=>window.removeEventListener('kaojiang-points-changed',refresh);
+  },[userId,reload]);
+  useEffect(() => {
     if (!userId || !isMemberPage(page)) return;
     const refreshVisible = () => {
       if (

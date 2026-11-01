@@ -143,6 +143,32 @@
       "path": "questions/shared.json"
     },
     {
+      "id": "syllabus-supplement",
+      "name": "四川专升本计算机基础章节强化练习",
+      "description": "按考试要求 7 个模块、22 个知识点分章节编写的原创仿真客观题，按大纲权重配比，覆盖计算机基础、软硬件、Office、网络与信息安全、算法、数据库与新技术",
+      "source": "sichuan_upgrading_supplement",
+      "category": "syllabus_practice",
+      "verification": "original_from_official_scope",
+      "sourceUrl": "https://zs.gingkoc.edu.cn/ueditor/php/upload/file/20240329/1711693941663940.pdf",
+      "path": "questions/supplement.json",
+      "defaults": {
+        "sourceVerification": "本站原创仿真练习：依据四川专升本计算机基础考试要求的知识点编写，非官方历年真题；题量与配比参照大纲模块权重，不代表官方考试分值比例"
+      }
+    },
+    {
+      "id": "syllabus-supplement-2610",
+      "name": "四川专升本计算机基础考点补强（2026-10）",
+      "description": "针对考试要求明确列出但原题库覆盖薄弱的考点补充的原创仿真题：Excel 常用函数与地址引用、Word 查找替换与图文混排、流程图跟踪与复杂度、IP 子网计算、关系运算与 E-R、云服务模式等；另补充简答题，用于覆盖客观题之外的文字作答训练",
+      "source": "sichuan_upgrading_supplement_2610",
+      "category": "syllabus_practice",
+      "verification": "original_from_official_scope",
+      "sourceUrl": "https://zs.gingkoc.edu.cn/ueditor/php/upload/file/20240329/1711693941663940.pdf",
+      "path": "questions/supplement-2026-10",
+      "defaults": {
+        "sourceVerification": "本站原创仿真练习：依据四川专升本计算机基础考试要求逐条编写，非官方历年真题；简答题采用作答后自评的方式，不能替代人工阅卷"
+      }
+    },
+    {
       "id": "user-provided-2011-xichang",
       "name": "西昌学院 2011 年专升本真题（用户提供）",
       "description": "用户提供的 2011 年西昌学院专升本《大学计算机基础》A 卷；原卷 90 题，其中 29 题在 PDF 中缺失（单选 29-50、判断 1-7），已按可读的 61 题入库",

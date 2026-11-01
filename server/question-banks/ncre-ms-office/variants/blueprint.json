@@ -1,0 +1,3028 @@
+{
+  "schemaVersion": 1,
+  "certificateId": "ncre-ms-office",
+  "purpose": "变式题生成蓝图：从每个知识点的种子题派生新题，保持考点不变、情境与设问变化",
+  "examBlueprint": {
+    "durationMinutes": 120,
+    "totalScore": 100,
+    "software": "Microsoft Office 2016（Windows 7 环境）",
+    "items": [
+      {
+        "type": "single_choice",
+        "score": 20,
+        "note": "含公共基础知识 10 分"
+      },
+      {
+        "type": "word_operation",
+        "score": 30,
+        "note": "对应题库中的 short_answer 操作题"
+      },
+      {
+        "type": "excel_operation",
+        "score": 30,
+        "note": "对应题库中的 short_answer 操作题"
+      },
+      {
+        "type": "powerpoint_operation",
+        "score": 20,
+        "note": "对应题库中的 short_answer 操作题"
+      }
+    ]
+  },
+  "generationContract": {
+    "mustKeep": [
+      "chapter / knowledgeSection / knowledgePoint 必须与种子题完全一致",
+      "正确项唯一，且四个选项互不重复",
+      "解析必须说明判断依据，并指出主要干扰项错在哪里",
+      "题干自包含，不出现“如下图”“见图”等缺图表述"
+    ],
+    "mustChange": [
+      "至少改变两个变体轴（见模块 axes），不能只替换数字或同义词",
+      "设问角度要与所引用的种子题不同",
+      "情境中的软件、对象、数据规模或交付场景应发生变化"
+    ],
+    "difficultyRule": [
+      "easy：单一知识点直接回忆或识别，干扰项差异明显",
+      "medium：需要两步推理或区分相近功能",
+      "hard：涉及作用范围、边界条件或多个功能的组合判断"
+    ],
+    "answerPositionRule": "同一知识点连续生成的 4 道题，正确项应分布在 A/B/C/D 各一次",
+    "rejectIf": [
+      "与题库中任一题的题干二元相似度 ≥ 0.9",
+      "只改了数字、专有名词或语序，考点与推理路径未变",
+      "选项中出现“以上都对/以上均错误”等位置依赖表述"
+    ]
+  },
+  "modules": [
+    {
+      "name": "公共基础知识",
+      "axes": [
+        {
+          "name": "设问对象",
+          "values": [
+            "定义",
+            "性质",
+            "复杂度",
+            "运算过程",
+            "适用条件"
+          ]
+        },
+        {
+          "name": "数据结构或模型",
+          "values": [
+            "线性表",
+            "栈",
+            "队列",
+            "二叉树",
+            "关系模型",
+            "E-R 模型"
+          ]
+        },
+        {
+          "name": "规模参数",
+          "values": [
+            "n 取小值",
+            "n 取 2 的幂",
+            "n 取非 2 的幂",
+            "最坏情况",
+            "平均情况"
+          ]
+        },
+        {
+          "name": "表述方向",
+          "values": [
+            "正面选择正确项",
+            "选择错误项",
+            "判断说法正误",
+            "补全结论"
+          ]
+        }
+      ],
+      "leaves": [
+        {
+          "code": "pub-algo-basic",
+          "chapter": "公共基础知识",
+          "section": "数据结构与算法",
+          "point": "算法基本概念",
+          "scope": "算法的定义、特征与基本要素；算法与程序的区别；算法的描述方法",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q039",
+            "ncre-office-user-docx-q040",
+            "ncre-office-user-docx-q041",
+            "ncre-office-pub-algo-basic-01",
+            "ncre-office-pub-algo-basic-02",
+            "ncre-office-pub-algo-basic-03",
+            "ncre-office-pub-algo-basic-04",
+            "ncre-office-pub-algo-basic-05"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 5,
+            "hard": 1
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把算法等同于程序",
+              "distractor": "算法就是程序，二者没有区别"
+            },
+            {
+              "misconception": "认为算法必须有输入",
+              "distractor": "算法必须同时有输入和输出"
+            }
+          ],
+          "scenarios": [
+            "给出一段伪代码判断是否满足算法特征",
+            "比较两种解题步骤的描述方式"
+          ]
+        },
+        {
+          "code": "pub-algo-complexity",
+          "chapter": "公共基础知识",
+          "section": "数据结构与算法",
+          "point": "算法复杂度",
+          "scope": "时间复杂度与空间复杂度的含义、量级表示与常见复杂度大小比较",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q001",
+            "ncre-office-user-docx-q002",
+            "ncre-office-user-docx-q003",
+            "ncre-office-pub-algo-complexity-01",
+            "ncre-office-pub-algo-complexity-02",
+            "ncre-office-pub-algo-complexity-03",
+            "ncre-office-pub-algo-complexity-04",
+            "ncre-office-pub-algo-complexity-05"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 5,
+            "hard": 1
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把时间复杂度当成语句条数",
+              "distractor": "时间复杂度由程序语句条数决定"
+            },
+            {
+              "misconception": "把空间复杂度当成占用空间大小",
+              "distractor": "空间复杂度指算法运行时占用的全部存储空间"
+            }
+          ],
+          "scenarios": [
+            "给出复杂度表达式反推规模翻倍后的运算量",
+            "比较两个算法的量级"
+          ]
+        },
+        {
+          "code": "pub-ds-basic",
+          "chapter": "公共基础知识",
+          "section": "数据结构与算法",
+          "point": "数据结构基本概念",
+          "scope": "数据、数据元素与数据项；逻辑结构与存储结构；线性结构与非线性结构",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q004",
+            "ncre-office-user-docx-q005",
+            "ncre-office-user-docx-q006",
+            "ncre-office-pub-ds-basic-01",
+            "ncre-office-pub-ds-basic-02",
+            "ncre-office-pub-ds-basic-03",
+            "ncre-office-pub-ds-basic-04",
+            "ncre-office-pub-ds-basic-05"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 5,
+            "hard": 1
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "混淆逻辑结构与存储结构",
+              "distractor": "数据的逻辑结构与存储结构是一一对应的"
+            },
+            {
+              "misconception": "把树形结构当成线性结构",
+              "distractor": "树形结构属于线性结构"
+            }
+          ],
+          "scenarios": [
+            "给出数据元素关系判断属于哪种结构",
+            "判断某存储方式能否表示给定逻辑关系"
+          ]
+        },
+        {
+          "code": "pub-linear-list",
+          "chapter": "公共基础知识",
+          "section": "数据结构与算法",
+          "point": "线性表",
+          "scope": "顺序存储与链式存储的差异、插入删除的元素移动、单链表与双向链表、循环链表",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q026",
+            "ncre-office-user-docx-q027",
+            "ncre-office-user-docx-q028",
+            "ncre-office-user-docx-q034",
+            "ncre-office-pub-linear-list-01",
+            "ncre-office-pub-linear-list-02",
+            "ncre-office-pub-linear-list-03",
+            "ncre-office-pub-linear-list-04"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 5,
+            "hard": 1
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "认为链表也能随机存取",
+              "distractor": "链表可以随机访问任一元素"
+            },
+            {
+              "misconception": "算错插入删除的移动次数",
+              "distractor": "插入第 i 个元素需移动 n-i 个元素"
+            }
+          ],
+          "scenarios": [
+            "计算顺序表插入删除的元素移动次数",
+            "比较顺序表与链表的适用场景"
+          ]
+        },
+        {
+          "code": "pub-stack-queue",
+          "chapter": "公共基础知识",
+          "section": "数据结构与算法",
+          "point": "栈和队列",
+          "scope": "栈与队列的定义与特点、顺序与链式存储、循环队列的队满队空判断",
+          "seedCount": 9,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q007",
+            "ncre-office-user-docx-q008",
+            "ncre-office-user-docx-q009",
+            "ncre-office-user-docx-q010",
+            "ncre-office-user-docx-q011",
+            "ncre-office-user-docx-q012",
+            "ncre-office-user-docx-q013",
+            "ncre-office-user-docx-q014",
+            "ncre-office-user-docx-q015"
+          ],
+          "difficultyMix": {
+            "easy": 0,
+            "medium": 9,
+            "hard": 0
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把栈当成先进先出",
+              "distractor": "栈按先进先出组织数据"
+            },
+            {
+              "misconception": "循环队列只用队头指针判断",
+              "distractor": "循环队列只需队头指针即可反映元素变化"
+            }
+          ],
+          "scenarios": [
+            "给出入栈序列判断合法出栈序列",
+            "计算循环队列的元素个数"
+          ]
+        },
+        {
+          "code": "pub-tree",
+          "chapter": "公共基础知识",
+          "section": "数据结构与算法",
+          "point": "树和二叉树",
+          "scope": "树的基本术语、二叉树性质与遍历、满二叉树与完全二叉树、结点数计算",
+          "seedCount": 10,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q016",
+            "ncre-office-user-docx-q017",
+            "ncre-office-user-docx-q018",
+            "ncre-office-user-docx-q019",
+            "ncre-office-user-docx-q020",
+            "ncre-office-user-docx-q021",
+            "ncre-office-user-docx-q022",
+            "ncre-office-user-docx-q023",
+            "ncre-office-user-docx-q024",
+            "ncre-office-user-docx-q025"
+          ],
+          "difficultyMix": {
+            "easy": 0,
+            "medium": 10,
+            "hard": 0
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "记错二叉树叶子与度为 2 结点的关系",
+              "distractor": "叶子结点总是比度为 2 的结点少一个"
+            },
+            {
+              "misconception": "把满二叉树与完全二叉树混为一谈",
+              "distractor": "完全二叉树就是满二叉树"
+            }
+          ],
+          "scenarios": [
+            "由叶子数与度为 1 的结点数求总结点数",
+            "给出两种遍历序列还原第三种"
+          ]
+        },
+        {
+          "code": "pub-search",
+          "chapter": "公共基础知识",
+          "section": "数据结构与算法",
+          "point": "查找技术",
+          "scope": "顺序查找与二分查找的过程、适用条件与平均查找长度比较",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q029",
+            "ncre-office-user-docx-q035",
+            "ncre-office-pub-search-01",
+            "ncre-office-pub-search-02",
+            "ncre-office-pub-search-03",
+            "ncre-office-pub-search-04",
+            "ncre-office-pub-search-05",
+            "ncre-office-pub-search-06"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 4,
+            "hard": 2
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "认为链表可以直接二分",
+              "distractor": "有序单链表可以采用二分查找"
+            },
+            {
+              "misconception": "算错二分查找的比较次数",
+              "distractor": "长度为 1000 的有序表二分查找最多比较 9 次"
+            }
+          ],
+          "scenarios": [
+            "计算给定长度的二分查找最坏比较次数",
+            "比较顺序查找与二分查找的适用条件"
+          ]
+        },
+        {
+          "code": "pub-sort",
+          "chapter": "公共基础知识",
+          "section": "数据结构与算法",
+          "point": "排序技术",
+          "scope": "冒泡、快速、简单插入、希尔、选择、堆排序的过程、稳定性与时间复杂度",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q030",
+            "ncre-office-user-docx-q031",
+            "ncre-office-user-docx-q032",
+            "ncre-office-user-docx-q033",
+            "ncre-office-pub-sort-01",
+            "ncre-office-pub-sort-02",
+            "ncre-office-pub-sort-03",
+            "ncre-office-pub-sort-04"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 6,
+            "hard": 0
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "记错排序方法的稳定性",
+              "distractor": "快速排序是稳定排序"
+            },
+            {
+              "misconception": "把平均复杂度当成最坏复杂度",
+              "distractor": "快速排序在最坏情况下仍为 O(nlog₂n)"
+            }
+          ],
+          "scenarios": [
+            "判断给定排序方法是否稳定",
+            "比较不同排序方法的最坏比较次数"
+          ]
+        },
+        {
+          "code": "pub-prog-style",
+          "chapter": "公共基础知识",
+          "section": "程序设计基础",
+          "point": "程序设计方法与风格",
+          "scope": "程序设计风格、源程序文档化、数据说明与语句结构规范",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q042",
+            "ncre-office-pub-prog-style-01",
+            "ncre-office-pub-prog-style-02",
+            "ncre-office-pub-prog-style-03",
+            "ncre-office-pub-prog-style-04",
+            "ncre-office-pub-prog-style-05",
+            "ncre-office-pub-prog-style-06",
+            "ncre-office-pub-prog-style-07"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 4,
+            "hard": 2
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "认为注释越多越好",
+              "distractor": "注释应逐行解释代码的字面含义"
+            },
+            {
+              "misconception": "忽视命名的作用",
+              "distractor": "变量名越短越高效"
+            }
+          ],
+          "scenarios": [
+            "判断某种写法是否符合良好风格",
+            "为一段代码指出最应改进的风格问题"
+          ]
+        },
+        {
+          "code": "pub-structured",
+          "chapter": "公共基础知识",
+          "section": "程序设计基础",
+          "point": "结构化程序设计",
+          "scope": "结构化程序设计的三种基本结构、自顶向下逐步求精、模块化原则",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q036",
+            "ncre-office-user-docx-q037",
+            "ncre-office-user-docx-q038",
+            "ncre-office-user-docx-q047",
+            "ncre-office-pub-structured-01",
+            "ncre-office-pub-structured-02",
+            "ncre-office-pub-structured-03",
+            "ncre-office-pub-structured-04"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 5,
+            "hard": 1
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把结构化等同于模块化",
+              "distractor": "结构化程序设计就是模块化设计"
+            },
+            {
+              "misconception": "认为可以随意使用 GOTO",
+              "distractor": "为提高效率应多用无条件转移语句"
+            }
+          ],
+          "scenarios": [
+            "判断某流程图是否符合结构化要求",
+            "说明逐步求精的实施顺序"
+          ]
+        },
+        {
+          "code": "pub-oop",
+          "chapter": "公共基础知识",
+          "section": "程序设计基础",
+          "point": "面向对象的程序设计",
+          "scope": "对象与类的概念、封装、继承、多态、消息传递",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q043",
+            "ncre-office-user-docx-q044",
+            "ncre-office-user-docx-q045",
+            "ncre-office-user-docx-q046",
+            "ncre-office-pub-oop-01",
+            "ncre-office-pub-oop-02",
+            "ncre-office-pub-oop-03",
+            "ncre-office-pub-oop-04"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 6,
+            "hard": 0
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把类当成对象",
+              "distractor": "类是对象的实例"
+            },
+            {
+              "misconception": "混淆继承与多态",
+              "distractor": "多态是指子类自动拥有父类的属性和方法"
+            }
+          ],
+          "scenarios": [
+            "给出场景判断应使用哪种面向对象特性",
+            "辨析封装、继承、多态的区别"
+          ]
+        },
+        {
+          "code": "pub-se-basic",
+          "chapter": "公共基础知识",
+          "section": "软件工程基础",
+          "point": "软件工程基本概念",
+          "scope": "软件危机、软件工程的目标与原则、软件生命周期各阶段",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q060",
+            "ncre-office-user-docx-q061",
+            "ncre-office-user-docx-q062",
+            "ncre-office-pub-se-basic-01",
+            "ncre-office-pub-se-basic-02",
+            "ncre-office-pub-se-basic-03",
+            "ncre-office-pub-se-basic-04",
+            "ncre-office-pub-se-basic-05"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 5,
+            "hard": 1
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把维护阶段排除在生命周期外",
+              "distractor": "维护不属于软件生命周期的阶段"
+            },
+            {
+              "misconception": "混淆开发阶段与定义阶段的任务",
+              "distractor": "需求分析属于开发阶段的任务"
+            }
+          ],
+          "scenarios": [
+            "判断某活动属于生命周期的哪个阶段",
+            "说明软件危机的主要表现"
+          ]
+        },
+        {
+          "code": "pub-se-analysis",
+          "chapter": "公共基础知识",
+          "section": "软件工程基础",
+          "point": "结构化分析方法",
+          "scope": "需求分析的任务、数据流图、数据字典、结构化分析步骤",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q052",
+            "ncre-office-user-docx-q053",
+            "ncre-office-user-docx-q055",
+            "ncre-office-pub-se-analysis-01",
+            "ncre-office-pub-se-analysis-02",
+            "ncre-office-pub-se-analysis-03",
+            "ncre-office-pub-se-analysis-04",
+            "ncre-office-pub-se-analysis-05"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 4,
+            "hard": 2
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把结构图当成分析工具",
+              "distractor": "结构图是结构化分析阶段的主要工具"
+            },
+            {
+              "misconception": "混淆数据流图与程序流程图",
+              "distractor": "数据流图描述的是程序的执行顺序"
+            }
+          ],
+          "scenarios": [
+            "给出图元判断其含义",
+            "判断某文档属于哪个阶段的产物"
+          ]
+        },
+        {
+          "code": "pub-se-design",
+          "chapter": "公共基础知识",
+          "section": "软件工程基础",
+          "point": "结构化设计方法",
+          "scope": "概要设计与详细设计、模块独立性、内聚与耦合、结构图、PAD 与 N-S 图",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q056",
+            "ncre-office-user-docx-q057",
+            "ncre-office-user-docx-q058",
+            "ncre-office-user-docx-q059",
+            "ncre-office-pub-se-design-01",
+            "ncre-office-pub-se-design-02",
+            "ncre-office-pub-se-design-03",
+            "ncre-office-pub-se-design-04"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 6,
+            "hard": 0
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把高内聚低耦合记反",
+              "distractor": "模块的内聚越低、耦合越高，独立性越强"
+            },
+            {
+              "misconception": "混淆概要设计与详细设计的工具",
+              "distractor": "PAD 图用于概要设计"
+            }
+          ],
+          "scenarios": [
+            "判断给定设计属于概要设计还是详细设计",
+            "比较两个模块设计的独立性"
+          ]
+        },
+        {
+          "code": "pub-se-test",
+          "chapter": "公共基础知识",
+          "section": "软件工程基础",
+          "point": "软件测试",
+          "scope": "测试的目的与原则、白盒测试与黑盒测试方法、测试用例设计",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q048",
+            "ncre-office-user-docx-q049",
+            "ncre-office-user-docx-q050",
+            "ncre-office-user-docx-q051",
+            "ncre-office-pub-se-test-01",
+            "ncre-office-pub-se-test-02",
+            "ncre-office-pub-se-test-03",
+            "ncre-office-pub-se-test-04"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 5,
+            "hard": 1
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把测试目的说成改正错误",
+              "distractor": "软件测试的目的是发现并改正错误"
+            },
+            {
+              "misconception": "把黑盒方法当成白盒方法",
+              "distractor": "边界值分析属于白盒测试"
+            }
+          ],
+          "scenarios": [
+            "判断给定测试方法属于白盒还是黑盒",
+            "给出场景选择合适的测试方法"
+          ]
+        },
+        {
+          "code": "pub-se-debug",
+          "chapter": "公共基础知识",
+          "section": "软件工程基础",
+          "point": "程序的调试",
+          "scope": "调试与测试的区别、调试的步骤与常用方法",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q063",
+            "ncre-office-pub-se-debug-01",
+            "ncre-office-pub-se-debug-02",
+            "ncre-office-pub-se-debug-03",
+            "ncre-office-pub-se-debug-04",
+            "ncre-office-pub-se-debug-05",
+            "ncre-office-pub-se-debug-06",
+            "ncre-office-pub-se-debug-07"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 4,
+            "hard": 2
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把调试与测试混为一谈",
+              "distractor": "调试与测试的目的完全相同"
+            },
+            {
+              "misconception": "认为测试能证明程序无错",
+              "distractor": "通过测试可以证明程序没有错误"
+            }
+          ],
+          "scenarios": [
+            "判断某活动属于测试还是调试",
+            "选择适合给定情形的调试方法"
+          ]
+        },
+        {
+          "code": "pub-db-basic",
+          "chapter": "公共基础知识",
+          "section": "数据库设计基础",
+          "point": "数据库系统的基本概念",
+          "scope": "数据库、数据库管理系统、数据库系统、三级模式与两级映像、数据独立性",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q069",
+            "ncre-office-user-docx-q072",
+            "ncre-office-user-docx-q073",
+            "ncre-office-user-docx-q074",
+            "ncre-office-user-docx-q080",
+            "ncre-office-user-docx-q081",
+            "ncre-office-pub-db-basic-01",
+            "ncre-office-pub-db-basic-02"
+          ],
+          "difficultyMix": {
+            "easy": 1,
+            "medium": 7,
+            "hard": 0
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把 DBMS 与数据库混为一谈",
+              "distractor": "数据库管理系统就是数据库"
+            },
+            {
+              "misconception": "记错三级模式的对应关系",
+              "distractor": "概念模式描述数据的物理存储结构"
+            }
+          ],
+          "scenarios": [
+            "判断某模式或映像的作用",
+            "说明数据独立性的来源"
+          ]
+        },
+        {
+          "code": "pub-db-model",
+          "chapter": "公共基础知识",
+          "section": "数据库设计基础",
+          "point": "数据模型",
+          "scope": "层次模型、网状模型、关系模型、E-R 模型与 E-R 图转换",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q064",
+            "ncre-office-user-docx-q066",
+            "ncre-office-user-docx-q067",
+            "ncre-office-user-docx-q068",
+            "ncre-office-user-docx-q078",
+            "ncre-office-pub-db-model-01",
+            "ncre-office-pub-db-model-02",
+            "ncre-office-pub-db-model-03"
+          ],
+          "difficultyMix": {
+            "easy": 1,
+            "medium": 7,
+            "hard": 0
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "记错 E-R 图图元",
+              "distractor": "E-R 图中用椭圆表示实体"
+            },
+            {
+              "misconception": "把关系模型当成概念模型",
+              "distractor": "关系模型是概念数据模型"
+            }
+          ],
+          "scenarios": [
+            "给出 E-R 图判断实体与联系的类型",
+            "判断某模型属于哪个层次"
+          ]
+        },
+        {
+          "code": "pub-db-algebra",
+          "chapter": "公共基础知识",
+          "section": "数据库设计基础",
+          "point": "关系代数",
+          "scope": "关系的并、交、差、笛卡儿积、选择、投影、连接运算",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q075",
+            "ncre-office-user-docx-q076",
+            "ncre-office-user-docx-q077",
+            "ncre-office-pub-db-algebra-01",
+            "ncre-office-pub-db-algebra-02",
+            "ncre-office-pub-db-algebra-03",
+            "ncre-office-pub-db-algebra-04",
+            "ncre-office-pub-db-algebra-05"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 5,
+            "hard": 1
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "混淆选择与投影",
+              "distractor": "投影是按条件筛选元组"
+            },
+            {
+              "misconception": "算错笛卡儿积的元组数",
+              "distractor": "R 与 S 的笛卡儿积元组数为 m+n"
+            }
+          ],
+          "scenarios": [
+            "给出关系表计算运算结果",
+            "判断某运算属于传统集合运算还是专门关系运算"
+          ]
+        },
+        {
+          "code": "pub-db-design",
+          "chapter": "公共基础知识",
+          "section": "数据库设计基础",
+          "point": "数据库设计与管理",
+          "scope": "数据库设计的四个阶段、函数依赖与 1NF/2NF/3NF、索引与视图",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q065",
+            "ncre-office-user-docx-q070",
+            "ncre-office-user-docx-q071",
+            "ncre-office-user-docx-q079",
+            "ncre-office-user-docx-q082",
+            "ncre-office-pub-db-design-01",
+            "ncre-office-pub-db-design-02",
+            "ncre-office-pub-db-design-03"
+          ],
+          "difficultyMix": {
+            "easy": 1,
+            "medium": 7,
+            "hard": 0
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把 2NF 与 3NF 的条件记反",
+              "distractor": "第三范式消除了非主属性对主键的部分函数依赖"
+            },
+            {
+              "misconception": "认为范式越高越好",
+              "distractor": "范式级别越高，数据库性能一定越好"
+            }
+          ],
+          "scenarios": [
+            "判断给定关系模式最高属于第几范式",
+            "说明数据库设计的阶段顺序"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Office 应用基础",
+      "axes": [
+        {
+          "name": "程序",
+          "values": [
+            "Word",
+            "Excel",
+            "PowerPoint",
+            "三者的组合"
+          ]
+        },
+        {
+          "name": "入口",
+          "values": [
+            "功能区",
+            "右键菜单",
+            "后台视图",
+            "对话框",
+            "快捷键"
+          ]
+        },
+        {
+          "name": "文件形态",
+          "values": [
+            "当前格式",
+            "旧版格式",
+            "PDF/XPS",
+            "模板",
+            "启用宏的格式"
+          ]
+        },
+        {
+          "name": "协作场景",
+          "values": [
+            "单人编辑",
+            "多人共享",
+            "跨设备分发",
+            "外部交付"
+          ]
+        }
+      ],
+      "leaves": [
+        {
+          "code": "office-ui",
+          "chapter": "Office 应用基础",
+          "section": "界面与功能设置",
+          "point": "界面使用与功能设置",
+          "scope": "功能区与选项卡、快速访问工具栏、后台视图、Office 选项与自定义",
+          "seedCount": 12,
+          "seedQuestionIds": [
+            "ncre-office-basics-003",
+            "ncre-office-basics-004",
+            "ncre-office-basics-005",
+            "ncre-office-basics-006",
+            "ncre-office-basics-008",
+            "ncre-office-basics-010",
+            "ncre-office-basics-011",
+            "ncre-office-basics-012",
+            "ncre-office-office-ui-01",
+            "ncre-office-office-ui-02",
+            "ncre-office-office-ui-03",
+            "ncre-office-office-ui-04"
+          ],
+          "difficultyMix": {
+            "easy": 6,
+            "medium": 5,
+            "hard": 1
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把快速访问工具栏与功能区混淆",
+              "distractor": "快速访问工具栏位于功能区最右侧"
+            },
+            {
+              "misconception": "认为功能区不能自定义",
+              "distractor": "功能区的选项卡和命令组不可增删"
+            }
+          ],
+          "scenarios": [
+            "给出需求选择最合适的命令入口",
+            "说明某界面元素的作用"
+          ]
+        },
+        {
+          "code": "office-format",
+          "chapter": "Office 应用基础",
+          "section": "文件与信息共享",
+          "point": "文件格式与兼容性",
+          "scope": "docx/xlsx/pptx 与旧版格式、PDF 与 XPS 输出、兼容模式检查",
+          "seedCount": 12,
+          "seedQuestionIds": [
+            "ncre-office-office-format-01",
+            "ncre-office-office-format-02",
+            "ncre-office-office-format-03",
+            "ncre-office-office-format-04",
+            "ncre-office-office-format-05",
+            "ncre-office-office-format-06",
+            "ncre-office-office-format-07",
+            "ncre-office-office-format-08",
+            "ncre-office-office-format-09",
+            "ncre-office-office-format-10",
+            "ncre-office-office-format-11",
+            "ncre-office-office-format-12"
+          ],
+          "difficultyMix": {
+            "easy": 3,
+            "medium": 6,
+            "hard": 3
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "认为 .docx 能保留宏",
+              "distractor": "把含宏文档保存为 .docx 后宏仍然可用"
+            },
+            {
+              "misconception": "把兼容模式当成只读",
+              "distractor": "兼容模式表示文档被设置为只读"
+            }
+          ],
+          "scenarios": [
+            "给出分发场景选择合适格式",
+            "判断格式转换后的影响"
+          ]
+        },
+        {
+          "code": "office-share",
+          "chapter": "Office 应用基础",
+          "section": "文件与信息共享",
+          "point": "各模块之间信息共享",
+          "scope": "选择性粘贴、对象链接与嵌入、跨应用引用与数据更新",
+          "seedCount": 12,
+          "seedQuestionIds": [
+            "ncre-office-basics-001",
+            "ncre-office-basics-002",
+            "ncre-office-integrated-001",
+            "ncre-office-basics-007",
+            "ncre-office-basics-009",
+            "ncre-office-basics-013",
+            "ncre-office-basics-014",
+            "ncre-office-basics-015",
+            "ncre-office-basics-016",
+            "ncre-office-basics-017",
+            "ncre-office-basics-018",
+            "ncre-office-basics-019"
+          ],
+          "difficultyMix": {
+            "easy": 6,
+            "medium": 6,
+            "hard": 0
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把嵌入与链接混为一谈",
+              "distractor": "链接对象会把数据完整复制到目标文档中"
+            },
+            {
+              "misconception": "认为选择性粘贴只能粘贴文本",
+              "distractor": "选择性粘贴只能粘贴纯文本"
+            }
+          ],
+          "scenarios": [
+            "给出协作场景选择粘贴方式",
+            "判断源文件移动后链接对象的表现"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Word 文档处理",
+      "axes": [
+        {
+          "name": "触发入口",
+          "values": [
+            "功能区选项卡",
+            "右键菜单",
+            "对话框启动器",
+            "快捷键",
+            "状态栏"
+          ]
+        },
+        {
+          "name": "作用范围",
+          "values": [
+            "字符",
+            "段落",
+            "节",
+            "整篇文档",
+            "表格单元格"
+          ]
+        },
+        {
+          "name": "文档形态",
+          "values": [
+            "短文档",
+            "多节长文档",
+            "含表格文档",
+            "图文混排文档",
+            "邮件合并主文档"
+          ]
+        },
+        {
+          "name": "设问方式",
+          "values": [
+            "最优操作方法是",
+            "该设置的作用是",
+            "操作后会出现什么结果",
+            "不能实现该效果的是"
+          ]
+        }
+      ],
+      "leaves": [
+        {
+          "code": "word-basic",
+          "chapter": "Word 文档处理",
+          "section": "文档基础",
+          "point": "文档创建编辑保存打印保护",
+          "scope": "新建打开与保存另存、录入与编辑、查找替换、打印设置、文档保护",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q089",
+            "ncre-office-user-docx-q090",
+            "ncre-office-user-docx-q092",
+            "ncre-office-user-docx-q093",
+            "ncre-office-user-docx-q096",
+            "ncre-office-user-docx-q106",
+            "ncre-office-user-docx-q108",
+            "ncre-office-word-basic-01"
+          ],
+          "difficultyMix": {
+            "easy": 0,
+            "medium": 7,
+            "hard": 1
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "认为自动保存等于自动备份",
+              "distractor": "开启自动恢复后无需手动保存"
+            },
+            {
+              "misconception": "混淆只读推荐与加密",
+              "distractor": "标记为最终状态可以防止他人修改内容"
+            }
+          ],
+          "scenarios": [
+            "给出文档保护需求选择合适手段",
+            "判断某打印设置的效果"
+          ]
+        },
+        {
+          "code": "word-view",
+          "chapter": "Word 文档处理",
+          "section": "文档基础",
+          "point": "多窗口多文档与视图",
+          "scope": "页面/阅读/大纲/草稿视图、拆分与并排比较、导航窗格、显示比例",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q088",
+            "ncre-office-word-view-01",
+            "ncre-office-word-view-02",
+            "ncre-office-word-view-03",
+            "ncre-office-word-view-04",
+            "ncre-office-word-view-05",
+            "ncre-office-word-view-06",
+            "ncre-office-word-view-07"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 4,
+            "hard": 2
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把阅读视图当成放映",
+              "distractor": "阅读视图会全屏显示且不能编辑"
+            },
+            {
+              "misconception": "认为拆分窗口会分成两个文件",
+              "distractor": "拆分窗口会把文档拆成两个独立文件"
+            }
+          ],
+          "scenarios": [
+            "给出查看需求选择合适视图",
+            "说明某视图的显示特点"
+          ]
+        },
+        {
+          "code": "word-font",
+          "chapter": "Word 文档处理",
+          "section": "文字与段落",
+          "point": "字体与段落",
+          "scope": "字体与字符间距、段落对齐缩进、行距段间距、制表位、项目符号与编号",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q102",
+            "ncre-office-user-docx-q104",
+            "ncre-office-word-font-01",
+            "ncre-office-word-font-02",
+            "ncre-office-word-font-03",
+            "ncre-office-word-font-04",
+            "ncre-office-word-font-05",
+            "ncre-office-word-font-06"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 5,
+            "hard": 1
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把首行缩进与左侧缩进混淆",
+              "distractor": "设置左侧缩进 2 字符可实现首行缩进"
+            },
+            {
+              "misconception": "把段前间距当成行距",
+              "distractor": "段前间距用于控制行与行之间的距离"
+            }
+          ],
+          "scenarios": [
+            "给出排版要求选择正确设置项",
+            "判断某段落设置的实际效果"
+          ]
+        },
+        {
+          "code": "word-style",
+          "chapter": "Word 文档处理",
+          "section": "文字与段落",
+          "point": "样式与主题",
+          "scope": "内置与自定义样式、样式修改与自动更新、主题颜色字体、模板与文档部件",
+          "seedCount": 9,
+          "seedQuestionIds": [
+            "ncre-office-word-001",
+            "ncre-office-word-002",
+            "ncre-office-user-docx-q085",
+            "ncre-office-user-docx-q094",
+            "ncre-office-user-docx-q099",
+            "ncre-office-word-style-01",
+            "ncre-office-word-style-02",
+            "ncre-office-word-style-03",
+            "ncre-office-op-word-08"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 6,
+            "hard": 1
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "认为直接格式优先于样式且无法清除",
+              "distractor": "手工设置的格式无法恢复为样式格式"
+            },
+            {
+              "misconception": "忽视样式修改的全局影响",
+              "distractor": "修改样式只影响当前段落"
+            }
+          ],
+          "scenarios": [
+            "给出批量改格式需求选择样式方案",
+            "判断修改样式后的影响范围"
+          ]
+        },
+        {
+          "code": "word-page",
+          "chapter": "Word 文档处理",
+          "section": "页面与引用",
+          "point": "页面布局与分栏分页分节",
+          "scope": "纸张与页边距、分栏、分页符与分节符、页面边框与水印",
+          "seedCount": 9,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q091",
+            "ncre-office-user-docx-q098",
+            "ncre-office-user-docx-q100",
+            "ncre-office-word-page-01",
+            "ncre-office-word-page-02",
+            "ncre-office-word-page-03",
+            "ncre-office-word-page-04",
+            "ncre-office-word-page-05",
+            "ncre-office-op-word-04"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 6,
+            "hard": 1
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把分页符当成分节符",
+              "distractor": "插入分页符即可让不同部分使用不同纸张方向"
+            },
+            {
+              "misconception": "认为分栏是整篇文档属性",
+              "distractor": "分栏只能应用于整篇文档"
+            }
+          ],
+          "scenarios": [
+            "给出局部版式需求选择分节方案",
+            "判断分节符类型的效果"
+          ]
+        },
+        {
+          "code": "word-header",
+          "chapter": "Word 文档处理",
+          "section": "页面与引用",
+          "point": "页眉页脚与引用",
+          "scope": "页眉页脚与首页不同、页码与域、目录、脚注尾注、题注与交叉引用、索引",
+          "seedCount": 9,
+          "seedQuestionIds": [
+            "ncre-office-word-004",
+            "ncre-office-user-docx-q084",
+            "ncre-office-user-docx-q097",
+            "ncre-office-user-docx-q105",
+            "ncre-office-user-docx-q107",
+            "ncre-office-user-docx-q109",
+            "ncre-office-word-header-01",
+            "ncre-office-word-header-02",
+            "ncre-office-op-word-01"
+          ],
+          "difficultyMix": {
+            "easy": 1,
+            "medium": 6,
+            "hard": 2
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "忘记断开链接到前一条页眉",
+              "distractor": "设置不同页眉时无需断开与前一节的链接"
+            },
+            {
+              "misconception": "混淆 PAGE 与 NUMPAGES",
+              "distractor": "NUMPAGES 域显示当前页码"
+            }
+          ],
+          "scenarios": [
+            "给出页码格式要求选择域组合",
+            "判断页眉页脚的继承关系"
+          ]
+        },
+        {
+          "code": "word-review",
+          "chapter": "Word 文档处理",
+          "section": "页面与引用",
+          "point": "审阅与修订",
+          "scope": "批注、修订标记、接受与拒绝修订、比较与合并文档、限制编辑",
+          "seedCount": 9,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q110",
+            "ncre-office-user-docx-q111",
+            "ncre-office-word-review-01",
+            "ncre-office-word-review-02",
+            "ncre-office-word-review-03",
+            "ncre-office-word-review-04",
+            "ncre-office-word-review-05",
+            "ncre-office-word-review-06",
+            "ncre-office-op-word-05"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 6,
+            "hard": 1
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把批注当成修订",
+              "distractor": "批注会直接修改正文内容"
+            },
+            {
+              "misconception": "认为接受修订后仍可恢复",
+              "distractor": "接受修订后原文无法再找回"
+            }
+          ],
+          "scenarios": [
+            "给出协作审阅需求选择修订或批注",
+            "判断合并与比较的区别"
+          ]
+        },
+        {
+          "code": "word-table",
+          "chapter": "Word 文档处理",
+          "section": "表格、图形与对象",
+          "point": "表格与图表",
+          "scope": "表格创建与编辑、合并拆分单元格、重复标题行、表格样式、表格公式与图表",
+          "seedCount": 9,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q083",
+            "ncre-office-user-docx-q101",
+            "ncre-office-word-table-01",
+            "ncre-office-word-table-02",
+            "ncre-office-word-table-03",
+            "ncre-office-word-table-04",
+            "ncre-office-word-table-05",
+            "ncre-office-word-table-06",
+            "ncre-office-op-word-03"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 6,
+            "hard": 1
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "认为重复标题行对所有行生效",
+              "distractor": "重复标题行可让表格前两行都在每页显示"
+            },
+            {
+              "misconception": "混淆表格公式的方向参数",
+              "distractor": "=SUM(LEFT) 表示对上方单元格求和"
+            }
+          ],
+          "scenarios": [
+            "给出长表格打印需求设置标题行",
+            "计算表格公式的结果"
+          ]
+        },
+        {
+          "code": "word-graphic",
+          "chapter": "Word 文档处理",
+          "section": "表格、图形与对象",
+          "point": "图形图片 SmartArt 与文本框",
+          "scope": "图片环绕方式、裁剪与压缩、形状与 SmartArt、文本框与链接、组合与对齐",
+          "seedCount": 9,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q095",
+            "ncre-office-user-docx-q103",
+            "ncre-office-word-graphic-01",
+            "ncre-office-word-graphic-02",
+            "ncre-office-word-graphic-03",
+            "ncre-office-word-graphic-04",
+            "ncre-office-word-graphic-05",
+            "ncre-office-word-graphic-06",
+            "ncre-office-op-word-06"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 6,
+            "hard": 1
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "认为嵌入型图片可以任意拖动",
+              "distractor": "嵌入型图片可以自由拖动到页面任意位置"
+            },
+            {
+              "misconception": "把裁剪当成删除",
+              "distractor": "裁剪会把图片多余部分永久删除"
+            }
+          ],
+          "scenarios": [
+            "给出图文排版要求选择环绕方式",
+            "判断图片处理操作的效果"
+          ]
+        },
+        {
+          "code": "word-symbol",
+          "chapter": "Word 文档处理",
+          "section": "表格、图形与对象",
+          "point": "符号与数学公式",
+          "scope": "插入符号与特殊字符、公式编辑器、公式编号与对齐",
+          "seedCount": 9,
+          "seedQuestionIds": [
+            "ncre-office-word-symbol-01",
+            "ncre-office-word-symbol-02",
+            "ncre-office-word-symbol-03",
+            "ncre-office-word-symbol-04",
+            "ncre-office-word-symbol-05",
+            "ncre-office-word-symbol-06",
+            "ncre-office-word-symbol-07",
+            "ncre-office-word-symbol-08",
+            "ncre-office-op-word-07"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 5,
+            "hard": 2
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "用空格对齐公式编号",
+              "distractor": "公式编号应通过连续空格推到右边界"
+            },
+            {
+              "misconception": "把线性格式当成图片",
+              "distractor": "线性格式的公式不能转换为专业型"
+            }
+          ],
+          "scenarios": [
+            "给出公式排版要求选择实现方式",
+            "判断公式显示格式的特点"
+          ]
+        },
+        {
+          "code": "word-mailmerge",
+          "chapter": "Word 文档处理",
+          "section": "批量处理与自动化",
+          "point": "邮件合并",
+          "scope": "主文档与数据源、合并域、规则、预览与合并输出",
+          "seedCount": 9,
+          "seedQuestionIds": [
+            "ncre-office-word-003",
+            "ncre-office-user-docx-q086",
+            "ncre-office-user-docx-q087",
+            "ncre-office-word-mailmerge-01",
+            "ncre-office-word-mailmerge-02",
+            "ncre-office-word-mailmerge-03",
+            "ncre-office-word-mailmerge-04",
+            "ncre-office-word-mailmerge-05",
+            "ncre-office-op-word-02"
+          ],
+          "difficultyMix": {
+            "easy": 3,
+            "medium": 5,
+            "hard": 1
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "认为数据源只能是 Excel",
+              "distractor": "邮件合并的数据源只能是 Excel 工作表"
+            },
+            {
+              "misconception": "混淆规则与合并域",
+              "distractor": "要实现条件显示应插入合并域而非规则"
+            }
+          ],
+          "scenarios": [
+            "给出批量生成需求设计合并流程",
+            "判断合并结果的数量与内容"
+          ]
+        },
+        {
+          "code": "word-macro",
+          "chapter": "Word 文档处理",
+          "section": "批量处理与自动化",
+          "point": "控件宏与图文素材分析提取",
+          "scope": "内容控件、录制与运行宏、宏安全性、素材信息提取与引用",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-word-macro-01",
+            "ncre-office-word-macro-02",
+            "ncre-office-word-macro-03",
+            "ncre-office-word-macro-04",
+            "ncre-office-word-macro-05",
+            "ncre-office-word-macro-06",
+            "ncre-office-word-macro-07",
+            "ncre-office-word-macro-08"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 4,
+            "hard": 2
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "认为录制宏能实现任意逻辑",
+              "distractor": "宏录制器可以录制条件判断和循环"
+            },
+            {
+              "misconception": "忽视宏安全性",
+              "distractor": "宏安全性设置为禁用后仍会自动运行宏"
+            }
+          ],
+          "scenarios": [
+            "给出自动化需求判断是否适合录制宏",
+            "说明宏的保存位置与启用方式"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Excel 数据处理",
+      "axes": [
+        {
+          "name": "数据规模",
+          "values": [
+            "十几行",
+            "几百行",
+            "上千行",
+            "多工作表",
+            "多工作簿"
+          ]
+        },
+        {
+          "name": "引用形态",
+          "values": [
+            "相对引用",
+            "绝对引用",
+            "混合引用",
+            "三维引用",
+            "跨工作簿引用"
+          ]
+        },
+        {
+          "name": "实现手段",
+          "values": [
+            "函数公式",
+            "数据工具",
+            "数据透视表",
+            "图表",
+            "条件格式"
+          ]
+        },
+        {
+          "name": "设问方式",
+          "values": [
+            "应使用哪个函数",
+            "公式结果是什么",
+            "最优操作方法是",
+            "该功能的前提条件是"
+          ]
+        }
+      ],
+      "leaves": [
+        {
+          "code": "excel-sheet",
+          "chapter": "Excel 数据处理",
+          "section": "工作表基础",
+          "point": "工作表基本操作、视图与打印",
+          "scope": "工作簿与工作表管理、冻结窗格与拆分、页面布局与打印标题、文件格式",
+          "seedCount": 9,
+          "seedQuestionIds": [
+            "ncre-office-excel-006",
+            "ncre-office-user-docx-q125",
+            "ncre-office-user-docx-q126",
+            "ncre-office-excel-sheet-01",
+            "ncre-office-excel-sheet-02",
+            "ncre-office-excel-sheet-03",
+            "ncre-office-excel-sheet-04",
+            "ncre-office-excel-sheet-05",
+            "ncre-office-op-excel-09"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 6,
+            "hard": 1
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把冻结窗格与拆分混淆",
+              "distractor": "冻结窗格后各窗格可以独立滚动"
+            },
+            {
+              "misconception": "认为打印区域只能有一个",
+              "distractor": "打印区域只能设置为一个连续区域"
+            }
+          ],
+          "scenarios": [
+            "给出打印需求设置页面选项",
+            "判断视图操作的效果"
+          ]
+        },
+        {
+          "code": "excel-input",
+          "chapter": "Excel 数据处理",
+          "section": "工作表基础",
+          "point": "数据输入与编辑",
+          "scope": "数据类型与录入技巧、填充与序列、查找替换、批注与批注编辑",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q116",
+            "ncre-office-user-docx-q118",
+            "ncre-office-user-docx-q122",
+            "ncre-office-excel-input-01",
+            "ncre-office-excel-input-02",
+            "ncre-office-excel-input-03",
+            "ncre-office-excel-input-04",
+            "ncre-office-excel-input-05"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 5,
+            "hard": 1
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "直接输入 001 得到文本",
+              "distractor": "在常规格式下输入 001 会保留前导零"
+            },
+            {
+              "misconception": "把 Ctrl+Enter 当成换行",
+              "distractor": "Ctrl+Enter 用于在单元格内换行"
+            }
+          ],
+          "scenarios": [
+            "给出录入要求选择正确输入方式",
+            "判断填充操作的结果"
+          ]
+        },
+        {
+          "code": "excel-format",
+          "chapter": "Excel 数据处理",
+          "section": "工作表基础",
+          "point": "单元格格式化",
+          "scope": "数字格式与自定义格式、对齐边框底纹、条件格式、单元格样式与格式刷",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q117",
+            "ncre-office-user-docx-q119",
+            "ncre-office-user-docx-q131",
+            "ncre-office-excel-format-01",
+            "ncre-office-excel-format-02",
+            "ncre-office-excel-format-03",
+            "ncre-office-excel-format-04",
+            "ncre-office-excel-format-05"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 5,
+            "hard": 1
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "认为改格式会改数值",
+              "distractor": "把数值设为货币格式后数值本身会改变"
+            },
+            {
+              "misconception": "把条件格式当成静态格式",
+              "distractor": "条件格式设置后不会随数值变化"
+            }
+          ],
+          "scenarios": [
+            "给出显示要求设计自定义格式",
+            "判断条件格式规则的作用范围"
+          ]
+        },
+        {
+          "code": "excel-protect",
+          "chapter": "Excel 数据处理",
+          "section": "工作表基础",
+          "point": "工作表保护与版本比较",
+          "scope": "保护工作表与工作簿、允许编辑区域、版本比较与共享工作簿",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-excel-protect-01",
+            "ncre-office-excel-protect-02",
+            "ncre-office-excel-protect-03",
+            "ncre-office-excel-protect-04",
+            "ncre-office-excel-protect-05",
+            "ncre-office-excel-protect-06",
+            "ncre-office-excel-protect-07",
+            "ncre-office-excel-protect-08"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 4,
+            "hard": 2
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把保护工作表与保护工作簿混淆",
+              "distractor": "保护工作表可以阻止删除工作表"
+            },
+            {
+              "misconception": "认为保护后完全无法选中",
+              "distractor": "保护工作表后连单元格都无法选中"
+            }
+          ],
+          "scenarios": [
+            "给出权限需求选择保护层级",
+            "判断保护设置允许的操作"
+          ]
+        },
+        {
+          "code": "excel-reference",
+          "chapter": "Excel 数据处理",
+          "section": "公式与函数",
+          "point": "单元格引用",
+          "scope": "相对引用、绝对引用、混合引用、三维引用、名称与跨表引用",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q112",
+            "ncre-office-user-docx-q113",
+            "ncre-office-user-docx-q115",
+            "ncre-office-excel-reference-01",
+            "ncre-office-excel-reference-02",
+            "ncre-office-excel-reference-03",
+            "ncre-office-excel-reference-04",
+            "ncre-office-excel-reference-05"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 5,
+            "hard": 1
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "混淆 $ 的位置含义",
+              "distractor": "$A1 表示行绝对、列相对"
+            },
+            {
+              "misconception": "填充时忘记绝对引用",
+              "distractor": "复制公式时绝对引用会随位置改变"
+            }
+          ],
+          "scenarios": [
+            "给出公式与复制目标推算结果",
+            "为指定需求选择引用类型"
+          ]
+        },
+        {
+          "code": "excel-formula",
+          "chapter": "Excel 数据处理",
+          "section": "公式与函数",
+          "point": "公式函数与数组",
+          "scope": "运算符与优先级、常用函数与嵌套、数组公式、错误值识别",
+          "seedCount": 11,
+          "seedQuestionIds": [
+            "ncre-office-excel-001",
+            "ncre-office-excel-002",
+            "ncre-office-user-docx-q114",
+            "ncre-office-user-docx-q121",
+            "ncre-office-user-docx-q123",
+            "ncre-office-user-docx-q127",
+            "ncre-office-user-docx-q128",
+            "ncre-office-user-docx-q130",
+            "ncre-office-user-docx-q132",
+            "ncre-office-op-excel-01",
+            "ncre-office-op-excel-02"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 8,
+            "hard": 1
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把 VLOOKUP 当成可向左查找",
+              "distractor": "VLOOKUP 可以查找区域中任意列的值"
+            },
+            {
+              "misconception": "忽略错误值处理",
+              "distractor": "公式出现 #N/A 时应删除该行"
+            }
+          ],
+          "scenarios": [
+            "给出统计需求选择函数组合",
+            "推算嵌套公式的结果"
+          ]
+        },
+        {
+          "code": "excel-link",
+          "chapter": "Excel 数据处理",
+          "section": "公式与函数",
+          "point": "多工作表联动",
+          "scope": "跨表引用与汇总、合并计算、工作组编辑",
+          "seedCount": 9,
+          "seedQuestionIds": [
+            "ncre-office-excel-link-01",
+            "ncre-office-excel-link-02",
+            "ncre-office-excel-link-03",
+            "ncre-office-excel-link-04",
+            "ncre-office-excel-link-05",
+            "ncre-office-excel-link-06",
+            "ncre-office-excel-link-07",
+            "ncre-office-excel-link-08",
+            "ncre-office-op-excel-08"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 5,
+            "hard": 2
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "跨表引用漏写感叹号",
+              "distractor": "跨表引用写成 Sheet1.B2 即可"
+            },
+            {
+              "misconception": "认为三维引用包含新增工作表",
+              "distractor": "三维引用不会包含区间内新增的工作表"
+            }
+          ],
+          "scenarios": [
+            "给出多表汇总需求选择引用方式",
+            "判断工作表移动后引用的变化"
+          ]
+        },
+        {
+          "code": "excel-chart",
+          "chapter": "Excel 数据处理",
+          "section": "图表与可视化",
+          "point": "迷你图与图表",
+          "scope": "图表类型选择、图表元素与布局、次坐标轴、迷你图、趋势线",
+          "seedCount": 9,
+          "seedQuestionIds": [
+            "ncre-office-excel-005",
+            "ncre-office-user-docx-q133",
+            "ncre-office-excel-chart-01",
+            "ncre-office-excel-chart-02",
+            "ncre-office-excel-chart-03",
+            "ncre-office-excel-chart-04",
+            "ncre-office-excel-chart-05",
+            "ncre-office-excel-chart-06",
+            "ncre-office-op-excel-05"
+          ],
+          "difficultyMix": {
+            "easy": 3,
+            "medium": 5,
+            "hard": 1
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "用饼图表现趋势",
+              "distractor": "展示时间趋势应优先选择饼图"
+            },
+            {
+              "misconception": "忘记次坐标轴",
+              "distractor": "数量级差异大时应删除其中一个系列"
+            }
+          ],
+          "scenarios": [
+            "给出数据特征选择图表类型",
+            "判断图表元素的设置效果"
+          ]
+        },
+        {
+          "code": "excel-sort",
+          "chapter": "Excel 数据处理",
+          "section": "数据管理",
+          "point": "排序筛选分类汇总",
+          "scope": "多关键字排序与自定义序列、自动筛选与高级筛选、分类汇总与分级显示",
+          "seedCount": 9,
+          "seedQuestionIds": [
+            "ncre-office-excel-003",
+            "ncre-office-user-docx-q120",
+            "ncre-office-excel-sort-01",
+            "ncre-office-excel-sort-02",
+            "ncre-office-excel-sort-03",
+            "ncre-office-excel-sort-04",
+            "ncre-office-excel-sort-05",
+            "ncre-office-excel-sort-06",
+            "ncre-office-op-excel-04"
+          ],
+          "difficultyMix": {
+            "easy": 3,
+            "medium": 5,
+            "hard": 1
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "分类汇总前不排序",
+              "distractor": "分类汇总前无需对数据排序"
+            },
+            {
+              "misconception": "把高级筛选的同行为或",
+              "distractor": "高级筛选条件区域同一行的条件表示逻辑或"
+            }
+          ],
+          "scenarios": [
+            "给出多条件筛选需求设计条件区域",
+            "判断排序与筛选的效果差异"
+          ]
+        },
+        {
+          "code": "excel-tools",
+          "chapter": "Excel 数据处理",
+          "section": "数据管理",
+          "point": "数据验证、分列与合并计算",
+          "scope": "数据验证规则与提示、分列、合并计算、删除重复项",
+          "seedCount": 9,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q124",
+            "ncre-office-excel-tools-01",
+            "ncre-office-excel-tools-02",
+            "ncre-office-excel-tools-03",
+            "ncre-office-excel-tools-04",
+            "ncre-office-excel-tools-05",
+            "ncre-office-excel-tools-06",
+            "ncre-office-excel-tools-07",
+            "ncre-office-op-excel-06"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 6,
+            "hard": 1
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把输入信息当成校验",
+              "distractor": "设置输入信息即可阻止非法数据录入"
+            },
+            {
+              "misconception": "分列前不插入空列",
+              "distractor": "分列会覆盖目标列右侧的数据且无法避免"
+            }
+          ],
+          "scenarios": [
+            "给出录入规范需求设置验证规则",
+            "判断分列与合并计算的结果"
+          ]
+        },
+        {
+          "code": "excel-pivot",
+          "chapter": "Excel 数据处理",
+          "section": "数据管理",
+          "point": "数据透视表与数据透视图",
+          "scope": "数据透视表布局、值汇总方式、切片器、数据透视图、刷新",
+          "seedCount": 9,
+          "seedQuestionIds": [
+            "ncre-office-excel-004",
+            "ncre-office-excel-pivot-01",
+            "ncre-office-excel-pivot-02",
+            "ncre-office-excel-pivot-03",
+            "ncre-office-excel-pivot-04",
+            "ncre-office-excel-pivot-05",
+            "ncre-office-excel-pivot-06",
+            "ncre-office-excel-pivot-07",
+            "ncre-office-op-excel-03"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 5,
+            "hard": 2
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "认为透视表会自动刷新",
+              "distractor": "源数据修改后透视表会自动更新"
+            },
+            {
+              "misconception": "把切片器当成普通筛选",
+              "distractor": "切片器只能控制一张透视表"
+            }
+          ],
+          "scenarios": [
+            "给出汇总需求设计透视表布局",
+            "判断透视表字段放置的效果"
+          ]
+        },
+        {
+          "code": "excel-whatif",
+          "chapter": "Excel 数据处理",
+          "section": "高级分析",
+          "point": "模拟分析与预测",
+          "scope": "单变量求解、模拟运算表、方案管理器、预测工作表",
+          "seedCount": 9,
+          "seedQuestionIds": [
+            "ncre-office-excel-whatif-01",
+            "ncre-office-excel-whatif-02",
+            "ncre-office-excel-whatif-03",
+            "ncre-office-excel-whatif-04",
+            "ncre-office-excel-whatif-05",
+            "ncre-office-excel-whatif-06",
+            "ncre-office-excel-whatif-07",
+            "ncre-office-excel-whatif-08",
+            "ncre-office-op-excel-07"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 5,
+            "hard": 2
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把单变量求解当成模拟运算表",
+              "distractor": "模拟运算表可以反推目标值对应的输入"
+            },
+            {
+              "misconception": "试图单独修改模拟运算表结果",
+              "distractor": "模拟运算表的结果区域可以逐格修改"
+            }
+          ],
+          "scenarios": [
+            "给出逆算需求选择模拟分析工具",
+            "判断模拟运算表的变量个数限制"
+          ]
+        },
+        {
+          "code": "excel-external",
+          "chapter": "Excel 数据处理",
+          "section": "高级分析",
+          "point": "外部数据与 Power Pivot",
+          "scope": "导入文本与网页数据、获取和转换、数据模型与关系、度量值",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q129",
+            "ncre-office-excel-external-01",
+            "ncre-office-excel-external-02",
+            "ncre-office-excel-external-03",
+            "ncre-office-excel-external-04",
+            "ncre-office-excel-external-05",
+            "ncre-office-excel-external-06",
+            "ncre-office-excel-external-07"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 5,
+            "hard": 1
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把 Power Query 当成 Power Pivot",
+              "distractor": "Power Query 用于建立表间关系"
+            },
+            {
+              "misconception": "认为导入数据不会更新",
+              "distractor": "导入的外部数据无法刷新"
+            }
+          ],
+          "scenarios": [
+            "给出多源数据整理需求选择工具",
+            "判断数据模型与关系的作用"
+          ]
+        },
+        {
+          "code": "excel-macro",
+          "chapter": "Excel 数据处理",
+          "section": "高级分析",
+          "point": "控件宏与素材分析",
+          "scope": "表单控件与 ActiveX 控件、录制宏、宏安全性、素材数据提取",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-excel-macro-01",
+            "ncre-office-excel-macro-02",
+            "ncre-office-excel-macro-03",
+            "ncre-office-excel-macro-04",
+            "ncre-office-excel-macro-05",
+            "ncre-office-excel-macro-06",
+            "ncre-office-excel-macro-07",
+            "ncre-office-excel-macro-08"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 4,
+            "hard": 2
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把 .xlsx 当成可保存宏",
+              "distractor": "含宏工作簿保存为 .xlsx 后宏仍可运行"
+            },
+            {
+              "misconception": "认为录制宏万能",
+              "distractor": "宏录制器可以录制条件判断"
+            }
+          ],
+          "scenarios": [
+            "给出自动化需求判断实现方式",
+            "说明宏的保存格式与启用流程"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "PowerPoint 演示文稿",
+      "axes": [
+        {
+          "name": "作用层级",
+          "values": [
+            "单张幻灯片",
+            "某个版式",
+            "整个母版",
+            "整篇演示文稿"
+          ]
+        },
+        {
+          "name": "触发时机",
+          "values": [
+            "编辑时",
+            "进入幻灯片时",
+            "单击时",
+            "上一动画之后"
+          ]
+        },
+        {
+          "name": "交付场景",
+          "values": [
+            "现场演讲",
+            "无人值守循环",
+            "观众自行浏览",
+            "导出视频或 PDF"
+          ]
+        },
+        {
+          "name": "设问方式",
+          "values": [
+            "最优操作方法是",
+            "该设置的影响范围是",
+            "要实现该效果应设置",
+            "下列说法错误的是"
+          ]
+        }
+      ],
+      "leaves": [
+        {
+          "code": "ppt-basic",
+          "chapter": "PowerPoint 演示文稿",
+          "section": "基础与视图",
+          "point": "基本操作与视图模式",
+          "scope": "新建与保存、普通/幻灯片浏览/备注/阅读/大纲视图、显示比例与窗口操作",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q144",
+            "ncre-office-ppt-basic-01",
+            "ncre-office-ppt-basic-02",
+            "ncre-office-ppt-basic-03",
+            "ncre-office-ppt-basic-04",
+            "ncre-office-ppt-basic-05",
+            "ncre-office-ppt-basic-06",
+            "ncre-office-ppt-basic-07"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 4,
+            "hard": 2
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把阅读视图当成编辑视图",
+              "distractor": "阅读视图下可以编辑幻灯片内容"
+            },
+            {
+              "misconception": "认为 .ppsx 与 .pptx 等价",
+              "distractor": ".ppsx 文件双击后进入编辑界面"
+            }
+          ],
+          "scenarios": [
+            "给出使用场景选择视图",
+            "判断视图与文件格式的特点"
+          ]
+        },
+        {
+          "code": "ppt-organize",
+          "chapter": "PowerPoint 演示文稿",
+          "section": "基础与视图",
+          "point": "幻灯片组织与管理",
+          "scope": "新建幻灯片与版式选择、节、复制移动删除、隐藏幻灯片",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q135",
+            "ncre-office-ppt-organize-01",
+            "ncre-office-ppt-organize-02",
+            "ncre-office-ppt-organize-03",
+            "ncre-office-ppt-organize-04",
+            "ncre-office-ppt-organize-05",
+            "ncre-office-ppt-organize-06",
+            "ncre-office-ppt-organize-07"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 4,
+            "hard": 2
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "认为隐藏幻灯片等于删除",
+              "distractor": "隐藏幻灯片后内容被删除"
+            },
+            {
+              "misconception": "把版式当成主题",
+              "distractor": "版式决定配色方案"
+            }
+          ],
+          "scenarios": [
+            "给出组织需求选择幻灯片操作",
+            "判断版式与母版的作用范围"
+          ]
+        },
+        {
+          "code": "ppt-theme",
+          "chapter": "PowerPoint 演示文稿",
+          "section": "主题与母版",
+          "point": "主题与背景",
+          "scope": "主题颜色字体效果、背景填充与样式、设计变体",
+          "seedCount": 9,
+          "seedQuestionIds": [
+            "ncre-office-ppt-001",
+            "ncre-office-user-docx-q140",
+            "ncre-office-ppt-theme-01",
+            "ncre-office-ppt-theme-02",
+            "ncre-office-ppt-theme-03",
+            "ncre-office-ppt-theme-04",
+            "ncre-office-ppt-theme-05",
+            "ncre-office-ppt-theme-06",
+            "ncre-office-op-ppt-04"
+          ],
+          "difficultyMix": {
+            "easy": 3,
+            "medium": 5,
+            "hard": 1
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "认为背景默认应用到全部页",
+              "distractor": "设置背景格式后一定应用于所有幻灯片"
+            },
+            {
+              "misconception": "把主题当成模板",
+              "distractor": "主题包含母版、版式和示例内容"
+            }
+          ],
+          "scenarios": [
+            "给出统一风格需求选择主题操作",
+            "判断背景设置的作用范围"
+          ]
+        },
+        {
+          "code": "ppt-master",
+          "chapter": "PowerPoint 演示文稿",
+          "section": "主题与母版",
+          "point": "幻灯片母版",
+          "scope": "母版与版式的层级关系、占位符、母版修改的影响范围、页脚与编号",
+          "seedCount": 9,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q137",
+            "ncre-office-user-docx-q142",
+            "ncre-office-user-docx-q146",
+            "ncre-office-user-docx-q147",
+            "ncre-office-ppt-master-01",
+            "ncre-office-ppt-master-02",
+            "ncre-office-ppt-master-03",
+            "ncre-office-ppt-master-04",
+            "ncre-office-op-ppt-01"
+          ],
+          "difficultyMix": {
+            "easy": 1,
+            "medium": 6,
+            "hard": 2
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "在普通视图逐页改格式",
+              "distractor": "要统一修改所有标题格式应逐页修改"
+            },
+            {
+              "misconception": "认为版式修改影响全部幻灯片",
+              "distractor": "修改某个版式会影响所有幻灯片"
+            }
+          ],
+          "scenarios": [
+            "给出全局格式需求定位修改位置",
+            "判断母版与版式的继承关系"
+          ]
+        },
+        {
+          "code": "ppt-object",
+          "chapter": "PowerPoint 演示文稿",
+          "section": "对象编辑",
+          "point": "文本、图形、图片、表格与图表",
+          "scope": "文本框与占位符、形状与 SmartArt、图片处理、表格与图表插入",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q134",
+            "ncre-office-user-docx-q138",
+            "ncre-office-user-docx-q141",
+            "ncre-office-ppt-object-01",
+            "ncre-office-ppt-object-02",
+            "ncre-office-ppt-object-03",
+            "ncre-office-ppt-object-04",
+            "ncre-office-ppt-object-05"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 5,
+            "hard": 1
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把占位符当成普通文本框",
+              "distractor": "占位符的格式与母版无关"
+            },
+            {
+              "misconception": "认为链接图表不会更新",
+              "distractor": "链接的图表在源数据变化后无法更新"
+            }
+          ],
+          "scenarios": [
+            "给出内容呈现需求选择对象类型",
+            "判断对象格式的继承来源"
+          ]
+        },
+        {
+          "code": "ppt-media",
+          "chapter": "PowerPoint 演示文稿",
+          "section": "对象编辑",
+          "point": "音视频与艺术字",
+          "scope": "插入音频视频、播放与剪裁设置、艺术字样式",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-ppt-media-01",
+            "ncre-office-ppt-media-02",
+            "ncre-office-ppt-media-03",
+            "ncre-office-ppt-media-04",
+            "ncre-office-ppt-media-05",
+            "ncre-office-ppt-media-06",
+            "ncre-office-ppt-media-07",
+            "ncre-office-ppt-media-08"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 4,
+            "hard": 2
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把自动播放与跨幻灯片播放混淆",
+              "distractor": "设置自动播放后音频会跨页持续播放"
+            },
+            {
+              "misconception": "认为剪裁会删除原文件",
+              "distractor": "剪裁音频会修改原始音频文件"
+            }
+          ],
+          "scenarios": [
+            "给出播放需求设置音频或视频选项",
+            "判断媒体链接与嵌入的差异"
+          ]
+        },
+        {
+          "code": "ppt-animation",
+          "chapter": "PowerPoint 演示文稿",
+          "section": "动画与交互",
+          "point": "动画与切换效果",
+          "scope": "进入强调退出与动作路径、动画窗格、开始方式与计时、动画刷",
+          "seedCount": 9,
+          "seedQuestionIds": [
+            "ncre-office-ppt-002",
+            "ncre-office-ppt-animation-01",
+            "ncre-office-ppt-animation-02",
+            "ncre-office-ppt-animation-03",
+            "ncre-office-ppt-animation-04",
+            "ncre-office-ppt-animation-05",
+            "ncre-office-ppt-animation-06",
+            "ncre-office-ppt-animation-07",
+            "ncre-office-op-ppt-02"
+          ],
+          "difficultyMix": {
+            "easy": 3,
+            "medium": 4,
+            "hard": 2
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "混淆开始方式与延迟",
+              "distractor": "动画的延迟指动画播放的总时长"
+            },
+            {
+              "misconception": "认为切换与动画等价",
+              "distractor": "切换效果与动画效果完全相同"
+            }
+          ],
+          "scenarios": [
+            "给出节奏要求设置动画计时",
+            "判断动画窗格中的顺序与触发关系"
+          ]
+        },
+        {
+          "code": "ppt-interaction",
+          "chapter": "PowerPoint 演示文稿",
+          "section": "动画与交互",
+          "point": "超链接与交互",
+          "scope": "超链接目标类型、动作按钮、动作设置、交互跳转",
+          "seedCount": 9,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q145",
+            "ncre-office-ppt-interaction-01",
+            "ncre-office-ppt-interaction-02",
+            "ncre-office-ppt-interaction-03",
+            "ncre-office-ppt-interaction-04",
+            "ncre-office-ppt-interaction-05",
+            "ncre-office-ppt-interaction-06",
+            "ncre-office-ppt-interaction-07",
+            "ncre-office-op-ppt-03"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 5,
+            "hard": 2
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把节当成超链接目标",
+              "distractor": "超链接可以直接跳转到某个节"
+            },
+            {
+              "misconception": "认为动作按钮只能跳转",
+              "distractor": "动作按钮只能用于切换幻灯片"
+            }
+          ],
+          "scenarios": [
+            "给出导航需求设计超链接方案",
+            "判断动作设置触发方式的效果"
+          ]
+        },
+        {
+          "code": "ppt-show",
+          "chapter": "PowerPoint 演示文稿",
+          "section": "放映与输出",
+          "point": "放映设置与打包输出",
+          "scope": "放映方式与自定义放映、排练计时、打包与导出视频",
+          "seedCount": 9,
+          "seedQuestionIds": [
+            "ncre-office-ppt-003",
+            "ncre-office-user-docx-q136",
+            "ncre-office-user-docx-q143",
+            "ncre-office-ppt-show-01",
+            "ncre-office-ppt-show-02",
+            "ncre-office-ppt-show-03",
+            "ncre-office-ppt-show-04",
+            "ncre-office-ppt-show-05",
+            "ncre-office-op-ppt-05"
+          ],
+          "difficultyMix": {
+            "easy": 3,
+            "medium": 5,
+            "hard": 1
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "混淆 F5 与 Shift+F5",
+              "distractor": "Shift+F5 从头开始放映"
+            },
+            {
+              "misconception": "认为排练计时会自动生效",
+              "distractor": "设置排练计时后放映时一定按计时自动播放"
+            }
+          ],
+          "scenarios": [
+            "给出放映场景设置放映方式",
+            "判断打包与导出的差异"
+          ]
+        },
+        {
+          "code": "ppt-review",
+          "chapter": "PowerPoint 演示文稿",
+          "section": "放映与输出",
+          "point": "审阅与比较",
+          "scope": "批注、比较演示文稿、合并修订",
+          "seedCount": 8,
+          "seedQuestionIds": [
+            "ncre-office-ppt-review-01",
+            "ncre-office-ppt-review-02",
+            "ncre-office-ppt-review-03",
+            "ncre-office-ppt-review-04",
+            "ncre-office-ppt-review-05",
+            "ncre-office-ppt-review-06",
+            "ncre-office-ppt-review-07",
+            "ncre-office-ppt-review-08"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 4,
+            "hard": 2
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "把批注与备注混淆",
+              "distractor": "批注会显示在放映画面上"
+            },
+            {
+              "misconception": "认为删除批注可恢复",
+              "distractor": "删除批注后无法通过显示标记恢复"
+            }
+          ],
+          "scenarios": [
+            "给出协作审阅需求选择批注或备注",
+            "判断比较与合并的区别"
+          ]
+        },
+        {
+          "code": "ppt-material",
+          "chapter": "PowerPoint 演示文稿",
+          "section": "放映与输出",
+          "point": "素材分析与引用",
+          "scope": "从图文素材中提取信息、引用到演示文稿、跨应用协同",
+          "seedCount": 9,
+          "seedQuestionIds": [
+            "ncre-office-user-docx-q139",
+            "ncre-office-ppt-material-01",
+            "ncre-office-ppt-material-02",
+            "ncre-office-ppt-material-03",
+            "ncre-office-ppt-material-04",
+            "ncre-office-ppt-material-05",
+            "ncre-office-ppt-material-06",
+            "ncre-office-ppt-material-07",
+            "ncre-office-op-ppt-06"
+          ],
+          "difficultyMix": {
+            "easy": 2,
+            "medium": 5,
+            "hard": 2
+          },
+          "angles": [
+            "概念辨析",
+            "操作路径",
+            "参数与边界",
+            "反向推理",
+            "场景应用",
+            "错因诊断"
+          ],
+          "traps": [
+            {
+              "misconception": "直接把文档段落粘贴到幻灯片",
+              "distractor": "把文档全文粘贴到幻灯片是最佳做法"
+            },
+            {
+              "misconception": "忽视大纲导入对样式的依赖",
+              "distractor": "从大纲导入时任何段落都会生成幻灯片"
+            }
+          ],
+          "scenarios": [
+            "给出素材转换需求设计制作流程",
+            "判断大纲导入后的层次结构"
+          ]
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "leafCount": 60,
+    "seedCount": 519
+  }
+}

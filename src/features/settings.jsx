@@ -19,10 +19,18 @@ import {
 import { api } from "../api.js";
 import { ContentPlaceholder } from "../components/content-placeholder.jsx";
 import { Heading, IconButton } from "../components/study-ui.jsx";
+import { WebPreferenceSettings } from "./web-preference-settings.jsx";
+import { AccountSecuritySettings } from "../components/account-security.jsx";
+import { BlueSettingsProfile } from "./blue-settings-profile.jsx";
+import { deepSeekDefaults } from "../../server/ai-model-defaults.js";
 
 export function SettingsView({
+  user,
+  blue = false,
+  webPreferences,
   membership,
   onOpenVip,
+  onBrowseCertificates,
   run,
   busy,
   notify,
@@ -47,13 +55,14 @@ export function SettingsView({
     [settingsError, setSettingsError] = useState("");
   const load = () => api("/settings").then(setS);
   useEffect(() => {
+    if (blue) return;
     api("/community/profile")
       .then(({ profile }) => {
         setCommunityProfile(profile);
         setCommunityName(profile.name);
       })
       .catch(() => {});
-  }, []);
+  }, [blue]);
   useEffect(() => {
     if (!membership.account?.canManageAiService) {
       setS(null);
@@ -117,9 +126,7 @@ export function SettingsView({
   const useDeepSeekDefaults = () => {
     setS({
       ...s,
-      baseUrl: "https://api.deepseek.com",
-      model: "deepseek-chat",
-      temperature: 0.3,
+      ...deepSeekDefaults,
     });
     setDirty(true);
     setDeepSeekGuideOpen(false);
@@ -168,9 +175,19 @@ export function SettingsView({
   };
   return (
     <>
-      <Heading title="设置" subtitle="备考目标、AI 服务与调用用量" />
-      <MembershipSettingsEntry membership={membership} onOpenVip={onOpenVip} />
-      <section className="certificate-settings">
+      <Heading title="设置" subtitle="学习偏好、备考目标与账号服务" />
+      {blue && <BlueSettingsProfile user={user} membership={membership} busy={busy} onOpenVip={onOpenVip} onUserUpdated={onUserUpdated} notify={notify}/>}
+      {webPreferences&&<WebPreferenceSettings key={currentCertificateId} state={webPreferences} notify={notify} busy={busy}/>}
+      {!blue && <MembershipSettingsEntry membership={membership} onOpenVip={onOpenVip} />}
+      <div className={blue ? "blue-settings-account-grid" : undefined}>
+      <AccountSecuritySettings />
+      {blue ? <section className="certificate-settings" aria-label="备考目标">
+        <div className="section-heading"><h2><GraduationCap size={21}/>备考目标</h2><p>章节、练习与考试都围绕当前目标展开。</p></div>
+        {certificates.filter(c=>c.id===currentCertificateId).map(c=><div className="certificate-setting selected blue-settings-target" key={c.id}>
+          <span className="certificate-setting-icon"><Check size={18}/></span><span><strong>{c.name}</strong><small>当前正在备考</small></span>
+        </div>)}
+        <div className="blue-settings-target-note"><small>已开放 {certificates.length} 个备考方向</small><button type="button" disabled={!!busy} onClick={onBrowseCertificates}>浏览考试与证书<GraduationCap size={16}/></button></div>
+      </section> : <section className="certificate-settings">
         <div className="section-heading">
           <div>
             <h2>
@@ -179,7 +196,7 @@ export function SettingsView({
             </h2>
             <p>切换后，章节、推荐练习、错题本和模拟考试会使用对应题库。</p>
           </div>
-          <span className="badge green">账号设置</span>
+          {onBrowseCertificates ? <button type="button" onClick={onBrowseCertificates} disabled={!!busy}>浏览考试与证书<GraduationCap size={16}/></button> : <span className="badge green">账号设置</span>}
         </div>
         <div className="certificate-settings-list">
           {certificates.map((certificate) => {
@@ -216,8 +233,9 @@ export function SettingsView({
             );
           })}
         </div>
-      </section>
-      <section className="community-profile-settings">
+      </section>}
+      </div>
+      {!blue && <section className="community-profile-settings">
         <div className="section-heading">
           <div>
             <h2>
@@ -253,7 +271,7 @@ export function SettingsView({
             保存昵称
           </button>
         </div>
-      </section>
+      </section>}
       {!membership.account?.canManageAiService && (
         <ApiAccessNotice membership={membership} onOpenVip={onOpenVip} />
       )}
@@ -536,7 +554,7 @@ export function SettingsView({
                         <dt>API Key</dt>
                         <dd>粘贴刚才复制的 sk- 密钥</dd>
                         <dt>模型名称</dt>
-                        <dd>deepseek-chat</dd>
+                        <dd>{deepSeekDefaults.model}</dd>
                         <dt>Temperature</dt>
                         <dd>0.3</dd>
                         <dt>输出长度</dt>
@@ -559,7 +577,7 @@ export function SettingsView({
                   <strong>测试失败时先检查</strong>
                   <p>
                     Key 是否完整、API 账户是否有余额、模型名是否为
-                    deepseek-chat。不要把 API Key 发给别人或放进截图。
+                    {deepSeekDefaults.model}。不要把 API Key 发给别人或放进截图。
                   </p>
                   <a
                     href="https://api-docs.deepseek.com/"

@@ -40,6 +40,9 @@ import { QuestionImages } from '../components/QuestionImages';
 import { AiQuestionDraftScreen } from './AiQuestionDraftScreen';
 import { PracticeHubScreen } from './PracticeHubScreen';
 import { CommunityScreen } from './CommunityScreen';
+import { AdminScreen } from './AdminScreen';
+import { ProfileSetupScreen } from './ProfileSetupScreen';
+import { AccountSecurityScreen } from './AccountSecurityScreen';
 import { previewUiSound } from '../audioFeedback';
 import {
   AnimatedPressable,
@@ -567,8 +570,8 @@ export function PracticeScreen({
     if (preview) {
       const previewText =
         action === '给我提示'
-          ? '预览模式只展示页面结构。登录并领取 AI 额度后，这里会返回不会直接泄露答案的分步提示。'
-          : '预览模式只展示页面结构。登录并领取 AI 额度后，这里会返回针对当前题目的详细讲解。';
+          ? '预览模式只展示页面结构。登录并领取 AI 积分后，这里会返回不会直接泄露答案的分步提示。'
+          : '预览模式只展示页面结构。登录并领取 AI 积分后，这里会返回针对当前题目的详细讲解。';
       if (action === '给我提示') setHintText(previewText);
       else setTeacherText(previewText);
       setAiBusy('');
@@ -605,7 +608,7 @@ export function PracticeScreen({
       setAiAnalysis({
         mistakeType: '预览示例',
         weakKnowledge: 'OSPF 选举资格',
-        reason: '登录并领取 AI 额度后，服务会结合你的错误选项和历史作答记录分析薄弱点。',
+        reason: '登录并领取 AI 积分后，服务会结合你的错误选项和历史作答记录分析薄弱点。',
       });
       setAiBusy('');
       return;
@@ -631,7 +634,7 @@ export function PracticeScreen({
     setAiError(null);
     setAiBusy('train');
     if (preview) {
-      setTrainingNotice('登录并领取 AI 额度后，这里会根据当前知识点生成 3 道变式题。');
+      setTrainingNotice('登录并领取 AI 积分后，这里会根据当前知识点生成 3 道变式题。');
       setAiBusy('');
       return;
     }
@@ -1316,14 +1319,13 @@ export function ProfileScreen({
   const [aboutOpen, setAboutOpen] = useState(false);
   const [tutorialOpen, setTutorialOpen] = useState(false);
   const [authorApiOpen, setAuthorApiOpen] = useState(false);
-  const [communityNameOpen, setCommunityNameOpen] = useState(false);
   const [communityOpen, setCommunityOpen] = useState(false);
+  const [adminOpen, setAdminOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const [securityOpen, setSecurityOpen] = useState(false);
   const [redeemOpen, setRedeemOpen] = useState(false);
   const [membershipPlan, setMembershipPlan] = useState<keyof typeof membershipLabels>('free');
   const membershipRevision = useRef(0);
-  const [communityName, setCommunityName] = useState('');
-  const [communityNameBusy, setCommunityNameBusy] = useState(false);
-  const [communityNameError, setCommunityNameError] = useState('');
   const [settings, setSettings] = useState<AiSettingsResponse | null>(null);
   const [canManageAiService, setCanManageAiService] = useState(false);
   const [settingsBusy, setSettingsBusy] = useState(false);
@@ -1335,7 +1337,7 @@ export function ProfileScreen({
   const [authorPassword, setAuthorPassword] = useState('');
   const [aiForm, setAiForm] = useState({
     baseUrl: 'https://api.deepseek.com',
-    model: 'deepseek-chat',
+    model: 'deepseek-flash',
     temperature: '0.3',
   });
 
@@ -1356,37 +1358,9 @@ export function ProfileScreen({
     return () => { mounted = false; };
   }, [active, preview, user?.id]);
 
-  function openCommunityNameSettings() {
-    setCommunityName(user?.communityName || user?.username || '');
-    setCommunityNameError('');
-    setCommunityNameOpen(true);
-  }
-
-  async function saveCommunityName() {
-    if (!user || preview) return;
-    const name = communityName.trim();
-    if (!name) {
-      setCommunityNameError('社区昵称不能为空');
-      return;
-    }
-    setCommunityNameBusy(true);
-    setCommunityNameError('');
-    try {
-      const result = await mobileApi.updateCommunityProfile(name);
-      onUserUpdated?.(result.user);
-      setCommunityNameOpen(false);
-    } catch (cause: unknown) {
-      setCommunityNameError(
-        cause instanceof Error ? cause.message : '社区昵称保存失败',
-      );
-    } finally {
-      setCommunityNameBusy(false);
-    }
-  }
-
   async function openAiSettings() {
     if (!user || preview) {
-      Alert.alert('需要登录', '登录考匠账号后即可使用作者 AI 服务并查看剩余额度。');
+      Alert.alert('需要登录', '登录考匠账号后即可使用作者 AI 服务并查看剩余积分。');
       return;
     }
     setSettingsBusy(true);
@@ -1396,10 +1370,10 @@ export function ProfileScreen({
       if (!entitlement.canManageAiService) {
         Alert.alert(
           entitlement.aiServiceAvailable ? '作者 AI 服务已连接' : '作者 AI 服务暂未就绪',
-          '无需填写个人 API。解析、提示和分析每次扣对应额度，出题扣签到机会或会员题数；失败自动返还。可在 VIP 页查看和领取额度。',
+          '无需填写个人 API。解析、提示、出题、计划和答疑统一使用积分；成功按实际用量结算，失败退还预扣。可在 VIP 页查看积分和记录。',
           [
             { text: '稍后再说', style: 'cancel' },
-            { text: '查看 AI 额度', onPress: () => onNavigate('vip') },
+            { text: '查看 AI 积分', onPress: () => onNavigate('vip') },
           ],
         );
         return;
@@ -1462,7 +1436,7 @@ export function ProfileScreen({
       const result = await mobileApi.settings();
       setSettings(result);
       setApiKey('');
-      setSettingsNotice('作者 AI 配置已保存，所有账号共用服务并独立扣除额度。');
+      setSettingsNotice('作者 AI 配置已保存，所有账号共用服务并独立扣除积分。');
     } catch (error: unknown) {
       setSettingsError(error instanceof Error ? error.message : '保存 AI 配置失败');
     } finally {
@@ -1494,7 +1468,7 @@ export function ProfileScreen({
       });
       setAuthorPassword('');
       setAuthorApiOpen(false);
-      setSettingsNotice('作者预设配置已保存，所有账号共用服务并独立扣除额度。');
+      setSettingsNotice('作者预设配置已保存，所有账号共用服务并独立扣除积分。');
     } catch (error: unknown) {
       setSettingsError(error instanceof Error ? error.message : '作者 API 部署失败');
     } finally {
@@ -1504,6 +1478,9 @@ export function ProfileScreen({
 
   return (
     <ScreenContainer profile>
+      {user?.isAdmin && !preview && adminOpen && <Modal visible={active && adminOpen} animationType="slide" onRequestClose={() => setAdminOpen(false)}>
+        <AdminScreen user={user} certificates={certificates} onClose={() => setAdminOpen(false)} onUserUpdated={onUserUpdated} />
+      </Modal>}
       <RedeemCodeModal visible={active && redeemOpen} preview={preview} userId={user?.id} onClose={() => setRedeemOpen(false)} onRedeemed={(result) => { membershipRevision.current++; setMembershipPlan(result.plan); setCanManageAiService(!!result.canManageAiService); }} />
       {communityOpen && (
         <Modal
@@ -1522,10 +1499,10 @@ export function ProfileScreen({
       )}
       <EntranceView delay={60} distance={16} style={styles.profileCard}>
         <View style={styles.profileIdentity}>
-          <View style={styles.avatar}><Text style={styles.avatarText}>考</Text></View>
+          {user?.avatarUrl ? <Image source={{ uri: mobileApi.resolveDownloadUrl(user.avatarUrl) }} style={styles.avatar} /> : <View style={styles.avatar}><Text style={styles.avatarText}>考</Text></View>}
           <View style={styles.profileIdentityCopy}>
             <Text style={styles.profileKicker}>考匠账号</Text>
-            <Text numberOfLines={1} style={styles.profileName}>{user?.username ?? '未登录用户'}</Text>
+            <Text numberOfLines={1} style={styles.profileName}>{user?.communityName || user?.username || '未登录用户'}</Text>
             <Text numberOfLines={1} style={styles.profileMeta}>
               {activeCertificate?.name ?? (user ? '请选择证书与题库' : '预览模式')}
             </Text>
@@ -1603,6 +1580,8 @@ export function ProfileScreen({
           />
           <SettingRow onPress={() => onNavigate('vip')} title="我的会员" value={membershipLabels[membershipPlan]} />
           <SettingRow onPress={() => setRedeemOpen(true)} title="兑换码" value="开通 / 续期会员" />
+          {user && !preview && <SettingRow onPress={() => setSecurityOpen(true)} title="账号与安全" value="登录密码与账号保护" />}
+          {user?.isAdmin && !preview && <SettingRow onPress={() => setAdminOpen(true)} title="管理中心" value="注册账号 · 公告管理" />}
           <SettingRow
             onPress={user ? onOpenCertificatePicker : undefined}
             title="考试与题库"
@@ -1611,11 +1590,11 @@ export function ProfileScreen({
           <SettingRow
             onPress={() => void openAiSettings()}
             title="AI 学习助手"
-            value={canManageAiService ? '管理作者服务' : '作者服务 · 按额度使用'}
+            value={canManageAiService ? '管理作者服务' : '作者服务 · 按积分使用'}
           />
           <SettingRow
-            onPress={user ? openCommunityNameSettings : undefined}
-            title="社区昵称"
+            onPress={user ? () => setProfileOpen(true) : undefined}
+            title="个人资料"
             value={user?.communityName || user?.username || '登录后设置'}
           />
         </View>
@@ -1655,6 +1634,12 @@ export function ProfileScreen({
           </AnimatedPressable>
         </EntranceView>
       )}
+      {user && securityOpen && <Modal visible={active} onRequestClose={() => setSecurityOpen(false)} animationType="slide">
+        <AccountSecurityScreen key={user.id} onClose={() => setSecurityOpen(false)} onLogout={() => { setSecurityOpen(false); onLogout?.(); }} />
+      </Modal>}
+      {user && profileOpen && <Modal visible={active} onRequestClose={() => setProfileOpen(false)} animationType="slide">
+        <ProfileSetupScreen user={user} onSaved={(updated) => { onUserUpdated?.(updated); setProfileOpen(false); }} onCancel={() => setProfileOpen(false)} />
+      </Modal>}
       <Modal
         animationType="slide"
         onRequestClose={() => setAppSettingsOpen(false)}
@@ -1828,55 +1813,6 @@ export function ProfileScreen({
         </View>
       </Modal>
       <Modal
-        animationType="fade"
-        onRequestClose={() => {
-          if (!communityNameBusy) setCommunityNameOpen(false);
-        }}
-        transparent
-        visible={active && communityNameOpen}
-      >
-        <View style={styles.modalBackdrop}>
-          <View style={styles.nameModal}>
-            <Text style={styles.modalTitle}>设置社区昵称</Text>
-            <Text style={styles.modalIntro}>
-              这是你在公共大群里显示的名字，不会改变登录账号。最多 24 个字符。
-            </Text>
-            <TextInput
-              editable={!communityNameBusy}
-              maxLength={24}
-              onChangeText={setCommunityName}
-              placeholder="输入社区昵称"
-              placeholderTextColor={colors.textFaint}
-              style={styles.settingsInput}
-              value={communityName}
-            />
-            {!!communityNameError && (
-              <Text style={styles.settingsError}>{communityNameError}</Text>
-            )}
-            <View style={styles.modalActions}>
-              <AnimatedPressable
-                disabled={communityNameBusy}
-                onPress={() => setCommunityNameOpen(false)}
-                style={styles.modalSecondaryButton}
-              >
-                <Text style={styles.modalSecondaryText}>取消</Text>
-              </AnimatedPressable>
-              <AnimatedPressable
-                disabled={communityNameBusy}
-                onPress={() => void saveCommunityName()}
-                style={styles.modalPrimaryButton}
-              >
-                {communityNameBusy ? (
-                  <ActivityIndicator color={colors.white} />
-                ) : (
-                  <Text style={styles.modalPrimaryText}>保存昵称</Text>
-                )}
-              </AnimatedPressable>
-            </View>
-          </View>
-        </View>
-      </Modal>
-      <Modal
         animationType="slide"
         onRequestClose={() => setAiSettingsOpen(false)}
         transparent
@@ -1939,7 +1875,7 @@ export function ProfileScreen({
                 autoCapitalize="none"
                 editable={!preview && !settingsSaveBusy}
                 onChangeText={(model) => setAiForm((current) => ({ ...current, model }))}
-                placeholder="deepseek-chat"
+                placeholder="deepseek-flash"
                 placeholderTextColor={colors.textFaint}
                 style={styles.settingsInput}
                 value={aiForm.model}
@@ -2022,7 +1958,7 @@ export function ProfileScreen({
                   <GuideStep number="1" text="打开 DeepSeek 开放平台并登录账号。" />
                   <GuideStep number="2" text="在 API Keys 页面创建一个新的 Key。" />
                   <GuideStep number="3" text="回到这里，填写 API 地址、模型和 Key。" />
-                  <GuideStep number="4" text="点击底部保存，所有账号即可按各自额度使用 AI。" />
+                  <GuideStep number="4" text="点击底部保存，所有账号即可按各自积分使用 AI。" />
                   <AnimatedPressable
                     onPress={() =>
                       void Linking.openURL('https://platform.deepseek.com/api_keys').catch(
@@ -2105,7 +2041,7 @@ export function ProfileScreen({
                   我希望，让暂时无力承担学费的同学，也能接触到经过整理、真正精练有用的题目；让没有时间参加补课的同学，也能利用通勤、排队和睡前的碎片时间，一点点向前进步；让每个人都能体验到更现代、更贴近自己的 AI 教育。
                 </Text>
                 <Text style={styles.authorMessage}>
-                  普通题库继续免费开放。AI 服务由作者统一提供，按账号额度使用，可通过每日签到或会员获取额度。
+                  普通题库继续免费开放。AI 服务由作者统一提供，按账号积分使用，可通过每日签到或会员获取积分。
                 </Text>
                 <Text style={styles.authorMessage}>
                   如果考匠对你有帮助，欢迎打赏一笔小小的支持，帮助我们持续维护题库、改进体验，让考匠社区越来越好。

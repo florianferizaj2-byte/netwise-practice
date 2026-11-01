@@ -1,0 +1,458 @@
+{
+  "schemaVersion": 1,
+  "certificateId": "hcip-datacom-advanced",
+  "examCode": "H12-831",
+  "syllabusVersion": "V1.0",
+  "generatedAt": "2026-10-19",
+  "contentCategory": "syllabus_practice（原创仿真练习，非官方真题）",
+  "questionTypeNote": "全部为单项选择题；官方大纲未公布题型构成，本站题型比例不代表官方比例。",
+  "totals": {
+    "questions": 101,
+    "target": 101,
+    "modules": 8,
+    "knowledgeLeaves": 36,
+    "coveredLeaves": 36
+  },
+  "modules": [
+    {
+      "name": "IGP 高级特性",
+      "officialWeight": 17,
+      "targetQuestionCount": 17,
+      "actualQuestionCount": 17
+    },
+    {
+      "name": "BGP 高级特性",
+      "officialWeight": 10,
+      "targetQuestionCount": 10,
+      "actualQuestionCount": 10
+    },
+    {
+      "name": "IPv6 路由",
+      "officialWeight": 20,
+      "targetQuestionCount": 20,
+      "actualQuestionCount": 20
+    },
+    {
+      "name": "以太网高级技术",
+      "officialWeight": 10,
+      "targetQuestionCount": 11,
+      "actualQuestionCount": 11
+    },
+    {
+      "name": "MPLS 技术",
+      "officialWeight": 19,
+      "targetQuestionCount": 19,
+      "actualQuestionCount": 19
+    },
+    {
+      "name": "网络运维",
+      "officialWeight": 7,
+      "targetQuestionCount": 7,
+      "actualQuestionCount": 7
+    },
+    {
+      "name": "网络故障排除",
+      "officialWeight": 10,
+      "targetQuestionCount": 10,
+      "actualQuestionCount": 10
+    },
+    {
+      "name": "网络割接",
+      "officialWeight": 7,
+      "targetQuestionCount": 7,
+      "actualQuestionCount": 7
+    }
+  ],
+  "batches": [
+    {
+      "batch": "hcip-adv-b02",
+      "runId": "hcip-adv-b02",
+      "questionCount": 20,
+      "authorContext": "teammate hcip-author-adv-1 session 2026-10-19 (hcip-adv-b02, hcip-adv-b03)",
+      "reviewVerdicts": [
+        "pass"
+      ],
+      "reviewerContexts": [
+        "hcip-reviewer-adv-1 session 2026-10-19"
+      ],
+      "newSources": [
+        {
+          "id": "rfc3623-ospf-gr",
+          "title": "RFC 3623: Graceful OSPF Restart",
+          "url": "https://www.rfc-editor.org/rfc/rfc3623.txt",
+          "authority": "standard",
+          "locator": "Section 1 Overview、Section 2.2 When to Exit Graceful Restart、Section 3 Operation of Helper Neighbor、Section 3.1 Entering Helper Mode、Section 3.2 Exiting Helper Mode"
+        },
+        {
+          "id": "rfc5880-bfd",
+          "title": "RFC 5880: Bidirectional Forwarding Detection (BFD)",
+          "url": "https://www.rfc-editor.org/rfc/rfc5880.txt",
+          "authority": "standard",
+          "locator": "Section 3 Protocol Overview、Section 4.1 Generic BFD Control Packet Format（Detect Mult）、Section 6.8.4 Calculating the Detection Time"
+        },
+        {
+          "id": "rfc5120-isis-mt",
+          "title": "RFC 5120: Multi-Topology (MT) Routing in Intermediate System to Intermediate Systems (IS-ISs)",
+          "url": "https://www.rfc-editor.org/rfc/rfc5120.txt",
+          "authority": "standard",
+          "locator": "Section 1 Introduction、Section 4 MTs and Overload/Partition/Attached Bits、Section 6 MT SPF Computation、Section 7.1-7.4"
+        },
+        {
+          "id": "rfc4291-ipv6-addressing",
+          "title": "RFC 4291: IP Version 6 Addressing Architecture",
+          "url": "https://www.rfc-editor.org/rfc/rfc4291.txt",
+          "authority": "standard",
+          "locator": "Section 2.3 Text Representation of Address Prefixes、Section 2.5.6 Link-Local IPv6 Unicast Addresses"
+        }
+      ]
+    },
+    {
+      "batch": "hcip-adv-b03",
+      "runId": "hcip-adv-b03",
+      "questionCount": 20,
+      "authorContext": "teammate hcip-author-adv-1 session 2026-10-19 (hcip-adv-b02, hcip-adv-b03)",
+      "reviewVerdicts": [
+        "pass"
+      ],
+      "reviewerContexts": [
+        "hcip-reviewer-adv-1 session 2026-10-19"
+      ],
+      "newSources": [
+        {
+          "id": "rfc3623-ospf-gr",
+          "title": "RFC 3623: Graceful OSPF Restart",
+          "url": "https://www.rfc-editor.org/rfc/rfc3623.txt",
+          "authority": "standard",
+          "locator": "Section 1 Overview、Section 2.2 When to Exit Graceful Restart、Section 3 Operation of Helper Neighbor、Section 3.1 Entering Helper Mode、Section 3.2 Exiting Helper Mode"
+        },
+        {
+          "id": "rfc5880-bfd",
+          "title": "RFC 5880: Bidirectional Forwarding Detection (BFD)",
+          "url": "https://www.rfc-editor.org/rfc/rfc5880.txt",
+          "authority": "standard",
+          "locator": "Section 3 Protocol Overview、Section 4.1 Generic BFD Control Packet Format（Detect Mult）、Section 6.8.4 Calculating the Detection Time"
+        },
+        {
+          "id": "rfc3032-mpls-label",
+          "title": "RFC 3032: MPLS Label Stack Encoding",
+          "url": "https://www.rfc-editor.org/rfc/rfc3032.txt",
+          "authority": "standard",
+          "locator": "Section 2.1 Encoding the Label Stack"
+        },
+        {
+          "id": "rfc5120-isis-mt",
+          "title": "RFC 5120: Multi-Topology (MT) Routing in Intermediate System to Intermediate Systems (IS-ISs)",
+          "url": "https://www.rfc-editor.org/rfc/rfc5120.txt",
+          "authority": "standard",
+          "locator": "Section 1 Introduction、Section 4 MTs and Overload/Partition/Attached Bits、Section 6 MT SPF Computation、Section 7.1-7.4"
+        },
+        {
+          "id": "rfc4577-ospf-vpn",
+          "title": "RFC 4577: OSPF as the Provider/Customer Edge Protocol for BGP/MPLS IP Virtual Private Networks (VPNs)",
+          "url": "https://www.rfc-editor.org/rfc/rfc4577.txt",
+          "authority": "standard",
+          "locator": "Section 4.1.3 Inter-Area/Intra-Area/External Routes、Section 4.2.4 OSPF Domain Identifiers、Section 4.2.5 Loop Prevention、Section 4.2.7 Sham Links"
+        },
+        {
+          "id": "rfc4291-ipv6-addressing",
+          "title": "RFC 4291: IP Version 6 Addressing Architecture",
+          "url": "https://www.rfc-editor.org/rfc/rfc4291.txt",
+          "authority": "standard",
+          "locator": "Section 2.3 Text Representation of Address Prefixes、Section 2.5.6 Link-Local IPv6 Unicast Addresses"
+        }
+      ]
+    },
+    {
+      "batch": "hcip-adv-b04",
+      "runId": "hcip-adv-b04",
+      "questionCount": 20,
+      "authorContext": "teammate hcip-author-adv-2 session 2026-10-19 (hcip-adv-b04, hcip-adv-b05)",
+      "reviewVerdicts": [
+        "pass"
+      ],
+      "reviewerContexts": [
+        "hcip-reviewer-adv-2 session 2026-10-19"
+      ],
+      "newSources": [
+        {
+          "id": "rfc5082-gtsm",
+          "title": "RFC 5082: The Generalized TTL Security Mechanism (GTSM)",
+          "url": "https://www.rfc-editor.org/rfc/rfc5082.txt",
+          "authority": "standard",
+          "locator": "Section 2、3、6"
+        },
+        {
+          "id": "rfc5424-syslog",
+          "title": "RFC 5424: The Syslog Protocol",
+          "url": "https://www.rfc-editor.org/rfc/rfc5424.txt",
+          "authority": "standard",
+          "locator": "Section 6.2.1"
+        },
+        {
+          "id": "rfc2131-dhcp",
+          "title": "RFC 2131: Dynamic Host Configuration Protocol",
+          "url": "https://www.rfc-editor.org/rfc/rfc2131.txt",
+          "authority": "standard",
+          "locator": "Section 1.5、4.3"
+        }
+      ]
+    },
+    {
+      "batch": "hcip-adv-b05",
+      "runId": "hcip-adv-b05",
+      "questionCount": 21,
+      "authorContext": "teammate hcip-author-adv-2 session 2026-10-19 (hcip-adv-b04, hcip-adv-b05)",
+      "reviewVerdicts": [
+        "pass"
+      ],
+      "reviewerContexts": [
+        "hcip-reviewer-adv-2 session 2026-10-19"
+      ],
+      "newSources": [
+        {
+          "id": "rfc3032-mpls-label",
+          "title": "RFC 3032: MPLS Label Stack Encoding",
+          "url": "https://www.rfc-editor.org/rfc/rfc3032.txt",
+          "authority": "standard",
+          "locator": "Section 2.1、2.4"
+        },
+        {
+          "id": "rfc4360-extended-community",
+          "title": "RFC 4360: BGP Extended Communities Attribute",
+          "url": "https://www.rfc-editor.org/rfc/rfc4360.txt",
+          "authority": "standard",
+          "locator": "Section 2、4"
+        },
+        {
+          "id": "rfc4577-ospf-vpn",
+          "title": "RFC 4577: OSPF as the Provider/Customer Edge Protocol for BGP/MPLS IP Virtual Private Networks (VPNs)",
+          "url": "https://www.rfc-editor.org/rfc/rfc4577.txt",
+          "authority": "standard",
+          "locator": "Section 4.1.2、4.1.5、4.2.4、4.2.5"
+        },
+        {
+          "id": "rfc5905-ntp",
+          "title": "RFC 5905: Network Time Protocol Version 4: Protocol and Algorithms Specification",
+          "url": "https://www.rfc-editor.org/rfc/rfc5905.txt",
+          "authority": "standard",
+          "locator": "Section 2、3、9.1"
+        },
+        {
+          "id": "rfc5424-syslog",
+          "title": "RFC 5424: The Syslog Protocol",
+          "url": "https://www.rfc-editor.org/rfc/rfc5424.txt",
+          "authority": "standard",
+          "locator": "Section 6.2.1、6.2.3"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "huawei-h12-831-outline",
+      "title": "HCIP-Datacom-Advanced Routing & Switching Technology V1.0 考试大纲（华为人才在线）",
+      "url": "https://e.huawei.com/cn/talent/#/cert/product-details?certifiedProductId=351&authenticationLevel=CTYPE_CARE_HCIP&technicalField=IIC&version=1.0",
+      "authority": "official",
+      "access": "opened",
+      "checkedAt": "2026-10-18"
+    },
+    {
+      "id": "rfc2328-ospfv2",
+      "title": "RFC 2328: OSPF Version 2",
+      "url": "https://www.rfc-editor.org/rfc/rfc2328.txt",
+      "authority": "standard",
+      "access": "opened",
+      "checkedAt": "2026-10-18"
+    },
+    {
+      "id": "rfc4271-bgp4",
+      "title": "RFC 4271: A Border Gateway Protocol 4 (BGP-4)",
+      "url": "https://www.rfc-editor.org/rfc/rfc4271.txt",
+      "authority": "standard",
+      "access": "opened",
+      "checkedAt": "2026-10-18"
+    },
+    {
+      "id": "rfc1195-isis",
+      "title": "RFC 1195: Use of OSI IS-IS for Routing in TCP/IP and Dual Environments",
+      "url": "https://www.rfc-editor.org/rfc/rfc1195.txt",
+      "authority": "standard",
+      "access": "opened",
+      "checkedAt": "2026-10-18"
+    },
+    {
+      "id": "rfc5308-isis-ipv6",
+      "title": "RFC 5308: Routing IPv6 with IS-IS",
+      "url": "https://www.rfc-editor.org/rfc/rfc5308.txt",
+      "authority": "standard",
+      "access": "opened",
+      "checkedAt": "2026-10-18"
+    },
+    {
+      "id": "rfc5340-ospfv3",
+      "title": "RFC 5340: OSPF for IPv6",
+      "url": "https://www.rfc-editor.org/rfc/rfc5340.txt",
+      "authority": "standard",
+      "access": "opened",
+      "checkedAt": "2026-10-18"
+    },
+    {
+      "id": "rfc3623-ospf-gr",
+      "title": "RFC 3623: Graceful OSPF Restart",
+      "url": "https://www.rfc-editor.org/rfc/rfc3623.txt",
+      "authority": "standard",
+      "access": "opened",
+      "checkedAt": "2026-10-19"
+    },
+    {
+      "id": "rfc5880-bfd",
+      "title": "RFC 5880: Bidirectional Forwarding Detection (BFD)",
+      "url": "https://www.rfc-editor.org/rfc/rfc5880.txt",
+      "authority": "standard",
+      "access": "opened",
+      "checkedAt": "2026-10-19"
+    },
+    {
+      "id": "rfc5120-isis-mt",
+      "title": "RFC 5120: Multi-Topology (MT) Routing in Intermediate System to Intermediate Systems (IS-ISs)",
+      "url": "https://www.rfc-editor.org/rfc/rfc5120.txt",
+      "authority": "standard",
+      "access": "opened",
+      "checkedAt": "2026-10-19"
+    },
+    {
+      "id": "rfc4291-ipv6-addressing",
+      "title": "RFC 4291: IP Version 6 Addressing Architecture",
+      "url": "https://www.rfc-editor.org/rfc/rfc4291.txt",
+      "authority": "standard",
+      "access": "opened",
+      "checkedAt": "2026-10-19"
+    },
+    {
+      "id": "rfc4760-mp-bgp",
+      "title": "RFC 4760: Multiprotocol Extensions for BGP-4",
+      "url": "https://www.rfc-editor.org/rfc/rfc4760.txt",
+      "authority": "standard",
+      "access": "opened",
+      "checkedAt": "2026-10-18"
+    },
+    {
+      "id": "rfc3031-mpls",
+      "title": "RFC 3031: Multiprotocol Label Switching Architecture",
+      "url": "https://www.rfc-editor.org/rfc/rfc3031.txt",
+      "authority": "standard",
+      "access": "opened",
+      "checkedAt": "2026-10-18"
+    },
+    {
+      "id": "rfc5036-ldp",
+      "title": "RFC 5036: LDP Specification",
+      "url": "https://www.rfc-editor.org/rfc/rfc5036.txt",
+      "authority": "standard",
+      "access": "opened",
+      "checkedAt": "2026-10-18"
+    },
+    {
+      "id": "rfc4364-mpls-vpn",
+      "title": "RFC 4364: BGP/MPLS IP Virtual Private Networks (VPNs)",
+      "url": "https://www.rfc-editor.org/rfc/rfc4364.txt",
+      "authority": "standard",
+      "access": "opened",
+      "checkedAt": "2026-10-18"
+    },
+    {
+      "id": "rfc3032-mpls-label",
+      "title": "RFC 3032: MPLS Label Stack Encoding",
+      "url": "https://www.rfc-editor.org/rfc/rfc3032.txt",
+      "authority": "standard",
+      "access": "opened",
+      "checkedAt": "2026-10-19"
+    },
+    {
+      "id": "rfc4577-ospf-vpn",
+      "title": "RFC 4577: OSPF as the Provider/Customer Edge Protocol for BGP/MPLS IP Virtual Private Networks (VPNs)",
+      "url": "https://www.rfc-editor.org/rfc/rfc4577.txt",
+      "authority": "standard",
+      "access": "opened",
+      "checkedAt": "2026-10-19"
+    },
+    {
+      "id": "rfc1997-community",
+      "title": "RFC 1997: BGP Communities Attribute",
+      "url": "https://www.rfc-editor.org/rfc/rfc1997.txt",
+      "authority": "standard",
+      "access": "opened",
+      "checkedAt": "2026-10-18"
+    },
+    {
+      "id": "rfc4456-route-reflection",
+      "title": "RFC 4456: BGP Route Reflection: An Alternative to Full Mesh Internal BGP (IBGP)",
+      "url": "https://www.rfc-editor.org/rfc/rfc4456.txt",
+      "authority": "standard",
+      "access": "opened",
+      "checkedAt": "2026-10-18"
+    },
+    {
+      "id": "rfc5082-gtsm",
+      "title": "RFC 5082: The Generalized TTL Security Mechanism (GTSM)",
+      "url": "https://www.rfc-editor.org/rfc/rfc5082.txt",
+      "authority": "standard",
+      "access": "opened",
+      "checkedAt": "2026-10-19"
+    },
+    {
+      "id": "rfc5424-syslog",
+      "title": "RFC 5424: The Syslog Protocol",
+      "url": "https://www.rfc-editor.org/rfc/rfc5424.txt",
+      "authority": "standard",
+      "access": "opened",
+      "checkedAt": "2026-10-19"
+    },
+    {
+      "id": "rfc2131-dhcp",
+      "title": "RFC 2131: Dynamic Host Configuration Protocol",
+      "url": "https://www.rfc-editor.org/rfc/rfc2131.txt",
+      "authority": "standard",
+      "access": "opened",
+      "checkedAt": "2026-10-19"
+    },
+    {
+      "id": "rfc4360-extended-community",
+      "title": "RFC 4360: BGP Extended Communities Attribute",
+      "url": "https://www.rfc-editor.org/rfc/rfc4360.txt",
+      "authority": "standard",
+      "access": "opened",
+      "checkedAt": "2026-10-19"
+    },
+    {
+      "id": "rfc5905-ntp",
+      "title": "RFC 5905: Network Time Protocol Version 4: Protocol and Algorithms Specification",
+      "url": "https://www.rfc-editor.org/rfc/rfc5905.txt",
+      "authority": "standard",
+      "access": "opened",
+      "checkedAt": "2026-10-19"
+    }
+  ],
+  "review": {
+    "method": "独立盲审：题干与选项隐藏答案/解析后由未参与创作的复核会话作答，再与候选答案比对",
+    "reviewerContexts": [
+      "hcip-reviewer-adv-1 session 2026-10-19",
+      "hcip-reviewer-adv-2 session 2026-10-19"
+    ],
+    "verdict": "全部题目 pass"
+  },
+  "verification": {
+    "bankValidate": "node scripts/validate-question-banks.js：7269 unique bundled questions across 8 certificates（通过）",
+    "coveredReport": "node scripts/report-bank-coverage.js：两个 HCIP 证书模块缺口均为 0（通过）",
+    "examSmoke": "pipeline exam-smoke 各 10 次 × 20 题：ok=true，无重复/题量错误",
+    "build": "node scripts/build.mjs：通过（dist/app 生成）",
+    "e2e": "node test/e2e.js：通过",
+    "hcipPageCheck": "node test/hcip-practice.e2e.js：通过（证书选择、练习判分、刷新恢复、20 题模拟组卷）",
+    "unitTests": "npm test：62/70 个测试文件通过；8 个失败均为本次改动之前已存在的版本/兽医题量/沙箱/其他证书内容问题，与本批 HCIP 题库无关"
+  },
+  "limitations": [
+    "厂商设备行为题（路由策略、MQC、防火墙、堆叠、WLAN、割接流程等）部分仅能引用官方大纲与公开标准/工程实践，未能取得可打开的华为产品文档正文，已在 provenance locator 中如实标注。",
+    "题库为原创仿真练习，不是官方真题，也不代表官方题型构成；未在本批中引入多选、判断或主观题。",
+    "题库已有 20 题保留原 ID 与内容，本批只新增题目，未重写已发布题。"
+  ]
+}

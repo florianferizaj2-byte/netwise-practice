@@ -1,4 +1,13 @@
-import { lazy, useRef, useState } from "react";
+import { lazy, useEffect, useRef, useState } from "react";
+import { ChapterArt } from "../components/chapter-art.jsx";
+import { usePracticeViewport } from "../components/practice-viewport.jsx";
+import "./blue-practice-view.css";
+import {
+  usePracticeFlow,
+  PracticeModeSwitch,
+  PracticeSaveStatus,
+  MemorizeStatus,
+} from "../components/practice-flow.jsx";
 import { PracticeModes } from "../practice-modes.jsx";
 import { useDesktopWeb } from "../desktop-experience.jsx";
 import {
@@ -7,10 +16,12 @@ import {
 } from "../desktop-workspace.jsx";
 import {
   ArrowLeft,
+  BookOpen,
   ArrowRight,
   Check,
   ChevronRight,
   CircleCheck,
+  Clock,
   Flag,
   Lightbulb,
   MessageCircle,
@@ -33,6 +44,10 @@ import {
   QuestionReport,
 } from "../components/question-tools.jsx";
 import { Heading } from "../components/study-ui.jsx";
+import {
+  PracticeAutoNext,
+  usePracticeReview,
+} from "../components/practice-review.jsx";
 const VeterinaryPractice = lazy(() =>
   import("./veterinary-practice.jsx").then((m) => ({
     default: m.VeterinaryPractice,
@@ -48,25 +63,87 @@ export function Practice(props) {
 export function GenericPractice({
   session,
   refresh,
+  onAttemptSaved,
   run,
   busy,
   train,
   configured,
+  tutor,
   exit,
+  blue = false,
+  preferences,
+  returnLabel = "返回学习总览",
 }) {
   const desktop = useDesktopWeb();
   const [outcome, setOutcome] = useState({ serial: 0, streak: 0 });
-  const { index, setIndex, responses, setResponses, done, setDone } =
-    usePracticeProgress(session);
+  const {
+    index,
+    setIndex,
+    responses,
+    setResponses,
+    done,
+    setDone,
+    mode,
+    setMode,
+  } = usePracticeProgress(session);
   const [teacherOpen, setTeacherOpen] = useState(false);
   const started = useRef(Date.now());
+  const [roundStart] = useState(() => session.startedAt || Date.now());
+  const [elapsed, setElapsed] = useState(() =>
+    Math.max(0, Math.floor((Date.now() - roundStart) / 1000)),
+  );
+  useEffect(() => {
+    if (!blue || done) return;
+    const timer = setInterval(
+      () =>
+        setElapsed(Math.max(0, Math.floor((Date.now() - roundStart) / 1000))),
+      1000,
+    );
+    return () => clearInterval(timer);
+  }, [blue, done, roundStart]);
   const q = session.questions[index];
   const current = responses[q.id] || {};
   const selected = current.selected || [];
-  const result = current.result || null;
+  const memorizing = mode === "memorize";
+  const flow = usePracticeFlow({
+    session,
+    index,
+    mode,
+    responses,
+    setResponses,
+    done,
+    run,
+    onSaved: onAttemptSaved,
+    onConfirmed: (r) => {
+      setOutcome((old) => ({
+        serial: old.serial + 1,
+        streak: r.correct === true ? old.streak + 1 : 0,
+      }));
+      review.acknowledge();
+    },
+  });
+  const result = current.result || (memorizing ? flow.studyAnswer : null);
+  const questionPanelRef = usePracticeViewport({
+    questionId: q.id,
+    mode,
+    answerKey: result?.answer.join(","),
+    done,
+  });
   const teacher = current.teacher || "";
   const hint = current.hint || 0;
   const feedbackKind = current.feedbackKind || null;
+  const review = usePracticeReview({
+    questionId: q.id,
+    result,
+    enabled: blue,
+    autoNext: !memorizing && preferences?.autoNext === true,
+    showAnalysis: memorizing || current.revealed || preferences?.showAnalysis,
+    busy,
+    done,
+    last: index === session.questions.length - 1,
+    next: () => jumpTo(index + 1),
+    teacherOpen,
+  });
   const history = session.questions
     .map((question) => responses[question.id])
     .filter((response) => response?.submitted)
@@ -74,7 +151,12 @@ export function GenericPractice({
   const answeredIds = new Set(history.map((item) => item.questionId));
   const revealedIds = new Set(
     session.questions
-      .filter((question) => responses[question.id]?.revealed)
+      .filter(
+        (question) =>
+          !responses[question.id]?.submitted &&
+          (responses[question.id]?.revealed ||
+            responses[question.id]?.memorized),
+      )
       .map((question) => question.id),
   );
   const updateCurrent = (patch) =>
@@ -83,7 +165,7 @@ export function GenericPractice({
       [q.id]: { ...old[q.id], ...patch },
     }));
   const choose = (k) => {
-    if (result) return;
+    if (memorizing || result || busy || current.attemptPayload) return;
     updateCurrent({
       selected: isSingleSelect(q)
         ? [k]
@@ -94,28 +176,27 @@ export function GenericPractice({
   };
   const jumpTo = (nextIndex) => {
     if (busy || nextIndex < 0 || nextIndex >= session.questions.length) return;
+    review.cancel();
     setIndex(nextIndex);
     setTeacherOpen(false);
-    if (desktop) window.scrollTo({ top: 0, behavior: "instant" });
     started.current = Date.now();
   };
-  const submit = () =>
-    run("正在记录作答", async () => {
-      const r = await api("/attempts", {
-        questionId: q.id,
-        selected,
-        ...(q.type === "short_answer"
-          ? { response: current.responseDraft || "" }
-          : {}),
-        timeMs: Math.min(86400000, Date.now() - started.current),
-      });
-      updateCurrent({ result: r, submitted: true, revealed: false });
-      setOutcome((old) => ({
-        serial: old.serial + 1,
-        streak: r.correct === true ? old.streak + 1 : 0,
-      }));
-      await refresh();
-    });
+  const submit = () => {
+    if (
+      memorizing ||
+      current.attemptPayload ||
+      busy ||
+      result ||
+      !selected.length ||
+      (q.type === "short_answer" && !current.responseDraft?.trim())
+    )
+      return;
+    flow.submit(
+      selected,
+      q.type === "short_answer" ? current.responseDraft || "" : undefined,
+      Math.min(86400000, Date.now() - started.current),
+    );
+  };
   const removeWrong = () =>
     run("正在移除错题", async () => {
       await api(`/wrong/${encodeURIComponent(q.id)}`, null, "DELETE");
@@ -153,12 +234,57 @@ export function GenericPractice({
       updateCurrent({ teacher: r.text, ...(level ? { hint: level } : {}) });
       setTeacherOpen(true);
     });
+  useEffect(() => {
+    if (!blue || done) return;
+    const keyboard = (event) => {
+      if (
+        event.repeat ||
+        event.ctrlKey ||
+        event.metaKey ||
+        event.altKey ||
+        busy ||
+        document.querySelector('[role="dialog"], dialog[open]') ||
+        event.isComposing ||
+        event.target.closest?.(
+          'input,textarea,select,a,summary,[contenteditable="true"]',
+        ) ||
+        (event.target.closest?.("button") &&
+          !event.target.closest(
+            ".option,.practice-primary,.practice-mode-switch",
+          ))
+      )
+        return;
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        jumpTo(index - 1);
+      }
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        jumpTo(index + 1);
+      }
+      if (event.key === "Enter") {
+        event.preventDefault();
+        memorizing || result ? next() : submit();
+      }
+    };
+    document.addEventListener("keydown", keyboard);
+    return () => document.removeEventListener("keydown", keyboard);
+  }, [blue, done, busy, index, current, session, mode, result]);
+  const correctCount = history.filter((h) => h.correct === true).length;
+  const accuracy = history.length
+    ? Math.round((correctCount / history.length) * 100)
+    : null;
   if (done)
     return (
-      <div className="completion">
+      <div className={`completion${blue ? " blue-practice-summary" : ""}`}>
         <CircleCheck size={56} />
-        <h1>本轮练习完成</h1>
+        <h1>
+          {history.length + revealedIds.size === session.questions.length
+            ? "本轮练习完成"
+            : "本轮练习已结束"}
+        </h1>
         <p>{session.title}</p>
+        <PracticeSaveStatus flow={flow} summary />
         <div className="completion-stats">
           <strong>
             {history.filter((h) => h.correct).length}
@@ -169,37 +295,116 @@ export function GenericPractice({
             <small>答错</small>
           </strong>
           <strong>
-            {session.questions.length - history.length}
+            {revealedIds.size}
             <small>查看答案</small>
+          </strong>
+          <strong>
+            {Math.max(
+              0,
+              session.questions.length - history.length - revealedIds.size,
+            )}
+            <small>未作答</small>
           </strong>
         </div>
         <button className="primary" onClick={exit}>
-          返回学习总览
+          {returnLabel}
           <ArrowRight size={17} />
         </button>
       </div>
     );
   return (
-    <>
-      <Heading
-        title={session.title}
-        subtitle={`${q.chapter}${q.knowledgeSection ? ` · ${q.knowledgeSection}` : ""} · ${q.targetKnowledgePoint || q.knowledgePoint}`}
-      >
-        <button onClick={exit}>
-          <ArrowLeft size={16} />
-          结束练习
-        </button>
-      </Heading>
+    <div className={`practice-page${blue ? " blue-practice" : ""}`}>
+      {blue ? (
+        <header className="blue-practice-heading">
+          <div>
+            <button
+              className="blue-practice-back"
+              disabled={!!busy}
+              onClick={exit}
+            >
+              <ArrowLeft size={15} />
+              {returnLabel}
+            </button>
+            <div className="blue-practice-title">
+              <ChapterArt
+                certificateId={session.certificateId}
+                title={q.chapter}
+              />
+              <div>
+                <h1>{session.title}</h1>
+                <p>
+                  {q.chapter} · 本轮 {session.questions.length} 题
+                </p>
+              </div>
+            </div>
+          </div>
+        </header>
+      ) : (
+        <Heading
+          title={session.title}
+          subtitle={`${q.chapter}${q.knowledgeSection ? ` · ${q.knowledgeSection}` : ""} · ${q.targetKnowledgePoint || q.knowledgePoint}`}
+        >
+          <button onClick={exit}>
+            <ArrowLeft size={16} />
+            结束练习
+          </button>
+        </Heading>
+      )}
       <div className="practice-layout">
-        <section className="question-panel">
-          <PracticeModes outcome={outcome} />
+        {blue && (
+          <div className="blue-round-progress">
+            <BookOpen size={22} />
+            <span>
+              本轮进度 <strong>{history.length}</strong> /{" "}
+              {session.questions.length} 题已答
+            </span>
+            <div
+              className="progress"
+              role="progressbar"
+              aria-label="本轮作答进度"
+              aria-valuemin={0}
+              aria-valuemax={session.questions.length}
+              aria-valuenow={history.length}
+            >
+              <i
+                style={{
+                  width: `${(history.length / session.questions.length) * 100}%`,
+                }}
+              />
+            </div>
+            <span
+              className="blue-round-clock"
+              title="从本轮开始计算，包含暂时离开页面的时间"
+            >
+              <Clock size={19} />
+              本轮用时{" "}
+              <time>
+                {Math.floor(elapsed / 60)
+                  .toString()
+                  .padStart(2, "0")}
+                :{(elapsed % 60).toString().padStart(2, "0")}
+              </time>
+            </span>
+          </div>
+        )}
+        <section className="question-panel" ref={questionPanelRef}>
+          <PracticeModeSwitch
+            mode={mode}
+            setMode={(value) => {
+              review.cancel();
+              setMode(value);
+            }}
+            disabled={!!busy}
+          >
+            <PracticeModes outcome={outcome} />
+          </PracticeModeSwitch>
           <div className="question-top">
             <span>
               第 <b>{index + 1}</b> / {session.questions.length} 题
             </span>
             <span
               className={
-                "badge " + (q.source === "ai_generated" ? "green" : "")
+                "badge " + (q.source === "ai_generated" ? "brand" : "")
               }
             >
               {sourceName(q)}
@@ -220,7 +425,7 @@ export function GenericPractice({
               </select>
             </label>
           </div>
-          <div className="progress">
+          <div className={`progress${blue ? " blue-question-position" : ""}`}>
             <i
               style={{
                 width: ((index + 1) / session.questions.length) * 100 + "%",
@@ -281,53 +486,61 @@ export function GenericPractice({
           </div>
           <QuestionImages question={q} />
           <h2 className="question-text">{q.question}</h2>
-          <QuestionOrigin question={q} />
+          <QuestionOrigin question={q} compact={blue} />
+          <MemorizeStatus flow={flow} visible={memorizing && !current.result} />
           {q.type === "short_answer" ? (
-            <div className="short-answer-editor">
-              <label htmlFor={`short-answer-${q.id}`}>我的作答</label>
-              <textarea
-                id={`short-answer-${q.id}`}
-                rows={5}
-                maxLength={5000}
-                placeholder="在这里填写配置命令、计算过程或文字答案…"
-                value={result?.response ?? current.responseDraft ?? ""}
-                disabled={!!result || !!busy}
-                onChange={(event) =>
-                  updateCurrent({ responseDraft: event.target.value })
-                }
-              />
-              {!result && (
-                <div
-                  className="short-answer-self-rate"
-                  role="group"
-                  aria-label="自我评估答案"
-                >
-                  <span>对照题意完成作答后，自评：</span>
-                  <button
-                    type="button"
-                    className={selected[0] === "A" ? "selected correct" : ""}
-                    disabled={!!busy}
-                    onClick={() => updateCurrent({ selected: ["A"] })}
+            !memorizing && (
+              <div className="short-answer-editor">
+                <label htmlFor={`short-answer-${q.id}`}>我的作答</label>
+                <textarea
+                  id={`short-answer-${q.id}`}
+                  rows={5}
+                  maxLength={5000}
+                  placeholder="在这里填写配置命令、计算过程或文字答案…"
+                  value={result?.response ?? current.responseDraft ?? ""}
+                  disabled={
+                    memorizing || !!result || !!busy || !!current.attemptPayload
+                  }
+                  onChange={(event) =>
+                    updateCurrent({ responseDraft: event.target.value })
+                  }
+                />
+                {!result && !memorizing && (
+                  <div
+                    className="short-answer-self-rate"
+                    role="group"
+                    aria-label="自我评估答案"
                   >
-                    我答对了
-                  </button>
-                  <button
-                    type="button"
-                    className={selected[0] === "B" ? "selected review" : ""}
-                    disabled={!!busy}
-                    onClick={() => updateCurrent({ selected: ["B"] })}
-                  >
-                    需要复习
-                  </button>
-                </div>
-              )}
-            </div>
+                    <span>对照题意完成作答后，自评：</span>
+                    <button
+                      type="button"
+                      className={selected[0] === "A" ? "selected correct" : ""}
+                      disabled={!!busy || !!current.attemptPayload}
+                      onClick={() => updateCurrent({ selected: ["A"] })}
+                    >
+                      我答对了
+                    </button>
+                    <button
+                      type="button"
+                      className={selected[0] === "B" ? "selected review" : ""}
+                      disabled={!!busy || !!current.attemptPayload}
+                      onClick={() => updateCurrent({ selected: ["B"] })}
+                    >
+                      需要复习
+                    </button>
+                  </div>
+                )}
+              </div>
+            )
           ) : (
             <div className="options">
               {Object.entries(q.options).map(([k, v]) => (
                 <button
                   key={k}
-                  disabled={!!result}
+                  disabled={
+                    memorizing || !!result || !!busy || !!current.attemptPayload
+                  }
+                  aria-pressed={selected.includes(k)}
                   className={
                     "option " +
                     (selected.includes(k) ? "chosen " : "") +
@@ -368,12 +581,26 @@ export function GenericPractice({
                     : "正确答案 " + result.answer.join("、")}
                 </span>
               </h3>
-              {q.type === "short_answer" && result.expectedAnswer && (
-                <div className="expected-answer">{result.expectedAnswer}</div>
+              {review.expanded &&
+                q.type === "short_answer" &&
+                result.expectedAnswer && (
+                  <div className="expected-answer">{result.expectedAnswer}</div>
+                )}
+              {review.expanded ? (
+                <p>{result.analysis}</p>
+              ) : (
+                <button
+                  className="practice-analysis-reveal"
+                  type="button"
+                  onClick={review.reveal}
+                >
+                  展开答案解析
+                </button>
               )}
-              <p>{result.analysis}</p>
             </div>
           )}
+          <PracticeAutoNext review={review} />
+          <PracticeSaveStatus current={current} flow={flow} />
           {result && q.source === "ai_generated" && (
             <div className="question-feedback">
               <span>这道共享 AI 题怎么样？</span>
@@ -412,6 +639,15 @@ export function GenericPractice({
             </div>
           )}
           <div className="question-actions">
+            {blue && (
+              <button
+                disabled={!!busy || index === 0}
+                onClick={() => jumpTo(index - 1)}
+              >
+                <ArrowLeft size={16} />
+                上一题
+              </button>
+            )}
             <button
               disabled={!!busy || hint >= 3 || !!result}
               onClick={() => ask("给我提示", hint + 1)}
@@ -421,10 +657,12 @@ export function GenericPractice({
             </button>
             <button
               className="text-button"
-              disabled={!!busy || !!result}
+              disabled={
+                memorizing || !!busy || !!result || !!current.attemptPayload
+              }
               onClick={() =>
                 run("正在查看答案", async () => {
-                  const revealed = await api(`/questions/${q.id}/reveal`, {});
+                  const revealed = await flow.reveal();
                   setOutcome((old) => ({ serial: old.serial + 1, streak: 0 }));
                   updateCurrent({
                     result: revealed,
@@ -443,9 +681,9 @@ export function GenericPractice({
               onChanged={refresh}
             />
             <QuestionReport question={q} busy={busy} run={run} />
-            {result ? (
+            {result || memorizing ? (
               <>
-                {result.correct === false && (
+                {result?.correct === false && (
                   <button
                     className="ai-analysis-button"
                     onClick={analyzeMistake}
@@ -455,18 +693,20 @@ export function GenericPractice({
                     AI 解析
                   </button>
                 )}
-                {result.correct === true && session.title === "错题复习" && (
-                  <button
-                    className="wrong-remove"
-                    disabled={!!busy || current.wrongRemoved}
-                    onClick={removeWrong}
-                  >
-                    <Trash2 size={16} />
-                    {current.wrongRemoved ? "已移除错题" : "移除错题"}
-                  </button>
-                )}
+                {result?.correct === true &&
+                  current.submitted &&
+                  session.title === "错题复习" && (
+                    <button
+                      className="wrong-remove"
+                      disabled={!!busy || current.wrongRemoved}
+                      onClick={removeWrong}
+                    >
+                      <Trash2 size={16} />
+                      {current.wrongRemoved ? "已移除错题" : "移除错题"}
+                    </button>
+                  )}
                 <button
-                  className="primary push-right"
+                  className="primary push-right practice-primary"
                   onClick={next}
                   disabled={!!busy}
                 >
@@ -478,24 +718,62 @@ export function GenericPractice({
               </>
             ) : (
               <button
-                className="primary push-right"
+                className="primary push-right practice-primary"
                 disabled={
                   !selected.length ||
                   (q.type === "short_answer" &&
                     !current.responseDraft?.trim()) ||
-                  !!busy
+                  !!busy ||
+                  !!current.attemptPayload
                 }
                 onClick={submit}
               >
-                {q.type === "short_answer" ? "提交自评" : "提交答案"}
+                {current.saveStatus === "pending"
+                  ? "正在保存作答…"
+                  : q.type === "short_answer"
+                    ? "提交自评"
+                    : "提交答案"}
                 <Check size={17} />
               </button>
             )}
           </div>
+          {blue && (
+            <div className="blue-practice-shortcuts">
+              <span>
+                {memorizing
+                  ? "Enter 下一题 · ← → 切换题目 · 背题不计入答题成绩"
+                  : "Enter 提交或进入下一题 · ← → 切换题目"}
+              </span>
+              {!result && (
+                <button
+                  disabled={!!busy || index === session.questions.length - 1}
+                  onClick={() => jumpTo(index + 1)}
+                >
+                  跳过此题
+                  <ArrowRight size={15} />
+                </button>
+              )}
+            </div>
+          )}
         </section>
         <aside className="teacher-panel">
+          {blue && (
+            <div className="blue-answer-stats">
+              <div>
+                <span>已答</span>
+                <strong>
+                  {history.length} <small>/ {session.questions.length}</small>
+                </strong>
+              </div>
+              <div>
+                <span>正确率</span>
+                <strong>{accuracy === null ? "—" : accuracy + "%"}</strong>
+              </div>
+            </div>
+          )}
           {desktop && (
             <DesktopPracticeNav
+              pageSize={blue ? 20 : 40}
               questions={session.questions}
               index={index}
               responses={responses}
@@ -507,6 +785,12 @@ export function GenericPractice({
             <Sparkles size={21} />
             AI 老师
           </h2>
+          {tutor && (
+            <button disabled={!!busy} onClick={() => tutor(q)}>
+              <BookOpen size={17} />
+              AI 精讲这个知识点
+            </button>
+          )}
           <button
             className="teacher-open"
             onClick={() => setTeacherOpen(!teacherOpen)}
@@ -551,8 +835,17 @@ export function GenericPractice({
               <span>一步一步，找到答案</span>
             </div>
           )}
+          {blue && (
+            <div className="blue-practice-end">
+              <p>提交后查看答案与解析，错题自动收录。</p>
+              <button disabled={!!busy} onClick={() => setDone(true)}>
+                结束本轮练习
+              </button>
+              <small>结束后查看本轮结果</small>
+            </div>
+          )}
         </aside>
       </div>
-    </>
+    </div>
   );
 }

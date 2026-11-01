@@ -1,0 +1,67 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import fs from "node:fs";
+import path from "node:path";
+import crypto from "node:crypto";
+import {createStore} from "../server/store.js";
+import {createApp} from "../server/index.js";
+import {learningFixture} from "./helpers/ai-learning.js";
+
+test("authenticated progressive exam API replays durable events and isolates answers, costs and certificates",async t=>{
+  const parent=path.resolve("tmp"),dir=fs.mkdtempSync(path.join(parent,"ai-learning-api-")),store=createStore(dir);
+  const user=store.register("learning_api","fixture-password-123"),other=store.register("learning_other","fixture-password-123");
+  store.selectCertificate(user.id,"network-engineer");store.selectCertificate(other.id,"network-engineer");
+  const fixture=learningFixture(store,{delayMs:10,holdAfter:3});
+  const app=await createApp({store,provider:fixture.provider,withFrontend:false,accountSecurity:{enabled:false},
+    aiLearning:{tickMs:20,questions:fixture.questions}});
+  const server=app.listen(0,"127.0.0.1");await new Promise(resolve=>server.once("listening",resolve));
+  const base="http://127.0.0.1:"+server.address().port+"/api",token=store.createAuthSession(user.id),otherToken=store.createAuthSession(other.id);
+  t.after(async()=>{fixture.release();await app.locals.stop();server.closeAllConnections();await new Promise(resolve=>server.close(resolve));store.db.close();
+    assert.equal(path.dirname(dir),parent);fs.rmSync(dir,{recursive:true,force:true});});
+  const request=async(url,body,bearer=token)=>{
+    const r=await fetch(base+url,{method:body?"POST":"GET",headers:{"Content-Type":"application/json",...(bearer?{Authorization:"Bearer "+bearer}:{})},...(body?{body:JSON.stringify(body)}:{})});
+    return {status:r.status,body:await r.json()};
+  };
+  assert.equal((await request("/ai-learning/profile",null,"")).status,401);
+  const profile=await request("/ai-learning/profile");assert.equal(profile.status,200);
+  const setup={kind:"exam",strategy:"weakness",count:10,durationMinutes:40,pointIds:[]};
+  const preview=await request("/ai-learning/preview",setup);assert.equal(preview.status,200,JSON.stringify(preview.body));
+  assert.equal(fixture.generated,0);
+  const body={...setup,requestId:crypto.randomUUID(),profileRevision:preview.body.profileRevision,acceptedPricing:true};
+  let response=await request("/ai-learning/jobs",body);assert.equal(response.status,200,JSON.stringify(response.body));
+  const id=response.body.id;
+  assert.equal((await request("/ai-learning/jobs",body)).body.id,id);
+  assert.equal((await request("/ai-learning/jobs/"+id,null,otherToken)).status,404);
+  assert.equal((await request("/ai-learning/jobs/"+id+"/answers",{expectedVersion:0,answers:{}},otherToken)).status,404);
+  const wait=async(fn)=>{for(let i=0;i<160;i++){const value=await fn();if(value)return value;await new Promise(resolve=>setTimeout(resolve,100));}throw Error("Timed out waiting for synthetic progressive paper");};
+  const ready=await wait(async()=>{const v=(await request("/ai-learning/jobs/"+id)).body;return v.readyCount>=3?v:null;});
+  assert.ok(ready.readyCount<10);assert.equal(ready.result,null);
+  assert.ok(ready.questions.every(q=>!("answer" in q)&&!("analysis" in q)&&!("ownerUserId" in q)));
+  response=await request("/ai-learning/jobs/"+id+"/start",{});assert.equal(response.status,200);
+  const q=ready.questions[0],patch={expectedVersion:0,answers:{[q.id]:["A"]}};
+  const saved=await request("/ai-learning/jobs/"+id+"/answers",patch);assert.equal(saved.status,200);assert.equal(saved.body.answersVersion,1);
+  assert.equal((await request("/ai-learning/jobs/"+id+"/answers",patch)).body.answersVersion,1);
+  const streamController=new AbortController();
+  const stream=await fetch(base+"/ai-learning/jobs/"+id+"/events?after=0",{headers:{Authorization:"Bearer "+token},signal:streamController.signal});
+  assert.equal(stream.status,200);assert.equal(stream.headers.get("x-accel-buffering"),"no");
+  const reader=stream.body.getReader(),first=await reader.read(),chunk=new TextDecoder().decode(first.value);
+  assert.match(chunk,/question-ready/);assert.ok(!chunk.includes('"answer":'));streamController.abort();await reader.cancel().catch(()=>{});
+  const cross=await fetch(base+"/ai-learning/jobs/"+id+"/events",{headers:{Authorization:"Bearer "+otherToken}});
+  assert.equal(cross.status,404);await cross.text();
+  fixture.release();
+  const completed=await wait(async()=>{const v=(await request("/ai-learning/jobs/"+id)).body;return v.readyCount===10?v:null;});
+  assert.equal(completed.status,"completed");assert.ok(fixture.reviews>=10);
+  const revocation=await fetch(base+"/ai-learning/jobs/"+id+"/events?after="+completed.eventId,
+    {headers:{Authorization:"Bearer "+token},signal:AbortSignal.timeout(5000)});
+  const revocationReader=revocation.body.getReader();
+  store.selectCertificate(user.id,"hcia-datacom");
+  assert.equal((await request("/ai-learning/jobs/"+id)).status,404);
+  assert.deepEqual((await request("/ai-learning/jobs")).body.jobs,[]);
+  assert.equal((await revocationReader.read()).done,true);
+  await revocationReader.cancel();store.selectCertificate(user.id,"network-engineer");
+  assert.equal((await request("/ai-learning/jobs/"+id+"/submit",{expectedVersion:1})).status,200);
+  assert.equal((await request("/ai-learning/jobs/"+id+"/submit",{expectedVersion:1})).status,200);
+  assert.equal(store.allA(user.id).filter(a=>a.mode==="exam").length,10);
+  assert.equal(store.points.wallet(user.id).heldUnits,0);assert.equal(store.points.audit().passed,true);
+  assert.ok(Number(store.db.prepare("SELECT COUNT(*) AS n FROM ai_points_calls WHERE user_id=? AND state='finished'").get(user.id).n)>=20);
+});

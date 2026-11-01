@@ -1,0 +1,117 @@
+.blue-workspace .blue-vet-practice .vet-practice-banner {
+  display: none;
+}
+.blue-vet-practice .blue-practice-title > svg {
+  color: var(--web-accent);
+  flex: none;
+  margin-right: 16px;
+}
+.blue-vet-practice .vet-module-tabs {
+  margin-bottom: 18px;
+  gap: 10px;
+}
+.blue-workspace .blue-vet-practice .vet-module-tabs button {
+  background: var(--paper);
+  color: var(--text);
+  border-color: var(--line);
+  border-radius: 9px;
+  min-height: 46px;
+}
+.blue-workspace .blue-vet-practice .vet-module-tabs button.active {
+  background: var(--web-soft);
+  color: var(--web-accent);
+  border-color: var(--web-accent);
+  box-shadow: inset 0 -3px 0 var(--web-accent);
+}
+.blue-vet-practice .vet-module-tabs small {
+  color: var(--text-2);
+}
+.blue-vet-practice .vet-shared-card {
+  background: var(--web-soft);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--web-accent);
+  border-radius: 10px;
+  padding: 18px;
+  margin-top: 18px;
+}
+.blue-vet-practice .vet-shared-card-head {
+  color: var(--web-accent);
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.blue-vet-practice .vet-shared-card p {
+  color: var(--text);
+  font-size: calc(15px * var(--reading-scale, 1));
+  line-height: 1.85;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+.blue-vet-practice .vet-case-steps {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.blue-workspace .blue-vet-practice .vet-case-steps button {
+  min-height: 42px;
+  color: var(--text);
+  border-color: var(--line);
+  background: var(--paper);
+}
+.blue-workspace .blue-vet-practice .vet-case-steps button.active {
+  color: white;
+  background: #2454ed;
+  border-color: #2454ed;
+}
+.blue-workspace .blue-vet-practice .vet-case-steps button.active b {
+  color: white;
+}
+.blue-vet-practice .vet-options-label,
+.blue-vet-practice .vet-teacher-note {
+  color: var(--text-2);
+}
+.blue-vet-navigation {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.blue-vet-practice .question-actions {
+  margin-top: 16px;
+}
+.blue-practice.blue-vet-practice .blue-practice-heading > button { display: inline-flex; min-height: 42px; }
+.blue-vet-practice .vet-question-nav {
+  border-color: var(--line);
+  background: var(--web-soft);
+}
+.blue-vet-practice
+  :is(
+    .vet-nav-head,
+    .vet-nav-toggle,
+    .vet-nav-toolbar,
+    .vet-nav-pagebar,
+    .vet-nav-legend
+  ) {
+  color: var(--text);
+}
+.blue-vet-practice .vet-nav-toolbar select {
+  color: var(--text);
+  background: var(--paper);
+  border-color: var(--line);
+}
+@media (max-width: 600px) {
+  .blue-vet-practice .vet-module-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .blue-vet-practice .vet-module-tabs button {
+    min-width: 0;
+  }
+  .blue-vet-practice .blue-practice-heading {
+    flex-wrap: wrap;
+  }
+  .blue-vet-practice .vet-shared-card {
+    padding: 14px;
+  }
+}

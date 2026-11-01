@@ -1,0 +1,370 @@
+[
+  {
+    "id": "ncre-office-office-ui-01",
+    "type": "single_choice",
+    "question": "在 Office 2016 中要调整自动保存间隔、显示网格线等全局行为，应进入（ ）。",
+    "options": {
+      "A": "“开始”选项卡中的“段落”组",
+      "B": "右键快捷菜单中的“字体”",
+      "C": "“文件”选项卡中的“选项”",
+      "D": "“视图”选项卡中的“窗口”组"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "“文件→选项”打开该程序的选项对话框，集中管理保存、显示、校对、语言、自定义功能区等全局设置。",
+    "chapter": "Office 应用基础",
+    "knowledgeSection": "界面与功能设置",
+    "knowledgePoint": "界面使用与功能设置",
+    "difficulty": "easy",
+    "tags": [
+      "Office选项",
+      "全局设置"
+    ]
+  },
+  {
+    "id": "ncre-office-office-ui-02",
+    "type": "single_choice",
+    "question": "在 Office 2016 的功能区中找不到某个命令时，最快的定位方式是（ ）。",
+    "options": {
+      "A": "打开帮助文档逐页阅读",
+      "B": "逐个选项卡翻找",
+      "C": "重新安装 Office",
+      "D": "使用功能区上的“告诉我您想要做什么”搜索框"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "“告诉我您想要做什么”搜索框可以按关键词检索命令、帮助和智能服务，并能直接执行找到的命令，是定位陌生功能的快捷入口。",
+    "chapter": "Office 应用基础",
+    "knowledgeSection": "界面与功能设置",
+    "knowledgePoint": "界面使用与功能设置",
+    "difficulty": "medium",
+    "tags": [
+      "搜索框",
+      "命令定位"
+    ]
+  },
+  {
+    "id": "ncre-office-office-ui-03",
+    "type": "single_choice",
+    "question": "Office 2016 中，快速访问工具栏默认位于（ ）。",
+    "options": {
+      "A": "窗口底部状态栏右侧",
+      "B": "窗口左上角标题栏区域",
+      "C": "功能区最右侧",
+      "D": "后台视图的“信息”页"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "快速访问工具栏默认在标题栏左侧，存放保存、撤销、恢复等高频命令，也可通过下拉箭头把它移到功能区下方。",
+    "chapter": "Office 应用基础",
+    "knowledgeSection": "界面与功能设置",
+    "knowledgePoint": "界面使用与功能设置",
+    "difficulty": "medium",
+    "tags": [
+      "快速访问工具栏",
+      "界面"
+    ]
+  },
+  {
+    "id": "ncre-office-office-ui-04",
+    "type": "single_choice",
+    "question": "关于 Office 的功能区，下列说法正确的是（ ）。",
+    "options": {
+      "A": "所有 Office 程序的选项卡顺序完全相同且不可调整",
+      "B": "快速访问工具栏不能添加自定义命令",
+      "C": "功能区一旦安装就不能隐藏",
+      "D": "可以通过“自定义功能区”增删选项卡和命令组"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "功能区支持通过选项自定义选项卡、组和命令，也可以双击选项卡或使用快捷键折叠/展开；快速访问工具栏可添加任意命令；不同程序的选项卡集合并不相同。",
+    "chapter": "Office 应用基础",
+    "knowledgeSection": "界面与功能设置",
+    "knowledgePoint": "界面使用与功能设置",
+    "difficulty": "hard",
+    "tags": [
+      "功能区",
+      "自定义"
+    ]
+  },
+  {
+    "id": "ncre-office-office-format-01",
+    "type": "single_choice",
+    "question": "Word 2016 文档默认的保存格式是（ ）。",
+    "options": {
+      "A": ".doc",
+      "B": ".rtf",
+      "C": ".txt",
+      "D": ".docx"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": ".docx 是基于 XML 的压缩格式，文件更小、恢复能力更强，是 Word 2007 之后的默认格式；.doc 是 Word 97-2003 的二进制格式。",
+    "chapter": "Office 应用基础",
+    "knowledgeSection": "文件与信息共享",
+    "knowledgePoint": "文件格式与兼容性",
+    "difficulty": "easy",
+    "tags": [
+      "文件格式",
+      "docx"
+    ]
+  },
+  {
+    "id": "ncre-office-office-format-02",
+    "type": "single_choice",
+    "question": "Excel 2016 工作簿默认的保存格式是（ ）。",
+    "options": {
+      "A": ".csv",
+      "B": ".xlsx",
+      "C": ".xls",
+      "D": ".xlt"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": ".xlsx 是 Excel 2007 之后默认的基于 XML 的格式；.xls 是旧版二进制格式，.csv 是纯文本分隔格式，.xlt 是模板。",
+    "chapter": "Office 应用基础",
+    "knowledgeSection": "文件与信息共享",
+    "knowledgePoint": "文件格式与兼容性",
+    "difficulty": "easy",
+    "tags": [
+      "文件格式",
+      "xlsx"
+    ]
+  },
+  {
+    "id": "ncre-office-office-format-03",
+    "type": "single_choice",
+    "question": "PowerPoint 2016 演示文稿默认的保存格式是（ ）。",
+    "options": {
+      "A": ".ppsx",
+      "B": ".pptx",
+      "C": ".potx",
+      "D": ".ppt"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": ".pptx 是 PowerPoint 2007 之后的默认格式；.ppt 是旧版格式，.ppsx 是放映格式（打开即放映），.potx 是模板格式。",
+    "chapter": "Office 应用基础",
+    "knowledgeSection": "文件与信息共享",
+    "knowledgePoint": "文件格式与兼容性",
+    "difficulty": "easy",
+    "tags": [
+      "文件格式",
+      "pptx"
+    ]
+  },
+  {
+    "id": "ncre-office-office-format-04",
+    "type": "single_choice",
+    "question": "希望接收方在不安装 Office 的手机或平板上也能看到与原件完全一致的版式，最合适的做法是（ ）。",
+    "options": {
+      "A": "将文档导出为 PDF",
+      "B": "把文档内容复制到邮件正文",
+      "C": "把文档压缩成 ZIP 发送",
+      "D": "把文档另存为 .doc"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "PDF 是固定版式格式，跨设备呈现稳定；另存为旧格式仍需要 Office 打开，ZIP 只改变打包方式，复制到邮件正文会丢失排版。",
+    "chapter": "Office 应用基础",
+    "knowledgeSection": "文件与信息共享",
+    "knowledgePoint": "文件格式与兼容性",
+    "difficulty": "medium",
+    "tags": [
+      "PDF",
+      "版式保持"
+    ]
+  },
+  {
+    "id": "ncre-office-office-format-05",
+    "type": "single_choice",
+    "question": "在 Office 2016 中打开由 Office 2003 创建的 .doc 文件时，标题栏显示“兼容模式”，其含义是（ ）。",
+    "options": {
+      "A": "文件被设置为只读",
+      "B": "文件正在被其他用户占用",
+      "C": "文件已经损坏无法编辑",
+      "D": "文件仍使用旧格式，部分新增功能不可用"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "兼容模式表示文档以旧格式保存，为避免旧版本打不开，Word 会禁用部分新特性。可通过“文件→信息→转换”升级为当前格式。",
+    "chapter": "Office 应用基础",
+    "knowledgeSection": "文件与信息共享",
+    "knowledgePoint": "文件格式与兼容性",
+    "difficulty": "medium",
+    "tags": [
+      "兼容模式",
+      "旧格式"
+    ]
+  },
+  {
+    "id": "ncre-office-office-format-06",
+    "type": "single_choice",
+    "question": "文档中包含 VBA 宏，希望保存后再次打开时宏仍然可用，应选择的保存格式是（ ）。",
+    "options": {
+      "A": ".dotx",
+      "B": ".docm",
+      "C": ".docx",
+      "D": ".pdf"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": ".docm 是启用宏的文档格式；.docx 保存时会剥离宏代码；.dotx 是模板；.pdf 是固定版式输出，都不能保留可执行宏。",
+    "chapter": "Office 应用基础",
+    "knowledgeSection": "文件与信息共享",
+    "knowledgePoint": "文件格式与兼容性",
+    "difficulty": "medium",
+    "tags": [
+      "宏格式",
+      "docm"
+    ]
+  },
+  {
+    "id": "ncre-office-office-format-07",
+    "type": "single_choice",
+    "question": "要把排版好的 Word 文档保存为可反复套用的模板，应选择的格式是（ ）。",
+    "options": {
+      "A": ".docm",
+      "B": ".docx",
+      "C": ".rtf",
+      "D": ".dotx"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": ".dotx 是 Word 模板格式，双击新建时以它为蓝本生成新文档，原模板不被修改；.docm 是启用宏的文档。",
+    "chapter": "Office 应用基础",
+    "knowledgeSection": "文件与信息共享",
+    "knowledgePoint": "文件格式与兼容性",
+    "difficulty": "medium",
+    "tags": [
+      "模板格式",
+      "dotx"
+    ]
+  },
+  {
+    "id": "ncre-office-office-format-08",
+    "type": "single_choice",
+    "question": "在 Excel 中把工作表数据另存为纯文本、以便导入其他业务系统时，最常用的格式是（ ）。",
+    "options": {
+      "A": "PDF",
+      "B": "XLSB",
+      "C": "CSV（逗号分隔）",
+      "D": "XLSX"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "CSV 用分隔符保存纯文本数据，几乎所有系统都能解析；XLSX/XLSB 是二进制或压缩包结构，PDF 是固定版式，都不便于数据导入。",
+    "chapter": "Office 应用基础",
+    "knowledgeSection": "文件与信息共享",
+    "knowledgePoint": "文件格式与兼容性",
+    "difficulty": "medium",
+    "tags": [
+      "CSV",
+      "数据交换"
+    ]
+  },
+  {
+    "id": "ncre-office-office-format-09",
+    "type": "single_choice",
+    "question": "把 .docx 文档另存为 .doc 后，最可能出现的情况是（ ）。",
+    "options": {
+      "A": "文档将无法再用 Word 打开",
+      "B": "新增的样式、图表、艺术字等特性可能丢失或被降级",
+      "C": "文档中的所有图片都会被删除",
+      "D": "文档体积一定变小且内容完全不变"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "旧格式不支持新版本的部分特性，另存时会被转换或降级，因此应在保存后用“检查兼容性”确认影响范围，必要时保留 .docx 原件。",
+    "chapter": "Office 应用基础",
+    "knowledgeSection": "文件与信息共享",
+    "knowledgePoint": "文件格式与兼容性",
+    "difficulty": "hard",
+    "tags": [
+      "向下兼容",
+      "格式转换"
+    ]
+  },
+  {
+    "id": "ncre-office-office-format-10",
+    "type": "single_choice",
+    "question": "关于 Word 的“检查兼容性”功能，下列说法正确的是（ ）。",
+    "options": {
+      "A": "它只能检查图片分辨率",
+      "B": "它用于检查文档是否含有病毒",
+      "C": "它自动把文档转换为旧格式并删除新特性",
+      "D": "它列出当前文档中使用、但在旧版 Office 中不支持的要素"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "“文件→信息→检查问题→检查兼容性”会生成报告，指出在 Word 97-2003 等旧版本中会失效或降级的元素，便于决定是否另存为旧格式。",
+    "chapter": "Office 应用基础",
+    "knowledgeSection": "文件与信息共享",
+    "knowledgePoint": "文件格式与兼容性",
+    "difficulty": "hard",
+    "tags": [
+      "检查兼容性",
+      "兼容性检查器"
+    ]
+  },
+  {
+    "id": "ncre-office-office-format-11",
+    "type": "single_choice",
+    "question": "PDF 与 XPS 的共同点是（ ）。",
+    "options": {
+      "A": "都支持运行 VBA 宏",
+      "B": "都只能由 Microsoft Office 生成",
+      "C": "都可以直接编辑其中的文字和表格",
+      "D": "都是固定版式格式，便于跨设备保持外观一致"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "PDF 和 XPS 都描述固定的页面版式，与设备字体无关，适合分发与打印；二者都不适合作为继续编辑的源文件，也不承载宏。",
+    "chapter": "Office 应用基础",
+    "knowledgeSection": "文件与信息共享",
+    "knowledgePoint": "文件格式与兼容性",
+    "difficulty": "hard",
+    "tags": [
+      "PDF",
+      "XPS"
+    ]
+  },
+  {
+    "id": "ncre-office-office-format-12",
+    "type": "single_choice",
+    "question": "在 Word 中把文档“标记为最终状态”后，主要效果是（ ）。",
+    "options": {
+      "A": "文档被自动加密并需要密码打开",
+      "B": "文档变为只读，编辑命令被禁用并提示这是最终版本",
+      "C": "文档被转换为 PDF",
+      "D": "文档中的所有批注被永久删除"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "“标记为最终状态”是协作提示手段，使文档只读并显示标记，但它不是安全机制，接收者仍可通过“仍要编辑”解除。",
+    "chapter": "Office 应用基础",
+    "knowledgeSection": "文件与信息共享",
+    "knowledgePoint": "文件格式与兼容性",
+    "difficulty": "medium",
+    "tags": [
+      "最终状态",
+      "只读"
+    ]
+  }
+]

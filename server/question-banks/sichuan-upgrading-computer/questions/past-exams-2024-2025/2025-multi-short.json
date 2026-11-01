@@ -1,0 +1,502 @@
+[
+  {
+    "id": "sc-past-2025-036",
+    "type": "multiple_choice",
+    "question": "下列属于我国自主研发的操作系统有（ ）。",
+    "options": {
+      "A": "鸿蒙操作系统（HarmonyOS）",
+      "B": "麒麟操作系统（KylinOS）",
+      "C": "统信操作系统（UOS）",
+      "D": "视窗操作系统（Windows）"
+    },
+    "answer": ["A", "B", "C"],
+    "analysis": "HarmonyOS、KylinOS、UOS 均由国内团队主导研发，属于国产操作系统，故 A、B、C 正确。Windows 由美国微软开发，不属于我国自主研发，故 D 错。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "软件与系统操作",
+    "knowledgePoint": "操作系统与软件分类",
+    "difficulty": "easy",
+    "tags": ["四川专升本", "计算机基础", "2025真题", "操作系统与软件分类"],
+    "provenance": [
+      {
+        "file": "2025四川专升本计算机基础真题及答案解析（aipta.com/article/10227.html）",
+        "questionNumber": "三、36"
+      }
+    ]
+  },
+  {
+    "id": "sc-past-2025-037",
+    "type": "multiple_choice",
+    "question": "数字素养的主要构成要素有（ ）。",
+    "options": {
+      "A": "数字意识",
+      "B": "计算思维",
+      "C": "数字化学习与创新",
+      "D": "数字社会责任"
+    },
+    "answer": ["A", "B", "C", "D"],
+    "analysis": "数字素养框架普遍将数字意识、计算思维、数字化学习与创新、数字社会责任并列为四大构成要素，因此全选。任何一项缺失都会使数字素养的定义不完整，漏选某项即把完整框架割裂。",
+    "chapter": "网络与信息安全",
+    "knowledgeSection": "信息安全",
+    "knowledgePoint": "安全防护与信息素养",
+    "difficulty": "easy",
+    "tags": ["四川专升本", "计算机基础", "2025真题", "安全防护与信息素养"],
+    "provenance": [
+      {
+        "file": "2025四川专升本计算机基础真题及答案解析（aipta.com/article/10227.html）",
+        "questionNumber": "三、37"
+      }
+    ]
+  },
+  {
+    "id": "sc-past-2025-038",
+    "type": "multiple_choice",
+    "question": "云计算的特点有（ ）。",
+    "options": {
+      "A": "快速弹性伸缩",
+      "B": "资源池化",
+      "C": "按需服务",
+      "D": "虚拟化"
+    },
+    "answer": ["A", "B", "C", "D"],
+    "analysis": "快速弹性伸缩、资源池化、按需自助服务是云计算公认的特征，虚拟化是支撑这些特征的关键实现技术，四者共同构成云计算的典型特点，故全选。若把虚拟化排除，就忽略了云资源抽象供给的技术前提。",
+    "chapter": "计算机新技术",
+    "knowledgeSection": "云计算",
+    "knowledgePoint": "云服务与部署模式",
+    "difficulty": "medium",
+    "tags": ["四川专升本", "计算机基础", "2025真题", "云服务与部署模式"],
+    "provenance": [
+      {
+        "file": "2025四川专升本计算机基础真题及答案解析（aipta.com/article/10227.html）",
+        "questionNumber": "三、38"
+      }
+    ]
+  },
+  {
+    "id": "sc-past-2025-039",
+    "type": "multiple_choice",
+    "question": "下列关于 Excel 中数据排序的说法，正确的是（ ）。",
+    "options": {
+      "A": "可以按一个或多个关键字排序",
+      "B": "可以按升序或降序排序",
+      "C": "可以设置自定义排序",
+      "D": "可以按行或按列排序"
+    },
+    "answer": ["A", "B", "C", "D"],
+    "analysis": "Excel 排序支持主/次/第三关键字，支持升序与降序，可在“排序选项”中选择自定义序列（如职务、星期）作为次序，也能在选项里把排序方向设为按行或按列，因此四项全选，漏选任一项都遗漏了“排序”对话框中的真实功能。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "函数与数据处理",
+    "difficulty": "medium",
+    "tags": ["四川专升本", "计算机基础", "2025真题", "函数与数据处理"],
+    "provenance": [
+      {
+        "file": "2025四川专升本计算机基础真题及答案解析（aipta.com/article/10227.html）",
+        "questionNumber": "三、39"
+      }
+    ]
+  },
+  {
+    "id": "sc-past-2025-040",
+    "type": "multiple_choice",
+    "question": "下列关于 PowerPoint 母版的说法，正确的是（ ）。",
+    "options": {
+      "A": "使用母版可以快速制作多张版式相同的幻灯片",
+      "B": "母版分为幻灯片母版、讲义母版、备注母版",
+      "C": "一个演示文稿只能包含一个幻灯片母版",
+      "D": "修改母版可以同时更新所有基于该母版的幻灯片版式"
+    },
+    "answer": ["A", "B", "D"],
+    "analysis": "母版统一管理版式与占位符，可批量生成风格一致的幻灯片（A 正确）；母版确实分幻灯片、讲义、备注三类（B 正确）；修改母版后所有套用该母版的版式同步更新（D 正确）。PowerPoint 2010 及以后版本支持通过“插入幻灯片母版”建立多套母版，C 的“只能包含一个”错误。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "PowerPoint",
+    "knowledgePoint": "幻灯片制作与放映",
+    "difficulty": "medium",
+    "tags": ["四川专升本", "计算机基础", "2025真题", "幻灯片制作与放映"],
+    "provenance": [
+      {
+        "file": "2025四川专升本计算机基础真题及答案解析（aipta.com/article/10227.html）",
+        "questionNumber": "三、40"
+      }
+    ]
+  },
+  {
+    "id": "sc-past-2025-041",
+    "type": "multiple_choice",
+    "question": "在 PowerPoint 中，通过设置“动作按钮”可以实现的功能有（ ）。",
+    "options": {
+      "A": "链接幻灯片",
+      "B": "运行程序",
+      "C": "播放声音",
+      "D": "结束放映"
+    },
+    "answer": ["A", "B", "C", "D"],
+    "analysis": "动作按钮的“动作设置”对话框支持超链接到指定幻灯片（A）、运行外部程序（B）、播放声音（C）以及结束放映（D）等操作，因此全选。若只记得“跳转”，会遗漏运行程序、声音与放映控制这几类动作。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "PowerPoint",
+    "knowledgePoint": "幻灯片制作与放映",
+    "difficulty": "medium",
+    "tags": ["四川专升本", "计算机基础", "2025真题", "幻灯片制作与放映"],
+    "provenance": [
+      {
+        "file": "2025四川专升本计算机基础真题及答案解析（aipta.com/article/10227.html）",
+        "questionNumber": "三、41"
+      }
+    ]
+  },
+  {
+    "id": "sc-past-2025-042",
+    "type": "multiple_choice",
+    "question": "下列关于信息安全中数字签名的说法，正确的是（ ）。",
+    "options": {
+      "A": "数字签名就是发送方手写签名的数字图像",
+      "B": "接收方通过签名信息能验证发送方的身份",
+      "C": "发送方无法否认曾经发送过签名文件",
+      "D": "接收方不可能伪造出发送方的数字签名"
+    },
+    "answer": ["B", "C", "D"],
+    "analysis": "数字签名用发送方私钥加密摘要，接收方用公钥验证，从而确认身份（B 正确）、保证不可否认（C 正确）；因私钥仅发送方持有，接收方无法伪造签名（D 正确）。数字签名是基于密钥的密码学标记，并非手写签名的图像扫描件，A 错误。",
+    "chapter": "网络与信息安全",
+    "knowledgeSection": "信息安全",
+    "knowledgePoint": "安全防护与信息素养",
+    "difficulty": "medium",
+    "tags": ["四川专升本", "计算机基础", "2025真题", "安全防护与信息素养"],
+    "provenance": [
+      {
+        "file": "2025四川专升本计算机基础真题及答案解析（aipta.com/article/10227.html）",
+        "questionNumber": "三、42"
+      }
+    ]
+  },
+  {
+    "id": "sc-past-2025-043",
+    "type": "multiple_choice",
+    "question": "已知整数数组：54、34、78、23、45、64、40，下列说法正确的是（ ）。",
+    "options": {
+      "A": "使用二分查找法前，需先进行排序",
+      "B": "使用顺序查找法前，需先进行排序",
+      "C": "升序排序后使用二分查找 45，查找次数为 1",
+      "D": "降序排序后使用顺序查找 45，查找次数为 5"
+    },
+    "answer": ["A", "C"],
+    "analysis": "二分查找要求有序，必须先排序（A 正确）；顺序查找对无序数据同样适用，无需排序（B 错误）。升序后数组为 23、34、40、45、54、64、78，首 个比较位置是中间元素 45，一次命中（C 正确）。降序后为 78、64、54、45、34、23、40，顺序查找第 4 次遇到 45，不是第 5 次（D 错误）。",
+    "chapter": "算法与程序设计",
+    "knowledgeSection": "算法基础",
+    "knowledgePoint": "算法特征与计算思维",
+    "difficulty": "hard",
+    "tags": ["四川专升本", "计算机基础", "2025真题", "算法特征与计算思维"],
+    "provenance": [
+      {
+        "file": "2025四川专升本计算机基础真题及答案解析（aipta.com/article/10227.html）",
+        "questionNumber": "三、43"
+      }
+    ]
+  },
+  {
+    "id": "sc-past-2025-044",
+    "type": "multiple_choice",
+    "question": "图灵的主要贡献有（ ）。",
+    "options": {
+      "A": "提出 OSI 参考模型",
+      "B": "提出图灵机模型",
+      "C": "提出量子计算机模型",
+      "D": "提出判断机器智能的图灵测试"
+    },
+    "answer": ["B", "D"],
+    "analysis": "图灵 1936 年提出图灵机模型奠定计算理论基础（B 正确），1950 年提出图灵测试用于判断机器是否表现出智能（D 正确）。OSI 参考模型由 ISO 组织提出（A 错）；量子计算机的理论奠基是图灵之外的物理与信息科学家（C 错）。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "计算机概述",
+    "knowledgePoint": "计算机发展与应用",
+    "difficulty": "medium",
+    "tags": ["四川专升本", "计算机基础", "2025真题", "计算机发展与应用"],
+    "provenance": [
+      {
+        "file": "2025四川专升本计算机基础真题及答案解析（aipta.com/article/10227.html）",
+        "questionNumber": "三、44"
+      }
+    ]
+  },
+  {
+    "id": "sc-past-2025-045",
+    "type": "multiple_choice",
+    "question": "以下能够表示汉字编码的是（ ）。",
+    "options": {
+      "A": "ASCII",
+      "B": "GB 2312",
+      "C": "GBK",
+      "D": "UTF-8"
+    },
+    "answer": ["B", "C", "D"],
+    "analysis": "GB 2312、GBK 都是专门的汉字字符集编码标准，UTF-8 是 Unicode 的变长实现，可编码汉字，故 B、C、D 正确。ASCII 只有 128 个西文字符，不含汉字，故 A 错。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "数制与数据表示",
+    "knowledgePoint": "信息编码与计量",
+    "difficulty": "easy",
+    "tags": ["四川专升本", "计算机基础", "2025真题", "信息编码与计量"],
+    "provenance": [
+      {
+        "file": "2025四川专升本计算机基础真题及答案解析（aipta.com/article/10227.html）",
+        "questionNumber": "三、45"
+      }
+    ]
+  },
+  {
+    "id": "sc-past-2025-046",
+    "type": "short_answer",
+    "question": "微型计算机的系统总线按功能分为（ ）、地址总线、控制总线。",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "数据总线。",
+    "analysis": "系统总线按传送信息类型分为数据总线、地址总线、控制总线三类：数据总线传数据，地址总线传访问地址，控制总线传控制信号。常见错误填“信息总线”或“通信总线”，都不属于系统总线的三类标准划分。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "硬件系统",
+    "knowledgePoint": "体系结构与硬件",
+    "difficulty": "easy",
+    "tags": ["四川专升本", "计算机基础", "2025真题", "体系结构与硬件", "填空题"],
+    "provenance": [
+      {
+        "file": "2025四川专升本计算机基础真题及答案解析（aipta.com/article/10227.html）",
+        "questionNumber": "四、46"
+      }
+    ]
+  },
+  {
+    "id": "sc-past-2025-047",
+    "type": "short_answer",
+    "question": "将自然界的声音转换为计算机能够处理的数据，需要经过采样、量化和（ ）三个步骤。",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "编码。",
+    "analysis": "声音数字化三步：采样（按时间取样）、量化（把样值离散分级）、编码（把量化结果用二进制表示并按格式存储）。常见错误填“压缩”，压缩是编码之后可选的处理步骤，不属于必经三步。",
+    "chapter": "计算机软硬件基础",
+    "knowledgeSection": "数字媒体",
+    "knowledgePoint": "音频与图像基础",
+    "difficulty": "easy",
+    "tags": ["四川专升本", "计算机基础", "2025真题", "音频与图像基础", "填空题"],
+    "provenance": [
+      {
+        "file": "2025四川专升本计算机基础真题及答案解析（aipta.com/article/10227.html）",
+        "questionNumber": "四、47"
+      }
+    ]
+  },
+  {
+    "id": "sc-past-2025-048",
+    "type": "short_answer",
+    "question": "物联网的三层体系结构为（ ）、网络层、应用层。",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "感知层。",
+    "analysis": "物联网自下而上为感知层（传感器采集）、网络层（传输汇聚）、应用层（业务处理与服务），故填感知层。常见错误填“传输层”（借用了 OSI 层名）或“物理层”，均不是物联网三层结构的标准名称。",
+    "chapter": "计算机新技术",
+    "knowledgeSection": "物联网",
+    "knowledgePoint": "物联网三层结构",
+    "difficulty": "easy",
+    "tags": ["四川专升本", "计算机基础", "2025真题", "物联网三层结构", "填空题"],
+    "provenance": [
+      {
+        "file": "2025四川专升本计算机基础真题及答案解析（aipta.com/article/10227.html）",
+        "questionNumber": "四、48"
+      }
+    ]
+  },
+  {
+    "id": "sc-past-2025-049",
+    "type": "short_answer",
+    "question": "在 Word 中，段落缩进包括左缩进、右缩进、（ ）和悬挂缩进。",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "首行缩进。",
+    "analysis": "Word 段落缩进的四种形式是左缩进、右缩进、首行缩进（段落第一行缩进）和悬挂缩进（除首行外其余行缩进）。常见错误填“上下缩进”，Word 不提供段前段外的“上下缩进”这一缩进类型（段前段后属于间距）。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Word",
+    "knowledgePoint": "文档编辑与排版",
+    "difficulty": "easy",
+    "tags": ["四川专升本", "计算机基础", "2025真题", "文档编辑与排版", "填空题"],
+    "provenance": [
+      {
+        "file": "2025四川专升本计算机基础真题及答案解析（aipta.com/article/10227.html）",
+        "questionNumber": "四、49"
+      }
+    ]
+  },
+  {
+    "id": "sc-past-2025-050",
+    "type": "short_answer",
+    "question": "在 Word 中可以通过编辑限制保护文档，编辑限制的类型为不允许任何更改（只读）、（ ）、批注、填写窗体。",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "修订（或“跟踪修订模式下的修订”）。",
+    "analysis": "Word“限制格式和编辑”窗格中的编辑限制四种类型依次是：不允许任何更改（只读）、修订、批注、填写窗体，因此填修订。常见错误填“局部编辑”或“部分编辑”，不是该功能的正式选项名称。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Word",
+    "knowledgePoint": "文档编辑与排版",
+    "difficulty": "medium",
+    "tags": ["四川专升本", "计算机基础", "2025真题", "文档编辑与排版", "填空题"],
+    "provenance": [
+      {
+        "file": "2025四川专升本计算机基础真题及答案解析（aipta.com/article/10227.html）",
+        "questionNumber": "四、50"
+      }
+    ]
+  },
+  {
+    "id": "sc-past-2025-051",
+    "type": "short_answer",
+    "question": "在 Excel 单元格中，输入公式 =123&345，计算结果为（ ）。",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "123345（文本型）。",
+    "analysis": "& 是文本连接运算符，把两侧内容按文本拼接，123 与 345 连接后得到文本“123345”。常见错误答 468（误把 & 当成加法）或“123、345”，忽略连接符不做数值运算且中间不加分隔符。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Excel",
+    "knowledgePoint": "函数与数据处理",
+    "difficulty": "medium",
+    "tags": ["四川专升本", "计算机基础", "2025真题", "函数与数据处理", "填空题"],
+    "provenance": [
+      {
+        "file": "2025四川专升本计算机基础真题及答案解析（aipta.com/article/10227.html）",
+        "questionNumber": "四、51"
+      }
+    ]
+  },
+  {
+    "id": "sc-past-2025-052",
+    "type": "short_answer",
+    "question": "在 PowerPoint 中，在（ ）视图下可以同时显示幻灯片、备注和大纲。",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "普通视图。",
+    "analysis": "普通视图由幻灯片窗格、备注窗格和左侧的幻灯片/大纲选项卡组成，可同时看到幻灯片内容与备注、大纲，故填普通视图。常见错误填大纲视图（不能同时显示幻灯片编辑与备注）或浏览视图（只显示缩略图）。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "PowerPoint",
+    "knowledgePoint": "幻灯片制作与放映",
+    "difficulty": "easy",
+    "tags": ["四川专升本", "计算机基础", "2025真题", "幻灯片制作与放映", "填空题"],
+    "provenance": [
+      {
+        "file": "2025四川专升本计算机基础真题及答案解析（aipta.com/article/10227.html）",
+        "questionNumber": "四、52"
+      }
+    ]
+  },
+  {
+    "id": "sc-past-2025-053",
+    "type": "short_answer",
+    "question": "在 PowerPoint 中，打印内容设置为讲义时，一页纸最多可以打印（ ）张幻灯片。",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "9（或“九”）。",
+    "analysis": "讲义的“每页幻灯片数”可选 1、2、3、4、6、9，最大为 9 张，故填 9。常见错误填 6（常用值之一）或 3（默认带笔记行的常见布局），都小于可选上限。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "PowerPoint",
+    "knowledgePoint": "幻灯片制作与放映",
+    "difficulty": "medium",
+    "tags": ["四川专升本", "计算机基础", "2025真题", "幻灯片制作与放映", "填空题"],
+    "provenance": [
+      {
+        "file": "2025四川专升本计算机基础真题及答案解析（aipta.com/article/10227.html）",
+        "questionNumber": "四、53"
+      }
+    ]
+  },
+  {
+    "id": "sc-past-2025-054",
+    "type": "short_answer",
+    "question": "无符号数 (10100100)₂ − (10011001)₂ 的结果转换成十进制为（ ）。",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "11。",
+    "analysis": "(10100100)₂ = 164，(10011001)₂ = 153，164 − 153 = 11；也可直接二进制相减 10100100 − 10011001 = 00001011₂ = 11。常见错误是把两数当十六进制或漏借位导致差为 00010011（19）。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "数制与数据表示",
+    "knowledgePoint": "进制转换",
+    "difficulty": "medium",
+    "tags": ["四川专升本", "计算机基础", "2025真题", "进制转换", "填空题"],
+    "provenance": [
+      {
+        "file": "2025四川专升本计算机基础真题及答案解析（aipta.com/article/10227.html）",
+        "questionNumber": "四、54"
+      }
+    ]
+  },
+  {
+    "id": "sc-past-2025-055",
+    "type": "short_answer",
+    "question": "一台计算机的 IP 地址为 192.168.3.18，子网掩码为 255.255.255.0，则它的网络号为（ ）。",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "192.168.3.0。",
+    "analysis": "网络号 = IP 地址按位与子网掩码：前 24 位保留、末字节与 0 相与清零，得到 192.168.3.0。常见错误答 192.168.3.18（把主机号也当成网络号）或 192.168.3.255（混淆了该子网的广播地址）。",
+    "chapter": "网络与信息安全",
+    "knowledgeSection": "网络基础",
+    "knowledgePoint": "网络设备与 Internet",
+    "difficulty": "medium",
+    "tags": ["四川专升本", "计算机基础", "2025真题", "网络设备与 Internet", "填空题"],
+    "provenance": [
+      {
+        "file": "2025四川专升本计算机基础真题及答案解析（aipta.com/article/10227.html）",
+        "questionNumber": "四、55"
+      }
+    ]
+  },
+  {
+    "id": "sc-past-2025-056",
+    "type": "short_answer",
+    "question": "Word 中的文字环绕方式有哪些？",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "嵌入型、四周型环绕、紧密型环绕、上下型环绕、衬于文字下方、浮于文字上方（部分版本还提供穿越型环绕与两侧型环绕）。",
+    "analysis": "环绕方式决定图片与文字的相对位置：嵌入型把图片当作字符参与排版，四周型与紧密型让文字环绕图片外框或图形轮廓，上下型使文字只在图片上下方，衬于文字下方与浮于文字上方控制图片与文字的叠放层次。常见错误是只答“嵌入型、浮于文字上方”两类，遗漏中间几种。",
+    "chapter": "办公自动化",
+    "knowledgeSection": "Word",
+    "knowledgePoint": "表格图文与邮件合并",
+    "difficulty": "medium",
+    "tags": ["四川专升本", "计算机基础", "2025真题", "表格图文与邮件合并", "简答题"],
+    "provenance": [
+      {
+        "file": "2025四川专升本计算机基础真题及答案解析（aipta.com/article/10227.html）",
+        "questionNumber": "五、56"
+      }
+    ]
+  },
+  {
+    "id": "sc-past-2025-057",
+    "type": "short_answer",
+    "question": "常见的网络拓扑结构有哪些？并简述其主要特征。",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "①总线型：所有结点共享一条公共传输干线，结构简单、节省线缆，但干线故障会导致全网瘫痪；②星型：各结点通过独立线路连接中心节点，便于集中管理与故障隔离，但中心节点是单点故障源；③环型：结点首尾相连成闭环，结构规约、无冲突，但任一链路断开可能使全环中断；④树型：分层分级连接，便于扩展与管理，上层故障影响相应子树；⑤网状型：结点间多路径互联，可靠性与容错性最高，但布线与成本复杂。",
+    "analysis": "答题要点是先列出总线型、星型、环型（可补充树型、网状型），再逐个说明“可靠性与中心节点依赖”这一核心特征。常见错误是只罗列名称不写特征，或把星型与总线型的特征写反（星型依赖中心节点，总线型依赖公共干线）。",
+    "chapter": "网络与信息安全",
+    "knowledgeSection": "网络基础",
+    "knowledgePoint": "网络设备与 Internet",
+    "difficulty": "medium",
+    "tags": ["四川专升本", "计算机基础", "2025真题", "网络设备与 Internet", "简答题"],
+    "provenance": [
+      {
+        "file": "2025四川专升本计算机基础真题及答案解析（aipta.com/article/10227.html）",
+        "questionNumber": "五、57"
+      }
+    ]
+  },
+  {
+    "id": "sc-past-2025-058",
+    "type": "short_answer",
+    "question": "在三个无符号数 (11100110)₂、(354)₈、(EA)₁₆ 中，哪个数字最大？请分别写出转换为十进制的过程和结果。",
+    "options": {},
+    "answer": [],
+    "expectedAnswer": "(11100110)₂ = 1×2⁷+1×2⁶+1×2⁵+0+0+1×2²+1×2¹+0 = 128+64+32+4+2 = 230；(354)₈ = 3×8²+5×8¹+4×8⁰ = 192+40+4 = 236；(EA)₁₆ = 14×16¹+10×16⁰ = 224+10 = 234。比较 230、236、234，最大数是八进制的 (354)₈，等于 236。",
+    "analysis": "按“各位权值乘系数求和”分别展开：二进制按 2 的幂、八进制按 8 的幂、十六进制按 16 的幂，其中 E=14、A=10。常见错误是把 E 当作 15、或在八进制展开时误乘 10 的幂，从而得出 344 或 240 等错误结果。",
+    "chapter": "计算机基础知识",
+    "knowledgeSection": "数制与数据表示",
+    "knowledgePoint": "进制转换",
+    "difficulty": "medium",
+    "tags": ["四川专升本", "计算机基础", "2025真题", "进制转换", "简答题"],
+    "provenance": [
+      {
+        "file": "2025四川专升本计算机基础真题及答案解析（aipta.com/article/10227.html）",
+        "questionNumber": "六、58"
+      }
+    ]
+  }
+]

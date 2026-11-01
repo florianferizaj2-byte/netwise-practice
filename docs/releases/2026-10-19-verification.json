@@ -1,0 +1,239 @@
+{
+  "schemaVersion": 1,
+  "scope": "isolated Web candidate; existing App and committed banks retained",
+  "baseCommit": "4cbbd3f1de443949ba91ece1aea25bec877f28bd",
+  "startedAt": "2026-10-19T05:14:12.918Z",
+  "finishedAt": "2026-10-19T05:26:06.860Z",
+  "node": "v24.21.0",
+  "platform": "win32",
+  "passed": true,
+  "checks": [
+    {
+      "label": "移动端版本一致性检查",
+      "command": [
+        "scripts/check-mobile-version.mjs"
+      ],
+      "exitCode": 0,
+      "durationMs": 45,
+      "log": "test-output/release-step-1.log"
+    },
+    {
+      "label": "题库结构检查",
+      "command": [
+        "scripts/validate-question-banks.js"
+      ],
+      "exitCode": 0,
+      "durationMs": 412,
+      "log": "test-output/release-step-2.log"
+    },
+    {
+      "label": "内容审核与发布包质量检查",
+      "command": [
+        "--test",
+        ".agents/skills/kaojiang-content-pipeline/scripts/quality.test.mjs"
+      ],
+      "exitCode": 0,
+      "durationMs": 2714,
+      "log": "test-output/release-step-3.log"
+    },
+    {
+      "label": "移动端类型检查",
+      "command": [
+        "mobile/node_modules/typescript/bin/tsc",
+        "--noEmit",
+        "--project",
+        "mobile/tsconfig.json"
+      ],
+      "exitCode": 0,
+      "durationMs": 2646,
+      "log": "test-output/release-step-4.log"
+    },
+    {
+      "label": "服务端与客户端回归测试",
+      "command": [
+        "--test",
+        "--test-concurrency=4",
+        "test/*.test.js"
+      ],
+      "exitCode": 0,
+      "durationMs": 191630,
+      "log": "test-output/release-step-5.log"
+    },
+    {
+      "label": "电脑与移动网页构建",
+      "command": [
+        "scripts/build.mjs"
+      ],
+      "exitCode": 0,
+      "durationMs": 11704,
+      "log": "test-output/release-step-6.log"
+    },
+    {
+      "label": "浏览器完整流程检查",
+      "command": [
+        "test/e2e.js"
+      ],
+      "exitCode": 0,
+      "durationMs": 17159,
+      "log": "test-output/release-step-7.log"
+    },
+    {
+      "label": "VIP AI 精讲与练习完整流程检查",
+      "command": [
+        "test/subjective-study.e2e.js"
+      ],
+      "exitCode": 0,
+      "durationMs": 26089,
+      "log": "test-output/release-step-8.log"
+    },
+    {
+      "label": "会员购买与兑换入口检查",
+      "command": [
+        "test/membership-purchase.e2e.js"
+      ],
+      "exitCode": 0,
+      "durationMs": 13747,
+      "log": "test-output/release-step-9.log"
+    },
+    {
+      "label": "移动网页双浏览器流程检查",
+      "command": [
+        "test/mobile-web.e2e.js"
+      ],
+      "exitCode": 0,
+      "durationMs": 31018,
+      "log": "test-output/release-step-10.log"
+    },
+    {
+      "label": "苹果网页布局与无障碍检查",
+      "command": [
+        "test/apple-ui.e2e.js"
+      ],
+      "exitCode": 0,
+      "durationMs": 27880,
+      "log": "test-output/release-step-11.log"
+    },
+    {
+      "label": "移动端 AI 精炼完整流程检查",
+      "command": [
+        "test/mobile-study.e2e.js"
+      ],
+      "exitCode": 0,
+      "durationMs": 23906,
+      "log": "test-output/release-step-12.log"
+    },
+    {
+      "label": "手机账号管理完整流程检查",
+      "command": [
+        "test/mobile-admin.e2e.js"
+      ],
+      "exitCode": 0,
+      "durationMs": 16707,
+      "log": "test-output/release-step-13.log"
+    },
+    {
+      "label": "公告热更新完整流程检查",
+      "command": [
+        "test/mobile-announcement.e2e.js"
+      ],
+      "exitCode": 0,
+      "durationMs": 10872,
+      "log": "test-output/release-step-14.log"
+    },
+    {
+      "label": "启动公告、资料补全与网页用户列表检查",
+      "command": [
+        "test/mobile-profile.e2e.js"
+      ],
+      "exitCode": 0,
+      "durationMs": 14918,
+      "log": "test-output/release-step-15.log"
+    },
+    {
+      "label": "官网安装包与强制更新检查",
+      "command": [
+        "test/mobile-release-publish.e2e.js"
+      ],
+      "exitCode": 0,
+      "durationMs": 7472,
+      "log": "test-output/release-step-16.log"
+    },
+    {
+      "label": "蓝色Web候选版本专项验收",
+      "command": [
+        "scripts/verify-web-blue.mjs"
+      ],
+      "exitCode": 0,
+      "durationMs": 279091,
+      "log": "test-output/release-step-17.log"
+    },
+    {
+      "label": "管理员Web工作台完整流程检查",
+      "command": [
+        "test/admin-console.e2e.js"
+      ],
+      "exitCode": 0,
+      "durationMs": 35547,
+      "log": "test-output/release-step-18.log"
+    }
+  ],
+  "testCounts": {
+    "unit": {
+      "tests": 298,
+      "pass": 298,
+      "fail": 0
+    },
+    "contentQuality": {
+      "tests": 25,
+      "pass": 25,
+      "fail": 0
+    }
+  },
+  "blueBrowserChecks": 17,
+  "adminBrowserChecks": [
+    "route:overview",
+    "route:catalog",
+    "route:questions",
+    "route:documents",
+    "route:quality",
+    "route:teaching",
+    "route:users",
+    "route:memberships",
+    "route:announcement",
+    "route:feedback",
+    "route:jobs",
+    "route:config",
+    "route:usage",
+    "route:audit",
+    "route:system",
+    "API failure and recovery",
+    "filters and refresh",
+    "bulk preview, hide and restore preserve learning history",
+    "revision persistence without mutating published question",
+    "missing review fails closed",
+    "user profile and membership saved",
+    "controlled course preview",
+    "announcement saved",
+    "learner denied",
+    "Web announcement reads shared service",
+    "layout:375",
+    "layout:768",
+    "layout:1440"
+  ],
+  "build": {
+    "schemaVersion": 1,
+    "version": "0.4.6",
+    "source": {
+      "sha256": "b6c9d0317b6a4882cbd83b497223b5ede3d443faebc9b5a942c0040d1aafd600",
+      "files": 472
+    },
+    "artifacts": {
+      "sha256": "4aabc48846dddecc8398714b9233efb3f3c4fcb39362746eec2ecff0366382a0",
+      "files": 139
+    }
+  },
+  "productionDataUsed": false,
+  "paidModelCalls": false,
+  "newApkPublished": false,
+  "productionDeployed": false
+}

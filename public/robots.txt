@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /community/uploads/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /api/
+Disallow: /community/uploads/
+
+# OAI-SearchBot handles search discovery. GPTBot is used for model training.
+User-agent: GPTBot
+Disallow: /
+
+Sitemap: https://aceexam.top/sitemap.xml
