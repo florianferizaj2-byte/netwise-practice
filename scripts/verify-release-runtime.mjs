@@ -11,6 +11,7 @@ import {
   runtimeArtifacts,
   runtimeSources,
 } from "./release-runtime.mjs";
+import { getReleaseTarget } from './release-checks.mjs';
 
 // This rehearsal is deliberately not an archive or an alternative release gate.
 // It copies the working candidate into a throwaway directory, outside the repo.
@@ -213,14 +214,7 @@ async function worker(stage) {
       });
       assert.equal(denied.status, 404);
       if (["upgrade", "restart"].includes(stage)) {
-        const expected = [
-          "network-engineer",
-          "hcia-datacom",
-          "ncre-ms-office",
-          "veterinary-practitioner",
-          "sichuan-upgrading-computer",
-          "ncre-l2-c-programming",
-        ].sort();
+        const expected = JSON.parse(process.env.REHEARSAL_CERTIFICATES);
         assert.deepEqual(me.certificates.map((c) => c.id).sort(), expected);
         const { catalogue } = await load("demo-tutor/registry.js");
         assert.equal(catalogue().coverage.ready, 39);
@@ -286,7 +280,7 @@ async function worker(stage) {
           fixture.planId = plan.id;
           await request(
             "/auth/certificate",
-            { certificateId: "ncre-l2-c-programming" },
+            { certificateId: "ncre-ms-office" },
             "PUT",
           );
           const cExam = await request("/exams", {
@@ -348,16 +342,19 @@ async function worker(stage) {
             ).status,
             404,
           );
-          assert.equal(
+          if (process.env.REHEARSAL_TARGET !== 'android') assert.equal(
             (await fetch(origin + "/app/version.json")).headers
               .get("content-type")
               .includes("json"),
             true,
           );
+          else assert.equal(fs.existsSync(path.join(baseDirectory, 'dist/app')), false,
+            'Android update must preserve, not replace, the existing mobile website');
           assert.equal(fs.existsSync(path.join(baseDirectory, "src")), false);
-          assert.equal(
-            fs.existsSync(path.join(baseDirectory, "scripts")),
-            false,
+          assert.deepEqual(
+            fs.readdirSync(path.join(baseDirectory, 'scripts')).sort(),
+            ['check-account-mail.mjs', 'check-v1-deployment.mjs', 'migrate-ai-points.mjs'],
+            'Only the three approved deployment helpers may ship; build and development scripts stay excluded',
           );
           assert.equal(
             fs.existsSync(path.join(baseDirectory, "public/demo")),
@@ -466,6 +463,7 @@ async function worker(stage) {
 }
 
 const root = fileURLToPath(new URL("../", import.meta.url));
+const sourceCertificates = (await import("../server/certificates.js")).certificates.map(item => item.id).sort();
 const parent = fs.realpathSync(os.tmpdir());
 const directory = fs.mkdtempSync(path.join(parent, "ace-release-runtime-"));
 const logRoot = path.join(root, "test-output");
@@ -495,6 +493,8 @@ Object.assign(cleanEnvironment, {
   ALLOWED_HOSTS: "127.0.0.1,localhost",
   COOKIE_SECURE: "0",
   REHEARSAL_ROOT: directory,
+  REHEARSAL_TARGET: getReleaseTarget(root),
+  REHEARSAL_CERTIFICATES: JSON.stringify(sourceCertificates),
 });
 const run = (executable, args, cwd, env = cleanEnvironment, timeout = 120000) =>
   new Promise((resolve, reject) => {
@@ -655,7 +655,7 @@ try {
     candidateProvenance: provenance,
     runtimeFiles: files.length,
     stages,
-    certificates: 6,
+    certificates: sourceCertificates.length,
     independentProductionDependencies: true,
     personalOrProductionDataUsed: false,
     externalModelCalls: 0,

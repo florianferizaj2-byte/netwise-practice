@@ -1,0 +1,1803 @@
+[
+  {
+    "id": "hcip821-6-1-1-015",
+    "type": "single_choice",
+    "question": "在 RSTP 中，某端口为同一台交换机上的另一个指定端口提供备份，它从共享网段收到的 BPDU 来自本交换机的其他端口。该端口承担的角色是？",
+    "options": {
+      "A": "根端口（Root Port）",
+      "B": "替代端口（Alternate Port）",
+      "C": "备份端口（Backup Port）",
+      "D": "边缘端口（Edge Port）"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "备份端口用于为同一台交换机上的指定端口提供备份，它从本交换机其他端口发出的 BPDU 中感知到更优信息，因而处于丢弃状态，C 正确。A 错误：根端口是本交换机到根桥路径开销最小的端口，其备份由替代端口承担。B 错误：替代端口是从其他交换机收到更优 BPDU 后阻塞、为根端口提供备份的端口，不是为指定端口备份。D 错误：边缘端口连接终端设备、正常时不参与生成树计算，不具备为指定端口备份的职责。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "RSTP",
+    "difficulty": "medium",
+    "tags": [
+      "RSTP",
+      "端口角色",
+      "备份端口"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-1-015",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「RSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / RSTP」；备份端口为本交换机指定端口提供备份、其更优 BPDU 来自本机其他端口，属公开的 IEEE 802.1D-2004 标准结论；该标准为收费文档且未收录于 sources.json，故仅引官方大纲范围，未编造标准链接。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，RSTP 端口角色按公开标准结论核对，未复制任何第三方题目正文。",
+      "reviewDigest": "abd905224e64a7cf147add881b500a921ebe715265789e672f06788fb9defe42"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-1-016",
+    "type": "single_choice",
+    "question": "RSTP 使用 Proposal/Agreement 机制使端口快速迁移到转发状态。下列哪种链路条件下该机制无法直接完成快速迁移？",
+    "options": {
+      "A": "两台交换机之间为全双工点对点链路",
+      "B": "端口连接在共享介质（如集线器）上，同一网段存在多台交换机",
+      "C": "上游端口为指定端口且处于转发状态，下游端口支持 RSTP",
+      "D": "新增交换机通过点对点链路接入现有 RSTP 网络"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Proposal/Agreement 建立在链路为点对点、且下游只有一台桥的前提上：上游发出 Proposal 后能确认唯一的 downstream 已完成同步并回送 Agreement。共享介质上可能同时存在多台交换机的 BPDU，无法确认同步范围，因此该机制不能直接生效，端口只能按计时器迁移，B 正确。A、D 都是典型的点对点 P/A 快速迁移场景。C 描述的是握手的正常前提，满足时正好可以快速迁移，故不是正确选项。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "RSTP",
+    "difficulty": "medium",
+    "tags": [
+      "RSTP",
+      "Proposal/Agreement",
+      "点对点链路"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-1-016",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「RSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / RSTP」；P/A 快速迁移以点对点链路为前提、共享介质退化为计时器迁移，属公开的 IEEE 802.1D-2004 标准结论；标准文本为收费文档，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按公开标准定义自行组织，未复制任何第三方题目正文。",
+      "reviewDigest": "3c385b021d2d2d7f32f48a512645c4185e5f43c1a12914c308fc4ba7b7a5f23c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-1-017",
+    "type": "single_choice",
+    "question": "在华为设备上把一个连接终端 PC 的端口配置为边缘端口后，该端口收到了 BPDU。按照 RSTP 的处理规则，该端口会发生什么？",
+    "options": {
+      "A": "继续作为边缘端口工作，只记录一条日志",
+      "B": "立即进入 error-down 状态并关闭端口",
+      "C": "丢弃该 BPDU，端口保持转发且不参与生成树计算",
+      "D": "失去边缘端口属性，转为普通 RSTP 端口参与生成树计算"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "边缘端口的假设是所连网段没有其他桥。一旦收到 BPDU，说明该假设被打破，端口立即退出边缘状态并作为普通 RSTP 端口参与生成树计算，D 正确。A 错误：仅记录日志而不改变状态会在存在交换环路时失去保护。B 错误：error-down 需要额外配置 BPDU 保护才能触发，默认处理不是直接关闭端口。C 错误：忽略 BPDU 会让端口继续错误转发，正是边缘端口要避免的风险。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "RSTP",
+    "difficulty": "medium",
+    "tags": [
+      "RSTP",
+      "边缘端口",
+      "BPDU"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-1-017",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「RSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / RSTP」；边缘端口收到 BPDU 后退出边缘状态并参与生成树计算，属公开的 IEEE 802.1D-2004 标准结论；标准文本为收费文档，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，边缘端口行为按公开标准定义核对，未复制任何第三方题目正文。",
+      "reviewDigest": "4a5de341e2d048257b0192397ed45770db2008107280ea4f33d3abe075340e14"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-1-018",
+    "type": "single_choice",
+    "question": "与 802.1D 相比，RSTP 交换机发送配置 BPDU 的方式有什么不同？",
+    "options": {
+      "A": "每台交换机都按 Hello 时间主动发送 BPDU，而不只是根桥发送、其他桥转发",
+      "B": "只有根桥按 Hello 时间发送 BPDU，非根桥仅在收到后转发",
+      "C": "所有交换机只在检测到拓扑变化时才发送 BPDU",
+      "D": "非根桥每隔 2 秒发送 TCN BPDU 通知根桥"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "RSTP 让每台交换机都以本地 Hello 定时器为周期主动发送 BPDU，因此上游故障时下游能快速感知，A 正确。B 描述的正是 802.1D 的行为：只有根桥产生配置 BPDU，其他桥从根端口收到后从指定端口转发，收敛依赖这种逐跳传递。C 错误：BPDU 承担保活与角色协商，必须周期性发送，不能只在拓扑变化时发送。D 错误：TCN BPDU 是 802.1D 的机制，RSTP 已改用 BPDU 中的 TC 标志，不再发送 TCN。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "RSTP",
+    "difficulty": "easy",
+    "tags": [
+      "RSTP",
+      "BPDU",
+      "Hello 时间"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-1-018",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「RSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / RSTP」；RSTP 每桥按 Hello 时间主动发送 BPDU、802.1D 仅根桥产生配置 BPDU，属公开的 IEEE 802.1D-2004 标准结论；标准文本为收费文档，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，BPDU 发送行为按公开标准定义核对，未复制任何第三方题目正文。",
+      "reviewDigest": "fd4c9390d8e94a4a7b41388952bcc62a0d06b8178f695b7ae52290d8c6c7216c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-1-019",
+    "type": "single_choice",
+    "question": "RSTP 检测到拓扑变化后，与 802.1D 相比在处理方式上的主要区别是什么？",
+    "options": {
+      "A": "先向根桥发送 TCN BPDU，由根桥回送 TCA 后再泛洪拓扑变化",
+      "B": "仅由根桥置位 TC 标志，其他交换机不参与泛洪",
+      "C": "直接在 BPDU 中置 TC 标志，并在 TC While 定时器运行期间持续泛洪该 BPDU",
+      "D": "停止转发数据 30 秒，等待 MAC 地址表自然老化"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "RSTP 取消了 TCN/TCA 的两段式上报，检测到变化的交换机直接在 BPDU 中置 TC 标志，并在 TC While 定时器（通常为 2 个 Hello 时间）内持续泛洪，使全网快速刷新 MAC 表项，C 正确。A 是 802.1D 的做法，上报链路长、收敛慢。B 错误：任何检测到拓扑变化的交换机都可以置位 TC 并泛洪，不限于根桥。D 错误：RSTP 不要求停止转发，而是通过快速刷新表项缩短中断时间，30 秒停顿反而是 802.1D 的收敛特征。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "RSTP",
+    "difficulty": "medium",
+    "tags": [
+      "RSTP",
+      "拓扑变化",
+      "TC 标志"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-1-019",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「RSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / RSTP」；RSTP 以 TC 标志与 TC While 定时器取代 802.1D 的 TCN/TCA，属公开的 IEEE 802.1D-2004 标准结论；标准文本为收费文档，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，拓扑变化处理机制按公开标准定义核对，未复制任何第三方题目正文。",
+      "reviewDigest": "7edc6afaa8016bf47a967a27a719f9550d3664afdc4823db5f99ddf99982e0cf"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-1-020",
+    "type": "single_choice",
+    "question": "SWA 有两个端口可到达根桥。端口 G0/0/1 经 SWB 到根桥的累计根路径开销为 20000，SWB 的桥 ID 为 32768.00-11-22-33-44-01，上游端口 ID 为 128.2；端口 G0/0/2 经 SWC 到根桥的累计根路径开销同为 20000，SWC 的桥 ID 为 32768.00-11-22-33-44-02，上游端口 ID 为 128.1。SWA 选择根端口的结果是什么？",
+    "options": {
+      "A": "G0/0/2 成为根端口，因为上游端口 ID 128.1 更小",
+      "B": "G0/0/1 成为根端口，因为上游桥 ID 更小",
+      "C": "两个端口都成为根端口，形成负载分担",
+      "D": "两个端口都保持阻塞，等待开销变化"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "根端口选举依次比较：累计根路径开销、上游桥 ID、上游端口 ID、本端端口 ID。本题两条路径开销都是 20000，进入第二级比较：SWB 的桥 ID 32768.00-11-22-33-44-01 小于 SWC 的 32768.00-11-22-33-44-02，因此 G0/0/1 胜出，B 正确。A 错误：只有在桥 ID 也相同时才会比较上游端口 ID，128.1 更小并不意味着 G0/0/2 获胜。C 错误：一台非根桥只有一个根端口，转发负载分担要靠 MSTP 多实例或链路聚合实现。D 错误：选举一定会产生唯一根端口，不会让两个端口同时保持阻塞。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "RSTP",
+    "difficulty": "hard",
+    "tags": [
+      "RSTP",
+      "根端口选举",
+      "路径开销"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-1-020",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「RSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / RSTP」；根端口依次比较根路径开销、上游桥 ID、上游端口 ID、本端端口 ID，属公开的 IEEE 802.1D-2004 标准结论；题中桥 ID 与开销均为题目给定值，已按比较顺序复算，标准文本为收费文档，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干与数据，按公开标准的选举顺序独立推算答案，未复制任何第三方题目正文。",
+      "reviewDigest": "dfe7e8433b889de9e5fb3ce55f56c311d8229f7b43874795a88baf12298b343e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-1-021",
+    "type": "single_choice",
+    "question": "在华为设备上执行 display stp brief，某端口输出为“MSTID 0，Port Role ALTE，STP State DISCARDING，Protection NONE”。该输出说明什么？",
+    "options": {
+      "A": "该端口是替代端口，为根端口提供备份，当前处于丢弃状态、不转发业务报文",
+      "B": "该端口是备份端口，为同一交换机的指定端口提供备份",
+      "C": "该端口是指定端口，但因生成树计算被阻塞",
+      "D": "该端口是根端口，因保护功能被关闭"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "输出中的 Port Role 为 ALTE，即 Alternate Port（替代端口）；STP State 为 DISCARDING，表示端口不学习 MAC、不转发业务报文；Protection 为 NONE 表示未启用保护特性，A 正确。B 错误：备份端口在输出中记为 BACKUP，且其备份对象是本交换机的指定端口。C 错误：指定端口角色记为 DESI，其阻塞并非“指定端口被阻塞”这种状态。D 错误：根端口角色记为 ROOT，且 ROOT 端口正常应处于转发状态；Protection 为 NONE 说明没有保护动作。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "RSTP",
+    "difficulty": "medium",
+    "tags": [
+      "RSTP",
+      "display stp brief",
+      "替代端口"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-1-021",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「RSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / RSTP」；display stp brief 的角色缩写 ROOT/DESI/ALTE/BACKUP 与状态取值属华为设备实现行为，题目已写明华为设备；标准机制为公开的 IEEE 802.1D-2004 结论，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，命令输出语义按华为设备公开实现行为核对，未复制任何第三方题目正文。",
+      "reviewDigest": "8e0e62bada23e84baad387a4744176c94b77129007a6c5c871e9ed244e9af650"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-1-022",
+    "type": "single_choice",
+    "question": "RSTP 网络中，某交换机的根端口因链路故障失效，该交换机上还存在一个替代端口。接下来的收敛过程是什么？",
+    "options": {
+      "A": "替代端口先进入 Listening 状态，等待 15 秒后进入 Learning",
+      "B": "替代端口必须收到根桥新发出的 TCN 后才能改变状态",
+      "C": "交换机重新启动生成树选举，所有端口先进入阻塞状态",
+      "D": "替代端口被选为新的根端口并快速迁移到转发状态，无需等待 Forward Delay"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "替代端口平时就在接收上游 BPDU 并保持丢弃状态，其上游路径已处于转发，因此根端口失效后它可以直接接替根端口并快速进入转发，D 正确。A 错误：Listening 状态在 RSTP 中已被取消，且替代端口无需经历两段转发延迟。B 错误：RSTP 不依赖 TCN 触发角色切换，TC 标志用于刷新 MAC 表而不是选路。C 错误：RSTP 只重新计算受影响的部分，不会让所有端口回到阻塞，否则就失去了快速收敛的意义。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "RSTP",
+    "difficulty": "medium",
+    "tags": [
+      "RSTP",
+      "替代端口",
+      "快速收敛"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-1-022",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「RSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / RSTP」；根端口失效后替代端口接替并快速转发，属公开的 IEEE 802.1D-2004 标准结论；标准文本为收费文档，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，替代端口接替行为按公开标准定义核对，未复制任何第三方题目正文。",
+      "reviewDigest": "c7e6419a023fa66de11d88348b5dcb1ae88edc2d1a1d745b3c0f1e4fab14b981"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-1-023",
+    "type": "single_choice",
+    "question": "华为设备运行 RSTP，Hello 时间保持默认 2 秒。某端口连续收不到上游 BPDU 时，RSTP 在多久后判定邻居失效并触发重新计算？",
+    "options": {
+      "A": "2 秒",
+      "B": "6 秒",
+      "C": "20 秒",
+      "D": "30 秒"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RSTP 以 3 个 Hello 时间为 BPDU 超时判据，即 3×2 秒＝6 秒，超过该时间未收到上游 BPDU 就认为邻居失效并立即重新计算，B 正确。A 错误：2 秒只是一个 Hello 周期，单次丢包不应触发切换。C 错误：20 秒是 802.1D 中的 Max Age 默认值，RSTP 的检测不再等待该计时器。D 错误：30 秒是 802.1D 从阻塞到转发的典型总延时（Listening 15 秒加 Learning 15 秒），与 BPDU 超时判据无关。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "RSTP",
+    "difficulty": "medium",
+    "tags": [
+      "RSTP",
+      "BPDU 老化",
+      "Hello 时间"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-1-023",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「RSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / RSTP」；RSTP 以 3 个 Hello 时间为 BPDU 超时判据，题目给定 Hello 为 2 秒并已按 3×2＝6 秒复算；标准文本为收费文档，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干与选项，按公开标准的超时判据自行计算，未复制任何第三方题目正文。",
+      "reviewDigest": "2547947f1353d90ee5280ab33fe6b1dd849af270a72003bd908b651a48bf05f1"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-1-024",
+    "type": "single_choice",
+    "question": "在华为设备上把连接终端的端口配置为边缘端口后，端口链路 up 时进入转发状态需要经历多长时间？",
+    "options": {
+      "A": "立即进入转发状态，不经过 Forward Delay 等待",
+      "B": "等待 2 秒 Hello 时间后进入转发",
+      "C": "等待 15 秒 Forward Delay 后进入转发",
+      "D": "等待 30 秒（Listening 与 Learning 各 15 秒）后进入转发"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "边缘端口所连的是终端，不会形成环路，因此链路 up 后立即进入转发，A 正确。B 错误：Hello 时间是 BPDU 发送周期，不是边缘端口的迁移延时。C 错误：15 秒是 802.1D 的单个 Forward Delay，只有非边缘端口在需要计时器迁移时才涉及。D 错误：30 秒是 802.1D 中 Listening 加 Learning 的总时长，RSTP 已取消 Listening，且边缘端口根本不走这段流程。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "RSTP",
+    "difficulty": "easy",
+    "tags": [
+      "RSTP",
+      "边缘端口",
+      "转发延时"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-1-024",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「RSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / RSTP」；边缘端口不经过转发延迟、链路 up 后直接转发，属公开的 IEEE 802.1D-2004 标准结论；标准文本为收费文档，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，边缘端口转发时延按公开标准定义核对，未复制任何第三方题目正文。",
+      "reviewDigest": "b9c04a22717e245ed0a87145b9f68b48b0bb967a5b03d71aab53b205e0236d24"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-1-025",
+    "type": "single_choice",
+    "question": "RSTP 的 Proposal/Agreement 快速迁移过程中，上下游交互的正确顺序是？",
+    "options": {
+      "A": "下游先发送 Agreement，上游再发送 Proposal，最后下游同步其他端口",
+      "B": "上游先发送 Agreement，下游回复 Proposal，随后双方同时进入转发",
+      "C": "上游发送 Proposal，下游立即进入转发并回送 Agreement，上游再同步其他端口",
+      "D": "上游发送带 Proposal 置位的 BPDU，下游同步其他端口后回送 Agreement，上游收到后指定端口进入转发"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确顺序是：上游指定端口发出 Proposal 置位的 BPDU；下游收到后先把除边缘端口和收到 Proposal 的端口之外的其他端口同步（阻塞），再回送 Agreement；上游收到 Agreement 后指定端口立即进入转发，D 正确。A 错误：Proposal 必须由上游先发，下游不可能先回 Agreement。B 错误：Agreement 是下游对 Proposal 的确认，方向不能颠倒。C 错误：下游必须先完成同步再回送 Agreement，若先进入转发就可能与尚未阻塞的端口形成临时环路。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "RSTP",
+    "difficulty": "hard",
+    "tags": [
+      "RSTP",
+      "Proposal/Agreement",
+      "交互顺序"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-1-025",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「RSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / RSTP」；Proposal 由上游发起、下游同步后回 Agreement、上游收到后转发的握手顺序，属公开的 IEEE 802.1D-2004 标准结论；标准文本为收费文档，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，握手顺序按公开标准定义核对，未复制任何第三方题目正文。",
+      "reviewDigest": "1745c81cf5cb08100692ac1a6a0557dd962884e43fb97b9f61e4195cd2b9c3b8"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-1-026",
+    "type": "single_choice",
+    "question": "RSTP 中替代端口（Alternate Port）与备份端口（Backup Port）的主要区别是什么？",
+    "options": {
+      "A": "替代端口连接终端，备份端口连接交换机",
+      "B": "替代端口处于转发状态，备份端口处于学习状态",
+      "C": "替代端口从其他交换机收到 BPDU、为根端口提供备份；备份端口从本交换机其他端口收到 BPDU、为指定端口提供备份",
+      "D": "替代端口只存在于根桥，备份端口只存在于非根桥"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "两种角色的区别在于 BPDU 来源与备份对象：替代端口的更优 BPDU 来自其他交换机，为根端口提供备份；备份端口的更优 BPDU 来自本交换机的其他端口，为指定端口提供备份，C 正确。A 错误：连接终端的端口是边缘端口，两种角色都不用于连接终端。B 错误：两者在稳定状态下都处于丢弃状态，不转发也不学习。D 错误：根桥没有根端口，自然不会有替代端口；备份端口则可能出现在任何存在共享网段的交换机上，角色与是否为根桥没有对应关系。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "RSTP",
+    "difficulty": "medium",
+    "tags": [
+      "RSTP",
+      "替代端口",
+      "备份端口"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-1-026",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「RSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / RSTP」；替代端口与备份端口的 BPDU 来源及备份对象差异，属公开的 IEEE 802.1D-2004 标准结论；标准文本为收费文档，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，两种端口角色按公开标准定义区分，未复制任何第三方题目正文。",
+      "reviewDigest": "79fdf16cef163e9b814f4cb69bc8f3fc50e13251fc04f63615acfae0d040fada"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-1-027",
+    "type": "single_choice",
+    "question": "关于 RSTP 的快速收敛机制，下列说法错误的是？",
+    "options": {
+      "A": "点对点链路上使用 Proposal/Agreement 握手机制加快端口迁移",
+      "B": "RSTP 取消了 Listening 状态，端口状态只剩 Discarding、Learning 和 Forwarding",
+      "C": "拓扑变化通过 BPDU 中的 TC 标志和 TC While 定时器快速传播",
+      "D": "替代端口必须在根端口失效后等待 30 秒才能成为新的根端口"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "本题要求选出错误说法。替代端口一直在接收上游 BPDU，根端口失效后可立即接替并快速进入转发，不需要 30 秒，因此 D 错误，为本题答案。A 正确：P/A 机制正是 RSTP 在点对点链路上快速迁移的核心。B 正确：RSTP 删除了 Listening，把端口状态精简为三种。C 正确：TC 标志配合 TC While 定时器替代了 802.1D 的 TCN/TCA 流程。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "RSTP",
+    "difficulty": "medium",
+    "tags": [
+      "RSTP",
+      "快速收敛",
+      "反向设问"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-1-027",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「RSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / RSTP」；P/A、三种端口状态、TC 标志与 TC While 定时器及替代端口快速接替均属公开的 IEEE 802.1D-2004 标准结论；标准文本为收费文档，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计反向设问题干与选项，技术结论按公开标准定义核对，未复制任何第三方题目正文。",
+      "reviewDigest": "20b978a7506411616b320371c327354b836c3eba1b6ca10b78e4c7d21a1fba17"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-2-001",
+    "type": "single_choice",
+    "question": "MSTP 用配置标识（Configuration Identifier）判断两台交换机是否属于同一个 MST 区域。该配置标识由哪些内容构成？",
+    "options": {
+      "A": "桥优先级、MAC 地址和端口优先级",
+      "B": "实例号、VLAN ID 和端口路径开销",
+      "C": "根桥 ID、根路径开销和 Hello 时间",
+      "D": "域名（Region Name）、修订级别（Revision Level）和 VLAN 到实例的映射摘要"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "配置标识由域名、修订级别和 VLAN 到实例的映射（摘要）三部分构成，三者完全一致才属于同一 MST 区域，D 正确。A 错误：桥优先级和 MAC 属于桥 ID，是选举根桥的比较对象，不是区域标识。B 错误：实例号和 VLAN 映射只参与构成映射摘要，端口路径开销是各端口独立的选路参数。C 错误：根桥 ID、根路径开销和 Hello 时间出现在 BPDU 的 CIST 相关字段中，用于生成树计算，不是配置标识的组成部分。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "MSTP",
+    "difficulty": "medium",
+    "tags": [
+      "MSTP",
+      "MST 区域",
+      "配置标识"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-2-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「MSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / MSTP」；配置标识由域名、修订级别和 VLAN 到实例映射摘要组成，属公开的 IEEE 802.1Q 标准结论；标准文本为收费文档，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，区域标识构成按公开标准定义核对，未复制任何第三方题目正文。",
+      "reviewDigest": "fc035ca22226eb6f8c029c399c4c5cac6722afa2507835e6062002fb5f058ca5"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-2-002",
+    "type": "single_choice",
+    "question": "MSTP 中，交换机连接其他 MST 区域或运行 RSTP/STP 的设备、并参与 CIST 计算的端口，在 CIST 中承担什么角色？",
+    "options": {
+      "A": "根端口",
+      "B": "主端口（Master Port）",
+      "C": "替代端口",
+      "D": "边缘端口"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "连接其他区域或运行 RSTP/STP 设备的端口是域边界端口，它在 CIST 中承担主端口角色，负责把本区域的 IST 接入外部生成树，B 正确。A 错误：根端口是本交换机到 CIST 总根路径开销最小的端口，可能位于区域内部，与是否跨越区域边界无关。C 错误：替代端口是阻塞的备份端口，不承担跨区域连接职责。D 错误：边缘端口连接终端、不参与生成树计算，更不会连接其他区域。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "MSTP",
+    "difficulty": "medium",
+    "tags": [
+      "MSTP",
+      "主端口",
+      "域边界端口"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-2-002",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「MSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / MSTP」；域边界端口在 CIST 中承担主端口角色，属公开的 IEEE 802.1Q 标准结论；标准文本为收费文档，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，主端口角色按公开标准定义核对，未复制任何第三方题目正文。",
+      "reviewDigest": "4ec848214fca2fef3f829542c632e5b5646eb1cc2dfdf4fee4bc5d29997bd1b2"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-2-003",
+    "type": "single_choice",
+    "question": "由多台交换机组成的 MSTP 网络中，CIST 总根桥（CIST Root）是如何确定的？",
+    "options": {
+      "A": "由各区域内部 MSTI 0 的根桥优先级比较产生",
+      "B": "由 VLAN 数量最多的交换机担任",
+      "C": "在所有参与 MSTP 的交换机中，比较 CIST 桥优先级，最小者成为总根；优先级相同则比较 MAC 地址",
+      "D": "由管理员手工指定，且必须与各区域 IST 根桥是同一台设备"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "CIST 总根在所有参与 MSTP 的交换机中选举，比较 CIST 桥优先级（数值最小者优先），相同时比较 MAC 地址（小者优先），C 正确。A 错误：MSTI 0 优先级在区域内决定 IST 根桥，各区域 IST 根桥再通过外部路径开销竞争，不能直接等同于 CIST 总根选举。B 错误：VLAN 数量与根桥选举无关。D 错误：总根由协议选举而非手工指定，也不需要与每个区域的 IST 根桥是同一台设备。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "MSTP",
+    "difficulty": "medium",
+    "tags": [
+      "MSTP",
+      "CIST 总根",
+      "根桥选举"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-2-003",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「MSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / MSTP」；CIST 总根按 CIST 桥优先级（小者优先）与 MAC 地址选举，属公开的 IEEE 802.1Q 标准结论；标准文本为收费文档，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，CIST 总根选举规则按公开标准定义核对，未复制任何第三方题目正文。",
+      "reviewDigest": "74d45e37ad4f47d3a7c787d507898ad511d1216c189ef3268e8d6b064944873a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-2-004",
+    "type": "single_choice",
+    "question": "关于 MSTP 中 MSTI 根桥的选举，下列说法正确的是？",
+    "options": {
+      "A": "各 MSTI 的根桥在 MST 区域内部选举，不同实例可选不同根桥以实现负载分担",
+      "B": "MSTI 根桥在全网范围内选举，与 CIST 总根桥必须是同一台设备",
+      "C": "MSTI 根桥由 VLAN ID 最小的交换机自动担任",
+      "D": "一个区域只能有一个 MSTI，因此不存在多个实例根桥"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "MSTI 的拓扑只在区域内部有意义，其根桥按该实例的桥优先级在区域内选举，因此不同实例可以选出不同根桥，把不同 VLAN 的流量引到不同链路，A 正确。B 错误：MSTI 不跨越区域边界，不存在全网范围的 MSTI 根桥，也不要求与 CIST 总根一致。C 错误：根桥由实例优先级和 MAC 决定，与 VLAN ID 大小无关。D 错误：一个区域可以配置多个 MSTI，正是多实例负载分担的基础。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "MSTP",
+    "difficulty": "medium",
+    "tags": [
+      "MSTP",
+      "MSTI",
+      "负载分担"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-2-004",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「MSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / MSTP」；MSTI 拓扑仅在区域内有效、不同实例可选不同根桥，属公开的 IEEE 802.1Q 标准结论；标准文本为收费文档，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，MSTI 根桥选举范围按公开标准定义核对，未复制任何第三方题目正文。",
+      "reviewDigest": "6f434acb515430baea713ffc59945fe0f5777fddfbf03a2ff7079fc122c88b89"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-2-005",
+    "type": "single_choice",
+    "question": "在同一个 MST 区域内，一个 VLAN 最多可以映射到几个生成树实例？",
+    "options": {
+      "A": "最多 2 个，用于冗余",
+      "B": "恰好 1 个",
+      "C": "最多 16 个",
+      "D": "不受限制，可映射到所有实例"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "MSTP 的实例与 VLAN 是多对一关系：一个实例可以包含多个 VLAN，但一个 VLAN 只能属于一个实例，因此恰好 1 个，B 正确。A、C、D 都违背了这一基本约束：若一个 VLAN 同时属于多个实例，同一 VLAN 的报文就会在不同实例的拓扑上出现不一致的转发路径，无法保证无环。未显式映射的 VLAN 统一归入实例 0。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "MSTP",
+    "difficulty": "easy",
+    "tags": [
+      "MSTP",
+      "VLAN 映射",
+      "实例"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-2-005",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「MSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / MSTP」；一个 VLAN 只能映射到一个实例、一个实例可包含多个 VLAN，属公开的 IEEE 802.1Q 标准结论；标准文本为收费文档，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，VLAN 与实例映射约束按公开标准定义核对，未复制任何第三方题目正文。",
+      "reviewDigest": "650a871dedd75c44f6684bc27906b994c37994937b6348f66da42e815f4f0683"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-2-006",
+    "type": "single_choice",
+    "question": "在华为设备上完成 MSTP 域配置后，没有显式映射到任何 MSTI 的 VLAN 属于哪个实例？",
+    "options": {
+      "A": "不参与生成树，直接转发",
+      "B": "属于编号最大的实例",
+      "C": "每个 VLAN 自动形成独立实例",
+      "D": "属于实例 0（CIST）"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "MSTP 默认把所有未显式映射的 VLAN 归入实例 0，实例 0 即 IST，与区域间链路共同构成 CIST，D 正确。A 错误：任何 VLAN 都必须有生成树保护，未映射不等于不参与。B 错误：实例号不会因“未映射”而自动取最大值，默认归属固定为 0。C 错误：设备不会为每个 VLAN 自动创建实例，实例需要显式配置并映射 VLAN。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "MSTP",
+    "difficulty": "easy",
+    "tags": [
+      "MSTP",
+      "实例 0",
+      "默认映射"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-2-006",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「MSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / MSTP」；未显式映射的 VLAN 默认归入实例 0（IST），属公开的 IEEE 802.1Q 标准结论；题目已写明华为设备，标准文本为收费文档，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，默认实例归属按公开标准定义核对，未复制任何第三方题目正文。",
+      "reviewDigest": "127c752dc53f3ad6331d2a11166cdb9ce0b73f1b8fe6ff576ec90d7a4512e682"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-2-007",
+    "type": "single_choice",
+    "question": "MSTP 的 BPDU 与 RSTP 的 RST BPDU 在格式上是什么关系？",
+    "options": {
+      "A": "MSTP BPDU 在 RST BPDU 基础上增加 MST 扩展字段，协议版本号为 3",
+      "B": "MSTP 使用全新的 BPDU 类型，与 RST BPDU 完全不兼容",
+      "C": "MSTP BPDU 是 802.1D 配置 BPDU 去掉 TCN 字段后的简化版本",
+      "D": "MSTP 不使用 BPDU，而使用 LSA 传递生成树信息"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "MSTP 沿用了 RST BPDU 的基本结构，并在其后追加 MST 扩展字段（携带配置标识、CIST 根路径开销、各 MSTI 的优先级与角色等），协议版本号为 3，A 正确。B 错误：正因为沿用 RST BPDU 结构，MSTP 才能与 RSTP 互通。C 错误：MSTP 是在 RST BPDU 上扩展，而不是从 802.1D 配置 BPDU 删减字段。D 错误：LSA 是 OSPF 的链路状态通告，与生成树无关。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "MSTP",
+    "difficulty": "medium",
+    "tags": [
+      "MSTP",
+      "BPDU",
+      "协议版本"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-2-007",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「MSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / MSTP」；MSTP BPDU 在 RST BPDU 基础上增加 MST 扩展、协议版本号为 3，属公开的 IEEE 802.1Q 标准结论；标准文本为收费文档，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，BPDU 格式关系按公开标准定义核对，未复制任何第三方题目正文。",
+      "reviewDigest": "221d84df5eb9c938a95d1e7e38c213f9f9c70af96f4773f7e9b776aef4216d8e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-2-008",
+    "type": "single_choice",
+    "question": "一个 MST 区域的边界端口连接到一台只运行 RSTP 的交换机。关于双方互通，下列描述正确的是？",
+    "options": {
+      "A": "对方必须升级到 MSTP 才能通信",
+      "B": "边界端口向对方发送完整 MSTP BPDU，对方按实例逐棵计算",
+      "C": "边界端口按 RSTP 格式与对方交互，整个 MST 区域对外表现为一台 RSTP 交换机参与 CIST 计算",
+      "D": "双方无法形成生成树，链路必须手工阻塞"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "MSTP 向后兼容 RSTP/STP：边界端口检测到对方只支持 RSTP 时按 RSTP 格式交互，整个 MST 区域在 CIST 上对外呈现为一台（虚拟）RSTP 交换机，C 正确。A 错误：兼容设计的目的就是无需对端升级。B 错误：对方不识别 MST 扩展字段，不会按实例逐棵计算，区域内 MSTI 信息也不跨越边界。D 错误：双方可以正常形成生成树，只是本区域对外退化为单棵生成树视图。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "MSTP",
+    "difficulty": "medium",
+    "tags": [
+      "MSTP",
+      "RSTP 互通",
+      "域边界"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-2-008",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「MSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / MSTP」；MSTP 与 RSTP 互通时边界端口按 RSTP 交互、区域对外表现为一台 RSTP 交换机，属公开的 IEEE 802.1Q 标准结论；标准文本为收费文档，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，RSTP 兼容行为按公开标准定义核对，未复制任何第三方题目正文。",
+      "reviewDigest": "908a20d612c588f13bf0aaa8bf02f2a58083a56de5e2b915ec84564862cc158e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-2-009",
+    "type": "single_choice",
+    "question": "某 MSTP 网络有两条上行链路，要求 VLAN 10～20 的流量走左侧链路、VLAN 30～40 的流量走右侧链路，同时保留链路冗余。最合适的实现方式是什么？",
+    "options": {
+      "A": "把所有 VLAN 都映射到实例 0，依靠路径开销自动选路",
+      "B": "关闭右侧链路的生成树，让它始终转发",
+      "C": "为两组 VLAN 分别配置不同的端口优先级，但不划分实例",
+      "D": "把两组 VLAN 映射到不同的 MSTI，并为各 MSTI 设置不同的根桥优先级，使不同实例阻塞不同端口"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "MSTP 的负载分担依赖多实例：把两组 VLAN 映射到不同 MSTI，再让不同实例的根桥位于不同侧，各实例就会阻塞不同端口，同时任一链路故障时另一个实例仍可收敛，D 正确。A 错误：全部放入实例 0 只有一棵拓扑，两条链路中必有一条被阻塞，无法按 VLAN 分流。B 错误：关闭生成树会失去冗余并可能形成环路。C 错误：不划分实例时端口优先级只影响单棵拓扑的选举，不能实现按 VLAN 的差异化转发。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "MSTP",
+    "difficulty": "medium",
+    "tags": [
+      "MSTP",
+      "负载分担",
+      "场景应用"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-2-009",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「MSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / MSTP」；按 VLAN 分组映射不同 MSTI 并设置不同实例根桥实现负载分担，属公开的 IEEE 802.1Q 标准结论；标准文本为收费文档，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计场景题干与选项，多实例负载分担方案按公开标准机制推导，未复制任何第三方题目正文。",
+      "reviewDigest": "edd506fc7032948c1417d396506b59fe5510d8df45b12765f4a396f7258c5363"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-2-010",
+    "type": "single_choice",
+    "question": "四台交换机组成一个 MST 区域，CIST 桥优先级分别为 SW1 4096、SW2 8192、SW3 32768、SW4 32768；MSTI 1 的桥优先级分别为 SW1 32768、SW2 4096、SW3 32768、SW4 32768。忽略 MAC 地址差异，CIST 总根和 MSTI 1 的根桥分别是谁？",
+    "options": {
+      "A": "SW1 为 CIST 总根，SW1 也是 MSTI 1 的根桥",
+      "B": "SW1 为 CIST 总根，SW2 为 MSTI 1 的根桥",
+      "C": "SW2 为 CIST 总根，SW1 为 MSTI 1 的根桥",
+      "D": "SW3 为 CIST 总根，SW4 为 MSTI 1 的根桥"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "CIST 总根比较 CIST 桥优先级，4096＜8192＜32768，SW1 最小，故 SW1 为 CIST 总根。MSTI 1 的根桥在该实例内单独比较优先级：SW2 为 4096，小于其余三台的 32768，故 SW2 成为 MSTI 1 的根桥。因此 B 正确。A 错误：SW1 在 MSTI 1 中优先级为 32768，并非最优。C 错误：CIST 中 SW2 的 8192 大于 SW1 的 4096，SW2 不可能成为总根。D 错误：4096 比 32768 更优，SW3/SW4 都只能排在后面。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "MSTP",
+    "difficulty": "hard",
+    "tags": [
+      "MSTP",
+      "根桥选举",
+      "计算题"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-2-010",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「MSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / MSTP」；CIST 总根与 MSTI 根桥分别按各自优先级比较，题目给定 4096/8192/32768 并已按小者优先复算；标准文本为收费文档，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计数据并逐项比较优先级，答案由作者自行推算，未复制任何第三方题目正文。",
+      "reviewDigest": "1a6119a38cc764cc4068deee42941ba385ead6b13a59a9fbf8a4ac135cdcfd6c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-2-011",
+    "type": "single_choice",
+    "question": "在华为设备上修改 MST 域的域名、修订级别和实例映射后，display stp region-configuration 仍显示旧配置。最可能的原因是什么？",
+    "options": {
+      "A": "需要重启交换机才能生效",
+      "B": "必须先关闭所有端口的生成树",
+      "C": "修改后没有执行 active region-configuration 提交配置",
+      "D": "只有根桥才能修改域配置"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "华为设备把 MST 域参数放在 region-configuration 视图下编辑，编辑完成后必须执行 active region-configuration 才会真正生效并刷新 BPDU 中的配置标识，因此 C 正确。A 错误：域参数提交不依赖整机重启。B 错误：关闭生成树与域配置提交无关，反而会破坏现网防环。D 错误：任何参与该区域的交换机都可以配置本地域参数，是否成为根桥由选举决定。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "MSTP",
+    "difficulty": "medium",
+    "tags": [
+      "MSTP",
+      "域配置",
+      "华为设备"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-2-011",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「MSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / MSTP」；域参数修改后需执行 active region-configuration 提交才生效，属华为设备实现行为，题目已写明华为设备，故仅引官方大纲范围。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，配置生效语义按华为设备公开实现行为核对，未复制任何第三方题目正文。",
+      "reviewDigest": "2c86bd8b6ec92d071a2a0973c003804b249358ef4ad4e3ad11129728e2be7887"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-2-012",
+    "type": "single_choice",
+    "question": "MSTP 中域边界端口（连接其他区域或运行 RSTP/STP 设备的端口）的作用是什么？",
+    "options": {
+      "A": "在 CIST 中作为主端口把本区域接入外部生成树，而区域内的 MSTI 不跨越该边界",
+      "B": "把本区域所有 MSTI 的 BPDU 原样扩散到相邻区域",
+      "C": "只转发 VLAN 1 的流量，其他 VLAN 一律阻塞",
+      "D": "用于在区域之间同步 VLAN 映射表"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "域边界端口在 CIST 中承担主端口角色，负责把本区域的 IST 与外部生成树连接起来；MSTI 的拓扑仅在本区域内有效，不会跨越边界，A 正确。B 错误：MST 扩展信息不会原样扩散到其他区域，正因如此各区域才能独立规划实例。C 错误：边界端口并不按 VLAN 1 与其他 VLAN 做这种区分，转发状态由各实例的 CIST/MSTI 计算决定。D 错误：VLAN 映射表属于区域内部配置，不通过 BPDU 在区域间同步，映射摘要只用于判断是否同区域。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "MSTP",
+    "difficulty": "hard",
+    "tags": [
+      "MSTP",
+      "域边界端口",
+      "主端口"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-2-012",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「MSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / MSTP」；域边界端口承载 CIST 连接而 MSTI 不跨域，属公开的 IEEE 802.1Q 标准结论；标准文本为收费文档，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，域边界端口职责按公开标准定义核对，未复制任何第三方题目正文。",
+      "reviewDigest": "4106e2f08d58d9591539638defd1f704fa85397658f5e1ce89d7150bb10cbc69"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-2-013",
+    "type": "single_choice",
+    "question": "MSTP 中某个 MSTI 内发生拓扑变化时，影响范围是什么？",
+    "options": {
+      "A": "所有实例与 CIST 一起重新计算，收敛范围与单生成树相同",
+      "B": "变化会通过 CIST 扩散，导致其他实例的端口也进入阻塞",
+      "C": "只影响 CIST，MSTI 内部端口状态不变",
+      "D": "该实例内端口重新收敛并刷新对应 MAC 表项，其他实例继续按原拓扑转发"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "MSTI 的拓扑相互独立，某实例内链路变化只触发该实例的重新收敛和相应 MAC 表项刷新，其他实例与 CIST 可继续按原拓扑转发，D 正确。A 错误：多实例的设计目的正是把故障影响限制在实例内，不会全实例重算。B 错误：拓扑变化不会因 CIST 传播而阻塞其他实例的端口。C 错误：MSTI 内的端口状态当然会改变，否则该实例无法收敛；把影响说成只在 CIST 恰好相反。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "MSTP",
+    "difficulty": "medium",
+    "tags": [
+      "MSTP",
+      "拓扑变化",
+      "实例隔离"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-2-013",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「MSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / MSTP」；某 MSTI 内拓扑变化只影响该实例并刷新其表项，属公开的 IEEE 802.1Q 标准结论；标准文本为收费文档，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，实例间故障隔离按公开标准机制推导，未复制任何第三方题目正文。",
+      "reviewDigest": "706844b3a4fe19bad0f4169775169a88602249f278afa646232a8a7df669ed08"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-2-014",
+    "type": "single_choice",
+    "question": "在华为设备上，希望实例 2 的流量优先走 G0/0/2 而不是 G0/0/1，最直接有效的配置是什么？",
+    "options": {
+      "A": "把 G0/0/1 的端口优先级改为 0",
+      "B": "增大 G0/0/1 在实例 2 中的路径开销",
+      "C": "把 G0/0/2 配置为边缘端口",
+      "D": "关闭 G0/0/1 的生成树功能"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "每个实例可以单独设置端口路径开销，增大 G0/0/1 在实例 2 的开销后，实例 2 会认为经 G0/0/2 的路径更优，从而把该实例的流量切到 G0/0/2，B 正确。A 错误：端口优先级影响的是指定端口选举与上游端口比较，改到 0 只对单棵拓扑的选举起作用，不能直接实现按实例选路。C 错误：边缘端口用于连接终端，配置在交换机互联端口上反而会因收到 BPDU 而失效。D 错误：关闭生成树会带来环路风险，不是选路手段。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "MSTP",
+    "difficulty": "medium",
+    "tags": [
+      "MSTP",
+      "路径开销",
+      "配置语义"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-2-014",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「MSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / MSTP」；端口在各实例可单独设置路径开销以控制该实例选路，属华为设备支持的公开标准机制，题目已写明华为设备，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，按实例路径开销的作用机制推导，未复制任何第三方题目正文。",
+      "reviewDigest": "31f2ad130b04dc70743f24d1f2f030e353fe5b49a6642070b239fe590ac70d0c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-2-015",
+    "type": "single_choice",
+    "question": "在华为设备上执行 display stp instance 1 brief，输出显示 G0/0/1 的角色为 ROOT、状态为 FORWARDING，G0/0/2 的角色为 ALTE、状态为 DISCARDING。若实例 1 映射了 VLAN 100，下列判断正确的是？",
+    "options": {
+      "A": "VLAN 100 的流量会从 G0/0/2 转发，G0/0/1 被阻塞",
+      "B": "两个端口都在转发，VLAN 100 实现负载分担",
+      "C": "实例 1 中 G0/0/2 为替代端口，VLAN 100 的流量经 G0/0/1 转发",
+      "D": "实例 1 未生效，输出中的角色只对实例 0 有效"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "实例 1 中 G0/0/1 为根端口且转发，G0/0/2 为替代端口且丢弃；VLAN 100 映射到实例 1，其流量沿该实例的根端口转发，因此经 G0/0/1 转发，C 正确。A 错误：ALTE/DISCARDING 的端口不转发业务报文。B 错误：替代端口被阻塞，两个端口并未同时转发。D 错误：display stp instance 1 brief 正是查看实例 1 的端口角色与状态，输出已表明该实例生效。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "MSTP",
+    "difficulty": "medium",
+    "tags": [
+      "MSTP",
+      "display stp instance",
+      "输出解读"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-2-015",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「MSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / MSTP」；display stp instance 输出的 ROOT/ALTE 角色与 FORWARDING/DISCARDING 状态语义属华为设备实现行为，题目已写明华为设备，故仅引官方大纲范围。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计命令输出解读题，语义按华为设备公开实现行为核对，未复制任何第三方题目正文。",
+      "reviewDigest": "3693a13f0564f65ee72fdfc36677e414962b95cdd2e0dcdb44fada59f3a5d66e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-2-016",
+    "type": "single_choice",
+    "question": "关于 MSTP，下列说法错误的是？",
+    "options": {
+      "A": "一个 MST 区域在 CIST 上对外表现为一台逻辑交换机",
+      "B": "同一个 VLAN 可以同时映射到多个 MSTI，以便为不同实例提供冗余路径",
+      "C": "不同 MSTI 可以选择不同的根桥，从而实现按 VLAN 的负载分担",
+      "D": "域边界端口参与 CIST 计算，但 MSTI 不跨越区域边界"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "本题要求选出错误说法。MSTP 中一个 VLAN 只能映射到一个实例，否则同一 VLAN 会在多棵拓扑上出现不一致的转发路径，因此 B 错误，为本题答案。A 正确：区域在 CIST 上被抽象为一台逻辑交换机，以区域根桥的身份参与外部计算。C 正确：不同实例可选不同根桥，这正是 MSTP 负载分担的基础。D 正确：域边界端口属于 CIST，MSTI 只在区域内有效。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "MSTP",
+    "difficulty": "medium",
+    "tags": [
+      "MSTP",
+      "VLAN 映射",
+      "反向设问"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-2-016",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「MSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / MSTP」；一个 VLAN 只能属于一个实例、区域对外为一台逻辑交换机、MSTI 不跨域，均属公开的 IEEE 802.1Q 标准结论；标准文本为收费文档，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计反向设问题干与选项，技术结论按公开标准定义核对，未复制任何第三方题目正文。",
+      "reviewDigest": "43dd1a643430fb430e00bd30f781cc56b0b44fdb524105758df902128226b653"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-2-017",
+    "type": "single_choice",
+    "question": "现网 MST 区域的域名为 office、修订级别为 1。新交换机配置了相同域名和相同的实例映射，但修订级别保持默认 0。接入后最可能的结果是什么？",
+    "options": {
+      "A": "自动继承现网修订级别，正常加入同一区域",
+      "B": "新交换机被拒绝接入，端口进入 error-down",
+      "C": "两台交换机仍属同一区域，只是实例号重新编排",
+      "D": "被视为不同区域，互连端口成为域边界端口，区域内 MSTI 不连续，可能导致部分 VLAN 路径异常"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "区域标识要求域名、修订级别、映射摘要三者完全一致，修订级别不同即属于不同区域，互连端口成为域边界端口，两边的 MSTI 各自独立、不再连续，可能出现部分 VLAN 绕行或阻塞，D 正确。A 错误：修订级别不会自动继承，必须显式配置一致。B 错误：区域不匹配不会触发 error-down，端口仍参与 CIST 计算。C 错误：实例号不会因不匹配而重新编排，配置保持原样，只是拓扑不再连续。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "MSTP",
+    "difficulty": "hard",
+    "tags": [
+      "MSTP",
+      "修订级别",
+      "故障定位"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-2-017",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「MSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / MSTP」；域名相同但修订级别不同即属于不同区域、互连端口成为域边界端口，属公开的 IEEE 802.1Q 标准结论；标准文本为收费文档，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计故障场景与选项，区域不匹配后果按公开标准机制推导，未复制任何第三方题目正文。",
+      "reviewDigest": "253762fb06977a93613cff30bab7d6b893ea5b9ace257d93a4d26601265cd4bd"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-2-018",
+    "type": "single_choice",
+    "question": "SWA 位于某 MST 区域内部，其 IST 根端口到区域边界主端口的内部路径开销为 10000，边界主端口到 CIST 总根的外部路径开销为 20000。SWA 到 CIST 总根的总路径开销是多少？",
+    "options": {
+      "A": "30000",
+      "B": "10000",
+      "C": "20000",
+      "D": "40000"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "MSTP 中到 CIST 总根的总开销由两段相加：区域内部到边界主端口的内部开销 10000，加上边界主端口到 CIST 总根的外部开销 20000，即 10000＋20000＝30000，A 正确。B 错误：10000 只是区域内部那一段，漏掉了外部开销。C 错误：20000 只是外部开销，漏掉了内部那一段。D 错误：40000 把两段错误地重复累加，没有依据。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "MSTP",
+    "difficulty": "hard",
+    "tags": [
+      "MSTP",
+      "路径开销",
+      "计算题"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-2-018",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「MSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / MSTP」；到 CIST 总根的总开销等于区域内部开销加外部开销，题目给定 10000 与 20000 并已按 10000＋20000＝30000 复算；标准文本为收费文档，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计数值并自行相加复算，未复制任何第三方题目正文。",
+      "reviewDigest": "3ba50cb6a8b282bd8d6fff62584172c85f9d37e56a8c1ba0c66a2b3e0976c2f1"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-2-1-001",
+    "type": "single_choice",
+    "question": "华为 iStack 堆叠系统中，成员设备按角色划分为哪几类？",
+    "options": {
+      "A": "根桥、非根桥、边缘设备",
+      "B": "主交换机（Master）、备交换机（Standby）、从交换机（Slave）",
+      "C": "管理交换机、成员交换机、候选交换机",
+      "D": "活动网关、备用网关、转发设备"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "华为 iStack 的成员角色分为主交换机、备交换机和从交换机：主交换机负责管理与控制，备交换机在主故障时接替，从交换机承担转发，B 正确。A 错误：根桥/非根桥是生成树的角色，与堆叠角色无关。C 错误：管理交换机、成员交换机、候选交换机是集群（Cluster）的角色划分，不是堆叠。D 错误：活动/备用网关是 VRRP 等网关冗余的概念。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "堆叠与集群",
+    "knowledgePoint": "交换机堆叠与集群",
+    "difficulty": "easy",
+    "tags": [
+      "堆叠",
+      "iStack",
+      "成员角色"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-2-1-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「交换机堆叠与集群」与三级目录「交换技术基础 / 堆叠与集群 / 交换机堆叠与集群」；主交换机、备交换机、从交换机的角色划分属华为设备实现行为，没有对应 IETF 标准文档，故仅以官方大纲范围为依据。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开的堆叠工程实践独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "346e26f112bc02b126f645bc8381acb287de9c75e78f6ef92de51f0c65a56197"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-2-1-002",
+    "type": "single_choice",
+    "question": "华为设备组成 iStack，SW1 的堆叠优先级为 150，SW2 的堆叠优先级为 200，其余条件相同。哪台设备成为主交换机？",
+    "options": {
+      "A": "SW1，因为优先级数值小者优先",
+      "B": "两台设备轮流担任主交换机",
+      "C": "由 MAC 地址决定，与优先级无关",
+      "D": "SW2，因为堆叠优先级数值大者优先"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "华为堆叠主交换机选举首先比较堆叠优先级，数值大者优先，200＞150，因此 SW2 成为主交换机，D 正确。A 错误：堆叠优先级不是“小者优先”，这与生成树桥优先级的比较方向相反，容易混淆。B 错误：主备角色是选举产生的稳定结果，不会轮换。C 错误：MAC 地址只在优先级相同时作为次级比较条件，本例优先级已分出高低。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "堆叠与集群",
+    "knowledgePoint": "交换机堆叠与集群",
+    "difficulty": "easy",
+    "tags": [
+      "堆叠",
+      "主交换机选举",
+      "优先级"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-2-1-002",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「交换机堆叠与集群」与三级目录「交换技术基础 / 堆叠与集群 / 交换机堆叠与集群」；华为堆叠主交换机选举按优先级数值大者优先，题中给定 150 与 200 并已比较；属华为设备实现行为，无对应 IETF 标准，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开的堆叠工程实践独立设计数值并自行比较，未复制任何第三方题目正文。",
+      "reviewDigest": "bf786a3ae29ea3aa60806b42aef8ce5fb880b97011632c3861490dbb27f7841b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-2-1-003",
+    "type": "single_choice",
+    "question": "华为设备组成 iStack，两台成员的堆叠优先级都保持默认值，SW1 的 MAC 地址为 00e0-fc00-0001，SW2 的 MAC 地址为 00e0-fc00-0002。哪台设备成为主交换机？",
+    "options": {
+      "A": "SW1，优先级相同时 MAC 地址小者优先",
+      "B": "SW2，优先级相同时 MAC 地址大者优先",
+      "C": "无法选举，必须手工指定",
+      "D": "由堆叠 ID 小者担任，与 MAC 无关"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "两台设备的堆叠优先级相同，进入次级比较：MAC 地址小者优先。00e0-fc00-0001 小于 00e0-fc00-0002，因此 SW1 成为主交换机，A 正确。B 错误：比较方向是 MAC 小者优先，不是大者。C 错误：优先级与 MAC 已能分出结果，选举可以自动完成。D 错误：堆叠 ID 用于标识成员与接口槽位，不是主交换机选举的比较项。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "堆叠与集群",
+    "knowledgePoint": "交换机堆叠与集群",
+    "difficulty": "medium",
+    "tags": [
+      "堆叠",
+      "主交换机选举",
+      "MAC 地址"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-2-1-003",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「交换机堆叠与集群」与三级目录「交换技术基础 / 堆叠与集群 / 交换机堆叠与集群」；优先级相同时按 MAC 地址小者优先，题中 MAC 为 00e0-fc00-0001 与 00e0-fc00-0002 并已比较；属华为设备实现行为，无对应 IETF 标准，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开的堆叠工程实践独立设计数据并自行比较，未复制任何第三方题目正文。",
+      "reviewDigest": "9b122bb319016d08179711235268677db8cc963679aef0c304a25e0b2f645b87"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-2-1-004",
+    "type": "single_choice",
+    "question": "把三台交换机堆叠时，环形连接与链形连接相比，主要优势是什么？",
+    "options": {
+      "A": "环形连接可以减少堆叠 ID 的数量",
+      "B": "环形连接不需要选举主交换机",
+      "C": "环形连接在一条堆叠链路故障时仍能保持成员间互通，可靠性更高",
+      "D": "环形连接可以把堆叠带宽提高一倍，但不提供冗余"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "环形连接首尾相接，任意一条堆叠链路故障后仍有一条路径连通所有成员，因此可靠性高于链形，C 正确。A 错误：堆叠 ID 是每台成员的唯一编号，与连接拓扑无关。B 错误：无论链形还是环形都必须选举主交换机。D 错误：环形连接的价值正是冗余，且堆叠带宽由链路数量与规格决定，不是“提高一倍但不提供冗余”。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "堆叠与集群",
+    "knowledgePoint": "交换机堆叠与集群",
+    "difficulty": "easy",
+    "tags": [
+      "堆叠",
+      "环形连接",
+      "可靠性"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-2-1-004",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「交换机堆叠与集群」与三级目录「交换技术基础 / 堆叠与集群 / 交换机堆叠与集群」；环形堆叠在单条链路故障时仍保持成员互通，属公开的工程实践结论，无对应 IETF 标准，故仅以官方大纲范围为依据。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开的堆叠工程实践独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "9ec041679e641d1e4e99fc5edb39f1ad351162e39aead8c778840b278922e536"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-2-1-005",
+    "type": "single_choice",
+    "question": "一台接入交换机需要双归到由两台成员组成的堆叠系统，并要求两条上行链路同时转发、任一成员故障不影响业务。应如何配置？",
+    "options": {
+      "A": "在堆叠系统上创建两个独立的普通端口，分别连接两条上行链路",
+      "B": "在接入交换机上配置生成树，阻塞其中一条上行链路",
+      "C": "把两条上行链路分别配置为主备静态路由",
+      "D": "在堆叠系统上创建一个 Eth-Trunk，把两台成员设备上对应的端口都加入该 Eth-Trunk"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "堆叠系统可把不同成员设备上的端口加入同一个 Eth-Trunk，形成跨设备链路聚合：两条上行链路同时转发并互为备份，任一成员故障时其余成员仍可承载流量，D 正确。A 错误：两个独立端口无法聚合，生成树还会阻塞其中一条，不能同时转发。B 错误：阻塞一条链路只实现主备，达不到同时转发的要求。C 错误：静态路由解决三层选路，不能为二层双归链路提供聚合与快速切换。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "堆叠与集群",
+    "knowledgePoint": "交换机堆叠与集群",
+    "difficulty": "medium",
+    "tags": [
+      "堆叠",
+      "Eth-Trunk",
+      "跨设备链路聚合"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-2-1-005",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「交换机堆叠与集群」与三级目录「交换技术基础 / 堆叠与集群 / 交换机堆叠与集群」；跨成员设备创建 Eth-Trunk 实现双归同时转发与成员级冗余，属公开的工程实践结论，无对应 IETF 标准，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开的堆叠工程实践独立设计场景与选项，未复制任何第三方题目正文。",
+      "reviewDigest": "01544eea699232ba6598fcd805f425e69d6e543278e71711112b3cce21d24fcf"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-2-1-006",
+    "type": "single_choice",
+    "question": "华为 iStack 系统运行中主交换机发生硬件故障，堆叠系统的行为是什么？",
+    "options": {
+      "A": "整个堆叠系统停止转发，等待主交换机恢复",
+      "B": "备交换机接替成为新的主交换机，其他成员继续工作，业务可经剩余链路转发",
+      "C": "所有成员重新选举堆叠 ID 后重启",
+      "D": "从交换机直接升级为主交换机，备交换机保持不变"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "主交换机故障后由备交换机接替主角色，其余成员继续运行，配合跨设备链路聚合等冗余设计业务不中断，B 正确。A 错误：堆叠的意义之一就是主控冗余，不会整体停转。C 错误：堆叠 ID 是配置标识，不会因主故障而重新选举，成员也无需全部重启。D 错误：接替顺序是先备后从，从交换机不会越过备交换机直接成为主。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "堆叠与集群",
+    "knowledgePoint": "交换机堆叠与集群",
+    "difficulty": "easy",
+    "tags": [
+      "堆叠",
+      "主备倒换",
+      "可靠性"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-2-1-006",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「交换机堆叠与集群」与三级目录「交换技术基础 / 堆叠与集群 / 交换机堆叠与集群」；主交换机故障后由备交换机接替，属华为设备实现行为，无对应 IETF 标准，故仅以官方大纲范围为依据。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开的堆叠工程实践独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "a2d4f5bbe87c015a60955daeaa481032fe19e32f5e2477e6c44c4365467960e2"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-2-1-007",
+    "type": "single_choice",
+    "question": "华为堆叠系统配置 MAD 双主检测的主要目的是什么？",
+    "options": {
+      "A": "在堆叠链路故障导致系统分裂时检测出双主冲突，并抑制其中一个系统，避免网络中出现重复的 IP/MAC 和广播风暴",
+      "B": "检测堆叠线缆的带宽是否达到要求",
+      "C": "在主交换机故障时选举新的备交换机",
+      "D": "自动把两台成员合并为一个堆叠系统"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "堆叠分裂后两个系统都可能认为自己是唯一的堆叠系统，从而出现重复的 IP/MAC 并引发广播风暴。MAD 通过检测报文发现双主，并把其中一个系统置为恢复状态，A 正确。B 错误：带宽检测不是 MAD 的职责。C 错误：主故障时的接替由备交换机完成，不需要 MAD。D 错误：合并是两个堆叠系统正常连接后的选举与加入过程，与分裂检测相反。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "堆叠与集群",
+    "knowledgePoint": "交换机堆叠与集群",
+    "difficulty": "medium",
+    "tags": [
+      "堆叠",
+      "MAD",
+      "双主检测"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-2-1-007",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「交换机堆叠与集群」与三级目录「交换技术基础 / 堆叠与集群 / 交换机堆叠与集群」；MAD 用于堆叠分裂时检测双主并抑制其中一个系统，属华为设备实现行为，无对应 IETF 标准，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开的堆叠工程实践独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "f6f65ce9b71e0168620fc3bb0c3c1045b83f5e53911a6323800e99b5fd5d1583"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-2-1-008",
+    "type": "single_choice",
+    "question": "两个已经独立运行的华为堆叠系统通过堆叠线连接后，会发生什么？",
+    "options": {
+      "A": "两个系统保持独立，堆叠线只用于转发数据",
+      "B": "后接入的系统自动成为主系统，原系统全部重启",
+      "C": "两个系统合并为一个堆叠系统，按优先级和 MAC 重新选举主交换机，落败方设备重启后作为成员加入",
+      "D": "堆叠 ID 冲突，合并立即失败且无法恢复"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "两个堆叠系统相连后进入合并流程：比较双方主交换机的优先级与 MAC 选出新主，落败一方的设备重启后作为成员加入，最终形成一个堆叠系统，C 正确。A 错误：堆叠口发现对端后会触发合并，不会维持两个独立系统。B 错误：并非“后接入者”自动为主，而是按优先级和 MAC 比较。D 错误：合并时若堆叠 ID 冲突会要求调整，但不会导致不可恢复的失败。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "堆叠与集群",
+    "knowledgePoint": "交换机堆叠与集群",
+    "difficulty": "hard",
+    "tags": [
+      "堆叠",
+      "堆叠合并",
+      "主交换机选举"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-2-1-008",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「交换机堆叠与集群」与三级目录「交换技术基础 / 堆叠与集群 / 交换机堆叠与集群」；两个堆叠系统合并时按优先级与 MAC 重新选举、落败方设备重启加入，属华为设备实现行为，无对应 IETF 标准，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开的堆叠工程实践独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "14d1ac4dbd452ecd7b1e9106407ba7cd2e936f0518f2b95ae557fde461d41ead"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-2-1-009",
+    "type": "single_choice",
+    "question": "在华为堆叠系统中，成员设备的堆叠 ID 有什么作用？",
+    "options": {
+      "A": "决定设备参与生成树计算的桥优先级",
+      "B": "作为设备的管理 IP 地址",
+      "C": "标识成员设备在堆叠系统中的槽位，接口编号中的槽位号即由它决定",
+      "D": "用于标识堆叠线缆的物理端口号"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "堆叠 ID 是成员设备在堆叠系统中的唯一编号，相当于槽位号，接口命名中的第一段就是它，例如堆叠 ID 为 2 的成员上的端口显示为 GigabitEthernet 2/0/1，C 正确。A 错误：生成树桥优先级由 stp priority 配置，与堆叠 ID 无关。B 错误：堆叠成员通常共享管理地址，堆叠 ID 不是 IP。D 错误：堆叠 ID 标识设备，不标识线缆的物理端口号。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "堆叠与集群",
+    "knowledgePoint": "交换机堆叠与集群",
+    "difficulty": "medium",
+    "tags": [
+      "堆叠",
+      "堆叠 ID",
+      "接口命名"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-2-1-009",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「交换机堆叠与集群」与三级目录「交换技术基础 / 堆叠与集群 / 交换机堆叠与集群」；堆叠 ID 标识成员槽位并体现在接口编号第一段，属华为设备实现行为，无对应 IETF 标准，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开的堆叠工程实践独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "284cd38d91610265db44d43295e9a55c9d1ceddc20de6cae4700470253af5e77"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-2-1-010",
+    "type": "single_choice",
+    "question": "在华为堆叠系统上执行 display interface 时看到接口名 GigabitEthernet 2/0/1。其中的“2”表示什么？",
+    "options": {
+      "A": "VLAN ID",
+      "B": "堆叠 ID（成员设备编号）",
+      "C": "端口优先级",
+      "D": "堆叠线缆所在的物理槽位号"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "堆叠后接口采用“槽位/子卡/端口”三段命名，第一段的槽位号就是成员设备的堆叠 ID，因此“2”表示该端口属于堆叠 ID 为 2 的成员，B 正确。A 错误：VLAN ID 不参与接口命名。C 错误：端口优先级是生成树选举参数，不会出现在接口名中。D 错误：第三段才是端口号，第一段对应成员设备而非堆叠线缆的物理槽位。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "堆叠与集群",
+    "knowledgePoint": "交换机堆叠与集群",
+    "difficulty": "easy",
+    "tags": [
+      "堆叠",
+      "接口命名",
+      "堆叠 ID"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-2-1-010",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「交换机堆叠与集群」与三级目录「交换技术基础 / 堆叠与集群 / 交换机堆叠与集群」；堆叠后接口命名第一段为成员堆叠 ID，属华为设备实现行为，无对应 IETF 标准，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开的堆叠工程实践独立设计接口命名解读题，未复制任何第三方题目正文。",
+      "reviewDigest": "2a8cc82bac650c156b629ad0974b38ae1fc3378bc9daf49d716d251317784752"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-2-1-011",
+    "type": "single_choice",
+    "question": "与多台交换机独立组网相比，把交换机组成堆叠系统的主要优势不包括下列哪一项？",
+    "options": {
+      "A": "提高单台成员设备的 CPU 主频和单板转发能力",
+      "B": "通过单一管理入口简化配置与维护",
+      "C": "扩展端口密度，并实现跨成员设备的链路聚合",
+      "D": "通过成员间冗余提高系统可靠性"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "本题要求选出“不包括”的优势。堆叠不会改变单台成员设备的硬件规格，CPU 主频和单板转发能力由设备型号决定，因此 A 不是堆叠带来的优势，为本题答案。B 正确：堆叠后可用一个管理入口管理整个系统。C 正确：成员端口可统一使用并组成跨设备 Eth-Trunk。D 正确：主备角色与成员冗余提升了整体可靠性。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "堆叠与集群",
+    "knowledgePoint": "交换机堆叠与集群",
+    "difficulty": "medium",
+    "tags": [
+      "堆叠",
+      "堆叠优势",
+      "反向设问"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-2-1-011",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「交换机堆叠与集群」与三级目录「交换技术基础 / 堆叠与集群 / 交换机堆叠与集群」；堆叠带来统一管理、端口扩展与跨设备聚合、成员冗余，但不改变单机硬件规格，属公开的工程实践结论，无对应 IETF 标准，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开的堆叠工程实践独立设计反向设问题干与选项，未复制任何第三方题目正文。",
+      "reviewDigest": "4daf8cec4193f600526877ea0999bce4924802335509307f28f77b9c07160bcd"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-2-1-012",
+    "type": "single_choice",
+    "question": "华为交换机集群（Cluster）中，设备按角色划分通常包括哪几类？",
+    "options": {
+      "A": "主交换机、备交换机、从交换机",
+      "B": "根桥、指定桥、边缘桥",
+      "C": "管理交换机（Commander）、成员交换机（Member）、候选交换机（Candidate）",
+      "D": "活动路由器、备用路由器、虚拟路由器"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "华为集群由管理交换机、成员交换机和候选交换机组成：管理交换机提供统一管理入口，成员交换机已被纳入管理，候选交换机是待加入的邻居设备，C 正确。A 错误：主/备/从是堆叠系统的角色。B 错误：根桥/指定桥是生成树角色。D 错误：活动/备用/虚拟路由器是 VRRP 的角色划分。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "堆叠与集群",
+    "knowledgePoint": "交换机堆叠与集群",
+    "difficulty": "easy",
+    "tags": [
+      "集群",
+      "Cluster",
+      "成员角色"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-2-1-012",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「交换机堆叠与集群」与三级目录「交换技术基础 / 堆叠与集群 / 交换机堆叠与集群」；集群角色分为管理交换机、成员交换机、候选交换机，属华为设备实现行为，无对应 IETF 标准，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开的集群工程实践独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "e8f305afa2e00472cf2d3a7baeb7c4078d5a99376de4700b962f3a8f8b9da379"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-2-1-013",
+    "type": "single_choice",
+    "question": "华为交换机集群中，管理交换机用于收集候选交换机和成员交换机拓扑信息的协议是哪一个？",
+    "options": {
+      "A": "NDP",
+      "B": "STP",
+      "C": "LACP",
+      "D": "NTDP"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "NTDP（Neighbor Topology Discovery Protocol）负责收集集群范围内的拓扑与设备信息，供管理交换机识别候选和成员设备，D 正确。A 错误：NDP（Neighbor Discovery Protocol）只做邻居信息收集，是 NTDP 的基础，不负责完整拓扑的汇总。B 错误：STP 用于防止二层环路。C 错误：LACP 用于链路聚合协商，与集群拓扑发现无关。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "堆叠与集群",
+    "knowledgePoint": "交换机堆叠与集群",
+    "difficulty": "medium",
+    "tags": [
+      "集群",
+      "NTDP",
+      "拓扑发现"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-2-1-013",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「交换机堆叠与集群」与三级目录「交换技术基础 / 堆叠与集群 / 交换机堆叠与集群」；集群用 NTDP 收集拓扑与设备信息、NDP 负责邻居发现，属华为设备实现行为，无对应 IETF 标准，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开的集群工程实践独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "ad515ab1097cf50e17c199bef91fc04b75d93849396d0cbef79a68fba9499589"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-2-1-014",
+    "type": "single_choice",
+    "question": "关于交换机堆叠与集群的区别，下列描述正确的是？",
+    "options": {
+      "A": "堆叠只是集中管理，各成员仍独立转发；集群则合并为一台逻辑设备",
+      "B": "堆叠把多台设备合并为一台逻辑设备，控制与转发统一；集群主要是管理层面的集中管理，成员仍独立转发",
+      "C": "两者完全相同，只是厂商命名不同",
+      "D": "集群必须使用专用堆叠线，堆叠使用普通业务口"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "堆叠是设备级虚拟化：多台成员合并为一台逻辑设备，控制平面与转发平面统一；集群是管理级集中化：成员保持独立的转发与控制，只通过管理交换机统一管理，B 正确。A 错误：把两者说反了。C 错误：两者的实现层次和故障域不同，不能等同。D 错误：堆叠通常使用专用堆叠口或指定业务口作为堆叠口，而集群沿用普通业务网络与管理 VLAN，描述正好颠倒。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "堆叠与集群",
+    "knowledgePoint": "交换机堆叠与集群",
+    "difficulty": "medium",
+    "tags": [
+      "堆叠",
+      "集群",
+      "机制对比"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-2-1-014",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「交换机堆叠与集群」与三级目录「交换技术基础 / 堆叠与集群 / 交换机堆叠与集群」；堆叠为设备级虚拟化、集群为管理级集中化，属公开的工程实践结论，无对应 IETF 标准，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开的堆叠、集群工程实践独立设计对比题，未复制任何第三方题目正文。",
+      "reviewDigest": "f0c566f05318af51c8f43c2ee95283ecd159772220727658db0239880d0d0c48"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-2-1-015",
+    "type": "single_choice",
+    "question": "华为交换机集群组建完成后，成员交换机是否需要单独配置管理 IP 地址？",
+    "options": {
+      "A": "不需要，成员交换机由管理交换机统一管理，管理员通过管理交换机的管理 IP 访问整个集群",
+      "B": "需要，每台成员交换机都必须配置独立的管理 IP",
+      "C": "需要，但只在管理 VLAN 中配置",
+      "D": "不需要，集群通过 MAC 地址直接管理成员"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "集群的设计目标之一就是用一个管理 IP 管理多台设备：成员交换机不必各自配置管理 IP，管理员登录管理交换机即可对整个集群下发配置，A 正确。B、C 错误：为每台成员单独配置管理 IP 会重新引入多地址管理的问题，违背集群的初衷。D 错误：集群管理基于 IP 网络与管理 VLAN 通信，并不通过 MAC 地址直接管理成员。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "堆叠与集群",
+    "knowledgePoint": "交换机堆叠与集群",
+    "difficulty": "easy",
+    "tags": [
+      "集群",
+      "管理 IP",
+      "统一管理"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-2-1-015",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「交换机堆叠与集群」与三级目录「交换技术基础 / 堆叠与集群 / 交换机堆叠与集群」；集群由管理交换机提供唯一管理 IP、成员无需单独管理地址，属华为设备实现行为，无对应 IETF 标准，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开的集群工程实践独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "42b04d2917eba45c71227a000de082b42f7b363fc502060ffa1a3f0a9b695e15"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-2-1-016",
+    "type": "single_choice",
+    "question": "华为堆叠系统的系统 MAC 地址取自主交换机。主备倒换发生后，可能带来什么影响？",
+    "options": {
+      "A": "系统 MAC 保持不变，对协议无任何影响",
+      "B": "所有成员设备的堆叠 ID 都会改变",
+      "C": "系统 MAC 随新主交换机变化，可能导致依赖该 MAC 的协议邻居关系重新建立",
+      "D": "堆叠系统会立即分裂为两个独立系统"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "堆叠系统以主交换机的 MAC 作为系统 MAC，主备倒换后系统 MAC 变为新主的 MAC，依赖该地址的协议（如某些邻居关系、ARP 表项）可能需要重新学习或重建，C 正确。A 错误：系统 MAC 确实会变化，不能忽略其影响。B 错误：堆叠 ID 是本地配置，不随主备倒换改变。D 错误：主备倒换是正常的冗余切换，不会导致系统分裂；分裂是堆叠链路故障造成的另一种情况。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "堆叠与集群",
+    "knowledgePoint": "交换机堆叠与集群",
+    "difficulty": "hard",
+    "tags": [
+      "堆叠",
+      "系统 MAC",
+      "主备倒换"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-2-1-016",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「交换机堆叠与集群」与三级目录「交换技术基础 / 堆叠与集群 / 交换机堆叠与集群」；系统 MAC 取自主交换机，主备倒换后随之变化，属华为设备实现行为，无对应 IETF 标准，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开的堆叠工程实践独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "0acdbb290f62ed0cfdd2538771a570efadd75030b0b8621bff2ab862d506eaa1"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-2-1-017",
+    "type": "single_choice",
+    "question": "华为堆叠系统启用 MAD 双主检测时，在什么场景下需要使用代理检测方式？",
+    "options": {
+      "A": "两个成员设备之间只有一条堆叠线时",
+      "B": "堆叠分裂后的两个系统之间没有直连链路，需要借助中间设备转发检测报文时",
+      "C": "堆叠系统只包含两台成员设备时",
+      "D": "主交换机优先级最高时"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "代理检测用于分裂后的两个系统之间不存在直连链路的情况：由中间设备（代理）转发 MAD 检测报文，使双方仍能互相发现，B 正确。A 错误：只有一条堆叠线不是选择代理检测的依据，直连检测要求的是两系统间存在可直连的链路。C 错误：成员数量与检测方式无关。D 错误：优先级影响主交换机选举，不影响 MAD 检测方式的选择。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "堆叠与集群",
+    "knowledgePoint": "交换机堆叠与集群",
+    "difficulty": "hard",
+    "tags": [
+      "堆叠",
+      "MAD",
+      "代理检测"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-2-1-017",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「交换机堆叠与集群」与三级目录「交换技术基础 / 堆叠与集群 / 交换机堆叠与集群」；MAD 代理检测用于分裂后两系统无直连链路、需中间设备转发的场景，属华为设备实现行为，无对应 IETF 标准，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开的堆叠工程实践独立设计场景题，未复制任何第三方题目正文。",
+      "reviewDigest": "1425f76d4df48488d14b25d4e2f6aee655471cb747f20f283623743e790b9704"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-2-1-018",
+    "type": "single_choice",
+    "question": "一台新交换机加入现有华为堆叠系统后，display stack 显示该成员状态为 Offline，其他成员正常。最可能的原因是什么？",
+    "options": {
+      "A": "新交换机的堆叠 ID 与现有成员冲突",
+      "B": "新交换机的堆叠优先级低于主交换机",
+      "C": "新交换机的 MAC 地址比主交换机大",
+      "D": "新交换机未配置管理 IP 地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "堆叠 ID 必须唯一，冲突时新成员无法正常注册，状态显示为 Offline，A 正确。B 错误：优先级低只会影响主交换机选举，设备仍可正常加入并作为从交换机工作。C 错误：MAC 大小只在优先级相同时用于选举，不影响成员能否加入。D 错误：堆叠成员不要求各自配置管理 IP，这与成员注册无关。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "堆叠与集群",
+    "knowledgePoint": "交换机堆叠与集群",
+    "difficulty": "medium",
+    "tags": [
+      "堆叠",
+      "堆叠 ID 冲突",
+      "故障定位"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-2-1-018",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「交换机堆叠与集群」与三级目录「交换技术基础 / 堆叠与集群 / 交换机堆叠与集群」；堆叠 ID 冲突会导致新成员无法注册并显示 Offline，属华为设备实现行为，无对应 IETF 标准，故仅引官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与公开的堆叠工程实践独立设计故障定位题，未复制任何第三方题目正文。",
+      "reviewDigest": "28c40b0b19a741f84948b360fce677df2656aded7129dba1fa0d24404ccbde71"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-1-1-001",
+    "type": "single_choice",
+    "question": "关于 IPv4 组播地址块 224.0.0.0/24（Local Network Control Block），下列描述正确的是？",
+    "options": {
+      "A": "该地址块的组播报文可以被路由器转发到其他网段",
+      "B": "该地址块属于源特定组播（SSM）范围",
+      "C": "该地址块用于本地链路控制，组播路由器不转发其报文；224.0.0.1 表示本网段所有主机",
+      "D": "该地址块由 GLOP 机制分配给各个自治系统"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "224.0.0.0/24 是本地网络控制块，其中的地址用于链路本地控制协议，组播路由器不转发目的地址属于该块的报文，224.0.0.1 为所有主机、224.0.0.2 为所有路由器，C 正确。A 错误：正因限定在本链路，才不会被路由器转发出去。B 错误：SSM 使用 232.0.0.0/8 地址块，不在 224.0.0.0/24 内。D 错误：GLOP 使用 233.0.0.0/8，按自治系统号分配，与本地控制块无关。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "medium",
+    "tags": [
+      "组播",
+      "组播地址",
+      "本地网络控制块"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-1-1-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc5771-multicast-ipv4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 4 页「IP 组播基础」与三级目录「组播基础 / IP 组播基础 / 组播地址与转发」；224.0.0.0/24 为 Local Network Control Block、其报文不被组播路由器转发，依据 RFC 5771 第 3 节，并与第 4 节 Internetwork Control Block 区分；SSM 232/8 与 GLOP 233/8 的划分见第 8 节与第 9 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立命题，组播地址块划分按 RFC 5771 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "2f534d8d134ace7ae6b277e13593ebf58be1a5373c204d81eb8375ddf56c9faa"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  }
+]

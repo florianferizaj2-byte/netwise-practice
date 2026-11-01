@@ -14,26 +14,26 @@ const visit = node => {
 };
 visit(parsed);
 
-test('Android save-in-progress blocks navigation; AI-in-progress requires explicit informed exit', () => {
+test('Android save-in-progress blocks navigation; AI-in-progress requires explicit informed exit', async () => {
   assert.ok(exitSource);
   const navigations = [], alerts = [];
   const context = vm.createContext({ practiceSaving: true, aiBusy: '', practiceMode: 'sequential', practiceSession: 'standard',
-    onNavigate: (...args) => navigations.push(JSON.parse(JSON.stringify(args))), Alert: { alert: (...args) => alerts.push(args) } });
+    saveLatest:{current:async()=>{}},setError(){},onNavigate: (...args) => navigations.push(JSON.parse(JSON.stringify(args))), Alert: { alert: (...args) => alerts.push(args) } });
   const exit = vm.runInContext('(' + exitSource + ')', context);
   exit(); assert.equal(navigations.length, 0); assert.equal(alerts.length, 0);
-  context.practiceSaving = false; exit();
+  context.practiceSaving = false; exit();await new Promise(resolve=>setImmediate(resolve));
   assert.deepEqual(navigations.pop(), ['practice', { practiceMode: 'sequential', practiceSession: 'standard' }]);
   context.aiBusy = 'teacher'; exit();
   assert.equal(navigations.length, 0); assert.equal(alerts.length, 1);
   const [title, message, buttons] = alerts[0];
   assert.equal(title, 'AI 仍在处理中'); assert.match(message, /不会自动取消/);
-  assert.equal(buttons[0].style, 'cancel'); buttons[1].onPress();
+  assert.equal(buttons[0].style, 'cancel'); buttons[1].onPress();await new Promise(resolve=>setImmediate(resolve));
   assert.equal(navigations.length, 1);
   assert.doesNotMatch(exitSource, /mobileApi|androidPointsFlow|abort\(|cancel\(/);
 });
 
 test('Android question header reflows its title between balanced action columns', () => {
-  assert.match(source, /nativeHeaderLeading:\{width:96\}/);
+  assert.match(source, /nativeHeaderLeading:\{width:96,flexDirection:'row',alignItems:'center'\}/);
   assert.match(source, /nativeCenteredTitle:\{flex:1,minWidth:0,alignItems:'center'\}/);
   assert.doesNotMatch(source, /nativeCenteredTitle:\{position:'absolute'/);
   assert.match(source, /nativeQuestionFooterBody:.*maxWidth:760/);
@@ -52,4 +52,11 @@ test('Android compact wallet exposes owned holds, retry and accessible balance w
   assert.doesNotMatch(ui, /reserveCall|availableUnits\s*[-+]=|chargedUnits\s*=/);
   assert.match(read('components/Motion.android.tsx'), /accessibilityValue/);
   assert.doesNotMatch(read('components/Motion.tsx'), /accessibilityValue/);
+});
+
+test('exiting waits for the real checkpoint write; failed storage holds the current question instead of navigating from the head',async()=>{
+ let resolve, navigated=false,error='';
+ const context=vm.createContext({practiceSaving:false,aiBusy:'',practiceMode:'sequential',practiceSession:'standard',saveLatest:{current:()=>new Promise(r=>resolve=r)},onNavigate(){navigated=true},setError:e=>error=e,Alert:{alert(){}}});
+ const exit=vm.runInContext('('+exitSource+')',context);exit();assert.equal(navigated,false);resolve();await new Promise(r=>setImmediate(r));assert.equal(navigated,true);
+ navigated=false;context.saveLatest.current=async()=>{throw Error('disk')};exit();await new Promise(r=>setImmediate(r));assert.equal(navigated,false);assert.match(error,/未保存/);
 });

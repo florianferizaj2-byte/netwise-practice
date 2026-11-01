@@ -20,7 +20,7 @@ export function LaunchAnnouncement({ children }: { children: ReactNode }) {
       settled = true;
       clearTimeout(timer);
       const current = publicAnnouncements.snapshot();
-      setNotice(current.enabled ? current : null);
+      setNotice(publicAnnouncements.needsDisplay(current) ? current : null);
       setReady(true);
     };
     // Include local hydration in the deadline, not only the network request.
@@ -43,7 +43,7 @@ export function LaunchAnnouncement({ children }: { children: ReactNode }) {
           content={notice}
           visible={ready && !active}
           launch
-          onClose={() => setNotice(null)}
+          onClose={() => { if (notice) void publicAnnouncements.markRead(notice); setNotice(null); }}
         />
       )}
     </View>

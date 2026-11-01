@@ -11,6 +11,7 @@ import { FundedTestAIProvider as OpenAICompatibleProvider } from "./helpers/ai-p
 import { encrypt } from "../server/security.js";
 import { fixtureQuestion, mockAI } from "./ai-fixture.js";
 
+const currentMobilePolicy=JSON.parse(fs.readFileSync(new URL('../server/mobile-release.json',import.meta.url),'utf8'));
 const currentMobileVersion = JSON.parse(fs.readFileSync(new URL('../mobile/package.json', import.meta.url), 'utf8')).version;
 
 const verdict = {
@@ -495,7 +496,8 @@ test("mobile version endpoint blocks outdated clients and exposes the APK link",
   assert.equal(oldVersion.status, 200);
   assert.equal(oldVersion.data.forceUpdate, true);
   assert.equal(oldVersion.data.downloadUrl, `/downloads/kaojiang-v${currentMobileVersion}.apk`);
-  assert.equal(oldVersion.data.minimumVersion, currentMobileVersion);
+  assert.equal(oldVersion.data.minimumVersion, currentMobilePolicy.minimumVersion);
+  assert.equal(oldVersion.data.latestVersion,currentMobileVersion);
 
   const currentVersion = await req(`/mobile/version?version=${currentMobileVersion}`);
   assert.equal(currentVersion.data.forceUpdate, false);

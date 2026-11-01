@@ -1,3 +1,4 @@
+import {createServer as createHttpServer} from 'node:http';
 // Android screen implementations rendered locally through RN Web for layout and
 // interaction checks. Native system adapters are explicit fixtures, not proof of
 // camera, APK installer, system bars or native route-player/device acceptance.
@@ -8,7 +9,8 @@ import crypto from 'node:crypto';
 import express from 'express';
 import react from '@vitejs/plugin-react';
 import { createServer } from 'vite';
-import { expect } from '@playwright/test';
+import { expect as baseExpect } from '@playwright/test';
+const expect=baseExpect.configure({timeout:15000});
 import { createApp } from '../server/index.js';
 import { createStore } from '../server/store.js';
 import { completeFixtureProfile } from './helpers/mobile-profile.js';
@@ -46,7 +48,15 @@ store.points.recordFinance({ key: 'synthetic-ui-income', kind: 'revenue', amount
 store.points.grant({ userId: user.id, sourceKey: 'synthetic-ui-grant', units: 1000000, kind: 'test', requireFunded: true });
 store.aiServices.policy = () => ({ managed: true });
 store.aiServices.channels = () => [{ id: 'ui-flash', name: '界面验收接口', baseUrl: 'https://api.deepseek.com', model: 'deepseek-flash', keyCipher: 'SYNTHETIC-UNUSED-KEY', priority: 1, enabled: true }];
-const backend = await createApp({ store, withFrontend: false, authRequired: true, accountSecurity: { enabled: false }, announcementFile: path.join(directory, 'no-announcement.json') });
+// Keep this same-day UI scenario independent of a real midnight during a long
+// release build. Elapsed dwell time remains real and monotonic; separate server
+// regressions still verify day rollover and expired permits.
+const learningStarted = performance.now();
+const learningDay = new Date(Date.now() + 8 * 3600000).toISOString().slice(0, 10);
+const learningEpoch = Date.parse(learningDay + 'T12:00:00+08:00');
+const backend = await createApp({ store, withFrontend: false, authRequired: true, accountSecurity: { enabled: false },
+  locationLearningNow: () => learningEpoch + Math.floor(performance.now() - learningStarted),
+  announcementFile: path.join(directory, 'no-announcement.json') });
 const entry = path.join(directory, 'harness'); fs.mkdirSync(entry);
 const write = (name, text) => fs.writeFileSync(path.join(entry, name), text);
 const source = file => '/@fs/' + path.join(mobile, file).replaceAll('\\', '/');
@@ -59,19 +69,33 @@ html,body,#root{height:100%;margin:0}#root{display:flex;flex-direction:column;ov
 write('storage.ts', 'export default {async getItem(k){return localStorage.getItem(k)},async setItem(k,v){localStorage.setItem(k,v)},async removeItem(k){localStorage.removeItem(k)},async multiRemove(ks){ks.forEach(k=>localStorage.removeItem(k))}}');
 write('stream.ts', 'export const fetch=(...args)=>globalThis.fetch(...args)');
 write('audio.ts', 'export async function prepareUiSounds(){} export function setUiSoundSettings(){} export function playUiSound(){} export function previewUiSound(){}');
+write('answer-feedback.ts', `import{configurePracticeVoice}from'./practice-voice';let settings=null;export async function prepareAnswerFeedback(){} export function configureAnswerFeedback(s){settings=s;window.__answerFeedbackSettings=s;configurePracticeVoice(s)} export function stopAnswerFeedback(){} export function previewAnswerSound(current){if(!current||current())window.__builtinAuditions=(window.__builtinAuditions||0)+1} export function playCorrectAnswerFeedback(correct){if(!correct||!settings)return;window.__answerFeedbackEvents??=[];window.__answerFeedbackEvents.push({...settings})}`);
+// Only device storage/player APIs are fixtures. Catalog, manifests and complete asset
+// bytes are fetched from the real local backend and verified before being usable.
+write('practice-voice.ts', `import{createVoiceEngine}from'${source('src/practiceVoiceEngine.ts')}';import{mobileApi,API_BASE_URL}from'${source('src/api/client.ts')}';import{DEFAULT_ANSWER_FEEDBACK}from'${source('src/answerFeedbackSettings.ts')}';let settings=DEFAULT_ANSWER_FEEDBACK;
+const prefix='voice-ui-pack:',assets='voice-ui-asset:';const read=async id=>JSON.parse(localStorage.getItem(prefix+id)||'null');
+const engine=createVoiceEngine({catalog:()=>mobileApi.voicePacks(),manifest:id=>mobileApi.voicePackManifest(id),read,save:async pack=>{localStorage.setItem(prefix+pack.id,JSON.stringify(pack))},list:async()=>{const rows=[];for(let i=0;i<localStorage.length;i++){const key=localStorage.key(i);if(key?.startsWith(prefix)){const p=JSON.parse(localStorage.getItem(key));rows.push({id:p.id,name:p.name,revision:p.revision,bytes:p.assets.reduce((s,a)=>s+a.bytes,0)})}}return rows},remove:async id=>localStorage.removeItem(prefix+id),prepare:async(a,download,signal)=>{
+ if(download){window.__voiceAssetRequests=(window.__voiceAssetRequests||0)+1;const response=await fetch(new URL(a.url,API_BASE_URL),{signal});if(!response.ok)throw Error('audio download failed');const data=new Uint8Array(await response.arrayBuffer());const hash=[...new Uint8Array(await crypto.subtle.digest('SHA-256',data))].map(b=>b.toString(16).padStart(2,'0')).join('');if(hash!==a.sha256||data.length!==a.bytes)throw Error('audio integrity failed');localStorage.setItem(assets+a.id,hash)}
+ if(localStorage.getItem(assets+a.id)!==a.sha256)throw Error('local audio missing');let released=false;return{ready:()=>!released,play:(volume,max,current)=>{if(released||!current())return false;window.__voicePlayback??=[];window.__voicePlayback.push({id:a.id,volume});return true},stop(){},release(){released=true}}},settings:()=>settings,active:()=>true,now:Date.now,random:()=>0});
+export const practiceVoice={...engine,enter(scope,current){if(current&&!current())return false;window.__practiceVoiceEntries??=[];window.__practiceVoiceEntries.push(scope);return engine.enter(scope,current)}};export function configurePracticeVoice(next){settings=next;engine.select(next.voicePackId)}`);
 write('status.tsx', 'export function StatusBar(){return null}');
-write('native.ts', "export*from'react-native-web';import{Platform}from'react-native-web';Platform.OS='android';export const ToastAndroid={LONG:1,SHORT:0,show(){}};export const PermissionsAndroid={PERMISSIONS:{},RESULTS:{GRANTED:'granted'},async check(){return true},async request(){return 'granted'}};");
+write('native.ts', `export*from'react-native-web';import React from'react';import{PanResponder as requirePanResponder,Platform,StyleSheet,Text as BaseText,TextInput as BaseInput,useWindowDimensions as baseDimensions}from'react-native-web';Platform.OS='android';
+const Scale=React.createContext(1);export function TestFontScaleProvider({children}){const [scale,setScale]=React.useState(1);React.useLayoutEffect(()=>{window.__setFontScale=setScale},[]);return React.createElement(Scale.Provider,{value:scale},children)}
+const scaled=(style,scale)=>{const s=StyleSheet.flatten(style)||{};return[style,typeof s.fontSize==='number'?{fontSize:s.fontSize*scale}:null,typeof s.lineHeight==='number'?{lineHeight:s.lineHeight*scale}:null]};
+export const Text=React.forwardRef((props,ref)=>React.createElement(BaseText,{...props,ref,style:scaled(props.style,React.useContext(Scale))}));export const TextInput=React.forwardRef((props,ref)=>React.createElement(BaseInput,{...props,ref,style:scaled(props.style,React.useContext(Scale))}));export const useWindowDimensions=()=>({...baseDimensions(),fontScale:React.useContext(Scale)});
+export const PanResponder={...requirePanResponder,create(config){const wrapped={};for(const [key,fn]of Object.entries(config))wrapped[key]=(e,g)=>{const r=fn(e,g);window.__swipeDebug??=[];window.__swipeDebug.push({key,result:r,dx:g?.dx,dy:g?.dy,x0:g?.x0,touches:g?.numberActiveTouches,pageX:e?.nativeEvent?.pageX});return r};return requirePanResponder.create(wrapped)}};export const ToastAndroid={LONG:1,SHORT:0,show(){}};export const PermissionsAndroid={PERMISSIONS:{},RESULTS:{GRANTED:'granted'},async check(){return true},async request(){return'granted'}};`);
 write('picker.ts', 'export async function launchImageLibraryAsync(){return {canceled:true,assets:[]}};export async function requestMediaLibraryPermissionsAsync(){return {granted:true}};');
 write('file-system.ts', 'export const cacheDirectory=null,documentDirectory=null;export async function getInfoAsync(){return {exists:false}};export async function deleteAsync(){};');
 write('intent.ts', 'export async function startActivityAsync(){};');
 write('native-route.ts', 'export function routePlayerAvailable(){return true} export async function updateRoutePlayerIdentity(){} export async function openRoutePlayer(){throw Error("Native entry is not part of browser acceptance")};');
-write('main.tsx', `import React from 'react';import {createRoot} from 'react-dom/client';
-import {ThemeProvider} from ${JSON.stringify(source('src/theme.android.ts'))};
+write('main.tsx', `import React from 'react';import {createRoot} from 'react-dom/client';import{TestFontScaleProvider}from'./native';
+import {ThemeProvider,useTheme} from ${JSON.stringify(source('src/theme.android.ts'))};
 import {AppShell} from ${JSON.stringify(source('src/navigation/AppShell.android.tsx'))};
 import {setSessionToken} from ${JSON.stringify(source('src/api/client.ts'))};
 import {AppAlertHost} from ${JSON.stringify(source('src/components/AppAlert.tsx'))};
 if(!localStorage.getItem('ui-initialized')){await setSessionToken(${JSON.stringify(token)});localStorage.setItem('ui-initialized','1')}
-createRoot(document.getElementById('root')).render(<ThemeProvider><AppShell/><AppAlertHost/></ThemeProvider>);`);
+function ThemeProbe(){const{setMode}=useTheme();React.useLayoutEffect(()=>{window.__setAndroidTheme=setMode},[setMode]);return null}
+createRoot(document.getElementById('root')).render(<TestFontScaleProvider><ThemeProvider><ThemeProbe/><AppShell/><AppAlertHost/></ThemeProvider></TestFontScaleProvider>);`);
 const nativeScreens = {
   name: 'android-project-siblings', enforce: 'pre',
   transform(code,id){
@@ -86,10 +110,12 @@ const nativeScreens = {
     return null;
   },
 };
+const app = express(); app.use(express.json());
+const server = createHttpServer(app);
 const vite = await createServer({
   configFile: false, root: entry, plugins: [nativeScreens, react()], logLevel: 'error',
   define: { 'process.env.EXPO_PUBLIC_API_URL': '""', global: 'globalThis', __DEV__: 'false' },
-  optimizeDeps: { include: ['react-native-web'] },
+  optimizeDeps: { include: ['react-native-web','react-native-safe-area-context'], esbuildOptions: { resolveExtensions: ['.web.tsx','.web.ts','.web.jsx','.web.js','.tsx','.ts','.jsx','.js','.json'] } },
   resolve: { dedupe: ['react', 'react-dom'], extensions: ['.web.tsx', '.web.ts', '.web.jsx', '.web.js', '.tsx', '.ts', '.jsx', '.js', '.json'], alias: [
     { find: /^react-native$/, replacement: path.join(entry, 'native.ts') },
     { find: /^react-native-web$/, replacement: path.join(mobile, 'node_modules/react-native-web') },
@@ -103,29 +129,45 @@ const vite = await createServer({
     { find: 'expo-file-system/legacy', replacement: path.join(entry, 'file-system.ts') },
     { find: 'expo-intent-launcher', replacement: path.join(entry, 'intent.ts') },
     { find: /^\.\.?\/audioFeedback$/, replacement: path.join(entry, 'audio.ts') },
+    { find: /^\.\.?\/answerFeedback$/, replacement: path.join(entry, 'answer-feedback.ts') },
+    { find: /^\.\.?\/practiceVoice$/, replacement: path.join(entry,'practice-voice.ts') },
     { find: /^\.\.\/\.\.\/modules\/route-player\/index\.android$/, replacement: path.join(entry, 'native-route.ts') },
-  ] }, server: { middlewareMode: true, fs: { allow: [root, directory] } },
+  ] }, server: { middlewareMode: true, hmr: {server}, fs: { allow: [root, directory] } },
 });
-const app = express(); app.use(express.json());
-let aiRequests = 0, forceWalletExpired = false;
+// This browser harness runs Android source and must retain native update policy.
+app.use((req, _res, next) => { req.headers['x-app-platform'] = 'android'; next(); });
+let aiRequests = 0, forceWalletExpired = false, versionFault = '';
+const previousVersionEnvironment = { latest: process.env.MOBILE_LATEST_VERSION, minimum: process.env.MOBILE_MINIMUM_VERSION };
+app.use('/api/mobile/version', (_req, res, next) => {
+ if(versionFault==='offline') return res.status(503).json({error:'Synthetic connection outage'});
+ if(versionFault==='legacy'){const send=res.json.bind(res);res.json=data=>send({...data,backend:undefined});}
+ next();
+});
 app.use('/api/ai', (req, res, next) => { if(req.method==='GET')return next(); aiRequests++; res.status(503).json({ error: 'Synthetic UI test: no model call' }); });
 app.get('/api/account/points/wallet', (_req, res, next) => forceWalletExpired ? res.status(401).json({ error: 'Synthetic session expiry' }) : next());
-app.get('/api/mobile/version', (_req, res) => res.json({ currentVersion: '0.4.8', latestVersion: '0.4.8', minimumVersion: '0.4.8', forceUpdate: false, updateAvailable: false }));
-app.use((req, res, next) => req.path.startsWith('/api/') ? backend(req, res, next) : next());
+app.use((req, res, next) => (req.path.startsWith('/api/')||req.path.startsWith('/voice-packs/assets/')) ? backend(req, res, next) : next());
 app.use(vite.middlewares);
-const server = app.listen(0, '127.0.0.1'); await new Promise(resolve => server.once('listening', resolve));
-const base = `http://127.0.0.1:${server.address().port}`, checks = [], errors = [], screenshots = [];
-const issuedResponse = await fetch(base + '/api/admin/membership-codes', { method: 'POST', headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' }, body: JSON.stringify({ plan: 'vip', quantity: 1, durationDays: 30, expiresAt: null, requestId: crypto.randomUUID() }) });
+server.listen(0, '127.0.0.1'); await new Promise(resolve => server.once('listening', resolve));
+const base = `http://127.0.0.1:${server.address().port}`, checks = [], errors = [], screenshots = [], consoleErrors = [], failedRequests = [];
+const issuedResponse = await fetch(base + '/api/admin/membership-codes', { method: 'POST', headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' }, body: JSON.stringify({ plan: 'svip', quantity: 1, durationDays: 30, expiresAt: null, requestId: crypto.randomUUID() }) });
 assert.ok(issuedResponse.ok, 'isolated admin creates one test membership code');
 const issued = await issuedResponse.json(), redemptionCode = issued.codes?.[0]?.code;
 assert.equal(typeof redemptionCode, 'string');
+// Publish two complete packs through the real administrator routes in this disposable store.
+async function voiceAdmin(url,method,body,raw){const response=await fetch(base+url,{method,headers:{Authorization:'Bearer '+token,'Content-Type':raw?'application/octet-stream':'application/json'},body:raw??JSON.stringify(body)});const data=await response.json();assert.ok(response.ok,JSON.stringify(data));return data}
+const voiceIds=[];
+for(const style of ['soft','crisp','warm']){const data=await voiceAdmin('/api/admin/voice-packs/assets?name='+encodeURIComponent(style+'.wav'),'POST',null,fs.readFileSync(path.join(mobile,'assets/sounds/answer-correct-'+style+'.wav')));voiceIds.push(data.asset.id)}
+await voiceAdmin('/api/admin/voice-packs/assets','PATCH',{requestId:crypto.randomUUID(),items:voiceIds.map(id=>({id,expectedRevision:0,state:'ready'}))});
+let voiceConfig;
+for(const [id,name]of[['gazi-voice','嘎子语音包'],['luyinbox','卢音盒音效']]){const published=await voiceAdmin('/api/admin/voice-packs/'+id,'PUT',{requestId:crypto.randomUUID(),expectedRevision:0,name,enabled:true,cues:{'practice.enter':voiceIds,'answer.correct':voiceIds,'answer.streak':[{count:2,clips:voiceIds}], 'answer.wrong':[1,2,3,4,5].map(count=>({count,clips:voiceIds}))}});voiceConfig=published.configuration}
+await voiceAdmin('/api/admin/voice-packs/default','PUT',{requestId:crypto.randomUUID(),expectedRevision:voiceConfig.revision,packId:'gazi-voice'});
 let browser, page;
 const shot = async name => {
   await page.evaluate(() => document.fonts.ready);
   await page.waitForTimeout(150);
   const file = path.join(out, name + '.jpg');
   await page.screenshot({ path: file, type: 'jpeg', quality: 78, animations: 'disabled' });
-  assert.ok(fs.statSync(file).size <= 500000); screenshots.push(file);
+  assert.ok(fs.statSync(file).size <= 500000); screenshots.push(file); console.log('Android UI snapshot: '+name);
 };
 const tab = async name => page.getByRole('button', { name: name + '导航', exact: true }).click();
 try {
@@ -133,37 +175,134 @@ try {
   const context = await browser.newContext({ viewport: { width: 393, height: 852 }, deviceScaleFactor: 1, hasTouch: true, reducedMotion: 'reduce' });
   await context.route('**/*', route => ['127.0.0.1', 'localhost'].includes(new URL(route.request().url()).hostname) ? route.continue() : route.abort());
   page = await context.newPage(); page.setDefaultTimeout(15000);
-  page.on('pageerror', e => errors.push(e.message));
-  await page.goto(base, { waitUntil: 'networkidle' });
-  await expect(page.getByTestId('today-screen')).toBeVisible();
+  page.on('pageerror', e => {errors.push(e.message);fs.appendFileSync(path.join(out,'page-error-stacks.log'),e.stack+'\n');});page.on('console',m=>{if(m.type()==='error')consoleErrors.push(m.text().slice(0,500))});page.on('requestfailed',r=>failedRequests.push({url:r.url(),error:r.failure()?.errorText}));
+  await page.goto(base, { waitUntil: 'domcontentloaded', timeout: 60000 });
+  await expect(page.getByTestId('today-screen')).toBeVisible({timeout:15000});
   await expect(page.getByText('今天，也要稳步向前', { exact: true })).toBeVisible();
   assert.equal(await page.locator('#app-tab-bar').getByRole('button').count(), 5);
   assert.ok((await page.getByText('今天，也要稳步向前', { exact: true }).evaluate(e => getComputedStyle(e).fontFamily)).includes('KaojiangSans'));
   await shot('01-today-393'); checks.push('native Today, bundled font and five-item navigation');
+  if(process.env.OWNED_PRACTICE_FLOW==='1'){
+    const readSession=async kind=>page.evaluate(kind=>{
+      for(let i=0;i<localStorage.length;i++){const key=localStorage.key(i);if(!key?.startsWith('kaojiang-practice-checkpoint-v1:'))continue;const book=JSON.parse(localStorage.getItem(key));if(book?.format!==2)continue;const rows=Object.values(book.sessions).filter(r=>(r.session||'standard')===kind);if(rows.length)return rows.sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt))[0];}return null;
+    },kind);
+    const current=async kind=>{await expect.poll(async()=>!!(await readSession(kind))?.snapshot?.length).toBe(true);const row=await readSession(kind),q=store.getQ(row.questionId);assert.ok(q);await expect(page.getByTestId('practice-swipe-area').getByText(q.question,{exact:true})).toBeVisible();return{row,q}};
+    const choose=async(q,correct)=>{
+      if(q.type==='short_answer'){await page.getByPlaceholder('填写配置命令、计算过程或文字答案…',{exact:true}).fill('Synthetic self-assessment');await page.getByRole('button',{name:correct?'我答对了':'需要复习',exact:true}).click();return;}
+      const selected=correct?q.answer:[Object.keys(q.options).find(k=>!q.answer.includes(k))||Object.keys(q.options)[0]];
+      for(const key of selected)await page.getByRole(q.type==='multiple_choice'?'checkbox':'radio',{name:key+'：'+q.options[key],exact:true}).click();
+    };
+    const grade=async(kind,correct)=>{const{q}=await current(kind);await choose(q,correct);await page.getByRole('button',{name:q.type==='short_answer'?'提交自评':'确认答案',exact:true}).click();await expect(page.getByTestId('practice-record-sync')).toContainText('答题记录已同步');return q.id;};
+    const homeDaily=async()=>{await page.getByRole('button',{name:/^(开始|继续)今日学习$/}).click();await expect(page.getByTestId('practice-swipe-area')).toBeVisible();};
+    await homeDaily();await grade('daily',false);await page.getByRole('button',{name:'下一题',exact:true}).click();
+    const day=await current('daily');await choose(day.q,false);await expect.poll(async()=>!!(await readSession('daily'))?.selected?.length).toBe(true);
+    const count=store.allA(user.id).length;
+    await page.getByRole('button',{name:'‹ 返回今日',exact:true}).click();await expect(page.getByTestId('today-screen')).toBeVisible();await homeDaily();
+    assert.equal((await current('daily')).q.id,day.q.id,'the actual Today continue button resumes the untouched question');
+    assert.equal(store.allA(user.id).length,count,'opening a saved daily draft never submits an answer');
+    await page.getByRole('button',{name:'‹ 返回今日',exact:true}).click();await page.reload();await expect(page.getByTestId('today-screen')).toBeVisible();await homeDaily();
+    assert.equal((await current('daily')).q.id,day.q.id,'daily cursor survives complete JS process restart');
+    // The previously selected draft is still checked; clear it before choosing the correct answer.
+    if(day.q.type!=='short_answer'&&day.q.type==='multiple_choice')for(const key of (await readSession('daily')).selected)await page.getByRole('checkbox',{name:key+'：'+day.q.options[key],exact:true}).click();
+    const dailyCorrect=await grade('daily',true);await page.getByRole('button',{name:'‹ 返回今日',exact:true}).click();await homeDaily();
+    assert.notEqual((await current('daily')).q.id,dailyCorrect,'a correct cursor advances automatically on the next ordinary entry');
+    const beforePicker=(await current('daily')).q.id;
+    await page.getByRole('button',{name:'更换今日练习范围',exact:true}).click();
+    await expect(page.getByRole('heading',{name:'练习',exact:true})).toBeVisible();
+    await page.getByRole('button',{name:'‹ 返回今日',exact:true}).click();await homeDaily();
+    assert.equal((await current('daily')).q.id,beforePicker,'closing the picker cannot reset the next Today entry');
+    await shot('daily-real-entry-restored-393');checks.push('Today real button: draft/ordered queue survives exit and process restart; correct cursor is skipped');
+    await page.getByRole('button',{name:'切换到普通练习和AI出题',exact:true}).click();
+    await page.getByRole('button',{name:'练习知识点 '+chapter,exact:true}).click();
+    const standardCorrect=await grade('standard',true);await page.getByRole('button',{name:'下一题',exact:true}).click();
+    let normal=await current('standard');await choose(normal.q,false);await expect.poll(async()=>!!(await readSession('standard'))?.selected?.length).toBe(true);
+    await page.getByRole('button',{name:'返回题库目录',exact:true}).click();
+    await page.getByRole('button',{name:'练习知识点 '+chapter,exact:true}).click();
+    assert.equal((await current('standard')).q.id,normal.q.id,'ordinary chapter entry, not a special resume card, restores its cursor');
+    await page.getByRole('button',{name:'返回题库目录',exact:true}).click();await page.reload();await expect(page.getByTestId('today-screen')).toBeVisible();await tab('练习');
+    await page.getByRole('button',{name:'练习知识点 '+chapter,exact:true}).click();assert.equal((await current('standard')).q.id,normal.q.id);
+    await shot('sequential-real-entry-restored-393');checks.push('same sequential chapter entry restores draft/cursor before and after process restart');
+    const attemptedFixture=()=>store.allA(user.id).filter(a=>a.questionId.startsWith('android-ui-question-')).map(a=>a.questionId);
+    for(let n=0;n<30&&new Set(attemptedFixture()).size<30;n++){
+      await grade('standard',false);
+      if(new Set(attemptedFixture()).size===30)break;
+      await page.getByRole('button',{name:'下一题',exact:true}).click();
+    }
+    assert.equal(new Set(attemptedFixture()).size,30);normal=await current('standard');
+    await page.getByRole('button',{name:'返回题库目录',exact:true}).click();
+    await page.getByRole('button',{name:'练习知识点 '+chapter,exact:true}).click();
+    assert.equal((await current('standard')).q.id,normal.q.id,'the normal continue hero must use a real cursor even when coverage is 100 percent');
+    checks.push('continue hero resumes its actual last chapter/point even when question coverage reaches 100 percent');
+
+    await page.getByRole('button',{name:'返回题库目录',exact:true}).click();await page.getByRole('button',{name:'复习已答题',exact:true}).click();
+    await expect(page.getByRole('heading',{name:'已答题复习',exact:true})).toBeVisible();const review=await current('review');
+    const ids=review.row.snapshot.map(q=>q.id);assert.ok(ids.includes(standardCorrect));assert.ok(ids.includes(dailyCorrect));
+    await grade('review',false);await page.getByRole('button',{name:'返回题库目录',exact:true}).click();
+    await page.getByRole('button',{name:'练习知识点 '+chapter,exact:true}).click();assert.equal((await current('standard')).q.id,normal.q.id,'review never overwrites the ordinary cursor');
+    await page.getByRole('button',{name:'返回题库目录',exact:true}).click();await tab('今日');await homeDaily();assert.notEqual((await current('daily')).q.id,dailyCorrect,'review cannot un-master a previously confirmed correct question');
+    checks.push('explicit answered review includes historical correct answers and cannot overwrite daily/ordinary progress');
+    await shot('owned-progress-and-review-393');
+  }else{
   await tab('练习');
   await expect(page.getByText('继续巩固知识点', { exact: true })).toBeVisible();
   await shot('02-practice-directory-393');
   await page.getByRole('button', { name: `展开 ${chapter} 的子知识点`, exact: true }).click();
   await page.getByRole('button', { name: '展开 网络基础 的考点', exact: true }).click();
   await shot('02b-expanded-directory-393');
+  assert.equal(await page.evaluate(()=>window.__practiceVoiceEntries?.length||0),0,'opening the practice catalog stays silent');
   await page.getByRole('textbox', { name: '搜索知识点', exact: true }).fill(leaf);
   await expect(page.getByText(leaf, { exact: true })).toBeVisible();
   await shot('03-knowledge-search-393');
   await page.getByRole('button', { name: new RegExp('练习.*' + leaf) }).click();
   await expect(page.getByText('确认答案', { exact: true })).toBeVisible();
+  await expect.poll(()=>page.evaluate(()=>window.__practiceVoiceEntries?.length||0)).toBe(1);
   await expect(page.locator('#app-tab-bar')).toHaveCount(0);
   await expect(page.getByRole('button', { name: '上一题', exact: true })).toBeDisabled();
   assert.equal(await page.getByRole('button', { name: '确认答案', exact: true }).evaluate(e => getComputedStyle(e).backgroundColor), 'rgb(40, 101, 238)');
   await shot('04-practice-question-393');
   await page.getByText('64 个', { exact: true }).click();
   await page.getByText('AI 提示', { exact: true }).click();
-  await expect(page.getByRole('heading', { name: '使用 AI 前确认积分', exact: true })).toBeVisible();
+  await expect(page.getByTestId('android-ai-confirm-sheet')).toBeVisible();
+  const compactSheet=await page.getByTestId('android-ai-confirm-sheet').boundingBox();
+  assert.ok(compactSheet.height<852*0.65,'collapsed AI consent is a compact bottom sheet, not a full-page wall of text');
+  await expect(page.getByTestId('android-ai-cost-details')).toHaveCount(0);
+  await page.getByRole('button',{name:'费用说明',exact:true}).click();
+  await expect(page.getByTestId('android-ai-cost-details')).toBeVisible();
+  await page.getByRole('button',{name:'费用说明',exact:true}).click();
+  await expect(page.getByTestId('android-ai-cost-details')).toHaveCount(0);
   assert.equal(aiRequests, 0);
   await shot('05-ai-points-confirm-393');
+  await page.setViewportSize({width:320,height:852});await page.evaluate(()=>{window.__setFontScale(1.35);window.__setAndroidTheme('dark')});
+  await expect(page.getByRole('button',{name:'继续使用AI，按实际用量结算',exact:true})).toBeInViewport();
+  await expect(page.getByTestId('android-ai-cost-details')).toHaveCount(0);
+  await shot('polish-ai-confirm-dark-320-scale1.35');
+  await page.setViewportSize({width:393,height:852});await page.evaluate(()=>{window.__setFontScale(1);window.__setAndroidTheme('light')});
   await page.getByRole('button', { name: '取消本次AI请求', exact: true }).click();
   await page.getByText('确认答案', { exact: true }).click();
   await expect(page.getByText('正确答案：', { exact: false }).first()).toBeVisible();
+  assert.equal(await page.evaluate(()=>window.__answerFeedbackEvents?.length||0),0,'wrong answer stays quiet');
   await shot('06-practice-analysis-393'); checks.push('catalog search, practice, wrong answer, analysis and pre-AI consent/cancel');
+  for(const [width,mode,scale]of[[393,'light',1],[393,'dark',1],[320,'dark',1.35]]){
+    await page.setViewportSize({width,height:852});
+    await page.evaluate(({mode,scale})=>{window.__setAndroidTheme(mode);window.__setFontScale(scale)},{mode,scale});
+    await page.waitForTimeout(200);
+    const headingLines=await page.getByRole('heading',{name:'知识点练习',exact:true}).evaluate(e=>({height:e.getBoundingClientRect().height,line:parseFloat(getComputedStyle(e).lineHeight)}));
+    assert.ok(headingLines.height<=headingLines.line+1,'practice title stays complete on one line even at large text');
+    const letters=await page.getByRole('radio').evaluateAll(radios=>radios.map(r=>{const circle=r.firstElementChild,text=circle.firstElementChild,a=circle.getBoundingClientRect(),b=text.getBoundingClientRect();return{letter:text.textContent,dx:Math.abs(a.x+a.width/2-b.x-b.width/2),dy:Math.abs(a.y+a.height/2-b.y-b.height/2)}}));
+    assert.equal(letters.length,4);
+    for(const letter of letters){assert.ok(letter.dx<=1&&letter.dy<=1,JSON.stringify(letter));}
+    const feedback=await page.getByText('再想一想',{exact:true}).evaluate(e=>{const p=e.parentElement,s=getComputedStyle(p);return{left:parseFloat(s.paddingLeft),top:parseFloat(s.paddingTop),overflow:p.scrollWidth>p.clientWidth+1}});
+    assert.ok(feedback.left>=16&&feedback.top>=16&&!feedback.overflow,'answer feedback keeps comfortable interior padding');
+    for(const label of ['AI 解析错因','AI 详细讲解','生成 3 道变式题']){
+      const button=page.getByRole('button',{name:label,exact:true});
+      const metrics=await button.evaluate(e=>{const label=[...e.children].at(-1),s=getComputedStyle(label),r=label.getBoundingClientRect(),b=e.getBoundingClientRect();return{labelHeight:r.height,line:parseFloat(s.lineHeight),inside:r.left>=b.left+8&&r.right<=b.right-8,height:b.height}});
+      assert.ok(metrics.labelHeight<=metrics.line+1&&metrics.inside&&metrics.height>=48,label+' stays complete on one line');
+    }
+    await page.getByRole('button',{name:'生成 3 道变式题',exact:true}).scrollIntoViewIfNeeded();
+    await shot('polish-answer-'+mode+'-'+width+'-scale'+scale);
+  }
+  await page.setViewportSize({width:393,height:852});await page.evaluate(()=>{window.__setFontScale(1);window.__setAndroidTheme('light')});
+  checks.push('option badges centered, padded answer feedback and complete AI labels in light/dark and narrow large text');
   const answerCount = () => store.db.prepare('SELECT COUNT(*) AS count FROM attempts WHERE user_id=?').get(user.id).count;
   const recorded = answerCount();
   await page.getByRole('button', { name: '下一题', exact: true }).click();
@@ -175,10 +314,71 @@ try {
   await expect(page.getByRole('radio', { name: 'B：64 个', exact: true })).toBeChecked();
   await expect(page.getByRole('button', { name: '确认答案', exact: true })).toBeVisible();
   assert.equal(answerCount(), recorded, 'unsubmitted draft is restored without another grading request');
+  let delayedAttemptPending=false, delayedAttemptFinished=false;
+  await page.route('**/api/attempts',async route=>{delayedAttemptPending=true;await new Promise(r=>setTimeout(r,1200));await route.continue();delayedAttemptFinished=true;});
+  await page.getByRole('radio',{name:'A：62 个',exact:true}).click();
+  await page.getByRole('button',{name:'确认答案',exact:true}).click();
+  await expect(page.getByText('回答正确！',{exact:true})).toBeVisible();
+  assert.equal(delayedAttemptFinished,false,'local grade appears before the delayed server acknowledgement');
+  await expect.poll(()=>delayedAttemptFinished,{timeout:5000}).toBe(true);
+  await page.unroute('**/api/attempts');
+  checks.push('instant answer rendering while real attempt acknowledgement is deliberately delayed');
+  assert.equal(await page.evaluate(()=>window.__answerFeedbackEvents.length),1);
+  await page.getByRole('button',{name:'上一题',exact:true}).click();
+  await page.getByRole('button',{name:'下一题',exact:true}).click();
+  assert.equal(await page.evaluate(()=>window.__answerFeedbackEvents.length),1,'review and background sync do not replay success');
+  assert.equal(await page.evaluate(()=>window.__practiceVoiceEntries.length),1,'answering, next/previous and rerenders do not replay the entry sound');
+  checks.push('new correct answer emits one feedback event; wrong answers and history stay silent');
+  checks.push('practice directory stays silent; entry sound starts once when the actual question is visible');
   await page.getByRole('button', { name: '返回题库目录', exact: true }).click();
   await expect(page.locator('#app-tab-bar').getByRole('button')).toHaveCount(5);
   checks.push('focused practice footer, previous-answer review and draft restoration without duplicate attempts');
+  await expect(page.getByRole('button',{name:'继续上次刷题',exact:true})).toBeVisible();
+  await page.reload();await expect(page.getByTestId('today-screen')).toBeVisible();await tab('练习');
+  await page.getByRole('button',{name:'继续上次刷题',exact:true}).click();
+  await expect(page.getByRole('button',{name:'确认答案',exact:true})).toBeVisible();
+  await expect(page.getByText('回答正确！',{exact:true})).toHaveCount(0);
+  assert.equal(answerCount(),recorded+1,'process restart skips the mastered cursor without duplicating an attempt');
+  assert.equal(await page.evaluate(()=>window.__answerFeedbackEvents?.length||0),0,'restored history never replays answer feedback');
+  await page.getByRole('button',{name:'返回题库目录',exact:true}).click();
+  checks.push('native continue card survives process reload and restores cursor/result with no duplicated grade or answer sound');
+  await page.getByRole('button',{name:'继续上次刷题',exact:true}).click();
+  const beforeSkip=answerCount();
+  await page.getByRole('button',{name:'跳过本题',exact:true}).click();
+  await expect(page.getByText('第 4 / 20 题',{exact:true})).toBeVisible();
+  await page.getByRole('button',{name:'跳过本题',exact:true}).click();
+  await expect(page.getByText('第 5 / 20 题',{exact:true})).toBeVisible();
+  assert.equal(answerCount(),beforeSkip,'skip button does not submit, grade or delete');
+  await page.getByRole('radio',{name:'B：64 个',exact:true}).click();
+  await page.getByRole('button',{name:'刷题语音包设置',exact:true}).click();
+  await expect(page.getByTestId('voice-pack-settings')).toBeVisible();
+  await page.getByRole('button',{name:'返回设置',exact:true}).click();
+  await expect(page.getByRole('radio',{name:'B：64 个',exact:true})).toBeChecked();
+  await expect(page.getByText('第 5 / 20 题',{exact:true})).toBeVisible();
+  await shot('quick-voice-return-and-skip-393');
+  await page.getByRole('button',{name:'返回题库目录',exact:true}).click();
+  checks.push('accessible skip advances without attempts; speaker opens shared voice settings and preserves question/draft');
+
+
   await tab('我的'); await shot('07-my-393');
+  for(const [width,mode,scale]of[[393,'light',1],[393,'dark',1],[320,'dark',1.35]]){
+    await page.setViewportSize({width,height:852});
+    await page.evaluate(({mode,scale})=>{window.__setAndroidTheme(mode);window.__setFontScale(scale)},{mode,scale});
+    await page.waitForTimeout(200);
+    const card=page.getByTestId('profile-membership-card'),balance=page.getByTestId('profile-points-value');
+    await card.scrollIntoViewIfNeeded();
+    const b=await card.boundingBox(),v=await balance.boundingBox();
+    assert.ok(v.x>=b.x+12&&v.x+v.width<=b.x+b.width-12,'balance stays inside the membership card');
+    assert.ok(await balance.evaluate(e=>parseFloat(getComputedStyle(e).fontSize))>=28,'balance has a clear numeric hierarchy');
+    for(const name of ['签到领积分，进入每日签到页','兑换码','积分记录']){
+      const button=card.getByRole('button',{name,exact:true});
+      const label=await button.evaluate(e=>{const text=e.lastElementChild;return{height:text.getBoundingClientRect().height,line:parseFloat(getComputedStyle(text).lineHeight)}});
+      assert.ok(label.height<=label.line+1,name+' remains a complete label without an orphaned last character');
+    }
+    await shot('polish-membership-'+mode+'-'+width+'-scale'+scale);
+  }
+  await page.setViewportSize({width:393,height:852});await page.evaluate(()=>{window.__setFontScale(1);window.__setAndroidTheme('light')});
+  checks.push('membership card: grouped balance/actions, light/dark and narrow large-font layout');
   await page.getByRole('button', { name: '设置', exact: true }).click();
   await expect(page.getByText('修改会立即生效', { exact: true })).toBeVisible();
   await shot('08-settings-393');
@@ -197,6 +397,94 @@ try {
   await expect(page.getByRole('radio', { name: '较强', exact: true })).toBeChecked();
   await page.getByRole('radio', { name: '适中', exact: true }).click();
   await page.getByRole('button', { name: '试听当前音效', exact: true }).click();
+  const feedbackPanel=page.getByTestId('answer-feedback-settings');
+  await expect(feedbackPanel.getByTestId('voice-pack-downloads')).toBeVisible();
+  await feedbackPanel.getByRole('button',{name:'打开语音包设置',exact:true}).click();
+  await page.getByRole('button',{name:'管理语音包',exact:true}).click();
+  await page.getByRole('radio',{name:'仅内置音效',exact:true}).click();
+  await expect(page.getByRole('radio',{name:'仅内置音效',exact:true})).toBeChecked();
+  await page.getByRole('button',{name:'返回语音包',exact:true}).click();
+  await page.getByRole('button',{name:'返回设置',exact:true}).click();
+  await expect(feedbackPanel.getByRole('switch',{name:'答对提示音',exact:true})).toBeChecked();
+  await expect(feedbackPanel.getByRole('switch',{name:'答对震动',exact:true})).toBeChecked();
+  await feedbackPanel.getByRole('radio',{name:'答对提示音音色：温暖',exact:true}).click();
+  await feedbackPanel.getByRole('radio',{name:'答对提示音音量：轻声',exact:true}).click();
+  await feedbackPanel.getByRole('radio',{name:'答对震动强度：明显',exact:true}).click();
+  await feedbackPanel.getByRole('switch',{name:'答对提示音',exact:true}).click();
+  await feedbackPanel.getByRole('switch',{name:'答对震动',exact:true}).click();
+  await expect(feedbackPanel.getByRole('button',{name:'体验答对反馈',exact:true})).toBeDisabled();
+  await feedbackPanel.getByRole('switch',{name:'答对震动',exact:true}).click();
+  const priorFeedback=await page.evaluate(()=>window.__answerFeedbackEvents?.length||0);
+  await feedbackPanel.getByRole('button',{name:'体验答对反馈',exact:true}).click();
+  const feedback=await page.evaluate(()=>window.__answerFeedbackEvents.at(-1));
+  assert.deepEqual({...feedback},{soundEnabled:false,hapticsEnabled:true,volume:0.16,style:'warm',hapticStrength:'strong',voicePackId:'builtin'});
+  assert.equal(await page.evaluate(()=>window.__answerFeedbackEvents.length),priorFeedback+1);
+  await expect.poll(()=>page.evaluate(()=>JSON.parse(localStorage.getItem('kaojiang-answer-feedback-v1')||'null'))).toEqual(feedback);
+  for(const [width,mode,scale] of [[320,'dark',1.35],[393,'light',1]]){
+    await page.setViewportSize({width,height:852});await page.evaluate(({mode,scale})=>{window.__setAndroidTheme(mode);window.__setFontScale(scale)},{mode,scale});
+    await feedbackPanel.scrollIntoViewIfNeeded();
+    const metrics=await feedbackPanel.evaluate(e=>({width:e.clientWidth,overflow:e.scrollWidth>e.clientWidth+1,targets:[...e.querySelectorAll('[role="radio"]')].map(r=>r.getBoundingClientRect().height)}));
+    assert.ok(!metrics.overflow&&metrics.targets.every(h=>h>=48));
+    await shot('answer-feedback-settings-'+width+'-'+mode);
+  }
+  checks.push('answer feedback switches, tone, volume, vibration level and preview persist with narrow/large-text layouts');
+  // Approved standalone voice settings: real backend bytes + actual selection engine.
+  await feedbackPanel.getByRole('button',{name:'打开语音包设置',exact:true}).click();
+  const voiceScreen=page.getByTestId('voice-pack-settings');
+  await expect(page.getByRole('heading',{name:'语音包',exact:true})).toBeVisible();
+  await voiceScreen.getByRole('switch',{name:'刷题语音',exact:true}).click();
+  await voiceScreen.getByRole('button',{name:'提高语音音量',exact:true}).click();
+  await expect(page.getByTestId('voice-volume-value')).toHaveText('21%');
+  const slider=voiceScreen.getByTestId('voice-volume-slider');await slider.scrollIntoViewIfNeeded();const sliderBox=await slider.boundingBox();
+  await page.mouse.move(sliderBox.x+sliderBox.width*0.5,sliderBox.y+sliderBox.height/2);await page.mouse.down();
+  await page.mouse.move(sliderBox.x+sliderBox.width*0.32,sliderBox.y+sliderBox.height/2,{steps:8});await page.mouse.up();
+  await expect.poll(()=>page.evaluate(()=>JSON.parse(localStorage.getItem('kaojiang-answer-feedback-v1')).volume)).toBeCloseTo(0.32,1);
+  const chosenVoiceVolume=await page.evaluate(()=>JSON.parse(localStorage.getItem('kaojiang-answer-feedback-v1')).volume);assert.ok(chosenVoiceVolume<=0.33,'drag ends at approximately 32 percent and persists');
+
+  await voiceScreen.getByRole('button',{name:'下载语音包 嘎子语音包',exact:true}).click();
+  await expect(voiceScreen.getByRole('radio',{name:'使用语音包 嘎子语音包',exact:true})).toBeChecked();
+  const audioFetches=await page.evaluate(()=>window.__voiceAssetRequests||0);
+  assert.equal(audioFetches,3,'all three real audio assets were fetched and hash checked');
+  await voiceScreen.getByRole('button',{name:'试听当前语音包',exact:true}).click();
+  await voiceScreen.getByRole('button',{name:'试听当前语音包',exact:true}).click();
+  assert.equal(await page.evaluate(()=>window.__voicePlayback.length),2,'explicit preview repeats without synthesizing attempts');
+  assert.equal(await page.evaluate(()=>window.__voiceAssetRequests),audioFetches,'preview is local-only');
+  await voiceScreen.getByRole('button',{name:'配置开始刷题语音',exact:true}).click();
+  await voiceScreen.getByRole('radio',{name:'进入题目：随机',exact:true}).click();
+  await voiceScreen.getByRole('checkbox',{name:'进入题目 语音 3',exact:true}).click();
+  await voiceScreen.getByRole('button',{name:'试听进入题目语音 1',exact:true}).click();
+  await expect.poll(()=>page.evaluate(()=>JSON.parse(localStorage.getItem('kaojiang-answer-feedback-v1')).voiceScenes?.['gazi-voice']?.['practice.enter']?.clips.length)).toBe(2);
+  await shot('voice-scene-selection-393');
+  await page.getByRole('button',{name:'返回语音包',exact:true}).click();
+  await expect(voiceScreen.getByRole('button',{name:'配置开始刷题语音',exact:true})).toContainText('随机 · 2 条');
+  await voiceScreen.getByRole('button',{name:'配置答错与连错语音',exact:true}).click();
+  await voiceScreen.getByRole('radio',{name:'连续答错 5 次及以上：关闭',exact:true}).click();
+  await expect.poll(()=>page.evaluate(()=>JSON.parse(localStorage.getItem('kaojiang-answer-feedback-v1')).voiceScenes?.['gazi-voice']?.['wrong:5']?.mode)).toBe('off');
+  await page.getByRole('button',{name:'返回语音包',exact:true}).click();
+  for(const [width,mode,scale] of [[393,'light',1],[393,'dark',1],[320,'dark',1.35]]){
+    await page.setViewportSize({width,height:1000});await page.evaluate(({mode,scale})=>{window.__setAndroidTheme(mode);window.__setFontScale(scale)},{mode,scale});
+    await voiceScreen.evaluate(e=>{e.scrollTop=0});await page.waitForTimeout(150);
+    assert.equal(await voiceScreen.evaluate(e=>e.scrollWidth>e.clientWidth+1),false,'voice settings never overflow horizontally');
+    for(const label of ['配置开始刷题语音','配置答对与连对语音','配置答错与连错语音'])assert.ok((await voiceScreen.getByRole('button',{name:label,exact:true}).boundingBox()).height>=48);
+    if(width===320){for(const text of ['开始刷题','答对与连对','答错与连错','嘎子语音包'])for(const node of await voiceScreen.getByText(text,{exact:true}).all())assert.ok(await node.evaluate(e=>e.getBoundingClientRect().height<=parseFloat(getComputedStyle(e).lineHeight)+1),text+' stays on one line with large text');}
+    await shot('voice-settings-'+width+'-'+mode+'-scale'+scale);
+  }
+  await page.setViewportSize({width:393,height:852});await page.evaluate(()=>{window.__setFontScale(1);window.__setAndroidTheme('light')});
+  await page.getByRole('button',{name:'返回设置',exact:true}).click();await page.getByRole('button',{name:'关闭设置',exact:true}).click();
+  await page.reload();await tab('我的');await page.getByRole('button',{name:'设置',exact:true}).click();
+  await page.getByRole('button',{name:'打开语音包设置',exact:true}).click();
+  await expect(voiceScreen.getByRole('radio',{name:'使用语音包 嘎子语音包',exact:true})).toBeChecked();
+  await expect(voiceScreen.getByRole('button',{name:'配置开始刷题语音',exact:true})).toContainText('随机 · 2 条');
+  await page.getByRole('button',{name:'管理语音包',exact:true}).click();
+  await voiceScreen.getByRole('button',{name:'删除语音包 嘎子语音包',exact:true}).click();
+  await voiceScreen.getByRole('button',{name:'确认删除语音包 嘎子语音包',exact:true}).click();
+  await expect(voiceScreen.getByRole('button',{name:'删除语音包 嘎子语音包',exact:true})).toHaveCount(0);
+  await expect(voiceScreen.getByRole('radio',{name:'仅内置音效',exact:true})).toBeChecked();
+  await page.getByRole('button',{name:'返回语音包',exact:true}).click();
+  await page.getByRole('button',{name:'返回设置',exact:true}).click();
+  const feedbackAfterVoiceSettings={...feedback,soundEnabled:true,volume:chosenVoiceVolume,voiceScenes:{'gazi-voice':{'practice.enter':{mode:'random',clips:voiceIds.slice(0,2)},'wrong:5':{mode:'off',clips:[]}}}};
+  await expect.poll(()=>page.evaluate(()=>JSON.parse(localStorage.getItem('kaojiang-answer-feedback-v1')))).toEqual(feedbackAfterVoiceSettings);
+  checks.push('voice settings: real download/hash, repeated local preview, volume, candidate subset, wrong tier, restart persistence, delete and narrow/dark layouts');
   await page.getByRole('button', { name: '清理学习缓存', exact: true }).click();
   await expect(page.getByText('已清理', { exact: true })).toBeVisible();
   checks.push('settings animation/sound-style/volume/switch controls persist; cache cleanup preserves the signed-in account');
@@ -223,19 +511,31 @@ try {
   await page.getByRole('button', { name: '确认兑换', exact: true }).click();
   await expect(page.getByText(/兑换码.*(?:无效|不存在|错误)/).first()).toBeVisible();
   await shot('11b-invalid-redemption-393');
+  const walletBeforeRedeem=store.points.wallet(user.id);
+  const balanceText=units=>(units/(walletBeforeRedeem.scale||1000)).toLocaleString('zh-CN',{maximumFractionDigits:3});
   await page.getByRole('textbox', { name: '会员兑换码', exact: true }).fill(redemptionCode);
   await page.getByRole('button', { name: '确认兑换', exact: true }).click();
   await expect(page.getByRole('button', { name: '完成', exact: true })).toBeVisible();
   await shot('11c-redemption-success-393');
   await page.getByRole('button', { name: '完成', exact: true }).click();
-  await expect(page.getByRole('button', { name: '查看可用AI积分、服务费用和积分记录', exact: true }).getByText('1,990 积分', { exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: '查看可用AI积分、服务费用和积分记录', exact: true }).getByTestId('profile-points-value')).toHaveText(balanceText(walletBeforeRedeem.availableUnits));
+  assert.equal(store.points.wallet(user.id).availableUnits,walletBeforeRedeem.availableUnits,'redemption preserves all existing points and adds no monthly lump sum');
   await page.getByText('会员与 AI 积分', { exact: true }).click();
   await expect(page.getByText('选择会员套餐', { exact: true })).toBeVisible();
   await shot('12-membership-393');
   await page.getByRole('button', { name: '签到领积分', exact: true }).click();
+  const daily=page.getByTestId('android-check-in-screen');
+  await expect(daily.getByRole('heading',{name:'每日签到',exact:true})).toBeVisible();
+  await expect(daily.getByText('当前 SVIP',{exact:true})).toBeVisible();
+  await expect(daily.getByTestId('check-in-reward')).toHaveText('+66');
+  await daily.getByRole('button',{name:'签到领取 66 积分',exact:true}).click();
+  await expect(daily.getByRole('button',{name:'今日已签到',exact:true})).toBeDisabled();
+  await expect(daily.getByTestId('check-in-balance')).toHaveText(balanceText(walletBeforeRedeem.availableUnits+66000));
+  assert.equal(store.points.wallet(user.id).availableUnits,walletBeforeRedeem.availableUnits+66000,'daily check-in adds exactly 66 points without dropping the existing balance');
+  await daily.getByRole('button',{name:'关闭每日签到',exact:true}).click();
   await expect(page.getByRole('button', { name: '已签到', exact: true })).toBeVisible();
-  await expect(page.getByText('1,995', { exact: true })).toBeVisible();
-  checks.push('real funded fixture redemption and check-in refresh balances immediately');
+  await expect(page.getByTestId('vip-points-balance').getByText(balanceText(walletBeforeRedeem.availableUnits+66000), { exact: true })).toBeVisible();
+  checks.push('redemption issues no monthly lump sum; daily SVIP check-in credits exactly 66 points immediately');
   await page.getByRole('button', { name: '服务价目', exact: false }).click();
   await expect(page.getByText('AI 服务积分价目', { exact: true })).toBeVisible();
   checks.push('My/settings/profile save/security/redeem/membership/pricing entries');
@@ -271,6 +571,26 @@ try {
   await expect(page.getByText('当前筛选下没有错题', { exact: true })).toHaveCount(0);
   await page.getByRole('button', { name: '全部错题', exact: true }).click();
   checks.push('wrong book grouping and repeated-error filters');
+  await page.getByRole('button',{name:/进入复习$/}).first().click();
+  await page.getByRole('radio',{name:'A：62 个',exact:true}).click();
+  await page.getByRole('button',{name:'确认答案',exact:true}).click();
+  await expect(page.getByRole('button',{name:'删除错题',exact:true})).toBeEnabled();
+  const retainedWrong=store.allA(user.id).at(-1).questionId;
+  await page.getByRole('button',{name:'下一题',exact:true}).click();
+  assert.ok(store.wrongQuestions(user.id).some(q=>q.id===retainedWrong),'next keeps a correctly retried wrong question');
+  await page.getByRole('radio',{name:'A：62 个',exact:true}).click();
+  await page.getByRole('button',{name:'确认答案',exact:true}).click();
+  await expect(page.getByRole('button',{name:'删除错题',exact:true})).toBeEnabled();
+  const deletedWrong=store.allA(user.id).at(-1).questionId, wrongBefore=store.wrongQuestions(user.id).length;
+  await shot('wrong-delete-or-keep-393');
+  await page.getByRole('button',{name:'删除错题',exact:true}).click();
+  await expect.poll(()=>store.wrongQuestions(user.id).length).toBe(wrongBefore-1);
+  await expect(page.getByRole('button',{name:'确认答案',exact:true})).toBeVisible();
+  assert.ok(!store.wrongQuestions(user.id).some(q=>q.id===deletedWrong));
+  assert.ok(store.wrongQuestions(user.id).some(q=>q.id===retainedWrong));
+  await page.getByRole('button',{name:'返回题库目录',exact:true}).click();
+  checks.push('real wrong-book DELETE: next retains correct retries, explicit delete removes only chosen question and advances');
+
   await tab('我的');
   await page.getByRole('button', { name: '考试与题库，切换证书', exact: true }).click();
   await expect(page.getByRole('textbox', { name: '搜索考试证书', exact: true })).toBeVisible();
@@ -290,36 +610,51 @@ try {
   await page.getByRole('button', { name: '确认选择考试证书', exact: true }).click();
   await expect(page.getByTestId('today-screen')).toBeVisible();
   checks.push('certificate search/confirmation and wrong-record isolation across certificate switches');
+  // Earlier ordinary practice exhausted the first fixture chapter. Fresh short
+  // chapters prove multi-selection rather than reusing those historical items.
+  const learningChapters=[chapter+'甲',chapter+'乙'];
+  for(let i=0;i<12;i++)store.addQ({...store.getQ('android-ui-question-0'),id:'location-multi-fixture-'+i,question:'专项验收题 '+i,chapter:learningChapters[Math.floor(i/6)]});
+
   await tab('练习');
   await page.getByRole('textbox', { name: '搜索知识点', exact: true }).fill('虚拟定位学习');
   await page.getByRole('button', { name: '虚拟定位学习', exact: true }).click();
   await expect(page.getByRole('textbox', { name: '搜索专项学习知识点', exact: true })).toBeVisible();
   await page.getByRole('textbox', { name: '搜索专项学习知识点', exact: true }).fill(leaf);
-  await page.getByRole('button', { name: `选择${leaf}，30道题`, exact: true }).click();
-  await expect(page.getByText('专项学习 1 / 30', { exact: true })).toBeVisible();
-  await shot('20-daily30-question-393');
-  for (let i = 0; i < 30; i++) {
-    await expect(page.getByText(`专项学习 ${i + 1} / 30`, { exact: true })).toBeVisible();
+  for(const name of learningChapters)await page.getByRole('checkbox', {name, exact:true}).click();
+  await page.getByRole('button', {name:'开始学习 · 10 题', exact:true}).click();
+  await expect(page.getByText('第 1 题 · 单选题', { exact: true })).toBeVisible();
+  assert.ok(await page.getByTestId('location-learning-header').evaluate(e=>e.getBoundingClientRect().top)>=0,'learning header remains within its independent safe-area window');
+  await page.getByRole('button',{name:'答题卡',exact:true}).click();
+  await expect(page.getByRole('button',{name:'第2题，未答',exact:true})).toBeDisabled();
+  await page.getByRole('button',{name:'关闭答题卡',exact:true}).click();
+  const gate=await page.getByTestId('location-learning-header').boundingBox();
+  await page.mouse.move(100,gate.y+220);await page.mouse.down();await page.mouse.move(280,gate.y+224,{steps:8});await page.mouse.up();
+  await expect(page.getByText('第 1 题 · 单选题',{exact:true})).toBeVisible();
+  await expect(page.getByRole('button',{name:'跳过本题',exact:true})).toHaveCount(0);
+  checks.push('location learning ignores right swipe and has no skip control');
+  await shot('20-daily10-question-393');
+  for (let i = 0; i < 10; i++) {
+    await expect(page.getByText(`第 ${i + 1} 题 · 单选题`, { exact: true })).toBeVisible();
     const answer = page.getByRole('button', { name: '提交本题', exact: true });
-    await page.getByRole('radio', { name: i === 0 ? 'B 64 个' : 'A 62 个', exact: true }).click();
+    await page.getByRole('radio', { name: i === 0 ? 'B，64 个' : 'A，62 个', exact: true }).click();
     await answer.scrollIntoViewIfNeeded();
     if (i === 0) await expect(answer).toBeDisabled();
     await expect(answer).toBeEnabled({ timeout: 12000 });
     await answer.click();
     if (i === 0) await expect(page.getByText('本题答错了，阅读解析也算完成', { exact: true })).toBeVisible();
-    const advance = page.getByRole('button', { name: i === 29 ? '确认阅读，完成 30 题' : '确认阅读，下一题', exact: true });
+    const advance = page.getByRole('button', { name: i === 9 ? '确认阅读，完成 10 题' : '确认阅读，下一题', exact: true });
     await advance.scrollIntoViewIfNeeded();
-    if (i === 0) { await expect(advance).toBeDisabled(); await shot('21-daily30-wrong-review-393'); }
+    if (i === 0) { await expect(advance).toBeDisabled(); await shot('21-daily10-wrong-review-393'); }
     await expect(advance).toBeEnabled({ timeout: 12000 });
     await advance.click();
   }
-  await expect(page.getByText('已解锁模拟定位学习', { exact: true })).toBeVisible();
-  await shot('22-daily30-unlocked-393');
+  await expect(page.getByText('今日学习已完成', { exact: true })).toBeVisible();
+  await shot('22-daily10-unlocked-393');
   await page.getByRole('button', { name: '退出专项学习', exact: true }).click();
   await page.getByRole('button', { name: '虚拟定位学习', exact: true }).click();
-  await expect(page.getByText('已解锁模拟定位学习', { exact: true })).toBeVisible();
+  await expect(page.getByText('今日学习已完成', { exact: true })).toBeVisible();
   await page.getByRole('button', { name: '退出专项学习', exact: true }).click();
-  checks.push('daily30 real API: reading/answer/review delays, wrong answers allowed, thirty completions and same-day reopen');
+  checks.push('daily10 real API: reading/answer/review delays, wrong answers allowed, ten completions and same-day reopen');
   await tab('我的');
   await page.getByRole('button', { name: '退出登录', exact: true }).click();
   await expect(page.getByText('欢迎回来', { exact: true })).toBeVisible();
@@ -330,15 +665,16 @@ try {
   await tab('错题');
   await expect(page.getByText('这里会记录你的薄弱点', { exact: true })).toBeVisible();
   await tab('我的');
-  await expect(page.getByRole('button', { name: '查看可用AI积分、服务费用和积分记录', exact: true }).getByText('0 积分', { exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: '查看可用AI积分、服务费用和积分记录', exact: true }).getByTestId('profile-points-value')).toHaveText('0');
+  assert.equal(store.points.wallet(other.id).availableUnits,0,'a different account cannot inherit the first account wallet');
   await expect(page.getByText('安卓界面验收用户', { exact: true })).toHaveCount(0);
   await tab('练习');
   await page.getByRole('textbox', { name: '搜索知识点', exact: true }).fill('虚拟定位学习');
   await page.getByRole('button', { name: '虚拟定位学习', exact: true }).click();
   await expect(page.getByRole('textbox', { name: '搜索专项学习知识点', exact: true })).toBeVisible();
-  await expect(page.getByText('已解锁模拟定位学习', { exact: true })).toHaveCount(0);
+  await expect(page.getByText('今日学习已完成', { exact: true })).toHaveCount(0);
   await page.getByRole('button', { name: '退出专项学习', exact: true }).click();
-  checks.push('logout/login account isolation for profile, balance, wrong book and daily30 entitlement');
+  checks.push('logout/login account isolation for profile, balance, wrong book and daily10 entitlement');
   await tab('我的');
   await page.getByRole('button', { name: '设置', exact: true }).click();
   await page.getByText('深色模式', { exact: true }).click();
@@ -347,7 +683,7 @@ try {
   await tab('我的');
   await page.getByText('会员与 AI 积分', { exact: true }).click();
   await shot('23b-membership-dark-393');
-  const selectedPlan = page.getByRole('button', { name: 'SVIP，19.9元，每30天1990积分', exact: true });
+  const selectedPlan = page.getByRole('button', { name: 'SVIP，19.9元，每日签到66积分，会员有效30天', exact: true });
   assert.equal(await selectedPlan.locator('svg').last().evaluate(e => getComputedStyle(e).stroke), 'rgb(16, 23, 34)');
   await page.getByRole('button', { name: '返回我的', exact: true }).click();
   await tab('练习');
@@ -366,12 +702,34 @@ try {
   checks.push('dark theme and narrow phone/tablet/landscape layout with visible bottom navigation');
   await tab('我的');
   await page.getByRole('button', { name: '查看可用AI积分、服务费用和积分记录', exact: true }).click();
-  await expect(page.getByRole('heading', { name: '积分费用与记录', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: '积分', exact: true })).toBeVisible();
+  await page.getByRole('button', {name:'关闭积分费用与记录',exact:true}).click();
+  versionFault = 'legacy'; await page.reload();
+  await expect.poll(()=>page.evaluate(()=>window.__answerFeedbackSettings)).toEqual(feedbackAfterVoiceSettings);
+  checks.push('answer feedback settings restore after application reload');
+  await expect(page.getByTestId('backend-connection-notice')).toContainText('服务端尚未完成 v1.0 升级');
+  versionFault = ''; await page.getByRole('button',{name:'重新连接',exact:true}).click();
+  await expect(page.getByTestId('backend-connection-notice')).toHaveCount(0);
+  versionFault = 'offline'; await page.reload();
+  await expect(page.getByTestId('backend-connection-notice')).toContainText('暂未连接到服务器');
+  versionFault = ''; await page.getByRole('button',{name:'重新连接',exact:true}).click();
+  await expect(page.getByTestId('backend-connection-notice')).toHaveCount(0);
+  checks.push('v1 backend contract detects an old server and recovers from a connection outage without a fake zero balance');
+  await tab('我的');
+  await page.getByRole('button', { name: '查看可用AI积分、服务费用和积分记录', exact: true }).click();
   forceWalletExpired = true;
-  await page.getByRole('button', { name: '刷新可用积分', exact: true }).click();
+  await page.getByRole('button', { name: '刷新积分余额和使用记录', exact: true }).click();
   await expect(page.getByText('欢迎回来', { exact: true })).toBeVisible();
-  await expect(page.getByRole('heading', { name: '积分费用与记录', exact: true })).toHaveCount(0);
+  await expect(page.getByRole('heading', { name: '积分', exact: true })).toHaveCount(0);
   checks.push('expired-session returns to sign-in and clears account-owned points presentation');
+  process.env.MOBILE_LATEST_VERSION='9.0.0'; await page.reload();
+  await expect(page.getByText('欢迎回来',{exact:true})).toBeVisible();
+  await expect(page.getByText('请更新到最新版',{exact:true})).toHaveCount(0);
+  process.env.MOBILE_MINIMUM_VERSION='9.0.0'; await page.reload();
+  await expect(page.getByText('请更新到最新版',{exact:true})).toBeVisible();
+  await expect(page.getByText('欢迎回来',{exact:true})).toHaveCount(0);
+  checks.push('optional updates do not interrupt a supported app; unsupported versions enter the non-dismissible update screen');
+  }
   assert.equal(aiRequests, 0);
   assert.deepEqual(errors, []);
   assert.deepEqual(sourceHashes(), testedSources, 'verified Android source must not change during acceptance');
@@ -382,9 +740,10 @@ try {
     fs.writeFileSync(path.join(out, 'failure-dom.txt'), await page.locator('body').innerText().catch(() => ''));
     await shot('failure').catch(() => {});
   }
-  fs.writeFileSync(path.join(out, 'failure.json'), JSON.stringify({ error: error.stack, errors, checks }, null, 2));
+  fs.writeFileSync(path.join(out, 'failure.json'), JSON.stringify({ error: error.stack, errors, checks, consoleErrors, failedRequests }, null, 2));
   throw error;
 } finally {
+  for(const [key,value] of [['MOBILE_LATEST_VERSION',previousVersionEnvironment.latest],['MOBILE_MINIMUM_VERSION',previousVersionEnvironment.minimum]]){if(value===undefined)delete process.env[key];else process.env[key]=value;}
   fs.writeFileSync(path.join(out, 'result.json'), JSON.stringify({ checks, errors, screenshots, aiRequests, testedSources, nativeSystemAdapters: 'fixtures; not native-device acceptance' }, null, 2));
   await browser?.close(); await vite.close(); await new Promise(resolve => server.close(resolve)); store.close?.();
 }

@@ -1,0 +1,738 @@
+[
+  {
+    "id": "hcip821-route-longest-match-001",
+    "type": "single_choice",
+    "question": "一台路由器的路由表中存在 10.0.0.0/8、10.1.0.0/16、10.1.2.0/24 三条路由，下一跳均可达。收到目的地址为 10.1.2.3 的报文时，路由器选择哪条路由转发？",
+    "options": {
+      "A": "10.0.0.0/8 的路由",
+      "B": "10.1.0.0/16 的路由",
+      "C": "10.1.2.0/24 的路由",
+      "D": "三条路由形成等价，随机选择一条"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "目的地址 10.1.2.3 同时落在三条路由的网段内，此时按最长前缀匹配，掩码最长的 10.1.2.0/24 最精确，因此选它转发。10.0.0.0/8 与 10.1.0.0/16 虽然也匹配，但覆盖范围更大、前缀更短，只在没有更精确路由时才使用。三条路由的前缀长度不同，不满足等价路由的条件，不会随机选择。",
+    "chapter": "路由基础",
+    "knowledgeSection": "IP 路由基础",
+    "knowledgePoint": "路由表与最长匹配",
+    "difficulty": "easy",
+    "tags": [
+      "最长匹配",
+      "路由表",
+      "转发"
+    ],
+    "provenance": {
+      "questionId": "hcip821-route-longest-match-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 1 页“路由基础 3%”与第 2 页“IP 路由基础”；对应三级目录「路由基础 / IP 路由基础 / 路由表与最长匹配」。最长前缀匹配为可独立验证的稳定结论。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "c8acf9d7f0ca8182b6ddb407665d63391cf0a263202280f2819c97ba032dbdc0"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-ospf-neighbor-001",
+    "type": "single_choice",
+    "question": "两台路由器通过以太网互联并启用 OSPF，广播网络上完成 DR/BDR 选举后，两台都未当选 DR 或 BDR 的路由器之间最终稳定在哪种邻居状态？",
+    "options": {
+      "A": "Full",
+      "B": "2-Way",
+      "C": "ExStart",
+      "D": "Init"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "广播网络上所有路由器都与 DR、BDR 建立邻接并达到 Full，但未当选的路由器彼此之间不交换 LSA，只保持在 2-Way 状态。Full 描述的是它们与 DR/BDR 之间的关系；ExStart 是开始交换 DD 报文前的状态；Init 表示已经收到 Hello 但还未确认双向通信。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 基础",
+    "knowledgePoint": "邻居状态机",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "DR/BDR",
+      "邻居状态"
+    ],
+    "provenance": {
+      "questionId": "hcip821-ospf-neighbor-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据大纲第 2 页“OSPF 基础 / OSPF 工作过程”；对应「OSPF 核心知识 / OSPF 基础 / 邻居状态机」；邻居状态与 DR/BDR 邻接关系依据 RFC 2328 第 10.1 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；OSPF 状态机结论按 RFC 2328 原文核对，未复制第三方题目。",
+      "reviewDigest": "3b70d9d9b8dbf3096096e646e8d69bd0353c62c0eff45a2c2a4cf462ce614324"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-ospf-interarea-001",
+    "type": "single_choice",
+    "question": "在 OSPF 多区域网络中，一个区域内部的路由要传递到其他区域，依靠的是哪种机制？",
+    "options": {
+      "A": "ABR 把区域内路由转换为 Type 3 LSA 发布到其他区域",
+      "B": "ASBR 把 Type 5 LSA 直接泛洪到所有区域",
+      "C": "DR 把 Type 1 LSA 原样转发到其他区域",
+      "D": "区域内每台路由器各自生成 Type 3 LSA 并泛洪"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "区域间路由由 ABR 完成转换：它把本区域计算出的路由以 Type 3 Summary-LSA 注入其他区域，其他区域再据此计算区域间路由。Type 5 描述的是外部路由，由 ASBR 产生，不属于区域间路由。Type 1 只在所属区域内泛洪，DR 不会把它原样转发到其他区域。Type 3 只由 ABR 产生，普通路由器不生成。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 路由计算",
+    "knowledgePoint": "区域间路由计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "ABR",
+      "Type 3 LSA"
+    ],
+    "provenance": {
+      "questionId": "hcip821-ospf-interarea-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据大纲第 2 页“OSPF 路由计算 / 区域间路由计算”；对应「OSPF 核心知识 / OSPF 路由计算 / 区域间路由计算」；Type 3 Summary-LSA 依据 RFC 2328 第 12.4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；区域间路由机制按 RFC 2328 原文核对，未复制第三方题目。",
+      "reviewDigest": "e1ed59231388b1eb759ea21b656cf981e052b6778a318a4bdbf0f747d0a0b491"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-ospf-stub-001",
+    "type": "single_choice",
+    "question": "某 OSPF 区域被配置为 Stub 区域后，关于该区域内路由器的链路状态数据库，下列描述正确的是？",
+    "options": {
+      "A": "不会存在 Type 3 LSA，只保留 Type 1 和 Type 2",
+      "B": "不会存在 Type 5 LSA，ABR 通过 Type 3 LSA 下发默认路由",
+      "C": "不会存在 Type 4 LSA，但 Type 5 LSA 仍会泛洪",
+      "D": "不会存在 Type 1 LSA，所有路由由 ABR 以 Type 3 下发"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Stub 区域阻止 Type 5 外部 LSA 进入，同时也不接收 Type 4 LSA；ABR 改为下发一条 Type 3 默认路由，保证区域内路由器仍能访问外部网络。区域内仍然存在描述拓扑和网段的 Type 1、Type 2 LSA，区域间路由也仍依靠 Type 3 传递，因此“没有 Type 3”和“没有 Type 1”都不成立。Type 5 被阻断后不会继续泛洪。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "Stub 与 Totally Stub",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "Stub",
+      "LSA"
+    ],
+    "provenance": {
+      "questionId": "hcip821-ospf-stub-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据大纲第 2 页“Stub 区域和 Totally Stub 区域”；对应「OSPF 核心知识 / OSPF 特殊区域 / Stub 与 Totally Stub」；Stub 区域 LSA 过滤与默认路由依据 RFC 2328 第 3.6 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；Stub 区域行为按 RFC 2328 原文核对，未复制第三方题目。",
+      "reviewDigest": "ece8dde75ebda3c82570456d7adb4be0e86eb139c5202ddb216e9409efde3529"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-isis-level-001",
+    "type": "single_choice",
+    "question": "IS-IS 中，Level-1 路由器需要访问本区域以外的目的地址时，默认采用哪种方式？",
+    "options": {
+      "A": "直接使用 Level-1 LSP 计算到达目的地的路由",
+      "B": "与区域外路由器建立 Level-2 邻接后学习明细路由",
+      "C": "使用 Level-1-2 路由器在 LSP 中置位的 Attached 位所产生的默认路由",
+      "D": "由 DIS 把 Level-2 LSP 转换成 Level-1 LSP"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Level-1 路由器只维护本区域拓扑，无法直接算出区域外明细。Level-1-2 路由器会在自己的 Level-1 LSP 中把 Attached 位置位，Level-1 路由器据此生成一条指向该 Level-1-2 路由器的默认路由，把出区域流量交给它。Level-1 路由器不会建立 Level-2 邻接，那是 Level-1-2 路由器的能力。DIS 负责广播网伪节点，不承担 LSP 类型转换。只靠 Level-1 LSP 也得不到区域外路由。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS",
+      "Level-1",
+      "Attached 位"
+    ],
+    "provenance": {
+      "questionId": "hcip821-isis-level-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据大纲第 2 页“IS-IS 工作原理”；对应「IS-IS 核心知识 / IS-IS 原理 / 工作原理与分层」；Attached 位与 Level-1 默认路由依据 RFC 1195 第 7.2.3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；IS-IS 分层与 Attached 位结论按 RFC 1195 原文核对，未复制第三方题目。",
+      "reviewDigest": "f2041927d0bd69356865b97a65b31826834616a213e2d3664962e998151fd485"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-bgp-localpref-001",
+    "type": "single_choice",
+    "question": "一台路由器从两个 IBGP 邻居学到同一目的网段的路由，两条路由的 AS_Path 长度相同，Local_Pref 分别为 100 和 200。默认情况下 BGP 选择哪条路由？",
+    "options": {
+      "A": "Local_Pref 为 100 的路由",
+      "B": "先比较 MED，再决定",
+      "C": "两条路由自动形成负载分担",
+      "D": "Local_Pref 为 200 的路由"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Local_Pref 是公认必遵属性，数值越大越优，用于告诉本 AS 内的路由器哪条出口更好。两条路由的 AS_Path 长度相同，比较进行到 Local_Pref 时就会选出 200 的那条。MED 主要在同一对等体或同一 AS 的多个入口之间比较，顺序排在 Local_Pref 之后。BGP 默认只选一条最优路由，不会自动负载分担。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 路径属性与反射器",
+    "knowledgePoint": "路径属性",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "Local_Pref",
+      "选路"
+    ],
+    "provenance": {
+      "questionId": "hcip821-bgp-localpref-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据大纲第 3 页“BGP 路径属性与路由反射器”；对应「BGP 核心知识 / BGP 路径属性与反射器 / 路径属性」；LOCAL_PREF 比较方向依据 RFC 4271 第 5.1.5 节与第 9.1 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；BGP 属性比较结论按 RFC 4271 原文核对，未复制第三方题目。",
+      "reviewDigest": "e2a71e3d98f8343202774ec6dfe997976b2dab891f3e6a493729234e7e205d6b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-bgp-bestpath-001",
+    "type": "single_choice",
+    "question": "下列 BGP 选路因素中，默认情况下最先比较的是哪一项？",
+    "options": {
+      "A": "MED",
+      "B": "AS_Path 长度",
+      "C": "Origin 类型",
+      "D": "Local_Pref"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "BGP 选路按固定顺序逐项比较，Local_Pref 位于 AS_Path、Origin、MED 之前，因此在这四项中最先起作用。AS_Path 在 Local_Pref 之后比较，路径越短越优。Origin 又排在 AS_Path 之后。MED 用于影响外部 AS 的入口选择，位置更靠后，且默认只在相邻 AS 之间比较。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 路由优选",
+    "knowledgePoint": "优选顺序",
+    "difficulty": "hard",
+    "tags": [
+      "BGP",
+      "选路顺序",
+      "路径属性"
+    ],
+    "provenance": {
+      "questionId": "hcip821-bgp-bestpath-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据大纲第 3 页“BGP 路由优选”；对应「BGP 核心知识 / BGP 路由优选 / 优选顺序」；选路顺序依据 RFC 4271 第 9.1 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；BGP 选路顺序按 RFC 4271 原文核对，未复制第三方题目。",
+      "reviewDigest": "337dd87e55dfd6436c1b06833e666ea07c43bf47d1df8b4974a8d6edebfc6d9a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-bgp-rr-001",
+    "type": "single_choice",
+    "question": "在 BGP 路由反射器组网中，RR 从某个客户端收到一条路由后，默认会把它反射给哪些邻居？",
+    "options": {
+      "A": "仅反射给其他客户端",
+      "B": "除源邻居外的所有客户端和非客户端",
+      "C": "仅反射给非客户端",
+      "D": "仅反射给 EBGP 邻居"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "路由反射器按来源决定反射范围：从客户端学到的路由会反射给所有客户端和其他非客户端，但不会再回送给始发该路由的邻居；从非客户端学到的路由才只反射给客户端。只发给其他客户端或只发给非客户端都不完整。反射给 EBGP 邻居属于普通 BGP 发布行为，不属于路由反射器的反射规则。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 路径属性与反射器",
+    "knowledgePoint": "路由反射器",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "路由反射器",
+      "客户端"
+    ],
+    "provenance": {
+      "questionId": "hcip821-bgp-rr-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4456-route-reflection"
+      ],
+      "locator": "自编题；范围依据大纲第 3 页“BGP 路径属性与路由反射器”；对应「BGP 核心知识 / BGP 路径属性与反射器 / 路由反射器」；反射规则依据 RFC 4456 第 3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；RR 反射规则按 RFC 4456 原文核对，未复制第三方题目。",
+      "reviewDigest": "c6c81d33a837cfb553f69ae2e04a1bf50937ca9b6d2799546fcca1f602856892"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-route-policy-export-001",
+    "type": "single_choice",
+    "question": "希望只把匹配指定前缀的静态路由发布进 OSPF，其他路由不发布，应使用下列哪种工具？",
+    "options": {
+      "A": "在接口上配置 traffic-filter inbound",
+      "B": "配置策略路由并指定下一跳",
+      "C": "在 OSPF 进程中使用 filter-policy export 过滤发布路由",
+      "D": "在 BGP 邻居上配置 route-policy"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "filter-policy export 作用于本设备向外发布的路由，可以按 ACL 或前缀列表只放行指定路由进入 OSPF。traffic-filter 过滤的是接口上转发的数据报文，不控制路由发布。策略路由改变的是报文转发路径，也不决定哪些路由被发布。BGP 邻居上的 route-policy 只影响 BGP 路由的收发，与 OSPF 发布无关。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "路由策略与路由控制",
+    "knowledgePoint": "路由策略应用",
+    "difficulty": "medium",
+    "tags": [
+      "filter-policy",
+      "OSPF",
+      "路由发布"
+    ],
+    "provenance": {
+      "questionId": "hcip821-route-policy-export-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据大纲第 3 页“路由策略与路由控制 / 路由控制案例”；对应「路由和流量控制 / 路由策略与路由控制 / 路由策略应用」；filter-policy 的 import/export 作用范围为设备实现的稳定语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；路由发布过滤的语义按设备命令行为核对，未复制第三方题目。",
+      "reviewDigest": "6248f57afded7897269801b1036598f68cd88ff3d82ba0d640ad5fda81e3bb82"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-pbr-priority-001",
+    "type": "single_choice",
+    "question": "接口上配置了策略路由，某个报文既匹配策略路由的条件，也在路由表中存在匹配的路由。默认情况下该报文如何转发？",
+    "options": {
+      "A": "按策略路由指定的下一跳转发",
+      "B": "按路由表的最长匹配转发",
+      "C": "丢弃报文",
+      "D": "复制报文并从两条路径同时转发"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "策略路由在路由表之前生效，匹配成功的报文按策略指定的下一跳或出接口转发，不再查路由表。只有未匹配任何策略路由条件时，才回退到路由表按最长匹配转发。丢弃通常来自策略中显式配置的 discard 动作或匹配后被拒绝。设备不会为普通单播报文自动复制成两份从两条路径发送。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "策略路由",
+    "difficulty": "medium",
+    "tags": [
+      "策略路由",
+      "转发",
+      "路由表"
+    ],
+    "provenance": {
+      "questionId": "hcip821-pbr-priority-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据大纲第 3 页“流量过滤与转发路径控制 / 策略路由”；对应「路由和流量控制 / 流量过滤与转发路径控制 / 策略路由」；策略路由优先于路由表为稳定语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；策略路由执行顺序按设备转发流程核对，未复制第三方题目。",
+      "reviewDigest": "0165d34fe8ba1932c9f952cb79e7abf5e453eeffbb9ef7862c6ae2e7849ccd7f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-rstp-alternate-001",
+    "type": "single_choice",
+    "question": "RSTP 中，替代端口（Alternate Port）的作用是什么？",
+    "options": {
+      "A": "为指定端口提供备份",
+      "B": "永久阻塞且不参与生成树计算",
+      "C": "直接连接终端并学习 MAC 地址",
+      "D": "为根端口提供备份，根端口失效时快速切换"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "替代端口收到的是其他网桥发来的更优 BPDU，它作为根端口的备份存在；根端口失效时，替代端口可以立即进入转发，不必重新经历完整的收敛过程。为指定端口提供备份的是备份端口。替代端口仍然参与 BPDU 处理，不是永久阻塞。直接连接终端、快速进入转发的是边缘端口。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "RSTP",
+    "difficulty": "medium",
+    "tags": [
+      "RSTP",
+      "端口角色",
+      "收敛"
+    ],
+    "provenance": {
+      "questionId": "hcip821-rstp-alternate-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据大纲第 3 页“RSTP 原理与配置”；对应「交换技术基础 / 生成树协议 / RSTP」；端口角色为 IEEE 802.1w 定义的稳定结论。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；RSTP 端口角色按标准定义核对，未复制第三方题目。",
+      "reviewDigest": "904923c46102d2bd7c9d6ee0a2da73a451bcb7b4442489a2afd4acba8f8f79d8"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-igmpv2-leave-001",
+    "type": "single_choice",
+    "question": "在 IGMPv2 中，主机离开组播组时发送什么报文，路由器收到后如何处理？",
+    "options": {
+      "A": "Leave 报文；路由器立即删除该组",
+      "B": "Leave 报文；路由器发送特定组查询，确认无成员后再删除",
+      "C": "Report 报文；路由器立即删除该组",
+      "D": "Query 报文；路由器等待 60 秒后删除"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IGMPv2 主机离组时发送 Leave Group 报文。路由器收到后不会立即删除组，而是向该组发送特定组查询；如果仍有成员，主机会回复报告，路由器继续维护该组，只有查询超时仍无响应才删除。立即删除可能误删仍有接收者的组。Report 用于加入或响应查询，不是离组报文。Query 由路由器发出，方向相反。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IGMP",
+    "knowledgePoint": "IGMP 工作原理",
+    "difficulty": "easy",
+    "tags": [
+      "IGMPv2",
+      "离组",
+      "组播"
+    ],
+    "provenance": {
+      "questionId": "hcip821-igmpv2-leave-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2236-igmpv2"
+      ],
+      "locator": "自编题；范围依据大纲第 4 页“IGMP 原理与配置”；对应「组播基础 / IGMP / IGMP 工作原理」；Leave Group 与特定组查询依据 RFC 2236 第 2.3 节与第 3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；IGMPv2 离组流程按 RFC 2236 原文核对，未复制第三方题目。",
+      "reviewDigest": "80931642a761199353b85a9683296a7914c32d7ea9ae19b838947f513d067bd0"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-pim-sm-spt-001",
+    "type": "single_choice",
+    "question": "PIM-SM 中，组播流量从共享树切换到最短路径树（SPT）的直接触发条件是什么？",
+    "options": {
+      "A": "RP 向源发送 Register-Stop",
+      "B": "接收者发送 IGMP Leave",
+      "C": "源向 RP 发送 Register 报文",
+      "D": "最后一跳路由器收到组播数据后，向源发送 Join 建立最短路径树"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "PIM-SM 默认允许最后一跳路由器在收到第一个组播数据包后发起 SPT 切换：它向源方向逐跳发送 Join，建立源到接收者的最短路径树，随后流量从共享树切到 SPT。Register-Stop 是 RP 通知源停止注册封装，不触发 SPT 切换。Leave 表示接收者离组。Register 是源把流量注册到 RP 的过程。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-SM",
+    "difficulty": "hard",
+    "tags": [
+      "PIM-SM",
+      "SPT",
+      "共享树"
+    ],
+    "provenance": {
+      "questionId": "hcip821-pim-sm-spt-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4601-pim-sm"
+      ],
+      "locator": "自编题；范围依据大纲第 4 页“PIM-SM”；对应「组播基础 / PIM / PIM-SM」；共享树到 SPT 切换依据 RFC 4601 第 3.3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；PIM-SM 切换过程按 RFC 4601 原文核对，未复制第三方题目。",
+      "reviewDigest": "45802ca69e59cc84d08382e24ed473405539314e67641b1770dac9ef2bcdf4d4"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-ndp-ns-001",
+    "type": "single_choice",
+    "question": "IPv6 节点需要解析目的地址对应的链路层地址时，使用哪种报文？",
+    "options": {
+      "A": "ARP 请求",
+      "B": "路由器通告",
+      "C": "邻居请求",
+      "D": "重定向"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "IPv6 使用邻居发现协议完成地址解析：节点发送邻居请求（NS），目标节点用邻居通告（NA）回复自己的链路层地址，从而取代了 IPv4 的 ARP。ARP 是 IPv4 的机制。路由器通告用于下发前缀、默认网关等参数。重定向用于通知主机存在更优的下一跳。",
+    "chapter": "IPv6 核心知识",
+    "knowledgeSection": "ICMPv6 与 NDP",
+    "knowledgePoint": "邻居发现",
+    "difficulty": "easy",
+    "tags": [
+      "IPv6",
+      "NDP",
+      "地址解析"
+    ],
+    "provenance": {
+      "questionId": "hcip821-ndp-ns-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4861-ndp"
+      ],
+      "locator": "自编题；范围依据大纲第 4 页“ICMPv6 和 NDP”；对应「IPv6 核心知识 / ICMPv6 与 NDP / 邻居发现」；NS/NA 地址解析依据 RFC 4861 第 4.3、4.4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；NDP 地址解析按 RFC 4861 原文核对，未复制第三方题目。",
+      "reviewDigest": "2df88bde0f72cf38ee4bcf02d1060106e08e0cb5cf5bfca35fdfc2caaf40fd2d"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-vrf-isolation-001",
+    "type": "single_choice",
+    "question": "VRF 的主要作用是什么？",
+    "options": {
+      "A": "在同一台设备上隔离不同 VPN 的路由表和转发实例",
+      "B": "对 VPN 报文进行加密",
+      "C": "为报文压入 MPLS 标签",
+      "D": "在设备之间建立隧道"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "VRF 为每个 VPN 维护独立的路由表和转发实例，使相同私网地址可以在不同 VPN 中重复使用而互不干扰。加密由 IPsec 等安全协议完成。压入 MPLS 标签是 MPLS 转发的工作。建立隧道依靠 GRE、IPsec 等技术，VRF 本身只负责隔离，不建立隧道。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VRF",
+    "difficulty": "easy",
+    "tags": [
+      "VRF",
+      "VPN",
+      "路由隔离"
+    ],
+    "provenance": {
+      "questionId": "hcip821-vrf-isolation-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4364-mpls-vpn"
+      ],
+      "locator": "自编题；范围依据大纲第 4 页“VRF 基本概念及应用”；对应「网络安全基础 / VPN 与 VRF / VRF」；VRF 隔离模型依据 RFC 4364 第 4.1 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；VRF 路由隔离结论按 RFC 4364 原文核对，未复制第三方题目。",
+      "reviewDigest": "caef71680426e31daa9f8a36207dbc86d72bbc7fee509eefd5ac815e8c18a9dc"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-ipsec-spd-001",
+    "type": "single_choice",
+    "question": "IPsec 处理一个需要出入本机的报文时，首先依据什么决定对它丢弃、绕过还是实施保护？",
+    "options": {
+      "A": "先查 ARP 表",
+      "B": "先查 MAC 地址表",
+      "C": "先查路由表，再查 ACL",
+      "D": "先查安全策略数据库（SPD），匹配丢弃、绕过或保护动作"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "IPsec 在出方向和入方向都先匹配安全策略数据库：SPD 中的策略规定哪些流量丢弃、哪些明文绕过、哪些需要 IPsec 保护；确定保护后再到安全关联数据库查找已协商的参数。ARP 表和 MAC 地址表只解决二层地址解析。路由表决定出接口和下一跳，但不决定是否实施 IPsec。",
+    "chapter": "网络安全基础",
+    "knowledgeSection": "VPN 与 VRF",
+    "knowledgePoint": "VPN 技术概述",
+    "difficulty": "easy",
+    "tags": [
+      "IPsec",
+      "SPD",
+      "VPN"
+    ],
+    "provenance": {
+      "questionId": "hcip821-ipsec-spd-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4301-ipsec"
+      ],
+      "locator": "自编题；范围依据大纲第 4 页“VPN 技术概述”；对应「网络安全基础 / VPN 与 VRF / VPN 技术概述」；SPD/SAD 处理顺序依据 RFC 4301 第 4.4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；IPsec 策略处理按 RFC 4301 原文核对，未复制第三方题目。",
+      "reviewDigest": "053b6be0f8cb3c6f3e191a9b657fde9b6b30fc994a12360726d26afe32ea209d"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-vrrp-preempt-001",
+    "type": "single_choice",
+    "question": "VRRP 备份组中，原 Master 的优先级为 120，Backup 的优先级为 100。原 Master 配置了抢占且抢占延迟为 20 秒。原 Master 故障恢复后会出现什么结果？",
+    "options": {
+      "A": "备份路由器立即抢占，原 Master 保持 Backup",
+      "B": "原 Master 永远保持 Backup",
+      "C": "原 Master 在 20 秒抢占延迟结束后重新成为 Master",
+      "D": "两台路由器同时成为 Master"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "原 Master 恢复后优先级 120 高于 Backup 的 100，且 Backup 已启用抢占并设置 20 秒延迟，因此延迟计时结束后原 Master 重新抢回 Master 角色。立即抢占忽略了配置的延迟。原 Master 的优先级更高，不会永久停留在 Backup。VRRP 通过优先级选举产生单一 Master，正常情况下不会出现双 Master。",
+    "chapter": "网络可靠性",
+    "knowledgeSection": "VRRP",
+    "knowledgePoint": "VRRP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "VRRP",
+      "抢占",
+      "优先级"
+    ],
+    "provenance": {
+      "questionId": "hcip821-vrrp-preempt-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc5798-vrrp"
+      ],
+      "locator": "自编题；范围依据大纲第 4 页“VRRP 原理与配置”；对应「网络可靠性 / VRRP / VRRP 原理与配置」；优先级与抢占依据 RFC 5798 第 6.4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；VRRP 抢占行为按 RFC 5798 原文核对，未复制第三方题目。",
+      "reviewDigest": "520a380e6f0bb799af6518fbab62bf58eb866883d52155316b96533ae4423f7a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-dhcp-dora-001",
+    "type": "single_choice",
+    "question": "DHCP 客户端首次申请地址时，四个报文的正确顺序是？",
+    "options": {
+      "A": "Discover → Offer → Request → Ack",
+      "B": "Offer → Discover → Request → Ack",
+      "C": "Discover → Request → Offer → Ack",
+      "D": "Request → Offer → Discover → Ack"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "客户端先广播 Discover 寻找可用的 DHCP 服务器，服务器回 Offer 提供地址参数，客户端再发 Request 正式请求该地址，服务器最后用 Ack 确认租约生效。把 Offer 放在 Discover 之前、把 Request 提到 Offer 之前，或让客户端先发 Request，都不符合 DHCP 的交互过程。",
+    "chapter": "网络服务与管理",
+    "knowledgeSection": "DHCP",
+    "knowledgePoint": "DHCP 原理与配置",
+    "difficulty": "easy",
+    "tags": [
+      "DHCP",
+      "DORA",
+      "地址分配"
+    ],
+    "provenance": {
+      "questionId": "hcip821-dhcp-dora-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2131-dhcp"
+      ],
+      "locator": "自编题；范围依据大纲第 5 页“DHCP 原理与配置”；对应「网络服务与管理 / DHCP / DHCP 原理与配置」；DORA 交互依据 RFC 2131 第 4.3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；DHCP 报文顺序按 RFC 2131 原文核对，未复制第三方题目。",
+      "reviewDigest": "749e46fcbd6850e205e1a086f28c3d1760f990b619d2bfbf8f9792edb2b19d22"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-capwap-channel-001",
+    "type": "single_choice",
+    "question": "在 AC 与 AP 组成的 WLAN 中，CAPWAP 协议如何处理控制信息和数据流量？",
+    "options": {
+      "A": "控制报文和数据报文共用同一条 CAPWAP 通道",
+      "B": "分别建立控制通道和数据通道，数据通道可单独实施保护",
+      "C": "只有数据通道，控制报文通过 SNMP 传递",
+      "D": "控制通道使用 TCP，数据通道使用 UDP"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "CAPWAP 在 AC 与 AP 之间分别建立控制通道和数据通道：控制通道承载配置、状态等管理信息，数据通道承载用户报文，两者可以分别管理和保护。把两者合并到一条通道会失去这种分离能力。控制信息不走 SNMP，SNMP 是网络管理协议。CAPWAP 本身基于 UDP，不存在控制走 TCP、数据走 UDP 的划分。",
+    "chapter": "大型 WLAN 组网架构",
+    "knowledgeSection": "大型 WLAN 组网",
+    "knowledgePoint": "组网架构与 CAPWAP",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN",
+      "CAPWAP",
+      "AC"
+    ],
+    "provenance": {
+      "questionId": "hcip821-capwap-channel-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc5415-capwap"
+      ],
+      "locator": "自编题；范围依据大纲第 5 页“大型 WLAN 组网概述 / 高可靠性技术”；对应「大型 WLAN 组网架构 / 大型 WLAN 组网 / 组网架构与 CAPWAP」；控制通道与数据通道依据 RFC 5415 第 1.3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；CAPWAP 通道模型按 RFC 5415 原文核对，未复制第三方题目。",
+      "reviewDigest": "c3546c96dd436debcf9a0bd349c6002de0df209819a1bb8ffde25375cd2ed385"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-vxlan-encap-001",
+    "type": "single_choice",
+    "question": "VXLAN 采用哪种封装方式，其 IANA 分配的目的 UDP 端口是多少？",
+    "options": {
+      "A": "MAC-in-UDP 封装，目的 UDP 端口 4789",
+      "B": "IP-in-IP 封装，协议号 4",
+      "C": "GRE 封装，协议号 47",
+      "D": "802.1Q 双层标签封装"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "VXLAN 把原始二层帧封装进 UDP 报文，用 VXLAN 头中的 VNI 标识租户网络，IANA 分配的目的 UDP 端口是 4789。IP-in-IP 使用 IP 协议号 4，GRE 使用协议号 47，二者都不是 VXLAN。双层 802.1Q 标签是 QinQ 的封装方式，用于运营商网络扩展 VLAN，不提供 VXLAN 的 VNI 语义。",
+    "chapter": "网络解决方案",
+    "knowledgeSection": "企业数通解决方案",
+    "knowledgePoint": "数据中心与 VXLAN",
+    "difficulty": "easy",
+    "tags": [
+      "VXLAN",
+      "数据中心",
+      "封装"
+    ],
+    "provenance": {
+      "questionId": "hcip821-vxlan-encap-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc7348-vxlan"
+      ],
+      "locator": "自编题；范围依据大纲第 5 页“企业数通解决方案概述 / 数据中心网络”；对应「网络解决方案 / 企业数通解决方案 / 数据中心与 VXLAN」；VXLAN 封装与 UDP 4789 依据 RFC 7348 第 5 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲独立命题；VXLAN 封装结论按 RFC 7348 原文核对，未复制第三方题目。",
+      "reviewDigest": "fd46e0c782436ecd4f0344258276e62ad131a95e64161c8209aafaabfe91799a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  }
+]

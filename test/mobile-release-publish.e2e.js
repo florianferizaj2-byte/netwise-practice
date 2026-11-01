@@ -6,6 +6,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { createApp } from '../server/index.js';
 import { createStore } from '../server/store.js';
+import { getReleaseTarget } from '../scripts/release-checks.mjs';
 
 const policy = JSON.parse(fs.readFileSync(new URL('../server/mobile-release.json', import.meta.url), 'utf8'));
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'aceexam-publish-check-'));
@@ -28,7 +29,9 @@ try {
   const old = await fetch(`${base}/api/mobile/version?version=0.4.5`).then((response) => response.json());
   assert.equal(old.forceUpdate, true); assert.equal(old.minimumVersion, policy.minimumVersion);
   assert.equal((await fetch(`${base}/api/mobile/version?version=${policy.latestVersion}`).then((response) => response.json())).forceUpdate, false);
-  assert.equal((await fetch(`${base}/app/version.json`).then((response) => response.json())).version, policy.latestVersion);
+  if (getReleaseTarget(process.cwd()) !== 'android')
+    assert.equal((await fetch(`${base}/app/version.json`).then((response) => response.json())).version, policy.latestVersion);
+  else assert.equal(fs.existsSync(path.resolve('dist/app')), false, 'Deferred mobile website must not be bundled');
   browser = await chromium.launch({ headless: true, proxy: { server: 'http://127.0.0.1:9', bypass: '127.0.0.1,localhost' } });
   const page = await browser.newPage({ viewport: { width: 1280, height: 850 } });
   const errors = []; page.on('pageerror', (error) => errors.push(error.message));

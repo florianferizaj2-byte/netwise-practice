@@ -14,13 +14,16 @@
     ],
     "analysis": "接入层直接连接 PC、电话、AP 等终端，并执行 VLAN、接入认证和边缘安全策略。",
     "chapter": "园区网络典型组网方案",
-    "knowledgePoint": "接入/汇聚/核心",
+    "knowledgePoint": "接入层设计",
     "difficulty": "easy",
     "tags": [
       "园区网络典型组网方案",
+      "网络层次设计",
+      "接入层设计",
       "接入/汇聚/核心"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "网络层次设计"
   },
   {
     "id": "hcia-v2-22-core-layer",
@@ -37,13 +40,16 @@
     ],
     "analysis": "核心层承担骨干转发，应保持高带宽、高可靠和简洁稳定的策略。",
     "chapter": "园区网络典型组网方案",
-    "knowledgePoint": "接入/汇聚/核心",
+    "knowledgePoint": "汇聚层与核心层",
     "difficulty": "easy",
     "tags": [
       "园区网络典型组网方案",
+      "网络层次设计",
+      "汇聚层与核心层",
       "接入/汇聚/核心"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "网络层次设计"
   },
   {
     "id": "hcia-v2-22-gateway-placement",
@@ -60,13 +66,16 @@
     ],
     "analysis": "汇聚层可集中承载用户 VLAN 网关，并结合冗余机制降低单点故障影响。",
     "chapter": "园区网络典型组网方案",
-    "knowledgePoint": "网关部署",
+    "knowledgePoint": "网关部署位置",
     "difficulty": "medium",
     "tags": [
       "园区网络典型组网方案",
+      "网关与可靠性设计",
+      "网关部署位置",
       "网关部署"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "网关与可靠性设计"
   },
   {
     "id": "hcia-v2-22-segmentation",
@@ -85,12 +94,15 @@
     ],
     "analysis": "VLAN、三层 ACL 和按业务制定的访问策略可共同限制横向访问并缩小故障与安全影响范围。",
     "chapter": "园区网络典型组网方案",
-    "knowledgePoint": "园区安全",
+    "knowledgePoint": "园区接入安全",
     "difficulty": "medium",
     "tags": [
       "园区网络典型组网方案",
+      "园区安全与运维",
+      "园区接入安全",
       "园区安全"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "园区安全与运维"
   }
 ]

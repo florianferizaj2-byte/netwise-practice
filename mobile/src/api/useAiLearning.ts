@@ -10,6 +10,7 @@ export function useAiLearning(userId:string|undefined,certificateId:string|null|
   const [error,setError]=useState(""),[busy,setBusy]=useState(false),[saveState,setSaveState]=useState("saved");
   const [live,setLive]=useState(false),[tick,setTick]=useState(Date.now()),[receivedAt,setReceivedAt]=useState(Date.now());
   const ref=useRef<AiLearningJob|null>(null),pending=useRef<Record<string,string[]>>({}),version=useRef(0),cursor=useRef(0);
+  const opening=useRef(false);
   const mounted=useRef(true),saving=useRef(false),conflict=useRef(false),expired=useRef(false),chain=useRef(Promise.resolve());
   const flushRef=useRef<()=>Promise<boolean>>(async()=>true),refreshRef=useRef<()=>Promise<void>>(async()=>{});
   const timer=useRef<ReturnType<typeof setTimeout>|null>(null),refreshing=useRef(false);
@@ -22,6 +23,7 @@ export function useAiLearning(userId:string|undefined,certificateId:string|null|
   };
   const apply=(next:AiLearningJob,ack=false)=>{
     if(!mounted.current||ref.current&&ref.current.id!==next.id)return;
+    if(ref.current?.id===next.id&&next.eventId<ref.current.eventId)return;
     if(!ack&&saving.current){setJob(j=>j?{...j,questions:next.questions,readyCount:next.readyCount,status:next.status}:next);return;}
     if(!ack&&Object.keys(pending.current).length&&version.current!==next.answersVersion){
       const same=Object.entries(pending.current).every(([id,a])=>JSON.stringify(a)===JSON.stringify(next.answers[id]||[]));
@@ -57,7 +59,7 @@ export function useAiLearning(userId:string|undefined,certificateId:string|null|
       const next=await mobileApi.aiLearningAction(current.id,"answers",{expectedVersion:version.current,answers:delta});
       if(!mounted.current||ref.current?.id!==current.id)return false;
       for(const [id,a] of Object.entries(delta))if(JSON.stringify(a)===JSON.stringify(pending.current[id]))delete pending.current[id];
-      version.current=next.answersVersion;apply(next,true);persist();return Object.keys(pending.current).length===0;
+      version.current=Math.max(version.current,next.answersVersion);apply(next,true);persist();return Object.keys(pending.current).length===0;
     }catch(e){
       if(mounted.current){
         if(text(e).includes("另一设备"))conflict.current=true;
@@ -69,7 +71,8 @@ export function useAiLearning(userId:string|undefined,certificateId:string|null|
   };
   flushRef.current=flush;
   const open=async(id:string)=>{
-    if(!await flushRef.current()){setError("请先同步当前暂存作答或处理冲突。");return;}
+    if(opening.current)return;opening.current=true;
+    if(!await flushRef.current()){opening.current=false;setError("请先同步当前暂存作答或处理冲突。");return;}
     setBusy(true);setError("");
     try{
       const next=await mobileApi.aiLearningJob(id);
@@ -85,8 +88,18 @@ export function useAiLearning(userId:string|undefined,certificateId:string|null|
           version.current=draft.version;
         }
       }catch{setError("本机暂存记录损坏，服务器记录仍保留。");}
-      ref.current=next;cursor.current=next.eventId;apply(next);
-    }catch(e){if(mounted.current)setError(text(e));}finally{if(mounted.current)setBusy(false);}
+      ref.current=next;cursor.current=next.eventId;apply(next);return next;
+    }catch(e){if(mounted.current)setError(text(e));}finally{opening.current=false;if(mounted.current)setBusy(false);}
+  };
+  const reload=async()=>{
+    if(!userId||!certificateId||preview)return;
+    setError("");
+    try{
+      const [next,list]=await Promise.all([mobileApi.aiLearningProfile(),mobileApi.aiLearningJobs()]);
+      if(!mounted.current)return;
+      setProfile(next);setJobs(list.jobs.filter(j=>j.kind===kind));
+      if(ref.current)await refreshRef.current();
+    }catch(e){if(mounted.current)setError(text(e));}
   };
   const reloadJobs=async()=>{
     const list=await mobileApi.aiLearningJobs();
@@ -152,15 +165,15 @@ export function useAiLearning(userId:string|undefined,certificateId:string|null|
   };
   const useServer=async()=>{
     if(!ref.current)return;
-    if(expired.current&&Object.keys(pending.current).length){
+    if(Object.keys(pending.current).length){
       try{
         await chain.current.catch(()=>{});
-        await AsyncStorage.setItem(key(ref.current.id)+":expired",JSON.stringify({version:version.current,answers:pending.current,archivedAt:new Date().toISOString()}));
-      }catch{setError("到期暂存归档失败，请保持当前页面并重试。");return;}
+        await AsyncStorage.setItem(key(ref.current.id)+(expired.current?":expired":":conflict"),JSON.stringify({version:version.current,answers:pending.current,archivedAt:new Date().toISOString()}));
+      }catch{setError("本机作答归档失败，请保持当前页面并重试。");return;}
     }
     pending.current={};conflict.current=false;expired.current=false;version.current=ref.current.answersVersion;
     setAnswers(ref.current.answers);setSaveState("saved");setError("");persist();
   };
   const remaining=job?.remainingMs===null||job?.remainingMs===undefined?null:Math.max(0,job.remainingMs-(job.waiting?0:Math.max(0,tick-receivedAt)));
-  return {profile,jobs,job,answers,error,setError,busy,setBusy,saveState,live,remaining,open,choose,action,submit,flush,reloadJobs,acceptCreated,useServer};
+  return {profile,jobs,job,answers,error,setError,busy,setBusy,saveState,live,remaining,open,choose,action,submit,flush,reloadJobs,reload,acceptCreated,useServer};
 }

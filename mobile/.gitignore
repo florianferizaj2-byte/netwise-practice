@@ -38,6 +38,10 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 
+# local native-module build output
+modules/*/android/build/
+modules/*/android/.cxx/
+
 # generated native folders
 /ios
 /android

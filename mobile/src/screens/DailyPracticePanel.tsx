@@ -5,6 +5,7 @@ import { PracticeScreen } from "./TabScreens";
 import { AnimatedPressable } from "../components/Motion";
 import { ScreenActivityProvider } from "../navigation/ScreenActivity";
 import { useThemedStyles, type ThemeColors } from "../theme";
+import type { AuthResponse } from '../api/client';
 import type { AppTab, NavigationOptions } from "../types";
 
 export function DailyPracticePanel({
@@ -13,7 +14,11 @@ export function DailyPracticePanel({
   preview,
   onClose,
   onNavigate,
+  user, certificates, onOpenCertificatePicker,
 }: {
+  user?: AuthResponse['user'];
+  certificates?: AuthResponse['certificates'];
+  onOpenCertificatePicker?: () => void;
   visible: boolean;
   active: boolean;
   preview: boolean;
@@ -86,6 +91,7 @@ export function DailyPracticePanel({
           <PracticeScreen
             key={revision}
             {...route}
+            user={user} certificates={certificates} onOpenCertificatePicker={onOpenCertificatePicker}
             preview={preview}
             onNavigate={navigate}
           />

@@ -96,7 +96,7 @@ test('slow hydration cannot replace fresh content; concurrent requests are coale
   let finishRead;
   let finishRequest;
   let calls = 0;
-  const storage = { getItem: () => new Promise((resolve) => { finishRead = resolve; }), setItem: async () => {} };
+  const storage = { getItem: (key) => key === ANNOUNCEMENT_CACHE_KEY ? new Promise((resolve) => { finishRead = resolve; }) : Promise.resolve(null), setItem: async () => {} };
   const client = new AnnouncementClient(storage, () => { calls += 1; return new Promise((resolve) => { finishRequest = resolve; }); });
   const hydration = client.hydrate();
   const refresh = client.refresh(true);

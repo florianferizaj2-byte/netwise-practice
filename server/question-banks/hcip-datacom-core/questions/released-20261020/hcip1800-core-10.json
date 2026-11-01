@@ -1,0 +1,1806 @@
+[
+  {
+    "id": "hcip821-5-2-2-001",
+    "type": "single_choice",
+    "question": "在华为设备上配置 MQC 时，关于流分类（traffic classifier）的职责，下列描述正确的是？",
+    "options": {
+      "A": "流分类同时定义匹配规则和丢弃、重标记等动作，流行为只负责把流分类应用到接口",
+      "B": "流分类必须先应用到接口，才能在流策略中被引用",
+      "C": "流分类只定义 if-match 匹配规则，本身不执行丢弃、重标记等动作",
+      "D": "流分类中的 if-match 只能引用 ACL，不能匹配 VLAN ID、802.1p 优先级或报文长度"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "流分类的职责只是用 if-match 描述“匹配什么样的报文”，丢弃、重标记、监管、统计等动作全部定义在流行为中，再由流策略把流分类与流行为绑定后应用。A 把动作写进了流分类，还颠倒了流策略与应用对象的关系；B 错误，应用到接口的是流策略，流分类本身不需要先应用；D 错误，if-match 既可引用 ACL，也可直接匹配 VLAN ID、802.1p、DSCP、报文长度等多种字段。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "MQC",
+    "difficulty": "easy",
+    "tags": [
+      "MQC",
+      "流分类",
+      "if-match"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-2-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / MQC」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / MQC」；流分类只做匹配、流行为承载动作、流策略负责绑定与应用的三段式分工属于设备公开配置语义，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "dcaead743fb02aed08b89e6b136d285452a7343195ab79a349f3584cc65254c4"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-2-002",
+    "type": "single_choice",
+    "question": "某流分类 c1 中同时配置了 if-match acl 3000 与 if-match vlan-id 100 两条规则。一个属于 VLAN 100、但不匹配 ACL 3000 的报文进入应用了该流策略的接口。华为设备的处理结果是什么？",
+    "options": {
+      "A": "该报文不命中 c1，流策略继续检查后续绑定的流分类",
+      "B": "该报文命中 c1，因为 VLAN 100 的条件已经满足",
+      "C": "该报文被直接丢弃，因为流分类条件互相冲突",
+      "D": "设备报错，同一流分类内不允许出现不同类型的 if-match"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "同一流分类内不同类型（ACL、VLAN ID 等）的 if-match 之间是“与”关系，必须全部满足才命中；报文只满足 VLAN 条件，因此不命中 c1，流策略按顺序继续检查后续流分类。B 把“与”误当成“或”；C 混淆了匹配与动作，流分类不命中只表示不执行该分类绑定的动作，并不丢包；D 错误，同一流分类允许配置多个不同类型的 if-match。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "MQC",
+    "difficulty": "medium",
+    "tags": [
+      "MQC",
+      "流分类",
+      "if-match"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-2-002",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / MQC」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / MQC」；同一流分类内不同类型 if-match 为“与”、同类型为“或”属于设备公开配置语义，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "45981b8f906e8b847f2c4b422379a3a51b0a611f203a53ed7ca32513a7f9513c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-2-003",
+    "type": "single_choice",
+    "question": "华为设备上一个流策略按顺序绑定了流分类 c1、c2、c3，三者匹配范围存在重叠且各自绑定了不同的流行为。一个同时满足 c1 和 c2 匹配条件的报文经过该流策略时，下列描述正确的是？",
+    "options": {
+      "A": "c1、c2、c3 绑定的流行为会依次全部执行",
+      "B": "匹配范围最精确的流分类优先生效",
+      "C": "三个流分类中随机选择一个执行其流行为",
+      "D": "按绑定顺序先命中 c1，只执行 c1 绑定的流行为，不再检查 c2 与 c3"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "流策略内部按流分类的绑定顺序依次匹配，报文命中第一个流分类后即按该分类绑定的流行为处理，不再继续匹配后面的流分类，因此重叠部分由排在前面的分类决定。A 错误，同一报文只执行一个流分类对应的流行为，不会逐条累加；B 错误，匹配顺序由绑定顺序决定，不存在“最精确优先”；C 错误，匹配过程是确定性的，不会随机选择。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "MQC",
+    "difficulty": "medium",
+    "tags": [
+      "MQC",
+      "流策略",
+      "匹配顺序"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-2-003",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / MQC」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / MQC」；流策略中多个流分类按绑定顺序匹配、命中即停止属于设备公开配置语义，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "52a23afdddbc740caba3611ba1a29dc594b5bdbde1bb7258511f1ff639475758"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-2-004",
+    "type": "single_choice",
+    "question": "关于华为设备 MQC 中流量监管（car）与流量整形（shaping）的差异，下列描述正确的是？",
+    "options": {
+      "A": "两者都对超出速率的报文先缓存，再择机发送",
+      "B": "流量监管对超出承诺速率的报文直接丢弃或重新标记优先级，流量整形把超出部分缓存后平滑发送",
+      "C": "流量整形只能应用在接口入方向，流量监管只能应用在出方向",
+      "D": "流量监管会引入排队时延，流量整形不会引入任何时延"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "流量监管在令牌不足时对报文执行丢弃或降级（重标记）动作，不缓存报文；流量整形把超出速率的报文放入缓存队列，等令牌充足后按承诺速率发送，因此会引入一定时延但输出更平滑。A 把两者的缓存行为混为一谈，监管并不缓存；C 方向说法错误，监管常用于入方向、整形用于出方向，并非题述的互斥限制；D 恰好说反，引入排队时延的是整形而不是监管。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "MQC",
+    "difficulty": "medium",
+    "tags": [
+      "MQC",
+      "流量监管",
+      "流量整形"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-2-004",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / MQC」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / MQC」；流量监管丢弃/重标记超额报文、流量整形缓存超额报文后平滑发送属于设备公开配置语义，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "04c3cc55c0bf545cd0fe790361b7b4433b8b5a516e8788134e66079d3ab2fac4"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-2-005",
+    "type": "single_choice",
+    "question": "华为设备上对某流配置流量监管 car cir 8000 kbps cbs 20000 bytes。某时刻令牌桶中只剩 500 字节令牌，一个 1500 字节的报文到达，因令牌不足暂不能发送。若此后没有新报文到达，至少需要等待多长时间桶中令牌才够发送该报文？",
+    "options": {
+      "A": "0.125 毫秒",
+      "B": "8 毫秒",
+      "C": "1 毫秒",
+      "D": "1.5 毫秒"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "先换算令牌补充速率：8000 kbps = 8 000 000 bit/s，除以 8 得 1 000 000 字节/秒，即 1000 字节/毫秒。发送 1500 字节的报文还差 1500 − 500 = 1000 字节令牌，需要 1000 ÷ 1000 = 1 毫秒。0.125 毫秒是把 8000 kbps 直接当成 8000 字节/毫秒，漏掉了比特到字节的换算，速率被放大 8 倍；8 毫秒多除了一次 8，把速率算成 125 字节/毫秒；1.5 毫秒按报文全长 1500 字节计算，忽略了桶中已有的 500 字节令牌。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "MQC",
+    "difficulty": "hard",
+    "tags": [
+      "MQC",
+      "流量监管",
+      "令牌桶计算"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-2-005",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / MQC」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / MQC」；令牌桶按 CIR 补充令牌、报文长度不足时等待补足属于流量监管的公开模型，数值由作者按 kbps 到字节/毫秒换算独立复算，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "1e0f20b447193aea35aec9feca00f4d1644458f6b77a023f084d791fd2c7f372"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-2-006",
+    "type": "single_choice",
+    "question": "华为设备接口出方向发生拥塞时，关于 PQ（优先队列）的调度行为，下列描述正确的是？",
+    "options": {
+      "A": "严格按优先级调度，高优先级队列非空时总是优先发送，低优先级队列可能长时间得不到调度",
+      "B": "各队列按权重轮询，任何队列都不会被饿死",
+      "C": "高优先级队列只有在其他队列全部为空时才能发送",
+      "D": "PQ 会对超出速率的报文重新标记 DSCP，从而缓解拥塞"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "PQ 采用严格优先级调度：只要高优先级队列有报文，就先发送高优先级队列的报文，队列拥塞时低优先级报文还可能被丢弃，因此低优先级业务可能长期得不到调度。B 描述的是 WFQ、WRR 等加权调度，与严格优先级不同；C 说反了，PQ 不需要等低优先级队列为空；D 错误，重标记 DSCP 是流行为中的标记动作，不属于队列调度行为，也不能缓解拥塞。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "MQC",
+    "difficulty": "medium",
+    "tags": [
+      "MQC",
+      "拥塞管理",
+      "PQ"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-2-006",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / MQC」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / MQC」；PQ 严格优先级调度及其饿死风险属于公开的队列调度结论，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "41e67c333e84838dae4f9a37a0886f55c10362fca2757c071c73ae74b7129106"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-2-007",
+    "type": "single_choice",
+    "question": "关于 WRED 与尾丢弃（Tail Drop）在拥塞避免上的差异，下列描述正确的是？",
+    "options": {
+      "A": "WRED 只在队列完全填满后才丢弃所有新到报文",
+      "B": "WRED 在队列长度超过下限后按丢弃概率提前丢弃部分报文，可降低全局同步风险并对不同优先级区别对待",
+      "C": "WRED 通过缓存全部超额报文来消除拥塞",
+      "D": "WRED 只能作用于入方向，尾丢弃只能作用于出方向"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "WRED 在队列长度达到下限后开始按概率随机丢弃报文，长度越大丢弃概率越高，并可对不同优先级设置不同门限，从而避免多条 TCP 流同时超时重传造成的全局同步。A 描述的是尾丢弃；C 错误，WRED 的核心是提前丢弃而不是无限缓存，缓存也无法消除拥塞；D 错误，WRED 与尾丢弃都作用于出方向队列的拥塞避免环节，方向划分不成立。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "MQC",
+    "difficulty": "medium",
+    "tags": [
+      "MQC",
+      "拥塞避免",
+      "WRED"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-2-007",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / MQC」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / MQC」；WRED 在队列门限之间按概率提前丢弃、与尾丢弃形成对比属于公开的拥塞避免结论，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "921ecb8f7f6346a8dbd070122f9c95b44decd409436540c929eb1b227228687b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-2-008",
+    "type": "single_choice",
+    "question": "某流分类 c1 使用 if-match acl 3000，ACL 3000 中只有 rule 5 deny tcp destination-port eq 80 与 rule 10 permit ip。一个目的端口为 80 的 TCP 报文进入应用了该流策略的接口。下列描述正确的是？",
+    "options": {
+      "A": "该报文被 ACL 丢弃，不会进入后续转发流程",
+      "B": "该报文命中 c1，并执行 c1 绑定的流行为",
+      "C": "设备提示配置冲突，流分类不能引用包含 deny 规则的 ACL",
+      "D": "该报文不命中 c1，流策略继续匹配其他流分类；若都未命中则按原有转发流程处理"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "流分类引用 ACL 时，ACL 的 permit 与 deny 只表示报文是否匹配该流分类：permit 表示匹配，deny 表示不匹配，并不会因为 deny 规则而丢弃报文。目的端口 80 的报文命中 deny 规则，因此不属于 c1，流策略继续检查后续流分类，全部未命中时按正常流程转发。A 混淆了“匹配结果”和“过滤动作”；B 把 deny 当成命中；C 错误，引用含 deny 规则的 ACL 是合法配置。若要丢弃，需在流行为中配置 deny 动作。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "MQC",
+    "difficulty": "hard",
+    "tags": [
+      "MQC",
+      "ACL",
+      "流分类"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-2-008",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / MQC」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / MQC」；流分类引用 ACL 时 permit/deny 仅表示是否匹配该分类、真正的丢弃动作在流行为中，属于设备公开配置语义，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "7d3ea0aa5ee140a398a25a381c6af7b288dcc4928dec925089e9fee07abd74f8"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-2-009",
+    "type": "single_choice",
+    "question": "管理员在接口 GE0/0/1 入方向应用流策略后执行 display traffic policy statistics interface GE0/0/1 inbound，发现某流分类的 Matched 计数持续增长，Passed 计数不增长，Dropped 计数同步增长。最可能的原因是什么？",
+    "options": {
+      "A": "该流分类绑定的流行为中配置了丢弃动作，命中报文被丢弃",
+      "B": "流策略应用方向配反，统计到的是反方向报文",
+      "C": "ACL 未匹配任何报文，Matched 计数实际是接口总流量",
+      "D": "设备不支持统计功能，计数为随机值"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Matched 表示命中该流分类的报文数，Passed 与 Dropped 分别表示经流行为处理后放行与丢弃的报文数；Matched 增长而 Passed 不增长、Dropped 同步增长，说明命中的报文全部被流行为丢弃。B 错误，命令已限定 inbound 且 Matched 有增长，说明方向与匹配都正常；C 错误，未匹配时 Matched 不会增长；D 错误，能区分 Matched、Passed、Dropped 三个计数说明统计功能已经生效。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "MQC",
+    "difficulty": "medium",
+    "tags": [
+      "MQC",
+      "验证命令",
+      "统计"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-2-009",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / MQC」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / MQC」；流策略统计中 Matched/Passed/Dropped 的含义与流行为丢弃动作的对应关系属于设备公开命令语义，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "3883bfdd1bac48cf2ad4e865335c16cb9a2f5d42945113cd6b1f0b975d8536cf"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-2-010",
+    "type": "single_choice",
+    "question": "在华为设备的转发流程中，MQC 的流量监管（car）与基于队列的拥塞管理分别主要作用于哪个环节？",
+    "options": {
+      "A": "两者都在出方向队列调度阶段生效",
+      "B": "两者都在入方向完成，与队列无关",
+      "C": "流量监管通常在报文进入设备或进入队列之前完成速率检查，拥塞管理在出方向队列调度时按优先级发送报文",
+      "D": "流量监管只在出方向生效，拥塞管理只在入方向生效"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "流量监管在报文到达的早期完成令牌检查，对超额报文直接丢弃或重标记，防止超额流量进入后续环节；拥塞管理发生在出方向，当接口发送速率小于到达速率时把报文放入不同优先级队列并按调度算法发送。A 把监管也放到队列调度阶段，监管并不依赖队列；B 错误，拥塞管理必然发生在出方向队列；D 把两者的位置说反。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "MQC",
+    "difficulty": "medium",
+    "tags": [
+      "MQC",
+      "流量监管",
+      "拥塞管理"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-2-010",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / MQC」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / MQC」；流量监管在报文进入队列前完成速率检查、拥塞管理在出方向队列调度中生效，属于设备公开转发流程语义，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "830ace31a232db0a773f668f84663e2d8ec29e872f6caf6a6e0300218186f76a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-2-011",
+    "type": "single_choice",
+    "question": "关于 MQC 流策略与策略路由（PBR）的区别，下列描述正确的是？",
+    "options": {
+      "A": "两者都只能修改报文的转发下一跳，不能对报文做过滤",
+      "B": "MQC 流策略只能匹配路由前缀，PBR 只能匹配报文五元组",
+      "C": "PBR 必须与流分类、流行为配合使用，MQC 不需要",
+      "D": "MQC 通过流分类匹配报文并执行流行为中的重标记、监管、丢弃等多种动作，PBR 侧重为匹配的报文指定转发路径"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "MQC 是通用的报文处理框架，流行为中可配置重标记、流量监管、统计、丢弃、重定向等动作；PBR 的目标是按策略为报文指定下一跳、出接口等转发行为，属于转发路径控制。A 错误，MQC 可以做过滤与多种处理，不止改下一跳；B 错误，MQC 匹配的是报文特征而非路由前缀；C 错误，PBR 通过策略节点与 ACL 匹配报文，不需要流分类、流行为，反倒是 MQC 才使用这套模型。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "MQC",
+    "difficulty": "medium",
+    "tags": [
+      "MQC",
+      "策略路由",
+      "机制对比"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-2-011",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / MQC」与同页「策略路由」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / MQC」；MQC 以流分类加流行为处理报文、PBR 侧重指定转发路径，属于设备公开配置语义，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "a13f98fa6f19dc80b8e52b74ccbdeda37ac663f002cfb82e248c638bc9efb4db"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-2-012",
+    "type": "single_choice",
+    "question": "华为交换机需要在接口入方向把属于 VLAN 100 的报文的内层 802.1p 优先级重标记为 5 后再转发。下列做法正确的是？",
+    "options": {
+      "A": "在流分类中配置 remark 8021p 5，在流行为中配置 if-match vlan-id 100",
+      "B": "在流分类中配置 if-match vlan-id 100，在流行为中配置 remark 8021p 5，再由流策略绑定并应用到接口入方向",
+      "C": "只需在接口下配置 traffic-filter 引用一个 ACL，即可完成 802.1p 重标记",
+      "D": "802.1p 重标记只能在全局视图配置，无法通过流策略实现"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "MQC 的分工是流分类负责匹配、流行为负责动作：先用 if-match vlan-id 100 选出报文，再在流行为中用 remark 8021p 5 修改优先级，最后经流策略绑定并应用到接口入方向。A 把匹配与动作的位置对调，配置无法成立；C 错误，traffic-filter 只按 ACL 做 permit/deny 过滤，不能重标记优先级；D 错误，重标记正是流行为的典型动作之一。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "MQC",
+    "difficulty": "medium",
+    "tags": [
+      "MQC",
+      "重标记",
+      "802.1p"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-2-012",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / MQC」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / MQC」；在流行为中使用 remark 8021p 重标记内层优先级、流分类只负责匹配，属于设备公开配置语义，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "0fbab35afaca03c6c380811c29b182b67e9b47bdc784003ad5d8f68f14f31c18"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-2-013",
+    "type": "single_choice",
+    "question": "下列哪一项不是华为设备 MQC 流行为（traffic behavior）可以配置的动作？",
+    "options": {
+      "A": "修改路由表中目的网段 10.1.1.0/24 的出接口",
+      "B": "对命中报文重新标记 DSCP 或 802.1p 优先级",
+      "C": "对命中报文执行流量监管",
+      "D": "对命中报文开启统计计数"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "流行为作用于被流分类选中的报文，可配置重标记、流量监管、统计、丢弃、重定向等动作；修改路由表中某网段的出接口属于路由控制范畴（如静态路由或 Route-Policy 的 apply 动作），不作用于单个报文，因此不是流行为的动作。B 是重标记动作，改变报文优先级字段；C 是流量监管动作，对超额流量限速；D 是统计动作，用于计数与验证，三者都属于流行为。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "MQC",
+    "difficulty": "easy",
+    "tags": [
+      "MQC",
+      "流行为",
+      "反向设问"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-2-013",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / MQC」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / MQC」；流行为可选动作包含重标记、监管、统计、丢弃，修改路由表属于路由控制，二者的边界属于设备公开配置语义，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "2ae82ff769bfa60670cc48d3c9951815674aa05eacc5b1f9a9d274be447102f0"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-2-014",
+    "type": "single_choice",
+    "question": "某企业出口路由器需要对语音流量优先转发、对 P2P 下载限速，并丢弃对指定网段的访问。仅使用 MQC 实现时，下列方案最合理的是？",
+    "options": {
+      "A": "为三类需求分别创建三个流策略并应用到同一接口的同一方向，设备会自动合并为一个策略",
+      "B": "只创建一个流分类匹配所有流量，在同一个流行为中同时配置优先队列、限速与丢弃三种动作",
+      "C": "用接口下的 traffic-filter 引用一个 ACL 完成全部三类需求",
+      "D": "创建多个流分类分别匹配语音、P2P 与指定网段，在各自流行为中配置优先队列、流量监管与丢弃，再绑定到同一流策略并应用到接口"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "MQC 的做法是用不同流分类区分业务，再为每个分类绑定对应的流行为，最后把多个“流分类＋流行为”组合进同一个流策略并应用到接口，这样各类业务得到不同处理。A 错误，同一接口同一方向通常只应用一个流策略，多个策略不会自动合并；B 错误，一个流分类匹配所有流量就无法区分业务，三种动作会作用于全部报文；C 错误，traffic-filter 只有 permit/deny 过滤能力，无法实现优先队列与限速。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "MQC",
+    "difficulty": "hard",
+    "tags": [
+      "MQC",
+      "场景应用",
+      "流策略"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-2-014",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / MQC」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / MQC」；以多个流分类区分业务并绑定不同流行为、再合入同一流策略，属于设备公开配置模型，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "1c4299b8d013c079a66e146d9b9ebb667a3374ba5ccaf93ce38d0865d8a0db11"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-2-015",
+    "type": "single_choice",
+    "question": "关于华为设备上 MQC 流策略的应用位置，下列描述正确的是？",
+    "options": {
+      "A": "一个流策略只能应用在一个接口上，应用后不能再应用到其他接口",
+      "B": "流策略只能应用在 Trunk 类型的接口上",
+      "C": "同一流策略可以应用到多个接口，也可在设备支持的情况下应用到 VLAN 或全局",
+      "D": "流策略必须同时应用在入方向与出方向才会生效"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "流策略是可复用的配置对象，定义一次后可以应用到多个接口，也可按设备支持情况应用到 VLAN 或全局范围，从而减少重复配置。A 错误，流策略可以重复应用；B 错误，Access、Trunk 等接口都可应用流策略，与链路类型无关；D 错误，流策略只需应用在需要控制的方向，单向应用即可生效。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "MQC",
+    "difficulty": "easy",
+    "tags": [
+      "MQC",
+      "流策略应用",
+      "VLAN"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-2-015",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / MQC」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / MQC」；流策略可复用到多个接口并可按设备支持应用到 VLAN 或全局，属于设备公开配置语义，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "3cfe939abe3b56189aa9fd187679348ae58867b4900661cefd4755c48a8313f4"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-2-016",
+    "type": "single_choice",
+    "question": "执行 display traffic classifier user-defined 时看到某流分类下配置了 if-match acl 3001，而 ACL 3001 尚未创建。在华为设备上该流分类的匹配结果是什么？",
+    "options": {
+      "A": "匹配所有报文，相当于没有限制",
+      "B": "不匹配任何报文，引用不存在的 ACL 时该条件无法命中",
+      "C": "设备自动创建 ACL 3001 并允许所有报文通过",
+      "D": "该流分类会被设备自动删除"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "if-match 引用一个不存在的 ACL 时，该条件没有可供匹配的规则集合，因此任何报文都无法命中这个流分类；流策略会继续检查后续流分类，若都未命中则按原有流程转发，不会因此丢包。A 与 C 都误以为缺失的 ACL 等同于 permit any；D 错误，流分类配置仍然存在，只是匹配不到报文，需要补建 ACL 或修正引用。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "MQC",
+    "difficulty": "medium",
+    "tags": [
+      "MQC",
+      "ACL引用",
+      "故障定位"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-2-016",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / MQC」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / MQC」；if-match 引用不存在的 ACL 时条件无法命中、流策略继续向下匹配，属于设备公开配置语义，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "24034b3d91e287eebd50be042167c6635b47013fb025ea9ebe47ca0c8e18e445"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-2-017",
+    "type": "single_choice",
+    "question": "同一流分类中配置了两条同类型条件 if-match dscp ef 与 if-match dscp af11。关于该流分类的匹配结果，下列描述正确的是？",
+    "options": {
+      "A": "两条条件必须同时满足才命中，因此该流分类永远匹配不到报文",
+      "B": "只有第一条 if-match dscp ef 生效，第二条被忽略",
+      "C": "同类型条件之间是“或”关系，DSCP 为 ef 或 af11 的报文都属于该流分类",
+      "D": "设备报错，同一流分类内不能配置两条同类型的 if-match"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "流分类内同类型条件之间是“或”关系，不同类型条件之间是“与”关系；两条 if-match dscp 属于同类型，因此匹配 ef 或 af11 任一取值的报文都会命中该流分类。A 把“或”当成“与”，并据此得出永远不命中的错误结论；B 错误，同类型条件不是只取第一条；D 错误，同一流分类允许配置多条同类型条件，正是用“或”来覆盖多个取值。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "MQC",
+    "difficulty": "medium",
+    "tags": [
+      "MQC",
+      "if-match",
+      "条件关系"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-2-017",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / MQC」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / MQC」；同一流分类内同类型 if-match 为“或”、不同类型为“与”，属于设备公开配置语义，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "775d82e7d79048f708a7ebe14d6d6ad678ef339576394a577a728e5a1239f438"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-2-018",
+    "type": "single_choice",
+    "question": "华为设备上配置 car cir 10000 kbps cbs 20000 bytes（按 1 字节等于 8 比特换算，忽略报文长度与取整影响）。某流在接口长时间空闲后突然以 20 Mbps 的速率持续发送，理论上可以保持多长时间不因超出承诺速率而被丢弃？",
+    "options": {
+      "A": "16 毫秒",
+      "B": "2 毫秒",
+      "C": "160 毫秒",
+      "D": "20 毫秒"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "承诺速率为 10000 kbps = 10 000 000 bit/s，实际速率 20 Mbps 比它高 10 Mbps，即每秒多消耗 10 000 000 比特令牌。桶容量 20000 字节 = 160 000 比特，因此可支撑 160 000 ÷ 10 000 000 = 0.016 秒 = 16 毫秒。2 毫秒是把桶容量误当 20000 比特后的结果；160 毫秒把超额速率误算成 1 Mbps；20 毫秒按桶容量 20000 字节除以 1000 字节/毫秒计算，忽略了实际速率是承诺速率的 2 倍、超额速率只有 10 Mbps。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "MQC",
+    "difficulty": "hard",
+    "tags": [
+      "MQC",
+      "流量监管",
+      "突发计算"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-2-018",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / MQC」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / MQC」；空闲后桶满、超额速率消耗 CBS 的时长由作者按比特与字节换算独立复算，令牌桶模型属于设备公开配置语义，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "06c26140819528849185367b863a5e49d331b6073355d49ec81cb2048e348c81"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-3-001",
+    "type": "single_choice",
+    "question": "在华为设备上创建 ACL 时，下列编号与类型的对应关系正确的是？",
+    "options": {
+      "A": "2000–2999 为高级 ACL，3000–3999 为基本 ACL",
+      "B": "3000–3999 为高级 ACL，4000–4999 为二层 ACL",
+      "C": "4000–4999 为基本 ACL，6000–6999 为二层 ACL",
+      "D": "6000–6999 为高级 ACL，2000–2999 为用户 ACL"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "华为设备按编号区分 ACL 类型：基本 ACL 为 2000–2999，高级 ACL 为 3000–3999，二层 ACL 为 4000–4999，用户 ACL 为 6000–6999。A 把基本与高级的编号对调；C 把二层 ACL 的编号说成基本 ACL，又把用户 ACL 说成二层 ACL；D 同样错位，6000–6999 是用户 ACL，2000–2999 是基本 ACL。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "流量过滤",
+    "difficulty": "easy",
+    "tags": [
+      "ACL",
+      "编号范围",
+      "流量过滤"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-3-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / 流量过滤」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / 流量过滤」；ACL 按编号段区分基本、高级、二层与用户类型的规则属于设备公开配置语义，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "0dd0d1717b46ad436c3b1fb6f1ae6611626e0dce523573179a1bf3ecfe8e547d"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-3-002",
+    "type": "single_choice",
+    "question": "华为设备上配置 rule permit source 192.168.16.0 0.0.15.255。下列哪个源地址会被该规则匹配？",
+    "options": {
+      "A": "192.168.32.10",
+      "B": "192.168.8.5",
+      "C": "192.168.15.255",
+      "D": "192.168.31.200"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "通配符 0.0.15.255 的第三字节为 15（二进制 00001111），表示第三字节的低 4 位可变；第四字节 255 表示整个字节可变。因此第二字节固定为 168、第三字节取 16–31、第四字节取 0–255，地址范围是 192.168.16.0–192.168.31.255，即 192.168.16.0/20，192.168.31.200 落在范围内。192.168.32.10 超出第三字节上界，192.168.8.5 低于下界，192.168.15.255 的第三字节为 15，不在 16–31 之内。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "流量过滤",
+    "difficulty": "medium",
+    "tags": [
+      "ACL",
+      "通配符",
+      "地址计算"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-3-002",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / 流量过滤」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / 流量过滤」；通配符中 0 位必须匹配、1 位任意的语义属于设备公开配置规则，地址范围由作者按二进制掩码独立复算，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "b1a0e55c4087b6b60e0d8cfe15035003a8b966fa956f2f1778b4e6f9b717f7b0"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-3-003",
+    "type": "single_choice",
+    "question": "华为设备接口下配置 traffic-filter inbound acl 3000，ACL 3000 中只有一条 rule 5 deny tcp destination-port eq 23。一个目的端口为 80 的 TCP 报文从该接口进入，结果是什么？",
+    "options": {
+      "A": "报文未命中任何规则，按 ACL 的默认动作放行",
+      "B": "报文被丢弃，因为 ACL 末尾隐含拒绝所有报文",
+      "C": "报文被丢弃，因为 ACL 中存在 deny 规则就会全部拒绝",
+      "D": "设备提示 ACL 规则不完整，接口下的 traffic-filter 不生效"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "该报文的目的是 80 端口，不匹配 rule 5 的 deny tcp destination-port eq 23，ACL 中又没有其他规则，华为 ACL 在所有规则都未命中时的默认动作是 permit，因此报文被放行。B 把其他厂商或防火墙的隐含拒绝行为套用到华为 ACL；C 错误，deny 规则只对其匹配的报文生效；D 错误，只配置部分规则的 ACL 可以正常被引用。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "流量过滤",
+    "difficulty": "medium",
+    "tags": [
+      "ACL",
+      "默认动作",
+      "traffic-filter"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-3-003",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / 流量过滤」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / 流量过滤」；华为 ACL 全部规则未命中时默认 permit，属于设备公开配置语义，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "1617eaac033f06470918fd8f2cd01675943a5ddadb049a46f4c774f131d67eae"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-3-004",
+    "type": "single_choice",
+    "question": "关于华为设备上基本 ACL 与高级 ACL 的匹配能力，下列描述正确的是？",
+    "options": {
+      "A": "基本 ACL 可以匹配源地址、目的地址和协议号",
+      "B": "高级 ACL 只能匹配源地址，不能匹配端口号",
+      "C": "基本 ACL 只能匹配源 IP 地址；高级 ACL 可以匹配源/目的地址、协议号、源/目的端口等",
+      "D": "两者匹配能力完全相同，只是编号区间不同"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "基本 ACL 的规则只有源地址与通配符，用于粗粒度的源地址过滤；高级 ACL 可以同时匹配源地址、目的地址、协议号、源端口、目的端口、TCP 标志等字段，能力明显更强。A 把高级 ACL 的能力安到基本 ACL 上；B 恰好说反，端口匹配正是高级 ACL 的特点；D 错误，能力差异正是两类 ACL 并存的原因。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "流量过滤",
+    "difficulty": "easy",
+    "tags": [
+      "ACL",
+      "基本ACL",
+      "高级ACL"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-3-004",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / 流量过滤」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / 流量过滤」；基本 ACL 只匹配源地址、高级 ACL 可匹配五元组等字段，属于设备公开配置语义，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "c140ebc7a0cc3bb86dc582f204c59a10b01431759af62854dc538cf67090ea97"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-3-005",
+    "type": "single_choice",
+    "question": "关于华为设备接口下 traffic-filter 与 traffic-policy 的区别，下列描述正确的是？",
+    "options": {
+      "A": "traffic-filter 可以引用流策略完成重标记与监管，traffic-policy 只能过滤报文",
+      "B": "traffic-filter 直接引用 ACL 对报文做 permit/deny 过滤，traffic-policy 引用流策略可执行重标记、监管、统计等多种动作",
+      "C": "两者都只能应用在接口出方向",
+      "D": "traffic-filter 只对路由表中的路由生效，不影响数据报文"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "traffic-filter 是接口下的报文过滤命令，直接绑定 ACL，按规则对报文做允许或拒绝；traffic-policy 绑定的是 MQC 流策略，可执行重标记、流量监管、统计、丢弃等多种动作，能力更丰富。A 把两者的能力对调；C 错误，两者都可在入方向或出方向应用；D 错误，traffic-filter 处理的正是数据报文，过滤路由表的是 filter-policy 等路由过滤工具。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "流量过滤",
+    "difficulty": "medium",
+    "tags": [
+      "traffic-filter",
+      "traffic-policy",
+      "MQC"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-3-005",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / 流量过滤」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / 流量过滤」；traffic-filter 直接引用 ACL 过滤、traffic-policy 引用流策略执行多种动作，属于设备公开配置语义，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "8226d09d35c3994fa984e45a17b550e6e1bb5fdf510add3fb0cf024c68e7633a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-3-006",
+    "type": "single_choice",
+    "question": "华为设备上 ACL 3000 现有 rule 5 permit ip source 10.1.2.0 0.0.0.255 与 rule 15 deny ip，随后又配置了 rule 10 deny ip source 10.1.1.5 0。一个源地址为 10.1.1.5、目的地址为 172.16.1.1 的报文匹配该 ACL 的结果是什么？",
+    "options": {
+      "A": "被 rule 5 允许，因为 rule 5 的编号最小",
+      "B": "被 rule 15 拒绝，因为 deny 规则优先于 permit 规则",
+      "C": "设备报错，rule 编号必须连续配置",
+      "D": "被 rule 10 拒绝，因为 ACL 按编号从小到大匹配，rule 10 先于 rule 15 命中"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "ACL 规则按编号从小到大依次匹配，命中即停止：rule 5 只放行 10.1.2.0/24 的源地址，10.1.1.5 不匹配；接着匹配 rule 10，其源地址 10.1.1.5 与通配符 0 精确命中，报文被拒绝，不再检查 rule 15。A 忽略了 rule 5 的源地址范围；B 错误，ACL 不是 deny 优先，而是编号顺序优先；C 错误，rule 编号可以留间隔，正是为了后续插入规则。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "流量过滤",
+    "difficulty": "hard",
+    "tags": [
+      "ACL",
+      "规则顺序",
+      "通配符"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-3-006",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / 流量过滤」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / 流量过滤」；ACL 按规则编号升序匹配、命中即停止、编号可留间隔，属于设备公开配置语义，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "dd3519d8dc9c66e1eda54e2754320c6b1b319ac7618940d6651a4033537ac452"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-3-007",
+    "type": "single_choice",
+    "question": "华为设备上配置 time-range work 08:00-18:00 working-day，并在 ACL 3000 中配置 rule 5 deny tcp destination-port eq 80 time-range work。当前为周日 20:00，某用户访问某服务器的 80 端口。下列描述正确的是？",
+    "options": {
+      "A": "被拒绝，因为规则已经配置并生效",
+      "B": "被允许，因为时间段名称未生效，规则被忽略后 ACL 默认拒绝",
+      "C": "规则在该时间不生效，报文继续匹配后续规则；若没有其他规则命中则按 ACL 默认动作放行",
+      "D": "设备会自动把规则改为永久生效"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "引用 time-range 的 ACL 规则只在该时间段处于活动状态时参与匹配；周日 20:00 不在 08:00-18:00 的工作日范围内，rule 5 此时不生效，报文继续匹配后续规则，若没有其他规则命中则按华为 ACL 的默认动作 permit 放行。A 忽略了时间段条件；B 结论碰巧是“允许”但理由错误，时间段未生效时规则只是不参与匹配，并不会让 ACL 默认动作变成拒绝；D 错误，设备不会改写时间段配置。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "流量过滤",
+    "difficulty": "medium",
+    "tags": [
+      "ACL",
+      "时间段",
+      "time-range"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-3-007",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / 流量过滤」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / 流量过滤」；引用 time-range 的 ACL 规则仅在时间段内参与匹配、未命中时按默认 permit 处理，属于设备公开配置语义，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "9bf137be1db39fe5bb3911fee0b2e42bb95d52202ecf8c471729f2269a52b393"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-3-008",
+    "type": "single_choice",
+    "question": "在华为设备的高级 ACL 中配置 rule permit tcp source 172.16.0.0 0.0.255.255 destination 192.168.1.0 0.0.0.255，该规则匹配的报文特征是什么？",
+    "options": {
+      "A": "源地址属于 172.16.0.0/16、目的地址属于 192.168.1.0/24 的 TCP 报文",
+      "B": "源地址属于 172.16.0.0/24、目的地址属于 192.168.1.0/16 的 TCP 报文",
+      "C": "源地址为 172.16.0.0、目的地址为 192.168.1.0 的 TCP 报文",
+      "D": "只匹配源地址、不检查目的地址的 TCP 报文"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "通配符中为 0 的位必须与配置地址一致，为 1 的位可以是任意值：源地址通配符 0.0.255.255 表示前两个字节固定、后两个字节任意，即 172.16.0.0/16；目的地址通配符 0.0.0.255 表示前三个字节固定，即 192.168.1.0/24；规则还限定了协议为 TCP。B 把两段通配符的范围对调；C 把通配符当成 0 处理，忽略了可变位；D 错误，规则中给出了 destination 子句，目的地址必然参与匹配。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "流量过滤",
+    "difficulty": "medium",
+    "tags": [
+      "ACL",
+      "通配符",
+      "源目地址"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-3-008",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / 流量过滤」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / 流量过滤」；高级 ACL 中 source/destination 后接通配符的匹配语义属于设备公开配置规则，掩码范围由作者独立复算，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "5c2c6ff963a4273c7c2964726df1b934234c402ad1ed8011e2d8be2bb4bc1aec"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-3-009",
+    "type": "single_choice",
+    "question": "华为设备上二层 ACL（编号 4000–4999）可以匹配下列哪组字段？",
+    "options": {
+      "A": "源 IP 地址与目的 IP 地址",
+      "B": "TCP 源端口与目的端口",
+      "C": "AAA 用户组与时间范围",
+      "D": "源 MAC 地址、目的 MAC 地址与以太网帧类型"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "二层 ACL 工作在数据链路层，规则基于源 MAC 地址、目的 MAC 地址和以太网帧类型等字段进行匹配，常用于二层转发场景的报文过滤。A 与 B 属于三层、四层字段，应由高级 ACL 匹配；C 是用户 ACL（6000–6999）结合 AAA 的能力，不是二层 ACL 的匹配字段。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "流量过滤",
+    "difficulty": "easy",
+    "tags": [
+      "ACL",
+      "二层ACL",
+      "MAC地址"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-3-009",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / 流量过滤」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / 流量过滤」；二层 ACL 基于源/目的 MAC 与以太网帧类型匹配，属于设备公开配置语义，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "fe8e9c3b9fc95689985c37f1a802fb25f899166af2b862e1bbf7b4b9dc57fe03"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-3-010",
+    "type": "single_choice",
+    "question": "管理员在华为交换机接口 GE0/0/1 上配置 traffic-filter inbound acl 3000，希望阻断从该接口进入的、源地址属于 10.1.1.0/24 的报文，其中 ACL 3000 的 rule 5 为 deny ip source 10.1.1.0 0.0.0.255。测试发现这些报文仍能通过。最可能的原因是什么？",
+    "options": {
+      "A": "ACL 3000 的编号应改为 2000–2999 才能过滤数据报文",
+      "B": "配置被应用到了错误的接口方向，或该接口并非报文实际进入的接口",
+      "C": "华为设备的 traffic-filter 只在出方向生效",
+      "D": "ACL 中必须同时配置 permit 规则，否则整个 ACL 不生效"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "traffic-filter inbound 只对从该接口进入设备的报文生效，如果报文实际从其他接口进入，或者配置被误加到 outbound 方向，过滤就不会命中，这是此类“配置正确但不生效”的最常见原因。A 错误，3000–3999 的高级 ACL 完全可以过滤数据报文；C 错误，traffic-filter 支持 inbound 与 outbound 两个方向；D 错误，ACL 可以只包含 deny 规则，未命中时按默认 permit 处理。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "流量过滤",
+    "difficulty": "medium",
+    "tags": [
+      "traffic-filter",
+      "故障定位",
+      "接口方向"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-3-010",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / 流量过滤」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / 流量过滤」；traffic-filter inbound 只处理从该接口进入的报文，方向或接口不符则不生效，属于设备公开配置语义，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "172f5e14e27b8e3fbe867ce47ff57d98ea51baf7af1bf0ce2cb9447863ce7994"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-3-011",
+    "type": "single_choice",
+    "question": "华为设备上用户 ACL（编号 6000–6999）的主要用途是什么？",
+    "options": {
+      "A": "基于 AAA 的用户或用户组对报文进行匹配，常用于对特定用户下发访问控制",
+      "B": "基于源 MAC 地址过滤二层报文",
+      "C": "基于 VLAN ID 与 802.1p 优先级过滤报文",
+      "D": "只用于匹配路由表中的路由前缀"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "用户 ACL 在普通 ACL 规则之外增加了基于用户、用户组的匹配条件，需要与 AAA 配合，把登录用户身份与报文关联起来，从而对特定用户实施访问控制。B 是二层 ACL 的能力；C 属于二层或 MQC 流分类的匹配字段；D 错误，用户 ACL 匹配的是用户身份相关的报文，路由前缀过滤应使用 IP-Prefix List 等路由过滤工具。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "流量过滤",
+    "difficulty": "easy",
+    "tags": [
+      "ACL",
+      "用户ACL",
+      "AAA"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-3-011",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / 流量过滤」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / 流量过滤」；用户 ACL 结合 AAA 的用户或用户组进行匹配，属于设备公开配置语义，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "b56dd17326a1912adf8d60a3044681e333cb942813db56f5bdef5125691ab5bf"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-3-012",
+    "type": "single_choice",
+    "question": "华为设备上基本 ACL 的规则 rule 5 permit source 10.1.1.0 0.0.0.255 与 rule 5 permit source 10.1.1.0 0.0.0.0 的区别是什么？",
+    "options": {
+      "A": "前者只匹配 10.1.1.0 一个地址，后者匹配整个 10.1.1.0/24",
+      "B": "两者完全等价，都匹配 10.1.1.0/24",
+      "C": "前者匹配 10.1.1.0/24 网段，后者只匹配 10.1.1.0 这一个地址",
+      "D": "后者非法，通配符不能全部为 0"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "通配符 0.0.0.255 表示最后一个字节任意，因此匹配 10.1.1.0–10.1.1.255 整个 /24 网段；通配符 0.0.0.0 表示四个字节都必须与配置地址一致，只匹配 10.1.1.0 这一个地址。A 把两者的范围对调；B 错误，一个通配符末字节可变、一个完全固定，范围不同；D 错误，通配符全 0 是合法的精确匹配写法。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "流量过滤",
+    "difficulty": "medium",
+    "tags": [
+      "ACL",
+      "通配符",
+      "精确匹配"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-3-012",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / 流量过滤」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / 流量过滤」；通配符 0.0.0.0 表示精确匹配单个地址、0.0.0.255 表示末字节任意，属于设备公开配置语义，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "a5b1bac25705c15107ca977ce65aed9ec79d48be7dc2b5abe7a1f0ed960b3432"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-3-013",
+    "type": "single_choice",
+    "question": "在华为设备的高级 ACL 中要匹配源地址属于 10.1.1.0/24 的 ICMP 报文，下列配置正确的是？",
+    "options": {
+      "A": "rule 5 permit tcp destination-port eq icmp",
+      "B": "rule 5 permit icmp source 10.1.1.0 0.0.0.255",
+      "C": "rule 5 permit udp destination-port eq 1",
+      "D": "rule 5 permit ip protocol icmp-type 8"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "ICMP 是独立的三层协议，华为高级 ACL 用协议关键字 icmp 表示匹配 ICMP 报文，再配合 source 与通配符限定源地址，因此 rule 5 permit icmp source 10.1.1.0 0.0.0.255 正确。A 把 ICMP 当成 TCP 的端口，协议层与字段都不对；C 把 ICMP 当成 UDP 端口 1，同样混淆了协议号与端口号；D 语法与语义都不成立，ip 表示任意 IP 报文，icmp-type 需要与 icmp 协议关键字配合使用。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "流量过滤",
+    "difficulty": "medium",
+    "tags": [
+      "ACL",
+      "ICMP",
+      "规则配置"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-3-013",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / 流量过滤」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / 流量过滤」；高级 ACL 以协议关键字 icmp 匹配 ICMP 报文，属于设备公开配置语义，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "ecd849fee29a01ba997fd957bed12e437c416e89e546eaa0f8c60c8269e6bd58"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-3-014",
+    "type": "single_choice",
+    "question": "华为路由器接口 GE0/0/1 入方向配置 traffic-filter inbound acl 3000，ACL 3000 只有一条 rule 5 deny ip destination 224.0.0.5 0。该接口运行 OSPF，使用 224.0.0.5 发送 Hello 报文。下列描述正确的是？",
+    "options": {
+      "A": "只丢弃用户数据，OSPF Hello 使用单播发送因而不受影响",
+      "B": "OSPF 邻居关系不受影响，因为 OSPF 报文优先于 ACL 处理",
+      "C": "所有组播报文都会被丢弃，包括目的地址 224.0.0.6 的报文",
+      "D": "目的地址为 224.0.0.5 的 OSPF Hello 被丢弃，邻居关系无法建立或中断"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "224.0.0.5 是 OSPF 的 AllSPFRouters 组播地址，属于 224.0.0.0/24 本地链路控制块，OSPF Hello 以该地址为目的地址发出；接口入方向 traffic-filter 命中 deny ip destination 224.0.0.5 0 后，这些 Hello 会被丢弃，邻居无法建立或已建立的邻居超时中断。A 错误，Hello 是组播报文而非单播；B 错误，ACL 在转发流程中先于协议报文处理，不存在协议优先于 ACL 的规则；C 错误，规则只精确匹配 224.0.0.5，目的地址 224.0.0.6 的报文不受影响。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "流量过滤",
+    "difficulty": "hard",
+    "tags": [
+      "ACL",
+      "组播",
+      "OSPF",
+      "traffic-filter"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-3-014",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc5771-multicast-ipv4",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / 流量过滤」；技术依据 RFC 5771 第 4 节（Local Network Control Block 224.0.0.0/24）与 RFC 2328 第 9.5 节（AllSPFRouters 地址 224.0.0.5 承载 Hello），接口 ACL 过滤导致邻居中断属于设备公开转发行为。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与上述公开标准独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "8a7e269f72774bea960d39f7bb8961e0d2bd1fae4ae599f983592d18f430c541"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-3-015",
+    "type": "single_choice",
+    "question": "华为设备上配置 rule deny ip source 192.168.0.0 0.0.3.255。该规则拒绝的源地址范围是？",
+    "options": {
+      "A": "192.168.0.0–192.168.0.255",
+      "B": "192.168.0.0–192.168.1.255",
+      "C": "192.168.0.0–192.168.3.255",
+      "D": "192.168.0.0–192.168.255.255"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "通配符 0.0.3.255 的第三字节为 3（二进制 00000011），表示第三字节只有最低 2 位可变，可取 0、1、2、3；第四字节 255 表示整字节可变。因此范围为 192.168.0.0–192.168.3.255，即 192.168.0.0/22，共 4×256 = 1024 个地址。A 只取了第三字节为 0 的情况；B 的第三字节只取 0–1，少算一位；D 把通配符当成 0.0.255.255，夸大了范围。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "流量过滤",
+    "difficulty": "hard",
+    "tags": [
+      "ACL",
+      "通配符",
+      "地址范围计算"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-3-015",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / 流量过滤」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / 流量过滤」；通配符按二进制位决定可变范围，0.0.3.255 对应 /22，地址范围由作者按位展开独立复算，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "50ef18f0303db359d8851e9c3a5e251f21ee87b3d052e0ca42ddcbcca1414ee7"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-3-016",
+    "type": "single_choice",
+    "question": "管理员在华为设备上用 ACL 拒绝源地址属于 239.0.0.0/8 的组播报文。关于 239.0.0.0/8 的地址属性，下列描述正确的是？",
+    "options": {
+      "A": "属于管理范围（Administratively Scoped）地址，可在组织内部按需划分使用范围",
+      "B": "属于本地网络控制地址块，只能在单个网段内使用且路由器不转发",
+      "C": "属于 SSM（指定源组播）专用地址块",
+      "D": "属于 GLOP 地址块，由自治系统号映射生成"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IPv4 组播地址块中，239.0.0.0/8 是管理范围（Administratively Scoped）地址，类似私有地址，组织可自行划分边界并在内部使用。B 描述的是 224.0.0.0/24 本地网络控制块；C 的 SSM 地址块是 232.0.0.0/8；D 的 GLOP 地址块是 233.0.0.0/8。三者与 239.0.0.0/8 的用途和范围都不同。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "流量过滤",
+    "difficulty": "medium",
+    "tags": [
+      "ACL",
+      "组播地址",
+      "地址范围"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-3-016",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc5771-multicast-ipv4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / 流量过滤」；技术依据 RFC 5771 第 4 节（Local Network Control Block 224.0.0.0/24）、第 8 节（SSM 232/8）、第 9 节（GLOP 233/8）、第 10 节（Administratively Scoped 239/8）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲与 RFC 5771 独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "4e3fc2d75925d6bb3c9e10b8c9f778aaa5a21b264ab0276fc4b53dd6a57cd126"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-3-017",
+    "type": "single_choice",
+    "question": "华为高级 ACL 的规则中使用 established 关键字时，匹配的是什么报文？",
+    "options": {
+      "A": "仅匹配 TCP 建立连接时发送的第一个 SYN 报文",
+      "B": "匹配 TCP 首部中 ACK 或 RST 标志位置位的报文，常用于只放行已建立连接的返回流量",
+      "C": "匹配所有 UDP 报文，与 TCP 标志位无关",
+      "D": "匹配 ICMP 差错报文中的目的不可达消息"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "established 是对 TCP 标志位的匹配条件，报文 TCP 首部中的 ACK 或 RST 标志位置位时才命中，因此常配合源/目的地址与端口，放行已建立连接的双向流量而拒绝主动发起的连接。A 错误，SYN 报文通常不置 ACK 位，会被 established 条件排除；C 错误，established 只对 TCP 有意义；D 错误，ICMP 没有 TCP 标志位，该条件无法匹配 ICMP 报文。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "流量过滤",
+    "difficulty": "medium",
+    "tags": [
+      "ACL",
+      "established",
+      "TCP标志"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-3-017",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / 流量过滤」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / 流量过滤」；established 关键字匹配 TCP 首部 ACK/RST 置位的报文，属于设备公开配置语义，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "6b9d077716103857845e38811d2e61da2e440aa5d349fdb9778a0f92d5ab909c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-5-2-3-018",
+    "type": "single_choice",
+    "question": "ACL 3000 中依次配置 rule 5 deny tcp destination-port eq 80 与 rule 10 permit ip。管理员原本只想阻断 10.1.1.0/24 访问 Web，结果发现所有网段访问 80 端口的 TCP 报文都被阻断。问题出在哪里？",
+    "options": {
+      "A": "rule 10 应放在 rule 5 之前，才能只阻断指定网段",
+      "B": "华为 ACL 中 permit ip 会自动覆盖前面的 deny 规则",
+      "C": "ACL 3000 属于基本 ACL，不能匹配端口号",
+      "D": "rule 5 缺少 source 地址限制，匹配了所有源地址访问 80 端口的 TCP 报文"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "rule 5 只写了 deny tcp destination-port eq 80，没有 source 子句，相当于源地址任意，因此任何网段访问 80 端口的 TCP 报文都会命中并被拒绝。要只阻断 10.1.1.0/24，应在该规则中增加 source 10.1.1.0 0.0.0.255。A 错误，调换顺序只会让 permit ip 先放行全部报文，起不到阻断作用；B 错误，ACL 按编号顺序匹配，后面的 permit 不会覆盖前面的 deny；C 错误，3000–3999 正是可以匹配端口的高级 ACL。",
+    "chapter": "路由和流量控制",
+    "knowledgeSection": "流量过滤与转发路径控制",
+    "knowledgePoint": "流量过滤",
+    "difficulty": "hard",
+    "tags": [
+      "ACL",
+      "规则范围",
+      "故障定位"
+    ],
+    "provenance": {
+      "questionId": "hcip821-5-2-3-018",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「流量过滤与转发路径控制 / 流量过滤」，对应三级目录「路由和流量控制 / 流量过滤与转发路径控制 / 流量过滤」；缺少 source 子句等价于源地址任意、ACL 按编号顺序匹配，属于设备公开配置语义，来源包内没有对应的 IETF 标准文档，故范围仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "441bed96144bab464090da31ee417314beb0efe7635bdd86187bef4cac77eb54"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-1-001",
+    "type": "single_choice",
+    "question": "RSTP 定义了四种端口角色，下列组合正确的是？",
+    "options": {
+      "A": "根端口、指定端口、Alternate 端口、Backup 端口",
+      "B": "根端口、指定端口、阻塞端口、监听端口",
+      "C": "根端口、备份根端口、转发端口、学习端口",
+      "D": "主端口、从端口、边缘端口、普通端口"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "RSTP 保留根端口与指定端口，并新增替代端口（Alternate）与备份端口（Backup），共四种端口角色。B 把 STP 的阻塞、监听状态当成角色；C 混入了端口状态名称，RSTP 并没有“备份根端口”这一角色；D 的“边缘端口”是端口的一种属性而非角色，“主/从端口”也不是生成树的角色划分。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "RSTP",
+    "difficulty": "easy",
+    "tags": [
+      "RSTP",
+      "端口角色",
+      "生成树"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-1-001",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「RSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / RSTP」；根端口、指定端口、Alternate、Backup 四种角色依据公开的 IEEE 802.1w/802.1D-2004 标准结论，该标准文本为收费文档、无公开可打开版本，故仅引用官方大纲，未编造标准链接。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲与公开的标准结论独立命题，未复制任何第三方题目正文或标准原文。",
+      "reviewDigest": "8ac069af992e0e8da293bcaffb4ff802608b9f1761002178ebbb5776eb7c7807"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-1-002",
+    "type": "single_choice",
+    "question": "华为交换机运行 RSTP 时，关于 BPDU 的发送与邻居失效判断，下列描述正确的是？",
+    "options": {
+      "A": "只有根桥周期性发送 BPDU，非根桥只在收到 BPDU 后转发",
+      "B": "收到 BPDU 后才回应，因此 RSTP 没有周期性发送机制",
+      "C": "每台交换机按 Hello 时间（默认 2 秒）周期性发送 BPDU；连续 3 个 Hello 时间收不到上游 BPDU 即认为邻居失效",
+      "D": "必须连续 20 秒收不到 BPDU 才认为邻居失效"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "RSTP 中每台交换机都按 Hello 时间周期性发送 BPDU（默认 2 秒），不再像 STP 那样只由根桥产生、其他桥转发；若连续 3 个 Hello 时间（默认 6 秒）收不到上游 BPDU，就认为邻居失效并立即重新计算。A 与 B 描述的是 STP 的 BPDU 产生与转发方式；D 的 20 秒是 STP 的 Max Age 默认值，RSTP 的失效判断已缩短为 3 个 Hello 时间。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "RSTP",
+    "difficulty": "medium",
+    "tags": [
+      "RSTP",
+      "BPDU",
+      "Hello计时器"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-1-002",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「RSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / RSTP」；RSTP 各桥按 Hello 时间发送 BPDU、连续 3 个 Hello 时间未收到即判定邻居失效，依据公开的 IEEE 802.1w/802.1D-2004 标准结论，标准文本为收费文档，故仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲与公开的标准结论独立命题，未复制任何第三方题目正文或标准原文。",
+      "reviewDigest": "b50da2de798360eb8ed2093cdf19c95140fa1bd1295203750c30718e6b9b34d5"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-1-003",
+    "type": "single_choice",
+    "question": "RSTP 中 Proposal/Agreement 机制的作用是什么？",
+    "options": {
+      "A": "用于协商根桥的优先级",
+      "B": "用于在共享网段上选举指定端口",
+      "C": "用于同步 MSTP 的区域名称与修订级别",
+      "D": "在点到点链路上通过提议与同意握手，使下游端口无需等待 Forward Delay 即可快速进入转发"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "RSTP 在上游指定端口发送 Proposal 置位的 BPDU，下游端口同意后回送 Agreement，双方同步后下游端口可立即进入转发，从而跳过 STP 的 Listening、Learning 等待时间，实现快速收敛。A 错误，根桥由优先级与桥 MAC 比较决定，不通过该机制协商；B 错误，Proposal/Agreement 依赖点到点链路，共享网段上的指定端口选举并不使用它；C 错误，区域参数同步属于 MSTP 配置一致性检查，与该握手无关。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "RSTP",
+    "difficulty": "medium",
+    "tags": [
+      "RSTP",
+      "P/A机制",
+      "快速收敛"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-1-003",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「RSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / RSTP」；Proposal/Agreement 在点到点链路上同步并跳过 Forward Delay，依据公开的 IEEE 802.1w/802.1D-2004 标准结论，标准文本为收费文档，故仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲与公开的标准结论独立命题，未复制任何第三方题目正文或标准原文。",
+      "reviewDigest": "df3de0aec634c94e96f31d1fc357067bc1ed97ceb2aa79e1a722929a4fbb3cc0"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-1-004",
+    "type": "single_choice",
+    "question": "关于 RSTP 的 Alternate 端口与 Backup 端口，下列描述正确的是？",
+    "options": {
+      "A": "两者都用于连接终端主机，因此都直接进入转发状态",
+      "B": "Alternate 端口提供到根桥的替代路径，可替代根端口；Backup 端口提供到同一网段的备份路径，可替代指定端口",
+      "C": "Alternate 端口用于替代指定端口，Backup 端口用于替代根端口",
+      "D": "两者正常工作时都处于 Forwarding 状态"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Alternate 端口是从其他桥收到更优 BPDU 的端口，它保留了到根桥的另一条路径，可在根端口失效时接替；Backup 端口是同一网段上本机另一个端口为指定端口时形成的冗余端口，可在指定端口失效时接替。A 错误，连接终端的边缘端口才直接转发，两种替代角色都处于 Discarding；C 把两者的替代对象说反；D 错误，替代端口不转发用户流量，只有角色切换后才进入转发。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "RSTP",
+    "difficulty": "medium",
+    "tags": [
+      "RSTP",
+      "Alternate端口",
+      "Backup端口"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-1-004",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「RSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / RSTP」；Alternate 替代根端口、Backup 替代指定端口的定义依据公开的 IEEE 802.1w/802.1D-2004 标准结论，标准文本为收费文档，故仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲与公开的标准结论独立命题，未复制任何第三方题目正文或标准原文。",
+      "reviewDigest": "8245ffcff8729052e744eb753c923da4eb3df472df8f8987dfe1e0c93dc30f39"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-1-005",
+    "type": "single_choice",
+    "question": "与 STP 相比，RSTP 检测拓扑变化的方式有什么不同？",
+    "options": {
+      "A": "RSTP 中非边缘端口从 Discarding 或 Learning 进入 Forwarding 即视为拓扑变化，不再依赖 TC 计时器等待；STP 需要依靠拓扑变化通知与计时器",
+      "B": "RSTP 取消了拓扑变化通知，因此永远不会刷新 MAC 地址表项",
+      "C": "RSTP 只在根桥上检测拓扑变化，其他交换机不参与",
+      "D": "RSTP 完全依靠 Max Age 超时判断拓扑变化，与 STP 相同"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "RSTP 把“非边缘端口开始转发”本身作为拓扑变化的判据，并立即向其他端口泛洪拓扑变化信息，同时刷新相关 MAC 表项，因此不需要像 STP 那样等待计时器。B 错误，RSTP 仍会泛洪拓扑变化并刷新 MAC 表；C 错误，任何交换机检测到端口状态变化都可以发起；D 错误，Max Age 超时用于邻居失效判断，与拓扑变化检测是不同机制。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "RSTP",
+    "difficulty": "hard",
+    "tags": [
+      "RSTP",
+      "拓扑变化",
+      "MAC表刷新"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-1-005",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「RSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / RSTP」；RSTP 以非边缘端口进入转发作为拓扑变化判据并立即泛洪，依据公开的 IEEE 802.1w/802.1D-2004 标准结论，标准文本为收费文档，故仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲与公开的标准结论独立命题，未复制任何第三方题目正文或标准原文。",
+      "reviewDigest": "a43ca600fdce6411b470a46343892cd4790f0314db6f35bed4a4886b02fde088"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-1-006",
+    "type": "single_choice",
+    "question": "华为交换机在接入端口上配置 stp bpdu-protection 后，若该端口收到 BPDU，会发生什么？",
+    "options": {
+      "A": "端口被选举为根端口并继续转发",
+      "B": "端口保持 Forwarding 状态，但不再发送 BPDU",
+      "C": "端口被置为 error-down，需要人工恢复或配置自动恢复后才能继续转发",
+      "D": "设备立即重启以重新计算生成树"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "BPDU 保护用于连接终端的边缘端口：正常情况下这些端口不应收到 BPDU，一旦收到说明链路上接入了交换机，端口会被置为 error-down 并停止转发，以避免非法设备影响生成树拓扑，需要人工恢复或配置自动恢复定时器。A 错误，收到 BPDU 不会让该端口成为根端口；B 错误，端口会停止转发而不是保持 Forwarding；D 错误，保护动作只针对单个端口，不会重启设备。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "RSTP",
+    "difficulty": "medium",
+    "tags": [
+      "RSTP",
+      "BPDU保护",
+      "边缘端口"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-1-006",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「RSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / RSTP」；边缘端口收到 BPDU 即被置为 error-down 的 BPDU 保护行为属于设备公开配置语义，无对应公开 IETF 标准，故仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲与设备公开的配置语义独立命题，未复制任何第三方题目正文。",
+      "reviewDigest": "0b7c1e6deb2891bbf3be8f7d9bc69599d135f13b91e5aef7c47717e4f3f60f42"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-1-007",
+    "type": "single_choice",
+    "question": "在华为交换机指定端口上配置 stp root-protection 后，若该端口收到优先级更高的 BPDU，会发生什么？",
+    "options": {
+      "A": "端口成为新的根端口，设备重新参与根桥选举",
+      "B": "端口进入 Discarding 状态、不再转发报文，从而保护当前根桥的地位",
+      "C": "设备自动把本机桥优先级降到最低以竞争根桥",
+      "D": "端口被置为 error-down，必须重启设备才能恢复"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "根保护部署在根桥的指定端口上，正常情况下这些端口不应收到更优 BPDU；一旦收到，说明下游存在优先级更高的桥，端口会进入 Discarding 状态并保持，防止根桥被抢占导致拓扑震荡。A 错误，根保护的目的正是不让该端口接受更优 BPDU；C 错误，设备不会自动修改优先级，那会加剧竞争；D 错误，根保护使端口进入 Discarding 而不是 error-down，BPDU 不再更优后可恢复。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "RSTP",
+    "difficulty": "medium",
+    "tags": [
+      "RSTP",
+      "根保护",
+      "BPDU"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-1-007",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「RSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / RSTP」；指定端口收到更优 BPDU 后进入 Discarding 的根保护行为属于设备公开配置语义，无对应公开 IETF 标准，故仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲与设备公开的配置语义独立命题，未复制任何第三方题目正文。",
+      "reviewDigest": "a3f36fae174b30fd61d41d396735f6ae01db4cf46d86290afc501c71130761dc"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-1-008",
+    "type": "single_choice",
+    "question": "RSTP 中在根端口和 Alternate 端口上配置环路保护（loop-protection）的作用是什么？",
+    "options": {
+      "A": "防止用户私自接入交换机形成环路",
+      "B": "检测到环路后自动关闭整个 VLAN 的转发",
+      "C": "收到优先级更高的 BPDU 时直接丢弃该 BPDU",
+      "D": "当这些端口长时间收不到 BPDU 时不再转为指定端口转发，而是进入 Discarding，避免上游链路单向故障引发环路"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "根端口与 Alternate 端口依赖持续收到上游 BPDU 来确认链路正常；若上游链路出现单向故障，端口可能因收不到 BPDU 而超时并转为指定端口开始转发，从而形成环路。环路保护让这些端口在长时间收不到 BPDU 时进入 Discarding 并告警，等待 BPDU 恢复。A 描述的是 BPDU 保护的作用；B 错误，保护动作针对端口而非关闭整个 VLAN；C 错误，丢弃更优 BPDU 是根保护的表现，不是环路保护。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "RSTP",
+    "difficulty": "hard",
+    "tags": [
+      "RSTP",
+      "环路保护",
+      "单向故障"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-1-008",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「RSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / RSTP」；根端口/Alternate 端口长时间收不到 BPDU 时进入 Discarding 的环路保护行为属于设备公开配置语义，无对应公开 IETF 标准，故仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲与设备公开的配置语义独立命题，未复制任何第三方题目正文。",
+      "reviewDigest": "1ab1ab5f7967dc9496a4b5cb6be673fcc57b6e26020c6acd0fd303de7b9c9383"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-1-009",
+    "type": "single_choice",
+    "question": "三台华为交换机 SW1、SW2、SW3 的桥优先级分别为 4096、32768、32768，桥 MAC 地址分别为 00e0-fc00-0001、00e0-fc00-0002、00e0-fc00-0003，运行 RSTP 且各链路开销相同。根桥是哪一台？",
+    "options": {
+      "A": "SW1",
+      "B": "SW2",
+      "C": "SW3",
+      "D": "无法确定，必须再比较各端口的路径开销"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "根桥选举先比较桥优先级，数值越小越优：SW1 为 4096，小于 SW2、SW3 的 32768，因此 SW1 直接成为根桥，无需再比较 MAC 地址。B 与 C 的优先级相同且都大于 SW1 的 4096，MAC 地址比较只在优先级相同时才进行；D 错误，根桥选举在优先级阶段就已分出结果，路径开销用于确定非根桥的根端口与各网段的指定端口。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "RSTP",
+    "difficulty": "easy",
+    "tags": [
+      "RSTP",
+      "根桥选举",
+      "桥优先级"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-1-009",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「RSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / RSTP」；根桥按桥优先级、桥 MAC 依次比较的选举规则依据公开的 IEEE 802.1w/802.1D-2004 标准结论，数值比较由作者独立复算，标准文本为收费文档，故仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲与公开的标准结论独立命题，未复制任何第三方题目正文或标准原文。",
+      "reviewDigest": "ac279fe01f7f15eb93eba5533ad21a5f8cb9f5654dfd9ab20f08d5ef5443c060"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-1-010",
+    "type": "single_choice",
+    "question": "一台非根交换机有两条到根桥的路径：经本地端口 G0/0/1 的累计根路径开销为 20000，经本地端口 G0/0/2 的累计根路径开销也为 20000；两条路径上游的桥 ID 相同，上游指定端口优先级均为 128，上游指定端口号分别为 G0/0/1 与 G0/0/2。RSTP 会如何选择根端口？",
+    "options": {
+      "A": "两个端口都成为根端口，实现负载分担",
+      "B": "继续比较上游指定端口的端口号，端口号较小的路径所对应的本地端口成为根端口",
+      "C": "两个端口条件完全相同，随机选择其中一个",
+      "D": "比较本地两个端口的端口号，本地端口号较小的成为根端口"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RSTP 选择根端口依次比较：累计根路径开销、上游桥 ID、上游指定端口优先级、上游指定端口号。前两项与第三项都相同，于是比较上游指定端口号，端口号较小（G0/0/1）的路径胜出，对应本地端口成为根端口。A 错误，一台非根交换机只有一个根端口，不会双根端口负载分担；C 错误，选举是确定性的，不会随机；D 错误，比较的是上游指定端口号而不是本地端口号，这一顺序不能颠倒。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "RSTP",
+    "difficulty": "hard",
+    "tags": [
+      "RSTP",
+      "根端口选举",
+      "路径开销"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-1-010",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「RSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / RSTP」；根端口依次比较根路径开销、上游桥 ID、上游指定端口优先级与端口号的规则依据公开的 IEEE 802.1w/802.1D-2004 标准结论，标准文本为收费文档，故仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲与公开的标准结论独立命题，未复制任何第三方题目正文或标准原文。",
+      "reviewDigest": "498acfeb55aacfa183c5677277fc43837c7fd64af7ba418f44d05596b562385c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-1-011",
+    "type": "single_choice",
+    "question": "华为交换机运行 RSTP 时，如果某个端口收到 STP（802.1D）格式的 BPDU，下列描述正确的是？",
+    "options": {
+      "A": "丢弃该 BPDU，端口继续按 RSTP 方式工作",
+      "B": "设备立即整体切换到 MSTP 运行",
+      "C": "该端口按 STP 方式工作，RSTP 与 STP 可以在同一网络中互通",
+      "D": "端口立即进入 error-down 状态"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "RSTP 向下兼容 STP：端口收到 802.1D 格式的 BPDU 后，会按 STP 的规则在该端口上运行，通过与 STP 交换机的交互维持一致的无环拓扑，因此两种协议可以在同一网络中混合部署。A 错误，兼容处理不是简单丢弃；B 错误，MSTP 需要显式配置，不会因收到 STP BPDU 自动切换；D 错误，error-down 是 BPDU 保护等特性触发的动作，与协议兼容无关。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "RSTP",
+    "difficulty": "medium",
+    "tags": [
+      "RSTP",
+      "STP兼容",
+      "BPDU"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-1-011",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「RSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / RSTP」；RSTP 收到 STP 格式 BPDU 后按 STP 方式运行的兼容行为依据公开的 IEEE 802.1w/802.1D-2004 标准结论，标准文本为收费文档，故仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲与公开的标准结论独立命题，未复制任何第三方题目正文或标准原文。",
+      "reviewDigest": "c4dbe2f2e689ddac9647cfb5df9b63ea73a8cc89de3177befabb8e67fe57a179"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-1-012",
+    "type": "single_choice",
+    "question": "在华为交换机上执行 display stp brief，某端口输出的角色为 ROOT、状态为 FORWARDING。下列解释正确的是？",
+    "options": {
+      "A": "该端口是根端口，当前正常转发报文",
+      "B": "该端口是指定端口，当前处于阻塞状态",
+      "C": "该端口是 Alternate 端口，当前处于学习状态",
+      "D": "该端口是边缘端口，未参与生成树计算"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "display stp brief 中 Role 字段表示端口角色，ROOT 即根端口，指该端口到根桥的路径开销最优，是交换机去往根桥的出口；状态 FORWARDING 表示端口正在转发用户报文。B 错误，指定端口的角色显示为 DESI，且阻塞状态显示为 DISCARDING；C 错误，Alternate 端口角色显示为 ALTE，正常应处于 DISCARDING；D 错误，边缘端口仍参与生成树计算并会显示角色，其典型状态为 FORWARDING 但不代表未参与计算。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "RSTP",
+    "difficulty": "easy",
+    "tags": [
+      "RSTP",
+      "验证命令",
+      "端口角色"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-1-012",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「RSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / RSTP」；display stp brief 中 ROOT/FORWARDING 等角色与状态取值的含义属于设备公开命令输出语义，无对应公开 IETF 标准，故仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲与设备公开的命令语义独立命题，未复制任何第三方题目正文。",
+      "reviewDigest": "da69122ea7bef148f77dbc55133b3f2ebc16d452e98427584bf17cef75c9fb64"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-1-013",
+    "type": "single_choice",
+    "question": "RSTP 中端口从 Discarding 迁移到 Forwarding 的过程中，Learning 状态的作用是什么？",
+    "options": {
+      "A": "学习 BPDU 中的桥优先级信息",
+      "B": "学习路由表中的目的网段",
+      "C": "不学习 MAC 地址，只等待 Forward Delay 计时器超时",
+      "D": "学习 MAC 地址但不转发用户报文，为进入转发状态做准备"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Learning 状态是转发前的过渡阶段：端口开始学习进入报文的源 MAC 地址并构建 MAC 表项，但还不转发用户报文，避免拓扑尚未稳定时产生错误的转发表项，随后才进入 Forwarding。A 错误，桥优先级来自 BPDU，与 Learning 状态无关；B 错误，路由表属于三层转发，与二层端口状态无关；C 错误，Learning 状态正是要学习 MAC 地址，把它说成只等待计时器与实际作用相反。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "RSTP",
+    "difficulty": "easy",
+    "tags": [
+      "RSTP",
+      "端口状态",
+      "Learning"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-1-013",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「RSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / RSTP」；Learning 状态学习 MAC 但不转发、作为进入 Forwarding 前的过渡，依据公开的 IEEE 802.1w/802.1D-2004 标准结论，标准文本为收费文档，故仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲与公开的标准结论独立命题，未复制任何第三方题目正文或标准原文。",
+      "reviewDigest": "2c634349540f50f2d3abd0a48d6a0bf7f4bb6b16f70bc28a05c4ea3175ecadef"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-6-1-1-014",
+    "type": "single_choice",
+    "question": "一台运行 RSTP 的交换机上，根端口所在链路发生故障，该交换机还有一个处于 Discarding 状态的 Alternate 端口。RSTP 的处理过程是什么？",
+    "options": {
+      "A": "等待 Max Age 20 秒后再启用 Alternate 端口",
+      "B": "立即把 Alternate 端口提升为根端口，经过快速的同步过程后进入转发，无需等待 Forward Delay",
+      "C": "先重新选举根桥，再重新计算所有端口角色，通常耗时约 50 秒",
+      "D": "Alternate 端口保持阻塞，直到管理员手动切换"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Alternate 端口本身就保存了到根桥的替代路径，根端口失效后它直接接替根端口角色，并通过 RSTP 的同步与握手快速进入转发，通常在一秒以内完成，不需要等待 Forward Delay。A 错误，20 秒是 STP 的 Max Age 默认值，RSTP 不会等这么久；C 错误，根桥并未失效，无需重新选举根桥，50 秒是 STP 的典型收敛时间；D 错误，RSTP 的替代端口正是为自动切换而设计，不需要人工干预。",
+    "chapter": "交换技术基础",
+    "knowledgeSection": "生成树协议",
+    "knowledgePoint": "RSTP",
+    "difficulty": "medium",
+    "tags": [
+      "RSTP",
+      "快速切换",
+      "Alternate端口"
+    ],
+    "provenance": {
+      "questionId": "hcip821-6-1-1-014",
+      "sourceIds": [
+        "huawei-h12-821-outline"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 3 页「RSTP 原理与配置」与三级目录「交换技术基础 / 生成树协议 / RSTP」；根端口失效后 Alternate 端口接替并快速进入转发的行为依据公开的 IEEE 802.1w/802.1D-2004 标准结论，标准文本为收费文档，故仅引用官方大纲。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开大纲与公开的标准结论独立命题，未复制任何第三方题目正文或标准原文。",
+      "reviewDigest": "74618ded3432a5bcdb1311c38132b53654101fd597d5e1e431588286c6e26060"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  }
+]

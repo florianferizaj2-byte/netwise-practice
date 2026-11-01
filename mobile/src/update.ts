@@ -1,6 +1,7 @@
 import { Platform } from 'react-native';
 import * as FileSystem from 'expo-file-system/legacy';
 import * as IntentLauncher from 'expo-intent-launcher';
+import { validateApkDownload, type ApkIntegrity } from './updateIntegrity';
 
 const APK_MIME_TYPE = 'application/vnd.android.package-archive';
 const FLAG_GRANT_READ_URI_PERMISSION = 1;
@@ -16,6 +17,7 @@ export async function downloadAndInstallUpdate(
   version: string,
   onProgress: UpdateProgressCallback,
   onInstallStarted?: () => void,
+  integrity?: ApkIntegrity,
 ) {
   if (Platform.OS !== 'android') {
     throw new Error('应用内安装 APK 仅支持 Android');
@@ -33,7 +35,7 @@ export async function downloadAndInstallUpdate(
   const download = FileSystem.createDownloadResumable(
     downloadUrl,
     fileUri,
-    {},
+    { md5: !!integrity?.md5 },
     ({ totalBytesWritten, totalBytesExpectedToWrite }) => {
       if (totalBytesExpectedToWrite <= 0) {
         onProgress(null);
@@ -48,6 +50,15 @@ export async function downloadAndInstallUpdate(
   const result = await download.downloadAsync();
   if (!result?.uri) {
     throw new Error('新版 APK 下载未完成');
+  }
+
+  const info = await FileSystem.getInfoAsync(result.uri);
+  try {
+    validateApkDownload({ status: result.status, mimeType: result.mimeType,
+      size: info.exists ? info.size : 0, md5: result.md5 }, integrity);
+  } catch (error) {
+    await FileSystem.deleteAsync(fileUri, { idempotent: true });
+    throw error;
   }
 
   const contentUri = await FileSystem.getContentUriAsync(result.uri);

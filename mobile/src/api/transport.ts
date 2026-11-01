@@ -1,3 +1,5 @@
+import { API_BASE_URL, ensureApiBase, preferApiBase, resolveApiUrl } from './endpoint';
+
 export class ApiError extends Error {
   constructor(
     message: string,
@@ -14,6 +16,9 @@ export async function fetchJson<T>(
   init: RequestInit = {},
   timeoutMs = 30000,
 ): Promise<T> {
+  // 首次请求前确认 IPv6 直连是否可用，不可用则整场会话走回落地址。
+  await ensureApiBase();
+  const target = resolveApiUrl(url);
   const controller = new AbortController();
   let timedOut = false;
   const cancel = () => controller.abort();
@@ -24,7 +29,7 @@ export async function fetchJson<T>(
     controller.abort();
   }, timeoutMs);
   try {
-    const response = await fetch(url, { ...init, signal: controller.signal });
+    const response = await fetch(target, { ...init, signal: controller.signal });
     const raw = await response.text();
     let data: unknown;
     try {
@@ -44,8 +49,11 @@ export async function fetchJson<T>(
     return data as T;
   } catch (error) {
     if (timedOut) throw new Error('请求超时，请检查网络后重试');
-    if (error instanceof TypeError)
+    if (error instanceof TypeError) {
+      // 连接层失败：后续请求改用回落地址，避免每次都在不可用链路上等超时。
+      preferApiBase(API_BASE_URL);
       throw new Error('无法连接服务器，请检查网络后重试');
+    }
     throw error;
   } finally {
     clearTimeout(timer);

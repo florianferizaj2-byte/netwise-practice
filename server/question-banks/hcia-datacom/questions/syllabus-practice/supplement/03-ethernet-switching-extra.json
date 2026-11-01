@@ -14,13 +14,16 @@
     ],
     "analysis": "已知单播可根据 MAC 地址表精确选择出接口。 本题考查“交换机转发”，因此应选择“只从 MAC 表指定的出接口转发”。",
     "chapter": "以太网交换基础",
-    "knowledgePoint": "交换机转发",
+    "knowledgePoint": "转发、泛洪与丢弃",
     "difficulty": "easy",
     "tags": [
       "以太网交换基础",
+      "交换机转发原理",
+      "转发、泛洪与丢弃",
       "交换机转发"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "交换机转发原理"
   },
   {
     "id": "hcia-v2-extra-03-broadcast-mac",
@@ -37,13 +40,16 @@
     ],
     "analysis": "全 F 的目的 MAC 地址表示二层广播，会在所属广播域内泛洪。 本题考查“以太网帧”，因此应选择“FF:FF:FF:FF:FF:FF”。",
     "chapter": "以太网交换基础",
-    "knowledgePoint": "以太网帧",
+    "knowledgePoint": "以太网帧结构",
     "difficulty": "easy",
     "tags": [
       "以太网交换基础",
+      "以太网帧与 MAC 地址",
+      "以太网帧结构",
       "以太网帧"
     ],
-    "stage": "直接计算"
+    "stage": "直接计算",
+    "knowledgeSection": "以太网帧与 MAC 地址"
   },
   {
     "id": "hcia-v2-extra-03-mac-aging",
@@ -60,13 +66,16 @@
     ],
     "analysis": "终端可能移动，老化机制可避免过期 MAC 与端口关系长期残留。 本题考查“MAC 地址表”，因此应选择“清除长期未使用的旧位置映射”。",
     "chapter": "以太网交换基础",
-    "knowledgePoint": "MAC 地址表",
+    "knowledgePoint": "MAC 地址表学习",
     "difficulty": "medium",
     "tags": [
       "以太网交换基础",
+      "交换机转发原理",
+      "MAC 地址表学习",
       "MAC 地址表"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "交换机转发原理"
   },
   {
     "id": "hcia-v2-extra-03-collision-domain",
@@ -83,13 +92,16 @@
     ],
     "analysis": "交换机端口隔离冲突域，全双工环境中也不会发生共享介质冲突。 本题考查“广播域”，因此应选择“独立的冲突域”。",
     "chapter": "以太网交换基础",
-    "knowledgePoint": "广播域",
+    "knowledgePoint": "冲突域与广播域",
     "difficulty": "medium",
     "tags": [
       "以太网交换基础",
+      "冲突域与双工",
+      "冲突域与广播域",
       "广播域"
     ],
-    "stage": "反向推理"
+    "stage": "反向推理",
+    "knowledgeSection": "冲突域与双工"
   },
   {
     "id": "hcia-v2-extra-03-frame-fcs",
@@ -106,13 +118,16 @@
     ],
     "analysis": "FCS 基于 CRC 计算，用于接收端发现帧比特差错。 本题考查“以太网帧”，因此应选择“检测帧在传输中是否出现差错”。",
     "chapter": "以太网交换基础",
-    "knowledgePoint": "以太网帧",
+    "knowledgePoint": "以太网帧结构",
     "difficulty": "easy",
     "tags": [
       "以太网交换基础",
+      "以太网帧与 MAC 地址",
+      "以太网帧结构",
       "以太网帧"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "以太网帧与 MAC 地址"
   },
   {
     "id": "hcia-v2-extra-03-source-refresh",
@@ -129,12 +144,15 @@
     ],
     "analysis": "持续根据源 MAC 学习可让表项反映终端的最新连接位置。 本题考查“MAC 地址表”，因此应选择“刷新该动态表项的老化计时并在必要时更新端口”。",
     "chapter": "以太网交换基础",
-    "knowledgePoint": "MAC 地址表",
+    "knowledgePoint": "MAC 地址表学习",
     "difficulty": "medium",
     "tags": [
       "以太网交换基础",
+      "交换机转发原理",
+      "MAC 地址表学习",
       "MAC 地址表"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "交换机转发原理"
   }
 ]

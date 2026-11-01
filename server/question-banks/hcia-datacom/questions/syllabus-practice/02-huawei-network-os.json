@@ -14,13 +14,16 @@
     ],
     "analysis": "system-view 用于从用户视图进入系统视图，随后可进行设备级配置。",
     "chapter": "华为网络设备操作系统",
-    "knowledgePoint": "命令行视图",
+    "knowledgePoint": "命令行视图与切换",
     "difficulty": "easy",
     "tags": [
       "华为网络设备操作系统",
+      "VRP 命令行基础",
+      "命令行视图与切换",
       "命令行视图"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "VRP 命令行基础"
   },
   {
     "id": "hcia-v2-02-view-prompt",
@@ -37,13 +40,16 @@
     ],
     "analysis": "尖括号通常表示用户视图，方括号通常表示系统视图或其下级配置视图。",
     "chapter": "华为网络设备操作系统",
-    "knowledgePoint": "命令行视图",
+    "knowledgePoint": "命令行视图与切换",
     "difficulty": "easy",
     "tags": [
       "华为网络设备操作系统",
+      "VRP 命令行基础",
+      "命令行视图与切换",
       "命令行视图"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "VRP 命令行基础"
   },
   {
     "id": "hcia-v2-02-save-config",
@@ -60,13 +66,16 @@
     ],
     "analysis": "运行配置位于内存中，执行保存操作后才会写入启动配置，避免重启后丢失。",
     "chapter": "华为网络设备操作系统",
-    "knowledgePoint": "配置保存",
+    "knowledgePoint": "配置文件管理",
     "difficulty": "easy",
     "tags": [
       "华为网络设备操作系统",
+      "VRP 命令行基础",
+      "配置文件管理",
       "配置保存"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "VRP 命令行基础"
   },
   {
     "id": "hcia-v2-02-ssh-management",
@@ -85,12 +94,15 @@
     ],
     "analysis": "SSH/STelnet 对认证与会话数据加密，但仍然依赖正常的 IP 连通性。",
     "chapter": "华为网络设备操作系统",
-    "knowledgePoint": "SSH 与 STelnet",
+    "knowledgePoint": "Telnet 与 SSH 远程登录",
     "difficulty": "medium",
     "tags": [
       "华为网络设备操作系统",
+      "设备登录与权限",
+      "Telnet 与 SSH 远程登录",
       "SSH 与 STelnet"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "设备登录与权限"
   }
 ]

@@ -12,7 +12,7 @@ import { render, validate } from "../generated/tutor-renderer.js";
 import { ChapterArt } from "../components/chapter-art.jsx";
 import { KnowledgeFavoriteButton } from "../components/knowledge-favorite.jsx";
 import { StudyTeacher } from "../components/study-lesson.jsx";
-import "../../public/demo/home-blue/tutor.css";
+import "./interactive-tutor-base.css";
 import "./interactive-tutor.css";
 
 const phases = {

@@ -1,7 +1,9 @@
 {
-  "latestVersion": "0.4.6",
-  "minimumVersion": "0.4.6",
-  "downloadUrl": "/downloads/kaojiang-v0.4.6.apk",
-  "releaseNotes": "进入 App 先显示可热更新的公告；所有账号需完善名字和头像，网页管理员用户列表显示头像和昵称；定位教程新增求助作者微信二维码。",
-  "apkSha256": "8d9fc548e31950c2e9007fe2de224b786d57312ea061f5e05502bd7d818654cc"
+  "latestVersion": "1.0.12",
+  "minimumVersion": "1.0.1",
+  "downloadUrl": "/downloads/kaojiang-v1.0.12.apk",
+  "releaseNotes": "v1.0.12：安装兼容重打包，构建号45；沿用正式证书，原生库压缩解压安装并启用v1/v2/v3签名；修复新版本标签可能仍指向旧APK的下载配置。保留AI学习与逐题组卷功能。",
+  "apkBytes": 58868839,
+  "apkSha256": "c23f1acb7f5a469f11a3253c2ca8d1dee67eed59772d138f4231d761f4478eb3",
+  "apkMd5": "e2514d3c9f189161cf69e3475b92a90a"
 }

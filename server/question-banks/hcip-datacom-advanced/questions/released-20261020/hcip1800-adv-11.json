@@ -1,0 +1,1934 @@
+[
+  {
+    "id": "hcip831-4-2-2-001",
+    "type": "single_choice",
+    "question": "交换机限制 MAC 地址表容量的主要目的是？",
+    "options": {
+      "A": "防止表项被耗尽导致泛洪",
+      "B": "减少 VLAN 数量",
+      "C": "提高转发速率",
+      "D": "加快生成树收敛"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "MAC 表容量有限，攻击者伪造大量源 MAC 可迅速填满表项，之后未知单播被泛洪，造成带宽浪费与信息泄露。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "MAC 地址表安全",
+    "difficulty": "medium",
+    "tags": [
+      "MAC 表安全",
+      "容量"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-2-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / MAC 地址表安全」。知识点编码 hcip831-4-2-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "69b3f6ebb4e3eb4f57c2d0d6da4512dac2d81fcda587da4f5db49f18ba9ffa99"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-2-002",
+    "type": "single_choice",
+    "question": "MAC 地址表项的老化机制作用是？",
+    "options": {
+      "A": "同步表项到邻居",
+      "B": "回收长期不活跃的表项",
+      "C": "限制端口数量",
+      "D": "加密表项内容"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "表项在老化时间内无流量刷新即被删除，避免表项长期占用。老化时间过短会导致频繁泛洪，过长会占用表空间。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "MAC 地址表安全",
+    "difficulty": "medium",
+    "tags": [
+      "MAC 表",
+      "老化"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-2-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / MAC 地址表安全」。知识点编码 hcip831-4-2-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "a3df3c52747437b830c6c8627744ed9d18a72f7599da95e06a5952dfca9ba702"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-2-003",
+    "type": "single_choice",
+    "question": "静态 MAC 表项的特点是？",
+    "options": {
+      "A": "只对组播生效",
+      "B": "自动学习且会老化",
+      "C": "手工配置且不会老化",
+      "D": "只能学习一次"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "静态表项由管理员手工绑定端口，优先级高于动态表项且不老化，常用于服务器、网关等固定设备。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "MAC 地址表安全",
+    "difficulty": "medium",
+    "tags": [
+      "MAC 表",
+      "静态表项"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-2-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / MAC 地址表安全」。知识点编码 hcip831-4-2-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "ca2e300c18a9ba524cffedcda17bf470fbb34a7607dfebb417afe7543383fbfb"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-2-004",
+    "type": "single_choice",
+    "question": "黑洞 MAC 表项的作用是？",
+    "options": {
+      "A": "丢弃指定源或目的 MAC 的报文",
+      "B": "限制 VLAN 数量",
+      "C": "加速报文转发",
+      "D": "学习更多 MAC"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "黑洞表项让匹配的 MAC 报文被直接丢弃，常用于封堵攻击源或隔离违规终端，比 ACL 更节省资源。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "MAC 地址表安全",
+    "difficulty": "medium",
+    "tags": [
+      "MAC 表",
+      "黑洞"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-2-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / MAC 地址表安全」。知识点编码 hcip831-4-2-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "05b64d513330d9a9e05cb498799d4ce5d1392a7dc154cf9cf33efd54959cbf39"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-2-005",
+    "type": "single_choice",
+    "question": "MAC 泛洪攻击的原理是？",
+    "options": {
+      "A": "发送超大报文",
+      "B": "伪造 ARP 网关",
+      "C": "耗尽 IP 地址",
+      "D": "伪造大量源 MAC 填满表项"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "攻击者用大量虚假源 MAC 发送报文，使交换机的 MAC 表被占满，正常表项被挤出，之后单播流量被迫泛洪。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "MAC 地址表安全",
+    "difficulty": "hard",
+    "tags": [
+      "MAC 泛洪",
+      "原理"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-2-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / MAC 地址表安全」。知识点编码 hcip831-4-2-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "47c4a1c78b4dfa112d91f5292feffe518453277afb67e5ebb2383e5e62cf3cd9"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-2-006",
+    "type": "single_choice",
+    "question": "限制单端口学习 MAC 数量的作用是？",
+    "options": {
+      "A": "提高端口速率",
+      "B": "抑制 MAC 泛洪与私接设备",
+      "C": "加快收敛",
+      "D": "减少广播域"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "为每个端口设置 MAC 学习上限，超过阈值即触发告警或丢弃，可有效抑制泛洪攻击与私接交换机的行为。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "MAC 地址表安全",
+    "difficulty": "medium",
+    "tags": [
+      "MAC 表安全",
+      "端口限制"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-2-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / MAC 地址表安全」。知识点编码 hcip831-4-2-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "67a3cf92a152557c16f3818c9c4e81100d43d4f97b93e19ec34b954187bbf9a1"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-2-007",
+    "type": "multiple_choice",
+    "question": "MAC 地址表安全通常包括下列哪些手段？",
+    "options": {
+      "A": "限制单端口 MAC 数",
+      "B": "开启组播路由",
+      "C": "配置黑洞 MAC",
+      "D": "限制表项容量"
+    },
+    "answer": [
+      "A",
+      "C",
+      "D"
+    ],
+    "analysis": "表项容量限制、端口 MAC 数限制与黑洞 MAC 都是常见手段。组播路由属于三层组播范畴。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "MAC 地址表安全",
+    "difficulty": "medium",
+    "tags": [
+      "MAC 表安全",
+      "手段",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-2-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / MAC 地址表安全」。知识点编码 hcip831-4-2-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "5f549642a0c6e9fc620515f6d7a6d36bc05bd22c9c9e2138201747279968e58f"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-2-008",
+    "type": "true_false",
+    "question": "静态 MAC 表项会随老化时间到期而被删除。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "静态表项由管理员手工配置，不会老化；会老化的是动态学习到的表项。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "MAC 地址表安全",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "静态 MAC"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-2-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / MAC 地址表安全」。知识点编码 hcip831-4-2-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "95fba51c6b06617bf67e6346be0d31c205f1d0315a993998d2eb7d1948ad0cc8"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-3-001",
+    "type": "single_choice",
+    "question": "端口安全的主要作用是？",
+    "options": {
+      "A": "提高端口带宽",
+      "B": "提供 PoE 供电",
+      "C": "限制端口可学习的 MAC 数量与范围",
+      "D": "加快生成树收敛"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "端口安全通过限制最大 MAC 数、绑定合法 MAC 与配置违规动作，防止私接设备与 MAC 伪造。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "端口安全",
+    "difficulty": "medium",
+    "tags": [
+      "端口安全",
+      "作用"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-3-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / 端口安全」。知识点编码 hcip831-4-2-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "ddaf7236bb28ef6503e87110acb06fc834de7dc301c23045fce187af39db1a13"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-3-002",
+    "type": "single_choice",
+    "question": "端口安全的违规动作不包括下列哪一项？",
+    "options": {
+      "A": "shutdown",
+      "B": "restrict",
+      "C": "flood",
+      "D": "protect"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "华为端口安全的违规动作包括 protect（丢弃）、restrict（丢弃并告警）与 shutdown（关闭端口）。flood 不是违规动作。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "端口安全",
+    "difficulty": "medium",
+    "tags": [
+      "端口安全",
+      "违规动作"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-3-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / 端口安全」。知识点编码 hcip831-4-2-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "77f80b39d221d8929d8859af2983d0a06da8f9fc08d9197645f0ad108a5bcde3"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-3-003",
+    "type": "single_choice",
+    "question": "sticky MAC 的特点是？",
+    "options": {
+      "A": "学习后转为静态表项，重启后仍生效",
+      "B": "只对组播生效",
+      "C": "每次重启都会丢失",
+      "D": "只能手工配置"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Sticky MAC 在端口学习到 MAC 后自动写入配置并转为静态表项，设备重启后无需重新学习，适合哑终端接入。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "端口安全",
+    "difficulty": "medium",
+    "tags": [
+      "端口安全",
+      "sticky"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-3-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / 端口安全」。知识点编码 hcip831-4-2-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "51b2c1e900c8de66cea48923e5fa964e6f05180a71ddf086f12ba3cf0611f4c9"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-3-004",
+    "type": "single_choice",
+    "question": "端口安全违规动作 shutdown 与 restrict 的主要区别是？",
+    "options": {
+      "A": "前者只告警，后者关闭端口",
+      "B": "前者只对组播生效",
+      "C": "两者完全相同",
+      "D": "前者关闭端口，后者只丢弃并告警"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "shutdown 会把端口置为 error-down 并需要人工或自动恢复；restrict 只丢弃违规报文并上报告警，业务影响更小。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "端口安全",
+    "difficulty": "hard",
+    "tags": [
+      "端口安全",
+      "违规动作"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-3-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / 端口安全」。知识点编码 hcip831-4-2-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "59b97bf01391ff2d03604f1892e6bfde997587164861e2d5402eb6829ec2ae8f"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-3-005",
+    "type": "single_choice",
+    "question": "端口安全与 DHCP Snooping 配合可以实现什么？",
+    "options": {
+      "A": "加快路由收敛",
+      "B": "扩展 VLAN 数量",
+      "C": "只允许合法终端接入并获取地址",
+      "D": "提高无线覆盖"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "端口安全限制 MAC，DHCP Snooping 建立 IP-MAC-端口绑定，两者结合可阻止私接设备与地址伪造。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "端口安全",
+    "difficulty": "medium",
+    "tags": [
+      "端口安全",
+      "联动"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-3-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / 端口安全」。知识点编码 hcip831-4-2-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "2bc89902628e16d8ac29189c17c3cc4923ed0264682d99835afa9ef188e5b62c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-3-006",
+    "type": "single_choice",
+    "question": "端口安全的最大 MAC 数应如何设置？",
+    "options": {
+      "A": "不设置限制",
+      "B": "按端口实际接入终端数设置",
+      "C": "统一设置为 1",
+      "D": "设置为最大值"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "设置为 1 会导致下挂交换机的端口异常，设置过大则失去防护意义。应按端口用途与实际终端数量合理设置。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "端口安全",
+    "difficulty": "medium",
+    "tags": [
+      "端口安全",
+      "配置"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-3-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / 端口安全」。知识点编码 hcip831-4-2-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "2969d91b77373b0899aba905b3f67db0d1a59cf068c4992e560d26e1ed40d6cf"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-3-007",
+    "type": "multiple_choice",
+    "question": "端口安全可以实现下列哪些效果？",
+    "options": {
+      "A": "为终端分配 IP 地址",
+      "B": "绑定合法终端 MAC",
+      "C": "违规时关闭端口",
+      "D": "限制端口学习 MAC 的数量"
+    },
+    "answer": [
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "端口安全负责 MAC 层面的接入控制。IP 地址分配由 DHCP 完成，不属于端口安全职责。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "端口安全",
+    "difficulty": "medium",
+    "tags": [
+      "端口安全",
+      "效果",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-3-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / 端口安全」。知识点编码 hcip831-4-2-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e4e6cbd5270827305ddd17c3b4af2a821af08ae52260904f794d47832fc5f1db"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-3-008",
+    "type": "true_false",
+    "question": "端口安全的 protect 动作会关闭端口并上报告警。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "protect 只静默丢弃违规报文，不告警也不关闭端口；restrict 会告警，shutdown 才会关闭端口。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "端口安全",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "端口安全"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-3-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / 端口安全」。知识点编码 hcip831-4-2-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "8689153fc99c882745e33d6de4843c7d83faab1fccfb701ac7a3a327434dbbc6"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-4-001",
+    "type": "single_choice",
+    "question": "MAC 地址漂移指的是？",
+    "options": {
+      "A": "MAC 地址被转换为 IP",
+      "B": "MAC 表被清空",
+      "C": "MAC 地址被加密",
+      "D": "同一 MAC 在两个端口间反复切换学习"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "当同一 MAC 先后从不同端口被学习到时即发生漂移，常见于二层环路或 MAC 伪造，会导致转发表频繁震荡。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "MAC 漂移防止与检测",
+    "difficulty": "medium",
+    "tags": [
+      "MAC 漂移",
+      "定义"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-4-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / MAC 漂移防止与检测」。知识点编码 hcip831-4-2-4。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "c175063d7de11baae9bf63c1c616c69e392d9407dc873d208d2e7cdc0816039b"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-4-002",
+    "type": "single_choice",
+    "question": "MAC 地址漂移最常见的原因是？",
+    "options": {
+      "A": "MTU 配置过小",
+      "B": "VLAN 数量过多",
+      "C": "二层环路或 MAC 伪造",
+      "D": "接口速率不匹配"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "环路使同一帧从多个端口进入，MAC 表被反复改写；MAC 伪造也会造成同样现象。应先排查环路再考虑攻击。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "MAC 漂移防止与检测",
+    "difficulty": "medium",
+    "tags": [
+      "MAC 漂移",
+      "原因"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-4-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / MAC 漂移防止与检测」。知识点编码 hcip831-4-2-4。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "c0b0554fbc49cc4027840aa28721baf6cb7ebb5ccb5347004880acb7b672466c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-4-003",
+    "type": "single_choice",
+    "question": "MAC 漂移检测的作用是？",
+    "options": {
+      "A": "自动修改 VLAN",
+      "B": "发现漂移并上报告警",
+      "C": "自动分配地址",
+      "D": "自动修复环路"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "漂移检测在检测到同一 MAC 频繁换端口时上报告警，便于运维定位环路或攻击，本身不负责修复。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "MAC 漂移防止与检测",
+    "difficulty": "medium",
+    "tags": [
+      "MAC 漂移",
+      "检测"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-4-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / MAC 漂移防止与检测」。知识点编码 hcip831-4-2-4。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "97fa89140f2c09c5a73ce8ffc55c2dfb9f9f3081e2accc881887a7a21c509779"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-4-004",
+    "type": "single_choice",
+    "question": "MAC 漂移抑制与漂移检测的区别是？",
+    "options": {
+      "A": "前者只告警，后者丢弃",
+      "B": "前者只能用于 IPv6",
+      "C": "两者完全相同",
+      "D": "前者丢弃漂移报文，后者只告警"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "漂移抑制在检测到漂移后直接丢弃相关报文并阻断，防止表项继续震荡；漂移检测仅上报，不影响转发。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "MAC 漂移防止与检测",
+    "difficulty": "hard",
+    "tags": [
+      "MAC 漂移",
+      "抑制"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-4-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / MAC 漂移防止与检测」。知识点编码 hcip831-4-2-4。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "42ca1f0cca2835030a095f31c2049588ce4071b752bb03c737ec82dc9531230e"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-4-005",
+    "type": "single_choice",
+    "question": "MAC 漂移对网络的主要影响是？",
+    "options": {
+      "A": "减少广播报文",
+      "B": "提高带宽利用率",
+      "C": "加快收敛",
+      "D": "转发表震荡导致丢包与延迟"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "表项反复改写会使报文被送到错误端口，造成丢包、乱序与延迟抖动，严重时业务大面积中断。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "MAC 漂移防止与检测",
+    "difficulty": "medium",
+    "tags": [
+      "MAC 漂移",
+      "影响"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-4-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / MAC 漂移防止与检测」。知识点编码 hcip831-4-2-4。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "a992dc072fc2009c3c12ce22135aa839fda1d54455aa06b318f46cce3c1fb28f"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-4-006",
+    "type": "single_choice",
+    "question": "处理 MAC 漂移的第一步通常是？",
+    "options": {
+      "A": "排查二层环路",
+      "B": "升级软件版本",
+      "C": "增加 VLAN",
+      "D": "更换光模块"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "绝大多数漂移由环路引起，应先检查生成树状态、临时环路与双上行配置，再考虑 MAC 伪造等安全因素。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "MAC 漂移防止与检测",
+    "difficulty": "medium",
+    "tags": [
+      "MAC 漂移",
+      "处理"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-4-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / MAC 漂移防止与检测」。知识点编码 hcip831-4-2-4。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "ee74b1c8f94ad681a3a1794b1a5d8da3e4127edd3f8f150d59177f83dbd41968"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-4-007",
+    "type": "multiple_choice",
+    "question": "MAC 漂移的常见成因包括？",
+    "options": {
+      "A": "MAC 地址伪造",
+      "B": "双网卡终端",
+      "C": "二层环路",
+      "D": "接口速率不匹配"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "环路、MAC 伪造与双网卡终端（同一 MAC 出现在两个接入点）都会造成漂移。接口速率不匹配影响的是丢包与协商。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "MAC 漂移防止与检测",
+    "difficulty": "medium",
+    "tags": [
+      "MAC 漂移",
+      "成因",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-4-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / MAC 漂移防止与检测」。知识点编码 hcip831-4-2-4。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "5a3915c38b374e07e944be96faa620a45d6ce8d056ca9e7dacad44d63827a13d"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-4-008",
+    "type": "true_false",
+    "question": "MAC 漂移检测可以自动消除二层环路。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "漂移检测只负责发现与告警，消除环路仍需依靠生成树配置调整或物理链路排查。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "MAC 漂移防止与检测",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "MAC 漂移"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-4-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / MAC 漂移防止与检测」。知识点编码 hcip831-4-2-4。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "868d445b1c6657bbc6cf09f716061c604feb005f04472bf63374e805e4121f16"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-5-001",
+    "type": "single_choice",
+    "question": "MACsec 对应的 IEEE 标准是？",
+    "options": {
+      "A": "802.1Q",
+      "B": "802.1X",
+      "C": "802.1AX",
+      "D": "802.1AE"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "MACsec 由 802.1AE 定义，在二层提供逐跳的加密与完整性保护。802.1X 负责接入认证，802.1Q 定义 VLAN 标签。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "MACsec",
+    "difficulty": "medium",
+    "tags": [
+      "MACsec",
+      "标准"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-5-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / MACsec」。知识点编码 hcip831-4-2-5。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "ac5e1bd7cd8ddba019a7ba68b4aeefaf984301c77b803d50166c35b3e3363136"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-5-002",
+    "type": "single_choice",
+    "question": "MACsec 的保护范围是？",
+    "options": {
+      "A": "无线空口",
+      "B": "应用层会话",
+      "C": "端到端的三层隧道",
+      "D": "逐跳的二层链路"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "MACsec 在每一段链路上独立加解密，属于逐跳保护；IPsec 提供的是端到端的三层保护，两者作用层次不同。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "MACsec",
+    "difficulty": "medium",
+    "tags": [
+      "MACsec",
+      "范围"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-5-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / MACsec」。知识点编码 hcip831-4-2-5。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "1f141aea7c898fef28838570fc824323ce10e0691113b03dba9a43ef173fb11b"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-5-003",
+    "type": "single_choice",
+    "question": "MACsec 的密钥协商依赖什么协议？",
+    "options": {
+      "A": "MKA",
+      "B": "PIM",
+      "C": "LDP",
+      "D": "IKE"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "MKA（MACsec Key Agreement）基于 802.1X 的 EAP 认证结果协商会话密钥，并负责密钥更新与成员管理。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "MACsec",
+    "difficulty": "medium",
+    "tags": [
+      "MACsec",
+      "MKA"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-5-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / MACsec」。知识点编码 hcip831-4-2-5。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "49c8e2e580fc0cdb03ff7b3f5bf80858fe09a12061ce88ec8b16a77c20381526"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-5-004",
+    "type": "single_choice",
+    "question": "MACsec 与 IPsec 的主要区别是？",
+    "options": {
+      "A": "前者只做认证不加密",
+      "B": "前者保护二层逐跳，后者保护三层端到端",
+      "C": "两者都保护二层",
+      "D": "后者只能用于无线"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "MACsec 在每条链路上加解密，适合设备间点对点保护；IPsec 在端到端封装，跨越多个设备仍保持加密。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "MACsec",
+    "difficulty": "hard",
+    "tags": [
+      "MACsec",
+      "IPsec"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-5-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / MACsec」。知识点编码 hcip831-4-2-5。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d1befbb32023e4b9ea338801300ba5f5a85ffad60e7e9f6f404874e236711542"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-5-005",
+    "type": "single_choice",
+    "question": "MACsec 的典型部署场景是？",
+    "options": {
+      "A": "无线终端接入",
+      "B": "广域网跨域互联",
+      "C": "数据中心设备间链路加密",
+      "D": "组播分发"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "MACsec 常用于数据中心交换机之间、交换机与服务器之间的链路加密，防止链路被物理搭线窃听。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "MACsec",
+    "difficulty": "medium",
+    "tags": [
+      "MACsec",
+      "场景"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-5-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / MACsec」。知识点编码 hcip831-4-2-5。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d1fd990c666f9da3b5e9b14d7ee0db81e4da07e5b640d1f9ba9c1e7884e5b98c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-5-006",
+    "type": "single_choice",
+    "question": "启用 MACsec 后对转发性能的影响是？",
+    "options": {
+      "A": "完全无影响",
+      "B": "只影响组播",
+      "C": "增加加解密开销，可能降低吞吐",
+      "D": "提高吞吐量"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "MACsec 需要专用硬件或占用 CPU 做加解密，未配备加密引擎的设备会出现吞吐下降与延迟增加。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "MACsec",
+    "difficulty": "medium",
+    "tags": [
+      "MACsec",
+      "性能"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-5-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / MACsec」。知识点编码 hcip831-4-2-5。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "7a4b31af171181bb069c9c758435bc35cf614c68172667957d96577729596bfa"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-5-007",
+    "type": "multiple_choice",
+    "question": "MACsec 可以提供下列哪些安全能力？",
+    "options": {
+      "A": "路由认证",
+      "B": "完整性校验",
+      "C": "重放保护",
+      "D": "数据加密"
+    },
+    "answer": [
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "MACsec 提供加密、完整性与重放保护。路由认证由路由协议的认证机制负责。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "MACsec",
+    "difficulty": "medium",
+    "tags": [
+      "MACsec",
+      "能力",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-5-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / MACsec」。知识点编码 hcip831-4-2-5。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "90882286548bc2a5aed7aafe3b812b96cc1c44b479ecffbbfa99bfd4dc054a7a"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-5-008",
+    "type": "true_false",
+    "question": "MACsec 提供的是端到端的三层加密。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "MACsec 是逐跳的二层保护，每经过一台设备都会解密再加密；端到端三层加密由 IPsec 提供。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "MACsec",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "MACsec"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-5-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / MACsec」。知识点编码 hcip831-4-2-5。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "1b890b96c32844ec6614d0bf9a31ef18949db0024207ccce8c6b2844b53a7fbf"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-6-001",
+    "type": "single_choice",
+    "question": "交换机流量抑制的主要对象是？",
+    "options": {
+      "A": "管理报文",
+      "B": "路由协议报文",
+      "C": "广播、组播与未知单播",
+      "D": "已知单播"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "流量抑制针对广播、组播与未知单播这三类泛洪流量设置阈值，超过阈值即丢弃或告警，防止广播风暴。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "交换机流量控制",
+    "difficulty": "medium",
+    "tags": [
+      "流量控制",
+      "抑制对象"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-6-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / 交换机流量控制」。知识点编码 hcip831-4-2-6。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "169e80bc8a19f968ab258d72cabdd1f3fc6d072e8c538816bffc9b9b814acd96"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-6-002",
+    "type": "single_choice",
+    "question": "风暴控制的阈值通常以什么为单位？",
+    "options": {
+      "A": "接口数量",
+      "B": "每秒报文数或带宽百分比",
+      "C": "VLAN 数量",
+      "D": "MAC 表项数"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "风暴控制可按 pps 或带宽百分比设置阈值，超过阈值后按配置动作丢弃报文或关闭端口。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "交换机流量控制",
+    "difficulty": "medium",
+    "tags": [
+      "流量控制",
+      "阈值"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-6-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / 交换机流量控制」。知识点编码 hcip831-4-2-6。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "78a1329150411aa96f91c4759f8096b1e78bfeaa8d77fc5b4263790f5945351a"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-6-003",
+    "type": "single_choice",
+    "question": "流量抑制与 QoS 限速的主要区别是？",
+    "options": {
+      "A": "后者只能用于组播",
+      "B": "两者完全相同",
+      "C": "前者针对泛洪流量做保护，后者按业务分配带宽",
+      "D": "前者只对单播生效"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "流量抑制是安全保护机制，防止广播风暴打满链路；QoS 限速是带宽管理机制，按业务类别分配与限制带宽。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "交换机流量控制",
+    "difficulty": "hard",
+    "tags": [
+      "流量控制",
+      "QoS"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-6-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / 交换机流量控制」。知识点编码 hcip831-4-2-6。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "95f601059e81b51b5c0d69e64b2a93b2073a70675f50c13553963f002a2d4fa7"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-6-004",
+    "type": "single_choice",
+    "question": "风暴控制的动作通常包括？",
+    "options": {
+      "A": "swap 与 flood",
+      "B": "permit 与 deny",
+      "C": "push 与 pop",
+      "D": "block 与 shutdown"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "超过阈值后可配置 block（丢弃超限报文）或 shutdown（关闭端口并告警），后者更激进。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "交换机流量控制",
+    "difficulty": "medium",
+    "tags": [
+      "流量控制",
+      "动作"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-6-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / 交换机流量控制」。知识点编码 hcip831-4-2-6。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "b7b3108026cc660fcc6ce305c9137d27df04b9417120c5b85203ef800d817441"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-6-005",
+    "type": "single_choice",
+    "question": "未知单播泛洪的根源是？",
+    "options": {
+      "A": "路由表为空",
+      "B": "MAC 表中没有对应表项",
+      "C": "VLAN 配置错误",
+      "D": "ARP 表项过多"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "交换机收到目的 MAC 不在表中的单播帧时只能向同 VLAN 所有端口泛洪，表项缺失越多泛洪越严重。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "交换机流量控制",
+    "difficulty": "medium",
+    "tags": [
+      "流量控制",
+      "泛洪"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-6-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / 交换机流量控制」。知识点编码 hcip831-4-2-6。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "543e61f7a76b503c4d549ad56bd7c92b5b9271dd9f3614cc09bb530bc701e8c1"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-6-006",
+    "type": "multiple_choice",
+    "question": "下列哪些措施可以缓解广播风暴？",
+    "options": {
+      "A": "启用端口隔离",
+      "B": "增大 MAC 表容量",
+      "C": "配置风暴控制",
+      "D": "划分更小的 VLAN"
+    },
+    "answer": [
+      "A",
+      "C",
+      "D"
+    ],
+    "analysis": "风暴控制直接限速，划分 VLAN 缩小广播域，端口隔离阻断用户间泛洪。增大 MAC 表容量对广播无效。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "交换机流量控制",
+    "difficulty": "medium",
+    "tags": [
+      "流量控制",
+      "风暴",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-6-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / 交换机流量控制」。知识点编码 hcip831-4-2-6。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "32c9d391d7277f0726a9e9db065157c76eb161b7c2e81ea52adb15c24fe48e36"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-6-007",
+    "type": "true_false",
+    "question": "流量抑制可以对已知单播进行限速。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "流量抑制针对广播、组播与未知单播，已知单播按 MAC 表精确转发，不属于抑制对象；对其限速应使用 QoS。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "交换机流量控制",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "流量控制"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-6-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / 交换机流量控制」。知识点编码 hcip831-4-2-6。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e0467dd7331f21dd456c3eb38ff955386ad6c397dab372a36ebe3cabd2c186e6"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-7-001",
+    "type": "single_choice",
+    "question": "DHCP Snooping 的主要作用是？",
+    "options": {
+      "A": "阻止非法 DHCP 服务器并建立绑定表",
+      "B": "压缩 DHCP 报文",
+      "C": "加密 DHCP 报文",
+      "D": "为终端分配地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "DHCP Snooping 通过信任端口划分阻止私接服务器，同时记录 IP-MAC-端口-VLAN 绑定表，供 IPSG 等模块使用。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "DHCP Snooping",
+    "difficulty": "medium",
+    "tags": [
+      "DHCP Snooping",
+      "作用"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-7-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / DHCP Snooping」。知识点编码 hcip831-4-2-7。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "09a5e0af81de884ecf7f020782d5550539bce0722d2b21b3d0895f51d82e3683"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-7-002",
+    "type": "single_choice",
+    "question": "DHCP Snooping 中连接合法服务器的端口应配置为？",
+    "options": {
+      "A": "信任端口",
+      "B": "非信任端口",
+      "C": "镜像端口",
+      "D": "边缘端口"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "信任端口允许 DHCP 响应报文通过，通常连接合法服务器或上行设备；非信任端口会丢弃 Offer、Ack 等响应。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "DHCP Snooping",
+    "difficulty": "medium",
+    "tags": [
+      "DHCP Snooping",
+      "信任端口"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-7-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / DHCP Snooping」。知识点编码 hcip831-4-2-7。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "0fb8c1b59b5130e22716648a04d89c9256999d396dcda25ca564b4620933a300"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-7-003",
+    "type": "single_choice",
+    "question": "DHCP Snooping 绑定表记录的内容是？",
+    "options": {
+      "A": "仅 VLAN 号",
+      "B": "IP、MAC、VLAN 与端口",
+      "C": "仅 MAC 地址",
+      "D": "仅 IP 地址"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "绑定表记录终端获取到的 IP、MAC、所属 VLAN 与接入端口，是 IPSG 与端口安全联动的基础数据。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "DHCP Snooping",
+    "difficulty": "medium",
+    "tags": [
+      "DHCP Snooping",
+      "绑定表"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-7-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / DHCP Snooping」。知识点编码 hcip831-4-2-7。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4bdadf51a90551d027d4630a058ede199a3e198bdbdccdf1318eddba6af25191"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-7-004",
+    "type": "single_choice",
+    "question": "option82 的作用是？",
+    "options": {
+      "A": "压缩 DHCP 报文",
+      "B": "分配静态地址",
+      "C": "加密 DHCP 报文",
+      "D": "在 DHCP 报文中插入接入位置信息"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "option82 由接入设备插入端口、VLAN 等位置信息，服务器据此分配地址或做审计，也可用于防止地址伪造。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "DHCP Snooping",
+    "difficulty": "medium",
+    "tags": [
+      "DHCP Snooping",
+      "option82"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-7-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / DHCP Snooping」。知识点编码 hcip831-4-2-7。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "041af28802369b655d53723b8f6446507cc880746dc1e762864b323c2d99750f"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-7-005",
+    "type": "single_choice",
+    "question": "DHCP Snooping 与 IPSG 的关系是？",
+    "options": {
+      "A": "前者生成绑定表，后者用绑定表校验报文",
+      "B": "两者互不相关",
+      "C": "两者功能完全相同",
+      "D": "后者生成绑定表，前者校验"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "DHCP Snooping 负责监听并生成绑定表，IPSG 读取该表对报文做源 IP 与源 MAC 校验，二者是数据与消费者的关系。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "DHCP Snooping",
+    "difficulty": "hard",
+    "tags": [
+      "DHCP Snooping",
+      "IPSG"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-7-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / DHCP Snooping」。知识点编码 hcip831-4-2-7。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "f485c65d7f18bae5aecef609f3f83d4e83fc882a9f4fac12b1b7438d7c5d1558"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-7-006",
+    "type": "single_choice",
+    "question": "私接 DHCP 服务器会造成什么后果？",
+    "options": {
+      "A": "终端获取错误地址导致无法上网",
+      "B": "交换机端口速率下降",
+      "C": "VLAN 数量增加",
+      "D": "生成树重新收敛"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "私接服务器可能下发错误的网关或 DNS，使终端无法正常通信，甚至被引导到攻击者主机。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "DHCP Snooping",
+    "difficulty": "medium",
+    "tags": [
+      "DHCP Snooping",
+      "私接"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-7-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / DHCP Snooping」。知识点编码 hcip831-4-2-7。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d64ff23eeae19fee743464f5844794c5e6970cb2def6c971c56fccce96896679"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-7-007",
+    "type": "multiple_choice",
+    "question": "部署 DHCP Snooping 时需要完成下列哪些配置？",
+    "options": {
+      "A": "为每个用户配置静态 IP",
+      "B": "把连接服务器的端口设为信任",
+      "C": "全局使能 DHCP Snooping",
+      "D": "在用户 VLAN 上使能"
+    },
+    "answer": [
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "使能功能、划分信任端口、指定生效 VLAN 是基本配置。用户地址仍由 DHCP 动态分配，无需静态配置。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "DHCP Snooping",
+    "difficulty": "medium",
+    "tags": [
+      "DHCP Snooping",
+      "配置",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-7-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / DHCP Snooping」。知识点编码 hcip831-4-2-7。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "818fce0a3cb641b8697d28d433cdeda61d42ae3d4272ffbcf4cd647e38250cb2"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-7-008",
+    "type": "true_false",
+    "question": "DHCP Snooping 会丢弃来自非信任端口的 DHCP Offer 报文。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "非信任端口只允许客户端请求方向的报文通过，服务器响应方向的 Offer、Ack 会被丢弃，从而阻止私接服务器生效。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "DHCP Snooping",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "DHCP Snooping"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-7-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / DHCP Snooping」。知识点编码 hcip831-4-2-7。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "15412802e906976350c508f49d3a423c2da399390dfd0dca4fbecbfa8c04d4dd"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-8-001",
+    "type": "single_choice",
+    "question": "IP Source Guard 的主要作用是？",
+    "options": {
+      "A": "加速路由收敛",
+      "B": "校验报文的源 IP 与源 MAC 是否合法",
+      "C": "分配 IP 地址",
+      "D": "加密 IP 报文"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IPSG 依据绑定表检查报文的源 IP、源 MAC、VLAN 与端口，不匹配即丢弃，防止地址伪造与 IP 冲突。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "IP Source Guard",
+    "difficulty": "medium",
+    "tags": [
+      "IPSG",
+      "作用"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-8-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / IP Source Guard」。知识点编码 hcip831-4-2-8。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "8811474cd7867dc33c94f81dcb96e1dfdda31f1522e0f56ad7ae8784ae9b20f7"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-8-002",
+    "type": "single_choice",
+    "question": "IPSG 的绑定表通常来自哪里？",
+    "options": {
+      "A": "ARP 表",
+      "B": "DHCP Snooping 或静态绑定",
+      "C": "路由表",
+      "D": "MAC 地址表"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "绑定表可由 DHCP Snooping 动态生成，也可手工配置静态绑定，用于不通过 DHCP 获取地址的服务器等设备。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "IP Source Guard",
+    "difficulty": "medium",
+    "tags": [
+      "IPSG",
+      "绑定表"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-8-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / IP Source Guard」。知识点编码 hcip831-4-2-8。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "288fa6db6085e4577b7aeb7cae1724247cb572414354644fcde697b4c8c737cc"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-8-003",
+    "type": "single_choice",
+    "question": "IPSG 通常部署在什么位置？",
+    "options": {
+      "A": "接入层用户端口",
+      "B": "无线控制器",
+      "C": "核心层互联链路",
+      "D": "出口路由器"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IPSG 部署在接入层靠近终端的端口，能在报文进入网络的第一跳就阻断伪造源地址的流量。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "IP Source Guard",
+    "difficulty": "medium",
+    "tags": [
+      "IPSG",
+      "部署"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-8-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / IP Source Guard」。知识点编码 hcip831-4-2-8。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "8ea9df6e94ab4480bb03e1e3a072fbce4de433d89744b8faaa7cf3315f3ac871"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-8-004",
+    "type": "single_choice",
+    "question": "IPSG 与端口安全的主要区别是？",
+    "options": {
+      "A": "前者只校验目的 IP",
+      "B": "两者完全相同",
+      "C": "前者校验源 IP，后者限制 MAC 数量",
+      "D": "后者校验源 IP"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "端口安全关注\"这个端口能学多少个 MAC\"，IPSG 关注\"这个报文的源 IP 是否属于该端口\"，两者常配合使用。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "IP Source Guard",
+    "difficulty": "hard",
+    "tags": [
+      "IPSG",
+      "端口安全"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-8-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / IP Source Guard」。知识点编码 hcip831-4-2-8。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "5e605ca5452c440e38de5ad92d6df6f3fd648d4106962f622461cda245cbe81e"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-8-005",
+    "type": "single_choice",
+    "question": "IPSG 检查的字段不包括下列哪一项？",
+    "options": {
+      "A": "VLAN 与端口",
+      "B": "源 MAC 地址",
+      "C": "源 IP 地址",
+      "D": "目的 IP 地址"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "IPSG 校验源 IP、源 MAC 及所属 VLAN 与端口，目的地址不在校验范围内。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "IP Source Guard",
+    "difficulty": "medium",
+    "tags": [
+      "IPSG",
+      "校验字段"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-8-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / IP Source Guard」。知识点编码 hcip831-4-2-8。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "dfc34266888c4af69f0301b5d3f798368286d91ae3595101a85b9a292951e51c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-8-006",
+    "type": "single_choice",
+    "question": "终端手工配置静态 IP 后无法上网，而其他终端正常，最可能的原因是？",
+    "options": {
+      "A": "VLAN 未划分",
+      "B": "生成树未收敛",
+      "C": "IPSG 缺少该 IP 的静态绑定",
+      "D": "交换机端口速率不匹配"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "IPSG 启用后只放行绑定表中存在的源 IP，手工配置的地址若未加入静态绑定就会被丢弃。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "IP Source Guard",
+    "difficulty": "medium",
+    "tags": [
+      "IPSG",
+      "排障"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-8-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / IP Source Guard」。知识点编码 hcip831-4-2-8。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "7af2a9f8c780bbccbc5efd15b02ffc289c8888108caa3a3dc3e40f331e6976f0"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-8-007",
+    "type": "multiple_choice",
+    "question": "IPSG 可以防止下列哪些行为？",
+    "options": {
+      "A": "源 IP 地址伪造",
+      "B": "路由环路",
+      "C": "IP 地址冲突",
+      "D": "MAC 地址伪造"
+    },
+    "answer": [
+      "A",
+      "C",
+      "D"
+    ],
+    "analysis": "IPSG 通过绑定表校验源 IP 与源 MAC，可阻止地址伪造与冲突。路由环路属于三层问题，需靠 TTL 与路由设计解决。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "IP Source Guard",
+    "difficulty": "medium",
+    "tags": [
+      "IPSG",
+      "防护",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-8-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / IP Source Guard」。知识点编码 hcip831-4-2-8。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "f3f2bc38128dac53dff370a01c17e3cc09f2d57ef4a3291b69d5b5cfe2d0f85e"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-8-008",
+    "type": "true_false",
+    "question": "IPSG 依赖 DHCP Snooping 生成的绑定表工作。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "动态 IPSG 必须由 DHCP Snooping 生成绑定表；若终端使用静态地址，则需要额外配置静态绑定，否则会被丢弃。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "IP Source Guard",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "IPSG"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-8-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / IP Source Guard」。知识点编码 hcip831-4-2-8。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "a730ab721a336afdb35494fcc6562ca184613f8ba307c3165fe2eb7b34817b5a"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  }
+]

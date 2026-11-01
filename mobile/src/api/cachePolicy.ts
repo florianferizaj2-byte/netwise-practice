@@ -70,6 +70,8 @@ export function persistentStudyData(
     items?: unknown[];
     total?: number;
     nextOffset?: number | null;
+    offset?: number;
+    practiceStateVersion?: number;
   };
   const items = Array.isArray(data) ? data : page.items;
   if (!Array.isArray(items) || items.length > 100) return undefined;
@@ -97,9 +99,12 @@ export function persistentStudyData(
     'difficulty',
     'tags',
     'attempted',
+    'answered',
+    'mastered',
     'favorite',
     'source',
   ];
+  if(new URLSearchParams(key.split('?')[1]).get('feedback')==='instant')fields.push('answer','analysis','expectedAnswer');
   const questions = rows.map((item) =>
     Object.fromEntries(
       fields
@@ -109,5 +114,5 @@ export function persistentStudyData(
   );
   return Array.isArray(data)
     ? questions
-    : { items: questions, total: page.total, nextOffset: page.nextOffset };
+    : { items: questions, total: page.total, nextOffset: page.nextOffset, ...(page.practiceStateVersion===undefined?{}:{practiceStateVersion:page.practiceStateVersion}), ...(page.offset===undefined?{}:{offset:page.offset}) };
 }

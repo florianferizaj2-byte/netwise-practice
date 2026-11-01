@@ -1,0 +1,1852 @@
+[
+  {
+    "id": "hcip821-3-1-2-003",
+    "type": "single_choice",
+    "question": "IS-IS 采用两级分层结构。关于 Level-1、Level-2 与 Level-1-2 路由器的职责，下列描述正确的是？",
+    "options": {
+      "A": "Level-2 路由器必须与所有 Level-1 路由器建立 Level-1 邻接，否则无法转发区域间流量",
+      "B": "Level-1 路由器只维护本区域的链路状态并计算区域内路由；Level-2 路由器负责区域间路由；Level-1-2 路由器同时参与区域和骨干",
+      "C": "Level-1 路由器负责在 Level-2 骨干中泛洪 Level-2 LSP",
+      "D": "Level-1-2 路由器只维护 Level-2 LSDB，不保存任何 Level-1 拓扑"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项 B：IS-IS 把路由域分为区域和骨干，Level-1 只感知本区域拓扑，Level-2 负责区域间（骨干）路由，Level-1-2 同时维护两个级别的链路状态，把区域接入骨干。A 错误：Level-2 路由器不需要与 Level-1 路由器建立 Level-1 邻接，跨区域由 Level-1-2 完成。C 错误：Level-2 LSP 只在 Level-2 内泛洪，Level-1 路由器既不产生也不泛洪它。D 错误：Level-1-2 同时保存 Level-1 和 Level-2 两个 LSDB。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "分层",
+      "Level-1-2"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-2-003",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 工作原理；技术依据 RFC 1195 第 1.2 节（两级分层与 Level-1/Level-2 路由器职责）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "f7fe7696b7e35e902d180f771b0921c1c76c0590f27e52a893b5904fa49edd8d"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-2-004",
+    "type": "single_choice",
+    "question": "IS-IS 路由器周期性发送 IIH（Hello PDU）。IIH 的主要作用是什么？",
+    "options": {
+      "A": "向邻居请求发送缺失的 LSP",
+      "B": "携带完整的链路状态信息，用于邻居之间同步 LSDB",
+      "C": "建立并维持邻接，携带区域地址、保持时间、DIS 优先级等参数",
+      "D": "向区域内通告从其他协议引入的外部路由"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项 C：IIH 用于发现邻居、建立并维持邻接，报文中包含区域地址、保持时间、DIS 优先级等邻接参数。B 错误：完整的链路状态信息由 LSP 携带，不是 Hello 的职责。A 错误：请求缺失的 LSP 使用 PSNP，不是 Hello。D 错误：引入的外部路由通过 LSP 中的可达性信息通告。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "easy",
+    "tags": [
+      "IS-IS",
+      "IIH",
+      "邻接"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-2-004",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 工作原理；技术依据 RFC 1195 第 5.1 节（Hello 报文初始化并维持邻接）与第 4.4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "9edda3becc0dcc8cbca880e5a9fdacc34bb17ee91a14986ebeb09eb5aee779ab"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-2-005",
+    "type": "single_choice",
+    "question": "在 IS-IS 广播网络中，DIS 的主要职责是什么？",
+    "options": {
+      "A": "同时选举备份 DIS，在主 DIS 故障时立即接管",
+      "B": "与每台路由器建立 Full 邻接，其他路由器之间不再建立邻接",
+      "C": "作为该网段的默认网关，负责转发所有区域间流量",
+      "D": "代表该广播网产生伪节点 LSP，并周期性发送 CSNP 以同步网段内各路由器的 LSDB"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项 D：广播网被抽象为一个伪节点，由 DIS 代表伪节点产生 LSP，并周期发送 CSNP 帮助网段内路由器同步数据库。B 错误：IS-IS 广播网上各路由器之间仍会建立邻接，DIS 并不阻止其他路由器互建邻接。C 错误：DIS 不是默认网关，区域间流量由 Level-1-2 路由器转发。A 错误：IS-IS 没有备份 DIS，这一点与 OSPF 的 DR/BDR 不同。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "DIS",
+      "伪节点"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-2-005",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 工作原理；技术依据 RFC 1195 第 4.3 节（LAN、DIS 与伪节点）与第 1.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "21b487339070f3146d007426ddffef23f19b7b5c957b155e578b225000743d91"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-2-006",
+    "type": "single_choice",
+    "question": "在 IS-IS 广播网络中，关于 DIS 发送 CSNP 的时机，下列描述正确的是？",
+    "options": {
+      "A": "DIS 只在收到新的 LSP 后立即发送一次 CSNP，平时不发送",
+      "B": "DIS 周期性发送 CSNP，并在邻接建立时发送 CSNP，用于把 LSDB 中 LSP 的摘要同步给邻居",
+      "C": "DIS 只在 LSDB 发生变化时发送 CSNP，邻接建立时不发送",
+      "D": "CSNP 由网段内每台非 DIS 路由器各自周期发送"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项 B：CSNP 列出 LSDB 中所有 LSP 的摘要，DIS 会周期发送，并在邻接首次建立时发送，使邻居快速发现差异并请求缺失的 LSP。A 错误：CSNP 不是每收到一个 LSP 才发一次，收到新 LSP 后的确认通常由 PSNP 完成。C 错误：邻接建立时正需要 CSNP 完成初始同步，不能省略。D 错误：广播网上由 DIS 发送 CSNP，非 DIS 路由器不承担这一职责。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "CSNP",
+      "LSDB 同步"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-2-006",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 工作原理；技术依据 RFC 1195 第 5.1 节（CSNP 用于周期性或初始同步数据库）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "22d8824db78fb513a0a3becfda1a3c0764b873f38f7b86da46371bb163a304b0"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-2-007",
+    "type": "single_choice",
+    "question": "在 IS-IS 广播网络中，路由器收到 LSPID 为 0010.0100.1001.02-00 的 LSP。其中 02 表示什么？",
+    "options": {
+      "A": "区域地址的一部分",
+      "B": "该 LSP 的分片号（Fragment Number）",
+      "C": "伪节点标识（Pseudonode ID），表示该 LSP 由 DIS 代表该广播网产生",
+      "D": "该 LSP 的序列号"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项 C：LSPID 由 6 字节 System ID、1 字节伪节点标识和 1 字节分片号组成。这里的 02 是非零伪节点标识，说明它描述的是 DIS 代表的广播网伪节点。B 错误：分片号是连字符后的 00。A 错误：区域地址不包含在 LSPID 中，而在 NET 和 Hello 报文的区域地址字段中。D 错误：序列号位于 LSP 报文内部，不是 LSPID 的组成部分。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "LSPID",
+      "伪节点"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-2-007",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 工作原理；技术依据 RFC 1195 第 4.3 节（伪节点 LSP）与第 3.6 节（多个 LSP 与 SNP）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "069ced0016f9a5849d874facfa790496b36f04d368ea747be13a05d8f8e9deb5"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-2-008",
+    "type": "single_choice",
+    "question": "IS-IS 路由器收到同一 LSPID 的新 LSP 时，判断哪一个更新的规则是什么？",
+    "options": {
+      "A": "以本地接收时间更晚的 LSP 为更新",
+      "B": "只比较剩余寿命，剩余寿命大者更新，与序列号无关",
+      "C": "只比较校验和，校验和大者更新",
+      "D": "先比较序列号，序列号大者更新；序列号相同则比较剩余寿命，剩余寿命大者更新；仍相同再比较校验和"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项 D：IS-IS 按序列号、剩余寿命、校验和的顺序判断 LSP 新旧，序列号是首要依据，剩余寿命用于处理序列号相同的情况，校验和作为最后的比较项。B 错误：绕过序列号会把旧 LSP 误判为新 LSP。C 错误：校验和只用于最后一级比较，不能单独决定新旧。A 错误：接收时间与 LSP 的版本无关，网络乱序时按接收时间判断会出错。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS",
+      "LSP",
+      "序列号"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-2-008",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 工作原理；技术依据 RFC 1195 第 5.1 节（SNP 用于确认最新 LSP 序列号）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "eee99810d32d92530dd0e259a8ca3fa7699b985d5a0a4defe6320446aee7b316"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-2-009",
+    "type": "single_choice",
+    "question": "关于 IS-IS 中 CSNP 与 PSNP 的作用，下列描述正确的是？",
+    "options": {
+      "A": "CSNP 用于请求缺失的 LSP；PSNP 用于描述完整 LSDB",
+      "B": "CSNP 列出 LSDB 中 LSP 的摘要，用于数据库同步；PSNP 可对 LSP 进行确认，也可用于请求缺失的 LSP",
+      "C": "CSNP 与 PSNP 都只在点到点链路上使用",
+      "D": "CSNP 只能由 Level-1 路由器产生；PSNP 只能由 DIS 产生"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项 B：CSNP 是完整序列号报文，携带数据库摘要，用于周期性或初始同步；PSNP 是部分序列号报文，既可作为确认，也可作为请求。A 错误：把两者的功能对调了。C 错误：CSNP 主要用于广播网同步，PSNP 在广播网和点到点链路上都可能使用。D 错误：CSNP 由 DIS 在广播网上发送，并非 Level-1 专属；PSNP 也不是只有 DIS 才能产生。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "CSNP",
+      "PSNP"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-2-009",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 工作原理；技术依据 RFC 1195 第 5.1 节（完整与部分序列号报文的定义及用途）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "9039e28b567ea28f4823efc6a3ed31083dcc1f93e06b6f41bf77de2ca7f6d9d1"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-2-010",
+    "type": "single_choice",
+    "question": "在 IS-IS 多区域组网中，关于 Level-2 骨干区域的连续性，下列描述正确的是？",
+    "options": {
+      "A": "Level-2 骨干可以被 Level-1 区域分割成互不相连的片段，区域间路由仍能正常计算",
+      "B": "不同 Level-1 区域之间可以直接建立 Level-1 邻接并交换区域间路由",
+      "C": "每个 Level-1 区域都要通过 Level-1-2 路由器接入连续的 Level-2 骨干，区域间流量经 Level-2 转发",
+      "D": "Level-1-2 路由器会把收到的 Level-1 LSP 原样泛洪到 Level-2 骨干"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项 C：IS-IS 要求 Level-2 路由器集合保持连通，Level-1 区域通过 Level-1-2 接入骨干，区域间流量必须经过 Level-2。B 错误：Level-1 邻接要求两端在同一区域，不同区域不能直接建立 Level-1 邻接。A 错误：Level-2 骨干被分割后没有用 Level-1 链路修复的机制，区域间路由会出问题。D 错误：Level-1 LSP 只在本区域泛洪，Level-1-2 会另外产生描述自身的 Level-2 LSP，而不是原样转发。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "Level-2",
+      "骨干区域"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-2-010",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 工作原理；技术依据 RFC 1195 第 1.2 节（Level-2 路由器集合必须连通，Level-1 区域经 Level-2 互通）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "53cf448dcc689ad58a7c13610cbb3e68caa99cec414d989cedee2a9402eba4c5"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-2-011",
+    "type": "single_choice",
+    "question": "一台 Level-1-2 路由器同时维护 Level-1 和 Level-2 两个 LSDB。关于它的路由计算，下列描述正确的是？",
+    "options": {
+      "A": "两个 LSDB 计算出的路由完全相同，因此只需保留一份",
+      "B": "把两个 LSDB 合并成一张图后只运行一次 SPF",
+      "C": "只运行 Level-2 SPF，Level-1 区域内的路由由 DIS 下发",
+      "D": "分别以两个 LSDB 为输入运行 SPF，得到区域内路由和区域间/骨干路由，再按优先级选出最优路由"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项 D：IS-IS 的 Level-1 和 Level-2 各自维护独立的链路状态数据库，并分别运行 SPF，路由器再把两个级别算出的候选路由按优先级选优。B 错误：两个级别的拓扑和泛洪范围不同，不能合并成一张图。C 错误：Level-1 区域内的路由由 Level-1 SPF 计算，DIS 只负责广播网伪节点，不下发路由。A 错误：两个 LSDB 描述的范围不同，计算结果也不相同。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS",
+      "SPF",
+      "LSDB"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-2-011",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 工作原理；技术依据 RFC 1195 第 1.2 节与第 3.10 节（路由优先级与 Dijkstra 计算）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "8ef469640dc7302918dec1edcbec28c7cdc6f9668f287fd3ec1edfa84ac81a2b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-2-012",
+    "type": "single_choice",
+    "question": "在 IS-IS 的 narrow 度量模式下，链路开销字段为 6 位。一条链路的 cost 最大可以配置为多少？",
+    "options": {
+      "A": "15",
+      "B": "63",
+      "C": "255",
+      "D": "65535"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项 B：6 位二进制能表示的最大值是 2 的 6 次方减 1，即 64-1=63。A 的 15 是 4 位最大值；C 的 255 是 8 位最大值；D 的 65535 是 16 位最大值，均与 6 位字段不符。需要注意，路径总度量与单链路字段的编码宽度不同，这里问的是一条链路的 cost 上限。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "度量",
+      "cost"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-2-012",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 工作原理；技术依据 RFC 1195 第 3.2 节（度量为 6 位字段，最大可报告值为 63）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "b67cbf1d5a4187dc62216f4ea496625ab1eab44e41dd929e841faa3f0f01221f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-2-013",
+    "type": "single_choice",
+    "question": "华为设备上，某 IS-IS 接口的 Hello 发送间隔配置为 5 秒，holding multiplier 配置为 4。邻居在该接口上超过多久收不到 Hello 就认为邻接失效？",
+    "options": {
+      "A": "9 秒",
+      "B": "15 秒",
+      "C": "20 秒",
+      "D": "60 秒"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项 C：邻接保持时间等于 Hello 发送间隔乘以 holding multiplier，即 5×4=20 秒。A 的 9 秒是把 5 与 4 相加；B 的 15 秒相当于 multiplier 取 3（5×3）；D 的 60 秒相当于 multiplier 取 12，均与题干参数不符。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "easy",
+    "tags": [
+      "IS-IS",
+      "Hello",
+      "保持时间"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-2-013",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 工作原理；华为设备命令语义按题干参数表述；技术依据 RFC 1195 第 4.4 节与第 5.1 节（Hello 维持邻接）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "4e53a85920d7ca9467ffaa8233a256831217fb1f0e30a3690c5d93681bbb266d"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-2-014",
+    "type": "single_choice",
+    "question": "IS-IS 路由器从邻居收到 IIH，但该 IIH 的邻居列表中尚未包含本路由器的 System ID。此时邻接处于什么状态？",
+    "options": {
+      "A": "Down",
+      "B": "Init",
+      "C": "Up",
+      "D": "ExStart"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项 B：收到对端 Hello、但对端 Hello 中还没有本端标识，说明只完成了单向发现，邻接处于 Init。A 错误：Down 表示尚未收到对端任何 Hello。C 错误：Up 要求双方 Hello 的邻居列表中都包含对方。D 错误：ExStart 是 OSPF 邻接状态机中的状态，IS-IS 没有该状态。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "easy",
+    "tags": [
+      "IS-IS",
+      "邻接状态",
+      "Init"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-2-014",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 工作原理；技术依据 RFC 1195 第 4.4 节（邻接维护）与第 5.1 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "224a5ddd237446daffcec035d1d121a603d702ae377540de26bc9b31e2b03773"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-2-015",
+    "type": "single_choice",
+    "question": "两台路由器直连，接口均使能 IS-IS，区域地址和 Level 配置一致，但邻接长期停留在 Init。最可能的原因是？",
+    "options": {
+      "A": "两台路由器的 System ID 相同",
+      "B": "本端发出的 Hello 能到达对端，但对端发出的 Hello 不能到达本端，形成单向通信",
+      "C": "两台路由器之间的 Level-2 骨干不连续",
+      "D": "两台路由器的 DIS 优先级不同"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项 B：Init 表示本端收到了对端 Hello，但对端还未在 Hello 中看到本端，典型原因是反向 Hello 丢失或链路单向。A 错误：System ID 相同会造成路由器标识冲突，但不会只表现为单向 Hello。C 错误：Level-2 骨干连续性影响区域间路由，不影响本地邻接建立。D 错误：DIS 优先级只决定广播网中谁当选 DIS，不会让邻接停在 Init。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "故障定位",
+      "Init"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-2-015",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 工作原理；技术依据 RFC 1195 第 4.4 节（邻接建立依赖双向 Hello）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "4fef81d6f0f1bd15c63b32576f991b302ef3220ad9c2b83b1632deb18e5472f4"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-2-016",
+    "type": "single_choice",
+    "question": "在 IS-IS 广播网络中，关于非 DIS 路由器之间的邻接关系，下列描述正确的是？",
+    "options": {
+      "A": "非 DIS 路由器之间不建立邻接，只有 DIS 与它们建立邻接",
+      "B": "非 DIS 路由器之间只保持 Init，必须经过 DIS 才能互相通信",
+      "C": "非 DIS 路由器之间也会建立并保持 Up 邻接；DIS 的作用是代表广播网产生伪节点 LSP，并不阻止其他路由器互建邻接",
+      "D": "非 DIS 路由器之间的邻接由 DIS 指定，未指定的不建立"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项 C：IS-IS 在广播网上让各路由器彼此建立邻接，DIS 只负责代表伪节点生成 LSP 和同步 CSNP，不限制其他路由器之间的邻接。B 错误：Init 表示单向发现，正常广播网最终应达到 Up。A 错误：这是把 OSPF 中非 DR 之间保持 2-Way 的行为套用到 IS-IS。D 错误：邻接由 Hello 交互决定，不由 DIS 指定。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS",
+      "广播网",
+      "邻接"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-2-016",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 工作原理；技术依据 RFC 1195 第 4.3 节（广播网与伪节点）与第 1.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "10c0d60942bd6bd107bff1fca3ab0467b2b207b8b71a548a9d049e84ee17878b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-2-017",
+    "type": "single_choice",
+    "question": "IS-IS 路由器启动并完成基本配置后，下列过程的一般顺序是什么？①建立邻接 ②通过 LSP、CSNP、PSNP 同步 LSDB ③运行 SPF 计算 ④将最优路由写入路由表",
+    "options": {
+      "A": "③→①→②→④",
+      "B": "②→①→③→④",
+      "C": "①→③→②→④",
+      "D": "①→②→③→④"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项 D：先通过 Hello 建立邻接，再交换 LSP 并用 CSNP/PSNP 完成数据库同步，之后才有完整的拓扑运行 SPF，最后把计算结果安装到路由表。B 错误：没有邻接就无法交换 LSP，数据库同步不可能先于邻接。C 错误：LSDB 未同步时运行 SPF 会得到不完整甚至错误的结果。A 错误：SPF 依赖邻接和 LSDB，不能排在它们之前。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "easy",
+    "tags": [
+      "IS-IS",
+      "协议流程",
+      "SPF"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-2-017",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 工作原理；技术依据 RFC 1195 第 3.1 节与第 5.1 节（邻接、数据库同步与路由计算的关系）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "71c84a7375fc8c60d7192dafdc479c1262ea4f07db0736d7255dd21ed0b86077"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-2-018",
+    "type": "single_choice",
+    "question": "一台 IS-IS 路由器从邻居收到一个比本地 LSDB 中更新的 LSP 后，通常如何处理？",
+    "options": {
+      "A": "只更新本地 LSDB，不向任何邻居泛洪",
+      "B": "更新本地 LSDB，向除入接口外的其他邻接泛洪该 LSP，并在 PSNP 中确认",
+      "C": "直接丢弃，等待 DIS 重新发送",
+      "D": "先运行 SPF，再把该 LSP 泛洪给邻居"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项 B：收到更新的 LSP 后先更新数据库，再向其他邻接泛洪，并用 PSNP 向发送方确认，SPF 在数据库变化后按调度执行。A 错误：不泛洪会导致其他路由器的数据库无法收敛。C 错误：更新的 LSP 正是需要接收和扩散的信息，不应丢弃。D 错误：泛洪与 SPF 的先后不是先算后发，SPF 通常在数据库更新后触发。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "LSP 泛洪",
+      "PSNP"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-2-018",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 工作原理；技术依据 RFC 1195 第 5.1 节（LSP/SNP 的泛洪与确认）与第 3.1 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "5a633e59dc38903e85f31f953f265eb035f83963849c5c9579d20c9305fbc6a4"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-2-019",
+    "type": "single_choice",
+    "question": "维护人员在一台 IS-IS 路由器上设置 Overload 位后，其他路由器在计算路径时会如何处理经过该路由器的流量？",
+    "options": {
+      "A": "仍把该路由器当作最优中转节点，只是降低其优先级",
+      "B": "删除该路由器的所有路由，包括其直连网段",
+      "C": "不把该路由器当作中转节点，但去往该路由器直连网段的流量仍可正常到达",
+      "D": "只对 Level-1 生效，对 Level-2 不生效"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项 C：Overload 位表示该路由器资源不足，其他路由器在 SPF 计算中避免把它作为中转节点，但指向其直连网段的路由仍保留，便于管理访问。B 错误：不会删除直连网段，否则该设备将完全不可达。A 错误：Overload 的效果是避开中转，不是降低优先级后仍优先使用。D 错误：Overload 位按级别分别设置，可影响 Level-1 和 Level-2，题干未限定只影响 Level-1。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "Overload",
+      "SPF"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-2-019",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 工作原理；技术依据 RFC 1195 第 1.2 节（LSP 中的可达性标志与分层路由）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "6c366a9e5cf99535cf9a883827c96853f1b6765fe76efcedc7c2cee4713067e4"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-2-020",
+    "type": "single_choice",
+    "question": "在 IS-IS 中，Level-1-2 路由器把 Level-2 路由通过路由渗透（route leak）引入 Level-1 区域，主要目的是什么？",
+    "options": {
+      "A": "用 Level-1 LSP 替换 Level-2 LSP 的泛洪",
+      "B": "把 Level-1 明细路由引入 Level-2，减少 Level-2 的路由数量",
+      "C": "阻止 Level-1 路由器访问区域外网络",
+      "D": "让 Level-1 路由器获得部分区域外明细路由，避免所有出区域流量都依赖默认路由"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项 D：路由渗透把 Level-2 路由引入 Level-1，使 Level-1 路由器能按明细选择出口，而不是把所有区域外流量都交给默认路由。B 错误：那是 Level-1-2 向 Level-2 通告或汇总 Level-1 路由，方向相反。C 错误：渗透是为了更好地访问区域外网络，不是阻断。A 错误：渗透只改变路由信息的发布范围，不改变 LSP 的泛洪机制。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "路由渗透",
+      "Level-1"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-2-020",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 工作原理；技术依据 RFC 1195 第 1.2 节与第 3.2 节（区域间可达性信息的层次化发布）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "709494acf905ce6d04a0aa2f22b867ad66af21da2771460edd87f9850162a938"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-2-021",
+    "type": "single_choice",
+    "question": "IS-IS 要同时承载 IPv6 路由，协议本身采用了什么方式？",
+    "options": {
+      "A": "必须改用 OSPFv3，IS-IS 不能承载 IPv6 路由",
+      "B": "在原有 IS-IS PDU 中新增 IPv6 可达性 TLV，仍使用 IIH、LSP、SNP 和 SPF，不需要新的传输协议",
+      "C": "必须把 NET 改为 IPv6 地址才能计算 IPv6 路由",
+      "D": "为 IPv6 单独启动一个基于 TCP 的 IS-IS 进程"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项 B：IS-IS 通过扩展 TLV 携带 IPv6 可达性信息，报文类型和 SPF 计算框架保持不变，因此同一进程可以同时支持 IPv4 和 IPv6。A 错误：IS-IS 可以通过扩展支持 IPv6，不是必须改用 OSPFv3。C 错误：NET 是 NSAP 地址，与 IPv6 地址无关，不需要改成 IPv6 地址。D 错误：IS-IS 直接封装在链路层，不使用 TCP，也不需要为 IPv6 另起一个 TCP 进程。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "IPv6",
+      "TLV"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-2-021",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 工作原理；技术依据 RFC 1195 第 5.1 节与第 5.2 节（通过可变长 TLV 扩展 IS-IS 承载的信息）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "65c7d7f33124242d97a202bbafb2ef34b387ab0a3ebfb51e50e2bc5e4a375283"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-2-022",
+    "type": "single_choice",
+    "question": "与 OSPFv2 相比，IS-IS 在协议栈上的主要特点是什么？",
+    "options": {
+      "A": "IS-IS 使用 UDP 520 端口交换路由",
+      "B": "IS-IS 使用 TCP 179 端口建立邻居",
+      "C": "IS-IS 的 PDU 直接封装在数据链路层，不依赖 IP 承载；OSPFv2 封装在 IP 中，使用 IP 协议号 89",
+      "D": "IS-IS 必须运行在 IPv6 之上，不能用于 IPv4 网络"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项 C：IS-IS 的报文直接运行在链路层之上，不依赖 IP 报文承载；OSPFv2 直接封装在 IP 中，IP 协议号为 89。B 错误：TCP 179 是 BGP 的端口。A 错误：UDP 520 是 RIP 使用的端口。D 错误：IS-IS 可以用于 IPv4 网络，也可以通过扩展 TLV 承载 IPv6 路由，但不要求底层必须是 IPv6。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "OSPF",
+      "协议栈"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-2-022",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 工作原理；技术依据 RFC 1195 第 4.1 节与第 5.1 节（IS-IS PDU 直接使用链路层封装）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "70af7df1650c1d7c8e850c4f76ddd9b77cb1ade74b32fb31316a53b16d2b2145"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-2-023",
+    "type": "single_choice",
+    "question": "在华为设备上执行 display isis peer，某邻居的输出中邻接级别为 L1、状态为 Up。下列解读正确的是？",
+    "options": {
+      "A": "该邻接只能承载 Level-2 LSP，不能承载 Level-1 LSP",
+      "B": "该邻居是 Level-2 路由器，邻接尚未建立",
+      "C": "该邻居一定是本网段的 DIS",
+      "D": "本端与该邻居建立了 Level-1 邻接，且邻接已进入 Up 状态，可以交换 Level-1 LSP"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项 D：输出中的级别表示邻接所属的层次，L1 即 Level-1 邻接；State 为 Up 表示双方已完成邻接建立，可以交换 Level-1 的 LSP。B 错误：L1 与 Up 已经明确否定了 Level-2 和未建立的说法。C 错误：DIS 身份不由邻接级别和 Up 状态表示，不能据此断定。A 错误：Level-1 邻接承载的正是 Level-1 LSP，Level-2 LSP 需要 Level-2 邻接。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "easy",
+    "tags": [
+      "IS-IS",
+      "display isis peer",
+      "验证"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-2-023",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 工作原理；输出字段语义按华为设备 display isis peer 的公开显示；技术依据 RFC 1195 第 4.4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "51f0d3649ee8ad8694c38d64fbf0c734a1d19976aa3a7cf6f25f719ac74aa735"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-2-024",
+    "type": "single_choice",
+    "question": "一台 IS-IS 路由器需要通告的链路状态信息超过单个 LSP 的承载能力时，如何处理？",
+    "options": {
+      "A": "丢弃超出部分，只保留第一个 LSP",
+      "B": "拆分为多个 LSP 分片，各分片使用相同的 System ID 和伪节点 ID、不同的分片号，并分别泛洪",
+      "C": "把 LSP 转换为 CSNP 后发送",
+      "D": "降低接口 cost，使 LSP 长度自动缩短"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项 B：IS-IS 允许把过长的链路状态信息拆成多个 LSP 分片，分片号不同，每个分片独立泛洪并在接收端共同参与 SPF。A 错误：丢弃超出部分会造成链路状态信息缺失，导致路由错误。C 错误：CSNP 只是数据库摘要，不能承载完整的链路状态内容。D 错误：cost 是度量值，与 LSP 的编码长度无关。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "LSP 分片",
+      "泛洪"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-2-024",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 工作原理；技术依据 RFC 1195 第 3.6 节（多个 LSP 与 SNP 的分片机制）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "e111e547800ad8c7dfa1984a84703024c2bcd38e1e745a4abae9e367ed0c24b0"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-2-025",
+    "type": "single_choice",
+    "question": "一台运行正常的 Level-1 路由器，关于它的 LSDB 和路由表，下列哪项一定不成立？",
+    "options": {
+      "A": "它的路由表中有一条指向 Level-1-2 路由器的默认路由",
+      "B": "它的 Level-1 LSDB 中包含本区域路由器的 LSP",
+      "C": "它的 Level-1 LSDB 中包含其他区域的明细 LSP",
+      "D": "它与本区域的 Level-1-2 路由器建立了 Level-1 邻接"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项 C：Level-1 LSP 只在本区域泛洪，Level-1 路由器的 LSDB 中不会出现其他区域的明细 LSP，区域外目的地通过默认路由访问。B 正常：本区域路由器的 LSP 正是 Level-1 LSDB 的内容。A 正常：Level-1-2 通过 Attached 位使 Level-1 路由器生成默认路由。D 正常：同区域的 Level-1 路由器可以与 Level-1-2 建立 Level-1 邻接。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "Level-1",
+      "LSDB"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-2-025",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 工作原理；技术依据 RFC 1195 第 1.2 节（Level-1 路由器不掌握区域外拓扑）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "6dd27b9706c8330dc68411387e2b4ac792bae3891055c2c614a5660b274cab18"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-2-026",
+    "type": "single_choice",
+    "question": "某企业将接入层划分为多个 Level-1 区域，汇聚层路由器作为 Level-1-2，核心层运行 Level-2。采用这种设计的主要依据是什么？",
+    "options": {
+      "A": "所有区域必须配置相同的区域地址，否则无法通过 Level-2 互通",
+      "B": "Level-1 路由器可以直接计算其他区域的明细路由，因此不需要 Level-2",
+      "C": "Level-2 路由器必须与接入层每台路由器建立 Level-1 邻接才能转发",
+      "D": "Level-1 区域内部拓扑变化只影响本区域，区域间流量经 Level-1-2 进入连续的 Level-2 骨干转发"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项 D：分层设计把区域内的拓扑变化限制在区域内，区域间流量由 Level-1-2 交给连续的 Level-2 骨干，既隔离震荡又保持互通。B 错误：Level-1 路由器不保存其他区域的明细，需要 Level-1-2 和 Level-2 完成区域间转发。C 错误：Level-2 路由器不必与接入层建立 Level-1 邻接，跨层连接由 Level-1-2 承担。A 错误：不同区域本来就可以使用不同的区域地址，Level-2 不要求区域地址一致。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "分层设计",
+      "场景"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-2-026",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 工作原理；技术依据 RFC 1195 第 1.2 节（区域与骨干的分层设计）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "06f752db66d9fec1ee80d00af3fab74681627231a1d146bb385aee3386990372"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-2-027",
+    "type": "single_choice",
+    "question": "一台 Level-1-2 路由器在区域 A 内与 Level-1 路由器建立邻接，同时与区域 B 的 Level-2 路由器建立邻接。关于它的 LSDB，下列描述正确的是？",
+    "options": {
+      "A": "只维护一个 LSDB，其中混合保存 Level-1 和 Level-2 LSP",
+      "B": "分别维护 Level-1 LSDB 和 Level-2 LSDB，前者保存区域 A 的拓扑，后者保存 Level-2 骨干拓扑",
+      "C": "只维护 Level-2 LSDB，区域 A 的拓扑由 Level-1 路由器汇总后上报",
+      "D": "两个 LSDB 的内容必须完全一致，否则无法计算路由"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项 B：Level-1-2 路由器同时属于区域和骨干，分别维护两个独立的 LSDB，Level-1 LSDB 描述区域 B，Level-2 LSDB 描述骨干，两个级别各自运行 SPF。A 错误：两个级别的 LSP 泛洪范围和数据库是分开的，不能混在一个 LSDB 中。C 错误：Level-1 区域拓扑由 Level-1-2 自己通过 Level-1 邻接学习，不依赖 Level-1 路由器汇总上报。D 错误：两个 LSDB 描述不同范围，内容本来就不相同。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "Level-1-2",
+      "LSDB"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-2-027",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 工作原理；技术依据 RFC 1195 第 1.2 节与第 3.10 节（两个级别分别计算）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "71f09d36bbc2ec314f15c8ba266546daaca2626bda4e7fbbe99a425cb3558133"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-3-001",
+    "type": "single_choice",
+    "question": "在华为设备上，接口已配置 IP 地址且 IS-IS 进程已创建，但接口视图下没有执行 isis enable。该接口会有什么表现？",
+    "options": {
+      "A": "可以建立邻接，但不能发送 LSP",
+      "B": "仍然发送 Hello 并建立邻接，只是不参与 SPF 计算",
+      "C": "不发送也不接收 IS-IS 报文，无法建立邻接，也不参与 LSP 泛洪",
+      "D": "会自动成为被动接口，并把网段通告出去"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项 C：华为设备的 IS-IS 采用接口使能方式，未执行 isis enable 的接口不会发送 Hello，也不会处理 IS-IS 报文，因此无法建立邻接或参与泛洪。B 错误：不使能就不会发送 Hello，更不可能建立邻接。A 错误：邻接本身就无法建立，谈不上只缺少 LSP。D 错误：被动接口需要显式配置 isis silent，不会因为没有 isis enable 而自动产生通告。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "接口使能",
+      "isis enable"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-3-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 基本配置；华为设备命令语义按题干表述；技术依据 RFC 1195 第 4.4 节（邻接建立在使能 IS-IS 的接口上）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "460395c3cc21693f9a15f8c28e8176dea2c36ef3596d1acca21ca0b10136c80d"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-3-002",
+    "type": "single_choice",
+    "question": "在华为设备上为一台 IS-IS 路由器配置多个 NET（例如用于区域迁移），这些 NET 必须满足什么条件？",
+    "options": {
+      "A": "多个 NET 必须分别属于不同的 IS-IS 进程",
+      "B": "所有 NET 的区域地址必须相同，System ID 可以不同",
+      "C": "所有 NET 必须逐字节完全相同",
+      "D": "所有 NET 的 System ID 必须相同，区域地址可以不同"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项 D：多个 NET 仍然标识同一台路由器，因此 System ID 必须一致；区域地址可以不同，用于区域地址迁移或合并时平滑过渡。B 错误：System ID 不同会被当作不同的路由器，造成标识冲突。C 错误：多个完全相同的 NET 没有意义，也不符合多 NET 的迁移用途。A 错误：同一 IS-IS 进程可以配置多个 NET。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "NET",
+      "System ID"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-3-002",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 基本配置；华为设备命令语义按题干表述；技术依据 RFC 1195 第 1.2 节（同一路由器可配置多个区域地址）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "0bb331d8e72d805f7ced13651ae46acfc11612268e9b88bbbd7b36823503185f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-3-003",
+    "type": "single_choice",
+    "question": "华为设备上，一台 Level-1-2 路由器的某接口配置 isis circuit-level level-1 后，该接口的邻接行为是什么？",
+    "options": {
+      "A": "同时建立 Level-1 和 Level-2 邻接",
+      "B": "只建立 Level-1 邻接，不建立 Level-2 邻接，进程本身仍可支持两个级别",
+      "C": "只建立 Level-2 邻接",
+      "D": "不建立任何邻接"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项 B：接口的 circuit-level 限定该接口建立邻接的级别，配置为 level-1 后只建立 Level-1 邻接，但路由器的 Level-1-2 进程能力不受影响，其他接口仍可建立 Level-2 邻接。A 错误：同时建立两个级别是 Level-1-2 接口未限制级别时的默认行为。C 错误：level-1 与 level-2 的含义相反。D 错误：配置后仍会建立 Level-1 邻接，不是完全禁用。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "circuit-level",
+      "邻接级别"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-3-003",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 基本配置；华为设备命令语义按题干表述；技术依据 RFC 1195 第 1.2 节与第 4.4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "13e086f4b669aa9847604b64ce698ef68331a8c80ec8f7c94a69a8cf347154c3"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-3-004",
+    "type": "single_choice",
+    "question": "华为设备上，把广播型以太网接口的 IS-IS 链路类型配置为 p2p 后，会有什么变化？",
+    "options": {
+      "A": "该接口只能建立 Level-2 邻接",
+      "B": "该接口仍然选举 DIS，但 DIS 不产生伪节点 LSP",
+      "C": "该接口不再进行 DIS 选举，直接与对端建立点到点邻接",
+      "D": "该接口会自动关闭 IP 转发"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项 C：把接口类型改为 p2p 后，IS-IS 按点到点链路处理，不进行 DIS 选举，也不产生伪节点 LSP，双方直接建立邻接。B 错误：p2p 链路上没有 DIS 选举。A 错误：链路类型与邻接级别是两个独立配置，p2p 不会限制为 Level-2。D 错误：IS-IS 链路类型不影响接口的 IP 转发功能。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "circuit-type",
+      "p2p"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-3-004",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 基本配置；华为设备命令语义按题干表述；技术依据 RFC 1195 第 4.3 节与第 4.4 节（点到点链路不选 DIS）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "9edb6a08976ec6f0c5ee43df3d87087ff6f5bd133cb6e05ef3f5dcbc3701e92b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-3-005",
+    "type": "single_choice",
+    "question": "某 IS-IS 网络有两条到达同一目的网段的路径，开销分别为 20 和 30。管理员把开销 30 的路径接口 cost 改为 15 后，路由会如何变化？",
+    "options": {
+      "A": "路由会被删除，必须重启 IS-IS 进程才能恢复",
+      "B": "原开销 20 的路径仍然最优，因为 IS-IS 只比较跳数",
+      "C": "两条路径会自动负载分担，与开销无关",
+      "D": "开销 15 的路径成为最优路由；若两条路径开销相同，还可能形成等价路由负载分担"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项 D：IS-IS 按链路开销累加计算最短路径，修改后 15 小于 20，该路径成为最优；当多条路径总开销相等时才可能形成等价负载分担。B 错误：IS-IS 比较的是度量开销，不是跳数。C 错误：只有开销相等的路径才会负载分担，20 与 15 不等价。A 错误：cost 变化会触发 SPF 重新计算，路由自动更新，不需要重启进程。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "cost",
+      "选路"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-3-005",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 基本配置；华为设备命令语义按题干表述；技术依据 RFC 1195 第 3.10 节（按度量计算最短路径）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "8642cfc5b1004691956a3be42d201bf91073ebc91ca1fe39c67591e7e7ef2a12"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-3-006",
+    "type": "single_choice",
+    "question": "华为设备上，IS-IS 接口配置 isis timer hello 5、isis timer holding-multiplier 4。邻居超过多久收不到该接口的 Hello 就认为邻接失效？",
+    "options": {
+      "A": "9 秒",
+      "B": "15 秒",
+      "C": "20 秒",
+      "D": "60 秒"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项 C：保持时间等于 Hello 间隔乘以 holding multiplier，即 5×4=20 秒，超过该时间未收到 Hello 就拆除邻接。A 的 9 秒是 5 与 4 相加；B 的 15 秒相当于 multiplier 取 3；D 的 60 秒相当于 multiplier 取 12，均不符合题干参数。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本配置",
+    "difficulty": "easy",
+    "tags": [
+      "IS-IS",
+      "timer hello",
+      "holding-multiplier"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-3-006",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 基本配置；华为设备命令语义按题干参数表述；技术依据 RFC 1195 第 4.4 节与第 5.1 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "f7228791dc28197c8cfb27865804ffb6a99cfa5c54f870269f6ad2b4e51e4dd3"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-3-007",
+    "type": "single_choice",
+    "question": "在华为设备上，IS-IS 的接口认证与区域认证在作用范围上有什么区别？",
+    "options": {
+      "A": "接口认证作用于所有 LSP；区域认证只作用于 Hello",
+      "B": "接口认证作用于该接口发送和接收的 Hello 报文；区域认证作用于本区域的 LSP、CSNP 和 PSNP",
+      "C": "两者都只作用于 Hello 报文",
+      "D": "配置接口认证后，区域认证会自动失效"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项 B：接口认证只校验该接口的 Hello 报文，区域认证校验区域内的 LSP 和序列号报文，两者覆盖的报文类型不同。A 错误：把接口认证与区域认证的范围对调了。C 错误：区域认证不只作用于 Hello，还覆盖 LSP、CSNP、PSNP。D 错误：两类认证分别作用于不同报文，配置接口认证不会让区域认证自动失效。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本配置",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS",
+      "认证",
+      "接口认证"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-3-007",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 基本配置；华为设备命令语义按题干表述；技术依据 RFC 1195 第 3.9 节与第 5.2 节（认证字段覆盖的 PDU）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "c84dc824263ec9e17c07ffe3b85848ca4e39c5067048fe9f0dece3d283022f1f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-3-008",
+    "type": "single_choice",
+    "question": "在华为设备上执行 display isis interface，输出显示某接口参与 Level-1、接口状态为 Up，但 display isis peer 中没有该接口的邻居。下列判断最合理的是？",
+    "options": {
+      "A": "该 IS-IS 进程已经关闭",
+      "B": "该接口没有使能 IS-IS，需要重新配置",
+      "C": "接口已在 IS-IS 中使能且协议运行正常，缺少邻居更可能是链路、对端配置或 Hello 未互通导致",
+      "D": "该接口一定是本网段的 DIS"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项 C：接口能够显示参与 Level-1 且状态为 Up，说明接口已使能 IS-IS、进程也在运行，此时没有邻居应排查链路、对端是否使能、Hello 是否互通等方向。B 错误：接口参与 Level-1 正说明已使能。A 错误：进程关闭时不会正常显示该接口的 IS-IS 运行信息。D 错误：DIS 身份与是否有邻居无必然关系，不能据此断定。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "display isis interface",
+      "验证"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-3-008",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 基本配置；输出字段语义按华为设备 display isis interface 的公开显示；技术依据 RFC 1195 第 4.4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "1e3acbf1ae6179f8f17918831f7f44304a1160f533bd7573434a86a1b1dc4a66"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-3-009",
+    "type": "single_choice",
+    "question": "两台直连路由器的接口状态均为 Up，区域地址和 Level 配置一致，但 IS-IS 邻接始终无法建立。检查发现一端接口配置了认证密码，另一端没有配置。最可能的原因是什么？",
+    "options": {
+      "A": "两台路由器的 DIS 优先级不同",
+      "B": "区域地址不一致",
+      "C": "两台路由器的 System ID 冲突",
+      "D": "认证参数不一致，Hello 报文校验失败被丢弃，邻接无法建立"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项 D：接口认证覆盖 Hello 报文，一端配置密码而另一端未配置时，带认证信息的 Hello 无法通过对端校验，邻接无法建立。B 错误：题干已说明区域地址一致，不是本例原因。C 错误：System ID 冲突会表现为标识冲突等问题，题干没有相关证据。A 错误：DIS 优先级只影响广播网选举，不会阻止邻接建立。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "认证",
+      "故障定位"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-3-009",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 基本配置；华为设备命令语义按题干表述；技术依据 RFC 1195 第 3.9 节（Hello 认证失败导致邻接无法建立）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "f2e66402857fcf0709d499b714607ca909d590c33ea0f901ec7135043225f708"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-3-010",
+    "type": "single_choice",
+    "question": "在华为设备上，要把一条静态路由引入 IS-IS 并让其他路由器学习到，应在 IS-IS 进程视图执行什么操作？",
+    "options": {
+      "A": "执行 network 命令宣告该静态路由的网段",
+      "B": "执行 import-route static，把静态路由作为外部路由引入 IS-IS",
+      "C": "只需在出接口下执行 isis enable",
+      "D": "配置 default-route-advertise 自动带入所有静态路由"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项 B：import-route 用于把直连、静态或其他协议路由引入 IS-IS，static 参数表示引入静态路由，引入后通过 LSP 发布。A 错误：IS-IS 不使用 OSPF 那样的 network 命令宣告网段，而是在接口下使能。C 错误：接口使能只通告该接口的直连网段，不会带入其他静态路由。D 错误：default-route-advertise 只发布默认路由，不会把全部静态路由引入。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "import-route",
+      "路由引入"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-3-010",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 基本配置；华为设备命令语义按题干表述；技术依据 RFC 1195 第 3.4 节（外部链路与外部路由引入）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "dd95bc3c722d5b27aaf5bc4f94edfa24d314cb26369f4f6728841644bacc7cb5"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-3-011",
+    "type": "single_choice",
+    "question": "一台 Level-1-2 路由器要把区域 A 内多条连续的 Level-1 路由汇总后发布到 Level-2，应使用什么配置？",
+    "options": {
+      "A": "配置 import-route direct 引入直连路由",
+      "B": "配置 filter-policy export 丢弃所有明细路由",
+      "C": "配置 isis silent 抑制明细路由",
+      "D": "在 IS-IS 进程视图配置路由汇总（summary），只把汇总路由发布到 Level-2"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项 D：路由汇总把多条连续的 Level-1 路由合并成一条汇总路由发布到 Level-2，可减少 LSP 和路由表规模。B 错误：filter-policy export 能过滤发布的路由，但不会生成汇总路由，直接丢弃明细还会造成部分目的不可达。A 错误：import-route direct 是引入直连路由，与汇总无关。C 错误：isis silent 抑制接口的 IS-IS 报文，不承担路由汇总功能。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "路由汇总",
+      "summary"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-3-011",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 基本配置；华为设备命令语义按题干表述；技术依据 RFC 1195 第 3.2 节（区域间可达性信息的层次化汇总）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "9db6d7316663dde6bb8aef4d63ee10f339a15b7b4ba8b39366dc3c99682ad1fa"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-3-012",
+    "type": "single_choice",
+    "question": "在华为设备上，IS-IS 进程中配置 filter-policy export 的作用是什么？",
+    "options": {
+      "A": "过滤 LSP 在邻居之间的泛洪",
+      "B": "控制从 IS-IS 接收路由并加入本地路由表",
+      "C": "过滤接口上转发的数据报文",
+      "D": "控制本机向 IS-IS 发布的路由，只有通过过滤的路由才会被引入 IS-IS"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项 D：filter-policy export 作用于本机向外发布的路由，通过过滤的才进入 IS-IS 并随 LSP 通告。B 错误：控制接收路由的是 filter-policy import。C 错误：过滤转发数据报文使用 traffic-filter 等接口过滤工具。A 错误：该策略针对路由发布，不直接过滤 LSP 泛洪。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "filter-policy",
+      "路由过滤"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-3-012",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 基本配置；华为设备命令语义按题干表述；技术依据 RFC 1195 第 3.1 节（路由信息交换与发布过滤）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "e56ad5f2887027b2bbf3eb219c3f415c26b86f571a57419e861a8c83a008680b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-3-013",
+    "type": "single_choice",
+    "question": "在华为设备上，接口下配置 isis silent 后，该接口会怎样？",
+    "options": {
+      "A": "不发送也不接收 IS-IS 报文、不建立邻接，但接口所在网段仍可作为直连网段被通告",
+      "B": "只接收 Hello，不发送 Hello",
+      "C": "仍建立邻接，只是不参与 DIS 选举",
+      "D": "关闭该接口的 IP 地址和路由"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项 A：isis silent 让接口停止收发 IS-IS 报文，因此不会建立邻接，但它所在网段仍作为直连网段参与通告，适合连接终端或非 IS-IS 设备的接口。B 错误：silent 是收发都停止，不是只停发送。C 错误：不建立邻接，也就谈不上参与 DIS 选举。D 错误：silent 只影响 IS-IS 协议报文，不关闭接口的 IP 地址和转发功能。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "isis silent",
+      "被动接口"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-3-013",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 基本配置；华为设备命令语义按题干表述；技术依据 RFC 1195 第 4.4 节与第 5.1 节（抑制接口 IS-IS 报文）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "0963eda551f075ca1fe75def4cabf5f89153922c6dd5d473193bd979719fcda8"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-3-014",
+    "type": "single_choice",
+    "question": "在华为设备上为 IS-IS 接口使能 BFD 的主要目的是什么？",
+    "options": {
+      "A": "用 BFD 快速检测链路或邻居故障，并把故障更快通知 IS-IS，从而加快路由收敛",
+      "B": "用 BFD 报文替代 Hello 建立 IS-IS 邻接",
+      "C": "用 BFD 对 IS-IS 报文进行加密",
+      "D": "用 BFD 选举广播网的 DIS"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项 A：BFD 提供毫秒级的链路或邻居故障检测，检测到故障后通知 IS-IS 拆除邻接并重新计算，缩短收敛时间。B 错误：IS-IS 邻接仍由 Hello 建立和维持，BFD 不替代 Hello。C 错误：BFD 是检测协议，不提供报文加密功能。D 错误：DIS 由接口优先级和 MAC 地址选举，与 BFD 无关。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本配置",
+    "difficulty": "easy",
+    "tags": [
+      "IS-IS",
+      "BFD",
+      "快速收敛"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-3-014",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 基本配置；华为设备命令语义按题干表述；技术依据 RFC 1195 第 4.4 节（邻接故障检测）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "576aaed2dead6bc5716a9f9589ba00d3f903a08327271ea8e6f3366530ef0838"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-3-015",
+    "type": "single_choice",
+    "question": "华为设备上，某广播网接口配置 isis dis-priority 100，同一网段另一台路由器的 DIS 优先级为 64。关于 DIS 选举，下列描述正确的是？",
+    "options": {
+      "A": "100 高于 64，该接口所属路由器更可能当选 DIS；IS-IS 的 DIS 可以被更高优先级的路由器抢占",
+      "B": "数值越小越优先，因此优先级 64 的路由器当选",
+      "C": "优先级相同时比较接口 IP 地址，而不是 MAC 地址",
+      "D": "DIS 一旦选出就不能更换，除非重启进程"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项 A：DIS 选举先比较接口优先级，数值大者优先；IS-IS 的 DIS 是可抢占的，后出现的高优先级路由器可以接管。B 错误：优先级数值越大越优先，不是越小越优先。C 错误：优先级相同时比较的是 MAC（SNPA）地址，不是接口 IP 地址。D 错误：DIS 可以被抢占，不需要重启进程。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "DIS",
+      "dis-priority"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-3-015",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 基本配置；华为设备命令语义按题干表述；技术依据 RFC 1195 第 4.3 节（DIS 选举）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "c976be7644f5b0dea7cb1596fbacf2ef8fa86272bd18a918aa339c07012537cf"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-3-016",
+    "type": "single_choice",
+    "question": "在华为设备上，IS-IS 的 lsp-length originate 配置项的作用是什么？",
+    "options": {
+      "A": "设置本机产生的 LSP 的最大长度；超过该长度的链路状态信息需要拆分为多个 LSP 分片",
+      "B": "设置允许接收的 LSP 最大长度，超过则丢弃",
+      "C": "设置 Hello 报文的最大长度",
+      "D": "设置 CSNP 的发送周期"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项 A：lsp-length originate 限制本机生成 LSP 的长度，信息过多时按分片号拆成多个 LSP 分别泛洪。B 错误：限制接收 LSP 长度的是 lsp-length receive。C 错误：Hello 报文长度受接口 MTU 等限制，不由该命令设置。D 错误：CSNP 发送周期由相应的定时器配置控制，与 LSP 长度无关。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "lsp-length",
+      "LSP 分片"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-3-016",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 基本配置；华为设备命令语义按题干表述；技术依据 RFC 1195 第 3.6 节（多个 LSP 与分片）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "4002daaa7b733368df31a21344df742f2557a47fb1df0f2b05cd3848c5b8b454"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-3-017",
+    "type": "single_choice",
+    "question": "在华为设备上执行 display isis route，发现到达同一目的网段有两条开销均为 20 的路径。下列判断正确的是？",
+    "options": {
+      "A": "两条路径开销相同，在等价路由数量限制内可以形成等价路由并负载分担",
+      "B": "只有先学习到的一条会进入路由表",
+      "C": "两条路径同时使用一定会形成环路",
+      "D": "必须手工删除一条路径，否则无法转发"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项 A：IS-IS 支持等价路由，当多条路径的总开销相同且未超过设备的等价路由数量限制时，可以同时装入路由表实现负载分担。B 错误：开销相同不会只保留先学到的一条。C 错误：SPF 计算的是无环最短路径树，等价路径同时使用不会形成环路。D 错误：等价路径可以共存，不需要手工删除。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "等价路由",
+      "display isis route"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-3-017",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 基本配置；输出语义按华为设备 display isis route 的公开显示；技术依据 RFC 1195 第 3.10 节（等开销路径）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "107b666493082e5199e2d295593cf26ee6e428f35850078796bea8bc7a69fc24"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-3-018",
+    "type": "single_choice",
+    "question": "在华为设备上，IS-IS 进程配置 timer lsp 的作用是什么？",
+    "options": {
+      "A": "控制本地 LSP 的生成间隔，避免拓扑频繁变化时过于频繁地生成和泛洪 LSP",
+      "B": "控制 Hello 报文的发送间隔",
+      "C": "控制 DIS 发送 CSNP 的间隔",
+      "D": "控制 LSP 在 LSDB 中的最大存活时间"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项 A：timer lsp 设置本地 LSP 的生成间隔，抑制拓扑频繁变化引起的过多 LSP 生成和泛洪。B 错误：Hello 间隔由 timer hello 控制。C 错误：DIS 的 CSNP 发送间隔由 timer csnp 控制。D 错误：LSP 的最大存活时间由 timer lsp-max-age 控制。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "timer lsp",
+      "LSP 生成"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-3-018",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 IS-IS 基本配置；华为设备命令语义按题干表述；技术依据 RFC 1195 第 5.1 节与第 3.6 节（LSP 生成与泛洪）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "2c77d98d49e6e4f33cb23f4d0aee8f72619159b82c836ac8154dee5b6c83bd9b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-1-001",
+    "type": "single_choice",
+    "question": "关于 BGP 的基本特征，下列描述正确的是？",
+    "options": {
+      "A": "BGP 是运行在 TCP 之上的路径矢量协议，主要用于在不同 AS 之间交换路由，使用 TCP 179 端口",
+      "B": "BGP 是链路状态协议，使用 SPF 计算最短路径",
+      "C": "BGP 直接封装在 IP 中，使用 IP 协议号 89",
+      "D": "BGP 使用 UDP 179 端口周期广播路由"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项 A：BGP 是基于 TCP 179 端口的路径矢量协议，通过 AS_Path 等属性描述路径，主要用于 AS 之间交换路由。B 错误：链路状态和 SPF 是 OSPF、IS-IS 的特征。C 错误：IP 协议号 89 对应 OSPF，BGP 由 TCP 承载。D 错误：BGP 使用 TCP 单播连接，不使用 UDP 广播。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 概述与邻居关系",
+    "difficulty": "easy",
+    "tags": [
+      "BGP",
+      "TCP 179",
+      "路径矢量"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-1-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 BGP 概述与邻居关系；技术依据 RFC 4271 第 3 节（BGP 基于 TCP 的运行概述）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "d6625b9a2479bbdf5ccb786c058e6381b84bee8fc8909929fd3d4083c9cd8e9a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-1-002",
+    "type": "single_choice",
+    "question": "两台路由器分属不同 AS，通过一台中间路由器相连（非直连）。要建立 EBGP 邻居，除了路由可达外还必须满足什么条件？",
+    "options": {
+      "A": "配置 peer ebgp-max-hop，使 EBGP 报文的 TTL 足够大",
+      "B": "把 EBGP 改为 IBGP 才能跨跳",
+      "C": "只配置 peer connect-interface 为 Loopback 即可，不需要调整 TTL",
+      "D": "EBGP 邻居默认允许任意跳数，无需额外配置"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项 A：EBGP 报文默认 TTL 为 1，非直连场景必须配置 ebgp-max-hop 增大 TTL，报文才能跨越多跳到达对端。B 错误：跨 AS 的邻居仍是 EBGP，改为 IBGP 不符合 AS 关系。C 错误：connect-interface 只指定源地址，不能改变 TTL 限制，仍需 ebgp-max-hop。D 错误：EBGP 默认按直连处理，不允许任意跳数。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 概述与邻居关系",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "EBGP",
+      "ebgp-max-hop"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-1-002",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 BGP 概述与邻居关系；技术依据 RFC 4271 第 3 节（BGP 传输）；EBGP 默认 TTL 与多跳配置为部署语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "13ae5a76fc531edd80dfb413550ac8bb748e06e3e03dc26fb9abaae874723531"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-1-003",
+    "type": "single_choice",
+    "question": "两台同一 AS 的路由器使用 Loopback 接口地址建立 IBGP 邻居。除了配置 peer 指向对端 Loopback 地址外，通常还必须配置什么？",
+    "options": {
+      "A": "本端 peer connect-interface（或 update-source）指定 Loopback 为源地址，保证 TCP 连接的源地址与对端期望的一致",
+      "B": "把 peer ebgp-max-hop 设为 1",
+      "C": "关闭 BGP 的 TCP 连接，改用 UDP 传输",
+      "D": "把 Hold Time 设为 0"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项 A：IBGP 使用 TCP 建连，若对端把邻居地址配置为 Loopback 地址，本端必须让 TCP 连接的源地址也是该 Loopback 地址，因此需要 connect-interface 或 update-source。B 错误：ebgp-max-hop 用于 EBGP 多跳，IBGP 不需要。C 错误：BGP 必须使用 TCP，不能改为 UDP。D 错误：Hold Time 设为 0 与源地址匹配无关，也不能解决邻居建立问题。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 概述与邻居关系",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "IBGP",
+      "update-source"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-1-003",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 BGP 概述与邻居关系；技术依据 RFC 4271 第 3 节与第 4.2 节（TCP 连接与 BGP Identifier）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "913f7afc495bd09c92da1327bcc34e0c743750bd4e7c098369d26c0fa85efde5"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-1-004",
+    "type": "single_choice",
+    "question": "在 BGP 邻居状态机中，State 显示为 Active 通常表示什么？",
+    "options": {
+      "A": "路由器正在尝试与对端建立 TCP 连接（发起连接或等待重试），邻居尚未建立",
+      "B": "邻居已建立，可以交换 Update 报文",
+      "C": "已收到对端 Open 报文，正在等待 Keepalive",
+      "D": "邻居协商失败，进入永久错误状态"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项 A：Active 属于 TCP 连接建立阶段，表示本端正在尝试连接或等待重试，尚未进入 BGP 报文交换。B 错误：可以交换 Update 的是 Established 状态。C 错误：等待 Keepalive 的是 OpenConfirm 状态。D 错误：协商失败通常发送 Notification 后回到 Idle，Active 不是永久错误状态。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 概述与邻居关系",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "状态机",
+      "Active"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-1-004",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 BGP 概述与邻居关系；技术依据 RFC 4271 第 8.2.2 节（BGP 有限状态机）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "5fc8bb7de0e60efc9dc8629a958302e6aeac0b84b361512d054bf97019034226"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-1-005",
+    "type": "single_choice",
+    "question": "华为设备上 display bgp peer 显示某邻居 State 长期为 Active。下列哪项最不可能是该现象的原因？",
+    "options": {
+      "A": "邻居已进入 Established，正在正常交换路由",
+      "B": "到邻居的 TCP 179 端口不可达，例如被路由或 ACL 阻断",
+      "C": "邻居地址配置错误，或对端没有配置本端为邻居",
+      "D": "本端发起 TCP 连接的源地址与对端期望的地址不一致"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项 A：State 为 Active 说明 TCP 连接尚未建立，与已进入 Established 相互矛盾，因此 A 最不可能是原因。B 可能：TCP 179 不可达会让连接反复重试并停留在 Active。C 可能：邻居地址错误或对端未配置邻居，连接无法完成。D 可能：源地址不匹配会导致对端拒绝或连接无法正确匹配，表现为长期 Active。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 概述与邻居关系",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "故障定位",
+      "Active"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-1-005",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 BGP 概述与邻居关系；输出语义按华为设备 display bgp peer 的公开显示；技术依据 RFC 4271 第 8.2.2 节（Active 状态）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "390d4e4e07474f0aa4e444c084c564d14c569770555700c8de0a041c902d3d6f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-1-006",
+    "type": "single_choice",
+    "question": "一台华为 BGP 路由器没有手工配置 router-id，且存在多个 Loopback 接口和物理接口地址。BGP 默认如何选择 Router ID？",
+    "options": {
+      "A": "优先选择最大的 Loopback 接口地址；若没有 Loopback，则选择最大的物理接口地址",
+      "B": "选择最小的接口地址",
+      "C": "随机选择一个接口地址",
+      "D": "直接使用设备的 MAC 地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项 A：未手工指定时，BGP 优先从 Loopback 接口地址中选择最大者作为 Router ID；没有 Loopback 时才从物理接口地址中选择最大者。B 错误：选择方向是最大而不是最小。C 错误：Router ID 的选择有确定规则，不是随机。D 错误：MAC 地址不参与 BGP Router ID 的选择。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 概述与邻居关系",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "Router ID",
+      "选路"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-1-006",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 BGP 概述与邻居关系；华为 Router ID 选择语义按题干表述；技术依据 RFC 4271 第 4.2 节（BGP Identifier）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "d56ecebd1249b35ae616872cd8595ba85b6c6187ac2b3eb8a4f95760bc85ef9e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-4-1-1-007",
+    "type": "single_choice",
+    "question": "某 AS 内两台路由器要建立 IBGP 邻居，但它们之间的 Loopback 地址目前不可达。最直接的后果是什么？",
+    "options": {
+      "A": "BGP 的 TCP 连接无法建立，邻居停留在 Connect 或 Active，无法进入 Established",
+      "B": "BGP 会自动改用 EBGP 建立邻居",
+      "C": "BGP 会通过组播发现邻居并继续建立",
+      "D": "IBGP 邻居不依赖底层路由，仍可正常建立"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项 A：IBGP 邻居依赖 TCP 连接，而 TCP 连接又依赖底层 IGP 提供 Loopback 地址的可达性，地址不可达时连接无法建立，邻居停留在 Connect/Active。B 错误：AS 号相同就是 IBGP，不会因为地址不可达自动变成 EBGP。C 错误：BGP 不会通过组播自动发现邻居，必须手工配置。D 错误：IBGP 虽然不要求直连，但必须依赖底层路由可达。",
+    "chapter": "BGP 核心知识",
+    "knowledgeSection": "BGP 基础",
+    "knowledgePoint": "BGP 概述与邻居关系",
+    "difficulty": "medium",
+    "tags": [
+      "BGP",
+      "IBGP",
+      "底层路由"
+    ],
+    "provenance": {
+      "questionId": "hcip821-4-1-1-007",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc4271-bgp4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2-5 页知识点清单中的 BGP 概述与邻居关系；技术依据 RFC 4271 第 3 节（IBGP 依赖底层可达性建立 TCP 连接）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目；华为设备命令语义按题干所述行为表述。",
+      "reviewDigest": "e2a0dafa638e20ce68d93294cf92c9226e844ab6160ad4829f7cc009ae431d42"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  }
+]

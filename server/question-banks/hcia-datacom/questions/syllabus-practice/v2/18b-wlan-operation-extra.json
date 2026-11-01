@@ -1,0 +1,221 @@
+[
+  {
+    "id": "hcia-v3-18b-001",
+    "type": "single_choice",
+    "question": "WPA2-PSK 的密钥协商过程中，终端与 AP 最终派生出什么？",
+    "options": {
+      "A": "一条 CAPWAP 隧道",
+      "B": "用于加密单播数据的会话密钥",
+      "C": "一个公网 IP 地址",
+      "D": "一个新的 SSID"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "PSK 阶段用预共享密钥做四次握手，双方各自派生出成对主密钥与会话密钥，用于后续数据加密。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgeSection": "STA 接入与漫游",
+    "knowledgePoint": "认证与密钥协商",
+    "difficulty": "hard",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "STA 接入与漫游",
+      "认证与密钥协商"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-18b-002",
+    "type": "true_false",
+    "question": "WPA2 的四次握手用于校验双方持有相同的预共享密钥，并协商出各自的会话密钥。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "四次握手通过交互随机数与消息完整性校验确认密钥一致，同时派生会话密钥，是 WPA2 安全性的关键环节。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgeSection": "STA 接入与漫游",
+    "knowledgePoint": "认证与密钥协商",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "STA 接入与漫游",
+      "认证与密钥协商"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-18b-003",
+    "type": "single_choice",
+    "question": "AC 上配置 WLAN 业务时，通常需要把 VAP 模板绑定到哪个对象？",
+    "options": {
+      "A": "路由表",
+      "B": "AP 组",
+      "C": "物理接口",
+      "D": "ACL 规则"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "VAP 模板绑定到 AP 组后，该组内所有 AP 都会按模板发射对应 SSID，实现批量生效。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgeSection": "AP 上线流程",
+    "knowledgePoint": "AP 组与模板",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "AP 上线流程",
+      "AP 组与模板"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-18b-004",
+    "type": "single_choice",
+    "question": "AP 上线后业务正常，但用户反映网速很慢，最应优先排查什么？",
+    "options": {
+      "A": "AP 的序列号",
+      "B": "交换机的 STP 优先级",
+      "C": "AC 的 NTP 同步状态",
+      "D": "信道干扰、用户数与 AP 发射功率配置"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "无线速率受同频干扰、并发用户数与功率设置影响最大，应先做信道扫描与容量评估，而非检查无关的运维配置。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgeSection": "AP 上线流程",
+    "knowledgePoint": "AP 上线失败排查",
+    "difficulty": "hard",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "AP 上线流程",
+      "AP 上线失败排查"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-18b-005",
+    "type": "single_choice",
+    "question": "三层漫游场景中，为保证终端 IP 不变通常依赖什么机制？",
+    "options": {
+      "A": "把 SSID 改为隐藏",
+      "B": "终端重新发起 DHCP",
+      "C": "关闭所有 VLAN",
+      "D": "AC 间建立隧道转发用户流量并保持原网关"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "三层漫游通过 AC 间隧道把流量引回原网关，使终端 IP 与业务连接保持不变，实现跨网段无缝切换。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgeSection": "STA 接入与漫游",
+    "knowledgePoint": "WLAN 漫游",
+    "difficulty": "hard",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "STA 接入与漫游",
+      "WLAN 漫游"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-18b-006",
+    "type": "true_false",
+    "question": "若 AP 的射频被关闭，终端将搜不到该 AP 广播的 SSID。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "射频关闭后 AP 不再发送 Beacon 帧，终端扫描不到该网络，这是排查“某区域无信号”时的常见原因。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgeSection": "AP 上线流程",
+    "knowledgePoint": "AP 上线失败排查",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "AP 上线流程",
+      "AP 上线失败排查"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-18b-007",
+    "type": "single_choice",
+    "question": "Portal 认证中，用户尚未认证时访问网页会发生什么？",
+    "options": {
+      "A": "被重定向到认证页面",
+      "B": "直接获得完全上网权限",
+      "C": "被分配静态 IP 地址",
+      "D": "自动加入所有 VLAN"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "未认证流量被强制重定向到 Portal 页面，认证通过后才放通上网权限，这是访客网络的标准流程。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgeSection": "WLAN 安全",
+    "knowledgePoint": "PSK 与 Portal 认证",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "WLAN 安全",
+      "PSK 与 Portal 认证"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-18b-008",
+    "type": "single_choice",
+    "question": "802.1X 认证使用的 EAP 报文在终端与服务器之间如何传递？",
+    "options": {
+      "A": "由 DNS 服务器中转",
+      "B": "由认证者（AP 或交换机）透明转发",
+      "C": "由网关做 NAT 转换",
+      "D": "由终端直接发给服务器"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "终端与 RADIUS 之间不直接通信，EAP 报文由认证者封装转发，认证者本身不参与凭据判定。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgeSection": "WLAN 安全",
+    "knowledgePoint": "802.1X 认证",
+    "difficulty": "hard",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "WLAN 安全",
+      "802.1X 认证"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-18b-009",
+    "type": "true_false",
+    "question": "隐藏 SSID 可以提升无线安全性，使未授权用户完全无法接入。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "隐藏 SSID 只是不广播名称，抓包仍可发现该网络，属于弱防护；真正的安全依靠 WPA2/WPA3 与 802.1X 认证。",
+    "chapter": "WLAN 工作原理与配置",
+    "knowledgeSection": "WLAN 安全",
+    "knowledgePoint": "WEP 与 WPA/WPA2",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 工作原理与配置",
+      "WLAN 安全",
+      "WEP 与 WPA/WPA2"
+    ],
+    "stage": "反向推理"
+  }
+]

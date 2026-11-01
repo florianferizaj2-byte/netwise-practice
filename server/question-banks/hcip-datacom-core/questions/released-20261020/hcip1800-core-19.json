@@ -1,0 +1,1296 @@
+[
+  {
+    "id": "hcip821-11-1-1-001",
+    "type": "single_choice",
+    "question": "DHCP 客户端首次申请地址时，四个报文的正确顺序是？",
+    "options": {
+      "A": "Offer、Discover、Request、Ack",
+      "B": "Discover、Offer、Request、Ack",
+      "C": "Request、Offer、Discover、Ack",
+      "D": "Discover、Request、Offer、Ack"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "客户端先广播 Discover 寻找服务器，服务器回 Offer 提供参数，客户端再发 Request 确认选择，服务器最后用 Ack 确认租约生效。",
+    "chapter": "网络服务与管理",
+    "knowledgeSection": "DHCP",
+    "knowledgePoint": "DHCP 原理与配置",
+    "difficulty": "easy",
+    "tags": [
+      "DHCP",
+      "DORA"
+    ],
+    "provenance": {
+      "questionId": "hcip821-11-1-1-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络服务与管理 / DHCP / DHCP 原理与配置」。知识点编码 hcip821-11-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4f670bab6ca14a39c07ebabbc2ab566ed6a06c9e0fa0c7d093a7fce0227ee0ed"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-11-1-1-002",
+    "type": "single_choice",
+    "question": "DHCP 客户端与服务器使用的 UDP 端口分别是？",
+    "options": {
+      "A": "68 和 68",
+      "B": "67 和 67",
+      "C": "67 和 68",
+      "D": "68 和 67"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "客户端使用 UDP 68 接收，服务器使用 UDP 67 监听。中继场景中中继设备以 67 为目的端口向服务器转发。",
+    "chapter": "网络服务与管理",
+    "knowledgeSection": "DHCP",
+    "knowledgePoint": "DHCP 原理与配置",
+    "difficulty": "easy",
+    "tags": [
+      "DHCP",
+      "端口"
+    ],
+    "provenance": {
+      "questionId": "hcip821-11-1-1-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络服务与管理 / DHCP / DHCP 原理与配置」。知识点编码 hcip821-11-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e8c73a581470af3db9992004ef927df6365e2a883a806c3113b599b0f5d358eb"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-11-1-1-003",
+    "type": "single_choice",
+    "question": "DHCP 中继的主要作用是？",
+    "options": {
+      "A": "压缩 DHCP 报文",
+      "B": "加密 DHCP 报文",
+      "C": "跨网段转发 DHCP 报文",
+      "D": "为客户端分配静态地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "DHCP 广播无法跨越路由器，中继把广播转为单播发往指定服务器，并把响应回送客户端，实现跨网段地址分配。",
+    "chapter": "网络服务与管理",
+    "knowledgeSection": "DHCP",
+    "knowledgePoint": "DHCP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "DHCP",
+      "中继"
+    ],
+    "provenance": {
+      "questionId": "hcip821-11-1-1-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络服务与管理 / DHCP / DHCP 原理与配置」。知识点编码 hcip821-11-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "053b639236f1e36ce23275fcd95eebdea11f432d3399ff84f430f3adf94c425f"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-11-1-1-004",
+    "type": "single_choice",
+    "question": "DHCP 租期的作用是？",
+    "options": {
+      "A": "限定服务器的响应时间",
+      "B": "限定地址的使用期限，到期需续租",
+      "C": "限定中继的转发跳数",
+      "D": "限定客户端的接入速率"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "租期到期前客户端会发起续租，续租失败则地址被回收。租期过短会增加报文开销，过长会降低地址回收效率。",
+    "chapter": "网络服务与管理",
+    "knowledgeSection": "DHCP",
+    "knowledgePoint": "DHCP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "DHCP",
+      "租期"
+    ],
+    "provenance": {
+      "questionId": "hcip821-11-1-1-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络服务与管理 / DHCP / DHCP 原理与配置」。知识点编码 hcip821-11-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "23ee7bf4169b927ff6226e7493e372a14b2cc1f65501ce438d3fbb931248985f"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-11-1-1-005",
+    "type": "single_choice",
+    "question": "DHCP 服务器向客户端发送 NAK 报文的场景是？",
+    "options": {
+      "A": "客户端首次发送 Discover",
+      "B": "客户端释放地址",
+      "C": "客户端续租成功",
+      "D": "客户端请求的地址不可用或租约已失效"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "当客户端请求的地址已被占用、不在地址池内或租约已失效时，服务器回 NAK，客户端收到后重新发起 Discover。",
+    "chapter": "网络服务与管理",
+    "knowledgeSection": "DHCP",
+    "knowledgePoint": "DHCP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "DHCP",
+      "NAK"
+    ],
+    "provenance": {
+      "questionId": "hcip821-11-1-1-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络服务与管理 / DHCP / DHCP 原理与配置」。知识点编码 hcip821-11-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "f249a6a7e1e340b3ac7fe6b5eb5a295b50c089c0136ac4035a12becbaafb185a"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-11-1-1-006",
+    "type": "single_choice",
+    "question": "地址池中配置 excluded-ip-address 的作用是？",
+    "options": {
+      "A": "禁止客户端访问该地址",
+      "B": "为该地址保留网关角色",
+      "C": "把指定地址排除，不参与自动分配",
+      "D": "把指定地址固定分配给某终端"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "排除地址通常用于网关、服务器、打印机等需要固定使用的地址，避免被动态分配给普通终端造成冲突。",
+    "chapter": "网络服务与管理",
+    "knowledgeSection": "DHCP",
+    "knowledgePoint": "DHCP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "DHCP",
+      "地址池"
+    ],
+    "provenance": {
+      "questionId": "hcip821-11-1-1-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络服务与管理 / DHCP / DHCP 原理与配置」。知识点编码 hcip821-11-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "bea45ab0fd982501b5aae6403bff3153a0b1d2af550e2d83804162809d986e0c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-11-1-1-007",
+    "type": "multiple_choice",
+    "question": "DHCP 报文中的 option 字段可以携带下列哪些信息？",
+    "options": {
+      "A": "路由器的接口 MTU",
+      "B": "DNS 服务器地址",
+      "C": "网关地址",
+      "D": "AC 的 IP 地址"
+    },
+    "answer": [
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "option3 携带网关、option6 携带 DNS、option43 携带 AC 地址。接口 MTU 属于链路参数，不由 DHCP option 下发。",
+    "chapter": "网络服务与管理",
+    "knowledgeSection": "DHCP",
+    "knowledgePoint": "DHCP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "DHCP",
+      "option",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip821-11-1-1-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络服务与管理 / DHCP / DHCP 原理与配置」。知识点编码 hcip821-11-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "874f0a3e9558a72c95639f31cfb53d0114253f749dffd64dcb98b0c8fcbe9d01"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-11-1-1-008",
+    "type": "true_false",
+    "question": "DHCP 客户端在地址租期到期前会自动发起续租。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "客户端在租期过半（T1）时向原服务器单播续租，若失败则在 87.5%（T2）时向任意服务器广播请求，避免地址突然失效。",
+    "chapter": "网络服务与管理",
+    "knowledgeSection": "DHCP",
+    "knowledgePoint": "DHCP 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "DHCP 续租"
+    ],
+    "provenance": {
+      "questionId": "hcip821-11-1-1-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络服务与管理 / DHCP / DHCP 原理与配置」。知识点编码 hcip821-11-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "6c72906553d835b5379478faa15d2be9d6911bc040cfbad58a5ff81962ce66c7"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-11-2-1-001",
+    "type": "single_choice",
+    "question": "SNMP 使用的 UDP 端口是？",
+    "options": {
+      "A": "514 和 515",
+      "B": "161 和 161",
+      "C": "161 和 162",
+      "D": "162 和 163"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "SNMP 代理监听 UDP 161 接收 Get/Set 请求，网管站监听 UDP 162 接收 Trap。UDP 514 是 Syslog 的端口。",
+    "chapter": "网络服务与管理",
+    "knowledgeSection": "网络管理",
+    "knowledgePoint": "网络管理协议",
+    "difficulty": "easy",
+    "tags": [
+      "SNMP",
+      "端口"
+    ],
+    "provenance": {
+      "questionId": "hcip821-11-2-1-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络服务与管理 / 网络管理 / 网络管理协议」。知识点编码 hcip821-11-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "b8fb15e211be1644547200cb51597165d02aa413f1e0814c5bdfb2876fb1a558"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-11-2-1-002",
+    "type": "single_choice",
+    "question": "SNMP Trap 的发送方向是？",
+    "options": {
+      "A": "由被管设备主动发往网管站",
+      "B": "由网管站主动发往设备",
+      "C": "由设备与网管站互发",
+      "D": "由中继设备转发"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Trap 是设备在发生告警时主动上报的机制，不需要网管站轮询，因此能及时反映故障。轮询方式对应 Get 操作。",
+    "chapter": "网络服务与管理",
+    "knowledgeSection": "网络管理",
+    "knowledgePoint": "网络管理协议",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP",
+      "Trap"
+    ],
+    "provenance": {
+      "questionId": "hcip821-11-2-1-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络服务与管理 / 网络管理 / 网络管理协议」。知识点编码 hcip821-11-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "46112df04c43661328f71a2e73efdcf259a4d212e0a26adb8df33127dfdd51c9"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-11-2-1-003",
+    "type": "single_choice",
+    "question": "在 SNMP 管理中，MIB 的主要作用是什么？",
+    "options": {
+      "A": "定义被管对象的结构与标识",
+      "B": "定义 Trap 的发送周期",
+      "C": "定义 SNMP 报文的加密算法",
+      "D": "定义设备的转发流程"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "MIB 是管理信息库，用树形结构描述被管对象的 OID、类型与访问权限，网管站按 OID 读取或设置对象值。",
+    "chapter": "网络服务与管理",
+    "knowledgeSection": "网络管理",
+    "knowledgePoint": "网络管理协议",
+    "difficulty": "medium",
+    "tags": [
+      "SNMP",
+      "MIB"
+    ],
+    "provenance": {
+      "questionId": "hcip821-11-2-1-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络服务与管理 / 网络管理 / 网络管理协议」。知识点编码 hcip821-11-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "3b4cc162ed70d17ffe3882c2fb744ddc884b6646e0ad2b6756b245d4f2ac59b4"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-11-2-1-004",
+    "type": "single_choice",
+    "question": "Syslog 的严重级别中，数值越小表示？",
+    "options": {
+      "A": "级别越高、越紧急",
+      "B": "级别越低、越不重要",
+      "C": "仅表示日志条数",
+      "D": "与级别无关"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Syslog 级别 0 到 7，0 为 Emergency 最紧急，7 为 Debug 最详细。数值越小越严重，与常见\"数值越大越重要\"的直觉相反。",
+    "chapter": "网络服务与管理",
+    "knowledgeSection": "网络管理",
+    "knowledgePoint": "网络管理协议",
+    "difficulty": "medium",
+    "tags": [
+      "Syslog",
+      "级别"
+    ],
+    "provenance": {
+      "questionId": "hcip821-11-2-1-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络服务与管理 / 网络管理 / 网络管理协议」。知识点编码 hcip821-11-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "503883b1151b28bc61a1b9c48744390068e8a74527a56902fc0cb517dad596f0"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-11-2-1-005",
+    "type": "single_choice",
+    "question": "NETCONF 协议使用的缺省端口是？",
+    "options": {
+      "A": "161",
+      "B": "830",
+      "C": "514",
+      "D": "22"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "NETCONF 基于 SSH，缺省使用 TCP 830；也可承载在 SSH 的 22 端口上。SNMP 用 161，Syslog 用 514。",
+    "chapter": "网络服务与管理",
+    "knowledgeSection": "网络管理",
+    "knowledgePoint": "网络管理协议",
+    "difficulty": "medium",
+    "tags": [
+      "NETCONF",
+      "端口"
+    ],
+    "provenance": {
+      "questionId": "hcip821-11-2-1-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络服务与管理 / 网络管理 / 网络管理协议」。知识点编码 hcip821-11-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "61c53d2da8ba1ba1273fca3aec370a7758fee3497badaf2749b7ecbb989543f5"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-11-2-1-006",
+    "type": "single_choice",
+    "question": "Telemetry 相比 SNMP 轮询的主要优势是？",
+    "options": {
+      "A": "占用带宽相对更大",
+      "B": "配置过程更简单",
+      "C": "不需要建立网络连接",
+      "D": "毫秒级高频推送，采集精度更高"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Telemetry 由设备按订阅主动、周期性地推送数据，采集周期可到毫秒级，适合大规模网络的实时监控；SNMP 轮询精度受周期与开销限制。",
+    "chapter": "网络服务与管理",
+    "knowledgeSection": "网络管理",
+    "knowledgePoint": "网络管理协议",
+    "difficulty": "medium",
+    "tags": [
+      "Telemetry",
+      "采集"
+    ],
+    "provenance": {
+      "questionId": "hcip821-11-2-1-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络服务与管理 / 网络管理 / 网络管理协议」。知识点编码 hcip821-11-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "6f79004bbccce2d279efa90eb89f1dc97a2dacb92432dedf0cd0df23ab6e8eb4"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-11-2-1-007",
+    "type": "multiple_choice",
+    "question": "SNMPv3 提供的安全能力包括？",
+    "options": {
+      "A": "报文加密",
+      "B": "身份认证",
+      "C": "访问控制",
+      "D": "路由计算"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "SNMPv3 通过 USM 提供认证与加密，通过 VACM 提供视图级访问控制。路由计算属于路由协议职责。",
+    "chapter": "网络服务与管理",
+    "knowledgeSection": "网络管理",
+    "knowledgePoint": "网络管理协议",
+    "difficulty": "medium",
+    "tags": [
+      "SNMPv3",
+      "安全",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip821-11-2-1-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络服务与管理 / 网络管理 / 网络管理协议」。知识点编码 hcip821-11-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "436c28bb67b82eae68d02ea52f0e95d7ca32b1dc03ee8da70f7d90b22de7dfe8"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-11-2-1-008",
+    "type": "true_false",
+    "question": "SNMPv2c 使用明文团体名进行认证，安全性低于 SNMPv3。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "v2c 的团体名以明文传输，易被嗅探；v3 引入用户、认证与加密机制，安全性显著提高。",
+    "chapter": "网络服务与管理",
+    "knowledgeSection": "网络管理",
+    "knowledgePoint": "网络管理协议",
+    "difficulty": "easy",
+    "tags": [
+      "判断",
+      "SNMP"
+    ],
+    "provenance": {
+      "questionId": "hcip821-11-2-1-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络服务与管理 / 网络管理 / 网络管理协议」。知识点编码 hcip821-11-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "dd9322f57f21e71d2f4ab9ea9c9650a3142a76d1e4b76156f209e7147e41e911"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-13-1-1-001",
+    "type": "single_choice",
+    "question": "园区网典型的三层架构是？",
+    "options": {
+      "A": "物理层、链路层、网络层",
+      "B": "出口层、DMZ 层、内网层",
+      "C": "核心层、汇聚层、接入层",
+      "D": "控制层、转发层、管理层"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "园区网通常划分为核心层、汇聚层、接入层：接入层连接终端，汇聚层做策略与路由汇聚，核心层负责高速转发。",
+    "chapter": "网络解决方案",
+    "knowledgeSection": "企业数通解决方案",
+    "knowledgePoint": "园区网",
+    "difficulty": "easy",
+    "tags": [
+      "园区网",
+      "三层架构"
+    ],
+    "provenance": {
+      "questionId": "hcip821-13-1-1-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络解决方案 / 企业数通解决方案 / 园区网」。知识点编码 hcip821-13-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4fd4ed0f996863542290de4200e1c995b70632e58b8e842be34d13d3d3a1ecc5"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-13-1-1-002",
+    "type": "single_choice",
+    "question": "核心层的主要设计目标是？",
+    "options": {
+      "A": "高速无阻塞转发与高可靠",
+      "B": "终结所有 VLAN",
+      "C": "部署大量安全策略",
+      "D": "为终端提供 PoE 供电"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "核心层应保持简洁，专注于高速转发与冗余可靠，避免在其上堆叠复杂策略。策略通常下移到汇聚层。",
+    "chapter": "网络解决方案",
+    "knowledgeSection": "企业数通解决方案",
+    "knowledgePoint": "园区网",
+    "difficulty": "medium",
+    "tags": [
+      "核心层",
+      "设计"
+    ],
+    "provenance": {
+      "questionId": "hcip821-13-1-1-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络解决方案 / 企业数通解决方案 / 园区网」。知识点编码 hcip821-13-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "18c07986a9365555da60064b02c0743111b56cea6095d33031ff57e71d74b033"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-13-1-1-003",
+    "type": "single_choice",
+    "question": "园区网汇聚层的主要职责是什么？",
+    "options": {
+      "A": "路由汇聚、策略实施与网关部署",
+      "B": "连接互联网出口",
+      "C": "提供无线覆盖",
+      "D": "为终端提供接入端口"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "汇聚层承担各接入区块的路由汇总、ACL 与 QoS 策略、VLAN 终结与网关功能，是策略实施的主要位置。",
+    "chapter": "网络解决方案",
+    "knowledgeSection": "企业数通解决方案",
+    "knowledgePoint": "园区网",
+    "difficulty": "medium",
+    "tags": [
+      "汇聚层",
+      "职责"
+    ],
+    "provenance": {
+      "questionId": "hcip821-13-1-1-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络解决方案 / 企业数通解决方案 / 园区网」。知识点编码 hcip821-13-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "91e1c8d15a09866ca54edd924c738c30b1c2ce79c922808000c3b163cc4e14e3"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-13-1-1-004",
+    "type": "single_choice",
+    "question": "园区网接入层的主要职责是什么？",
+    "options": {
+      "A": "提供广域网互联",
+      "B": "连接多个园区",
+      "C": "为终端提供二层接入与端口安全",
+      "D": "承担全网路由计算"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "接入层直接连接终端，负责端口密度、PoE 供电、VLAN 划分与端口安全，通常不做复杂路由。",
+    "chapter": "网络解决方案",
+    "knowledgeSection": "企业数通解决方案",
+    "knowledgePoint": "园区网",
+    "difficulty": "medium",
+    "tags": [
+      "接入层",
+      "职责"
+    ],
+    "provenance": {
+      "questionId": "hcip821-13-1-1-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络解决方案 / 企业数通解决方案 / 园区网」。知识点编码 hcip821-13-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "30d57f1b1adc8208af6b8fca12462e295ebdca1ca992c0d97b7633819784a502"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-13-1-1-005",
+    "type": "single_choice",
+    "question": "交换机堆叠（iStack/CSS）的主要好处是？",
+    "options": {
+      "A": "提高单端口的转发速率",
+      "B": "多台设备逻辑上合为一台，简化管理与冗余",
+      "C": "减少 VLAN 数量",
+      "D": "替代路由协议完成选路"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "堆叠把多台交换机在逻辑上合并成一台，统一管理、统一配置，并通过跨设备链路聚合实现设备级冗余。",
+    "chapter": "网络解决方案",
+    "knowledgeSection": "企业数通解决方案",
+    "knowledgePoint": "园区网",
+    "difficulty": "medium",
+    "tags": [
+      "堆叠",
+      "CSS"
+    ],
+    "provenance": {
+      "questionId": "hcip821-13-1-1-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络解决方案 / 企业数通解决方案 / 园区网」。知识点编码 hcip821-13-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "6fd9b94e73120a0595545123f2ad759d1266516e654d6a30236c1d4808b74c90"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-13-1-1-006",
+    "type": "true_false",
+    "question": "园区网中，网关通常部署在接入层交换机上。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "网关一般部署在汇聚层或核心层，以获得更好的性能与冗余；接入层设备数量多、性能有限，不适合承担集中网关。",
+    "chapter": "网络解决方案",
+    "knowledgeSection": "企业数通解决方案",
+    "knowledgePoint": "园区网",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "网关位置"
+    ],
+    "provenance": {
+      "questionId": "hcip821-13-1-1-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络解决方案 / 企业数通解决方案 / 园区网」。知识点编码 hcip821-13-1-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "b972dcf91a34f44859a9c5b57ff26aec198474b1ab68c50e2883c7fc8297b1cd"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-13-1-2-001",
+    "type": "single_choice",
+    "question": "VXLAN 使用的目的 UDP 端口是多少？",
+    "options": {
+      "A": "4789",
+      "B": "5246",
+      "C": "830",
+      "D": "4500"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "VXLAN 把二层帧封装进 UDP，IANA 分配的目的端口是 4789，部分厂商实现使用 8472，但标准端口为 4789。",
+    "chapter": "网络解决方案",
+    "knowledgeSection": "企业数通解决方案",
+    "knowledgePoint": "数据中心与 VXLAN",
+    "difficulty": "easy",
+    "tags": [
+      "VXLAN",
+      "端口"
+    ],
+    "provenance": {
+      "questionId": "hcip821-13-1-2-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络解决方案 / 企业数通解决方案 / 数据中心与 VXLAN」。知识点编码 hcip821-13-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "604c412f52b9514e66c31f2d00e6f1ae8346123580e8123402db2b7fbc413c93"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-13-1-2-002",
+    "type": "single_choice",
+    "question": "VXLAN 的 VNI 字段长度是多少位？",
+    "options": {
+      "A": "12 位",
+      "B": "32 位",
+      "C": "16 位",
+      "D": "24 位"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "VNI 为 24 位，可支持约 1600 万个租户网络，远超 VLAN 的 12 位 4094 个。",
+    "chapter": "网络解决方案",
+    "knowledgeSection": "企业数通解决方案",
+    "knowledgePoint": "数据中心与 VXLAN",
+    "difficulty": "medium",
+    "tags": [
+      "VXLAN",
+      "VNI"
+    ],
+    "provenance": {
+      "questionId": "hcip821-13-1-2-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络解决方案 / 企业数通解决方案 / 数据中心与 VXLAN」。知识点编码 hcip821-13-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "ea0f969640e8f251325e7e70caf6f006b23eb2f4ef3fcf8c95d385b9193f3885"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-13-1-2-003",
+    "type": "single_choice",
+    "question": "VTEP 的主要功能是？",
+    "options": {
+      "A": "为租户分配 IP 地址",
+      "B": "对报文做 VXLAN 封装与解封装",
+      "C": "提供无线接入服务",
+      "D": "计算全网路由表项"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "VTEP 是 VXLAN 隧道的端点，负责把内层二层帧封装进 VXLAN 与 UDP，或解封装后交给本地网络。",
+    "chapter": "网络解决方案",
+    "knowledgeSection": "企业数通解决方案",
+    "knowledgePoint": "数据中心与 VXLAN",
+    "difficulty": "medium",
+    "tags": [
+      "VXLAN",
+      "VTEP"
+    ],
+    "provenance": {
+      "questionId": "hcip821-13-1-2-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络解决方案 / 企业数通解决方案 / 数据中心与 VXLAN」。知识点编码 hcip821-13-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "601a6b13efbed0031d3af10153b76361164bab7f116c13c1ca8cdf955aaa10aa"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-13-1-2-004",
+    "type": "single_choice",
+    "question": "Underlay 与 Overlay 的关系是？",
+    "options": {
+      "A": "两者完全独立，互不影响转发",
+      "B": "两者必须使用同一套 VLAN",
+      "C": "Underlay 提供物理承载，Overlay 提供逻辑网络",
+      "D": "Underlay 是虚拟网络，Overlay 是物理网络"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Underlay 由物理设备与 IP 路由构成，提供可达性；Overlay 在其上构建虚拟网络，通过隧道承载租户流量。",
+    "chapter": "网络解决方案",
+    "knowledgeSection": "企业数通解决方案",
+    "knowledgePoint": "数据中心与 VXLAN",
+    "difficulty": "medium",
+    "tags": [
+      "VXLAN",
+      "Underlay"
+    ],
+    "provenance": {
+      "questionId": "hcip821-13-1-2-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络解决方案 / 企业数通解决方案 / 数据中心与 VXLAN」。知识点编码 hcip821-13-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e22f4faa0d395220633527d41d0e4aece526e2d1c0d12dd3d2ecfb6865396fe6"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-13-1-2-005",
+    "type": "single_choice",
+    "question": "BGP EVPN 在 VXLAN 网络中的主要作用是？",
+    "options": {
+      "A": "传递租户的 MAC 与 IP 可达信息",
+      "B": "为 VTEP 分配 IP 地址",
+      "C": "加密 VXLAN 报文",
+      "D": "提供无线用户认证"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "EVPN 用 BGP 的 MP_REACH 承载 MAC/IP 路由，实现 VTEP 之间的地址学习与主机信息同步，替代传统的数据平面泛洪学习。",
+    "chapter": "网络解决方案",
+    "knowledgeSection": "企业数通解决方案",
+    "knowledgePoint": "数据中心与 VXLAN",
+    "difficulty": "medium",
+    "tags": [
+      "EVPN",
+      "VXLAN"
+    ],
+    "provenance": {
+      "questionId": "hcip821-13-1-2-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络解决方案 / 企业数通解决方案 / 数据中心与 VXLAN」。知识点编码 hcip821-13-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "048c862dba2e30f9fd694be58ef5f61a0d7ebe91244d07b22ab12ce38ec10e82"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-13-1-3-001",
+    "type": "single_choice",
+    "question": "SD-WAN 控制器的主要职责是？",
+    "options": {
+      "A": "提供无线射频调优",
+      "B": "集中管理策略并下发到各站点设备",
+      "C": "转发站点的业务流量",
+      "D": "为终端分配 IP 地址"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "SD-WAN 控制器负责拓扑与策略编排、设备纳管与监控，业务流量仍由站点设备转发，控制器不在数据转发路径上。",
+    "chapter": "网络解决方案",
+    "knowledgeSection": "企业数通解决方案",
+    "knowledgePoint": "SD-WAN",
+    "difficulty": "medium",
+    "tags": [
+      "SD-WAN",
+      "控制器"
+    ],
+    "provenance": {
+      "questionId": "hcip821-13-1-3-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络解决方案 / 企业数通解决方案 / SD-WAN」。知识点编码 hcip821-13-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "a320cf0a09da4a86d2601d835c78c559ccfbd58289c9c7be843706f5e574087b"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-13-1-3-002",
+    "type": "single_choice",
+    "question": "SD-WAN 中的 ZTP 指的是？",
+    "options": {
+      "A": "零丢包转发机制",
+      "B": "零信任安全认证",
+      "C": "零配置无线接入",
+      "D": "设备上电后自动获取配置并上线"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "ZTP 即零接触部署，设备上电后通过 DHCP、DNS 或控制器地址自动获取引导配置并完成上线，无需现场工程师逐台配置。",
+    "chapter": "网络解决方案",
+    "knowledgeSection": "企业数通解决方案",
+    "knowledgePoint": "SD-WAN",
+    "difficulty": "medium",
+    "tags": [
+      "SD-WAN",
+      "ZTP"
+    ],
+    "provenance": {
+      "questionId": "hcip821-13-1-3-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络解决方案 / 企业数通解决方案 / SD-WAN」。知识点编码 hcip821-13-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "110752e99c06acd16968cbb39d252893eaaf444882a655c8ff9708e0eeea787c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-13-1-3-003",
+    "type": "single_choice",
+    "question": "SD-WAN 基于应用识别选路的核心价值是？",
+    "options": {
+      "A": "替代所有专线",
+      "B": "减少设备数量",
+      "C": "按应用质量需求动态选择链路",
+      "D": "提高单条链路的带宽上限"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "SD-WAN 识别应用类型，结合链路时延、丢包、抖动等质量指标，为关键应用动态选择更优路径，提升体验并降低成本。",
+    "chapter": "网络解决方案",
+    "knowledgeSection": "企业数通解决方案",
+    "knowledgePoint": "SD-WAN",
+    "difficulty": "medium",
+    "tags": [
+      "SD-WAN",
+      "应用选路"
+    ],
+    "provenance": {
+      "questionId": "hcip821-13-1-3-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络解决方案 / 企业数通解决方案 / SD-WAN」。知识点编码 hcip821-13-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "07788fbff61a9038d21eefe21a6f5bcd41222559ab61b3b195ff7c07abe675ca"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-13-1-3-004",
+    "type": "single_choice",
+    "question": "SD-WAN 通常使用什么方式构建站点间的逻辑网络？",
+    "options": {
+      "A": "静态 ARP 映射",
+      "B": "物理专线直连",
+      "C": "Overlay 隧道",
+      "D": "二层 VLAN 延伸"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "SD-WAN 在多种物理链路（MPLS、互联网、4G/5G）之上建立 Overlay 隧道，屏蔽底层差异，统一承载业务。",
+    "chapter": "网络解决方案",
+    "knowledgeSection": "企业数通解决方案",
+    "knowledgePoint": "SD-WAN",
+    "difficulty": "medium",
+    "tags": [
+      "SD-WAN",
+      "Overlay"
+    ],
+    "provenance": {
+      "questionId": "hcip821-13-1-3-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络解决方案 / 企业数通解决方案 / SD-WAN」。知识点编码 hcip821-13-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "6d8e44c5ed44a8136f1950448db80e6ef87e11ac25bc49753e5f50a925428bbf"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-13-1-3-005",
+    "type": "true_false",
+    "question": "SD-WAN 控制器负责转发站点之间的业务流量。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "控制器负责管理与策略编排，业务流量由站点设备按策略转发。把控制器放进转发路径会引入单点故障与性能瓶颈。",
+    "chapter": "网络解决方案",
+    "knowledgeSection": "企业数通解决方案",
+    "knowledgePoint": "SD-WAN",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "SD-WAN"
+    ],
+    "provenance": {
+      "questionId": "hcip821-13-1-3-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络解决方案 / 企业数通解决方案 / SD-WAN」。知识点编码 hcip821-13-1-3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "7f7d966c280bf6dd8c8d8a3b05bfa4ea3241a6b71f683b82903da45c876c99e0"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-8-3-1-003",
+    "type": "single_choice",
+    "question": "SLAAC 指的是什么？",
+    "options": {
+      "A": "管理员手工配置地址",
+      "B": "主机根据 RA 通告的前缀自动生成地址",
+      "C": "主机通过 DHCPv6 获取地址",
+      "D": "通过 DNS 解析生成地址"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "SLAAC 即无状态地址自动配置，主机依据路由器通告的前缀与接口标识自行生成地址，不需要服务器记录分配状态。",
+    "chapter": "IPv6 核心知识",
+    "knowledgeSection": "IPv6 地址配置",
+    "knowledgePoint": "地址配置方式",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "SLAAC"
+    ],
+    "provenance": {
+      "questionId": "hcip821-8-3-1-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 核心知识 / IPv6 地址配置 / 地址配置方式」。知识点编码 hcip821-8-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "a0d17a77f5b7b0250129e2fada5e0fe82132c9f9a69906c05726ad50901615e3"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-8-3-1-004",
+    "type": "single_choice",
+    "question": "DHCPv6 有状态与无状态的主要区别是？",
+    "options": {
+      "A": "有状态只用于 IPv4",
+      "B": "有状态分配地址，无状态只下发其他参数",
+      "C": "有状态只下发 DNS，无状态分配地址",
+      "D": "两者完全等价可用"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "有状态 DHCPv6 由服务器分配并记录地址；无状态 DHCPv6 只下发 DNS 等参数，地址仍由 SLAAC 生成。",
+    "chapter": "IPv6 核心知识",
+    "knowledgeSection": "IPv6 地址配置",
+    "knowledgePoint": "地址配置方式",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "DHCPv6"
+    ],
+    "provenance": {
+      "questionId": "hcip821-8-3-1-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 核心知识 / IPv6 地址配置 / 地址配置方式」。知识点编码 hcip821-8-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "c3a2d5db43ce989ae591c59aa33947b580f702fad335038a10eb4a9e1aa0234c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-8-3-1-005",
+    "type": "single_choice",
+    "question": "EUI-64 方式生成接口标识时，会插入什么？",
+    "options": {
+      "A": "FFFE",
+      "B": "0000",
+      "C": "FE80",
+      "D": "FFFF"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "EUI-64 在 MAC 地址中间插入 FFFE，并翻转第 7 位（U/L 位），形成 64 位接口标识。",
+    "chapter": "IPv6 核心知识",
+    "knowledgeSection": "IPv6 地址配置",
+    "knowledgePoint": "地址配置方式",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "EUI-64"
+    ],
+    "provenance": {
+      "questionId": "hcip821-8-3-1-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 核心知识 / IPv6 地址配置 / 地址配置方式」。知识点编码 hcip821-8-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "a06a97ff985ecb9100ffacb6746b28dae036466ab00033a0ba6422a06b58ef94"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-8-3-1-006",
+    "type": "single_choice",
+    "question": "IPv6 的重复地址检测（DAD）使用什么报文？",
+    "options": {
+      "A": "路由器通告与重定向",
+      "B": "回显请求与回显应答",
+      "C": "路由请求与路由通告",
+      "D": "邻居请求与邻居通告"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "DAD 向被检测地址对应的被请求节点组播地址发送 NS，若收到 NA 则说明地址已被占用。",
+    "chapter": "IPv6 核心知识",
+    "knowledgeSection": "IPv6 地址配置",
+    "knowledgePoint": "地址配置方式",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "DAD"
+    ],
+    "provenance": {
+      "questionId": "hcip821-8-3-1-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 核心知识 / IPv6 地址配置 / 地址配置方式」。知识点编码 hcip821-8-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "723bde3b93308d5c5e6021ddf6b728881af503fd1e36980910e04f10e7033b71"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip821-8-3-1-007",
+    "type": "single_choice",
+    "question": "IPv6 主机通过什么报文请求路由器下发前缀？",
+    "options": {
+      "A": "重定向（Redirect）",
+      "B": "路由器通告（RA）",
+      "C": "路由请求（RS）",
+      "D": "邻居请求（NS）"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "主机发送 RS 请求网络参数，路由器以 RA 回应，携带前缀、默认网关、MTU 等信息。RA 也可周期主动发送。",
+    "chapter": "IPv6 核心知识",
+    "knowledgeSection": "IPv6 地址配置",
+    "knowledgePoint": "地址配置方式",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6",
+      "RS",
+      "RA"
+    ],
+    "provenance": {
+      "questionId": "hcip821-8-3-1-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 核心知识 / IPv6 地址配置 / 地址配置方式」。知识点编码 hcip821-8-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "cb868cad96ff3f8a07c955280ca949d0db0ec45609503b567afd0b91b2d67281"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  }
+]

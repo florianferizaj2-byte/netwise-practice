@@ -1,0 +1,1857 @@
+[
+  {
+    "id": "hcip821-7-1-1-002",
+    "type": "single_choice",
+    "question": "IPv4 组播地址使用 D 类地址空间。下列哪一项是该地址空间的完整范围？",
+    "options": {
+      "A": "224.0.0.0～239.255.255.255",
+      "B": "224.0.0.0～239.255.255.254",
+      "C": "232.0.0.0～239.255.255.255",
+      "D": "240.0.0.0～255.255.255.255"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "D 类地址最高 4 位固定为 1110，第一个字节取值 224 至 239，因此地址空间为 224.0.0.0 到 239.255.255.255，A 正确。B 漏掉了 239.255.255.255 这个合法组地址。C 把 SSM 块 232/8 当成了起点，实际 224.0.0.0 至 231.255.255.255 同样是组播地址。D 是 E 类保留地址空间，不用于组播。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "easy",
+    "tags": [
+      "组播",
+      "IPv4 组播地址",
+      "D 类地址"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-1-1-002",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1112-multicast"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IP 组播基础 / 组播地址与转发」（三级目录编码 hcip821-7-1-1）；D 类地址以 1110 开头、范围为 224.0.0.0 至 239.255.255.255、E 类保留的结论依据 RFC 1112 第 4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "b6e70195d7559939db0c84eb2eca07e8ac0ea0303b97e80fed72763fe77eb374"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-1-1-003",
+    "type": "single_choice",
+    "question": "224.0.1.0/24 属于 Internetwork Control Block。与本地网络控制块相比，该地址块的特点是？",
+    "options": {
+      "A": "只能在同一台设备内部使用，不能出现在任何链路上",
+      "B": "地址由各厂商自行分配，不同厂商之间会冲突",
+      "C": "仅供组播路由协议建立邻居使用，不能承载其他协议",
+      "D": "用于可跨网段转发的协议控制流量，允许被路由器继续转发"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Internetwork Control Block 承载可以转发到互联网各处的协议控制流量，例如 224.0.1.1 的 NTP，允许路由器继续转发，D 正确。A 错误：它本来就要出现在链路上并可跨网段。B 错误：该块由 IANA 统一按协议分配，不由厂商自行分配。C 错误：该块并不限定只做邻居建立，关键在于控制流量可被转发。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "medium",
+    "tags": [
+      "组播地址",
+      "Internetwork Control",
+      "224.0.1.0/24"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-1-1-003",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc5771-multicast-ipv4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IP 组播基础 / 组播地址与转发」（三级目录编码 hcip821-7-1-1）；Internetwork Control Block 的协议控制流量可以被转发、示例为 224.0.1.1 NTP 的依据是 RFC 5771 第 5 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "682386c03cc657d804e366eb561ff1689508018ce6908f3534b6be42c2ceaf74"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-1-1-004",
+    "type": "single_choice",
+    "question": "224.0.0.0/24 是 IPv4 组播的本地网络控制块。关于该地址块内的组播流量，下列描述正确的是？",
+    "options": {
+      "A": "只要 TTL 足够大，就可以被路由器转发到其他网段",
+      "B": "用于本地链路的协议控制流量，不被路由器转发到链路之外",
+      "C": "该地址块供组播源动态申请，可以跨域使用",
+      "D": "该地址块专用于 SSM，必须配合 IGMPv3 指定源"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "本地网络控制块承载不离开链路的协议控制流量，例如 224.0.0.5 这个 OSPF 路由器组，路由器不会把它转发到链路之外，B 正确。A 错误：TTL 大小不是决定因素，该块本身规定不转发。C 错误：该块由 IANA 按协议分配，不是供源动态申请。D 错误：SSM 使用 232/8，与 224.0.0/24 无关。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "easy",
+    "tags": [
+      "组播地址",
+      "本地网络控制块",
+      "224.0.0.0/24"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-1-1-004",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc5771-multicast-ipv4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IP 组播基础 / 组播地址与转发」（三级目录编码 hcip821-7-1-1）；本地网络控制块用于不离开链路的协议控制流量的结论依据 RFC 5771 第 4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "69931b60bff21cfacac32a2cfb904b3e544ffd7e30ead9601daa2efc7ecda4eb"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-1-1-005",
+    "type": "single_choice",
+    "question": "某视频分发系统使用 232.0.0.0/8 内的组地址，并要求接收者只接收指定源发送的流量。关于这种用法，下列判断正确的是？",
+    "options": {
+      "A": "必须为每个组部署 RP，由 RP 汇聚所有源",
+      "B": "接收者只能使用 IGMPv1 加入该组",
+      "C": "该地址块专用于 SSM，接收者用 IGMPv3 按源和组的方式加入",
+      "D": "该地址块属于管理范围地址，只能在一个域内使用"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "232/8 是 SSM 专用块，SSM 要求接收者显式指定源，IGMPv3 的源过滤能力正好支持按源与组加入，C 正确。A 错误：SSM 不需要 RP，直接建立以源为根的树。B 错误：IGMPv1 没有源过滤能力，无法表达 SSM 加入。D 错误：管理范围地址是 239/8，SSM 地址可以与任意源配合使用。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "medium",
+    "tags": [
+      "SSM",
+      "232/8",
+      "IGMPv3"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-1-1-005",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc5771-multicast-ipv4",
+        "rfc3376-igmpv3"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IP 组播基础 / 组播地址与转发」（三级目录编码 hcip821-7-1-1）；232/8 为 SSM 专用块且明确不得用于其他用途的依据是 RFC 5771 第 8 节；按源与组加入的 INCLUDE 语义依据 RFC 3376 第 2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "00df56c4bb766202105eaeac2d46d4dd76bd8fbcbe23a95c624eca43a2ab180b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-1-1-006",
+    "type": "single_choice",
+    "question": "某企业拥有 16 位 AS 号 65001，希望获得一段全球可路由、按 AS 号算法映射的组播地址。下列做法正确的是？",
+    "options": {
+      "A": "使用 GLOP 映射，把 AS 号写成 X.Y 填入 233/8 的中间两个字节，得到 233.X.Y.0/24",
+      "B": "在 239/8 中任选一个 /24，因为管理范围地址全球唯一",
+      "C": "使用 224.0.1.0/24 中的一个地址，由 IANA 按 AS 号分配",
+      "D": "使用 232/8 中的地址，因为 SSM 地址由 AS 号决定"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "GLOP 把 16 位 ASN 的 X.Y 两个字节嵌入 233/8 的中间两个字节，得到 233.X.Y.0/24，A 正确。B 错误：239/8 是管理范围地址，只在域内有效，不保证全球唯一。C 错误：Internetwork Control 块不按 AS 号映射。D 错误：232/8 是 SSM 块，与 AS 号没有映射关系。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "medium",
+    "tags": [
+      "GLOP",
+      "233/8",
+      "AS 号映射"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-1-1-006",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc5771-multicast-ipv4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IP 组播基础 / 组播地址与转发」（三级目录编码 hcip821-7-1-1）；GLOP 把 16 位 ASN 以 X.Y 形式映射为 233.X.Y.0/24 的定义依据 RFC 5771 第 9 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "65554131f7b3d0060ef075be4d47ac8184187418aa3aad89108d7a4492a3b295"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-1-1-007",
+    "type": "single_choice",
+    "question": "企业在内部网络中规划组播应用，希望所用地址不会与互联网上的组播服务冲突。最合适的地址选择是？",
+    "options": {
+      "A": "232.1.1.0/24，因为 SSM 地址天然只在本地有效",
+      "B": "239.1.1.0/24，管理范围地址只在域内使用，不与外部冲突",
+      "C": "233.1.1.0/24，GLOP 地址由 AS 号决定，全球唯一",
+      "D": "224.0.1.1，Internetwork Control 块专供内部使用"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "239/8 是管理范围块，地址只在管理域内有效，适合内部使用且不会与外部冲突，B 正确。A 错误：232/8 是 SSM 专用块，不能当作私有地址随意占用。C 错误：GLOP 地址全球可路由，正是需要避免的冲突来源。D 错误：224.0.1.1 是 NTP 等协议使用的可转发控制地址，不属于内部私有范围。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "medium",
+    "tags": [
+      "管理范围地址",
+      "239/8",
+      "地址规划"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-1-1-007",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc5771-multicast-ipv4"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IP 组播基础 / 组播地址与转发」（三级目录编码 hcip821-7-1-1）；239/8 管理范围地址供域内使用、无需 IANA 分配的说明依据 RFC 5771 第 10 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "2ca495e613a1c1927afef2007a43f9f03799bf6d59514ac3343ed5335bfd4b5a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-1-1-008",
+    "type": "single_choice",
+    "question": "IPv4 组播地址映射到以太网组播 MAC 时，采用的做法是？",
+    "options": {
+      "A": "把完整 32 位组地址直接填入 MAC 地址的 32 位",
+      "B": "使用 01-00-5E-00-00-00 加上组地址的高 23 位",
+      "C": "通过 ARP 请求获得组地址对应的 MAC",
+      "D": "取组地址低 23 位放入 01-00-5E-00-00-00 的低 23 位"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "组播 MAC 前缀为 01-00-5E，后 23 位取 IPv4 组地址的低 23 位，D 正确。A 错误：MAC 只有 48 位，且映射只保留 23 位。B 错误：取的是低 23 位而不是高 23 位。C 错误：组播不使用 ARP 解析，目的 MAC 由组地址直接推导。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "easy",
+    "tags": [
+      "组播 MAC",
+      "01-00-5E",
+      "地址映射"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-1-1-008",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1112-multicast"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IP 组播基础 / 组播地址与转发」（三级目录编码 hcip821-7-1-1）；把 IP 组地址低 23 位放入 01-00-5E-00-00-00 低 23 位的映射规则依据 RFC 1112 第 6.4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "1c20188f97b1ca1d3186f09551f7411b4879ddb1b365496a3239245cb3598a02"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-1-1-009",
+    "type": "single_choice",
+    "question": "组地址 239.1.2.3 对应的以太网组播 MAC 地址是？",
+    "options": {
+      "A": "01-00-5E-EF-01-02",
+      "B": "01-00-5E-00-01-02",
+      "C": "01-00-5E-01-02-03",
+      "D": "01-00-5E-7F-01-02"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "复算过程：239.1.2.3 的十六进制为 EF 01 02 03，取低 23 位即 01 02 03，拼到 01-00-5E 之后得到 01-00-5E-01-02-03，C 正确。A 把第一个字节 EF 也带入，多保留了高位。B 漏掉了第二字节 01 的低 7 位，只剩 00。D 把 239 的低 7 位当成 7F 填入，取值错误。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "medium",
+    "tags": [
+      "组播 MAC",
+      "地址计算",
+      "239.1.2.3"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-1-1-009",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1112-multicast"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IP 组播基础 / 组播地址与转发」（三级目录编码 hcip821-7-1-1）；低 23 位映射的逐位计算依据 RFC 1112 第 6.4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "376a158a8bbb45bf5744172b4cf443d6e44bd3f53275f19828833c079ac8d3d1"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-1-1-010",
+    "type": "single_choice",
+    "question": "由于 IPv4 组播地址到 MAC 地址的映射只保留 23 位，会有多个组地址映射到同一个 MAC 地址。映射到同一个 MAC 的 IPv4 组地址最多有多少个？",
+    "options": {
+      "A": "8 个",
+      "B": "32 个",
+      "C": "256 个",
+      "D": "512 个"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "复算过程：IPv4 组播地址中有 28 位可用于标识组，映射只保留低 23 位，被丢弃的是 28 减 23 等于 5 位，因此每个 MAC 对应 2 的 5 次方即 32 个组地址，B 正确。A 只按 3 位差异计算。C 误以为丢弃 8 位。D 把丢弃位数错算成 9 位。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "medium",
+    "tags": [
+      "组播 MAC",
+      "地址重叠",
+      "计算"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-1-1-010",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1112-multicast"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IP 组播基础 / 组播地址与转发」（三级目录编码 hcip821-7-1-1）；组地址有 28 个有效位、多个组可能映射到同一 MAC 的结论依据 RFC 1112 第 6.4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "843464aabc23fe02d0a96204db11502fb6a38da6bdcff15084a7f36786b803e8"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-1-1-011",
+    "type": "single_choice",
+    "question": "下列哪一组 IPv4 组地址会被映射到同一个以太网组播 MAC 地址？",
+    "options": {
+      "A": "224.0.1.1 与 239.0.1.1",
+      "B": "224.0.1.1 与 224.0.1.2",
+      "C": "232.1.1.1 与 233.1.1.2",
+      "D": "239.1.2.3 与 239.4.2.3"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "只有低 23 位相同的组地址才会映射到同一 MAC。224.0.1.1 与 239.0.1.1 的第三、四字节都是 01、01，第二字节低 7 位都是 0，低 23 位同为 00 01 01，映射结果都是 01-00-5E-00-01-01，A 正确。B 的第四字节不同，低 23 位不同。C 的第三、四字节为 01 01 与 01 02，结果不同。D 的第二字节低 7 位分别为 1 与 4，结果不同。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "hard",
+    "tags": [
+      "组播 MAC",
+      "地址重叠",
+      "反向判断"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-1-1-011",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1112-multicast"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IP 组播基础 / 组播地址与转发」（三级目录编码 hcip821-7-1-1）；同一 MAC 对应多个组地址的判断依据 RFC 1112 第 6.4 节的低 23 位映射。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "6ebe2f5cb235393fddd3f00f1565c3fdf7144a09c05c9042c3148736b6fd787f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-1-1-012",
+    "type": "single_choice",
+    "question": "在支持 IGMPv3 的网络中，主机发送的版本 3 成员报告发往哪个地址？",
+    "options": {
+      "A": "224.0.0.1",
+      "B": "224.0.0.2",
+      "C": "224.0.0.22",
+      "D": "所加入的组地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "IGMPv3 规定版本 3 成员报告发往 224.0.0.22，所有支持 IGMPv3 的组播路由器都在该地址上监听，C 正确。A 是通用查询的目的地址，即所有主机组。B 是 IGMPv2 离组报文的目的地址，即所有路由器组。D 是 IGMPv1 与 IGMPv2 成员报告的目的地址，版本 3 报告不再发往组地址。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "medium",
+    "tags": [
+      "IGMPv3",
+      "224.0.0.22",
+      "报文目的地址"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-1-1-012",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3376-igmpv3"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IP 组播基础 / 组播地址与转发」（三级目录编码 hcip821-7-1-1）；版本 3 成员报告发往 224.0.0.22、由所有支持 IGMPv3 的路由器监听的依据是 RFC 3376 第 4.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "622165fdd8f5b5d1c61d28394a27f6d53b3a27ada800de52f347c2d6e31e4bc3"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-1-1-013",
+    "type": "single_choice",
+    "question": "PIM 路由器之间发送的 Hello、Join/Prune 等报文，默认发往哪个组地址？",
+    "options": {
+      "A": "224.0.0.1",
+      "B": "224.0.0.5",
+      "C": "224.0.0.9",
+      "D": "224.0.0.13"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "IPv4 的 ALL-PIM-ROUTERS 组地址是 224.0.0.13，PIM 控制报文默认发往该地址，Graft 与 Graft Ack 例外而采用单播，D 正确。A 是所有主机组，用于 IGMP 通用查询。B 是 OSPF 所有路由器组。C 是 RIPv2 使用的组地址。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "easy",
+    "tags": [
+      "PIM",
+      "224.0.0.13",
+      "协议地址"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-1-1-013",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3973-pim-dm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IP 组播基础 / 组播地址与转发」（三级目录编码 hcip821-7-1-1）；ALL-PIM-ROUTERS 为 224.0.0.13、PIM 报文 TTL 为 1 且 Graft 采用单播的说明依据 RFC 3973 第 4.7 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "ef747e4208121a7b41d2b611b2a50bcf11afa73a97faf1f73b5c588ab62f5de0"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-1-1-014",
+    "type": "single_choice",
+    "question": "组播转发中的 RPF 检查是指？",
+    "options": {
+      "A": "检查报文目的地址是否为合法组播地址",
+      "B": "检查报文的入接口是否为通往源的单播路由出接口，即 RPF 接口",
+      "C": "检查报文的 TTL 是否大于接口阈值",
+      "D": "检查报文的源地址是否在本地组成员表中"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RPF 要求组播报文只能从通往源的接口进入，该接口由单播路由信息确定，B 正确。A 描述的是组地址合法性检查，不是 RPF。C 描述的是 TTL 阈值检查。D 描述的是组成员过滤，与 RPF 无关。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "medium",
+    "tags": [
+      "RPF",
+      "组播转发",
+      "单播路由"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-1-1-014",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3973-pim-dm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IP 组播基础 / 组播地址与转发」（三级目录编码 hcip821-7-1-1）；RPF 仅接受从通往源的接口收到的报文、上游接口即 RPF 接口的定义依据 RFC 3973 第 2.1 节与第 4.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "596edcb5a7c6abde06519a35ae5fa45dd8b2e6e1ce7640ac2d97fb9feef819eb"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-1-1-015",
+    "type": "single_choice",
+    "question": "华为设备上，某组播源发出的流量在中间路由器被丢弃。查看发现该流量的入接口与本地去往该源的单播路由出接口不一致。最可能的原因是？",
+    "options": {
+      "A": "组地址落在 224.0.0.0/24 内，被路由器按本地控制流量丢弃",
+      "B": "该组的 IGMP 报告被抑制，路由器没有收到成员信息",
+      "C": "RPF 检查失败，报文入接口不是 RPF 接口，因此被丢弃",
+      "D": "组播报文的 TTL 已减为 0，被路由器正常丢弃"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "题干已给出入接口与去往源的单播出接口不一致，这正是 RPF 检查失败的条件，报文不会被转发，C 正确。A 错误：题中没有说明组地址属于本地控制块，且本地控制块流量本就不会被路由到该设备。B 错误：缺少成员只会导致下游剪枝，不会造成上游入接口判断错误。D 错误：TTL 耗尽与接口一致性无关。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "hard",
+    "tags": [
+      "RPF",
+      "故障定位",
+      "华为设备"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-1-1-015",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3973-pim-dm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IP 组播基础 / 组播地址与转发」（三级目录编码 hcip821-7-1-1）；RPF 检查失败的报文必须不转发、并进入对应 (S,G) 的 Assert 处理的规则依据 RFC 3973 第 4.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "0a3d557629025d747895cf803b81671c1cd6b050b18f7d54df0ab7561ce8883c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-1-1-016",
+    "type": "single_choice",
+    "question": "组播转发表中，(S,G) 表项与 (*,G) 表项的区别是？",
+    "options": {
+      "A": "(*,G) 不限定源，任何源发往组 G 的流量都可匹配；(S,G) 只匹配特定源 S 发往组 G 的流量",
+      "B": "(*,G) 只用于 SSM，(S,G) 只用于 ASM",
+      "C": "(*,G) 表示所有组，(S,G) 表示单个组",
+      "D": "两者完全等价，只是显示格式不同"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "(*,G) 是共享树表项，源字段通配，匹配任意源发往 G 的流量；(S,G) 是源特定表项，只匹配源 S，A 正确。B 方向相反：SSM 使用 (S,G)，ASM 才可能使用 (*,G)。C 错误：(*,G) 中的星号指代源而不是组。D 错误：两者匹配范围和建立方式都不同。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "medium",
+    "tags": [
+      "组播转发表",
+      "(S,G)",
+      "(*,G)"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-1-1-016",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3973-pim-dm",
+        "rfc4601-pim-sm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IP 组播基础 / 组播地址与转发」（三级目录编码 hcip821-7-1-1）；(S,G) 以源与组标识转发的定义依据 RFC 3973 第 2.1 节，共享树与源特定树的区分依据 RFC 4601 第 3.2 节与第 3.3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "289c0dbf26239679a61bb9cbeff22af856fa44b1e36b3a8f3bedb3499247c0cb"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-1-1-017",
+    "type": "single_choice",
+    "question": "华为设备上执行 display multicast routing-table 查看组播路由表项时，表项中包含的关键信息是？",
+    "options": {
+      "A": "仅包含组地址和源地址，出接口需另查单播路由表",
+      "B": "仅包含入接口和出接口，源与组信息由 IGMP 表提供",
+      "C": "组地址、源地址和 TTL 阈值，不包含接口信息",
+      "D": "源地址、组地址、入接口即 RPF 接口，以及出接口列表"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "组播路由表项以源与组标识转发状态，同时记录上游入接口与下游出接口列表，D 正确。A 错误：出接口列表就在组播路由表项中。B 错误：源与组信息正是组播路由表的主键，不由 IGMP 表提供。C 错误：接口信息是组播转发表项的核心字段，这部分内容不能缺失。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "medium",
+    "tags": [
+      "组播转发表",
+      "验证输出",
+      "华为设备"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-1-1-017",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3973-pim-dm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IP 组播基础 / 组播地址与转发」（三级目录编码 hcip821-7-1-1）；组播状态以上游 RPF 接口与出接口列表 olist 表示的模型依据 RFC 3973 第 4.1.3 节；命令字段形式属华为 VRP 实现。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "9e9be92cbac73e96801293027019722050d508f5dd6b2f6e92f39e7fec24bd74"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-1-1-018",
+    "type": "single_choice",
+    "question": "在企业域边界路由器上配置了针对某组地址范围的管理范围边界。该配置的直接效果是？",
+    "options": {
+      "A": "该组地址范围被自动翻译为私有单播地址",
+      "B": "该组地址范围被纳入 IGMP 查询器选举范围",
+      "C": "属于该范围的组播流量不会从配置边界的接口转发出去，从而被限制在管理域内",
+      "D": "属于该范围的组播报文会被改写为 SSM 地址继续转发"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "管理范围边界把指定组范围的流量限制在域内，边界接口不转发该范围流量，C 正确。A 错误：边界配置不做地址翻译。B 错误：边界与 IGMP 查询器选举无关。D 错误：不会改写组地址，SSM 也不是通过改写地址产生的。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "medium",
+    "tags": [
+      "管理范围",
+      "组播边界",
+      "域内限制"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-1-1-018",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc5771-multicast-ipv4",
+        "rfc3973-pim-dm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IP 组播基础 / 组播地址与转发」（三级目录编码 hcip821-7-1-1）；管理范围地址供域内使用的定位依据 RFC 5771 第 10 节，出接口列表中排除管理范围边界的 boundary(G) 定义依据 RFC 3973 第 4.1.3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "2df13baccea8ad948283dc4c28d0330adb8cee91334351686857b95bb1cee8bf"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-1-1-019",
+    "type": "single_choice",
+    "question": "主机发送组播数据时不需要 ARP 解析，原因是？",
+    "options": {
+      "A": "组播使用广播 MAC 地址，所有主机都会处理",
+      "B": "目的 MAC 由目的组地址直接映射得到，无需解析",
+      "C": "组播报文封装在 IP-in-IP 隧道中，不经过二层",
+      "D": "组播使用 PPP 封装，链路上没有 MAC 地址"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "组播目的 MAC 由组地址按固定规则映射得到，主机直接把帧发往该 MAC，不需要 ARP，B 正确。A 错误：组播 MAC 不是广播 MAC，广播 MAC 是 FF-FF-FF-FF-FF-FF。C 错误：组播在以太网上正常经过二层封装。D 错误：以太网链路上存在 MAC 地址，与 PPP 无关。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "easy",
+    "tags": [
+      "组播 MAC",
+      "ARP",
+      "二层封装"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-1-1-019",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1112-multicast"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IP 组播基础 / 组播地址与转发」（三级目录编码 hcip821-7-1-1）；组地址到以太网组播地址的直接映射、无需地址解析的依据是 RFC 1112 第 6.4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "46c4a6ddf7a5df6ead0fdf9e3387d3ed7044ae2b3a935817dd0c5622a38f6325"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-1-1-020",
+    "type": "single_choice",
+    "question": "以太网组播 MAC 地址在第一个字节上的特征是？",
+    "options": {
+      "A": "第一个字节的最低位为 0",
+      "B": "第一个字节固定为 FF",
+      "C": "第一个字节固定为 00",
+      "D": "第一个字节的最低位为 1"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "以太网用第一个字节的最低位区分单播与组播，该位为 1 表示组播或广播，D 正确。A 描述的是单播地址的特征。B 是全 F 广播地址的特征。C 是 00 开头地址的特征，不能代表组播。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "easy",
+    "tags": [
+      "组播 MAC",
+      "I/G 位",
+      "以太网"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-1-1-020",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1112-multicast"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IP 组播基础 / 组播地址与转发」（三级目录编码 hcip821-7-1-1）；以太网组播地址以 01-00-5E 开头、首字节最低位为 1 的依据是 RFC 1112 第 6.4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "28ca73fb6a1fecb6fb5ff3621259d753ac3e0cda8eb9e86bdcd2b7f3202252c7"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-1-1-021",
+    "type": "single_choice",
+    "question": "组地址 239.255.255.255 映射得到的以太网组播 MAC 地址是？",
+    "options": {
+      "A": "01-00-5E-7F-FF-FF",
+      "B": "01-00-5E-FF-FF-FF",
+      "C": "01-00-5E-00-FF-FF",
+      "D": "01-00-5E-3F-FF-FF"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "复算过程：239.255.255.255 的低 23 位全为 1，填入 01-00-5E 之后的 23 位即 7F FF FF，得到 01-00-5E-7F-FF-FF，A 正确。B 把 23 位全 1 误写成 24 位全 1，多写了一位。C 只保留了后 16 位，漏掉第二字节的低 7 位。D 的 3F 是只保留 6 位的错误结果。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "medium",
+    "tags": [
+      "组播 MAC",
+      "地址计算",
+      "239/8"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-1-1-021",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1112-multicast"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IP 组播基础 / 组播地址与转发」（三级目录编码 hcip821-7-1-1）；低 23 位映射的逐位计算依据 RFC 1112 第 6.4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "55f4e5f91c62da18a75fdb20401ba425f87d3c7e76b957f4a2f3aacbbd4abe64"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-1-1-022",
+    "type": "single_choice",
+    "question": "关于组播报文的源地址，下列说法正确的是？",
+    "options": {
+      "A": "源地址必须落在 224.0.0.0/4 内",
+      "B": "源地址必须是单播地址，组地址不能作为源地址",
+      "C": "源地址可以是任意组地址，只要目的地址是单播",
+      "D": "源地址与目的地址必须属于同一个组"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "组播报文的源地址始终是发送主机的单播地址，组地址只出现在目的地址字段，B 正确。A 错误：源地址不能是组播地址。C 错误：组地址不能作源，而且组播报文的目的地址必须是组地址，不会是单播。D 错误：源与目的不需要属于同一个组，这正是任意源组播的常态。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "medium",
+    "tags": [
+      "组播源地址",
+      "单播地址",
+      "报文格式"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-1-1-022",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1112-multicast"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IP 组播基础 / 组播地址与转发」（三级目录编码 hcip821-7-1-1）；组地址绝不能出现在源地址字段、源地址必须是出接口单播地址的规则依据 RFC 1112 第 6.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "88117b9147eaa972909793a0b1b75ad72a84d3fbd703b91b64a0001154105f8c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-1-1-023",
+    "type": "single_choice",
+    "question": "主机网卡收到目的 MAC 为某组播 MAC 的帧后，若本机并未加入对应的组，通常会怎样处理？",
+    "options": {
+      "A": "一律上交应用层，由应用自行丢弃",
+      "B": "回送 ICMP 不可达报文给源",
+      "C": "把该帧广播给同一网段的所有主机",
+      "D": "在数据链路层或 IP 层丢弃该帧，不上交应用"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "网卡按组播 MAC 过滤，未加入该组的帧不会交付上层；即使因 MAC 重叠被接收，IP 层还会按组地址再次过滤，D 正确。A 错误：未加入的组不会上交应用层。B 错误：组播不产生此类 ICMP 报文。C 错误：主机不会把收到的帧再广播出去。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "medium",
+    "tags": [
+      "组播接收",
+      "MAC 过滤",
+      "主机行为"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-1-1-023",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1112-multicast"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IP 组播基础 / 组播地址与转发」（三级目录编码 hcip821-7-1-1）；目的组非本机加入的组时静默丢弃、由 IP 模块按目的地址过滤的说明依据 RFC 1112 第 7.2 节与第 7.4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "6ac200c6973fdb436df56f244a9664ea470bd7c18f0d525b570112f5c1230aab"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-1-1-024",
+    "type": "single_choice",
+    "question": "由于多个组地址可能映射到同一个组播 MAC，主机在二层收到帧后还需要做什么？",
+    "options": {
+      "A": "不需要再做检查，MAC 相同即代表组相同",
+      "B": "重新计算源地址对应的 MAC，与目的 MAC 比较",
+      "C": "在 IP 层按目的组地址再次过滤，只把真正加入的组交给上层",
+      "D": "向路由器查询该 MAC 对应的组地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "MAC 映射存在 32 比 1 的重叠，二层过滤不足以保证正确性，主机必须在 IP 层按目的组地址再次过滤，C 正确。A 错误：MAC 相同不代表组相同。B 错误：源地址与目的 MAC 没有对应关系。D 错误：不存在这种查询机制。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "hard",
+    "tags": [
+      "组播 MAC",
+      "地址重叠",
+      "接收过滤"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-1-1-024",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1112-multicast"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IP 组播基础 / 组播地址与转发」（三级目录编码 hcip821-7-1-1）；硬件过滤不足时由 IP 模块按 IP 目的地址自行过滤的说明依据 RFC 1112 第 7.4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "d70d5b6b2868ee5fc32ccc01b00da5c158d2c7127ed8bbc6eb4cf0e491d3f793"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-1-1-025",
+    "type": "single_choice",
+    "question": "组播路由器为某个 (S,G) 计算出出接口列表为空，意味着？",
+    "options": {
+      "A": "该组一定没有任何成员，表项应立即删除",
+      "B": "当前没有需要转发该组流量的下游接口，路由器不再向任何接口复制报文",
+      "C": "组播报文将从入接口回送，形成环回",
+      "D": "路由器会把报文改为广播从所有接口发出"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "出接口列表为空表示没有下游需要该流量，路由器不向任何接口转发，并可能触发剪枝，B 正确。A 错误：表项是否删除取决于定时器与状态，不能凭一次空列表断定无成员。C 错误：不会从入接口回送。D 错误：组播不会退化为广播泛洪到所有接口。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "medium",
+    "tags": [
+      "组播转发表",
+      "出接口列表",
+      "剪枝"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-1-1-025",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3973-pim-dm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IP 组播基础 / 组播地址与转发」（三级目录编码 hcip821-7-1-1）；出接口列表为空时不转发并进入剪枝处理的数据转发规则依据 RFC 3973 第 4.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "af6e280f0e6f278dc821ead135a664bed36fafb236aee7e9b8473cd48a07581f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-1-1-026",
+    "type": "single_choice",
+    "question": "组播报文经过组播路由器逐跳转发时，下列字段变化正确的是？",
+    "options": {
+      "A": "目的组地址保持不变，TTL 逐跳减 1",
+      "B": "目的组地址被改写为下一跳的单播地址",
+      "C": "源地址被改写为出接口地址",
+      "D": "TTL 保持不变，由接收者负责去重"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "组播转发不改变目的组地址，靠 TTL 递减防止环路，A 正确。B 错误：组播不会把目的地址改成单播。C 错误：源地址保持不变，否则接收者无法识别源。D 错误：TTL 必须递减，否则报文可能永久循环。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "medium",
+    "tags": [
+      "组播转发",
+      "TTL",
+      "报文头"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-1-1-026",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1112-multicast"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IP 组播基础 / 组播地址与转发」（三级目录编码 hcip821-7-1-1）；组播报文以 TTL 大于 1 为条件由组播路由器向其他网段转发、目的地址保持组地址的模型依据 RFC 1112 第 2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "a431d2a34125889539ee65788e6b816462c0e9f5597d3ba33c9133f9e6e424b2"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-1-1-027",
+    "type": "single_choice",
+    "question": "在一条连接多个接收者的共享链路上，组播路由器发送同一组流量时？",
+    "options": {
+      "A": "为每个接收者各复制一份，按单播地址分别发送",
+      "B": "按接收者数量轮流发送，每次只发给一个接收者",
+      "C": "先单播给第一个接收者，再由其转发给其他接收者",
+      "D": "在链路上只发送一份组播报文，由加入该组的主机共同接收"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "组播的核心是在有成员的链路上只发送一份，由链路层组播地址让多台主机同时接收，D 正确。A 描述的是单播复制，失去了组播的意义。B 描述的是轮询单播。C 错误：接收者之间不承担转发职责。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IP 组播基础",
+    "knowledgePoint": "组播地址与转发",
+    "difficulty": "medium",
+    "tags": [
+      "组播转发",
+      "带宽优化",
+      "共享链路"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-1-1-027",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1112-multicast"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IP 组播基础 / 组播地址与转发」（三级目录编码 hcip821-7-1-1）；组播数据在同一链路上只发送一份、由主机组成员共同接收的模型依据 RFC 1112 第 2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "16be4a3a0cc39b86c74efdfc8a7fe4b5c54ed4990a7859b646fd027db8f87367"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-2-1-001",
+    "type": "single_choice",
+    "question": "IGMP 的主要作用是？",
+    "options": {
+      "A": "在路由器之间交换组播路由，构建组播分发树",
+      "B": "把组播地址解析为对应的 MAC 地址",
+      "C": "让主机把本机的组播组成员关系报告给直连的组播路由器",
+      "D": "为组播报文提供可靠传输与重传"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "IGMP 运行在主机与直连组播路由器之间，用于报告和维护组成员关系，C 正确。A 描述的是 PIM 等组播路由协议。B 描述的是地址映射规则，不需要协议交互。D 错误：IGMP 不提供可靠性机制，组播本身也不保证可靠。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IGMP",
+    "knowledgePoint": "IGMP 工作原理",
+    "difficulty": "easy",
+    "tags": [
+      "IGMP",
+      "组成员关系",
+      "协议定位"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-2-1-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3376-igmpv3"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IGMP / IGMP 工作原理」（三级目录编码 hcip821-7-2-1）；IGMP 用于向邻居组播路由器报告 IPv4 组播组成员关系的定位依据 RFC 3376 第 1 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "9e52af25c74118427dbc85d48c9cee2222da2f128e8191671bd961f513c5b141"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-2-1-002",
+    "type": "single_choice",
+    "question": "与后续版本相比，IGMPv1 的显著特点是？",
+    "options": {
+      "A": "没有离组报文，成员离开后只能等待组成员关系超时；查询器角色依赖组播路由协议确定",
+      "B": "支持源过滤，可以指定只接收某些源的流量",
+      "C": "定义了离组报文，可以立即通知路由器成员离开",
+      "D": "使用 224.0.0.22 作为成员报告的目的地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IGMPv1 只有查询与报告两类报文，没有离组报文，离开只能等超时；其查询器角色也交给组播路由协议决定，A 正确。B 是 IGMPv3 的源过滤能力。C 是 IGMPv2 新增的离组机制。D 是 IGMPv3 报告的目的地址。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IGMP",
+    "knowledgePoint": "IGMP 工作原理",
+    "difficulty": "medium",
+    "tags": [
+      "IGMPv1",
+      "离组",
+      "查询器"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-2-1-002",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2236-igmpv2",
+        "rfc3376-igmpv3"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IGMP / IGMP 工作原理」（三级目录编码 hcip821-7-2-1）；IGMPv1 无离组类型、查询器选举由组播路由协议决定的差异依据 RFC 2236 第 2.1 节与附录一（第 13 节）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "14517eabc495d38170098ebac03b720a0a6a9783c7d5473c99fe723b047a6298"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-2-1-003",
+    "type": "single_choice",
+    "question": "IGMPv2 主机离开组播组时，离组报文默认发往哪个地址？",
+    "options": {
+      "A": "224.0.0.1",
+      "B": "224.0.0.2",
+      "C": "224.0.0.22",
+      "D": "所离开的组地址"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IGMPv2 离组报文发往所有路由器组 224.0.0.2，B 正确。A 是所有主机组，用于通用查询。C 是 IGMPv3 报告地址。D 是旧式实现的做法，标准要求发往 224.0.0.2，路由器只是可以兼容接收发往组地址的离组报文。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IGMP",
+    "knowledgePoint": "IGMP 工作原理",
+    "difficulty": "easy",
+    "tags": [
+      "IGMPv2",
+      "离组报文",
+      "224.0.0.2"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-2-1-003",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2236-igmpv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IGMP / IGMP 工作原理」（三级目录编码 hcip821-7-2-1）；离组报文发往 ALL-ROUTERS 224.0.0.2 的规定依据 RFC 2236 第 3 节与第 9 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "21afe7e815433befaf1bc8896fa14ea1e02a0bc4aae97ecd4e6dc51b7ff3d827"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-2-1-004",
+    "type": "single_choice",
+    "question": "IGMPv2 查询器收到某组的离组报文后，通常采取的动作是？",
+    "options": {
+      "A": "立即删除该组的成员记录并停止转发",
+      "B": "立即向该组发送版本 2 成员报告",
+      "C": "把离组报文转发给上游组播路由器",
+      "D": "向该组发送特定组查询，确认是否还有成员，超时无响应才删除记录"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "查询器收到离组报文后发送特定组查询，若在最后成员查询时间内没有收到报告，才认为无本地成员，D 正确。A 错误：立即删除可能误删仍有成员的组。B 错误：成员报告由主机发送，路由器不发成员报告。C 错误：IGMP 报文不跨路由器转发。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IGMP",
+    "knowledgePoint": "IGMP 工作原理",
+    "difficulty": "medium",
+    "tags": [
+      "IGMPv2",
+      "离组处理",
+      "特定组查询"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-2-1-004",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2236-igmpv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IGMP / IGMP 工作原理」（三级目录编码 hcip821-7-2-1）；查询器收到离组后发送最后成员查询、超时无报告才判定无成员的流程依据 RFC 2236 第 3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "537bdad92a5c09a4ee60b0952b8f1ba4b2f29b284bf967bb8160140e12b74eb2"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-2-1-005",
+    "type": "single_choice",
+    "question": "在同一网段存在多台 IGMPv2 路由器时，查询器的选举规则是？",
+    "options": {
+      "A": "由 Router ID 最大的路由器担任",
+      "B": "由优先级最高的路由器担任",
+      "C": "由接口 IP 地址最小的路由器担任",
+      "D": "由最先启动的路由器永久担任"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "IGMPv2 按接口 IP 地址选举查询器，地址最小者成为查询器，其他路由器设置其他查询器存在计时器，C 正确。A 与 B 是 OSPF、VRRP 一类的选举依据，不适用于 IGMP。D 错误：非查询器在计时器超时后会重新参与选举，不存在永久担任。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IGMP",
+    "knowledgePoint": "IGMP 工作原理",
+    "difficulty": "medium",
+    "tags": [
+      "IGMPv2",
+      "查询器选举",
+      "IP 地址"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-2-1-005",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2236-igmpv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IGMP / IGMP 工作原理」（三级目录编码 hcip821-7-2-1）；收到低 IP 地址查询即转为非查询器、超时后恢复查询器的规则依据 RFC 2236 第 3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "6c4fd875e9c0762daa03b1a6dc6a79377ce822ee2ad5d0af5479b7c5b636c9ff"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-2-1-006",
+    "type": "single_choice",
+    "question": "IGMPv3 中，主机以 INCLUDE 模式加入组 G 并给出源列表 {S1,S2}，含义是？",
+    "options": {
+      "A": "只希望接收源 S1、S2 发往 G 的流量",
+      "B": "希望接收除 S1、S2 之外所有源发往 G 的流量",
+      "C": "希望接收所有源发往 G 的流量，并对 S1、S2 做限速",
+      "D": "拒绝加入组 G，仅登记 S1、S2 的地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "INCLUDE 模式表示只接收源列表中列出的源，A 正确。B 描述的是 EXCLUDE 模式。C 错误：INCLUDE 是白名单而不是限速。D 错误：INCLUDE 模式本身就是一种加入方式。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IGMP",
+    "knowledgePoint": "IGMP 工作原理",
+    "difficulty": "medium",
+    "tags": [
+      "IGMPv3",
+      "INCLUDE",
+      "源过滤"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-2-1-006",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3376-igmpv3"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IGMP / IGMP 工作原理」（三级目录编码 hcip821-7-2-1）；INCLUDE 与 EXCLUDE 两种过滤模式的语义依据 RFC 3376 第 2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "22a0db461638907ea6c66b2e0e43a3724d0f4d24cbf210c43933098a803a7e0c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-2-1-007",
+    "type": "single_choice",
+    "question": "关于 IGMPv3，下列说法正确的是？",
+    "options": {
+      "A": "版本 3 报告发往组地址，并沿用版本 2 的离组报文",
+      "B": "版本 3 取消了查询报文，改由报告主动通告成员关系",
+      "C": "版本 3 报告发往 224.0.0.1，由所有主机共同处理",
+      "D": "版本 3 报告发往 224.0.0.22，不再使用离组报文，改用带 BLOCK_OLD_SOURCES 等记录的状态变更报告"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "IGMPv3 报告发往 224.0.0.22，通过记录类型表达源或组的离开，不再需要独立的离组报文，D 正确。A 错误：v3 报告目的地址不是组地址，也不再使用 v2 离组报文。B 错误：查询报文仍然存在。C 错误：224.0.0.1 是通用查询的目的地址。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IGMP",
+    "knowledgePoint": "IGMP 工作原理",
+    "difficulty": "hard",
+    "tags": [
+      "IGMPv3",
+      "报告地址",
+      "状态变更"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-2-1-007",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3376-igmpv3"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IGMP / IGMP 工作原理」（三级目录编码 hcip821-7-2-1）；版本 3 报告发往 224.0.0.22、以 BLOCK_OLD_SOURCES 等记录表达状态变更的规定依据 RFC 3376 第 4.2 节与第 4.2.5 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "de2c6644597906281e662481d0c36b25b369547811e292a5d4c17231ee72fe15"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-2-1-008",
+    "type": "single_choice",
+    "question": "IGMP 报文类型字段取值与报文名称的对应关系，正确的是？",
+    "options": {
+      "A": "0x11 为成员报告，0x16 为查询",
+      "B": "0x11 为成员查询，0x16 为版本 2 成员报告，0x17 为离组，0x22 为版本 3 成员报告",
+      "C": "0x11 为成员查询，0x12 为离组，0x22 为版本 2 成员报告",
+      "D": "0x16 为成员查询，0x17 为版本 1 成员报告，0x22 为离组"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "0x11 是成员查询，0x16 是版本 2 成员报告，0x17 是离组，0x12 是版本 1 成员报告，0x22 是版本 3 成员报告，B 正确。A 把查询与报告对调。C 把 0x12 当成离组，0x22 当成版本 2 报告。D 把 0x16 当成查询、0x22 当成离组。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IGMP",
+    "knowledgePoint": "IGMP 工作原理",
+    "difficulty": "medium",
+    "tags": [
+      "IGMP",
+      "报文类型",
+      "类型号"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-2-1-008",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2236-igmpv2",
+        "rfc3376-igmpv3"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IGMP / IGMP 工作原理」（三级目录编码 hcip821-7-2-1）；0x11、0x16、0x17 的类型定义依据 RFC 2236 第 2.1 节，0x22 与 0x12 的兼容类型依据 RFC 3376 第 4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "590537ed700439ae846e1e7ed9265f640ff645a733b4a7a92a3611fbbb1a0153"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-2-1-009",
+    "type": "single_choice",
+    "question": "IGMPv2 查询器发出的特定组查询，其目的地址与最大响应时间分别是？",
+    "options": {
+      "A": "224.0.0.1，等于查询间隔",
+      "B": "224.0.0.2，等于组成员关系间隔",
+      "C": "被查询的组地址，等于最后成员查询间隔",
+      "D": "224.0.0.22，等于最后成员查询间隔"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "特定组查询发往被查询的组地址，最大响应时间取最后成员查询间隔，用于压缩离组延迟，C 正确。A 错误：目的地址不是所有主机组，最大响应时间也不是查询间隔。B 错误：224.0.0.2 用于离组报文。D 错误：224.0.0.22 是 IGMPv3 报告地址。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IGMP",
+    "knowledgePoint": "IGMP 工作原理",
+    "difficulty": "medium",
+    "tags": [
+      "IGMPv2",
+      "特定组查询",
+      "最大响应时间"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-2-1-009",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2236-igmpv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IGMP / IGMP 工作原理」（三级目录编码 hcip821-7-2-1）；特定组查询发往被查询组、最大响应时间取最后成员查询间隔的规定依据 RFC 2236 第 3 节与第 8.8 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "39b0c36ed7986ae9960cc14145587df19e6081c33e1e2e1e994e44e0d3e85588"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-2-1-010",
+    "type": "single_choice",
+    "question": "IGMPv2 通用查询报文的特征是？",
+    "options": {
+      "A": "目的地址为 224.0.0.1，组地址字段为 0",
+      "B": "目的地址为组地址，组地址字段为该组",
+      "C": "目的地址为 224.0.0.2，组地址字段为 0",
+      "D": "目的地址为 224.0.0.22，组地址字段为任意值"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "通用查询发往所有主机组 224.0.0.1，组地址字段填 0 表示查询所有组，A 正确。B 描述的是特定组查询。C 的 224.0.0.2 是离组报文的目的地址。D 的 224.0.0.22 是 IGMPv3 报告的目的地址。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IGMP",
+    "knowledgePoint": "IGMP 工作原理",
+    "difficulty": "easy",
+    "tags": [
+      "IGMPv2",
+      "通用查询",
+      "224.0.0.1"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-2-1-010",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2236-igmpv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IGMP / IGMP 工作原理」（三级目录编码 hcip821-7-2-1）；通用查询发往 224.0.0.1、组地址字段为 0 的说明依据 RFC 2236 第 3 节与第 2.4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "323740e0caf7680fb2cb8fe2c174478cc9868bf387ad2cebea5366c62ca4584c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-2-1-011",
+    "type": "single_choice",
+    "question": "IGMPv2 中，主机在等待发送成员报告期间收到同组其他主机的成员报告，通常会？",
+    "options": {
+      "A": "立即发送自己的报告，保证可靠性",
+      "B": "停止本组的报告计时器，不再发送报告，以抑制重复报告",
+      "C": "改为发送离组报文",
+      "D": "向查询器发送源过滤列表"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IGMPv2 采用报告抑制：收到同组报告后停止计时器、不再发送，减少链路上的重复报文，B 正确。A 与抑制机制相反。C 错误：成员并未离开。D 错误：源过滤是 IGMPv3 的能力，v2 报告不携带源列表。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IGMP",
+    "knowledgePoint": "IGMP 工作原理",
+    "difficulty": "medium",
+    "tags": [
+      "IGMPv2",
+      "报告抑制",
+      "重复报文"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-2-1-011",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2236-igmpv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IGMP / IGMP 工作原理」（三级目录编码 hcip821-7-2-1）；收到同组报告后停止计时器以抑制重复报告的机制依据 RFC 2236 第 3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "de80170c680daab0514230065c1f1404e74fb1e40a149523cae53b5948cedcb8"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-2-1-012",
+    "type": "single_choice",
+    "question": "IGMPv3 路由器在某个组上收到版本 2 成员报告后，按兼容规则应如何处理？",
+    "options": {
+      "A": "丢弃该报告，因为版本不匹配",
+      "B": "把该报告当作版本 3 的 CHANGE_TO_EXCLUDE 记录处理，并保留源列表",
+      "C": "把接口强制降级为版本 1，并忽略所有离组报文",
+      "D": "把该报告等价转换为 IS_EX 且源列表为空的记录，即任意源都接收"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "版本 2 报告无法表达源信息，兼容处理时等价为 IS_EX 且源列表为空，即接收任意源的流量，D 正确。A 错误：必须兼容旧版本主机。B 错误：转换目标是 IS_EX 而不是带源列表的 CHANGE_TO_EXCLUDE。C 错误：降级为版本 1 需要听到版本 1 报告或查询，且行为不止忽略离组。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IGMP",
+    "knowledgePoint": "IGMP 工作原理",
+    "difficulty": "hard",
+    "tags": [
+      "IGMPv3",
+      "版本兼容",
+      "IS_EX"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-2-1-012",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3376-igmpv3"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IGMP / IGMP 工作原理」（三级目录编码 hcip821-7-2-1）；版本 2 报告在版本 3 路由器中转换为 IS_EX 且源列表为空的兼容映射依据 RFC 3376 第 7.3.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "5700394e7b45e04a4fa01321fef50c8e73d2a8e0895e4bf51baece05f1ed6fa4"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-2-1-013",
+    "type": "single_choice",
+    "question": "IGMPv2 路由器在接口上收到版本 1 查询且最大响应时间字段为 0 时，应如何理解该查询？",
+    "options": {
+      "A": "把最大响应时间按 10 秒处理，并让主机以版本 1 报告响应",
+      "B": "视为非法报文直接丢弃",
+      "C": "把最大响应时间按 0 秒处理，要求主机立即报告",
+      "D": "视为版本 3 查询并启用源过滤"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "版本 1 查询的最大响应时间为 0 时必须理解为 100，也就是 10 秒；同时版本 1 路由器只接受版本 1 报告，A 正确。B 错误：必须兼容版本 1 路由器，不能丢弃。C 错误：0 不代表立即报告，而是解释为 10 秒。D 错误：版本 1 查询没有版本 3 的源过滤字段。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IGMP",
+    "knowledgePoint": "IGMP 工作原理",
+    "difficulty": "medium",
+    "tags": [
+      "IGMPv2",
+      "版本兼容",
+      "最大响应时间"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-2-1-013",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2236-igmpv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IGMP / IGMP 工作原理」（三级目录编码 hcip821-7-2-1）；版本 1 查询最大响应时间为 0 时按 10 秒解释、并以版本 1 报告响应的要求依据 RFC 2236 第 4 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "0d22f0db06371604b34f0c365cd181bb51c5715cc5700fdd0379ceca8d00ad35"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-2-1-014",
+    "type": "single_choice",
+    "question": "按 RFC 2236 默认参数，健壮系数为 2、查询间隔为 125 秒、最大响应时间为 10 秒，组成员关系间隔是多少秒？",
+    "options": {
+      "A": "125 秒",
+      "B": "135 秒",
+      "C": "260 秒",
+      "D": "250 秒"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "复算过程：组成员关系间隔等于健壮系数乘查询间隔再加一个查询响应间隔，即 2 乘 125 加 10 等于 260 秒，C 正确。A 只取了查询间隔。B 是 125 加 10，漏乘健壮系数。D 是 2 乘 125，漏加查询响应间隔。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IGMP",
+    "knowledgePoint": "IGMP 工作原理",
+    "difficulty": "hard",
+    "tags": [
+      "IGMP",
+      "组成员关系间隔",
+      "计算"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-2-1-014",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2236-igmpv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IGMP / IGMP 工作原理」（三级目录编码 hcip821-7-2-1）；组成员关系间隔等于健壮系数乘查询间隔加一个查询响应间隔的公式依据 RFC 2236 第 8.4 节，默认值见第 8.1 至 8.3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "0f206cfc114a47ff71051db3e93fcf09c13212f83a012030f4b12e65ce2a4363"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-2-1-015",
+    "type": "single_choice",
+    "question": "IGMPv2 查询器收到离组报文后开始发送特定组查询。按默认参数，最后成员查询间隔为 1 秒、最后成员查询次数为 2 次，若始终没有主机响应，最多经过多长时间判定该组已无本地成员？",
+    "options": {
+      "A": "1 秒",
+      "B": "2 秒",
+      "C": "10 秒",
+      "D": "260 秒"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "复算过程：最后成员查询时间等于最后成员查询间隔乘最后成员查询次数，即 1 乘 2 等于 2 秒；两次查询覆盖两个 1 秒间隔，之后仍无报告即判定无成员，B 正确。A 只算了一次查询间隔。C 把通用查询的最大响应时间 10 秒当成了离组判定时间。D 是完整的组成员关系间隔，与离组快速判定无关。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IGMP",
+    "knowledgePoint": "IGMP 工作原理",
+    "difficulty": "hard",
+    "tags": [
+      "IGMPv2",
+      "离组判定",
+      "计算"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-2-1-015",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2236-igmpv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IGMP / IGMP 工作原理」（三级目录编码 hcip821-7-2-1）；最后成员查询时间等于最后成员查询间隔乘查询次数的定义依据 RFC 2236 第 8.8 节与第 8.9 节，离组处理流程见第 3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "59c3fa376b0cca332b5e936a2cc050dad8dc92fdd30efb06f80b536f0b96cb52"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-2-1-016",
+    "type": "single_choice",
+    "question": "IGMPv3 成员报告中的组记录类型，下列对应关系正确的是？",
+    "options": {
+      "A": "1 为 MODE_IS_EXCLUDE，4 为 MODE_IS_INCLUDE",
+      "B": "1 为 ALLOW_NEW_SOURCES，6 为 BLOCK_OLD_SOURCES",
+      "C": "3 为 CHANGE_TO_EXCLUDE，5 为 CHANGE_TO_INCLUDE",
+      "D": "1 为 MODE_IS_INCLUDE，4 为 CHANGE_TO_EXCLUDE，6 为 BLOCK_OLD_SOURCES"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "记录类型 1 是 MODE_IS_INCLUDE，2 是 MODE_IS_EXCLUDE，3 是 CHANGE_TO_INCLUDE，4 是 CHANGE_TO_EXCLUDE，5 是 ALLOW_NEW_SOURCES，6 是 BLOCK_OLD_SOURCES，D 正确。A 把 1 与 2 混淆。B 把 1 写成 ALLOW，实际 5 才是 ALLOW_NEW_SOURCES。C 把 3 与 4 对调。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IGMP",
+    "knowledgePoint": "IGMP 工作原理",
+    "difficulty": "medium",
+    "tags": [
+      "IGMPv3",
+      "记录类型",
+      "源过滤"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-2-1-016",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3376-igmpv3"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IGMP / IGMP 工作原理」（三级目录编码 hcip821-7-2-1）；组记录类型 1 至 6 的编号与名称依据 RFC 3376 第 4.2.5 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "551310e92bd00bec56a17b7c1bc20ce247393b9f9e93930bea2c402f00408433"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-2-1-017",
+    "type": "single_choice",
+    "question": "IGMP 报文在网络中的传输特征是？",
+    "options": {
+      "A": "TTL 默认为 255，可被路由器转发到任意网段",
+      "B": "封装在 TCP 报文中，端口号为 2",
+      "C": "IP 协议号为 2，TTL 为 1，并携带路由器告警选项，不跨路由器转发",
+      "D": "使用 UDP 封装，目的端口为 1985"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "IGMP 直接封装在 IP 中，协议号 2，TTL 为 1 且携带路由器告警选项，因此只在本地链路生效，C 正确。A 错误：TTL 为 1，不会被转发到其他网段。B 错误：IGMP 不使用 TCP，也不使用端口号。D 错误：IGMP 不使用 UDP 封装。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IGMP",
+    "knowledgePoint": "IGMP 工作原理",
+    "difficulty": "easy",
+    "tags": [
+      "IGMP",
+      "TTL",
+      "协议号"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-2-1-017",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2236-igmpv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IGMP / IGMP 工作原理」（三级目录编码 hcip821-7-2-1）；IGMP 以 IP 协议号 2 封装、TTL 为 1 且携带路由器告警选项的说明依据 RFC 2236 第 2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "493d81cd71a6be73688720a47ca980fb4ab369c2949ceada771ae504116a5a72"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-2-1-018",
+    "type": "single_choice",
+    "question": "华为设备上，主机已成功加入组 G，但直连路由器上查不到该组的成员记录。下列排查方向中最不相关的是？",
+    "options": {
+      "A": "检查组播路由表是否存在对应的 (S,G) 表项",
+      "B": "检查主机所在接口是否使能了 IGMP",
+      "C": "检查主机与路由器使用的 IGMP 版本是否匹配",
+      "D": "检查该网段是否存在 IGMP 查询器"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "成员记录由接口上的 IGMP 维护，与组播路由表是否已建立 (S,G) 表项无关，因此 A 最不相关，也最不可能解释查不到成员记录。B 若接口未使能 IGMP，路由器不会处理报告。C 版本不匹配会导致报告被忽略或按低版本降级处理。D 没有查询器时主机不会周期性上报，成员关系难以维持。",
+    "chapter": "组播基础",
+    "knowledgeSection": "IGMP",
+    "knowledgePoint": "IGMP 工作原理",
+    "difficulty": "hard",
+    "tags": [
+      "IGMP",
+      "故障定位",
+      "华为设备"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-2-1-018",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3376-igmpv3"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / IGMP / IGMP 工作原理」（三级目录编码 hcip821-7-2-1）；查询器与版本兼容对成员关系维护的影响依据 RFC 3376 第 6.6.2 节与第 7 节；命令与接口配置形式属华为 VRP 实现。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "4312351d51aecfac349c7a0b0b2c06c60a5c2078063f39e10426f8f613e19695"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-1-001",
+    "type": "single_choice",
+    "question": "PIM-DM 的默认转发模型可以概括为？",
+    "options": {
+      "A": "先向 RP 注册，再由 RP 沿共享树分发",
+      "B": "先向所有 PIM 邻居扩散，收到剪枝后再裁掉不需要的分支，即扩散剪枝",
+      "C": "只为明确申请的下游建立路径，从不向无成员分支发送",
+      "D": "依赖 DVMRP 的距离向量信息计算最短路径树"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "PIM-DM 假设所有下游都需要流量，先扩散再由无成员分支发起剪枝，形成扩散剪枝循环，B 正确。A 是 PIM-SM 的 RP 与共享树机制。C 描述的是稀疏模式按需加入的行为。D 错误：PIM-DM 使用底层单播路由信息，不依赖 DVMRP 的距离向量协议。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-DM",
+    "difficulty": "easy",
+    "tags": [
+      "PIM-DM",
+      "扩散剪枝",
+      "组播路由"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-1-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3973-pim-dm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / PIM / PIM-DM」（三级目录编码 hcip821-7-3-1）；初始向全网扩散、无成员分支再剪枝的扩散剪枝模型依据 RFC 3973 第 3 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "55abb25af0deab26ab82ad27a4fda6b739f659ede7d5375f415b1dce3c46ca9e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-1-002",
+    "type": "single_choice",
+    "question": "PIM-DM 中，上游路由器把某接口剪枝后，该接口下仍有另一台路由器需要该组流量。这台下游路由器应当？",
+    "options": {
+      "A": "等待剪枝定时器超时，期间不发送任何报文",
+      "B": "向 RP 发送注册报文，请求重新下发流量",
+      "C": "把接口的 TTL 阈值调大，迫使上游恢复转发",
+      "D": "立即向上游发送 Join，覆盖该剪枝状态"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "收到剪枝后若本地仍有需求，下游路由器立即发送 Join 覆盖该剪枝，使上游继续转发，D 正确。A 错误：等待超时会带来最长一个剪枝周期的流量中断。B 错误：PIM-DM 没有 RP。C 错误：TTL 阈值不能改变剪枝状态。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-DM",
+    "difficulty": "hard",
+    "tags": [
+      "PIM-DM",
+      "Prune 覆盖",
+      "剪枝"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-1-002",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3973-pim-dm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / PIM / PIM-DM」（三级目录编码 hcip821-7-3-1）；下游用 Join 覆盖剪枝、通过 Override 间隔消除剪枝传播延迟的机制依据 RFC 3973 第 4.3.5 节与第 4.4.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "ee84a436b89e43cc16816c93b8146bdaabf6473ae14c8dbe39517b3c76e19212"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-1-003",
+    "type": "single_choice",
+    "question": "PIM-DM 中，被剪枝的分支上新增了组成员，路由器用什么机制恢复转发？",
+    "options": {
+      "A": "向上游发送 Graft 报文，上游回复 Graft Ack 后恢复转发",
+      "B": "向上游发送 Register 报文，由 RP 转发数据",
+      "C": "发送 Assert 报文，声明自己应成为转发者",
+      "D": "等待扩散周期到达后自动恢复，无需报文交互"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Graft 用于把剪枝分支重新接回分发树，上游以 Graft Ack 确认，A 正确。B 是 PIM-SM 的源注册机制。C 的 Assert 用于多路访问网段上选举唯一转发者。D 错误：Graft 是显式触发的，不能只靠等待扩散周期。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-DM",
+    "difficulty": "medium",
+    "tags": [
+      "PIM-DM",
+      "Graft",
+      "Graft Ack"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-1-003",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3973-pim-dm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / PIM / PIM-DM」（三级目录编码 hcip821-7-3-1）；Graft 重新接回剪枝分支、Graft Ack 单播确认的机制依据 RFC 3973 第 3 节、第 4.4 节与第 4.7.9 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "5e3a68801b6eb6fba8ede4308d9aefe643fc6418d7842bdc0a8d481e56db29ce"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-1-004",
+    "type": "single_choice",
+    "question": "PIM-DM 中，同一多路访问网段上两台路由器都从上游收到了某 (S,G) 的流量。Assert 选举的比较规则是？",
+    "options": {
+      "A": "优先比较接口 IP 地址，地址大者胜出",
+      "B": "优先比较 Router ID，Router ID 小者胜出",
+      "C": "先比较到源的度量优先级，小者胜；相同再比较度量值，小者胜；仍相同则 IP 地址大者胜",
+      "D": "先比较度量值，大者胜；相同再比较 IP 地址，小者胜"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Assert 先比较度量优先级，再比较度量值，二者都是小者优；都相同时用发送 Assert 的路由器 IP 地址决胜，地址大者胜，C 正确。A 把 IP 地址当成了首要依据。B 错误：Assert 不使用 Router ID。D 把度量值的比较方向说反了。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-DM",
+    "difficulty": "hard",
+    "tags": [
+      "PIM-DM",
+      "Assert",
+      "选举规则"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-1-004",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3973-pim-dm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / PIM / PIM-DM」（三级目录编码 hcip821-7-3-1）；metric preference 与 route metric 均小者优、再以 IP 地址大者决胜的规则依据 RFC 3973 第 4.6.1 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "c2c6d2785f852c78bdd97fe3ebfa219e86b8ad16a48f60ae264a4b3fa74fa6d4"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-1-005",
+    "type": "single_choice",
+    "question": "PIM-DM 中 State Refresh 机制的作用是？",
+    "options": {
+      "A": "取代 Hello 报文，用于发现 PIM 邻居",
+      "B": "由直连源的路由器周期性发起，沿 RPF 路径刷新下游的剪枝状态，减少剪枝超时后的重复扩散",
+      "C": "在 RP 与源 DR 之间同步共享树状态",
+      "D": "用于在 Assert 选举失败后重新计算 RPF 接口"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "State Refresh 由直连源的路由器周期性发起并沿 RPF 传播，收到后刷新已有剪枝状态，避免剪枝超时后反复扩散，B 正确。A 错误：邻居发现仍由 Hello 完成。C 错误：PIM-DM 没有 RP。D 错误：它与 Assert 选举和 RPF 计算是不同机制。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-DM",
+    "difficulty": "medium",
+    "tags": [
+      "PIM-DM",
+      "State Refresh",
+      "剪枝刷新"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-1-005",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3973-pim-dm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / PIM / PIM-DM」（三级目录编码 hcip821-7-3-1）；State Refresh 由直连源的路由器发起、沿 RPF 刷新剪枝状态的说明依据 RFC 3973 第 3 节与第 4.5 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "3ae5ab9e97b270567b9bcd154c9c912132c4329c624b7cd2348ce5dfbbf4b7ed"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-7-3-1-006",
+    "type": "single_choice",
+    "question": "关于 PIM-DM 建立的转发树，下列说法正确的是？",
+    "options": {
+      "A": "同时建立共享树与最短路径树，并以共享树为主",
+      "B": "以 RP 为根建立共享树，源树仅用于 SSM",
+      "C": "先建立共享树，再切换到以 RP 为根的树",
+      "D": "不存在 RP，只有以源为根的源树，RPF 检查失败的分支不会转发数据"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "PIM-DM 没有 RP，仅维护以源为根的源树；RPF 检查失败的分支不转发数据，D 正确。A 同时建立两类树并以共享树为主，是 PIM-SM 的特征。B 以 RP 为根建立共享树，也是 PIM-SM 的做法，且 SSM 本就不使用共享树。C 共享树切换到源树的过程同样属于 PIM-SM。",
+    "chapter": "组播基础",
+    "knowledgeSection": "PIM",
+    "knowledgePoint": "PIM-DM",
+    "difficulty": "medium",
+    "tags": [
+      "PIM-DM",
+      "源树",
+      "RPF"
+    ],
+    "provenance": {
+      "questionId": "hcip821-7-3-1-006",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3973-pim-dm"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲 PDF 第 2-5 页「组播」章节知识点清单中的「组播基础 / PIM / PIM-DM」（三级目录编码 hcip821-7-3-1）；PIM-DM 没有 RP、只发送显式触发的剪枝与 Graft 的差异依据 RFC 3973 第 3 节，RPF 检查失败的报文不转发的规则依据第 4.2 节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据华为公开 H12-821 V1.0 考试大纲独立设计题干、选项与解析，技术结论按 RFC 原文核对，未复制任何第三方题目正文。",
+      "reviewDigest": "61340053dc69be64825b66fa44ce15c6db7aa0a1e4bc13ed85649ef23c7435f5"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  }
+]

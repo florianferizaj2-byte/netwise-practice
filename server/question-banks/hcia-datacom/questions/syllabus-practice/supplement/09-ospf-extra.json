@@ -14,13 +14,16 @@
     ],
     "analysis": "OSPF 周期性发送 Hello 用于发现邻居并检测邻居是否存活。 本题考查“单区域 OSPF”，因此应选择“发现并维持邻居关系”。",
     "chapter": "OSPF 原理与配置",
-    "knowledgePoint": "单区域 OSPF",
+    "knowledgePoint": "区域与开销计算",
     "difficulty": "easy",
     "tags": [
       "OSPF 原理与配置",
+      "单区域 OSPF 与 LSA",
+      "区域与开销计算",
       "单区域 OSPF"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "单区域 OSPF 与 LSA"
   },
   {
     "id": "hcia-v2-extra-09-area-match",
@@ -37,13 +40,16 @@
     ],
     "analysis": "区域 ID 是 OSPF 邻接关键参数之一，不一致会阻止邻接建立。 本题考查“单区域 OSPF”，因此应选择“不能建立正常邻接”。",
     "chapter": "OSPF 原理与配置",
-    "knowledgePoint": "单区域 OSPF",
+    "knowledgePoint": "区域与开销计算",
     "difficulty": "medium",
     "tags": [
       "OSPF 原理与配置",
+      "单区域 OSPF 与 LSA",
+      "区域与开销计算",
       "单区域 OSPF"
     ],
-    "stage": "直接计算"
+    "stage": "直接计算",
+    "knowledgeSection": "单区域 OSPF 与 LSA"
   },
   {
     "id": "hcia-v2-extra-09-dead-timer",
@@ -60,13 +66,16 @@
     ],
     "analysis": "Dead Timer 用于检测邻居失效，超时后邻居关系会被删除。 本题考查“邻居状态”，因此应选择“将邻居状态置为 Down”。",
     "chapter": "OSPF 原理与配置",
-    "knowledgePoint": "邻居状态",
+    "knowledgePoint": "邻居状态机",
     "difficulty": "medium",
     "tags": [
       "OSPF 原理与配置",
+      "邻居与邻接关系",
+      "邻居状态机",
       "邻居状态"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "邻居与邻接关系"
   },
   {
     "id": "hcia-v2-extra-09-dr-role",
@@ -83,13 +92,16 @@
     ],
     "analysis": "DR/BDR 让 DROther 主要与 DR、BDR 建立 Full 邻接，降低全互连同步开销。 本题考查“DR/BDR”，因此应选择“减少多路由器之间 LSA 交换的邻接数量”。",
     "chapter": "OSPF 原理与配置",
-    "knowledgePoint": "DR/BDR",
+    "knowledgePoint": "网络类型与 DR/BDR",
     "difficulty": "medium",
     "tags": [
       "OSPF 原理与配置",
+      "邻居与邻接关系",
+      "网络类型与 DR/BDR",
       "DR/BDR"
     ],
-    "stage": "反向推理"
+    "stage": "反向推理",
+    "knowledgeSection": "邻居与邻接关系"
   },
   {
     "id": "hcia-v2-extra-09-lsa-db",
@@ -106,13 +118,16 @@
     ],
     "analysis": "OSPF 汇集 LSA 形成 LSDB，再运行 SPF 算法计算路由。 本题考查“单区域 OSPF”，因此应选择“链路状态数据库 LSDB”。",
     "chapter": "OSPF 原理与配置",
-    "knowledgePoint": "单区域 OSPF",
+    "knowledgePoint": "区域与开销计算",
     "difficulty": "hard",
     "tags": [
       "OSPF 原理与配置",
+      "单区域 OSPF 与 LSA",
+      "区域与开销计算",
       "单区域 OSPF"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "单区域 OSPF 与 LSA"
   },
   {
     "id": "hcia-v2-extra-09-passive-interface",
@@ -129,12 +144,15 @@
     ],
     "analysis": "被动接口适合连接终端网段，可避免在无需邻居的接口上发送 OSPF Hello。 本题考查“单区域 OSPF”，因此应选择“不在该接口发送 Hello，但仍可通告其网段”。",
     "chapter": "OSPF 原理与配置",
-    "knowledgePoint": "单区域 OSPF",
+    "knowledgePoint": "区域与开销计算",
     "difficulty": "hard",
     "tags": [
       "OSPF 原理与配置",
+      "单区域 OSPF 与 LSA",
+      "区域与开销计算",
       "单区域 OSPF"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "单区域 OSPF 与 LSA"
   }
 ]

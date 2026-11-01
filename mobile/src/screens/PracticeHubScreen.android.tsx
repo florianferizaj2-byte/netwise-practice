@@ -1,9 +1,14 @@
+import type { PracticeCheckpoint } from '../api/practiceCheckpointStore';
+import { useScreenActive } from '../navigation/ScreenActivity';
+import { practiceCheckpoint } from '../api/practiceCheckpoint.android';
+import { practiceOwner } from '../api/ownedPractice.android';
+import { PracticeResumeCard } from '../components/PracticeResumeCard.android';
 import { androidAccent } from '../android-design-tokens';
 import { AndroidPageHeader, AndroidPointsLink, type AndroidCertificateProps } from '../components/AndroidUi.android';
 import { AppIcon } from '../components/AppIcon';
 import { RoutePlayerChapter } from '../components/RoutePlayerChapter';
 import { iosStyles } from '../iosStyles';
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
@@ -156,6 +161,16 @@ export function PracticeHubScreen({
   );
   const daily = practiceSession === "daily",
     ai = !daily && practiceMode === "ai";
+  const active=useScreenActive(), resumeKey=JSON.stringify([user?.id,user?.certificateId,practiceMode]);
+  const [resumeEntry,setResumeEntry]=useState<{key:string;row:PracticeCheckpoint|null}>({key:'',row:null});
+  useEffect(()=>{
+    if(!active)return;let live=true;
+    if(!user||preview||daily||ai){setResumeEntry({key:resumeKey,row:null});return;}
+    void practiceCheckpoint.find(practiceOwner(user),{session:'standard',mode:practiceMode}).then(row=>{if(live)setResumeEntry({key:resumeKey,row});}).catch(()=>{if(live)setResumeEntry({key:resumeKey,row:null});});
+    return()=>{live=false};
+  },[active,resumeKey,preview,daily,ai]);
+  const lastPractice=resumeEntry.key===resumeKey?resumeEntry.row:null;
+  const resumeReady=!user||preview||resumeEntry.key===resumeKey;
   const needle = search.trim().toLowerCase();
   const progress = catalog?.total
     ? percentage((catalog.attemptedCount / catalog.total) * 100)
@@ -199,7 +214,7 @@ export function PracticeHubScreen({
     [catalog],
   );
 
-  const suggestedChapter=catalog?.chapters.find(chapter=>chapter.attemptedCount>0&&chapter.progress<100)??catalog?.chapters[0];
+  const suggestedChapter=(lastPractice?.chapter?catalog?.chapters.find(chapter=>chapter.name===lastPractice.chapter):undefined)??catalog?.chapters.find(chapter=>chapter.attemptedCount>0&&chapter.progress<100)??catalog?.chapters[0];
 
   function chooseMode(mode: PracticeMode) {
     if (onPracticeModeChange) onPracticeModeChange(mode);
@@ -227,6 +242,14 @@ export function PracticeHubScreen({
       practiceKnowledgePoint: point,
       practiceSelectionComplete: daily,
     });
+  }
+  async function continueChapter(chapter:string){
+    if(!user || preview || daily || ai){begin(chapter);return;}
+    try{
+      const saved=await practiceCheckpoint.find(practiceOwner(user),{session:'standard',mode:practiceMode,chapter});
+      if(saved){onNavigate('practice',{practiceMode:saved.mode,practiceSession:'standard',practiceSource:'all',practiceChapter:saved.chapter,practiceKnowledgeSection:saved.section,practiceKnowledgePoint:saved.point,practiceQuestionId:saved.questionId});return;}
+      begin(chapter);
+    }catch{Alert.alert('续刷位置暂时未能读取','未重置原有进度，请稍后重试。');}
   }
   function toggleChapter(name: string) {
     setExpandedChapters((current) => {
@@ -298,6 +321,7 @@ export function PracticeHubScreen({
       ListHeaderComponent={
         <>
           <AndroidPageHeader title="练习" user={user} certificates={certificates} onOpenCertificatePicker={onOpenCertificatePicker}/>
+          {!preview && !daily && !ai && <PracticeResumeCard user={user} onNavigate={onNavigate}/>}
           <View style={s.heading}>
             <View style={s.grow}>
               {daily && <Text style={s.title}>选择今日练习范围</Text>}
@@ -327,7 +351,7 @@ export function PracticeHubScreen({
             <Text style={s.heroTitle}>{suggestedChapter.name}</Text>
             <View style={s.heroLabel}><Text style={s.heroDetail}>已刷 {suggestedChapter.attemptedCount} / {suggestedChapter.questionCount} 题</Text><Text style={s.heroDetail}>{percentage(suggestedChapter.progress)}%</Text></View>
             <AnimatedProgressBar value={percentage(suggestedChapter.progress)} color="#FFFFFF" trackColor="#FFFFFF40"/>
-            <AnimatedPressable accessibilityRole="button" accessibilityLabel={'练习知识点 '+suggestedChapter.name} onPress={()=>begin(suggestedChapter.name)} style={s.heroButton}><Text style={s.heroButtonText}>继续练习</Text><AppIcon name="arrow" size={21} color="#2052C5"/></AnimatedPressable>
+            <AnimatedPressable accessibilityRole="button" accessibilityLabel={'练习知识点 '+suggestedChapter.name} disabled={!resumeReady} onPress={()=>void continueChapter(suggestedChapter.name)} style={s.heroButton}><Text style={s.heroButtonText}>{resumeReady?'继续练习':'正在读取进度…'}</Text><AppIcon name="arrow" size={21} color="#2052C5"/></AnimatedPressable>
           </View>}
           {!daily && (
             <>
@@ -388,6 +412,9 @@ export function PracticeHubScreen({
                   <AppIcon style={s.chevron}>›</AppIcon>
                 </AnimatedPressable>
               </View>
+              <AnimatedPressable accessibilityRole="button" accessibilityLabel="复习已答题" onPress={()=>onNavigate('practice',{practiceSource:'answered',practiceMode:'sequential'})} style={[s.library,{minHeight:64,marginTop:8}]}>
+                <View style={s.libraryIcon}><AppIcon name="book" size={23} color={colors.brand}/></View><View style={s.grow}><Text style={s.libraryTitle}>复习已答题</Text><Text style={s.libraryMeta}>做过的题单独回顾，不影响新题进度</Text></View><AppIcon name="chevron-right" size={18} color={colors.textMuted}/>
+              </AnimatedPressable>
             </>
           )}
 
@@ -399,8 +426,8 @@ export function PracticeHubScreen({
                 : ai
                   ? "展开目录，选择具体考点。每组 10 题，逐题二次复核。"
                   : practiceMode === "random"
-                    ? "选择练习范围后，打乱题目顺序开始刷题。"
-                    : "可以练习整个大知识点，也可以展开后选择子知识点。"}
+                    ? "自动续上次位置，随机练习跳过已答对题。"
+                    : "同一范围自动续刷；已答对题请到“复习已答题”回顾。"}
             </Text>
           </View>
 

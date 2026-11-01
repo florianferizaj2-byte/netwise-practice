@@ -1,0 +1,844 @@
+[
+  {
+    "id": "hcia-v3-09-001",
+    "type": "single_choice",
+    "question": "OSPF 报文直接封装在 IP 报文里时，IP 头部的协议号是多少？",
+    "options": {
+      "A": "6",
+      "B": "17",
+      "C": "89",
+      "D": "179"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "OSPF 的 IP 协议号 89，BGP 是 179，TCP 是 6，UDP 是 17。OSPF 不通过 TCP 或 UDP 端口承载。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "OSPF 基础概念",
+    "knowledgePoint": "OSPF 特点与协议号",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF 原理与配置",
+      "OSPF 基础概念",
+      "OSPF 特点与协议号"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-09-002",
+    "type": "single_choice",
+    "question": "OSPF 在广播网络上发送 Hello 报文时使用的组播地址是？",
+    "options": {
+      "A": "224.0.0.5",
+      "B": "224.0.0.6",
+      "C": "224.0.0.1",
+      "D": "224.0.0.9"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "224.0.0.5 是 AllSPFRouters，所有 OSPF 路由器都监听；224.0.0.6 只被 DR 与 BDR 监听。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "OSPF 基础概念",
+    "knowledgePoint": "OSPF 特点与协议号",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF 原理与配置",
+      "OSPF 基础概念",
+      "OSPF 特点与协议号"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-09-003",
+    "type": "multiple_choice",
+    "question": "OSPF 作为链路状态协议，具有下列哪些特点？",
+    "options": {
+      "A": "支持无类路由与 VLSM",
+      "B": "以开销作为度量值",
+      "C": "通过 SPF 算法计算最短路径树",
+      "D": "默认每 30 秒广播整张路由表"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "OSPF 只在拓扑变化时增量泛洪 LSA，靠 SPF 计算路由；周期性广播整表是 RIP 的特征。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "OSPF 基础概念",
+    "knowledgePoint": "OSPF 特点与协议号",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF 原理与配置",
+      "OSPF 基础概念",
+      "OSPF 特点与协议号"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-09-004",
+    "type": "single_choice",
+    "question": "OSPF Router ID 的选举顺序是什么？",
+    "options": {
+      "A": "随机生成后不再变化",
+      "B": "先看手工配置，再看最大 Loopback 地址，最后看最大物理接口地址",
+      "C": "由邻居协商决定",
+      "D": "先看最大物理接口地址，再看 Loopback 地址"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "手工 router-id 优先级最高；未配置时选最大的 Loopback 接口地址，无 Loopback 再选最大物理接口地址。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "OSPF 基础概念",
+    "knowledgePoint": "Router ID 选举",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF 原理与配置",
+      "OSPF 基础概念",
+      "Router ID 选举"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-09-005",
+    "type": "single_choice",
+    "question": "修改 Router ID 后，通常需要执行什么操作才能生效？",
+    "options": {
+      "A": "重新插拔网线",
+      "B": "关闭 STP",
+      "C": "重新配置接口 IP",
+      "D": "重启 OSPF 进程或执行 reset ospf process"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Router ID 在 OSPF 进程启动时确定，修改后必须重置进程才会重新选举，重置会导致邻居重建，需谨慎操作。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "OSPF 基础概念",
+    "knowledgePoint": "Router ID 选举",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF 原理与配置",
+      "OSPF 基础概念",
+      "Router ID 选举"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-09-006",
+    "type": "true_false",
+    "question": "Router ID 必须与设备上某个接口的实际 IP 地址完全一致，否则 OSPF 无法运行。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Router ID 只是一个 32 位标识，可以手工指定为任意格式合法的地址，不必对应真实接口，但规范上建议与 Loopback 一致。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "OSPF 基础概念",
+    "knowledgePoint": "Router ID 选举",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF 原理与配置",
+      "OSPF 基础概念",
+      "Router ID 选举"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-09-007",
+    "type": "single_choice",
+    "question": "OSPF 共有几种报文类型？",
+    "options": {
+      "A": "3 种",
+      "B": "5 种",
+      "C": "4 种",
+      "D": "6 种"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Hello、DD、LSR、LSU、LSAck 五种。Hello 建邻居，DD 交换摘要，LSR 请求，LSU 承载完整 LSA，LSAck 确认。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "OSPF 基础概念",
+    "knowledgePoint": "OSPF 报文类型",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF 原理与配置",
+      "OSPF 基础概念",
+      "OSPF 报文类型"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-09-008",
+    "type": "single_choice",
+    "question": "OSPF 中用于描述本地链路状态数据库摘要的报文是？",
+    "options": {
+      "A": "LSR 报文",
+      "B": "DD 报文",
+      "C": "LSU 报文",
+      "D": "Hello 报文"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "DD（Database Description）携带 LSA 头部摘要，双方比对后由 LSR 请求缺失部分，LSU 负责传送完整内容。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "OSPF 基础概念",
+    "knowledgePoint": "OSPF 报文类型",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF 原理与配置",
+      "OSPF 基础概念",
+      "OSPF 报文类型"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-09-009",
+    "type": "single_choice",
+    "question": "OSPF 中确保 LSA 可靠传输的机制是什么？",
+    "options": {
+      "A": "依靠 Hello 报文确认",
+      "B": "收到 LSU 后回送 LSAck 确认",
+      "C": "依靠 TCP 重传",
+      "D": "依靠 ARP 确认"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "OSPF 运行在 IP 之上没有传输层重传，因此用 LSAck 显式确认，超时未确认则重发 LSU。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "OSPF 基础概念",
+    "knowledgePoint": "OSPF 报文类型",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF 原理与配置",
+      "OSPF 基础概念",
+      "OSPF 报文类型"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-09-010",
+    "type": "single_choice",
+    "question": "OSPF 邻居状态中，表示双方已交换完 DD 报文并开始请求缺失 LSA 的状态是？",
+    "options": {
+      "A": "Loading",
+      "B": "ExStart",
+      "C": "Exchange",
+      "D": "2-Way"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "状态顺序为 Down、Init、2-Way、ExStart、Exchange、Loading、Full。Loading 阶段用 LSR 请求缺失 LSA。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "邻居与邻接关系",
+    "knowledgePoint": "邻居状态机",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF 原理与配置",
+      "邻居与邻接关系",
+      "邻居状态机"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-09-011",
+    "type": "single_choice",
+    "question": "OSPF 邻居停留在 2-Way 状态，最可能的原因是什么？",
+    "options": {
+      "A": "Router ID 冲突",
+      "B": "区域号配置错误",
+      "C": "链路完全中断",
+      "D": "双方在广播网络中均为 DRother，无需建立邻接"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "广播网络中 DRother 之间只维持 2-Way 邻居关系，不交换 LSA，这是正常现象，不是故障。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "邻居与邻接关系",
+    "knowledgePoint": "邻居状态机",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF 原理与配置",
+      "邻居与邻接关系",
+      "邻居状态机"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-09-012",
+    "type": "true_false",
+    "question": "OSPF 邻居必须先达到 FULL 状态，才能完成 LSDB 同步。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "顺序是先同步 LSDB 再进入 FULL，FULL 表示双方数据库已完全一致。把因果关系颠倒是最常见的记忆错误。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "邻居与邻接关系",
+    "knowledgePoint": "邻居状态机",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF 原理与配置",
+      "邻居与邻接关系",
+      "邻居状态机"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-09-013",
+    "type": "single_choice",
+    "question": "OSPF 在哪种网络类型下需要选举 DR 与 BDR？",
+    "options": {
+      "A": "点到多点网络",
+      "B": "所有网络类型",
+      "C": "点到点网络",
+      "D": "广播网络与 NBMA 网络"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "广播与 NBMA 支持多台路由器同处一个网段，需 DR 减少邻接数量；P2P 与 P2MP 只有两端，不选举。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "邻居与邻接关系",
+    "knowledgePoint": "网络类型与 DR/BDR",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF 原理与配置",
+      "邻居与邻接关系",
+      "网络类型与 DR/BDR"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-09-014",
+    "type": "single_choice",
+    "question": "DR 选举时首先比较什么？",
+    "options": {
+      "A": "接口带宽",
+      "B": "设备启动时间",
+      "C": "DR 优先级，默认值为 1",
+      "D": "Router ID 大小"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "先比 DR 优先级（大者优），优先级相同再比 Router ID（大者优）。优先级设为 0 表示不参与选举。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "邻居与邻接关系",
+    "knowledgePoint": "网络类型与 DR/BDR",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF 原理与配置",
+      "邻居与邻接关系",
+      "网络类型与 DR/BDR"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-09-015",
+    "type": "single_choice",
+    "question": "DR 选举具有什么特性？",
+    "options": {
+      "A": "由管理员手工指定，不能自动选举",
+      "B": "非抢占，已有 DR 不会因新设备优先级更高而被替换",
+      "C": "每次 Hello 都重新选举",
+      "D": "随时抢占，优先级高者立即成为 DR"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "DR 选举是非抢占的，新接入的高优先级设备不会顶替现任 DR，必须重置 OSPF 进程才会重新选举。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "邻居与邻接关系",
+    "knowledgePoint": "网络类型与 DR/BDR",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF 原理与配置",
+      "邻居与邻接关系",
+      "网络类型与 DR/BDR"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-09-016",
+    "type": "single_choice",
+    "question": "广播网络中 OSPF 默认的 Hello 间隔与 Dead 间隔分别是？",
+    "options": {
+      "A": "5 秒与 20 秒",
+      "B": "10 秒与 30 秒",
+      "C": "30 秒与 120 秒",
+      "D": "10 秒与 40 秒"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "广播与 P2P 为 10/40，NBMA 与 P2MP 为 30/120。Dead 间隔默认为 Hello 的 4 倍。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "邻居与邻接关系",
+    "knowledgePoint": "Hello 与 Dead 定时器",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF 原理与配置",
+      "邻居与邻接关系",
+      "Hello 与 Dead 定时器"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-09-017",
+    "type": "single_choice",
+    "question": "两台路由器直连但 OSPF 邻居无法建立，最需要优先检查什么？",
+    "options": {
+      "A": "路由表的默认路由",
+      "B": "Hello 与 Dead 定时器、区域号、认证是否一致",
+      "C": "设备的 SNMP 版本",
+      "D": "接口的光模块波长"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Hello 报文携带区域号、定时器、认证等参数，任一项不一致都会导致邻居无法建立，是 OSPF 排障的第一顺位。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "邻居与邻接关系",
+    "knowledgePoint": "Hello 与 Dead 定时器",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF 原理与配置",
+      "邻居与邻接关系",
+      "Hello 与 Dead 定时器"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-09-018",
+    "type": "true_false",
+    "question": "若两端 OSPF 的 Hello 间隔不一致，邻居关系会停留在 Init 状态无法继续。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "定时器不一致时 Hello 报文被判定为参数不匹配而丢弃，双方只能看到对方但无法推进状态机。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "邻居与邻接关系",
+    "knowledgePoint": "Hello 与 Dead 定时器",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF 原理与配置",
+      "邻居与邻接关系",
+      "Hello 与 Dead 定时器"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-09-019",
+    "type": "single_choice",
+    "question": "Type 1 Router LSA 描述的是什么？",
+    "options": {
+      "A": "广播网络中 DR 连接的网段与路由器列表",
+      "B": "其他区域的网段汇总信息",
+      "C": "自治系统外部引入的路由",
+      "D": "本区域内每台路由器的链路与接口状态"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Type1 由每台路由器产生，描述自身链路；Type2 由 DR 产生描述广播网段；Type3 是区域间汇总。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "单区域 OSPF 与 LSA",
+    "knowledgePoint": "LSA 类型与作用",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF 原理与配置",
+      "单区域 OSPF 与 LSA",
+      "LSA 类型与作用"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-09-020",
+    "type": "single_choice",
+    "question": "Type 2 Network LSA 由谁产生？",
+    "options": {
+      "A": "ASBR 产生",
+      "B": "ABR 产生",
+      "C": "广播网络中的 DR",
+      "D": "每台路由器各自产生"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Type2 由 DR 生成，描述该广播网段的掩码以及连接到该网段的所有路由器，因此只有 DR 会产生。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "单区域 OSPF 与 LSA",
+    "knowledgePoint": "LSA 类型与作用",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF 原理与配置",
+      "单区域 OSPF 与 LSA",
+      "LSA 类型与作用"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-09-021",
+    "type": "multiple_choice",
+    "question": "下列关于 OSPF LSA 类型的描述，正确的有哪些？",
+    "options": {
+      "A": "Type 1 由每台路由器产生，描述自身链路",
+      "B": "Type 3 由 ABR 产生，描述区域间路由",
+      "C": "Type 5 由 ASBR 产生，描述外部路由",
+      "D": "Type 4 由 DR 产生，描述广播网段"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "Type4 是 ASBR Summary LSA，由 ABR 产生用于描述如何到达 ASBR；描述广播网段的是 Type2。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "单区域 OSPF 与 LSA",
+    "knowledgePoint": "LSA 类型与作用",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF 原理与配置",
+      "单区域 OSPF 与 LSA",
+      "LSA 类型与作用"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-09-022",
+    "type": "single_choice",
+    "question": "OSPF 中的骨干区域是哪一个？",
+    "options": {
+      "A": "Area 0",
+      "B": "任意编号最小的区域",
+      "C": "Area 1",
+      "D": "Area 255"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Area 0 为骨干区域，所有非骨干区域必须与它直接相连，区域间路由都要经过骨干区域中转。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "单区域 OSPF 与 LSA",
+    "knowledgePoint": "区域与开销计算",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF 原理与配置",
+      "单区域 OSPF 与 LSA",
+      "区域与开销计算"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-09-023",
+    "type": "single_choice",
+    "question": "千兆接口在 OSPF 默认参考带宽下的开销是多少？",
+    "options": {
+      "A": "1",
+      "B": "10",
+      "C": "100",
+      "D": "1000"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "开销 = 100M / 1000M = 0.1，向上取整为 1。因此千兆与万兆开销同为 1，无法区分。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "单区域 OSPF 与 LSA",
+    "knowledgePoint": "区域与开销计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF 原理与配置",
+      "单区域 OSPF 与 LSA",
+      "区域与开销计算"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v3-09-024",
+    "type": "single_choice",
+    "question": "要让千兆与万兆接口的 OSPF 开销产生差异，应如何操作？",
+    "options": {
+      "A": "调大参考带宽，例如设为 10000",
+      "B": "修改接口的 IP 地址",
+      "C": "调小参考带宽，例如设为 10",
+      "D": "关闭 DR 选举"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "参考带宽需大于最高接口速率才能体现差异，设为 10000 后千兆开销 10、万兆开销 1。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "单区域 OSPF 与 LSA",
+    "knowledgePoint": "区域与开销计算",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF 原理与配置",
+      "单区域 OSPF 与 LSA",
+      "区域与开销计算"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-09-025",
+    "type": "true_false",
+    "question": "OSPF 的区域划分可以减小 LSDB 规模并限制拓扑变化的影响范围。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "区域内的详细拓扑只在区域内泛洪，区域间只传汇总路由，因此 LSDB 更小、SPF 计算更快、故障影响更局部。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "单区域 OSPF 与 LSA",
+    "knowledgePoint": "区域与开销计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF 原理与配置",
+      "单区域 OSPF 与 LSA",
+      "区域与开销计算"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-09-026",
+    "type": "single_choice",
+    "question": "在 OSPF 进程中宣告网段使用哪条命令？",
+    "options": {
+      "A": "network 网段 子网掩码",
+      "B": "ip network 网段",
+      "C": "advertise 网段",
+      "D": "network 网段 反掩码"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "OSPF 的 network 命令使用反掩码（通配符），如 network 10.1.1.0 0.0.0.255，与 ACL 的通配符写法一致。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "单区域 OSPF 与 LSA",
+    "knowledgePoint": "OSPF 配置与验证",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF 原理与配置",
+      "单区域 OSPF 与 LSA",
+      "OSPF 配置与验证"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-09-027",
+    "type": "single_choice",
+    "question": "查看 OSPF 邻居关系的详细状态，应使用哪条命令？",
+    "options": {
+      "A": "display ip routing-table",
+      "B": "display ospf peer",
+      "C": "display ospf lsdb",
+      "D": "display ospf interface"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "display ospf peer 显示邻居 Router ID、状态与接口；lsdb 查看链路状态数据库，interface 查看接口参数。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "单区域 OSPF 与 LSA",
+    "knowledgePoint": "OSPF 配置与验证",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF 原理与配置",
+      "单区域 OSPF 与 LSA",
+      "OSPF 配置与验证"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-09-028",
+    "type": "single_choice",
+    "question": "两台 OSPF 路由器邻居状态为 FULL，但路由表中缺少对方网段，最可能的原因是什么？",
+    "options": {
+      "A": "Hello 定时器不一致",
+      "B": "区域号配置不同",
+      "C": "接口未配置 IP 地址",
+      "D": "对方未在 OSPF 进程中宣告该网段"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "邻居 FULL 说明参数匹配、LSDB 已同步，此时缺路由只能说明该网段没有被正确宣告或宣告在错误的区域。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "单区域 OSPF 与 LSA",
+    "knowledgePoint": "OSPF 配置与验证",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF 原理与配置",
+      "单区域 OSPF 与 LSA",
+      "OSPF 配置与验证"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-09-029",
+    "type": "single_choice",
+    "question": "OSPF 中 ABR 指的是什么设备？",
+    "options": {
+      "A": "引入外部路由的自治系统边界路由器",
+      "B": "负责 DR 选举的核心交换机",
+      "C": "同时连接骨干区域与其他区域的区域边界路由器",
+      "D": "只运行单区域的内部路由器"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "ABR 连接 Area 0 与其他区域并产生 Type3 汇总 LSA；引入外部路由的设备是 ASBR，两者职责不同。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "单区域 OSPF 与 LSA",
+    "knowledgePoint": "区域与开销计算",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF 原理与配置",
+      "单区域 OSPF 与 LSA",
+      "区域与开销计算"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-09-030",
+    "type": "true_false",
+    "question": "非骨干区域必须与骨干区域直接相连，否则区域间路由可能无法正常传递。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "OSPF 要求区域间路由经骨干区域中转，物理上不直连时需使用虚连接（Virtual Link）打通逻辑链路。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "单区域 OSPF 与 LSA",
+    "knowledgePoint": "区域与开销计算",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF 原理与配置",
+      "单区域 OSPF 与 LSA",
+      "区域与开销计算"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-09-031",
+    "type": "single_choice",
+    "question": "OSPF 邻居状态 Init 表示什么？",
+    "options": {
+      "A": "双方正在交换 DD 报文",
+      "B": "邻居关系已彻底断开",
+      "C": "双方已完成 LSDB 同步",
+      "D": "收到了对方的 Hello，但自己的 Router ID 未出现在对方邻居列表中"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Init 表示单向可见，只有双向都看到对方才进入 2-Way，这是判断单向链路故障的关键状态。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "邻居与邻接关系",
+    "knowledgePoint": "邻居状态机",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF 原理与配置",
+      "邻居与邻接关系",
+      "邻居状态机"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-09-032",
+    "type": "single_choice",
+    "question": "把 OSPF 接口的 DR 优先级设为 0，效果是什么？",
+    "options": {
+      "A": "该接口不参与 DR 与 BDR 选举",
+      "B": "该接口关闭 OSPF",
+      "C": "该接口开销变为 0",
+      "D": "该接口必定成为 DR"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "优先级 0 表示放弃选举权，该路由器只能成为 DRother。常用于把路由器规划为纯转发角色。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "邻居与邻接关系",
+    "knowledgePoint": "网络类型与 DR/BDR",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF 原理与配置",
+      "邻居与邻接关系",
+      "网络类型与 DR/BDR"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-09-033",
+    "type": "single_choice",
+    "question": "OSPF 中 Router LSA 的链路类型不包含下列哪一种？",
+    "options": {
+      "A": "点到点链路",
+      "B": "外部链路",
+      "C": "传输网络链路",
+      "D": "末梢网络链路"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Router LSA 描述 P2P、Transit、Stub、Virtual 四类链路，外部路由由 Type5 或 Type7 承载，不在 Type1 中。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "单区域 OSPF 与 LSA",
+    "knowledgePoint": "LSA 类型与作用",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF 原理与配置",
+      "单区域 OSPF 与 LSA",
+      "LSA 类型与作用"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-09-034",
+    "type": "true_false",
+    "question": "OSPF 的 SPF 计算以本路由器为根，计算到各网段的最短路径树。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "每台路由器独立运行 SPF，以自身为根、依据 LSDB 中的链路开销构建最短路径树，再据此生成路由表。",
+    "chapter": "OSPF 原理与配置",
+    "knowledgeSection": "OSPF 基础概念",
+    "knowledgePoint": "OSPF 特点与协议号",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF 原理与配置",
+      "OSPF 基础概念",
+      "OSPF 特点与协议号"
+    ],
+    "stage": "基础理解"
+  }
+]

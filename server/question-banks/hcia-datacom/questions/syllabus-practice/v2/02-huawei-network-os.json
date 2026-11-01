@@ -1,0 +1,663 @@
+[
+  {
+    "id": "hcia-v3-02-001",
+    "type": "single_choice",
+    "question": "在华为 VRP 系统中，执行 system-view 命令后进入的是哪个视图？",
+    "options": {
+      "A": "系统视图",
+      "B": "接口视图",
+      "C": "协议视图",
+      "D": "用户视图"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "登录设备默认处于用户视图（提示符 < >），system-view 进入系统视图（[ ]），在系统视图下才能进入接口、协议等子视图。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgeSection": "VRP 命令行基础",
+    "knowledgePoint": "命令行视图与切换",
+    "difficulty": "easy",
+    "tags": [
+      "华为网络设备操作系统",
+      "VRP 命令行基础",
+      "命令行视图与切换"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-02-002",
+    "type": "single_choice",
+    "question": "在接口视图下，要直接返回用户视图应使用哪条命令？",
+    "options": {
+      "A": "exit",
+      "B": "quit",
+      "C": "back",
+      "D": "return"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "quit 逐层退出上一级视图，return 从任意视图直接回到用户视图，两者作用范围不同。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgeSection": "VRP 命令行基础",
+    "knowledgePoint": "命令行视图与切换",
+    "difficulty": "medium",
+    "tags": [
+      "华为网络设备操作系统",
+      "VRP 命令行基础",
+      "命令行视图与切换"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-02-003",
+    "type": "true_false",
+    "question": "用户视图下的提示符是尖括号 < >，系统视图下的提示符是方括号 [ ]。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "通过提示符形状可以快速判断当前所处视图，这是排查配置敲错层级最直接的方法。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgeSection": "VRP 命令行基础",
+    "knowledgePoint": "命令行视图与切换",
+    "difficulty": "easy",
+    "tags": [
+      "华为网络设备操作系统",
+      "VRP 命令行基础",
+      "命令行视图与切换"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-02-004",
+    "type": "single_choice",
+    "question": "输入命令前缀后按 Tab 键，VRP 系统的行为是什么？",
+    "options": {
+      "A": "列出所有以该前缀开头的命令",
+      "B": "自动补全为唯一匹配的完整命令",
+      "C": "直接执行该命令",
+      "D": "删除已输入的字符"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Tab 做补全，? 做提示。当前缀匹配到多条命令时 Tab 不会补全，此时应改用 ? 查看候选列表。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgeSection": "VRP 命令行基础",
+    "knowledgePoint": "命令帮助与补全",
+    "difficulty": "easy",
+    "tags": [
+      "华为网络设备操作系统",
+      "VRP 命令行基础",
+      "命令帮助与补全"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-02-005",
+    "type": "single_choice",
+    "question": "想查看 display 命令下所有可用的子命令，最合适的操作是？",
+    "options": {
+      "A": "输入 display 后跟一个空格再输入 ?",
+      "B": "输入 display 后直接按回车",
+      "C": "输入 display 后按 Tab 键",
+      "D": "输入 help display"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "空格加 ? 列出该命令下的全部关键字及说明，是查命令语法最常用的方式。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgeSection": "VRP 命令行基础",
+    "knowledgePoint": "命令帮助与补全",
+    "difficulty": "easy",
+    "tags": [
+      "华为网络设备操作系统",
+      "VRP 命令行基础",
+      "命令帮助与补全"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-02-006",
+    "type": "true_false",
+    "question": "VRP 支持命令关键字缩写，只要输入的前缀能唯一标识该关键字即可执行。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "例如 display 可缩写为 dis。当前缀存在多个匹配项时系统会报错提示不完整，需要补足更多字符。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgeSection": "VRP 命令行基础",
+    "knowledgePoint": "命令帮助与补全",
+    "difficulty": "easy",
+    "tags": [
+      "华为网络设备操作系统",
+      "VRP 命令行基础",
+      "命令帮助与补全"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-02-007",
+    "type": "single_choice",
+    "question": "设备重启后配置丢失，最可能的原因是什么？",
+    "options": {
+      "A": "修改配置后没有执行保存操作",
+      "B": "设备没有配置管理 IP 地址",
+      "C": "设备未开启 Telnet 服务",
+      "D": "设备未配置 SNMP 团体名"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "配置修改后先写入运行配置（内存），执行 save 才写入启动配置文件，否则重启后回到上次保存的状态。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgeSection": "VRP 命令行基础",
+    "knowledgePoint": "配置文件管理",
+    "difficulty": "easy",
+    "tags": [
+      "华为网络设备操作系统",
+      "VRP 命令行基础",
+      "配置文件管理"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-02-008",
+    "type": "single_choice",
+    "question": "查看设备当前正在运行的全部配置，应使用哪条命令？",
+    "options": {
+      "A": "display saved-configuration",
+      "B": "display current-configuration",
+      "C": "display startup",
+      "D": "display version"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "current-configuration 是内存中的运行配置，saved-configuration 是下次启动加载的配置，两者可能不一致。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgeSection": "VRP 命令行基础",
+    "knowledgePoint": "配置文件管理",
+    "difficulty": "medium",
+    "tags": [
+      "华为网络设备操作系统",
+      "VRP 命令行基础",
+      "配置文件管理"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-02-009",
+    "type": "true_false",
+    "question": "display saved-configuration 显示的内容与设备当前实际生效的配置一定完全相同。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "运行配置可能包含尚未保存的改动，因此两者不一定相同；排查“重启后行为变化”时正是要对比这两份配置。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgeSection": "VRP 命令行基础",
+    "knowledgePoint": "配置文件管理",
+    "difficulty": "medium",
+    "tags": [
+      "华为网络设备操作系统",
+      "VRP 命令行基础",
+      "配置文件管理"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-02-010",
+    "type": "single_choice",
+    "question": "通过 Console 口首次登录设备时，通常不需要配置下列哪一项？",
+    "options": {
+      "A": "Console 线的物理连接",
+      "B": "终端仿真软件的连接方式",
+      "C": "设备的 IP 地址",
+      "D": "终端的串口参数"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Console 是带外管理，通过串口直接通信，不依赖 IP 网络，这正是设备零配置时仍能登录的原因。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgeSection": "设备登录与权限",
+    "knowledgePoint": "Console 与本地登录",
+    "difficulty": "easy",
+    "tags": [
+      "华为网络设备操作系统",
+      "设备登录与权限",
+      "Console 与本地登录"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-02-011",
+    "type": "single_choice",
+    "question": "华为设备 Console 口默认的通信参数通常是？",
+    "options": {
+      "A": "4800 波特率、8 位数据位、偶校验、1 位停止位",
+      "B": "115200 波特率、7 位数据位、奇校验、2 位停止位",
+      "C": "38400 波特率、8 位数据位、无校验、2 位停止位",
+      "D": "9600 波特率、8 位数据位、无校验、1 位停止位"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "默认 9600-8-N-1，若终端显示乱码，优先检查波特率与流控是否与设备一致。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgeSection": "设备登录与权限",
+    "knowledgePoint": "Console 与本地登录",
+    "difficulty": "medium",
+    "tags": [
+      "华为网络设备操作系统",
+      "设备登录与权限",
+      "Console 与本地登录"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-02-012",
+    "type": "true_false",
+    "question": "Console 用户界面（user-interface console 0）也可以配置认证方式和用户级别。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Console 与 VTY 一样属于用户界面，可以设置 authentication-mode 与 user privilege level，用于本地登录的身份校验。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgeSection": "设备登录与权限",
+    "knowledgePoint": "Console 与本地登录",
+    "difficulty": "medium",
+    "tags": [
+      "华为网络设备操作系统",
+      "设备登录与权限",
+      "Console 与本地登录"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-02-013",
+    "type": "single_choice",
+    "question": "配置 Telnet 远程登录时，必须创建并配置的是哪类接口？",
+    "options": {
+      "A": "VTY 虚拟终端接口",
+      "B": "以太网物理接口",
+      "C": "AUX 备份接口",
+      "D": "Console 用户界面"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Telnet 与 SSH 都通过 VTY 接入，需在 user-interface vty 0 4 下配置认证方式，并保证设备有可达的 IP 地址。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgeSection": "设备登录与权限",
+    "knowledgePoint": "Telnet 与 SSH 远程登录",
+    "difficulty": "medium",
+    "tags": [
+      "华为网络设备操作系统",
+      "设备登录与权限",
+      "Telnet 与 SSH 远程登录"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-02-014",
+    "type": "single_choice",
+    "question": "相比 Telnet，SSH 在安全性上的关键改进是什么？",
+    "options": {
+      "A": "把传输层协议从 TCP 换成 UDP",
+      "B": "使用更短的报文头降低开销",
+      "C": "对会话数据与身份认证过程进行加密",
+      "D": "取消了口令认证环节"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Telnet 明文传输口令，抓包即可还原；SSH 通过密钥交换建立加密通道，因此生产环境应关闭 Telnet。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgeSection": "设备登录与权限",
+    "knowledgePoint": "Telnet 与 SSH 远程登录",
+    "difficulty": "medium",
+    "tags": [
+      "华为网络设备操作系统",
+      "设备登录与权限",
+      "Telnet 与 SSH 远程登录"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-02-015",
+    "type": "single_choice",
+    "question": "配置 STelnet 登录前，设备上通常需要先生成什么？",
+    "options": {
+      "A": "一条默认路由",
+      "B": "一个 DHCP 地址池",
+      "C": "本地 RSA 密钥对",
+      "D": "一个 VLAN 接口"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "执行 rsa local-key-pair create 生成密钥对，再开启 stelnet server enable，SSH 客户端才能完成密钥交换。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgeSection": "设备登录与权限",
+    "knowledgePoint": "Telnet 与 SSH 远程登录",
+    "difficulty": "hard",
+    "tags": [
+      "华为网络设备操作系统",
+      "设备登录与权限",
+      "Telnet 与 SSH 远程登录"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-02-016",
+    "type": "single_choice",
+    "question": "华为 VRP 中用户级别 3 通常对应下列哪一类权限？",
+    "options": {
+      "A": "参观级，只能执行 ping 等查看命令",
+      "B": "监控级，可查看配置但不能修改",
+      "C": "管理级，可执行大部分业务配置命令",
+      "D": "超级管理员，可执行所有命令含调试"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "级别 0 参观、1 监控、2 配置、3 管理、4-15 超级。级别越高可用命令越多，15 级才能执行 debugging 等敏感操作。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgeSection": "设备登录与权限",
+    "knowledgePoint": "用户级别与命令权限",
+    "difficulty": "medium",
+    "tags": [
+      "华为网络设备操作系统",
+      "设备登录与权限",
+      "用户级别与命令权限"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-02-017",
+    "type": "multiple_choice",
+    "question": "关于华为设备用户级别与命令权限，下列说法正确的有哪些？",
+    "options": {
+      "A": "级别 0 为参观级，只能执行 ping、tracert 等命令",
+      "B": "级别 1 为监控级，可执行 display 类命令",
+      "C": "级别 3 为管理级，可执行系统与业务配置",
+      "D": "级别 15 的命令集合比级别 3 更少"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "级别越高可用命令越多，15 级为最高权限。误认为高等级命令更少是常见错误。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgeSection": "设备登录与权限",
+    "knowledgePoint": "用户级别与命令权限",
+    "difficulty": "medium",
+    "tags": [
+      "华为网络设备操作系统",
+      "设备登录与权限",
+      "用户级别与命令权限"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-02-018",
+    "type": "true_false",
+    "question": "为 VTY 用户设置 user privilege level 15 后，该用户登录即拥有最高权限。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "用户界面下的 user privilege level 决定登录后的默认级别，是权限规划中最需要收紧的配置项之一。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgeSection": "设备登录与权限",
+    "knowledgePoint": "用户级别与命令权限",
+    "difficulty": "medium",
+    "tags": [
+      "华为网络设备操作系统",
+      "设备登录与权限",
+      "用户级别与命令权限"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-02-019",
+    "type": "single_choice",
+    "question": "查看设备 Flash 中保存的文件列表，应使用哪条命令？",
+    "options": {
+      "A": "ls",
+      "B": "dir",
+      "C": "display file",
+      "D": "show flash"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "dir 列出当前目录文件，配合 cd 可切换目录；copy 用于复制文件，delete 删除文件。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgeSection": "设备文件与启动",
+    "knowledgePoint": "文件系统操作",
+    "difficulty": "easy",
+    "tags": [
+      "华为网络设备操作系统",
+      "设备文件与启动",
+      "文件系统操作"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-02-020",
+    "type": "single_choice",
+    "question": "把配置文件备份到 TFTP 服务器，通常使用哪条命令？",
+    "options": {
+      "A": "save tftp 文件名",
+      "B": "tftp 服务器地址 put 文件名",
+      "C": "backup config tftp",
+      "D": "copy running-config tftp"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "VRP 用 tftp 命令配合 put/get 完成上传下载，put 是上传到服务器，get 是从服务器下载。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgeSection": "设备文件与启动",
+    "knowledgePoint": "文件系统操作",
+    "difficulty": "medium",
+    "tags": [
+      "华为网络设备操作系统",
+      "设备文件与启动",
+      "文件系统操作"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-02-021",
+    "type": "true_false",
+    "question": "删除 Flash 中的配置文件后，设备下次启动将使用出厂默认配置。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "启动时找不到指定的配置文件，设备会以空配置启动。因此删除前必须确认已备份，否则将丢失全部业务配置。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgeSection": "设备文件与启动",
+    "knowledgePoint": "文件系统操作",
+    "difficulty": "medium",
+    "tags": [
+      "华为网络设备操作系统",
+      "设备文件与启动",
+      "文件系统操作"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-02-022",
+    "type": "single_choice",
+    "question": "设备上电后的启动流程，正确顺序是？",
+    "options": {
+      "A": "加载 BootROM→加载配置文件→硬件自检→加载 VRP 镜像",
+      "B": "硬件自检→加载 BootROM→加载 VRP 镜像→加载配置文件",
+      "C": "加载配置文件→硬件自检→加载 VRP 镜像→加载 BootROM",
+      "D": "加载 VRP 镜像→硬件自检→加载配置文件→加载 BootROM"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "先自检硬件，再由 BootROM 引导加载系统镜像，最后读取配置文件并逐条执行，顺序颠倒则设备无法启动。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgeSection": "设备文件与启动",
+    "knowledgePoint": "系统启动过程",
+    "difficulty": "medium",
+    "tags": [
+      "华为网络设备操作系统",
+      "设备文件与启动",
+      "系统启动过程"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-02-023",
+    "type": "single_choice",
+    "question": "设备无法正常加载系统镜像时，通常可以通过哪种方式恢复？",
+    "options": {
+      "A": "进入 BootROM 菜单重新指定镜像或导入文件",
+      "B": "重新插拔所有业务网线",
+      "C": "修改 VTY 的用户级别",
+      "D": "在用户视图执行 reset saved-configuration"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "BootROM 是独立于 VRP 的最小系统，可在镜像损坏或丢失时通过串口重新加载，是设备“变砖”后的最后手段。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgeSection": "设备文件与启动",
+    "knowledgePoint": "系统启动过程",
+    "difficulty": "hard",
+    "tags": [
+      "华为网络设备操作系统",
+      "设备文件与启动",
+      "系统启动过程"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-02-024",
+    "type": "true_false",
+    "question": "display startup 可以查看设备下次启动所使用的系统镜像文件名。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "该命令同时显示当前启动镜像与下次启动镜像，升级后若两者不一致，重启才会真正切换到新版本。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgeSection": "设备文件与启动",
+    "knowledgePoint": "系统启动过程",
+    "difficulty": "medium",
+    "tags": [
+      "华为网络设备操作系统",
+      "设备文件与启动",
+      "系统启动过程"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-02-025",
+    "type": "single_choice",
+    "question": "查看设备当前运行的 VRP 软件版本，应使用哪条命令？",
+    "options": {
+      "A": "display startup",
+      "B": "display current-configuration",
+      "C": "display version",
+      "D": "display device"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "display version 输出 VRP 版本、补丁信息与设备型号，是升级前确认基线版本的第一步。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgeSection": "设备文件与启动",
+    "knowledgePoint": "版本与补丁管理",
+    "difficulty": "easy",
+    "tags": [
+      "华为网络设备操作系统",
+      "设备文件与启动",
+      "版本与补丁管理"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-02-026",
+    "type": "single_choice",
+    "question": "关于补丁（Patch）与系统镜像的关系，下列说法正确的是？",
+    "options": {
+      "A": "加载补丁后无需再加载镜像",
+      "B": "补丁只在设备出厂时存在，运行中不能加载",
+      "C": "补丁可以脱离镜像独立运行",
+      "D": "补丁需与对应版本的镜像匹配，不能跨版本随意加载"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "补丁是针对特定版本镜像的增量修复，版本不匹配会导致加载失败，升级时必须成对确认镜像与补丁版本。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgeSection": "设备文件与启动",
+    "knowledgePoint": "版本与补丁管理",
+    "difficulty": "medium",
+    "tags": [
+      "华为网络设备操作系统",
+      "设备文件与启动",
+      "版本与补丁管理"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-02-027",
+    "type": "true_false",
+    "question": "升级设备版本前，应先备份当前配置与镜像，并确认新版本与硬件型号兼容。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "版本升级属于高风险割接操作，缺少备份或型号不兼容会导致设备无法启动，是现网事故的常见成因。",
+    "chapter": "华为网络设备操作系统",
+    "knowledgeSection": "设备文件与启动",
+    "knowledgePoint": "版本与补丁管理",
+    "difficulty": "easy",
+    "tags": [
+      "华为网络设备操作系统",
+      "设备文件与启动",
+      "版本与补丁管理"
+    ],
+    "stage": "综合应用"
+  }
+]

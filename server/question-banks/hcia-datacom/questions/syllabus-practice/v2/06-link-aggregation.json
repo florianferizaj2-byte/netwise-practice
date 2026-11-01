@@ -1,0 +1,665 @@
+[
+  {
+    "id": "hcia-v3-06-001",
+    "type": "single_choice",
+    "question": "链路聚合技术最直接的作用是什么？",
+    "options": {
+      "A": "为报文提供端到端加密",
+      "B": "把多条物理链路捆绑为一条逻辑链路提升带宽与可靠性",
+      "C": "替代路由协议完成寻址",
+      "D": "把多个 VLAN 合并为一个广播域"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "聚合在不升级硬件的前提下叠加带宽，同时某条成员链路故障时流量自动切换到其余链路，兼具扩容与冗余。",
+    "chapter": "以太网链路聚合",
+    "knowledgeSection": "链路聚合原理",
+    "knowledgePoint": "聚合模式与工作方式",
+    "difficulty": "easy",
+    "tags": [
+      "以太网链路聚合",
+      "链路聚合原理",
+      "聚合模式与工作方式"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-06-002",
+    "type": "single_choice",
+    "question": "华为设备的手工模式链路聚合，其成员接口状态由什么决定？",
+    "options": {
+      "A": "由 STP 选举决定",
+      "B": "由路由表决定",
+      "C": "全部成员接口强制参与转发，不做协议协商",
+      "D": "由 LACP 协商决定活动接口"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "手工模式不运行 LACP，只要物理状态 Up 就参与转发，配置简单但无法检测对端配置错误。",
+    "chapter": "以太网链路聚合",
+    "knowledgeSection": "链路聚合原理",
+    "knowledgePoint": "聚合模式与工作方式",
+    "difficulty": "medium",
+    "tags": [
+      "以太网链路聚合",
+      "链路聚合原理",
+      "聚合模式与工作方式"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-06-003",
+    "type": "true_false",
+    "question": "手工模式聚合的两端设备即使一端未配置聚合，也可能出现流量丢弃或环路问题。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "手工模式无协商机制，一端聚合而另一端未聚合时，对端会把多条链路当作独立链路，容易形成二层环路。",
+    "chapter": "以太网链路聚合",
+    "knowledgeSection": "链路聚合原理",
+    "knowledgePoint": "聚合模式与工作方式",
+    "difficulty": "hard",
+    "tags": [
+      "以太网链路聚合",
+      "链路聚合原理",
+      "聚合模式与工作方式"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-06-004",
+    "type": "single_choice",
+    "question": "LACP 协议使用什么报文进行交互？",
+    "options": {
+      "A": "BPDU",
+      "B": "Hello 报文",
+      "C": "LACPDU",
+      "D": "ARP 报文"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "LACPDU 承载系统优先级、系统 MAC、端口优先级等字段，双方据此协商活动链路集合。",
+    "chapter": "以太网链路聚合",
+    "knowledgeSection": "链路聚合原理",
+    "knowledgePoint": "LACP 协议",
+    "difficulty": "medium",
+    "tags": [
+      "以太网链路聚合",
+      "链路聚合原理",
+      "LACP 协议"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-06-005",
+    "type": "single_choice",
+    "question": "LACP 协商中，系统优先级相同时通过什么决定优劣？",
+    "options": {
+      "A": "设备启动时间较早者优先",
+      "B": "接口速率较高者优先",
+      "C": "系统 MAC 地址较小者优先",
+      "D": "端口数量较多者优先"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "先比系统优先级（数值小者优），相同再比系统 MAC。端口侧同理，先比端口优先级再比端口号。",
+    "chapter": "以太网链路聚合",
+    "knowledgeSection": "链路聚合原理",
+    "knowledgePoint": "LACP 协议",
+    "difficulty": "hard",
+    "tags": [
+      "以太网链路聚合",
+      "链路聚合原理",
+      "LACP 协议"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-06-006",
+    "type": "true_false",
+    "question": "静态 LACP 模式下，两端设备通过 LACPDU 协商哪些成员接口成为活动接口。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "静态 LACP 兼具手工模式的固定成员与 LACP 的协商能力，能发现对端配置不一致，是现网推荐方式。",
+    "chapter": "以太网链路聚合",
+    "knowledgeSection": "链路聚合原理",
+    "knowledgePoint": "LACP 协议",
+    "difficulty": "medium",
+    "tags": [
+      "以太网链路聚合",
+      "链路聚合原理",
+      "LACP 协议"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-06-007",
+    "type": "single_choice",
+    "question": "配置 max active-linknumber 2 且成员接口有 4 个时，聚合组的转发行为是什么？",
+    "options": {
+      "A": "4 条链路平均分担流量",
+      "B": "只有 1 条链路转发",
+      "C": "4 条链路全部被阻塞",
+      "D": "2 条为活动链路转发，其余 2 条作为备份"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "活动链路数量受上限约束，超出部分进入备份状态，活动链路故障时备份链路接替，形成 M:N 保护。",
+    "chapter": "以太网链路聚合",
+    "knowledgeSection": "链路聚合原理",
+    "knowledgePoint": "活动链路选举",
+    "difficulty": "medium",
+    "tags": [
+      "以太网链路聚合",
+      "链路聚合原理",
+      "活动链路选举"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v3-06-008",
+    "type": "single_choice",
+    "question": "LACP 选举活动接口时，若端口优先级相同，则比较什么？",
+    "options": {
+      "A": "接口描述字符串",
+      "B": "端口号较大者优先",
+      "C": "接口的 MAC 地址",
+      "D": "端口号较小者优先"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "端口优先级数值小者优，相同则端口号小者优。可通过 lacp priority 调整某接口是否优先成为活动链路。",
+    "chapter": "以太网链路聚合",
+    "knowledgeSection": "链路聚合原理",
+    "knowledgePoint": "活动链路选举",
+    "difficulty": "medium",
+    "tags": [
+      "以太网链路聚合",
+      "链路聚合原理",
+      "活动链路选举"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-06-009",
+    "type": "true_false",
+    "question": "备份链路在活动链路正常时也会转发用户流量，只是优先级较低。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "备份链路不转发用户流量，仅在活动链路失效时接替，因此备份链路不贡献带宽，只提供可靠性。",
+    "chapter": "以太网链路聚合",
+    "knowledgeSection": "链路聚合原理",
+    "knowledgePoint": "活动链路选举",
+    "difficulty": "medium",
+    "tags": [
+      "以太网链路聚合",
+      "链路聚合原理",
+      "活动链路选举"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-06-010",
+    "type": "single_choice",
+    "question": "创建编号为 1 的 Eth-Trunk 接口，应使用哪条命令？",
+    "options": {
+      "A": "trunk-group 1",
+      "B": "eth-trunk 1 enable",
+      "C": "interface Eth-Trunk 1",
+      "D": "link-aggregation 1"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "先 interface Eth-Trunk 1 创建逻辑接口，再在成员接口下执行 eth-trunk 1 加入聚合组。",
+    "chapter": "以太网链路聚合",
+    "knowledgeSection": "聚合配置与负载分担",
+    "knowledgePoint": "Eth-Trunk 配置",
+    "difficulty": "easy",
+    "tags": [
+      "以太网链路聚合",
+      "聚合配置与负载分担",
+      "Eth-Trunk 配置"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-06-011",
+    "type": "single_choice",
+    "question": "把物理接口加入 Eth-Trunk 1，正确的操作是？",
+    "options": {
+      "A": "在 Eth-Trunk 视图执行 port add",
+      "B": "在系统视图执行 join eth-trunk 1",
+      "C": "在物理接口视图执行 eth-trunk 1",
+      "D": "在 VLAN 视图执行 trunk add"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "成员接口必须在自身接口视图下用 eth-trunk 命令加入，加入后其原有二层配置会被 Eth-Trunk 的配置取代。",
+    "chapter": "以太网链路聚合",
+    "knowledgeSection": "聚合配置与负载分担",
+    "knowledgePoint": "Eth-Trunk 配置",
+    "difficulty": "medium",
+    "tags": [
+      "以太网链路聚合",
+      "聚合配置与负载分担",
+      "Eth-Trunk 配置"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-06-012",
+    "type": "true_false",
+    "question": "把接口加入 Eth-Trunk 后，该物理接口上原有的 VLAN 配置会自动清除。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "聚合后由 Eth-Trunk 逻辑接口统一承载二层配置，成员接口不再单独生效，因此原配置被清除，需在 Eth-Trunk 上重配。",
+    "chapter": "以太网链路聚合",
+    "knowledgeSection": "聚合配置与负载分担",
+    "knowledgePoint": "Eth-Trunk 配置",
+    "difficulty": "medium",
+    "tags": [
+      "以太网链路聚合",
+      "聚合配置与负载分担",
+      "Eth-Trunk 配置"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-06-013",
+    "type": "single_choice",
+    "question": "Eth-Trunk 的负载分担默认采用什么方式？",
+    "options": {
+      "A": "基于流的哈希，同一条流走同一条成员链路",
+      "B": "逐包轮询，每个报文换一条链路",
+      "C": "只使用第一条成员链路",
+      "D": "按报文大小选择链路"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "逐流哈希保证同一会话的报文不乱序；逐包轮询虽然更均匀，但会导致乱序，因此不作为默认方式。",
+    "chapter": "以太网链路聚合",
+    "knowledgeSection": "聚合配置与负载分担",
+    "knowledgePoint": "负载分担方式",
+    "difficulty": "medium",
+    "tags": [
+      "以太网链路聚合",
+      "聚合配置与负载分担",
+      "负载分担方式"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-06-014",
+    "type": "single_choice",
+    "question": "配置 load-balance src-dst-ip 后，聚合组依据什么区分不同的流？",
+    "options": {
+      "A": "源 IP 与目的 IP 的组合",
+      "B": "源端口与目的端口的组合",
+      "C": "源 MAC 与目的 MAC 的组合",
+      "D": "VLAN ID 与优先级"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "哈希因子决定流的粒度，src-dst-ip 适合三层转发场景；二层转发场景更适合用 src-dst-mac。",
+    "chapter": "以太网链路聚合",
+    "knowledgeSection": "聚合配置与负载分担",
+    "knowledgePoint": "负载分担方式",
+    "difficulty": "medium",
+    "tags": [
+      "以太网链路聚合",
+      "聚合配置与负载分担",
+      "负载分担方式"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-06-015",
+    "type": "true_false",
+    "question": "若所有流量都来自同一对源目 IP，即使配置了负载分担，也只能压在某一条成员链路上。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "哈希结果由流特征决定，特征相同的流必然落到同一链路，这是聚合无法突破单流带宽上限的根本原因。",
+    "chapter": "以太网链路聚合",
+    "knowledgeSection": "聚合配置与负载分担",
+    "knowledgePoint": "负载分担方式",
+    "difficulty": "hard",
+    "tags": [
+      "以太网链路聚合",
+      "聚合配置与负载分担",
+      "负载分担方式"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-06-016",
+    "type": "multiple_choice",
+    "question": "加入同一 Eth-Trunk 的成员接口必须满足哪些条件？",
+    "options": {
+      "A": "速率一致",
+      "B": "双工模式一致",
+      "C": "同属一台设备且为同一 VLAN 属性",
+      "D": "必须使用不同型号的光模块"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "速率、双工、VLAN 属性不一致会导致成员接口无法加入或加入后不转发，光模块型号并无强制差异要求。",
+    "chapter": "以太网链路聚合",
+    "knowledgeSection": "聚合配置与负载分担",
+    "knowledgePoint": "成员接口约束",
+    "difficulty": "medium",
+    "tags": [
+      "以太网链路聚合",
+      "聚合配置与负载分担",
+      "成员接口约束"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-06-017",
+    "type": "single_choice",
+    "question": "某接口执行 eth-trunk 1 后提示无法加入，最可能的原因是什么？",
+    "options": {
+      "A": "设备未开启 SNMP",
+      "B": "设备未配置默认路由",
+      "C": "该接口的 MAC 地址被修改过",
+      "D": "该接口已属于其他 Eth-Trunk 或存在冲突配置"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "一个物理接口只能属于一个聚合组，且不能带有 Eth-Trunk 不支持的子接口等配置，需先清理再加入。",
+    "chapter": "以太网链路聚合",
+    "knowledgeSection": "聚合配置与负载分担",
+    "knowledgePoint": "成员接口约束",
+    "difficulty": "medium",
+    "tags": [
+      "以太网链路聚合",
+      "聚合配置与负载分担",
+      "成员接口约束"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-06-018",
+    "type": "true_false",
+    "question": "跨设备的两条链路不能直接加入同一个 Eth-Trunk，除非使用堆叠或 M-LAG 等跨设备聚合技术。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "普通 Eth-Trunk 要求成员接口位于同一台设备，跨设备聚合需借助堆叠把多台设备变成一台逻辑设备，或使用 M-LAG。",
+    "chapter": "以太网链路聚合",
+    "knowledgeSection": "聚合配置与负载分担",
+    "knowledgePoint": "成员接口约束",
+    "difficulty": "medium",
+    "tags": [
+      "以太网链路聚合",
+      "聚合配置与负载分担",
+      "成员接口约束"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-06-019",
+    "type": "single_choice",
+    "question": "交换机堆叠后，对外呈现的形态是什么？",
+    "options": {
+      "A": "多台独立设备，各自管理",
+      "B": "一个 VLAN",
+      "C": "一台三层路由器",
+      "D": "一台逻辑设备，统一管理"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "堆叠把多台交换机虚拟成一台逻辑设备，统一配置与管理，并可实现跨设备的链路聚合。",
+    "chapter": "以太网链路聚合",
+    "knowledgeSection": "堆叠与集群",
+    "knowledgePoint": "堆叠（iStack）原理",
+    "difficulty": "easy",
+    "tags": [
+      "以太网链路聚合",
+      "堆叠与集群",
+      "堆叠（iStack）原理"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-06-020",
+    "type": "single_choice",
+    "question": "堆叠系统中负责统一管理的主交换机是如何确定的？",
+    "options": {
+      "A": "由管理员的 IP 地址决定",
+      "B": "由设备上电顺序决定",
+      "C": "随机选举产生",
+      "D": "先比堆叠优先级，再比 MAC 地址"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "堆叠优先级高者当选主交换机，优先级相同则 MAC 小者当选。主设备故障后由备设备接替。",
+    "chapter": "以太网链路聚合",
+    "knowledgeSection": "堆叠与集群",
+    "knowledgePoint": "堆叠（iStack）原理",
+    "difficulty": "medium",
+    "tags": [
+      "以太网链路聚合",
+      "堆叠与集群",
+      "堆叠（iStack）原理"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-06-021",
+    "type": "true_false",
+    "question": "堆叠成员设备之间需要专用的堆叠线缆或堆叠端口连接，业务口不能用于堆叠。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "部分型号支持将业务口配置为堆叠物理成员端口（如通过命令指定），因此“业务口绝不能用于堆叠”的说法不成立。",
+    "chapter": "以太网链路聚合",
+    "knowledgeSection": "堆叠与集群",
+    "knowledgePoint": "堆叠（iStack）原理",
+    "difficulty": "hard",
+    "tags": [
+      "以太网链路聚合",
+      "堆叠与集群",
+      "堆叠（iStack）原理"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-06-022",
+    "type": "single_choice",
+    "question": "CSS 集群与普通堆叠的主要差异是什么？",
+    "options": {
+      "A": "CSS 必须依赖 STP 才能工作",
+      "B": "CSS 不支持链路聚合",
+      "C": "CSS 面向框式设备，把多台机框虚拟成一台",
+      "D": "CSS 只能用于接入层设备"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "CSS（Cluster Switch System）把两台框式交换机组合成一台逻辑设备，与盒式设备的 iStack 堆叠目标一致但实现不同。",
+    "chapter": "以太网链路聚合",
+    "knowledgeSection": "堆叠与集群",
+    "knowledgePoint": "CSS 集群",
+    "difficulty": "medium",
+    "tags": [
+      "以太网链路聚合",
+      "堆叠与集群",
+      "CSS 集群"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-06-023",
+    "type": "single_choice",
+    "question": "CSS 集群中，主控板角色如何确定？",
+    "options": {
+      "A": "由上行链路数量决定",
+      "B": "比较设备序列号，小者为主",
+      "C": "比较集群优先级，高者为主",
+      "D": "由上电时间决定"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "集群优先级高者成为主控，相同则比较 MAC 或序列号。优先级可人工调整以规划主备关系。",
+    "chapter": "以太网链路聚合",
+    "knowledgeSection": "堆叠与集群",
+    "knowledgePoint": "CSS 集群",
+    "difficulty": "medium",
+    "tags": [
+      "以太网链路聚合",
+      "堆叠与集群",
+      "CSS 集群"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-06-024",
+    "type": "true_false",
+    "question": "CSS 集群建立后，两台设备的配置文件会合并为一份统一配置。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "集群对外是一台设备，配置统一管理；建立集群时需注意主备设备配置冲突，通常建议先备份再合并。",
+    "chapter": "以太网链路聚合",
+    "knowledgeSection": "堆叠与集群",
+    "knowledgePoint": "CSS 集群",
+    "difficulty": "medium",
+    "tags": [
+      "以太网链路聚合",
+      "堆叠与集群",
+      "CSS 集群"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-06-025",
+    "type": "single_choice",
+    "question": "堆叠相比普通链路聚合，额外带来的能力是什么？",
+    "options": {
+      "A": "支持跨设备链路聚合，消除单设备故障点",
+      "B": "可以把多个 VLAN 合并",
+      "C": "可以替代路由完成三层转发",
+      "D": "可以提升单条链路的物理速率"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "堆叠后两台设备成为一台逻辑设备，成员端口可跨设备聚合，任一设备故障时链路仍可用，可靠性显著提升。",
+    "chapter": "以太网链路聚合",
+    "knowledgeSection": "堆叠与集群",
+    "knowledgePoint": "堆叠与聚合的差异",
+    "difficulty": "medium",
+    "tags": [
+      "以太网链路聚合",
+      "堆叠与集群",
+      "堆叠与聚合的差异"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-06-026",
+    "type": "multiple_choice",
+    "question": "关于链路聚合与堆叠的区别，下列说法正确的有哪些？",
+    "options": {
+      "A": "链路聚合提升带宽，堆叠提升管理维度与跨设备可靠性",
+      "B": "链路聚合的成员接口必须位于同一设备",
+      "C": "堆叠后多台设备共享同一管理 IP",
+      "D": "堆叠必须依赖 LACP 协议才能建立"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "堆叠依靠专用堆叠链路与堆叠协议建立，与 LACP 无关；LACP 只用于链路聚合的活动链路协商。",
+    "chapter": "以太网链路聚合",
+    "knowledgeSection": "堆叠与集群",
+    "knowledgePoint": "堆叠与聚合的差异",
+    "difficulty": "medium",
+    "tags": [
+      "以太网链路聚合",
+      "堆叠与集群",
+      "堆叠与聚合的差异"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-06-027",
+    "type": "single_choice",
+    "question": "堆叠系统发生分裂（双主）时，可能造成什么后果？",
+    "options": {
+      "A": "堆叠自动恢复为单台设备",
+      "B": "两台设备都以主设备身份运行，出现 IP 与 MAC 冲突",
+      "C": "所有业务端口自动关闭",
+      "D": "堆叠优先级自动归零"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "堆叠线缆全部断开时两台设备各自独立运行，配置与地址重复会引发严重冲突，因此需要配置双主检测（MAD）。",
+    "chapter": "以太网链路聚合",
+    "knowledgeSection": "堆叠与集群",
+    "knowledgePoint": "堆叠与聚合的差异",
+    "difficulty": "hard",
+    "tags": [
+      "以太网链路聚合",
+      "堆叠与集群",
+      "堆叠与聚合的差异"
+    ],
+    "stage": "综合应用"
+  }
+]

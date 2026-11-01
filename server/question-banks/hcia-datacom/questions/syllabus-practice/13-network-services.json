@@ -14,13 +14,16 @@
     ],
     "analysis": "客户端先 Discover，服务器 Offer，客户端 Request，服务器最终 Ack 确认租约。",
     "chapter": "网络服务与应用",
-    "knowledgePoint": "DHCP",
+    "knowledgePoint": "DHCP 报文与交互流程",
     "difficulty": "medium",
     "tags": [
       "网络服务与应用",
+      "DHCP 服务",
+      "DHCP 报文与交互流程",
       "DHCP"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "DHCP 服务"
   },
   {
     "id": "hcia-v2-13-dns",
@@ -37,13 +40,16 @@
     ],
     "analysis": "DNS 提供域名与 IP 地址等资源记录之间的查询解析，使用户无需记忆数字地址。",
     "chapter": "网络服务与应用",
-    "knowledgePoint": "DNS",
+    "knowledgePoint": "DNS 解析与配置",
     "difficulty": "easy",
     "tags": [
       "网络服务与应用",
+      "DNS 与文件传输",
+      "DNS 解析与配置",
       "DNS"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "DNS 与文件传输"
   },
   {
     "id": "hcia-v2-13-ntp",
@@ -60,13 +66,16 @@
     ],
     "analysis": "统一时间可让日志、告警和审计记录具备一致时间线，便于定位事件。",
     "chapter": "网络服务与应用",
-    "knowledgePoint": "NTP",
+    "knowledgePoint": "NTP 分层与工作模式",
     "difficulty": "easy",
     "tags": [
       "网络服务与应用",
+      "NTP 与远程服务",
+      "NTP 分层与工作模式",
       "NTP"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "NTP 与远程服务"
   },
   {
     "id": "hcia-v2-13-tftp",
@@ -83,12 +92,15 @@
     ],
     "analysis": "TFTP 通常使用 UDP 69 端口开始传输，协议简单，缺少 FTP 那样的完整会话和认证能力。",
     "chapter": "网络服务与应用",
-    "knowledgePoint": "FTP/TFTP",
+    "knowledgePoint": "TFTP 与文件传输",
     "difficulty": "medium",
     "tags": [
       "网络服务与应用",
+      "DNS 与文件传输",
+      "TFTP 与文件传输",
       "FTP/TFTP"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "DNS 与文件传输"
   }
 ]

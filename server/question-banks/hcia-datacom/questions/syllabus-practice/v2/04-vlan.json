@@ -1,0 +1,968 @@
+[
+  {
+    "id": "hcia-v3-04-001",
+    "type": "single_choice",
+    "question": "VLAN 技术最核心的作用是什么？",
+    "options": {
+      "A": "为报文提供加密能力",
+      "B": "替代路由完成跨网段转发",
+      "C": "在二层设备上隔离广播域",
+      "D": "提升链路物理带宽"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "VLAN 把一个物理交换网络切成多个逻辑广播域，广播只在同一 VLAN 内泛洪，同时提升安全性与带宽利用率。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "VLAN 基础与标签",
+    "knowledgePoint": "VLAN 作用与划分方式",
+    "difficulty": "easy",
+    "tags": [
+      "VLAN 原理与配置",
+      "VLAN 基础与标签",
+      "VLAN 作用与划分方式"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-04-002",
+    "type": "single_choice",
+    "question": "执行命令 vlan batch 10 20 与 vlan batch 10 to 20，分别创建多少个 VLAN？",
+    "options": {
+      "A": "2 个和 11 个",
+      "B": "11 个和 2 个",
+      "C": "2 个和 10 个",
+      "D": "20 个和 11 个"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "vlan batch 10 20 只创建两个离散 VLAN；10 to 20 是闭区间，包含 10 到 20 共 11 个。易错点：把区间当成 10 个。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "VLAN 基础与标签",
+    "knowledgePoint": "VLAN 作用与划分方式",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 原理与配置",
+      "VLAN 基础与标签",
+      "VLAN 作用与划分方式"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v3-04-003",
+    "type": "multiple_choice",
+    "question": "下列哪些属于常见的 VLAN 划分方式？",
+    "options": {
+      "A": "基于接口划分",
+      "B": "基于 MAC 地址划分",
+      "C": "基于 IP 子网划分",
+      "D": "基于设备机箱颜色划分"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "基于接口最常用且实现简单，基于 MAC 与子网可实现终端移动后 VLAN 不变，但配置与维护成本更高。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "VLAN 基础与标签",
+    "knowledgePoint": "VLAN 作用与划分方式",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 原理与配置",
+      "VLAN 基础与标签",
+      "VLAN 作用与划分方式"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-04-004",
+    "type": "true_false",
+    "question": "同一 VLAN 内的主机即使连接在不同交换机上，也属于同一个广播域。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "VLAN 标识随 802.1Q 标签跨交换机传递，因此 VLAN 的范围可以跨越整张交换网络，与物理位置无关。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "VLAN 基础与标签",
+    "knowledgePoint": "VLAN 作用与划分方式",
+    "difficulty": "easy",
+    "tags": [
+      "VLAN 原理与配置",
+      "VLAN 基础与标签",
+      "VLAN 作用与划分方式"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-04-005",
+    "type": "single_choice",
+    "question": "IEEE 802.1Q 标签中，VLAN ID 字段占多少位？",
+    "options": {
+      "A": "12 位",
+      "B": "8 位",
+      "C": "16 位",
+      "D": "3 位"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "12 位可表示 0-4095，其中 0 与 4095 保留，实际可用 VLAN 为 1-4094 共 4094 个。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "VLAN 基础与标签",
+    "knowledgePoint": "802.1Q 标签格式",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 原理与配置",
+      "VLAN 基础与标签",
+      "802.1Q 标签格式"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-04-006",
+    "type": "single_choice",
+    "question": "802.1Q 标签插入以太网帧后，帧的长度最多增加多少字节？",
+    "options": {
+      "A": "2 字节",
+      "B": "4 字节",
+      "C": "6 字节",
+      "D": "8 字节"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "标签由 TPID、PRI、CFI、VLAN ID 组成，共 4 字节，因此带标签帧的最大长度由 1518 变为 1522 字节。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "VLAN 基础与标签",
+    "knowledgePoint": "802.1Q 标签格式",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 原理与配置",
+      "VLAN 基础与标签",
+      "802.1Q 标签格式"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-04-007",
+    "type": "single_choice",
+    "question": "802.1Q 标签中 TPID 字段的固定取值通常是多少？",
+    "options": {
+      "A": "0x8847",
+      "B": "0x0800",
+      "C": "0x86DD",
+      "D": "0x8100"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "TPID 固定为 0x8100，用于标识该帧携带 802.1Q 标签；0x0800 是 IPv4，0x86DD 是 IPv6。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "VLAN 基础与标签",
+    "knowledgePoint": "802.1Q 标签格式",
+    "difficulty": "hard",
+    "tags": [
+      "VLAN 原理与配置",
+      "VLAN 基础与标签",
+      "802.1Q 标签格式"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-04-008",
+    "type": "multiple_choice",
+    "question": "关于 802.1Q 标签中的 PRI 字段，下列说法正确的有哪些？",
+    "options": {
+      "A": "占 3 位，取值 0-7",
+      "B": "用于标识帧的优先级",
+      "C": "可配合队列调度实现 QoS",
+      "D": "用于标识 VLAN 编号"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "PRI 为 3 位优先级字段，值越大优先级越高，是二层 QoS 调度的依据；VLAN 编号由 VID 字段标识。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "VLAN 基础与标签",
+    "knowledgePoint": "802.1Q 标签格式",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 原理与配置",
+      "VLAN 基础与标签",
+      "802.1Q 标签格式"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-04-009",
+    "type": "single_choice",
+    "question": "华为交换机上可以创建并使用的 VLAN 编号范围是？",
+    "options": {
+      "A": "0 到 4095",
+      "B": "1 到 4095",
+      "C": "1 到 4094",
+      "D": "2 到 4094"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "VLAN 0 与 4095 为协议保留值，不可用于业务；VLAN 1 为默认 VLAN，通常不建议承载业务流量。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "VLAN 基础与标签",
+    "knowledgePoint": "VLAN 范围与保留",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 原理与配置",
+      "VLAN 基础与标签",
+      "VLAN 范围与保留"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-04-010",
+    "type": "true_false",
+    "question": "VLAN 1 是设备的默认 VLAN，所有接口初始都属于 VLAN 1，出于安全考虑应避免用它承载业务。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "默认 VLAN 承载管理协议与大量泛洪流量，且无法通过删除隔离，规范做法是把业务与管理迁移到其他 VLAN。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "VLAN 基础与标签",
+    "knowledgePoint": "VLAN 范围与保留",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 原理与配置",
+      "VLAN 基础与标签",
+      "VLAN 范围与保留"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-04-011",
+    "type": "single_choice",
+    "question": "Access 接口收到一个不带标签的帧时，会如何处理？",
+    "options": {
+      "A": "原样转发到所有端口",
+      "B": "打上该接口 PVID 对应的 VLAN 标签",
+      "C": "直接丢弃该帧",
+      "D": "把帧改为广播帧"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Access 接口只属于一个 VLAN，收到无标签帧时按 PVID 打标后进入交换；PVID 默认等于接口所属 VLAN。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "接口类型与报文处理",
+    "knowledgePoint": "Access 接口",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 原理与配置",
+      "接口类型与报文处理",
+      "Access 接口"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-04-012",
+    "type": "single_choice",
+    "question": "Access 接口向终端发送帧时，对标签的处理方式是什么？",
+    "options": {
+      "A": "保留原有标签发出",
+      "B": "添加双层标签发出",
+      "C": "重新打上 VLAN 1 的标签",
+      "D": "剥离标签后以无标签形式发出"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "普通终端网卡不识别 802.1Q 标签，因此 Access 接口发出时统一去标签，这是接入侧的标准行为。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "接口类型与报文处理",
+    "knowledgePoint": "Access 接口",
+    "difficulty": "easy",
+    "tags": [
+      "VLAN 原理与配置",
+      "接口类型与报文处理",
+      "Access 接口"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-04-013",
+    "type": "true_false",
+    "question": "一个 Access 接口可以同时属于多个 VLAN，从而承载多个 VLAN 的流量。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Access 接口只能属于一个 VLAN；需要承载多个 VLAN 时应使用 Trunk 或 Hybrid 接口。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "接口类型与报文处理",
+    "knowledgePoint": "Access 接口",
+    "difficulty": "easy",
+    "tags": [
+      "VLAN 原理与配置",
+      "接口类型与报文处理",
+      "Access 接口"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-04-014",
+    "type": "single_choice",
+    "question": "Trunk 接口发送帧时，默认对哪类 VLAN 的帧不携带标签？",
+    "options": {
+      "A": "PVID 所对应的 VLAN",
+      "B": "所有 VLAN",
+      "C": "VLAN 100 以上的所有 VLAN",
+      "D": "任何 VLAN 都不例外"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Trunk 接口对 PVID 对应 VLAN 的帧去标签发送，其余允许通过的 VLAN 保留标签，这是华为设备的默认行为。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "接口类型与报文处理",
+    "knowledgePoint": "Trunk 接口",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 原理与配置",
+      "接口类型与报文处理",
+      "Trunk 接口"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-04-015",
+    "type": "single_choice",
+    "question": "接口配置 port trunk allow-pass vlan 2 to 4094 后，该接口允许通过多少个 VLAN？",
+    "options": {
+      "A": "4095 个",
+      "B": "4093 个",
+      "C": "4092 个",
+      "D": "4094 个"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "2 到 4094 是闭区间，数量为 4094-2+1 = 4093；VLAN 1 未被包含，需单独放通。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "接口类型与报文处理",
+    "knowledgePoint": "Trunk 接口",
+    "difficulty": "hard",
+    "tags": [
+      "VLAN 原理与配置",
+      "接口类型与报文处理",
+      "Trunk 接口"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v3-04-016",
+    "type": "single_choice",
+    "question": "两台交换机通过 Trunk 互联，业务 VLAN 10 的主机无法互通，最需要优先检查什么？",
+    "options": {
+      "A": "两端主机的默认网关是否相同",
+      "B": "两端是否配置了静态路由",
+      "C": "两端 Trunk 是否都放通了 VLAN 10",
+      "D": "两端是否开启了 NAT"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Trunk 默认只放通 VLAN 1，业务 VLAN 必须显式 allow-pass，这是 VLAN 跨设备不通的首要原因。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "接口类型与报文处理",
+    "knowledgePoint": "Trunk 接口",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 原理与配置",
+      "接口类型与报文处理",
+      "Trunk 接口"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-04-017",
+    "type": "true_false",
+    "question": "Trunk 接口的 PVID 若两端配置不一致，可能导致某个 VLAN 的流量被错误转发到另一个 VLAN。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "PVID 决定无标签帧归属哪个 VLAN，两端不一致会让无标签帧进入不同 VLAN，形成隐蔽的串 VLAN 故障。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "接口类型与报文处理",
+    "knowledgePoint": "Trunk 接口",
+    "difficulty": "hard",
+    "tags": [
+      "VLAN 原理与配置",
+      "接口类型与报文处理",
+      "Trunk 接口"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-04-018",
+    "type": "single_choice",
+    "question": "Hybrid 接口相比 Trunk 接口的主要优势是什么？",
+    "options": {
+      "A": "可以承载三层路由协议",
+      "B": "不需要配置 PVID",
+      "C": "可以自动协商对端接口类型",
+      "D": "可对每个 VLAN 单独指定是否携带标签"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Hybrid 通过 tagged 与 untagged 两个列表逐 VLAN 控制标签，灵活性最高，常用于交换机与终端、AP 混合接入的场景。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "接口类型与报文处理",
+    "knowledgePoint": "Hybrid 接口",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 原理与配置",
+      "接口类型与报文处理",
+      "Hybrid 接口"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-04-019",
+    "type": "single_choice",
+    "question": "接口配置 port hybrid tagged vlan 2 3 100、port hybrid untagged vlan 4 6 后，发送哪些 VLAN 的帧会携带标签？",
+    "options": {
+      "A": "VLAN 4、6",
+      "B": "VLAN 2、3、100",
+      "C": "全部 VLAN",
+      "D": "仅 VLAN 1"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "tagged 列表中的 VLAN 出方向保留标签，untagged 列表中的 VLAN 去标签发送，两个列表互不影响。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "接口类型与报文处理",
+    "knowledgePoint": "Hybrid 接口",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 原理与配置",
+      "接口类型与报文处理",
+      "Hybrid 接口"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-04-020",
+    "type": "multiple_choice",
+    "question": "关于 Hybrid 接口的 tagged 与 untagged 列表，下列说法正确的有哪些？",
+    "options": {
+      "A": "同一 VLAN 不能同时出现在两个列表中",
+      "B": "untagged 列表中的 VLAN 发出的帧不带标签",
+      "C": "tagged 列表中的 VLAN 发出的帧带标签",
+      "D": "一个 Hybrid 接口只能配置一个 untagged VLAN"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "同一 VLAN 同时配 tagged 与 untagged 会产生冲突，设备通常只保留后者配置；untagged 列表可以包含多个 VLAN。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "接口类型与报文处理",
+    "knowledgePoint": "Hybrid 接口",
+    "difficulty": "hard",
+    "tags": [
+      "VLAN 原理与配置",
+      "接口类型与报文处理",
+      "Hybrid 接口"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-04-021",
+    "type": "true_false",
+    "question": "Access 接口可以视为 Hybrid 接口的特例，即只允许一个 untagged VLAN 通过。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "从标签处理逻辑看，Access 等价于只放通一个 VLAN 且该 VLAN 在 untagged 列表中，理解这一点有助于统一记忆三种接口。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "接口类型与报文处理",
+    "knowledgePoint": "Hybrid 接口",
+    "difficulty": "hard",
+    "tags": [
+      "VLAN 原理与配置",
+      "接口类型与报文处理",
+      "Hybrid 接口"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-04-022",
+    "type": "single_choice",
+    "question": "VLANIF 接口的主要作用是什么？",
+    "options": {
+      "A": "为终端分配 MAC 地址",
+      "B": "把多个物理接口聚合成一条逻辑链路",
+      "C": "为 VLAN 提供三层接口，实现 VLAN 间路由",
+      "D": "隔离同一 VLAN 内的广播"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "VLANIF 是三层接口，配置 IP 后即为该 VLAN 的网关，主机把跨网段流量交给它完成三层转发。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "VLAN 间通信",
+    "knowledgePoint": "VLANIF 三层接口",
+    "difficulty": "easy",
+    "tags": [
+      "VLAN 原理与配置",
+      "VLAN 间通信",
+      "VLANIF 三层接口"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-04-023",
+    "type": "single_choice",
+    "question": "VLANIF 接口要正常转发流量，必须满足下列哪个条件？",
+    "options": {
+      "A": "该 VLAN 内至少有一个处于 Up 状态的物理接口",
+      "B": "必须同时开启 STP",
+      "C": "该 VLAN 编号必须小于 100",
+      "D": "该 VLAN 必须配置在 Trunk 接口上"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "VLANIF 的状态依赖 VLAN 内成员接口，若所有成员接口 Down，VLANIF 也会 Down，导致网关不可达。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "VLAN 间通信",
+    "knowledgePoint": "VLANIF 三层接口",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 原理与配置",
+      "VLAN 间通信",
+      "VLANIF 三层接口"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-04-024",
+    "type": "single_choice",
+    "question": "主机把跨网段报文发给 VLANIF 网关时，报文的目的 MAC 地址是什么？",
+    "options": {
+      "A": "本机网卡的 MAC 地址",
+      "B": "广播地址",
+      "C": "VLANIF 接口的 MAC 地址",
+      "D": "目的主机的 MAC 地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "跨网段时主机通过 ARP 获取网关 MAC 作为目的 MAC，目的 IP 仍是最终主机，这是三层转发的典型特征。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "VLAN 间通信",
+    "knowledgePoint": "VLANIF 三层接口",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 原理与配置",
+      "VLAN 间通信",
+      "VLANIF 三层接口"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-04-025",
+    "type": "true_false",
+    "question": "同一台三层交换机上，两个 VLANIF 接口配置同网段 IP 会导致地址冲突并可能引发路由异常。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "同一设备上的不同三层接口不能处于同一网段，否则设备会产生两条等价的直连路由，转发行为不确定。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "VLAN 间通信",
+    "knowledgePoint": "VLANIF 三层接口",
+    "difficulty": "hard",
+    "tags": [
+      "VLAN 原理与配置",
+      "VLAN 间通信",
+      "VLANIF 三层接口"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-04-026",
+    "type": "single_choice",
+    "question": "单臂路由实现 VLAN 间通信时，路由器上需要配置什么？",
+    "options": {
+      "A": "把物理接口配置为 Access 模式",
+      "B": "一个物理接口下划分多个子接口并封装 802.1Q",
+      "C": "每个 VLAN 占用一个独立物理接口",
+      "D": "关闭所有子接口的 ARP 功能"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "单臂路由用一条物理链路承载多个 VLAN，靠子接口的 dot1q termination vid 区分标签，适合链路资源紧张的场景。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "VLAN 间通信",
+    "knowledgePoint": "单臂路由",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 原理与配置",
+      "VLAN 间通信",
+      "单臂路由"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-04-027",
+    "type": "single_choice",
+    "question": "单臂路由方案最主要的性能瓶颈是什么？",
+    "options": {
+      "A": "子接口无法配置 IP 地址",
+      "B": "必须依赖 STP 才能转发",
+      "C": "无法支持 ARP 协议",
+      "D": "所有 VLAN 流量共用一条物理链路"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "单臂路由的物理链路成为汇聚点，VLAN 数量与流量增长后容易拥塞，因此中大型网络更倾向用三层交换机做网关。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "VLAN 间通信",
+    "knowledgePoint": "单臂路由",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 原理与配置",
+      "VLAN 间通信",
+      "单臂路由"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-04-028",
+    "type": "true_false",
+    "question": "单臂路由的子接口必须封装与所承载 VLAN 编号一致的 802.1Q 标识。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "子接口依靠 VID 匹配带标签帧，封装编号与 VLAN 不一致时该 VLAN 的报文无法进入对应子接口。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "VLAN 间通信",
+    "knowledgePoint": "单臂路由",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 原理与配置",
+      "VLAN 间通信",
+      "单臂路由"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-04-029",
+    "type": "single_choice",
+    "question": "MUX VLAN 中，Principal VLAN 与 Subordinate VLAN 的关系是什么？",
+    "options": {
+      "A": "主 VLAN 不能与任何从 VLAN 通信",
+      "B": "从 VLAN 之间可以自由互通",
+      "C": "主从 VLAN 必须使用相同编号",
+      "D": "主 VLAN 可与所有从 VLAN 通信，从 VLAN 之间相互隔离"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "MUX VLAN 用于同一网段内的访问控制，主 VLAN 提供共享资源，隔离型从 VLAN 之间二层不通，节省 IP 网段资源。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "VLAN 间通信",
+    "knowledgePoint": "VLAN 聚合与 MUX VLAN",
+    "difficulty": "hard",
+    "tags": [
+      "VLAN 原理与配置",
+      "VLAN 间通信",
+      "VLAN 聚合与 MUX VLAN"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-04-030",
+    "type": "single_choice",
+    "question": "VLAN 聚合（Super VLAN）主要解决什么问题？",
+    "options": {
+      "A": "把广播域合并成一个更大的域",
+      "B": "多个 VLAN 共用同一个三层网关与 IP 网段，节省地址",
+      "C": "提升单条链路的物理带宽",
+      "D": "为每个 VLAN 分配独立的公网地址"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Super VLAN 让多个 Sub VLAN 共享一个 VLANIF 与网段，子 VLAN 之间二层隔离、三层可经代理 ARP 通信，常用于大量小规模用户的场景。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "VLAN 间通信",
+    "knowledgePoint": "VLAN 聚合与 MUX VLAN",
+    "difficulty": "hard",
+    "tags": [
+      "VLAN 原理与配置",
+      "VLAN 间通信",
+      "VLAN 聚合与 MUX VLAN"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-04-031",
+    "type": "multiple_choice",
+    "question": "下列关于 MUX VLAN 的说法，正确的有哪些？",
+    "options": {
+      "A": "Principal VLAN 可以与所有 Subordinate VLAN 通信",
+      "B": "Separate VLAN 内的端口彼此不能二层互通",
+      "C": "Group VLAN 内的端口可以相互二层互通",
+      "D": "MUX VLAN 需要为每个从 VLAN 分配独立网段"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "MUX VLAN 的隔离发生在二层，所有从 VLAN 可共用同一网段，无需为每个 VLAN 单独规划子网。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "VLAN 间通信",
+    "knowledgePoint": "VLAN 聚合与 MUX VLAN",
+    "difficulty": "hard",
+    "tags": [
+      "VLAN 原理与配置",
+      "VLAN 间通信",
+      "VLAN 聚合与 MUX VLAN"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-04-032",
+    "type": "single_choice",
+    "question": "两台交换机之间用 Access 接口互联，且两端 VLAN 不同，会出现什么结果？",
+    "options": {
+      "A": "交换机会自动同步 VLAN 配置",
+      "B": "两端主机被划入不同广播域，无法二层互通",
+      "C": "两端主机可以正常互通",
+      "D": "接口会因配置冲突自动关闭"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Access 互联时无标签帧按各自 PVID 打标，两端 VLAN 不同即处于不同广播域，必须改为 Trunk 或统一 VLAN。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "接口类型与报文处理",
+    "knowledgePoint": "Access 接口",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 原理与配置",
+      "接口类型与报文处理",
+      "Access 接口"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-04-033",
+    "type": "single_choice",
+    "question": "交换机上执行 display vlan 命令，主要可以查看什么信息？",
+    "options": {
+      "A": "NAT 转换会话",
+      "B": "VLAN 编号、包含的接口与类型",
+      "C": "路由表的下一跳",
+      "D": "接口的物理光功率"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "display vlan 输出 VLAN 及其成员接口，是排查“某接口到底属于哪个 VLAN”的首选命令。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "VLAN 基础与标签",
+    "knowledgePoint": "VLAN 作用与划分方式",
+    "difficulty": "easy",
+    "tags": [
+      "VLAN 原理与配置",
+      "VLAN 基础与标签",
+      "VLAN 作用与划分方式"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-04-034",
+    "type": "true_false",
+    "question": "接口配置 port link-type trunk 后，若不配置 allow-pass，默认只允许 VLAN 1 通过。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "华为 Trunk 接口默认 allow-pass VLAN 1，业务 VLAN 必须显式放通，这是新建 Trunk 后业务不通的高频原因。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "接口类型与报文处理",
+    "knowledgePoint": "Trunk 接口",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 原理与配置",
+      "接口类型与报文处理",
+      "Trunk 接口"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-04-035",
+    "type": "single_choice",
+    "question": "某接口需要同时连接一台普通 PC 与一台 IP 话机，且两者属于不同 VLAN，最合适的接口类型是？",
+    "options": {
+      "A": "Hybrid 接口",
+      "B": "Loopback 接口",
+      "C": "Trunk 接口",
+      "D": "Access 接口"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Hybrid 可让 PC 所在 VLAN 去标签、话机所在 VLAN 带标签，一端口承载两类终端，是典型应用场景。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "接口类型与报文处理",
+    "knowledgePoint": "Hybrid 接口",
+    "difficulty": "hard",
+    "tags": [
+      "VLAN 原理与配置",
+      "接口类型与报文处理",
+      "Hybrid 接口"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-04-036",
+    "type": "single_choice",
+    "question": "同一 VLAN 内两台主机无法互通，但都能 ping 通网关，最可能的原因是什么？",
+    "options": {
+      "A": "主机侧启用了端口隔离或 ACL 限制",
+      "B": "VLANIF 未配置子网掩码",
+      "C": "网关未配置 IP 地址",
+      "D": "交换机未开启 STP"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "能通网关说明二层与三层接口正常，问题多出在主机侧隔离策略、ACL 或终端防火墙，排查应聚焦访问控制。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "VLAN 间通信",
+    "knowledgePoint": "VLANIF 三层接口",
+    "difficulty": "hard",
+    "tags": [
+      "VLAN 原理与配置",
+      "VLAN 间通信",
+      "VLANIF 三层接口"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-04-037",
+    "type": "multiple_choice",
+    "question": "实现 VLAN 间通信的常见方案有哪些？",
+    "options": {
+      "A": "三层交换机上的 VLANIF 接口",
+      "B": "路由器上的单臂路由子接口",
+      "C": "在交换机上划分更多 VLAN",
+      "D": "把接口配置为 Access 并互连"
+    },
+    "answer": [
+      "A",
+      "B"
+    ],
+    "analysis": "VLAN 间通信必须经过三层设备，VLANIF 与单臂路由是两种主流实现；继续划分 VLAN 只会增加隔离，不能实现互通。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "VLAN 间通信",
+    "knowledgePoint": "VLANIF 三层接口",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 原理与配置",
+      "VLAN 间通信",
+      "VLANIF 三层接口"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-04-038",
+    "type": "single_choice",
+    "question": "关于 PVID 的描述，下列哪一项是正确的？",
+    "options": {
+      "A": "PVID 决定接口的物理速率",
+      "B": "PVID 决定接口收到无标签帧时归属哪个 VLAN",
+      "C": "PVID 只对 Trunk 接口有效",
+      "D": "PVID 必须等于 4094"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "PVID 是端口缺省 VLAN 标识，Access 与 Hybrid 收无标签帧时按 PVID 打标，Trunk 发 PVID 帧时去标签。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "接口类型与报文处理",
+    "knowledgePoint": "Trunk 接口",
+    "difficulty": "medium",
+    "tags": [
+      "VLAN 原理与配置",
+      "接口类型与报文处理",
+      "Trunk 接口"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-04-039",
+    "type": "true_false",
+    "question": "VLAN 可以限制广播泛洪范围，因此合理划分 VLAN 能降低整网的广播开销。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "广播只在 VLAN 内泛洪，划分后单台主机收到的广播量下降，同时故障影响范围也被收窄。",
+    "chapter": "VLAN 原理与配置",
+    "knowledgeSection": "VLAN 基础与标签",
+    "knowledgePoint": "VLAN 作用与划分方式",
+    "difficulty": "easy",
+    "tags": [
+      "VLAN 原理与配置",
+      "VLAN 基础与标签",
+      "VLAN 作用与划分方式"
+    ],
+    "stage": "反向推理"
+  }
+]

@@ -1,9 +1,10 @@
 import {z} from 'zod';
 import {cnyMicros,pointUnits} from './money.js';
-import {ensureAccountPoints,pointsPlans} from './account.js';
+import {ensureAccountPoints,accountPointsPlans} from './account.js';
+import {readCheckInPolicy,updateCheckInPolicy} from './check-in-policy.js';
 import {pointsUsageReport,userPointOperations,userPointReceipt,pointWalletSnapshot} from './reports.js';
 import {officialRateCards} from './pricing.js';
-import {pointServicePrices} from './service-prices.js';
+import {pointServicePrices,membershipCostForecast} from './service-prices.js';
 
 const pagination={limit:z.coerce.number().int().min(1).max(100).default(30),offset:z.coerce.number().int().min(0).max(1000000).default(0)};
 const money=z.string().regex(/^(0|[1-9]\d{0,8})(\.\d{1,6})?$/);
@@ -16,13 +17,13 @@ export function registerPointsRoutes({route,store,requestUserId,requireAdmin}) {
     requestUserId(req);
     return pointServicePrices(store);
   });
-  route('get','/api/account/points',req=>({wallet:ensureAccountPoints(store,requestUserId(req)),plans:pointsPlans,
+  route('get','/api/account/points',req=>({wallet:ensureAccountPoints(store,requestUserId(req)),plans:accountPointsPlans(store),
     billingMode:'points',policy:{pointScale:1000,pointsPerCny:100,refundOnFailure:true,earliestExpiryFirst:true}}));
   route('get','/api/account/points/transactions',req=>{
     const query=z.object(pagination).strict().parse(req.query);
     return {entries:store.points.journal(requestUserId(req),query),...query};
   });
-  route('get','/api/account/points/operations',req=>userPointOperations(store,requestUserId(req),z.object(pagination).strict().parse(req.query)));
+  route('get','/api/account/points/operations',req=>userPointOperations(store,requestUserId(req),z.object({...pagination,state:z.enum(['all','pending','settled','refunded']).optional()}).strict().parse(req.query)));
   route('get','/api/account/points/receipt',req=>{
     const query=z.object({requestId:z.string().uuid().optional(),jobId:z.string().uuid().optional()})
       .strict().refine(value=>!!value.requestId!==!!value.jobId,'提供一个请求或任务编号').parse(req.query);
@@ -32,7 +33,13 @@ export function registerPointsRoutes({route,store,requestUserId,requireAdmin}) {
   const audit=(req,action,id,data)=>store.audit(req.user.id,action,'ai_points',id,data);
   admin('get','/usage',req=>pointsUsageReport(store,z.object({...pagination,days:z.coerce.number().int().min(1).max(365).default(30),search:z.string().trim().max(100).default('')}).strict().parse(req.query)));
   admin('get','/users/:id',req=>userPointOperations(store,req.params.id,z.object(pagination).strict().parse(req.query)));
-  admin('get','/configuration',()=>({plans:pointsPlans,officialRateCards,customRateCards:store.db.prepare('SELECT data,paused FROM ai_points_rates ORDER BY provider,model').all().map(row=>({...JSON.parse(row.data),paused:!!row.paused})),finance:store.points.finance()}));
+  admin('get','/configuration',()=>({plans:accountPointsPlans(store),checkInPolicy:readCheckInPolicy(store),costForecast:membershipCostForecast(store),billingPolicy:{admission:'positive-wallet-overdraft',allowNegativeSettlement:true,dailyCostLimitMicros:null},officialRateCards,customRateCards:store.db.prepare('SELECT data,paused FROM ai_points_rates ORDER BY provider,model').all().map(row=>({...JSON.parse(row.data),paused:!!row.paused})),finance:store.points.finance()}));
+  admin('get','/check-in-policy',()=>({policy:readCheckInPolicy(store)}));
+  admin('put','/check-in-policy',req=>store.points.transaction(()=>{
+    const result=updateCheckInPolicy(store,req.body,req.user.id);
+    if(!result.replayed)audit(req,'points_check_in_policy_updated',String(result.appliedRevision),{revision:result.appliedRevision,dailyPoints:result.policy.dailyPoints,enabled:result.policy.enabled,requireFunded:result.policy.requireFunded,reason:req.body.reason});
+    return result;
+  }));
   admin('post','/finance',req=>{
     const body=z.object({requestId:z.string().uuid(),kind:z.enum(['revenue','expense']),amountCny:money,
       userId:z.string().max(150).nullable().default(null),reference:z.string().trim().min(8).max(500)}).strict().parse(req.body);

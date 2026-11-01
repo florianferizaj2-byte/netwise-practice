@@ -2,13 +2,14 @@ import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { checkMobileVersion } from "./check-mobile-version.mjs";
 import { sourceSnapshot, writeBuildProvenance } from "./release-runtime.mjs";
+import { getReleaseTarget } from './release-checks.mjs';
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 checkMobileVersion(root);
 const before = sourceSnapshot(root);
 for (const [script, ...args] of [
   ["node_modules/vite/bin/vite.js", "build"],
-  ["scripts/build-mobile-web.mjs"],
+  ...(getReleaseTarget(root) === 'android' ? [] : [["scripts/build-mobile-web.mjs"]]),
 ]) {
   const result = spawnSync(process.execPath, [script, ...args], {
     cwd: root,

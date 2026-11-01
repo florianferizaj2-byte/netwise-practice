@@ -1,3 +1,4 @@
+import { SafeAreaView } from '../components/SafeArea';
 import { AppIcon } from '../components/AppIcon';
 import { iosStyles } from '../iosStyles';
 import { useRef, useState } from 'react';
@@ -43,7 +44,7 @@ export function CertificateScreen({
   }
 
   return (
-    <View style={styles.nativeScreen}><ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
+    <SafeAreaView style={styles.nativeScreen}><ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
       {onCancel && (
         <AnimatedPressable
           accessibilityLabel="返回我的"
@@ -105,7 +106,7 @@ export function CertificateScreen({
 
       {!!error && <Text style={styles.error}>{error}</Text>}
       {!certificates.some(c=>c.name.toLowerCase().includes(search.trim().toLowerCase()))&&<Text style={styles.meta}>未找到匹配的证书，试试其他关键词。</Text>}
-    </ScrollView><View style={styles.nativeFooter}><Text style={styles.meta}>切换只展示对应证书的记录，已有学习进度和错题会保留。</Text><AnimatedPressable accessibilityRole="button" accessibilityLabel="确认选择考试证书" disabled={!selectedId||!!busyId} onPress={()=>{if(selectedId===currentCertificateId&&onCancel)onCancel();else void choose(selectedId)}} style={[styles.nativeConfirm,(!selectedId||!!busyId)&&{opacity:0.5}]}><Text style={styles.nativeConfirmText}>{busyId?'正在准备题库…':selectedId===currentCertificateId?'保持当前证书':'确认切换'}</Text></AnimatedPressable></View></View>
+    </ScrollView><View style={styles.nativeFooter}><Text style={styles.meta}>切换只展示对应证书的记录，已有学习进度和错题会保留。</Text><AnimatedPressable accessibilityRole="button" accessibilityLabel="确认选择考试证书" disabled={!selectedId||!!busyId} onPress={()=>{if(selectedId===currentCertificateId&&onCancel)onCancel();else void choose(selectedId)}} style={[styles.nativeConfirm,(!selectedId||!!busyId)&&{opacity:0.5}]}><Text style={styles.nativeConfirmText}>{busyId?'正在准备题库…':selectedId===currentCertificateId?'保持当前证书':'确认切换'}</Text></AnimatedPressable></View></SafeAreaView>
   );
 }
 

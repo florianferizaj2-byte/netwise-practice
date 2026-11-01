@@ -57,7 +57,11 @@ try {
   await panel()
     .getByRole("button", { name: "重试读取问答", exact: true })
     .click();
-  await expect(panel()).toContainText("今日可新提问 20 / 20 次");
+  const initialQuota = (await f.req(f.url(session))).data.quota;
+  assert.equal(initialQuota.unit, "points");
+  assert.equal(initialQuota.requestLimits.used, 0);
+  assert.equal(initialQuota.requestLimits.limit, 1000);
+  await expect(panel()).toContainText(`可用积分 ${initialQuota.remaining}，按实际 AI 用量结算。`);
   let dropped = false;
   const sent = [];
   await page.route(teacherPath, async (route) => {
@@ -82,11 +86,16 @@ try {
   await expect(panel()).toContainText("答疑应答丢失测试");
   await expect(message).toHaveValue("帧和广播域分别是什么意思？");
   assert.equal(f.control.calls.length, 2);
+  const committedQuota = (await f.req(f.url(session))).data.quota;
+  assert(committedQuota.availableUnits < initialQuota.availableUnits);
   await panel().getByRole("button", { name: "问老师", exact: true }).click();
   await expect(panel().locator(".ss-teacher-answer")).toContainText(
     "以太网中传输的一份数据",
   );
-  await expect(panel()).toContainText("今日可新提问 19 / 20 次");
+  const retriedQuota = (await f.req(f.url(session))).data.quota;
+  assert.equal(retriedQuota.availableUnits, committedQuota.availableUnits, "A committed reply retry must not debit points twice");
+  assert.equal(retriedQuota.requestLimits.used, 1);
+  await expect(panel()).toContainText(`可用积分 ${retriedQuota.remaining}，按实际 AI 用量结算。`);
   assert.equal(sent[0], sent[1]);
   assert.equal(f.control.calls.length, 2);
   assert.equal((await f.req(f.url(session))).data.messages.length, 1);
@@ -144,13 +153,17 @@ try {
   report.checks.push(
     "Persisted private questions and structured answers restore after refresh; teacher panel fits 320–1672px and renders in dark mode",
   );
+  const beforeOutageQuota = (await f.req(f.url(session))).data.quota;
   f.control.mode = "outage";
   await panel()
     .getByRole("textbox", { name: "你的问题", exact: true })
     .fill("为什么要确定广播的范围？");
   await panel().getByRole("button", { name: "问老师", exact: true }).click();
   await expect(panel()).toContainText("老师暂时未能完成答疑");
-  assert.equal((await f.req(f.url(session))).data.quota.used, 1);
+  assert.equal((await f.req(f.url(session))).data.quota.requestLimits.used, 1);
+  const failedQuota = (await f.req(f.url(session))).data.quota;
+  assert.equal(failedQuota.availableUnits, beforeOutageQuota.availableUnits, "Synthetic upstream outage must release reserved points");
+  assert.equal(failedQuota.heldUnits, 0);
   const failedId = (await f.req(f.url(session))).data.draft.requestId;
   await page.reload();
   await page.getByRole("button", { name: "问 AI 老师", exact: true }).click();
@@ -162,7 +175,7 @@ try {
   await expect(panel().locator(".ss-teacher-answer")).toHaveCount(2);
   assert.equal((await f.req(f.url(session))).data.draft, null);
   assert.equal(sent.at(-1), failedId);
-  assert.equal((await f.req(f.url(session))).data.quota.used, 2);
+  assert.equal((await f.req(f.url(session))).data.quota.requestLimits.used, 2);
   await page.getByRole("button", { name: "收起 AI 老师", exact: true }).click();
   for (
     let i = 0;
@@ -196,7 +209,7 @@ try {
     "先回看",
   );
   assert.equal(f.control.calls.length, calls);
-  assert.equal((await f.req(f.url(session))).data.quota.used, 2);
+  assert.equal((await f.req(f.url(session))).data.quota.requestLimits.used, 2);
   const source = await page.locator(".tutor-shell").innerHTML();
   assert(!source.includes('"correctId"'));
   report.checks.push(

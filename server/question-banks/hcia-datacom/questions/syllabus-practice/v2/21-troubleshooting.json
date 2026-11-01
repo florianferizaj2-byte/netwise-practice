@@ -1,0 +1,619 @@
+[
+  {
+    "id": "hcia-v3-21-001",
+    "type": "single_choice",
+    "question": "分层排障法中“自下而上”的排查顺序是什么？",
+    "options": {
+      "A": "物理层→链路层→网络层→传输层→应用层",
+      "B": "应用层→传输层→网络层→链路层→物理层",
+      "C": "任意顺序均可",
+      "D": "先查应用再查物理"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "自下而上从物理连接查起，逐层向上验证；自上而下则先看应用表现。选择哪种取决于故障现象与经验判断。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "排障方法论",
+    "knowledgePoint": "分层排障法",
+    "difficulty": "medium",
+    "tags": [
+      "网络故障排除",
+      "排障方法论",
+      "分层排障法"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-21-002",
+    "type": "single_choice",
+    "question": "整栋楼断网、单台主机也无法上网，最适合先采用哪种排查思路？",
+    "options": {
+      "A": "直接更换所有终端",
+      "B": "自上而下，先查应用服务器",
+      "C": "自下而上，从物理链路与接入设备查起",
+      "D": "先修改路由协议配置"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "大面积失效通常源于共性环节（链路、电源、上行设备），自下而上能快速定位共同故障点，避免逐个终端排查。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "排障方法论",
+    "knowledgePoint": "分层排障法",
+    "difficulty": "medium",
+    "tags": [
+      "网络故障排除",
+      "排障方法论",
+      "分层排障法"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-21-003",
+    "type": "true_false",
+    "question": "分层排障的核心价值在于把复杂问题拆成可验证的小范围，逐层缩小故障域。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "逐层验证可以明确“哪一层开始异常”，从而把排查范围从整网收窄到具体设备或接口，效率远高于凭经验猜测。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "排障方法论",
+    "knowledgePoint": "分层排障法",
+    "difficulty": "easy",
+    "tags": [
+      "网络故障排除",
+      "排障方法论",
+      "分层排障法"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-21-004",
+    "type": "single_choice",
+    "question": "“对比法”排障的具体做法是什么？",
+    "options": {
+      "A": "对比采购价格",
+      "B": "对比不同厂商的设备型号",
+      "C": "对比故障设备与正常设备的配置和状态差异",
+      "D": "对比历史流量报表"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "找到同角色、同版本的正常设备做基线对比，配置差异往往直接指向根因，是排障中最实用的手段之一。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "排障方法论",
+    "knowledgePoint": "分而治之与对比法",
+    "difficulty": "medium",
+    "tags": [
+      "网络故障排除",
+      "排障方法论",
+      "分而治之与对比法"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-21-005",
+    "type": "single_choice",
+    "question": "“分而治之”在排障中的含义是什么？",
+    "options": {
+      "A": "把故障分给不同人员处理",
+      "B": "把网络分成若干段，逐段测试以定位故障区间",
+      "C": "把配置分成多个文件保存",
+      "D": "把设备拆开检修硬件"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "通过分段隔离（例如先验证核心到汇聚、再验证汇聚到接入），可快速判断故障落在哪一段，避免全网盲查。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "排障方法论",
+    "knowledgePoint": "分而治之与对比法",
+    "difficulty": "medium",
+    "tags": [
+      "网络故障排除",
+      "排障方法论",
+      "分而治之与对比法"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-21-006",
+    "type": "true_false",
+    "question": "替换法是指用已知正常的部件替换可疑部件，通过现象是否消失来判断故障点。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "替换法适合硬件类故障（光模块、网线、电源），但需注意替换操作本身可能引入新变量，应逐项替换。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "排障方法论",
+    "knowledgePoint": "分而治之与对比法",
+    "difficulty": "medium",
+    "tags": [
+      "网络故障排除",
+      "排障方法论",
+      "分而治之与对比法"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-21-007",
+    "type": "single_choice",
+    "question": "排查接口是否 Up、有无 CRC 错误，最直接的命令是什么？",
+    "options": {
+      "A": "display ospf peer",
+      "B": "display vlan",
+      "C": "display nat session",
+      "D": "display interface"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "display interface 输出物理与协议状态、收发速率、错误计数，是二层与物理层排障的入口命令。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "排障方法论",
+    "knowledgePoint": "常用排障工具",
+    "difficulty": "easy",
+    "tags": [
+      "网络故障排除",
+      "排障方法论",
+      "常用排障工具"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-21-008",
+    "type": "single_choice",
+    "question": "使用 debugging 命令排障时最需要注意什么？",
+    "options": {
+      "A": "调试命令会永久修改配置",
+      "B": "调试信息量大，可能影响设备性能，用完应及时关闭",
+      "C": "调试命令只能用于物理层",
+      "D": "调试命令不需要任何权限"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "debugging 会占用 CPU 并向终端输出大量报文，在高负载设备上可能导致业务受损，属于短时排障手段。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "排障方法论",
+    "knowledgePoint": "常用排障工具",
+    "difficulty": "medium",
+    "tags": [
+      "网络故障排除",
+      "排障方法论",
+      "常用排障工具"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-21-009",
+    "type": "multiple_choice",
+    "question": "下列哪些属于常用的网络排障手段？",
+    "options": {
+      "A": "ping 验证三层连通性",
+      "B": "tracert 定位路径中断点",
+      "C": "抓包分析报文交互",
+      "D": "修改设备采购清单"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "连通性测试、路径追踪与抓包是最基础的三类手段；采购与排障无关，属于明显的干扰项。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "排障方法论",
+    "knowledgePoint": "常用排障工具",
+    "difficulty": "easy",
+    "tags": [
+      "网络故障排除",
+      "排障方法论",
+      "常用排障工具"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-21-010",
+    "type": "single_choice",
+    "question": "同一 VLAN 内主机不能互通，但都能 ping 通网关，最不可能的原因是什么？",
+    "options": {
+      "A": "主机侧防火墙拦截",
+      "B": "接口被划入错误的 VLAN",
+      "C": "网关未配置 IP 地址",
+      "D": "存在端口隔离配置"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "能 ping 通网关说明网关已配置且二层可达，因此“网关未配 IP”与现象矛盾，属于可排除项。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "二层故障排查",
+    "knowledgePoint": "VLAN 与接口故障",
+    "difficulty": "hard",
+    "tags": [
+      "网络故障排除",
+      "二层故障排查",
+      "VLAN 与接口故障"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-21-011",
+    "type": "single_choice",
+    "question": "两台交换机通过 Trunk 互联后业务 VLAN 不通，最应优先检查什么？",
+    "options": {
+      "A": "两端 allow-pass 是否都放通了该 VLAN",
+      "B": "两端设备的 NTP 同步状态",
+      "C": "两端设备的 SNMP 版本",
+      "D": "两端设备的日志级别"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Trunk 默认只放通 VLAN 1，业务 VLAN 必须在两端都 allow-pass，单端放通是最常见的配置遗漏。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "二层故障排查",
+    "knowledgePoint": "VLAN 与接口故障",
+    "difficulty": "medium",
+    "tags": [
+      "网络故障排除",
+      "二层故障排查",
+      "VLAN 与接口故障"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-21-012",
+    "type": "true_false",
+    "question": "接口物理状态为 Down 时，应先检查网线、光模块与对端设备，而不是排查 VLAN 配置。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "物理 Down 说明信号层未建立，VLAN 等二层配置此时根本不会生效，排查顺序必须先物理后逻辑。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "二层故障排查",
+    "knowledgePoint": "VLAN 与接口故障",
+    "difficulty": "medium",
+    "tags": [
+      "网络故障排除",
+      "二层故障排查",
+      "VLAN 与接口故障"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-21-013",
+    "type": "single_choice",
+    "question": "网络出现广播风暴、CPU 占用骤升、MAC 表频繁漂移，最可能的原因是什么？",
+    "options": {
+      "A": "存在二层环路且 STP 未生效",
+      "B": "NAT 地址池耗尽",
+      "C": "NTP 未同步",
+      "D": "DNS 服务器故障"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "环路导致广播无限复制并引发 MAC 漂移，是这类组合症状的典型根因，应检查 STP 状态与是否有私接设备。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "二层故障排查",
+    "knowledgePoint": "STP 与环路故障",
+    "difficulty": "hard",
+    "tags": [
+      "网络故障排除",
+      "二层故障排查",
+      "STP 与环路故障"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-21-014",
+    "type": "single_choice",
+    "question": "排查 STP 拓扑频繁震荡，最应关注什么？",
+    "options": {
+      "A": "VLAN 编号是否为偶数",
+      "B": "是否有接口在 Up/Down 间反复切换或收到异常 BPDU",
+      "C": "设备的序列号是否连续",
+      "D": "日志是否开启 debugging"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "链路抖动或用户私接设备产生异常 BPDU 都会触发拓扑重算，表现为 TC 频繁、流量短时中断。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "二层故障排查",
+    "knowledgePoint": "STP 与环路故障",
+    "difficulty": "hard",
+    "tags": [
+      "网络故障排除",
+      "二层故障排查",
+      "STP 与环路故障"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-21-015",
+    "type": "true_false",
+    "question": "边缘端口收到 BPDU 后失去边缘属性，是 STP 防止用户私接交换设备形成环路的重要机制。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "该机制让接入端口在检测到 BPDU 时重新参与生成树计算，配合 BPDU 保护可直接关闭端口阻断风险。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "二层故障排查",
+    "knowledgePoint": "STP 与环路故障",
+    "difficulty": "medium",
+    "tags": [
+      "网络故障排除",
+      "二层故障排查",
+      "STP 与环路故障"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-21-016",
+    "type": "single_choice",
+    "question": "Eth-Trunk 已建立但只有一条成员链路在转发，最可能的原因是什么？",
+    "options": {
+      "A": "VLAN 数量超过 4094",
+      "B": "NTP 未同步",
+      "C": "两端成员接口的速率或双工不一致导致部分接口未加入",
+      "D": "设备未配置默认路由"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "成员接口速率、双工、VLAN 属性必须一致，不一致的接口无法成为活动链路，表现为带宽未叠加。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "二层故障排查",
+    "knowledgePoint": "链路聚合故障",
+    "difficulty": "hard",
+    "tags": [
+      "网络故障排除",
+      "二层故障排查",
+      "链路聚合故障"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-21-017",
+    "type": "single_choice",
+    "question": "LACP 模式下聚合组无法建立，最需要检查什么？",
+    "options": {
+      "A": "两端是否为同一 LACP 模式且系统优先级与端口配置匹配",
+      "B": "两端设备的采购批次",
+      "C": "两端设备的机柜编号",
+      "D": "两端设备的序列号长度"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "一端手工模式、一端 LACP 模式时协商失败，聚合组无法进入转发状态，这是聚合不通的典型原因。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "二层故障排查",
+    "knowledgePoint": "链路聚合故障",
+    "difficulty": "medium",
+    "tags": [
+      "网络故障排除",
+      "二层故障排查",
+      "链路聚合故障"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-21-018",
+    "type": "true_false",
+    "question": "聚合组中部分成员接口处于 Unselect 状态时，该聚合组一定存在配置错误。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "配置了最大活动链路数后，超出上限的成员处于备份状态属正常现象，不能一概判定为故障。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "二层故障排查",
+    "knowledgePoint": "链路聚合故障",
+    "difficulty": "medium",
+    "tags": [
+      "网络故障排除",
+      "二层故障排查",
+      "链路聚合故障"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-21-019",
+    "type": "single_choice",
+    "question": "路由表中完全没有某目的网段，应首先确认什么？",
+    "options": {
+      "A": "终端的操作系统版本",
+      "B": "该网段是否被正确宣告或配置了静态路由",
+      "C": "AP 的发射功率",
+      "D": "交换机的 VLAN 数量"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "路由缺失要么是没有宣告，要么是宣告在错误区域或被优先级更优的路由覆盖，应从路由来源查起。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "三层与业务故障",
+    "knowledgePoint": "路由故障排查",
+    "difficulty": "medium",
+    "tags": [
+      "网络故障排除",
+      "三层与业务故障",
+      "路由故障排查"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-21-020",
+    "type": "single_choice",
+    "question": "路由表中存在目标网段但显示为 Inactive，最可能的原因是什么？",
+    "options": {
+      "A": "该路由优先级过高",
+      "B": "掩码长度写错",
+      "C": "VLAN 未创建",
+      "D": "下一跳不可达，路由迭代失败"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Inactive 表示路由本身配置存在但无法解析出可用出接口，需先修复到下一跳的可达性。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "三层与业务故障",
+    "knowledgePoint": "路由故障排查",
+    "difficulty": "hard",
+    "tags": [
+      "网络故障排除",
+      "三层与业务故障",
+      "路由故障排查"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-21-021",
+    "type": "single_choice",
+    "question": "OSPF 邻居一直停留在 Init 状态，最可能说明什么？",
+    "options": {
+      "A": "区域号配置一致",
+      "B": "接口开销配置正确",
+      "C": "双方已完成 LSDB 同步",
+      "D": "单向收到 Hello，本端地址未出现在对端邻居列表中"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Init 表示单向可见，常见于单向链路、组播被过滤或 ACL 拦截了部分 Hello 报文。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "三层与业务故障",
+    "knowledgePoint": "OSPF 邻居故障",
+    "difficulty": "hard",
+    "tags": [
+      "网络故障排除",
+      "三层与业务故障",
+      "OSPF 邻居故障"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-21-022",
+    "type": "multiple_choice",
+    "question": "OSPF 邻居无法建立，可能需要检查哪些参数？",
+    "options": {
+      "A": "区域号是否一致",
+      "B": "Hello 与 Dead 定时器是否一致",
+      "C": "认证方式与密钥是否一致",
+      "D": "设备的机柜位置是否相同"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "区域、定时器、认证三项必须匹配，MTU 不一致还会导致卡在 ExStart；机柜位置与协议协商无关。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "三层与业务故障",
+    "knowledgePoint": "OSPF 邻居故障",
+    "difficulty": "medium",
+    "tags": [
+      "网络故障排除",
+      "三层与业务故障",
+      "OSPF 邻居故障"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-21-023",
+    "type": "true_false",
+    "question": "OSPF 邻居卡在 ExStart 状态，常见原因是两端接口 MTU 不一致。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "ExStart 阶段协商主从关系与 DD 报文大小，MTU 不一致会导致 DD 报文被丢弃，邻居无法推进到 Exchange。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "三层与业务故障",
+    "knowledgePoint": "OSPF 邻居故障",
+    "difficulty": "hard",
+    "tags": [
+      "网络故障排除",
+      "三层与业务故障",
+      "OSPF 邻居故障"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-21-024",
+    "type": "single_choice",
+    "question": "内网主机能访问部分网站但其他网站打不开，NAT 与 ACL 侧最可能的问题是什么？",
+    "options": {
+      "A": "NAT 地址池完全未配置",
+      "B": "默认路由指向错误",
+      "C": "ACL 规则顺序不当，宽泛的 deny 提前命中",
+      "D": "交换机未开启 STP"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "部分可达说明转换与路由基本正常，问题多为策略粒度或顺序问题，应检查 ACL 命中计数与规则排列。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "三层与业务故障",
+    "knowledgePoint": "NAT 与 ACL 故障",
+    "difficulty": "hard",
+    "tags": [
+      "网络故障排除",
+      "三层与业务故障",
+      "NAT 与 ACL 故障"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-21-025",
+    "type": "single_choice",
+    "question": "配置了 NAT 但会话表中没有任何表项，最应优先怀疑什么？",
+    "options": {
+      "A": "ACL 未匹配到流量或 nat outbound 未应用在正确接口",
+      "B": "VLAN 数量不足",
+      "C": "光模块型号不匹配",
+      "D": "设备未开启 NTP"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "会话表为空意味着转换根本没触发，排查顺序为：ACL 是否命中、接口是否正确、方向是否选对。",
+    "chapter": "网络故障排除",
+    "knowledgeSection": "三层与业务故障",
+    "knowledgePoint": "NAT 与 ACL 故障",
+    "difficulty": "medium",
+    "tags": [
+      "网络故障排除",
+      "三层与业务故障",
+      "NAT 与 ACL 故障"
+    ],
+    "stage": "综合应用"
+  }
+]

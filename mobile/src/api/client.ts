@@ -1,20 +1,25 @@
 import { APP_VERSION } from '../version';
+import {normalizeReleasePolicy} from './versionPolicy';
 import type { AiLearningProfile, AiLearningSetup, AiLearningQuote, AiLearningJob, AiLearningSummary, AiLearningEvent } from './aiLearningTypes';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { fetch as streamingFetch } from 'expo/fetch';
 import { ResourceCache, CacheCancelledError } from './resourceCache';
 import { persistentStudyData, studyCachePolicy } from './cachePolicy';
 import { ApiError, fetchJson } from './transport';
+import { API_BASE_URL, apiAssetOrigin, resolveApiUrl } from './endpoint';
+import type { VoicePackCatalog, VoicePackManifest } from './voicePacks';
 import type { StudyCatalog, StudyLesson, StudySession, StudyAttempt, StudyTeacherMessage, StudyTeacherAnswer, StudyTeacherRequest } from './studyTypes';
 import { studyRequestId } from './studyTypes';
 import type { Announcement } from '../announcements/client';
+import type { BackendContract } from './backendContract';
 export { ApiError } from './transport';
-
-export const API_BASE_URL =
-  process.env.EXPO_PUBLIC_API_URL ||
-  (typeof document !== 'undefined' ? `${window.location.origin}/api` : 'https://aceexam.top/api');
+export { API_BASE_URL, API_BASES, API_FALLBACK_URL } from './endpoint';
 
 export type AppVersionResponse = {
+  backend?: BackendContract;
+  apkBytes?: number;
+  apkMd5?: string;
+  apkSha256?: string;
   currentVersion: string;
   latestVersion: string;
   minimumVersion: string;
@@ -197,7 +202,7 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
         '/wrong',
         '/favorites',
         '/questions?',
-      ]);
+      ],key=>path!=='/attempts'||!key.startsWith('/questions?')||new URLSearchParams(key.split('?')[1]).get('feedback')!=='instant');
     } else if (path.startsWith('/ai-learning/') && path.endsWith('/submit')) {
       studyCache.invalidate(['/dashboard','/practice/catalog','/questions?','/wrong','/exams','/community/leaderboards']);
     } else if (path.endsWith('/submit') || path === '/ai/train') {
@@ -244,7 +249,7 @@ async function streamRequest<T>(
     }
     timer = setTimeout(() => controller.abort(), 240000);
     sent = true;
-    const response = await streamingFetch(`${API_BASE_URL}${path}`, {
+    const response = await streamingFetch(resolveApiUrl(`${API_BASE_URL}${path}`), {
       method: 'POST',
       credentials: 'omit',
       headers: {
@@ -383,11 +388,18 @@ export type Question = {
   lastWrong?: { createdAt: string };
   review?: { dueAt?: string } | null;
   attempted?: boolean;
+  answered?: boolean;
+  mastered?: boolean;
   favorite?: boolean;
   source?: string;
 };
 
 export type QuestionFilters = {
+  excludeCorrect?: '1';
+  review?: 'answered';
+  before?: string;
+  anchor?: string;
+  feedback?: 'instant';
   chapter?: string;
   knowledgeSection?: string;
   knowledgePoint?: string;
@@ -422,6 +434,8 @@ export type ExamSession = {
   result?: ExamResult;
 };
 export type QuestionPage = {
+  practiceStateVersion?: number;
+  offset?: number;
   items: Question[];
   total: number;
   nextOffset: number | null;
@@ -579,6 +593,7 @@ export type AiSettingsPayload = {
 };
 
 export type AccountEntitlementsResponse = {
+  pointsPlans?: Partial<Record<'vip' | 'svip' | 'ssvip', { name: string; priceCents: number; monthlyPoints: number; dailyPoints?: number; membershipDistribution?: 'daily-check-in' }>>;
   plan: 'free' | 'vip' | 'svip' | 'ssvip';
   expiresAt: string | null;
   apiConfigUnlocked: boolean;
@@ -586,11 +601,18 @@ export type AccountEntitlementsResponse = {
   aiServiceMode?: 'author';
   canManageAiService?: boolean;
   billingMode?: 'points';
-  points?: {availableUnits:number;heldUnits:number;expiredUnits:number;pendingUnits:number;scale:number;pointsPerCny:number;monthlyPoints:number;periodStart:string|null;periodEnd:string|null};
+  points?: {availableUnits:number;heldUnits:number;expiredUnits:number;pendingUnits:number;scale:number;pointsPerCny:number;monthlyPoints:number;dailyCheckInPoints?:number;membershipDistribution?:'daily-check-in';legacyPrepaidUntil?:string|null;periodStart:string|null;periodEnd:string|null};
   generation?: { limit: number; used: number; remaining: number; periodStart: string | null; periodEnd: string | null };
   checkIn: {
     day: string;
     claimed: boolean;
+    canClaim?: boolean;
+    disabledReason?: string | null;
+    configuredPoints?: number;
+    legacyPrepaidUntil?: string | null;
+    dailyStartsAt?: string | null;
+    expiresAt?: string;
+    policy?: {revision:number;enabled:boolean;requireFunded:boolean;dailyPoints:Record<'free'|'vip'|'svip'|'ssvip',number>;membershipDistribution:'daily-check-in'};
     grants: { points?:number; explanations: number; generations: number; analyses: number };
     remaining: { explanations: number; generations: number; analyses: number };
   };
@@ -655,6 +677,11 @@ function questionPagePath(offset = 0, filters?: QuestionFilters, seed?: string) 
 }
 
 export const mobileApi = {
+  voicePacks() { return request<VoicePackCatalog>("/voice-packs"); },
+  voicePackManifest(id:string) {
+    if(!/^[a-z0-9][a-z0-9-]{0,47}$/.test(id))return Promise.reject(new Error("语音包编号无效"));
+    return request<VoicePackManifest>(`/voice-packs/${encodeURIComponent(id)}/manifest`);
+  },
   onStatus(listener: (status: 'expired' | 'update') => void) {
     statusListeners.add(listener);
     return () => {
@@ -666,9 +693,30 @@ export const mobileApi = {
     return studyCache.clear();
   },
   appVersion(version: string) {
-    return request<AppVersionResponse>(
-      `/mobile/version?version=${encodeURIComponent(version)}`,
-    );
+    // Release metadata is public and must not be cancelled by restoring or
+    // switching the account. It must never expire an unrelated login token.
+    return fetchJson<AppVersionResponse>(
+      `${API_BASE_URL}/mobile/version?version=${encodeURIComponent(version)}&_=${Date.now()}`,
+      { cache:'no-store', credentials: 'omit', headers: { Accept: 'application/json', 'Cache-Control':'no-cache', 'X-Client': 'mobile', 'X-App-Version': APP_VERSION } },
+      15000,
+    ).then(release=>typeof document!=='undefined'?release:normalizeReleasePolicy(release,version));
+  },
+
+  adminUsers(search = '', status: 'all' | 'active' | 'banned' = 'all', offset = 0) {
+    return request<AdminUserPage>(`/admin/mobile/users?search=${encodeURIComponent(search)}&status=${status}&offset=${offset}&limit=30`);
+  },
+  adminUser(id: string) {
+    return request<{ user: AdminUser }>(`/admin/mobile/users/${encodeURIComponent(id)}`);
+  },
+  adminSaveUser(id: string, fields: AdminUserEdit) {
+    return request<{ saved: boolean; user: AdminUser }>(`/admin/mobile/users/${encodeURIComponent(id)}`, { method: 'PUT', body: JSON.stringify(fields) });
+  },
+  adminSetUserBanned(id: string, banned: boolean, reason: string) {
+    return request<{ saved: boolean }>(`/admin/users/${encodeURIComponent(id)}/ban`, { method: 'PUT', body: JSON.stringify({ banned, reason }) });
+  },
+  adminAnnouncement() { return request<AdminAnnouncement>('/admin/mobile/announcement'); },
+  adminSaveAnnouncement(fields: { revision: string; enabled: boolean; title: string; body: string }) {
+    return request<AdminAnnouncement & { saved: boolean }>('/admin/mobile/announcement', { method: 'PUT', body: JSON.stringify(fields) });
   },
 
   adminUsers(search = '', status: 'all' | 'active' | 'banned' = 'all', offset = 0) {
@@ -690,7 +738,7 @@ export const mobileApi = {
 
   resolveDownloadUrl(url: string) {
     if (/^https?:\/\//i.test(url)) return url;
-    const origin = API_BASE_URL.replace(/\/api\/?$/, '');
+    const origin = apiAssetOrigin();
     return `${origin}${url.startsWith('/') ? url : `/${url}`}`;
   },
 
@@ -825,16 +873,13 @@ export const mobileApi = {
     limit?: number,
     offset = 0,
     random = false,
-    filters?: {
-      chapter?: string;
-      knowledgeSection?: string;
-      knowledgePoint?: string;
-    },
+    filters?: QuestionFilters,
   ) {
     const params = new URLSearchParams({ bankOnly: '1' });
     if (limit != null) params.set('limit', String(limit));
     if (offset) params.set('offset', String(offset));
-    if (random) params.set('random', '1');
+    if (random) { params.set('random', '1'); params.set('excludeCorrect', '1'); }
+    if (filters?.feedback) params.set('feedback',filters.feedback);
     if (filters?.chapter) params.set('chapter', filters.chapter);
     if (filters?.knowledgeSection)
       params.set('knowledgeSection', filters.knowledgeSection);
@@ -866,8 +911,15 @@ export const mobileApi = {
     return cachedRequest<PracticeCatalogSummaryResponse>('/practice/catalog?summary=1', force);
   },
 
-  favorites(force = false) {
-    return cachedRequest<Question[]>('/favorites', force);
+  favorites(force = false,feedback = false) {
+    return cachedRequest<Question[]>('/favorites'+(feedback?'?feedback=instant':''), force);
+  },
+
+  practiceQuestion(questionId:string) {
+    return cachedRequest<Question>('/questions/'+encodeURIComponent(questionId));
+  },
+  practiceFeedback(questionId:string) {
+    return studyCache.read<Pick<Question,'answer'|'analysis'|'expectedAnswer'>>('/practice-feedback/'+encodeURIComponent(questionId),(signal)=>request(`/questions/${encodeURIComponent(questionId)}/reveal`,{method:'POST',signal}));
   },
 
   wrong(force = false) {
@@ -908,7 +960,7 @@ export const mobileApi = {
     let lastByte=Date.now();
     const watchdog=setInterval(()=>{if(Date.now()-lastByte>45000)controller.abort();},5000);
     try {
-      const response=await streamingFetch(API_BASE_URL+'/ai-learning/jobs/'+encodeURIComponent(id)+'/events?after='+after,{
+      const response=await streamingFetch(resolveApiUrl(API_BASE_URL+'/ai-learning/jobs/'+encodeURIComponent(id)+'/events?after='+after),{
         headers:{Accept:'text/event-stream','X-Client':'mobile','X-App-Version':APP_VERSION,...(token?{Authorization:'Bearer '+token}:{})},
         credentials:'omit',signal:controller.signal,
       });
@@ -978,6 +1030,7 @@ export const mobileApi = {
     selected: string[],
     timeMs: number,
     response?: string,
+    clientAttemptId?: string,
   ) {
     return request<AttemptResponse>('/attempts', {
       method: 'POST',
@@ -986,6 +1039,7 @@ export const mobileApi = {
         selected,
         timeMs,
         ...(response ? { response } : {}),
+        ...(clientAttemptId ? {clientAttemptId} : {}),
       }),
     });
   },
@@ -1162,11 +1216,14 @@ export const mobileApi = {
 
   communityImageUrl(imageUrl: string) {
     if (/^https?:\/\//i.test(imageUrl)) return imageUrl;
-    return `${API_BASE_URL.replace(/\/api\/?$/, '')}${imageUrl}`;
+    return `${apiAssetOrigin()}${imageUrl}`;
   },
 
-  accountEntitlements() {
-    return request<AccountEntitlementsResponse>('/account/entitlements');
+  accountEntitlements(signal?: AbortSignal) {
+    return request<AccountEntitlementsResponse>('/account/entitlements', { signal });
+  },
+  pointOperations() {
+    return request<{rows:PointOperation[]}>('/account/points/operations?limit=20');
   },
   pointOperations() {
     return request<{rows:PointOperation[]}>('/account/points/operations?limit=20');

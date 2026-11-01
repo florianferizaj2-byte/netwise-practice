@@ -650,17 +650,13 @@ function loadCatalog() {
   for (const question of questions.values())
     for (const certificateId of question.certificates) {
       assertQuestionTaxonomy(questionForCertificate(question, certificateId), taxonomyByCertificate.get(certificateId));
-      if (certificateId === "veterinary-practitioner") {
-        const issue = veterinaryContextIssue(question);
-        if (issue) throw new Error(`兽医题目不可独立作答：${question.id} / ${issue}`);
-      }
-    }
   const withdrawals = manifests.flatMap((manifest) => manifest.withdrawals);
   for (const entry of withdrawals) {
     if (questions.has(entry.questionId))
       throw new Error(`已下架题目不能同时出现在正式题库：${entry.questionId}`);
   }
   return {
+    withdrawals,
     manifests,
     certificates: manifests.map((entry) => ({
       ...entry.certificate,
@@ -672,6 +668,8 @@ function loadCatalog() {
     withdrawals,
   };
 }
+
+export { guideSchema };
 
 const catalog = loadCatalog();
 

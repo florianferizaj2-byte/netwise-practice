@@ -2,7 +2,11 @@
 
 **把每一道题，学成你的底气。**
 
-考匠是面向职业认证与升学考试的练习平台，把章节刷题、错题复习、模拟考试、分步 AI 精讲和学习计划放在同一个学习空间。网页、Android 与苹果手机网页版共用账号和学习数据；用户生成的题目经校验、审核和确认投稿后，可供同证书的其他用户练习。
+**分支预发行 Android v1.0.12（构建 45）** · [APK](public/downloads/kaojiang-v1.0.12.apk) · [SHA-256](public/downloads/kaojiang-v1.0.12.apk.sha256) · [更新说明](docs/release-v1.0.12.md)。安装兼容重打包，沿用正式证书；保留 v1.0.11 的 AI 学习中心与逐题组卷。安装、推送和部署分别验证。
+
+**最近 GitHub Release：Android v1.0.3** · [下载 APK](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v1.0.3/kaojiang-v1.0.3.apk) · [GitHub 发布页](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v1.0.3) · [SHA-256](public/downloads/kaojiang-v1.0.3.apk.sha256) · [更新与部署说明](docs/release-v1.0.3.md)。正式签名，包含负积分结算与即时答题。
+
+进入 App 先显示可热更新的公告；所有账号需完善名字和头像，网页管理员用户列表显示头像和昵称；定位教程新增“求助作者”微信二维码。[版本说明](docs/release-v0.4.6.md) · [服务器更新步骤](docs/DEPLOY-v0.4.6.md)。本机检查通过，手机实际权限与覆盖安装仍待验收。
 
 [访问考匠](https://aceexam.top/) · [多端入口](https://aceexam.top/#downloads) · [本次大更新](docs/releases/2026-10-19-web-admin.md) · [管理员工作台](docs/admin-console.md) · [部署与升级](#部署与升级) · [历史更新](CHANGELOG.md)
 
@@ -31,7 +35,15 @@
 
 首批网络工程师内容包含 **39 节完整互动课、1 节明确标识的 VLAN 部分示范**；其余 107 节保留原有精讲，不宣称已经全部互动化。普通课程播放和确定性判分不调用模型，老师答疑按现有账号额度调用网关。详见 [Web 学习系统说明](docs/web-next-release.md)。
 
-### 可扩展的管理工作台
+- 软考中级网络工程师：1,182 道题
+- HCIA-Datacom V2.0：1,020 道题
+- HCIP-Datacom-Core Technology（H12-821）：900 道题
+- HCIP-Datacom-Advanced Routing & Switching Technology（H12-831）：900 道题
+- 全国计算机等级考试二级 MS Office：519 道题（496 道客观题 + 23 道操作题）
+- 全国计算机等级考试二级 C 语言程序设计：560 道题
+- 全国执业兽医资格考试（兽医全科类）：已导入 7,888 道可发布题目，另有 2,577 道待核对
+- 四川省专升本计算机基础：1,364 道题（100 道原创练习 + 1,020 道章节强化练习 + 138 道考点补强 + 45 道现有题库共用题 + 61 道西昌学院 2011 年真题），包含 7 个考纲模块及知识点、考点与练习建议；见[模块说明](docs/sichuan-upgrading-computer.md)
+- 共 14,288 道内置唯一题目，共用题只入库一次，题库启动时自动校验并同步到 SQLite
 
 管理员从 `/#admin/overview` 进入独立后台，原 `#admin` 和教学管理入口继续兼容。后台沿用现有管理员权限，管理证书筛选不会改变管理员自己的学习目标。
 

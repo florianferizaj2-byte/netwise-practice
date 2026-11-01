@@ -161,10 +161,10 @@ export class ResourceCache {
     this.listeners.get(key)?.forEach((listener) => listener(invalidated));
   }
 
-  invalidate(prefixes: string[]) {
+  invalidate(prefixes: string[], matches:(key:string)=>boolean=()=>true) {
     const keys = new Set([...this.entries.keys(), ...this.flights.keys()]);
     for (const key of keys) {
-      if (!prefixes.some((prefix) => key.startsWith(prefix))) continue;
+      if (!prefixes.some((prefix) => key.startsWith(prefix))||!matches(key)) continue;
       this.flights.get(key)?.controller.abort();
       this.flights.delete(key);
       const previous = this.snapshot(key);

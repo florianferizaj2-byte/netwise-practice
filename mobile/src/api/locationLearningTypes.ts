@@ -13,6 +13,9 @@ export type LocationLearningSession = {
   day: string;
   state: "active" | "completed" | "abandoned" | "invalidated";
   point: LocationLearningPoint;
+  pointIds?: string[];
+  questions?: Question[];
+  reviews?: { questionId: string; correct: boolean; selected: string[]; answer: string[]; analysis: string }[];
   completedCount: number;
   answeredCount: number;
   correctCount: number;
@@ -36,6 +39,8 @@ export type LocationLearningStatus = {
   day: string;
   certificateId: string;
   unlocked: boolean;
+  exemption?: string | null;
+  remainingCount?: number;
   validUntil: string;
   policy: {
     count: number;

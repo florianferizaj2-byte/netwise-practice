@@ -70,7 +70,7 @@ function updateCacheContext(url, method, data) {
     responseCache.invalidate(["/study/catalog", "/study/practice-sessions"]);
   if (url.startsWith("/admin/study")) responseCache.invalidate(["/study/"]);
   if (url.startsWith("/account/"))
-    responseCache.invalidate(["/study/", "/dashboard"]);
+    responseCache.invalidate(["/study/", "/dashboard", "/account/entitlements", "/account/points", "/account/check-in"]);
   if (url.startsWith("/knowledge-favorites"))
     responseCache.invalidate(["/knowledge-favorites"]);
   if (/^\/(attempts|wrong|exams|ai|questions|admin)\b/.test(url))
@@ -140,10 +140,10 @@ async function request(url, body, method, options, generation) {
   try {
     const res = await fetch("/api" + url, {
       method: method || (body ? "POST" : "GET"),
-      headers: { "Content-Type": "application/json",
+      headers: { "Content-Type": options.raw ? "application/octet-stream" : "application/json",
         ...(method!=='GET'?{'X-AI-Request-Id':options.requestId||pointRequestId()}:{}),
       },
-      ...(body ? { body: JSON.stringify(body) } : {}),
+      ...(body ? { body: options.raw ? body : JSON.stringify(body) } : {}),
       signal: controller.signal,
     });
     if(res.headers.get('X-AI-Points-Changed')==='1')pointsChanged();

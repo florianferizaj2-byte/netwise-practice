@@ -1,6 +1,6 @@
 {
   "name": "aceexam",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,8 +10,9 @@
     "build:mobile-web": "node scripts/build-mobile-web.mjs",
     "start": "node server/index.js --production",
     "test": "node --test test/*.test.js",
-    "test:e2e": "node test/e2e.js",
-    "test:ai-learning": "node --test test/ai-learning.test.js test/ai-learning-api.test.js",
+    "test:e2e": "node scripts/verify-web-blue.mjs",
+    "test:e2e:voice-library": "node scripts/verify-voice-library.mjs",
+    "test:ai-learning": "node --test test/ai-learning.test.js test/ai-learning-api.test.js test/ai-learning-recovery.test.js",
     "test:e2e:ai-learning": "node test/ai-learning.e2e.js",
     "test:e2e:mobile": "node test/mobile-web.e2e.js",
     "test:e2e:mobile-study": "node test/mobile-study.e2e.js",
@@ -30,9 +31,12 @@
     "bank:hcia:supplement": "node scripts/build-hcia-v2-supplement.js",
     "bank:hcia:import-h12-811": "node scripts/import-hcia-h12-811-bank.js",
     "bank:report": "node scripts/report-bank-coverage.js",
-    "bank:knowledge": "node scripts/report-knowledge-coverage.js",
-    "bank:knowledge:check": "node scripts/report-knowledge-coverage.js --check",
-    "auth:mail:check": "node scripts/check-account-mail.mjs"
+    "auth:mail:check": "node scripts/check-account-mail.mjs",
+    "points:migrate": "node scripts/migrate-ai-points.mjs",
+    "verify:backend": "node scripts/verify-mobile-backend.mjs",
+    "deploy:check": "node scripts/check-v1-deployment.mjs",
+    "verify:apk": "python scripts/verify-android-apk.py",
+    "verify:web-blue": "node scripts/verify-web-blue.mjs"
   },
   "dependencies": {
     "dotenv": "^17.2.0",
@@ -42,7 +46,8 @@
     "qrcode.react": "^4.2.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "zod": "^4.1.0"
+    "zod": "^4.1.0",
+    "nodemailer": "^10.1.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.55.0",

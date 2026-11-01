@@ -18,9 +18,11 @@
     "difficulty": "easy",
     "tags": [
       "VLAN 原理与配置",
+      "接口类型与报文处理",
       "Access 接口"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "接口类型与报文处理"
   },
   {
     "id": "hcia-v2-extra-04-trunk-allow",
@@ -41,9 +43,11 @@
     "difficulty": "medium",
     "tags": [
       "VLAN 原理与配置",
+      "接口类型与报文处理",
       "Trunk 接口"
     ],
-    "stage": "直接计算"
+    "stage": "直接计算",
+    "knowledgeSection": "接口类型与报文处理"
   },
   {
     "id": "hcia-v2-extra-04-inter-vlan",
@@ -60,13 +64,16 @@
     ],
     "analysis": "VLAN 之间在二层隔离，跨 VLAN 通信必须经过三层转发。 本题考查“VLAN 原理”，因此应选择“三层路由或 VLANIF 网关”。",
     "chapter": "VLAN 原理与配置",
-    "knowledgePoint": "VLAN 原理",
+    "knowledgePoint": "VLAN 范围与保留",
     "difficulty": "easy",
     "tags": [
       "VLAN 原理与配置",
+      "VLAN 基础与标签",
+      "VLAN 范围与保留",
       "VLAN 原理"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "VLAN 基础与标签"
   },
   {
     "id": "hcia-v2-extra-04-tag-position",
@@ -83,13 +90,16 @@
     ],
     "analysis": "802.1Q 标签位于源 MAC 与原类型/长度字段之间。 本题考查“802.1Q”，因此应选择“源 MAC 地址之后、类型字段之前”。",
     "chapter": "VLAN 原理与配置",
-    "knowledgePoint": "802.1Q",
+    "knowledgePoint": "802.1Q 标签格式",
     "difficulty": "hard",
     "tags": [
       "VLAN 原理与配置",
+      "VLAN 基础与标签",
+      "802.1Q 标签格式",
       "802.1Q"
     ],
-    "stage": "反向推理"
+    "stage": "反向推理",
+    "knowledgeSection": "VLAN 基础与标签"
   },
   {
     "id": "hcia-v2-extra-04-hybrid-untagged",
@@ -110,9 +120,11 @@
     "difficulty": "medium",
     "tags": [
       "VLAN 原理与配置",
+      "接口类型与报文处理",
       "Hybrid 接口"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "接口类型与报文处理"
   },
   {
     "id": "hcia-v2-extra-04-vlan-broadcast",
@@ -129,12 +141,15 @@
     ],
     "analysis": "每个 VLAN 是独立广播域，二层广播不会跨越 VLAN 边界。 本题考查“VLAN 原理”，因此应选择“不会被二层转发到另一个 VLAN”。",
     "chapter": "VLAN 原理与配置",
-    "knowledgePoint": "VLAN 原理",
+    "knowledgePoint": "VLAN 范围与保留",
     "difficulty": "easy",
     "tags": [
       "VLAN 原理与配置",
+      "VLAN 基础与标签",
+      "VLAN 范围与保留",
       "VLAN 原理"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "VLAN 基础与标签"
   }
 ]

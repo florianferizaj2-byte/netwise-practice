@@ -1,0 +1,63 @@
+# HCIP-Datacom-Advanced 网络运维信息收集工具 / 网络割接基本概念
+hcip831-6-1-2|s|easy|需要一次性收集设备多项运行信息用于故障定位，最合适的命令是？|display diagnostic-information|display version|display clock|display users|A|display diagnostic-information 汇总版本、配置、接口、路由与协议状态，适合一次性导出完整现场。其余命令只覆盖单项信息。|运维;信息收集
+hcip831-6-1-2|s|easy|查看设备软件版本与硬件概要应使用哪条命令？|display version|display clock|display users|display arp|A|display version 显示 VRP 版本、补丁、设备型号、内存与运行时长，是确认版本与硬件配置的首选命令。|运维;版本
+hcip831-6-1-2|s|easy|查看当前生效的完整配置应使用哪条命令？|display current-configuration|display saved-configuration|display startup|display version|A|current-configuration 显示当前运行配置；saved-configuration 显示下次启动加载的配置，两者可能不一致。|运维;配置
+hcip831-6-1-2|s|medium|查看接口简要状态与收发速率应使用哪条命令？|display interface brief|display ip routing-table|display mac-address|display arp|A|interface brief 以列表形式显示各接口的物理状态、协议状态、带宽利用率与错包统计，适合快速巡检。|运维;接口
+hcip831-6-1-2|s|medium|排查路由缺失时应优先查看哪张表？|display ip routing-table|display mac-address|display arp|display session|A|路由表反映当前生效的路由，若目的网段不在表中，需进一步检查协议邻居与路由引入配置。|运维;路由表
+hcip831-6-1-2|s|medium|查看 OSPF 邻居状态与区域信息应使用哪条命令？|display ospf peer|display ospf interface|display bgp peer|display isis peer|A|ospf peer 显示邻居的 Router ID、状态、区域与接口；ospf interface 显示接口参数；isis peer 用于 IS-IS。|运维;OSPF
+hcip831-6-1-2|s|medium|查看 BGP 邻居状态应使用哪条命令？|display bgp peer|display ospf peer|display isis peer|display ldp session|A|bgp peer 显示邻居地址、AS 号、状态与收发路由数；状态为 Established 才表示会话正常。|运维;BGP
+hcip831-6-1-2|s|medium|查看 MAC 地址表应使用哪条命令？|display mac-address|display arp|display ip routing-table|display fib|A|mac-address 显示 MAC、VLAN、端口与表项类型，用于定位终端接入位置与 MAC 漂移问题。|运维;MAC 表
+hcip831-6-1-2|s|medium|查看 ARP 表项应使用哪条命令？|display arp|display mac-address|display fib|display session|A|arp 显示 IP 与 MAC 的映射及老化时间，用于排查地址冲突、网关不可达与二层解析失败。|运维;ARP
+hcip831-6-1-2|s|medium|查看设备日志缓冲区应使用哪条命令？|display logbuffer|display trapbuffer|display alarm|display clock|A|logbuffer 保存系统日志，trapbuffer 保存告警，alarm 显示当前活动告警，三者用途不同。|运维;日志
+hcip831-6-1-2|s|medium|查看 CPU 占用率应使用哪条命令？|display cpu-usage|display memory-usage|display device|display fan|A|cpu-usage 显示整体与各任务的 CPU 占用，可据此判断是否存在协议震荡或攻击流量。|运维;CPU
+hcip831-6-1-2|s|medium|查看内存占用应使用哪条命令？|display memory-usage|display cpu-usage|display power|display elabel|A|memory-usage 显示总内存、已用与剩余，持续增长不回落时需怀疑内存泄漏。|运维;内存
+hcip831-6-1-2|s|medium|查看单板与模块的在位状态应使用哪条命令？|display device|display version|display elabel|display alarm|A|device 显示各槽位单板类型、状态与数量，用于确认硬件是否被正确识别。|运维;硬件
+hcip831-6-1-2|s|medium|查看电源模块状态应使用哪条命令？|display power|display fan|display temperature|display device|A|power 显示电源的在位、工作模式与输出电压；fan 与 temperature 分别对应风扇与温度。|运维;电源
+hcip831-6-1-2|s|medium|查看光模块收发功率应使用哪条命令？|display transceiver|display interface|display device|display elabel|A|transceiver 显示光模块型号、波长、收发光功率与告警阈值，是判断链路质量的关键命令。|运维;光模块
+hcip831-6-1-2|s|medium|查看设备电子标签应使用哪条命令？|display elabel|display device|display version|display alarm|A|elabel 显示设备与单板的序列号、生产日期与厂商信息，常用于资产核对与保修查询。|运维;资产
+hcip831-6-1-2|s|medium|查看当前活动告警应使用哪条命令？|display alarm active|display logbuffer|display trapbuffer|display clock|A|alarm active 列出尚未恢复的告警及其级别，便于快速掌握设备当前异常。|运维;告警
+hcip831-6-1-2|s|medium|逐跳定位转发中断应使用什么工具？|tracert|ping|telnet|ftp|A|tracert 逐跳显示路径与时延，可定位中断发生在哪一跳；ping 只能判断端到端是否可达。|运维;tracert
+hcip831-6-1-2|s|medium|需要抓取指定接口的报文时使用什么功能？|端口镜像或报文捕获|display arp|display mac-address|display version|A|通过端口镜像把流量复制到分析端口，或使用设备内置的报文捕获功能，再用 Wireshark 分析协议交互。|运维;抓包
+hcip831-6-1-2|s|medium|查看会话表应使用哪条命令？|display session table|display arp|display mac-address|display fib|A|会话表显示五元组、状态与老化时间，用于确认防火墙是否放行、会话是否建立。|运维;会话
+hcip831-6-1-2|s|medium|查看设备健康度检查结果应使用哪条命令？|display health|display version|display clock|display users|A|health 命令汇总 CPU、内存、温度、风扇、电源等关键指标并给出健康状态，适合快速体检。|运维;健康检查
+hcip831-6-1-2|s|medium|查看已安装补丁应使用哪条命令？|display patch-information|display version|display device|display elabel|A|patch-information 显示已加载的补丁包与状态，确认漏洞修复情况时必须核对。|运维;补丁
+hcip831-6-1-2|s|medium|查看下次启动加载的配置文件应使用哪条命令？|display startup|display current-configuration|display saved-configuration|display version|A|startup 显示下次启动使用的配置与系统文件，saved-configuration 显示已保存的配置内容，两者配合可判断配置是否丢失。|运维;启动配置
+hcip831-6-1-2|m|medium|下列哪些命令可以用于收集接口层信息？|display interface brief|display interface|display transceiver|display bgp peer|ABC|前三条命令分别提供接口概览、详细统计与光模块信息。bgp peer 属于路由协议信息。|运维;接口;多选
+hcip831-6-1-2|m|medium|故障现场应优先保存哪些信息？|配置与日志|接口与协议状态|CPU 与内存占用|设备采购发票|ABC|现场信息用于还原故障，配置、状态与资源占用是核心。采购发票与故障定位无关。|运维;现场;多选
+hcip831-6-1-2|t|easy|display current-configuration 与 display saved-configuration 显示的内容总是相同。|||||B|当前配置是内存中运行的配置，已保存配置是下次启动加载的配置。修改后未保存时两者不一致，这正是配置丢失类故障的根源。|判断;配置
+hcip831-6-1-2|t|medium|display diagnostic-information 会一次性收集多项运行信息。|||||A|该命令汇总版本、配置、接口、路由、协议与日志等多项信息，适合故障时一次性导出完整现场。|判断;信息收集
+hcip831-6-1-2|s|medium|设备重启后配置丢失，最可能的原因是？|修改后未执行保存|设备没有 license|接口未启用|VLAN 未划分|A|配置修改后只在内存中生效，未执行 save 时重启会加载旧的已保存配置，表现为配置"回退"。|运维;配置丢失
+hcip831-6-1-2|s|hard|排查时发现接口 Up 但协议 Down，最应查看哪类信息？|接口详细统计与协议配置|设备的采购记录|机房的温度|人员排班|A|物理 Up 而协议 Down 说明链路层协商或协议配置有问题，应查看接口详细状态、双工协商与协议参数。|运维;接口
+hcip831-6-1-2|s|medium|收集信息时同时保存时间戳的意义是？|便于与其他设备日志对齐|提高采集速度|减少存储空间|增加信息量|A|多设备信息需要按时间对齐才能还原事件顺序，缺少时间戳的现场数据价值大幅降低。|运维;时间戳
+hcip831-8-1-1|s|easy|网络运维中，网络割接的定义是什么？|对在线网络的设备或业务进行有计划变更|对设备进行日常巡检|对故障进行紧急修复|对配置进行备份|A|割接是在保证或尽量减小业务影响的前提下，对在线网络的设备、链路或业务进行的有计划变更。|割接;定义
+hcip831-8-1-1|s|medium|割接方案中"回退预案"的作用是？|割接失败时恢复原状态|缩短割接时间|替代配置备份|提升设备性能|A|回退预案明确失败判据、回退步骤与责任人，使割接未达预期时能尽快恢复到变更前的可用状态。|割接;回退
+hcip831-8-1-1|s|medium|割接窗口通常选择在什么时间？|业务低峰期|业务高峰期|任意时间|设备保修期内|A|低峰期业务量小，即使出现问题影响面也最小，同时便于安排足够的人力与时间。|割接;窗口
+hcip831-8-1-1|s|medium|割接前必须完成的关键动作是？|备份配置并确认回退可行|直接下发新配置|断开所有链路|重启全部设备|A|备份配置是回退的前提，同时要确认回退步骤可执行、回退时间可接受，否则不应开始割接。|割接;准备
+hcip831-8-1-1|s|medium|割接影响范围评估的核心是？|受影响的业务与用户范围|设备的采购价格|机柜的尺寸|人员的数量|A|影响范围决定通知对象、割接窗口与回退策略，评估不清会导致业务方毫无准备地遭遇中断。|割接;影响评估
+hcip831-8-1-1|s|medium|割接失败判据应在什么时候确定？|割接开始之前|割接失败之后|割接完成之后|项目验收之后|A|失败判据必须在割接前与业务方共同确认，例如业务验证项不通过、时延超过阈值，否则现场容易争论是否该回退。|割接;失败判据
+hcip831-8-1-1|s|medium|割接通知应包含的核心内容是？|时间、影响范围与联系人|设备型号|机柜位置|采购渠道|A|通知要让业务方明确"什么时候、影响什么、出问题找谁"，缺少任一项都会造成沟通混乱。|割接;通知
+hcip831-8-1-1|s|medium|分批割接的主要好处是？|缩小单次失败的影响面|缩短总工期|减少设备数量|提高带宽|A|把大批量变更拆成多批，单批失败只影响部分业务，便于定位与回退，是降低风险的有效手段。|割接;分批
+hcip831-8-1-1|s|medium|割接与日常变更的关系是？|割接是影响较大的计划性变更|两者完全相同|割接不需要审批|变更不需要方案|A|割接属于影响范围大、风险高的计划性变更，通常需要更严格的方案评审、审批与回退准备。|割接;变更
+hcip831-8-1-1|s|medium|割接前的演练主要验证什么？|步骤可行性与耗时|设备采购流程|人员排班|机房温度|A|在测试环境按方案完整走一遍，可以发现命令错误、依赖缺失与耗时估算偏差，避免在生产环境踩坑。|割接;演练
+hcip831-8-1-1|s|medium|割接后验证应重点确认什么？|业务连通性与关键指标|设备的采购价格|机柜的颜色|人员的考勤|A|验证要覆盖原业务路径、关键时延与丢包指标，以及冗余切换是否正常，确认无隐性退化。|割接;验证
+hcip831-8-1-1|s|medium|割接方案中明确责任人的作用是？|避免操作与决策无人负责|提高设备性能|减少 VLAN|增加带宽|A|每步操作、验证与回退决策都应有明确责任人，避免现场推诿或多人同时操作造成冲突。|割接;责任
+hcip831-8-1-1|s|medium|割接 checklist 的主要价值是？|防止步骤遗漏|替代方案文档|减少设备数量|提高带宽|A|把步骤、验证项与回退点列成清单逐项打勾，可以显著降低高压环境下的遗漏风险。|割接;checklist
+hcip831-8-1-1|s|medium|业务割接与设备割接的主要区别是？|前者调整业务路径，后者更换或升级设备|两者完全相同|前者不需要窗口|后者不需要回退|A|业务割接侧重业务迁移与路径调整，设备割接侧重硬件替换或软件升级，两者的风险点与验证项不同。|割接;分类
+hcip831-8-1-1|s|hard|割接过程中发现业务异常，正确做法是？|按预案判断是否回退|继续执行剩余步骤|忽略异常继续观察|立即删除全部配置|A|应先按失败判据判断异常是否属于可接受范围，超出则立即执行回退，避免影响扩大。继续执行会放大风险。|割接;处置
+hcip831-8-1-1|s|medium|割接方案评审的主要目的是？|发现方案缺陷与遗漏|提高设备性能|减少设备数量|增加带宽|A|由未参与编写的同事评审，容易发现步骤缺失、依赖未考虑、回退不可行等问题。|割接;评审
+hcip831-8-1-1|s|medium|割接记录应包含的关键内容是？|实际步骤、耗时与异常|设备采购价格|机柜尺寸|人员排班|A|记录实际执行与计划的差异、遇到的问题与处理方式，可作为下次同类割接的参考。|割接;记录
+hcip831-8-1-1|m|medium|割接方案通常包含下列哪些内容？|割接目标与范围|详细步骤与时间点|回退预案与失败判据|设备采购合同|ABC|割接方案聚焦目标、步骤、验证与回退。采购合同属于商务文档，不属于技术方案。|割接;方案;多选
+hcip831-8-1-1|m|medium|降低割接风险的手段包括？|分批实施|提前演练|准备回退预案|取消业务验证|ABC|分批、演练与回退预案都能降低风险。取消业务验证会使问题无法及时发现。|割接;风险;多选
+hcip831-8-1-1|t|medium|割接可以在业务高峰期进行，只要方案足够详细。|||||B|高峰期业务量大，一旦异常影响面最大且回退时间受限，割接窗口应选在业务低峰期。|判断;窗口
+hcip831-8-1-1|t|easy|回退预案应在割接开始前准备好。|||||A|回退预案必须与割接方案同时准备并在开始前确认可执行，否则失败时无法快速恢复。|判断;回退
+hcip831-8-1-1|s|medium|割接前通知业务方的主要目的是？|让其提前安排并配合验证|提高设备性能|减少设备数量|增加带宽|A|业务方需要提前安排人员配合验证与应急，缺少配合会导致验证不充分、问题发现滞后。|割接;沟通
+hcip831-8-1-1|s|medium|割接窗口时间估算应包含什么？|操作时间与验证、回退余量|仅操作时间|仅验证时间|仅回退时间|A|窗口必须覆盖操作、验证与可能的回退，只估算操作时间会导致超时后被迫在压力下决策。|割接;时间估算
+hcip831-8-1-1|s|medium|割接后出现性能下降但业务可用，应如何处理？|记录并安排后续优化|立即回退|忽略不管|重启设备|A|业务可用且未触发失败判据时不必回退，但需记录指标变化并在后续窗口优化，避免问题累积。|割接;优化
+hcip831-8-1-1|s|medium|割接文档中"依赖关系"指的是？|前置条件与关联系统|设备的采购渠道|机柜的尺寸|人员的学历|A|例如割接依赖上游电路开通、DNS 记录变更或防火墙策略调整，遗漏依赖会导致割接中途卡住。|割接;依赖
+hcip831-8-1-1|s|medium|割接后配置未保存会导致什么？|下次重启回到旧配置|设备立即重启|接口自动关闭|路由自动清空|A|割接后的配置若未保存，设备重启会加载旧配置，业务会回退到割接前状态，属于常见的人为失误。|割接;保存
+hcip831-8-1-1|s|hard|割接中需要临时中断业务时，最合适的做法是？|在窗口内按步骤短时中断并快速验证|随时中断不通知|中断后不再验证|中断并等待用户报障|A|计划性中断应在约定窗口内执行，控制中断时长并立即验证，避免长时间不可用。|割接;中断
+hcip831-8-1-1|s|medium|割接完成后应更新哪些文档？|拓扑、配置基线与资产台账|仅采购合同|仅人员名单|仅机房平面图|A|割接改变了网络状态，拓扑、配置基线与台账必须同步更新，否则后续排障会依据错误信息。|割接;文档更新
+hcip831-8-1-1|m|medium|割接前的准备工作包括？|方案编写与评审|配置备份|影响范围通知|直接在生产环境试错|ABC|方案、备份与通知都是必要准备。在生产环境直接试错风险极高，应在测试环境验证。|割接;准备;多选
+hcip831-8-1-1|t|medium|割接失败判据可以等割接完成后再与业务方商量。|||||B|失败判据必须在割接前确认，否则现场容易因标准不一致而延误回退时机，扩大业务影响。|判断;失败判据
+hcip831-8-1-1|s|medium|割接方案中时间点的作用是？|明确各步骤的开始与截止时间|提高设备性能|减少设备数量|增加带宽|A|明确时间点可以控制整体节奏，及时发现某步骤超时并决定是否回退，避免窗口被耗尽。|割接;时间点
+hcip831-8-1-1|s|medium|割接涉及多厂商设备时，最需要提前确认什么？|接口与协议兼容性|设备的颜色|机柜的高度|人员的学历|A|多厂商互通容易出现协议实现差异，应提前在测试环境验证互联、认证与特性兼容性。|割接;兼容性

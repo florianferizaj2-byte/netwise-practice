@@ -1,0 +1,711 @@
+[
+  {
+    "id": "hcia-v3-20-001",
+    "type": "single_choice",
+    "question": "JSON 数据结构中最外层的两种基本形态是什么？",
+    "options": {
+      "A": "注释与标签",
+      "B": "缩进与空行",
+      "C": "对象（大括号）与数组（方括号）",
+      "D": "字符串与数字"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "JSON 只有对象与数组两种复合结构，对象是键值对集合，数组是有序值列表，其余为基本类型。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "数据格式",
+    "knowledgePoint": "JSON 格式",
+    "difficulty": "medium",
+    "tags": [
+      "网络编程自动化",
+      "数据格式",
+      "JSON 格式"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-20-002",
+    "type": "single_choice",
+    "question": "下列哪一项是合法的 JSON 片段？",
+    "options": {
+      "A": "{hostname:SW1,vlans:10-20}",
+      "B": "{hostname:'SW1',vlans:[10,20]}",
+      "C": "{\"hostname\":\"SW1\",\"vlans\":[10,20]}",
+      "D": "{hostname=\"SW1\";vlans=(10,20)}"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "JSON 要求键必须用双引号、字符串必须用双引号、不能使用单引号，也不能有注释与结尾逗号。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "数据格式",
+    "knowledgePoint": "JSON 格式",
+    "difficulty": "medium",
+    "tags": [
+      "网络编程自动化",
+      "数据格式",
+      "JSON 格式"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-20-003",
+    "type": "true_false",
+    "question": "JSON 标准允许在对象末尾添加注释以便说明字段含义。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "标准 JSON 不支持注释，加注释会导致解析失败。需要注释时通常改用 YAML 或把说明写入独立字段。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "数据格式",
+    "knowledgePoint": "JSON 格式",
+    "difficulty": "medium",
+    "tags": [
+      "网络编程自动化",
+      "数据格式",
+      "JSON 格式"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-20-004",
+    "type": "single_choice",
+    "question": "YAML 相比 JSON 的主要优势是什么？",
+    "options": {
+      "A": "解析速度一定更快",
+      "B": "不支持嵌套结构",
+      "C": "不需要缩进",
+      "D": "支持注释、可读性更好，适合人工编辑配置文件"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "YAML 用缩进表达层级、支持注释，便于手写维护；代价是对缩进极其敏感，空格与制表符混用会直接报错。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "数据格式",
+    "knowledgePoint": "YAML 格式",
+    "difficulty": "medium",
+    "tags": [
+      "网络编程自动化",
+      "数据格式",
+      "YAML 格式"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-20-005",
+    "type": "single_choice",
+    "question": "YAML 中用短横线（-）开头的行表示什么？",
+    "options": {
+      "A": "一个文档结束标记",
+      "B": "一个注释行",
+      "C": "数组中的一个元素",
+      "D": "一个键值对"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "短横线表示列表项，缩进相同的多个短横线构成数组；注释使用井号而不是短横线。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "数据格式",
+    "knowledgePoint": "YAML 格式",
+    "difficulty": "medium",
+    "tags": [
+      "网络编程自动化",
+      "数据格式",
+      "YAML 格式"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-20-006",
+    "type": "true_false",
+    "question": "YAML 对缩进敏感，混用制表符与空格可能导致解析失败。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "YAML 规范禁止用制表符做缩进，编辑器里看似对齐的两行可能层级不同，是配置出错的高频原因。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "数据格式",
+    "knowledgePoint": "YAML 格式",
+    "difficulty": "medium",
+    "tags": [
+      "网络编程自动化",
+      "数据格式",
+      "YAML 格式"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-20-007",
+    "type": "single_choice",
+    "question": "XML 用标签描述数据，其结构本质上是什么？",
+    "options": {
+      "A": "线性表结构",
+      "B": "树形结构，有且只有一个根元素",
+      "C": "二进制字节流",
+      "D": "键值对的无序集合"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "XML 文档必须有唯一根元素，子元素层层嵌套构成树，这一特性与 NETCONF 的数据模型天然契合。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "数据格式",
+    "knowledgePoint": "XML 与数据模型",
+    "difficulty": "medium",
+    "tags": [
+      "网络编程自动化",
+      "数据格式",
+      "XML 与数据模型"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-20-008",
+    "type": "single_choice",
+    "question": "NETCONF 协议默认使用的传输层端口是多少？",
+    "options": {
+      "A": "830",
+      "B": "22",
+      "C": "443",
+      "D": "161"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "NETCONF 以 SSH 为承载，默认端口 830；也可通过 22 端口复用 SSH 连接，具体取决于实现配置。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "自动化接口与协议",
+    "knowledgePoint": "NETCONF 协议",
+    "difficulty": "medium",
+    "tags": [
+      "网络编程自动化",
+      "自动化接口与协议",
+      "NETCONF 协议"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-20-009",
+    "type": "single_choice",
+    "question": "NETCONF 中用于获取设备配置的操作是？",
+    "options": {
+      "A": "get-config",
+      "B": "edit-config",
+      "C": "lock",
+      "D": "close-session"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "get-config 读取配置，edit-config 下发配置，lock 加锁防止并发修改，close-session 结束会话。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "自动化接口与协议",
+    "knowledgePoint": "NETCONF 协议",
+    "difficulty": "medium",
+    "tags": [
+      "网络编程自动化",
+      "自动化接口与协议",
+      "NETCONF 协议"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-20-010",
+    "type": "true_false",
+    "question": "NETCONF 使用 XML 编码报文，并通过能力集（capability）协商双方支持的功能。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "会话建立后双方交换 hello 报文与能力集，只有共同支持的能力才能使用，这是协议可扩展的基础。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "自动化接口与协议",
+    "knowledgePoint": "NETCONF 协议",
+    "difficulty": "hard",
+    "tags": [
+      "网络编程自动化",
+      "自动化接口与协议",
+      "NETCONF 协议"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-20-011",
+    "type": "single_choice",
+    "question": "YANG 模型的作用是什么？",
+    "options": {
+      "A": "定义被管设备的数据结构，供 NETCONF 等协议使用",
+      "B": "描述物理接口的光功率",
+      "C": "替代 SNMP 的传输层",
+      "D": "为设备提供加密算法"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "YANG 是数据建模语言，规定配置与状态数据的层级、类型与约束，使自动化工具能按统一模型操作设备。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "自动化接口与协议",
+    "knowledgePoint": "YANG 模型",
+    "difficulty": "medium",
+    "tags": [
+      "网络编程自动化",
+      "自动化接口与协议",
+      "YANG 模型"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-20-012",
+    "type": "single_choice",
+    "question": "RESTful API 中用于创建资源的 HTTP 方法是？",
+    "options": {
+      "A": "POST",
+      "B": "HEAD",
+      "C": "GET",
+      "D": "DELETE"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "GET 查询、POST 创建、PUT 更新、DELETE 删除。用错方法会导致资源状态与预期不符。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "自动化接口与协议",
+    "knowledgePoint": "RESTful API",
+    "difficulty": "medium",
+    "tags": [
+      "网络编程自动化",
+      "自动化接口与协议",
+      "RESTful API"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-20-013",
+    "type": "single_choice",
+    "question": "RESTful API 通常使用哪种数据格式交换内容？",
+    "options": {
+      "A": "CSV",
+      "B": "二进制私有格式",
+      "C": "JSON",
+      "D": "纯文本表格"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "REST 接口普遍使用 JSON，因为结构清晰、跨语言支持好；部分场景也支持 XML，但 JSON 更为常见。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "自动化接口与协议",
+    "knowledgePoint": "RESTful API",
+    "difficulty": "easy",
+    "tags": [
+      "网络编程自动化",
+      "自动化接口与协议",
+      "RESTful API"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-20-014",
+    "type": "true_false",
+    "question": "REST 架构是无状态的，每次请求都应携带完成处理所需的全部信息。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "无状态让服务端可以水平扩展，但也意味着认证令牌等信息需随每次请求携带，通常放在请求头中。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "自动化接口与协议",
+    "knowledgePoint": "RESTful API",
+    "difficulty": "medium",
+    "tags": [
+      "网络编程自动化",
+      "自动化接口与协议",
+      "RESTful API"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-20-015",
+    "type": "single_choice",
+    "question": "Python 中用缩进表示代码块，这带来什么约束？",
+    "options": {
+      "A": "缩进只能使用制表符",
+      "B": "同一代码块的缩进必须一致，否则报语法错误",
+      "C": "缩进可以任意混用空格与制表符",
+      "D": "缩进不影响程序运行"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Python 以缩进划分作用域，同一块内缩进不一致会抛出 IndentationError，这是初学者最常见的报错。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "Python 编程基础",
+    "knowledgePoint": "Python 基础语法",
+    "difficulty": "easy",
+    "tags": [
+      "网络编程自动化",
+      "Python 编程基础",
+      "Python 基础语法"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-20-016",
+    "type": "single_choice",
+    "question": "Python 中字典（dict）的典型特征是什么？",
+    "options": {
+      "A": "元素按插入顺序无法修改",
+      "B": "以键值对存储，通过键快速取值",
+      "C": "只能存储数字",
+      "D": "必须定长且不能扩容"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "字典用键索引值，适合表示结构化配置；列表用下标索引，两者在自动化脚本中用途不同。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "Python 编程基础",
+    "knowledgePoint": "Python 基础语法",
+    "difficulty": "easy",
+    "tags": [
+      "网络编程自动化",
+      "Python 编程基础",
+      "Python 基础语法"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-20-017",
+    "type": "true_false",
+    "question": "Python 的列表（list）可以存放不同类型的数据，并且长度可变。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "列表是动态数组，支持追加、删除与混合类型，因此常用来收集设备列表或批量处理结果。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "Python 编程基础",
+    "knowledgePoint": "Python 基础语法",
+    "difficulty": "easy",
+    "tags": [
+      "网络编程自动化",
+      "Python 编程基础",
+      "Python 基础语法"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-20-018",
+    "type": "single_choice",
+    "question": "Python 中用于正则表达式匹配的标准库是？",
+    "options": {
+      "A": "sys",
+      "B": "os",
+      "C": "json",
+      "D": "re"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "re 提供 match、search、findall 等接口；os 处理文件系统，json 处理序列化，sys 与解释器交互。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "Python 编程基础",
+    "knowledgePoint": "字符串与正则处理",
+    "difficulty": "medium",
+    "tags": [
+      "网络编程自动化",
+      "Python 编程基础",
+      "字符串与正则处理"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-20-019",
+    "type": "single_choice",
+    "question": "从设备回显中提取所有 IP 地址，最适合使用什么方法？",
+    "options": {
+      "A": "用随机抽样",
+      "B": "用排序后取第一个",
+      "C": "用正则表达式匹配点分十进制格式",
+      "D": "用字符串长度判断"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正则能按模式精确提取，例如匹配四段数字的结构，比手工切分更稳健，适合解析 display 命令输出。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "Python 编程基础",
+    "knowledgePoint": "字符串与正则处理",
+    "difficulty": "medium",
+    "tags": [
+      "网络编程自动化",
+      "Python 编程基础",
+      "字符串与正则处理"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-20-020",
+    "type": "true_false",
+    "question": "re.search 与 re.match 的区别在于 match 只从字符串起始位置尝试匹配。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "match 锚定开头，search 扫描全文，findall 返回所有匹配。选错函数会导致明明存在的模式匹配不到。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "Python 编程基础",
+    "knowledgePoint": "字符串与正则处理",
+    "difficulty": "hard",
+    "tags": [
+      "网络编程自动化",
+      "Python 编程基础",
+      "字符串与正则处理"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-20-021",
+    "type": "single_choice",
+    "question": "netmiko 库的主要用途是什么？",
+    "options": {
+      "A": "管理数据库表结构",
+      "B": "编译 Python 源码",
+      "C": "绘制网络拓扑图",
+      "D": "通过 SSH 连接网络设备并执行命令"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "netmiko 封装了 SSH 交互细节，适合登录设备执行 display 与配置命令；paramiko 是更底层的 SSH 实现库。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "Python 编程基础",
+    "knowledgePoint": "常用网络自动化库",
+    "difficulty": "medium",
+    "tags": [
+      "网络编程自动化",
+      "Python 编程基础",
+      "常用网络自动化库"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-20-022",
+    "type": "single_choice",
+    "question": "使用 requests 库调用 RESTful API 时，通常使用哪个方法发起查询？",
+    "options": {
+      "A": "requests.read",
+      "B": "requests.fetch",
+      "C": "requests.push",
+      "D": "requests.get"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "requests 提供 get、post、put、delete 对应 HTTP 方法，查询用 get，创建用 post。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "Python 编程基础",
+    "knowledgePoint": "常用网络自动化库",
+    "difficulty": "medium",
+    "tags": [
+      "网络编程自动化",
+      "Python 编程基础",
+      "常用网络自动化库"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-20-023",
+    "type": "true_false",
+    "question": "paramiko 是纯 Python 实现的 SSH 协议库，可直接用于建立到设备的加密会话。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "paramiko 提供 SSH 客户端与服务端实现，netmiko 在其之上做了面向网络设备的封装，二者层次不同。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "Python 编程基础",
+    "knowledgePoint": "常用网络自动化库",
+    "difficulty": "medium",
+    "tags": [
+      "网络编程自动化",
+      "Python 编程基础",
+      "常用网络自动化库"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-20-024",
+    "type": "single_choice",
+    "question": "网络自动化中把“配置模板 + 变量”组合生成配置，主要解决什么问题？",
+    "options": {
+      "A": "提升链路物理带宽",
+      "B": "替代路由协议计算路径",
+      "C": "为设备提供供电",
+      "D": "避免手工重复输入导致的配置偏差"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "模板化让同一套逻辑适配多台设备，变量替换即可生成差异化配置，是消除人为错误的核心手段。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "Python 编程基础",
+    "knowledgePoint": "Python 基础语法",
+    "difficulty": "medium",
+    "tags": [
+      "网络编程自动化",
+      "Python 编程基础",
+      "Python 基础语法"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-20-025",
+    "type": "single_choice",
+    "question": "下列哪种组合属于典型的网络自动化技术栈？",
+    "options": {
+      "A": "VLAN + Trunk + Access",
+      "B": "STP + VRRP + NAT",
+      "C": "Python + NETCONF/YANG + 控制器",
+      "D": "OSPF + BGP + RIP"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "自动化栈由编程语言、标准协议与编排平台组成；其余选项都是传统转发与协议技术，不属于自动化体系。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "自动化接口与协议",
+    "knowledgePoint": "NETCONF 协议",
+    "difficulty": "medium",
+    "tags": [
+      "网络编程自动化",
+      "自动化接口与协议",
+      "NETCONF 协议"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-20-026",
+    "type": "single_choice",
+    "question": "JSON 与 YAML 之间通常可以怎样转换？",
+    "options": {
+      "A": "必须通过数据库中转",
+      "B": "YAML 可以转 JSON，反向不可行",
+      "C": "两者完全不兼容，无法转换",
+      "D": "两者都表达同一类数据结构，可通过库相互序列化与反序列化"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "两者都能表达对象与数组，Python 的 json 与 yaml 库可互相转换；差异主要在语法与注释支持。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "数据格式",
+    "knowledgePoint": "YAML 格式",
+    "difficulty": "medium",
+    "tags": [
+      "网络编程自动化",
+      "数据格式",
+      "YAML 格式"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-20-027",
+    "type": "true_false",
+    "question": "自动化脚本批量下发配置前，应先备份设备现有配置以便回滚。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "批量操作的影响面远大于单台手工操作，缺少备份会让一次脚本错误演变为大面积故障，备份是强制步骤。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "自动化接口与协议",
+    "knowledgePoint": "RESTful API",
+    "difficulty": "easy",
+    "tags": [
+      "网络编程自动化",
+      "自动化接口与协议",
+      "RESTful API"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-20-028",
+    "type": "single_choice",
+    "question": "NETCONF 的 edit-config 操作中，merge 与 replace 的区别是什么？",
+    "options": {
+      "A": "merge 只能删除配置",
+      "B": "两者完全等价",
+      "C": "replace 只修改状态数据",
+      "D": "merge 合并到现有配置，replace 替换目标配置"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "merge 在原有配置上叠加，replace 用新内容整体替换目标节点，选错会导致多余配置残留或误删。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "自动化接口与协议",
+    "knowledgePoint": "NETCONF 协议",
+    "difficulty": "hard",
+    "tags": [
+      "网络编程自动化",
+      "自动化接口与协议",
+      "NETCONF 协议"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-20-029",
+    "type": "single_choice",
+    "question": "网络自动化带来的主要运维收益是什么？",
+    "options": {
+      "A": "完全不需要网络工程师",
+      "B": "自动提升设备硬件性能",
+      "C": "配置一致、可重复、可审计，降低人为失误",
+      "D": "可以取消所有安全策略"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "自动化的价值在于一致性与可追溯，把重复劳动交给脚本，人转向设计与异常处理，而非取代工程判断。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "自动化接口与协议",
+    "knowledgePoint": "YANG 模型",
+    "difficulty": "easy",
+    "tags": [
+      "网络编程自动化",
+      "自动化接口与协议",
+      "YANG 模型"
+    ],
+    "stage": "综合应用"
+  }
+]

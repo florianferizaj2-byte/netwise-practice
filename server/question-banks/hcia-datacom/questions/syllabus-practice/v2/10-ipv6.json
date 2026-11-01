@@ -1,0 +1,790 @@
+[
+  {
+    "id": "hcia-v3-10-001",
+    "type": "single_choice",
+    "question": "IPv6 地址的长度是多少位？",
+    "options": {
+      "A": "32 位",
+      "B": "64 位",
+      "C": "48 位",
+      "D": "128 位"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "IPv6 为 128 位，通常写成 8 组、每组 4 位十六进制数，用冒号分隔；IPv4 只有 32 位。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 地址格式",
+    "knowledgePoint": "IPv6 地址结构与简写",
+    "difficulty": "easy",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 地址格式",
+      "IPv6 地址结构与简写"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-10-002",
+    "type": "single_choice",
+    "question": "IPv6 地址 2001:0DB8:0000:0000:0000:0000:0000:0001 的最简写法是？",
+    "options": {
+      "A": "2001:DB8::0:1",
+      "B": "2001:0DB8::0001",
+      "C": "2001:DB8:0:0:0:0:0:1",
+      "D": "2001:DB8::1"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "每组前导零可省略，连续的全零组可用一次双冒号替代。双冒号在一串地址中只能出现一次，否则无法确定省略了几组。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 地址格式",
+    "knowledgePoint": "IPv6 地址结构与简写",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 地址格式",
+      "IPv6 地址结构与简写"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v3-10-003",
+    "type": "true_false",
+    "question": "一个 IPv6 地址中可以出现两次双冒号，用于省略两段不同的连续零。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "双冒号只能出现一次。出现两次时无法判断每组零的个数，地址将产生歧义，因此属于非法写法。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 地址格式",
+    "knowledgePoint": "IPv6 地址结构与简写",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 地址格式",
+      "IPv6 地址结构与简写"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-10-004",
+    "type": "single_choice",
+    "question": "IPv6 地址 FE80::1 属于哪一类地址？",
+    "options": {
+      "A": "组播地址",
+      "B": "任播地址",
+      "C": "链路本地单播地址",
+      "D": "全球单播地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "FE80::/10 为链路本地地址，只在单条链路上有效，用于邻居发现与路由协议，不能跨路由器转发。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 地址格式",
+    "knowledgePoint": "IPv6 地址类型",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 地址格式",
+      "IPv6 地址类型"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-10-005",
+    "type": "single_choice",
+    "question": "IPv6 组播地址的固定前缀是什么？",
+    "options": {
+      "A": "FE80::/10",
+      "B": "FF00::/8",
+      "C": "2000::/3",
+      "D": "FC00::/7"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "FF00::/8 为组播，2000::/3 为全球单播，FE80::/10 为链路本地，FC00::/7 为唯一本地地址。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 地址格式",
+    "knowledgePoint": "IPv6 地址类型",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 地址格式",
+      "IPv6 地址类型"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-10-006",
+    "type": "multiple_choice",
+    "question": "IPv6 地址体系包含下列哪些类型？",
+    "options": {
+      "A": "单播地址",
+      "B": "组播地址",
+      "C": "任播地址",
+      "D": "广播地址"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "IPv6 取消了广播，用组播替代广播的功能。因此“IPv6 有广播地址”是典型错误认知。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 地址格式",
+    "knowledgePoint": "IPv6 地址类型",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 地址格式",
+      "IPv6 地址类型"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-10-007",
+    "type": "single_choice",
+    "question": "IPv6 任播（Anycast）地址的特点是什么？",
+    "options": {
+      "A": "多个接口共享同一地址，报文送给其中最近的一个",
+      "B": "只在本地链路内有效",
+      "C": "报文会复制发送给所有成员",
+      "D": "必须手工配置且不能用于路由"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "任播让多台设备配置同一地址，路由按最短路径把报文交给最近的实例，常用于 DNS 根与 CDN 就近服务。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 地址格式",
+    "knowledgePoint": "IPv6 地址类型",
+    "difficulty": "hard",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 地址格式",
+      "IPv6 地址类型"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-10-008",
+    "type": "single_choice",
+    "question": "接口 MAC 地址为 00E0-FCEF-0FEC，其对应的 EUI-64 接口标识中插入的固定值是什么？",
+    "options": {
+      "A": "0000",
+      "B": "FF00",
+      "C": "FFFE",
+      "D": "FFFF"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "EUI-64 把 MAC 从中间劈开插入 FFFE，再把第一个字节的第七位取反，从而得到 64 位接口标识。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 地址格式",
+    "knowledgePoint": "EUI-64 接口标识",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 地址格式",
+      "EUI-64 接口标识"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-10-009",
+    "type": "single_choice",
+    "question": "EUI-64 生成接口标识时，对 MAC 地址第一个字节做了什么处理？",
+    "options": {
+      "A": "把最高位置 1",
+      "B": "整体左移一位",
+      "C": "保持不变",
+      "D": "把第七位取反"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "第七位是 U/L 位，取反后表示该地址为全球唯一。忘记取反是计算 EUI-64 时最常见的错误。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 地址格式",
+    "knowledgePoint": "EUI-64 接口标识",
+    "difficulty": "hard",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 地址格式",
+      "EUI-64 接口标识"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v3-10-010",
+    "type": "true_false",
+    "question": "MAC 地址 00E0-FCEF-0FEC 转换后，EUI-64 接口标识的第一个字节为 02E0。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "00 的二进制为 00000000，第七位取反后变为 00000010 即 02，因此首字节由 00 变为 02，得到 02E0。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 地址格式",
+    "knowledgePoint": "EUI-64 接口标识",
+    "difficulty": "hard",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 地址格式",
+      "EUI-64 接口标识"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v3-10-011",
+    "type": "single_choice",
+    "question": "IPv6 中 NDP 协议的作用类似于 IPv4 中的哪个协议？",
+    "options": {
+      "A": "ICMP",
+      "B": "OSPF",
+      "C": "DHCP",
+      "D": "ARP"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "NDP 用 NS 与 NA 完成地址解析，功能上取代 ARP，同时还承担路由器发现、重复地址检测等职责。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 协议机制",
+    "knowledgePoint": "NDP 邻居发现",
+    "difficulty": "easy",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 协议机制",
+      "NDP 邻居发现"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-10-012",
+    "type": "single_choice",
+    "question": "NDP 中用于请求邻居链路层地址的报文是？",
+    "options": {
+      "A": "RS 报文",
+      "B": "NA 报文",
+      "C": "RA 报文",
+      "D": "NS 报文"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "NS（Neighbor Solicitation）请求，NA（Neighbor Advertisement）应答；RS 与 RA 用于路由器与前缀发现。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 协议机制",
+    "knowledgePoint": "NDP 邻居发现",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 协议机制",
+      "NDP 邻居发现"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-10-013",
+    "type": "true_false",
+    "question": "IPv6 的地址解析请求使用组播而不是广播，因此不会打扰链路上的所有主机。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "NS 报文发往被请求节点组播地址，只有目标主机的网卡会处理，避免了 IPv4 中 ARP 广播的全员打扰。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 协议机制",
+    "knowledgePoint": "NDP 邻居发现",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 协议机制",
+      "NDP 邻居发现"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-10-014",
+    "type": "single_choice",
+    "question": "IPv6 中 RS 与 RA 报文的作用是什么？",
+    "options": {
+      "A": "主机请求邻居的 MAC 地址",
+      "B": "主机请求路由器信息，路由器通告前缀与默认网关",
+      "C": "检测 IP 地址是否冲突",
+      "D": "路由器之间交换路由表"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RS 由主机发出请求，RA 由路由器周期性或应答式发送，携带前缀、默认网关、MTU 等信息，是 SLAAC 的基础。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 协议机制",
+    "knowledgePoint": "RS 与 RA 报文",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 协议机制",
+      "RS 与 RA 报文"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-10-015",
+    "type": "single_choice",
+    "question": "RA 报文中哪个标志位表示主机应使用无状态自动配置生成地址？",
+    "options": {
+      "A": "O 标志位",
+      "B": "M 标志位",
+      "C": "A 标志位",
+      "D": "L 标志位"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "A 位为自治标志，置 1 表示可用前缀做 SLAAC；M 位表示使用 DHCPv6 获取地址，O 位表示用 DHCPv6 获取其他参数。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 协议机制",
+    "knowledgePoint": "RS 与 RA 报文",
+    "difficulty": "hard",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 协议机制",
+      "RS 与 RA 报文"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-10-016",
+    "type": "true_false",
+    "question": "RA 报文的目的地址可以是 FF02::1 这个全部节点组播地址。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "路由器周期性发送 RA 时使用 FF02::1 让所有节点收到；应答 RS 时则单播回送给请求主机。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 协议机制",
+    "knowledgePoint": "RS 与 RA 报文",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 协议机制",
+      "RS 与 RA 报文"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-10-017",
+    "type": "single_choice",
+    "question": "IPv6 无状态地址自动配置（SLAAC）生成地址的方式是什么？",
+    "options": {
+      "A": "RA 通告的前缀加上接口标识",
+      "B": "由 DHCPv6 服务器统一分配",
+      "C": "由 DNS 服务器解析得到",
+      "D": "由网关随机生成后下发"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "SLAAC 把 RA 中的 64 位前缀与本地生成的 64 位接口标识拼接成完整地址，无需服务器记录租约。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 协议机制",
+    "knowledgePoint": "无状态地址自动配置",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 协议机制",
+      "无状态地址自动配置"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-10-018",
+    "type": "single_choice",
+    "question": "SLAAC 相比 DHCPv6 的主要优势是什么？",
+    "options": {
+      "A": "必须依赖中心服务器才能工作",
+      "B": "可以精确统计每台主机的地址使用",
+      "C": "支持更细粒度的地址策略",
+      "D": "无需服务器维护地址租约，部署简单"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "SLAAC 靠 RA 前缀自动成地址，无状态、易部署；代价是无法集中管理租约，审计能力弱于 DHCPv6。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 协议机制",
+    "knowledgePoint": "无状态地址自动配置",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 协议机制",
+      "无状态地址自动配置"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-10-019",
+    "type": "true_false",
+    "question": "主机通过 SLAAC 生成地址前，会用 NDP 做重复地址检测，确认该地址未被占用。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "DAD 通过发送 NS 并等待回应判断地址是否冲突，这是 IPv6 地址配置流程中的必要环节。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 协议机制",
+    "knowledgePoint": "无状态地址自动配置",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 协议机制",
+      "无状态地址自动配置"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-10-020",
+    "type": "single_choice",
+    "question": "配置 IPv6 静态默认路由的命令是？",
+    "options": {
+      "A": "ip route-static 0.0.0.0 0 下一跳",
+      "B": "ipv6 route-static :: 0 下一跳",
+      "C": "route ipv6 ::/0 下一跳",
+      "D": "ipv6 default-route 下一跳"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IPv6 默认路由写作 ::/0，命令为 ipv6 route-static :: 0 下一跳；注意与 IPv4 的 0.0.0.0 0 区分。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 路由与过渡",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 路由与过渡",
+      "IPv6 静态路由"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-10-021",
+    "type": "single_choice",
+    "question": "IPv6 静态路由的下一跳通常指定为哪种地址？",
+    "options": {
+      "A": "对端的链路本地地址或全球单播地址",
+      "B": "本端的 MAC 地址",
+      "C": "回环地址 127.0.0.1",
+      "D": "组播地址 FF02::1"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "链路本地地址在点到点链路上唯一确定邻居，配置更稳定；也可使用对端全球单播地址，但需保证可达。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 路由与过渡",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 路由与过渡",
+      "IPv6 静态路由"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-10-022",
+    "type": "true_false",
+    "question": "IPv6 静态路由可以只指定出接口而不指定下一跳，在点到点链路上这是常用做法。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "点到点链路只有唯一邻居，只指出接口即可确定转发方向；广播型接口则必须给下一跳以避免大量地址解析。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 路由与过渡",
+    "knowledgePoint": "IPv6 静态路由",
+    "difficulty": "hard",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 路由与过渡",
+      "IPv6 静态路由"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-10-023",
+    "type": "single_choice",
+    "question": "OSPFv3 与 OSPFv2 的主要区别是什么？",
+    "options": {
+      "A": "OSPFv3 取消了区域概念",
+      "B": "OSPFv3 使用 TCP 承载",
+      "C": "OSPFv3 基于链路运行，使用链路本地地址建立邻居",
+      "D": "OSPFv3 不再使用 SPF 算法"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "OSPFv3 的 network 命令被接口下的 ospfv3 配置取代，邻居靠链路本地地址建立，协议号仍为 89。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 路由与过渡",
+    "knowledgePoint": "OSPFv3 与路由协议",
+    "difficulty": "hard",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 路由与过渡",
+      "OSPFv3 与路由协议"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-10-024",
+    "type": "single_choice",
+    "question": "IPv6 中运行 RIPng 使用的 UDP 端口是多少？",
+    "options": {
+      "A": "179",
+      "B": "89",
+      "C": "520",
+      "D": "521"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "RIPng 使用 UDP 521 与 FF02::9 组播，RIPv2 使用 UDP 520 与 224.0.0.9，两者需区分记忆。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 路由与过渡",
+    "knowledgePoint": "OSPFv3 与路由协议",
+    "difficulty": "hard",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 路由与过渡",
+      "OSPFv3 与路由协议"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-10-025",
+    "type": "multiple_choice",
+    "question": "IPv4 向 IPv6 过渡的常见技术有哪些？",
+    "options": {
+      "A": "双栈",
+      "B": "隧道",
+      "C": "NAT64 与协议转换",
+      "D": "VLAN 隔离"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "双栈让设备同时运行两套协议，隧道把 IPv6 封装在 IPv4 中穿越，NAT64 实现异构网络互访。VLAN 与过渡无关。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 路由与过渡",
+    "knowledgePoint": "IPv6 过渡技术",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 路由与过渡",
+      "IPv6 过渡技术"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-10-026",
+    "type": "single_choice",
+    "question": "双栈技术的核心思想是什么？",
+    "options": {
+      "A": "把 IPv6 报文全部转换为 IPv4",
+      "B": "设备同时启用 IPv4 与 IPv6 协议栈，按目的地址选择协议",
+      "C": "只运行 IPv6 并关闭 IPv4",
+      "D": "用 VLAN 隔离两套协议"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "双栈是最平滑的过渡方式，设备同时具备两种地址与协议栈，访问谁就用谁的协议，无需额外转换设备。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 路由与过渡",
+    "knowledgePoint": "IPv6 过渡技术",
+    "difficulty": "easy",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 路由与过渡",
+      "IPv6 过渡技术"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-10-027",
+    "type": "true_false",
+    "question": "NAT64 可以把 IPv6 报文转换为 IPv4 报文，从而实现纯 IPv6 主机访问 IPv4 服务。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "NAT64 配合 DNS64 完成地址与协议转换，是 IPv6 孤岛访问 IPv4 资源的常用方案。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 路由与过渡",
+    "knowledgePoint": "IPv6 过渡技术",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 路由与过渡",
+      "IPv6 过渡技术"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-10-028",
+    "type": "single_choice",
+    "question": "IPv6 接口自动生成的链路本地地址前缀是什么？",
+    "options": {
+      "A": "FE80::/64",
+      "B": "FF02::/64",
+      "C": "2001::/64",
+      "D": "FC00::/64"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "接口启用 IPv6 后会自动生成 FE80::/64 前缀的链路本地地址，同链路的邻居正是靠它互相通信。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 地址格式",
+    "knowledgePoint": "IPv6 地址类型",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 地址格式",
+      "IPv6 地址类型"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-10-029",
+    "type": "single_choice",
+    "question": "IPv6 中 FF02::1 表示什么地址？",
+    "options": {
+      "A": "链路上所有路由器的组播地址",
+      "B": "所有 OSPF 路由器的组播地址",
+      "C": "链路上所有节点的组播地址",
+      "D": "全球单播地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "FF02::1 为 All-Nodes，FF02::2 为 All-Routers，FF02::5 与 FF02::6 分别对应 OSPFv3 的 DR 与 DRother 组播。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 地址格式",
+    "knowledgePoint": "IPv6 地址类型",
+    "difficulty": "hard",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 地址格式",
+      "IPv6 地址类型"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-10-030",
+    "type": "single_choice",
+    "question": "IPv6 报文头部相比 IPv4 头部的主要变化是什么？",
+    "options": {
+      "A": "固定 40 字节，取消了头部校验和与可选字段",
+      "B": "长度增加到 60 字节并保留校验和",
+      "C": "取消了源地址字段",
+      "D": "增加了分片字段作为必选项"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IPv6 基本头部固定 40 字节，去掉校验和（交由上下层处理），可选功能改为扩展头部，简化了路由器处理。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 地址格式",
+    "knowledgePoint": "IPv6 地址结构与简写",
+    "difficulty": "hard",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 地址格式",
+      "IPv6 地址结构与简写"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-10-031",
+    "type": "true_false",
+    "question": "IPv6 中路由器不对报文进行分片，分片只能由源主机完成。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IPv6 取消了中间路由器分片，源端通过路径 MTU 发现确定合适报文大小，超出则回送 ICMPv6 差错。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 协议机制",
+    "knowledgePoint": "NDP 邻居发现",
+    "difficulty": "hard",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 协议机制",
+      "NDP 邻居发现"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-10-032",
+    "type": "single_choice",
+    "question": "主机启用 IPv6 后，通常会有几个地址同时生效？",
+    "options": {
+      "A": "必须手工配置两个地址",
+      "B": "至少一个链路本地地址，通常还有一个全球单播地址",
+      "C": "只能有一个地址，不能并存",
+      "D": "只有一个全球单播地址"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IPv6 允许一个接口配置多个地址，链路本地地址必选且自动生成，全球单播地址可通过 SLAAC 或手工获得。",
+    "chapter": "IPv6 地址与配置",
+    "knowledgeSection": "IPv6 地址格式",
+    "knowledgePoint": "IPv6 地址类型",
+    "difficulty": "medium",
+    "tags": [
+      "IPv6 地址与配置",
+      "IPv6 地址格式",
+      "IPv6 地址类型"
+    ],
+    "stage": "综合应用"
+  }
+]

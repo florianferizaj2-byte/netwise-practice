@@ -45,11 +45,13 @@ import { registerMobileAdminRoutes } from "./mobile-admin.js";
 import { registerAdminConsole, draftQuestion } from "./admin-console/index.js";
 import { createMobileProfileService, registerMobileProfile } from "./mobile-profile.js";
 import { resolveMobileRelease } from "./mobile-release.js";
+import { mobileBackendContract } from "./mobile-contract.js";
 import { runPointsRequest, withPointsTask, currentPointsTask, commitPointsResult } from "./ai-points/runtime.js";
-import { ensureAccountPoints, pointsCheckInView, claimPointsCheckIn, pointsPlans } from "./ai-points/account.js";
+import { ensureAccountPoints, pointsCheckInView, claimPointsCheckIn, accountPointsPlans } from "./ai-points/account.js";
 import { registerPointsRoutes } from "./ai-points/routes.js";
 import { registerAiServiceRoutes } from "./ai-service-routes.js";
 import { registerLocationLearning } from "./location-learning.js";
+import { registerVoicePackRoutes } from "./voice-packs.js";
 import { createAiLearning } from "./ai-learning.js";
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
@@ -225,10 +227,17 @@ export async function createApp(options = {}) {
   };
   const requestToken = (req) => bearerToken(req) || cookie(req, "netwise_session");
   const isMobileClient = (req) => req.get("x-client")?.toLowerCase() === "mobile";
+  // APK version policy is not an authorization boundary. Keep the existing,
+  // separately deployed browser app usable without telling it to install an APK.
+  const isBrowserApp = (req) => {
+    const platform = req.get('x-app-platform')?.toLowerCase();
+    return platform === 'web' || (platform !== 'android' &&
+      req.get('sec-fetch-dest') !== undefined && /^Mozilla\//i.test(req.get('user-agent') || ''));
+  };
   const isTokenClient = (req) =>
     ["mobile", "miniprogram"].includes(req.get("x-client")?.toLowerCase());
   app.use("/api", (req, res, next) => {
-    if (req.path === "/mobile/version" || !isMobileClient(req)) return next();
+    if (req.path === "/mobile/version" || !isMobileClient(req) || isBrowserApp(req)) return next();
     const release = mobileRelease();
     const currentVersion = String(req.headers["x-app-version"] || "0.0.0");
     if (compareVersions(currentVersion, release.minimumVersion) < 0) {
@@ -406,7 +415,8 @@ export async function createApp(options = {}) {
     sessionCookie(req, res, null, false);
     return { loggedOut: true };
   });
-  route("get", "/api/mobile/version", (req) => {
+  route("get", "/api/mobile/version", (req,res) => {
+    res.set("Cache-Control","no-store, max-age=0");
     const release = mobileRelease();
     const currentVersion = String(req.query.version || "0.0.0");
     return {
@@ -415,8 +425,12 @@ export async function createApp(options = {}) {
       minimumVersion: release.minimumVersion,
       downloadUrl: release.downloadUrl,
       releaseNotes: release.releaseNotes,
-      updateAvailable: compareVersions(currentVersion, release.latestVersion) < 0,
-      forceUpdate: compareVersions(currentVersion, release.minimumVersion) < 0,
+      backend: mobileBackendContract(app),
+      apkBytes: release.apkBytes,
+      apkMd5: release.apkMd5,
+      apkSha256: release.apkSha256,
+      updateAvailable: !isBrowserApp(req) && compareVersions(currentVersion, release.latestVersion) < 0,
+      forceUpdate: !isBrowserApp(req) && compareVersions(currentVersion, release.minimumVersion) < 0,
     };
   });
   registerGuestTrialRoutes({ route, store, provider, runAI: (work, key) => {
@@ -755,7 +769,7 @@ export async function createApp(options = {}) {
     ...store.accountEntitlement(userId),
     billingMode: "points",
     points: ensureAccountPoints(store,userId),
-    pointsPlans,
+    pointsPlans:accountPointsPlans(store),
     aiServiceAvailable: aiServiceAvailable(),
     aiServiceMode: "author",
     canManageAiService: authorAiOwner(store)?.id === userId,
@@ -781,9 +795,12 @@ export async function createApp(options = {}) {
   route("get", "/api/account/entitlements", (req) =>
     accountEntitlementView(requestUserId(req)),
   );
+  route("get", "/api/account/check-in", req => accountEntitlementView(requestUserId(req)));
   route("post", "/api/account/check-in", (req) => {
+    z.object({}).strict().parse(req.body || {});
     const userId = requestUserId(req);
     const result = claimPointsCheckIn(store,userId,day());
+    if(result.claimed)req.res.set("X-AI-Points-Changed","1");
     return {
       claimed: result.claimed,
       ...accountEntitlementView(userId),
@@ -894,6 +911,7 @@ export async function createApp(options = {}) {
   };
   registerMembershipRoutes({ route, store, requireAdmin, requestUserId, accountEntitlementView });
   registerPointsRoutes({ route,store,requireAdmin,requestUserId });
+  app.locals.voicePacks = registerVoicePackRoutes({ app,route,store,requireAdmin,requestUserId });
   registerAiServiceRoutes({ route,store,provider,requireAdmin,ai });
   registerMobileAdminRoutes({ route, store, requireAdmin, certificates, announcements: mobileAnnouncements, profiles: mobileProfiles });
   const adminConsole = registerAdminConsole({ route, store, requireAdmin, provider, ai });
@@ -1455,17 +1473,23 @@ export async function createApp(options = {}) {
       userId,
       certificateId: req.user?.certificateId,
       attemptedIds: store.attemptedQuestionIds(userId),
+      correctIds: store.correctQuestionIds(userId),
+      answeredIds: new Set(store.allA(userId).filter(a=>a.selected?.length).map(a=>a.questionId)),
       favoriteIds: store.favoriteQuestionIds(userId),
     };
   };
   const publicQuestionForUser = (question, state) => ({
     ...publicQuestion(questionForCertificate(question, state.certificateId)),
     attempted: state.attemptedIds.has(question.id),
+    answered: state.answeredIds.has(question.id),
+    mastered: state.correctIds.has(question.id),
     favorite: state.favoriteIds.has(question.id),
   });
   const privateQuestionForUser = (question, state) => ({
     ...privateQuestion(questionForCertificate(question, state.certificateId)),
     attempted: state.attemptedIds.has(question.id),
+    answered: state.answeredIds.has(question.id),
+    mastered: state.correctIds.has(question.id),
     favorite: state.favoriteIds.has(question.id),
   });
   const learningPlans = createLearningPlans(store);
@@ -1495,12 +1519,15 @@ export async function createApp(options = {}) {
   });
   route("get", "/api/questions", (req) => {
     const state = questionState(req);
+    const instant=req.query.feedback==='instant';
+    if(instant)requestUserId(req);
+    const project=instant?privateQuestionForUser:publicQuestionForUser;
     // Installed mobile clients used this endpoint for ordinary practice before
     // they supplied bankOnly. Explicit AI source requests retain their scope.
     const bankOnly = req.query.bankOnly === "1" ||
       (isMobileClient(req) && !req.query.source && req.query.bankOnly !== "0");
     const certificateId = requireCertificate(req);
-    const questions = (bankOnly
+    let questions = (bankOnly
       ? bankQuestionsForCertificate(certificateId)
       : certificateQuestions(certificateId, state.userId)).filter(
       (q) =>
@@ -1521,10 +1548,17 @@ export async function createApp(options = {}) {
     const offset = Number.isInteger(parsedOffset) ? Math.max(0, parsedOffset) : 0;
     const random = req.query.random === "1" || req.query.random === "true";
 
+    if (req.query.excludeCorrect === "1") {
+      const userId = requestUserId(req);
+      const before = req.query.before ? z.iso.datetime().parse(req.query.before) : undefined;
+      const mastered = store.correctQuestionIds(userId, before);
+      questions = questions.filter(q => !mastered.has(q.id));
+    }
+    if (req.query.review === "answered") { requestUserId(req); questions=questions.filter(q=>state.answeredIds.has(q.id)); }
     if (req.query.page === "1") {
       const seed = random ? z.string().min(1).max(64).parse(req.query.seed) : undefined;
-      const page = questionPage(questions, { offset, limit: limit ?? 40, seed });
-      return { ...page, items: page.items.map((question) => publicQuestionForUser(question, state)) };
+      const page = questionPage(questions, { offset, limit: limit ?? 40, seed, anchor: typeof req.query.anchor === "string" ? req.query.anchor : undefined });
+      return { ...page, practiceStateVersion: 1, items: page.items.map((question) => project(question, state)) };
     }
 
     if (random) {
@@ -1537,12 +1571,12 @@ export async function createApp(options = {}) {
       }
       return questions
         .slice(0, limit === undefined ? undefined : limit)
-        .map((question) => publicQuestionForUser(question, state));
+        .map((question) => project(question, state));
     }
 
     return questions
       .slice(offset, limit === undefined ? undefined : offset + limit)
-      .map((question) => publicQuestionForUser(question, state));
+      .map((question) => project(question, state));
   });
   route("get", "/api/practice/catalog", (req) => {
     const certificateId = requireCertificate(req);
@@ -1882,7 +1916,7 @@ export async function createApp(options = {}) {
         (question) =>
           !certificateId || hasCertificateQuestion(question, certificateId),
       )
-      .map((question) => publicQuestionForUser(question, state));
+      .map((question) => (req.query.feedback==='instant'?privateQuestionForUser:publicQuestionForUser)(question, state));
   });
   route("delete", "/api/wrong/:id", (req) => {
     const question = requireQ(req.params.id, req);

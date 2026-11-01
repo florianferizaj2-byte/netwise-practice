@@ -1,0 +1,421 @@
+[
+  {
+    "id": "hcia-v3-17-001",
+    "type": "single_choice",
+    "question": "在 Fit AP 组网中，AC 与 AP 的职责分工是什么？",
+    "options": {
+      "A": "两者职责完全相同",
+      "B": "AC 负责集中管理与配置下发，AP 负责射频收发",
+      "C": "AP 负责全部管理功能，AC 只做转发",
+      "D": "AC 只负责供电，不参与配置"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "AC 承担配置、认证、漫游等控制功能，AP 专注无线信号收发，这种分工让大规模部署可以集中运维。",
+    "chapter": "WLAN 组网架构",
+    "knowledgeSection": "设备角色与形态",
+    "knowledgePoint": "AP 与 AC 的角色分工",
+    "difficulty": "easy",
+    "tags": [
+      "WLAN 组网架构",
+      "设备角色与形态",
+      "AP 与 AC 的角色分工"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-17-002",
+    "type": "single_choice",
+    "question": "Fat AP 与 Fit AP 的核心区别是什么？",
+    "options": {
+      "A": "Fat AP 无法发射无线信号",
+      "B": "Fit AP 不需要供电",
+      "C": "Fat AP 自身完成全部无线功能，Fit AP 依赖 AC 集中管理",
+      "D": "Fat AP 只能工作在 5G 频段"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Fat AP 独立工作、适合小型场景但难以集中管理；Fit AP 功能简单、配置由 AC 下发，适合中大型网络。",
+    "chapter": "WLAN 组网架构",
+    "knowledgeSection": "设备角色与形态",
+    "knowledgePoint": "Fat AP 与 Fit AP",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 组网架构",
+      "设备角色与形态",
+      "Fat AP 与 Fit AP"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-17-003",
+    "type": "true_false",
+    "question": "Fit AP 在未成功注册到 AC 之前，无法正常提供无线接入服务。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Fit AP 的配置与业务参数由 AC 下发，未上线时没有可用配置，因此表现为不发射信号或无法关联。",
+    "chapter": "WLAN 组网架构",
+    "knowledgeSection": "设备角色与形态",
+    "knowledgePoint": "Fat AP 与 Fit AP",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 组网架构",
+      "设备角色与形态",
+      "Fat AP 与 Fit AP"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-17-004",
+    "type": "single_choice",
+    "question": "AC 旁挂组网的特点是什么？",
+    "options": {
+      "A": "AC 不串接在业务路径上，通过汇聚或核心设备接入",
+      "B": "AC 只能部署在接入层",
+      "C": "旁挂模式下 AP 无法上线",
+      "D": "AC 必须串接在所有 AP 的上行链路中"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "旁挂组网对现有网络改动小、扩容灵活，是现网最常见的部署方式；直连组网则把 AC 置于业务路径中。",
+    "chapter": "WLAN 组网架构",
+    "knowledgeSection": "设备角色与形态",
+    "knowledgePoint": "AC 组网方式",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 组网架构",
+      "设备角色与形态",
+      "AC 组网方式"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-17-005",
+    "type": "single_choice",
+    "question": "CAPWAP 协议使用的两个 UDP 端口分别是？",
+    "options": {
+      "A": "5246 控制、5247 数据",
+      "B": "1812 控制、1813 数据",
+      "C": "4789 控制、4790 数据",
+      "D": "5247 控制、5246 数据"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "CAPWAP 控制通道用 UDP 5246，数据通道用 UDP 5247。隧道转发模式下用户数据封装在 5247 中。",
+    "chapter": "WLAN 组网架构",
+    "knowledgeSection": "CAPWAP 协议",
+    "knowledgePoint": "CAPWAP 隧道与端口",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 组网架构",
+      "CAPWAP 协议",
+      "CAPWAP 隧道与端口"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-17-006",
+    "type": "single_choice",
+    "question": "CAPWAP 控制通道的主要作用是什么？",
+    "options": {
+      "A": "承载 AP 与 AC 之间的配置下发与状态上报",
+      "B": "为 AP 提供 PoE 供电",
+      "C": "承载用户的业务数据",
+      "D": "同步 AP 的系统时钟"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "控制通道负责管理报文，数据通道负责用户业务报文；两者分离便于在隧道转发与直接转发之间灵活选择。",
+    "chapter": "WLAN 组网架构",
+    "knowledgeSection": "CAPWAP 协议",
+    "knowledgePoint": "控制通道与数据通道",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 组网架构",
+      "CAPWAP 协议",
+      "控制通道与数据通道"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-17-007",
+    "type": "true_false",
+    "question": "采用直接转发模式时，CAPWAP 数据通道不承载用户业务报文。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "直接转发让用户数据在 AP 本地进入有线网络，只有控制报文走 CAPWAP，因此数据通道基本不承载业务流量。",
+    "chapter": "WLAN 组网架构",
+    "knowledgeSection": "CAPWAP 协议",
+    "knowledgePoint": "控制通道与数据通道",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 组网架构",
+      "CAPWAP 协议",
+      "控制通道与数据通道"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-17-008",
+    "type": "multiple_choice",
+    "question": "AP 发现 AC 的常见方式有哪些？",
+    "options": {
+      "A": "静态配置 AC 的 IP 地址",
+      "B": "通过 DHCP Option 43 下发 AC 地址",
+      "C": "通过 DNS 解析 AC 域名",
+      "D": "通过 STP 选举产生"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "AP 可通过静态、DHCP Option 43、DNS、广播等方式发现 AC；STP 是二层防环协议，与 AP 发现无关。",
+    "chapter": "WLAN 组网架构",
+    "knowledgeSection": "CAPWAP 协议",
+    "knowledgePoint": "AP 发现 AC 的方式",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 组网架构",
+      "CAPWAP 协议",
+      "AP 发现 AC 的方式"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-17-009",
+    "type": "single_choice",
+    "question": "DHCP Option 43 在 WLAN 组网中的作用是什么？",
+    "options": {
+      "A": "为 AP 分配管理 VLAN",
+      "B": "为 AP 提供固件升级包",
+      "C": "限制 AP 的接入数量",
+      "D": "向 AP 下发 AC 的 IP 地址列表"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "AP 通过 DHCP 获取自身地址时，Option 43 携带 AC 地址，从而自动完成发现与注册，实现即插即用。",
+    "chapter": "WLAN 组网架构",
+    "knowledgeSection": "CAPWAP 协议",
+    "knowledgePoint": "AP 发现 AC 的方式",
+    "difficulty": "hard",
+    "tags": [
+      "WLAN 组网架构",
+      "CAPWAP 协议",
+      "AP 发现 AC 的方式"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-17-010",
+    "type": "single_choice",
+    "question": "直接转发（本地转发）模式的特点是什么？",
+    "options": {
+      "A": "AP 不参与任何数据转发",
+      "B": "所有用户数据必须经 AC 集中转发",
+      "C": "必须关闭 CAPWAP 控制通道",
+      "D": "用户数据在 AP 侧直接进入有线网络，不经 AC 转发"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "直接转发减轻 AC 的流量压力、时延更低，适合大流量场景；代价是业务策略分散在各 AP 接入点。",
+    "chapter": "WLAN 组网架构",
+    "knowledgeSection": "转发模式",
+    "knowledgePoint": "直接转发（本地转发）",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 组网架构",
+      "转发模式",
+      "直接转发（本地转发）"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-17-011",
+    "type": "single_choice",
+    "question": "隧道转发（集中转发）模式的优势是什么？",
+    "options": {
+      "A": "AP 无需注册即可工作",
+      "B": "转发时延一定低于直接转发",
+      "C": "业务策略集中在 AC 上统一实施，便于管理与审计",
+      "D": "不占用 AC 的转发性能"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "隧道转发把所有用户数据引到 AC，策略集中、安全可控；但 AC 成为性能瓶颈，时延与带宽压力更大。",
+    "chapter": "WLAN 组网架构",
+    "knowledgeSection": "转发模式",
+    "knowledgePoint": "隧道转发（集中转发）",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 组网架构",
+      "转发模式",
+      "隧道转发（集中转发）"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-17-012",
+    "type": "true_false",
+    "question": "隧道转发模式下，AC 的转发性能会直接影响整个无线网络的吞吐上限。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "所有业务流量都要经 AC 处理，AC 的吞吐能力即成为瓶颈，这也是大流量场景倾向直接转发的原因。",
+    "chapter": "WLAN 组网架构",
+    "knowledgeSection": "转发模式",
+    "knowledgePoint": "隧道转发（集中转发）",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 组网架构",
+      "转发模式",
+      "隧道转发（集中转发）"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-17-013",
+    "type": "single_choice",
+    "question": "选择转发模式时，下列哪种情况更适合隧道转发？",
+    "options": {
+      "A": "用户流量极大且 AC 性能有限",
+      "B": "AP 与 AC 之间三层不可达",
+      "C": "需要对无线用户做统一的安全策略与审计",
+      "D": "要求最低转发时延"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "集中策略与审计是隧道转发的核心价值；大流量、低时延场景则应选直接转发，避免 AC 成为瓶颈。",
+    "chapter": "WLAN 组网架构",
+    "knowledgeSection": "转发模式",
+    "knowledgePoint": "转发模式的选择",
+    "difficulty": "hard",
+    "tags": [
+      "WLAN 组网架构",
+      "转发模式",
+      "转发模式的选择"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-17-014",
+    "type": "single_choice",
+    "question": "AP 与 AC 之间三层可达但二层不通时，哪种转发模式仍然可用？",
+    "options": {
+      "A": "两种都可用且无差异",
+      "B": "直接转发",
+      "C": "两种都不可用",
+      "D": "隧道转发"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "隧道转发把用户数据封装在 CAPWAP 中，只需三层可达即可；直接转发要求 AP 与业务网关二层连通。",
+    "chapter": "WLAN 组网架构",
+    "knowledgeSection": "转发模式",
+    "knowledgePoint": "转发模式的选择",
+    "difficulty": "hard",
+    "tags": [
+      "WLAN 组网架构",
+      "转发模式",
+      "转发模式的选择"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-17-015",
+    "type": "true_false",
+    "question": "CAPWAP 控制通道始终存在，与采用哪种转发模式无关。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "无论直接转发还是隧道转发，AP 都必须与 AC 维持控制通道以接收配置、上报状态，区别只在数据通道是否承载业务。",
+    "chapter": "WLAN 组网架构",
+    "knowledgeSection": "CAPWAP 协议",
+    "knowledgePoint": "控制通道与数据通道",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 组网架构",
+      "CAPWAP 协议",
+      "控制通道与数据通道"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-17-016",
+    "type": "single_choice",
+    "question": "云 AP 相比 Fit AP 的差异主要体现在哪里？",
+    "options": {
+      "A": "管理功能由云平台承担，无需本地部署 AC",
+      "B": "完全不支持集中管理",
+      "C": "只能工作在 2.4G 频段",
+      "D": "不需要供电"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "云 AP 把管理与配置能力放到云端，适合无本地 AC 的中小场景；本质仍是瘦 AP 架构，只是管理面外置。",
+    "chapter": "WLAN 组网架构",
+    "knowledgeSection": "设备角色与形态",
+    "knowledgePoint": "Fat AP 与 Fit AP",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 组网架构",
+      "设备角色与形态",
+      "Fat AP 与 Fit AP"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-17-017",
+    "type": "single_choice",
+    "question": "AC 直连组网相比旁挂组网的主要缺点是什么？",
+    "options": {
+      "A": "必须关闭 VLAN",
+      "B": "无法管理 Fit AP",
+      "C": "不能使用 CAPWAP 协议",
+      "D": "AC 串接在业务路径上，单点故障影响面更大"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "直连组网让 AC 成为必经节点，转发性能与可靠性压力集中；旁挂组网把 AC 移出主路径，风险更分散。",
+    "chapter": "WLAN 组网架构",
+    "knowledgeSection": "设备角色与形态",
+    "knowledgePoint": "AC 组网方式",
+    "difficulty": "hard",
+    "tags": [
+      "WLAN 组网架构",
+      "设备角色与形态",
+      "AC 组网方式"
+    ],
+    "stage": "综合应用"
+  }
+]

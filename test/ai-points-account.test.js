@@ -1,73 +1,124 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
 import {DatabaseSync} from 'node:sqlite';
 import {createPointsStore} from '../server/ai-points/store.js';
-import {ensureAccountPoints,claimPointsCheckIn,pointsCheckInView} from '../server/ai-points/account.js';
-const fixed=Date.parse('2026-10-23T08:00:00Z'),day=86400000;
-function fixture(t,amount=100000000){
-  const db=new DatabaseSync(':memory:');t.after(()=>db.close());let now=fixed;
-  const points=createPointsStore(db,{now:()=>now});
-  if(amount)points.recordFinance({key:'synthetic',kind:'revenue',amountMicros:amount,reference:'synthetic-account-funding',createdBy:'fixture-admin'});
-  return {db,points,advance:ms=>{now+=ms;}};
+import {ensureAccountPoints,claimPointsCheckIn,pointsCheckInView,accountPointsPlans} from '../server/ai-points/account.js';
+import {readCheckInPolicy,updateCheckInPolicy} from '../server/ai-points/check-in-policy.js';
+const fixed=Date.parse('2026-10-26T08:00:00Z'),dayMs=86400000;
+function fixture(t,plan='free') {
+  let now=fixed;const db=new DatabaseSync(':memory:');t.after(()=>db.close());
+  const store={db,points:createPointsStore(db,{now:()=>now}),plan,expiresAt:fixed+60*dayMs,
+    accountEntitlement(){return {plan:now>=this.expiresAt?'free':this.plan,
+      generation:{periodStart:new Date(fixed).toISOString(),periodEnd:new Date(this.expiresAt).toISOString(),limit:100,remaining:100}};},
+    advance(ms){now+=ms;},day(){return new Date(now+8*3600000).toISOString().slice(0,10);}};
+  return store;
 }
-const entitlement=(plan='vip',days=30,remaining=100)=>({plan,generation:{periodStart:new Date(fixed).toISOString(),periodEnd:new Date(fixed+days*day).toISOString(),limit:100,remaining}});
-test('every paid tier converts its full thirty day allowance once and does not reset spent points',t=>{
-  for(const [plan,expected] of [['vip',990000],['svip',1990000],['ssvip',3990000]]){
-    const store=fixture(t),period=entitlement(plan);
-    assert.equal(ensureAccountPoints(store,'learner',period).availableUnits,expected);
-    const op=store.points.begin({userId:'learner',requestKey:plan,signature:plan}).operation;
-    const call=store.points.reserveCall(op.id,{settings:{baseUrl:'https://api.deepseek.com',model:'deepseek-flash'},inputLimit:10,outputLimit:10});
-    store.points.finishCall(call.id,{success:true,usage:{hasUsage:true,prompt_tokens:10,completion_tokens:10,total_tokens:20}});
-    store.points.finish(op.id,{success:true,result:'fixture'});
-    for(let count=0;count<3;count++)assert.equal(ensureAccountPoints(store,'learner',period).availableUnits,expected-40);
-    assert.equal(store.db.prepare("SELECT count(*) AS n FROM ai_points_grants WHERE kind='membership'").get().n,1);
-    assert.equal(store.points.audit().passed,true);
+function change(store,patch={}) {
+  const p=readCheckInPolicy(store);
+  return {requestId:crypto.randomUUID(),revision:p.revision,enabled:p.enabled,
+    requireFunded:p.requireFunded,dailyPoints:p.dailyPoints,reason:'Synthetic fixture policy adjustment',...patch};
+}
+test('membership reads no longer issue monthly allowances or reset existing balances',t=>{
+  for(const [plan,daily] of [['free',1],['vip',33],['svip',66],['ssvip',133]]) {
+    const s=fixture(t,plan);
+    for(let i=0;i<3;i++){const v=ensureAccountPoints(s,'learner');assert.equal(v.availableUnits,0);assert.equal(v.pendingUnits,0);assert.equal(v.dailyCheckInPoints,daily);assert.equal(v.membershipDistribution,'daily-check-in');}
+    assert.equal(s.db.prepare('SELECT count(*) n FROM ai_points_grants').get().n,0);
   }
 });
-test('partial periods prorate time and old consumed quota, while zero remaining quota grants nothing',t=>{
-  const store=fixture(t);
-  assert.equal(ensureAccountPoints(store,'half',entitlement('vip',15,100)).availableUnits,495000);
-  assert.equal(ensureAccountPoints(store,'legacy',entitlement('vip',30,25)).availableUnits,247500);
-  assert.equal(ensureAccountPoints(store,'empty',entitlement('vip',30,0)).availableUnits,0);
-  assert.equal(ensureAccountPoints(store,'free',{plan:'free'}).availableUnits,0);
+test('each tier claims the configured daily reward without creating fictional revenue',t=>{
+  for(const [plan,reward] of [['free',1],['vip',33],['svip',66],['ssvip',133]]) {
+    const s=fixture(t,plan),v=claimPointsCheckIn(s,'learner',s.day());
+    assert.equal(v.claimed,true);assert.equal(v.grants.points,reward);assert.equal(v.rewardPlan,plan);
+    assert.equal(s.points.wallet('learner').availableUnits,reward*1000);
+    assert.equal(s.db.prepare('SELECT count(*) n FROM ai_points_finance').get().n,0);
+    assert.equal(s.db.prepare('SELECT count(*) n FROM ai_points_check_ins').get().n,1);
+    assert.equal(s.points.audit().passed,true);
+  }
 });
-test('same-period renewal tops up only the difference; a later period gets a separate grant',t=>{
-  const store=fixture(t),short=entitlement('vip',15);
-  ensureAccountPoints(store,'learner',short);
-  const op=store.points.begin({userId:'learner',requestKey:'spend',signature:'fixture'}).operation;
-  const call=store.points.reserveCall(op.id,{settings:{baseUrl:'https://api.deepseek.com',model:'deepseek-flash'},inputLimit:10,outputLimit:10});
-  store.points.finishCall(call.id,{success:true,usage:{hasUsage:true,prompt_tokens:10,completion_tokens:10,total_tokens:20}});store.points.finish(op.id,{success:true});
-  const full=entitlement();assert.equal(ensureAccountPoints(store,'learner',full).availableUnits,989960);
-  assert.equal(ensureAccountPoints(store,'learner',full).availableUnits,989960);
-  store.advance(30*day);
-  const next={plan:'vip',generation:{...full.generation,periodStart:full.generation.periodEnd,periodEnd:new Date(fixed+60*day).toISOString()}};
-  assert.equal(ensureAccountPoints(store,'learner',next).availableUnits,990000);
-  assert.equal(store.db.prepare('SELECT count(*) AS n FROM ai_points_grants').get().n,2);
+test('same account and day stays idempotent after an upgrade or policy change',t=>{
+  const s=fixture(t);claimPointsCheckIn(s,'learner',s.day());s.plan='vip';
+  updateCheckInPolicy(s,change(s,{dailyPoints:{free:2,vip:40,svip:80,ssvip:160}}),'admin');
+  const v=pointsCheckInView(s,'learner',s.day());
+  assert.equal(v.grants.points,1);assert.equal(v.rewardPlan,'free');assert.equal(v.policyRevision,0);
+  assert.equal(v.configuredPoints,40);assert.equal(v.canClaim,false);
+  assert.equal(claimPointsCheckIn(s,'learner',s.day()).claimed,false);
+  assert.equal(s.points.wallet('learner').availableUnits,1000);
+  assert.equal(s.db.prepare('SELECT count(*) n FROM ai_points_journal').get().n,1);
 });
-test('unfunded renewals show only the missing points and never issue credit without budget',t=>{
-  const store=fixture(t,5000000);
-  assert.equal(ensureAccountPoints(store,'learner',entitlement('vip',15)).availableUnits,495000);
-  const pending=ensureAccountPoints(store,'learner',entitlement());
-  assert.equal(pending.availableUnits,495000);assert.equal(pending.pendingUnits,495000);
-  assert.equal(store.points.finance().overBudgetMicros,0);
+test('rewards expire at Beijing midnight and a later day may claim again',t=>{
+  const s=fixture(t,'svip');const first=claimPointsCheckIn(s,'learner',s.day());
+  assert.equal(first.expiresAt,'2026-10-26T15:59:59.999Z');
+  s.advance(8*3600000+1);assert.equal(s.points.wallet('learner').availableUnits,0);
+  assert.equal(pointsCheckInView(s,'learner',s.day()).claimed,false);
+  assert.equal(claimPointsCheckIn(s,'learner',s.day()).grants.points,66);
+  assert.equal(s.points.wallet('learner').availableUnits,66000);
 });
-test('extending an expired grant must fund the revived liability, even when its face amount is unchanged',t=>{
-  const store=fixture(t,1000000),expiresAt=new Date(fixed+1000).toISOString();
-  store.points.ensurePeriodicGrant({userId:'learner',sourceKey:'old-period',targetUnits:100000,expiresAt});
-  store.advance(2000);
-  store.points.grant({userId:'peer',sourceKey:'budget-used-elsewhere',units:120000,requireFunded:true});
-  assert.throws(()=>store.points.ensurePeriodicGrant({userId:'learner',sourceKey:'old-period',targetUnits:100000,expiresAt:new Date(fixed+day).toISOString()}),{code:'AI_POINTS_GRANT_FUNDING_REQUIRED'});
-  assert.equal(store.points.wallet('learner').availableUnits,0);assert.equal(store.points.finance().overBudgetMicros,0);
+test('expired membership receives the free reward determined by the server',t=>{
+  const s=fixture(t,'ssvip');s.expiresAt=fixed+1000;s.advance(2000);
+  assert.equal(pointsCheckInView(s,'learner',s.day()).plan,'free');
+  assert.equal(claimPointsCheckIn(s,'learner',s.day()).grants.points,1);
 });
-test('daily gifts are funded, idempotent, and expire at the original local day boundary',t=>{
-  const store=fixture(t),date='2026-10-23';
-  assert.equal(claimPointsCheckIn(store,'learner',date).claimed,true);
-  assert.equal(claimPointsCheckIn(store,'learner',date).claimed,false);
-  assert.equal(pointsCheckInView(store,'learner',date).claimed,true);
-  assert.equal(store.points.wallet('learner').availableUnits,5000);
-  assert.equal(store.db.prepare('SELECT count(*) AS n FROM ai_points_grants').get().n,1);
-  store.advance(8*3600000+1);assert.equal(store.points.wallet('learner').availableUnits,0);
-  const unfunded=fixture(t,0);
-  assert.throws(()=>claimPointsCheckIn(unfunded,'learner',date),{code:'AI_POINTS_GRANT_FUNDING_REQUIRED'});
-  assert.equal(pointsCheckInView(unfunded,'learner',date).claimed,false);
+test('old monthly balances are retained and cannot be paid twice during the prepaid period',t=>{
+  const s=fixture(t,'vip'),expiry=new Date(fixed+30*dayMs).toISOString();
+  s.points.grant({userId:'learner',sourceKey:'membership:vip:legacy-period',kind:'membership',units:990000,expiresAt:expiry});
+  const before=s.db.prepare('SELECT * FROM ai_points_grants').all();
+  assert.equal(ensureAccountPoints(s,'learner').availableUnits,990000);
+  assert.deepEqual(s.db.prepare('SELECT * FROM ai_points_grants').all(),before);
+  const view=pointsCheckInView(s,'learner',s.day());
+  assert.equal(view.grants.points,0);assert.equal(view.canClaim,false);assert.equal(view.dailyStartsAt,expiry);
+  assert.throws(()=>claimPointsCheckIn(s,'learner',s.day()),{code:'AI_POINTS_MEMBERSHIP_PREPAID'});
+  s.advance(30*dayMs+1);
+  assert.equal(claimPointsCheckIn(s,'learner',s.day()).grants.points,33);
+  assert.equal(s.points.wallet('learner').availableUnits,33000);
+  assert.equal(s.db.prepare("SELECT count(*) n FROM ai_points_grants WHERE kind='membership'").get().n,1);
+});
+test('an already spent prepaid monthly grant still prevents a duplicate daily allocation',t=>{
+  const s=fixture(t,'vip');
+  s.points.recordFinance({key:'synthetic-spent',kind:'revenue',amountMicros:1000000,reference:'synthetic-legacy-spend-income',createdBy:'fixture'});
+  s.points.grant({userId:'learner',sourceKey:'membership:vip:used',kind:'membership',units:40,expiresAt:new Date(fixed+dayMs).toISOString()});
+  const op=s.points.begin({userId:'learner',requestKey:'synthetic-legacy-use',signature:'fixture'}).operation;
+  const call=s.points.reserveCall(op.id,{settings:{baseUrl:'https://api.deepseek.com',model:'deepseek-flash'},inputLimit:10,outputLimit:10});
+  s.points.finishCall(call.id,{success:true,usage:{hasUsage:true,prompt_tokens:10,completion_tokens:10,total_tokens:20}});
+  s.points.finish(op.id,{success:true});
+  assert.equal(s.points.audit().passed,true);
+  assert.equal(ensureAccountPoints(s,'learner').availableUnits,0);
+  assert.equal(pointsCheckInView(s,'learner',s.day()).canClaim,false);
+});
+test('old five-point daily grants remain claimed without amount conflicts or replacement',t=>{
+  const s=fixture(t);
+  s.points.grant({userId:'learner',sourceKey:'check-in:'+s.day(),kind:'daily-gift',units:5000,expiresAt:'2026-10-26T15:59:59.999Z'});
+  assert.equal(pointsCheckInView(s,'learner',s.day()).grants.points,5);
+  assert.equal(claimPointsCheckIn(s,'learner',s.day()).claimed,false);
+  assert.equal(s.points.wallet('learner').availableUnits,5000);
+});
+test('disabled check-in and optional funded mode reject without partial grants or fake income',t=>{
+  const s=fixture(t);
+  updateCheckInPolicy(s,change(s,{enabled:false}),'admin');
+  assert.throws(()=>claimPointsCheckIn(s,'learner',s.day()),{code:'AI_POINTS_CHECK_IN_DISABLED'});
+  updateCheckInPolicy(s,change(s,{enabled:true,requireFunded:true}),'admin');
+  assert.throws(()=>claimPointsCheckIn(s,'learner',s.day()),{code:'AI_POINTS_GRANT_FUNDING_REQUIRED'});
+  assert.equal(s.db.prepare('SELECT count(*) n FROM ai_points_grants').get().n,0);
+  assert.equal(s.db.prepare('SELECT count(*) n FROM ai_points_check_ins').get().n,0);
+  s.points.recordFinance({key:'synthetic-income',kind:'revenue',amountMicros:1000000,reference:'synthetic-fixture-income',createdBy:'fixture'});
+  assert.equal(claimPointsCheckIn(s,'learner',s.day()).claimed,true);
+});
+test('policy updates validate tiers, reject stale writes and replay exactly once',t=>{
+  const s=fixture(t),body=change(s,{dailyPoints:{free:2,vip:34,svip:67,ssvip:134}});
+  const first=updateCheckInPolicy(s,body,'admin');assert.equal(first.policy.revision,1);
+  assert.equal(updateCheckInPolicy(s,body,'admin').replayed,true);
+  assert.equal(s.db.prepare('SELECT count(*) n FROM ai_points_check_in_policy_changes').get().n,1);
+  assert.throws(()=>updateCheckInPolicy(s,{...body,requestId:crypto.randomUUID()},'admin'),{code:'AI_POINTS_CHECK_IN_POLICY_CONFLICT'});
+  assert.throws(()=>updateCheckInPolicy(s,{...body,reason:'Different synthetic reason'},'admin'),{code:'AI_POINTS_IDEMPOTENCY_CONFLICT'});
+  assert.throws(()=>updateCheckInPolicy(s,body,'other-admin'),{code:'AI_POINTS_IDEMPOTENCY_CONFLICT'});
+  for(const amount of [-1,0,0.5,100001])assert.throws(()=>updateCheckInPolicy(s,change(s,{dailyPoints:{...body.dailyPoints,free:amount}}),'admin'));
+  assert.equal(accountPointsPlans(s).ssvip.dailyPoints,134);
+});
+test('legacy periodic-grant budget protection remains unchanged outside daily check-in',t=>{
+  const s=fixture(t),expiresAt=new Date(fixed+1000).toISOString();
+  s.points.recordFinance({key:'synthetic',kind:'revenue',amountMicros:1000000,reference:'synthetic-legacy-funding',createdBy:'fixture'});
+  s.points.ensurePeriodicGrant({userId:'learner',sourceKey:'old-period',targetUnits:100000,expiresAt});
+  s.advance(2000);s.points.grant({userId:'peer',sourceKey:'budget-used-elsewhere',units:120000,requireFunded:true});
+  assert.throws(()=>s.points.ensurePeriodicGrant({userId:'learner',sourceKey:'old-period',targetUnits:100000,expiresAt:new Date(fixed+dayMs).toISOString()}),{code:'AI_POINTS_GRANT_FUNDING_REQUIRED'});
+  assert.equal(s.points.wallet('learner').availableUnits,0);assert.equal(s.points.finance().overBudgetMicros,0);
 });

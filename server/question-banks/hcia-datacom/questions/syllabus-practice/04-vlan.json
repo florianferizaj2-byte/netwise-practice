@@ -14,13 +14,16 @@
     ],
     "analysis": "802.1Q 标签中的 VLAN ID 占 12 位，可表示 4096 个数值，其中部分值保留。",
     "chapter": "VLAN 原理与配置",
-    "knowledgePoint": "802.1Q",
+    "knowledgePoint": "802.1Q 标签格式",
     "difficulty": "easy",
     "tags": [
       "VLAN 原理与配置",
+      "VLAN 基础与标签",
+      "802.1Q 标签格式",
       "802.1Q"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "VLAN 基础与标签"
   },
   {
     "id": "hcia-v2-04-access-port",
@@ -41,9 +44,11 @@
     "difficulty": "medium",
     "tags": [
       "VLAN 原理与配置",
+      "接口类型与报文处理",
       "Access 接口"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "接口类型与报文处理"
   },
   {
     "id": "hcia-v2-04-trunk-port",
@@ -66,9 +71,11 @@
     "difficulty": "medium",
     "tags": [
       "VLAN 原理与配置",
+      "接口类型与报文处理",
       "Trunk 接口"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "接口类型与报文处理"
   },
   {
     "id": "hcia-v2-04-hybrid-port",
@@ -89,8 +96,10 @@
     "difficulty": "hard",
     "tags": [
       "VLAN 原理与配置",
+      "接口类型与报文处理",
       "Hybrid 接口"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "接口类型与报文处理"
   }
 ]

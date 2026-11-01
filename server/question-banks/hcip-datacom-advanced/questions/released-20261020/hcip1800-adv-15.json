@@ -1,0 +1,2073 @@
+[
+  {
+    "id": "hcip831-8-1-2-001",
+    "type": "single_choice",
+    "question": "割接开始前的最后一次确认应重点核对什么？",
+    "options": {
+      "A": "人员学历",
+      "B": "人员、窗口、备份与回退就绪",
+      "C": "机柜颜色",
+      "D": "设备采购价格"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "开始前需确认参与人员到位、窗口未被占用、配置已备份、回退步骤可执行，四项齐备才可开始。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "开始前确认"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "630cd9c3a8900080fa6e9f518e8dd520f3d41298d0da6f786417ed0e7c06e3c1"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-002",
+    "type": "single_choice",
+    "question": "割接执行的正确顺序通常是？",
+    "options": {
+      "A": "先改核心再改接入",
+      "B": "先改备用路径，再切主用",
+      "C": "先断主用再改备用",
+      "D": "同时改主备"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "先构建并验证备用路径，再把业务切过去，可以把中断时间压到切换瞬间，是低风险割接的常规做法。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "执行顺序"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "ccfbd0f64055a89f920b787afc73d4907d70f28df92931c9b36e304b7bd48a3a"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-003",
+    "type": "single_choice",
+    "question": "割接中配置下发应采用什么方式？",
+    "options": {
+      "A": "由多人同时修改",
+      "B": "按方案逐段下发并即时验证",
+      "C": "一次性粘贴全部配置",
+      "D": "边想边改"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "逐段下发可以在每一步验证结果，一旦异常能定位到具体步骤并快速回退；一次性下发会掩盖问题。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "配置下发"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "c81173697c748decb5ed2f2e0e2912e6c764017e5f9df88ad5b20f3e9b5885b9"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-004",
+    "type": "single_choice",
+    "question": "割接后的观察期主要观察什么？",
+    "options": {
+      "A": "设备的采购价格",
+      "B": "机柜温度",
+      "C": "人员考勤",
+      "D": "业务指标是否稳定"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "观察期内需持续关注丢包、时延、CPU 与告警，确认没有滞后出现的异常，再宣布割接结束。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "观察期"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "389e9bb52f91a164bb8380b9f068983e8f82705236ed47f4baa5002b22018c03"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-005",
+    "type": "single_choice",
+    "question": "触发回退的条件应该是？",
+    "options": {
+      "A": "任何轻微告警",
+      "B": "满足预先定义的失败判据",
+      "C": "操作人员主观感觉",
+      "D": "业务方催促"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "回退应基于割接前约定的失败判据，避免因主观判断导致该回不退或不该退乱退。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "回退触发"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "63619a03fd13b228b4f8e40b009fa8480f776f4c82187c658cb15144908fc05b"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-006",
+    "type": "single_choice",
+    "question": "回退执行的首要步骤是？",
+    "options": {
+      "A": "重启所有设备",
+      "B": "删除所有 VLAN",
+      "C": "恢复备份配置",
+      "D": "断开所有链路"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "回退应先恢复变更前的配置基线，再逐项验证业务，必要时再调整链路与路由。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "回退执行"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "f0b6d2e75b3b009f9175248a14131ddefb38fb9a813a41697682f8c997dc3080"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-007",
+    "type": "single_choice",
+    "question": "判断一次网络割接已经完成的标志是什么？",
+    "options": {
+      "A": "人员离场",
+      "B": "业务验证通过且观察期无异常",
+      "C": "配置下发完成",
+      "D": "设备重启完成"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "配置下发只是过程，业务验证通过并经过观察期稳定后才能判定割接完成。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "完成标志"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4941ff4013f58ba211812133d3ad5b56d05f2ed4907b6b822bd8efeed5b67e42"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-008",
+    "type": "single_choice",
+    "question": "割接后的交接应包含什么？",
+    "options": {
+      "A": "变更内容、遗留问题与注意事项",
+      "B": "设备采购价格",
+      "C": "机柜颜色",
+      "D": "人员学历"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "交接要让值班人员知道改了什么、还有哪些遗留项、遇到异常如何处置，避免信息断层。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "交接"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "406fd6e581116718a441fcae14af5644d6df91a511df8c5ba2e464b1900ad12a"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-009",
+    "type": "single_choice",
+    "question": "割接复盘的主要目的是？",
+    "options": {
+      "A": "总结问题并改进流程",
+      "B": "追究个人责任",
+      "C": "评估带宽",
+      "D": "计算设备折旧"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "复盘聚焦流程与方案的改进点，例如估算偏差、依赖遗漏、验证不足，而不是追责。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "复盘"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-009",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "2893ed3e81116e7ec1e4428f342315d670005f527942f41d1a81dcdc5fc0f2bc"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-010",
+    "type": "single_choice",
+    "question": "遗留问题应如何处理？",
+    "options": {
+      "A": "直接忽略",
+      "B": "口头转达",
+      "C": "等下次故障再说",
+      "D": "登记并指定责任人与期限"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "遗留问题必须有台账、责任人与解决期限，否则会在下一次变更中演变为事故。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "遗留问题"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-010",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "a9217f946abcbeb9f9feb5cccf417b98dacc02fe4960d1249e9ef096f4eca8db"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-011",
+    "type": "single_choice",
+    "question": "割接中多人协作时最重要的纪律是？",
+    "options": {
+      "A": "同时修改同一设备",
+      "B": "不记录操作",
+      "C": "各自独立操作",
+      "D": "一人操作一人复核"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "关键命令由一人执行、另一人复核，可以显著降低误操作概率，同时保证操作有记录可追溯。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "协作"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-011",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "0d6893f4e4115df6b3c7c4c16af968905d4f48c25cd3b5224013921fa6fb60cc"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-012",
+    "type": "single_choice",
+    "question": "割接前对现网做基线采集的目的是？",
+    "options": {
+      "A": "增加带宽",
+      "B": "减少设备数量",
+      "C": "提高设备性能",
+      "D": "为割接后对比提供依据"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "采集割接前的路由数、会话数、时延与丢包等基线，割接后可快速判断是否发生退化。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "基线"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-012",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d279638a87426bc62d79fda90018df6301cdf1dd927c761cbaadbedcb7e920fc"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-013",
+    "type": "single_choice",
+    "question": "割接方案中的\"验证点\"应该？",
+    "options": {
+      "A": "模糊描述",
+      "B": "割接后补充",
+      "C": "由业务方临时决定",
+      "D": "可量化且可判定通过与否"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "验证点要能明确判断通过或失败，例如\"ping 丢包率小于 1%\"\"关键业务响应小于 200ms\"。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "验证点"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-013",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "5e9e77ada3ec17c85b8ba97cf56e67677b0f5a62689b147fa9799161caeb1149"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-014",
+    "type": "single_choice",
+    "question": "割接过程中设备意外重启，最先应做什么？",
+    "options": {
+      "A": "继续下发剩余配置",
+      "B": "等待自行恢复",
+      "C": "确认配置是否保存并评估影响",
+      "D": "立即更换设备"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "先确认重启后加载的是哪份配置、业务是否受影响，再决定继续、回退或恢复，避免在状态不明时叠加操作。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "hard",
+    "tags": [
+      "割接",
+      "意外"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-014",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "1fe9debc515092f2b3394914854ed94c16d94d08e82c53946d3e4974a4ff26f4"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-015",
+    "type": "single_choice",
+    "question": "割接窗口超时的正确处理是？",
+    "options": {
+      "A": "直接放弃现场",
+      "B": "按预案决定回退或申请延长",
+      "C": "强行继续不评估",
+      "D": "隐瞒超时"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "超时后应评估剩余步骤与风险，按预案选择回退或与业务方协商延长窗口，不能盲目硬推。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "超时"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-015",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "eacb6ec118fd9f2142b63d2f8e1675125cd2caceff31cfd23363e9a2dd62808f"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-016",
+    "type": "single_choice",
+    "question": "割接中临时回退点的作用是？",
+    "options": {
+      "A": "增加带宽",
+      "B": "提高设备性能",
+      "C": "减少设备数量",
+      "D": "在关键步骤前保留可恢复状态"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "在不可逆操作前保存配置与状态，一旦后续步骤失败可以回到该点，而不必整体回退。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "回退点"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-016",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e4fabc917cff30977ddffb73762897e4c83542424cc29fc068b88a7bed8f2f4e"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-017",
+    "type": "multiple_choice",
+    "question": "割接执行阶段应遵循的原则包括？",
+    "options": {
+      "A": "每步验证",
+      "B": "边执行边改方案",
+      "C": "按方案逐步执行",
+      "D": "关键操作双人复核"
+    },
+    "answer": [
+      "A",
+      "C",
+      "D"
+    ],
+    "analysis": "执行阶段应严格按方案推进并逐步验证、双人复核。临时改方案会绕过评审，风险不可控。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "执行",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-017",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "ee92c3a0e17232919b57da1eabfbf45605bb1d5c7010a40940416c2fd2f20813"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-018",
+    "type": "multiple_choice",
+    "question": "割接后的验证内容通常包括？",
+    "options": {
+      "A": "关键性能指标",
+      "B": "业务连通性",
+      "C": "冗余切换是否正常",
+      "D": "设备采购流程"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "验证覆盖连通性、性能与冗余三个维度。采购流程与割接验证无关。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "验证",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-018",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "75f4107ee8b8ef27b2001d4ccb5e35df8d14d5e025f00643f05eb93fe44f6a8c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-019",
+    "type": "true_false",
+    "question": "割接完成后只要配置下发成功就可以判定割接结束。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "配置下发成功不等于业务正常，必须完成业务验证并经过观察期稳定后才能判定结束。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "完成标志"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-019",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "a56277535142c91894100b4850942402c9377749d34d7b9b28dfc8e0a96fa367"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-020",
+    "type": "true_false",
+    "question": "割接前采集基线有助于割接后判断是否发生性能退化。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "有基线才能对比，缺少基线时无法区分\"原本就慢\"与\"割接导致变慢\"。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "easy",
+    "tags": [
+      "判断",
+      "基线"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-020",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "6c99f83764f16f1ae3fe14f6af185c3c195d823976eb9ad6526856da3257a573"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-021",
+    "type": "single_choice",
+    "question": "割接中发现某条命令与方案不一致，应如何处理？",
+    "options": {
+      "A": "暂停并确认后再执行",
+      "B": "继续执行后续步骤",
+      "C": "直接按自己理解修改",
+      "D": "跳过该步骤"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "与方案不一致时必须暂停确认，擅自修改会偏离评审过的路径，可能引入未评估的风险。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "异常"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-021",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "a1c9fe2bc93a6e9c068773ffc44fd0c3ad95d68fd87c37c784795eb343963361"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-022",
+    "type": "single_choice",
+    "question": "割接方案中的\"回退时间\"指什么？",
+    "options": {
+      "A": "通知业务方的时间",
+      "B": "割接总时长",
+      "C": "观察期时长",
+      "D": "从决定回退到业务恢复所需时间"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "回退时间必须在窗口余量之内，否则一旦失败将无法在窗口内恢复，只能带故障过夜。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "回退时间"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-022",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "9ee88b1e321803d24e1ed630b272939c6f8dfc4408bc24fd77eb98cf69779613"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-023",
+    "type": "single_choice",
+    "question": "割接涉及跨部门协作时，最需要提前明确什么？",
+    "options": {
+      "A": "接口人与决策机制",
+      "B": "采购渠道",
+      "C": "设备型号",
+      "D": "机柜位置"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "跨部门协作要明确谁负责哪一段、异常时谁决策，避免现场互相等待或推诿。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "协作"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-023",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "18046ee89919b4ed68ba845ba3738ba7e08a2ee22d382994a16fb49999b2679c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-024",
+    "type": "single_choice",
+    "question": "割接记录中\"计划与实际的差异\"的价值是？",
+    "options": {
+      "A": "改进后续估算与方案",
+      "B": "减少设备数量",
+      "C": "增加带宽",
+      "D": "提高设备性能"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "差异分析能暴露估算偏差与遗漏步骤，是提升下次割接质量最直接的输入。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "记录"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-024",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4edad35b3440ce504637f36bdc5696433ba1269d57a7e7303a9acbf1d067486d"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-025",
+    "type": "single_choice",
+    "question": "割接前应确认监控系统处于什么状态？",
+    "options": {
+      "A": "全部关闭",
+      "B": "告警正常且已屏蔽计划内告警",
+      "C": "不做处理",
+      "D": "全部静音"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "需保证监控能反映真实异常，同时对计划内中断的告警做临时屏蔽，避免干扰判断。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "监控"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-025",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "cafc0dab30fd83e2ad63fe265af0e6706207de3602427a90cbbe232ffe6ab222"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-026",
+    "type": "single_choice",
+    "question": "割接后部分业务正常、部分异常，最可能的原因是？",
+    "options": {
+      "A": "窗口选择错误",
+      "B": "割接未执行",
+      "C": "设备完全损坏",
+      "D": "路由或策略只覆盖了部分路径"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "部分正常说明变更已生效但不完整，常见于路由未全量收敛、策略遗漏某些网段或 ACL 顺序问题。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "hard",
+    "tags": [
+      "割接",
+      "部分异常"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-026",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "2e42122360bc2ce1dd89d6821b63d7d84ae2c83fb14f10d93c69dec1a7faae9e"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-027",
+    "type": "single_choice",
+    "question": "割接中需要重启设备时，应提前确认什么？",
+    "options": {
+      "A": "冗余路径可承载业务",
+      "B": "人员学历",
+      "C": "机柜颜色",
+      "D": "设备采购价格"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "重启前必须确认冗余链路或备设备能承载流量，否则重启即等于业务中断。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "重启"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-027",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "764a5b409c92f87c3994c6d374ed208514bf0d42df3a3a31b6c62743861a947f"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-028",
+    "type": "single_choice",
+    "question": "割接方案的版本管理为何重要？",
+    "options": {
+      "A": "提高设备性能",
+      "B": "避免执行时用错版本",
+      "C": "增加带宽",
+      "D": "减少设备数量"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "方案多次修订后容易出现执行人拿旧版本操作的情况，应统一版本号并在执行前确认。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "版本"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-028",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "34f56f9c43d5e05c0f87547e724dfb330a5cc53a14d490b8e010f46bef3dc3f5"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-029",
+    "type": "single_choice",
+    "question": "割接完成后对业务方的反馈应包含什么？",
+    "options": {
+      "A": "结果、影响与后续安排",
+      "B": "设备采购价格",
+      "C": "人员学历",
+      "D": "机柜颜色"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "反馈要让业务方知道割接是否成功、是否还有影响、后续是否还有窗口，形成闭环。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "反馈"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-029",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "ec425c6ce22001aed9d45b0f358199b45f7001d8d8d3658f3e3114696f100efe"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-030",
+    "type": "multiple_choice",
+    "question": "割接复盘应讨论的内容包括？",
+    "options": {
+      "A": "个人绩效评分",
+      "B": "流程改进点",
+      "C": "方案与实际执行的差异",
+      "D": "异常处理是否得当"
+    },
+    "answer": [
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "复盘聚焦技术与流程改进。个人绩效评分不属于技术复盘范畴，且容易使复盘失真。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "割接",
+      "复盘",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-030",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "c5e35bd85251bceed5ee697487d7a95b324954370d7202f6e3d2eb06b7715b11"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-8-1-2-031",
+    "type": "true_false",
+    "question": "割接过程中可以临时修改方案中的关键步骤，只要操作人员有经验。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "关键步骤的修改会绕过评审与验证，风险不可控。确需调整应暂停并按变更流程重新确认。",
+    "chapter": "网络割接",
+    "knowledgeSection": "网络割接",
+    "knowledgePoint": "割接操作流程",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "变更控制"
+    ],
+    "provenance": {
+      "questionId": "hcip831-8-1-2-031",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「网络割接 / 网络割接 / 割接操作流程」。知识点编码 hcip831-8-1-2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "6357dec16eb3b02b5030f65d99e11c2b360638b7839d59b122e36e1358ca698b"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-2-1-013",
+    "type": "single_choice",
+    "question": "OSPFv3 与 OSPFv2 的最大区别是？",
+    "options": {
+      "A": "不支持路由汇总",
+      "B": "不支持 DR 选举",
+      "C": "不支持区域划分",
+      "D": "基于链路运行而非基于网段"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "OSPFv3 按链路而非网段运行，邻居通过链路本地地址建立，接口可以没有全局 IPv6 地址。区域、DR 选举与汇总仍然支持。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "原理"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-013",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」。知识点编码 hcip831-3-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d9ebf15a3bd8922a05a367d8794f7d0ffe9b3c9ee22ace75980120febbe35118"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-2-1-014",
+    "type": "single_choice",
+    "question": "OSPFv3 报文使用的源地址通常是？",
+    "options": {
+      "A": "接口的链路本地地址",
+      "B": "接口的全局单播地址",
+      "C": "环回地址",
+      "D": "组播地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "OSPFv3 用链路本地地址作为报文源与下一跳，因此不需要为接口配置全局地址也能建立邻居。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "链路本地"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-014",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」。知识点编码 hcip831-3-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "f349c1045813f3cbe5106b99242d8ad4be212d960280bf897a2708f09a59b20d"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-2-1-015",
+    "type": "single_choice",
+    "question": "OSPFv3 使用的两个组播地址是？",
+    "options": {
+      "A": "224.0.0.5 与 224.0.0.6",
+      "B": "FF05::5 与 FF05::6",
+      "C": "FF02::5 与 FF02::6",
+      "D": "FF02::1 与 FF02::2"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "FF02::5 对应 AllSPFRouters，FF02::6 对应 AllDRouters，与 v2 的 224.0.0.5/6 一一对应。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "组播"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-015",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」。知识点编码 hcip831-3-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "cc591940af557f70f8a61a306ba7e44e640732e0b3cc970dcee481c80cdfbd1c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-2-1-016",
+    "type": "single_choice",
+    "question": "OSPFv3 中 Router ID 的格式是？",
+    "options": {
+      "A": "64 位接口标识",
+      "B": "48 位 MAC 地址",
+      "C": "128 位 IPv6 地址",
+      "D": "32 位点分十进制"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "OSPFv3 仍使用 32 位点分十进制 Router ID，通常取 Loopback 的 IPv4 地址或手工指定，必须全网唯一。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "Router ID"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-016",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」。知识点编码 hcip831-3-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "ba08f36eac42fc1bdbde439f076af728cab049dbd58fe9de48e90c22ee2e728a"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-2-1-017",
+    "type": "single_choice",
+    "question": "OSPFv3 新增的 Link-LSA 的作用是？",
+    "options": {
+      "A": "通告 ASBR 位置",
+      "B": "通告外部路由",
+      "C": "在链路上通告链路本地地址与前缀",
+      "D": "通告区域间路由"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Link-LSA 在单条链路上泛洪，携带链路本地地址、接口前缀与选项信息，供邻居计算下一跳与地址。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "hard",
+    "tags": [
+      "OSPFv3",
+      "Link-LSA"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-017",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」。知识点编码 hcip831-3-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "9d125122271f68ead1640af0e5746b815f2b696adeb0089d4659d5ff605f9b6c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-2-1-018",
+    "type": "single_choice",
+    "question": "OSPFv3 新增的 Intra-Area-Prefix-LSA 的作用是？",
+    "options": {
+      "A": "携带组播信息",
+      "B": "携带区域内 IPv6 前缀",
+      "C": "携带区域间前缀",
+      "D": "携带外部前缀"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "OSPFv3 把前缀从 Router-LSA 中剥离，由 Intra-Area-Prefix-LSA 单独携带区域内前缀，使拓扑与地址解耦。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "hard",
+    "tags": [
+      "OSPFv3",
+      "前缀 LSA"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-018",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」。知识点编码 hcip831-3-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "970c79116c369a660a942d0e920113b10ba253c5008b7431ed122efe1c257db0"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-2-1-019",
+    "type": "single_choice",
+    "question": "OSPFv3 的认证依靠什么实现？",
+    "options": {
+      "A": "明文口令",
+      "B": "证书",
+      "C": "MD5",
+      "D": "IPsec"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "OSPFv3 本身不带认证字段，依靠 IPsec 的 AH 或 ESP 提供认证与加密，这是与 v2 的显著差异。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "认证"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-019",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」。知识点编码 hcip831-3-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "ecbd493f30df3ccd4dab03572861e13cdaa6b1ba1acadc35c1541bc3e32ff039"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-2-1-020",
+    "type": "single_choice",
+    "question": "OSPFv3 的报文类型与 OSPFv2 相比？",
+    "options": {
+      "A": "完全相同，仍为五类",
+      "B": "增加为七类",
+      "C": "减少为三类",
+      "D": "只保留 Hello"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "OSPFv3 仍使用 Hello、DD、LSR、LSU、LSAck 五类报文，主要变化在报文格式与地址字段。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "报文"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-020",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」。知识点编码 hcip831-3-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "cce16b524e8f8423f51c1200395c60f78060884ed2dbec121e29a066389dde45"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-2-1-021",
+    "type": "single_choice",
+    "question": "OSPFv3 能否与 OSPFv2 在同一接口上共存？",
+    "options": {
+      "A": "可以，二者独立运行",
+      "B": "不可以，会冲突",
+      "C": "只能运行 v3",
+      "D": "只能运行 v2"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "OSPFv3 与 OSPFv2 是独立进程，可在同一接口上同时运行，分别维护 IPv4 与 IPv6 路由。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "共存"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-021",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」。知识点编码 hcip831-3-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "ffbedbc0d76e92479597f37f0230b26c04f35e81c4dcddcc4ab8a8b95a417b3e"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-2-1-022",
+    "type": "single_choice",
+    "question": "OSPFv3 中 DR 选举是否仍然存在？",
+    "options": {
+      "A": "不存在",
+      "B": "由前缀长度决定",
+      "C": "由 Router ID 直接指定",
+      "D": "存在，机制与 v2 类似"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "广播与 NBMA 网络仍选举 DR/BDR，用优先级与 Router ID 比较，规则与 v2 基本一致。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "DR"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-022",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」。知识点编码 hcip831-3-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "3ec0e98a4b4c72c11723c630439dd88aeeb69e8668c5a8b1b4c1f1e755760e60"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-2-1-023",
+    "type": "multiple_choice",
+    "question": "OSPFv3 相比 OSPFv2 的变化包括？",
+    "options": {
+      "A": "使用链路本地地址",
+      "B": "基于链路运行",
+      "C": "新增 Link-LSA",
+      "D": "取消区域划分"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "OSPFv3 仍保留区域划分与汇总能力。基于链路、链路本地地址与新增 LSA 是主要变化。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "差异",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-023",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」。知识点编码 hcip831-3-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "b36d66cb5574418eecf834b3bf95350d193c6d2187a0a68fac4c29d169681f37"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-2-1-024",
+    "type": "multiple_choice",
+    "question": "OSPFv3 支持下列哪些能力？",
+    "options": {
+      "A": "多区域",
+      "B": "路由汇总",
+      "C": "DR 选举",
+      "D": "IPv4 单播路由"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "OSPFv3 只负责 IPv6 路由，IPv4 由 OSPFv2 负责。多区域、汇总与 DR 选举均支持。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "能力",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-024",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」。知识点编码 hcip831-3-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e086be9f4e923e0ab00c236d828a9439c9260d1c40272ceb836fb1f0a027d7e5"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-2-1-025",
+    "type": "true_false",
+    "question": "OSPFv3 要求接口必须配置全局 IPv6 地址才能建立邻居。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "OSPFv3 使用链路本地地址建立邻居，接口没有全局地址也能形成邻接，这是\"基于链路\"的直接体现。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "OSPFv3"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-025",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」。知识点编码 hcip831-3-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "cdf4020f521c2134f757df1dca68c71c3c7301494b4879b47c4b762a5224f65a"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-2-1-026",
+    "type": "true_false",
+    "question": "OSPFv3 使用 FF02::5 作为 AllSPFRouters 组播地址。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "FF02::5 对应 AllSPFRouters，FF02::6 对应 AllDRouters，与 IPv4 的 224.0.0.5/6 作用相同。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "easy",
+    "tags": [
+      "判断",
+      "OSPFv3"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-026",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」。知识点编码 hcip831-3-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4eaa84b365361ff9801c2d4733884c479e91b624e4972fbe37978d20959c00e0"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-2-1-027",
+    "type": "single_choice",
+    "question": "OSPFv3 邻居无法建立，最可能的原因是？",
+    "options": {
+      "A": "链路本地地址不可达或区域号不一致",
+      "B": "接口未配置全局地址",
+      "C": "Router ID 为 IPv4 格式",
+      "D": "未启用 MPLS"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "链路本地地址是 OSPFv3 建立邻居的基础，链路不通或区域号不一致都会导致失败。Router ID 用 IPv4 格式是正常做法。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "排障"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-027",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」。知识点编码 hcip831-3-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "16fc108849f0fe19f9440bd7c326c160169288b96faff57d00c0b0bd9d052690"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-2-1-028",
+    "type": "single_choice",
+    "question": "OSPFv3 的接口配置命令通常是？",
+    "options": {
+      "A": "在系统视图下 ospf 进程号",
+      "B": "在区域视图下 network 命令",
+      "C": "在接口视图下 ospfv3 进程号 area 区域号",
+      "D": "在接口视图下 ip ospf 进程号"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "OSPFv3 在接口视图下用 ospfv3 1 area 0 的形式使能，与 v2 在进程内用 network 宣告的方式不同。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "配置"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-028",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」。知识点编码 hcip831-3-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "3ea1ff96479c93db249b907d331b2bebd219f850e1c8ec78ca11e695f04504c3"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-2-1-029",
+    "type": "single_choice",
+    "question": "OSPFv3 的路由汇总在什么设备上配置？",
+    "options": {
+      "A": "ABR 与 ASBR",
+      "B": "任意路由器",
+      "C": "只有 DR",
+      "D": "只有主机"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "区域间汇总在 ABR 上配置，外部路由汇总在 ASBR 上配置，与 OSPFv2 的角色划分一致。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "汇总"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-029",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」。知识点编码 hcip831-3-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "886589c0c7bf4027442b5e0ea74f2a0191cf2162506ab23cf77294fc568c9d00"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-2-1-030",
+    "type": "single_choice",
+    "question": "OSPFv3 中 Router-LSA 携带什么信息？",
+    "options": {
+      "A": "IPv6 前缀",
+      "B": "组播组信息",
+      "C": "外部路由",
+      "D": "拓扑与接口类型"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "OSPFv3 把前缀从 Router-LSA 中移出，Router-LSA 只描述拓扑与接口类型，前缀由 Intra-Area-Prefix-LSA 承载。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "Router-LSA"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-030",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」。知识点编码 hcip831-3-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "ddc57bb5747b391af514e1ed8fe3310f11eeec316e19557a2a093e6a51191b78"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-2-1-031",
+    "type": "single_choice",
+    "question": "OSPFv3 的下一跳地址通常是什么？",
+    "options": {
+      "A": "邻居的链路本地地址",
+      "B": "邻居的全局地址",
+      "C": "组播地址",
+      "D": "自己的环回地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "OSPFv3 路由的下一跳使用邻居接口的链路本地地址，因此转发时不依赖全局地址的可达性。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "hard",
+    "tags": [
+      "OSPFv3",
+      "下一跳"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-031",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」。知识点编码 hcip831-3-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "ece4c2f6fd3bcc801afc133842387786a112f6f2337e7b545a5b6dab4c1e071a"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-2-1-032",
+    "type": "single_choice",
+    "question": "OSPFv3 是否支持 Stub 与 NSSA 区域？",
+    "options": {
+      "A": "只支持 Stub",
+      "B": "不支持",
+      "C": "只支持 NSSA",
+      "D": "支持"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "OSPFv3 完整支持 Stub、Totally Stub、NSSA 与 Totally NSSA，区域类型与 v2 一致。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "区域类型"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-032",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」。知识点编码 hcip831-3-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e5158c84b3ef943950379328b7ced7010cef8049f092fe90e0c41ccf4fa61bd0"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-2-1-033",
+    "type": "single_choice",
+    "question": "OSPFv3 与 OSPFv2 能否互相引入路由？",
+    "options": {
+      "A": "可以，通过 ASBR 重发布",
+      "B": "不可以",
+      "C": "只能通过静态路由",
+      "D": "只能单向引入"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "在同一台 ASBR 上分别运行 v2 与 v3 进程，用 import-route 互相引入即可实现 IPv4 与 IPv6 路由互通。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "重发布"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-033",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」。知识点编码 hcip831-3-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "21e62ab5e2db40a9ee39c8e9d605ebdcc466fa43faa36c33fedfafa260c3ba56"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-2-1-034",
+    "type": "multiple_choice",
+    "question": "部署 OSPFv3 时需要确认的配置包括？",
+    "options": {
+      "A": "Router ID 唯一",
+      "B": "接口使能 ospfv3",
+      "C": "接口配置 IPv4 地址",
+      "D": "区域号一致"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "OSPFv3 依赖接口使能、区域一致与唯一 Router ID。接口不需要 IPv4 地址，甚至不需要全局 IPv6 地址。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "部署",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-034",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」。知识点编码 hcip831-3-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "50ef501546dc1b6d58b7d06504847a2c6d75f9fdef905f1cf25dd6eb340f742a"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-2-1-035",
+    "type": "true_false",
+    "question": "OSPFv3 使用与 OSPFv2 完全相同的 LSA 类型。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "OSPFv3 新增 Link-LSA 与 Intra-Area-Prefix-LSA，并把前缀从 Router-LSA 中分离，LSA 结构有实质变化。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "LSA"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-035",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」。知识点编码 hcip831-3-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "82bfeef1db9279c7bf588200fc6cc2c2246ad1d448d7ce5adc5355db327ce450"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-2-1-036",
+    "type": "single_choice",
+    "question": "OSPFv3 中接口未配置 IPv6 地址能否形成邻居？",
+    "options": {
+      "A": "不能，必须配置环回地址",
+      "B": "能，只要有链路本地地址",
+      "C": "不能，必须配置全局地址",
+      "D": "不能，必须配置 IPv4 地址"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "接口启用 IPv6 后会自动生成链路本地地址，OSPFv3 依靠该地址建立邻居，全局地址不是必需条件。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "邻居"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-036",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」。知识点编码 hcip831-3-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "a7f31405f262c1d92cc4bde53ecdb762ee62b286a1e720df0e24694a12ee5d2e"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-2-1-037",
+    "type": "single_choice",
+    "question": "OSPFv3 的 Router ID 冲突会导致什么？",
+    "options": {
+      "A": "接口自动关闭",
+      "B": "邻居无法正常建立或路由异常",
+      "C": "设备自动重启",
+      "D": "VLAN 自动删除"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Router ID 在 OSPF 域内必须唯一，冲突会导致 LSA 归属混乱，表现为邻居异常或路由缺失。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "Router ID"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-037",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」。知识点编码 hcip831-3-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "32d089d28c682fa3b1b0c60b6a46839872f542f258014e43e75eaa5c1b0c4200"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-2-1-038",
+    "type": "single_choice",
+    "question": "OSPFv3 报文的 Hop Limit 通常为？",
+    "options": {
+      "A": "128",
+      "B": "1",
+      "C": "255",
+      "D": "64"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "OSPFv3 报文使用 255 的 Hop Limit，并检查该值，用于确保报文来自直连邻居而非被转发。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "Hop Limit"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-038",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」。知识点编码 hcip831-3-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "c17cb9c5770f79e2829ca56f4ab0c4f18a650f7841335c78370cab926525d336"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-2-1-039",
+    "type": "single_choice",
+    "question": "OSPFv3 中同一链路上可以运行多个实例吗？",
+    "options": {
+      "A": "只能运行 v2",
+      "B": "不可以",
+      "C": "只能运行一个进程",
+      "D": "可以，按实例号区分"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "OSPFv3 支持每链路多实例，用实例号区分不同进程，便于同一物理链路上承载多个独立路由域。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "hard",
+    "tags": [
+      "OSPFv3",
+      "多实例"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-039",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」。知识点编码 hcip831-3-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "19613a08fee5d48dd582ecd0ec4fd5f13068bf04ad06a2cccd1b33acedbd2f52"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-2-1-040",
+    "type": "single_choice",
+    "question": "OSPFv3 的路由表查询命令通常是？",
+    "options": {
+      "A": "display ospf peer",
+      "B": "display ospf routing",
+      "C": "display ospfv3 routing",
+      "D": "display ipv6 routing-table"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "display ospfv3 routing 显示 OSPFv3 计算出的路由，display ipv6 routing-table 显示最终生效的 IPv6 路由表。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "命令"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-040",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」。知识点编码 hcip831-3-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "891cb88c3dc3e378be33ea5fb36505ae2e80c0d358a424da51c3ecfec4bbfb57"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  }
+]

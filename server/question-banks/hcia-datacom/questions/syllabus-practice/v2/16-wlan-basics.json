@@ -1,0 +1,319 @@
+[
+  {
+    "id": "hcia-v3-16-001",
+    "type": "single_choice",
+    "question": "802.11n 相比 802.11g 引入的关键技术是什么？",
+    "options": {
+      "A": "OFDM 正交频分复用",
+      "B": "MIMO 多输入多输出",
+      "C": "CSMA/CA 冲突避免",
+      "D": "WEP 加密"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "802.11n 引入 MIMO 与信道绑定，速率大幅提升；OFDM 在 802.11a/g 时已使用，CSMA/CA 是更早期就有的机制。",
+    "chapter": "WLAN 技术基础",
+    "knowledgeSection": "802.11 标准与频段",
+    "knowledgePoint": "802.11 系列标准",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 技术基础",
+      "802.11 标准与频段",
+      "802.11 系列标准"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-16-002",
+    "type": "single_choice",
+    "question": "802.11ac 标准工作在哪个频段？",
+    "options": {
+      "A": "仅 5 GHz",
+      "B": "60 GHz",
+      "C": "仅 2.4 GHz",
+      "D": "2.4 GHz 与 5 GHz 双频"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "802.11ac 只在 5GHz 工作，因此又称 5G Wi-Fi；802.11n 才同时支持 2.4G 与 5G 双频。",
+    "chapter": "WLAN 技术基础",
+    "knowledgeSection": "802.11 标准与频段",
+    "knowledgePoint": "802.11 系列标准",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 技术基础",
+      "802.11 标准与频段",
+      "802.11 系列标准"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-16-003",
+    "type": "true_false",
+    "question": "Wi-Fi 6 对应的 IEEE 标准是 802.11ax。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "802.11ax 即 Wi-Fi 6，引入 OFDMA 与上行 MU-MIMO，重点提升高密场景下的并发效率而非单纯峰值速率。",
+    "chapter": "WLAN 技术基础",
+    "knowledgeSection": "802.11 标准与频段",
+    "knowledgePoint": "802.11 系列标准",
+    "difficulty": "easy",
+    "tags": [
+      "WLAN 技术基础",
+      "802.11 标准与频段",
+      "802.11 系列标准"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-16-004",
+    "type": "single_choice",
+    "question": "2.4 GHz 频段中互不重叠的三个信道是？",
+    "options": {
+      "A": "1、2、3",
+      "B": "1、5、9",
+      "C": "2、5、8",
+      "D": "1、6、11"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "2.4G 每个信道带宽 20MHz，信道间隔仅 5MHz，因此只有 1、6、11 三个信道完全不重叠。",
+    "chapter": "WLAN 技术基础",
+    "knowledgeSection": "802.11 标准与频段",
+    "knowledgePoint": "频段与信道",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 技术基础",
+      "802.11 标准与频段",
+      "频段与信道"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-16-005",
+    "type": "single_choice",
+    "question": "5 GHz 频段相比 2.4 GHz 频段的主要特点是什么？",
+    "options": {
+      "A": "只能用于室外覆盖",
+      "B": "传输距离更远且干扰更大",
+      "C": "信道更多、干扰更少，但穿透能力较弱",
+      "D": "信道更少但穿墙能力更强"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "5G 可用信道多、非 Wi-Fi 干扰源少，但波长更短导致穿透损耗大，因此高密场景多用 5G、广覆盖仍需 2.4G 补充。",
+    "chapter": "WLAN 技术基础",
+    "knowledgeSection": "802.11 标准与频段",
+    "knowledgePoint": "频段与信道",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 技术基础",
+      "802.11 标准与频段",
+      "频段与信道"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-16-006",
+    "type": "true_false",
+    "question": "信道绑定（如 40MHz）可以提升单用户速率，但会减少可用信道数量并增加干扰概率。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "绑定把两个 20MHz 信道合并使用，速率翻倍但占用更宽频谱，在高密部署中往往得不偿失。",
+    "chapter": "WLAN 技术基础",
+    "knowledgeSection": "802.11 标准与频段",
+    "knowledgePoint": "频段与信道",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 技术基础",
+      "802.11 标准与频段",
+      "频段与信道"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-16-007",
+    "type": "single_choice",
+    "question": "MIMO 技术提升速率的原理是什么？",
+    "options": {
+      "A": "减少报文重传",
+      "B": "扩大信道带宽",
+      "C": "提高发射功率",
+      "D": "多天线同时收发多条空间流"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "MIMO 利用空间复用在同一频段并行传输多条数据流，流数越多速率越高，但受终端天线数量限制。",
+    "chapter": "WLAN 技术基础",
+    "knowledgeSection": "802.11 标准与频段",
+    "knowledgePoint": "速率与调制技术",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 技术基础",
+      "802.11 标准与频段",
+      "速率与调制技术"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-16-008",
+    "type": "single_choice",
+    "question": "无线信号强度常用的单位是什么？",
+    "options": {
+      "A": "MHz",
+      "B": "Mbps",
+      "C": "dBm",
+      "D": "V"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "dBm 是以 1 毫瓦为基准的对数功率单位，数值越大信号越强；MHz 是频率单位，Mbps 是速率单位。",
+    "chapter": "WLAN 技术基础",
+    "knowledgeSection": "射频基础",
+    "knowledgePoint": "射频信号与功率",
+    "difficulty": "easy",
+    "tags": [
+      "WLAN 技术基础",
+      "射频基础",
+      "射频信号与功率"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-16-009",
+    "type": "single_choice",
+    "question": "发射功率每增加 3 dB，信号强度大约变化多少？",
+    "options": {
+      "A": "功率保持不变",
+      "B": "功率约增加三倍",
+      "C": "功率约减半",
+      "D": "功率约翻一倍"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "dB 是对数单位，3dB 约等于功率翻倍、10dB 约等于十倍。掌握这一点才能正确理解功率与覆盖的关系。",
+    "chapter": "WLAN 技术基础",
+    "knowledgeSection": "射频基础",
+    "knowledgePoint": "射频信号与功率",
+    "difficulty": "hard",
+    "tags": [
+      "WLAN 技术基础",
+      "射频基础",
+      "射频信号与功率"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v3-16-010",
+    "type": "true_false",
+    "question": "无线信号强度越高，终端的实际吞吐一定越高。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "吞吐还受干扰、并发用户数、信道带宽与终端能力影响；信号很强但同频干扰严重时，吞吐可能依然很低。",
+    "chapter": "WLAN 技术基础",
+    "knowledgeSection": "射频基础",
+    "knowledgePoint": "射频信号与功率",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 技术基础",
+      "射频基础",
+      "射频信号与功率"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-16-011",
+    "type": "single_choice",
+    "question": "全向天线与定向天线的主要区别是什么？",
+    "options": {
+      "A": "定向天线只能用于室外",
+      "B": "全向天线增益一定高于定向天线",
+      "C": "两者覆盖形状完全相同",
+      "D": "全向天线水平面均匀辐射，定向天线把能量集中到特定方向"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "全向天线适合大厅等中心覆盖场景，定向天线增益更高、覆盖更远，适合走廊、长距离桥接与室外定向覆盖。",
+    "chapter": "WLAN 技术基础",
+    "knowledgeSection": "射频基础",
+    "knowledgePoint": "天线类型与增益",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 技术基础",
+      "射频基础",
+      "天线类型与增益"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-16-012",
+    "type": "single_choice",
+    "question": "同频干扰与邻频干扰的区别是什么？",
+    "options": {
+      "A": "同频干扰只发生在 5G 频段",
+      "B": "邻频干扰不会影响速率",
+      "C": "两者完全等价",
+      "D": "同频是信道完全相同，邻频是信道部分重叠"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "同频干扰影响最严重，邻频干扰因频谱部分重叠同样会造成退避与重传，因此信道规划要同时避免这两类情况。",
+    "chapter": "WLAN 技术基础",
+    "knowledgeSection": "射频基础",
+    "knowledgePoint": "干扰与信道规划",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 技术基础",
+      "射频基础",
+      "干扰与信道规划"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-16-013",
+    "type": "true_false",
+    "question": "在 2.4 GHz 频段做信道规划时，相邻 AP 应尽量使用 1、6、11 这类互不重叠的信道。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "只有 1、6、11 完全不重叠，交错使用可最大限度降低同频与邻频干扰，是 2.4G 覆盖规划的基本做法。",
+    "chapter": "WLAN 技术基础",
+    "knowledgeSection": "射频基础",
+    "knowledgePoint": "干扰与信道规划",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 技术基础",
+      "射频基础",
+      "干扰与信道规划"
+    ],
+    "stage": "综合应用"
+  }
+]

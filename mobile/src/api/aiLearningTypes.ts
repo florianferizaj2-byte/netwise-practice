@@ -26,6 +26,7 @@ export type AiLearningJob = AiLearningSummary & {
   blueprint:AiLearningBlueprint;questions:Array<Question & {position:number}>;groupId:string;answers:Record<string,string[]>;answersVersion:number;
   eventId:number;startedAt:string|null;remainingMs:number|null;waiting:boolean;pricing:AiLearningQuote["pricing"];
   billing:{chargedUnits:number;heldUnits:number;scale:number};
+  progress:{stage:string;position:number};retryable:boolean;errorCode:string|null;
   result:{score:number;maxScore:number;targetCount:number;partial:boolean;elapsed:number;notice:string;results:Array<Question & AttemptResponse>}|null;
 };
 export type AiLearningEvent = {id:number;type:string;data:Record<string,unknown>};

@@ -180,7 +180,11 @@ try {
   });
   await answer(page, q);
   await expect.poll(() => lostAttempt).toBe(true);
-  await expect(page.locator(".result-block")).toHaveCount(0);
+  // The newer practice flow grades from the prefetched reveal immediately,
+  // but a lost acknowledgement must remain visibly unsynced, never "saved".
+  await expect(page.locator(".result-block")).toBeVisible();
+  await expect(page.locator(".practice-save-status")).toContainText("尚未保存到账号");
+  await expect(page.getByRole("button", { name: "重试保存", exact: true })).toBeVisible();
   assert.equal(store.allA(user.id).length, 1);
   assert.equal((await api("/learning-plan")).plan.tasks.at(-1).answered, 1);
   await page.unroute("**/api/attempts");

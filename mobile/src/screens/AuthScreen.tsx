@@ -1,3 +1,4 @@
+import { SafeAreaView } from '../components/SafeArea';
 import { iosStyles } from '../iosStyles';
 import { useEffect, useRef, useState } from 'react';
 import {
@@ -92,7 +93,7 @@ export function AuthScreen({ onAuthenticated, onPreview }: AuthScreenProps) {
   }
 
   return (
-    <KeyboardAvoidingView
+    <SafeAreaView style={styles.flex}><KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       style={styles.flex}
     >
@@ -205,7 +206,7 @@ export function AuthScreen({ onAuthenticated, onPreview }: AuthScreenProps) {
           <WebAppActions />
         </EntranceView>
       </ScrollView>
-    </KeyboardAvoidingView>
+    </KeyboardAvoidingView></SafeAreaView>
   );
 }
 

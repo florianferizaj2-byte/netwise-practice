@@ -52,7 +52,7 @@ export function tokenCost(usage, rates) {
     BigInt(output) * BigInt(rates.outputMicrosPerMillion);
   return safeNumber(ceilRatio(numerator, 1_000_000n), '成本');
 }
-export const displayPoints = units => integer(units, '积分') / POINT_SCALE;
+export const displayPoints = units => integer(units, '积分', {min:-Number.MAX_SAFE_INTEGER}) / POINT_SCALE;
 export function pointUnits(value) {
   const text=String(value);
   if(!/^(0|[1-9]\d{0,8})(\.\d{1,3})?$/.test(text))

@@ -1,0 +1,1853 @@
+[
+  {
+    "id": "hcip831-1-1-2-006",
+    "type": "single_choice",
+    "question": "R1 从 ASBR1 和 ASBR2 学到同一条 Type 2 外部路由，两条路由的外部度量均为 20。R1 到 ASBR1 的内部开销为 10，到 ASBR2 的内部开销为 30，且没有配置其他选路策略。R1 选择哪条路径？",
+    "options": {
+      "A": "两条路径等价，R1 对它们进行负载分担",
+      "B": "经 ASBR2 的路径，因为到 ASBR2 的内部开销更大，说明该路径更可靠",
+      "C": "经 ASBR1 的路径，因为 Type 2 外部度量相同时比较到 ASBR 的内部开销，较小者优先",
+      "D": "两条路径都不被采纳，Type 2 外部路由必须由 ASBR 指定非 0 转发地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项 C：Type 2 外部路由先比较外部度量，20 与 20 相同，再按内部开销选择到达 ASBR 代价较小的路径，10 小于 30，因此选 ASBR1。A 项忽略了外部度量相同时还要比较到 ASBR 的内部开销，不能直接判定等价；B 项把内部开销大当作优点，与实际优选方向相反；D 项误解了转发地址的作用，Type 2 外部路由的转发地址可以为 0，并不要求 ASBR 指定。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Type 2 外部路由",
+      "选路"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-006",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §16.4（AS 外部路由计算）与 §16.4.1（外部路径优先）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "f20c0d9e262e48ae153daaf8cec9ca238863103d830d1ac230b113a619e17b31"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-007",
+    "type": "single_choice",
+    "question": "R1 到同一外部网段有两条 Type 1 外部路由：经 ASBR1 的外部度量为 10，R1 到 ASBR1 的内部开销为 30；经 ASBR2 的外部度量为 20，R1 到 ASBR2 的内部开销为 10。R1 优选哪条路径？",
+    "options": {
+      "A": "经 ASBR2，总开销为 20+10=30，小于经 ASBR1 的 10+30=40",
+      "B": "经 ASBR1，因为它的外部度量 10 更小，内部开销不参与 Type 1 比较",
+      "C": "两条路径等价，Type 1 只比较外部度量",
+      "D": "经 ASBR1，因为 Type 1 路由总是选择外部度量最小的 ASBR"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项 A：Type 1 外部路由的度量由外部度量与到 ASBR 的内部开销相加得到，经 ASBR1 为 10+30=40，经 ASBR2 为 20+10=30，30 更小，故选 ASBR2。B 项把 Type 1 当成只比较外部度量，漏加了内部开销；C 项同样漏掉内部开销，错误地判定等价；D 项方向错误，Type 1 比较的是总开销而不是仅比较外部度量。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Type 1 外部路由",
+      "度量计算"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-007",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §16.4（AS 外部路由计算，Type 1 总开销）与 §16.4.1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "6ab32b9ab90d81815c78dff9fd1ab17ca051bbfbd117943f308a59018b31348d"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-008",
+    "type": "single_choice",
+    "question": "华为设备上，R1 到达 10.10.10.0/24 同时存在一条 OSPF 区域内路由（开销 100）和一条 Type 1 外部路由（总开销 10）。按 OSPF 选路规则，R1 会选择哪条路由？",
+    "options": {
+      "A": "外部路由，因为它的总开销 10 明显更小",
+      "B": "两条路由都装入转发表并负载分担",
+      "C": "外部路由，因为 Type 1 外部路由优先于区域内路由",
+      "D": "区域内路由，区域内路由优先于任何 AS 外部路由，与开销大小无关"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项 D：OSPF 的路径优先级规定区域内和区域间路由优先于 AS 外部路由，因此即使外部路由开销更小，也先选区域内路由。A 项只比较开销，忽略了路径类型优先级；B 项把不同优先级的路径当成等价路径，不符合选路规则；C 项把优先级顺序说反了，外部路由不可能优先于区域内路由。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "路径优先级",
+      "区域内路由"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-008",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §16.4 第 6 步（区域内、区域间路径优先于 AS 外部路径）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "ad7f984651b0042ad4c2b75ac5d6a1dd40e045b5798634ed8cbb726423af35b0"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-009",
+    "type": "single_choice",
+    "question": "同一目的网段，R1 有一条从本区域 SPF 计算得到的区域内路由，开销为 50；另有 ABR 通告的区域间 Type 3 路由，开销为 10。R1 的路由表会选择哪条？",
+    "options": {
+      "A": "区域间路由，因为它的开销 10 更小",
+      "B": "区域内路由，OSPF 区域内路径优先于区域间路径",
+      "C": "两条路由开销可以相加，形成一条开销为 60 的等价路径",
+      "D": "丢弃区域间路由，并重新建立与 ABR 的邻居关系"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项 B：OSPF 先比较路径类型，区域内路径优先于区域间路径，因此即使区域间路由开销更小，仍选区域内路由。A 项只按数值比较开销，忽略了路径类型优先级；C 项错误地把两条不同来源的路由开销相加，OSPF 不会这样合并路径；D 项把正常的路由优选当成邻居故障，处理方式没有依据。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "区域内路由",
+      "区域间路由"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-009",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §16.2（区域间路由计算）与 §11（路由表结构）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "133ee9f94f1070665dc2cfe3571e1e2c5f9ccba1fe643d9c40672f25825c0009"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-010",
+    "type": "single_choice",
+    "question": "华为设备上，ASBR 在 OSPF 进程配置了 default-route-advertise route-policy P，本机路由表存在一条默认路由，但策略 P 拒绝该默认路由。该 ASBR 的行为是？",
+    "options": {
+      "A": "仍生成 Type 5 默认路由，route-policy 只影响默认路由的度量",
+      "B": "改为生成 Type 3 默认路由，并只在本区域泛洪",
+      "C": "不生成默认路由的 Type 5 LSA，因为待通告的默认路由未通过策略",
+      "D": "删除本机默认路由，然后重新执行路由引入"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项 C：default-route-advertise 引用的 route-policy 用来筛选允许通告的默认路由，策略拒绝时不会产生默认路由的 Type 5 LSA。A 项误解了 route-policy 的作用，它不是只改度量而是决定是否通告；B 项混淆了 Type 3 与 Type 5 的生成者，ASBR 通告默认路由使用 Type 5；D 项把策略拒绝当成需要删除本地路由，既无必要也会破坏本地转发。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "默认路由",
+      "route-policy"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-010",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §12.4.4（AS-external-LSA，默认路由以 0.0.0.0/0 表示）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "5fc99e2e82908b295272c249faef0d7b55d8cd0f6709e388d26d88f28b019487"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-011",
+    "type": "single_choice",
+    "question": "华为设备上，ASBR 配置了 default-route-advertise always，但本机路由表中没有任何默认路由。该 ASBR 会怎样处理？",
+    "options": {
+      "A": "仍然产生 Type 5 默认路由，并通告到普通 OSPF 区域",
+      "B": "等待邻居送来默认路由后，再产生 Type 5 默认路由",
+      "C": "只产生 Type 7 默认路由，不产生 Type 5 默认路由",
+      "D": "配置被拒绝，必须先把默认路由加入本机路由表"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项 A：always 参数的作用就是在本机没有默认路由时也强制产生默认路由的 Type 5 LSA，因此仍会向普通区域通告。B 项描述的是不带 always 时的依赖关系，与题干条件不符；C 项把 NSSA 的 Type 7 默认路由场景套到普通区域，普通区域使用 Type 5；D 项错误地认为配置依赖本地默认路由存在，always 正是为了摆脱这一依赖。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "默认路由",
+      "always"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-011",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §12.4.4（AS-external-LSA，默认路由以 0.0.0.0/0 表示）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "5b4f0c5c963a55720cd97f0e74878e72f702322b21065b3bef2793ca85989782"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-012",
+    "type": "single_choice",
+    "question": "华为设备上，ASBR 执行 import-route static 引入静态路由，命令中没有指定 cost 和 type 参数。这些静态路由生成的 AS-external LSA 默认使用什么度量？",
+    "options": {
+      "A": "Type 1，cost 0",
+      "B": "Type 2，cost 1",
+      "C": "Type 2，cost 20，继承静态路由自身的度量",
+      "D": "Type 1，cost 100"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项 B：华为设备 OSPF 的 import-route 在未指定参数时，引入路由的默认外部度量类型为 Type 2，默认 cost 为 1。A 项把类型和初值都设错，默认既不是 Type 1 也不是 0；C 项误以为会继承静态路由度量，静态路由本身没有 OSPF 外部度量可继承；D 项把类型和数值都换成另一组常见配置值，缺乏依据。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "路由引入",
+      "默认度量"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-012",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §12.4.4（AS-external-LSA 的度量字段）；华为 import-route 默认 cost 1、type 2 为设备默认行为，已在题干注明。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "23eec5c341fd3b7aadd44fa8de0d2aa836e70ff01178696f2cc2496d0fdb05e5"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-013",
+    "type": "single_choice",
+    "question": "华为设备默认偏好值下，R1 同时通过 OSPF 区域内路由和静态路由学到 10.1.1.0/24。OSPF 路由的默认 preference 为 10，静态路由为 60。R1 会把哪条路由装入路由表？",
+    "options": {
+      "A": "静态路由，因为静态路由比动态路由更可信",
+      "B": "两条都装入并负载分担",
+      "C": "OSPF 路由，因为 60 小于 10",
+      "D": "OSPF 路由，因为 preference 数值越小越优先，10 小于 60"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项 D：华为设备用 preference 表示路由优先级，数值越小越优先，OSPF 的 10 小于静态路由的 60，因此选择 OSPF 路由。A 项把“静态路由更可信”的直觉当成规则，忽略了实际 preference 比较；B 项只有在同协议同优先级且开销相等时才可能负载分担，不同来源路由不能直接等价；C 项把数值大小与优先级方向说反了。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "preference",
+      "路由优选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-013",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §16.4（内部与外部路径优先）与 §11（路由表结构）；华为 preference 默认值按设备默认行为在题干注明。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "7d4fabeddc2d30a29c9e9c844cd189c29328144f265caa96ab6babf32fee3322"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-014",
+    "type": "single_choice",
+    "question": "华为设备默认偏好值下，R1 从 OSPF ASBR 学到一条 Type 2 外部路由，AS-external 默认 preference 为 150；同时从 RIP 学到同一前缀，RIP 默认 preference 为 100。R1 选择哪条路由？",
+    "options": {
+      "A": "RIP 路由，因为 100 小于 150，数值越小越优先",
+      "B": "OSPF 外部路由，因为 OSPF 协议整体优于 RIP",
+      "C": "两条路由等价，进行负载分担",
+      "D": "OSPF 外部路由，因为 Type 2 外部度量一定小于 RIP 度量"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项 A：不同协议之间先比较 preference，RIP 的 100 小于 OSPF AS-external 的 150，因此选择 RIP 路由。B 项把协议类型当成绝对优劣，实际由 preference 决定；C 项忽略了 preference 差异，不同协议路由不能直接形成等价；D 项把 OSPF 外部度量与 RIP 度量放在一起比较，跨协议的度量没有可比性。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "preference ase",
+      "RIP"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-014",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §16.4（内部与外部路径优先）；华为 preference/preference ase 默认值按设备默认行为在题干注明。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "35d840f1ce8fc6c0d2a162c9bbd0394c7c44881cd92064afa2b7d93555d45c73"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-015",
+    "type": "single_choice",
+    "question": "华为设备上，管理员在 OSPF 进程视图执行 preference 20，没有修改 AS-external 的偏好值。该操作对 OSPF 内部路由和 AS 外部路由的影响是？",
+    "options": {
+      "A": "内部路由和 AS 外部路由的 preference 都变为 20",
+      "B": "内部路由和 AS 外部路由都保持原来的 10",
+      "C": "内部路由的 preference 变为 20，AS 外部路由仍为默认的 150",
+      "D": "内部路由保持 10，AS 外部路由变为 20"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项 C：preference 命令设置 OSPF 内部路由的优先级；AS 外部路由使用独立的 AS-external 优先级，未执行 preference ase 时仍为默认 150。A 项把两类路由的优先级混为同一个参数；B 项忽略了 preference 命令已经修改内部路由优先级；D 项把作用对象说反，preference 不会自动改外部路由的优先级。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "preference",
+      "AS-external"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-015",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §16.4（内部与外部路径优先）；华为 preference 与 preference ase 的作用范围按设备实现，已在题干注明。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "3aa0a1fa8e20853cf3d9af1fd6c1ca54bb3a3481270bc0282d79fba297a6cf82"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-016",
+    "type": "single_choice",
+    "question": "ABR 在区域 1 配置 area-range 10.1.0.0 255.255.0.0 not-advertise。该配置的效果是？",
+    "options": {
+      "A": "在区域 1 内删除 10.1.0.0/16 的所有明细路由",
+      "B": "ABR 不向其他区域发布匹配 10.1.0.0/16 的 Type 3 LSA，区域 1 内部路由不受影响",
+      "C": "ABR 向区域 0 发布一条开销为无穷大的 Type 3 LSA，其他区域仍可使用明细",
+      "D": "ABR 把匹配路由改成 Type 5 外部 LSA 后发布"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项 B：area-range 的 not-advertise 表示不把匹配范围的区域间路由通告到其他区域，它抑制的是 ABR 对外发布的 Type 3 LSA，不会删除源区域内部的明细路由。A 项误以为会删除区域 1 内路由，实际只影响对外通告；C 项把抑制通告误解为发布无穷大度量，其他区域不会收到该范围路由；D 项把区域间聚合与外部路由引入混淆，不会改发 Type 5。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "区域间聚合",
+      "not-advertise"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-016",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §12.4.3（Summary-LSA）与 §16.2（区域间路由计算）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "739dc51efdfb5be7712afabceb3c87b885c9b097b44c5b8c7258325a5ccbfc46"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-017",
+    "type": "single_choice",
+    "question": "ASBR 对外部路由配置 asbr-summary 10.2.0.0 255.255.0.0 not-advertise。与不带 not-advertise 的聚合配置相比，该配置的区别是？",
+    "options": {
+      "A": "只抑制明细路由，仍然发布聚合路由",
+      "B": "只发布明细路由，不发布聚合路由",
+      "C": "聚合路由和明细路由都照常发布",
+      "D": "既不发布聚合路由，也抑制匹配范围的明细外部路由"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项 D：asbr-summary 的 not-advertise 表示匹配范围的外部路由不对外通告，因此聚合路由和明细路由都不会发布。A 项描述的是普通聚合只抑制明细的行为，漏掉了 not-advertise 对聚合本身的抑制；B 项与 not-advertise 的语义相反，明细同样被抑制；C 项认为配置没有效果，与实际行为不符。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "ASBR 聚合",
+      "not-advertise"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-017",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §12.4.4（AS-external-LSA）与 §16.4（AS 外部路由计算）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "27220e36d85fc8631a212430fbdc7715163c1f52b10dd9b39f611cf1f6c0e369"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-018",
+    "type": "single_choice",
+    "question": "华为设备上，ASBR 配置 asbr-summary 对引入的外部路由进行聚合。该命令聚合的对象是？",
+    "options": {
+      "A": "所有 OSPF 区域内路由",
+      "B": "ABR 产生的 Type 3 区域间路由",
+      "C": "ASBR 通过 import-route 引入并生成的 Type 5 外部路由",
+      "D": "NSSA 内所有 Type 7 路由，包括其他 ASBR 产生的"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项 C：asbr-summary 是 ASBR 上的外部路由聚合命令，作用于本机通过 import-route 引入后生成的 Type 5 外部路由。A 项把外部聚合误当成区域内聚合，区域内路由不是该命令的对象；B 项混淆了 ABR 的 area-range 与 ASBR 的 asbr-summary；D 项扩大了范围，asbr-summary 不会聚合其他 ASBR 产生的 Type 7 路由。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "ASBR 聚合",
+      "Type 5"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-018",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §12.4.4（AS-external-LSA）与 §16.4（AS 外部路由计算）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "a5f0176e25d36d746b408befdf5d9c37b9101c50aaa201f7f8f0d0d6fb7ee903"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-019",
+    "type": "single_choice",
+    "question": "ASBR 将一条指向 Null0 的静态汇总路由通过 import-route 引入 OSPF，并生成 Type 5 LSA。该 LSA 的 Forwarding Address 字段通常是什么？",
+    "options": {
+      "A": "0.0.0.0，表示流量发往产生该 LSA 的 ASBR",
+      "B": "ASBR 的 Router ID，表示由 ASBR 直接转发",
+      "C": "该静态路由出接口的地址，表示由出接口直接转发",
+      "D": "255.255.255.255，表示按广播方式转发"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项 A：Forwarding Address 为 0.0.0.0 表示目的网段应经产生该 LSA 的 ASBR 到达；指向 Null0 的汇总路由没有真实下一跳接口，ASBR 通常把该字段置 0。B 项把 Router ID 当作转发地址，Router ID 只是路由器标识，不表示下一跳；C 项 Null0 不是真实出接口，无法提供可转发的接口地址；D 项广播地址不能作为单播转发地址，也不符合该字段语义。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Type 5",
+      "转发地址"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-019",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §12.4.4（AS-external-LSA）与 §16.4（AS 外部路由计算）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "cf21e56e25d9775365f36f8c218a56c52a3a03734513b78fe5af0101db835985"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-020",
+    "type": "single_choice",
+    "question": "ASBR 使用 import-route static route-policy P 引入静态路由，策略 P 对匹配前缀执行 apply cost 100。该前缀生成的 Type 5 LSA 中，外部度量如何体现？",
+    "options": {
+      "A": "仍为默认值 1，apply cost 只影响本地路由表",
+      "B": "变为 0，表示由接收方重新计算",
+      "C": "由接收方根据接口开销重新计算，LSA 中不携带该值",
+      "D": "外部度量设置为 100，并随 Type 5 LSA 通告"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项 D：route-policy 中的 apply cost 会修改引入路由的外部度量，ASBR 以该值生成 Type 5 LSA，邻居收到后看到的外部度量就是 100。A 项把策略作用限制在本地路由表，忽略了它会写入 LSA；B 项把度量改为 0 并称由接收方计算，Type 5 的外部度量由 ASBR 设置；C 项错误地认为 LSA 不携带外部度量。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "路由引入",
+      "apply cost"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-020",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §12.4.4（AS-external-LSA 的度量字段）与 §16.4。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "aa0ef24734c3cb759cb636f68e6aaf11e92b7e11c60fd141a9c6e52300082ecd"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-021",
+    "type": "single_choice",
+    "question": "华为设备上，把直连网段 10.3.3.0/24 发布进 OSPF 时，使用 network 命令与使用 import-route direct 的关键区别是？",
+    "options": {
+      "A": "两者都生成 Type 5 外部路由，没有实质区别",
+      "B": "network 把网段作为区域内路由描述，import-route direct 生成 Type 5 外部路由",
+      "C": "network 生成 Type 3 区域间路由，import-route 生成 Type 2 网络 LSA",
+      "D": "两者都不需要匹配接口地址，直接按目的网段生效"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项 B：network 命令把匹配接口加入 OSPF 区域，网段作为区域内拓扑的一部分由 Router LSA 和 Network LSA 描述；import-route direct 则把直连路由当作外部路由引入，生成 Type 5 LSA。A 项忽略了二者路径类型的本质差异；C 项把 LSA 类型随意对应，network 不产生 Type 3，import-route 也不产生 Type 2；D 项错误，network 必须匹配接口地址和掩码。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "network",
+      "import-route"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-021",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §12.4.1（Router-LSA）、§12.4.2（Network-LSA）与 §12.4.4（AS-external-LSA）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "3cea5c68cdd0c2fdc186c7cd666669fc8c5ae81344b771b48a87be39787184b3"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-022",
+    "type": "single_choice",
+    "question": "NSSA 区域内的 ASBR 通过 import-route 引入一条外部路由。该路由在 NSSA 内以哪种 LSA 承载？",
+    "options": {
+      "A": "Type 7 LSA",
+      "B": "Type 5 LSA",
+      "C": "Type 3 LSA",
+      "D": "Type 4 LSA"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项 A：NSSA 不允许 Type 5 LSA 进入，NSSA 内的 ASBR 用 Type 7 LSA 承载引入的外部路由，再由 NSSA ABR 决定是否翻译成 Type 5 发往其他区域。B 项把普通区域的外部 LSA 类型套到 NSSA；C 项 Type 3 用于区域间路由，不由 ASBR 承载外部路由；D 项 Type 4 描述 ASBR 可达性，不承载外部前缀。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "NSSA",
+      "Type 7"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-022",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2",
+        "rfc4577-ospf-vpn"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 4577 §4.2.8.1、§4.2.8.3（NSSA 外部路由以 Type 7 通告）与 RFC 2328 §12.1.3（LS type 字段）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "21c7b2a260f38c8bb4455f2a76cadf5bc9ceb7ac4be60a661c76684939d6b190"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-023",
+    "type": "single_choice",
+    "question": "关于 ABR 产生 Type 3 LSA 的范围，下列描述正确的是？",
+    "options": {
+      "A": "ABR 为本区域内每条路由向本区域再发一条 Type 3 LSA",
+      "B": "ABR 只为区域 0 的路由产生 Type 3 LSA",
+      "C": "ABR 把一个区域的区域内路由以 Type 3 LSA 通告到其他区域，不会把该路由以 Type 3 形式回注同一区域",
+      "D": "ABR 把 Type 5 LSA 转换成 Type 3 LSA 后只在区域 0 泛洪"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项 C：Type 3 LSA 用于区域间路由通告，ABR 将一个区域的区域内路由汇总后发布到其他区域，不会把同一路由再以 Type 3 形式发回原区域。A 项误解了 Type 3 的方向，区域内路由在本区域已由 Type 1/2 描述；B 项把来源限制为区域 0，实际任何区域的区域内路由都可被通告；D 项混淆了 Type 5 与 Type 3 的转换关系。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Type 3",
+      "ABR"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-023",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §12.4.3（Summary-LSA）与 §16.2（区域间路由计算）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "3b2815a529cb0e47bfbbce4f7238e8beb8e25fb2a810f098e98df2703da834ad"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-024",
+    "type": "single_choice",
+    "question": "ABR 向区域 2 发布一条描述 10.4.0.0/16 的 Type 3 LSA。该 LSA 中的度量表示什么？",
+    "options": {
+      "A": "源区域中该网段的总开销",
+      "B": "ABR 到区域 0 中目的地的开销加上源区域开销",
+      "C": "固定为 1",
+      "D": "ABR 自己到该目的网段的开销"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项 D：Type 3 LSA 的度量是 ABR 自己到达该目的网段的开销，接收方在此基础上再加上到 ABR 的开销。A 项把源区域内部开销当成 LSA 度量，实际由 ABR 重新填写；B 项重复叠加了到区域 0 的开销，没有这种计算方式；C 项把度量固定为 1，忽略了实际路径开销。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Type 3",
+      "度量"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-024",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §12.4.3（Summary-LSA 的度量字段）与 §16.2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "a05f4ad0c177cf1299f1c0d97e2603ae638ada18f90f7739c36cc69f1d1238a3"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-025",
+    "type": "single_choice",
+    "question": "当 ASBR 位于另一个区域时，R1 所在区域的路由器如何知道该 ASBR 的可达性？",
+    "options": {
+      "A": "通过 Type 5 LSA 中的转发地址字段",
+      "B": "通过 ABR 产生的 Type 4 LSA（ASBR Summary）",
+      "C": "通过 Type 3 LSA 中的 ASBR 标志位",
+      "D": "通过 Type 2 Network LSA"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项 B：Type 4 LSA 由 ABR 产生，用来描述 ASBR 的可达性，使其他区域的路由器能够计算到 ASBR 的路径。A 项转发地址用于外部路由的下一跳，不负责描述 ASBR 本身；C 项 Type 3 LSA 没有 ASBR 标志位，也不承担该功能；D 项 Type 2 描述广播网中的路由器集合，与 ASBR 可达性无关。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Type 4",
+      "ASBR"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-025",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §12.4.3（Summary-LSA，Type 4）与 §16.2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "4d5198bf36d3354a6e68227823bdbd49d1af872d04140d6e882bc97f676c024b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-026",
+    "type": "single_choice",
+    "question": "一条 Type 5 外部 LSA 的 Forwarding Address 字段为非 0 的 10.5.5.5。路由器计算该外部路由时，内部开销应如何计算？",
+    "options": {
+      "A": "固定按 0 计算，直接使用外部度量",
+      "B": "计算到产生该 LSA 的 ASBR 的开销",
+      "C": "计算到 Type 5 LSA 中 Link State ID 的开销",
+      "D": "计算到转发地址 10.5.5.5 的开销，再加上外部度量"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项 D：转发地址非 0 时，路由器把流量发往该地址，因此内部开销按到转发地址的最短路径计算，再叠加外部度量。A 项适用于转发地址为 0 的情况，不能套用到非 0 场景；B 项在转发地址非 0 时不再以 ASBR 为下一跳；C 项 Link State ID 标识外部目的网段，不是下一跳地址。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "Type 5",
+      "转发地址"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-026",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §12.4.4（AS-external-LSA 的 Forwarding Address 字段）与 §16.4。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "56498bec2f133e2607a7e8a4e156bc46301960b8dfaaf8b4d3e13424e34b8d83"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-027",
+    "type": "single_choice",
+    "question": "Type 5 AS-external LSA 的泛洪范围是？",
+    "options": {
+      "A": "整个 AS，但不会进入 Stub 区域和 NSSA 区域",
+      "B": "只在本区域内部泛洪",
+      "C": "只进入区域 0",
+      "D": "只进入 NSSA 区域"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项 A：Type 5 LSA 在整个自治系统内泛洪，但 Stub 区域和 NSSA 区域不接收 Type 5，NSSA 用 Type 7 承载外部路由。B 项描述的是区域内 LSA 的范围，Type 5 不局限于本区域；C 项错误地限制为区域 0；D 项把 Type 7 的适用范围套给了 Type 5。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "Type 5",
+      "泛洪范围"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-027",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §12.4.4（AS-external-LSA 的泛洪范围）与 §3.6（Stub 区域）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "a5e7877efbe2b6417dd947ab42bd720d17508706568428e1cabb24d133af7fe3"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-028",
+    "type": "single_choice",
+    "question": "ASBR 配置 import-route static route-policy P，策略 P 拒绝前缀 10.6.6.0/24。该前缀在 ASBR 本地路由表中仍是一条静态路由。结果是？",
+    "options": {
+      "A": "该前缀仍会生成 Type 5 LSA，只是度量变为无穷大",
+      "B": "该前缀会以 Type 3 LSA 发布",
+      "C": "该前缀不会生成外部 LSA，也不会被通告进 OSPF",
+      "D": "该前缀会生成 Type 7 LSA"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项 C：import-route 引用的 route-policy 拒绝该前缀时，路由不会被引入 OSPF，因此不会生成 Type 5 或 Type 7 外部 LSA，也不会通告给邻居。A 项误以为拒绝只改变度量，实际是阻止引入；B 项把拒绝引入与区域间通告混淆，OSPF 不会为该前缀生成 Type 3；D 项错误地认为普通区域会生成 Type 7。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "路由引入",
+      "策略拒绝"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-028",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §12.4.4（AS-external-LSA）与 §16.4（外部路由计算）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "a8b629614f1919e433aa9d07949d1a0a5b33be9489ae211756e171a37941bd24"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-029",
+    "type": "single_choice",
+    "question": "华为设备上，OSPF 进程配置 bandwidth-reference 1000，某接口带宽为 10 Mbit/s，接口下没有单独配置 OSPF cost。该接口的 OSPF 开销是多少？",
+    "options": {
+      "A": "1",
+      "B": "10",
+      "C": "1000",
+      "D": "100"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项 D：OSPF 接口开销按参考带宽除以接口带宽计算，1000÷10=100。A 项是开销下限，只有当计算结果小于 1 时才取 1，本题结果为 100；B 项用默认参考带宽 100 计算得到 10，与题干配置的 1000 不符；C 项把参考带宽本身当成了接口开销。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "cost",
+      "带宽参考"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-029",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §12.4.1（Router-LSA 链路度量）与 §16.1（SPF 计算）；华为 bandwidth-reference 计算公式为设备实现，已在题干注明。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "39cbd6b049349b2f40ce3b812c49230beed6075018390b3feed21ac7524bb3a2"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-030",
+    "type": "single_choice",
+    "question": "ABR 配置 area-range 10.7.0.0 255.255.0.0 cost 77，聚合范围内各明细路由的开销不同。ABR 向其他区域发布的聚合 Type 3 LSA 开销是多少？",
+    "options": {
+      "A": "各明细路由开销的最大值",
+      "B": "77，显式 cost 覆盖默认取值",
+      "C": "各明细路由开销之和",
+      "D": "1"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项 B：area-range 指定 cost 后，聚合 Type 3 LSA 使用该显式值 77，不再按默认规则取明细路由开销。A 项描述的是未指定 cost 时的默认行为，本题已显式指定；C 项把聚合开销误当成明细开销求和；D 项把聚合度量固定为 1，没有依据。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "区域间聚合",
+      "cost"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-030",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §12.4.3（Summary-LSA 的度量字段）与 §16.2。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "b0b4c4ae8f428e3aef296ee4b1d818e22ac2b72a0b9fd577d3d56a16264d57ea"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-031",
+    "type": "single_choice",
+    "question": "华为设备上，ASBR 配置 default-route-advertise cost 50 type 1，且本机存在默认路由。生成的 Type 5 默认路由使用什么外部度量和类型？",
+    "options": {
+      "A": "外部度量 1，Type 2",
+      "B": "外部度量 50，Type 2",
+      "C": "外部度量 1，Type 1",
+      "D": "外部度量 50，Type 1"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项 D：命令中的 cost 50 设置外部度量，type 1 设置外部度量类型，两者同时生效，因此 Type 5 默认路由为度量 50、Type 1。A 项忽略了显式 cost 和 type，使用了默认值；B 项只应用了 cost，漏掉 type 1；C 项只应用了 type，漏掉 cost 50。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "默认路由",
+      "Type 5"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-031",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §12.4.4（AS-external-LSA 的 metric 字段）；华为 default-route-advertise 参数语义为设备实现，已在题干注明。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "41078c142e285b6c3fabefc21812c677cd06da29a5f84f757a1504b3e3b33edf"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-032",
+    "type": "single_choice",
+    "question": "华为设备上，ASBR 在 OSPF 进程配置 filter-policy export，希望阻止一条通过 import-route 引入的外部路由发布。该过滤器的作用范围是？",
+    "options": {
+      "A": "只过滤 import-route 引入的路由，不影响 OSPF 自身的区域内、区域间路由",
+      "B": "同时过滤 OSPF 区域内和区域间路由",
+      "C": "过滤所有 Type 3 LSA",
+      "D": "过滤接收到的 Type 5 LSA"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项 A：OSPF 的 filter-policy export 针对本机引入并准备以外部 LSA 发布的路由，不会拦截 OSPF 自身产生的区域内、区域间路由。B 项扩大了作用范围，把正常的 OSPF 路由也包含进来；C 项错误地把 Type 3 过滤交给该命令，区域间过滤应使用 area-range 等机制；D 项把 export 方向误解为接收方向，接收过滤是 import 的职责。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "filter-policy export",
+      "路由过滤"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-032",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §12.4.4（AS-external-LSA）与 §16.4（外部路由计算）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "13138a9b4ecb7701ebfd3426a45019b23a6e9a3eb439532f2a86aa777c8df8d6"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-033",
+    "type": "single_choice",
+    "question": "ASBR 通过 route-policy 为引入的外部路由设置 tag 100，该 tag 会出现在 Type 5 LSA 中。tag 在 OSPF 路由控制中的主要作用是？",
+    "options": {
+      "A": "参与 SPF 计算，数值越小路径越优",
+      "B": "代替外部度量表示开销",
+      "C": "作为路由标记供策略匹配和过滤，不参与最短路径计算",
+      "D": "用于 DR 选举"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项 C：OSPF 外部路由的 tag 是随 LSA 传递的管理标记，供路由策略匹配、过滤或分类使用，不进入 SPF 的度量比较。A 项把 tag 当成路径开销，SPF 不使用该字段；B 项混淆了 tag 与外部度量；D 项把路由标记与 DR 选举混为一谈，DR 选举依据接口优先级和 Router ID。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "tag",
+      "路由策略"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-033",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §12.4.4（AS-external-LSA 的 External Route Tag 字段）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "6fa8ef629e3380eee1f26e665a82cbd56dfc200871964e18dc755e2a59741f18"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-034",
+    "type": "single_choice",
+    "question": "华为设备上，R1 同时从 OSPF（Type 2 外部路由，AS-external 默认 preference 150）和 RIP（默认 preference 100）学到同一前缀。管理员在 OSPF 进程执行 preference ase 90 后，R1 的选择是？",
+    "options": {
+      "A": "仍选 RIP，preference ase 只影响 Type 1 外部路由",
+      "B": "OSPF 外部路由，因为 90 小于 RIP 的 100",
+      "C": "两条路由等价，进行负载分担",
+      "D": "OSPF 外部路由，因为 150 小于 100"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项 B：preference ase 修改 AS 外部路由的优先级，修改后为 90，小于 RIP 的 100，因此选择 OSPF 外部路由。A 项错误地限定 preference ase 只影响 Type 1，实际对两类外部度量都生效；C 项忽略了修改后已产生的优先级差异；D 项引用了修改前的 150，且把数值比较方向说错。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "preference ase",
+      "路由优选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-034",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §16.4（内部与外部路径优先）；华为 preference ase 语义与默认值按设备实现，已在题干注明。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "e18aa73b78c7b3ada1af7e871d5ddf26d98d8a1bf4aa162f4894e7095db1a3a9"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-035",
+    "type": "single_choice",
+    "question": "一条 Type 2 外部路由的外部度量为 20，R1 到 ASBR 的内部开销为 30。R1 路由表中该外部路由的 Type 2 外部度量部分是多少？",
+    "options": {
+      "A": "20，Type 2 外部度量不随内部跳数增加",
+      "B": "50",
+      "C": "30",
+      "D": "10"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项 A：Type 2 外部路由只比较 ASBR 通告的外部度量，内部开销不叠加到外部度量上，因此该部分仍为 20。B 项把 20 与 30 相加，那是 Type 1 的计算方式；C 项只取内部开销，忽略了外部度量；D 项把两个值相减，没有这种算法。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "Type 2",
+      "外部度量"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-035",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §16.4（AS 外部路由计算，Type 2 度量）与 §16.4.1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "f5db919d6bd57062f80f72b257f245bdee94e75c74e82058d59cfaa05a9b2694"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-2-036",
+    "type": "single_choice",
+    "question": "同一条外部路由在 ASBR 上分别以 type 1 和 type 2 引入，外部度量相同。对远离 ASBR 的 R1 而言，两种方式在度量计算上的差别是？",
+    "options": {
+      "A": "Type 1 只使用外部度量，Type 2 叠加内部开销",
+      "B": "Type 1 叠加 R1 到 ASBR 的内部开销，Type 2 只比较外部度量",
+      "C": "两者都不叠加内部开销",
+      "D": "两者都叠加内部开销"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项 B：Type 1 外部路由的总度量是外部度量加上到 ASBR 的内部开销；Type 2 默认只比较外部度量，不再叠加内部开销。A 项把两种类型的计算方式说反；C 项忽略了 Type 1 需要叠加内部开销；D 项忽略了 Type 2 不叠加内部开销的特点。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 路由控制",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Type 1",
+      "Type 2"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-2-036",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 路由控制；技术依据 RFC 2328 §16.4（AS 外部路由计算）与 §16.4.1（外部路径优先）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "10024bdafef93ec9c6c84be9456af2a1831e58fb53c1d0398b2b02a1b01003d6"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-001",
+    "type": "single_choice",
+    "question": "OSPF GR 中，重启路由器通过 Grace-LSA 通告重启意图。Grace-LSA 在 OSPFv2 中属于哪种 LSA？",
+    "options": {
+      "A": "Type 5 AS-external LSA",
+      "B": "Type 7 NSSA LSA",
+      "C": "链路本地范围的 Opaque LSA（LS type 9）",
+      "D": "Type 3 Summary LSA"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项 C：Grace-LSA 是链路本地范围的 Opaque LSA，LS type 为 9，Opaque Type 为 3，Opaque ID 为 0，只供直连邻居使用。A 项 Type 5 用于外部路由，与 GR 通告无关；B 项 Type 7 用于 NSSA 外部路由；D 项 Type 3 用于区域间路由，均不承载 GR 参数。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "GR",
+      "Grace-LSA"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-001",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc3623-ospf-gr"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 其他特性；技术依据 RFC 3623 §1（Overview）与附录 A（Grace-LSA Format，LS type 9、Opaque Type 3）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "082afb12d3baf3f876edd28f4ea42aef58bf1bad30684bf05d2c01b90a7d1b0e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-002",
+    "type": "single_choice",
+    "question": "RFC 3623 对 OSPF GR 的 RestartInterval 给出的建议默认值是多少？",
+    "options": {
+      "A": "120 秒",
+      "B": "60 秒",
+      "C": "300 秒",
+      "D": "1800 秒"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项 A：RFC 3623 附录 B.1 给出的 RestartInterval 建议默认值为 120 秒，可配置范围为 1 至 1800 秒。B 项 60 秒过短，不是建议默认值；C 项 300 秒没有对应建议；D 项 1800 秒是 LSRefreshTime，也是 grace period 的上限参考，而不是默认值。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "GR",
+      "RestartInterval"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-002",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc3623-ospf-gr"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 其他特性；技术依据 RFC 3623 附录 B.1（RestartInterval，建议默认 120 秒）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "9041e533cabd966ca3629d3bd9647d2d3a8570f0c4430487b8bd9a752722cd42"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-003",
+    "type": "single_choice",
+    "question": "为避免重启路由器的 LSA 在 GR 期间老化失效，RFC 3623 建议 grace period 不应超过哪个值？",
+    "options": {
+      "A": "MaxAge 3600 秒",
+      "B": "Router Dead Interval 40 秒",
+      "C": "Hello Interval 10 秒",
+      "D": "LSRefreshTime 1800 秒"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项 D：RFC 3623 指出 grace period 不应超过 LSRefreshTime，即 1800 秒，否则重启路由器原有的 LSA 可能在 GR 结束前老化失效。A 项 MaxAge 是 LSA 的最大年龄，超过它 LSA 会被清除，不能作为 grace period 上限；B 项和 C 项是邻居与 Hello 定时器，与 LSA 老化上限不是同一概念。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "GR",
+      "LSRefreshTime"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-003",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc3623-ospf-gr"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 其他特性；技术依据 RFC 3623 §2.1（grace period 不应超过 LSRefreshTime 1800 秒）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "83999d39760a348f5b920651dd8ca9368409262d558c10b6b12d1d46905e9580"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-004",
+    "type": "single_choice",
+    "question": "路由器 Y 收到邻居 X 的 Grace-LSA 后，要进入 Helper 模式，必须满足的条件之一是？",
+    "options": {
+      "A": "Y 与 X 的邻居状态达到 2-Way 即可",
+      "B": "Y 与 X 在对应网段上已经处于 Full 邻接状态",
+      "C": "Y 必须同时重启自己的 OSPF 进程",
+      "D": "X 必须先删除自己的 Router LSA"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项 B：RFC 3623 规定 Helper 进入条件之一是 Y 与 X 在对应网段上已经是 Full 邻接，只有完全邻接才具备协助保持通告的基础。A 项 2-Way 表示双向通信但未完成数据库同步，不足以进入 Helper；C 项 Helper 不需要重启自身进程，重启自身反而会退出协助状态；D 项重启路由器在 GR 期间保留原 LSA，不应先删除 Router LSA。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "GR",
+      "Helper"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-004",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc3623-ospf-gr"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 其他特性；技术依据 RFC 3623 §3.1（Entering Helper Mode，要求 Full 邻接）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "d8c2e20cec97f589ccab004531b1c9caaeaf8ee340a972ffc86a811b93928012"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-005",
+    "type": "single_choice",
+    "question": "OSPF GR 期间，重启路由器 X 对重启前自己产生的 LSA 的处理方式是？",
+    "options": {
+      "A": "立即将所有自产生 LSA 的 age 置为 MaxAge 并刷新",
+      "B": "重新生成一套度量更大的 Router LSA",
+      "C": "保留并接受邻居持有的原自产生 LSA，不修改、不刷新，退出 GR 后再重新产生",
+      "D": "删除 LSDB 中所有 LSA 并重新同步"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项 C：GR 期间重启路由器不产生、不修改、不刷新 LS type 1 至 5 和 7 的 LSA，而是接受邻居持有的原自产生 LSA，待退出 GR 后再按当前状态重新产生。A 项是正常关闭 OSPF 时的刷新动作，会破坏 GR；B 项会改变拓扑描述，导致邻居认为拓扑变化；D 项清空 LSDB 会触发普通重启，无法保持转发。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "GR",
+      "LSA"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-005",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc3623-ospf-gr"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 其他特性；技术依据 RFC 3623 §2（Operation of Restarting Router，GR 期间不产生、不刷新 LS type 1-5、7 LSA）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "c20a382f211c05d106644949ffbd1e5054b7a9ef87d0d5fdf44f781e2fc7851e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-006",
+    "type": "single_choice",
+    "question": "华为设备上，在接口启用 OSPF 区域认证后，下列哪类报文需要参与认证？",
+    "options": {
+      "A": "该接口上发送和接收的所有 OSPF 报文，包括 Hello 报文",
+      "B": "只有 LSU 报文",
+      "C": "只有 DD 报文",
+      "D": "只有 LSAck 报文"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项 A：OSPF 认证作用于接口上的全部协议报文，Hello、DD、LSR、LSU 和 LSAck 都要经过认证，认证失败的报文会被丢弃。B 项只认证 LSU 会放过 Hello 等报文，无法阻止非法邻居建立；C 项只认证 DD 同样不完整；D 项只认证 LSAck 更不符合协议要求。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "认证",
+      "报文"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-006",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 其他特性；技术依据 RFC 2328 附录 D（Authentication，所有 OSPF 报文参与认证）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "8f7853ce614a0b7b94f9ff7b8fe7240d91ad3ddd457ce89657fd08b95a98ee7e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-007",
+    "type": "single_choice",
+    "question": "两台 ABR 之间需要建立 OSPF 虚连接，下列哪个区域可以作为虚连接的传输区域？",
+    "options": {
+      "A": "Stub 区域",
+      "B": "Totally Stub 区域",
+      "C": "NSSA 区域",
+      "D": "普通非骨干区域，且两台 ABR 在该区域有 Full 邻接"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项 D：虚连接必须穿过一个普通传输区域，两端 ABR 在该区域都要有接口并建立 Full 邻接，才能依靠该区域的区域内路由到达对端。A 项和 B 项 Stub 类区域不承载虚连接所需的完整 LSA 信息；C 项 NSSA 同样不能作为虚连接传输区域；只有普通非骨干区域满足条件。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "虚连接",
+      "传输区域"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-007",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 其他特性；技术依据 RFC 2328 §15（Virtual Links，传输区域不能是 Stub 区域）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "7f05c8e70073a7f72a6d260eb85c075a031c2525e5581a5d633d6f657cfb4460"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-008",
+    "type": "single_choice",
+    "question": "OSPF 虚连接的开销如何确定？",
+    "options": {
+      "A": "固定为 1",
+      "B": "取虚连接两端接口配置的 cost 之和",
+      "C": "等于穿过传输区域到对端 ABR 的最短路径开销",
+      "D": "等于传输区域内所有链路开销之和"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项 C：虚连接本身没有物理接口，其开销按穿过传输区域到达对端 ABR 的区域内最短路径开销计算。A 项把虚连接当成固定开销，忽略了传输区域路径；B 项两端并没有可相加的虚连接接口 cost；D 项把区域内所有链路求和，范围过大且不符合最短路径计算。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "虚连接",
+      "cost"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-008",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 其他特性；技术依据 RFC 2328 §15（Virtual Links，开销取到端点的区域内路径开销）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "41f830e541028e9c75e7db17248b387c13d7483501a5a5b77824b967f5f914e4"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-009",
+    "type": "single_choice",
+    "question": "华为设备上，OSPF 接口的网络类型为 NBMA 时，默认的 Hello 间隔和 Router Dead 间隔分别是？",
+    "options": {
+      "A": "30 秒和 120 秒",
+      "B": "10 秒和 40 秒",
+      "C": "30 秒和 40 秒",
+      "D": "10 秒和 120 秒"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项 A：华为设备 NBMA 接口默认 Hello 间隔为 30 秒，Router Dead 间隔为 Hello 的 4 倍即 120 秒。B 项 10 秒和 40 秒是广播、点到点等类型的常见默认值；C 项把 Hello 改为 30 秒却保留 40 秒 Dead，比例不成立；D 项把两个默认值张冠李戴。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "NBMA",
+      "定时器"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-009",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 其他特性；技术依据 RFC 2328 §9.5.1（NBMA 上的 Hello）与附录 B（HelloInterval/RouterDeadInterval）；华为 NBMA 默认 30/120 为设备默认行为，已在题干注明。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "4a5fa7cd421651ce7bf34d639a44b2be8887eec4feedd3b2acf91419618f3de8"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-010",
+    "type": "single_choice",
+    "question": "两台华为路由器在广播网上建立 OSPF 邻接时，邻居状态长期停留在 ExStart 或 Exchange，接口 MTU 不一致是最常见的原因之一。下列处理方式正确的是？",
+    "options": {
+      "A": "修改 Router ID，使两台路由器的 Router ID 不同",
+      "B": "统一两端接口 MTU，或在接口下配置 ospf mtu-ignore",
+      "C": "把网络类型改为 NBMA 后重新建立邻居",
+      "D": "删除区域 0 配置，改用其他区域建立邻居"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项 B：DD 报文携带接口 MTU，MTU 不一致会导致数据库描述过程无法正常推进，处理方式是统一 MTU，或在确认无分片风险时配置 ospf mtu-ignore 跳过检查。A 项 Router ID 冲突通常影响邻居建立的其他环节，改 ID 不解决 MTU 差异；C 项更换网络类型不会消除 MTU 不一致；D 项删除区域 0 会破坏骨干区域，不能解决该问题。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "MTU",
+      "邻居故障"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-010",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 其他特性；技术依据 RFC 2328 §10.6（Receiving Database Description Packets，MTU 与 DD 过程）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "28e5e33a205a6f449ee37866f4bc6ce339b1575a3c61f34848075ec2086f3a1a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-011",
+    "type": "single_choice",
+    "question": "OSPF GR 重启前，路由器 X 是某广播网段上的 DR。重启后它如何保持该网段的 DR 身份？",
+    "options": {
+      "A": "立即发送优先级为 255 的 Hello 报文强制抢占 DR",
+      "B": "由 Helper 邻居永久指定 X 为 DR，不再参与选举",
+      "C": "GR 期间不进行 DR 选举，X 自动继续担任 DR",
+      "D": "在接口处于 Waiting 状态时，收到仍把自己列为 DR 的邻居 Hello 后，重新选举自己为 DR"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项 D：RFC 3623 规定重启路由器若重启前是 DR，会在接口 Waiting 状态收到邻居 Hello 且其中仍将自己列为 DR 时，重新选举自己为 DR，从而保持该身份。A 项通过篡改优先级强行抢占并不可取，也不是 GR 的规定动作；B 项 Helper 只维持通告，不能永久指定 DR；C 项 GR 期间仍会进行必要的 DR 处理，不会自动延续。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "GR",
+      "DR"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-011",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc3623-ospf-gr"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 其他特性；技术依据 RFC 3623 §2（Operation of Restarting Router，重启前为 DR 时的重新选举）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "1df431f0195cb2267cd9a8fe6a381555b6a4ae27ad5536f51059b3a1e87b5acf"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-012",
+    "type": "single_choice",
+    "question": "Type 7 LSA 的泛洪范围是？",
+    "options": {
+      "A": "整个 AS",
+      "B": "仅区域 0",
+      "C": "仅 NSSA 区域内部；跨区域需由 ABR 翻译成 Type 5",
+      "D": "所有 Stub 区域"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项 C：Type 7 LSA 只在 NSSA 区域内泛洪，NSSA ABR 可将满足条件的 Type 7 翻译为 Type 5 后再传播到其他区域。A 项把 Type 7 当成 Type 5，扩大了泛洪范围；B 项错误地限定为区域 0，NSSA 可以是非骨干区域；D 项把 NSSA 与 Stub 区域混淆，Stub 区域不承载外部路由。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "NSSA",
+      "Type 7"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-012",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4577-ospf-vpn"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 其他特性；技术依据 RFC 4577 §4.2.8.1、§4.2.8.3（NSSA 外部路由以 Type 7 承载并翻译）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "8951f6e921bb425f212e704a6336c7eaa57b466351313bcea727114a65063a53"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-013",
+    "type": "single_choice",
+    "question": "在 BGP/MPLS IP VPN 中，PE-CE 之间运行 OSPF，客户站点之间还存在一条后门链路。希望流量优先走 VPN 骨干而不是后门链路时，应使用？",
+    "options": {
+      "A": "Sham Link，使经过 VPN 骨干的路径表现为区域内路径",
+      "B": "把 PE-CE 接口配置为 Stub 区域",
+      "C": "在 CE 上把 OSPF preference 改为 255",
+      "D": "把 VPN 路由改为 Type 5 外部路由"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项 A：Sham Link 在两个 PE 的 VRF 之间建立一条逻辑上的区域内点到点链路，使经过 VPN 骨干的路径表现为区域内路径，从而可以优先于后门链路。B 项把接口设为 Stub 区域并不能改变区域间路径与后门区域内路径的优先级；C 项修改 preference 不解决 OSPF 路径类型差异；D 项改成 Type 5 外部路由反而会降低优先级。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Sham Link",
+      "MPLS VPN"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-013",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4577-ospf-vpn"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 其他特性；技术依据 RFC 4577 §4.2.7.1（Intra-Area Routes，Sham Link 使 VPN 路径表现为区域内路径）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "50d2485426569955c6384157fe02058543378a881ce1cb964e0f649927a349c1"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-014",
+    "type": "single_choice",
+    "question": "Sham Link 在 OSPF 中被当作什么类型的链路，并以哪种 LSA 通告？",
+    "options": {
+      "A": "广播链路，以 Type 2 Network LSA 通告",
+      "B": "虚连接，以 Type 4 LSA 通告",
+      "C": "外部链路，以 Type 5 LSA 通告",
+      "D": "未编号点到点区域内链路，以 Type 1 Router LSA 中的 Type 1 链路通告"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项 D：RFC 4577 规定 Sham Link 是未编号的点到点区域内链路，作为 Type 1 链路在 Type 1 Router LSA 中通告。A 项把它当成广播链路，Sham Link 不进行 DR 选举；B 项混淆了虚连接与 Sham Link，Type 4 描述 ASBR；C 项把它当成外部链路，实际是区域内链路。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "Sham Link",
+      "Type 1"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-014",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4577-ospf-vpn"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 其他特性；技术依据 RFC 4577 §4.2.7.3（OSPF Protocol on Sham Links，未编号点到点区域内链路，Type 1 链路）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "e77e5fa73909eed6f0d7121a941f1320bcdbab26bae85a156f2abf4075240767"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-015",
+    "type": "single_choice",
+    "question": "Sham Link 处于 Up 状态的条件是？",
+    "options": {
+      "A": "两端 PE 的全局 Router ID 互相可达即可",
+      "B": "本地 VRF 中已安装到对端 Sham Link 端点 /32 地址的路由",
+      "C": "两端 CE 之间建立 BGP 邻居",
+      "D": "两端 PE 的 OSPF 进程号相同"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项 B：RFC 4577 规定 Sham Link 的 Up 条件是本地 VRF 中已安装到对端 Sham Link 端点 32 位地址的路由，该地址由 BGP 作为 VPN-IPv4 路由分发。A 项全局 Router ID 可达并不等于 VRF 内端点可达；C 项 CE 之间不建立 BGP 邻居，Sham Link 是 PE 之间的逻辑链路；D 项 OSPF 进程号只是本地标识，不影响 Sham Link 状态。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "Sham Link",
+      "端点地址"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-015",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4577-ospf-vpn"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 其他特性；技术依据 RFC 4577 §4.2.7.2（Creating Sham Links，端点 /32 路由安装后 Up）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "3a4d7d3f45247abe0b0d5571d8b5c3c2be6b1fa136e4291910cd2ab53bafae71"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-016",
+    "type": "single_choice",
+    "question": "在 BGP/MPLS IP VPN 的 OSPF PE-CE 场景中，PE 向 CE 发送 LSA 时设置 DN 位，并在从 CE 收到带 DN 位的 LSA 时忽略。这样做的目的是？",
+    "options": {
+      "A": "防止从 VPN 骨干学到的路由经 CE 又回注骨干形成环路",
+      "B": "加快 SPF 计算速度",
+      "C": "标识该 LSA 是 Type 7",
+      "D": "用于 DR 选举"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "正确项 A：DN 位用于防止路由在 VPN 骨干与客户站点之间反复回注形成环路，PE 设置 DN 位并在收到带 DN 位的 LSA 时忽略。B 项 DN 位不参与 SPF 加速，SPF 仍按拓扑计算；C 项 LSA 类型由 LS type 字段标识，与 DN 位无关；D 项 DR 选举依据接口优先级和 Router ID，不使用 DN 位。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "DN 位",
+      "MPLS VPN"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-016",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4577-ospf-vpn"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 其他特性；技术依据 RFC 4577 §4.1.5（Prevention of Loops）与 §4.2.5.1（The DN Bit）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "f93bae3110a6f74fa6e1c36c1d0e6e301fdeaddf00963fcbf3b8ca0ed4309f0e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-017",
+    "type": "single_choice",
+    "question": "在 BGP/MPLS IP VPN 中，PE 判断从 BGP 收到的 VPN-IPv4 路由与本地 OSPF 实例是否属于同一 OSPF 域，依据的是？",
+    "options": {
+      "A": "路由的 MED 值",
+      "B": "路由的 AS_PATH 属性",
+      "C": "路由携带的 OSPF Domain Identifier 扩展团体",
+      "D": "路由的 Local Preference 属性"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "正确项 C：同一 OSPF 域的路由会携带相同的 OSPF Domain Identifier 扩展团体，PE 据此判断该 VPN-IPv4 路由是否属于本地 OSPF 实例所在的域。A 项 MED 影响 BGP 选路，不能标识 OSPF 域；B 项 AS_PATH 用于 BGP 防环和选路；D 项 Local Preference 是 BGP 本地优先级，与 OSPF 域无关。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "Domain ID",
+      "MPLS VPN"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-017",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc4577-ospf-vpn"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 其他特性；技术依据 RFC 4577 §4.2.4（OSPF Domain Identifiers）与 §4.1.2（VRFs and Routes）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "346d8636d527cf91df795065c7cfdab6338011bc850f71bcbeee5c97bcbe6547"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-018",
+    "type": "single_choice",
+    "question": "OSPF LSA 的 LSRefreshTime 是多少？自产生 LSA 到达该时间后会发生什么？",
+    "options": {
+      "A": "3600 秒，LSA 被直接删除",
+      "B": "1800 秒，路由器重新产生该 LSA 的新实例",
+      "C": "300 秒，LSA 被置为 MaxAge",
+      "D": "40 秒，LSA 被重传"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "正确项 B：LSRefreshTime 为 1800 秒，自产生 LSA 到达该时间后，路由器会产生并泛洪该 LSA 的新实例，以维持数据库同步。A 项 3600 秒是 MaxAge，且到达 MaxAge 是清除而不是正常刷新；C 项 300 秒既不是刷新时间也不是老化时间，置为 MaxAge 是提前老化操作；D 项 40 秒是常见的 Router Dead 间隔，与 LSA 刷新无关。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "LSA",
+      "LSRefreshTime"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-018",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 其他特性；技术依据 RFC 2328 附录 B（Architectural Constants，LSRefreshTime 1800 秒）与 §14（Aging the Link State Database）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "6b3541a83cd44d2f0c52be6ff71de132505e35aea4dcdadd2e611ad1fdc74a87"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip831-1-1-3-019",
+    "type": "single_choice",
+    "question": "华为设备上，广播网中 OSPF DR 选举的规则是？",
+    "options": {
+      "A": "接口优先级相同时一定重新选举并抢占",
+      "B": "Router ID 越小越优先",
+      "C": "优先级为 0 的接口优先成为 DR",
+      "D": "先比较接口 DR 优先级，大者优先；相同时比较 Router ID，大者优先；优先级 0 不参与 DR/BDR 选举"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "正确项 D：DR 选举先比较接口 DR 优先级，数值大者优先；优先级相同再比较 Router ID，数值大者优先；优先级 0 表示不参与 DR/BDR 选举。A 项忽略了 OSPF 的非抢占特性，已有 DR 不会因新路由器优先级更高就被立即替换；B 项把 Router ID 的比较方向说反；C 项与优先级 0 的含义相反。",
+    "chapter": "IGP 高级特性",
+    "knowledgeSection": "OSPF 高级特性",
+    "knowledgePoint": "OSPF 其他特性",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "DR 选举",
+      "优先级"
+    ],
+    "provenance": {
+      "questionId": "hcip831-1-1-3-019",
+      "sourceIds": [
+        "huawei-h12-831-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-831 V1.0 大纲第 2 页 IGP 高级特性/OSPF 其他特性；技术依据 RFC 2328 §9.4（Electing the Designated Router）与 §7.3（The Designated Router）。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开考纲与公开标准独立设计题干、选项与解析，未复制第三方题目。",
+      "reviewDigest": "20de85268a4082b783f4da91e6b6f4bd502ab0c36fd05d141629a72645adbed2"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  }
+]

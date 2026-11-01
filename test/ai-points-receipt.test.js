@@ -4,6 +4,13 @@ test('task receipts bind real HTTP requests, caches and jobs to the authenticate
   const parent=path.resolve('tmp'),dir=fs.mkdtempSync(path.join(parent,'points-receipts-')),store=createStore(dir);
   const one=store.register('receipt_one','fixture-password-123'),two=store.register('receipt_two','fixture-password-123');
   for(const user of [one,two]){store.selectCertificate(user.id,'network-engineer');store.points.recordFinance({key:'synthetic-income:'+user.id,kind:'revenue',amountMicros:1000000000,reference:'synthetic test funding:'+user.id,createdBy:user.id});store.points.grant({userId:user.id,sourceKey:'fixture-grant',units:1000000,kind:'test',requireFunded:true});}
+  // A receipt identity/cache test must not change its expected amount at noon,
+  // on weekends, or across a vendor price-band boundary. Fixed synthetic rates
+  // retain the exact 40-unit assertion without modifying production pricing.
+  const fixtureNow=Date.now();
+  store.points.saveRateCard({id:'receipt-fixed-fixture',provider:'https://api.deepseek.com',model:'deepseek-flash',
+    inputMicrosPerMillion:2000000,outputMicrosPerMillion:8000000,cachedMicrosPerMillion:40000,
+    source:'synthetic://receipt-fixed-fixture',verifiedAt:new Date(fixtureNow-1000).toISOString(),expiresAt:new Date(fixtureNow+86400000).toISOString()},one.id);
   const settings={baseUrl:'https://api.deepseek.com',model:'deepseek-flash',apiKey:'synthetic-never-sent',temperature:.3};
   let calls=0;const provider=new OpenAICompatibleProvider(store,{fetch:async()=>{calls++;return new Response(JSON.stringify({choices:[{message:{content:JSON.stringify({text:'合成验收讲解，依据条件逐步判断。'})},finish_reason:'stop'}],usage:{prompt_tokens:10,completion_tokens:10,total_tokens:20}}));}});
   const raw=provider.call.bind(provider);provider.call=(messages,config,options)=>raw(messages,{...settings,...config},options);

@@ -14,13 +14,16 @@
     ],
     "analysis": "10.0.0.0/8 是三段常用 IPv4 私有地址范围之一。 本题考查“IPv4 地址”，因此应选择“10.0.0.0/8”。",
     "chapter": "IP 地址与配置",
-    "knowledgePoint": "IPv4 地址",
+    "knowledgePoint": "IPv4 地址分类",
     "difficulty": "easy",
     "tags": [
       "IP 地址与配置",
+      "IPv4 地址体系",
+      "IPv4 地址分类",
       "IPv4 地址"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "IPv4 地址体系"
   },
   {
     "id": "hcia-v2-extra-07-slash-26",
@@ -37,13 +40,16 @@
     ],
     "analysis": "/26 共 64 个地址，扣除网络地址和广播地址后通常有 62 个可用地址。 本题考查“子网划分”，因此应选择“62”。",
     "chapter": "IP 地址与配置",
-    "knowledgePoint": "子网划分",
+    "knowledgePoint": "子网划分计算",
     "difficulty": "easy",
     "tags": [
       "IP 地址与配置",
+      "子网划分与掩码",
+      "子网划分计算",
       "子网划分"
     ],
-    "stage": "直接计算"
+    "stage": "直接计算",
+    "knowledgeSection": "子网划分与掩码"
   },
   {
     "id": "hcia-v2-extra-07-network-27",
@@ -60,13 +66,16 @@
     ],
     "analysis": "/27 的块大小为 32，77 位于 64 到 95 的地址块。 本题考查“子网划分”，因此应选择“192.168.10.64”。",
     "chapter": "IP 地址与配置",
-    "knowledgePoint": "子网划分",
+    "knowledgePoint": "子网划分计算",
     "difficulty": "medium",
     "tags": [
       "IP 地址与配置",
+      "子网划分与掩码",
+      "子网划分计算",
       "子网划分"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "子网划分与掩码"
   },
   {
     "id": "hcia-v2-extra-07-broadcast-28",
@@ -83,13 +92,16 @@
     ],
     "analysis": "/28 的块大小为 16，34 位于 32 到 47 的子网，47 是广播地址。 本题考查“子网划分”，因此应选择“10.0.0.47”。",
     "chapter": "IP 地址与配置",
-    "knowledgePoint": "子网划分",
+    "knowledgePoint": "子网划分计算",
     "difficulty": "medium",
     "tags": [
       "IP 地址与配置",
+      "子网划分与掩码",
+      "子网划分计算",
       "子网划分"
     ],
-    "stage": "反向推理"
+    "stage": "反向推理",
+    "knowledgeSection": "子网划分与掩码"
   },
   {
     "id": "hcia-v2-extra-07-gateway-purpose",
@@ -106,13 +118,16 @@
     ],
     "analysis": "目的地址不在本地子网时，主机把报文交给默认网关继续路由。 本题考查“IPv4 地址”，因此应选择“把非本地子网流量交给三层设备转发”。",
     "chapter": "IP 地址与配置",
-    "knowledgePoint": "IPv4 地址",
+    "knowledgePoint": "IPv4 地址分类",
     "difficulty": "easy",
     "tags": [
       "IP 地址与配置",
+      "IPv4 地址体系",
+      "IPv4 地址分类",
       "IPv4 地址"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "IPv4 地址体系"
   },
   {
     "id": "hcia-v2-extra-07-arp-cache",
@@ -129,12 +144,15 @@
     ],
     "analysis": "ARP 缓存保存本链路邻居或网关的 IP 与 MAC 映射。 本题考查“ARP”，因此应选择“已解析的 IPv4 地址与 MAC 地址对应关系”。",
     "chapter": "IP 地址与配置",
-    "knowledgePoint": "ARP",
+    "knowledgePoint": "ARP 工作原理",
     "difficulty": "medium",
     "tags": [
       "IP 地址与配置",
+      "地址解析与诊断",
+      "ARP 工作原理",
       "ARP"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "地址解析与诊断"
   }
 ]

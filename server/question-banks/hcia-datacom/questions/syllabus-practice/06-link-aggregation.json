@@ -16,13 +16,16 @@
     ],
     "analysis": "Eth-Trunk 把多条物理链路组合成一条逻辑链路，可提升带宽并在成员故障时保持可用性。",
     "chapter": "以太网链路聚合",
-    "knowledgePoint": "Eth-Trunk",
+    "knowledgePoint": "Eth-Trunk 配置",
     "difficulty": "easy",
     "tags": [
       "以太网链路聚合",
+      "聚合配置与负载分担",
+      "Eth-Trunk 配置",
       "Eth-Trunk"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "聚合配置与负载分担"
   },
   {
     "id": "hcia-v2-06-lacp",
@@ -39,13 +42,16 @@
     ],
     "analysis": "LACP 用于设备间协商聚合关系，选择活动成员并检测聚合链路状态。",
     "chapter": "以太网链路聚合",
-    "knowledgePoint": "LACP",
+    "knowledgePoint": "LACP 协议",
     "difficulty": "easy",
     "tags": [
       "以太网链路聚合",
+      "链路聚合原理",
+      "LACP 协议",
       "LACP"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "链路聚合原理"
   },
   {
     "id": "hcia-v2-06-member-consistency",
@@ -62,13 +68,16 @@
     ],
     "analysis": "成员接口关键属性一致可以避免带宽计算、报文转发和链路状态出现异常。",
     "chapter": "以太网链路聚合",
-    "knowledgePoint": "成员接口",
+    "knowledgePoint": "成员接口约束",
     "difficulty": "medium",
     "tags": [
       "以太网链路聚合",
+      "聚合配置与负载分担",
+      "成员接口约束",
       "成员接口"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "聚合配置与负载分担"
   },
   {
     "id": "hcia-v2-06-hashing",
@@ -85,12 +94,15 @@
     ],
     "analysis": "按流哈希能把不同流分散到成员链路，同时使同一流通常走固定链路以减少乱序。",
     "chapter": "以太网链路聚合",
-    "knowledgePoint": "负载分担",
+    "knowledgePoint": "负载分担方式",
     "difficulty": "medium",
     "tags": [
       "以太网链路聚合",
+      "聚合配置与负载分担",
+      "负载分担方式",
       "负载分担"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "聚合配置与负载分担"
   }
 ]

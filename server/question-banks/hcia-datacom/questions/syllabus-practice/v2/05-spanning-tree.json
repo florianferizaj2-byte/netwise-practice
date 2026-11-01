@@ -1,0 +1,596 @@
+[
+  {
+    "id": "hcia-v3-05-001",
+    "type": "single_choice",
+    "question": "二层网络中形成环路后，最典型的现象是什么？",
+    "options": {
+      "A": "路由表项全部老化",
+      "B": "广播帧不断复制，形成广播风暴",
+      "C": "VLAN 配置被自动清空",
+      "D": "所有接口自动进入 Down 状态"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "二层帧没有 TTL 机制，环路中广播会被无限复制，迅速耗尽带宽与 CPU，是二层最严重的故障之一。",
+    "chapter": "生成树原理与配置",
+    "knowledgeSection": "STP 基本原理",
+    "knowledgePoint": "二层环路与 STP 作用",
+    "difficulty": "easy",
+    "tags": [
+      "生成树原理与配置",
+      "STP 基本原理",
+      "二层环路与 STP 作用"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-05-002",
+    "type": "multiple_choice",
+    "question": "二层环路可能引发下列哪些问题？",
+    "options": {
+      "A": "广播风暴",
+      "B": "MAC 地址表震荡",
+      "C": "主机收到重复帧",
+      "D": "接口光功率下降"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "同一帧从两个方向到达会使 MAC 表项在两个端口间反复切换（漂移），同时主机收到重复帧。光功率属于物理层指标，与环路无关。",
+    "chapter": "生成树原理与配置",
+    "knowledgeSection": "STP 基本原理",
+    "knowledgePoint": "二层环路与 STP 作用",
+    "difficulty": "medium",
+    "tags": [
+      "生成树原理与配置",
+      "STP 基本原理",
+      "二层环路与 STP 作用"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-05-003",
+    "type": "true_false",
+    "question": "STP 通过阻塞冗余端口，把有环的物理拓扑裁剪成一棵无环的逻辑树。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "STP 保留冗余链路作为备份，但逻辑上只让一条路径转发，既避免环路又保留可靠性。",
+    "chapter": "生成树原理与配置",
+    "knowledgeSection": "STP 基本原理",
+    "knowledgePoint": "二层环路与 STP 作用",
+    "difficulty": "easy",
+    "tags": [
+      "生成树原理与配置",
+      "STP 基本原理",
+      "二层环路与 STP 作用"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-05-004",
+    "type": "single_choice",
+    "question": "STP 选举根桥时比较的首要参数是什么？",
+    "options": {
+      "A": "端口数量",
+      "B": "设备型号",
+      "C": "桥优先级",
+      "D": "接口速率"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "先比桥优先级（默认 32768），优先级相同再比桥 MAC，MAC 小者当选。桥 ID = 优先级 + MAC。",
+    "chapter": "生成树原理与配置",
+    "knowledgeSection": "STP 基本原理",
+    "knowledgePoint": "根桥选举",
+    "difficulty": "medium",
+    "tags": [
+      "生成树原理与配置",
+      "STP 基本原理",
+      "根桥选举"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-05-005",
+    "type": "single_choice",
+    "question": "四台交换机桥优先级均为默认值，MAC 分别为 00-e0-fc-00-00-40、00-e0-fc-00-00-10、00-e0-fc-00-00-20、00-e0-fc-00-00-80，哪台被选为根桥？",
+    "options": {
+      "A": "MAC 为 00-e0-fc-00-00-20 的交换机",
+      "B": "MAC 为 00-e0-fc-00-00-80 的交换机",
+      "C": "MAC 为 00-e0-fc-00-00-10 的交换机",
+      "D": "MAC 为 00-e0-fc-00-00-40 的交换机"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "优先级相同时比较桥 MAC，数值最小者胜出。00-00-10 在四者中最小，因此当选根桥。",
+    "chapter": "生成树原理与配置",
+    "knowledgeSection": "STP 基本原理",
+    "knowledgePoint": "根桥选举",
+    "difficulty": "medium",
+    "tags": [
+      "生成树原理与配置",
+      "STP 基本原理",
+      "根桥选举"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v3-05-006",
+    "type": "true_false",
+    "question": "把某台交换机的桥优先级配置为 0，可使其在选举中一定成为根桥。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "桥优先级取值范围 0-61440、步长 4096，0 为最小可能值，因此配置为 0 后必然胜出。实际常用 stp root primary 实现。",
+    "chapter": "生成树原理与配置",
+    "knowledgeSection": "STP 基本原理",
+    "knowledgePoint": "根桥选举",
+    "difficulty": "medium",
+    "tags": [
+      "生成树原理与配置",
+      "STP 基本原理",
+      "根桥选举"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-05-007",
+    "type": "single_choice",
+    "question": "非根桥上，根端口是如何选出的？",
+    "options": {
+      "A": "端口编号最大的端口",
+      "B": "MAC 地址最小的端口",
+      "C": "第一个 Up 的端口",
+      "D": "到达根桥路径开销最小的端口"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "先比根路径开销，再比对端桥 ID，最后比对端端口 ID。每台非根桥有且只有一个根端口。",
+    "chapter": "生成树原理与配置",
+    "knowledgeSection": "STP 基本原理",
+    "knowledgePoint": "根端口与指定端口选举",
+    "difficulty": "medium",
+    "tags": [
+      "生成树原理与配置",
+      "STP 基本原理",
+      "根端口与指定端口选举"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-05-008",
+    "type": "single_choice",
+    "question": "STP 中指定端口的作用是什么？",
+    "options": {
+      "A": "只在根桥上存在",
+      "B": "接收所有发往根桥的流量",
+      "C": "在链路上负责向该网段转发 BPDU 与数据",
+      "D": "永久处于阻塞状态"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "每条链路有且只有一个指定端口，负责该网段的下行转发；根桥上所有端口都是指定端口。",
+    "chapter": "生成树原理与配置",
+    "knowledgeSection": "STP 基本原理",
+    "knowledgePoint": "根端口与指定端口选举",
+    "difficulty": "medium",
+    "tags": [
+      "生成树原理与配置",
+      "STP 基本原理",
+      "根端口与指定端口选举"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-05-009",
+    "type": "multiple_choice",
+    "question": "STP 选举端口角色时依次比较哪些参数？",
+    "options": {
+      "A": "根路径开销",
+      "B": "对端桥 ID",
+      "C": "对端端口 ID",
+      "D": "接口的光模块型号"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "比较顺序固定为根路径开销、对端桥 ID、对端端口 ID，前一项相同才比较下一项，顺序颠倒会得到错误结论。",
+    "chapter": "生成树原理与配置",
+    "knowledgeSection": "STP 基本原理",
+    "knowledgePoint": "根端口与指定端口选举",
+    "difficulty": "hard",
+    "tags": [
+      "生成树原理与配置",
+      "STP 基本原理",
+      "根端口与指定端口选举"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-05-010",
+    "type": "single_choice",
+    "question": "STP 标准中不包含下列哪种端口状态？",
+    "options": {
+      "A": "Discarding",
+      "B": "Learning",
+      "C": "Blocking",
+      "D": "Forwarding"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Discarding 是 RSTP 的状态划分；STP 的五种状态为 Disabled、Blocking、Listening、Learning、Forwarding。",
+    "chapter": "生成树原理与配置",
+    "knowledgeSection": "STP 基本原理",
+    "knowledgePoint": "端口状态与计时器",
+    "difficulty": "medium",
+    "tags": [
+      "生成树原理与配置",
+      "STP 基本原理",
+      "端口状态与计时器"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-05-011",
+    "type": "single_choice",
+    "question": "STP 中处于 Forwarding 状态的端口具备哪些能力？",
+    "options": {
+      "A": "只收发 BPDU，不转发数据",
+      "B": "既收发 BPDU，也转发用户数据",
+      "C": "只转发数据，不收发 BPDU",
+      "D": "既不转发数据也不收发 BPDU"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Forwarding 是最终工作状态；Blocking 只收 BPDU 不转发数据；Learning 学习 MAC 但不转发数据。",
+    "chapter": "生成树原理与配置",
+    "knowledgeSection": "STP 基本原理",
+    "knowledgePoint": "端口状态与计时器",
+    "difficulty": "medium",
+    "tags": [
+      "生成树原理与配置",
+      "STP 基本原理",
+      "端口状态与计时器"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-05-012",
+    "type": "single_choice",
+    "question": "STP 中 Forward Delay 默认值与作用分别是什么？",
+    "options": {
+      "A": "15 秒，控制 Listening 与 Learning 状态的停留时间",
+      "B": "30 秒，控制端口关闭延时",
+      "C": "2 秒，控制 BPDU 发送间隔",
+      "D": "20 秒，控制 BPDU 的老化时间"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Hello 2 秒、Max Age 20 秒、Forward Delay 15 秒。收敛慢的根源正是 Listening 与 Learning 各 15 秒的等待。",
+    "chapter": "生成树原理与配置",
+    "knowledgeSection": "STP 基本原理",
+    "knowledgePoint": "端口状态与计时器",
+    "difficulty": "medium",
+    "tags": [
+      "生成树原理与配置",
+      "STP 基本原理",
+      "端口状态与计时器"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-05-013",
+    "type": "true_false",
+    "question": "STP 从链路故障到恢复转发通常需要数十秒，这是 RSTP 出现的主要原因。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "STP 依赖计时器被动等待，典型收敛时间 30-50 秒；RSTP 通过 P/A 机制与边缘端口把收敛降到秒级。",
+    "chapter": "生成树原理与配置",
+    "knowledgeSection": "STP 基本原理",
+    "knowledgePoint": "端口状态与计时器",
+    "difficulty": "easy",
+    "tags": [
+      "生成树原理与配置",
+      "STP 基本原理",
+      "端口状态与计时器"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-05-014",
+    "type": "single_choice",
+    "question": "RSTP 相比 STP 新增了哪两种端口角色？",
+    "options": {
+      "A": "Root 与 Designated",
+      "B": "Alternate 与 Backup",
+      "C": "Edge 与 Trunk",
+      "D": "Master 与 Slave"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Alternate 是根端口的备份，Backup 是指定端口的备份。两者都处于 Discarding 状态，但替代关系不同。",
+    "chapter": "生成树原理与配置",
+    "knowledgeSection": "RSTP 改进机制",
+    "knowledgePoint": "RSTP 端口角色",
+    "difficulty": "medium",
+    "tags": [
+      "生成树原理与配置",
+      "RSTP 改进机制",
+      "RSTP 端口角色"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-05-015",
+    "type": "single_choice",
+    "question": "RSTP 中 Alternate 端口的作用是什么？",
+    "options": {
+      "A": "连接终端的边缘接口",
+      "B": "替代指定端口转发下行流量",
+      "C": "永久阻塞且不参与任何计算",
+      "D": "作为根端口的备份，根端口失效时快速接替"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Alternate 端口从其他交换机收到更优 BPDU，因此不能成为根端口，但保留为备份，故障时可立即切换。",
+    "chapter": "生成树原理与配置",
+    "knowledgeSection": "RSTP 改进机制",
+    "knowledgePoint": "RSTP 端口角色",
+    "difficulty": "medium",
+    "tags": [
+      "生成树原理与配置",
+      "RSTP 改进机制",
+      "RSTP 端口角色"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-05-016",
+    "type": "true_false",
+    "question": "RSTP 的 Alternate 端口与 Backup 端口都能收发并处理 BPDU，只是不转发用户数据。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "两者处于 Discarding 状态，但持续参与 BPDU 交互以便随时接替，这正是快速收敛的前提。",
+    "chapter": "生成树原理与配置",
+    "knowledgeSection": "RSTP 改进机制",
+    "knowledgePoint": "RSTP 端口角色",
+    "difficulty": "medium",
+    "tags": [
+      "生成树原理与配置",
+      "RSTP 改进机制",
+      "RSTP 端口角色"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-05-017",
+    "type": "single_choice",
+    "question": "RSTP 的 P/A 机制能够加速收敛，同时避免临时环路的关键原因是什么？",
+    "options": {
+      "A": "关闭了 BPDU 的交互",
+      "B": "把阻塞端口改为 Forwarding",
+      "C": "直接跳过所有状态立即转发",
+      "D": "上游先阻塞相关端口，收到 Agreement 后才放开"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Proposal 发出时上游同步阻塞非边缘端口，收到下游 Agreement 后再逐级放开，用一次同步换取无环的秒级收敛。",
+    "chapter": "生成树原理与配置",
+    "knowledgeSection": "RSTP 改进机制",
+    "knowledgePoint": "P/A 快速收敛机制",
+    "difficulty": "hard",
+    "tags": [
+      "生成树原理与配置",
+      "RSTP 改进机制",
+      "P/A 快速收敛机制"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-05-018",
+    "type": "single_choice",
+    "question": "P/A 机制能够生效的前提条件是什么？",
+    "options": {
+      "A": "端口必须配置为边缘端口",
+      "B": "对端必须是根桥",
+      "C": "链路上存在集线器",
+      "D": "对端是指定端口且链路为点对点全双工"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "P/A 要求链路为点对点类型，共享介质无法确认同步范围，因此会退化为普通收敛流程。",
+    "chapter": "生成树原理与配置",
+    "knowledgeSection": "RSTP 改进机制",
+    "knowledgePoint": "P/A 快速收敛机制",
+    "difficulty": "hard",
+    "tags": [
+      "生成树原理与配置",
+      "RSTP 改进机制",
+      "P/A 快速收敛机制"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-05-019",
+    "type": "single_choice",
+    "question": "把连接终端的接口配置为边缘端口，主要带来什么好处？",
+    "options": {
+      "A": "使该接口不再参与任何 VLAN",
+      "B": "链路 Up 后立即转发，跳过 STP 收敛等待",
+      "C": "自动提升接口速率到千兆",
+      "D": "自动为该接口分配 IP 地址"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "边缘端口不参与生成树计算，链路 Up 即进入 Forwarding，终端开机即可上网，同时避免终端插拔引起拓扑震荡。",
+    "chapter": "生成树原理与配置",
+    "knowledgeSection": "RSTP 改进机制",
+    "knowledgePoint": "边缘端口",
+    "difficulty": "medium",
+    "tags": [
+      "生成树原理与配置",
+      "RSTP 改进机制",
+      "边缘端口"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-05-020",
+    "type": "true_false",
+    "question": "边缘端口一旦收到 BPDU，会自动失去边缘端口属性并重新参与生成树计算。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "这是防止用户私接交换机形成环路的重要保护；配合 BPDU 保护可直接关闭该端口。",
+    "chapter": "生成树原理与配置",
+    "knowledgeSection": "RSTP 改进机制",
+    "knowledgePoint": "边缘端口",
+    "difficulty": "medium",
+    "tags": [
+      "生成树原理与配置",
+      "RSTP 改进机制",
+      "边缘端口"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-05-021",
+    "type": "single_choice",
+    "question": "在华为交换机上把生成树模式切换为 RSTP，应使用哪条命令？",
+    "options": {
+      "A": "stp mode rstp",
+      "B": "spanning-tree mode rstp",
+      "C": "stp protocol rstp",
+      "D": "stp enable rstp"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "华为用 stp mode {stp|rstp|mstp} 切换模式，默认多为 MSTP。模式不一致会影响互通与收敛。",
+    "chapter": "生成树原理与配置",
+    "knowledgeSection": "STP 配置与保护",
+    "knowledgePoint": "STP 模式与优先级配置",
+    "difficulty": "medium",
+    "tags": [
+      "生成树原理与配置",
+      "STP 配置与保护",
+      "STP 模式与优先级配置"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-05-022",
+    "type": "single_choice",
+    "question": "把某台交换机配置为根桥，最简洁的命令是？",
+    "options": {
+      "A": "stp enable root",
+      "B": "stp root primary",
+      "C": "stp root secondary",
+      "D": "stp priority 32768"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "stp root primary 把优先级设为 0，secondary 设为 4096，用于规划主备根桥；直接改 priority 需自行计算数值。",
+    "chapter": "生成树原理与配置",
+    "knowledgeSection": "STP 配置与保护",
+    "knowledgePoint": "STP 模式与优先级配置",
+    "difficulty": "medium",
+    "tags": [
+      "生成树原理与配置",
+      "STP 配置与保护",
+      "STP 模式与优先级配置"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-05-023",
+    "type": "single_choice",
+    "question": "配置 BPDU 保护（bpdu-protection）后，边缘端口收到 BPDU 会如何处理？",
+    "options": {
+      "A": "端口进入 Error-Down 状态并被关闭",
+      "B": "端口转为根端口继续转发",
+      "C": "仅记录日志不采取动作",
+      "D": "自动提升端口优先级"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "BPDU 保护用于阻止用户私接交换设备，端口被关闭后需管理员手工恢复或配置自动恢复定时器。",
+    "chapter": "生成树原理与配置",
+    "knowledgeSection": "STP 配置与保护",
+    "knowledgePoint": "BPDU 保护",
+    "difficulty": "medium",
+    "tags": [
+      "生成树原理与配置",
+      "STP 配置与保护",
+      "BPDU 保护"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-05-024",
+    "type": "single_choice",
+    "question": "根桥保护（root-protection）的作用是什么？",
+    "options": {
+      "A": "防止 MAC 地址表溢出",
+      "B": "防止本设备端口因收到更优 BPDU 而失去根桥地位",
+      "C": "防止终端私接交换机",
+      "D": "防止 VLAN 数量超限"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "根桥保护在指定端口上生效，收到优先级更优的 BPDU 时直接丢弃并告警，避免网络中新接入设备抢占根桥。",
+    "chapter": "生成树原理与配置",
+    "knowledgeSection": "STP 配置与保护",
+    "knowledgePoint": "根桥保护与环路保护",
+    "difficulty": "hard",
+    "tags": [
+      "生成树原理与配置",
+      "STP 配置与保护",
+      "根桥保护与环路保护"
+    ],
+    "stage": "基础理解"
+  }
+]

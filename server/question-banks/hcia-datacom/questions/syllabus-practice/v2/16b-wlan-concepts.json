@@ -1,0 +1,148 @@
+[
+  {
+    "id": "hcia-v3-16b-001",
+    "type": "single_choice",
+    "question": "BSS（基本服务集）指的是什么？",
+    "options": {
+      "A": "AC 管理的全部 AP 集合",
+      "B": "一台 AP 与其关联的所有 STA 构成的无线服务集合",
+      "C": "多台 AP 通过交换机互联形成的扩展网络",
+      "D": "一个 VLAN 内的所有有线终端"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "BSS 是最小的无线服务单元，由单个 AP 及其关联终端组成，用 BSSID 唯一标识，BSSID 通常就是该 AP 射频的 MAC 地址。",
+    "chapter": "WLAN 技术基础",
+    "knowledgeSection": "WLAN 基本概念",
+    "knowledgePoint": "BSS 与 ESS",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 技术基础",
+      "WLAN 基本概念",
+      "BSS 与 ESS"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-16b-002",
+    "type": "single_choice",
+    "question": "多个 BSS 通过分布式系统互联形成 ESS，其意义是什么？",
+    "options": {
+      "A": "提升单台 AP 的发射功率",
+      "B": "把一个 AP 拆成多个逻辑设备",
+      "C": "取消终端认证过程",
+      "D": "让终端在更大范围内使用同一 SSID 漫游"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "ESS 让多个 AP 共用同一 SSID 并互相转发，终端移动时可保持业务连续，是园区无线覆盖的基本形态。",
+    "chapter": "WLAN 技术基础",
+    "knowledgeSection": "WLAN 基本概念",
+    "knowledgePoint": "BSS 与 ESS",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 技术基础",
+      "WLAN 基本概念",
+      "BSS 与 ESS"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-16b-003",
+    "type": "true_false",
+    "question": "同一 ESS 内所有 AP 可以配置相同的 SSID，但各自的 BSSID 必须不同。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "SSID 是用户可见的网络名称，可复用；BSSID 是 AP 射频的唯一标识，重复会导致终端关联混乱。",
+    "chapter": "WLAN 技术基础",
+    "knowledgeSection": "WLAN 基本概念",
+    "knowledgePoint": "BSS 与 ESS",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 技术基础",
+      "WLAN 基本概念",
+      "BSS 与 ESS"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-16b-004",
+    "type": "single_choice",
+    "question": "一个完整的 WLAN 组网通常包含哪些基本元素？",
+    "options": {
+      "A": "STA、AP、AC 与上层有线网络",
+      "B": "交换机、路由器、防火墙与服务器",
+      "C": "DNS、DHCP、NTP 与 Syslog",
+      "D": "光模块、网线、配线架与机柜"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "无线侧核心元素是终端 STA、接入点 AP 与集中管理设备 AC，再通过有线网络接入园区骨干。",
+    "chapter": "WLAN 技术基础",
+    "knowledgeSection": "WLAN 基本概念",
+    "knowledgePoint": "WLAN 组网元素",
+    "difficulty": "easy",
+    "tags": [
+      "WLAN 技术基础",
+      "WLAN 基本概念",
+      "WLAN 组网元素"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-16b-005",
+    "type": "single_choice",
+    "question": "STA 在 WLAN 中指的是什么？",
+    "options": {
+      "A": "无线接入点设备",
+      "B": "具备无线网卡的终端设备",
+      "C": "认证服务器",
+      "D": "无线接入控制器"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "STA 即 Station，包括笔记本、手机、无线摄像头等终端，是无线网络的最终使用者，AP 与 AC 都是为其服务的网络设备。",
+    "chapter": "WLAN 技术基础",
+    "knowledgeSection": "WLAN 基本概念",
+    "knowledgePoint": "WLAN 组网元素",
+    "difficulty": "easy",
+    "tags": [
+      "WLAN 技术基础",
+      "WLAN 基本概念",
+      "WLAN 组网元素"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-16b-006",
+    "type": "true_false",
+    "question": "SSID 是用户看到的无线网络名称，一台 AP 可以同时广播多个 SSID。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "通过多个 VAP 模板，一台 AP 可同时承载多个 SSID 并映射到不同 VLAN，实现员工、访客、物联网等业务隔离。",
+    "chapter": "WLAN 技术基础",
+    "knowledgeSection": "WLAN 基本概念",
+    "knowledgePoint": "SSID 与 BSSID",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 技术基础",
+      "WLAN 基本概念",
+      "SSID 与 BSSID"
+    ],
+    "stage": "综合应用"
+  }
+]

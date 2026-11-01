@@ -18,9 +18,11 @@
     "difficulty": "easy",
     "tags": [
       "IPv6 地址与配置",
+      "IPv6 地址格式",
       "IPv6 地址类型"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "IPv6 地址格式"
   },
   {
     "id": "hcia-v2-10-link-local",
@@ -41,9 +43,11 @@
     "difficulty": "medium",
     "tags": [
       "IPv6 地址与配置",
+      "IPv6 地址格式",
       "IPv6 地址类型"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "IPv6 地址格式"
   },
   {
     "id": "hcia-v2-10-no-broadcast",
@@ -60,13 +64,16 @@
     ],
     "analysis": "IPv6 不定义广播地址，使用组播和任播等方式完成相应的一对多或就近通信。",
     "chapter": "IPv6 地址与配置",
-    "knowledgePoint": "邻居发现",
+    "knowledgePoint": "NDP 邻居发现",
     "difficulty": "easy",
     "tags": [
       "IPv6 地址与配置",
+      "IPv6 协议机制",
+      "NDP 邻居发现",
       "邻居发现"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "IPv6 协议机制"
   },
   {
     "id": "hcia-v2-10-compression",
@@ -83,12 +90,15 @@
     ],
     "analysis": "为保证地址能唯一还原，一个 IPv6 地址中双冒号压缩只能出现一次。",
     "chapter": "IPv6 地址与配置",
-    "knowledgePoint": "地址简写",
+    "knowledgePoint": "IPv6 地址结构与简写",
     "difficulty": "medium",
     "tags": [
       "IPv6 地址与配置",
+      "IPv6 地址格式",
+      "IPv6 地址结构与简写",
       "地址简写"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "IPv6 地址格式"
   }
 ]

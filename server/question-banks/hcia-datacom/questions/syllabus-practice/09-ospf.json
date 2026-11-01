@@ -14,13 +14,16 @@
     ],
     "analysis": "OSPF 直接使用 IP 协议号 89，不通过 TCP 或 UDP 端口承载。",
     "chapter": "OSPF 原理与配置",
-    "knowledgePoint": "单区域 OSPF",
+    "knowledgePoint": "OSPF 配置与验证",
     "difficulty": "medium",
     "tags": [
       "OSPF 原理与配置",
+      "单区域 OSPF 与 LSA",
+      "OSPF 配置与验证",
       "单区域 OSPF"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "单区域 OSPF 与 LSA"
   },
   {
     "id": "hcia-v2-09-router-id",
@@ -37,13 +40,16 @@
     ],
     "analysis": "Router ID 是 32 位标识，用于在 OSPF 域内唯一识别路由器并参与协议运行。",
     "chapter": "OSPF 原理与配置",
-    "knowledgePoint": "Router ID",
+    "knowledgePoint": "Router ID 选举",
     "difficulty": "easy",
     "tags": [
       "OSPF 原理与配置",
+      "OSPF 基础概念",
+      "Router ID 选举",
       "Router ID"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "OSPF 基础概念"
   },
   {
     "id": "hcia-v2-09-backbone",
@@ -60,13 +66,16 @@
     ],
     "analysis": "Area 0 是 OSPF 骨干区域，其他常规区域通常需要通过骨干区域进行区域间通信。",
     "chapter": "OSPF 原理与配置",
-    "knowledgePoint": "单区域 OSPF",
+    "knowledgePoint": "区域与开销计算",
     "difficulty": "easy",
     "tags": [
       "OSPF 原理与配置",
+      "单区域 OSPF 与 LSA",
+      "区域与开销计算",
       "单区域 OSPF"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "单区域 OSPF 与 LSA"
   },
   {
     "id": "hcia-v2-09-priority-zero",
@@ -83,12 +92,15 @@
     ],
     "analysis": "接口优先级为 0 表示不具备 DR/BDR 候选资格，但仍可参与邻居发现和路由交换。",
     "chapter": "OSPF 原理与配置",
-    "knowledgePoint": "DR/BDR",
+    "knowledgePoint": "网络类型与 DR/BDR",
     "difficulty": "medium",
     "tags": [
       "OSPF 原理与配置",
+      "邻居与邻接关系",
+      "网络类型与 DR/BDR",
       "DR/BDR"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "邻居与邻接关系"
   }
 ]

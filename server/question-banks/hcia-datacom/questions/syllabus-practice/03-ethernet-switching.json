@@ -14,13 +14,16 @@
     ],
     "analysis": "交换机把帧的源 MAC 地址与入接口关联写入 MAC 地址表，再根据目的 MAC 地址转发。",
     "chapter": "以太网交换基础",
-    "knowledgePoint": "MAC 地址表",
+    "knowledgePoint": "MAC 地址表学习",
     "difficulty": "easy",
     "tags": [
       "以太网交换基础",
+      "交换机转发原理",
+      "MAC 地址表学习",
       "MAC 地址表"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "交换机转发原理"
   },
   {
     "id": "hcia-v2-03-unknown-unicast",
@@ -37,13 +40,16 @@
     ],
     "analysis": "未知单播会在所属 VLAN 内泛洪到除入接口外的端口，以尝试找到目的主机。",
     "chapter": "以太网交换基础",
-    "knowledgePoint": "交换机转发",
+    "knowledgePoint": "转发、泛洪与丢弃",
     "difficulty": "medium",
     "tags": [
       "以太网交换基础",
+      "交换机转发原理",
+      "转发、泛洪与丢弃",
       "交换机转发"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "交换机转发原理"
   },
   {
     "id": "hcia-v2-03-broadcast-domain",
@@ -60,13 +66,16 @@
     ],
     "analysis": "不同 VLAN 是彼此隔离的二层广播域，跨 VLAN 通信需要三层转发。",
     "chapter": "以太网交换基础",
-    "knowledgePoint": "广播域",
+    "knowledgePoint": "冲突域与广播域",
     "difficulty": "easy",
     "tags": [
       "以太网交换基础",
+      "冲突域与双工",
+      "冲突域与广播域",
       "广播域"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "冲突域与双工"
   },
   {
     "id": "hcia-v2-03-full-duplex",
@@ -83,12 +92,15 @@
     ],
     "analysis": "全双工链路可同时收发，不发生共享介质上的冲突，因此无需 CSMA/CD。",
     "chapter": "以太网交换基础",
-    "knowledgePoint": "以太网帧",
+    "knowledgePoint": "以太网帧结构",
     "difficulty": "medium",
     "tags": [
       "以太网交换基础",
+      "以太网帧与 MAC 地址",
+      "以太网帧结构",
       "以太网帧"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "以太网帧与 MAC 地址"
   }
 ]

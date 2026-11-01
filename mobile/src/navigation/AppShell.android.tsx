@@ -1,3 +1,7 @@
+import { AiIcon } from '../screens/ai-learning/AiElements';
+import { inlineAiGenerationPage } from '../aiGenerationPresentation';
+import {PracticeSyncNotice} from '../components/PracticeSyncNotice.android';
+import {usePracticeAttemptOwner} from '../api/practiceAttemptSync.android';
 import { useAndroidFocusModeState } from './AndroidFocusMode.android';
 import { AppIcon } from '../components/AppIcon';
 import { Easing } from 'react-native';
@@ -57,6 +61,8 @@ import {
   type ThemeColors,
 } from '../theme';
 import { APP_VERSION } from '../version';
+import {practiceVoice} from '../practiceVoice';
+import { backendConnectionNotice } from '../api/backendContract';
 import { AiLearningScreen } from '../screens/AiLearningScreen';
 import { ExamWorkspaceScreen } from '../screens/ExamWorkspaceScreen';
 import { AiLearningTaskNotice } from '../components/AiLearningTaskNotice';
@@ -80,7 +86,7 @@ const tabs: Array<{ id: AppTab; label: string; icon: string; symbol: string }> =
 
 export function AppShell() {
   const focusMode=useAndroidFocusModeState();
-  const { animationScale, resolvedMode, reduceMotion } = useTheme();
+  const { colors, animationScale, resolvedMode, reduceMotion } = useTheme();
   const styles = useThemedStyles(createStyles, iosStyles.shell);
   const [isPreview, setIsPreview] = useState(false);
   const [session, setSession] = useState<AuthResponse | null>(null);
@@ -89,6 +95,8 @@ export function AppShell() {
   const [aiExamEntryKey, setAiExamEntryKey] = useState(0);
   const [dailyPracticeDay, setDailyPracticeDay] = useState<string | null>(null);
   const appActive = useAppActive();
+  useEffect(()=>{if(!session)void practiceVoice.setAccount(null);else if(appActive)void practiceVoice.setAccount(String(session.user.id));else practiceVoice.stop();},[session?.user.id,appActive]);
+  usePracticeAttemptOwner(isPreview?undefined:session?.user,appActive);
   const { data: dashboard } = useCachedQuery(
     '/dashboard?summary=1',
     mobileApi.dashboard,
@@ -129,6 +137,7 @@ export function AppShell() {
     null,
   );
   const [versionCheckKey, setVersionCheckKey] = useState(0);
+  const [backendNotice, setBackendNotice] = useState('');
   const aiJobSeenStorageKey = session?.user.id
     ? `kaojiang-ai-job-notices:${session.user.id}`
     : null;
@@ -263,13 +272,16 @@ export function AppShell() {
 
   useEffect(() => {
     let mounted = true;
+    if (!appActive) return;
     void mobileApi
       .appVersion(APP_VERSION)
       .then((release) => {
         if (!mounted) return;
         setUpdateRelease(release.forceUpdate ? release : null);
+        setBackendNotice(backendConnectionNotice(release));
       })
       .catch(() => {
+        if (mounted) setBackendNotice('暂未连接到服务器，可先查看已缓存内容。网络恢复后请重新连接。');
         // A temporary network failure should not brick the app; normal API requests
         // will still report their own connection state after the check completes.
       });
@@ -277,7 +289,7 @@ export function AppShell() {
     return () => {
       mounted = false;
     };
-  }, [versionCheckKey]);
+  }, [versionCheckKey, appActive]);
 
   useEffect(() => {
     if (!isPreview && !session) return;
@@ -417,6 +429,7 @@ export function AppShell() {
   }
 
   const seenAiJobSet = new Set(seenAiJobIds);
+  const inlineAiProgress=inlineAiGenerationPage({tab:activeTab,mode:practiceMode,chapter:practiceChapter,point:practiceKnowledgePoint,library:practiceAiLibrary,daily:dailyPracticeOpen});
   const visibleProgressJob = aiQuestionJobs.find((item) => item.id === shownAiJobId) ?? null;
   const newestJob = aiQuestionJobs.find((item) => item.status === 'queued' || item.status === 'running')
     ?? aiQuestionJobs[0]
@@ -492,6 +505,13 @@ export function AppShell() {
         </SafeAreaView>
       </Modal>
       <View style={styles.screen}>
+        {!isPreview && !!backendNotice && <View testID="backend-connection-notice" accessibilityRole="alert" style={{ paddingHorizontal: spacing.md, paddingVertical: 12, gap: 8, backgroundColor: colors.background, borderBottomWidth: 1, borderBottomColor: colors.border }}>
+          <Text style={{ color: colors.text, fontSize: 14, lineHeight: 21 }}>{backendNotice}</Text>
+          <AnimatedPressable accessibilityRole="button" onPress={() => setVersionCheckKey(key => key + 1)} style={{ alignSelf: 'flex-start', paddingVertical: 6, paddingHorizontal: 12 }}>
+            <Text style={{ color: colors.brand, fontSize: 14, fontWeight: '500' }}>重新连接</Text>
+          </AnimatedPressable>
+        </View>}
+        {!isPreview&&session?.user&&<PracticeSyncNotice/>}
         {!isPreview&&session?.user&&<AndroidPointsBar headless userId={session.user.id} certificateId={session.user.certificateId} appActive={appActive}/>}
         <Animated.View
           accessibilityElementsHidden={dailyPracticeOpen}
@@ -546,7 +566,7 @@ export function AppShell() {
             </View>
           ))}
         </Animated.View>
-        {visibleProgressJob && (
+        {visibleProgressJob && !inlineAiProgress && (
           <AiGenerationProgressPill
             job={visibleProgressJob}
             onClose={() => {
@@ -573,6 +593,7 @@ export function AppShell() {
         {!focusMode&&<TabBar activeTab={activeTab} onChange={handleNavigate} hidden={dailyPracticeOpen} />}
         {dailyPracticeDay && <DailyPracticePanel
           key={`${session?.user.id ?? 'preview'}:${session?.user.certificateId ?? ''}:${dailyPracticeDay}`}
+          user={session?.user} certificates={session?.certificates} onOpenCertificatePicker={handleOpenCertificatePicker}
           visible={dailyPracticeOpen}
           active={appActive && !certificatePickerOpen}
           preview={isPreview}
@@ -629,6 +650,7 @@ function UpdateRequiredScreen({
         release.latestVersion,
         setDownloadProgress,
         () => setDownloadState('installing'),
+          { bytes: release.apkBytes, md5: release.apkMd5 },
       );
       setDownloadState('idle');
       setDownloadProgress(null);
@@ -849,9 +871,11 @@ function TabBarItem({
       accessibilityRole="button"
       accessibilityState={{ selected: active }}
       onPress={onPress}
-      style={[styles.tab, active && styles.activeTab]}
+      style={[styles.tab, active && tab.id !== "ai" && styles.activeTab]}
     >
-      <Animated.View style={{ transform: [{ scale: iconScale }] }}><AppIcon name={tab.symbol} selected={active} size={23} style={[styles.tabIcon, active && styles.activeTabIcon]} /></Animated.View>
+      <Animated.View style={{ transform: [{ scale: iconScale }] }}>{tab.id === "ai" ?
+        <View style={{width:34,height:34,borderRadius:10,backgroundColor:"#2962F4",alignItems:"center",justifyContent:"center"}}><AiIcon name="sparkle" color="#FFF" size={23}/></View> :
+        <AppIcon name={tab.symbol} selected={active} size={23} style={[styles.tabIcon, active && styles.activeTabIcon]} />}</Animated.View>
       <Text style={[styles.tabLabel, active && styles.activeTabLabel]}>
         {tab.label}
       </Text>
@@ -1037,7 +1061,6 @@ const createStyles = (colors: ThemeColors) =>
     safeArea: {
       backgroundColor: colors.background,
       flex: 1,
-      paddingTop: Platform.OS === 'android' ? NativeStatusBar.currentHeight ?? 0 : 0,
     },
     screen: {
       flex: 1,

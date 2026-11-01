@@ -1,0 +1,367 @@
+[
+  {
+    "id": "hcia-v3-15-001",
+    "type": "single_choice",
+    "question": "传统数据中心三层架构的层次划分是什么？",
+    "options": {
+      "A": "控制层、转发层、管理层",
+      "B": "物理层、链路层、网络层",
+      "C": "核心层、汇聚层、接入层",
+      "D": "Leaf 层、Spine 层、边界层"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "传统 DC 沿用园区三层模型，南北向流量需逐层上行；在服务器密集的东西向流量场景下，汇聚层容易成为瓶颈。",
+    "chapter": "数据中心网络基础",
+    "knowledgeSection": "数据中心架构",
+    "knowledgePoint": "传统三层 DC 架构",
+    "difficulty": "easy",
+    "tags": [
+      "数据中心网络基础",
+      "数据中心架构",
+      "传统三层 DC 架构"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-15-002",
+    "type": "single_choice",
+    "question": "Leaf-Spine 架构相比传统三层架构的最大优势是什么？",
+    "options": {
+      "A": "不需要任何路由协议",
+      "B": "设备数量更少，成本更低",
+      "C": "任意两台服务器之间跳数固定，时延可预测且带宽无阻塞",
+      "D": "只能支持南北向流量"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Leaf 全互联到 Spine，任意 Leaf 之间只有两跳，路径时延一致，配合 ECMP 可实现无阻塞转发。",
+    "chapter": "数据中心网络基础",
+    "knowledgeSection": "数据中心架构",
+    "knowledgePoint": "Leaf-Spine 架构",
+    "difficulty": "medium",
+    "tags": [
+      "数据中心网络基础",
+      "数据中心架构",
+      "Leaf-Spine 架构"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-15-003",
+    "type": "true_false",
+    "question": "Leaf-Spine 架构中，Leaf 之间通常不直接互联，跨 Leaf 通信必须经过 Spine。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Leaf 只与 Spine 相连，横向扩展靠增加 Spine 数量实现；若 Leaf 间直连会破坏路径一致性并引入环路风险。",
+    "chapter": "数据中心网络基础",
+    "knowledgeSection": "数据中心架构",
+    "knowledgePoint": "Leaf-Spine 架构",
+    "difficulty": "medium",
+    "tags": [
+      "数据中心网络基础",
+      "数据中心架构",
+      "Leaf-Spine 架构"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-15-004",
+    "type": "single_choice",
+    "question": "东西向流量指的是什么？",
+    "options": {
+      "A": "数据中心内部服务器之间的横向流量",
+      "B": "数据中心到分支机构的流量",
+      "C": "用户访问互联网的下行流量",
+      "D": "管理平面到控制平面的流量"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "东西向是服务器之间的横向交互，在分布式应用中占主导；南北向是数据中心与外部用户之间的纵向流量。",
+    "chapter": "数据中心网络基础",
+    "knowledgeSection": "数据中心架构",
+    "knowledgePoint": "东西向与南北向流量",
+    "difficulty": "easy",
+    "tags": [
+      "数据中心网络基础",
+      "数据中心架构",
+      "东西向与南北向流量"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-15-005",
+    "type": "true_false",
+    "question": "云计算与分布式应用普及后，数据中心的东西向流量占比显著上升。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "微服务之间大量互相调用使横向流量成为主体，这正是 Leaf-Spine 与 VXLAN 大二层方案被广泛采用的原因。",
+    "chapter": "数据中心网络基础",
+    "knowledgeSection": "数据中心架构",
+    "knowledgePoint": "东西向与南北向流量",
+    "difficulty": "medium",
+    "tags": [
+      "数据中心网络基础",
+      "数据中心架构",
+      "东西向与南北向流量"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-15-006",
+    "type": "single_choice",
+    "question": "Underlay 网络与 Overlay 网络的关系是什么？",
+    "options": {
+      "A": "两者完全独立，互不依赖",
+      "B": "Underlay 只在 IPv6 中存在",
+      "C": "Overlay 是物理层，Underlay 是虚拟层",
+      "D": "Underlay 提供物理承载，Overlay 在其上构建虚拟网络"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Underlay 由物理设备与 IP 路由构成承载网，Overlay 通过隧道封装在其上建立逻辑网络，实现租户隔离与地址解耦。",
+    "chapter": "数据中心网络基础",
+    "knowledgeSection": "Overlay 技术",
+    "knowledgePoint": "Underlay 与 Overlay",
+    "difficulty": "medium",
+    "tags": [
+      "数据中心网络基础",
+      "Overlay 技术",
+      "Underlay 与 Overlay"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-15-007",
+    "type": "single_choice",
+    "question": "VXLAN 使用的目的 UDP 端口号是多少？",
+    "options": {
+      "A": "8472",
+      "B": "4788",
+      "C": "4789",
+      "D": "6081"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "VXLAN 标准目的端口为 4789，通过 UDP 封装二层帧实现三层网络上的大二层互通，VNI 标识不同虚拟网络。",
+    "chapter": "数据中心网络基础",
+    "knowledgeSection": "Overlay 技术",
+    "knowledgePoint": "VXLAN 原理",
+    "difficulty": "medium",
+    "tags": [
+      "数据中心网络基础",
+      "Overlay 技术",
+      "VXLAN 原理"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-15-008",
+    "type": "single_choice",
+    "question": "VXLAN 中 VTEP 的作用是什么？",
+    "options": {
+      "A": "承担三层路由计算",
+      "B": "为虚拟机分配 IP 地址",
+      "C": "管理物理服务器的电源",
+      "D": "负责 VXLAN 报文的封装与解封装"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "VTEP 是 VXLAN 隧道端点，把原始二层帧加上 VXLAN 头、UDP 头与外部 IP 头后转发，对端 VTEP 再解封装。",
+    "chapter": "数据中心网络基础",
+    "knowledgeSection": "Overlay 技术",
+    "knowledgePoint": "VXLAN 原理",
+    "difficulty": "medium",
+    "tags": [
+      "数据中心网络基础",
+      "Overlay 技术",
+      "VXLAN 原理"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-15-009",
+    "type": "true_false",
+    "question": "VXLAN 的 VNI 长度为 24 位，可支持约 1600 万个虚拟网络。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "24 位 VNI 可表示 2^24 约 1677 万个标识，远超 VLAN 的 4094 个，满足多租户大规模隔离需求。",
+    "chapter": "数据中心网络基础",
+    "knowledgeSection": "Overlay 技术",
+    "knowledgePoint": "VXLAN 原理",
+    "difficulty": "hard",
+    "tags": [
+      "数据中心网络基础",
+      "Overlay 技术",
+      "VXLAN 原理"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-15-010",
+    "type": "single_choice",
+    "question": "BGP EVPN 在数据中心中主要承担什么角色？",
+    "options": {
+      "A": "作为 VXLAN 的控制平面，通告 MAC 与 IP 可达性",
+      "B": "替代物理交换机转发数据",
+      "C": "为服务器提供 DHCP 服务",
+      "D": "承担链路聚合协商"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "EVPN 用 BGP 扩展团体传递 MAC 与 IP 路由，取代传统 VXLAN 的泛洪学习，实现控制平面驱动与快速收敛。",
+    "chapter": "数据中心网络基础",
+    "knowledgeSection": "Overlay 技术",
+    "knowledgePoint": "EVPN 概述",
+    "difficulty": "hard",
+    "tags": [
+      "数据中心网络基础",
+      "Overlay 技术",
+      "EVPN 概述"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-15-011",
+    "type": "true_false",
+    "question": "传统 VXLAN 依赖数据平面泛洪学习 MAC 地址，规模扩大后泛洪开销明显。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "无控制平面时 VTEP 需靠泛洪学习远端 MAC，租户与主机数量增长后开销剧增，EVPN 正是为解决此问题而引入。",
+    "chapter": "数据中心网络基础",
+    "knowledgeSection": "Overlay 技术",
+    "knowledgePoint": "EVPN 概述",
+    "difficulty": "medium",
+    "tags": [
+      "数据中心网络基础",
+      "Overlay 技术",
+      "EVPN 概述"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-15-012",
+    "type": "single_choice",
+    "question": "M-LAG 技术的核心价值是什么？",
+    "options": {
+      "A": "把多台设备堆叠成一台",
+      "B": "为服务器提供 NAT 转换",
+      "C": "替代 OSPF 完成路由计算",
+      "D": "两台设备跨设备聚合，实现双活接入且无需堆叠"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "M-LAG 让两台独立设备以同一逻辑身份参与链路聚合，控制面独立、转发面双活，避免了堆叠分裂的风险。",
+    "chapter": "数据中心网络基础",
+    "knowledgeSection": "数据中心可靠性技术",
+    "knowledgePoint": "M-LAG 跨设备聚合",
+    "difficulty": "hard",
+    "tags": [
+      "数据中心网络基础",
+      "数据中心可靠性技术",
+      "M-LAG 跨设备聚合"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-15-013",
+    "type": "single_choice",
+    "question": "数据中心采用 CSS 集群的主要目的是什么？",
+    "options": {
+      "A": "增加 VLAN 数量",
+      "B": "替代防火墙功能",
+      "C": "为虚拟机提供存储",
+      "D": "把两台框式设备虚拟成一台，简化管理并提升可靠性"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "CSS 让双机对外呈现单一管理实体，配合跨框链路聚合消除单点故障，是 DC 核心层常见的可靠性方案。",
+    "chapter": "数据中心网络基础",
+    "knowledgeSection": "数据中心可靠性技术",
+    "knowledgePoint": "堆叠与 CSS 在 DC 的应用",
+    "difficulty": "medium",
+    "tags": [
+      "数据中心网络基础",
+      "数据中心可靠性技术",
+      "堆叠与 CSS 在 DC 的应用"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-15-014",
+    "type": "true_false",
+    "question": "堆叠系统分裂后可能出现双主，因此数据中心通常还需要部署双主检测机制。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "堆叠线缆故障导致两台设备各自认为自己是主设备，地址与配置冲突会引发大范围故障，MAD 检测可自动隔离一侧。",
+    "chapter": "数据中心网络基础",
+    "knowledgeSection": "数据中心可靠性技术",
+    "knowledgePoint": "堆叠与 CSS 在 DC 的应用",
+    "difficulty": "medium",
+    "tags": [
+      "数据中心网络基础",
+      "数据中心可靠性技术",
+      "堆叠与 CSS 在 DC 的应用"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-15-015",
+    "type": "single_choice",
+    "question": "数据中心 Fabric 自动化部署通常依赖什么？",
+    "options": {
+      "A": "依靠 DHCP 自动分配 VLAN",
+      "B": "控制器统一下发配置，设备作为转发节点",
+      "C": "逐台手工登录设备配置",
+      "D": "只依赖 STP 自动收敛"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Fabric 由控制器承担编排与配置下发，设备即插即用上线，大幅降低大规模组网的人工成本与配置偏差。",
+    "chapter": "数据中心网络基础",
+    "knowledgeSection": "数据中心可靠性技术",
+    "knowledgePoint": "Fabric 与自动化部署",
+    "difficulty": "medium",
+    "tags": [
+      "数据中心网络基础",
+      "数据中心可靠性技术",
+      "Fabric 与自动化部署"
+    ],
+    "stage": "基础理解"
+  }
+]

@@ -17,7 +17,7 @@ test("the course index contains no answer keys and the reviewed engine loads wit
     const source = JSON.parse(
       fs.readFileSync(
         new URL(
-          "../public/demo/home-blue/ai-content-network-engineer.json",
+          "./fixtures/tutor-curriculum-source.json",
           import.meta.url,
         ),
         "utf8",

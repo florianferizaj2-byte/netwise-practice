@@ -23,6 +23,9 @@ export function verificationEnvironment(
     "PLAYWRIGHT_BROWSERS_PATH",
     "TEST_BROWSER_CHANNEL",
     "CI",
+    "JAVA_HOME",
+    "ANDROID_HOME",
+    "ANDROID_SDK_ROOT",
   ]);
   fs.mkdirSync(temporaryParent, { recursive: true });
   const parent = fs.realpathSync(temporaryParent);
@@ -54,7 +57,7 @@ export function verificationEnvironment(
         !path.basename(directory).startsWith("ace-verification-")
       )
         throw new Error("验收临时目录已改变，拒绝删除。");
-      fs.rmSync(directory, { recursive: true, force: true });
+      fs.rmSync(directory, { recursive: true, force: true, maxRetries: 5, retryDelay: 200 });
     },
   };
 }

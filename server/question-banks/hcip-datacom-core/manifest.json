@@ -202,10 +202,10 @@
       "category": "syllabus_practice",
       "verification": "original_from_official_scope",
       "sourceUrl": "https://e.huawei.com/cn/talent/#/cert/product-details?certifiedProductId=351&authenticationLevel=CTYPE_CARE_HCIP&technicalField=IIC&version=1.0",
-      "description": "依据华为官方 H12-821 V1.0 考试大纲编写的单项选择题，覆盖大纲全部章节与三级知识点",
-      "path": "questions/curated",
+      "description": "依据华为官方 H12-821 V1.0 大纲编写的原创练习，已发布 900 题并覆盖全部三级知识点；含单项选择、多项选择与判断三种题型，非官方真题。",
+      "path": "questions/released-20261020",
       "defaults": {
-        "sourceVerification": "本站原创仿真练习：依据华为人才在线 H12-821 V1.0 考试大纲编写，非官方真题；官方大纲未公布题型构成，本库首批仅含单项选择题。"
+        "sourceVerification": "本站原创仿真练习：依据华为人才在线 H12-821 V1.0 考试大纲编写，非官方真题；官方大纲未公布题型构成，本库含单项选择、多项选择与判断三种题型。"
       }
     }
   ],

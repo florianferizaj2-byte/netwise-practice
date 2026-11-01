@@ -1,0 +1,1890 @@
+[
+  {
+    "id": "hcip821-2-3-2-016",
+    "type": "single_choice",
+    "question": "某 OSPF 网络把区域 1 配置为 NSSA，把区域 2 配置为 Totally NSSA。以下关于这两种区域允许通过的 LSA 的说法，哪一项成立？",
+    "options": {
+      "A": "NSSA 阻止 Type 5 LSA 进入但允许 Type 3 和 Type 7；Totally NSSA 进一步阻止 Type 3 进入，只由 ABR 下发一条默认路由",
+      "B": "NSSA 阻止 Type 3 进入；Totally NSSA 允许 Type 3 进入但阻止 Type 7",
+      "C": "两者都阻止 Type 3 和 Type 7，唯一区别是 Totally NSSA 内不允许存在 ASBR",
+      "D": "两者都允许 Type 5 进入，只是 Totally NSSA 会把 Type 5 转换成 Type 7"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "NSSA 在 Stub 区域的基础上允许以 Type 7 LSA 在区域内引入外部路由，因此它阻止 Type 5 进入，但区域间 Type 3 和 Type 7 都可以存在；Totally NSSA 相当于在 NSSA 上再加 no-summary，进一步阻止 Type 3 进入，由 ABR 下发一条默认路由保证区域外可达。B 把两者的 Type 3 行为说反，且 Totally NSSA 并不阻止 Type 7；C 错误，NSSA 的设计目的正是允许 ASBR 引入外部路由；D 错误，NSSA 系列区域都不允许 Type 5 进入，转换方向是边界路由器把 Type 7 翻译成 Type 5，而不是把 Type 5 转成 Type 7。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "NSSA 与 Totally NSSA",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "NSSA",
+      "Totally NSSA",
+      "LSA"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-2-016",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3101-nssa"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识 / OSPF 特殊区域 / NSSA 与 Totally NSSA」，对应三级目录 hcip821-2-3-2；技术依据 RFC 3101 §1.3（第 5–6 页）：NSSA 阻止 Type 5、允许 Type 3/Type 7；Totally NSSA 的 no-summary 语义。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc3101-nssa 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "1da9f4e3ebbbe1a83f7005b883d35e420140ebe459f8ac8b3158cf5ce2a0bda7"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-2-017",
+    "type": "single_choice",
+    "question": "一台同时连接 Area 0 和某个 NSSA 的 ABR 向该 NSSA 内下发一条 Type 7 默认路由。以下关于这条 LSA 的 P 位及其翻译行为的判断，哪一项符合标准？",
+    "options": {
+      "A": "P 位为 1，会被翻译成 Type 5 并泛洪到 Area 0",
+      "B": "P 位为 0，不会被翻译成 Type 5",
+      "C": "P 位为 1，但只有在 Totally NSSA 中才会被翻译成 Type 5",
+      "D": "P 位为 0，会被翻译成 Type 5，只是翻译后的 LSA 不携带度量"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RFC 3101 规定，NSSA 边界路由器自己产生的 Type 7 默认路由，其 P 位必须清零，因此这条默认路由只在 NSSA 内生效，不会被翻译成 Type 5 传到骨干区域，避免默认路由被不当扩散。A 和 C 都把 P 位说成 1 并认为会被翻译，与边界路由器产生的默认路由规则相反；D 虽然 P 位判断正确，但 Type 7 默认路由根本不会被翻译，而且 LSA 是否携带度量与翻译行为无关。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "NSSA 与 Totally NSSA",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "NSSA",
+      "Type 7",
+      "P 位"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-2-017",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3101-nssa"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识 / OSPF 特殊区域 / NSSA 与 Totally NSSA」，对应三级目录 hcip821-2-3-2；技术依据 RFC 3101 §1.3 与 Appendix D（第 5–6、28 页）：NSSA 边界路由器产生的 Type 7 默认路由 P 位清零且不被翻译成 Type 5。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc3101-nssa 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "364e8304312e5819afc06fe799f4a3f3f6a32a19b9997e8a1cfedc7bc7c86608"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-2-018",
+    "type": "single_choice",
+    "question": "某 NSSA 内部的 ASBR 用 Type 7 LSA 通告了它引入的外部路由。关于该 NSSA 的 ABR 是否需要为这台 ASBR 向 NSSA 内产生 Type 4 LSA，下列判断正确的是？",
+    "options": {
+      "A": "需要，否则 NSSA 内的路由器无法计算到该 ASBR 的路由",
+      "B": "需要，而且这条 Type 4 还会被翻译成 Type 5 传到骨干区域",
+      "C": "不需要，因为 Type 7 外部路由不会越过 NSSA 边界，区域外路由器不需要经该 ASBR 转发",
+      "D": "不需要，因为 NSSA 内不允许存在 ASBR"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Type 4 LSA 的作用是告诉其他区域如何到达 ASBR，供区域间外部路由计算使用。NSSA 的 Type 7 LSA 只在产生它的 NSSA 内泛洪，不会越过 NSSA 边界，区域外路由器不需要经过该 ASBR 转发，因此 ABR 不为 NSSA 内的 ASBR 产生 Type 4，NSSA 内的路由器依靠区域内的 Type 1/2 拓扑就能算出到 ASBR 的路由。A 错在把区域内的可达性寄托于 Type 4；B 错在 Type 4 本身不会被翻译成 Type 5；D 错在 NSSA 正是为允许 ASBR 引入外部路由而设计的。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "NSSA 与 Totally NSSA",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "NSSA",
+      "Type 4",
+      "Type 7"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-2-018",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3101-nssa",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识 / OSPF 特殊区域 / NSSA 与 Totally NSSA」，对应三级目录 hcip821-2-3-2；技术依据 RFC 3101 §1.3（第 6 页）与 RFC 2328 §12.4.3（第 135 页）：Type 4 描述到 ASBR 的区域间可达性；NSSA 边界不为其内部 ASBR 产生 Type 4。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc3101-nssa、rfc2328-ospfv2 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "381732bb77febcb77b1654b270eb2025dc7bee7b39b074ba545e5d82e698bdd4"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-3-001",
+    "type": "single_choice",
+    "question": "某 ASBR 通过重分发引入了 10 条外部路由，管理员既想减少泛洪到整个 OSPF 域的 Type 5 LSA 数量，又想保持区域 1 内部的明细路由不变。下列做法正确的是？",
+    "options": {
+      "A": "在 ASBR 上配置外部路由汇总，把这 10 条外部路由聚合成一条 Type 5 LSA",
+      "B": "在区域 1 的 ABR 上配置区域范围汇总，把这 10 条外部路由聚合成一条 Type 3 LSA",
+      "C": "在区域 1 的任意内部路由器上配置区域范围汇总，压缩 Type 5 LSA",
+      "D": "在 ABR 上配置外部路由汇总，把 Type 5 LSA 聚合成 Type 3 LSA"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "外部路由由 ASBR 引入并以 Type 5 LSA 泛洪到支持 Type 5 的区域，要减少 Type 5 的数量就应在产生它们的 ASBR 上做外部路由汇总，聚合成一条 Type 5，区域 1 内部的明细不受影响。B 错在 ABR 的区域范围汇总只处理本区域的区域内路由并生成 Type 3，对外部路由无效；C 错在内部路由器既不产生 Type 5 也不能做区域范围汇总；D 混淆了汇总对象和 LSA 类型，ABR 不能把 Type 5 聚合成 Type 3。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "路由汇总",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "外部路由汇总",
+      "Type 5",
+      "ASBR"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-3-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识 / OSPF 特殊区域 / 路由汇总」，对应三级目录 hcip821-2-3-3；技术依据 RFC 2328 §12.4.3 与 §12.4.4（第 135–140 页）：外部路由以 Type 5 由 ASBR 产生，ABR 的 summary-LSA 从不承载 AS 外部路由。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc2328-ospfv2 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "f1b2a6f22edc79ad3fe74e65807c99989d1d69cf49f23e2802ba5a3345b8541c"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-3-002",
+    "type": "single_choice",
+    "question": "在华为设备上，某 ABR 对区域 1 配置了 abr-summary 10.1.0.0 255.255.252.0。区域 1 内存在 10.1.0.0/24 至 10.1.3.0/24 四条明细路由，且全网只有这一台 ABR。该配置生效后，最符合实际的效果是？",
+    "options": {
+      "A": "区域 1 内部路由表中的四条明细被一条 10.1.0.0/22 取代",
+      "B": "其他区域收到一条 10.1.0.0/22 的 Type 3 LSA，区域 1 内部仍保留四条明细",
+      "C": "其他区域收到一条 10.1.0.0/22 的 Type 5 LSA，区域 1 内部的明细被抑制",
+      "D": "该配置不会生效，因为 abr-summary 只能汇总 Type 5 LSA"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "abr-summary 是 ABR 上的区域范围汇总：ABR 把落入该范围的区域内明细聚合成一条 Type 3 LSA 发布到其他区域，同时抑制这些明细的 Type 3 对外发布；但区域 1 内部的链路状态数据库和路由表不受影响，四条明细仍在。A 错在把汇总效果扩展到区域内部；C 错在汇总生成的是 Type 3 而不是 Type 5，且内部明细不会被抑制；D 错在 abr-summary 正是用于区域间路由汇总的命令。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "路由汇总",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "abr-summary",
+      "Type 3",
+      "区域范围"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-3-002",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识 / OSPF 特殊区域 / 路由汇总」，对应三级目录 hcip821-2-3-3；技术依据 RFC 2328 §12.4.3（第 135–137 页）：区域范围最多生成一条 Type 3 summary-LSA，范围内明细被隐藏。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc2328-ospfv2 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "ce872b0a19a4479a10067803fdb0ee9ea8370b0a8ddfca4e3ba4d70601035e4d"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-3-003",
+    "type": "single_choice",
+    "question": "某园区网区域 2 内有 172.16.12.0/24、172.16.13.0/24、172.16.14.0/24、172.16.15.0/24 四条连续前缀。管理员希望只向其他区域通告一条既能覆盖这四条、又不会多覆盖无关地址的前缀。下列哪条前缀符合要求？",
+    "options": {
+      "A": "172.16.12.0/21",
+      "B": "172.16.12.0/23",
+      "C": "172.16.12.0/22",
+      "D": "172.16.0.0/16"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "把第三个字节写成二进制：12=00001100、13=00001101、14=00001110、15=00001111，四条前缀前 22 位完全相同，第 23、24 位覆盖 00 到 11 四种组合，因此 172.16.12.0/22 恰好覆盖 172.16.12.0 至 172.16.15.255，既完整又不多覆盖。A 的 /21 覆盖 172.16.8.0 至 172.16.15.255，多包含了 8 至 11 四段无关地址；B 的 /23 只覆盖 12、13 两段，漏掉 14、15；D 的 /16 覆盖整个 172.16.0.0/16，范围过大。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "路由汇总",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "路由汇总",
+      "掩码计算",
+      "CIDR"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-3-003",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识 / OSPF 特殊区域 / 路由汇总」，对应三级目录 hcip821-2-3-3；技术依据 RFC 2328 §3.5（第 35–36 页）：地址范围由 [address,mask] 定义，汇总前缀需覆盖全部明细且不超出必要范围。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc2328-ospfv2 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "8de251caf60ffcbb31827ed1975944ad656bda3b06b6f61cd344eb889453af9f"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-3-004",
+    "type": "single_choice",
+    "question": "某 ABR 在区域 1 下配置了区域范围 10.10.0.0 255.255.0.0，但区域 1 当前没有任何属于 10.10.0.0/16 的可达路由。此时其他区域的路由表中会出现什么？",
+    "options": {
+      "A": "出现 10.10.0.0/16 的汇总路由，下一跳指向该 ABR",
+      "B": "出现 10.10.0.0/16，但度量为 0",
+      "C": "出现 10.10.0.0/16，并被标记为外部路由",
+      "D": "不出现该汇总路由，只有范围内存在可达明细时 ABR 才会产生汇总 LSA"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "区域范围汇总的生成依赖范围内至少有一条可达的明细路由：ABR 把落入范围的区域内路由聚合后才产生对应的 Type 3 LSA；如果一条匹配的明细都没有，就不会产生该汇总，已经在其他区域出现的旧汇总也会被撤销。A、B、C 都假定汇总会无条件生成，与实际行为不符；其中 B 的度量为 0 和 C 的外部路由标记也没有依据，汇总路由的度量取自范围内明细的开销，且它仍是区域间路由而非外部路由。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "路由汇总",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "路由汇总",
+      "汇总生成条件"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-3-004",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识 / OSPF 特殊区域 / 路由汇总」，对应三级目录 hcip821-2-3-3；技术依据 RFC 2328 §12.4.3（第 136 页）：只有落入范围的区域内路由才产生范围汇总 LSA，无匹配明细则不产生。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc2328-ospfv2 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "33607304051fe08e4381ab8416bc901931066edfec6035f6fba396c8e69bde00"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-3-005",
+    "type": "single_choice",
+    "question": "某 ABR 对区域 1 配置地址范围汇总后，范围内四条明细路由的开销分别为 20、30、10、25。按 OSPF 地址范围汇总的标准行为，生成的 Type 3 汇总路由开销是多少？",
+    "options": {
+      "A": "85",
+      "B": "30",
+      "C": "21.25",
+      "D": "10"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "OSPF 地址范围汇总生成的路由开销取范围内各明细网络开销的最大值，因此 max(20,30,10,25)=30。A 的 85 是四条开销之和，汇总并不会累加开销；C 的 21.25 是算术平均值，OSPF 汇总不按平均计算；D 的 10 是四条中的最小值，取最小值会低估到达范围内部署最远网络的代价。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "路由汇总",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "路由汇总",
+      "开销计算"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-3-005",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识 / OSPF 特殊区域 / 路由汇总」，对应三级目录 hcip821-2-3-3；技术依据 RFC 2328 §12.4.3（第 136 页）：范围汇总 Type 3 的 cost 取范围内各组成部分网络的最大开销。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc2328-ospfv2 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "7054092bb19935f1e5e22cd044b7237bf0582195eae82f0d8d78cb955458c94a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-3-006",
+    "type": "single_choice",
+    "question": "区域 1 的 ABR 把 10.1.0.0/22 汇总后发布到区域 0，区域 1 内部的链路状态数据库仍保留各条明细。区域 1 内的路由器 R1 收到一个目的地址为 10.1.3.7 的报文时，会依据哪条路由转发？",
+    "options": {
+      "A": "指向 ABR 的 10.1.0.0/22 汇总路由",
+      "B": "默认路由",
+      "C": "直接丢弃，因为汇总后明细已被删除",
+      "D": "区域 1 内通过 Type 1/2 LSA 计算出的 10.1.3.0/24 明细路由"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "汇总只改变 ABR 向其他区域通告的内容，区域 1 内部的明细仍通过 Type 1/2 LSA 参与最短路径计算并进入路由表；按最长匹配原则，10.1.3.7 命中 10.1.3.0/24 明细，不会走 /22 汇总。A 忽略了最长匹配，且汇总路由是 ABR 对外发布的路由；B 只有在没有任何更具体路由时才使用默认路由；C 错误，汇总不会删除区域内的明细。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "路由汇总",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "路由汇总",
+      "最长匹配",
+      "区域内路由"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-3-006",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识 / OSPF 特殊区域 / 路由汇总」，对应三级目录 hcip821-2-3-3；技术依据 RFC 2328 §12.4.3（第 135 页）：summary-LSA 描述的是区域外目的地，区域内明细仍由 Type 1/2 承载。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc2328-ospfv2 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "02e2e8812d222818b9d1a5ec45d30ab3ddab7833b34272073cd8eaef3a11383e"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-3-007",
+    "type": "single_choice",
+    "question": "区域 1 通过 ABR-1 和 ABR-2 同时连接 Area 0。管理员只在 ABR-1 上为区域 1 配置了正确的区域范围汇总，但 Area 0 的路由器仍然同时收到 10.1.0.0/22 的 Type 3 LSA 和 10.1.1.0/24 的 Type 3 LSA。最可能的原因是？",
+    "options": {
+      "A": "ABR-2 没有配置相同的汇总，仍把区域 1 的明细以 Type 3 LSA 发布到 Area 0",
+      "B": "汇总命令写在了错误的路由器视图，ABR-1 上的配置实际没有生效",
+      "C": "Area 0 不允许 Type 3 LSA，因此 ABR-1 的汇总被丢弃",
+      "D": "区域 1 内存在 ASBR，明细被 ASBR 用 Type 5 LSA 带入了 Area 0"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "同一区域可以有多台 ABR，每台 ABR 都会独立地把自己生成的 Type 3 LSA 注入骨干区域。只在一台 ABR 上配置汇总，另一台仍会按明细生成 Type 3，所以 Area 0 同时看到汇总和明细；解决办法是在所有 ABR 上配置一致的汇总。B 与题干给出的“ABR-1 配置正确”矛盾；C 错误，Area 0 正是 Type 3 LSA 泛洪的骨干区域；D 与题干不符，题干已说明 Area 0 收到的明细是 Type 3 而非 Type 5。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "路由汇总",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "路由汇总",
+      "多 ABR",
+      "故障定位"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-3-007",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识 / OSPF 特殊区域 / 路由汇总」，对应三级目录 hcip821-2-3-3；技术依据 RFC 2328 §12.4.3（第 135 页）：每台 ABR 独立产生 summary-LSA，多 ABR 需一致配置才能抑制明细。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc2328-ospfv2 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "b7966a16bfa4b83b86d40204fafd3e8414a607e02040a24741cc428aec2a75b5"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-3-008",
+    "type": "single_choice",
+    "question": "以下关于 OSPF 区域间路由汇总与外部路由汇总的对比结论，哪一项正确？",
+    "options": {
+      "A": "两者都由 ABR 完成，前者汇总 Type 3 LSA，后者汇总 Type 5 LSA",
+      "B": "区域间汇总在 ABR 上把区域内明细聚合成 Type 3 LSA；外部汇总在 ASBR 上把引入的外部路由聚合成 Type 5 LSA，NSSA 内则为 Type 7 LSA",
+      "C": "区域间汇总在 ASBR 上完成，外部汇总在 ABR 上完成",
+      "D": "两者都只能汇总 Type 7 LSA"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "区域间汇总由 ABR 执行，对象是本区域的区域内路由，结果是生成 Type 3 LSA；外部汇总由 ASBR 执行，对象是重分发进来的外部路由，在普通区域生成 Type 5 LSA，在 NSSA 内生成 Type 7 LSA，再由边界路由器按需翻译。A 错在把外部汇总也归给 ABR；C 把两者的执行者完全对调；D 错在 Type 7 只用于 NSSA 的外部路由，并不是两种汇总的唯一载体。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "路由汇总",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "路由汇总",
+      "ABR",
+      "ASBR"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-3-008",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识 / OSPF 特殊区域 / 路由汇总」，对应三级目录 hcip821-2-3-3；技术依据 RFC 2328 §12.4.3 与 §12.4.4（第 135–140 页）：ABR 产生 Type 3、ASBR 产生 Type 5，两者对象不同。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc2328-ospfv2 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "734c42a242a25bd0062658f1837603b57d1644c3c7cc4531b91408fe916ebccc"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-3-009",
+    "type": "single_choice",
+    "question": "Area 0 的链路状态数据库中同时存在 10.1.0.0/22 的 Type 3 LSA 和 200.1.0.0/16 的 Type 5 LSA。以下关于这两条 LSA 产生者的判断，哪一项成立？",
+    "options": {
+      "A": "两条都由 ABR 产生",
+      "B": "两条都由 ASBR 产生",
+      "C": "Type 3 由 ABR 汇总区域内路由产生，Type 5 由 ASBR 引入或汇总外部路由产生",
+      "D": "Type 3 由 ASBR 产生，Type 5 由 ABR 产生"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Type 3 是区域间路由的载体，由 ABR 把本区域内的路由或区域范围汇总结果通告到其他区域；Type 5 是自治系统外部路由的载体，只能由 ASBR 在引入外部路由时产生，汇总后的外部路由同样由 ASBR 以 Type 5 发出。A 否认了 Type 5 必须由 ASBR 产生；B 否认了 Type 3 由 ABR 产生；D 把两种 LSA 的产生者完全对调。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "路由汇总",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "Type 3",
+      "Type 5",
+      "LSA 产生者"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-3-009",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识 / OSPF 特殊区域 / 路由汇总」，对应三级目录 hcip821-2-3-3；技术依据 RFC 2328 §12.4.3 与 §12.4.4（第 135、139 页）：Type 3 由 ABR 汇总区域内路由产生，Type 5 由 ASBR 引入外部路由产生。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc2328-ospfv2 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "20de5035d150c3d76a3686d3873801dfb91d2a52088fa9306b6ddb6b868e8d78"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-3-010",
+    "type": "single_choice",
+    "question": "某 NSSA 内有 8 条由 ASBR 引入的外部路由，它们以 Type 7 LSA 在 NSSA 内泛洪。管理员希望 NSSA 边界路由器向骨干区域只通告一条聚合后的 Type 5 LSA。应在哪里做聚合？",
+    "options": {
+      "A": "在 NSSA 内的 ASBR 上配置 Type 5 地址范围，把 8 条外部路由先聚合成 Type 5 LSA 再送入 NSSA",
+      "B": "在骨干区域的 ABR 上对已经翻译好的 Type 5 LSA 再做一次汇总",
+      "C": "在 NSSA 内任意一台内部路由器上配置一条指向 ASBR 的静态汇总路由",
+      "D": "在 NSSA 边界路由器上配置 Type 7 地址范围，把匹配的多条 Type 7 LSA 聚合后翻译成一条 Type 5 LSA"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "NSSA 边界路由器负责把 Type 7 LSA 翻译成 Type 5 LSA，RFC 3101 允许在边界路由器上配置 Type 7 地址范围，把落入同一范围的多条 Type 7 先聚合，再以一条 Type 5 通告到支持 Type 5 的区域。A 错在 NSSA 内不允许 Type 5 LSA 泛洪，ASBR 只能以 Type 7 引入外部路由，无法先把它们聚合成 Type 5 再送入 NSSA；B 错在翻译后的 Type 5 已经进入骨干，再汇总无法减少 NSSA 到边界的聚合工作，也不是标准规定的 Type 7 聚合位置；C 错在静态汇总路由只是本地路由条目，不会改变 Type 7 LSA 的泛洪和翻译结果。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "路由汇总",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "NSSA",
+      "Type 7 地址范围",
+      "路由汇总"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-3-010",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc3101-nssa"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识 / OSPF 特殊区域 / 路由汇总」，对应三级目录 hcip821-2-3-3；技术依据 RFC 3101 §2.2（第 7 页）与 §3.2（第 16 页）：NSSA 边界路由器可用 Type 7 地址范围把多条 Type 7 聚合后翻译为单条 Type 5。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc3101-nssa 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "f85e3ae00715b69a2856761fea5d2ea04a0efabd549399a19102b9f6f9971890"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-3-011",
+    "type": "single_choice",
+    "question": "区域 1 内有 4 条 /24 明细，ABR 上配置了能覆盖它们的区域范围汇总，且网络中只有这一台 ABR。配置生效后，Area 0 的链路状态数据库中与这 4 条网段相关的 Type 3 LSA 数量和内容如何变化？",
+    "options": {
+      "A": "4 条明细 Type 3 LSA 被 1 条汇总 Type 3 LSA 替代",
+      "B": "仍是 4 条明细 Type 3 LSA，另加 1 条汇总 Type 3 LSA",
+      "C": "变为 1 条 Type 5 LSA",
+      "D": "变为 0 条，因为汇总路由改用 Type 1 LSA 传播"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "ABR 对区域 1 配置区域范围后，会把范围内本区域的明细聚合成一条 Type 3 LSA 注入 Area 0，并抑制这些明细对应的 Type 3 LSA，所以 4 条变 1 条；区域 1 内部的明细 LSA 仍然存在，但不属于 Area 0 的 Type 3 统计。B 错在明细 Type 3 会被抑制而不是继续存在；C 错在区域间汇总使用 Type 3，Type 5 只承载外部路由；D 错在 Type 1 是路由器 LSA，只在区域内泛洪，不能替代跨区域的汇总。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "路由汇总",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "路由汇总",
+      "LSDB",
+      "Type 3"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-3-011",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识 / OSPF 特殊区域 / 路由汇总」，对应三级目录 hcip821-2-3-3；技术依据 RFC 2328 §12.4.3（第 136 页）：每个范围最多一条 Type 3，范围内组成部分对外隐藏。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc2328-ospfv2 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "a1a5f00e8407d727f172d58fb53655c71d823bc51cb585309f689107dc2a4607"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-3-012",
+    "type": "single_choice",
+    "question": "ABR 为区域 1 配置的汇总范围内原本有 3 条明细路由，随后这 3 条明细全部撤销。此时该汇总路由会怎样？",
+    "options": {
+      "A": "汇总路由继续存在，直到管理员手工删除汇总配置",
+      "B": "ABR 撤销对应的汇总 LSA，其他区域不再有该汇总路由",
+      "C": "汇总路由自动变成默认路由",
+      "D": "汇总路由保留，但度量变为 0"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "区域范围汇总的生命周期跟随范围内的明细：只要还有至少一条匹配明细，ABR 就维持汇总；当最后一条明细撤销后，汇总失去依据，ABR 会撤销对应的 Type 3 LSA，其他区域随之删除该汇总路由。A 错在汇总不是静态配置的固定路由；C 错在汇总不会演变成默认路由，默认路由需要单独配置；D 错在汇总不会以度量 0 的形式保留。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "路由汇总",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "路由汇总",
+      "汇总撤销"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-3-012",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识 / OSPF 特殊区域 / 路由汇总」，对应三级目录 hcip821-2-3-3；技术依据 RFC 2328 §12.4.3（第 136 页）：目的地不可达时以 MaxAge 冲刷 summary-LSA。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc2328-ospfv2 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "6cb9f24c9b680a6e7b132c7db916c9a81dac268f43fd83cce016084f99627774"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-3-013",
+    "type": "single_choice",
+    "question": "某企业有 16 个连续的分支网段 10.20.0.0/24 至 10.20.15.0/24，全部位于 OSPF 区域 3。管理员希望骨干区域只看到一条覆盖它们的汇总路由。下列配置思路正确的是？",
+    "options": {
+      "A": "在每台分支路由器上配置一条 10.20.0.0/20 的静态路由",
+      "B": "在 ASBR 上配置 asbr-summary 10.20.0.0/20",
+      "C": "在骨干区域的 DR 上配置 abr-summary 10.20.0.0/20",
+      "D": "在区域 3 的 ABR 上为区域 3 配置 10.20.0.0/20 的区域范围汇总"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "区域 3 的明细属于区域内路由，要减少跨区域通告就应由连接区域 3 和骨干的 ABR 在区域 3 视图下配置区域范围 10.20.0.0/20；2^(24-20)=16，恰好覆盖 16 个 /24，范围从 10.20.0.0 到 10.20.15.255。A 错在静态路由不会替代 OSPF 的 Type 3 明细；B 错在 asbr-summary 只汇总引入的外部路由，这些分支网段不是外部路由；C 错在汇总必须配置在明细所属区域的 ABR 视图下，DR 不承担该功能。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "路由汇总",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "路由汇总",
+      "abr-summary",
+      "场景应用"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-3-013",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识 / OSPF 特殊区域 / 路由汇总」，对应三级目录 hcip821-2-3-3；技术依据 RFC 2328 §3.5（第 35–36 页）：16 个连续 /24 对应 /20，区域范围汇总在 ABR 上配置。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc2328-ospfv2 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "dca6ee69ddaf7856db752046b3a1fe6345f075a879106d8d10839be71c8ab2b0"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-3-014",
+    "type": "single_choice",
+    "question": "以下哪一项正确区分了路由汇总与路由过滤？",
+    "options": {
+      "A": "汇总和过滤都会生成新的聚合前缀",
+      "B": "过滤会改变路由的掩码长度，汇总不会",
+      "C": "汇总生成一条新的聚合前缀并抑制被覆盖的明细；过滤只按策略丢弃或放行路由，不生成新前缀",
+      "D": "汇总只能用于 Type 5 LSA，过滤只能用于 Type 3 LSA"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "汇总改变的是通告内容：把多条明细合并成一条更短掩码的新前缀，并抑制被覆盖的明细；过滤改变的是通告策略：按 ACL、前缀列表等条件决定某条路由是否被通告或接收，不会凭空产生聚合前缀。A 错在过滤不生成新前缀；B 错在过滤不改变掩码，改变掩码是汇总的特征；D 错在两者都可作用于多种 OSPF 路由类型，并不存在这种固定分工。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "路由汇总",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "路由汇总",
+      "路由过滤",
+      "概念辨析"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-3-014",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识 / OSPF 特殊区域 / 路由汇总」，对应三级目录 hcip821-2-3-3；技术依据 RFC 2328 §12.4.3（第 135–136 页）：汇总生成新的范围前缀并隐藏明细；过滤只决定通告与否，不产生新前缀。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc2328-ospfv2 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "7de8e8c3d7dcf153a54c062d5fb1938beefd2e147cce0ff6360ead99f11659ad"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-3-015",
+    "type": "single_choice",
+    "question": "管理员在华为设备的 ABR 区域 1 下配置 abr-summary 10.1.0.0 255.255.255.0，原意是汇总 10.1.0.0/24 至 10.1.3.0/24。结果其他区域只看到 10.1.0.0/24 的汇总，10.1.1.0/24 至 10.1.3.0/24 仍以明细 Type 3 LSA 出现。原因是什么？",
+    "options": {
+      "A": "汇总命令的发布方向配置反了",
+      "B": "配置的掩码只覆盖 10.1.0.0/24，其余三条明细不在该范围内",
+      "C": "ABR 不支持对 /24 以上的路由做汇总",
+      "D": "明细路由的度量大于汇总路由的度量"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "区域范围的匹配由地址和掩码共同决定，255.255.255.0 对应 /24，范围只包含 10.1.0.0/24，因此只有这一条被聚合成汇总，另外三条不在范围内，仍按明细生成 Type 3 并被通告。要覆盖四条应配置 255.255.252.0。A 错在方向不是原因，命令确实生效了；C 错在 ABR 完全支持 /24 及以上范围的汇总；D 错在度量大小不影响某条明细是否落入汇总范围。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "路由汇总",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "路由汇总",
+      "掩码配置",
+      "故障定位"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-3-015",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识 / OSPF 特殊区域 / 路由汇总」，对应三级目录 hcip821-2-3-3；技术依据 RFC 2328 §3.5（第 35–36 页）：范围由 [address,mask] 定义，/24 掩码不覆盖其余三条 /24 明细。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc2328-ospfv2 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "0b643a5bdee8f98bde75df05b12300213c5245716a8b9fc07c0e1236771f7ab5"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-3-016",
+    "type": "single_choice",
+    "question": "ABR 上配置的汇总前缀为 10.1.0.0/22。下列哪条明细路由不会被该汇总覆盖？",
+    "options": {
+      "A": "10.1.0.0/24",
+      "B": "10.1.2.0/24",
+      "C": "10.1.3.0/24",
+      "D": "10.1.4.0/24"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "10.1.0.0/22 的第三个字节范围是 0 至 3，即覆盖 10.1.0.0 到 10.1.3.255。10.1.0.0/24、10.1.2.0/24、10.1.3.0/24 都落在该范围内；10.1.4.0/24 的第三个字节是 4，已经超出 /22 的边界，不会被覆盖。因此 A、B、C 都在汇总范围内，只有 D 在范围之外。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "路由汇总",
+    "difficulty": "easy",
+    "tags": [
+      "OSPF",
+      "路由汇总",
+      "覆盖范围",
+      "计算"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-3-016",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识 / OSPF 特殊区域 / 路由汇总」，对应三级目录 hcip821-2-3-3；技术依据 RFC 2328 §3.5（第 35–36 页）：10.1.0.0/22 覆盖 10.1.0.0–10.1.3.255，10.1.4.0/24 在范围外。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc2328-ospfv2 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "4a89593c85a32bf0e67e32f20e5a7bb04af3e728684ac41d7e664c222af2ff38"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-3-017",
+    "type": "single_choice",
+    "question": "一台同时连接 Area 0、区域 1 和区域 2 的 ABR 上，两个区域各自有一批 /24 明细需要分别聚合成一条 Type 3 LSA。下列做法正确的是？",
+    "options": {
+      "A": "分别在区域 1、区域 2 视图下配置各自范围的 abr-summary",
+      "B": "在区域 1 视图下配置一条覆盖两个区域的 10.0.0.0/8 汇总",
+      "C": "在 Area 0 视图下配置一条 abr-summary 覆盖两个区域",
+      "D": "在 ASBR 上配置 asbr-summary 覆盖两个区域"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "区域范围汇总绑定在具体的区域上，只匹配该区域内的明细，因此要为区域 1 和区域 2 分别进入各自的区域视图配置 abr-summary，才能得到两条独立的 Type 3 汇总。B 用一个 /8 覆盖两个区域会把不同区域的明细混在一条汇总里，既无法分别控制，也可能把未使用的地址包含进来；C 错在 Area 0 视图不负责汇总其他区域的明细；D 错在 asbr-summary 只处理外部路由。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "路由汇总",
+    "difficulty": "medium",
+    "tags": [
+      "OSPF",
+      "路由汇总",
+      "多区域",
+      "配置语义"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-3-017",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识 / OSPF 特殊区域 / 路由汇总」，对应三级目录 hcip821-2-3-3；技术依据 RFC 2328 §12.4.3（第 135–136 页）：区域范围绑定到具体区域，按区域分别汇总。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc2328-ospfv2 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "a58f5c8e9c45030b2b01dd8c9f5723dc0ae23a4ddc53598249bd59c7ec964c82"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-2-3-3-018",
+    "type": "single_choice",
+    "question": "在华为设备上，ABR 的区域 1 下配置了 10.1.0.0/22 的区域范围汇总。区域 1 内有一条 10.1.2.0/24 是从区域 2 学来的 Type 3 路由，另有一条 10.1.3.0/24 是区域 1 内部的明细。汇总后的结果是哪一项？",
+    "options": {
+      "A": "两条都会被汇总，其他区域只看到 10.1.0.0/22",
+      "B": "两条都不会被汇总，仍各自以明细 Type 3 LSA 通告",
+      "C": "只有区域 1 内部的 10.1.3.0/24 参与该区域范围汇总，从区域 2 学来的 Type 3 不会被该汇总覆盖",
+      "D": "汇总会把从区域 2 学来的 Type 3 转换成 Type 5 LSA"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "区域范围汇总只处理该区域的区域内路由，也就是由 Type 1/2 LSA 计算出的路由；从其他区域学来的 Type 3 属于区域间路由，不参与本区域的区域范围汇总，仍按原样继续通告。因此只有 10.1.3.0/24 被聚合成 10.1.0.0/22，10.1.2.0/24 作为区域间路由保留。A 错在把区域间路由也纳入汇总；B 错在忽略了区域内明细会被汇总；D 错在汇总不会改变 LSA 的类型，更不会生成 Type 5。",
+    "chapter": "OSPF 核心知识",
+    "knowledgeSection": "OSPF 特殊区域",
+    "knowledgePoint": "路由汇总",
+    "difficulty": "hard",
+    "tags": [
+      "OSPF",
+      "路由汇总",
+      "区域内路由",
+      "区域间路由"
+    ],
+    "provenance": {
+      "questionId": "hcip821-2-3-3-018",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc2328-ospfv2"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「OSPF 核心知识 / OSPF 特殊区域 / 路由汇总」，对应三级目录 hcip821-2-3-3；技术依据 RFC 2328 §12.4.3（第 136 页）：只有区域内路由进入范围汇总；区域间路由按目的地单独产生 Type 3。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc2328-ospfv2 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "ef70d56d4aaadfcff4483d497389eddfe328de0c9c742d09db7ff4c4103eb911"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-1-001",
+    "type": "single_choice",
+    "question": "在 IS-IS 中，一台路由器的 NET 由区域地址、System ID 和 SEL 三部分组成。若把这三部分的职责对应起来，正确的是哪一项？",
+    "options": {
+      "A": "区域地址标识路由器所在区域，System ID 在路由域内唯一标识路由器，SEL 标识同一系统内的不同实体",
+      "B": "区域地址在路由域内唯一标识路由器，System ID 标识区域，SEL 表示路由优先级",
+      "C": "三部分都由 6 字节组成，SEL 用于标识接口",
+      "D": "区域地址和 System ID 都由 IP 地址自动生成，SEL 固定为 FF"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "NET 是 IS-IS 使用的 OSI 地址：区域地址对应 ISO 地址中的 IDP 与 HO-DSP，用于划分区域；System ID 固定 6 字节，在同一路由域内唯一标识一台路由器；SEL 是 NSAP 选择符，用于区分同一系统内的不同实体，路由器通常取 00。B 把区域地址和 System ID 的职责对调，并把 SEL 说成优先级；C 错在三者长度不同，System ID 为 6 字节、SEL 为 1 字节、区域地址长度可变；D 错在 NET 需要手工配置，SEL 也不是 FF。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "easy",
+    "tags": [
+      "IS-IS",
+      "NET",
+      "System ID",
+      "SEL"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-1-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」，对应三级目录 hcip821-3-1-1；技术依据 RFC 1195 §1.2（Figure 1，第 6 页）与 §3.3（第 19–21 页）：NET 由区域地址、6 字节 System ID 和 1 字节 SEL 组成。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc1195-isis 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "c943b352296ac10946f59fb61e2b96b8859ea255b501a00359f83b12afdf92e1"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-1-002",
+    "type": "single_choice",
+    "question": "某台路由器的 NET 为 49.0001.0000.0000.0001.00，其中开头的 49 表示什么？",
+    "options": {
+      "A": "区域号 49",
+      "B": "AFI，取值为 49 时表示本地管理的私有地址格式",
+      "C": "System ID 的高位",
+      "D": "SEL 的取值"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "NET 采用 OSI NSAP 的层次结构，第一个字节是 AFI（授权与格式标识），49 属于本地管理的私有地址格式，常用于企业自建 IS-IS 域；本例的区域地址是 49.0001 而不是 49。A 把 AFI 与区域号混淆；C 错在 System ID 位于区域地址之后，本例为 0000.0000.0001；D 错在 SEL 是 NET 的最后一个字节 00。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "easy",
+    "tags": [
+      "IS-IS",
+      "NET",
+      "AFI",
+      "地址结构"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-1-002",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」，对应三级目录 hcip821-3-1-1；技术依据 RFC 1195 §1.2（Figure 1，第 6 页）：AFI 是地址的第一个字节；49 属于本地管理的私有地址格式。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc1195-isis 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "376591b4e0b84594a6cda470c69c51aa7642b56b4dee05fa23d43c21a3309740"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-1-003",
+    "type": "single_choice",
+    "question": "某华为设备配置 network-entity 49.0002.0000.0000.0001.00。按 NET 的字段划分，49.0002 表示什么？",
+    "options": {
+      "A": "System ID",
+      "B": "SEL",
+      "C": "区域地址",
+      "D": "路由器类型"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "NET 的书写顺序是区域地址、System ID、SEL：区域地址由 IDP 与 HO-DSP 组成，本例为 49.0002；其后的 0000.0000.0001 是 6 字节 System ID；最后的 00 是 SEL。A 错在 System ID 是中间 6 字节；B 错在 SEL 是末尾的 00；D 错在路由器类型由配置的 Level 决定，NET 中并没有表示路由器类型的字段。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "easy",
+    "tags": [
+      "IS-IS",
+      "NET",
+      "区域地址",
+      "字段解析"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-1-003",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」，对应三级目录 hcip821-3-1-1；技术依据 RFC 1195 §1.2（第 6 页）与 §3.3（第 20 页）：区域地址为 IDP+HO-DSP，49.0002 为区域部分。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc1195-isis 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "15a2ebf89901398eb9e88d4defa11eb523c420975108865282851667bc6b7530"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-1-004",
+    "type": "single_choice",
+    "question": "某路由器所在区域地址为 49.0001，System ID 为 0000.0000.0001，SEL 为 00。下列哪个 NET 的书写正确？",
+    "options": {
+      "A": "49.0001.0000.0000.0001.00",
+      "B": "49.0001.0000.0000.0001",
+      "C": "49.0001.00.0000.0000.0001",
+      "D": "49.0001.0000.0000.0001.0002"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "NET 按区域地址、System ID、SEL 的顺序拼接，本例为 49.0001 + 0000.0000.0001 + 00，即 49.0001.0000.0000.0001.00。B 缺少 1 字节 SEL，不是完整的 NET；C 把 SEL 放到了 System ID 之前，字段顺序错误；D 在 1 字节 SEL 的位置写了 0002，长度和取值都不符合路由器 NET 的要求。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "NET",
+      "地址拼接",
+      "反向构造"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-1-004",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」，对应三级目录 hcip821-3-1-1；技术依据 RFC 1195 §1.2（第 6 页）与 §3.3（第 20 页）：NET 按区域地址、System ID、SEL 顺序拼接，SEL 为 1 字节。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc1195-isis 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "fdf82a2f358bd819fb381f3bff025c4277e4449f11774990cdf4e55a82dec0e3"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-1-005",
+    "type": "single_choice",
+    "question": "按 RFC 1195 推荐的第二种方法，用路由器 Loopback 地址 10.0.0.1 生成 6 字节 System ID 时，需要在 4 字节 IP 地址前加上十六进制 0200。生成的 System ID 是下列哪一个？",
+    "options": {
+      "A": "0A00.0000.0001",
+      "B": "0200.0A00.0001",
+      "C": "0200.1000.0001",
+      "D": "0000.0000.0001"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "把 10.0.0.1 逐字节写成十六进制：10=0A、0=00、0=00、1=01，得到 0A00.0001；前面加上推荐的 2 字节前缀 0200，共 6 字节，即 0200.0A00.0001。A 漏掉了 0200 前缀，只有 4 字节；C 把十进制 10 误当作十六进制 10，并少写了 00 字节；D 是全零地址，不能唯一标识该路由器。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS",
+      "System ID",
+      "IP 地址转换",
+      "计算"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-1-005",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」，对应三级目录 hcip821-3-1-1；技术依据 RFC 1195 §3.3（第 20–21 页）：推荐用十六进制 0200 加 4 字节 IP 地址生成 6 字节 System ID。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc1195-isis 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "36149267426a92bb3ff8f0037b06e0240ff0d73e73c72248cb08d493d14b0337"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-1-006",
+    "type": "single_choice",
+    "question": "路由器的 NET 以 00 结尾。这个 00 在 NET 中表示什么？",
+    "options": {
+      "A": "区域地址的结束符",
+      "B": "System ID 的校验字节",
+      "C": "NSAP 选择符 SEL，路由器通常取 00",
+      "D": "保留字段，可以任意取值"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "NET 的最后 1 字节是 NSAP 选择符 SEL（也称 NSEL），用于区分同一系统内的不同实体；路由器作为中间系统使用 00，因此常见 NET 都以 00 结尾。A 错在区域地址由前面的字节表示，不靠 00 结束；B 错在 SEL 不是校验字节，IS-IS 的校验由报文中的校验和字段完成；D 错在 SEL 有明确语义，不能任意取值。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "easy",
+    "tags": [
+      "IS-IS",
+      "NET",
+      "SEL",
+      "NSAP"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-1-006",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」，对应三级目录 hcip821-3-1-1；技术依据 RFC 1195 §1.2（Figure 1，第 6 页）与 §3.3（第 20 页）：NET 最后 1 字节为 NSAP 选择符 SEL，路由器取 00。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc1195-isis 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "611517bb2ea80d906ef29b00f2380f618838a7282a12c05fcf03b9f7f9ed2043"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-1-007",
+    "type": "single_choice",
+    "question": "以下关于 NET 与 NSAP 关系的说法，哪一项成立？",
+    "options": {
+      "A": "NET 是 NSAP 的网络层地址部分，SEL 必须非 0",
+      "B": "NSAP 是 NET 的子集，只用于 IP 网络",
+      "C": "NET 与 NSAP 完全无关，NET 是 IP 地址的十六进制表示",
+      "D": "NET 是 SEL 为 00 的一类 NSAP，用于在 IS-IS 中标识路由器"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "NET 本质上是 NSAP 地址的一种用法：当 NSAP 的 SEL 取 00 时表示一台中间系统（路由器），这个地址在 IS-IS 中称为 NET。A 把 SEL 说成必须非 0，恰好与路由器 NET 的约定相反；B 颠倒了两者的包含关系，NSAP 是更一般的 OSI 地址；C 错在 NET 与 IP 地址没有必然的十六进制对应关系，它属于 OSI 地址体系。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "NET",
+      "NSAP",
+      "概念辨析"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-1-007",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」，对应三级目录 hcip821-3-1-1；技术依据 RFC 1195 §1.2（第 6 页）：NET 是 SEL 为 00 的 NSAP，用于标识路由器。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc1195-isis 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "48da45c73bdcec65b40aba996ff4cd97fd0ae9c8f85f052f5673e24eda21c807"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-1-008",
+    "type": "single_choice",
+    "question": "RFC 1195 对 System ID 的唯一性提出了什么要求？",
+    "options": {
+      "A": "必须在整个路由域内唯一，每台路由器分配不同的 ID",
+      "B": "只需在同一台路由器的不同 NET 之间唯一",
+      "C": "只需在同一广播网段内唯一",
+      "D": "只需在同一区域地址内唯一"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "System ID 用于在路由域内唯一标识一台路由器，LSP 标识、SPF 计算都依赖它，因此 RFC 1195 要求每台路由器分配不同的 ID，而不只是在区域内或网段内唯一。B 错在唯一性范围被缩小到单台路由器；C 错在跨网段的路由器同样可能冲突；D 错在 Level-2 路由器会在整个路由域内泛洪 LSP，仅区域内唯一不足以避免冲突。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "System ID",
+      "唯一性"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-1-008",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」，对应三级目录 hcip821-3-1-1；技术依据 RFC 1195 §3.3（第 20 页）：ID（System ID）必须在整个路由域内唯一。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc1195-isis 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "bc361f2a2b2145b1b93b395bae15f01276f25408b084c1a2a3d96d778f5766b3"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-1-009",
+    "type": "single_choice",
+    "question": "以下关于 NET 中区域地址分配的说法，哪一项成立？",
+    "options": {
+      "A": "所有区域必须使用相同的区域地址",
+      "B": "区域地址必须与 IP 子网一一对应",
+      "C": "区域地址只在 Level-2 路由器上配置",
+      "D": "路由域内每个区域必须有唯一的 Area 值，同一区域的路由器至少共享相同的区域地址"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "区域地址用于划分 IS-IS 区域，路由域内每个区域应有唯一的 Area 值，同一区域的路由器至少共享一个相同的区域地址，才能建立 Level-1 邻接；一个区域也可以配置多个区域地址以实现平滑迁移。A 错在所有区域共用地址会使区域无法区分；B 错在 RFC 1195 明确不要求 IP 子网与区域结构存在固定对应；C 错在 Level-1 路由器同样需要区域地址来判断邻居是否同区域。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "区域地址",
+      "Area 值"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-1-009",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」，对应三级目录 hcip821-3-1-1；技术依据 RFC 1195 §3.3（第 20 页）：每个区域有唯一 Area 值；同一区域路由器共享高位区域地址。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc1195-isis 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "1f1b043105e6359123e8aadbf5610c36ffa3331f928fd5685399015c32f3dde0"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-1-010",
+    "type": "single_choice",
+    "question": "某台 IS-IS 路由器的接口 IP 地址属于 10.1.1.0/24，其 NET 的区域地址是 49.0003。该路由器应归属哪个区域？",
+    "options": {
+      "A": "属于 10.1.1.0/24 对应的区域，与 NET 无关",
+      "B": "必须把 NET 改为 10.1.1.0 才能加入区域",
+      "C": "属于 NET 中区域地址 49.0003 标识的区域，IS-IS 区域划分与接口 IP 子网没有强制对应关系",
+      "D": "区域地址由接口 IP 自动计算，49.0003 无效"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "IS-IS 的区域成员关系由 NET 中的区域地址决定，与接口 IP 地址属于哪个子网没有强制关系，RFC 1195 明确允许 IP 地址与区域结构独立分配。A 错在把 IP 子网当作区域依据；B 错在 NET 不是 IP 地址，不能写成 10.1.1.0；D 错在区域地址需要规划配置，不会从接口 IP 自动推导。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "easy",
+    "tags": [
+      "IS-IS",
+      "区域地址",
+      "区域成员关系"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-1-010",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」，对应三级目录 hcip821-3-1-1；技术依据 RFC 1195 §1.3（第 9 页）：IP 地址分配与 IS-IS 区域结构没有强制对应关系。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc1195-isis 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "351cf13f4cc7734a632436694537f2ea54174363d378a46cda5ad4c79dfcaa87"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-1-011",
+    "type": "single_choice",
+    "question": "两台 Level-2 路由器的区域地址分别为 49.0001 和 49.0002，它们之间的链路能否建立 Level-2 邻接？",
+    "options": {
+      "A": "不能，区域地址不同无法建立任何邻接",
+      "B": "能，但只能建立 Level-1 邻接",
+      "C": "不能，除非把两台路由器的 System ID 改成相同",
+      "D": "能，Level-2 邻接不要求区域地址相同，该链路只交换 Level-2 的 LSP"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Level-2 邻接跨越区域，不要求双方的区域地址相同；当区域地址不重叠时，该链路被视为 level 2 only，只交换 Level-2 的 LSP，这也是骨干可以连接不同区域的原因。A 错在把 Level-1 的要求套到 Level-2 上；B 错在区域地址不同时不会建立 Level-1 邻接；C 错在 System ID 相同反而会造成标识冲突，且与能否建立 L2 邻接无关。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "Level-2 邻接",
+      "区域地址"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-1-011",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」，对应三级目录 hcip821-3-1-1；技术依据 RFC 1195 §1.2（第 7–8 页）：Level-2 邻接不要求区域地址一致，区域不重叠时链路为 level 2 only。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc1195-isis 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "c40e7873107bee05c9ad83d64b60998482596e4052c25e5acb2011ce0dd6d7c1"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-1-012",
+    "type": "single_choice",
+    "question": "路由器 A 配置的区域地址为 49.0001 和 49.0002，路由器 B 配置的区域地址为 49.0002 和 49.0003。两者在同一链路上能否建立 Level-1 邻接？",
+    "options": {
+      "A": "不能，必须所有区域地址完全一致",
+      "B": "能，只要双方区域地址存在交集 49.0002 即可",
+      "C": "不能，一台路由器只能有一个区域地址",
+      "D": "能，但必须先把 System ID 配置成一样"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Level-1 邻接要求双方区域地址有交集，而不要求两个集合完全相同；A 有 49.0001、49.0002，B 有 49.0002、49.0003，交集为 49.0002，因此可以建立 Level-1 邻接。A 错在把“有交集”误认为“完全一致”；C 错在一台路由器可以配置多个区域地址，常用于区域合并或迁移；D 错在 System ID 相同会造成冲突，不是建立邻接的条件。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS",
+      "Level-1 邻接",
+      "区域地址交集"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-1-012",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」，对应三级目录 hcip821-3-1-1；技术依据 RFC 1195 §1.2（第 7 页）：Level-1 邻接只要双方区域地址存在交集即可建立。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc1195-isis 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "f23d02e805e7d80a0947c8d589983ff11a564bff0b6e10b779a6a4d677c01e38"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-1-013",
+    "type": "single_choice",
+    "question": "一台 IS-IS 路由器需要同时属于区域 49.0001 和区域 49.0002。正确的 NET 配置方式是哪一项？",
+    "options": {
+      "A": "配置两个 NET，区域地址分别为 49.0001 和 49.0002，两个 NET 使用相同的 System ID",
+      "B": "配置两个 NET，区域地址相同但 System ID 不同",
+      "C": "只配置一个 NET，把两个区域地址拼接在区域字段中",
+      "D": "配置两个 IS-IS 进程，每个进程使用不同的 System ID"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "一台路由器可以通过多个 NET 同时属于多个区域，这些 NET 代表同一台路由器，因此 System ID 必须相同，只有区域地址不同。B 错在 System ID 不同会让设备被当作两台路由器；C 错在 NET 的区域字段不能随意拼接两个区域地址来表示双重归属；D 错在应通过多个 NET 实现，而不是用不同 System ID 启动两个进程。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "多 NET",
+      "区域归属"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-1-013",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」，对应三级目录 hcip821-3-1-1；技术依据 RFC 1195 §3.3（第 20–21 页）：同一路由器的多个 NET 共享 System ID，可对应不同区域地址。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc1195-isis 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "0271736858c935d14f79b02e364eb8cddd9df36cad8212d02243cdb357b0c2ac"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-1-014",
+    "type": "single_choice",
+    "question": "某台运行 IS-IS 的路由器修改了 NET 中的区域地址，System ID 保持不变。最直接的影响是什么？",
+    "options": {
+      "A": "该路由器的 System ID 会发生冲突",
+      "B": "所有接口的 IP 地址必须重新配置",
+      "C": "它离开原区域并加入新区域，与原区域邻居的 Level-1 邻接会重建，Level-2 邻接通常不受区域地址影响",
+      "D": "路由器自动变成 Level-1 路由器"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "区域地址决定路由器属于哪个区域。修改后，与原区域邻居不再满足 Level-1 区域地址交集条件，相关邻接会重建；而 Level-2 邻接不要求区域地址相同，通常可以继续维持。A 错在 System ID 未变，不会因此冲突；B 错在区域地址与接口 IP 配置相互独立；D 错在路由器级别由配置决定，不会因改区域地址自动降级。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS",
+      "NET 变更",
+      "邻接重建"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-1-014",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」，对应三级目录 hcip821-3-1-1；技术依据 RFC 1195 §1.2（第 7 页）与 §4.4（第 32 页）：区域地址变化影响 Level-1 邻接，Level-2 邻接不要求区域一致。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc1195-isis 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "9d3bcfd3fd19fad3f20f0926dfcfba1596581efa72e84c47d21885760620e17d"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-1-015",
+    "type": "single_choice",
+    "question": "IS-IS 的报文分为三大类。下列哪一组分类是正确的？",
+    "options": {
+      "A": "Hello PDU、LSU、LSA",
+      "B": "LSP、LSA、SNP",
+      "C": "Hello PDU、DBD、LSR",
+      "D": "Hello PDU、LSP、SNP"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "IS-IS 的 PDU 分为 Hello PDU（IIH）、链路状态 PDU（LSP）和序列号 PDU（SNP，含 CSNP 与 PSNP）三类：Hello 建立和维护邻接，LSP 描述链路状态，SNP 同步数据库。A 中的 LSU、LSA 和 C 中的 DBD、LSR 都是 OSPF 的报文或概念；B 混入了 OSPF 的 LSA，且漏掉了 Hello PDU。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "easy",
+    "tags": [
+      "IS-IS",
+      "PDU",
+      "Hello",
+      "LSP",
+      "SNP"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-1-015",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」，对应三级目录 hcip821-3-1-1；技术依据 RFC 1195 §5.1（第 33–34 页）：IS-IS 报文分为 Hello、LSP、SNP 三类。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc1195-isis 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "ea2d5663f3d1fb9e8f2e007ff3f39b315bf9f89a45adb134ec6c9153f135d037"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-1-016",
+    "type": "single_choice",
+    "question": "以下哪一项正确区分了 CSNP 与 PSNP？",
+    "options": {
+      "A": "CSNP 携带数据库中所有 LSP 的最新序列号，用于数据库同步；PSNP 只携带部分 LSP 的摘要，可兼作确认和请求",
+      "B": "CSNP 只携带一条 LSP 的摘要，PSNP 携带数据库中所有 LSP 的摘要",
+      "C": "两者都用于建立邻接",
+      "D": "CSNP 只在点到点链路上发送，PSNP 只在广播网上发送"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "CSNP 列出本地数据库中所有 LSP 的最新序列号，常用于邻接建立后或周期性同步；PSNP 只列出部分 LSP 的摘要，既可以对收到的 LSP 作出确认，也可以请求缺失的 LSP。B 把两者的范围说反；C 错在建立邻接依靠 Hello PDU，SNP 用于数据库同步；D 错在两种 SNP 在广播网和点到点链路上都可以使用。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS",
+      "CSNP",
+      "PSNP",
+      "数据库同步"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-1-016",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」，对应三级目录 hcip821-3-1-1；技术依据 RFC 1195 §5.1（第 34 页）：CSNP 含全部 LSP 的最新序列号；PSNP 只含部分摘要，可作确认与请求。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc1195-isis 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "2d46de54f014b52b03fe593737b5a01ef6b999207709eb8529c0e7ae17d6951b"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-1-017",
+    "type": "single_choice",
+    "question": "IS-IS 的 LSP ID 由三部分组成。下列哪一项正确描述了这三部分？",
+    "options": {
+      "A": "区域地址、System ID、SEL",
+      "B": "System ID、序列号、校验和",
+      "C": "System ID、伪节点 ID、分片号",
+      "D": "源 IP 地址、掩码、度量"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "LSP ID 由 6 字节 System ID、1 字节伪节点 ID 和 1 字节分片号组成：伪节点 ID 为 0 表示路由器自身产生的 LSP，非 0 表示 DIS 为广播网产生的伪节点 LSP，分片号用于区分同一来源的多个分片。A 是 NET 的字段划分；B 中的序列号和校验和是 LSP 报文头里的独立字段，不属于 LSP ID；D 是 IP 可达性信息的内容。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "LSP ID",
+      "伪节点",
+      "分片"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-1-017",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」，对应三级目录 hcip821-3-1-1；技术依据 RFC 1195 §3.6（第 24 页）：LSP 由 System ID、伪节点 ID 与分片号标识。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc1195-isis 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "473034d10b21ad0667e67e3f2f0e5cc374acea8a8d7f880fa5c0d6f072ac7543"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-1-018",
+    "type": "single_choice",
+    "question": "某 LSP 的标识为 0000.0000.0001.01-02。其中 01 和 02 分别表示什么？",
+    "options": {
+      "A": "01 表示分片号，02 表示伪节点 ID",
+      "B": "01 表示区域号，02 表示 SEL",
+      "C": "两者都表示分片号",
+      "D": "01 表示伪节点 ID，02 表示分片号"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "LSP ID 的格式是 System ID.伪节点 ID-分片号：0000.0000.0001 是 System ID，点号后的 01 是伪节点 ID，短横线后的 02 是分片号。伪节点 ID 为 01 说明该 LSP 由广播网上的伪节点产生，分片号 02 表示这是同一来源的第三个分片。A 把两者顺序说反；B 错在区域号不在 LSP ID 中，SEL 属于 NET；C 错在 01 是伪节点 ID，不是分片号。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "LSP ID",
+      "字段解析",
+      "伪节点"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-1-018",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」，对应三级目录 hcip821-3-1-1；技术依据 RFC 1195 §3.6（第 24 页）：LSP ID 中伪节点 ID 与分片号的字段顺序。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc1195-isis 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "79b9bc959d4620efb2921e67875879df4a289b33a34a6be8506b183e054c4767"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-1-019",
+    "type": "single_choice",
+    "question": "当链路状态信息多到一个 LSP 放不下时，IS-IS 采用的解决办法是什么？",
+    "options": {
+      "A": "丢弃超出部分，只保留能放进一个 LSP 的信息",
+      "B": "把 LSP 拆分成多个分片，用 LSP 编号区分，各分片独立泛洪和处理",
+      "C": "改用 CSNP 承载路由信息",
+      "D": "自动降低链路度量以压缩信息"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IS-IS 允许把 LSP 拆成多个分片，用 LSP ID 中的分片号区分；每个分片独立泛洪、独立处理，某个分片变化时只需重新发布受影响的分片。A 错在丢弃信息会破坏链路状态数据库的完整性；C 错在 CSNP 只携带 LSP 摘要，不能承载路由信息；D 错在度量与信息压缩无关，降低度量也不能减少 LSP 内容。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "LSP 分片",
+      "泛洪"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-1-019",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」，对应三级目录 hcip821-3-1-1；技术依据 RFC 1195 §3.6（第 24 页）：LSP 与 CSNP 可拆分为多个报文，用 LSP 编号区分。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc1195-isis 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "86b27e7ef45c3799bcbb11c628266fe347ceec2e553c728e441eb5132c94f0c9"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-1-020",
+    "type": "single_choice",
+    "question": "IS-IS 使用 TLV（Code、Length、Value）承载可变长字段。当路由器收到一个包含未识别 TLV 的 PDU 时，标准要求它如何处理？",
+    "options": {
+      "A": "忽略未识别的 TLV，其余内容继续处理，从而支持协议扩展",
+      "B": "丢弃整个 PDU，因为存在无法解析的字段",
+      "C": "把该 TLV 转换成 LSP 泛洪出去",
+      "D": "只接受 Code 小于 128 的 TLV，其余情况丢弃整个 PDU"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IS-IS 的 TLV 采用 Code、Length、Value 编码，标准规定收到未识别的 Code 时应忽略并原样传递，其余可识别的内容继续处理；这种前向兼容设计使新特性可以在不中断老设备的情况下逐步部署。B 和 D 都主张丢弃整个 PDU，会破坏新旧设备的互通；C 错在未识别 TLV 不能被随意改写或重新泛洪。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "TLV",
+      "协议扩展"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-1-020",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」，对应三级目录 hcip821-3-1-1；技术依据 RFC 1195 §3.1（第 15 页）：TLV 编码；未识别的 Code 被忽略并原样传递。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc1195-isis 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "a85283f5e40c66d52fe3112181717e3c14e67f260f0cbc27eaa2c1d56462ce8d"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-1-021",
+    "type": "single_choice",
+    "question": "支持 IP 的 IS-IS 路由器会在 Hello 报文中携带 Protocols Supported TLV。如果某 Hello 报文中缺少该字段，接收方应如何理解？",
+    "options": {
+      "A": "发送方是 IP-only 路由器",
+      "B": "发送方被视为 OSI-only 路由器",
+      "C": "发送方一定是 Level-2 路由器",
+      "D": "报文格式错误，必须丢弃"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RFC 1195 规定，双栈或纯 IP 路由器发送的 Hello 必须携带 Protocols Supported 字段；如果缺少该字段，接收方按 OSI-only 路由器处理，不会把它当作可承载 IP 的邻居。A 与规则相反，纯 IP 路由器同样必须携带该字段；C 错在路由器级别与是否携带该 TLV 无关；D 错在该情形有明确的兼容处理方式，不需要丢弃报文。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "Protocols Supported",
+      "Hello",
+      "TLV"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-1-021",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」，对应三级目录 hcip821-3-1-1；技术依据 RFC 1195 §4.4（第 32 页）：Hello 缺少 Protocols Supported 字段时按 OSI-only 路由器处理。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc1195-isis 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "ffb2a9b9c0f481c83110dae19aa032ca9b105508bc7e625e6295e48c8fa0b226"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-1-022",
+    "type": "single_choice",
+    "question": "在 IS-IS 广播网络上，DIS 产生的伪节点 LSP 是否携带该 LAN 上所有 IP 前缀的可达信息？",
+    "options": {
+      "A": "携带，伪节点 LSP 统一通告 LAN 上所有 IP 子网",
+      "B": "只在 Level-2 网络上携带",
+      "C": "不携带，IP 可达信息由各路由器在自己的 LSP 中通告，伪节点 LSP 只描述伪节点与路由器的连接",
+      "D": "只在点到点链路上携带"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "RFC 1195 明确指出伪节点 LSP 不包含 IP 可达性字段：广播网上的每台路由器都要在自己的 LSP 中通告它能到达的 IP 子网，伪节点 LSP 只描述伪节点与各路由器的连接关系，用于简化拓扑。A 与标准描述相反；B 和 D 都错在伪节点 LSP 的 IP 可达性行为与网络类型、Level 无关，它本身就不承载这些前缀。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS",
+      "伪节点 LSP",
+      "IP 可达性",
+      "DIS"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-1-022",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」，对应三级目录 hcip821-3-1-1；技术依据 RFC 1195 §4.3（第 31 页）：伪节点 LSP 不携带 IP 可达性字段，由各路由器自行通告。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc1195-isis 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "c4d399a75ff7155252aa4f5cfa875e5c1186b0e85515ac4393c6e79ae10f2908"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-1-023",
+    "type": "single_choice",
+    "question": "两台 IS-IS 路由器接口的 IP 地址属于不同逻辑子网，但物理链路互通。它们能否建立 IS-IS 邻接？",
+    "options": {
+      "A": "不能，IP 子网不同无法建立邻接",
+      "B": "只能建立 Level-2 邻接",
+      "C": "必须先配置静态路由才能建立邻接",
+      "D": "能，IS-IS 邻接的建立不依赖接口 IP 地址是否同子网"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "IS-IS 邻接的建立使用 OSI 地址和 Hello 报文，不依赖接口 IP 地址是否属于同一子网；同一物理 LAN 上存在多个逻辑子网时，两台路由器仍可建立邻接并转发 IP 报文。A 错在把 IP 子网一致性当成邻接条件；B 错在邻接级别由 Hello 中的 Level 决定，与 IP 子网无关；C 错在静态路由不影响邻接建立。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "邻接",
+      "IP 子网"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-1-023",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」，对应三级目录 hcip821-3-1-1；技术依据 RFC 1195 §4.4（第 32 页）：邻接建立与 IP 接口地址是否同子网无关。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc1195-isis 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "b9eef829c0ce1d158ff8503c0f732203f2582cb44575b52c4e3a08c788debb56"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-1-024",
+    "type": "single_choice",
+    "question": "一台路由器的 NET 为 49.0001.0000.0000.0001.00。仅凭这个 NET 能否判断它是 Level-1、Level-2 还是 Level-1-2 路由器？",
+    "options": {
+      "A": "能，NET 的最后一段决定路由器类型",
+      "B": "不能，路由器类型由配置决定，NET 只描述区域地址、System ID 和 SEL",
+      "C": "能，区域地址以 49 开头的一定是 Level-2",
+      "D": "能，System ID 为全 0 的是 Level-1-2"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "NET 只承载区域地址、System ID 和 SEL，路由器是 Level-1、Level-2 还是 Level-1-2 由设备配置的级别决定，不能从 NET 的字段推断。A 错在 NET 最后一段是 SEL，不表示级别；C 错在 AFI 49 只说明地址格式，与级别无关；D 错在 System ID 用于唯一标识路由器，全 0 也不代表某个级别。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "easy",
+    "tags": [
+      "IS-IS",
+      "NET",
+      "路由器类型",
+      "反向设问"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-1-024",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」，对应三级目录 hcip821-3-1-1；技术依据 RFC 1195 §1.2（第 6–7 页）：NET 字段不含路由器级别，Level 由配置决定。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc1195-isis 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "4cb61857e8ed4d55b8c11b26a61d7e10a1a04a2a7ec4dee97728d04820c46bd7"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-1-025",
+    "type": "single_choice",
+    "question": "一台 Level-1-2 路由器在网络中正常工作。关于它产生的 LSP，下列描述正确的是？",
+    "options": {
+      "A": "只产生 Level-1 LSP",
+      "B": "只产生 Level-2 LSP",
+      "C": "同时产生 Level-1 和 Level-2 LSP，分别描述它在两个层次上的链路状态",
+      "D": "产生一个同时携带两个层次信息的 LSP，伪节点字段为 0"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Level-1-2 路由器同时参与区域内部和骨干两个层次的链路状态计算，因此分别产生 Level-1 LSP 和 Level-2 LSP，内容各自描述对应层次的链路状态。A 和 B 都只保留了一个层次，无法同时完成区域内与区域间路由；D 错在 IS-IS 没有把两个层次合并进一个 LSP 的机制，LSP 通过 Level-1/Level-2 类型区分。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "easy",
+    "tags": [
+      "IS-IS",
+      "Level-1-2",
+      "LSP"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-1-025",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」，对应三级目录 hcip821-3-1-1；技术依据 RFC 1195 §5.1（第 33 页）：同时具备 L1/L2 的路由器分别发送两种 LSP。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc1195-isis 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "2c5232c3e239e01ed059f93468c94790ce9e8ca482b40f6290fdd151b766bfff"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-1-026",
+    "type": "single_choice",
+    "question": "管理员把两台 Level-2 路由器配置成相同的 System ID，但它们的区域地址不同。可能出现什么问题？",
+    "options": {
+      "A": "两台路由器会用相同的 LSP 标识描述不同的链路状态，导致路由域内 LSP 冲突和路由不稳定",
+      "B": "没有问题，System ID 只在本区域内有意义",
+      "C": "两台路由器会自动协商修改 System ID",
+      "D": "只会影响 Level-1 邻接，Level-2 不受影响"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "System ID 必须在整个路由域内唯一，LSP ID 以 System ID 开头，伪节点 ID 和分片号再作区分。两台 Level-2 路由器使用相同 System ID 时，会以相同的 LSP 标识描述各自不同的链路状态，造成 LSP 冲突、数据库反复更新和路由不稳定。B 错在 Level-2 LSP 会在整个路由域泛洪，唯一性不能只看本区域；C 错在 IS-IS 不会自动修改 System ID；D 错在 Level-2 恰恰是冲突影响最大的层次。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS",
+      "System ID 冲突",
+      "LSP 标识",
+      "故障定位"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-1-026",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」，对应三级目录 hcip821-3-1-1；技术依据 RFC 1195 §3.3（第 20 页）：System ID 在路由域内唯一，重复会造成 LSP 标识冲突。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc1195-isis 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "7d01c8b840e28a3171da08c0e4f15794021a84ce32f4f49b434c9bacba78ad61"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-1-027",
+    "type": "single_choice",
+    "question": "一个只运行 IP、不使用 OSI 协议的网络要部署 IS-IS。以下关于 NET 配置的判断，哪一项成立？",
+    "options": {
+      "A": "可以不配置 NET，IS-IS 直接用 IP 地址建立邻居",
+      "B": "必须配置全球唯一的 NSAP，否则无法转发 IP 报文",
+      "C": "NET 可以配置成任意长度，SEL 可以省略",
+      "D": "仍必须为每台路由器配置 NET，NET 只用于 IS-IS 协议自身，不参与 IP 转发"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "IS-IS 的报文格式要求路由器具有 OSI 风格的地址，即使网络只运行 IP，也必须为每台路由器配置 NET；此时 NET 仅用于 IS-IS 协议运行，不参与 IP 报文的转发和寻址。A 错在缺少 NET 无法形成邻接和 LSP；B 错在用私有地址格式即可，且 NET 不影响 IP 转发；C 错在 NET 有固定字段结构，SEL 是必需的 1 字节字段。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "基本概念与 NET",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "NET",
+      "IP-only",
+      "场景应用"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-1-027",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「IS-IS 核心知识 / IS-IS 原理 / 基本概念与 NET」，对应三级目录 hcip821-3-1-1；技术依据 RFC 1195 §3.3（第 19 页）：所有使用 IS-IS 的路由器都必须有 OSI 风格地址，纯 IP 环境仅用于协议自身。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc1195-isis 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "271a2bb71bc3a3379dfab92025f6eafa02f7317cf349cf67ee9b3ca46b3321f6"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-2-001",
+    "type": "single_choice",
+    "question": "一台 Level-1-2 路由器通过 Level-2 链路上联骨干区域。当它失去全部 Level-2 邻接后，它在 Level-1 LSP 中的 Attached 位以及同区域 Level-1 路由器的默认路由会发生什么变化？",
+    "options": {
+      "A": "Attached 位保持置位，Level-1 路由器继续把它作为通往区域外的出口",
+      "B": "Attached 位清零，Level-1 路由器不再把它当作通往区域外的默认出口",
+      "C": "Attached 位清零，但 Level-1 路由器仍无条件把它作为默认出口",
+      "D": "Attached 位保持置位，同时该路由器自动产生 Type 5 LSA 弥补缺失的出口"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Level-1 路由器只把 Level-1 LSP 中 Attached 位置位的 Level-2 路由器当作离开本区域的出口。当 Level-1-2 路由器失去全部 Level-2 邻接时，它会在 Level-1 LSP 中把 Attached 位清零，同区域的 Level-1 路由器据此不再选择它作为默认出口，而去寻找其他仍然置位的 Level-2 路由器。A 与 D 都认为 Attached 位保持置位，会让流量被引向没有骨干连接的出口；C 自相矛盾，Attached 位清零后 Level-1 路由器不会再无条件使用它；D 还错误地把 OSPF 的 Type 5 LSA 概念套用到 IS-IS。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS",
+      "Attached 位",
+      "Level-1-2",
+      "默认路由"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-2-001",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「IS-IS 核心知识 / IS-IS 原理 / 工作原理与分层」，对应三级目录 hcip821-3-1-2；技术依据 RFC 1195 §1.2（第 7 页）：失去 Level-2 连通时清除 Attached 位，Level-1 路由器只选择置位的 L2 路由器。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc1195-isis 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "7d1c1a6086cd1352f63abf79d66cec81b4ee019330b13fc895806572cbc6a68a"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  },
+  {
+    "id": "hcip821-3-1-2-002",
+    "type": "single_choice",
+    "question": "一个 Level-1 区域内有 17.133.5.0/24、17.133.43.0/24、17.133.57.0/24 三条 IP 前缀，该区域的 Level-2 路由器按 RFC 1195 描述的方式向其他区域通告本区域的可达性。下列描述正确的是？",
+    "options": {
+      "A": "Level-2 LSP 必须逐条列出这三条 /24 前缀，任何情况下都不能简化",
+      "B": "Level-2 路由器可以在 L2 LSP 中通告一条覆盖这三条前缀的汇总地址（例如 17.133.0.0/16），被该汇总覆盖的明细不再重复通告",
+      "C": "Level-2 路由器只能通告一条 0.0.0.0/0 默认路由，不能通告具体前缀",
+      "D": "Level-2 路由器把这三条前缀转换成 Type 3 LSA 后通告给其他区域"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "RFC 1195 的分层缩写机制允许 Level-2 路由器手工配置汇总地址，用一条更短掩码的前缀代替本区域内多条明细前缀；只有至少有一条明细可达时该汇总才会被通告，被汇总覆盖的 Level-1 明细不再在 L2 LSP 中重复出现。B 描述的正是这一机制，因此为正确答案；A 否认了汇总能力，与分层缩写的设计目的相反；C 把汇总地址与默认路由混为一谈，默认路由只是掩码全 0 的特例，并不是唯一选择；D 错在 Type 3 LSA 是 OSPF 的概念，IS-IS 的 IP 可达性由 L2 LSP 中的 IP 可达性字段承载。",
+    "chapter": "IS-IS 核心知识",
+    "knowledgeSection": "IS-IS 原理",
+    "knowledgePoint": "工作原理与分层",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS",
+      "L2 LSP",
+      "路由汇总",
+      "分层路由"
+    ],
+    "provenance": {
+      "questionId": "hcip821-3-1-2-002",
+      "sourceIds": [
+        "huawei-h12-821-outline",
+        "rfc1195-isis"
+      ],
+      "locator": "自编题；范围依据 H12-821 V1.0 大纲第 2 页「IS-IS 核心知识 / IS-IS 原理 / 工作原理与分层」，对应三级目录 hcip821-3-1-2；技术依据 RFC 1195 §3.2（第 17–18 页）：L2 LSP 可用手工汇总地址缩写区域内多条 IP 前缀，被覆盖明细不再重复通告。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "根据公开的 H12-821 V1.0 考纲范围与 rfc1195-isis 的公开标准文本独立设计题干、选项与解析，未复制任何第三方题目正文。",
+      "reviewDigest": "a8540ade327da1a5a80102664985e85aa578ed53de827b2eb1245ed2b5d111b4"
+    },
+    "sourceVerification": "syllabus_practice；已记录逐题来源与复核，非专家认证。"
+  }
+]

@@ -1,3 +1,4 @@
+import { canReplayAudio } from './audioPlaybackState';
 import {
   createAudioPlayer,
   preload,
@@ -32,9 +33,13 @@ export function prepareUiSounds() {
         interruptionMode: 'mixWithOthers',
         playsInSilentMode: false,
       });
-      await Promise.all(Object.values(sources).map((source) => preload(source)));
+      await Promise.all(
+        Object.values(sources).map((source) => preload(source)),
+      );
       for (const style of Object.keys(sources) as UiSoundStyle[]) {
-        const player = createAudioPlayer(sources[style], { updateInterval: 1000 });
+        const player = createAudioPlayer(sources[style], {
+          updateInterval: 1000,
+        });
         player.volume = settings.volume;
         player.addListener('playbackStatusUpdate', (status) => {
           if (status.isLoaded && pendingStyle === style) {
@@ -46,7 +51,7 @@ export function prepareUiSounds() {
       }
       if (pendingStyle) {
         const player = players[pendingStyle];
-        if (player?.isLoaded) {
+        if (player && canReplayAudio(player)) {
           pendingStyle = null;
           playPlayer(player);
         }
@@ -73,7 +78,7 @@ export function playUiSound() {
     void prepareUiSounds();
     return;
   }
-  if (!player.isLoaded) {
+  if (!canReplayAudio(player)) {
     pendingStyle = settings.style;
     return;
   }
@@ -83,11 +88,15 @@ export function playUiSound() {
 
 export function previewUiSound() {
   const player = players[settings.style];
-  if (!player?.isLoaded || player.playing) return;
+  if (!player || !canReplayAudio(player) || player.playing) return;
   playPlayer(player, Math.max(settings.volume, 0.2), true);
 }
 
-function playPlayer(player: AudioPlayer, volume = settings.volume, preview = false) {
+function playPlayer(
+  player: AudioPlayer,
+  volume = settings.volume,
+  preview = false,
+) {
   player.volume = volume;
   void player
     .seekTo(0)

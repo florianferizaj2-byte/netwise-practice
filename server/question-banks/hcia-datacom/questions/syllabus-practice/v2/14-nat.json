@@ -1,0 +1,905 @@
+[
+  {
+    "id": "hcia-v3-14-001",
+    "type": "single_choice",
+    "question": "NAT 技术解决的核心问题是什么？",
+    "options": {
+      "A": "让私网地址访问公网，同时缓解 IPv4 地址短缺",
+      "B": "替代路由完成网段隔离",
+      "C": "提升链路物理带宽",
+      "D": "为报文提供端到端加密"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "NAT 在地址转换点把私网地址映射为公网地址，使大量内网主机共享少量公网地址，同时隐藏内网结构。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "静态 NAT",
+    "knowledgePoint": "NAT 与私网地址",
+    "difficulty": "easy",
+    "tags": [
+      "NAT 原理与配置",
+      "静态 NAT",
+      "NAT 与私网地址"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-14-002",
+    "type": "single_choice",
+    "question": "静态 NAT 的映射特点是什么？",
+    "options": {
+      "A": "一个私网地址固定映射到一个公网地址",
+      "B": "只转换端口不转换地址",
+      "C": "地址映射关系随会话动态变化",
+      "D": "多个私网地址共享一个公网地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "静态 NAT 是一对一固定映射，配置后长期有效，适合需要固定公网地址对外提供服务的服务器。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "静态 NAT",
+    "knowledgePoint": "静态 NAT 一对一映射",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "静态 NAT",
+      "静态 NAT 一对一映射"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-14-003",
+    "type": "single_choice",
+    "question": "配置一条将私网 192.168.1.10 映射到公网 200.1.1.10 的静态 NAT，正确命令是？",
+    "options": {
+      "A": "nat static global 200.1.1.10 inside 192.168.1.10",
+      "B": "nat static 192.168.1.10 200.1.1.10",
+      "C": "nat one-to-one 192.168.1.10 200.1.1.10",
+      "D": "ip nat inside source static 192.168.1.10 200.1.1.10"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "华为用 nat static global 公网地址 inside 私网地址，配置在公网侧接口下；关键字顺序不能颠倒。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "静态 NAT",
+    "knowledgePoint": "静态 NAT 一对一映射",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "静态 NAT",
+      "静态 NAT 一对一映射"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-14-004",
+    "type": "true_false",
+    "question": "静态 NAT 的映射关系固定，因此公网侧可以主动向该公网地址发起连接并到达内网服务器。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "固定映射使外网可以主动访问内网服务器，这正是静态 NAT 与 NAT Server 常用于发布内部服务的原理。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "静态 NAT",
+    "knowledgePoint": "静态 NAT 一对一映射",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "静态 NAT",
+      "静态 NAT 一对一映射"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-14-005",
+    "type": "single_choice",
+    "question": "NAT Server 的典型用途是什么？",
+    "options": {
+      "A": "把内网服务器的某个端口发布到公网供外部访问",
+      "B": "为 VLAN 提供三层网关",
+      "C": "为内网主机自动分配 IP 地址",
+      "D": "在设备间同步路由表"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "NAT Server 支持地址加端口的映射，例如把公网 200.1.1.10:80 映射到内网 192.168.1.10:80，实现服务发布。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "静态 NAT",
+    "knowledgePoint": "NAT Server",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "静态 NAT",
+      "NAT Server"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-14-006",
+    "type": "single_choice",
+    "question": "把公网 200.1.1.10 的 8080 端口映射到内网 192.168.1.10 的 80 端口，属于哪种技术？",
+    "options": {
+      "A": "Easy IP",
+      "B": "NAT Server 端口映射",
+      "C": "静态路由",
+      "D": "动态 NAT 地址池"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "带端口的映射正是 NAT Server 的能力，也叫端口映射或端口转发，可让多个内网服务共用一个公网地址。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "静态 NAT",
+    "knowledgePoint": "NAT Server",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "静态 NAT",
+      "NAT Server"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-14-007",
+    "type": "true_false",
+    "question": "NAT Server 只能做地址映射，不能指定端口，因此一个公网地址只能发布一个内网服务。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "NAT Server 支持 global 地址加端口到 inside 地址加端口的映射，因此一个公网地址可通过不同端口发布多个服务。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "静态 NAT",
+    "knowledgePoint": "NAT Server",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "静态 NAT",
+      "NAT Server"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-14-008",
+    "type": "single_choice",
+    "question": "私网地址在公网上不可路由，因此内网主机访问互联网时必须经过什么设备？",
+    "options": {
+      "A": "无线 AP",
+      "B": "二层交换机",
+      "C": "集线器",
+      "D": "具备 NAT 能力的出口设备"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "公网路由器会丢弃目的为私网地址的报文，必须由出口设备把源地址转换为公网地址后才能正常往返。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "静态 NAT",
+    "knowledgePoint": "NAT 与私网地址",
+    "difficulty": "easy",
+    "tags": [
+      "NAT 原理与配置",
+      "静态 NAT",
+      "NAT 与私网地址"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-14-009",
+    "type": "true_false",
+    "question": "NAT 转换只修改报文的源或目的 IP 地址，不会影响传输层端口。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "NAPT 与 Easy IP 会同时转换端口以区分不同会话，仅转换地址的是基础 NAT，不能一概而论。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "动态 NAT 与 NAPT",
+    "knowledgePoint": "NAPT 与 Easy IP",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "动态 NAT 与 NAPT",
+      "NAPT 与 Easy IP"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-14-010",
+    "type": "single_choice",
+    "question": "动态 NAT 使用地址池时，映射关系的特点是什么？",
+    "options": {
+      "A": "只转换端口不转换地址",
+      "B": "从池中动态选取地址，会话结束后释放",
+      "C": "不占用公网地址",
+      "D": "固定一对一永久绑定"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "动态 NAT 从地址池按需分配公网地址，无会话时地址可被其他主机复用，因此适合内部用户多、并发有限的场景。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "动态 NAT 与 NAPT",
+    "knowledgePoint": "动态 NAT 地址池",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "动态 NAT 与 NAPT",
+      "动态 NAT 地址池"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-14-011",
+    "type": "single_choice",
+    "question": "创建 NAT 地址池 1，范围为 200.1.1.10 到 200.1.1.20，正确命令是？",
+    "options": {
+      "A": "nat address-group 1 200.1.1.10 200.1.1.20",
+      "B": "nat group 1 200.1.1.10 200.1.1.20",
+      "C": "nat pool 1 200.1.1.10-200.1.1.20",
+      "D": "address-group 1 range 200.1.1.10 200.1.1.20"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "华为用 nat address-group 编号 起始地址 结束地址 定义地址池，之后在接口下用 nat outbound 引用。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "动态 NAT 与 NAPT",
+    "knowledgePoint": "动态 NAT 地址池",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "动态 NAT 与 NAPT",
+      "动态 NAT 地址池"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-14-012",
+    "type": "true_false",
+    "question": "动态 NAT 的地址池耗尽后，新的会话将无法建立地址转换。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "地址池数量决定并发上限，池满后新连接无法分配公网地址而失败，因此现网更常用 NAPT 或 Easy IP。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "动态 NAT 与 NAPT",
+    "knowledgePoint": "动态 NAT 地址池",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "动态 NAT 与 NAPT",
+      "动态 NAT 地址池"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-14-013",
+    "type": "single_choice",
+    "question": "NAPT 相比基础 NAT 增加了什么能力？",
+    "options": {
+      "A": "只转换目的地址",
+      "B": "为报文增加加密头",
+      "C": "把 IPv4 转为 IPv6",
+      "D": "同时转换端口，实现多个私网地址共用一个公网地址"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "NAPT 用端口区分不同会话，因此一个公网地址可承载大量内网主机，是家庭与企业上网最常见的形态。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "动态 NAT 与 NAPT",
+    "knowledgePoint": "NAPT 与 Easy IP",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "动态 NAT 与 NAPT",
+      "NAPT 与 Easy IP"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-14-014",
+    "type": "single_choice",
+    "question": "Easy IP 的特点是什么？",
+    "options": {
+      "A": "必须配置至少 10 个公网地址",
+      "B": "只能做静态一对一映射",
+      "C": "只能用于 IPv6 网络",
+      "D": "直接用接口的公网地址做 NAPT，无需单独定义地址池"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Easy IP 以接口地址作为转换后地址并复用端口，配置最简，适合拨号或地址不固定的出口场景。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "动态 NAT 与 NAPT",
+    "knowledgePoint": "NAPT 与 Easy IP",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "动态 NAT 与 NAPT",
+      "NAPT 与 Easy IP"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-14-015",
+    "type": "true_false",
+    "question": "在接口下执行 nat outbound 2000 且不指定地址池时，默认采用 Easy IP 方式。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "只引用 ACL 而不指定地址池即使用接口地址做 NAPT，这是华为设备上最常用的出口上网配置。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "动态 NAT 与 NAPT",
+    "knowledgePoint": "NAPT 与 Easy IP",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "动态 NAT 与 NAPT",
+      "NAPT 与 Easy IP"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-14-016",
+    "type": "single_choice",
+    "question": "查看当前 NAT 会话转换关系，应使用哪条命令？",
+    "options": {
+      "A": "display acl all",
+      "B": "display nat static",
+      "C": "display ip routing-table",
+      "D": "display nat session all"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "display nat session 显示源目地址与端口的转换对应关系，是判断 NAT 是否真正生效的关键依据。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "动态 NAT 与 NAPT",
+    "knowledgePoint": "NAT 转换表",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "动态 NAT 与 NAPT",
+      "NAT 转换表"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-14-017",
+    "type": "single_choice",
+    "question": "NAT 转换表中的会话表项通常具有什么特性？",
+    "options": {
+      "A": "永久保留直到设备重启",
+      "B": "只能手工删除",
+      "C": "有老化时间，长时间无流量后自动删除",
+      "D": "每 10 秒强制清空一次"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "会话表按协议设置老化时间，超时无流量即回收，从而释放公网地址与端口资源。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "动态 NAT 与 NAPT",
+    "knowledgePoint": "NAT 转换表",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "动态 NAT 与 NAPT",
+      "NAT 转换表"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-14-018",
+    "type": "true_false",
+    "question": "若 NAT 转换表中看不到某个会话，说明该流量可能没有被 NAT 规则匹配到。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "会话表为空通常意味着 ACL 未匹配、接口方向配错或 nat outbound 未生效，是 NAT 排障的第一检查点。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "动态 NAT 与 NAPT",
+    "knowledgePoint": "NAT 转换表",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "动态 NAT 与 NAPT",
+      "NAT 转换表"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-14-019",
+    "type": "single_choice",
+    "question": "NAT 与 ACL 配合时，ACL 的作用是什么？",
+    "options": {
+      "A": "为报文提供加密",
+      "B": "圈定需要做地址转换的流量范围",
+      "C": "替代路由表做转发",
+      "D": "决定公网地址池的大小"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "nat outbound 引用 ACL，只有被 permit 的流量才做转换，因此 ACL 是控制“谁可以上网”的关键配置。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "NAT 应用与排错",
+    "knowledgePoint": "NAT 与 ACL 配合",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "NAT 应用与排错",
+      "NAT 与 ACL 配合"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-14-020",
+    "type": "single_choice",
+    "question": "若 ACL 3000 只 permit 了 192.168.1.0/24，其他网段上网会出现什么现象？",
+    "options": {
+      "A": "ACL 被自动忽略",
+      "B": "其他网段不做地址转换，因此无法访问公网",
+      "C": "所有网段都能正常上网",
+      "D": "其他网段自动使用 Easy IP"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "NAT 只处理 ACL 允许的流量，未被 permit 的报文保持私网源地址出境，公网侧无法回程，表现为不能上网。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "NAT 应用与排错",
+    "knowledgePoint": "NAT 与 ACL 配合",
+    "difficulty": "hard",
+    "tags": [
+      "NAT 原理与配置",
+      "NAT 应用与排错",
+      "NAT 与 ACL 配合"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-14-021",
+    "type": "true_false",
+    "question": "NAT 的 ACL 只负责选择流量，其 deny 规则不会直接丢弃报文，而是表示不做转换。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "被 NAT 引用的 ACL 中 deny 的流量不做地址转换但仍可能被转发，是否丢弃取决于接口上的 traffic-filter。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "NAT 应用与排错",
+    "knowledgePoint": "NAT 与 ACL 配合",
+    "difficulty": "hard",
+    "tags": [
+      "NAT 原理与配置",
+      "NAT 应用与排错",
+      "NAT 与 ACL 配合"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-14-022",
+    "type": "single_choice",
+    "question": "内网主机能 ping 通网关但无法上网，NAT 相关最可能的原因是什么？",
+    "options": {
+      "A": "终端网卡速率不匹配",
+      "B": "出口未配置 NAT 或 ACL 未匹配内网网段",
+      "C": "内网交换机未开启 STP",
+      "D": "DNS 服务器未配置 NTP"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "能通网关说明二层与网关正常，问题出在出口的地址转换或默认路由，应检查 nat outbound 与会话表。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "NAT 应用与排错",
+    "knowledgePoint": "NAT 排错",
+    "difficulty": "hard",
+    "tags": [
+      "NAT 原理与配置",
+      "NAT 应用与排错",
+      "NAT 排错"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-14-023",
+    "type": "multiple_choice",
+    "question": "NAT 不生效时，应依次检查哪些环节？",
+    "options": {
+      "A": "ACL 是否匹配内网源地址",
+      "B": "nat outbound 是否配置在正确的公网侧接口",
+      "C": "是否存在到公网的默认路由",
+      "D": "内网交换机是否配置了 SNMP"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "SNMP 与转发无关。NAT 排障遵循“匹配、应用、路由”三步：ACL 命中、接口应用、回程可达。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "NAT 应用与排错",
+    "knowledgePoint": "NAT 排错",
+    "difficulty": "hard",
+    "tags": [
+      "NAT 原理与配置",
+      "NAT 应用与排错",
+      "NAT 排错"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-14-024",
+    "type": "true_false",
+    "question": "NAT 只能解决地址转换问题，若出口缺少默认路由，即使 NAT 配置正确也无法上网。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "NAT 与路由是两个独立环节，转换成功但无路由时报文仍无法发出，因此排障必须同时验证路由。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "NAT 应用与排错",
+    "knowledgePoint": "NAT 排错",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "NAT 应用与排错",
+      "NAT 排错"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-14-025",
+    "type": "single_choice",
+    "question": "企业出口 NAT 通常部署在什么位置？",
+    "options": {
+      "A": "接入层交换机的用户端口",
+      "B": "无线 AP 的上行口",
+      "C": "内网与公网的交界处，即出口路由器的公网侧接口",
+      "D": "核心交换机的互联链路"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "NAT 必须在流量进出公网的必经节点执行，部署在内网深处会导致转换后地址仍需再次转换，增加复杂度。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "NAT 应用与排错",
+    "knowledgePoint": "NAT 典型组网",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "NAT 应用与排错",
+      "NAT 典型组网"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-14-026",
+    "type": "single_choice",
+    "question": "双出口企业网络中，NAT 配置需要注意什么？",
+    "options": {
+      "A": "必须关闭所有静态路由",
+      "B": "只需在主出口配置 NAT",
+      "C": "两个出口必须使用同一地址池",
+      "D": "按出口分别配置 NAT 与策略路由，避免回程不对称"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "双出口若流量从一个出口出去却从另一个回程，会因地址不匹配被丢弃，需要策略路由与 NAT 协同保证往返一致。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "NAT 应用与排错",
+    "knowledgePoint": "NAT 典型组网",
+    "difficulty": "hard",
+    "tags": [
+      "NAT 原理与配置",
+      "NAT 应用与排错",
+      "NAT 典型组网"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-14-027",
+    "type": "true_false",
+    "question": "NAT 可以隐藏内网地址结构，在一定程度上提升安全性，但不能替代防火墙策略。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "NAT 只改变地址可见性，无法防御应用层攻击与非法访问，安全防护仍需依赖防火墙与 ACL 策略。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "NAT 应用与排错",
+    "knowledgePoint": "NAT 典型组网",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "NAT 应用与排错",
+      "NAT 典型组网"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-14-028",
+    "type": "single_choice",
+    "question": "NAT Server 配置后外网仍无法访问内网服务器，最可能缺少什么？",
+    "options": {
+      "A": "内网交换机的 VLAN 数量",
+      "B": "设备的 NTP 同步",
+      "C": "内网服务器的 SNMP 团体名",
+      "D": "公网侧到该地址的路由，或 ACL 未放通该流量"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "NAT Server 依赖公网可达与策略放通，若上游未把该公网地址路由到本设备，或 ACL 拦截，则映射不会生效。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "静态 NAT",
+    "knowledgePoint": "NAT Server",
+    "difficulty": "hard",
+    "tags": [
+      "NAT 原理与配置",
+      "静态 NAT",
+      "NAT Server"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-14-029",
+    "type": "single_choice",
+    "question": "NAPT 使用端口区分会话，因此理论上一个公网地址最多可支持多少并发会话？",
+    "options": {
+      "A": "固定为 1024 个",
+      "B": "没有上限",
+      "C": "受端口号数量限制，约 6 万多个",
+      "D": "固定为 254 个"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "可用端口约 65535 个，扣除保留端口后约 6 万余，因此单地址并发存在上限，超大规模场景需多地址或 NAT64。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "动态 NAT 与 NAPT",
+    "knowledgePoint": "NAPT 与 Easy IP",
+    "difficulty": "hard",
+    "tags": [
+      "NAT 原理与配置",
+      "动态 NAT 与 NAPT",
+      "NAPT 与 Easy IP"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v3-14-030",
+    "type": "single_choice",
+    "question": "私网主机访问公网时，NAT 设备修改的是报文的哪个字段？",
+    "options": {
+      "A": "目的 IP 地址",
+      "B": "以太网类型字段",
+      "C": "目的 MAC 地址",
+      "D": "源 IP 地址（NAPT 下还包括源端口）"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "出方向转换源地址与源端口，回方向再改回目的地址与端口，从而实现私网与公网的双向映射。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "静态 NAT",
+    "knowledgePoint": "NAT 与私网地址",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "静态 NAT",
+      "NAT 与私网地址"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-14-031",
+    "type": "true_false",
+    "question": "NAT 转换发生在路由查找之后，因此必须先有正确的路由才能进行地址转换。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "设备先查路由确定出接口，再在出接口上执行 NAT，因此路由缺失时转换根本不会发生，这解释了为何 NAT 正常仍上不了网。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "NAT 应用与排错",
+    "knowledgePoint": "NAT 排错",
+    "difficulty": "hard",
+    "tags": [
+      "NAT 原理与配置",
+      "NAT 应用与排错",
+      "NAT 排错"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-14-032",
+    "type": "single_choice",
+    "question": "静态 NAT 与动态 NAT 的主要区别是什么？",
+    "options": {
+      "A": "静态不能用于服务器发布",
+      "B": "映射关系是否固定，静态为一对一固定，动态为按需分配",
+      "C": "动态不需要公网地址",
+      "D": "静态只支持 IPv4，动态只支持 IPv6"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "固定与动态的差异决定了适用场景：需要外网主动访问用静态或 NAT Server，内部用户共享上网用动态或 NAPT。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "静态 NAT",
+    "knowledgePoint": "静态 NAT 一对一映射",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "静态 NAT",
+      "静态 NAT 一对一映射"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-14-033",
+    "type": "single_choice",
+    "question": "在接口下配置 nat outbound 3000 address-group 1，其含义是？",
+    "options": {
+      "A": "ACL 3000 匹配的流量被丢弃",
+      "B": "地址池 1 被删除",
+      "C": "ACL 3000 匹配的流量使用地址池 1 做转换",
+      "D": "所有流量使用地址池 1 转换"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "nat outbound 先引用 ACL 选择流量，再指定地址池；省略地址池则使用接口地址做 Easy IP。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "NAT 应用与排错",
+    "knowledgePoint": "NAT 与 ACL 配合",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "NAT 应用与排错",
+      "NAT 与 ACL 配合"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-14-034",
+    "type": "true_false",
+    "question": "NAT 可以缓解 IPv4 地址短缺，但无法从根本上解决地址耗尽问题。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "NAT 是过渡性方案，真正的长期解法是 IPv6；NAT 还带来端到端可达性破坏与排障复杂度上升的代价。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "静态 NAT",
+    "knowledgePoint": "NAT 与私网地址",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "静态 NAT",
+      "NAT 与私网地址"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-14-035",
+    "type": "single_choice",
+    "question": "内网两台服务器都需要用 80 端口对外提供服务，但只有一个公网地址，应如何配置？",
+    "options": {
+      "A": "把公网地址配置在服务器上",
+      "B": "关闭其中一台服务器的服务",
+      "C": "为两台服务器配置相同的静态 NAT",
+      "D": "用 NAT Server 把不同公网端口映射到两台服务器的 80 端口"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "同一公网地址的不同端口可分别映射到不同内网主机，例如 8080 映射到服务器 A、8081 映射到服务器 B。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "静态 NAT",
+    "knowledgePoint": "NAT Server",
+    "difficulty": "hard",
+    "tags": [
+      "NAT 原理与配置",
+      "静态 NAT",
+      "NAT Server"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-14-036",
+    "type": "single_choice",
+    "question": "NAT 环境下抓包看到内网地址出现在公网链路上，说明什么？",
+    "options": {
+      "A": "公网地址池已扩容",
+      "B": "NAT 转换已成功",
+      "C": "该流量未被 NAT 规则匹配",
+      "D": "设备已切换为 IPv6"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "公网链路上出现私网源地址说明转换未发生，应检查 ACL 是否命中、nat outbound 是否配置在正确接口。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "NAT 应用与排错",
+    "knowledgePoint": "NAT 排错",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "NAT 应用与排错",
+      "NAT 排错"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-14-037",
+    "type": "true_false",
+    "question": "NAT 转换表中的源地址与端口是内网主机的，目的地址是公网服务器的，这一对应关系在会话期间保持不变。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "会话建立后映射关系固定，回程报文才能正确还原；若中途变化会导致连接中断，因此设备需维护会话表。",
+    "chapter": "NAT 原理与配置",
+    "knowledgeSection": "动态 NAT 与 NAPT",
+    "knowledgePoint": "NAT 转换表",
+    "difficulty": "medium",
+    "tags": [
+      "NAT 原理与配置",
+      "动态 NAT 与 NAPT",
+      "NAT 转换表"
+    ],
+    "stage": "基础理解"
+  }
+]

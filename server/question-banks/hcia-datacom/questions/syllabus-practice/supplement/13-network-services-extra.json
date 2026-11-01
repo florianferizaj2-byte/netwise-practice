@@ -14,13 +14,16 @@
     ],
     "analysis": "DHCP Relay 将客户端广播转换并转发到远端 DHCP 服务器。 本题考查“DHCP”，因此应选择“DHCP Relay”。",
     "chapter": "网络服务与应用",
-    "knowledgePoint": "DHCP",
+    "knowledgePoint": "DHCP 报文与交互流程",
     "difficulty": "medium",
     "tags": [
       "网络服务与应用",
+      "DHCP 服务",
+      "DHCP 报文与交互流程",
       "DHCP"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "DHCP 服务"
   },
   {
     "id": "hcia-v2-extra-13-dhcp-gateway",
@@ -37,13 +40,16 @@
     ],
     "analysis": "DHCP Option 3 用于向客户端提供默认网关地址。 本题考查“DHCP”，因此应选择“Option 3 Router”。",
     "chapter": "网络服务与应用",
-    "knowledgePoint": "DHCP",
+    "knowledgePoint": "DHCP 报文与交互流程",
     "difficulty": "hard",
     "tags": [
       "网络服务与应用",
+      "DHCP 服务",
+      "DHCP 报文与交互流程",
       "DHCP"
     ],
-    "stage": "直接计算"
+    "stage": "直接计算",
+    "knowledgeSection": "DHCP 服务"
   },
   {
     "id": "hcia-v2-extra-13-dns-cache",
@@ -60,13 +66,16 @@
     ],
     "analysis": "缓存仍在 TTL 内的 DNS 记录，可减少重复递归查询。 本题考查“DNS”，因此应选择“降低重复查询延迟和上游负载”。",
     "chapter": "网络服务与应用",
-    "knowledgePoint": "DNS",
+    "knowledgePoint": "DNS 解析与配置",
     "difficulty": "easy",
     "tags": [
       "网络服务与应用",
+      "DNS 与文件传输",
+      "DNS 解析与配置",
       "DNS"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "DNS 与文件传输"
   },
   {
     "id": "hcia-v2-extra-13-ntp-stratum",
@@ -83,13 +92,16 @@
     ],
     "analysis": "Stratum 表示与参考时钟的层级距离，数值越小通常越接近权威时间源。 本题考查“NTP”，因此应选择“时间源更接近权威参考时钟”。",
     "chapter": "网络服务与应用",
-    "knowledgePoint": "NTP",
+    "knowledgePoint": "NTP 分层与工作模式",
     "difficulty": "hard",
     "tags": [
       "网络服务与应用",
+      "NTP 与远程服务",
+      "NTP 分层与工作模式",
       "NTP"
     ],
-    "stage": "反向推理"
+    "stage": "反向推理",
+    "knowledgeSection": "NTP 与远程服务"
   },
   {
     "id": "hcia-v2-extra-13-ftp-control",
@@ -106,13 +118,16 @@
     ],
     "analysis": "FTP 控制连接使用 TCP 21，数据连接根据主动或被动模式另行建立。 本题考查“FTP/TFTP”，因此应选择“TCP 21”。",
     "chapter": "网络服务与应用",
-    "knowledgePoint": "FTP/TFTP",
+    "knowledgePoint": "FTP 主动与被动模式",
     "difficulty": "medium",
     "tags": [
       "网络服务与应用",
+      "DNS 与文件传输",
+      "FTP 主动与被动模式",
       "FTP/TFTP"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "DNS 与文件传输"
   },
   {
     "id": "hcia-v2-extra-13-tftp-risk",
@@ -129,12 +144,15 @@
     ],
     "analysis": "TFTP 协议简单，通常不提供强认证和加密，适合受控网络内的文件传输。 本题考查“FTP/TFTP”，因此应选择“TFTP 缺少完善认证和加密保护”。",
     "chapter": "网络服务与应用",
-    "knowledgePoint": "FTP/TFTP",
+    "knowledgePoint": "TFTP 与文件传输",
     "difficulty": "easy",
     "tags": [
       "网络服务与应用",
+      "DNS 与文件传输",
+      "TFTP 与文件传输",
       "FTP/TFTP"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "DNS 与文件传输"
   }
 ]

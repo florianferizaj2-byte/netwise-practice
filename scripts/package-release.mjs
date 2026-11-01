@@ -8,7 +8,10 @@ import {
   assertRuntimePath,
   assertTrackedReleaseInputs,
   isRuntimeSource,
+  assertReleaseVerification,
+  runtimeArtifacts,
 } from "./release-runtime.mjs";
+import { getReleaseTarget } from './release-checks.mjs';
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const git = (...args) =>
@@ -20,10 +23,11 @@ const git = (...args) =>
 const mobile = JSON.parse(
   fs.readFileSync(path.join(root, "mobile/package.json"), "utf8"),
 );
-const build = JSON.parse(
+const target = getReleaseTarget(root);
+const build = target === 'android' ? null : JSON.parse(
   fs.readFileSync(path.join(root, "dist/app/version.json"), "utf8"),
 );
-if (build.version !== mobile.version)
+if (build && build.version !== mobile.version)
   throw new Error("移动网页构建版本与源码不一致，请先重新构建");
 const version = mobile.version;
 const commit = git("rev-parse", "HEAD");
@@ -32,6 +36,7 @@ assertTrackedReleaseInputs(root, tracked, version);
 if (git("status", "--porcelain", "--untracked-files=no"))
   throw new Error("请先提交已核对的发布源码，再制作更新包");
 const provenance = assertBuildProvenance(root);
+const verification = assertReleaseVerification(root);
 // Desktop/server changes do not necessarily change the Expo Web build ID.
 const webBuildId = createHash("sha256")
   .update(
@@ -68,13 +73,7 @@ try {
   const runtimeSources = tracked.filter((file) =>
     isRuntimeSource(file, version),
   );
-  const compiled = filesAt(path.join(root, "dist"))
-    .map((file) => path.relative(root, file).split(path.sep).join("/"))
-    .filter(
-      (file) =>
-        !file.startsWith("dist/downloads/") ||
-        [apkName, `${apkName}.sha256`].includes(path.basename(file)),
-    );
+  const compiled = [...runtimeArtifacts(root, version), 'dist/build-provenance.json'];
   for (const file of [...runtimeSources, ...compiled]) {
     assertRuntimePath(file);
     const destination = path.resolve(staging, file);
@@ -90,9 +89,13 @@ try {
         version,
         commit,
         webBuildId,
-        mobileWebBuildId: build.buildId,
+        target,
+        preserveExistingMobileWeb: target === 'android',
+        mobileWebBuildId: build?.buildId ?? null,
         buildProvenance: provenance,
         apkSha256: apkHash,
+        verifiedChecks: verification.checks.map(check => check.id),
+        productionCertificateSha256: verification.native.certificateSha256,
         createdAt: new Date().toISOString(),
         deployment:
           "Merge into the existing project, preserve .env, DATA_DIR and user uploads, install production dependencies, then restart.",
@@ -135,7 +138,9 @@ try {
     version,
     commit,
     webBuildId,
-    mobileWebBuildId: build.buildId,
+    target,
+    preserveExistingMobileWeb: target === 'android',
+    mobileWebBuildId: build?.buildId ?? null,
     notes,
     assets: [
       path.join(output, apkName),

@@ -6,6 +6,7 @@ import { chromium, webkit, expect } from "@playwright/test";
 import { createApp } from "../server/index.js";
 import { createStore } from "../server/store.js";
 import { completeFixtureProfile, dismissLaunchAnnouncement } from './helpers/mobile-profile.js';
+import { getReleaseTarget } from '../scripts/release-checks.mjs';
 
 process.env.ALLOWED_HOSTS = "127.0.0.1,localhost";
 process.env.COOKIE_SECURE = "0";
@@ -50,7 +51,7 @@ async function shop(context, page, link) {
 try {
   for (const [engine, type] of [["chromium", chromium], ["webkit", webkit]]) {
     browser = await type.launch({ headless: true, proxy: { server: "http://127.0.0.1:9", bypass: "127.0.0.1,localhost" } });
-    for (const mobile of [false, true]) {
+    for (const mobile of getReleaseTarget(process.cwd()) === 'android' ? [false] : [false, true]) {
       const user = await store.register(`purchase_${engine}_${mobile ? "mobile" : "desktop"}`, "fixture-password-123");
       completeFixtureProfile(store, user);
       store.selectCertificate(user.id, "sichuan-upgrading-computer");

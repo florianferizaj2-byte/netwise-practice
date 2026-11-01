@@ -252,14 +252,15 @@ try {
       await fit(1672);
     }
   }
-  assert.equal(artChecks.length, 56);
+  assert.equal(artChecks.length, catalog.certificates.reduce((sum, cert) => sum + cert.chapters.length, 0));
+  assert.deepEqual(new Set(artChecks.map(row => row.certificate)), new Set(catalog.certificates.map(cert => cert.id)));
   assert.equal(
     artChecks.filter((row) => row.certificate === "ncre-l2-c-programming")
       .length,
     12,
   );
   checks.push(
-    "56 chapter cards share the correct large/small animated illustrations across five real certificates, including all 12 C chapters",
+    `${artChecks.length} chapter cards share the correct large/small animated illustrations across ${catalog.certificates.length} real certificates, including all 12 C chapters`,
   );
 
   await page

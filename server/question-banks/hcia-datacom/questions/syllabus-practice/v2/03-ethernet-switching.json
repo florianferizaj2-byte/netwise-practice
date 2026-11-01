@@ -1,0 +1,719 @@
+[
+  {
+    "id": "hcia-v3-03-001",
+    "type": "single_choice",
+    "question": "以太网帧结构中，用于差错检测的字段是什么？",
+    "options": {
+      "A": "帧校验序列 FCS",
+      "B": "目的 MAC 地址",
+      "C": "前导码",
+      "D": "类型字段"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "FCS 用 CRC 对整帧计算校验值，接收端重算并比对，不一致即丢弃。它只能检错，不能纠错。",
+    "chapter": "以太网交换基础",
+    "knowledgeSection": "以太网帧与 MAC 地址",
+    "knowledgePoint": "以太网帧结构",
+    "difficulty": "easy",
+    "tags": [
+      "以太网交换基础",
+      "以太网帧与 MAC 地址",
+      "以太网帧结构"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-03-002",
+    "type": "single_choice",
+    "question": "标准以太网帧的最小长度（不含前导码）是多少字节？",
+    "options": {
+      "A": "46 字节",
+      "B": "1518 字节",
+      "C": "128 字节",
+      "D": "64 字节"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "最小 64 字节、最大 1518 字节。数据字段不足 46 字节时需填充，否则与冲突碎片无法区分。",
+    "chapter": "以太网交换基础",
+    "knowledgeSection": "以太网帧与 MAC 地址",
+    "knowledgePoint": "以太网帧结构",
+    "difficulty": "medium",
+    "tags": [
+      "以太网交换基础",
+      "以太网帧与 MAC 地址",
+      "以太网帧结构"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-03-003",
+    "type": "true_false",
+    "question": "以太网帧的类型字段取值为 0x0800 时，表示上层承载的是 IPv4 报文。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "0x0800 对应 IPv4，0x86DD 对应 IPv6，0x8100 表示携带 802.1Q 标签。",
+    "chapter": "以太网交换基础",
+    "knowledgeSection": "以太网帧与 MAC 地址",
+    "knowledgePoint": "以太网帧结构",
+    "difficulty": "medium",
+    "tags": [
+      "以太网交换基础",
+      "以太网帧与 MAC 地址",
+      "以太网帧结构"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-03-004",
+    "type": "single_choice",
+    "question": "一个 MAC 地址的长度是多少位？",
+    "options": {
+      "A": "128 位",
+      "B": "48 位",
+      "C": "32 位",
+      "D": "64 位"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "MAC 地址 48 位，通常写作 12 个十六进制字符；前 24 位是厂商标识 OUI，后 24 位由厂商分配。",
+    "chapter": "以太网交换基础",
+    "knowledgeSection": "以太网帧与 MAC 地址",
+    "knowledgePoint": "MAC 地址结构",
+    "difficulty": "easy",
+    "tags": [
+      "以太网交换基础",
+      "以太网帧与 MAC 地址",
+      "MAC 地址结构"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-03-005",
+    "type": "single_choice",
+    "question": "MAC 地址 00-1A-2B-3C-4D-5E 中，表示厂商标识 OUI 的是哪一部分？",
+    "options": {
+      "A": "00-1A-2B-3C",
+      "B": "00-1A-2B",
+      "C": "1A-2B-3C-4D",
+      "D": "3C-4D-5E"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "前三个字节为 OUI，由 IEEE 统一分配给厂商；后三个字节由厂商自行编号，保证全球唯一。",
+    "chapter": "以太网交换基础",
+    "knowledgeSection": "以太网帧与 MAC 地址",
+    "knowledgePoint": "MAC 地址结构",
+    "difficulty": "medium",
+    "tags": [
+      "以太网交换基础",
+      "以太网帧与 MAC 地址",
+      "MAC 地址结构"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-03-006",
+    "type": "true_false",
+    "question": "MAC 地址第一个字节的最低位为 1 时，表示该地址是单播地址。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "最低位为 0 是单播，为 1 是组播；全 1（FF-FF-FF-FF-FF-FF）是广播地址，属于组播的特例。",
+    "chapter": "以太网交换基础",
+    "knowledgeSection": "以太网帧与 MAC 地址",
+    "knowledgePoint": "MAC 地址结构",
+    "difficulty": "hard",
+    "tags": [
+      "以太网交换基础",
+      "以太网帧与 MAC 地址",
+      "MAC 地址结构"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-03-007",
+    "type": "single_choice",
+    "question": "交换机收到目的 MAC 为 FF-FF-FF-FF-FF-FF 的帧时，会如何处理？",
+    "options": {
+      "A": "只发给网关端口",
+      "B": "只从入端口回送",
+      "C": "直接丢弃该帧",
+      "D": "向除入端口外的所有端口泛洪"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "广播帧必须让同一广播域内所有主机都收到，因此交换机向除入端口外的所有端口复制转发。",
+    "chapter": "以太网交换基础",
+    "knowledgeSection": "以太网帧与 MAC 地址",
+    "knowledgePoint": "单播、组播与广播",
+    "difficulty": "easy",
+    "tags": [
+      "以太网交换基础",
+      "以太网帧与 MAC 地址",
+      "单播、组播与广播"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-03-008",
+    "type": "single_choice",
+    "question": "IPv4 组播地址 224.0.0.5 对应的组播 MAC 地址是什么？",
+    "options": {
+      "A": "FF-FF-FF-00-00-05",
+      "B": "00-00-5E-00-00-05",
+      "C": "01-00-5E-80-00-05",
+      "D": "01-00-5E-00-00-05"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "IPv4 组播 MAC 前缀为 01-00-5E，取组播 IP 后 23 位映射到 MAC 后 23 位，因此高位需清零。",
+    "chapter": "以太网交换基础",
+    "knowledgeSection": "以太网帧与 MAC 地址",
+    "knowledgePoint": "单播、组播与广播",
+    "difficulty": "hard",
+    "tags": [
+      "以太网交换基础",
+      "以太网帧与 MAC 地址",
+      "单播、组播与广播"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v3-03-009",
+    "type": "multiple_choice",
+    "question": "下列关于单播、组播、广播的说法，正确的有哪些？",
+    "options": {
+      "A": "单播帧的目的 MAC 是某一台主机的地址",
+      "B": "组播帧只能被加入了对应组播组的主机处理",
+      "C": "广播帧会被同一广播域内所有主机处理",
+      "D": "广播帧可以被路由器默认转发到其他网段"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "路由器默认不转发广播帧，这正是广播域以路由器或 VLAN 为边界的原因。",
+    "chapter": "以太网交换基础",
+    "knowledgeSection": "以太网帧与 MAC 地址",
+    "knowledgePoint": "单播、组播与广播",
+    "difficulty": "medium",
+    "tags": [
+      "以太网交换基础",
+      "以太网帧与 MAC 地址",
+      "单播、组播与广播"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-03-010",
+    "type": "single_choice",
+    "question": "交换机学习 MAC 地址表项时，依据的是帧中的哪个字段？",
+    "options": {
+      "A": "源 IP 地址与入端口",
+      "B": "目的 MAC 地址与出端口",
+      "C": "源 MAC 地址与入端口",
+      "D": "目的 IP 地址与出端口"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "交换机根据“源 MAC 从哪个端口进来”建立映射，而转发时查的是目的 MAC，学习与转发依据的字段不同。",
+    "chapter": "以太网交换基础",
+    "knowledgeSection": "交换机转发原理",
+    "knowledgePoint": "MAC 地址表学习",
+    "difficulty": "medium",
+    "tags": [
+      "以太网交换基础",
+      "交换机转发原理",
+      "MAC 地址表学习"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-03-011",
+    "type": "single_choice",
+    "question": "交换机 MAC 地址表中的动态表项，默认老化时间通常是多少秒？",
+    "options": {
+      "A": "1800 秒",
+      "B": "3600 秒",
+      "C": "300 秒",
+      "D": "30 秒"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "华为交换机默认老化时间 300 秒，可通过 mac-address aging-time 调整。静态表项不会老化。",
+    "chapter": "以太网交换基础",
+    "knowledgeSection": "交换机转发原理",
+    "knowledgePoint": "表项老化机制",
+    "difficulty": "medium",
+    "tags": [
+      "以太网交换基础",
+      "交换机转发原理",
+      "表项老化机制"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-03-012",
+    "type": "true_false",
+    "question": "手工配置的静态 MAC 表项会随老化时间到期而被自动删除。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "静态表项永久有效，只能手工删除；只有动态学习到的表项才会老化，用于适应终端位置变化。",
+    "chapter": "以太网交换基础",
+    "knowledgeSection": "交换机转发原理",
+    "knowledgePoint": "表项老化机制",
+    "difficulty": "easy",
+    "tags": [
+      "以太网交换基础",
+      "交换机转发原理",
+      "表项老化机制"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-03-013",
+    "type": "single_choice",
+    "question": "交换机刚启动、MAC 地址表为空时收到一个单播帧，会如何处理？",
+    "options": {
+      "A": "等待表项建立后再转发",
+      "B": "直接丢弃该帧",
+      "C": "从入端口原路返回",
+      "D": "向除入端口外的所有端口泛洪"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "目的 MAC 查不到表项即为未知单播，交换机只能泛洪；这种流量过多会显著消耗带宽。",
+    "chapter": "以太网交换基础",
+    "knowledgeSection": "交换机转发原理",
+    "knowledgePoint": "转发、泛洪与丢弃",
+    "difficulty": "easy",
+    "tags": [
+      "以太网交换基础",
+      "交换机转发原理",
+      "转发、泛洪与丢弃"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-03-014",
+    "type": "single_choice",
+    "question": "若帧的目的 MAC 在地址表中对应端口与入端口相同，交换机会如何处理？",
+    "options": {
+      "A": "回送到入端口",
+      "B": "转发给默认网关",
+      "C": "丢弃该帧，不向其他端口转发",
+      "D": "向所有端口泛洪"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "同端口收发说明目的主机与源主机在同一接口下（例如经集线器接入），无需交换机转发，直接丢弃可避免环路与浪费。",
+    "chapter": "以太网交换基础",
+    "knowledgeSection": "交换机转发原理",
+    "knowledgePoint": "转发、泛洪与丢弃",
+    "difficulty": "hard",
+    "tags": [
+      "以太网交换基础",
+      "交换机转发原理",
+      "转发、泛洪与丢弃"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-03-015",
+    "type": "multiple_choice",
+    "question": "下列哪些情况会使交换机对帧执行泛洪？",
+    "options": {
+      "A": "目的 MAC 为广播地址",
+      "B": "目的 MAC 为未知单播地址",
+      "C": "目的 MAC 为组播地址且未配置组播表项",
+      "D": "目的 MAC 已学习到明确出端口"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "广播、未知单播、未建表项的组播都需要泛洪；已学到明确出端口的单播走精确转发。",
+    "chapter": "以太网交换基础",
+    "knowledgeSection": "交换机转发原理",
+    "knowledgePoint": "转发、泛洪与丢弃",
+    "difficulty": "medium",
+    "tags": [
+      "以太网交换基础",
+      "交换机转发原理",
+      "转发、泛洪与丢弃"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-03-016",
+    "type": "single_choice",
+    "question": "集线器（Hub）与交换机在冲突域上的本质区别是什么？",
+    "options": {
+      "A": "集线器每个端口独立成域，交换机所有端口同属一个域",
+      "B": "集线器不产生冲突域",
+      "C": "集线器所有端口同属一个冲突域，交换机每个端口独立成域",
+      "D": "两者的冲突域划分完全相同"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "集线器工作在物理层，采用共享介质与 CSMA/CD；交换机工作在链路层，每端口可全双工，天然隔离冲突域。",
+    "chapter": "以太网交换基础",
+    "knowledgeSection": "冲突域与双工",
+    "knowledgePoint": "冲突域与广播域",
+    "difficulty": "medium",
+    "tags": [
+      "以太网交换基础",
+      "冲突域与双工",
+      "冲突域与广播域"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-03-017",
+    "type": "single_choice",
+    "question": "下列哪种设备可以隔离广播域？",
+    "options": {
+      "A": "二层交换机",
+      "B": "集线器",
+      "C": "路由器",
+      "D": "中继器"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "路由器不转发广播帧，因此每个接口是一个独立广播域；二层交换机只能隔离冲突域。",
+    "chapter": "以太网交换基础",
+    "knowledgeSection": "冲突域与双工",
+    "knowledgePoint": "冲突域与广播域",
+    "difficulty": "easy",
+    "tags": [
+      "以太网交换基础",
+      "冲突域与双工",
+      "冲突域与广播域"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-03-018",
+    "type": "true_false",
+    "question": "在一台交换机上划分多个 VLAN，可以把一个物理广播域切分成多个逻辑广播域。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "VLAN 的核心价值就是在二层设备上隔离广播域，减少广播泛洪范围并提升安全性。",
+    "chapter": "以太网交换基础",
+    "knowledgeSection": "冲突域与双工",
+    "knowledgePoint": "冲突域与广播域",
+    "difficulty": "easy",
+    "tags": [
+      "以太网交换基础",
+      "冲突域与双工",
+      "冲突域与广播域"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-03-019",
+    "type": "single_choice",
+    "question": "接口工作在半双工模式时，可能出现的典型现象是什么？",
+    "options": {
+      "A": "VLAN 标签被自动剥离",
+      "B": "自动协商为 1000M 速率",
+      "C": "接口无法收发任何报文",
+      "D": "出现冲突并触发重传，吞吐下降"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "半双工同一时刻只能单向传输，双方同时发送即冲突，需退避重传，因此现网互联应尽量使用全双工。",
+    "chapter": "以太网交换基础",
+    "knowledgeSection": "冲突域与双工",
+    "knowledgePoint": "双工模式与速率",
+    "difficulty": "medium",
+    "tags": [
+      "以太网交换基础",
+      "冲突域与双工",
+      "双工模式与速率"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-03-020",
+    "type": "single_choice",
+    "question": "两端接口一端强制全双工、另一端自协商，最可能出现什么问题？",
+    "options": {
+      "A": "自协商端降为半双工，导致大量冲突与丢包",
+      "B": "链路直接物理断开",
+      "C": "两端自动统一为全双工千兆",
+      "D": "两端速率自动提升一倍"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "自协商依赖双方交互能力信息，一端被强制后协商失败，通常退化为半双工，形成典型的双工不匹配故障。",
+    "chapter": "以太网交换基础",
+    "knowledgeSection": "冲突域与双工",
+    "knowledgePoint": "双工模式与速率",
+    "difficulty": "hard",
+    "tags": [
+      "以太网交换基础",
+      "冲突域与双工",
+      "双工模式与速率"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-03-021",
+    "type": "true_false",
+    "question": "全双工模式下不再使用 CSMA/CD，因为收发通道相互独立，不会发生冲突。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "全双工链路的两对线分别负责收发，物理上消除了冲突可能，因此 CSMA/CD 失去意义。",
+    "chapter": "以太网交换基础",
+    "knowledgeSection": "冲突域与双工",
+    "knowledgePoint": "双工模式与速率",
+    "difficulty": "medium",
+    "tags": [
+      "以太网交换基础",
+      "冲突域与双工",
+      "双工模式与速率"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-03-022",
+    "type": "single_choice",
+    "question": "CSMA/CD 中的“CD”指的是什么？",
+    "options": {
+      "A": "冲突检测",
+      "B": "载波检测",
+      "C": "循环冗余校验",
+      "D": "冲突域划分"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "CS 为载波监听、MA 为多路访问、CD 为冲突检测；发送过程中持续监听，一旦检测到冲突立即停止并退避重发。",
+    "chapter": "以太网交换基础",
+    "knowledgeSection": "冲突域与双工",
+    "knowledgePoint": "CSMA/CD 与共享介质",
+    "difficulty": "easy",
+    "tags": [
+      "以太网交换基础",
+      "冲突域与双工",
+      "CSMA/CD 与共享介质"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-03-023",
+    "type": "single_choice",
+    "question": "CSMA/CD 检测到冲突后，发送方通常采取什么动作？",
+    "options": {
+      "A": "停止发送，随机退避一段时间后重试",
+      "B": "提高发送功率继续发送",
+      "C": "把帧转交给网关重发",
+      "D": "立即改用全双工模式"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "二进制指数退避算法让各站随机错开重发时刻，降低再次冲突的概率，这是共享介质以太网的核心机制。",
+    "chapter": "以太网交换基础",
+    "knowledgeSection": "冲突域与双工",
+    "knowledgePoint": "CSMA/CD 与共享介质",
+    "difficulty": "medium",
+    "tags": [
+      "以太网交换基础",
+      "冲突域与双工",
+      "CSMA/CD 与共享介质"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-03-024",
+    "type": "true_false",
+    "question": "交换机的每个端口构成独立的冲突域，因此交换机端口数量增加不会扩大冲突范围。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "交换机通过缓存与调度实现端口间隔离，冲突只可能发生在端口与所连共享介质之间，不会跨端口扩散。",
+    "chapter": "以太网交换基础",
+    "knowledgeSection": "冲突域与双工",
+    "knowledgePoint": "CSMA/CD 与共享介质",
+    "difficulty": "medium",
+    "tags": [
+      "以太网交换基础",
+      "冲突域与双工",
+      "CSMA/CD 与共享介质"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-03-025",
+    "type": "single_choice",
+    "question": "以太网帧在数据字段不足 46 字节时，发送方会执行什么操作？",
+    "options": {
+      "A": "直接发送短帧",
+      "B": "填充字节使帧长达到最小帧长",
+      "C": "改为发送广播帧",
+      "D": "把帧拆成两个更短的帧"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "填充保证帧长不小于 64 字节，否则接收方无法区分正常短帧与冲突产生的碎片。",
+    "chapter": "以太网交换基础",
+    "knowledgeSection": "以太网帧与 MAC 地址",
+    "knowledgePoint": "以太网帧结构",
+    "difficulty": "medium",
+    "tags": [
+      "以太网交换基础",
+      "以太网帧与 MAC 地址",
+      "以太网帧结构"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-03-026",
+    "type": "multiple_choice",
+    "question": "关于交换机 MAC 地址表，下列说法正确的有哪些？",
+    "options": {
+      "A": "表项包含 MAC 地址、VLAN、出端口等要素",
+      "B": "动态表项可被新学习到的同一 MAC 覆盖",
+      "C": "MAC 地址漂移往往意味着存在二层环路",
+      "D": "一个 MAC 地址可以同时对应多个不同的物理端口"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "同一 MAC 在同一 VLAN 内只能对应一个出端口，若反复在两个端口间切换即为 MAC 漂移，通常由环路引起。",
+    "chapter": "以太网交换基础",
+    "knowledgeSection": "交换机转发原理",
+    "knowledgePoint": "MAC 地址表学习",
+    "difficulty": "hard",
+    "tags": [
+      "以太网交换基础",
+      "交换机转发原理",
+      "MAC 地址表学习"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-03-027",
+    "type": "single_choice",
+    "question": "交换机进行二层转发时，判断依据主要是下列哪一项？",
+    "options": {
+      "A": "帧的目的 MAC 地址",
+      "B": "报文的源端口号",
+      "C": "帧的前导码长度",
+      "D": "报文的目的 IP 地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "二层交换只看目的 MAC 与 VLAN，不解析 IP；只有三层设备才依据目的 IP 查路由表转发。",
+    "chapter": "以太网交换基础",
+    "knowledgeSection": "交换机转发原理",
+    "knowledgePoint": "转发、泛洪与丢弃",
+    "difficulty": "easy",
+    "tags": [
+      "以太网交换基础",
+      "交换机转发原理",
+      "转发、泛洪与丢弃"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-03-028",
+    "type": "single_choice",
+    "question": "某端口出现大量 CRC 错误与碎片帧，最可能的原因是？",
+    "options": {
+      "A": "NAT 地址池耗尽",
+      "B": "路由表缺少条目",
+      "C": "线缆质量差或存在电磁干扰",
+      "D": "VLAN 划分错误"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "CRC 错误属于物理层信号劣化，常见于网线过长、水晶头氧化或强电干扰，与二层三层配置无关。",
+    "chapter": "以太网交换基础",
+    "knowledgeSection": "以太网帧与 MAC 地址",
+    "knowledgePoint": "以太网帧结构",
+    "difficulty": "hard",
+    "tags": [
+      "以太网交换基础",
+      "以太网帧与 MAC 地址",
+      "以太网帧结构"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-03-029",
+    "type": "true_false",
+    "question": "广播域内的主机数量越多，广播流量占用的带宽比例通常越高。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "广播帧要复制给域内每台主机，规模越大开销越明显，这也是大二层网络需要划分 VLAN 的原因之一。",
+    "chapter": "以太网交换基础",
+    "knowledgeSection": "冲突域与双工",
+    "knowledgePoint": "冲突域与广播域",
+    "difficulty": "easy",
+    "tags": [
+      "以太网交换基础",
+      "冲突域与双工",
+      "冲突域与广播域"
+    ],
+    "stage": "反向推理"
+  }
+]

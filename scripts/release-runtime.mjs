@@ -1,11 +1,13 @@
 import fs from "node:fs";
 import path from "node:path";
 import { createHash } from "node:crypto";
+import { checksForTarget, getReleaseTarget } from './release-checks.mjs';
 
 const slash = (value) => value.split(path.sep).join("/");
 const privateFile =
   /(^|\/)(\.env[^/]*|node_modules|data|uploads|drafts|\.git)(\/|$)|\.(db|sqlite|sqlite3|jks|keystore|pem|key|properties)$/i;
 const provenanceFile = "dist/build-provenance.json";
+const runtimeScripts = new Set(['scripts/migrate-ai-points.mjs', 'scripts/check-account-mail.mjs', 'scripts/check-v1-deployment.mjs']);
 
 export function filesBelow(root, relative) {
   const filename = path.resolve(root, relative);
@@ -24,11 +26,12 @@ export function filesBelow(root, relative) {
 export function isRuntimeSource(file, version) {
   return (
     !file.split("/").includes("drafts") &&
-    (file.startsWith("server/") ||
+    (file.startsWith("server/") || runtimeScripts.has(file) ||
       file.startsWith("public/question-images/") ||
       [
         "package.json",
         "package-lock.json",
+        "release-target.json",
         "README.md",
         `docs/release-v${version}.md`,
         `docs/DEPLOY-v${version}.md`,
@@ -52,9 +55,9 @@ export function assertRuntimePath(file) {
   if (privateFile.test(file) || /^dist\/demo(?:\/|$)/i.test(file))
     throw new Error(`禁止打包私有或开发文件：${file}`);
   if (
-    !/^(server\/|public\/question-images\/|dist\/|docs\/|package(?:-lock)?\.json$|README\.md$)/.test(
+    !/^(server\/|public\/question-images\/|dist\/|docs\/|package(?:-lock)?\.json$|release-target\.json$|README\.md$)/.test(
       file,
-    )
+    ) && !runtimeScripts.has(file)
   )
     throw new Error(`非运行时文件：${file}`);
 }
@@ -72,7 +75,9 @@ export function runtimeSources(root, version) {
     "docs",
     "package.json",
     "package-lock.json",
+    "release-target.json",
     "README.md",
+    "scripts",
   ])
     .filter((file) => isRuntimeSource(file, version))
     .sort();
@@ -84,6 +89,7 @@ export function runtimeArtifacts(root, version) {
     .filter(
       (file) =>
         file !== provenanceFile &&
+        (getReleaseTarget(root) !== 'android' || !file.startsWith('dist/app/')) &&
         (!file.startsWith("dist/downloads/") ||
           [apk, `${apk}.sha256`].includes(path.basename(file))),
     )
@@ -107,6 +113,7 @@ export function buildInputs(root) {
     "vite.config.js",
     "package.json",
     "package-lock.json",
+    "release-target.json",
     "mobile/App.tsx",
     "mobile/index.ts",
     "mobile/app.config.js",
@@ -118,7 +125,11 @@ export function buildInputs(root) {
     "scripts/build-mobile-web.mjs",
     "scripts/check-mobile-version.mjs",
     "scripts/release-runtime.mjs",
+    "scripts/release-checks.mjs",
     "scripts/package-release.mjs",
+    "scripts/check-v1-deployment.mjs",
+    "scripts/migrate-ai-points.mjs",
+    "scripts/check-account-mail.mjs",
   ])
     .filter(
       (file) =>
@@ -145,6 +156,32 @@ export function fingerprint(root, files) {
 
 export function sourceSnapshot(root) {
   return fingerprint(root, buildInputs(root));
+}
+
+export function releaseVerificationInputs(root) {
+  return fingerprint(root, [...new Set([
+    ...buildInputs(root),
+    ...existingFiles(root, ['test', 'mobile/modules', 'mobile/plugins', 'mobile/RELEASE_SIGNING.md',
+      'scripts/verify.mjs', 'scripts/verification-env.mjs', 'scripts/release-checks.mjs',
+      'scripts/verify-android-apk.py', 'scripts/verify-release-runtime.mjs']),
+  ])].sort());
+}
+
+export function assertReleaseVerification(root) {
+  const file = path.join(root, 'test-output/release-verification-report.json');
+  if (!fs.existsSync(file)) throw new Error('缺少完整发行验收记录，请运行 npm run verify');
+  const report = JSON.parse(fs.readFileSync(file, 'utf8'));
+  const { version } = JSON.parse(fs.readFileSync(path.join(root, 'mobile/package.json'), 'utf8'));
+  const target = getReleaseTarget(root);
+  if (!report.complete || !report.passed || report.version !== version || report.target !== target ||
+      JSON.stringify(report.inputs) !== JSON.stringify(releaseVerificationInputs(root)) ||
+      JSON.stringify(report.checks?.map(check => check.id)) !== JSON.stringify(checksForTarget(target).map(check => check.id)) ||
+      report.checks.some(check => check.exitCode !== 0))
+    throw new Error('发行验收未完整通过或源码已变化，请重新运行 npm run verify');
+  const apk = path.join(root, 'public/downloads', `kaojiang-v${version}.apk`);
+  if (!report.native?.passed || report.native.sha256 !== createHash('sha256').update(fs.readFileSync(apk)).digest('hex'))
+    throw new Error('正式 APK 与验收记录不符');
+  return report;
 }
 
 export function writeBuildProvenance(root, before) {
@@ -188,8 +225,7 @@ export function assertBuildProvenance(root) {
   artifacts.forEach(assertRuntimePath);
   for (const file of [
     "dist/index.html",
-    "dist/app/index.html",
-    "dist/app/version.json",
+    ...(getReleaseTarget(root) === 'android' ? [] : ["dist/app/index.html", "dist/app/version.json"]),
   ])
     if (!artifacts.includes(file)) throw new Error(`构建产物缺失：${file}`);
   if (

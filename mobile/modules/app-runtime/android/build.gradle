@@ -1,0 +1,9 @@
+plugins {
+  id 'com.android.library'
+  id 'expo-module-gradle-plugin'
+}
+group = 'com.kaojiang.runtime'
+version = '1.0.0'
+android { namespace 'com.kaojiang.runtime'; defaultConfig { minSdkVersion 24; versionCode 1; versionName '1.0.0' } }
+
+dependencies { testImplementation 'junit:junit:4.13.2' }

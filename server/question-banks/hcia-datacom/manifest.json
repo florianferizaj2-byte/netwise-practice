@@ -35,12 +35,73 @@
         "name": "网络参考模型",
         "order": 1,
         "weight": 5,
-        "targetQuestionCount": 10,
+        "targetQuestionCount": 50,
         "knowledgePoints": [
-          "OSI 与 TCP/IP 模型",
-          "数据封装",
-          "TCP 与 UDP",
-          "常用协议"
+          "OSI 七层模型",
+          "TCP/IP 四层模型",
+          "数据封装与解封装",
+          "TCP 连接管理",
+          "TCP 可靠传输机制",
+          "UDP 特性与应用",
+          "HTTP 与 HTTPS",
+          "DNS 协议",
+          "常用协议与端口号"
+        ],
+        "sections": [
+          {
+            "name": "协议分层与封装",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "OSI 七层模型",
+                "code": "01-1-1"
+              },
+              {
+                "name": "TCP/IP 四层模型",
+                "code": "01-1-2"
+              },
+              {
+                "name": "数据封装与解封装",
+                "code": "01-1-3"
+              }
+            ]
+          },
+          {
+            "name": "传输层协议",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "TCP 连接管理",
+                "code": "01-2-1"
+              },
+              {
+                "name": "TCP 可靠传输机制",
+                "code": "01-2-2"
+              },
+              {
+                "name": "UDP 特性与应用",
+                "code": "01-2-3"
+              }
+            ]
+          },
+          {
+            "name": "应用层协议与端口",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "HTTP 与 HTTPS",
+                "code": "01-3-1"
+              },
+              {
+                "name": "DNS 协议",
+                "code": "01-3-2"
+              },
+              {
+                "name": "常用协议与端口号",
+                "code": "01-3-3"
+              }
+            ]
+          }
         ]
       },
       {
@@ -48,12 +109,73 @@
         "name": "华为网络设备操作系统",
         "order": 2,
         "weight": 5,
-        "targetQuestionCount": 10,
+        "targetQuestionCount": 50,
         "knowledgePoints": [
-          "命令行视图",
-          "配置保存",
-          "SSH 与 STelnet",
-          "基础设备操作"
+          "命令行视图与切换",
+          "命令帮助与补全",
+          "配置文件管理",
+          "Console 与本地登录",
+          "Telnet 与 SSH 远程登录",
+          "用户级别与命令权限",
+          "文件系统操作",
+          "系统启动过程",
+          "版本与补丁管理"
+        ],
+        "sections": [
+          {
+            "name": "VRP 命令行基础",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "命令行视图与切换",
+                "code": "02-1-1"
+              },
+              {
+                "name": "命令帮助与补全",
+                "code": "02-1-2"
+              },
+              {
+                "name": "配置文件管理",
+                "code": "02-1-3"
+              }
+            ]
+          },
+          {
+            "name": "设备登录与权限",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "Console 与本地登录",
+                "code": "02-2-1"
+              },
+              {
+                "name": "Telnet 与 SSH 远程登录",
+                "code": "02-2-2"
+              },
+              {
+                "name": "用户级别与命令权限",
+                "code": "02-2-3"
+              }
+            ]
+          },
+          {
+            "name": "设备文件与启动",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "文件系统操作",
+                "code": "02-3-1"
+              },
+              {
+                "name": "系统启动过程",
+                "code": "02-3-2"
+              },
+              {
+                "name": "版本与补丁管理",
+                "code": "02-3-3"
+              }
+            ]
+          }
         ]
       },
       {
@@ -61,20 +183,147 @@
         "name": "以太网交换基础",
         "order": 3,
         "weight": 5,
-        "targetQuestionCount": 10,
-        "knowledgePoints": ["以太网帧", "MAC 地址表", "交换机转发", "广播域"]
+        "targetQuestionCount": 50,
+        "knowledgePoints": [
+          "以太网帧结构",
+          "MAC 地址结构",
+          "单播、组播与广播",
+          "MAC 地址表学习",
+          "转发、泛洪与丢弃",
+          "表项老化机制",
+          "冲突域与广播域",
+          "双工模式与速率",
+          "CSMA/CD 与共享介质"
+        ],
+        "sections": [
+          {
+            "name": "以太网帧与 MAC 地址",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "以太网帧结构",
+                "code": "03-1-1"
+              },
+              {
+                "name": "MAC 地址结构",
+                "code": "03-1-2"
+              },
+              {
+                "name": "单播、组播与广播",
+                "code": "03-1-3"
+              }
+            ]
+          },
+          {
+            "name": "交换机转发原理",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "MAC 地址表学习",
+                "code": "03-2-1"
+              },
+              {
+                "name": "转发、泛洪与丢弃",
+                "code": "03-2-2"
+              },
+              {
+                "name": "表项老化机制",
+                "code": "03-2-3"
+              }
+            ]
+          },
+          {
+            "name": "冲突域与双工",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "冲突域与广播域",
+                "code": "03-3-1"
+              },
+              {
+                "name": "双工模式与速率",
+                "code": "03-3-2"
+              },
+              {
+                "name": "CSMA/CD 与共享介质",
+                "code": "03-3-3"
+              }
+            ]
+          }
+        ]
       },
       {
         "id": "vlan",
         "name": "VLAN 原理与配置",
         "order": 4,
         "weight": 6,
-        "targetQuestionCount": 10,
+        "targetQuestionCount": 60,
         "knowledgePoints": [
-          "802.1Q",
+          "VLAN 作用与划分方式",
+          "802.1Q 标签格式",
+          "VLAN 范围与保留",
           "Access 接口",
           "Trunk 接口",
-          "Hybrid 接口"
+          "Hybrid 接口",
+          "VLANIF 三层接口",
+          "单臂路由",
+          "VLAN 聚合与 MUX VLAN"
+        ],
+        "sections": [
+          {
+            "name": "VLAN 基础与标签",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "VLAN 作用与划分方式",
+                "code": "04-1-1"
+              },
+              {
+                "name": "802.1Q 标签格式",
+                "code": "04-1-2"
+              },
+              {
+                "name": "VLAN 范围与保留",
+                "code": "04-1-3"
+              }
+            ]
+          },
+          {
+            "name": "接口类型与报文处理",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "Access 接口",
+                "code": "04-2-1"
+              },
+              {
+                "name": "Trunk 接口",
+                "code": "04-2-2"
+              },
+              {
+                "name": "Hybrid 接口",
+                "code": "04-2-3"
+              }
+            ]
+          },
+          {
+            "name": "VLAN 间通信",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "VLANIF 三层接口",
+                "code": "04-3-1"
+              },
+              {
+                "name": "单臂路由",
+                "code": "04-3-2"
+              },
+              {
+                "name": "VLAN 聚合与 MUX VLAN",
+                "code": "04-3-3"
+              }
+            ]
+          }
         ]
       },
       {
@@ -82,52 +331,448 @@
         "name": "生成树原理与配置",
         "order": 5,
         "weight": 5,
-        "targetQuestionCount": 10,
-        "knowledgePoints": ["根桥选举", "端口角色", "STP/RSTP", "二层环路"]
+        "targetQuestionCount": 50,
+        "knowledgePoints": [
+          "二层环路与 STP 作用",
+          "根桥选举",
+          "根端口与指定端口选举",
+          "端口状态与计时器",
+          "RSTP 端口角色",
+          "P/A 快速收敛机制",
+          "边缘端口",
+          "STP 模式与优先级配置",
+          "BPDU 保护",
+          "根桥保护与环路保护"
+        ],
+        "sections": [
+          {
+            "name": "STP 基本原理",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "二层环路与 STP 作用",
+                "code": "05-1-1"
+              },
+              {
+                "name": "根桥选举",
+                "code": "05-1-2"
+              },
+              {
+                "name": "根端口与指定端口选举",
+                "code": "05-1-3"
+              },
+              {
+                "name": "端口状态与计时器",
+                "code": "05-1-4"
+              }
+            ]
+          },
+          {
+            "name": "RSTP 改进机制",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "RSTP 端口角色",
+                "code": "05-2-1"
+              },
+              {
+                "name": "P/A 快速收敛机制",
+                "code": "05-2-2"
+              },
+              {
+                "name": "边缘端口",
+                "code": "05-2-3"
+              }
+            ]
+          },
+          {
+            "name": "STP 配置与保护",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "STP 模式与优先级配置",
+                "code": "05-3-1"
+              },
+              {
+                "name": "BPDU 保护",
+                "code": "05-3-2"
+              },
+              {
+                "name": "根桥保护与环路保护",
+                "code": "05-3-3"
+              }
+            ]
+          }
+        ]
       },
       {
         "id": "link-aggregation",
         "name": "以太网链路聚合",
         "order": 6,
         "weight": 4,
-        "targetQuestionCount": 10,
-        "knowledgePoints": ["Eth-Trunk", "LACP", "负载分担", "成员接口"]
+        "targetQuestionCount": 40,
+        "knowledgePoints": [
+          "聚合模式与工作方式",
+          "LACP 协议",
+          "活动链路选举",
+          "Eth-Trunk 配置",
+          "负载分担方式",
+          "成员接口约束",
+          "堆叠（iStack）原理",
+          "CSS 集群",
+          "堆叠与聚合的差异"
+        ],
+        "sections": [
+          {
+            "name": "链路聚合原理",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "聚合模式与工作方式",
+                "code": "06-1-1"
+              },
+              {
+                "name": "LACP 协议",
+                "code": "06-1-2"
+              },
+              {
+                "name": "活动链路选举",
+                "code": "06-1-3"
+              }
+            ]
+          },
+          {
+            "name": "聚合配置与负载分担",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "Eth-Trunk 配置",
+                "code": "06-2-1"
+              },
+              {
+                "name": "负载分担方式",
+                "code": "06-2-2"
+              },
+              {
+                "name": "成员接口约束",
+                "code": "06-2-3"
+              }
+            ]
+          },
+          {
+            "name": "堆叠与集群",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "堆叠（iStack）原理",
+                "code": "06-3-1"
+              },
+              {
+                "name": "CSS 集群",
+                "code": "06-3-2"
+              },
+              {
+                "name": "堆叠与聚合的差异",
+                "code": "06-3-3"
+              }
+            ]
+          }
+        ]
       },
       {
         "id": "ip-addressing",
         "name": "IP 地址与配置",
         "order": 7,
         "weight": 7,
-        "targetQuestionCount": 10,
-        "knowledgePoints": ["IPv4 地址", "子网划分", "ARP", "ICMP"]
+        "targetQuestionCount": 70,
+        "knowledgePoints": [
+          "IPv4 地址分类",
+          "私有地址与特殊地址",
+          "网络地址与广播地址",
+          "子网掩码与掩码长度",
+          "子网划分计算",
+          "VLSM 与地址规划",
+          "ARP 工作原理",
+          "ICMP 与 ping",
+          "tracert 与路径诊断"
+        ],
+        "sections": [
+          {
+            "name": "IPv4 地址体系",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "IPv4 地址分类",
+                "code": "07-1-1"
+              },
+              {
+                "name": "私有地址与特殊地址",
+                "code": "07-1-2"
+              },
+              {
+                "name": "网络地址与广播地址",
+                "code": "07-1-3"
+              }
+            ]
+          },
+          {
+            "name": "子网划分与掩码",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "子网掩码与掩码长度",
+                "code": "07-2-1"
+              },
+              {
+                "name": "子网划分计算",
+                "code": "07-2-2"
+              },
+              {
+                "name": "VLSM 与地址规划",
+                "code": "07-2-3"
+              }
+            ]
+          },
+          {
+            "name": "地址解析与诊断",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "ARP 工作原理",
+                "code": "07-3-1"
+              },
+              {
+                "name": "ICMP 与 ping",
+                "code": "07-3-2"
+              },
+              {
+                "name": "tracert 与路径诊断",
+                "code": "07-3-3"
+              }
+            ]
+          }
+        ]
       },
       {
         "id": "ip-routing",
         "name": "IP 路由基础",
         "order": 8,
         "weight": 5,
-        "targetQuestionCount": 10,
-        "knowledgePoints": ["路由表", "最长匹配", "静态路由", "默认路由"]
+        "targetQuestionCount": 50,
+        "knowledgePoints": [
+          "路由表字段",
+          "路由优先级",
+          "路由度量值",
+          "静态路由基本配置",
+          "默认路由",
+          "浮动静态路由与备份",
+          "最长匹配原则",
+          "递归查找与路由迭代",
+          "直连路由与接口状态"
+        ],
+        "sections": [
+          {
+            "name": "路由表与选路",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "路由表字段",
+                "code": "08-1-1"
+              },
+              {
+                "name": "路由优先级",
+                "code": "08-1-2"
+              },
+              {
+                "name": "路由度量值",
+                "code": "08-1-3"
+              }
+            ]
+          },
+          {
+            "name": "静态路由配置",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "静态路由基本配置",
+                "code": "08-2-1"
+              },
+              {
+                "name": "默认路由",
+                "code": "08-2-2"
+              },
+              {
+                "name": "浮动静态路由与备份",
+                "code": "08-2-3"
+              }
+            ]
+          },
+          {
+            "name": "转发与查找",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "最长匹配原则",
+                "code": "08-3-1"
+              },
+              {
+                "name": "递归查找与路由迭代",
+                "code": "08-3-2"
+              },
+              {
+                "name": "直连路由与接口状态",
+                "code": "08-3-3"
+              }
+            ]
+          }
+        ]
       },
       {
         "id": "ospf",
         "name": "OSPF 原理与配置",
         "order": 9,
         "weight": 7,
-        "targetQuestionCount": 10,
-        "knowledgePoints": ["Router ID", "邻居状态", "DR/BDR", "单区域 OSPF"]
+        "targetQuestionCount": 70,
+        "knowledgePoints": [
+          "OSPF 特点与协议号",
+          "Router ID 选举",
+          "OSPF 报文类型",
+          "邻居状态机",
+          "网络类型与 DR/BDR",
+          "Hello 与 Dead 定时器",
+          "LSA 类型与作用",
+          "区域与开销计算",
+          "OSPF 配置与验证"
+        ],
+        "sections": [
+          {
+            "name": "OSPF 基础概念",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "OSPF 特点与协议号",
+                "code": "09-1-1"
+              },
+              {
+                "name": "Router ID 选举",
+                "code": "09-1-2"
+              },
+              {
+                "name": "OSPF 报文类型",
+                "code": "09-1-3"
+              }
+            ]
+          },
+          {
+            "name": "邻居与邻接关系",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "邻居状态机",
+                "code": "09-2-1"
+              },
+              {
+                "name": "网络类型与 DR/BDR",
+                "code": "09-2-2"
+              },
+              {
+                "name": "Hello 与 Dead 定时器",
+                "code": "09-2-3"
+              }
+            ]
+          },
+          {
+            "name": "单区域 OSPF 与 LSA",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "LSA 类型与作用",
+                "code": "09-3-1"
+              },
+              {
+                "name": "区域与开销计算",
+                "code": "09-3-2"
+              },
+              {
+                "name": "OSPF 配置与验证",
+                "code": "09-3-3"
+              }
+            ]
+          }
+        ]
       },
       {
         "id": "ipv6",
         "name": "IPv6 地址与配置",
         "order": 10,
         "weight": 5,
-        "targetQuestionCount": 10,
+        "targetQuestionCount": 50,
         "knowledgePoints": [
+          "IPv6 地址结构与简写",
           "IPv6 地址类型",
-          "地址简写",
-          "邻居发现",
-          "IPv6 路由"
+          "EUI-64 接口标识",
+          "NDP 邻居发现",
+          "RS 与 RA 报文",
+          "无状态地址自动配置",
+          "IPv6 静态路由",
+          "OSPFv3 与路由协议",
+          "IPv6 过渡技术"
+        ],
+        "sections": [
+          {
+            "name": "IPv6 地址格式",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "IPv6 地址结构与简写",
+                "code": "10-1-1"
+              },
+              {
+                "name": "IPv6 地址类型",
+                "code": "10-1-2"
+              },
+              {
+                "name": "EUI-64 接口标识",
+                "code": "10-1-3"
+              }
+            ]
+          },
+          {
+            "name": "IPv6 协议机制",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "NDP 邻居发现",
+                "code": "10-2-1"
+              },
+              {
+                "name": "RS 与 RA 报文",
+                "code": "10-2-2"
+              },
+              {
+                "name": "无状态地址自动配置",
+                "code": "10-2-3"
+              }
+            ]
+          },
+          {
+            "name": "IPv6 路由与过渡",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "IPv6 静态路由",
+                "code": "10-3-1"
+              },
+              {
+                "name": "OSPFv3 与路由协议",
+                "code": "10-3-2"
+              },
+              {
+                "name": "IPv6 过渡技术",
+                "code": "10-3-3"
+              }
+            ]
+          }
         ]
       },
       {
@@ -135,44 +780,364 @@
         "name": "ACL 原理与配置",
         "order": 11,
         "weight": 5,
-        "targetQuestionCount": 10,
-        "knowledgePoints": ["基本 ACL", "高级 ACL", "规则顺序", "通配符掩码"]
+        "targetQuestionCount": 50,
+        "knowledgePoints": [
+          "ACL 分类与编号范围",
+          "规则匹配顺序",
+          "匹配动作与默认行为",
+          "通配符掩码规则",
+          "通配符计算",
+          "基本 ACL 应用",
+          "高级 ACL 应用",
+          "ACL 应用方向与位置"
+        ],
+        "sections": [
+          {
+            "name": "ACL 基础",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "ACL 分类与编号范围",
+                "code": "11-1-1"
+              },
+              {
+                "name": "规则匹配顺序",
+                "code": "11-1-2"
+              },
+              {
+                "name": "匹配动作与默认行为",
+                "code": "11-1-3"
+              }
+            ]
+          },
+          {
+            "name": "通配符掩码",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "通配符掩码规则",
+                "code": "11-2-1"
+              },
+              {
+                "name": "通配符计算",
+                "code": "11-2-2"
+              }
+            ]
+          },
+          {
+            "name": "ACL 应用",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "基本 ACL 应用",
+                "code": "11-3-1"
+              },
+              {
+                "name": "高级 ACL 应用",
+                "code": "11-3-2"
+              },
+              {
+                "name": "ACL 应用方向与位置",
+                "code": "11-3-3"
+              }
+            ]
+          }
+        ]
       },
       {
         "id": "aaa",
         "name": "AAA 原理与配置",
         "order": 12,
         "weight": 3,
-        "targetQuestionCount": 10,
-        "knowledgePoints": ["认证", "授权", "计费", "本地用户"]
+        "targetQuestionCount": 30,
+        "knowledgePoints": [
+          "认证（Authentication）",
+          "授权（Authorization）",
+          "计费（Accounting）",
+          "本地认证",
+          "RADIUS 协议",
+          "HWTACACS 协议",
+          "认证模式配置",
+          "域与用户级别",
+          "授权与计费配置"
+        ],
+        "sections": [
+          {
+            "name": "AAA 框架",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "认证（Authentication）",
+                "code": "12-1-1"
+              },
+              {
+                "name": "授权（Authorization）",
+                "code": "12-1-2"
+              },
+              {
+                "name": "计费（Accounting）",
+                "code": "12-1-3"
+              }
+            ]
+          },
+          {
+            "name": "认证方式与服务器",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "本地认证",
+                "code": "12-2-1"
+              },
+              {
+                "name": "RADIUS 协议",
+                "code": "12-2-2"
+              },
+              {
+                "name": "HWTACACS 协议",
+                "code": "12-2-3"
+              }
+            ]
+          },
+          {
+            "name": "AAA 配置与域管理",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "认证模式配置",
+                "code": "12-3-1"
+              },
+              {
+                "name": "域与用户级别",
+                "code": "12-3-2"
+              },
+              {
+                "name": "授权与计费配置",
+                "code": "12-3-3"
+              }
+            ]
+          }
+        ]
       },
       {
         "id": "network-services",
         "name": "网络服务与应用",
         "order": 13,
         "weight": 4,
-        "targetQuestionCount": 10,
-        "knowledgePoints": ["DHCP", "DNS", "FTP/TFTP", "NTP"]
+        "targetQuestionCount": 40,
+        "knowledgePoints": [
+          "DHCP 报文与交互流程",
+          "DHCP 地址池配置",
+          "DHCP 中继",
+          "DNS 解析与配置",
+          "FTP 主动与被动模式",
+          "TFTP 与文件传输",
+          "NTP 分层与工作模式",
+          "NTP 配置",
+          "Telnet 与 HTTP 服务"
+        ],
+        "sections": [
+          {
+            "name": "DHCP 服务",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "DHCP 报文与交互流程",
+                "code": "13-1-1"
+              },
+              {
+                "name": "DHCP 地址池配置",
+                "code": "13-1-2"
+              },
+              {
+                "name": "DHCP 中继",
+                "code": "13-1-3"
+              }
+            ]
+          },
+          {
+            "name": "DNS 与文件传输",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "DNS 解析与配置",
+                "code": "13-2-1"
+              },
+              {
+                "name": "FTP 主动与被动模式",
+                "code": "13-2-2"
+              },
+              {
+                "name": "TFTP 与文件传输",
+                "code": "13-2-3"
+              }
+            ]
+          },
+          {
+            "name": "NTP 与远程服务",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "NTP 分层与工作模式",
+                "code": "13-3-1"
+              },
+              {
+                "name": "NTP 配置",
+                "code": "13-3-2"
+              },
+              {
+                "name": "Telnet 与 HTTP 服务",
+                "code": "13-3-3"
+              }
+            ]
+          }
+        ]
       },
       {
         "id": "nat",
         "name": "NAT 原理与配置",
         "order": 14,
         "weight": 5,
-        "targetQuestionCount": 10,
-        "knowledgePoints": ["静态 NAT", "动态 NAT", "Easy IP", "NAT Server"]
+        "targetQuestionCount": 50,
+        "knowledgePoints": [
+          "静态 NAT 一对一映射",
+          "NAT Server",
+          "NAT 与私网地址",
+          "动态 NAT 地址池",
+          "NAPT 与 Easy IP",
+          "NAT 转换表",
+          "NAT 与 ACL 配合",
+          "NAT 排错",
+          "NAT 典型组网"
+        ],
+        "sections": [
+          {
+            "name": "静态 NAT",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "静态 NAT 一对一映射",
+                "code": "14-1-1"
+              },
+              {
+                "name": "NAT Server",
+                "code": "14-1-2"
+              },
+              {
+                "name": "NAT 与私网地址",
+                "code": "14-1-3"
+              }
+            ]
+          },
+          {
+            "name": "动态 NAT 与 NAPT",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "动态 NAT 地址池",
+                "code": "14-2-1"
+              },
+              {
+                "name": "NAPT 与 Easy IP",
+                "code": "14-2-2"
+              },
+              {
+                "name": "NAT 转换表",
+                "code": "14-2-3"
+              }
+            ]
+          },
+          {
+            "name": "NAT 应用与排错",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "NAT 与 ACL 配合",
+                "code": "14-3-1"
+              },
+              {
+                "name": "NAT 排错",
+                "code": "14-3-2"
+              },
+              {
+                "name": "NAT 典型组网",
+                "code": "14-3-3"
+              }
+            ]
+          }
+        ]
       },
       {
         "id": "data-center",
         "name": "数据中心网络基础",
         "order": 15,
         "weight": 3,
-        "targetQuestionCount": 10,
+        "targetQuestionCount": 30,
         "knowledgePoints": [
-          "数据中心架构",
-          "Leaf-Spine",
-          "东西向流量",
-          "Underlay 与 Overlay"
+          "传统三层 DC 架构",
+          "Leaf-Spine 架构",
+          "东西向与南北向流量",
+          "Underlay 与 Overlay",
+          "VXLAN 原理",
+          "EVPN 概述",
+          "堆叠与 CSS 在 DC 的应用",
+          "M-LAG 跨设备聚合",
+          "Fabric 与自动化部署"
+        ],
+        "sections": [
+          {
+            "name": "数据中心架构",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "传统三层 DC 架构",
+                "code": "15-1-1"
+              },
+              {
+                "name": "Leaf-Spine 架构",
+                "code": "15-1-2"
+              },
+              {
+                "name": "东西向与南北向流量",
+                "code": "15-1-3"
+              }
+            ]
+          },
+          {
+            "name": "Overlay 技术",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "Underlay 与 Overlay",
+                "code": "15-2-1"
+              },
+              {
+                "name": "VXLAN 原理",
+                "code": "15-2-2"
+              },
+              {
+                "name": "EVPN 概述",
+                "code": "15-2-3"
+              }
+            ]
+          },
+          {
+            "name": "数据中心可靠性技术",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "堆叠与 CSS 在 DC 的应用",
+                "code": "15-3-1"
+              },
+              {
+                "name": "M-LAG 跨设备聚合",
+                "code": "15-3-2"
+              },
+              {
+                "name": "Fabric 与自动化部署",
+                "code": "15-3-3"
+              }
+            ]
+          }
         ]
       },
       {
@@ -180,44 +1145,369 @@
         "name": "WLAN 技术基础",
         "order": 16,
         "weight": 3,
-        "targetQuestionCount": 10,
-        "knowledgePoints": ["802.11", "射频基础", "信道", "SSID/BSSID"]
+        "targetQuestionCount": 30,
+        "knowledgePoints": [
+          "802.11 系列标准",
+          "频段与信道",
+          "速率与调制技术",
+          "射频信号与功率",
+          "天线类型与增益",
+          "干扰与信道规划",
+          "SSID 与 BSSID",
+          "BSS 与 ESS",
+          "WLAN 组网元素"
+        ],
+        "sections": [
+          {
+            "name": "802.11 标准与频段",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "802.11 系列标准",
+                "code": "16-1-1"
+              },
+              {
+                "name": "频段与信道",
+                "code": "16-1-2"
+              },
+              {
+                "name": "速率与调制技术",
+                "code": "16-1-3"
+              }
+            ]
+          },
+          {
+            "name": "射频基础",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "射频信号与功率",
+                "code": "16-2-1"
+              },
+              {
+                "name": "天线类型与增益",
+                "code": "16-2-2"
+              },
+              {
+                "name": "干扰与信道规划",
+                "code": "16-2-3"
+              }
+            ]
+          },
+          {
+            "name": "WLAN 基本概念",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "SSID 与 BSSID",
+                "code": "16-3-1"
+              },
+              {
+                "name": "BSS 与 ESS",
+                "code": "16-3-2"
+              },
+              {
+                "name": "WLAN 组网元素",
+                "code": "16-3-3"
+              }
+            ]
+          }
+        ]
       },
       {
         "id": "wlan-architecture",
         "name": "WLAN 组网架构",
         "order": 17,
         "weight": 3,
-        "targetQuestionCount": 10,
-        "knowledgePoints": ["AC 与 AP", "Fat/Fit AP", "CAPWAP", "转发模式"]
+        "targetQuestionCount": 30,
+        "knowledgePoints": [
+          "AP 与 AC 的角色分工",
+          "Fat AP 与 Fit AP",
+          "AC 组网方式",
+          "CAPWAP 隧道与端口",
+          "控制通道与数据通道",
+          "AP 发现 AC 的方式",
+          "直接转发（本地转发）",
+          "隧道转发（集中转发）",
+          "转发模式的选择"
+        ],
+        "sections": [
+          {
+            "name": "设备角色与形态",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "AP 与 AC 的角色分工",
+                "code": "17-1-1"
+              },
+              {
+                "name": "Fat AP 与 Fit AP",
+                "code": "17-1-2"
+              },
+              {
+                "name": "AC 组网方式",
+                "code": "17-1-3"
+              }
+            ]
+          },
+          {
+            "name": "CAPWAP 协议",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "CAPWAP 隧道与端口",
+                "code": "17-2-1"
+              },
+              {
+                "name": "控制通道与数据通道",
+                "code": "17-2-2"
+              },
+              {
+                "name": "AP 发现 AC 的方式",
+                "code": "17-2-3"
+              }
+            ]
+          },
+          {
+            "name": "转发模式",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "直接转发（本地转发）",
+                "code": "17-3-1"
+              },
+              {
+                "name": "隧道转发（集中转发）",
+                "code": "17-3-2"
+              },
+              {
+                "name": "转发模式的选择",
+                "code": "17-3-3"
+              }
+            ]
+          }
+        ]
       },
       {
         "id": "wlan-operation",
         "name": "WLAN 工作原理与配置",
         "order": 18,
         "weight": 4,
-        "targetQuestionCount": 10,
-        "knowledgePoints": ["AP 上线", "STA 接入", "漫游", "WLAN 安全"]
+        "targetQuestionCount": 40,
+        "knowledgePoints": [
+          "AP 上线与注册",
+          "AP 组与模板",
+          "AP 上线失败排查",
+          "STA 扫描与关联",
+          "认证与密钥协商",
+          "WLAN 漫游",
+          "WEP 与 WPA/WPA2",
+          "802.1X 认证",
+          "PSK 与 Portal 认证"
+        ],
+        "sections": [
+          {
+            "name": "AP 上线流程",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "AP 上线与注册",
+                "code": "18-1-1"
+              },
+              {
+                "name": "AP 组与模板",
+                "code": "18-1-2"
+              },
+              {
+                "name": "AP 上线失败排查",
+                "code": "18-1-3"
+              }
+            ]
+          },
+          {
+            "name": "STA 接入与漫游",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "STA 扫描与关联",
+                "code": "18-2-1"
+              },
+              {
+                "name": "认证与密钥协商",
+                "code": "18-2-2"
+              },
+              {
+                "name": "WLAN 漫游",
+                "code": "18-2-3"
+              }
+            ]
+          },
+          {
+            "name": "WLAN 安全",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "WEP 与 WPA/WPA2",
+                "code": "18-3-1"
+              },
+              {
+                "name": "802.1X 认证",
+                "code": "18-3-2"
+              },
+              {
+                "name": "PSK 与 Portal 认证",
+                "code": "18-3-3"
+              }
+            ]
+          }
+        ]
       },
       {
         "id": "device-management",
         "name": "网络设备管理",
         "order": 19,
         "weight": 4,
-        "targetQuestionCount": 10,
-        "knowledgePoints": ["SNMP", "日志", "NTP", "远程管理"]
+        "targetQuestionCount": 40,
+        "knowledgePoints": [
+          "Telnet 管理",
+          "SSH 管理",
+          "用户界面与访问控制",
+          "SNMP 版本与架构",
+          "MIB 与 OID",
+          "Trap 与告警",
+          "Syslog 日志",
+          "日志级别",
+          "NTP 时间同步"
+        ],
+        "sections": [
+          {
+            "name": "远程管理",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "Telnet 管理",
+                "code": "19-1-1"
+              },
+              {
+                "name": "SSH 管理",
+                "code": "19-1-2"
+              },
+              {
+                "name": "用户界面与访问控制",
+                "code": "19-1-3"
+              }
+            ]
+          },
+          {
+            "name": "SNMP 网络管理",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "SNMP 版本与架构",
+                "code": "19-2-1"
+              },
+              {
+                "name": "MIB 与 OID",
+                "code": "19-2-2"
+              },
+              {
+                "name": "Trap 与告警",
+                "code": "19-2-3"
+              }
+            ]
+          },
+          {
+            "name": "日志与时间同步",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "Syslog 日志",
+                "code": "19-3-1"
+              },
+              {
+                "name": "日志级别",
+                "code": "19-3-2"
+              },
+              {
+                "name": "NTP 时间同步",
+                "code": "19-3-3"
+              }
+            ]
+          }
+        ]
       },
       {
         "id": "automation",
         "name": "网络编程自动化",
         "order": 20,
         "weight": 4,
-        "targetQuestionCount": 10,
+        "targetQuestionCount": 40,
         "knowledgePoints": [
-          "Python 基础",
-          "JSON/YAML",
-          "NETCONF/YANG",
-          "REST API"
+          "JSON 格式",
+          "YAML 格式",
+          "XML 与数据模型",
+          "Python 基础语法",
+          "字符串与正则处理",
+          "常用网络自动化库",
+          "NETCONF 协议",
+          "YANG 模型",
+          "RESTful API"
+        ],
+        "sections": [
+          {
+            "name": "数据格式",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "JSON 格式",
+                "code": "20-1-1"
+              },
+              {
+                "name": "YAML 格式",
+                "code": "20-1-2"
+              },
+              {
+                "name": "XML 与数据模型",
+                "code": "20-1-3"
+              }
+            ]
+          },
+          {
+            "name": "Python 编程基础",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "Python 基础语法",
+                "code": "20-2-1"
+              },
+              {
+                "name": "字符串与正则处理",
+                "code": "20-2-2"
+              },
+              {
+                "name": "常用网络自动化库",
+                "code": "20-2-3"
+              }
+            ]
+          },
+          {
+            "name": "自动化接口与协议",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "NETCONF 协议",
+                "code": "20-3-1"
+              },
+              {
+                "name": "YANG 模型",
+                "code": "20-3-2"
+              },
+              {
+                "name": "RESTful API",
+                "code": "20-3-3"
+              }
+            ]
+          }
         ]
       },
       {
@@ -225,18 +1515,151 @@
         "name": "网络故障排除",
         "order": 21,
         "weight": 4,
-        "targetQuestionCount": 10,
-        "knowledgePoints": ["分层排障", "连通性检查", "配置核对", "故障定位"]
+        "targetQuestionCount": 40,
+        "knowledgePoints": [
+          "分层排障法",
+          "分而治之与对比法",
+          "常用排障工具",
+          "VLAN 与接口故障",
+          "STP 与环路故障",
+          "链路聚合故障",
+          "路由故障排查",
+          "OSPF 邻居故障",
+          "NAT 与 ACL 故障"
+        ],
+        "sections": [
+          {
+            "name": "排障方法论",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "分层排障法",
+                "code": "21-1-1"
+              },
+              {
+                "name": "分而治之与对比法",
+                "code": "21-1-2"
+              },
+              {
+                "name": "常用排障工具",
+                "code": "21-1-3"
+              }
+            ]
+          },
+          {
+            "name": "二层故障排查",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "VLAN 与接口故障",
+                "code": "21-2-1"
+              },
+              {
+                "name": "STP 与环路故障",
+                "code": "21-2-2"
+              },
+              {
+                "name": "链路聚合故障",
+                "code": "21-2-3"
+              }
+            ]
+          },
+          {
+            "name": "三层与业务故障",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "路由故障排查",
+                "code": "21-3-1"
+              },
+              {
+                "name": "OSPF 邻居故障",
+                "code": "21-3-2"
+              },
+              {
+                "name": "NAT 与 ACL 故障",
+                "code": "21-3-3"
+              }
+            ]
+          }
+        ]
       },
       {
         "id": "campus-design",
         "name": "园区网络典型组网方案",
         "order": 22,
         "weight": 4,
-        "targetQuestionCount": 10,
-        "knowledgePoints": ["接入/汇聚/核心", "网关部署", "可靠性", "园区安全"]
+        "targetQuestionCount": 40,
+        "knowledgePoints": [
+          "接入层设计",
+          "汇聚层与核心层",
+          "出口与广域网",
+          "网关部署位置",
+          "VRRP 网关冗余",
+          "链路与设备冗余",
+          "园区接入安全",
+          "无线覆盖规划",
+          "园区运维与监控"
+        ],
+        "sections": [
+          {
+            "name": "网络层次设计",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "name": "接入层设计",
+                "code": "22-1-1"
+              },
+              {
+                "name": "汇聚层与核心层",
+                "code": "22-1-2"
+              },
+              {
+                "name": "出口与广域网",
+                "code": "22-1-3"
+              }
+            ]
+          },
+          {
+            "name": "网关与可靠性设计",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "name": "网关部署位置",
+                "code": "22-2-1"
+              },
+              {
+                "name": "VRRP 网关冗余",
+                "code": "22-2-2"
+              },
+              {
+                "name": "链路与设备冗余",
+                "code": "22-2-3"
+              }
+            ]
+          },
+          {
+            "name": "园区安全与运维",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "name": "园区接入安全",
+                "code": "22-3-1"
+              },
+              {
+                "name": "无线覆盖规划",
+                "code": "22-3-2"
+              },
+              {
+                "name": "园区运维与监控",
+                "code": "22-3-3"
+              }
+            ]
+          }
+        ]
       }
-    ]
+    ],
+    "blueprintNote": "targetQuestionCount = 章节权重 × 10，合计 1000 题；knowledgePoints 为三级知识点扁平视图，sections 为章节树（二级小节 + 三级知识点）。"
   },
   "banks": [
     {

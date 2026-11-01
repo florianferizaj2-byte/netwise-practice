@@ -6,15 +6,20 @@ import { pathToFileURL } from 'node:url';
 
 export async function mobileModules(t, storage) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'aceexam-mobile-test-'));
+  // 单元测试固定单一地址：不探测 IPv6 直连，也不产生额外的版本请求。
+  process.env.EXPO_PUBLIC_API_URL ||= 'https://aceexam.top/api';
+  delete process.env.EXPO_PUBLIC_API_FALLBACK_URL;
   const packageInfo = fs.readFileSync(new URL('../mobile/package.json', import.meta.url), 'utf8');
   fs.writeFileSync(path.join(dir, 'package.json.mjs'), `export default ${packageInfo};`);
   const files = [
     'api/resourceCache',
     'api/cachePolicy',
     'api/transport',
+    'api/endpoint',
     'api/studyTypes',
     'api/communityMessages',
     'api/client',
+    'api/versionPolicy',
     'version',
   ];
   for (const file of files) {

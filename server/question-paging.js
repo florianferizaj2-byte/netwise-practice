@@ -6,7 +6,7 @@ function rank(id, seed) {
   return hash >>> 0;
 }
 
-export function questionPage(questions, { offset = 0, limit = 40, seed } = {}) {
+export function questionPage(questions, { offset = 0, limit = 40, seed, anchor } = {}) {
   const ordered = seed
     ? questions
         .map((question) => ({ question, rank: rank(question.id, seed) }))
@@ -16,9 +16,11 @@ export function questionPage(questions, { offset = 0, limit = 40, seed } = {}) {
         )
         .map(({ question }) => question)
     : questions;
+  if (anchor) { const index = ordered.findIndex(q => q.id === anchor); if (index >= 0) offset = Math.floor(index / limit) * limit; }
   const items = ordered.slice(offset, offset + limit);
   return {
     items,
+    offset,
     total: ordered.length,
     nextOffset:
       offset + items.length < ordered.length ? offset + items.length : null,

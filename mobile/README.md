@@ -1,8 +1,12 @@
 # 考匠移动端
 
-这是考匠的 Expo / React Native 移动端。Android 当前源码版本为 v0.4.7；继续复用现有 Node 后端，通过移动端 Bearer 会话连接生产 API。
+这是考匠的 Expo / React Native 移动端。Android 当前源码版本为 v1.0.10（versionCode 43）；继续复用现有 Node 后端，通过移动端 Bearer 会话连接生产 API。
 
-[v0.4.7 本地 APK](kaojiang-v0.4.7.apk) · [SHA-256](kaojiang-v0.4.7.apk.sha256) · [本地构建说明](../docs/release-v0.4.7.md)。新增三条路线选择，均到终点跳回起点循环；68 项原生测试、正式签名及安装包内容检查通过，真机待验证。
+[v1.0.10 APK](../public/downloads/kaojiang-v1.0.10.apk) · [SHA-256](../public/downloads/kaojiang-v1.0.10.apk.sha256) · [更新说明](../docs/release-v1.0.10.md)。公告关闭后按实际内容去重；语音包设置页支持本地下载、试听、音量与场景候选。客户端设置保存在本机，不修改全局后台配置。
+
+[v1.0.4 APK](kaojiang-v1.0.4.apk) · [SHA-256](kaojiang-v1.0.4.apk.sha256) · [更新说明](../docs/release-v1.0.4.md)。新增答对提示音与轻短震动，可在设置独立开关并调整音色、音量和震动强度。本地构建已验证，不等同于 GitHub 发布、部署或手机实装。
+
+[v1.0.3 APK](kaojiang-v1.0.3.apk) · [SHA-256](kaojiang-v1.0.3.apk.sha256) · [更新说明](../docs/release-v1.0.3.md)。积分余额与记录、每日签到、关于和紧凑错题页已实现；正式签名、字体、原生安全区与页面代码内容检查通过。新增正余额可发起、结算允许负分和普通练习即时反馈。GitHub 发布与线上部署、真机安装分别验收。
 
 [v0.4.6 APK](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.6/kaojiang-v0.4.6.apk) · [SHA-256](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.6/kaojiang-v0.4.6.apk.sha256) · [发布页](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v0.4.6) · [构建说明](../docs/release-v0.4.6.md) · [服务器更新步骤](../docs/DEPLOY-v0.4.6.md)。
 
@@ -33,15 +37,17 @@ npm start
 
 - Android 真机安装 Expo Go，扫描终端二维码；
 - 已安装 Android Studio 时，可以按 `a` 启动 Android 模拟器；
-- 需要连接真实后端时，复制 `.env.example` 为 `.env.local`，将 `EXPO_PUBLIC_API_URL` 改成电脑在局域网中的地址。
+- 需要连接真实后端时，复制 `.env.example` 为 `.env.local`，将 `EXPO_PUBLIC_API_URL` 改成电脑在局域网中的地址；`EXPO_PUBLIC_API_FALLBACK_URL` 可留空。
 
-App 保留开发期“进入预览模式”入口，用于查看动画和页面结构；真实登录通过移动端 Bearer 会话接入，证书选择后会请求首页学习数据。当前构建目标为 `kaojiang-v0.4.6.apk`。启动时会后台请求 `/api/mobile/version`，低于服务端最低版本的旧 App 会强制显示最新版下载页；旧客户端调用受保护的移动端 API 也会被服务端拒绝并返回下载地址。
+正式包默认首选 IPv6 直连 `https://direct.aceexam.top:8443/api`（该域名只有 AAAA 记录），首个请求前会用 `/api/mobile/version` 探测一次，连不上则整场会话自动回落到 `https://aceexam.top/api`；网页端始终使用当前站点同源地址，不参与回落。
+
+App 保留开发期“进入预览模式”入口，用于查看动画和页面结构；真实登录通过移动端 Bearer 会话接入，证书选择后会请求首页学习数据。当前构建目标为 `kaojiang-v1.0.3.apk`。启动时会后台请求 `/api/mobile/version`，低于服务端最低版本的旧 App 会强制显示最新版下载页；旧客户端调用受保护的移动端 API 也会被服务端拒绝并返回下载地址。
 
 版本过旧时，Android App 会优先提供应用内下载并调起系统安装器；系统仍会要求用户确认安装。页面同时保留浏览器下载入口，应用内下载失败或设备限制安装时可以使用浏览器方式。登录会话会保存在本机，正常关闭并重新打开 App 不需要重复登录；主动退出登录会清除本机会话。答题页采用紧凑布局，举报题目入口位于题干卡片右下角的三角感叹号图标。
 
 ## 正式签名
 
-Release 构建使用专用正式证书，Expo 重新生成 Android 工程后仍会应用该配置。配置位置和应用指纹见 [正式签名说明](RELEASE_SIGNING.md)。本次本地构建为 `kaojiang-v0.4.7.apk` / versionCode 31，已核验与 v0.4.6 签名一致。本地构建不等于手机覆盖安装已经验证。
+Release 构建使用专用正式证书，Expo 重新生成 Android 工程后仍会应用该配置。配置位置和应用指纹见 [正式签名说明](RELEASE_SIGNING.md)。本次本地构建为 `kaojiang-v1.0.3.apk` / versionCode 36，已核验与 v1.0.1 的正式签名一致。本地构建不等于手机覆盖安装已经验证。
 
 ## v0.4.6 本地更新
 
@@ -142,6 +148,7 @@ Release 构建使用专用正式证书，Expo 重新生成 Android 工程后仍�
 ## v0.3.1 更新
 
 - 交互音效：轻柔、清脆、醇厚三种音色，可关闭、调整音量或试听，偏好保存在本机。
+- Android 答对反馈：在“我的 → 设置 → 答对反馈”分别开关提示音与震动，选择音色、音量和轻短震动强度，并体验当前设置。普通练习与本次专项作答答对时触发一次；答错、回看、后台同步及考试不触发。配置保存在本机，音效离线预载、不等待网络；本地 v1.0.4 APK 已包含该功能，已发布的 v1.0.3 安装包不包含这次改动。
 - 底部新增 VIP 套餐展示，社区和排行榜位于“我的 → 考匠社区”；支付及实时会员额度尚未接入。
 - 已共享的 AI 题组会计入提交题目排行榜。
 - Android versionCode 为 15，沿用现有安装包签名以支持覆盖升级。
@@ -195,3 +202,21 @@ node test/mobile.e2e.js
 ```
 
 浏览器回归验证模块返回不重复取题、作答保留、统计更新和断网重启读取缓存；它不能代替 Android/iOS 真机的帧率、后台恢复和安装验证。
+
+## 后端语音包预留
+
+[语音包 API](../docs/VOICE-PACKS-API.md) 提供入场、答对及连对里程碑的配置、上传、发布和读取协议。App 源码已包含 typed API、轮次/作答防重复与精确连对选音器；尚未绑定远程语音播放，当前 v1.0.4 APK 保持内置提示音。素材到位后需接入预载播放器、重新打包并实机验收。
+
+## v1.0.5 下载语音包
+
+在设置的「答对反馈 → 刷题语音包」下载后台发布的音频包，校验完成后选择使用。整包音频存入应用私有目录，作答时只播放本地资源；未下载、离线且无本地包、损坏或未就绪时不阻塞答题，保留内置提示音。选择的已下载包支持离线播放；支持显示大小、进度、更新与删除。
+
+实际 Android 版本由 `modules/app-runtime` 读取 PackageManager，不能只修改 package.json 或关于页标签冒充新 APK。详见 [v1.0.5 说明](../docs/release-v1.0.5.md)。
+
+## v1.0.6 连错与候选池
+
+支持连续答错 1–5 档（第5档覆盖之后的连续错误），答对清零。后台可逐场景设置固定单条或在所选候选池中随机，手机仅播放已下载包中的本地素材。后台发布新配置后，要在手机更新语音包；详见 [v1.0.6](../docs/release-v1.0.6.md)。
+
+## v1.0.7 重播修复
+
+音频正常播完仍可 seekTo(0) 重播，不能只凭 Android 播放器的直接 isLoaded 标志判断为未加载。内置答对、按钮音和下载语音共用 `audioPlaybackState.ts`；每个新作答不被间隔吞掉，重复回执、离开页面和后台取消规则保留。无需重新下载已有语音包。入场语音仅在实际题目加载并可见后触发，练习目录、加载页和空页保持静默；上一题/下一题不重复入场。

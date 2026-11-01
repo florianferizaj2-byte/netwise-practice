@@ -20,11 +20,12 @@ test("Sichuan scope reuses one canonical question with separate classifications 
   const all = bundledQuestions();
   const scoped = all.filter((question) => question.certificates.includes(certificateId));
   const shared = scoped.filter((question) => question.certificateScopes?.[certificateId]);
-  // 100 道原创练习 + 1020 道章节强化练习 + 45 道共用题 + 61 道西昌学院 2011 真题（用户提供）+ 138 道 2026-10 考点补强
+  // 100 道原创练习 + 1020 道章节强化练习 + 138 道考点补强 + 45 道共用题 + 61 道西昌学院 2011 真题（用户提供）
   assert.equal(scoped.length, 1364);
   assert.equal(shared.length, 45);
   assert.equal(scoped.filter((question) => question.id.startsWith("sc-upgrading-computer-")).length, 100);
   assert.equal(scoped.filter((question) => question.id.startsWith("sc-upgrading-supplement-")).length, 1020);
+  assert.equal(scoped.filter((question) => question.id.startsWith("sc-2610-")).length, 138);
   assert.equal(scoped.filter((question) => question.id.startsWith("sc-2011-xichang-")).length, 61);
   assert.equal(scoped.filter((question) => question.id.startsWith("sc-2610-")).length, 138);
   assert.equal(all.filter((question) => question.id === originalId).length, 1);

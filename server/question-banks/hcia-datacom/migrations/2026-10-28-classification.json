@@ -1,0 +1,2339 @@
+{
+ "schemaVersion": 1,
+ "certificateId": "hcia-datacom",
+ "appliedAt": "2026-10-28",
+ "note": "HCIA 题库重建三级知识体系后，用于迁移用户历史记录中的分类标签与知识点 ID。不修改任何作答答案字母。",
+ "optionOrderChanged": false,
+ "questions": {
+  "hcia-v2-01-osi-transport": {
+   "chapter": "网络参考模型",
+   "knowledgeSection": "协议分层与封装",
+   "knowledgePoint": "OSI 七层模型"
+  },
+  "hcia-v2-01-pdu-frame": {
+   "chapter": "网络参考模型",
+   "knowledgeSection": "协议分层与封装",
+   "knowledgePoint": "数据封装与解封装"
+  },
+  "hcia-v2-01-tcp-reliable": {
+   "chapter": "网络参考模型",
+   "knowledgeSection": "传输层协议",
+   "knowledgePoint": "TCP 可靠传输机制"
+  },
+  "hcia-v2-01-encapsulation-order": {
+   "chapter": "网络参考模型",
+   "knowledgeSection": "协议分层与封装",
+   "knowledgePoint": "数据封装与解封装"
+  },
+  "hcia-v2-02-system-view": {
+   "chapter": "华为网络设备操作系统",
+   "knowledgeSection": "VRP 命令行基础",
+   "knowledgePoint": "命令行视图与切换"
+  },
+  "hcia-v2-02-view-prompt": {
+   "chapter": "华为网络设备操作系统",
+   "knowledgeSection": "VRP 命令行基础",
+   "knowledgePoint": "命令行视图与切换"
+  },
+  "hcia-v2-02-save-config": {
+   "chapter": "华为网络设备操作系统",
+   "knowledgeSection": "VRP 命令行基础",
+   "knowledgePoint": "配置文件管理"
+  },
+  "hcia-v2-02-ssh-management": {
+   "chapter": "华为网络设备操作系统",
+   "knowledgeSection": "设备登录与权限",
+   "knowledgePoint": "Telnet 与 SSH 远程登录"
+  },
+  "hcia-v2-03-mac-learning": {
+   "chapter": "以太网交换基础",
+   "knowledgeSection": "交换机转发原理",
+   "knowledgePoint": "MAC 地址表学习"
+  },
+  "hcia-v2-03-unknown-unicast": {
+   "chapter": "以太网交换基础",
+   "knowledgeSection": "交换机转发原理",
+   "knowledgePoint": "转发、泛洪与丢弃"
+  },
+  "hcia-v2-03-broadcast-domain": {
+   "chapter": "以太网交换基础",
+   "knowledgeSection": "冲突域与双工",
+   "knowledgePoint": "冲突域与广播域"
+  },
+  "hcia-v2-03-full-duplex": {
+   "chapter": "以太网交换基础",
+   "knowledgeSection": "以太网帧与 MAC 地址",
+   "knowledgePoint": "以太网帧结构"
+  },
+  "hcia-v2-04-dot1q-vid": {
+   "chapter": "VLAN 原理与配置",
+   "knowledgeSection": "VLAN 基础与标签",
+   "knowledgePoint": "802.1Q 标签格式"
+  },
+  "hcia-v2-04-access-port": {
+   "chapter": "VLAN 原理与配置",
+   "knowledgeSection": "接口类型与报文处理",
+   "knowledgePoint": "Access 接口"
+  },
+  "hcia-v2-04-trunk-port": {
+   "chapter": "VLAN 原理与配置",
+   "knowledgeSection": "接口类型与报文处理",
+   "knowledgePoint": "Trunk 接口"
+  },
+  "hcia-v2-04-hybrid-port": {
+   "chapter": "VLAN 原理与配置",
+   "knowledgeSection": "接口类型与报文处理",
+   "knowledgePoint": "Hybrid 接口"
+  },
+  "hcia-v2-05-root-bridge": {
+   "chapter": "生成树原理与配置",
+   "knowledgeSection": "STP 基本原理",
+   "knowledgePoint": "根桥选举"
+  },
+  "hcia-v2-05-root-port": {
+   "chapter": "生成树原理与配置",
+   "knowledgeSection": "RSTP 改进机制",
+   "knowledgePoint": "RSTP 端口角色"
+  },
+  "hcia-v2-05-loop-prevention": {
+   "chapter": "生成树原理与配置",
+   "knowledgeSection": "STP 基本原理",
+   "knowledgePoint": "二层环路与 STP 作用"
+  },
+  "hcia-v2-05-rstp": {
+   "chapter": "生成树原理与配置",
+   "knowledgeSection": "STP 基本原理",
+   "knowledgePoint": "根桥选举"
+  },
+  "hcia-v2-06-eth-trunk-purpose": {
+   "chapter": "以太网链路聚合",
+   "knowledgeSection": "聚合配置与负载分担",
+   "knowledgePoint": "Eth-Trunk 配置"
+  },
+  "hcia-v2-06-lacp": {
+   "chapter": "以太网链路聚合",
+   "knowledgeSection": "链路聚合原理",
+   "knowledgePoint": "LACP 协议"
+  },
+  "hcia-v2-06-member-consistency": {
+   "chapter": "以太网链路聚合",
+   "knowledgeSection": "聚合配置与负载分担",
+   "knowledgePoint": "成员接口约束"
+  },
+  "hcia-v2-06-hashing": {
+   "chapter": "以太网链路聚合",
+   "knowledgeSection": "聚合配置与负载分担",
+   "knowledgePoint": "负载分担方式"
+  },
+  "hcia-v2-07-ipv4-24-hosts": {
+   "chapter": "IP 地址与配置",
+   "knowledgeSection": "子网划分与掩码",
+   "knowledgePoint": "子网划分计算"
+  },
+  "hcia-v2-07-arp-purpose": {
+   "chapter": "IP 地址与配置",
+   "knowledgeSection": "地址解析与诊断",
+   "knowledgePoint": "ARP 工作原理"
+  },
+  "hcia-v2-07-ping-icmp": {
+   "chapter": "IP 地址与配置",
+   "knowledgeSection": "地址解析与诊断",
+   "knowledgePoint": "ICMP 与 ping"
+  },
+  "hcia-v2-07-same-subnet": {
+   "chapter": "IP 地址与配置",
+   "knowledgeSection": "IPv4 地址体系",
+   "knowledgePoint": "IPv4 地址分类"
+  },
+  "hcia-v2-08-longest-prefix": {
+   "chapter": "IP 路由基础",
+   "knowledgeSection": "转发与查找",
+   "knowledgePoint": "最长匹配原则"
+  },
+  "hcia-v2-08-default-route": {
+   "chapter": "IP 路由基础",
+   "knowledgeSection": "静态路由配置",
+   "knowledgePoint": "默认路由"
+  },
+  "hcia-v2-08-direct-route": {
+   "chapter": "IP 路由基础",
+   "knowledgeSection": "路由表与选路",
+   "knowledgePoint": "路由表字段"
+  },
+  "hcia-v2-08-static-next-hop": {
+   "chapter": "IP 路由基础",
+   "knowledgeSection": "静态路由配置",
+   "knowledgePoint": "静态路由基本配置"
+  },
+  "hcia-v2-09-ip-protocol": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "单区域 OSPF 与 LSA",
+   "knowledgePoint": "OSPF 配置与验证"
+  },
+  "hcia-v2-09-router-id": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "OSPF 基础概念",
+   "knowledgePoint": "Router ID 选举"
+  },
+  "hcia-v2-09-backbone": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "单区域 OSPF 与 LSA",
+   "knowledgePoint": "区域与开销计算"
+  },
+  "hcia-v2-09-priority-zero": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "邻居与邻接关系",
+   "knowledgePoint": "网络类型与 DR/BDR"
+  },
+  "hcia-v2-10-address-length": {
+   "chapter": "IPv6 地址与配置",
+   "knowledgeSection": "IPv6 地址格式",
+   "knowledgePoint": "IPv6 地址类型"
+  },
+  "hcia-v2-10-link-local": {
+   "chapter": "IPv6 地址与配置",
+   "knowledgeSection": "IPv6 地址格式",
+   "knowledgePoint": "IPv6 地址类型"
+  },
+  "hcia-v2-10-no-broadcast": {
+   "chapter": "IPv6 地址与配置",
+   "knowledgeSection": "IPv6 协议机制",
+   "knowledgePoint": "NDP 邻居发现"
+  },
+  "hcia-v2-10-compression": {
+   "chapter": "IPv6 地址与配置",
+   "knowledgeSection": "IPv6 地址格式",
+   "knowledgePoint": "IPv6 地址结构与简写"
+  },
+  "hcia-v2-11-first-match": {
+   "chapter": "ACL 原理与配置",
+   "knowledgeSection": "ACL 基础",
+   "knowledgePoint": "规则匹配顺序"
+  },
+  "hcia-v2-11-basic-acl": {
+   "chapter": "ACL 原理与配置",
+   "knowledgeSection": "ACL 应用",
+   "knowledgePoint": "基本 ACL 应用"
+  },
+  "hcia-v2-11-advanced-acl": {
+   "chapter": "ACL 原理与配置",
+   "knowledgeSection": "ACL 应用",
+   "knowledgePoint": "高级 ACL 应用"
+  },
+  "hcia-v2-11-wildcard": {
+   "chapter": "ACL 原理与配置",
+   "knowledgeSection": "通配符掩码",
+   "knowledgePoint": "通配符掩码规则"
+  },
+  "hcia-v2-12-authentication": {
+   "chapter": "AAA 原理与配置",
+   "knowledgeSection": "AAA 框架",
+   "knowledgePoint": "认证（Authentication）"
+  },
+  "hcia-v2-12-authorization": {
+   "chapter": "AAA 原理与配置",
+   "knowledgeSection": "AAA 框架",
+   "knowledgePoint": "授权（Authorization）"
+  },
+  "hcia-v2-12-accounting": {
+   "chapter": "AAA 原理与配置",
+   "knowledgeSection": "AAA 框架",
+   "knowledgePoint": "计费（Accounting）"
+  },
+  "hcia-v2-12-local-user": {
+   "chapter": "AAA 原理与配置",
+   "knowledgeSection": "认证方式与服务器",
+   "knowledgePoint": "本地认证"
+  },
+  "hcia-v2-13-dhcp-dora": {
+   "chapter": "网络服务与应用",
+   "knowledgeSection": "DHCP 服务",
+   "knowledgePoint": "DHCP 报文与交互流程"
+  },
+  "hcia-v2-13-dns": {
+   "chapter": "网络服务与应用",
+   "knowledgeSection": "DNS 与文件传输",
+   "knowledgePoint": "DNS 解析与配置"
+  },
+  "hcia-v2-13-ntp": {
+   "chapter": "网络服务与应用",
+   "knowledgeSection": "NTP 与远程服务",
+   "knowledgePoint": "NTP 分层与工作模式"
+  },
+  "hcia-v2-13-tftp": {
+   "chapter": "网络服务与应用",
+   "knowledgeSection": "DNS 与文件传输",
+   "knowledgePoint": "TFTP 与文件传输"
+  },
+  "hcia-v2-14-static-nat": {
+   "chapter": "NAT 原理与配置",
+   "knowledgeSection": "静态 NAT",
+   "knowledgePoint": "静态 NAT 一对一映射"
+  },
+  "hcia-v2-14-dynamic-nat": {
+   "chapter": "NAT 原理与配置",
+   "knowledgeSection": "动态 NAT 与 NAPT",
+   "knowledgePoint": "动态 NAT 地址池"
+  },
+  "hcia-v2-14-easy-ip": {
+   "chapter": "NAT 原理与配置",
+   "knowledgeSection": "动态 NAT 与 NAPT",
+   "knowledgePoint": "NAPT 与 Easy IP"
+  },
+  "hcia-v2-14-nat-server": {
+   "chapter": "NAT 原理与配置",
+   "knowledgeSection": "静态 NAT",
+   "knowledgePoint": "NAT Server"
+  },
+  "hcia-v2-15-leaf-spine": {
+   "chapter": "数据中心网络基础",
+   "knowledgeSection": "数据中心架构",
+   "knowledgePoint": "Leaf-Spine 架构"
+  },
+  "hcia-v2-15-east-west": {
+   "chapter": "数据中心网络基础",
+   "knowledgeSection": "数据中心架构",
+   "knowledgePoint": "东西向与南北向流量"
+  },
+  "hcia-v2-15-underlay": {
+   "chapter": "数据中心网络基础",
+   "knowledgeSection": "Overlay 技术",
+   "knowledgePoint": "Underlay 与 Overlay"
+  },
+  "hcia-v2-15-overlay": {
+   "chapter": "数据中心网络基础",
+   "knowledgeSection": "Overlay 技术",
+   "knowledgePoint": "Underlay 与 Overlay"
+  },
+  "hcia-v2-16-ssid": {
+   "chapter": "WLAN 技术基础",
+   "knowledgeSection": "WLAN 基本概念",
+   "knowledgePoint": "SSID 与 BSSID"
+  },
+  "hcia-v2-16-bssid": {
+   "chapter": "WLAN 技术基础",
+   "knowledgeSection": "WLAN 基本概念",
+   "knowledgePoint": "SSID 与 BSSID"
+  },
+  "hcia-v2-16-24g-channels": {
+   "chapter": "WLAN 技术基础",
+   "knowledgeSection": "802.11 标准与频段",
+   "knowledgePoint": "频段与信道"
+  },
+  "hcia-v2-16-csma-ca": {
+   "chapter": "WLAN 技术基础",
+   "knowledgeSection": "802.11 标准与频段",
+   "knowledgePoint": "802.11 系列标准"
+  },
+  "hcia-v2-17-ac-role": {
+   "chapter": "WLAN 组网架构",
+   "knowledgeSection": "设备角色与形态",
+   "knowledgePoint": "AP 与 AC 的角色分工"
+  },
+  "hcia-v2-17-fit-ap": {
+   "chapter": "WLAN 组网架构",
+   "knowledgeSection": "设备角色与形态",
+   "knowledgePoint": "Fat AP 与 Fit AP"
+  },
+  "hcia-v2-17-capwap": {
+   "chapter": "WLAN 组网架构",
+   "knowledgeSection": "CAPWAP 协议",
+   "knowledgePoint": "CAPWAP 隧道与端口"
+  },
+  "hcia-v2-17-forward-mode": {
+   "chapter": "WLAN 组网架构",
+   "knowledgeSection": "转发模式",
+   "knowledgePoint": "转发模式的选择"
+  },
+  "hcia-v2-18-ap-online": {
+   "chapter": "WLAN 工作原理与配置",
+   "knowledgeSection": "AP 上线流程",
+   "knowledgePoint": "AP 上线与注册"
+  },
+  "hcia-v2-18-sta-access": {
+   "chapter": "WLAN 工作原理与配置",
+   "knowledgeSection": "STA 接入与漫游",
+   "knowledgePoint": "STA 扫描与关联"
+  },
+  "hcia-v2-18-roaming": {
+   "chapter": "WLAN 工作原理与配置",
+   "knowledgeSection": "STA 接入与漫游",
+   "knowledgePoint": "WLAN 漫游"
+  },
+  "hcia-v2-18-wpa-security": {
+   "chapter": "WLAN 工作原理与配置",
+   "knowledgeSection": "WLAN 安全",
+   "knowledgePoint": "WEP 与 WPA/WPA2"
+  },
+  "hcia-v2-19-snmp": {
+   "chapter": "网络设备管理",
+   "knowledgeSection": "SNMP 网络管理",
+   "knowledgePoint": "SNMP 版本与架构"
+  },
+  "hcia-v2-19-syslog": {
+   "chapter": "网络设备管理",
+   "knowledgeSection": "日志与时间同步",
+   "knowledgePoint": "Syslog 日志"
+  },
+  "hcia-v2-19-time-sync": {
+   "chapter": "网络设备管理",
+   "knowledgeSection": "日志与时间同步",
+   "knowledgePoint": "NTP 时间同步"
+  },
+  "hcia-v2-19-secure-remote": {
+   "chapter": "网络设备管理",
+   "knowledgeSection": "远程管理",
+   "knowledgePoint": "SSH 管理"
+  },
+  "hcia-v2-20-json-object": {
+   "chapter": "网络编程自动化",
+   "knowledgeSection": "数据格式",
+   "knowledgePoint": "JSON 格式"
+  },
+  "hcia-v2-20-python-list": {
+   "chapter": "网络编程自动化",
+   "knowledgeSection": "Python 编程基础",
+   "knowledgePoint": "Python 基础语法"
+  },
+  "hcia-v2-20-netconf-yang": {
+   "chapter": "网络编程自动化",
+   "knowledgeSection": "自动化接口与协议",
+   "knowledgePoint": "YANG 模型"
+  },
+  "hcia-v2-20-rest-api": {
+   "chapter": "网络编程自动化",
+   "knowledgeSection": "自动化接口与协议",
+   "knowledgePoint": "RESTful API"
+  },
+  "hcia-v2-21-interface-down": {
+   "chapter": "网络故障排除",
+   "knowledgeSection": "排障方法论",
+   "knowledgePoint": "分层排障法"
+  },
+  "hcia-v2-21-gateway-ping": {
+   "chapter": "网络故障排除",
+   "knowledgeSection": "排障方法论",
+   "knowledgePoint": "常用排障工具"
+  },
+  "hcia-v2-21-traceroute": {
+   "chapter": "网络故障排除",
+   "knowledgeSection": "排障方法论",
+   "knowledgePoint": "常用排障工具"
+  },
+  "hcia-v2-21-method": {
+   "chapter": "网络故障排除",
+   "knowledgeSection": "排障方法论",
+   "knowledgePoint": "分而治之与对比法"
+  },
+  "hcia-v2-22-access-layer": {
+   "chapter": "园区网络典型组网方案",
+   "knowledgeSection": "网络层次设计",
+   "knowledgePoint": "接入层设计"
+  },
+  "hcia-v2-22-core-layer": {
+   "chapter": "园区网络典型组网方案",
+   "knowledgeSection": "网络层次设计",
+   "knowledgePoint": "汇聚层与核心层"
+  },
+  "hcia-v2-22-gateway-placement": {
+   "chapter": "园区网络典型组网方案",
+   "knowledgeSection": "网关与可靠性设计",
+   "knowledgePoint": "网关部署位置"
+  },
+  "hcia-v2-22-segmentation": {
+   "chapter": "园区网络典型组网方案",
+   "knowledgeSection": "园区安全与运维",
+   "knowledgePoint": "园区接入安全"
+  },
+  "hcia-v2-extra-01-tcp-handshake": {
+   "chapter": "网络参考模型",
+   "knowledgeSection": "传输层协议",
+   "knowledgePoint": "TCP 连接管理"
+  },
+  "hcia-v2-extra-01-udp-dns": {
+   "chapter": "网络参考模型",
+   "knowledgeSection": "应用层协议与端口",
+   "knowledgePoint": "常用协议与端口号"
+  },
+  "hcia-v2-extra-01-tcp-sequence": {
+   "chapter": "网络参考模型",
+   "knowledgeSection": "传输层协议",
+   "knowledgePoint": "TCP 可靠传输机制"
+  },
+  "hcia-v2-extra-01-decapsulation": {
+   "chapter": "网络参考模型",
+   "knowledgeSection": "协议分层与封装",
+   "knowledgePoint": "数据封装与解封装"
+  },
+  "hcia-v2-extra-01-ip-layer": {
+   "chapter": "网络参考模型",
+   "knowledgeSection": "协议分层与封装",
+   "knowledgePoint": "TCP/IP 四层模型"
+  },
+  "hcia-v2-extra-01-port-demux": {
+   "chapter": "网络参考模型",
+   "knowledgeSection": "应用层协议与端口",
+   "knowledgePoint": "常用协议与端口号"
+  },
+  "hcia-v2-extra-02-display-current": {
+   "chapter": "华为网络设备操作系统",
+   "knowledgeSection": "VRP 命令行基础",
+   "knowledgePoint": "配置文件管理"
+  },
+  "hcia-v2-extra-02-undo-command": {
+   "chapter": "华为网络设备操作系统",
+   "knowledgeSection": "VRP 命令行基础",
+   "knowledgePoint": "命令行视图与切换"
+  },
+  "hcia-v2-extra-02-quit-view": {
+   "chapter": "华为网络设备操作系统",
+   "knowledgeSection": "VRP 命令行基础",
+   "knowledgePoint": "命令行视图与切换"
+  },
+  "hcia-v2-extra-02-interface-view": {
+   "chapter": "华为网络设备操作系统",
+   "knowledgeSection": "VRP 命令行基础",
+   "knowledgePoint": "命令行视图与切换"
+  },
+  "hcia-v2-extra-02-save-startup": {
+   "chapter": "华为网络设备操作系统",
+   "knowledgeSection": "VRP 命令行基础",
+   "knowledgePoint": "配置文件管理"
+  },
+  "hcia-v2-extra-02-stelnet-prereq": {
+   "chapter": "华为网络设备操作系统",
+   "knowledgeSection": "设备登录与权限",
+   "knowledgePoint": "Telnet 与 SSH 远程登录"
+  },
+  "hcia-v2-extra-03-known-unicast": {
+   "chapter": "以太网交换基础",
+   "knowledgeSection": "交换机转发原理",
+   "knowledgePoint": "转发、泛洪与丢弃"
+  },
+  "hcia-v2-extra-03-broadcast-mac": {
+   "chapter": "以太网交换基础",
+   "knowledgeSection": "以太网帧与 MAC 地址",
+   "knowledgePoint": "以太网帧结构"
+  },
+  "hcia-v2-extra-03-mac-aging": {
+   "chapter": "以太网交换基础",
+   "knowledgeSection": "交换机转发原理",
+   "knowledgePoint": "MAC 地址表学习"
+  },
+  "hcia-v2-extra-03-collision-domain": {
+   "chapter": "以太网交换基础",
+   "knowledgeSection": "冲突域与双工",
+   "knowledgePoint": "冲突域与广播域"
+  },
+  "hcia-v2-extra-03-frame-fcs": {
+   "chapter": "以太网交换基础",
+   "knowledgeSection": "以太网帧与 MAC 地址",
+   "knowledgePoint": "以太网帧结构"
+  },
+  "hcia-v2-extra-03-source-refresh": {
+   "chapter": "以太网交换基础",
+   "knowledgeSection": "交换机转发原理",
+   "knowledgePoint": "MAC 地址表学习"
+  },
+  "hcia-v2-extra-04-pvid-ingress": {
+   "chapter": "VLAN 原理与配置",
+   "knowledgeSection": "接口类型与报文处理",
+   "knowledgePoint": "Access 接口"
+  },
+  "hcia-v2-extra-04-trunk-allow": {
+   "chapter": "VLAN 原理与配置",
+   "knowledgeSection": "接口类型与报文处理",
+   "knowledgePoint": "Trunk 接口"
+  },
+  "hcia-v2-extra-04-inter-vlan": {
+   "chapter": "VLAN 原理与配置",
+   "knowledgeSection": "VLAN 基础与标签",
+   "knowledgePoint": "VLAN 范围与保留"
+  },
+  "hcia-v2-extra-04-tag-position": {
+   "chapter": "VLAN 原理与配置",
+   "knowledgeSection": "VLAN 基础与标签",
+   "knowledgePoint": "802.1Q 标签格式"
+  },
+  "hcia-v2-extra-04-hybrid-untagged": {
+   "chapter": "VLAN 原理与配置",
+   "knowledgeSection": "接口类型与报文处理",
+   "knowledgePoint": "Hybrid 接口"
+  },
+  "hcia-v2-extra-04-vlan-broadcast": {
+   "chapter": "VLAN 原理与配置",
+   "knowledgeSection": "VLAN 基础与标签",
+   "knowledgePoint": "VLAN 范围与保留"
+  },
+  "hcia-v2-extra-05-bpdu": {
+   "chapter": "生成树原理与配置",
+   "knowledgeSection": "STP 基本原理",
+   "knowledgePoint": "根桥选举"
+  },
+  "hcia-v2-extra-05-path-cost": {
+   "chapter": "生成树原理与配置",
+   "knowledgeSection": "RSTP 改进机制",
+   "knowledgePoint": "RSTP 端口角色"
+  },
+  "hcia-v2-extra-05-designated-port": {
+   "chapter": "生成树原理与配置",
+   "knowledgeSection": "RSTP 改进机制",
+   "knowledgePoint": "RSTP 端口角色"
+  },
+  "hcia-v2-extra-05-bridge-priority": {
+   "chapter": "生成树原理与配置",
+   "knowledgeSection": "STP 基本原理",
+   "knowledgePoint": "根桥选举"
+  },
+  "hcia-v2-extra-05-edge-port": {
+   "chapter": "生成树原理与配置",
+   "knowledgeSection": "STP 基本原理",
+   "knowledgePoint": "根端口与指定端口选举"
+  },
+  "hcia-v2-extra-05-loop-symptom": {
+   "chapter": "生成树原理与配置",
+   "knowledgeSection": "STP 基本原理",
+   "knowledgePoint": "二层环路与 STP 作用"
+  },
+  "hcia-v2-extra-06-manual-mode": {
+   "chapter": "以太网链路聚合",
+   "knowledgeSection": "聚合配置与负载分担",
+   "knowledgePoint": "Eth-Trunk 配置"
+  },
+  "hcia-v2-extra-06-member-failure": {
+   "chapter": "以太网链路聚合",
+   "knowledgeSection": "聚合配置与负载分担",
+   "knowledgePoint": "成员接口约束"
+  },
+  "hcia-v2-extra-06-logical-config": {
+   "chapter": "以太网链路聚合",
+   "knowledgeSection": "聚合配置与负载分担",
+   "knowledgePoint": "Eth-Trunk 配置"
+  },
+  "hcia-v2-extra-06-lacp-active": {
+   "chapter": "以太网链路聚合",
+   "knowledgeSection": "链路聚合原理",
+   "knowledgePoint": "LACP 协议"
+  },
+  "hcia-v2-extra-06-bandwidth-limit": {
+   "chapter": "以太网链路聚合",
+   "knowledgeSection": "聚合配置与负载分担",
+   "knowledgePoint": "负载分担方式"
+  },
+  "hcia-v2-extra-06-peer-consistency": {
+   "chapter": "以太网链路聚合",
+   "knowledgeSection": "聚合配置与负载分担",
+   "knowledgePoint": "成员接口约束"
+  },
+  "hcia-v2-extra-07-private-10": {
+   "chapter": "IP 地址与配置",
+   "knowledgeSection": "IPv4 地址体系",
+   "knowledgePoint": "IPv4 地址分类"
+  },
+  "hcia-v2-extra-07-slash-26": {
+   "chapter": "IP 地址与配置",
+   "knowledgeSection": "子网划分与掩码",
+   "knowledgePoint": "子网划分计算"
+  },
+  "hcia-v2-extra-07-network-27": {
+   "chapter": "IP 地址与配置",
+   "knowledgeSection": "子网划分与掩码",
+   "knowledgePoint": "子网划分计算"
+  },
+  "hcia-v2-extra-07-broadcast-28": {
+   "chapter": "IP 地址与配置",
+   "knowledgeSection": "子网划分与掩码",
+   "knowledgePoint": "子网划分计算"
+  },
+  "hcia-v2-extra-07-gateway-purpose": {
+   "chapter": "IP 地址与配置",
+   "knowledgeSection": "IPv4 地址体系",
+   "knowledgePoint": "IPv4 地址分类"
+  },
+  "hcia-v2-extra-07-arp-cache": {
+   "chapter": "IP 地址与配置",
+   "knowledgeSection": "地址解析与诊断",
+   "knowledgePoint": "ARP 工作原理"
+  },
+  "hcia-v2-extra-08-route-type": {
+   "chapter": "IP 路由基础",
+   "knowledgeSection": "路由表与选路",
+   "knowledgePoint": "路由表字段"
+  },
+  "hcia-v2-extra-08-static-preference": {
+   "chapter": "IP 路由基础",
+   "knowledgeSection": "静态路由配置",
+   "knowledgePoint": "静态路由基本配置"
+  },
+  "hcia-v2-extra-08-recursive-lookup": {
+   "chapter": "IP 路由基础",
+   "knowledgeSection": "路由表与选路",
+   "knowledgePoint": "路由表字段"
+  },
+  "hcia-v2-extra-08-route-blackhole": {
+   "chapter": "IP 路由基础",
+   "knowledgeSection": "转发与查找",
+   "knowledgePoint": "最长匹配原则"
+  },
+  "hcia-v2-extra-08-default-use": {
+   "chapter": "IP 路由基础",
+   "knowledgeSection": "静态路由配置",
+   "knowledgePoint": "默认路由"
+  },
+  "hcia-v2-extra-08-static-discard": {
+   "chapter": "IP 路由基础",
+   "knowledgeSection": "静态路由配置",
+   "knowledgePoint": "静态路由基本配置"
+  },
+  "hcia-v2-extra-09-hello-purpose": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "单区域 OSPF 与 LSA",
+   "knowledgePoint": "区域与开销计算"
+  },
+  "hcia-v2-extra-09-area-match": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "单区域 OSPF 与 LSA",
+   "knowledgePoint": "区域与开销计算"
+  },
+  "hcia-v2-extra-09-dead-timer": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "邻居与邻接关系",
+   "knowledgePoint": "邻居状态机"
+  },
+  "hcia-v2-extra-09-dr-role": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "邻居与邻接关系",
+   "knowledgePoint": "网络类型与 DR/BDR"
+  },
+  "hcia-v2-extra-09-lsa-db": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "单区域 OSPF 与 LSA",
+   "knowledgePoint": "区域与开销计算"
+  },
+  "hcia-v2-extra-09-passive-interface": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "单区域 OSPF 与 LSA",
+   "knowledgePoint": "区域与开销计算"
+  },
+  "hcia-v2-extra-10-global-unicast": {
+   "chapter": "IPv6 地址与配置",
+   "knowledgeSection": "IPv6 地址格式",
+   "knowledgePoint": "IPv6 地址类型"
+  },
+  "hcia-v2-extra-10-loopback": {
+   "chapter": "IPv6 地址与配置",
+   "knowledgeSection": "IPv6 地址格式",
+   "knowledgePoint": "IPv6 地址类型"
+  },
+  "hcia-v2-extra-10-ndp": {
+   "chapter": "IPv6 地址与配置",
+   "knowledgeSection": "IPv6 协议机制",
+   "knowledgePoint": "NDP 邻居发现"
+  },
+  "hcia-v2-extra-10-slaac": {
+   "chapter": "IPv6 地址与配置",
+   "knowledgeSection": "IPv6 协议机制",
+   "knowledgePoint": "无状态地址自动配置"
+  },
+  "hcia-v2-extra-10-prefix-64": {
+   "chapter": "IPv6 地址与配置",
+   "knowledgeSection": "IPv6 地址格式",
+   "knowledgePoint": "IPv6 地址结构与简写"
+  },
+  "hcia-v2-extra-10-multicast-allnodes": {
+   "chapter": "IPv6 地址与配置",
+   "knowledgeSection": "IPv6 协议机制",
+   "knowledgePoint": "NDP 邻居发现"
+  },
+  "hcia-v2-extra-11-implicit-deny": {
+   "chapter": "ACL 原理与配置",
+   "knowledgeSection": "ACL 基础",
+   "knowledgePoint": "规则匹配顺序"
+  },
+  "hcia-v2-extra-11-acl-direction": {
+   "chapter": "ACL 原理与配置",
+   "knowledgeSection": "ACL 应用",
+   "knowledgePoint": "高级 ACL 应用"
+  },
+  "hcia-v2-extra-11-wildcard-255": {
+   "chapter": "ACL 原理与配置",
+   "knowledgeSection": "通配符掩码",
+   "knowledgePoint": "通配符掩码规则"
+  },
+  "hcia-v2-extra-11-source-first": {
+   "chapter": "ACL 原理与配置",
+   "knowledgeSection": "ACL 基础",
+   "knowledgePoint": "规则匹配顺序"
+  },
+  "hcia-v2-extra-11-protocol-port": {
+   "chapter": "ACL 原理与配置",
+   "knowledgeSection": "ACL 应用",
+   "knowledgePoint": "高级 ACL 应用"
+  },
+  "hcia-v2-extra-11-acl-test": {
+   "chapter": "ACL 原理与配置",
+   "knowledgeSection": "ACL 基础",
+   "knowledgePoint": "ACL 分类与编号范围"
+  },
+  "hcia-v2-extra-12-radius": {
+   "chapter": "AAA 原理与配置",
+   "knowledgeSection": "AAA 框架",
+   "knowledgePoint": "认证（Authentication）"
+  },
+  "hcia-v2-extra-12-tacacs": {
+   "chapter": "AAA 原理与配置",
+   "knowledgeSection": "AAA 框架",
+   "knowledgePoint": "授权（Authorization）"
+  },
+  "hcia-v2-extra-12-auth-order": {
+   "chapter": "AAA 原理与配置",
+   "knowledgeSection": "AAA 框架",
+   "knowledgePoint": "认证（Authentication）"
+  },
+  "hcia-v2-extra-12-least-privilege": {
+   "chapter": "AAA 原理与配置",
+   "knowledgeSection": "AAA 框架",
+   "knowledgePoint": "授权（Authorization）"
+  },
+  "hcia-v2-extra-12-accounting-log": {
+   "chapter": "AAA 原理与配置",
+   "knowledgeSection": "AAA 框架",
+   "knowledgePoint": "计费（Accounting）"
+  },
+  "hcia-v2-extra-12-credential-policy": {
+   "chapter": "AAA 原理与配置",
+   "knowledgeSection": "认证方式与服务器",
+   "knowledgePoint": "本地认证"
+  },
+  "hcia-v2-extra-13-dhcp-relay": {
+   "chapter": "网络服务与应用",
+   "knowledgeSection": "DHCP 服务",
+   "knowledgePoint": "DHCP 报文与交互流程"
+  },
+  "hcia-v2-extra-13-dhcp-gateway": {
+   "chapter": "网络服务与应用",
+   "knowledgeSection": "DHCP 服务",
+   "knowledgePoint": "DHCP 报文与交互流程"
+  },
+  "hcia-v2-extra-13-dns-cache": {
+   "chapter": "网络服务与应用",
+   "knowledgeSection": "DNS 与文件传输",
+   "knowledgePoint": "DNS 解析与配置"
+  },
+  "hcia-v2-extra-13-ntp-stratum": {
+   "chapter": "网络服务与应用",
+   "knowledgeSection": "NTP 与远程服务",
+   "knowledgePoint": "NTP 分层与工作模式"
+  },
+  "hcia-v2-extra-13-ftp-control": {
+   "chapter": "网络服务与应用",
+   "knowledgeSection": "DNS 与文件传输",
+   "knowledgePoint": "FTP 主动与被动模式"
+  },
+  "hcia-v2-extra-13-tftp-risk": {
+   "chapter": "网络服务与应用",
+   "knowledgeSection": "DNS 与文件传输",
+   "knowledgePoint": "TFTP 与文件传输"
+  },
+  "hcia-v2-extra-14-pat": {
+   "chapter": "NAT 原理与配置",
+   "knowledgeSection": "动态 NAT 与 NAPT",
+   "knowledgePoint": "NAPT 与 Easy IP"
+  },
+  "hcia-v2-extra-14-inside-outside": {
+   "chapter": "NAT 原理与配置",
+   "knowledgeSection": "静态 NAT",
+   "knowledgePoint": "NAT 与私网地址"
+  },
+  "hcia-v2-extra-14-nat-session": {
+   "chapter": "NAT 原理与配置",
+   "knowledgeSection": "动态 NAT 与 NAPT",
+   "knowledgePoint": "动态 NAT 地址池"
+  },
+  "hcia-v2-extra-14-server-port": {
+   "chapter": "NAT 原理与配置",
+   "knowledgeSection": "静态 NAT",
+   "knowledgePoint": "NAT Server"
+  },
+  "hcia-v2-extra-14-nat-limit": {
+   "chapter": "NAT 原理与配置",
+   "knowledgeSection": "静态 NAT",
+   "knowledgePoint": "NAT Server"
+  },
+  "hcia-v2-extra-14-easy-ip-interface": {
+   "chapter": "NAT 原理与配置",
+   "knowledgeSection": "动态 NAT 与 NAPT",
+   "knowledgePoint": "NAPT 与 Easy IP"
+  },
+  "hcia-v2-extra-15-spine-connect": {
+   "chapter": "数据中心网络基础",
+   "knowledgeSection": "数据中心架构",
+   "knowledgePoint": "Leaf-Spine 架构"
+  },
+  "hcia-v2-extra-15-ecmp": {
+   "chapter": "数据中心网络基础",
+   "knowledgeSection": "数据中心架构",
+   "knowledgePoint": "Leaf-Spine 架构"
+  },
+  "hcia-v2-extra-15-north-south": {
+   "chapter": "数据中心网络基础",
+   "knowledgeSection": "数据中心架构",
+   "knowledgePoint": "东西向与南北向流量"
+  },
+  "hcia-v2-extra-15-overlay-vtep": {
+   "chapter": "数据中心网络基础",
+   "knowledgeSection": "Overlay 技术",
+   "knowledgePoint": "Underlay 与 Overlay"
+  },
+  "hcia-v2-extra-15-underlay-requirement": {
+   "chapter": "数据中心网络基础",
+   "knowledgeSection": "Overlay 技术",
+   "knowledgePoint": "Underlay 与 Overlay"
+  },
+  "hcia-v2-extra-15-dc-reliability": {
+   "chapter": "数据中心网络基础",
+   "knowledgeSection": "数据中心架构",
+   "knowledgePoint": "传统三层 DC 架构"
+  },
+  "hcia-v2-extra-16-rssi": {
+   "chapter": "WLAN 技术基础",
+   "knowledgeSection": "射频基础",
+   "knowledgePoint": "射频信号与功率"
+  },
+  "hcia-v2-extra-16-sni": {
+   "chapter": "WLAN 技术基础",
+   "knowledgeSection": "射频基础",
+   "knowledgePoint": "射频信号与功率"
+  },
+  "hcia-v2-extra-16-channel-width": {
+   "chapter": "WLAN 技术基础",
+   "knowledgeSection": "802.11 标准与频段",
+   "knowledgePoint": "频段与信道"
+  },
+  "hcia-v2-extra-16-5g-benefit": {
+   "chapter": "WLAN 技术基础",
+   "knowledgeSection": "802.11 标准与频段",
+   "knowledgePoint": "802.11 系列标准"
+  },
+  "hcia-v2-extra-16-hidden-node": {
+   "chapter": "WLAN 技术基础",
+   "knowledgeSection": "802.11 标准与频段",
+   "knowledgePoint": "802.11 系列标准"
+  },
+  "hcia-v2-extra-16-bssid-ssid": {
+   "chapter": "WLAN 技术基础",
+   "knowledgeSection": "WLAN 基本概念",
+   "knowledgePoint": "SSID 与 BSSID"
+  },
+  "hcia-v2-extra-17-fat-ap": {
+   "chapter": "WLAN 组网架构",
+   "knowledgeSection": "设备角色与形态",
+   "knowledgePoint": "Fat AP 与 Fit AP"
+  },
+  "hcia-v2-extra-17-ac-discovery": {
+   "chapter": "WLAN 组网架构",
+   "knowledgeSection": "设备角色与形态",
+   "knowledgePoint": "Fat AP 与 Fit AP"
+  },
+  "hcia-v2-extra-17-tunnel-forward": {
+   "chapter": "WLAN 组网架构",
+   "knowledgeSection": "转发模式",
+   "knowledgePoint": "转发模式的选择"
+  },
+  "hcia-v2-extra-17-direct-forward": {
+   "chapter": "WLAN 组网架构",
+   "knowledgeSection": "转发模式",
+   "knowledgePoint": "转发模式的选择"
+  },
+  "hcia-v2-extra-17-ac-redundancy": {
+   "chapter": "WLAN 组网架构",
+   "knowledgeSection": "设备角色与形态",
+   "knowledgePoint": "Fat AP 与 Fit AP"
+  },
+  "hcia-v2-extra-17-ap-management-vlan": {
+   "chapter": "WLAN 组网架构",
+   "knowledgeSection": "CAPWAP 协议",
+   "knowledgePoint": "CAPWAP 隧道与端口"
+  },
+  "hcia-v2-extra-18-auth-assoc": {
+   "chapter": "WLAN 工作原理与配置",
+   "knowledgeSection": "STA 接入与漫游",
+   "knowledgePoint": "STA 扫描与关联"
+  },
+  "hcia-v2-extra-18-ssid-vlan": {
+   "chapter": "WLAN 工作原理与配置",
+   "knowledgeSection": "STA 接入与漫游",
+   "knowledgePoint": "WLAN 漫游"
+  },
+  "hcia-v2-extra-18-roam-rssi": {
+   "chapter": "WLAN 工作原理与配置",
+   "knowledgeSection": "STA 接入与漫游",
+   "knowledgePoint": "WLAN 漫游"
+  },
+  "hcia-v2-extra-18-wlan-security-psk": {
+   "chapter": "WLAN 工作原理与配置",
+   "knowledgeSection": "WLAN 安全",
+   "knowledgePoint": "WEP 与 WPA/WPA2"
+  },
+  "hcia-v2-extra-18-enterprise-auth": {
+   "chapter": "WLAN 工作原理与配置",
+   "knowledgeSection": "WLAN 安全",
+   "knowledgePoint": "802.1X 认证"
+  },
+  "hcia-v2-extra-18-ap-radio": {
+   "chapter": "WLAN 工作原理与配置",
+   "knowledgeSection": "AP 上线流程",
+   "knowledgePoint": "AP 上线与注册"
+  },
+  "hcia-v2-extra-19-snmpv3": {
+   "chapter": "网络设备管理",
+   "knowledgeSection": "SNMP 网络管理",
+   "knowledgePoint": "SNMP 版本与架构"
+  },
+  "hcia-v2-extra-19-trap": {
+   "chapter": "网络设备管理",
+   "knowledgeSection": "SNMP 网络管理",
+   "knowledgePoint": "SNMP 版本与架构"
+  },
+  "hcia-v2-extra-19-log-level": {
+   "chapter": "网络设备管理",
+   "knowledgeSection": "日志与时间同步",
+   "knowledgePoint": "Syslog 日志"
+  },
+  "hcia-v2-extra-19-config-backup": {
+   "chapter": "网络设备管理",
+   "knowledgeSection": "远程管理",
+   "knowledgePoint": "SSH 管理"
+  },
+  "hcia-v2-extra-19-mgmt-plane": {
+   "chapter": "网络设备管理",
+   "knowledgeSection": "远程管理",
+   "knowledgePoint": "用户界面与访问控制"
+  },
+  "hcia-v2-extra-19-syslog-time": {
+   "chapter": "网络设备管理",
+   "knowledgeSection": "日志与时间同步",
+   "knowledgePoint": "Syslog 日志"
+  },
+  "hcia-v2-extra-20-json-array": {
+   "chapter": "网络编程自动化",
+   "knowledgeSection": "数据格式",
+   "knowledgePoint": "JSON 格式"
+  },
+  "hcia-v2-extra-20-yaml-indent": {
+   "chapter": "网络编程自动化",
+   "knowledgeSection": "数据格式",
+   "knowledgePoint": "YAML 格式"
+  },
+  "hcia-v2-extra-20-python-dict": {
+   "chapter": "网络编程自动化",
+   "knowledgeSection": "Python 编程基础",
+   "knowledgePoint": "Python 基础语法"
+  },
+  "hcia-v2-extra-20-api-idempotent": {
+   "chapter": "网络编程自动化",
+   "knowledgeSection": "自动化接口与协议",
+   "knowledgePoint": "RESTful API"
+  },
+  "hcia-v2-extra-20-automation-validate": {
+   "chapter": "网络编程自动化",
+   "knowledgeSection": "自动化接口与协议",
+   "knowledgePoint": "NETCONF 协议"
+  },
+  "hcia-v2-extra-20-yang-model": {
+   "chapter": "网络编程自动化",
+   "knowledgeSection": "自动化接口与协议",
+   "knowledgePoint": "YANG 模型"
+  },
+  "hcia-v2-extra-21-scope-first": {
+   "chapter": "网络故障排除",
+   "knowledgeSection": "排障方法论",
+   "knowledgePoint": "分层排障法"
+  },
+  "hcia-v2-extra-21-physical-check": {
+   "chapter": "网络故障排除",
+   "knowledgeSection": "排障方法论",
+   "knowledgePoint": "分层排障法"
+  },
+  "hcia-v2-extra-21-vlan-check": {
+   "chapter": "网络故障排除",
+   "knowledgeSection": "排障方法论",
+   "knowledgePoint": "分而治之与对比法"
+  },
+  "hcia-v2-extra-21-route-check": {
+   "chapter": "网络故障排除",
+   "knowledgeSection": "排障方法论",
+   "knowledgePoint": "常用排障工具"
+  },
+  "hcia-v2-extra-21-change-correlation": {
+   "chapter": "网络故障排除",
+   "knowledgeSection": "排障方法论",
+   "knowledgePoint": "分层排障法"
+  },
+  "hcia-v2-extra-21-evidence-record": {
+   "chapter": "网络故障排除",
+   "knowledgeSection": "排障方法论",
+   "knowledgePoint": "分层排障法"
+  },
+  "hcia-v2-extra-22-distribution-role": {
+   "chapter": "园区网络典型组网方案",
+   "knowledgeSection": "网络层次设计",
+   "knowledgePoint": "接入层设计"
+  },
+  "hcia-v2-extra-22-gateway-redundancy": {
+   "chapter": "园区网络典型组网方案",
+   "knowledgeSection": "网关与可靠性设计",
+   "knowledgePoint": "网关部署位置"
+  },
+  "hcia-v2-extra-22-access-security": {
+   "chapter": "园区网络典型组网方案",
+   "knowledgeSection": "园区安全与运维",
+   "knowledgePoint": "园区接入安全"
+  },
+  "hcia-v2-extra-22-guest-isolation": {
+   "chapter": "园区网络典型组网方案",
+   "knowledgeSection": "园区安全与运维",
+   "knowledgePoint": "园区接入安全"
+  },
+  "hcia-v2-extra-22-uplink-redundancy": {
+   "chapter": "园区网络典型组网方案",
+   "knowledgeSection": "网关与可靠性设计",
+   "knowledgePoint": "链路与设备冗余"
+  },
+  "hcia-v2-extra-22-segmentation-benefit": {
+   "chapter": "园区网络典型组网方案",
+   "knowledgeSection": "园区安全与运维",
+   "knowledgePoint": "园区接入安全"
+  },
+  "hcia-h12-811-recall-001": {
+   "chapter": "网络参考模型",
+   "knowledgeSection": "协议分层与封装",
+   "knowledgePoint": "OSI 七层模型"
+  },
+  "hcia-h12-811-recall-002": {
+   "chapter": "网络参考模型",
+   "knowledgeSection": "协议分层与封装",
+   "knowledgePoint": "OSI 七层模型"
+  },
+  "hcia-h12-811-recall-003": {
+   "chapter": "网络参考模型",
+   "knowledgeSection": "协议分层与封装",
+   "knowledgePoint": "TCP/IP 四层模型"
+  },
+  "hcia-h12-811-recall-004": {
+   "chapter": "网络参考模型",
+   "knowledgeSection": "传输层协议",
+   "knowledgePoint": "UDP 特性与应用"
+  },
+  "hcia-h12-811-recall-005": {
+   "chapter": "以太网交换基础",
+   "knowledgeSection": "交换机转发原理",
+   "knowledgePoint": "转发、泛洪与丢弃"
+  },
+  "hcia-h12-811-recall-006": {
+   "chapter": "以太网交换基础",
+   "knowledgeSection": "交换机转发原理",
+   "knowledgePoint": "转发、泛洪与丢弃"
+  },
+  "hcia-h12-811-recall-007": {
+   "chapter": "IP 地址与配置",
+   "knowledgeSection": "地址解析与诊断",
+   "knowledgePoint": "ICMP 与 ping"
+  },
+  "hcia-h12-811-recall-008": {
+   "chapter": "网络参考模型",
+   "knowledgeSection": "传输层协议",
+   "knowledgePoint": "TCP 连接管理"
+  },
+  "hcia-h12-811-recall-009": {
+   "chapter": "网络参考模型",
+   "knowledgeSection": "传输层协议",
+   "knowledgePoint": "TCP 连接管理"
+  },
+  "hcia-h12-811-recall-010": {
+   "chapter": "网络参考模型",
+   "knowledgeSection": "协议分层与封装",
+   "knowledgePoint": "TCP/IP 四层模型"
+  },
+  "hcia-h12-811-recall-011": {
+   "chapter": "IP 地址与配置",
+   "knowledgeSection": "地址解析与诊断",
+   "knowledgePoint": "ICMP 与 ping"
+  },
+  "hcia-h12-811-recall-012": {
+   "chapter": "以太网交换基础",
+   "knowledgeSection": "交换机转发原理",
+   "knowledgePoint": "转发、泛洪与丢弃"
+  },
+  "hcia-h12-811-recall-013": {
+   "chapter": "VLAN 原理与配置",
+   "knowledgeSection": "VLAN 基础与标签",
+   "knowledgePoint": "802.1Q 标签格式"
+  },
+  "hcia-h12-811-recall-014": {
+   "chapter": "VLAN 原理与配置",
+   "knowledgeSection": "VLAN 基础与标签",
+   "knowledgePoint": "VLAN 作用与划分方式"
+  },
+  "hcia-h12-811-recall-015": {
+   "chapter": "VLAN 原理与配置",
+   "knowledgeSection": "接口类型与报文处理",
+   "knowledgePoint": "Trunk 接口"
+  },
+  "hcia-h12-811-recall-016": {
+   "chapter": "VLAN 原理与配置",
+   "knowledgeSection": "接口类型与报文处理",
+   "knowledgePoint": "Hybrid 接口"
+  },
+  "hcia-h12-811-recall-017": {
+   "chapter": "以太网交换基础",
+   "knowledgeSection": "交换机转发原理",
+   "knowledgePoint": "转发、泛洪与丢弃"
+  },
+  "hcia-h12-811-recall-018": {
+   "chapter": "以太网交换基础",
+   "knowledgeSection": "交换机转发原理",
+   "knowledgePoint": "MAC 地址表学习"
+  },
+  "hcia-h12-811-recall-019": {
+   "chapter": "ACL 原理与配置",
+   "knowledgeSection": "ACL 应用",
+   "knowledgePoint": "高级 ACL 应用"
+  },
+  "hcia-h12-811-recall-020": {
+   "chapter": "VLAN 原理与配置",
+   "knowledgeSection": "VLAN 基础与标签",
+   "knowledgePoint": "802.1Q 标签格式"
+  },
+  "hcia-h12-811-recall-021": {
+   "chapter": "生成树原理与配置",
+   "knowledgeSection": "STP 基本原理",
+   "knowledgePoint": "根桥选举"
+  },
+  "hcia-h12-811-recall-022": {
+   "chapter": "生成树原理与配置",
+   "knowledgeSection": "STP 基本原理",
+   "knowledgePoint": "根桥选举"
+  },
+  "hcia-h12-811-recall-023": {
+   "chapter": "生成树原理与配置",
+   "knowledgeSection": "STP 基本原理",
+   "knowledgePoint": "根桥选举"
+  },
+  "hcia-h12-811-recall-024": {
+   "chapter": "生成树原理与配置",
+   "knowledgeSection": "STP 基本原理",
+   "knowledgePoint": "端口状态与计时器"
+  },
+  "hcia-h12-811-recall-025": {
+   "chapter": "生成树原理与配置",
+   "knowledgeSection": "STP 基本原理",
+   "knowledgePoint": "端口状态与计时器"
+  },
+  "hcia-h12-811-recall-026": {
+   "chapter": "生成树原理与配置",
+   "knowledgeSection": "RSTP 改进机制",
+   "knowledgePoint": "RSTP 端口角色"
+  },
+  "hcia-h12-811-recall-027": {
+   "chapter": "生成树原理与配置",
+   "knowledgeSection": "STP 基本原理",
+   "knowledgePoint": "根端口与指定端口选举"
+  },
+  "hcia-h12-811-recall-028": {
+   "chapter": "生成树原理与配置",
+   "knowledgeSection": "STP 基本原理",
+   "knowledgePoint": "根桥选举"
+  },
+  "hcia-h12-811-recall-029": {
+   "chapter": "生成树原理与配置",
+   "knowledgeSection": "STP 基本原理",
+   "knowledgePoint": "端口状态与计时器"
+  },
+  "hcia-h12-811-recall-030": {
+   "chapter": "生成树原理与配置",
+   "knowledgeSection": "STP 基本原理",
+   "knowledgePoint": "根桥选举"
+  },
+  "hcia-h12-811-recall-031": {
+   "chapter": "生成树原理与配置",
+   "knowledgeSection": "STP 基本原理",
+   "knowledgePoint": "根桥选举"
+  },
+  "hcia-h12-811-recall-032": {
+   "chapter": "生成树原理与配置",
+   "knowledgeSection": "STP 基本原理",
+   "knowledgePoint": "根桥选举"
+  },
+  "hcia-h12-811-recall-033": {
+   "chapter": "VLAN 原理与配置",
+   "knowledgeSection": "VLAN 基础与标签",
+   "knowledgePoint": "802.1Q 标签格式"
+  },
+  "hcia-h12-811-recall-034": {
+   "chapter": "以太网链路聚合",
+   "knowledgeSection": "聚合配置与负载分担",
+   "knowledgePoint": "Eth-Trunk 配置"
+  },
+  "hcia-h12-811-recall-035": {
+   "chapter": "园区网络典型组网方案",
+   "knowledgeSection": "网络层次设计",
+   "knowledgePoint": "汇聚层与核心层"
+  },
+  "hcia-h12-811-recall-036": {
+   "chapter": "网络设备管理",
+   "knowledgeSection": "SNMP 网络管理",
+   "knowledgePoint": "SNMP 版本与架构"
+  },
+  "hcia-h12-811-recall-037": {
+   "chapter": "IPv6 地址与配置",
+   "knowledgeSection": "IPv6 地址格式",
+   "knowledgePoint": "IPv6 地址类型"
+  },
+  "hcia-h12-811-recall-038": {
+   "chapter": "IPv6 地址与配置",
+   "knowledgeSection": "IPv6 地址格式",
+   "knowledgePoint": "EUI-64 接口标识"
+  },
+  "hcia-h12-811-recall-039": {
+   "chapter": "IP 地址与配置",
+   "knowledgeSection": "子网划分与掩码",
+   "knowledgePoint": "子网划分计算"
+  },
+  "hcia-h12-811-recall-040": {
+   "chapter": "IPv6 地址与配置",
+   "knowledgeSection": "IPv6 地址格式",
+   "knowledgePoint": "IPv6 地址类型"
+  },
+  "hcia-h12-811-recall-041": {
+   "chapter": "IPv6 地址与配置",
+   "knowledgeSection": "IPv6 协议机制",
+   "knowledgePoint": "NDP 邻居发现"
+  },
+  "hcia-h12-811-recall-042": {
+   "chapter": "IP 地址与配置",
+   "knowledgeSection": "子网划分与掩码",
+   "knowledgePoint": "子网划分计算"
+  },
+  "hcia-h12-811-recall-043": {
+   "chapter": "以太网交换基础",
+   "knowledgeSection": "以太网帧与 MAC 地址",
+   "knowledgePoint": "单播、组播与广播"
+  },
+  "hcia-h12-811-recall-044": {
+   "chapter": "网络故障排除",
+   "knowledgeSection": "排障方法论",
+   "knowledgePoint": "常用排障工具"
+  },
+  "hcia-h12-811-recall-045": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "单区域 OSPF 与 LSA",
+   "knowledgePoint": "OSPF 配置与验证"
+  },
+  "hcia-h12-811-recall-046": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "单区域 OSPF 与 LSA",
+   "knowledgePoint": "LSA 类型与作用"
+  },
+  "hcia-h12-811-recall-047": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "单区域 OSPF 与 LSA",
+   "knowledgePoint": "LSA 类型与作用"
+  },
+  "hcia-h12-811-recall-048": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "单区域 OSPF 与 LSA",
+   "knowledgePoint": "OSPF 配置与验证"
+  },
+  "hcia-h12-811-recall-049": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "单区域 OSPF 与 LSA",
+   "knowledgePoint": "LSA 类型与作用"
+  },
+  "hcia-h12-811-recall-050": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "邻居与邻接关系",
+   "knowledgePoint": "网络类型与 DR/BDR"
+  },
+  "hcia-h12-811-recall-051": {
+   "chapter": "IP 路由基础",
+   "knowledgeSection": "静态路由配置",
+   "knowledgePoint": "静态路由基本配置"
+  },
+  "hcia-h12-811-recall-052": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "邻居与邻接关系",
+   "knowledgePoint": "邻居状态机"
+  },
+  "hcia-h12-811-recall-053": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "邻居与邻接关系",
+   "knowledgePoint": "邻居状态机"
+  },
+  "hcia-h12-811-recall-054": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "单区域 OSPF 与 LSA",
+   "knowledgePoint": "OSPF 配置与验证"
+  },
+  "hcia-h12-811-recall-055": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "邻居与邻接关系",
+   "knowledgePoint": "邻居状态机"
+  },
+  "hcia-h12-811-recall-056": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "单区域 OSPF 与 LSA",
+   "knowledgePoint": "LSA 类型与作用"
+  },
+  "hcia-h12-811-recall-057": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "单区域 OSPF 与 LSA",
+   "knowledgePoint": "区域与开销计算"
+  },
+  "hcia-h12-811-recall-058": {
+   "chapter": "IP 路由基础",
+   "knowledgeSection": "路由表与选路",
+   "knowledgePoint": "路由表字段"
+  },
+  "hcia-h12-811-recall-059": {
+   "chapter": "IP 路由基础",
+   "knowledgeSection": "路由表与选路",
+   "knowledgePoint": "路由表字段"
+  },
+  "hcia-h12-811-recall-060": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "邻居与邻接关系",
+   "knowledgePoint": "网络类型与 DR/BDR"
+  },
+  "hcia-h12-811-recall-061": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "单区域 OSPF 与 LSA",
+   "knowledgePoint": "区域与开销计算"
+  },
+  "hcia-h12-811-recall-062": {
+   "chapter": "华为网络设备操作系统",
+   "knowledgeSection": "VRP 命令行基础",
+   "knowledgePoint": "配置文件管理"
+  },
+  "hcia-h12-811-recall-063": {
+   "chapter": "网络编程自动化",
+   "knowledgeSection": "自动化接口与协议",
+   "knowledgePoint": "RESTful API"
+  },
+  "hcia-h12-811-recall-064": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "单区域 OSPF 与 LSA",
+   "knowledgePoint": "区域与开销计算"
+  },
+  "hcia-h12-811-recall-065": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "邻居与邻接关系",
+   "knowledgePoint": "邻居状态机"
+  },
+  "hcia-h12-811-recall-066": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "单区域 OSPF 与 LSA",
+   "knowledgePoint": "OSPF 配置与验证"
+  },
+  "hcia-h12-811-recall-067": {
+   "chapter": "IP 路由基础",
+   "knowledgeSection": "路由表与选路",
+   "knowledgePoint": "路由表字段"
+  },
+  "hcia-h12-811-recall-068": {
+   "chapter": "网络故障排除",
+   "knowledgeSection": "排障方法论",
+   "knowledgePoint": "常用排障工具"
+  },
+  "hcia-h12-811-recall-069": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "单区域 OSPF 与 LSA",
+   "knowledgePoint": "区域与开销计算"
+  },
+  "hcia-h12-811-recall-070": {
+   "chapter": "网络设备管理",
+   "knowledgeSection": "SNMP 网络管理",
+   "knowledgePoint": "SNMP 版本与架构"
+  },
+  "hcia-h12-811-recall-071": {
+   "chapter": "ACL 原理与配置",
+   "knowledgeSection": "ACL 应用",
+   "knowledgePoint": "高级 ACL 应用"
+  },
+  "hcia-h12-811-recall-072": {
+   "chapter": "ACL 原理与配置",
+   "knowledgeSection": "ACL 应用",
+   "knowledgePoint": "基本 ACL 应用"
+  },
+  "hcia-h12-811-recall-073": {
+   "chapter": "ACL 原理与配置",
+   "knowledgeSection": "ACL 应用",
+   "knowledgePoint": "ACL 应用方向与位置"
+  },
+  "hcia-h12-811-recall-074": {
+   "chapter": "ACL 原理与配置",
+   "knowledgeSection": "ACL 应用",
+   "knowledgePoint": "基本 ACL 应用"
+  },
+  "hcia-h12-811-recall-075": {
+   "chapter": "数据中心网络基础",
+   "knowledgeSection": "数据中心架构",
+   "knowledgePoint": "Leaf-Spine 架构"
+  },
+  "hcia-h12-811-recall-076": {
+   "chapter": "WLAN 组网架构",
+   "knowledgeSection": "设备角色与形态",
+   "knowledgePoint": "Fat AP 与 Fit AP"
+  },
+  "hcia-h12-811-recall-077": {
+   "chapter": "WLAN 技术基础",
+   "knowledgeSection": "802.11 标准与频段",
+   "knowledgePoint": "802.11 系列标准"
+  },
+  "hcia-h12-811-recall-078": {
+   "chapter": "WLAN 技术基础",
+   "knowledgeSection": "802.11 标准与频段",
+   "knowledgePoint": "802.11 系列标准"
+  },
+  "hcia-h12-811-recall-079": {
+   "chapter": "WLAN 技术基础",
+   "knowledgeSection": "射频基础",
+   "knowledgePoint": "射频信号与功率"
+  },
+  "hcia-h12-811-recall-080": {
+   "chapter": "华为网络设备操作系统",
+   "knowledgeSection": "VRP 命令行基础",
+   "knowledgePoint": "命令行视图与切换"
+  },
+  "hcia-h12-811-recall-081": {
+   "chapter": "华为网络设备操作系统",
+   "knowledgeSection": "VRP 命令行基础",
+   "knowledgePoint": "配置文件管理"
+  },
+  "hcia-h12-811-recall-082": {
+   "chapter": "华为网络设备操作系统",
+   "knowledgeSection": "VRP 命令行基础",
+   "knowledgePoint": "命令行视图与切换"
+  },
+  "hcia-h12-811-recall-083": {
+   "chapter": "华为网络设备操作系统",
+   "knowledgeSection": "VRP 命令行基础",
+   "knowledgePoint": "命令行视图与切换"
+  },
+  "hcia-h12-811-recall-084": {
+   "chapter": "华为网络设备操作系统",
+   "knowledgeSection": "VRP 命令行基础",
+   "knowledgePoint": "配置文件管理"
+  },
+  "hcia-h12-811-recall-085": {
+   "chapter": "华为网络设备操作系统",
+   "knowledgeSection": "VRP 命令行基础",
+   "knowledgePoint": "配置文件管理"
+  },
+  "hcia-h12-811-recall-086": {
+   "chapter": "网络设备管理",
+   "knowledgeSection": "远程管理",
+   "knowledgePoint": "Telnet 管理"
+  },
+  "hcia-h12-811-recall-087": {
+   "chapter": "网络设备管理",
+   "knowledgeSection": "远程管理",
+   "knowledgePoint": "Telnet 管理"
+  },
+  "hcia-h12-811-recall-088": {
+   "chapter": "AAA 原理与配置",
+   "knowledgeSection": "AAA 配置与域管理",
+   "knowledgePoint": "域与用户级别"
+  },
+  "hcia-h12-811-recall-089": {
+   "chapter": "网络故障排除",
+   "knowledgeSection": "排障方法论",
+   "knowledgePoint": "常用排障工具"
+  },
+  "hcia-h12-811-simulation-090": {
+   "chapter": "网络参考模型",
+   "knowledgeSection": "协议分层与封装",
+   "knowledgePoint": "OSI 七层模型"
+  },
+  "hcia-h12-811-simulation-091": {
+   "chapter": "以太网交换基础",
+   "knowledgeSection": "交换机转发原理",
+   "knowledgePoint": "MAC 地址表学习"
+  },
+  "hcia-h12-811-simulation-092": {
+   "chapter": "网络参考模型",
+   "knowledgeSection": "传输层协议",
+   "knowledgePoint": "UDP 特性与应用"
+  },
+  "hcia-h12-811-simulation-093": {
+   "chapter": "IP 地址与配置",
+   "knowledgeSection": "子网划分与掩码",
+   "knowledgePoint": "子网划分计算"
+  },
+  "hcia-h12-811-simulation-094": {
+   "chapter": "以太网交换基础",
+   "knowledgeSection": "交换机转发原理",
+   "knowledgePoint": "转发、泛洪与丢弃"
+  },
+  "hcia-h12-811-simulation-095": {
+   "chapter": "以太网交换基础",
+   "knowledgeSection": "冲突域与双工",
+   "knowledgePoint": "CSMA/CD 与共享介质"
+  },
+  "hcia-h12-811-simulation-096": {
+   "chapter": "IP 路由基础",
+   "knowledgeSection": "路由表与选路",
+   "knowledgePoint": "路由表字段"
+  },
+  "hcia-h12-811-simulation-097": {
+   "chapter": "IP 地址与配置",
+   "knowledgeSection": "地址解析与诊断",
+   "knowledgePoint": "ARP 工作原理"
+  },
+  "hcia-h12-811-simulation-098": {
+   "chapter": "VLAN 原理与配置",
+   "knowledgeSection": "VLAN 基础与标签",
+   "knowledgePoint": "802.1Q 标签格式"
+  },
+  "hcia-h12-811-simulation-099": {
+   "chapter": "VLAN 原理与配置",
+   "knowledgeSection": "VLAN 基础与标签",
+   "knowledgePoint": "802.1Q 标签格式"
+  },
+  "hcia-h12-811-simulation-100": {
+   "chapter": "VLAN 原理与配置",
+   "knowledgeSection": "VLAN 基础与标签",
+   "knowledgePoint": "802.1Q 标签格式"
+  },
+  "hcia-h12-811-simulation-101": {
+   "chapter": "VLAN 原理与配置",
+   "knowledgeSection": "接口类型与报文处理",
+   "knowledgePoint": "Trunk 接口"
+  },
+  "hcia-h12-811-simulation-102": {
+   "chapter": "以太网链路聚合",
+   "knowledgeSection": "聚合配置与负载分担",
+   "knowledgePoint": "Eth-Trunk 配置"
+  },
+  "hcia-h12-811-simulation-103": {
+   "chapter": "以太网链路聚合",
+   "knowledgeSection": "聚合配置与负载分担",
+   "knowledgePoint": "Eth-Trunk 配置"
+  },
+  "hcia-h12-811-simulation-104": {
+   "chapter": "生成树原理与配置",
+   "knowledgeSection": "STP 基本原理",
+   "knowledgePoint": "二层环路与 STP 作用"
+  },
+  "hcia-h12-811-simulation-105": {
+   "chapter": "生成树原理与配置",
+   "knowledgeSection": "STP 基本原理",
+   "knowledgePoint": "根桥选举"
+  },
+  "hcia-h12-811-simulation-106": {
+   "chapter": "生成树原理与配置",
+   "knowledgeSection": "STP 配置与保护",
+   "knowledgePoint": "STP 模式与优先级配置"
+  },
+  "hcia-h12-811-simulation-107": {
+   "chapter": "生成树原理与配置",
+   "knowledgeSection": "STP 基本原理",
+   "knowledgePoint": "根桥选举"
+  },
+  "hcia-h12-811-simulation-108": {
+   "chapter": "以太网交换基础",
+   "knowledgeSection": "交换机转发原理",
+   "knowledgePoint": "MAC 地址表学习"
+  },
+  "hcia-h12-811-simulation-109": {
+   "chapter": "VLAN 原理与配置",
+   "knowledgeSection": "VLAN 基础与标签",
+   "knowledgePoint": "802.1Q 标签格式"
+  },
+  "hcia-h12-811-simulation-110": {
+   "chapter": "IP 地址与配置",
+   "knowledgeSection": "子网划分与掩码",
+   "knowledgePoint": "子网划分计算"
+  },
+  "hcia-h12-811-simulation-111": {
+   "chapter": "IP 地址与配置",
+   "knowledgeSection": "子网划分与掩码",
+   "knowledgePoint": "子网划分计算"
+  },
+  "hcia-h12-811-simulation-112": {
+   "chapter": "IPv6 地址与配置",
+   "knowledgeSection": "IPv6 地址格式",
+   "knowledgePoint": "IPv6 地址类型"
+  },
+  "hcia-h12-811-simulation-113": {
+   "chapter": "IPv6 地址与配置",
+   "knowledgeSection": "IPv6 地址格式",
+   "knowledgePoint": "IPv6 地址类型"
+  },
+  "hcia-h12-811-simulation-114": {
+   "chapter": "IP 地址与配置",
+   "knowledgeSection": "IPv4 地址体系",
+   "knowledgePoint": "私有地址与特殊地址"
+  },
+  "hcia-h12-811-simulation-115": {
+   "chapter": "网络故障排除",
+   "knowledgeSection": "排障方法论",
+   "knowledgePoint": "常用排障工具"
+  },
+  "hcia-h12-811-simulation-116": {
+   "chapter": "IP 地址与配置",
+   "knowledgeSection": "地址解析与诊断",
+   "knowledgePoint": "ICMP 与 ping"
+  },
+  "hcia-h12-811-simulation-117": {
+   "chapter": "网络服务与应用",
+   "knowledgeSection": "DNS 与文件传输",
+   "knowledgePoint": "DNS 解析与配置"
+  },
+  "hcia-h12-811-simulation-118": {
+   "chapter": "IP 地址与配置",
+   "knowledgeSection": "子网划分与掩码",
+   "knowledgePoint": "子网掩码与掩码长度"
+  },
+  "hcia-h12-811-simulation-119": {
+   "chapter": "IP 地址与配置",
+   "knowledgeSection": "子网划分与掩码",
+   "knowledgePoint": "子网划分计算"
+  },
+  "hcia-h12-811-simulation-120": {
+   "chapter": "IPv6 地址与配置",
+   "knowledgeSection": "IPv6 地址格式",
+   "knowledgePoint": "IPv6 地址类型"
+  },
+  "hcia-h12-811-simulation-121": {
+   "chapter": "IPv6 地址与配置",
+   "knowledgeSection": "IPv6 地址格式",
+   "knowledgePoint": "IPv6 地址类型"
+  },
+  "hcia-h12-811-simulation-122": {
+   "chapter": "IP 地址与配置",
+   "knowledgeSection": "地址解析与诊断",
+   "knowledgePoint": "ARP 工作原理"
+  },
+  "hcia-h12-811-simulation-123": {
+   "chapter": "IP 地址与配置",
+   "knowledgeSection": "子网划分与掩码",
+   "knowledgePoint": "子网划分计算"
+  },
+  "hcia-h12-811-simulation-124": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "单区域 OSPF 与 LSA",
+   "knowledgePoint": "OSPF 配置与验证"
+  },
+  "hcia-h12-811-simulation-125": {
+   "chapter": "IP 路由基础",
+   "knowledgeSection": "静态路由配置",
+   "knowledgePoint": "默认路由"
+  },
+  "hcia-h12-811-simulation-126": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "单区域 OSPF 与 LSA",
+   "knowledgePoint": "区域与开销计算"
+  },
+  "hcia-h12-811-simulation-127": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "单区域 OSPF 与 LSA",
+   "knowledgePoint": "OSPF 配置与验证"
+  },
+  "hcia-h12-811-simulation-128": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "邻居与邻接关系",
+   "knowledgePoint": "邻居状态机"
+  },
+  "hcia-h12-811-simulation-129": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "邻居与邻接关系",
+   "knowledgePoint": "网络类型与 DR/BDR"
+  },
+  "hcia-h12-811-simulation-130": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "单区域 OSPF 与 LSA",
+   "knowledgePoint": "OSPF 配置与验证"
+  },
+  "hcia-h12-811-simulation-131": {
+   "chapter": "IP 路由基础",
+   "knowledgeSection": "路由表与选路",
+   "knowledgePoint": "路由表字段"
+  },
+  "hcia-h12-811-simulation-132": {
+   "chapter": "IP 路由基础",
+   "knowledgeSection": "静态路由配置",
+   "knowledgePoint": "静态路由基本配置"
+  },
+  "hcia-h12-811-simulation-133": {
+   "chapter": "IP 路由基础",
+   "knowledgeSection": "路由表与选路",
+   "knowledgePoint": "路由表字段"
+  },
+  "hcia-h12-811-simulation-134": {
+   "chapter": "IP 路由基础",
+   "knowledgeSection": "静态路由配置",
+   "knowledgePoint": "静态路由基本配置"
+  },
+  "hcia-h12-811-simulation-135": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "单区域 OSPF 与 LSA",
+   "knowledgePoint": "OSPF 配置与验证"
+  },
+  "hcia-h12-811-simulation-136": {
+   "chapter": "OSPF 原理与配置",
+   "knowledgeSection": "邻居与邻接关系",
+   "knowledgePoint": "邻居状态机"
+  },
+  "hcia-h12-811-simulation-137": {
+   "chapter": "IP 路由基础",
+   "knowledgeSection": "路由表与选路",
+   "knowledgePoint": "路由表字段"
+  },
+  "hcia-h12-811-simulation-138": {
+   "chapter": "ACL 原理与配置",
+   "knowledgeSection": "ACL 基础",
+   "knowledgePoint": "ACL 分类与编号范围"
+  },
+  "hcia-h12-811-simulation-139": {
+   "chapter": "ACL 原理与配置",
+   "knowledgeSection": "ACL 应用",
+   "knowledgePoint": "基本 ACL 应用"
+  },
+  "hcia-h12-811-simulation-140": {
+   "chapter": "ACL 原理与配置",
+   "knowledgeSection": "ACL 应用",
+   "knowledgePoint": "高级 ACL 应用"
+  },
+  "hcia-h12-811-simulation-141": {
+   "chapter": "NAT 原理与配置",
+   "knowledgeSection": "动态 NAT 与 NAPT",
+   "knowledgePoint": "动态 NAT 地址池"
+  },
+  "hcia-h12-811-simulation-142": {
+   "chapter": "NAT 原理与配置",
+   "knowledgeSection": "动态 NAT 与 NAPT",
+   "knowledgePoint": "动态 NAT 地址池"
+  },
+  "hcia-h12-811-simulation-143": {
+   "chapter": "NAT 原理与配置",
+   "knowledgeSection": "动态 NAT 与 NAPT",
+   "knowledgePoint": "NAPT 与 Easy IP"
+  },
+  "hcia-h12-811-simulation-144": {
+   "chapter": "网络服务与应用",
+   "knowledgeSection": "DHCP 服务",
+   "knowledgePoint": "DHCP 报文与交互流程"
+  },
+  "hcia-h12-811-simulation-145": {
+   "chapter": "网络服务与应用",
+   "knowledgeSection": "DHCP 服务",
+   "knowledgePoint": "DHCP 报文与交互流程"
+  },
+  "hcia-h12-811-simulation-146": {
+   "chapter": "网络服务与应用",
+   "knowledgeSection": "DHCP 服务",
+   "knowledgePoint": "DHCP 报文与交互流程"
+  },
+  "hcia-h12-811-simulation-147": {
+   "chapter": "AAA 原理与配置",
+   "knowledgeSection": "AAA 框架",
+   "knowledgePoint": "认证（Authentication）"
+  },
+  "hcia-h12-811-simulation-148": {
+   "chapter": "网络设备管理",
+   "knowledgeSection": "远程管理",
+   "knowledgePoint": "Telnet 管理"
+  },
+  "hcia-h12-811-simulation-149": {
+   "chapter": "网络设备管理",
+   "knowledgeSection": "远程管理",
+   "knowledgePoint": "Telnet 管理"
+  },
+  "hcia-h12-811-simulation-150": {
+   "chapter": "以太网交换基础",
+   "knowledgeSection": "交换机转发原理",
+   "knowledgePoint": "MAC 地址表学习"
+  },
+  "hcia-h12-811-simulation-151": {
+   "chapter": "ACL 原理与配置",
+   "knowledgeSection": "ACL 应用",
+   "knowledgePoint": "基本 ACL 应用"
+  },
+  "hcia-h12-811-simulation-152": {
+   "chapter": "WLAN 组网架构",
+   "knowledgeSection": "CAPWAP 协议",
+   "knowledgePoint": "CAPWAP 隧道与端口"
+  },
+  "hcia-h12-811-simulation-153": {
+   "chapter": "WLAN 技术基础",
+   "knowledgeSection": "射频基础",
+   "knowledgePoint": "射频信号与功率"
+  },
+  "hcia-h12-811-simulation-154": {
+   "chapter": "WLAN 工作原理与配置",
+   "knowledgeSection": "WLAN 安全",
+   "knowledgePoint": "WEP 与 WPA/WPA2"
+  },
+  "hcia-h12-811-simulation-155": {
+   "chapter": "WLAN 技术基础",
+   "knowledgeSection": "射频基础",
+   "knowledgePoint": "射频信号与功率"
+  },
+  "hcia-h12-811-simulation-156": {
+   "chapter": "WLAN 工作原理与配置",
+   "knowledgeSection": "STA 接入与漫游",
+   "knowledgePoint": "WLAN 漫游"
+  },
+  "hcia-h12-811-simulation-157": {
+   "chapter": "WLAN 工作原理与配置",
+   "knowledgeSection": "WLAN 安全",
+   "knowledgePoint": "WEP 与 WPA/WPA2"
+  },
+  "hcia-h12-811-simulation-158": {
+   "chapter": "WLAN 技术基础",
+   "knowledgeSection": "射频基础",
+   "knowledgePoint": "干扰与信道规划"
+  },
+  "hcia-h12-811-simulation-159": {
+   "chapter": "WLAN 组网架构",
+   "knowledgeSection": "CAPWAP 协议",
+   "knowledgePoint": "CAPWAP 隧道与端口"
+  },
+  "hcia-h12-811-simulation-160": {
+   "chapter": "华为网络设备操作系统",
+   "knowledgeSection": "VRP 命令行基础",
+   "knowledgePoint": "命令行视图与切换"
+  },
+  "hcia-h12-811-simulation-161": {
+   "chapter": "华为网络设备操作系统",
+   "knowledgeSection": "VRP 命令行基础",
+   "knowledgePoint": "配置文件管理"
+  },
+  "hcia-h12-811-simulation-162": {
+   "chapter": "华为网络设备操作系统",
+   "knowledgeSection": "VRP 命令行基础",
+   "knowledgePoint": "配置文件管理"
+  },
+  "hcia-h12-811-simulation-163": {
+   "chapter": "华为网络设备操作系统",
+   "knowledgeSection": "设备文件与启动",
+   "knowledgePoint": "版本与补丁管理"
+  },
+  "hcia-h12-811-simulation-164": {
+   "chapter": "华为网络设备操作系统",
+   "knowledgeSection": "VRP 命令行基础",
+   "knowledgePoint": "命令行视图与切换"
+  },
+  "hcia-h12-811-simulation-165": {
+   "chapter": "华为网络设备操作系统",
+   "knowledgeSection": "VRP 命令行基础",
+   "knowledgePoint": "配置文件管理"
+  },
+  "hcia-h12-811-simulation-166": {
+   "chapter": "网络设备管理",
+   "knowledgeSection": "远程管理",
+   "knowledgePoint": "SSH 管理"
+  },
+  "hcia-h12-811-simulation-167": {
+   "chapter": "网络故障排除",
+   "knowledgeSection": "排障方法论",
+   "knowledgePoint": "常用排障工具"
+  },
+  "hcia-h12-811-simulation-168": {
+   "chapter": "网络故障排除",
+   "knowledgeSection": "排障方法论",
+   "knowledgePoint": "常用排障工具"
+  },
+  "hcia-h12-811-simulation-169": {
+   "chapter": "网络设备管理",
+   "knowledgeSection": "远程管理",
+   "knowledgePoint": "Telnet 管理"
+  },
+  "hcia-h12-811-simulation-170": {
+   "chapter": "网络设备管理",
+   "knowledgeSection": "远程管理",
+   "knowledgePoint": "SSH 管理"
+  },
+  "hcia-h12-811-simulation-171": {
+   "chapter": "网络设备管理",
+   "knowledgeSection": "远程管理",
+   "knowledgePoint": "SSH 管理"
+  },
+  "hcia-h12-811-simulation-172": {
+   "chapter": "园区网络典型组网方案",
+   "knowledgeSection": "网络层次设计",
+   "knowledgePoint": "汇聚层与核心层"
+  },
+  "hcia-h12-811-simulation-173": {
+   "chapter": "数据中心网络基础",
+   "knowledgeSection": "Overlay 技术",
+   "knowledgePoint": "Underlay 与 Overlay"
+  },
+  "hcia-h12-811-simulation-174": {
+   "chapter": "数据中心网络基础",
+   "knowledgeSection": "Overlay 技术",
+   "knowledgePoint": "Underlay 与 Overlay"
+  },
+  "hcia-h12-811-simulation-175": {
+   "chapter": "数据中心网络基础",
+   "knowledgeSection": "数据中心架构",
+   "knowledgePoint": "Leaf-Spine 架构"
+  },
+  "hcia-h12-811-simulation-176": {
+   "chapter": "园区网络典型组网方案",
+   "knowledgeSection": "网络层次设计",
+   "knowledgePoint": "接入层设计"
+  },
+  "hcia-h12-811-simulation-177": {
+   "chapter": "园区网络典型组网方案",
+   "knowledgeSection": "网络层次设计",
+   "knowledgePoint": "汇聚层与核心层"
+  },
+  "hcia-h12-811-simulation-178": {
+   "chapter": "园区网络典型组网方案",
+   "knowledgeSection": "网络层次设计",
+   "knowledgePoint": "汇聚层与核心层"
+  },
+  "hcia-h12-811-simulation-179": {
+   "chapter": "数据中心网络基础",
+   "knowledgeSection": "Overlay 技术",
+   "knowledgePoint": "Underlay 与 Overlay"
+  },
+  "hcia-h12-811-simulation-180": {
+   "chapter": "园区网络典型组网方案",
+   "knowledgeSection": "网络层次设计",
+   "knowledgePoint": "汇聚层与核心层"
+  }
+ },
+ "pointIds": {
+  "kp-65ae5f843811724482c096a6": [
+   "kp-a8030f76d625f1e606d19eda",
+   "kp-b5b32a5741253dbb08a5fda0"
+  ],
+  "kp-c52861e64b10e3d58af0adac": [
+   "kp-801355e4cee940a585f9cce5"
+  ],
+  "kp-b45b81324bc39b6dfa58fd28": [
+   "kp-6c23ee49f13025410e51b950",
+   "kp-a8030f76d625f1e606d19eda",
+   "kp-b5b32a5741253dbb08a5fda0",
+   "kp-c149f6f4b511ab23567628ee",
+   "kp-d5948a42e1fc71bd08d65432"
+  ],
+  "kp-11043e56408781384aedb3b3": [
+   "kp-8051fe863aca21e747160e4d",
+   "kp-a60077a196d13b787f63688b"
+  ],
+  "kp-7e8ec5611c9491b51fc66c1e": [
+   "kp-1fa4cdb4b73f0b84c3702dbe",
+   "kp-a60077a196d13b787f63688b"
+  ],
+  "kp-75309fafc9d04a22ff5f7467": [
+   "kp-86f30200d61bbf0a9427e481"
+  ],
+  "kp-6314387d9d3c63dd07a1b045": [
+   "kp-2f94cf8f515928bfd87a8543",
+   "kp-a8030f76d625f1e606d19eda",
+   "kp-eab746d1f7eb722c98ea2ba7"
+  ],
+  "kp-5193d8afd0a6381c7e7b4501": [
+   "kp-2f94cf8f515928bfd87a8543",
+   "kp-c01e7a18f1435cbe14057b49"
+  ],
+  "kp-8bd60c15b74e04ad96899eaf": [
+   "kp-f4b9940e128545d5ce384438"
+  ],
+  "kp-423dde2ea1cdd5d551ec64ee": [
+   "kp-fa37c4d012bb20a5091e0b34"
+  ],
+  "kp-39ed010950b2da65d0d1631f": [
+   "kp-af2513fe83e1d6ab1a18bc05",
+   "kp-cbd2fb8d4516ff2022eabed3",
+   "kp-fb7139ce4b72ed30383253f1"
+  ],
+  "kp-0c0231e200b0805c42fe1e8c": [
+   "kp-05046a7617f79f5554bc19e4"
+  ],
+  "kp-3e8a543c92824b312de76dd2": [
+   "kp-4aae8e69298aeb6d748be291"
+  ],
+  "kp-971a6e19c1221e356913c8f9": [
+   "kp-fb7139ce4b72ed30383253f1"
+  ],
+  "kp-ef0a05e7cc5affd3c1579af9": [
+   "kp-16066b843d57203501ca3de5",
+   "kp-aa07083f61cf72c2bf9bb933",
+   "kp-e59433042b1b70a8d367c1e3"
+  ],
+  "kp-cd5d305808bbaf70f044decb": [
+   "kp-2f396a751ee82ed3e6b44efa"
+  ],
+  "kp-170cfc050cd81c6df9039ddb": [
+   "kp-210fa4efde4f263c8ba02de5"
+  ],
+  "kp-0378de75e8087303803ffb2b": [
+   "kp-16066b843d57203501ca3de5",
+   "kp-210fa4efde4f263c8ba02de5",
+   "kp-2f396a751ee82ed3e6b44efa",
+   "kp-7f3c431f55045c9ed42285a7",
+   "kp-aa07083f61cf72c2bf9bb933"
+  ],
+  "kp-530a385925e5bde87423bff7": [
+   "kp-7366b89f23ecba18a696599a"
+  ],
+  "kp-a52f1e910a6a0fd6354ae0b1": [
+   "kp-51fe49ba8869c353258b6ae5"
+  ],
+  "kp-eccfe6b82858aff77e74a200": [
+   "kp-e5550d118b492f2538f39d9d"
+  ],
+  "kp-4529d719d722fa55cd2ac3f0": [
+   "kp-76b825bf639d4b54eb2f5c4c"
+  ],
+  "kp-0036d6f33df33440fdb27552": [
+   "kp-23c3c4db800874dcf2d99b1e",
+   "kp-6fedc3fc282b5bfa5c92b010",
+   "kp-a8030f76d625f1e606d19eda",
+   "kp-c510e9e1190d5f634ce5ebd1",
+   "kp-d1eae335b7347f67b69ce21a"
+  ],
+  "kp-5663504660bb7d1b59813e36": [
+   "kp-0fc2e5d7bb2dfe78d95a77be"
+  ],
+  "kp-8d5cefd9a9802c3b6946999d": [
+   "kp-d362e21f0c1aea188d5347e4"
+  ],
+  "kp-de8d94a7d24eafab0a8c93ce": [
+   "kp-5807be7edb9a37afc46772de"
+  ],
+  "kp-c81cc414818011da93ba846e": [
+   "kp-19d146e82a87b21054bf2c59"
+  ],
+  "kp-43be561e0d4916fd267d26aa": [
+   "kp-43a1da3b4ff05586812326ab"
+  ],
+  "kp-1670e7e0e03d217e0d8e0d6d": [
+   "kp-13a14716887aa3357bcb457e"
+  ],
+  "kp-5dffa419b018332a939f1868": [
+   "kp-13a14716887aa3357bcb457e",
+   "kp-43a1da3b4ff05586812326ab",
+   "kp-f870b446395e011f18b1b8ad"
+  ],
+  "kp-01c49339e3a6b76d917d8363": [
+   "kp-669884ee9052aad6bfae3cf4",
+   "kp-d9c6c55b3a92174cdd1cf0b3",
+   "kp-f21588304eff926c15ad2643"
+  ],
+  "kp-f05c76bfa1c67475b551e397": [
+   "kp-02648dd5139595bdd01e24ff"
+  ],
+  "kp-33d483e952b0801578321be2": [
+   "kp-3310de2c70bcd5dbb3b3e702",
+   "kp-c670eadde183a97d46d73405"
+  ],
+  "kp-c57b51708f20c7b9fc00a0c6": [
+   "kp-16b3d1f585ddd9ec675a7f56",
+   "kp-e44321f7cd9c2a00cb516ed2"
+  ],
+  "kp-b0b8ff59f326ff475e20f418": [
+   "kp-438f18f15d5c2445844ab885"
+  ],
+  "kp-c11dc5994fe9d9a806eb2a3f": [
+   "kp-7238c837d8b14eb4b56bd3e5"
+  ],
+  "kp-ceec0c2dbbf2ed5c2a7d3674": [
+   "kp-b45991eab00640cfa525fe87"
+  ],
+  "kp-5e4b95191b2ebbbd67846ee9": [
+   "kp-89e6bcd4039b8882f42eaa7b",
+   "kp-8cbdbf6437d3dc448301a2f2"
+  ],
+  "kp-aea490fbdd8d54cbc1dd628d": [
+   "kp-921a3b2c65f7466a18e7dbf9",
+   "kp-a4f50c552f9576c4a7c7ea26"
+  ],
+  "kp-865d0ffc21a739d1cd0305ed": [
+   "kp-5429a90f1cdc4301eb65949c"
+  ],
+  "kp-f0f7bfc3060e4f41793575cf": [
+   "kp-4b30c8affc665a08b2f88e0d"
+  ],
+  "kp-ec7d3f4f6a551229d3bb9b3d": [
+   "kp-5b382bcc231d41d17ec734b5"
+  ],
+  "kp-0ae30b90a34e607d920dc1de": [
+   "kp-8a62ceef5544c5136e9f09af"
+  ],
+  "kp-7c5d5b39bdc9d64ee43fcc97": [
+   "kp-95f80f08eb6f38fbc3a8ff1f"
+  ],
+  "kp-2f55d77b9a4adbace70b71c4": [
+   "kp-e1b9155c2d3f46b0e148192a"
+  ],
+  "kp-5cc5859251e9206a74f86dbe": [
+   "kp-ec391dd8d2062b9dd519b80a"
+  ],
+  "kp-c11f5fd04b57b4e7ab99b466": [
+   "kp-a21cf63724292d43f331d642"
+  ],
+  "kp-ee7dce1efbae5e9f4bcb37a8": [
+   "kp-570f1ba19407560fecedc48a",
+   "kp-7c9f942cfd91885b162fbc5c",
+   "kp-ec391dd8d2062b9dd519b80a"
+  ],
+  "kp-0452dc2beba77afaa4cd7816": [
+   "kp-d3d9c0e18baa91f8956f02b4"
+  ],
+  "kp-5676a35202a5b2e98b3f9d1a": [
+   "kp-bccea0a7bb76217b8c39488e"
+  ],
+  "kp-22958276fe5d63d695d2b114": [
+   "kp-69bb27fa9ebf320e9f397e25"
+  ],
+  "kp-e036a09035d2cb8f17cb65e8": [
+   "kp-fa7decd8a0442516b3126a71"
+  ],
+  "kp-2923a107dda078e7efa89387": [
+   "kp-6dd05ca7801d2af324b54abc"
+  ],
+  "kp-7e283f4237fa5f3a6b8d3b9f": [
+   "kp-928e3416d0a9f605b813bfec"
+  ],
+  "kp-0a62b605e89b46e11f916594": [
+   "kp-0c901b46568439894f7ea683"
+  ],
+  "kp-c17576d88501e3662bc2b9ce": [
+   "kp-900f101afdf032a494782807"
+  ],
+  "kp-c3714e6bad4b82a89c66274d": [
+   "kp-449b16b0a8f5339c637c6897"
+  ],
+  "kp-3fdb5ec918f5451577c3b6aa": [
+   "kp-61eac6963c967da621ed4895"
+  ],
+  "kp-6f0b65721827b60b889e7e32": [
+   "kp-2358e68701bff145c24cc5c7",
+   "kp-ec10b075b5dadb3507764719"
+  ],
+  "kp-a1fd45fff49e15c4d126c77b": [
+   "kp-ec10b075b5dadb3507764719"
+  ],
+  "kp-a9bdf561e0c750c6fad71617": [
+   "kp-f3d7540f0c4fcdfabfe753cd"
+  ],
+  "kp-d7546dc407728c454287bf5f": [
+   "kp-fa4a1fb7386ef5428165d41c"
+  ],
+  "kp-5c310adb968f7a7f313c8be8": [
+   "kp-81332cde60e008b363761d8f"
+  ],
+  "kp-63657fbb8893b445224f2106": [
+   "kp-b2bbdbf34bf01841f97fe07a"
+  ],
+  "kp-db6dc37c040d68ec72aa4626": [
+   "kp-d6a2f3049da1427775007466"
+  ],
+  "kp-0d738aecf4f5cddb8fa136cf": [
+   "kp-b90238f08a7682f8e6ef242c",
+   "kp-d1baca9ac4120ea2c6b71497"
+  ],
+  "kp-aced0478b1a80630b408ec60": [
+   "kp-8cfad39b59f764991cb06d7b"
+  ],
+  "kp-8eb28d8bedd8b1b8a0be8603": [
+   "kp-8a1a34ab4d02bad828d50dae"
+  ],
+  "kp-db6b1196efd3cdfbc89954b6": [
+   "kp-5bd38c573c3de65ca7107172"
+  ],
+  "kp-038b840af817861d3e913547": [
+   "kp-3ae72530adac92400e3ba71c",
+   "kp-5f94c4c00d92dcf07e444d34",
+   "kp-9424b0714cc42943b5fc17c9",
+   "kp-e1f70e3b2e5cbdf40d28485b",
+   "kp-eca282ad058d2f944d40294d"
+  ],
+  "kp-3ddddb393603415a65020411": [
+   "kp-11da813f6e6e6ceed9f375dd",
+   "kp-9f7bbdc7bb72ec48a3e0ac8e"
+  ],
+  "kp-149a71d8b60e829a7679375b": [
+   "kp-c7996419338b011db19c4441"
+  ],
+  "kp-ff85f023dcb85419123e30b2": [
+   "kp-cc6b61078f83c8d1bc06f13d"
+  ],
+  "kp-9120c564d822663e7ae9d599": [
+   "kp-ffade0c21966a45c6b45210b"
+  ],
+  "kp-dd9fbcd34e9db1062d147603": [
+   "kp-b7db779a12c1a0e67ab1d544"
+  ],
+  "kp-58efff4b8546a5a0169789ed": [
+   "kp-5f94c4c00d92dcf07e444d34"
+  ],
+  "kp-2a52ef44d2624a0248c95f38": [
+   "kp-5f94c4c00d92dcf07e444d34",
+   "kp-b7db779a12c1a0e67ab1d544"
+  ],
+  "kp-ac586833aa65d5cef058b107": [
+   "kp-8ac9148aa051d4038ed135d6"
+  ],
+  "kp-79d71ba738a5a96c597c5b8a": [
+   "kp-114956fbb721576ba16b2b54",
+   "kp-7c6087627880e970a20d3aaa"
+  ],
+  "kp-a894172ed76113502a71dbeb": [
+   "kp-06ee76f646a520f5a4d78163"
+  ],
+  "kp-31f90d24f73ef5863b9b76a3": [
+   "kp-20cfb58d8e14d874d5ebccb7"
+  ],
+  "kp-56845b1811f551bbca32dbe6": [
+   "kp-61710f972bb6a78a6493d1f9"
+  ],
+  "kp-c41a5233b5195d0179b545fb": [
+   "kp-1fa4cdb4b73f0b84c3702dbe"
+  ],
+  "kp-02ce72b3a979551c94ca7aa4": [
+   "kp-0ac0f502c580c9b56625e4ef"
+  ],
+  "kp-a33f33055a45d99997c3a3c2": [
+   "kp-3310de2c70bcd5dbb3b3e702",
+   "kp-669884ee9052aad6bfae3cf4",
+   "kp-f21588304eff926c15ad2643"
+  ],
+  "kp-c8ab52c043ea29d8be9a6a0b": [
+   "kp-7238c837d8b14eb4b56bd3e5",
+   "kp-ef8c8e67bb7d2c96a6e7dd42"
+  ],
+  "kp-bca4740db690dafe9b598a92": [
+   "kp-921a3b2c65f7466a18e7dbf9"
+  ],
+  "kp-383e4156e1d028df38472792": [
+   "kp-3ce8e524e40845d611a75eeb",
+   "kp-fa7decd8a0442516b3126a71"
+  ],
+  "kp-9ff1293adb23c1a8dcc87613": [
+   "kp-08cd9cfea13b8ce79148c9a4"
+  ],
+  "kp-a9b482609e6e9805631f2b0a": [
+   "kp-51fdc684a19abf150c24a5be",
+   "kp-8d849cdb60b44f74923d49e4"
+  ],
+  "kp-0f7669f3981b801fda063788": [
+   "kp-d6a2f3049da1427775007466"
+  ],
+  "kp-f19c013e71a3dfd3f099f5cb": [
+   "kp-9424b0714cc42943b5fc17c9"
+  ],
+  "kp-3053c180100f90066bd1edd7": [
+   "kp-528dea6ccb0053847a42287b"
+  ],
+  "kp-312c2d08697add13eddbc680": [
+   "kp-e250f10df8089201a34b8821"
+  ]
+ }
+}

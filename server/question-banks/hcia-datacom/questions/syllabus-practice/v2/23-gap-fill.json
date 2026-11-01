@@ -1,0 +1,323 @@
+[
+  {
+    "id": "hcia-v3-23-001",
+    "type": "single_choice",
+    "question": "设备上配置 NTP 的目的，除了保证日志时间准确，还有什么作用？",
+    "options": {
+      "A": "自动生成 VLAN 编号",
+      "B": "提升接口的物理带宽",
+      "C": "替代 DNS 完成解析",
+      "D": "为数字证书校验与计费记录提供可信时间基准"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "证书有效期校验、审计日志与计费记录都依赖统一时间，时间偏差会导致认证失败与审计失效。",
+    "chapter": "网络设备管理",
+    "knowledgeSection": "日志与时间同步",
+    "knowledgePoint": "NTP 时间同步",
+    "difficulty": "medium",
+    "tags": [
+      "网络设备管理",
+      "日志与时间同步",
+      "NTP 时间同步"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-23-002",
+    "type": "single_choice",
+    "question": "配置 BPDU 保护后，被关闭的边缘端口如何恢复？",
+    "options": {
+      "A": "重启对端设备即可恢复",
+      "B": "端口会在 30 秒后自动恢复",
+      "C": "无需恢复，永久关闭",
+      "D": "管理员手工恢复，或配置自动恢复定时器"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "端口进入 Error-Down 后默认需人工 shutdown 再 undo shutdown，也可用 error-down auto-recovery 配置自动恢复时间。",
+    "chapter": "生成树原理与配置",
+    "knowledgeSection": "STP 配置与保护",
+    "knowledgePoint": "BPDU 保护",
+    "difficulty": "hard",
+    "tags": [
+      "生成树原理与配置",
+      "STP 配置与保护",
+      "BPDU 保护"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-23-003",
+    "type": "single_choice",
+    "question": "根桥保护通常在哪些端口上配置？",
+    "options": {
+      "A": "所有 Alternate 端口",
+      "B": "任意未使用的端口",
+      "C": "所有根端口",
+      "D": "指向终端的指定端口"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "根桥保护部署在不应收到更优 BPDU 的指定端口上，例如连接终端的接入端口，防止用户私接设备抢占根桥。",
+    "chapter": "生成树原理与配置",
+    "knowledgeSection": "STP 配置与保护",
+    "knowledgePoint": "根桥保护与环路保护",
+    "difficulty": "hard",
+    "tags": [
+      "生成树原理与配置",
+      "STP 配置与保护",
+      "根桥保护与环路保护"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-23-004",
+    "type": "single_choice",
+    "question": "M-LAG 与堆叠在可靠性上的关键差异是什么？",
+    "options": {
+      "A": "两者完全相同",
+      "B": "M-LAG 只能用于盒式设备",
+      "C": "M-LAG 两台设备控制面独立，堆叠共享同一控制面",
+      "D": "堆叠不需要任何互联链路"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "M-LAG 双机控制面独立、转发面双活，避免了堆叠分裂导致的双主问题，升级也可分设备滚动进行。",
+    "chapter": "数据中心网络基础",
+    "knowledgeSection": "数据中心可靠性技术",
+    "knowledgePoint": "M-LAG 跨设备聚合",
+    "difficulty": "hard",
+    "tags": [
+      "数据中心网络基础",
+      "数据中心可靠性技术",
+      "M-LAG 跨设备聚合"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-23-005",
+    "type": "true_false",
+    "question": "Fabric 自动化部署中，新设备上电后可被控制器自动发现并下发配置，无需逐台手工配置。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "设备以出厂配置上线，通过 DHCP 与控制器建立管理通道后获取角色与配置，实现即插即用式部署。",
+    "chapter": "数据中心网络基础",
+    "knowledgeSection": "数据中心可靠性技术",
+    "knowledgePoint": "Fabric 与自动化部署",
+    "difficulty": "medium",
+    "tags": [
+      "数据中心网络基础",
+      "数据中心可靠性技术",
+      "Fabric 与自动化部署"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-23-006",
+    "type": "single_choice",
+    "question": "802.11ac 相比 802.11n 在速率上的主要提升手段是什么？",
+    "options": {
+      "A": "更宽的信道绑定与更多空间流",
+      "B": "取消 MIMO",
+      "C": "改用 2.4G 频段",
+      "D": "降低调制阶数"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "802.11ac 支持 80/160MHz 信道与最多 8 条空间流，配合 256QAM 显著提升速率，但只在 5G 频段工作。",
+    "chapter": "WLAN 技术基础",
+    "knowledgeSection": "802.11 标准与频段",
+    "knowledgePoint": "速率与调制技术",
+    "difficulty": "hard",
+    "tags": [
+      "WLAN 技术基础",
+      "802.11 标准与频段",
+      "速率与调制技术"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-23-007",
+    "type": "single_choice",
+    "question": "定向天线增益较高，其代价是什么？",
+    "options": {
+      "A": "只能工作在 2.4G 频段",
+      "B": "覆盖角度变窄，非正向区域信号弱",
+      "C": "无法在室外使用",
+      "D": "必须降低发射功率"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "增益来自能量在特定方向的集中，方向越集中覆盖角越小，因此定向天线适合走廊与桥接，不适合大范围均匀覆盖。",
+    "chapter": "WLAN 技术基础",
+    "knowledgeSection": "射频基础",
+    "knowledgePoint": "天线类型与增益",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 技术基础",
+      "射频基础",
+      "天线类型与增益"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-23-008",
+    "type": "single_choice",
+    "question": "直接转发模式下，无线用户的网关通常部署在哪里？",
+    "options": {
+      "A": "AP 所连接的有线网络侧（如汇聚交换机）",
+      "B": "必须部署在核心路由器上",
+      "C": "由 AP 自身充当网关",
+      "D": "必须部署在 AC 上"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "直接转发让业务流量在本地进入有线网络，因此网关位于 AP 上游的汇聚或核心设备，AC 只承载管理流量。",
+    "chapter": "WLAN 组网架构",
+    "knowledgeSection": "转发模式",
+    "knowledgePoint": "直接转发（本地转发）",
+    "difficulty": "medium",
+    "tags": [
+      "WLAN 组网架构",
+      "转发模式",
+      "直接转发（本地转发）"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-23-009",
+    "type": "single_choice",
+    "question": "XML 相比 JSON 在表达复杂配置时的主要优势是什么？",
+    "options": {
+      "A": "不支持嵌套结构",
+      "B": "体积更小解析更快",
+      "C": "支持命名空间与严格的模式校验",
+      "D": "不需要闭合标签"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "XML 的命名空间与 Schema 校验能力适合描述复杂的层次化配置模型，NETCONF 正是基于这一特性构建。",
+    "chapter": "网络编程自动化",
+    "knowledgeSection": "数据格式",
+    "knowledgePoint": "XML 与数据模型",
+    "difficulty": "hard",
+    "tags": [
+      "网络编程自动化",
+      "数据格式",
+      "XML 与数据模型"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-23-010",
+    "type": "true_false",
+    "question": "同一台设备上 NTP 客户端与 NTP 服务器角色可以同时存在。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "设备既可向上游同步时间，也可作为服务器向下游提供时间，形成分层的时间同步体系，这是 NTP 层级设计的体现。",
+    "chapter": "网络服务与应用",
+    "knowledgeSection": "NTP 与远程服务",
+    "knowledgePoint": "NTP 分层与工作模式",
+    "difficulty": "medium",
+    "tags": [
+      "网络服务与应用",
+      "NTP 与远程服务",
+      "NTP 分层与工作模式"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-23-011",
+    "type": "single_choice",
+    "question": "网段 192.168.100.0/23 包含多少个可用主机地址？",
+    "options": {
+      "A": "510 个",
+      "B": "508 个",
+      "C": "254 个",
+      "D": "512 个"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "/23 主机位 9 位，2^9 - 2 = 510。易错点：把 /23 当成两个独立 /24 各减 2，得到 508；实际合并后只有一个网络地址和一个广播地址。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "子网划分与掩码",
+    "knowledgePoint": "子网划分计算",
+    "difficulty": "hard",
+    "tags": [
+      "IP 地址与配置",
+      "子网划分与掩码",
+      "子网划分计算"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v3-23-012",
+    "type": "single_choice",
+    "question": "主机 ARP 缓存中同一 IP 对应的 MAC 突然变化，最需要警惕什么？",
+    "options": {
+      "A": "网卡速率协商失败",
+      "B": "VLAN 编号超出范围",
+      "C": "可能遭遇 ARP 欺骗，需核对网关真实 MAC",
+      "D": "DNS 服务器地址写错"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "ARP 无认证机制，攻击者可伪造应答把网关 MAC 指向自己，形成中间人。可通过静态绑定、DAI 或 DHCP Snooping 防护。",
+    "chapter": "IP 地址与配置",
+    "knowledgeSection": "地址解析与诊断",
+    "knowledgePoint": "ARP 工作原理",
+    "difficulty": "medium",
+    "tags": [
+      "IP 地址与配置",
+      "地址解析与诊断",
+      "ARP 工作原理"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-23-013",
+    "type": "single_choice",
+    "question": "限制只有管理网段 10.10.10.0/24 能 SSH 登录设备，应如何配置？",
+    "options": {
+      "A": "关闭设备的 HTTP 服务",
+      "B": "在 VTY 下调用仅 permit 该网段的 ACL",
+      "C": "把 VTY 用户级别设为 0",
+      "D": "删除所有本地用户"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "user-interface vty 下用 acl 2000 绑定访问控制列表，只放通管理网段，可显著缩小暴力破解面。易错点：以为改用户级别能限制来源。",
+    "chapter": "网络设备管理",
+    "knowledgeSection": "远程管理",
+    "knowledgePoint": "用户界面与访问控制",
+    "difficulty": "medium",
+    "tags": [
+      "网络设备管理",
+      "远程管理",
+      "用户界面与访问控制"
+    ],
+    "stage": "综合应用"
+  }
+]

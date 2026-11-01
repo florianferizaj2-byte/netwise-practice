@@ -2,6 +2,7 @@ import crypto from "node:crypto";
 import { z } from "zod";
 import { decrypt, validateBaseUrl, redact } from "./security.js";
 import { questionSimilarity } from "./question-similarity.js";
+import { questionGenerationContract, normalizeGeneratedQuestion, questionFailureFeedback } from "./ai-question-contract.js";
 import { questionForCertificate } from "./question-banks/scopes.js";
 import { authorAiSettings } from "./ai-service.js";
 import { deepSeekDefaults, officialDeepSeek } from "./ai-model-defaults.js";
@@ -608,7 +609,7 @@ export class OpenAICompatibleProvider extends AIProvider {
         ...(feedback ? { correction: feedback } : {}),
       }));
       const batch = await this.structured(
-        `一次生成 ${pending.length} 道题。所有题目必须围绕知识点“${target}”，章节必须严格为“${seed.chapter}”${targetSection ? `，二级分类必须严格为“${targetSection}”` : ""}，题目之间要改变设问角度、情境或推理路径，不能只改数字或替换同义词。每题严格遵守对应 difficulty。若提供 learningGoal，按其 stage 设计概念理解、情境变式或综合迁移，不得偏离目标知识点或超纲。返回 {"questions":[题目对象]}，不要返回 Markdown 或其他字段。题目对象的 type 只能是英文枚举 "single_choice"、"multiple_choice" 或 "true_false"；options 必须是 JSON 对象而不是数组，格式为 {"A":"...","B":"...","C":"...","D":"..."}；answer 必须是字母数组，例如单选 ["A"]、多选 ["A","C"]。如果 specs 中有 correction，必须优先修正该问题。`,
+        questionGenerationContract() + `一次生成 ${pending.length} 道题。所有题目必须围绕知识点“${target}”，章节必须严格为“${seed.chapter}”${targetSection ? `，二级分类必须严格为“${targetSection}”` : ""}，题目之间要改变设问角度、情境或推理路径，不能只改数字或替换同义词。每题严格遵守对应 difficulty。若提供 learningGoal，按其 stage 设计概念理解、情境变式或综合迁移，不得偏离目标知识点或超纲。返回 {"questions":[题目对象]}，不要返回 Markdown 或其他字段。题目对象的 type 只能是英文枚举 "single_choice"、"multiple_choice" 或 "true_false"；options 必须是 JSON 对象而不是数组，格式为 {"A":"...","B":"...","C":"...","D":"..."}；answer 必须是字母数组，例如单选 ["A"]、多选 ["A","C"]。如果 specs 中有 correction，必须优先修正该问题。`,
         {
           certificateId: options.certificateId,
           chapter: seed.chapter,
@@ -646,12 +647,12 @@ export class OpenAICompatibleProvider extends AIProvider {
         completed: accepted.size,
         total: specs.length,
       });
-      const feedback = new Map();
-        const candidates = [];
+      const feedback = new Map(), failureCodes = new Map();
+      const candidates = [];
       for (let i = 0; i < batch.questions.length; i++) {
         const request = pending[i];
         try {
-          const draft = normalizeQuestionDraft(batch.questions[i], {
+          const draft = normalizeGeneratedQuestion(batch.questions[i], {
             chapter: seed.chapter,
             ...(targetSection ? { knowledgeSection: targetSection } : {}),
             knowledgePoint: target,
@@ -675,7 +676,9 @@ export class OpenAICompatibleProvider extends AIProvider {
             throw new Error("题目难度与扩充目标不一致");
           candidates.push({ index: request.index, question: raw });
         } catch (error) {
-          feedback.set(request.index, error.message.slice(0, 500));
+          const failure = questionFailureFeedback(error);
+          feedback.set(request.index, failure.correction);
+          failureCodes.set(request.index, failure.code);
         }
       }
       if (candidates.length) {
@@ -759,7 +762,10 @@ export class OpenAICompatibleProvider extends AIProvider {
         for (const candidate of candidates) {
           const verdict = verdicts.get(candidate.index);
           if (reviewAccepted(verdict)) accepted.set(candidate.index, candidate.question);
-          else feedback.set(candidate.index, reviewFailure(verdict));
+          else {
+            feedback.set(candidate.index, reviewFailure(verdict));
+            failureCodes.set(candidate.index, "AI_QUESTION_QUALITY_REJECTED");
+          }
         }
       }
       pending = pending
@@ -767,6 +773,7 @@ export class OpenAICompatibleProvider extends AIProvider {
         .map((request) => ({
           ...request,
           feedback: feedback.get(request.index) || request.feedback || "未通过质量校验",
+          feedbackCode: failureCodes.get(request.index) || request.feedbackCode || "AI_QUESTION_QUALITY_REJECTED",
         }));
     }
     if (pending.length) {
@@ -774,9 +781,8 @@ export class OpenAICompatibleProvider extends AIProvider {
         .slice(0, 3)
         .map(({ index, feedback }) => `第 ${index + 1} 题：${feedback}`)
         .join("；");
-      throw new Error(
-        `AI 已修正 ${maxRounds} 轮，仍有 ${pending.length} 道题未通过质量审核${reasons ? `：${reasons}` : ""}`,
-      );
+      const code = pending.some(p => p.feedbackCode === "AI_QUESTION_SCHEMA_INVALID") ? "AI_QUESTION_SCHEMA_INVALID" : "AI_QUESTION_QUALITY_REJECTED";
+      throw Object.assign(new Error(`AI 已修正 ${maxRounds} 轮，仍有 ${pending.length} 道题未通过交付检查${reasons ? `：${reasons}` : ""}`), {code});
     }
     return specs.map(({ index }) => accepted.get(index));
   }

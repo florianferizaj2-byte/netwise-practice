@@ -14,13 +14,15 @@
     ],
     "analysis": "RSSI 表示接收到的信号功率强弱，是评估无线覆盖的重要指标之一。 本题考查“射频基础”，因此应选择“接收信号强度”。",
     "chapter": "WLAN 技术基础",
-    "knowledgePoint": "射频基础",
+    "knowledgePoint": "射频信号与功率",
     "difficulty": "medium",
     "tags": [
       "WLAN 技术基础",
-      "射频基础"
+      "射频基础",
+      "射频信号与功率"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "射频基础"
   },
   {
     "id": "hcia-v2-extra-16-sni",
@@ -37,13 +39,15 @@
     ],
     "analysis": "信噪比越高通常说明信号相对噪声更清晰，有利于更稳定的无线通信。 本题考查“射频基础”，因此应选择“信号功率与噪声功率之比”。",
     "chapter": "WLAN 技术基础",
-    "knowledgePoint": "射频基础",
+    "knowledgePoint": "射频信号与功率",
     "difficulty": "medium",
     "tags": [
       "WLAN 技术基础",
-      "射频基础"
+      "射频基础",
+      "射频信号与功率"
     ],
-    "stage": "直接计算"
+    "stage": "直接计算",
+    "knowledgeSection": "射频基础"
   },
   {
     "id": "hcia-v2-extra-16-channel-width",
@@ -60,13 +64,16 @@
     ],
     "analysis": "更宽信道可提升吞吐潜力，但可用不重叠信道变少，规划要求更高。 本题考查“信道”，因此应选择“更高理论速率但占用更多频谱并更易受干扰”。",
     "chapter": "WLAN 技术基础",
-    "knowledgePoint": "信道",
+    "knowledgePoint": "频段与信道",
     "difficulty": "hard",
     "tags": [
       "WLAN 技术基础",
+      "802.11 标准与频段",
+      "频段与信道",
       "信道"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "802.11 标准与频段"
   },
   {
     "id": "hcia-v2-extra-16-5g-benefit",
@@ -83,13 +90,16 @@
     ],
     "analysis": "5 GHz 频段通常提供更多可选信道，较适合高密度部署，但穿墙能力需结合现场评估。 本题考查“802.11”，因此应选择“可用非重叠信道通常更多”。",
     "chapter": "WLAN 技术基础",
-    "knowledgePoint": "802.11",
+    "knowledgePoint": "802.11 系列标准",
     "difficulty": "easy",
     "tags": [
       "WLAN 技术基础",
+      "802.11 标准与频段",
+      "802.11 系列标准",
       "802.11"
     ],
-    "stage": "反向推理"
+    "stage": "反向推理",
+    "knowledgeSection": "802.11 标准与频段"
   },
   {
     "id": "hcia-v2-extra-16-hidden-node",
@@ -106,13 +116,16 @@
     ],
     "analysis": "隐藏节点因彼此不可感知，可能同时占用无线介质；RTS/CTS 等机制可在部分场景缓解。 本题考查“802.11”，因此应选择“两个终端互相听不到却同时向 AP 发送而发生冲突”。",
     "chapter": "WLAN 技术基础",
-    "knowledgePoint": "802.11",
+    "knowledgePoint": "802.11 系列标准",
     "difficulty": "hard",
     "tags": [
       "WLAN 技术基础",
+      "802.11 标准与频段",
+      "802.11 系列标准",
       "802.11"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "802.11 标准与频段"
   },
   {
     "id": "hcia-v2-extra-16-bssid-ssid",
@@ -129,12 +142,15 @@
     ],
     "analysis": "统一 SSID 可为用户提供一致网络名称，终端可在不同 AP 覆盖间进行漫游。 本题考查“SSID/BSSID”，因此应选择“形成统一的无线业务网络便于终端移动接入”。",
     "chapter": "WLAN 技术基础",
-    "knowledgePoint": "SSID/BSSID",
+    "knowledgePoint": "SSID 与 BSSID",
     "difficulty": "easy",
     "tags": [
       "WLAN 技术基础",
+      "WLAN 基本概念",
+      "SSID 与 BSSID",
       "SSID/BSSID"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "WLAN 基本概念"
   }
 ]

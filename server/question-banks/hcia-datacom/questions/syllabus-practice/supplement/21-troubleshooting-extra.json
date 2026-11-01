@@ -14,13 +14,16 @@
     ],
     "analysis": "先界定受影响用户和时间有助于判断问题是单点、网段还是全网，并缩小排查范围。 本题考查“分层排障”，因此应选择“影响范围、时间和可复现现象”。",
     "chapter": "网络故障排除",
-    "knowledgePoint": "分层排障",
+    "knowledgePoint": "分层排障法",
     "difficulty": "easy",
     "tags": [
       "网络故障排除",
+      "排障方法论",
+      "分层排障法",
       "分层排障"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "排障方法论"
   },
   {
     "id": "hcia-v2-extra-21-physical-check",
@@ -37,13 +40,16 @@
     ],
     "analysis": "down/down 常表示物理链路未建立，应检查线缆、模块、端口启用与对端设备。 本题考查“分层排障”，因此应选择“物理层链路与对端状态”。",
     "chapter": "网络故障排除",
-    "knowledgePoint": "分层排障",
+    "knowledgePoint": "分层排障法",
     "difficulty": "easy",
     "tags": [
       "网络故障排除",
+      "排障方法论",
+      "分层排障法",
       "分层排障"
     ],
-    "stage": "直接计算"
+    "stage": "直接计算",
+    "knowledgeSection": "排障方法论"
   },
   {
     "id": "hcia-v2-extra-21-vlan-check",
@@ -60,13 +66,16 @@
     ],
     "analysis": "二层业务首先核对接入口 VLAN、上联 Trunk 与 VLAN 是否已创建及允许通过。 本题考查“配置核对”，因此应选择“端口 VLAN 归属与 Trunk 放行情况”。",
     "chapter": "网络故障排除",
-    "knowledgePoint": "配置核对",
+    "knowledgePoint": "分而治之与对比法",
     "difficulty": "medium",
     "tags": [
       "网络故障排除",
+      "排障方法论",
+      "分而治之与对比法",
       "配置核对"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "排障方法论"
   },
   {
     "id": "hcia-v2-extra-21-route-check",
@@ -83,13 +92,16 @@
     ],
     "analysis": "跨网段不通常需要检查去程路由、下一跳以及目的端回程路径是否完整。 本题考查“连通性检查”，因此应选择“路由表和回程路由”。",
     "chapter": "网络故障排除",
-    "knowledgePoint": "连通性检查",
+    "knowledgePoint": "常用排障工具",
     "difficulty": "medium",
     "tags": [
       "网络故障排除",
+      "排障方法论",
+      "常用排障工具",
       "连通性检查"
     ],
-    "stage": "反向推理"
+    "stage": "反向推理",
+    "knowledgeSection": "排障方法论"
   },
   {
     "id": "hcia-v2-extra-21-change-correlation",
@@ -106,13 +118,16 @@
     ],
     "analysis": "变更时间线是重要证据，应优先审查变更内容和影响面并按流程回退验证。 本题考查“故障定位”，因此应选择“比对并验证近期变更，必要时按方案回退”。",
     "chapter": "网络故障排除",
-    "knowledgePoint": "故障定位",
+    "knowledgePoint": "分层排障法",
     "difficulty": "easy",
     "tags": [
       "网络故障排除",
+      "排障方法论",
+      "分层排障法",
       "故障定位"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "排障方法论"
   },
   {
     "id": "hcia-v2-extra-21-evidence-record",
@@ -129,12 +144,15 @@
     ],
     "analysis": "规范复盘沉淀知识库，可减少同类问题再次处理的时间和风险。 本题考查“故障定位”，因此应选择“便于复盘、防复发和后续快速定位”。",
     "chapter": "网络故障排除",
-    "knowledgePoint": "故障定位",
+    "knowledgePoint": "分层排障法",
     "difficulty": "easy",
     "tags": [
       "网络故障排除",
+      "排障方法论",
+      "分层排障法",
       "故障定位"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "排障方法论"
   }
 ]

@@ -14,13 +14,16 @@
     ],
     "analysis": "SNMP Agent 运行在被管设备上，维护管理信息并响应管理站查询或发送通知。",
     "chapter": "网络设备管理",
-    "knowledgePoint": "SNMP",
+    "knowledgePoint": "SNMP 版本与架构",
     "difficulty": "easy",
     "tags": [
       "网络设备管理",
+      "SNMP 网络管理",
+      "SNMP 版本与架构",
       "SNMP"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "SNMP 网络管理"
   },
   {
     "id": "hcia-v2-19-syslog",
@@ -37,13 +40,16 @@
     ],
     "analysis": "集中日志便于跨设备按统一时间线查询事件、关联告警并保留审计记录。",
     "chapter": "网络设备管理",
-    "knowledgePoint": "日志",
+    "knowledgePoint": "Syslog 日志",
     "difficulty": "easy",
     "tags": [
       "网络设备管理",
+      "日志与时间同步",
+      "Syslog 日志",
       "日志"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "日志与时间同步"
   },
   {
     "id": "hcia-v2-19-time-sync",
@@ -60,13 +66,16 @@
     ],
     "analysis": "一致的设备时间能让日志和告警顺序可信，避免因时钟偏差误判故障因果关系。",
     "chapter": "网络设备管理",
-    "knowledgePoint": "NTP",
+    "knowledgePoint": "NTP 时间同步",
     "difficulty": "medium",
     "tags": [
       "网络设备管理",
+      "日志与时间同步",
+      "NTP 时间同步",
       "NTP"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "日志与时间同步"
   },
   {
     "id": "hcia-v2-19-secure-remote",
@@ -83,12 +92,14 @@
     ],
     "analysis": "SSH/STelnet 能加密认证信息和管理会话，适合替代明文 Telnet。",
     "chapter": "网络设备管理",
-    "knowledgePoint": "远程管理",
+    "knowledgePoint": "SSH 管理",
     "difficulty": "easy",
     "tags": [
       "网络设备管理",
-      "远程管理"
+      "远程管理",
+      "SSH 管理"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "远程管理"
   }
 ]

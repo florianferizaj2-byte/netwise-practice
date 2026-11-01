@@ -14,13 +14,16 @@
     ],
     "analysis": "display current-configuration 用于查看设备当前生效的运行配置。 本题考查“基础设备操作”，因此应选择“display current-configuration”。",
     "chapter": "华为网络设备操作系统",
-    "knowledgePoint": "基础设备操作",
+    "knowledgePoint": "配置文件管理",
     "difficulty": "easy",
     "tags": [
       "华为网络设备操作系统",
+      "VRP 命令行基础",
+      "配置文件管理",
       "基础设备操作"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "VRP 命令行基础"
   },
   {
     "id": "hcia-v2-extra-02-undo-command",
@@ -37,13 +40,16 @@
     ],
     "analysis": "undo 通常用于删除已配置命令或恢复相应默认设置。 本题考查“命令行视图”，因此应选择“取消或恢复该项配置”。",
     "chapter": "华为网络设备操作系统",
-    "knowledgePoint": "命令行视图",
+    "knowledgePoint": "命令行视图与切换",
     "difficulty": "easy",
     "tags": [
       "华为网络设备操作系统",
+      "VRP 命令行基础",
+      "命令行视图与切换",
       "命令行视图"
     ],
-    "stage": "直接计算"
+    "stage": "直接计算",
+    "knowledgeSection": "VRP 命令行基础"
   },
   {
     "id": "hcia-v2-extra-02-quit-view",
@@ -60,13 +66,16 @@
     ],
     "analysis": "quit 逐级返回上一级命令视图，return 可直接返回用户视图。 本题考查“命令行视图”，因此应选择“返回上一级视图”。",
     "chapter": "华为网络设备操作系统",
-    "knowledgePoint": "命令行视图",
+    "knowledgePoint": "命令行视图与切换",
     "difficulty": "easy",
     "tags": [
       "华为网络设备操作系统",
+      "VRP 命令行基础",
+      "命令行视图与切换",
       "命令行视图"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "VRP 命令行基础"
   },
   {
     "id": "hcia-v2-extra-02-interface-view",
@@ -83,13 +92,16 @@
     ],
     "analysis": "接口地址、状态和链路参数通常在相应接口视图中配置。 本题考查“命令行视图”，因此应选择“对应接口视图”。",
     "chapter": "华为网络设备操作系统",
-    "knowledgePoint": "命令行视图",
+    "knowledgePoint": "命令行视图与切换",
     "difficulty": "medium",
     "tags": [
       "华为网络设备操作系统",
+      "VRP 命令行基础",
+      "命令行视图与切换",
       "命令行视图"
     ],
-    "stage": "反向推理"
+    "stage": "反向推理",
+    "knowledgeSection": "VRP 命令行基础"
   },
   {
     "id": "hcia-v2-extra-02-save-startup",
@@ -106,13 +118,16 @@
     ],
     "analysis": "保存操作把当前配置写入启动配置，设备重启时可再次加载。 本题考查“配置保存”，因此应选择“启动配置文件”。",
     "chapter": "华为网络设备操作系统",
-    "knowledgePoint": "配置保存",
+    "knowledgePoint": "配置文件管理",
     "difficulty": "easy",
     "tags": [
       "华为网络设备操作系统",
+      "VRP 命令行基础",
+      "配置文件管理",
       "配置保存"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "VRP 命令行基础"
   },
   {
     "id": "hcia-v2-extra-02-stelnet-prereq",
@@ -129,12 +144,15 @@
     ],
     "analysis": "STelnet 基于 SSH，需要配置密钥、用户认证和 VTY 访问方式。 本题考查“SSH 与 STelnet”，因此应选择“SSH 用户认证及密钥等安全参数”。",
     "chapter": "华为网络设备操作系统",
-    "knowledgePoint": "SSH 与 STelnet",
+    "knowledgePoint": "Telnet 与 SSH 远程登录",
     "difficulty": "hard",
     "tags": [
       "华为网络设备操作系统",
+      "设备登录与权限",
+      "Telnet 与 SSH 远程登录",
       "SSH 与 STelnet"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "设备登录与权限"
   }
 ]

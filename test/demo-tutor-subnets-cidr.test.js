@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import { reviewedTutorSnapshot } from "./helpers/reviewed-tutor-snapshot.js";
 import { getBundle, catalogue } from "../server/demo-tutor/registry.js";
 import {
   correctHomeBlueLesson,
@@ -187,14 +188,7 @@ test("installed destination routes use longest matching prefix and distinct erro
   }
 });
 test("demo corrections persist across export and isolate earlier ordinary-learning versions", () => {
-  const catalog = JSON.parse(
-    fs.readFileSync(
-      new URL(
-        "../public/demo/home-blue/ai-content-network-engineer.json",
-        import.meta.url,
-      ),
-    ),
-  );
+  const catalog = reviewedTutorSnapshot();
   for (const b of bundles) {
     const n = catalog.lessons.find((n) => n.id === b.course.nodeId);
     assert.equal(n.version, subnetCorrectedVersions[n.id]);

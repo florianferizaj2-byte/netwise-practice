@@ -1,0 +1,1863 @@
+[
+  {
+    "id": "hcip831-3-4-1-001",
+    "type": "single_choice",
+    "question": "BGP4+ 指的是？",
+    "options": {
+      "A": "支持 IPv6 的 MP-BGP",
+      "B": "BGP 的第四版本",
+      "C": "只支持组播的 BGP",
+      "D": "一种新的路由协议"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "BGP4+ 是 MP-BGP 对 IPv6 的扩展，沿用 BGP4 的报文与选路机制，通过新地址族承载 IPv6 前缀。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "定义"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "0da7b32c91d7578b2eb34a1e6658044cee97dce2098326c09091c4b4f0439655"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-002",
+    "type": "single_choice",
+    "question": "BGP4+ 使用的地址族标识 AFI 是？",
+    "options": {
+      "A": "2",
+      "B": "25",
+      "C": "1",
+      "D": "16388"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "AFI 2 表示 IPv6，AFI 1 表示 IPv4，SAFI 1 表示单播。BGP4+ 使用 AFI 2 与 SAFI 1 的组合。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "AFI"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "8010d8b6ba345d0e9504bb5ff37f72ba4472d9f0c3b48abe945d96a6e6ea7696"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-003",
+    "type": "single_choice",
+    "question": "BGP4+ 携带 IPv6 路由使用的属性是？",
+    "options": {
+      "A": "Next_Hop",
+      "B": "MP_REACH_NLRI",
+      "C": "AS_Path",
+      "D": "MED"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "MP_REACH_NLRI 携带可达的 IPv6 前缀与下一跳，MP_UNREACH_NLRI 用于撤销，二者是 MP-BGP 的核心属性。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "属性"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d5a635c6c1e72959ca87c2f6e06e0e07eec4f52aaaf3b4249321d8d3a4a1c8d1"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-004",
+    "type": "single_choice",
+    "question": "BGP4+ 邻居使用什么地址建立？",
+    "options": {
+      "A": "链路本地地址",
+      "B": "IPv6 地址",
+      "C": "IPv4 地址",
+      "D": "MAC 地址"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "BGP4+ 邻居以 IPv6 地址标识，可用全局地址或链路本地地址，使用链路本地地址时需指定出接口。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "邻居"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "f82e20b2751a6737eb785301dbc037fedcdd1f507cf26b53c22f8dfb16ac00ca"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-005",
+    "type": "single_choice",
+    "question": "BGP4+ 的选路规则与 IPv4 BGP 相比？",
+    "options": {
+      "A": "完全不同",
+      "B": "完全相同",
+      "C": "只看 AS_Path",
+      "D": "不看 Local_Pref"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "BGP4+ 沿用 BGP 的选路顺序：Preferred-value、Local_Pref、本地始发、AS_Path、Origin、MED 等，与 IPv4 一致。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "选路"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "46de22cbadcc88271bef590bc6e5f6c3b14920ddf5ad7830725f2a6626a5b625"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-006",
+    "type": "single_choice",
+    "question": "配置 BGP4+ 时必须使能哪个地址族？",
+    "options": {
+      "A": "ipv4-family",
+      "B": "ipv6-family",
+      "C": "vpnv4",
+      "D": "L2VPN"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "在 BGP 视图下进入 ipv6-family 并激活邻居，才能交换 IPv6 前缀；只建立邻居不激活地址族不会传路由。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "地址族"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "3df5ef219b2c9118c49efb9d9183c9e1e0408aa2cfb09662f8826787407d9c36"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-007",
+    "type": "single_choice",
+    "question": "BGP4+ 通告 IPv6 前缀通常使用什么命令？",
+    "options": {
+      "A": "import-route 加接口",
+      "B": "redistribute 加 ACL",
+      "C": "peer 加地址",
+      "D": "network 加 IPv6 前缀与前缀长度"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "用 network 2001:db8:: 64 的形式把本地存在的 IPv6 路由通告进 BGP，前缀必须已在路由表中存在。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "通告"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "bff3e160c4d8efe92c3f67508a21dcc68722243862d040bcf49362d834bde7c2"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-008",
+    "type": "single_choice",
+    "question": "BGP4+ 使用链路本地地址建立邻居时，必须额外指定什么？",
+    "options": {
+      "A": "出接口",
+      "B": "下一跳",
+      "C": "Router ID",
+      "D": "AS 号"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "链路本地地址不唯一，必须用 peer 命令指定出接口，设备才知道从哪个接口发送报文。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "hard",
+    "tags": [
+      "BGP4+",
+      "链路本地"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e9d398d3083ec08c5792244fd361aebc95f0c2d6a299c01ad29da67a4ca8730e"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-009",
+    "type": "single_choice",
+    "question": "BGP4+ 中 next-hop-local 的作用是？",
+    "options": {
+      "A": "删除下一跳属性",
+      "B": "改为链路本地地址",
+      "C": "把下一跳改为 0",
+      "D": "把下一跳改为自身地址"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "从 EBGP 学到的路由通告给 IBGP 邻居时，缺省下一跳不变，配置 next-hop-local 后改为自身地址，保证 IBGP 邻居可达。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "下一跳"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-009",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "6ab7353807623d3bed78cf8c8e4698036328de0e24e0e3c9e682231b401a9788"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-010",
+    "type": "single_choice",
+    "question": "BGP4+ 是否支持路由反射器？",
+    "options": {
+      "A": "不支持",
+      "B": "只支持联盟",
+      "C": "支持",
+      "D": "只支持全互联"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "BGP4+ 沿用 BGP 的反射机制，RR 可以在 IPv6 地址族内反射路由，减少 IBGP 全互联。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "RR"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-010",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "7b95b4ea1d720be762928d7dee49d29ee7a88c636896cf1b0e635279414eab12"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-011",
+    "type": "single_choice",
+    "question": "BGP4+ 是否支持 4 字节 AS 号？",
+    "options": {
+      "A": "只支持 2 字节",
+      "B": "不支持",
+      "C": "只支持私有 AS",
+      "D": "支持"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "BGP4+ 与 BGP4 一样支持 4 字节 AS 号，通过 AS4_PATH 与能力协商与旧设备兼容。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "AS4"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-011",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "59ed713ff12a5f8f793eee583456ace48b30895e44905ef273aec54f194004b0"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-012",
+    "type": "single_choice",
+    "question": "同一台设备可以同时运行 IPv4 BGP 与 BGP4+ 吗？",
+    "options": {
+      "A": "需要两个进程",
+      "B": "只能运行一种",
+      "C": "可以，地址族相互独立",
+      "D": "不可以"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "同一 BGP 进程内可同时激活 ipv4-family 与 ipv6-family，两个地址族独立维护邻居与路由表。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "双栈"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-012",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "c0cc7856c03fcecb44cdacc6e1c0420090af0763a091dff2f0b4bc6e1033a77c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-013",
+    "type": "single_choice",
+    "question": "BGP4+ 的扩展团体属性主要用于？",
+    "options": {
+      "A": "压缩路由",
+      "B": "控制路由策略与标记",
+      "C": "分配标签",
+      "D": "加密路由"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "扩展团体属性可携带 RT、SoO 等语义，用于 VPN 导入导出与防环控制，IPv6 场景同样适用。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "扩展团体"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-013",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "327d0c4bf76f1fa4f7acfa5b3c779ba1a8e0a56c89a3458b994cf91e436c67b3"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-014",
+    "type": "single_choice",
+    "question": "BGP4+ 邻居状态为 Established 但无 IPv6 路由，最可能的原因是？",
+    "options": {
+      "A": "Router ID 冲突",
+      "B": "AS 号配置错误",
+      "C": "未在 ipv6-family 下激活邻居",
+      "D": "TCP 连接失败"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Established 说明会话已建立，但若未在 ipv6-family 视图下 peer enable，该地址族不会交换任何前缀。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "hard",
+    "tags": [
+      "BGP4+",
+      "排障"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-014",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "bdffb72fc507690f9648dac8ffca8b33660bb431351e1461907ea2af33f4fe34"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-015",
+    "type": "single_choice",
+    "question": "BGP4+ 的 Router ID 格式是？",
+    "options": {
+      "A": "128 位 IPv6 地址",
+      "B": "32 位点分十进制",
+      "C": "64 位接口标识",
+      "D": "48 位 MAC"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "BGP4+ 仍使用 32 位点分十进制 Router ID，通常取 IPv4 Loopback 地址或手工指定。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "Router ID"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-015",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "7df9654de25ba8cb0c4c4d6f2e0bc77054e6ae6e1bef04f750c5337d8ef2470f"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-016",
+    "type": "single_choice",
+    "question": "BGP4+ 中 IPv6 前缀的掩码范围是？",
+    "options": {
+      "A": "0 到 64",
+      "B": "0 到 128",
+      "C": "0 到 32",
+      "D": "1 到 128"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IPv6 前缀长度为 0 到 128 位，0 表示默认路由，128 表示主机路由。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "前缀长度"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-016",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "0bacd1a4c2b4b53378dbe05a1af085253d0d235e5cecccf16da8b221303aed59"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-017",
+    "type": "multiple_choice",
+    "question": "BGP4+ 相比 IPv4 BGP 的变化包括？",
+    "options": {
+      "A": "选路规则完全不同",
+      "B": "使用 IPv6 地址建立邻居",
+      "C": "使用 MP_REACH_NLRI 携带前缀",
+      "D": "需要使能 ipv6-family"
+    },
+    "answer": [
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "BGP4+ 只改变承载地址与属性封装，选路规则与 IPv4 BGP 保持一致。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "差异",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-017",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "de8346df9db2be5536bd14193cfd4f169b38d6332e1287017d149813ccdb17b9"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-018",
+    "type": "multiple_choice",
+    "question": "BGP4+ 部署时通常需要配置？",
+    "options": {
+      "A": "IPv4 静态路由",
+      "B": "IPv6 邻居地址",
+      "C": "ipv6-family 下激活邻居",
+      "D": "通告的 IPv6 前缀"
+    },
+    "answer": [
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "前三项是 BGP4+ 的基本配置。IPv4 静态路由与 IPv6 路由交换无关。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "部署",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-018",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "0d9ac8facae93cc744d1af5f7cf6ec3d20f461b9f9bf2ab06c09c5bbbf1fcedb"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-019",
+    "type": "true_false",
+    "question": "BGP4+ 使用 MP_REACH_NLRI 属性携带 IPv6 前缀。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "MP_REACH_NLRI 携带可达前缀与下一跳，MP_UNREACH_NLRI 负责撤销，这是 MP-BGP 的标准做法。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "BGP4+"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-019",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "aad675f23f739330d3c7e2ebcc39932b19e6c78d52e6c096a7732020352b7435"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-020",
+    "type": "true_false",
+    "question": "BGP4+ 的选路规则与 IPv4 BGP 完全不同。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "BGP4+ 沿用同一套选路规则，只改变了地址族与属性封装方式。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "easy",
+    "tags": [
+      "判断",
+      "选路"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-020",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "8173bdfa7c295de1a96df18696d981948ea5c38a52e3bd191fa4ad406c6b7de0"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-021",
+    "type": "single_choice",
+    "question": "BGP4+ 邻居使用链路本地地址时，路由的下一跳通常是什么？",
+    "options": {
+      "A": "对端的链路本地地址",
+      "B": "自己的环回地址",
+      "C": "对端的全局地址",
+      "D": "组播地址"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "使用链路本地地址建邻时，下一跳也是链路本地地址，因此必须正确指定出接口，否则无法转发。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "下一跳"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-021",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "dd69efdbe4a97cfb3a7232ba86d266459524835bf1669b51fc1f4c602696896c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-022",
+    "type": "single_choice",
+    "question": "BGP4+ 中 peer 命令指定的地址类型是？",
+    "options": {
+      "A": "IPv4 地址",
+      "B": "MAC 地址",
+      "C": "IPv6 地址",
+      "D": "域名"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "BGP4+ 的 peer 命令使用 IPv6 地址标识邻居，如 peer 2001:db8::1 as-number 65001。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "命令"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-022",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "fce807bddbf2fea6778adbe660aca08d720288bcdb12be9c76b7f27ea0d2e7c8"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-023",
+    "type": "single_choice",
+    "question": "BGP4+ 与 BGP VPNv6 的区别是？",
+    "options": {
+      "A": "后者承载 VPN 的 IPv6 路由",
+      "B": "前者不支持前缀",
+      "C": "两者完全相同",
+      "D": "后者不支持 BGP"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "BGP4+ 承载普通 IPv6 单播路由；VPNv6 使用 AFI 2 与 SAFI 128 承载带 RD 的 VPN 路由。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "hard",
+    "tags": [
+      "BGP4+",
+      "VPNv6"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-023",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "9d311bb51b18c70c119659ea33e466bbc47a4926ae34115f217b72d756f77b0a"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-024",
+    "type": "single_choice",
+    "question": "BGP4+ 的路由聚合命令通常在哪个视图下配置？",
+    "options": {
+      "A": "区域视图",
+      "B": "ipv6-family 视图",
+      "C": "系统视图",
+      "D": "接口视图"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "聚合在 BGP 的 ipv6-family 地址族视图下配置，可指定聚合前缀与是否抑制明细路由。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "聚合"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-024",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "188c19ce2ec4be686994484597c5c16def751ca645274c15820bd69647b58a62"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-025",
+    "type": "single_choice",
+    "question": "BGP4+ 是否支持路由策略？",
+    "options": {
+      "A": "只支持 AS_Path 过滤",
+      "B": "只支持前缀列表",
+      "C": "不支持",
+      "D": "支持，与 IPv4 相同"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "BGP4+ 支持 route-policy、前缀列表、AS_Path 过滤器、团体属性过滤器等全部策略工具。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "策略"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-025",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "0b7a23d14a25ef13dee00f923b63b538f80ccc31e95010ae00dc268e4ed40f8a"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-026",
+    "type": "single_choice",
+    "question": "BGP4+ 建立邻居前必须保证什么？",
+    "options": {
+      "A": "组播已启用",
+      "B": "MPLS 已配置",
+      "C": "IPv6 地址可达且 TCP 179 放通",
+      "D": "IPv4 地址可达"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "BGP 基于 TCP 179，邻居地址必须可达且端口未被拦截，否则会话停留在 Active 或 Connect。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "邻居建立"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-026",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "12e8c32852fbb02c033f2b394cee31fcc66ec50dcca4e54d44453e6f206842a3"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-027",
+    "type": "single_choice",
+    "question": "BGP4+ 中 IBGP 邻居的下一跳缺省如何处理？",
+    "options": {
+      "A": "删除该属性",
+      "B": "改为 0",
+      "C": "改为自身地址",
+      "D": "保持不变"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "IBGP 通告时下一跳缺省不变，若下一跳在 AS 内不可达，需要配置 next-hop-local 改为自身地址。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "IBGP"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-027",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "09dc3444fe6a0ca99bb92315c43763f37ad3f74b5ae1028e3754a22a37cde17e"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-028",
+    "type": "multiple_choice",
+    "question": "BGP4+ 支持下列哪些能力？",
+    "options": {
+      "A": "联盟",
+      "B": "路由反射",
+      "C": "路由聚合",
+      "D": "二层标签交换"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "BGP4+ 支持 RR、联盟、聚合等 BGP 标准能力。二层标签交换由 LDP 或 BGP EVPN 承担。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "能力",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-028",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "cfeee243ff34f563f59bd4e00df5416f24822438d1574bcae7b2a75897e11a17"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-029",
+    "type": "true_false",
+    "question": "BGP4+ 邻居建立后会自动交换 IPv6 路由，无需激活地址族。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "必须在 ipv6-family 视图下对邻居执行 enable，否则该地址族不会交换任何前缀。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "地址族"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-029",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4f02f778ee20a5c065902248f522edc22832d636f58d3a91bfe285d07d2c7063"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-030",
+    "type": "single_choice",
+    "question": "BGP4+ 中 AS_Path 的作用与 IPv4 相比？",
+    "options": {
+      "A": "不同，只用于防环",
+      "B": "不同，只用于选路",
+      "C": "相同，用于防环与选路",
+      "D": "不使用该属性"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "AS_Path 在 IPv6 中同样用于防止 AS 间环路并作为选路依据，长度越短越优。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "AS_Path"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-030",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "bea90d5c10ed4eaad4eaa3734b7e5519c12903f5a9a0eaafc50a433d97e82b75"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-031",
+    "type": "single_choice",
+    "question": "BGP4+ 学到路由但不优，最可能的原因是？",
+    "options": {
+      "A": "Router ID 冲突",
+      "B": "端口未放行",
+      "C": "AS 号错误",
+      "D": "下一跳不可达"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "下一跳不可达时路由保留在 BGP 表中但不装入 IPv6 路由表，需检查 IGP 是否可达该下一跳。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "hard",
+    "tags": [
+      "BGP4+",
+      "排障"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-031",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "ca0c8ddef0e0c6edbc09861e87d2c2e0d731cf4218a790762d94974ed7949792"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-032",
+    "type": "single_choice",
+    "question": "BGP4+ 中 IPv6 默认路由的通告方式是？",
+    "options": {
+      "A": "network 0.0.0.0 0",
+      "B": "import-route static",
+      "C": "network :: 0",
+      "D": "default-route originate"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "可用 network :: 0 通告默认路由，也可用 default-route originate 生成默认路由，具体取决于设备实现。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "默认路由"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-032",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "13cdba2b01a4a89cd22f909248bfd16330dae6c745b67b2645436a60fe1c5b12"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-033",
+    "type": "single_choice",
+    "question": "BGP4+ 邻居使用全局地址与链路本地地址的主要区别是？",
+    "options": {
+      "A": "后者不需要 AS 号",
+      "B": "后者不支持认证",
+      "C": "后者不能传路由",
+      "D": "后者必须指定出接口"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "链路本地地址在每条链路上可能重复，必须用出接口限定；全局地址唯一，不需要额外指定接口。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "地址类型"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-033",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "6b75da54ccac086e271a8e980108bbce57bc8241fc237d621e908c662eb7e2d4"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-034",
+    "type": "single_choice",
+    "question": "BGP4+ 与 IGP 的关系是？",
+    "options": {
+      "A": "两者互不相关",
+      "B": "BGP4+ 依赖 IGP 提供下一跳可达性",
+      "C": "BGP4+ 替代 IGP",
+      "D": "BGP4+ 只用于域内"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "BGP4+ 负责域间路由，但下一跳的可达性由 IGP（IS-IS 或 OSPFv3）提供，缺少 IGP 时路由不优。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "IGP"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-034",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d22e65baae74ea0d9f48cfa8483f096f02267d129de19ca0bfb0af6d0170f2ac"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-035",
+    "type": "multiple_choice",
+    "question": "BGP4+ 排障时可检查下列哪些内容？",
+    "options": {
+      "A": "ipv6-family 是否激活邻居",
+      "B": "邻居状态是否为 Established",
+      "C": "下一跳是否可达",
+      "D": "设备的采购价格"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "前三项覆盖了会话、地址族激活与路由优选三个关键环节。采购价格与排障无关。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "排障",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-035",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "c46a9136599948585d9c37d3a09d1cd3441941bdf1f5cda537d3e4dc9fc20e23"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-036",
+    "type": "true_false",
+    "question": "BGP4+ 使用 TCP 179 建立邻居。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "BGP 系列协议统一使用 TCP 179，IPv6 场景同样如此，只是承载地址变为 IPv6。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "easy",
+    "tags": [
+      "判断",
+      "BGP4+"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-036",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "5f217887ad55391cac7c21a70311635c89ee00fe949e44dc70447eced0cc6293"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-037",
+    "type": "single_choice",
+    "question": "BGP4+ 中 Route Refresh 能力的作用是？",
+    "options": {
+      "A": "修改 AS 号",
+      "B": "清除路由表",
+      "C": "动态请求对端重发路由",
+      "D": "重置 TCP 连接"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "Route Refresh 允许在不中断会话的情况下请求对端重新通告路由，便于策略调整后立即生效。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "能力"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-037",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "cc79be6f22cf82d9759c6d71082f933ca23974f232d8eba3601c87630a262558"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-038",
+    "type": "single_choice",
+    "question": "BGP4+ 的路由表查看命令通常是？",
+    "options": {
+      "A": "display bgp ipv6 routing-table",
+      "B": "display ospfv3 routing",
+      "C": "display ipv6 routing-table",
+      "D": "display bgp routing-table"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "display bgp ipv6 routing-table 显示 BGP4+ 的 BGP 路由表，display ipv6 routing-table 显示最终生效路由。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "命令"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-038",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "7d2855582ced20f9771aa480f55c880b42f92bf9d2f51c15df0ce928f627b2d0"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-039",
+    "type": "single_choice",
+    "question": "两台设备同时配置 IPv4 与 IPv6 BGP，IPv4 正常而 IPv6 不通，最可能的原因是？",
+    "options": {
+      "A": "ipv6-family 下未激活邻居",
+      "B": "AS 号不一致",
+      "C": "TCP 179 被拦截",
+      "D": "Router ID 冲突"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "同一会话可承载多个地址族，IPv4 正常说明 TCP 与 AS 号都没问题，问题出在 IPv6 地址族未激活。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "hard",
+    "tags": [
+      "BGP4+",
+      "排障"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-039",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "2b76bd296b9e5a3ad5e8561de5048edc8d566811479c76b4d2d07b213d0a5b86"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-040",
+    "type": "single_choice",
+    "question": "BGP4+ 支持的最大前缀长度是？",
+    "options": {
+      "A": "256",
+      "B": "32",
+      "C": "128",
+      "D": "64"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "IPv6 地址为 128 位，因此前缀长度最大 128，表示单台主机路由。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "前缀"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-040",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "b278fca3bb1f8a813ff30a0bec3eb36b693b4182a28ce0dc99cb4f025f8450b6"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-041",
+    "type": "multiple_choice",
+    "question": "BGP4+ 与 IPv4 BGP 的共同点包括？",
+    "options": {
+      "A": "使用 TCP 179",
+      "B": "使用相同的地址族",
+      "C": "使用相同的选路规则",
+      "D": "支持路由反射"
+    },
+    "answer": [
+      "A",
+      "C",
+      "D"
+    ],
+    "analysis": "两者共用传输层、选路规则与反射机制，区别在于地址族与属性封装。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "共同点",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-041",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d88d30538afd83c08368db6386bf1698a33a6aa7974aea7defcdd0eaa9a09f07"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-042",
+    "type": "true_false",
+    "question": "BGP4+ 需要为 IPv6 单独启动一个 BGP 进程。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "同一 BGP 进程可同时激活多个地址族，不需要为 IPv6 单独启动进程。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "进程"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-042",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "3a98879d135fe9a8abe7a10b61d9eb59a6218873a0da1fe8872483f48a3ab978"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-4-1-043",
+    "type": "single_choice",
+    "question": "BGP4+ 中 IPv6 前缀的下一跳缺省是什么？",
+    "options": {
+      "A": "自己的环回地址",
+      "B": "全零地址",
+      "C": "对端邻居的 IPv6 地址",
+      "D": "对端的 IPv4 地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "EBGP 通告时下一跳改为自身接口地址，IBGP 通告时缺省保持不变，与 IPv4 行为一致。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "BGP4+",
+    "knowledgePoint": "BGP4+ 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "BGP4+",
+      "下一跳"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-4-1-043",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / BGP4+ / BGP4+ 原理与配置」。知识点编码 hcip831-3-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "3f7a12635c68e61ce690f1e0f61bb410095170d12aa6a19fb14305b292b3dbe3"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-4-2-5-009",
+    "type": "single_choice",
+    "question": "MACsec 的加密发生在哪一层？",
+    "options": {
+      "A": "三层",
+      "B": "四层",
+      "C": "应用层",
+      "D": "二层"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "MACsec 在以太网层对帧做加密与完整性保护，属于二层安全技术，与 IP 层加密互不替代。",
+    "chapter": "以太网高级技术",
+    "knowledgeSection": "以太网交换安全",
+    "knowledgePoint": "MACsec",
+    "difficulty": "medium",
+    "tags": [
+      "MACsec",
+      "层次"
+    ],
+    "provenance": {
+      "questionId": "hcip831-4-2-5-009",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「以太网高级技术 / 以太网交换安全 / MACsec」。知识点编码 hcip831-4-2-5。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "b048df5f7aec7a676b957e67f4bf59267b0589b2d016eefa1e34265008ecc129"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-4-1-025",
+    "type": "single_choice",
+    "question": "MPLS VPN 中实现站点间互访的基础是？",
+    "options": {
+      "A": "PE 上正确的 RT 导入导出",
+      "B": "P 设备的 VPN 实例",
+      "C": "LDP 的会话数量",
+      "D": "CE 的 MPLS 配置"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "站点互访依赖 PE 之间 VPNv4 路由的正确导入导出，核心是两端 RT 匹配；P 与 CE 都不需要 VPN 实例。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "medium",
+    "tags": [
+      "MPLS VPN",
+      "互通"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-025",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "45db066fe5e882074b30871e69469763113d2f78f6994d325918212442abeed8"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-4-1-026",
+    "type": "single_choice",
+    "question": "MPLS VPN 中 PE-CE 使用 BGP 时，PE 需要配置什么？",
+    "options": {
+      "A": "PIM 邻居",
+      "B": "全局 BGP 邻居",
+      "C": "VPN 实例内的 BGP 邻居",
+      "D": "LDP 邻居"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "PE 在 VPN 实例视图下与 CE 建立 BGP 邻居，把学到的路由附加 RT 后通过 MP-BGP 通告给其他 PE。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "medium",
+    "tags": [
+      "MPLS VPN",
+      "BGP"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-026",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e1e85db92ca0a931315e4f55f6c43f16206f0e7151c0407bdac714eef6ee7062"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-4-1-027",
+    "type": "single_choice",
+    "question": "MPLS VPN 中同一 VPN 的两个站点使用相同网段会导致什么？",
+    "options": {
+      "A": "自动隔离",
+      "B": "路由冲突或部分站点不可达",
+      "C": "自动聚合",
+      "D": "自动做 NAT"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "同一 VPN 内地址必须唯一，重叠会导致 VPNv4 前缀相同、后到的路由覆盖或形成等价路径，造成部分站点不可达。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "hard",
+    "tags": [
+      "MPLS VPN",
+      "地址重叠"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-027",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4e364d5b97f5bcf843ec682458de26c28843f643f4078c4a86937b2fc6f59cb8"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-4-1-028",
+    "type": "single_choice",
+    "question": "MPLS VPN 的 Extranet 场景主要依靠什么实现？",
+    "options": {
+      "A": "修改 RD",
+      "B": "交叉配置 import 与 export RT",
+      "C": "关闭 LDP",
+      "D": "调整 MTU"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "Extranet 让不同 VPN 的站点访问彼此部分资源，通过为双方配置交叉 RT 精确控制可见路由范围。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "medium",
+    "tags": [
+      "MPLS VPN",
+      "Extranet"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-028",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "1f59cd55ae6995f62b29a795925ce17231b36235a2cd6594409284fc2922a81e"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-4-1-029",
+    "type": "multiple_choice",
+    "question": "MPLS VPN 典型应用包括？",
+    "options": {
+      "A": "企业多站点互联",
+      "B": "跨企业受控互访",
+      "C": "集中上网出口",
+      "D": "无线终端认证"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "MPLS VPN 承载站点互联、集中出口与跨企业互访。无线终端认证属于 WLAN 准入范畴。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "medium",
+    "tags": [
+      "MPLS VPN",
+      "应用",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-029",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4f1de2abf929fda820740bac361a658b371e41d25aed8bc34fc20e6e81107654"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-5-4-1-030",
+    "type": "true_false",
+    "question": "MPLS VPN 中 CE 需要配置 VPN 实例。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "VPN 实例只配置在 PE 上，CE 按普通 IP 转发，不感知 MPLS 与 VPN 信息。",
+    "chapter": "MPLS 技术",
+    "knowledgeSection": "MPLS VPN 部署与应用",
+    "knowledgePoint": "MPLS VPN 典型应用与 OSPF VPN 拓展",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "CE"
+    ],
+    "provenance": {
+      "questionId": "hcip831-5-4-1-030",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「MPLS 技术 / MPLS VPN 部署与应用 / MPLS VPN 典型应用与 OSPF VPN 拓展」。知识点编码 hcip831-5-4-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "cee82bdd618e0f0683765a430faef2115a785c5d4177c4e25d9e0521b0a8b7bd"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-2-1-041",
+    "type": "single_choice",
+    "question": "OSPFv3 的 Router-LSA 是否携带 IPv6 前缀？",
+    "options": {
+      "A": "只携带外部前缀",
+      "B": "携带全部前缀",
+      "C": "不携带，由前缀 LSA 承载",
+      "D": "只携带链路本地前缀"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "OSPFv3 把前缀从 Router-LSA 中分离，区域内前缀由 Intra-Area-Prefix-LSA 承载，实现拓扑与地址解耦。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "OSPFv3",
+    "knowledgePoint": "OSPFv3 原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "OSPFv3",
+      "LSA"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-2-1-041",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / OSPFv3 / OSPFv3 原理与配置」。知识点编码 hcip831-3-2-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "1d78af40061deb35d9a5c033caa50a20ddc7be472b255bcf045ddc033242fca6"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-042",
+    "type": "single_choice",
+    "question": "IS-IS IPv6 中，IPv6 前缀的度量与 IPv4 相比？",
+    "options": {
+      "A": "沿用同一套度量体系",
+      "B": "不使用度量",
+      "C": "使用独立度量",
+      "D": "只使用跳数"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IS-IS 的窄度量与宽度量机制与地址族无关，IPv6 前缀沿用同一套度量计算最短路径。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "度量"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-042",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4be1fb53b55a236e0441e1114185ebd6bc7038eb613fbf18086646cfec1e9b0c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-043",
+    "type": "single_choice",
+    "question": "IS-IS 双栈部署时，若只在一端使能 IPv6，会出现什么？",
+    "options": {
+      "A": "NET 冲突",
+      "B": "设备自动重启",
+      "C": "IPv4 邻居中断",
+      "D": "IPv6 邻居无法建立"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "IS-IS 邻居需要双方都支持并通告 IPv6 能力，单端使能会导致 IPv6 邻接无法形成。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "双栈"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-043",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "371a642adface99e735c5af430a2ce727ef4e5d3d98b6af0e68c95e818d9e601"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  }
+]

@@ -1,5 +1,16 @@
+import { loadOwnedPractice, ownedPracticePage, saveOwnedPractice, practiceOwner, type PracticeSelection } from '../api/ownedPractice.android';
+import { practiceCheckpoint } from '../api/practiceCheckpoint.android';
+import { practiceFingerprint } from '../api/practiceCheckpointStore';
+import { VoicePackSettings, type VoicePackSettingsHandle } from '../components/VoicePackSettings.android';
+import {practiceAttemptSync,usePracticeAttemptView} from '../api/practiceAttemptSync.android';
+import {studyRequestId} from '../api/studyTypes';
 import { androidAccent } from '../android-design-tokens';
 import { useAndroidFocusMode } from '../navigation/AndroidFocusMode.android';
+import { CheckInScreen } from './CheckInScreen.android';
+import { AnswerFeedbackSettings } from '../components/AnswerFeedbackSettings.android';
+import { playCorrectAnswerFeedback,stopAnswerFeedback } from '../answerFeedback';
+import {practiceVoice} from '../practiceVoice';
+import { AboutScreen } from './AboutScreen.android';
 import { AndroidPageHeader, AndroidPointsLink } from '../components/AndroidUi.android';
 import { androidPointsFlow } from '../api/androidPointsRuntime.android';
 import { AppIcon } from '../components/AppIcon';
@@ -9,6 +20,7 @@ export { ExamScreen } from './ExamScreen';
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import {
   ActivityIndicator,
+  AppState,
   BackHandler,
   Image,
   Linking,
@@ -28,6 +40,7 @@ import { AppSwitch } from '../components/AppSwitch';
 
 import {
   mobileApi,
+  API_BASE_URL,
   type AiAnalysisResponse,
   type AiSettingsResponse,
   type AiTeacherAction,
@@ -74,7 +87,6 @@ import type {
   PracticeSession,
   PracticeSource,
 } from '../types';
-import { APP_VERSION } from '../version';
 
 type ScreenProps = {
   dashboard?: DashboardResponse | null;
@@ -202,13 +214,13 @@ async function loadDailyPracticeQuestions(
   knowledgeSection?: string,
   knowledgePoint?: string,
 ) {
-  const filters = { chapter, knowledgeSection, knowledgePoint };
+  const filters = { chapter, knowledgeSection, knowledgePoint,feedback:'instant' as const };
   const hasSelection = Boolean(chapter || knowledgeSection || knowledgePoint);
   const selectedQuestions = await mobileApi.questions(
     DAILY_PRACTICE_COUNT,
     0,
     true,
-    hasSelection ? filters : undefined,
+    filters,
   );
   if (!hasSelection || selectedQuestions.length >= DAILY_PRACTICE_COUNT) {
     return shuffleQuestions(selectedQuestions).slice(0, DAILY_PRACTICE_COUNT);
@@ -219,6 +231,7 @@ async function loadDailyPracticeQuestions(
     DAILY_PRACTICE_COUNT + selectedQuestions.length,
     0,
     true,
+    {feedback:'instant'},
   );
   return shuffleQuestions([
     ...selectedQuestions,
@@ -272,8 +285,16 @@ export function PracticeScreen({
   preview = false, user, certificates, onOpenCertificatePicker,
 }: ScreenProps) {
   const { colors, reduceMotion } = useTheme();
+  const { width: practiceWidth, fontScale: practiceFontScale } = useWindowDimensions();
+  const optionBadgeEdge = Math.ceil(36 * Math.max(1, practiceFontScale));
+  const stackAiActions = practiceWidth < 360 || practiceFontScale > 1.15;
+  const stackPracticeHeader = practiceWidth < 360 && practiceFontScale > 1.15;
   const styles = useThemedStyles(createStyles, iosStyles.tabs);
   const active = useScreenActive();
+  const feedbackVisible = useRef(false);
+  const voiceRound=useRef('practice:'+Date.now()+':'+Math.random());
+  const voiceScope=[voiceRound.current,user?.id,practiceSession,practiceMode,practiceSource,practiceChapter,practiceKnowledgeSection,practiceKnowledgePoint,practiceAiGroupId].join(':');
+
   const isDailyPractice = practiceSession === 'daily';
   const [questions, setQuestions] = useState<Question[]>([]);
   const [nextOffset, setNextOffset] = useState<number | null>(null);
@@ -283,11 +304,22 @@ export function PracticeScreen({
   const pageGeneration = useRef(0);
   const viewedAnswers=useRef<{generation:number;items:Map<string,{selected:string[];draft:string;result:AttemptResponse|null}>}>({generation:-1,items:new Map()});
   const pageSeed = useRef('');
+  const randomBefore = useRef('');
+  const pageBaseOffset = useRef(0);
+  const checkpointContext = useRef('');
+  const currentCheckpointContext = JSON.stringify([API_BASE_URL,user?.id,user?.certificateId,practiceMode,practiceChapter,practiceKnowledgeSection,practiceKnowledgePoint]);
+  const [checkpointReady, setCheckpointReady] = useState(false);
+  const ownedSelection=useRef<PracticeSelection>({session:'standard',mode:'sequential'});
+  const managedPractice=!!user&&!preview&&!practiceAiGroupId&&practiceMode!=='ai'&&(practiceSource==='all'||practiceSource==='answered');
+  const saveLatest=useRef<()=>Promise<void>>(()=>Promise.resolve());
   const pageFlight = useRef<Promise<number> | null>(null);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [selected, setSelected] = useState<string[]>([]);
   const [responseDraft, setResponseDraft] = useState('');
   const [result, setResult] = useState<AttemptResponse | null>(null);
+  const [syncIds,setSyncIds]=useState<Record<string,string>>({});
+  const [feedbackById,setFeedbackById]=useState<Record<string,Pick<Question,'answer'|'analysis'|'expectedAnswer'>>>({});
+  const submissionGuard=useRef(''),fallbackIds=useRef(new Map<string,string>());
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [finished, setFinished] = useState(false);
@@ -306,6 +338,9 @@ export function PracticeScreen({
   const [reportBusy, setReportBusy] = useState(false);
   const [reportNotice, setReportNotice] = useState('');
   const [wrongDeleteBusy, setWrongDeleteBusy] = useState(false);
+  const wrongDeleteLock = useRef(false), skipLock = useRef(false);
+  const [practiceVoiceSettingsOpen, setPracticeVoiceSettingsOpen] = useState(false);
+  const practiceVoiceSettingsRef = useRef<VoicePackSettingsHandle>(null);
   const favoriteRevisionRef = useRef(new Map<string, number>());
   const favoriteDesiredRef = useRef(new Map<string, boolean>());
   const favoriteConfirmedRef = useRef(new Map<string, boolean>());
@@ -328,18 +363,25 @@ export function PracticeScreen({
   },[active,focusedPractice,onNavigate,practiceMode,practiceSession,practiceSaving,aiBusy]);
 
   useEffect(() => {
+    if(!active){checkpointContext.current="";return;}
     let mounted = true;
     const cachedPage = !preview && !needsPracticePicker && !isDailyPractice &&
       practiceSource === 'all' && practiceMode === 'sequential' && !practiceAiGroupId &&
-      reloadKey === 0
+      reloadKey === 0 && !practiceQuestionId && !managedPractice
       ? mobileApi.freshQuestionPage(0, {
+          feedback:'instant',
           chapter: practiceChapter,
           knowledgeSection: practiceKnowledgeSection,
           knowledgePoint: practiceKnowledgePoint,
         })
       : undefined;
     pageGeneration.current += 1;
+    setSyncIds({});setFeedbackById({});submissionGuard.current='';fallbackIds.current.clear();
     pageSeed.current = Math.random().toString(36).slice(2);
+    randomBefore.current = new Date().toISOString();
+    pageBaseOffset.current = 0;
+    setCheckpointReady(false);
+    checkpointContext.current="";
     pageFlight.current = null;
     setNextOffset(cachedPage?.nextOffset ?? null);
     setTotalQuestions(cachedPage?.total ?? 0);
@@ -367,6 +409,8 @@ export function PracticeScreen({
     setReportNote('');
     setReportNotice('');
     setWrongDeleteBusy(false);
+    wrongDeleteLock.current=false;skipLock.current=false;
+    setPracticeVoiceSettingsOpen(false);
 
     if (preview) {
       setQuestions([previewQuestion]);
@@ -388,7 +432,7 @@ export function PracticeScreen({
       return () => { mounted = false; };
     }
 
-    const loadQuestions = practiceAiGroupId
+    const initialQuestions = (): Promise<Question[] | QuestionPage> => practiceAiGroupId
       ? mobileApi.aiQuestionGroup(practiceAiGroupId).then((result) => result.questions)
       : isDailyPractice
       ? loadDailyPracticeQuestions(
@@ -399,24 +443,43 @@ export function PracticeScreen({
       : practiceSource === 'wrong'
         ? mobileApi.wrong()
         : practiceSource === 'favorites'
-          ? mobileApi.favorites()
+          ? mobileApi.favorites(false,true)
           : mobileApi.questionPage(0, {
+              feedback:'instant',
+              ...(practiceMode==='random'?{excludeCorrect:'1' as const,before:randomBefore.current}:{}),
               chapter: practiceChapter,
               knowledgeSection: practiceKnowledgeSection,
               knowledgePoint: practiceKnowledgePoint,
             }, practiceMode === 'random' ? pageSeed.current : undefined, reloadKey > 0);
+
+    let restoring: Awaited<ReturnType<typeof practiceCheckpoint.read>> = null;
+    let restoreIndex: number | undefined;
+    const owner = user ? practiceOwner(user) : null;
+    const selection:PracticeSelection={session:practiceSource==='answered'?'review':isDailyPractice?'daily':'standard',mode:practiceMode==='random'?'random':'sequential',chapter:practiceChapter,section:practiceKnowledgeSection,point:practiceKnowledgePoint};
+    ownedSelection.current=selection;
+    const loadQuestions:Promise<Question[] | QuestionPage> = owner && managedPractice
+      ? loadOwnedPractice(owner,selection,practiceQuestionId).then(loaded=>{
+          if(!mounted)return [];
+          restoring=loaded.saved;restoreIndex=loaded.index;ownedSelection.current=loaded.selection;pageSeed.current=loaded.seed;randomBefore.current=loaded.before;pageBaseOffset.current=loaded.base;
+          if(loaded.notice)setTrainingNotice(loaded.notice);
+          return {items:loaded.items,total:loaded.total,nextOffset:loaded.nextOffset,offset:loaded.base};
+        })
+      : initialQuestions();
 
     loadQuestions
       .then((loaded: Question[] | QuestionPage) => {
         if (!mounted) return;
         const loadedItems = Array.isArray(loaded) ? loaded : loaded.items;
         const selectedIds = practiceQuestionIds ? new Set(practiceQuestionIds) : null;
-        const items = practiceSource === 'wrong' ? loadedItems.filter((question) =>
+        const pending = practiceAttemptSync.getSnapshot();
+        const pendingCorrect = (q:Question) => pending.owner===owner && pending.entries.some(e=>e.payload.questionId===q.id && (e.result?.correct || (!e.result && !!q.answer?.length && sameAnswers(e.payload.selected,q.answer))));
+        const candidateItems = !managedPractice && practiceMode==='random' && practiceSource==='all' && !restoring ? loadedItems.filter(q=>!pendingCorrect(q)) : loadedItems;
+        const items = practiceSource === 'wrong' ? candidateItems.filter((question) =>
           (!selectedIds || selectedIds.has(question.id)) &&
           (!practiceChapter || question.chapter === practiceChapter) &&
           (!practiceKnowledgeSection || question.knowledgeSection === practiceKnowledgeSection) &&
           (!practiceKnowledgePoint || question.knowledgePoint === practiceKnowledgePoint),
-        ) : loadedItems;
+        ) : candidateItems;
         setNextOffset(Array.isArray(loaded) ? null : loaded.nextOffset);
         setTotalQuestions(Array.isArray(loaded) ? items.length : loaded.total);
         const nextQuestions = !Array.isArray(loaded) || isDailyPractice
@@ -425,10 +488,18 @@ export function PracticeScreen({
             ? shuffleQuestions(items)
             : items;
         setQuestions(nextQuestions);
-        const requestedIndex = practiceQuestionId
+        const requestedIndex = restoreIndex ?? (practiceQuestionId
           ? nextQuestions.findIndex((question) => question.id === practiceQuestionId)
-          : -1;
+          : -1);
         setQuestionIndex(requestedIndex >= 0 ? requestedIndex : 0);
+        pageBaseOffset.current=Array.isArray(loaded)?0:(loaded.offset || 0);
+        const restoredQuestion=nextQuestions[requestedIndex];
+        if(restoring && restoredQuestion?.id===restoring.questionId && practiceFingerprint(restoredQuestion)===restoring.fingerprint){
+          setSelected(restoring.selected);setResponseDraft(restoring.draft);
+          if(restoring.submitted && restoredQuestion.answer?.length)setResult({questionId:restoredQuestion.id,selected:restoring.selected,correct:restoredQuestion.type==='short_answer'?restoring.selected[0]==='A':sameAnswers(restoring.selected,restoredQuestion.answer),answer:restoredQuestion.answer,analysis:restoredQuestion.analysis,timeMs:0});
+        }
+        checkpointContext.current=currentCheckpointContext;
+        setCheckpointReady(true);
       })
       .catch((requestError) => {
         if (!mounted) return;
@@ -447,6 +518,7 @@ export function PracticeScreen({
       pageGeneration.current += 1;
     };
   }, [
+    active, user?.id,user?.certificateId,
     isDailyPractice,
     practiceChapter,
     practiceKnowledgeSection,
@@ -462,9 +534,47 @@ export function PracticeScreen({
   ]);
 
   const currentQuestion = questions[questionIndex];
+  const sync=usePracticeAttemptView(syncIds[currentQuestion?.id || ""]);
+  saveLatest.current=()=>{
+    if(checkpointContext.current!==currentCheckpointContext || !checkpointReady || !user || !managedPractice || needsPracticePicker || !currentQuestion)return Promise.resolve();
+    return saveOwnedPractice(practiceOwner(user),ownedSelection.current,{questions,index:questionIndex,base:pageBaseOffset.current,total:totalQuestions,nextOffset,seed:pageSeed.current,before:randomBefore.current,selected,draft:responseDraft,submitted:!!result,completed:finished});
+  };
+  useEffect(()=>{
+    void saveLatest.current().catch(()=>setError('本机续刷进度未保存，请检查存储空间；已同步的作答记录不受影响。'));
+  },[checkpointReady,currentQuestion?.id,questionIndex,selected,responseDraft,result,finished,totalQuestions,nextOffset,questions.length,user?.id,user?.certificateId,needsPracticePicker,practiceMode,practiceSource,practiceAiGroupId,isDailyPractice,preview]);
+  useEffect(()=>{
+    const sub=AppState.addEventListener('change',state=>{if(state!=='active')void saveLatest.current().catch(()=>{});});
+    return()=>{sub.remove();void saveLatest.current().catch(()=>{});};
+  },[]);
+  // A practice tab/catalog or loading screen is not the question-taking screen.
+  const practiceVoiceVisible=active&&focusedPractice&&!loading&&!!currentQuestion&&!practiceVoiceSettingsOpen&&!reportOpen;
+  feedbackVisible.current=practiceVoiceVisible;
+  useEffect(()=>{
+    if(practiceVoiceVisible)practiceVoice.enter(voiceScope,()=>feedbackVisible.current);
+    else stopAnswerFeedback();
+    return ()=>stopAnswerFeedback();
+  },[practiceVoiceVisible,voiceScope]);
+
+  const feedbackQuestion = useRef<string | undefined>(undefined);
+  feedbackQuestion.current = currentQuestion?.id;
   const questionIdRef = useRef(currentQuestion?.id);
   questionIdRef.current = currentQuestion?.id;
   const elapsedTime = useActiveTimer(currentQuestion?.id);
+  const currentSync=sync.entry;
+  const recordSyncPending=!!currentSync&&currentSync.status!=='saved';
+  useEffect(()=>{
+    if(!active||preview||!currentQuestion)return;
+    const generation=pageGeneration.current;
+    // New servers send practice answers with the page. Warm only the next few
+    // missing keys for older servers, favorites and generated question groups.
+    const missing=questions.slice(questionIndex,questionIndex+3).filter(q=>!q.answer?.length&&!feedbackById[q.id]?.answer?.length);
+    for(const q of missing)void mobileApi.practiceFeedback(q.id).then(feedback=>{if(generation===pageGeneration.current)setFeedbackById(old=>({...old,[q.id]:feedback}));}).catch(()=>{});
+  },[active,preview,currentQuestion?.id,questions.length]);
+  useEffect(()=>{
+    if(currentSync?.status==='saved' && currentSync.result){const saved=practiceReviewHistory().get(currentSync.payload.questionId);if(saved)saved.result=currentSync.result;}
+    if(currentSync?.status==='saved'&&currentSync.result){if(result?.questionId===currentSync.result.questionId&&(result.correct!==currentSync.result.correct||!sameAnswers(result.answer,currentSync.result.answer)))setError('题库内容已更新，已按服务器答案校正本题结果。');setResult(currentSync.result);}
+  },[currentSync?.status,currentSync?.result,currentQuestion?.id,syncIds]);
+
 
   function questionTask() {
     const generation = pageGeneration.current;
@@ -478,9 +588,9 @@ export function PracticeScreen({
     const generation = pageGeneration.current;
     setLoadingMore(true);
     setPageError('');
-    const pending = mobileApi.questionPage(nextOffset, {
-      chapter: practiceChapter, knowledgeSection: practiceKnowledgeSection, knowledgePoint: practiceKnowledgePoint,
-    }, practiceMode === 'random' ? pageSeed.current : undefined).then((page) => {
+    const pending = (managedPractice&&user ? ownedPracticePage(practiceOwner(user),ownedSelection.current,nextOffset,pageSeed.current,randomBefore.current) : mobileApi.questionPage(nextOffset, {
+      feedback:'instant', ...(practiceMode==='random'?{excludeCorrect:'1' as const,before:randomBefore.current}:{}), chapter: practiceChapter, knowledgeSection: practiceKnowledgeSection, knowledgePoint: practiceKnowledgePoint,
+    }, practiceMode === 'random' ? pageSeed.current : undefined)).then((page) => {
       if (generation !== pageGeneration.current) return 0;
       setQuestions((current) => {
         const ids = new Set(current.map((question) => question.id));
@@ -530,6 +640,13 @@ export function PracticeScreen({
     }
   }
 
+  function publishSubmittedResult(next: AttemptResponse, pendingId?:string) {
+    setResult(next);
+    const generation = pageGeneration.current;
+    if(user&&!preview)void practiceCheckpoint.record(practiceOwner(user),{questionId:next.questionId,correct:next.correct,confirmed:!pendingId,attemptId:pendingId}).catch(()=>{if(generation===pageGeneration.current)setError('本机已答题记录未保存，请检查存储空间。');});
+    if (feedbackVisible.current) playCorrectAnswerFeedback(next.correct, () => feedbackVisible.current && pageGeneration.current === generation && feedbackQuestion.current === next.questionId,{scope:voiceScope,attemptId:generation+':'+questionIndex+':'+next.questionId});
+  }
+
   async function submitAnswer() {
     if (!currentQuestion || result || submitting) return;
     if (currentQuestion.type === 'short_answer' && !responseDraft.trim()) {
@@ -540,12 +657,15 @@ export function PracticeScreen({
       setError(currentQuestion.type === 'short_answer' ? '请选择自评结果' : '先选择一个答案');
       return;
     }
+    const guard=pageGeneration.current+':'+currentQuestion.id;
+    if(submissionGuard.current===guard)return;
+    submissionGuard.current=guard;
     setError(null);
     setSubmitting(true);
     const timeMs = elapsedTime();
 
     if (preview) {
-      setResult({
+      publishSubmittedResult({
         questionId: currentQuestion.id,
         selected,
         correct: sameAnswers(selected, ['A']),
@@ -558,16 +678,29 @@ export function PracticeScreen({
     }
 
     const generation = pageGeneration.current;
+    const feedback=currentQuestion.answer?.length?currentQuestion:feedbackById[currentQuestion.id];
+    if(feedback?.answer?.length&&feedback.answer.every(a=>/^[A-E]$/.test(a))&&sync.ready&&sync.owner===JSON.stringify([API_BASE_URL,user?.id,user?.certificateId||''])){
+      try{
+        const id=practiceAttemptSync.enqueue({questionId:currentQuestion.id,selected,timeMs,...(currentQuestion.type==='short_answer'?{response:responseDraft.trim()}:{})});
+        setSyncIds(old=>({...old,[currentQuestion.id]:id}));
+        publishSubmittedResult({questionId:currentQuestion.id,selected:[...selected],timeMs,correct:currentQuestion.type==='short_answer'?selected[0]==='A':sameAnswers(selected,feedback.answer),answer:[...feedback.answer],analysis:feedback.analysis,expectedAnswer:feedback.expectedAnswer},id);
+      }catch(cause){submissionGuard.current='';setError(cause instanceof Error?cause.message:'答题记录暂存失败，请重试');}
+      finally{setSubmitting(false);}
+      return;
+    }
+    let clientAttemptId=fallbackIds.current.get(guard);if(!clientAttemptId){clientAttemptId=studyRequestId();fallbackIds.current.set(guard,clientAttemptId);}
     try {
       const response = await mobileApi.recordAttempt(
         currentQuestion.id,
         selected,
         timeMs,
         currentQuestion.type === 'short_answer' ? responseDraft.trim() : undefined,
+        clientAttemptId,
       );
-      if (generation === pageGeneration.current) setResult(response);
+      if (generation === pageGeneration.current) publishSubmittedResult(response);
     } catch (requestError) {
       if (generation !== pageGeneration.current) return;
+      submissionGuard.current='';
       setError(
         requestError instanceof Error
           ? requestError.message
@@ -579,7 +712,7 @@ export function PracticeScreen({
   }
 
   async function askAiTeacher(action: AiTeacherAction, hintLevel = 0) {
-    if (!currentQuestion || aiBusy) return;
+    if (!currentQuestion || aiBusy || recordSyncPending) return;
     const current = questionTask();
     setAiError(null);
     setAiBusy(action === '给我提示' ? 'hint' : 'teacher');
@@ -616,7 +749,7 @@ export function PracticeScreen({
   }
 
   async function analyzeWithAi() {
-    if (!currentQuestion || aiBusy) return;
+    if (!currentQuestion || aiBusy || recordSyncPending) return;
     const current = questionTask();
     setAiError(null);
     setAiBusy('analysis');
@@ -645,7 +778,7 @@ export function PracticeScreen({
   }
 
   async function generateAiPractice() {
-    if (!currentQuestion || aiBusy) return;
+    if (!currentQuestion || aiBusy || recordSyncPending) return;
     const current = questionTask();
     setAiError(null);
     setAiBusy('train');
@@ -782,18 +915,21 @@ export function PracticeScreen({
       !currentQuestion ||
       practiceSource !== 'wrong' ||
       !result?.correct ||
-      wrongDeleteBusy
+      wrongDeleteBusy || wrongDeleteLock.current || recordSyncPending
     )
       return;
     const current = questionTask();
+    wrongDeleteLock.current=true;
     setWrongDeleteBusy(true);
     setError(null);
     try {
       if (!preview) await mobileApi.removeWrong(currentQuestion.id);
       if (!current()) return;
       const remaining = questions.filter((question) => question.id !== currentQuestion.id);
-      setReportNotice('已从错题中移除。');
-      if (!remaining.length) {
+      practiceReviewHistory().delete(currentQuestion.id);
+      setReportNotice('已删除错题，自动进入下一题。');
+      setTotalQuestions(remaining.length);
+      if (!remaining.length || questionIndex >= remaining.length) {
         setQuestions([]);
         setFinished(true);
       } else {
@@ -811,6 +947,7 @@ export function PracticeScreen({
           : '移除错题失败，请稍后重试',
       );
     } finally {
+      wrongDeleteLock.current=false;
       if (current()) setWrongDeleteBusy(false);
     }
   }
@@ -840,7 +977,7 @@ export function PracticeScreen({
 
   function requestPracticeExit(){
     if(practiceSaving)return;
-    const leave=()=>onNavigate('practice',{practiceMode,practiceSession});
+    const leave=()=>{void saveLatest.current().then(()=>onNavigate('practice',{practiceMode,practiceSession})).catch(()=>setError('续刷进度未保存，请重试后退出。'));};
     if(aiBusy){
       Alert.alert('AI 仍在处理中','离开页面不会自动取消正在进行的 AI 请求，积分以最终用量结算。',[
         {text:'继续等待',style:'cancel'},
@@ -866,15 +1003,25 @@ export function PracticeScreen({
     setQuestionIndex(index);setSelected(saved?.selected??[]);setResponseDraft(saved?.draft??'');setResult(saved?.result??null);setError(null);
   }
   function previousPracticeQuestion(){
-    if(submitting||aiBusy||loadingMore||questionIndex===0)return;
+    if(submitting||aiBusy||loadingMore||wrongDeleteBusy||questionIndex===0)return;
     rememberPracticeView();restorePracticeView(questionIndex-1);
   }
   function continuePracticeQuestion(){
-    if(submitting||aiBusy||loadingMore)return;
+    if(submitting||aiBusy||loadingMore||wrongDeleteBusy)return;
     rememberPracticeView();
     const next=questions[questionIndex+1];
     if(next&&practiceReviewHistory().has(next.id))restorePracticeView(questionIndex+1);
     else void nextQuestion();
+  }
+
+  function skipPracticeQuestion(){
+    if(!active || !focusedPractice || !currentQuestion || loading || submitting || aiBusy || loadingMore || wrongDeleteBusy || reportOpen || practiceVoiceSettingsOpen || skipLock.current)return;
+    skipLock.current=true;
+    rememberPracticeView();
+    // Navigation only. No recordAttempt/enqueue, grading or wrong-book deletion.
+    const next=questions[questionIndex+1];
+    if(next && practiceReviewHistory().has(next.id)){restorePracticeView(questionIndex+1);skipLock.current=false;}
+    else void nextQuestion().finally(()=>{skipLock.current=false;});
   }
 
   if (practiceAiLibrary && !preview) {
@@ -974,13 +1121,14 @@ export function PracticeScreen({
               ? '暂时无法读取题目'
               : practiceSource === 'favorites'
                 ? '还没有收藏题目'
-                : '当前范围暂时没有题目'}
+                : practiceSource==='answered'?'还没有已答题记录':managedPractice?'本范围暂无未掌握题':'当前范围暂时没有题目'}
           </Text>
+          {practiceSource==='all' && <AnimatedPressable accessibilityRole="button" accessibilityLabel="复习已答题" onPress={()=>onNavigate('practice',{practiceSource:'answered',practiceMode:'sequential'})} style={styles.secondaryAction}><Text style={styles.secondaryActionText}>复习已答题</Text></AnimatedPressable>}
           <Text style={styles.emptyText}>
             {error ||
               (practiceSource === 'favorites'
                 ? '练习时点击题目右上角的星标，就能在这里集中复习。'
-                : '可以返回目录选择其他知识点，或重新同步题库。')}
+                : practiceSource==='answered'?'完成真实作答后，这里会保留可复习的题目，不影响新题进度。':managedPractice?'已答对题会自动跳过；你可以复习已答题，或选择其他练习范围。':'可以返回目录选择其他知识点，或重新同步题库。')}
           </Text>
           {practiceSource === 'favorites' && !error ? (
             <PrimaryAction
@@ -1018,19 +1166,21 @@ export function PracticeScreen({
   if (practiceKnowledgeSection) headerParts.push(practiceKnowledgeSection);
   if (practiceKnowledgePoint) headerParts.push(practiceKnowledgePoint);
   headerParts.push(`${questionIndex + 1}/${Math.max(totalQuestions, questions.length)}`);
+  const skipDisabled = !active || !focusedPractice || loading || submitting || !!aiBusy || loadingMore || wrongDeleteBusy || reportOpen || practiceVoiceSettingsOpen;
 
   return (
-    <View style={styles.nativeFocusScreen}>
+    <View style={styles.nativeFocusScreen} testID="practice-swipe-area">
       <View style={styles.nativeQuestionHeader}>
-        <View style={styles.nativeHeaderLeading}><AnimatedPressable accessibilityRole="button" accessibilityLabel={isDailyPractice?'更换今日练习范围':'返回题库目录'} disabled={practiceSaving} accessibilityHint={practiceSaving?'正在保存作答，完成后可返回':undefined} onPress={requestPracticeExit} style={[styles.nativeHeaderButton,practiceSaving&&{opacity:0.45}]}><AppIcon name="chevron-left" size={25} color={colors.text}/></AnimatedPressable></View><View pointerEvents="none" style={styles.nativeCenteredTitle}><Text accessibilityRole="header" style={styles.nativeQuestionTitle}>{practiceSource==='wrong'?'错题复习':practiceSource==='favorites'?'收藏练习':isDailyPractice?'每日刷题':'知识点练习'}</Text></View>
+        <View style={[styles.nativeHeaderLeading,stackPracticeHeader&&styles.nativeHeaderFlexible]}><AnimatedPressable accessibilityRole="button" accessibilityLabel={isDailyPractice?'更换今日练习范围':'返回题库目录'} disabled={practiceSaving} accessibilityHint={practiceSaving?'正在保存作答，完成后可返回':undefined} onPress={requestPracticeExit} style={[styles.nativeHeaderButton,practiceSaving&&{opacity:0.45}]}><AppIcon name="chevron-left" size={25} color={colors.text}/></AnimatedPressable><AnimatedPressable accessibilityRole="button" accessibilityLabel="刷题语音包设置" accessibilityHint="配置当前语音包、音量和答题语音" onPress={()=>setPracticeVoiceSettingsOpen(true)} style={styles.nativeHeaderButton}><AppIcon name="volume" size={21} color={colors.textMuted}/></AnimatedPressable></View>{!stackPracticeHeader&&<View pointerEvents="none" style={styles.nativeCenteredTitle}><Text accessibilityRole="header" style={styles.nativeQuestionTitle}>{practiceSource==='wrong'?'错题复习':practiceSource==='favorites'?'收藏练习':practiceSource==='answered'?'已答题复习':isDailyPractice?'每日刷题':'知识点练习'}</Text></View>}
         <View style={styles.nativeHeaderTools}>
           <AnimatedPressable accessibilityRole="button" accessibilityLabel={currentQuestion.favorite?'取消收藏题目':'收藏题目'} onPress={toggleFavorite} style={styles.nativeHeaderButton}><AppIcon name="star" selected={!!currentQuestion.favorite} size={23} color={currentQuestion.favorite?colors.brand:colors.text}/></AnimatedPressable>
           <AnimatedPressable accessibilityRole="button" accessibilityLabel="举报题目" disabled={reportBusy} onPress={()=>setReportOpen(true)} style={styles.nativeHeaderButton}><AppIcon name="flag" size={23} color={colors.text}/></AnimatedPressable>
         </View>
       </View>
+      {stackPracticeHeader&&<View style={styles.nativeHeaderTitleRow}><Text accessibilityRole="header" style={styles.nativeQuestionTitle}>{practiceSource==='wrong'?'错题复习':practiceSource==='favorites'?'收藏练习':practiceSource==='answered'?'已答题复习':isDailyPractice?'每日刷题':'知识点练习'}</Text></View>}
       <ScrollView style={styles.nativeQuestionScroll} contentContainerStyle={styles.nativeQuestionContent} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
         <AnimatedProgressBar value={((questionIndex+1)/Math.max(1,totalQuestions,questions.length))*100} color={colors.brand} trackColor={colors.border}/>
-        <View style={styles.nativeQuestionProgress}><Text style={styles.nativeProgressText}>第 {questionIndex+1} / {Math.max(totalQuestions,questions.length)} 题</Text><Text style={styles.nativeProgressHint}>{result?'本题已作答':modeLabel}</Text></View>
+        <View style={styles.nativeQuestionProgress}><Text style={styles.nativeProgressText}>第 {questionIndex+1} / {Math.max(totalQuestions,questions.length)} 题</Text><AnimatedPressable accessibilityRole="button" accessibilityLabel="跳过本题" accessibilityHint="不提交作答，直接进入下一题" disabled={skipDisabled} onPress={skipPracticeQuestion} style={[styles.nativeSkipButton,skipDisabled&&{opacity:0.45}]}><Text style={[styles.nativeSkipText,{color:colors.brand}]}>{result?'下一题':'跳过'}</Text></AnimatedPressable></View>
         {!!pageError&&<Text style={styles.formError}>{pageError}，点击下一题可重试。</Text>}
         {loadingMore&&<Text style={styles.loadingText}>正在准备后续题目…</Text>}
         <View style={styles.nativeKnowledgeLine}><Text style={styles.nativeKnowledgeChip}>{currentQuestion.knowledgePoint||practiceKnowledgePoint||'综合练习'}</Text><Text style={styles.nativeProgressHint}>{currentQuestion.type==='short_answer'?'简答题':currentQuestion.type==='true_false'?'判断题':isMultiple?'多选题':'单选题'}</Text></View>
@@ -1088,12 +1238,13 @@ export function PracticeScreen({
                 <View
                   style={[
                     styles.optionLetter,
+                    { width: optionBadgeEdge, height: optionBadgeEdge, borderRadius: optionBadgeEdge / 2 },
                     isSelected && styles.selectedOptionLetter,
                     isCorrect && styles.correctOptionLetter,
                     isWrong && styles.wrongOptionLetter,
                   ]}
                 >
-                  <Text style={[styles.optionLetterText,isSelected&&{color:colors.white},isCorrect&&{color:colors.success},isWrong&&{color:colors.warning}]}>{option}</Text>
+                  <Text style={[styles.optionLetterText,{lineHeight:optionBadgeEdge/Math.max(0.5,practiceFontScale)},isSelected&&{color:colors.white},isCorrect&&{color:colors.success},isWrong&&{color:colors.warning}]}>{option}</Text>
                 </View>
                 <Text style={styles.questionOptionText}>{currentQuestion.options[option]}</Text>
                 {isCorrect && <Text style={styles.optionStatus}>✓</Text>}
@@ -1121,56 +1272,46 @@ export function PracticeScreen({
           <Text style={styles.feedbackAnswer}>{currentQuestion.type === 'short_answer' ? '参考答案' : `正确答案：${answerText}`}</Text>
           {currentQuestion.type === 'short_answer' && !!result.expectedAnswer && <Text style={styles.feedbackText}>{result.expectedAnswer}</Text>}
           {!!result.analysis && <Text style={styles.feedbackText}>{result.analysis}</Text>}
+          {!!currentSync&&<View testID="practice-record-sync"><Text style={styles.nativeProgressHint}>{currentSync.status==='saved'?'答题记录已同步':currentSync.error?'答题记录未同步，请点击重试': '答案已展示，答题记录正在后台同步，可继续下一题'}</Text>{!!currentSync.error&&<AnimatedPressable accessibilityRole="button" accessibilityLabel="重试同步本题作答" onPress={()=>practiceAttemptSync.retry(currentSync.id)} style={{minHeight:48,justifyContent:'center'}}><Text style={[styles.nativeProgressHint,{color:colors.brand}]}>重试同步</Text></AnimatedPressable>}</View>}
         </EntranceView>
       )}
 
-      {result && (
-        <>
-          {practiceSource === 'wrong' && result.correct && (
-            <AnimatedPressable
-              accessibilityRole="button"
-              disabled={wrongDeleteBusy}
-              onPress={() => void removeCurrentWrong()}
-              style={[styles.removeWrongButton, wrongDeleteBusy && styles.disabledAction]}
-            >
-              <Text style={styles.removeWrongButtonText}>
-                {wrongDeleteBusy ? '移除中…' : '从错题中移除'}
-              </Text>
-            </AnimatedPressable>
-          )}
-        </>
-      )}
 
       {result && (
         <View style={styles.aiTools}>
           {result.correct === false && (
             <AnimatedPressable
               accessibilityRole="button"
-              disabled={!!aiBusy}
+              accessibilityLabel={aiBusy === 'analysis' ? 'AI 解析中…' : 'AI 解析错因'}
+              disabled={!!aiBusy||recordSyncPending}
               onPress={analyzeWithAi}
-              style={styles.aiToolButton}
+              style={[styles.aiToolButton, stackAiActions && styles.aiToolWide]}
             >
+              <AppIcon name="sparkles" size={18} color={colors.brand}/>
               <Text style={styles.aiToolButtonText}>
-                {aiBusy === 'analysis' ? 'AI 解析中…' : 'AI 解析错因'}
+                {aiBusy === 'analysis' ? '解析中…' : '错因分析'}
               </Text>
             </AnimatedPressable>
           )}
           <AnimatedPressable
             accessibilityRole="button"
-            disabled={!!aiBusy}
+            accessibilityLabel={aiBusy === 'teacher' ? 'AI 老师思考中…' : 'AI 详细讲解'}
+            disabled={!!aiBusy||recordSyncPending}
             onPress={() => askAiTeacher('详细讲解')}
-            style={styles.aiToolButton}
+            style={[styles.aiToolButton, stackAiActions && styles.aiToolWide]}
           >
+            <AppIcon name="book" size={18} color={colors.brand}/>
             <Text style={styles.aiToolButtonText}>
-              {aiBusy === 'teacher' ? 'AI 老师思考中…' : 'AI 详细讲解'}
+              {aiBusy === 'teacher' ? '思考中…' : '详细讲解'}
             </Text>
           </AnimatedPressable>
           <AnimatedPressable
             accessibilityRole="button"
-            disabled={!!aiBusy}
+            disabled={!!aiBusy||recordSyncPending}
             onPress={generateAiPractice}
-            style={styles.aiToolButton}
+            style={[styles.aiToolButton, styles.aiToolWide]}
           >
+            <AppIcon name="sparkles" size={18} color={colors.brand}/>
             <Text style={styles.aiToolButtonText}>
               {aiBusy === 'train' ? (aiProgress || '正在准备生成…') : '生成 3 道变式题'}
             </Text>
@@ -1205,9 +1346,13 @@ export function PracticeScreen({
         </View>
       </ScrollView>
       <View style={styles.nativeQuestionFooter}><View style={styles.nativeQuestionFooterBody}>
-        <AnimatedPressable accessibilityRole="button" accessibilityLabel="上一题" disabled={questionIndex===0||submitting||!!aiBusy||loadingMore} onPress={previousPracticeQuestion} style={[styles.nativePrevious,(questionIndex===0||submitting||!!aiBusy||loadingMore)&&{opacity:0.45}]}><Text style={styles.nativePreviousText}>上一题</Text></AnimatedPressable>
-        <AnimatedPressable accessibilityRole="button" accessibilityLabel={result?'下一题':currentQuestion.type==='short_answer'?'提交自评':'确认答案'} disabled={submitting||!!aiBusy||loadingMore} onPress={result?continuePracticeQuestion:submitAnswer} style={[styles.nativeConfirm,(submitting||!!aiBusy||loadingMore)&&{opacity:0.6}]}><Text style={styles.nativeConfirmText}>{submitting?'正在判分…':result?'下一题':currentQuestion.type==='short_answer'?'提交自评':'确认答案'}</Text></AnimatedPressable>
+        {practiceSource==='wrong' && result?.correct ? <AnimatedPressable accessibilityRole="button" accessibilityLabel="删除错题" testID="practice-wrong-delete" accessibilityHint={recordSyncPending?'作答同步后可删除，删除成功自动下一题':'从错题本删除，并自动进入下一题'} disabled={wrongDeleteBusy||recordSyncPending||!!aiBusy||loadingMore} onPress={()=>void removeCurrentWrong()} style={[styles.nativePrevious,{flex:1,width:undefined,borderColor:colors.brand},(wrongDeleteBusy||recordSyncPending||!!aiBusy||loadingMore)&&{opacity:0.45}]}><Text style={[styles.nativePreviousText,{color:colors.brand}]}>{wrongDeleteBusy?'删除中…':'删除错题'}</Text></AnimatedPressable> : <AnimatedPressable accessibilityRole="button" accessibilityLabel="上一题" disabled={questionIndex===0||submitting||!!aiBusy||loadingMore||wrongDeleteBusy} onPress={previousPracticeQuestion} style={[styles.nativePrevious,(questionIndex===0||submitting||!!aiBusy||loadingMore||wrongDeleteBusy)&&{opacity:0.45}]}><Text style={styles.nativePreviousText}>上一题</Text></AnimatedPressable>}
+        <AnimatedPressable accessibilityRole="button" accessibilityLabel={result?'下一题':currentQuestion.type==='short_answer'?'提交自评':'确认答案'} disabled={submitting||!!aiBusy||loadingMore||wrongDeleteBusy} onPress={result?continuePracticeQuestion:submitAnswer} style={[styles.nativeConfirm,(submitting||!!aiBusy||loadingMore||wrongDeleteBusy)&&{opacity:0.6}]}><Text style={styles.nativeConfirmText}>{submitting?'正在判分…':result?'下一题':currentQuestion.type==='short_answer'?'提交自评':'确认答案'}</Text></AnimatedPressable>
       </View></View>
+      {practiceVoiceSettingsOpen && <Modal visible={active} animationType={reduceMotion?'none':'slide'} statusBarTranslucent navigationBarTranslucent onRequestClose={()=>practiceVoiceSettingsRef.current?.goBack()}>
+        <VoicePackSettings ref={practiceVoiceSettingsRef} onClose={()=>setPracticeVoiceSettingsOpen(false)}/>
+      </Modal>}
+
       <Modal
         animationType={reduceMotion?'none':'slide'}
         onRequestClose={() => {
@@ -1216,7 +1361,7 @@ export function PracticeScreen({
         transparent
         visible={active && reportOpen}
       >
-        <View style={styles.modalBackdrop}>
+        <SafeAreaView style={styles.modalBackdrop}>
           <View style={styles.reportModal}>
             <Text style={styles.modalTitle}>举报题目</Text>
             <Text style={styles.modalIntro}>
@@ -1274,7 +1419,7 @@ export function PracticeScreen({
               </AnimatedPressable>
             </View>
           </View>
-        </View>
+        </SafeAreaView>
       </Modal>
     </View>
   );
@@ -1314,6 +1459,8 @@ export function ProfileScreen({
   const activeCertificate = certificates.find((certificate) => certificate.id === user?.certificateId);
   const [sponsorOpen, setSponsorOpen] = useState(false);
   const [appSettingsOpen, setAppSettingsOpen] = useState(false);
+  const [voiceSettingsOpen, setVoiceSettingsOpen] = useState(false);
+  const voiceSettingsRef = useRef<VoicePackSettingsHandle>(null);
   const [aiSettingsOpen, setAiSettingsOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [tutorialOpen, setTutorialOpen] = useState(false);
@@ -1323,6 +1470,7 @@ export function ProfileScreen({
   const [profileOpen, setProfileOpen] = useState(false);
   const [securityOpen, setSecurityOpen] = useState(false);
   const [redeemOpen, setRedeemOpen] = useState(false);
+  const [checkInOpen,setCheckInOpen]=useState(false);
   const [membershipPlan, setMembershipPlan] = useState<keyof typeof membershipLabels>('free');
   const membershipRevision = useRef(0);
   const [settings, setSettings] = useState<AiSettingsResponse | null>(null);
@@ -1477,6 +1625,7 @@ export function ProfileScreen({
 
   return (
     <ScreenContainer profile>
+      <CheckInScreen visible={active&&checkInOpen} preview={preview} user={user} onClose={()=>setCheckInOpen(false)} onUpdated={account=>{membershipRevision.current++;setMembershipPlan(account.plan);setCanManageAiService(!!account.canManageAiService);}}/>
       {user?.isAdmin && !preview && adminOpen && <Modal visible={active && adminOpen} animationType={reduceMotion?'none':'slide'} onRequestClose={() => setAdminOpen(false)}>
         <AdminScreen user={user} certificates={certificates} onClose={() => setAdminOpen(false)} onUserUpdated={onUserUpdated} />
       </Modal>}
@@ -1496,7 +1645,7 @@ export function ProfileScreen({
           </SafeAreaView>
         </Modal>
       )}
-      <AndroidPageHeader title="我的" action={{label:'设置',onPress:()=>setAppSettingsOpen(true)}}/>
+      <AndroidPageHeader title="我的" action={{label:'设置',onPress:()=>{setVoiceSettingsOpen(false);setAppSettingsOpen(true)}}}/>
       <View style={styles.nativeIdentity}>
         {user?.avatarUrl?<Image source={{uri:mobileApi.resolveDownloadUrl(user.avatarUrl)}} style={styles.avatar}/>:<View style={styles.avatar}><AppIcon name="person" size={32} color={colors.brand}/></View>}
         <View style={styles.profileIdentityCopy}><Text style={styles.profileName}>{user?.communityName||user?.username||'未登录用户'}</Text><Text style={styles.profileMeta}>{user?'考匠，陪你认真备考每一天':'登录后同步学习记录'}</Text></View>
@@ -1505,13 +1654,13 @@ export function ProfileScreen({
       <AnimatedPressable accessibilityRole="button" accessibilityLabel="考试与题库，切换证书" onPress={user?onOpenCertificatePicker:undefined} style={styles.nativeCertificate}>
         <View style={styles.nativeIconTile}><AppIcon name="exam" size={23} color={colors.brand}/></View><View style={styles.profileIdentityCopy}><Text style={styles.profileMeta}>考试与题库</Text><Text style={styles.nativeCertificateTitle}>{activeCertificate?.name||(user?'请选择证书与题库':'预览模式')}</Text></View><Text style={styles.nativeLink}>切换</Text><AppIcon name="chevron-right" size={16} color={colors.textMuted}/>
       </AnimatedPressable>
-      <View style={styles.nativeMembership}>
+      <View testID="profile-membership-card" style={styles.nativeMembership}>
         <AnimatedPressable accessibilityRole="button" onPress={()=>onNavigate('vip')} style={styles.nativeMemberHeading}><AppIcon name="crown" size={25} color={androidAccent(colors,'member').ink}/><Text style={styles.nativeMemberTitle}>会员与 AI 积分</Text><Text style={styles.nativeMemberPlan}>{membershipPlan==='free'?'普通用户':membershipLabels[membershipPlan]}</Text><AppIcon name="chevron-right" size={16} color={colors.brand}/></AnimatedPressable>
-        <AndroidPointsLink userId={user?.id} compact/>
+        <AndroidPointsLink userId={user?.id} membership/>
         <View style={styles.nativeMemberActions}>
-          <AnimatedPressable accessibilityRole="button" accessibilityLabel="签到领积分，进入会员积分页" onPress={()=>onNavigate('vip')} style={styles.nativeMemberAction}><AppIcon name="calendar" size={19} color={colors.brand}/><Text style={styles.nativeMemberActionText}>签到领积分</Text></AnimatedPressable>
-          <AnimatedPressable accessibilityRole="button" onPress={()=>setRedeemOpen(true)} style={styles.nativeMemberAction}><AppIcon name="crown" size={19} color={colors.brand}/><Text style={styles.nativeMemberActionText}>兑换码</Text></AnimatedPressable>
-          <AnimatedPressable accessibilityRole="button" onPress={androidPointsFlow.showDetails} style={styles.nativeMemberAction}><AppIcon name="list" size={19} color={colors.brand}/><Text style={styles.nativeMemberActionText}>积分记录</Text></AnimatedPressable>
+          <AnimatedPressable accessibilityRole="button" accessibilityLabel="签到领积分，进入每日签到页" onPress={()=>setCheckInOpen(true)} style={[styles.nativeMemberAction,fontScale>1.2&&styles.nativeMemberActionLarge]}><AppIcon name="calendar" size={18} color={colors.brand}/><Text style={styles.nativeMemberActionText}>签到</Text></AnimatedPressable>
+          <AnimatedPressable accessibilityRole="button" onPress={()=>setRedeemOpen(true)} style={[styles.nativeMemberAction,fontScale>1.2&&styles.nativeMemberActionLarge]}><AppIcon name="crown" size={19} color={colors.brand}/><Text style={styles.nativeMemberActionText}>兑换码</Text></AnimatedPressable>
+          <AnimatedPressable accessibilityRole="button" accessibilityLabel="积分记录" onPress={androidPointsFlow.showDetails} style={[styles.nativeMemberAction,fontScale>1.2&&styles.nativeMemberActionLarge]}><AppIcon name="list" size={18} color={colors.brand}/><Text style={styles.nativeMemberActionText}>记录</Text></AnimatedPressable>
         </View>
       </View>
       <View style={styles.profileSection}><Text style={styles.profileSectionTitle}>学习入口</Text><View style={styles.profileShortcutGrid}>
@@ -1540,7 +1689,8 @@ export function ProfileScreen({
       {user && profileOpen && <Modal visible={active} onRequestClose={() => setProfileOpen(false)} animationType={reduceMotion?'none':'slide'}>
         <ProfileSetupScreen user={user} onSaved={(updated) => { onUserUpdated?.(updated); setProfileOpen(false); }} onCancel={() => setProfileOpen(false)} />
       </Modal>}
-      <Modal animationType={reduceMotion?'none':'slide'} onRequestClose={()=>setAppSettingsOpen(false)} visible={active&&appSettingsOpen}>
+      <Modal animationType={reduceMotion?'none':'slide'} onRequestClose={()=>voiceSettingsOpen?voiceSettingsRef.current?.goBack():setAppSettingsOpen(false)} visible={active&&appSettingsOpen}>
+        {voiceSettingsOpen?<VoicePackSettings ref={voiceSettingsRef} onClose={()=>setVoiceSettingsOpen(false)}/>:
         <SafeAreaView style={styles.settingsPage}>
           <View style={styles.settingsNativeHeader}><AnimatedPressable accessibilityRole="button" accessibilityLabel="关闭设置" onPress={()=>setAppSettingsOpen(false)} style={styles.nativeHeaderButton}><AppIcon name="chevron-left" size={25} color={colors.text}/></AnimatedPressable><Text accessibilityRole="header" style={styles.settingsNativeTitle}>设置</Text></View>
           <ScrollView contentContainerStyle={styles.settingsPageContent} showsVerticalScrollIndicator={false}>
@@ -1570,10 +1720,11 @@ export function ProfileScreen({
               </View>
               <AnimatedPressable accessibilityRole="button" onPress={previewUiSound} style={styles.settingsSample}><AppIcon name="volume" size={22} color={colors.brand}/><Text style={styles.nativeLink}>试听当前音效</Text></AnimatedPressable>
             </View>
+            <AnswerFeedbackSettings onOpenVoicePacks={()=>setVoiceSettingsOpen(true)}/>
             <AnimatedPressable accessibilityRole="button" accessibilityLabel="清理学习缓存" onPress={()=>{void mobileApi.clearStudyCache().then(()=>setCacheNotice('已清理')).catch(()=>setCacheNotice('清理失败，请重试'))}} style={styles.settingsCache}><AppIcon name="refresh" size={23} color={colors.text}/><View style={styles.nativeSettingCopy}><Text style={styles.settingsRowLabelText}>清理学习缓存</Text><Text style={styles.settingsSmall}>{cacheNotice||'不会清除账号中的学习记录'}</Text></View><AppIcon name="chevron-right" size={18} color={colors.textMuted}/></AnimatedPressable>
             <Text style={styles.settingsDeviceNote}>设置仅影响当前设备的使用体验</Text>
           </ScrollView>
-        </SafeAreaView>
+        </SafeAreaView>}
       </Modal>
       <Modal
         animationType={reduceMotion?'none':'fade'}
@@ -1581,7 +1732,7 @@ export function ProfileScreen({
         transparent
         visible={active && sponsorOpen}
       >
-        <View style={styles.modalBackdrop}>
+        <SafeAreaView style={styles.modalBackdrop}>
           <View style={styles.sponsorModal}>
             <Text style={styles.modalTitle}>赞助作者</Text>
             <Text style={styles.modalIntro}>
@@ -1600,7 +1751,7 @@ export function ProfileScreen({
               <Text style={styles.modalPrimaryText}>暂时关闭</Text>
             </AnimatedPressable>
           </View>
-        </View>
+        </SafeAreaView>
       </Modal>
       <Modal
         animationType={reduceMotion?'none':'slide'}
@@ -1608,7 +1759,7 @@ export function ProfileScreen({
         transparent
         visible={active && aiSettingsOpen}
       >
-        <View style={styles.modalBackdrop}>
+        <SafeAreaView style={styles.modalBackdrop}>
           <View style={styles.settingsModal}>
             <ScrollView
               contentContainerStyle={styles.settingsModalScroll}
@@ -1786,73 +1937,9 @@ export function ProfileScreen({
               </View>
             </ScrollView>
           </View>
-        </View>
+        </SafeAreaView>
       </Modal>
-      <Modal
-        animationType={reduceMotion?'none':'slide'}
-        onRequestClose={() => setAboutOpen(false)}
-        transparent
-        visible={active && aboutOpen}
-      >
-        <View style={styles.modalBackdrop}>
-          <View style={styles.settingsModal}>
-            <ScrollView
-              contentContainerStyle={styles.settingsModalScroll}
-              showsVerticalScrollIndicator={false}
-            >
-              <View style={styles.modalHeader}>
-                <View style={styles.modalHeaderCopy}>
-                  <Text style={styles.modalTitle}>关于考匠</Text><Text style={styles.nativeLicense}>安卓界面字体：Noto Sans SC。Copyright 2014–2021 Adobe，依据 SIL Open Font License 1.1 随应用分发。完整许可证随安装包提供。</Text>
-                  <Text style={styles.modalKicker}>移动端 v{APP_VERSION} · 让学习回到每个人手里</Text>
-                </View>
-                <AnimatedPressable
-                  accessibilityLabel="关闭关于考匠"
-                  accessibilityRole="button"
-                  onPress={() => setAboutOpen(false)}
-                  style={styles.modalCloseButton}
-                >
-                  <Text style={styles.modalCloseText}>关闭</Text>
-                </AnimatedPressable>
-              </View>
-              <View style={styles.aboutHero}>
-                <Text style={styles.aboutHeroMark}>考</Text>
-                <View style={styles.aboutHeroCopy}>
-                  <Text style={styles.aboutHeroTitle}>考匠 · AceExam</Text>
-                  <Text style={styles.aboutHeroText}>把精练题、碎片时间和现代化 AI 教育放在一起。</Text>
-                </View>
-              </View>
-              <Text style={styles.aboutSectionTitle}>作者想说</Text>
-              <View style={styles.authorMessageCard}>
-                <Text style={styles.authorMessageLead}>我做考匠，起初只是因为相信：</Text>
-                <Text style={styles.authorMessage}>
-                  每一个认真学习的人，都应该拥有一条不被费用和时间挡住的路。
-                </Text>
-                <Text style={styles.authorMessage}>
-                  我希望，让暂时无力承担学费的同学，也能接触到经过整理、真正精练有用的题目；让没有时间参加补课的同学，也能利用通勤、排队和睡前的碎片时间，一点点向前进步；让每个人都能体验到更现代、更贴近自己的 AI 教育。
-                </Text>
-                <Text style={styles.authorMessage}>
-                  普通题库继续免费开放。AI 服务由作者统一提供，按账号积分使用，可通过每日签到或会员获取积分。
-                </Text>
-                <Text style={styles.authorMessage}>
-                  如果考匠对你有帮助，欢迎打赏一笔小小的支持，帮助我们持续维护题库、改进体验，让考匠社区越来越好。
-                </Text>
-              </View>
-              <Text style={styles.aboutFootnote}>
-                愿每一次短暂练习，都能变成看得见的进步。感谢你把时间交给考匠。
-              </Text>
-              <AnimatedPressable
-                onPress={() => {
-                  setAboutOpen(false);
-                  setSponsorOpen(true);
-                }}
-                style={styles.modalPrimaryButton}
-              >
-                <Text style={styles.modalPrimaryText}>去赞助作者</Text>
-              </AnimatedPressable>
-            </ScrollView>
-          </View>
-        </View>
-      </Modal>
+      <AboutScreen visible={aboutOpen} onClose={()=>setAboutOpen(false)} onSponsor={()=>{setAboutOpen(false);setSponsorOpen(true);}}/>
     </ScreenContainer>
   );
 }
@@ -3325,12 +3412,33 @@ const legacyProfileStyles=(c:ThemeColors)=>({...baseCreateStyles(c),...StyleShee
  settingsCard:{backgroundColor:c.surface,borderColor:c.border,borderWidth:StyleSheet.hairlineWidth,borderRadius:14,overflow:'hidden',marginBottom:16},settingRow:{flexDirection:'row',alignItems:'center',gap:12,padding:14,minHeight:62,borderBottomColor:c.border,borderBottomWidth:StyleSheet.hairlineWidth},settingTitle:{color:c.text,fontSize:15,fontWeight:'500'},settingValue:{color:c.textMuted,fontSize:12,lineHeight:19,marginTop:3},nativeSettingCopy:{flex:1,minWidth:0},nativeSettingIcon:{width:34,height:34,borderRadius:9,backgroundColor:c.brandSoft,alignItems:'center',justifyContent:'center'},
  nativeAboutRow:{flexDirection:'row',backgroundColor:c.surface,borderRadius:14,borderWidth:StyleSheet.hairlineWidth,borderColor:c.border,marginBottom:16},nativeAboutButton:{flex:1,flexDirection:'row',alignItems:'center',justifyContent:'center',gap:6,paddingHorizontal:10,minHeight:60,flexWrap:'wrap'},nativeAboutText:{fontSize:13,color:c.text},nativeVersion:{fontSize:12,color:c.textMuted},logoutButton:{backgroundColor:c.surface,borderRadius:12,minHeight:50,alignItems:'center',justifyContent:'center',marginBottom:16,borderWidth:StyleSheet.hairlineWidth,borderColor:c.border},logoutText:{color:c.warning,fontSize:15,fontWeight:'500'},nativeLicense:{color:c.textMuted,fontSize:12,lineHeight:20,marginTop:8},
  questionCard:{backgroundColor:'transparent',padding:0,gap:12},questionText:{color:c.text,fontSize:18,lineHeight:30,fontWeight:'700'},questionOption:{backgroundColor:c.surface,borderColor:c.border,borderWidth:1,borderRadius:12,flexDirection:'row',alignItems:'center',minHeight:60,padding:14,gap:12},selectedOption:{backgroundColor:c.brandSoft,borderColor:c.brand},correctOption:{backgroundColor:c.successSoft,borderColor:c.success},wrongOption:{backgroundColor:c.warningSoft,borderColor:c.warning},questionOptionText:{color:c.text,fontSize:15,lineHeight:24,flex:1},modeButton:{flex:1,alignItems:'center',justifyContent:'center',minHeight:48,borderRadius:9,padding:9},modeButtonHint:{display:'none'},activeModeButton:{backgroundColor:c.brandSoft},activeModeButtonText:{color:c.brand,fontWeight:'700'},aiToolButton:{flexGrow:1,flexBasis:'30%',minHeight:48,padding:12,backgroundColor:c.brandSoft,borderRadius:10,alignItems:'center',justifyContent:'center'},aiToolButtonText:{color:c.brand,fontSize:13,fontWeight:'500'},
- nativeFocusScreen:{flex:1,backgroundColor:c.background},nativeQuestionHeader:{flexDirection:'row',alignItems:'center',minHeight:60,paddingHorizontal:8,paddingVertical:6,width:'100%',maxWidth:760,alignSelf:'center'},nativeHeaderButton:{width:48,minHeight:48,alignItems:'center',justifyContent:'center'},nativeHeaderLeading:{width:96},nativeCenteredTitle:{flex:1,minWidth:0,alignItems:'center'},nativeQuestionTitle:{color:c.text,fontSize:18,fontWeight:'700',textAlign:'center'},nativeHeaderTools:{flexDirection:'row',alignItems:'center',width:96},nativeQuestionScroll:{flex:1,minHeight:0},nativeQuestionContent:{padding:16,paddingTop:12,paddingBottom:24,gap:14,width:'100%',maxWidth:760,alignSelf:'center'},nativeQuestionProgress:{flexDirection:'row',alignItems:'center',justifyContent:'space-between',gap:8},nativeProgressText:{color:c.text,fontSize:14},nativeProgressHint:{color:c.textMuted,fontSize:12,lineHeight:20},nativeKnowledgeLine:{flexDirection:'row',alignItems:'center',gap:12,flexWrap:'wrap',marginTop:6},nativeKnowledgeChip:{fontSize:12,color:c.textMuted,backgroundColor:c.surfaceMuted,paddingVertical:5,paddingHorizontal:10,borderRadius:8},nativeCombinedQuestionCard:{backgroundColor:c.surface,borderRadius:15,padding:16,gap:16},nativeHintRow:{flexDirection:'row',alignItems:'center',gap:9,borderWidth:1,borderColor:c.border,borderRadius:11,minHeight:54,padding:12},nativeHintTitle:{flex:1,color:c.text,fontSize:15,fontWeight:'500'},nativeBeforeAnswer:{color:c.textMuted,fontSize:12,lineHeight:20,textAlign:'center',paddingVertical:12},nativeQuestionFooterBody:{flexDirection:'row',alignItems:'center',gap:12,width:'100%',maxWidth:760,alignSelf:'center'},nativeQuestionFooter:{padding:16,paddingBottom:20,backgroundColor:c.surface,borderTopColor:c.border,borderTopWidth:StyleSheet.hairlineWidth},nativePrevious:{width:96,minHeight:50,borderRadius:11,borderWidth:1,borderColor:c.border,alignItems:'center',justifyContent:'center'},nativePreviousText:{fontSize:15,color:c.text,fontWeight:'500'},nativeConfirm:{flex:1,minHeight:50,borderRadius:11,backgroundColor:c.action,alignItems:'center',justifyContent:'center'},nativeConfirmText:{fontSize:15,fontWeight:'700',color:'#FFFFFF'},optionLetter:{width:32,height:32,borderRadius:16,borderWidth:1,borderColor:c.border,backgroundColor:'transparent',alignItems:'center',justifyContent:'center'},optionLetterText:{color:c.text,fontSize:16,fontWeight:'400'},selectedOptionLetter:{backgroundColor:c.action,borderColor:c.action},correctOptionLetter:{backgroundColor:c.successSoft,borderColor:c.success},wrongOptionLetter:{backgroundColor:c.warningSoft,borderColor:c.warning},
+ nativeFocusScreen:{flex:1,backgroundColor:c.background},nativeQuestionHeader:{flexDirection:'row',alignItems:'center',minHeight:60,paddingHorizontal:8,paddingVertical:6,width:'100%',maxWidth:760,alignSelf:'center'},nativeHeaderButton:{width:48,minHeight:48,alignItems:'center',justifyContent:'center'},nativeHeaderLeading:{width:96,flexDirection:'row',alignItems:'center'},nativeCenteredTitle:{flex:1,minWidth:0,alignItems:'center'},nativeQuestionTitle:{color:c.text,fontSize:18,fontWeight:'700',textAlign:'center'},nativeHeaderTools:{flexDirection:'row',alignItems:'center',width:96},nativeQuestionScroll:{flex:1,minHeight:0},nativeQuestionContent:{padding:16,paddingTop:12,paddingBottom:24,gap:14,width:'100%',maxWidth:760,alignSelf:'center'},nativeQuestionProgress:{flexDirection:'row',alignItems:'center',justifyContent:'space-between',gap:8},nativeProgressText:{color:c.text,fontSize:14},nativeSkipButton:{minHeight:44,minWidth:68,paddingHorizontal:16,borderRadius:22,borderWidth:1,borderColor:c.brand,alignItems:'center',justifyContent:'center'},nativeSkipText:{fontSize:14,fontWeight:'600'},nativeProgressHint:{color:c.textMuted,fontSize:12,lineHeight:20},nativeKnowledgeLine:{flexDirection:'row',alignItems:'center',gap:12,flexWrap:'wrap',marginTop:6},nativeKnowledgeChip:{fontSize:12,color:c.textMuted,backgroundColor:c.surfaceMuted,paddingVertical:5,paddingHorizontal:10,borderRadius:8},nativeCombinedQuestionCard:{backgroundColor:c.surface,borderRadius:15,padding:16,gap:16},nativeHintRow:{flexDirection:'row',alignItems:'center',gap:9,borderWidth:1,borderColor:c.border,borderRadius:11,minHeight:54,padding:12},nativeHintTitle:{flex:1,color:c.text,fontSize:15,fontWeight:'500'},nativeBeforeAnswer:{color:c.textMuted,fontSize:12,lineHeight:20,textAlign:'center',paddingVertical:12},nativeQuestionFooterBody:{flexDirection:'row',alignItems:'center',gap:12,width:'100%',maxWidth:760,alignSelf:'center'},nativeQuestionFooter:{padding:16,paddingBottom:20,backgroundColor:c.surface,borderTopColor:c.border,borderTopWidth:StyleSheet.hairlineWidth},nativePrevious:{width:96,minHeight:50,borderRadius:11,borderWidth:1,borderColor:c.border,alignItems:'center',justifyContent:'center'},nativePreviousText:{fontSize:15,color:c.text,fontWeight:'500'},nativeConfirm:{flex:1,minHeight:50,borderRadius:11,backgroundColor:c.action,alignItems:'center',justifyContent:'center'},nativeConfirmText:{fontSize:15,fontWeight:'700',color:'#FFFFFF'},optionLetter:{width:32,height:32,borderRadius:16,borderWidth:1,borderColor:c.border,backgroundColor:'transparent',alignItems:'center',justifyContent:'center'},optionLetterText:{color:c.text,fontSize:16,fontWeight:'400'},selectedOptionLetter:{backgroundColor:c.action,borderColor:c.action},correctOptionLetter:{backgroundColor:c.successSoft,borderColor:c.success},wrongOptionLetter:{backgroundColor:c.warningSoft,borderColor:c.warning},
 settingsPage:{flex:1,backgroundColor:c.background},settingsNativeHeader:{minHeight:60,paddingHorizontal:8,flexDirection:'row',alignItems:'center',gap:4},settingsNativeTitle:{fontSize:22,color:c.text,fontWeight:'700'},settingsPageContent:{padding:16,paddingTop:8,paddingBottom:28,gap:16},settingsNativeGroup:{backgroundColor:c.surface,borderRadius:15,padding:16,gap:15},settingsNativeGroupTitle:{fontSize:18,fontWeight:'700',color:c.text},settingsChoiceRow:{flexDirection:'row',alignItems:'center',gap:10,flexWrap:'wrap'},settingsRowLabel:{flexDirection:'row',alignItems:'center',gap:9,minWidth:94,minHeight:48},settingsRowLabelText:{fontSize:14,fontWeight:'500',color:c.text},settingsSegments:{flexDirection:'row',alignItems:'stretch',flex:1,minWidth:174,borderRadius:10,backgroundColor:c.surfaceMuted,padding:3,gap:2},settingsSegment:{flex:1,minHeight:48,paddingHorizontal:4,paddingVertical:10,alignItems:'center',justifyContent:'center',borderRadius:8},settingsSegmentSelected:{backgroundColor:c.action},settingsSegmentText:{fontSize:12,color:c.textMuted,textAlign:'center'},settingsSegmentTextSelected:{color:'#FFFFFF',fontWeight:'700'},settingsSmall:{fontSize:12,color:c.textMuted,lineHeight:20},settingsSectionDivider:{height:StyleSheet.hairlineWidth,backgroundColor:c.border},settingsSoundToggleRow:{flexDirection:'row',alignItems:'center',gap:10},settingsSoundHeader:{flexDirection:'row',alignItems:'center',justifyContent:'space-between',gap:12},settingsSample:{flexDirection:'row',alignItems:'center',justifyContent:'center',gap:9,minHeight:50,padding:12,backgroundColor:c.brandSoft,borderColor:c.brand,borderWidth:1,borderRadius:11},settingsCache:{flexDirection:'row',alignItems:'center',gap:12,minHeight:84,padding:16,backgroundColor:c.surface,borderRadius:14},settingsDeviceNote:{fontSize:12,color:c.textMuted,lineHeight:20,textAlign:'center',padding:8},
 })});
 
 
 const createStyles=(c:ThemeColors)=>({...legacyProfileStyles(c),...StyleSheet.create({
+  nativeHeaderFlexible:{flex:1,width:undefined},
+  nativeMemberActionLarge:{flexDirection:'column',gap:6,paddingHorizontal:4,minHeight:68},
+  nativeHeaderTitleRow:{width:'100%',paddingHorizontal:16,paddingBottom:8,alignItems:'center'},
+  optionLetter:{width:36,height:36,borderRadius:18,borderWidth:1,borderColor:c.border,backgroundColor:'transparent',alignItems:'center',justifyContent:'center',flexShrink:0},
+  optionLetterText:{color:c.text,fontSize:16,fontWeight:'500',width:'100%',height:'100%',textAlign:'center',textAlignVertical:'center',includeFontPadding:false},
+  feedbackGood:{backgroundColor:c.successSoft,borderColor:c.success,borderRadius:16,borderWidth:1,padding:18,gap:8},
+  feedbackBad:{backgroundColor:c.warningSoft,borderColor:c.warning,borderRadius:16,borderWidth:1,padding:18,gap:8},
+  feedbackTitle:{color:c.text,fontSize:16,lineHeight:25,fontWeight:'700'},
+  feedbackAnswer:{color:c.text,fontSize:14,lineHeight:24,fontWeight:'500'},
+  feedbackText:{color:c.textMuted,fontSize:14,lineHeight:25},
+  aiTools:{flexDirection:'row',flexWrap:'wrap',gap:10},
+  aiToolButton:{flexGrow:1,flexBasis:'45%',minWidth:0,minHeight:52,paddingHorizontal:12,paddingVertical:12,backgroundColor:c.brandSoft,borderRadius:12,flexDirection:'row',alignItems:'center',justifyContent:'center',gap:8},
+  aiToolWide:{flexBasis:'100%'},
+  aiToolButtonText:{color:c.brand,fontSize:14,lineHeight:23,fontWeight:'500',flexShrink:1,textAlign:'center'},
+  nativeMembership:{padding:18,borderRadius:18,backgroundColor:c.surface,borderColor:c.border,borderWidth:StyleSheet.hairlineWidth,marginBottom:16},
+  nativeMemberHeading:{flexDirection:'row',alignItems:'center',gap:9,minHeight:44},
+  nativeMemberTitle:{color:c.text,fontSize:16,fontWeight:'700',flex:1,minWidth:0},
+  nativeMemberPlan:{color:androidAccent(c,'member').ink,fontSize:12,fontWeight:'500',backgroundColor:androidAccent(c,'member').soft,paddingHorizontal:10,paddingVertical:4,borderRadius:8},
+  nativeMemberActions:{flexDirection:'row',borderTopColor:c.border,borderTopWidth:StyleSheet.hairlineWidth,paddingTop:14,gap:8},
+  nativeMemberAction:{flex:1,minWidth:0,minHeight:48,flexDirection:'row',alignItems:'center',justifyContent:'center',gap:6,paddingVertical:10,paddingHorizontal:5,borderRadius:10,backgroundColor:c.surfaceMuted},
+  nativeMemberActionText:{color:c.text,fontSize:13,fontWeight:'500',flexShrink:1},
   nativeAboutRow:{flexDirection:'row',alignItems:'stretch',backgroundColor:c.surface,borderRadius:18,borderWidth:StyleSheet.hairlineWidth,borderColor:c.border,marginBottom:14,overflow:'hidden'},
   nativeAboutStack:{flexDirection:'column'},
   nativeAboutButton:{flex:1,minWidth:0,minHeight:64,flexDirection:'row',alignItems:'center',justifyContent:'center',gap:8,paddingHorizontal:12,paddingVertical:12},

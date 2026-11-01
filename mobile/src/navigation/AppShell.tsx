@@ -1,3 +1,4 @@
+import { AiIcon } from '../screens/ai-learning/AiElements';
 import { AppIcon } from '../components/AppIcon';
 import { ContentPlaceholder } from '../components/ContentPlaceholder';
 import { iosStyles } from '../iosStyles';
@@ -565,6 +566,7 @@ export function AppShell() {
         <TabBar activeTab={activeTab} onChange={handleNavigate} hidden={dailyPracticeOpen} />
         {dailyPracticeDay && <DailyPracticePanel
           key={`${session?.user.id ?? 'preview'}:${session?.user.certificateId ?? ''}:${dailyPracticeDay}`}
+          user={session?.user} certificates={session?.certificates} onOpenCertificatePicker={handleOpenCertificatePicker}
           visible={dailyPracticeOpen}
           active={appActive && !certificatePickerOpen}
           preview={isPreview}
@@ -839,7 +841,7 @@ function TabBarItem({
       onPress={onPress}
       style={styles.tab}
     >
-      {isAppleWeb ? <AppIcon name={tab.symbol} selected={active} style={[styles.tabIcon, active && styles.activeTabIcon]}>{tab.icon}</AppIcon> : <Animated.Text
+      {tab.id === "ai" ? <View style={{width:34,height:34,borderRadius:10,backgroundColor:"#2962F4",alignItems:"center",justifyContent:"center"}}><AiIcon name="sparkle" color="#FFF" size={23}/></View> : isAppleWeb ? <AppIcon name={tab.symbol} selected={active} style={[styles.tabIcon, active && styles.activeTabIcon]}>{tab.icon}</AppIcon> : <Animated.Text
         style={[
           styles.tabIcon,
           active && styles.activeTabIcon,

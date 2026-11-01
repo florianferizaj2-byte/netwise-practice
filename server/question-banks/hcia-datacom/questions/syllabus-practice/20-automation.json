@@ -14,13 +14,16 @@
     ],
     "analysis": "JSON 对象使用花括号并由键值对组成，数组则使用方括号。",
     "chapter": "网络编程自动化",
-    "knowledgePoint": "JSON/YAML",
+    "knowledgePoint": "JSON 格式",
     "difficulty": "easy",
     "tags": [
       "网络编程自动化",
+      "数据格式",
+      "JSON 格式",
       "JSON/YAML"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "数据格式"
   },
   {
     "id": "hcia-v2-20-python-list",
@@ -37,13 +40,16 @@
     ],
     "analysis": "Python 列表 list 按顺序保存多个元素，并支持添加、删除和修改。",
     "chapter": "网络编程自动化",
-    "knowledgePoint": "Python 基础",
+    "knowledgePoint": "Python 基础语法",
     "difficulty": "easy",
     "tags": [
       "网络编程自动化",
+      "Python 编程基础",
+      "Python 基础语法",
       "Python 基础"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "Python 编程基础"
   },
   {
     "id": "hcia-v2-20-netconf-yang",
@@ -62,13 +68,16 @@
     ],
     "analysis": "NETCONF 提供网络配置管理协议能力，YANG 定义结构化数据模型，两者常配合实现设备自动化。",
     "chapter": "网络编程自动化",
-    "knowledgePoint": "NETCONF/YANG",
+    "knowledgePoint": "YANG 模型",
     "difficulty": "medium",
     "tags": [
       "网络编程自动化",
+      "自动化接口与协议",
+      "YANG 模型",
       "NETCONF/YANG"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "自动化接口与协议"
   },
   {
     "id": "hcia-v2-20-rest-api",
@@ -85,12 +94,15 @@
     ],
     "analysis": "REST API 通常通过 HTTP/HTTPS 的 GET、POST、PUT、DELETE 等方法访问资源 URI。",
     "chapter": "网络编程自动化",
-    "knowledgePoint": "REST API",
+    "knowledgePoint": "RESTful API",
     "difficulty": "medium",
     "tags": [
       "网络编程自动化",
+      "自动化接口与协议",
+      "RESTful API",
       "REST API"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "自动化接口与协议"
   }
 ]

@@ -1,0 +1,1440 @@
+[
+  {
+    "id": "hcip831-3-3-1-001",
+    "type": "single_choice",
+    "question": "IS-IS 承载 IPv6 路由主要依靠什么机制？",
+    "options": {
+      "A": "新增一个路由进程",
+      "B": "新增 TLV 携带 IPv6 信息",
+      "C": "新增一种 NET 格式",
+      "D": "新增一种报文类型"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IS-IS 通过扩展 TLV 支持 IPv6，包括接口地址 TLV 与 IPv6 可达性 TLV，报文类型与邻居建立机制保持不变。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "TLV"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-001",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "fa8aed71e2a2a9311a0b74671dbe1ab058cdce0d271303551f5e283dd343c72c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-002",
+    "type": "single_choice",
+    "question": "IS-IS 中用于通告 IPv6 前缀的 TLV 是？",
+    "options": {
+      "A": "IPv6 Interface Address TLV",
+      "B": "Router Capability TLV",
+      "C": "Multi-Topology TLV",
+      "D": "IPv6 Reachability TLV"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "IPv6 Reachability TLV（236）携带可达的 IPv6 前缀与度量；Interface Address TLV（232）携带接口链路本地地址。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "可达性 TLV"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-002",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "cdaaf0788cc6a341094d93cde2d7b8cc151d69226dc20c73dac34441074aa179"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-003",
+    "type": "single_choice",
+    "question": "IS-IS 中用于通告接口链路本地地址的 TLV 是？",
+    "options": {
+      "A": "IPv6 Interface Address TLV",
+      "B": "IPv6 Reachability TLV",
+      "C": "Protocols Supported TLV",
+      "D": "Multi-Topology TLV"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IPv6 Interface Address TLV（232）在 Hello 与 LSP 中携带接口的 IPv6 地址，供邻居计算下一跳。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "地址 TLV"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-003",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "fb37e8fe58b366b5e46fa84cd6fb05bd3052897046d35b693c3e11df433b77f8"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-004",
+    "type": "single_choice",
+    "question": "IS-IS 多拓扑（MT）的作用是？",
+    "options": {
+      "A": "加快邻居建立",
+      "B": "合并 IPv4 与 IPv6 拓扑",
+      "C": "为 IPv6 建立独立于 IPv4 的拓扑",
+      "D": "减少 LSP 数量"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "MT 通过 Multi-Topology TLV 为不同地址族维护独立拓扑，允许 IPv4 与 IPv6 的路径不一致，避免单拓扑的限制。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS IPv6",
+      "多拓扑"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-004",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "a0e0b30be39b0a1122bd8fbdb00c956163e1fdeccc92ad8183812b71ea32c3bc"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-005",
+    "type": "single_choice",
+    "question": "IS-IS 单拓扑模式对 IPv4 与 IPv6 的要求是？",
+    "options": {
+      "A": "IPv4 不支持单拓扑",
+      "B": "IPv6 必须走独立链路",
+      "C": "两者必须使用相同的拓扑",
+      "D": "两者必须使用不同的拓扑"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "单拓扑下 IPv4 与 IPv6 共用同一 SPF 结果，因此要求两种协议的拓扑一致，否则会出现次优路径或不可达。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS IPv6",
+      "单拓扑"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-005",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "2d9152bda197fa6e2439d3e7007c9c56237f38fefc3eb6a0e748069200ab8133"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-006",
+    "type": "single_choice",
+    "question": "IS-IS 支持 IPv6 时，NLPID 的取值是？",
+    "options": {
+      "A": "137",
+      "B": "134",
+      "C": "129",
+      "D": "142"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "IPv6 的 NLPID 为 142，IS-IS 通过 Protocols Supported TLV 通告该值，表示支持 IPv6。129 是 IPv4 的 NLPID。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "NLPID"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-006",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "5eb2c654e2637201f94678b8e4bc3ffec6f077fd181db1117284d754e2b3f0bd"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-007",
+    "type": "single_choice",
+    "question": "IS-IS 的 NET 在 IPv6 环境中是否需要重新规划？",
+    "options": {
+      "A": "不需要，与 IPv4 共用同一 NET",
+      "B": "需要，必须使用 IPv6 地址",
+      "C": "需要，必须使用 128 位",
+      "D": "需要，必须配置两个 NET"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "NET 属于 OSI 地址体系，与 IPv4/IPv6 无关，同一台设备运行双栈时仍使用同一个 NET。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "NET"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-007",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "bf05b89613dc8e0dff3fdce77bb02cf53975f4e509a91bd15d937e3ee5b90d09"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-008",
+    "type": "single_choice",
+    "question": "IS-IS 双栈部署时，IPv6 邻居的建立方式与 IPv4 相比？",
+    "options": {
+      "A": "必须配置 BGP",
+      "B": "完全相同，仍通过 IIH 建立",
+      "C": "必须使用 IPv6 组播",
+      "D": "必须使用静态路由"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IS-IS 邻居建立与地址族无关，仍通过 IIH 报文与 Level 机制建立邻接，双栈共用同一邻居关系。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "邻居"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-008",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "0f785843bfea899fa8566e0387c9665ce7c3b067b39cf0ffb1ad88b749dd857d"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-009",
+    "type": "single_choice",
+    "question": "IS-IS 单拓扑模式下，若某链路只启用 IPv6 未启用 IPv4，会出现什么问题？",
+    "options": {
+      "A": "IPv4 路由自动切换",
+      "B": "IPv6 路由被丢弃",
+      "C": "邻居无法建立",
+      "D": "该链路无法进入 SPF 拓扑"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "单拓扑要求两种协议拓扑一致，只启用 IPv6 的链路不会被 IPv4 的 SPF 使用，导致 IPv6 流量无法经过该链路。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS IPv6",
+      "单拓扑"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-009",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "d9812e0f87746aa8f5caa8f4c74a23c493684970936c95168ede360eaa5b2ad7"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-010",
+    "type": "single_choice",
+    "question": "IS-IS IPv6 的配置中，使能多拓扑的命令通常是？",
+    "options": {
+      "A": "ipv6 enable topology standard",
+      "B": "ipv6 enable topology ipv6",
+      "C": "ipv6 router isis",
+      "D": "isis ipv6 enable"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "ipv6 enable topology ipv6 表示 IPv6 使用独立拓扑；standard 表示单拓扑，与 IPv4 共用。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "配置"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-010",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "0c15cef6064a6c3927d1e54597ab30a9f4c2e5b19ec0dcae8c2a672424a98bf7"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-011",
+    "type": "single_choice",
+    "question": "IS-IS IPv6 路由的下一跳通常是？",
+    "options": {
+      "A": "自己的环回地址",
+      "B": "邻居的全局地址",
+      "C": "邻居接口的链路本地地址",
+      "D": "组播地址"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "IPv6 可达性 TLV 携带的下一跳为邻居的链路本地地址，转发时不依赖全局地址的可达性。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "下一跳"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-011",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e81cf38790c280c3cecadcff46b0460a6006187f9403c19d5db35e9aa145fe70"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-012",
+    "type": "multiple_choice",
+    "question": "IS-IS 支持 IPv6 需要新增或扩展下列哪些内容？",
+    "options": {
+      "A": "IPv6 Interface Address TLV",
+      "B": "IPv6 Reachability TLV",
+      "C": "新的 Hello 报文类型",
+      "D": "Multi-Topology TLV"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "IS-IS 通过新增 TLV 承载 IPv6 信息，Hello 等报文类型保持不变，只是携带新的 TLV。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "扩展",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-012",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "bfba7b37fe6e31ec04628c1e84df68624906a5a22106f1d6e90ee30aa0ea668c"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-013",
+    "type": "multiple_choice",
+    "question": "IS-IS 双栈部署时需要注意？",
+    "options": {
+      "A": "拓扑模式选择单拓扑还是多拓扑",
+      "B": "为 IPv6 单独规划一套 NET",
+      "C": "接口同时使能 IPv4 与 IPv6",
+      "D": "NET 保持唯一"
+    },
+    "answer": [
+      "A",
+      "C",
+      "D"
+    ],
+    "analysis": "NET 与地址族无关，不需要为 IPv6 单独规划。拓扑模式、接口使能与 NET 唯一性是关键点。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "部署",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-013",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "dfa721a45a429b35a1cd1e9dc15aa7371efd1a833de4e02ab4e4273e93793aa7"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-014",
+    "type": "true_false",
+    "question": "IS-IS 支持 IPv6 需要定义新的报文类型。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "IS-IS 通过 TLV 扩展支持 IPv6，报文类型不变，这是 IS-IS 可扩展性的体现。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "IS-IS IPv6"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-014",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "aeaf7184206b140d5a9bb831c24735226ed74e6d79e17ff3d208f3959c57732f"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-015",
+    "type": "true_false",
+    "question": "IS-IS 的 NET 与 IPv4、IPv6 地址无关。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "NET 是 OSI 地址，由区域地址、System ID 与 SEL 组成，与 IP 地址族无关，双栈共用同一个 NET。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "easy",
+    "tags": [
+      "判断",
+      "NET"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-015",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "ecd7388a570886fa239144ff40d8573ec6bad44ad36993f4226fa0658a71e427"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-016",
+    "type": "single_choice",
+    "question": "IS-IS IPv6 邻居建立失败，最不可能的原因是？",
+    "options": {
+      "A": "NET 使用 IPv4 格式",
+      "B": "Level 不匹配",
+      "C": "链路本地地址不可达",
+      "D": "接口未使能 IPv6"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "NET 使用 OSI 格式，与 IPv4 无关，本身不会导致 IPv6 邻居失败。接口未使能、链路不通、Level 不匹配都会。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "排障"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-016",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "328d2400552ef6a2958d410d5e391f82fcb8d732e87ac56d54a7e6f3dd6af5e8"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-017",
+    "type": "single_choice",
+    "question": "IS-IS 多拓扑模式下，IPv4 与 IPv6 的路由计算关系是？",
+    "options": {
+      "A": "完全共用一次计算",
+      "B": "由 IPv6 结果推导 IPv4",
+      "C": "各自独立计算",
+      "D": "由 IPv4 结果推导 IPv6"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "MT 模式下每个拓扑独立运行 SPF，IPv4 与 IPv6 可以有不同的最优路径，互不影响。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "SPF"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-017",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "133a73f6cb496aed5a0274e061ba4acc16b8813880c667a4d20ed6dfc3fcf5f9"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-018",
+    "type": "single_choice",
+    "question": "单拓扑与多拓扑的选择依据是？",
+    "options": {
+      "A": "链路带宽",
+      "B": "两种协议的拓扑是否一致",
+      "C": "NET 的数量",
+      "D": "设备的 CPU 性能"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "若 IPv4 与 IPv6 拓扑完全一致，单拓扑更简单；若存在只支持一种协议的链路或需要差异化路径，应使用多拓扑。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS IPv6",
+      "选型"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-018",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "1a4ce0f109be07821aaf0b65823f5debe772184c28e9d4b9cc8e3a52e74dc38b"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-019",
+    "type": "single_choice",
+    "question": "IS-IS IPv6 的路由优先级缺省值是多少？",
+    "options": {
+      "A": "15",
+      "B": "60",
+      "C": "255",
+      "D": "10"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IS-IS 缺省优先级为 15，低于 OSPF 的 10、高于静态路由的 60，与 IPv4 环境一致。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "优先级"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-019",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "a53ff0da2ab0e130aa3082b4983f8a1e5bb7e14bc8d8967274853f4e20cddfc6"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-020",
+    "type": "single_choice",
+    "question": "IS-IS IPv6 是否支持路由汇总？",
+    "options": {
+      "A": "支持，在 Level-1-2 上汇总",
+      "B": "只支持外部路由",
+      "C": "只支持主机路由",
+      "D": "不支持"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IS-IS 支持在 Level-1-2 路由器上对 Level-1 路由做汇总后发布到 Level-2，IPv4 与 IPv6 均支持。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "汇总"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-020",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "07078a56854ef14d9fa58be761bc548b74f8d56123fcc98d657fa6303bbeba40"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-021",
+    "type": "single_choice",
+    "question": "IS-IS IPv6 的度量类型与 IPv4 相比？",
+    "options": {
+      "A": "只支持宽度量",
+      "B": "不使用度量",
+      "C": "相同，支持窄度量与宽度量",
+      "D": "只支持窄度量"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "IS-IS 的窄度量与宽度量机制与地址族无关，IPv6 沿用同一套度量体系。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "度量"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-021",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "c7bbc82018f8c42990a6b44472229468ff03ee19d2ecbf8bceab393a80f331bf"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-022",
+    "type": "single_choice",
+    "question": "某链路 IPv4 正常但 IPv6 不通，最可能的原因是？",
+    "options": {
+      "A": "IIH 间隔不一致",
+      "B": "NET 配置错误",
+      "C": "Level 配置错误",
+      "D": "单拓扑下该链路未被 IPv6 SPF 使用"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "单拓扑要求拓扑一致，若该链路在 IPv4 拓扑中可用但 IPv6 前缀未正确通告，IPv6 流量不会经过它。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS IPv6",
+      "排障"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-022",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "3bd0a48d1bae64e197839b021b617fbcf15dbd8c4c3c4e7c0ffad8f709d723c1"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-023",
+    "type": "single_choice",
+    "question": "IS-IS IPv6 中，接口使能 IS-IS 的命令通常是？",
+    "options": {
+      "A": "isis ipv6 enable",
+      "B": "ipv6 enable isis",
+      "C": "ipv6 router isis",
+      "D": "isis enable ipv6"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "华为设备在接口视图下用 isis ipv6 enable 使能 IPv6 的 IS-IS 处理，再配合 ipv6 enable topology 指定拓扑模式。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "命令"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-023",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "ff2988e85a27caed97c26c5d3c3e3474ea3acc21a3171201c4fbb1230f6e4567"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-024",
+    "type": "single_choice",
+    "question": "IS-IS 与 OSPFv3 在 IPv6 支持方式上的主要区别是？",
+    "options": {
+      "A": "前者扩展 TLV，后者设计新协议",
+      "B": "前者不支持 IPv6",
+      "C": "两者完全相同",
+      "D": "后者使用 TLV"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "IS-IS 通过 TLV 扩展原生支持多地址族；OSPFv3 是为 IPv6 重新设计的协议，两者思路不同。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "对比"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-024",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "074c60f0d49d3d4b228970f7af046b8593733fd9115fef277902db093a3da2d9"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-025",
+    "type": "multiple_choice",
+    "question": "IS-IS IPv6 排障时通常检查？",
+    "options": {
+      "A": "IPv6 前缀是否通告",
+      "B": "接口是否使能 IPv6",
+      "C": "IPv4 地址是否配置",
+      "D": "拓扑模式是否匹配"
+    },
+    "answer": [
+      "A",
+      "B",
+      "D"
+    ],
+    "analysis": "前三项直接决定 IPv6 能否计算路由。接口无需 IPv4 地址，IPv4 是否配置与 IPv6 转发无关。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "排障",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-025",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4f574058bd73b0d94294972ce3b4cb5e77c2f26ca6896dd7ddf84347368381db"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-026",
+    "type": "true_false",
+    "question": "IS-IS 单拓扑模式下 IPv4 与 IPv6 必须使用相同的拓扑。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "单拓扑共用一次 SPF，因此两种协议的拓扑必须一致，否则会出现次优路径或不可达。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "单拓扑"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-026",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e4c35683437c49dab8400855ed5651bf30b1568748ea7832c189eb4111b87a9b"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-027",
+    "type": "true_false",
+    "question": "IS-IS 支持 IPv6 时仍需保证 NET 在域内唯一。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "NET 的唯一性是 IS-IS 的基础要求，与地址族无关，双栈环境下同样必须唯一。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "easy",
+    "tags": [
+      "判断",
+      "NET"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-027",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "4d1a1077adbc305445a272750bc818476ca5652c3a1bb8d3b4ff452c74a0498d"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-028",
+    "type": "single_choice",
+    "question": "IS-IS IPv6 的 LSP 中，IPv6 前缀由哪个 TLV 携带？",
+    "options": {
+      "A": "Protocols Supported TLV",
+      "B": "Extended IS Reachability TLV",
+      "C": "IPv6 Reachability TLV",
+      "D": "IPv6 Interface Address TLV"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "IPv6 Reachability TLV（236）携带前缀、度量与下一跳信息，是 IPv6 路由计算的核心 TLV。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "LSP"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-028",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "13feef1727066bb7ae5e8b5a887d33fc348673f1edc420ae6abe5dde9df7eabc"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-029",
+    "type": "single_choice",
+    "question": "IS-IS 双栈环境中，IPv4 与 IPv6 的邻居状态是？",
+    "options": {
+      "A": "必须分别建立进程",
+      "B": "必须使用不同 NET",
+      "C": "共用同一邻居关系",
+      "D": "各自独立维护邻居"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "IS-IS 的邻居关系与地址族无关，双栈共用同一邻接，TLV 中分别携带两种协议的地址与前缀。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "双栈"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-029",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "8992e421d6c7f9068d9a71889c7d7574e2681c8f896eb7ca73f9319c4a00e0b5"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-030",
+    "type": "single_choice",
+    "question": "多拓扑模式下，某拓扑的 SPF 计算失败会影响另一个拓扑吗？",
+    "options": {
+      "A": "会，全部中断",
+      "B": "会导致邻居重建",
+      "C": "不会，各拓扑独立计算",
+      "D": "会导致 NET 冲突"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "MT 的核心价值就是拓扑隔离，一个拓扑的链路变化或计算异常不会影响另一个拓扑的转发。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS IPv6",
+      "隔离"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-030",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "dd0c851bdf76363fb5e765f916bf8f721100c7a9f9a4250ca839a94b3015081f"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-031",
+    "type": "single_choice",
+    "question": "IS-IS IPv6 是否支持与 IPv4 相同的 Level 分层？",
+    "options": {
+      "A": "支持，Level-1 与 Level-2 均适用",
+      "B": "只支持 Level-1",
+      "C": "只支持 Level-2",
+      "D": "不支持分层"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Level 分层属于 IS-IS 的拓扑机制，与地址族无关，IPv6 同样分为 Level-1、Level-2 与 Level-1-2。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "分层"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-031",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "0ee8ddb5a50c0344dcacc517add76ea4a684783e3e09828d4aeb8350e3d704fc"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-032",
+    "type": "single_choice",
+    "question": "IS-IS IPv6 中 DIS 的作用与 IPv4 相比？",
+    "options": {
+      "A": "不同，由 NET 决定",
+      "B": "不同，IPv6 不选举 DIS",
+      "C": "相同，负责广播网伪节点",
+      "D": "不同，由 Router ID 决定"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "DIS 选举机制与地址族无关，广播网络上仍由 DIS 生成伪节点并负责 LSP 泛洪。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "DIS"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-032",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "48862faaddd575261276714bf6434e6c8653962d8307bfcc94336a4ff0171c53"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-033",
+    "type": "multiple_choice",
+    "question": "下列哪些属于 IS-IS 支持 IPv6 的必要条件？",
+    "options": {
+      "A": "接口使能 IS-IS IPv6",
+      "B": "NET 配置正确",
+      "C": "接口使能 IPv6",
+      "D": "配置 IPv6 默认路由"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C"
+    ],
+    "analysis": "前三项是协议运行的基础。默认路由属于路由策略，不是协议运行的必要条件。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "条件",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-033",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "343d004b1898cba25420c6d4c3013562ab8d138a6682f02b55e5c99f6c0884f6"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-034",
+    "type": "true_false",
+    "question": "IS-IS 多拓扑模式下，IPv4 与 IPv6 可以有不同的最优路径。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "每个拓扑独立运行 SPF，因此两种协议的最优路径可以不同，这正是多拓扑的价值所在。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "判断",
+      "多拓扑"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-034",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "b009a0594cff54dd18c576773db33db5ffe646e9dc27a7ff85829c1852581aa2"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-035",
+    "type": "single_choice",
+    "question": "IS-IS IPv6 路由未出现在路由表，最先检查什么？",
+    "options": {
+      "A": "设备的 CPU",
+      "B": "SNMP 配置",
+      "C": "IPv6 可达性 TLV 是否收到",
+      "D": "光模块型号"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "先用 display isis lsdb verbose 确认 LSP 中是否携带 IPv6 可达性 TLV，再检查路由优选与引入配置。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "排障"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-035",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "52e5b6f90e2ea20f989d65f61656f3982b8b3a2944b148b836539486a94559da"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-036",
+    "type": "single_choice",
+    "question": "IS-IS IPv6 与 BGP4+ 配合时，通常由谁引入路由？",
+    "options": {
+      "A": "只有 DIS",
+      "B": "任意路由器",
+      "C": "只有 Level-1",
+      "D": "ASBR 上互相引入"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "ASBR 负责在 IS-IS 与 BGP4+ 之间重发布路由，把域内前缀通告给 BGP，或把 BGP 路由引入 IS-IS。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "重发布"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-036",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "e3d9403fd14deab29258a19a9ec5c56311cbc4a0186cd587642f154d5c100893"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-037",
+    "type": "single_choice",
+    "question": "IS-IS IPv6 的 Hello 报文中携带 IPv6 地址的作用是？",
+    "options": {
+      "A": "用于选举 DIS",
+      "B": "用于认证",
+      "C": "用于计算度量",
+      "D": "供邻居计算下一跳"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Hello 中的 IPv6 Interface Address TLV 让邻居获知本接口的链路本地地址，从而把该地址作为下一跳。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "Hello"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-037",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "13ce35e4037daa36b1910340d1ba99d8b469eaf26201121e2768e7d8d1f85ff1"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-038",
+    "type": "single_choice",
+    "question": "某设备同时运行 IS-IS IPv4 与 IPv6，但 IPv6 邻居一直 Init，最可能的原因是？",
+    "options": {
+      "A": "接口未使能 IPv6 或地址未生效",
+      "B": "Level 不匹配",
+      "C": "度量类型不一致",
+      "D": "NET 配置错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "Init 表示只收到对端 Hello，本端地址未生效或被过滤会导致对端收不到本端 Hello，应检查接口 IPv6 状态。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "hard",
+    "tags": [
+      "IS-IS IPv6",
+      "排障"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-038",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "296b89c41563bf9ec11b3040748f89861f0be753d23feb4cd00ef8474afcdc97"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-039",
+    "type": "single_choice",
+    "question": "IS-IS IPv6 的宽度量取值范围是？",
+    "options": {
+      "A": "1 到 65535",
+      "B": "1 到 255",
+      "C": "1 到 63",
+      "D": "1 到 16777214"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "宽度量使用 24 位，取值 1 到 16777214；窄度量只有 6 位，最大 63，无法满足大型网络需求。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "度量"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-039",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "b9bfb10fecb6a19a2237cd32a3cb716251e793e3037f32f71e9539c3dafb6a55"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-040",
+    "type": "multiple_choice",
+    "question": "IS-IS IPv6 相比 OSPFv3 的优势包括？",
+    "options": {
+      "A": "支持更多区域类型",
+      "B": "报文类型无需新增",
+      "C": "通过 TLV 平滑扩展",
+      "D": "天然支持多拓扑"
+    },
+    "answer": [
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "IS-IS 的 TLV 扩展机制与多拓扑支持是其优势。区域类型丰富是 OSPF 的特点，IS-IS 只有 Level 分层。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "medium",
+    "tags": [
+      "IS-IS IPv6",
+      "对比",
+      "多选"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-040",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "a15703c9b8c2260947298eda0aa1aaaba6085684929fc4ca57af73b1141fe02f"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  },
+  {
+    "id": "hcip831-3-3-1-041",
+    "type": "true_false",
+    "question": "IS-IS IPv6 需要为 IPv6 单独配置一套 NET。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "NET 与地址族无关，双栈共用同一个 NET，单独配置会导致邻居关系混乱。",
+    "chapter": "IPv6 路由",
+    "knowledgeSection": "IS-IS IPv6",
+    "knowledgePoint": "IS-IS（IPv6）原理与配置",
+    "difficulty": "easy",
+    "tags": [
+      "判断",
+      "NET"
+    ],
+    "provenance": {
+      "questionId": "hcip831-3-3-1-041",
+      "sourceIds": [
+        "huawei-h12-831-outline"
+      ],
+      "locator": "自编题；范围依据官方大纲「IPv6 路由 / IS-IS IPv6 / IS-IS（IPv6）原理与配置」。知识点编码 hcip831-3-3-1。",
+      "category": "syllabus_practice",
+      "reuse": "original",
+      "reuseBasis": "依据公开考纲与公开协议规范独立设计题干、选项与解析，未复制第三方题目正文。",
+      "reviewDigest": "5464a87d9894333150b93db19024b88565edc57247a84ce7ef957230b6e0c6ca"
+    },
+    "sourceVerification": "syllabus_practice；结构自检通过，待专家复核。"
+  }
+]

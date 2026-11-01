@@ -14,13 +14,16 @@
     ],
     "analysis": "Fat AP 具备较独立的控制与配置能力，适合小型或分散场景。 本题考查“Fat/Fit AP”，因此应选择“由 AP 本身承担较多配置和控制功能”。",
     "chapter": "WLAN 组网架构",
-    "knowledgePoint": "Fat/Fit AP",
+    "knowledgePoint": "Fat AP 与 Fit AP",
     "difficulty": "easy",
     "tags": [
       "WLAN 组网架构",
+      "设备角色与形态",
+      "Fat AP 与 Fit AP",
       "Fat/Fit AP"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "设备角色与形态"
   },
   {
     "id": "hcia-v2-extra-17-ac-discovery",
@@ -37,13 +40,16 @@
     ],
     "analysis": "集中式 WLAN 中 AP 需发现 AC、建立 CAPWAP 隧道并完成注册。 本题考查“AC 与 AP”，因此应选择“发现并连接 AC”。",
     "chapter": "WLAN 组网架构",
-    "knowledgePoint": "AC 与 AP",
+    "knowledgePoint": "Fat AP 与 Fit AP",
     "difficulty": "medium",
     "tags": [
       "WLAN 组网架构",
+      "设备角色与形态",
+      "Fat AP 与 Fit AP",
       "AC 与 AP"
     ],
-    "stage": "直接计算"
+    "stage": "直接计算",
+    "knowledgeSection": "设备角色与形态"
   },
   {
     "id": "hcia-v2-extra-17-tunnel-forward",
@@ -60,13 +66,15 @@
     ],
     "analysis": "数据隧道回 AC 便于集中控制和审计，但会增加 AC 侧转发负担。 本题考查“转发模式”，因此应选择“用户数据可集中经过 AC 统一策略控制”。",
     "chapter": "WLAN 组网架构",
-    "knowledgePoint": "转发模式",
+    "knowledgePoint": "转发模式的选择",
     "difficulty": "medium",
     "tags": [
       "WLAN 组网架构",
-      "转发模式"
+      "转发模式",
+      "转发模式的选择"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "转发模式"
   },
   {
     "id": "hcia-v2-extra-17-direct-forward",
@@ -83,13 +91,15 @@
     ],
     "analysis": "直接转发可减少 AC 的数据转发压力，需在接入网络侧做好 VLAN 和策略设计。 本题考查“转发模式”，因此应选择“用户数据由 AP 就近进入有线网络”。",
     "chapter": "WLAN 组网架构",
-    "knowledgePoint": "转发模式",
+    "knowledgePoint": "转发模式的选择",
     "difficulty": "medium",
     "tags": [
       "WLAN 组网架构",
-      "转发模式"
+      "转发模式",
+      "转发模式的选择"
     ],
-    "stage": "反向推理"
+    "stage": "反向推理",
+    "knowledgeSection": "转发模式"
   },
   {
     "id": "hcia-v2-extra-17-ac-redundancy",
@@ -106,13 +116,16 @@
     ],
     "analysis": "AC 是集中控制点，冗余可降低控制器单点故障对无线业务的影响。 本题考查“AC 与 AP”，因此应选择“避免单个 AC 故障影响大量 AP 与用户”。",
     "chapter": "WLAN 组网架构",
-    "knowledgePoint": "AC 与 AP",
+    "knowledgePoint": "Fat AP 与 Fit AP",
     "difficulty": "easy",
     "tags": [
       "WLAN 组网架构",
+      "设备角色与形态",
+      "Fat AP 与 Fit AP",
       "AC 与 AP"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "设备角色与形态"
   },
   {
     "id": "hcia-v2-extra-17-ap-management-vlan",
@@ -129,12 +142,15 @@
     ],
     "analysis": "CAPWAP 基于 IP 传输，AP 管理地址到 AC 地址的三层可达是上线基础。 本题考查“CAPWAP”，因此应选择“AP 到 AC 的 IP 可达性”。",
     "chapter": "WLAN 组网架构",
-    "knowledgePoint": "CAPWAP",
+    "knowledgePoint": "CAPWAP 隧道与端口",
     "difficulty": "easy",
     "tags": [
       "WLAN 组网架构",
+      "CAPWAP 协议",
+      "CAPWAP 隧道与端口",
       "CAPWAP"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "CAPWAP 协议"
   }
 ]

@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AccessibilityInfo, Platform, StyleSheet, useColorScheme, type ImageStyle, type TextStyle, type ViewStyle } from 'react-native';
 import { createContext, createElement, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { prepareUiSounds, setUiSoundSettings, type UiSoundStyle } from './audioFeedback';
+import { useAnswerFeedbackSettings } from './useAnswerFeedbackSettings';
 
 export type ThemeMode = 'system' | 'light' | 'dark';
 export type AnimationSpeed = 'slow' | 'normal' | 'fast';
@@ -145,7 +146,7 @@ const animationScales: Record<AnimationSpeed, number> = {
   fast: 0.72,
 };
 
-type ThemeContextValue = {
+type ThemeContextValue = ReturnType<typeof useAnswerFeedbackSettings> & {
   colors: ThemeColors;
   mode: ThemeMode;
   resolvedMode: 'light' | 'dark';
@@ -166,6 +167,7 @@ const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const systemScheme = useColorScheme();
+  const answerFeedback = useAnswerFeedbackSettings();
   const [mode, setModeState] = useState<ThemeMode>('system');
   const [animationSpeed, setAnimationSpeedState] = useState<AnimationSpeed>('normal');
   const [soundEnabled, setSoundEnabledState] = useState(true);
@@ -250,6 +252,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     : mode;
 
   const value = useMemo<ThemeContextValue>(() => ({
+    ...answerFeedback,
     colors: resolvedMode === 'dark' ? darkColors : lightColors,
     mode,
     resolvedMode,
@@ -264,7 +267,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     setSoundEnabled,
     setSoundVolume,
     setSoundStyle,
-  }), [animationSpeed, mode, resolvedMode, reduceMotion, setAnimationSpeed, setMode, setSoundEnabled, setSoundStyle, setSoundVolume, soundEnabled, soundStyle, soundVolume]);
+  }), [answerFeedback, animationSpeed, mode, resolvedMode, reduceMotion, setAnimationSpeed, setMode, setSoundEnabled, setSoundStyle, setSoundVolume, soundEnabled, soundStyle, soundVolume]);
 
   return createElement(ThemeContext.Provider, { value }, children);
 }

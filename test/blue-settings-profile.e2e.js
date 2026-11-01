@@ -6,6 +6,7 @@ import path from "node:path";
 import { expect, webkit } from "@playwright/test";
 import { createStore } from "../server/store.js";
 import { createApp } from "../server/index.js";
+import { getReleaseTarget } from "../scripts/release-checks.mjs";
 import { OpenAICompatibleProvider } from "../server/ai.js";
 import { launchTestBrowser } from "./helpers/browser.js";
 import {
@@ -379,6 +380,25 @@ try {
     "New browser restores profile and theme; peer account remains separate; membership and certificate entries work",
   );
 
+  if (getReleaseTarget(process.cwd()) === "android") {
+    // This release deliberately does not build /app/. Exercise the actual
+    // versioned Android Bearer contract, keeping desktop WebKit below intact.
+    const headers = { Authorization: `Bearer ${token}`, "X-Client": "mobile",
+      "X-App-Platform": "android", "X-App-Version": version };
+    const nativeResponse = await fetch(base + "/api/auth/me", { headers });
+    assert.equal(nativeResponse.status, 200);
+    const nativeUser = (await nativeResponse.json()).user;
+    const webUser = await readUser();
+    assert.equal(nativeUser.id, webUser.id);
+    assert.equal(nativeUser.communityName, "应答恢复后的昵称");
+    assert.equal(nativeUser.avatarUrl, webUser.avatarUrl);
+    assert.equal(nativeUser.profileComplete, true);
+    const avatar = await fetch(base + nativeUser.avatarUrl, { headers });
+    assert.equal(avatar.status, 200);
+    assert.match(avatar.headers.get("content-type"), /^image\//);
+    assert((await avatar.arrayBuffer()).byteLength > 0);
+    checks.push("Versioned Android Bearer profile and avatar reflect the Web edit; /app/ visual verification not executed for this Android-only target");
+  } else {
   // The existing /app/ Web build consumes exactly the same profile, without another setup step.
   const mobile = await contextFor(browser, token, {
     viewport: { width: 393, height: 852 },
@@ -420,6 +440,8 @@ try {
   checks.push(
     "Existing /app/ mobile Web restores the Web-edited profile, skips setup and shows the saved name/avatar in its real profile screen",
   );
+
+  }
 
   await context.close();
   await browser.close();

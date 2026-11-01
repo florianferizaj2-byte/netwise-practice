@@ -6,6 +6,7 @@ import path from "node:path";
 import { chromium, expect } from "@playwright/test";
 import { createStore } from "../server/store.js";
 import { createApp } from "../server/index.js";
+import { certificates } from "../server/certificates.js";
 import { practiceStorageKey } from "../src/practice-progress.js";
 
 Object.assign(process.env, {
@@ -95,7 +96,7 @@ try {
   await expect(
     np.getByRole("heading", { name: "选择备考目标", exact: true }),
   ).toBeVisible();
-  await expect(np.locator(".blue-cert-card")).toHaveCount(6);
+  await expect(np.locator(".blue-cert-card")).toHaveCount(certificates.length);
   await card(np, "ncre-ms-office").click();
   assert.equal((await me(newToken)).user.certificateId, null);
   assert.equal(writes, 0, "preview selection must not activate a certificate");
@@ -125,7 +126,7 @@ try {
     if (new URL(r.url()).pathname === "/api/questions") banks.push(r.url());
   });
   await page.goto(base + "/#certificates", { waitUntil: "networkidle" });
-  await expect(page.locator(".blue-cert-card")).toHaveCount(6);
+  await expect(page.locator(".blue-cert-card")).toHaveCount(certificates.length);
   assert.deepEqual(
     banks,
     [],

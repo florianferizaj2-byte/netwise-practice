@@ -14,13 +14,16 @@
     ],
     "analysis": "ACL 通常采用从前到后首条命中原则，因此规则顺序会直接影响过滤结果。",
     "chapter": "ACL 原理与配置",
-    "knowledgePoint": "规则顺序",
+    "knowledgePoint": "规则匹配顺序",
     "difficulty": "easy",
     "tags": [
       "ACL 原理与配置",
+      "ACL 基础",
+      "规则匹配顺序",
       "规则顺序"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "ACL 基础"
   },
   {
     "id": "hcia-v2-11-basic-acl",
@@ -37,13 +40,16 @@
     ],
     "analysis": "基本 ACL 的主要匹配条件是源 IPv4 地址，高级 ACL 才可进一步匹配协议和端口等字段。",
     "chapter": "ACL 原理与配置",
-    "knowledgePoint": "基本 ACL",
+    "knowledgePoint": "基本 ACL 应用",
     "difficulty": "easy",
     "tags": [
       "ACL 原理与配置",
+      "ACL 应用",
+      "基本 ACL 应用",
       "基本 ACL"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "ACL 应用"
   },
   {
     "id": "hcia-v2-11-advanced-acl",
@@ -62,13 +68,16 @@
     ],
     "analysis": "高级 ACL 能结合源目的地址、协议类型以及四层端口精细识别流量，与设备电源参数无关。",
     "chapter": "ACL 原理与配置",
-    "knowledgePoint": "高级 ACL",
+    "knowledgePoint": "高级 ACL 应用",
     "difficulty": "medium",
     "tags": [
       "ACL 原理与配置",
+      "ACL 应用",
+      "高级 ACL 应用",
       "高级 ACL"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "ACL 应用"
   },
   {
     "id": "hcia-v2-11-wildcard",
@@ -85,12 +94,14 @@
     ],
     "analysis": "通配符掩码中 0 表示对应位需要比较，1 表示该位不关心。",
     "chapter": "ACL 原理与配置",
-    "knowledgePoint": "通配符掩码",
+    "knowledgePoint": "通配符掩码规则",
     "difficulty": "medium",
     "tags": [
       "ACL 原理与配置",
-      "通配符掩码"
+      "通配符掩码",
+      "通配符掩码规则"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "通配符掩码"
   }
 ]

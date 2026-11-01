@@ -9,7 +9,8 @@ import { assertBuildProvenance } from "./release-runtime.mjs";
 const root = fileURLToPath(new URL("../", import.meta.url));
 const checks = [
   ["蓝色公开首页与真实登录", "blue-landing"],
-  ["现有六类证书选择", "certificate-selection"],
+  ["服务端完整证书目录", "certificate-selection"],
+  ["HCIP 练习判分、恢复与模拟考试", "hcip-practice"],
   ["首页与全部章节插画", "blue-workspace"],
   ["题目收藏总览", "favorites-overview"],
   ["知识点收藏", "knowledge-favorites"],
@@ -25,6 +26,7 @@ const checks = [
   ["解析展开与自动切题", "practice-review"],
   ["账号每日学习提醒", "study-reminders"],
   ["会员三档与真实测试码兑换", "blue-membership"],
+  ["会员每日签到与后台配置", "tiered-check-in"],
   ["全站蓝色与深色配色", "blue-palette"],
 ];
 const output = path.join(root, "test-output");

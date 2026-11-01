@@ -14,13 +14,16 @@
     ],
     "analysis": "物理状态 Down 首先指向链路层以下问题，应先检查介质、模块、接口启用状态和对端。",
     "chapter": "网络故障排除",
-    "knowledgePoint": "分层排障",
+    "knowledgePoint": "分层排障法",
     "difficulty": "easy",
     "tags": [
       "网络故障排除",
+      "排障方法论",
+      "分层排障法",
       "分层排障"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "排障方法论"
   },
   {
     "id": "hcia-v2-21-gateway-ping",
@@ -37,13 +40,16 @@
     ],
     "analysis": "默认网关测试能先确认终端 IP、掩码、VLAN 和本地链路到三层出口是否基本正常。",
     "chapter": "网络故障排除",
-    "knowledgePoint": "连通性检查",
+    "knowledgePoint": "常用排障工具",
     "difficulty": "easy",
     "tags": [
       "网络故障排除",
+      "排障方法论",
+      "常用排障工具",
       "连通性检查"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "排障方法论"
   },
   {
     "id": "hcia-v2-21-traceroute",
@@ -60,13 +66,16 @@
     ],
     "analysis": "逐跳探测能显示路径中的路由节点和响应时延，帮助缩小三层路径故障范围。",
     "chapter": "网络故障排除",
-    "knowledgePoint": "故障定位",
+    "knowledgePoint": "常用排障工具",
     "difficulty": "medium",
     "tags": [
       "网络故障排除",
+      "排障方法论",
+      "常用排障工具",
       "故障定位"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "排障方法论"
   },
   {
     "id": "hcia-v2-21-method",
@@ -85,12 +94,15 @@
     ],
     "analysis": "有效排障需要先界定问题、基于证据验证假设并记录结果；无计划地大量修改会扩大风险。",
     "chapter": "网络故障排除",
-    "knowledgePoint": "配置核对",
+    "knowledgePoint": "分而治之与对比法",
     "difficulty": "medium",
     "tags": [
       "网络故障排除",
+      "排障方法论",
+      "分而治之与对比法",
       "配置核对"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "排障方法论"
   }
 ]

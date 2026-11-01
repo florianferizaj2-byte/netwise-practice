@@ -14,13 +14,16 @@
     ],
     "analysis": "无线控制器 AC 集中完成 AP 管理、业务配置下发和部分用户控制功能。",
     "chapter": "WLAN 组网架构",
-    "knowledgePoint": "AC 与 AP",
+    "knowledgePoint": "AP 与 AC 的角色分工",
     "difficulty": "easy",
     "tags": [
       "WLAN 组网架构",
+      "设备角色与形态",
+      "AP 与 AC 的角色分工",
       "AC 与 AP"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "设备角色与形态"
   },
   {
     "id": "hcia-v2-17-fit-ap",
@@ -37,13 +40,16 @@
     ],
     "analysis": "Fit AP 把主要控制和管理能力交由 AC 统一处理，便于大规模部署和策略一致。",
     "chapter": "WLAN 组网架构",
-    "knowledgePoint": "Fat/Fit AP",
+    "knowledgePoint": "Fat AP 与 Fit AP",
     "difficulty": "easy",
     "tags": [
       "WLAN 组网架构",
+      "设备角色与形态",
+      "Fat AP 与 Fit AP",
       "Fat/Fit AP"
     ],
-    "stage": "基础理解"
+    "stage": "基础理解",
+    "knowledgeSection": "设备角色与形态"
   },
   {
     "id": "hcia-v2-17-capwap",
@@ -60,13 +66,16 @@
     ],
     "analysis": "CAPWAP 用于 AC 与 AP 之间建立控制通道，并可按组网方式承载用户数据。",
     "chapter": "WLAN 组网架构",
-    "knowledgePoint": "CAPWAP",
+    "knowledgePoint": "CAPWAP 隧道与端口",
     "difficulty": "medium",
     "tags": [
       "WLAN 组网架构",
+      "CAPWAP 协议",
+      "CAPWAP 隧道与端口",
       "CAPWAP"
     ],
-    "stage": "综合应用"
+    "stage": "综合应用",
+    "knowledgeSection": "CAPWAP 协议"
   },
   {
     "id": "hcia-v2-17-forward-mode",
@@ -83,12 +92,14 @@
     ],
     "analysis": "隧道转发把用户数据经 CAPWAP 送到 AC，直接转发则由 AP 就近转入有线网络。",
     "chapter": "WLAN 组网架构",
-    "knowledgePoint": "转发模式",
+    "knowledgePoint": "转发模式的选择",
     "difficulty": "medium",
     "tags": [
       "WLAN 组网架构",
-      "转发模式"
+      "转发模式",
+      "转发模式的选择"
     ],
-    "stage": "变式计算"
+    "stage": "变式计算",
+    "knowledgeSection": "转发模式"
   }
 ]

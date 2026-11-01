@@ -73,7 +73,7 @@ export function createAndroidPointsFlow(deps: Dependencies) {
     if(!valid(version)||id!==refreshRevision)return;
     publish({refreshing:false,wallet:wallet.status==='fulfilled'?selectWallet(wallet.value.wallet):null,
       prices:prices.status==='fulfilled'?prices.value:null,
-      error:wallet.status==='rejected'?'积分未同步，点击刷新；不会将未知余额显示为 0。':''});
+      error:wallet.status==='rejected'?(Number(wallet.reason?.status)===404?'服务端尚未升级到 v1.0，请部署配套后端后重试。':'积分未同步，点击刷新；不会将未知余额显示为 0。'):''});
   }
   async function reconcile(key:string,track:Tracking){
     if(!valid(track.epoch)||!tracks.has(key)||!appActive||track.busy)return;

@@ -115,7 +115,6 @@ let aiRequests = 0, forceWalletExpired = false, failWallet=false,holdAnswer=fals
 app.use('/api/ai', (req, res, next) => { if(req.method==='GET')return next(); aiRequests++; if(holdAi){holdAi=false;releaseAi=()=>res.json({text:'合成缓存讲解，未调用模型',cached:true});return;}res.status(503).json({ error: 'Synthetic UI test: no model call' }); });
 app.get('/api/account/points/wallet', (_req, res, next) => forceWalletExpired?res.status(401).json({error:'Synthetic session expiry'}):failWallet?res.status(503).json({error:'Synthetic wallet offline'}):next());
 app.use((req,res,next)=>{if(holdAnswer&&req.method==='POST'&&/^\/api\/attempts?$/.test(req.path)){holdAnswer=false;const end=res.end.bind(res);res.end=(...args)=>{releaseAnswer=()=>end(...args);return res;};}next();});
-app.get('/api/mobile/version', (_req, res) => res.json({ currentVersion: '0.4.8', latestVersion: '0.4.8', minimumVersion: '0.4.8', forceUpdate: false, updateAvailable: false }));
 app.use((req, res, next) => req.path.startsWith('/api/') ? backend(req, res, next) : next());
 app.use(vite.middlewares);
 const server = app.listen(0, '127.0.0.1'); await new Promise(resolve => server.once('listening', resolve));

@@ -1,0 +1,714 @@
+[
+  {
+    "id": "hcia-v3-08-001",
+    "type": "single_choice",
+    "question": "路由表中 Proto 字段表示什么？",
+    "options": {
+      "A": "该路由的下一跳地址",
+      "B": "该路由的开销值",
+      "C": "该路由的出接口编号",
+      "D": "该路由的来源协议"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "Proto 显示 Direct、Static、OSPF 等来源，是判断路由由谁生成的第一依据。Pre 是优先级，Cost 是度量值。",
+    "chapter": "IP 路由基础",
+    "knowledgeSection": "路由表与选路",
+    "knowledgePoint": "路由表字段",
+    "difficulty": "easy",
+    "tags": [
+      "IP 路由基础",
+      "路由表与选路",
+      "路由表字段"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-08-002",
+    "type": "single_choice",
+    "question": "查看设备 IPv4 路由表应使用哪条命令？",
+    "options": {
+      "A": "display ip routing-table",
+      "B": "display vlan",
+      "C": "display interface brief",
+      "D": "display arp"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "display ip routing-table 输出目的网段、掩码、协议、优先级、开销与下一跳，是三层排障的入口命令。",
+    "chapter": "IP 路由基础",
+    "knowledgeSection": "路由表与选路",
+    "knowledgePoint": "路由表字段",
+    "difficulty": "easy",
+    "tags": [
+      "IP 路由基础",
+      "路由表与选路",
+      "路由表字段"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-08-003",
+    "type": "true_false",
+    "question": "路由表中的 NextHop 字段可能是一个接口名，表示该路由为直连路由。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "直连路由的下一跳显示为接口本身，而静态或动态路由的下一跳通常是邻居的 IP 地址。",
+    "chapter": "IP 路由基础",
+    "knowledgeSection": "路由表与选路",
+    "knowledgePoint": "路由表字段",
+    "difficulty": "medium",
+    "tags": [
+      "IP 路由基础",
+      "路由表与选路",
+      "路由表字段"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-08-004",
+    "type": "single_choice",
+    "question": "华为设备上直连路由的默认优先级是多少？",
+    "options": {
+      "A": "0",
+      "B": "100",
+      "C": "60",
+      "D": "10"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "直连 0、OSPF 10、静态 60、RIP 100。优先级数值越小越优先，因此直连路由永远不会被其他协议覆盖。",
+    "chapter": "IP 路由基础",
+    "knowledgeSection": "路由表与选路",
+    "knowledgePoint": "路由优先级",
+    "difficulty": "medium",
+    "tags": [
+      "IP 路由基础",
+      "路由表与选路",
+      "路由优先级"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-08-005",
+    "type": "single_choice",
+    "question": "同一目的网段同时存在 OSPF 路由与静态路由时，默认优选哪一条？",
+    "options": {
+      "A": "OSPF 路由，因为优先级 10 小于 60",
+      "B": "两者负载分担",
+      "C": "静态路由，因为配置更明确",
+      "D": "随机选择一条"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "不同协议之间先比优先级，数值小者优。OSPF 的 10 优于静态的 60，因此 OSPF 路由进入路由表。",
+    "chapter": "IP 路由基础",
+    "knowledgeSection": "路由表与选路",
+    "knowledgePoint": "路由优先级",
+    "difficulty": "medium",
+    "tags": [
+      "IP 路由基础",
+      "路由表与选路",
+      "路由优先级"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-08-006",
+    "type": "single_choice",
+    "question": "若希望静态路由优先于 OSPF 路由，应如何配置？",
+    "options": {
+      "A": "为该静态路由指定大于 60 的优先级",
+      "B": "把 OSPF 进程号改小",
+      "C": "为该静态路由指定小于 10 的优先级",
+      "D": "为静态路由增加度量值"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "ip route-static 目的 掩码 下一跳 preference 值，把值设为小于 10 即可让静态路由胜出，常用于策略引流。",
+    "chapter": "IP 路由基础",
+    "knowledgeSection": "路由表与选路",
+    "knowledgePoint": "路由优先级",
+    "difficulty": "hard",
+    "tags": [
+      "IP 路由基础",
+      "路由表与选路",
+      "路由优先级"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v3-08-007",
+    "type": "true_false",
+    "question": "路由优先级与路由度量值是同一个概念，只是叫法不同。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "优先级用于不同协议之间比较，度量值用于同一协议内部比较，两者作用层次不同，不可混为一谈。",
+    "chapter": "IP 路由基础",
+    "knowledgeSection": "路由表与选路",
+    "knowledgePoint": "路由度量值",
+    "difficulty": "medium",
+    "tags": [
+      "IP 路由基础",
+      "路由表与选路",
+      "路由度量值"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-08-008",
+    "type": "single_choice",
+    "question": "OSPF 计算度量值时默认使用的参考带宽是多少？",
+    "options": {
+      "A": "10000 Mbit/s",
+      "B": "10 Mbit/s",
+      "C": "100 Mbit/s",
+      "D": "1000 Mbit/s"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "默认参考带宽 100M，开销 = 参考带宽 / 接口带宽。千兆与万兆接口开销都为 1，需调整参考带宽区分。",
+    "chapter": "IP 路由基础",
+    "knowledgeSection": "路由表与选路",
+    "knowledgePoint": "路由度量值",
+    "difficulty": "medium",
+    "tags": [
+      "IP 路由基础",
+      "路由表与选路",
+      "路由度量值"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-08-009",
+    "type": "single_choice",
+    "question": "配置一条到达 192.168.2.0/24、下一跳为 10.1.1.2 的静态路由，正确命令是？",
+    "options": {
+      "A": "ip route 192.168.2.0 255.255.255.0 10.1.1.2",
+      "B": "route add 192.168.2.0 24 10.1.1.2",
+      "C": "static route 192.168.2.0/24 10.1.1.2",
+      "D": "ip route-static 192.168.2.0 24 10.1.1.2"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "华为用 ip route-static 目的网络 掩码长度 下一跳，掩码可写长度也可写点分十进制，但不能用斜杠形式。",
+    "chapter": "IP 路由基础",
+    "knowledgeSection": "静态路由配置",
+    "knowledgePoint": "静态路由基本配置",
+    "difficulty": "medium",
+    "tags": [
+      "IP 路由基础",
+      "静态路由配置",
+      "静态路由基本配置"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-08-010",
+    "type": "single_choice",
+    "question": "静态路由指定出接口而不指定下一跳，可能带来什么问题？",
+    "options": {
+      "A": "优先级自动变为 0",
+      "B": "在广播型接口上会触发大量 ARP，且可能产生路由歧义",
+      "C": "设备会自动重启",
+      "D": "路由无法进入路由表"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "广播型接口上指出接口会让设备对每个目的地址都发 ARP；点对点接口可只指出接口，是例外情况。",
+    "chapter": "IP 路由基础",
+    "knowledgeSection": "静态路由配置",
+    "knowledgePoint": "静态路由基本配置",
+    "difficulty": "hard",
+    "tags": [
+      "IP 路由基础",
+      "静态路由配置",
+      "静态路由基本配置"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-08-011",
+    "type": "true_false",
+    "question": "静态路由不会随网络拓扑变化自动调整，需要人工维护。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "静态路由配置简单、开销小，但缺乏适应性；链路变化后若未同步修改，会形成黑洞路由。",
+    "chapter": "IP 路由基础",
+    "knowledgeSection": "静态路由配置",
+    "knowledgePoint": "静态路由基本配置",
+    "difficulty": "easy",
+    "tags": [
+      "IP 路由基础",
+      "静态路由配置",
+      "静态路由基本配置"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-08-012",
+    "type": "single_choice",
+    "question": "默认路由的目的网络与掩码表示是什么？",
+    "options": {
+      "A": "0.0.0.0 0.0.0.0",
+      "B": "127.0.0.0 8",
+      "C": "255.255.255.255 32",
+      "D": "0.0.0.0 255.255.255.255"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "0.0.0.0/0 掩码长度为 0，可匹配任意目的地址，是最不精确的路由，只在没有更精确匹配时使用。",
+    "chapter": "IP 路由基础",
+    "knowledgeSection": "静态路由配置",
+    "knowledgePoint": "默认路由",
+    "difficulty": "easy",
+    "tags": [
+      "IP 路由基础",
+      "静态路由配置",
+      "默认路由"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-08-013",
+    "type": "single_choice",
+    "question": "企业出口路由器配置默认路由的主要目的是什么？",
+    "options": {
+      "A": "为内网主机分配 IP 地址",
+      "B": "提升接口物理带宽",
+      "C": "把未知目的流量统一交给运营商",
+      "D": "阻止所有外部流量进入"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "出口设备无法掌握全网路由，用默认路由把未知流量交给上行，可大幅精简路由表规模。",
+    "chapter": "IP 路由基础",
+    "knowledgeSection": "静态路由配置",
+    "knowledgePoint": "默认路由",
+    "difficulty": "medium",
+    "tags": [
+      "IP 路由基础",
+      "静态路由配置",
+      "默认路由"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-08-014",
+    "type": "true_false",
+    "question": "在只有默认路由的情况下，即使目标地址在本网段内，报文也会被送往默认路由的下一跳。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "本网段属于直连路由，掩码更长、优先级更高，按最长匹配原则不会走默认路由。",
+    "chapter": "IP 路由基础",
+    "knowledgeSection": "静态路由配置",
+    "knowledgePoint": "默认路由",
+    "difficulty": "medium",
+    "tags": [
+      "IP 路由基础",
+      "静态路由配置",
+      "默认路由"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-08-015",
+    "type": "single_choice",
+    "question": "浮动静态路由的实现原理是什么？",
+    "options": {
+      "A": "为备份静态路由配置更大的优先级数值",
+      "B": "为备份静态路由配置更小的度量值",
+      "C": "把备份路由配置在另一台设备上",
+      "D": "关闭主路由的接口"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "优先级数值越大越不优先，主路由失效后备份路由才进入路由表，从而实现静态路由的主备切换。",
+    "chapter": "IP 路由基础",
+    "knowledgeSection": "静态路由配置",
+    "knowledgePoint": "浮动静态路由与备份",
+    "difficulty": "medium",
+    "tags": [
+      "IP 路由基础",
+      "静态路由配置",
+      "浮动静态路由与备份"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-08-016",
+    "type": "single_choice",
+    "question": "主路由优先级 60，备份静态路由应配置为多少才能实现浮动？",
+    "options": {
+      "A": "50",
+      "B": "80",
+      "C": "0",
+      "D": "10"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "备份路由优先级必须大于主路由才会被隐藏，80 > 60 符合要求；配置 50 会直接抢占主路由。",
+    "chapter": "IP 路由基础",
+    "knowledgeSection": "静态路由配置",
+    "knowledgePoint": "浮动静态路由与备份",
+    "difficulty": "medium",
+    "tags": [
+      "IP 路由基础",
+      "静态路由配置",
+      "浮动静态路由与备份"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v3-08-017",
+    "type": "true_false",
+    "question": "浮动静态路由只有在主路由从路由表中消失后才会被激活。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "同一目的网段只保留最优的一条进入路由表，备份路由处于未激活状态，主路由撤销后自动顶上。",
+    "chapter": "IP 路由基础",
+    "knowledgeSection": "静态路由配置",
+    "knowledgePoint": "浮动静态路由与备份",
+    "difficulty": "medium",
+    "tags": [
+      "IP 路由基础",
+      "静态路由配置",
+      "浮动静态路由与备份"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-08-018",
+    "type": "single_choice",
+    "question": "路由表中同时存在 10.1.0.0/16 与 10.1.1.0/24 两条路由，访问 10.1.1.5 时选哪条？",
+    "options": {
+      "A": "10.1.1.0/24，因为掩码更长",
+      "B": "10.1.0.0/16，因为范围更大",
+      "C": "取决于优先级数值",
+      "D": "两条负载分担"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "最长匹配原则优先于优先级比较，掩码越长越精确。只有掩码长度相同时才比较优先级与度量值。",
+    "chapter": "IP 路由基础",
+    "knowledgeSection": "转发与查找",
+    "knowledgePoint": "最长匹配原则",
+    "difficulty": "medium",
+    "tags": [
+      "IP 路由基础",
+      "转发与查找",
+      "最长匹配原则"
+    ],
+    "stage": "变式计算"
+  },
+  {
+    "id": "hcia-v3-08-019",
+    "type": "single_choice",
+    "question": "路由查找的比较顺序，正确的是？",
+    "options": {
+      "A": "先比度量值，再比优先级，最后比掩码长度",
+      "B": "三者同时比较，无先后顺序",
+      "C": "先比掩码长度，再比优先级，最后比度量值",
+      "D": "先比优先级，再比掩码长度，最后比度量值"
+    },
+    "answer": [
+      "C"
+    ],
+    "analysis": "最长匹配是第一原则，保证精确路由优先；同掩码长度下才在协议之间比优先级，协议内部再比度量值。",
+    "chapter": "IP 路由基础",
+    "knowledgeSection": "转发与查找",
+    "knowledgePoint": "最长匹配原则",
+    "difficulty": "hard",
+    "tags": [
+      "IP 路由基础",
+      "转发与查找",
+      "最长匹配原则"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-08-020",
+    "type": "true_false",
+    "question": "默认路由 0.0.0.0/0 的掩码长度为 0，因此在所有候选中优先级最低。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "掩码最短意味着匹配范围最大，只有在没有任何更精确路由匹配时才命中默认路由，因此它天然是最后的兜底。",
+    "chapter": "IP 路由基础",
+    "knowledgeSection": "转发与查找",
+    "knowledgePoint": "最长匹配原则",
+    "difficulty": "medium",
+    "tags": [
+      "IP 路由基础",
+      "转发与查找",
+      "最长匹配原则"
+    ],
+    "stage": "反向推理"
+  },
+  {
+    "id": "hcia-v3-08-021",
+    "type": "single_choice",
+    "question": "路由递归查找（路由迭代）指的是什么？",
+    "options": {
+      "A": "反复查询同一目的地址直到超时",
+      "B": "把路由表复制到多台设备",
+      "C": "把静态路由转换为动态路由",
+      "D": "用下一跳地址再次查路由表以确定出接口"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "静态路由只给下一跳时，设备需查该下一跳如何到达，从而确定真实出接口，这个过程就是路由迭代。",
+    "chapter": "IP 路由基础",
+    "knowledgeSection": "转发与查找",
+    "knowledgePoint": "递归查找与路由迭代",
+    "difficulty": "hard",
+    "tags": [
+      "IP 路由基础",
+      "转发与查找",
+      "递归查找与路由迭代"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-08-022",
+    "type": "single_choice",
+    "question": "静态路由的下一跳不可达时，该路由会处于什么状态？",
+    "options": {
+      "A": "优先级自动降为 0",
+      "B": "被自动删除且不可恢复",
+      "C": "自动改为默认路由",
+      "D": "变为非活跃状态，不参与转发"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "下一跳不可达时路由迭代失败，路由标记为 Inactive，不出现在活跃路由表中，因此流量不会命中它。",
+    "chapter": "IP 路由基础",
+    "knowledgeSection": "转发与查找",
+    "knowledgePoint": "递归查找与路由迭代",
+    "difficulty": "medium",
+    "tags": [
+      "IP 路由基础",
+      "转发与查找",
+      "递归查找与路由迭代"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-08-023",
+    "type": "true_false",
+    "question": "路由迭代失败是静态路由配置正确但业务仍不通的常见原因。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "下一跳本身没有可达路由时，静态路由无法生效，排查时需先确认到下一跳的连通性。",
+    "chapter": "IP 路由基础",
+    "knowledgeSection": "转发与查找",
+    "knowledgePoint": "递归查找与路由迭代",
+    "difficulty": "medium",
+    "tags": [
+      "IP 路由基础",
+      "转发与查找",
+      "递归查找与路由迭代"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-08-024",
+    "type": "single_choice",
+    "question": "直连路由产生的必要条件是什么？",
+    "options": {
+      "A": "接口物理状态与协议状态均为 Up 且配置了 IP 地址",
+      "B": "接口配置了描述信息",
+      "C": "接口加入了 Eth-Trunk",
+      "D": "设备开启了 OSPF"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "接口 Up 且配置 IP 后自动生成直连路由，无需任何路由协议；接口 Down 时直连路由随之撤销。",
+    "chapter": "IP 路由基础",
+    "knowledgeSection": "转发与查找",
+    "knowledgePoint": "直连路由与接口状态",
+    "difficulty": "medium",
+    "tags": [
+      "IP 路由基础",
+      "转发与查找",
+      "直连路由与接口状态"
+    ],
+    "stage": "基础理解"
+  },
+  {
+    "id": "hcia-v3-08-025",
+    "type": "single_choice",
+    "question": "接口物理状态 Up 但协议状态 Down，通常说明什么？",
+    "options": {
+      "A": "接口未配置 IP 地址",
+      "B": "链路层协商失败，例如两端封装或时钟不匹配",
+      "C": "VLAN 未创建",
+      "D": "光模块已损坏无法发光"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "物理 Up 说明信号可达，协议 Down 说明二层协商未通过，常见于 PPP 认证失败、封装类型不一致等场景。",
+    "chapter": "IP 路由基础",
+    "knowledgeSection": "转发与查找",
+    "knowledgePoint": "直连路由与接口状态",
+    "difficulty": "hard",
+    "tags": [
+      "IP 路由基础",
+      "转发与查找",
+      "直连路由与接口状态"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-08-026",
+    "type": "single_choice",
+    "question": "两台路由器互联接口掩码不一致，可能出现什么现象？",
+    "options": {
+      "A": "接口自动进入 Down 状态",
+      "B": "路由表自动汇总",
+      "C": "自动协商为较小掩码",
+      "D": "双方直连路由网段不同，互相 ping 不通"
+    },
+    "answer": [
+      "D"
+    ],
+    "analysis": "掩码不同会导致各自认为的直连网段不一致，报文无法匹配到对端地址，表现为直连不通。",
+    "chapter": "IP 路由基础",
+    "knowledgeSection": "转发与查找",
+    "knowledgePoint": "直连路由与接口状态",
+    "difficulty": "hard",
+    "tags": [
+      "IP 路由基础",
+      "转发与查找",
+      "直连路由与接口状态"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-08-027",
+    "type": "multiple_choice",
+    "question": "关于路由优先级，下列说法正确的有哪些？",
+    "options": {
+      "A": "数值越小优先级越高",
+      "B": "直连路由优先级为 0",
+      "C": "静态路由默认优先级为 60",
+      "D": "优先级只在同掩码长度的路由之间比较"
+    },
+    "answer": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "analysis": "四个选项均正确。最长匹配优先，同掩码长度下才比较优先级，因此优先级的作用范围受掩码约束。",
+    "chapter": "IP 路由基础",
+    "knowledgeSection": "路由表与选路",
+    "knowledgePoint": "路由优先级",
+    "difficulty": "hard",
+    "tags": [
+      "IP 路由基础",
+      "路由表与选路",
+      "路由优先级"
+    ],
+    "stage": "综合应用"
+  },
+  {
+    "id": "hcia-v3-08-028",
+    "type": "single_choice",
+    "question": "某静态路由配置为 ip route-static 0.0.0.0 0 10.1.1.2，其作用是？",
+    "options": {
+      "A": "拒绝所有流量",
+      "B": "把所有未知目的流量交给 10.1.1.2",
+      "C": "为 10.1.1.2 提供 NAT",
+      "D": "只放通 10.1.1.2 一个地址"
+    },
+    "answer": [
+      "B"
+    ],
+    "analysis": "0.0.0.0/0 即默认路由，匹配任意目的地址，作为路由表中最后的兜底条目。",
+    "chapter": "IP 路由基础",
+    "knowledgeSection": "静态路由配置",
+    "knowledgePoint": "默认路由",
+    "difficulty": "easy",
+    "tags": [
+      "IP 路由基础",
+      "静态路由配置",
+      "默认路由"
+    ],
+    "stage": "直接计算"
+  },
+  {
+    "id": "hcia-v3-08-029",
+    "type": "true_false",
+    "question": "路由表中同一目的网段、同一掩码长度、同一协议的两条路由，会依据度量值择优选一条。",
+    "options": {
+      "A": "正确",
+      "B": "错误"
+    },
+    "answer": [
+      "A"
+    ],
+    "analysis": "协议内部比较度量值，度量值相同时才可能形成等价路由并做负载分担，此时两条都会进入路由表。",
+    "chapter": "IP 路由基础",
+    "knowledgeSection": "路由表与选路",
+    "knowledgePoint": "路由度量值",
+    "difficulty": "medium",
+    "tags": [
+      "IP 路由基础",
+      "路由表与选路",
+      "路由度量值"
+    ],
+    "stage": "反向推理"
+  }
+]
