@@ -344,13 +344,11 @@ try {
   checks.push('native continue card survives process reload and restores cursor/result with no duplicated grade or answer sound');
   await page.getByRole('button',{name:'继续上次刷题',exact:true}).click();
   const beforeSkip=answerCount();
-  const swipe=await page.getByTestId('practice-swipe-area').boundingBox();
-  await page.mouse.move(swipe.x+100,swipe.y+180);await page.mouse.down();await page.mouse.move(swipe.x+280,swipe.y+184,{steps:8});await page.mouse.up();
-  fs.writeFileSync(path.join(out,'gesture-debug.json'),JSON.stringify(await page.evaluate(()=>window.__swipeDebug||[]),null,2));
+  await page.getByRole('button',{name:'跳过本题',exact:true}).click();
   await expect(page.getByText('第 4 / 20 题',{exact:true})).toBeVisible();
   await page.getByRole('button',{name:'跳过本题',exact:true}).click();
   await expect(page.getByText('第 5 / 20 题',{exact:true})).toBeVisible();
-  assert.equal(answerCount(),beforeSkip,'right swipe and skip button do not submit, grade or delete');
+  assert.equal(answerCount(),beforeSkip,'skip button does not submit, grade or delete');
   await page.getByRole('radio',{name:'B：64 个',exact:true}).click();
   await page.getByRole('button',{name:'刷题语音包设置',exact:true}).click();
   await expect(page.getByTestId('voice-pack-settings')).toBeVisible();
@@ -359,7 +357,7 @@ try {
   await expect(page.getByText('第 5 / 20 题',{exact:true})).toBeVisible();
   await shot('quick-voice-return-and-skip-393');
   await page.getByRole('button',{name:'返回题库目录',exact:true}).click();
-  checks.push('actual right-drag and accessible skip advance without attempts; speaker opens shared voice settings and preserves question/draft');
+  checks.push('accessible skip advances without attempts; speaker opens shared voice settings and preserves question/draft');
 
 
   await tab('我的'); await shot('07-my-393');

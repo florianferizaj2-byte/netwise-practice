@@ -34,19 +34,13 @@ test('failed removal keeps the current question and double-tap sends only one de
 test('deleting the final position finishes instead of unexpectedly returning to an earlier wrong question',async()=>{
   const f=fixture({questionIndex:2,currentQuestion:{id:'three'}});await f.run();assert.equal(f.observed.finished,true);assert.equal(f.observed.index,null);
 });
-const swipeCode=ts.transpileModule(fs.readFileSync('mobile/src/practiceSwipe.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS}}).outputText;
-const swipe={exports:{}};vm.runInNewContext(swipeCode,swipe);
-test('right swipe respects threshold, vertical scrolling and Android edge-back gestures',()=>{
-  const {claimPracticeSwipe:claim,completePracticeSwipe:complete}=swipe.exports;
-  assert.equal(claim({dx:30,dy:4,x0:60}),true);assert.equal(complete({dx:90,dy:4,x0:60}),true);
-  for(const gesture of [{dx:60,dy:0,x0:60},{dx:100,dy:90,x0:60},{dx:120,dy:0,x0:5},{dx:-120,dy:0,x0:160}])assert.equal(complete(gesture),false);
-});
-test('only ordinary practice owns swipe and quick voice settings; location exam cannot skip',()=>{
-  assert.match(source,/swipeResponder.panHandlers/);assert.match(source,/accessibilityLabel="刷题语音包设置"/);
-  assert.match(source,/practiceVoiceSettingsOpen && <Modal/);assert.match(source,/answerInputFocused.current/);
-  assert.match(source,/onStartShouldSetPanResponderCapture: event =>/);
-  assert.match(source,/x0:swipeOrigin.current/);
-  assert.match(source,/onPanResponderTerminationRequest: \(\) => false/);
+test('practice uses an explicit skip button and no swipe gesture',()=>{
+  assert.doesNotMatch(source,/PanResponder|swipeResponder|practiceSwipe/);
+  assert.match(source,/accessibilityLabel="跳过本题"/);
+  assert.match(source,/onPress=\{skipPracticeQuestion\}/);
+  assert.match(source,/styles\.nativeSkipButton/);
+  assert.match(source,/accessibilityLabel="刷题语音包设置"/);
+  assert.match(source,/practiceVoiceSettingsOpen && <Modal/);
   assert.doesNotMatch(functions.get('skipPracticeQuestion'),/mobileApi\.|practiceAttemptSync\.enqueue/);
-  for(const name of ['LocationLearningGate','ExamScreen'])assert.doesNotMatch(fs.readFileSync('mobile/src/screens/'+name+'.android.tsx','utf8'),/swipeResponder|skipPracticeQuestion|practice-swipe-area/);
+  for(const name of ['LocationLearningGate','ExamScreen'])assert.doesNotMatch(fs.readFileSync('mobile/src/screens/'+name+'.android.tsx','utf8'),/skipPracticeQuestion|practice-swipe-area/);
 });
