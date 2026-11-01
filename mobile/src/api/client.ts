@@ -719,23 +719,6 @@ export const mobileApi = {
     return request<AdminAnnouncement & { saved: boolean }>('/admin/mobile/announcement', { method: 'PUT', body: JSON.stringify(fields) });
   },
 
-  adminUsers(search = '', status: 'all' | 'active' | 'banned' = 'all', offset = 0) {
-    return request<AdminUserPage>(`/admin/mobile/users?search=${encodeURIComponent(search)}&status=${status}&offset=${offset}&limit=30`);
-  },
-  adminUser(id: string) {
-    return request<{ user: AdminUser }>(`/admin/mobile/users/${encodeURIComponent(id)}`);
-  },
-  adminSaveUser(id: string, fields: AdminUserEdit) {
-    return request<{ saved: boolean; user: AdminUser }>(`/admin/mobile/users/${encodeURIComponent(id)}`, { method: 'PUT', body: JSON.stringify(fields) });
-  },
-  adminSetUserBanned(id: string, banned: boolean, reason: string) {
-    return request<{ saved: boolean }>(`/admin/users/${encodeURIComponent(id)}/ban`, { method: 'PUT', body: JSON.stringify({ banned, reason }) });
-  },
-  adminAnnouncement() { return request<AdminAnnouncement>('/admin/mobile/announcement'); },
-  adminSaveAnnouncement(fields: { revision: string; enabled: boolean; title: string; body: string }) {
-    return request<AdminAnnouncement & { saved: boolean }>('/admin/mobile/announcement', { method: 'PUT', body: JSON.stringify(fields) });
-  },
-
   resolveDownloadUrl(url: string) {
     if (/^https?:\/\//i.test(url)) return url;
     const origin = apiAssetOrigin();
@@ -1221,9 +1204,6 @@ export const mobileApi = {
 
   accountEntitlements(signal?: AbortSignal) {
     return request<AccountEntitlementsResponse>('/account/entitlements', { signal });
-  },
-  pointOperations() {
-    return request<{rows:PointOperation[]}>('/account/points/operations?limit=20');
   },
   pointOperations() {
     return request<{rows:PointOperation[]}>('/account/points/operations?limit=20');

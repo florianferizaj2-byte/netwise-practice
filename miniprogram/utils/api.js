@@ -71,10 +71,10 @@ function bindWechat(bindingToken, username, password) {
   }).then(completeAuth);
 }
 
-function registerWechat(bindingToken, username, password, emailProof) {
+function registerWechat(bindingToken, username, password) {
   return request('/auth/wechat/register', {
     method: 'POST',
-    data: { bindingToken, username, password, ...emailProof },
+    data: { bindingToken, username, password },
   }).then(completeAuth);
 }
 

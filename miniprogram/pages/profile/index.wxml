@@ -29,7 +29,7 @@
 
   <view class="ai-card card">
     <text class="ai-title">AI 学习服务</text>
-    <text class="ai-text">AI 提示、错因解析、详细讲解、出题、判分和答疑统一使用积分。任务先预扣、成功后按实际用量结算，失败自动退还；同一账号的积分在网页和 App 共用。</text>
+    <text class="ai-text">做题后可使用 AI 提示、错因解析、详细讲解和变式训练。所有账号共用作者提供的 AI 服务，会员与签到额度按账号同步。</text>
   </view>
 
   <button class="primary-button sponsor-button" bindtap="openSponsor">赞助作者</button>
@@ -47,7 +47,7 @@
   <view wx:if="{{aiOpen}}" class="modal-mask" bindtap="closeAi">
     <view class="modal-card" catchtap="noop">
       <text class="modal-title">AI 学习助手</text>
-      <text class="modal-text">所有账号统一使用作者 AI 服务，无需填写个人 API。各项 AI 功能共用积分，优先使用先到期积分；失败退还预扣，缓存结果不重复扣费。</text>
+      <text class="modal-text">所有账号共用作者提供的 AI 服务，无需填写个人 API。会员与每日签到提供学习额度，使用时按对应功能扣除。</text>
       <button class="primary-button" bindtap="closeAi">知道了</button>
     </view>
   </view>

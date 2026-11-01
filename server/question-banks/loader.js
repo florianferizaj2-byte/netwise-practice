@@ -204,28 +204,8 @@ export function validateManifest(manifest, directory) {
     : null;
 }
 
-export { guideSchema };
-
 const sharedQuestionMarker =
   /共享题干题\s*(?:【题干】)?|【题干】|[（(]共用题干[）)]/g;
-
-// These references require an actual case. Avoid substring checks such as
-// /本病/: they also match independent questions about “基本病理变化”.
-export function veterinaryContextIssue(question) {
-  const text = String(question.question || "").replace(/\s+/g, "")
-    .replace(/^题共用(?:题干|备选答案)\)/, "");
-  const stem = String(question.sharedStem || "").replace(/\s+/g, "").replace(/[。]+$/, "");
-  const child = (stem && text.startsWith(stem) ? text.slice(stem.length) : text)
-    .replace(/^[。:：]+/, "");
-  if (/^(?:°C|℃)[,，。]/.test(child))
-    return "题干混入缺少数值的温度残片";
-  const reference = /^(?:(?:对|针对|治疗|防治|预防|确诊|诊断|控制|引起|处理|检查|确定|防控)(?:于|此)?|造成)?(?:该|本|此|上述)(?:病(?!理)|患|例|畜|动物|犬|猫|猪|牛|羊|鸡|鸭|鹅|兔|马|毒物|寄生虫|病原|病毒|菌|群|种)/;
-  if (reference.test(text) && !String(question.sharedStem || "").trim())
-    return "病例指代缺少可独立阅读的病例材料";
-  if (question.sharedKind === "stem" && !String(question.sharedStem || "").trim())
-    return "病例题组缺少共用题干";
-  return null;
-}
 
 function cleanSharedStem(value) {
   return String(value || "")
@@ -376,22 +356,16 @@ function decorateAnalysisSharedGroups(rows, stream) {
   rows.forEach((row) => {
     if (pending) {
       const sourceGap = row.anchor - pending.lastAnchor;
-      const questionNumber = row.question.provenance?.[0]?.questionNumber;
-      const followsNumber = !Number.isInteger(questionNumber) || !Number.isInteger(pending.lastNumber) ||
-        questionNumber === pending.lastNumber + 1;
       const belongsToAnotherGroup =
         row.question.sharedGroupId && row.question.sharedGroupId !== pending.id;
-      const text = normalizeSharedText(row.question.question).replace(/\s+/g, "");
-      const followup = /^(?:(?:对|针对|治疗|防治|预防|确诊|诊断|控制|引起|处理|检查|确定|防控)(?:于|此)?|造成)?(?:该|本|此|上述)(?:病(?!理)|患|例|畜|动物|犬|猫|猪|牛|羊|鸡|鸭|鹅|兔|马|毒物|寄生虫|病原|病毒|菌|群|种)/.test(text) ||
-        /^(?:若|如|如果|进一步|为进一步|最可能|最适宜|首先应|应首先|其(?:病因|病原|诊断|治疗|症状))/.test(text) ||
-        text.startsWith(pending.stem.replace(/\s+/g, ""));
-      // Adjacency is necessary but not sufficient. Stop at an independent
-      // question or numbering reset instead of attaching up to eight unrelated
-      // questions after the final case in a section.
+      // In the extracted PDFs, the next case marker is stored at the end of
+      // the last child question's analysis. Once a stem has been found, every
+      // consecutive question before that next marker belongs to the case;
+      // relying only on words such as “本病” incorrectly split questions like
+      // “若进行腹腔穿刺……” and “防治本病的措施……”。
       if (
         pending.order <= 8 &&
         sourceGap === 1 &&
-        followsNumber && followup &&
         !belongsToAnotherGroup
       ) {
         setSharedFields(row.question, {
@@ -402,7 +376,6 @@ function decorateAnalysisSharedGroups(rows, stream) {
         });
         pending.order += 1;
         pending.lastAnchor = row.anchor;
-        pending.lastNumber = questionNumber;
       } else {
         pending = null;
       }
@@ -414,13 +387,12 @@ function decorateAnalysisSharedGroups(rows, stream) {
         stem,
         order: 1,
         lastAnchor: row.anchor,
-        lastNumber: row.question.provenance?.[0]?.questionNumber,
       };
     }
   });
 }
 
-export function decorateVeterinarySharedGroups(questions) {
+function decorateVeterinarySharedGroups(questions) {
   const rowsByStream = new Map();
   questions.forEach((question, index) => {
     if (!question.certificates?.includes("veterinary-practitioner")) return;
@@ -484,14 +456,7 @@ export function decorateVeterinarySharedGroups(questions) {
       continue;
     if (group.length < 2) continue;
     const counts = new Map();
-    // File layout and input shuffling must not decide a tied module. Preserve
-    // the chapter of the earliest original child when chapter counts tie.
-    const ordered = [...group].sort((a, b) =>
-      (a.sharedOrder || Number.MAX_SAFE_INTEGER) - (b.sharedOrder || Number.MAX_SAFE_INTEGER) ||
-      (a.provenance?.[0]?.sourceIndex || Number.MAX_SAFE_INTEGER) - (b.provenance?.[0]?.sourceIndex || Number.MAX_SAFE_INTEGER) ||
-      a.id.localeCompare(b.id),
-    );
-    for (const question of ordered)
+    for (const question of group)
       counts.set(question.chapter, (counts.get(question.chapter) || 0) + 1);
     const targetChapter = [...counts.entries()].sort((a, b) => b[1] - a[1])[0]?.[0];
     if (targetChapter) {
@@ -648,7 +613,7 @@ function loadCatalog() {
     manifests.map((manifest) => [manifest.certificate.id, manifest.taxonomyIndex]),
   );
   for (const question of questions.values())
-    for (const certificateId of question.certificates) {
+    for (const certificateId of question.certificates)
       assertQuestionTaxonomy(questionForCertificate(question, certificateId), taxonomyByCertificate.get(certificateId));
   const withdrawals = manifests.flatMap((manifest) => manifest.withdrawals);
   for (const entry of withdrawals) {
@@ -665,7 +630,6 @@ function loadCatalog() {
       guide: entry.guide ? structuredClone(entry.guide) : null,
     })),
     questions: [...questions.values()],
-    withdrawals,
   };
 }
 

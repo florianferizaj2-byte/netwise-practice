@@ -27,7 +27,6 @@ test("Sichuan scope reuses one canonical question with separate classifications 
   assert.equal(scoped.filter((question) => question.id.startsWith("sc-upgrading-supplement-")).length, 1020);
   assert.equal(scoped.filter((question) => question.id.startsWith("sc-2610-")).length, 138);
   assert.equal(scoped.filter((question) => question.id.startsWith("sc-2011-xichang-")).length, 61);
-  assert.equal(scoped.filter((question) => question.id.startsWith("sc-2610-")).length, 138);
   assert.equal(all.filter((question) => question.id === originalId).length, 1);
   assert.deepEqual([...new Set(scoped.map((question) => questionForCertificate(question, certificateId).chapter))].sort(), certificate.syllabus.modules.map((module) => module.name).sort());
   for (const question of shared) {

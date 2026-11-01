@@ -221,7 +221,7 @@ test("manifest catalog discovers the certificate tracks and keeps sources explic
   const veterinaryQuestions = bundledQuestions().filter((q) =>
     hasCertificateQuestion(q, "veterinary-practitioner"),
   );
-  assert.equal(veterinaryQuestions.length, 4135);
+  assert.equal(veterinaryQuestions.length, 7888);
   assert.ok(veterinaryQuestions.every((q) => q.source === "vet_admin_added"));
   assert.ok(
     veterinaryQuestions.every((q) =>
