@@ -16,7 +16,7 @@
     ],
     "analysis": "动物在感染某种病原微生物耐过后产生的对该病原体再次侵入的抵 抗力称为天然主动免疫,故 1 题、3 题均选 C。给动物接种疫苗,刺激机体 免疫系统发生应答反应,产生的特异性免疫力称为人工主动免疫,故 2 题 选 D。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：病毒",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -31,7 +31,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2025-preventive-00002",
@@ -49,7 +50,7 @@
     ],
     "analysis": "lgG 是动物体抗感染免疫的主力,同时也是血清学诊断和疫苗免疫后监测 的主要抗体。在动物体内 lgG 不仅含量高,而且持续时间长,可发挥抗菌、中和 病毒和毒素等免疫学活性。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：免疫基础",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -64,7 +65,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2025-preventive-00003",
@@ -82,7 +84,7 @@
     ],
     "analysis": "细菌群体的生长曲线分为迟缓期、对数期、亡期四个时期。其中对数期, 又称指数期,指细菌经过迟缓期的适应后,以恒定的速度分裂增殖,活菌数目呈 对数直线上升。此期细菌的大小、形态、染色性、生物活性等都较典型,对外界 环境因素的作用也较敏感。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：细菌与支原体",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -97,7 +99,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2025-preventive-00004",
@@ -115,7 +118,7 @@
     ],
     "analysis": "防止乳的酸败:乳中加入甲醛、过氧化氢、苯甲酸、硼酸及其盐类、水杨 酸等,起抑菌、防腐作用。",
     "chapter": "预防科目",
-    "knowledgePoint": "预防综合题",
+    "knowledgePoint": "预防综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -130,7 +133,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "预防综合题"
   },
   {
     "id": "vet-2025-preventive-00005",
@@ -148,7 +152,7 @@
     ],
     "analysis": "乳兔是常用于分离牛病毒性腹泻病毒的实验动物,乳兔对它非常敏感,可 以用来进行病毒的分离和鉴定。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：病毒",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -163,7 +167,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2025-preventive-00006",
@@ -181,7 +186,7 @@
     ],
     "analysis": "10%氢氧化钠溶液属于强碱类消毒剂,对炭疽杆菌及其芽孢有强大的杀灭 作用,是屠宰加工车间等场所处理炭疽污染的首选消毒剂之一。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医公共卫生学",
+    "knowledgePoint": "公卫：人兽共患病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -196,7 +201,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医公共卫生学"
   },
   {
     "id": "vet-2025-preventive-00007",
@@ -213,7 +219,7 @@
     ],
     "analysis": "犬冠状病毒性腹泻,主要表现为,肠胃黏膜出血、脱落。呕吐拉稀,拉出 红色、深绿色等恶臭稀便。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：病毒",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -228,7 +234,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2025-preventive-00008",
@@ -246,7 +253,7 @@
     ],
     "analysis": "家畜中以各种牛、猪、免、绵羊发病较多,禽类中以鸡、火鸡和鸭最易感。",
     "chapter": "预防科目",
-    "knowledgePoint": "预防综合题",
+    "knowledgePoint": "预防综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -261,7 +268,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "预防综合题"
   },
   {
     "id": "vet-2025-preventive-00009",
@@ -279,7 +287,7 @@
     ],
     "analysis": "当动物发病时,其同群健康动物,如果有弱毒苗时,应当采取紧急免疫。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：病毒",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -294,7 +302,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2025-preventive-00010",
@@ -312,7 +321,7 @@
     ],
     "analysis": "兔瘟病毒可凝集绵羊、鸡、鹅、豚鼠和人的红细胞,但是在用血凝和血凝 抑制试验进行诊断的时候多选用人 O 型红细胞",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：病毒",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -327,7 +336,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2025-preventive-00011",
@@ -345,7 +355,7 @@
     ],
     "analysis": "病毒是动物与人传染性海绵状脑病的病原,不是传统意义的病毒,没有核 酸,是具有传染性的蛋白质颗粒。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：病毒",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -360,7 +370,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2025-preventive-00012",
@@ -378,7 +389,7 @@
     ],
     "analysis": "传染性法氏囊病毒,无囊膜、20 面体、双链双节段 RNA,VP2 为保护性抗 原",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：病毒",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -393,7 +404,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2025-preventive-00013",
@@ -411,7 +423,7 @@
     ],
     "analysis": "羊狂蝇的成蝇:羊狂蝇的雌蝇在产幼虫时,会飞向羊群,并突然冲向羊的 鼻孔,直接将幼虫产在羊的鼻孔内或鼻孔周围。",
     "chapter": "预防科目",
-    "knowledgePoint": "预防综合题",
+    "knowledgePoint": "预防综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -426,7 +438,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "预防综合题"
   },
   {
     "id": "vet-2025-preventive-00014",
@@ -444,7 +457,7 @@
     ],
     "analysis": "根据题干,体温升高呈双向热,鼻端干燥,后期出现神经症状,结 合选项可判断为犬瘟热",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医传染病学",
+    "knowledgePoint": "传染病：犬猫疫病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -459,7 +472,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医传染病学"
   },
   {
     "id": "vet-2025-preventive-00015",
@@ -477,7 +491,7 @@
     ],
     "analysis": ";犬是犬瘟热最易感的动物,水貂、雪貂、浣熊等也易感",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医传染病学",
+    "knowledgePoint": "传染病：犬猫疫病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -492,7 +506,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医传染病学"
   },
   {
     "id": "vet-2025-preventive-00016",
@@ -510,7 +525,7 @@
     ],
     "analysis": "根据幼犬双相热、呼吸道及消化道症状、后期神经症状,可判断为犬瘟 犬病,“眼角膜蓝白色”多与犬传染性肝炎相关,“口腔黏膜水疱”常见于口炎 等,“恐水症”是狂犬病典型表现,均不符合本题病症。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医传染病学",
+    "knowledgePoint": "传染病：犬猫疫病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -525,7 +540,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医传染病学"
   },
   {
     "id": "vet-2025-preventive-00017",
@@ -543,7 +559,7 @@
     ],
     "analysis": "肝片吸虫:成虫主要寄生于宿主的胆管内。肝片吸虫通过中间宿主淡水螺 进入终末宿主体内,移行至肝脏并在胆管内发育为成虫。成虫在胆管内产卵,卵 随胆汁进入肠道并随粪便排出体外。 (26--28)鹅群,2 周龄,精神萎顿,食欲减退或废绝,严重下痢,麻痹或抽搐; 小肠膨大增粗,形似香肠,肠腔内有凝固性栓子。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医寄生虫学",
+    "knowledgePoint": "寄生虫：吸虫与绦虫",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -558,7 +574,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医寄生虫学"
   },
   {
     "id": "vet-2025-preventive-00018",
@@ -576,7 +593,7 @@
     ],
     "analysis": "小鹅瘟首选治疗措施是高免血清或高免卵黄抗体。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：免疫基础",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -591,7 +608,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2025-preventive-00019",
@@ -609,7 +627,7 @@
     ],
     "analysis": "节片戴文绦虫,虫体小,0.5-3mm,仅 4-9 个节片,中间宿主蜗牛、蛞蝓, 导致禽类腿麻痹。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医寄生虫学",
+    "knowledgePoint": "寄生虫：生活史与宿主",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -624,7 +642,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医寄生虫学"
   },
   {
     "id": "vet-2025-preventive-00020",
@@ -642,7 +661,7 @@
     ],
     "analysis": "毛尾线虫的虫卵呈棕黄色、腰鼓型、厚卵壳,两端有塞,感染后会导致绵 羊出现出血性肠炎等症状,与题干描述相符。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医寄生虫学",
+    "knowledgePoint": "寄生虫：线虫",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -657,7 +676,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医寄生虫学"
   },
   {
     "id": "vet-2025-preventive-00021",
@@ -675,7 +695,7 @@
     ],
     "analysis": "毛尾线虫主要寄生在绵羊的盲肠内,可引起盲肠炎症等病变。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医寄生虫学",
+    "knowledgePoint": "寄生虫：线虫",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -690,7 +710,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医寄生虫学"
   },
   {
     "id": "vet-2025-preventive-00022",
@@ -708,7 +729,7 @@
     ],
     "analysis": "布鲁氏菌病可导致母羊妊娠后期流产,羊水浑浊,胎儿真胃有黏液絮状物, 公羊出现睾丸炎,与题干症状相符。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医传染病学",
+    "knowledgePoint": "传染病：猪与反刍动物疫病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -723,7 +744,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医传染病学"
   },
   {
     "id": "vet-2025-preventive-00023",
@@ -741,7 +763,7 @@
     ],
     "analysis": "羊痒螨是一种常见的体外寄生虫,寄生于羊的皮肤表面,引起强烈的瘙痒 和皮肤炎。通过刮取患部皮屑在显微镜下检查,可以发现羊痒螨及卵。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医寄生虫学",
+    "knowledgePoint": "寄生虫：吸虫与绦虫",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -756,7 +778,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医寄生虫学"
   },
   {
     "id": "vet-2025-preventive-00024",
@@ -774,7 +797,7 @@
     ],
     "analysis": "猫免疫缺陷病又叫猫艾滋病,是由猫免疫缺陷病毒(FIV)感染引起的一种 慢性病毒性传染病。主要特征是:消瘦,由于慢性疾病和食欲不振,病猫会出现 体重下降,贫血是由于免疫系统受损,病猫可能会出现贫血症状。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：病毒",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -789,7 +812,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2025-preventive-00025",
@@ -807,7 +831,7 @@
     ],
     "analysis": "多氯联苯是一种已知的免疫抑制剂,能够干扰免疫系统的正常功能,导致 免疫抑制。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -822,7 +846,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2025-preventive-00026",
@@ -840,7 +865,7 @@
     ],
     "analysis": "土耳其斯坦分体吸虫为东毕吸虫,东毕吸虫接触到水中的尾蚴而感 染。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医寄生虫学",
+    "knowledgePoint": "寄生虫：吸虫与绦虫",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -855,7 +880,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医寄生虫学"
   },
   {
     "id": "vet-2025-preventive-00027",
@@ -873,7 +899,7 @@
     ],
     "analysis": "以库蠓、疟蚊等节肢动物传播媒介;牛流行热病毒或三日热病毒, 病程最短,可引起奶牛、黄牛和水牛的急性热性传染病。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医传染病学",
+    "knowledgePoint": "传染病：猪与反刍动物疫病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -888,7 +914,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医传染病学"
   },
   {
     "id": "vet-2025-preventive-00028",
@@ -906,7 +933,7 @@
     ],
     "analysis": "根据症状及病理变化描述,诊断为马立克氏病。诊断方法为琼脂扩 散试验。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：病毒",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -921,7 +948,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2025-preventive-00029",
@@ -939,7 +967,7 @@
     ],
     "analysis": "根据题干信息,2 周龄鸡群排白色稀粪,肝脏肿大有坏死点,肠粘 膜坏死,病料接种麦康凯琼脂长出无色菌落,可初步判断病原体为鸡白痢 沙门氏菌。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：细菌与支原体",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -954,7 +982,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2025-preventive-00030",
@@ -972,7 +1001,7 @@
     ],
     "analysis": "根据题干信息,2 月龄鸡群出现冠髯发绀、出血,排绿色稀粪,剖 检见腺胃乳头出血,是鸡新城疫的典型症状。病料接种鸡胚后,病毒在鸡 胚内增殖,尿囊液中含有大量病毒。对鸡新城疫病毒的实验室检查,最常 用的方法是血凝和血凝抑制试验。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：病毒",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -987,7 +1016,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2025-preventive-00031",
@@ -1005,7 +1035,7 @@
     ],
     "analysis": "成虫主要寄生在犬猫小肠黏膜上吸血,而且虫体会分泌抗凝素,延 长凝血时间,并且虫体会不断变换吸血部位,造成动物大量失血,且常伴 有血性或黏液性腹泻,粪便呈柏油状。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医寄生虫学",
+    "knowledgePoint": "寄生虫：线虫",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1020,7 +1050,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医寄生虫学"
   },
   {
     "id": "vet-2025-preventive-00032",
@@ -1038,7 +1069,7 @@
     ],
     "analysis": "细菌在麦康凯琼脂上培养长出红色菌落,结合题干描述,该牛最可 能感染的是大肠杆菌病。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：细菌与支原体",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1053,7 +1084,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2025-preventive-00033",
@@ -1071,7 +1103,7 @@
     ],
     "analysis": "病例中犊牛主要呈现排带血、气泡等特征的稀便,有急性胃肠炎病变,符 合大肠杆菌病肠型的临床特点,呼吸型主要表现呼吸道症状,败血症型以全身败 血症表现为主,神经型侧重神经症状,关节炎型主要是关节病变,均不符合。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：细菌与支原体",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1086,7 +1118,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2025-preventive-00034",
@@ -1104,7 +1137,7 @@
     ],
     "analysis": "初乳含免疫球蛋白,能增强犊牛抵抗力,防控大肠杆菌病等疾病;丙硫咪 唑是抗蠕虫药,氨丙啉常用于球虫病,新霉素预防性使用易产生耐药性,扑杀发 病牛不是常规防控首要做法,主要应通过增强犊牛自身抵抗力等预防,所以选 A 。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：细菌与支原体",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1119,7 +1152,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2025-preventive-00035",
@@ -1138,7 +1172,7 @@
     ],
     "analysis": "高温处理法适用于染疫动物的蹄、骨和角的处理,将肉尸作高温处 理时剔出的蹄、骨和角放入高压锅内蒸煮至骨脱胶或脱脂为止。 手术用具的消毒应用高压消毒法,高温高压可杀死所有的微生物,包括细 菌的芽孢和霉菌的孢子。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医公共卫生学",
+    "knowledgePoint": "公卫：消毒与环境卫生",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1153,7 +1187,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医公共卫生学"
   },
   {
     "id": "vet-2025-preventive-00036",
@@ -1171,7 +1206,7 @@
     ],
     "analysis": "伊氏锥虫病的传播媒介为虻,因此预防该病主要措施应该是灭虻。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医传染病学",
+    "knowledgePoint": "传染病：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1186,7 +1221,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医传染病学"
   },
   {
     "id": "vet-2025-preventive-00037",
@@ -1204,7 +1240,7 @@
     ],
     "analysis": "用于测定小分子抗原及半抗原。其基本程序是:用特异性抗体包被固相载 体,然后加入含待测抗原的溶液和一定量的酶标抗原共同孵育,设置仅加酶标抗 原的对照。如果样本中的抗原含量高,会竞争性地结合固相载体上的特异性抗体, 导致酶标抗原结合的机会减少,从而显色反应减弱。因此,显色反应的深浅与样 本中的抗原含量成反比。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：免疫基础",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1219,7 +1255,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2025-preventive-00038",
@@ -1237,7 +1274,7 @@
     ],
     "analysis": "临床上以剧痒,患部皮肤渗出、脱毛、老化、形成痂皮以及逐渐向 外周蔓延为特征。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医寄生虫学",
+    "knowledgePoint": "寄生虫：节肢动物与体表寄生虫",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1252,7 +1289,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医寄生虫学"
   },
   {
     "id": "vet-2025-preventive-00039",
@@ -1270,7 +1308,7 @@
     ],
     "analysis": "预防接种在经常发生某些传染病的地区,或有某些传染病潜在的地 区,或经常受到邻近地区某些传染病或威胁的地区,为了防患于未然,在 平时有计划地给健康畜群进行的疫苗免疫接种,称为预防接种。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：疫苗与免疫接种",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1285,7 +1323,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2025-preventive-00040",
@@ -1303,7 +1342,7 @@
     ],
     "analysis": "鸡传染性喉气管炎病毒(ILTV)属于疱疹病毒科,其潜伏感染特性 与疱疹病毒科病毒相似,常潜伏于三叉神经节中。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：病毒",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1318,7 +1357,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2025-preventive-00041",
@@ -1336,7 +1376,7 @@
     ],
     "analysis": "乙型脑炎预防:接种弱毒疫苗。在当地蚊蝇出现季节前接种。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：疫苗与免疫接种",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1351,7 +1391,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2025-preventive-00042",
@@ -1369,7 +1410,7 @@
     ],
     "analysis": "大口德拉西线虫会引起马胃部肿瘤。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医寄生虫学",
+    "knowledgePoint": "寄生虫：线虫",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1384,7 +1425,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医寄生虫学"
   },
   {
     "id": "vet-2025-preventive-00043",
@@ -1402,7 +1444,7 @@
     ],
     "analysis": "又称鸡毒支原体或鸡慢性呼吸道病,由鸡败血支原体引起的慢性呼 吸道传染病。主要表现为气管炎和气囊炎,以咳嗽、气喘、流鼻液和呼吸 啰音为特征。4-8 周龄鸡易感,可垂直传播(经卵)和水平传播。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：细菌与支原体",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1417,7 +1459,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2025-preventive-00044",
@@ -1435,7 +1478,7 @@
     ],
     "analysis": "能使接种的实验动物在一定时限内引致一半动物感染发病的微生物 量称为半数感染量(ID50)。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医传染病学",
+    "knowledgePoint": "传染病：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1450,7 +1493,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医传染病学"
   },
   {
     "id": "vet-2025-preventive-00045",
@@ -1468,7 +1512,7 @@
     ],
     "analysis": "过敏反应型变态反应属于I型变态反应,过敏反应型变态反应主要 见于蠕形螨,血吸虫毛蚴和棘球囊。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医传染病学",
+    "knowledgePoint": "传染病：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1483,7 +1527,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医传染病学"
   },
   {
     "id": "vet-2025-preventive-00047",
@@ -1501,7 +1546,7 @@
     ],
     "analysis": "脾脏:是动物体内最大的淋巴器官,也是产生抗体的主要外周淋巴器官。 脾脏内定居着大量淋巴细胞和其他免疫细胞,抗原一旦进入脾脏即可发生 T 细胞 和 B 细胞的活化和增殖,产生致敏 T 细胞和浆细胞。脾脏是体内产生抗体的主要 器官。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：免疫基础",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1516,7 +1561,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2025-preventive-00048",
@@ -1534,7 +1580,7 @@
     ],
     "analysis": "颌下淋巴结肿大:是典型马腺疫感染的重要临床特征之一。马腺疫是由马 链球菌马亚种引起的一种急性、热性、高度接触性传染病。其主要临床症状包括 发热、呼吸道黏膜发炎和颌下淋巴结肿胀化脓。颌下淋巴结肿大且初期较硬,触 之有热痛感,随后化脓变软,破溃后流出大量黄白色黏稠脓汁。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医传染病学",
+    "knowledgePoint": "传染病：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1549,7 +1595,8 @@
         "sha256": "dcf723b7858b4283df86d92510cc2b7c7065414ec535a1af9e962febe6a63b47"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医传染病学"
   },
   {
     "id": "vet-2026-recall-preventive-00001",
@@ -1567,7 +1614,7 @@
     ],
     "analysis": "鸡皮刺螨白天藏于隐蔽处,夜间出来叮咬宿主吸血。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医寄生虫学",
+    "knowledgePoint": "寄生虫：节肢动物与体表寄生虫",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1582,7 +1629,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医寄生虫学"
   },
   {
     "id": "vet-2026-recall-preventive-00002",
@@ -1600,7 +1648,7 @@
     ],
     "analysis": "天然感染自然界中的抗原为天然主动免疫。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：病毒",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1615,7 +1663,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2026-recall-preventive-00003",
@@ -1633,7 +1682,7 @@
     ],
     "analysis": "亚硝酸盐在体内可生成亚硝胺,具有强致癌性。",
     "chapter": "预防科目",
-    "knowledgePoint": "预防综合题",
+    "knowledgePoint": "预防综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1648,7 +1697,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "预防综合题"
   },
   {
     "id": "vet-2026-recall-preventive-00004",
@@ -1666,7 +1716,7 @@
     ],
     "analysis": "体内功能最强、唯一能初次激活初始 T 细胞的专职抗原提呈细胞,抗原提 呈效率最高,是最有效的 APC。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：免疫基础",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1681,7 +1731,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2026-recall-preventive-00005",
@@ -1699,7 +1750,7 @@
     ],
     "analysis": "有机氯农药通过食物进入人体被吸收后,代谢缓慢,主要蓄积于脂肪组织。",
     "chapter": "预防科目",
-    "knowledgePoint": "预防综合题",
+    "knowledgePoint": "预防综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1714,7 +1765,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "预防综合题"
   },
   {
     "id": "vet-2026-recall-preventive-00006",
@@ -1732,7 +1784,7 @@
     ],
     "analysis": "鸭瘟自然感染情况下的传播途径主要是消化道,其次可通过交配、眼结膜、 呼吸道、泄殖腔和损伤的皮肤传播。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医传染病学",
+    "knowledgePoint": "传染病：流行病学与传播",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1747,7 +1799,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医传染病学"
   },
   {
     "id": "vet-2026-recall-preventive-00007",
@@ -1765,7 +1818,7 @@
     ],
     "analysis": "急性弓形虫感染阶段,组织细胞内大量存在速殖子(滋养体)。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医寄生虫学",
+    "knowledgePoint": "寄生虫：原虫与球虫",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1780,7 +1833,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医寄生虫学"
   },
   {
     "id": "vet-2026-recall-preventive-00008",
@@ -1798,7 +1852,7 @@
     ],
     "analysis": "兔球虫寄生于肠道,卵囊随粪便排出,采用粪便漂浮法镜检。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医寄生虫学",
+    "knowledgePoint": "寄生虫：原虫与球虫",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1813,7 +1867,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医寄生虫学"
   },
   {
     "id": "vet-2026-recall-preventive-00009",
@@ -1831,7 +1886,7 @@
     ],
     "analysis": "生物放大:是指有毒化学物质在食物链各个环节中的毒性渐进现象,即在 生态系统中同一条食物链上,高营养级生物通过摄食低营养级生物,某种元素或 难分解化合物在生物机体内的浓度逐级升高的现象。",
     "chapter": "预防科目",
-    "knowledgePoint": "预防综合题",
+    "knowledgePoint": "预防综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1846,7 +1901,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "预防综合题"
   },
   {
     "id": "vet-2026-recall-preventive-00010",
@@ -1864,7 +1920,7 @@
     ],
     "analysis": "轮状病毒主要侵害仔猪肠道,引发急性水样腹泻。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：病毒",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1879,7 +1935,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2026-recall-preventive-00011",
@@ -1897,7 +1954,7 @@
     ],
     "analysis": "胎生网尾线虫寄生于牛,丝状网尾线虫寄生于羊。均属于肺线虫;寄生于 肺脏。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医寄生虫学",
+    "knowledgePoint": "寄生虫：线虫",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1912,7 +1969,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医寄生虫学"
   },
   {
     "id": "vet-2026-recall-preventive-00012",
@@ -1930,7 +1988,7 @@
     ],
     "analysis": "小反刍兽疫尸体病变可见结膜炎、坏死性口炎,严重病例可蔓延到硬腭及 咽喉部。皱胃则常出现糜烂病灶,肠道有糜烂或出血变化,特别在结肠和直肠的 结合处常见到特征性的线状出血或斑马样条纹。",
     "chapter": "预防科目",
-    "knowledgePoint": "预防综合题",
+    "knowledgePoint": "传染病：猪与反刍动物疫病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1945,7 +2003,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医传染病学"
   },
   {
     "id": "vet-2026-recall-preventive-00013",
@@ -1963,7 +2022,7 @@
     ],
     "analysis": "结核分枝杆菌细胞壁含大量脂质,抗酸染色后呈红色,其余菌体为蓝色。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医传染病学",
+    "knowledgePoint": "传染病：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1978,7 +2037,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医传染病学"
   },
   {
     "id": "vet-2026-recall-preventive-00014",
@@ -1996,7 +2056,7 @@
     ],
     "analysis": "牛流行热又称三日热或暂时热,病程一般 3-4d。按临诊表现分三型,呼吸 型、胃肠型和瘫痪型。",
     "chapter": "预防科目",
-    "knowledgePoint": "预防综合题",
+    "knowledgePoint": "传染病：猪与反刍动物疫病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2011,7 +2071,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医传染病学"
   },
   {
     "id": "vet-2026-recall-preventive-00015",
@@ -2029,7 +2090,7 @@
     ],
     "analysis": ":被动红细胞溶解试验,抗体结合红细胞抗原后,补体激活,破坏红细胞 膜造成溶血。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：免疫基础",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2044,7 +2105,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2026-recall-preventive-00016",
@@ -2062,7 +2124,7 @@
     ],
     "analysis": "非洲猪瘟病毒核酸检测以 PCR 为常用、快速确诊手段。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：病毒",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2077,7 +2139,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2026-recall-preventive-00017",
@@ -2095,7 +2158,7 @@
     ],
     "analysis": "牛环形泰勒虫病常取急性经过,病牛在 3~20d 内死亡。初期体温升高达",
     "chapter": "预防科目",
-    "knowledgePoint": "预防综合题",
+    "knowledgePoint": "预防综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2110,7 +2173,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "预防综合题"
   },
   {
     "id": "vet-2026-recall-preventive-00018",
@@ -2128,7 +2192,7 @@
     ],
     "analysis": "绿色食物的特征:无污染、安全、优质、营养。不包括口感。",
     "chapter": "预防科目",
-    "knowledgePoint": "预防综合题",
+    "knowledgePoint": "预防综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2143,7 +2207,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "预防综合题"
   },
   {
     "id": "vet-2026-recall-preventive-00019",
@@ -2161,7 +2226,7 @@
     ],
     "analysis": "副猪嗜血杆菌病临床上以体温升高、呼吸困难、关节肿大和运动障碍为特 征,少数猪表现神经症状。",
     "chapter": "预防科目",
-    "knowledgePoint": "预防综合题",
+    "knowledgePoint": "预防综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2176,7 +2241,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "预防综合题"
   },
   {
     "id": "vet-2026-recall-preventive-00020",
@@ -2194,7 +2260,7 @@
     ],
     "analysis": "伏马菌素是镰刀菌产生的霉菌毒素,污染玉米等饲料;肉毒毒素、肠毒素 属于细菌毒素;秋水仙素、龙葵素为植物毒素,均不属于霉菌毒素。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：细菌与支原体",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2209,7 +2275,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2026-recall-preventive-00021",
@@ -2227,7 +2294,7 @@
     ],
     "analysis": "动物传染病的诊断体系分为临床综合诊断与实验室诊断两大类别。其中病 理解剖学诊断是临床综合诊断中最常用的核心方法,通过现场尸体剖检观察特征 性肉眼病理变化,结合流行病学特点与临床症状,即可快速做出初步诊断,无需 依赖实验室设备,适用于临床现场的综合诊断。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医传染病学",
+    "knowledgePoint": "传染病：流行病学与传播",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2242,7 +2309,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医传染病学"
   },
   {
     "id": "vet-2026-recall-preventive-00022",
@@ -2260,7 +2328,7 @@
     ],
     "analysis": "空斑试验可通过稀释分离得到单个病毒空斑,实现混合病毒中分纯单一病 毒;PCR 仅核酸检测,平板划线用于细菌分离;凝集、血凝为血清学鉴定,无法 分离纯化病毒。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：病毒",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2275,7 +2343,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2026-recall-preventive-00023",
@@ -2293,7 +2362,7 @@
     ],
     "analysis": "对无菌采集的病变组织第一步直接划线接种培养基分离目标细菌;离心集 菌、过滤集菌多用于液体样本;抑制杂菌、动物去杂适用于污染严重病料。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：细菌与支原体",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2308,7 +2377,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2026-recall-preventive-00024",
@@ -2326,7 +2396,7 @@
     ],
     "analysis": "猪痢疾短螺旋体在 TSB 血液琼脂上,38°C48~96min 可形成扁平、半透明、 针尖状、强β溶血性菌落。",
     "chapter": "预防科目",
-    "knowledgePoint": "预防综合题",
+    "knowledgePoint": "微免：细菌与支原体",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2341,7 +2411,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2026-recall-preventive-00025",
@@ -2359,7 +2430,7 @@
     ],
     "analysis": "羊囊尾蚴病其成虫寄生于犬科动物的小肠内,孕节或虫卵随粪便排出,被 羊吞食后感染,防控核心是避免犬粪污染放牧场地。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医传染病学",
+    "knowledgePoint": "传染病：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2374,7 +2445,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医传染病学"
   },
   {
     "id": "vet-2026-recall-preventive-00026",
@@ -2392,7 +2464,7 @@
     ],
     "analysis": "隐孢子虫病传染来源是患病动物和向外界排卵囊的动物或人。一般通过污 染的饲料和饮水而传播。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医传染病学",
+    "knowledgePoint": "传染病：流行病学与传播",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2407,7 +2479,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医传染病学"
   },
   {
     "id": "vet-2026-recall-preventive-00027",
@@ -2425,7 +2498,7 @@
     ],
     "analysis": "黏液瘤病毒,为兔痘病毒属成员,野兔、家兔均易感。病毒可通过呼吸道 传播。兔感染后 48h 出现临床症状,首先是眼结膜炎,接着头部广泛肿胀,呈特 征性的“狮子头”。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：病毒",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2440,7 +2513,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2026-recall-preventive-00028",
@@ -2458,7 +2532,7 @@
     ],
     "analysis": "矛形剑带绦虫治疗或预防驱虫可用氯硝硫胺。伊维菌素、左旋咪唑主要驱 线虫;磺胺嘧啶、马杜霉素抗球虫药,对绦虫无效。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医寄生虫学",
+    "knowledgePoint": "寄生虫：吸虫与绦虫",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2473,7 +2547,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医寄生虫学"
   },
   {
     "id": "vet-2026-recall-preventive-00029",
@@ -2491,7 +2566,7 @@
     ],
     "analysis": "口蹄疫成年动物的口腔黏膜、蹄部和乳房等处皮肤发生水疱和溃烂,幼龄 动物多因心肌炎使其死亡。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医传染病学",
+    "knowledgePoint": "传染病：猪与反刍动物疫病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2506,7 +2581,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医传染病学"
   },
   {
     "id": "vet-2026-recall-preventive-00030",
@@ -2524,7 +2600,7 @@
     ],
     "analysis": "猪乙型脑炎由蚊虫叮咬传播,属于典型虫媒性人畜共患病。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医传染病学",
+    "knowledgePoint": "传染病：犬猫疫病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2539,7 +2615,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医传染病学"
   },
   {
     "id": "vet-2026-recall-preventive-00031",
@@ -2557,7 +2634,7 @@
     ],
     "analysis": "犬心丝虫病是由恶丝虫属的犬恶丝虫寄生于犬的右心室和肺动脉所引起, 犬的主要症状为咳嗽,其他症状有心悸、心内有杂音,呼吸困难,体温升高,腹 围增大等。外周血液内发现微丝蚴,即可确诊。 (共用题干) 某养殖绵羊群,可视黏膜黄染,食欲下降,腹泻,消瘦。草场有蚂蚁滋生。粪便 检查如图所示虫卵。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医寄生虫学",
+    "knowledgePoint": "寄生虫：线虫",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2572,7 +2649,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医寄生虫学"
   },
   {
     "id": "vet-2026-recall-preventive-00032",
@@ -2590,7 +2668,7 @@
     ],
     "analysis": "歧腔吸虫虫卵似卵圆形,黄褐色,具卵盖。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医寄生虫学",
+    "knowledgePoint": "寄生虫：线虫",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2605,7 +2683,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医寄生虫学"
   },
   {
     "id": "vet-2026-recall-preventive-00033",
@@ -2623,7 +2702,7 @@
     ],
     "analysis": "歧腔吸虫成虫寄生于牛羊的肝脏、胆管和胆囊内,发育过程需要两个中间 宿主,第一中间宿主是陆地螺(蜗牛)。第二中间宿主是蚂蚁。牛羊粪便排出虫 卵,蜗牛吞食,体内发育出尾蚴;尾蚴聚集成粘液球被蚂蚁吞食,在蚂蚁腹腔内 发育为囊蚴;羊吃草吞入带囊蚴的蚂蚁发生感染。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医传染病学",
+    "knowledgePoint": "传染病：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2638,7 +2717,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医传染病学"
   },
   {
     "id": "vet-2026-recall-preventive-00034",
@@ -2656,7 +2736,7 @@
     ],
     "analysis": "牛传染性胸膜肺炎易感动物主要是牦牛、奶牛、黄牛、水牛、骗牛、驯鹿 及羚羊。山羊、绵羊及骆驼在自然情况下不易感染。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医传染病学",
+    "knowledgePoint": "传染病：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2671,7 +2751,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医传染病学"
   },
   {
     "id": "vet-2026-recall-preventive-00035",
@@ -2689,7 +2770,7 @@
     ],
     "analysis": "牛吸吮线虫病俗称牛眼虫病。虫体寄生于牛的结膜囊、第三眼睑和泪管, 免疫细胞难以浸润,虫体可长期存活。 (共用题干) 某病牛表现稽留高热、贫血、黄疸等急性热性症状。取末梢血液镜检可见如图所 示虫体。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医寄生虫学",
+    "knowledgePoint": "寄生虫：原虫与球虫",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2704,7 +2785,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医寄生虫学"
   },
   {
     "id": "vet-2026-recall-preventive-00036",
@@ -2722,7 +2804,7 @@
     ],
     "analysis": "伊氏锥虫由虻及吸血蝇类在吸血过程中进行机械性传播。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医传染病学",
+    "knowledgePoint": "传染病：流行病学与传播",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2737,7 +2819,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医传染病学"
   },
   {
     "id": "vet-2026-recall-preventive-00037",
@@ -2755,7 +2838,7 @@
     ],
     "analysis": "三氮脒为伊氏锥虫病首选治疗药;地克珠利、莫能菌素抗球虫,吡喹酮抗 吸虫绦虫,伊维菌素驱线虫外寄生虫。 (共用题干) 一泰迪犬粪便检查镜检可见下图虫卵",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医寄生虫学",
+    "knowledgePoint": "寄生虫：原虫与球虫",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2770,7 +2853,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医寄生虫学"
   },
   {
     "id": "vet-2026-recall-preventive-00038",
@@ -2788,7 +2872,7 @@
     ],
     "analysis": "犬复孔绦虫的中间宿主为跳蚤及毛虱。虫卵随粪便排出后,被跳蚤幼虫吞 食,在跳蚤体内发育为似囊尾蚴;犬舔毛时误食带虫的跳蚤而感染。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医寄生虫学",
+    "knowledgePoint": "寄生虫：生活史与宿主",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2803,7 +2887,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医寄生虫学"
   },
   {
     "id": "vet-2026-recall-preventive-00039",
@@ -2821,7 +2906,7 @@
     ],
     "analysis": "莫尼茨绦虫成虫寄生于肠道,大量虫体掠夺营养致羊消瘦贫血;幼虫异位 寄生脑部引发回旋等神经症状,粪便可见白色孕卵节片。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医寄生虫学",
+    "knowledgePoint": "寄生虫：吸虫与绦虫",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2836,7 +2921,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医寄生虫学"
   },
   {
     "id": "vet-2026-recall-preventive-00040",
@@ -2853,7 +2939,7 @@
     ],
     "analysis": "犬并殖吸虫病是由并殖科的卫氏并殖吸虫寄生于犬、猫、人及多种野生动 物的肺组织内引起的,移行的童虫可引起嗜酸性粒细胞性腹膜炎、胸膜炎和肌炎 及多病灶性的胸膜出血。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医寄生虫学",
+    "knowledgePoint": "寄生虫：吸虫与绦虫",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2868,7 +2954,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医寄生虫学"
   },
   {
     "id": "vet-2026-recall-preventive-00041",
@@ -2886,7 +2973,7 @@
     ],
     "analysis": "奶牛乳腺炎常见致病菌为金黄色葡萄球菌。",
     "chapter": "预防科目",
-    "knowledgePoint": "预防综合题",
+    "knowledgePoint": "公卫：动物性食品安全",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2901,7 +2988,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医公共卫生学"
   },
   {
     "id": "vet-2026-recall-preventive-00042",
@@ -2919,7 +3007,7 @@
     ],
     "analysis": "屠宰污水好氧处理后上层清液排放前常用氯化消毒,杀灭水中病原微生物, 达标排放。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医公共卫生学",
+    "knowledgePoint": "公卫：消毒与环境卫生",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2934,7 +3022,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医公共卫生学"
   },
   {
     "id": "vet-2026-recall-preventive-00043",
@@ -2952,7 +3041,7 @@
     ],
     "analysis": "多次注射异种血清,体内产生抗体,抗原抗体结合形成免疫复合物沉积, 引发III型超敏反应(免疫复合物型)。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：免疫基础",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2967,7 +3056,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2026-recall-preventive-00044",
@@ -2985,7 +3075,7 @@
     ],
     "analysis": "小反刍兽疫典型症状:口腔糜烂溃疡、腹泻便血,消化道黏膜出血糜烂, 病原为有囊膜副黏病毒。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：病毒",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3000,7 +3090,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2026-recall-preventive-00045",
@@ -3018,7 +3109,7 @@
     ],
     "analysis": "稀释法既能定性判断耐药,又能定量测出最低抑菌浓度 MIC。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：细菌与支原体",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3033,7 +3124,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2026-recall-preventive-00046",
@@ -3051,7 +3143,7 @@
     ],
     "analysis": "羊快疫多是较为肥胖的羊只发病,特征是真胃出血性坏死性炎症。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医传染病学",
+    "knowledgePoint": "传染病：猪与反刍动物疫病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3066,7 +3158,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医传染病学"
   },
   {
     "id": "vet-2026-recall-preventive-00047",
@@ -3084,7 +3177,7 @@
     ],
     "analysis": "玻片凝集试验利用特异性血清与菌体抗原反应,用于细菌血清型分型鉴定。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：病原检测与消毒灭菌",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3099,7 +3192,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2026-recall-preventive-00048",
@@ -3117,7 +3211,7 @@
     ],
     "analysis": "由 3~5 个低聚糖单元重复构成的多糖链构成菌体抗原(即 O 抗原)。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：免疫基础",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3132,7 +3226,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2026-recall-preventive-00049",
@@ -3150,7 +3245,7 @@
     ],
     "analysis": "犬细小病毒弱毒苗于 2~3 月龄首免,间隔 2 周加强免疫一次,以后 6 个 月加强免疫一次。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：病毒",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3165,7 +3260,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2026-recall-preventive-00050",
@@ -3183,7 +3279,7 @@
     ],
     "analysis": "猪乙脑与蓝耳病(猪繁殖与呼吸综合征)均会造成母猪流产、死胎、公猪 睾丸炎,临床繁殖症状高度相似,其余选项无繁殖障碍典型症状。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医传染病学",
+    "knowledgePoint": "传染病：猪与反刍动物疫病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3198,7 +3294,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医传染病学"
   },
   {
     "id": "vet-2026-recall-preventive-00051",
@@ -3216,7 +3313,7 @@
     ],
     "analysis": "10 日龄雏鸭、急性死亡、角弓反张神经症状,为鸭病毒性肝炎典型特征。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：病毒",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3231,7 +3328,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2026-recall-preventive-00052",
@@ -3249,7 +3347,7 @@
     ],
     "analysis": "典型新城疫特征为腺胃乳头出血;非典型新城疫无特征消化道出血病变, 仅见喉头气管充血、少量黏液。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医传染病学",
+    "knowledgePoint": "传染病：禽类疫病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3264,7 +3362,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医传染病学"
   },
   {
     "id": "vet-2026-recall-preventive-00053",
@@ -3282,7 +3381,7 @@
     ],
     "analysis": "腹泻排番茄样稀粪最可能是犬细小病毒病。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医传染病学",
+    "knowledgePoint": "传染病：犬猫疫病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3297,7 +3396,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医传染病学"
   },
   {
     "id": "vet-2026-recall-preventive-00054",
@@ -3315,7 +3415,7 @@
     ],
     "analysis": "透明质酸酶、链激酶属于侵袭性酶,分解组织基质,帮助细菌扩散,增强 侵袭力。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：细菌与支原体",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3330,7 +3430,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2026-recall-preventive-00055",
@@ -3348,7 +3449,7 @@
     ],
     "analysis": "黏膜固有层淋巴细胞以 T 细胞、B 细胞为主。 (共用题干)",
     "chapter": "预防科目",
-    "knowledgePoint": "预防综合题",
+    "knowledgePoint": "预防综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3363,7 +3464,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "预防综合题"
   },
   {
     "id": "vet-2026-recall-preventive-00056",
@@ -3381,7 +3483,7 @@
     ],
     "analysis": "猫传染性腹膜炎的病原是冠状病毒。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：病毒",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3396,7 +3498,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   },
   {
     "id": "vet-2026-recall-preventive-00057",
@@ -3414,7 +3517,7 @@
     ],
     "analysis": "鸡马立克氏病肿瘤由大小、形态不一的多形性淋巴细胞混合组成。",
     "chapter": "预防科目",
-    "knowledgePoint": "预防综合题",
+    "knowledgePoint": "传染病：禽类疫病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3429,7 +3532,8 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医传染病学"
   },
   {
     "id": "vet-2026-recall-preventive-00058",
@@ -3447,7 +3551,7 @@
     ],
     "analysis": "脂溶性物质不易溶于水,难以通过动物尿液、胆汁排出体外,会持续蓄积 在脂肪组织,随着食物链逐级传递、浓度不断升高,也就是生物放大。",
     "chapter": "预防科目",
-    "knowledgePoint": "兽医微生物学与免疫学",
+    "knowledgePoint": "微免：细菌与支原体",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3462,6 +3566,7 @@
         "sha256": "dfa0b1b15f7b58d160e84a293321d9b66554684e33e82c6e6fd4970ec1562a24"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医微生物学与免疫学"
   }
 ]

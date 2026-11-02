@@ -15,7 +15,7 @@
     ],
     "analysis": "患犬干咳无痰、咽喉疼痛、气喘、舌红少苔、脉象细数,属肺阴亏虚之证。 百合固金汤具有养阴润肺、止咳化痰的功效,适用于肺阴不足所致的干咳、咽喉 疼痛等症。六味地黄丸滋阴补肾,用于肾阴虚;香薷散解表祛暑,用于暑湿感冒; 麻黄汤发汗解表,用于风寒感冒;补中益气汤益气升阳,用于气虚证,均不适合 该病症。",
     "chapter": "临床科目",
-    "knowledgePoint": "中兽医学",
+    "knowledgePoint": "中兽医：方剂与临床应用",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -30,7 +30,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "中兽医学"
   },
   {
     "id": "vet-2025-clinical-00002",
@@ -48,7 +49,7 @@
     ],
     "analysis": "酒精试验阳性提示乳汁中含有较多的钙盐等物质,易发生凝固。柠檬酸钠 可与钙离子结合,防止乳汁凝固,适合用于该情况。青霉素钾、硫酸链霉素用于 治疗细菌感染性乳房炎,而该奶牛乳房炎检测阴性,无需使用抗生素;促乳素会 促进乳汁分泌,不利于症状缓解;醋酸泼尼松为糖皮质激素,可能影响乳汁质量, 不宜用于泌乳期奶牛。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医产科学",
+    "knowledgePoint": "产科：乳房与泌乳",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -63,7 +64,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医产科学"
   },
   {
     "id": "vet-2025-clinical-00003",
@@ -81,7 +83,7 @@
     ],
     "analysis": "催产素能促进子宫平滑肌收缩,加速子宫复旧,常用于治疗母牛产后子宫 复旧延迟。孕酮抑制子宫收缩;促黄体素、促卵泡素主要调节卵巢功能;松弛素 使骨盆韧带松弛,均无促进子宫复旧的作用。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "产科：产后疾病与护理",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -96,7 +98,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医产科学"
   },
   {
     "id": "vet-2025-clinical-00004",
@@ -114,7 +117,7 @@
     ],
     "analysis": "根据该犬的症状(呼吸困难、犬坐姿势、气喘、运动后加重、可视粘膜发 绀)和 X 线检查(左心房、左心室扩张,肺部阴影增加),推测可能患有动脉导管未 闭。动脉导管未闭时,由于主动脉压力高于肺动脉,血液持续从主动脉流入肺动 脉,心脏听诊可闻及连续性心杂音。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：临床检查与一般症状",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -129,7 +132,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2025-clinical-00005",
@@ -147,7 +151,7 @@
     ],
     "analysis": "动脉导管未闭是犬常见的先天性心脏病,出生后动脉导管未闭合,导致血 液分流,引起左心房、左心室扩张,肺部防於血,出现呼吸困难、气喘、可视粘 膜发绀等症状,与该犬的表现相符。扩张性心肌病多发生于成年犬;肥厚性心肌 病以心肌肥厚为特征;限制性心肌病较少见;主动脉瓣狭窄主要影响左心室射血, 与该犬症状不完全一致。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：鉴别诊断与临床推理",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -162,7 +166,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2025-clinical-00006",
@@ -180,7 +185,7 @@
     ],
     "analysis": "阴道脱出根据程度可分为轻度、中度和重度。阴道脱出根据程度可分为轻 度、中度和重度。轻度阴道脱出站立时无明显脱出,卧地时少量突出,站立后立 即缩回;中度阴道脱出卧地时脱出明显突出,站立后可自行缩回;重度阴道脱出 站立时脱出物也不能缩回。题干中卧地时脱出物呈拳头大,站立后可自行缩回, 符合中度阴道脱出的特征。 胎儿胎囊脱出:属于流产或早产的表现,脱出物为 含胎儿的胎膜,与阴道下壁突出不符合。阴道肿瘤一般不会随着体位变化自行缩 回。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医产科学",
+    "knowledgePoint": "产科：产后疾病与护理",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -195,7 +200,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医产科学"
   },
   {
     "id": "vet-2025-clinical-00007",
@@ -213,7 +219,7 @@
     ],
     "analysis": "阴道脱出主要与胎盘分泌雌激素增多导致骨盆韧带及阴道组织松弛阴道腔 扩张、腹内压增高等因素有关。子宫炎症与阴道脱出无直接关系,主要影响子宫 的功能。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医产科学",
+    "knowledgePoint": "产科：产后疾病与护理",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -228,7 +234,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医产科学"
   },
   {
     "id": "vet-2025-clinical-00008",
@@ -246,7 +253,7 @@
     ],
     "analysis": "孕酮具有维持妊娠、抑制子宫收缩的作用,可用于预防流产。抗生素用于 治疗感染;雌激素可能诱发流产;可的松属于糖皮质激素,大剂量可能影响妊娠; 马绒毛囊促性腺激素主要用于促进卵泡发育,均不适合用于预防流产。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医产科学",
+    "knowledgePoint": "产科：妊娠与胎儿发育",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -261,7 +268,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医产科学"
   },
   {
     "id": "vet-2025-clinical-00009",
@@ -279,7 +287,7 @@
     ],
     "analysis": "笼养蛋鸡疲劳综合征主要是由于钙摄入不足或吸收不良,导致骨骼缺钙引 起的。在饲料中添加钙可有效预防该病。钾、钴、铁、锰虽为必需微量元素,但 与该病的发生无直接关系。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -294,7 +302,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2025-clinical-00010",
@@ -312,7 +321,7 @@
     ],
     "analysis": "会阴疝是指腹腔或盆腔内的器官通过会阴部的薄弱区域突出形成的疝,多 见于老龄犬,表现为肛门旁肿胀,触诊柔软,可还纳,常伴有排尿困难。膀胱爆 裂会有剧烈疼痛和腹腔积液;前列腺炎多见于公犬;阴道肿瘤质地较硬,不可还 纳;肠便秘一般不会出现肛门旁肿胀,故该病最可能是会阴疝。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医外科与手术学",
+    "knowledgePoint": "外科：疝与腹部手术",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -327,7 +336,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医外科与手术学"
   },
   {
     "id": "vet-2025-clinical-00011",
@@ -345,7 +355,7 @@
     ],
     "analysis": "腹水多在腹腔,与题干肛门旁肿物不符,乳糜液呈乳白色;淋巴液量少多 为无色透明;血液提示出血淡红色或粉色,与该病例表现不符。结合上一题诊断 会阴疝,题干中穿刺液常为淡黄色,会阴疝时,膀胱易通过疝孔进入会阴部, 导致尿液排出受阻(尿闭),疝囊内积聚的液体即为潴留的尿液,颜色多 为淡黄色。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医外科与手术学",
+    "knowledgePoint": "外科：疝与腹部手术",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -360,7 +370,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医外科与手术学"
   },
   {
     "id": "vet-2025-clinical-00012",
@@ -378,7 +389,7 @@
     ],
     "analysis": "该犬患会阴疝,可能导致膀胱位置异常,发生膀胱反转,从而引起尿闭。 肛门腺炎、膀胱结石、便秘也可能导致排尿困难,但结合会阴疝的症状,膀胱反 转是最可能的原因。膀胱破裂会出现尿液外漏,不会表现为尿闭。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：临床检查与一般症状",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -393,7 +404,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2025-clinical-00013",
@@ -411,7 +423,7 @@
     ],
     "analysis": "催产素能促进子宫平滑肌收缩,减少子宫出血,常用于剖腹产手术中子宫 弛缓和出血的情况。黄体酮抑制子宫收缩;新斯的明主要作用于骨骼肌;阿托品 抑制腺体分泌和平滑肌收缩;前裂炳酮并非常用药物,故选用催产素。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医外科与手术学",
+    "knowledgePoint": "外科：疝与腹部手术",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -426,7 +438,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医外科与手术学"
   },
   {
     "id": "vet-2025-clinical-00014",
@@ -444,7 +457,7 @@
     ],
     "analysis": "奶牛生产瘫痪又称乳热症,主要是由于产后血钙浓度急剧下降引起的,表 现为四肢瘫痪、意识障碍等。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "内科：神经与运动系统疾病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -459,7 +472,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医内科学"
   },
   {
     "id": "vet-2025-clinical-00015",
@@ -477,7 +491,7 @@
     ],
     "analysis": "急性肾衰竭的多尿期是肾功能开始恢复的阶段,此时肾小球滤过功能逐渐 好转,但肾小管重吸收功能尚未完全恢复,导致大量水分和电解质随尿液排出。 在多尿期,由于肾小管对钾离子的重吸收能力下降,同时大量尿液排出会带走大 量钾离子,导致血钾水平降低,即低血钾。低血钾可能引起肌肉无力、心律失常 等症状,是多尿期需要重点监测和纠正的电解质紊乱",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -492,7 +506,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2025-clinical-00016",
@@ -510,7 +525,7 @@
     ],
     "analysis": "蹄真皮的弥散性、无败性炎症称为蹄叶炎。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "外科：创伤与伤口处理",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -525,7 +540,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医外科与手术学"
   },
   {
     "id": "vet-2025-clinical-00017",
@@ -543,7 +559,7 @@
     ],
     "analysis": "严重窒息,无呼吸,黏膜苍白,心跳微弱。轻度窒息,呼吸不匀, 黏膜发绀,心跳快而弱。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -558,7 +574,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2025-clinical-00018",
@@ -576,7 +593,7 @@
     ],
     "analysis": "相侮是属于相克不足导致的反克。与相克关系的顺序相反。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -591,7 +608,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2025-clinical-00019",
@@ -609,7 +627,7 @@
     ],
     "analysis": "根据题干描述,松狮犬在更换食物后出现舔爪子、挠耳朵等瘙痒症 状,患部被毛着色,爪部湿红,且瘙痒无明显季节性。这些症状高度提示 可能是食物过敏引发的过敏性皮炎。 过敏性疾病常与体内免疫球蛋白 E(IgE)水平升高相关,IgE 在I型超敏 反应中起关键作用,会介导肥大细胞释放组胺等炎症介质,导致瘙痒、红 斑等症状。因此,诊断时首先应检查血清 IgE 含量。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -624,7 +642,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2025-clinical-00020",
@@ -642,7 +661,7 @@
     ],
     "analysis": "该病例为过敏引起的瘙痒和炎症反应,全身对症治疗的关键是抑制 过度的免疫反应和炎症。糖皮质激素类药物具有强大的抗炎、抗过敏作用, 能有效减轻过敏反应导致的瘙痒、红斑和肿胀等症状,是治疗过敏性疾病 的常用全身用药。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -657,7 +676,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2025-clinical-00021",
@@ -675,7 +695,7 @@
     ],
     "analysis": "根据题干描述,该松狮犬双眼持续流泪、结膜潮红,且下眼睑睫毛 朝向角膜。眼睑内翻,下眼睑睫毛异常朝向角膜(倒睫)会直接刺激角膜 和结膜,引发炎症反应,导致结膜潮红和反射性流泪,这是该病例流泪的 最可能原因。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "外科：眼耳与其他专科手术",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -690,7 +710,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医外科与手术学"
   },
   {
     "id": "vet-2025-clinical-00022",
@@ -708,7 +729,7 @@
     ],
     "analysis": "该病为眼睑内翻(眼睑内翻导致睫毛刺激角膜),治疗的关键是纠 正眼睑内翻,使睫毛远离角膜。临床中,针对眼睑内翻的手术治疗常采用 “距眼睑缘 3mm 处做眼睑皮瓣切除术”,通过切除部分眼睑皮肤和皮下组 织,矫正眼睑内翻的状态,使睫毛恢复正常方向,避免对角膜的刺激。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医外科与手术学",
+    "knowledgePoint": "外科：眼耳与其他专科手术",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -723,7 +744,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医外科与手术学"
   },
   {
     "id": "vet-2025-clinical-00023",
@@ -741,7 +763,7 @@
     ],
     "analysis": "该病例的倒睫多由眼睑内翻引起,而犬的眼睑内翻在很多品种(如 藏獒、松狮犬、沙皮犬等)中属于先天性疾病,且具有明显的遗传性,常 与品种特异性的眼睑结构异常相关。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -756,7 +778,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2025-clinical-00024",
@@ -774,7 +797,7 @@
     ],
     "analysis": "盐酸利多卡因是常用的局部麻醉药,具有起效快、作用时间适中、毒性小 等特点,适用于腰旁神经传导麻醉。赛拉嗪是镇静镇痛药;硫酸妥钠是巴比妥类 镇静催眠药;替来他明、氯胺酮是全身麻醉药,均不适合用于神经传导麻醉。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "外科：麻醉与保定",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -789,7 +812,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医外科与手术学"
   },
   {
     "id": "vet-2025-clinical-00025",
@@ -807,7 +831,7 @@
     ],
     "analysis": "食欲减退,反刍停止,行为异常,网胃区触诊敏感疼痛,可诊断为 创伤性网胃炎,用 X 线或金属探测器检查。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：临床检查与一般症状",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -822,7 +846,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2025-clinical-00026",
@@ -840,7 +865,7 @@
     ],
     "analysis": "继续发展为心区拍水音,即创伤性网胃心包炎,可引起间接性心功 能障碍,颈静脉怒张和水肿。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医内科学",
+    "knowledgePoint": "内科：心血管与血液疾病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -855,7 +880,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医内科学"
   },
   {
     "id": "vet-2025-clinical-00027",
@@ -873,7 +899,7 @@
     ],
     "analysis": "创伤性网胃心包炎后期会发展为心力衰竭,所以要心脏减压,可通 过静脉放血和利尿的方式进行。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医外科与手术学",
+    "knowledgePoint": "外科：创伤与伤口处理",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -888,7 +914,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医外科与手术学"
   },
   {
     "id": "vet-2025-clinical-00028",
@@ -906,7 +933,7 @@
     ],
     "analysis": "食欲减退,反刍停止,粪便稀软/酸臭,胃内容物稀软和 PH=5,这都 是瘤胃酸中毒的典型症状。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：鉴别诊断与临床推理",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -921,7 +948,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2025-clinical-00029",
@@ -939,7 +967,7 @@
     ],
     "analysis": "最重要的就是纠正酸中毒,清除内容物,恢复胃肠机能",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：临床检查与一般症状",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -954,7 +982,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2025-clinical-00030",
@@ -972,7 +1001,7 @@
     ],
     "analysis": "难产类型的判断,持续强烈努责,说明产力较强;胎儿两前肢和口 鼻进入子宫颈,但无法娩出,通常是由胎势异常引起的。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医产科学",
+    "knowledgePoint": "产科：分娩与难产处理",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -987,7 +1016,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医产科学"
   },
   {
     "id": "vet-2025-clinical-00031",
@@ -1005,7 +1035,7 @@
     ],
     "analysis": "子宫颈扩张不全是因为阵缩出现,此时雌激素及松弛素分泌不足, 子宫颈未见充分软化。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医产科学",
+    "knowledgePoint": "产科：妊娠与胎儿发育",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1020,7 +1050,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医产科学"
   },
   {
     "id": "vet-2025-clinical-00032",
@@ -1038,7 +1069,7 @@
     ],
     "analysis": "清晨散步后,流涎、腹泻,共济失调,明显的中毒反应。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医内科学",
+    "knowledgePoint": "内科：消化系统疾病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1053,7 +1084,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医内科学"
   },
   {
     "id": "vet-2025-clinical-00033",
@@ -1071,7 +1103,7 @@
     ],
     "analysis": "齿龈呈黑褐色,有蒜臭样砷化氢气味,是典型的砷化物中毒",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：鉴别诊断与临床推理",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1086,7 +1118,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2025-clinical-00034",
@@ -1104,7 +1137,7 @@
     ],
     "analysis": "重金属中毒的首选解毒药物为巯基络合剂",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医内科学",
+    "knowledgePoint": "内科：消化系统疾病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1119,7 +1152,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医内科学"
   },
   {
     "id": "vet-2025-clinical-00035",
@@ -1137,7 +1171,7 @@
     ],
     "analysis": "母畜发情时,体内激素和生殖道的变化是生殖生理的典型特征。发情时, 雌激素显著升高,雌激素作用于生殖道,会刺激黏膜上皮细胞增生,同时促进 腺体分泌,导致分泌物增多。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医产科学",
+    "knowledgePoint": "产科：生殖生理与繁殖管理",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1152,7 +1186,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医产科学"
   },
   {
     "id": "vet-2025-clinical-00036",
@@ -1170,7 +1205,7 @@
     ],
     "analysis": "犬可以在 X 线平片上看到阴茎骨。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1185,7 +1220,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2025-clinical-00037",
@@ -1203,7 +1239,7 @@
     ],
     "analysis": "维生素 B1 缺乏时,禽表现进行性肌麻痹、多发性神经炎,观星状。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1218,7 +1254,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2025-clinical-00038",
@@ -1236,7 +1273,7 @@
     ],
     "analysis": "频繁排尿导致机体失水失盐,因此血钾降低。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "诊断：实验室检验",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1251,7 +1288,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2025-clinical-00039",
@@ -1269,7 +1307,7 @@
     ],
     "analysis": "数脉:一息五至以上(牛的正常脉象一息三至四至),主热证,因热迫血 行,脉搏次数增多。迟脉:一息不足四至,主寒证,寒邪凝滞,气血运行缓慢。 浮脉:轻按即得,重按稍弱,主表证,病邪在表,气血趋于体表。虚脉:三部脉 举按皆无力,主虚证,为气血不足之象。沉脉:轻按不应,重按始得,主里证, 病邪在里。",
     "chapter": "临床科目",
-    "knowledgePoint": "中兽医学",
+    "knowledgePoint": "中兽医：基础理论与阴阳五行",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1284,7 +1322,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "中兽医学"
   },
   {
     "id": "vet-2025-clinical-00040",
@@ -1302,7 +1341,7 @@
     ],
     "analysis": "生地:主要功效为清热凉血、养阴生津,无明显消肿止痛作用。黄芩:善 于清热燥湿、泻火解毒、止血、安胎,消肿止痛并非其突出功效。穿心莲:具有 清热解毒、凉血、消肿、燥湿的功效,可清热消肿止痛,符合题意。苦参:功效 为清热燥湿、杀虫、利尿,不侧重消肿止痛。龙胆草:主要是清热燥湿、泻肝胆 火,无显著消肿止痛效果。",
     "chapter": "临床科目",
-    "knowledgePoint": "中兽医学",
+    "knowledgePoint": "中兽医：中药性能与功效",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1317,7 +1356,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "中兽医学"
   },
   {
     "id": "vet-2025-clinical-00041",
@@ -1335,7 +1375,7 @@
     ],
     "analysis": "疖是单个毛囊及其所属皮脂腺的急性化脓性感染。痈是多个疖融合而成的 急性化脓性感染。脓肿是局限性化脓性感染,形成充满脓液的腔隙。败血症是细 菌进入血液并大量繁殖引起的全身性感染。蜂窝织炎是指疏松结缔组织的急性弥 漫性化脓性感染,与周围组织无明显界限。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医外科与手术学",
+    "knowledgePoint": "外科：创伤与伤口处理",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1350,7 +1390,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医外科与手术学"
   },
   {
     "id": "vet-2025-clinical-00042",
@@ -1368,7 +1409,7 @@
     ],
     "analysis": "虚实:辨别邪正盛衰的两个纲领。虚证—机体正气虚弱所出现的各种症候。 实证—邪气亢盛而正气未衰,正邪斗争比较激烈而引起的",
     "chapter": "临床科目",
-    "knowledgePoint": "中兽医学",
+    "knowledgePoint": "中兽医：基础理论与阴阳五行",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1383,7 +1424,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "中兽医学"
   },
   {
     "id": "vet-2025-clinical-00043",
@@ -1401,7 +1443,7 @@
     ],
     "analysis": "丘脑下部分泌 PRF(催乳素释放因子)、GIH(生长抑素)、PIF(催乳素抑制 因子)、GnRH(促性腺激素释放激素)等。褪黑素主要由松果体分泌,不属于丘脑 下部分泌的激素。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1416,7 +1458,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2025-clinical-00044",
@@ -1434,7 +1477,7 @@
     ],
     "analysis": "结节样皮炎多见于牛,表现为皮肤出现坚实的结节样突起,与该牛群症状 (面部、肩部等部位结节,质地坚实)相符。湿疹多为红斑、丘疹;淋巴肉瘤结节 柔软;乳头状瘤呈乳头状;鳞状细胞瘤破溃明显,故该病最可能是结节样皮炎。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：鉴别诊断与临床推理",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1449,7 +1492,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2025-clinical-00045",
@@ -1467,7 +1511,7 @@
     ],
     "analysis": "结节样皮炎的治疗以物理去除结节为主,如手术切除、电刀烧烙、激光、 冷冻等。紧急免疫用于传染性疾病的预防,对已形成的结节无治疗作用,故不包 括紧急免疫。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医外科与手术学",
+    "knowledgePoint": "外科：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1482,7 +1526,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医外科与手术学"
   },
   {
     "id": "vet-2025-clinical-00046",
@@ -1500,7 +1545,7 @@
     ],
     "analysis": "该病预防可通过疫苗注射,发病后需去除突起物防止扩散。其他选项中, 替硝唑、酮康唑抗真菌;多拉菌素、吡虫啉驱虫;长春新碱、环磷酰胺为化疗药; 阿莫西林抗菌,均不针对该病的防治。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1515,7 +1560,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2025-clinical-00047",
@@ -1533,7 +1579,7 @@
     ],
     "analysis": "低钾血症常伴随镁代谢异常,犊牛患低钾血症时,血清镁浓度往往下降, 形成低钾低镁血症。其他离子浓度变化与低钾血症无直接关联。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1548,7 +1594,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2025-clinical-00048",
@@ -1566,7 +1613,7 @@
     ],
     "analysis": "尿液中白细胞增多提示泌尿系统存在炎症(感染或非感染性炎症),而肾 上皮细胞来自肾脏实质(如肾小管上皮细胞),其大量出现提示肾脏本身存在病 变。肾炎(如肾小球肾炎、肾盂肾炎)时,肾脏实质受损,肾小管上皮细胞脱落 增加,同时炎症刺激导致白细胞(中性粒细胞等)浸润并进入尿液,因此尿液中 会同时出现大量白细胞和肾上皮细胞,符合题干描述。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医内科学",
+    "knowledgePoint": "内科：泌尿系统疾病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1581,7 +1628,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医内科学"
   },
   {
     "id": "vet-2025-clinical-00049",
@@ -1599,7 +1647,7 @@
     ],
     "analysis": "瓣胃阻塞是由于瓣胃内容物干燥、积聚,导致胃壁收缩无力,食物排出受 阻。治疗的核心是软化内容物、促进瓣胃蠕动。硫酸钠(芒硝)是常用的渗透性 泻药,口服后在瓣胃内形成高渗环境,可吸收水分,软化干燥的食糜,同时刺激 瓣胃黏膜,增强其蠕动功能,促进内容物排出,对轻度瓣胃阻塞效果显著。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1614,7 +1662,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2025-clinical-00050",
@@ -1632,7 +1681,7 @@
     ],
     "analysis": "葡萄球菌感染引起的腹泻在仔兔中最为常见,主要与仔兔的生理特点和饲 养环境相关。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医内科学",
+    "knowledgePoint": "内科：消化系统疾病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1647,7 +1696,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医内科学"
   },
   {
     "id": "vet-2025-clinical-00051",
@@ -1665,7 +1715,7 @@
     ],
     "analysis": "超声内镜是将内镜与超声技术结合的设备,内镜前端的超声探头可对黏膜 下组织进行实时超声扫描,清晰显示黏膜下各层结构(如黏膜肌层、黏膜下层、 固有肌层等)及病变的位置、大小、回声特性,从而判断病变的性质(如囊性、 实性)和起源层次(如是否来自黏膜下层、固有肌层等)",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：影像与器械检查",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1680,7 +1730,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2025-clinical-00052",
@@ -1698,7 +1749,7 @@
     ],
     "analysis": "在胃壁手术(如胃切开术、胃肠吻合术等)中,为确保缝合后胃壁的密封 性和愈合效果,缝针通常需要穿透胃壁的全层(从黏膜层、黏膜下层、肌层到浆 膜层)。全层缝合可有效闭合胃壁创口,防止胃内容物漏出(如胃液、食糜等), 避免腹腔污染或腹膜炎的发生。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医外科与手术学",
+    "knowledgePoint": "外科：创伤与伤口处理",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1713,7 +1764,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医外科与手术学"
   },
   {
     "id": "vet-2025-clinical-00053",
@@ -1731,7 +1783,7 @@
     ],
     "analysis": "开放性气胸时,外界空气可通过胸壁创口自由进出胸腔,导致两侧胸腔压 力随呼吸运动发生显著变化",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1746,7 +1798,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2025-clinical-00054",
@@ -1764,7 +1817,7 @@
     ],
     "analysis": "根据题干中羊采食大量再生高粱幼苗(高粱幼苗含氰苷,可分解产生氢氰 酸),以及典型症状 ——可视黏膜鲜红(与缺氧导致的发绀不同,因氢氰酸抑 制细胞呼吸链,氧无法被利用,血液含氧量高)、呼出气体有苦杏仁味,可确诊 为氢氰酸中毒。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：临床检查与一般症状",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1779,7 +1832,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2025-clinical-00055",
@@ -1797,7 +1851,7 @@
     ],
     "analysis": "氢氰酸的毒性在于其与细胞色素氧化酶结合,抑制细胞呼吸链,导致组织 细胞无法利用血液中的氧气(即 “内窒息”),属于组织性缺氧。此时血液中 氧含量正常(故可视黏膜鲜红),但氧不能被组织利用。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "诊断：临床检查与一般症状",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1812,7 +1866,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2025-clinical-00056",
@@ -1830,7 +1885,7 @@
     ],
     "analysis": "氢氰酸中毒的治疗原则是尽快恢复细胞色素氧化酶活性。亚硝酸钠可使血 红蛋白转化为高铁血红蛋白,与氢氰酸结合形成无毒的氰化高铁血红蛋白;随后 需用硫代硫酸钠,其作为供硫体,使氰离子转化为无毒的硫氰酸盐排出体外,二 者联用可增强解毒效果。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "诊断：临床检查与一般症状",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1845,7 +1900,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2025-clinical-00057",
@@ -1863,7 +1919,7 @@
     ],
     "analysis": "急性瘤胃鼓气是由于瘤胃内迅速积聚大量气体(主要为二氧化碳和甲烷), 导致瘤胃急剧扩张,若不及时放气,可能引发呼吸困难、窒息甚至死亡。此时, 通过瘤胃穿刺(左肷部刺入瘤胃)放出气体是紧急缓解症状的关键治疗措施,属 于急性穿刺的典型适应症。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1878,7 +1934,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2025-clinical-00058",
@@ -1896,7 +1953,7 @@
     ],
     "analysis": "牛瘤胃鼓气时,常通过穿刺放气或插入器具导气缓解症状,其中顺气穴是 治疗该病的特定穴位。顺气穴位于牛的左侧倒数第 6~7 肋间,肩关节水平线下 方,是瘤胃穿刺放气的常用部位,插入柳枝可直接排出瘤胃内的气体,缓解鼓气 症状",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1911,7 +1968,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2025-clinical-00059",
@@ -1929,7 +1987,7 @@
     ],
     "analysis": "妊娠母牛临产前,荐坐韧带会逐渐松软,这是为分娩做准备的重要生理变 化。产前 12-36 小时,母牛荐坐韧带后缘会完全松软,轮廓消失,此时尾根两侧 明显塌陷,这是判断母牛即将分娩的重要标志之一",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医产科学",
+    "knowledgePoint": "产科：妊娠与胎儿发育",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1944,7 +2002,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医产科学"
   },
   {
     "id": "vet-2025-clinical-00060",
@@ -1962,7 +2021,7 @@
     ],
     "analysis": "判定胃管是否插入食道的关键是排除误入气管的可能,马属动物因解剖结 构特点,在食管沟部(颈部左侧,气管下方)可触摸到胃管,这是确认胃管进入 食道的可靠方法。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -1977,7 +2036,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2025-clinical-00061",
@@ -1995,7 +2055,7 @@
     ],
     "analysis": ":食管憩室是食管壁局部向外膨出形成的囊状结构,当进行 X 线钡餐造影 时,钡剂会进入憩室内,在 X 线影像上呈现为高密度阴影(钡剂为高密度造影 剂)。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2010,7 +2070,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2025-clinical-00062",
@@ -2028,7 +2089,7 @@
     ],
     "analysis": "3%碘酊为强效皮肤消毒剂,对细菌、芽孢等杀灭作用强,是动物手术区域 皮肤消毒的常用消毒药物,消毒后用 75%酒精脱碘。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医外科与手术学",
+    "knowledgePoint": "外科：无菌术与围手术期",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2043,7 +2104,8 @@
         "sha256": "63f48feb70c6a7ba25e41dcf251b238c1d44cf206daf5a722208c3077ea280b2"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医外科与手术学"
   },
   {
     "id": "vet-2026-recall-clinical-00001",
@@ -2061,7 +2123,7 @@
     ],
     "analysis": "五柱栏是专门为牛设计的保定器械,其构造是在四柱栏的基础上增加一前 柱,专门用于固定牛的头部,其他柱栏则用于固定体躯和肢体。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2076,7 +2138,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2026-recall-clinical-00002",
@@ -2094,7 +2157,7 @@
     ],
     "analysis": "营养代谢病多由日粮中营养物质缺乏、过剩或比例失调引起。对饲料进行 化学成分分析,是查明病因最直接、最核心的诊断依据。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医内科学",
+    "knowledgePoint": "内科：代谢与营养疾病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2109,7 +2172,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医内科学"
   },
   {
     "id": "vet-2026-recall-clinical-00003",
@@ -2127,7 +2191,7 @@
     ],
     "analysis": "笼养蛋鸡疲劳综合征又称骨质疏松症,是集约化笼养蛋鸡生产中常见的一 种营养代谢性疾病,主要表现无力站立,移动困难,骨质疏松,骨骼变形、变脆 以及蛋壳质量变差。产蛋高峰期蛋鸡对钙的需求量极大,为预防笼养蛋鸡疲劳症, 日粮中的钙磷比例应严格控制在 5:1 至 6:1 之间。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医内科学",
+    "knowledgePoint": "内科：代谢与营养疾病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2142,7 +2206,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医内科学"
   },
   {
     "id": "vet-2026-recall-clinical-00004",
@@ -2160,7 +2225,7 @@
     ],
     "analysis": "犬立耳手术的最佳时期通常在出生后 2 至 3 个月(或 3 至 5 个月龄)。此时 幼犬耳朵软骨尚未完全发育定型,且血管较细,术后愈合快、疼痛感较轻。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医外科与手术学",
+    "knowledgePoint": "外科：创伤与伤口处理",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2175,7 +2240,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医外科与手术学"
   },
   {
     "id": "vet-2026-recall-clinical-00005",
@@ -2193,7 +2259,7 @@
     ],
     "analysis": "疖、蜂窝织炎、痈、脓肿多由葡萄球菌、链球菌等化脓性细菌引起,属于 非特异性感染,破伤风由破伤风梭菌引起,属于特异性感染。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医外科与手术学",
+    "knowledgePoint": "外科：创伤与伤口处理",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2208,7 +2274,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医外科与手术学"
   },
   {
     "id": "vet-2026-recall-clinical-00006",
@@ -2226,7 +2293,7 @@
     ],
     "analysis": "七情主要通过直接伤及内脏和影响气机运行两个方面引起疾病。一般来说, 怒伤肝、喜伤心、思伤脾、忧伤肺、恐伤肾。怒则气上、喜则气缓、悲则气消、 恐则气下、惊则气乱、思则气结。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2241,7 +2308,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2026-recall-clinical-00007",
@@ -2259,7 +2327,7 @@
     ],
     "analysis": "全蝎功效:息风止痉,通络止痛,攻毒散结。熄风止痉的要药。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2274,7 +2342,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2026-recall-clinical-00008",
@@ -2292,7 +2361,7 @@
     ],
     "analysis": "超声波洗牙是临床标准处理方案,利用超声振动击碎牙结石,清除齿龈内 外结石,再抛光牙面,是去除牙结石最有效手段。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：影像与器械检查",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2307,7 +2376,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2026-recall-clinical-00009",
@@ -2325,7 +2395,7 @@
     ],
     "analysis": "新洁尔灭(苯扎溴铵)术前手臂消毒常用 0.1%浓度。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医外科与手术学",
+    "knowledgePoint": "外科：无菌术与围手术期",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2340,7 +2410,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医外科与手术学"
   },
   {
     "id": "vet-2026-recall-clinical-00010",
@@ -2358,7 +2429,7 @@
     ],
     "analysis": "动物发生长时间便秘时,由于过度努责,腹内压急剧升高,极易导致直肠 末端黏膜或全层经肛门向外翻出,形成直肠脱垂。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "内科：消化系统疾病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2373,7 +2444,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医内科学"
   },
   {
     "id": "vet-2026-recall-clinical-00011",
@@ -2391,7 +2463,7 @@
     ],
     "analysis": "猪食盐中毒引发的脑组织病变特征为嗜酸性粒细胞血管袖套,血管周围大 量嗜酸性粒细胞浸润,是该病特征性病理变化。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "内科：神经与运动系统疾病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2406,7 +2478,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医内科学"
   },
   {
     "id": "vet-2026-recall-clinical-00012",
@@ -2424,7 +2497,7 @@
     ],
     "analysis": "根据病变深度,白线处的炎症可分为浅表与深层。仅累及白线表层角质的 受损和感染,称为蹄白线浅表炎;若深入蹄真皮层则为深层炎。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2439,7 +2512,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2026-recall-clinical-00013",
@@ -2457,7 +2531,7 @@
     ],
     "analysis": "蹄叶炎患畜因蹄真皮层发生弥漫性非化脓性炎症,产生剧烈疼痛,站立时 为了减轻蹄部负重,常表现出典型的紧张步样。 (共用题干) 金毛犬,6 月龄,脐部出现一局限性球形肿物,质地柔软,按压肿胀物其内容物 可还纳回腹腔。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2472,7 +2546,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2026-recall-clinical-00014",
@@ -2490,7 +2565,7 @@
     ],
     "analysis": "通过手按压、推送肿物即可判断能否还纳,快速确诊脐疝;直肠、血常规、 尿常规、生化对本病无诊断价值。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：实验室检验",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2505,7 +2580,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2026-recall-clinical-00015",
@@ -2523,7 +2599,7 @@
     ],
     "analysis": "保守疗法适用于疝轮较小、年龄小的动物。可用疝带(皮带或复绷带)、 强刺激剂(幼驹用赤色碘化汞软膏,犊牛用重铬酸钾软膏)等促使局部炎性增生 闭合疝口。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医外科与手术学",
+    "knowledgePoint": "外科：创伤与伤口处理",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2538,7 +2614,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医外科与手术学"
   },
   {
     "id": "vet-2026-recall-clinical-00016",
@@ -2556,7 +2633,7 @@
     ],
     "analysis": "破壶音:肺内有空洞且空洞与支气管相通,叩击时空洞内气体经支气管急 速排出,气流摩擦产生类似敲击破陶壶的声响,为本病特征叩诊音。 (共用题干)",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：临床检查与一般症状",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2571,7 +2648,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2026-recall-clinical-00017",
@@ -2589,7 +2667,7 @@
     ],
     "analysis": "肉鸡腹水综合征是生长过快的禽类在多种因素作用下出现相对性缺氧,导 致血液黏稠、血容量增加、组织细胞损伤及肺动脉高压,且以腹腔积液和心脏衰 竭为特征的疾病。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2604,7 +2682,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2026-recall-clinical-00018",
@@ -2622,7 +2701,7 @@
     ],
     "analysis": "小动物麻醉输氧配套二氧化碳浓度维持 2%~5%,少量 CO2 刺激呼吸中 枢,防止呼吸抑制;浓度过高会酸中毒、呼吸窘迫,过低会呼吸暂停。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2637,7 +2716,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2026-recall-clinical-00019",
@@ -2655,7 +2735,7 @@
     ],
     "analysis": "腹膜炎时腹膜通透性大幅升高,腹腔渗出液蛋白含量显著上升,是区分渗 出液与漏出液、确诊腹膜炎核心指标。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：鉴别诊断与临床推理",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2670,7 +2750,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2026-recall-clinical-00020",
@@ -2688,7 +2769,7 @@
     ],
     "analysis": "电子内窥镜自带操作通道,可配套活检钳,能直观观察病变并同步钳取组 织做病理活检,是临床取材最常用器械。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2703,7 +2784,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2026-recall-clinical-00021",
@@ -2721,7 +2803,7 @@
     ],
     "analysis": "犬阴茎具有骨结构,切除阴茎悬韧带是进行会阴部或阴囊部尿道造口术的 关键前置步骤,其核心目的是充分暴露并缩短尿道路径。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医外科与手术学",
+    "knowledgePoint": "外科：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2736,7 +2818,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医外科与手术学"
   },
   {
     "id": "vet-2026-recall-clinical-00022",
@@ -2754,7 +2837,7 @@
     ],
     "analysis": "根据题干有外伤史、腹侧囊状柔软凸起,仰卧可还纳缩小,是腹壁疝典型 特征;腹壁肌肉受撞击破裂,腹腔脏器脱出形成疝。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医外科与手术学",
+    "knowledgePoint": "外科：疝与腹部手术",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2769,7 +2852,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医外科与手术学"
   },
   {
     "id": "vet-2026-recall-clinical-00023",
@@ -2787,7 +2871,7 @@
     ],
     "analysis": "肝脏实质器官急性炎症、出现渗出时,其声阻抗比正常组织小,透声增高, 因而可出现低回声区。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：影像与器械检查",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2802,7 +2886,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2026-recall-clinical-00024",
@@ -2820,7 +2905,7 @@
     ],
     "analysis": "甲状腺激素能促进胆固醇的合成与降解,但降解作用强于合成。当甲状腺 功能减弱时,胆固醇的降解和排泄受阻,导致血清胆固醇水平升高。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2835,7 +2920,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2026-recall-clinical-00025",
@@ -2853,7 +2939,7 @@
     ],
     "analysis": "肺泡气肿在临床上最常见于马、骡等马属动物,役用牛和猎犬也可发生, 但相对少见。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2868,7 +2954,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2026-recall-clinical-00026",
@@ -2886,7 +2973,7 @@
     ],
     "analysis": "耳血肿多由外伤或耳部瘙痒抓挠引起耳廓内血管破裂,血液积聚在皮肤与 软骨之间。其典型临床特征为耳廓迅速肿胀、触诊有明显的波动感、局部皮温略 高且伴有疼痛。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：鉴别诊断与临床推理",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2901,7 +2988,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2026-recall-clinical-00027",
@@ -2919,7 +3007,7 @@
     ],
     "analysis": "白内障是指眼球晶状体因蛋白质和晶状体纤维发生变化,导致透明性能变 差,表现为不透明或灰白色浑浊。老年猫瞳孔区出现均匀灰白色浑浊,且外观似 白内障,最符合晶状体混浊的特征。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：鉴别诊断与临床推理",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2934,7 +3022,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2026-recall-clinical-00028",
@@ -2952,7 +3041,7 @@
     ],
     "analysis": "直肠脱垂是指直肠黏膜或直肠壁全层脱出于肛门之外。其典型的临床表现 为肛门处突出一个类似“香肠”状的圆柱形肿块,脱出的黏膜因充血水肿呈鲜红 色或暗红色。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -2967,7 +3056,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2026-recall-clinical-00029",
@@ -2985,7 +3075,7 @@
     ],
     "analysis": "孕酮在妊娠期能抑制子宫自发性活动,维持正常妊娠。在分娩启动前后, 随着黄体退化或胎盘功能减退,母畜外周血中的孕酮含量会明显下降,从而解除 对子宫的抑制,触发分娩活动。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医产科学",
+    "knowledgePoint": "产科：妊娠与胎儿发育",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3000,7 +3090,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医产科学"
   },
   {
     "id": "vet-2026-recall-clinical-00030",
@@ -3018,7 +3109,7 @@
     ],
     "analysis": "在分娩前,母畜体内的雌激素含量显著上升。雌激素不仅能刺激子宫肌层 生长,还能显著提高子宫肌对催产素的敏感性,并促进前列腺素的释放,从而协 同触发分娩。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医产科学",
+    "knowledgePoint": "产科：分娩与难产处理",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3033,7 +3124,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医产科学"
   },
   {
     "id": "vet-2026-recall-clinical-00031",
@@ -3051,7 +3143,7 @@
     ],
     "analysis": "牛是子叶型胎盘,胎儿胎盘子叶与母体胎盘紧密嵌合;一旦产后子宫收缩 无力,二者难以分离,这是牛胎衣不下远高发于其他动物的根本原因。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医产科学",
+    "knowledgePoint": "产科：产后疾病与护理",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3066,7 +3158,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医产科学"
   },
   {
     "id": "vet-2026-recall-clinical-00032",
@@ -3084,7 +3177,7 @@
     ],
     "analysis": "苍术具有燥湿健脾、祛风散寒的功效。在化湿药中,苍术辛散苦燥,兼有 发汗解表的作用,常用于治疗外感风寒夹湿的表证。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3099,7 +3192,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2026-recall-clinical-00033",
@@ -3117,7 +3211,7 @@
     ],
     "analysis": "马雁翅穴定位在腰胯部,主治腰胯风湿、腰胯闪伤、不孕症。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医产科学",
+    "knowledgePoint": "产科：不孕与生殖疾病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3132,7 +3226,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医产科学"
   },
   {
     "id": "vet-2026-recall-clinical-00034",
@@ -3150,7 +3245,7 @@
     ],
     "analysis": "肌酸激酶主要存在于心肌、骨骼肌中,心肌受损时血清含量显著升高,是 心肌炎诊断核心血清酶。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3165,7 +3260,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2026-recall-clinical-00035",
@@ -3183,7 +3279,7 @@
     ],
     "analysis": "肛门囊摘除术主要适用于反复发作的慢性肛门囊炎、肛门瘘、肛门腺肿瘤 等。急性肛门囊炎或肛门脓肿通常采取切开引流、冲洗及全身抗感染等保守治疗, 待急性炎症消退后再评估是否需要手术。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医外科与手术学",
+    "knowledgePoint": "外科：肿瘤与外科疾病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3198,7 +3294,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医外科与手术学"
   },
   {
     "id": "vet-2026-recall-clinical-00036",
@@ -3216,7 +3313,7 @@
     ],
     "analysis": "归经是指中药对机体某部分的选择作用,即药物作用部位。一种药物主要 对某一经(脏腑及其经络)或某几经发生明显作用,而对其他经则作用较小。",
     "chapter": "临床科目",
-    "knowledgePoint": "中兽医学",
+    "knowledgePoint": "中兽医：基础理论与阴阳五行",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3231,7 +3328,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "中兽医学"
   },
   {
     "id": "vet-2026-recall-clinical-00037",
@@ -3249,7 +3347,7 @@
     ],
     "analysis": "心膈三角区由心脏后缘、膈肌前下方、胸骨围成,为 X 线侧位片标志性三 角阴影。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3264,7 +3362,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2026-recall-clinical-00038",
@@ -3282,7 +3381,7 @@
     ],
     "analysis": "病猪发热泻痢、里急后重、口色红黄苔黄腻脉弦数,辨证为大肠湿热血痢; 白头翁汤功效清热解毒、凉血止痢,专治湿热泻痢。 (共用题干) 犬,3 岁,食用鸡骨后,食道触诊敏感,频繁做逆呕动作,呕吐物混有血液和黄 色粘液。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：临床检查与一般症状",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3297,7 +3396,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2026-recall-clinical-00039",
@@ -3315,7 +3415,7 @@
     ],
     "analysis": "膝反射(膝腱反射)的反射中枢位于脊髓的第 4~5 腰椎节段。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3330,7 +3430,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2026-recall-clinical-00040",
@@ -3348,7 +3449,7 @@
     ],
     "analysis": "大动物,以手伸入直肠并经肠壁而间接地对盆腔器官及后部腹腔器官进行 检查的方法,称为直肠检查法。用于发情鉴定、妊娠诊断以及疝痛、母畜生殖器 官及泌尿器官疾病的诊断。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医产科学",
+    "knowledgePoint": "产科：妊娠与胎儿发育",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3363,7 +3464,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医产科学"
   },
   {
     "id": "vet-2026-recall-clinical-00041",
@@ -3381,7 +3483,7 @@
     ],
     "analysis": "隐性乳腺炎乳腺和乳汁通常无肉眼可见的变化,但乳汁电导率、体细胞数、 pH 等理化性质已发生变化,必须采用特殊的理化方法才可检出。 (共用题干) 牛,5 岁,近期食欲减退,鼻镜干燥,精神不振,粪便稀薄,混有鲜红色血液, 舌鲜红,舌苔黄腻,脉滑数。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医产科学",
+    "knowledgePoint": "产科：乳房与泌乳",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3396,7 +3498,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医产科学"
   },
   {
     "id": "vet-2026-recall-clinical-00042",
@@ -3414,7 +3517,7 @@
     ],
     "analysis": "槐花散:功能清肠止血,疏风理气。主治肠风下血,血色鲜红,或粪中带 血。用于大肠湿热所致的便血。 (共用题干) 母牛频繁排尿,排尿疼痛,排尿少,呈点滴状断续排除,排尿时后驱摇晃,直接 触诊膀胱疼痛不安,尿沉渣中见大量白细胞、膀胱上皮细胞及细菌。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：实验室检验",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3429,7 +3532,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2026-recall-clinical-00043",
@@ -3447,7 +3551,7 @@
     ],
     "analysis": "胃管探诊是食道阻塞确诊标准方法,胃管抵达阻塞部位会受阻停滞。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：实验室检验",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3462,7 +3566,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2026-recall-clinical-00044",
@@ -3480,7 +3585,7 @@
     ],
     "analysis": "病犬频尿、尿淋漓、按压膀胱疼痛肿胀,是膀胱炎典型表现。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：系统检查与定位",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3495,7 +3600,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2026-recall-clinical-00045",
@@ -3513,7 +3619,7 @@
     ],
     "analysis": "康奈尔式缝合是一种全层连续内翻缝合,常用于胃肠道的吻合,属于非张 力缝合。而间断水平褥式、近远远近等缝合方式通常用于减张,属于张力缝合。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医外科与手术学",
+    "knowledgePoint": "外科：创伤与伤口处理",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3528,7 +3634,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医外科与手术学"
   },
   {
     "id": "vet-2026-recall-clinical-00046",
@@ -3546,7 +3653,7 @@
     ],
     "analysis": "姜牙穴主治马冷痛、各种腹痛。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3561,7 +3668,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2026-recall-clinical-00047",
@@ -3579,7 +3687,7 @@
     ],
     "analysis": "结肠的主要功能是吸收水分和形成粪便。当结肠发生炎症时,其吸收功能 受损,肠道分泌增加,蠕动加快,临床上最典型和主要的症状即为腹泻。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3594,7 +3702,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2026-recall-clinical-00048",
@@ -3612,7 +3721,7 @@
     ],
     "analysis": "心电图加压单极肢体导联包括 aVR、aVL 和 aVF 三个导联。其中,aVL 导 联即为加压单极左上肢导联,其探查电极放置在左上肢,记录左上肢相对于中心 电端的电位变化。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：影像与器械检查",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3627,7 +3736,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2026-recall-clinical-00049",
@@ -3645,7 +3755,7 @@
     ],
     "analysis": "促性腺激素释放激素可促进垂体前叶分泌促卵泡素和促黄体素,FSH 能促 进母畜卵巢内多个卵泡同步发育、成熟,从而达到超数排卵的目的,是临床提高 母畜超数排卵效果的常用激素。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医产科学",
+    "knowledgePoint": "产科：生殖生理与繁殖管理",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3660,7 +3770,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医产科学"
   },
   {
     "id": "vet-2026-recall-clinical-00050",
@@ -3678,7 +3789,7 @@
     ],
     "analysis": "肝性黄疸由肝细胞实质性损伤导致。黄曲霉毒素破坏肝实质,肝脏摄取、 转化、排泄胆红素能力下降,血液胆红素蓄积引发黄疸。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医内科学",
+    "knowledgePoint": "内科：心血管与血液疾病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3693,7 +3804,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医内科学"
   },
   {
     "id": "vet-2026-recall-clinical-00051",
@@ -3711,7 +3823,7 @@
     ],
     "analysis": "肝细胞损伤后胆红素代谢受阻,血液总胆红素含量显著升高。肝脏合成白 蛋白能力下降;肝细胞破裂释放大量谷丙转氨酶,指标上升;肝脏蛋白合成不足, 总蛋白降低;肝损伤伴随胆管淤积时碱性磷酸酶升高,其余选项均不符合本病生 化特点。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3726,7 +3838,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2026-recall-clinical-00052",
@@ -3744,7 +3857,7 @@
     ],
     "analysis": "胼胝性溃疡核心特征:肉芽生长不良,苍白平滑无颗粒,上皮再生迟缓, 纤维组织过度增生,提早形成坚硬致密瘢痕组织,与题干描述完全吻合。 (共用题干) 临清狮子猫,6 岁,近期出现大量流涎,食欲不振,口腔检查发现牙龈红肿,牙 周袋内蓄积脓液。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医外科与手术学",
+    "knowledgePoint": "外科：肿瘤与外科疾病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3759,7 +3872,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医外科与手术学"
   },
   {
     "id": "vet-2026-recall-clinical-00053",
@@ -3777,7 +3891,7 @@
     ],
     "analysis": "猫牙周炎需清理牙周袋、拔牙等口腔深部操作,操作时间较长,动物易剧 烈挣扎;局部麻醉镇痛不全,硬膜外、荐髓间、肋间穿刺麻醉均不适用口腔手术, 临床标准采用吸入式全身麻醉。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医外科与手术学",
+    "knowledgePoint": "外科：麻醉与保定",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3792,7 +3906,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医外科与手术学"
   },
   {
     "id": "vet-2026-recall-clinical-00054",
@@ -3810,7 +3925,7 @@
     ],
     "analysis": "长期饲喂稀软流食,牙齿缺少摩擦,牙菌斑、牙结石快速堆积,极易诱发 牙周炎;啃硬质骨头、橡胶玩具、洁齿零食可摩擦清洁牙面,每日刷牙能清除菌 斑。 (共用题干) 奶牛,6 岁,怀孕 285 天,分娩预兆明显,持续努责未见胎儿露出;检查发现两侧 阴唇不对称,产道向前逐渐狭窄,只能容纳一手臂进入子宫,其他未发现异常。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医产科学",
+    "knowledgePoint": "产科：分娩与难产处理",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3825,7 +3940,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医产科学"
   },
   {
     "id": "vet-2026-recall-clinical-00055",
@@ -3843,7 +3959,7 @@
     ],
     "analysis": "子宫捻转,治疗核心是解除子宫扭转、恢复正常解剖位置。翻转母体术是 奶牛子宫捻转首选且最有效的矫正方法,通过翻转母牛身体,依靠胎儿重力复位 扭转的子宫。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "产科：分娩与难产处理",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3858,7 +3974,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医产科学"
   },
   {
     "id": "vet-2026-recall-clinical-00056",
@@ -3876,7 +3993,7 @@
     ],
     "analysis": "子宫捻转,发病诱因多和子宫游离、体位剧烈变动、子宫支撑不足相关, 盆骨骨折只会造成骨性产道狭窄、难产,不会诱发子宫扭转。 (共用题干) 犊牛,出生第一天健康无异常,第二天吸吮牛乳后出现精神萎靡,体虚无力,反 应迟钝,心博过速。尿色初期淡黄,后期出现茶色尿。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医外科与手术学",
+    "knowledgePoint": "外科：骨关节与运动器官",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3891,7 +4008,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医外科与手术学"
   },
   {
     "id": "vet-2026-recall-clinical-00057",
@@ -3909,7 +4027,7 @@
     ],
     "analysis": "新生犊牛出生次日吮乳后发病,精神沉郁、心跳快、尿液由淡黄转为茶色 血红蛋白尿,是新生仔畜溶血病典型症状。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3924,7 +4042,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2026-recall-clinical-00058",
@@ -3942,7 +4061,7 @@
     ],
     "analysis": "公猫尿道阻塞易反复,传统导尿、穿刺仅临时缓解梗阻,处方粮、抗生素 只能辅助预防感染,无法解决公猫阴茎段尿道先天狭窄的根本问题;尿道造口手 术可避开狭窄的阴茎尿道,建立宽大永久排尿通道,是杜绝复发的最佳方案。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3957,7 +4076,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2026-recall-clinical-00059",
@@ -3975,7 +4095,7 @@
     ],
     "analysis": "在进行公猫尿道造口术时,为了使尿道口能够稳定地外翻并缝合在皮肤上, 防止术后阴茎回缩导致造口狭窄或闭锁,必须将附着在阴茎上的尿道缩肌进行分 离并切除。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医外科与手术学",
+    "knowledgePoint": "外科：创伤与伤口处理",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -3990,7 +4110,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医外科与手术学"
   },
   {
     "id": "vet-2026-recall-clinical-00060",
@@ -4008,7 +4129,7 @@
     ],
     "analysis": "细支气管炎是细支气管黏膜的炎症,会导致细支气管痉挛、狭窄,引发通 气障碍,出现高度呼吸困难,由于呼吸肌剧烈收缩,腹压反复波动,进而诱发肛 门抽动;喉头水肿、咽喉炎、猪传染性萎缩性鼻炎、鼻腔狭窄主要引发上呼吸道 狭窄,以吸气性呼吸困难为主,呼吸困难程度相对较轻,一般不会引发肛门抽动。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "内科：呼吸系统疾病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -4023,7 +4144,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医内科学"
   },
   {
     "id": "vet-2026-recall-clinical-00061",
@@ -4041,7 +4163,7 @@
     ],
     "analysis": "出血性胃炎特征:胃黏膜弥漫肿胀,大量点状、斑块出血,表面覆红褐色 血性黏液;镜检黏膜水肿、广泛出血,上皮变性坏死脱落,和题干病变完全吻合。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "内科：消化系统疾病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -4056,7 +4178,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医内科学"
   },
   {
     "id": "vet-2026-recall-clinical-00062",
@@ -4074,7 +4197,7 @@
     ],
     "analysis": "马拉色菌是犬皮肤表面的正常菌群,当皮肤屏障受损、环境潮湿或机体免 疫力下降时,会大量繁殖引发感染,临床特征为皮肤瘙痒、发红,分泌油性分泌 物,伴有明显异味,长期感染可导致皮肤苔藓化和色素沉着。",
     "chapter": "临床科目",
-    "knowledgePoint": "兽医临床诊断学",
+    "knowledgePoint": "诊断：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -4089,7 +4212,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医临床诊断学"
   },
   {
     "id": "vet-2026-recall-clinical-00063",
@@ -4107,7 +4231,7 @@
     ],
     "analysis": "题干中 ACTH 刺激试验呈低反应性,结合对称性脱毛、色素沉着、肌无力 等典型表现,最可能是犬肾上腺皮质功能减退症。该病导致肾上腺皮质分泌的醛 固酮严重缺乏。醛固酮的主要生理作用是保钠排钾,因此伴随的变化是高钾血症。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -4122,7 +4246,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2026-recall-clinical-00064",
@@ -4140,7 +4265,7 @@
     ],
     "analysis": "细菌性唾液腺炎是由致病菌侵入腺体引起的化脓性感染。核心治疗措施是 选用对致病菌敏感的抗菌药物(抗生素),控制局部及全身感染。氨苄西林钠属 于β-内酰胺类广谱抗生素。呋塞米为利尿药,阿苯达唑为驱虫药,新斯的明为 拟胆碱药,地塞米松为糖皮质激素。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "临床综合：综合与未细分",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -4155,7 +4280,8 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "临床综合题"
   },
   {
     "id": "vet-2026-recall-clinical-00065",
@@ -4173,7 +4299,7 @@
     ],
     "analysis": "食盐中毒时,脑组织的主要病理学变化为嗜酸性粒细胞性脑膜脑炎。其特 征性镜下病变是脑血管周围出现大量的炎性细胞浸润,形成“血管套”。",
     "chapter": "临床科目",
-    "knowledgePoint": "临床综合题",
+    "knowledgePoint": "内科：中毒与环境病",
     "difficulty": "medium",
     "tags": [
       "执业兽医",
@@ -4188,6 +4314,7 @@
         "sha256": "f02afc0b707a4a4b315994b2ab31a21f911ae5b07732bf2f990d367f0cfcadf0"
       }
     ],
-    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案"
+    "sourceVerification": "用户提供资料，未独立核实年份、出处与答案",
+    "knowledgeSection": "兽医内科学"
   }
 ]

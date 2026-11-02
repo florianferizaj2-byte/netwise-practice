@@ -110,5 +110,1172 @@
       "verification": "user_provided_sources_pending_import",
       "path": "questions"
     }
-  ]
+  ],
+  "taxonomy": {
+    "schemaVersion": 1,
+    "modules": [
+      {
+        "name": "基础科目",
+        "order": 1,
+        "sections": [
+          {
+            "name": "兽医法律法规和职业道德",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "code": "1-1-1",
+                "name": "法规：执业资格与机构管理",
+                "order": 1,
+                "scope": "题干、选项或解析主要考查执业资格与机构管理相关知识。",
+                "questionCount": 50
+              },
+              {
+                "code": "1-1-2",
+                "name": "法规：动物防疫与疫情处置",
+                "order": 2,
+                "scope": "题干、选项或解析主要考查动物防疫与疫情处置相关知识。",
+                "questionCount": 97
+              },
+              {
+                "code": "1-1-3",
+                "name": "法规：检疫与监督管理",
+                "order": 3,
+                "scope": "题干、选项或解析主要考查检疫与监督管理相关知识。",
+                "questionCount": 64
+              },
+              {
+                "code": "1-1-4",
+                "name": "法规：兽药与处方管理",
+                "order": 4,
+                "scope": "题干、选项或解析主要考查兽药与处方管理相关知识。",
+                "questionCount": 53
+              },
+              {
+                "code": "1-1-5",
+                "name": "法规：职业道德与法律责任",
+                "order": 5,
+                "scope": "题干、选项或解析主要考查职业道德与法律责任相关知识。",
+                "questionCount": 413
+              },
+              {
+                "code": "1-1-6",
+                "name": "法规：综合与未细分",
+                "order": 6,
+                "scope": "题干、选项或解析主要考查综合与未细分相关知识。",
+                "questionCount": 0
+              }
+            ]
+          },
+          {
+            "name": "动物解剖学、组织学与胚胎学",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "code": "1-2-1",
+                "name": "解剖：细胞与组织",
+                "order": 1,
+                "scope": "题干、选项或解析主要考查细胞与组织相关知识。",
+                "questionCount": 167
+              },
+              {
+                "code": "1-2-2",
+                "name": "解剖：骨骼与肌肉",
+                "order": 2,
+                "scope": "题干、选项或解析主要考查骨骼与肌肉相关知识。",
+                "questionCount": 37
+              },
+              {
+                "code": "1-2-3",
+                "name": "解剖：消化系统",
+                "order": 3,
+                "scope": "题干、选项或解析主要考查消化系统相关知识。",
+                "questionCount": 7
+              },
+              {
+                "code": "1-2-4",
+                "name": "解剖：呼吸与循环系统",
+                "order": 4,
+                "scope": "题干、选项或解析主要考查呼吸与循环系统相关知识。",
+                "questionCount": 74
+              },
+              {
+                "code": "1-2-5",
+                "name": "解剖：泌尿与生殖系统",
+                "order": 5,
+                "scope": "题干、选项或解析主要考查泌尿与生殖系统相关知识。",
+                "questionCount": 13
+              },
+              {
+                "code": "1-2-6",
+                "name": "解剖：神经与感觉器官",
+                "order": 6,
+                "scope": "题干、选项或解析主要考查神经与感觉器官相关知识。",
+                "questionCount": 33
+              },
+              {
+                "code": "1-2-7",
+                "name": "解剖：胚胎发育",
+                "order": 7,
+                "scope": "题干、选项或解析主要考查胚胎发育相关知识。",
+                "questionCount": 5
+              },
+              {
+                "code": "1-2-8",
+                "name": "解剖：综合与未细分",
+                "order": 8,
+                "scope": "题干、选项或解析主要考查综合与未细分相关知识。",
+                "questionCount": 0
+              }
+            ]
+          },
+          {
+            "name": "动物生理学",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "code": "1-3-1",
+                "name": "生理：血液与循环",
+                "order": 1,
+                "scope": "题干、选项或解析主要考查血液与循环相关知识。",
+                "questionCount": 79
+              },
+              {
+                "code": "1-3-2",
+                "name": "生理：呼吸",
+                "order": 2,
+                "scope": "题干、选项或解析主要考查呼吸相关知识。",
+                "questionCount": 41
+              },
+              {
+                "code": "1-3-3",
+                "name": "生理：消化与吸收",
+                "order": 3,
+                "scope": "题干、选项或解析主要考查消化与吸收相关知识。",
+                "questionCount": 53
+              },
+              {
+                "code": "1-3-4",
+                "name": "生理：泌尿与体液平衡",
+                "order": 4,
+                "scope": "题干、选项或解析主要考查泌尿与体液平衡相关知识。",
+                "questionCount": 58
+              },
+              {
+                "code": "1-3-5",
+                "name": "生理：神经与感觉",
+                "order": 5,
+                "scope": "题干、选项或解析主要考查神经与感觉相关知识。",
+                "questionCount": 58
+              },
+              {
+                "code": "1-3-6",
+                "name": "生理：内分泌与生殖",
+                "order": 6,
+                "scope": "题干、选项或解析主要考查内分泌与生殖相关知识。",
+                "questionCount": 108
+              },
+              {
+                "code": "1-3-7",
+                "name": "生理：体温与能量代谢",
+                "order": 7,
+                "scope": "题干、选项或解析主要考查体温与能量代谢相关知识。",
+                "questionCount": 23
+              },
+              {
+                "code": "1-3-8",
+                "name": "生理：综合与未细分",
+                "order": 8,
+                "scope": "题干、选项或解析主要考查综合与未细分相关知识。",
+                "questionCount": 56
+              }
+            ]
+          },
+          {
+            "name": "动物生物化学",
+            "order": 4,
+            "knowledgePoints": [
+              {
+                "code": "1-4-1",
+                "name": "生化：蛋白质与酶",
+                "order": 1,
+                "scope": "题干、选项或解析主要考查蛋白质与酶相关知识。",
+                "questionCount": 103
+              },
+              {
+                "code": "1-4-2",
+                "name": "生化：糖代谢",
+                "order": 2,
+                "scope": "题干、选项或解析主要考查糖代谢相关知识。",
+                "questionCount": 15
+              },
+              {
+                "code": "1-4-3",
+                "name": "生化：脂类代谢",
+                "order": 3,
+                "scope": "题干、选项或解析主要考查脂类代谢相关知识。",
+                "questionCount": 27
+              },
+              {
+                "code": "1-4-4",
+                "name": "生化：核酸与遗传信息",
+                "order": 4,
+                "scope": "题干、选项或解析主要考查核酸与遗传信息相关知识。",
+                "questionCount": 43
+              },
+              {
+                "code": "1-4-5",
+                "name": "生化：维生素与辅酶",
+                "order": 5,
+                "scope": "题干、选项或解析主要考查维生素与辅酶相关知识。",
+                "questionCount": 22
+              },
+              {
+                "code": "1-4-6",
+                "name": "生化：生物氧化与能量",
+                "order": 6,
+                "scope": "题干、选项或解析主要考查生物氧化与能量相关知识。",
+                "questionCount": 11
+              },
+              {
+                "code": "1-4-7",
+                "name": "生化：细胞膜与物质转运",
+                "order": 7,
+                "scope": "题干、选项或解析主要考查细胞膜与物质转运相关知识。",
+                "questionCount": 20
+              },
+              {
+                "code": "1-4-8",
+                "name": "生化：综合与未细分",
+                "order": 8,
+                "scope": "题干、选项或解析主要考查综合与未细分相关知识。",
+                "questionCount": 4
+              }
+            ]
+          },
+          {
+            "name": "动物病理学",
+            "order": 5,
+            "knowledgePoints": [
+              {
+                "code": "1-5-1",
+                "name": "病理：细胞损伤与适应",
+                "order": 1,
+                "scope": "题干、选项或解析主要考查细胞损伤与适应相关知识。",
+                "questionCount": 105
+              },
+              {
+                "code": "1-5-2",
+                "name": "病理：循环障碍",
+                "order": 2,
+                "scope": "题干、选项或解析主要考查循环障碍相关知识。",
+                "questionCount": 102
+              },
+              {
+                "code": "1-5-3",
+                "name": "病理：炎症与修复",
+                "order": 3,
+                "scope": "题干、选项或解析主要考查炎症与修复相关知识。",
+                "questionCount": 40
+              },
+              {
+                "code": "1-5-4",
+                "name": "病理：肿瘤",
+                "order": 4,
+                "scope": "题干、选项或解析主要考查肿瘤相关知识。",
+                "questionCount": 24
+              },
+              {
+                "code": "1-5-5",
+                "name": "病理：疾病概论与全身病变",
+                "order": 5,
+                "scope": "题干、选项或解析主要考查疾病概论与全身病变相关知识。",
+                "questionCount": 21
+              },
+              {
+                "code": "1-5-6",
+                "name": "病理：器官系统病理",
+                "order": 6,
+                "scope": "题干、选项或解析主要考查器官系统病理相关知识。",
+                "questionCount": 12
+              },
+              {
+                "code": "1-5-7",
+                "name": "病理：综合与未细分",
+                "order": 7,
+                "scope": "题干、选项或解析主要考查综合与未细分相关知识。",
+                "questionCount": 44
+              }
+            ]
+          },
+          {
+            "name": "兽医药理学",
+            "order": 6,
+            "knowledgePoints": [
+              {
+                "code": "1-6-1",
+                "name": "药理：药物作用与药动学",
+                "order": 1,
+                "scope": "题干、选项或解析主要考查药物作用与药动学相关知识。",
+                "questionCount": 68
+              },
+              {
+                "code": "1-6-2",
+                "name": "药理：抗菌与抗病毒药",
+                "order": 2,
+                "scope": "题干、选项或解析主要考查抗菌与抗病毒药相关知识。",
+                "questionCount": 60
+              },
+              {
+                "code": "1-6-3",
+                "name": "药理：抗寄生虫药",
+                "order": 3,
+                "scope": "题干、选项或解析主要考查抗寄生虫药相关知识。",
+                "questionCount": 8
+              },
+              {
+                "code": "1-6-4",
+                "name": "药理：麻醉与镇痛药",
+                "order": 4,
+                "scope": "题干、选项或解析主要考查麻醉与镇痛药相关知识。",
+                "questionCount": 44
+              },
+              {
+                "code": "1-6-5",
+                "name": "药理：系统用药",
+                "order": 5,
+                "scope": "题干、选项或解析主要考查系统用药相关知识。",
+                "questionCount": 23
+              },
+              {
+                "code": "1-6-6",
+                "name": "药理：不良反应与中毒",
+                "order": 6,
+                "scope": "题干、选项或解析主要考查不良反应与中毒相关知识。",
+                "questionCount": 41
+              },
+              {
+                "code": "1-6-7",
+                "name": "药理：合理用药与给药",
+                "order": 7,
+                "scope": "题干、选项或解析主要考查合理用药与给药相关知识。",
+                "questionCount": 44
+              },
+              {
+                "code": "1-6-8",
+                "name": "药理：综合与未细分",
+                "order": 8,
+                "scope": "题干、选项或解析主要考查综合与未细分相关知识。",
+                "questionCount": 34
+              }
+            ]
+          },
+          {
+            "name": "基础综合题",
+            "order": 7,
+            "knowledgePoints": [
+              {
+                "code": "1-7-1",
+                "name": "基础综合：综合与未细分",
+                "order": 1,
+                "scope": "题干、选项或解析主要考查综合与未细分相关知识。",
+                "questionCount": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "预防科目",
+        "order": 2,
+        "sections": [
+          {
+            "name": "兽医微生物学与免疫学",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "code": "2-1-1",
+                "name": "微免：细菌与支原体",
+                "order": 1,
+                "scope": "题干、选项或解析主要考查细菌与支原体相关知识。",
+                "questionCount": 181
+              },
+              {
+                "code": "2-1-2",
+                "name": "微免：病毒",
+                "order": 2,
+                "scope": "题干、选项或解析主要考查病毒相关知识。",
+                "questionCount": 217
+              },
+              {
+                "code": "2-1-3",
+                "name": "微免：真菌与其他病原",
+                "order": 3,
+                "scope": "题干、选项或解析主要考查真菌与其他病原相关知识。",
+                "questionCount": 18
+              },
+              {
+                "code": "2-1-4",
+                "name": "微免：免疫基础",
+                "order": 4,
+                "scope": "题干、选项或解析主要考查免疫基础相关知识。",
+                "questionCount": 174
+              },
+              {
+                "code": "2-1-5",
+                "name": "微免：疫苗与免疫接种",
+                "order": 5,
+                "scope": "题干、选项或解析主要考查疫苗与免疫接种相关知识。",
+                "questionCount": 53
+              },
+              {
+                "code": "2-1-6",
+                "name": "微免：病原检测与消毒灭菌",
+                "order": 6,
+                "scope": "题干、选项或解析主要考查病原检测与消毒灭菌相关知识。",
+                "questionCount": 35
+              },
+              {
+                "code": "2-1-7",
+                "name": "微免：综合与未细分",
+                "order": 7,
+                "scope": "题干、选项或解析主要考查综合与未细分相关知识。",
+                "questionCount": 35
+              }
+            ]
+          },
+          {
+            "name": "兽医传染病学",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "code": "2-2-1",
+                "name": "传染病：猪与反刍动物疫病",
+                "order": 1,
+                "scope": "题干、选项或解析主要考查猪与反刍动物疫病相关知识。",
+                "questionCount": 165
+              },
+              {
+                "code": "2-2-2",
+                "name": "传染病：禽类疫病",
+                "order": 2,
+                "scope": "题干、选项或解析主要考查禽类疫病相关知识。",
+                "questionCount": 75
+              },
+              {
+                "code": "2-2-3",
+                "name": "传染病：犬猫疫病",
+                "order": 3,
+                "scope": "题干、选项或解析主要考查犬猫疫病相关知识。",
+                "questionCount": 39
+              },
+              {
+                "code": "2-2-4",
+                "name": "传染病：其他动物疫病",
+                "order": 4,
+                "scope": "题干、选项或解析主要考查其他动物疫病相关知识。",
+                "questionCount": 14
+              },
+              {
+                "code": "2-2-5",
+                "name": "传染病：流行病学与传播",
+                "order": 5,
+                "scope": "题干、选项或解析主要考查流行病学与传播相关知识。",
+                "questionCount": 56
+              },
+              {
+                "code": "2-2-6",
+                "name": "传染病：免疫预防与控制",
+                "order": 6,
+                "scope": "题干、选项或解析主要考查免疫预防与控制相关知识。",
+                "questionCount": 21
+              },
+              {
+                "code": "2-2-7",
+                "name": "传染病：综合与未细分",
+                "order": 7,
+                "scope": "题干、选项或解析主要考查综合与未细分相关知识。",
+                "questionCount": 159
+              }
+            ]
+          },
+          {
+            "name": "兽医寄生虫学",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "code": "2-3-1",
+                "name": "寄生虫：原虫与球虫",
+                "order": 1,
+                "scope": "题干、选项或解析主要考查原虫与球虫相关知识。",
+                "questionCount": 102
+              },
+              {
+                "code": "2-3-2",
+                "name": "寄生虫：线虫",
+                "order": 2,
+                "scope": "题干、选项或解析主要考查线虫相关知识。",
+                "questionCount": 129
+              },
+              {
+                "code": "2-3-3",
+                "name": "寄生虫：吸虫与绦虫",
+                "order": 3,
+                "scope": "题干、选项或解析主要考查吸虫与绦虫相关知识。",
+                "questionCount": 88
+              },
+              {
+                "code": "2-3-4",
+                "name": "寄生虫：节肢动物与体表寄生虫",
+                "order": 4,
+                "scope": "题干、选项或解析主要考查节肢动物与体表寄生虫相关知识。",
+                "questionCount": 42
+              },
+              {
+                "code": "2-3-5",
+                "name": "寄生虫：生活史与宿主",
+                "order": 5,
+                "scope": "题干、选项或解析主要考查生活史与宿主相关知识。",
+                "questionCount": 54
+              },
+              {
+                "code": "2-3-6",
+                "name": "寄生虫：诊断与防治",
+                "order": 6,
+                "scope": "题干、选项或解析主要考查诊断与防治相关知识。",
+                "questionCount": 10
+              },
+              {
+                "code": "2-3-7",
+                "name": "寄生虫：综合与未细分",
+                "order": 7,
+                "scope": "题干、选项或解析主要考查综合与未细分相关知识。",
+                "questionCount": 27
+              }
+            ]
+          },
+          {
+            "name": "兽医公共卫生学",
+            "order": 4,
+            "knowledgePoints": [
+              {
+                "code": "2-4-1",
+                "name": "公卫：人兽共患病",
+                "order": 1,
+                "scope": "题干、选项或解析主要考查人兽共患病相关知识。",
+                "questionCount": 7
+              },
+              {
+                "code": "2-4-2",
+                "name": "公卫：动物性食品安全",
+                "order": 2,
+                "scope": "题干、选项或解析主要考查动物性食品安全相关知识。",
+                "questionCount": 20
+              },
+              {
+                "code": "2-4-3",
+                "name": "公卫：检疫与卫生监督",
+                "order": 3,
+                "scope": "题干、选项或解析主要考查检疫与卫生监督相关知识。",
+                "questionCount": 9
+              },
+              {
+                "code": "2-4-4",
+                "name": "公卫：兽药残留与毒物",
+                "order": 4,
+                "scope": "题干、选项或解析主要考查兽药残留与毒物相关知识。",
+                "questionCount": 15
+              },
+              {
+                "code": "2-4-5",
+                "name": "公卫：消毒与环境卫生",
+                "order": 5,
+                "scope": "题干、选项或解析主要考查消毒与环境卫生相关知识。",
+                "questionCount": 33
+              },
+              {
+                "code": "2-4-6",
+                "name": "公卫：综合与未细分",
+                "order": 6,
+                "scope": "题干、选项或解析主要考查综合与未细分相关知识。",
+                "questionCount": 16
+              }
+            ]
+          },
+          {
+            "name": "预防综合题",
+            "order": 5,
+            "knowledgePoints": [
+              {
+                "code": "2-5-1",
+                "name": "预防综合：综合与未细分",
+                "order": 1,
+                "scope": "题干、选项或解析主要考查综合与未细分相关知识。",
+                "questionCount": 62
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "临床科目",
+        "order": 3,
+        "sections": [
+          {
+            "name": "兽医临床诊断学",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "code": "3-1-1",
+                "name": "诊断：临床检查与一般症状",
+                "order": 1,
+                "scope": "题干、选项或解析主要考查临床检查与一般症状相关知识。",
+                "questionCount": 360
+              },
+              {
+                "code": "3-1-2",
+                "name": "诊断：实验室检验",
+                "order": 2,
+                "scope": "题干、选项或解析主要考查实验室检验相关知识。",
+                "questionCount": 77
+              },
+              {
+                "code": "3-1-3",
+                "name": "诊断：影像与器械检查",
+                "order": 3,
+                "scope": "题干、选项或解析主要考查影像与器械检查相关知识。",
+                "questionCount": 57
+              },
+              {
+                "code": "3-1-4",
+                "name": "诊断：系统检查与定位",
+                "order": 4,
+                "scope": "题干、选项或解析主要考查系统检查与定位相关知识。",
+                "questionCount": 31
+              },
+              {
+                "code": "3-1-5",
+                "name": "诊断：鉴别诊断与临床推理",
+                "order": 5,
+                "scope": "题干、选项或解析主要考查鉴别诊断与临床推理相关知识。",
+                "questionCount": 183
+              },
+              {
+                "code": "3-1-6",
+                "name": "诊断：综合与未细分",
+                "order": 6,
+                "scope": "题干、选项或解析主要考查综合与未细分相关知识。",
+                "questionCount": 348
+              }
+            ]
+          },
+          {
+            "name": "兽医内科学",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "code": "3-2-1",
+                "name": "内科：消化系统疾病",
+                "order": 1,
+                "scope": "题干、选项或解析主要考查消化系统疾病相关知识。",
+                "questionCount": 141
+              },
+              {
+                "code": "3-2-2",
+                "name": "内科：呼吸系统疾病",
+                "order": 2,
+                "scope": "题干、选项或解析主要考查呼吸系统疾病相关知识。",
+                "questionCount": 85
+              },
+              {
+                "code": "3-2-3",
+                "name": "内科：心血管与血液疾病",
+                "order": 3,
+                "scope": "题干、选项或解析主要考查心血管与血液疾病相关知识。",
+                "questionCount": 60
+              },
+              {
+                "code": "3-2-4",
+                "name": "内科：泌尿系统疾病",
+                "order": 4,
+                "scope": "题干、选项或解析主要考查泌尿系统疾病相关知识。",
+                "questionCount": 24
+              },
+              {
+                "code": "3-2-5",
+                "name": "内科：神经与运动系统疾病",
+                "order": 5,
+                "scope": "题干、选项或解析主要考查神经与运动系统疾病相关知识。",
+                "questionCount": 30
+              },
+              {
+                "code": "3-2-6",
+                "name": "内科：代谢与营养疾病",
+                "order": 6,
+                "scope": "题干、选项或解析主要考查代谢与营养疾病相关知识。",
+                "questionCount": 57
+              },
+              {
+                "code": "3-2-7",
+                "name": "内科：中毒与环境病",
+                "order": 7,
+                "scope": "题干、选项或解析主要考查中毒与环境病相关知识。",
+                "questionCount": 103
+              },
+              {
+                "code": "3-2-8",
+                "name": "内科：皮肤与其他系统疾病",
+                "order": 8,
+                "scope": "题干、选项或解析主要考查皮肤与其他系统疾病相关知识。",
+                "questionCount": 11
+              },
+              {
+                "code": "3-2-9",
+                "name": "内科：综合与未细分",
+                "order": 9,
+                "scope": "题干、选项或解析主要考查综合与未细分相关知识。",
+                "questionCount": 70
+              }
+            ]
+          },
+          {
+            "name": "兽医外科与手术学",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "code": "3-3-1",
+                "name": "外科：无菌术与围手术期",
+                "order": 1,
+                "scope": "题干、选项或解析主要考查无菌术与围手术期相关知识。",
+                "questionCount": 32
+              },
+              {
+                "code": "3-3-2",
+                "name": "外科：麻醉与保定",
+                "order": 2,
+                "scope": "题干、选项或解析主要考查麻醉与保定相关知识。",
+                "questionCount": 69
+              },
+              {
+                "code": "3-3-3",
+                "name": "外科：创伤与伤口处理",
+                "order": 3,
+                "scope": "题干、选项或解析主要考查创伤与伤口处理相关知识。",
+                "questionCount": 158
+              },
+              {
+                "code": "3-3-4",
+                "name": "外科：骨关节与运动器官",
+                "order": 4,
+                "scope": "题干、选项或解析主要考查骨关节与运动器官相关知识。",
+                "questionCount": 75
+              },
+              {
+                "code": "3-3-5",
+                "name": "外科：疝与腹部手术",
+                "order": 5,
+                "scope": "题干、选项或解析主要考查疝与腹部手术相关知识。",
+                "questionCount": 64
+              },
+              {
+                "code": "3-3-6",
+                "name": "外科：眼耳与其他专科手术",
+                "order": 6,
+                "scope": "题干、选项或解析主要考查眼耳与其他专科手术相关知识。",
+                "questionCount": 39
+              },
+              {
+                "code": "3-3-7",
+                "name": "外科：肿瘤与外科疾病",
+                "order": 7,
+                "scope": "题干、选项或解析主要考查肿瘤与外科疾病相关知识。",
+                "questionCount": 46
+              },
+              {
+                "code": "3-3-8",
+                "name": "外科：综合与未细分",
+                "order": 8,
+                "scope": "题干、选项或解析主要考查综合与未细分相关知识。",
+                "questionCount": 64
+              }
+            ]
+          },
+          {
+            "name": "兽医产科学",
+            "order": 4,
+            "knowledgePoints": [
+              {
+                "code": "3-4-1",
+                "name": "产科：生殖生理与繁殖管理",
+                "order": 1,
+                "scope": "题干、选项或解析主要考查生殖生理与繁殖管理相关知识。",
+                "questionCount": 76
+              },
+              {
+                "code": "3-4-2",
+                "name": "产科：妊娠与胎儿发育",
+                "order": 2,
+                "scope": "题干、选项或解析主要考查妊娠与胎儿发育相关知识。",
+                "questionCount": 82
+              },
+              {
+                "code": "3-4-3",
+                "name": "产科：分娩与难产处理",
+                "order": 3,
+                "scope": "题干、选项或解析主要考查分娩与难产处理相关知识。",
+                "questionCount": 53
+              },
+              {
+                "code": "3-4-4",
+                "name": "产科：产后疾病与护理",
+                "order": 4,
+                "scope": "题干、选项或解析主要考查产后疾病与护理相关知识。",
+                "questionCount": 40
+              },
+              {
+                "code": "3-4-5",
+                "name": "产科：乳房与泌乳",
+                "order": 5,
+                "scope": "题干、选项或解析主要考查乳房与泌乳相关知识。",
+                "questionCount": 15
+              },
+              {
+                "code": "3-4-6",
+                "name": "产科：不孕与生殖疾病",
+                "order": 6,
+                "scope": "题干、选项或解析主要考查不孕与生殖疾病相关知识。",
+                "questionCount": 37
+              },
+              {
+                "code": "3-4-7",
+                "name": "产科：综合与未细分",
+                "order": 7,
+                "scope": "题干、选项或解析主要考查综合与未细分相关知识。",
+                "questionCount": 12
+              }
+            ]
+          },
+          {
+            "name": "中兽医学",
+            "order": 5,
+            "knowledgePoints": [
+              {
+                "code": "3-5-1",
+                "name": "中兽医：基础理论与阴阳五行",
+                "order": 1,
+                "scope": "题干、选项或解析主要考查基础理论与阴阳五行相关知识。",
+                "questionCount": 46
+              },
+              {
+                "code": "3-5-2",
+                "name": "中兽医：辨证与诊法",
+                "order": 2,
+                "scope": "题干、选项或解析主要考查辨证与诊法相关知识。",
+                "questionCount": 52
+              },
+              {
+                "code": "3-5-3",
+                "name": "中兽医：中药性能与功效",
+                "order": 3,
+                "scope": "题干、选项或解析主要考查中药性能与功效相关知识。",
+                "questionCount": 95
+              },
+              {
+                "code": "3-5-4",
+                "name": "中兽医：方剂与临床应用",
+                "order": 4,
+                "scope": "题干、选项或解析主要考查方剂与临床应用相关知识。",
+                "questionCount": 89
+              },
+              {
+                "code": "3-5-5",
+                "name": "中兽医：针灸与外治",
+                "order": 5,
+                "scope": "题干、选项或解析主要考查针灸与外治相关知识。",
+                "questionCount": 30
+              },
+              {
+                "code": "3-5-6",
+                "name": "中兽医：综合与未细分",
+                "order": 6,
+                "scope": "题干、选项或解析主要考查综合与未细分相关知识。",
+                "questionCount": 66
+              }
+            ]
+          },
+          {
+            "name": "临床综合题",
+            "order": 6,
+            "knowledgePoints": [
+              {
+                "code": "3-6-1",
+                "name": "临床综合：综合与未细分",
+                "order": 1,
+                "scope": "题干、选项或解析主要考查综合与未细分相关知识。",
+                "questionCount": 523
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "综合科目",
+        "order": 4,
+        "sections": [
+          {
+            "name": "猪病",
+            "order": 1,
+            "knowledgePoints": [
+              {
+                "code": "4-1-1",
+                "name": "猪病：传染病",
+                "order": 1,
+                "scope": "题干、选项或解析主要考查传染病相关知识。",
+                "questionCount": 9
+              },
+              {
+                "code": "4-1-2",
+                "name": "猪病：寄生虫病",
+                "order": 2,
+                "scope": "题干、选项或解析主要考查寄生虫病相关知识。",
+                "questionCount": 1
+              },
+              {
+                "code": "4-1-3",
+                "name": "猪病：消化与呼吸疾病",
+                "order": 3,
+                "scope": "题干、选项或解析主要考查消化与呼吸疾病相关知识。",
+                "questionCount": 2
+              },
+              {
+                "code": "4-1-4",
+                "name": "猪病：繁殖与产科疾病",
+                "order": 4,
+                "scope": "题干、选项或解析主要考查繁殖与产科疾病相关知识。",
+                "questionCount": 5
+              },
+              {
+                "code": "4-1-5",
+                "name": "猪病：饲养管理与综合防控",
+                "order": 5,
+                "scope": "题干、选项或解析主要考查饲养管理与综合防控相关知识。",
+                "questionCount": 0
+              },
+              {
+                "code": "4-1-6",
+                "name": "猪病：综合与未细分",
+                "order": 6,
+                "scope": "题干、选项或解析主要考查综合与未细分相关知识。",
+                "questionCount": 0
+              }
+            ]
+          },
+          {
+            "name": "禽病",
+            "order": 2,
+            "knowledgePoints": [
+              {
+                "code": "4-2-1",
+                "name": "禽病：病毒性传染病",
+                "order": 1,
+                "scope": "题干、选项或解析主要考查病毒性传染病相关知识。",
+                "questionCount": 13
+              },
+              {
+                "code": "4-2-2",
+                "name": "禽病：细菌与支原体病",
+                "order": 2,
+                "scope": "题干、选项或解析主要考查细菌与支原体病相关知识。",
+                "questionCount": 4
+              },
+              {
+                "code": "4-2-3",
+                "name": "禽病：寄生虫与真菌病",
+                "order": 3,
+                "scope": "题干、选项或解析主要考查寄生虫与真菌病相关知识。",
+                "questionCount": 9
+              },
+              {
+                "code": "4-2-4",
+                "name": "禽病：营养与代谢疾病",
+                "order": 4,
+                "scope": "题干、选项或解析主要考查营养与代谢疾病相关知识。",
+                "questionCount": 4
+              },
+              {
+                "code": "4-2-5",
+                "name": "禽病：饲养管理与综合防控",
+                "order": 5,
+                "scope": "题干、选项或解析主要考查饲养管理与综合防控相关知识。",
+                "questionCount": 15
+              },
+              {
+                "code": "4-2-6",
+                "name": "禽病：综合与未细分",
+                "order": 6,
+                "scope": "题干、选项或解析主要考查综合与未细分相关知识。",
+                "questionCount": 11
+              }
+            ]
+          },
+          {
+            "name": "牛羊病",
+            "order": 3,
+            "knowledgePoints": [
+              {
+                "code": "4-3-1",
+                "name": "牛羊病：传染病",
+                "order": 1,
+                "scope": "题干、选项或解析主要考查传染病相关知识。",
+                "questionCount": 13
+              },
+              {
+                "code": "4-3-2",
+                "name": "牛羊病：寄生虫病",
+                "order": 2,
+                "scope": "题干、选项或解析主要考查寄生虫病相关知识。",
+                "questionCount": 3
+              },
+              {
+                "code": "4-3-3",
+                "name": "牛羊病：消化与呼吸疾病",
+                "order": 3,
+                "scope": "题干、选项或解析主要考查消化与呼吸疾病相关知识。",
+                "questionCount": 10
+              },
+              {
+                "code": "4-3-4",
+                "name": "牛羊病：代谢与营养疾病",
+                "order": 4,
+                "scope": "题干、选项或解析主要考查代谢与营养疾病相关知识。",
+                "questionCount": 0
+              },
+              {
+                "code": "4-3-5",
+                "name": "牛羊病：繁殖与乳房疾病",
+                "order": 5,
+                "scope": "题干、选项或解析主要考查繁殖与乳房疾病相关知识。",
+                "questionCount": 17
+              },
+              {
+                "code": "4-3-6",
+                "name": "牛羊病：饲养管理与综合防控",
+                "order": 6,
+                "scope": "题干、选项或解析主要考查饲养管理与综合防控相关知识。",
+                "questionCount": 3
+              },
+              {
+                "code": "4-3-7",
+                "name": "牛羊病：综合与未细分",
+                "order": 7,
+                "scope": "题干、选项或解析主要考查综合与未细分相关知识。",
+                "questionCount": 28
+              }
+            ]
+          },
+          {
+            "name": "犬猫病",
+            "order": 4,
+            "knowledgePoints": [
+              {
+                "code": "4-4-1",
+                "name": "犬猫病：传染病",
+                "order": 1,
+                "scope": "题干、选项或解析主要考查传染病相关知识。",
+                "questionCount": 1
+              },
+              {
+                "code": "4-4-2",
+                "name": "犬猫病：寄生虫与皮肤病",
+                "order": 2,
+                "scope": "题干、选项或解析主要考查寄生虫与皮肤病相关知识。",
+                "questionCount": 3
+              },
+              {
+                "code": "4-4-3",
+                "name": "犬猫病：消化与呼吸疾病",
+                "order": 3,
+                "scope": "题干、选项或解析主要考查消化与呼吸疾病相关知识。",
+                "questionCount": 13
+              },
+              {
+                "code": "4-4-4",
+                "name": "犬猫病：心肾与内分泌疾病",
+                "order": 4,
+                "scope": "题干、选项或解析主要考查心肾与内分泌疾病相关知识。",
+                "questionCount": 3
+              },
+              {
+                "code": "4-4-5",
+                "name": "犬猫病：外科与繁殖疾病",
+                "order": 5,
+                "scope": "题干、选项或解析主要考查外科与繁殖疾病相关知识。",
+                "questionCount": 7
+              },
+              {
+                "code": "4-4-6",
+                "name": "犬猫病：饲养管理与综合防控",
+                "order": 6,
+                "scope": "题干、选项或解析主要考查饲养管理与综合防控相关知识。",
+                "questionCount": 1
+              },
+              {
+                "code": "4-4-7",
+                "name": "犬猫病：综合与未细分",
+                "order": 7,
+                "scope": "题干、选项或解析主要考查综合与未细分相关知识。",
+                "questionCount": 19
+              }
+            ]
+          },
+          {
+            "name": "其他动物病",
+            "order": 5,
+            "knowledgePoints": [
+              {
+                "code": "4-5-1",
+                "name": "其他动物病：马与兔疾病",
+                "order": 1,
+                "scope": "题干、选项或解析主要考查马与兔疾病相关知识。",
+                "questionCount": 0
+              },
+              {
+                "code": "4-5-2",
+                "name": "其他动物病：水生动物疾病",
+                "order": 2,
+                "scope": "题干、选项或解析主要考查水生动物疾病相关知识。",
+                "questionCount": 0
+              },
+              {
+                "code": "4-5-3",
+                "name": "其他动物病：特种与实验动物疾病",
+                "order": 3,
+                "scope": "题干、选项或解析主要考查特种与实验动物疾病相关知识。",
+                "questionCount": 2
+              },
+              {
+                "code": "4-5-4",
+                "name": "其他动物病：综合与未细分",
+                "order": 4,
+                "scope": "题干、选项或解析主要考查综合与未细分相关知识。",
+                "questionCount": 9
+              }
+            ]
+          },
+          {
+            "name": "综合病例题",
+            "order": 6,
+            "knowledgePoints": [
+              {
+                "code": "4-6-1",
+                "name": "综合病例：跨学科病例整合",
+                "order": 1,
+                "scope": "题干、选项或解析主要考查跨学科病例整合相关知识。",
+                "questionCount": 23
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }
