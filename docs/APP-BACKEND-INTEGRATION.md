@@ -20,10 +20,8 @@
 | 验证码（公开） | `POST /auth/email-code` | 注册、找回及绑定流程，内置频率限制 |
 | 找回密码（公开） | `POST /auth/reset-password` | 校验验证码并更新凭据 |
 | 账号安全 | `GET /auth/security`、`POST /auth/bind-email`、`POST /auth/change-password` | 邮箱绑定、修改密码及会话失效 |
-| 专项学习状态 | `GET /location-learning` | 当前账号、证书的学习进度和解锁状态 |
-| 开始专项练习 | `POST /location-learning/start` | 按知识点创建练习 |
-| 练习过程 | `POST /location-learning/:id/{present,pulse,pause,answer,advance,cancel}` | 服务端计时、答题、继续或取消 |
-| 原生功能凭证 | `POST /location-learning/permit`、`POST /location-learning/consume` | 完成学习后签发并一次性消费凭证 |
+| 模拟定位资格 | `GET /location-learning` | 返回当前账号、证书、北京时间当天答题数；严格超过 10 题时解锁 |
+| 原生功能凭证 | `POST /location-learning/permit`、`POST /location-learning/consume` | 服务端重新核验当日答题数后签发并一次性消费凭证 |
 
 管理端新增 `/admin/points/*`（用量、用户明细、费率、资金、发放、成本核对）和
 `/admin/ai-services/*`（渠道增改、排序、启停、显式连接测试和管理策略）。

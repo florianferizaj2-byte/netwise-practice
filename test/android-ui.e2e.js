@@ -610,51 +610,16 @@ try {
   await page.getByRole('button', { name: '确认选择考试证书', exact: true }).click();
   await expect(page.getByTestId('today-screen')).toBeVisible();
   checks.push('certificate search/confirmation and wrong-record isolation across certificate switches');
-  // Earlier ordinary practice exhausted the first fixture chapter. Fresh short
-  // chapters prove multi-selection rather than reusing those historical items.
-  const learningChapters=[chapter+'甲',chapter+'乙'];
-  for(let i=0;i<12;i++)store.addQ({...store.getQ('android-ui-question-0'),id:'location-multi-fixture-'+i,question:'专项验收题 '+i,chapter:learningChapters[Math.floor(i/6)]});
-
   await tab('练习');
   await page.getByRole('textbox', { name: '搜索知识点', exact: true }).fill('虚拟定位学习');
   await page.getByRole('button', { name: '虚拟定位学习', exact: true }).click();
-  await expect(page.getByRole('textbox', { name: '搜索专项学习知识点', exact: true })).toBeVisible();
-  await page.getByRole('textbox', { name: '搜索专项学习知识点', exact: true }).fill(leaf);
-  for(const name of learningChapters)await page.getByRole('checkbox', {name, exact:true}).click();
-  await page.getByRole('button', {name:'开始学习 · 10 题', exact:true}).click();
-  await expect(page.getByText('第 1 题 · 单选题', { exact: true })).toBeVisible();
-  assert.ok(await page.getByTestId('location-learning-header').evaluate(e=>e.getBoundingClientRect().top)>=0,'learning header remains within its independent safe-area window');
-  await page.getByRole('button',{name:'答题卡',exact:true}).click();
-  await expect(page.getByRole('button',{name:'第2题，未答',exact:true})).toBeDisabled();
-  await page.getByRole('button',{name:'关闭答题卡',exact:true}).click();
-  const gate=await page.getByTestId('location-learning-header').boundingBox();
-  await page.mouse.move(100,gate.y+220);await page.mouse.down();await page.mouse.move(280,gate.y+224,{steps:8});await page.mouse.up();
-  await expect(page.getByText('第 1 题 · 单选题',{exact:true})).toBeVisible();
-  await expect(page.getByRole('button',{name:'跳过本题',exact:true})).toHaveCount(0);
-  checks.push('location learning ignores right swipe and has no skip control');
-  await shot('20-daily10-question-393');
-  for (let i = 0; i < 10; i++) {
-    await expect(page.getByText(`第 ${i + 1} 题 · 单选题`, { exact: true })).toBeVisible();
-    const answer = page.getByRole('button', { name: '提交本题', exact: true });
-    await page.getByRole('radio', { name: i === 0 ? 'B，64 个' : 'A，62 个', exact: true }).click();
-    await answer.scrollIntoViewIfNeeded();
-    if (i === 0) await expect(answer).toBeDisabled();
-    await expect(answer).toBeEnabled({ timeout: 12000 });
-    await answer.click();
-    if (i === 0) await expect(page.getByText('本题答错了，阅读解析也算完成', { exact: true })).toBeVisible();
-    const advance = page.getByRole('button', { name: i === 9 ? '确认阅读，完成 10 题' : '确认阅读，下一题', exact: true });
-    await advance.scrollIntoViewIfNeeded();
-    if (i === 0) { await expect(advance).toBeDisabled(); await shot('21-daily10-wrong-review-393'); }
-    await expect(advance).toBeEnabled({ timeout: 12000 });
-    await advance.click();
-  }
-  await expect(page.getByText('今日学习已完成', { exact: true })).toBeVisible();
-  await shot('22-daily10-unlocked-393');
+  await expect(page.getByTestId('location-learning-today-count')).toHaveText(/\d+题/);
+  await expect(page.getByText('今日条件已满足', { exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: '进入模拟定位学习', exact: true })).toBeVisible();
+  await expect(page.getByRole('textbox', { name: '搜索专项学习知识点', exact: true })).toHaveCount(0);
+  await shot('20-daily-threshold-unlocked-393');
   await page.getByRole('button', { name: '退出专项学习', exact: true }).click();
-  await page.getByRole('button', { name: '虚拟定位学习', exact: true }).click();
-  await expect(page.getByText('今日学习已完成', { exact: true })).toBeVisible();
-  await page.getByRole('button', { name: '退出专项学习', exact: true }).click();
-  checks.push('daily10 real API: reading/answer/review delays, wrong answers allowed, ten completions and same-day reopen');
+  checks.push('daily answer count unlocks the route-player entry without opening a dedicated quiz');
   await tab('我的');
   await page.getByRole('button', { name: '退出登录', exact: true }).click();
   await expect(page.getByText('欢迎回来', { exact: true })).toBeVisible();
@@ -671,10 +636,11 @@ try {
   await tab('练习');
   await page.getByRole('textbox', { name: '搜索知识点', exact: true }).fill('虚拟定位学习');
   await page.getByRole('button', { name: '虚拟定位学习', exact: true }).click();
-  await expect(page.getByRole('textbox', { name: '搜索专项学习知识点', exact: true })).toBeVisible();
-  await expect(page.getByText('今日学习已完成', { exact: true })).toHaveCount(0);
+  await expect(page.getByTestId('location-learning-today-count')).toHaveText('0题');
+  await expect(page.getByText('今日条件未满足', { exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: '进入模拟定位学习', exact: true })).toHaveCount(0);
   await page.getByRole('button', { name: '退出专项学习', exact: true }).click();
-  checks.push('logout/login account isolation for profile, balance, wrong book and daily10 entitlement');
+  checks.push('logout/login account isolation for profile, balance, wrong book and daily answer threshold');
   await tab('我的');
   await page.getByRole('button', { name: '设置', exact: true }).click();
   await page.getByText('深色模式', { exact: true }).click();

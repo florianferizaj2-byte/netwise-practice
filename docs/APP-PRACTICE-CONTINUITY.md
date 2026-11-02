@@ -10,13 +10,9 @@
 
 ## 模拟定位学习
 
-- 复用考试页的 `ExamQuestionCard` 与 `ExamAnswerGrid`，不创建正式考试记录，不改变正式考试的计时、交卷规则。
-- `GET /api/location-learning` 返回 `remainingCount` 与可选知识点。排除当前证书下所有已经作答的题，包括普通练习、考试和此前定位学习；共用材料题按完整题组过滤。
-- `POST /api/location-learning/start` 保留旧版 `pointId`，新版可传 `pointIds: string[]`，二者只能选一个。App 按章节多选，将章节下知识点一起传入，合计抽取 10 题，保持完整材料组。
-- 当前没有进行中的学习且整个证书可用未刷题不足 10 题时，`unlocked=true`，`exemption=insufficient_unseen_questions`。通行凭据仍须登录并由服务端签发、核销。进行中的 10 题不会因为刚答完一题而提前免刷。
-- 每次定位作答仍通过服务端 `recordAttempt` 写入普通学习记录；重复请求不重复计数。答题卡可回看已答题，后续未答题按顺序完成。
-- 进入实际题目时播放进入语音，答题结果触发同一语音包及连对/连错逻辑。回看旧题不重播答题反馈；答题卡、退后台和退出时停止声音。
-- 题目答案提前读取用于即时反馈，但完成进度、阅读时间、记录和通行资格只认服务器确认。计时心跳不重复发送整组题，减少无效传输和重绘。
+- Android 入口不再启动定位专项刷题。`GET /api/location-learning` 返回 `todayCount` 和 `policy.dailyQuestionThreshold`；仅当当前账号、当前证书、北京时间当天的已保存答题数严格大于阈值 10 时 `unlocked=true`。
+- 今日答题数按首页 `todayCount` 的口径统计当前证书题目的已保存作答记录。10 题仍锁定，11 题解锁；切换账号、证书或北京时间自然日会重新计算。
+- `POST /api/location-learning/permit` 与 `/consume` 各自实时核验资格。许可仍为短时、单次凭据；客户端缺少 `todayCount` 时失败关闭。
 
 ## 安全区域
 

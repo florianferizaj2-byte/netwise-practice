@@ -55,7 +55,7 @@ function watchNativeAccess(snapshot: SessionSnapshot) {
 
 async function request<T>(path: string, body?: unknown, signal?: AbortSignal): Promise<T> {
   const snapshot = mobileSessionSnapshot();
-  if (!snapshot.token) throw new ApiError('请先登录后完成专项学习', 401, null);
+  if (!snapshot.token) throw new ApiError('请先登录后查看今日资格', 401, null);
   let data: T;
   try {
     data = await fetchJson<T>(`${API_BASE_URL}/location-learning${path}`, {
@@ -110,7 +110,15 @@ export const locationLearningApi = {
     const snapshot = mobileSessionSnapshot();
     const status = await this.locationLearningStatus();
     assertCurrent(snapshot);
-    if (!status.unlocked) throw new Error(`请先完成今天当前证书下的 ${status.policy?.count || 10} 道专项学习题`);
+    const threshold = status.policy?.dailyQuestionThreshold ?? 10;
+    if (
+      !status.unlocked ||
+      !Number.isFinite(status.todayCount) ||
+      status.todayCount <= threshold
+    )
+      throw new Error(
+        `今日已答 ${Number.isFinite(status.todayCount) ? status.todayCount : 0} 题，需超过 ${threshold} 题才能进入`,
+      );
     const { permit } = await request<{ permit: string }>('/permit', {});
     assertCurrent(snapshot);
     await updateRoutePlayerIdentity(`${status.userId}:${status.certificateId}`);

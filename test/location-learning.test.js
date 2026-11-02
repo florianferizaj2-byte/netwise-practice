@@ -16,6 +16,7 @@ function fixture(t, { count = 35, groups = false } = {}) {
   t.after(() => db.close());
   let time = Date.parse("2026-10-24T01:00:00Z");
   const hidden = new Set();
+  const attempts = [];
   const questions = Array.from({ length: count }, (_, i) => ({
     id: "fixture-" + i,
     certificates: ["network-engineer"],
@@ -36,12 +37,21 @@ function fixture(t, { count = 35, groups = false } = {}) {
   }));
   const store = {
     db,
+    allA(user) {
+      return attempts.filter((attempt) => attempt.userId === user);
+    },
     getQ: (id) => questions.find((q) => q.id === id),
     isQuestionHidden: (id) => hidden.has(id),
     attemptedQuestionIds(user) { return new Set(db.prepare("SELECT question FROM fixture_attempts WHERE user=?").all(user).map(r=>r.question)); },
     recordAttempt(id, selected, _ms, _mode, user = "learner") {
       const q = this.getQ(id),
         correct = JSON.stringify(selected) === JSON.stringify(q.answer);
+      attempts.push({
+        questionId: id,
+        userId: user,
+        certificateId: q.certificates[0],
+        createdAt: new Date(time).toISOString(),
+      });
       db.prepare("INSERT INTO fixture_attempts VALUES(?,?,?,?)").run(
         crypto.randomUUID(),
         id,
@@ -61,6 +71,11 @@ function fixture(t, { count = 35, groups = false } = {}) {
   const context = ["learner", "network-engineer"],
     start = () =>
       service.start(...context, service.status(...context).points[0].id);
+  const addAttempt = ({
+    user = context[0],
+    questionId = questions[0].id,
+    createdAt = new Date(time).toISOString(),
+  } = {}) => attempts.push({ questionId, userId: user, createdAt });
   function dwell(status, ms) {
     let current = status;
     const s = status.session,
@@ -98,6 +113,7 @@ function fixture(t, { count = 35, groups = false } = {}) {
     context,
     questions,
     hidden,
+    addAttempt,
     start,
     dwell,
     answer,
@@ -112,6 +128,7 @@ test("location learning uses one exact current-certificate leaf and hides answer
     status = f.start();
   assert.equal(status.policy.count, 10);
   assert.equal(status.unlocked, false);
+  assert.equal(status.todayCount, 0);
   assert.equal(status.session.total, 10);
   assert.equal(status.session.question.answer, undefined);
   assert.equal(status.session.question.analysis, undefined);
@@ -123,11 +140,30 @@ test("location learning uses one exact current-certificate leaf and hides answer
     internal.questions.every((q) => q.knowledgePoint === "Fixture leaf"),
   );
 });
-test("fewer than ten unseen questions exempts the gate, but indivisible groups do not falsely satisfy ten", t => {
+test("daily qualification requires more than ten current-certificate answers for the same account and Shanghai day", t => {
+  const f = fixture(t);
+  for (let i = 0; i < 10; i++) f.addAttempt();
+  f.addAttempt({ user: "other" });
+  f.addAttempt({ createdAt: "2026-10-23T15:59:59.999Z" });
+  let state = f.service.status(...f.context);
+  assert.equal(state.todayCount, 10);
+  assert.equal(state.unlocked, false);
+  assert.throws(() => f.service.permit(...f.context), (error) => error.status === 403);
+  f.addAttempt({
+    questionId: "other-certificate-question",
+  });
+  f.questions.push({ ...f.questions[0], id: "other-certificate-question", certificates: ["other-certificate"] });
+  assert.equal(f.service.status(...f.context).todayCount, 10);
+  f.addAttempt();
+  state = f.service.status(...f.context);
+  assert.equal(state.todayCount, 11);
+  assert.equal(state.unlocked, true);
+});
+test("a small unseen question pool does not bypass the daily answer threshold", t => {
   const small=fixture(t,{count:9}), state=small.service.status(...small.context);
-  assert.equal(state.remainingCount,9);assert.equal(state.unlocked,true);
-  assert.equal(state.exemption,'insufficient_unseen_questions');
-  assert.ok(small.service.permit(...small.context).permit);
+  assert.equal(state.remainingCount,9);assert.equal(state.unlocked,false);
+  assert.equal(state.todayCount,0);
+  assert.throws(()=>small.service.permit(...small.context),/超过 10/);
   const grouped=fixture(t,{count:32,groups:true});
   assert.equal(grouped.service.status(...grouped.context).unlocked,false);
   assert.throws(()=>grouped.start(),/10/);
@@ -158,8 +194,10 @@ test('existing 30-question round keeps eight completed answers and finishes afte
   let state=f.service.status(...f.context);
   assert.equal(state.session.completedCount,8); assert.equal(state.session.total,10);
   for(let i=0;i<2;i++) state=f.advance(f.answer(f.dwell(state,1000),['A']));
-  assert.equal(state.unlocked,true); assert.equal(state.session.completedCount,10);
+  assert.equal(state.unlocked,false); assert.equal(state.todayCount,10); assert.equal(state.session.completedCount,10);
   assert.equal(f.db.prepare('SELECT count(*) AS n FROM fixture_attempts').get().n,10);
+  f.addAttempt();
+  assert.equal(f.service.status(...f.context).unlocked,true);
   const saved=JSON.parse(f.db.prepare('SELECT data FROM location_learning_sessions WHERE id=?').get(id).data);
   assert.equal(saved.questions.length,30); assert.equal(saved.results.length,10);
 });
@@ -308,7 +346,7 @@ test("lost acknowledgement retries never duplicate an answer or completed questi
     1,
   );
 });
-test("10 wrong answers can unlock the day; permits are scoped, one-use and cannot be minted early", (t) => {
+test("eleven answers unlock the day; permits are scoped, one-use and cannot be minted early", (t) => {
   const f = fixture(t);
   assert.throws(
     () => f.service.permit(...f.context),
@@ -317,9 +355,13 @@ test("10 wrong answers can unlock the day; permits are scoped, one-use and canno
   let state = f.start();
   for (let i = 0; i < 10; i++)
     state = f.advance(f.dwell(f.answer(f.dwell(state, 1000)), 3000));
-  assert.equal(state.unlocked, true);
+  assert.equal(state.unlocked, false);
   assert.equal(state.session.completedCount, 10);
   assert.equal(state.session.correctCount, 0);
+  assert.equal(state.todayCount, 10);
+  assert.equal(f.service.status(...f.context).unlocked, false);
+  f.addAttempt();
+  assert.equal(f.service.status(...f.context).todayCount, 11);
   assert.equal(f.service.status(...f.context).unlocked, true);
   const permit = f.service.permit(...f.context).permit;
   assert.throws(() => f.service.consume("other", f.context[1], permit));
@@ -362,6 +404,7 @@ test("permit expiry and model-free quiz traffic fail closed without consuming AI
   let state = f.start();
   for (let i = 0; i < 10; i++)
     state = f.advance(f.answer(f.dwell(state, 1000), ["A"]));
+  f.addAttempt();
   const permit = f.service.permit(...f.context).permit;
   f.tick(31000);
   assert.throws(
@@ -378,7 +421,7 @@ test("location learning API authenticates, validates strict timing payloads and 
   const parent = path.resolve("tmp"),
     directory = fs.mkdtempSync(path.join(parent, "location-learning-api-")),
     store = createStore(directory);
-  let clock = Date.parse("2026-10-24T01:00:00Z");
+  let clock = Date.now();
   const owner = store.register("location_gate_owner", "fixture-password-123"),
     other = store.register("location_gate_other", "fixture-password-123");
   for (const user of [owner, other])
@@ -493,10 +536,37 @@ test("location learning API authenticates, validates strict timing payloads and 
     assert.equal(advanced.status, 200, JSON.stringify(advanced.data));
     state = advanced.data;
   }
-  assert.equal(state.unlocked, true);
+  assert.equal(state.unlocked, false);
+  assert.equal(state.todayCount, 10);
   assert.equal(store.allA(owner.id).length, 10);
   assert.equal(store.allA(owner.id).filter((a) => a.correct).length, 0);
   assert.equal(store.allA(other.id).length, 0);
+  const practiced = new Set(store.allA(owner.id).map((attempt) => attempt.questionId));
+  const practiceQuestions = store.allQ().filter((q) =>
+    q.certificates?.includes("network-engineer") &&
+    ["single_choice", "multiple_choice", "true_false"].includes(q.type) &&
+    q.options && Object.keys(q.options).length && !practiced.has(q.id),
+  ).slice(0, 4);
+  assert.equal(practiceQuestions.length, 4, "runtime certificate must have four unattempted practice questions");
+  for (const question of practiceQuestions) {
+    const response = await fetch(`http://127.0.0.1:${server.address().port}/api/attempts`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify({
+        questionId: question.id,
+        selected: [Object.keys(question.options)[0]],
+        timeMs: 0,
+      }),
+    });
+    assert.equal(response.status, 200, await response.text());
+  }
+  const qualified = (await req()).data;
+  assert.equal(qualified.todayCount, 14);
+  assert.equal(store.allA(owner.id).length, 14);
+  assert.equal(qualified.unlocked, true);
   const permit = (await req("/permit", {})).data.permit;
   assert.equal((await req("/consume", { permit })).status, 200);
   assert.equal((await req("/consume", { permit })).status, 403);

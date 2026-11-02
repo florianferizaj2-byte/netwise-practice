@@ -6,7 +6,10 @@ import { stripTypeScriptTypes } from 'node:module';
 import { mobileModules, memoryStorage, deferred } from './mobile-fixture.js';
 
 const response = (body, status = 200) => new Response(JSON.stringify(body), { status });
-const status = { userId: 'learner', certificateId: 'network-engineer', unlocked: true };
+const status = {
+  userId: 'learner', certificateId: 'network-engineer', unlocked: true,
+  todayCount: 11, policy: { dailyQuestionThreshold: 10 },
+};
 
 async function fixture(t) {
   const storage = memoryStorage();
@@ -49,14 +52,14 @@ async function fixture(t) {
   return { api, client, identities, storage, records };
 }
 
-test('Android adapter requires a session and completed daily study before issuing native credentials', async (t) => {
+test('Android adapter requires more than ten daily answers before issuing native credentials', async (t) => {
   const { api, client, identities } = await fixture(t);
   const requests = [];
   globalThis.fetch = async (url) => {
     requests.push(new URL(url).pathname);
     return response({ ...status, unlocked: false });
   };
-  await assert.rejects(api.locationLearningOpenCredentials(), /10 道/);
+  await assert.rejects(api.locationLearningOpenCredentials(), /超过 10/);
   assert.deepEqual(requests, ['/api/location-learning']);
   assert.deepEqual(identities, []);
   await client.clearSessionToken();
@@ -64,10 +67,17 @@ test('Android adapter requires a session and completed daily study before issuin
   assert.equal(requests.length, 1);
 });
 
-test('Android describes the server-owned question count while an older backend is still deployed', async t => {
+test('Android fails closed when the backend omits the daily answer count', async t => {
   const {api}=await fixture(t);
-  globalThis.fetch=async()=>response({...status,unlocked:false,policy:{count:30}});
-  await assert.rejects(api.locationLearningOpenCredentials(),/30 道/);
+  globalThis.fetch=async()=>response({...status,todayCount:undefined,policy:{count:30}});
+  await assert.rejects(api.locationLearningOpenCredentials(),/超过 10/);
+});
+
+test('exactly ten daily answers remain locked even when a stale server says unlocked', async t => {
+  const {api,identities}=await fixture(t);
+  globalThis.fetch=async()=>response({...status,todayCount:10});
+  await assert.rejects(api.locationLearningOpenCredentials(),/超过 10/);
+  assert.deepEqual(identities,[]);
 });
 
 test('Android credentials carry the real bearer/version and logout immediately revokes the native identity', async (t) => {

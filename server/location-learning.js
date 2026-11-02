@@ -8,6 +8,7 @@ import {
 
 export const locationLearningPolicy = Object.freeze({
   count: 10,
+  dailyQuestionThreshold: 10,
   answerMs: 1000,
   wrongReviewMs: 3000,
   pulseIntervalMs: 1000,
@@ -89,14 +90,6 @@ export function createLocationLearning(
     save(s);
     return true;
   };
-  const completedToday = (user, certificate) => {
-    completeSatisfiedSession(active(user, certificate));
-    return !!db
-      .prepare(
-        "SELECT 1 FROM location_learning_sessions WHERE user_id=? AND certificate_id=? AND day=? AND state='completed'",
-      )
-      .get(user, certificate, dayAt(now()));
-  };
   const active = (user, certificate) =>
     unpack(
       db
@@ -105,7 +98,33 @@ export function createLocationLearning(
         )
         .get(user, certificate, dayAt(now())),
     );
-  const unlocked = (user, certificate) => completedToday(user, certificate) || (!active(user, certificate) && pool(user, certificate).length < locationLearningPolicy.count);
+  const todayQuestionCount = (user, certificate) => {
+    const attempts = store.allA(user),
+      questionIds = new Set(
+        questionsForCertificate(
+          certificate,
+          user,
+          true,
+          new Set(attempts.map((attempt) => attempt.questionId)),
+        ).map((question) => question.id),
+      ),
+      today = dayAt(now());
+    return attempts.filter((attempt) => {
+      const createdAt = Date.parse(attempt.createdAt);
+      return (
+        questionIds.has(attempt.questionId) &&
+        Number.isFinite(createdAt) &&
+        dayAt(createdAt) === today
+      );
+    }).length;
+  };
+  const unlocked = (user, certificate) => {
+    completeSatisfiedSession(active(user, certificate));
+    return (
+      todayQuestionCount(user, certificate) >
+      locationLearningPolicy.dailyQuestionThreshold
+    );
+  };
   function pool(user, certificate) {
     const all = questionsForCertificate(certificate, user).filter(
       (q) => q.source !== "ai_generated",
@@ -226,8 +245,8 @@ export function createLocationLearning(
   };
   const status = (user, certificate, includeCatalog = true) => {
     const remainingQuestions = pool(user, certificate);
-    const exempt = !active(user, certificate) && remainingQuestions.length < locationLearningPolicy.count;
-    const isUnlocked = exempt || completedToday(user, certificate);
+    const todayCount = todayQuestionCount(user, certificate),
+      isUnlocked = unlocked(user, certificate);
     let session = active(user, certificate);
     if (session && !usable(session, certificate)) {
       session.state = "invalidated";
@@ -239,7 +258,7 @@ export function createLocationLearning(
       day: dayAt(now()),
       certificateId: certificate,
       unlocked: isUnlocked,
-      exemption: exempt ? "insufficient_unseen_questions" : null,
+      todayCount,
       remainingCount: remainingQuestions.length,
       validUntil: new Date(midnight(now())).toISOString(),
       policy: locationLearningPolicy,
@@ -251,7 +270,8 @@ export function createLocationLearning(
     userId: user,
     day: dayAt(now()),
     certificateId: certificate,
-    unlocked: s.state === "completed" || completedToday(user, certificate),
+    unlocked: unlocked(user, certificate),
+    todayCount: todayQuestionCount(user, certificate),
     validUntil: new Date(midnight(now())).toISOString(),
     policy: locationLearningPolicy,
     session: view(s, includeQuestions),
@@ -458,7 +478,10 @@ export function createLocationLearning(
     permit(user, certificate) {
       return tx(() => {
         if (!unlocked(user, certificate))
-          fail(`请先完成今天当前证书下的 ${locationLearningPolicy.count} 道专项学习题`, 403);
+          fail(
+            `今日已答 ${todayQuestionCount(user, certificate)} 题，需超过 ${locationLearningPolicy.dailyQuestionThreshold} 题才能进入`,
+            403,
+          );
         db.prepare(
           "DELETE FROM location_learning_permits WHERE expires_at<? OR used=1",
         ).run(now());
@@ -473,7 +496,10 @@ export function createLocationLearning(
     consume(user, certificate, permit) {
       return tx(() => {
         if (!unlocked(user, certificate))
-          fail("今天的专项学习尚未完成，请先在考匠刷题", 403);
+          fail(
+            `今日已答 ${todayQuestionCount(user, certificate)} 题，需超过 ${locationLearningPolicy.dailyQuestionThreshold} 题才能进入`,
+            403,
+          );
         const used = db
           .prepare(
             "UPDATE location_learning_permits SET used=1 WHERE token_hash=? AND user_id=? AND certificate_id=? AND day=? AND used=0 AND expires_at>?",

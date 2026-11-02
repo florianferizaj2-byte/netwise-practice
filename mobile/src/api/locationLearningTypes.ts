@@ -39,11 +39,13 @@ export type LocationLearningStatus = {
   day: string;
   certificateId: string;
   unlocked: boolean;
+  todayCount: number;
   exemption?: string | null;
   remainingCount?: number;
   validUntil: string;
   policy: {
     count: number;
+    dailyQuestionThreshold: number;
     answerMs: number;
     wrongReviewMs: number;
     pulseIntervalMs: number;
