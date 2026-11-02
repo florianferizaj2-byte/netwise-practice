@@ -1,9 +1,9 @@
 {
-  "latestVersion": "1.0.12",
+  "latestVersion": "1.0.14",
   "minimumVersion": "1.0.1",
-  "downloadUrl": "/downloads/kaojiang-v1.0.12.apk",
-  "releaseNotes": "v1.0.12：安装兼容重打包，构建号45；沿用正式证书，原生库压缩解压安装并启用v1/v2/v3签名；修复新版本标签可能仍指向旧APK的下载配置。保留AI学习与逐题组卷功能。",
-  "apkBytes": 58868839,
-  "apkSha256": "c23f1acb7f5a469f11a3253c2ca8d1dee67eed59772d138f4231d761f4478eb3",
-  "apkMd5": "e2514d3c9f189161cf69e3475b92a90a"
+  "downloadUrl": "/downloads/kaojiang-v1.0.14.apk",
+  "releaseNotes": "v1.0.14：模拟定位入口直接读取现有今日答题数，超过10题即可进入；移除专项学习前置要求，修复进度显示为0的问题。",
+  "apkBytes": 41610714,
+  "apkSha256": "430e329e76fa143a6c194722e906c7b7ac11405b2e95d7b4d42973324d14b2bb",
+  "apkMd5": "a828817f224633daa0893291adbdaa33"
 }
