@@ -8,6 +8,7 @@ import {
   studyCache,
 } from './client';
 import { ApiError, fetchJson } from './transport';
+import { activeApiBase } from './endpoint';
 import { CacheCancelledError } from './resourceCache';
 import { studyRequestId } from './studyTypes';
 import { APP_VERSION } from '../version';
@@ -132,7 +133,7 @@ export const locationLearningApi = {
     }
     watchNativeAccess(snapshot);
     return {
-      apiBaseUrl: API_BASE_URL,
+      apiBaseUrl: activeApiBase(),
       sessionToken: snapshot.token!,
       permit,
       appVersion: APP_VERSION,

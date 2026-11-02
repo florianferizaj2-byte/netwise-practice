@@ -32,10 +32,10 @@ function load({ env = {}, fetchImpl, web = false } = {}) {
 test('native builds prefer the IPv6 direct host and fall back to the public domain', () => {
   const api = load();
   assert.deepEqual([...api.API_BASES], [
-    'https://direct.aceexam.top:8443/api',
+    'https://direct.aceexam.top:9443/api',
     'https://aceexam.top/api',
   ]);
-  assert.equal(api.API_BASE_URL, 'https://direct.aceexam.top:8443/api');
+  assert.equal(api.API_BASE_URL, 'https://direct.aceexam.top:9443/api');
   assert.equal(api.API_FALLBACK_URL, 'https://aceexam.top/api');
 });
 
@@ -51,14 +51,14 @@ test('web builds stay on the current origin and never probe another host', async
 test('an unreachable IPv6 host switches the session to the fallback base', async () => {
   const api = load({
     fetchImpl: async (url) => {
-      if (url.startsWith('https://direct.aceexam.top:8443/api')) throw new TypeError('no route to host');
+      if (url.startsWith('https://direct.aceexam.top:9443/api')) throw new TypeError('no route to host');
       return { status: 200 };
     },
   });
   await api.ensureApiBase();
   assert.equal(api.activeApiBase(), 'https://aceexam.top/api');
   assert.equal(
-    api.resolveApiUrl('https://direct.aceexam.top:8443/api/questions?bankOnly=1'),
+    api.resolveApiUrl('https://direct.aceexam.top:9443/api/questions?bankOnly=1'),
     'https://aceexam.top/api/questions?bankOnly=1',
   );
   assert.equal(api.apiAssetOrigin(), 'https://aceexam.top');
@@ -67,17 +67,17 @@ test('an unreachable IPv6 host switches the session to the fallback base', async
 test('a reachable IPv6 host keeps every request on the direct base', async () => {
   const api = load({ fetchImpl: async () => ({ status: 200 }) });
   await api.ensureApiBase();
-  assert.equal(api.activeApiBase(), 'https://direct.aceexam.top:8443/api');
+  assert.equal(api.activeApiBase(), 'https://direct.aceexam.top:9443/api');
   assert.equal(
-    api.resolveApiUrl('https://direct.aceexam.top:8443/api/mobile/version'),
-    'https://direct.aceexam.top:8443/api/mobile/version',
+    api.resolveApiUrl('https://direct.aceexam.top:9443/api/mobile/version'),
+    'https://direct.aceexam.top:9443/api/mobile/version',
   );
-  assert.equal(api.apiAssetOrigin(), 'https://direct.aceexam.top:8443');
+  assert.equal(api.apiAssetOrigin(), 'https://direct.aceexam.top:9443');
 });
 
 test('fallback never rewrites URLs that do not belong to the API base', () => {
   const api = load({ fetchImpl: async () => ({ status: 200 }) });
-  api.preferApiBase('https://direct.aceexam.top:8443/api');
+  api.preferApiBase('https://direct.aceexam.top:9443/api');
   assert.equal(api.activeApiBase(), 'https://aceexam.top/api');
   assert.equal(api.resolveApiUrl('https://cdn.test/a.png'), 'https://cdn.test/a.png');
 });

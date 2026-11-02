@@ -1,7 +1,7 @@
 /**
  * API 入口选择。
  *
- * 首选 IPv6 直连（direct.aceexam.top 只有 AAAA 记录，端口 8443），
+ * 首选 IPv6 直连（direct.aceexam.top 只有 AAAA 记录，端口 9443），
  * 连不上时回落到走 Cloudflare IPv4/IPv6 的正式域名，避免手机在无 IPv6
  * 网络下整站不可用。网页端始终使用当前站点同源地址，不参与回落。
  */
@@ -11,7 +11,7 @@ const envFallback = process.env.EXPO_PUBLIC_API_FALLBACK_URL?.trim() || '';
 const webOrigin =
   typeof document !== 'undefined' ? `${window.location.origin}/api` : '';
 
-const DEFAULT_PRIMARY = 'https://direct.aceexam.top:8443/api';
+const DEFAULT_PRIMARY = 'https://direct.aceexam.top:9443/api';
 const DEFAULT_FALLBACK = 'https://aceexam.top/api';
 
 export const API_BASES: string[] = Array.from(

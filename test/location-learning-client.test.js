@@ -11,15 +11,28 @@ const status = {
   policy: { count: 10 },
 };
 
-async function fixture(t) {
+async function fixture(t, { dualEndpoints = false } = {}) {
+  const originalPrimary = process.env.EXPO_PUBLIC_API_URL;
+  const originalFallback = process.env.EXPO_PUBLIC_API_FALLBACK_URL;
+  t.after(() => {
+    if (originalPrimary === undefined) delete process.env.EXPO_PUBLIC_API_URL;
+    else process.env.EXPO_PUBLIC_API_URL = originalPrimary;
+    if (originalFallback === undefined) delete process.env.EXPO_PUBLIC_API_FALLBACK_URL;
+    else process.env.EXPO_PUBLIC_API_FALLBACK_URL = originalFallback;
+  });
   const storage = memoryStorage();
   const load = await mobileModules(t, storage);
+  if (dualEndpoints) {
+    process.env.EXPO_PUBLIC_API_URL = 'https://direct.aceexam.top:9443/api';
+    process.env.EXPO_PUBLIC_API_FALLBACK_URL = 'https://aceexam.top/api';
+  }
   const client = await load('client');
   const identities = [], records=[];
   const modules = {
     './client': client,
     './practiceCheckpoint.android': {practiceCheckpoint:{async record(owner,result){records.push({owner,result})}}},
     './transport': await load('transport'),
+    './endpoint': await load('endpoint'),
     './resourceCache': await load('resourceCache'),
     './studyTypes': await load('studyTypes'),
     '../version': await load('version'),
@@ -108,6 +121,35 @@ test('Android credentials carry the real bearer/version and logout immediately r
   assert.deepEqual(identities, ['learner:network-engineer']);
   await client.clearSessionToken();
   assert.deepEqual(identities, ['learner:network-engineer', null]);
+});
+
+test('native credentials use the working fallback after IPv6 DNS fails', async (t) => {
+  const { api, identities } = await fixture(t, { dualEndpoints: true });
+  const requests = [];
+  globalThis.fetch = async (url) => {
+    requests.push(url);
+    if (url.startsWith('https://direct.aceexam.top:9443/api'))
+      throw new TypeError('Unable to resolve host direct.aceexam.top');
+    if (url.endsWith('/permit')) return response({ permit: 'fixture-permit' });
+    if (new URL(url).pathname.endsWith('/dashboard')) return response({ todayCount: 11 });
+    return response(status);
+  };
+  const credentials = await api.locationLearningOpenCredentials();
+  assert.equal(credentials.apiBaseUrl, 'https://aceexam.top/api');
+  assert.equal(requests.filter(url => url.includes('direct.aceexam.top')).length, 1);
+  assert.ok(requests.filter(url => !url.includes('probe=1')).every(url => url.startsWith(credentials.apiBaseUrl)));
+  assert.deepEqual(identities, ['learner:network-engineer']);
+});
+
+test('native credentials keep the direct address when IPv6 is reachable', async (t) => {
+  const { api } = await fixture(t, { dualEndpoints: true });
+  globalThis.fetch = async (url) => {
+    if (url.endsWith('/permit')) return response({ permit: 'fixture-permit' });
+    if (new URL(url).pathname.endsWith('/dashboard')) return response({ todayCount: 11 });
+    return response(status);
+  };
+  const credentials = await api.locationLearningOpenCredentials();
+  assert.equal(credentials.apiBaseUrl, 'https://direct.aceexam.top:9443/api');
 });
 
 test('existing certificate switching revokes Android access without changing the shared auth flow', async (t) => {
