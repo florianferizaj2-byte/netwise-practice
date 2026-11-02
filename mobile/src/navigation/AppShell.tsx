@@ -33,7 +33,7 @@ import { useCachedQuery } from '../api/useCachedQuery';
 import { ScreenActivityProvider, useAppActive } from './ScreenActivity';
 import { AnimatedPressable, EntranceView } from '../components/Motion';
 import { BrandMark } from '../components/BrandMark';
-import { useLaunchStage } from '../launch/LaunchReadiness';
+import { useLaunchActive, useLaunchStage } from '../launch/LaunchReadiness';
 import { AuthScreen } from '../screens/AuthScreen';
 import { ProfileSetupScreen } from '../screens/ProfileSetupScreen';
 import { CertificateScreen } from '../screens/CertificateScreen';

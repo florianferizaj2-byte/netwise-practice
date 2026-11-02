@@ -204,8 +204,6 @@ export function validateManifest(manifest, directory) {
     : null;
 }
 
-export { guideSchema };
-
 const sharedQuestionMarker =
   /共享题干题\s*(?:【题干】)?|【题干】|[（(]共用题干[）)]/g;
 

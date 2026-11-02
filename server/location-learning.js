@@ -5,6 +5,7 @@ import {
   hasCertificateQuestion,
   questionForCertificate,
 } from "./certificates.js";
+import { studySummary } from "./study-summary.js";
 
 export const locationLearningPolicy = Object.freeze({
   count: 10,
@@ -108,15 +109,10 @@ export function createLocationLearning(
           new Set(attempts.map((attempt) => attempt.questionId)),
         ).map((question) => question.id),
       ),
-      today = dayAt(now());
-    return attempts.filter((attempt) => {
-      const createdAt = Date.parse(attempt.createdAt);
-      return (
-        questionIds.has(attempt.questionId) &&
-        Number.isFinite(createdAt) &&
-        dayAt(createdAt) === today
+      certificateAttempts = attempts.filter((attempt) =>
+        questionIds.has(attempt.questionId),
       );
-    }).length;
+    return studySummary(certificateAttempts, [], new Date(now())).todayCount;
   };
   const unlocked = (user, certificate) => {
     completeSatisfiedSession(active(user, certificate));
