@@ -9,11 +9,11 @@ import { studySummary } from "./study-summary.js";
 
 export const locationLearningPolicy = Object.freeze({
   count: 10,
-  dailyQuestionThreshold: 10,
   answerMs: 1000,
   wrongReviewMs: 3000,
   pulseIntervalMs: 1000,
 });
+const DAILY_QUESTION_THRESHOLD = 10;
 const fail = (message, status = 409, code = "LOCATION_LEARNING_REQUIRED") => {
   throw Object.assign(new Error(message), { status, code });
 };
@@ -118,7 +118,7 @@ export function createLocationLearning(
     completeSatisfiedSession(active(user, certificate));
     return (
       todayQuestionCount(user, certificate) >
-      locationLearningPolicy.dailyQuestionThreshold
+      DAILY_QUESTION_THRESHOLD
     );
   };
   function pool(user, certificate) {
@@ -241,8 +241,7 @@ export function createLocationLearning(
   };
   const status = (user, certificate, includeCatalog = true) => {
     const remainingQuestions = pool(user, certificate);
-    const todayCount = todayQuestionCount(user, certificate),
-      isUnlocked = unlocked(user, certificate);
+    const isUnlocked = unlocked(user, certificate);
     let session = active(user, certificate);
     if (session && !usable(session, certificate)) {
       session.state = "invalidated";
@@ -254,7 +253,6 @@ export function createLocationLearning(
       day: dayAt(now()),
       certificateId: certificate,
       unlocked: isUnlocked,
-      todayCount,
       remainingCount: remainingQuestions.length,
       validUntil: new Date(midnight(now())).toISOString(),
       policy: locationLearningPolicy,
@@ -267,7 +265,6 @@ export function createLocationLearning(
     day: dayAt(now()),
     certificateId: certificate,
     unlocked: unlocked(user, certificate),
-    todayCount: todayQuestionCount(user, certificate),
     validUntil: new Date(midnight(now())).toISOString(),
     policy: locationLearningPolicy,
     session: view(s, includeQuestions),
@@ -475,7 +472,7 @@ export function createLocationLearning(
       return tx(() => {
         if (!unlocked(user, certificate))
           fail(
-            `今日已答 ${todayQuestionCount(user, certificate)} 题，需超过 ${locationLearningPolicy.dailyQuestionThreshold} 题才能进入`,
+            `今日已答 ${todayQuestionCount(user, certificate)} 题，需超过 ${DAILY_QUESTION_THRESHOLD} 题才能进入`,
             403,
           );
         db.prepare(
@@ -493,7 +490,7 @@ export function createLocationLearning(
       return tx(() => {
         if (!unlocked(user, certificate))
           fail(
-            `今日已答 ${todayQuestionCount(user, certificate)} 题，需超过 ${locationLearningPolicy.dailyQuestionThreshold} 题才能进入`,
+            `今日已答 ${todayQuestionCount(user, certificate)} 题，需超过 ${DAILY_QUESTION_THRESHOLD} 题才能进入`,
             403,
           );
         const used = db

@@ -7,8 +7,7 @@ import {
   Text,
   View,
 } from "react-native";
-import { locationLearningApi } from "../api/locationLearning.android";
-import type { LocationLearningStatus } from "../api/locationLearningTypes";
+import { mobileApi } from "../api/client";
 import { AnimatedPressable } from "../components/Motion";
 import { AndroidModalSafeArea } from "../components/AndroidModalSafeArea.android";
 import { AppIcon } from "../components/AppIcon";
@@ -26,7 +25,7 @@ export function LocationLearningGate({
 }) {
   const s = useThemedStyles(styles),
     screenActive = useScreenActive();
-  const [data, setData] = useState<LocationLearningStatus | null>(null),
+  const [todayCount, setTodayCount] = useState<number | null>(null),
     [error, setError] = useState(""),
     [loading, setLoading] = useState(false),
     [busy, setBusy] = useState(false),
@@ -35,16 +34,19 @@ export function LocationLearningGate({
 
   useEffect(() => {
     if (!visible) {
-      setData(null);
+      setTodayCount(null);
       return;
     }
     let live = true;
     setLoading(true);
     setError("");
-    locationLearningApi
-      .locationLearningStatus()
-      .then((next) => {
-        if (live) setData(next);
+    mobileApi
+      .dashboard(true)
+      .then((summary) => {
+        if (live && Number.isFinite(summary?.todayCount))
+          setTodayCount(summary.todayCount);
+        else if (live)
+          setError("暂时无法读取今日答题数");
       })
       .catch((cause) => {
         if (live) setError(cause instanceof Error ? cause.message : String(cause));
@@ -57,10 +59,9 @@ export function LocationLearningGate({
     };
   }, [visible, retry]);
 
-  const threshold = data?.policy.dailyQuestionThreshold ?? 10,
-    todayCount = data?.todayCount ?? 0,
-    qualified = !!data && data.unlocked && todayCount > threshold,
-    remaining = Math.max(0, threshold + 1 - todayCount);
+  const threshold = 10,
+    qualified = todayCount !== null && todayCount > threshold,
+    remaining = Math.max(0, threshold + 1 - (todayCount ?? 0));
 
   async function enter() {
     if (requestBusy.current || !qualified) return;
@@ -115,9 +116,9 @@ export function LocationLearningGate({
               </AnimatedPressable>
             </View>
           ) : null}
-          {loading && !data ? (
+          {loading && todayCount === null ? (
             <ActivityIndicator accessibilityLabel="正在读取今日答题数" />
-          ) : data ? (
+          ) : todayCount !== null ? (
             <View style={s.card}>
               <Text style={s.eyebrow}>今日已答</Text>
               <View testID="location-learning-today-count" style={s.countRow}>

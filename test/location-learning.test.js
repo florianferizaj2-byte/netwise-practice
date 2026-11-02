@@ -128,7 +128,7 @@ test("location learning uses one exact current-certificate leaf and hides answer
     status = f.start();
   assert.equal(status.policy.count, 10);
   assert.equal(status.unlocked, false);
-  assert.equal(status.todayCount, 0);
+  assert.equal(Object.hasOwn(status, "todayCount"), false);
   assert.equal(status.session.total, 10);
   assert.equal(status.session.question.answer, undefined);
   assert.equal(status.session.question.analysis, undefined);
@@ -146,23 +146,21 @@ test("daily qualification requires more than ten current-certificate answers for
   f.addAttempt({ user: "other" });
   f.addAttempt({ createdAt: "2026-10-23T15:59:59.999Z" });
   let state = f.service.status(...f.context);
-  assert.equal(state.todayCount, 10);
   assert.equal(state.unlocked, false);
   assert.throws(() => f.service.permit(...f.context), (error) => error.status === 403);
   f.addAttempt({
     questionId: "other-certificate-question",
   });
   f.questions.push({ ...f.questions[0], id: "other-certificate-question", certificates: ["other-certificate"] });
-  assert.equal(f.service.status(...f.context).todayCount, 10);
+  assert.equal(f.service.status(...f.context).unlocked, false);
   f.addAttempt();
   state = f.service.status(...f.context);
-  assert.equal(state.todayCount, 11);
   assert.equal(state.unlocked, true);
 });
 test("a small unseen question pool does not bypass the daily answer threshold", t => {
   const small=fixture(t,{count:9}), state=small.service.status(...small.context);
   assert.equal(state.remainingCount,9);assert.equal(state.unlocked,false);
-  assert.equal(state.todayCount,0);
+  assert.equal(Object.hasOwn(state, "todayCount"), false);
   assert.throws(()=>small.service.permit(...small.context),/超过 10/);
   const grouped=fixture(t,{count:32,groups:true});
   assert.equal(grouped.service.status(...grouped.context).unlocked,false);
@@ -194,7 +192,7 @@ test('existing 30-question round keeps eight completed answers and finishes afte
   let state=f.service.status(...f.context);
   assert.equal(state.session.completedCount,8); assert.equal(state.session.total,10);
   for(let i=0;i<2;i++) state=f.advance(f.answer(f.dwell(state,1000),['A']));
-  assert.equal(state.unlocked,false); assert.equal(state.todayCount,10); assert.equal(state.session.completedCount,10);
+  assert.equal(state.unlocked,false); assert.equal(state.session.completedCount,10);
   assert.equal(f.db.prepare('SELECT count(*) AS n FROM fixture_attempts').get().n,10);
   f.addAttempt();
   assert.equal(f.service.status(...f.context).unlocked,true);
@@ -358,10 +356,8 @@ test("eleven answers unlock the day; permits are scoped, one-use and cannot be m
   assert.equal(state.unlocked, false);
   assert.equal(state.session.completedCount, 10);
   assert.equal(state.session.correctCount, 0);
-  assert.equal(state.todayCount, 10);
   assert.equal(f.service.status(...f.context).unlocked, false);
   f.addAttempt();
-  assert.equal(f.service.status(...f.context).todayCount, 11);
   assert.equal(f.service.status(...f.context).unlocked, true);
   const permit = f.service.permit(...f.context).permit;
   assert.throws(() => f.service.consume("other", f.context[1], permit));
@@ -537,7 +533,6 @@ test("location learning API authenticates, validates strict timing payloads and 
     state = advanced.data;
   }
   assert.equal(state.unlocked, false);
-  assert.equal(state.todayCount, 10);
   assert.equal(store.allA(owner.id).length, 10);
   assert.equal(store.allA(owner.id).filter((a) => a.correct).length, 0);
   assert.equal(store.allA(other.id).length, 0);
@@ -564,9 +559,15 @@ test("location learning API authenticates, validates strict timing payloads and 
     assert.equal(response.status, 200, await response.text());
   }
   const qualified = (await req()).data;
-  assert.equal(qualified.todayCount, 14);
+  assert.equal(Object.hasOwn(qualified, "todayCount"), false);
   assert.equal(store.allA(owner.id).length, 14);
   assert.equal(qualified.unlocked, true);
+  const summaryResponse = await fetch(
+    `http://127.0.0.1:${server.address().port}/api/dashboard?summary=1`,
+    { headers: { Authorization: "Bearer " + token } },
+  );
+  assert.equal(summaryResponse.status, 200);
+  assert.equal((await summaryResponse.json()).todayCount, 14);
   const permit = (await req("/permit", {})).data.permit;
   assert.equal((await req("/consume", { permit })).status, 200);
   assert.equal((await req("/consume", { permit })).status, 403);

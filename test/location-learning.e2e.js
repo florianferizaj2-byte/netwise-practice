@@ -72,8 +72,8 @@ fs.writeFileSync(
 );
 fs.writeFileSync(
   path.join(entry, "main.tsx"),
-  `import React,{useState}from'react';import{createRoot}from'react-dom/client';import{ThemeProvider}from ${JSON.stringify(source("src/theme.ts"))};import{LocationLearningGate}from ${JSON.stringify(source("src/screens/LocationLearningGate.android.tsx"))};import{setSessionToken}from ${JSON.stringify(source("src/api/client.ts"))};import{locationLearningApi}from ${JSON.stringify(source("src/api/locationLearning.android.ts"))};
-function Harness(){const[visible,setVisible]=useState(true),[entered,setEntered]=useState(false);return <ThemeProvider><button onClick={()=>setVisible(true)}>重新进入专项学习</button>{entered&&<p role="status">已通过服务端通行凭据验证</p>}<LocationLearningGate visible={visible} onClose={()=>setVisible(false)} onEnter={async()=>{const c=await locationLearningApi.locationLearningOpenCredentials();const r=await fetch(c.apiBaseUrl+'/location-learning/consume',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+c.sessionToken},body:JSON.stringify({permit:c.permit})});if(!r.ok)throw Error('fixture permit rejected');setEntered(true)}}/></ThemeProvider>};await setSessionToken(${JSON.stringify(token)});createRoot(document.getElementById('root')).render(<Harness/>);`,
+  `import React,{useState}from'react';import{createRoot}from'react-dom/client';import{ThemeProvider}from ${JSON.stringify(source("src/theme.ts"))};import{LocationLearningGate}from ${JSON.stringify(source("src/screens/LocationLearningGate.android.tsx"))};import{mobileApi,setSessionToken}from ${JSON.stringify(source("src/api/client.ts"))};import{locationLearningApi}from ${JSON.stringify(source("src/api/locationLearning.android.ts"))};
+function Harness(){const[visible,setVisible]=useState(true),[entered,setEntered]=useState(false);return <ThemeProvider><button onClick={()=>setVisible(true)}>重新进入专项学习</button>{entered&&<p role="status">已通过服务端通行凭据验证</p>}<LocationLearningGate visible={visible} onClose={()=>setVisible(false)} onEnter={async()=>{const c=await locationLearningApi.locationLearningOpenCredentials();const r=await fetch(c.apiBaseUrl+'/location-learning/consume',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+c.sessionToken},body:JSON.stringify({permit:c.permit})});if(!r.ok)throw Error('fixture permit rejected');setEntered(true)}}/></ThemeProvider>};await setSessionToken(${JSON.stringify(token)});await mobileApi.cacheSession({user:{id:${JSON.stringify(owner.id)},username:'location_browser_user',certificateId:'network-engineer'},certificates:[]});createRoot(document.getElementById('root')).render(<Harness/>);`,
 );
 const aliases = [
   {
@@ -178,6 +178,18 @@ try {
 
   await page.getByRole("button", { name: "退出专项学习", exact: true }).click();
   clock += 86400000;
+  addAttempt();
+  const attempts = store.db
+    .prepare("SELECT id,data FROM attempts WHERE user_id=?")
+    .all(owner.id);
+  for (const row of attempts) {
+    const attempt = JSON.parse(row.data);
+    attempt.createdAt = new Date(Date.now() - 86400000).toISOString();
+    store.db.prepare("UPDATE attempts SET data=? WHERE id=?").run(
+      JSON.stringify(attempt),
+      row.id,
+    );
+  }
   await page.getByRole("button", { name: "重新进入专项学习", exact: true }).click();
   await expect(page.getByTestId("location-learning-today-count")).toHaveText("0题");
   await expect(page.getByRole("button", { name: "进入模拟定位学习", exact: true })).toHaveCount(0);

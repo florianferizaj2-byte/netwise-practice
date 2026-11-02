@@ -108,16 +108,20 @@ export const locationLearningApi = {
   },
   async locationLearningOpenCredentials(): Promise<LocationLearningCredentials> {
     const snapshot = mobileSessionSnapshot();
-    const status = await this.locationLearningStatus();
+    const [status, dashboard] = await Promise.all([
+      this.locationLearningStatus(),
+      mobileApi.dashboard(true),
+    ]);
     assertCurrent(snapshot);
-    const threshold = status.policy?.dailyQuestionThreshold ?? 10;
+    const threshold = 10,
+      todayCount = dashboard?.todayCount;
     if (
-      !status.unlocked ||
-      !Number.isFinite(status.todayCount) ||
-      status.todayCount <= threshold
+      typeof todayCount !== 'number' ||
+      !Number.isFinite(todayCount) ||
+      todayCount <= threshold
     )
       throw new Error(
-        `今日已答 ${Number.isFinite(status.todayCount) ? status.todayCount : 0} 题，需超过 ${threshold} 题才能进入`,
+        `今日已答 ${Number.isFinite(todayCount) ? todayCount : 0} 题，需超过 ${threshold} 题才能进入`,
       );
     const { permit } = await request<{ permit: string }>('/permit', {});
     assertCurrent(snapshot);

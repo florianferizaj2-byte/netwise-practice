@@ -8,7 +8,7 @@ import { mobileModules, memoryStorage, deferred } from './mobile-fixture.js';
 const response = (body, status = 200) => new Response(JSON.stringify(body), { status });
 const status = {
   userId: 'learner', certificateId: 'network-engineer', unlocked: true,
-  todayCount: 11, policy: { dailyQuestionThreshold: 10 },
+  policy: { count: 10 },
 };
 
 async function fixture(t) {
@@ -49,6 +49,14 @@ async function fixture(t) {
   });
   const { locationLearningApi: api } = await import(moduleUrl(source));
   await client.setSessionToken('learner-token');
+  await client.mobileApi.cacheSession({
+    user: {
+      id: 'learner',
+      username: 'learner',
+      certificateId: 'network-engineer',
+    },
+    certificates: [],
+  });
   return { api, client, identities, storage, records };
 }
 
@@ -56,26 +64,27 @@ test('Android adapter requires more than ten daily answers before issuing native
   const { api, client, identities } = await fixture(t);
   const requests = [];
   globalThis.fetch = async (url) => {
-    requests.push(new URL(url).pathname);
-    return response({ ...status, unlocked: false });
+    const path = new URL(url).pathname;
+    requests.push(path);
+    return response(path.endsWith('/dashboard') ? { todayCount: 10 } : status);
   };
   await assert.rejects(api.locationLearningOpenCredentials(), /超过 10/);
-  assert.deepEqual(requests, ['/api/location-learning']);
+  assert.deepEqual(requests, ['/api/location-learning', '/api/dashboard']);
   assert.deepEqual(identities, []);
   await client.clearSessionToken();
   await assert.rejects(api.locationLearningStatus(), (error) => error.status === 401);
-  assert.equal(requests.length, 1);
+  assert.equal(requests.length, 2);
 });
 
-test('Android fails closed when the backend omits the daily answer count', async t => {
+test('Android fails closed when the existing dashboard summary omits todayCount', async t => {
   const {api}=await fixture(t);
-  globalThis.fetch=async()=>response({...status,todayCount:undefined,policy:{count:30}});
+  globalThis.fetch=async url=>response(new URL(url).pathname.endsWith('/dashboard')?{}:status);
   await assert.rejects(api.locationLearningOpenCredentials(),/超过 10/);
 });
 
 test('exactly ten daily answers remain locked even when a stale server says unlocked', async t => {
   const {api,identities}=await fixture(t);
-  globalThis.fetch=async()=>response({...status,todayCount:10});
+  globalThis.fetch=async url=>response(new URL(url).pathname.endsWith('/dashboard')?{todayCount:10}:status);
   await assert.rejects(api.locationLearningOpenCredentials(),/超过 10/);
   assert.deepEqual(identities,[]);
 });
@@ -85,15 +94,17 @@ test('Android credentials carry the real bearer/version and logout immediately r
   const requests = [];
   globalThis.fetch = async (url, init) => {
     requests.push({ path: new URL(url).pathname, init });
-    return response(url.endsWith('/permit') ? { permit: 'fixture-permit' } : status);
+    if (url.endsWith('/permit')) return response({ permit: 'fixture-permit' });
+    if (new URL(url).pathname.endsWith('/dashboard')) return response({ todayCount: 11 });
+    return response({ ...status, unlocked: false });
   };
   const credentials = await api.locationLearningOpenCredentials();
   assert.equal(credentials.sessionToken, 'learner-token');
   assert.equal(credentials.permit, 'fixture-permit');
   assert.ok(credentials.appVersion);
-  assert.equal(requests[1].init.method, 'POST');
-  assert.equal(requests[1].init.headers.Authorization, 'Bearer learner-token');
-  assert.equal(requests[1].init.headers['X-App-Version'], credentials.appVersion);
+  assert.equal(requests[2].init.method, 'POST');
+  assert.equal(requests[2].init.headers.Authorization, 'Bearer learner-token');
+  assert.equal(requests[2].init.headers['X-App-Version'], credentials.appVersion);
   assert.deepEqual(identities, ['learner:network-engineer']);
   await client.clearSessionToken();
   assert.deepEqual(identities, ['learner:network-engineer', null]);
@@ -105,7 +116,9 @@ test('existing certificate switching revokes Android access without changing the
     if (url.endsWith('/auth/certificate')) return response({ user: {
       id: 'learner', username: 'learner', certificateId: 'hcia-datacom',
     } });
-    return response(url.endsWith('/permit') ? { permit: 'fixture-permit' } : status);
+    if (url.endsWith('/permit')) return response({ permit: 'fixture-permit' });
+    if (new URL(url).pathname.endsWith('/dashboard')) return response({ todayCount: 11 });
+    return response(status);
   };
   await api.locationLearningOpenCredentials();
   await client.mobileApi.selectCertificate('hcia-datacom');
@@ -117,6 +130,7 @@ test('a late old-session permit or 401 cannot grant access or clear a new accoun
   const permit = deferred(), started = deferred();
   globalThis.fetch = async (url) => {
     if (url.endsWith('/permit')) { started.resolve(); return permit.promise; }
+    if (new URL(url).pathname.endsWith('/dashboard')) return response({ todayCount: 11 });
     return response(status);
   };
   const opening = api.locationLearningOpenCredentials();
