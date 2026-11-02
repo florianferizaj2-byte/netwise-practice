@@ -2,7 +2,7 @@ import fs from 'node:fs';
 
 const bundled = JSON.parse(fs.readFileSync(new URL('./mobile-release.json', import.meta.url), 'utf8'));
 
-/** A stale preserved .env must not undo the minimum version shipped in this release. */
+/** Only a newer, complete release override can replace the bundled support policy. */
 export function resolveMobileRelease(environment, compare) {
   const configuredLatest = environment.MOBILE_LATEST_VERSION?.trim();
   const configuredMinimum = environment.MOBILE_MINIMUM_VERSION?.trim();

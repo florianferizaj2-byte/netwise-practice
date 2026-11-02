@@ -224,7 +224,7 @@ try {
     ["community", "共享 AI 题库"],
     ["chat", "考匠社区"],
     ["settings", "设置"],
-    ["admin", "管理员面板"],
+    ["admin", "总览工作台"],
     ["chapters", "章节练习"],
   ]) {
     await page.goto(`${base}/#${route}`);
@@ -234,7 +234,7 @@ try {
   }
   // The badge renders after the API returns a populated membership list.
   await page.goto(base + "/#admin");
-  await page.getByRole("tab", { name: "兑换码", exact: true }).click();
+  await page.getByRole("link", { name: "会员与兑换码", exact: true }).click();
   const membershipRows = page.locator(".membership-admin tbody tr");
   await expect(membershipRows).toHaveCount(30);
   await expect(membershipRows.locator(".member-tier")).toHaveCount(30);

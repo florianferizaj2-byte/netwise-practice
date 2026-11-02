@@ -8,7 +8,7 @@
 
 [v1.0.3 APK](kaojiang-v1.0.3.apk) · [SHA-256](kaojiang-v1.0.3.apk.sha256) · [更新说明](../docs/release-v1.0.3.md)。积分余额与记录、每日签到、关于和紧凑错题页已实现；正式签名、字体、原生安全区与页面代码内容检查通过。新增正余额可发起、结算允许负分和普通练习即时反馈。GitHub 发布与线上部署、真机安装分别验收。
 
-[v0.4.6 APK](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.6/kaojiang-v0.4.6.apk) · [SHA-256](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.6/kaojiang-v0.4.6.apk.sha256) · [发布页](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v0.4.6) · [构建说明](../docs/release-v0.4.6.md) · [服务器更新步骤](../docs/DEPLOY-v0.4.6.md)。
+[v0.4.8 APK](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.8/kaojiang-v0.4.8.apk) · [SHA-256](https://github.com/florianferizaj2-byte/netwise-practice/releases/download/v0.4.8/kaojiang-v0.4.8.apk.sha256) · [发布页](https://github.com/florianferizaj2-byte/netwise-practice/releases/tag/v0.4.8) · [构建与兼容说明](../docs/release-v0.4.8.md) · [服务器更新步骤](../docs/DEPLOY-v0.4.8.md)。
 
 首页只保留公告和学习内容，移除顶部大标题/日期。管理员在“我的 → 管理中心”管理账号及公告；公告无需重装即可更新，支持离线缓存。新管理功能需要同步部署后端，详见[手机管理与公告说明](../docs/MOBILE-ADMIN-ANNOUNCEMENTS.md)。虚拟定位学习开启空闲悬浮窗时提示等待定位成功，再由用户手动开始。
 

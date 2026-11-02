@@ -30,7 +30,10 @@ git status --short
 git branch --show-current
 Get-ChildItem -LiteralPath server/question-banks -Directory
 npm run bank:validate
+npm run bank:report
 ~~~
+
+`bank:report` 是只读的覆盖缺口报表：按证书列出每个大纲模块的权重、目标题量、现有题量和缺口，并单独列出不在大纲中的章节。补题前用它确认优先级；大纲外章节会阻止服务启动，退出码为 1。
 
 先判断任务类型：
 
@@ -265,3 +268,9 @@ git push origin main
 ~~~
 
 只有如实记录校验、测试和构建结果，才可以声称题库扩展完成。
+
+## 12. 网页后台修订交接
+
+管理后台将内置题修改保存为隔离批次，不覆盖正式题库。完整流程见 [admin-console.md](admin-console.md)。修订使用新题号，并在逐题 provenance 的 `replacement` 中记录原题 ID、证书、原题内容摘要与纠错依据；独立复核摘要同时绑定替换关系。只有实质修改且原题仅属于一个证书时允许替换，跨证书共用原题需另行设计迁移。
+
+代码接入发布包后，启动同步会验证替换基线、保留旧题及学习历史，并将旧题下架。仅改答案或解析的版本也不会与旧题指纹冲突；普通新题继续受唯一指纹与质量检查约束。导出不是上线：必须继续核对真实加载结果、升级后重启和原有考试恢复。

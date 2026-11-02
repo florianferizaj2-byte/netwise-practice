@@ -11,7 +11,7 @@ const current = JSON.parse(fs.readFileSync(new URL('../mobile/package.json', imp
 const bundled = JSON.parse(fs.readFileSync(new URL('../server/mobile-release.json', import.meta.url), 'utf8'));
 const compare = (a, b) => { const x = a.split('.').map(Number), y = b.split('.').map(Number); return x.map((value, i) => value - y[i]).find((value) => value !== 0) || 0; };
 
-test('shipped download policy matches the APK version and cannot be downgraded by a preserved environment', () => {
+test('shipped support policy survives stale environment pins, including the previous forced minimum', () => {
   assert.equal(bundled.latestVersion, current);
   assert.equal(bundled.minimumVersion, '1.0.1');
   assert.ok(compare(bundled.minimumVersion,current)<=0);
@@ -44,6 +44,7 @@ test('clients below the minimum receive 426; supported v1.0.1 is optional and th
   assert.equal((await fetch(`${base}/auth/me`,{headers:{'X-Client':'mobile','X-App-Version':'1.0.1'}})).status,200);
   const info = await fetch(`${base}/mobile/version?version=${current}`).then((response) => response.json());
   assert.equal(info.forceUpdate, false);
+  assert.equal(info.updateAvailable, false);
   assert.equal((await fetch(`${base}/auth/me`, { headers: { 'X-Client': 'mobile', 'X-App-Version': current } })).status, 200);
   assert.equal((await fetch(`${base}/auth/me`)).status, 200);
   const browserHeaders = { 'X-Client':'mobile', 'X-App-Version':'0.4.5', 'User-Agent':'Mozilla/5.0 (Linux; Android)', 'Sec-Fetch-Dest':'empty' };

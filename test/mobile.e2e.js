@@ -5,7 +5,7 @@ import express from 'express';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { createApp } from '../server/index.js';
+import { createVerifiedTestApp as createApp, verifiedFetch } from './helpers/account-mail.js';
 import { createStore } from '../server/store.js';
 
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'aceexam-mobile-e2e-'));
@@ -29,7 +29,7 @@ const headers = {
 };
 let browser;
 try {
-  const registration = await fetch(`${base}/api/auth/register`, {
+  const registration = await verifiedFetch(`${base}/api/auth/register`, {
     method: 'POST',
     headers,
     body: JSON.stringify({

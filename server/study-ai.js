@@ -51,7 +51,7 @@ export function createStudyAI(provider, store) {
           !unsafeStudyTeacherAnswer(row.answer)).slice(-3).map((row) => ({
             question: normalizeStudyText(row.question).slice(0, 600), answer: row.answer,
           })),
-        ...(!questionPending ? { reference: normalizeStudyText(context.reference).slice(0, 3000) } : {}),
+        ...(!questionPending && !interactiveTutor ? { reference: normalizeStudyText(context.reference).slice(0, 3000) } : {}),
         ...(context.question ? { question: questionPending ? publicStudyQuestion(context.question) : context.question,
           submitted: !!context.submitted } : {}),
       };
