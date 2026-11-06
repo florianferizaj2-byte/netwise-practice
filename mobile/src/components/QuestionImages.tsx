@@ -15,21 +15,22 @@ function items(question: Question): QuestionImage[] {
     .filter((item): item is QuestionImage => Boolean(item?.src));
 }
 
-function Picture({ image, index }: { image: QuestionImage; index: number }) {
+function Picture({ image, index, resolveLocalImage }: { image: QuestionImage; index: number; resolveLocalImage?: (src: string) => string | undefined }) {
   const styles = useThemedStyles(createStyles);
   const { width } = useWindowDimensions();
   const [ratio, setRatio] = useState(1.5);
   const [failed, setFailed] = useState(false);
-  const uri = mobileApi.communityImageUrl(image.src);
+  const uri = resolveLocalImage ? resolveLocalImage(image.src) || '' : mobileApi.communityImageUrl(image.src);
   useEffect(() => {
     setFailed(false);
+    if (!uri) return;
     Image.getSize(uri, (w, h) => setRatio(w > 0 && h > 0 ? w / h : 1.5), () => setRatio(1.5));
   }, [uri]);
   const pictureWidth = Math.min(width - spacing.lg * 4, 600);
   const pictureHeight = Math.max(110, Math.min(480, pictureWidth / ratio));
   return (
     <View style={styles.card}>
-      {failed ? (
+      {failed || !uri ? (
         <Text style={styles.missing}>第 {index + 1} 张题图暂时无法加载</Text>
       ) : (
         <Image
@@ -45,11 +46,11 @@ function Picture({ image, index }: { image: QuestionImage; index: number }) {
   );
 }
 
-export function QuestionImages({ question }: { question: Question }) {
+export function QuestionImages({ question, resolveLocalImage }: { question: Question; resolveLocalImage?: (src: string) => string | undefined }) {
   const images = items(question);
   if (!images.length) return null;
   return <View style={{ gap: spacing.xs }}>{images.map((image, index) =>
-    <Picture image={image} index={index} key={`${image.src}-${index}`} />,
+    <Picture image={image} index={index} resolveLocalImage={resolveLocalImage} key={`${image.src}-${index}`} />,
   )}</View>;
 }
 

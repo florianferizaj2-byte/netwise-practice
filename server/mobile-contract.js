@@ -4,6 +4,7 @@ export const MOBILE_API_REVISION = 1;
 // A capability means its actual protocol routes are mounted, not that an AI
 // provider, membership balance or a third-party payment has been configured.
 const protocols = {
+  'offline-packs-v1': ['GET /api/offline/certificates/:certificateId/manifest', 'GET /api/offline/certificates/:certificateId/packages/:version', 'GET /api/offline/certificates/:certificateId/attempts', 'POST /api/offline/certificates/:certificateId/attempts'],
   'voice-packs-v1': ['GET /api/voice-packs', 'GET /api/voice-packs/:id/manifest', 'GET /voice-packs/assets/:id'],
   'points-v1': ['GET /api/account/points/wallet', 'GET /api/account/points/services', 'GET /api/account/points/operations', 'GET /api/account/points/receipt'],
   'account-security-v1': ['GET /api/auth/security-config', 'GET /api/auth/security', 'POST /api/auth/change-password'],

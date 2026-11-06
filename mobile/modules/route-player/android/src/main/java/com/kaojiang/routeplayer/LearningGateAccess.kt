@@ -11,9 +11,10 @@ import java.security.MessageDigest
 
 /** In-memory authorization only. No bearer token or client-side completion flag is persisted. */
 object LearningGateAccess {
-    private data class Grant(val scope: String, val issued: Long, val expires: Long)
+    private data class Grant(val scope: String, val issued: Long, val expires: Long, val offlineDay: String? = null)
     private val handler = Handler(Looper.getMainLooper())
     private var scope: String? = null
+    private var offlineScope: String? = null
     private var grant: Grant? = null
     private var expiry: Runnable? = null
 
@@ -25,6 +26,20 @@ object LearningGateAccess {
         if (scope != next) { revoke(context); scope = next }
     }
 
+    @Synchronized fun setOfflineIdentity(context: Context, value: String?) {
+        if (offlineScope != value) { revoke(context); offlineScope = value }
+    }
+
+    @Synchronized internal fun acceptOffline(context: Context, expectedScope: String, snapshot: OfflineLearningGate.Snapshot) {
+        check(offlineScope == expectedScope) { "账号或证书已改变，请从考匠重新进入" }
+        val now = System.currentTimeMillis()
+        check(snapshot.day == OfflineLearningGate.day(now)) { "学习日期已变化，请重新进入" }
+        check(snapshot.count >= OfflineLearningGate.MINIMUM_ANSWERS) {
+            "今日已答 " + snapshot.count + " 题，需要答满 11 题"
+        }
+        remember(context, expectedScope, OfflineLearningGate.untilMidnight(now), snapshot.day)
+    }
+
     @Synchronized fun acceptValidated(context: Context, body: String) {
         val response = JSONObject(body)
         check(response.optBoolean("allowed", false)) { "请先完成今天的专项学习题" }
@@ -33,9 +48,13 @@ object LearningGateAccess {
         check(response.getString("day").matches(Regex("\\d{4}-\\d{2}-\\d{2}"))) { "学习资格日期无效" }
         val duration = response.getLong("validForMs")
         check(duration in 1..86_400_000L) { "今日学习资格已过期" }
+        remember(context, authorizedScope, duration)
+    }
+
+    private fun remember(context: Context, authorizedScope: String, duration: Long, offlineDay: String? = null) {
         expiry?.let(handler::removeCallbacks)
         val issued = SystemClock.elapsedRealtime()
-        val next = Grant(authorizedScope, issued, issued + duration)
+        val next = Grant(authorizedScope, issued, issued + duration, offlineDay)
         grant = next
         expiry = Runnable { synchronized(this) { if (grant == next) revoke(context.applicationContext) } }
             .also { handler.postDelayed(it, duration) }
@@ -44,7 +63,9 @@ object LearningGateAccess {
     @Synchronized fun isAllowed(): Boolean {
         val current = grant ?: return false
         val elapsed = SystemClock.elapsedRealtime()
-        return current.scope == scope && elapsed >= current.issued && elapsed < current.expires
+        val validScope = if (current.offlineDay == null) current.scope == scope
+            else current.scope == offlineScope && current.offlineDay == OfflineLearningGate.day()
+        return validScope && elapsed >= current.issued && elapsed < current.expires
     }
 
     @Synchronized fun revoke(context: Context) {

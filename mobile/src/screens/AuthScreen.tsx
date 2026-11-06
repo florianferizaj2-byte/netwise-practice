@@ -22,9 +22,10 @@ import type { AuthResponse } from '../api/client';
 type AuthScreenProps = {
   onAuthenticated: (response: AuthResponse) => void;
   onPreview: () => void;
+  onOffline?: () => void;
 };
 
-export function AuthScreen({ onAuthenticated, onPreview }: AuthScreenProps) {
+export function AuthScreen({ onAuthenticated, onPreview, onOffline }: AuthScreenProps) {
   const { colors } = useTheme();
   const styles = useThemedStyles(createStyles, iosStyles.auth);
   const [mode, setMode] = useState<AuthMode | 'reset'>('login');
@@ -191,6 +192,10 @@ export function AuthScreen({ onAuthenticated, onPreview }: AuthScreenProps) {
           {mode !== 'login' && !!policyError && <><Text accessibilityRole="alert" style={styles.errorText}>{policyError}</Text><AnimatedPressable onPress={() => setPolicyRevision(value => value + 1)} style={styles.previewButton}><Text style={styles.previewButtonText}>重新读取</Text></AnimatedPressable></>}
           {!!notice && <Text accessibilityRole="text" style={styles.note}>{notice}</Text>}
           {mode === 'login' && emailRequired && <AnimatedPressable disabled={busy} onPress={() => setMode('reset')} style={styles.previewButton}><Text style={styles.previewButtonText}>忘记密码？</Text></AnimatedPressable>}
+
+          {onOffline && <AnimatedPressable accessibilityRole="button" onPress={onOffline} style={[styles.previewButton, { minHeight: 48, justifyContent: 'center' }]}>
+            <Text style={styles.previewButtonText}>打开本机学习包</Text>
+          </AnimatedPressable>}
 
           {__DEV__ && (
             <AnimatedPressable onPress={onPreview} style={styles.previewButton}>

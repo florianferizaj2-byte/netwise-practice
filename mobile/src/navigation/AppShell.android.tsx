@@ -1,3 +1,9 @@
+import { OfflineDeviceLibrary, type OfflineLibrarySelection } from '../offline/OfflineDeviceLibrary.android';
+import { OfflineStudyScreen } from '../offline/OfflineStudyScreen.android';
+import { offlineProfileFromSession, readOfflineDeviceProfile, saveOfflineDeviceProfile, type OfflineDeviceProfile } from '../offline/offlineDeviceProfile.android';
+import { useOfflineStudySync } from '../offline/offlineStudySync.android';
+import { setOfflineRoutePlayerIdentity } from '../../modules/route-player/index.android';
+import { offlineOwnerKey } from '../offline/offlineStudyStore.android';
 import { AiIcon } from '../screens/ai-learning/AiElements';
 import { inlineAiGenerationPage } from '../aiGenerationPresentation';
 import {PracticeSyncNotice} from '../components/PracticeSyncNotice.android';
@@ -90,6 +96,25 @@ export function AppShell() {
   const styles = useThemedStyles(createStyles, iosStyles.shell);
   const [isPreview, setIsPreview] = useState(false);
   const [session, setSession] = useState<AuthResponse | null>(null);
+  const [offlineProfile, setOfflineProfile] = useState<OfflineDeviceProfile | null>(null);
+  const [offlineLibraryOpen, setOfflineLibraryOpen] = useState(false);
+  const [offlineSelection, setOfflineSelection] = useState<OfflineLibrarySelection | null>(null);
+  const offlineProfileChanged = useRef(false);
+  useEffect(() => {
+    let live = true;
+    void readOfflineDeviceProfile().then((profile) => {
+      if (live && !offlineProfileChanged.current) setOfflineProfile(profile);
+    }).catch(() => undefined);
+    return () => { live = false; };
+  }, []);
+  useEffect(() => {
+    if (!session) return;
+    const profile = offlineProfileFromSession(session);
+    offlineProfileChanged.current = true;
+    setOfflineProfile(profile);
+    void saveOfflineDeviceProfile(profile).catch(() => undefined);
+    setOfflineSelection((selection) => selection?.owner.userId === profile.userId ? selection : null);
+  }, [session]);
   const [activeTab, setActiveTab] = useState<AppTab>('today');
   const [dailyPracticeOpen, setDailyPracticeOpen] = useState(false);
   const [aiExamEntryKey, setAiExamEntryKey] = useState(0);
@@ -97,6 +122,13 @@ export function AppShell() {
   const appActive = useAppActive();
   useEffect(()=>{if(!session)void practiceVoice.setAccount(null);else if(appActive)void practiceVoice.setAccount(String(session.user.id));else practiceVoice.stop();},[session?.user.id,appActive]);
   usePracticeAttemptOwner(isPreview?undefined:session?.user,appActive);
+  useOfflineStudySync(isPreview ? undefined : session?.user, appActive);
+  useEffect(() => {
+    const user = isPreview ? undefined : session?.user;
+    const scope = offlineSelection ? offlineOwnerKey(offlineSelection.owner) : user?.certificateId ? offlineOwnerKey({ userId: user.id, certificateId: user.certificateId }) : null;
+    void setOfflineRoutePlayerIdentity(scope).catch(() => undefined);
+    return () => { void setOfflineRoutePlayerIdentity(null).catch(() => undefined); };
+  }, [isPreview, session?.user.id, session?.user.certificateId, offlineSelection?.owner.userId, offlineSelection?.owner.certificateId]);
   const { data: dashboard } = useCachedQuery(
     '/dashboard?summary=1',
     mobileApi.dashboard,
@@ -132,7 +164,7 @@ export function AppShell() {
   const knownAiJobStatuses = useRef(new Map<string, AiQuestionGenerationJob['status']>());
   const [certificatePickerOpen, setCertificatePickerOpen] = useState(false);
   const [sessionRestored, setSessionRestored] = useState(false);
-  useLaunchStage('route', sessionRestored);
+  useLaunchStage('route', sessionRestored || !!offlineProfile);
   const [updateRelease, setUpdateRelease] = useState<AppVersionResponse | null>(
     null,
   );
@@ -358,6 +390,11 @@ export function AppShell() {
   }
 
   function handleLogout() {
+    offlineProfileChanged.current = true;
+    setOfflineProfile(null);
+    setOfflineLibraryOpen(false);
+    setOfflineSelection(null);
+    void saveOfflineDeviceProfile(null).catch(() => undefined);
     if (session) void mobileApi.logout().catch(() => undefined);
     setSession(null);
     setIsPreview(false);
@@ -446,7 +483,18 @@ export function AppShell() {
     setVersionCheckKey((current) => current + 1);
   }
 
-  if (!sessionRestored) {
+  const onOpenOffline = offlineProfile ? () => setOfflineLibraryOpen(true) : undefined;
+  if (offlineLibraryOpen && offlineProfile) {
+    return <>
+      <StatusBar style={resolvedMode === 'dark' ? 'light' : 'dark'} />
+      <OfflineDeviceLibrary key={offlineProfile.userId} profile={offlineProfile}
+        onBack={() => { setOfflineSelection(null); setOfflineLibraryOpen(false); }} onOpen={setOfflineSelection} />
+      {offlineSelection && offlineSelection.owner.userId === offlineProfile.userId &&
+        <OfflineStudyScreen owner={offlineSelection.owner} installed={offlineSelection.installed} onClose={() => setOfflineSelection(null)} />}
+    </>;
+  }
+
+  if (!sessionRestored && !offlineProfile) {
     return <VersionCheckingScreen />;
   }
 
@@ -455,6 +503,7 @@ export function AppShell() {
       <UpdateRequiredScreen
         release={updateRelease}
         onRetry={retryVersionCheck}
+        onOffline={onOpenOffline}
       />
     );
   }
@@ -466,6 +515,7 @@ export function AppShell() {
         <AuthScreen
           onAuthenticated={handleAuthenticated}
           onPreview={() => setIsPreview(true)}
+          onOffline={onOpenOffline}
         />
       </>
     );
@@ -507,6 +557,9 @@ export function AppShell() {
       <View style={styles.screen}>
         {!isPreview && !!backendNotice && <View testID="backend-connection-notice" accessibilityRole="alert" style={{ paddingHorizontal: spacing.md, paddingVertical: 12, gap: 8, backgroundColor: colors.background, borderBottomWidth: 1, borderBottomColor: colors.border }}>
           <Text style={{ color: colors.text, fontSize: 14, lineHeight: 21 }}>{backendNotice}</Text>
+          {onOpenOffline && <AnimatedPressable accessibilityRole="button" onPress={onOpenOffline} style={{ minHeight: 48, alignSelf: 'flex-start', justifyContent: 'center', paddingHorizontal: 12 }}>
+            <Text style={{ color: colors.brand, fontSize: 15, fontWeight: '700' }}>打开本机学习包</Text>
+          </AnimatedPressable>}
           <AnimatedPressable accessibilityRole="button" onPress={() => setVersionCheckKey(key => key + 1)} style={{ alignSelf: 'flex-start', paddingVertical: 6, paddingHorizontal: 12 }}>
             <Text style={{ color: colors.brand, fontSize: 14, fontWeight: '500' }}>重新连接</Text>
           </AnimatedPressable>
@@ -622,9 +675,11 @@ function VersionCheckingScreen() {
 
 function UpdateRequiredScreen({
   onRetry,
+  onOffline,
   release,
 }: {
   onRetry: () => void;
+  onOffline?: () => void;
   release: AppVersionResponse;
 }) {
   const { resolvedMode } = useTheme();
@@ -742,6 +797,9 @@ function UpdateRequiredScreen({
               改用浏览器下载新版
             </Text>
             <AppIcon style={styles.updateBrowserButtonArrow}>→</AppIcon>
+          </AnimatedPressable>}
+          {onOffline && <AnimatedPressable accessibilityRole="button" onPress={onOffline} style={styles.updateRetryButton}>
+            <Text style={styles.updateRetryText}>打开本机学习包</Text>
           </AnimatedPressable>}
           <AnimatedPressable
             accessibilityLabel="重新检查版本"

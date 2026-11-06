@@ -1085,6 +1085,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
       response,
       clientAttemptId,
       certificateId,
+      offlineMetadata,
     ) {
       const q = getQ(questionId);
       if (!q) throw new Error("题目不存在");
@@ -1098,7 +1099,10 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         : null;
       if (previous) {
         const saved = JSON.parse(previous.data);
-        if ((certificateId && saved.certificateId && certificateId !== saved.certificateId) || saved.questionId !== questionId || JSON.stringify([...saved.selected].sort()) !== JSON.stringify([...selected].sort()) || saved.response !== response)
+        if ((certificateId && saved.certificateId && certificateId !== saved.certificateId) || saved.questionId !== questionId || JSON.stringify([...saved.selected].sort()) !== JSON.stringify([...selected].sort()) || saved.response !== response ||
+          (offlineMetadata && (saved.mode !== mode || saved.timeMs !== timeMs ||
+            saved.offlinePackVersion !== offlineMetadata.packVersion ||
+            Date.parse(saved.createdAt) !== offlineMetadata.occurredAt)))
           throw Object.assign(new Error("这次作答标识已被使用，请重新进入练习"), { status: 409 });
         return { ...saved, answer: q.answer, analysis: q.analysis,
           ...(q.type === "short_answer" ? { expectedAnswer: q.expectedAnswer } : {}) };
@@ -1121,7 +1125,11 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         knowledgePoint: q.targetKnowledgePoint || q.knowledgePoint,
         practicedKnowledgePoint: q.knowledgePoint,
         ...((certificateId || (q.certificates?.length === 1 ? q.certificates[0] : null)) ? { certificateId: certificateId || q.certificates[0] } : {}),
-        createdAt: new Date().toISOString(),
+        createdAt: new Date(offlineMetadata?.occurredAt ?? Date.now()).toISOString(),
+        ...(offlineMetadata ? {
+          offlinePackVersion: offlineMetadata.packVersion,
+          receivedAt: new Date(offlineMetadata.receivedAt).toISOString(),
+        } : {}),
       };
       db.exec("SAVEPOINT attempt");
       try {

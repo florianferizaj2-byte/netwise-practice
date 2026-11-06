@@ -7,9 +7,9 @@ import { QuestionImages } from './QuestionImages';
 
 // One renderer for the real exam and location-learning exam. Changing its
 // typography, option alignment or hit areas keeps both experiences identical.
-export const ExamQuestionCard = memo(function ExamQuestionCard({ question, index, selected, disabled, onChoose, children }: {
+export const ExamQuestionCard = memo(function ExamQuestionCard({ question, index, selected, disabled, onChoose, children, resolveLocalImage }: {
   question: Question; index: number; selected: string[]; disabled?: boolean;
-  onChoose: (letter: string) => void; children?: ReactNode;
+  onChoose: (letter: string) => void; children?: ReactNode; resolveLocalImage?: (src: string) => string | undefined;
 }) {
   const s = useThemedStyles(styles);
   const { fontScale } = useWindowDimensions();
@@ -17,7 +17,7 @@ export const ExamQuestionCard = memo(function ExamQuestionCard({ question, index
   return <View style={s.card}>
     {!!question.sharedStem && <Text style={s.sharedStem}>{question.sharedStem}</Text>}
     <Text style={s.question}>{index + 1}. {question.question}</Text>
-    <QuestionImages question={question} />
+    <QuestionImages question={question} resolveLocalImage={resolveLocalImage} />
     {Object.entries(question.options).map(([letter, text]) => <AnimatedPressable key={letter}
       accessibilityRole={question.type === 'multiple_choice' ? 'checkbox' : 'radio'}
       accessibilityLabel={letter + '，' + text} accessibilityState={{ checked: selected.includes(letter), disabled: !!disabled }}

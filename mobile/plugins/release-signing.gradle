@@ -10,6 +10,8 @@ tasks.matching { it.name == "createBundleReleaseJsAndAssets" }.configureEach {
     inputs.file(new File(rootDir, "../package.json"))
     inputs.file(new File(rootDir, "../app.json"))
     inputs.property("aceexamReleaseVersion", releasePackage.version)
+    inputs.property("aceexamApiBase", System.getenv("EXPO_PUBLIC_API_URL") ?: "")
+    inputs.property("aceexamApiFallback", System.getenv("EXPO_PUBLIC_API_FALLBACK_URL") ?: "")
 }
 
 def signingProperties = new Properties()

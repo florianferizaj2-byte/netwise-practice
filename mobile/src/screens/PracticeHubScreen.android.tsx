@@ -7,6 +7,7 @@ import { androidAccent } from '../android-design-tokens';
 import { AndroidPageHeader, AndroidPointsLink, type AndroidCertificateProps } from '../components/AndroidUi.android';
 import { AppIcon } from '../components/AppIcon';
 import { RoutePlayerChapter } from '../components/RoutePlayerChapter';
+import { OfflineDownloadCard } from '../offline/OfflineDownloadCard.android';
 import { iosStyles } from '../iosStyles';
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -322,6 +323,7 @@ export function PracticeHubScreen({
         <>
           <AndroidPageHeader title="练习" user={user} certificates={certificates} onOpenCertificatePicker={onOpenCertificatePicker}/>
           {!preview && !daily && !ai && <PracticeResumeCard user={user} onNavigate={onNavigate}/>}
+          {!preview && !daily && !ai && user?.certificateId && <OfflineDownloadCard key={user.id + ':' + user.certificateId} userId={user.id} certificateId={user.certificateId} />}
           <View style={s.heading}>
             <View style={s.grow}>
               {daily && <Text style={s.title}>选择今日练习范围</Text>}

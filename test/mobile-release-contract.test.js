@@ -27,10 +27,15 @@ test('the real public version endpoint advertises only mounted v1 capabilities',
     assert.equal(path.dirname(fs.realpathSync(directory)), parent); assert.ok(path.basename(directory).startsWith('v1-contract-')); fs.rmSync(directory, { recursive: true, force: true }); });
   const response = await fetch(`http://127.0.0.1:${server.address().port}/api/mobile/version?version=1.0.1`);
   assert.equal(response.status, 200); const release = await response.json();
-  assert.equal(release.latestVersion, JSON.parse(fs.readFileSync(new URL('../mobile/package.json',import.meta.url),'utf8')).version); assert.equal(release.forceUpdate, false);
+  // Development APKs may be newer than the last published artifact. The backend
+  // must keep pointing at the published artifact until a release is verified.
+  const published = JSON.parse(fs.readFileSync(new URL('../server/mobile-release.json', import.meta.url), 'utf8'));
+  assert.equal(release.latestVersion, published.latestVersion);
+  assert.equal(release.downloadUrl, published.downloadUrl);
+  assert.equal(release.forceUpdate, false);
   assert.equal(release.backend.version, MOBILE_BACKEND_VERSION); assert.equal(release.backend.apiRevision, 1);
   const { backendConnectionNotice } = await loadPure('api/backendContract.ts'); assert.equal(backendConnectionNotice(release), '');
-  assert.deepEqual(release.backend.capabilities.sort(), ['account-security-v1', 'learning-gate-v1', 'points-v1', 'voice-packs-v1']);
+  assert.deepEqual(release.backend.capabilities.sort(), ['account-security-v1', 'learning-gate-v1', 'offline-packs-v1', 'points-v1', 'voice-packs-v1']);
 });
 
 test('APK install preflight rejects errors, HTML, empty/truncated files and corrupted downloads', async () => {

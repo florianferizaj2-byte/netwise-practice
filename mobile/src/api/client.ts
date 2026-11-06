@@ -1303,3 +1303,4 @@ export const mobileApi = {
 
 // Read-only context for platform-specific integrations; existing Web flows stay unchanged.
 export const mobileSessionSnapshot = () => ({ token: sessionToken, revision: sessionRevision });
+export const mobileStudyScope = () => studyScope;

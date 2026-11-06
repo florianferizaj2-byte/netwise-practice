@@ -2,7 +2,7 @@ import { requireOptionalNativeModule } from 'expo';
 import { Platform } from 'react-native';
 import type {LocationLearningCredentials} from '../../src/api/locationLearningTypes';
 
-type RoutePlayerModule = { openAfterStudy: (apiBaseUrl:string,token:string,permit:string,appVersion:string) => Promise<void>; setLearningIdentity:(identity:string|null)=>Promise<void> };
+type RoutePlayerModule = { openAfterStudy: (apiBaseUrl:string,token:string,permit:string,appVersion:string) => Promise<void>; setLearningIdentity:(identity:string|null)=>Promise<void>; openAfterOfflineStudy?: (scope: string) => Promise<void>; setOfflineLearningIdentity?: (scope: string | null) => Promise<void> };
 const native = Platform.OS === 'android'
   ? requireOptionalNativeModule<RoutePlayerModule>('AceExamRoutePlayer')
   : null;
@@ -15,3 +15,12 @@ export async function openRoutePlayer(credentials?:LocationLearningCredentials):
   await native!.openAfterStudy(credentials.apiBaseUrl,credentials.sessionToken,credentials.permit,credentials.appVersion);
 }
 export async function updateRoutePlayerIdentity(identity:string|null):Promise<void> { if(native?.setLearningIdentity)await native.setLearningIdentity(identity); }
+
+export async function setOfflineRoutePlayerIdentity(scope: string | null): Promise<void> {
+  await native?.setOfflineLearningIdentity?.(scope);
+}
+
+export async function openOfflineRoutePlayer(scope: string): Promise<void> {
+  if (!native?.openAfterOfflineStudy) throw new Error('当前安装包尚不支持离线定位学习。');
+  await native.openAfterOfflineStudy(scope);
+}

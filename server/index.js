@@ -51,6 +51,8 @@ import { ensureAccountPoints, pointsCheckInView, claimPointsCheckIn, accountPoin
 import { registerPointsRoutes } from "./ai-points/routes.js";
 import { registerAiServiceRoutes } from "./ai-service-routes.js";
 import { registerLocationLearning } from "./location-learning.js";
+import { registerOfflinePacks } from "./offline-packs.js";
+import { registerOfflineAttempts } from "./offline-attempts.js";
 import { registerVoicePackRoutes } from "./voice-packs.js";
 import { createAiLearning } from "./ai-learning.js";
 
@@ -2555,6 +2557,9 @@ export async function createApp(options = {}) {
   app.locals.aiLearning = aiLearning;
   registerExamRoutes({ route, store, requireCertificate, requestUserId, certificateQuestions, syllabusForCertificate, publicQuestion });
   app.locals.locationLearning = registerLocationLearning({ route,store,certificateQuestions,now:options.locationLearningNow });
+  registerOfflinePacks({ app, route, store, certificates, questions: bankQuestionsForCertificate,
+    syllabus: syllabusForCertificate, publicDir: path.join(root, "public") });
+  registerOfflineAttempts({ route, store, certificates, now: options.offlineNow });
   app.get("/community/uploads/:file", (req, res, next) => {
     const file = req.params.file || "";
     if (!/^[a-f0-9-]{36}\.(jpg|png|gif|webp)$/i.test(file))
