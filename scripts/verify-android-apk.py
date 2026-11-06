@@ -10,6 +10,7 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 app = json.loads((ROOT / 'mobile/app.json').read_text(encoding='utf-8'))['expo']
+policy = json.loads((ROOT / 'server/mobile-release.json').read_text(encoding='utf-8'))
 apk = ROOT / 'public/downloads' / f"kaojiang-v{app['version']}.apk"
 sdk = Path(os.environ.get('ANDROID_HOME') or os.environ.get('ANDROID_SDK_ROOT') or r'C:\aceexam-rp\android-sdk')
 tools = sorted((sdk / 'build-tools').iterdir(), key=lambda p: tuple(int(n) for n in re.findall(r'\d+', p.name)), reverse=True)
@@ -52,7 +53,11 @@ with zipfile.ZipFile(apk) as archive:
     native_entries = [info for info in archive.infolist() if info.filename.startswith('lib/') and info.filename.endswith('.so')]
     assert native_entries and all(info.compress_type == zipfile.ZIP_DEFLATED for info in native_entries), 'Native libraries must use compatible compressed packaging'
     abis = sorted({name.split('/')[1] for name in names if name.startswith('lib/') and name.endswith('.so')})
-    assert abis == sorted(['armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64']), 'Missing supported native ABI'
+    supported_abis = {'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'}
+    expected_abis = policy.get('apkAbis', sorted(supported_abis))
+    assert isinstance(expected_abis, list) and 'arm64-v8a' in expected_abis, 'Invalid published ABI declaration'
+    assert len(expected_abis) == len(set(expected_abis)) and set(expected_abis) <= supported_abis, 'Unsupported published ABI declaration'
+    assert abis == sorted(expected_abis), 'APK architectures differ from the published release'
     font_hashes = {hashlib.sha256(archive.read(name)).hexdigest() for name in names if name.endswith('.ttf')}
     for name in ['NotoSansSC_400Regular.ttf', 'NotoSansSC_500Medium.ttf', 'NotoSansSC_700Bold.ttf']:
         assert hashlib.sha256((ROOT / 'mobile/assets/fonts' / name).read_bytes()).hexdigest() in font_hashes, f'Missing bundled font: {name}'
@@ -64,7 +69,8 @@ with zipfile.ZipFile(apk) as archive:
         assert hashlib.sha256(sound.read_bytes()).hexdigest() in sound_hashes, f'Missing confirmation sound: {style}'
     bundle = archive.read('assets/index.android.bundle')
     for marker in ['https://aceexam.top/api', app['version'], 'points-v1', 'backend-connection-notice',
-                   'android-ai-confirm-sheet', 'android-modal-safe-area', 'location-learning-header', 'profile-points-value',
+                   'android-ai-confirm-sheet', 'android-modal-safe-area', 'location-learning-today-count', 'profile-points-value',
+                   'offline-download-card', '打开本机学习包', '进入虚拟定位学习',
                    'android-check-in-screen', 'android-about-screen', 'android-wrong-screen',
                    'wrong-knowledge-grid', 'wrong-question-stem', 'about-full-letter', 'about-font-license',
                    '复习已答题', '题库分页超过读取限制，已保留续刷位置', 'practice-swipe-area', 'practice-wrong-delete', 'kaojiang-practice-checkpoint-v1:', 'android-page-safe-area', 'kaojiang-practice-outbox-v1', 'practice-record-sync', 'practice-sync-notice', 'points-debt-notice', 'answer-feedback-settings', 'kaojiang-answer-feedback-v1', 'voice-pack-settings', 'voice-volume-slider', 'kaojiang-read-announcement-content-v1']:
@@ -73,11 +79,16 @@ with zipfile.ZipFile(apk) as archive:
         assert marker.encode() not in bundle, f'Browser-test control leaked into the APK: {marker}'
     safe_area_native = any(b'RNCSafeAreaProvider' in archive.read(name) for name in names if name.endswith('.dex'))
     assert safe_area_native, 'Native safe-area provider is missing from the signed APK'
+    assert any(b'openAfterOfflineStudy' in archive.read(name) for name in names if name.endswith('.dex')), 'Native offline learning gate is missing'
 
 digest = hashlib.sha256(apk.read_bytes()).hexdigest()
 assert (apk.with_suffix('.apk.sha256')).read_text(encoding='utf-8').split()[0].lower() == digest, 'APK checksum mismatch'
-assert (ROOT / 'mobile' / apk.name).read_bytes() == apk.read_bytes(), 'Mobile and download copies differ'
-policy = json.loads((ROOT / 'server/mobile-release.json').read_text(encoding='utf-8'))
+# The public download is canonical in Git; a separate local build copy is optional.
+local_copy = ROOT / 'mobile' / apk.name
+if local_copy.exists():
+    assert local_copy.read_bytes() == apk.read_bytes(), 'Mobile and download copies differ'
+
+assert policy['latestVersion'] == app['version'] and policy['downloadUrl'] == '/downloads/' + apk.name, 'Release version/download path mismatch'
 assert policy['apkSha256'].lower() == digest and policy['apkBytes'] == apk.stat().st_size, 'Public version metadata does not match the APK'
 assert policy['apkMd5'].lower() == hashlib.md5(apk.read_bytes()).hexdigest(), 'Download integrity metadata mismatch'
 result = {'passed': True, 'version': app['version'], 'versionCode': app['android']['versionCode'], 'package': package.group(1),

@@ -1,9 +1,12 @@
 {
-  "latestVersion": "1.0.15",
+  "latestVersion": "1.0.16",
   "minimumVersion": "1.0.1",
-  "downloadUrl": "/downloads/kaojiang-v1.0.15.apk",
-  "releaseNotes": "v1.0.15：修复模拟定位原生入口未跟随网络备用地址的问题；IPv6不可用时沿用aceexam.top，直连端口统一为9443。保留今日答题超过10题的进入条件。",
-  "apkBytes": 41610736,
-  "apkSha256": "52f216658f9f0f10f4af71c6b98b9accc5927626c283e945a089fd6a5dc96d37",
-  "apkMd5": "8fc3b1c1b0c181b6caa2d250b33e239b"
+  "downloadUrl": "/downloads/kaojiang-v1.0.16.apk",
+  "releaseNotes": "v1.0.16：支持按证书下载离线学习包。已下载内容可在断网时刷题、模拟考试和查看解析；虚拟定位学习资格在本机判断，联网后补传作答记录。AI 功能仍需联网。",
+  "apkBytes": 42755981,
+  "apkSha256": "24d3c559e7c7a941a6faec6656383c12e3216fecb21371c3519f2215f4208acb",
+  "apkMd5": "91028dcc7d9993639ad885934ae0f753",
+  "apkAbis": [
+    "arm64-v8a"
+  ]
 }

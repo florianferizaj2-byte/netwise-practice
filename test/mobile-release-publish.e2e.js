@@ -26,7 +26,7 @@ try {
   const range = await fetch(base + policy.downloadUrl, { headers: { Range: 'bytes=0-1023' } });
   assert.equal(range.status, 206);
   assert.equal((await range.arrayBuffer()).byteLength, 1024);
-  const old = await fetch(`${base}/api/mobile/version?version=0.4.5`).then((response) => response.json());
+  const old = await fetch(`${base}/api/mobile/version?version=${policy.minimumVersion}`).then((response) => response.json());
   assert.equal(old.forceUpdate, false); assert.equal(old.updateAvailable, true); assert.equal(old.minimumVersion, policy.minimumVersion);
   const unsupported = await fetch(`${base}/api/mobile/version?version=0.4.2`).then((response) => response.json());
   assert.equal(unsupported.forceUpdate, true);
