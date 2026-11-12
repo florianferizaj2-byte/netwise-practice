@@ -8,6 +8,7 @@ import { createConsoleStore, fail, stamp } from "./store.js";
 import { commitPointsResult } from "../ai-points/runtime.js";
 import {
   consoleMetrics,
+  consolePracticeRanking,
   consoleUsage,
   configStatus,
   contentRevision,
@@ -34,6 +35,10 @@ const pagination = {
   limit: z.coerce.number().int().min(1).max(100).default(30),
   offset: z.coerce.number().int().min(0).max(1_000_000).default(0),
 };
+const overviewDays = z.coerce
+  .number()
+  .pipe(z.union([z.literal(7), z.literal(30)]))
+  .default(7);
 const identifier = z.string().trim().min(1).max(200);
 const revision = z.string().regex(/^[a-f0-9]{64}$/);
 const documentInput = z
@@ -362,10 +367,7 @@ export function registerAdminConsole({
       return handler(req);
     });
   r("get", "/overview", (req) => {
-    const days = z.coerce
-      .number()
-      .pipe(z.union([z.literal(7), z.literal(30)]))
-      .parse(req.query.days || 7);
+    const days = overviewDays.parse(req.query.days || undefined);
     const documents = content.documents(),
       jobs = content.jobs();
     return {
@@ -383,6 +385,17 @@ export function registerAdminConsole({
       },
       config: configStatus(store),
     };
+  });
+  r("get", "/overview/practice-ranking", (req) => {
+    const filters = z
+      .object({
+        ...pagination,
+        limit: pagination.limit.default(6),
+        days: overviewDays,
+        sort: z.enum(["total", "period"]).default("total"),
+      })
+      .parse(req.query);
+    return consolePracticeRanking(store, filters);
   });
   r("get", "/catalog", () => {
     const all = publicRows(),

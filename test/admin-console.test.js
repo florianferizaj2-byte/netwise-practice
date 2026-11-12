@@ -8,6 +8,7 @@ import { pathToFileURL } from "node:url";
 import { spawnSync } from "node:child_process";
 import { createApp } from "../server/index.js";
 import { createStore } from "../server/store.js";
+import { createStudyStore } from "../server/study-store.js";
 import { certificates } from "../server/certificates.js";
 import { reviewDigest } from "../server/content-quality/quality.js";
 import { globMatch } from "../server/admin-console/index.js";
@@ -140,6 +141,7 @@ test("console rejects guests and learners, paginates public questions, safely ma
   for (const token of [null, f.tokens[1]])
     for (const route of [
       "/overview",
+      "/overview/practice-ranking",
       "/questions",
       "/catalog",
       "/documents",
@@ -226,6 +228,115 @@ test("console rejects guests and learners, paginates public questions, safely ma
       /keyCipher|password_hash|fixture-password/,
     );
   }
+});
+test("practice ranking counts real answers across learning modes, sorts before pagination and includes inactive users", async (t) => {
+  const f = await fixture(t);
+  const { store, admin, learner } = f;
+  const idle = store.register("console_test_idle", "fixture-password-123");
+  const q = store
+    .allQ()
+    .find(
+      (q) =>
+        q.type === "single_choice" &&
+        q.certificates?.includes("network-engineer"),
+    );
+  const now = Date.now();
+  const offline = {
+    occurredAt: now - 15 * 86400000,
+    receivedAt: now,
+    packVersion: "a".repeat(64),
+  };
+  const saved = (id) =>
+    store.recordAttempt(
+      q.id,
+      q.answer,
+      1000,
+      "practice",
+      learner.id,
+      undefined,
+      id,
+      "network-engineer",
+      offline,
+    );
+  const retryId = crypto.randomUUID();
+  saved(retryId);
+  saved(retryId);
+  saved(crypto.randomUUID());
+  store.recordAttempt(q.id, q.answer, 1000, "practice", learner.id);
+  for (let i = 0; i < 3; i++)
+    store.recordAttempt(q.id, q.answer, 1000, "exam", admin.id);
+  store.recordAttempt(q.id, [], 1000, "exam", idle.id);
+
+  const study = createStudyStore(store.db);
+  const item = store.db
+    .prepare("SELECT id, node_id FROM study_packages LIMIT 1")
+    .get();
+  const node = { id: item.node_id };
+  const session = study.createSession(learner.id, node, item, [
+    "fixture-study",
+  ]);
+  study.createAttempt(
+    learner.id,
+    session,
+    "fixture-study",
+    crypto.randomUUID(),
+    { b1: "typed answer" },
+    { correct: false },
+  );
+  const idleSession = study.createSession(idle.id, node, item, [
+    "fixture-study",
+  ]);
+  study.createAttempt(
+    idle.id,
+    idleSession,
+    "fixture-study",
+    crypto.randomUUID(),
+    { b1: " \t\n" },
+    { correct: false },
+  );
+
+  const url = prefix + "/overview/practice-ranking?";
+  const first = await f.request(url + "days=7&limit=1");
+  assert.equal(first.status, 200);
+  assert.equal(first.cache, "no-store");
+  assert.equal(first.data.total, 3);
+  assert.deepEqual(
+    first.data.rows.map(({ id, totalAttempts, periodAttempts }) => [
+      id,
+      totalAttempts,
+      periodAttempts,
+    ]),
+    [[learner.id, 4, 2]],
+  );
+  const second = await f.request(url + "days=7&limit=1&offset=1");
+  assert.equal(second.data.rows[0].id, admin.id);
+  const recent = await f.request(url + "days=7&sort=period");
+  assert.deepEqual(
+    recent.data.rows.map(({ id, periodAttempts }) => [id, periodAttempts]),
+    [
+      [admin.id, 3],
+      [learner.id, 2],
+      [idle.id, 0],
+    ],
+  );
+  const monthly = await f.request(url + "days=30&sort=period");
+  assert.deepEqual(
+    monthly.data.rows.map(({ id, periodAttempts }) => [id, periodAttempts]),
+    [
+      [learner.id, 4],
+      [admin.id, 3],
+      [idle.id, 0],
+    ],
+  );
+  assert.equal((await f.request(url + "sort=username")).status, 400);
+
+  const { data: overview } = await f.request(prefix + "/overview?days=7");
+  assert.equal(overview.stats.attempts, 5);
+  assert.equal(overview.stats.activeLearners, 2);
+  assert.equal(
+    overview.trend.reduce((total, day) => total + day.attempts, 0),
+    5,
+  );
 });
 test("visibility previews are versioned and idempotent, retain attempts and exams, survive restart and restore safely", async (t) => {
   const f = await fixture(t),

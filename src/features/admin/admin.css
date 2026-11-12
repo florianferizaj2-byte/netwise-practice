@@ -763,134 +763,193 @@
   font-size: 10px;
   color: #8997ac;
 }
-.ac-overview-banner {
+[data-admin-section="overview"] .ac-page-heading {
+  margin-bottom: 14px;
+}
+.ac-overview .ac-section-toolbar {
+  margin-bottom: 12px;
+}
+.ac-overview .ac-section-toolbar > div:first-child {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  position: relative;
-  background: linear-gradient(110deg, #eaf1ff, #edf5ff 65%, #e3edff);
-  border: 1px solid #e0eafa;
-  border-radius: 11px;
-  padding: 25px 28px;
-  margin-bottom: 25px;
-  overflow: hidden;
-  min-height: 190px;
+  gap: 8px;
 }
-.ac-overview-banner h2 {
-  font-size: 24px;
-  letter-spacing: -0.5px;
-  margin: 3px 0 7px;
+.admin-console .ac-overview .ac-section-toolbar > .ac-inline > button {
+  min-height: 32px;
+  padding: 5px 9px;
+  font-size: 11px;
 }
-.ac-overview-banner p {
-  font-size: 12px;
-  color: #7990b4;
+.ac-overview .ac-metrics {
+  gap: 12px;
+  margin-bottom: 12px;
 }
-.ac-overview-banner button {
-  margin-top: 18px;
-  padding: 8px 15px;
-  font-size: 12px;
+.ac-overview .ac-metrics > section {
+  padding: 11px 14px;
 }
-.ac-banner-art {
-  position: relative;
-  width: 210px;
-  height: 145px;
-  display: grid;
-  place-items: center;
-  margin-right: 45px;
-  color: #fff;
-}
-.ac-banner-art > div {
-  position: absolute;
-  width: 116px;
-  height: 134px;
-  border-radius: 14px;
-  transform: rotate(10deg);
-  background: #a8c5ff;
-  border: 1px solid #ccdeff;
-  box-shadow: 0 10px 16px #4674bd14;
-}
-.ac-banner-art > div:nth-child(2) {
-  transform: rotate(-10deg) translate(-22px, 2px);
-  background: #d7e7ff;
-}
-.ac-banner-art > div:nth-child(3) {
-  transform: rotate(-5deg);
-  background: linear-gradient(130deg, #6c9dff, #2b65ed);
-  border: 3px solid #e7f0ff;
-}
-.ac-banner-art > svg {
-  position: relative;
-  transform: rotate(-5deg);
-  stroke-width: 1.3;
-}
-.ac-banner-art > span {
-  position: absolute;
-  bottom: 0;
-  right: 15px;
-  background: #fff;
-  width: 47px;
-  height: 47px;
-  border-radius: 50%;
-  border: 5px solid #d4e4ff;
-  color: #2454ed;
-  font-size: 24px;
-  display: grid;
-  place-items: center;
-  box-shadow: 0 4px 15px #3c63ac18;
+.ac-overview .ac-metrics section > strong {
+  font-size: 25px;
+  line-height: 1.15;
+  margin: 5px 0 3px;
 }
 .ac-overview-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.55fr) minmax(290px, 1fr);
-  gap: 20px;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.ac-overview-secondary {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.ac-overview-grid > .ac-panel {
+  margin-bottom: 0;
+}
+.ac-overview .ac-panel-head {
+  flex-wrap: wrap;
+  padding: 12px 14px 10px;
+  gap: 6px;
+}
+.ac-overview .ac-panel-head h2 {
+  font-size: 14px;
+}
+.admin-console .ac-ranking-table {
+  min-width: 0;
+  table-layout: fixed;
+  font-variant-numeric: tabular-nums;
+}
+.admin-console .ac-ranking-table thead th,
+.admin-console .ac-ranking-table tbody :is(th, td) {
+  padding: 5px 12px;
+}
+.admin-console .ac-ranking-table thead th:first-child {
+  width: 48px;
+}
+.admin-console .ac-ranking-table thead th:nth-child(n + 3) {
+  width: 104px;
+}
+.admin-console .ac-ranking-table :is(th, td):nth-child(n + 3) {
+  text-align: right;
+}
+.admin-console .ac-ranking-table tbody th {
+  color: var(--ac-ink);
+  background: transparent;
+  border-bottom: 1px solid #eef2f7;
+  text-align: left;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.admin-console .ac-ranking-table tbody tr:last-child th {
+  border-bottom: 0;
+}
+.ac-ranking-table tbody th :is(span, small) {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ac-ranking-table tbody th small,
+.ac-ranking-table td:first-child {
+  color: var(--ac-muted);
+  font-weight: 400;
+}
+.ac-ranking-table tbody th small {
+  font-size: 10px;
+}
+.admin-console .ac-ranking-table th button {
+  padding: 0;
+  min-height: 24px;
+  gap: 2px;
+  border: 0;
+  border-radius: 3px;
+  color: var(--ac-muted);
+  background: transparent;
+}
+.admin-console .ac-ranking-table th[aria-sort] button,
+.ac-ranking-table .is-sorted {
+  color: var(--ac-blue);
+  font-weight: 700;
+}
+.ac-practice-ranking .ac-pagination {
+  padding: 6px 14px;
 }
 .ac-chart {
-  height: 198px;
-  display: flex;
-  align-items: flex-end;
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
   gap: 8px;
-  padding: 10px 24px 0;
-  background: repeating-linear-gradient(
-    to top,
-    transparent 0,
-    transparent 48px,
-    #f1f4f9 49px,
-    #f1f4f9 50px
-  );
-  margin: 0 20px 0;
+  margin: 10px 14px 0;
 }
-.ac-chart > div {
+.ac-chart-scale {
+  height: 144px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 9px;
-  flex: 1;
-  height: 190px;
-  min-width: 0;
+  justify-content: space-between;
+  text-align: right;
+  font-size: 10px;
+  color: var(--ac-muted);
+  line-height: 0;
 }
-.ac-chart > div > span {
+.ac-chart-columns {
+  display: flex;
+  gap: clamp(2px, 0.55vw, 8px);
+  background: repeating-linear-gradient(
+    to top,
+    var(--ac-line) 0,
+    var(--ac-line) 1px,
+    transparent 1px,
+    transparent 48px
+  ) top / 100% 145px no-repeat;
+}
+.ac-chart-columns > div {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+}
+.ac-chart-track {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 144px;
+}
+.ac-chart-track > span {
   display: block;
-  min-height: 2px;
   width: min(100%, 28px);
-  border-radius: 4px 4px 0 0;
-  background: linear-gradient(#7299ff, #2f64ef);
+  border-radius: 3px 3px 0 0;
+  background: #4e79ed;
+}
+.ac-chart-columns > div:hover .ac-chart-track > span {
+  background: var(--ac-blue);
 }
 .ac-chart small {
-  font-size: 9px;
-  min-height: 19px;
+  display: block;
+  width: max-content;
+  margin-top: 5px;
+  position: relative;
+  left: 50%;
+  translate: -50% 0;
+  font-size: 10px;
   white-space: nowrap;
-  color: #9aa7bb;
+  color: var(--ac-muted);
+}
+.ac-chart-columns > div:first-child small {
+  left: 0;
+  translate: 0;
+}
+.ac-chart-columns > div:last-child small {
+  left: 100%;
+  translate: -100% 0;
 }
 .ac-chart-data {
-  font-size: 10px;
-  color: #8193b0;
-  padding: 8px 23px 15px;
+  font-size: 11px;
+  color: var(--ac-muted);
+  padding: 8px 14px 11px;
+}
+.ac-chart-data summary {
+  cursor: pointer;
 }
 .ac-chart-data p {
   padding: 3px;
 }
 .ac-todos {
-  padding: 0 20px 8px;
+  padding: 0 14px 4px;
 }
 .admin-console .ac-todos button {
   display: flex;
@@ -898,8 +957,8 @@
   border: 0;
   border-radius: 0;
   border-bottom: 1px solid #f0f3f8;
-  padding: 16px 0;
-  gap: 15px;
+  padding: 8px 0;
+  gap: 8px;
   justify-content: space-between;
 }
 .ac-todos button > span {
@@ -914,14 +973,14 @@
   color: #7898d9;
 }
 .ac-todos button strong {
-  font-size: 20px;
+  font-size: 16px;
   color: #365bc2;
 }
 .ac-config-note {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 20px 17px;
+  padding: 8px 14px 12px;
   font-size: 10px;
   color: #7d8aa0;
 }
@@ -937,24 +996,20 @@
   display: flex;
   align-items: baseline;
   gap: 10px;
-  padding: 0 23px 18px;
+  padding: 0 14px 8px;
 }
 .ac-asset-total strong {
-  font-size: 30px;
+  font-size: 23px;
 }
 .ac-asset-total > span {
   font-size: 11px;
   color: #8291aa;
 }
-.ac-asset-total > svg {
-  margin-left: auto;
-  color: #b4c9f7;
-}
 .ac-sources {
-  padding: 0 23px 22px;
+  padding: 0 14px 14px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
 }
 .ac-sources > div {
   display: flex;
@@ -963,7 +1018,7 @@
   font-size: 10px;
 }
 .ac-sources > div > span {
-  width: 150px;
+  width: 46%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -990,30 +1045,17 @@
   color: #627797;
 }
 .ac-timeline {
-  padding: 0 22px 12px;
+  padding: 0 14px 12px;
 }
 .ac-timeline article {
   display: flex;
-  gap: 11px;
-  position: relative;
-  min-height: 65px;
-  padding-bottom: 13px;
+  gap: 8px;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 4px 0;
 }
-.ac-timeline article > span {
-  border: 2px solid #a1bcfa;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  margin-top: 6px;
-  flex: none;
-}
-.ac-timeline article:not(:last-child):before {
-  content: "";
-  position: absolute;
-  left: 3px;
-  top: 17px;
-  height: 43px;
-  border-left: 1px solid #e4ecfa;
+.ac-timeline article + article {
+  border-top: 1px solid #edf1f7;
 }
 .ac-timeline strong {
   font-size: 11px;
@@ -1026,7 +1068,9 @@
 }
 .ac-timeline small {
   font-size: 9px;
-  color: #a0acc0;
+  color: var(--ac-muted);
+  text-align: right;
+  flex: none;
 }
 .ac-segment {
   display: flex;
@@ -1750,14 +1794,6 @@
   .ac-metrics > section {
     padding: 16px;
   }
-  .ac-overview-grid {
-    grid-template-columns: minmax(0, 1.35fr) minmax(250px, 1fr);
-    gap: 16px;
-  }
-  .ac-banner-art {
-    margin-right: 0;
-    width: 170px;
-  }
   .ac-announcement-grid {
     grid-template-columns: 1fr;
   }
@@ -1799,8 +1835,8 @@
     border: 0;
     border-radius: 0;
   }
-  .ac-overview-grid {
-    grid-template-columns: minmax(0, 1.4fr) minmax(245px, 1fr);
+  .ac-overview-secondary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .ac-metrics {
     gap: 10px;
@@ -1863,26 +1899,13 @@
   }
   .ac-overview-grid {
     grid-template-columns: 1fr;
-    gap: 0;
   }
-  .ac-overview-banner {
-    padding: 21px;
-    min-height: 180px;
+  .admin-console .ac-ranking-table thead th,
+  .admin-console .ac-ranking-table tbody :is(th, td) {
+    padding-inline: 8px;
   }
-  .ac-overview-banner h2 {
-    font-size: 19px;
-    max-width: none;
-  }
-  .ac-overview-banner p {
-    font-size: 11px;
-    max-width: none;
-  }
-  .ac-banner-art {
-    display: none;
-  }
-  .ac-overview-banner > div:first-child {
-    z-index: 1;
-    position: relative;
+  .admin-console .ac-ranking-table thead th:nth-child(n + 3) {
+    width: 82px;
   }
   .ac-section-toolbar {
     gap: 9px;
@@ -1908,10 +1931,6 @@
   .ac-search-form {
     min-width: 100%;
     max-width: 100%;
-  }
-  .ac-chart {
-    margin-inline: 12px;
-    padding-inline: 5px;
   }
   .ac-toolbar {
     gap: 9px;

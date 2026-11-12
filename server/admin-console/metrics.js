@@ -1,8 +1,33 @@
 import { digest } from "../content-quality/quality.js";
 import { authorAiSettings } from "../ai-service.js";
 
-const day = (value) =>
-  new Date(value).toLocaleDateString("en-CA", { timeZone: "Asia/Shanghai" });
+const day = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Shanghai" })
+  .format;
+const dayMs = 86400000;
+const answerEvents = `WITH answer_events AS (
+  SELECT a.user_id, json_extract(a.data, '$.createdAt') AS created_at,
+         json_extract(a.data, '$.correct') AS correct
+  FROM attempts a
+  WHERE json_array_length(a.data, '$.selected') > 0
+     OR trim(json_extract(a.data, '$.response'), char(9, 10, 13, 32)) <> ''
+  UNION ALL
+  SELECT s.user_id, s.created_at, json_extract(s.data, '$.result.correct') AS correct
+  FROM study_attempts s
+  WHERE EXISTS (
+    SELECT 1 FROM json_each(s.data, '$.answers') AS answer
+    WHERE trim(answer.value, char(9, 10, 13, 32)) <> ''
+  )
+)`;
+
+function practiceWindow(days) {
+  const now = Date.now();
+  const keys = Array.from({ length: days }, (_, i) =>
+    day(now - (days - 1 - i) * dayMs),
+  );
+  const since = new Date(keys[0] + "T00:00:00+08:00").toISOString();
+  const until = new Date(Date.parse(since) + days * dayMs).toISOString();
+  return { keys, since, until };
+}
 const sum = (rows) => {
   const unknown = rows.filter(
     (r) => !Number.isFinite(r.estimatedCostCny),
@@ -23,21 +48,20 @@ const sum = (rows) => {
   };
 };
 export function consoleMetrics(store, days) {
-  const end = Date.now(),
-    start = end - (days - 1) * 86400000;
-  const keys = Array.from({ length: days }, (_, i) =>
-    day(start + i * 86400000),
-  );
-  const since = new Date(keys[0] + "T00:00:00+08:00").toISOString();
+  const { keys, since, until } = practiceWindow(days);
   const attempts = store.db
     .prepare(
-      "SELECT user_id,data FROM attempts WHERE json_extract(data,'$.createdAt')>=?",
+      `${answerEvents}
+       SELECT a.user_id AS userId, date(a.created_at, '+8 hours') AS day, a.correct
+       FROM answer_events a JOIN users u ON u.id = a.user_id
+       WHERE a.created_at >= ? AND a.created_at < ?`,
     )
-    .all(since)
-    .map((r) => ({ ...JSON.parse(r.data), userId: r.user_id }));
+    .all(since, until);
   const users = store.db
-    .prepare("SELECT created_at FROM users WHERE created_at>=?")
-    .all(since);
+    .prepare(
+      "SELECT date(created_at, '+8 hours') AS day FROM users WHERE created_at>=? AND created_at<?",
+    )
+    .all(since, until);
   const usage = store.db
     .prepare(
       "SELECT data FROM user_usage WHERE json_extract(data,'$.createdAt')>=?",
@@ -45,6 +69,16 @@ export function consoleMetrics(store, days) {
     .all(since)
     .map((r) => JSON.parse(r.data));
   const stat = store.adminStats();
+  const byDay = new Map(
+    keys.map((date) => [date, { attempts: 0, learners: new Set() }]),
+  );
+  for (const attempt of attempts) {
+    const bucket = byDay.get(attempt.day);
+    if (bucket) {
+      bucket.attempts++;
+      bucket.learners.add(attempt.userId);
+    }
+  }
   return {
     updatedAt: new Date().toISOString(),
     days,
@@ -58,11 +92,9 @@ export function consoleMetrics(store, days) {
     usage: sum(usage),
     trend: keys.map((date) => ({
       date,
-      attempts: attempts.filter((a) => day(a.createdAt) === date).length,
-      newUsers: users.filter((u) => day(u.created_at) === date).length,
-      active: new Set(
-        attempts.filter((a) => day(a.createdAt) === date).map((a) => a.userId),
-      ).size,
+      attempts: byDay.get(date).attempts,
+      newUsers: users.filter((u) => u.day === date).length,
+      active: byDay.get(date).learners.size,
     })),
     sourceNames: Object.fromEntries(
       store.allQ().map((q) => [q.source, q.sourceLabel || q.source]),
@@ -72,6 +104,29 @@ export function consoleMetrics(store, days) {
       .filter((r) => r.action !== "study_seed_published")
       .slice(0, 8),
   };
+}
+export function consolePracticeRanking(store, { days, sort, limit, offset }) {
+  const { since, until } = practiceWindow(days);
+  const order = sort === "period" ? "periodAttempts" : "totalAttempts";
+  const rows = store.db
+    .prepare(
+      `${answerEvents}, answer_counts AS (
+       SELECT user_id, COUNT(*) AS total,
+              COUNT(*) FILTER (WHERE created_at >= ? AND created_at < ?) AS period
+       FROM answer_events
+       GROUP BY user_id
+     )
+     SELECT u.id, u.username, u.community_name AS communityName,
+            COALESCE(a.total, 0) AS totalAttempts, COALESCE(a.period, 0) AS periodAttempts
+     FROM users u LEFT JOIN answer_counts a ON a.user_id = u.id
+     ORDER BY ${order} DESC, u.id ASC
+     LIMIT ? OFFSET ?`,
+    )
+    .all(since, until, limit, offset);
+  const { total } = store.db
+    .prepare("SELECT COUNT(*) AS total FROM users")
+    .get();
+  return { rows, total, offset, limit };
 }
 export function consoleUsage(store, { days, offset, limit, search }) {
   const since = new Date(Date.now() - days * 86400000).toISOString();

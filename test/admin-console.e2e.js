@@ -104,6 +104,74 @@ try {
   }
   await goto("overview");
   await expect(page.locator(".ac-metrics")).toBeVisible();
+  const rankingQuestion = store
+    .allQ()
+    .find((q) => q.certificates?.includes("network-engineer"));
+  const rankingLearner = store.registerWithHash(
+    "browser_ranking_learner",
+    "preview-only",
+    crypto.randomBytes(64).toString("hex"),
+  );
+  for (let i = 0; i < 3; i++) {
+    store.recordAttempt(
+      rankingQuestion.id,
+      rankingQuestion.answer,
+      1000,
+      "practice",
+      rankingLearner.id,
+      undefined,
+      crypto.randomUUID(),
+      "network-engineer",
+      {
+        occurredAt: Date.now() - 15 * 86400000,
+        receivedAt: Date.now(),
+        packVersion: "a".repeat(64),
+      },
+    );
+  }
+  store.recordAttempt(
+    rankingQuestion.id,
+    rankingQuestion.answer,
+    1000,
+    "practice",
+    admin.id,
+  );
+  for (let i = 0; i < 4; i++) {
+    store.registerWithHash(
+      `browser_ranking_idle_${i}`,
+      "preview-only",
+      crypto.randomBytes(64).toString("hex"),
+    );
+  }
+  await page.getByRole("button", { name: "刷新总览" }).click();
+  const ranking = page.getByRole("table", { name: "用户刷题排行" });
+  const firstLearner = ranking
+    .locator("tbody tr")
+    .first()
+    .getByRole("rowheader");
+  await expect(firstLearner).toHaveText(rankingLearner.username);
+  await ranking.getByRole("button", { name: "近 7 天" }).click();
+  await expect(firstLearner).toHaveText(admin.username);
+  await expect(
+    ranking.getByRole("columnheader", { name: "近 7 天" }),
+  ).toHaveAttribute("aria-sort", "descending");
+  await page.getByRole("button", { name: "下一页" }).click();
+  await expect(ranking.locator("tbody tr")).toHaveCount(1);
+  await expect(ranking.locator("tbody tr td").first()).toHaveText("7");
+  await page.getByRole("button", { name: "活跃人数" }).click();
+  await expect(
+    page.getByRole("img", { name: "每日活跃答题人数柱状图" }),
+  ).toBeVisible();
+  await page
+    .getByRole("group", { name: "统计时段" })
+    .getByRole("button", { name: "近 30 天" })
+    .click();
+  await expect(firstLearner).toHaveText(rankingLearner.username);
+  await expect(
+    page.getByRole("img", { name: "每日活跃答题人数柱状图" }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "答题次数", exact: true }).click();
+  checks.push("overview ranking, pagination and trends");
   await page.screenshot({
     path: output + "/overview-desktop.png",
     fullPage: true,

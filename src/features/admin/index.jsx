@@ -34,6 +34,7 @@ export function AdminView({ user, certificates = [], navigate }) {
     currentHash = useRef(location.hash);
   const active = modules.find((m) => m.id === locationState.section),
     section = active?.id || locationState.section;
+  const showHeadingContext = section !== "overview";
   useEffect(() => {
     const change = () => {
       if (
@@ -242,14 +243,16 @@ export function AdminView({ user, certificates = [], navigate }) {
           >
             <div className="ac-page-heading">
               <div>
-                <div className="ac-eyebrow">ACEEXAM / OPERATIONS</div>
+                {showHeadingContext && <div className="ac-eyebrow">ACEEXAM / OPERATIONS</div>}
                 <h1>{active?.label || "页面不存在"}</h1>
-                <p>{active?.description || "请从管理导航选择功能。"}</p>
+                {showHeadingContext && <p>{active?.description || "请从管理导航选择功能。"}</p>}
               </div>
-              <span className="ac-workspace-pill">
-                <span />
-                管理工作台
-              </span>
+              {showHeadingContext && (
+                <span className="ac-workspace-pill">
+                  <span />
+                  管理工作台
+                </span>
+              )}
             </div>
             {error && (
               <div className="ac-error-banner" role="alert">
