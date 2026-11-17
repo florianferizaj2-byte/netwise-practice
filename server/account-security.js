@@ -52,6 +52,10 @@ export function createAccountSecurity(store, options = {}) {
     now = options.now || Date.now;
   const mailer = options.mailer || createAccountMailer();
   const enabled = options.enabled ?? accountEmailEnabled();
+  const registrationEnabled = options.registrationEnabled || (() => true);
+  function requireRegistration() {
+    if (!registrationEnabled()) throw fail("暂未开放新账号注册，已有账号可以正常登录", 403, "REGISTRATION_PAUSED");
+  }
   const requireEmailFeature = () => {
     if (!enabled) throw fail("邮箱验证与邮箱找回暂未启用", 503, "EMAIL_FEATURE_DISABLED");
   };
@@ -149,6 +153,7 @@ export function createAccountSecurity(store, options = {}) {
       })
       .strict()
       .parse(raw);
+    if (body.purpose === "register") requireRegistration();
     if (!mailer.available)
       throw fail(
         "邮件验证服务暂未开通，请稍后重试或联系管理员；已有账号仍可正常登录",
@@ -321,6 +326,7 @@ export function createAccountSecurity(store, options = {}) {
     return result.value;
   }
   async function register(raw, { wechat = false } = {}) {
+    requireRegistration();
     if (enabled && (!raw?.email || !raw?.challengeId || !raw?.code))
       throw fail(
         "新账号需要验证邮箱，请获取邮箱验证码；旧版 App 请更新或前往网站注册",
@@ -333,6 +339,7 @@ export function createAccountSecurity(store, options = {}) {
     const salt = crypto.randomBytes(16).toString("base64"),
       hash = (await scrypt(body.password, salt, 64)).toString("base64");
     const createUser = () => {
+      requireRegistration();
       if (
         process.env.ADMIN_USERNAME?.trim().toLowerCase() ===
         body.username.toLowerCase()
@@ -462,6 +469,7 @@ export function createAccountSecurity(store, options = {}) {
     config: () => ({
       emailVerificationRequired: enabled,
       emailAvailable: enabled && mailer.available,
+      registrationEnabled: registrationEnabled(),
     }),
   };
 }

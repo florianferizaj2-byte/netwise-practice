@@ -13,9 +13,9 @@ import { AiAnalysisPage, AiHomePage, AiPlanPage, AiSettingsPage, type AiUiSettin
 import { AiAnswerPage, AiHistoryPage, AiMonitorPage, AiResultPage, AiReviewPage } from "./ai-learning/AiSessionPages";
 
 type Page="home"|"analysis"|"settings"|"plan"|"monitor"|"answer"|"result"|"review"|"history";
-export function AiLearningScreen({kind="practice",preview=false,user,certificateName="当前证书",onNavigate,onExamFocus,homeAccessory}:{
+export function AiLearningScreen({kind="practice",preview=false,user,certificateName="当前证书",onNavigate,onExamFocus,homeAccessory,homeTitle}:{
   kind?:AiLearningKind;preview?:boolean;user?:AuthResponse["user"];certificateName?:string;
-  onNavigate:(tab:AppTab,options?:NavigationOptions)=>void;onExamFocus?:(focus:boolean)=>void;homeAccessory?:ReactNode;
+  onNavigate:(tab:AppTab,options?:NavigationOptions)=>void;onExamFocus?:(focus:boolean)=>void;homeAccessory?:ReactNode;homeTitle?:string;
 }){
   const active=useScreenActive(),{p}=useAiDesign(),a=useAiLearning(user?.id,user?.certificateId,kind,active,preview),{job,profile}=a;
   const [page,setPage]=useState<Page>("home"),[index,setIndex]=useState(0),[sheet,setSheet]=useState<"submit"|"cancel"|"wallet"|null>(null);
@@ -93,7 +93,7 @@ export function AiLearningScreen({kind="practice",preview=false,user,certificate
     onCancel={()=>setSheet("cancel")} onWallet={()=>setSheet("wallet")} onHistory={showHistory}/>;
   else content=<AiHomePage kind={kind} profile={profile} loading={a.busy} settings={settings} onChange={strategy=>setSettings(s=>({...s,strategy}))}
     onPlan={()=>void previewPlan()} onSettings={showSettings} onAnalysis={()=>setPage("analysis")} onHistory={showHistory} certificateName={certificateName}
-    activeJob={job} accessory={homeAccessory} onContinue={()=>setPage(job?.submitted?"result":job?.startedAt?"answer":"monitor")}/>;
+    activeJob={job} accessory={homeAccessory} homeTitle={homeTitle} onContinue={()=>setPage(job?.submitted?"result":job?.startedAt?"answer":"monitor")}/>;
   const answered=job?.questions.filter(q=>(a.answers[q.id]||[]).length).length||0,partial=!!job&&job.readyCount<job.targetCount;
   return <View style={{flex:1,backgroundColor:p.bg}}>{error}{content}
     <AiSheet visible={sheet==="submit"} onClose={()=>{if(!a.busy)setSheet(null);}} title={partial?"确认部分交卷":"核对并交卷"}>

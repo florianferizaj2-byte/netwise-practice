@@ -8,6 +8,9 @@ import {
   View,
 } from "react-native";
 import { mobileApi } from "../api/client";
+import { isApiUnavailable } from '../api/transport';
+import { installedOfflinePackManifest, type OfflinePackOwner } from '../offline/offlinePacks.android';
+import { offlineStudyStore } from '../offline/offlineStudyStore.android';
 import { AnimatedPressable } from "../components/Motion";
 import { AndroidModalSafeArea } from "../components/AndroidModalSafeArea.android";
 import { AppIcon } from "../components/AppIcon";
@@ -18,10 +21,12 @@ export function LocationLearningGate({
   visible,
   onClose,
   onEnter,
+  owner,
 }: {
   visible: boolean;
   onClose: () => void;
-  onEnter: () => Promise<void>;
+  onEnter: (local: boolean) => Promise<void>;
+  owner?: OfflinePackOwner;
 }) {
   const s = useThemedStyles(styles),
     screenActive = useScreenActive();
@@ -31,6 +36,7 @@ export function LocationLearningGate({
     [busy, setBusy] = useState(false),
     [retry, setRetry] = useState(0);
   const requestBusy = useRef(false);
+  const [local, setLocal] = useState(false);
 
   useEffect(() => {
     if (!visible) {
@@ -40,6 +46,7 @@ export function LocationLearningGate({
     let live = true;
     setLoading(true);
     setError("");
+    setLocal(false);
     mobileApi
       .dashboard(true)
       .then((summary) => {
@@ -48,7 +55,16 @@ export function LocationLearningGate({
         else if (live)
           setError("暂时无法读取今日答题数");
       })
-      .catch((cause) => {
+      .catch(async (cause) => {
+        if (owner && isApiUnavailable(cause)) {
+          try {
+            if (await installedOfflinePackManifest(owner)) {
+              const count = await offlineStudyStore.todayCount(owner);
+              if (live) { setLocal(true); setTodayCount(count); }
+              return;
+            }
+          } catch { /* Show the original connection error and retry action. */ }
+        }
         if (live) setError(cause instanceof Error ? cause.message : String(cause));
       })
       .finally(() => {
@@ -57,7 +73,7 @@ export function LocationLearningGate({
     return () => {
       live = false;
     };
-  }, [visible, retry]);
+  }, [visible, retry, owner?.userId, owner?.certificateId]);
 
   const threshold = 10,
     qualified = todayCount !== null && todayCount > threshold,
@@ -69,7 +85,7 @@ export function LocationLearningGate({
     setBusy(true);
     setError("");
     try {
-      await onEnter();
+      await onEnter(local);
       onClose();
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : String(cause));

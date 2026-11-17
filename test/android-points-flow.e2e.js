@@ -45,7 +45,7 @@ function begin(req,taskType,key){const user=caller(req),nonce=req.headers['x-ai-
   const call=store.points.reserveCall(operation.id,{settings,inputLimit:1000,outputLimit:aiOutputBudget({taskType,outputItemCount:3}).maxTokens,taskType});
   return {user,operation,call};}
 function finish(item,success=true){store.points.finishCall(item.call.id,{success:true,usage:{hasUsage:true,prompt_tokens:100,completion_tokens:50,total_tokens:150}});store.points.finish(item.operation.id,{success,result:{synthetic:true},error:success?null:'synthetic review rejection'});}
-app.post('/api/ai/teacher',(req,res)=>{paidRequests++;if(mode==='cache')return res.json({text:'合成缓存讲解',cached:true});const item=begin(req,'question-explanation');finish(item,mode!=='fail');if(mode==='fail')return res.status(503).json({error:'合成任务失败，已退款'});
+app.post('/api/ai/teacher',(req,res)=>{paidRequests++;if(mode==='cache')return res.json({text:'合成缓存讲解',cached:true});if(mode==='reject')return res.status(402).json({error:'AI 积分不足'});const item=begin(req,'question-explanation');finish(item,mode!=='fail');if(mode==='fail')return res.status(503).json({error:'合成任务失败，已退款'});
   store.points.grant({userId:item.user.id,sourceKey:'concurrent-gift:'+item.operation.id,units:50000,kind:'test',requireFunded:true});res.json({text:'合成已计费讲解'});});
 app.post('/api/ai/train/stream',(req,res)=>{streamRequests++;const item=begin(req,'question-generation');finish(item);res.type('text/event-stream').end('data: {"type":"done","result":{"questions":[],"cached":false}}\n\n');});
 app.post('/api/ai/questions/generations',(req,res)=>{const jobId=crypto.randomUUID();pendingJob=begin(req,'question-generation','question-job:'+jobId);res.json({job:{id:jobId,status:'queued'}});});
@@ -53,7 +53,7 @@ app.get('/api/study/teacher/history',(_req,res)=>res.json({messages:[]}));
 app.post('/api/study/teacher',(req,res)=>{const item=begin(req,'study-teacher');finish(item);res.json({answer:{conclusion:'合成老师答疑结果',points:[],example:''},cached:false});});
 app.use((req,res,next)=>req.path.startsWith('/api/')?backend(req,res,next):next());app.use(vite.middlewares);
 const server=app.listen(0,'127.0.0.1');await new Promise(resolve=>server.once('listening',resolve));const base=`http://127.0.0.1:${server.address().port}`,checks=[],errors=[];
-let browser,page;const confirm=async()=>{await expect(page.getByTestId('android-ai-confirm-sheet')).toBeVisible();await page.getByRole('button',{name:'继续使用AI，按实际用量结算',exact:true}).click();};
+let browser,page;
 const message=pattern=>page.getByTestId('android-global-points').getByText(pattern);
 async function shot(name){await page.waitForTimeout(400);const file=path.join(out,name+'.png');await page.screenshot({path:file});assert.ok(fs.statSync(file).size<=500000);}
 try{
@@ -61,23 +61,23 @@ try{
   await context.route('**/*',route=>['127.0.0.1','localhost'].includes(new URL(route.request().url()).hostname)?route.continue():route.abort());
   page=await context.newPage();page.setDefaultTimeout(15000);page.on('pageerror',error=>errors.push(error.message));await page.goto(base,{waitUntil:'domcontentloaded',timeout:60000});
   await expect(page.getByText('可用积分 1,000',{exact:true})).toBeVisible();
-  await page.getByRole('button',{name:'测试题目讲解',exact:true}).click();await expect(page.getByTestId('android-ai-confirm-sheet')).toBeVisible();
-  assert.equal(paidRequests,0);await shot('confirm-light-375');await page.getByRole('button',{name:'取消本次AI请求',exact:true}).click();assert.equal(paidRequests,0);
-  checks.push('confirmation is visible before transport; cancel sends no model request');
-  await page.getByRole('button',{name:'测试题目讲解',exact:true}).click();await confirm();await expect(message(/实扣 0.24 积分/)).toBeVisible();
+  assert.equal(paidRequests,0);
+  await page.getByRole('button',{name:'测试题目讲解',exact:true}).click();await expect.poll(()=>paidRequests).toBe(1);
+  await expect(page.getByTestId('android-ai-confirm-sheet')).toHaveCount(0);
+  await expect(message(/实扣 0.24 积分/)).toBeVisible();
   assert.equal(paidRequests,1);await expect(page.getByText('可用积分 1,049.76',{exact:true})).toBeVisible();
-  checks.push('exact receipt shows 0.24 points despite a concurrent 50-point gift');
-  mode='cache';await page.getByRole('button',{name:'测试题目讲解',exact:true}).click();await confirm();await expect(message(/本次 0 积分/)).toBeVisible();
+  checks.push('one tap sends exactly one request without a sheet; the exact receipt shows 0.24 points despite a concurrent gift');
+  mode='cache';await page.getByRole('button',{name:'测试题目讲解',exact:true}).click();await expect(message(/本次 0 积分/)).toBeVisible();
   checks.push('cached response is explicitly shown as zero, not charged at its sample price');
-  mode='fail';await page.getByRole('button',{name:'测试题目讲解',exact:true}).click();await confirm();await expect(message(/已退回 3.68 积分/)).toBeVisible();
+  mode='fail';await page.getByRole('button',{name:'测试题目讲解',exact:true}).click();await expect(message(/已退回 3.68 积分/)).toBeVisible();
   checks.push('server-confirmed failed operation returns its whole reservation');
-  await page.getByRole('button',{name:'测试流式出题',exact:true}).click();assert.equal(streamRequests,0);await confirm();await expect(message(/AI 出题：实扣 0.24/)).toBeVisible();assert.equal(streamRequests,1);
-  checks.push('SSE generation uses the same confirmation and receipt flow');
-  await page.getByRole('button',{name:'测试后台出题',exact:true}).click();await confirm();await expect(message(/AI 出题：预扣/)).toBeVisible();
+  await page.getByRole('button',{name:'测试流式出题',exact:true}).click();await expect(message(/AI 出题：实扣 0.24/)).toBeVisible();assert.equal(streamRequests,1);
+  checks.push('SSE generation starts directly and keeps the exact receipt');
+  await page.getByRole('button',{name:'测试后台出题',exact:true}).click();await expect(message(/AI 出题：预扣/)).toBeVisible();
   finish(pendingJob);await expect(message(/AI 出题：实扣 0.24/)).toBeVisible({timeout:15000});
   checks.push('background generation keeps polling its own job receipt until actual settlement');
   await page.getByRole('button',{name:'打开老师答疑',exact:true}).click();await expect(page.getByTestId('android-inline-points')).toBeVisible();
-  await page.getByRole('textbox',{name:'向 AI 老师提问',exact:true}).fill('合成提问：为什么这样处理？');await page.getByRole('button',{name:'发送问题',exact:true}).click();await confirm();
+  await page.getByRole('textbox',{name:'向 AI 老师提问',exact:true}).fill('合成提问：为什么这样处理？');await page.getByRole('button',{name:'发送问题',exact:true}).click();
   await expect(page.getByText('合成老师答疑结果',{exact:true})).toBeVisible();await expect(page.getByTestId('android-inline-points').getByText(/AI 老师答疑：实扣 0.24/)).toBeVisible();
   checks.push('teacher modal has its own readable points entry and exact result feedback');
   await page.getByRole('button',{name:'收起',exact:true}).click();await page.getByRole('button',{name:'查看积分费用与记录',exact:true}).click();
@@ -100,13 +100,15 @@ try{
   await page.getByRole('button',{name:'查看积分费用与记录',exact:true}).click();await expect(sheet).toBeVisible();await expect(ledger.getByRole('button',{name:/查看详情/}).first()).toBeVisible();await assertFits();await shot('ledger-dark-320');
   checks.push('full-screen records fit 320px and 375px with light/dark surfaces, safe-area header and untruncated text');
   await page.getByRole('button',{name:'关闭积分费用与记录',exact:true}).click();await page.setViewportSize({width:375,height:812});
-  await page.getByRole('button',{name:'深色验收',exact:true}).click();await page.getByRole('button',{name:'测试题目讲解',exact:true}).click();await expect(page.getByTestId('android-ai-confirm-sheet')).toBeVisible();await shot('confirm-dark-375');
-  await page.setViewportSize({width:812,height:375});await expect(page.getByRole('button',{name:'继续使用AI，按实际用量结算',exact:true})).toBeInViewport();
-  await page.getByRole('button',{name:'取消本次AI请求',exact:true}).click();await page.setViewportSize({width:375,height:812});
-  checks.push('fee and record entry is one tap away, with light/dark and landscape confirmation controls');
+  await page.setViewportSize({width:812,height:375});await page.getByRole('button',{name:'查看积分费用与记录',exact:true}).click();
+  await expect(sheet.getByRole('button',{name:'关闭积分费用与记录',exact:true})).toBeInViewport();await assertFits();
+  await sheet.getByRole('button',{name:'关闭积分费用与记录',exact:true}).click();await page.setViewportSize({width:375,height:812});
+  checks.push('manual fee and record entry is usable in landscape without interrupting AI actions');
   await page.getByRole('button',{name:'切换测试账号',exact:true}).click();await expect(page.getByText('可用积分 0',{exact:true})).toBeVisible();
-  mode='cache';await page.getByRole('button',{name:'测试题目讲解',exact:true}).click();await confirm();await expect(message(/本次 0 积分/)).toBeVisible();
-  checks.push('account switching clears old wallet data and zero balance still permits a free cached result');
+  mode='reject';await page.getByRole('button',{name:'测试题目讲解',exact:true}).click();await expect(page.getByRole('status')).toHaveText('AI 积分不足');
+  await expect(message(/未新增积分账单/)).toBeVisible();
+  mode='cache';await page.getByRole('button',{name:'测试题目讲解',exact:true}).click();await expect(message(/本次 0 积分/)).toBeVisible();
+  checks.push('zero balance shows the server rejection without a new bill and still permits a cached result');
   assert.deepEqual(errors,[]);assert.equal(store.points.audit().passed,true);
   fs.writeFileSync(path.join(out,'result.json'),JSON.stringify({passed:true,checks,errors,realUpstreamRequests:0,nativeRuntime:'browser harness, not physical device'},null,2));console.log('Android points full-flow browser acceptance passed: '+checks.length+' checks');
 }catch(error){if(page){await shot('failure').catch(()=>{});fs.writeFileSync(path.join(out,'failure.txt'),await page.locator('body').innerText().catch(()=>''));}console.error(errors.slice(0,4).join('\n'));throw error;}

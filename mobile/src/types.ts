@@ -3,6 +3,7 @@ export type AppTab =
   | 'practice'
   | 'wrong'
   | 'ai'
+  | 'community'
   | 'exam'
   | 'vip'
   | 'profile';

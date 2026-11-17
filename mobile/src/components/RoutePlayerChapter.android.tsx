@@ -2,7 +2,10 @@ import { useState } from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { AnimatedPressable } from './Motion';
 import { AppAlert } from './AppAlert';
-import { openRoutePlayer, routePlayerAvailable } from '../../modules/route-player/index.android';
+import { openOfflineRoutePlayer, openRoutePlayer, routePlayerAvailable } from '../../modules/route-player/index.android';
+import { offlinePackOwner } from '../offline/offlinePractice.android';
+import { offlineOwnerKey } from '../offline/offlineStudyStore.android';
+import type { AuthResponse } from '../api/client';
 import { useTheme, useThemedStyles, type ThemeColors } from '../theme';
 import {mobileSessionSnapshot} from '../api/client';
 import {locationLearningApi as mobileApi} from '../api/locationLearning.android';
@@ -11,17 +14,21 @@ import {LocationLearningGate} from '../screens/LocationLearningGate.android';
 export const ROUTE_PLAYER_CHAPTER = '虚拟定位学习';
 
 /** Daily, account-and-certificate scoped study is verified before native entry. */
-export function RoutePlayerChapter({ search = '',preview=false }: { search?: string;preview?:boolean }) {
+export function RoutePlayerChapter({ search = '',preview=false,user }: { search?: string;preview?:boolean;user?: AuthResponse['user'] }) {
   const [opening, setOpening] = useState(false);
   const [gateOpen,setGateOpen]=useState(false);
   const s = useThemedStyles(styles);
   const { colors } = useTheme();
   if (!routePlayerAvailable() || !ROUTE_PLAYER_CHAPTER.includes(search.trim())) return null;
 
-  async function open() {
+  const owner = offlinePackOwner(user);
+  async function open(local: boolean) {
     if (opening) return;
     setOpening(true);
-    try { await openRoutePlayer(await mobileApi.locationLearningOpenCredentials()); }
+    try {
+      if (local && owner) await openOfflineRoutePlayer(offlineOwnerKey(owner));
+      else await openRoutePlayer(await mobileApi.locationLearningOpenCredentials());
+    }
     finally { setOpening(false); }
   }
 
@@ -32,7 +39,7 @@ export function RoutePlayerChapter({ search = '',preview=false }: { search?: str
         <Text style={s.title}>{ROUTE_PLAYER_CHAPTER}</Text>
         {opening ? <ActivityIndicator size="small" color={colors.brand} /> : <Text style={s.action}>进入学习 ›</Text>}
       </AnimatedPressable>
-      {gateOpen&&<LocationLearningGate visible={gateOpen} onClose={()=>setGateOpen(false)} onEnter={open}/>}
+      {gateOpen&&<LocationLearningGate visible={gateOpen} onClose={()=>setGateOpen(false)} onEnter={open} owner={owner}/>}
     </View>
   );
 }

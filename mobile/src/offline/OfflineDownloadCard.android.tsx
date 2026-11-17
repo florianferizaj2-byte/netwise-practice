@@ -3,24 +3,21 @@ import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { AnimatedPressable } from '../components/Motion';
 import { AppIcon } from '../components/AppIcon';
 import { radius, spacing, useThemedStyles, type ThemeColors } from '../theme';
-import { downloadOfflinePack, installedOfflinePackManifest, loadOfflinePack, type InstalledOfflinePack } from './offlinePacks.android';
+import { downloadOfflinePack, installedOfflinePackManifest } from './offlinePacks.android';
 import type { OfflinePackManifest } from './offlinePackFormat';
-import { OfflineStudyScreen } from './OfflineStudyScreen.android';
 
-export function OfflineDownloadCard({ userId, certificateId }: { userId: string; certificateId: string }) {
+export function OfflineDownloadCard({ userId, certificateId, name }: { userId: string; certificateId: string; name: string }) {
   const styles = useThemedStyles(createStyles);
   const [installed, setInstalled] = useState<OfflinePackManifest | null>(null);
   const [progress, setProgress] = useState<number | null>(null);
   const [message, setMessage] = useState('');
-  const [opened, setOpened] = useState<InstalledOfflinePack | null>(null);
-  const [opening, setOpening] = useState(false);
   const current = useRef<AbortController | null>(null);
   const owner = { userId, certificateId };
   useEffect(() => {
     let live = true;
     void installedOfflinePackManifest({ userId, certificateId }).then((value) => {
       if (live) setInstalled(value);
-    }).catch(() => { if (live) setMessage('本机学习包索引异常，请重新下载。'); });
+    }).catch(cause => { if (live) setMessage(cause instanceof Error ? cause.message : '本机学习包无法读取，请重新下载。'); });
     return () => {
       live = false;
       current.current?.abort();
@@ -51,42 +48,23 @@ export function OfflineDownloadCard({ userId, certificateId }: { userId: string;
     }
   }
 
-  async function open() {
-    if (opening) return;
-    setOpening(true);
-    setMessage('');
-    try {
-      const pack = await loadOfflinePack(owner);
-      if (!pack) throw new Error('请先下载本证书的学习包。');
-      setOpened(pack);
-    } catch (cause) {
-      setMessage(cause instanceof Error ? cause.message : '读取学习包失败，请重新下载。');
-    } finally {
-      setOpening(false);
-    }
-  }
-
   return <View style={styles.card} testID="offline-download-card">
-    {opened && <OfflineStudyScreen owner={owner} installed={opened} onClose={() => setOpened(null)} />}
     <View style={styles.heading}>
       <AppIcon name="download" size={22} color={styles.accent.color} />
-      <Text style={styles.title} accessibilityRole="header">证书离线学习包</Text>
+      <Text style={styles.title} accessibilityRole="header">{name}</Text>
     </View>
     <Text style={styles.meta}>{installed
       ? '已下载 · ' + installed.questionCount.toLocaleString() + ' 道题 · ' +
         (installed.bytes / 1024 / 1024).toFixed(1) + ' MB'
-      : '下载本证书的题目、答案、解析和配图。'}</Text>
+      : '未下载'}</Text>
     <View style={styles.actions}>
-      {installed && <AnimatedPressable accessibilityRole="button" accessibilityState={{ disabled: opening || progress !== null }}
-        disabled={opening || progress !== null} onPress={() => void open()} style={styles.button}>
-        <Text style={styles.accent}>{opening ? '正在读取本机学习包…' : '开始离线学习'}</Text>
-      </AnimatedPressable>}
       <AnimatedPressable accessibilityRole="button"
+        accessibilityLabel={installed ? `检查${name}题库更新` : `下载${name}题库`}
         accessibilityState={{ busy: progress !== null, disabled: progress !== null }}
         disabled={progress !== null} onPress={() => void download()} style={styles.button}>
         {progress !== null && <ActivityIndicator size="small" color={styles.accent.color} />}
         <Text style={styles.accent}>{progress !== null ? (progress >= 90 ? '正在校验学习包…' : '正在下载 ' + progress + '%')
-          : installed ? '检查学习包更新' : '下载学习包'}</Text>
+          : installed ? '检查更新' : '下载题库'}</Text>
       </AnimatedPressable>
       {progress !== null && <AnimatedPressable accessibilityRole="button" onPress={() => current.current?.abort()}
         style={styles.button}><Text style={styles.meta}>取消下载</Text></AnimatedPressable>}

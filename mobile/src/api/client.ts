@@ -10,7 +10,7 @@ import { API_BASE_URL, apiAssetOrigin, resolveApiUrl } from './endpoint';
 import type { VoicePackCatalog, VoicePackManifest } from './voicePacks';
 import type { StudyCatalog, StudyLesson, StudySession, StudyAttempt, StudyTeacherMessage, StudyTeacherAnswer, StudyTeacherRequest } from './studyTypes';
 import { studyRequestId } from './studyTypes';
-import type { Announcement } from '../announcements/client';
+import type { Announcement, AnnouncementDisplayMode } from '../announcements/client';
 import type { BackendContract } from './backendContract';
 export { ApiError } from './transport';
 export { API_BASE_URL, API_BASES, API_FALLBACK_URL } from './endpoint';
@@ -54,8 +54,8 @@ export type MobileRequestHooks = {
   after: (context: MobileRequestContext, outcome: MobileRequestOutcome) => void;
 };
 let mobileRequestHooks: MobileRequestHooks | undefined;
-// Optional UI integration. Only the Android shell registers it; Web does not
-// show a new prompt, fetch a receipt or change its existing request workflow.
+// Optional Android integration for live balance and billing receipts. Web does
+// not register it and keeps its existing request workflow.
 export function registerMobileRequestHooks(hooks: MobileRequestHooks) {
   mobileRequestHooks = hooks;
   return () => { if (mobileRequestHooks === hooks) mobileRequestHooks = undefined; };
@@ -365,6 +365,19 @@ export type AdminUser = {
 export type AdminUserPage = { users: AdminUser[]; total: number; limit: number; offset: number; nextOffset: number | null };
 export type AdminUserEdit = Pick<AdminUser, 'revision' | 'communityName' | 'certificateId' | 'membershipPlan' | 'membershipExpiresAt'>;
 export type AdminAnnouncement = { announcement: Announcement; revision: string };
+export type AdminOverview = {
+  updatedAt: string;
+  stats: { users: number; bannedUsers: number; questions: number; newUsers: number; activeLearners: number; attempts: number; correct: number };
+  usage: { calls: number; successful: number; knownCostCny: number; unknownCost: number };
+  trend: Array<{ date: string; attempts: number; newUsers: number; active: number }>;
+  pending: { feedback: number; drafts: number; failedJobs: number };
+};
+export type AdminPracticeRanking = {
+  rows: Array<{ id: string; username: string; communityName: string | null; totalAttempts: number; periodAttempts: number }>;
+  total: number;
+  offset: number;
+  limit: number;
+};
 
 export type Question = {
   id: string;
@@ -533,8 +546,9 @@ export type AiQuestionGroupResponse = {
 
 export type LeaderboardEntry = {
   rank: number;
-  userId: string;
+  userId?: string;
   name: string;
+  avatarUrl?: string | null;
   value: number;
   answered: number;
   correct: number;
@@ -715,7 +729,19 @@ export const mobileApi = {
     return request<{ saved: boolean }>(`/admin/users/${encodeURIComponent(id)}/ban`, { method: 'PUT', body: JSON.stringify({ banned, reason }) });
   },
   adminAnnouncement() { return request<AdminAnnouncement>('/admin/mobile/announcement'); },
-  adminSaveAnnouncement(fields: { revision: string; enabled: boolean; title: string; body: string }) {
+  adminOverview(days: 7 | 30, signal?: AbortSignal) {
+    return request<AdminOverview>(`/admin/console/overview?days=${days}`, { signal });
+  },
+  adminPracticeRanking(days: 7 | 30, sort: 'total' | 'period', offset: number, signal?: AbortSignal) {
+    return request<AdminPracticeRanking>(`/admin/console/overview/practice-ranking?days=${days}&sort=${sort}&offset=${offset}&limit=12`, { signal });
+  },
+  adminAccountControls() { return request<{ registrationEnabled: boolean }>('/admin/mobile/account-controls'); },
+  adminSaveAccountControls(registrationEnabled: boolean) {
+    return request<{ saved: boolean; registrationEnabled: boolean }>('/admin/mobile/account-controls', {
+      method: 'PUT', body: JSON.stringify({ registrationEnabled }),
+    });
+  },
+  adminSaveAnnouncement(fields: { revision: string; enabled: boolean; title: string; body: string; displayMode?: AnnouncementDisplayMode }) {
     return request<AdminAnnouncement & { saved: boolean }>('/admin/mobile/announcement', { method: 'PUT', body: JSON.stringify(fields) });
   },
 
@@ -736,7 +762,7 @@ export const mobileApi = {
   },
 
   accountEmailPolicy() {
-    return request<{ emailVerificationRequired: boolean; emailAvailable: boolean }>('/auth/security-config');
+    return request<{ emailVerificationRequired: boolean; emailAvailable: boolean; registrationEnabled?: boolean }>('/auth/security-config');
   },
 
   sendAccountEmailCode(fields: { purpose: 'register' | 'reset' | 'bind'; email: string; username?: string; currentPassword?: string }) {
@@ -921,8 +947,8 @@ export const mobileApi = {
   aiLearningQuote(setup: AiLearningSetup) {
     return request<AiLearningQuote>('/ai-learning/preview', {method:'POST',body:JSON.stringify(setup)});
   },
-  aiLearningJobs() {
-    return request<{jobs:AiLearningSummary[]}>('/ai-learning/jobs');
+  aiLearningJobs(signal?: AbortSignal) {
+    return request<{jobs:AiLearningSummary[]}>('/ai-learning/jobs', { signal });
   },
   aiLearningJob(id:string) {
     return request<AiLearningJob>('/ai-learning/jobs/'+encodeURIComponent(id));
@@ -1160,8 +1186,8 @@ export const mobileApi = {
     studyCache.invalidate(['/practice/catalog', '/questions?']);
   },
 
-  leaderboards() {
-    return request<LeaderboardResponse>('/community/leaderboards');
+  leaderboards(signal?: AbortSignal) {
+    return request<LeaderboardResponse>('/community/leaderboards', { signal });
   },
 
   communityMessages(before?: string, limit = 50, signal?: AbortSignal) {

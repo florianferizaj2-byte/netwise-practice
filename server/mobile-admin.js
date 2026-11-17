@@ -12,7 +12,21 @@ const editUser = z.object({
   membershipExpiresAt: z.string().datetime({ offset: true }).nullable(),
 }).strict();
 
-export function registerMobileAdminRoutes({ route, store, requireAdmin, certificates, announcements, profiles }) {
+export function createMobileAccountControls(db) {
+  db.exec(`CREATE TABLE IF NOT EXISTS mobile_account_controls (
+    id INTEGER PRIMARY KEY CHECK (id = 1),
+    registration_enabled INTEGER NOT NULL CHECK (registration_enabled IN (0, 1))
+  )`);
+  const read = db.prepare('SELECT registration_enabled FROM mobile_account_controls WHERE id = 1');
+  const write = db.prepare(`INSERT INTO mobile_account_controls VALUES (1, ?)
+    ON CONFLICT(id) DO UPDATE SET registration_enabled = excluded.registration_enabled`);
+  return {
+    registrationEnabled: () => read.get()?.registration_enabled !== 0,
+    setRegistrationEnabled: (enabled) => write.run(Number(enabled)),
+  };
+}
+
+export function registerMobileAdminRoutes({ route, store, requireAdmin, certificates, announcements, profiles, controls }) {
   const managedView = (user) => ({ ...view(user), avatarUrl: profiles?.view(user)?.avatarUrl || null });
   const adminRoute = (method, suffix, handler) => {
     route(method, '/api/admin/mobile' + suffix, handler);
@@ -63,7 +77,27 @@ export function registerMobileAdminRoutes({ route, store, requireAdmin, certific
     requireAdmin(req);
     const result = await announcements.save(req.body);
     store.audit(req.user.id, 'mobile_announcement_updated', 'announcement', result.announcement.id,
-      { title: result.announcement.title, enabled: result.announcement.enabled });
+      { title: result.announcement.title, enabled: result.announcement.enabled, displayMode: result.announcement.displayMode });
     return { saved: true, ...result };
+  });
+  adminRoute('get', '/account-controls', (req) => {
+    requireAdmin(req);
+    return { registrationEnabled: controls.registrationEnabled() };
+  });
+  adminRoute('put', '/account-controls', (req) => {
+    requireAdmin(req);
+    const fields = z.object({ registrationEnabled: z.boolean() }).strict().parse(req.body);
+    store.db.exec('BEGIN IMMEDIATE');
+    try {
+      if (fields.registrationEnabled !== controls.registrationEnabled()) {
+        controls.setRegistrationEnabled(fields.registrationEnabled);
+        store.audit(req.user.id, 'registration_policy_updated', 'account_controls', 'global', fields);
+      }
+      store.db.exec('COMMIT');
+      return { saved: true, ...fields };
+    } catch (error) {
+      store.db.exec('ROLLBACK');
+      throw error;
+    }
   });
 }

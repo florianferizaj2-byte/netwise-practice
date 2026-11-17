@@ -1,10 +1,6 @@
-import { OfflineDeviceLibrary, type OfflineLibrarySelection } from '../offline/OfflineDeviceLibrary.android';
-import { OfflineStudyScreen } from '../offline/OfflineStudyScreen.android';
-import { offlineProfileFromSession, readOfflineDeviceProfile, saveOfflineDeviceProfile, type OfflineDeviceProfile } from '../offline/offlineDeviceProfile.android';
 import { useOfflineStudySync } from '../offline/offlineStudySync.android';
 import { setOfflineRoutePlayerIdentity } from '../../modules/route-player/index.android';
 import { offlineOwnerKey } from '../offline/offlineStudyStore.android';
-import { AiIcon } from '../screens/ai-learning/AiElements';
 import { inlineAiGenerationPage } from '../aiGenerationPresentation';
 import {PracticeSyncNotice} from '../components/PracticeSyncNotice.android';
 import {usePracticeAttemptOwner} from '../api/practiceAttemptSync.android';
@@ -41,6 +37,8 @@ import {
   type DashboardResponse,
 } from '../api/client';
 import { useCachedQuery } from '../api/useCachedQuery';
+import { communityUnreadLabel } from '../api/communityUnread';
+import { useCommunityUnread } from '../api/useCommunityUnread';
 import { ScreenActivityProvider, useAppActive } from './ScreenActivity';
 import { AnimatedPressable, EntranceView } from '../components/Motion';
 import { BrandMark } from '../components/BrandMark';
@@ -69,7 +67,8 @@ import {
 import { APP_VERSION } from '../version';
 import {practiceVoice} from '../practiceVoice';
 import { backendConnectionNotice } from '../api/backendContract';
-import { AiLearningScreen } from '../screens/AiLearningScreen';
+import { CommunityScreen } from '../screens/CommunityScreen';
+import type { AiLearningKind } from '../api/aiLearningTypes';
 import { ExamWorkspaceScreen } from '../screens/ExamWorkspaceScreen';
 import { AiLearningTaskNotice } from '../components/AiLearningTaskNotice';
 import { AndroidPointsBar } from '../components/AndroidPointsBar.android';
@@ -82,12 +81,12 @@ import type {
   PracticeSource,
 } from '../types';
 
-const tabs: Array<{ id: AppTab; label: string; icon: string; symbol: string }> = [
-  { id: 'today', label: '今日', icon: '⌂', symbol: 'home' },
-  { id: 'practice', label: '练习', icon: '✦', symbol: 'book' },
-  { id: 'ai', label: 'AI 生成', icon: '✦', symbol: 'sparkles' },
-  { id: 'exam', label: '考试', icon: '□', symbol: 'exam' },
-  { id: 'profile', label: '我的', icon: '◎', symbol: 'person' },
+const tabs: Array<{ id: AppTab; label: string; symbol: string }> = [
+  { id: 'today', label: '今日', symbol: 'home' },
+  { id: 'practice', label: '练习', symbol: 'book' },
+  { id: 'community', label: '社区', symbol: 'message' },
+  { id: 'exam', label: '考试', symbol: 'exam' },
+  { id: 'profile', label: '我的', symbol: 'person' },
 ];
 
 export function AppShell() {
@@ -96,28 +95,9 @@ export function AppShell() {
   const styles = useThemedStyles(createStyles, iosStyles.shell);
   const [isPreview, setIsPreview] = useState(false);
   const [session, setSession] = useState<AuthResponse | null>(null);
-  const [offlineProfile, setOfflineProfile] = useState<OfflineDeviceProfile | null>(null);
-  const [offlineLibraryOpen, setOfflineLibraryOpen] = useState(false);
-  const [offlineSelection, setOfflineSelection] = useState<OfflineLibrarySelection | null>(null);
-  const offlineProfileChanged = useRef(false);
-  useEffect(() => {
-    let live = true;
-    void readOfflineDeviceProfile().then((profile) => {
-      if (live && !offlineProfileChanged.current) setOfflineProfile(profile);
-    }).catch(() => undefined);
-    return () => { live = false; };
-  }, []);
-  useEffect(() => {
-    if (!session) return;
-    const profile = offlineProfileFromSession(session);
-    offlineProfileChanged.current = true;
-    setOfflineProfile(profile);
-    void saveOfflineDeviceProfile(profile).catch(() => undefined);
-    setOfflineSelection((selection) => selection?.owner.userId === profile.userId ? selection : null);
-  }, [session]);
   const [activeTab, setActiveTab] = useState<AppTab>('today');
   const [dailyPracticeOpen, setDailyPracticeOpen] = useState(false);
-  const [aiExamEntryKey, setAiExamEntryKey] = useState(0);
+  const [aiEntry, setAiEntry] = useState<{ key: number; kind: AiLearningKind }>({ key: 0, kind: 'exam' });
   const [dailyPracticeDay, setDailyPracticeDay] = useState<string | null>(null);
   const appActive = useAppActive();
   useEffect(()=>{if(!session)void practiceVoice.setAccount(null);else if(appActive)void practiceVoice.setAccount(String(session.user.id));else practiceVoice.stop();},[session?.user.id,appActive]);
@@ -125,10 +105,10 @@ export function AppShell() {
   useOfflineStudySync(isPreview ? undefined : session?.user, appActive);
   useEffect(() => {
     const user = isPreview ? undefined : session?.user;
-    const scope = offlineSelection ? offlineOwnerKey(offlineSelection.owner) : user?.certificateId ? offlineOwnerKey({ userId: user.id, certificateId: user.certificateId }) : null;
+    const scope = user?.certificateId ? offlineOwnerKey({ userId: user.id, certificateId: user.certificateId }) : null;
     void setOfflineRoutePlayerIdentity(scope).catch(() => undefined);
     return () => { void setOfflineRoutePlayerIdentity(null).catch(() => undefined); };
-  }, [isPreview, session?.user.id, session?.user.certificateId, offlineSelection?.owner.userId, offlineSelection?.owner.certificateId]);
+  }, [isPreview, session?.user.id, session?.user.certificateId]);
   const { data: dashboard } = useCachedQuery(
     '/dashboard?summary=1',
     mobileApi.dashboard,
@@ -163,8 +143,12 @@ export function AppShell() {
   const seenAiJobIdsRef = useRef(new Set<string>());
   const knownAiJobStatuses = useRef(new Map<string, AiQuestionGenerationJob['status']>());
   const [certificatePickerOpen, setCertificatePickerOpen] = useState(false);
+  const communityUnread = useCommunityUnread(
+    !isPreview && session?.user.certificateId && session.user.profileComplete === true ? session.user.id : undefined,
+    appActive && activeTab !== 'community' && !focusMode && !dailyPracticeOpen && !certificatePickerOpen,
+  );
   const [sessionRestored, setSessionRestored] = useState(false);
-  useLaunchStage('route', sessionRestored || !!offlineProfile);
+  useLaunchStage('route', sessionRestored);
   const [updateRelease, setUpdateRelease] = useState<AppVersionResponse | null>(
     null,
   );
@@ -313,7 +297,7 @@ export function AppShell() {
         setBackendNotice(backendConnectionNotice(release));
       })
       .catch(() => {
-        if (mounted) setBackendNotice('暂未连接到服务器，可先查看已缓存内容。网络恢复后请重新连接。');
+        if (mounted) setBackendNotice('暂未连接到服务器。');
         // A temporary network failure should not brick the app; normal API requests
         // will still report their own connection state after the check completes.
       });
@@ -390,11 +374,6 @@ export function AppShell() {
   }
 
   function handleLogout() {
-    offlineProfileChanged.current = true;
-    setOfflineProfile(null);
-    setOfflineLibraryOpen(false);
-    setOfflineSelection(null);
-    void saveOfflineDeviceProfile(null).catch(() => undefined);
     if (session) void mobileApi.logout().catch(() => undefined);
     setSession(null);
     setIsPreview(false);
@@ -421,8 +400,11 @@ export function AppShell() {
     if (session?.certificates.length) setCertificatePickerOpen(true);
   }
 
-  function handleNavigate(tab: AppTab, options?: NavigationOptions) {
-    if (tab === 'exam' && options?.openAiExam) setAiExamEntryKey(key => key + 1);
+  function handleNavigate(destination: AppTab, options?: NavigationOptions) {
+    const tab = destination === 'ai' ? 'exam' : destination;
+    if (destination === 'ai' || (tab === 'exam' && options?.openAiExam)) {
+      setAiEntry(({ key }) => ({ key: key + 1, kind: destination === 'ai' ? 'practice' : 'exam' }));
+    }
     if (tab === 'practice' && options?.practiceSession === 'daily') {
       setDailyPracticeDay(new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Shanghai' }));
       setDailyPracticeOpen(true);
@@ -483,18 +465,7 @@ export function AppShell() {
     setVersionCheckKey((current) => current + 1);
   }
 
-  const onOpenOffline = offlineProfile ? () => setOfflineLibraryOpen(true) : undefined;
-  if (offlineLibraryOpen && offlineProfile) {
-    return <>
-      <StatusBar style={resolvedMode === 'dark' ? 'light' : 'dark'} />
-      <OfflineDeviceLibrary key={offlineProfile.userId} profile={offlineProfile}
-        onBack={() => { setOfflineSelection(null); setOfflineLibraryOpen(false); }} onOpen={setOfflineSelection} />
-      {offlineSelection && offlineSelection.owner.userId === offlineProfile.userId &&
-        <OfflineStudyScreen owner={offlineSelection.owner} installed={offlineSelection.installed} onClose={() => setOfflineSelection(null)} />}
-    </>;
-  }
-
-  if (!sessionRestored && !offlineProfile) {
+  if (!sessionRestored) {
     return <VersionCheckingScreen />;
   }
 
@@ -503,7 +474,6 @@ export function AppShell() {
       <UpdateRequiredScreen
         release={updateRelease}
         onRetry={retryVersionCheck}
-        onOffline={onOpenOffline}
       />
     );
   }
@@ -515,7 +485,6 @@ export function AppShell() {
         <AuthScreen
           onAuthenticated={handleAuthenticated}
           onPreview={() => setIsPreview(true)}
-          onOffline={onOpenOffline}
         />
       </>
     );
@@ -557,9 +526,6 @@ export function AppShell() {
       <View style={styles.screen}>
         {!isPreview && !!backendNotice && <View testID="backend-connection-notice" accessibilityRole="alert" style={{ paddingHorizontal: spacing.md, paddingVertical: 12, gap: 8, backgroundColor: colors.background, borderBottomWidth: 1, borderBottomColor: colors.border }}>
           <Text style={{ color: colors.text, fontSize: 14, lineHeight: 21 }}>{backendNotice}</Text>
-          {onOpenOffline && <AnimatedPressable accessibilityRole="button" onPress={onOpenOffline} style={{ minHeight: 48, alignSelf: 'flex-start', justifyContent: 'center', paddingHorizontal: 12 }}>
-            <Text style={{ color: colors.brand, fontSize: 15, fontWeight: '700' }}>打开本机学习包</Text>
-          </AnimatedPressable>}
           <AnimatedPressable accessibilityRole="button" onPress={() => setVersionCheckKey(key => key + 1)} style={{ alignSelf: 'flex-start', paddingVertical: 6, paddingHorizontal: 12 }}>
             <Text style={{ color: colors.brand, fontSize: 14, fontWeight: '500' }}>重新连接</Text>
           </AnimatedPressable>
@@ -608,10 +574,11 @@ export function AppShell() {
                   practiceQuestionIds,
                   practiceAiGroupId,
                   aiQuestionGroupId,
-                  aiExamEntryKey,
+                  aiEntry,
                   onPracticeModeChange: setPracticeMode,
                   onOpenCertificatePicker: handleOpenCertificatePicker,
                   onUserUpdated: handleUserUpdated,
+                  onCommunityRead: communityUnread.markRead,
                   user: session?.user,
                   certificates: session?.certificates ?? [],
                 })}
@@ -640,10 +607,11 @@ export function AppShell() {
             }}
           />
         )}
-        <AiLearningTaskNotice enabled={appActive && !!session && !focusMode && activeTab !== 'ai' && activeTab !== 'exam' && !dailyPracticeOpen}
+        <AiLearningTaskNotice inline enabled={appActive && !!session && !focusMode && activeTab !== 'exam' && !dailyPracticeOpen}
           scope={String(session?.user.id) + ':' + session?.user.certificateId}
           onOpen={kind => handleNavigate(kind === 'exam' ? 'exam' : 'ai', {openAiExam: kind === 'exam'})} />
-        {!focusMode&&<TabBar activeTab={activeTab} onChange={handleNavigate} hidden={dailyPracticeOpen} />}
+        {!focusMode&&<TabBar activeTab={activeTab} onChange={handleNavigate} hidden={dailyPracticeOpen}
+          communityUnread={activeTab === 'community' ? 0 : communityUnread.count} />}
         {dailyPracticeDay && <DailyPracticePanel
           key={`${session?.user.id ?? 'preview'}:${session?.user.certificateId ?? ''}:${dailyPracticeDay}`}
           user={session?.user} certificates={session?.certificates} onOpenCertificatePicker={handleOpenCertificatePicker}
@@ -675,11 +643,9 @@ function VersionCheckingScreen() {
 
 function UpdateRequiredScreen({
   onRetry,
-  onOffline,
   release,
 }: {
   onRetry: () => void;
-  onOffline?: () => void;
   release: AppVersionResponse;
 }) {
   const { resolvedMode } = useTheme();
@@ -798,9 +764,6 @@ function UpdateRequiredScreen({
             </Text>
             <AppIcon style={styles.updateBrowserButtonArrow}>→</AppIcon>
           </AnimatedPressable>}
-          {onOffline && <AnimatedPressable accessibilityRole="button" onPress={onOffline} style={styles.updateRetryButton}>
-            <Text style={styles.updateRetryText}>打开本机学习包</Text>
-          </AnimatedPressable>}
           <AnimatedPressable
             accessibilityLabel="重新检查版本"
             accessibilityRole="button"
@@ -835,10 +798,11 @@ function renderScreen(
     practiceQuestionIds?: string[];
     practiceAiGroupId?: string;
     aiQuestionGroupId?: string;
-    aiExamEntryKey?: number;
+    aiEntry: { key: number; kind: AiLearningKind };
     onPracticeModeChange: (mode: PracticeMode) => void;
     onOpenCertificatePicker: () => void;
     onUserUpdated: (user: AuthResponse['user']) => void;
+    onCommunityRead: ReturnType<typeof useCommunityUnread>['markRead'];
     user: AuthResponse['user'] | undefined;
     certificates: AuthResponse['certificates'];
   },
@@ -854,12 +818,11 @@ function renderScreen(
       );
     case 'wrong':
       return <WrongScreen onNavigate={onNavigate} {...data} />;
-    case 'ai':
-      return <AiLearningScreen key={data.user?.id + ':' + data.user?.certificateId} user={data.user} preview={data.preview}
-        certificateName={data.certificates.find(item => item.id === data.user?.certificateId)?.name || '当前证书'} onNavigate={onNavigate} />;
+    case 'community':
+      return <CommunityScreen learning preview={data.preview} user={data.user} showLeaderboard={false} onSignIn={data.onLogout} onLatestLoaded={data.onCommunityRead} />;
     case 'exam':
       return <ExamWorkspaceScreen key={data.user?.id + ':' + data.user?.certificateId} normal={<ExamScreen onNavigate={onNavigate} {...data} />}
-        user={data.user} preview={data.preview} openAiKey={data.aiExamEntryKey}
+        user={data.user} preview={data.preview} enablePractice openAiKey={data.aiEntry.key} openAiKind={data.aiEntry.kind}
         certificateName={data.certificates.find(item => item.id === data.user?.certificateId)?.name || '当前证书'} onNavigate={onNavigate} />;
     case 'vip':
       return <VipScreen preview={data.preview} user={data.user}
@@ -876,10 +839,12 @@ function renderScreen(
 function TabBar({
   activeTab,
   onChange,
+  communityUnread,
   hidden = false,
 }: {
   activeTab: AppTab;
   onChange: (tab: AppTab) => void;
+  communityUnread: number;
   hidden?: boolean;
 }) {
   const styles = useThemedStyles(createStyles, iosStyles.shell);
@@ -891,6 +856,7 @@ function TabBar({
           key={tab.id}
           onPress={() => onChange(tab.id)}
           tab={tab}
+          badge={tab.id === 'community' ? communityUnreadLabel(communityUnread) : ''}
         />
       ))}
     </View>
@@ -901,10 +867,12 @@ function TabBarItem({
   active,
   onPress,
   tab,
+  badge,
 }: {
   active: boolean;
   onPress: () => void;
   tab: (typeof tabs)[number];
+  badge: string;
 }) {
   const { animationScale, reduceMotion } = useTheme();
   const styles = useThemedStyles(createStyles, iosStyles.shell);
@@ -925,18 +893,22 @@ function TabBarItem({
 
   return (
     <AnimatedPressable
-      accessibilityLabel={`${tab.label}导航`}
+      accessibilityLabel={badge ? `${tab.label}导航，${badge === '99+' ? '超过 99' : badge} 条未读消息` : `${tab.label}导航`}
       accessibilityRole="button"
       accessibilityState={{ selected: active }}
       onPress={onPress}
-      style={[styles.tab, active && tab.id !== "ai" && styles.activeTab]}
+      style={[styles.tab, active && styles.activeTab]}
     >
-      <Animated.View style={{ transform: [{ scale: iconScale }] }}>{tab.id === "ai" ?
-        <View style={{width:34,height:34,borderRadius:10,backgroundColor:"#2962F4",alignItems:"center",justifyContent:"center"}}><AiIcon name="sparkle" color="#FFF" size={23}/></View> :
-        <AppIcon name={tab.symbol} selected={active} size={23} style={[styles.tabIcon, active && styles.activeTabIcon]} />}</Animated.View>
+      <Animated.View style={{ transform: [{ scale: iconScale }] }}>
+        <AppIcon name={tab.symbol} selected={active} size={21} style={[styles.tabIcon, active && styles.activeTabIcon]} />
+      </Animated.View>
       <Text style={[styles.tabLabel, active && styles.activeTabLabel]}>
         {tab.label}
       </Text>
+      {!!badge && <View pointerEvents="none" accessible={false} accessibilityElementsHidden importantForAccessibility="no-hide-descendants"
+        testID="community-unread-badge" style={styles.tabBadge}>
+        <Text allowFontScaling={false} style={styles.tabBadgeText}>{badge}</Text>
+      </View>}
     </AnimatedPressable>
   );
 }
@@ -1357,32 +1329,52 @@ const createStyles = (colors: ThemeColors) =>
       borderTopWidth: 1,
       flexDirection: 'row',
       justifyContent: 'space-around',
-      paddingBottom: spacing.xs,
-      paddingTop: spacing.xs,
+      paddingVertical: 3,
     },
     tab: {
       alignItems: 'center',
       flex: 1,
       minWidth: 0,
       gap: 2,
-      minHeight: 60,
+      minHeight: 48,
       marginHorizontal: 3,
       justifyContent: 'center',
     },
-    activeTab: { backgroundColor: colors.brandSoft, borderRadius: 18 },
+    activeTab: { backgroundColor: colors.brandSoft, borderRadius: 14 },
     tabIcon: {
       color: colors.textFaint,
-      fontSize: 22,
-      fontWeight: '700',
-      height: 25,
-      lineHeight: 25,
     },
     activeTabIcon: {
       color: colors.brand,
     },
+    tabBadge: {
+      position: 'absolute',
+      top: 0,
+      right: 4,
+      minWidth: 18,
+      height: 18,
+      paddingHorizontal: 3,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderColor: colors.surface,
+      borderWidth: 1,
+      borderRadius: radius.pill,
+      backgroundColor: '#BB2336',
+    },
+    tabBadgeText: {
+      color: colors.white,
+      fontWeight: '800',
+      fontSize: 10,
+      lineHeight: 12,
+      includeFontPadding: false,
+      fontVariant: ['tabular-nums'],
+    },
     tabLabel: {
       color: colors.textFaint,
       fontSize: 12,
+      lineHeight: 16,
+      includeFontPadding: false,
+      textAlign: 'center',
       fontWeight: '600',
     },
     activeTabLabel: {

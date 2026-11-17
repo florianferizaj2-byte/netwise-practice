@@ -1,5 +1,7 @@
 import { AppIcon } from '../components/AppIcon';
 import { iosStyles } from '../iosStyles';
+import { LeaderboardModal } from './LeaderboardModal';
+import { LearningCommunityLayout } from './LearningCommunityLayout';
 import { useEffect, useRef, useState } from 'react';
 import * as ImagePicker from 'expo-image-picker';
 import { prepareCommunityImage } from '../platform/communityImage';
@@ -8,9 +10,7 @@ import {
   FlatList,
   Image,
   KeyboardAvoidingView,
-  Modal,
   Platform,
-  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -22,26 +22,21 @@ import {
   type AuthResponse,
   type CommunityImagePayload,
   type CommunityMessage,
-  type LeaderboardResponse,
 } from '../api/client';
 import { AnimatedPressable, EntranceView } from '../components/Motion';
 import { useScreenActive } from '../navigation/ScreenActivity';
 import { mergeMessages } from '../api/communityMessages';
+import { communityCursor, type CommunityCursor } from '../api/communityUnread';
 import { isAppleWeb, radius, shadow, spacing, useThemedStyles, useTheme, type ThemeColors } from '../theme';
-
-const quickEmojis = ['😀', '🤝', '🎉', '💪', '❤️', '😂'];
-const leaderboardTabs = [
-  { key: 'answered', label: '刷题量', unit: '题' },
-  { key: 'accuracy', label: '正确率', unit: '%' },
-  { key: 'streakDays', label: '坚持天数', unit: '天' },
-  { key: 'submitted', label: '提交题目', unit: '题' },
-] as const;
-type LeaderboardTab = typeof leaderboardTabs[number]['key'];
 
 type CommunityScreenProps = {
   preview?: boolean;
   user?: AuthResponse['user'];
   onClose?: () => void;
+  showLeaderboard?: boolean;
+  learning?: boolean;
+  onSignIn?: () => void;
+  onLatestLoaded?: (latest: CommunityCursor | null) => void;
 };
 
 type PendingImage = CommunityImagePayload & { uri: string };
@@ -82,10 +77,11 @@ function imageMimeType(value?: string): PendingImage['mimeType'] {
   return 'image/jpeg';
 }
 
-export function CommunityScreen({ preview = false, user, onClose }: CommunityScreenProps) {
+export function CommunityScreen({ preview = false, user, onClose, showLeaderboard = true, learning = false, onSignIn, onLatestLoaded }: CommunityScreenProps) {
   const { colors } = useTheme();
   const styles = useThemedStyles(createStyles, iosStyles.community);
   const active = useScreenActive();
+  const readOnly = preview || (learning && !user);
   const [messages, setMessages] = useState<CommunityMessage[]>([]);
   const [hasMore, setHasMore] = useState(false);
   const [nextBefore, setNextBefore] = useState<string | null>(null);
@@ -96,10 +92,7 @@ export function CommunityScreen({ preview = false, user, onClose }: CommunityScr
   const [attachment, setAttachment] = useState<PendingImage | null>(null);
   const [error, setError] = useState('');
   const [leaderboardOpen, setLeaderboardOpen] = useState(false);
-  const [leaderboard, setLeaderboard] = useState<LeaderboardResponse | null>(null);
-  const [leaderboardTab, setLeaderboardTab] = useState<LeaderboardTab>('answered');
-  const [leaderboardLoading, setLeaderboardLoading] = useState(false);
-  const [leaderboardError, setLeaderboardError] = useState('');
+  const [refreshKey, setRefreshKey] = useState(0);
   const scrollRef = useRef<FlatList<CommunityMessage> | null>(null);
   const initialized = useRef(false);
   const historyLoaded = useRef(false);
@@ -114,8 +107,8 @@ export function CommunityScreen({ preview = false, user, onClose }: CommunityScr
     const controller = new AbortController();
     if (!initialized.current) setLoading(true);
     setError('');
-    if (preview) {
-      setMessages(previewMessages);
+    if (readOnly) {
+      setMessages(learning ? [] : previewMessages);
       setHasMore(false);
       setNextBefore(null);
       setLoading(false);
@@ -130,6 +123,7 @@ export function CommunityScreen({ preview = false, user, onClose }: CommunityScr
       try {
         const result = await mobileApi.communityMessages(undefined, 50, controller.signal);
         if (!mounted) return;
+        onLatestLoaded?.(communityCursor(result.messages.at(-1)));
         scrollAfterUpdate.current = !initialized.current || nearBottom.current;
         setMessages((current) => mergeMessages(current, result.messages));
         // The older-history cursor belongs to loadOlder, never to polling.
@@ -149,10 +143,10 @@ export function CommunityScreen({ preview = false, user, onClose }: CommunityScr
     void refresh();
     const timer = setInterval(() => { void refresh(); }, 10000);
     return () => { mounted = false; controller.abort(); clearInterval(timer); };
-  }, [active, preview]);
+  }, [active, readOnly, learning, refreshKey, onLatestLoaded]);
 
   async function loadOlder() {
-    if (preview || loadingMore || !hasMore || !nextBefore) return;
+    if (readOnly || loadingMore || !hasMore || !nextBefore) return;
     setLoadingMore(true);
     historyLoaded.current = true;
     scrollAfterUpdate.current = false;
@@ -170,7 +164,7 @@ export function CommunityScreen({ preview = false, user, onClose }: CommunityScr
   }
 
   async function chooseImage() {
-    if (sending || preview) return;
+    if (sending || readOnly) return;
     setError('');
     try {
       // Safari must open the picker directly from the user's tap.
@@ -207,21 +201,16 @@ export function CommunityScreen({ preview = false, user, onClose }: CommunityScr
     }
   }
 
-  function addEmoji(emoji: string) {
-    if (preview || sending) return;
-    setDraft((current) => `${current}${emoji}`.slice(0, 2000));
-  }
-
   async function sendMessage() {
     if (sendPending.current) return;
     const text = draft.trim();
-    if (preview) {
+    if (readOnly) {
       setDraft('');
       setAttachment(null);
       return;
     }
     if (!text && !attachment) {
-      setError('先输入文字、Emoji 或选择一张图片');
+      setError('先输入文字或选择一张图片');
       return;
     }
     setSending(true);
@@ -241,22 +230,23 @@ export function CommunityScreen({ preview = false, user, onClose }: CommunityScr
     }
   }
 
-  async function openLeaderboard() {
-    setLeaderboardOpen(true);
-    setLeaderboardError('');
-    if (preview) return;
-    setLeaderboardLoading(true);
-    try {
-      setLeaderboard(await mobileApi.leaderboards());
-    } catch (cause: unknown) {
-      setLeaderboardError(cause instanceof Error ? cause.message : '排行榜加载失败');
-    } finally {
-      setLeaderboardLoading(false);
-    }
+  if (learning) {
+    return <LearningCommunityLayout
+      active={active} readOnly={readOnly} user={user} messages={messages}
+      listRef={scrollRef} loading={loading} loadingMore={loadingMore} hasMore={hasMore} error={error}
+      draft={draft} attachmentUri={attachment?.uri} sending={sending}
+      onNearLatest={(value) => { nearBottom.current = value; }}
+      onListSizeChange={() => {
+        if (scrollAfterUpdate.current) {
+          scrollAfterUpdate.current = false;
+          scrollRef.current?.scrollToOffset({ offset: 0, animated: false });
+        }
+      }}
+      onRefresh={() => { setLoading(true); setRefreshKey((key) => key + 1); }} onLoadOlder={() => void loadOlder()}
+      onSignIn={onSignIn} onPickImage={() => void chooseImage()} onRemoveAttachment={() => setAttachment(null)}
+      onDraftChange={(value) => setDraft(value.slice(0, 2000))} onSend={() => void sendMessage()}
+    />;
   }
-
-  const activeBoard = leaderboard?.[leaderboardTab];
-  const activeTab = leaderboardTabs.find((tab) => tab.key === leaderboardTab)!;
 
   return (
     <KeyboardAvoidingView
@@ -264,7 +254,7 @@ export function CommunityScreen({ preview = false, user, onClose }: CommunityScr
       style={styles.flex}
     >
       <View style={styles.screen}>
-        <View style={styles.header}>
+        <View style={[styles.header, !showLeaderboard && styles.chatHeader]}>
           {onClose && (
             <AnimatedPressable
               accessibilityLabel="返回我的"
@@ -278,15 +268,15 @@ export function CommunityScreen({ preview = false, user, onClose }: CommunityScr
           <View>
             <Text style={styles.title}>考匠社区</Text>
           </View>
-          <AnimatedPressable
+          {showLeaderboard && <AnimatedPressable
             accessibilityLabel="打开排行榜"
             accessibilityRole="button"
-            onPress={() => void openLeaderboard()}
+            onPress={() => setLeaderboardOpen(true)}
             style={styles.leaderboardEntry}
           >
             {isAppleWeb && <AppIcon name="trophy" size={17} color={colors.brand} />}
-            <Text style={styles.leaderboardEntryText}>{isAppleWeb ? '排行榜' : '♛ 排行榜'}</Text>
-          </AnimatedPressable>
+            <Text style={styles.leaderboardEntryText}>排行榜</Text>
+          </AnimatedPressable>}
         </View>
 
         <FlatList
@@ -369,13 +359,6 @@ export function CommunityScreen({ preview = false, user, onClose }: CommunityScr
           </View>
         )}
 
-        <View style={styles.emojiRow}>
-          {quickEmojis.map((emoji) => (
-            <AnimatedPressable key={emoji} onPress={() => addEmoji(emoji)} style={styles.emojiButton}>
-              <Text style={styles.emoji}>{emoji}</Text>
-            </AnimatedPressable>
-          ))}
-        </View>
         <View style={styles.composerRow}>
           <AnimatedPressable
             accessibilityLabel="选择社区图片"
@@ -406,72 +389,9 @@ export function CommunityScreen({ preview = false, user, onClose }: CommunityScr
             {sending ? <ActivityIndicator color={colors.white} size="small" /> : <AppIcon name="send" style={styles.sendText}>发送</AppIcon>}
           </AnimatedPressable>
         </View>
-        <Modal
-          animationType="slide"
-          onRequestClose={() => setLeaderboardOpen(false)}
-          transparent
-        visible={active && leaderboardOpen}
-        >
-          <View style={styles.leaderboardBackdrop}>
-            <View style={styles.leaderboardPanel}>
-              <View style={styles.leaderboardHeader}>
-                <View>
-                  <Text style={styles.leaderboardTitle}>社区排行榜</Text>
-                  <Text style={styles.leaderboardSubtitle}>一起记录每天的进步</Text>
-                </View>
-                <AnimatedPressable accessibilityLabel="关闭排行榜" onPress={() => setLeaderboardOpen(false)} style={styles.leaderboardClose}>
-                  <AppIcon style={styles.leaderboardCloseText}>×</AppIcon>
-                </AnimatedPressable>
-              </View>
-              <View style={styles.leaderboardTabs}>
-                {leaderboardTabs.map((tab) => (
-                  <AnimatedPressable
-                    accessibilityLabel={`${tab.label}榜单`}
-                    key={tab.key}
-                    onPress={() => setLeaderboardTab(tab.key)}
-                    style={[styles.leaderboardTab, leaderboardTab === tab.key && styles.leaderboardTabActive]}
-                  >
-                    <Text style={[styles.leaderboardTabText, leaderboardTab === tab.key && styles.leaderboardTabTextActive]}>{tab.label}</Text>
-                  </AnimatedPressable>
-                ))}
-              </View>
-              <Text style={styles.leaderboardRule}>
-                {leaderboardTab === 'accuracy'
-                  ? `至少作答 ${leaderboard?.accuracyMinAttempts ?? 20} 题参与正确率排行`
-                  : leaderboardTab === 'streakDays'
-                    ? '按北京时间计算连续刷题天数，今天未刷时保留昨日连续记录'
-                    : leaderboardTab === 'submitted'
-                      ? '统计通过双重核验并提交到服务器的题目'
-                      : '统计累计作答次数'}
-              </Text>
-              {leaderboardLoading && <ActivityIndicator color={colors.brand} />}
-              {!!leaderboardError && <Text style={styles.errorText}>{leaderboardError}</Text>}
-              <ScrollView contentContainerStyle={styles.leaderboardRows} showsVerticalScrollIndicator={false}>
-                {preview && <Text style={styles.leaderboardEmpty}>登录后查看真实榜单</Text>}
-                {!preview && !leaderboardLoading && !leaderboardError && !activeBoard?.top.length && (
-                  <Text style={styles.leaderboardEmpty}>这个榜单还没有记录，开始刷题吧。</Text>
-                )}
-                {activeBoard?.top.map((entry) => (
-                  <View key={entry.userId} style={[styles.leaderboardRow, entry.userId === user?.id && styles.leaderboardOwnRow]}>
-                    <Text style={styles.leaderboardRank}>{entry.rank}</Text>
-                    <View style={styles.leaderboardPerson}>
-                      <Text style={styles.leaderboardName}>{entry.name}{entry.userId === user?.id ? ' · 我' : ''}</Text>
-                      {leaderboardTab === 'accuracy' && <Text style={styles.leaderboardDetail}>{entry.correct}/{entry.answered} 题正确</Text>}
-                    </View>
-                    <Text style={styles.leaderboardValue}>{entry.value}{activeTab.unit}</Text>
-                  </View>
-                ))}
-              </ScrollView>
-              {activeBoard?.me && activeBoard.me.rank > activeBoard.top.length && (
-                <View style={[styles.leaderboardRow, styles.leaderboardOwnRow]}>
-                  <Text style={styles.leaderboardRank}>{activeBoard.me.rank}</Text>
-                  <Text style={styles.leaderboardName}>我的排名</Text>
-                  <Text style={styles.leaderboardValue}>{activeBoard.me.value}{activeTab.unit}</Text>
-                </View>
-              )}
-            </View>
-          </View>
-        </Modal>
+        {showLeaderboard && active && leaderboardOpen && (
+          <LeaderboardModal user={preview ? undefined : user} onClose={() => setLeaderboardOpen(false)} />
+        )}
       </View>
     </KeyboardAvoidingView>
   );
@@ -490,6 +410,7 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
     justifyContent: 'space-between',
     paddingTop: spacing.sm,
   },
+  chatHeader: { justifyContent: 'flex-start', gap: spacing.sm },
   backButton: {
     backgroundColor: colors.surfaceMuted,
     borderRadius: radius.pill,
@@ -518,28 +439,6 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
     paddingHorizontal: spacing.sm,
   },
   leaderboardEntryText: { color: colors.brandDark, fontSize: 13, fontWeight: '800' },
-  leaderboardBackdrop: { backgroundColor: '#0008', flex: 1, justifyContent: 'flex-end' },
-  leaderboardPanel: { backgroundColor: colors.background, borderTopLeftRadius: radius.lg, borderTopRightRadius: radius.lg, gap: spacing.sm, height: '82%', padding: spacing.lg },
-  leaderboardHeader: { alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between' },
-  leaderboardTitle: { color: colors.text, fontSize: 23, fontWeight: '800' },
-  leaderboardSubtitle: { color: colors.textMuted, fontSize: 12, marginTop: 3 },
-  leaderboardClose: { alignItems: 'center', height: 36, justifyContent: 'center', width: 36 },
-  leaderboardCloseText: { color: colors.textMuted, fontSize: 28 },
-  leaderboardTabs: { flexDirection: 'row', gap: 3 },
-  leaderboardTab: { alignItems: 'center', borderRadius: radius.sm, flex: 1, minHeight: 36, justifyContent: 'center' },
-  leaderboardTabActive: { backgroundColor: colors.brandSoft },
-  leaderboardTabText: { color: colors.textMuted, fontSize: 12, fontWeight: '700' },
-  leaderboardTabTextActive: { color: colors.brandDark, fontWeight: '800' },
-  leaderboardRule: { color: colors.textMuted, fontSize: 12, lineHeight: 18 },
-  leaderboardRows: { gap: 5, paddingBottom: spacing.xl },
-  leaderboardRow: { alignItems: 'center', backgroundColor: colors.surface, borderRadius: radius.sm, flexDirection: 'row', gap: spacing.sm, minHeight: 56, padding: spacing.sm },
-  leaderboardOwnRow: { borderColor: colors.brand, borderWidth: 1 },
-  leaderboardRank: { color: colors.brand, fontSize: 17, fontWeight: '800', textAlign: 'center', width: 32 },
-  leaderboardPerson: { flex: 1 },
-  leaderboardName: { color: colors.text, fontSize: 14, fontWeight: '700' },
-  leaderboardDetail: { color: colors.textMuted, fontSize: 11, marginTop: 2 },
-  leaderboardValue: { color: colors.brandDark, fontSize: 15, fontWeight: '800' },
-  leaderboardEmpty: { color: colors.textMuted, fontSize: 14, paddingVertical: spacing.xl, textAlign: 'center' },
   roomCard: {
     alignItems: 'center',
     backgroundColor: colors.brand,
@@ -712,18 +611,6 @@ const createStyles = (colors: ThemeColors) => StyleSheet.create({
     fontSize: 24,
     lineHeight: 24,
   },
-  emojiRow: {
-    flexDirection: 'row',
-    gap: spacing.xs,
-    paddingBottom: spacing.xs,
-  },
-  emojiButton: {
-    alignItems: 'center',
-    height: 30,
-    justifyContent: 'center',
-    width: 30,
-  },
-  emoji: { fontSize: 20 },
   composerRow: {
     alignItems: 'flex-end',
     flexDirection: 'row',

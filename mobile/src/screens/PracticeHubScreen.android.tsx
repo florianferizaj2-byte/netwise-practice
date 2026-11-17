@@ -6,8 +6,8 @@ import { PracticeResumeCard } from '../components/PracticeResumeCard.android';
 import { androidAccent } from '../android-design-tokens';
 import { AndroidPageHeader, AndroidPointsLink, type AndroidCertificateProps } from '../components/AndroidUi.android';
 import { AppIcon } from '../components/AppIcon';
-import { RoutePlayerChapter } from '../components/RoutePlayerChapter';
-import { OfflineDownloadCard } from '../offline/OfflineDownloadCard.android';
+import { RoutePlayerChapter } from '../components/RoutePlayerChapter.android';
+import { useOfflineCatalog } from '../offline/offlinePractice.android';
 import { iosStyles } from '../iosStyles';
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -152,7 +152,8 @@ export function PracticeHubScreen({
     mobileApi.practiceCatalog,
     !preview,
   );
-  const catalog = preview ? sampleCatalog : query.data;
+  const local = useOfflineCatalog(user, !preview && practiceMode !== 'ai' && (!query.data || query.fetching || !!query.error));
+  const catalog = preview ? sampleCatalog : local?.catalog ?? query.data;
   const [search, setSearch] = useState("");
   const [expandedChapters, setExpandedChapters] = useState<Set<string>>(
     () => new Set(),
@@ -322,8 +323,6 @@ export function PracticeHubScreen({
       ListHeaderComponent={
         <>
           <AndroidPageHeader title="练习" user={user} certificates={certificates} onOpenCertificatePicker={onOpenCertificatePicker}/>
-          {!preview && !daily && !ai && <PracticeResumeCard user={user} onNavigate={onNavigate}/>}
-          {!preview && !daily && !ai && user?.certificateId && <OfflineDownloadCard key={user.id + ':' + user.certificateId} userId={user.id} certificateId={user.certificateId} />}
           <View style={s.heading}>
             <View style={s.grow}>
               {daily && <Text style={s.title}>选择今日练习范围</Text>}
@@ -348,13 +347,36 @@ export function PracticeHubScreen({
             />
           </View>
 
-          {!daily&&!ai&&suggestedChapter&&<View style={s.resumeHero}>
-            <View style={s.heroLabel}><AppIcon name="book" size={19} color="#FFFFFF"/><Text style={s.heroLabelText}>继续巩固知识点</Text></View>
-            <Text style={s.heroTitle}>{suggestedChapter.name}</Text>
-            <View style={s.heroLabel}><Text style={s.heroDetail}>已刷 {suggestedChapter.attemptedCount} / {suggestedChapter.questionCount} 题</Text><Text style={s.heroDetail}>{percentage(suggestedChapter.progress)}%</Text></View>
-            <AnimatedProgressBar value={percentage(suggestedChapter.progress)} color="#FFFFFF" trackColor="#FFFFFF40"/>
-            <AnimatedPressable accessibilityRole="button" accessibilityLabel={'练习知识点 '+suggestedChapter.name} disabled={!resumeReady} onPress={()=>void continueChapter(suggestedChapter.name)} style={s.heroButton}><Text style={s.heroButtonText}>{resumeReady?'继续练习':'正在读取进度…'}</Text><AppIcon name="arrow" size={21} color="#2052C5"/></AnimatedPressable>
-          </View>}
+          {!daily && !ai && !needle && (
+            <>
+              {suggestedChapter && (
+                <View style={s.resumeHero}>
+                  <View style={s.heroLabel}>
+                    <AppIcon name="book" size={19} color="#FFFFFF" />
+                    <Text style={s.heroLabelText}>继续巩固知识点</Text>
+                  </View>
+                  <Text style={s.heroTitle}>{suggestedChapter.name}</Text>
+                  <View style={s.heroLabel}>
+                    <Text style={s.heroDetail}>已刷 {suggestedChapter.attemptedCount} / {suggestedChapter.questionCount} 题</Text>
+                    <Text style={s.heroDetail}>{percentage(suggestedChapter.progress)}%</Text>
+                  </View>
+                  <AnimatedProgressBar value={percentage(suggestedChapter.progress)} color="#FFFFFF" trackColor="#FFFFFF40" />
+                  <AnimatedPressable
+                    accessibilityRole="button"
+                    accessibilityLabel={'练习知识点 ' + suggestedChapter.name}
+                    disabled={!resumeReady}
+                    onPress={() => void continueChapter(suggestedChapter.name)}
+                    style={s.heroButton}
+                  >
+                    <Text style={s.heroButtonText}>{resumeReady ? '继续练习' : '正在读取进度…'}</Text>
+                    <AppIcon name="arrow" size={21} color="#2052C5" />
+                  </AnimatedPressable>
+                </View>
+              )}
+              {!preview && <PracticeResumeCard user={user} onNavigate={onNavigate} />}
+            </>
+          )}
+
           {!daily && (
             <>
               <View style={s.modeRow}>{modes.map(mode=><AnimatedPressable key={mode.id} accessibilityRole="radio" accessibilityLabel={mode.title} accessibilityState={{checked:practiceMode===mode.id}} onPress={()=>chooseMode(mode.id)} style={[s.mode,practiceMode===mode.id&&s.modeSelected]}>
@@ -502,7 +524,7 @@ export function PracticeHubScreen({
               匹配 {chapters.length} 个大知识点 · 清空搜索可查看全部
             </Text>
           )}
-          {!preview && !!query.error && (
+          {!preview && !!query.error && !local && (
             <View style={s.errorNotice}>
               <Text style={s.errorText}>
                 {catalog
@@ -652,7 +674,7 @@ export function PracticeHubScreen({
         );
       }}
       ListEmptyComponent={
-        !preview && query.loading ? (
+        !preview && query.loading && !catalog ? (
           <View style={s.empty}>
             <ActivityIndicator color={colors.brand} />
             <Text style={s.emptyText}>正在读取知识点…</Text>
@@ -681,7 +703,7 @@ export function PracticeHubScreen({
       }
       ListFooterComponent={
         <>
-          {!daily && !ai && <RoutePlayerChapter search={search} />}
+          {!daily && !ai && <RoutePlayerChapter search={search} user={user} preview={preview} />}
           {!!chapters.length && <Text style={s.footer}>进度按已练习的不同题目统计</Text>}
         </>
       }

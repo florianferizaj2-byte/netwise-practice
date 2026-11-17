@@ -1,20 +1,20 @@
 import { useState, type ReactNode } from "react";
-import { ActivityIndicator, FlatList, ScrollView, TextInput, View } from "react-native";
+import { ActivityIndicator, FlatList, Platform, ScrollView, TextInput, View } from "react-native";
 import { AnimatedPressable, AnimatedProgressBar } from "../../components/Motion";
 import type { AiLearningProfile, AiLearningQuote, AiLearningSetup, AiLearningStrategy } from "../../api/aiLearningTypes";
 import { AiButton, AiCard, AiDetailRow, AiFooter, AiGoalGrid, AiHeader, AiIcon, AiMetricRow, AiNotice, AiTag, AiText, aiGoalTitle, useAiDesign } from "./AiElements";
 
 type Kind="practice"|"exam";
 type Settings={strategy:AiLearningStrategy;count:10|20|30|50;duration:number;pointIds:string[]};
-export function AiHomePage({kind,profile,loading,settings,onChange,onPlan,onSettings,onAnalysis,onHistory,certificateName,activeJob,onContinue,accessory}:{
+export function AiHomePage({kind,profile,loading,settings,onChange,onPlan,onSettings,onAnalysis,onHistory,certificateName,activeJob,onContinue,accessory,homeTitle}:{
   kind:Kind;profile:AiLearningProfile|null;loading:boolean;settings:Settings;onChange:(strategy:AiLearningStrategy)=>void;
   onPlan:()=>void;onSettings:()=>void;onAnalysis:()=>void;onHistory:()=>void;certificateName:string;
-  activeJob?:{readyCount:number;targetCount:number;status:string;submitted:boolean}|null;onContinue:()=>void;accessory?:ReactNode;
+  activeJob?:{readyCount:number;targetCount:number;status:string;submitted:boolean}|null;onContinue:()=>void;accessory?:ReactNode;homeTitle?:string;
 }){
   const {p}=useAiDesign(),cold=profile?.confidence==="insufficient";
   const points=profile?.points.filter(q=>q.recentCount>0).slice(0,3)||[];
   return <View style={{flex:1,backgroundColor:p.bg}}>
-    <AiHeader home title={kind==="exam"?"考试":"AI 生成"} action="记录" onAction={onHistory}/>{accessory}
+    <AiHeader home title={homeTitle ?? (kind==="exam"?"考试":"AI 生成")} action="记录" onAction={onHistory}/>{accessory}
     <ScrollView contentContainerStyle={{paddingHorizontal:20,paddingTop:4,paddingBottom:18,gap:16}}>
       <AiText type="tiny" tone="muted" numberOfLines={1}>{certificateName}</AiText>
       <View style={{gap:6}}><AiText type="hero">{kind==="exam"?"一场更适合你的模拟考":cold?"先测一小组，找到你的起点":"下一组，\n练得更有针对性"}</AiText>
@@ -48,6 +48,7 @@ export function AiHomePage({kind,profile,loading,settings,onChange,onPlan,onSett
 }
 
 export function AiPlanPage({quote,onBack,onSettings,onConfirm,busy}:{quote:AiLearningQuote|null;onBack:()=>void;onSettings:()=>void;onConfirm:()=>void;busy:boolean}){
+  const directSpend=Platform.OS==="android";
   const {p}=useAiDesign();const groups=quote?Object.entries(quote.blueprint.slots.reduce<Record<string,number>>((out,s)=>({...out,[s.stage]:(out[s.stage]||0)+1}),{})):[];
   const descriptions:Record<string,string>={"补基础":"先拆开概念，再把基础补牢","做变式":"换一种设问，检验是否理解","迁移验证":"用新情境确认掌握","诊断理解":"先用基础与中等题了解真实表现","综合进阶":"在已有掌握证据上增加综合应用","间隔巩固":"换情境确认是否依然记得","补弱项":"优先巩固反复出错的知识点","覆盖验证":"兼顾知识范围与稳定性"};
   return <View style={{flex:1,backgroundColor:p.bg}}><AiHeader title="专属方案" onBack={onBack}/>
@@ -65,13 +66,13 @@ export function AiPlanPage({quote,onBack,onSettings,onConfirm,busy}:{quote:AiLea
         <AiCard style={{paddingVertical:10}}><AiText type="heading">本次设置</AiText><AiDetailRow label="题目数量" value={quote.blueprint.targetCount+"道"} icon="document" onPress={onSettings}/>
           <AiDetailRow label="知识范围" value={quote.blueprint.reasons.length+"个知识点"} icon="book" onPress={onSettings}/>
           <AiDetailRow label="难度安排" value={quote.blueprint.diagnostic?"基础与中等诊断":"按训练目标安排"} icon="chart"/></AiCard>
-        <AiNotice icon="shield" title="积分使用确认" detail={quote.pricing.sampleUnits===null?"暂无可核验的用量示例。":
+        <AiNotice icon="shield" title={directSpend?"积分使用说明":"积分使用确认"} detail={quote.pricing.sampleUnits===null?"暂无可核验的用量示例。":
           "标准用量示例约"+(quote.pricing.sampleUnits/quote.pricing.scale).toFixed(2)+"积分，不是固定价格或扣费上限。"}/>
         <AiText type="tiny" tone="muted">{quote.pricing.notice}</AiText>
         {!quote.pricing.available&&<AiNotice tone="amber" title="当前服务价格尚未就绪" detail="暂不开始收费生成，请先核对积分中心的可用服务。"/>}
       </>}
     </ScrollView><AiFooter><View style={{flexDirection:"row",gap:10}}><AiButton label="返回调整" onPress={onSettings} variant="secondary" disabled={busy} style={{flex:0.8}}/>
-      <AiButton label="确认方案，开始生成" onPress={onConfirm} busy={busy} disabled={!quote?.pricing.available} style={{flex:1.5}}/></View></AiFooter>
+      <AiButton label={directSpend?"开始生成":"确认方案，开始生成"} onPress={onConfirm} busy={busy} disabled={!quote?.pricing.available} style={{flex:1.5}}/></View></AiFooter>
   </View>;
 }
 

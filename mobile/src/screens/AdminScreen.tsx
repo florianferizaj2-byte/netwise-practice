@@ -3,24 +3,35 @@ import { ActivityIndicator, FlatList, KeyboardAvoidingView, Platform, ScrollView
 import { SafeAreaView } from '../components/SafeArea';
 import { AppAlert } from '../components/AppAlert';
 import { AppSwitch } from '../components/AppSwitch';
+import { AppIcon } from '../components/AppIcon';
 import { AnimatedPressable } from '../components/Motion';
 import { mobileApi, type AdminAnnouncement, type AdminUser, type AdminUserPage, type AuthResponse } from '../api/client';
 import { publicAnnouncements } from '../announcements/current';
-import { useScreenActive } from '../navigation/ScreenActivity';
-import { useThemedStyles, type ThemeColors } from '../theme';
+import type { AnnouncementDisplayMode } from '../announcements/client';
+import { useThemedStyles, useTheme, type ThemeColors } from '../theme';
+import { AdminOverviewPanel } from './AdminOverviewPanel';
 
 type Props = { user: AuthResponse['user']; certificates: AuthResponse['certificates']; onClose: () => void; onUserUpdated?: (user: AuthResponse['user']) => void };
 const plans = { free: '普通账号', vip: 'VIP', svip: 'SVIP', ssvip: 'SSVIP' } as const;
+const adminTabs = [
+  { key: 'overview', label: '总览' }, { key: 'users', label: '账号' },
+  { key: 'announcement', label: '公告' }, { key: 'controls', label: '开关' },
+] as const;
+const announcementModes: Array<{ key: AnnouncementDisplayMode; label: string; detail: string }> = [
+  { key: 'once', label: '每条只弹一次', detail: '同一台设备关闭后，标题或正文更新时才会再弹。' },
+  { key: 'everyLaunch', label: '每次启动弹出', detail: '用户重新打开 App 时都会看到这条公告。' },
+  { key: 'never', label: '仅首页显示', detail: '在首页保留公告入口，由用户点开阅读。' },
+];
 const formatDate = (date: string | null) => date ? new Date(date).toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' }) : '—';
 const errorText = (error: unknown) => error instanceof Error ? error.message : '操作失败，请重试';
 const dateInput = (value: string | null) => value ? new Date(value).toLocaleDateString('en-CA', { timeZone: 'Asia/Shanghai' }) : '';
 
 export function AdminScreen({ user, certificates, onClose, onUserUpdated }: Props) {
   const s = useThemedStyles(styles);
-  const active = useScreenActive();
+  const { colors } = useTheme();
   const alive = useRef(true);
   const requestNumber = useRef(0);
-  const [tab, setTab] = useState<'users' | 'announcement'>('users');
+  const [tab, setTab] = useState<(typeof adminTabs)[number]['key']>('overview');
   const [search, setSearch] = useState('');
   const [status, setStatus] = useState<'all' | 'active' | 'banned'>('all');
   const [page, setPage] = useState<AdminUserPage | null>(null);
@@ -35,12 +46,17 @@ export function AdminScreen({ user, certificates, onClose, onUserUpdated }: Prop
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [enabled, setEnabled] = useState(true);
+  const [displayMode, setDisplayMode] = useState<AnnouncementDisplayMode>('once');
+  const [savedRegistrationEnabled, setSavedRegistrationEnabled] = useState<boolean | null>(null);
+  const [registrationEnabled, setRegistrationEnabled] = useState(true);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
 
-  useEffect(() => () => { alive.current = false; requestNumber.current += 1; }, []);
-  useEffect(() => { if (active && user.isAdmin) void loadUsers(); }, [active, user.id]);
+  useEffect(() => {
+    alive.current = true;
+    return () => { alive.current = false; requestNumber.current += 1; };
+  }, []);
   if (!user.isAdmin) return null;
 
   async function loadUsers(filter = status, offset = 0) {
@@ -106,7 +122,10 @@ export function AdminScreen({ user, certificates, onClose, onUserUpdated }: Prop
     setBusy(true); setError(''); setNotice('');
     try {
       const result = await mobileApi.adminAnnouncement();
-      if (alive.current) { setAnnouncement(result); setTitle(result.announcement.title); setBody(result.announcement.body); setEnabled(result.announcement.enabled); }
+      if (alive.current) {
+        setAnnouncement(result); setTitle(result.announcement.title); setBody(result.announcement.body);
+        setEnabled(result.announcement.enabled); setDisplayMode(result.announcement.displayMode ?? 'once');
+      }
     } catch (cause) { if (alive.current) setError(errorText(cause)); }
     finally { if (alive.current) setBusy(false); }
   }
@@ -115,9 +134,36 @@ export function AdminScreen({ user, certificates, onClose, onUserUpdated }: Prop
     if (!title.trim() || !body.trim()) { setError('请填写公告标题和正文'); return; }
     setBusy(true); setError(''); setNotice('');
     try {
-      const result = await mobileApi.adminSaveAnnouncement({ revision: announcement.revision, enabled, title: title.trim(), body: body.trim() });
+      const result = await mobileApi.adminSaveAnnouncement({
+        revision: announcement.revision, enabled, title: title.trim(), body: body.trim(),
+        ...(announcement.announcement.displayMode ? { displayMode } : {}),
+      });
       if (alive.current) { setAnnouncement(result); setNotice(enabled ? '公告已保存，首页将显示最新内容' : '公告已隐藏'); }
       void publicAnnouncements.refresh(true);
+    } catch (cause) { if (alive.current) setError(errorText(cause)); }
+    finally { if (alive.current) setBusy(false); }
+  }
+  async function loadControls() {
+    setBusy(true); setError(''); setNotice('');
+    try {
+      const result = await mobileApi.adminAccountControls();
+      if (alive.current) {
+        setSavedRegistrationEnabled(result.registrationEnabled);
+        setRegistrationEnabled(result.registrationEnabled);
+      }
+    } catch (cause) { if (alive.current) setError(errorText(cause)); }
+    finally { if (alive.current) setBusy(false); }
+  }
+  async function saveControls() {
+    if (busy || savedRegistrationEnabled === null || registrationEnabled === savedRegistrationEnabled) return;
+    setBusy(true); setError(''); setNotice('');
+    try {
+      const result = await mobileApi.adminSaveAccountControls(registrationEnabled);
+      if (alive.current) {
+        setSavedRegistrationEnabled(result.registrationEnabled);
+        setRegistrationEnabled(result.registrationEnabled);
+        setNotice(result.registrationEnabled ? '已开放新账号注册' : '已暂停新账号注册');
+      }
     } catch (cause) { if (alive.current) setError(errorText(cause)); }
     finally { if (alive.current) setBusy(false); }
   }
@@ -132,22 +178,38 @@ export function AdminScreen({ user, certificates, onClose, onUserUpdated }: Prop
     <SafeAreaView style={s.safe}>
       <KeyboardAvoidingView style={s.safe} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <View style={s.header}>
+          <AnimatedPressable accessibilityRole="button" accessibilityLabel="返回我的" onPress={onClose} style={s.back}>
+            <AppIcon name="chevron-left" size={23} color={colors.text} />
+          </AnimatedPressable>
           <Text accessibilityRole="header" style={s.heading}>管理中心</Text>
-          {button('返回我的', onClose, false, false)}
         </View>
         <View style={s.tabs}>
-          {(['users', 'announcement'] as const).map((key) => <AnimatedPressable key={key} accessibilityRole="button"
+          {adminTabs.map(({ key, label }) => <AnimatedPressable key={key} accessibilityRole="button"
             accessibilityState={{ selected: tab === key }} disabled={busy} onPress={() => {
               setTab(key); setSelected(null); setError(''); setNotice('');
-              if (key === 'announcement') void loadAnnouncement(); else void loadUsers();
+              if (key === 'announcement') void loadAnnouncement();
+              if (key === 'users') void loadUsers();
+              if (key === 'controls') void loadControls();
             }} style={[s.tab, tab === key && s.activeTab]}>
-            <Text style={[s.tabText, tab === key && s.activeText]}>{key === 'users' ? '账号管理' : '公告管理'}</Text>
+            <Text style={[s.tabText, tab === key && s.activeText]}>{label}</Text>
           </AnimatedPressable>)}
         </View>
         {!!error && <Text accessibilityRole="alert" style={s.error}>{error}</Text>}
         {!!notice && <Text accessibilityLiveRegion="polite" style={s.notice}>{notice}</Text>}
         {busy && <ActivityIndicator style={s.loading} accessibilityLabel="正在处理" />}
-        {tab === 'users' && !selected ? <>
+        {tab === 'overview' ? <AdminOverviewPanel onOpenUser={(id) => { setTab('users'); void loadUser(id); }} /> :
+        tab === 'controls' ? <ScrollView contentContainerStyle={s.form}>
+          <View style={s.settingsCard}>
+            <View style={s.row}>
+              <Text style={[s.label, s.grow]}>开放新账号注册</Text>
+              <AppSwitch accessibilityLabel="开放新账号注册" value={registrationEnabled} onValueChange={setRegistrationEnabled}
+                disabled={busy || savedRegistrationEnabled === null} />
+            </View>
+            <Text style={s.meta}>暂停时会关闭邮箱验证码注册和微信新账号注册。已有账号可正常登录和找回密码。</Text>
+          </View>
+          {button('保存开关', () => void saveControls(), true, busy || savedRegistrationEnabled === null || registrationEnabled === savedRegistrationEnabled)}
+          {button('读取最新开关', () => void loadControls())}
+        </ScrollView> : tab === 'users' && !selected ? <>
           <View style={s.search}>
             <TextInput accessibilityLabel="搜索账号或昵称" placeholder="搜索账号或昵称" value={search} maxLength={100}
               onChangeText={setSearch} onSubmitEditing={() => void loadUsers()} style={[s.input, s.searchInput]} />
@@ -193,11 +255,27 @@ export function AdminScreen({ user, certificates, onClose, onUserUpdated }: Prop
           {!selected.isAdmin && <><Text style={s.label}>封禁原因（选填）</Text><TextInput accessibilityLabel="封禁原因" value={banReason} onChangeText={setBanReason} maxLength={200}
             style={s.input} placeholder="填写封禁原因" />{button(selected.bannedAt ? '解除封禁' : '封禁账号', confirmBan)}</>}
         </ScrollView> : <ScrollView contentContainerStyle={s.form} keyboardShouldPersistTaps="handled">
-          <View style={s.row}><Text style={s.label}>在首页显示公告</Text><AppSwitch accessibilityLabel="在首页显示公告" value={enabled} onValueChange={setEnabled} disabled={busy || !announcement} /></View>
+          <View style={s.settingsCard}>
+            <View style={s.row}>
+              <Text style={[s.label, s.grow]}>启用公告</Text>
+              <AppSwitch accessibilityLabel="启用公告" value={enabled} onValueChange={setEnabled} disabled={busy || !announcement} />
+            </View>
+            {announcement?.announcement.displayMode ? (
+              <View style={s.options} accessibilityRole="radiogroup" accessibilityLabel="公告弹出频率">
+                {announcementModes.map((mode) => <AnimatedPressable key={mode.key}
+                  accessibilityRole="radio" accessibilityState={{ checked: displayMode === mode.key, disabled: busy || !enabled }}
+                  disabled={busy || !enabled} onPress={() => setDisplayMode(mode.key)}
+                  style={[s.policyOption, displayMode === mode.key && s.activeTab]}>
+                  <Text style={[s.tabText, displayMode === mode.key && s.activeText]}>{mode.label}</Text>
+                  <Text style={s.meta}>{mode.detail}</Text>
+                </AnimatedPressable>)}
+              </View>
+            ) : announcement ? <Text style={s.meta}>当前服务端仅支持每条公告弹出一次。</Text> : null}
+          </View>
           <Text style={s.label}>公告标题</Text><TextInput accessibilityLabel="公告标题" editable={!busy} placeholder="输入公告标题" value={title} onChangeText={setTitle} maxLength={80} style={s.input} />
           <Text style={s.label}>公告正文</Text><TextInput accessibilityLabel="公告正文" editable={!busy} placeholder="输入公告正文" value={body} onChangeText={setBody} maxLength={8000}
             multiline textAlignVertical="top" style={[s.input, s.bodyInput]} />
-          <Text style={s.meta}>保存后直接更新公告，无需重新安装。其他用户回到首页时会读取最新内容。</Text>
+          <Text style={s.meta}>保存后首页会读取新内容，弹出规则从用户下次启动时生效。</Text>
           {button('保存公告', () => void saveAnnouncement(), true, busy || !announcement)}
           {button('读取最新公告', () => void loadAnnouncement())}
           {!!announcement && <Text style={s.meta}>上次更新：{formatDate(announcement.announcement.updatedAt)}</Text>}
@@ -208,9 +286,11 @@ export function AdminScreen({ user, certificates, onClose, onUserUpdated }: Prop
 }
 
 const styles = (c: ThemeColors) => StyleSheet.create({
-  safe: { flex: 1, backgroundColor: c.background }, header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: 16, gap: 12 },
-  heading: { color: c.text, fontSize: 22, fontWeight: '700' }, tabs: { flexDirection: 'row', paddingHorizontal: 20, gap: 12 },
-  tab: { flex: 1, padding: 12, minHeight: 48, alignItems: 'center', justifyContent: 'center', borderRadius: 12, backgroundColor: c.surface },
+  safe: { flex: 1, backgroundColor: c.background }, header: { flexDirection: 'row', alignItems: 'center', padding: 16, gap: 10 },
+  back: { minWidth: 48, minHeight: 48, borderRadius: 12, justifyContent: 'center', alignItems: 'center', backgroundColor: c.surfaceMuted },
+  heading: { color: c.text, fontSize: 22, fontWeight: '700' },
+  tabs: { flexDirection: 'row', marginHorizontal: 16, padding: 4, gap: 4, borderRadius: 14, backgroundColor: c.surfaceMuted },
+  tab: { flex: 1, paddingVertical: 8, minWidth: 0, minHeight: 44, alignItems: 'center', justifyContent: 'center', borderRadius: 10 },
   tabText: { color: c.text, fontSize: 15, fontWeight: '600' }, activeTab: { backgroundColor: c.brandSoft }, activeText: { color: c.brandDark },
   button: { paddingHorizontal: 16, paddingVertical: 12, minHeight: 48, alignItems: 'center', justifyContent: 'center', borderRadius: 12, backgroundColor: c.surface, borderWidth: 1, borderColor: c.border },
   buttonText: { color: c.text, fontSize: 15, lineHeight: 23 }, primaryButton: { backgroundColor: c.brandSoft, borderColor: c.brandSoft }, primaryText: { color: c.brandDark, fontWeight: '700' }, disabled: { opacity: 0.5 },
@@ -222,5 +302,8 @@ const styles = (c: ThemeColors) => StyleSheet.create({
   row: { flexDirection: 'row', gap: 12, alignItems: 'center', justifyContent: 'space-between' }, meta: { color: c.textMuted, fontSize: 14, lineHeight: 22 },
   form: { padding: 20, gap: 12, paddingBottom: 40 }, label: { color: c.text, fontSize: 16, fontWeight: '600', lineHeight: 25 }, options: { gap: 8 },
   bodyInput: { minHeight: 220 }, error: { color: c.warning, paddingHorizontal: 20, paddingVertical: 12, fontSize: 15, lineHeight: 23 },
+  grow: { flex: 1 },
+  settingsCard: { padding: 14, gap: 10, borderRadius: 14, backgroundColor: c.surface },
+  policyOption: { minHeight: 52, padding: 10, gap: 2, borderRadius: 10, backgroundColor: c.surfaceMuted },
   notice: { color: c.success, paddingHorizontal: 20, paddingVertical: 12, fontSize: 15, lineHeight: 23 }, loading: { padding: 12 },
 });

@@ -18,6 +18,9 @@ import { RefreshControl } from "../components/RefreshControl";
 import { SafeAreaView } from "../components/SafeArea";
 import { mobileApi, type ExamSession, type Question } from "../api/client";
 import { ApiError } from "../api/transport";
+import { OfflineExamScreen } from '../offline/OfflineExamScreen.android';
+import { offlinePackOwner } from '../offline/offlinePractice.android';
+import { installedOfflinePackManifest, loadOfflinePack, type InstalledOfflinePack } from '../offline/offlinePacks.android';
 import { useCachedQuery } from "../api/useCachedQuery";
 import { useScreenActive } from "../navigation/ScreenActivity";
 import { AnimatedPressable, AnimatedProgressBar } from "../components/Motion";
@@ -56,6 +59,18 @@ export function ExamScreen({
     { colors, reduceMotion } = useTheme(),
     active = useScreenActive();
   const [exam, setExam] = useState<ExamSession | null>(null);
+  const offlineOwner = offlinePackOwner(user);
+  const [offlineAvailable, setOfflineAvailable] = useState(false);
+  const [offlineExam, setOfflineExam] = useState<InstalledOfflinePack | null>(null);
+  const [openingOfflineExam, setOpeningOfflineExam] = useState(false);
+  useEffect(() => {
+    if (!offlineOwner || !active || preview) return;
+    let live = true;
+    void installedOfflinePackManifest(offlineOwner).then(value => {
+      if (live) setOfflineAvailable(!!value);
+    }).catch(() => { if (live) setOfflineAvailable(false); });
+    return () => { live = false; };
+  }, [active, preview, offlineOwner?.userId, offlineOwner?.certificateId]);
   const examRef = useRef(exam);
   examRef.current = exam;
   const catalog = useCachedQuery(
@@ -422,6 +437,18 @@ export function ExamScreen({
           }
         >
           <AndroidPageHeader title="考试" user={user} certificates={certificates} onOpenCertificatePicker={onOpenCertificatePicker}/><Text style={s.subtitle}>按知识点组卷，检验学习成果</Text>
+          {offlineAvailable && offlineOwner && <AnimatedPressable accessibilityRole="button" disabled={openingOfflineExam} style={s.resume} onPress={async () => {
+            setOpeningOfflineExam(true);
+            setError('');
+            try {
+              const pack = await loadOfflinePack(offlineOwner);
+              if (!pack) throw new Error('请在设置中下载当前证书题库。');
+              if (mounted.current) setOfflineExam(pack);
+            } catch (cause) {
+              if (mounted.current) setError(cause instanceof Error ? cause.message : '本机题库读取失败。');
+            } finally { if (mounted.current) setOpeningOfflineExam(false); }
+          }}><Text style={s.link}>{openingOfflineExam ? '正在读取本机题库…' : '离线模拟考试'}</Text></AnimatedPressable>}
+          {offlineExam && offlineOwner && <OfflineExamScreen owner={offlineOwner} installed={offlineExam} onClose={() => setOfflineExam(null)} />}
           {(error || catalog.error) && (
             <Text style={s.error}>
               {error || catalog.error?.message} · 可下拉重试

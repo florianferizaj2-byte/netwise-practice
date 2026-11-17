@@ -4,7 +4,7 @@ import { fetchJson } from '../api/transport';
 import { AnnouncementClient } from './client';
 
 export const publicAnnouncements = new AnnouncementClient(AsyncStorage, () => fetchJson<unknown>(
-  `${API_BASE_URL}/mobile/announcement?_=${Date.now()}`,
+  `${API_BASE_URL}/mobile/announcement?displayPolicy=1&_=${Date.now()}`,
   { headers: { Accept: 'application/json' }, credentials: 'omit', cache: 'no-store' },
   8_000,
 ));

@@ -11,6 +11,13 @@ export class ApiError extends Error {
   }
 }
 
+export class ApiConnectionError extends Error {}
+
+export function isApiUnavailable(error: unknown) {
+  return error instanceof ApiConnectionError ||
+    (error instanceof ApiError && [502, 503, 504].includes(error.status));
+}
+
 export async function fetchJson<T>(
   url: string,
   init: RequestInit = {},
@@ -48,11 +55,11 @@ export async function fetchJson<T>(
     }
     return data as T;
   } catch (error) {
-    if (timedOut) throw new Error('请求超时，请检查网络后重试');
-    if (error instanceof TypeError) {
+    if (timedOut) throw new ApiConnectionError('请求超时，请检查网络后重试');
+    if (!(error instanceof ApiError) && !controller.signal.aborted) {
       // 连接层失败：后续请求改用回落地址，避免每次都在不可用链路上等超时。
       preferApiBase(API_BASE_URL);
-      throw new Error('无法连接服务器，请检查网络后重试');
+      throw new ApiConnectionError('无法连接服务器，请检查网络后重试');
     }
     throw error;
   } finally {

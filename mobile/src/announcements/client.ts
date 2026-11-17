@@ -1,13 +1,16 @@
+export type AnnouncementDisplayMode = 'once' | 'everyLaunch' | 'never';
+
 export type Announcement = Readonly<{
   schemaVersion: 1;
   id: string;
   enabled: boolean;
+  displayMode?: AnnouncementDisplayMode;
   title: string;
   body: string;
   updatedAt: string;
 }>;
 
-const fields = ['schemaVersion', 'id', 'enabled', 'title', 'body', 'updatedAt'];
+const fields = ['schemaVersion', 'id', 'enabled', 'displayMode', 'title', 'body', 'updatedAt'];
 export const ANNOUNCEMENT_CACHE_KEY = 'kaojiang-public-announcement-v1';
 export const ANNOUNCEMENT_READ_KEY = 'kaojiang-read-announcement-content-v1';
 // Content, not a generated id/timestamp: a no-op administrator save is not news.
@@ -35,7 +38,12 @@ export function parseAnnouncement(value: unknown): Announcement {
   };
   const updatedAt = text('updatedAt', 40);
   if (!/^\d{4}-\d{2}-\d{2}T/.test(updatedAt) || !Number.isFinite(Date.parse(updatedAt))) throw new Error('Invalid announcement date');
+  const displayMode = data.displayMode;
+  if (displayMode !== undefined && displayMode !== 'once' && displayMode !== 'everyLaunch' && displayMode !== 'never') {
+    throw new Error('Invalid announcement display mode');
+  }
   return Object.freeze({ schemaVersion: 1, id: text('id', 80), enabled: data.enabled,
+    ...(displayMode === undefined ? {} : { displayMode }),
     title: text('title', 80), body: text('body', 8000), updatedAt });
 }
 
@@ -91,7 +99,8 @@ export class AnnouncementClient {
   };
 
   needsDisplay = (content: Announcement = this.current): boolean =>
-    content.enabled && this.readContent !== readIdentity(content);
+    content.enabled && (content.displayMode === 'everyLaunch' ||
+      (content.displayMode !== 'never' && this.readContent !== readIdentity(content)));
 
   markRead = (content: Announcement = this.current): Promise<void> => {
     const identity = readIdentity(content);

@@ -80,7 +80,7 @@ export const PanResponder={...requirePanResponder,create(config){const wrapped={
 write('picker.ts', 'export async function launchImageLibraryAsync(){return {canceled:true,assets:[]}};export async function requestMediaLibraryPermissionsAsync(){return {granted:true}};');
 write('file-system.ts', 'export const cacheDirectory=null,documentDirectory=null;export async function getInfoAsync(){return {exists:false}};export async function deleteAsync(){};');
 write('intent.ts', 'export async function startActivityAsync(){};');
-write('native-route.ts', 'export function routePlayerAvailable(){return true} export async function updateRoutePlayerIdentity(){} export async function openRoutePlayer(){throw Error("Native entry is not part of browser acceptance")};');
+write('native-route.ts', 'export function routePlayerAvailable(){return true} export async function updateRoutePlayerIdentity(){} export async function setOfflineRoutePlayerIdentity(){} export async function openRoutePlayer(){throw Error("Native entry is not part of browser acceptance")}; export const openOfflineRoutePlayer=openRoutePlayer;');
 write('main.tsx', `import React from 'react';import {createRoot} from 'react-dom/client';import{TestFontScaleProvider}from'./native';
 import {ThemeProvider,useTheme} from ${JSON.stringify(source('src/theme.android.ts'))};
 import {AppShell} from ${JSON.stringify(source('src/navigation/AppShell.android.tsx'))};
@@ -144,6 +144,7 @@ const shot=async name=>{
   assert.ok(fs.statSync(file).size<500000);screenshots.push(file);
 };
 const tab=async name=>page.getByRole("button",{name:name+"导航",exact:true}).click();
+const aiPractice=async()=>{await tab("考试");await page.getByRole("tab",{name:"AI 专项练习",exact:true}).click();};
 const request=async url=>{
   const r=await fetch(base+"/api"+url,{headers:{Authorization:"Bearer "+token}});assert.equal(r.status,200);return r.json();
 };
@@ -151,10 +152,10 @@ try{
   browser=await launchTestBrowser();page=await browser.newPage({viewport:{width:393,height:852},deviceScaleFactor:1});
   page.on("pageerror",e=>errors.push(e.message));
   await page.goto(base,{waitUntil:"networkidle"});
-  await expect(page.getByRole("button",{name:"AI 生成导航",exact:true})).toBeVisible({timeout:20000});
+  await expect(page.getByRole("button",{name:"社区导航",exact:true})).toBeVisible({timeout:20000});
   const nav=await page.locator("#app-tab-bar [role=button]").allTextContents();
-  assert.equal(nav.length,5);assert.match(nav[2],/AI 生成/);
-  await tab("AI 生成");
+  assert.equal(nav.length,5);assert.match(nav[2],/^社区$/);
+  await aiPractice();
   await expect(page.getByText("近30天学习画像",{exact:true})).toBeVisible();
   for(const name of ["攻克不会的","挑战更难的","巩固易忘的","综合提分"])await expect(page.getByRole("radio",{name,exact:true})).toBeAttached();
   await expect(page.getByRole("button",{name:"查看专属方案",exact:true})).toBeVisible();
@@ -165,18 +166,18 @@ try{
   await page.getByRole("button",{name:/^本次练习 /}).click();await shot("03-settings");
   await page.getByRole("button",{name:"保存设置",exact:true}).click();
   await page.getByRole("button",{name:"查看专属方案",exact:true}).click();
-  await expect(page.getByText("积分使用确认",{exact:true})).toBeVisible();
+  await expect(page.getByText("积分使用说明",{exact:true})).toBeVisible();
   assert.equal(fixture.generated,0);await shot("04-plan");
   await page.getByRole("button",{name:"返回",exact:true}).click();
-  checks.push("center navigation and separate home, evidence, settings and non-billed plan preview");
+  checks.push("AI practice under Exams retains home, evidence, settings and non-billed plan preview");
 
   await tab("考试");await page.getByRole("tab",{name:"AI 个性化",exact:true}).click();
   await page.getByRole("button",{name:/^考试设置 /}).click();
   await page.getByRole("radio",{name:"10题",exact:true}).click();await page.getByRole("button",{name:"保存设置",exact:true}).click();
   await shot("05-ai-exam-setup");
   await page.getByRole("button",{name:"查看组卷方案",exact:true}).click();
-  await expect(page.getByRole("button",{name:"确认方案，开始生成",exact:true})).toBeEnabled();
-  await page.getByRole("button",{name:"确认方案，开始生成",exact:true}).click();
+  await expect(page.getByRole("button",{name:"开始生成",exact:true})).toBeEnabled();
+  await page.getByRole("button",{name:"开始生成",exact:true}).click();
   await expect(page.getByRole("button",{name:"开始作答",exact:true})).toBeEnabled({timeout:20000});
   await shot("06-monitor");
   let current=(await request("/ai-learning/jobs")).jobs.find(j=>j.kind==="exam");
@@ -246,15 +247,15 @@ try{
   await page.getByRole("button",{name:"返回",exact:true}).click();
   checks.push("full submission reveals score and separate explanations; history filters practice and exam by owner");
 
-  await tab("AI 生成");fixture.reject();
+  await aiPractice();fixture.reject();
   await page.getByRole("button",{name:"查看专属方案",exact:true}).click();
-  await page.getByRole("button",{name:"确认方案，开始生成",exact:true}).click();
+  await page.getByRole("button",{name:"开始生成",exact:true}).click();
   await expect(page.getByText("后续题目暂未交付",{exact:true})).toBeVisible({timeout:30000});await shot("14-quality-blocked");
   const failed=(await request("/ai-learning/jobs")).jobs.find(j=>j.kind==="practice");
   const failedState=await request("/ai-learning/jobs/"+failed.id);assert.equal(failedState.readyCount,0);assert.equal(failedState.retryable,false);
   await page.getByRole("button",{name:"返回",exact:true}).click();forceWalletError=true;
   await page.getByRole("button",{name:"查看专属方案",exact:true}).click();
-  await page.getByRole("button",{name:"确认方案，开始生成",exact:true}).click();
+  await page.getByRole("button",{name:"开始生成",exact:true}).click();
   await expect(page.getByText("积分准备好，再继续",{exact:true})).toBeVisible();await shot("15-wallet");
   await page.getByRole("button",{name:"关闭",exact:true}).click();forceWalletError=false;
   checks.push("quality failures retain checkpoints and bounded retry budget; insufficient points opens a non-fabricated wallet sheet");
@@ -262,7 +263,7 @@ try{
   const empty=store.register("ai_cold_start","fixture-password-123");completeFixtureProfile(store,empty);store.selectCertificate(empty.id,"network-engineer");
   const emptyToken=store.createAuthSession(empty.id);
   await page.evaluate(async t=>window.__switchSession(t),emptyToken);await page.reload({waitUntil:"networkidle"});
-  await tab("AI 生成");await expect(page.getByText("学习画像待建立",{exact:true})).toBeVisible({timeout:15000});
+  await aiPractice();await expect(page.getByText("学习画像待建立",{exact:true})).toBeVisible({timeout:15000});
   await shot("16-cold-start");
   await page.setViewportSize({width:320,height:740});await page.evaluate(()=>window.__setFontScale(1.35));
   await expect(page.getByRole("button",{name:"查看诊断方案",exact:true})).toBeVisible();

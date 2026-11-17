@@ -29,10 +29,19 @@ export function createMobileProfileService(store) {
   fs.mkdirSync(directory, { recursive: true });
   const current = (id) => store.db.prepare('SELECT community_name AS name, avatar_file AS avatar FROM users WHERE id=?').get(id);
   const avatarExists = (file) => typeof file === 'string' && avatarPattern.test(file) && fs.existsSync(path.join(directory, file));
+  const avatarUrlForFile = (file) => avatarExists(file) ? `/avatars/${file}` : null;
+  const leaderboardAvatarUrlForFile = (file) => avatarExists(file) ? `/api/community/avatars/${file}` : null;
+  const sendAvatar = (req, res, next) => {
+    const file = req.params.file;
+    if (!avatarExists(file)) return res.status(404).end();
+    res.set('Cache-Control', 'public, max-age=31536000, immutable');
+    res.set('X-Content-Type-Options', 'nosniff');
+    res.sendFile(file, { root: directory }, (error) => { if (error && !res.headersSent) next(error); });
+  };
   const view = (user) => {
     if (!user) return null;
     const profile = current(user.id);
-    const avatarUrl = avatarExists(profile?.avatar) ? `/avatars/${profile.avatar}` : null;
+    const avatarUrl = avatarUrlForFile(profile?.avatar);
     return { ...user, communityName: profile?.name ?? user.communityName ?? null, avatarUrl, profileComplete: !!profile?.name?.trim() && !!avatarUrl };
   };
   const save = (userId, fields) => {
@@ -57,7 +66,7 @@ export function createMobileProfileService(store) {
     }
     return view(store.userById(userId));
   };
-  return { directory, view, save };
+  return { view, save, leaderboardAvatarUrlForFile, sendAvatar };
 }
 
 export function registerMobileProfile({ app, route, service, userView }) {
@@ -65,11 +74,5 @@ export function registerMobileProfile({ app, route, service, userView }) {
     if (!req.user) { const error = new Error('请先登录'); error.status = 401; throw error; }
     return { user: userView(service.save(req.user.id, req.body)) };
   });
-  app.get('/avatars/:file', (req, res, next) => {
-    const file = req.params.file;
-    if (!avatarPattern.test(file)) return res.status(404).end();
-    res.set('Cache-Control', 'public, max-age=31536000, immutable');
-    res.set('X-Content-Type-Options', 'nosniff');
-    res.sendFile(path.join(service.directory, file), (error) => { if (error && !res.headersSent) next(error); });
-  });
+  app.get('/avatars/:file', service.sendAvatar);
 }

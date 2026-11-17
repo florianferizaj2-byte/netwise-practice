@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { buildOfflineExamQuestions, createOfflineExam, scoreOfflineExam } from "../mobile/src/offline/offlineExamCore.ts";
-import { gradeOfflineAnswer, shanghaiStudyDay } from "../mobile/src/offline/offlineStudyCore.ts";
+import { gradeOfflineAnswer, offlinePracticeCatalog, practiceQuestions, shanghaiStudyDay } from "../mobile/src/offline/offlineStudyCore.ts";
 import { bundledQuestions, hasCertificateQuestion, questionForCertificate, syllabusForCertificate } from "../server/question-banks/loader.js";
 
 test("practice grades each question type and uses Beijing midnight independent of device zone", () => {
@@ -27,6 +27,21 @@ test("offline veterinary mock applies the bundled fixed-module blueprint", () =>
   for (const group of new Set(paper.questions.map((q) => q.sharedGroupId).filter(Boolean)))
     assert.equal(paper.questions.filter((q) => q.sharedGroupId === group).length,
       questions.filter((q) => q.sharedGroupId === group).length);
+});
+
+test("downloaded chapter practice includes short answers and separates matching names in different sections", () => {
+  const pack = { questions: [
+    { id: "short", type: "short_answer", chapter: "甲", knowledgeSection: "一", knowledgePoint: "原理" },
+    { id: "choice", type: "single_choice", chapter: "甲", knowledgeSection: "二", knowledgePoint: "原理" },
+    { id: "general", type: "single_choice" },
+  ] };
+  const catalog = offlinePracticeCatalog(pack, new Set(["short", "other-certificate"]), 0);
+  assert.equal(catalog.attemptedCount, 1);
+  assert.equal(catalog.chapters[0].progress, 50);
+  assert.deepEqual(catalog.chapters[0].sections.map(row => row.attemptedCount), [1, 0]);
+  assert.deepEqual(practiceQuestions(pack, { chapter: "甲", section: "一", point: "原理" }).map(row => row.id), ["short"]);
+  const general = catalog.chapters[1];
+  assert.deepEqual(practiceQuestions(pack, { chapter: general.name, point: general.knowledgePoints[0].name }).map(row => row.id), ["general"]);
 });
 
 test("local exam resume and score preserve IDs and do not count unanswered rows", () => {

@@ -28,13 +28,12 @@ test('Android modal windows have their own safe-area provider and do not rely on
     const code=read(file);assert.match(code,/AndroidModalSafeArea/);assert.match(code,/statusBarTranslucent/);assert.match(code,/navigationBarTranslucent/);
   }
 });
-test('AI cost details start folded without removing explicit request consent or cancellation',()=>{
+test('AI cost details remain available from the ledger without a second confirmation',()=>{
   const code=read('mobile/src/components/AndroidPointsBar.android.tsx');
-  assert.doesNotMatch(code,/使用 AI 前确认积分/);
+  assert.doesNotMatch(code,/android-ai-confirm-sheet|继续使用 AI|androidPointsFlow\.(accept|cancel)/);
   assert.match(code,/const \[expanded,setExpanded\]=useState\(false\)/);
-  assert.match(code,/expanded&&<View testID="android-ai-cost-details"/);
-  assert.match(code,/onPress=\{androidPointsFlow.accept\}/);
-  assert.match(code,/onPress=\{androidPointsFlow.cancel\}/);
+  assert.match(code,/expanded&&<View[^>]+testID="android-points-rules"/);
+  assert.match(code,/点击 AI 功能即发起请求/);
   assert.match(code,/费用说明/);
 });
 test('profile membership card uses a neutral surface with a prominent grouped balance',()=>{

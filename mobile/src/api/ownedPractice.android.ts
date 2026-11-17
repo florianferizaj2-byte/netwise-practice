@@ -74,11 +74,12 @@ async function freshOwnedPractice(owner:string, selection:PracticeSelection, see
     notice:page.practiceStateVersion===1?'':'当前服务器未更新学习状态接口，历史答对状态暂按本机记录过滤。'};
 }
 
-export function saveOwnedPractice(owner:string, selection:PracticeSelection, state:{questions:Question[];index:number;base:number;total:number;nextOffset:number|null;seed:string;before:string;selected:string[];draft:string;submitted:boolean;completed:boolean}) {
+export function saveOwnedPractice(owner:string, selection:PracticeSelection, state:{questions:Question[];index:number;base:number;total:number;nextOffset:number|null;seed:string;before:string;selected:string[];draft:string;submitted:boolean;completed:boolean;offlinePackVersion?:string}) {
   const current=state.questions[state.index];if(!current)return Promise.resolve();
-  const start=Math.max(0,state.index-20), snapshot=persistentStudyData('/questions?feedback=instant',{items:state.questions.slice(start),total:state.total,nextOffset:state.nextOffset}) as {items:Question[]}|undefined;
+  const start=state.offlinePackVersion && selection.session==='daily' ? 0 : Math.max(0,state.index-20);
+  const snapshot=persistentStudyData('/questions?feedback=instant',{items:state.questions.slice(start),total:state.total,nextOffset:state.nextOffset}) as {items:Question[]}|undefined;
   const row:PracticeCheckpoint={version:1,questionId:current.id,fingerprint:JSON.stringify([current.type,current.question,current.options,current.sharedStem]),index:state.base+state.index,
     ...selection,selected:[...state.selected],draft:state.draft,submitted:state.submitted,updatedAt:new Date().toISOString(),seed:state.seed,before:state.before,
-    snapshot:snapshot?.items,snapshotIndex:state.index-start,nextOffset:state.nextOffset,total:state.total,completed:state.completed};
+    snapshot:snapshot?.items,snapshotIndex:state.index-start,nextOffset:state.nextOffset,total:state.total,completed:state.completed,offlinePackVersion:state.offlinePackVersion};
   return practiceCheckpoint.save(owner,row);
 }

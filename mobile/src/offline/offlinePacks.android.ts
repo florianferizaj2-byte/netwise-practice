@@ -33,7 +33,18 @@ async function readInstall(id: string, certificateId: string): Promise<Install |
 
 export async function installedOfflinePackManifest(owner: OfflinePackOwner) {
   const id = await sha(scope(owner));
-  return (await readInstall(id, owner.certificateId))?.manifest ?? null;
+  const install = await readInstall(id, owner.certificateId);
+  if (!install) return null;
+  await installedPackFile(id, install);
+  return install.manifest;
+}
+
+async function installedPackFile(id: string, install: Install) {
+  const file = packRoot(id) + install.directory + '/pack.json';
+  const info = await FS.getInfoAsync(file);
+  if (!info.exists || info.isDirectory || info.size !== install.manifest.bytes)
+    throw new Error('本机学习包不完整，请重新下载。');
+  return { file, bytes: info.size };
 }
 
 export async function loadOfflinePack(owner: OfflinePackOwner): Promise<InstalledOfflinePack | null> {
@@ -41,16 +52,14 @@ export async function loadOfflinePack(owner: OfflinePackOwner): Promise<Installe
   const install = await readInstall(id, owner.certificateId);
   if (!install) return null;
   const dir = packRoot(id) + install.directory + '/';
-  const file = dir + 'pack.json';
-  const info = await FS.getInfoAsync(file);
-  if (!info.exists || info.isDirectory || info.size !== install.manifest.bytes)
-    throw new Error('本机学习包不完整，请重新下载。');
-  const pack = await decodeOfflinePack(install.manifest, await FS.readAsStringAsync(file), info.size, sha);
-  const files = new Map(Object.entries(pack.media).map(([key, asset], i) =>
-    [key, dir + 'image-' + i + '.' + extension(asset.mimeType)] as const));
-  for (const src of files.values()) {
-    const image = await FS.getInfoAsync(src);
-    if (!image.exists || image.isDirectory || !image.size) throw new Error('本机学习包缺少配图，请重新下载。');
+  const { file, bytes } = await installedPackFile(id, install);
+  const pack = await decodeOfflinePack(install.manifest, await FS.readAsStringAsync(file), bytes, sha);
+  const files = new Map<string, string>();
+  for (const [i, [key, asset]] of Object.entries(pack.media).entries()) {
+    const src = dir + 'image-' + i + '.' + extension(asset.mimeType);
+    const image = await FS.getInfoAsync(src).catch(() => null);
+    // The validated pack includes the original image bytes even if the extracted file is missing.
+    files.set(key, image?.exists && !image.isDirectory && image.size ? src : `data:${asset.mimeType};base64,${asset.base64}`);
   }
   return { ...install, pack, imageUri: (src) => files.get(src) };
 }
@@ -61,10 +70,12 @@ export async function downloadOfflinePack(
 ): Promise<OfflinePackManifest> {
   const snapshot = mobileSessionSnapshot();
   const key = scope(owner);
+  const activeScope = mobileStudyScope();
+  const activeUser = activeScope ? JSON.parse(activeScope)[1] : null;
   const assertCurrent = () => {
     const current = mobileSessionSnapshot();
     if (options.signal?.aborted || snapshot.revision !== current.revision ||
-      snapshot.token !== current.token || mobileStudyScope() !== key)
+      snapshot.token !== current.token || activeUser !== owner.userId || mobileStudyScope() !== activeScope)
       throw new Error('下载已取消，原学习包未受影响。');
   };
   if (!snapshot.token) throw new Error('请先联网登录，再下载该证书。');

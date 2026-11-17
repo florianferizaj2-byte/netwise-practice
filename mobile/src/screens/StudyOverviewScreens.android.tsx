@@ -1,11 +1,13 @@
 import { useScreenActive } from '../navigation/ScreenActivity';
 import { practiceCheckpoint } from '../api/practiceCheckpoint.android';
 import { practiceOwner } from '../api/ownedPractice.android';
-import { AndroidPageHeader, AndroidPointsLink, DailyGoalRing } from '../components/AndroidUi.android';
+import { AndroidPageHeader, AndroidPointsLink } from '../components/AndroidUi.android';
 import { AppIcon } from '../components/AppIcon';
 import { androidAccent, type AndroidAccent } from '../android-design-tokens';
 import { useLaunchStage } from '../launch/LaunchReadiness';
 import { AnnouncementCard } from '../components/AnnouncementCard';
+import { LeaderboardModal } from './LeaderboardModal';
+import { startupMotivation } from '../todayMotivation';
 import { iosStyles } from '../iosStyles';
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -102,24 +104,24 @@ const groupKey = (question: Question) =>
 const homeType = StyleSheet.create({
   heading: { fontSize: 24, lineHeight: 34, fontWeight: '500' },
   subtitle: { fontSize: 15, lineHeight: 24, fontWeight: '400' },
-  eyebrow: { fontSize: 14, lineHeight: 22, fontWeight: '500', letterSpacing: 0.3 },
-  goal: { fontSize: 22, lineHeight: 32, fontWeight: '500', fontVariant: ['tabular-nums'] },
-  detail: { fontSize: 14, lineHeight: 23, fontWeight: '400' },
-  action: { fontSize: 16, lineHeight: 24, fontWeight: '500' },
 });
+const DAILY_GOAL = 30;
 
 export function TodayScreen({dashboard,onNavigate,preview=false,user,certificates,onOpenCertificatePicker}:Props){
   const s=useThemedStyles(styles),{colors}=useTheme();
-  const { fontScale } = useWindowDimensions();
+  const { width, fontScale } = useWindowDimensions();
   const [announcementRefreshKey,setAnnouncementRefreshKey]=useState(0);
+  const [leaderboardOpen, setLeaderboardOpen] = useState(false);
   const query=useCachedQuery('/dashboard?summary=1',mobileApi.dashboard,!preview);
   const catalogQuery=useCachedQuery('/practice/catalog?summary=1',mobileApi.practiceCatalogSummary,!preview);
-  const offlineCatalog=useCachedQuery('/practice/catalog',mobileApi.practiceCatalog,false);
-  const catalog=catalogQuery.data??offlineCatalog.data,data=query.data||dashboard;
-  useLaunchStage('home',preview||!!(data||query.error)&&!!(catalog||catalogQuery.error));
+  const cachedCatalog=useCachedQuery('/practice/catalog',mobileApi.practiceCatalog,false);
+  const local=useOfflineCatalog(user,!preview&&(!query.data||!catalogQuery.data||query.fetching||catalogQuery.fetching||!!query.error||!!catalogQuery.error));
+  const catalog=catalogQuery.error ? local?.catalog??catalogQuery.data??cachedCatalog.data : catalogQuery.data??cachedCatalog.data??local?.catalog;
+  const data=query.data||dashboard;
+  useLaunchStage('home',preview||!!(data||query.error||local)&&!!(catalog||catalogQuery.error));
   const chapters=preview?demoChapters:catalog?.chapters||[];
   const total=preview?1204:catalog?.total,attempted=preview?166:catalog?.attemptedCount;
-  const today=preview?12:data?.todayCount;
+  const today=preview?12:local?Math.max(local.todayCount,data?.todayCount??0):data?.todayCount;
   const accuracy=preview?'86%':data?.accuracy==null?'—':Math.round(data.accuracy*100)+'%';
   const refresh=()=>{setAnnouncementRefreshKey(k=>k+1);void query.refresh();void catalogQuery.refresh();};
   const active=useScreenActive(), dailyOwner=user?practiceOwner(user):'';
@@ -133,21 +135,44 @@ export function TodayScreen({dashboard,onNavigate,preview=false,user,certificate
   const hasDailyResume=dailyResume.owner===dailyOwner&&dailyResume.exists;
   const dailyResumeReady=preview||!user||dailyResume.owner===dailyOwner;
   const daily=()=>onNavigate('practice',{practiceSession:'daily',practiceMode:'random',practiceSource:'all'});
+  const goalReached = today != null && today >= DAILY_GOAL;
+  const goalStatus = today == null ? '正在同步今日进度' : goalReached ? '今日目标已完成' : `还差 ${DAILY_GOAL - today} 题达标`;
+  const dailyActionLabel = !dailyResumeReady ? '正在读取进度…' : hasDailyResume ? '继续今日学习' : '开始今日学习';
+  const stackDailyActions = width < 355 || fontScale > 1.2;
   return <ScrollView testID="today-screen" contentContainerStyle={s.page} showsVerticalScrollIndicator={false}
     refreshControl={preview?undefined:<RefreshControl refreshing={!!(query.fetching&&data)} onRefresh={refresh}/>}>
-    <AndroidPageHeader user={user} certificates={certificates} onOpenCertificatePicker={onOpenCertificatePicker}/>
-    <Text accessibilityRole="header" style={[s.welcome,homeType.heading]}>今天，也要稳步向前</Text>
+    <AndroidPageHeader user={user} certificates={certificates} onOpenCertificatePicker={onOpenCertificatePicker}
+      action={{ label: '排行榜', icon: 'trophy', gold: true, shimmer: active && !leaderboardOpen, onPress: () => setLeaderboardOpen(true) }}/>
+    {active && leaderboardOpen && <LeaderboardModal gold user={preview ? undefined : user} onClose={() => setLeaderboardOpen(false)}/>}
+    <Text accessibilityRole="header" testID="today-motivation" style={[s.welcome,homeType.heading]}>{startupMotivation}</Text>
     <Text style={[s.subtitle,homeType.subtitle]}>专注每一次练习，让进步看得见</Text>
-    <View style={s.daily}>
-      <View style={[s.heroRow,{gap:22},fontScale>1.25&&{flexDirection:'column',alignItems:'stretch',gap:24}]}><View style={[s.heroCopy,fontScale>1.25&&{flex:0}]}>
-        <View style={s.heroLabelRow}><Text style={[s.dailyLabel,homeType.eyebrow]}>每日刷题</Text></View>
-        <Text style={[s.dailyTitle,homeType.goal]}>{(today||0)>=30?'今日目标已完成':'每天 30 题'}</Text>
-        <Text style={[s.heroSubtitle,homeType.detail]}>{today===undefined?'正在同步今日进度':(today||0)>=30?'再接再厉，继续巩固所学':'再完成 '+(30-(today||0))+' 题，达成今日目标'}</Text>
-      </View><DailyGoalRing count={today}/></View>
-      <AnimatedPressable accessibilityRole="button" accessibilityLabel={hasDailyResume?'继续今日学习':'开始今日学习'} disabled={!dailyResumeReady} onPress={daily} style={s.dailyButton}>
-        <Text style={[s.dailyButtonText,homeType.action]}>{!dailyResumeReady?'正在读取进度…':hasDailyResume?'继续今日学习':'开始今日学习'}</Text><AppIcon name="arrow" size={21} color="#2865EE"/>
-      </AnimatedPressable>
-      <AnimatedPressable accessibilityRole="button" accessibilityLabel="复习已答题" onPress={()=>onNavigate('practice',{practiceSource:'answered',practiceMode:'sequential'})} style={{minHeight:48,flexDirection:'row',gap:6,alignItems:'center',justifyContent:'center'}}><AppIcon name="book" size={17} color="#FFFFFF"/><Text style={[s.link,homeType.detail,s.dailyLink]}>复习已答题</Text></AnimatedPressable>
+    <View style={s.daily} testID="daily-goal-card">
+      <View style={[s.goalStatus, goalReached && s.goalStatusComplete]}>
+        <View importantForAccessibility="no-hide-descendants" style={goalReached ? s.goalCheck : undefined}>
+          <AppIcon name={goalReached ? 'check' : 'info'} size={goalReached ? 15 : 22} color={goalReached ? colors.success : colors.brandDark} />
+        </View>
+        <Text testID="daily-goal-status" accessibilityLiveRegion="polite" style={[s.goalStatusText, goalReached && s.goalStatusTextComplete]}>{goalStatus}</Text>
+      </View>
+      <View style={s.goalNumbers}>
+        <View style={s.goalNumber}>
+          <Text style={s.goalLabel}>今日已刷</Text>
+          <Text testID="daily-goal-count" style={s.goalValue}>{today == null ? '—' : <>{today}<Text style={s.goalUnit}> 题</Text></>}</Text>
+        </View>
+        <View style={s.goalDivider} />
+        <View style={s.goalNumber}>
+          <Text style={s.goalLabel}>每日目标</Text>
+          <Text style={s.goalValue}>{DAILY_GOAL}<Text style={s.goalUnit}> 题</Text></Text>
+        </View>
+      </View>
+      <View style={[s.goalActions, stackDailyActions && s.goalActionsStacked]}>
+        <AnimatedPressable accessibilityRole="button" accessibilityLabel={dailyActionLabel} disabled={!dailyResumeReady} onPress={daily} style={[s.goalButton, s.goalPrimary, !stackDailyActions && s.goalPrimaryShare, !dailyResumeReady && s.goalButtonBusy]}>
+          <Text style={[s.goalButtonText, s.goalPrimaryText]}>{dailyActionLabel}</Text>
+          {dailyResumeReady && <AppIcon name="arrow" size={18} color={colors.white} />}
+        </AnimatedPressable>
+        <AnimatedPressable accessibilityRole="button" accessibilityLabel="复习已答题" onPress={()=>onNavigate('practice',{practiceSource:'answered',practiceMode:'sequential'})} style={[s.goalButton, s.goalSecondary, !stackDailyActions && s.goalSecondaryShare]}>
+          <Text style={s.goalButtonText}>复习已答题</Text>
+        </AnimatedPressable>
+      </View>
     </View>
     <View style={s.metrics}>
       <Metric value={String(preview?7:data?.streakDays??'—')} label="连续学习 / 天"/>
@@ -363,27 +388,6 @@ const baseStyles = (c: ThemeColors) =>
       lineHeight: 18,
       marginTop: 10,
     },
-    daily: { backgroundColor: c.brand, borderRadius: 18, padding: 19, gap: 15 },
-    dailyLabel: { color: "#FFFFFFD0", fontSize: 12 },
-    dailyTitle: {
-      color: c.white,
-      fontSize: 16,
-      fontWeight: "700",
-      marginTop: 6,
-    },
-    dailyCount: { color: c.white, fontSize: 25, fontWeight: "700" },
-    dailyUnit: { color: "#FFFFFFD0", fontSize: 12, fontWeight: "400" },
-    dailyButton: {
-      backgroundColor: c.white,
-      borderRadius: 11,
-      paddingHorizontal: 15,
-      minHeight: 46,
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
-    },
-    dailyButtonText: { color: "#11664F", fontSize: 15, fontWeight: "700" },
-    dailyArrow: { color: "#11664F", fontSize: 23 },
     metrics: {
       flexDirection: "row",
       paddingVertical: 24,
@@ -487,8 +491,28 @@ const styles=(c:ThemeColors)=>({...baseStyles(c),...StyleSheet.create({
   page:{padding:16,paddingTop:8,paddingBottom:28,backgroundColor:c.background},
   welcome:{color:c.text,fontSize:23,fontWeight:'700',marginBottom:6},subtitle:{color:c.textMuted,fontSize:14,lineHeight:22,marginBottom:18},
   title:{color:c.text,fontSize:26,fontWeight:'700',marginBottom:5},
-  daily:{backgroundColor:c.action,borderRadius:16,padding:18,gap:16},heroRow:{flexDirection:'row',alignItems:'center',gap:8},heroCopy:{flex:1,gap:8},heroLabelRow:{flexDirection:'row',alignItems:'center',gap:7},dailyLabel:{color:'#FFFFFF',fontSize:16,fontWeight:'500'},dailyTitle:{color:'#FFFFFF',fontSize:16,fontWeight:'700',lineHeight:25},heroSubtitle:{color:'#FFFFFF',fontSize:12,lineHeight:19},dailyLink:{color:'#FFFFFF',fontSize:13,fontWeight:'600'},
-  dailyButton:{backgroundColor:'#FFFFFF',borderRadius:10,minHeight:48,paddingHorizontal:16,flexDirection:'row',justifyContent:'space-between',alignItems:'center'},dailyButtonText:{color:'#2052C5',fontSize:15,fontWeight:'700'},
+  daily:{backgroundColor:c.surface,borderColor:c.border,borderWidth:1,borderRadius:16,padding:14,gap:14},
+  goalStatus:{flexDirection:'row',alignItems:'center',gap:9,paddingHorizontal:12,paddingVertical:8,minHeight:48,borderRadius:9,backgroundColor:c.brandSoft},
+  goalStatusComplete:{backgroundColor:c.successSoft},
+  goalStatusText:{flex:1,color:c.brandDark,fontSize:15,lineHeight:22,fontWeight:'700'},
+  goalStatusTextComplete:{color:c.success},
+  goalCheck:{width:22,height:22,borderRadius:11,borderWidth:1.5,borderColor:c.success,alignItems:'center',justifyContent:'center'},
+  goalNumbers:{flexDirection:'row',alignItems:'stretch',paddingVertical:2},
+  goalNumber:{flex:1,minWidth:0,alignItems:'center',gap:3,paddingHorizontal:6},
+  goalDivider:{width:1,alignSelf:'stretch',marginVertical:3,backgroundColor:c.border},
+  goalLabel:{color:c.textMuted,fontSize:14,lineHeight:20,textAlign:'center'},
+  goalValue:{color:c.text,fontSize:32,lineHeight:40,fontWeight:'700',fontVariant:['tabular-nums'],textAlign:'center'},
+  goalUnit:{fontSize:16,fontWeight:'500'},
+  goalActions:{flexDirection:'row',gap:8},
+  goalActionsStacked:{flexDirection:'column'},
+  goalButton:{minHeight:48,minWidth:0,borderRadius:10,paddingHorizontal:10,paddingVertical:7,flexDirection:'row',alignItems:'center',justifyContent:'center',gap:6},
+  goalPrimary:{backgroundColor:c.action},
+  goalPrimaryShare:{flex:1.32},
+  goalButtonBusy:{opacity:0.6},
+  goalSecondary:{borderColor:c.border,borderWidth:1,backgroundColor:c.surface},
+  goalSecondaryShare:{flex:1},
+  goalButtonText:{flexShrink:1,color:c.text,fontSize:14,lineHeight:21,fontWeight:'700',textAlign:'center'},
+  goalPrimaryText:{color:c.white},
   metrics:{backgroundColor:c.surface,borderColor:c.border,borderWidth:StyleSheet.hairlineWidth,borderRadius:14,flexDirection:'row',paddingVertical:17,marginTop:14,marginBottom:18},metric:{flex:1,alignItems:'center',gap:7},metricValue:{color:c.brand,fontSize:23,fontWeight:'700'},metricLabel:{color:c.textMuted,fontSize:12},
   quickGrid:{flexDirection:'row',flexWrap:'wrap',gap:12},quickCard:{flexGrow:1,flexBasis:'45%',minWidth:135,backgroundColor:c.surface,borderWidth:StyleSheet.hairlineWidth,borderColor:c.border,borderRadius:14,padding:15,gap:8},quickIcon:{width:42,height:42,backgroundColor:c.brandSoft,borderRadius:12,alignItems:'center',justifyContent:'center'},quickTitle:{color:c.text,fontSize:16,fontWeight:'700'},quickHint:{color:c.textMuted,fontSize:12,lineHeight:18},
   sectionHead:{flexDirection:'row',justifyContent:'space-between',alignItems:'center',gap:8,marginTop:18,marginBottom:8},headerLink:{flexDirection:'row',alignItems:'center',gap:4,minHeight:48},link:{color:c.textMuted,fontSize:13},sectionTitle:{color:c.text,fontSize:18,fontWeight:'700'},
@@ -498,3 +522,4 @@ const styles=(c:ThemeColors)=>({...baseStyles(c),...StyleSheet.create({
   questionRow:{backgroundColor:c.surface,borderColor:c.border,borderWidth:StyleSheet.hairlineWidth,borderRadius:13,marginBottom:9,padding:14,flexDirection:'row',alignItems:'center',gap:8},questionTitle:{color:c.text,fontSize:15,lineHeight:24,fontWeight:'500'},questionTags:{flexDirection:'row',alignItems:'center',gap:6,marginBottom:8},typeTag:{color:c.brand,backgroundColor:c.brandSoft,fontSize:12,paddingHorizontal:7,paddingVertical:3,borderRadius:5},wrongTag:{color:c.warning,backgroundColor:c.warningSoft,fontSize:12,paddingHorizontal:7,paddingVertical:3,borderRadius:5},
   filter:{paddingHorizontal:13,paddingVertical:10,borderRadius:9,backgroundColor:c.surface,minHeight:48,justifyContent:'center'},filterActive:{backgroundColor:c.brandSoft,borderWidth:1,borderColor:c.brand},expand:{minHeight:48,alignItems:'center',justifyContent:'center'},
 })});
+import { useOfflineCatalog } from '../offline/offlinePractice.android';

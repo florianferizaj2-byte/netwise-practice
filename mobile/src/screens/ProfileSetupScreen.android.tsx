@@ -5,12 +5,13 @@ import * as ImagePicker from 'expo-image-picker';
 import { mobileApi, type AuthResponse } from '../api/client';
 import { AnimatedPressable } from '../components/Motion';
 import { SafeAreaView } from '../components/SafeArea';
+import { PresetAvatarPicker } from '../components/PresetAvatarPicker';
 import { prepareAvatarImage } from '../platform/avatarImage';
 import { openPermissionSettings, requestPhotoAccess } from '../permissions/photos';
 import { useThemedStyles, useTheme, type ThemeColors } from '../theme';
 
 type Props = { user: AuthResponse['user']; onSaved: (user: AuthResponse['user']) => void; onCancel?: () => void; onLogout?: () => void };
-type Avatar = { uri: string; data: string; mimeType: 'image/jpeg' | 'image/png' | 'image/webp' };
+type Avatar = { uri: string; data: string; mimeType: 'image/jpeg' | 'image/png' | 'image/webp'; index?: number };
 export function ProfileSetupScreen({ user, onSaved, onCancel, onLogout }: Props) {
   const { colors } = useTheme();
   const s = useThemedStyles(styles);
@@ -64,11 +65,13 @@ export function ProfileSetupScreen({ user, onSaved, onCancel, onLogout }: Props)
         <Text style={s.hint}>{onCancel ? '名字和头像随账号保存。' : '填写名字并选择头像后，继续学习。'}</Text>
         <AnimatedPressable accessibilityRole="button" accessibilityLabel="选择头像" accessibilityState={{ disabled: choosing || saving, busy: choosing }} disabled={choosing || saving} onPress={() => void choose()} style={s.avatarButton}>
           {avatarUri ? <Image source={{ uri: avatarUri }} style={s.avatar} /> : <View style={s.avatar}><Text style={s.placeholder}>头像</Text></View>}
-          <Text style={s.link}>{choosing ? '正在选择…' : '选择头像'}</Text>
+          <Text style={s.link}>{choosing ? '正在选择…' : '从相册选择'}</Text>
         </AnimatedPressable>
+        <PresetAvatarPicker selected={avatar?.index} disabled={choosing || saving}
+          onSelect={(preset) => { setAvatar(preset); setDenied(false); setError(''); }} />
         <Text style={s.label}>名字</Text>
         <TextInput accessibilityLabel="名字" value={name} onChangeText={setName} maxLength={24} editable={!saving} style={s.input} placeholder="输入你的名字或昵称" placeholderTextColor={colors.textFaint} returnKeyType="done" onSubmitEditing={() => void save()} />
-        <Text style={s.hint}>最多 24 个字，头像支持 JPG、PNG 或 WebP。</Text>
+        <Text style={s.hint}>名字最多 24 个字。</Text>
         {!!error && <Text accessibilityRole="alert" style={s.error}>{error}</Text>}
         {denied && Platform.OS !== 'web' && <AnimatedPressable accessibilityRole="button" onPress={() => { void openPermissionSettings().catch(() => setError('无法打开设置，请从手机设置中管理相册权限')); }} style={s.secondary}><Text style={s.link}>打开手机权限设置</Text></AnimatedPressable>}
         <AnimatedPressable accessibilityRole="button" accessibilityLabel={onCancel ? '保存资料' : '保存并继续'} accessibilityState={{ disabled: saving || choosing, busy: saving }} disabled={saving || choosing} onPress={() => void save()} style={[s.primary, (saving || choosing) && s.disabled]}><Text style={s.primaryText}>{saving ? '正在保存…' : onCancel ? '保存资料' : '保存并继续'}</Text></AnimatedPressable>

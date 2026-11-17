@@ -6,6 +6,7 @@ export type PracticeCheckpoint = {
   submitted: boolean; updatedAt: string;
   session?: 'standard' | 'daily' | 'review';
   snapshot?: Question[]; snapshotIndex?: number; nextOffset?: number | null; total?: number; completed?: boolean;
+  offlinePackVersion?: string;
 };
 export const practiceFingerprint = (q: Question) => JSON.stringify([q.type, q.question, q.options, q.sharedStem]);
 export type PracticeHistory = Record<string, { confirmed: boolean; pending?: boolean; attemptId?: string; correct: boolean }>;
@@ -28,6 +29,7 @@ export function createPracticeCheckpointStore(storage: { getItem(key: string): P
     && (row.session===undefined || ['standard','daily','review'].includes(row.session))
     && typeof row.updatedAt==='string' && Number.isFinite(Date.parse(row.updatedAt))
     && (row.completed===undefined || typeof row.completed==='boolean')
+    && (row.offlinePackVersion===undefined || /^[a-f0-9]{64}$/.test(row.offlinePackVersion))
     && (row.nextOffset===undefined || row.nextOffset===null || Number.isSafeInteger(row.nextOffset)&&row.nextOffset>=0);
   const validSnapshot=(snapshot:unknown):snapshot is Question[]=>Array.isArray(snapshot)&&snapshot.length<=100&&snapshot.every(q=>id(q?.id)&&q.source!=='ai_generated'&&typeof q.question==='string'&&q.options!==null&&typeof q.options==='object'&&Object.values(q.options).every(value=>typeof value==='string'))&&new Set(snapshot.map(q=>q.id)).size===snapshot.length;
   const clean=(row:PracticeCheckpoint)=>{if(row.snapshot!==undefined&&!validSnapshot(row.snapshot)){const copy={...row};delete copy.snapshot;delete copy.snapshotIndex;return copy;}return row;};

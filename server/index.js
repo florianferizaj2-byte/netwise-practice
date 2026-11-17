@@ -35,13 +35,14 @@ import { findSimilarQuestions, questionSimilarity } from "./question-similarity.
 import { questionImageSchema, validateQuestion } from "./domain.js";
 import { questionPage } from "./question-paging.js";
 import { studySummary } from "./study-summary.js";
+import { selectTodayMotivation } from "./today-motivation.js";
 import { authorAiAvailable, authorAiOwner } from "./ai-service.js";
 import { registerGuestTrialRoutes } from "./guest-trial.js";
 import { createAiScheduler, checkAiCancellation } from "./ai-tasks.js";
 import { createAuthRateLimiter } from "./auth-rate-limit.js";
 import { createAccountSecurity } from "./account-security.js";
 import { createMobileAnnouncementService, registerMobileAnnouncement } from "./mobile-announcement.js";
-import { registerMobileAdminRoutes } from "./mobile-admin.js";
+import { createMobileAccountControls, registerMobileAdminRoutes } from "./mobile-admin.js";
 import { registerAdminConsole, draftQuestion } from "./admin-console/index.js";
 import { createMobileProfileService, registerMobileProfile } from "./mobile-profile.js";
 import { resolveMobileRelease } from "./mobile-release.js";
@@ -165,7 +166,9 @@ export async function createApp(options = {}) {
   // profile, including its encrypted AI API key. Tests/local fixtures can
   // still opt into anonymous mode explicitly with { authRequired: false }.
   const authRequired = options.authRequired ?? true;
-  const accountSecurity = createAccountSecurity(store, options.accountSecurity);
+  const accountControls = createMobileAccountControls(store.db);
+  const accountSecurity = createAccountSecurity(store, { ...options.accountSecurity,
+    registrationEnabled: accountControls.registrationEnabled });
   const mobileProfiles = createMobileProfileService(store);
   const app = express();
   const aiScheduler = createAiScheduler(options.aiTasks);
@@ -439,9 +442,13 @@ export async function createApp(options = {}) {
     store.points.grant({userId:key,sourceKey:"guest-trial",units:10000,kind:"guest-gift",requireFunded:true});
     return ai(key,work,{usageUserId:"guest-trial",feature:"guest-trial"});
   }, customProvider: !!options.provider });
+  // Leaderboard images are public like profile avatars, and use the same API
+  // origin as the leaderboard (including the app's IPv6 API endpoint).
+  app.get("/api/community/avatars/:file", mobileProfiles.sendAvatar);
   app.use("/api", (req, res, next) => {
     if (!authRequired) return next();
     const user = store.authUser(requestToken(req));
+    if (!user && req.path === "/community/leaderboards" && ["GET", "HEAD"].includes(req.method)) return next();
     if (!user) return res.status(401).json({ error: "请先登录" });
     if (user.bannedAt)
       return res.status(403).json({
@@ -530,9 +537,20 @@ export async function createApp(options = {}) {
       nextBefore: messages[0] ? `${messages[0].createdAt}|${messages[0].id}` : null,
     };
   });
-  route("get", "/api/community/leaderboards", (req) =>
-    store.communityLeaderboards(req.user?.id || "local"),
-  );
+  let publicLeaderboardSnapshot;
+  route("get", "/api/community/leaderboards", (req, res) => {
+    res.set("Cache-Control", "private, no-store");
+    const viewerId = req.user?.id ?? (authRequired ? undefined : "local");
+    if (viewerId) return store.communityLeaderboards(viewerId, mobileProfiles.leaderboardAvatarUrlForFile);
+    const now = Date.now();
+    if (!publicLeaderboardSnapshot || publicLeaderboardSnapshot.expiresAt <= now) {
+      publicLeaderboardSnapshot = {
+        data: store.communityLeaderboards(undefined, mobileProfiles.leaderboardAvatarUrlForFile),
+        expiresAt: now + 15_000,
+      };
+    }
+    return publicLeaderboardSnapshot.data;
+  });
   route("post", "/api/community/messages", async (req) => {
     const body = z
       .object({
@@ -915,7 +933,8 @@ export async function createApp(options = {}) {
   registerPointsRoutes({ route,store,requireAdmin,requestUserId });
   app.locals.voicePacks = registerVoicePackRoutes({ app,route,store,requireAdmin,requestUserId });
   registerAiServiceRoutes({ route,store,provider,requireAdmin,ai });
-  registerMobileAdminRoutes({ route, store, requireAdmin, certificates, announcements: mobileAnnouncements, profiles: mobileProfiles });
+  registerMobileAdminRoutes({ route, store, requireAdmin, certificates, announcements: mobileAnnouncements,
+    profiles: mobileProfiles, controls: accountControls });
   const adminConsole = registerAdminConsole({ route, store, requireAdmin, provider, ai });
   const study = registerStudyRoutes({ route, store, provider, requireAdmin,
     requestUserId, ai, requireAiService, studyAI: options.studyAI, studySeeds: options.studySeeds });
@@ -2004,7 +2023,13 @@ export async function createApp(options = {}) {
       wrong = store
         .wrongQuestions(userId, userAttempts)
         .filter((question) => currentIds.has(question.id)),
-      summary = studySummary(attempts, wrong);
+      summary = {
+        ...studySummary(attempts, wrong),
+        todayMotivation: selectTodayMotivation(attempts, {
+          userId, certificateId, now: homeNow(),
+          isSingleChoice: (id) => store.getQ(id)?.type === "single_choice",
+        }),
+      };
     if (summaryOnly) return rememberHomeResult(cacheKey, userId, summary);
     const mastery = store.mastery(currentIds, userId, certificateId),
       syllabus = syllabusForCertificate(certificateId),

@@ -81,3 +81,13 @@ test('fallback never rewrites URLs that do not belong to the API base', () => {
   assert.equal(api.activeApiBase(), 'https://aceexam.top/api');
   assert.equal(api.resolveApiUrl('https://cdn.test/a.png'), 'https://cdn.test/a.png');
 });
+
+test('practice reachability returns even if a native network request never settles', { timeout: 3000 }, async () => {
+  let requestSignal;
+  const api = load({ fetchImpl: (_url, { signal }) => {
+    requestSignal = signal;
+    return new Promise(() => {});
+  } });
+  assert.equal(await api.canReachPracticeApi(), false);
+  assert.equal(requestSignal.aborted, true);
+});

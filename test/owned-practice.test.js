@@ -76,8 +76,8 @@ test('daily wrapper forwards the authenticated owner and flushes the child on cl
   const panel=fs.readFileSync('mobile/src/screens/DailyPracticePanel.android.tsx','utf8');assert.match(panel,/user=\{user\}/);assert.match(panel,/visible && <PracticeScreen/);
   const shell=fs.readFileSync('mobile/src/navigation/AppShell.android.tsx','utf8');assert.match(shell,/user=\{session\?\.user\} certificates=\{session\?\.certificates\}/);
   const home=fs.readFileSync('mobile/src/screens/StudyOverviewScreens.android.tsx','utf8'),hub=fs.readFileSync('mobile/src/screens/PracticeHubScreen.android.tsx','utf8');
-  assert.match(home,/hasDailyResume\?'继续今日学习'/);assert.doesNotMatch(home,/today\?'继续今日学习'/);assert.match(hub,/lastPractice\?\.chapter/);
-  const screen=fs.readFileSync('mobile/src/screens/TabScreens.android.tsx','utf8');assert.match(screen,/loadOwnedPractice\(owner,selection,practiceQuestionId\)/);assert.doesNotMatch(screen,/owner && practiceQuestionId && practiceSource/);
+  assert.match(home,/dailyResumeReady\s*\?\s*'正在读取进度…'\s*:\s*hasDailyResume\s*\?\s*'继续今日学习'\s*:\s*'开始今日学习'/);assert.doesNotMatch(home,/today\s*\?\s*'继续今日学习'/);assert.match(hub,/lastPractice\?\.chapter/);
+  const screen=fs.readFileSync('mobile/src/screens/TabScreens.android.tsx','utf8');assert.match(screen,/openPracticeWithDownloadedBank\(user, selection, practiceQuestionId\)/);assert.doesNotMatch(screen,/owner && practiceQuestionId && practiceSource/);
 });
 
 test('a parent chapter without a separate cursor can continue its last active point without changing the saved point scope',async t=>{

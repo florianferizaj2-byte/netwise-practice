@@ -28,7 +28,7 @@ function verifyInstantSubmission(body){
   function fixture(overrides={}){
     const observed={result:null,error:null,submitting:false,ids:{},queued:[],network:[],feedback:[]};
     const q={id:'q',type:'single_choice',answer:['A'],analysis:'prefetched solution'};
-    const ctx={module:{exports:null},currentQuestion:q,result:null,submitting:false,selected:['B'],responseDraft:'',preview:false,user:{id:'learner',certificateId:'cert'},API_BASE_URL:'https://example.test/api',sync:{ready:true,owner:JSON.stringify(['https://example.test/api','learner','cert'])},feedbackById:{},submissionGuard:{current:''},fallbackIds:{current:new Map()},pageGeneration:{current:1},elapsedTime:()=>1234,studyRequestId:()=> '00000000-0000-4000-8000-000000000001',sameAnswers:(a,b)=>JSON.stringify([...a].sort())===JSON.stringify([...b].sort()),setError:x=>observed.error=x,setSubmitting:x=>observed.submitting=x,setResult:x=>observed.result=x,publishSubmittedResult:x=>{observed.result=x;observed.feedback.push(x.correct)},setSyncIds:fn=>observed.ids=fn(observed.ids),practiceAttemptSync:{enqueue:p=>{observed.queued.push(p);return 'queued-id'}},mobileApi:{async recordAttempt(...args){observed.network.push(args);return {questionId:'q',selected:args[1],correct:true,timeMs:1234,answer:['B'],analysis:'authoritative'}}},...overrides};
+    const ctx={module:{exports:null},currentQuestion:q,result:null,submitting:false,selected:['B'],responseDraft:'',preview:false,localPack:null,user:{id:'learner',certificateId:'cert'},API_BASE_URL:'https://example.test/api',sync:{ready:true,owner:JSON.stringify(['https://example.test/api','learner','cert'])},feedbackById:{},submissionGuard:{current:''},fallbackIds:{current:new Map()},pageGeneration:{current:1},elapsedTime:()=>1234,studyRequestId:()=> '00000000-0000-4000-8000-000000000001',sameAnswers:(a,b)=>JSON.stringify([...a].sort())===JSON.stringify([...b].sort()),setError:x=>observed.error=x,setSubmitting:x=>observed.submitting=x,setResult:x=>observed.result=x,publishSubmittedResult:x=>{observed.result=x;observed.feedback.push(x.correct)},setSyncIds:fn=>observed.ids=fn(observed.ids),practiceAttemptSync:{enqueue:p=>{observed.queued.push(p);return 'queued-id'}},mobileApi:{async recordAttempt(...args){observed.network.push(args);return {questionId:'q',selected:args[1],correct:true,timeMs:1234,answer:['B'],analysis:'authoritative'}}},...overrides};
     const js=ts.transpileModule('module.exports=async function()'+body,{compilerOptions:{module:ts.ModuleKind.CommonJS}}).outputText;vm.runInNewContext(js,ctx);return {run:ctx.module.exports,observed};
   }
   // The handler is async, but its prefetched branch must synchronously publish
@@ -55,7 +55,11 @@ test('Android screen variants retain their practice and exam business handlers',
       }
       if(name==='screens/TabScreens'&&key==='loadMoreQuestions'){
         assert.match(actual,/ownedPracticePage/);
-        actual=actual.replace("(managedPractice && user ? ownedPracticePage(practiceOwner(user), ownedSelection.current, nextOffset, pageSeed.current, randomBefore.current) : ",'').replace('undefined)).then','undefined).then');
+        assert.match(actual,/!packOwner \|\| !managedPractice \|\| !isApiUnavailable\(cause\) \|\| generation !== pageGeneration.current/);
+        assert.match(actual,/loadLocalPractice\(packOwner, installed, ownedSelection.current, null\)/);
+        assert.match(actual,/nextOffset: null/);
+        actual=actual.replace("(managedPractice && user ? ownedPracticePage(practiceOwner(user), ownedSelection.current, nextOffset, pageSeed.current, randomBefore.current) : ",'')
+          .replace(/undefined\)\)\.catch\(async \(cause\) => \{[\s\S]*?\n    \}\)\.then/, 'undefined).then');
         assert.match(actual,/feedback: 'instant'/);
         assert.match(actual,/excludeCorrect: '1' as const, before: randomBefore.current/);
         // HTTP continuity tests cover the new owned random filter; the rest of
@@ -72,6 +76,10 @@ test('Android screen variants retain their practice and exam business handlers',
         assert.match(actual,/mobileApi.removeWrong/);assert.match(actual,/setTotalQuestions/);compared++;continue;
       }
       if(name==='screens/TabScreens'&&['previousPracticeQuestion','continuePracticeQuestion'].includes(key))actual=actual.replace(' || wrongDeleteBusy','');
+      if(name==='screens/TabScreens'&&key==='toggleFavorite'){
+        assert.match(actual,/offlineStudyStore\.setFavorite\(packOwner, questionId, nextFavorite\)/);
+        actual=actual.replace(/localPack && packOwner\n\s*\? await offlineStudyStore\.setFavorite[^\n]*\n\s*: /, '');
+      }
       if(name==='screens/TabScreens'&&key==='requestPracticeExit'){
         assert.match(actual,/saveLatest.current\(\).then/);assert.match(actual,/续刷进度未保存/);compared++;continue;
       }
@@ -145,7 +153,8 @@ test('new navigation and points entry points remain reachable without a global b
   assert.match(points, /registerMobileRequestHooks\(androidPointsFlow.hooks\)/);
   assert.match(points, /state.presentationHost==='root'/);
   const profile = native('screens/TabScreens');
-  for (const label of ['会员与 AI 积分', '签到领积分', '兑换码', '积分记录', '已生成题目', '账号与安全', '考匠社区']) assert.ok(profile.includes(label));
+  for (const label of ['会员与 AI 积分', '签到领积分', '兑换码', '积分记录', '已生成题目', '账号与安全', '社区']) assert.ok(profile.includes(label));
+  assert.match(profile, /onNavigate\('community'\)\} title="社区"/);
   assert.match(profile, /androidPointsFlow.showDetails/);
 });
 

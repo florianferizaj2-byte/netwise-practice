@@ -70,7 +70,7 @@ test("offline pack omits private and AI content and refuses unapproved image pat
   }
 });
 
-test("offline API checks account certificate and validates the immutable download version", async (t) => {
+test("offline API allows signed-in users to download other certificates and scopes attempts to the selected certificate", async (t) => {
   const parent = fs.realpathSync(os.tmpdir());
   const dir = fs.mkdtempSync(path.join(parent, "aceexam-offline-pack-test-"));
   const store = createStore(dir);
@@ -104,8 +104,12 @@ test("offline API checks account certificate and validates the immutable downloa
   const manifest = await initial.json();
   const download = base + "/packages/" + manifest.version;
   assert.equal((await req(base + "/manifest")).status, 401);
-  assert.equal((await req(base + "/manifest", secondToken)).status, 404);
-  assert.equal((await req(download, secondToken)).status, 404);
+  assert.deepEqual(await (await req(base + "/manifest", secondToken)).json(), manifest);
+  const otherCertificateDownload = await req(download, secondToken);
+  assert.equal(otherCertificateDownload.status, 200);
+  assert.equal(sha256(Buffer.from(await otherCertificateDownload.arrayBuffer())), manifest.sha256);
+  assert.equal((await req(download)).status, 401);
+  assert.equal((await req("/api/offline/certificates/missing/manifest", firstToken)).status, 404);
   const response = await req(download, firstToken);
   const bytes = Buffer.from(await response.arrayBuffer());
   assert.equal(response.status, 200);

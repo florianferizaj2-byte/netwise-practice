@@ -49,3 +49,64 @@ test('profile saves to the server, admin shows nickname/avatar and account isola
     fs.rmSync(directory, { recursive: true, force: true });
   }
 });
+
+test('leaderboards expose uploaded avatars to visitors and signed-in learners through the API', async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'aceexam-leaderboard-avatar-'));
+  const store = createStore(dir);
+  let app, server;
+  try {
+    const ranked = store.register('ranking_avatar_fixture', 'fixture-password-123');
+    const uncustomized = store.register('ranking_no_avatar_fixture', 'fixture-password-123');
+    const token = store.createAuthSession(ranked.id);
+    store.addQ({ id: 'ranking-avatar-qa', type: 'single_choice', question: 'Which option is correct?',
+      options: { A: 'Correct', B: 'Incorrect' }, answer: ['A'] });
+    store.recordAttempt('ranking-avatar-qa', ['A'], 1000, 'practice', ranked.id);
+    store.recordAttempt('ranking-avatar-qa', ['B'], 1000, 'practice', uncustomized.id);
+    app = await createApp({ store, withFrontend: false, authRequired: true });
+    server = app.listen(0, '127.0.0.1');
+    await new Promise((resolve) => server.once('listening', resolve));
+    const base = `http://127.0.0.1:${server.address().port}`;
+    const auth = { Authorization: `Bearer ${token}` };
+    const uploaded = await fetch(base + '/api/auth/profile', {
+      method: 'PUT', headers: { ...auth, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: '排行榜头像测试', image: avatarImage }),
+    });
+    assert.equal(uploaded.status, 200);
+    const { user } = await uploaded.json();
+    assert.match(user.avatarUrl, /^\/avatars\/[a-f0-9-]+\.png$/);
+    const expectedUrl = `/api/community${user.avatarUrl}`;
+    const getBoard = (headers) => fetch(base + '/api/community/leaderboards', { headers });
+    const publicResult = await getBoard();
+    assert.equal(publicResult.status, 200);
+    assert.match(publicResult.headers.get('cache-control'), /no-store/);
+    const { answered: visitors } = await publicResult.json();
+    assert.equal(visitors.me, null);
+    assert.equal(visitors.top.find((row) => row.name === user.communityName)?.avatarUrl, expectedUrl);
+    assert.ok(visitors.top.every((row) => !('userId' in row) && !('avatarFile' in row)));
+    assert.equal(visitors.top.find((row) => row.name !== user.communityName)?.avatarUrl, null);
+
+    const signedResult = await getBoard(auth);
+    assert.equal(signedResult.status, 200);
+    const { answered: signed } = await signedResult.json();
+    assert.equal(signed.me.userId, ranked.id);
+    assert.equal(signed.me.avatarUrl, expectedUrl);
+    assert.equal(signed.top.find((row) => row.userId === ranked.id)?.avatarUrl, expectedUrl);
+
+    for (const url of [expectedUrl, user.avatarUrl]) {
+      const image = await fetch(base + url);
+      assert.equal(image.status, 200);
+      assert.equal(image.headers.get('content-type'), 'image/png');
+      assert.equal(image.headers.get('x-content-type-options'), 'nosniff');
+      assert.deepEqual(Buffer.from(await image.arrayBuffer()), avatarBytes);
+    }
+    for (const file of ['not-an-avatar.png', '00000000-0000-0000-0000-000000000000.png', '..%2Fnetwise.sqlite']) {
+      const missing = await fetch(`${base}/api/community/avatars/${file}`);
+      assert.equal(missing.status, 404);
+    }
+  } finally {
+    if (app) await app.locals.stop();
+    if (server) await new Promise((resolve) => server.close(resolve));
+    store.db.close();
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});

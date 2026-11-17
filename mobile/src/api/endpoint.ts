@@ -54,21 +54,29 @@ export function preferApiBase(base: string): string {
   return activeApiBase();
 }
 
-async function reachable(base: string): Promise<boolean> {
+async function reachable(base: string, timeoutMs = 4000): Promise<boolean> {
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 4000);
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const timeout = new Promise<boolean>(resolve => {
+    timer = setTimeout(() => { controller.abort(); resolve(false); }, timeoutMs);
+  });
   try {
-    const response = await fetch(`${base}/mobile/version?probe=1`, {
+    const response = fetch(`${base}/mobile/version?probe=1`, {
       method: 'GET',
       cache: 'no-store',
       signal: controller.signal,
-    });
-    return response.status < 500;
+    }).then(result => result.status < 500, () => false);
+    return await Promise.race([response, timeout]);
   } catch {
     return false;
   } finally {
     clearTimeout(timer);
   }
+}
+
+/** A downloaded practice bank need not wait for the normal API timeout. */
+export function canReachPracticeApi() {
+  return reachable(activeApiBase(), 700);
 }
 
 /**

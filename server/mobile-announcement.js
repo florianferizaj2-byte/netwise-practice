@@ -5,10 +5,12 @@ import { fileURLToPath } from 'node:url';
 import { z } from 'zod';
 
 const defaultFile = fileURLToPath(new URL('./mobile-announcement.json', import.meta.url));
+const displayMode = z.enum(['once', 'everyLaunch', 'never']);
 const announcementSchema = z.object({
   schemaVersion: z.literal(1),
   id: z.string().trim().min(1).max(80),
   enabled: z.boolean(),
+  displayMode: displayMode.default('once'),
   title: z.string().trim().min(1).max(80),
   body: z.string().trim().min(1).max(8000),
   updatedAt: z.string().max(40).datetime({ offset: true }),
@@ -17,6 +19,7 @@ const announcementSchema = z.object({
 const editSchema = z.object({
   revision: z.string().regex(/^[a-f0-9]{64}$/),
   enabled: z.boolean(), title: z.string().trim().min(1).max(80), body: z.string().trim().min(1).max(8000),
+  displayMode: displayMode.optional(),
 }).strict();
 const revisionOf = (content) => crypto.createHash('sha256').update(JSON.stringify(content)).digest('hex');
 
@@ -40,7 +43,8 @@ export async function createMobileAnnouncementService({ file }) {
         const previous = await read();
         if (revisionOf(previous) !== fields.revision) throw Object.assign(new Error('公告已被更新，请重新读取后保存'), { status: 409 });
         const announcement = announcementSchema.parse({ schemaVersion: 1, id: crypto.randomUUID(),
-          enabled: fields.enabled, title: fields.title, body: fields.body, updatedAt: new Date().toISOString() });
+          enabled: fields.enabled, displayMode: fields.displayMode ?? previous.displayMode,
+          title: fields.title, body: fields.body, updatedAt: new Date().toISOString() });
         const temporary = path.join(path.dirname(filename), `.mobile-announcement-${crypto.randomUUID()}.tmp`);
         try {
           await fs.writeFile(temporary, `${JSON.stringify(announcement, null, 2)}\n`, { flag: 'wx', mode: 0o600 });
@@ -56,10 +60,12 @@ export async function createMobileAnnouncementService({ file }) {
 
 /** Public text content only. Re-read on every request so edits require no restart. */
 export function registerMobileAnnouncement(app, { service }) {
-  app.get('/api/mobile/announcement', async (_req, res) => {
+  app.get('/api/mobile/announcement', async (req, res) => {
     res.set('Cache-Control', 'no-store');
     try {
-      res.json(await service.read());
+      const { displayMode, ...announcement } = await service.read();
+      // Older Apps accept only the original schema's keys.
+      res.json(req.query.displayPolicy === '1' ? { ...announcement, displayMode } : announcement);
     } catch {
       res.status(503).json({ error: '公告暂时不可用，请稍后重试' });
     }

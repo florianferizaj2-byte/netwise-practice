@@ -34,11 +34,15 @@ export function AuthScreen({ onAuthenticated, onPreview, onOffline }: AuthScreen
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const [emailRequired, setEmailRequired] = useState<boolean | null>(null), [policyError, setPolicyError] = useState(''), [policyRevision, setPolicyRevision] = useState(0);
+  const [registrationEnabled, setRegistrationEnabled] = useState(true);
   useEffect(() => {
     let live = true; setEmailRequired(null); setPolicyError('');
     mobileApi.accountEmailPolicy().then(result => {
       if (typeof result.emailVerificationRequired !== 'boolean') throw new Error('注册设置读取失败');
-      if (live) setEmailRequired(result.emailVerificationRequired);
+      if (live) {
+        setEmailRequired(result.emailVerificationRequired);
+        setRegistrationEnabled(result.registrationEnabled !== false);
+      }
     }).catch(cause => { if (live) setPolicyError(cause instanceof Error ? cause.message : '注册设置读取失败'); });
     return () => { live = false; };
   }, [policyRevision]);
@@ -48,8 +52,9 @@ export function AuthScreen({ onAuthenticated, onPreview, onOffline }: AuthScreen
   useEffect(() => { setChallengeId(''); setCode(''); setError(''); setPassword(''); setConfirm(''); }, [mode]);
   useEffect(() => { const tick = () => setSeconds(Math.max(0, Math.ceil((until - Date.now()) / 1000))); tick(); const timer = setInterval(tick, 1000); return () => clearInterval(timer); }, [until]);
 
+  const registrationPaused = mode === 'register' && !registrationEnabled;
   async function sendCode() {
-    if (sending || inFlight.current || mode === 'login' || emailRequired !== true) return;
+    if (registrationPaused || sending || inFlight.current || mode === 'login' || emailRequired !== true) return;
     if (!username.trim() || !email.trim()) { setError('请先填写账号和邮箱'); return; }
     inFlight.current = true; setSending(true); setError(''); setNotice(''); const sentScope = scope.current;
     try {
@@ -64,7 +69,7 @@ export function AuthScreen({ onAuthenticated, onPreview, onOffline }: AuthScreen
   const action = mode === 'login' ? '登录' : mode === 'reset' ? '重置密码' : '注册';
 
   async function submit() {
-    if (inFlight.current) return;
+    if (registrationPaused || inFlight.current) return;
     if (mode !== 'login' && emailRequired === null) return;
     if (!username.trim() || password.length < 8) {
       setError('请输入账号和至少 8 位密码');
@@ -176,19 +181,25 @@ export function AuthScreen({ onAuthenticated, onPreview, onOffline }: AuthScreen
             <TextInput accessibilityLabel="邮箱" autoComplete="email" keyboardType="email-address" autoCapitalize="none" autoCorrect={false} style={styles.input} value={email} onChangeText={value => { setEmail(value); setChallengeId(''); setCode(''); }} placeholder="可长期接收邮件的邮箱" placeholderTextColor={colors.textFaint} editable={!busy && !sending} maxLength={254} />
             <Text style={styles.label}>邮箱验证码</Text>
             <TextInput accessibilityLabel="邮箱验证码" autoComplete="one-time-code" keyboardType="number-pad" style={styles.input} value={code} onChangeText={value => setCode(value.replace(/\D/g, '').slice(0, 6))} placeholder="6 位验证码" placeholderTextColor={colors.textFaint} editable={!busy} maxLength={6} />
-            <AnimatedPressable disabled={busy || sending || seconds > 0} onPress={sendCode} style={styles.previewButton}><Text style={styles.previewButtonText}>{sending ? '发送中…' : seconds > 0 ? `${seconds} 秒后重发` : '获取验证码'}</Text></AnimatedPressable>
+            <AnimatedPressable disabled={registrationPaused || busy || sending || seconds > 0} onPress={sendCode} style={styles.previewButton}><Text style={styles.previewButtonText}>{sending ? '发送中…' : seconds > 0 ? `${seconds} 秒后重发` : '获取验证码'}</Text></AnimatedPressable>
             </>}
           </>}
 
           <AnimatedPressable
-            disabled={busy || sending || (mode !== 'login' && emailRequired === null)}
+            disabled={registrationPaused || busy || sending || (mode !== 'login' && emailRequired === null)}
             onPress={submit}
-            style={[styles.primaryButton, busy && styles.disabledButton]}
+            style={[styles.primaryButton, (registrationPaused || busy) && styles.disabledButton]}
           >
             <Text style={styles.primaryButtonText}>{busy ? `${action}中…` : action}</Text>
           </AnimatedPressable>
 
           {!!error && <Text accessibilityRole="alert" style={styles.errorText}>{error}</Text>}
+          {registrationPaused && <View>
+            <Text accessibilityRole="alert" style={styles.note}>暂未开放新账号注册，已有账号可以正常登录。</Text>
+            <AnimatedPressable disabled={emailRequired === null} onPress={() => setPolicyRevision(value => value + 1)} style={styles.previewButton}>
+              <Text style={styles.previewButtonText}>刷新注册状态</Text>
+            </AnimatedPressable>
+          </View>}
           {mode !== 'login' && !!policyError && <><Text accessibilityRole="alert" style={styles.errorText}>{policyError}</Text><AnimatedPressable onPress={() => setPolicyRevision(value => value + 1)} style={styles.previewButton}><Text style={styles.previewButtonText}>重新读取</Text></AnimatedPressable></>}
           {!!notice && <Text accessibilityRole="text" style={styles.note}>{notice}</Text>}
           {mode === 'login' && emailRequired && <AnimatedPressable disabled={busy} onPress={() => setMode('reset')} style={styles.previewButton}><Text style={styles.previewButtonText}>忘记密码？</Text></AnimatedPressable>}

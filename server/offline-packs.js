@@ -104,8 +104,8 @@ export function registerOfflinePacks({ app, route, store, certificates, question
   const packFor = (req) => {
     if (!req.user?.id) throw error("请先登录下载学习包", 401, "OFFLINE_AUTH_REQUIRED");
     const certificate = known.get(req.params.certificateId);
-    if (!certificate || req.user.certificateId !== certificate.id)
-      throw error("该学习包不属于当前证书", 404, "OFFLINE_CERTIFICATE_NOT_FOUND");
+    if (!certificate)
+      throw error("未找到该证书的学习包", 404, "OFFLINE_CERTIFICATE_NOT_FOUND");
     const next = store.questionRevision();
     if (next !== revision) {
       revision = next;

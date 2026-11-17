@@ -1,6 +1,7 @@
 import { ActivityIndicator, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
 import { AppIcon } from './AppIcon';
+import { GoldShimmer, leaderboardGold } from './LeaderboardGold';
 import { AnimatedPressable } from './Motion.android';
 import { AppAlert } from './AppAlert';
 import { useAndroidPoints } from './AndroidPointsBar.android';
@@ -16,14 +17,20 @@ export type AndroidCertificateProps = {
   onOpenCertificatePicker?: () => void;
 };
 
-export function AndroidPageHeader({ title = '今日', action }: AndroidCertificateProps & { title?: string; action?: { label: string; onPress: () => void } }) {
+export function AndroidPageHeader({ title = '今日', action }: AndroidCertificateProps & {
+  title?: string;
+  action?: { label: string; icon?: string; onPress: () => void; gold?: boolean; shimmer?: boolean };
+}) {
   const s = useThemedStyles(styles), { colors } = useTheme();
   const tone = androidAccent(colors, title === '练习' ? 'practice' : title === '错题' ? 'review' : title === '考试' ? 'exam' : 'primary');
   const icon = title === '练习' ? 'book' : title === '错题' ? 'wrong' : title === '考试' ? 'exam' : title === '我的' ? 'person' : 'home';
+  const gold = action?.gold ? leaderboardGold(colors) : null;
   return <View testID="android-page-header" style={s.header}>
     <View style={s.headerIdentity}><View style={[s.headerIcon, { backgroundColor: tone.soft }]}><AppIcon name={icon} size={25} color={tone.ink}/></View><Text accessibilityRole="header" style={s.brand}>{title}</Text></View>
-    {action ? <AnimatedPressable accessibilityRole="button" onPress={action.onPress} style={s.headerAction}>
-      <AppIcon name="settings" size={23} color={colors.textMuted}/><Text style={s.actionText}>{action.label}</Text>
+    {action ? <AnimatedPressable accessibilityRole="button" accessibilityLabel={action.label} onPress={action.onPress} style={[s.headerAction, action.icon && s.headerActionAccent, gold && { backgroundColor: gold.soft, borderColor: gold.border, borderWidth: 1, overflow: 'hidden' }]}>
+      {gold && <GoldShimmer active={action.shimmer} small testID="leaderboard-entry-glow" />}
+      <AppIcon name={action.icon ?? 'settings'} size={action.icon ? 18 : 23} color={gold?.ink ?? (action.icon ? colors.brand : colors.textMuted)}/>
+      <Text style={[s.actionText, action.icon && s.actionTextAccent, gold && { color: gold.ink }]}>{action.label}</Text>
     </AnimatedPressable> : null}
   </View>;
 }
@@ -102,7 +109,9 @@ const styles = (c: ThemeColors) => StyleSheet.create({
   certificate: { flexDirection: 'row', alignItems: 'center', gap: 7, paddingHorizontal: 13, minHeight: 48, maxWidth: '65%', minWidth: 0, flexShrink: 1, backgroundColor: c.surface, borderColor: c.border, borderWidth: 1, borderRadius: 26 },
   certificateName: { color: c.text, fontSize: 14, flexShrink: 1 },
   headerAction: { flexDirection: 'row', alignItems: 'center', gap: 6, minHeight: 48, paddingHorizontal: 8 },
+  headerActionAccent: { backgroundColor: c.brandSoft, borderRadius: 12, paddingHorizontal: 11 },
   actionText: { color: c.textMuted, fontSize: 14 },
+  actionTextAccent: { color: c.brandDark, fontSize: 13, fontWeight: '700', flexShrink: 1 },
   points: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 6, minHeight: 48, paddingHorizontal: 12, borderRadius: 12, backgroundColor: c.brandSoft },
   pointsCompact: { flexDirection: 'row', alignItems: 'center', gap: 5, minHeight: 48, alignSelf: 'flex-start' },
   pointsText: { color: c.brand, fontSize: 13, fontWeight: '500', flexShrink: 1 },

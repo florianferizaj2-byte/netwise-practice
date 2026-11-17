@@ -60,45 +60,23 @@ export function AndroidPointsInline({active=true,headless=false}:{active?:boolea
 
 function AndroidPointsDialog({userId,ownerKey}:{userId:string;ownerKey:string}) {
   const s=useThemedStyles(styles),{colors,reduceMotion}=useTheme(),state=useAndroidPoints();
-  const belongs=state.ownerKey===ownerKey;
-  const prompt=belongs?state.prompt:null,visible=belongs&&(!!prompt||state.detailsOpen);
+  const visible=state.ownerKey===ownerKey&&state.detailsOpen;
   const [expanded,setExpanded]=useState(false);
-  useEffect(()=>{if(visible){setExpanded(false);Keyboard.dismiss();}},[visible,prompt?.requestId]);
+  useEffect(()=>{if(visible){setExpanded(false);Keyboard.dismiss();}},[visible]);
   const wallet=state.wallet,number=(n:number)=>formatPointUnits(n,wallet?.scale||1000);
-  const model=state.prices?.available?state.prices.models.find(m=>m.id===state.prices?.primaryModelId):null;
-  const example=model?.services.find(service=>service.id===prompt?.priceId);
-  const close=()=>{if(prompt)androidPointsFlow.cancel();else androidPointsFlow.hideDetails();};
-  if(!belongs)return null;
-  return <Modal visible={visible} transparent statusBarTranslucent navigationBarTranslucent animationType={reduceMotion?'none':'fade'} onRequestClose={close}>
+  const close=androidPointsFlow.hideDetails;
+  if(!visible)return null;
+  return <Modal visible transparent statusBarTranslucent navigationBarTranslucent animationType={reduceMotion?'none':'fade'} onRequestClose={close}>
     <View style={s.scrim}>
-      <AndroidModalSafeArea style={[s.modal,!prompt&&s.detailsModal]}>
-      <View testID={prompt?'android-ai-confirm-sheet':'android-points-details-sheet'} accessibilityViewIsModal style={[s.sheet,!prompt&&s.detailsSheet]}>
-      {prompt?<View style={s.header}><Text accessibilityRole="header" style={[s.title,s.grow]}>{prompt.name}</Text>
-        <AnimatedPressable accessibilityRole="button" accessibilityLabel="取消本次AI请求" onPress={close} style={s.smallButton}><Text style={s.action}>取消</Text></AnimatedPressable></View>:<View style={s.detailsHeader}>
+      <AndroidModalSafeArea style={s.detailsModal}>
+      <View testID="android-points-details-sheet" accessibilityViewIsModal style={s.detailsSheet}>
+      <View style={s.detailsHeader}>
         <AnimatedPressable accessibilityRole="button" accessibilityLabel="关闭积分费用与记录" onPress={close} style={s.headerButton}><AppIcon name="chevron-left" size={24} color={colors.text}/></AnimatedPressable>
         <Text accessibilityRole="header" style={s.pageTitle}>积分</Text>
         <AnimatedPressable accessibilityRole="button" accessibilityLabel="刷新积分余额和使用记录" disabled={state.refreshing} onPress={()=>void androidPointsFlow.refresh()} style={s.headerButton}>{state.refreshing?<ActivityIndicator size="small" color={colors.brand}/>:<AppIcon name="refresh" size={24} color={colors.text}/>}</AnimatedPressable>
-      </View>}
-      <ScrollView style={[s.sheetScroll,!prompt&&s.detailsScroll]} contentContainerStyle={[s.content,!prompt&&s.detailsContent]} keyboardShouldPersistTaps="handled">
-        {prompt&&<Text style={s.balance}>可用 {wallet?number(wallet.availableUnits):'—'} 积分 · 预扣 {wallet?number(wallet.heldUnits):'—'}</Text>}
+      </View>
+      <ScrollView style={s.detailsScroll} contentContainerStyle={s.detailsContent} keyboardShouldPersistTaps="handled">
         {!!state.error&&<Text style={s.error} accessibilityRole="alert">{state.error}</Text>}
-        {prompt?<>
-          <Text style={s.text}>免费结果不扣积分；正余额可使用 AI，本次结算可能扣成负数。</Text>
-          <AnimatedPressable accessibilityRole="button" accessibilityLabel="费用说明" accessibilityState={{expanded}} onPress={()=>setExpanded(value=>!value)} style={s.disclosure}>
-            <AppIcon name="info" size={16} color={colors.textMuted}/><Text style={s.disclosureText}>费用说明</Text><AppIcon name={expanded?'chevron-up':'chevron-right'} size={14} color={colors.textMuted}/>
-          </AnimatedPressable>
-          {expanded&&<View testID="android-ai-cost-details" style={s.costDetails}>
-          <Text style={s.text}>普通刷题、已有内容、缓存与确定性判分免费；只有新 AI 调用才按实际用量扣积分。</Text>
-          {wallet&&wallet.availableUnits<=0&&<Text style={s.note}>余额为零或负数时暂停新的付费 AI；题库解析和已有缓存仍然免费可读。</Text>}
-          {!!prompt.maybeFree&&<Text style={s.note}>{prompt.maybeFree}</Text>}
-          {example&&model?<View style={s.noteBox}>
-            <Text style={s.text}>{model.name} · 用量示例 {formatPointUnits(example.sampleUnits,state.prices?.scale||1000)} 积分</Text>
-            <Text style={s.text}>每轮 1000 输入 Token＋该服务首轮输出额度，含标准审核，不含重试。这不是固定价格，也不是预扣或扣费上限。</Text>
-          </View>:<Text style={s.note}>暂未取得本服务的有效用量示例，不能将未知费用当作 0 积分。是否需要 AI、余额是否足够，由服务端校验。</Text>}
-          <Text style={s.text}>正余额可发起，按实际用量结算后可能扣成负数；零或负余额暂停新的付费请求。任务最终失败退回该任务预扣，但不会延长原积分有效期。接口可能按管理员优先级切换，实际费用以命中的模型与用量为准。</Text>
-          <AiPointsPricing userId={userId}/>
-          </View>}
-        </>:<>
           <View style={s.walletCard} testID="android-points-balance">
             <View style={s.walletCaption}><View style={s.walletIcon}><AppIcon name="sparkles" size={23} color={colors.brand}/></View><Text style={s.walletLabel}>可用积分</Text></View>
             <View style={s.walletValueRow}><Text style={[s.walletValue,number(wallet?.availableUnits||0).length>10&&s.walletValueCompact,wallet&&wallet.availableUnits<0&&{color:colors.warning}]}>{wallet?number(wallet.availableUnits):'—'}</Text><Text style={s.walletUnit}>积分</Text></View>
@@ -111,19 +89,14 @@ function AndroidPointsDialog({userId,ownerKey}:{userId:string;ownerKey:string}) 
               <AppIcon name="info" size={22} color={colors.textMuted}/><Text style={s.rulesTitle}>积分与费用说明</Text><AppIcon name={expanded?'chevron-up':'chevron-right'} size={18} color={colors.textMuted}/>
             </AnimatedPressable>
             {expanded&&<View style={s.rulesContent} testID="android-points-rules">
-              <Text style={s.text}>新 AI 调用按实际用量扣分；免费题库、已有解析和缓存结果不收费。</Text>
+              <Text style={s.text}>点击 AI 功能即发起请求，新 AI 调用按实际用量扣分；免费题库、已有解析、确定性判分和缓存结果不收费。</Text>
               <Text style={s.text}>正余额即可发起任务。按实际用量结算，允许本次扣成负数；余额为零或负数时不再发起新的付费 AI。失败不扣分，未用预扣释放。</Text>
               <Text style={s.text}>先用先到期积分。会员积分每日签到领取，签到赠送当日有效；退款不延长原有效期。</Text>
               <AiPointsPricing userId={userId} embedded/>
             </View>}
           </View>
           <AndroidPointsLedger ownerKey={ownerKey} refreshKey={state.updated}/>
-        </>}
       </ScrollView>
-      {prompt&&<View style={s.footer}>
-        <AnimatedPressable accessibilityRole="button" accessibilityLabel="取消，不发起请求" onPress={androidPointsFlow.cancel} style={[s.button,s.cancelButton]}><Text style={s.action}>取消</Text></AnimatedPressable>
-        <AnimatedPressable accessibilityRole="button" accessibilityLabel="继续使用AI，按实际用量结算" onPress={androidPointsFlow.accept} style={[s.button,s.continueButton,{backgroundColor:colors.action}]}><Text style={[s.buttonText,{color:colors.white}]}>继续使用 AI</Text></AnimatedPressable>
-      </View>}
       </View>
       </AndroidModalSafeArea>
     </View>
@@ -187,7 +160,7 @@ function AndroidPointsLedger({ownerKey,refreshKey}:{ownerKey:string;refreshKey:n
 }
 
 const styles=(c:ThemeColors)=>StyleSheet.create({
-  detailsModal:{backgroundColor:c.background,justifyContent:'flex-start'},detailsScroll:{flexGrow:1,flexShrink:1,flexBasis:0,minHeight:0},detailsContent:{paddingTop:12,paddingBottom:28,gap:20},
+  detailsModal:{backgroundColor:c.background,justifyContent:'flex-start'},detailsScroll:{flexGrow:1,flexShrink:1,flexBasis:0,minHeight:0},detailsContent:{paddingHorizontal:20,paddingTop:12,paddingBottom:28,gap:20},
   detailsHeader:{minHeight:64,paddingHorizontal:12,flexDirection:'row',alignItems:'center',gap:8},headerButton:{minHeight:48,minWidth:48,justifyContent:'center',alignItems:'center'},pageTitle:{flex:1,textAlign:'center',fontSize:22,lineHeight:32,fontWeight:'700',color:c.text},
   walletCard:{padding:18,gap:14,borderRadius:24,backgroundColor:c.surface},walletCaption:{flexDirection:'row',alignItems:'center',gap:12},walletIcon:{width:36,height:36,borderRadius:16,alignItems:'center',justifyContent:'center',backgroundColor:c.brandSoft},walletLabel:{fontSize:16,lineHeight:24,fontWeight:'500',color:c.textMuted},
   walletValueRow:{flexDirection:'row',alignItems:'baseline',flexWrap:'wrap',gap:8},walletValue:{fontSize:40,lineHeight:52,fontWeight:'700',color:c.text,fontVariant:['tabular-nums'],flexShrink:1},walletValueCompact:{fontSize:32,lineHeight:44},walletUnit:{fontSize:16,lineHeight:24,color:c.textMuted},
@@ -203,17 +176,9 @@ const styles=(c:ThemeColors)=>StyleSheet.create({
   small:{color:c.text,fontSize:13,lineHeight:20},action:{color:c.brand,fontSize:14,lineHeight:22,fontWeight:'600'},
   grow:{flex:1},smallButton:{minHeight:48,minWidth:48,paddingHorizontal:8,justifyContent:'center',alignItems:'center'},
   inline:{paddingHorizontal:12,paddingVertical:8,flexDirection:'row',alignItems:'center',gap:8,backgroundColor:c.surface},
-  scrim:{flex:1,backgroundColor:c.overlay},modal:{justifyContent:'flex-end'},
-  sheet:{maxHeight:'88%',backgroundColor:c.surface,borderTopLeftRadius:24,borderTopRightRadius:24,overflow:'hidden',marginHorizontal:8},
-  detailsSheet:{height:'100%',maxHeight:'100%',flex:1,marginHorizontal:0,borderTopLeftRadius:0,borderTopRightRadius:0,backgroundColor:c.background},sheetScroll:{flexGrow:0,flexShrink:1},
-  header:{paddingHorizontal:20,paddingTop:12,paddingBottom:4,flexDirection:'row',alignItems:'center',gap:8},
-  disclosure:{alignSelf:'flex-start',minHeight:48,flexDirection:'row',alignItems:'center',gap:7},
-  disclosureText:{color:c.textMuted,fontSize:13,lineHeight:20},costDetails:{gap:14,paddingTop:4},
-  title:{color:c.text,fontSize:18,lineHeight:27,fontWeight:'700'},text:{color:c.text,fontSize:15,lineHeight:24},
-  content:{paddingHorizontal:20,paddingVertical:12,gap:10},noteBox:{padding:16,gap:8,borderRadius:12,backgroundColor:c.surfaceMuted},
+  scrim:{flex:1,backgroundColor:c.overlay},
+  detailsSheet:{height:'100%',maxHeight:'100%',flex:1,backgroundColor:c.background},
+  text:{color:c.text,fontSize:15,lineHeight:24},
   note:{color:c.text,fontSize:15,lineHeight:24},error:{color:c.warning,fontSize:14,lineHeight:22},
-  footer:{paddingHorizontal:20,paddingTop:8,paddingBottom:20,gap:12,flexDirection:'row',backgroundColor:c.surface},
-  cancelButton:{minWidth:80,backgroundColor:c.surfaceMuted},continueButton:{flex:1},
-  button:{minHeight:48,alignItems:'center',justifyContent:'center',padding:12,borderRadius:12,backgroundColor:c.surface},
-  buttonText:{fontSize:16,lineHeight:24,fontWeight:'700'},ledger:{gap:12},record:{paddingVertical:12,gap:6,borderBottomWidth:1,borderColor:c.border},
+  ledger:{gap:12},record:{paddingVertical:12,gap:6,borderBottomWidth:1,borderColor:c.border},
 });

@@ -222,6 +222,7 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
     "ALTER TABLE users ADD COLUMN banned_at TEXT",
     "ALTER TABLE users ADD COLUMN ban_reason TEXT",
     "ALTER TABLE users ADD COLUMN community_name TEXT",
+    "ALTER TABLE users ADD COLUMN avatar_file TEXT",
   ]) {
     try {
       db.exec(statement);
@@ -775,15 +776,14 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         throw error;
       }
     },
-    communityLeaderboards(userId) {
+    communityLeaderboards(userId, avatarUrlForFile = () => null) {
       const users = db.prepare(
-        "SELECT id, username, community_name AS communityName FROM users WHERE banned_at IS NULL",
+        "SELECT id, community_name AS communityName, avatar_file AS avatarFile FROM users WHERE banned_at IS NULL",
       ).all();
       const stats = new Map(users.map((user) => [user.id, {
         userId: user.id,
-        name: user.communityName || (/^1\d{10}$/.test(user.username)
-          ? `考匠用户 ${user.username.slice(-4)}`
-          : user.username),
+        name: user.communityName?.trim() || "考匠同学",
+        avatarFile: user.avatarFile,
         answered: 0,
         correct: 0,
         accuracy: 0,
@@ -829,23 +829,28 @@ export function createStore(dir = process.env.DATA_DIR || "data") {
         delete entry.days;
       }
       const items = [...stats.values()];
+      const avatarUrls = new Map();
       const ranked = (key, eligible) => {
         const rows = items.filter(eligible).sort((a, b) =>
-          b[key] - a[key] || b.answered - a.answered || a.name.localeCompare(b.name, "zh-CN"),
+          b[key] - a[key] || b.answered - a.answered || a.name.localeCompare(b.name, "zh-CN") ||
+          a.userId.localeCompare(b.userId),
         );
-        const format = (entry, index) => ({
-          rank: index + 1,
-          userId: entry.userId,
-          name: entry.name,
-          value: entry[key],
-          answered: entry.answered,
-          correct: entry.correct,
-        });
+        const format = (entry, index) => {
+          if (!avatarUrls.has(entry.userId)) avatarUrls.set(entry.userId, avatarUrlForFile(entry.avatarFile));
+          return {
+            rank: index + 1,
+            ...(userId == null ? {} : { userId: entry.userId }),
+            name: entry.name,
+            avatarUrl: avatarUrls.get(entry.userId),
+            value: entry[key],
+            answered: entry.answered,
+            correct: entry.correct,
+          };
+        };
+        const ownIndex = rows.findIndex((entry) => entry.userId === userId);
         return {
           top: rows.slice(0, 50).map(format),
-          me: rows.findIndex((entry) => entry.userId === userId) < 0
-            ? null
-            : format(rows.find((entry) => entry.userId === userId), rows.findIndex((entry) => entry.userId === userId)),
+          me: ownIndex < 0 ? null : format(rows[ownIndex], ownIndex),
         };
       };
       return {

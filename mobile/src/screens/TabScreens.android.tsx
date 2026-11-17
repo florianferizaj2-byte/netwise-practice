@@ -1,6 +1,13 @@
-import { loadOwnedPractice, ownedPracticePage, saveOwnedPractice, practiceOwner, type PracticeSelection } from '../api/ownedPractice.android';
+import { ownedPracticePage, saveOwnedPractice, practiceOwner, type PracticeSelection } from '../api/ownedPractice.android';
 import { practiceCheckpoint } from '../api/practiceCheckpoint.android';
 import { practiceFingerprint } from '../api/practiceCheckpointStore';
+import { randomUUID } from 'expo-crypto';
+import { isApiUnavailable } from '../api/transport';
+import { loadOfflinePack, type InstalledOfflinePack } from '../offline/offlinePacks.android';
+import { loadLocalPractice, offlinePackOwner, openPracticeWithDownloadedBank } from '../offline/offlinePractice.android';
+import { gradeOfflineAnswer } from '../offline/offlineStudyCore';
+import { offlineStudyStore } from '../offline/offlineStudyStore.android';
+import { OfflineDownloadCard } from '../offline/OfflineDownloadCard.android';
 import { VoicePackSettings, type VoicePackSettingsHandle } from '../components/VoicePackSettings.android';
 import {practiceAttemptSync,usePracticeAttemptView} from '../api/practiceAttemptSync.android';
 import {studyRequestId} from '../api/studyTypes';
@@ -58,7 +65,6 @@ import { RedeemCodeModal, membershipLabels } from '../components/RedeemCodeModal
 import { QuestionImages } from '../components/QuestionImages';
 import { AiQuestionDraftScreen } from './AiQuestionDraftScreen';
 import { PracticeHubScreen } from './PracticeHubScreen.android';
-import { CommunityScreen } from './CommunityScreen';
 import { AdminScreen } from './AdminScreen';
 import { ProfileSetupScreen } from './ProfileSetupScreen';
 import { AccountSecurityScreen } from './AccountSecurityScreen';
@@ -297,6 +303,8 @@ export function PracticeScreen({
 
   const isDailyPractice = practiceSession === 'daily';
   const [questions, setQuestions] = useState<Question[]>([]);
+  const [localPack, setLocalPack] = useState<InstalledOfflinePack | null>(null);
+  const packOwner = offlinePackOwner(user);
   const [nextOffset, setNextOffset] = useState<number | null>(null);
   const [totalQuestions, setTotalQuestions] = useState(0);
   const [loadingMore, setLoadingMore] = useState(false);
@@ -390,6 +398,7 @@ export function PracticeScreen({
     setLoading(!cachedPage);
     setError(null);
     setQuestions(cachedPage?.items ?? []);
+    setLocalPack(null);
     const cachedIndex = practiceQuestionId
       ? cachedPage?.items.findIndex((question) => question.id === practiceQuestionId)
       : -1;
@@ -457,16 +466,27 @@ export function PracticeScreen({
     const owner = user ? practiceOwner(user) : null;
     const selection:PracticeSelection={session:practiceSource==='answered'?'review':isDailyPractice?'daily':'standard',mode:practiceMode==='random'?'random':'sequential',chapter:practiceChapter,section:practiceKnowledgeSection,point:practiceKnowledgePoint};
     ownedSelection.current=selection;
-    const loadQuestions:Promise<Question[] | QuestionPage> = owner && managedPractice
-      ? loadOwnedPractice(owner,selection,practiceQuestionId).then(loaded=>{
-          if(!mounted)return [];
-          restoring=loaded.saved;restoreIndex=loaded.index;ownedSelection.current=loaded.selection;pageSeed.current=loaded.seed;randomBefore.current=loaded.before;pageBaseOffset.current=loaded.base;
-          if(loaded.notice)setTrainingNotice(loaded.notice);
-          return {items:loaded.items,total:loaded.total,nextOffset:loaded.nextOffset,offset:loaded.base};
-        })
-      : initialQuestions();
+    async function loadQuestions(): Promise<Question[] | QuestionPage> {
+      if (!user || !managedPractice) return initialQuestions();
+      const practice = await openPracticeWithDownloadedBank(user, selection, practiceQuestionId);
+      if (!mounted) return [];
+      if (practice.source === 'download') {
+        const { loaded } = practice;
+        restoring = loaded.saved;
+        restoreIndex = loaded.index;
+        ownedSelection.current = loaded.selection;
+        pageSeed.current = loaded.seed;
+        randomBefore.current = loaded.before;
+        setLocalPack(practice.installed);
+        return { items: loaded.items, total: loaded.items.length, nextOffset: null, offset: 0 };
+      }
+      const { loaded } = practice;
+      restoring=loaded.saved;restoreIndex=loaded.index;ownedSelection.current=loaded.selection;pageSeed.current=loaded.seed;randomBefore.current=loaded.before;pageBaseOffset.current=loaded.base;
+      if(loaded.notice)setTrainingNotice(loaded.notice);
+      return {items:loaded.items,total:loaded.total,nextOffset:loaded.nextOffset,offset:loaded.base};
+    }
 
-    loadQuestions
+    void loadQuestions()
       .then((loaded: Question[] | QuestionPage) => {
         if (!mounted) return;
         const loadedItems = Array.isArray(loaded) ? loaded : loaded.items;
@@ -496,7 +516,7 @@ export function PracticeScreen({
         const restoredQuestion=nextQuestions[requestedIndex];
         if(restoring && restoredQuestion?.id===restoring.questionId && practiceFingerprint(restoredQuestion)===restoring.fingerprint){
           setSelected(restoring.selected);setResponseDraft(restoring.draft);
-          if(restoring.submitted && restoredQuestion.answer?.length)setResult({questionId:restoredQuestion.id,selected:restoring.selected,correct:restoredQuestion.type==='short_answer'?restoring.selected[0]==='A':sameAnswers(restoring.selected,restoredQuestion.answer),answer:restoredQuestion.answer,analysis:restoredQuestion.analysis,timeMs:0});
+          if(restoring.submitted && (restoredQuestion.answer?.length || restoredQuestion.type==='short_answer'))setResult({questionId:restoredQuestion.id,selected:restoring.selected,correct:restoredQuestion.type==='short_answer'?restoring.selected[0]==='A':sameAnswers(restoring.selected,restoredQuestion.answer||[]),answer:restoredQuestion.answer||[],analysis:restoredQuestion.analysis,expectedAnswer:restoredQuestion.expectedAnswer,timeMs:0});
         }
         checkpointContext.current=currentCheckpointContext;
         setCheckpointReady(true);
@@ -534,10 +554,12 @@ export function PracticeScreen({
   ]);
 
   const currentQuestion = questions[questionIndex];
+  const localQuestions = useMemo(() => new Map(localPack?.pack.questions.map(q => [q.id, q])), [localPack]);
+  const localQuestion = currentQuestion && localQuestions.get(currentQuestion.id);
   const sync=usePracticeAttemptView(syncIds[currentQuestion?.id || ""]);
   saveLatest.current=()=>{
     if(checkpointContext.current!==currentCheckpointContext || !checkpointReady || !user || !managedPractice || needsPracticePicker || !currentQuestion)return Promise.resolve();
-    return saveOwnedPractice(practiceOwner(user),ownedSelection.current,{questions,index:questionIndex,base:pageBaseOffset.current,total:totalQuestions,nextOffset,seed:pageSeed.current,before:randomBefore.current,selected,draft:responseDraft,submitted:!!result,completed:finished});
+    return saveOwnedPractice(practiceOwner(user),ownedSelection.current,{questions,index:questionIndex,base:pageBaseOffset.current,total:totalQuestions,nextOffset,seed:pageSeed.current,before:randomBefore.current,selected,draft:responseDraft,submitted:!!result,completed:finished,offlinePackVersion:localPack?.manifest.version});
   };
   useEffect(()=>{
     void saveLatest.current().catch(()=>setError('本机续刷进度未保存，请检查存储空间；已同步的作答记录不受影响。'));
@@ -563,13 +585,13 @@ export function PracticeScreen({
   const currentSync=sync.entry;
   const recordSyncPending=!!currentSync&&currentSync.status!=='saved';
   useEffect(()=>{
-    if(!active||preview||!currentQuestion)return;
+    if(!active||preview||localPack||!currentQuestion)return;
     const generation=pageGeneration.current;
     // New servers send practice answers with the page. Warm only the next few
     // missing keys for older servers, favorites and generated question groups.
     const missing=questions.slice(questionIndex,questionIndex+3).filter(q=>!q.answer?.length&&!feedbackById[q.id]?.answer?.length);
     for(const q of missing)void mobileApi.practiceFeedback(q.id).then(feedback=>{if(generation===pageGeneration.current)setFeedbackById(old=>({...old,[q.id]:feedback}));}).catch(()=>{});
-  },[active,preview,currentQuestion?.id,questions.length]);
+  },[active,preview,localPack,currentQuestion?.id,questions.length]);
   useEffect(()=>{
     if(currentSync?.status==='saved' && currentSync.result){const saved=practiceReviewHistory().get(currentSync.payload.questionId);if(saved)saved.result=currentSync.result;}
     if(currentSync?.status==='saved'&&currentSync.result){if(result?.questionId===currentSync.result.questionId&&(result.correct!==currentSync.result.correct||!sameAnswers(result.answer,currentSync.result.answer)))setError('题库内容已更新，已按服务器答案校正本题结果。');setResult(currentSync.result);}
@@ -590,7 +612,17 @@ export function PracticeScreen({
     setPageError('');
     const pending = (managedPractice&&user ? ownedPracticePage(practiceOwner(user),ownedSelection.current,nextOffset,pageSeed.current,randomBefore.current) : mobileApi.questionPage(nextOffset, {
       feedback:'instant', ...(practiceMode==='random'?{excludeCorrect:'1' as const,before:randomBefore.current}:{}), chapter: practiceChapter, knowledgeSection: practiceKnowledgeSection, knowledgePoint: practiceKnowledgePoint,
-    }, practiceMode === 'random' ? pageSeed.current : undefined)).then((page) => {
+    }, practiceMode === 'random' ? pageSeed.current : undefined)).catch(async cause => {
+      if (!packOwner || !managedPractice || !isApiUnavailable(cause) || generation !== pageGeneration.current) throw cause;
+      const installed = await loadOfflinePack(packOwner);
+      if (!installed || generation !== pageGeneration.current) throw cause;
+      const loaded = await loadLocalPractice(packOwner, installed, ownedSelection.current, null);
+      if (generation !== pageGeneration.current) throw cause;
+      const existing = new Set(questions.map(q => q.id));
+      const items = loaded.items.filter(q => !existing.has(q.id));
+      setLocalPack(installed);
+      return { items, total: questions.length + items.length, nextOffset: null };
+    }).then((page) => {
       if (generation !== pageGeneration.current) return 0;
       setQuestions((current) => {
         const ids = new Set(current.map((question) => question.id));
@@ -640,10 +672,10 @@ export function PracticeScreen({
     }
   }
 
-  function publishSubmittedResult(next: AttemptResponse, pendingId?:string) {
+  function publishSubmittedResult(next: AttemptResponse, pendingId?:string, local = false) {
     setResult(next);
     const generation = pageGeneration.current;
-    if(user&&!preview)void practiceCheckpoint.record(practiceOwner(user),{questionId:next.questionId,correct:next.correct,confirmed:!pendingId,attemptId:pendingId}).catch(()=>{if(generation===pageGeneration.current)setError('本机已答题记录未保存，请检查存储空间。');});
+    if(user&&!preview&&!local)void practiceCheckpoint.record(practiceOwner(user),{questionId:next.questionId,correct:next.correct,confirmed:!pendingId,attemptId:pendingId}).catch(()=>{if(generation===pageGeneration.current)setError('本机已答题记录未保存，请检查存储空间。');});
     if (feedbackVisible.current) playCorrectAnswerFeedback(next.correct, () => feedbackVisible.current && pageGeneration.current === generation && feedbackQuestion.current === next.questionId,{scope:voiceScope,attemptId:generation+':'+questionIndex+':'+next.questionId});
   }
 
@@ -678,6 +710,25 @@ export function PracticeScreen({
     }
 
     const generation = pageGeneration.current;
+    if (localPack && packOwner && localQuestion && practiceFingerprint(localQuestion) === practiceFingerprint(currentQuestion)) {
+      try {
+        const response = currentQuestion.type === 'short_answer' ? responseDraft.trim() : undefined;
+        const correct = gradeOfflineAnswer(localQuestion, selected, response);
+        await offlineStudyStore.record(packOwner, [{ id: randomUUID(), questionId: currentQuestion.id,
+          selected: [...selected], response, correct, timeMs, occurredAt: Date.now(), source: 'practice', packVersion: localPack.manifest.version }]);
+        if (generation === pageGeneration.current) publishSubmittedResult({ questionId: currentQuestion.id,
+          selected: [...selected], correct, timeMs, answer: localQuestion.answer, analysis: localQuestion.analysis,
+          expectedAnswer: localQuestion.expectedAnswer }, undefined, true);
+      } catch (cause) {
+        if (generation === pageGeneration.current) {
+          submissionGuard.current = '';
+          setError(cause instanceof Error ? cause.message : '本机作答保存失败，请重试。');
+        }
+      } finally {
+        if (generation === pageGeneration.current) setSubmitting(false);
+      }
+      return;
+    }
     const feedback=currentQuestion.answer?.length?currentQuestion:feedbackById[currentQuestion.id];
     if(feedback?.answer?.length&&feedback.answer.every(a=>/^[A-E]$/.test(a))&&sync.ready&&sync.owner===JSON.stringify([API_BASE_URL,user?.id,user?.certificateId||''])){
       try{
@@ -872,7 +923,9 @@ export function PracticeScreen({
       .catch(() => undefined)
       .then(async () => {
         if (generation !== pageGeneration.current) return;
-        const saved = await mobileApi.favorite(questionId, nextFavorite);
+        const saved = localPack && packOwner
+          ? await offlineStudyStore.setFavorite(packOwner, questionId, nextFavorite).then(() => ({ favorite: nextFavorite }))
+          : await mobileApi.favorite(questionId, nextFavorite);
         if (generation !== pageGeneration.current) return;
         favoriteConfirmedRef.current.set(questionId, saved.favorite);
         if (favoriteRevisionRef.current.get(questionId) === revision) {
@@ -1070,7 +1123,7 @@ export function PracticeScreen({
           <AppIcon name="check" style={styles.completedEmoji}>✦</AppIcon>
           <Text style={styles.completedTitle}>很棒，节奏保持住</Text>
           <Text style={styles.completedText}>
-            本组练习进度已保存到你的账号，回到首页可以查看最新学习进度。
+            {localPack ? '本组作答已保存在本机，联网后会自动同步。' : '本组练习进度已保存到你的账号，回到首页可以查看最新学习进度。'}
           </Text>
           <PrimaryAction onPress={() => onNavigate('today')}>查看今日进度</PrimaryAction>
           <PrimaryAction
@@ -1123,7 +1176,7 @@ export function PracticeScreen({
                 ? '还没有收藏题目'
                 : practiceSource==='answered'?'还没有已答题记录':managedPractice?'本范围暂无未掌握题':'当前范围暂时没有题目'}
           </Text>
-          {practiceSource==='all' && <AnimatedPressable accessibilityRole="button" accessibilityLabel="复习已答题" onPress={()=>onNavigate('practice',{practiceSource:'answered',practiceMode:'sequential'})} style={styles.secondaryAction}><Text style={styles.secondaryActionText}>复习已答题</Text></AnimatedPressable>}
+          {!error && practiceSource==='all' && <AnimatedPressable accessibilityRole="button" accessibilityLabel="复习已答题" onPress={()=>onNavigate('practice',{practiceSource:'answered',practiceMode:'sequential',practiceChapter,practiceKnowledgeSection,practiceKnowledgePoint})} style={styles.secondaryAction}><Text style={styles.secondaryActionText}>复习已答题</Text></AnimatedPressable>}
           <Text style={styles.emptyText}>
             {error ||
               (practiceSource === 'favorites'
@@ -1174,7 +1227,7 @@ export function PracticeScreen({
         <View style={[styles.nativeHeaderLeading,stackPracticeHeader&&styles.nativeHeaderFlexible]}><AnimatedPressable accessibilityRole="button" accessibilityLabel={isDailyPractice?'更换今日练习范围':'返回题库目录'} disabled={practiceSaving} accessibilityHint={practiceSaving?'正在保存作答，完成后可返回':undefined} onPress={requestPracticeExit} style={[styles.nativeHeaderButton,practiceSaving&&{opacity:0.45}]}><AppIcon name="chevron-left" size={25} color={colors.text}/></AnimatedPressable><AnimatedPressable accessibilityRole="button" accessibilityLabel="刷题语音包设置" accessibilityHint="配置当前语音包、音量和答题语音" onPress={()=>setPracticeVoiceSettingsOpen(true)} style={styles.nativeHeaderButton}><AppIcon name="volume" size={21} color={colors.textMuted}/></AnimatedPressable></View>{!stackPracticeHeader&&<View pointerEvents="none" style={styles.nativeCenteredTitle}><Text accessibilityRole="header" style={styles.nativeQuestionTitle}>{practiceSource==='wrong'?'错题复习':practiceSource==='favorites'?'收藏练习':practiceSource==='answered'?'已答题复习':isDailyPractice?'每日刷题':'知识点练习'}</Text></View>}
         <View style={styles.nativeHeaderTools}>
           <AnimatedPressable accessibilityRole="button" accessibilityLabel={currentQuestion.favorite?'取消收藏题目':'收藏题目'} onPress={toggleFavorite} style={styles.nativeHeaderButton}><AppIcon name="star" selected={!!currentQuestion.favorite} size={23} color={currentQuestion.favorite?colors.brand:colors.text}/></AnimatedPressable>
-          <AnimatedPressable accessibilityRole="button" accessibilityLabel="举报题目" disabled={reportBusy} onPress={()=>setReportOpen(true)} style={styles.nativeHeaderButton}><AppIcon name="flag" size={23} color={colors.text}/></AnimatedPressable>
+          {!localPack && <AnimatedPressable accessibilityRole="button" accessibilityLabel="举报题目" disabled={reportBusy} onPress={()=>setReportOpen(true)} style={styles.nativeHeaderButton}><AppIcon name="flag" size={23} color={colors.text}/></AnimatedPressable>}
         </View>
       </View>
       {stackPracticeHeader&&<View style={styles.nativeHeaderTitleRow}><Text accessibilityRole="header" style={styles.nativeQuestionTitle}>{practiceSource==='wrong'?'错题复习':practiceSource==='favorites'?'收藏练习':practiceSource==='answered'?'已答题复习':isDailyPractice?'每日刷题':'知识点练习'}</Text></View>}
@@ -1186,7 +1239,7 @@ export function PracticeScreen({
         <View style={styles.nativeKnowledgeLine}><Text style={styles.nativeKnowledgeChip}>{currentQuestion.knowledgePoint||practiceKnowledgePoint||'综合练习'}</Text><Text style={styles.nativeProgressHint}>{currentQuestion.type==='short_answer'?'简答题':currentQuestion.type==='true_false'?'判断题':isMultiple?'多选题':'单选题'}</Text></View>
         <View style={styles.nativeCombinedQuestionCard}>
       <EntranceView delay={50} distance={12} style={styles.questionCard}>
-        <QuestionImages question={currentQuestion} />
+        <QuestionImages question={currentQuestion} resolveLocalImage={localQuestion ? localPack?.imageUri : undefined} />
         <Text style={styles.questionText}>{currentQuestion.question}</Text>
       </EntranceView>
 
@@ -1272,12 +1325,13 @@ export function PracticeScreen({
           <Text style={styles.feedbackAnswer}>{currentQuestion.type === 'short_answer' ? '参考答案' : `正确答案：${answerText}`}</Text>
           {currentQuestion.type === 'short_answer' && !!result.expectedAnswer && <Text style={styles.feedbackText}>{result.expectedAnswer}</Text>}
           {!!result.analysis && <Text style={styles.feedbackText}>{result.analysis}</Text>}
+          {localQuestion && <Text style={styles.nativeProgressHint}>作答已保存在本机，联网后自动同步。</Text>}
           {!!currentSync&&<View testID="practice-record-sync"><Text style={styles.nativeProgressHint}>{currentSync.status==='saved'?'答题记录已同步':currentSync.error?'答题记录未同步，请点击重试': '答案已展示，答题记录正在后台同步，可继续下一题'}</Text>{!!currentSync.error&&<AnimatedPressable accessibilityRole="button" accessibilityLabel="重试同步本题作答" onPress={()=>practiceAttemptSync.retry(currentSync.id)} style={{minHeight:48,justifyContent:'center'}}><Text style={[styles.nativeProgressHint,{color:colors.brand}]}>重试同步</Text></AnimatedPressable>}</View>}
         </EntranceView>
       )}
 
 
-      {result && (
+      {result && !localPack && (
         <View style={styles.aiTools}>
           {result.correct === false && (
             <AnimatedPressable
@@ -1316,6 +1370,7 @@ export function PracticeScreen({
               {aiBusy === 'train' ? (aiProgress || '正在准备生成…') : '生成 3 道变式题'}
             </Text>
           </AnimatedPressable>
+          <Text style={[styles.aiResponseMeta, {width:'100%'}]}>新 AI 调用按实际用量扣积分，已有结果免费。</Text>
         </View>
       )}
 
@@ -1459,13 +1514,13 @@ export function ProfileScreen({
   const activeCertificate = certificates.find((certificate) => certificate.id === user?.certificateId);
   const [sponsorOpen, setSponsorOpen] = useState(false);
   const [appSettingsOpen, setAppSettingsOpen] = useState(false);
+  const [offlineDownloadsOpen, setOfflineDownloadsOpen] = useState(false);
   const [voiceSettingsOpen, setVoiceSettingsOpen] = useState(false);
   const voiceSettingsRef = useRef<VoicePackSettingsHandle>(null);
   const [aiSettingsOpen, setAiSettingsOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [tutorialOpen, setTutorialOpen] = useState(false);
   const [authorApiOpen, setAuthorApiOpen] = useState(false);
-  const [communityOpen, setCommunityOpen] = useState(false);
   const [adminOpen, setAdminOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [securityOpen, setSecurityOpen] = useState(false);
@@ -1630,21 +1685,6 @@ export function ProfileScreen({
         <AdminScreen user={user} certificates={certificates} onClose={() => setAdminOpen(false)} onUserUpdated={onUserUpdated} />
       </Modal>}
       <RedeemCodeModal visible={active && redeemOpen} preview={preview} userId={user?.id} onClose={() => setRedeemOpen(false)} onRedeemed={(result) => { membershipRevision.current++; setMembershipPlan(result.plan); setCanManageAiService(!!result.canManageAiService); }} />
-      {communityOpen && (
-        <Modal
-          animationType={reduceMotion?'none':'slide'}
-          onRequestClose={() => setCommunityOpen(false)}
-          visible={active && communityOpen}
-        >
-          <SafeAreaView style={styles.communityModalSafeArea}>
-            <CommunityScreen
-              onClose={() => setCommunityOpen(false)}
-              preview={preview}
-              user={user}
-            />
-          </SafeAreaView>
-        </Modal>
-      )}
       <AndroidPageHeader title="我的" action={{label:'设置',onPress:()=>{setVoiceSettingsOpen(false);setAppSettingsOpen(true)}}}/>
       <View style={styles.nativeIdentity}>
         {user?.avatarUrl?<Image source={{uri:mobileApi.resolveDownloadUrl(user.avatarUrl)}} style={styles.avatar}/>:<View style={styles.avatar}><AppIcon name="person" size={32} color={colors.brand}/></View>}
@@ -1672,7 +1712,7 @@ export function ProfileScreen({
         ].map(item=><AnimatedPressable key={item.title} accessibilityRole="button" onPress={item.go} style={styles.profileShortcut}><View style={[styles.profileShortcutIcon,{backgroundColor:androidAccent(colors,item.tone).soft}]}><AppIcon name={item.icon} size={25} color={androidAccent(colors,item.tone).ink}/></View><Text style={styles.profileShortcutTitle}>{item.title}</Text></AnimatedPressable>)}
       </View></View>
       <View style={styles.settingsCard}>
-        <SettingRow onPress={()=>setCommunityOpen(true)} title="考匠社区" value="学习交流 · 排行榜"/>
+        <SettingRow onPress={()=>onNavigate('community')} title="社区" value="聊天"/>
         <SettingRow onPress={()=>void openAiSettings()} title="AI 学习助手" value={canManageAiService?'管理作者服务':'作者服务 · 按积分使用'}/>
         {user&&!preview&&<SettingRow onPress={()=>setSecurityOpen(true)} title="账号与安全" value="登录密码与账号保护"/>}
         {user?.isAdmin&&!preview&&<SettingRow onPress={()=>setAdminOpen(true)} title="管理中心" value="注册账号 · 公告管理"/>}
@@ -1689,11 +1729,30 @@ export function ProfileScreen({
       {user && profileOpen && <Modal visible={active} onRequestClose={() => setProfileOpen(false)} animationType={reduceMotion?'none':'slide'}>
         <ProfileSetupScreen user={user} onSaved={(updated) => { onUserUpdated?.(updated); setProfileOpen(false); }} onCancel={() => setProfileOpen(false)} />
       </Modal>}
-      <Modal animationType={reduceMotion?'none':'slide'} onRequestClose={()=>voiceSettingsOpen?voiceSettingsRef.current?.goBack():setAppSettingsOpen(false)} visible={active&&appSettingsOpen}>
+      <Modal animationType={reduceMotion?'none':'slide'} onRequestClose={()=>voiceSettingsOpen?voiceSettingsRef.current?.goBack():offlineDownloadsOpen?setOfflineDownloadsOpen(false):setAppSettingsOpen(false)} visible={active&&appSettingsOpen}>
         {voiceSettingsOpen?<VoicePackSettings ref={voiceSettingsRef} onClose={()=>setVoiceSettingsOpen(false)}/>:
+        offlineDownloadsOpen && user ? <SafeAreaView style={styles.settingsPage}>
+          <View style={styles.settingsNativeHeader}>
+            <AnimatedPressable accessibilityRole="button" accessibilityLabel="返回设置" onPress={() => setOfflineDownloadsOpen(false)} style={styles.nativeHeaderButton}><AppIcon name="chevron-left" size={25} color={colors.text}/></AnimatedPressable>
+            <Text accessibilityRole="header" style={styles.settingsNativeTitle}>离线题库下载</Text>
+          </View>
+          <ScrollView contentContainerStyle={styles.settingsPageContent}>
+            <Text style={styles.settingsSmall}>选择证书下载。断网后，打开「今日学习」或「练习」中的知识点，题目会自动从本机读取。</Text>
+            {[...certificates].sort((a, b) => Number(b.id === user.certificateId) - Number(a.id === user.certificateId)).map(certificate => <OfflineDownloadCard key={`${user.id}:${certificate.id}`} userId={user.id} certificateId={certificate.id} name={certificate.name} />)}
+            {!certificates.length && <Text style={styles.settingsSmall}>暂未读取到证书列表，请联网后重试。</Text>}
+          </ScrollView>
+        </SafeAreaView> :
         <SafeAreaView style={styles.settingsPage}>
           <View style={styles.settingsNativeHeader}><AnimatedPressable accessibilityRole="button" accessibilityLabel="关闭设置" onPress={()=>setAppSettingsOpen(false)} style={styles.nativeHeaderButton}><AppIcon name="chevron-left" size={25} color={colors.text}/></AnimatedPressable><Text accessibilityRole="header" style={styles.settingsNativeTitle}>设置</Text></View>
           <ScrollView contentContainerStyle={styles.settingsPageContent} showsVerticalScrollIndicator={false}>
+            {!preview && user && <AnimatedPressable accessibilityRole="button" accessibilityLabel="离线题库下载" testID="settings-offline-downloads" onPress={() => setOfflineDownloadsOpen(true)} style={styles.settingsCache}>
+              <AppIcon name="download" size={23} color={colors.text}/>
+              <View style={styles.nativeSettingCopy}>
+                <Text style={styles.settingsRowLabelText}>离线题库下载</Text>
+                <Text style={styles.settingsSmall}>选择证书，下载题目、解析和配图</Text>
+              </View>
+              <AppIcon name="chevron-right" size={18} color={colors.textMuted}/>
+            </AnimatedPressable>}
             <Text style={styles.settingsSmall}>修改会立即生效</Text>
             <View style={styles.settingsNativeGroup}>
               <Text style={styles.settingsNativeGroupTitle}>显示与动画</Text>
@@ -3205,7 +3264,6 @@ const baseCreateStyles = (colors: ThemeColors) => StyleSheet.create({
   profileSyncDot: { backgroundColor: colors.brand, borderRadius: radius.pill, height: 7, width: 7 },
   profileSyncText: { color: colors.textMuted, fontSize: 11 },
   profileSection: { gap: spacing.sm },
-  communityModalSafeArea: { backgroundColor: colors.background, flex: 1 },
   profileSectionHeader: { alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 2 },
   profileSectionTitle: { color: colors.text, fontSize: 16, fontWeight: '900' },
   profileSectionHint: { color: colors.textFaint, fontSize: 11 },

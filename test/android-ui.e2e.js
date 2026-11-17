@@ -17,6 +17,7 @@ import { completeFixtureProfile } from './helpers/mobile-profile.js';
 import { launchTestBrowser } from './helpers/browser.js';
 
 const root = process.cwd(), mobile = path.join(root, 'mobile');
+const communityOnly = process.env.STUDY_COMMUNITY_UI === '1';
 const sourceHashes = () => {
   const files = dir => fs.readdirSync(dir, { withFileTypes: true }).flatMap(e => e.isDirectory() ? files(path.join(dir, e.name)) : [path.join(dir, e.name)]);
   return Object.fromEntries(files(path.join(mobile, 'src')).map(p => [path.relative(mobile, p), crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex')]));
@@ -33,6 +34,14 @@ store.selectCertificate(user.id, 'network-engineer');
 const token = store.createAuthSession(user.id);
 const other = store.register('android_ui_other', 'fixture-password-123');
 completeFixtureProfile(store, other); store.selectCertificate(other.id, 'network-engineer');
+if (communityOnly) {
+  const seededAt = Date.now();
+  const recent = ['数据库范式这章，先画出函数依赖再看范式，复习轻松不少。', '错题我按考点整理，每周末把同一考点的几题放一起复盘。', '有道子网划分题容易漏掉网络地址和广播地址，记得检查这两个。'];
+  for (let n = 1; n <= 53; n++) {
+    const text = recent[n - 51] ?? `备考交流记录 ${n}`;
+    store.addCommunityMessage({ id: `ui-community-${n}`, userId: n === 51 ? user.id : other.id, text, createdAt: new Date(seededAt - (n < 51 ? 86400000 : 0) - (54 - n) * 60000).toISOString() }, Buffer.byteLength(text));
+  }
+}
 const chapter = '安卓界面验收网络基础', leaf = '安卓验收子网划分';
 for (let i = 0; i < 30; i++) store.addQ({
   id: 'android-ui-question-' + i, type: 'single_choice',
@@ -44,6 +53,11 @@ for (let i = 0; i < 30; i++) store.addQ({
 });
 for (let i = 0; i < 12; i++) store.recordAttempt('android-ui-question-' + i, [i < 2 ? 'B' : 'A'], 12000, 'practice', user.id);
 store.recordAttempt('android-ui-question-0', ['B'], 13000, 'practice', user.id);
+if (process.env.TODAY_DAILY_GOAL_UI === '1') {
+  const third = store.register('android_ui_third', 'fixture-password-123');
+  completeFixtureProfile(store, third);
+  for (const peer of [other, third]) store.recordAttempt('android-ui-question-0', ['A'], 12000, 'practice', peer.id);
+}
 store.points.recordFinance({ key: 'synthetic-ui-income', kind: 'revenue', amountMicros: 1000000000, reference: 'isolated UI fixture, no real payment', createdBy: user.id });
 store.points.grant({ userId: user.id, sourceKey: 'synthetic-ui-grant', units: 1000000, kind: 'test', requireFunded: true });
 store.aiServices.policy = () => ({ managed: true });
@@ -84,10 +98,10 @@ const Scale=React.createContext(1);export function TestFontScaleProvider({childr
 const scaled=(style,scale)=>{const s=StyleSheet.flatten(style)||{};return[style,typeof s.fontSize==='number'?{fontSize:s.fontSize*scale}:null,typeof s.lineHeight==='number'?{lineHeight:s.lineHeight*scale}:null]};
 export const Text=React.forwardRef((props,ref)=>React.createElement(BaseText,{...props,ref,style:scaled(props.style,React.useContext(Scale))}));export const TextInput=React.forwardRef((props,ref)=>React.createElement(BaseInput,{...props,ref,style:scaled(props.style,React.useContext(Scale))}));export const useWindowDimensions=()=>({...baseDimensions(),fontScale:React.useContext(Scale)});
 export const PanResponder={...requirePanResponder,create(config){const wrapped={};for(const [key,fn]of Object.entries(config))wrapped[key]=(e,g)=>{const r=fn(e,g);window.__swipeDebug??=[];window.__swipeDebug.push({key,result:r,dx:g?.dx,dy:g?.dy,x0:g?.x0,touches:g?.numberActiveTouches,pageX:e?.nativeEvent?.pageX});return r};return requirePanResponder.create(wrapped)}};export const ToastAndroid={LONG:1,SHORT:0,show(){}};export const PermissionsAndroid={PERMISSIONS:{},RESULTS:{GRANTED:'granted'},async check(){return true},async request(){return'granted'}};`);
-write('picker.ts', 'export async function launchImageLibraryAsync(){return {canceled:true,assets:[]}};export async function requestMediaLibraryPermissionsAsync(){return {granted:true}};');
+write('picker.ts', 'export async function launchImageLibraryAsync(){const asset=globalThis.__communityTestImage;globalThis.__communityTestImage=null;return asset?{canceled:false,assets:[asset]}:{canceled:true,assets:[]}};export async function requestMediaLibraryPermissionsAsync(){return {granted:true}};');
 write('file-system.ts', 'export const cacheDirectory=null,documentDirectory=null;export async function getInfoAsync(){return {exists:false}};export async function deleteAsync(){};');
 write('intent.ts', 'export async function startActivityAsync(){};');
-write('native-route.ts', 'export function routePlayerAvailable(){return true} export async function updateRoutePlayerIdentity(){} export async function openRoutePlayer(){throw Error("Native entry is not part of browser acceptance")};');
+write('native-route.ts', 'export function routePlayerAvailable(){return true} export async function updateRoutePlayerIdentity(){} export async function setOfflineRoutePlayerIdentity(){} export async function openRoutePlayer(){throw Error("Native entry is not part of browser acceptance")}; export const openOfflineRoutePlayer=openRoutePlayer;');
 write('main.tsx', `import React from 'react';import {createRoot} from 'react-dom/client';import{TestFontScaleProvider}from'./native';
 import {ThemeProvider,useTheme} from ${JSON.stringify(source('src/theme.android.ts'))};
 import {AppShell} from ${JSON.stringify(source('src/navigation/AppShell.android.tsx'))};
@@ -100,7 +114,8 @@ const nativeScreens = {
   name: 'android-project-siblings', enforce: 'pre',
   transform(code,id){
     if(!id.replaceAll('\\','/').startsWith(mobile.replaceAll('\\','/')+'/src/'))return null;
-    const next=code.replace(/require\((['"])([^'"]+\.(?:png|jpe?g|webp))\1\)/g,(_m,_q,file)=>'({uri:'+JSON.stringify('/@fs/'+path.resolve(path.dirname(id),file).replaceAll('\\','/'))+'})');
+    const input=communityOnly && id.replaceAll('\\','/').endsWith('/screens/AuthScreen.tsx') ? code.replace('{__DEV__ && (','{true && (') : code;
+    const next=input.replace(/require\((['"])([^'"]+\.(?:png|jpe?g|webp))\1\)/g,(_m,_q,file)=>'({uri:'+JSON.stringify('/@fs/'+path.resolve(path.dirname(id),file).replaceAll('\\','/'))+'})');
     return next===code?null:{code:next,map:null};
   },
   resolveId(id, importer) {
@@ -136,7 +151,7 @@ const vite = await createServer({
 });
 // This browser harness runs Android source and must retain native update policy.
 app.use((req, _res, next) => { req.headers['x-app-platform'] = 'android'; next(); });
-let aiRequests = 0, forceWalletExpired = false, versionFault = '';
+let aiRequests = 0, expectedAiRequests = 0, forceWalletExpired = false, versionFault = '';
 const previousVersionEnvironment = { latest: process.env.MOBILE_LATEST_VERSION, minimum: process.env.MOBILE_MINIMUM_VERSION };
 app.use('/api/mobile/version', (_req, res, next) => {
  if(versionFault==='offline') return res.status(503).json({error:'Synthetic connection outage'});
@@ -145,7 +160,7 @@ app.use('/api/mobile/version', (_req, res, next) => {
 });
 app.use('/api/ai', (req, res, next) => { if(req.method==='GET')return next(); aiRequests++; res.status(503).json({ error: 'Synthetic UI test: no model call' }); });
 app.get('/api/account/points/wallet', (_req, res, next) => forceWalletExpired ? res.status(401).json({ error: 'Synthetic session expiry' }) : next());
-app.use((req, res, next) => (req.path.startsWith('/api/')||req.path.startsWith('/voice-packs/assets/')) ? backend(req, res, next) : next());
+app.use((req, res, next) => (req.path.startsWith('/api/')||req.path.startsWith('/voice-packs/assets/')||req.path.startsWith('/community/uploads/')) ? backend(req, res, next) : next());
 app.use(vite.middlewares);
 server.listen(0, '127.0.0.1'); await new Promise(resolve => server.once('listening', resolve));
 const base = `http://127.0.0.1:${server.address().port}`, checks = [], errors = [], screenshots = [], consoleErrors = [], failedRequests = [];
@@ -169,20 +184,225 @@ const shot = async name => {
   await page.screenshot({ path: file, type: 'jpeg', quality: 78, animations: 'disabled' });
   assert.ok(fs.statSync(file).size <= 500000); screenshots.push(file); console.log('Android UI snapshot: '+name);
 };
-const tab = async name => page.getByRole('button', { name: name + '导航', exact: true }).click();
+const tab = async name => page.getByRole('button', { name: name === '社区' ? /^社区导航(?:，|$)/ : name + '导航', exact: true }).click();
 try {
   browser = await launchTestBrowser();
   const context = await browser.newContext({ viewport: { width: 393, height: 852 }, deviceScaleFactor: 1, hasTouch: true, reducedMotion: 'reduce' });
   await context.route('**/*', route => ['127.0.0.1', 'localhost'].includes(new URL(route.request().url()).hostname) ? route.continue() : route.abort());
   page = await context.newPage(); page.setDefaultTimeout(15000);
   page.on('pageerror', e => {errors.push(e.message);fs.appendFileSync(path.join(out,'page-error-stacks.log'),e.stack+'\n');});page.on('console',m=>{if(m.type()==='error')consoleErrors.push(m.text().slice(0,500))});page.on('requestfailed',r=>failedRequests.push({url:r.url(),error:r.failure()?.errorText}));
+  const dailyGoalOnly = process.env.TODAY_DAILY_GOAL_UI === '1';
+  let fixtureTodayCount;
+  if (dailyGoalOnly) {
+    await page.route(/\/api\/dashboard(?:\?|$)/, async (route) => {
+      const result = await route.fetch();
+      if (!result.ok()) return route.fulfill({ response: result });
+      await route.fulfill({ response: result, json: { ...await result.json(), todayCount: fixtureTodayCount } });
+    });
+  }
   await page.goto(base, { waitUntil: 'domcontentloaded', timeout: 60000 });
   await expect(page.getByTestId('today-screen')).toBeVisible({timeout:15000});
-  await expect(page.getByText('今天，也要稳步向前', { exact: true })).toBeVisible();
+  const motivation = page.getByTestId('today-motivation');
+  await expect(motivation).toBeVisible();
+  assert.ok((await motivation.innerText()).trim().length > 0);
   assert.equal(await page.locator('#app-tab-bar').getByRole('button').count(), 5);
-  assert.ok((await page.getByText('今天，也要稳步向前', { exact: true }).evaluate(e => getComputedStyle(e).fontFamily)).includes('KaojiangSans'));
-  await shot('01-today-393'); checks.push('native Today, bundled font and five-item navigation');
-  if(process.env.OWNED_PRACTICE_FLOW==='1'){
+  assert.ok((await motivation.evaluate(e => getComputedStyle(e).fontFamily)).includes('KaojiangSans'));
+  if (!dailyGoalOnly && !communityOnly) await shot('01-today-393');
+  checks.push('native Today, bundled font and five-item navigation');
+  if (communityOnly) {
+    const nav = page.locator('#app-tab-bar').getByRole('button');
+    await expect(nav.nth(2)).toHaveAccessibleName('社区导航');
+    const unread = nav.nth(2).getByTestId('community-unread-badge');
+    await expect(unread).toHaveCount(0);
+    await expect(page.getByRole('button', { name: 'AI 生成导航', exact: true })).toHaveCount(0);
+    await tab('社区');
+    const community = page.getByTestId('learning-community');
+    const feed = community.getByTestId('learning-community-feed');
+    await expect(community.getByRole('heading', { name: '社区', exact: true })).toBeVisible();
+    await expect(community.getByText('学习交流', { exact: true })).toHaveCount(0);
+    const newestPeer = feed.getByTestId('community-peer-bubble').filter({ hasText: '有道子网划分题容易漏掉网络地址和广播地址，记得检查这两个。' });
+    const earlierPeer = feed.getByTestId('community-peer-bubble').filter({ hasText: '错题我按考点整理，每周末把同一考点的几题放一起复盘。' });
+    await expect(newestPeer).toBeInViewport();
+    assert.ok((await newestPeer.boundingBox()).y > (await earlierPeer.boundingBox()).y, 'newer rows appear below older rows');
+    await expect(community.getByRole('button', { name: /排行榜/ })).toHaveCount(0);
+    const older = page.waitForResponse(response => new URL(response.url()).pathname === '/api/community/messages' && new URL(response.url()).searchParams.has('before'));
+    await feed.evaluate(node => { node.scrollTop = node.scrollHeight; });
+    await community.getByRole('button', { name: '查看历史消息', exact: true }).click();
+    assert.ok((await (await older).json()).messages.some(item => item.text === '备考交流记录 1'));
+    checks.push('community opens at the most recent messages, displays newest at the bottom, and loads older history above');
+
+    const draft = community.getByRole('textbox', { name: '写下讨论', exact: true });
+    const send = community.getByRole('button', { name: '发送消息', exact: true });
+    await expect(send).toBeDisabled();
+    await draft.fill('周末一起复盘错题。');
+    await expect(community.getByRole('button', { name: /表情/ })).toHaveCount(0);
+    await page.evaluate((base64) => { window.__communityTestImage = { uri: 'data:image/png;base64,' + base64, base64, fileSize: 100, mimeType: 'image/png' }; }, fs.readFileSync(path.join(root, 'test/fixtures/avatar.png'), 'base64'));
+    await community.getByRole('button', { name: '选择社区图片', exact: true }).click();
+    await expect(community.getByLabel('待发送图片')).toBeVisible();
+    const published = page.waitForResponse(response => new URL(response.url()).pathname === '/api/community/messages' && response.request().method() === 'POST');
+    await send.click();
+    assert.equal((await published).status(), 200);
+    const sent = feed.getByTestId('community-self-bubble').filter({ hasText: '周末一起复盘错题。' });
+    await expect(sent).toBeInViewport();
+    const [feedBox, ownBox, peerBox] = await Promise.all([feed.boundingBox(), sent.boundingBox(), newestPeer.boundingBox()]);
+    assert.ok(ownBox.y > peerBox.y, 'sending from history brings the newest message into view at the bottom');
+    assert.ok(peerBox.x - feedBox.x < 80 && feedBox.x + feedBox.width - ownBox.x - ownBox.width < 80);
+    assert.ok(ownBox.x > peerBox.x, 'own bubble is right-aligned while other users remain on the left');
+    const discussionImage = feed.locator('img[src*="/community/uploads/"]').last();
+    await expect.poll(() => discussionImage.evaluate(image => image.complete && image.naturalWidth > 0)).toBe(true);
+    await expect(draft).toHaveValue('');
+    await shot('kaojia-community-393');
+    checks.push('emoji picker removed; text and images still send to the real local API and display');
+
+    await tab('今日');
+    const badgeTime = Date.now() + 100;
+    const badgePosts = ['未读验收：今天做了两套卷。', '自己的消息不计未读。', '未读验收：考前记得重看错题。'];
+    for (const [n, text] of badgePosts.entries()) {
+      store.addCommunityMessage({ id: 'ui-unread-' + n, userId: n === 1 ? user.id : other.id, text,
+        createdAt: new Date(badgeTime + n).toISOString() }, Buffer.byteLength(text));
+    }
+    await expect(unread).toHaveText('2');
+    await expect(nav.nth(2)).toHaveAccessibleName('社区导航，2 条未读消息');
+    const [badgeBox, tabBox] = await Promise.all([unread.boundingBox(), nav.nth(2).boundingBox()]);
+    assert.ok(badgeBox.x > tabBox.x + tabBox.width / 2 && badgeBox.y < tabBox.y + tabBox.height / 2, 'badge is in the upper right');
+    await shot('community-unread-393');
+    await page.reload({ waitUntil: 'domcontentloaded' });
+    await expect(unread).toHaveText('2');
+    await tab('社区');
+    await expect(feed.getByText(badgePosts[2], { exact: true })).toBeVisible();
+    await expect(unread).toHaveCount(0);
+    await tab('今日');
+    await expect(nav.nth(2)).toHaveAccessibleName('社区导航');
+    checks.push('community badge shows only peer messages, survives reload, and clears after opening recent chat');
+
+    await tab('考试');
+    await page.getByRole('tab', { name: 'AI 专项练习', exact: true }).click();
+    await expect(page.getByRole('button', { name: /查看(专属|诊断)方案/ })).toBeVisible();
+    await page.getByRole('tab', { name: 'AI 个性化', exact: true }).click();
+    await expect(page.getByRole('button', { name: '查看组卷方案', exact: true })).toBeVisible();
+    checks.push('both the original AI practice and AI exam remain accessible from Exams');
+
+    await page.evaluate(() => { localStorage.clear(); localStorage.setItem('ui-initialized', '1'); });
+    await page.reload();
+    await page.getByText('进入 App 预览', { exact: true }).click();
+    await tab('社区');
+    await expect(community.getByRole('heading', { name: '登录参与聊天', exact: true })).toBeVisible();
+    await expect(unread).toHaveCount(0);
+    await expect(community.getByRole('button', { name: '发送消息', exact: true })).toHaveCount(0);
+    await expect(feed.getByText('周末一起复盘错题。', { exact: true })).toHaveCount(0);
+    await community.getByRole('button', { name: '去登录', exact: true }).click();
+    await expect(page.getByText('欢迎回来', { exact: true })).toBeVisible();
+    checks.push('preview shows a sign-in prompt, not dummy or private discussion posts');
+  } else if (dailyGoalOnly) {
+    const welcome = await motivation.innerText();
+    await tab('练习');
+    await tab('今日');
+    await expect(motivation).toHaveText(welcome);
+    checks.push('home shows a nonempty motivational line that stays stable when switching tabs');
+    const card = page.getByTestId('daily-goal-card');
+    const status = card.getByTestId('daily-goal-status');
+    const count = card.getByTestId('daily-goal-count');
+    const start = card.getByRole('button', { name: '开始今日学习', exact: true });
+    const review = card.getByRole('button', { name: '复习已答题', exact: true });
+    const reloadWithCount = async (value) => {
+      fixtureTodayCount = value;
+      await page.evaluate(() => localStorage.clear());
+      await page.reload();
+      await expect(card).toBeVisible();
+    };
+    await expect(status).toHaveText('正在同步今日进度');
+    await expect(count).toHaveText('—');
+    await reloadWithCount(18);
+    await expect(status).toHaveText('还差 12 题达标');
+    await expect(count).toHaveText('18 题');
+    await reloadWithCount(58);
+    await expect(status).toHaveText('今日目标已完成');
+    await expect(count).toHaveText('58 题');
+    await expect(card.getByText('30 题', { exact: true })).toBeVisible();
+    checks.push('Today displays syncing, remaining questions, and actual above-goal counts');
+
+    const leaderboard = page.getByRole('button', { name: '排行榜', exact: true });
+    const titleBox = await page.getByRole('heading', { name: '今日', exact: true }).boundingBox();
+    const leaderboardBox = await leaderboard.boundingBox();
+    assert.ok(leaderboardBox.x > titleBox.x + titleBox.width);
+    assert.ok(leaderboardBox.y < (await card.boundingBox()).y);
+    await expect(leaderboard).toHaveCSS('background-color', 'rgb(255, 240, 204)');
+    await expect(page.getByTestId('leaderboard-entry-glow')).toHaveCount(0);
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await expect(page.getByTestId('leaderboard-entry-glow-sweep')).toBeAttached();
+    await leaderboard.click();
+    const board = page.getByTestId('leaderboard-screen');
+    const goldHeader = board.getByTestId('gold-leaderboard-header');
+    await expect(board).toBeVisible();
+    await expect(goldHeader).toHaveCSS('background-color', 'rgb(255, 229, 164)');
+    await expect(page.getByTestId('leaderboard-entry-glow')).toHaveCount(0);
+    const titleSweep = board.getByTestId('leaderboard-title-glow-sweep');
+    const championSweep = board.getByTestId('leaderboard-champion-glow-sweep');
+    const titleStars = board.getByTestId('leaderboard-title-glow-stars');
+    const sweepX = (node) => new DOMMatrixReadOnly(getComputedStyle(node).transform).m41;
+    await expect(championSweep).toBeAttached();
+    await expect.poll(() => championSweep.evaluate((node) => Number(getComputedStyle(node).opacity))).toBeGreaterThan(0.2);
+    await expect.poll(() => titleStars.evaluate((node) => Number(getComputedStyle(node).opacity))).toBeGreaterThan(0.2);
+    await expect.poll(() => titleSweep.evaluate(sweepX), { timeout: 6500 }).toBeGreaterThan(50);
+    await expect.poll(() => titleSweep.evaluate(sweepX), { timeout: 6500, intervals: [50, 80, 120] }).toBeLessThan(-10);
+    await expect.poll(() => titleSweep.evaluate(sweepX), { timeout: 6500 }).toBeGreaterThan(50);
+    const image = board.locator('img[src*="/api/community/avatars/"]').first();
+    await expect.poll(() => image.evaluate((img) => img.complete && img.naturalWidth > 0)).toBe(true);
+    await expect(board.getByTestId('leaderboard-own-rank')).toContainText('我的排名');
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await expect(titleSweep).toHaveCount(0);
+    await expect(championSweep).toHaveCount(0);
+    await expect(goldHeader).toBeVisible();
+    checks.push('gold sweep changes position across cycles, the champion shines, and reduced motion keeps static gold');
+    await page.getByRole('button', { name: '关闭排行榜', exact: true }).click();
+    assert.ok(Math.abs((await start.boundingBox()).y - (await review.boundingBox()).y) < 2);
+    assert.ok((await start.boundingBox()).height >= 48 && (await review.boundingBox()).height >= 48);
+    await shot('today-goal-done-393');
+    checks.push('leaderboard stays at the top right; the two card actions fit at standard width');
+
+    await page.setViewportSize({ width: 320, height: 750 });
+    await page.evaluate(() => { window.__setFontScale(1.5); window.__setAndroidTheme('dark'); });
+    await expect.poll(async () => card.evaluate((node) => getComputedStyle(node).backgroundColor)).toBe('rgb(26, 37, 53)');
+    await expect.poll(async () => (await review.boundingBox()).y >= (await start.boundingBox()).y + (await start.boundingBox()).height).toBe(true);
+    await expect(status).toHaveText('今日目标已完成');
+    await leaderboard.click();
+    await expect(goldHeader).toHaveCSS('background-color', 'rgb(75, 53, 26)');
+    await page.getByRole('button', { name: '关闭排行榜', exact: true }).click();
+    checks.push('large fonts stack the buttons, and both the card and leaderboard have dark-mode colors');
+    await page.setViewportSize({ width: 393, height: 852 });
+    await page.evaluate(() => { window.__setFontScale(1); window.__setAndroidTheme('light'); });
+
+    await start.click();
+    await expect(page.getByTestId('practice-swipe-area')).toBeVisible();
+    await expect.poll(() => page.evaluate(() => Object.keys(localStorage).filter((key) => key.startsWith('kaojiang-practice-checkpoint-v1:')).some((key) => Object.values(JSON.parse(localStorage.getItem(key)).sessions || {}).some((row) => row.session === 'daily' && !row.completed)))).toBe(true);
+    await page.getByRole('button', { name: '‹ 返回今日', exact: true }).click();
+    await expect(card.getByRole('button', { name: '继续今日学习', exact: true })).toBeVisible();
+    await review.click();
+    await expect(page.getByRole('heading', { name: '已答题复习', exact: true })).toBeVisible();
+    checks.push('start and resume still use the daily session, and answered review opens normally');
+  } else if (process.env.PRACTICE_HEADER_AVATARS === '1') {
+    await page.getByRole('button', { name: '排行榜', exact: true }).click();
+    const board = page.getByTestId('leaderboard-screen');
+    await expect(board).toBeVisible();
+    const image = board.locator('img[src*="/api/community/avatars/"]').first();
+    await expect.poll(() => image.evaluate((img) => img.complete && img.naturalWidth > 0)).toBe(true);
+    await board.getByRole('button', { name: '关闭排行榜', exact: true }).click();
+    checks.push('Android leaderboard displays an actual image from the real avatar endpoint');
+
+    await tab('练习');
+    await page.getByText('继续练习', { exact: true }).click();
+    await expect(page.getByRole('button', { name: '确认答案', exact: true })).toBeVisible();
+    await page.getByRole('button', { name: '返回题库目录', exact: true }).click();
+    const dark = page.getByText('继续巩固知识点', { exact: true });
+    const light = page.getByTestId('practice-resume-card');
+    const directory = page.getByText('知识点目录', { exact: true });
+    await expect(dark).toBeVisible();
+    await expect(light).toBeVisible();
+    assert.ok((await dark.boundingBox()).y < (await light.boundingBox()).y);
+    assert.ok((await light.boundingBox()).y < (await directory.boundingBox()).y);
+    checks.push('both resume cards are above the directory, dark card first');
+    await shot('practice-resume-header-393');
+  } else if(process.env.OWNED_PRACTICE_FLOW==='1'){
     const readSession=async kind=>page.evaluate(kind=>{
       for(let i=0;i<localStorage.length;i++){const key=localStorage.key(i);if(!key?.startsWith('kaojiang-practice-checkpoint-v1:'))continue;const book=JSON.parse(localStorage.getItem(key));if(book?.format!==2)continue;const rows=Object.values(book.sessions).filter(r=>(r.session||'standard')===kind);if(rows.length)return rows.sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt))[0];}return null;
     },kind);
@@ -261,27 +481,16 @@ try {
   assert.equal(await page.getByRole('button', { name: '确认答案', exact: true }).evaluate(e => getComputedStyle(e).backgroundColor), 'rgb(40, 101, 238)');
   await shot('04-practice-question-393');
   await page.getByText('64 个', { exact: true }).click();
+  expectedAiRequests = 1;
   await page.getByText('AI 提示', { exact: true }).click();
-  await expect(page.getByTestId('android-ai-confirm-sheet')).toBeVisible();
-  const compactSheet=await page.getByTestId('android-ai-confirm-sheet').boundingBox();
-  assert.ok(compactSheet.height<852*0.65,'collapsed AI consent is a compact bottom sheet, not a full-page wall of text');
-  await expect(page.getByTestId('android-ai-cost-details')).toHaveCount(0);
-  await page.getByRole('button',{name:'费用说明',exact:true}).click();
-  await expect(page.getByTestId('android-ai-cost-details')).toBeVisible();
-  await page.getByRole('button',{name:'费用说明',exact:true}).click();
-  await expect(page.getByTestId('android-ai-cost-details')).toHaveCount(0);
-  assert.equal(aiRequests, 0);
-  await shot('05-ai-points-confirm-393');
-  await page.setViewportSize({width:320,height:852});await page.evaluate(()=>{window.__setFontScale(1.35);window.__setAndroidTheme('dark')});
-  await expect(page.getByRole('button',{name:'继续使用AI，按实际用量结算',exact:true})).toBeInViewport();
-  await expect(page.getByTestId('android-ai-cost-details')).toHaveCount(0);
-  await shot('polish-ai-confirm-dark-320-scale1.35');
-  await page.setViewportSize({width:393,height:852});await page.evaluate(()=>{window.__setFontScale(1);window.__setAndroidTheme('light')});
-  await page.getByRole('button', { name: '取消本次AI请求', exact: true }).click();
+  await expect.poll(()=>aiRequests).toBe(1);
+  await expect(page.getByTestId('android-ai-confirm-sheet')).toHaveCount(0);
+  await expect(page.getByText('Synthetic UI test: no model call', { exact: true })).toBeVisible();
   await page.getByText('确认答案', { exact: true }).click();
   await expect(page.getByText('正确答案：', { exact: false }).first()).toBeVisible();
   assert.equal(await page.evaluate(()=>window.__answerFeedbackEvents?.length||0),0,'wrong answer stays quiet');
-  await shot('06-practice-analysis-393'); checks.push('catalog search, practice, wrong answer, analysis and pre-AI consent/cancel');
+  await expect(page.getByText('新 AI 调用按实际用量扣积分，已有结果免费。', { exact: true })).toBeVisible();
+  await shot('06-practice-analysis-393'); checks.push('catalog search, wrong answer feedback, and one-tap AI with an inline fee note');
   for(const [width,mode,scale]of[[393,'light',1],[393,'dark',1],[320,'dark',1.35]]){
     await page.setViewportSize({width,height:852});
     await page.evaluate(({mode,scale})=>{window.__setAndroidTheme(mode);window.__setFontScale(scale)},{mode,scale});
@@ -696,7 +905,7 @@ try {
   await expect(page.getByText('欢迎回来',{exact:true})).toHaveCount(0);
   checks.push('optional updates do not interrupt a supported app; unsupported versions enter the non-dismissible update screen');
   }
-  assert.equal(aiRequests, 0);
+  assert.equal(aiRequests, expectedAiRequests);
   assert.deepEqual(errors, []);
   assert.deepEqual(sourceHashes(), testedSources, 'verified Android source must not change during acceptance');
   const unintendedWeb=[...vite.environments.client.moduleGraph.idToModuleMap.keys()].filter(id=>id.replaceAll('\\','/').startsWith(mobile.replaceAll('\\','/')+'/src/')&&/\.web\.tsx?(?:\?|$)/.test(id));
@@ -713,4 +922,4 @@ try {
   fs.writeFileSync(path.join(out, 'result.json'), JSON.stringify({ checks, errors, screenshots, aiRequests, testedSources, nativeSystemAdapters: 'fixtures; not native-device acceptance' }, null, 2));
   await browser?.close(); await vite.close(); await new Promise(resolve => server.close(resolve)); store.close?.();
 }
-console.log('Browser Android UI checks: ' + checks.length + '; screenshots: ' + screenshots.length + '; external model requests: ' + aiRequests);
+console.log('Browser Android UI checks: ' + checks.length + '; screenshots: ' + screenshots.length + '; synthetic AI API requests: ' + aiRequests + '; external model requests: 0');
